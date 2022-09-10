@@ -20,8 +20,8 @@ class Breeding implements Feature {
     private _eggList: Array<KnockoutObservable<Egg>>;
     private _eggSlots: KnockoutObservable<number>;
 
-    private _queueList: KnockoutObservableArray<PokemonNameType>;
-    private queueSlots: KnockoutObservable<number>;
+    private _queueList: KnockoutObservableArray<number>;
+    public queueSlots: KnockoutObservable<number>;
 
     public hatchList: { [name: number]: PokemonNameType[][] } = {};
 
@@ -42,6 +42,7 @@ class Breeding implements Feature {
         BreedingFilters.pokerus.value(Settings.getSetting('breedingPokerusFilter').value);
         BreedingController.displayValue(Settings.getSetting('breedingDisplayFilter').value);
         BreedingController.regionalAttackDebuff(+Settings.getSetting('breedingRegionalAttackDebuffSetting').value);
+        BreedingController.queueSizeLimit(+Settings.getSetting('breedingQueueSizeSetting').value);
     }
 
     initialize(): void {
@@ -165,7 +166,7 @@ class Breeding implements Feature {
     }
 
     public hasFreeQueueSlot(): boolean {
-        const slots = this.queueSlots();
+        const slots = this.usableQueueSlots();
         return slots && this._queueList().length < slots;
     }
 
@@ -241,9 +242,9 @@ class Breeding implements Feature {
 
     public addToQueue(pokemon: PartyPokemon): boolean {
         const queueSize = this._queueList().length;
-        if (queueSize < this.queueSlots()) {
+        if (queueSize < this.usableQueueSlots()) {
             pokemon.breeding = true;
-            this._queueList.push(pokemon.name);
+            this._queueList.push(pokemon.id);
             return true;
         }
         return false;
@@ -252,11 +253,32 @@ class Breeding implements Feature {
     public removeFromQueue(index: number): boolean {
         const queueSize = this._queueList().length;
         if (queueSize > index) {
-            const pokemonName = this._queueList.splice(index, 1)[0];
-            App.game.party._caughtPokemon().find(p => p.name == pokemonName).breeding = false;
+            const pokemonId = this._queueList.splice(index, 1)[0];
+            App.game.party._caughtPokemon().find(p => p.id == pokemonId).breeding = false;
             return true;
         }
         return false;
+    }
+
+    public clearQueue(shouldConfirm = false) {
+        if (shouldConfirm) {
+            Notifier.confirm({
+                title: 'Clear Queue',
+                message: 'Are you sure?\n\nAll Pokémon will be removed from your breeding queue.',
+                type: NotificationConstants.NotificationOption.warning,
+                confirm: 'Clear',
+            }).then(confirmed => {
+                if (confirmed) {
+                    while (this._queueList().length) {
+                        this.removeFromQueue(0);
+                    }
+                }
+            });
+        } else {
+            while (this._queueList().length) {
+                this.removeFromQueue(0);
+            }
+        }
     }
 
     public gainPokemonEgg(pokemon: PartyPokemon | PokemonListData, isHelper = false): boolean {
@@ -267,7 +289,7 @@ class Breeding implements Feature {
             });
             return false;
         }
-        const egg = this.createEgg(pokemon.name);
+        const egg = this.createEgg(pokemon.id);
 
         const success = this.gainEgg(egg, isHelper);
 
@@ -308,9 +330,9 @@ class Breeding implements Feature {
         });
     }
 
-    public createEgg(pokemonName: PokemonNameType, type = EggType.Pokemon): Egg {
-        const dataPokemon: DataPokemon = PokemonHelper.getPokemonByName(pokemonName);
-        return new Egg(type, this.getSteps(dataPokemon.eggCycles), pokemonName);
+    public createEgg(pokemonId: number, type = EggType.Pokemon): Egg {
+        const dataPokemon: DataPokemon = PokemonHelper.getPokemonById(pokemonId);
+        return new Egg(type, this.getSteps(dataPokemon.eggCycles), pokemonId);
     }
 
     public createTypedEgg(type: EggType): Egg {
@@ -322,8 +344,9 @@ class Breeding implements Feature {
         const ratio = 2;
         const possibleHatches = GameConstants.expRandomElement(hatchable, ratio);
 
-        const pokemon = Rand.fromArray(possibleHatches);
-        return this.createEgg(pokemon, type);
+        const pokemonName = Rand.fromArray(possibleHatches);
+        const pokemonId = PokemonHelper.getPokemonByName(pokemonName).id;
+        return this.createEgg(pokemonId, type);
     }
 
     public createRandomEgg(): Egg {
@@ -336,15 +359,19 @@ class Breeding implements Feature {
     public createFossilEgg(fossil: string): Egg {
         const pokemonName: PokemonNameType = GameConstants.FossilToPokemon[fossil];
         const pokemonNativeRegion = PokemonHelper.calcNativeRegion(pokemonName);
+        let fossilEgg: Egg;
         if (pokemonNativeRegion > player.highestRegion()) {
             Notifier.notify({
                 message: 'You must progress further before you can uncover this fossil Pokémon!',
                 type: NotificationConstants.NotificationOption.warning,
                 timeout: 5e3,
             });
-            return new Egg();
+            fossilEgg = new Egg();
+        } else {
+            const pokemonId = PokemonHelper.getPokemonByName(pokemonName).id;
+            fossilEgg = this.createEgg(pokemonId, EggType.Fossil);
         }
-        return this.createEgg(pokemonName, EggType.Fossil);
+        return fossilEgg;
     }
 
     public getSteps(eggCycles: number) {
@@ -392,7 +419,7 @@ class Breeding implements Feature {
         this._eggSlots(value);
     }
 
-    get queueList(): KnockoutObservable<Array<PokemonNameType>> {
+    get queueList(): KnockoutObservable<Array<number>> {
         return this._queueList;
     }
 
@@ -451,4 +478,19 @@ class Breeding implements Feature {
         }
     }
 
+    public usableQueueSlots = ko.pureComputed(() => {
+        const queueSizeSetting = BreedingController.queueSizeLimit();
+        return queueSizeSetting > -1 ? queueSizeSetting : this.queueSlots();
+    });
+
+    public updateQueueSizeLimit(size: number) {
+        BreedingController.queueSizeLimit(size);
+        if (size == 0) {
+            this.clearQueue();
+        } else if (size > 0) {
+            for (let i = this.queueList().length; i > this.usableQueueSlots(); i--) {
+                this.removeFromQueue(i - 1);
+            }
+        }
+    }
 }
