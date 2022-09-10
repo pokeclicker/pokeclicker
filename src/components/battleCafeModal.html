@@ -20,6 +20,20 @@ aria-labelledby="battleCafeModal"Label">
                     <!-- /ko -->
                 </div>
             </div>
+            <h5>Spin!</h5>
+            <div>
+                <span>Spins left: </span><span data-bind="text: BattleCafeController.spinsLeft()"></span>
+            </div>
+            <div>
+                <img style="width: 60px;" data-bind="attr: { src: `assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png` }" src="assets/images/profile/trainer-1.png">
+            </div>
+            <div>
+                <button class="btn btn-primary" onclick="BattleCafeController.spin(true);">Clockwise</button>
+                <button class="btn btn-primary" onclick="BattleCafeController.spin(false);">Counter clockwise</button>
+            </div>
+            <div>
+                <label for="battleCafeDuration">Spin duration:</label><input id="battleCafeDuration" type="number" min="1" max="30" value="3"/>
+            </div>
         </div>
 
        <div class="modal-footer">

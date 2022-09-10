@@ -17,8 +17,9 @@ class BattleCafe extends TownContent {
 
 class BattleCafeController {
     static selectedSweet = ko.observable<GameConstants.AlcremieSweet>(undefined);
+    static spinsLeft = ko.observable<number>(3);
 
-    public static spin() {
+    public static spin(clockwise: boolean) {
         if (!BattleCafeController.canSpin()) {
             Notifier.notify({
                 message: 'Can\'t spin',
