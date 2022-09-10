@@ -34,9 +34,12 @@ class BattleCafeController {
         BattleCafeController.isSpinning(true);
         BattleCafeController.spinsLeft(BattleCafeController.spinsLeft() - 1);
         const spinTime = +$('#battleCafeDuration').val();
+        const sweet = BattleCafeController.selectedSweet();
+        BattleCafeController.getPrice(sweet).forEach(b => GameHelper.incrementObservable(App.game.farming.berryList[b.berry], b.amount * -1));
+
         setTimeout(() => {
             BattleCafeController.isSpinning(false);
-            BattleCafeController.unlockAlcremie(clockwise, spinTime, BattleCafeController.selectedSweet());
+            BattleCafeController.unlockAlcremie(clockwise, spinTime, sweet);
         },
         spinTime * 1000);
     }
@@ -155,8 +158,8 @@ class BattleCafeController {
         evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Strawberry Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.nightCounterclockwiseAbove5]] = new PokemonItem('Alcremie (Strawberry Mint)', 0);
         evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Strawberry Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.nightClockwiseAbove5]] = new PokemonItem('Alcremie (Strawberry Lemon)', 0);
         evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Strawberry Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.nightCounterclockwiseBelow5]] = new PokemonItem('Alcremie (Strawberry Salted)', 0);
-        evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Strawberry Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.dayClockwiseAbove5]] = new PokemonItem('Alcremie (Strawberry Ruby Swirl)', 0);
-        evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Strawberry Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.dayCounterclockwiseAbove5]] = new PokemonItem('Alcremie (Strawberry Caramel)', 0);
+        evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Strawberry Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.dayCounterclockwiseAbove5]] = new PokemonItem('Alcremie (Strawberry Ruby Swirl)', 0);
+        evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Strawberry Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.dayClockwiseAbove5]] = new PokemonItem('Alcremie (Strawberry Caramel)', 0);
         evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Strawberry Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.at7Above10]] = new PokemonItem('Alcremie (Strawberry Rainbow)', 0);
 
         evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Love Sweet']]] = {};
@@ -166,8 +169,8 @@ class BattleCafeController {
         evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Love Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.nightCounterclockwiseAbove5]] = new PokemonItem('Alcremie (Love Mint)', 0);
         evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Love Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.nightClockwiseAbove5]] = new PokemonItem('Alcremie (Love Lemon)', 0);
         evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Love Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.nightCounterclockwiseBelow5]] = new PokemonItem('Alcremie (Love Salted)', 0);
-        evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Love Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.dayClockwiseAbove5]] = new PokemonItem('Alcremie (Love Ruby Swirl)', 0);
-        evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Love Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.dayCounterclockwiseAbove5]] = new PokemonItem('Alcremie (Love Caramel)', 0);
+        evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Love Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.dayCounterclockwiseAbove5]] = new PokemonItem('Alcremie (Love Ruby Swirl)', 0);
+        evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Love Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.dayClockwiseAbove5]] = new PokemonItem('Alcremie (Love Caramel)', 0);
         evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Love Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.at7Above10]] = new PokemonItem('Alcremie (Love Rainbow)', 0);
 
         evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Berry Sweet']]] = {};
@@ -177,8 +180,8 @@ class BattleCafeController {
         evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Berry Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.nightCounterclockwiseAbove5]] = new PokemonItem('Alcremie (Berry Mint)', 0);
         evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Berry Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.nightClockwiseAbove5]] = new PokemonItem('Alcremie (Berry Lemon)', 0);
         evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Berry Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.nightCounterclockwiseBelow5]] = new PokemonItem('Alcremie (Berry Salted)', 0);
-        evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Berry Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.dayClockwiseAbove5]] = new PokemonItem('Alcremie (Berry Ruby Swirl)', 0);
-        evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Berry Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.dayCounterclockwiseAbove5]] = new PokemonItem('Alcremie (Berry Caramel)', 0);
+        evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Berry Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.dayCounterclockwiseAbove5]] = new PokemonItem('Alcremie (Berry Ruby Swirl)', 0);
+        evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Berry Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.dayClockwiseAbove5]] = new PokemonItem('Alcremie (Berry Caramel)', 0);
         evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Berry Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.at7Above10]] = new PokemonItem('Alcremie (Berry Rainbow)', 0);
 
         evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Clover Sweet']]] = {};
@@ -188,8 +191,8 @@ class BattleCafeController {
         evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Clover Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.nightCounterclockwiseAbove5]] = new PokemonItem('Alcremie (Clover Mint)', 0);
         evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Clover Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.nightClockwiseAbove5]] = new PokemonItem('Alcremie (Clover Lemon)', 0);
         evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Clover Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.nightCounterclockwiseBelow5]] = new PokemonItem('Alcremie (Clover Salted)', 0);
-        evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Clover Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.dayClockwiseAbove5]] = new PokemonItem('Alcremie (Clover Ruby Swirl)', 0);
-        evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Clover Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.dayCounterclockwiseAbove5]] = new PokemonItem('Alcremie (Clover Caramel)', 0);
+        evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Clover Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.dayCounterclockwiseAbove5]] = new PokemonItem('Alcremie (Clover Ruby Swirl)', 0);
+        evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Clover Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.dayClockwiseAbove5]] = new PokemonItem('Alcremie (Clover Caramel)', 0);
         evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Clover Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.at7Above10]] = new PokemonItem('Alcremie (Clover Rainbow)', 0);
 
         evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Flower Sweet']]] = {};
@@ -199,8 +202,8 @@ class BattleCafeController {
         evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Flower Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.nightCounterclockwiseAbove5]] = new PokemonItem('Alcremie (Flower Mint)', 0);
         evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Flower Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.nightClockwiseAbove5]] = new PokemonItem('Alcremie (Flower Lemon)', 0);
         evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Flower Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.nightCounterclockwiseBelow5]] = new PokemonItem('Alcremie (Flower Salted)', 0);
-        evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Flower Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.dayClockwiseAbove5]] = new PokemonItem('Alcremie (Flower Ruby Swirl)', 0);
-        evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Flower Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.dayCounterclockwiseAbove5]] = new PokemonItem('Alcremie (Flower Caramel)', 0);
+        evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Flower Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.dayCounterclockwiseAbove5]] = new PokemonItem('Alcremie (Flower Ruby Swirl)', 0);
+        evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Flower Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.dayClockwiseAbove5]] = new PokemonItem('Alcremie (Flower Caramel)', 0);
         evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Flower Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.at7Above10]] = new PokemonItem('Alcremie (Flower Rainbow)', 0);
 
         evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Star Sweet']]] = {};
@@ -210,8 +213,8 @@ class BattleCafeController {
         evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Star Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.nightCounterclockwiseAbove5]] = new PokemonItem('Alcremie (Star Mint)', 0);
         evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Star Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.nightClockwiseAbove5]] = new PokemonItem('Alcremie (Star Lemon)', 0);
         evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Star Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.nightCounterclockwiseBelow5]] = new PokemonItem('Alcremie (Star Salted)', 0);
-        evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Star Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.dayClockwiseAbove5]] = new PokemonItem('Alcremie (Star Ruby Swirl)', 0);
-        evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Star Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.dayCounterclockwiseAbove5]] = new PokemonItem('Alcremie (Star Caramel)', 0);
+        evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Star Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.dayCounterclockwiseAbove5]] = new PokemonItem('Alcremie (Star Ruby Swirl)', 0);
+        evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Star Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.dayClockwiseAbove5]] = new PokemonItem('Alcremie (Star Caramel)', 0);
         evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Star Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.at7Above10]] = new PokemonItem('Alcremie (Star Rainbow)', 0);
 
         evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Ribbon Sweet']]] = {};
@@ -221,8 +224,8 @@ class BattleCafeController {
         evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Ribbon Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.nightCounterclockwiseAbove5]] = new PokemonItem('Alcremie (Ribbon Mint)', 0);
         evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Ribbon Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.nightClockwiseAbove5]] = new PokemonItem('Alcremie (Ribbon Lemon)', 0);
         evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Ribbon Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.nightCounterclockwiseBelow5]] = new PokemonItem('Alcremie (Ribbon Salted)', 0);
-        evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Ribbon Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.dayClockwiseAbove5]] = new PokemonItem('Alcremie (Ribbon Ruby Swirl)', 0);
-        evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Ribbon Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.dayCounterclockwiseAbove5]] = new PokemonItem('Alcremie (Ribbon Caramel)', 0);
+        evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Ribbon Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.dayCounterclockwiseAbove5]] = new PokemonItem('Alcremie (Ribbon Ruby Swirl)', 0);
+        evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Ribbon Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.dayClockwiseAbove5]] = new PokemonItem('Alcremie (Ribbon Caramel)', 0);
         evolutions[GameConstants.AlcremieSweet[GameConstants.AlcremieSweet['Ribbon Sweet']]][GameConstants.AlcremieSpins[GameConstants.AlcremieSpins.at7Above10]] = new PokemonItem('Alcremie (Ribbon Rainbow)', 0);
 
         return evolutions;
