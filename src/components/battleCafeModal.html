@@ -6,7 +6,19 @@ aria-labelledby="battleCafeModal"Label">
            <h5 class="modal-title">Battle Café</h5>
        </div>
        <div class="modal-body">
-            <span>Spin player, SPIN!</span>
+            <div>
+                <h5>Select a Sweet</h5>
+                <div class="row col-15 justify-content-center">
+                    <!-- ko foreach: GameHelper.enumStrings(GameConstants.AlcremieSweet) -->
+                    <div class="clickable col-4" data-bind="
+                        click: () => BattleCafeController.selectedSweet(GameConstants.AlcremieSweet[$data]),
+                        css: { 'bg-primary': BattleCafeController.selectedSweet() == GameConstants.AlcremieSweet[$data]}
+                    ">
+                        <span data-bind="text: $data"></span>
+                    </div>
+                    <!-- /ko -->
+                </div>
+            </div>
         </div>
 
        <div class="modal-footer">
