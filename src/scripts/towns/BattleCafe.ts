@@ -56,7 +56,7 @@ class BattleCafeController {
             } else if (!clockwise && spinTime >= 5) {
                 spin = GameConstants.AlcremieSpins.dayCounterclockwiseAbove5;
             }
-        } else {
+        } else { // Is night
             if (clockwise && spinTime < 5) {
                 spin = GameConstants.AlcremieSpins.nightClockwiseBelow5;
             } else if (clockwise && spinTime >= 5) {
