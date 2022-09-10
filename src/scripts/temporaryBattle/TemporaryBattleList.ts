@@ -1046,15 +1046,13 @@ TemporaryBattleList.Bede3 = new TemporaryBattle(
         new MultiRequirement([
             new GymBadgeRequirement(BadgeEnums.Galar_Fighting),
             new GymBadgeRequirement(BadgeEnums.Galar_Ghost),
+            new QuestLineStepCompletedRequirement('The Darkest Day', 0),
         ]),
     ],
     undefined,
     {
         displayName: 'Pokémon Trainer Bede',
         imageName: 'Bede',
-        firstTimeRewardFunction: () => {
-            App.game.quests.getQuestLine('The Darkest Day').beginQuest();
-        },
     }
 );
 TemporaryBattleList.Hop6 = new TemporaryBattle(

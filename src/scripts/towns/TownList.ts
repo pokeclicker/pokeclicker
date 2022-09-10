@@ -4299,7 +4299,7 @@ const SouthGalarRoamerNPC = new RoamerNPC('Professor Sonia', [
 
 const AssistantHenry = new NPC('Assistant Henry', [
     'There are many Pokémon in Galar that I heard look completely different in other regions of the world! They can also evolve in unique ways!',
-    'I know the reckless one, Linoone, will only evolve during the night time here. But, I also think I’ve seen its evolution wandering across the lake if you have a way to cross it.',
+    'I know the reckless one, Linoone, will only evolve during the night time here. But, I also think I’ve seen its evolution wandering across the lake if you have a way to cross.',
 ]);
 
 // Route 5 Trainer funny
@@ -4333,13 +4333,13 @@ const AncientMural1 = new NPC('Ancient Mural', [
 const StowonSideSonia = new NPC ('Sonia', [
     'Not a brilliant turn of events, but the ruins were brought into the light for us to see...',
     'What does this tell us about Galar’s legends? More than any hero, there’s those things that appear to be Pokémon that stand out!',
-    'Not juts that, but those Pokémon appear to be holding a sword and shield as if they were using them!',
+    'Not just that, but those Pokémon appear to be holding a sword and shield as if they were using them!',
     'More than any statue of a hero or old tapestry, these ruins made in truly ancient times must show us the real truth.',
     'Seems like at some point in history the sword and shield were combined with the two actual Pokémon and treated as the same thing...',
     'Two young heroes... The sword and shield were actually Pokémon... But why would the truth of these ruins be hidden when their stories were depicted in artwork?',
 ], {
     image: 'assets/images/npcs/Sonia.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Darkest Day', 1), new QuestLineStepCompletedRequirement('The Darkest Day', 3, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Darkest Day', 1), new QuestLineStepCompletedRequirement('The Darkest Day', 4, GameConstants.AchievementOption.less)]),
 });
 
 const AncientMural2 = new NPC('Ancient Mural Ruins', [
@@ -4350,23 +4350,41 @@ const AncientMural2 = new NPC('Ancient Mural Ruins', [
     requirement: new QuestLineStepCompletedRequirement('The Darkest Day', 1),
 });
 
-const HerosBath = new NPC('Hero\'s Bath', [
+const HerosBath = new NPC('Hero’s Bath', [
     '<i>The ancient Hero’s Bath.</i>',
     '<i>They say this is where the two heroes came to soothe their wounds after the battle to bring down that evil presence, long ago.</i>',
-]);
+], {image: 'assets/images/npcs/other/HerosBath.png'});
+
+const CirchesterHop = new NPC('Hop', [
+    'Based on the statues the sword and shield must have actually been two Pokémon, right?',
+    'You remember the Pokémon we met in the Slumbering Weald?',
+    'Do you think...it could’ve been one of them? I mean the sword or the shield Pokémon?',
+    'Perhaps when their duty was completed, they went into some kind of sleep?',
+], {
+    image: 'assets/images/temporaryBattle/Hop.png',
+    requirement: new MultiRequirement([new TemporaryBattleRequirement('Hop7'), new QuestLineCompletedRequirement('The Darkest Day', GameConstants.AchievementOption.less)]),
+});
+
+const CirchesterSonia = new NPC('Sonia', [
+    'Hmm... Who exactly were the heroes that bathed here?',
+    'Nowadays only Pokémon really use the Hero’s Bath...',
+    'I think I’ll have to look more into the history of the Slumbering Weald.',
+], {
+    image: 'assets/images/npcs/Sonia.png',
+    requirement: new MultiRequirement([new TemporaryBattleRequirement('Hop7'), new QuestLineCompletedRequirement('The Darkest Day', GameConstants.AchievementOption.less)]),
+});
+
+const CirchesterGuitarist = new NPC('Guitarist Justin', [
+    'I caught this Snom on Steamdrift Way, we’ve become really good mates.',
+    'I thought that friendship was all Snom needed to evolve, but I keep trying to give it a Soothe Bell during the daytime and nothing happens!',
+    'I’m too busy playing gigs to play with Snom in the evening!',
+], {image: 'assets/images/trainers/Guitarist (male).png'});
 
 // Wyndon (route 10 first encounter) or Motostoke
 const EiscueNPC = new NPC('Eiscue', [
-    'I love how silly my Eiscue looks with his worried expression after training for the Gym Challenge in Motostoke!',
-    'You see, it’s so hot in the Motostoke Stadium that\' the ice on his head melted right\' off!',
+    'I love how silly my Eiscue looks gobsmacked after training for the Gym Challenge in Motostoke!',
+    'You see, it’s so hot in the Motostoke Stadium that’ the ice on his head melted right’ off!',
 ]);
-
-// Circhester?
-const SnomNPC = new NPC('Guitarist Justin', [
-    'I caught this Snom on Steamdrift Way, we’ve become really good mates.',
-    'I thought that friendship was all Snom needed to evolve, but I keep trying to give it a Soothe Bell during the daytime and nothing happens!',
-    'I sure hope Snom doesn’t prefer the nighttime, I’m too busy playing gigs to play with Snom in the evening!',
-], {image: 'assets/images/trainers/Guitarist (male).png'});
 
 // Idk where
 const KantotoGalarEvosNPC = new NPC('Artist Doug', [
@@ -4619,7 +4637,7 @@ TownList.Circhester = new Town(
     [TemporaryBattleList['Rampaging Gigalith'], TemporaryBattleList['Rampaging Froslass'], GymList.Circhester1, GymList.Circhester2, CirchesterShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Circhester)],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 26)],
-        npcs: [HerosBath],
+        npcs: [HerosBath, CirchesterHop, CirchesterSonia, CirchesterGuitarist],
     }
 );
 TownList.Spikemuth = new Town(
