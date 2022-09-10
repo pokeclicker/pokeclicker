@@ -18,23 +18,49 @@ class BattleCafe extends TownContent {
 class BattleCafeController {
     static selectedSweet = ko.observable<GameConstants.AlcremieSweet>(undefined);
     static spinsLeft = ko.observable<number>(3);
+    static isSpinning = ko.observable<boolean>(false);
 
     public static spin(clockwise: boolean) {
         if (!BattleCafeController.canSpin()) {
-            Notifier.notify({
-                message: 'Can\'t spin',
-                type: NotificationConstants.NotificationOption.danger,
-            });
             return;
         }
+
+        BattleCafeController.isSpinning(true);
+        BattleCafeController.spinsLeft(BattleCafeController.spinsLeft() - 1);
+        setTimeout(() => {
+            BattleCafeController.isSpinning(false);
+        },
+        +$('#battleCafeDuration').val() * 1000);
     }
 
     private static canSpin() {
         if (!BattleCafeController.selectedSweet()) {
+            Notifier.notify({
+                message: 'No sweet selected',
+                type: NotificationConstants.NotificationOption.danger,
+            });
+            return false;
+        }
+        if (BattleCafeController.isSpinning()) {
+            Notifier.notify({
+                message: 'Already spinning',
+                type: NotificationConstants.NotificationOption.danger,
+            });
+            return false;
+        }
+        if (BattleCafeController.spinsLeft() < 1) {
+            Notifier.notify({
+                message: 'No spins left',
+                type: NotificationConstants.NotificationOption.danger,
+            });
             return false;
         }
         return BattleCafeController.getPrice(BattleCafeController.selectedSweet()).every(b => {
             if (App.game.farming.berryList[b.berry]() < b.amount) {
+                Notifier.notify({
+                    message: 'Not enough berries',
+                    type: NotificationConstants.NotificationOption.danger,
+                });
                 return false;
             }
             return true;
