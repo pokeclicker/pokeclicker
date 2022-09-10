@@ -1116,6 +1116,7 @@ class Update implements Saveable {
             if (playerData._townName == ('Giant Chasm')) {
                 playerData._townName = ('Humilau City');
             }
+
             // Add Detective Pikachu TemporaryBattles
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 36);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 37);
@@ -1137,6 +1138,10 @@ class Update implements Saveable {
             renamePokemon(saveData, 'Aegislash', 'Aegislash (Shield)');
             renamePokemon(saveData, 'Pumpkaboo', 'Pumpkaboo (Average)');
             renamePokemon(saveData, 'Gourgeist', 'Gourgeist (Average)');
+
+            // Add Snorlax Temporary Battles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 1);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 2);
 
             // Replace Pokémon names to IDs
             const eggList = saveData.breeding.eggList;
