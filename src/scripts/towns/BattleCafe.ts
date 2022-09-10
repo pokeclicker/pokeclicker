@@ -19,6 +19,23 @@ class BattleCafe extends TownContent {
     }
 }
 
+class BattleCafeSaveObject implements Saveable {
+    saveKey = 'BattleCafe';
+    defaults: Record<string, any>;
+    toJSON(): Record<string, any> {
+        return {
+            spinsLeft: BattleCafeController.spinsLeft(),
+        };
+    }
+    fromJSON(json: Record<string, any>): void {
+        if (!json) {
+            return;
+        }
+        BattleCafeController.spinsLeft(json.spinsLeft ?? 3);
+    }
+
+}
+
 class BattleCafeController {
     static selectedSweet = ko.observable<GameConstants.AlcremieSweet>(undefined);
     static spinsLeft = ko.observable<number>(3);
@@ -113,8 +130,9 @@ class BattleCafeController {
         switch (sweet) {
             case GameConstants.AlcremieSweet['Strawberry Sweet']:
                 return [
-                    {berry: BerryType.Cheri, amount: 3},
-                    {berry: BerryType.Chesto, amount: 3},
+                    {berry: BerryType.Cheri, amount: 500},
+                    {berry: BerryType.Leppa, amount: 400},
+                    {berry: BerryType.Razz, amount: 30},
                 ];
             case GameConstants.AlcremieSweet['Love Sweet']:
                 return [
