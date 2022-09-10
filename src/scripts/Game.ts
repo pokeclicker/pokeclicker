@@ -387,6 +387,9 @@ class Game {
                         timeout: 3e4,
                     });
                 }
+                // Give the players more Battle Cafe spins
+                BattleCafeController.spinsLeft(BattleCafeController.defaultSpins);¨
+
                 DayOfWeekRequirement.date(now.getDay());
             }
 
