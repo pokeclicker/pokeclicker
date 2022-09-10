@@ -27,10 +27,41 @@ class BattleCafeController {
 
         BattleCafeController.isSpinning(true);
         BattleCafeController.spinsLeft(BattleCafeController.spinsLeft() - 1);
+        const spinTime = +$('#battleCafeDuration').val();
         setTimeout(() => {
             BattleCafeController.isSpinning(false);
+            BattleCafeController.unlockAlcremie(clockwise, spinTime, BattleCafeController.selectedSweet());
         },
-        +$('#battleCafeDuration').val() * 1000);
+        spinTime * 1000);
+    }
+
+    private static unlockAlcremie(clockwise: boolean, spinTime: number, sweet: GameConstants.AlcremieSweet) {
+        let spin: GameConstants.AlcremieSpins;
+        const curHour = (new Date()).getHours();
+        if (curHour == 18 && !clockwise && spinTime > 10) {
+            spin = GameConstants.AlcremieSpins.at7Above10;
+        } else if (curHour >= 5 && curHour < 19) { // Is day
+            if (clockwise && spinTime < 5) {
+                spin = GameConstants.AlcremieSpins.dayClockwiseBelow5;
+            } else if (clockwise && spinTime >= 5) {
+                spin = GameConstants.AlcremieSpins.dayClockwiseAbove5;
+            } else if (!clockwise && spinTime < 5) {
+                spin = GameConstants.AlcremieSpins.dayCounterclockwiseBelow5;
+            } else if (!clockwise && spinTime >= 5) {
+                spin = GameConstants.AlcremieSpins.dayCounterclockwiseAbove5;
+            }
+        } else {
+            if (clockwise && spinTime < 5) {
+                spin = GameConstants.AlcremieSpins.nightClockwiseBelow5;
+            } else if (clockwise && spinTime >= 5) {
+                spin = GameConstants.AlcremieSpins.nightClockwiseAbove5;
+            } else if (!clockwise && spinTime < 5) {
+                spin = GameConstants.AlcremieSpins.nightCounterclockwiseBelow5;
+            } else if (!clockwise && spinTime >= 5) {
+                spin = GameConstants.AlcremieSpins.nightCounterclockwiseAbove5;
+            }
+        }
+        BattleCafeController.buildEvolutions()[GameConstants.AlcremieSweet[sweet]][GameConstants.AlcremieSpins[spin]].gain(1);
     }
 
     private static canSpin() {
