@@ -688,6 +688,15 @@
             , databind: "click: () => TemporaryBattleList['Rainbow Rocket Grunt 66'].protectedOnclick()"
             , visible:  "TemporaryBattleList['Rainbow Rocket Grunt 66'] && TemporaryBattleList['Rainbow Rocket Grunt 66'].isVisible()"
             , image: "assets/images/map/RainbowGruntM_Overworld.png"
+        %>
+        
+        <%- include('templates/mapOverlay',
+            { name: "Snorlax"
+            , x: 87, y: 32
+            , width: 4, height: 4
+            , databind: "click: () => TemporaryBattleList['Snorlax route 12'].protectedOnclick(), attr: { class: TemporaryBattleList['Snorlax route 12'].isUnlocked() ? '' : 'locked' }"
+            , visible:  "TemporaryBattleList['Snorlax route 12'] && TemporaryBattleList['Snorlax route 12'].isVisible()"
+            , image: "assets/images/map/snorlaxoverworld.png"
             })
         %>
 
@@ -770,6 +779,17 @@
             , image: "assets/images/map/RainbowGruntM_Overworld.png"
             })
         %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Snorlax"
+            , x: 36, y: 19
+            , width: 4, height: 4
+            , databind: "click: () => TemporaryBattleList['Snorlax route 16'].protectedOnclick(), attr: { class: TemporaryBattleList['Snorlax route 16'].isUnlocked() ? '' : 'locked' }"
+            , visible:  "TemporaryBattleList['Snorlax route 16'] && TemporaryBattleList['Snorlax route 16'].isVisible()"
+            , image: "assets/images/map/snorlaxoverworld.png"
+            })
+        %>
+    %>
     </g>
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.kanto, 'Sevii Islands 123').id">
