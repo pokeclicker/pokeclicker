@@ -3,6 +3,7 @@
 ///<reference path="../../declarations/requirements/GymBadgeRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/OneFromManyRequirement.d.ts"/>
 ///<reference path="../Quests/BulletinBoard.ts"/>
+///<reference path="BattleCafe.ts"/>
 ///<reference path="../../declarations/requirements/MultiRequirement.d.ts"/>
 
 const TownList: { [name: string]: Town } = {};
@@ -4498,7 +4499,7 @@ TownList['Professor Magnolia\'s House'] = new Town(
 TownList.Motostoke = new Town(
     'Motostoke',
     GameConstants.Region.galar,
-    [TemporaryBattleList.Marnie1, TemporaryBattleList['Rampaging Torkoal'], MotostokeShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Motostoke)],
+    [TemporaryBattleList.Marnie1, TemporaryBattleList['Rampaging Torkoal'], MotostokeShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Motostoke), new BattleCafe()],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 6)],
     }
@@ -4538,7 +4539,7 @@ TownList.Ballonlea = new Town(
 TownList.Hammerlocke = new Town(
     'Hammerlocke',
     GameConstants.Region.galar,
-    [TemporaryBattleList['Rampaging Haxorus'], new MoveToDungeon(dungeonList['Energy Plant']), HammerlockeShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Hammerlocke)],
+    [TemporaryBattleList['Rampaging Haxorus'], new MoveToDungeon(dungeonList['Energy Plant']), HammerlockeShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Hammerlocke), new BattleCafe()],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 22)],
     }
@@ -4562,7 +4563,7 @@ TownList.Spikemuth = new Town(
 TownList.Wyndon = new Town(
     'Wyndon',
     GameConstants.Region.galar,
-    [WyndonShop, new MoveToDungeon(dungeonList['Rose Tower'])],
+    [WyndonShop, new MoveToDungeon(dungeonList['Rose Tower']), new BattleCafe()],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 32)],
     }

@@ -7,7 +7,7 @@ class BattleCafe extends TownContent {
     }
 
     public onclick(): void {
-        $('#battleCafe').modal('show');
+        $('#battleCafeModal').modal('show');
     }
 
     public text() {
