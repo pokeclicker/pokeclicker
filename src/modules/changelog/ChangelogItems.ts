@@ -10,7 +10,44 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
-    // v0.9.9
+    // v0.9.14
+    new ChangelogUpdate('v0.9.14', new Date(2022, 8, 2)),
+    new Changelog(changelogType.CHANGE, 'Pinkan Dodrio is now purchasable in place of Pinkan Exeggutor'),
+    new Changelog(changelogType.CHANGE, 'Misc text changes'),
+    new Changelog(changelogType.CHANGE, 'Misc Pokémon stats updated'),
+    new Changelog(changelogType.FIXED, 'Sevii island fixes'),
+    new Changelog(changelogType.FIXED, 'Alola islands being inaccessible for some people'),
+    new Changelog(changelogType.FIXED, 'Questline requirements'),
+    new Changelog(changelogType.FIXED, 'All badges now displayed in badge case when available'),
+
+    // v0.9.13
+    new ChangelogUpdate('v0.9.13', new Date(2022, 8, 1)),
+    new Changelog(changelogType.NEW, 'Sevii islands 4, 5, 6 and 7'),
+    new Changelog(changelogType.NEW, 'Sevii questline'),
+    new Changelog(changelogType.NEW, 'Detective Pikachu questline'),
+    new Changelog(changelogType.CHANGE, 'Adjusted Team Plasma questline'),
+    new Changelog(changelogType.CHANGE, 'Adjusted Underground item sorting'),
+    new Changelog(changelogType.CHANGE, 'Misc text changes'),
+    new Changelog(changelogType.CHANGE, 'Misc UI changes'),
+    new Changelog(changelogType.CHANGE, 'Misc NPC changes'),
+
+    // v0.9.12
+    new ChangelogUpdate('v0.9.12', new Date(2022, 7, 18)),
+    new Changelog(changelogType.FIXED, 'Revert regional update'),
+
+    // v0.9.11
+    new ChangelogUpdate('v0.9.11', new Date(2022, 7, 18)),
+    new Changelog(changelogType.NEW, 'Celebi questline'),
+    new Changelog(changelogType.NEW, 'Added ability to lock plots in the farm'),
+    new Changelog(changelogType.NEW, 'Bulletin Board, With misc quests available'),
+    new Changelog(changelogType.CHANGE, 'More Battle Frontier rewards'),
+    new Changelog(changelogType.CHANGE, 'Misc text changes'),
+    new Changelog(changelogType.CHANGE, 'Misc UI changes'),
+    new Changelog(changelogType.CHANGE, 'Misc NPC changes'),
+    new Changelog(changelogType.FIXED, 'Pokérus status not visually updating in the hatchery'),
+    new Changelog(changelogType.FIXED, 'Multi quest progression'),
+
+    // v0.9.10
     new ChangelogUpdate('v0.9.10', new Date(2022, 7, 3)),
     new Changelog(changelogType.NEW, 'Added Furfrou (star)'),
     new Changelog(changelogType.CHANGE, 'Misc text changes'),

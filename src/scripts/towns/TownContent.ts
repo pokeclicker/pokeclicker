@@ -103,10 +103,9 @@ class NextRegionTownContent extends TownContent {
 }
 
 class MoveToDungeon extends TownContent {
-    dungeon: Dungeon;
-    constructor(dungeon: Dungeon) {
+
+    constructor(private dungeon: Dungeon, private visibleRequirement: Requirement = undefined) {
         super([]);
-        this.dungeon = dungeon;
     }
 
     public cssClass() {
@@ -116,7 +115,7 @@ class MoveToDungeon extends TownContent {
         return this.dungeon.name;
     }
     public isVisible(): boolean {
-        return true;
+        return this.visibleRequirement?.isCompleted() ?? true;
     }
     public onclick(): void {
         MapHelper.moveToTown(this.dungeon.name);
