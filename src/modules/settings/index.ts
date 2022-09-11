@@ -91,6 +91,7 @@ Settings.add(new Setting<string>('hideHatchery', 'Hide Hatchery Modal',
         new SettingOption('Queue Slots Full', 'queue'),
     ],
     'queue'));
+Settings.add(new BooleanSetting('hideQuestsOnFull', 'Hide Quest Menu on full questslots', true));
 Settings.add(new Setting<string>('farmDisplay', 'Farm timer display',
     [
         new SettingOption('To Next Stage', 'nextStage'),
@@ -140,6 +141,7 @@ Settings.add(new Setting<string>('saveReminder', 'Save reminder interval (in gam
         new SettingOption('7 Days', (7 * DAY).toString()),
     ],
     (12 * HOUR).toString()));
+Settings.add(new Setting('breedingQueueSizeSetting', 'Breeding Queue Size', [], '-1'));
 
 // Sound settings
 Object.values(NotificationConstants.NotificationSound).forEach((soundGroup) => {

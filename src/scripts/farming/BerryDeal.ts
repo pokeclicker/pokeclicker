@@ -284,7 +284,7 @@ class BerryDeal {
     }
 
     public static canUse(town: GameConstants.BerryTraderLocations, i: number): boolean {
-        const deal = BerryDeal.list[GameConstants.BerryTraderLocations[town]]?.peek()[i];
+        const deal = BerryDeal.list[town]?.peek()[i];
         if (!deal) {
             return false;
         } else {
@@ -293,7 +293,7 @@ class BerryDeal {
     }
 
     public static use(town: GameConstants.BerryTraderLocations, i: number, tradeTimes = 1) {
-        const deal = BerryDeal.list[GameConstants.BerryTraderLocations[town]]?.peek()[i];
+        const deal = BerryDeal.list[town]?.peek()[i];
         if (BerryDeal.canUse(town, i)) {
             const trades = deal.berries.map(berry => {
                 const amt = App.game.farming.berryList[berry.berryType]();
@@ -310,6 +310,14 @@ class BerryDeal {
                 deal.item.itemType.gain(deal.item.amount * maxTrades);
             }
             GameHelper.incrementObservable(App.game.statistics.berryDailyDealTrades);
+
+            const amount = deal.item.amount * maxTrades;
+            const multiple = amount > 1 ? 's' : '';
+            Notifier.notify({
+                message: `You traded for ${amount.toLocaleString('en-US')} × <img src="${deal.item.itemType.image}" height="24px"/> ${GameConstants.humanifyString(deal.item.itemType.displayName)}${multiple}.`,
+                type: NotificationConstants.NotificationOption.success,
+                setting: NotificationConstants.NotificationSetting.Items.item_bought,
+            });
         }
     }
 }

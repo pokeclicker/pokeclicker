@@ -1174,7 +1174,7 @@ const VioletEarlDervish = new NPC('Earl Dervish', [
 
 const AzaleaOldMan = new NPC('Wise Old Man', [
     'You want to know about Celebi? It hasn\'t been seen in a long time.',
-    'I remember, back in the day, it was the Guardian of Ilex Forest. It was a playful Pokémon. It loved playing with Children.',
+    'I remember, back in the day, it was the Guardian of Ilex Forest. It was a playful Pokémon. It loved playing with children.',
     'It was especially close to a kid named Samuel Oak. When he suddenly moved to Kanto, Celebi was quite sad. He never even said goodbye! I wonder what became of that boy. Maybe he knows more of where Celebi is right now. They certainly have Unfinished Business.',
     'Celebi got over it very quick, playful as it is. There are always other kids to play with. Then, some time later, a strange figure went into the forest with a golden Poké Ball. The Guardian hasn\'t been seen since.',
 ]);
@@ -1683,9 +1683,9 @@ const EverGrandeCityShop = new Shop([
 const BattleFrontierShop = new Shop([
     new PokeballItem(GameConstants.Pokeball.Ultraball, 1, GameConstants.Currency.battlePoint, undefined, 'Ultra Ball'),
     new PokeballItem(GameConstants.Pokeball.Masterball, 500, GameConstants.Currency.battlePoint , { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.battlePoint]}` }, 'Master Ball'),
-    new EnergyRestore(GameConstants.EnergyRestoreSize.SmallRestore, 10, GameConstants.Currency.battlePoint),
-    new EnergyRestore(GameConstants.EnergyRestoreSize.MediumRestore, 20, GameConstants.Currency.battlePoint),
-    new EnergyRestore(GameConstants.EnergyRestoreSize.LargeRestore, 40, GameConstants.Currency.battlePoint),
+    new EnergyRestore(GameConstants.EnergyRestoreSize.SmallRestore, 10, GameConstants.Currency.battlePoint, 'Small Restore'),
+    new EnergyRestore(GameConstants.EnergyRestoreSize.MediumRestore, 20, GameConstants.Currency.battlePoint, 'Medium Restore'),
+    new EnergyRestore(GameConstants.EnergyRestoreSize.LargeRestore, 40, GameConstants.Currency.battlePoint, 'Large Restore'),
     ItemList.FarmHandJamie,
     ItemList.HatcheryHelperNoel,
 ]);
@@ -3403,6 +3403,20 @@ const MysteryFan = new NPC('Mystery Fan', [
     'I\'ve heard a Pokémon detective is sniffing around here for mysteries! He might be interested in an enigmatic berry, too.',
 ]);
 
+const ExamineAegislash = new NPC('Examine Your Doublade', [
+    '<i>Your Doublade evolves and shifts to into an aggressive stance, revealing its Blade Forme.</i>',
+], {
+    image: 'assets/images/pokemon/681.1.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Princess Diancie', 4), new QuestLineStepCompletedRequirement('Princess Diancie', 5, GameConstants.AchievementOption.less)]),
+});
+
+const ThanksDiancie = new NPC('Princess Diancie', [
+    'Thank you for your help saving the Diamond Domain. I will be waiting for you in Reflection Cave.',
+], {
+    image: 'assets/images/pokemon/719.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Princess Diancie', 6), new QuestLineStepCompletedRequirement('Princess Diancie', 8, GameConstants.AchievementOption.less)]),
+});
+
 //Kalos Towns
 
 TownList['Vaniville Town'] = new Town(
@@ -3434,7 +3448,7 @@ TownList['Santalune City'] = new Town(
 TownList['Lumiose City'] = new Town(
     'Lumiose City',
     GameConstants.Region.kalos,
-    [DepartmentStoreShop,FriseurFurfrouShop, TemporaryBattleList.AZ],
+    [DepartmentStoreShop,FriseurFurfrouShop, TemporaryBattleList.AZ, TemporaryBattleList.Merilyn],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 4)],
         npcs: [ProfSycamore, LumioseEngineer],
@@ -3484,9 +3498,10 @@ TownList['Geosenge Town'] = new Town(
 TownList['Shalour City'] = new Town(
     'Shalour City',
     GameConstants.Region.kalos,
-    [ShalourCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Shalour City'])],
+    [ShalourCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Shalour City']), TemporaryBattleList.Riot, TemporaryBattleList['Millis and Argus Steel']],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Reflection Cave'))],
+        npcs: [ExamineAegislash, ThanksDiancie],
     }
 );
 TownList['Coumarine City'] = new Town(
@@ -4250,7 +4265,7 @@ const HammerlockeShop = new Shop([
     ItemList.Upgrade,
     ItemList.Dragon_scale,
 ]);
-const StowonSideShop: Shop = new Shop([
+const StowonSideShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
     ItemList.Fighting_egg,
@@ -4259,6 +4274,9 @@ const StowonSideShop: Shop = new Shop([
     ItemList.Dubious_disc,
     ItemList.Reaper_cloth,
 ]);
+const GlimwoodTangleShop = new Shop([
+    ItemList['Zarude (Dada)'],
+], undefined, [new QuestLineCompletedRequirement('Secrets of the Jungle')]);
 const BallonleaShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
@@ -4333,6 +4351,65 @@ const SouthGalarRoamerNPC = new RoamerNPC('Professor Sonia', [
 const IsleofArmorRoamerNPC = new RoamerNPC('Master Dojo Student', [
     'One of the other students said they saw a rare Pokémon on {ROUTE_NAME}. Might be worth having a look.',
 ], GameConstants.Region.galar, RoamingPokemonList.findGroup(GameConstants.Region.galar, GameConstants.GalarSubRegions.IsleofArmor));
+const JungleAsh1 = new NPC ('Ash Ketchum', [
+    'Hey! I didn\'t expect to see you again here. Fancy a ba-. Actually, no, I\'d like to ask a favour of you; a friend of mine living in Glimwood Tangle called me asking for some help.',
+    'I would go myself, but I promised one of the students here a battle and I don\'t want to bail on them. Would you be able to go for me?',
+    'Great! My friends name is Koko, tell him I sent you. This battle shouldn\'t take me too long, so come ask for my help if you need it!',
+],
+{ requirement: new MultiRequirement([new QuestLineStartedRequirement('Secrets of the Jungle'), new QuestLineStepCompletedRequirement('Secrets of the Jungle', 1, GameConstants.AchievementOption.less )])});
+const JungleKoko1 = new NPC ('Koko', [
+    'Hmm? Who are you? Oh, so Ash sent you to help me? That\'s great!',
+    'So, I\'m part of a tribe of Pokémon called Zarude, I was raised by them despite being a human. One of them has gone missing, I\'ve been told they were seen roaming, completely lost, around the Isle of Armor.',
+    'Could you go and catch it and bring it back here? If you need help locating it, I\'m sure one of the students at the dojo they have there could help you',
+],
+{ requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('Secrets of the Jungle', 0), new QuestLineStepCompletedRequirement('Secrets of the Jungle', 2, GameConstants.AchievementOption.less )])});
+const JungleKoko2 = new NPC ('Koko', [
+    'Great, you found it! Now if you could release it... hmm? It seems to like you. Well, if it wants to stay with you, that\'s it\s choice, so I guess it\'s fine.',
+    'Oh, it looks like a group of Zarude from the tribe are here..... They... are angry, they think you caught Zarude against it\'s will. I\'ll try and talk sense into them,',
+    'Zaruza! Zaru Zaru! Zarude!.. Nope, they\'re too angry to listen. Looks like you\'ll have to fight them if we want to calm them down. Zarude are strong, but I\'m sure you\'ll be fine if you are anywhere near as strong as Ash.',
+],
+{ requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('Secrets of the Jungle', 2), new QuestLineStepCompletedRequirement('Secrets of the Jungle', 4, GameConstants.AchievementOption.less )])});
+const JungleKoko3 = new NPC ('Koko', [
+    'Well, they\'re all knocked out. I\'ll try to talk reason into them when they wake up. Thanks for your help, I\'m glad you found Zarude safe.',
+    '...oh no. Another two groups of Zarude are coming and, as I\'m sure you can already guess, being surrounded by unconscious Zarude does not make you look good to them.',
+    'I\'m really sorry, it seems you\'ll have to fight off these ones as well.',
+],
+{ requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('Secrets of the Jungle', 4), new QuestLineStepCompletedRequirement('Secrets of the Jungle', 6, GameConstants.AchievementOption.less )])});
+const JungleKoko4 = new NPC ('Koko', [
+    'Okay... It\'s great that you were able to knock them all out without hurting them too much, but I don\'t think I\'ll be able to calm all of them on my own when they wake up.',
+    'Would you be able to bring Ash here? I think the 3 of us together should be able to calm the lot of them down. He\'s probably still at the Master Dojo.',
+],
+{ requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('Secrets of the Jungle', 6), new QuestLineStepCompletedRequirement('Secrets of the Jungle', 9, GameConstants.AchievementOption.less )])});
+const JungleAsh2 = new NPC ('Ash Ketchum', [
+    'You\'re back! How did it go with the Zarude?',
+    'Oh, I see, that\'s quite the problem... Still, you said they\'re all out cold for now, right? In that case, we should have time for a battle!',
+    'The battlefield out the back of the Dojo is being used out the moment, so let\'s battle out in front of the Dojo.',
+    'With this amazing new team of mine, I\'ll finally beat you, my strongest rival!',
+],
+{ requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('Secrets of the Jungle', 7), new QuestLineStepCompletedRequirement('Secrets of the Jungle', 9, GameConstants.AchievementOption.less )])});
+const JungleKoko5 = new NPC ('Koko', [
+    'You brought Ash? Fantastic! And just in time, the Zarude are starting to wake up. Ash, could you have your Pokémon help me explain to them what\'s going on?',
+    'Okay! It seems they finally understand. I\'m really sorry for all the trouble they caused for you.',
+    'Oh, Dada! Zaruza Zaru? Zaru. This is the Zarude that raised me, Dada. He says he was impressed watching you fight, and wants to fight you as well.',
+    'I should tell you, Dada is much stronger than the rest of the Zarude. Have a good fight, both of you!',
+],
+{ requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('Secrets of the Jungle', 9), new QuestLineStepCompletedRequirement('Secrets of the Jungle', 11, GameConstants.AchievementOption.less )])});
+const JungleAsh3 = new NPC ('Ash Ketchum', [
+    'Amazing, you even beat Dada! It\'s really clear that he is really amazed by your strength!',
+    'Hang on, did you guys see something? Oh, over there, it\'s Celebi! It must have come now things are peaceful here. It looks like it wants to play!',
+    'Actually, it looks interested in you in particular. Maybe it wants you to try and catch it? You should give it a shot!',
+],
+{ requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('Secrets of the Jungle', 11), new QuestLineStepCompletedRequirement('Secrets of the Jungle', 13, GameConstants.AchievementOption.less )])});
+const JungleKoko6 = new NPC ('Koko', [
+    'Wow, you actually caught Celebi! Well, I\'m not sure why, but it looks like that is what it wanted.',
+    'Oh, also, Dada said he would be interested in travelling with you. Although, he also said he needed to deal with the shortage of Quest Points the tribe is dealing with right now.',
+    'If you help him with that, I\'m sure he\'ll join you!',
+],
+{ requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('Secrets of the Jungle', 13), new QuestLineCompletedRequirement('Secrets of the Jungle', GameConstants.AchievementOption.less )])});
+const CrownShrineExplorer = new NPC('Explorer', [
+    'Whew! This place is quite a trek from Freezington.',
+    'I\'ve heard that a rare Pokémon sometimes hides in the chests here. I was told that it is incredibly rare, but can\'t be found anywhere else!',
+], {image: 'assets/images/trainers/Backpacker (male).png'});
 const CrownTundraRoamerNPC = new RoamerNPC('Freezington Mayor', [
     'If my eyes didn\'t decieve me, I saw a rare Pokémon at {ROUTE_NAME}. Go and see if you can find it if you\'re interested.',
 ], GameConstants.Region.galar, RoamingPokemonList.findGroup(GameConstants.Region.galar, GameConstants.GalarSubRegions.CrownTundra));
@@ -4540,7 +4617,7 @@ TownList.Wyndon = new Town(
 TownList['Wyndon Stadium'] = new Town(
     'Wyndon Stadium',
     GameConstants.Region.galar,
-    [GymList['Trainer Marnie'], GymList['Gym Leader Bede'], GymList['Trainer Hop'], GymList['Champion Leon'], pokeLeagueShop()],
+    [GymList['Elite Trainer Marnie'], GymList['Elite Gym Leader Bede'], GymList['Elite Trainer Hop'], GymList['Champion Leon'], pokeLeagueShop()],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 32)],
     }
@@ -4560,13 +4637,13 @@ TownList['Master Dojo'] = new Town(
     [new BulletinBoard(GameConstants.BulletinBoards.Armor), TemporaryBattleList.Mustard, MasterDojoShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Master Dojo'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 33)],
-        npcs: [IsleofArmorRoamerNPC],
+        npcs: [JungleAsh1, JungleAsh2, IsleofArmorRoamerNPC],
     }
 );
 TownList['Master Dojo Battle Court'] = new Town(
     'Master Dojo Battle Court',
     GameConstants.Region.galar,
-    [GymList['Gym Leader Klara'], GymList['Gym Leader Avery'], GymList['Dojo Matron Honey'], GymList['Dojo Master Mustard']],
+    [GymList['Elite Gym Leader Klara'], GymList['Elite Gym Leader Avery'], GymList['Elite Dojo Matron Honey'], GymList['Elite Dojo Master Mustard']],
     {
         requirements: [
             new MultiRequirement([
@@ -4589,7 +4666,7 @@ TownList['Crown Tundra Station'] = new Town(
 TownList.Freezington = new Town(
     'Freezington',
     GameConstants.Region.galar,
-    [new BulletinBoard(GameConstants.BulletinBoards.Crown), TemporaryBattleList.Calyrex, TemporaryBattleList.Glastrier, TemporaryBattleList.Spectrier, FreezingtonShop],
+    [new BulletinBoard(GameConstants.BulletinBoards.Crown), GymList['Elite Trainer Peony'], TemporaryBattleList.Calyrex, TemporaryBattleList.Glastrier, TemporaryBattleList.Spectrier, FreezingtonShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 46)],
         npcs: [CrownPeony1, Calyrex1, Calyrex2, Calyrex3, CrownPeony2, BirdPeony1, BirdPeony2, BirdPeony3, GolemPeony1, GolemPeony2, GolemPeony3, GolemPeony4, GolemPeony5, GolemPeony6, PeonyComplete, CrownTundraRoamerNPC],
@@ -4621,7 +4698,9 @@ TownList['Galar Mine No. 2'] = new DungeonTown(
 TownList['Glimwood Tangle'] = new DungeonTown(
     'Glimwood Tangle',
     GameConstants.Region.galar,
-    [new TemporaryBattleRequirement('Bede3')]
+    [new TemporaryBattleRequirement('Bede3')],
+    [TemporaryBattleList['Zarude Tribe 1'], TemporaryBattleList['Zarude Tribe 2'], TemporaryBattleList['Zarude Tribe 3'], TemporaryBattleList['Zarude (Dada)'], TemporaryBattleList['Flowering Celebi'], GlimwoodTangleShop],
+    [JungleKoko1, JungleKoko2, JungleKoko3, JungleKoko4, JungleKoko5, JungleAsh3, JungleKoko6]
 );
 TownList['Rose Tower'] = new DungeonTown(
     'Rose Tower',
@@ -4739,5 +4818,5 @@ TownList['Crown Shrine'] = new DungeonTown(
     GameConstants.Region.galar,
     [new RouteKillRequirement(10, GameConstants.Region.galar, 55)],
     [],
-    [Calyrex4]
+    [Calyrex4, CrownShrineExplorer]
 );

@@ -21,7 +21,7 @@ class Breeding implements Feature {
     private _eggSlots: KnockoutObservable<number>;
 
     private _queueList: KnockoutObservableArray<number>;
-    private queueSlots: KnockoutObservable<number>;
+    public queueSlots: KnockoutObservable<number>;
 
     public hatchList: { [name: number]: PokemonNameType[][] } = {};
 
@@ -42,6 +42,7 @@ class Breeding implements Feature {
         BreedingFilters.pokerus.value(Settings.getSetting('breedingPokerusFilter').value);
         BreedingController.displayValue(Settings.getSetting('breedingDisplayFilter').value);
         BreedingController.regionalAttackDebuff(+Settings.getSetting('breedingRegionalAttackDebuffSetting').value);
+        BreedingController.queueSizeLimit(+Settings.getSetting('breedingQueueSizeSetting').value);
     }
 
     initialize(): void {
@@ -165,7 +166,7 @@ class Breeding implements Feature {
     }
 
     public hasFreeQueueSlot(): boolean {
-        const slots = this.queueSlots();
+        const slots = this.usableQueueSlots();
         return slots && this._queueList().length < slots;
     }
 
@@ -241,7 +242,7 @@ class Breeding implements Feature {
 
     public addToQueue(pokemon: PartyPokemon): boolean {
         const queueSize = this._queueList().length;
-        if (queueSize < this.queueSlots()) {
+        if (queueSize < this.usableQueueSlots()) {
             pokemon.breeding = true;
             this._queueList.push(pokemon.id);
             return true;
@@ -257,6 +258,27 @@ class Breeding implements Feature {
             return true;
         }
         return false;
+    }
+
+    public clearQueue(shouldConfirm = false) {
+        if (shouldConfirm) {
+            Notifier.confirm({
+                title: 'Clear Queue',
+                message: 'Are you sure?\n\nAll Pokémon will be removed from your breeding queue.',
+                type: NotificationConstants.NotificationOption.warning,
+                confirm: 'Clear',
+            }).then(confirmed => {
+                if (confirmed) {
+                    while (this._queueList().length) {
+                        this.removeFromQueue(0);
+                    }
+                }
+            });
+        } else {
+            while (this._queueList().length) {
+                this.removeFromQueue(0);
+            }
+        }
     }
 
     public gainPokemonEgg(pokemon: PartyPokemon | PokemonListData, isHelper = false): boolean {
@@ -456,4 +478,19 @@ class Breeding implements Feature {
         }
     }
 
+    public usableQueueSlots = ko.pureComputed(() => {
+        const queueSizeSetting = BreedingController.queueSizeLimit();
+        return queueSizeSetting > -1 ? queueSizeSetting : this.queueSlots();
+    });
+
+    public updateQueueSizeLimit(size: number) {
+        BreedingController.queueSizeLimit(size);
+        if (size == 0) {
+            this.clearQueue();
+        } else if (size > 0) {
+            for (let i = this.queueList().length; i > this.usableQueueSlots(); i--) {
+                this.removeFromQueue(i - 1);
+            }
+        }
+    }
 }

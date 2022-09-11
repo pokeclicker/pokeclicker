@@ -743,6 +743,7 @@ export enum PokemonItemType {
     'Arctozolt',
     'Dracovish',
     'Arctovish',
+    'Zarude (Dada)',
 }
 
 export enum UltraBeastType {
@@ -966,10 +967,15 @@ export const GalarGyms = [
     'Circhester2',
     'Spikemuth',
     'Hammerlocke',
-    'Trainer Marnie',
-    'Trainer Hop',
-    'Gym Leader Bede',
+    'Elite Trainer Marnie',
+    'Elite Gym Leader Bede',
+    'Elite Trainer Hop',
     'Champion Leon',
+    'Elite Gym Leader Klara',
+    'Elite Gym Leader Avery',
+    'Elite Dojo Matron Honey',
+    'Elite Dojo Master Mustard',
+    'Elite Trainer Peony',
 ];
 
 export const OrangeGyms = [
@@ -1284,6 +1290,8 @@ export const RegionalStarters = [
 
 export const TemporaryBattles = [
     'Fighting Dojo',
+    'Snorlax route 12',
+    'Snorlax route 16',
     'Biker Goon 1',
     'Biker Goon 2',
     'Biker Goon 3',
@@ -1327,6 +1335,9 @@ export const TemporaryBattles = [
     'Lab Ambush',
     'Imposter',
     'Possessed Mewtwo',
+    'Riot',
+    'Merilyn',
+    'Millis and Argus Steel',
     'AZ',
     'Ash Ketchum Kanto',
     'Ash Ketchum Johto',
@@ -1388,6 +1399,12 @@ export const TemporaryBattles = [
     'Avery2',
     'Klara3',
     'Avery3',
+    'Zarude Tribe 1',
+    'Zarude Tribe 2',
+    'Zarude Tribe 3',
+    'Ash Ketchum Galar',
+    'Zarude (Dada)',
+    'Flowering Celebi',
     'Peony',
     'Calyrex',
     'Glastrier',
