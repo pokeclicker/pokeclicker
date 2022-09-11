@@ -785,7 +785,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 50,
         'eggCycles': 15,
-        'evolutions': [new QuestlineLevelEvolution('Pinkan Pidgey', 'Pinkan Pidgeotto', 18)],
+        'evolutions': [new QuestlineLevelEvolution('Team Rocket\'s Pinkan Themepark', 'Pinkan Pidgey', 'Pinkan Pidgeotto', 18)],
         'base': {
             'hitpoints': 40,
             'attack': 45,
