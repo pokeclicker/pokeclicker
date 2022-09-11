@@ -44,7 +44,7 @@ class Discord implements Saveable {
 
     login(): void {
         // This will be updated from our config values
-        location.href = `$DISCORD_LOGIN_PROXY?action=login&redirect_uri=${encodeURIComponent(location.href.replace(location.search, ''))}`;
+        location.href = `$DISCORD_LOGIN_PROXY?action=login&redirect_uri=${encodeURIComponent(location.origin + location.pathname)}`;
     }
 
     logout(): void {
