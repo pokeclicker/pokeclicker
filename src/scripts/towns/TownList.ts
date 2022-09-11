@@ -1129,7 +1129,7 @@ const VioletEarlDervish = new NPC('Earl Dervish', [
 
 const AzaleaOldMan = new NPC('Wise Old Man', [
     'You want to know about Celebi? It hasn\'t been seen in a long time.',
-    'I remember, back in the day, it was the Guardian of Ilex Forest. It was a playful Pokémon. It loved playing with Children.',
+    'I remember, back in the day, it was the Guardian of Ilex Forest. It was a playful Pokémon. It loved playing with children.',
     'It was especially close to a kid named Samuel Oak. When he suddenly moved to Kanto, Celebi was quite sad. He never even said goodbye! I wonder what became of that boy. Maybe he knows more of where Celebi is right now. They certainly have Unfinished Business.',
     'Celebi got over it very quick, playful as it is. There are always other kids to play with. Then, some time later, a strange figure went into the forest with a golden Poké Ball. The Guardian hasn\'t been seen since.',
 ]);
@@ -3363,6 +3363,20 @@ const MysteryFan = new NPC('Mystery Fan', [
     'I\'ve heard a Pokémon detective is sniffing around here for mysteries! He might be interested in an enigmatic berry, too.',
 ]);
 
+const ExamineAegislash = new NPC('Examine Your Doublade', [
+    '<i>Your Doublade evolves and shifts to into an aggressive stance, revealing its Blade Forme.</i>',
+], {
+    image: 'assets/images/pokemon/681.1.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Princess Diancie', 4), new QuestLineStepCompletedRequirement('Princess Diancie', 5, GameConstants.AchievementOption.less)]),
+});
+
+const ThanksDiancie = new NPC('Princess Diancie', [
+    'Thank you for your help saving the Diamond Domain. I will be waiting for you in Reflection Cave.',
+], {
+    image: 'assets/images/pokemon/719.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Princess Diancie', 6), new QuestLineStepCompletedRequirement('Princess Diancie', 8, GameConstants.AchievementOption.less)]),
+});
+
 //Kalos Towns
 
 TownList['Vaniville Town'] = new Town(
@@ -3394,7 +3408,7 @@ TownList['Santalune City'] = new Town(
 TownList['Lumiose City'] = new Town(
     'Lumiose City',
     GameConstants.Region.kalos,
-    [TemporaryBattleList['Sycamore 1'], TemporaryBattleList['Tierno 1'], DepartmentStoreShop, FriseurFurfrouShop, TemporaryBattleList.AZ],
+    [TemporaryBattleList['Sycamore 1'], TemporaryBattleList['Tierno 1'], DepartmentStoreShop, FriseurFurfrouShop, TemporaryBattleList.AZ, TemporaryBattleList.Merilyn],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 4)],
         npcs: [ProfSycamore, LumioseEngineer],
@@ -3444,9 +3458,10 @@ TownList['Geosenge Town'] = new Town(
 TownList['Shalour City'] = new Town(
     'Shalour City',
     GameConstants.Region.kalos,
-    [ShalourCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Shalour City'])],
+    [ShalourCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Shalour City']), TemporaryBattleList.Riot, TemporaryBattleList['Millis and Argus Steel']],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Reflection Cave'))],
+        npcs: [ExamineAegislash, ThanksDiancie],
     }
 );
 TownList['Coumarine City'] = new Town(
