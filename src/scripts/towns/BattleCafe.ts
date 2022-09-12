@@ -137,33 +137,34 @@ class BattleCafeController {
                 ];
             case GameConstants.AlcremieSweet['Love Sweet']:
                 return [
-                    {berry: BerryType.Cheri, amount: 3},
-                    {berry: BerryType.Chesto, amount: 3},
+                    {berry: BerryType.Roseli, amount: 20},
+                    {berry: BerryType.Liechi, amount: 10},
                 ];
             case GameConstants.AlcremieSweet['Berry Sweet']:
                 return [
-                    {berry: BerryType.Cheri, amount: 3},
-                    {berry: BerryType.Chesto, amount: 3},
+                    {berry: BerryType.Kelpsy, amount: 40},
+                    {berry: BerryType.Yache, amount: 25},
+                    {berry: BerryType.Coba, amount: 25},
                 ];
             case GameConstants.AlcremieSweet['Clover Sweet']:
                 return [
-                    {berry: BerryType.Cheri, amount: 3},
-                    {berry: BerryType.Chesto, amount: 3},
+                    {berry: BerryType.Wepear, amount: 30},
+                    {berry: BerryType.Aguav, amount: 30},
+                    {berry: BerryType.Lum, amount: 5},
                 ];
             case GameConstants.AlcremieSweet['Flower Sweet']:
                 return [
-                    {berry: BerryType.Cheri, amount: 3},
-                    {berry: BerryType.Chesto, amount: 3},
+                    {berry: BerryType.Pomeg, amount: 30},
+                    {berry: BerryType.Nomel, amount: 30},
                 ];
             case GameConstants.AlcremieSweet['Star Sweet']:
                 return [
-                    {berry: BerryType.Cheri, amount: 3},
-                    {berry: BerryType.Chesto, amount: 3},
+                    {berry: BerryType.Starf, amount: 1},
                 ];
             case GameConstants.AlcremieSweet['Ribbon Sweet']:
                 return [
-                    {berry: BerryType.Cheri, amount: 3},
-                    {berry: BerryType.Chesto, amount: 3},
+                    {berry: BerryType.Chople, amount: 20},
+                    {berry: BerryType.Haban, amount: 20},
                 ];
         }
     }
