@@ -2199,6 +2199,7 @@ Routes.add(new RegionRoute(
           new SpecialRoutePokemon(['Crustle', 'Mudsdale', 'Vulpix', 'Growlithe', 'Unfezant', 'Haxorus', 'Cramorant'], new WeatherRequirement([WeatherType.Sunny])),
           new SpecialRoutePokemon(['Mudsdale', 'Crustle', 'Claydol', 'Baltoy', 'Haxorus', 'Cramorant'], new WeatherRequirement([WeatherType.Sandstorm])),
           new SpecialRoutePokemon(['Drifblim', 'Claydol', 'Axew', 'Munna', 'Liepard', 'Unfezant', 'Haxorus', 'Cramorant'], new WeatherRequirement([WeatherType.Fog])),
+      ],
     }),
     [
         new MultiRequirement([
