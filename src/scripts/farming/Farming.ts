@@ -639,19 +639,19 @@ class Farming implements Feature {
             }));
 
         // Pinkan
-        this.mutations.push(new GrowNearBerryMutation(0.0001, BerryType.Pinkan,
+        this.mutations.push(new GrowNearBerryMutation(.0005, BerryType.Pinkan,
             [
                 BerryType.Pecha,
                 BerryType.Persim,
-                BerryType.Mago,
                 BerryType.Nanab,
+                BerryType.Mago,
                 BerryType.Qualot,
                 BerryType.Magost,
                 BerryType.Watmel,
             ], {
                 hint: 'I\'ve heard that there\'s a special Pink Berry that only appears when surrounded by a bunch of different types of Pink Berries!',
                 unlockReq: function(): boolean {
-                    return App.game.quests.getQuestLine('Ultra Beast Hunt').state() > 0; //TODO: Change to Pinkan Quest when created
+                    return App.game.quests.getQuestLine('Ultra Beast Hunt').state() > QuestLineState.inactive; //TODO: Change to Pinkan Quest when created
                 },
             }));
 

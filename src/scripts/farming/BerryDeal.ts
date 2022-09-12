@@ -239,43 +239,43 @@ class BerryDeal {
         const list = [];
         list.push(new BerryDeal(
             [BerryType.Pinkan],
-            [SeededRand.intBetween(50, 100)],
+            [SeededRand.intBetween(40, 60)],
             ItemList['Pinkan Arbok'],
             1
         ));
         list.push(new BerryDeal(
             [BerryType.Pinkan],
-            [SeededRand.intBetween(50, 100)],
+            [SeededRand.intBetween(20, 40)],
             ItemList['Pinkan Oddish'],
             1
         ));
         list.push(new BerryDeal(
             [BerryType.Pinkan],
-            [SeededRand.intBetween(50, 100)],
+            [SeededRand.intBetween(40, 60)],
             ItemList['Pinkan Poliwhirl'],
             1
         ));
         list.push(new BerryDeal(
             [BerryType.Pinkan],
-            [SeededRand.intBetween(50, 100)],
+            [SeededRand.intBetween(20, 40)],
             ItemList['Pinkan Geodude'],
             1
         ));
         list.push(new BerryDeal(
             [BerryType.Pinkan],
-            [SeededRand.intBetween(50, 100)],
+            [SeededRand.intBetween(80, 100)],
             ItemList['Pinkan Weezing'],
             1
         ));
         list.push(new BerryDeal(
             [BerryType.Pinkan],
-            [SeededRand.intBetween(50, 100)],
+            [SeededRand.intBetween(80, 100)],
             ItemList['Pinkan Scyther'],
             1
         ));
         list.push(new BerryDeal(
             [BerryType.Pinkan],
-            [SeededRand.intBetween(50, 100)],
+            [SeededRand.intBetween(80, 100)],
             ItemList['Pinkan Electabuzz'],
             1
         ));
