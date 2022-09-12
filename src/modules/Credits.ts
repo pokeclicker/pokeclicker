@@ -11,6 +11,15 @@ type Credit = {
 // Sort alphabetically
 export const SpriteCredits: Credit[] = [
     {
+        name: 'AutumnSpire',
+        link: 'https://www.deviantart.com/autumnspire',
+        image: 'https://a.deviantart.net/avatars-big/a/u/autumnspire.png',
+        resources: [
+            'Team Aqua Grunt Revamps',
+        ],
+        // Notes: Allowed use with credit.
+    },
+    {
         name: 'aveontrainer',
         link: 'https://www.deviantart.com/aveontrainer',
         image: 'https://a.deviantart.net/avatars-big/a/v/aveontrainer.png',
@@ -65,7 +74,7 @@ export const SpriteCredits: Credit[] = [
         name: 'CorgiOnNeptune',
         link: 'https://linktr.ee/CorgiOnNeptune',
         resources: [
-            'Recolours of Duncapham\'s sprite remakes',
+            'Recolours of Duncapham\'s sprite revamps',
             'Sounds for Wanderer/Roamer',
             'Sounds for BF finish & empty queue',
         ],
@@ -114,9 +123,16 @@ export const SpriteCredits: Credit[] = [
         link: 'https://discordapp.com/users/272336444297707521/',
         image: 'assets/images/profile/trainer-96.png',
         resources: [
+            'Arctovish shop image',
+            'Arctozolt shop image',
+            'Argus Steel',
+            'Ash\'s Butterfree',
             'Blimp base',
             'Danny',
+            'Dracovish shop image',
+            'Dracozolt shop image',
             'Luana',
+            'Merilyn',
             'Pinkan Bellsprout',
             'Pinkan Caterpie',
             'Pinkan Diglett',
@@ -127,6 +143,7 @@ export const SpriteCredits: Credit[] = [
             'Pinkan Pikachu',
             'Pinkan Rhyhorn (shiny)',
             'Pinkan Weedle',
+            'Pink Butterfree',
             'Rudy',
             'Supreme Gym Leader Drake',
             'Team Flare Admin (male)',
@@ -135,6 +152,7 @@ export const SpriteCredits: Credit[] = [
             'Tourist Couple/Bellhop',
             'Valencian Raticate',
             'Valencian Paras',
+            'Zarude (Dada) shop image',
         ],
         // Notes: Made specifically for PokéClicker.
     },
@@ -153,16 +171,25 @@ export const SpriteCredits: Credit[] = [
         link: 'https://www.deviantart.com/duncapham',
         image: 'https://a.deviantart.net/avatars-big/d/u/duncapham.png',
         resources: [
-            'Kanto Gym Leader/E4 sprite remakes',
+            'Kanto Gym Leader/E4 sprite revamps',
+            'Aqua and Magma leader revamps',
             'Blue recolours',
-            'Roxanne remake',
-            'Norman remake',
-            'Winona remake',
-            'Tate & Liza remake',
-            'Drake remake',
-            'Phoebe remake',
-            'Sidney remake',
-            'Steven remake',
+            'Channeler revamp',
+            'Cool Couple revamps',
+            'Drake revamp',
+            'Norman revamp',
+            'Old Couple revamp',
+            'Painter revamp',
+            'Phoebe revamp',
+            'Professor Oak revamp',
+            'Roxanne revamp',
+            'Ruin Maniac revamp',
+            'Scientist revamp',
+            'Sidney revamp',
+            'Steven revamp',
+            'Tamer revamp',
+            'Tate & Liza revamp',
+            'Winona revamp',
         ],
         // NOTES: Allowed use with credit given.
     },
@@ -177,6 +204,8 @@ export const SpriteCredits: Credit[] = [
             'Pinkan Primeape',
             'Pinkan Venonat',
             'Koga Trainer',
+            'Spooky Ivysaur',
+            'Spooky Venusaur',
         ],
         // Notes: Made specifically for PokéClicker.
     },
@@ -198,8 +227,8 @@ export const SpriteCredits: Credit[] = [
         // NOTES: No notes about credit, have messaged asking for permission, awaiting confirmation
     },
     {
-        name: 'eugene171',
-        link: 'https://discordapp.com/users/356459678965956613',
+        name: 'Farboo171',
+        link: 'https://github.com/Farboo171',
         resources: [
             'Freeze Mulch',
             'Underground Fossilized Dino',
@@ -294,7 +323,7 @@ export const SpriteCredits: Credit[] = [
         link: 'https://www.deviantart.com/kensuyjin33',
         image: 'https://a.deviantart.net/avatars-big/k/e/kensuyjin33.png',
         resources: [
-            'Blue sprite remakes',
+            'Blue sprite revamps',
         ],
         // NOTES: Allowed use with credit given.
     },
@@ -384,13 +413,15 @@ export const SpriteCredits: Credit[] = [
     },
     {
         name: 'NiCeDiCe',
-        link: 'https://github.com/NiCeDiCe90',
+        link: 'https://twitter.com/NiCeDiCe90',
         resources: [
             'Crystal Onix',
+            'Crystal Steelix',
             'Pinkan Rhyhorn (non shiny)',
             'Red Spearow',
             'shiny Totem Ribombee',
-            'Weather Institute world sprite',
+            'misc Map sprite edits',
+            'Bulbasaur (Rose)',
         ],
         // NOTES: Created specifically for PokéClicker.
     },
@@ -427,6 +458,8 @@ export const SpriteCredits: Credit[] = [
         resources: [
             'Elf Munchlax',
             'Grinch Celebi',
+            'Ivysaur (Rose)',
+            'Venusaur (Rose)',
         ],
         // Notes: Permission given via Discord #development-chat
     },
@@ -479,9 +512,11 @@ export const SpriteCredits: Credit[] = [
             'Detective Raichu',
             'Cissy',
             'Macro Cosmos (male) and (female)',
+            'Millis Steel',
             'Pinkan Pidgey',
             'Pinkan Rattata',
             'Pinkan Vileplume',
+            'Riot',
             'Valencian Butterfree',
             'Valencian Vileplume',
             'Valencian Weepinbell',
@@ -524,7 +559,7 @@ export const SpriteCredits: Credit[] = [
         link: 'https://www.deviantart.com/vur3',
         image: 'https://a.deviantart.net/avatars-big/v/u/vur3.png',
         resources: [
-            'Glacia remake',
+            'Glacia revamp',
         ],
         // Notes: Permission if credited.
     },
