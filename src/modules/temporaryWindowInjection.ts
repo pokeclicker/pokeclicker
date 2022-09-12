@@ -121,6 +121,7 @@ import QuestLineStartedRequirement from './requirements/QuestLineStartedRequirem
 import TemporaryBattleRequirement from './requirements/TemporaryBattleRequirement';
 import DayOfWeekRequirement from './requirements/DayOfWeekRequirement';
 import SaveReminder from './saveReminder/SaveReminder';
+import lazyLoad from './utilities/LazyLoader';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -248,4 +249,5 @@ Object.assign(<any>window, {
     TemporaryBattleRequirement,
     DayOfWeekRequirement,
     SaveReminder,
+    lazyLoad,
 });
