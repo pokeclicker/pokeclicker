@@ -18,6 +18,14 @@ export const SpriteCredits: Credit[] = [
         ],
         // Notes: Made specifically for PokéClicker.
     },
+        name: 'AutumnSpire',
+        link: 'https://www.deviantart.com/autumnspire',
+        image: 'https://a.deviantart.net/avatars-big/a/u/autumnspire.png',
+        resources: [
+            'Team Aqua Grunt Revamps',
+        ],
+        // Notes: Allowed use with credit.
+    },
     {
         name: 'aveontrainer',
         link: 'https://www.deviantart.com/aveontrainer',
@@ -73,7 +81,7 @@ export const SpriteCredits: Credit[] = [
         name: 'CorgiOnNeptune',
         link: 'https://linktr.ee/CorgiOnNeptune',
         resources: [
-            'Recolours of Duncapham\'s sprite remakes',
+            'Recolours of Duncapham\'s sprite revamps',
             'Sounds for Wanderer/Roamer',
             'Sounds for BF finish & empty queue',
         ],
@@ -176,16 +184,25 @@ export const SpriteCredits: Credit[] = [
         link: 'https://www.deviantart.com/duncapham',
         image: 'https://a.deviantart.net/avatars-big/d/u/duncapham.png',
         resources: [
-            'Kanto Gym Leader/E4 sprite remakes',
+            'Kanto Gym Leader/E4 sprite revamps',
+            'Aqua and Magma leader revamps',
             'Blue recolours',
-            'Roxanne remake',
-            'Norman remake',
-            'Winona remake',
-            'Tate & Liza remake',
-            'Drake remake',
-            'Phoebe remake',
-            'Sidney remake',
-            'Steven remake',
+            'Channeler revamp',
+            'Cool Couple revamps',
+            'Drake revamp',
+            'Norman revamp',
+            'Old Couple revamp',
+            'Painter revamp',
+            'Phoebe revamp',
+            'Professor Oak revamp',
+            'Roxanne revamp',
+            'Ruin Maniac revamp',
+            'Scientist revamp',
+            'Sidney revamp',
+            'Steven revamp',
+            'Tamer revamp',
+            'Tate & Liza revamp',
+            'Winona revamp',
         ],
         // NOTES: Allowed use with credit given.
     },
@@ -321,7 +338,7 @@ export const SpriteCredits: Credit[] = [
         link: 'https://www.deviantart.com/kensuyjin33',
         image: 'https://a.deviantart.net/avatars-big/k/e/kensuyjin33.png',
         resources: [
-            'Blue sprite remakes',
+            'Blue sprite revamps',
         ],
         // NOTES: Allowed use with credit given.
     },
@@ -560,7 +577,7 @@ export const SpriteCredits: Credit[] = [
         link: 'https://www.deviantart.com/vur3',
         image: 'https://a.deviantart.net/avatars-big/v/u/vur3.png',
         resources: [
-            'Glacia remake',
+            'Glacia revamp',
         ],
         // Notes: Permission if credited.
     },
