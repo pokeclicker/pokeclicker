@@ -1,9 +1,11 @@
 class BerryMasterShop extends Shop {
     constructor(
+        public location: GameConstants.BerryTraderLocations,
         public items: Item[],
-        public name: string = 'Berry Master'
+        public name: string = 'Berry Master',
+        requirements?: (Requirement | OneFromManyRequirement)[]
     ) {
-        super(items, name);
+        super(items, name, requirements);
     }
     public onclick(): void {
         ShopHandler.showShop(this);
@@ -12,4 +14,3 @@ class BerryMasterShop extends Shop {
 
     public amountInput = () => $('#berryMasterModal').find('input[name="amountOfItems"]');
 }
-
