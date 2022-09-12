@@ -68,12 +68,15 @@ class PartyController {
     static getHatcherySortedList = ko.pureComputed(() => {
         // If the breeding modal is open, we should sort it.
         if (modalUtils.observableState.breedingModal === 'show') {
+            // Don't adjust attack based on region if debuff is disabled
+            if (!App.game.challenges.list.regionalAttackDebuff.active()) {
+                region = -1;
+            }
             PartyController.hatcherySortedList = [...App.game.party.caughtPokemon];
             return PartyController.hatcherySortedList.sort(PartyController.compareBy(Settings.getSetting('hatcherySort').observableValue(), Settings.getSetting('hatcherySortDirection').observableValue(), BreedingController.regionalAttackDebuff()));
         }
         return PartyController.hatcherySortedList;
     }).extend({ rateLimit: 500 });
-
 
     private static proteinSortedList = [];
     static getProteinSortedList = ko.pureComputed(() => {
