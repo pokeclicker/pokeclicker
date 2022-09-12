@@ -1828,7 +1828,6 @@ TownList['Lilycove City'] = new Town(
     [DepartmentStoreShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 121)],
-        npcs: [],
     }
 );
 TownList['Mossdeep City'] = new Town(
@@ -2937,7 +2936,6 @@ TownList['Shopping Mall Nine'] = new Town(
     [DepartmentStoreShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.unova, 9)],
-        npcs: [],
     }
 );
 TownList['Humilau City'] = new Town(
