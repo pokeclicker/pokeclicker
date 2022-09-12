@@ -304,8 +304,6 @@ class BerryDeal {
             deal.berries.forEach((value) => GameHelper.incrementObservable(App.game.farming.berryList[value.berryType], -value.amount * maxTrades));
             if (deal.item.itemType instanceof UndergroundItem) {
                 Underground.gainMineItem(deal.item.itemType.id, deal.item.amount * maxTrades);
-            } else if (deal.item.itemType instanceof PokemonItem) {
-
             } else {
                 deal.item.itemType.gain(deal.item.amount * maxTrades);
             }
