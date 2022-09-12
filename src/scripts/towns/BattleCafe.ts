@@ -127,7 +127,6 @@ class BattleCafeController {
 
 
     private static getPrice(sweet: GameConstants.AlcremieSweet) : {berry: BerryType, amount: number}[] {
-        // TODO: fix prices
         switch (sweet) {
             case GameConstants.AlcremieSweet['Strawberry Sweet']:
                 return [
