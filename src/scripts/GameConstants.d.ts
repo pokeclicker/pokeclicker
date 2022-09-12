@@ -331,14 +331,22 @@ namespace GameConstants {
         //'Grass_Flute' = '',
     }
     declare enum PokemonItemType {
+        'Pinkan Arbok',
+        'Pinkan Oddish',
+        'Pinkan Poliwhirl',
+        'Pinkan Geodude',
+        'Pinkan Dodrio',
+        'Lickitung',
+        'Pinkan Weezing',
+        'Mr. Mime',
+        'Pinkan Scyther',
+        'Jynx',
+        'Pinkan Electabuzz',
+        'Magikarp',
         'Eevee',
         'Porygon',
-        'Jynx',
-        'Mr. Mime',
-        'Lickitung',
         'Togepi',
         'Beldum',
-        'Pinkan Dodrio',
         'Skorupi',
         'Combee',
         'Burmy (plant)',
@@ -402,6 +410,7 @@ namespace GameConstants {
         Kanto,
         Johto,
         Hoenn,
+        Sevii4567,
         Kalos,
         Alola,
         Galar,
@@ -480,6 +489,12 @@ namespace GameConstants {
         'Infected',
         'Contagious',
         'Resistant',
+    }
+    declare enum BerryTraderLocations {
+        'Goldenrod City',
+        'Mauville City',
+        'Pinkan Pokémon Reserve',
+        'Hearthome City',
     }
     declare enum ShardTraderLocations {
         'Cerulean City',

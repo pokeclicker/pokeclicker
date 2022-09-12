@@ -223,6 +223,10 @@ class Game {
                 p.breeding = false;
             }
         });
+        // Egg partyPokemon requires App.game.party and cannot be set until after loading is complete
+        App.game.breeding.eggList.filter(e => e().pokemon).forEach(e => {
+            e().setPartyPokemon();
+        });
     }
 
     start() {
