@@ -559,6 +559,41 @@ class QuestLineHelper {
         App.game.quests.questLines().push(rubySapphireSeviiQuestLine);
     }
 
+    public static createPinkanThemeparkQuestLine() {
+        const pinkanThemeparkQuestLine = new QuestLine('Team Rocket\'s Pinkan Themepark', 'Help Team Rocket build a Themepark on Pinkan Island?', new GymBadgeRequirement(BadgeEnums.Elite_OrangeChampion), GameConstants.BulletinBoards.Sevii4567);
+
+        const talktoTeamRocket = new TalkToNPCQuest(ThemeparkTeamRocket1, 'Talk to Team Rocket on Pinkan Island to hear about their plans');
+        pinkanThemeparkQuestLine.addQuest(talktoTeamRocket);
+
+        const farmPinkan = new HarvestBerriesQuest(1, undefined, BerryType.Pinkan);
+        pinkanThemeparkQuestLine.addQuest(farmPinkan);
+
+        const defeatPinkans = new MultipleQuestsQuest(
+            [
+                new DefeatPokemonsQuest(500, 0, 41, GameConstants.Region.kanto),
+                new DefeatPokemonsQuest(500, 0, 42, GameConstants.Region.kanto),
+            ], 'Help Team Rocket recruit some Pinkan Pokémon', () => App.game.farming.gainBerry(BerryType.Pinkan, 20));
+        pinkanThemeparkQuestLine.addQuest(defeatPinkans);
+
+        const collectPinkanMaterials = new MultipleQuestsQuest(
+            [
+                new GainGemsQuest(1000, 0, PokemonType.Fairy),
+                new CustomQuest(10, undefined, 'Gain 10 Pixie Plates', () => player.mineInventory().find(item => item.name == 'Pixie Plate').amount()),
+            ], 'Collect Fairy Gems and Pixie Plates');
+        pinkanThemeparkQuestLine.addQuest(collectPinkanMaterials);
+
+        const talktoTeamRocket2 = new TalkToNPCQuest(ThemeparkTeamRocket4, 'Talk to Team Rocket on Pinkan Island to open the Theme Park!');
+        pinkanThemeparkQuestLine.addQuest(talktoTeamRocket2);
+
+        const clearPinkanTeamRocket = new CustomQuest(1, 0, 'Defeat Team Rocket Jessie & James on Pinkan Island.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Pinkan Jessie & James')]());
+        pinkanThemeparkQuestLine.addQuest(clearPinkanTeamRocket);
+
+        const clearPinkanOfficerJenny = new CustomQuest(1, 0, 'Oh no! Officer Jenny has showed up. She\'s not happy! No time to plead your case, it\'s time to battle!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Pinkan Officer Jenny')]());
+        pinkanThemeparkQuestLine.addQuest(clearPinkanOfficerJenny);
+
+        App.game.quests.questLines().push(pinkanThemeparkQuestLine);
+    }
+
     // Sinnoh QuestLines
     public static createGalacticSinnohQuestLine() {
         const galacticSinnohQuestLine = new QuestLine('A new world', 'End Team Galactic\'s plan to destroy the world and create a new one in its place.');
@@ -1626,6 +1661,7 @@ class QuestLineHelper {
         this.createAquaMagmaHoennQuestLine();
         this.createDeoxysQuestLine();
         this.createRubySapphireSeviiQuestLine();
+        this.createPinkanThemeparkQuestLine();
         this.createGalacticSinnohQuestLine();
         this.createPlasmaUnovaQuestLine();
         this.createDetectivePikachuQuestLine();

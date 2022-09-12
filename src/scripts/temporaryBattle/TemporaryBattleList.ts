@@ -359,6 +359,37 @@ TemporaryBattleList['Scientist Gideon'] = new TemporaryBattle(
     [new QuestLineStepCompletedRequirement('Celio\'s Errand', 11)]
 );
 
+TemporaryBattleList['Pinkan Jessie & James'] = new TemporaryBattle(
+    'Pinkan Jessie & James',
+    [
+        new GymPokemon('Lickitung', 2000000, 40),
+        new GymPokemon('Pinkan Weezing', 3000000, 50),
+        new GymPokemon('Pinkan Arbok', 3000000, 50),
+        new GymPokemon('Meowth', 2000, 5),
+    ],
+    'We\'re blasting off again!!!!',
+    [new QuestLineStepCompletedRequirement('Team Rocket\'s Pinkan Themepark', 4)],
+    undefined,
+    {
+        displayName: 'Jessie & James',
+    }
+);
+
+TemporaryBattleList['Pinkan Officer Jenny'] = new TemporaryBattle(
+    'Pinkan Officer Jenny',
+    [
+        new GymPokemon('Growlithe', 2000000, 40),
+        new GymPokemon('Arcanine', 3500000, 55),
+        new GymPokemon('Pinkan Nidoking', 4000000, 70),
+    ],
+    'So you\'re not with them? Okay...just don\'t help those criminals in the future, got it? Looks like some new Pinkan Pokémon have made their way to the island, if you bring us some Pinkan Berries we\'ll trade you for them.',
+    [new QuestLineStepCompletedRequirement('Team Rocket\'s Pinkan Themepark', 5)],
+    undefined,
+    {
+        displayName: 'Officer Jenny',
+    }
+);
+
 // Sinnoh Temporary Battles
 TemporaryBattleList['Galactic Boss Cyrus'] = new TemporaryBattle(
     'Galactic Boss Cyrus',
