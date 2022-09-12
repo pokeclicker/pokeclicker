@@ -18,6 +18,7 @@ export const SpriteCredits: Credit[] = [
         ],
         // Notes: Made specifically for PokéClicker.
     },
+    {
         name: 'AutumnSpire',
         link: 'https://www.deviantart.com/autumnspire',
         image: 'https://a.deviantart.net/avatars-big/a/u/autumnspire.png',
