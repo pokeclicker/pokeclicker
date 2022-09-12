@@ -568,7 +568,7 @@ const ThemeparkTeamRocket1 = new NPC('Jessie and James', [
     'Would you mind Farming some Pinkan Berries to help use grow our supply? We don\'t know how to, but we\'ve heard the Berry Master in Kanto could be helpful?',
 ], {
     requirement: new MultiRequirement([new QuestLineStartedRequirement('Team Rocket\'s Pinkan Themepark'), new QuestLineStepCompletedRequirement('Team Rocket\'s Pinkan Themepark', 1, GameConstants.AchievementOption.less)]),
-    image: 'assets/images/npcs/Pinkan Jessie & James.png',
+    image: 'assets/images/temporaryBattle/Pinkan Jessie & James.png',
 });
 
 const ThemeparkTeamRocket2 = new NPC('Jessie and James', [
@@ -576,7 +576,7 @@ const ThemeparkTeamRocket2 = new NPC('Jessie and James', [
     'Now we can get us some Pinkan\'s for the theme park! Would you mind defeating 500 Pinkan Pokémon in the forest and out in the plains? We\'ll do the catching, you just need to beat \'em',
 ], {
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Team Rocket\'s Pinkan Themepark', 1), new QuestLineStepCompletedRequirement('Team Rocket\'s Pinkan Themepark', 2, GameConstants.AchievementOption.less)]),
-    image: 'assets/images/npcs/Pinkan Jessie & James.png',
+    image: 'assets/images/temporaryBattle/Pinkan Jessie & James.png',
 });
 
 const ThemeparkTeamRocket3 = new NPC('Jessie and James', [
@@ -584,7 +584,7 @@ const ThemeparkTeamRocket3 = new NPC('Jessie and James', [
     'We need a bunch of Pixie Plates, and we need some Fairy Gems to help...uh...pay off the contractor?',
 ], {
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Team Rocket\'s Pinkan Themepark', 2), new QuestLineStepCompletedRequirement('Team Rocket\'s Pinkan Themepark', 3, GameConstants.AchievementOption.less)]),
-    image: 'assets/images/npcs/Pinkan Jessie & James.png',
+    image: 'assets/images/temporaryBattle/Pinkan Jessie & James.png',
 });
 
 const ThemeparkTeamRocket4 = new NPC('Jessie and James', [
@@ -593,7 +593,7 @@ const ThemeparkTeamRocket4 = new NPC('Jessie and James', [
     'What\'s that? You\'re gonna stop us!? Heh, yeah right! Bring it on twerp!',
 ], {
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Team Rocket\'s Pinkan Themepark', 3), new QuestLineStepCompletedRequirement('Team Rocket\'s Pinkan Themepark', 5, GameConstants.AchievementOption.less)]),
-    image: 'assets/images/npcs/Pinkan Jessie & James.png',
+    image: 'assets/images/temporaryBattle/Pinkan Jessie & James.png',
 });
 
 const Informant1 = new NPC('Informant', [
@@ -889,7 +889,7 @@ TownList['Kumquat Island'] = new Town(
 TownList['Pummelo Island'] = new Town(
     'Pummelo Island',
     GameConstants.Region.kanto,
-    [GymList['Supreme Gym Leader Drake'], new BulletinBoard(GameConstants.BulletinBoards.Sevii4567)],
+    [GymList['Supreme Gym Leader Drake'], pokeLeagueShop(), new BulletinBoard(GameConstants.BulletinBoards.Sevii4567)],
     {
         requirements:
         [
