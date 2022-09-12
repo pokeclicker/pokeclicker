@@ -45,15 +45,22 @@ class PokemonItem extends CaughtIndicatingItem {
     }
 }
 
+ItemList['Pinkan Arbok']  = new PokemonItem('Pinkan Arbok', undefined);
+ItemList['Pinkan Oddish']  = new PokemonItem('Pinkan Oddish', undefined);
+ItemList['Pinkan Poliwhirl']  = new PokemonItem('Pinkan Poliwhirl', undefined);
+ItemList['Pinkan Geodude']  = new PokemonItem('Pinkan Geodude', undefined);
+ItemList['Pinkan Dodrio']  = new PokemonItem('Pinkan Dodrio', 50000);
+ItemList.Lickitung            = new PokemonItem('Lickitung', 1000);
+ItemList['Pinkan Weezing']  = new PokemonItem('Pinkan Weezing', undefined);
+ItemList['Pinkan Scyther']  = new PokemonItem('Pinkan Scyther', undefined);
+ItemList['Mr. Mime']             = new PokemonItem('Mr. Mime', 1000);
+ItemList['Pinkan Electabuzz']  = new PokemonItem('Pinkan Electabuzz', undefined);
+ItemList.Jynx                 = new PokemonItem('Jynx', 2000);
+ItemList.Magikarp             = new PokemonItem('Magikarp', 50000, Currency.money);
 ItemList.Eevee                = new PokemonItem('Eevee', 4000);
 ItemList.Porygon              = new PokemonItem('Porygon', 2000);
-ItemList.Jynx                 = new PokemonItem('Jynx', 2000);
-ItemList['Mr. Mime']             = new PokemonItem('Mr. Mime', 1000);
-ItemList.Lickitung            = new PokemonItem('Lickitung', 1000);
-ItemList.Magikarp             = new PokemonItem('Magikarp', 50000, Currency.money);
 ItemList.Togepi               = new PokemonItem('Togepi', 15000);
 ItemList.Beldum               = new PokemonItem('Beldum', 22500);
-ItemList['Pinkan Dodrio']  = new PokemonItem('Pinkan Dodrio', 50000);
 ItemList.Skorupi              = new PokemonItem('Skorupi', 6750);
 ItemList.Combee               = new PokemonItem('Combee', 6750);
 ItemList['Burmy (Plant)']        = new PokemonItem('Burmy (Plant)', 6750);

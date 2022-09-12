@@ -217,6 +217,12 @@ const TanobyRuinsShop = new Shop([
     ItemList['Pinkan Dodrio'],
 ], 'Trade with Prof. Ivy');
 
+const PinkanBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations['Pinkan Pokémon Reserve'],[
+    ItemList.Freeze_Mulch,
+    ItemList.Berry_Shovel,
+    ItemList.Mulch_Shovel,
+], 'Officer Jenny\'s Pinkan Trade Shop', [new QuestLineCompletedRequirement('Team Rocket\'s Pinkan Themepark')]);
+
 // Kanto NPCs
 
 const PalletProfOak = new ProfNPC('Prof. Oak',
@@ -546,7 +552,48 @@ const PinkanOfficerJenny2 = new NPC ('Officer Jenny', [
     'And since you\'ve conquered the Orange League, I suppose it should be safe to let you into Pinkan Mountain. Just be careful.',
 ], {
     image: 'assets/images/npcs/Officer Jenny.png',
-    requirement: new GymBadgeRequirement(BadgeEnums.Elite_OrangeChampion),
+    requirement: new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Elite_OrangeChampion), new QuestLineStepCompletedRequirement('Team Rocket\'s Pinkan Themepark', 0, GameConstants.AchievementOption.less)]),
+});
+const PinkanOfficerJenny3 = new NPC ('Officer Jenny', [
+    'Oh it\'s you again! Got some Pinkan Berries to trade?',
+    'So long as you\'re not helping those Rocket clowns, we\'ll let you trade for some of those rare Pinkan Pokémon that have only just come to the island.',
+], {
+    image: 'assets/images/npcs/Officer Jenny.png',
+    requirement: new QuestLineCompletedRequirement('Team Rocket\'s Pinkan Themepark'),
+});
+const ThemeparkTeamRocket1 = new NPC('Jessie and James', [
+    'Oh hello there trainer! What do you mean we\'re not supposed to be here? We toootally got permission from Officer Jenny!',
+    'Isn\'t your whole "thing" being helpful? We want to build a themepark to help fund the Pinkan Reserve, but this meddlesome twerp named Ash keeps getting in the way. He\'s even electrocuted us with his damn Pikachu!',
+    'We need a bunch of Pinkan berries to help feed the Pokémon at our themepark, but the twerp keeps zapping us when we try to go collect them.',
+    'Would you mind Farming some Pinkan Berries to help use grow our supply? We don\'t know how to, but we\'ve heard the Berry Master in Kanto could be helpful?',
+], {
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('Team Rocket\'s Pinkan Themepark'), new QuestLineStepCompletedRequirement('Team Rocket\'s Pinkan Themepark', 1, GameConstants.AchievementOption.less)]),
+    image: 'assets/images/temporaryBattle/Pinkan Jessie & James.png',
+});
+
+const ThemeparkTeamRocket2 = new NPC('Jessie and James', [
+    'Whoa! An actual Pinkan berry! Now our evil plo- plan! Definitely not evil, our very helpful and good plan!...Ahem. Our plan can now proceed.',
+    'Now we can get us some Pinkan\'s for the theme park! Would you mind defeating 500 Pinkan Pokémon in the forest and out in the plains? We\'ll do the catching, you just need to beat \'em',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Team Rocket\'s Pinkan Themepark', 1), new QuestLineStepCompletedRequirement('Team Rocket\'s Pinkan Themepark', 2, GameConstants.AchievementOption.less)]),
+    image: 'assets/images/temporaryBattle/Pinkan Jessie & James.png',
+});
+
+const ThemeparkTeamRocket3 = new NPC('Jessie and James', [
+    'Nice! Well, it would be nice. Now we have all these berries and Pinkan Pokémon, but nowhere to put \'em all!',
+    'We need a bunch of Pixie Plates, and we need some Fairy Gems to help...uh...pay off the contractor?',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Team Rocket\'s Pinkan Themepark', 2), new QuestLineStepCompletedRequirement('Team Rocket\'s Pinkan Themepark', 3, GameConstants.AchievementOption.less)]),
+    image: 'assets/images/temporaryBattle/Pinkan Jessie & James.png',
+});
+
+const ThemeparkTeamRocket4 = new NPC('Jessie and James', [
+    'Hahahaha! Now our plan can really start! Prepare for trouble, and make it double, because you just built us a profit machine!',
+    'We\'re going to make these Pinkan Pokémon perform silly routines and make us a ton of money, no days off for these suckers!',
+    'What\'s that? You\'re gonna stop us!? Heh, yeah right! Bring it on twerp!',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Team Rocket\'s Pinkan Themepark', 3), new QuestLineStepCompletedRequirement('Team Rocket\'s Pinkan Themepark', 5, GameConstants.AchievementOption.less)]),
+    image: 'assets/images/temporaryBattle/Pinkan Jessie & James.png',
 });
 
 const Informant1 = new NPC('Informant', [
@@ -842,7 +889,7 @@ TownList['Kumquat Island'] = new Town(
 TownList['Pummelo Island'] = new Town(
     'Pummelo Island',
     GameConstants.Region.kanto,
-    [GymList['Supreme Gym Leader Drake'], pokeLeagueShop()],
+    [GymList['Supreme Gym Leader Drake'], pokeLeagueShop(), new BulletinBoard(GameConstants.BulletinBoards.Sevii4567)],
     {
         requirements:
         [
@@ -865,10 +912,10 @@ TownList['Valencia Pokémon Center'] = new Town(
 TownList['Pinkan Pokémon Reserve'] = new Town(
     'Pinkan Pokémon Reserve',
     GameConstants.Region.kanto,
-    [PinkanPokémonReserveShop],
+    [PinkanPokémonReserveShop, PinkanBerryMaster, TemporaryBattleList['Pinkan Jessie & James'], TemporaryBattleList['Pinkan Officer Jenny']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 42)],
-        npcs: [PinkanOfficerJenny1, PinkanOfficerJenny2],
+        npcs: [PinkanOfficerJenny1, PinkanOfficerJenny2, PinkanOfficerJenny3, ThemeparkTeamRocket1, ThemeparkTeamRocket2, ThemeparkTeamRocket3, ThemeparkTeamRocket4],
     }
 );
 
@@ -1096,7 +1143,7 @@ const BlackthornCityShop = new Shop([
 
 // Johto NPCs
 
-const JohtoBerryMaster = new BerryMasterShop([
+const JohtoBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations['Goldenrod City'], [
     ItemList.Boost_Mulch,
     ItemList.Rich_Mulch,
     ItemList.Surprise_Mulch,
@@ -1647,7 +1694,7 @@ const BattleFrontierShop = new Shop([
 ]);
 
 //Hoenn Berry Master
-const HoennBerryMaster = new BerryMasterShop([
+const HoennBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations['Mauville City'],[
     ItemList.Boost_Mulch,
     ItemList.Rich_Mulch,
     ItemList.Surprise_Mulch,
@@ -2124,7 +2171,7 @@ const ResortAreaShop = new Shop([
 ]);
 
 //Sinnoh Berry Master
-const SinnohBerryMaster = new BerryMasterShop([
+const SinnohBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations['Hearthome City'],[
     ItemList.Boost_Mulch,
     ItemList.Rich_Mulch,
     ItemList.Surprise_Mulch,

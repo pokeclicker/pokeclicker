@@ -714,11 +714,20 @@ export enum FluteItemType {
 }
 
 export enum PokemonItemType {
+    'Pinkan Arbok',
+    'Pinkan Oddish',
+    'Pinkan Poliwhirl',
+    'Pinkan Geodude',
+    'Pinkan Dodrio',
+    'Lickitung',
+    'Pinkan Weezing',
+    'Mr. Mime',
+    'Pinkan Scyther',
+    'Jynx',
+    'Pinkan Electabuzz',
+    'Magikarp',
     'Eevee',
     'Porygon',
-    'Jynx',
-    'Mr. Mime',
-    'Lickitung',
     'Togepi',
     'Beldum',
     'Skorupi',
@@ -787,6 +796,7 @@ export enum BulletinBoards {
     All = -1,
     Kanto,
     Hoenn,
+    Sevii4567,
     Kalos,
     Alola,
     Galar,
@@ -1307,6 +1317,7 @@ export const TemporaryBattles = [
     'Wally 1',
     'May 4',
     'May 5',
+    'Wally 2',
     'Sevii Rocket Grunt 1',
     'Sevii Rocket Grunt 2',
     'Sevii Rocket Grunt 3',
@@ -1315,7 +1326,8 @@ export const TemporaryBattles = [
     'Sevii Rocket Ariana',
     'Sevii Rocket Archer',
     'Scientist Gideon',
-    'Wally 2',
+    'Pinkan Jessie & James',
+    'Pinkan Officer Jenny',
     'Barry 1',
     'Barry 2',
     'Barry 3',
@@ -1552,6 +1564,14 @@ export enum ShardTraderLocations {
     'Circhester',
     'Spikemuth',
     'Master Dojo',
+}
+
+export enum BerryTraderLocations {
+    'None' = -1,
+    'Goldenrod City' = 0,
+    'Mauville City',
+    'Pinkan Pokémon Reserve',
+    'Hearthome City',
 }
 
 export function getTemporaryBattlesIndex(temporaryBattle: string): number {
