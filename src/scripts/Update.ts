@@ -1143,6 +1143,23 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 1);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 2);
 
+            // Pinkan Berry
+            saveData.farming.berryList = Update.moveIndex(saveData.farming.berryList, 35);
+            saveData.farming.unlockedBerries = Update.moveIndex(saveData.farming.unlockedBerries, 35);
+            saveData.farming.mutations = Update.moveIndex(saveData.farming.mutations, 28);
+            saveData.farming.plotList.forEach(p => {
+                if (p.berry >= 35) {
+                    p.berry++;
+                }
+            });
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 15);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 16);
+
+            // Add Princess Diancie Temporary Battles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 46);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 47);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 48);
+
             // Replace Pokémon names to IDs
             const eggList = saveData.breeding.eggList;
             const queueList = saveData.breeding.queueList;
