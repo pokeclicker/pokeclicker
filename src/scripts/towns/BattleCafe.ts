@@ -157,8 +157,7 @@ class BattleCafeController {
                     {berry: BerryType.Nomel, amount: 30},
                 ];
             case GameConstants.AlcremieSweet['Star Sweet']:
-                return [{berry: BerryType.Starf, amount: 1},
-                ];
+                return [{berry: BerryType.Starf, amount: 1}];
             case GameConstants.AlcremieSweet['Ribbon Sweet']:
                 return [
                     {berry: BerryType.Chople, amount: 20},
