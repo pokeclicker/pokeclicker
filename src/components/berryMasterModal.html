@@ -30,7 +30,7 @@
                                     <th></th>
                                 </tr>
                             </thead>
-                            <tbody data-bind='foreach: BerryDeal.getDeals(player.region)'>
+                            <tbody data-bind='foreach: BerryDeal.getDeals(ShopHandler.shopObservable().location)'>
                                 <!-- ko foreach: berries -->
                                 <tr>
                                     <td data-bind="text: App.game.farming.berryList[$data.berryType]()"></td>
@@ -51,10 +51,10 @@
                                     <td class='vertical-middle' data-bind='attr: { rowspan: $parent.berries.length }, text: $parent.item.amount + " × " + $parent.item.itemType.displayName'></td>
                                     <td class='vertical-middle' data-bind="attr: { rowspan: $parent.berries.length }">
                                         <div class="btn-group btn-block" data-bind="let: { tradeAmount: ko.observable(1) }">
-                                            <button class='btn btn-success btn-block' data-bind='click: function(){BerryDeal.use(player.region, $parentContext.$index(), tradeAmount())}, css: { disabled: !BerryDeal.canUse(player.region, $parentContext.$index()) }'>
+                                            <button class='btn btn-success btn-block' data-bind='click: function(){BerryDeal.use(ShopHandler.shopObservable()?.location, $parentContext.$index(), tradeAmount())}, css: { disabled: !BerryDeal.canUse(ShopHandler.shopObservable()?.location, $parentContext.$index()) }'>
                                                 Trade
                                             </button>
-                                            <button type="button" data-bind="text: tradeAmount() + '&nbsp;', css: { disabled: !BerryDeal.canUse(player.region, $parentContext.$index()) }" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <button type="button" data-bind="text: tradeAmount() + '&nbsp;', css: { disabled: !BerryDeal.canUse(ShopHandler.shopObservable()?.location, $parentContext.$index()) }" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             </button>
                                             <div class="dropdown-menu" data-bind="foreach: [1, 10, 100, 1000, Infinity]">
                                                 <button class="dropdown-item" type="button" data-bind="click: function(){tradeAmount($data)}, text: $data"></button>
