@@ -220,8 +220,12 @@ class BreedingController {
     public static regionalAttackDebuff = ko.observable(-1);
 
     public static calculateRegionalMultiplier(pokemon: PartyPokemon): number {
-        if (BreedingController.regionalAttackDebuff() > -1 && PokemonHelper.calcNativeRegion(pokemon.name) !== BreedingController.regionalAttackDebuff()) {
-            return App.game.party.getRegionAttackMultiplier();
+        // Check if reginal debnuff is active
+        if (App.game.challenges.list.regionalAttackDebuff.active()) {
+            // Check if regional debuff being applied for sorting
+            if (BreedingController.regionalAttackDebuff() > -1 && PokemonHelper.calcNativeRegion(pokemon.name) !== BreedingController.regionalAttackDebuff()) {
+                return App.game.party.getRegionAttackMultiplier();
+            }
         }
         return 1.0;
     }
