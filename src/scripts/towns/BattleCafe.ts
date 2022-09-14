@@ -141,9 +141,9 @@ class BattleCafeController {
                 ];
             case GameConstants.AlcremieSweet['Berry Sweet']:
                 return [
-                    {berry: BerryType.Kelpsy, amount: 40},
                     {berry: BerryType.Yache, amount: 25},
-                    {berry: BerryType.Coba, amount: 25},
+                    {berry: BerryType.Haban, amount: 25},
+                    {berry: BerryType.Wiki, amount: 150},
                 ];
             case GameConstants.AlcremieSweet['Clover Sweet']:
                 return [
@@ -157,7 +157,10 @@ class BattleCafeController {
                     {berry: BerryType.Nomel, amount: 30},
                 ];
             case GameConstants.AlcremieSweet['Star Sweet']:
-                return [{berry: BerryType.Starf, amount: 1}];
+                return [
+                    {berry: BerryType.Starf, amount: 3},
+                    {berry: BerryType.Lansat, amount: 3},
+                ];
             case GameConstants.AlcremieSweet['Ribbon Sweet']:
                 return [
                     {berry: BerryType.Chople, amount: 20},
