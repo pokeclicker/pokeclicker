@@ -276,18 +276,11 @@ class QuestLineHelper {
         const talktoPokéfanDerek = new TalkToNPCQuest(EcruteakPokéfan, 'Talk to Pokéfan Derek in Ecruteak City.');
         johtoBeastsQuestLine.addQuest(talktoPokéfanDerek);
 
-        const catchRaikou = new CustomQuest(1, 0, 'Catch Raikou', () => App.game.statistics.pokemonCaptured[PokemonHelper.getPokemonByName('Raikou').id]());
+        const catchRaikou = new CaptureSpecificPokemonQuest('Raikou', 'Catch Raikou', 1, true);
 
-        const catchEntei = new CustomQuest(1, 0, 'Catch Entei', () => App.game.statistics.pokemonCaptured[PokemonHelper.getPokemonByName('Entei').id]());
+        const catchEntei = new CaptureSpecificPokemonQuest('Entei', 'Catch Entei', 1, true);
 
-        const catchSuicune = new CaptureSpecificPokemonQuest(
-            'Suicune',
-            'Catch Suicune.',
-            1,
-            false,
-            undefined,
-            undefined
-        );
+        const catchSuicune = new CaptureSpecificPokemonQuest('Suicune', 'Catch Suicune.');
 
         johtoBeastsQuestLine.addQuest(new MultipleQuestsQuest(
             [
@@ -335,14 +328,7 @@ class QuestLineHelper {
         const talktoEusine6 = new TalkToNPCQuest(CeruleanEusine, 'Talk to Eusine in Cerulean City.');
         johtoSuicuneQuestLine.addQuest(talktoEusine6);
 
-        const catchRoute25Suicune = new CaptureSpecificPokemonQuest(
-            'Suicune',
-            'Catch Suicune.',
-            1,
-            false,
-            undefined,
-            undefined
-        );
+        const catchRoute25Suicune = new CaptureSpecificPokemonQuest('Suicune', 'Catch Suicune.');
 
         johtoSuicuneQuestLine.addQuest(catchRoute25Suicune);
 
