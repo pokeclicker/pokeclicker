@@ -206,11 +206,8 @@ TemporaryBattleList['Suicune 6'] = new TemporaryBattle(
     'Suicune 6',
     [new GymPokemon('Suicune', 3449100, 40)],
     '',
-    [
-        new QuestLineStepCompletedRequirement('Eusine\'s Chase', 10),
-        new QuestLineCompletedRequirement('Eusine\'s Chase', GameConstants.AchievementOption.less ),
-    ],
-    undefined,
+    [new QuestLineStepCompletedRequirement('Eusine\'s Chase', 10)],
+    [new QuestLineStepCompletedRequirement('Eusine\'s Chase', 11)],
     {
         displayName: 'Suicune',
         returnTown: 'Cerulean City',
