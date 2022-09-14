@@ -1036,15 +1036,6 @@ class Update implements Saveable {
             // Add Celebi Temporary Battles
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 5);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 6);
-
-            // Add Suicune Temporary Battles
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 5);
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 6);
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 7);
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 8);
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 9);
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 10);
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 11);
         },
 
         '0.9.12': ({ playerData, saveData }) => {
@@ -1152,6 +1143,15 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 1);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 2);
 
+            // Add Suicune Temporary Battles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 7);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 8);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 9);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 10);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 11);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 12);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 13);
+
             // Pinkan Berry
             saveData.farming.berryList = Update.moveIndex(saveData.farming.berryList, 35);
             saveData.farming.unlockedBerries = Update.moveIndex(saveData.farming.unlockedBerries, 35);
@@ -1161,13 +1161,13 @@ class Update implements Saveable {
                     p.berry++;
                 }
             });
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 15);
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 16);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 22);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 23);
 
             // Add Princess Diancie Temporary Battles
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 46);
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 47);
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 48);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 53);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 54);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 55);
 
             // Replace Pokémon names to IDs
             const eggList = saveData.breeding.eggList;
