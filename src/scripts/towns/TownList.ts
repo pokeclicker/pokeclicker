@@ -319,7 +319,7 @@ const CeruleanEusine = new NPC('Eusine', [
     'Take a look at it! Suicune is still there waiting for you! It has been waiting for a worthy Trainer to whom it can entrust itself!',
 ],
 {
-    image: 'assets/images/temporaryBattle/Euisine.png',
+    image: 'assets/images/temporaryBattle/Eusine.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Eusine\'s Chase', 9), new QuestLineCompletedRequirement('Eusine\'s Chase', GameConstants.AchievementOption.less )]),
 });
 
@@ -338,7 +338,7 @@ const VermilionEusine = new NPC('Eusine', [
     'Sorry, I\'ve got to go!',
 ],
 {
-    image: 'assets/images/temporaryBattle/Euisine.png',
+    image: 'assets/images/temporaryBattle/Eusine.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Eusine\'s Chase', 5), new QuestLineStepCompletedRequirement('Eusine\'s Chase', 7, GameConstants.AchievementOption.less )]),
 });
 
@@ -391,7 +391,7 @@ const FuchsiaEusine = new NPC('Eusine', [
     'It seems that... Suicune prefers a hilly place near water... Somewhere north. I don\'t know exactly where, yet. It will be just you and me! Who\'ll find it first? I challenge you!',
 ],
 {
-    image: 'assets/images/temporaryBattle/Euisine.png',
+    image: 'assets/images/temporaryBattle/Eusine.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Eusine\'s Chase', 7), new QuestLineStepCompletedRequirement('Eusine\'s Chase', 9, GameConstants.AchievementOption.less )]),
 });
 
@@ -1322,7 +1322,7 @@ const EcruteakEusine = new NPC('Eusine', [
     'Ho-oh came down from the Tin Tower and revived those Pokémon. They became the Legendary Beasts. Some say these Beasts still inhabit the basement of the Burned Tower.',
     'Could you please clear Burned Tower for me and see if this is true?',
 ], {
-    image: 'assets/images/temporaryBattle/Euisine.png',
+    image: 'assets/images/temporaryBattle/Eusine.png',
     requirement: new MultiRequirement([new QuestLineStartedRequirement('The Legendary Beasts'), new QuestLineStepCompletedRequirement('The Legendary Beasts', 1, GameConstants.AchievementOption.less )]),
 });
 const EcruteakPokéfan = new NPC('Pokéfan Derek', [
@@ -1355,7 +1355,7 @@ const CianwoodEusine = new NPC('Eusine', [
     'I\'ve decided. I\'ll battle you as a trainer to earn Suicune\'s respect! Come on! Let\'s battle now!',
 ],
 {
-    image: 'assets/images/temporaryBattle/Euisine.png',
+    image: 'assets/images/temporaryBattle/Eusine.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Eusine\'s Chase', 0), new QuestLineStepCompletedRequirement('Eusine\'s Chase', 2, GameConstants.AchievementOption.less )]),
 });
 
@@ -1369,7 +1369,7 @@ const MahoganyEusine = new NPC('Eusine', [
     'Suicune... I won\'t stop following you until I\'ve found out what you\'re after... You hear me!',
 ],
 {
-    image: 'assets/images/temporaryBattle/Euisine.png',
+    image: 'assets/images/temporaryBattle/Eusine.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Eusine\'s Chase', 3), new QuestLineStepCompletedRequirement('Eusine\'s Chase', 5, GameConstants.AchievementOption.less )]),
 });
 
