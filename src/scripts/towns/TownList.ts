@@ -1370,7 +1370,7 @@ const MahoganyEusine = new NPC('Eusine', [
 ],
 {
     image: 'assets/images/temporaryBattle/Euisine.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Eusine\'s Chase', 3), new QuestLineStepCompletedRequirement('Eusine\'s Chase', 5, GameConstants.AchievementOption.less )])
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Eusine\'s Chase', 3), new QuestLineStepCompletedRequirement('Eusine\'s Chase', 5, GameConstants.AchievementOption.less )]),
 });
 
 const BlackthornJohtoRoamerNPC = new RoamerNPC('Pokéfan Trevor', [
