@@ -387,14 +387,7 @@ class QuestLineHelper {
         const talktoIlexForestShrine2 = new TalkToNPCQuest(IlexForestShrine2, 'Investigate the shrine in Ilex Forest.');
         celebiJohtoQuestLine.addQuest(talktoIlexForestShrine2);
 
-        const CelebiCatch = new CaptureSpecificPokemonQuest(
-            'Celebi',
-            'Play with the Celebi in Ilex Forest.',
-            1,
-            false,
-            undefined,
-            undefined
-        );
+        const CelebiCatch = new CaptureSpecificPokemonQuest('Celebi', 'Play with the Celebi in Ilex Forest.');
 
         celebiJohtoQuestLine.addQuest(CelebiCatch);
 
