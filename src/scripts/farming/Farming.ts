@@ -234,6 +234,13 @@ class Farming implements Feature {
             20, 0.1, 1100, 10,
             [10, 0, 0, 0, 30], BerryColor.Purple,
             ['This glossy and colorful Berry has a mouthwateringly delicious appearance. However, it is awfully sour.'], undefined, ['Oricorio (Sensu)']);
+        this.berryData[BerryType.Pinkan]    = new Berry(BerryType.Pinkan,   [1800, 3600, 7200, 14400, 28800],
+            1, 0.1, 420, 6.9,
+            [0, 0, 50, 0, 0], BerryColor.Pink,
+            [
+                'This Berry endemic to Pinkan Island has an incredibly sweet taste.',
+                'It has a vibrant pink pigment, and it is found in such abundance on Pinkan Island that all Pokémon found there are colored Pink!',
+            ], undefined, ['Oricorio (Pa\'u)']);
         //#endregion
 
         //#region Fourth Generation (Typed)
@@ -629,6 +636,23 @@ class Farming implements Feature {
         this.mutations.push(new EvolveNearFlavorMutation(.0002, BerryType.Belue, BerryType.Nomel,
             [[0, 80], [0, 80], [0, 80], [0, 80], [130, 160]], {
                 hint: 'I\'ve heard that a Nomel berry will change if its surroundings get extremely sour!',
+            }));
+
+        // Pinkan
+        this.mutations.push(new GrowNearBerryMutation(.0005, BerryType.Pinkan,
+            [
+                BerryType.Pecha,
+                BerryType.Persim,
+                BerryType.Nanab,
+                BerryType.Mago,
+                BerryType.Qualot,
+                BerryType.Magost,
+                BerryType.Watmel,
+            ], {
+                hint: 'I\'ve heard that there\'s a special Pink Berry that only appears when surrounded by a bunch of different types of Pink Berries!',
+                unlockReq: function(): boolean {
+                    return App.game.quests.getQuestLine('Team Rocket\'s Pinkan Themepark').state() > QuestLineState.inactive;
+                },
             }));
 
         //#endregion
