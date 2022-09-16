@@ -20273,10 +20273,6 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 166,
         'catchRate': 45,
-        'evolutions': [
-            new EnvironmentRestrictedLevelEvolution('Water', 'Cramorant', 'Cramorant (Gulping)', 50),
-            new EnvironmentRestrictedLevelEvolution('PowerPlant', 'Cramorant', 'Cramorant (Gorging)', 50),
-        ],
     },
     {
         'id': 845.1,
@@ -22054,7 +22050,6 @@ const pokemonList = createPokemonArray(
             'speed': 50,
         },
         'eggCycles': 25,
-        'evolutions': [new EnvironmentRestrictedLevelEvolution('Fire', 'Eiscue (Ice Face)', 'Eiscue (No Ice Face)', 1)],
         'levelType': LevelType.slow,
         'exp': 165,
         'catchRate': 60,
