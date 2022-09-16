@@ -312,6 +312,17 @@ const CeruleanSuperNerd = new NPC('Super Nerd Jovan', [
     'That day I learned that I should frequently download a save.',
 ], {image: 'assets/images/trainers/Super Nerd.png'});
 
+const CeruleanEusine = new NPC('Eusine', [
+    'Puff, puff... I am...no match for you. ...As I predicted.',
+    '..................',
+    'Go ahead. Since I met you in Ecruteak City, I\'ve sort of known that Suicune would choose you.',
+    'Take a look at it! Suicune is still there waiting for you! It has been waiting for a worthy Trainer to whom it can entrust itself!',
+],
+{
+    image: 'assets/images/temporaryBattle/Eusine.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Eusine\'s Chase', 9), new QuestLineCompletedRequirement('Eusine\'s Chase', GameConstants.AchievementOption.less )]),
+});
+
 const VermilionFanClubChairman = new NPC('Fan Club Chairman', [
     'You won’t find a Pokémon as wonderful as my favorite Rapidash in those Typed Eggs in the shops, but they might hatch rare Pokémon you can’t find anywhere else!',
 ]);
@@ -321,6 +332,15 @@ const VermilionShardApprentice = new NPC('Shard Apprentice', [
     'I happen to know that there are some Yellow and Blue Shards in Diglett\'s Cave. Just look inside the chests!',
     'Shards can have lots of different colors. Different dungeons will have different colors, so keep an eye out! Most of them can\'t even be found in Kanto!',
 ]);
+
+const VermilionEusine = new NPC('Eusine', [
+    'That was so close! I thought I could corner it by ambushing it here... But running on the water... is beyond me. Still, I am starting to see a pattern. Suicune prefers water! That means...',
+    'Sorry, I\'ve got to go!',
+],
+{
+    image: 'assets/images/temporaryBattle/Eusine.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Eusine\'s Chase', 5), new QuestLineStepCompletedRequirement('Eusine\'s Chase', 7, GameConstants.AchievementOption.less )]),
+});
 
 const LavenderMrFuji = new NPC('Mr. Fuji', [
     'Welcome. In our Volunteer House here we take in all kinds of Pokémon to care for them.',
@@ -364,6 +384,16 @@ const SaffronBreeder = new NPC('Breeder', [
 const FuchsiaKantoRoamerNPC = new RoamerNPC('Youngster Wendy', [
     'There\'s been some recent sightings of roaming Pokémon on {ROUTE_NAME}!',
 ], GameConstants.Region.kanto, RoamingPokemonList.findGroup(GameConstants.Region.kanto, GameConstants.KantoSubRegions.Kanto));
+
+const FuchsiaEusine = new NPC('Eusine', [
+    'You! Not again! I\'ll be there first next time! Having followed it here, I\'m starting to understand what Suicune is after.',
+    'To be honest, I would like to keep this information to myself. But I want to be an honest Trainer in front of Suicune! That\'s why I am sharing a clue with you.',
+    'It seems that... Suicune prefers a hilly place near water... Somewhere north. I don\'t know exactly where, yet. It will be just you and me! Who\'ll find it first? I challenge you!',
+],
+{
+    image: 'assets/images/temporaryBattle/Eusine.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Eusine\'s Chase', 7), new QuestLineStepCompletedRequirement('Eusine\'s Chase', 9, GameConstants.AchievementOption.less )]),
+});
 
 const CinnabarIslandResearcher = new NPC('Researcher', [
     'They were trying to clone an ancient Pokémon in the mansion... I wonder if they succeeded.',
@@ -437,9 +467,8 @@ const TwoIslandGameCornerOwner1 = new NPC ('Game Corner Owner', [
 const TwoIslandGameCornerOwner2 = new NPC ('Game Corner Owner', [
     'My sweet Lostelle! I\'m so glad you\'re all right.',
     'Thank you very much kind stranger. Please take the Meteorite.',
-], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Bill\'s Errand', 4), new QuestLineCompletedRequirement('Bill\'s Errand', GameConstants.AchievementOption.less)]),
-});
+],
+{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Bill\'s Errand', 4), new QuestLineCompletedRequirement('Bill\'s Errand', GameConstants.AchievementOption.less )]) });
 const ThreeIslandBiker1 = new NPC ('Biker', [
     'You know what sucks? The other islands are off limits for some arbitrary reason. There is no explanation. Just can\'t go there.',
     'Alright, you want the real truth? Some weird old dude told me this: "The other islands are locked behind part of a "Quest Line" You have to progress to unlock it."',
@@ -679,7 +708,7 @@ TownList['Cerulean City'] = new Town(
     [CeruleanCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Cerulean City']), new MoveToDungeon(dungeonList['Cerulean Cave'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 4)],
-        npcs: [CeruleanKantoBerryMaster, CeruleanSuperNerd, Mewtwo1, Mewtwo2, DetectiveRaichu],
+        npcs: [CeruleanKantoBerryMaster, CeruleanSuperNerd, Mewtwo1, Mewtwo2, DetectiveRaichu, CeruleanEusine],
     }
 );
 TownList['Vermilion City'] = new Town(
@@ -688,7 +717,7 @@ TownList['Vermilion City'] = new Town(
     [VermilionCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Vermilion City'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 6)],
-        npcs: [VermilionFanClubChairman, VermilionShardApprentice],
+        npcs: [VermilionFanClubChairman, VermilionShardApprentice, VermilionEusine],
     }
 );
 TownList['Lavender Town'] = new Town(
@@ -730,7 +759,7 @@ TownList['Fuchsia City'] = new Town(
             new RouteKillRequirement(10, GameConstants.Region.kanto, 18),
             new RouteKillRequirement(10, GameConstants.Region.kanto, 15),
         ])],
-        npcs: [FuchsiaKantoRoamerNPC],
+        npcs: [FuchsiaKantoRoamerNPC, FuchsiaEusine],
     }
 );
 TownList['Cinnabar Island'] = new Town(
@@ -1293,17 +1322,16 @@ const EcruteakEusine = new NPC('Eusine', [
     'Ho-oh came down from the Tin Tower and revived those Pokémon. They became the Legendary Beasts. Some say these Beasts still inhabit the basement of the Burned Tower.',
     'Could you please clear Burned Tower for me and see if this is true?',
 ], {
-    image: 'assets/images/temporaryBattle/Euisine',
-    requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Burned Tower'), GameConstants.AchievementOption.less),
+    image: 'assets/images/temporaryBattle/Eusine.png',
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('The Legendary Beasts'), new QuestLineStepCompletedRequirement('The Legendary Beasts', 1, GameConstants.AchievementOption.less )]),
 });
-
 const EcruteakPokéfan = new NPC('Pokéfan Derek', [
     'I saw it! Did you see it?! I saw you go in there! I don\'t know what you did in the Burned Tower, but three great Beasts came running out of there!',
     'It was a great sight to behold. They all went in different directions. I think they are just roaming the region now. My friend Trevor in Blackthorn City can tell you more.',
-    'Eusine was here a second ago. He seemed very excited, but then he suddenly left. I don\'t know where he went. I was a bit distracted by those majestic Beasts...',
+    'Eusine was here a second ago. He seemed very excited, but then he suddenly left. I don\'t know where he went, but he seemed to be particularly interested in the blue one.',
 ], {
     image: 'assets/images/trainers/PokéManiac.png',
-    requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Burned Tower')),
+    requirement: new QuestLineStepCompletedRequirement('The Legendary Beasts', 1),
 });
 
 const EcruteakKimonoGirl = new NPC('Kimono Girl', [
@@ -1321,9 +1349,29 @@ const CianwoodPhotographyAide = new NPC('Photography Aide', [
     'Cameron the Photographer isn’t here right now; he’s off taking photos of Pokémon on Berry Farms. Did you know that some Berries can even attract rare Pokémon?',
 ]);
 
+const CianwoodEusine = new NPC('Eusine', [
+    'Yo, wasn\'t that Suicune just now? I only caught a quick glimpse, but I thought I saw Suicune running on the waves.',
+    'Suicune is beautiful and grand. And it races through towns and roads at simply awesome speeds. It\'s wonderful... I want to see Suicune up close....',
+    'I\'ve decided. I\'ll battle you as a trainer to earn Suicune\'s respect! Come on! Let\'s battle now!',
+],
+{
+    image: 'assets/images/temporaryBattle/Eusine.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Eusine\'s Chase', 0), new QuestLineStepCompletedRequirement('Eusine\'s Chase', 2, GameConstants.AchievementOption.less )]),
+});
+
 const MahoganySouvenirShopAttendant = new NPC('Souvenir Shop Attendant', [
     'We’ve got stuff here nobody else has got! But keep any Dowsing Machines you have away from the merchandise… especially the RageCandyBars. Keep ‘em outside where they belong! I’ve heard those machines can attract Pokémon with held items more often, and even more so in Dungeons!',
 ]);
+
+const MahoganyEusine = new NPC('Eusine', [
+    'Suicune... How brave it is! How refreshing it is! How beautiful it is! And how quickly it moves! It seems to be heading east.',
+    'You seem to be around where Suicune would appear. Well, that\'s OK. My desire to search for Suicune is far beyond yours... My grandpa was...quite into myths. I\'ve heard so many stories about Suicune from him.',
+    'Suicune... I won\'t stop following you until I\'ve found out what you\'re after... You hear me!',
+],
+{
+    image: 'assets/images/temporaryBattle/Eusine.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Eusine\'s Chase', 3), new QuestLineStepCompletedRequirement('Eusine\'s Chase', 5, GameConstants.AchievementOption.less )]),
+});
 
 const BlackthornJohtoRoamerNPC = new RoamerNPC('Pokéfan Trevor', [
     'On the news, they are getting more reports of roaming Pokémon appearing on {ROUTE_NAME}!',
@@ -1381,7 +1429,7 @@ const HowardClifford3 = new NPC('Howard Clifford', [
 TownList['New Bark Town'] = new Town(
     'New Bark Town',
     GameConstants.Region.johto,
-    [],
+    [new BulletinBoard(GameConstants.BulletinBoards.Johto)],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion)],
         npcs: [ProfElm, NewBarkTechnologyEnthusiast],
@@ -1447,7 +1495,7 @@ TownList['Cianwood City'] = new Town(
     [CianwoodCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Cianwood City'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 41)],
-        npcs: [CianwoodPhotographyAide],
+        npcs: [CianwoodPhotographyAide, CianwoodEusine],
     }
 );
 TownList['Mahogany Town'] = new Town(
@@ -1459,7 +1507,7 @@ TownList['Mahogany Town'] = new Town(
             new RouteKillRequirement(10, GameConstants.Region.johto, 42),
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mt. Mortar')),
         ])],
-        npcs: [MahoganySouvenirShopAttendant],
+        npcs: [MahoganySouvenirShopAttendant, MahoganyEusine],
     }
 );
 TownList['Blackthorn City'] = new Town(
@@ -1514,7 +1562,7 @@ TownList['Ilex Forest'] = new DungeonTown(
 TownList['Burned Tower'] = new DungeonTown(
     'Burned Tower',
     GameConstants.Region.johto,
-    [new RouteKillRequirement(10, GameConstants.Region.johto, 37)]
+    [new QuestLineStepCompletedRequirement('The Legendary Beasts', 0)]
 );
 TownList['Tin Tower'] = new DungeonTown(
     'Tin Tower',
