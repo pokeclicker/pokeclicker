@@ -5,13 +5,13 @@
 
 class RoamingPokemonList {
     public static roamerGroups = [
-        [[GameConstants.KantoSubRegions.Kanto], [GameConstants.KantoSubRegions.Sevii123]],
+        [[GameConstants.KantoSubRegions.Kanto], [GameConstants.KantoSubRegions.Sevii123, GameConstants.KantoSubRegions.Sevii4567]],
         [[GameConstants.JohtoSubRegions.Johto]],
         [[GameConstants.HoennSubRegions.Hoenn]],
         [[GameConstants.SinnohSubRegions.Sinnoh]],
         [[GameConstants.UnovaSubRegions.Unova]],
         [[GameConstants.KalosSubRegions.Kalos]],
-        [[GameConstants.AlolaSubRegions.MelemeleIsland, GameConstants.AlolaSubRegions.AkalaIsland, GameConstants.AlolaSubRegions.UlaulaAndPoniIslands]],
+        [[GameConstants.AlolaSubRegions.MelemeleIsland, GameConstants.AlolaSubRegions.AkalaIsland, GameConstants.AlolaSubRegions.UlaulaIsland, GameConstants.AlolaSubRegions.PoniIsland]],
         [[GameConstants.GalarSubRegions.SouthGalar], [GameConstants.GalarSubRegions.NorthGalar], [GameConstants.GalarSubRegions.IsleofArmor], [GameConstants.GalarSubRegions.CrownTundra]],
     ];
 
@@ -74,6 +74,13 @@ class RoamingPokemonList {
 // Kanto
 RoamingPokemonList.add(GameConstants.Region.kanto, 0, new RoamingPokemon('Mew'));
 
+//Kanto - Sevii Islands
+RoamingPokemonList.add(GameConstants.Region.kanto, 1, new RoamingPokemon('Raikou', new QuestLineCompletedRequirement('Celio\'s Errand')));
+RoamingPokemonList.add(GameConstants.Region.kanto, 1, new RoamingPokemon('Entei', new QuestLineCompletedRequirement('Celio\'s Errand')));
+RoamingPokemonList.add(GameConstants.Region.kanto, 1, new RoamingPokemon('Suicune', new MultiRequirement([new QuestLineCompletedRequirement('Celio\'s Errand'), new ObtainedPokemonRequirement(pokemonMap.Suicune)])));
+RoamingPokemonList.add(GameConstants.Region.kanto, 1, new RoamingPokemon('Pink Butterfree', new GymBadgeRequirement(BadgeEnums.Elite_OrangeChampion)));
+RoamingPokemonList.add(GameConstants.Region.kanto, 1, new RoamingPokemon('Ash\'s Butterfree', new GymBadgeRequirement(BadgeEnums.Elite_OrangeChampion)));
+
 // Johto
 RoamingPokemonList.add(GameConstants.Region.johto, 0, new RoamingPokemon('Raikou', new QuestLineStepCompletedRequirement('The Legendary Beasts', 2)));
 RoamingPokemonList.add(GameConstants.Region.johto, 0, new RoamingPokemon('Entei', new QuestLineStepCompletedRequirement('The Legendary Beasts', 2)));
@@ -92,7 +99,7 @@ RoamingPokemonList.add(GameConstants.Region.sinnoh, 0, new RoamingPokemon('Cress
 // Unova
 RoamingPokemonList.add(GameConstants.Region.unova, 0, new RoamingPokemon('Tornadus', new GymBadgeRequirement(BadgeEnums.Legend)));
 RoamingPokemonList.add(GameConstants.Region.unova, 0, new RoamingPokemon('Thundurus', new GymBadgeRequirement(BadgeEnums.Legend)));
-RoamingPokemonList.add(GameConstants.Region.unova, 0, new RoamingPokemon('Meloetta (aria)', new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)));
+RoamingPokemonList.add(GameConstants.Region.unova, 0, new RoamingPokemon('Meloetta (Aria)', new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)));
 
 // Kalos
 RoamingPokemonList.add(GameConstants.Region.kalos, 0, new RoamingPokemon('Zapdos', new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Sea Spirit\'s Den'))));
@@ -109,7 +116,7 @@ RoamingPokemonList.add(GameConstants.Region.alola, 0, new RoamingPokemon('Zeraor
 RoamingPokemonList.add(GameConstants.Region.galar, 0, new RoamingPokemon('Galarian Zapdos', new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 3)));
 
 //Galar - Isle of Armor
-RoamingPokemonList.add(GameConstants.Region.galar, 2, new RoamingPokemon('Zarude', new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)));
+RoamingPokemonList.add(GameConstants.Region.galar, 2, new RoamingPokemon('Zarude', new QuestLineStepCompletedRequirement('Secrets of the Jungle', 1)));
 RoamingPokemonList.add(GameConstants.Region.galar, 2, new RoamingPokemon('Galarian Moltres', new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 3)));
 
 //Galar - Crown Tundra
