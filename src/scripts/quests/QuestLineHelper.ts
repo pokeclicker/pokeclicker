@@ -264,6 +264,142 @@ class QuestLineHelper {
         App.game.quests.questLines().push(rocketJohtoQuestLine);
     }
 
+<<<<<<< HEAD
+=======
+    public static createJohtoBeastsQuestLine() {
+        const johtoBeastsQuestLine = new QuestLine('The Legendary Beasts', 'Invesigate the legends surrounding the strange Burned Tower in Ecruteak City.', new GymBadgeRequirement(BadgeEnums.Fog), GameConstants.BulletinBoards.Johto);
+
+        const talktoEusine1 = new TalkToNPCQuest(EcruteakEusine, 'Talk to Eusine in Ecruteak City.');
+        johtoBeastsQuestLine.addQuest(talktoEusine1);
+
+        const clearBurnedTower = new CustomQuest(1, 0, 'Clear the Burned Tower.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Burned Tower')]());
+        johtoBeastsQuestLine.addQuest(clearBurnedTower);
+
+        const talktoPokéfanDerek = new TalkToNPCQuest(EcruteakPokéfan, 'Talk to Pokéfan Derek in Ecruteak City.');
+        johtoBeastsQuestLine.addQuest(talktoPokéfanDerek);
+
+        const catchRaikou = new CaptureSpecificPokemonQuest('Raikou', 'Catch Raikou', 1, true);
+
+        const catchEntei = new CaptureSpecificPokemonQuest('Entei', 'Catch Entei', 1, true);
+
+        const catchSuicune = new CaptureSpecificPokemonQuest('Suicune', 'Catch Suicune.');
+
+        johtoBeastsQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                catchRaikou,
+                catchEntei,
+                catchSuicune,
+            ], 'Catch the Legendary Beasts.'));
+
+        App.game.quests.questLines().push(johtoBeastsQuestLine);
+    }
+
+    public static createJohtoSuicuneQuestLine() {
+        const johtoSuicuneQuestLine = new QuestLine('Eusine\'s Chase', 'Eusine is looking for Suicune.', new QuestLineStepCompletedRequirement('The Legendary Beasts', 2), GameConstants.BulletinBoards.Johto);
+
+        const clearCianwoodSuicune = new CustomQuest(1, 0, 'Find Suicune.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Suicune 1')]());
+        johtoSuicuneQuestLine.addQuest(clearCianwoodSuicune);
+
+        const talktoEusine2 = new TalkToNPCQuest(CianwoodEusine, 'Talk to Eusine in Cianwood City.');
+        johtoSuicuneQuestLine.addQuest(talktoEusine2);
+
+        const clearEusine = new CustomQuest(1, 0, 'Defeat Eusine.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Eusine')]());
+        johtoSuicuneQuestLine.addQuest(clearEusine);
+
+        const clearRoute42Suicune = new CustomQuest(1, 0, 'Find Suicune.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Suicune 2')]());
+        johtoSuicuneQuestLine.addQuest(clearRoute42Suicune);
+
+        const talktoEusine3 = new TalkToNPCQuest(MahoganyEusine, 'Talk to Eusine in Mahogany Town.');
+        johtoSuicuneQuestLine.addQuest(talktoEusine3);
+
+        const clearVermilionSuicune = new CustomQuest(1, 0, 'Find Suicune.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Suicune 3')]());
+        johtoSuicuneQuestLine.addQuest(clearVermilionSuicune);
+
+        const talktoEusine4 = new TalkToNPCQuest(VermilionEusine, 'Talk to Eusine in Vermilion City.');
+        johtoSuicuneQuestLine.addQuest(talktoEusine4);
+
+        const clearRoute14Suicune = new CustomQuest(1, 0, 'Find Suicune.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Suicune 4')]());
+        johtoSuicuneQuestLine.addQuest(clearRoute14Suicune);
+
+        const talktoEusine5 = new TalkToNPCQuest(FuchsiaEusine, 'Talk to Eusine in Fuchsia City.');
+        johtoSuicuneQuestLine.addQuest(talktoEusine5);
+
+        const clearRoute25Suicune = new CustomQuest(1, 0, 'Find Suicune.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Suicune 5')]());
+        johtoSuicuneQuestLine.addQuest(clearRoute25Suicune);
+
+        const talktoEusine6 = new TalkToNPCQuest(CeruleanEusine, 'Talk to Eusine in Cerulean City.');
+        johtoSuicuneQuestLine.addQuest(talktoEusine6);
+
+        const catchRoute25Suicune = new CaptureSpecificPokemonQuest('Suicune', 'Catch Suicune.');
+
+        johtoSuicuneQuestLine.addQuest(catchRoute25Suicune);
+
+        App.game.quests.questLines().push(johtoSuicuneQuestLine);
+    }
+
+    public static createCelebiJohtoQuestLine() {
+        const celebiJohtoQuestLine = new QuestLine('Unfinished Business', 'A request from Professor Oak.', new QuestLineCompletedRequirement('Bill\'s Errand'), GameConstants.BulletinBoards.Kanto);
+
+        const talktoProfOak1 = new TalkToNPCQuest(PalletCelebiProfOak1, 'Talk to Professor Oak in Pallet Town.');
+        celebiJohtoQuestLine.addQuest(talktoProfOak1);
+
+        const talktoProfIvy = new TalkToNPCQuest(CelebiProfIvy, 'Talk to Professor Ivy in her lab in the Sevii Islands.');
+        celebiJohtoQuestLine.addQuest(talktoProfIvy);
+
+        const talktoProfOak2 = new TalkToNPCQuest(PalletCelebiProfOak2, 'Deliver the GS Ball to Professor Oak in Pallet Town.');
+        celebiJohtoQuestLine.addQuest(talktoProfOak2);
+
+        const talktoKurt1 = new TalkToNPCQuest(AzaleaCelebiKurt2, 'Deliver the GS Ball to Kurt in Azalea Town.');
+        celebiJohtoQuestLine.addQuest(talktoKurt1);
+
+        const talktoKurt2 = new TalkToNPCQuest(AzaleaCelebiKurt4, 'Talk to Kurt again after becoming Champion of Johto.');
+        celebiJohtoQuestLine.addQuest(talktoKurt2);
+
+        const talktoProfOak3 = new TalkToNPCQuest(AzaleaCelebiOak1, 'Talk to Professor Oak in Azalea Town.');
+        celebiJohtoQuestLine.addQuest(talktoProfOak3);
+
+        const talktoIlexForestShrine1 = new TalkToNPCQuest(IlexForestShrine1, 'Investigate the shrine in Ilex Forest.');
+        celebiJohtoQuestLine.addQuest(talktoIlexForestShrine1);
+
+        const SpikyEaredPichuReward = () => {
+            App.game.party.gainPokemonById(172.1);
+            Notifier.notify({
+                title: celebiJohtoQuestLine.name,
+                message: 'You captured the Spiky-eared Pichu!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
+        const clearSpikyEaredPichu = new CustomQuest(1, SpikyEaredPichuReward, 'Defeat the strange Pichu.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Spiky-eared Pichu')]());
+        celebiJohtoQuestLine.addQuest(clearSpikyEaredPichu);
+
+        const talktoProfOak4 = new TalkToNPCQuest(AzaleaCelebiOak2, 'Talk to Professor Oak in Azalea Town.');
+        celebiJohtoQuestLine.addQuest(talktoProfOak4);
+
+        const talktoTohjoFallsTimeDistortion = new TalkToNPCQuest(TohjoFallsCelebiTimeDistortion, 'Investigate the Time Distortion in Tohjo Falls.');
+        celebiJohtoQuestLine.addQuest(talktoTohjoFallsTimeDistortion);
+
+        const clearGiovanni = new CustomQuest(1, 0, 'Defeat Giovanni.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Rocket Boss Giovanni')]());
+        celebiJohtoQuestLine.addQuest(clearGiovanni);
+
+        const talktoProfOak5 = new TalkToNPCQuest(AzaleaCelebiOak3, 'Talk to Professor Oak in Azalea Town.');
+        celebiJohtoQuestLine.addQuest(talktoProfOak5);
+
+        const talktoIlexForestShrine2 = new TalkToNPCQuest(IlexForestShrine2, 'Investigate the shrine in Ilex Forest.');
+        celebiJohtoQuestLine.addQuest(talktoIlexForestShrine2);
+
+        const CelebiCatch = new CaptureSpecificPokemonQuest('Celebi', 'Play with the Celebi in Ilex Forest.');
+
+        celebiJohtoQuestLine.addQuest(CelebiCatch);
+
+        const talktoProfOak6 = new TalkToNPCQuest(AzaleaCelebiOak5, 'Talk to Professor Oak in Azalea Town.');
+        celebiJohtoQuestLine.addQuest(talktoProfOak6);
+
+        App.game.quests.questLines().push(celebiJohtoQuestLine);
+    }
+
+>>>>>>> e6ff451fa56bc70b865249d2b79e04f55a71eef1
     // Hoenn QuestLines
     public static createAquaMagmaHoennQuestLine() {
         const aquaMagmaHoennQuestLine = new QuestLine('Land vs. Water', 'Put a stop to the schemes of Team Aqua and Team Magma!');
@@ -1121,6 +1257,12 @@ class QuestLineHelper {
         this.createBillSeviiQuestLine();
         this.createPersonsofInterestQuestLine();
         this.createRocketJohtoQuestLine();
+<<<<<<< HEAD
+=======
+        this.createJohtoBeastsQuestLine();
+        this.createJohtoSuicuneQuestLine();
+        this.createCelebiJohtoQuestLine();
+>>>>>>> e6ff451fa56bc70b865249d2b79e04f55a71eef1
         this.createAquaMagmaHoennQuestLine();
         this.createDeoxysQuestLine();
         this.createGalacticSinnohQuestLine();

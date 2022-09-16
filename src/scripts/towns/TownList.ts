@@ -173,10 +173,39 @@ const CeruleanSuperNerd = new NPC('Super Nerd Jovan', [
     'That day I learned that I should frequently download a save.',
 ]);
 
+const CeruleanEusine = new NPC('Eusine', [
+    'Puff, puff... I am...no match for you. ...As I predicted.',
+    '..................',
+    'Go ahead. Since I met you in Ecruteak City, I\'ve sort of known that Suicune would choose you.',
+    'Take a look at it! Suicune is still there waiting for you! It has been waiting for a worthy Trainer to whom it can entrust itself!',
+],
+{
+    image: 'assets/images/temporaryBattle/Eusine.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Eusine\'s Chase', 9), new QuestLineCompletedRequirement('Eusine\'s Chase', GameConstants.AchievementOption.less )]),
+});
+
 const VermilionFanClubChairman = new NPC('Fan Club Chairman', [
     'You won’t find a Pokémon as wonderful as my favorite Rapidash in those Typed Eggs in the shops, but they might hatch rare Pokémon you can’t find anywhere else!',
 ]);
 
+<<<<<<< HEAD
+=======
+const VermilionShardApprentice = new NPC('Shard Apprentice', [
+    'Are you looking for some Shards? You can find them in many dungeons! Except in Viridan Forest and Mt. Moon. I\'ve never found any Shards there for some reason.',
+    'I happen to know that there are some Yellow and Blue Shards in Diglett\'s Cave. Just look inside the chests!',
+    'Shards can have lots of different colors. Different dungeons will have different colors, so keep an eye out! Most of them can\'t even be found in Kanto!',
+]);
+
+const VermilionEusine = new NPC('Eusine', [
+    'That was so close! I thought I could corner it by ambushing it here... But running on the water... is beyond me. Still, I am starting to see a pattern. Suicune prefers water! That means...',
+    'Sorry, I\'ve got to go!',
+],
+{
+    image: 'assets/images/temporaryBattle/Eusine.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Eusine\'s Chase', 5), new QuestLineStepCompletedRequirement('Eusine\'s Chase', 7, GameConstants.AchievementOption.less )]),
+});
+
+>>>>>>> e6ff451fa56bc70b865249d2b79e04f55a71eef1
 const LavenderMrFuji = new NPC('Mr. Fuji', [
     'Welcome. In our Volunteer House here we take in all kinds of Pokémon to care for them.',
     'Did you know that sparkling Pokémon are more often found in Dungeons, on Farms, from Eggs, and even from Shops, the Safari Zone, and Evolutions from Items?',
@@ -208,10 +237,285 @@ const FuchsiaKantoRoamerNPC = new RoamerNPC('Youngster Wendy', [
     'There\'s been some recent sightings of roaming Pokémon on {ROUTE_NAME}!',
 ], GameConstants.Region.kanto);
 
+const FuchsiaEusine = new NPC('Eusine', [
+    'You! Not again! I\'ll be there first next time! Having followed it here, I\'m starting to understand what Suicune is after.',
+    'To be honest, I would like to keep this information to myself. But I want to be an honest Trainer in front of Suicune! That\'s why I am sharing a clue with you.',
+    'It seems that... Suicune prefers a hilly place near water... Somewhere north. I don\'t know exactly where, yet. It will be just you and me! Who\'ll find it first? I challenge you!',
+],
+{
+    image: 'assets/images/temporaryBattle/Eusine.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Eusine\'s Chase', 7), new QuestLineStepCompletedRequirement('Eusine\'s Chase', 9, GameConstants.AchievementOption.less )]),
+});
+
 const CinnabarIslandResearcher = new NPC('Researcher', [
     'They were trying to clone an ancient Pokémon in the mansion... I wonder if they succeeded.',
     'Apparently the ancient Pokémon escaped, and can be found roaming around Kanto!',
+<<<<<<< HEAD
 ]);
+=======
+], {image: 'assets/images/trainers/Scientist (male).png'});
+
+const OneIslandCelio1 = new NPC ('Celio', [
+    'Ah, yes. Welcome! Welcome! Almost didn\'t see you there. I\'m just so busy trying to get this darned thing to work. Once it\'s complete we can finally have a direct communications network between the Sevii Islands and Kanto!',
+    'I don\'t even have time to go and pick up an important package. A meteorite, found by the owner of the game corner on Two Island. It contains important materials for my machine.',
+    'You seem like the adventuring type. Tell you what. How about Bill stays here with me to work on this machine, and you go fetch my Meteorite for me.',
+], {
+    image: 'assets/images/npcs/Celio.png',
+    requirement: new QuestLineStepCompletedRequirement('Bill\'s Errand', 1, GameConstants.AchievementOption.less),
+});
+const OneIslandCelio2 = new NPC ('Celio', [
+    'Back already? That didn\'t take very long.',
+    'What? It did take long? You went on a whole rescue mission? Seems like I lost track of time while working on my machine with Bill. It\'s been a lot of fun.',
+    'I\'m glad to hear Lostelle is all right. You can hand the meteorite to me. Bill, thank you for your assistance, I\'ll take it from here. I can see that your friend is eager to get back to Kanto and challenge the Pokémon League.',
+    'Thank you both very much.',
+], {
+    image: 'assets/images/npcs/Celio.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Bill\'s Errand', 5), new QuestLineCompletedRequirement('Bill\'s Errand', GameConstants.AchievementOption.less)]),
+});
+const OneIslandCelio3 = new NPC ('Celio', [
+    'You\'ve been a great help. Thanks again. Maybe we\'ll meet again some day...',
+], {
+    image: 'assets/images/npcs/Celio.png',
+    requirement: new MultiRequirement([new QuestLineCompletedRequirement('Bill\'s Errand'), new QuestLineStartedRequirement('Celio\'s Errand', GameConstants.AchievementOption.less)]),
+});
+const OneIslandCelio4 = new NPC ('Celio', [
+    'How have things been for you? Oh, is that right? You\'ve caught more Pokémon. Do you know what? Maybe I can be useful to you. I\'m modifying the Network Machine right now. I\'m changing it so it can handle trades over long distances. When I get finished, you\'ll be trading for exotic Pokémon from Trainers far away.',
+    'But, there is a slight catch. For the link to work, the Machine needs a special gemstone. It\'s supposed to be on One Island, but I haven\'t found one yet. Who knows where it could be.',
+], {
+    image: 'assets/images/npcs/Celio.png',
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('Celio\'s Errand'), new QuestLineStepCompletedRequirement('Celio\'s Errand', 1, GameConstants.AchievementOption.less)]),
+});
+const OneIslandCelio5 = new NPC ('Celio', [
+    'Oh! Th-that\'s... Thank you! You\'re simply amazing. ... ... ... ... Um... May I ask one more giant favor of you?',
+    'While I was studying gemstones, I discovered something important. There is another gem that forms a pair with this Ruby. That other gemstone is supposed to be in the Sevii Islands. Please, I need you to go find the other gem.',
+    'Here, take my ferry pass. It will let you get to all of the Sevii Islands. Please, I can\'t do it without your help.',
+], {
+    image: 'assets/images/npcs/Celio.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Celio\'s Errand', 4), new QuestLineStepCompletedRequirement('Celio\'s Errand', 6, GameConstants.AchievementOption.less)]),
+});
+const OneIslandCelio6 = new NPC ('Celio', [
+    'So this is the gem that forms a pair with the Ruby... You\'ve gone through a lot to get this, didn\'t you? You don\'t have to tell me. I know it wasn\'t easy. Thank you so much! Now it\'s my turn to work for you! Please give me a little time.',
+    'Okay, this is good... I did it! I linked up with Lanette! I did it! I\'ve managed to link up with Trainers in the Hoenn region! Finally, the Network Machine is fully operational! I owe it all to you! Thanks to you, my dream came true...',
+], {
+    image: 'assets/images/npcs/Celio.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Celio\'s Errand', 12), new QuestLineCompletedRequirement('Celio\'s Errand', GameConstants.AchievementOption.less)]),
+});
+const OneIslandCelio7 = new NPC ('Celio', [
+    'I... I\'m not crying. That\'s enough about me! You\'re going to keep looking for exotic Pokémon, right? I wish you the best of luck!',
+], {
+    image: 'assets/images/npcs/Celio.png',
+    requirement: new QuestLineCompletedRequirement('Celio\'s Errand'),
+});
+const OneIslandYoungster = new NPC ('Youngster', [
+    'Isn\'t it strange how Mol<b><i>tres</i></b> lives on <b><i>One</i></b> Island?',
+], {
+    image: 'assets/images/trainers/Youngster.png',
+    requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mt. Ember Summit')),
+});
+const TwoIslandGameCornerOwner1 = new NPC ('Game Corner Owner', [
+    'Hello stranger. I\'m afraid the Game Corner is currently closed.',
+    'What? The meteorite for Celio? Yes, I can give that to you. But I need you to do something for me first.',
+    'My daughter Lostelle is missing. She likes to pick berries in the Berry Forest on Three Island. She does it all the time. But this time she hasn\'t come back. Please go find her.',
+], {
+    requirement: new QuestLineStepCompletedRequirement('Bill\'s Errand', 4, GameConstants.AchievementOption.less),
+});
+const TwoIslandGameCornerOwner2 = new NPC ('Game Corner Owner', [
+    'My sweet Lostelle! I\'m so glad you\'re all right.',
+    'Thank you very much kind stranger. Please take the Meteorite.',
+],
+{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Bill\'s Errand', 4), new QuestLineCompletedRequirement('Bill\'s Errand', GameConstants.AchievementOption.less )]) });
+const ThreeIslandBiker1 = new NPC ('Biker', [
+    'You know what sucks? The other islands are off limits for some arbitrary reason. There is no explanation. Just can\'t go there.',
+    'Alright, you want the real truth? Some weird old dude told me this: "The other islands are locked behind part of a "Quest Line" You have to progress to unlock it."',
+    'I don\'t know what half those words mean. All I know is I can\'t go back to Kanto with the rest of the gang. This sucks.',
+], {
+    image: 'assets/images/temporaryBattle/Biker Goon.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Bill\'s Errand', 3), new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion, GameConstants.AchievementOption.less)]),
+});
+const ThreeIslandBiker2 = new NPC ('Biker', [
+    'You know what sucks? The other islands are off limits for some arbitrary reason. There is no explanation. Just can\'t go there.',
+    'Alright, you want the real truth? Some weird old dude told me this: "The other islands are locked behind part of a Questline. You can unlock it at a Bulletin Board."',
+    'I don\'t know what half those words mean. All I know is I can\'t go back to Kanto with the rest of the gang. This sucks.',
+], {
+    image: 'assets/images/temporaryBattle/Biker Goon.png',
+    requirement: new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), new QuestLineStepCompletedRequirement('Celio\'s Errand', 5 , GameConstants.AchievementOption.less)]),
+});
+const ThreeIslandBiker3 = new NPC ('Biker', [
+    'You know what sucks? The other islands are off limits for some arbitrary reason. There is no explanation. Just can\'t go there.',
+    'Wait, you got to them? Good for you. Not that it matters to me, I\'m still stuck here. This sucks.',
+], {
+    image: 'assets/images/temporaryBattle/Biker Goon.png',
+    requirement: new QuestLineStepCompletedRequirement('Celio\'s Errand', 5),
+});
+const CelebiProfIvy = new NPC ('Prof. Ivy', [
+    'Welcome to Valencia Island! Well, this tiny beach on Valencia Island. I don\'t know why I decided to have this lab built below this giant cliff... Can\'t even get to the rest of the island from here.',
+    'This is the GS Ball. I found it here recently. Professor Oak seemed very interested. Please deliver it to him at your earliest convenience.',
+    'But first, wanna get involved in our regional Pokémon League? No? Maybe another time then.',
+], {
+    image: 'assets/images/npcs/Professor Ivy.png',
+    requirement: new QuestLineStepCompletedRequirement('Unfinished Business', 2, GameConstants.AchievementOption.less),
+});
+const SeviiRocketGrunts = new NPC ('Team Rocket Grunts', [
+    'Whew, punched through at last. Let\'s go treasure hunting! Any treasure we find, we haul back to the Warehouse, understood?',
+    '...Oh, what are the passwords? At the Rocket Warehouse, I mean.',
+    'What, you forgot the password? There\'re actually two. The first one\'s "Goldeen need log". And the second one is...',
+    'Hey! This snoop\'s been listening in!',
+], {
+    image: 'assets/images/npcs/Team Rocket Grunts.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Celio\'s Errand', 0), new QuestLineStepCompletedRequirement('Celio\'s Errand', 2, GameConstants.AchievementOption.less)]),
+});
+const SeviiRuby = new NPC ('Ruby', [
+    '<img src="assets/images/npcs/textbody/ruby.png">',
+    '<i>You found a Ruby!</i>',
+],
+{ requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Celio\'s Errand', 3), new QuestLineStepCompletedRequirement('Celio\'s Errand', 4, GameConstants.AchievementOption.less )]) });
+const SeviiLorelei = new NPC ('Lorelei', [
+    'Thank you. But this is awful... I was born and raised here on these islands. I had no idea that those horrible criminals were loose here…',
+], {
+    image: 'assets/images/gymLeaders/Lorelei.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Celio\'s Errand', 6), new QuestLineStepCompletedRequirement('Celio\'s Errand', 8, GameConstants.AchievementOption.less)]),
+});
+const SeviiGideon1 = new NPC ('Gideon', [
+    'I can\'t figure out how I\'m supposed to get inside. Let me tell you, I found this place. Don\'t look so envious, will you?',
+], {
+    image: 'assets/images/temporaryBattle/Scientist Gideon.png',
+    requirement: new QuestLineStepCompletedRequirement('Celio\'s Errand', 7, GameConstants.AchievementOption.less),
+});
+const SeviiGideon2 = new NPC ('Gideon', [
+    'Fufu... Fufufufu... I guessed right. I was right in tailing you! I knew there was a Sapphire here, so it belongs to me! I\'ll sell it to Team Rocket for serious money.',
+    '...D-don\'t glare at me like that! If you want it back, why don\'t you go get it after I sell it? I\'ll even tell you one of the passwords to Team Rocket\'s Warehouse. The Warehouse password I know is "Yes, nah, Chansey." I\'m done. Don\'t think badly of me!',
+], {
+    image: 'assets/images/temporaryBattle/Scientist Gideon.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Celio\'s Errand', 7), new QuestLineStepCompletedRequirement('Celio\'s Errand', 9, GameConstants.AchievementOption.less)]),
+});
+const SixIslandSeviiRoamerNPC = new RoamerNPC('Bug Catcher John', [
+    'Apparently some kid released one of his Pokémon around here. That Pokémon, it\'s partner, and for whatever reason, the Legendary Beasts from Johto have been seen roaming on {ROUTE_NAME}.',
+], GameConstants.Region.kanto, RoamingPokemonList.findGroup(GameConstants.Region.kanto, GameConstants.KantoSubRegions.Sevii4567), undefined, new GymBadgeRequirement(BadgeEnums.Elite_OrangeChampion));
+const AlteringCaveRuinManiac1 = new NPC ('Ruin Maniac', [
+    'Hello. You want to know what I\'m doing in this pointless dead end cave?',
+    'Well, I\m trying to dig to a secluded island north of here. I\'ve heard there are some unusual Pokémon there.',
+    'Want to help me? No? Ah, you\'re busy dealing with a group of Team Rocket? Well, I wish you luck with that',
+    'Once I finish it you\'ll have a way to get to get to that island too, so make sure to come back later!',
+], {
+    image: 'assets/images/npcs/Ruin Maniac.png',
+    requirement: new QuestLineCompletedRequirement('Celio\'s Errand', GameConstants.AchievementOption.less),
+});
+const AlteringCaveRuinManiac2 = new NPC ('Ruin Maniac', [
+    'Wow, that was some back breaking work... But I have done it!',
+    'I\'ve dug a tunnel to Pinkan Island! Though, I think I\'ll need to rest for a while first... You go on ahead.',
+], {
+    image: 'assets/images/npcs/Ruin Maniac.png',
+    requirement: new QuestLineCompletedRequirement('Celio\'s Errand'),
+});
+const ValenciaProfIvy = new NPC ('Prof. Ivy', [
+    'Hello again! I see you too found a way around the giant cliff.',
+    'On this island, pokémon have changed over the years. I am here to study them.',
+    'Oh, you have already encountered them? And you are busy with the Orange League?',
+    'Well, good luck to you, then.',
+], {image: 'assets/images/npcs/Professor Ivy.png'});
+const TanobyProfIvy = new NPC ('Prof. Ivy', [
+    'Hello again! I see you too found your way to these ancient ruins!',
+    'A peculiar Pokémon known as Unown lives here. There are 28 different forms of Unown, but only one shows up at a time, but the form that appears changes every time the clock strikes midnight.',
+    'There are 2 other ruins like this, one in Johto, and one in Sinnoh. I have heard that in each ruins, there are forms that only appear there. For example, the forms that resemble a question mark and an exclamation point have only been seen here.',
+    'Speaking of peculiar Pokémon, I found this unusual variant of Dodrio on an island in this area. Hmm. If you want, you could buy it from me. I am needing some research funds.',
+], {image: 'assets/images/npcs/Professor Ivy.png'});
+const PinkanOfficerJenny1 = new NPC ('Officer Jenny', [
+    'Have you seen the Pinkan berries? That is what makes all the Pokémon on this island turn pink.',
+    'Hang on, this island is strictly off limits! Pinkan is a protected Pokémon reserve. How did you get here?',
+    'Well I suppose you did deal with that Team Rocket branch on Five Island, so I guess I\'ll let you stay, as thanks.',
+    'I\'m afraid I can\'t allow you into Pinkan Mountain though. The Pokémon there are extremely territorial.',
+    'If you want to prove you can deal with such dangerous Pokémon safely, I suggest defeating the Orange League.',
+], {
+    image: 'assets/images/npcs/Officer Jenny.png',
+    requirement: new GymBadgeRequirement(BadgeEnums.Elite_OrangeChampion, GameConstants.AchievementOption.less),
+});
+const PinkanOfficerJenny2 = new NPC ('Officer Jenny', [
+    'Have you seen the Pinkan berries? That is what makes all the Pokémon on this island turn pink.',
+    'Hang on, this island is strictly off limits! Pinkan is a protected Pokémon reserve. How did you get here?',
+    'Well I suppose you did deal with that Team Rocket branch on Five Island, so I guess I\'ll let you stay, as thanks.',
+    'And since you\'ve conquered the Orange League, I suppose it should be safe to let you into Pinkan Mountain. Just be careful.',
+], {
+    image: 'assets/images/npcs/Officer Jenny.png',
+    requirement: new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Elite_OrangeChampion), new QuestLineStepCompletedRequirement('Team Rocket\'s Pinkan Themepark', 0, GameConstants.AchievementOption.less)]),
+});
+const PinkanOfficerJenny3 = new NPC ('Officer Jenny', [
+    'Oh it\'s you again! Got some Pinkan Berries to trade?',
+    'So long as you\'re not helping those Rocket clowns, we\'ll let you trade for some of those rare Pinkan Pokémon that have only just come to the island.',
+], {
+    image: 'assets/images/npcs/Officer Jenny.png',
+    requirement: new QuestLineCompletedRequirement('Team Rocket\'s Pinkan Themepark'),
+});
+const ThemeparkTeamRocket1 = new NPC('Jessie and James', [
+    'Oh hello there trainer! What do you mean we\'re not supposed to be here? We toootally got permission from Officer Jenny!',
+    'Isn\'t your whole "thing" being helpful? We want to build a themepark to help fund the Pinkan Reserve, but this meddlesome twerp named Ash keeps getting in the way. He\'s even electrocuted us with his damn Pikachu!',
+    'We need a bunch of Pinkan berries to help feed the Pokémon at our themepark, but the twerp keeps zapping us when we try to go collect them.',
+    'Would you mind Farming some Pinkan Berries to help use grow our supply? We don\'t know how to, but we\'ve heard the Berry Master in Kanto could be helpful?',
+], {
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('Team Rocket\'s Pinkan Themepark'), new QuestLineStepCompletedRequirement('Team Rocket\'s Pinkan Themepark', 1, GameConstants.AchievementOption.less)]),
+    image: 'assets/images/temporaryBattle/Pinkan Jessie & James.png',
+});
+
+const ThemeparkTeamRocket2 = new NPC('Jessie and James', [
+    'Whoa! An actual Pinkan berry! Now our evil plo- plan! Definitely not evil, our very helpful and good plan!...Ahem. Our plan can now proceed.',
+    'Now we can get us some Pinkan\'s for the theme park! Would you mind defeating 500 Pinkan Pokémon in the forest and out in the plains? We\'ll do the catching, you just need to beat \'em',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Team Rocket\'s Pinkan Themepark', 1), new QuestLineStepCompletedRequirement('Team Rocket\'s Pinkan Themepark', 2, GameConstants.AchievementOption.less)]),
+    image: 'assets/images/temporaryBattle/Pinkan Jessie & James.png',
+});
+
+const ThemeparkTeamRocket3 = new NPC('Jessie and James', [
+    'Nice! Well, it would be nice. Now we have all these berries and Pinkan Pokémon, but nowhere to put \'em all!',
+    'We need a bunch of Pixie Plates, and we need some Fairy Gems to help...uh...pay off the contractor?',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Team Rocket\'s Pinkan Themepark', 2), new QuestLineStepCompletedRequirement('Team Rocket\'s Pinkan Themepark', 3, GameConstants.AchievementOption.less)]),
+    image: 'assets/images/temporaryBattle/Pinkan Jessie & James.png',
+});
+
+const ThemeparkTeamRocket4 = new NPC('Jessie and James', [
+    'Hahahaha! Now our plan can really start! Prepare for trouble, and make it double, because you just built us a profit machine!',
+    'We\'re going to make these Pinkan Pokémon perform silly routines and make us a ton of money, no days off for these suckers!',
+    'What\'s that? You\'re gonna stop us!? Heh, yeah right! Bring it on twerp!',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Team Rocket\'s Pinkan Themepark', 3), new QuestLineStepCompletedRequirement('Team Rocket\'s Pinkan Themepark', 5, GameConstants.AchievementOption.less)]),
+    image: 'assets/images/temporaryBattle/Pinkan Jessie & James.png',
+});
+
+const Informant1 = new NPC('Informant', [
+    '<i>In a shady warehouse, you find the informant. He is a Mr. Mime, and he doesn\'t seem willing to divulge the information you need.</i>',
+], {
+    image: 'assets/images/temporaryBattle/Mime Interview.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 2), new QuestLineStepCompletedRequirement('Detective Pikachu', 4, GameConstants.AchievementOption.less)]),
+});
+const Informant2 = new NPC('Informant', [
+    '<i>The Mr. Mime signals to you that this is an illicit drug called R. It is frequently used in the underground fighting rings near the Battle Frontier.</i>',
+], {
+    image: 'assets/images/temporaryBattle/Mime Interview.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 4), new QuestLineStepCompletedRequirement('Detective Pikachu', 6, GameConstants.AchievementOption.less)]),
+});
+
+const Mewtwo1 = new NPC('Mewtwo', [
+    'You were wise to seek me out. Howard Clifford has been deceiving you. He is the one making the R drug, and....',
+    '<i>A sphere of energy envelops Mewtwo, and he is dragged away by some sort of helicopter. The helicopter has a logo on it: Clifford Industries!</i>',
+], {
+    image: 'assets/images/temporaryBattle/Possessed Mewtwo.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 10), new QuestLineStepCompletedRequirement('Detective Pikachu', 12, GameConstants.AchievementOption.less)]),
+});
+
+const Mewtwo2 = new NPC('Mewtwo', [
+    'Thank you for your help. I have little to offer you in return, but perhaps this will help.',
+    'I found Detective Pikachu\'s partner some days ago injured on the side of the road, and have nursed him back to health. I hope this reunion will suffice.',
+], {
+    image: 'assets/images/temporaryBattle/Possessed Mewtwo.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 15), new QuestLineStepCompletedRequirement('Detective Pikachu', 17, GameConstants.AchievementOption.less)]),
+});
+
+const DetectiveRaichu = new NPC('Detective Raichu', [
+    'Thanks for your help, kid! I\'ll stick along with you until our next mystery comes along.',
+], {
+    image: 'assets/images/pokemon/26.02.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 16), new QuestLineStepCompletedRequirement('Detective Pikachu', 17, GameConstants.AchievementOption.less)]),
+});
+>>>>>>> e6ff451fa56bc70b865249d2b79e04f55a71eef1
 
 //Kanto Towns
 TownList['Pallet Town'] = new Town(
@@ -260,7 +564,11 @@ TownList['Cerulean City'] = new Town(
     [CeruleanCityShop, new MoveToDungeon(dungeonList['Cerulean Cave'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 4)],
+<<<<<<< HEAD
         npcs: [CeruleanKantoBerryMaster, CeruleanSuperNerd],
+=======
+        npcs: [CeruleanKantoBerryMaster, CeruleanSuperNerd, Mewtwo1, Mewtwo2, DetectiveRaichu, CeruleanEusine],
+>>>>>>> e6ff451fa56bc70b865249d2b79e04f55a71eef1
     }
 );
 TownList['Vermilion City'] = new Town(
@@ -269,7 +577,11 @@ TownList['Vermilion City'] = new Town(
     [VermilionCityShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 6)],
+<<<<<<< HEAD
         npcs: [VermilionFanClubChairman],
+=======
+        npcs: [VermilionFanClubChairman, VermilionShardApprentice, VermilionEusine],
+>>>>>>> e6ff451fa56bc70b865249d2b79e04f55a71eef1
     }
 );
 TownList['Lavender Town'] = new Town(
@@ -311,7 +623,7 @@ TownList['Fuchsia City'] = new Town(
             new RouteKillRequirement(10, GameConstants.Region.kanto, 18),
             new RouteKillRequirement(10, GameConstants.Region.kanto, 15),
         ])],
-        npcs: [FuchsiaKantoRoamerNPC],
+        npcs: [FuchsiaKantoRoamerNPC, FuchsiaEusine],
     }
 );
 TownList['Cinnabar Island'] = new Town(
@@ -551,6 +863,7 @@ const EcruteakEusine = new NPC('Eusine', [
     'Legends say that when the Brass Tower burned down and became the Burned Tower three unnamed Pokémon perished in the flames.',
     'Ho-oh came down from the Tin Tower and revived those Pokémon. They became the Legendary Beasts. Some say these Beasts still inhabit the basement of the Burned Tower.',
     'Could you please clear Burned Tower for me and see if this is true?',
+<<<<<<< HEAD
 ],
 { requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Burned Tower'), GameConstants.AchievementOption.less ) });
 
@@ -560,6 +873,20 @@ const EcruteakPokéfan = new NPC('Pokéfan Derek', [
     'Eusine was here a second ago. He seemed very excited, but then he suddenly left. I don\'t know where he went. I was a bit distracted by those majestic Beasts...',
 ],
 { requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Burned Tower')) });
+=======
+], {
+    image: 'assets/images/temporaryBattle/Eusine.png',
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('The Legendary Beasts'), new QuestLineStepCompletedRequirement('The Legendary Beasts', 1, GameConstants.AchievementOption.less )]),
+});
+const EcruteakPokéfan = new NPC('Pokéfan Derek', [
+    'I saw it! Did you see it?! I saw you go in there! I don\'t know what you did in the Burned Tower, but three great Beasts came running out of there!',
+    'It was a great sight to behold. They all went in different directions. I think they are just roaming the region now. My friend Trevor in Blackthorn City can tell you more.',
+    'Eusine was here a second ago. He seemed very excited, but then he suddenly left. I don\'t know where he went, but he seemed to be particularly interested in the blue one.',
+], {
+    image: 'assets/images/trainers/PokéManiac.png',
+    requirement: new QuestLineStepCompletedRequirement('The Legendary Beasts', 1),
+});
+>>>>>>> e6ff451fa56bc70b865249d2b79e04f55a71eef1
 
 const EcruteakKimonoGirl = new NPC('Kimono Girl', [
     'Legends say that Ho-Oh is searching for a trainer of pure heart.',
@@ -575,9 +902,29 @@ const CianwoodPhotographyAide = new NPC('Photography Aide', [
     'Cameron the Photographer isn’t here right now; he’s off taking photos of Pokémon on Berry Farms. Did you know that some Berries can even attract rare Pokémon?',
 ]);
 
+const CianwoodEusine = new NPC('Eusine', [
+    'Yo, wasn\'t that Suicune just now? I only caught a quick glimpse, but I thought I saw Suicune running on the waves.',
+    'Suicune is beautiful and grand. And it races through towns and roads at simply awesome speeds. It\'s wonderful... I want to see Suicune up close....',
+    'I\'ve decided. I\'ll battle you as a trainer to earn Suicune\'s respect! Come on! Let\'s battle now!',
+],
+{
+    image: 'assets/images/temporaryBattle/Eusine.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Eusine\'s Chase', 0), new QuestLineStepCompletedRequirement('Eusine\'s Chase', 2, GameConstants.AchievementOption.less )]),
+});
+
 const MahoganySouvenirShopAttendant = new NPC('Souvenir Shop Attendant', [
     'We’ve got stuff here nobody else has got! But keep any Item Magnets you have away from the merchandise… especially the RageCandyBars. Keep ‘em outside where they belong! I’ve heard magnets can attract Pokémon with held items more often, and even more so in Dungeons!',
 ]);
+
+const MahoganyEusine = new NPC('Eusine', [
+    'Suicune... How brave it is! How refreshing it is! How beautiful it is! And how quickly it moves! It seems to be heading east.',
+    'You seem to be around where Suicune would appear. Well, that\'s OK. My desire to search for Suicune is far beyond yours... My grandpa was...quite into myths. I\'ve heard so many stories about Suicune from him.',
+    'Suicune... I won\'t stop following you until I\'ve found out what you\'re after... You hear me!',
+],
+{
+    image: 'assets/images/temporaryBattle/Eusine.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Eusine\'s Chase', 3), new QuestLineStepCompletedRequirement('Eusine\'s Chase', 5, GameConstants.AchievementOption.less )]),
+});
 
 const BlackthornJohtoRoamerNPC = new RoamerNPC('Pokéfan Trevor', [
     'On the news, they are getting more reports of roaming Pokémon appearing on {ROUTE_NAME}!',
@@ -593,7 +940,7 @@ const ProfElm = new ProfNPC('Prof. Elm',
 TownList['New Bark Town'] = new Town(
     'New Bark Town',
     GameConstants.Region.johto,
-    [],
+    [new BulletinBoard(GameConstants.BulletinBoards.Johto)],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion)],
         npcs: [ProfElm, NewBarkTechnologyEnthusiast],
@@ -659,7 +1006,7 @@ TownList['Cianwood City'] = new Town(
     [CianwoodCityShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 41)],
-        npcs: [CianwoodPhotographyAide],
+        npcs: [CianwoodPhotographyAide, CianwoodEusine],
     }
 );
 TownList['Mahogany Town'] = new Town(
@@ -671,7 +1018,7 @@ TownList['Mahogany Town'] = new Town(
             new RouteKillRequirement(10, GameConstants.Region.johto, 42),
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mt. Mortar')),
         ])],
-        npcs: [MahoganySouvenirShopAttendant],
+        npcs: [MahoganySouvenirShopAttendant, MahoganyEusine],
     }
 );
 TownList['Blackthorn City'] = new Town(
@@ -724,7 +1071,7 @@ TownList['Ilex Forest'] = new DungeonTown(
 TownList['Burned Tower'] = new DungeonTown(
     'Burned Tower',
     GameConstants.Region.johto,
-    [new RouteKillRequirement(10, GameConstants.Region.johto, 37)]
+    [new QuestLineStepCompletedRequirement('The Legendary Beasts', 0)]
 );
 TownList['Tin Tower'] = new DungeonTown(
     'Tin Tower',

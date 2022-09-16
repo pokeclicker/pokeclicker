@@ -729,6 +729,23 @@ export enum EggItemType {
     'Mystery_egg',
 }
 
+<<<<<<< HEAD
+=======
+export enum BulletinBoards {
+    None = -2,
+    All = -1,
+    Kanto,
+    Johto,
+    Hoenn,
+    Sevii4567,
+    Kalos,
+    Alola,
+    Galar,
+    Armor,
+    Crown,
+}
+
+>>>>>>> e6ff451fa56bc70b865249d2b79e04f55a71eef1
 export const EnergyRestoreEffect = {
     SmallRestore: 0.1,
     MediumRestore: 0.2,
@@ -1197,6 +1214,28 @@ export const TemporaryBattles = [
     'Biker Goon 2',
     'Biker Goon 3',
     'Cue Ball Paxton',
+<<<<<<< HEAD
+=======
+    'Suicune 1',
+    'Eusine',
+    'Suicune 2',
+    'Suicune 3',
+    'Suicune 4',
+    'Suicune 5',
+    'Suicune 6',
+    'Sevii Rocket Grunt 1',
+    'Sevii Rocket Grunt 2',
+    'Sevii Rocket Grunt 3',
+    'Sevii Rocket Grunt 4',
+    'Sevii Rocket Grunt 5',
+    'Sevii Rocket Ariana',
+    'Sevii Rocket Archer',
+    'Scientist Gideon',
+    'Pinkan Jessie & James',
+    'Pinkan Officer Jenny',
+    'Spiky-eared Pichu',
+    'Rocket Boss Giovanni',
+>>>>>>> e6ff451fa56bc70b865249d2b79e04f55a71eef1
     'Galactic Boss Cyrus',
     'AZ',
     'Ultra Wormhole',

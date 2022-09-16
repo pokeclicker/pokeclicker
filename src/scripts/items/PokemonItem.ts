@@ -11,8 +11,13 @@ class PokemonItem extends CaughtIndicatingItem {
 
     gain(amt: number) {
         let shiny = false;
+        let numShiny = 0;
         for (let i = 0; i < amt; i++) {
-            shiny = shiny || PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SHOP);
+            const shinyBool = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SHOP);
+            if (shinyBool) {
+                numShiny++;
+            }
+            shiny = shiny || shinyBool;
         }
         const pokemonName = this.name as PokemonNameType;
         if (shiny) {
@@ -21,7 +26,20 @@ class PokemonItem extends CaughtIndicatingItem {
                 type: NotificationConstants.NotificationOption.warning,
             });
         }
+<<<<<<< HEAD
         App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(pokemonName).id, shiny, true);
+=======
+        if (shiny) {
+            App.game.logbook.newLog(LogBookTypes.SHINY, `The purchased ${pokemonName} turned out to be shiny! ${App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(pokemonName).id, true) ? '(duplicate)' : ''}`);
+        }
+
+        const pokemonID = PokemonHelper.getPokemonByName(pokemonName).id;
+        App.game.party.gainPokemonById(pokemonID, shiny, true);
+
+        const partyPokemon = App.game.party.getPokemon(pokemonID);
+        partyPokemon.effortPoints += App.game.party.calculateEffortPoints(partyPokemon, false, GameConstants.SHOPMON_EP_YIELD * (amt - numShiny));
+        partyPokemon.effortPoints += App.game.party.calculateEffortPoints(partyPokemon, true, GameConstants.SHOPMON_EP_YIELD * numShiny);
+>>>>>>> e6ff451fa56bc70b865249d2b79e04f55a71eef1
     }
 
     getCaughtStatus(): CaughtStatus {

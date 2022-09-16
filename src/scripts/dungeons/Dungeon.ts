@@ -1672,11 +1672,7 @@ dungeonList['Tin Tower'] = new Dungeon('Tin Tower',
     [
         new DungeonBossPokemon('Raticate', 380000, 35),
         new DungeonBossPokemon('Haunter', 380000, 35),
-        new DungeonBossPokemon('Ho-Oh', 1410000, 100, {requirement: new MultiRequirement([
-            new ObtainedPokemonRequirement(pokemonMap.Raikou),
-            new ObtainedPokemonRequirement(pokemonMap.Entei),
-            new ObtainedPokemonRequirement(pokemonMap.Suicune),
-        ])}),
+        new DungeonBossPokemon('Ho-Oh', 1410000, 100, {requirement: new QuestLineCompletedRequirement('The Legendary Beasts')}),
     ],
     4500, 37);
 
