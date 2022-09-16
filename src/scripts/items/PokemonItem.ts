@@ -20,6 +20,7 @@ class PokemonItem extends CaughtIndicatingItem {
             shiny = shiny || shinyBool;
         }
         const pokemonName = this.name as PokemonNameType;
+
         if (shiny || !App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(pokemonName).id)) {
             Notifier.notify({
                 message: `${(shiny) ? `✨ You obtained a shiny ${pokemonName}! ✨` : `You obtained ${GameHelper.anOrA(pokemonName)} ${pokemonName}!`}`,
@@ -37,7 +38,7 @@ class PokemonItem extends CaughtIndicatingItem {
 
         const partyPokemon = App.game.party.getPokemon(pokemonID);
         partyPokemon.effortPoints += App.game.party.calculateEffortPoints(partyPokemon, false, GameConstants.SHOPMON_EP_YIELD * (amt - numShiny));
-        partyPokemon.effortPoints += App.game.party.calculateEffortPoints(partyPokemon, true, GameConstants.SHOPMON_EP_YIELD * numShiny);#
+        partyPokemon.effortPoints += App.game.party.calculateEffortPoints(partyPokemon, true, GameConstants.SHOPMON_EP_YIELD * numShiny);
     }
 
     getCaughtStatus(): CaughtStatus {

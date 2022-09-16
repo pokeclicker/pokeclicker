@@ -508,7 +508,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.johto]: new Set([40, 41, 'Slowpoke Well']),
         [Region.hoenn]: new Set([105, 106, 107, 108, 109, 118, 122, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134]),
         [Region.sinnoh]: new Set([218, 219, 220, 223, 230, 'Pastoria City', 'Lake Verity', 'Lake Valor', 'Sendoff Spring']),
-        [Region.unova]: new Set([17, 18, 21, 24, 'Undella Town', 'Humilau City', 'Plasma Frigate']),
+        [Region.unova]: new Set([17, 18, 21, 24, 'Undella Town', 'Humilau City']),
         [Region.kalos]: new Set([8, 23, 'Coumarine City', 'Couriway Town', 'Sea Spirit\'s Den']),
         [Region.alola]: new Set([15, 19, 20, 'Seafolk Village', 'Brooklet Hill', 'Mina\'s Houseboat', 'Lake of the Sunne and Moone']),
         [Region.galar]: new Set(['Hulbury', 'Roaring-Sea Caves', 5, 6, 8, 9, 16, 21, 27, 29, 36, 37, 41, 42, 43, 44, 51, 53]),
@@ -688,7 +688,6 @@ export enum FossilPieceType {
     'Fossilized Drake',
     'Fossilized Dino',
 }
-
 
 export enum BattleItemType {
     'xAttack' = 'xAttack',
@@ -1048,6 +1047,7 @@ export const JohtoDungeons = [
     'Radio Tower',
     'Ice Path',
     'Dark Cave',
+    'Tohjo Falls',
     'Victory Road Johto',
     'Mt. Silver', // 37
 ];
@@ -1317,7 +1317,6 @@ export const TemporaryBattles = [
     'Spiky-eared Pichu',
     'Rocket Boss Giovanni',
     'Galactic Boss Cyrus',
-
     'Team Plasma Grunt 1',
     'Team Plasma Grunt 2',
     'Team Plasma Grunt 3',

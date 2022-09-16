@@ -1,14 +1,21 @@
 /*
 To update this type when adding multiple new pokemon:
+
 In 'PokemonList.ts', change the type of `PokemonListData -> name` to `string` and add your new pokemon.
+
 Add ` = string` to `export type PokemonNameType` on this file.
+
 Open the game, and run the following code in the browser console:
+
 copy(`export type PokemonNameType
     = ${pokemonList.map(p => `'${p.name.replace(/'/g, "\\'")}'`).join('\n    | ')};`);
+
 Replace everything in this file (except for this comment) with what was copied.
+
 Change the type of `PokemonListData -> name` back to `PokemonNameType`.
 Remove ` = string` from `export type PokemonNameType`.
 */
+
 export type PokemonNameType
     = 'Bulbasaur'
     | 'Bulbasaur (Clone)'
@@ -317,7 +324,46 @@ export type PokemonNameType
     | 'Sunkern'
     | 'Sunflora'
     | 'Yanma'
-@@ -367,7 +325,6 @@
+    | 'Wooper'
+    | 'Quagsire'
+    | 'Espeon'
+    | 'Umbreon'
+    | 'Murkrow'
+    | 'Slowking'
+    | 'Galarian Slowking'
+    | 'Misdreavus'
+    | 'Unown (A)'
+    | 'Unown (B)'
+    | 'Unown (C)'
+    | 'Unown (D)'
+    | 'Unown (E)'
+    | 'Unown (F)'
+    | 'Unown (G)'
+    | 'Unown (H)'
+    | 'Unown (I)'
+    | 'Unown (J)'
+    | 'Unown (K)'
+    | 'Unown (L)'
+    | 'Unown (M)'
+    | 'Unown (N)'
+    | 'Unown (O)'
+    | 'Unown (P)'
+    | 'Unown (Q)'
+    | 'Unown (R)'
+    | 'Unown (S)'
+    | 'Unown (T)'
+    | 'Unown (U)'
+    | 'Unown (V)'
+    | 'Unown (W)'
+    | 'Unown (X)'
+    | 'Unown (Y)'
+    | 'Unown (Z)'
+    | 'Unown (!)'
+    | 'Unown (?)'
+    | 'Wobbuffet'
+    | 'Girafarig'
+    | 'Pineco'
+    | 'Forretress'
     | 'Dunsparce'
     | 'Gligar'
     | 'Steelix'
@@ -903,7 +949,6 @@ export type PokemonNameType
     | 'Doublade'
     | 'Aegislash (Shield)'
     | 'Aegislash (Blade)'
-    | 'Aegislash'
     | 'Spritzee'
     | 'Aromatisse'
     | 'Swirlix'
