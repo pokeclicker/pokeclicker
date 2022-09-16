@@ -136,6 +136,7 @@ type ItemNameType
     | 'Furfrou (Kabuki)'
     | 'Furfrou (Pharaoh)'
     | 'Furfrou (Star)'
+    | 'Furfrou (La Reine)'
     | 'Type: Null'
     | 'Poipole'
     | 'Dracozolt'

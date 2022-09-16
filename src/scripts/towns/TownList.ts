@@ -1704,7 +1704,7 @@ const HoennBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations[
 ]);
 
 //Hoenn Flute Master
-const HoennFluteMaster = new GemMasterShop([]);
+const HoennFluteMaster = new GemMasterShop();
 
 //Hoenn NPCs
 
@@ -2737,7 +2737,7 @@ const AnvilleTownShop = new Shop([
 ]);
 
 //Unova Gem Master
-const UnovaFluteMaster = new GemMasterShop([]);
+const UnovaFluteMaster = new GemMasterShop();
 
 //Unova NPCs
 
@@ -3466,7 +3466,7 @@ TownList['Camphrier Town'] = new Town(
 TownList['Parfum Palace'] = new Town(
     'Parfum Palace',
     GameConstants.Region.kalos,
-    [new ShardTraderShop(GameConstants.ShardTraderLocations['Parfum Palace'], 'Furfrou Trader')],
+    [new ShardTraderShop(GameConstants.ShardTraderLocations['Parfum Palace'], 'Furfrou Trader'), new GemMasterShop('Furfrou Trader')],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 6)],
     }
