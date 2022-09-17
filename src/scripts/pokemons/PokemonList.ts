@@ -1065,7 +1065,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Poison],
         'levelType': LevelType.mediumfast,
         'exp': 157,
-        'eggCycles': 20,
+        'eggCycles': 30,
         'base': {
             'hitpoints': 60,
             'attack': 95,
@@ -2428,7 +2428,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Water],
         'levelType': LevelType.mediumslow,
         'exp': 135,
-        'eggCycles': 20,
+        'eggCycles': 30,
         'base': {
             'hitpoints': 65,
             'attack': 65,
@@ -3737,7 +3737,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Poison],
         'levelType': LevelType.mediumfast,
         'exp': 172,
-        'eggCycles': 20,
+        'eggCycles': 30,
         'base': {
             'hitpoints': 65,
             'attack': 90,
