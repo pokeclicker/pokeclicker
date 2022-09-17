@@ -92,7 +92,7 @@ class BattleCafeController {
     }
 
     private static canSpin() {
-        if (!BattleCafeController.selectedSweet()) {
+        if (BattleCafeController.selectedSweet() == undefined) {
             Notifier.notify({
                 message: 'No sweet selected',
                 type: NotificationConstants.NotificationOption.danger,
