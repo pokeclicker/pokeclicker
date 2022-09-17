@@ -598,7 +598,7 @@ const pokemonList = createPokemonArray(
             new LevelEvolution('Metapod', 'Valencian Butterfree', 10000),
             new LevelEvolution('Metapod', 'Pink Butterfree', 10000),
             new LevelEvolution('Metapod', 'Ash\'s Butterfree', 10000),
-          ],
+        ],
         'base': {
             'hitpoints': 50,
             'attack': 20,
