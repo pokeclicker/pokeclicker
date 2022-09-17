@@ -395,8 +395,7 @@ class QuestLineHelper {
     // Ho-oh Quest
 
     public static createhoohJohtoQuestLine() {
-        const hoohJohtoQuestLine = new QuestLine('Rainbow Guardian', 'The Kimono Girls of Ecruteak City wish to speak with you again.', new MultiRequirement([new QuestLineCompletedRequirement('Whirl Guardian'), new QuestLineCompletedRequirement('Legendary Beasts')]), GameConstants.BulletinBoards.Johto);
-
+        const hoohJohtoQuestLine = new QuestLine('Rainbow Guardian', 'The Kimono Girls of Ecruteak City wish to speak with you again.', new MultiRequirement([new QuestLineCompletedRequirement('Whirl Guardian'), new ObtainedPokemonRequirement(pokemonMap.Raikou), new ObtainedPokemonRequirement(pokemonMap.Entei), new ObtainedPokemonRequirement(pokemonMap.Suicune)]), GameConstants.BulletinBoards.Johto);
         const talkKimonoGirlsEcruteak = new TalkToNPCQuest(KimonoGirlsEcruteak, 'Meet the Kimono Girls at the Ecruteak Dance Theatre');
         hoohJohtoQuestLine.addQuest(talkKimonoGirlsEcruteak);
 
