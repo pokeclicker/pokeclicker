@@ -1314,6 +1314,7 @@ export const TemporaryBattles = [
     'Scientist Gideon',
     'Pinkan Jessie & James',
     'Pinkan Officer Jenny',
+    'Kimono Girls',
     'Spiky-eared Pichu',
     'Rocket Boss Giovanni',
     'Galactic Boss Cyrus',

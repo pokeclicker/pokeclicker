@@ -265,7 +265,7 @@ class QuestLineHelper {
     }
 
     public static createJohtoBeastsQuestLine() {
-        const johtoBeastsQuestLine = new QuestLine('The Legendary Beasts', 'Invesigate the legends surrounding the strange Burned Tower in Ecruteak City.', new GymBadgeRequirement(BadgeEnums.Fog), GameConstants.BulletinBoards.Johto);
+        const johtoBeastsQuestLine = new QuestLine('The Legendary Beasts', 'Investigate the legends surrounding the strange Burned Tower in Ecruteak City.', new GymBadgeRequirement(BadgeEnums.Fog), GameConstants.BulletinBoards.Johto);
 
         const talktoEusine1 = new TalkToNPCQuest(EcruteakEusine, 'Talk to Eusine in Ecruteak City.');
         johtoBeastsQuestLine.addQuest(talktoEusine1);
@@ -333,6 +333,88 @@ class QuestLineHelper {
         johtoSuicuneQuestLine.addQuest(catchRoute25Suicune);
 
         App.game.quests.questLines().push(johtoSuicuneQuestLine);
+    }
+
+    // Lugia Quest
+    public static createlugiaJohtoQuestLine() {
+        const lugiaJohtoQuestLine = new QuestLine('Whirl Guardian', 'The Kimono Girls of Ecruteak City need help.', new QuestLineCompletedRequirement('Team Rocket Again'), GameConstants.BulletinBoards.Johto);
+
+        const talktoZuki = new TalkToNPCQuest(Zuki, 'Talk to Kimono Girl Zuki in Violet City.');
+        lugiaJohtoQuestLine.addQuest(talktoZuki);
+
+        const helpZuki = new HatchEggsQuest(10, 0);
+        lugiaJohtoQuestLine.addQuest(helpZuki);
+
+        const talktoNaoko = new TalkToNPCQuest(Naoko, 'Talk to Kimono Girl Naoko in the Ilex Forest.');
+        lugiaJohtoQuestLine.addQuest(talktoNaoko);
+
+        const helpNaoko = new CustomQuest(1, 0, 'Lead Naoko out of Ilex Forest.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Ilex Forest')]());
+        lugiaJohtoQuestLine.addQuest(helpNaoko);
+
+        const kimonoReward = () => {
+            App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Ultraball, 50, false);
+            Notifier.notify({
+                title: lugiaJohtoQuestLine.name,
+                message: 'Kimono Girl Miki has given you a package containing 50 Ultraballs.',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
+        const talktoMiki = new TalkToNPCQuest(Miki, 'Talk to Kimono Girl Miki at the Ecruteak City Dance Theatre.', kimonoReward);
+        lugiaJohtoQuestLine.addQuest(talktoMiki);
+
+        const talktoSayo = new TalkToNPCQuest(Sayo, 'Talk to Kimono Girl Sayo in the Ice Path.');
+        lugiaJohtoQuestLine.addQuest(talktoSayo);
+
+        const helpSayo = new CustomQuest(1, 0, 'Navigate the Ice Path to give Sayo a push.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Ice Path')]());
+        lugiaJohtoQuestLine.addQuest(helpSayo);
+
+        const talktoKuni = new TalkToNPCQuest(Kuni, 'Talk to Kimono Girl Kuni in Goldenrod City.');
+        lugiaJohtoQuestLine.addQuest(talktoKuni);
+
+        const helpKuni = new CustomQuest(1, 0, 'Check the Radio Tower for any lingering Team Rocket activity.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Radio Tower')]());
+        lugiaJohtoQuestLine.addQuest(helpKuni);
+
+        const talktoKimonoGirlsWhirl = new TalkToNPCQuest(KimonoGirlsWhirl, 'Meet the Kimono Girls at the Whirl Islands.');
+        lugiaJohtoQuestLine.addQuest(talktoKimonoGirlsWhirl);
+
+        const LugiaCatch = new CaptureSpecificPokemonQuest(
+            'Lugia',
+            'Catch Lugia in the Whirl Islands.',
+            1,
+            false,
+            undefined,
+            undefined
+        );
+
+        lugiaJohtoQuestLine.addQuest(LugiaCatch);
+
+        App.game.quests.questLines().push(lugiaJohtoQuestLine);
+    }
+    // Ho-oh Quest
+
+    public static createhoohJohtoQuestLine() {
+        const hoohJohtoQuestLine = new QuestLine('Rainbow Guardian', 'The Kimono Girls of Ecruteak City wish to speak with you again.', new MultiRequirement([new QuestLineCompletedRequirement('Whirl Guardian'), new QuestLineCompletedRequirement('Legendary Beasts')]), GameConstants.BulletinBoards.Johto);
+
+        const talkKimonoGirlsEcruteak = new TalkToNPCQuest(KimonoGirlsEcruteak, 'Meet the Kimono Girls at the Ecruteak Dance Theatre');
+        hoohJohtoQuestLine.addQuest(talkKimonoGirlsEcruteak);
+
+        const clearKimonoGirls = new CustomQuest (1, 0, 'Prove your abilities as a trainer to the Kimono Girls of Ecruteak City.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Kimono Girls')]());
+        hoohJohtoQuestLine.addQuest(clearKimonoGirls);
+
+        const HoohCatch = new CaptureSpecificPokemonQuest(
+            'Ho-Oh',
+            'Catch Ho-oh in the Tin Tower.',
+            1,
+            false,
+            undefined,
+            undefined
+        );
+
+        hoohJohtoQuestLine.addQuest(HoohCatch);
+
+        App.game.quests.questLines().push(hoohJohtoQuestLine);
     }
 
     public static createCelebiJohtoQuestLine() {
@@ -1636,6 +1718,8 @@ class QuestLineHelper {
         this.createRocketJohtoQuestLine();
         this.createJohtoBeastsQuestLine();
         this.createJohtoSuicuneQuestLine();
+        this.createlugiaJohtoQuestLine();
+        this.createhoohJohtoQuestLine();
         this.createCelebiJohtoQuestLine();
         this.createAquaMagmaHoennQuestLine();
         this.createDeoxysQuestLine();

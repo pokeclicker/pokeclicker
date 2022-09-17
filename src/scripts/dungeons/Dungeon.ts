@@ -1993,7 +1993,7 @@ dungeonList['Tin Tower'] = new Dungeon('Tin Tower',
     [
         new DungeonBossPokemon('Raticate', 380000, 35),
         new DungeonBossPokemon('Haunter', 380000, 35),
-        new DungeonBossPokemon('Ho-Oh', 1410000, 100, {requirement: new QuestLineCompletedRequirement('The Legendary Beasts')}),
+        new DungeonBossPokemon('Ho-Oh', 1410000, 100, {hide: true, requirement: new QuestLineStepCompletedRequirement('Rainbow Guardian', 1)}),
     ],
     4500, 37);
 
@@ -2014,7 +2014,11 @@ dungeonList['Whirl Islands'] = new Dungeon('Whirl Islands',
         mythic: [{loot: 'Max Revive'}],
     },
     92800,
-    [new DungeonBossPokemon('Dewgong', 400000, 40), new DungeonBossPokemon('Kingler', 400000, 40), new DungeonBossPokemon('Lugia', 1410000, 100)],
+    [
+        new DungeonBossPokemon('Dewgong', 400000, 40),
+        new DungeonBossPokemon('Kingler', 400000, 40),
+        new DungeonBossPokemon('Lugia', 1410000, 100, {hide: true, requirement: new QuestLineStepCompletedRequirement('Whirl Guardian', 9)}),
+    ],
     5000, 41);
 
 dungeonList['Mt. Mortar'] = new Dungeon('Mt. Mortar',
