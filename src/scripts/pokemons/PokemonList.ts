@@ -16538,7 +16538,10 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 157,
         'catchRate': 90,
-        'evolutions': [new StoneEvolution('Doublade', 'Aegislash (Shield)', GameConstants.StoneType.Dusk_stone)],
+        'evolutions': [
+            new StoneEvolution('Doublade', 'Aegislash (Shield)', GameConstants.StoneType.Dusk_stone),
+            new LevelEvolution('Doublade', 'Aegislash (Blade)', 4777),
+        ],
         'base': {
             'hitpoints': 59,
             'attack': 110,
