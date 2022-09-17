@@ -3527,7 +3527,7 @@ const pokemonList = createPokemonArray(
         'evolutions': [
             new RegionStoneEvolution(allButAlola, 'Exeggcute', 'Exeggutor', GameConstants.StoneType.Leaf_stone),
             new RegionStoneEvolution(alolaOnly, 'Exeggcute', 'Alolan Exeggutor', GameConstants.StoneType.Leaf_stone),
-            new LevelEvolution('Exeggcute', 'Pinkan  Exeggutor', 31000),
+            new LevelEvolution('Exeggcute', 'Pinkan Exeggutor', 31000),
         ],
         'base': {
             'hitpoints': 60,
