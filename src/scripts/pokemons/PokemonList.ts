@@ -645,7 +645,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 12.02,
         'name': 'Pink Butterfree',
-        'catchRate': 15,
+        'catchRate': 45,
         'type': [PokemonType.Bug, PokemonType.Flying],
         'levelType': LevelType.mediumfast,
         'exp': 178,
@@ -662,7 +662,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 12.03,
         'name': 'Ash\'s Butterfree',
-        'catchRate': 15,
+        'catchRate': 45,
         'type': [PokemonType.Bug, PokemonType.Flying],
         'levelType': LevelType.mediumfast,
         'exp': 178,
@@ -1927,7 +1927,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 45.02,
         'name': 'Pinkan Vileplume',
-        'catchRate': 20,
+        'catchRate': 45,
         'type': [PokemonType.Grass, PokemonType.Poison],
         'levelType': LevelType.mediumslow,
         'exp': 221,
