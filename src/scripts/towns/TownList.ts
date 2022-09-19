@@ -1186,10 +1186,6 @@ const JohtoBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations[
     ItemList.ChartiBerry,
 ]);
 
-const NewBarkTechnologyEnthusiast = new NPC('Tech Enthusiast', [
-    'Technology is amazing! I have heard that picking up items in chests in Dungeons can make it easier to see! But the Dungeons seem to get harder with each chest you pick up...',
-]);
-
 const CherrygroveMrPokemon = new NPC('Mr. Pokémon', [
     'Welcome to Johto! This is where the first ever Pokémon egg was found long ago.',
     'Astounding breakthroughs have been made since then. We can now store Pokémon eggs for longer and queue them up for breeding.',
@@ -1432,7 +1428,7 @@ TownList['New Bark Town'] = new Town(
     [new BulletinBoard(GameConstants.BulletinBoards.Johto)],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion)],
-        npcs: [ProfElm, NewBarkTechnologyEnthusiast],
+        npcs: [ProfElm],
     }
 );
 TownList['Cherrygrove City'] = new Town(
@@ -1468,7 +1464,7 @@ TownList['Goldenrod City'] = new Town(
     [GoldenrodDepartmentStoreShop, JohtoBerryMaster, new MoveToDungeon(dungeonList['Radio Tower']), TemporaryBattleList['Aipom Alley'], TemporaryBattleList.Imposter, TemporaryBattleList['Possessed Mewtwo']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 34)],
-        npcs: [BigSpender, searchForClues, HowardClifford1, HowardClifford2, HowardClifford3],
+        npcs: [searchForClues, HowardClifford1, HowardClifford2, HowardClifford3],
     }
 );
 TownList['Ecruteak City'] = new Town(
@@ -1927,7 +1923,6 @@ TownList['Lilycove City'] = new Town(
     [DepartmentStoreShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 121)],
-        npcs: [BigSpender],
     }
 );
 TownList['Mossdeep City'] = new Town(
@@ -2409,7 +2404,7 @@ TownList['Veilstone City'] = new Town(
     [DepartmentStoreShop, new MoveToDungeon(dungeonList['Team Galactic HQ'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 215)],
-        npcs: [BigSpender],
+        npcs: [],
     }
 );
 TownList['Pastoria City'] = new Town(
@@ -3036,7 +3031,6 @@ TownList['Shopping Mall Nine'] = new Town(
     [DepartmentStoreShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.unova, 9)],
-        npcs: [BigSpender],
     }
 );
 TownList['Humilau City'] = new Town(
