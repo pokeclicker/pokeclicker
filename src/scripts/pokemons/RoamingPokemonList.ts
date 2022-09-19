@@ -5,13 +5,13 @@
 
 class RoamingPokemonList {
     public static roamerGroups = [
-        [[GameConstants.KantoSubRegions.Kanto], [GameConstants.KantoSubRegions.Sevii123 ,GameConstants.KantoSubRegions.Sevii4567]],
+        [[GameConstants.KantoSubRegions.Kanto], [GameConstants.KantoSubRegions.Sevii123, GameConstants.KantoSubRegions.Sevii4567]],
         [[GameConstants.JohtoSubRegions.Johto]],
         [[GameConstants.HoennSubRegions.Hoenn]],
         [[GameConstants.SinnohSubRegions.Sinnoh]],
         [[GameConstants.UnovaSubRegions.Unova]],
         [[GameConstants.KalosSubRegions.Kalos]],
-        [[GameConstants.AlolaSubRegions.MelemeleIsland, GameConstants.AlolaSubRegions.AkalaIsland, GameConstants.AlolaSubRegions.UlaulaAndPoniIslands]],
+        [[GameConstants.AlolaSubRegions.MelemeleIsland, GameConstants.AlolaSubRegions.AkalaIsland, GameConstants.AlolaSubRegions.UlaulaIsland, GameConstants.AlolaSubRegions.PoniIsland]],
         [[GameConstants.GalarSubRegions.SouthGalar], [GameConstants.GalarSubRegions.NorthGalar], [GameConstants.GalarSubRegions.IsleofArmor], [GameConstants.GalarSubRegions.CrownTundra]],
     ];
 
@@ -84,7 +84,6 @@ RoamingPokemonList.add(GameConstants.Region.kanto, 1, new RoamingPokemon('Ash\'s
 // Johto
 RoamingPokemonList.add(GameConstants.Region.johto, 0, new RoamingPokemon('Raikou', new TemporaryBattleRequirement('Silver 3')));
 RoamingPokemonList.add(GameConstants.Region.johto, 0, new RoamingPokemon('Entei', new TemporaryBattleRequirement('Silver 3')));
-RoamingPokemonList.add(GameConstants.Region.johto, 0, new RoamingPokemon('Suicune', new TemporaryBattleRequirement('Silver 3')));
 
 // Hoenn
 RoamingPokemonList.add(GameConstants.Region.hoenn, 0, new RoamingPokemon('Latios', new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)));

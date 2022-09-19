@@ -694,6 +694,36 @@
          })
      %>
 
+    <%- include('templates/mapOverlay',
+        { name: "Suicune"
+        , x: 8, y: 39
+        , width: 3, height: 4
+        , databind: "click: () => TemporaryBattleList['Suicune 1'].protectedOnclick()"
+        , visible:  "TemporaryBattleList['Suicune 1'] && TemporaryBattleList['Suicune 1'].isVisible()"
+        , image: "assets/images/map/suicune.png"
+        })
+    %>
+
+    <%- include('templates/mapOverlay',
+        { name: "Eusine"
+        , x: 8, y: 39
+        , width: 3, height: 4
+        , databind: "click: () => TemporaryBattleList.Eusine.protectedOnclick()"
+        , visible:  "TemporaryBattleList['Eusine'] && TemporaryBattleList['Eusine'].isVisible()"
+        , image: "assets/images/map/eusine.png"
+        })
+    %>
+
+    <%- include('templates/mapOverlay',
+        { name: "Suicune"
+        , x: 44, y: 9
+        , width: 3, height: 4
+        , databind: "click: () => TemporaryBattleList['Suicune 2'].protectedOnclick()"
+        , visible:  "TemporaryBattleList['Suicune 2'] && TemporaryBattleList['Suicune 2'].isVisible()"
+        , image: "assets/images/map/suicune.png"
+        })
+    %>
+
      <%- include('templates/mapOverlay',
          { name: "Rival Silver"
          , x: 54, y: 41
