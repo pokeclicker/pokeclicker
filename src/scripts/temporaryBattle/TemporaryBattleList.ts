@@ -1749,16 +1749,6 @@ TemporaryBattleList.Avery3 = new TemporaryBattle(
         imageName: 'Avery',
     }
 );
-TemporaryBattleList.Kubfu = new TemporaryBattle(
-    'Kubfu',
-    [new GymPokemon('Kubfu', 1886555626, 80)],
-    'Kub? Kubfu!',
-    [new QuestLineStepCompletedRequirement('The Crown of Galar', 0)],
-    undefined,
-    {
-        hideTrainer: true,
-    }
-);
 TemporaryBattleList['Zarude Tribe 1'] = new TemporaryBattle(
     'Zarude Tribe 1',
     [
