@@ -3950,6 +3950,13 @@ const RoadsideMotelAnabel5 = new NPC('Anabel', [
     image: 'assets/images/temporaryBattle/Anabel.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 16, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 18, GameConstants.AchievementOption.less)]),
 });
+const BattleTreeRed = new NPC('Red', [
+    '...',
+]);
+const BattleTreeBlue = new NPC('Blue', [
+    'Hello there champ! Fancy seeing you here.',
+    'We just planted this sapling here. Maybe it will grow into something great some day.',
+]);
 
 //Alola Towns
 
@@ -4101,6 +4108,15 @@ TownList['Pokémon League Alola'] = new Town(
         requirements:[
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mount Lanakila')),
         ],
+    }
+);
+TownList['A Tree Maybe'] = new Town(
+    'A Tree Maybe',
+    GameConstants.Region.alola,
+    [],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 30)],
+        npcs: [BattleTreeRed, BattleTreeBlue],
     }
 );
 
