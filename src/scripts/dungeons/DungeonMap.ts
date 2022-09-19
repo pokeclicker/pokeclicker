@@ -1,5 +1,5 @@
 class DungeonMap {
-    board: KnockoutObservable<DungeonTile[][]>;
+    board: KnockoutObservable<DungeonTile[][][]>;
     playerPosition: KnockoutObservable<Point>;
     playerMoved: KnockoutObservable<boolean>;
     totalFights: KnockoutObservable<number>;
