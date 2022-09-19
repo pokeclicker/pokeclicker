@@ -577,10 +577,7 @@ Routes.add(new RegionRoute(
         land: ['Pidgey', 'Pidgeotto', 'Vulpix', 'Growlithe', 'Hoothoot', 'Ledyba', 'Spinarak', 'Stantler'],
         headbutt: ['Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Pineco'],
     }),
-    [
-        new TemporaryBattleRequirement('Sudowoodo'),
-        new ObtainedPokemonRequirement(pokemonMap.Sudowoodo),
-    ]
+    [new TemporaryBattleRequirement('Sudowoodo')]
 ));
 Routes.add(new RegionRoute(
     'Johto Route 38', GameConstants.Region.johto, 38,
