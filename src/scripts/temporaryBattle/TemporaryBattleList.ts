@@ -12,10 +12,6 @@ TemporaryBattleList['Clefairy?'] = new TemporaryBattle(
     ],
     undefined,
     {
-    hideTrainer: true,
-    imageName: 'Bill',
-    }
-    {
         firstTimeRewardFunction: () => {
             BagHandler.gainItem({type: ItemType.item, id: 'Moon_stone'}, 1);
             Notifier.notify({
@@ -24,6 +20,10 @@ TemporaryBattleList['Clefairy?'] = new TemporaryBattle(
                 setting: NotificationConstants.NotificationSetting.Dungeons.rare_dungeon_item_found,
             });
         },
+    },
+    {
+    hideTrainer: true,
+    imageName: 'Bill',
     }
 );
 TemporaryBattleList['Fighting Dojo'] = new TemporaryBattle(
