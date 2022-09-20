@@ -1425,7 +1425,7 @@ class Farming implements Feature {
         this.farmHands.fromJSON(json.farmHands);
     }
 
-    public static genBounds = [8, 20, 35, 53, Infinity];
+    public static genBounds = [8, 20, 36, 54, Infinity];
     public static getGeneration(gen: number): BerryType[] {
         const genBounds = Farming.genBounds;
         const minBound = genBounds[gen - 1] || 0;
