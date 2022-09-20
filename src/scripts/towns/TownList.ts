@@ -714,7 +714,7 @@ TownList['Cerulean City'] = new Town(
 TownList['Sea Cottage'] = new Town(
     'Sea Cottage',
     GameConstants.Region.kanto,
-    [TemporaryBattleList['Clefairy?'], pokeLeagueShop()],
+    [TemporaryBattleList['Clefairy?']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 25)],
     }
