@@ -3,9 +3,7 @@ const TemporaryBattleList: { [battleName: string]: TemporaryBattle } = {};
 //Kanto Temporary Battles
 TemporaryBattleList['Bill Clefairy'] = new TemporaryBattle(
     'Bill Clefairy',
-    [
-        new GymPokemon('Clefairy', 21990, 20),
-    ],
+    [new GymPokemon('Clefairy', 21990, 20)],
     'Yeehah! Thanks! I owe you one! I screwed up an experiment and got combined with a Pokémon! Have this Moon Stone, it can be used to evolve the Pokémon I got combined with.',
     [new GymBadgeRequirement(BadgeEnums.Cascade)],
     undefined,
