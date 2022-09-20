@@ -43,6 +43,7 @@ GymList['Vermilion City'] = new Gym(
     [
         new RouteKillRequirement(10, GameConstants.Region.kanto, 6),
         new GymBadgeRequirement(BadgeEnums.Cascade),
+        new TemporaryBattleRequirement('Bill Clefairy'),
     ]
 );
 GymList['Celadon City'] = new Gym(
