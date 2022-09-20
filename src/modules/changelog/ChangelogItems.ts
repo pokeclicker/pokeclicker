@@ -18,6 +18,7 @@ const ChangelogItems = [
     new Changelog(changelogType.NEW, 'New setting added for quest modal'),
     new Changelog(changelogType.NEW, 'Hatchery size settings'),
     new Changelog(changelogType.NEW, 'Updated Alola maps'),
+    new Changelog(changelogType.NEW, 'Added Pinkan berry'),
     new Changelog(changelogType.CHANGE, 'Unova, Kalos and Alola Elite 4 can now be challenged in any order'),
     new Changelog(changelogType.CHANGE, 'Misc text changes'),
     new Changelog(changelogType.CHANGE, 'Misc UI changes'),
