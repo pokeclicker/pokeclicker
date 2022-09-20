@@ -12,7 +12,8 @@ TemporaryBattleList['Clefairy?'] = new TemporaryBattle(
     ],
     undefined,
     {
-    hideTrainer: true
+    hideTrainer: true,
+    imageName: 'Bill',
     },
     {
         firstTimeRewardFunction: () => {
