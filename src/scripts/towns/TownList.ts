@@ -711,6 +711,14 @@ TownList['Cerulean City'] = new Town(
         npcs: [CeruleanKantoBerryMaster, CeruleanSuperNerd, Mewtwo1, Mewtwo2, DetectiveRaichu, CeruleanEusine],
     }
 );
+TownList['Sea Cottage'] = new Town(
+    'Sea Cottage',
+    GameConstants.Region.kanto,
+    [LavenderTownShop],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 25)],
+    }
+);
 TownList['Vermilion City'] = new Town(
     'Vermilion City',
     GameConstants.Region.kanto,
