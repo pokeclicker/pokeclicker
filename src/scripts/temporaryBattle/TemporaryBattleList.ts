@@ -1,6 +1,30 @@
 const TemporaryBattleList: { [battleName: string]: TemporaryBattle } = {};
 
 //Kanto Temporary Battles
+TemporaryBattleList['Clefairy?'] = new TemporaryBattle(
+    'Clefairy?',
+    [
+        new GymPokemon('Clefairy', 21990, 20),
+    ],
+    'Yeehah! Thanks! I owe you one! I screwed up an experiment and got combined with a Pokémon! Have this Moon Stone, it can be used to evolve the Pokémon I got combined with.',
+    [
+     new RouteKillRequirement(10, GameConstants.Region.kanto, 25),
+    ],
+    undefined,
+    {
+    hideTrainer: true
+    }
+    {
+        firstTimeRewardFunction: () => {
+            BagHandler.gainItem({type: ItemType.item, id: 'Moon_stone'}, 1);
+            Notifier.notify({
+                message: 'You were awarded a Moon Stone for helping Bill',
+                type: NotificationConstants.NotificationOption.success,
+                setting: NotificationConstants.NotificationSetting.Dungeons.rare_dungeon_item_found,
+            });
+        },
+    }
+);
 TemporaryBattleList['Fighting Dojo'] = new TemporaryBattle(
     'Fighting Dojo',
     [
