@@ -10,6 +10,29 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.9.15
+    new ChangelogUpdate('v0.9.15', new Date(2022, 8, 20)),
+    new Changelog(changelogType.NEW, 'More Pokémon forms added'),
+    new Changelog(changelogType.NEW, 'More one off battles added'),
+    new Changelog(changelogType.NEW, 'New questlines'),
+    new Changelog(changelogType.NEW, 'New setting added for quest modal'),
+    new Changelog(changelogType.NEW, 'Hatchery size settings'),
+    new Changelog(changelogType.NEW, 'Updated Alola maps'),
+    new Changelog(changelogType.NEW, 'Added Pinkan berry'),
+    new Changelog(changelogType.CHANGE, 'Unova, Kalos and Alola Elite 4 can now be challenged in any order'),
+    new Changelog(changelogType.CHANGE, 'Misc text changes'),
+    new Changelog(changelogType.CHANGE, 'Misc UI changes'),
+    new Changelog(changelogType.CHANGE, 'Misc map changes'),
+    new Changelog(changelogType.CHANGE, 'Misc Pokémon stats updated'),
+    new Changelog(changelogType.CHANGE, 'Misc NPC changes'),
+    new Changelog(changelogType.CHANGE, 'Improved load times for Pokédex and Hatchery'),
+    new Changelog(changelogType.FIXED, 'Harvest rates for berries with a 0.5 harvest rate'),
+    new Changelog(changelogType.FIXED, 'Farm hands not remembering to focus Cheri berries'),
+    new Changelog(changelogType.FIXED, 'Farm hands not ignoring locked plots'),
+    new Changelog(changelogType.FIXED, 'Discord login should be more consistent'),
+    new Changelog(changelogType.FIXED, 'Fixed disappearing Pokémon bug for most players'),
+    new Changelog(changelogType.FIXED, 'Buying multiple Pokémon at the shop now applies the correct amount of EVs'),
+
     // v0.9.14
     new ChangelogUpdate('v0.9.14', new Date(2022, 8, 2)),
     new Changelog(changelogType.CHANGE, 'Pinkan Dodrio is now purchasable in place of Pinkan Exeggutor'),
