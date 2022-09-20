@@ -20,10 +20,11 @@ TemporaryBattleList['Clefairy?'] = new TemporaryBattle(
                 setting: NotificationConstants.NotificationSetting.Dungeons.rare_dungeon_item_found,
             });
         },
-    }
+    },
     {
     hideTrainer: true,
     imageName: 'Bill',
+    displayName: 'Clefairy',
     }
 );
 TemporaryBattleList['Fighting Dojo'] = new TemporaryBattle(
