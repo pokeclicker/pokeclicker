@@ -21,11 +21,6 @@ TemporaryBattleList['Clefairy?'] = new TemporaryBattle(
             });
         },
     },
-    {
-    hideTrainer: true,
-    imageName: 'Bill',
-    displayName: 'Clefairy',
-    }
 );
 TemporaryBattleList['Fighting Dojo'] = new TemporaryBattle(
     'Fighting Dojo',
