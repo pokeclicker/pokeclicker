@@ -8,10 +8,11 @@ TemporaryBattleList['Clefairy?'] = new TemporaryBattle(
     ],
     'Yeehah! Thanks! I owe you one! I screwed up an experiment and got combined with a Pokémon! Have this Moon Stone, it can be used to evolve the Pokémon I got combined with.',
     [
-     new RouteKillRequirement(10, GameConstants.Region.kanto, 25),
+     new GymBadgeRequirement(BadgeEnums.Cascade),
     ],
     undefined,
     {
+        hideTrainer: true,
         firstTimeRewardFunction: () => {
             BagHandler.gainItem({type: ItemType.item, id: 'Moon_stone'}, 1);
             Notifier.notify({
