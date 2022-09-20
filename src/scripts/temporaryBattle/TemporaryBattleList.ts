@@ -1,8 +1,8 @@
 const TemporaryBattleList: { [battleName: string]: TemporaryBattle } = {};
 
 //Kanto Temporary Battles
-TemporaryBattleList['Clefairy?'] = new TemporaryBattle(
-    'Clefairy?',
+TemporaryBattleList['Bill Clefairy'] = new TemporaryBattle(
+    'Bill Clefairy',
     [
         new GymPokemon('Clefairy', 21990, 20),
     ],
@@ -12,6 +12,7 @@ TemporaryBattleList['Clefairy?'] = new TemporaryBattle(
     ],
     undefined,
     {
+        displayName: 'Clefairy',
         hideTrainer: true,
         firstTimeRewardFunction: () => {
             BagHandler.gainItem({type: ItemType.item, id: 'Moon_stone'}, 1);
