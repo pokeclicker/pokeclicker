@@ -13,7 +13,7 @@ TemporaryBattleList['Clefairy?'] = new TemporaryBattle(
     undefined,
     {
     hideTrainer: true
-    }
+    },
     {
         firstTimeRewardFunction: () => {
             BagHandler.gainItem({type: ItemType.item, id: 'Moon_stone'}, 1);
