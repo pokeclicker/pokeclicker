@@ -235,7 +235,7 @@ class Farming implements Feature {
             [10, 0, 0, 0, 30], BerryColor.Purple,
             ['This glossy and colorful Berry has a mouthwateringly delicious appearance. However, it is awfully sour.'], undefined, ['Oricorio (Sensu)']);
         this.berryData[BerryType.Pinkan]    = new Berry(BerryType.Pinkan,   [1800, 3600, 7200, 14400, 28800],
-            1, 0.1, 420, 6.9,
+            3, 0.1, 2500, 15,
             [0, 0, 50, 0, 0], BerryColor.Pink,
             [
                 'This Berry endemic to Pinkan Island has an incredibly sweet taste.',
@@ -1425,7 +1425,7 @@ class Farming implements Feature {
         this.farmHands.fromJSON(json.farmHands);
     }
 
-    public static genBounds = [8, 20, 35, 53, Infinity];
+    public static genBounds = [8, 20, 36, 54, Infinity];
     public static getGeneration(gen: number): BerryType[] {
         const genBounds = Farming.genBounds;
         const minBound = genBounds[gen - 1] || 0;

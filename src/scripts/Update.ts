@@ -1174,6 +1174,18 @@ class Update implements Saveable {
             const queueList = saveData.breeding.queueList;
             Update.changePokemonNameToId(saveData, eggList);
             Update.changePokemonNameToId(saveData, queueList);
+
+            // Adding more Galar badges
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 109);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 110);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 111);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 112);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 113);
+        },
+
+        '0.9.16': ({ playerData, saveData }) => {
+            // Pinkan Berry
+            saveData.statistics.berriesHarvested = Update.moveIndex(saveData.statistics.berriesHarvested, 35);
         },
     };
 

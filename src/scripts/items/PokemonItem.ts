@@ -11,8 +11,13 @@ class PokemonItem extends CaughtIndicatingItem {
 
     gain(amt: number) {
         let shiny = false;
+        let numShiny = 0;
         for (let i = 0; i < amt; i++) {
-            shiny = shiny || PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SHOP);
+            const shinyBool = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SHOP);
+            if (shinyBool) {
+                numShiny++;
+            }
+            shiny = shiny || shinyBool;
         }
         const pokemonName = this.name as PokemonNameType;
 
@@ -32,7 +37,8 @@ class PokemonItem extends CaughtIndicatingItem {
         App.game.party.gainPokemonById(pokemonID, shiny, true);
 
         const partyPokemon = App.game.party.getPokemon(pokemonID);
-        partyPokemon.effortPoints += App.game.party.calculateEffortPoints(partyPokemon, shiny, GameConstants.SHOPMON_EP_YIELD);
+        partyPokemon.effortPoints += App.game.party.calculateEffortPoints(partyPokemon, false, GameConstants.SHOPMON_EP_YIELD * (amt - numShiny));
+        partyPokemon.effortPoints += App.game.party.calculateEffortPoints(partyPokemon, true, GameConstants.SHOPMON_EP_YIELD * numShiny);
     }
 
     getCaughtStatus(): CaughtStatus {
