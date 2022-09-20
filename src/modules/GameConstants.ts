@@ -679,6 +679,8 @@ export enum ShardType {
     'White Shard',
     'Pink Shard',
     'Cyan Shard',
+    'Rose Shard',
+    'Brown Shard',
 }
 
 export enum FossilPieceType {
