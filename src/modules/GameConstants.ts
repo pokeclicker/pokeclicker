@@ -1290,7 +1290,7 @@ export const RegionalStarters = [
 ];
 
 export const TemporaryBattles = [
-    'Clefairy?',
+    'Bill Clefairy',
     'Fighting Dojo',
     'Snorlax route 12',
     'Snorlax route 16',
