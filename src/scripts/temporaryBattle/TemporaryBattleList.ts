@@ -7,10 +7,8 @@ TemporaryBattleList['Bill Clefairy'] = new TemporaryBattle(
         new GymPokemon('Clefairy', 21990, 20),
     ],
     'Yeehah! Thanks! I owe you one! I screwed up an experiment and got combined with a Pokémon! Have this Moon Stone, it can be used to evolve the Pokémon I got combined with.',
-    [
-     new GymBadgeRequirement(BadgeEnums.Cascade),
-    ],
-    [new TemporaryBattleRequirement('Bill Clefairy')],
+    [new GymBadgeRequirement(BadgeEnums.Cascade)],
+    undefined,
     {
         displayName: 'Clefairy',
         hideTrainer: true,
