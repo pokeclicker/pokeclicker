@@ -5,7 +5,7 @@ class PokemonItem extends CaughtIndicatingItem {
     type: PokemonNameType;
 
     constructor(pokemon: PokemonNameType, basePrice: number, currency: GameConstants.Currency = GameConstants.Currency.questPoint) {
-        super(pokemon, basePrice, currency, undefined, undefined, undefined, 'pokemonItem');
+        super(pokemon, basePrice, currency, undefined, undefined, `Add ${pokemon}to your party.`, 'pokemonItem');
         this.type = pokemon;
     }
 
@@ -81,6 +81,7 @@ ItemList['Furfrou (Dandy)']      = new PokemonItem('Furfrou (Dandy)', 250000);
 ItemList['Furfrou (Kabuki)']     = new PokemonItem('Furfrou (Kabuki)', 75000, Currency.battlePoint);
 ItemList['Furfrou (Pharaoh)']    = new PokemonItem('Furfrou (Pharaoh)', 300000000, Currency.dungeonToken);
 ItemList['Furfrou (Star)']    = new PokemonItem('Furfrou (Star)', 10000);
+ItemList['Furfrou (La Reine)']    = new PokemonItem('Furfrou (La Reine)', undefined);
 ItemList['Type: Null']           = new PokemonItem('Type: Null', 114000);
 ItemList.Poipole              = new PokemonItem('Poipole', 90000);
 ItemList.Dracozolt              = new PokemonItem('Dracozolt', 100000);
