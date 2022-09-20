@@ -10,7 +10,7 @@ TemporaryBattleList['Bill Clefairy'] = new TemporaryBattle(
     [
      new GymBadgeRequirement(BadgeEnums.Cascade),
     ],
-    undefined,
+    [new TemporaryBattleRequirement('Bill Clefairy')],
     {
         displayName: 'Clefairy',
         hideTrainer: true,
