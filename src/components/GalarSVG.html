@@ -717,6 +717,22 @@
             })
         %>
 
+        <%- include('templates/mapPOI',
+           { name: "Farm"
+           , x: 52, y: 54
+           , width: 3, height: 3
+           , databind: "click:function(){FarmController.openFarmModal()}, attr: { class: App.game.farming.canAccess() ? 'completed' : 'locked' }"
+           })
+        %>
+
+        <%- include('templates/mapPOI',
+           { name: "Pokémon Day Care"
+           , x: 40, y: 4
+           , width: 4, height: 4
+           , databind: "click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? 'completed' : 'locked' }"
+           })
+        %>
+
         <%- include('templates/mapOverlay',
             { name: "Professor Magnolia's Blimp"
             , x: 49, y: 54
@@ -1128,6 +1144,14 @@
             , width: 3, height: 2
             , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Spikemuth') }"
             })
+        %>
+
+        <%- include('templates/mapPOI',
+           { name: "Underground Entrance"
+           , x: 37, y: 51
+           , width: 3, height: 4
+           , databind: "click:function(){App.game.underground.openUndergroundModal()}, attr: { class: App.game.underground.canAccess() ? 'completed' : 'locked' }"
+           })
         %>
 
         <%- include('templates/mapOverlay',
