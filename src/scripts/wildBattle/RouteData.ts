@@ -563,7 +563,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Johto Route 36', GameConstants.Region.johto, 36,
     new RoutePokemon({
-        land: ['Pidgey', 'Nidoran(M)', 'Nidoran(F)', 'Vulpix', 'Growlithe', 'Hoothoot', 'Stantler', 'Sudowoodo'],
+        land: ['Pidgey', 'Nidoran(M)', 'Nidoran(F)', 'Vulpix', 'Growlithe', 'Hoothoot', 'Stantler'],
         headbutt: ['Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Pineco'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Plain)]
@@ -574,7 +574,7 @@ Routes.add(new RegionRoute(
         land: ['Pidgey', 'Pidgeotto', 'Vulpix', 'Growlithe', 'Hoothoot', 'Ledyba', 'Spinarak', 'Stantler'],
         headbutt: ['Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Pineco'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.johto, 36)]
+    [new TemporaryBattleRequirement('Sudowoodo')]
 ));
 Routes.add(new RegionRoute(
     'Johto Route 38', GameConstants.Region.johto, 38,
