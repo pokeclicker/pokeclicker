@@ -1280,6 +1280,7 @@ export const TemporaryBattles = [
     'Biker Goon 2',
     'Biker Goon 3',
     'Cue Ball Paxton',
+    'Sudowoodo',
     'Suicune 1',
     'Eusine',
     'Suicune 2',
