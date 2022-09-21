@@ -651,7 +651,7 @@ class Farming implements Feature {
             ], {
                 hint: 'I\'ve heard that there\'s a special Pink Berry that only appears when surrounded by a bunch of different types of Pink Berries!',
                 unlockReq: function(): boolean {
-                    return App.game.quests.getQuestLine('Team Rocket\'s Pinkan Themepark').state() > QuestLineState.inactive;
+                    return App.game.quests.getQuestLine('Team Rocket\'s Pinkan Theme Park').state() > QuestLineState.inactive;
                 },
             }));
 
