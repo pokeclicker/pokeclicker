@@ -664,25 +664,6 @@ export enum StoneType {
     'Galarica_wreath',
 }
 
-export enum ShardType {
-    'None' = -1,
-    'Red Shard',
-    'Yellow Shard',
-    'Green Shard',
-    'Blue Shard',
-    'Grey Shard',
-    'Purple Shard',
-    'Ochre Shard',
-    'Black Shard',
-    'Crimson Shard',
-    'Lime Shard',
-    'White Shard',
-    'Pink Shard',
-    'Cyan Shard',
-    'Rose Shard',
-    'Brown Shard',
-}
-
 export enum FossilPieceType {
     'None' = -1,
     'Fossilized Bird',

@@ -283,24 +283,6 @@ namespace GameConstants {
         'Galarica_cuff',
         'Galarica_wreath',
     }
-    declare enum ShardType {
-        'None',
-        'Red Shard',
-        'Yellow Shard',
-        'Green Shard',
-        'Blue Shard',
-        'Grey Shard',
-        'Purple Shard',
-        'Ochre Shard',
-        'Black Shard',
-        'Crimson Shard',
-        'Lime Shard',
-        'White Shard',
-        'Pink Shard',
-        'Cyan Shard',
-        'Rose Shard',
-        'Brown Shard',
-    }
     declare enum FossilPieceType {
         'None',
         'Fossilized Bird',
