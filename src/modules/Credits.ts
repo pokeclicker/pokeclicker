@@ -115,6 +115,7 @@ export const SpriteCredits: Credit[] = [
             'Golfer',
             'Surfer',
             'Team Flare Grunts',
+            'Wonder Chest',
         ],
         // Notes: DaleArwin aka IanWalder, a GitHub contributor to this project, gives his permission
     },

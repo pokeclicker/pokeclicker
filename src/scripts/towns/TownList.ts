@@ -1100,6 +1100,7 @@ const VioletCityShop = new Shop([
     ItemList.Lucky_egg,
     ItemList.MediumRestore,
     ItemList.Mystery_egg,
+    ItemList.Wonder_Chest,
     ItemList.Togepi,
 ]);
 const AzaleaTownShop = new Shop([
@@ -2195,6 +2196,7 @@ const FightAreaShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
     ItemList.Ultraball,
+    ItemList.Macho_Brace,
 ]);
 const SurvivalAreaShop = new Shop([
     ItemList.Pokeball,
