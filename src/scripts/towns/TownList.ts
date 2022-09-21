@@ -3446,7 +3446,7 @@ const MysteryFan = new NPC('Mystery Fan', [
 ]);
 
 const ExamineAegislash = new NPC('Examine Your Doublade', [
-    '<i>Your Doublade evolves and shifts to into an aggressive stance, revealing its Blade Forme.</i>',
+    '<i>Your Doublade evolves and shifts into an aggressive stance, revealing its Blade Forme.</i>',
 ], {
     image: 'assets/images/pokemon/681.1.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Princess Diancie', 4), new QuestLineStepCompletedRequirement('Princess Diancie', 5, GameConstants.AchievementOption.less)]),
