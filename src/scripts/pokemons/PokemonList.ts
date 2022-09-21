@@ -1,5 +1,6 @@
 /// <reference path="../party/evolutions/EvolutionMethods.ts" />
 /// <reference path="../party/evolutions/WeatherRestrictedLevelEvolution.ts" />
+/// <reference path="../party/evolutions/HeldItemLevelEvolution.ts" />
 /// <reference path="../GameConstants.d.ts" />
 /// <reference path="../../declarations/weather/WeatherType.d.ts" />
 /// <reference path="../../declarations/enums/PokemonType.d.ts" />
@@ -790,7 +791,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 50,
         'eggCycles': 15,
-        'evolutions': [new QuestlineLevelEvolution('Team Rocket\'s Pinkan Themepark', 'Pinkan Pidgey', 'Pinkan Pidgeotto', 18)],
+        'evolutions': [new QuestlineLevelEvolution('Team Rocket\'s Pinkan Theme Park', 'Pinkan Pidgey', 'Pinkan Pidgeotto', 18)],
         'base': {
             'hitpoints': 40,
             'attack': 45,
@@ -3077,7 +3078,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 132,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Galarian Farfetch\'d', 'Sirfetch\'d', 20)],
+        'evolutions': [new HeldItemLevelEvolution('Galarian Farfetch\'d', 'Sirfetch\'d', 20, 'Leek')],
         'base': {
             'hitpoints': 52,
             'attack': 95,
