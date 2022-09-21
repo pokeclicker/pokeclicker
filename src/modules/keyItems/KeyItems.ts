@@ -37,7 +37,6 @@ export default class KeyItems implements Feature {
                         ],
                     });
                 }, 'Town Map'),
-            // TODO obtain somewhere at the start
             new KeyItem(KeyItemType.Dungeon_ticket, 'This ticket grants access to all dungeons in the Kanto region and beyond.<br/><strong>Tip:</strong> You gain Dungeon Tokens by capturing Pokémon.', undefined, undefined, undefined, 'Dungeon Ticket'),
             new KeyItem(KeyItemType.Super_rod, 'The best fishing rod for catching wild water Pokémon.',
                 () => App.game.statistics.routeKills[Region.kanto][12]() >= ROUTE_KILLS_NEEDED, undefined, undefined, 'Super Rod'),
