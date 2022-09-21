@@ -586,7 +586,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.hoenn]: new Set(['Petalburg City', 'Jagged Pass']),
         [Region.sinnoh]: new Set(['Veilstone City', 'Canalave City', 'Snowpoint Temple']),
         [Region.unova]: new Set(['Castelia City', 'Mistralton City', 'Opelucid City', 'Liberty Garden', 'Dragonspiral Tower', 'Dreamyard']),
-        [Region.kalos]: new Set(['Lost Hotel']),
+        [Region.kalos]: new Set(['Parfum Palace', 'Lost Hotel']),
         [Region.alola]: new Set(['Trainers\' School', 'Thrifty Megamart', 'Po Town', 'Ruins of Conflict', 'Ruins of Life', 'Ruins of Abundance', 'Ruins of Hope']),
         [Region.galar]: new Set(['Rose Tower', 'Hammerlocke', 'Stow-on-Side', 'Tower of Darkness', 'Tower of waters', 'Professor Magnolia\'s House', 'Wyndon', 'Wyndon Stadium', 'Master Dojo', 11]),
     },
@@ -714,11 +714,20 @@ export enum FluteItemType {
 }
 
 export enum PokemonItemType {
+    'Pinkan Arbok',
+    'Pinkan Oddish',
+    'Pinkan Poliwhirl',
+    'Pinkan Geodude',
+    'Pinkan Dodrio',
+    'Lickitung',
+    'Pinkan Weezing',
+    'Mr. Mime',
+    'Pinkan Scyther',
+    'Jynx',
+    'Pinkan Electabuzz',
+    'Magikarp',
     'Eevee',
     'Porygon',
-    'Jynx',
-    'Mr. Mime',
-    'Lickitung',
     'Togepi',
     'Beldum',
     'Skorupi',
@@ -734,6 +743,7 @@ export enum PokemonItemType {
     'Arctozolt',
     'Dracovish',
     'Arctovish',
+    'Zarude (Dada)',
 }
 
 export enum UltraBeastType {
@@ -785,7 +795,9 @@ export enum BulletinBoards {
     None = -2,
     All = -1,
     Kanto,
+    Johto,
     Hoenn,
+    Sevii4567,
     Kalos,
     Alola,
     Galar,
@@ -956,10 +968,15 @@ export const GalarGyms = [
     'Circhester2',
     'Spikemuth',
     'Hammerlocke',
-    'Trainer Marnie',
-    'Trainer Hop',
-    'Gym Leader Bede',
+    'Elite Trainer Marnie',
+    'Elite Gym Leader Bede',
+    'Elite Trainer Hop',
     'Champion Leon',
+    'Elite Gym Leader Klara',
+    'Elite Gym Leader Avery',
+    'Elite Dojo Matron Honey',
+    'Elite Dojo Master Mustard',
+    'Elite Trainer Peony',
 ];
 
 export const OrangeGyms = [
@@ -1280,6 +1297,13 @@ export const TemporaryBattles = [
     'Biker Goon 2',
     'Biker Goon 3',
     'Cue Ball Paxton',
+    'Suicune 1',
+    'Eusine',
+    'Suicune 2',
+    'Suicune 3',
+    'Suicune 4',
+    'Suicune 5',
+    'Suicune 6',
     'Sevii Rocket Grunt 1',
     'Sevii Rocket Grunt 2',
     'Sevii Rocket Grunt 3',
@@ -1288,6 +1312,8 @@ export const TemporaryBattles = [
     'Sevii Rocket Ariana',
     'Sevii Rocket Archer',
     'Scientist Gideon',
+    'Pinkan Jessie & James',
+    'Pinkan Officer Jenny',
     'Spiky-eared Pichu',
     'Rocket Boss Giovanni',
     'Galactic Boss Cyrus',
@@ -1317,6 +1343,9 @@ export const TemporaryBattles = [
     'Lab Ambush',
     'Imposter',
     'Possessed Mewtwo',
+    'Riot',
+    'Merilyn',
+    'Millis and Argus Steel',
     'AZ',
     'Ash Ketchum Kanto',
     'Ash Ketchum Johto',
@@ -1378,6 +1407,12 @@ export const TemporaryBattles = [
     'Avery2',
     'Klara3',
     'Avery3',
+    'Zarude Tribe 1',
+    'Zarude Tribe 2',
+    'Zarude Tribe 3',
+    'Ash Ketchum Galar',
+    'Zarude (Dada)',
+    'Flowering Celebi',
     'Peony',
     'Calyrex',
     'Glastrier',
@@ -1474,6 +1509,14 @@ export enum ShardTraderLocations {
     'Master Dojo',
 }
 
+export enum BerryTraderLocations {
+    'None' = -1,
+    'Goldenrod City' = 0,
+    'Mauville City',
+    'Pinkan Pokémon Reserve',
+    'Hearthome City',
+}
+
 export function getTemporaryBattlesIndex(temporaryBattle: string): number {
     return TemporaryBattles.findIndex((t) => t === temporaryBattle);
 }
@@ -1525,9 +1568,8 @@ export enum KalosSubRegions {
 export enum AlolaSubRegions {
     MelemeleIsland = 0,
     AkalaIsland,
-    UlaulaAndPoniIslands,
-    // UlaulaIsland,
-    // PoniIsland,
+    UlaulaIsland,
+    PoniIsland,
 }
 
 export enum GalarSubRegions {

@@ -594,7 +594,12 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 72,
         'eggCycles': 15,
-        'evolutions': [new LevelEvolution('Metapod', 'Butterfree', 10)],
+        'evolutions': [
+            new LevelEvolution('Metapod', 'Butterfree', 10),
+            new LevelEvolution('Metapod', 'Valencian Butterfree', 10000),
+            new LevelEvolution('Metapod', 'Pink Butterfree', 10000),
+            new LevelEvolution('Metapod', 'Ash\'s Butterfree', 10000),
+        ],
         'base': {
             'hitpoints': 50,
             'attack': 20,
@@ -628,7 +633,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Bug, PokemonType.Flying],
         'levelType': LevelType.mediumfast,
         'exp': 178,
-        'eggCycles': 35,
+        'eggCycles': 15,
         'base': {
             'hitpoints': 60,
             'attack': 45,
@@ -645,7 +650,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Bug, PokemonType.Flying],
         'levelType': LevelType.mediumfast,
         'exp': 178,
-        'eggCycles': 35,
+        'eggCycles': 15,
         'base': {
             'hitpoints': 60,
             'attack': 45,
@@ -786,6 +791,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 50,
         'eggCycles': 15,
+        'evolutions': [new QuestlineLevelEvolution('Team Rocket\'s Pinkan Theme Park', 'Pinkan Pidgey', 'Pinkan Pidgeotto', 18)],
         'base': {
             'hitpoints': 40,
             'attack': 45,
@@ -804,6 +810,23 @@ const pokemonList = createPokemonArray(
         'exp': 122,
         'eggCycles': 15,
         'evolutions': [new LevelEvolution('Pidgeotto', 'Pidgeot', 36)],
+        'base': {
+            'hitpoints': 63,
+            'attack': 60,
+            'specialAttack': 50,
+            'defense': 55,
+            'specialDefense': 50,
+            'speed': 71,
+        },
+    },
+    {
+        'id': 17.01,
+        'name': 'Pinkan Pidgeotto',
+        'catchRate': 120,
+        'type': [PokemonType.Normal, PokemonType.Flying],
+        'levelType': LevelType.mediumslow,
+        'exp': 122,
+        'eggCycles': 15,
         'base': {
             'hitpoints': 63,
             'attack': 60,
@@ -838,7 +861,10 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 51,
         'eggCycles': 15,
-        'evolutions': [new LevelEvolution('Rattata', 'Raticate', 20)],
+        'evolutions': [
+            new LevelEvolution('Rattata', 'Raticate', 20),
+            new LevelEvolution('Rattata', 'Valencian Raticate', 20000),
+        ],
         'base': {
             'hitpoints': 30,
             'attack': 56,
@@ -944,7 +970,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Normal],
         'levelType': LevelType.mediumfast,
         'exp': 145,
-        'eggCycles': 23,
+        'eggCycles': 15,
         'base': {
             'hitpoints': 55,
             'attack': 81,
@@ -1014,7 +1040,10 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 58,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Ekans', 'Arbok', 22)],
+        'evolutions': [
+            new LevelEvolution('Ekans', 'Arbok', 22),
+            new LevelEvolution('Ekans', 'Pinkan Arbok', 22000),
+        ],
         'base': {
             'hitpoints': 35,
             'attack': 60,
@@ -1027,6 +1056,23 @@ const pokemonList = createPokemonArray(
     {
         'id': 24,
         'name': 'Arbok',
+        'catchRate': 90,
+        'type': [PokemonType.Poison],
+        'levelType': LevelType.mediumfast,
+        'exp': 157,
+        'eggCycles': 20,
+        'base': {
+            'hitpoints': 60,
+            'attack': 95,
+            'specialAttack': 65,
+            'defense': 69,
+            'specialDefense': 79,
+            'speed': 80,
+        },
+    },
+    {
+        'id': 24.01,
+        'name': 'Pinkan Arbok',
         'catchRate': 90,
         'type': [PokemonType.Poison],
         'levelType': LevelType.mediumfast,
@@ -1560,7 +1606,10 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 128,
         'eggCycles': 20,
-        'evolutions': [new StoneEvolution('Nidorino', 'Nidoking', GameConstants.StoneType.Moon_stone)],
+        'evolutions': [
+            new StoneEvolution('Nidorino', 'Nidoking', GameConstants.StoneType.Moon_stone),
+            new LevelEvolution('Nidorino', 'Pinkan Nidoking', 33000),
+        ],
         'base': {
             'hitpoints': 61,
             'attack': 72,
@@ -1594,7 +1643,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Poison, PokemonType.Ground],
         'levelType': LevelType.mediumslow,
         'exp': 227,
-        'eggCycles': 45,
+        'eggCycles': 20,
         'base': {
             'hitpoints': 81,
             'attack': 102,
@@ -1803,6 +1852,23 @@ const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 43.01,
+        'name': 'Pinkan Oddish',
+        'catchRate': 255,
+        'type': [PokemonType.Grass, PokemonType.Poison],
+        'levelType': LevelType.mediumslow,
+        'exp': 64,
+        'eggCycles': 20,
+        'base': {
+            'hitpoints': 45,
+            'attack': 50,
+            'specialAttack': 75,
+            'defense': 55,
+            'specialDefense': 65,
+            'speed': 30,
+        },
+    },
+    {
         'id': 44,
         'name': 'Gloom',
         'catchRate': 120,
@@ -1812,6 +1878,8 @@ const pokemonList = createPokemonArray(
         'eggCycles': 20,
         'evolutions': [
             new StoneEvolution('Gloom', 'Vileplume', GameConstants.StoneType.Leaf_stone),
+            new LevelEvolution('Gloom', 'Valencian Vileplume', 44000),
+            new LevelEvolution('Gloom', 'Pinkan Vileplume', 44000),
             new StoneEvolution('Gloom', 'Bellossom', GameConstants.StoneType.Sun_stone),
         ],
         'base': {
@@ -1847,7 +1915,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Grass, PokemonType.Poison],
         'levelType': LevelType.mediumslow,
         'exp': 221,
-        'eggCycles': 45,
+        'eggCycles': 20,
         'base': {
             'hitpoints': 75,
             'attack': 80,
@@ -1864,7 +1932,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Grass, PokemonType.Poison],
         'levelType': LevelType.mediumslow,
         'exp': 221,
-        'eggCycles': 45,
+        'eggCycles': 20,
         'base': {
             'hitpoints': 75,
             'attack': 80,
@@ -2341,7 +2409,10 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 60,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Poliwag', 'Poliwhirl', 25)],
+        'evolutions': [
+            new LevelEvolution('Poliwag', 'Poliwhirl', 25),
+            new LevelEvolution('Poliwag', 'Pinkan Poliwhirl', 25000),
+        ],
         'base': {
             'hitpoints': 40,
             'attack': 50,
@@ -2369,6 +2440,23 @@ const pokemonList = createPokemonArray(
             'speed': 90,
         },
         'heldItem': {type: ItemType.item, id: 'Kings_rock'},
+    },
+    {
+        'id': 61.01,
+        'name': 'Pinkan Poliwhirl',
+        'catchRate': 120,
+        'type': [PokemonType.Water],
+        'levelType': LevelType.mediumslow,
+        'exp': 135,
+        'eggCycles': 20,
+        'base': {
+            'hitpoints': 65,
+            'attack': 65,
+            'specialAttack': 50,
+            'defense': 65,
+            'specialDefense': 50,
+            'speed': 90,
+        },
     },
     {
         'id': 62,
@@ -2520,7 +2608,10 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 60,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Bellsprout', 'Weepinbell', 21)],
+        'evolutions': [
+            new LevelEvolution('Bellsprout', 'Weepinbell', 21),
+            new LevelEvolution('Bellsprout', 'Valencian Weepinbell', 21000),
+        ],
         'base': {
             'hitpoints': 50,
             'attack': 75,
@@ -2572,7 +2663,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Grass, PokemonType.Poison],
         'levelType': LevelType.mediumslow,
         'exp': 137,
-        'eggCycles': 30,
+        'eggCycles': 20,
         'base': {
             'hitpoints': 65,
             'attack': 90,
@@ -2671,6 +2762,24 @@ const pokemonList = createPokemonArray(
             'specialDefense': 30,
             'speed': 20,
         },
+    },
+    {
+        'id': 74.02,
+        'name': 'Pinkan Geodude',
+        'catchRate': 255,
+        'type': [PokemonType.Rock, PokemonType.Ground],
+        'levelType': LevelType.mediumslow,
+        'exp': 60,
+        'eggCycles': 15,
+        'base': {
+            'hitpoints': 40,
+            'attack': 80,
+            'specialAttack': 30,
+            'defense': 100,
+            'specialDefense': 30,
+            'speed': 20,
+        },
+        'heldItem': {type: ItemType.underground, id: 'Everstone'},
     },
     {
         'id': 75,
@@ -2987,7 +3096,10 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 62,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Doduo', 'Dodrio', 31)],
+        'evolutions': [
+            new LevelEvolution('Doduo', 'Dodrio', 31),
+            new LevelEvolution('Doduo', 'Pinkan Dodrio', 31000),
+        ],
         'base': {
             'hitpoints': 35,
             'attack': 85,
@@ -3021,7 +3133,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Normal, PokemonType.Flying],
         'levelType': LevelType.mediumfast,
         'exp': 165,
-        'eggCycles': 30,
+        'eggCycles': 20,
         'base': {
             'hitpoints': 60,
             'attack': 110,
@@ -3416,6 +3528,7 @@ const pokemonList = createPokemonArray(
         'evolutions': [
             new RegionStoneEvolution(allButAlola, 'Exeggcute', 'Exeggutor', GameConstants.StoneType.Leaf_stone),
             new RegionStoneEvolution(alolaOnly, 'Exeggcute', 'Alolan Exeggutor', GameConstants.StoneType.Leaf_stone),
+            new LevelEvolution('Exeggcute', 'Pinkan Exeggutor', 31000),
         ],
         'base': {
             'hitpoints': 60,
@@ -3468,7 +3581,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Grass, PokemonType.Psychic],
         'levelType': LevelType.slow,
         'exp': 186,
-        'eggCycles': 30,
+        'eggCycles': 20,
         'base': {
             'hitpoints': 95,
             'attack': 95,
@@ -3617,6 +3730,7 @@ const pokemonList = createPokemonArray(
         'evolutions': [
             new RegionLevelEvolution(allButGalar, 'Koffing', 'Weezing', 35),
             new RegionLevelEvolution(galarOnly, 'Koffing', 'Galarian Weezing', 35),
+            new LevelEvolution('Koffing', 'Pinkan Weezing', 35000),
         ],
         'base': {
             'hitpoints': 40,
@@ -3630,6 +3744,23 @@ const pokemonList = createPokemonArray(
     {
         'id': 110,
         'name': 'Weezing',
+        'catchRate': 60,
+        'type': [PokemonType.Poison],
+        'levelType': LevelType.mediumfast,
+        'exp': 172,
+        'eggCycles': 20,
+        'base': {
+            'hitpoints': 65,
+            'attack': 90,
+            'specialAttack': 85,
+            'defense': 120,
+            'specialDefense': 70,
+            'speed': 60,
+        },
+    },
+    {
+        'id': 110.01,
+        'name': 'Pinkan Weezing',
         'catchRate': 60,
         'type': [PokemonType.Poison],
         'levelType': LevelType.mediumfast,
@@ -3950,6 +4081,23 @@ const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 123.01,
+        'name': 'Pinkan Scyther',
+        'catchRate': 45,
+        'type': [PokemonType.Bug, PokemonType.Flying],
+        'levelType': LevelType.mediumfast,
+        'exp': 100,
+        'eggCycles': 25,
+        'base': {
+            'hitpoints': 70,
+            'attack': 110,
+            'specialAttack': 55,
+            'defense': 80,
+            'specialDefense': 80,
+            'speed': 105,
+        },
+    },
+    {
         'id': 124,
         'name': 'Jynx',
         'catchRate': 45,
@@ -3984,6 +4132,23 @@ const pokemonList = createPokemonArray(
             'speed': 105,
         },
         'heldItem': {type: ItemType.item, id: 'Electirizer'},
+    },
+    {
+        'id': 125.01,
+        'name': 'Pinkan Electabuzz',
+        'catchRate': 45,
+        'type': [PokemonType.Electric],
+        'levelType': LevelType.mediumfast,
+        'exp': 172,
+        'eggCycles': 25,
+        'base': {
+            'hitpoints': 65,
+            'attack': 83,
+            'specialAttack': 95,
+            'defense': 57,
+            'specialDefense': 85,
+            'speed': 105,
+        },
     },
     {
         'id': 126,
@@ -6960,6 +7125,24 @@ const pokemonList = createPokemonArray(
     {
         'id': 251.1,
         'name': 'Grinch Celebi',
+        'catchRate': 45,
+        'type': [PokemonType.Psychic, PokemonType.Grass],
+        'levelType': LevelType.mediumslow,
+        'exp': 270,
+        'eggCycles': 120,
+        'base': {
+            'hitpoints': 100,
+            'attack': 100,
+            'specialAttack': 100,
+            'defense': 100,
+            'specialDefense': 100,
+            'speed': 100,
+        },
+        'heldItem': {type: ItemType.berry, id: BerryType.Lum},
+    },
+    {
+        'id': 251.2,
+        'name': 'Flowering Celebi',
         'catchRate': 45,
         'type': [PokemonType.Psychic, PokemonType.Grass],
         'levelType': LevelType.mediumslow,
@@ -16383,7 +16566,10 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 157,
         'catchRate': 90,
-        'evolutions': [new StoneEvolution('Doublade', 'Aegislash (Shield)', GameConstants.StoneType.Dusk_stone)],
+        'evolutions': [
+            new StoneEvolution('Doublade', 'Aegislash (Shield)', GameConstants.StoneType.Dusk_stone),
+            new LevelEvolution('Doublade', 'Aegislash (Blade)', 4777),
+        ],
         'base': {
             'hitpoints': 59,
             'attack': 110,
@@ -20118,10 +20304,6 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 166,
         'catchRate': 45,
-        'evolutions': [
-            new EnvironmentRestrictedLevelEvolution('Water', 'Cramorant', 'Cramorant (Gulping)', 50),
-            new EnvironmentRestrictedLevelEvolution('PowerPlant', 'Cramorant', 'Cramorant (Gorging)', 50),
-        ],
     },
     {
         'id': 845.1,
@@ -21899,7 +22081,6 @@ const pokemonList = createPokemonArray(
             'speed': 50,
         },
         'eggCycles': 25,
-        'evolutions': [new EnvironmentRestrictedLevelEvolution('Fire', 'Eiscue (Ice Face)', 'Eiscue (No Ice Face)', 1)],
         'levelType': LevelType.slow,
         'exp': 165,
         'catchRate': 60,
@@ -23393,23 +23574,23 @@ const pokemonList = createPokemonArray(
     //         'speed': 92,
     //     },
     // },
-    // {
-    //     'id': -145,
-    //     'name': 'Mega Lucario',
-    //     'type': [PokemonType.Fighting, PokemonType.Steel],
-    //     'eggCycles': 120,
-    //     'levelType': LevelType.mediumslow,
-    //     'exp': 347,
-    //     'catchRate': 2,
-    //     'base': {
-    //         'hitpoints': 70,
-    //         'attack': 145,
-    //         'specialAttack': 140,
-    //         'defense': 88,
-    //         'specialDefense': 70,
-    //         'speed': 112,
-    //     },
-    // },
+    {
+        'id': -145,
+        'name': 'Mega Lucario',
+        'type': [PokemonType.Fighting, PokemonType.Steel],
+        'eggCycles': 120,
+        'levelType': LevelType.mediumslow,
+        'exp': 347,
+        'catchRate': 2,
+        'base': {
+            'hitpoints': 70,
+            'attack': 145,
+            'specialAttack': 140,
+            'defense': 88,
+            'specialDefense': 70,
+            'speed': 112,
+        },
+    },
     // {
     //     'id': -146,
     //     'name': 'Mega Abomasnow',

@@ -5,13 +5,13 @@
 
 class RoamingPokemonList {
     public static roamerGroups = [
-        [[GameConstants.KantoSubRegions.Kanto], [GameConstants.KantoSubRegions.Sevii123 ,GameConstants.KantoSubRegions.Sevii4567]],
+        [[GameConstants.KantoSubRegions.Kanto], [GameConstants.KantoSubRegions.Sevii123, GameConstants.KantoSubRegions.Sevii4567]],
         [[GameConstants.JohtoSubRegions.Johto]],
         [[GameConstants.HoennSubRegions.Hoenn]],
         [[GameConstants.SinnohSubRegions.Sinnoh]],
         [[GameConstants.UnovaSubRegions.Unova]],
         [[GameConstants.KalosSubRegions.Kalos]],
-        [[GameConstants.AlolaSubRegions.MelemeleIsland, GameConstants.AlolaSubRegions.AkalaIsland, GameConstants.AlolaSubRegions.UlaulaAndPoniIslands]],
+        [[GameConstants.AlolaSubRegions.MelemeleIsland, GameConstants.AlolaSubRegions.AkalaIsland, GameConstants.AlolaSubRegions.UlaulaIsland, GameConstants.AlolaSubRegions.PoniIsland]],
         [[GameConstants.GalarSubRegions.SouthGalar], [GameConstants.GalarSubRegions.NorthGalar], [GameConstants.GalarSubRegions.IsleofArmor], [GameConstants.GalarSubRegions.CrownTundra]],
     ];
 
@@ -82,9 +82,8 @@ RoamingPokemonList.add(GameConstants.Region.kanto, 1, new RoamingPokemon('Pink B
 RoamingPokemonList.add(GameConstants.Region.kanto, 1, new RoamingPokemon('Ash\'s Butterfree', new GymBadgeRequirement(BadgeEnums.Elite_OrangeChampion)));
 
 // Johto
-RoamingPokemonList.add(GameConstants.Region.johto, 0, new RoamingPokemon('Raikou', new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Burned Tower'))));
-RoamingPokemonList.add(GameConstants.Region.johto, 0, new RoamingPokemon('Entei', new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Burned Tower'))));
-RoamingPokemonList.add(GameConstants.Region.johto, 0, new RoamingPokemon('Suicune', new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Burned Tower'))));
+RoamingPokemonList.add(GameConstants.Region.johto, 0, new RoamingPokemon('Raikou', new QuestLineStepCompletedRequirement('The Legendary Beasts', 2)));
+RoamingPokemonList.add(GameConstants.Region.johto, 0, new RoamingPokemon('Entei', new QuestLineStepCompletedRequirement('The Legendary Beasts', 2)));
 
 // Hoenn
 RoamingPokemonList.add(GameConstants.Region.hoenn, 0, new RoamingPokemon('Latios', new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)));
@@ -117,7 +116,7 @@ RoamingPokemonList.add(GameConstants.Region.alola, 0, new RoamingPokemon('Zeraor
 RoamingPokemonList.add(GameConstants.Region.galar, 0, new RoamingPokemon('Galarian Zapdos', new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 3)));
 
 //Galar - Isle of Armor
-RoamingPokemonList.add(GameConstants.Region.galar, 2, new RoamingPokemon('Zarude', new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)));
+RoamingPokemonList.add(GameConstants.Region.galar, 2, new RoamingPokemon('Zarude', new QuestLineStepCompletedRequirement('Secrets of the Jungle', 1)));
 RoamingPokemonList.add(GameConstants.Region.galar, 2, new RoamingPokemon('Galarian Moltres', new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 3)));
 
 //Galar - Crown Tundra

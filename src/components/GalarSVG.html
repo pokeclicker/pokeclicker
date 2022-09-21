@@ -900,8 +900,8 @@
         <!--Winter Hill Station-->
         <%- include('templates/mapRoute',
             { route: 31, region: 7
-            , width: 10, height: 2
-            , x: 46, y: 39, name: "WHS"
+            , width: 7, height: 2
+            , x: 49, y: 39, name: "WHS"
             })
         %>
 
@@ -1052,17 +1052,8 @@
         <!--Glimwood Tangle-->
         <%- include('templates/mapDungeon',
             { name: "Glimwood Tangle"
-            , x: 25, y: 38
-            , width: 6, height: 6
-            })
-        %>
-
-        <!--Glimwood Tangle extension-->
-        <%- include('templates/mapDungeon',
-            { name: "Glimwood Tangle"
-            , x: 27, y: 37
-            , width: 4, height: 1
-            , isExtension: true
+            , x: 25, y: 37
+            , width: 6, height: 7
             })
         %>
 
@@ -1087,16 +1078,16 @@
         <!--Rose Tower-->
         <%- include('templates/mapDungeon',
             { name: "Rose Tower"
-            , x: 48, y: 13
-            , width: 3, height: 4
+            , x: 48, y: 11
+            , width: 4, height: 3
             })
         %>
 
         <!--Rose Tower extension-->
         <%- include('templates/mapDungeon',
             { name: "Rose Tower"
-            , x: 48, y: 2
-            , width: 3, height: 11
+            , x: 49, y: 14
+            , width: 2, height: 0.5
             , isExtension: true
             })
         %>
@@ -1104,8 +1095,8 @@
         <!--Rose Tower extension-->
         <%- include('templates/mapDungeon',
             { name: "Rose Tower"
-            , x: 45, y: 2.5
-            , width: 3, height: 14
+            , x: 49, y: 9
+            , width: 2, height: 2
             , isExtension: true
             })
         %>
@@ -1113,8 +1104,8 @@
         <!--Rose Tower extension-->
         <%- include('templates/mapDungeon',
             { name: "Rose Tower"
-            , x: 51, y: 2.5
-            , width: 3, height: 14
+            , x: 48.5, y: 6
+            , width: 3, height: 3
             , isExtension: true
             })
         %>
@@ -1209,8 +1200,8 @@
         <!--Fields of Honour extension-->
         <%- include('templates/mapRoute',
             { route: 33, region: 7
-            , width: 11, height: 2
-            , x: 52, y: 43, name: "FoH"
+            , width: 9, height: 2
+            , x: 54, y: 43, name: "FoH"
             , noText: true
             })
         %>
@@ -1218,8 +1209,8 @@
         <!--Fields of Honour extension-->
         <%- include('templates/mapRoute',
             { route: 33, region: 7
-            , width: 5, height: 1
-            , x: 52, y: 42, name: "FoH"
+            , width: 3, height: 1
+            , x: 54, y: 42, name: "FoH"
             , noText: true
             })
         %>
@@ -2105,17 +2096,17 @@
             })
         %>
 
-        <!--Master Dojo Battlefield-->
+        <!--Master Dojo Battle Court-->
         <%- include('templates/mapTown',
-            { name: "Master Dojo Battlefield"
+            { name: "Master Dojo Battle Court"
             , x: 59, y: 36
             , width: 3, height: 2.67
             })
         %>
 
-        <!--Master Dojo Battlefield extension-->
+        <!--Master Dojo Battle Court extension-->
         <%- include('templates/mapTown',
-            { name: "Master Dojo Battlefield"
+            { name: "Master Dojo Battle Court"
             , x: 62, y: 36
             , width: 1, height: 3
             , isExtension: true
@@ -2148,6 +2139,15 @@
             { name: "Courageous Cavern"
             , x: 46, y: 40
             , width: 6, height: 1
+            , isExtension: true
+            })
+        %>
+
+        <!--Courageous Cavern extension-->
+        <%- include('templates/mapDungeon',
+            { name: "Courageous Cavern"
+            , x: 52, y: 42
+            , width: 2, height: 2
             , isExtension: true
             })
         %>
@@ -2277,6 +2277,16 @@
                , databind: "click: () => TemporaryBattleList['Avery3'].protectedOnclick()"
                , visible:  "TemporaryBattleList['Avery3'] && TemporaryBattleList['Avery3'].isVisible()"
                , image: "assets/images/map/avery.png"
+               })
+            %>
+
+            <%- include('templates/mapOverlay',
+               { name: "Ash Ketchum"
+               , x: 56, y: 43
+               , width: 4, height: 4
+               , databind: "click: () => TemporaryBattleList['Ash Ketchum Galar'].protectedOnclick()"
+               , visible:  "TemporaryBattleList['Ash Ketchum Galar'] && TemporaryBattleList['Ash Ketchum Galar'].isVisible()"
+               , image: "assets/images/map/ashketchumoverworld.png"
                })
             %>
     </g>
