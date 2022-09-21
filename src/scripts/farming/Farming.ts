@@ -235,7 +235,7 @@ class Farming implements Feature {
             [10, 0, 0, 0, 30], BerryColor.Purple,
             ['This glossy and colorful Berry has a mouthwateringly delicious appearance. However, it is awfully sour.'], undefined, ['Oricorio (Sensu)']);
         this.berryData[BerryType.Pinkan]    = new Berry(BerryType.Pinkan,   [1800, 3600, 7200, 14400, 28800],
-            1, 0.1, 420, 6.9,
+            3, 0.1, 2500, 15,
             [0, 0, 50, 0, 0], BerryColor.Pink,
             [
                 'This Berry endemic to Pinkan Island has an incredibly sweet taste.',
@@ -651,7 +651,7 @@ class Farming implements Feature {
             ], {
                 hint: 'I\'ve heard that there\'s a special Pink Berry that only appears when surrounded by a bunch of different types of Pink Berries!',
                 unlockReq: function(): boolean {
-                    return App.game.quests.getQuestLine('Team Rocket\'s Pinkan Themepark').state() > QuestLineState.inactive;
+                    return App.game.quests.getQuestLine('Team Rocket\'s Pinkan Theme Park').state() > QuestLineState.inactive;
                 },
             }));
 
