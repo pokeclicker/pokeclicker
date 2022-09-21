@@ -1,0 +1,65 @@
+<div class="modal noselect fade" id="heldItemModal" tabindex="-1" role="dialog" aria-labelledby="heldItemModal">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content">
+            <!-- ko if: modalUtils.observableState['heldItemModal'] === 'show' -->
+            <div class="modal-header bg-dark text-light" style='justify-content: space-around;'>
+                <h5 class="modal-title text-light">Select a Pokémon</h5>&nbsp;
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body p-0">
+                <img data-bind="attr: { src: HeldItem.heldItemSelected().image }" width="40%"/>
+                <br/>
+                <div class="sticky-top bg-dark text-light">
+                  <div class="btn-group btn-block m-0" role="group" aria-label="Basic example">
+                    <button class="btn btn-block btn-secondary btn-static" data-bind="text: HeldItem.heldItemSelected().displayName + ': ' + player.amountOfItem(HeldItem.heldItemSelected().name)"></button>
+                  </div>
+                  <div class="input-group" data-bind="with: Settings.getSetting('heldItemSort')">
+                      <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])"
+                          data-bind="foreach: $data.options, attr: {name}, selectedOptions: [$data.observableValue()]">
+                          <option data-bind="text: $data.text, value: $data.value"></option>
+                      </select>
+                      <div class="input-group-append bg-primary text-light">
+                          <label for="heldItemSortDirection" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;" data-bind="text: Settings.getSetting('heldItemSortDirection').observableValue() ? '⥄' : '⥂'">⥂</label>
+                          <input id="heldItemSortDirection" style="vertical-align: middle" class="hidden" type='checkbox'
+                              data-bind="checked: Settings.getSetting('heldItemSortDirection').observableValue()"
+                              onchange="Settings.setSettingByName('heldItemSortDirection', this.checked)"/>
+                      </div>
+                  </div>
+                </div>
+                <table class="table table-striped table-hover table-bordered table-sm m-0">
+                  <thead>
+                    <tr class="text-light">
+                      <th class="text-left bg-dark align-middle">Pokemon</th>
+                      <th class="text-center bg-dark align-middle">Current item</th>
+                    </tr>
+                  </thead>
+                  <tbody id="pokemonsWithHeldItems" data-bind="foreach: PartyController.getPokemonsWithHeldItemSortedList()">
+                    <tr class="clickable" data-bind="click: () => $data.giveHeldItem(HeldItem.heldItemSelected())">
+                      <td class="text-left"><knockout data-bind="text: $data.name"></knockout><sup data-bind="visible: $data.shiny">✨</sup></td>
+                      <td class="text-center tight" data-bind="
+                        text: $data.heldItem() == undefined ? '' : $data.heldItem().displayName,
+                        tooltip: $data.heldItem() != undefined ? { title: $data.heldItem().description, placement: 'bottom', trigger: 'hover'} : undefined
+                      "></td>
+                    </tr>
+                  </tbody>
+                  <tbody data-bind="foreach: new Array(6 - PartyController.getPokemonsWithHeldItemSortedList().length)">
+                    <tr><td colspan="2">Held item slot left</td></tr>
+                  </tbody>
+                  <thead>
+                      <tr class="text-light">
+                          <th colspan="2" class="text-left bg-dark align-middle">Pokemons without held items</th>
+                      </tr>
+                  </thead>
+                  <tbody data-bind="foreach: PartyController.getHeldItemSortedList()">
+                    <tr class="clickable" data-bind="click: () => $data.giveHeldItem(HeldItem.heldItemSelected()), visible: !$data.heldItem() && HeldItem.heldItemSelected().canUse($data)">
+                      <td class="text-left" colspan="2"><knockout data-bind="text: $data.name"></knockout><sup data-bind="visible: $data.shiny">✨</sup></td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+            <!-- /ko -->
+        </div>
+    </div>
+</div>
