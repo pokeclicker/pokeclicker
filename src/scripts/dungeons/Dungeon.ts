@@ -1848,11 +1848,11 @@ dungeonList['Union Cave'] = new Dungeon('Union Cave',
         legendary: [
             {loot: 'SmallRestore'},
             {loot: 'Revive'},
+            {loot: 'Soft_Sand', weight: 3},
         ],
         mythic: [
             {loot: 'Ultraball'},
             {loot: 'LargeRestore'},
-            {loot: 'Soft_Sand', weight: 3},
         ],
     },
     63600,
