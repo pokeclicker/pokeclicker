@@ -672,7 +672,7 @@ class Update implements Saveable {
 
             // Start Galactic questline if player has Coal Badge already
             if (saveData.badgeCase[40]) {
-                Update.startQuestLine(saveData, 'A new world');
+                Update.startQuestLine(saveData, 'A New World');
             }
 
             // Clear Valley Windworks Clears
@@ -1006,7 +1006,7 @@ class Update implements Saveable {
 
             // Start Galactic questline if player has Coal Badge already
             if (saveData.badgeCase[40]) {
-                Update.startQuestLine(saveData, 'A new world');
+                Update.startQuestLine(saveData, 'A New World');
             }
 
             // Update mine inventory
@@ -1177,6 +1177,35 @@ class Update implements Saveable {
             const queueList = saveData.breeding.queueList;
             Update.changePokemonNameToId(saveData, eggList);
             Update.changePokemonNameToId(saveData, queueList);
+
+            // Adding more Galar badges
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 109);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 110);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 111);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 112);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 113);
+        },
+
+        '0.9.16': ({ playerData, saveData }) => {
+            // Pinkan Berry
+            saveData.statistics.berriesHarvested = Update.moveIndex(saveData.statistics.berriesHarvested, 35);
+
+            // Rename Pinkan Rocket questline and Sinnoh questline
+            saveData.quests.questLines.forEach(v => {
+                if (v.name === 'Team Rocket\'s Pinkan Themepark') {
+                    v.name = 'Team Rocket\'s Pinkan Theme Park';
+                }
+            });
+            saveData.quests.questLines.forEach(v => {
+                if (v.name === 'A new world') {
+                    v.name = 'A New World';
+                }
+            });
+        },
+
+        '0.9.17': ({ playerData, saveData }) => {
+            // Add Sudowoodo Temporary Battle
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 7);
         },
     };
 
