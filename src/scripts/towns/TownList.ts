@@ -1509,7 +1509,6 @@ TownList['Goldenrod City'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 34)],
         npcs: [BigSpender, Kuni, searchForClues, HowardClifford1, HowardClifford2, HowardClifford3],
-        npcs: [searchForClues, HowardClifford1, HowardClifford2, HowardClifford3],
     }
 );
 TownList['Ecruteak City'] = new Town(
