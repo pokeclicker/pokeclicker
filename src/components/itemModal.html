@@ -76,7 +76,10 @@
                     <div id="itemBag" class="tab-pane p-3">
                         <div class="row justify-content-sm-center">
                             <div class="row col-10">
-                                <div class="btn btn-primary col-2" data-bind="template: { name: 'otherItemTemplate', data: 'Protein'}, click: () => $('#pokemonSelectorModal').modal('show')"></div>
+                                <div class="btn btn-primary col-2 item-bag-item" data-bind="template: { name: 'otherItemTemplate', data: 'Protein'}, click: () => $('#pokemonSelectorModal').modal('show')"></div>
+                            <!-- ko foreach: HeldItem.getHeldItems() -->
+                                <div class="btn btn-primary col-2 item-bag-item" data-bind="template: { name: 'otherItemTemplate', data: $data.name}, click: () => { HeldItem.heldItemSelected($data); $('#heldItemModal').modal('show'); }, visible: $data.isUnlocked()"></div>
+                            <!-- /ko -->
                             </div>
                         </div>
                     </div>
