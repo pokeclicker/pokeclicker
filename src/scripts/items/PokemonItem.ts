@@ -5,7 +5,7 @@ class PokemonItem extends CaughtIndicatingItem {
     type: PokemonNameType;
 
     constructor(pokemon: PokemonNameType, basePrice: number, currency: GameConstants.Currency = GameConstants.Currency.questPoint) {
-        super(pokemon, basePrice, currency, undefined, undefined, `Add ${pokemon}to your party.`, 'pokemonItem');
+        super(pokemon, basePrice, currency, undefined, undefined, `Add ${pokemon} to your party.`, 'pokemonItem');
         this.type = pokemon;
     }
 
