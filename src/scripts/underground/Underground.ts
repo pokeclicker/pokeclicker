@@ -256,7 +256,7 @@ class Underground implements Feature {
                 nMineItems += mineItem.amount();
             } else if (mineItem.valueType == UndergroundItemValueType.Fossil) {
                 nFossils += mineItem.amount();
-            } else {
+            } else if (mineItem.valueType == UndergroundItemValueType.Gem) {
                 nPlates += mineItem.amount();
             }
         });
