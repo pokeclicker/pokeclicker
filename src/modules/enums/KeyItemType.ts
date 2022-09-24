@@ -3,7 +3,6 @@ enum KeyItemType {
     'Coin_case',
     'Pokeball_bag',
     'Town_map',
-    'Factory_key',
     'Dungeon_ticket',
     'Super_rod',
     'Holo_caster',

@@ -115,6 +115,7 @@ export const SpriteCredits: Credit[] = [
             'Golfer',
             'Surfer',
             'Team Flare Grunts',
+            'Wonder Chest',
         ],
         // Notes: DaleArwin aka IanWalder, a GitHub contributor to this project, gives his permission
     },
@@ -630,7 +631,7 @@ fetch(`https://api.github.com/repos/pokeclicker/pokeclicker/contributors?per_pag
 export const CodeCredits: Credit[] = [
     {
         resources: [
-            1347,
+            1353,
         ],
         name: 'RedSparr0w',
         link: 'https://github.com/RedSparr0w',
@@ -670,7 +671,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            107,
+            111,
         ],
         name: 'Jaaslet',
         link: 'https://github.com/Jaaslet',
@@ -702,7 +703,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            46,
+            48,
         ],
         name: 'CorgiOnNeptune',
         link: 'https://github.com/CorgiOnNeptune',
@@ -726,7 +727,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            29,
+            30,
         ],
         name: 'Qwertypop04',
         link: 'https://github.com/Qwertypop04',
@@ -752,21 +753,21 @@ export const CodeCredits: Credit[] = [
         resources: [
             23,
         ],
-        name: 'LuqDragon',
-        link: 'https://github.com/LuqDragon',
-        image: 'https://avatars.githubusercontent.com/u/27972070?v=4',
-    },
-    {
-        resources: [
-            22,
-        ],
         name: 'DataCrusade',
         link: 'https://github.com/DataCrusade',
         image: 'https://avatars.githubusercontent.com/u/36621129?v=4',
     },
     {
         resources: [
-            22,
+            23,
+        ],
+        name: 'LuqDragon',
+        link: 'https://github.com/LuqDragon',
+        image: 'https://avatars.githubusercontent.com/u/27972070?v=4',
+    },
+    {
+        resources: [
+            23,
         ],
         name: 'amative1',
         link: 'https://github.com/amative1',

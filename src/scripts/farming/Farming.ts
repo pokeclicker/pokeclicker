@@ -180,8 +180,8 @@ class Farming implements Feature {
             ['This Berry can be eaten as is or boiled to obtain an extract that adds a dash of flavor to food.'], undefined, ['Flabébé (Blue)']);
         this.berryData[BerryType.Qualot]    = new Berry(BerryType.Qualot,   [230, 1000, 2500, 4800, 9600],
             22, 0.2, 550, 10,
-            [10, 0, 10, 0, 10], BerryColor.Yellow,
-            ['Even in places of constant rain and high humidity, this Berry\'s plant grows healthy and strong.'], undefined, ['Flabébé (Yellow)', 'Oricorio (Pom-Pom)']);
+            [10, 0, 10, 0, 10], BerryColor.Pink,
+            ['Even in places of constant rain and high humidity, this Berry\'s plant grows healthy and strong.'], undefined, ['Oricorio (Pa\'u)']);
         this.berryData[BerryType.Hondew]    = new Berry(BerryType.Hondew,   [1000, 2000, 5000, 10800, 21600],
             23, 0.2, 2000, 10,
             [10, 10, 0, 10, 0], BerryColor.Green,
@@ -651,7 +651,7 @@ class Farming implements Feature {
             ], {
                 hint: 'I\'ve heard that there\'s a special Pink Berry that only appears when surrounded by a bunch of different types of Pink Berries!',
                 unlockReq: function(): boolean {
-                    return App.game.quests.getQuestLine('Team Rocket\'s Pinkan Themepark').state() > QuestLineState.inactive;
+                    return App.game.quests.getQuestLine('Team Rocket\'s Pinkan Theme Park').state() > QuestLineState.inactive;
                 },
             }));
 
