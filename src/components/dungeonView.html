@@ -3,7 +3,7 @@
         data-bind="click: function() { DungeonRunner.handleClick() }">
         <h2 class="pageItemTitle" style="display: block;">
             <knockout data-bind="if: DungeonBattle.enemyPokemon() && DungeonBattle.enemyPokemon().health()">
-                <knockout data-bind="text: DungeonBattle.enemyPokemon().name">Pokémon name</knockout>
+                <knockout data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': DungeonBattle.enemyPokemon() } }">Pokémon name</knockout>
                 <!-- ko if: !DungeonBattle.trainer() -->
                 <knockout data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(DungeonBattle.enemyPokemon().id)}}"></knockout>
                 <!-- /ko -->

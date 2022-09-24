@@ -8,7 +8,7 @@
             </knockout>
 
             <knockout>
-                <knockout data-bind="text: BattleFrontierBattle.enemyPokemon().name">Pokémon name</knockout>
+                <knockout data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': BattleFrontierBattle.enemyPokemon() } }">Pokémon name</knockout>
             </knockout>
 
             <knockout class="right" data-bind="html: BattleFrontierRunner.pokemonLeftImages">

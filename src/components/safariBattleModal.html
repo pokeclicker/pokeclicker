@@ -11,8 +11,8 @@
                           </knockout>
 
                           <knockout>
-                              <knockout data-bind="text: SafariBattle.enemy.name">Pokémon name</knockout>
-                              <knockout data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(SafariBattle.enemy.id)}}"></knockout>
+                                <knockout data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': SafariBattle.enemy } }">Pokémon name</knockout>
+                                <knockout data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(SafariBattle.enemy.id)}}"></knockout>
                           </knockout>
 
                           <knockout class="right">

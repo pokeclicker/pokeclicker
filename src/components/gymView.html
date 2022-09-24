@@ -8,7 +8,7 @@
             </knockout>
 
             <knockout>
-                <knockout data-bind="text: GymBattle.enemyPokemon().name">Pokémon name</knockout>
+                <knockout data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': GymBattle.enemyPokemon() } }">Pokémon name</knockout>
             </knockout>
 
             <knockout class="right">
