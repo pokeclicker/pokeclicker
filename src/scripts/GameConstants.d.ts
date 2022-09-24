@@ -596,4 +596,8 @@ namespace GameConstants {
         IsleofArmor,
         CrownTundra,
     }
+    declare enum ExtraAchievementCategories {
+        global,
+        sevii,
+    }
 }

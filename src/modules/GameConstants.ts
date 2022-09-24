@@ -1562,3 +1562,8 @@ export enum GalarSubRegions {
     IsleofArmor,
     CrownTundra,
 }
+
+export enum ExtraAchievementCategories {
+    global = Region.final,
+    sevii,
+}

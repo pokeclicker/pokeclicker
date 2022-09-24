@@ -4,7 +4,6 @@
 class AchievementHandler {
     public static achievementList: Achievement[] = [];
     public static navigateIndex: KnockoutObservable<number> = ko.observable(0);
-    public static maxBonus: KnockoutObservableArray<number> = ko.observableArray([]);
     public static achievementListFiltered: KnockoutObservableArray<Achievement> = ko.observableArray([]);
     public static numberOfTabs: KnockoutObservable<number> = ko.observable(0);
 
@@ -37,7 +36,7 @@ class AchievementHandler {
     public static filter = {
         status: ko.observable(-2).extend({ numeric: 0 }),
         type:   ko.observable(-2).extend({ numeric: 0 }),
-        region: ko.observable(-2).extend({ numeric: 0 }),
+        category: ko.observable('all'),
     }
 
     public static getAchievementListWithIndex() {
@@ -62,11 +61,11 @@ class AchievementHandler {
 
     public static filterAchievementList(retainPage = false) {
         this.achievementListFiltered(this.achievementList.filter((a) => (
-            a.region <= player.highestRegion() &&
+            a.category.isUnlocked() &&
             a.achievable() &&
             (this.filter.status() == -2 || a.unlocked === !!this.filter.status()) &&
             (this.filter.type()   == -2 || a.property.achievementType === this.filter.type()) &&
-            (this.filter.region() == -2 || a.region === this.filter.region())
+            (this.filter.category() == 'all' || a.category.name === this.filter.category())
         )));
         this.calculateNumberOfTabs();
         if (!retainPage) {
@@ -119,8 +118,16 @@ class AchievementHandler {
         }
     }
 
-    public static addAchievement(name: string, description: string, property: AchievementRequirement, bonus: number, region = GameConstants.Region.none, achievableFunction: () => boolean | null = null) {
-        AchievementHandler.achievementList.push(new Achievement(name, description, property, bonus, region, achievableFunction));
+    public static addAchievement(name: string, description: string, property: AchievementRequirement, bonus: number, category: GameConstants.Region | GameConstants.ExtraAchievementCategories = GameConstants.ExtraAchievementCategories.global, achievableFunction: () => boolean | null = null) {
+        let categoryObj : AchievementCategory;
+        // ExtraAchievementCategory always starts at finals index
+        if (category >= GameConstants.Region.final) {
+            categoryObj = AchievementHandler.getAchievementCategoryByExtraCategory(category as GameConstants.ExtraAchievementCategories);
+        } else {
+            categoryObj = AchievementHandler.getAchievementCategoryByRegion(category as GameConstants.Region);
+        }
+        categoryObj.totalWeight += bonus;
+        AchievementHandler.achievementList.push(new Achievement(name, description, property, bonus, categoryObj, achievableFunction));
     }
 
     public static calculateBonus(): void {
@@ -128,30 +135,21 @@ class AchievementHandler {
             if (!achievement.achievable()) {
                 return 0;
             }
-            const max = AchievementHandler.maxBonus()[achievement.region];
-            achievement.bonus = (achievement.bonusWeight / max) * 100;
+            achievement.bonus = (achievement.bonusWeight / achievement.category.totalWeight) * achievement.category.achievementBonus;
         });
     }
 
-    public static calculateMaxBonus() {
-        GameHelper.enumNumbers(GameConstants.Region).forEach(region => {
-            AchievementHandler.maxBonus()[region] = AchievementHandler.achievementList.filter(a => a.region == region && a.achievable()).reduce((sum, a) => sum + a.bonusWeight, 0);
+    public static calculateMaxBonus(): void {
+        AchievementHandler.getAchievementCategories().forEach(category => {
+            category.totalWeight = AchievementHandler.achievementList.filter(a => a.category == category && a.achievable()).reduce((sum, a) => sum + a.bonusWeight, 0);
         });
         AchievementHandler.calculateBonus();
     }
 
-    public static bonusUnlocked(): number {
-        let sum = 0;
-        GameHelper.enumNumbers(GameConstants.Region).forEach(region => {
-            sum += AchievementHandler.achievementList.filter(a => a.region == region && a.isCompleted()).reduce((sum, a) => sum + a.bonusWeight, 0);
-        });
-        return sum;
-    }
-
     public static achievementBonus(): number {
         let sum = 0;
-        GameHelper.enumNumbers(GameConstants.Region).forEach(region => {
-            const total = AchievementHandler.achievementList.filter(a => a.region == region && a.isCompleted()).reduce((sum, a) => sum + a.bonusWeight, 0) / AchievementHandler.maxBonus()[region];
+        AchievementHandler.getAchievementCategories().forEach(category => {
+            const total = AchievementHandler.achievementList.filter(a => a.category == category && a.isCompleted()).reduce((sum, a) => sum + a.bonusWeight, 0) / category.totalWeight * category.achievementBonus;
             if (!isNaN(total)) {
                 sum += total;
             }
@@ -160,11 +158,30 @@ class AchievementHandler {
     }
 
     public static achievementBonusPercent(): string {
-        return `${(100 * AchievementHandler.achievementBonus()).toFixed(2)}%`;
+        return `${(AchievementHandler.achievementBonus()).toFixed(2)}%`;
     }
 
     public static findByName(name: string): Achievement {
         return AchievementHandler.achievementList.find((achievement) => achievement.name === name && achievement.achievable());
+    }
+
+    private static _achievementCategories : AchievementCategory[]
+    public static getAchievementCategories() : AchievementCategory[] {
+        if (AchievementHandler._achievementCategories) {
+            return AchievementHandler._achievementCategories;
+        }
+        const categories = GameHelper.enumStrings(GameConstants.Region).filter(r => r != 'none' && r != 'final').map(r => new AchievementCategory(r, 100, () => player.highestRegion() >= GameConstants.Region[r]));
+        categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.global], 200, () => true));
+        categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.sevii], 50, () => true));
+
+        AchievementHandler._achievementCategories = categories;
+        return categories;
+    }
+    public static getAchievementCategoryByRegion(region: GameConstants.Region): AchievementCategory {
+        return AchievementHandler.getAchievementCategories().find(c => c.name == GameConstants.Region[region]);
+    }
+    public static getAchievementCategoryByExtraCategory(category: GameConstants.ExtraAchievementCategories): AchievementCategory {
+        return AchievementHandler.getAchievementCategories().find(c => c.name == GameConstants.ExtraAchievementCategories[category]);
     }
 
     public static initialize(multiplier: Multiplier, challenges: Challenges) {
@@ -210,11 +227,11 @@ class AchievementHandler {
         AchievementHandler.addAchievement('DigDug ain\'t got nothin on me', 'Dig deeper 100 times', new UndergroundLayersMinedRequirement(100), 0.1);
         AchievementHandler.addAchievement('Both my thumbs are green! This can\'t be healthy', 'Dig deeper 1,000 times', new UndergroundLayersMinedRequirement(1000), 0.3);
 
-        AchievementHandler.addAchievement('Is that how I use this?', 'Level 1 Oak Item to the maximum level', new MaxLevelOakItemRequirement(1), 0.05, GameConstants.Region.none, () => !challenges.list.disableOakItems.active());
-        AchievementHandler.addAchievement('I\'ve got my hands full with all of these', 'Level 3 Oak Items to the maximum level', new MaxLevelOakItemRequirement(3), 0.1, GameConstants.Region.none, () => !challenges.list.disableOakItems.active());
-        AchievementHandler.addAchievement('Professor Oak is the best!', 'Level 8 Oak Items to the maximum level', new MaxLevelOakItemRequirement(8), 0.14, GameConstants.Region.none, () => !challenges.list.disableOakItems.active());
-        AchievementHandler.addAchievement('Prepared for anything!', 'Level 11 Oak Items to the maximum level', new MaxLevelOakItemRequirement(11), 0.18, GameConstants.Region.none, () => !challenges.list.disableOakItems.active() && challenges.list.disableClickAttack.active());
-        AchievementHandler.addAchievement('Prepared for anything!', 'Level 12 Oak Items to the maximum level', new MaxLevelOakItemRequirement(12), 0.18, GameConstants.Region.none, () => !challenges.list.disableOakItems.active() && !challenges.list.disableClickAttack.active());
+        AchievementHandler.addAchievement('Is that how I use this?', 'Level 1 Oak Item to the maximum level', new MaxLevelOakItemRequirement(1), 0.05, GameConstants.ExtraAchievementCategories.global, () => !challenges.list.disableOakItems.active());
+        AchievementHandler.addAchievement('I\'ve got my hands full with all of these', 'Level 3 Oak Items to the maximum level', new MaxLevelOakItemRequirement(3), 0.1, GameConstants.ExtraAchievementCategories.global, () => !challenges.list.disableOakItems.active());
+        AchievementHandler.addAchievement('Professor Oak is the best!', 'Level 8 Oak Items to the maximum level', new MaxLevelOakItemRequirement(8), 0.14, GameConstants.ExtraAchievementCategories.global, () => !challenges.list.disableOakItems.active());
+        AchievementHandler.addAchievement('Prepared for anything!', 'Level 11 Oak Items to the maximum level', new MaxLevelOakItemRequirement(11), 0.18, GameConstants.ExtraAchievementCategories.global, () => !challenges.list.disableOakItems.active() && challenges.list.disableClickAttack.active());
+        AchievementHandler.addAchievement('Prepared for anything!', 'Level 12 Oak Items to the maximum level', new MaxLevelOakItemRequirement(12), 0.18, GameConstants.ExtraAchievementCategories.global, () => !challenges.list.disableOakItems.active() && !challenges.list.disableClickAttack.active());
 
         AchievementHandler.addAchievement('First Team', 'Capture 100 Pokémon', new CapturedRequirement(100), 0.05);
         AchievementHandler.addAchievement('Filling the PC', 'Capture 1,000 Pokémon', new CapturedRequirement(1000), 0.10);
@@ -274,10 +291,10 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Legendaries hate that guy', 'Obtain 10 Master Balls', new PokeballRequirement(10, GameConstants.Pokeball.Masterball), 0.30);
         AchievementHandler.addAchievement('No Pokémon in the world can run away from me now!', 'Obtain 100 Master Balls', new PokeballRequirement(100, GameConstants.Pokeball.Masterball), 0.40);
 
-        AchievementHandler.addAchievement('A Few Clicks In', 'Click 10 times', new ClickRequirement(10, 1), 0.02, GameConstants.Region.none, () => !challenges.list.disableClickAttack.active());
-        AchievementHandler.addAchievement('Clicking Pro', 'Click 100 times', new ClickRequirement(100, 1), 0.05, GameConstants.Region.none, () => !challenges.list.disableClickAttack.active());
-        AchievementHandler.addAchievement('Ultra Clicker', 'Click 1,000 times', new ClickRequirement(1000, 1), 0.10, GameConstants.Region.none, () => !challenges.list.disableClickAttack.active());
-        AchievementHandler.addAchievement('Need a new mouse yet?', 'Click 10,000 times', new ClickRequirement(10000, 1), 0.25, GameConstants.Region.none, () => !challenges.list.disableClickAttack.active());
+        AchievementHandler.addAchievement('A Few Clicks In', 'Click 10 times', new ClickRequirement(10, 1), 0.02, GameConstants.ExtraAchievementCategories.global, () => !challenges.list.disableClickAttack.active());
+        AchievementHandler.addAchievement('Clicking Pro', 'Click 100 times', new ClickRequirement(100, 1), 0.05, GameConstants.ExtraAchievementCategories.global, () => !challenges.list.disableClickAttack.active());
+        AchievementHandler.addAchievement('Ultra Clicker', 'Click 1,000 times', new ClickRequirement(1000, 1), 0.10, GameConstants.ExtraAchievementCategories.global, () => !challenges.list.disableClickAttack.active());
+        AchievementHandler.addAchievement('Need a new mouse yet?', 'Click 10,000 times', new ClickRequirement(10000, 1), 0.25, GameConstants.ExtraAchievementCategories.global, () => !challenges.list.disableClickAttack.active());
 
         AchievementHandler.addAchievement('My new dirty hobby', 'Unlock 3 Plots in the Farm', new FarmPlotsUnlockedRequirement(3), 0.05);
         AchievementHandler.addAchievement('Allotment gardener', 'Unlock 9 Plots in the Farm', new FarmPlotsUnlockedRequirement(9), 0.15);
@@ -354,6 +371,19 @@ class AchievementHandler {
             AchievementHandler.addAchievement(`${GameConstants.camelCaseToString(GameConstants.Region[region])} Shiny Master`, `Complete the ${GameConstants.camelCaseToString(GameConstants.Region[region])} Shiny Pokédex!`, new CaughtUniqueShinyPokemonsByRegionRequirement(region, amtAll), 9, region);
         });
 
+        /*
+         * MINIREGIONS
+         */
+        GameConstants.RegionGyms[GameConstants.Region.final]?.forEach(gym => {
+            const gymTitle: string = gym.includes('Elite') || gym.includes('Champion') ? gym : `${gym} Gym`;
+            if (GymList[gym]?.flags?.achievement) {
+                AchievementHandler.addAchievement(`${gym} Gym regular`, `Clear ${gymTitle} 10 times`, new ClearGymRequirement(GameConstants.ACHIEVEMENT_DEFEAT_GYM_VALUES[0], GameConstants.getGymIndex(gym)), 1, GameConstants.ExtraAchievementCategories.sevii);
+                AchievementHandler.addAchievement(`${gym} Gym ruler`, `Clear ${gymTitle} 100 times`, new ClearGymRequirement(GameConstants.ACHIEVEMENT_DEFEAT_GYM_VALUES[1], GameConstants.getGymIndex(gym)), 2, GameConstants.ExtraAchievementCategories.sevii);
+                AchievementHandler.addAchievement(`${gym} Gym owner`, `Clear ${gymTitle} 1,000 times`, new ClearGymRequirement(GameConstants.ACHIEVEMENT_DEFEAT_GYM_VALUES[2], GameConstants.getGymIndex(gym)), 3, GameConstants.ExtraAchievementCategories.sevii);
+            }
+        });
+
+
         // load filters, filter the list & calculate number of tabs
         this.load();
         this.filterAchievementList(true);
@@ -369,11 +399,11 @@ class AchievementHandler {
 
     static load() {
         AchievementHandler.calculateMaxBonus();
-        this.achievementListFiltered(this.achievementList.filter(a => a.region <= player.highestRegion() && a.achievable()));
+        this.achievementListFiltered(this.achievementList.filter(a => a.category.isUnlocked() && a.achievable()));
         AchievementHandler.navigateIndex(Settings.getSetting('achievementsPage').value);
         AchievementHandler.filter.status(Settings.getSetting('achievementsStatus').value);
         AchievementHandler.filter.type(Settings.getSetting('achievementsType').value);
-        AchievementHandler.filter.region(Settings.getSetting('achievementsRegion').value);
+        AchievementHandler.filter.category(Settings.getSetting('achievementsCategory').value);
         // Cycle the pages to make sure they are upto date
         AchievementHandler.navigateRight();
         setTimeout(() => {

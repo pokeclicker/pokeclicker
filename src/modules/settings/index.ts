@@ -17,6 +17,7 @@ import {
 import HotkeySetting from './HotkeySetting';
 import BreedingFilters from './BreedingFilters';
 import ProteinFilters from './ProteinFilters';
+import GameHelper from '../GameHelper';
 
 export default Settings;
 
@@ -258,10 +259,13 @@ Settings.add(new Setting<string>('achievementsType', 'achievementsType',
         ...Settings.enumToSettingOptionArray(AchievementType, (a) => a !== 'None'),
     ],
     '-2'));
-Settings.add(new Setting<string>('achievementsRegion', 'achievementsRegion',
+Settings.add(new Setting<string>('achievementsCategory', 'achievementsCategory',
     [
-        new SettingOption('All', '-2'),
-        ...Settings.enumToSettingOptionArray(Region),
+        new SettingOption('All', 'all'),
+        ...GameHelper.enumStrings(Region).filter((r) => r !== 'none' && r !== 'final').map((r) => new SettingOption(r, r)),
+        // TODO: Find a way to take these from AchievementHandler
+        new SettingOption('Global', 'global'),
+        new SettingOption('Sevii', 'sevii'),
     ],
     '-2'));
 

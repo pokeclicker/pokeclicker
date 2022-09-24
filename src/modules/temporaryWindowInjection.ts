@@ -37,6 +37,7 @@ import Rand from './utilities/Rand';
 import Settings from './settings/index';
 import { SortOptionConfigs, SortOptions } from './settings/SortOptions';
 import { AchievementSortOptionConfigs, AchievementSortOptions } from './achievements/AchievementSortOptions';
+import AchievementCategory from './achievements/AchievementCategory';
 import NotificationConstants from './notifications/NotificationConstants';
 import Notifier from './notifications/Notifier';
 import LogBook from './logbook/LogBook';
@@ -164,6 +165,7 @@ Object.assign(<any>window, {
     SortOptions,
     AchievementSortOptionConfigs,
     AchievementSortOptions,
+    AchievementCategory,
     LogBook,
     LogBookTypes,
     ChangelogItems,
