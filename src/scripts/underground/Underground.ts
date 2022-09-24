@@ -251,6 +251,7 @@ class Underground implements Feature {
         let nMineItems = 0;
         let nFossils = 0;
         let nPlates = 0;
+        let nShards = 0;
         player.mineInventory().forEach(mineItem => {
             if (mineItem.valueType == UndergroundItemValueType.Diamond) {
                 nMineItems += mineItem.amount();
@@ -258,10 +259,12 @@ class Underground implements Feature {
                 nFossils += mineItem.amount();
             } else if (mineItem.valueType == UndergroundItemValueType.Gem) {
                 nPlates += mineItem.amount();
+            } else if (mineItem.valueType == UndergroundItemValueType.Shard) {
+                nShards += mineItem.amount();
             }
         });
 
-        return `<u>Owned:</u><br>Mine items: ${nMineItems.toLocaleString('en-US')}<br>Fossils: ${nFossils.toLocaleString('en-US')}<br>Plates: ${nPlates.toLocaleString('en-US')}`;
+        return `<u>Owned:</u><br>Mine items: ${nMineItems.toLocaleString('en-US')}<br>Fossils: ${nFossils.toLocaleString('en-US')}<br>Plates: ${nPlates.toLocaleString('en-US')}<br>Shards: ${nShards.toLocaleString('en-US')}`;
     });
 
     gainEnergy() {
