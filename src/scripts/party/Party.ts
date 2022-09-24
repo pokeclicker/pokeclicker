@@ -38,8 +38,6 @@ class Party implements Feature {
             }, new Map());
         });
 
-        ProteinFilters.region.value(+Settings.getSetting('proteinRegionFilter').value);
-        ProteinFilters.type.value(+Settings.getSetting('proteinTypeFilter').value);
     }
 
     gainPokemonById(id: number, shiny = false, suppressNotification = false) {
