@@ -370,6 +370,11 @@ class AchievementHandler {
         AchievementHandler.addAchievement('TODO_pokerus4', 'Have 250 Resistant Pokémon', new PokerusStatusRequirement(250, GameConstants.Pokerus.Resistant), 1);
         AchievementHandler.addAchievement('TODO_pokerus5', 'Have 500 Resistant Pokémon', new PokerusStatusRequirement(500, GameConstants.Pokerus.Resistant), 1.5);
 
+        AchievementHandler.addAchievement('Oh, an other quest slot!', 'Reach quest level 5', new QuestLevelRequirement(5), 0.2);
+        AchievementHandler.addAchievement('todo_questlevel', 'Reach quest level 10', new QuestLevelRequirement(10), 0.3);
+        AchievementHandler.addAchievement('What do i gain from leveling this?', 'Reach quest level 25', new QuestLevelRequirement(25), 0.5);
+        AchievementHandler.addAchievement('todo_questlevel2', 'Reach quest level 50', new QuestLevelRequirement(50), 0.8);
+
         /*
          * REGIONAL
          */

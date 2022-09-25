@@ -102,6 +102,7 @@ import PokeballRequirement from './requirements/PokeballRequirement';
 import PokerusStatusRequirement from './requirements/PokerusStatusRequirement';
 import ProteinObtainRequirement from './requirements/ProteinObtainRequirement';
 import QuestRequirement from './requirements/QuestRequirement';
+import QuestLevelRequirement from './requirements/QuestLevelRequirement';
 import RouteKillRequirement from './requirements/RouteKillRequirement';
 import SeededDateRequirement from './requirements/SeededDateRequirement';
 import ShinyPokemonRequirement from './requirements/ShinyPokemonRequirement';
@@ -233,6 +234,7 @@ Object.assign(<any>window, {
     PokerusStatusRequirement,
     ProteinObtainRequirement,
     QuestRequirement,
+    QuestLevelRequirement,
     RouteKillRequirement,
     SeededDateRequirement,
     ShinyPokemonRequirement,
