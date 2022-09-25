@@ -72,12 +72,20 @@ class PokemonHelper {
         return PokemonType[id];
     }
 
-    public static getImage(pokemon: PokemonInterface, shiny: boolean): string {
+    public static getImage(pokemon: PokemonInterface, shiny: boolean, gender: number = GameConstants.NO_GENDER): string {
         let src = 'assets/images/';
         if (shiny) {
             src += 'shiny';
         }
-        src += `pokemon/${pokemon.id}.png`;
+        let genderString = '';
+        // If Pokémon is female, use the female sprite, otherwise use the male/genderless one
+        if (gender == GameConstants.GENDER_FEMALE) { 
+            const hasDiff = this.getPokemonById(pokemon.id).gender.difference;
+            if (hasDiff) {
+                genderString = '-f';
+            }
+        }
+        src += `pokemon/${pokemon.id}${genderString}.png`;
         return src;
     }
 

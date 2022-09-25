@@ -614,4 +614,9 @@ namespace GameConstants {
     declare const TEXT_GENDERLESS;
     declare const TEXT_MALE;
     declare const TEXT_FEMALE;
+
+    // Current Pokémon Gender
+    declare const NO_GENDER;
+    declare const GENDER_MALE;
+    declare const GENDER_FEMALE;
 }
