@@ -194,13 +194,17 @@ class AchievementHandler {
         AchievementHandler.addAchievement('A Small Fortune', 'Obtain 10,000 Pokédollars', new MoneyRequirement(10000), 0.15);
         AchievementHandler.addAchievement('Annual Wage', 'Obtain 100,000 Pokédollars', new MoneyRequirement(100000), 0.20);
         AchievementHandler.addAchievement('Pfft, I Don\'t Need a Bike Voucher', 'Obtain 1,000,000 Pokédollars', new MoneyRequirement(1000000), 0.25);
-        AchievementHandler.addAchievement('A billion Poképennies', 'Obtain 10,000,000 Pokédollars', new MoneyRequirement(10000000), 0.5);
+        AchievementHandler.addAchievement('A billion Poképennies', 'Obtain 10,000,000 Pokédollars', new MoneyRequirement(10000000), 0.3);
+        AchievementHandler.addAchievement('Ready to retire', 'Obtain 1,000,000,000 Pokédollars', new MoneyRequirement(1000000000), 0.4);
+        AchievementHandler.addAchievement('I should go to space...', 'Obtain 100,000,000,000 Pokédollars', new MoneyRequirement(100000000000), 0.5);
 
         AchievementHandler.addAchievement('Dungeon Time', 'Obtain 100 Dungeon Tokens', new TokenRequirement(100), 0.05);
         AchievementHandler.addAchievement('Token Collector', 'Obtain 1,000 Dungeon Tokens', new TokenRequirement(1000), 0.10);
         AchievementHandler.addAchievement('Dungeon Grinder', 'Obtain 10,000 Dungeon Tokens', new TokenRequirement(10000), 0.15);
         AchievementHandler.addAchievement('Dungeon Master', 'Obtain 100,000 Dungeon Tokens', new TokenRequirement(100000), 0.20);
         AchievementHandler.addAchievement('Dungeon Legend', 'Obtain 1,000,000 Dungeon Tokens', new TokenRequirement(1000000), 0.25);
+        AchievementHandler.addAchievement('Dungeon Myth', 'Obtain 100,000,000 Dungeon Tokens', new TokenRequirement(100000000), 0.3);
+        AchievementHandler.addAchievement('Dungeon God', 'Obtain 10,000,000,000 Dungeon Tokens', new TokenRequirement(10000000000), 0.4);
 
         AchievementHandler.addAchievement('Basic Trainer', 'Have 100 Attack', new AttackRequirement(100), 0.05);
         AchievementHandler.addAchievement('Improving', 'Have 1,000 Attack', new AttackRequirement(1000), 0.10);
@@ -211,10 +215,13 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Pesky roamings, I need to oneshot routes for them...', 'Have 250,000 Attack', new AttackRequirement(250000), 0.35);
         AchievementHandler.addAchievement('You pressed F12 by any chance?', 'Have 500,000 Attack', new AttackRequirement(500000), 0.40);
         AchievementHandler.addAchievement('Left Left Right Right A B A B - Hey, 1 million!', 'Have 1,000,000 Attack', new AttackRequirement(1000000), 0.40);
+        AchievementHandler.addAchievement('TODO: attack', 'Have 5,000,000 Attack', new AttackRequirement(5000000), 0.45);
+        AchievementHandler.addAchievement('TODO: attack2', 'Have 20,000,000 Attack', new AttackRequirement(20000000), 0.50);
 
         AchievementHandler.addAchievement('Bling', 'Obtain 100 Diamonds', new DiamondRequirement(100), 0.05);
         AchievementHandler.addAchievement('Bling x10!', 'Obtain 1,000 Diamonds', new DiamondRequirement(1000), 0.15);
-        AchievementHandler.addAchievement('If you like it, you should\'ve put a ring on it.', 'Obtain 10,000 Diamonds', new DiamondRequirement(10000), 0.25);
+        AchievementHandler.addAchievement('If you like it, you should\'ve put a ring on it', 'Obtain 10,000 Diamonds', new DiamondRequirement(10000), 0.25);
+        AchievementHandler.addAchievement('Just keep trading!', 'Obtain 25,000 Diamonds', new DiamondRequirement(25000), 0.4);
 
         AchievementHandler.addAchievement('Is my thumb green yet?', 'Dig up 1 item', new UndergroundItemsFoundRequirement(1), 0.01);
         AchievementHandler.addAchievement('My shovel is starting to crack', 'Dig up 10 items', new UndergroundItemsFoundRequirement(10), 0.02);
@@ -249,6 +256,8 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Better Than Season 1 Ash', 'Capture 15 unique Pokémon', new CaughtPokemonRequirement(15), 0.05);
         AchievementHandler.addAchievement('Wonderful! Do you like to collect things?', 'Capture 50 unique Pokémon', new CaughtPokemonRequirement(50), 0.10);
         AchievementHandler.addAchievement('Surpassing Ash', 'Capture 100 unique Pokémon', new CaughtPokemonRequirement(100), 0.20);
+        AchievementHandler.addAchievement('Enough for a Zoo', 'Capture 500 unique Pokémon', new CaughtPokemonRequirement(500), 0.30);
+        AchievementHandler.addAchievement('The PC will be filled', 'Capture 1000 unique Pokémon', new CaughtPokemonRequirement(1000), 0.40);
 
         AchievementHandler.addAchievement('I\'d rather be shiny', 'Capture your first Shiny', new ShinyPokemonRequirement(1), 0.03);
         AchievementHandler.addAchievement('These Pokémon must be sick', 'Capture 10 unique Shinies', new ShinyPokemonRequirement(10), 0.06);
@@ -258,13 +267,18 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Where Did All The Shiny Pokémon Go?', 'Capture 50 unique Shinies', new ShinyPokemonRequirement(50), 0.30);
         AchievementHandler.addAchievement('Nvm, found some more', 'Capture 75 unique Shinies', new ShinyPokemonRequirement(75), 0.45);
         AchievementHandler.addAchievement('Just keep swimming just keep swimming -- oooo shiny!', 'Capture 100 unique Shinies', new ShinyPokemonRequirement(100), 0.60);
-        AchievementHandler.addAchievement('I don\'t know if I can handle the next batch of shinies.', 'Capture 151 unique Shinies!', new ShinyPokemonRequirement(151), 1.50);
+        AchievementHandler.addAchievement('I don\'t know if I can handle the next batch of shinies', 'Capture 151 unique Shinies!', new ShinyPokemonRequirement(151), 1.00);
+        AchievementHandler.addAchievement('Will need sunglasses', 'Capture 250 unique Shinies!', new ShinyPokemonRequirement(250), 1.20);
+        AchievementHandler.addAchievement('What was the odds again?', 'Capture 500 unique Shinies!', new ShinyPokemonRequirement(500), 1.30);
+        AchievementHandler.addAchievement('Non-shiny is now becomming care', 'Capture 1000 unique Shinies!', new ShinyPokemonRequirement(1000), 1.50);
 
         AchievementHandler.addAchievement('Pokémon Nursery', 'Hatch 1 egg', new HatchRequirement(1), 0.01);
         AchievementHandler.addAchievement('A Lot of Running', 'Hatch 10 eggs', new HatchRequirement(10), 0.04);
         AchievementHandler.addAchievement('Marathon Runner', 'Hatch 100 eggs', new HatchRequirement(100), 0.15);
         AchievementHandler.addAchievement('Egg Factory', 'Hatch 1,000 eggs', new HatchRequirement(1000), 0.3);
         AchievementHandler.addAchievement('Offical Easter Bunny', 'Hatch 10,000 eggs', new HatchRequirement(10000), 0.4);
+        AchievementHandler.addAchievement('What do you do with all the eggshell?', 'Hatch 100,000 eggs', new HatchRequirement(100000), 0.5);
+        AchievementHandler.addAchievement('TODO_hatch', 'Hatch 250,000 eggs', new HatchRequirement(250000), 0.7);
 
         AchievementHandler.addAchievement('Why is my Voltorb Upside Down?', 'Purchase your first Poké Ball', new PokeballRequirement(1, GameConstants.Pokeball.Pokeball), 0.01);
         AchievementHandler.addAchievement('Starting a Collection', 'Purchase 10 Poké Balls', new PokeballRequirement(10, GameConstants.Pokeball.Pokeball), 0.03);
@@ -309,16 +323,20 @@ class AchievementHandler {
         AchievementHandler.addAchievement('One more favor', 'Complete 10 quests', new QuestRequirement(10), 0.15);
         AchievementHandler.addAchievement('YES MAN!', 'Complete 100 quests', new QuestRequirement(100), 0.25);
         AchievementHandler.addAchievement('I just love green coins', 'Complete 1,000 quests', new QuestRequirement(1000), 0.4);
+        AchievementHandler.addAchievement('I want to be ready for the next region', 'Complete 5,000 quests', new QuestRequirement(5000), 0.6);
 
         AchievementHandler.addAchievement('Fighting novice', 'Complete stage 100 in Battle Frontier', new BattleFrontierHighestStageRequirement(100), 0.05);
         AchievementHandler.addAchievement('Competent fighter', 'Complete stage 250 in Battle Frontier', new BattleFrontierHighestStageRequirement(250), 0.15);
         AchievementHandler.addAchievement('Unstoppable fighting machine', 'Complete stage 500 in Battle Frontier', new BattleFrontierHighestStageRequirement(500), 0.25);
         AchievementHandler.addAchievement('Living Legend', 'Complete stage 1,000 in Battle Frontier', new BattleFrontierHighestStageRequirement(1000), 0.4);
+        AchievementHandler.addAchievement('Where do they get the trainers from?', 'Complete stage 2,000 in Battle Frontier', new BattleFrontierHighestStageRequirement(2000), 0.5);
 
         AchievementHandler.addAchievement('Keep on fighting', 'Complete 500 total stages in Battle Frontier', new BattleFrontierTotalStageRequirement(500), 0.05);
         AchievementHandler.addAchievement('Uphill battle', 'Complete 1,000 total stages in Battle Frontier', new BattleFrontierTotalStageRequirement(1000), 0.15);
         AchievementHandler.addAchievement('Don\'t stop trying', 'Complete 2,500 total stages in Battle Frontier', new BattleFrontierTotalStageRequirement(2500), 0.25);
         AchievementHandler.addAchievement('King of the hill', 'Complete 5,000 total stages in Battle Frontier', new BattleFrontierTotalStageRequirement(5000), 0.4);
+        AchievementHandler.addAchievement('Just one more try', 'Complete 25,000 total stages in Battle Frontier', new BattleFrontierTotalStageRequirement(25000), 0.5);
+        AchievementHandler.addAchievement('Need more Battle coins', 'Complete 100,000 total stages in Battle Frontier', new BattleFrontierTotalStageRequirement(100000), 0.7);
 
         AchievementHandler.addAchievement('Let\'s try this out', 'Obtain your first Protein', new ProteinObtainRequirement(1), 0.01);
         AchievementHandler.addAchievement('Pre-workout supplements', 'Obtain five Proteins', new ProteinObtainRequirement(5), 0.02);
@@ -328,7 +346,8 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Putting the \'bulk\' in bulk-buy', 'Obtain 500 Proteins', new ProteinObtainRequirement(500), 0.15);
         AchievementHandler.addAchievement('Protein stockpile', 'Obtain 1,000 Proteins', new ProteinObtainRequirement(1000), 0.20);
         AchievementHandler.addAchievement('Fish, eggs, nuts, and cheese', 'Obtain 5,000 Proteins', new ProteinObtainRequirement(5000), 0.35);
-        AchievementHandler.addAchievement('A literal mountain of muscle', 'Obtain 10,000 Proteins', new ProteinObtainRequirement(10000), 0.50);
+        AchievementHandler.addAchievement('Does this powder come with flavours?', 'Obtain 10,000 Proteins', new ProteinObtainRequirement(10000), 0.50);
+        AchievementHandler.addAchievement('A literal mountain of muscle', 'Obtain 50,000 Proteins', new ProteinObtainRequirement(50000), 0.70);
 
         /*
          * REGIONAL
