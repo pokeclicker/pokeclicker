@@ -360,6 +360,16 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Starting a farming empire', 'Unlock 6 Farm Hands', new FarmHandRequirement(6), 0.3);
         AchievementHandler.addAchievement('Will I ever need all this help?', 'Unlock 9 Farm Hands', new FarmHandRequirement(9), 0.4);
 
+        AchievementHandler.addAchievement('I hope it\'s not dangaous', 'Infect 20 Pokémon with Pokerus', new PokerusStatusRequirement(20, GameConstants.Pokerus.Infected), 0.1);
+        AchievementHandler.addAchievement('Anyway to get rid of it?', 'Infect 50 Pokémon with Pokerus', new PokerusStatusRequirement(50, GameConstants.Pokerus.Infected), 0.2);
+        AchievementHandler.addAchievement('TODO_pokerus', 'Infect 100 Pokémon with Pokerus', new PokerusStatusRequirement(100, GameConstants.Pokerus.Infected), 0.3);
+        AchievementHandler.addAchievement('TODO_pokerus2', 'Infect 250 Pokémon with Pokerus', new PokerusStatusRequirement(250, GameConstants.Pokerus.Infected), 0.4);
+        AchievementHandler.addAchievement('Infecting the whole world', 'Infect 1000 Pokémon with Pokerus', new PokerusStatusRequirement(1000, GameConstants.Pokerus.Infected), 0.5);
+        AchievementHandler.addAchievement('Curing them one at a time', 'Have 10 Resistant Pokémon', new PokerusStatusRequirement(10, GameConstants.Pokerus.Resistant), 0.3);
+        AchievementHandler.addAchievement('TODO_pokerus3', 'Have 50 Resistant Pokémon', new PokerusStatusRequirement(50, GameConstants.Pokerus.Resistant), 0.5);
+        AchievementHandler.addAchievement('TODO_pokerus4', 'Have 250 Resistant Pokémon', new PokerusStatusRequirement(250, GameConstants.Pokerus.Resistant), 1);
+        AchievementHandler.addAchievement('TODO_pokerus5', 'Have 500 Resistant Pokémon', new PokerusStatusRequirement(500, GameConstants.Pokerus.Resistant), 1.5);
+
         /*
          * REGIONAL
          */

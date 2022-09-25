@@ -99,6 +99,7 @@ import MoneyRequirement from './requirements/MoneyRequirement';
 import MaxLevelOakItemRequirement from './requirements/MaxLevelOakItemRequirement';
 import MaxRegionRequirement from './requirements/MaxRegionRequirement';
 import PokeballRequirement from './requirements/PokeballRequirement';
+import PokerusStatusRequirement from './requirements/PokerusStatusRequirement';
 import ProteinObtainRequirement from './requirements/ProteinObtainRequirement';
 import QuestRequirement from './requirements/QuestRequirement';
 import RouteKillRequirement from './requirements/RouteKillRequirement';
@@ -229,6 +230,7 @@ Object.assign(<any>window, {
     MaxLevelOakItemRequirement,
     MaxRegionRequirement,
     PokeballRequirement,
+    PokerusStatusRequirement,
     ProteinObtainRequirement,
     QuestRequirement,
     RouteKillRequirement,
