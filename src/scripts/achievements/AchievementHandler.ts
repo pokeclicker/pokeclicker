@@ -222,6 +222,7 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Bling x10!', 'Obtain 1,000 Diamonds', new DiamondRequirement(1000), 0.15);
         AchievementHandler.addAchievement('If you like it, you should\'ve put a ring on it', 'Obtain 10,000 Diamonds', new DiamondRequirement(10000), 0.25);
         AchievementHandler.addAchievement('Just keep trading!', 'Obtain 25,000 Diamonds', new DiamondRequirement(25000), 0.4);
+        AchievementHandler.addAchievement('Got all upgrades yet?', 'Obtain 100,000 Diamonds', new DiamondRequirement(100000), 0.6);
 
         AchievementHandler.addAchievement('Is my thumb green yet?', 'Dig up 1 item', new UndergroundItemsFoundRequirement(1), 0.01);
         AchievementHandler.addAchievement('My shovel is starting to crack', 'Dig up 10 items', new UndergroundItemsFoundRequirement(10), 0.02);
@@ -270,7 +271,7 @@ class AchievementHandler {
         AchievementHandler.addAchievement('I don\'t know if I can handle the next batch of shinies', 'Capture 151 unique Shinies!', new ShinyPokemonRequirement(151), 1.00);
         AchievementHandler.addAchievement('Will need sunglasses', 'Capture 250 unique Shinies!', new ShinyPokemonRequirement(250), 1.20);
         AchievementHandler.addAchievement('What was the odds again?', 'Capture 500 unique Shinies!', new ShinyPokemonRequirement(500), 1.30);
-        AchievementHandler.addAchievement('Non-shiny is now becomming care', 'Capture 1000 unique Shinies!', new ShinyPokemonRequirement(1000), 1.50);
+        AchievementHandler.addAchievement('Non-shiny is now becomming rare', 'Capture 1000 unique Shinies!', new ShinyPokemonRequirement(1000), 1.50);
 
         AchievementHandler.addAchievement('Pokémon Nursery', 'Hatch 1 egg', new HatchRequirement(1), 0.01);
         AchievementHandler.addAchievement('A Lot of Running', 'Hatch 10 eggs', new HatchRequirement(10), 0.04);
@@ -329,14 +330,14 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Competent fighter', 'Complete stage 250 in Battle Frontier', new BattleFrontierHighestStageRequirement(250), 0.15);
         AchievementHandler.addAchievement('Unstoppable fighting machine', 'Complete stage 500 in Battle Frontier', new BattleFrontierHighestStageRequirement(500), 0.25);
         AchievementHandler.addAchievement('Living Legend', 'Complete stage 1,000 in Battle Frontier', new BattleFrontierHighestStageRequirement(1000), 0.4);
-        AchievementHandler.addAchievement('Where do they get the trainers from?', 'Complete stage 2,000 in Battle Frontier', new BattleFrontierHighestStageRequirement(2000), 0.5);
+        AchievementHandler.addAchievement('Where do they find these trainers?', 'Complete stage 2,000 in Battle Frontier', new BattleFrontierHighestStageRequirement(2000), 0.5);
 
         AchievementHandler.addAchievement('Keep on fighting', 'Complete 500 total stages in Battle Frontier', new BattleFrontierTotalStageRequirement(500), 0.05);
         AchievementHandler.addAchievement('Uphill battle', 'Complete 1,000 total stages in Battle Frontier', new BattleFrontierTotalStageRequirement(1000), 0.15);
         AchievementHandler.addAchievement('Don\'t stop trying', 'Complete 2,500 total stages in Battle Frontier', new BattleFrontierTotalStageRequirement(2500), 0.25);
-        AchievementHandler.addAchievement('King of the hill', 'Complete 5,000 total stages in Battle Frontier', new BattleFrontierTotalStageRequirement(5000), 0.4);
-        AchievementHandler.addAchievement('Just one more try', 'Complete 25,000 total stages in Battle Frontier', new BattleFrontierTotalStageRequirement(25000), 0.5);
-        AchievementHandler.addAchievement('Need more Battle coins', 'Complete 100,000 total stages in Battle Frontier', new BattleFrontierTotalStageRequirement(100000), 0.7);
+        AchievementHandler.addAchievement('Need more Battle coins', 'Complete 5,000 total stages in Battle Frontier', new BattleFrontierTotalStageRequirement(5000), 0.4);
+        AchievementHandler.addAchievement('I can do it this time!', 'Complete 25,000 total stages in Battle Frontier', new BattleFrontierTotalStageRequirement(25000), 0.5);
+        AchievementHandler.addAchievement('King of the hill', 'Complete 100,000 total stages in Battle Frontier', new BattleFrontierTotalStageRequirement(100000), 0.7);
 
         AchievementHandler.addAchievement('Let\'s try this out', 'Obtain your first Protein', new ProteinObtainRequirement(1), 0.01);
         AchievementHandler.addAchievement('Pre-workout supplements', 'Obtain five Proteins', new ProteinObtainRequirement(5), 0.02);
@@ -360,15 +361,15 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Starting a farming empire', 'Unlock 6 Farm Hands', new FarmHandRequirement(6), 0.3);
         AchievementHandler.addAchievement('Will I ever need all this help?', 'Unlock 9 Farm Hands', new FarmHandRequirement(9), 0.4);
 
-        AchievementHandler.addAchievement('I hope it\'s not dangaous', 'Infect 20 Pokémon with Pokerus', new PokerusStatusRequirement(20, GameConstants.Pokerus.Infected), 0.1);
+        AchievementHandler.addAchievement('I hope it\'s not dangerous', 'Infect 20 Pokémon with Pokerus', new PokerusStatusRequirement(20, GameConstants.Pokerus.Infected), 0.1);
         AchievementHandler.addAchievement('Anyway to get rid of it?', 'Infect 50 Pokémon with Pokerus', new PokerusStatusRequirement(50, GameConstants.Pokerus.Infected), 0.2);
-        AchievementHandler.addAchievement('TODO_pokerus', 'Infect 100 Pokémon with Pokerus', new PokerusStatusRequirement(100, GameConstants.Pokerus.Infected), 0.3);
-        AchievementHandler.addAchievement('TODO_pokerus2', 'Infect 250 Pokémon with Pokerus', new PokerusStatusRequirement(250, GameConstants.Pokerus.Infected), 0.4);
+        AchievementHandler.addAchievement('It is the flu season', 'Infect 100 Pokémon with Pokerus', new PokerusStatusRequirement(100, GameConstants.Pokerus.Infected), 0.3);
+        AchievementHandler.addAchievement('Where is nursery Joy?', 'Infect 250 Pokémon with Pokerus', new PokerusStatusRequirement(250, GameConstants.Pokerus.Infected), 0.4);
         AchievementHandler.addAchievement('Infecting the whole world', 'Infect 1000 Pokémon with Pokerus', new PokerusStatusRequirement(1000, GameConstants.Pokerus.Infected), 0.5);
         AchievementHandler.addAchievement('Curing them one at a time', 'Have 10 Resistant Pokémon', new PokerusStatusRequirement(10, GameConstants.Pokerus.Resistant), 0.3);
-        AchievementHandler.addAchievement('TODO_pokerus3', 'Have 50 Resistant Pokémon', new PokerusStatusRequirement(50, GameConstants.Pokerus.Resistant), 0.5);
-        AchievementHandler.addAchievement('TODO_pokerus4', 'Have 250 Resistant Pokémon', new PokerusStatusRequirement(250, GameConstants.Pokerus.Resistant), 1);
-        AchievementHandler.addAchievement('TODO_pokerus5', 'Have 500 Resistant Pokémon', new PokerusStatusRequirement(500, GameConstants.Pokerus.Resistant), 1.5);
+        AchievementHandler.addAchievement('Pokémon center regular', 'Have 50 Resistant Pokémon', new PokerusStatusRequirement(50, GameConstants.Pokerus.Resistant), 0.5);
+        AchievementHandler.addAchievement('Doctor in training', 'Have 250 Resistant Pokémon', new PokerusStatusRequirement(250, GameConstants.Pokerus.Resistant), 1);
+        AchievementHandler.addAchievement('I should open my own Pokémon Center', 'Have 500 Resistant Pokémon', new PokerusStatusRequirement(500, GameConstants.Pokerus.Resistant), 1.5);
 
         AchievementHandler.addAchievement('Oh, an other quest slot!', 'Reach quest level 5', new QuestLevelRequirement(5), 0.2);
         AchievementHandler.addAchievement('todo_questlevel', 'Reach quest level 10', new QuestLevelRequirement(10), 0.3);
