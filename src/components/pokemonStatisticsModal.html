@@ -88,7 +88,7 @@
                         <!-- /ko -->
                       </td>
                     </tr>
-                    <!-- ko if: pokemonMap[$data].gender.difference -->
+                    <!-- ko if: App.game.party.alreadyCaughtPokemon($data) && pokemonMap[$data].gender.difference -->
                     <tr>
                       <td class="text-left align-middle">Default sprite</td>
                       <td class="text-left tight">

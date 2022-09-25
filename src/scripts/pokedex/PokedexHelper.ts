@@ -187,7 +187,7 @@ class PokedexHelper {
         }
         // Female
         let genderString = '';
-        if (App.game.party.getPokemon(id).defaultFemaleSprite() && pokemon.gender.difference) {
+        if (App.game.party.alreadyCaughtPokemon(id) && App.game.party.getPokemon(id).defaultFemaleSprite() && pokemon.gender.difference) {
             genderString = '-f';
         }
         src += `pokemon/${id}${genderString}.png`;
