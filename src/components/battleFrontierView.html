@@ -26,9 +26,7 @@
         </h2>
 
         <div>
-            <img class="enemy"
-                    data-bind="attr:{ src: PokemonHelper.getImage(BattleFrontierBattle.enemyPokemon(), BattleFrontierBattle.enemyPokemon().shiny) }"
-                    src=""/>
+            <knockout data-bind="template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': BattleFrontierBattle.enemyPokemon() } }">Pokémon sprite</knockout>
         </div>
         <div class="progress hitpoints" style="height: 20px;">
             <div class="progress-bar bg-danger" role="progressbar"

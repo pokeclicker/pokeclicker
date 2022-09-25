@@ -6,6 +6,7 @@ class SafariPokemon implements PokemonInterface {
     shiny: boolean;
     baseCatchFactor: number;
     baseEscapeFactor: number;
+    gender: number;
 
     // Used for overworld sprites
     x = 0;
@@ -52,6 +53,7 @@ class SafariPokemon implements PokemonInterface {
         this.type1 = data.type1;
         this.type2 = data.type2;
         this.shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SAFARI);
+        this.gender = PokemonFactory.generateGender(data.gender.ratio, data.gender.type);
         GameHelper.incrementObservable(App.game.statistics.pokemonEncountered[this.id]);
         GameHelper.incrementObservable(App.game.statistics.totalPokemonEncountered);
 

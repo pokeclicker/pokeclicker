@@ -20,7 +20,7 @@
                       </h2>
 
                       <div>
-                          <img class="enemy" data-bind="attr: { src: `assets/images/${SafariBattle.enemy.shiny ? 'shiny' : ''}pokemon/${SafariBattle.enemy.id}.png` }" src=""/>
+                          <knockout data-bind="template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': SafariBattle.enemy } }">Pokémon sprite</knockout>
                       </div>
 
                       <h2 class="pageItemFooter" style="display: block;">
