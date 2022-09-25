@@ -264,7 +264,7 @@ class Farming implements Feature {
             [
                 'Energy from lightning strikes is drawn into the plant, making the Berries grow big and rich.',
                 'The same energy promotes the growth of nearby Berries.',
-            ], new Aura(AuraType.Growth, [1.1, 1.2, 1.3]), ['Pikachu', 'Flabébé (Yellow)', 'Oricorio (Pom-Pom)']);
+            ], new Aura(AuraType.Growth, [1.1, 1.2, 1.3]), ['Pikachu', 'Flabébé (Yellow)', 'Oricorio (Pom-Pom)', 'Morpeko (Hangry)']);
         this.berryData[BerryType.Rindo]     = new Berry(BerryType.Rindo,    [3600, 7200, 16200, 28800, 57600],
             24, 0.05, 1400, 15,
             [10, 0, 0, 15, 0], BerryColor.Green,
