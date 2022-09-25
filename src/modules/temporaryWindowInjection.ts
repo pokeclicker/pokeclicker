@@ -92,6 +92,7 @@ import DefeatedRequirement from './requirements/DefeatedRequirement';
 import DiamondRequirement from './requirements/DiamondRequirement';
 import FarmHandRequirement from './requirements/FarmHandRequirement';
 import FarmPlotsUnlockedRequirement from './requirements/FarmPlotsUnlockedRequirement';
+import FarmPointsRequirement from './requirements/FarmPointsRequirement';
 import GymBadgeRequirement from './requirements/GymBadgeRequirement';
 import HatchRequirement from './requirements/HatchRequirement';
 import HatcheryHelperRequirement from './requirements/HatcheryHelperRequirement';
@@ -224,6 +225,7 @@ Object.assign(<any>window, {
     DiamondRequirement,
     FarmHandRequirement,
     FarmPlotsUnlockedRequirement,
+    FarmPointsRequirement,
     GymBadgeRequirement,
     HatchRequirement,
     HatcheryHelperRequirement,

@@ -196,7 +196,7 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Pfft, I Don\'t Need a Bike Voucher', 'Obtain 1,000,000 Pokédollars', new MoneyRequirement(1000000), 0.25);
         AchievementHandler.addAchievement('A billion Poképennies', 'Obtain 10,000,000 Pokédollars', new MoneyRequirement(10000000), 0.3);
         AchievementHandler.addAchievement('Ready to retire', 'Obtain 1,000,000,000 Pokédollars', new MoneyRequirement(1000000000), 0.4);
-        AchievementHandler.addAchievement('I should go to space...', 'Obtain 100,000,000,000 Pokédollars', new MoneyRequirement(100000000000), 0.5);
+        AchievementHandler.addAchievement('I should go to space...', 'Obtain 100,000,000,000 Pokédollars', new MoneyRequirement(100000000000), 0.6);
 
         AchievementHandler.addAchievement('Dungeon Time', 'Obtain 100 Dungeon Tokens', new TokenRequirement(100), 0.05);
         AchievementHandler.addAchievement('Token Collector', 'Obtain 1,000 Dungeon Tokens', new TokenRequirement(1000), 0.10);
@@ -204,7 +204,11 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Dungeon Master', 'Obtain 100,000 Dungeon Tokens', new TokenRequirement(100000), 0.20);
         AchievementHandler.addAchievement('Dungeon Legend', 'Obtain 1,000,000 Dungeon Tokens', new TokenRequirement(1000000), 0.25);
         AchievementHandler.addAchievement('Dungeon Myth', 'Obtain 100,000,000 Dungeon Tokens', new TokenRequirement(100000000), 0.3);
-        AchievementHandler.addAchievement('Dungeon God', 'Obtain 10,000,000,000 Dungeon Tokens', new TokenRequirement(10000000000), 0.4);
+        AchievementHandler.addAchievement('Dungeon God', 'Obtain 10,000,000,000 Dungeon Tokens', new TokenRequirement(10000000000), 0.6);
+
+        AchievementHandler.addAchievement('Farm Master', 'Obtain 100,000 Farm Points', new FarmPointsRequirement(100000), 0.20);
+        AchievementHandler.addAchievement('Farm Legend', 'Obtain 1,000,000 Farm Points', new FarmPointsRequirement(1000000), 0.30);
+        AchievementHandler.addAchievement('Farm Myth', 'Obtain 20,000,000 Farm Points', new FarmPointsRequirement(20000000), 0.60);
 
         AchievementHandler.addAchievement('Basic Trainer', 'Have 100 Attack', new AttackRequirement(100), 0.05);
         AchievementHandler.addAchievement('Improving', 'Have 1,000 Attack', new AttackRequirement(1000), 0.10);
@@ -216,7 +220,7 @@ class AchievementHandler {
         AchievementHandler.addAchievement('You pressed F12 by any chance?', 'Have 500,000 Attack', new AttackRequirement(500000), 0.40);
         AchievementHandler.addAchievement('Left Left Right Right A B A B - Hey, 1 million!', 'Have 1,000,000 Attack', new AttackRequirement(1000000), 0.40);
         AchievementHandler.addAchievement('TODO: attack', 'Have 5,000,000 Attack', new AttackRequirement(5000000), 0.45);
-        AchievementHandler.addAchievement('TODO: attack2', 'Have 20,000,000 Attack', new AttackRequirement(20000000), 0.50);
+        AchievementHandler.addAchievement('TODO: attack2', 'Have 20,000,000 Attack', new AttackRequirement(20000000), 0.60);
 
         AchievementHandler.addAchievement('Bling', 'Obtain 100 Diamonds', new DiamondRequirement(100), 0.05);
         AchievementHandler.addAchievement('Bling x10!', 'Obtain 1,000 Diamonds', new DiamondRequirement(1000), 0.15);
