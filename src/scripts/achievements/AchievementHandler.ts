@@ -349,6 +349,13 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Does this powder come with flavours?', 'Obtain 10,000 Proteins', new ProteinObtainRequirement(10000), 0.50);
         AchievementHandler.addAchievement('A literal mountain of muscle', 'Obtain 50,000 Proteins', new ProteinObtainRequirement(50000), 0.70);
 
+        AchievementHandler.addAchievement('Some nice help for the Day Care', 'Unlock 5 Hatchery Helpers', new HatcheryHelperRequirement(5, 0), 0.1);
+        AchievementHandler.addAchievement('Why do they have to work in shifts?', 'Unlock 10 Hatchery Helpers', new HatcheryHelperRequirement(10, 0), 0.3);
+        AchievementHandler.addAchievement('My loyal helpers', 'Get 3 Hatchery Helpers to 10% bonus efficiency', new HatcheryHelperRequirement(3, 10), 0.4);
+        AchievementHandler.addAchievement('Let\'s try some other helpers too?', 'Get 5 Hatchery Helpers to 10% bonus efficiency', new HatcheryHelperRequirement(5, 10), 0.5);
+        AchievementHandler.addAchievement('Sam just wants to help', 'Get 10 Hatchery Helpers to 10% bonus efficiency', new HatcheryHelperRequirement(10, 10), 1);
+        AchievementHandler.addAchievement('When are you going to breed yourself?', 'Get 10 Hatchery Helpers to 25% bonus efficiency', new HatcheryHelperRequirement(10, 25), 1.3);
+
         /*
          * REGIONAL
          */
