@@ -1578,8 +1578,8 @@ export const MALE_87_5 = 8;
 
 // Gender Text
 export const TEXT_GENDERLESS = '';
-export const TEXT_MALE = '♂'; // If Bootstrap Icons: <i class="bi bi-gender-male gender-icon-male"></i>
-export const TEXT_FEMALE = '♀'; // If Bootstrap Icons: <i class="bi bi-gender-female gender-icon-female"></i>
+export const TEXT_MALE = '<i class="gender-icon-male">♂</i>'; // If Bootstrap Icons: <i class="bi bi-gender-male gender-icon-male"></i>
+export const TEXT_FEMALE = '<i class="gender-icon-female">♀</i>'; // If Bootstrap Icons: <i class="bi bi-gender-female gender-icon-female"></i>
 
 // Wild/Trainer/BF Pokémon Gender
 export const NO_GENDER = 0;
