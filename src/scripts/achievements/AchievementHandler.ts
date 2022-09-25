@@ -435,6 +435,10 @@ class AchievementHandler {
          * MINIREGIONS
          */
         addGymAchievements(GameConstants.RegionGyms[GameConstants.Region.final], GameConstants.ExtraAchievementCategories.sevii);
+        AchievementHandler.addAchievement('Sevii Trainer', 'Catch 15 unique Pokémon native to the Sevii Area', new SeviiCaughtRequirement(15, false), 3, GameConstants.ExtraAchievementCategories.sevii);
+        AchievementHandler.addAchievement('Sevii Master', 'Catch 35 unique Pokémon native to the Sevii Area', new SeviiCaughtRequirement(35, false), 6, GameConstants.ExtraAchievementCategories.sevii);
+        AchievementHandler.addAchievement('Sevii Shiny Trainer', 'Catch 15 unique Shiny Pokémon native to the Sevii Area', new SeviiCaughtRequirement(15, true), 5, GameConstants.ExtraAchievementCategories.sevii);
+        AchievementHandler.addAchievement('Sevii Shiny Master', 'Catch 35 unique Shiny Pokémon native to the Sevii Area', new SeviiCaughtRequirement(35, true), 9, GameConstants.ExtraAchievementCategories.sevii);
 
 
         // load filters, filter the list & calculate number of tabs
