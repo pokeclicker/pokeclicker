@@ -12,6 +12,7 @@ enum PartyPokemonSaveKeys {
     pokerus,
     effortPoints,
     heldItem,
+    defaultFemaleSprite,
 }
 
 class PartyPokemon implements Saveable {
@@ -31,6 +32,7 @@ class PartyPokemon implements Saveable {
         levelEvolutionTriggered: false,
         pokerus: GameConstants.Pokerus.Uninfected,
         effortPoints: 0,
+        defaultFemaleSprite: false,
     };
 
     // Saveable observables
@@ -44,6 +46,7 @@ class PartyPokemon implements Saveable {
     proteinsUsed: KnockoutObservable<number>;
     _effortPoints: KnockoutObservable<number>;
     heldItem: KnockoutObservable<HeldItem>;
+    defaultFemaleSprite: KnockoutObservable<boolean>;
 
     constructor(
         public id: number,
@@ -72,6 +75,7 @@ class PartyPokemon implements Saveable {
         });
         this._attack = ko.pureComputed(() => this.calculateAttack());
         this.heldItem = ko.observable(undefined);
+        this.defaultFemaleSprite = ko.observable(false);
     }
 
     public calculateAttack(ignoreLevel = false): number {
@@ -321,6 +325,7 @@ class PartyPokemon implements Saveable {
         this.pokerus = json[PartyPokemonSaveKeys.pokerus] ?? this.defaults.pokerus;
         this.effortPoints = json[PartyPokemonSaveKeys.effortPoints] ?? this.defaults.effortPoints;
         this.heldItem(json[PartyPokemonSaveKeys.heldItem] && ItemList[json[PartyPokemonSaveKeys.heldItem]] instanceof HeldItem ? ItemList[json[PartyPokemonSaveKeys.heldItem]] as HeldItem : undefined);
+        this.defaultFemaleSprite(json[PartyPokemonSaveKeys.defaultFemaleSprite] ?? this.defaults.defaultFemaleSprite);
 
         if (this.evolutions != null) {
             for (const evolution of this.evolutions) {
@@ -353,6 +358,7 @@ class PartyPokemon implements Saveable {
             [PartyPokemonSaveKeys.pokerus]: this.pokerus,
             [PartyPokemonSaveKeys.effortPoints]: this.effortPoints,
             [PartyPokemonSaveKeys.heldItem]: this.heldItem()?.name,
+            [PartyPokemonSaveKeys.defaultFemaleSprite]: this.defaultFemaleSprite(),
         };
 
         // Don't save anything that is the default option
