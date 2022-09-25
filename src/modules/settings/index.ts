@@ -13,6 +13,8 @@ import {
     AchievementType,
     HOUR,
     DAY,
+    ExtraAchievementCategories,
+    camelCaseToString,
 } from '../GameConstants';
 import HotkeySetting from './HotkeySetting';
 import BreedingFilters from './BreedingFilters';
@@ -262,10 +264,10 @@ Settings.add(new Setting<string>('achievementsType', 'achievementsType',
 Settings.add(new Setting<string>('achievementsCategory', 'achievementsCategory',
     [
         new SettingOption('All', 'all'),
-        ...GameHelper.enumStrings(Region).filter((r) => r !== 'none' && r !== 'final').map((r) => new SettingOption(r, r)),
-        // TODO: Find a way to take these from AchievementHandler
-        new SettingOption('Global', 'global'),
-        new SettingOption('Sevii', 'sevii'),
+        ...GameHelper.enumStrings(Region)
+            .concat(GameHelper.enumStrings(ExtraAchievementCategories))
+            .filter((r) => r !== 'none' && r !== 'final')
+            .map((r) => new SettingOption(camelCaseToString(r), r)),
     ],
     '-2'));
 
