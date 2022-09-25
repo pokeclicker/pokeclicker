@@ -378,7 +378,7 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Oh, an other quest slot!', 'Reach quest level 5', new QuestLevelRequirement(5), 0.2);
         AchievementHandler.addAchievement('todo_questlevel', 'Reach quest level 10', new QuestLevelRequirement(10), 0.3);
         AchievementHandler.addAchievement('What do i gain from leveling this?', 'Reach quest level 25', new QuestLevelRequirement(25), 0.5);
-        AchievementHandler.addAchievement('todo_questlevel2', 'Reach quest level 50', new QuestLevelRequirement(50), 0.8);
+        AchievementHandler.addAchievement('todo_questlevel2', 'Reach quest level 40', new QuestLevelRequirement(40), 0.8);
 
         /*
          * REGIONAL
