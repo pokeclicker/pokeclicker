@@ -833,7 +833,7 @@ TownList['Professor Ivy\'s Lab'] = new Town(
 TownList['Four Island'] = new Town(
     'Four Island',
     GameConstants.Region.kanto,
-    [FourIslandShop],
+    [FourIslandShop, new MoveToDungeon(dungeonList['Icefall Cave'])],
     {
         requirements: [new QuestLineStepCompletedRequirement('Celio\'s Errand', 5)],
     }
@@ -4056,7 +4056,7 @@ TownList['Aether Paradise'] = new Town(
 TownList['Malie City'] = new Town(
     'Malie City',
     GameConstants.Region.alola,
-    [MalieCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Malie City']), new DockTownContent()],
+    [MalieCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Malie City']), new MoveToDungeon(dungeonList['Malie Garden']), new DockTownContent()],
     {
         requirements: [new TemporaryBattleRequirement('Ultra Wormhole')],
         npcs: [MalieKahuna],
