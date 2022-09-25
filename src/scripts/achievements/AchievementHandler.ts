@@ -356,6 +356,10 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Sam just wants to help', 'Get 10 Hatchery Helpers to 10% bonus efficiency', new HatcheryHelperRequirement(10, 10), 1);
         AchievementHandler.addAchievement('When are you going to breed yourself?', 'Get 10 Hatchery Helpers to 25% bonus efficiency', new HatcheryHelperRequirement(10, 25), 1.3);
 
+        AchievementHandler.addAchievement('Getting some help at the farm', 'Unlock 3 Farm Hands', new FarmHandRequirement(3), 0.2);
+        AchievementHandler.addAchievement('Starting a farming empire', 'Unlock 6 Farm Hands', new FarmHandRequirement(6), 0.3);
+        AchievementHandler.addAchievement('Will I ever need all this help?', 'Unlock 9 Farm Hands', new FarmHandRequirement(9), 0.4);
+
         /*
          * REGIONAL
          */
