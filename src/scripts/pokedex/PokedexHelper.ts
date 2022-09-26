@@ -171,11 +171,18 @@ class PokedexHelper {
     }
 
     public static getImage(id: number) {
+        const pokemon = PokemonHelper.getPokemonById(id);
         let src = 'assets/images/';
+        // Shiny
         if (App.game.party.alreadyCaughtPokemon(id, true) && !this.hideShinyImages()) {
             src += 'shiny';
         }
-        src += `pokemon/${id}.png`;
+        // Female
+        let genderString = '';
+        if (App.game.party.getPokemon(id).defaultFemaleSprite() && pokemon.gender.difference) {
+            genderString = '-f';
+        }
+        src += `pokemon/${id}${genderString}.png`;
         return src;
     }
 
