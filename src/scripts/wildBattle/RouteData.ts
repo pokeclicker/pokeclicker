@@ -1513,18 +1513,11 @@ Routes.add(new RegionRoute(
 KALOS
 */
 Routes.add(new RegionRoute(
-    'Kalos Route 1', GameConstants.Region.kalos, 1,
-    new RoutePokemon({
-        land: ['Rattata'],
-    }),
-    [new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)]
-));
-Routes.add(new RegionRoute(
     'Kalos Route 2', GameConstants.Region.kalos, 2,
     new RoutePokemon({
         land: ['Caterpie', 'Weedle', 'Pidgey', 'Zigzagoon', 'Fletchling', 'Bunnelby', 'Scatterbug'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.kalos, 1)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)]
 ));
 Routes.add(new RegionRoute(
     'Kalos Route 3', GameConstants.Region.kalos, 3,

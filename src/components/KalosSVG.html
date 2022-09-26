@@ -8,15 +8,6 @@
     <!-- ROUTES -->
     <!-- ------ -->
 
-    <!--Route 1-->
-    <%- include('templates/mapRoute',
-        { route: 1, region: 5
-        , width: 4.5, height: 3
-        , x: 53, y: 47
-        , rotate: true
-        })
-    %>
-
     <!--Route 2-->
     <%- include('templates/mapRoute',
         { route: 2, region: 5
@@ -644,6 +635,18 @@
         , x: 32, y: 12
         , width: 3, height: 4
         , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Coumarine City') }"
+        })
+    %>
+
+    <%- include('templates/mapPOI',
+        { name: "Route 1"
+        , width: 4.5, height: 3
+        , x: 53, y: 47
+        , rotate: true
+        , databind: `attr: { class: MapHelper.accessToTown("Aquacorde Town") ? 'unlockedTown' : 'lockedTown' },
+            click: () => {
+                Notifier.notify({message: 'This sure is a route'});
+            }`
         })
     %>
 
