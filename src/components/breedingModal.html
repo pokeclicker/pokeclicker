@@ -148,7 +148,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                 <div data-bind="if: App.game.party.getPokemon($data.id)?.pokerus" style="position: absolute;left: 2px;top:10px;">
                                     <img width="32px" src="" data-bind="attr: { src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[App.game.party.getPokemon($data.id).pokerus]}.png`}"/>
                                 </div>
-                                <img src="" width="80px" data-bind="attr:{ src: PokedexHelper.getImage($data.id)}">
+                                <img src="" width="80px" data-bind="attr:{ src: PokedexHelper.getImageStatistics($data.id)}">
                                 <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: BreedingController.getDisplayValue($data)">value</span>
                                 <a class="overlay" href="#breed" data-bind="click: function() { App.game.breeding.addPokemonToHatchery($data); App.game.breeding.checkCloseModal();}"></a>
                                 <div class="pokemonCategory dropdown">
