@@ -3477,7 +3477,7 @@ TownList['Aquacorde Town'] = new Town(
     GameConstants.Region.kalos,
     [AquacordeTownShop],
     {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 1)],
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)],
     }
 );
 TownList['Santalune City'] = new Town(
