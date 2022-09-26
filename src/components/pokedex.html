@@ -98,7 +98,7 @@ aria-labelledby="pokedexModalLabel">
 
            </div>
            <div>
-               <ul class="row justify-content-center p-0" data-bind="foreach: PokedexHelper.filteredList()"
+               <ul class="row justify-content-center p-0" data-bind="foreach: lazyLoad($element, PokedexHelper.filteredList)"
                    style="max-width: 100%; padding:0; margin:0;">
                    <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry"
                         data-bind="style:{background: PokedexHelper.getBackgroundColors($data.name)}">

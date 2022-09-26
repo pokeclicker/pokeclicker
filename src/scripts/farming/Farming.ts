@@ -180,8 +180,8 @@ class Farming implements Feature {
             ['This Berry can be eaten as is or boiled to obtain an extract that adds a dash of flavor to food.'], undefined, ['Flabébé (Blue)']);
         this.berryData[BerryType.Qualot]    = new Berry(BerryType.Qualot,   [230, 1000, 2500, 4800, 9600],
             22, 0.2, 550, 10,
-            [10, 0, 10, 0, 10], BerryColor.Yellow,
-            ['Even in places of constant rain and high humidity, this Berry\'s plant grows healthy and strong.'], undefined, ['Flabébé (Yellow)', 'Oricorio (Pom-Pom)']);
+            [10, 0, 10, 0, 10], BerryColor.Pink,
+            ['Even in places of constant rain and high humidity, this Berry\'s plant grows healthy and strong.'], undefined, ['Oricorio (Pa\'u)']);
         this.berryData[BerryType.Hondew]    = new Berry(BerryType.Hondew,   [1000, 2000, 5000, 10800, 21600],
             23, 0.2, 2000, 10,
             [10, 10, 0, 10, 0], BerryColor.Green,
@@ -234,6 +234,13 @@ class Farming implements Feature {
             20, 0.1, 1100, 10,
             [10, 0, 0, 0, 30], BerryColor.Purple,
             ['This glossy and colorful Berry has a mouthwateringly delicious appearance. However, it is awfully sour.'], undefined, ['Oricorio (Sensu)']);
+        this.berryData[BerryType.Pinkan]    = new Berry(BerryType.Pinkan,   [1800, 3600, 7200, 14400, 28800],
+            3, 0.1, 2500, 15,
+            [0, 0, 50, 0, 0], BerryColor.Pink,
+            [
+                'This Berry endemic to Pinkan Island has an incredibly sweet taste.',
+                'It has a vibrant pink pigment, and it is found in such abundance on Pinkan Island that all Pokémon found there are colored Pink!',
+            ], undefined, ['Oricorio (Pa\'u)']);
         //#endregion
 
         //#region Fourth Generation (Typed)
@@ -257,7 +264,7 @@ class Farming implements Feature {
             [
                 'Energy from lightning strikes is drawn into the plant, making the Berries grow big and rich.',
                 'The same energy promotes the growth of nearby Berries.',
-            ], new Aura(AuraType.Growth, [1.1, 1.2, 1.3]), ['Pikachu', 'Flabébé (Yellow)', 'Oricorio (Pom-Pom)']);
+            ], new Aura(AuraType.Growth, [1.1, 1.2, 1.3]), ['Pikachu', 'Flabébé (Yellow)', 'Oricorio (Pom-Pom)', 'Morpeko (Hangry)']);
         this.berryData[BerryType.Rindo]     = new Berry(BerryType.Rindo,    [3600, 7200, 16200, 28800, 57600],
             24, 0.05, 1400, 15,
             [10, 0, 0, 15, 0], BerryColor.Green,
@@ -428,7 +435,7 @@ class Farming implements Feature {
         this.berryData[BerryType.Enigma]    = new Berry(BerryType.Enigma,   [10800, 21600, 43200, 86400, 604800],
             0.5, 0, 15000, 20,
             [40, 10, 0, 0, 0], BerryColor.Purple,
-            ['A completely enigmatic Berry. It apparently has the power of the stars that fill the night sky.'], undefined, ['Oricorio (Sensu)']);
+            ['A completely enigmatic Berry. It apparently has the power of the stars that fill the night sky.'], undefined, ['Detective Pikachu', 'Oricorio (Sensu)']);
         //#endregion
 
         //#endregion
@@ -629,6 +636,23 @@ class Farming implements Feature {
         this.mutations.push(new EvolveNearFlavorMutation(.0002, BerryType.Belue, BerryType.Nomel,
             [[0, 80], [0, 80], [0, 80], [0, 80], [130, 160]], {
                 hint: 'I\'ve heard that a Nomel berry will change if its surroundings get extremely sour!',
+            }));
+
+        // Pinkan
+        this.mutations.push(new GrowNearBerryMutation(.0005, BerryType.Pinkan,
+            [
+                BerryType.Pecha,
+                BerryType.Persim,
+                BerryType.Nanab,
+                BerryType.Mago,
+                BerryType.Qualot,
+                BerryType.Magost,
+                BerryType.Watmel,
+            ], {
+                hint: 'I\'ve heard that there\'s a special Pink Berry that only appears when surrounded by a bunch of different types of Pink Berries!',
+                unlockReq: function(): boolean {
+                    return App.game.quests.getQuestLine('Team Rocket\'s Pinkan Theme Park').state() > QuestLineState.inactive;
+                },
             }));
 
         //#endregion
@@ -1401,7 +1425,7 @@ class Farming implements Feature {
         this.farmHands.fromJSON(json.farmHands);
     }
 
-    public static genBounds = [8, 20, 35, 53, Infinity];
+    public static genBounds = [8, 20, 36, 54, Infinity];
     public static getGeneration(gen: number): BerryType[] {
         const genBounds = Farming.genBounds;
         const minBound = genBounds[gen - 1] || 0;

@@ -106,10 +106,10 @@ class BreedingController {
     public static getEggImage(egg: Egg): string {
         let eggType = EggType[egg.type].toLowerCase();
         if (eggType == 'pokemon') {
-            const dataPokemon: DataPokemon = PokemonHelper.getPokemonByName(egg.pokemon);
+            const dataPokemon: DataPokemon = PokemonHelper.getPokemonById(egg.pokemon);
             eggType = String(PokemonType[dataPokemon.type1]).toLowerCase();
         } else if (eggType == 'fossil') {
-            eggType = GameConstants.PokemonToFossil[egg.pokemon];
+            eggType = GameConstants.PokemonToFossil[PokemonHelper.getPokemonById(egg.pokemon).name];
         }
         return `assets/images/breeding/${eggType}.png`;
     }
@@ -220,9 +220,16 @@ class BreedingController {
     public static regionalAttackDebuff = ko.observable(-1);
 
     public static calculateRegionalMultiplier(pokemon: PartyPokemon): number {
-        if (BreedingController.regionalAttackDebuff() > -1 && PokemonHelper.calcNativeRegion(pokemon.name) !== BreedingController.regionalAttackDebuff()) {
-            return App.game.party.getRegionAttackMultiplier();
+        // Check if reginal debnuff is active
+        if (App.game.challenges.list.regionalAttackDebuff.active()) {
+            // Check if regional debuff being applied for sorting
+            if (BreedingController.regionalAttackDebuff() > -1 && PokemonHelper.calcNativeRegion(pokemon.name) !== BreedingController.regionalAttackDebuff()) {
+                return App.game.party.getRegionAttackMultiplier();
+            }
         }
         return 1.0;
     }
+
+    // Queue size limit setting
+    public static queueSizeLimit = ko.observable(-1);
 }

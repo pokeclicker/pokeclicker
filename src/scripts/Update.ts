@@ -387,8 +387,8 @@ class Update implements Saveable {
         },
 
         '0.7.6': ({ playerData, saveData }) => {
-            Update.renamePokemonInSaveData(saveData, 'Lets go Pikachu', 'Let\'s Go Pikachu');
-            Update.renamePokemonInSaveData(saveData, 'Lets go Eevee', 'Let\'s Go Eevee');
+            Update.changeHatcheryKey(saveData, 'Lets go Pikachu', 'Let\'s Go Pikachu');
+            Update.changeHatcheryKey(saveData, 'Lets go Eevee', 'Let\'s Go Eevee');
 
             // Check if the Let's Go Pikachu is hidden due to MissingNo (reset breeding status)
             const pikachu = saveData.party.caughtPokemon.find(p => p.id == -8);
@@ -440,7 +440,7 @@ class Update implements Saveable {
 
         '0.8.4': ({ playerData, saveData }) => {
             // Update Pokemon names
-            Update.renamePokemonInSaveData(saveData, 'Vivillon', 'Vivillon (Meadow)');
+            Update.changeHatcheryKey(saveData, 'Vivillon', 'Vivillon (Meadow)');
 
             // Track Battle Frontier milestones earned
             const milestones = [
@@ -672,7 +672,7 @@ class Update implements Saveable {
 
             // Start Galactic questline if player has Coal Badge already
             if (saveData.badgeCase[40]) {
-                Update.startQuestLine(saveData, 'A new world');
+                Update.startQuestLine(saveData, 'A New World');
             }
 
             // Clear Valley Windworks Clears
@@ -949,7 +949,7 @@ class Update implements Saveable {
             };
 
             // Update Pokemon name changes for hatchery/queue
-            const renamePokemon = Update.renamePokemonInSaveData;
+            const renamePokemon = Update.changeHatcheryKey;
             renamePokemon(saveData, 'Bulbasaur (clone)', 'Bulbasaur (Clone)');
             renamePokemon(saveData, 'Ivysaur (clone)', 'Ivysaur (Clone)');
             renamePokemon(saveData, 'Venusaur (clone)', 'Venusaur (Clone)');
@@ -1006,7 +1006,7 @@ class Update implements Saveable {
 
             // Start Galactic questline if player has Coal Badge already
             if (saveData.badgeCase[40]) {
-                Update.startQuestLine(saveData, 'A new world');
+                Update.startQuestLine(saveData, 'A New World');
             }
 
             // Update mine inventory
@@ -1058,8 +1058,8 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 10);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 11);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 12);
+            // Pinkan Ash
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 23);
-
             // Add sevii4567 dungeons
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 14);
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 15);
@@ -1069,15 +1069,141 @@ class Update implements Saveable {
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 19);
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 20);
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 21);
-
             // Add orange league badges
             saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 40);
             saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 41);
             saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 42);
             saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 43);
             saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 44);
+
+
+            // Start Plasma questline if player has Toxic Badge already
+            if (saveData.badgeCase[59]) {
+                Update.startQuestLine(saveData, 'Quest for the DNA Splicers');
+            }
+            // Remove Team Plasma Assault dungeon
+            saveData.statistics.dungeonsCleared.splice(90, 1);
+            // Add Team Plasma Temporary Battles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 16);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 17);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 18);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 19);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 20);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 21);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 22);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 23);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 24);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 25);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 26);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 27);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 28);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 29);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 30);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 31);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 32);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 33);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 34);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 35);
+            // Move player out of Team Plasma Assault
+            if (playerData._townName == ('Team Plasma Assault')) {
+                playerData._townName = ('Opelucid City');
+            }
+            // Move player out of Plasma Frigate
+            if (playerData._townName == ('Plasma Frigate')) {
+                playerData._townName = ('Humilau City');
+            }
+            // Move player out of Giant Chasm
+            if (playerData._townName == ('Giant Chasm')) {
+                playerData._townName = ('Humilau City');
+            }
+
+            // Add Detective Pikachu TemporaryBattles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 36);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 37);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 38);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 39);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 40);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 41);
         },
 
+        '0.9.14': ({ playerData, saveData }) => {
+            if (saveData.party.caughtPokemon.filter(p => p.id === 103.02).length) {
+                saveData.wallet.currencies[1] += 50000;
+            }
+        },
+
+        '0.9.15': ({ playerData, saveData }) => {
+            // Aegislash and Pumpkaboo line renames
+            const renamePokemon = Update.changeHatcheryKey;
+            renamePokemon(saveData, 'Aegislash', 'Aegislash (Shield)');
+            renamePokemon(saveData, 'Pumpkaboo', 'Pumpkaboo (Average)');
+            renamePokemon(saveData, 'Gourgeist', 'Gourgeist (Average)');
+
+            // Add Snorlax Temporary Battles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 1);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 2);
+
+            // Add Suicune Temporary Battles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 7);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 8);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 9);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 10);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 11);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 12);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 13);
+
+            // Pinkan Berry
+            saveData.farming.berryList = Update.moveIndex(saveData.farming.berryList, 35);
+            saveData.farming.unlockedBerries = Update.moveIndex(saveData.farming.unlockedBerries, 35);
+            saveData.farming.mutations = Update.moveIndex(saveData.farming.mutations, 28);
+            saveData.farming.plotList.forEach(p => {
+                if (p.berry >= 35) {
+                    p.berry++;
+                }
+            });
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 22);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 23);
+
+            // Add Princess Diancie Temporary Battles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 53);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 54);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 55);
+
+            // Replace Pokémon names to IDs
+            const eggList = saveData.breeding.eggList;
+            const queueList = saveData.breeding.queueList;
+            Update.changePokemonNameToId(saveData, eggList);
+            Update.changePokemonNameToId(saveData, queueList);
+
+            // Adding more Galar badges
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 109);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 110);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 111);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 112);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 113);
+        },
+
+        '0.9.16': ({ playerData, saveData }) => {
+            // Pinkan Berry
+            saveData.statistics.berriesHarvested = Update.moveIndex(saveData.statistics.berriesHarvested, 35);
+
+            // Rename Pinkan Rocket questline and Sinnoh questline
+            saveData.quests.questLines.forEach(v => {
+                if (v.name === 'Team Rocket\'s Pinkan Themepark') {
+                    v.name = 'Team Rocket\'s Pinkan Theme Park';
+                }
+            });
+            saveData.quests.questLines.forEach(v => {
+                if (v.name === 'A new world') {
+                    v.name = 'A New World';
+                }
+            });
+        },
+
+        '0.9.17': ({ playerData, saveData }) => {
+            // Add Sudowoodo Temporary Battle
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 7);
+        },
     };
 
     constructor() {
@@ -1309,7 +1435,7 @@ class Update implements Saveable {
 
     // If any pokemon names change in the data rename them,
     // note that name isn't used in party.
-    static renamePokemonInSaveData = (saveData, oldName, newName) => {
+    static changeHatcheryKey = (saveData, oldName, newName) => {
         if (!saveData.breeding) {
             return;
         }
@@ -1322,6 +1448,14 @@ class Update implements Saveable {
 
         // Fixup queue
         saveData.breeding.queueList = saveData.breeding.queueList?.map(p => p == oldName ? newName : p) || [];
+    }
+
+    // Replaces Pokémon names to IDs in the save data
+    static changePokemonNameToId(saveData, pokemonArray) {
+        pokemonArray?.forEach(pokemonName => {
+            const pokemon = PokemonHelper.getPokemonByName(pokemonName);
+            Update.changeHatcheryKey(saveData, pokemonName, pokemon.id);
+        });
     }
 
     static startQuestLine = (saveData, questLineName: string) => {
