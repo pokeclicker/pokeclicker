@@ -307,6 +307,24 @@
     </td>
 </script>
 
+<script type="text/html" id="BooleanSettingSliderTemplate">
+    <td class="p-2">
+        <label class="m-0" data-bind="attr: { for: 'checkbox-' + $data.name }, text: `${$data.displayName}:`">
+            setting name
+        </label>
+    </td>
+    <td class="p-2">
+        <label class="form-check-label toggler-wrapper style-1 m-auto">
+            <input class="clickable" type="checkbox"
+                data-bind="checked: $data.observableValue(), attr: {name, id: 'checkbox-' + $data.name }"
+                onchange="Settings.setSettingByName(this.name, this.checked)"/>
+            <div class="toggler-slider">
+                <div class="toggler-knob"></div>
+            </div>
+        </label>
+    </td>
+</script>
+
 <script type="text/html" id="SoundSettingTemplate">
     <td class="p-2">
         <label class="m-0" data-bind="attr: { for: 'checkbox-' + $data.setting.name }, text: `${$data.setting.displayName}:`">
