@@ -703,7 +703,7 @@ GymList['Oreburgh City'] = new Gym(
     'This is embarrassing... I went and lost to a Trainer who didn\'t have a single Gym Badge... But that\'s tough. You were strong, and I was weak. That\'s all there is. According to Pokémon League rules, I have to give you our Gym Badge since you\'ve beaten me, the Leader. Heres your official Pokémon League Coal Badge.',
     [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
     () => {
-        App.game.quests.getQuestLine('A new world').beginQuest();
+        App.game.quests.getQuestLine('A New World').beginQuest();
     }
 );
 GymList['Eterna City'] = new Gym(

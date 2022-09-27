@@ -86,6 +86,27 @@ class PartyController {
         return PartyController.proteinSortedList;
     }).extend({ rateLimit: 500 });
 
+    private static heldItemSortedList = [];
+    static getHeldItemSortedList = ko.pureComputed(() => {
+        // If the held item modal is open, we should sort it.
+        if (modalUtils.observableState.heldItemModal === 'show') {
+            PartyController.heldItemSortedList = [...App.game.party.caughtPokemon];
+            return PartyController.heldItemSortedList.sort(PartyController.compareBy(Settings.getSetting('heldItemSort').observableValue(), Settings.getSetting('heldItemSortDirection').observableValue()));
+        }
+        return PartyController.heldItemSortedList;
+    }).extend({ rateLimit: 500 });
+
+    private static pokemonsWithHeldItemSortedList = [];
+    static getPokemonsWithHeldItemSortedList = ko.pureComputed(() => {
+        // If the held item modal is open, we should sort it.
+        if (modalUtils.observableState.heldItemModal === 'show') {
+            PartyController.pokemonsWithHeldItemSortedList = [...App.game.party.caughtPokemon.filter(p => p.heldItem())];
+            return PartyController.pokemonsWithHeldItemSortedList.sort(PartyController.compareBy(Settings.getSetting('heldItemSort').observableValue(), Settings.getSetting('heldItemSortDirection').observableValue()));
+        }
+        return PartyController.pokemonsWithHeldItemSortedList;
+    }).extend({ rateLimit: 500 });
+
+
     public static calculateRegionalMultiplier(pokemon: PartyPokemon, region: number): number {
         if (region > -1 && PokemonHelper.calcNativeRegion(pokemon.name) !== region) {
             return App.game.party.getRegionAttackMultiplier();

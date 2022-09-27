@@ -124,6 +124,7 @@ TemporaryBattleList['Snorlax route 12'] = new TemporaryBattle(
     ],
     [new TemporaryBattleRequirement('Snorlax route 12'), new ObtainedPokemonRequirement(pokemonMap.Snorlax)],
     {
+        displayName: 'Snorlax',
         isTrainerBattle: false,
         hideTrainer: true,
         visibleRequirement: new OneFromManyRequirement([new RouteKillRequirement(10, GameConstants.Region.kanto, 11), new RouteKillRequirement(5, GameConstants.Region.kanto, 12)]),
@@ -136,6 +137,7 @@ TemporaryBattleList['Snorlax route 16'] = new TemporaryBattle(
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Tower'))],
     [new TemporaryBattleRequirement('Snorlax route 16'), new ObtainedPokemonRequirement(pokemonMap.Snorlax)],
     {
+        displayName: 'Snorlax',
         isTrainerBattle: false,
         hideTrainer: true,
         visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.kanto, 7),
@@ -285,6 +287,22 @@ TemporaryBattleList['Silver 2'] = new TemporaryBattle(
         displayName: 'Rival Silver',
         returnTown: 'Azalea Town',
         imageName: 'Silver',
+    }
+);
+TemporaryBattleList.Sudowoodo = new TemporaryBattle(
+    'Sudowoodo',
+    [new GymPokemon('Sudowoodo', 540000, 20)],
+    undefined,
+    [
+        new GymBadgeRequirement(BadgeEnums.Plain),
+        new RouteKillRequirement(10, GameConstants.Region.johto, 36),
+    ],
+    [new TemporaryBattleRequirement('Sudowoodo'), new ObtainedPokemonRequirement(pokemonMap.Sudowoodo)],
+    {
+        isTrainerBattle: false,
+        hideTrainer: true,
+        visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.johto, 36),
+
     }
 );
 TemporaryBattleList['Silver 3'] = new TemporaryBattle(
@@ -774,13 +792,12 @@ TemporaryBattleList['Pinkan Jessie & James'] = new TemporaryBattle(
         new GymPokemon('Meowth', 2000, 5),
     ],
     'We\'re blasting off again!!!!',
-    [new QuestLineStepCompletedRequirement('Team Rocket\'s Pinkan Themepark', 4)],
+    [new QuestLineStepCompletedRequirement('Team Rocket\'s Pinkan Theme Park', 4)],
     undefined,
     {
         displayName: 'Jessie & James',
     }
 );
-
 TemporaryBattleList['Pinkan Officer Jenny'] = new TemporaryBattle(
     'Pinkan Officer Jenny',
     [
@@ -788,8 +805,8 @@ TemporaryBattleList['Pinkan Officer Jenny'] = new TemporaryBattle(
         new GymPokemon('Arcanine', 3500000, 55),
         new GymPokemon('Pinkan Nidoking', 4000000, 70),
     ],
-    'So you\'re not with them? Okay...just don\'t help those criminals in the future, got it? Looks like some new Pinkan Pokémon have made their way to the island, if you bring us some Pinkan Berries we\'ll trade you for them.',
-    [new QuestLineStepCompletedRequirement('Team Rocket\'s Pinkan Themepark', 5)],
+    'So you\'re not with them? Okay... Just don\'t help those criminals in the future, got it? Looks like some new Pinkan Pokémon have made their way to the island, if you bring us some Pinkan Berries we\'ll trade you for them.',
+    [new QuestLineStepCompletedRequirement('Team Rocket\'s Pinkan Theme Park', 5)],
     undefined,
     {
         displayName: 'Officer Jenny',
@@ -887,7 +904,7 @@ TemporaryBattleList['Galactic Boss Cyrus'] = new TemporaryBattle(
         new GymPokemon('Murkrow', 3665000, 36),
     ],
     'Impressive. Your prowess is notable.',
-    [new QuestLineStepCompletedRequirement('A new world', 2)]
+    [new QuestLineStepCompletedRequirement('A New World', 2)]
 );
 TemporaryBattleList['Barry 5'] = new TemporaryBattle(
     'Barry 5',
@@ -2981,7 +2998,6 @@ TemporaryBattleList['Avery 3'] = new TemporaryBattle(
         imageName: 'Avery',
     }
 );
-
 TemporaryBattleList['Zarude Tribe 1'] = new TemporaryBattle(
     'Zarude Tribe 1',
     [

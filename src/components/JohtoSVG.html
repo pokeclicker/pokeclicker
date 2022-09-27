@@ -694,6 +694,16 @@
          })
      %>
 
+     <%- include('templates/mapOverlay',
+         { name: "Sudowoodo"
+         , x: 32.5, y: 17
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Sudowoodo'].protectedOnclick(), attr: { class: TemporaryBattleList['Sudowoodo'].isUnlocked() ? '' : 'locked' }"
+         , visible:  "TemporaryBattleList['Sudowoodo'] && TemporaryBattleList['Sudowoodo'].isVisible()"
+         , image: "assets/images/map/sudowoodooverworld.png"
+         })
+     %>
+
     <%- include('templates/mapOverlay',
         { name: "Suicune"
         , x: 8, y: 39
