@@ -833,7 +833,7 @@ TownList['Professor Ivy\'s Lab'] = new Town(
 TownList['Four Island'] = new Town(
     'Four Island',
     GameConstants.Region.kanto,
-    [FourIslandShop],
+    [FourIslandShop, new MoveToDungeon(dungeonList['Icefall Cave'])],
     {
         requirements: [new QuestLineStepCompletedRequirement('Celio\'s Errand', 5)],
     }
@@ -1100,6 +1100,7 @@ const VioletCityShop = new Shop([
     ItemList.Lucky_egg,
     ItemList.MediumRestore,
     ItemList.Mystery_egg,
+    ItemList.Wonder_Chest,
     ItemList.Togepi,
 ]);
 const AzaleaTownShop = new Shop([
@@ -2200,6 +2201,7 @@ const FightAreaShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
     ItemList.Ultraball,
+    ItemList.Macho_Brace,
 ]);
 const SurvivalAreaShop = new Shop([
     ItemList.Pokeball,
@@ -4059,7 +4061,7 @@ TownList['Aether Paradise'] = new Town(
 TownList['Malie City'] = new Town(
     'Malie City',
     GameConstants.Region.alola,
-    [MalieCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Malie City']), new DockTownContent()],
+    [MalieCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Malie City']), new MoveToDungeon(dungeonList['Malie Garden']), new DockTownContent()],
     {
         requirements: [new TemporaryBattleRequirement('Ultra Wormhole')],
         npcs: [MalieKahuna],
