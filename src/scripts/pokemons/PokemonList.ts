@@ -612,6 +612,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 80,
             'speed': 70,
         },
+        'heldItem': {type: ItemType.item, id: 'Silver_Powder'},
     },
     {
         'id': 12.01,
@@ -629,6 +630,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 80,
             'speed': 70,
         },
+        'heldItem': {type: ItemType.item, id: 'Silver_Powder'},
     },
     {
         'id': 12.02,
@@ -646,6 +648,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 80,
             'speed': 70,
         },
+        'heldItem': {type: ItemType.item, id: 'Silver_Powder'},
     },
     {
         'id': 12.03,
@@ -663,6 +666,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 80,
             'speed': 70,
         },
+        'heldItem': {type: ItemType.item, id: 'Silver_Powder'},
     },
     {
         'id': 12.04,
@@ -984,6 +988,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 31,
             'speed': 70,
         },
+        'heldItem': {type: ItemType.item, id: 'Sharp_Beak'},
     },
     {
         'id': 21.1,
@@ -1001,6 +1006,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 31,
             'speed': 70,
         },
+        'heldItem': {type: ItemType.item, id: 'Sharp_Beak'},
     },
     {
         'id': 22,
@@ -1018,6 +1024,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 61,
             'speed': 100,
         },
+        'heldItem': {type: ItemType.item, id: 'Sharp_Beak'},
     },
     {
         'id': 23,
@@ -1094,6 +1101,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 50,
             'speed': 90,
         },
+        'heldItem': {type: ItemType.item, id: 'Light_Ball'},
     },
     {
         'id': 25.01,
@@ -1111,6 +1119,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 50,
             'speed': 90,
         },
+        'heldItem': {type: ItemType.item, id: 'Light_Ball'},
     },
     {
         'id': 25.02,
@@ -1128,6 +1137,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 50,
             'speed': 90,
         },
+        'heldItem': {type: ItemType.item, id: 'Light_Ball'},
     },
     {
         'id': 25.03,
@@ -1145,6 +1155,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 50,
             'speed': 90,
         },
+        'heldItem': {type: ItemType.item, id: 'Light_Ball'},
     },
     {
         'id': 25.04,
@@ -1162,6 +1173,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 50,
             'speed': 90,
         },
+        'heldItem': {type: ItemType.item, id: 'Light_Ball'},
     },
     {
         'id': 25.05,
@@ -1179,6 +1191,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 50,
             'speed': 90,
         },
+        'heldItem': {type: ItemType.item, id: 'Light_Ball'},
     },
     {
         'id': 25.06,
@@ -1196,6 +1209,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 50,
             'speed': 90,
         },
+        'heldItem': {type: ItemType.item, id: 'Light_Ball'},
     },
     {
         'id': 25.07,
@@ -1213,6 +1227,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 50,
             'speed': 90,
         },
+        'heldItem': {type: ItemType.item, id: 'Light_Ball'},
     },
     {
         'id': 25.08,
@@ -1230,6 +1245,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 50,
             'speed': 90,
         },
+        'heldItem': {type: ItemType.item, id: 'Light_Ball'},
     },
     {
         'id': 25.09,
@@ -1247,6 +1263,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 50,
             'speed': 90,
         },
+        'heldItem': {type: ItemType.item, id: 'Light_Ball'},
     },
     {
         'id': 25.10,
@@ -1264,6 +1281,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 50,
             'speed': 90,
         },
+        'heldItem': {type: ItemType.item, id: 'Light_Ball'},
     },
     {
         'id': 25.11,
@@ -1281,6 +1299,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 50,
             'speed': 90,
         },
+        'heldItem': {type: ItemType.item, id: 'Light_Ball'},
     },
     {
         'id': 25.12,
@@ -1298,6 +1317,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 50,
             'speed': 90,
         },
+        'heldItem': {type: ItemType.item, id: 'Light_Ball'},
     },
     {
         'id': 25.13,
@@ -1315,6 +1335,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 50,
             'speed': 90,
         },
+        'heldItem': {type: ItemType.item, id: 'Light_Ball'},
     },
     {
         'id': 25.14,
@@ -1333,6 +1354,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 50,
             'speed': 90,
         },
+        'heldItem': {type: ItemType.item, id: 'Light_Ball'},
     },
     {
         'id': 25.15,
@@ -1351,6 +1373,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 50,
             'speed': 90,
         },
+        'heldItem': {type: ItemType.item, id: 'Light_Ball'},
     },
     {
         'id': 26,
@@ -1457,6 +1480,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 55,
             'speed': 65,
         },
+        'heldItem': {type: ItemType.item, id: 'Soft_Sand'},
     },
     {
         'id': 28.01,
@@ -1690,6 +1714,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 65,
             'speed': 65,
         },
+        'heldItem': {type: ItemType.item, id: 'Charcoal'},
     },
     {
         'id': 37.01,
@@ -1726,6 +1751,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 100,
             'speed': 100,
         },
+        'heldItem': {type: ItemType.item, id: 'Charcoal'},
     },
     {
         'id': 38.01,
@@ -2045,6 +2071,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 75,
             'speed': 90,
         },
+        'heldItem': {type: ItemType.item, id: 'Silver_Powder'},
     },
     {
         'id': 50,
@@ -2063,6 +2090,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 45,
             'speed': 95,
         },
+        'heldItem': {type: ItemType.item, id: 'Soft_Sand'},
     },
     {
         'id': 50.01,
@@ -2082,6 +2110,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 45,
             'speed': 90,
         },
+        'heldItem': {type: ItemType.item, id: 'Soft_Sand'},
     },
     {
         'id': 50.02,
@@ -2099,6 +2128,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 45,
             'speed': 95,
         },
+        'heldItem': {type: ItemType.item, id: 'Soft_Sand'},
     },
     {
         'id': 51,
@@ -2116,6 +2146,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 70,
             'speed': 120,
         },
+        'heldItem': {type: ItemType.item, id: 'Soft_Sand'},
     },
     {
         'id': 51.01,
@@ -2134,6 +2165,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 70,
             'speed': 110,
         },
+        'heldItem': {type: ItemType.item, id: 'Soft_Sand'},
     },
     {
         'id': 52,
@@ -2476,6 +2508,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 55,
             'speed': 90,
         },
+        'heldItem': {type: ItemType.item, id: 'Twisted_Spoon'},
     },
     {
         'id': 64,
@@ -2494,6 +2527,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 70,
             'speed': 105,
         },
+        'heldItem': {type: ItemType.item, id: 'Twisted_Spoon'},
     },
     {
         'id': 65,
@@ -2511,6 +2545,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 95,
             'speed': 120,
         },
+        'heldItem': {type: ItemType.item, id: 'Twisted_Spoon'},
     },
     {
         'id': 66,
@@ -2529,6 +2564,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 35,
             'speed': 35,
         },
+        'heldItem': {type: ItemType.item, id: 'Macho_Brace'},
     },
     {
         'id': 67,
@@ -3033,7 +3069,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 70,
             'speed': 70,
         },
-        'heldItem': {type: ItemType.item, id: 'Metal_coat'},
+        'heldItem': {type: ItemType.item, id: 'Magnet'},
     },
     {
         'id': 83,
@@ -3051,6 +3087,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 62,
             'speed': 60,
         },
+        'heldItem': {type: ItemType.item, id: 'Leek'},
     },
     {
         'id': 83.1,
@@ -3070,6 +3107,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 62,
             'speed': 55,
         },
+        'heldItem': {type: ItemType.item, id: 'Leek'},
     },
     {
         'id': 84,
@@ -3091,6 +3129,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 35,
             'speed': 75,
         },
+        'heldItem': {type: ItemType.item, id: 'Sharp_Beak'},
     },
     {
         'id': 85,
@@ -3108,6 +3147,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 60,
             'speed': 110,
         },
+        'heldItem': {type: ItemType.item, id: 'Sharp_Beak'},
     },
     {
         'id': 85.01,
@@ -3125,6 +3165,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 60,
             'speed': 110,
         },
+        'heldItem': {type: ItemType.item, id: 'Sharp_Beak'},
     },
     {
         'id': 86,
@@ -3160,6 +3201,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 95,
             'speed': 70,
         },
+        'heldItem': {type: ItemType.item, id: 'Never_Melt_Ice'},
     },
     {
         'id': 88,
@@ -3303,6 +3345,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 55,
             'speed': 95,
         },
+        'heldItem': {type: ItemType.item, id: 'Spell_Tag'},
     },
     {
         'id': 94,
@@ -3594,7 +3637,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 50,
             'speed': 35,
         },
-        'heldItem': {type: ItemType.underground, id: 'Rare Bone'},
+        'heldItem': {type: ItemType.item, id: 'Thick_Club'},
     },
     {
         'id': 105,
@@ -3612,7 +3655,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 80,
             'speed': 45,
         },
-        'heldItem': {type: ItemType.underground, id: 'Rare Bone'},
+        'heldItem': {type: ItemType.item, id: 'Thick_Club'},
     },
     {
         'id': 105.01,
@@ -3631,6 +3674,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 80,
             'speed': 45,
         },
+        'heldItem': {type: ItemType.item, id: 'Thick_Club'},
     },
     {
         'id': 105.02,
@@ -3649,6 +3693,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 80,
             'speed': 65,
         },
+        'heldItem': {type: ItemType.item, id: 'Thick_Club'},
     },
     {
         'id': 106,
@@ -3956,6 +4001,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 50,
             'speed': 63,
         },
+        'heldItem': {type: ItemType.item, id: 'Mystic_Water'},
     },
     {
         'id': 119,
@@ -3973,6 +4019,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 80,
             'speed': 68,
         },
+        'heldItem': {type: ItemType.item, id: 'Mystic_Water'},
     },
     {
         'id': 120,
@@ -4237,6 +4284,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 95,
             'speed': 60,
         },
+        'heldItem': {type: ItemType.item, id: 'Mystic_Water'},
     },
     {
         'id': 131.1,
@@ -4272,6 +4320,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 48,
             'speed': 48,
         },
+        'heldItem': {type: ItemType.item, id: 'Quick_Powder'},
     },
     {
         'id': 133,
@@ -4692,7 +4741,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 70,
             'speed': 70,
         },
-        'heldItem': {type: ItemType.item, id: 'Dragon_scale'},
+        'heldItem': {type: ItemType.item, id: 'Dragon_Fang'},
     },
     {
         'id': 149,
@@ -5702,6 +5751,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 85,
             'speed': 85,
         },
+        'heldItem': {type: ItemType.item, id: 'Spell_Tag'},
     },
     {
         'id': 201,
@@ -6667,7 +6717,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 70,
             'speed': 70,
         },
-        'heldItem': {type: ItemType.item, id: 'Metal_coat'},
+        'heldItem': {type: ItemType.item, id: 'Sharp_Beak'},
     },
     {
         'id': 228,
@@ -7762,6 +7812,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 82,
             'speed': 80,
         },
+        'heldItem': {type: ItemType.item, id: 'Silver_Powder'},
     },
     {
         'id': 285,
@@ -7871,6 +7922,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 30,
             'speed': 40,
         },
+        'heldItem': {type: ItemType.item, id: 'Soft_Sand'},
     },
     {
         'id': 291,
@@ -7976,6 +8028,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 30,
             'speed': 25,
         },
+        'heldItem': {type: ItemType.item, id: 'Black_Belt'},
     },
     {
         'id': 297,
@@ -8037,7 +8090,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 90,
             'speed': 30,
         },
-        'heldItem': {type: ItemType.underground, id: 'Hard Stone'},
+        'heldItem': {type: ItemType.item, id: 'Magnet'},
     },
     {
         'id': 300,
@@ -8479,6 +8532,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 70,
             'speed': 20,
         },
+        'heldItem': {type: ItemType.item, id: 'Charcoal'},
     },
     {
         'id': 325,
@@ -8549,6 +8603,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 45,
             'speed': 10,
         },
+        'heldItem': {type: ItemType.item, id: 'Soft_Sand'},
     },
     {
         'id': 329,
@@ -8951,6 +9006,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 70,
             'speed': 70,
         },
+        'heldItem': {type: ItemType.item, id: 'Silk_Scarf'},
     },
     {
         'id': 351.1,
@@ -8968,6 +9024,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 70,
             'speed': 70,
         },
+        'heldItem': {type: ItemType.item, id: 'Charcoal'},
     },
     {
         'id': 351.2,
@@ -8985,6 +9042,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 70,
             'speed': 70,
         },
+        'heldItem': {type: ItemType.item, id: 'Mystic_Water'},
     },
     {
         'id': 351.3,
@@ -9002,6 +9060,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 70,
             'speed': 70,
         },
+        'heldItem': {type: ItemType.item, id: 'Never_Melt_Ice'},
     },
     {
         'id': 352,
@@ -9037,6 +9096,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 33,
             'speed': 45,
         },
+        'heldItem': {type: ItemType.item, id: 'Spell_Tag'},
     },
     {
         'id': 354,
@@ -9054,6 +9114,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 63,
             'speed': 65,
         },
+        'heldItem': {type: ItemType.item, id: 'Spell_Tag'},
     },
     {
         'id': 355,
@@ -9072,6 +9133,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 90,
             'speed': 25,
         },
+        'heldItem': {type: ItemType.item, id: 'Spell_Tag'},
     },
     {
         'id': 356,
@@ -9090,6 +9152,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 130,
             'speed': 25,
         },
+        'heldItem': {type: ItemType.item, id: 'Spell_Tag'},
     },
     {
         'id': 357,
@@ -9362,7 +9425,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 30,
             'speed': 50,
         },
-        'heldItem': {type: ItemType.item, id: 'Dragon_scale'},
+        'heldItem': {type: ItemType.item, id: 'Dragon_Fang'},
     },
     {
         'id': 372,
@@ -9381,7 +9444,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 50,
             'speed': 50,
         },
-        'heldItem': {type: ItemType.item, id: 'Dragon_scale'},
+        'heldItem': {type: ItemType.item, id: 'Dragon_Fang'},
     },
     {
         'id': 373,
@@ -9399,7 +9462,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 80,
             'speed': 100,
         },
-        'heldItem': {type: ItemType.item, id: 'Dragon_scale'},
+        'heldItem': {type: ItemType.item, id: 'Dragon_Fang'},
     },
     {
         'id': 374,
@@ -10360,6 +10423,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 53,
             'speed': 35,
         },
+        'heldItem': {type: ItemType.item, id: 'Miracle_Seed'},
     },
     {
         'id': 421,
@@ -10378,6 +10442,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 78,
             'speed': 85,
         },
+        'heldItem': {type: ItemType.item, id: 'Miracle_Seed'},
     },
     {
         'id': 421.1,
@@ -10395,6 +10460,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 78,
             'speed': 85,
         },
+        'heldItem': {type: ItemType.item, id: 'Miracle_Seed'},
     },
     {
         'id': 422,
@@ -11140,6 +11206,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 60,
             'speed': 40,
         },
+        'heldItem': {type: ItemType.item, id: 'Never_Melt_Ice'},
     },
     {
         'id': 460,
@@ -11157,6 +11224,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 85,
             'speed': 60,
         },
+        'heldItem': {type: ItemType.item, id: 'Never_Melt_Ice'},
     },
     {
         'id': 461,
@@ -11450,6 +11518,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 135,
             'speed': 45,
         },
+        'heldItem': {type: ItemType.item, id: 'Spell_Tag'},
     },
     {
         'id': 478,
@@ -12944,6 +13013,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 85,
             'speed': 45,
         },
+        'heldItem': {type: ItemType.item, id: 'Black_Belt'},
     },
     {
         'id': 539,
@@ -12961,6 +13031,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 75,
             'speed': 85,
         },
+        'heldItem': {type: ItemType.item, id: 'Black_Belt'},
     },
     {
         'id': 540,
@@ -13356,6 +13427,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 67,
             'speed': 60,
         },
+        'heldItem': {type: ItemType.item, id: 'Miracle_Seed'},
     },
     {
         'id': 557,
@@ -13463,6 +13535,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 65,
             'speed': 30,
         },
+        'heldItem': {type: ItemType.item, id: 'Spell_Tag'},
     },
     {
         'id': 562.1,
@@ -13499,6 +13572,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 105,
             'speed': 30,
         },
+        'heldItem': {type: ItemType.item, id: 'Spell_Tag'},
     },
     {
         'id': 564,
@@ -13587,6 +13661,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 62,
             'speed': 65,
         },
+        'heldItem': {type: ItemType.item, id: 'Silk_Scarf'},
     },
     {
         'id': 569,
@@ -13604,6 +13679,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 82,
             'speed': 75,
         },
+        'heldItem': {type: ItemType.item, id: 'Silk_Scarf'},
     },
     {
         'id': 569.1,
@@ -13622,6 +13698,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 82,
             'speed': 75,
         },
+        'heldItem': {type: ItemType.item, id: 'Silk_Scarf'},
     },
     {
         'id': 570,
@@ -13851,6 +13928,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 60,
             'speed': 44,
         },
+        'heldItem': {type: ItemType.item, id: 'Never_Melt_Ice'},
     },
     {
         'id': 583,
@@ -13869,6 +13947,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 75,
             'speed': 59,
         },
+        'heldItem': {type: ItemType.item, id: 'Never_Melt_Ice'},
     },
     {
         'id': 584,
@@ -13886,6 +13965,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 95,
             'speed': 79,
         },
+        'heldItem': {type: ItemType.item, id: 'Never_Melt_Ice'},
     },
     {
         'id': 585,
@@ -14534,6 +14614,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 135,
             'speed': 105,
         },
+        'heldItem': {type: ItemType.item, id: 'Never_Melt_Ice'},
     },
     {
         'id': 616,
@@ -14586,6 +14667,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 99,
             'speed': 32,
         },
+        'heldItem': {type: ItemType.item, id: 'Soft_Sand'},
     },
     {
         'id': 618.1,
@@ -14656,6 +14738,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 90,
             'speed': 48,
         },
+        'heldItem': {type: ItemType.item, id: 'Dragon_Fang'},
     },
     {
         'id': 622,
@@ -14936,6 +15019,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 105,
             'speed': 100,
         },
+        'heldItem': {type: ItemType.item, id: 'Silver_Powder'},
     },
     {
         'id': 638,
@@ -17097,6 +17181,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 55,
             'speed': 51,
         },
+        'heldItem': {type: ItemType.item, id: 'Miracle_Seed'},
     },
     {
         'id': 710.1,
@@ -17115,6 +17200,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 55,
             'speed': 56,
         },
+        'heldItem': {type: ItemType.item, id: 'Miracle_Seed'},
     },
     {
         'id': 710.2,
@@ -17133,6 +17219,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 55,
             'speed': 46,
         },
+        'heldItem': {type: ItemType.item, id: 'Miracle_Seed'},
     },
     {
         'id': 710.3,
@@ -17151,6 +17238,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 55,
             'speed': 41,
         },
+        'heldItem': {type: ItemType.item, id: 'Miracle_Seed'},
     },
     {
         'id': 711,
@@ -18101,6 +18189,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 72,
             'speed': 27,
         },
+        'heldItem': {type: ItemType.item, id: 'Mystic_Water'},
     },
     {
         'id': 752,
@@ -18118,6 +18207,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 132,
             'speed': 42,
         },
+        'heldItem': {type: ItemType.item, id: 'Mystic_Water'},
     },
     {
         'id': 752.01,
@@ -18153,6 +18243,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 35,
             'speed': 35,
         },
+        'heldItem': {type: ItemType.item, id: 'Miracle_Seed'},
     },
     {
         'id': 754,
@@ -18466,6 +18557,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 45,
             'speed': 15,
         },
+        'heldItem': {type: ItemType.item, id: 'Spell_Tag'},
     },
     {
         'id': 770,
@@ -18706,6 +18798,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 85,
             'speed': 36,
         },
+        'heldItem': {type: ItemType.item, id: 'Charcoal'},
     },
     {
         'id': 777,
@@ -20807,6 +20900,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 177,
         'catchRate': 45,
+        'heldItem': {type: ItemType.item, id: 'Leek'},
     },
     {
         'id': 866,
