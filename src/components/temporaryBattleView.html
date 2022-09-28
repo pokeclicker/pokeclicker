@@ -38,8 +38,21 @@
           </div>
         </div>
 
-        <div>
+        <div style="position:absolute; left:65%;" data-bind="if: !TemporaryBattleRunner.battleObservable().optionalArgs.hideTrainer">
+            <img data-bind="attr:{ src: TemporaryBattleRunner.battleObservable().getImage() }" onerror="this.src='assets/images/trainers/Mysterious Trainer.png';"/>
+        </div>
+
+        <div data-bind="ifnot: TemporaryBattleBattle.catching">
             <img class="enemy" data-bind="attr:{ src: PokemonHelper.getImage(TemporaryBattleBattle.enemyPokemon(), TemporaryBattleBattle.enemyPokemon().shiny) }" src=""/>
+        </div>
+
+        <div data-bind="if: TemporaryBattleBattle.catching" class="catchChance">
+            <img class="pokeball-animated"
+                 data-bind="attr:{ src: 'assets/images/pokeball/' + GameConstants.Pokeball[TemporaryBattleBattle.pokeball()] + '.svg' }"
+                 src=""/>
+            <br>
+            Catch Chance:
+            <knockout data-bind="text: Math.floor(TemporaryBattleBattle.catchRateActual()) + '%'">Catch Rate</knockout>
         </div>
 
         <div class="progress hitpoints" style="height: 20px;">

@@ -80,7 +80,7 @@
     </style>
 
 </head>
-<body class="no-select" data-bind="class: 'no-select ' + Settings.getSetting('theme').observableValue() + ' ' + Settings.getSetting('backgroundImage').observableValue() ">
+<body class="no-select" data-bind="class: 'no-select ' + Settings.getSetting('theme').observableValue() + ' ' + Settings.getSetting('backgroundImage').observableValue(), attr : {'oncontextmenu' : 'return !' + Settings.getSetting('disableRightClickMenu').observableValue().toString() + ';'}">
 @import "dynamicBackground.html"
 
 <div id="toaster"></div>
@@ -654,6 +654,9 @@
 
 <!-- Bulletin board Modal -->
 @import "bulletinBoardModal.html"
+
+<!-- Held Item Modal -->
+@import "heldItemModal.html"
 
 </body>
 </html>

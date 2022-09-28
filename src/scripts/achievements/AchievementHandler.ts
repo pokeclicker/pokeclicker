@@ -257,22 +257,22 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Doomsday Bunker stocked with Poké Balls!', 'Purchase 100,000 Poké Balls', new PokeballRequirement(100000, GameConstants.Pokeball.Pokeball), 0.20);
 
         AchievementHandler.addAchievement('ooooo A blue one!', 'Purchase your first Great Ball', new PokeballRequirement(1, GameConstants.Pokeball.Greatball), 0.03);
-        AchievementHandler.addAchievement('Great Ball 2', 'Obtain 10 Great Balls', new PokeballRequirement(10, GameConstants.Pokeball.Greatball), 0.05);
-        AchievementHandler.addAchievement('Great Ball 3', 'Obtain 100 Great Balls', new PokeballRequirement(100, GameConstants.Pokeball.Greatball), 0.10);
-        AchievementHandler.addAchievement('Great Ball 4', 'Obtain 1,000 Great Balls', new PokeballRequirement(1000, GameConstants.Pokeball.Greatball), 0.15);
-        AchievementHandler.addAchievement('Great Ball 5', 'Obtain 10,000 Great Balls', new PokeballRequirement(10000, GameConstants.Pokeball.Greatball), 0.20);
-        AchievementHandler.addAchievement('Great Ball 6', 'Obtain 100,000 Great Balls', new PokeballRequirement(100000, GameConstants.Pokeball.Greatball), 0.30);
+        AchievementHandler.addAchievement('I got a few Shiny Voltorb! Oh, wait...', 'Obtain 10 Great Balls', new PokeballRequirement(10, GameConstants.Pokeball.Greatball), 0.05);
+        AchievementHandler.addAchievement('Now Shinies won\'t run away so easily!', 'Obtain 100 Great Balls', new PokeballRequirement(100, GameConstants.Pokeball.Greatball), 0.10);
+        AchievementHandler.addAchievement('Regular Poké Balls just aren\'t what they used to be', 'Obtain 1,000 Great Balls', new PokeballRequirement(1000, GameConstants.Pokeball.Greatball), 0.15);
+        AchievementHandler.addAchievement('A Great Investment', 'Obtain 10,000 Great Balls', new PokeballRequirement(10000, GameConstants.Pokeball.Greatball), 0.20);
+        AchievementHandler.addAchievement('The Greatest Collection of all time', 'Obtain 100,000 Great Balls', new PokeballRequirement(100000, GameConstants.Pokeball.Greatball), 0.30);
 
-        AchievementHandler.addAchievement('Ultra Ball 1', 'Obtain your first Ultra Ball', new PokeballRequirement(1, GameConstants.Pokeball.Ultraball), 0.05);
-        AchievementHandler.addAchievement('Ultra Ball 2', 'Obtain 10 Ultra Balls', new PokeballRequirement(10, GameConstants.Pokeball.Ultraball), 0.10);
-        AchievementHandler.addAchievement('Ultra Ball 3', 'Obtain 100 Ultra Balls', new PokeballRequirement(100, GameConstants.Pokeball.Ultraball), 0.15);
-        AchievementHandler.addAchievement('Ultra Ball 4', 'Obtain 1,000 Ultra Balls', new PokeballRequirement(1000, GameConstants.Pokeball.Ultraball), 0.20);
-        AchievementHandler.addAchievement('Ultra Ball 5', 'Obtain 10,000 Ultra Balls', new PokeballRequirement(10000, GameConstants.Pokeball.Ultraball), 0.30);
-        AchievementHandler.addAchievement('Ultra Ball 6', 'Obtain 100,000 Ultra Balls', new PokeballRequirement(100000, GameConstants.Pokeball.Ultraball), 0.40);
+        AchievementHandler.addAchievement('They made one even better?', 'Obtain your first Ultra Ball', new PokeballRequirement(1, GameConstants.Pokeball.Ultraball), 0.05);
+        AchievementHandler.addAchievement('Let\'s see how high the Catch Rate becomes', 'Obtain 10 Ultra Balls', new PokeballRequirement(10, GameConstants.Pokeball.Ultraball), 0.10);
+        AchievementHandler.addAchievement('This should be enough for those elusive roamers...', 'Obtain 100 Ultra Balls', new PokeballRequirement(100, GameConstants.Pokeball.Ultraball), 0.15);
+        AchievementHandler.addAchievement('They don\'t work on Ultra Beasts? That\'s false advertising!', 'Obtain 1,000 Ultra Balls', new PokeballRequirement(1000, GameConstants.Pokeball.Ultraball), 0.20);
+        AchievementHandler.addAchievement('I don\'t think I\'ll ever be able to go back to the commoner\'s Great Ball', 'Obtain 10,000 Ultra Balls', new PokeballRequirement(10000, GameConstants.Pokeball.Ultraball), 0.30);
+        AchievementHandler.addAchievement('Just making sure no rare Pokémon flees', 'Obtain 100,000 Ultra Balls', new PokeballRequirement(100000, GameConstants.Pokeball.Ultraball), 0.40);
 
-        AchievementHandler.addAchievement('Master Ball 1', 'Obtain your first Master Ball', new PokeballRequirement(1, GameConstants.Pokeball.Masterball), 0.20);
-        AchievementHandler.addAchievement('Master Ball 2', 'Obtain 10 Master Balls', new PokeballRequirement(10, GameConstants.Pokeball.Masterball), 0.30);
-        AchievementHandler.addAchievement('Master Ball 3', 'Obtain 100 Master Balls', new PokeballRequirement(100, GameConstants.Pokeball.Masterball), 0.40);
+        AchievementHandler.addAchievement('The Ultimate Catching Device', 'Obtain your first Master Ball', new PokeballRequirement(1, GameConstants.Pokeball.Masterball), 0.20);
+        AchievementHandler.addAchievement('Legendaries hate that guy', 'Obtain 10 Master Balls', new PokeballRequirement(10, GameConstants.Pokeball.Masterball), 0.30);
+        AchievementHandler.addAchievement('No Pokémon in the world can run away from me now!', 'Obtain 100 Master Balls', new PokeballRequirement(100, GameConstants.Pokeball.Masterball), 0.40);
 
         AchievementHandler.addAchievement('A Few Clicks In', 'Click 10 times', new ClickRequirement(10, 1), 0.02, GameConstants.Region.none, () => !challenges.list.disableClickAttack.active());
         AchievementHandler.addAchievement('Clicking Pro', 'Click 100 times', new ClickRequirement(100, 1), 0.05, GameConstants.Region.none, () => !challenges.list.disableClickAttack.active());
@@ -286,7 +286,7 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Who planted these here?', 'Unlock 8 Berries', new BerriesUnlockedRequirement(8), 0.1);
         AchievementHandler.addAchievement('Farmer in training', 'Unlock 18 Berries', new BerriesUnlockedRequirement(18), 0.2);
         AchievementHandler.addAchievement('Farming apprentice', 'Unlock 36 Berries', new BerriesUnlockedRequirement(36), 0.3);
-        AchievementHandler.addAchievement('Master Farmer', 'Unlock 67 Berries', new BerriesUnlockedRequirement(67), 0.4);
+        AchievementHandler.addAchievement('Master Farmer', 'Unlock 68 Berries', new BerriesUnlockedRequirement(68), 0.4);
 
         AchievementHandler.addAchievement('Can you do this for me?', 'Complete 1 quest', new QuestRequirement(1), 0.05);
         AchievementHandler.addAchievement('One more favor', 'Complete 10 quests', new QuestRequirement(10), 0.15);

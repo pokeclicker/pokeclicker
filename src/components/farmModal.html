@@ -5,11 +5,10 @@
         <div class="modal-content">
             <div class="modal-header p-0">
                 <ul class="nav nav-tabs nav-fill">
-                    <li class="nav-item" onclick="$('#farm-fireall').hide()"><a data-toggle='tab' class='nav-link active' href="#berryFarmView">Farm</a></li>
-                    <li class='nav-item' data-bind="visible: App.game.farming.farmHands.isUnlocked()" onclick="$('#farm-fireall').show()"><a data-toggle='tab' class='nav-link' href="#farmHandsView">Farm Hands (BETA)</a></li>
-                    <li class='nav-item' onclick="$('#farm-fireall').hide()"><a data-toggle='tab' class='nav-link' href="#berryDexView">Berrydex</a></li>
-                    <li class='nav-item' onclick="$('#farm-fireall').hide()"><a data-toggle='tab' class='nav-link' href="#helpView">Help</a></li>
-                    <!-- TODO: HLXII Add Apricorn Tab ? -->
+                    <li class="nav-item" onclick="FarmController.farmingModalTabSelected('berryFarmView')"><a data-toggle='tab' class='nav-link active' href="#berryFarmView">Farm</a></li>
+                    <li class='nav-item' onclick="FarmController.farmingModalTabSelected('farmHandsView')" data-bind="visible: App.game.farming.farmHands.isUnlocked()"><a data-toggle='tab' class='nav-link' href="#farmHandsView">Farm Hands (BETA)</a></li>
+                    <li class='nav-item' onclick="FarmController.farmingModalTabSelected('berryDexView')"><a data-toggle='tab' class='nav-link' href="#berryDexView">Berrydex</a></li>
+                    <li class='nav-item' onclick="FarmController.farmingModalTabSelected('helpView')"><a data-toggle='tab' class='nav-link' href="#helpView">Help</a></li>
                     <btn class="btn btn-primary">
                         <span data-bind="template: { name: 'currencyTemplate', data: {'amount': App.game.wallet.currencies[GameConstants.Currency.farmPoint](), 'currency': GameConstants.Currency.farmPoint}}"></span>
                     </btn>
@@ -401,16 +400,32 @@
                         html: true,
                     }">
                 </knockout>
-        				<button id="farm-fireall" type="button" class="btn btn-danger" data-bind="attr : {disabled : !App.game.farming.farmHands.hired().length}, click: function(){App.game.farming.farmHands.hired().forEach(function(f){f.fire();})}" style="display : none;">Fire All</button>
-                <div class="safeLockButton">
+        				<button id="farm-fireall" type="button" class="btn btn-danger" data-bind="
+                            attr : { disabled : !App.game.farming.farmHands.hired().length },
+                            click: () => App.game.farming.farmHands.hired().forEach((f) => f.fire()),
+                            visible: FarmController.farmingModalTabSelected() == 'farmHandsView'
+                        ">Fire All</button>
+                <div class="safeLockButton" data-bind="visible: FarmController.farmingModalTabSelected() == 'berryFarmView'">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-primary" data-bind="
+                            click: function() {FarmController.selectedPlotSafeLock() ? FarmController.selectedPlotSafeLock(false) : FarmController.selectedPlotSafeLock(true);FarmController.selectedShovel(false);FarmController.selectedMulchShovel(false);},
+                            css: { 'active': FarmController.selectedPlotSafeLock() },
+                            tooltip: {title: 'Toggle locking a plot from interaction.',  trigger: 'hover', animation: false}
+                        ">
+                            <img src="assets/images/farm/plotSafeLock.svg" height="22">
+                        </button>
 
-                    <button type="button" class="btn btn-primary" data-bind="click: function() {FarmController.selectedPlotSafeLock() ? FarmController.selectedPlotSafeLock(false) : FarmController.selectedPlotSafeLock(true);FarmController.selectedShovel(false);FarmController.selectedMulchShovel(false);},
-                        css: { 'active': FarmController.selectedPlotSafeLock() },
-                        tooltip: {title: 'Toggle locking a plot from interaction.',  trigger: 'hover', animation: false}"
-                        >
-                        <img src="assets/images/farm/plotSafeLock.svg" height="22">
-                    </button>
+                        <button type="button" class="btn btn-primary" data-bind="
+                            click: () => FarmController.toggleAllPlotsLocked(true),
+                            tooltip: { title: 'Lock all plots.', trigger: 'hover', animation: false }
+                        ">All</button>
+                        <button type="button" class="btn btn-primary" data-bind="
+                            click: () => FarmController.toggleAllPlotsLocked(false),
+                            tooltip: { title: 'Unlock all plots.', trigger: 'hover', animation: false }
+                        ">None</button>
+                    </div>
                 </div>
+
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
         </div>

@@ -40,7 +40,7 @@ class DungeonRunner {
 
         DungeonRunner.timeLeftPercentage(100);
         // Dungeon size increases with each region
-        let dungeonSize = GameConstants.BASE_DUNGEON_SIZE + player.region;
+        let dungeonSize = GameConstants.BASE_DUNGEON_SIZE + (dungeon.optionalParameters.dungeonRegionalDifficulty ?? player.region);
         // Decrease dungeon size by 1 for every 10, 100, 1000 etc completes
         dungeonSize -= Math.max(0, App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]().toString().length - 1);
         const flash = App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]() >= 200;
@@ -179,7 +179,7 @@ class DungeonRunner {
         let setting = NotificationConstants.NotificationSetting.Dungeons.common_dungeon_item_found;
 
         if (typeof BerryType[input] == 'number') {
-            const berryPlural = (amount < 2) ? 'Berry' : 'Berries';
+            const berryPlural = (amount === 1) ? 'Berry' : 'Berries';
             message = `Found ${Math.floor(amount)} × <img src="${image}" height="24px"/> ${GameConstants.humanifyString(input)} ${berryPlural} in a dungeon chest.`;
         } if (ItemList[input] instanceof PokeballItem) {
             message = `Found ${amount} × <img src="${image}" height ="24px"/> ${ItemList[input].displayName}${multiple} in a dungeon chest.`;

@@ -680,6 +680,67 @@
             , image: "assets/images/map/ashketchumoverworld.png"
             })
         %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Suicune"
+            , x: 66, y: 34
+            , width: 3, height: 4
+            , databind: "click: () => TemporaryBattleList['Suicune 3'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Suicune 3'] && TemporaryBattleList['Suicune 3'].isVisible()"
+            , image: "assets/images/map/suicune.png"
+            })
+        %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Suicune"
+            , x: 75, y: 43
+            , width: 3, height: 4
+            , databind: "click: () => TemporaryBattleList['Suicune 4'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Suicune 4'] && TemporaryBattleList['Suicune 4'].isVisible()"
+            , image: "assets/images/map/suicune.png"
+            })
+        %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Suicune"
+            , x: 80, y: 1
+            , width: 3, height: 4
+            , databind: "click: () => TemporaryBattleList['Suicune 5'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Suicune 5'] && TemporaryBattleList['Suicune 5'].isVisible()"
+            , image: "assets/images/map/suicune.png"
+            })
+        %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Suicune"
+            , x: 80, y: 1
+            , width: 3, height: 4
+            , databind: "click: () => TemporaryBattleList['Suicune 6'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Suicune 6'] && TemporaryBattleList['Suicune 6'].isVisible()"
+            , image: "assets/images/map/suicune.png"
+            })
+        %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Snorlax"
+            , x: 36, y: 19
+            , width: 4, height: 4
+            , databind: "click: () => TemporaryBattleList['Snorlax route 16'].protectedOnclick(), attr: { class: TemporaryBattleList['Snorlax route 16'].isUnlocked() ? '' : 'locked' }"
+            , visible:  "TemporaryBattleList['Snorlax route 16'] && TemporaryBattleList['Snorlax route 16'].isVisible()"
+            , image: "assets/images/map/snorlaxoverworld.png"
+            })
+        %>
+        
+        <%- include('templates/mapOverlay',
+        { name: "Snorlax"
+            , x: 87, y: 32
+            , width: 4, height: 4
+            , databind: "click: () => TemporaryBattleList['Snorlax route 12'].protectedOnclick(), attr: { class: TemporaryBattleList['Snorlax route 12'].isUnlocked() ? '' : 'locked' }"
+            , visible:  "TemporaryBattleList['Snorlax route 12'] && TemporaryBattleList['Snorlax route 12'].isVisible()"
+            , image: "assets/images/map/snorlaxoverworld.png"
+            })
+        %>
+    %>
     </g>
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.kanto, 'Sevii Islands 123').id">
@@ -716,7 +777,7 @@
         <%- include('templates/mapRoute',
             { route: 28, region: 0
             , width: 4, height: 3
-            , x: 47, y: 27
+            , x: 41, y: 29
             , name: "C.B."
             , rotate: true
             })
@@ -726,7 +787,7 @@
         <%- include('templates/mapRoute',
             { route: 29, region: 0
             , width: 12, height: 3
-            , x: 73, y: 41
+            , x: 64, y: 43
             , name: "B.B."
             })
         %>
@@ -754,7 +815,7 @@
         <!--Two Island-->
         <%- include('templates/mapTown',
             { name: "Two Island"
-            , x: 46, y: 31
+            , x: 40, y: 33
             , width: 4, height: 4
             })
         %>
@@ -762,8 +823,24 @@
         <!--Three Island-->
         <%- include('templates/mapTown',
             { name: "Three Island"
-            , x: 85, y: 41
+            , x: 76, y: 43
             , width: 4, height: 4
+            })
+        %>
+
+        <!--Professor Ivy's Lab-->
+        <%- include('templates/mapTown',
+            { name: "Professor Ivy\'s Lab"
+            , x: 95, y: 32.5
+            , width: 4, height: 3.5
+            })
+        %>
+        <!--Professor Ivy's Lab extension-->
+        <%- include('templates/mapTown',
+            { name: "Professor Ivy\'s Lab"
+            , x: 97.3, y: 36
+            , width: 1.5, height: 0.4
+            , isExtension: true
             })
         %>
 
@@ -783,14 +860,14 @@
         <!--Berry Forest-->
         <%- include('templates/mapDungeon',
             { name: "Berry Forest"
-            , x: 65, y: 39
+            , x: 56, y: 41
             , width: 8, height: 5
             })
         %>
         <!--Berry Forest extension-->
         <%- include('templates/mapDungeon',
             { name: "Berry Forest"
-            , x: 64, y: 39
+            , x: 55, y: 41
             , width: 1, height: 3
             , isExtension: true
             })
@@ -798,7 +875,7 @@
         <!--Berry Forest extension-->
         <%- include('templates/mapDungeon',
             { name: "Berry Forest"
-            , x: 65, y: 38
+            , x: 56, y: 40
             , width: 7, height: 1
             , isExtension: true
             })
@@ -814,6 +891,587 @@
             , x: 4, y: 31
             , width: 3, height: 2
             , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('One Island') }"
+            })
+        %>
+    </g>
+
+    <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.kanto, 'Sevii Islands 4567').id">
+        <image width="1600" height="960" data-bind="attr: {
+            'xlink:href':'assets/images/kanto-sevii4567.png?v=$VERSION',
+            href:'assets/images/kanto-sevii4567.png?v=$VERSION'
+        }"></image>
+
+        <!-- ------ -->
+        <!-- ROUTES -->
+        <!-- ------ -->
+
+        <!--Five Isle Meadow-->
+        <%- include('templates/mapRoute',
+            { route: 30, region: 0
+            , width: 3, height: 6.5
+            , x: 73, y: 21
+            , name: "FIM"
+            })
+        %>
+
+        <!--Five Isle Meadow extension-->
+        <%- include('templates/mapRoute',
+            { route: 30, region: 0
+            , width: 2, height: 3
+            , x: 71, y: 21
+            , noText: true
+            })
+        %>
+
+        <!--Five Isle Meadow extension-->
+        <%- include('templates/mapRoute',
+            { route: 30, region: 0
+            , width: 4, height: 3
+            , x: 73, y: 31
+            , noText: true
+            })
+        %>
+
+        <!--Memorial Pillar-->
+        <%- include('templates/mapRoute',
+            { route: 31, region: 0
+            , width: 3, height: 8
+            , x: 77, y: 31
+            , name: "MP"
+            })
+        %>
+
+        <!--Water Labyrinth-->
+        <%- include('templates/mapRoute',
+            { route: 32, region: 0
+            , width: 8, height: 3
+            , x: 59, y: 18
+            , name: "WL"
+            })
+        %>
+
+        <!--Water Labyrinth extension-->
+        <%- include('templates/mapRoute',
+            { route: 32, region: 0
+            , width: 3, height: 2
+            , x: 67, y: 18
+            , noText: true
+            })
+        %>
+
+        <!--Resort Gorgeous-->
+        <%- include('templates/mapRoute',
+            { route: 33, region: 0
+            , width: 11, height: 3
+            , x: 67, y: 15
+            , name: "RG"
+            })
+        %>
+
+        <!--Water Path-->
+        <%- include('templates/mapRoute',
+            { route: 34, region: 0
+            , width: 3, height: 15
+            , x: 57, y: 37
+            , name: "WP"
+            })
+        %>
+
+        <!--Water Path extension-->
+        <%- include('templates/mapRoute',
+            { route: 34, region: 0
+            , width: 2, height: 3
+            , x: 55, y: 44
+            , noText: true
+            })
+        %>
+
+        <!--Water Path extension-->
+        <%- include('templates/mapRoute',
+            { route: 34, region: 0
+            , width: 1, height: 2
+            , x: 56, y: 50
+            , noText: true
+            })
+        %>
+
+        <!--Green Path-->
+        <%- include('templates/mapRoute',
+            { route: 35, region: 0
+            , width: 6, height: 3
+            , x: 45, y: 37
+            , name: "GP"
+            })
+        %>
+
+        <!--Green Path extension-->
+        <%- include('templates/mapRoute',
+            { route: 35, region: 0
+            , width: 1, height: 3
+            , x: 56, y: 37
+            , noText: true
+            })
+        %>
+
+        <!--Outcast Island-->
+        <%- include('templates/mapRoute',
+            { route: 36, region: 0
+            , width: 3, height: 8
+            , x: 45, y: 29
+            , name: "OI"
+            })
+        %>
+
+        <!--Ruin Valley-->
+        <%- include('templates/mapRoute',
+            { route: 37, region: 0
+            , width: 7, height: 2
+            , x: 49, y: 50
+            , name: "RV"
+            })
+        %>
+
+        <!--Ruin Valley extension-->
+        <%- include('templates/mapRoute',
+            { route: 37, region: 0
+            , width: 2, height: 5
+            , x: 49, y: 52
+            , noText: true
+            })
+        %>
+
+        <!--Ruin Valley extension-->
+        <%- include('templates/mapRoute',
+            { route: 37, region: 0
+            , width: 5, height: 2
+            , x: 51, y: 55
+            , noText: true
+            })
+        %>
+
+        <!--Ruin Valley extension-->
+        <%- include('templates/mapRoute',
+            { route: 37, region: 0
+            , width: 2, height: 3
+            , x: 54, y: 52
+            , noText: true
+            })
+        %>
+
+        <!--Canyon Entrance-->
+        <%- include('templates/mapRoute',
+            { route: 38, region: 0
+            , width: 3, height: 10
+            , x: 24, y: 31
+            , name: "CE"
+            })
+        %>
+
+        <!--Canyon Entrance extension-->
+        <%- include('templates/mapRoute',
+            { route: 38, region: 0
+            , width: 1, height: 3
+            , x: 27, y: 38
+            , noText: true
+            })
+        %>
+
+        <!--Sevault Canyon-->
+        <%- include('templates/mapRoute',
+            { route: 39, region: 0
+            , width: 3, height: 12
+            , x: 28, y: 38
+            , name: "SC"
+            })
+        %>
+
+        <!--Valencia Island-->
+        <%- include('templates/mapRoute',
+            { route: 40, region: 0
+            , width: 2, height: 4
+            , x: 3, y: 9
+            , name: "VI"
+            })
+        %>
+        <!--Valencia Island extension-->
+        <%- include('templates/mapRoute',
+            { route: 40, region: 0
+            , width: 2, height: 3
+            , x: 4, y: 6
+            , noText: true
+            })
+        %>
+        <!--Valencia Island extension-->
+        <%- include('templates/mapRoute',
+            { route: 40, region: 0
+            , width: 1, height: 2
+            , x: 3, y: 7
+            , noText: true
+            })
+        %>
+
+        <!--Pinkan Forest-->
+        <%- include('templates/mapRoute',
+            { route: 41, region: 0
+            , width: 5, height: 13
+            , x: 45, y: 3
+            , name: "PF"
+            })
+        %>
+        <!--Pinkan Forest extension-->
+        <%- include('templates/mapRoute',
+            { route: 41, region: 0
+            , width: 6, height: 1
+            , x: 39, y: 3
+            , noText: true
+            })
+        %>
+        <!--Pinkan Forest extension-->
+        <%- include('templates/mapRoute',
+            { route: 41, region: 0
+            , width: 4, height: 1
+            , x: 43, y: 2
+            , noText: true
+            })
+        %>
+        <!--Pinkan Forest extension-->
+        <%- include('templates/mapRoute',
+            { route: 41, region: 0
+            , width: 1, height: 3
+            , x: 50, y: 8
+            , noText: true
+            })
+        %>
+        <!--Pinkan Forest extension-->
+        <%- include('templates/mapRoute',
+            { route: 41, region: 0
+            , width: 3, height: 3
+            , x: 42, y: 11
+            , noText: true
+            })
+        %>
+        <!--Pinkan Forest extension-->
+        <%- include('templates/mapRoute',
+            { route: 41, region: 0
+            , width: 2, height: 1
+            , x: 43, y: 10
+            , noText: true
+            })
+        %>
+        <!--Pinkan Forest extension-->
+        <%- include('templates/mapRoute',
+            { route: 41, region: 0
+            , width: 1, height: 2
+            , x: 44, y: 14
+            , noText: true
+            })
+        %>
+        <!--Pinkan Forest extension-->
+        <%- include('templates/mapRoute',
+            { route: 41, region: 0
+            , width: 6, height: 1
+            , x: 42, y: 16
+            , noText: true
+            })
+        %>
+
+        <!--Pinkan Plains-->
+        <%- include('templates/mapRoute',
+            { route: 42, region: 0
+            , width: 3, height: 5
+            , x: 39, y: 9
+            , name: "PP"
+            })
+        %>
+        <!--Pinkan Plains extension-->
+        <%- include('templates/mapRoute',
+            { route: 42, region: 0
+            , width: 3, height: 1
+            , x: 42, y: 9
+            , noText: true
+            })
+        %>
+        <!--Pinkan Plains extension-->
+        <%- include('templates/mapRoute',
+            { route: 42, region: 0
+            , width: 1, height: 1
+            , x: 42, y: 10
+            , noText: true
+            })
+        %>
+        <!--Pinkan Plains extension-->
+        <%- include('templates/mapRoute',
+            { route: 42, region: 0
+            , width: 1, height: 1
+            , x: 39, y: 14
+            , noText: true
+            })
+        %>
+        <!--Pinkan Plains extension-->
+        <%- include('templates/mapRoute',
+            { route: 42, region: 0
+            , width: 7, height: 1
+            , x: 33, y: 15
+            , noText: true
+            })
+        %>
+        <!--Pinkan Plains extension-->
+        <%- include('templates/mapRoute',
+            { route: 42, region: 0
+            , width: 1, height: 2
+            , x: 34, y: 7
+            , noText: true
+            })
+        %>
+        <!--Pinkan Plains extension-->
+        <%- include('templates/mapRoute',
+            { route: 42, region: 0
+            , width: 5, height: 1.5
+            , x: 34, y: 9
+            , noText: true
+            })
+        %>
+
+        <!-- ----- -->
+        <!-- TOWNS -->
+        <!-- ----- -->
+
+        <!--Four Island-->
+        <%- include('templates/mapTown',
+            { name: "Four Island"
+            , x: 20, y: 13
+            , width: 4, height: 3
+            })
+        %>
+
+        <!--Four Island extension-->
+        <%- include('templates/mapTown',
+            { name: "Four Island"
+            , x: 20, y: 11
+            , width: 3, height: 1
+            , isExtension: true
+            })
+        %>
+
+        <!--Five Island-->
+        <%- include('templates/mapTown',
+            { name: "Five Island"
+            , x: 67, y: 20
+            , width: 4, height: 4
+            })
+        %>
+
+        <!--Rocket Warehouse-->
+        <%- include('templates/mapTown',
+            { name: "Rocket Warehouse"
+            , x: 72, y: 27.5
+            , width: 4, height: 3.5
+            })
+        %>
+
+        <!--Six Island-->
+        <%- include('templates/mapTown',
+            { name: "Six Island"
+            , x: 51, y: 43
+            , width: 4, height: 4
+            })
+        %>
+
+        <!--Dotted Hole-->
+        <%- include('templates/mapTown',
+            { name: "Dotted Hole"
+            , x: 51, y: 52
+            , width: 3, height: 3
+            })
+        %>
+
+        <!--Seven Island-->
+        <%- include('templates/mapTown',
+            { name: "Seven Island"
+            , x: 24, y: 26
+            , width: 4, height: 4
+            })
+        %>
+
+        <!--Mikan Island-->
+        <%- include('templates/mapTown',
+            { name: "Mikan Island"
+            , x: 4, y: 50.5
+            , width: 4, height: 5.5
+            })
+        %>
+
+        <!--Navel Island-->
+        <%- include('templates/mapTown',
+            { name: "Navel Island"
+            , x: 89, y: 8
+            , width: 2, height: 4
+            })
+        %>
+
+        <!--Trovita Island-->
+        <%- include('templates/mapTown',
+            { name: "Trovita Island"
+            , x: 58, y: 4
+            , width: 4, height: 4
+            })
+        %>
+
+        <!--Kumquat Island-->
+        <%- include('templates/mapTown',
+            { name: "Kumquat Island"
+            , x: 6, y: 23
+            , width: 6, height: 10
+            })
+        %>
+
+        <!--Pummelo Island-->
+            <%- include('templates/mapTown',
+            { name: "Pummelo Island"
+            , x: 88, y: 51
+            , width: 7, height: 4
+            })
+        %>
+
+        <!--Valencia Pokémon Center-->
+        <%- include('templates/mapTown',
+            { name: "Valencia Pokémon Center"
+            , x: 3, y: 2.5
+            , width: 4, height: 3.5
+            })
+        %>
+
+        <!--Pinkan Pokémon Reserve-->
+        <%- include('templates/mapTown',
+            { name: "Pinkan Pokémon Reserve"
+            , x: 33, y: 10.5
+            , width: 6, height: 4.5
+            })
+        %>
+
+        <!-- -------- -->
+        <!-- DUNGEONS -->
+        <!-- -------- -->
+
+        <!--Icefall Cave-->
+        <%- include('templates/mapDungeon',
+            { name: "Icefall Cave"
+            , x: 23, y: 10
+            , width: 3, height: 3
+            })
+        %>
+
+        <!--Icefall Cave extension-->
+        <%- include('templates/mapDungeon',
+            { name: "Icefall Cave"
+            , x: 20, y: 10
+            , width: 3, height: 2
+            , isExtension: true
+            })
+        %>
+
+        <!--Lost Cave-->
+        <%- include('templates/mapDungeon',
+            { name: "Lost Cave"
+            , x: 79, y: 15
+            , width: 3, height: 3
+            })
+        %>
+
+        <!--Lost Cave extension-->
+        <%- include('templates/mapDungeon',
+            { name: "Lost Cave"
+            , x: 89, y: 12
+            , width: 3, height: 2
+            })
+        %>
+
+        <!--Altering Cave-->
+        <%- include('templates/mapDungeon',
+            { name: "Altering Cave"
+            , x: 44, y: 26
+            , width: 5, height: 3
+            })
+        %>
+
+        <!--Altering Cave extension-->
+        <%- include('templates/mapDungeon',
+            { name: "Altering Cave"
+            , x: 40, y: 14
+            , width: 4, height: 2
+            })
+        %>
+
+        <!--Altering Cave extension-->
+        <%- include('templates/mapDungeon',
+            { name: "Altering Cave"
+            , x: 40, y: 16
+            , width: 2, height: 1
+            , isExtension: true
+            })
+        %>
+
+        <!--Pattern Bush-->
+        <%- include('templates/mapDungeon',
+            { name: "Pattern Bush"
+            , x: 51, y: 36
+            , width: 5, height: 4
+            })
+        %>
+
+        <!--Tanoby Ruins-->
+        <%- include('templates/mapDungeon',
+            { name: "Tanoby Ruins"
+            , x: 19, y: 50
+            , width: 20, height: 4
+            })
+        %>
+
+        <!--Sunburst Island-->
+        <%- include('templates/mapDungeon',
+            { name: "Sunburst Island"
+            , x: 76, y: 39
+            , width: 5, height: 3
+            })
+        %>
+
+        <!--Sunburst Island extension-->
+        <%- include('templates/mapDungeon',
+            { name: "Sunburst Island"
+            , x: 76, y: 42
+            , width: 2, height: 1
+            , isExtension: true
+            })
+        %>
+
+        <!--Pinkan Mountain-->
+        <%- include('templates/mapDungeon',
+            { name: "Pinkan Mountain"
+            , x: 35, y: 4
+            , width: 10, height: 5
+            })
+        %>
+
+        <!-- ------------------ -->
+        <!-- PLACES OF INTEREST -->
+        <!-- ------------------ -->
+
+        <!--Dock-->
+        <%- include('templates/mapPOI',
+            { name: "Dock"
+            , x: 63, y: 22
+            , width: 3, height: 2
+            , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Five Island') }"
+            })
+        %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Ash Ketchum"
+            , x: 38, y: 3
+            , width: 4, height: 4
+            , databind: "click: () => TemporaryBattleList['Ash Ketchum Pinkan'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Ash Ketchum Pinkan'] && TemporaryBattleList['Ash Ketchum Pinkan'].isVisible()"
+            , image: "assets/images/map/ashketchumoverworld.png"
             })
         %>
     </g>
