@@ -1,5 +1,3 @@
-/// <reference path="../../declarations/settings/ProteinFilters.d.ts" />
-
 enum PartyPokemonSaveKeys {
     attackBonusPercent = 0,
     attackBonusAmount,
@@ -215,33 +213,33 @@ class PartyPokemon implements Saveable {
         return (player.highestRegion() + 1) * 5 - this.proteinsUsed();
     };
 
-    public hideFromProteinList = (): boolean => {
-        const hidden = ko.pureComputed(() => {
-            if (!new RegExp(ProteinFilters.search.value(), 'i').test(this.name)) {
+    public hideFromProteinList = ko.pureComputed(() => {
+        if (this._breeding()) {
+            return true;
+        }
+        if (!new RegExp(Settings.getSetting('proteinSearchFilter').observableValue() , 'i').test(this.name)) {
+            return true;
+        }
+        if (Settings.getSetting('proteinRegionFilter').observableValue() > -2) {
+            if (PokemonHelper.calcNativeRegion(this.name) !== Settings.getSetting('proteinRegionFilter').observableValue()) {
                 return true;
             }
-
-            // Check based on native region
-            if (ProteinFilters.region.value() > -2) {
-                if (PokemonHelper.calcNativeRegion(this.name) !== ProteinFilters.region.value()) {
-                    return true;
-                }
+        }
+        const type: (PokemonType | null) = Settings.getSetting('proteinTypeFilter').observableValue() > -2 ? Settings.getSetting('proteinTypeFilter').observableValue() : null;
+        if (type !== null) {
+            const { type: types } = pokemonMap[this.name];
+            if (type !== null && !types.includes(type)) {
+                return true;
             }
-
-            // Check if either of the types match
-            const type: (PokemonType | null) = ProteinFilters.type.value() > -2 ? ProteinFilters.type.value() : null;
-            if (type !== null) {
-                const { type: types } = pokemonMap[this.name];
-                if (type !== null && !types.includes(type)) {
-                    return true;
-                }
-            }
-            return false;
-        }, this)();
-        return this.breeding || hidden ||
-            (this.proteinUsesRemaining() == 0 && Settings.getSetting('proteinHideMaxedPokemon').observableValue()) ||
-            (this.shiny && Settings.getSetting('proteinHideShinyPokemon').observableValue());
-    }
+        }
+        if (this.proteinUsesRemaining() == 0 && Settings.getSetting('proteinHideMaxedPokemon').observableValue()) {
+            return true;
+        }
+        if (this._shiny() && Settings.getSetting('proteinHideShinyPokemon').observableValue()) {
+            return true;
+        }
+        return false;
+    });
 
     public giveHeldItem = (heldItem: HeldItem): void => {
         if (!this.heldItem() || heldItem.name != this.heldItem().name) {
