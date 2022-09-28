@@ -36,7 +36,9 @@ TemporaryBattleList['Snorlax route 12'] = new TemporaryBattle(
     ],
     [new TemporaryBattleRequirement('Snorlax route 12'), new ObtainedPokemonRequirement(pokemonMap.Snorlax)],
     {
+        displayName: 'Snorlax',
         isTrainerBattle: false,
+        hideTrainer: true,
         visibleRequirement: new OneFromManyRequirement([new RouteKillRequirement(10, GameConstants.Region.kanto, 11), new RouteKillRequirement(5, GameConstants.Region.kanto, 12)]),
     }
 );
@@ -47,7 +49,9 @@ TemporaryBattleList['Snorlax route 16'] = new TemporaryBattle(
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Tower'))],
     [new TemporaryBattleRequirement('Snorlax route 16'), new ObtainedPokemonRequirement(pokemonMap.Snorlax)],
     {
+        displayName: 'Snorlax',
         isTrainerBattle: false,
+        hideTrainer: true,
         visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.kanto, 7),
     }
 );
@@ -102,6 +106,128 @@ TemporaryBattleList['Cue Ball Paxton'] = new TemporaryBattle(
 );
 
 // Johto Temporary Battles
+TemporaryBattleList.Sudowoodo = new TemporaryBattle(
+    'Sudowoodo',
+    [new GymPokemon('Sudowoodo', 540000, 20)],
+    undefined,
+    [
+        new GymBadgeRequirement(BadgeEnums.Plain),
+        new RouteKillRequirement(10, GameConstants.Region.johto, 36),
+    ],
+    [new TemporaryBattleRequirement('Sudowoodo'), new ObtainedPokemonRequirement(pokemonMap.Sudowoodo)],
+    {
+        isTrainerBattle: false,
+        hideTrainer: true,
+        visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.johto, 36),
+    }
+);
+TemporaryBattleList['Suicune 1'] = new TemporaryBattle(
+    'Suicune 1',
+    [new GymPokemon('Suicune', 1044000, 40)],
+    'Suicune fled.',
+    [
+        new QuestLineStartedRequirement('Eusine\'s Chase'),
+        new RouteKillRequirement(10, GameConstants.Region.johto, 41),
+    ],
+    undefined,
+    {
+        displayName: 'Suicune',
+        returnTown: 'Cianwood City',
+        imageName: 'Suicune',
+        hideTrainer: true,
+    }
+);
+TemporaryBattleList.Eusine = new TemporaryBattle(
+    'Eusine',
+    [
+        new GymPokemon('Drowzee', 348000, 25),
+        new GymPokemon('Haunter', 348000, 25),
+        new GymPokemon('Electrode', 359000, 27),
+    ],
+    'I hate to admit it, but you win. You\'re amazing! I\'m starting to understand why Suicune was keeping an eye on you. I\'m going to keep searching for Suicune. I have a feeling we\'ll see each other again. See you around!',
+    [new QuestLineStepCompletedRequirement('Eusine\'s Chase', 1)],
+    undefined,
+    {
+        displayName: 'Eusine',
+        returnTown: 'Cianwood City',
+    }
+);
+TemporaryBattleList['Suicune 2'] = new TemporaryBattle(
+    'Suicune 2',
+    [new GymPokemon('Suicune', 1115500, 40)],
+    'Suicune fled.',
+    [
+        new QuestLineStepCompletedRequirement('Eusine\'s Chase', 2),
+        new RouteKillRequirement(10, GameConstants.Region.johto, 42),
+    ],
+    undefined,
+    {
+        displayName: 'Suicune',
+        returnTown: 'Mahogany Town',
+        imageName: 'Suicune',
+        hideTrainer: true,
+    }
+);
+TemporaryBattleList['Suicune 3'] = new TemporaryBattle(
+    'Suicune 3',
+    [new GymPokemon('Suicune', 3269100, 40)],
+    'Suicune fled.',
+    [
+        new QuestLineStepCompletedRequirement('Eusine\'s Chase', 4),
+        new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion),
+    ],
+    undefined,
+    {
+        displayName: 'Suicune',
+        returnTown: 'Vermilion City',
+        imageName: 'Suicune',
+        hideTrainer: true,
+    }
+);
+TemporaryBattleList['Suicune 4'] = new TemporaryBattle(
+    'Suicune 4',
+    [new GymPokemon('Suicune', 3359100, 40)],
+    'Suicune fled.',
+    [
+        new QuestLineStepCompletedRequirement('Eusine\'s Chase', 6),
+        new RouteKillRequirement(10, GameConstants.Region.kanto, 14),
+    ],
+    undefined,
+    {
+        displayName: 'Suicune',
+        returnTown: 'Fuchsia City',
+        imageName: 'Suicune',
+        hideTrainer: true,
+    }
+);
+TemporaryBattleList['Suicune 5'] = new TemporaryBattle(
+    'Suicune 5',
+    [new GymPokemon('Suicune', 3449100, 40)],
+    'Suicune didn\'t flee.',
+    [new QuestLineStepCompletedRequirement('Eusine\'s Chase', 8)],
+    undefined,
+    {
+        displayName: 'Suicune',
+        returnTown: 'Cerulean City',
+        imageName: 'Suicune',
+        hideTrainer: true,
+    }
+);
+TemporaryBattleList['Suicune 6'] = new TemporaryBattle(
+    'Suicune 6',
+    [new GymPokemon('Suicune', 3449100, 40)],
+    '',
+    [new QuestLineStepCompletedRequirement('Eusine\'s Chase', 10)],
+    [new QuestLineStepCompletedRequirement('Eusine\'s Chase', 11)],
+    {
+        displayName: 'Suicune',
+        returnTown: 'Cerulean City',
+        imageName: 'Suicune',
+        hideTrainer: true,
+        isTrainerBattle: false,
+
+    }
+);
 TemporaryBattleList['Spiky-eared Pichu'] = new TemporaryBattle(
     'Spiky-eared Pichu',
     [new GymPokemon('Spiky-eared Pichu', 3178500, 20)],
@@ -124,6 +250,7 @@ TemporaryBattleList['Rocket Boss Giovanni'] = new TemporaryBattle(
     'What in the world are you? How this is possible...? How can a kid like you manage to destroy my dream once again? The precious dream of Team Rocket has become little more than an illusion...',
     [new QuestLineStepCompletedRequirement('Unfinished Business', 9)]
 );
+
 // Hoenn Temporary Battles
 TemporaryBattleList['Sevii Rocket Grunt 1'] = new TemporaryBattle(
     'Sevii Rocket Grunt 1',
@@ -240,7 +367,6 @@ TemporaryBattleList['Scientist Gideon'] = new TemporaryBattle(
     'If I can\'t sell the Sapphire, it\'s worthless! Go ahead, take it!',
     [new QuestLineStepCompletedRequirement('Celio\'s Errand', 11)]
 );
-
 TemporaryBattleList['Pinkan Jessie & James'] = new TemporaryBattle(
     'Pinkan Jessie & James',
     [
@@ -250,13 +376,12 @@ TemporaryBattleList['Pinkan Jessie & James'] = new TemporaryBattle(
         new GymPokemon('Meowth', 2000, 5),
     ],
     'We\'re blasting off again!!!!',
-    [new QuestLineStepCompletedRequirement('Team Rocket\'s Pinkan Themepark', 4)],
+    [new QuestLineStepCompletedRequirement('Team Rocket\'s Pinkan Theme Park', 4)],
     undefined,
     {
         displayName: 'Jessie & James',
     }
 );
-
 TemporaryBattleList['Pinkan Officer Jenny'] = new TemporaryBattle(
     'Pinkan Officer Jenny',
     [
@@ -264,8 +389,8 @@ TemporaryBattleList['Pinkan Officer Jenny'] = new TemporaryBattle(
         new GymPokemon('Arcanine', 3500000, 55),
         new GymPokemon('Pinkan Nidoking', 4000000, 70),
     ],
-    'So you\'re not with them? Okay...just don\'t help those criminals in the future, got it? Looks like some new Pinkan Pokémon have made their way to the island, if you bring us some Pinkan Berries we\'ll trade you for them.',
-    [new QuestLineStepCompletedRequirement('Team Rocket\'s Pinkan Themepark', 5)],
+    'So you\'re not with them? Okay... Just don\'t help those criminals in the future, got it? Looks like some new Pinkan Pokémon have made their way to the island, if you bring us some Pinkan Berries we\'ll trade you for them.',
+    [new QuestLineStepCompletedRequirement('Team Rocket\'s Pinkan Theme Park', 5)],
     undefined,
     {
         displayName: 'Officer Jenny',
@@ -281,7 +406,7 @@ TemporaryBattleList['Galactic Boss Cyrus'] = new TemporaryBattle(
         new GymPokemon('Murkrow', 3665000, 36),
     ],
     'Impressive. Your prowess is notable.',
-    [new QuestLineStepCompletedRequirement('A new world', 2)]
+    [new QuestLineStepCompletedRequirement('A New World', 2)]
 );
 // Unova Temporary Battles
 TemporaryBattleList['Team Plasma Grunt 1'] = new TemporaryBattle(
@@ -1626,7 +1751,6 @@ TemporaryBattleList.Avery3 = new TemporaryBattle(
         imageName: 'Avery',
     }
 );
-
 TemporaryBattleList['Zarude Tribe 1'] = new TemporaryBattle(
     'Zarude Tribe 1',
     [

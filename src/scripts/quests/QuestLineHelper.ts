@@ -264,6 +264,77 @@ class QuestLineHelper {
         App.game.quests.questLines().push(rocketJohtoQuestLine);
     }
 
+    public static createJohtoBeastsQuestLine() {
+        const johtoBeastsQuestLine = new QuestLine('The Legendary Beasts', 'Investigate the legends surrounding the strange Burned Tower in Ecruteak City.', new GymBadgeRequirement(BadgeEnums.Fog), GameConstants.BulletinBoards.Johto);
+
+        const talktoEusine1 = new TalkToNPCQuest(EcruteakEusine, 'Talk to Eusine in Ecruteak City.');
+        johtoBeastsQuestLine.addQuest(talktoEusine1);
+
+        const clearBurnedTower = new CustomQuest(1, 0, 'Clear the Burned Tower.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Burned Tower')]());
+        johtoBeastsQuestLine.addQuest(clearBurnedTower);
+
+        const talktoPokéfanDerek = new TalkToNPCQuest(EcruteakPokéfan, 'Talk to Pokéfan Derek in Ecruteak City.');
+        johtoBeastsQuestLine.addQuest(talktoPokéfanDerek);
+
+        const catchRaikou = new CaptureSpecificPokemonQuest('Raikou', 'Catch Raikou', 1, true);
+
+        const catchEntei = new CaptureSpecificPokemonQuest('Entei', 'Catch Entei', 1, true);
+
+        const catchSuicune = new CaptureSpecificPokemonQuest('Suicune', 'Catch Suicune.');
+
+        johtoBeastsQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                catchRaikou,
+                catchEntei,
+                catchSuicune,
+            ], 'Catch the Legendary Beasts.'));
+
+        App.game.quests.questLines().push(johtoBeastsQuestLine);
+    }
+
+    public static createJohtoSuicuneQuestLine() {
+        const johtoSuicuneQuestLine = new QuestLine('Eusine\'s Chase', 'Eusine is looking for Suicune.', new QuestLineStepCompletedRequirement('The Legendary Beasts', 2), GameConstants.BulletinBoards.Johto);
+
+        const clearCianwoodSuicune = new CustomQuest(1, 0, 'Find Suicune.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Suicune 1')]());
+        johtoSuicuneQuestLine.addQuest(clearCianwoodSuicune);
+
+        const talktoEusine2 = new TalkToNPCQuest(CianwoodEusine, 'Talk to Eusine in Cianwood City.');
+        johtoSuicuneQuestLine.addQuest(talktoEusine2);
+
+        const clearEusine = new CustomQuest(1, 0, 'Defeat Eusine.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Eusine')]());
+        johtoSuicuneQuestLine.addQuest(clearEusine);
+
+        const clearRoute42Suicune = new CustomQuest(1, 0, 'Find Suicune.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Suicune 2')]());
+        johtoSuicuneQuestLine.addQuest(clearRoute42Suicune);
+
+        const talktoEusine3 = new TalkToNPCQuest(MahoganyEusine, 'Talk to Eusine in Mahogany Town.');
+        johtoSuicuneQuestLine.addQuest(talktoEusine3);
+
+        const clearVermilionSuicune = new CustomQuest(1, 0, 'Find Suicune.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Suicune 3')]());
+        johtoSuicuneQuestLine.addQuest(clearVermilionSuicune);
+
+        const talktoEusine4 = new TalkToNPCQuest(VermilionEusine, 'Talk to Eusine in Vermilion City.');
+        johtoSuicuneQuestLine.addQuest(talktoEusine4);
+
+        const clearRoute14Suicune = new CustomQuest(1, 0, 'Find Suicune.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Suicune 4')]());
+        johtoSuicuneQuestLine.addQuest(clearRoute14Suicune);
+
+        const talktoEusine5 = new TalkToNPCQuest(FuchsiaEusine, 'Talk to Eusine in Fuchsia City.');
+        johtoSuicuneQuestLine.addQuest(talktoEusine5);
+
+        const clearRoute25Suicune = new CustomQuest(1, 0, 'Find Suicune.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Suicune 5')]());
+        johtoSuicuneQuestLine.addQuest(clearRoute25Suicune);
+
+        const talktoEusine6 = new TalkToNPCQuest(CeruleanEusine, 'Talk to Eusine in Cerulean City.');
+        johtoSuicuneQuestLine.addQuest(talktoEusine6);
+
+        const catchRoute25Suicune = new CaptureSpecificPokemonQuest('Suicune', 'Catch Suicune.');
+
+        johtoSuicuneQuestLine.addQuest(catchRoute25Suicune);
+
+        App.game.quests.questLines().push(johtoSuicuneQuestLine);
+    }
+
     public static createCelebiJohtoQuestLine() {
         const celebiJohtoQuestLine = new QuestLine('Unfinished Business', 'A request from Professor Oak.', new QuestLineCompletedRequirement('Bill\'s Errand'), GameConstants.BulletinBoards.Kanto);
 
@@ -316,14 +387,7 @@ class QuestLineHelper {
         const talktoIlexForestShrine2 = new TalkToNPCQuest(IlexForestShrine2, 'Investigate the shrine in Ilex Forest.');
         celebiJohtoQuestLine.addQuest(talktoIlexForestShrine2);
 
-        const CelebiCatch = new CaptureSpecificPokemonQuest(
-            'Celebi',
-            'Play with the Celebi in Ilex Forest.',
-            1,
-            false,
-            undefined,
-            undefined
-        );
+        const CelebiCatch = new CaptureSpecificPokemonQuest('Celebi', 'Play with the Celebi in Ilex Forest.');
 
         celebiJohtoQuestLine.addQuest(CelebiCatch);
 
@@ -475,9 +539,9 @@ class QuestLineHelper {
     }
 
     public static createPinkanThemeparkQuestLine() {
-        const pinkanThemeparkQuestLine = new QuestLine('Team Rocket\'s Pinkan Themepark', 'Help Team Rocket build a Themepark on Pinkan Island?', new GymBadgeRequirement(BadgeEnums.Elite_OrangeChampion), GameConstants.BulletinBoards.Sevii4567);
+        const pinkanThemeparkQuestLine = new QuestLine('Team Rocket\'s Pinkan Theme Park', 'Help Team Rocket build a theme park on Pinkan Island?', new GymBadgeRequirement(BadgeEnums.Elite_OrangeChampion), GameConstants.BulletinBoards.Sevii4567);
 
-        const talktoTeamRocket = new TalkToNPCQuest(ThemeparkTeamRocket1, 'Talk to Team Rocket on Pinkan Island to hear about their plans');
+        const talktoTeamRocket = new TalkToNPCQuest(ThemeparkTeamRocket1, 'Talk to Team Rocket on Pinkan Island to hear about their plans.');
         pinkanThemeparkQuestLine.addQuest(talktoTeamRocket);
 
         const farmPinkan = new HarvestBerriesQuest(1, undefined, BerryType.Pinkan);
@@ -497,7 +561,7 @@ class QuestLineHelper {
             ], 'Collect Fairy Gems and Pixie Plates');
         pinkanThemeparkQuestLine.addQuest(collectPinkanMaterials);
 
-        const talktoTeamRocket2 = new TalkToNPCQuest(ThemeparkTeamRocket4, 'Talk to Team Rocket on Pinkan Island to open the Theme Park!');
+        const talktoTeamRocket2 = new TalkToNPCQuest(ThemeparkTeamRocket4, 'Talk to Team Rocket on Pinkan Island to open the theme park!');
         pinkanThemeparkQuestLine.addQuest(talktoTeamRocket2);
 
         const clearPinkanTeamRocket = new CustomQuest(1, 0, 'Defeat Team Rocket Jessie & James on Pinkan Island.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Pinkan Jessie & James')]());
@@ -511,7 +575,7 @@ class QuestLineHelper {
 
     // Sinnoh QuestLines
     public static createGalacticSinnohQuestLine() {
-        const galacticSinnohQuestLine = new QuestLine('A new world', 'End Team Galactic\'s plan to destroy the world and create a new one in its place.');
+        const galacticSinnohQuestLine = new QuestLine('A New World', 'End Team Galactic\'s plan to destroy the world and create a new one in its place.');
 
         const clearValleyWindworks = new CustomQuest(1, 0, 'Team Galactic is stealing energy. Clear Valley Windworks.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Valley Windworks')]());
         galacticSinnohQuestLine.addQuest(clearValleyWindworks);
@@ -723,7 +787,7 @@ class QuestLineHelper {
         const imposterAttack = new CustomQuest(1, 0, 'Defeat Howard\'s bodyguard and escape.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Imposter')]());
         detectivePikachuQuestLine.addQuest(imposterAttack);
 
-        const howardConfront = new TalkToNPCQuest(HowardClifford3, 'Give Howard Clifford one last change to surrender!');
+        const howardConfront = new TalkToNPCQuest(HowardClifford3, 'Give Howard Clifford one last chance to surrender!');
         detectivePikachuQuestLine.addQuest(howardConfront);
 
         const possessedFight = new CustomQuest(1, 0, 'Defeat Mewtwo to free it from Howard\'s control!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Possessed Mewtwo')]());
@@ -877,7 +941,7 @@ class QuestLineHelper {
     }
 
     public static createPrincessDiancieQuestLine() {
-        const princessDiancieQuestLine = new QuestLine('Princess Diancie', 'Princess Diancie has been spotted in Kalos! She\'s searching for something.', new MultiRequirement([new ObtainedPokemonRequirement(pokemonMap.Doublade), new GymBadgeRequirement(BadgeEnums.Elite_Drasna)]) , GameConstants.BulletinBoards.Kalos);
+        const princessDiancieQuestLine = new QuestLine('Princess Diancie', 'Princess Diancie has been spotted in Kalos! She\'s searching for something.', new MultiRequirement([new ObtainedPokemonRequirement(pokemonMap.Doublade), new GymBadgeRequirement(BadgeEnums.Elite_Malva), new GymBadgeRequirement(BadgeEnums.Elite_Siebold), new GymBadgeRequirement(BadgeEnums.Elite_Wikstrom), new GymBadgeRequirement(BadgeEnums.Elite_Drasna)]) , GameConstants.BulletinBoards.Kalos);
 
         const catchFairy = new CustomQuest(100, undefined, 'Capture 100 Fairy-type Pokémon to follow Diancie\'s Fairy Aura.', () => {
             return pokemonMap.filter(p => p.type.includes(PokemonType.Fairy)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
@@ -1570,6 +1634,8 @@ class QuestLineHelper {
         this.createBillSeviiQuestLine();
         this.createPersonsofInterestQuestLine();
         this.createRocketJohtoQuestLine();
+        this.createJohtoBeastsQuestLine();
+        this.createJohtoSuicuneQuestLine();
         this.createCelebiJohtoQuestLine();
         this.createAquaMagmaHoennQuestLine();
         this.createDeoxysQuestLine();
