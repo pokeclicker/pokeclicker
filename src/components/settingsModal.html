@@ -331,13 +331,18 @@
             setting name
         </label>
     </td>
-    <td class="p-2">
+    <td class="p-1 tight">
         <button class="btn btn-info btn-sm" data-bind="click: () => $data.sound.play()"><i class="play-button"></i></button>
     </td>
-    <td class="p-2">
-        <input class="clickable" type="checkbox"
-            data-bind="checked: $data.setting.observableValue(), attr: {name: $data.setting.name, id: 'checkbox-' + $data.setting.name }"
-            onchange="Settings.setSettingByName(this.name, this.checked)"/>
+    <td class="p-2 tight">
+        <label class="form-check-label toggler-wrapper style-1 m-auto">
+            <input class="clickable" type="checkbox"
+                data-bind="checked: $data.setting.observableValue(), attr: {name: $data.setting.name, id: 'checkbox-' + $data.setting.name }"
+                onchange="Settings.setSettingByName(this.name, this.checked)"/>
+            <div class="toggler-slider">
+                <div class="toggler-knob"></div>
+            </div>
+        </label>
     </td>
 </script>
 
