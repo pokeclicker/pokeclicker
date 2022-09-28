@@ -102,7 +102,7 @@ class Breeding implements Feature {
             ['Bagon', 'Shelgon', 'Salamence'],
             ['Gible', 'Gabite', 'Garchomp'],
             ['Deino', 'Zweilous', 'Hydreigon'],
-            ['Goomy', 'Sligoo', 'Goodra'],
+            ['Goomy', 'Sliggoo', 'Goodra'],
             ['Turtonator', 'Drampa', 'Jangmo-o', 'Hakamo-o', 'Kommo-o'],
             ['Dreepy', 'Drakloak', 'Dragapult', 'Duraludon'],
         ];
