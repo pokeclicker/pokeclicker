@@ -307,19 +307,42 @@
     </td>
 </script>
 
+<script type="text/html" id="BooleanSettingSliderTemplate">
+    <td class="p-2">
+        <label class="m-0" data-bind="attr: { for: 'checkbox-' + $data.name }, text: `${$data.displayName}:`">
+            setting name
+        </label>
+    </td>
+    <td class="p-2">
+        <label class="form-check-label toggler-wrapper style-1 m-auto">
+            <input class="clickable" type="checkbox"
+                data-bind="checked: $data.observableValue(), attr: {name, id: 'checkbox-' + $data.name }"
+                onchange="Settings.setSettingByName(this.name, this.checked)"/>
+            <div class="toggler-slider">
+                <div class="toggler-knob"></div>
+            </div>
+        </label>
+    </td>
+</script>
+
 <script type="text/html" id="SoundSettingTemplate">
     <td class="p-2">
         <label class="m-0" data-bind="attr: { for: 'checkbox-' + $data.setting.name }, text: `${$data.setting.displayName}:`">
             setting name
         </label>
     </td>
-    <td class="p-2">
+    <td class="p-1 tight">
         <button class="btn btn-info btn-sm" data-bind="click: () => $data.sound.play()"><i class="play-button"></i></button>
     </td>
-    <td class="p-2">
-        <input class="clickable" type="checkbox"
-            data-bind="checked: $data.setting.observableValue(), attr: {name: $data.setting.name, id: 'checkbox-' + $data.setting.name }"
-            onchange="Settings.setSettingByName(this.name, this.checked)"/>
+    <td class="p-2 tight">
+        <label class="form-check-label toggler-wrapper style-1 m-auto">
+            <input class="clickable" type="checkbox"
+                data-bind="checked: $data.setting.observableValue(), attr: {name: $data.setting.name, id: 'checkbox-' + $data.setting.name }"
+                onchange="Settings.setSettingByName(this.name, this.checked)"/>
+            <div class="toggler-slider">
+                <div class="toggler-knob"></div>
+            </div>
+        </label>
     </td>
 </script>
 
