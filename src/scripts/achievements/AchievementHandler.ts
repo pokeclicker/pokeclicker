@@ -219,8 +219,8 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Pesky roamings, I need to oneshot routes for them...', 'Have 250,000 Attack', new AttackRequirement(250000), 0.35);
         AchievementHandler.addAchievement('You pressed F12 by any chance?', 'Have 500,000 Attack', new AttackRequirement(500000), 0.40);
         AchievementHandler.addAchievement('Left Left Right Right A B A B - Hey, 1 million!', 'Have 1,000,000 Attack', new AttackRequirement(1000000), 0.40);
-        AchievementHandler.addAchievement('TODO: attack', 'Have 5,000,000 Attack', new AttackRequirement(5000000), 0.45);
-        AchievementHandler.addAchievement('TODO: attack2', 'Have 20,000,000 Attack', new AttackRequirement(20000000), 0.60);
+        AchievementHandler.addAchievement('Can I beat Kalos yet?', 'Have 5,000,000 Attack', new AttackRequirement(5000000), 0.45);
+        AchievementHandler.addAchievement('No one can challenge me!', 'Have 20,000,000 Attack', new AttackRequirement(20000000), 0.60);
 
         AchievementHandler.addAchievement('Bling', 'Obtain 100 Diamonds', new DiamondRequirement(100), 0.05);
         AchievementHandler.addAchievement('Bling x10!', 'Obtain 1,000 Diamonds', new DiamondRequirement(1000), 0.15);
@@ -283,7 +283,7 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Egg Factory', 'Hatch 1,000 eggs', new HatchRequirement(1000), 0.3);
         AchievementHandler.addAchievement('Offical Easter Bunny', 'Hatch 10,000 eggs', new HatchRequirement(10000), 0.4);
         AchievementHandler.addAchievement('What do you do with all the eggshell?', 'Hatch 100,000 eggs', new HatchRequirement(100000), 0.5);
-        AchievementHandler.addAchievement('TODO_hatch', 'Hatch 250,000 eggs', new HatchRequirement(250000), 0.7);
+        AchievementHandler.addAchievement('Day Care is my home', 'Hatch 250,000 eggs', new HatchRequirement(250000), 0.7);
 
         AchievementHandler.addAchievement('Why is my Voltorb Upside Down?', 'Purchase your first Poké Ball', new PokeballRequirement(1, GameConstants.Pokeball.Pokeball), 0.01);
         AchievementHandler.addAchievement('Starting a Collection', 'Purchase 10 Poké Balls', new PokeballRequirement(10, GameConstants.Pokeball.Pokeball), 0.03);
@@ -376,9 +376,9 @@ class AchievementHandler {
         AchievementHandler.addAchievement('I should open my own Pokémon Center', 'Have 500 Resistant Pokémon', new PokerusStatusRequirement(500, GameConstants.Pokerus.Resistant), 1.5);
 
         AchievementHandler.addAchievement('Oh, an other quest slot!', 'Reach quest level 5', new QuestLevelRequirement(5), 0.2);
-        AchievementHandler.addAchievement('todo_questlevel', 'Reach quest level 10', new QuestLevelRequirement(10), 0.3);
+        AchievementHandler.addAchievement('I am getting good at questing!', 'Reach quest level 10', new QuestLevelRequirement(10), 0.3);
         AchievementHandler.addAchievement('What do i gain from leveling this?', 'Reach quest level 25', new QuestLevelRequirement(25), 0.5);
-        AchievementHandler.addAchievement('todo_questlevel2', 'Reach quest level 40', new QuestLevelRequirement(40), 0.8);
+        AchievementHandler.addAchievement('Quest master', 'Reach quest level 40', new QuestLevelRequirement(40), 0.8);
 
         /*
          * REGIONAL
