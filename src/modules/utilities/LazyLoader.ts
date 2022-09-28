@@ -12,7 +12,7 @@ function createObserver(loader: HTMLElement, options: IntersectionObserverInit):
 
             // keep loading more in case we don't push the loader off screen
             // @ts-ignore
-            requestIdleCallback(loadMore);
+            requestIdleCallback(loadMore, { timeout: 100 });
         }
     };
 

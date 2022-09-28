@@ -10,6 +10,18 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.9.16
+    new ChangelogUpdate('v0.9.16', new Date(2022, 8, 21)),
+    new Changelog(changelogType.NEW, 'New Furfrou form added'),
+    new Changelog(changelogType.CHANGE, 'Buffed Pinkan berry harvest rate'),
+    new Changelog(changelogType.CHANGE, 'Misc text changes'),
+    new Changelog(changelogType.CHANGE, 'Misc UI changes'),
+    new Changelog(changelogType.CHANGE, 'Misc image changes'),
+    new Changelog(changelogType.CHANGE, 'Added a Dock to Seafolk Village'),
+    new Changelog(changelogType.CHANGE, 'Re-adjusted when hatchery sounds play'),
+    new Changelog(changelogType.FIXED, 'Fix farm harvested statistics'),
+    new Changelog(changelogType.FIXED, 'Master Farmer achievement'),
+
     // v0.9.15
     new ChangelogUpdate('v0.9.15', new Date(2022, 8, 20)),
     new Changelog(changelogType.NEW, 'More Pokémon forms added'),
