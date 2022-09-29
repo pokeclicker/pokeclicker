@@ -1519,7 +1519,7 @@ KALOS
 Routes.add(new RegionRoute(
     'Kalos Route 1', GameConstants.Region.kalos, 1,
     new RoutePokemon({
-        land: ['Rattata'],
+        land: ['Bunnelby', 'Fletchling'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)]
 ));
