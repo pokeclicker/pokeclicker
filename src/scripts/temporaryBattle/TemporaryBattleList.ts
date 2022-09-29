@@ -36,6 +36,7 @@ TemporaryBattleList['Snorlax route 12'] = new TemporaryBattle(
     ],
     [new TemporaryBattleRequirement('Snorlax route 12'), new ObtainedPokemonRequirement(pokemonMap.Snorlax)],
     {
+        displayName: 'Snorlax',
         isTrainerBattle: false,
         hideTrainer: true,
         visibleRequirement: new OneFromManyRequirement([new RouteKillRequirement(10, GameConstants.Region.kanto, 11), new RouteKillRequirement(5, GameConstants.Region.kanto, 12)]),
@@ -48,6 +49,7 @@ TemporaryBattleList['Snorlax route 16'] = new TemporaryBattle(
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Tower'))],
     [new TemporaryBattleRequirement('Snorlax route 16'), new ObtainedPokemonRequirement(pokemonMap.Snorlax)],
     {
+        displayName: 'Snorlax',
         isTrainerBattle: false,
         hideTrainer: true,
         visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.kanto, 7),
@@ -104,6 +106,21 @@ TemporaryBattleList['Cue Ball Paxton'] = new TemporaryBattle(
 );
 
 // Johto Temporary Battles
+TemporaryBattleList.Sudowoodo = new TemporaryBattle(
+    'Sudowoodo',
+    [new GymPokemon('Sudowoodo', 540000, 20)],
+    undefined,
+    [
+        new GymBadgeRequirement(BadgeEnums.Plain),
+        new RouteKillRequirement(10, GameConstants.Region.johto, 36),
+    ],
+    [new TemporaryBattleRequirement('Sudowoodo'), new ObtainedPokemonRequirement(pokemonMap.Sudowoodo)],
+    {
+        isTrainerBattle: false,
+        hideTrainer: true,
+        visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.johto, 36),
+    }
+);
 TemporaryBattleList['Suicune 1'] = new TemporaryBattle(
     'Suicune 1',
     [new GymPokemon('Suicune', 1044000, 40)],
@@ -120,7 +137,6 @@ TemporaryBattleList['Suicune 1'] = new TemporaryBattle(
         hideTrainer: true,
     }
 );
-
 TemporaryBattleList.Eusine = new TemporaryBattle(
     'Eusine',
     [
@@ -136,7 +152,6 @@ TemporaryBattleList.Eusine = new TemporaryBattle(
         returnTown: 'Cianwood City',
     }
 );
-
 TemporaryBattleList['Suicune 2'] = new TemporaryBattle(
     'Suicune 2',
     [new GymPokemon('Suicune', 1115500, 40)],
@@ -153,7 +168,6 @@ TemporaryBattleList['Suicune 2'] = new TemporaryBattle(
         hideTrainer: true,
     }
 );
-
 TemporaryBattleList['Suicune 3'] = new TemporaryBattle(
     'Suicune 3',
     [new GymPokemon('Suicune', 3269100, 40)],
@@ -170,7 +184,6 @@ TemporaryBattleList['Suicune 3'] = new TemporaryBattle(
         hideTrainer: true,
     }
 );
-
 TemporaryBattleList['Suicune 4'] = new TemporaryBattle(
     'Suicune 4',
     [new GymPokemon('Suicune', 3359100, 40)],
@@ -187,7 +200,6 @@ TemporaryBattleList['Suicune 4'] = new TemporaryBattle(
         hideTrainer: true,
     }
 );
-
 TemporaryBattleList['Suicune 5'] = new TemporaryBattle(
     'Suicune 5',
     [new GymPokemon('Suicune', 3449100, 40)],
@@ -201,7 +213,6 @@ TemporaryBattleList['Suicune 5'] = new TemporaryBattle(
         hideTrainer: true,
     }
 );
-
 TemporaryBattleList['Suicune 6'] = new TemporaryBattle(
     'Suicune 6',
     [new GymPokemon('Suicune', 3449100, 40)],
@@ -217,7 +228,6 @@ TemporaryBattleList['Suicune 6'] = new TemporaryBattle(
 
     }
 );
-
 TemporaryBattleList['Spiky-eared Pichu'] = new TemporaryBattle(
     'Spiky-eared Pichu',
     [new GymPokemon('Spiky-eared Pichu', 3178500, 20)],
@@ -229,7 +239,6 @@ TemporaryBattleList['Spiky-eared Pichu'] = new TemporaryBattle(
         hideTrainer: true,
     }
 );
-
 TemporaryBattleList['Rocket Boss Giovanni'] = new TemporaryBattle(
     'Rocket Boss Giovanni',
     [
@@ -241,6 +250,7 @@ TemporaryBattleList['Rocket Boss Giovanni'] = new TemporaryBattle(
     'What in the world are you? How this is possible...? How can a kid like you manage to destroy my dream once again? The precious dream of Team Rocket has become little more than an illusion...',
     [new QuestLineStepCompletedRequirement('Unfinished Business', 9)]
 );
+
 // Hoenn Temporary Battles
 TemporaryBattleList['Sevii Rocket Grunt 1'] = new TemporaryBattle(
     'Sevii Rocket Grunt 1',
@@ -357,7 +367,6 @@ TemporaryBattleList['Scientist Gideon'] = new TemporaryBattle(
     'If I can\'t sell the Sapphire, it\'s worthless! Go ahead, take it!',
     [new QuestLineStepCompletedRequirement('Celio\'s Errand', 11)]
 );
-
 TemporaryBattleList['Pinkan Jessie & James'] = new TemporaryBattle(
     'Pinkan Jessie & James',
     [
@@ -367,13 +376,12 @@ TemporaryBattleList['Pinkan Jessie & James'] = new TemporaryBattle(
         new GymPokemon('Meowth', 2000, 5),
     ],
     'We\'re blasting off again!!!!',
-    [new QuestLineStepCompletedRequirement('Team Rocket\'s Pinkan Themepark', 4)],
+    [new QuestLineStepCompletedRequirement('Team Rocket\'s Pinkan Theme Park', 4)],
     undefined,
     {
         displayName: 'Jessie & James',
     }
 );
-
 TemporaryBattleList['Pinkan Officer Jenny'] = new TemporaryBattle(
     'Pinkan Officer Jenny',
     [
@@ -381,8 +389,8 @@ TemporaryBattleList['Pinkan Officer Jenny'] = new TemporaryBattle(
         new GymPokemon('Arcanine', 3500000, 55),
         new GymPokemon('Pinkan Nidoking', 4000000, 70),
     ],
-    'So you\'re not with them? Okay...just don\'t help those criminals in the future, got it? Looks like some new Pinkan Pokémon have made their way to the island, if you bring us some Pinkan Berries we\'ll trade you for them.',
-    [new QuestLineStepCompletedRequirement('Team Rocket\'s Pinkan Themepark', 5)],
+    'So you\'re not with them? Okay... Just don\'t help those criminals in the future, got it? Looks like some new Pinkan Pokémon have made their way to the island, if you bring us some Pinkan Berries we\'ll trade you for them.',
+    [new QuestLineStepCompletedRequirement('Team Rocket\'s Pinkan Theme Park', 5)],
     undefined,
     {
         displayName: 'Officer Jenny',
@@ -398,7 +406,7 @@ TemporaryBattleList['Galactic Boss Cyrus'] = new TemporaryBattle(
         new GymPokemon('Murkrow', 3665000, 36),
     ],
     'Impressive. Your prowess is notable.',
-    [new QuestLineStepCompletedRequirement('A new world', 2)]
+    [new QuestLineStepCompletedRequirement('A New World', 2)]
 );
 // Unova Temporary Battles
 TemporaryBattleList['Team Plasma Grunt 1'] = new TemporaryBattle(
