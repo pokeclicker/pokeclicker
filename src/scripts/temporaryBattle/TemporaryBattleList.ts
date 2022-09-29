@@ -1670,7 +1670,10 @@ TemporaryBattleList.Klara2 = new TemporaryBattle(
         new GymPokemon('Whirlipede', 581335135, 63),
     ],
     'Just what have you got that I don\'t?',
-    [new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 6)],
+    [
+        new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 6),
+        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Warm-Up Tunnel')),
+    ],
     undefined,
     {
         displayName: 'Pokémon Trainer Klara',
@@ -1685,7 +1688,10 @@ TemporaryBattleList.Avery2 = new TemporaryBattle(
         new GymPokemon('Kadabra', 581335135, 63),
     ],
     'What a Psystrike to my poor pride...',
-    [new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 6)],
+    [
+        new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 6),
+        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Warm-Up Tunnel')),
+    ],
     undefined,
     {
         displayName: 'Pokémon Trainer Avery',

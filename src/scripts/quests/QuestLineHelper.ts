@@ -1346,8 +1346,8 @@ class QuestLineHelper {
         const talktoMustard5 = new TalkToNPCQuest(Mustard5, 'Talk to Mustard at the Master Dojo.');
         dojoArmorQuestLine.addQuest(talktoMustard5);
 
-        const talktoKlara2 = new TalkToNPCQuest(Klara1, 'Talk to Klara.');
-        const talktoAvery2 = new TalkToNPCQuest(Avery1, 'Talk to Avery.');
+        const talktoKlara2 = new TalkToNPCQuest(Klara2, 'Talk to Klara.');
+        const talktoAvery2 = new TalkToNPCQuest(Avery2, 'Talk to Avery.');
         dojoArmorQuestLine.addQuest(new MultipleQuestsQuest(
             [
                 talktoKlara2,
@@ -1589,7 +1589,7 @@ class QuestLineHelper {
                 catchRegisteel,
             ], 'Catch Regirock, Regice and Registeel in the Rock Peak Ruins, Iceberg Ruins and Iron Ruins respectively.'));
 
-        const talktoGolemPeony4 = new TalkToNPCQuest(GolemPeony4, 'You have captured Regigigas, now go report back to Peony.');
+        const talktoGolemPeony4 = new TalkToNPCQuest(GolemPeony4, 'You have captured Regirock, Regice and Registeel, now go report back to Peony.');
         ancientGolemsQuestLine.addQuest(talktoGolemPeony4);
 
         const clearRegigigas = new CustomQuest(1, 0, 'Defeat Regigigas at Giants bed!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Regigigas')]());
