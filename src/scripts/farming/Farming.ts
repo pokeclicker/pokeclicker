@@ -396,7 +396,7 @@ class Farming implements Feature {
             [30, 30, 10, 10, 10], BerryColor.Yellow,
             ['This Berry remains poisonous until fully ripened. Once ripe it has a spicy and sweet complex flavor.'], undefined, ['Flabébé (Yellow)', 'Oricorio (Pom-Pom)']);
         this.berryData[BerryType.Maranga]   = new Berry(BerryType.Maranga,  [5040, 10080, 20160, 40320, 80640],
-            1, 0.05, 7660, 20,
+            1, 0.05, 8000, 20,
             [10, 10, 30, 30, 10], BerryColor.Blue,
             ['This Berry resembles the Durin Berry, though its spikes are less pronounced. It is quite delicious when roasted.'], undefined, ['Flabébé (Blue)']);
 
