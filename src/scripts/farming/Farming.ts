@@ -161,7 +161,7 @@ class Farming implements Feature {
             ['This Berry is very big and sour. The juiciness of the pulp accentuates the sourness.'], undefined, ['Flabébé (Yellow)', 'Oricorio (Pom-Pom)']);
 
         this.berryData[BerryType.Lum]       = new Berry(BerryType.Lum,      [3000, 3200, 3400, 3600, 43200],
-            1, 0, 1000, 3,
+            1, 0, 540, 3,
             [10, 10, 10, 10, 0], BerryColor.Green,
             [
                 'This Berry\'s gradual process of storing nutrients beneficial to Pokémon health causes it to mature slowly.',
@@ -382,18 +382,21 @@ class Farming implements Feature {
             [0, 0, 0, 40, 10], BerryColor.Yellow,
             [
                 'The cluster of drupelets that make up this Berry pop rhythmically if the Berry is handled roughly.',
-                'The sound of these Berries attracts wild Pokémon.',
+                'The sound of these Berries attracts rare wild Pokémon.',
             ], new Aura(AuraType.Roaming, [1.005, 1.01, 1.015]), ['Flabébé (Yellow)', 'Oricorio (Pom-Pom)']);
         this.berryData[BerryType.Rowap]     = new Berry(BerryType.Rowap,    [5760, 9000, 14040, 21240, 42480],
             1, 0.05, 2900, 20,
             [10, 0, 0, 0, 40], BerryColor.Blue,
-            ['In days of old, people worked the top-shaped pieces of this Berry free and used them as toys.'], new Aura(AuraType.Ev, [1.005, 1.01, 1.015]), ['Flabébé (Blue)']);
+            [
+                'In days of old, people worked the top-shaped pieces of this Berry free and used them as toys.',
+                'These berries make catching efforts worth more.',
+            ], new Aura(AuraType.Ev, [1.005, 1.01, 1.015]), ['Flabébé (Blue)']);
         this.berryData[BerryType.Kee]       = new Berry(BerryType.Kee,      [4680, 9360, 18360, 36360, 72720],
             1, 0.05, 3000, 20,
             [30, 30, 10, 10, 10], BerryColor.Yellow,
             ['This Berry remains poisonous until fully ripened. Once ripe it has a spicy and sweet complex flavor.'], undefined, ['Flabébé (Yellow)', 'Oricorio (Pom-Pom)']);
         this.berryData[BerryType.Maranga]   = new Berry(BerryType.Maranga,  [5040, 10080, 20160, 40320, 80640],
-            1, 0.05, 3100, 20,
+            1, 0.05, 7660, 20,
             [10, 10, 30, 30, 10], BerryColor.Blue,
             ['This Berry resembles the Durin Berry, though its spikes are less pronounced. It is quite delicious when roasted.'], undefined, ['Flabébé (Blue)']);
 
