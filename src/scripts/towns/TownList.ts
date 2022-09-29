@@ -4510,7 +4510,7 @@ const Mustard6 = new NPC ('Mustard', [
 });
 const Mustard7 = new NPC ('Mustard', [
     'Good! Now then... The first thing for you to do is become best friends with Kubfu! You need to build trust! Kubfu hasn\'t really had a chance to explore the world outside the dojo, so... Maybe it\'ll help you become better friends if you train alongside it!',
-    'Hmm. Maybe you should train against Dark and Water types. It will be useful for it to know their weaknesses, since they will be its own weaknesses when it evolves.'
+    'Hmm. Maybe you should train against Dark and Water types. It will be useful for it to know their weaknesses, since they will be its own weaknesses when it evolves.',
 ], {
     image: 'assets/images/temporaryBattle/Mustard.png',
     requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 12), new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 14, GameConstants.AchievementOption.less )]),
@@ -4524,7 +4524,7 @@ const Mustard8 = new NPC ('Mustard', [
 const Mustard9 = new NPC ('Mustard', [
     'Good, good! You two are just the best of friends now, aren\'t you? Kubfu\'s really become more confident. How wonderful! I daresay I think you\'re both ready.',
     'Now then! If you want Kubfu to become stronger... there are special training grounds just for Kubfu! Prepare yourselves for the...Towers of Two Fists! The blue tower is the Tower of Waters! And the red tower is the Tower of Darkness!',
-    'Each tower will help Kubfu learn a different fighting style! I\'m really looking forward to when you two make it to the top of those towers! It\'s going to be so exciting!'
+    'Each tower will help Kubfu learn a different fighting style! I\'m really looking forward to when you two make it to the top of those towers! It\'s going to be so exciting!',
 ], {
     image: 'assets/images/temporaryBattle/Mustard.png',
     requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 16), new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 18, GameConstants.AchievementOption.less )]),
