@@ -4880,3 +4880,13 @@ TownList['Crown Shrine'] = new DungeonTown(
     [],
     [Calyrex4, CrownShrineExplorer]
 );
+
+// Used to check if next region can be reached, for example for professor NPC
+TownList['Final Region Town'] = new Town(
+    'Final Region Town',
+    GameConstants.Region.final,
+    [],
+    {
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
+    }
+);

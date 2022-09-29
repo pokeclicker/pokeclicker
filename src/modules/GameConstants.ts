@@ -1237,6 +1237,7 @@ export const StartingTowns = [
     'Vaniville Town', // Kalos
     'Iki Town Outskirts', // Alola
     'Postwick', // Galar
+    'Final Region Town', // Final
 ];
 
 export const StartingRoutes = [
