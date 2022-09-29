@@ -4323,7 +4323,7 @@ const HammerlockeShop = new Shop([
     ItemList.Upgrade,
     ItemList.Dragon_scale,
 ]);
-const StowonSideShop =  Shop([
+const StowonSideShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
     ItemList.Fighting_egg,

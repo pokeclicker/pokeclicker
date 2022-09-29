@@ -1648,7 +1648,7 @@ TemporaryBattleList.Mustard = new TemporaryBattle(
         new GymPokemon('Shinx', 856950891, 60),
     ],
     'That was everything I hoped for and more!',
-    [new QuestLineStepRequirement('The Dojo\'s Armor', 0)],
+    [new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 0)],
     undefined,
     {
         displayName: 'Dojo Master Mustard',
