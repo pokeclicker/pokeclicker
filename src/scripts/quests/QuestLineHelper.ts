@@ -1222,13 +1222,13 @@ class QuestLineHelper {
         darkestDayQuestLine.addQuest(clearHop7);
 
         const talkToBath = new TalkToNPCQuest(HerosBath, '');
-        const talkToSonia2 = new TalkToNPCQuest(CirchesterSonia, 'Talk to Sonia.');
         const talkToHop = new TalkToNPCQuest(CirchesterHop, 'Talk to Hop.');
+        const talkToSonia2 = new TalkToNPCQuest(CirchesterSonia, 'Talk to Sonia.');
         darkestDayQuestLine.addQuest(new MultipleQuestsQuest(
             [
                 talkToBath,
-                talkToSonia2,
                 talkToHop,
+                talkToSonia2,
             ], 'Learn more about the heroes who stopped The Darkest Day.')); // Step 5
 
         const clearHammerlockeGym = new CustomQuest(1, 0, 'Continue your Gym Challenge and gain entry to the Champion Cup.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Hammerlocke')]());

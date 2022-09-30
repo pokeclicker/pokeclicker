@@ -4400,13 +4400,7 @@ const FreezingtonShop = new Shop([
 
 //Galar NPCs
 
-const ProfMagnolia = new ProfNPC('Prof. Magnolia',
-    GameConstants.Region.galar,
-    'TODO: Add text before Galar is released',
-    'TODO: Add text before Galar is released',
-    'assets/images/npcs/Professor Magnolia.png');
-
-const Mom = new NPC('Mom', [
+const PostwickMum = new NPC('Mum', [
     'Don’t go too far into the Slumbering Weald.',
     'I’ve heard there are some very strong Pokémon in there.',
     'Only those who beat the champion are strong enough to face them!',
@@ -4418,34 +4412,22 @@ const WedgehurstRailStaff = new NPC('Rail Staff', [
     'I’m sure if you go to these places you’ll find many unique and powerful Pokémon!',
 ], {image: 'assets/images/trainers/Rail Staff.png'});
 
-const SouthGalarRoamerNPC = new RoamerNPC('Professor Sonia', [
-    'I’ve heard there’s been sightings of a never-before-seen, superstrong Pokémon on {ROUTE_NAME}! You should go check it out!',
-], GameConstants.Region.galar, RoamingPokemonList.findGroup(GameConstants.Region.galar, GameConstants.GalarSubRegions.SouthGalar), 'assets/images/npcs/Professor Sonia.png');
-
 const AssistantHenry = new NPC('Assistant Henry', [
     'There are many Pokémon in Galar that I heard look completely different in other regions of the world! They can also evolve in unique ways!',
-    'I know the reckless one, Linoone, will only evolve during the night time here. But, I also think I’ve seen its evolution wandering across the lake if you have a way to cross.',
+    'I know that reckless one, Linoone, will only evolve during the night time here. But, I also think I’ve seen its evolution wandering across the lake if you have a way to cross.',
 ]);
 
-// Route 5 Trainer funny
-const ApplinNPC = new NPC('Cook Stuart', [
-    'I love Sweet and Tart Apples! Oh, this is Applin! It isn’t a snack, but helps me make all sorts of dishes!',
+const TurffieldCook = new NPC('Cook Stuart', [
+    'I love Sweet and Tart Apples! Oh, this is Applin! He isn’t a snack, but helps me make all sorts of dishes!',
     'Applin absolutely loves Sweet and Tart treats.',
     'But, I could never give Applin a Sweet or Tart Apple, that just seems so... wrong...',
     'I can’t be missing out on much anyways, what could be more perfect than my Applin!',
 ], {image: 'assets/images/trainers/Cook.png'});
 
-const CramorantNPC = new NPC('Cramorant', [
+const HammerlockeHiker = new NPC('Hiker Donald', [
     'Have you spotted a blue bird walking around with an Arrokuda in its throat? It’s quite a daft Pokémon, but it sure is hungry! I guess if it trains near water it tries to swallow Arrokudas, but they always get stuck in its throat.',
-    'My mate told me a story of a Pikachu getting lodged in the gluttonous bird’s gullet while it was gorging near an industrial area! But that sounds ridiculous! How would it not be bothered by the big rat in its throat? It would drive me mad.',
-    'Now, what was that bird’s name again...',
-]);
-
-const RunerigusNPC = new NPC('Runerigus', [
-    'My Galarian Yamask refused to evolve until we trained together at the dungeon in the Wild Area!',
-    'There are Pokémon from other regions that only evolve in special locations as well. But for an unknown reason, while they are in Galar, some of those Pokémon can simply evolve using stones.',
-    '<i>Sounds like lazy game design to me...</i>',
-]);
+    'My mate told me a story of a Pikachu getting lodged in the gluttonous bird’s gullet while it was gorging in a thunderstorm! But that sounds ridiculous! How would it not be bothered by the big rat in its throat? It would drive me mad.',
+], {image: 'assets/images/npcs/Hiker (Gen 8).png'});
 
 const AncientMural1 = new NPC('Ancient Mural', [
     '<i>It’s Stow-on-Side’s famous mural.</i>',
@@ -4501,29 +4483,22 @@ const CirchesterSonia = new NPC('Sonia', [
 
 const CirchesterGuitarist = new NPC('Guitarist Justin', [
     'I caught this Snom on Steamdrift Way, we’ve become really good mates.',
-    'I thought that friendship was all Snom needed to evolve, but I keep trying to give it a Soothe Bell during the daytime and nothing happens!',
-    'I’m too busy playing gigs to play with Snom in the evening!',
+    'I thought that friendship was all Snom needed to evolve, but I kept trying to give it a Soothe Bell during the daytime and nothing happened!',
+    'I’m too busy playing gigs to frolic around with Snom in the evening!',
 ], {image: 'assets/images/trainers/Guitarist (male).png'});
 
-// Wyndon (route 10 first encounter) or Motostoke
-const EiscueNPC = new NPC('Eiscue', [
-    'I love how silly my Eiscue looks gobsmacked after training for the Gym Challenge in Motostoke!',
-    'You see, it’s so hot in the Motostoke Stadium that’ the ice on his head melted right’ off!',
-]);
-
-// Idk where
-const KantotoGalarEvosNPC = new NPC('Artist Doug', [
-    'text',
-    'text',
-], {image: 'assets/images/trainers/Artist (Gen 8).png'});
-
-/* To be added when held item evos are ready
-const FarfetchdNPC = new NPC('SirFetchd', [
+/* To be added when held item evos are ready.
+// Add to town near a dungeon/shop that has the Leek available.
+const FarfetchdArtist = new NPC('Artist Duncan', [
     'My Kantonian Farfetch’d would never evolve no matter how many fresh Leeks I gave it.',
     'Lo and behold, here in Galar the Farfetch’d wield thick, tough leeks for battle!',
-    'Once my Galarian Farfetch’d was holding a Leek, I was gobsmacked by how  quickly he transformed into a noble ally. With the Leek growing into a mighty stalk for battle!',
-]);
+    'Once my Galarian Farfetch’d was holding a Leek.. Blimey, I was surprised how quickly he transformed into a noble ally! With the Leek growing into a mighty stalk for battle!',
+], {image: 'assets/images/npcs/Artist (Gen 8).png'});
 */
+
+const SouthGalarRoamerNPC = new RoamerNPC('Professor Sonia', [
+    'I’ve heard there’s been sightings of a never-before-seen, superstrong Pokémon on {ROUTE_NAME}! You should go check it out!',
+], GameConstants.Region.galar, RoamingPokemonList.findGroup(GameConstants.Region.galar, GameConstants.GalarSubRegions.SouthGalar), 'assets/images/npcs/Professor Sonia.png');
 
 // Isle of Armor
 const IsleofArmorRoamerNPC = new RoamerNPC('Master Dojo Student', [
@@ -4730,6 +4705,13 @@ const PeonyComplete = new NPC ('Peony', [
     requirement: new MultiRequirement([new QuestLineCompletedRequirement('The Crown of Galar'), new QuestLineCompletedRequirement('The Birds of the Dyna Tree'), new QuestLineCompletedRequirement('The Ancient Golems')]),
 });
 
+const ProfMagnolia = new ProfNPC('Prof. Magnolia',
+    GameConstants.Region.galar,
+    'TODO: Add text before Galar is released',
+    'TODO: Add text before Galar is released',
+    'assets/images/npcs/Professor Magnolia.png');
+
+
 //Galar towns
 
 TownList.Postwick = new Town(
@@ -4738,7 +4720,7 @@ TownList.Postwick = new Town(
     [new BulletinBoard(GameConstants.BulletinBoards.Galar), PostwickShop],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
-        npcs: [ProfMagnolia, Mom],
+        npcs: [ProfMagnolia, PostwickMum],
     }
 );
 TownList['Slumbering Weald'] = new Town(
@@ -4764,7 +4746,7 @@ TownList['Professor Magnolia\'s House'] = new Town(
     [],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 2)],
-        npcs: [AssistantHenry],
+        npcs: [ProfMagnolia, AssistantHenry],
     }
 );
 TownList.Motostoke = new Town(
@@ -4781,6 +4763,7 @@ TownList.Turffield = new Town(
     [TemporaryBattleList['Rampaging Tsareena'], TurffieldShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Turffield)],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 13)],
+        npcs: [TurffieldCook],
     }
 );
 TownList.Hulbury = new Town(
@@ -4814,6 +4797,7 @@ TownList.Hammerlocke = new Town(
     [TemporaryBattleList['Rampaging Haxorus'], new MoveToDungeon(dungeonList['Energy Plant']), HammerlockeShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Hammerlocke)],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 22)],
+        npcs: [HammerlockeHiker],
     }
 );
 TownList.Circhester = new Town(
