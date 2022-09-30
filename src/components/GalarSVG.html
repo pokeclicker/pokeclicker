@@ -1275,6 +1275,15 @@
             })
         %>
 
+        <!--Fields of Honour extension-->
+        <%- include('templates/mapRoute',
+            { route: 33, region: 7
+            , width: 2, height: 1
+            , x: 52, y: 44, name: "FoH"
+            , noText: true
+            })
+        %>
+
         <!--Soothing Wetlands-->
         <%- include('templates/mapRoute',
             { route: 34, region: 7
@@ -1385,6 +1394,15 @@
             { route: 36, region: 7
             , width: 10, height: 2
             , x: 36, y: 36, name: "CB"
+            , noText: true
+            })
+        %>
+
+        <!--Challenge Beach extension-->
+        <%- include('templates/mapRoute',
+            { route: 36, region: 7
+            , width: 1, height: 1
+            , x: 36, y: 28, name: "CB"
             , noText: true
             })
         %>
@@ -1531,7 +1549,7 @@
         <!--Workout Sea extension-->
         <%- include('templates/mapRoute',
             { route: 41, region: 7
-            , width: 11, height: 1
+            , width: 10, height: 1
             , x: 69, y: 23, name: "WS"
             , noText: true
             })
@@ -2050,7 +2068,7 @@
         <!--Honeycalm Sea extension-->
         <%- include('templates/mapRoute',
             { route: 44, region: 7
-            , width: 10, height: 3.5
+            , width: 10, height: 3
             , x: 36, y: 20, name: "HS"
             , noText: true
             })
@@ -2059,8 +2077,8 @@
         <!--Honeycalm Sea extension-->
         <%- include('templates/mapRoute',
             { route: 44, region: 7
-            , width: 6, height: 1.5
-            , x: 40, y: 23.5, name: "HS"
+            , width: 5, height: 2
+            , x: 41, y: 23, name: "HS"
             , noText: true
             })
         %>
@@ -2068,8 +2086,17 @@
         <!--Honeycalm Sea extension-->
         <%- include('templates/mapRoute',
             { route: 44, region: 7
-            , width: 3, height: 3
-            , x: 40, y: 25, name: "HS"
+            , width: 2, height: 3
+            , x: 41, y: 25, name: "HS"
+            , noText: true
+            })
+        %>
+
+        <!--Honeycalm Sea extension-->
+        <%- include('templates/mapRoute',
+            { route: 44, region: 7
+            , width: 1, height: 5
+            , x: 36, y: 23, name: "HS"
             , noText: true
             })
         %>
@@ -2240,16 +2267,16 @@
         <!--Tower of Darkness-->
         <%- include('templates/mapDungeon',
             { name: "Tower of Darkness"
-            , x: 63, y: 10.5
-            , width: 4, height: 5.5
+            , x: 63, y: 10
+            , width: 4, height: 6
             })
         %>
 
         <!--Tower of Waters-->
         <%- include('templates/mapDungeon',
             { name: "Tower of Waters"
-            , x: 36, y: 23.5
-            , width: 4, height: 5.5
+            , x: 37, y: 23
+            , width: 4, height: 6
             })
         %>
 
