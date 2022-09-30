@@ -4720,7 +4720,7 @@ TownList.Postwick = new Town(
     [new BulletinBoard(GameConstants.BulletinBoards.Galar), PostwickShop],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
-        npcs: [ProfMagnolia, PostwickMum],
+        npcs: [PostwickMum],
     }
 );
 TownList['Slumbering Weald'] = new Town(
