@@ -1861,10 +1861,7 @@ TownList['Slateport City'] = new Town(
     GameConstants.Region.hoenn,
     [SlateportCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Slateport City'])],
     {
-        requirements: [
-            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Granite Cave')),
-            new GymBadgeRequirement(BadgeEnums.Knuckle),
-        ],
+        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Granite Cave'))],
         npcs: [SlateportHoennRoamerNPC],
     }
 );
