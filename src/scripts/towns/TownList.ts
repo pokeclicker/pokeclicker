@@ -4412,8 +4412,8 @@ const Archeologist = new NPC('Archeologist', [
 ], {image: 'assets/images/trainers/Ruin Maniac.png'});
 const Meteorologist = new NPC('Meteorologist', [
     'The Pokémon in the Wild Area are very finicky, and many of them only appear in certain weathers.',
-    'Some Pokémon, namely Cramorant and Eiscue, only appear in certain forms depending on weather.',
     'I\'ve also heard that the Pokémon in the Isle of Armor to the East, and the Crown Tundra to the South, are also like this.',
+    'There are even some Pokémon, namely Cramorant and Eiscue, that only appear in certain forms depending on weather.',
 ]);
 const TeamYellGrunts = new NPC('Team Yell Grunts', [
     'Our Marnie\'s Morpeko is so cute, don\'tcha think?',
