@@ -110,9 +110,9 @@ class PokemonFactory {
         return false;
     }
 
-    public static generatePartyPokemon(id: number, shiny = false): PartyPokemon {
+    public static generatePartyPokemon(id: number, shiny = false, gender = GameConstants.NO_GENDER): PartyPokemon {
         const dataPokemon = PokemonHelper.getPokemonById(id);
-        return new PartyPokemon(dataPokemon.id, dataPokemon.name, dataPokemon.evolutions, dataPokemon.attack, shiny);
+        return new PartyPokemon(dataPokemon.id, dataPokemon.name, dataPokemon.evolutions, dataPokemon.attack, shiny, gender);
     }
 
     /**

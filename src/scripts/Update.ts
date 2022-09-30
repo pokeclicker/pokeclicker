@@ -1203,6 +1203,20 @@ class Update implements Saveable {
         '0.9.17': ({ playerData, saveData }) => {
             // Add Sudowoodo Temporary Battle
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 7);
+
+            // Add Gender Statistics
+            saveData.statistics.totalMalePokemonCaptured = saveData.statistics.totalMalePokemonCaptured || 0;
+            saveData.statistics.totalFemalePokemonCaptured = saveData.statistics.totalFemalePokemonCaptured || 0;
+            saveData.statistics.totalMalePokemonDefeated = saveData.statistics.totalMalePokemonDefeated || 0;
+            saveData.statistics.totalFemalePokemonDefeated = saveData.statistics.totalFemalePokemonDefeated || 0;
+            saveData.statistics.totalMalePokemonEncountered = saveData.statistics.totalMalePokemonEncountered || 0;
+            saveData.statistics.totalFemalePokemonEncountered = saveData.statistics.totalFemalePokemonEncountered || 0;
+            saveData.statistics.totalShinyMalePokemonCaptured = saveData.statistics.totalShinyMalePokemonCaptured || 0;
+            saveData.statistics.totalShinyFemalePokemonCaptured = saveData.statistics.totalShinyFemalePokemonCaptured || 0;
+            saveData.statistics.totalShinyMalePokemonDefeated = saveData.statistics.totalShinyMalePokemonDefeated || 0;
+            saveData.statistics.totalShinyFemalePokemonDefeated = saveData.statistics.totalShinyFemalePokemonDefeated || 0;
+            saveData.statistics.totalShinyMalePokemonEncountered = saveData.statistics.totalShinyMalePokemonEncountered || 0;
+            saveData.statistics.totalShinyFemalePokemonEncountered = saveData.statistics.totalShinyFemalePokemonEncountered || 0;
         },
     };
 

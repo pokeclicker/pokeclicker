@@ -40,17 +40,35 @@ class Party implements Feature {
 
     }
 
-    gainPokemonById(id: number, shiny = false, suppressNotification = false) {
-        this.gainPokemon(PokemonFactory.generatePartyPokemon(id, shiny), suppressNotification);
+    gainPokemonById(id: number, shiny = false, suppressNotification = false, gender = GameConstants.NO_GENDER) {
+        this.gainPokemon(PokemonFactory.generatePartyPokemon(id, shiny, gender), suppressNotification);
     }
 
     gainPokemon(pokemon: PartyPokemon, suppressNotification = false) {
         GameHelper.incrementObservable(App.game.statistics.pokemonCaptured[pokemon.id]);
         GameHelper.incrementObservable(App.game.statistics.totalPokemonCaptured);
+        // Gender Statistics
+        if (pokemon.gender === GameConstants.GENDER_MALE) {
+            GameHelper.incrementObservable(App.game.statistics.malePokemonCaptured[pokemon.id]);
+            GameHelper.incrementObservable(App.game.statistics.totalMalePokemonCaptured);
+        }
+        else if (pokemon.gender === GameConstants.GENDER_FEMALE) {
+            GameHelper.incrementObservable(App.game.statistics.femalePokemonCaptured[pokemon.id]);
+            GameHelper.incrementObservable(App.game.statistics.totalFemalePokemonCaptured);
+        }
 
         if (pokemon.shiny) {
             GameHelper.incrementObservable(App.game.statistics.shinyPokemonCaptured[pokemon.id]);
             GameHelper.incrementObservable(App.game.statistics.totalShinyPokemonCaptured);
+            // Gender Statistics
+            if (pokemon.gender === GameConstants.GENDER_MALE) {
+                GameHelper.incrementObservable(App.game.statistics.shinyMalePokemonCaptured[pokemon.id]);
+                GameHelper.incrementObservable(App.game.statistics.totalShinyMalePokemonCaptured);
+            }
+            else if (pokemon.gender === GameConstants.GENDER_FEMALE) {
+                GameHelper.incrementObservable(App.game.statistics.shinyFemalePokemonCaptured[pokemon.id]);
+                GameHelper.incrementObservable(App.game.statistics.totalShinyFemalePokemonCaptured);
+            }
             // Add all shiny catches to the log book
             App.game.logbook.newLog(LogBookTypes.CAUGHT, `You have captured a shiny ${pokemon.name}! ${this.alreadyCaughtPokemon(pokemon.id, true) ? '(duplicate)' : ''}`);
             // Already caught (shiny)

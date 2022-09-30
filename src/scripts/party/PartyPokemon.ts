@@ -53,7 +53,8 @@ class PartyPokemon implements Saveable {
         public name: PokemonNameType,
         public evolutions: Evolution[],
         public baseAttack: number,
-        shiny = false
+        shiny = false,
+        public gender,
     ) {
         this.proteinsUsed = ko.observable(0).extend({ numeric: 0 });
         this._breeding = ko.observable(false).extend({ boolean: null });

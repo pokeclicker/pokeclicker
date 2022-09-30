@@ -59,9 +59,28 @@ class BattlePokemon implements EnemyPokemonInterface {
     public defeat(trainer = false): void {
         GameHelper.incrementObservable(App.game.statistics.pokemonDefeated[this.id]);
         GameHelper.incrementObservable(App.game.statistics.totalPokemonDefeated);
+        // Gender Statistics
+        if (this.gender === GameConstants.GENDER_MALE) {
+            GameHelper.incrementObservable(App.game.statistics.malePokemonDefeated[this.id]);
+            GameHelper.incrementObservable(App.game.statistics.totalMalePokemonDefeated);
+        }
+        else if (this.gender === GameConstants.GENDER_FEMALE) {
+            GameHelper.incrementObservable(App.game.statistics.femalePokemonDefeated[this.id]);
+            GameHelper.incrementObservable(App.game.statistics.totalFemalePokemonDefeated);
+        }
+
         if (this.shiny) {
             GameHelper.incrementObservable(App.game.statistics.shinyPokemonDefeated[this.id]);
             GameHelper.incrementObservable(App.game.statistics.totalShinyPokemonDefeated);
+            // Gender Statistics
+            if (this.gender === GameConstants.GENDER_MALE) {
+                GameHelper.incrementObservable(App.game.statistics.malePokemonDefeated[this.id]);
+                GameHelper.incrementObservable(App.game.statistics.totalMalePokemonDefeated);
+            }
+            else if (this.gender === GameConstants.GENDER_FEMALE) {
+                GameHelper.incrementObservable(App.game.statistics.femalePokemonDefeated[this.id]);
+                GameHelper.incrementObservable(App.game.statistics.totalFemalePokemonDefeated);
+            }
         }
 
         if (this.reward.amount > 0) {
