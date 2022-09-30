@@ -385,6 +385,7 @@ export const SpriteCredits: Credit[] = [
             'Fairy Tale Girl',
             'Gen 8 Reporter (Lucy Stevens)',
             'Hex Maniac',
+            'Hiker (Gen 8)',
             'Looker',
             'Mr. Fuji',
             'Punk Girl',
