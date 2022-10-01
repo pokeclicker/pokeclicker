@@ -3859,8 +3859,8 @@ const AetherParadiseAlolaRoamerNPC = new RoamerNPC('Assistant Branch Chief Wicke
 
 const ProfKukui = new ProfNPC('Prof. Kukui',
     GameConstants.Region.alola,
-    'TODO',
-    'TODO',
+    'This is truly an astounding feat! Congratulations on completing the Pokédex!',
+    'With that, you can stamp your ticket to the noble Galar region!',
     'assets/images/npcs/Professor Kukui.png');
 
 const RoadsideMotelLooker1 = new NPC('Looker', [
@@ -4830,8 +4830,8 @@ const PeonyComplete = new NPC ('Peony', [
 });
 const ProfMagnolia = new ProfNPC('Prof. Magnolia',
     GameConstants.Region.galar,
-    'TODO: Add text before Galar is released',
-    'TODO: Add text before Galar is released',
+    'Ahhh, how incredible. Look how far you have come, dear trainer. Congratulations on another complete Pokédex.',
+    'Now be on your way, the illustrious Paldea region awaits.',
     'assets/images/npcs/Professor Magnolia.png');
 
 
