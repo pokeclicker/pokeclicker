@@ -4429,6 +4429,12 @@ const TurffieldCook = new NPC('Cook Stuart', [
     'I can’t be missing out on much anyways, what could be more perfect than my Applin!',
 ], { image: 'assets/images/trainers/Cook.png' });
 
+const Meteorologist = new NPC('Meteorologist', [
+    'The Pokémon in the Wild Area are very finicky, and many of them only appear in certain weathers.',
+    'I\'ve also heard that the Pokémon in the Isle of Armor to the East, and the Crown Tundra to the South, are also like this.',
+    'There are even some Pokémon, namely Cramorant and Eiscue, that only appear in certain forms depending on weather.',
+]);
+
 const HammerlockeHiker = new NPC('Hiker Donald', [
     'Have you spotted a blue bird walking around with an Arrokuda in its throat? It’s quite a daft Pokémon, but it sure is hungry! I guess if it trains near water it tries to swallow Arrokudas, but they always get stuck in its throat.',
     'My mate told me a story of a Pikachu getting lodged in the gluttonous bird’s gullet while it was gorging in a thunderstorm! But that sounds ridiculous! How would it not be bothered by the big rat in its throat? It would drive me mad.',
@@ -4467,12 +4473,6 @@ const Archaeologist = new NPC('Archaeologist', [
     'It seems they do not evolve into Galarian Cofagrigus, but a completely different Pokémon instead.',
     'For some mysterious reason, they only evolve when trained in a specific area of the wild area known as the Dusty Bowl.',
 ], { image: 'assets/images/trainers/Ruin Maniac.png' });
-
-const Meteorologist = new NPC('Meteorologist', [
-    'The Pokémon in the Wild Area are very finicky, and many of them only appear in certain weathers.',
-    'I\'ve also heard that the Pokémon in the Isle of Armor to the East, and the Crown Tundra to the South, are also like this.',
-    'There are even some Pokémon, namely Cramorant and Eiscue, that only appear in certain forms depending on weather.',
-]);
 
 const HerosBath = new NPC('Hero’s Bath', [
     '<i>The ancient Hero’s Bath.</i>',
