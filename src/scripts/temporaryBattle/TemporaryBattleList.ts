@@ -124,7 +124,7 @@ TemporaryBattleList.Sudowoodo = new TemporaryBattle(
 TemporaryBattleList['Suicune 1'] = new TemporaryBattle(
     'Suicune 1',
     [new GymPokemon('Suicune', 1044000, 40)],
-    'Suicune fled.',
+    '<i>Suicune fled.</i>',
     [
         new QuestLineStartedRequirement('Eusine\'s Chase'),
         new RouteKillRequirement(10, GameConstants.Region.johto, 41),
@@ -155,7 +155,7 @@ TemporaryBattleList.Eusine = new TemporaryBattle(
 TemporaryBattleList['Suicune 2'] = new TemporaryBattle(
     'Suicune 2',
     [new GymPokemon('Suicune', 1115500, 40)],
-    'Suicune fled.',
+    '<i>Suicune fled.</i>',
     [
         new QuestLineStepCompletedRequirement('Eusine\'s Chase', 2),
         new RouteKillRequirement(10, GameConstants.Region.johto, 42),
@@ -171,7 +171,7 @@ TemporaryBattleList['Suicune 2'] = new TemporaryBattle(
 TemporaryBattleList['Suicune 3'] = new TemporaryBattle(
     'Suicune 3',
     [new GymPokemon('Suicune', 3269100, 40)],
-    'Suicune fled.',
+    '<i>Suicune fled.</i>',
     [
         new QuestLineStepCompletedRequirement('Eusine\'s Chase', 4),
         new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion),
@@ -187,7 +187,7 @@ TemporaryBattleList['Suicune 3'] = new TemporaryBattle(
 TemporaryBattleList['Suicune 4'] = new TemporaryBattle(
     'Suicune 4',
     [new GymPokemon('Suicune', 3359100, 40)],
-    'Suicune fled.',
+    '<i>Suicune fled.</i>',
     [
         new QuestLineStepCompletedRequirement('Eusine\'s Chase', 6),
         new RouteKillRequirement(10, GameConstants.Region.kanto, 14),
@@ -203,7 +203,7 @@ TemporaryBattleList['Suicune 4'] = new TemporaryBattle(
 TemporaryBattleList['Suicune 5'] = new TemporaryBattle(
     'Suicune 5',
     [new GymPokemon('Suicune', 3449100, 40)],
-    'Suicune didn\'t flee.',
+    '<i>Suicune didn\'t flee.</i>',
     [new QuestLineStepCompletedRequirement('Eusine\'s Chase', 8)],
     undefined,
     {
@@ -225,7 +225,6 @@ TemporaryBattleList['Suicune 6'] = new TemporaryBattle(
         imageName: 'Suicune',
         hideTrainer: true,
         isTrainerBattle: false,
-
     }
 );
 TemporaryBattleList['Spiky-eared Pichu'] = new TemporaryBattle(
@@ -237,6 +236,7 @@ TemporaryBattleList['Spiky-eared Pichu'] = new TemporaryBattle(
     {
         displayName: 'Strange Pichu',
         hideTrainer: true,
+        imageName: '../pokemon/172.1',
     }
 );
 TemporaryBattleList['Rocket Boss Giovanni'] = new TemporaryBattle(
@@ -1596,6 +1596,7 @@ TemporaryBattleList['Rampaging Zacian'] = new TemporaryBattle(
     undefined,
     {
         hideTrainer: true,
+        imageName: '../pokemon/888',
     }
 );
 TemporaryBattleList['Rampaging Zamazenta'] = new TemporaryBattle(
@@ -1609,6 +1610,7 @@ TemporaryBattleList['Rampaging Zamazenta'] = new TemporaryBattle(
     undefined,
     {
         hideTrainer: true,
+        imageName: '../pokemon/889',
     }
 );
 TemporaryBattleList.Klara1 = new TemporaryBattle(
