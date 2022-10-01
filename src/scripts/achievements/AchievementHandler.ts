@@ -365,15 +365,15 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Starting a farming empire', 'Unlock 6 Farm Hands', new FarmHandRequirement(6), 0.3);
         AchievementHandler.addAchievement('Will I ever need all this help?', 'Unlock 9 Farm Hands', new FarmHandRequirement(9), 0.4);
 
-        AchievementHandler.addAchievement('I hope it\'s not dangerous', 'Infect 20 Pokémon with Pokerus', new PokerusStatusRequirement(20, GameConstants.Pokerus.Infected), 0.1);
-        AchievementHandler.addAchievement('Anyway to get rid of it?', 'Infect 50 Pokémon with Pokerus', new PokerusStatusRequirement(50, GameConstants.Pokerus.Infected), 0.2);
-        AchievementHandler.addAchievement('It is the flu season', 'Infect 100 Pokémon with Pokerus', new PokerusStatusRequirement(100, GameConstants.Pokerus.Infected), 0.3);
-        AchievementHandler.addAchievement('Where is nursery Joy?', 'Infect 250 Pokémon with Pokerus', new PokerusStatusRequirement(250, GameConstants.Pokerus.Infected), 0.4);
-        AchievementHandler.addAchievement('Infecting the whole world', 'Infect 1000 Pokémon with Pokerus', new PokerusStatusRequirement(1000, GameConstants.Pokerus.Infected), 0.5);
-        AchievementHandler.addAchievement('Curing them one at a time', 'Have 10 Resistant Pokémon', new PokerusStatusRequirement(10, GameConstants.Pokerus.Resistant), 0.3);
-        AchievementHandler.addAchievement('Pokémon center regular', 'Have 50 Resistant Pokémon', new PokerusStatusRequirement(50, GameConstants.Pokerus.Resistant), 0.5);
-        AchievementHandler.addAchievement('Doctor in training', 'Have 250 Resistant Pokémon', new PokerusStatusRequirement(250, GameConstants.Pokerus.Resistant), 1);
-        AchievementHandler.addAchievement('I should open my own Pokémon Center', 'Have 500 Resistant Pokémon', new PokerusStatusRequirement(500, GameConstants.Pokerus.Resistant), 1.5);
+        AchievementHandler.addAchievement('I hope it\'s not dangerous', 'Infect 20 Pokémon with Pokérus', new PokerusStatusRequirement(20, GameConstants.Pokerus.Infected), 0.1);
+        AchievementHandler.addAchievement('Anyway to get rid of it?', 'Infect 50 Pokémon with Pokérus', new PokerusStatusRequirement(50, GameConstants.Pokerus.Infected), 0.2);
+        AchievementHandler.addAchievement('It is the flu season', 'Infect 100 Pokémon with Pokérus', new PokerusStatusRequirement(100, GameConstants.Pokerus.Infected), 0.3);
+        AchievementHandler.addAchievement('Where is nursery Joy?', 'Infect 250 Pokémon with Pokérus', new PokerusStatusRequirement(250, GameConstants.Pokerus.Infected), 0.4);
+        AchievementHandler.addAchievement('Infecting the whole world', 'Infect 1000 Pokémon with Pokérus', new PokerusStatusRequirement(1000, GameConstants.Pokerus.Infected), 0.5);
+        AchievementHandler.addAchievement('Curing them one at a time', 'Have 10 Pokémon Resistant to Pokérus', new PokerusStatusRequirement(10, GameConstants.Pokerus.Resistant), 0.3);
+        AchievementHandler.addAchievement('Pokémon center regular', 'Have 50 Pokémon Resistant to Pokérus', new PokerusStatusRequirement(50, GameConstants.Pokerus.Resistant), 0.5);
+        AchievementHandler.addAchievement('Doctor in training', 'Have 250 Pokémon Resistant to Pokérus', new PokerusStatusRequirement(250, GameConstants.Pokerus.Resistant), 1);
+        AchievementHandler.addAchievement('I should open my own Pokémon Center', 'Have 500 Pokémon Resistant to Pokérus', new PokerusStatusRequirement(500, GameConstants.Pokerus.Resistant), 1.5);
 
         AchievementHandler.addAchievement('Oh, an other quest slot!', 'Reach quest level 5', new QuestLevelRequirement(5), 0.2);
         AchievementHandler.addAchievement('I am getting good at questing!', 'Reach quest level 10', new QuestLevelRequirement(10), 0.3);
