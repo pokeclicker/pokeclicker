@@ -1337,7 +1337,6 @@ const EcruteakKimonoGirl = new NPC('Kimono Girl', [
     'Legends say that Ho-Oh is searching for a trainer of pure heart.',
     'To prove yourself, you must tame the three legendary beasts of Johto, and bring them to the nearby Tin Tower.',
 ], {
-    image: 'assets/images/npcs/Kimono Girl.png',
     requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Burned Tower')),
 });
 
