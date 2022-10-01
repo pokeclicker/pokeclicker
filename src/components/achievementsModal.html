@@ -31,10 +31,10 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                                     </select>
                                 </div>
                                 <div class="form-group col-md-3 col-6">
-                                    <label>Region</label>
-                                    <select name="achievementsRegion" class="custom-select" onchange="AchievementHandler.filter.region(this.value), Settings.setSettingByName(this.name, this.value)">
-                                        <!-- ko foreach: Settings.getSetting('achievementsRegion').options.filter(r => r.value <= player.highestRegion()) -->
-                                        <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('achievementsRegion').value === $data.value }, text: $data.text">Region</option>
+                                    <label>Category</label>
+                                    <select name="achievementsCategory" class="custom-select" onchange="AchievementHandler.filter.category(this.value), Settings.setSettingByName(this.name, this.value)">
+                                        <!-- ko foreach: Settings.getSetting('achievementsCategory').options.filter(r => r.value == 'all' || AchievementHandler.getAchievementCategories().find((c) => c.name == r.value).isUnlocked()) -->
+                                        <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('achievementsCategory').value === $data.value }, text: $data.text">Category</option>
                                         <!-- /ko -->
                                     </select>
                                 </div>
