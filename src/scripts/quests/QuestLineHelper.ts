@@ -1631,7 +1631,7 @@ class QuestLineHelper {
             ]), GameConstants.BulletinBoards.Galar);
 
         const mysteryGift = new TalkToNPCQuest(MagearnaMysteryGift, 'Go home and open your Mystery Gift', () => {
-            App.game.party.gainPokemonById(658.01);
+            App.game.party.gainPokemonById(801.1);
             Notifier.notify({
                 title: magearnaQuestLine.name,
                 message: 'You obtained Magearna (Original Color)!',
