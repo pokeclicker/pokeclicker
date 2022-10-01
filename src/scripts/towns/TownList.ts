@@ -4482,13 +4482,13 @@ const CirchesterSonia = new NPC('Sonia', [
 });
 
 const CirchesterGuitarist = new NPC('Guitarist Justin', [
-    'I caught this Snom on Steamdrift Way, we’ve become really good mates.',
-    'I thought that friendship was all Snom needed to evolve, but I kept trying to give it a Soothe Bell during the daytime and nothing happened!',
-    'I’m too busy playing gigs to frolic around with Snom in the evening!',
+    'I caught this Snom on Steamdrift Way and we’ve become really good mates.',
+    'I thought that friendship was all Snom needed to evolve, but I kept trying to give it a Soothe Bell during the day and nothing happened!',
+    'I’m too busy playing gigs to scamper around with Snom in the evening!',
 ], {image: 'assets/images/trainers/Guitarist (male).png'});
 
 /* To be added when held item evos are ready.
-// Add to town near a dungeon/shop that has the Leek available.
+// TODO: Add to town near a dungeon/shop that has the Leek available.
 const FarfetchdArtist = new NPC('Artist Duncan', [
     'My Kantonian Farfetch’d would never evolve no matter how many fresh Leeks I gave it.',
     'Lo and behold, here in Galar the Farfetch’d wield thick, tough leeks for battle!',
@@ -4497,7 +4497,7 @@ const FarfetchdArtist = new NPC('Artist Duncan', [
 */
 
 const SouthGalarRoamerNPC = new RoamerNPC('Professor Sonia', [
-    'I’ve heard there’s been sightings of a never-before-seen, superstrong Pokémon on {ROUTE_NAME}! You should go check it out!',
+    'I’ve heard there’s been sightings of a never-before-seen, super strong Pokémon on {ROUTE_NAME}! You should go check it out!',
 ], GameConstants.Region.galar, RoamingPokemonList.findGroup(GameConstants.Region.galar, GameConstants.GalarSubRegions.SouthGalar), 'assets/images/npcs/Professor Sonia.png');
 
 // Isle of Armor
