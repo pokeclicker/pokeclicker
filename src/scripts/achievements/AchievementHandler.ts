@@ -274,7 +274,7 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Just keep swimming just keep swimming -- oooo shiny!', 'Capture 100 unique Shinies', new ShinyPokemonRequirement(100), 0.60);
         AchievementHandler.addAchievement('I don\'t know if I can handle the next batch of shinies', 'Capture 151 unique Shinies!', new ShinyPokemonRequirement(151), 1.00);
         AchievementHandler.addAchievement('Will need sunglasses', 'Capture 250 unique Shinies!', new ShinyPokemonRequirement(250), 1.20);
-        AchievementHandler.addAchievement('What was the odds again?', 'Capture 500 unique Shinies!', new ShinyPokemonRequirement(500), 1.30);
+        AchievementHandler.addAchievement('What were the odds again?', 'Capture 500 unique Shinies!', new ShinyPokemonRequirement(500), 1.30);
         AchievementHandler.addAchievement('Non-shiny is now becomming rare', 'Capture 1000 unique Shinies!', new ShinyPokemonRequirement(1000), 1.50);
 
         AchievementHandler.addAchievement('Pokémon Nursery', 'Hatch 1 egg', new HatchRequirement(1), 0.01);
