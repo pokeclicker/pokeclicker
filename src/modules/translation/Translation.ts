@@ -46,7 +46,7 @@ export default class Translate {
                 ns: ['pokemon'],
                 fallbackLng: 'en',
                 backend: {
-                    loadPath: './locales/{{lng}}/{{ns}}.json',
+                    loadPath: '$TRANSLATIONS_URL/locales/{{lng}}/{{ns}}.json',
                 },
             });
 
