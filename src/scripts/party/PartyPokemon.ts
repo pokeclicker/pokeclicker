@@ -225,11 +225,9 @@ class PartyPokemon implements Saveable {
                 return true;
             }
         }
-        const type: (PokemonType | null) = Settings.getSetting('proteinTypeFilter').observableValue() > -2 ? Settings.getSetting('proteinTypeFilter').observableValue() : null;
-        if (type !== null) {
-            const { type: types } = pokemonMap[this.name];
-            if (type !== null && !types.includes(type)) {
-                return true;
+        const type = Settings.getSetting('proteinTypeFilter').observableValue();
+        if (type > -2 && !pokemonMap[this.name].type.includes(type)) {
+            return true;
             }
         }
         if (this.proteinUsesRemaining() == 0 && Settings.getSetting('proteinHideMaxedPokemon').observableValue()) {
