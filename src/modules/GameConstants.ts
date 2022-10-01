@@ -55,8 +55,8 @@ export const MaxIDPerRegion = [
 export const ITEM_USE_TIME = 30;
 export const FLUTE_TYPE_ATTACK_MULTIPLIER = 1.005;
 
-export const ROAMING_MIN_CHANCE = 8192;
-export const ROAMING_MAX_CHANCE = 4096;
+export const ROAMING_MIN_CHANCE = 16;
+export const ROAMING_MAX_CHANCE = 8;
 
 // Shinies
 export const SHINY_CHANCE_BATTLE = 8192;
@@ -157,6 +157,8 @@ export const DUNGEON_BOSS_HELD_ITEM_MODIFIER = DUNGEON_HELD_ITEM_MODIFIER * 1.5;
 export const HELD_ITEM_CHANCE = 512;
 export const HELD_UNDERGROUND_ITEM_CHANCE = 2048;
 export const DNA_ITEM_CHANCE = 60;
+export const RUST_ITEM_CHANCE = 90;
+export const MANE_ITEM_CHANCE = 10;
 
 // Gems
 export const GEM_UPGRADE_COST = 500;
@@ -663,6 +665,8 @@ export enum StoneType {
     'Cracked_pot',
     'Galarica_cuff',
     'Galarica_wreath',
+    'Black_mane_hair',
+    'White_mane_hair',
 }
 
 export enum FossilPieceType {
