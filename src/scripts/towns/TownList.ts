@@ -4422,6 +4422,12 @@ const BattleCafeMaster = new NPC('Battle Café Master', [
     'Stop by the Battle Café, we sell all the Sweets you’ll need!',
 ], {image: 'assets/images/npcs/BattleCafeMaster.png'});
 
+const MotostokeArtist = new NPC('Artist Duncan', [
+    'My Kantonian Farfetch’d would never evolve no matter how many fresh Leeks I gave it.',
+    'Lo and behold, here in Galar the Farfetch’d wield thick, tough leeks for battle!',
+    'Once my Galarian Farfetch’d was holding a Leek.. Blimey, I was surprised how quickly he transformed into a noble ally! With the Leek growing into a mighty stalk for battle!',
+], {image: 'assets/images/npcs/Artist (Gen 8).png'});
+
 const TurffieldCook = new NPC('Cook Stuart', [
     'I love Sweet and Tart Apples! Oh, this is Applin! He isn’t a snack, but helps me make all sorts of dishes!',
     'Applin absolutely loves Sweet and Tart treats.',
@@ -4509,15 +4515,6 @@ const TeamYellGrunts = new NPC('Team Yell Grunts', [
     'When it’s hungry, though, it gets so angry it changes forms.',
     'If you want to catch it in that form, you would probably be best trying to attract it with a berry that electric Pokémon like.',
 ], {image: 'assets/images/trainers/Team Yell Grunts.png'});
-
-/* To be added when held item evos are ready.
-// TODO: Add to town near a dungeon/shop that has the Leek available.
-const FarfetchdArtist = new NPC('Artist Duncan', [
-    'My Kantonian Farfetch’d would never evolve no matter how many fresh Leeks I gave it.',
-    'Lo and behold, here in Galar the Farfetch’d wield thick, tough leeks for battle!',
-    'Once my Galarian Farfetch’d was holding a Leek.. Blimey, I was surprised how quickly he transformed into a noble ally! With the Leek growing into a mighty stalk for battle!',
-], {image: 'assets/images/npcs/Artist (Gen 8).png'});
-*/
 
 const SouthGalarRoamerNPC = new RoamerNPC('Professor Sonia', [
     'I’ve heard there’s been sightings of a never-before-seen, super strong Pokémon on {ROUTE_NAME}! You should go check it out!',
@@ -4880,7 +4877,7 @@ TownList.Motostoke = new Town(
     [TemporaryBattleList.Marnie1, TemporaryBattleList['Rampaging Torkoal'], MotostokeShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Motostoke), new BattleCafe()],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 6)],
-        npcs: [BattleCafeMaster],
+        npcs: [BattleCafeMaster, MotostokeArtist],
     }
 );
 TownList.Turffield = new Town(
