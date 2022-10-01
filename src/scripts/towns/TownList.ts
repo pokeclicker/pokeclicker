@@ -4414,6 +4414,14 @@ const AssistantHenry = new NPC('Assistant Henry', [
     'I know that reckless one, Linoone, will only evolve during the night time here. But, I also think I’ve seen its evolution wandering across the lake if you have a way to cross.',
 ]);
 
+const BattleCafeMaster = new NPC('Battle Café Master', [
+    'Milcery can evolve when you spin around with it, while treating it to a Sweet.',
+    'For example, you can whip up a Vanilla Alcremie, by spinning clockwise for less than 5 seconds, during the day. Piece of cake! There’s a unique form for each Sweet under this circumstance, so bake it till you make it!',
+    'There are more tiers to Alcremie than I can count. Mix up the direction, duration, time of day, and the given Sweet to disover all the flavours there are to find.',
+    'I will suggest that you only do 3 spins a day if you don’t want to end up sick!',
+    'Stop by the Battle Café, we sell all the Sweets you’ll need!',
+], {image: 'assets/images/npcs/BattleCafeMaster.png'});
+
 const TurffieldCook = new NPC('Cook Stuart', [
     'I love Sweet and Tart Apples! Oh, this is Applin! He isn’t a snack, but helps me make all sorts of dishes!',
     'Applin absolutely loves Sweet and Tart treats.',
@@ -4872,6 +4880,7 @@ TownList.Motostoke = new Town(
     [TemporaryBattleList.Marnie1, TemporaryBattleList['Rampaging Torkoal'], MotostokeShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Motostoke), new BattleCafe()],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 6)],
+        npcs: [BattleCafeMaster],
     }
 );
 TownList.Turffield = new Town(

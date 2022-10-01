@@ -380,6 +380,7 @@ export const SpriteCredits: Credit[] = [
         resources: [
             'Artist (Gen 8)',
             'Artist (male)',
+            'Battle Café Master',
             'Bill',
             'Cook (Gen 8)',
             'Fairy Tale Girl',
