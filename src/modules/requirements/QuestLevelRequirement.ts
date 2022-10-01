@@ -11,6 +11,6 @@ export default class QuestLevelRequirement extends AchievementRequirement {
     }
 
     public hint(): string {
-        return `Needs questlevel ${this.requiredValue}.`;
+        return `Needs quest level ${this.requiredValue}.`;
     }
 }
