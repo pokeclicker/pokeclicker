@@ -149,6 +149,8 @@ namespace GameConstants {
     declare const EP_EV_RATIO: number;
     declare const EP_CHALLENGE_MODIFIER: number;
     declare const DNA_ITEM_CHANCE: number;
+    declare const RUST_ITEM_CHANCE: number;
+    declare const MANE_ITEM_CHANCE: number;
     declare enum GameState {
         idle,
         paused,
@@ -283,6 +285,8 @@ namespace GameConstants {
         'Cracked_pot',
         'Galarica_cuff',
         'Galarica_wreath',
+        'Black_mane_hair',
+        'White_mane_hair',
     }
     declare enum FossilPieceType {
         'None',

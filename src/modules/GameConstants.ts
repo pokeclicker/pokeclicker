@@ -159,6 +159,8 @@ export const DUNGEON_BOSS_HELD_ITEM_MODIFIER = DUNGEON_HELD_ITEM_MODIFIER * 1.5;
 export const HELD_ITEM_CHANCE = 512;
 export const HELD_UNDERGROUND_ITEM_CHANCE = 2048;
 export const DNA_ITEM_CHANCE = 60;
+export const RUST_ITEM_CHANCE = 90;
+export const MANE_ITEM_CHANCE = 10;
 
 // Gems
 export const GEM_UPGRADE_COST = 500;
@@ -665,6 +667,8 @@ export enum StoneType {
     'Cracked_pot',
     'Galarica_cuff',
     'Galarica_wreath',
+    'Black_mane_hair',
+    'White_mane_hair',
 }
 
 export enum FossilPieceType {
