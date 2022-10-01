@@ -1511,7 +1511,14 @@ class QuestLineHelper {
                 catchGlastrier,
             ], 'Spectrier and Glastrier are now roaming the Crown Tundra. Catch them when the opportunity arises!'));
 
-        const talktoCalyrex4 = new TalkToNPCQuest(Calyrex4, 'Now that you have captured both of its steeds, talk to Calyrex at the Crown Shrine.');
+        const UnityReward = () => {
+            App.game.keyItems.gainKeyItem(KeyItemType.Reins_of_unity, true);
+            $('#npcModal').one('hidden.bs.modal', () => {
+                KeyItemController.showGainModal(KeyItemType.Reins_of_unity);
+            });
+        };
+
+        const talktoCalyrex4 = new TalkToNPCQuest(Calyrex4, 'Now that you have captured both of its steeds, talk to Calyrex at the Crown Shrine.', UnityReward);
         galarCrownQuestLine.addQuest(talktoCalyrex4);
 
         const catchCalyrex = new CaptureSpecificPokemonQuest('Calyrex', 'Now that you have found and caught Glastrier and Spectrier, Calyrex wants to challenge you at Crown Shrine. Catch it!', 1, false, 0, undefined);
@@ -1615,6 +1622,33 @@ class QuestLineHelper {
         ancientGolemsQuestLine.addQuest(talktoGolemPeony6);
 
         App.game.quests.questLines().push(ancientGolemsQuestLine);
+    }
+
+    public static createOriginalColorMagearnaQuestLine() {
+        const magearnaQuestLine = new QuestLine('A Mystery Gift', 'You have recieved a Mystery Gift.',
+            new MultiRequirement([
+                new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.kanto),
+                new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.johto),
+                new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.hoenn),
+                new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.sinnoh),
+                new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.unova),
+                new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.kalos),
+                new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.alola),
+                new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.galar),
+            ]), GameConstants.BulletinBoards.Galar);
+
+        const mysteryGift = new TalkToNPCQuest(MagearnaMysteryGift, 'Go home and open your Mystery Gift', () => {
+            App.game.party.gainPokemonById(801.1);
+            Notifier.notify({
+                title: magearnaQuestLine.name,
+                message: 'You obtained Magearna (Original Color)!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        });
+        magearnaQuestLine.addQuest(mysteryGift);
+
+        App.game.quests.questLines().push(magearnaQuestLine);
     }
 
     // Event QuestLines
@@ -1728,6 +1762,7 @@ class QuestLineHelper {
         this.createGalarCrownQuestLine();
         this.createDynaTreeBirdsQuestLine();
         this.createAncientGolemsQuestLine();
+        this.createOriginalColorMagearnaQuestLine();
         this.createFindSurpriseTogepiForEasterQuestLine();
         this.createHoopaDayPikabluQuestLine();
     }
