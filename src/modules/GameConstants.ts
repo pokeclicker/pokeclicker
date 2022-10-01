@@ -139,6 +139,7 @@ export enum AchievementType {
     'Quest',
     'Battle Frontier',
     'Protein',
+    'Pokérus',
 }
 
 export enum DungeonTile {
@@ -1391,6 +1392,7 @@ export const TemporaryBattles = [
     'Avery2',
     'Klara3',
     'Avery3',
+    'Kubfu',
     'Zarude Tribe 1',
     'Zarude Tribe 2',
     'Zarude Tribe 3',
@@ -1582,4 +1584,9 @@ export enum AlcremieSpins {
     dayClockwiseAbove5,
     dayCounterclockwiseAbove5,
     at7Above10,
+}
+
+export enum ExtraAchievementCategories {
+    global = Region.final,
+    sevii,
 }

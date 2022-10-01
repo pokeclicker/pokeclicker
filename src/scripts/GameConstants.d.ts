@@ -98,7 +98,8 @@ namespace GameConstants {
         'Farming',
         'Quest',
         'Battle Frontier',
-        'Protein'
+        'Protein',
+        'Pokérus',
     }
     declare enum DungeonTile {
         empty,
@@ -596,6 +597,8 @@ namespace GameConstants {
         IsleofArmor,
         CrownTundra,
     }
+
+
     declare enum AlcremieSweet {
         'Strawberry Sweet',
         'Love Sweet',
@@ -615,5 +618,9 @@ namespace GameConstants {
         dayClockwiseAbove5,
         dayCounterclockwiseAbove5,
         at7Above10
+    }
+    declare enum ExtraAchievementCategories {
+        global,
+        sevii,
     }
 }
