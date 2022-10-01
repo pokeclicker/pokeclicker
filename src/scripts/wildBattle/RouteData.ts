@@ -806,10 +806,7 @@ Routes.add(new RegionRoute(
         land: ['Poochyena', 'Gulpin', 'Minun', 'Oddish', 'Wingull', 'Plusle'],
         water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer'],
     }),
-    [
-        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Granite Cave')),
-        new GymBadgeRequirement(BadgeEnums.Knuckle),
-    ]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Granite Cave'))]
 ));
 Routes.add(new RegionRoute(
     'Hoenn Route 111', GameConstants.Region.hoenn, 111,
@@ -923,10 +920,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo'],
     }),
-    [
-        new RouteKillRequirement(10, GameConstants.Region.hoenn, 121),
-        new GymBadgeRequirement(BadgeEnums.Feather),
-    ]
+    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 121)]
 ));
 Routes.add(new RegionRoute(
     'Hoenn Route 123', GameConstants.Region.hoenn, 123,
