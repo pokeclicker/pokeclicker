@@ -13,9 +13,12 @@ import {
     AchievementType,
     HOUR,
     DAY,
+    ExtraAchievementCategories,
+    camelCaseToString,
 } from '../GameConstants';
 import HotkeySetting from './HotkeySetting';
 import BreedingFilters from './BreedingFilters';
+import GameHelper from '../GameHelper';
 import PokemonType from '../enums/PokemonType';
 
 export default Settings;
@@ -251,10 +254,13 @@ Settings.add(new Setting<string>('achievementsType', 'achievementsType',
         ...Settings.enumToSettingOptionArray(AchievementType, (a) => a !== 'None'),
     ],
     '-2'));
-Settings.add(new Setting<string>('achievementsRegion', 'achievementsRegion',
+Settings.add(new Setting<string>('achievementsCategory', 'achievementsCategory',
     [
-        new SettingOption('All', '-2'),
-        ...Settings.enumToSettingOptionArray(Region),
+        new SettingOption('All', 'all'),
+        ...GameHelper.enumStrings(Region)
+            .concat(GameHelper.enumStrings(ExtraAchievementCategories))
+            .filter((r) => r !== 'none' && r !== 'final')
+            .map((r) => new SettingOption(camelCaseToString(r), r)),
     ],
     '-2'));
 

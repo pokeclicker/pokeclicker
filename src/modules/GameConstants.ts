@@ -139,6 +139,7 @@ export enum AchievementType {
     'Quest',
     'Battle Frontier',
     'Protein',
+    'Pokérus',
 }
 
 export enum DungeonTile {
@@ -1562,4 +1563,30 @@ export enum GalarSubRegions {
     NorthGalar,
     IsleofArmor,
     CrownTundra,
+}
+
+export enum AlcremieSweet {
+    'Strawberry Sweet',
+    'Love Sweet',
+    'Berry Sweet',
+    'Clover Sweet',
+    'Flower Sweet',
+    'Star Sweet',
+    'Ribbon Sweet',
+}
+export enum AlcremieSpins {
+    dayClockwiseBelow5,
+    dayCounterclockwiseBelow5,
+    nightClockwiseBelow5,
+    nightCounterclockwiseAbove5,
+    nightClockwiseAbove5,
+    nightCounterclockwiseBelow5,
+    dayClockwiseAbove5,
+    dayCounterclockwiseAbove5,
+    at7Above10,
+}
+
+export enum ExtraAchievementCategories {
+    global = Region.final,
+    sevii,
 }
