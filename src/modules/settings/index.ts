@@ -18,7 +18,6 @@ import {
 } from '../GameConstants';
 import HotkeySetting from './HotkeySetting';
 import BreedingFilters from './BreedingFilters';
-import ProteinFilters from './ProteinFilters';
 import GameHelper from '../GameHelper';
 import PokemonType from '../enums/PokemonType';
 
