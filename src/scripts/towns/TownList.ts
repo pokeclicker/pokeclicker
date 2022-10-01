@@ -4726,7 +4726,13 @@ const ProfMagnolia = new ProfNPC('Prof. Magnolia',
     GameConstants.Region.galar,
     'TODO: Add text before Galar is released',
     'TODO: Add text before Galar is released');
-
+const MagearnaMysteryGift = new NPC('Mystery Gift',
+    [
+        'You have recieved a Mystery Gift for completing the National Shiny Dex!',
+    ], {
+        requirement: new MultiRequirement([new QuestLineStartedRequirement('A Mystery Gift'), new QuestLineCompletedRequirement('A Mystery Gift', GameConstants.AchievementOption.less)]),
+    }
+);
 
 //Galar towns
 
@@ -4736,7 +4742,7 @@ TownList.Postwick = new Town(
     [new BulletinBoard(GameConstants.BulletinBoards.Galar), PostwickShop],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
-        npcs: [PostwickMum],
+        npcs: [PostwickMum, MagearnaMysteryGift],
     }
 );
 TownList['Slumbering Weald'] = new Town(
@@ -5040,4 +5046,14 @@ TownList['Crown Shrine'] = new DungeonTown(
     [new RouteKillRequirement(10, GameConstants.Region.galar, 55)],
     [],
     [Calyrex4, CrownShrineExplorer]
+);
+
+// Used to check if next region can be reached, for example for professor NPC
+TownList['Final Region Town'] = new Town(
+    'Final Region Town',
+    GameConstants.Region.final,
+    [],
+    {
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
+    }
 );

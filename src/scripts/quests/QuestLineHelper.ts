@@ -1624,6 +1624,33 @@ class QuestLineHelper {
         App.game.quests.questLines().push(ancientGolemsQuestLine);
     }
 
+    public static createOriginalColorMagearnaQuestLine() {
+        const magearnaQuestLine = new QuestLine('A Mystery Gift', 'You have recieved a Mystery Gift.',
+            new MultiRequirement([
+                new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.kanto),
+                new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.johto),
+                new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.hoenn),
+                new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.sinnoh),
+                new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.unova),
+                new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.kalos),
+                new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.alola),
+                new CaughtUniqueShinyPokemonsByRegionRequirement(GameConstants.Region.galar),
+            ]), GameConstants.BulletinBoards.Galar);
+
+        const mysteryGift = new TalkToNPCQuest(MagearnaMysteryGift, 'Go home and open your Mystery Gift', () => {
+            App.game.party.gainPokemonById(801.1);
+            Notifier.notify({
+                title: magearnaQuestLine.name,
+                message: 'You obtained Magearna (Original Color)!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        });
+        magearnaQuestLine.addQuest(mysteryGift);
+
+        App.game.quests.questLines().push(magearnaQuestLine);
+    }
+
     // Event QuestLines
     public static createFindSurpriseTogepiForEasterQuestLine() {
         const findSurpriseTogepiForEasterQuestLine = new QuestLine('Togepi Egg Hunt', 'A strange Togepi has been spotted, but cannot be found!');
@@ -1735,6 +1762,7 @@ class QuestLineHelper {
         this.createGalarCrownQuestLine();
         this.createDynaTreeBirdsQuestLine();
         this.createAncientGolemsQuestLine();
+        this.createOriginalColorMagearnaQuestLine();
         this.createFindSurpriseTogepiForEasterQuestLine();
         this.createHoopaDayPikabluQuestLine();
     }
