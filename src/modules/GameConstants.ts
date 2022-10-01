@@ -139,6 +139,7 @@ export enum AchievementType {
     'Quest',
     'Battle Frontier',
     'Protein',
+    'Pokérus',
 }
 
 export enum DungeonTile {
@@ -1562,4 +1563,9 @@ export enum GalarSubRegions {
     NorthGalar,
     IsleofArmor,
     CrownTundra,
+}
+
+export enum ExtraAchievementCategories {
+    global = Region.final,
+    sevii,
 }
