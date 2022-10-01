@@ -8,6 +8,9 @@ class App {
     static translation = new Translate(Settings.getSetting('translation.language'));
 
     static start() {
+        // Hide tooltips that stay on game load
+        $('.tooltip').tooltip('hide');
+
         if (!App.debug) {
             Object.freeze(GameConstants);
         }
@@ -45,7 +48,8 @@ class App {
                 new AchievementTracker(),
                 new Challenges(),
                 new BattleFrontier(),
-                multiplier
+                multiplier,
+                new SaveReminder()
             );
 
             console.log(`[${GameConstants.formatDate(new Date())}] %cGame loaded`, 'color:#2ecc71;font-weight:900;');

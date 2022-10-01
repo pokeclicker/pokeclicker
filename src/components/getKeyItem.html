@@ -3,7 +3,7 @@
         <div class="modal-content" style="text-align: center">
             <div class="modal-header">
                 <div style="width: 100%;">
-                    <img src="assets/images/oak.png">
+                    <img src="assets/images/npcs/Professor Oak.png">
                     <h5 class="modal-title" id="keyItemModalLabel">New key item!</h5>
                 </div>
             </div>
@@ -17,7 +17,7 @@
                 <span data-bind="html:  App.game.keyItems.itemList[KeyItemController.latestGainedItem()].description">Description</span>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="click: App.game.keyItems.itemList[KeyItemController.latestGainedItem()].unlockReward">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="click: App.game.keyItems.itemList[KeyItemController.latestGainedItem()].unlockRewardOnClose">Close</button>
             </div>
         </div>
     </div>

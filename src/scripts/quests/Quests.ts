@@ -23,7 +23,7 @@ class Quests implements Saveable {
     });
     public questSlots: KnockoutComputed<number> = ko.pureComputed((): number => {
         // Minimum of 1, Maximum of 4
-        return Math.min(4, Math.max(1, Math.floor(this.level() / 5)));
+        return Math.min(4, Math.max(1, Math.floor((this.level() + 5) / 5)));
     });
 
     // Get current quests by status
@@ -36,8 +36,38 @@ class Quests implements Saveable {
     public incompleteQuests: KnockoutComputed<Array<Quest>> =  ko.pureComputed(() => {
         return this.questList().filter(quest => !quest.isCompleted());
     });
+    public sortedQuestList: KnockoutComputed<Array<Quest>> = ko.pureComputed(() => {
+        const list = [...this.questList()];
+        return list.sort(Quests.questCompareBy);
+    });
 
     constructor() {}
+
+    static questCompareBy(quest1, quest2): number {
+        if (Quests.getQuestSortStatus(quest1) < Quests.getQuestSortStatus(quest2)) {
+            return -1;
+        } else if (Quests.getQuestSortStatus(quest1) > Quests.getQuestSortStatus(quest2)) {
+            return 1;
+        } else if (quest1.pointsReward > quest2.pointsReward) {
+            return -1;
+        } else if (quest1.pointsReward < quest2.pointsReward) {
+            return 1;
+        }
+
+        return 0;
+    }
+
+    static getQuestSortStatus(quest): number {
+        if (quest.isCompleted() && !quest.claimed()) {
+            return 0;
+        } else if (quest.isCompleted()) {
+            return 3;
+        } else if (quest.inProgress()) {
+            return 1;
+        }
+
+        return 2;
+    }
 
     /**
      * Gets a quest line by name
@@ -52,9 +82,12 @@ class Quests implements Saveable {
         // Check if we can start a new quest, and the requested quest isn't started or completed
         if (this.canStartNewQuest() && quest && !quest.inProgress() && !quest.isCompleted()) {
             quest.begin();
+            if ((Settings.getSetting('hideQuestsOnFull').value) && this.currentQuests().length >= this.questSlots()) {
+                $('#QuestModal').modal('hide');
+            }
         } else {
             Notifier.notify({
-                message: 'You cannot start more quests',
+                message: 'You cannot start more quests.',
                 type: NotificationConstants.NotificationOption.danger,
             });
         }
@@ -67,7 +100,7 @@ class Quests implements Saveable {
             quest.quit(shouldConfirm);
         } else {
             Notifier.notify({
-                message: 'You cannot quit this quest',
+                message: 'You cannot quit this quest.',
                 type: NotificationConstants.NotificationOption.danger,
             });
         }
@@ -83,6 +116,12 @@ class Quests implements Saveable {
                 this.refreshQuests(true);
                 // Give player a free refresh
                 this.freeRefresh(true);
+                Notifier.notify({
+                    message: '<i>All quests completed. Your quest list has been refreshed.</i>',
+                    type: NotificationConstants.NotificationOption.info,
+                    timeout: 1e4,
+                    setting: NotificationConstants.NotificationSetting.General.quest_completed,
+                });
             }
 
             // Track quest completion and total quest completed
@@ -93,7 +132,7 @@ class Quests implements Saveable {
         } else {
             console.trace('cannot claim quest..');
             Notifier.notify({
-                message: 'You cannot claim this quest',
+                message: 'You cannot claim this quest.',
                 type: NotificationConstants.NotificationOption.danger,
             });
         }
@@ -109,12 +148,13 @@ class Quests implements Saveable {
         // Refresh the list each time a player levels up
         if (this.level() > currentLevel) {
             Notifier.notify({
-                message: 'Your quest level has increased!\n<i>You have a free quest refresh.</i>',
+                message: `Your quest level has increased to ${this.level()}!\n<i>You have a free quest refresh.</i>`,
                 type: NotificationConstants.NotificationOption.success,
                 timeout: 1e4,
                 sound: NotificationConstants.NotificationSound.Quests.quest_level_increased,
             });
             this.freeRefresh(true);
+            App.game.logbook.newLog(LogBookTypes.QUEST, `Quest level increased to level ${this.level()}!`);
             // Track when users gains a quest level and how long it took in seconds
             LogEvent('gain quest level', 'quests', `level (${this.level()})`, App.game.statistics.secondsPlayed());
         }
@@ -139,10 +179,10 @@ class Quests implements Saveable {
         if (free || this.canAffordRefresh()) {
             if (!free) {
                 if (shouldConfirm && !await Notifier.confirm({
-                    title: 'Refresh quest list',
+                    title: 'Refresh Quest List',
                     message: 'Are you sure you want to refresh the quest list?',
                     type: NotificationConstants.NotificationOption.warning,
-                    confirm: 'refresh',
+                    confirm: 'Refresh',
                 })) {
                     return;
                 }
@@ -268,7 +308,14 @@ class Quests implements Saveable {
                 if (ql) {
                     ql.state(questLine.state);
                     if (questLine.state == QuestLineState.started) {
-                        ql.resumeAt(questLine.quest, questLine.initial);
+                        if (ql.quests()[questLine.quest] instanceof MultipleQuestsQuest) {
+                            ql.resumeAt(questLine.quest, 0);
+                            ql.curQuestObject().quests.forEach((q, i) => {
+                                q.initial(questLine?.initial[i] ?? 0);
+                            });
+                        } else {
+                            ql.resumeAt(questLine.quest, questLine.initial);
+                        }
                     }
                 }
             } catch (e) {
@@ -286,7 +333,7 @@ class Quests implements Saveable {
             lastRefreshRegion: this.lastRefreshRegion,
             freeRefresh: this.freeRefresh(),
             questList: this.questList().map(quest => quest.toJSON()),
-            questLines: this.questLines(),
+            questLines: this.questLines().filter(q => q.state()),
         };
     }
 

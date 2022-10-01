@@ -34,7 +34,8 @@ class BattlePokemon implements EnemyPokemonInterface {
         public reward: Amount = new Amount(0, GameConstants.Currency.money),
         public shiny: boolean,
         public gemReward = 1,
-        public heldItem?: BagItem
+        public heldItem?: BagItem,
+        public ep?: number
     ) {
         this.health = ko.observable(maxHealth);
         this.maxHealth = ko.observable(maxHealth);

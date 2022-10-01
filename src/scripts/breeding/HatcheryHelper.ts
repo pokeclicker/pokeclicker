@@ -44,7 +44,7 @@ class HatcheryHelper {
         public unlockRequirement?: Requirement | MultiRequirement | OneFromManyRequirement
     ) {
         SeededRand.seed(parseInt(this.name, 36));
-        this.trainerSprite = SeededRand.intBetween(0, Profile.MAX_TRAINER - 1);
+        this.trainerSprite = SeededRand.intBetween(0, 118);
 
         this.tooltip = ko.pureComputed(() => `<strong>${this.name}</strong><br/>
             Cost: <img src="assets/images/currency/${GameConstants.Currency[this.cost.currency]}.svg" width="20px">&nbsp;${(this.cost.amount).toLocaleString('en-US')}/hatch<br/>
@@ -75,13 +75,23 @@ class HatcheryHelper {
         return this.unlockRequirement?.isCompleted() ?? true;
     }
 
+    // String for currency in Notifications and Logs
+    currencyString() {
+        switch (GameConstants.Currency[this.cost.currency]) {
+            case 'money':
+                return 'Pokédollars';
+            default:
+                return `${GameConstants.camelCaseToString(GameConstants.Currency[this.cost.currency])}s`;
+        }
+    }
+
     hire(): void {
 
         // Check the player has enough Currency to hire this Hatchery Helper
         if (!App.game.wallet.hasAmount(this.cost)) {
             Notifier.notify({
                 title: `[HATCHERY HELPER] <img src="assets/images/profile/trainer-${this.trainerSprite}.png" height="24px" class="pixelated"/> ${this.name}`,
-                message: `You don't have enough ${GameConstants.camelCaseToString(GameConstants.Currency[this.cost.currency])} to hire me..\nCost: <img src="./assets/images/currency/${GameConstants.Currency[this.cost.currency]}.svg" height="24px"/> ${this.cost.amount.toLocaleString('en-US')}`,
+                message: `You don't have enough ${this.currencyString()} to hire me...\nCost: <img src="./assets/images/currency/${GameConstants.Currency[this.cost.currency]}.svg" height="24px"/> ${this.cost.amount.toLocaleString('en-US')}`,
                 type: NotificationConstants.NotificationOption.warning,
                 timeout: 30 * GameConstants.SECOND,
             });
@@ -100,7 +110,7 @@ class HatcheryHelper {
     fire(): void {
         Notifier.notify({
             title: `[HATCHERY HELPER] <img src="assets/images/profile/trainer-${this.trainerSprite}.png" height="24px" class="pixelated"/> ${this.name}`,
-            message: 'Thanks for the work,\nLet me know when you\'re hiring again!',
+            message: 'Thanks for the work.\nLet me know when you\'re hiring again!',
             type: NotificationConstants.NotificationOption.info,
             timeout: 30 * GameConstants.SECOND,
         });
@@ -113,11 +123,12 @@ class HatcheryHelper {
         if (!App.game.wallet.loseAmount(this.cost)) {
             Notifier.notify({
                 title: `[HATCHERY HELPER] <img src="assets/images/profile/trainer-${this.trainerSprite}.png" height="24px" class="pixelated"/> ${this.name}`,
-                message: `It looks like you are a little short on ${GameConstants.camelCaseToString(GameConstants.Currency[this.cost.currency])} right now..\nLet me know when you're hiring again!\nCost: <img src="./assets/images/currency/${GameConstants.Currency[this.cost.currency]}.svg" height="24px"/> ${this.cost.amount.toLocaleString('en-US')}`,
+                message: `It looks like you are a little short on ${this.currencyString()} right now...\nLet me know when you're hiring again!\nCost: <img src="./assets/images/currency/${GameConstants.Currency[this.cost.currency]}.svg" height="24px"/> ${this.cost.amount.toLocaleString('en-US')}`,
                 type: NotificationConstants.NotificationOption.danger,
                 timeout: 30 * GameConstants.MINUTE,
             });
             this.hired(false);
+            App.game.logbook.newLog(LogBookTypes.OTHER, `You ran out of ${this.currencyString()} to pay Hatchery Helper ${this.name}!`);
             return;
         }
     }
@@ -173,20 +184,30 @@ class HatcheryHelpers {
             const steps = Math.max(1, Math.round(amount * (helper.stepEfficiency() / 100)));
 
             // Add steps to the egg we are managing
-            const egg = this.hatchery.eggList[index]();
-            egg.addSteps(steps, multiplier);
+            let egg = this.hatchery.eggList[index]();
+            egg.addSteps(steps, multiplier, true);
 
             // Check if the egg is ready to hatch
-            if (egg.progress() >= 100 || egg.isNone()) {
-                egg.hatch(helper.attackEfficiency());
-                this.hatchery.eggList[index](new Egg());
+            if (egg.canHatch()) {
+                const hatched = egg.hatch(helper.attackEfficiency(), true);
+                if (hatched) {
+                    // Reset egg
+                    this.hatchery.eggList[index](new Egg());
+                    egg = this.hatchery.eggList[index]();
+                }
+            }
+
+            // Check if egg slot empty
+            if (egg.isNone()) {
+                // Get the currently selected region
+                const currentRegion = +Settings.getSetting('breedingRegionalAttackDebuffSetting').value;
 
                 // Check if there's a pokemon we can chuck into an egg
-                const pokemon = App.game.party.caughtPokemon
-                    .sort(PartyController.compareBy(helper.sortOption(), helper.sortDirection()))
+                const pokemon = [...App.game.party.caughtPokemon]
+                    .sort(PartyController.compareBy(helper.sortOption(), helper.sortDirection(), currentRegion))
                     .find(p => BreedingController.visible(p)());
                 if (pokemon) {
-                    this.hatchery.gainPokemonEgg(pokemon);
+                    this.hatchery.gainPokemonEgg(pokemon, true);
                     // Charge the player when we put a pokemon in the hatchery
                     helper.charge();
                     // Increment our hatched counter

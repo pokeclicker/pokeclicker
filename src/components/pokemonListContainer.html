@@ -70,7 +70,7 @@
                                 <span data-bind="text: displayName">Name</span>
                                 <sup data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)">✨</sup>
                             </div>
-                            <div class="pokemonAttack" data-bind="text: attack.toLocaleString()"></div>
+                            <div class="pokemonAttack" data-bind="text: attack.toLocaleString('en-US')"></div>
                             <div class="pokemonLevel" data-bind="text: level"></div>
                         </div>
                     </td>

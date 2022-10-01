@@ -19,7 +19,7 @@ export default class RedeemableCodes implements Saveable {
                 // Notify that the code was activated successfully
                 Notifier.notify({
                     title: 'Code activated!',
-                    message: 'You gained 10,000 farmpoints and 100 Cheri berries',
+                    message: 'You gained 10,000 Farm Points and 100 Cheri Berries!',
                     type: NotificationConstants.NotificationOption.success,
                     timeout: 1e4,
                 });

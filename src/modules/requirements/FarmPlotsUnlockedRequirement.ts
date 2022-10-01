@@ -7,10 +7,10 @@ export default class FarmPlotsUnlockedRequirement extends AchievementRequirement
     }
 
     public getProgress() {
-        return Math.min(App.game.farming.plotList.filter((p) => p.isUnlocked).length, this.requiredValue);
+        return Math.min(App.game.farming.unlockedPlotCount(), this.requiredValue);
     }
 
     public hint(): string {
-        return `${this.requiredValue} Plots in the Farm need to be unlocked .`;
+        return `${this.requiredValue} Plots in the Farm need to be unlocked.`;
     }
 }

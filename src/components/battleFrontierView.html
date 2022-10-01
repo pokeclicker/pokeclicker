@@ -17,7 +17,7 @@
             <div class="progress timer">
                 <div class="progress-bar bg-danger" role="progressbar"
                         data-bind="attr:{ style: 'width:' + BattleFrontierRunner.timeLeftPercentage() + '%' },
-                        css: { 'bg-danger': BattleFrontierRunner.timeLeftSeconds() < 20, 'bg-primary': BattleFrontierRunner.timeLeftSeconds() >= 20 }"
+                        css: { 'bg-danger': BattleFrontierRunner.timeLeftSeconds() < 10, 'bg-primary': BattleFrontierRunner.timeLeftSeconds() >= 10 }"
                         aria-valuemin="0" aria-valuemax="100">
                         <span data-bind="text: BattleFrontierRunner.timeLeftSeconds() + 's'" style="font-size: 12px;"></span>
                 </div>
@@ -34,7 +34,7 @@
             <div class="progress-bar bg-danger" role="progressbar"
                     data-bind="attr:{ style: 'width:' + BattleFrontierBattle.enemyPokemon().healthPercentage() + '%' }"
                     aria-valuemin="0" aria-valuemax="100">
-                    <span data-bind="text: BattleFrontierBattle.enemyPokemon().health() + ' / ' + BattleFrontierBattle.enemyPokemon().maxHealth()" style="font-size: 12px;"></span>
+                    <span data-bind="text: BattleFrontierBattle.enemyPokemon().health().toLocaleString('en-US') + ' / ' + BattleFrontierBattle.enemyPokemon().maxHealth().toLocaleString('en-US')" style="font-size: 12px;"></span>
             </div>
         </div>
     </div>

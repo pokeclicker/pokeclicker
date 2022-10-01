@@ -45,6 +45,7 @@ class FarmHand {
         energy: 0,
         hired: false,
         plots: [],
+        name: undefined,
     };
     // Maximum Efficiency value
     public maxEfficiency = 50;
@@ -76,7 +77,7 @@ class FarmHand {
         public unlockRequirement?: Requirement | MultiRequirement | OneFromManyRequirement
     ) {
         SeededRand.seed(parseInt(this.name, 36));
-        this.trainerSprite = SeededRand.intBetween(0, Profile.MAX_TRAINER - 1);
+        this.trainerSprite = SeededRand.intBetween(0, 118);
         // Negative value so they are charged on the first tick and work on the first tick
         this.workTicks(-GameConstants.TICK_TIME);
         this.costTicks(-GameConstants.TICK_TIME);
@@ -123,7 +124,7 @@ class FarmHand {
         if (!App.game.wallet.hasAmount(this.cost)) {
             Notifier.notify({
                 title: `[FARM HAND] <img src="assets/images/profile/trainer-${this.trainerSprite}.png" height="24px" class="pixelated"/> ${this.name}`,
-                message: `You don't have enough Farm Points to hire me..\nCost: <img src="./assets/images/currency/farmPoint.svg" height="24px"/> ${this.cost.amount.toLocaleString('en-US')}`,
+                message: `You don't have enough Farm Points to hire me...\nCost: <img src="./assets/images/currency/farmPoint.svg" height="24px"/> ${this.cost.amount.toLocaleString('en-US')}`,
                 type: NotificationConstants.NotificationOption.warning,
                 timeout: 30 * GameConstants.SECOND,
             });
@@ -142,7 +143,7 @@ class FarmHand {
     fire(): void {
         Notifier.notify({
             title: `[FARM HAND] <img src="assets/images/profile/trainer-${this.trainerSprite}.png" height="24px" class="pixelated"/> ${this.name}`,
-            message: 'Thanks for the work,\nLet me know when you\'re hiring again!',
+            message: 'Thanks for the work.\nLet me know when you\'re hiring again!',
             type: NotificationConstants.NotificationOption.info,
             timeout: 30 * GameConstants.SECOND,
         });
@@ -192,7 +193,7 @@ class FarmHand {
         if (this.shouldHarvest()) {
             let readyPlotIndex;
             do {
-                readyPlotIndex = App.game.farming.plotList.findIndex((p, i) => p.isUnlocked && p.berry !== BerryType.None && p.stage() >= PlotStage.Berry && this.plots().includes(i));
+                readyPlotIndex = App.game.farming.plotList.findIndex((p, i) => p.isUnlocked && p.berry !== BerryType.None && p.stage() >= PlotStage.Berry && this.plots().includes(i) && !p.isSafeLocked);
                 if (readyPlotIndex >= 0 && workTimes > 0) {
                     const berry = App.game.farming.plotList[readyPlotIndex].berry;
                     App.game.farming.harvest(readyPlotIndex);
@@ -212,7 +213,7 @@ class FarmHand {
             let emptyPlotIndex;
             do {
                 // Find empty plots
-                emptyPlotIndex = App.game.farming.plotList.findIndex((p, i) => p.isUnlocked && p.berry == BerryType.None && this.plots().includes(i));
+                emptyPlotIndex = App.game.farming.plotList.findIndex((p, i) => p.isUnlocked && p.berry == BerryType.None && this.plots().includes(i) && !p.isSafeLocked);
                 // Plant the berry
                 if (emptyPlotIndex >= 0 && workTimes > 0) {
                     // Plant the expected berry
@@ -258,11 +259,12 @@ class FarmHand {
         if (!App.game.wallet.loseAmount(this.cost)) {
             Notifier.notify({
                 title: `[FARM HAND] <img src="assets/images/profile/trainer-${this.trainerSprite}.png" height="24px" class="pixelated"/> ${this.name}`,
-                message: `It looks like you are a little short on Farm Points right now..\nLet me know when you're hiring again!\nCost: <img src="./assets/images/currency/farmPoint.svg" height="24px"/> ${this.cost.amount.toLocaleString('en-US')}`,
+                message: `It looks like you are a little short on Farm Points right now...\nLet me know when you're hiring again!\nCost: <img src="./assets/images/currency/farmPoint.svg" height="24px"/> ${this.cost.amount.toLocaleString('en-US')}`,
                 type: NotificationConstants.NotificationOption.danger,
                 timeout: 30 * GameConstants.MINUTE,
             });
             this.hired(false);
+            App.game.logbook.newLog(LogBookTypes.OTHER, `You ran out of Farm Points to pay Farm Hand ${this.name}!`);
             return;
         }
         // Charge the player for the hour
@@ -283,6 +285,8 @@ class FarmHand {
             energy: this.energy(),
             hired: this.hired(),
             plots: this.plots(),
+            // It uses the name to look up the farmhand on load
+            name: this.name,
         };
 
         // Don't save anything that is the default option
@@ -299,13 +303,13 @@ class FarmHand {
         if (!json) {
             return;
         }
-        this.focus(json.focus || this.defaults.focus);
-        this.shouldHarvest(json.shouldHarvest || this.defaults.shouldHarvest);
-        this.workTicks(json.workTicks || this.defaults.workTicks);
-        this.costTicks(json.costTicks || this.defaults.costTicks);
-        this.energy(json.energy || this.defaults.energy);
-        this.hired(json.hired || this.defaults.hired);
-        this.plots(json.plots || this.defaults.plots);
+        this.focus(json.focus ?? this.defaults.focus);
+        this.shouldHarvest(json.shouldHarvest ?? this.defaults.shouldHarvest);
+        this.workTicks(json.workTicks ?? this.defaults.workTicks);
+        this.costTicks(json.costTicks ?? this.defaults.costTicks);
+        this.energy(json.energy ?? this.defaults.energy);
+        this.hired(json.hired ?? this.defaults.hired);
+        this.plots(json.plots ?? this.defaults.plots);
     }
 }
 

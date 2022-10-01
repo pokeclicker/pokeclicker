@@ -114,8 +114,9 @@ class EnigmaMutation extends GrowMutation {
         }
 
         const hints = [];
+        const unlocked = App.game.farming.unlockedBerries[this.mutatedBerry]();
         this.hintsSeen.forEach((hintSeen, idx) => {
-            if (!hintSeen()) {
+            if (!hintSeen() && !unlocked) {
                 return false;
             }
             hints.push(this.getHint(idx));
@@ -127,7 +128,7 @@ class EnigmaMutation extends GrowMutation {
             tempHint += 'a specific configuration of Berries';
         }
 
-        tempHint += (hints.length !== 4) ? '. However there\'s still something missing...' : '.';
+        tempHint += (hints.length !== 4) ? '. However, there\'s still something missing...' : '.';
 
         return tempHint;
     }

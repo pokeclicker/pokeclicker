@@ -4,7 +4,7 @@
             <div class="modal-header bg-dark text-light" style='justify-content: space-around;'>
                 <h5 class="modal-title text-muted" data-bind="text: `#${pokemonMap[$data].id <= 0 ? '???' : Math.floor(pokemonMap[$data].id).toString().padStart(3,0)}&nbsp;&nbsp;`"></h5>
                 <h5 class="modal-title text-light" data-bind="text: PokemonHelper.displayName(pokemonMap[$data].name)">Pokémon Statistics</h5>&nbsp;
-                <h5 class="modal-title text-light">
+                <h5 class="modal-title text-light" data-bind="if: App.game.party.getPokemon(pokemonMap[$data].id)">
                     <img width="18px" src="" data-bind="attr: { src: `assets/images/pokeball/Pokeball${App.game.party.alreadyCaughtPokemon(pokemonMap[$data].id, true) && PokedexHelper.toggleStatisticShiny() ? '-shiny' : ''}.svg`}, click: () => PokedexHelper.toggleStatisticShiny(!PokedexHelper.toggleStatisticShiny())"/>
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -12,6 +12,9 @@
                 </button>
             </div>
             <div class="modal-body p-0">
+              <div style="position: absolute; top: 0px; right: 0px;" data-bind="if: App.game.party.getPokemon(pokemonMap[$data].id)?.pokerus">
+                  <img width="40px" src="" data-bind="attr: { src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[App.game.party.getPokemon(pokemonMap[$data].id)?.pokerus]}.png`}"/>
+              </div>
                 <img data-bind="attr:{ src: PokedexHelper.getImageStatistics(pokemonMap[$data].id) }" src=""/>
                 <table class="table table-striped table-hover table-bordered table-sm m-0">
                   <thead>
@@ -33,6 +36,16 @@
                       <td class="text-left">Proteins Used</td>
                       <td class="text-left tight"><code data-bind="text: (App.game.party.getPokemon($data) ? App.game.party.getPokemon($data).proteinsUsed() : 0).toLocaleString('en-US')">-</code></td>
                     </tr>
+                    <!-- ko if: App.game.party.getPokemon($data)?.pokerus -->
+                      <tr>
+                        <td class="text-left">EVs</td>
+                        <td class="text-left tight"><code data-bind="text: App.game.party.getPokemon($data).evs().toLocaleString('en-US')">-</code></td>
+                      </tr>
+                      <tr>
+                        <td class="text-left">EV bonus</td>
+                        <td class="text-left tight"><code data-bind="text: '×' + App.game.party.getPokemon($data).calculateEVAttackBonus().toLocaleString('en-US')">-</code></td>
+                      </tr>
+                    <!-- /ko -->
                     <tr>
                       <td class="text-left">Type</td>
                       <td class="text-left tight">

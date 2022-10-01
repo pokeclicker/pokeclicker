@@ -4,9 +4,14 @@ class BattleFrontierMilestone {
     constructor (
         public stage: number,
         public rewardFunction: () => void,
+        public requirement?: Requirement,
         public _image?: string,
         private _description?: string
-    ) {}
+    ) { }
+
+    public isUnlocked(): boolean {
+        return this.requirement ? this.requirement.isCompleted() : true;
+    }
 
     gain () {
         if (!this.obtained()) {
