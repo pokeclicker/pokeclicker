@@ -487,8 +487,8 @@ GymList['Petalburg City'] = new Gym(
     5000,
     '… I… I can\'t… I can\'t believe it. I lost to you? But, rules are rules! Here, take this.',
     [
-        new GymBadgeRequirement(BadgeEnums.Heat),
         new GymBadgeRequirement(BadgeEnums.Knuckle),
+        new GymBadgeRequirement(BadgeEnums.Heat),
     ]
 );
 GymList['Fortree City'] = new Gym(
@@ -549,7 +549,10 @@ GymList['Elite Sidney'] = new Gym(
     BadgeEnums.Elite_Sidney,
     15000,
     'Well, listen to what this loser has to say. You\'ve got what it takes to go far. Now, go on to the next room and enjoy your next battle!',
-    [new TemporaryBattleRequirement('Wally 2')]
+    [
+        new GymBadgeRequirement(BadgeEnums.Feather),
+        new TemporaryBattleRequirement('Wally 2'),
+    ]
 );
 GymList['Elite Phoebe'] = new Gym(
     'Phoebe',
@@ -1064,12 +1067,12 @@ GymList['Champion Iris'] = new Champion(
     'Iris',
     'Champion Iris',
     [
-        new GymPokemon('Hydreigon', 12458300, 58),
-        new GymPokemon('Salamence', 12462000, 58),
-        new GymPokemon('Aggron', 12464000, 58),
-        new GymPokemon('Archeops', 12460250, 60),
-        new GymPokemon('Lapras', 12470000, 58),
-        new GymPokemon('Haxorus', 14570000, 62),
+        new GymPokemon('Hydreigon', 12458300, 61),
+        new GymPokemon('Druddigon', 12462000, 61),
+        new GymPokemon('Archeops', 12464000, 61),
+        new GymPokemon('Aggron', 12460250, 61),
+        new GymPokemon('Lapras', 12470000, 61),
+        new GymPokemon('Haxorus', 14570000, 63),
     ],
     BadgeEnums.Elite_UnovaChampion,
     64000,

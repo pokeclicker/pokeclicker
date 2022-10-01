@@ -9002,9 +9002,8 @@ dungeonList['Split-Decision Ruins'] = new Dungeon('Split-Decision Ruins',
             {loot: 'Purple Shard'},
         ],
         mythic: [
-            {loot: 'Iron Plate'},
-            {loot: 'Icicle Plate'},
-            {loot: 'Stone Plate'},
+            {loot: 'Draco Plate'},
+            {loot: 'Zap Plate'},
         ],
     },
     32870660,
@@ -9101,6 +9100,7 @@ dungeonList['Tunnel to the Top'] = new Dungeon('Tunnel to the Top',
         new DungeonBossPokemon('Coalossal', 167825980, 60),
     ],
     2000000, 54);
+
 dungeonList['Crown Shrine'] = new Dungeon('Crown Shrine',
     ['Dhelmise', 'Hatterene', 'Reuniclus', 'Mr. Rime', 'Mamoswine', 'Roserade'],
     {

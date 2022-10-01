@@ -921,10 +921,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo'],
     }),
-    [
-        new RouteKillRequirement(10, GameConstants.Region.hoenn, 121),
-        new GymBadgeRequirement(BadgeEnums.Feather),
-    ]
+    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 121)]
 ));
 Routes.add(new RegionRoute(
     'Hoenn Route 123', GameConstants.Region.hoenn, 123,
