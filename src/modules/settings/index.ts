@@ -20,6 +20,7 @@ import HotkeySetting from './HotkeySetting';
 import BreedingFilters from './BreedingFilters';
 import ProteinFilters from './ProteinFilters';
 import GameHelper from '../GameHelper';
+import PokemonType from '../enums/PokemonType';
 
 export default Settings;
 
@@ -190,6 +191,9 @@ Settings.add(new Setting<number>('proteinSort', 'Sort', proteinSortSettings, Sor
 Settings.add(new BooleanSetting('proteinSortDirection', 'reverse', false));
 Settings.add(new BooleanSetting('proteinHideMaxedPokemon', 'Hide Pokémon with max protein', false));
 Settings.add(new BooleanSetting('proteinHideShinyPokemon', 'Hide shiny Pokémon', false));
+Settings.add(new Setting<string>('proteinSearchFilter', 'Search', [], ''));
+Settings.add(new Setting<number>('proteinRegionFilter', 'Region', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(Region)], -2));
+Settings.add(new Setting<number>('proteinTypeFilter', 'Type', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None')], -2));
 
 // Held Item Sorting
 const heldItemSortSettings = Object.keys(SortOptionConfigs).map((opt) => (
@@ -197,16 +201,6 @@ const heldItemSortSettings = Object.keys(SortOptionConfigs).map((opt) => (
 ));
 Settings.add(new Setting<number>('heldItemSort', 'Sort:', heldItemSortSettings, SortOptions.id));
 Settings.add(new BooleanSetting('heldItemSortDirection', 'reverse', false));
-
-// Protein filters
-Object.keys(ProteinFilters).forEach((key) => {
-    // One-off because search isn't stored in settings
-    if (key === 'search') {
-        return;
-    }
-    const filter = ProteinFilters[key];
-    Settings.add(new Setting<string>(filter.optionName, filter.displayName, filter.options || [], filter.value().toString()));
-});
 
 // Breeding Filters
 Object.keys(BreedingFilters).forEach((key) => {

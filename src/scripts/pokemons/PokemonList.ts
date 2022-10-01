@@ -3070,6 +3070,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 62,
             'speed': 55,
         },
+        'heldItem': {type: ItemType.item, id: 'Leek'},
     },
     {
         'id': 84,
@@ -20807,6 +20808,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 177,
         'catchRate': 45,
+        'heldItem': {type: ItemType.item, id: 'Leek'},
     },
     {
         'id': 866,

@@ -1392,6 +1392,7 @@ export const TemporaryBattles = [
     'Avery2',
     'Klara3',
     'Avery3',
+    'Kubfu',
     'Zarude Tribe 1',
     'Zarude Tribe 2',
     'Zarude Tribe 3',
