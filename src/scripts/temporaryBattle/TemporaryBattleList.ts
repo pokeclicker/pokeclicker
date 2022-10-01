@@ -1285,13 +1285,7 @@ TemporaryBattleList.Bede3 = new TemporaryBattle(
         new GymPokemon('Hattrem', 204218033, 35),
     ],
     'This has to be some kind of mistake. I demand a do-over!',
-    [
-        new MultiRequirement([
-            new GymBadgeRequirement(BadgeEnums.Galar_Fighting),
-            new GymBadgeRequirement(BadgeEnums.Galar_Ghost),
-            new QuestLineStepCompletedRequirement('The Darkest Day', 0),
-        ]),
-    ],
+    [new QuestLineStepCompletedRequirement('The Darkest Day', 0)],
     undefined,
     {
         displayName: 'Pokémon Trainer Bede',
