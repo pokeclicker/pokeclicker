@@ -149,7 +149,7 @@ class AchievementHandler {
     public static achievementBonus(): number {
         let sum = 0;
         AchievementHandler.getAchievementCategories().forEach(category => {
-            const total = AchievementHandler.achievementList.filter(a => a.category == category && a.isCompleted()).reduce((sum, a) => sum + a.bonusWeight, 0) / category.totalWeight * category.achievementBonus;
+            const total = AchievementHandler.achievementList.filter(a => a.category == category && a.isCompleted()).reduce((sum, a) => sum + a.bonusWeight, 0) / category.totalWeight * category.achievementBonus / 100;
             if (!isNaN(total)) {
                 sum += total;
             }
@@ -158,7 +158,7 @@ class AchievementHandler {
     }
 
     public static achievementBonusPercent(): string {
-        return `${(AchievementHandler.achievementBonus()).toFixed(2)}%`;
+        return `${(100 * AchievementHandler.achievementBonus()).toFixed(2)}%`;
     }
 
     public static findByName(name: string): Achievement {

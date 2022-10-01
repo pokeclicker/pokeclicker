@@ -4743,8 +4743,10 @@ const Calyrex3 = new NPC ('Calyrex', [
 });
 
 const Calyrex4 = new NPC ('Calyrex', [
-    'Finally, my loyal steeds have returned to me. There are truly no words with which to fully express my gratitude to you. So... I have a suggestion',
-    'If you are able to capture me, it will prove your worth beyond any doubt, and I will lend you my strength on your journey. Once you have readied yourself, come face me!',
+    'Finally, my loyal steeds have returned to me. There are truly no words with which to fully express my gratitude to you. But I can try. Take these Reins of Unity.',
+    '<img src="assets/images/keyitems/Reins_of_unity.png">',
+    'They can be used to combine myself and my steeds. However, it is incomplete. They must have have hair from the manes of my steeds intertwined to work.',
+    'And to that point... I have a suggestion. If you are able to capture me, it will prove your worth beyond any doubt, and I will lend you my strength on your journey. Once you have readied yourself, come face me!',
 ], {
     image: 'assets/images/temporaryBattle/Calyrex.png',
     requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Crown of Galar', 7), new QuestLineStepCompletedRequirement('The Crown of Galar', 9, GameConstants.AchievementOption.less )]),
@@ -4835,6 +4837,13 @@ const ProfMagnolia = new ProfNPC('Prof. Magnolia',
     //*TODO*: Change second line to this text when Paldea is available: 'Now be on your way, the illustrious Paldea region awaits over the horizons.',
     'assets/images/npcs/Professor Magnolia.png');
 
+const MagearnaMysteryGift = new NPC('Mystery Gift',
+    [
+        'You have recieved a Mystery Gift for completing the National Shiny Dex!',
+    ], {
+        requirement: new MultiRequirement([new QuestLineStartedRequirement('A Mystery Gift'), new QuestLineCompletedRequirement('A Mystery Gift', GameConstants.AchievementOption.less)]),
+    }
+);
 
 //Galar Towns
 TownList.Postwick = new Town(
@@ -4843,7 +4852,7 @@ TownList.Postwick = new Town(
     [new BulletinBoard(GameConstants.BulletinBoards.Galar), PostwickShop],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
-        npcs: [PostwickMum],
+        npcs: [PostwickMum, MagearnaMysteryGift],
     }
 );
 TownList['Slumbering Weald'] = new Town(
@@ -5152,4 +5161,14 @@ TownList['Crown Shrine'] = new DungeonTown(
     [new RouteKillRequirement(10, GameConstants.Region.galar, 55)],
     [],
     [Calyrex4, CrownShrineExplorer]
+);
+
+// Used to check if next region can be reached, for example for professor NPC
+TownList['Final Region Town'] = new Town(
+    'Final Region Town',
+    GameConstants.Region.final,
+    [],
+    {
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
+    }
 );

@@ -13,6 +13,7 @@ enum KeyItemType {
     'Event_calendar',
     'Gem_case',
     'DNA_splicers',
+    'Reins_of_unity',
     'Pokerus_virus',
 }
 
