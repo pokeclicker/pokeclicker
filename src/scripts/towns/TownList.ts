@@ -4837,12 +4837,12 @@ const ProfMagnolia = new ProfNPC('Prof. Magnolia',
     //*TODO*: Change second line to this text when Paldea is available: 'Now be on your way, the illustrious Paldea region awaits over the horizons.',
     'assets/images/npcs/Professor Magnolia.png');
 
-const MagearnaMysteryGift = new NPC('Mystery Gift',
-    [
-        'You have recieved a Mystery Gift for completing the National Shiny Dex!',
-    ], {
-        requirement: new MultiRequirement([new QuestLineStartedRequirement('A Mystery Gift'), new QuestLineCompletedRequirement('A Mystery Gift', GameConstants.AchievementOption.less)]),
-    }
+const MagearnaMysteryGift = new NPC('Mystery Gift', [
+    'You have recieved a Mystery Gift for completing the National Shiny Dex!',
+], {
+    image: 'assets/images/pokemon/801.1.png',
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('A Mystery Gift'), new QuestLineCompletedRequirement('A Mystery Gift', GameConstants.AchievementOption.less)]),
+}
 );
 
 //Galar Towns
