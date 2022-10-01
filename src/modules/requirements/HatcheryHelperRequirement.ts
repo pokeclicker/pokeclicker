@@ -11,6 +11,6 @@ export default class HatcheryHelperRequirement extends AchievementRequirement {
     }
 
     public hint(): string {
-        return `${this.requiredValue} Hatchery helpers needs atleast ${this.bonusRequired} bonus.`;
+        return `${this.requiredValue} Hatchery helpers needs at least ${this.bonusRequired} bonus.`;
     }
 }
