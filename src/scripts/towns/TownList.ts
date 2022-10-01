@@ -4831,7 +4831,8 @@ const PeonyComplete = new NPC ('Peony', [
 const ProfMagnolia = new ProfNPC('Prof. Magnolia',
     GameConstants.Region.galar,
     'Ahhh, how incredible. Look how far you have come, dear trainer. Congratulations on another complete Pokédex.',
-    'Now be on your way, the illustrious Paldea region awaits.',
+    'I hear word of an exotic region on the horizon, but there has been no word yet when the blimp will be able to reach such faraway lands.',
+    //*TODO*: Change second line to this text when Paldea is available: 'Now be on your way, the illustrious Paldea region awaits over the horizons.',
     'assets/images/npcs/Professor Magnolia.png');
 
 
