@@ -228,7 +228,6 @@ class PartyPokemon implements Saveable {
         const type = Settings.getSetting('proteinTypeFilter').observableValue();
         if (type > -2 && !pokemonMap[this.name].type.includes(type)) {
             return true;
-            }
         }
         if (this.proteinUsesRemaining() == 0 && Settings.getSetting('proteinHideMaxedPokemon').observableValue()) {
             return true;
