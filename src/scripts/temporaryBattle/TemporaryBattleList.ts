@@ -1588,7 +1588,7 @@ TemporaryBattleList.Shielbert2 = new TemporaryBattle(
 TemporaryBattleList['Rampaging Zacian'] = new TemporaryBattle(
     'Rampaging Zacian',
     [new GymPokemon('Zacian (Crowned Sword)', 2357932001, 70)],
-    'Zacian fainted.',
+    '<i>Zacian fainted.</i>',
     [
         new TemporaryBattleRequirement('Sordward2'),
         new TemporaryBattleRequirement('Shielbert2'),
@@ -1648,12 +1648,7 @@ TemporaryBattleList.Mustard = new TemporaryBattle(
         new GymPokemon('Shinx', 856950891, 60),
     ],
     'That was everything I hoped for and more!',
-    [
-        new MultiRequirement([
-            new RouteKillRequirement(10, GameConstants.Region.galar, 33),
-            new QuestLineStartedRequirement('The Dojo\'s Armor'),
-        ]),
-    ],
+    [new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 0)],
     undefined,
     {
         displayName: 'Dojo Master Mustard',
@@ -1668,10 +1663,8 @@ TemporaryBattleList.Klara2 = new TemporaryBattle(
     ],
     'Just what have you got that I don\'t?',
     [
-        new MultiRequirement([
-            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Warm-Up Tunnel')),
-            new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 1),
-        ]),
+        new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 6),
+        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Warm-Up Tunnel')),
     ],
     undefined,
     {
@@ -1688,10 +1681,8 @@ TemporaryBattleList.Avery2 = new TemporaryBattle(
     ],
     'What a Psystrike to my poor pride...',
     [
-        new MultiRequirement([
-            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Warm-Up Tunnel')),
-            new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 1),
-        ]),
+        new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 6),
+        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Warm-Up Tunnel')),
     ],
     undefined,
     {
@@ -1708,12 +1699,7 @@ TemporaryBattleList.Klara3 = new TemporaryBattle(
         new GymPokemon('Galarian Slowbro', 470316225, 67),
     ],
     'But I didn\'t hold back! I gave it everything I\'ve got...',
-    [
-        new MultiRequirement([
-            new TemporaryBattleRequirement('Klara2'),
-            new TemporaryBattleRequirement('Avery2'),
-        ]),
-    ],
+    [new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 9)],
     undefined,
     {
         displayName: 'Pokémon Trainer Klara',
@@ -1730,17 +1716,23 @@ TemporaryBattleList.Avery3 = new TemporaryBattle(
         new GymPokemon('Galarian Slowbro', 470316225, 67),
     ],
     'Oh, I should just Imprison myself for this!',
-    [
-        new MultiRequirement([
-            new TemporaryBattleRequirement('Klara2'),
-            new TemporaryBattleRequirement('Avery2'),
-        ]),
-    ],
+    [new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 9)],
     undefined,
     {
         displayName: 'Pokémon Trainer Avery',
         returnTown: 'Master Dojo',
         imageName: 'Avery',
+    }
+);
+TemporaryBattleList.Kubfu = new TemporaryBattle(
+    'Kubfu',
+    [new GymPokemon('Kubfu', 1886555626, 50)],
+    undefined,
+    [new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 11)],
+    [new ObtainedPokemonRequirement(pokemonMap.Kubfu)],
+    {
+        isTrainerBattle: false,
+        hideTrainer: true,
     }
 );
 TemporaryBattleList['Zarude Tribe 1'] = new TemporaryBattle(
@@ -1900,9 +1892,10 @@ TemporaryBattleList.Regigigas = new TemporaryBattle(
     'Regigigas',
     [new GymPokemon('Regigigas', 2031393560, 100)],
     '<i>The ancient giant was defeated!</i>',
+    [new QuestLineStepCompletedRequirement('The Ancient Golems', 6)],
     [new QuestLineStepCompletedRequirement('The Ancient Golems', 7)],
-    undefined,
     {
         hideTrainer: true,
+        isTrainerBattle: false,
     }
 );
