@@ -175,6 +175,7 @@ export const SpriteCredits: Credit[] = [
             'Danny',
             'Dracovish shop image',
             'Dracozolt shop image',
+            'Dungeon Ladder',
             'Luana',
             'Merilyn',
             'Pinkan Arbok',
