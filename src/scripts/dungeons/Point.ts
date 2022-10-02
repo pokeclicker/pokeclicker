@@ -3,9 +3,9 @@ class Point {
     y: number;
     floor: number;
 
-    constructor(x: number, y: number) {
+    constructor(x: number, y: number, floor = 0) {
         this.x = x;
         this.y = y;
-        this.floor = 0;
+        this.floor = floor;
     }
 }

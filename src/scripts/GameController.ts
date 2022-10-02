@@ -344,6 +344,9 @@ class GameController {
                             } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.boss && !DungeonRunner.fightingBoss()) {
                                 DungeonRunner.startBossFight();
                             }
+                            else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.ladder) {
+                                DungeonRunner.nextFloor();
+                            }
                             return e.preventDefault();
                     }
                 }

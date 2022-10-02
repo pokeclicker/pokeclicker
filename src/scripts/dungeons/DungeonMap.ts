@@ -4,24 +4,34 @@ class DungeonMap {
     playerMoved: KnockoutObservable<boolean>;
     totalFights: KnockoutObservable<number>;
     totalChests: KnockoutObservable<number>;
+    floorSizes: number[];
 
     constructor(
-        public size: number,
+        size: number,
         public flash = false
     ) {
+        if (size <= 9) {
+            this.floorSizes = [size];
+        } else {
+            this.floorSizes = [9, size - 9 + 5];
+        }
+
         this.board = ko.observable(this.generateMap());
 
-        this.playerPosition = ko.observable(new Point(Math.floor(size / 2), size - 1));
+        this.playerPosition = ko.observable(new Point(Math.floor(this.floorSizes[0] / 2), this.floorSizes[0] - 1));
         this.playerMoved = ko.observable(false);
 
-        // Move the boss if it spawns on the player.
-        if (this.currentTile().type() == GameConstants.DungeonTile.boss) {
-            this.currentTile().type(GameConstants.DungeonTile.entrance);
-            const newX = Rand.intBetween(0, size - 1);
-            const newY = Rand.intBetween(0, size - 2); // Don't allow it to be on the bottom row
-            this.board()[newY][newX].type(GameConstants.DungeonTile.boss);
-            this.board()[newY][newX].calculateCssClass();
-        }
+        // Move the boss or ladder if it spawns on the player.
+        this.floorSizes.forEach((size, index) => {
+            const endTitleType = index == this.floorSizes.length - 1 ? GameConstants.DungeonTile.boss : GameConstants.DungeonTile.ladder;
+            if (this.currentTile().type() == endTitleType) {
+                this.currentTile().type(GameConstants.DungeonTile.entrance);
+                const newX = Rand.intBetween(0, size - 1);
+                const newY = Rand.intBetween(0, size - 2); // Don't allow it to be on the bottom row
+                this.board()[index][newY][newX].type(endTitleType);
+                this.board()[index][newY][newX].calculateCssClass();
+            }
+        });
         this.currentTile().type(GameConstants.DungeonTile.entrance);
         this.currentTile().isVisible = true;
         this.currentTile().isVisited = true;
@@ -29,12 +39,12 @@ class DungeonMap {
         if (this.flash) {
             this.nearbyTiles(this.playerPosition()).forEach(t => t.isVisible = true);
         }
-        this.totalFights = ko.observable(this.board().flat().filter((t) => t.type() == GameConstants.DungeonTile.enemy).length);
-        this.totalChests = ko.observable(this.board().flat().filter((t) => t.type() == GameConstants.DungeonTile.chest).length);
+        this.totalFights = ko.observable(this.board().flat().flat().filter((t) => t.type() == GameConstants.DungeonTile.enemy).length);
+        this.totalChests = ko.observable(this.board().flat().flat().filter((t) => t.type() == GameConstants.DungeonTile.chest).length);
     }
 
     public moveToCoordinates(x: number, y: number) {
-        if (this.moveToTile(new Point(x, y))) {
+        if (this.moveToTile(new Point(x, y, this.playerPosition().floor))) {
             this.playerMoved(true);
         }
     }
@@ -76,8 +86,8 @@ class DungeonMap {
     public showChestTiles(): void {
         for (let i = 0; i < this.board().length; i++) {
             for (let j = 0; j < this.board()[i].length; j++) {
-                if (this.board()[i][j].type() == GameConstants.DungeonTile.chest) {
-                    this.board()[i][j].isVisible = true;
+                if (this.board()[this.playerPosition().floor][i][j].type() == GameConstants.DungeonTile.chest) {
+                    this.board()[this.playerPosition().floor][i][j].isVisible = true;
                 }
             }
         }
@@ -86,21 +96,21 @@ class DungeonMap {
     public showAllTiles(): void {
         for (let i = 0; i < this.board().length; i++) {
             for (let j = 0; j < this.board()[i].length; j++) {
-                this.board()[i][j].isVisible = true;
+                this.board()[this.playerPosition().floor][i][j].isVisible = true;
             }
         }
     }
 
     public currentTile(): DungeonTile {
-        return this.board()[this.playerPosition().y][this.playerPosition().x];
+        return this.board()[this.playerPosition().floor][this.playerPosition().y][this.playerPosition().x];
     }
 
     public nearbyTiles(point: Point): DungeonTile[] {
         const tiles = [];
-        tiles.push(this.board()[point.y - 1]?.[point.x]);
-        tiles.push(this.board()[point.y + 1]?.[point.x]);
-        tiles.push(this.board()[point.y]?.[point.x - 1]);
-        tiles.push(this.board()[point.y]?.[point.x + 1]);
+        tiles.push(this.board()[this.playerPosition().floor][point.y - 1]?.[point.x]);
+        tiles.push(this.board()[this.playerPosition().floor][point.y + 1]?.[point.x]);
+        tiles.push(this.board()[this.playerPosition().floor][point.y]?.[point.x - 1]);
+        tiles.push(this.board()[this.playerPosition().floor][point.y]?.[point.x + 1]);
         return tiles.filter(t => t);
     }
 
@@ -111,7 +121,7 @@ class DungeonMap {
         }
 
         // If tile out of bounds, it's invalid
-        if (point.x < 0 || point.x >= this.size || point.y < 0 || point.y >= this.size) {
+        if (point.x < 0 || point.x >= this.floorSizes[this.playerPosition().floor] || point.y < 0 || point.y >= this.floorSizes[this.playerPosition().floor]) {
             return false;
         }
 
@@ -119,40 +129,49 @@ class DungeonMap {
         return this.nearbyTiles(point).some(t => t.isVisited);
     }
 
-    public generateMap(): DungeonTile[][] {
-        // Fill mapList with required Tiles
-        const mapList: DungeonTile[] = [];
+    public generateMap(): DungeonTile[][][] {
+        const map: DungeonTile[][][] = [];
 
-        // Boss
-        mapList.push(new DungeonTile(GameConstants.DungeonTile.boss));
+        this.floorSizes.forEach((size, index) => {
+            // Fill mapList with required Tiles
+            const mapList: DungeonTile[] = [];
 
-        // Chests (leave 1 space for enemy and 1 space for empty tile)
-        for (let i = 0; i < this.size && mapList.length < this.size * this.size - 2; i++) {
-            mapList.push(new DungeonTile(GameConstants.DungeonTile.chest));
-        }
+            // Boss or ladder
+            if (index == this.floorSizes.length - 1) {
+                mapList.push(new DungeonTile(GameConstants.DungeonTile.boss));
+            } else {
+                mapList.push(new DungeonTile(GameConstants.DungeonTile.ladder));
+            }
 
-        // Enemy Pokemon (leave 1 space for empty tile)
-        for (let i = 0; i < this.size * 2 + 3 && mapList.length < this.size * this.size - 1; i++) {
-            mapList.push(new DungeonTile(GameConstants.DungeonTile.enemy));
-        }
+            // Chests (leave 1 space for enemy and 1 space for empty tile)
+            for (let i = 0; i < size && mapList.length < size * size - 2; i++) {
+                mapList.push(new DungeonTile(GameConstants.DungeonTile.chest));
+            }
 
-        // Fill with empty tiles
-        for (let i: number = mapList.length; i < this.size * this.size; i++) {
-            mapList.push(new DungeonTile(GameConstants.DungeonTile.empty));
-        }
+            // Enemy Pokemon (leave 1 space for empty tile)
+            for (let i = 0; i < size * 2 + 3 && mapList.length < size * size - 1; i++) {
+                mapList.push(new DungeonTile(GameConstants.DungeonTile.enemy));
+            }
 
-        // Shuffle the tiles randomly
-        this.shuffle(mapList);
-        // Make sure the player tile is empty
-        while (mapList[mapList.length - Math.floor(this.size / 2) - 1].type() != GameConstants.DungeonTile.empty) {
+            // Fill with empty tiles
+            for (let i: number = mapList.length; i < size * size; i++) {
+                mapList.push(new DungeonTile(GameConstants.DungeonTile.empty));
+            }
+
+            // Shuffle the tiles randomly
             this.shuffle(mapList);
-        }
+            // Make sure the player tile is empty
+            while (mapList[mapList.length - Math.floor(size / 2) - 1].type() != GameConstants.DungeonTile.empty) {
+                this.shuffle(mapList);
+            }
 
-        // Create a 2d array
-        const map: DungeonTile[][] = [];
-        while (mapList.length) {
-            map.push(mapList.splice(0, this.size));
-        }
+            // Create a 2d array
+            const floor: DungeonTile[][] = [];
+            while (mapList.length) {
+                floor.push(mapList.splice(0, size));
+            }
+            map.push(floor);
+        });
         return map;
     }
 

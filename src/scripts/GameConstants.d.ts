@@ -106,6 +106,7 @@ namespace GameConstants {
         enemy,
         chest,
         boss,
+        ladder,
     }
     declare const ROUTE_HELD_ITEM_MODIFIER: number;
     declare const DUNGEON_HELD_ITEM_MODIFIER: number;
