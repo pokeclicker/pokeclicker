@@ -3196,7 +3196,7 @@ dungeonList['Sky Pillar'] = new Dungeon('Sky Pillar',
     34000, 101);
 
 dungeonList['Sealed Chamber'] = new Dungeon('Sealed Chamber',
-    ['Zubat', 'Golbat', 'Tentacool'],
+    ['Zubat','Magikarp', 'Tentacool', 'Wailmer', 'Horsea'],
     {
         common: [
             {loot: 'xClick'},
@@ -3219,9 +3219,10 @@ dungeonList['Sealed Chamber'] = new Dungeon('Sealed Chamber',
     },
     500000,
     [
-        new DungeonBossPokemon('Regirock', 4500000, 20),
-        new DungeonBossPokemon('Regice', 4500000, 20),
-        new DungeonBossPokemon('Registeel', 4500000, 20),
+        new DungeonBossPokemon('Golbat', 4500000, 20, {hide: true, requirement: new QuestLineStepCompletedRequirement('The Three Golems', 8, GameConstants.AchievementOption.less)}),
+        new DungeonBossPokemon('Regirock', 4500000, 20, {requirement: new QuestLineStepCompletedRequirement('The Three Golems', 8)}),
+        new DungeonBossPokemon('Regice', 4500000, 20, {requirement: new QuestLineStepCompletedRequirement('The Three Golems', 8)}),
+        new DungeonBossPokemon('Registeel', 4500000, 20, {requirement: new QuestLineStepCompletedRequirement('The Three Golems', 8)}),
     ],
     36000, 101);
 
