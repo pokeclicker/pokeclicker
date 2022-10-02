@@ -48,6 +48,7 @@ export default class Translate {
                 backend: {
                     loadPath: '$TRANSLATIONS_URL/locales/{{lng}}/{{ns}}.json',
                 },
+                returnEmptyString: false,
             });
 
         i18next.on('initialized', () => {
