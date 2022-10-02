@@ -1819,82 +1819,82 @@ const ProfBirch = new ProfNPC('Prof. Birch',
     'assets/images/npcs/Professor Birch.png');
 
 const SCEntrance = new NPC('Strange Markings', [
-    '<i>These strange markings seem to spell something out. Someone nearby may know more.</i>'
+    '<i>These strange markings seem to spell something out. Someone nearby may know more.</i>',
 ], {image: 'assets/images/npcs/Regi Entrance.png',
-    requirement: new QuestLineStepCompletedRequirement('The Three Golems', 0)
+    requirement: new QuestLineStepCompletedRequirement('The Three Golems', 0),
 });
 
 const MazeHintLeft = new NPC('Room Engraving', [
-    '<i>These strange markings seem to spell something out. Someone nearby may know more.</i>'
+    '<i>These strange markings seem to spell something out. Someone nearby may know more.</i>',
 ], {image: 'assets/images/npcs/Left.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Three Golems', 1), new QuestLineStepCompletedRequirement('The Three Golems', 3, GameConstants.AchievementOption.less)]),
 });
 
 const SCMazeLeft = new NPC('Go Left', [
-    '<i>You turn left and proceed to the next room</i>'
+    '<i>You turn left and proceed to the next room</i>',
 ],  {requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Three Golems', 1), new QuestLineStepCompletedRequirement('The Three Golems', 3, GameConstants.AchievementOption.less)]),
 });
 
 const SCMazeLeftWrong = new NPC('Go Left', [
-    '<i>You turn left, but it is a dead end</i>'
+    '<i>You turn left, but it is a dead end</i>',
 ],  {requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Three Golems', 3), new QuestLineStepCompletedRequirement('The Three Golems', 6, GameConstants.AchievementOption.less)]),
 });
 
 const MazeHintRight = new NPC('Room Engraving', [
-    '<i>These strange markings seem to spell something out. Someone nearby may know more.</i>'
+    '<i>These strange markings seem to spell something out. Someone nearby may know more.</i>',
 ], {image: 'assets/images/npcs/Right.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Three Golems', 5), new QuestLineStepCompletedRequirement('The Three Golems', 6, GameConstants.AchievementOption.less)]),
 });
 
 const SCMazeRight = new NPC('Go Right', [
-    '<i>You turn right and proceed to the next room</i>'
+    '<i>You turn right and proceed to the next room</i>',
 ],  {requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Three Golems', 5), new QuestLineStepCompletedRequirement('The Three Golems', 6, GameConstants.AchievementOption.less)]),
 });
 
 const SCMazeRightWrong = new NPC('Go Right', [
-    '<i>You turn right, but it is a dead end</i>'
+    '<i>You turn right, but it is a dead end</i>',
 ],  {requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Three Golems', 1), new QuestLineStepCompletedRequirement('The Three Golems', 5, GameConstants.AchievementOption.less)]),
 });
 
 const MazeHintStraight = new NPC('Room Engraving', [
-    '<i>These strange markings seem to spell something out. Someone nearby may know more.</i>'
+    '<i>These strange markings seem to spell something out. Someone nearby may know more.</i>',
 ], {image: 'assets/images/npcs/Straight.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Three Golems', 3), new QuestLineStepCompletedRequirement('The Three Golems', 5, GameConstants.AchievementOption.less)]),
 });
 
 const SCMazeStraight = new NPC('Go Straight', [
-    '<i>You go straight and proceed to the next room</i>'
+    '<i>You go straight and proceed to the next room</i>',
 ],  {requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Three Golems', 3), new QuestLineStepCompletedRequirement('The Three Golems', 5, GameConstants.AchievementOption.less)]),
 });
 
 const SCMazeStraightWrong = new NPC('Go Straight', [
-    '<i>You go straight, but it is a dead end</i>'
+    '<i>You go straight, but it is a dead end</i>',
 ],  {requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Three Golems', 1), new QuestLineStepCompletedRequirement('The Three Golems', 3, GameConstants.AchievementOption.less)]),
 });
 
 const SCHints = new NPC('Hidden Message', [
-    '<i>These strange markings seem to spell something out. Someone nearby may know more.</i>'
+    '<i>These strange markings seem to spell something out. Someone nearby may know more.</i>',
 ], {image: 'assets/images/npcs/Regi Hints.png',
-    requirement: new QuestLineStepCompletedRequirement('The Three Golems', 6)
+    requirement: new QuestLineStepCompletedRequirement('The Three Golems', 6),
 });
 
 const BrailleEnthusiast1 = new NPC('Braille Enthusiast', [
-    'The markings at the entrance to the Sealed Chamber seem to say that some sort of secret is inside. Try to find more braille messages, and I can decode them for you!'
+    'The markings at the entrance to the Sealed Chamber seem to say that some sort of secret is inside. Try to find more braille messages, and I can decode them for you!',
 ], {image: 'assets/images/npcs/Ruin Maniac.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Three Golems', 0), new QuestLineStepCompletedRequirement('The Three Golems', 1, GameConstants.AchievementOption.less)]),
 });
 
 const BrailleEnthusiast2 = new NPC('Braille Enthusiast', [
-    'There are a few carvings inside this maze. The shortest says "LEFT", the longest says "STRAIGHT", and the one that is five characters long says "RIGHT"'
+    'There are a few carvings inside this maze. The shortest says "LEFT", the longest says "STRAIGHT", and the one that is five characters long says "RIGHT"',
 ], {image: 'assets/images/npcs/Ruin Maniac.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Three Golems', 1), new QuestLineStepCompletedRequirement('The Three Golems', 6, GameConstants.AchievementOption.less)]),
 });
 
-    
+
 const BrailleEnthusiast3 = new NPC('Braille Enthusiast', [
     'The first carving says DESERT. There is a desert near Route 111, right?',
-	'The second carving says ISLAND. There are a lot of islands on Route 105.',
-	'The third carving says ANCIENT. I remember seeing some ancient ruins on Route 120.'
+    'The second carving says ISLAND. There are a lot of islands on Route 105.',
+    'The third carving says ANCIENT. I remember seeing some ancient ruins on Route 120.',
 ], {image: 'assets/images/npcs/Ruin Maniac.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Three Golems', 6), new QuestLineStepCompletedRequirement('The Three Golems', 8, GameConstants.AchievementOption.less)]),
 });

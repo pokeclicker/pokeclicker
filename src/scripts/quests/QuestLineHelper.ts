@@ -583,8 +583,8 @@ class QuestLineHelper {
     //Regi Trio Quest
     public static createRegiTrioQuestLine() {
         const regiTrioQuestLine = new QuestLine('The Three Golems', 'Discover the secrets of the Sealed Chamber.', new GymBadgeRequirement(BadgeEnums.Mind), GameConstants.BulletinBoards.Hoenn);
-        
-	    const clearSealedChamber = new CustomQuest(1, 0, 'Enter the Sealed Chamber to find clues.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Sealed Chamber')]());
+
+        const clearSealedChamber = new CustomQuest(1, 0, 'Enter the Sealed Chamber to find clues.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Sealed Chamber')]());
         regiTrioQuestLine.addQuest(clearSealedChamber);
 
         const readEntranceSign = new TalkToNPCQuest(SCEntrance, 'Investigate the strange markings in the Sealed Chamber.');
@@ -609,10 +609,10 @@ class QuestLineHelper {
         regiTrioQuestLine.addQuest(readSCHints);
 
         const regiHint1 = new DefeatPokemonsQuest(100, 0, 111, GameConstants.Region.hoenn, 'Release Regirock');
-		
-		const regiHint2 = new DefeatPokemonsQuest(100, 0, 105, GameConstants.Region.hoenn, 'Release Regice');
-		
-		const regiHint3 = new DefeatPokemonsQuest(100, 0, 120, GameConstants.Region.hoenn, 'Release Registeel');
+
+        const regiHint2 = new DefeatPokemonsQuest(100, 0, 105, GameConstants.Region.hoenn, 'Release Regice');
+
+        const regiHint3 = new DefeatPokemonsQuest(100, 0, 120, GameConstants.Region.hoenn, 'Release Registeel');
 
         regiTrioQuestLine.addQuest(new MultipleQuestsQuest(
             [
@@ -633,8 +633,8 @@ class QuestLineHelper {
                 catchRegice,
                 catchRegisteel,
             ], 'Catch the Regi Trio.'));
-		
-		App.game.quests.questLines().push(regiTrioQuestLine);
+
+        App.game.quests.questLines().push(regiTrioQuestLine);
     }
     // Sinnoh QuestLines
     // Started upon defeating Oreburgh City's gym.
@@ -1845,7 +1845,7 @@ class QuestLineHelper {
         this.createRubySapphireSeviiQuestLine();
         this.createPinkanThemeparkQuestLine();
         this.createRegiTrioQuestLine();
-		this.createGalacticSinnohQuestLine();
+        this.createGalacticSinnohQuestLine();
         this.createPlasmaUnovaQuestLine();
         this.createDetectivePikachuQuestLine();
         this.createVivillonQuestLine();
