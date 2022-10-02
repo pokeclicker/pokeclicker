@@ -49,6 +49,10 @@ export default class Translate {
                     loadPath: '$TRANSLATIONS_URL/locales/{{lng}}/{{ns}}.json',
                 },
                 returnEmptyString: false,
+                interpolation: {
+                    nestingPrefix: '[[',
+                    nestingSuffix: ']]',
+                },
             });
 
         i18next.on('initialized', () => {
