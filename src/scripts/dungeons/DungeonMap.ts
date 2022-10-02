@@ -10,10 +10,10 @@ class DungeonMap {
         size: number,
         public flash = false
     ) {
-        if (size <= 9) {
+        if (size <= GameConstants.MAX_DUNGEON_SIZE) {
             this.floorSizes = [size];
         } else {
-            this.floorSizes = [9, size - 9 + 5];
+            this.floorSizes = [GameConstants.MAX_DUNGEON_SIZE, size - GameConstants.MAX_DUNGEON_SIZE + GameConstants.MIN_DUNGEON_SIZE - 1];
         }
 
         this.board = ko.observable(this.generateMap());
@@ -43,8 +43,8 @@ class DungeonMap {
         this.totalChests = ko.observable(this.board().flat().flat().filter((t) => t.type() == GameConstants.DungeonTile.chest).length);
     }
 
-    public moveToCoordinates(x: number, y: number) {
-        if (this.moveToTile(new Point(x, y, this.playerPosition().floor))) {
+    public moveToCoordinates(x: number, y: number, floor = undefined) {
+        if (this.moveToTile(new Point(x, y, floor ?? this.playerPosition().floor))) {
             this.playerMoved(true);
         }
     }
@@ -84,19 +84,23 @@ class DungeonMap {
     }
 
     public showChestTiles(): void {
-        for (let i = 0; i < this.board()[this.playerPosition().floor].length; i++) {
-            for (let j = 0; j < this.board()[this.playerPosition().floor][i].length; j++) {
-                if (this.board()[this.playerPosition().floor][i][j].type() == GameConstants.DungeonTile.chest) {
-                    this.board()[this.playerPosition().floor][i][j].isVisible = true;
+        for (let s = 0; s < this.board().length; s++) {
+            for (let i = 0; i < this.board()[s].length; i++) {
+                for (let j = 0; j < this.board()[s][i].length; j++) {
+                    if (this.board()[s][i][j].type() == GameConstants.DungeonTile.chest) {
+                        this.board()[s][i][j].isVisible = true;
+                    }
                 }
             }
         }
     }
 
     public showAllTiles(): void {
-        for (let i = 0; i < this.board()[this.playerPosition().floor].length; i++) {
-            for (let j = 0; j < this.board()[this.playerPosition().floor][i].length; j++) {
-                this.board()[this.playerPosition().floor][i][j].isVisible = true;
+        for (let s = 0; s < this.board().length; s++) {
+            for (let i = 0; i < this.board()[s].length; i++) {
+                for (let j = 0; j < this.board()[s][i].length; j++) {
+                    this.board()[s][i][j].isVisible = true;
+                }
             }
         }
     }

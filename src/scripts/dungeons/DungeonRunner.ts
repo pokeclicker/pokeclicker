@@ -215,7 +215,13 @@ class DungeonRunner {
     }
 
     public static nextFloor() {
-        DungeonRunner.map.playerPosition().floor++;
+        DungeonRunner.map.moveToCoordinates(
+            Math.floor(DungeonRunner.map.floorSizes[DungeonRunner.map.playerPosition().floor + 1] / 2),
+            DungeonRunner.map.floorSizes[DungeonRunner.map.playerPosition().floor + 1] - 1,
+            DungeonRunner.map.playerPosition().floor + 1
+        );
+        DungeonRunner.map.playerPosition.notifySubscribers();
+        DungeonRunner.timeLeft(DungeonRunner.timeLeft() + GameConstants.DUNGEON_LADDER_BONUS);
     }
 
     public static async dungeonLeave(shouldConfirm = Settings.getSetting('confirmLeaveDungeon').observableValue()): Promise<void> {
