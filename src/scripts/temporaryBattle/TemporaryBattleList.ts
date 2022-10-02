@@ -1502,7 +1502,7 @@ TemporaryBattleList['Gym Leader Bede'] = new TemporaryBattle(
         new GymPokemon('Galarian Rapidash', 594371034, 62),
         new GymPokemon('Hatterene', 613544294, 63),
     ],
-    'Thank you for the battle. I can now accept you as the Champion. It\'s painful to admit, but I\'ve come to realise a few of my weaknesses. But I\'ll keep getting stronger.',
+    'Thank you for the battle. I can now accept you as the Champion. It\'s painful to admit, but I\'ve come to realise a few of my weaknesses. But I\'ll keep getting stronger. I\'ll reach the pinnacle of what Fairy types can do.',
     [
         new TemporaryBattleRequirement('Rampaging Conkeldurr'),
         new TemporaryBattleRequirement('Rampaging Dusknoir'),
