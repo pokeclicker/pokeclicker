@@ -456,7 +456,7 @@ GymList['Mauville City'] = new Gym(
     BadgeEnums.Dynamo,
     3000,
     'Wahahahah! Fine, I lost! You ended up giving me a thrill! Take this Badge!',
-    [new GymBadgeRequirement(BadgeEnums.Knuckle)],
+    undefined,
     () => {
         App.game.quests.getQuestLine('Land vs. Water').beginQuest();
     }
@@ -486,7 +486,10 @@ GymList['Petalburg City'] = new Gym(
     BadgeEnums.Balance,
     5000,
     '… I… I can\'t… I can\'t believe it. I lost to you? But, rules are rules! Here, take this.',
-    [new GymBadgeRequirement(BadgeEnums.Heat)]
+    [
+        new GymBadgeRequirement(BadgeEnums.Knuckle),
+        new GymBadgeRequirement(BadgeEnums.Heat),
+    ]
 );
 GymList['Fortree City'] = new Gym(
     'Winona',
@@ -545,7 +548,10 @@ GymList['Elite Sidney'] = new Gym(
     BadgeEnums.Elite_Sidney,
     15000,
     'Well, listen to what this loser has to say. You\'ve got what it takes to go far. Now, go on to the next room and enjoy your next battle!',
-    [new GymBadgeRequirement(BadgeEnums.Rain)]
+    [
+        new GymBadgeRequirement(BadgeEnums.Feather),
+        new GymBadgeRequirement(BadgeEnums.Rain),
+    ]
 );
 GymList['Elite Phoebe'] = new Gym(
     'Phoebe',
@@ -699,7 +705,7 @@ GymList['Oreburgh City'] = new Gym(
     'This is embarrassing... I went and lost to a Trainer who didn\'t have a single Gym Badge... But that\'s tough. You were strong, and I was weak. That\'s all there is. According to Pokémon League rules, I have to give you our Gym Badge since you\'ve beaten me, the Leader. Heres your official Pokémon League Coal Badge.',
     [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
     () => {
-        App.game.quests.getQuestLine('A new world').beginQuest();
+        App.game.quests.getQuestLine('A New World').beginQuest();
     }
 );
 GymList['Eterna City'] = new Gym(
@@ -1060,12 +1066,12 @@ GymList['Champion Iris'] = new Champion(
     'Iris',
     'Champion Iris',
     [
-        new GymPokemon('Hydreigon', 12458300, 58),
-        new GymPokemon('Salamence', 12462000, 58),
-        new GymPokemon('Aggron', 12464000, 58),
-        new GymPokemon('Archeops', 12460250, 60),
-        new GymPokemon('Lapras', 12470000, 58),
-        new GymPokemon('Haxorus', 14570000, 62),
+        new GymPokemon('Hydreigon', 12458300, 61),
+        new GymPokemon('Druddigon', 12462000, 61),
+        new GymPokemon('Archeops', 12464000, 61),
+        new GymPokemon('Aggron', 12460250, 61),
+        new GymPokemon('Lapras', 12470000, 61),
+        new GymPokemon('Haxorus', 14570000, 63),
     ],
     BadgeEnums.Elite_UnovaChampion,
     64000,
@@ -1619,8 +1625,14 @@ GymList['Stow-on-Side1'] = new Gym(
     ],
     BadgeEnums.Galar_Fighting,
     80000,
-    'Your strength nearly made me want to turn and run in my bare feet',
-    [new TemporaryBattleRequirement('Hop5')]
+    'Your strength nearly made me want to turn and run in my bare feet.',
+    [new TemporaryBattleRequirement('Hop5')],
+    // Starts Galar story quest if both Stow-on-Side gyms are defeated.
+    () => {
+        if (App.game.badgeCase.hasBadge(BadgeEnums.Galar_Ghost)) {
+            App.game.quests.getQuestLine('The Darkest Day').beginQuest();
+        }
+    }
 );
 GymList['Stow-on-Side2'] = new Gym(
     'Allister',
@@ -1634,7 +1646,13 @@ GymList['Stow-on-Side2'] = new Gym(
     BadgeEnums.Galar_Ghost,
     80000,
     'Maybe my mask... kept me from seeing just how strong you really are...',
-    [new TemporaryBattleRequirement('Hop5')]
+    [new TemporaryBattleRequirement('Hop5')],
+    // Starts Galar story quest if both Stow-on-Side gyms are defeated.
+    () => {
+        if (App.game.badgeCase.hasBadge(BadgeEnums.Galar_Fighting)) {
+            App.game.quests.getQuestLine('The Darkest Day').beginQuest();
+        }
+    }
 );
 GymList.Ballonlea = new Gym(
     'Opal',

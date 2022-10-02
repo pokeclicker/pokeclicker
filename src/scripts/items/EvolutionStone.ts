@@ -83,3 +83,5 @@ ItemList.Tart_apple        = new EvolutionStone(GameConstants.StoneType.Tart_app
 ItemList.Cracked_pot       = new EvolutionStone(GameConstants.StoneType.Cracked_pot, 5000, undefined , 'Cracked Pot');
 ItemList.Galarica_cuff     = new EvolutionStone(GameConstants.StoneType.Galarica_cuff, 5000, undefined , 'Galarica Cuff');
 ItemList.Galarica_wreath   = new EvolutionStone(GameConstants.StoneType.Galarica_wreath, 5000, undefined , 'Galarica Wreath');
+ItemList.Black_mane_hair   = new EvolutionStone(GameConstants.StoneType.Black_mane_hair, 2500, undefined, 'Black Mane Hair');
+ItemList.White_mane_hair   = new EvolutionStone(GameConstants.StoneType.White_mane_hair, 2500, undefined, 'White Mane Hair');

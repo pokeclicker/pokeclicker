@@ -185,6 +185,10 @@ class Party implements Feature {
 
         let EPNum = number * App.game.multiplier.getBonus('ev');
 
+        if (pokemon.heldItem() && pokemon.heldItem() instanceof EVsGainedBonusHeldItem) {
+            EPNum *= (pokemon.heldItem() as EVsGainedBonusHeldItem).gainedBonus;
+        }
+
         if (shiny) {
             EPNum *= GameConstants.SHINY_EP_MODIFIER;
         }
