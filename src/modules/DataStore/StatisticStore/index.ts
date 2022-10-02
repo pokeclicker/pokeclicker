@@ -42,22 +42,30 @@ export default class Statistics implements Saveable {
     totalShinyPokemonHatched: KnockoutObservable<number>;
 
     totalMalePokemonCaptured: KnockoutObservable<number>;
-    totalFemalePokemonCaptured: KnockoutObservable<number>;
     totalMalePokemonDefeated: KnockoutObservable<number>;
-    totalFemalePokemonDefeated: KnockoutObservable<number>;
     totalMalePokemonEncountered: KnockoutObservable<number>;
-    totalFemalePokemonEncountered: KnockoutObservable<number>;
     totalMalePokemonHatched: KnockoutObservable<number>;
+    totalFemalePokemonCaptured: KnockoutObservable<number>;
+    totalFemalePokemonDefeated: KnockoutObservable<number>;
+    totalFemalePokemonEncountered: KnockoutObservable<number>;
     totalFemalePokemonHatched: KnockoutObservable<number>;
+    totalGenderlessPokemonCaptured: KnockoutObservable<number>;
+    totalGenderlessPokemonDefeated: KnockoutObservable<number>;
+    totalGenderlessPokemonEncountered: KnockoutObservable<number>;
+    totalGenderlessPokemonHatched: KnockoutObservable<number>;
 
     totalShinyMalePokemonCaptured: KnockoutObservable<number>;
-    totalShinyFemalePokemonCaptured: KnockoutObservable<number>;
     totalShinyMalePokemonDefeated: KnockoutObservable<number>;
-    totalShinyFemalePokemonDefeated: KnockoutObservable<number>;
     totalShinyMalePokemonEncountered: KnockoutObservable<number>;
-    totalShinyFemalePokemonEncountered: KnockoutObservable<number>;
     totalShinyMalePokemonHatched: KnockoutObservable<number>;
+    totalShinyFemalePokemonCaptured: KnockoutObservable<number>;
+    totalShinyFemalePokemonDefeated: KnockoutObservable<number>;
+    totalShinyFemalePokemonEncountered: KnockoutObservable<number>;
     totalShinyFemalePokemonHatched: KnockoutObservable<number>;
+    totalShinyGenderlessPokemonCaptured: KnockoutObservable<number>;
+    totalShinyGenderlessPokemonDefeated: KnockoutObservable<number>;
+    totalShinyGenderlessPokemonEncountered: KnockoutObservable<number>;
+    totalShinyGenderlessPokemonHatched: KnockoutObservable<number>;
     // Underground
     undergroundItemsFound: KnockoutObservable<number>;
     undergroundLayersMined: KnockoutObservable<number>;
@@ -106,12 +114,12 @@ export default class Statistics implements Saveable {
     shinyPokemonEncountered: any;
     shinyPokemonHatched: any;
     malePokemonCaptured: any;
-    femalePokemonCaptured: any;
     malePokemonDefeated: any;
-    femalePokemonDefeated: any;
     malePokemonEncountered: any;
-    femalePokemonEncountered: any;
     malePokemonHatched: any;
+    femalePokemonCaptured: any;
+    femalePokemonDefeated: any;
+    femalePokemonEncountered: any;
     femalePokemonHatched: any;
     shinyMalePokemonCaptured: any;
     shinyFemalePokemonCaptured: any;
@@ -144,21 +152,29 @@ export default class Statistics implements Saveable {
         'totalShinyPokemonEncountered',
         'totalShinyPokemonHatched',
         'totalMalePokemonCaptured',
-        'totalFemalePokemonCaptured',
         'totalMalePokemonDefeated',
-        'totalFemalePokemonDefeated',
         'totalMalePokemonEncountered',
-        'totalFemalePokemonEncountered',
         'totalMalePokemonHatched',
+        'totalFemalePokemonCaptured',
+        'totalFemalePokemonDefeated',
+        'totalFemalePokemonEncountered',
         'totalFemalePokemonHatched',
+        'totalGenderlessPokemonCaptured',
+        'totalGenderlessPokemonDefeated',
+        'totalGenderlessPokemonEncountered',
+        'totalGenderlessPokemonHatched',
         'totalShinyMalePokemonCaptured',
-        'totalShinyFemalePokemonCaptured',
         'totalShinyMalePokemonDefeated',
-        'totalShinyFemalePokemonDefeated',
         'totalShinyMalePokemonEncountered',
-        'totalShinyFemalePokemonEncountered',
         'totalShinyMalePokemonHatched',
+        'totalShinyFemalePokemonCaptured',
+        'totalShinyFemalePokemonDefeated',
+        'totalShinyFemalePokemonEncountered',
         'totalShinyFemalePokemonHatched',
+        'totalShinyGenderlessPokemonCaptured',
+        'totalShinyGenderlessPokemonDefeated',
+        'totalShinyGenderlessPokemonEncountered',
+        'totalShinyGenderlessPokemonHatched',
         'undergroundItemsFound',
         'undergroundLayersMined',
         'undergroundDailyDealTrades',
@@ -197,12 +213,12 @@ export default class Statistics implements Saveable {
         'shinyPokemonEncountered',
         'shinyPokemonHatched',
         'malePokemonCaptured',
-        'femalePokemonCaptured',
         'malePokemonDefeated',
-        'femalePokemonDefeated',
         'malePokemonEncountered',
-        'femalePokemonEncountered',
         'malePokemonHatched',
+        'femalePokemonCaptured',
+        'femalePokemonDefeated',
+        'femalePokemonEncountered',
         'femalePokemonHatched',
         'shinyMalePokemonCaptured',
         'shinyFemalePokemonCaptured',

@@ -60,6 +60,9 @@ class Party implements Feature {
             GameHelper.incrementObservable(App.game.statistics.femalePokemonCaptured[pokemon.id]);
             GameHelper.incrementObservable(App.game.statistics.totalFemalePokemonCaptured);
         }
+        else if (pokemon.gender === GameConstants.NO_GENDER) {
+            GameHelper.incrementObservable(App.game.statistics.totalGenderlessPokemonCaptured);
+        }
 
         if (pokemon.shiny) {
             GameHelper.incrementObservable(App.game.statistics.shinyPokemonCaptured[pokemon.id]);
@@ -72,6 +75,9 @@ class Party implements Feature {
             else if (pokemon.gender === GameConstants.GENDER_FEMALE) {
                 GameHelper.incrementObservable(App.game.statistics.shinyFemalePokemonCaptured[pokemon.id]);
                 GameHelper.incrementObservable(App.game.statistics.totalShinyFemalePokemonCaptured);
+            }
+            else if (pokemon.gender === GameConstants.NO_GENDER) {
+                GameHelper.incrementObservable(App.game.statistics.totalShinyGenderlessPokemonCaptured);
             }
             // Add all shiny catches to the log book
             App.game.logbook.newLog(LogBookTypes.CAUGHT, `You have captured a shiny ${pokemon.name}! ${this.alreadyCaughtPokemon(pokemon.id, true) ? '(duplicate)' : ''}`);

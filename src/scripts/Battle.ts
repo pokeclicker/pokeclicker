@@ -123,6 +123,9 @@ class Battle {
             GameHelper.incrementObservable(App.game.statistics.femalePokemonEncountered[enemyPokemon.id]);
             GameHelper.incrementObservable(App.game.statistics.totalFemalePokemonEncountered);
         }
+        else if (enemyPokemon.gender === GameConstants.NO_GENDER) {
+            GameHelper.incrementObservable(App.game.statistics.totalGenderlessPokemonEncountered);
+        }
         // Shiny
         if (enemyPokemon.shiny) {
             GameHelper.incrementObservable(App.game.statistics.shinyPokemonEncountered[enemyPokemon.id]);
@@ -135,6 +138,9 @@ class Battle {
             else if (enemyPokemon.gender === GameConstants.GENDER_FEMALE) {
                 GameHelper.incrementObservable(App.game.statistics.shinyFemalePokemonEncountered[enemyPokemon.id]);
                 GameHelper.incrementObservable(App.game.statistics.totalShinyFemalePokemonEncountered);
+            }
+            else if (enemyPokemon.gender === GameConstants.NO_GENDER) {
+                GameHelper.incrementObservable(App.game.statistics.totalShinyGenderlessPokemonEncountered);
             }
             App.game.logbook.newLog(LogBookTypes.SHINY, `[${Routes.getRoute(player.region, player.route()).routeName}] You encountered a wild shiny ${enemyPokemon.name}.`);
         } else if (!App.game.party.alreadyCaughtPokemon(enemyPokemon.id) && enemyPokemon.health()) {

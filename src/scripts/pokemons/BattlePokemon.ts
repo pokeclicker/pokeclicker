@@ -68,6 +68,9 @@ class BattlePokemon implements EnemyPokemonInterface {
             GameHelper.incrementObservable(App.game.statistics.femalePokemonDefeated[this.id]);
             GameHelper.incrementObservable(App.game.statistics.totalFemalePokemonDefeated);
         }
+        else if (this.gender === GameConstants.NO_GENDER) {
+            GameHelper.incrementObservable(App.game.statistics.totalGenderlessPokemonDefeated);
+        }
 
         if (this.shiny) {
             GameHelper.incrementObservable(App.game.statistics.shinyPokemonDefeated[this.id]);
@@ -80,6 +83,9 @@ class BattlePokemon implements EnemyPokemonInterface {
             else if (this.gender === GameConstants.GENDER_FEMALE) {
                 GameHelper.incrementObservable(App.game.statistics.femalePokemonDefeated[this.id]);
                 GameHelper.incrementObservable(App.game.statistics.totalFemalePokemonDefeated);
+            }
+            else if (this.gender === GameConstants.NO_GENDER) {
+                GameHelper.incrementObservable(App.game.statistics.totalGenderlessPokemonDefeated);
             }
         }
 

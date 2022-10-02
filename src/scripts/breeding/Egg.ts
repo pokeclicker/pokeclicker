@@ -157,6 +157,9 @@ class Egg implements Saveable {
                 GameHelper.incrementObservable(App.game.statistics.shinyFemalePokemonHatched[pokemonID]);
                 GameHelper.incrementObservable(App.game.statistics.totalShinyFemalePokemonHatched);
             }
+            else if (gender === GameConstants.NO_GENDER) {
+                GameHelper.incrementObservable(App.game.statistics.totalShinyGenderlessPokemonHatched);
+            }
         } else {
             Notifier.notify({
                 message: `You hatched ${GameHelper.anOrA(PokemonHelper.getPokemonById(this.pokemon).name)} ${PokemonHelper.getPokemonById(this.pokemon).name}!`,
@@ -191,6 +194,9 @@ class Egg implements Saveable {
         else if (gender === GameConstants.GENDER_FEMALE) {
             GameHelper.incrementObservable(App.game.statistics.femalePokemonHatched[pokemonID]);
             GameHelper.incrementObservable(App.game.statistics.totalFemalePokemonHatched);
+        }
+        else if (gender === GameConstants.NO_GENDER) {
+            GameHelper.incrementObservable(App.game.statistics.totalGenderlessPokemonHatched);
         }
         App.game.oakItems.use(OakItemType.Blaze_Cassette);
         return true;
