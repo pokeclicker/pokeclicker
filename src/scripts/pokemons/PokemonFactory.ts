@@ -291,6 +291,14 @@ class PokemonFactory {
 
     // Gender functions
     /**
+     * generateGender but using Pokemon ID
+     */
+    public static generateGenderById(id) {
+        const pokemon = PokemonHelper.getPokemonById(id);
+        return this.generateGender(pokemon.gender.ratio, pokemon.gender.type);
+    }
+
+    /**
      * Calculate which gender has the pokemon.
      * @param chance Base chance, should be from GameConstants under Gender Ratio comment
      * @param genderType Gender type (Genderless, male only, etc.), should be from GameConstants under Gender Types comment
