@@ -1140,8 +1140,8 @@ TemporaryBattleList['Ash Ketchum Alola'] = new TemporaryBattle(
 TemporaryBattleList.Hop1 = new TemporaryBattle(
     'Hop1',
     [
-        new GymPokemon('Wooloo', 29607662, 3),
-        new GymPokemon('Sobble', 30984763, 5),
+        new GymPokemon('Wooloo', 96928085, 3),
+        new GymPokemon('Sobble', 105005426, 5),
     ],
     'Well, that was a shock! Guess I know now why Lee thought he should give you a Pokémon, too...',
     [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
@@ -1155,8 +1155,8 @@ TemporaryBattleList.Hop1 = new TemporaryBattle(
 TemporaryBattleList.Mirages = new TemporaryBattle(
     'Mirages',
     [
-        new GymPokemon('Zacian (Battle Hero)', 34427515, 70),
-        new GymPokemon('Zamazenta (Battle Hero)', 34427515, 70),
+        new GymPokemon('Zacian (Battle Hero)', 114428989, 70),
+        new GymPokemon('Zamazenta (Battle Hero)', 114428989, 70),
     ],
     '<i>The Pokémon fled.</i>',
     [new TemporaryBattleRequirement('Hop1')],
@@ -1168,9 +1168,9 @@ TemporaryBattleList.Mirages = new TemporaryBattle(
 TemporaryBattleList.Hop2 = new TemporaryBattle(
     'Hop2',
     [
-        new GymPokemon('Wooloo', 82626036, 6),
-        new GymPokemon('Rookidee', 82626036, 5),
-        new GymPokemon('Sobble', 85208099, 8),
+        new GymPokemon('Wooloo', 88822988, 6),
+        new GymPokemon('Rookidee', 88822988, 5),
+        new GymPokemon('Sobble', 91598706, 8),
     ],
     'And I even got my Pokéball throw perfect too!',
     [new RouteKillRequirement(10, GameConstants.Region.galar, 2)],
@@ -1200,9 +1200,9 @@ TemporaryBattleList.Hop3 = new TemporaryBattle(
 TemporaryBattleList.Bede1 = new TemporaryBattle(
     'Bede1',
     [
-        new GymPokemon('Solosis', 107930259, 13),
-        new GymPokemon('Gothita', 107930259, 15),
-        new GymPokemon('Hatenna', 111200873, 16),
+        new GymPokemon('Solosis', 110628515, 13),
+        new GymPokemon('Gothita', 110628515, 15),
+        new GymPokemon('Hatenna', 113980895, 16),
     ],
     'I see... Well, that\'s fine. I wasn\'t really trying all that hard anyway.',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Galar Mine'))],
@@ -1224,7 +1224,7 @@ TemporaryBattleList.Hop4 = new TemporaryBattle(
     undefined,
     {
         displayName: 'Pokémon Trainer Hop',
-        returnTown: 'Hulbury',
+        returnTown: 'Turffield',
         imageName: 'Hop',
     }
 );
@@ -1346,13 +1346,13 @@ TemporaryBattleList.Marnie2 = new TemporaryBattle(
     undefined,
     {
         displayName: 'Pokémon Trainer Marnie',
-        returnTown: 'Spikemuth',
+        returnTown: 'Circhester',
         imageName: 'Marnie',
     }
 );
 TemporaryBattleList.Eternatus = new TemporaryBattle(
     'Eternatus',
-    [new GymPokemon('Eternatus', 1560840234, 60)],
+    [new GymPokemon('Eternatus', 1454990842, 60)],
     '<i>You defeated Eternatus, but it looks like it\'s not over yet!</i>',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Energy Plant'))],
     undefined,
@@ -1362,7 +1362,7 @@ TemporaryBattleList.Eternatus = new TemporaryBattle(
 );
 TemporaryBattleList['The Darkest Day'] = new TemporaryBattle(
     'The Darkest Day',
-    [new GymPokemon('Eternamax Eternatus', 1597800902, 60)],
+    [new GymPokemon('Eternamax Eternatus', 1567895148, 60)],
     '<b><i>You caught Eternatus!</i></b>',
     [new TemporaryBattleRequirement('Eternatus')],
     undefined,

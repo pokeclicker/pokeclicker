@@ -1777,7 +1777,6 @@ GymList['Elite Trainer Hop'] = new Gym(
     // [new GymPokemon('Cinderace', 137833678, 60)]
 );
 // Galar Champion
-//TODO: rewards/hp rebalance
 GymList['Champion Leon'] = new Champion(
     'Leon',
     'Champion Leon',
@@ -1810,7 +1809,7 @@ GymList['Champion Leon'] = new Champion(
     ]
 );
 
-// Armor + crown gyms
+// Armor + Crown gyms
 GymList['Elite Gym Leader Klara'] = new Gym(
     'Klara',
     'Elite Gym Leader Klara',
@@ -1824,12 +1823,7 @@ GymList['Elite Gym Leader Klara'] = new Gym(
     BadgeEnums.Elite_ArmorPoison,
     150000,
     'Aww, come on! What a drag! But...I guess it was also kinda fun!',
-    [
-        new MultiRequirement([
-            new ObtainedPokemonRequirement(pokemonMap['Urshifu (Single Strike)']),
-            new ObtainedPokemonRequirement(pokemonMap['Urshifu (Rapid Strike)']),
-        ]),
-    ]
+    [new QuestLineCompletedRequirement('The Dojo\'s Armor')]
 );
 GymList['Elite Gym Leader Avery'] = new Gym(
     'Avery',
@@ -1844,12 +1838,7 @@ GymList['Elite Gym Leader Avery'] = new Gym(
     BadgeEnums.Elite_ArmorPsychic,
     150000,
     'More! I require more! Show me your Stored Power!',
-    [
-        new MultiRequirement([
-            new ObtainedPokemonRequirement(pokemonMap['Urshifu (Single Strike)']),
-            new ObtainedPokemonRequirement(pokemonMap['Urshifu (Rapid Strike)']),
-        ]),
-    ]
+    [new QuestLineCompletedRequirement('The Dojo\'s Armor')]
 );
 GymList['Elite Dojo Matron Honey'] = new Gym(
     'Honey',
