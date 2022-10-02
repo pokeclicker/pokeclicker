@@ -160,6 +160,16 @@
                         <code data-bind="html: App.game.statistics.femalePokemonCaptured[$data]().toLocaleString('en-US')"></code>
                       </td>
                     </tr>
+                    <tr>
+                      <td class="text-left align-middle">Male/Female Hatched</td>
+                      <td class="text-left tight">
+                        <code data-bind="html: '♂: '"></code>
+                        <code data-bind="html: App.game.statistics.malePokemonHatched[$data]().toLocaleString('en-US')"></code>
+                        <br />
+                        <code data-bind="html: '♀: '"></code>
+                        <code data-bind="html: App.game.statistics.femalePokemonHatched[$data]().toLocaleString('en-US')"></code>
+                      </td>
+                    </tr>
                     <!-- /ko -->
 
                     <tr>
@@ -209,6 +219,16 @@
                         <br />
                         <code data-bind="html: '♀: '"></code>
                         <code data-bind="html: App.game.statistics.shinyFemalePokemonCaptured[$data]().toLocaleString('en-US')"></code>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-left align-middle">Shiny Male/Female Hatched</td>
+                      <td class="text-left tight">
+                        <code data-bind="html: '♂: '"></code>
+                        <code data-bind="html: App.game.statistics.shinyMalePokemonHatched[$data]().toLocaleString('en-US')"></code>
+                        <br />
+                        <code data-bind="html: '♀: '"></code>
+                        <code data-bind="html: App.game.statistics.shinyFemalePokemonHatched[$data]().toLocaleString('en-US')"></code>
                       </td>
                     </tr>
                     <!-- /ko -->

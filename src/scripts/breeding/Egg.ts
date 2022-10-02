@@ -113,6 +113,7 @@ class Egg implements Saveable {
         // If the party pokemon exist, increase it's damage output
 
         const pokemonID = PokemonHelper.getPokemonById(this.pokemon).id;
+        const gender = PokemonFactory.generateGenderById(pokemonID);
         if (partyPokemon) {
             // Increase attack
             partyPokemon.attackBonusPercent += Math.max(1, Math.round(GameConstants.BREEDING_ATTACK_BONUS * (efficiency / 100)));
@@ -147,6 +148,15 @@ class Egg implements Saveable {
             App.game.logbook.newLog(LogBookTypes.SHINY, `You hatched a shiny ${PokemonHelper.getPokemonById(this.pokemon).name}! ${App.game.party.alreadyCaughtPokemon(pokemonID, true) ? '(duplicate)' : ''}`);
             GameHelper.incrementObservable(App.game.statistics.shinyPokemonHatched[pokemonID]);
             GameHelper.incrementObservable(App.game.statistics.totalShinyPokemonHatched);
+            // Gender Statistics
+            if (gender === GameConstants.GENDER_MALE) {
+                GameHelper.incrementObservable(App.game.statistics.shinyMalePokemonHatched[pokemonID]);
+                GameHelper.incrementObservable(App.game.statistics.totalShinyMalePokemonHatched);
+            }
+            else if (gender === GameConstants.GENDER_FEMALE) {
+                GameHelper.incrementObservable(App.game.statistics.shinyFemalePokemonHatched[pokemonID]);
+                GameHelper.incrementObservable(App.game.statistics.totalShinyFemalePokemonHatched);
+            }
         } else {
             Notifier.notify({
                 message: `You hatched ${GameHelper.anOrA(PokemonHelper.getPokemonById(this.pokemon).name)} ${PokemonHelper.getPokemonById(this.pokemon).name}!`,
@@ -154,7 +164,7 @@ class Egg implements Saveable {
                 setting: NotificationConstants.NotificationSetting.Hatchery.hatched,
             });
         }
-        App.game.party.gainPokemonById(pokemonID, shiny);
+        App.game.party.gainPokemonById(pokemonID, shiny, undefined, gender);
 
         // Capture base form if not already caught. This helps players get Gen2 Pokemon that are base form of Gen1
         const pokemonName = PokemonHelper.getPokemonById(this.pokemon).name;
@@ -173,6 +183,15 @@ class Egg implements Saveable {
         // Update statistics
         GameHelper.incrementObservable(App.game.statistics.pokemonHatched[pokemonID]);
         GameHelper.incrementObservable(App.game.statistics.totalPokemonHatched);
+        // Gender Statistics
+        if (gender === GameConstants.GENDER_MALE) {
+            GameHelper.incrementObservable(App.game.statistics.malePokemonHatched[pokemonID]);
+            GameHelper.incrementObservable(App.game.statistics.totalMalePokemonHatched);
+        }
+        else if (gender === GameConstants.GENDER_FEMALE) {
+            GameHelper.incrementObservable(App.game.statistics.femalePokemonHatched[pokemonID]);
+            GameHelper.incrementObservable(App.game.statistics.totalFemalePokemonHatched);
+        }
         App.game.oakItems.use(OakItemType.Blaze_Cassette);
         return true;
     }
