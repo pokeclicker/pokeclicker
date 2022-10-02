@@ -59,7 +59,7 @@ class Plot implements Saveable {
                 }
 
                 return this.berryData?.aura?.auraType ?? null;
-            }),
+            }).extend({ rateLimit: 50 }),
             value: ko.pureComputed(() => {
                 if (!this.berryData?.aura) {
                     return null;
@@ -68,7 +68,7 @@ class Plot implements Saveable {
                 const boost = this.auraBoost();
                 const value = this.berryData.aura.getAuraValue(this.stage());
                 return value > 1 ? value * boost : value / boost;
-            }),
+            }).extend({ rateLimit: 50 }),
         };
 
         this.formattedStageTimeLeft = ko.pureComputed(() => {
