@@ -222,6 +222,7 @@ class DungeonRunner {
         );
         DungeonRunner.map.playerPosition.notifySubscribers();
         DungeonRunner.timeLeft(DungeonRunner.timeLeft() + GameConstants.DUNGEON_LADDER_BONUS);
+        DungeonRunner.map.playerMoved(false);
     }
 
     public static async dungeonLeave(shouldConfirm = Settings.getSetting('confirmLeaveDungeon').observableValue()): Promise<void> {

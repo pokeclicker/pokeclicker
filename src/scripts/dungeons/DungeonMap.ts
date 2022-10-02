@@ -24,17 +24,18 @@ class DungeonMap {
         // Move the boss or ladder if it spawns on the player.
         this.floorSizes.forEach((size, index) => {
             const endTitleType = index == this.floorSizes.length - 1 ? GameConstants.DungeonTile.boss : GameConstants.DungeonTile.ladder;
-            if (this.currentTile().type() == endTitleType) {
-                this.currentTile().type(GameConstants.DungeonTile.entrance);
+            const entranceTile = this.board()[index][size - 1][Math.floor(size / 2)];
+            if (entranceTile.type() == endTitleType) {
+                entranceTile.type(GameConstants.DungeonTile.entrance);
                 const newX = Rand.intBetween(0, size - 1);
                 const newY = Rand.intBetween(0, size - 2); // Don't allow it to be on the bottom row
                 this.board()[index][newY][newX].type(endTitleType);
                 this.board()[index][newY][newX].calculateCssClass();
             }
+            entranceTile.type(GameConstants.DungeonTile.entrance);
+            entranceTile.isVisible = true;
+            entranceTile.isVisited = true;
         });
-        this.currentTile().type(GameConstants.DungeonTile.entrance);
-        this.currentTile().isVisible = true;
-        this.currentTile().isVisited = true;
         this.currentTile().hasPlayer = true;
         if (this.flash) {
             this.nearbyTiles(this.playerPosition()).forEach(t => t.isVisible = true);
@@ -111,10 +112,10 @@ class DungeonMap {
 
     public nearbyTiles(point: Point): DungeonTile[] {
         const tiles = [];
-        tiles.push(this.board()[this.playerPosition().floor][point.y - 1]?.[point.x]);
-        tiles.push(this.board()[this.playerPosition().floor][point.y + 1]?.[point.x]);
-        tiles.push(this.board()[this.playerPosition().floor][point.y]?.[point.x - 1]);
-        tiles.push(this.board()[this.playerPosition().floor][point.y]?.[point.x + 1]);
+        tiles.push(this.board()[point.floor][point.y - 1]?.[point.x]);
+        tiles.push(this.board()[point.floor][point.y + 1]?.[point.x]);
+        tiles.push(this.board()[point.floor][point.y]?.[point.x - 1]);
+        tiles.push(this.board()[point.floor][point.y]?.[point.x + 1]);
         return tiles.filter(t => t);
     }
 
@@ -125,8 +126,12 @@ class DungeonMap {
         }
 
         // If tile out of bounds, it's invalid
-        if (point.x < 0 || point.x >= this.floorSizes[this.playerPosition().floor] || point.y < 0 || point.y >= this.floorSizes[this.playerPosition().floor]) {
+        if (point.x < 0 || point.x >= this.floorSizes[point.floor] || point.y < 0 || point.y >= this.floorSizes[point.floor]) {
             return false;
+        }
+
+        if (this.board()[point.floor][point.y]?.[point.x].isVisited) {
+            return true;
         }
 
         //If any of the adjacent Tiles is visited, it's a valid Tile.
