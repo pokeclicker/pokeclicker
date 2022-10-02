@@ -84,8 +84,8 @@ class DungeonMap {
     }
 
     public showChestTiles(): void {
-        for (let i = 0; i < this.board().length; i++) {
-            for (let j = 0; j < this.board()[i].length; j++) {
+        for (let i = 0; i < this.board()[this.playerPosition().floor].length; i++) {
+            for (let j = 0; j < this.board()[this.playerPosition().floor][i].length; j++) {
                 if (this.board()[this.playerPosition().floor][i][j].type() == GameConstants.DungeonTile.chest) {
                     this.board()[this.playerPosition().floor][i][j].isVisible = true;
                 }
@@ -94,8 +94,8 @@ class DungeonMap {
     }
 
     public showAllTiles(): void {
-        for (let i = 0; i < this.board().length; i++) {
-            for (let j = 0; j < this.board()[i].length; j++) {
+        for (let i = 0; i < this.board()[this.playerPosition().floor].length; i++) {
+            for (let j = 0; j < this.board()[this.playerPosition().floor][i].length; j++) {
                 this.board()[this.playerPosition().floor][i][j].isVisible = true;
             }
         }

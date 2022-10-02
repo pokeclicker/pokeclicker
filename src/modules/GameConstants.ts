@@ -147,6 +147,7 @@ export enum DungeonTile {
     enemy,
     chest,
     boss,
+    ladder,
 }
 
 // Held item chance
