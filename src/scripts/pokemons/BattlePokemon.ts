@@ -57,37 +57,7 @@ class BattlePokemon implements EnemyPokemonInterface {
     }
 
     public defeat(trainer = false): void {
-        GameHelper.incrementObservable(App.game.statistics.pokemonDefeated[this.id]);
-        GameHelper.incrementObservable(App.game.statistics.totalPokemonDefeated);
-        // Gender Statistics
-        if (this.gender === GameConstants.GENDER_MALE) {
-            GameHelper.incrementObservable(App.game.statistics.malePokemonDefeated[this.id]);
-            GameHelper.incrementObservable(App.game.statistics.totalMalePokemonDefeated);
-        }
-        else if (this.gender === GameConstants.GENDER_FEMALE) {
-            GameHelper.incrementObservable(App.game.statistics.femalePokemonDefeated[this.id]);
-            GameHelper.incrementObservable(App.game.statistics.totalFemalePokemonDefeated);
-        }
-        else if (this.gender === GameConstants.NO_GENDER) {
-            GameHelper.incrementObservable(App.game.statistics.totalGenderlessPokemonDefeated);
-        }
-
-        if (this.shiny) {
-            GameHelper.incrementObservable(App.game.statistics.shinyPokemonDefeated[this.id]);
-            GameHelper.incrementObservable(App.game.statistics.totalShinyPokemonDefeated);
-            // Gender Statistics
-            if (this.gender === GameConstants.GENDER_MALE) {
-                GameHelper.incrementObservable(App.game.statistics.malePokemonDefeated[this.id]);
-                GameHelper.incrementObservable(App.game.statistics.totalMalePokemonDefeated);
-            }
-            else if (this.gender === GameConstants.GENDER_FEMALE) {
-                GameHelper.incrementObservable(App.game.statistics.femalePokemonDefeated[this.id]);
-                GameHelper.incrementObservable(App.game.statistics.totalFemalePokemonDefeated);
-            }
-            else if (this.gender === GameConstants.NO_GENDER) {
-                GameHelper.incrementObservable(App.game.statistics.totalGenderlessPokemonDefeated);
-            }
-        }
+        PokemonHelper.incrementPokemonStatistics(this.id, GameConstants.STATISTIC_DEFEATED, this.shiny, this.gender);
 
         if (this.reward.amount > 0) {
             App.game.wallet.addAmount(this.reward);

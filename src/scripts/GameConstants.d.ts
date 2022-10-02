@@ -619,4 +619,10 @@ namespace GameConstants {
     declare const NO_GENDER;
     declare const GENDER_MALE;
     declare const GENDER_FEMALE;
+
+    // Pokemon Statistics
+    declare const STATISTIC_CAPTURED;
+    declare const STATISTIC_DEFEATED;
+    declare const STATISTIC_ENCOUNTERED;
+    declare const STATISTIC_HATCHED;
 }

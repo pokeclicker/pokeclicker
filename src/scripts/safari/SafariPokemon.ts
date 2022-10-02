@@ -54,31 +54,9 @@ class SafariPokemon implements PokemonInterface {
         this.type2 = data.type2;
         this.shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SAFARI);
         this.gender = PokemonFactory.generateGender(data.gender.ratio, data.gender.type);
-        GameHelper.incrementObservable(App.game.statistics.pokemonEncountered[this.id]);
-        GameHelper.incrementObservable(App.game.statistics.totalPokemonEncountered);
-        // Gender Statistics
-        if (this.gender === GameConstants.GENDER_MALE) {
-            GameHelper.incrementObservable(App.game.statistics.malePokemonEncountered[this.id]);
-            GameHelper.incrementObservable(App.game.statistics.totalMalePokemonEncountered);
-        }
-        else if (this.gender === GameConstants.GENDER_FEMALE) {
-            GameHelper.incrementObservable(App.game.statistics.femalePokemonEncountered[this.id]);
-            GameHelper.incrementObservable(App.game.statistics.totalFemalePokemonEncountered);
-        }
+        PokemonHelper.incrementPokemonStatistics(this.id, GameConstants.STATISTIC_ENCOUNTERED, this.shiny, this.gender);
         // Shiny
         if (this.shiny) {
-            GameHelper.incrementObservable(App.game.statistics.shinyPokemonEncountered[this.id]);
-            GameHelper.incrementObservable(App.game.statistics.totalShinyPokemonEncountered);
-            // Gender Statistics
-            if (this.gender === GameConstants.GENDER_MALE) {
-                GameHelper.incrementObservable(App.game.statistics.shinyMalePokemonEncountered[this.id]);
-                GameHelper.incrementObservable(App.game.statistics.totalShinyMalePokemonEncountered);
-            }
-            else if (this.gender === GameConstants.GENDER_FEMALE) {
-                GameHelper.incrementObservable(App.game.statistics.shinyFemalePokemonEncountered[this.id]);
-                GameHelper.incrementObservable(App.game.statistics.totalShinyFemalePokemonEncountered);
-            }
-
             Notifier.notify({
                 message: `✨ You encountered a shiny ${name}! ✨`,
                 type: NotificationConstants.NotificationOption.warning,

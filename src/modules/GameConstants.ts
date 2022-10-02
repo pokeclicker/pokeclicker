@@ -1585,3 +1585,9 @@ export const TEXT_FEMALE = '<i class="gender-icon-female">♀</i>'; // If Bootst
 export const NO_GENDER = 0;
 export const GENDER_MALE = 1;
 export const GENDER_FEMALE = 2;
+
+// Pokemon Statistics
+export const STATISTIC_CAPTURED = 'Captured';
+export const STATISTIC_DEFEATED = 'Defeated';
+export const STATISTIC_ENCOUNTERED = 'Encountered';
+export const STATISTIC_HATCHED = 'Hatched';
