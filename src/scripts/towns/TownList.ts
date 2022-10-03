@@ -4580,7 +4580,7 @@ const SlumberingHop2 = new NPC('Hop', [
     'So, do you think... Would you be up for one more battle?',
 ], {
     image: 'assets/images/temporaryBattle/Hop.png',
-    requirement: new MultiRequirement([new QuestLineStartedCompletedRequirement('Sword and Shield', 0), new QuestLineStepCompletedRequirement('Sword and Shield', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Sword and Shield', 0), new QuestLineStepCompletedRequirement('Sword and Shield', 1, GameConstants.AchievementOption.less)]),
 });
 
 const SordwardShielbert1 = new NPC('Sordward & Shielbert', [
@@ -4594,7 +4594,7 @@ const SordwardShielbert1 = new NPC('Sordward & Shielbert', [
     'Oh, you want us to return them? Then perhaps we should settle this with a battle?',
 ], {
     image: 'assets/images/temporaryBattle/Sordward & Shielbert.png',
-    requirement: new MultiRequirement([new QuestLineStartedCompletedRequirement('Sword and Shield', 1), new QuestLineStepCompletedRequirement('Sword and Shield', 3, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Sword and Shield', 1), new QuestLineStepCompletedRequirement('Sword and Shield', 3, GameConstants.AchievementOption.less)]),
 });
 
 const SordwardShielbert2 = new NPC('Sordward & Shielbert', [
@@ -4603,7 +4603,7 @@ const SordwardShielbert2 = new NPC('Sordward & Shielbert', [
     'You wish to keep them from us? No matter. This time we\'ve brought much stronger Pokémon to thoroughly trounce you with!',
 ], {
     image: 'assets/images/temporaryBattle/Sordward & Shielbert.png',
-    requirement: new MultiRequirement([new QuestLineStartedCompletedRequirement('Sword and Shield', 6), new QuestLineStepCompletedRequirement('Sword and Shield', 8, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Sword and Shield', 6), new QuestLineStepCompletedRequirement('Sword and Shield', 8, GameConstants.AchievementOption.less)]),
 });
 
 const SordwardShielbert3 = new NPC('Sordward & Shielbert', [
@@ -4618,7 +4618,7 @@ const SordwardShielbert3 = new NPC('Sordward & Shielbert', [
     'Ahem... If you want to take the lift up, you\'ll have to defeat us! This time we will show you the opulent Pokémon we have raised explicity for this battle!',
 ], {
     image: 'assets/images/temporaryBattle/Sordward & Shielbert.png',
-    requirement: new MultiRequirement([new QuestLineStartedCompletedRequirement('Sword and Shield', 13), new QuestLineStepCompletedRequirement('Sword and Shield', 15, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Sword and Shield', 13), new QuestLineStepCompletedRequirement('Sword and Shield', 15, GameConstants.AchievementOption.less)]),
 });
 
 const SordwardShielbert4 = new NPC('Sordward & Shielbert', [
@@ -4627,7 +4627,7 @@ const SordwardShielbert4 = new NPC('Sordward & Shielbert', [
     'W-wait! D-don\'t attack us! Go into town, and sow as much destruction as you can!',
 ], {
     image: 'assets/images/temporaryBattle/Sordward & Shielbert.png',
-    requirement: new MultiRequirement([new QuestLineStartedCompletedRequirement('Sword and Shield', 15), new QuestLineStepCompletedRequirement('Sword and Shield', 17, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Sword and Shield', 15), new QuestLineStepCompletedRequirement('Sword and Shield', 17, GameConstants.AchievementOption.less)]),
 });
 
 const Piers = new NPC('Piers', [
@@ -4635,7 +4635,7 @@ const Piers = new NPC('Piers', [
     'Plus it looks like those Pokémon are waiting for you, now they\'re calmed down an\' all.',
 ], {
     image: 'assets/images/gymLeaders/Piers.png',
-    requirement: new MultiRequirement([new QuestLineStartedCompletedRequirement('Sword and Shield', 17), new QuestLineStepCompletedRequirement('Sword and Shield', 19, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Sword and Shield', 17), new QuestLineStepCompletedRequirement('Sword and Shield', 19, GameConstants.AchievementOption.less)]),
 });
 
 const SouthGalarRoamerNPC = new RoamerNPC('Professor Sonia', [

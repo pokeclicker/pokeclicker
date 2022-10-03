@@ -1250,13 +1250,13 @@ class QuestLineHelper {
         darkestDayQuestLine.addQuest(talktoRoseBroadcast);
 
         const talktoHop2 = new TalkToNPCQuest(WyndonHop, 'Talk to Hop in Wyndon Stadium.');
-        swordShieldQuestLine.addQuest(talktoHop2);
+        darkestDayQuestLine.addQuest(talktoHop2);
 
         const clearSlumberingWeald = new CustomQuest(1, 0, 'Chairman Rose has interrupted your fight with Leon and brought about the Darkest Day. Clear Slu', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Energy Plant')]());
         darkestDayQuestLine.addQuest(clearSlumberingWeald);
 
-        const talktoHop2 = new TalkToNPCQuest(SlumberingHop1, 'Talk to Hop in Slumbering Weald Shrine.');
-        darkestDayQuestLine.addQuest(talktoHop2);
+        const talktoHop3 = new TalkToNPCQuest(SlumberingHop1, 'Talk to Hop in Slumbering Weald Shrine.');
+        darkestDayQuestLine.addQuest(talktoHop3);
 
         const clearEnergyPlant = new CustomQuest(1, 0, 'Unfortunately, all you found at the Slumbering Weald was a rusty sword and shield. Go to the Energy Plant in Hammerlocke to put an end to Chairman Rose\'s plans!', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Energy Plant')]());
         darkestDayQuestLine.addQuest(clearEnergyPlant);
@@ -1289,8 +1289,8 @@ class QuestLineHelper {
     public static createSwordShieldQuestLine() {
         const swordShieldQuestLine = new QuestLine('Sword and Shield', 'Stop the weapons from making a mess.', new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion), GameConstants.BulletinBoards.Galar);
 
-        const talktoHop2 = new TalkToNPCQuest(SlumberingHop2, 'Talk to Hop in the Slumbering Weald.');
-        swordShieldQuestLine.addQuest(talktoHop2);
+        const talktoHop4 = new TalkToNPCQuest(SlumberingHop2, 'Talk to Hop in the Slumbering Weald.');
+        swordShieldQuestLine.addQuest(talktoHop4);
 
         const clearHop8 = new CustomQuest(1, 0, 'Hop wants to fight you one more time at Slumbering Weald Shrine.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Hop8')]());
         swordShieldQuestLine.addQuest(clearHop8);
@@ -1369,7 +1369,7 @@ class QuestLineHelper {
             ], 'Zacian and Zamazenta are rampaging in Energy Plant. Defeat them!'));
 
         const talktoPiers = new TalkToNPCQuest(Piers, 'Talk to Piers in the Energy Plant.');
-        swordShieldQuestLine.addQuest(Piers);
+        swordShieldQuestLine.addQuest(talktoPiers);
 
         const catchZacian = new CustomQuest(1, 0, 'Catch Zacian.', () => App.game.statistics.pokemonCaptured[pokemonMap['Zacian (Battle Hero)'].id](), 0);
         const catchZamazenta = new CustomQuest(1, 0, 'Catch Zamazenta.', () => App.game.statistics.pokemonCaptured[pokemonMap['Zamazenta (Battle Hero)'].id](), 0);
