@@ -1354,7 +1354,7 @@ TemporaryBattleList.Eternatus = new TemporaryBattle(
     'Eternatus',
     [new GymPokemon('Eternatus', 1454990842, 60)],
     '<i>You defeated Eternatus, but it looks like it\'s not over yet!</i>',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Energy Plant'))],
+    [new QuestLineStepCompletedRequirement('The Darkest Day', 16)],
     undefined,
     {
         hideTrainer: true,
@@ -1384,12 +1384,7 @@ TemporaryBattleList.Hop8 = new TemporaryBattle(
         new GymPokemon('Inteleon', 375642238, 60),
     ],
     'I didn\'t expect there to be such a gap between you and me, mate...',
-    [
-        new MultiRequirement([
-            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Slumbering Weald Shrine')),
-            new QuestLineStartedRequirement('Sword and Shield'),
-        ]),
-    ],
+    [new QuestLineStepCompletedRequirement('Sword and Shield', 0)],
     undefined,
     {
         displayName: 'Pokémon Trainer Hop',
@@ -1405,7 +1400,7 @@ TemporaryBattleList.Sordward1 = new TemporaryBattle(
         new GymPokemon('Bisharp', 457925774, 60),
     ],
     'Oh... How can this be? My...my Pokémon...',
-    [new TemporaryBattleRequirement('Hop8')],
+    [new QuestLineStepCompletedRequirement('Sword and Shield', 2)],
     undefined,
     {
         displayName: 'Pokémon Trainer Sordward',
@@ -1421,7 +1416,7 @@ TemporaryBattleList.Shielbert1 = new TemporaryBattle(
         new GymPokemon('Klinklang', 457925774, 60),
     ],
     'Oh... How can this be? My...my Pokémon...',
-    [new TemporaryBattleRequirement('Hop8')],
+    [new QuestLineStepCompletedRequirement('Sword and Shield', 2)],
     undefined,
     {
         displayName: 'Pokémon Trainer Shielbert',
@@ -1432,10 +1427,7 @@ TemporaryBattleList['Rampaging Tsareena'] = new TemporaryBattle(
     'Rampaging Tsareena',
     [new GymPokemon('Tsareena', 1757548771, 60)],
     '<i>The Rampaging Tsareena fainted.</i>',
-    [
-        new TemporaryBattleRequirement('Sordward1'),
-        new TemporaryBattleRequirement('Shielbert1'),
-    ],
+    [new QuestLineStepCompletedRequirement('Sword and Shield', 3)],
     undefined,
     {
         hideTrainer: true,
@@ -1464,15 +1456,15 @@ TemporaryBattleList['Rampaging Torkoal'] = new TemporaryBattle(
 TemporaryBattleList['Sordward & Shielbert'] = new TemporaryBattle(
     'Sordward & Shielbert',
     [
-        new GymPokemon('Golisopod', 99102160, 62),
-        new GymPokemon('Bronzong', 99102160, 62),
-        new GymPokemon('Doublade', 99102160, 62),
-        new GymPokemon('Falinks', 99102160, 62),
-        new GymPokemon('Bisharp', 102105255, 62),
-        new GymPokemon('Klinklang', 102105255, 62),
+        new GymPokemon('Golisopod', 298548951, 62),
+        new GymPokemon('Bronzong', 298548951, 62),
+        new GymPokemon('Doublade', 298548951, 62),
+        new GymPokemon('Falinks', 298548951, 62),
+        new GymPokemon('Bisharp', 310734622, 62),
+        new GymPokemon('Klinklang', 310734622, 62),
     ],
     'Quite the vexing predicament indeed, surely this must be some kind of mistake...',
-    [new TemporaryBattleRequirement('Rampaging Torkoal')]
+    [new QuestLineStepCompletedRequirement('Sword and Shield', 7)]
 );
 TemporaryBattleList['Rampaging Conkeldurr'] = new TemporaryBattle(
     'Rampaging Conkeldurr',
@@ -1502,7 +1494,7 @@ TemporaryBattleList['Gym Leader Bede'] = new TemporaryBattle(
         new GymPokemon('Galarian Rapidash', 594371034, 62),
         new GymPokemon('Hatterene', 613544294, 63),
     ],
-    'Thank you for the battle. I can now accept you as the Champion. It\'s painful to admit, but I\'ve come to realise a few of my weaknesses. But I\'ll keep getting stronger.',
+    'Thank you for the battle. I can now accept you as the Champion. It\'s painful to admit, but I\'ve come to realise a few of my weaknesses. But I\'ll keep getting stronger. I\'ll reach the pinnacle of what Fairy types can do.',
     [
         new TemporaryBattleRequirement('Rampaging Conkeldurr'),
         new TemporaryBattleRequirement('Rampaging Dusknoir'),
@@ -1562,7 +1554,7 @@ TemporaryBattleList.Sordward2 = new TemporaryBattle(
         new GymPokemon('Bisharp', 572641343, 64),
     ],
     'Oho... My noble Pokémon...',
-    [new TemporaryBattleRequirement('Rampaging Haxorus')],
+    [new QuestLineStepCompletedRequirement('Sword and Shield', 14)],
     undefined,
     {
         displayName: 'Pokémon Trainer Sordward',
@@ -1578,7 +1570,7 @@ TemporaryBattleList.Shielbert2 = new TemporaryBattle(
         new GymPokemon('Klinklang', 572641343, 64),
     ],
     'Oho... My noble Pokémon...',
-    [new TemporaryBattleRequirement('Rampaging Haxorus')],
+    [new QuestLineStepCompletedRequirement('Sword and Shield', 14)],
     undefined,
     {
         displayName: 'Pokémon Trainer Shielbert',
@@ -1589,10 +1581,7 @@ TemporaryBattleList['Rampaging Zacian'] = new TemporaryBattle(
     'Rampaging Zacian',
     [new GymPokemon('Zacian (Crowned Sword)', 2357932001, 70)],
     '<i>Zacian fainted.</i>',
-    [
-        new TemporaryBattleRequirement('Sordward2'),
-        new TemporaryBattleRequirement('Shielbert2'),
-    ],
+    [new QuestLineStepCompletedRequirement('Sword and Shield', 16)],
     undefined,
     {
         hideTrainer: true,
@@ -1603,10 +1592,7 @@ TemporaryBattleList['Rampaging Zamazenta'] = new TemporaryBattle(
     'Rampaging Zamazenta',
     [new GymPokemon('Zamazenta (Crowned Shield)', 2357932001, 70)],
     '<i>Zamazenta fainted.</i>',
-    [
-        new TemporaryBattleRequirement('Sordward2'),
-        new TemporaryBattleRequirement('Shielbert2'),
-    ],
+    [new QuestLineStepCompletedRequirement('Sword and Shield', 16)],
     undefined,
     {
         hideTrainer: true,
