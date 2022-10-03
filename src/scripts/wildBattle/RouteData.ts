@@ -2524,7 +2524,7 @@ Routes.add(new RegionRoute(
           new SpecialRoutePokemon(['Cramorant (Gorging)'], new WeatherRequirement([WeatherType.Thunderstorm])),
       ],
     }),
-    [new TemporaryBattleRequirement('Hop 7')],
+    [new QuestLineStepCompletedRequirement('The Darkest Day', 5)],
     undefined,
     GameConstants.GalarSubRegions.NorthGalar
 ));

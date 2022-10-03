@@ -1626,8 +1626,14 @@ GymList['Stow-on-Side1'] = new Gym(
     ],
     BadgeEnums.Galar_Fighting,
     80000,
-    'Your strength nearly made me want to turn and run in my bare feet',
-    [new TemporaryBattleRequirement('Hop 5')]
+    'Your strength nearly made me want to turn and run in my bare feet.',
+    [new TemporaryBattleRequirement('Hop5')],
+    // Starts Galar story quest if both Stow-on-Side gyms are defeated.
+    () => {
+        if (App.game.badgeCase.hasBadge(BadgeEnums.Galar_Ghost)) {
+            App.game.quests.getQuestLine('The Darkest Day').beginQuest();
+        }
+    }
 );
 GymList['Stow-on-Side2'] = new Gym(
     'Allister',
@@ -1641,7 +1647,13 @@ GymList['Stow-on-Side2'] = new Gym(
     BadgeEnums.Galar_Ghost,
     80000,
     'Maybe my mask... kept me from seeing just how strong you really are...',
-    [new TemporaryBattleRequirement('Hop 5')]
+    [new TemporaryBattleRequirement('Hop5')],
+    // Starts Galar story quest if both Stow-on-Side gyms are defeated.
+    () => {
+        if (App.game.badgeCase.hasBadge(BadgeEnums.Galar_Fighting)) {
+            App.game.quests.getQuestLine('The Darkest Day').beginQuest();
+        }
+    }
 );
 GymList.Ballonlea = new Gym(
     'Opal',
@@ -1766,7 +1778,6 @@ GymList['Elite Trainer Hop'] = new Gym(
     // [new GymPokemon('Cinderace', 137833678, 60)]
 );
 // Galar Champion
-//TODO: rewards/hp rebalance
 GymList['Champion Leon'] = new Champion(
     'Leon',
     'Champion Leon',
@@ -1799,7 +1810,7 @@ GymList['Champion Leon'] = new Champion(
     ]
 );
 
-// Armor + crown gyms
+// Armor + Crown gyms
 GymList['Elite Gym Leader Klara'] = new Gym(
     'Klara',
     'Elite Gym Leader Klara',
@@ -1813,12 +1824,7 @@ GymList['Elite Gym Leader Klara'] = new Gym(
     BadgeEnums.Elite_ArmorPoison,
     150000,
     'Aww, come on! What a drag! But...I guess it was also kinda fun!',
-    [
-        new MultiRequirement([
-            new ObtainedPokemonRequirement(pokemonMap['Urshifu (Single Strike)']),
-            new ObtainedPokemonRequirement(pokemonMap['Urshifu (Rapid Strike)']),
-        ]),
-    ]
+    [new QuestLineCompletedRequirement('The Dojo\'s Armor')]
 );
 GymList['Elite Gym Leader Avery'] = new Gym(
     'Avery',
@@ -1833,12 +1839,7 @@ GymList['Elite Gym Leader Avery'] = new Gym(
     BadgeEnums.Elite_ArmorPsychic,
     150000,
     'More! I require more! Show me your Stored Power!',
-    [
-        new MultiRequirement([
-            new ObtainedPokemonRequirement(pokemonMap['Urshifu (Single Strike)']),
-            new ObtainedPokemonRequirement(pokemonMap['Urshifu (Rapid Strike)']),
-        ]),
-    ]
+    [new QuestLineCompletedRequirement('The Dojo\'s Armor')]
 );
 GymList['Elite Dojo Matron Honey'] = new Gym(
     'Honey',

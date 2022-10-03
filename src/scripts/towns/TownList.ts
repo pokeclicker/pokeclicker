@@ -326,7 +326,7 @@ const CeruleanEusine = new NPC('Eusine', [
 
 const VermilionFanClubChairman = new NPC('Fan Club Chairman', [
     'You won’t find a Pokémon as wonderful as my favorite Rapidash in those Typed Eggs in the shops, but they might hatch rare Pokémon you can’t find anywhere else!',
-]);
+], {image: 'assets/images/npcs/Gentleman (Gen 4).png'});
 
 const VermilionShardApprentice = new NPC('Shard Apprentice', [
     'Are you looking for some Shards? You can find them in many dungeons! Except in Viridan Forest and Mt. Moon. I\'ve never found any Shards there for some reason.',
@@ -1300,6 +1300,7 @@ const IlexForestShrine1 = new NPC('Investigate the Shrine', [
     '<i>Something strange is going on here. The air seems to curve around itself. You feel like you\'re here, but also not here at the same time.</i>',
     '<i>No sign of Celebi, but you do see a strange looking Pichu approaching.</i>',
 ], {
+    image: 'assets/images/npcs/other/Ilex Forest.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Unfinished Business', 5), new QuestLineStepCompletedRequirement('Unfinished Business', 7, GameConstants.AchievementOption.less)]),
 });
 
@@ -1308,6 +1309,7 @@ const IlexForestShrine2 = new NPC('Investigate the Shrine', [
     '<i>Celebi is here! It seems to want to play with you, but every time you approach it backs off. It\'s luring you deeper into the forest!</i>',
     '<i>What would the professor do?</i>',
 ], {
+    image: 'assets/images/npcs/other/Ilex Forest.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Unfinished Business', 11), new QuestLineStepCompletedRequirement('Unfinished Business', 13, GameConstants.AchievementOption.less)]),
 });
 
@@ -1380,9 +1382,11 @@ const BlackthornJohtoRoamerNPC = new RoamerNPC('Pokéfan Trevor', [
 const TohjoFallsCelebiTimeDistortion = new NPC('Investigate the Time Distortion', [
     '<i>You are experiencing that same feeling again. Like you\'re not really here.</i>',
     '<i>A man sits in the back of the cave. He is listening to a portable radio.</i>',
+    '<img src="assets/images/temporaryBattle/Rocket Boss Giovanni.png">',
     '...I don\'t know why you have come here. Anyway, I have to warn you that this is not a place for kids like you.',
     'You have a certain look... You\'re the kid who stood in front of me in Viridian City! I\'m on my way to Goldenrod City to answer the call and join my team. Are you going to get in my way?',
 ], {
+    image: 'assets/images/npcs/other/Tohjo Falls.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Unfinished Business', 8), new QuestLineStepCompletedRequirement('Unfinished Business', 10, GameConstants.AchievementOption.less), new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Tohjo Falls'))]),
 });
 
@@ -2863,7 +2867,7 @@ const IcirrusFanClubChairman = new NPC('Fan Club Chairman', [
     'The legendary dragons of Dragonspiral Tower are said to embody these very concepts. They sometimes leave a piece of their DNA behind after a battle.',
     'If you have DNA splicers, perhaps you can make Kyurem whole again.',
     'I\'ve never seen it, but supposedly it works just like any other evolution item.',
-]);
+], {image: 'assets/images/trainers/Gentleman.png'});
 
 const P2LaboratoryColress = new NPC('Colress', [
     'So you defeated Ghetsis. Interesting. You must be a very strong trainer.',
@@ -3862,8 +3866,8 @@ const AetherParadiseAlolaRoamerNPC = new RoamerNPC('Assistant Branch Chief Wicke
 
 const ProfKukui = new ProfNPC('Prof. Kukui',
     GameConstants.Region.alola,
-    'TODO',
-    'TODO',
+    'This is truly an astounding feat! Congratulations on completing the Pokédex!',
+    'With that, you can stamp your ticket to the noble Galar region!',
     'assets/images/npcs/Professor Kukui.png');
 
 const RoadsideMotelLooker1 = new NPC('Looker', [
@@ -4397,40 +4401,259 @@ const FreezingtonShop = new Shop([
     ItemList.Ultraball,
 ]);
 
-//Galar NPC
 
+//Galar NPCs
 
 const PostwickMum = new NPC('Mum', [
-    'Don\'t go too far into the Slumbering Weald.',
-    'I\'ve heard there are some very strong Pokemon in there.',
+    'Don’t go too far into the Slumbering Weald.',
+    'I’ve heard there are some very strong Pokémon in there.',
     'Only those who beat the champion are strong enough to face them!',
 ]);
-const RailStaff = new NPC('Rail Staff', [
+
+const WedgehurstRailStaff = new NPC('Rail Staff', [
     'There are some areas around Galar that you can only reach after beating the Champion.',
-    'One is an island paradise, and the other a freezing wasteland.',
-    'I\m sure if you go to these places you\'ll find many unique and powerful Pokémon!',
+    'One is an island paradise, the other a freezing wasteland.',
+    'I’m sure if you go to these places you’ll find many unique and powerful Pokémon!',
 ], {image: 'assets/images/trainers/Rail Staff.png'});
-const Archeologist = new NPC('Archeologist', [
-    'I\'ve been studying the Galarian form of Yamask.',
-    'It seems they do not evolve into Galarian Cofagrigus, but a completely different Pokémon instead',
-    'For some mysterious reason, they only evolve when trained in a specific area of the wild area known as the Dusty Bowl.',
-], {image: 'assets/images/trainers/Ruin Maniac.png'});
+
+const AssistantHenry = new NPC('Assistant Henry', [
+    'There are many Pokémon in Galar that I heard look completely different in other regions of the world! They can also evolve in unique ways!',
+    'I know that reckless one, Linoone, will only evolve during the night time here. But, I also think I’ve seen its evolution wandering across the lake if you have a way to cross.',
+]);
+
+const BattleCafeMaster = new NPC('Battle Café Master', [
+    'Milcery can evolve when you spin around with it, while treating it to a Sweet.',
+    'For example, you can whip up a Vanilla Alcremie, by spinning clockwise for less than 5 seconds, during the day. Piece of cake! There’s a unique form for each Sweet under this circumstance, so bake it till you make it!',
+    'There are more tiers to Alcremie than I can count. Mix up the direction, duration, time of day, and the given Sweet to disover all the flavours there are to find.',
+    'I will suggest that you only do 3 spins a day if you don’t want to end up sick!',
+    'Stop by the Battle Café, we sell all the Sweets you’ll need!',
+], {image: 'assets/images/npcs/BattleCafeMaster.png'});
+
+const MotostokeArtist = new NPC('Artist Duncan', [
+    'My Kantonian Farfetch’d would never evolve no matter how many fresh Leeks I gave it.',
+    'Lo and behold, here in Galar the Farfetch’d wield thick, tough leeks for battle!',
+    'Once my Galarian Farfetch’d was holding a Leek.. Blimey, I was surprised how quickly he transformed into a noble ally! With the Leek growing into a mighty stalk for battle!',
+], {image: 'assets/images/npcs/Artist (Gen 8).png'});
+
+const TurffieldCook = new NPC('Cook Stuart', [
+    'I love Sweet and Tart Apples! Oh, this is Applin! He isn’t a snack, but helps me make all sorts of dishes!',
+    'Applin absolutely loves Sweet and Tart treats.',
+    'But, I could never give Applin a Sweet or Tart Apple, that just seems so... wrong...',
+    'I can’t be missing out on much anyways, what could be more perfect than my Applin!',
+], { image: 'assets/images/trainers/Cook.png' });
+
 const Meteorologist = new NPC('Meteorologist', [
     'The Pokémon in the Wild Area are very finicky, and many of them only appear in certain weathers.',
     'I\'ve also heard that the Pokémon in the Isle of Armor to the East, and the Crown Tundra to the South, are also like this.',
     'There are even some Pokémon, namely Cramorant and Eiscue, that only appear in certain forms depending on weather.',
 ]);
+
+const HammerlockeHiker = new NPC('Hiker Donald', [
+    'Have you spotted a blue bird walking around with an Arrokuda in its throat? It’s quite a daft Pokémon, but it sure is hungry! I guess if it trains near water it tries to swallow Arrokudas, but they always get stuck in its throat.',
+    'My mate told me a story of a Pikachu getting lodged in the gluttonous bird’s gullet while it was gorging in a thunderstorm! But that sounds ridiculous! How would it not be bothered by the big rat in its throat? It would drive me mad.',
+], {image: 'assets/images/npcs/Hiker (Gen 8).png'});
+
+const AncientMural1 = new NPC('Ancient Mural', [
+    '<i>It’s Stow-on-Side’s famous mural.</i>',
+    '<i>It’s said to be a very deep work of art...</i>',
+], {
+    image: 'assets/images/npcs/other/Ancient Mural.png',
+    requirement: new QuestLineStepCompletedRequirement('The Darkest Day', 1, GameConstants.AchievementOption.less),
+});
+
+const AncientMural2 = new NPC('Ancient Mural Ruins', [
+    '<i>It’s the statues that were hidden behind Stow-on-Side’s famous mural.</i>',
+    '<i>They depict two heroes and two Pokémon.</i>',
+], {
+    image: 'assets/images/npcs/other/Ancient Mural Ruins.png',
+    requirement: new QuestLineStepCompletedRequirement('The Darkest Day', 1),
+});
+
+const StowonSideSonia = new NPC ('Sonia', [
+    'Not a brilliant turn of events, but the ruins were brought into the light for us to see...',
+    'What does this tell us about Galar’s legends? More than any hero, there’s those things that appear to be Pokémon that stand out!',
+    'Not just that, but those Pokémon appear to be holding a sword and shield as if they were using them!',
+    'More than any statue of a hero or old tapestry, these ruins made in truly ancient times must show us the real truth.',
+    'Seems like at some point in history the sword and shield were combined with the two actual Pokémon and treated as the same thing...',
+    'Two young heroes... The sword and shield were actually Pokémon... But why would the truth of these ruins be hidden when their stories were depicted in artwork?',
+], {
+    image: 'assets/images/npcs/Sonia.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Darkest Day', 1), new QuestLineStepCompletedRequirement('The Darkest Day', 3, GameConstants.AchievementOption.less)]),
+});
+
+const Archaeologist = new NPC('Archaeologist', [
+    'I\'ve been studying the Galarian form of Yamask.',
+    'It seems they do not evolve into Galarian Cofagrigus, but a completely different Pokémon instead.',
+    'For some mysterious reason, they only evolve when trained in a specific area of the wild area known as the Dusty Bowl.',
+], { image: 'assets/images/trainers/Ruin Maniac.png' });
+
+const HerosBath = new NPC('Hero’s Bath', [
+    '<i>The ancient Hero’s Bath.</i>',
+    '<i>They say this is where the two heroes came to soothe their wounds after the battle to bring down that evil presence, long ago.</i>',
+], {image: 'assets/images/npcs/other/HerosBath.png'});
+
+const CirchesterHop = new NPC('Hop', [
+    'Based on the statues the sword and shield must have actually been two Pokémon, right?',
+    'You remember the Pokémon we met in the Slumbering Weald?',
+    'Do you think...it could’ve been one of them? I mean the sword or the shield Pokémon?',
+    'Perhaps when their duty was completed, they went into some kind of sleep?',
+], {
+    image: 'assets/images/temporaryBattle/Hop.png',
+    requirement: new MultiRequirement([new TemporaryBattleRequirement('Hop7'), new QuestLineStepCompletedRequirement('The Darkest Day', 6, GameConstants.AchievementOption.less)]),
+});
+
+const CirchesterSonia = new NPC('Sonia', [
+    'Hmm... Who exactly were the heroes that bathed here?',
+    'Nowadays only Pokémon really use the Hero’s Bath...',
+    'I think I’ll have to look more into the history of the Slumbering Weald.',
+], {
+    image: 'assets/images/npcs/Sonia.png',
+    requirement: new MultiRequirement([new TemporaryBattleRequirement('Hop7'), new QuestLineStepCompletedRequirement('The Darkest Day', 6, GameConstants.AchievementOption.less)]),
+});
+
+const CirchesterGuitarist = new NPC('Guitarist Justin', [
+    'I caught this Snom on Steamdrift Way and we’ve become really good mates.',
+    'I thought that friendship was all Snom needed to evolve, but I kept trying to give it a Soothe Bell during the day and nothing happened!',
+    'I’m too busy playing gigs to scamper around with Snom in the evening!',
+], {image: 'assets/images/trainers/Guitarist (male).png'});
+
 const TeamYellGrunts = new NPC('Team Yell Grunts', [
-    'Our Marnie\'s Morpeko is so cute, don\'tcha think?',
-    'When it\'s hungry, though, it gets so angry it changes forms',
+    'Our Marnie’s Morpeko is so cute, don’tcha think?',
+    'When it’s hungry, though, it gets so angry it changes forms.',
     'If you want to catch it in that form, you would probably be best trying to attract it with a berry that electric Pokémon like.',
 ], {image: 'assets/images/trainers/Team Yell Grunts.png'});
+
+const RoseBroadcast = new NPC('Broadcast of Chairman Rose', [
+    'Hello there, Leon! Just letting you know...',
+    'I think it\'s time I brought about the Darkest Day. For the sake of Galar\'s future, of course!',
+    'But I\'m in a bit of a pickle. The energy released by the Darkest Day is too much for us to contain.',
+    'I\'m sorry it\'s come to this. But it\'s you who forced my hand, Leon. You refused to listen!',
+], {
+    image: 'assets/images/trainers/Macro Cosmos (rose).png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Darkest Day', 10), new QuestLineStepCompletedRequirement('The Darkest Day', 12, GameConstants.AchievementOption.less)]),
+});
+
+const WyndonHop = new NPC('Hop', [
+    'That video stream... That was from Hammerlocke Stadium, right? What in the world did the chairman do...?"',
+    'I want to help my brother! I\'ve got to! But I can\'t even manage to beat you, so what sort of help could I ever be...?',
+    'Hold the phone... The chairman was talking about the Darkest Day. That\'s the thing where the sky went all dark once, ages and ages ago, right? What does he mean, he\'s bringing that about? And where did we even hear that name...?',
+    'Ah! That statue of the hero in Motostoke! Sonia said something back then, didn\'t she... Though it turned out to be wrong, since there were actually two heroes and all that.',
+    'Still! Those two managed to bring an end to the Darkest Day with the sword and shield Pokémon! Sonia thought the Pokémon might still be sleeping somewhere though, right?',
+    'That\'s it! I\'m sure it\'s got to be the Slumbering Weald! Those illusions you tried to fight off that day—they must\'ve been the Pokémon that are supposed to be sleeping there!',
+    'Let\'s go back to the Slumbering Weald! If we\'re lucky, we\'ll find something that can help!',
+], {
+    image: 'assets/images/temporaryBattle/Hop.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Darkest Day', 11), new QuestLineStepCompletedRequirement('The Darkest Day', 13, GameConstants.AchievementOption.less)]),
+});
+
+const SlumberingHop1 = new NPC('Hop', [
+    'Would you take a look at that! Now that\'s something you don\'t see every day... This place definitely feels like the stuff of legend. See that! The sword and the shield! The legends really were true!',
+    'That settles it! We\'re taking the sword and shield. Though...wow, would you look at the state of these things? They seems like they might fall to pieces if you so much as look at \'em funny.',
+    'I don\'t know if these rusty old things will really be able to stop the Darkest Day, but... Well, I guess it can\'t hurt to have them along! Let\'s hope they bring us some good luck!',
+    'Maybe the Pokémon themselves really are still asleep somewhere. So it seems we\'re on our own if we want to go help Lee. This is all the help we\'ve got!',
+], {
+    image: 'assets/images/temporaryBattle/Hop.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Darkest Day', 13), new QuestLineStepCompletedRequirement('The Darkest Day', 15, GameConstants.AchievementOption.less)]),
+});
+
+const EnergyPlantRose = new NPC('Chairman Rose', [
+    'Most impressive! I wouldn\'t expect any less from a challenger endorsed by the strongest Champion ever to grace our beloved Galar region!"',
+    'I really do wish I could have seen the Championship Match between you two. And I\'m terribly sorry to have ruined the whole Gym Challenge and everything!',
+    'It\'s too bad, but it can\'t be helped... In order to solve the energy issue as soon as possible, we awakened Eternatus. But we couldn\'t control it. The Champion came to aid me, even at the cost of abandoning the match. Indeed, just like a knight in shining armor coming to rescue a princess from a dragon!',
+    'I do tend to ramble on, I know. I love to make speeches. But I think I can stop talking now. I think the Champion should have captured Eternatus by now. If you\'re curious, you can take the lift up.',
+    'And I trust you\'ll be going too, right, Hop? I certainly hope losing to me didn\'t discourage you too much. Go on now, both of you! Go see how our Champion is doing!',
+], {
+    image: 'assets/images/trainers/Macro Cosmos (rose).png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Darkest Day', 15), new QuestLineStepCompletedRequirement('The Darkest Day', 17, GameConstants.AchievementOption.less)]),
+});
+
+const Leon = new NPC('Leon', [
+    'My matches are always sold out, but this... I\'ve never seen a crowd this wild!',
+    'Everyone knows what you did for us this week... They know you\'re the one who caught Eternatus and saved the future of the Galar region.',
+    'A real hero, who battled alongside the Legendary Pokémon, Zacian and Zamazenta... I couldn\'t have dreamed of a better challenger to help increase my winning streak!',
+    'Oh... And you\'ve even added Eternatus to your party. The greatest challenger along with the most powerful Pokémon—is that it? Now you\'re really getting me excited',
+    'Now that I\'ve seen just what kind of strength you possess as the greatest of challengers...crushing you into the dirt will show everyone just how strong their Champion truly is!',
+    'Come on, now! Let\'s make this a final match that\'ll go down in Galar\'s history! No! A match that\'ll change Galar forever!',
+    'We\'re gonna have an absolutely champion time!',
+], {
+    image: 'assets/images/gymLeaders/Leon.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Darkest Day', 18), new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion, GameConstants.AchievementOption.less)]),
+});
+
+const SlumberingHop2 = new NPC('Hop', [
+    'Huh? What\'re you doing here in the woods? Nobody ever comes in here, since this is the forest where Zacian and Zamazenta rested. It\'s the best place to do a bit of thinking, since it\'s so quiet and all.',
+    'Oh, but I hadn\'t had the chance to tell you! Congrats on your victory! Honestly... I never thought you\'d manage to beat my brother. The greatest Champion Galar ever had! He was undefeatable till you came around! It\'s actually still pretty hard to believe...',
+    'Really... You\'re amazing. So amazing, maybe, that I don\'t even realize just how amazing you really are!',
+    'So, do you think... Would you be up for one more battle?',
+], {
+    image: 'assets/images/temporaryBattle/Hop.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Sword and Shield', 0), new QuestLineStepCompletedRequirement('Sword and Shield', 1, GameConstants.AchievementOption.less)]),
+});
+
+const SordwardShielbert1 = new NPC('Sordward & Shielbert', [
+    'Well, well, well... I thought I heard someone making some noise over this way!',
+    'I am Sordward!',
+    'I am Shielbert!',
+    'We are the new kings of Galar! We\'re descendents of the first kings!',
+    'More than that, we\'re celebrities!',
+    'Well, well, well! Could these things here be the fabled sword and shield?',
+    'Well, well, well! They certainly are dirty! They must be fake! I fear to touch them with my bare hands.',
+    'Oh, you want us to return them? Then perhaps we should settle this with a battle?',
+], {
+    image: 'assets/images/temporaryBattle/Sordward & Shielbert.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Sword and Shield', 1), new QuestLineStepCompletedRequirement('Sword and Shield', 3, GameConstants.AchievementOption.less)]),
+});
+
+const SordwardShielbert2 = new NPC('Sordward & Shielbert', [
+    'We know all the Wishing Stars that Chairman Rose had gathered are here. We celebrities have an advanced level of insight into such things!',
+    'You noncelebrities are not suited to having such valuable things. Hand them over to us.',
+    'You wish to keep them from us? No matter. This time we\'ve brought much stronger Pokémon to thoroughly trounce you with!',
+], {
+    image: 'assets/images/temporaryBattle/Sordward & Shielbert.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Sword and Shield', 6), new QuestLineStepCompletedRequirement('Sword and Shield', 8, GameConstants.AchievementOption.less)]),
+});
+
+const SordwardShielbert3 = new NPC('Sordward & Shielbert', [
+    'Well, well, well? It seems you have rescued the stadiums from their perils. As expected of the Champion.',
+    'You want to know why we have been forcing those Pokémon to rampage? We did it in order to expose the true nature of Zacian and Zamazenta!',
+    'We have always been revered as the resplendent descendents of the real hero...',
+    'It\'s all because you ruffians had to go and save Galar from Eternatus!',
+    'You said that the real heroes were Pokémon! You just carelessly changed history!',
+    'What does that mean we are? You dare say that our esteemed ancestors were liars?',
+    'It\'s obvious that the old history was better! It was right!',
+    'To suddenly start creating heroes left and right... It\'s complete rubbish!',
+    'Ahem... If you want to take the lift up, you\'ll have to defeat us! This time we will show you the opulent Pokémon we have raised explicity for this battle!',
+], {
+    image: 'assets/images/temporaryBattle/Sordward & Shielbert.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Sword and Shield', 13), new QuestLineStepCompletedRequirement('Sword and Shield', 15, GameConstants.AchievementOption.less)]),
+});
+
+const SordwardShielbert4 = new NPC('Sordward & Shielbert', [
+    'Fwahaheho! We did it! Zacian and Zamazenta came, following after the Rusted Sword and Shield!',
+    'Yes! Expose your true, barbaric, brutish nature...and reveal to us exactly who the false kings are!',
+    'W-wait! D-don\'t attack us! Go into town, and sow as much destruction as you can!',
+], {
+    image: 'assets/images/temporaryBattle/Sordward & Shielbert.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Sword and Shield', 15), new QuestLineStepCompletedRequirement('Sword and Shield', 17, GameConstants.AchievementOption.less)]),
+});
+
+const Piers = new NPC('Piers', [
+    'As expected of the Champion... You took complete control of the situation.',
+    'Plus it looks like those Pokémon are waiting for you, now they\'re calmed down an\' all.',
+], {
+    image: 'assets/images/gymLeaders/Piers.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Sword and Shield', 17), new QuestLineStepCompletedRequirement('Sword and Shield', 19, GameConstants.AchievementOption.less)]),
+});
+
 const SouthGalarRoamerNPC = new RoamerNPC('Professor Sonia', [
-    'I\'ve heard there\'s been sightings of a never-before-seen, superstrong Pokémon on {ROUTE_NAME}! You should go check it out!',
-], GameConstants.Region.galar, RoamingPokemonList.findGroup(GameConstants.Region.galar, GameConstants.GalarSubRegions.SouthGalar));
+    'I’ve heard there’s been sightings of a never-before-seen, super strong Pokémon on {ROUTE_NAME}! You should go check it out!',
+], GameConstants.Region.galar, RoamingPokemonList.findGroup(GameConstants.Region.galar, GameConstants.GalarSubRegions.SouthGalar), 'assets/images/npcs/Professor Sonia.png');
+
+//Isle of Armor NPCs
 const IsleofArmorRoamerNPC = new RoamerNPC('Master Dojo Student', [
     'One of the other students said they saw a rare Pokémon on {ROUTE_NAME}. Might be worth having a look.',
 ], GameConstants.Region.galar, RoamingPokemonList.findGroup(GameConstants.Region.galar, GameConstants.GalarSubRegions.IsleofArmor), 'assets/images/trainers/Master Dojo.png');
+
 const Mustard1 = new NPC ('Mustard', [
     '... ... ... Why hello there! My name is Mustard! I\'m rather good at Pokémon battles, you know! I\'m pleased as cheese that you could join us!',
     'Yaaay! This is my favorite part! I wanna see just how good you are! So, why not have a battle with little old me? Just say the word when you\'re ready!',
@@ -4541,6 +4764,7 @@ const Mustard10 = new NPC ('Mustard', [
     image: 'assets/images/trainers/Dojo Master.png',
     requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 18), new QuestLineCompletedRequirement('The Dojo\'s Armor', GameConstants.AchievementOption.less )]),
 });
+
 const JungleAsh1 = new NPC ('Ash Ketchum', [
     'Hey! I didn\'t expect to see you again here. Fancy a ba-. Actually, no, I\'d like to ask a favour of you; a friend of mine living in Glimwood Tangle called me asking for some help.',
     'I would go myself, but I promised one of the students here a battle and I don\'t want to bail on them. Would you be able to go for me?',
@@ -4606,11 +4830,14 @@ const CrownShrineExplorer = new NPC('Explorer', [
     'Whew! This place is quite a trek from Freezington.',
     'I\'ve heard that a rare Pokémon sometimes hides in the chests here. I was told that it is incredibly rare, but can\'t be found anywhere else!',
 ], {image: 'assets/images/trainers/Backpacker (male).png'});
+
+//Crown Tundra NPCs
 const CrownTundraRoamerNPC = new RoamerNPC('Freezington Mayor', [
-    'If my eyes didn\'t decieve me, I saw a rare Pokémon at {ROUTE_NAME}. Go and see if you can find it if you\'re interested.',
+    'If my eyes didn\'t deceive me, I saw a rare Pokémon at {ROUTE_NAME}. Go and see if you can find it if you\'re interested.',
 ], GameConstants.Region.galar, RoamingPokemonList.findGroup(GameConstants.Region.galar, GameConstants.GalarSubRegions.CrownTundra));
+
 const CrownPeony1 = new NPC ('Peony', [
-    'Hey, Chief! I was talking to the locals and they were talking some ancient king Pokémon! They also mentioned a couple of horsey Pokémon that it was ultra-mega-close to. There\'s a statue of it outside and I\'ve heard this rock I\'ve been using as a pillow is part of it!',
+    'Hey, Chief! I was talking to the locals and they were talking about some ancient king Pokémon! They also mentioned a couple of horsey Pokémon that it was ultra-mega-close to. There\'s a statue of it outside and I\'ve heard this rock I\'ve been using as a pillow is part of it!',
     'Could you go and put it back on for me?',
 ], {
     image: 'assets/images/temporaryBattle/Peony.png',
@@ -4622,25 +4849,28 @@ const Calyrex1 = new NPC ('Calyrex', [
     'I once reigned over these land as king, but now I have lost all but a fraction of my former strength. Even my loyal steeds have abandoned me.',
     'Would you do me the favour of protecting me from wild Pokémon at the Old Cemetery and Snowslide Slope? I wish to grow a Shaderoot Carrot and an Iceroot Carrot which I believe could draw out my loyal steeds.',
 ], {
-    image: 'assets/images/temporaryBattle/Calyrex.png',
+    image: 'assets/images/npcs/Possessed Peony.png',
     requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Crown of Galar', 1), new QuestLineStepCompletedRequirement('The Crown of Galar', 3, GameConstants.AchievementOption.less )]),
 });
+
 const Calyrex2 = new NPC ('Calyrex', [
     'Thank you for your help in growing these carrots. It is my belief that they will draw my loyal steeds back to me...',
     'What?! They are here already! But they appear to be unable to tell exactly where the scent of the carrots is coming from!',
     'The people of this place are in danger, you must fight them off!',
 ], {
-    image: 'assets/images/temporaryBattle/Calyrex.png',
+    image: 'assets/images/npcs/Possessed Peony.png',
     requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Crown of Galar', 3), new QuestLineStepCompletedRequirement('The Crown of Galar', 5, GameConstants.AchievementOption.less )]),
 });
+
 const Calyrex3 = new NPC ('Calyrex', [
     'You have my thanks for protecting the village, human child. Although, unfortunately, this has also caused my loyal steeds to flee.',
     'Hmm...... Perhaps now we know they are in this area, it would be better to search for them?.',
     'I think that would be for the best. Once you capture them, I would appreciate it if you could bring them to the Crown Shrine at the mountain\'s peak.',
 ], {
-    image: 'assets/images/temporaryBattle/Calyrex.png',
+    image: 'assets/images/npcs/Possessed Peony.png',
     requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Crown of Galar', 5), new QuestLineStepCompletedRequirement('The Crown of Galar', 7, GameConstants.AchievementOption.less )]),
 });
+
 const Calyrex4 = new NPC ('Calyrex', [
     'Finally, my loyal steeds have returned to me. There are truly no words with which to fully express my gratitude to you. But I can try. Take these Reins of Unity.',
     '<img src="assets/images/keyitems/Reins_of_unity.png">',
@@ -4676,7 +4906,7 @@ const BirdPeony2 = new NPC ('Peony', [
     requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 2), new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 4, GameConstants.AchievementOption.less )]),
 });
 const BirdPeony3 = new NPC ('Peony', [
-    'Wait--you really caught Articuno, Moltres and Zapdos from the legends?! Thats\'s ultra-mega-brilliant! Report away!',
+    'Wait--you really caught Articuno, Moltres, and Zapdos from the legends?! Thats\'s ultra-mega-brilliant! Report away!',
     'So that\'s them is it? I can definitely see the resemblance, but they don\'t seem quite the same...',
     'Maybe they\'re regional variants or somethin\'? At an rate, that\'s good enough for me. Let\'s call this expedition a success!',
 ], {
@@ -4697,7 +4927,7 @@ const GolemPeony2 = new NPC ('Peony', [
     requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Ancient Golems', 1), new QuestLineStepCompletedRequirement('The Ancient Golems', 3, GameConstants.AchievementOption.less )]),
 });
 const GolemPeony3 = new NPC ('Peony', [
-    'So that didn/t work? Well, I heard there are some legendary Pokémon in those ruins, called Regirock, Regice and Registeel. Apparently they\'ll show up to people who have done enough explorin\' in their ruins.',
+    'So that didn/t work? Well, I heard there are some legendary Pokémon in those ruins, called Regirock, Regice, and Registeel. Apparently they\'ll show up to people who have done enough explorin\' in their ruins.',
     'Maybe if you caught them, the other ruins would open? What? You already have? Well, it might be worth doing it again, anyway.',
 ], {
     image: 'assets/images/temporaryBattle/Peony.png',
@@ -4731,18 +4961,20 @@ const PeonyComplete = new NPC ('Peony', [
 });
 const ProfMagnolia = new ProfNPC('Prof. Magnolia',
     GameConstants.Region.galar,
-    'TODO: Add text before Galar is released',
-    'TODO: Add text before Galar is released');
-const MagearnaMysteryGift = new NPC('Mystery Gift',
-    [
-        'You have recieved a Mystery Gift for completing the National Shiny Dex!',
-    ], {
-        requirement: new MultiRequirement([new QuestLineStartedRequirement('A Mystery Gift'), new QuestLineCompletedRequirement('A Mystery Gift', GameConstants.AchievementOption.less)]),
-    }
+    'Ahhh, how incredible. Look how far you have come, dear trainer. Congratulations on another complete Pokédex.',
+    'I hear word of an exotic region on the horizon, but there has been no word yet when the blimp will be able to reach such faraway lands.',
+    //*TODO*: Change second line to this text when Paldea is available: 'Now be on your way, the illustrious Paldea region awaits over the horizons.',
+    'assets/images/npcs/Professor Magnolia.png');
+
+const MagearnaMysteryGift = new NPC('Mystery Gift', [
+    'You have recieved a Mystery Gift for completing the National Shiny Dex!',
+], {
+    image: 'assets/images/pokemon/801.1.png',
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('A Mystery Gift'), new QuestLineCompletedRequirement('A Mystery Gift', GameConstants.AchievementOption.less)]),
+}
 );
 
-//Galar towns
-
+//Galar Towns
 TownList.Postwick = new Town(
     'Postwick',
     GameConstants.Region.galar,
@@ -4766,7 +4998,7 @@ TownList.Wedgehurst = new Town(
     [TemporaryBattleList['Sordward & Shielbert'], WedgehurstShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 1)],
-        npcs: [RailStaff, SouthGalarRoamerNPC],
+        npcs: [WedgehurstRailStaff, SouthGalarRoamerNPC],
     }
 );
 TownList['Professor Magnolia\'s House'] = new Town(
@@ -4775,7 +5007,7 @@ TownList['Professor Magnolia\'s House'] = new Town(
     [],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 2)],
-        npcs: [ProfMagnolia],
+        npcs: [ProfMagnolia, AssistantHenry],
     }
 );
 TownList.Motostoke = new Town(
@@ -4784,6 +5016,7 @@ TownList.Motostoke = new Town(
     [TemporaryBattleList['Marnie 1'], TemporaryBattleList['Rampaging Torkoal'], MotostokeShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Motostoke), new BattleCafe()],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 6)],
+        npcs: [BattleCafeMaster, MotostokeArtist],
     }
 );
 TownList.Turffield = new Town(
@@ -4792,6 +5025,7 @@ TownList.Turffield = new Town(
     [TemporaryBattleList['Rampaging Tsareena'], TurffieldShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Turffield)],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 13)],
+        npcs: [TurffieldCook],
     }
 );
 TownList.Hulbury = new Town(
@@ -4809,7 +5043,7 @@ TownList['Stow-on-Side'] = new Town(
     [TemporaryBattleList['Bede 3'], TemporaryBattleList['Rampaging Conkeldurr'], TemporaryBattleList['Rampaging Dusknoir'], GymList['Stow-on-Side1'], GymList['Stow-on-Side2'], StowonSideShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Stow-on-Side']), new ShardTraderShop(GameConstants.ShardTraderLocations['Route 6'], 'Fossil Master')],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 23)],
-        npcs: [Archeologist],
+        npcs: [AncientMural1, AncientMural2, StowonSideSonia, Archaeologist],
     }
 );
 TownList.Ballonlea = new Town(
@@ -4820,20 +5054,24 @@ TownList.Ballonlea = new Town(
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Glimwood Tangle'))],
     }
 );
+
 TownList.Hammerlocke = new Town(
     'Hammerlocke',
     GameConstants.Region.galar,
     [TemporaryBattleList['Rampaging Haxorus'], new MoveToDungeon(dungeonList['Energy Plant']), HammerlockeShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Hammerlocke), new BattleCafe()],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 22)],
+        npcs: [HammerlockeHiker],
     }
 );
+
 TownList.Circhester = new Town(
     'Circhester',
     GameConstants.Region.galar,
     [TemporaryBattleList['Rampaging Gigalith'], TemporaryBattleList['Rampaging Froslass'], GymList.Circhester1, GymList.Circhester2, CirchesterShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Circhester)],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 26)],
+        npcs: [HerosBath, CirchesterHop, CirchesterSonia, CirchesterGuitarist],
     }
 );
 TownList.Spikemuth = new Town(
@@ -4861,7 +5099,8 @@ TownList['Wyndon Stadium'] = new Town(
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 32)],
     }
 );
-//Isle of Armor towns
+
+//Isle of Armor Towns
 TownList['Armor Station'] = new Town(
     'Armor Station',
     GameConstants.Region.galar,
@@ -4909,12 +5148,10 @@ TownList.Freezington = new Town(
 
 
 //Galar Dungeons
-
-
 TownList['Slumbering Weald Shrine'] = new DungeonTown(
     'Slumbering Weald Shrine',
     GameConstants.Region.galar,
-    [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
+    [new QuestLineStepCompletedRequirement('The Darkest Day', 12)],
     [TemporaryBattleList['Hop 8'], TemporaryBattleList['Sordward 1'], TemporaryBattleList['Shielbert 1']]
 );
 TownList['Galar Mine'] = new DungeonTown(
@@ -4932,7 +5169,7 @@ TownList['Galar Mine No. 2'] = new DungeonTown(
 TownList['Glimwood Tangle'] = new DungeonTown(
     'Glimwood Tangle',
     GameConstants.Region.galar,
-    [new TemporaryBattleRequirement('Bede3')],
+    [new QuestLineStepCompletedRequirement('The Darkest Day', 2)],
     [TemporaryBattleList['Zarude Tribe 1'], TemporaryBattleList['Zarude Tribe 2'], TemporaryBattleList['Zarude Tribe 3'], TemporaryBattleList['Zarude (Dada)'], TemporaryBattleList['Flowering Celebi'], GlimwoodTangleShop],
     [JungleKoko1, JungleKoko2, JungleKoko3, JungleKoko4, JungleKoko5, JungleAsh3, JungleKoko6]
 );
@@ -4944,7 +5181,7 @@ TownList['Rose Tower'] = new DungeonTown(
 TownList['Energy Plant'] = new DungeonTown(
     'Energy Plant',
     GameConstants.Region.galar,
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rose Tower'))],
+    [new QuestLineStepCompletedRequirement('The Darkest Day', 14)],
     [TemporaryBattleList.Eternatus, TemporaryBattleList['Sordward 2'], TemporaryBattleList['Shielbert 2'], TemporaryBattleList['Rampaging Zacian'], TemporaryBattleList['Rampaging Zamazenta'], TemporaryBattleList['The Darkest Day']]
 );
 TownList['Dusty Bowl'] = new DungeonTown(

@@ -112,17 +112,17 @@ class PartyPokemon implements Saveable {
         return eggTypes;
     }
 
-    public calculatePokerus() {
+    public calculatePokerus(index: number) {
         const eggTypes = this.calculatePokerusTypes();
-        return App.game.breeding.eggList.forEach(p => {
-            const pokemon = p().partyPokemon();
+        for (let i = index; i < App.game.breeding.eggList.length; i++) {
+            const pokemon = App.game.breeding.eggList[i]().partyPokemon();
             if (pokemon && pokemon.pokerus == GameConstants.Pokerus.Uninfected) {
                 const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
                 if (eggTypes.has(dataPokemon.type1) || eggTypes.has(dataPokemon.type2)) {
                     pokemon.pokerus = GameConstants.Pokerus.Infected;
                 }
             }
-        });
+        }
     }
 
     calculateLevelFromExp() {
