@@ -4991,7 +4991,7 @@ TownList.Wedgehurst = new Town(
     [TemporaryBattleList['Sordward & Shielbert'], WedgehurstShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 1)],
-        npcs: [WedgehurstRailStaff, SouthGalarRoamerNPC],
+        npcs: [WedgehurstRailStaff, SouthGalarRoamerNPC, SordwardShielbert2],
     }
 );
 TownList['Professor Magnolia\'s House'] = new Town(
@@ -5090,6 +5090,7 @@ TownList['Wyndon Stadium'] = new Town(
     [GymList['Elite Trainer Marnie'], GymList['Elite Gym Leader Bede'], GymList['Elite Trainer Hop'], GymList['Champion Leon'], pokeLeagueShop()],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 32)],
+        npcs: [RoseBroadcast, WyndonHop, Leon],
     }
 );
 
@@ -5145,7 +5146,8 @@ TownList['Slumbering Weald Shrine'] = new DungeonTown(
     'Slumbering Weald Shrine',
     GameConstants.Region.galar,
     [new QuestLineStepCompletedRequirement('The Darkest Day', 12)],
-    [TemporaryBattleList.Hop8, TemporaryBattleList.Sordward1, TemporaryBattleList.Shielbert1]
+    [TemporaryBattleList.Hop8, TemporaryBattleList.Sordward1, TemporaryBattleList.Shielbert1],
+    [SlumberingHop1, SlumberingHop2, SordwardShielbert1]
 );
 TownList['Galar Mine'] = new DungeonTown(
     'Galar Mine',
@@ -5175,7 +5177,8 @@ TownList['Energy Plant'] = new DungeonTown(
     'Energy Plant',
     GameConstants.Region.galar,
     [new QuestLineStepCompletedRequirement('The Darkest Day', 14)],
-    [TemporaryBattleList.Eternatus, TemporaryBattleList.Sordward2, TemporaryBattleList.Shielbert2, TemporaryBattleList['Rampaging Zacian'], TemporaryBattleList['Rampaging Zamazenta'], TemporaryBattleList['The Darkest Day']]
+    [TemporaryBattleList.Eternatus, TemporaryBattleList.Sordward2, TemporaryBattleList.Shielbert2, TemporaryBattleList['Rampaging Zacian'], TemporaryBattleList['Rampaging Zamazenta'], TemporaryBattleList['The Darkest Day']],
+    [EnergyPlantRose, SordwardShielbert3, SordwardShielbert4, Piers],
 );
 TownList['Dusty Bowl'] = new DungeonTown(
     'Dusty Bowl',
