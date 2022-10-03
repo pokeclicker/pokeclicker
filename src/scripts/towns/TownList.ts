@@ -4638,6 +4638,16 @@ const Piers = new NPC('Piers', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Sword and Shield', 17), new QuestLineStepCompletedRequirement('Sword and Shield', 19, GameConstants.AchievementOption.less)]),
 });
 
+const EnergyPlantHop = new NPC('Hop', [
+    'Huh? Oh, hi. I forgot to say, congrats on catching Zacian and Zamazenta!',
+    'Y\'know, we gave Zacian and Zamazenta got the Rusted Sword and the Rusted Shield back, right?',
+    'But when you caught them, neither were using them. But they must still have them, right?',
+    'So.... Maybe if you keep defeating them, they\'ll occasionally drop them?',
+], {
+    image: 'assets/images/temporaryBattle/Hop.png',
+    requirement: new MultiRequirement([new QuestLineCompletedRequirement('Sword and Shield')]),
+});
+
 const SouthGalarRoamerNPC = new RoamerNPC('Professor Sonia', [
     'I’ve heard there’s been sightings of a never-before-seen, super strong Pokémon on {ROUTE_NAME}! You should go check it out!',
 ], GameConstants.Region.galar, RoamingPokemonList.findGroup(GameConstants.Region.galar, GameConstants.GalarSubRegions.SouthGalar), 'assets/images/npcs/Professor Sonia.png');
@@ -4867,11 +4877,18 @@ const Calyrex3 = new NPC ('Calyrex', [
 const Calyrex4 = new NPC ('Calyrex', [
     'Finally, my loyal steeds have returned to me. There are truly no words with which to fully express my gratitude to you. But I can try. Take these Reins of Unity.',
     '<img src="assets/images/keyitems/Reins_of_unity.png">',
-    'They can be used to combine myself and my steeds. However, it is incomplete. They must have have hair from the manes of my steeds intertwined to work.',
+    'They can be used to combine myself and my steeds. However, it is incomplete. They must have have hair from the manes of my steeds intertwined to work. I expect they will occasionally leave such hair behind upon being defeated.',
     'And to that point... I have a suggestion. If you are able to capture me, it will prove your worth beyond any doubt, and I will lend you my strength on your journey. Once you have readied yourself, come face me!',
 ], {
-    image: 'assets/images/temporaryBattle/Calyrex.png',
+    image: 'assets/images/temporaryBattle/Possessed Peony.png',
     requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Crown of Galar', 7), new QuestLineStepCompletedRequirement('The Crown of Galar', 9, GameConstants.AchievementOption.less )]),
+});
+const Calyrex5 = new NPC ('Calyrex', [
+    '<i>Human child... I look forward to what adventures we might have together.</i>',
+    '<i>May I remind you, if you ever wish to return my steeds and I to our true power, you must gather some hair from the manes of my steeds as they roam the Crown Tundra, and intertwine such hair with the Reins of Unity.</i>',
+], {
+    image: 'assets/images/temporaryBattle/Calyrex.png',
+    requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Crown of Galar', 9)]),
 });
 const CrownPeony2 = new NPC ('Peony', [
     'Wait--you really caught Calyrex from the legends?! Thats\'s ultra-mega-brilliant! Report away!',
@@ -4991,7 +5008,7 @@ TownList.Wedgehurst = new Town(
     [TemporaryBattleList['Sordward & Shielbert'], WedgehurstShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 1)],
-        npcs: [WedgehurstRailStaff, SouthGalarRoamerNPC],
+        npcs: [WedgehurstRailStaff, SouthGalarRoamerNPC, SordwardShielbert2],
     }
 );
 TownList['Professor Magnolia\'s House'] = new Town(
@@ -5090,6 +5107,7 @@ TownList['Wyndon Stadium'] = new Town(
     [GymList['Elite Trainer Marnie'], GymList['Elite Gym Leader Bede'], GymList['Elite Trainer Hop'], GymList['Champion Leon'], pokeLeagueShop()],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 32)],
+        npcs: [RoseBroadcast, WyndonHop, Leon],
     }
 );
 
@@ -5145,7 +5163,8 @@ TownList['Slumbering Weald Shrine'] = new DungeonTown(
     'Slumbering Weald Shrine',
     GameConstants.Region.galar,
     [new QuestLineStepCompletedRequirement('The Darkest Day', 12)],
-    [TemporaryBattleList.Hop8, TemporaryBattleList.Sordward1, TemporaryBattleList.Shielbert1]
+    [TemporaryBattleList.Hop8, TemporaryBattleList.Sordward1, TemporaryBattleList.Shielbert1],
+    [SlumberingHop1, SlumberingHop2, SordwardShielbert1]
 );
 TownList['Galar Mine'] = new DungeonTown(
     'Galar Mine',
@@ -5175,7 +5194,8 @@ TownList['Energy Plant'] = new DungeonTown(
     'Energy Plant',
     GameConstants.Region.galar,
     [new QuestLineStepCompletedRequirement('The Darkest Day', 14)],
-    [TemporaryBattleList.Eternatus, TemporaryBattleList.Sordward2, TemporaryBattleList.Shielbert2, TemporaryBattleList['Rampaging Zacian'], TemporaryBattleList['Rampaging Zamazenta'], TemporaryBattleList['The Darkest Day']]
+    [TemporaryBattleList.Eternatus, TemporaryBattleList.Sordward2, TemporaryBattleList.Shielbert2, TemporaryBattleList['Rampaging Zacian'], TemporaryBattleList['Rampaging Zamazenta'], TemporaryBattleList['The Darkest Day']],
+    [EnergyPlantRose, SordwardShielbert3, SordwardShielbert4, Piers, EnergyPlantHop]
 );
 TownList['Dusty Bowl'] = new DungeonTown(
     'Dusty Bowl',
@@ -5282,7 +5302,7 @@ TownList['Crown Shrine'] = new DungeonTown(
     GameConstants.Region.galar,
     [new RouteKillRequirement(10, GameConstants.Region.galar, 55)],
     [],
-    [Calyrex4, CrownShrineExplorer]
+    [Calyrex4, Calyrex5, CrownShrineExplorer]
 );
 
 // Used to check if next region can be reached, for example for professor NPC
