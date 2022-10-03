@@ -48,7 +48,14 @@
                                                 html: true
                                               }">
                                     </td>
-                                    <td class='vertical-middle' data-bind='attr: { rowspan: $parent.berries.length }, text: $parent.item.amount + " × " + $parent.item.itemType.displayName'></td>
+                                    <td class='vertical-middle' data-bind='attr: { rowspan: $parent.berries.length }'>
+                                        <span data-bind='text: $parent.item.amount + " × " + $parent.item.itemType.displayName'></span>
+                                        <knockout data-bind="if: ($parent.item.itemType instanceof CaughtIndicatingItem)">
+                                            <span style="float:right; margin-right: 5px"
+                                                  data-bind="template: { name: 'caughtStatusTemplate', data: {'status': $parent.item.itemType.getCaughtStatus()}}">
+                                            </span>
+                                        </knockout>
+                                    </td>
                                     <td class='vertical-middle' data-bind="attr: { rowspan: $parent.berries.length }">
                                         <div class="btn-group btn-block" data-bind="let: { tradeAmount: ko.observable(1) }">
                                             <button class='btn btn-success btn-block' data-bind='click: function(){BerryDeal.use(ShopHandler.shopObservable()?.location, $parentContext.$index(), tradeAmount())}, css: { disabled: !BerryDeal.canUse(ShopHandler.shopObservable()?.location, $parentContext.$index()) }'>
