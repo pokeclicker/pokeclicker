@@ -41,6 +41,10 @@ export default class Settings {
         return GameHelper.enumStrings(obj).filter(filter).map((val) => new SettingOption(camelCaseToString(val), `${obj[val]}`));
     }
 
+    static enumToNumberSettingOptionArray(obj: any, filter: (v) => boolean = () => true) {
+        return GameHelper.enumStrings(obj).filter(filter).map((val) => new SettingOption(camelCaseToString(val), obj[val]));
+    }
+
     static saveDefault() {
         localStorage.setItem('settings', JSON.stringify(Settings.toJSON()));
     }
