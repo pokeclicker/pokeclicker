@@ -21059,6 +21059,9 @@ const pokemonList = createPokemonArray(
         'exp': 62,
         'catchRate': 45,
         'evolutions': [new LevelEvolution('Grookey', 'Thwackey', 16)],
+        'gender': {
+            'ratio': GameConstants.MALE_87_5,
+        },
     },
     {
         'id': 811,
@@ -21077,6 +21080,9 @@ const pokemonList = createPokemonArray(
         'exp': 147,
         'catchRate': 45,
         'evolutions': [new LevelEvolution('Thwackey', 'Rillaboom', 35)],
+        'gender': {
+            'ratio': GameConstants.MALE_87_5,
+        },
     },
     {
         'id': 812,
@@ -21094,6 +21100,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 265,
         'catchRate': 45,
+        'gender': {
+            'ratio': GameConstants.MALE_87_5,
+        },
     },
     {
         'id': 812.1,
@@ -21112,6 +21121,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 265,
         'catchRate': 45,
+        'gender': {
+            'ratio': GameConstants.MALE_87_5,
+        },
     },
     {
         'id': 813,
@@ -21130,6 +21142,9 @@ const pokemonList = createPokemonArray(
         'exp': 62,
         'catchRate': 45,
         'evolutions': [new LevelEvolution('Scorbunny', 'Raboot', 16)],
+        'gender': {
+            'ratio': GameConstants.MALE_87_5,
+        },
     },
     {
         'id': 814,
@@ -21148,6 +21163,9 @@ const pokemonList = createPokemonArray(
         'exp': 147,
         'catchRate': 45,
         'evolutions': [new LevelEvolution('Raboot', 'Cinderace', 35)],
+        'gender': {
+            'ratio': GameConstants.MALE_87_5,
+        },
     },
     {
         'id': 815,
@@ -21165,6 +21183,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 265,
         'catchRate': 45,
+        'gender': {
+            'ratio': GameConstants.MALE_87_5,
+        },
     },
     {
         'id': 815.1,
@@ -21183,6 +21204,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 265,
         'catchRate': 45,
+        'gender': {
+            'ratio': GameConstants.MALE_87_5,
+        },
     },
     {
         'id': 816,
@@ -21201,6 +21225,9 @@ const pokemonList = createPokemonArray(
         'exp': 62,
         'catchRate': 45,
         'evolutions': [new LevelEvolution('Sobble', 'Drizzile', 16)],
+        'gender': {
+            'ratio': GameConstants.MALE_87_5,
+        },
     },
     {
         'id': 817,
@@ -21219,6 +21246,9 @@ const pokemonList = createPokemonArray(
         'exp': 147,
         'catchRate': 45,
         'evolutions': [new LevelEvolution('Drizzile', 'Inteleon', 35)],
+        'gender': {
+            'ratio': GameConstants.MALE_87_5,
+        },
     },
     {
         'id': 818,
@@ -21236,6 +21266,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 265,
         'catchRate': 45,
+        'gender': {
+            'ratio': GameConstants.MALE_87_5,
+        },
     },
     {
         'id': 818.1,
@@ -21254,6 +21287,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 265,
         'catchRate': 45,
+        'gender': {
+            'ratio': GameConstants.MALE_87_5,
+        },
     },
     {
         'id': 819,
@@ -22180,6 +22216,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 62,
         'catchRate': 120,
+        'gender': {
+            'type': GameConstants.GENDERLESS,
+        },
     },
     {
         'id': 855,
@@ -22197,6 +22236,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 178,
         'catchRate': 60,
+        'gender': {
+            'type': GameConstants.GENDERLESS,
+        },
     },
     {
         'id': 856,
@@ -22215,6 +22257,9 @@ const pokemonList = createPokemonArray(
         'exp': 53,
         'catchRate': 235,
         'evolutions': [new LevelEvolution('Hatenna', 'Hattrem', 32)],
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 857,
@@ -22233,6 +22278,9 @@ const pokemonList = createPokemonArray(
         'exp': 130,
         'catchRate': 120,
         'evolutions': [new LevelEvolution('Hattrem', 'Hatterene', 42)],
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 858,
@@ -22253,6 +22301,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 255,
         'catchRate': 45,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 858.1,
@@ -22274,6 +22325,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 255,
         'catchRate': 45,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 859,
@@ -22295,6 +22349,9 @@ const pokemonList = createPokemonArray(
         'exp': 53,
         'catchRate': 255,
         'evolutions': [new LevelEvolution('Impidimp', 'Morgrem', 32)],
+        'gender': {
+            'type': GameConstants.MALE_ONLY,
+        },
     },
     {
         'id': 860,
@@ -22316,6 +22373,9 @@ const pokemonList = createPokemonArray(
         'exp': 130,
         'catchRate': 120,
         'evolutions': [new LevelEvolution('Morgrem', 'Grimmsnarl', 42)],
+        'gender': {
+            'type': GameConstants.MALE_ONLY,
+        },
     },
     {
         'id': 861,
@@ -22336,6 +22396,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 255,
         'catchRate': 45,
+        'gender': {
+            'type': GameConstants.MALE_ONLY,
+        },
     },
     {
         'id': 861.1,
@@ -22357,6 +22420,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 255,
         'catchRate': 45,
+        'gender': {
+            'type': GameConstants.MALE_ONLY,
+        },
     },
     {
         'id': 862,
@@ -22412,6 +22478,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 179,
         'catchRate': 30,
+        'gender': {
+            'ratio': GameConstants.MALE_25,
+        },
     },
     {
         'id': 865,
@@ -22487,6 +22556,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 54,
         'catchRate': 200,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869,
@@ -22504,6 +22576,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.01,
@@ -22521,6 +22596,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.02,
@@ -22538,6 +22616,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.03,
@@ -22555,6 +22636,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.04,
@@ -22572,6 +22656,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.05,
@@ -22589,6 +22676,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.06,
@@ -22606,6 +22696,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.07,
@@ -22623,6 +22716,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.08,
@@ -22640,6 +22736,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.1,
@@ -22657,6 +22756,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.11,
@@ -22674,6 +22776,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.12,
@@ -22691,6 +22796,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.13,
@@ -22708,6 +22816,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.14,
@@ -22725,6 +22836,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.15,
@@ -22742,6 +22856,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.16,
@@ -22759,6 +22876,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.17,
@@ -22776,6 +22896,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.18,
@@ -22793,6 +22916,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.2,
@@ -22810,6 +22936,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.21,
@@ -22827,6 +22956,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.22,
@@ -22844,6 +22976,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.23,
@@ -22861,6 +22996,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.24,
@@ -22878,6 +23016,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.25,
@@ -22895,6 +23036,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.26,
@@ -22912,6 +23056,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.27,
@@ -22929,6 +23076,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.28,
@@ -22946,6 +23096,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.3,
@@ -22963,6 +23116,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.31,
@@ -22980,6 +23136,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.32,
@@ -22997,6 +23156,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.33,
@@ -23014,6 +23176,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.34,
@@ -23031,6 +23196,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.35,
@@ -23048,6 +23216,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.36,
@@ -23065,6 +23236,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.37,
@@ -23082,6 +23256,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.38,
@@ -23099,6 +23276,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.4,
@@ -23116,6 +23296,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.41,
@@ -23133,6 +23316,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.42,
@@ -23150,6 +23336,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.43,
@@ -23167,6 +23356,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.44,
@@ -23184,6 +23376,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.45,
@@ -23201,6 +23396,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.46,
@@ -23218,6 +23416,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.47,
@@ -23235,6 +23436,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.48,
@@ -23252,6 +23456,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.5,
@@ -23269,6 +23476,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.51,
@@ -23286,6 +23496,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.52,
@@ -23303,6 +23516,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.53,
@@ -23320,6 +23536,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.54,
@@ -23337,6 +23556,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.55,
@@ -23354,6 +23576,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.56,
@@ -23371,6 +23596,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.57,
@@ -23388,6 +23616,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.58,
@@ -23405,6 +23636,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.6,
@@ -23422,6 +23656,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.61,
@@ -23439,6 +23676,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.62,
@@ -23456,6 +23696,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.63,
@@ -23473,6 +23716,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.64,
@@ -23490,6 +23736,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.65,
@@ -23507,6 +23756,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.66,
@@ -23524,6 +23776,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.67,
@@ -23541,6 +23796,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.68,
@@ -23558,6 +23816,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 869.7,
@@ -23576,6 +23837,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'catchRate': 100,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 870,
@@ -23593,6 +23857,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 165,
         'catchRate': 45,
+        'gender': {
+            'type': GameConstants.GENDERLESS,
+        },
     },
     {
         'id': 871,
@@ -23722,6 +23989,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 166,
         'catchRate': 30,
+        'gender': {
+            'type': GameConstants.MALE_ONLY,
+        },
     },
     {
         'id': 876.1,
@@ -23742,6 +24012,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 166,
         'catchRate': 30,
+        'gender': {
+            'type': GameConstants.FEMALE_ONLY,
+        },
     },
     {
         'id': 877,
@@ -23855,6 +24128,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 177,
         'catchRate': 45,
+        'gender': {
+            'type': GameConstants.GENDERLESS,
+        },
     },
     {
         'id': 881,
@@ -23875,6 +24151,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 177,
         'catchRate': 45,
+        'gender': {
+            'type': GameConstants.GENDERLESS,
+        },
     },
     {
         'id': 882,
@@ -23895,6 +24174,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 177,
         'catchRate': 45,
+        'gender': {
+            'type': GameConstants.GENDERLESS,
+        },
     },
     {
         'id': 883,
@@ -23915,6 +24197,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 177,
         'catchRate': 45,
+        'gender': {
+            'type': GameConstants.GENDERLESS,
+        },
     },
     {
         'id': 884,
@@ -24037,6 +24322,9 @@ const pokemonList = createPokemonArray(
         'exp': 335,
         'catchRate': 10,
         'heldItem': {type: ItemType.item, id: 'Rusted_Sword'},
+        'gender': {
+            'type': GameConstants.GENDERLESS,
+        },
     },
     {
         'id': 888.1,
@@ -24055,6 +24343,9 @@ const pokemonList = createPokemonArray(
         'exp': 335,
         'catchRate': 10,
         'heldItem': {type: ItemType.item, id: 'Rusted_Sword'},
+        'gender': {
+            'type': GameConstants.GENDERLESS,
+        },
     },
     {
         'id': 889,
@@ -24074,6 +24365,9 @@ const pokemonList = createPokemonArray(
         'exp': 335,
         'catchRate': 10,
         'heldItem': {type: ItemType.item, id: 'Rusted_Shield'},
+        'gender': {
+            'type': GameConstants.GENDERLESS,
+        },
     },
     {
         'id': 889.1,
@@ -24092,6 +24386,9 @@ const pokemonList = createPokemonArray(
         'exp': 335,
         'catchRate': 10,
         'heldItem': {type: ItemType.item, id: 'Rusted_Shield'},
+        'gender': {
+            'type': GameConstants.GENDERLESS,
+        },
     },
     {
         'id': 890,
@@ -24112,6 +24409,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 345,
         'catchRate': 255,
+        'gender': {
+            'type': GameConstants.GENDERLESS,
+        },
     },
     {
         'id': 890.1,
@@ -24133,6 +24433,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 345,
         'catchRate': 255,
+        'gender': {
+            'type': GameConstants.GENDERLESS,
+        },
     },
     {
         'id': 891,
@@ -24150,6 +24453,9 @@ const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': 335,
+        'gender': {
+            'ratio': GameConstants.MALE_87_5,
+        },
     },
     {
         'id': 892,
@@ -24170,6 +24476,9 @@ const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': 335,
+        'gender': {
+            'ratio': GameConstants.MALE_87_5,
+        },
     },
     {
         'id': 892.1,
@@ -24190,6 +24499,9 @@ const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': 335,
+        'gender': {
+            'ratio': GameConstants.MALE_87_5,
+        },
     },
     {
         'id': 892.2,
@@ -24211,6 +24523,9 @@ const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': 335,
+        'gender': {
+            'ratio': GameConstants.MALE_87_5,
+        },
     },
     {
         'id': 892.3,
@@ -24232,6 +24547,9 @@ const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': 335,
+        'gender': {
+            'ratio': GameConstants.MALE_87_5,
+        },
     },
     {
         'id': 893,
@@ -24252,6 +24570,9 @@ const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': 335,
+        'gender': {
+            'type': GameConstants.GENDERLESS,
+        },
     },
     {
         'id': 893.1,
@@ -24272,6 +24593,9 @@ const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': 335,
+        'gender': {
+            'type': GameConstants.GENDERLESS,
+        },
     },
     {
         'id': 894,
@@ -24289,6 +24613,9 @@ const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': 335,
+        'gender': {
+            'type': GameConstants.GENDERLESS,
+        },
     },
     {
         'id': 895,
@@ -24306,6 +24633,9 @@ const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': 335,
+        'gender': {
+            'type': GameConstants.GENDERLESS,
+        },
     },
     {
         'id': 896,
@@ -24324,6 +24654,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 335,
         'heldItem': {type: ItemType.item, id: 'White_mane_hair'},
+        'gender': {
+            'type': GameConstants.GENDERLESS,
+        },
     },
     {
         'id': 897,
@@ -24342,6 +24675,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 335,
         'heldItem': {type: ItemType.item, id: 'Black_mane_hair'},
+        'gender': {
+            'type': GameConstants.GENDERLESS,
+        },
     },
     {
         'id': 898,
@@ -24363,6 +24699,9 @@ const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': 335,
+        'gender': {
+            'type': GameConstants.GENDERLESS,
+        },
     },
     {
         'id': 898.1,
@@ -24380,6 +24719,9 @@ const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': 335,
+        'gender': {
+            'type': GameConstants.GENDERLESS,
+        },
     },
     {
         'id': 898.2,
@@ -24397,6 +24739,9 @@ const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': 335,
+        'gender': {
+            'type': GameConstants.GENDERLESS,
+        },
     },
     // Missingno.
     {
@@ -24415,6 +24760,9 @@ const pokemonList = createPokemonArray(
             'defense': 11,
             'specialDefense': 23,
             'speed': 0,
+        },
+        'gender': {
+            'type': GameConstants.GENDERLESS,
         },
     },
     // Megas only between -100 → -199
@@ -24435,6 +24783,9 @@ const pokemonList = createPokemonArray(
             'specialDefense': 120,
             'speed': 80,
         },
+        'gender': {
+            'ratio': GameConstants.MALE_87_5,
+        },
     },
     {
         'id': -101,
@@ -24452,6 +24803,9 @@ const pokemonList = createPokemonArray(
             'defense': 111,
             'specialDefense': 85,
             'speed': 100,
+        },
+        'gender': {
+            'ratio': GameConstants.MALE_87_5,
         },
     },
     // {
@@ -25152,6 +25506,9 @@ const pokemonList = createPokemonArray(
             'specialDefense': 100,
             'speed': 115,
         },
+        'gender': {
+            'type': GameConstants.GENDERLESS,
+        },
     },
     // {
     //     'id': -143,
@@ -25202,6 +25559,9 @@ const pokemonList = createPokemonArray(
             'defense': 88,
             'specialDefense': 70,
             'speed': 112,
+        },
+        'gender': {
+            'ratio': GameConstants.MALE_87_5,
         },
     },
     // {
@@ -25288,6 +25648,9 @@ const pokemonList = createPokemonArray(
             'defense': 47,
             'specialDefense': 131,
             'speed': 103,
+        },
+        'gender': {
+            'type': GameConstants.GENDERLESS,
         },
     }
 );
