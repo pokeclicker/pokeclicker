@@ -35,6 +35,16 @@ class PokemonItem extends CaughtIndicatingItem {
 
         const pokemonID = PokemonHelper.getPokemonByName(pokemonName).id;
         App.game.party.gainPokemonById(pokemonID, shiny, true);
+        // Only for statistics
+        for (let i = 0; i < amt - 1; i++) { // -1 because gainPokemonById will add 1 to statistics
+            const gender = PokemonFactory.generateGenderById(pokemonID);
+            // Add to shiny statistics depending of the number of shinies obtained
+            let shinyStatistic = false;
+            if (i < numShiny - 1) {
+                shinyStatistic = true;
+            }
+            PokemonHelper.incrementPokemonStatistics(pokemonID, GameConstants.STATISTIC_CAPTURED, shinyStatistic, gender);
+        }
 
         const partyPokemon = App.game.party.getPokemon(pokemonID);
         partyPokemon.effortPoints += App.game.party.calculateEffortPoints(partyPokemon, false, GameConstants.SHOPMON_EP_YIELD * (amt - numShiny));
