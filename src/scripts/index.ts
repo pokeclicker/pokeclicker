@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // preventing us from getting into that messy situation.
 // Copied from https://stackoverflow.com/questions/19305821/multiple-modals-overlay#answer-24914782
 $(document).on('show.bs.modal', '.modal', function () {
-    const zIndex = 1040 + (10 * $('.modal:visible').length);
+    const zIndex = Math.max(1040, Math.max(...$('.modal:visible').get().map(e => +e.style.zIndex)) + 10);
     $(this).css('z-index', zIndex);
     // setTimeout with 0 delay because the backdrop doesn't exist yet
     setTimeout(() => {
