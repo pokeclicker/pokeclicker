@@ -15,7 +15,7 @@
               <div style="position: absolute; top: 0px; right: 0px;" data-bind="if: App.game.party.getPokemon(pokemonMap[$data].id)?.pokerus">
                   <img width="40px" src="" data-bind="attr: { src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[App.game.party.getPokemon(pokemonMap[$data].id)?.pokerus]}.png`}"/>
               </div>
-                <img data-bind="attr:{ src: PokedexHelper.getImageStatistics(pokemonMap[$data].id) }" src=""/>
+                <img data-bind="attr:{ src: PokemonHelper.getImage(pokemonMap[$data].id, App.game.party.alreadyCaughtPokemon(pokemonMap[$data].id, true) && PokedexHelper.toggleStatisticShiny(), App.game.party.alreadyCaughtPokemon(pokemonMap[$data].id) && App.game.party.getPokemon(pokemonMap[$data].id).defaultFemaleSprite()) }" src=""/>
                 <table class="table table-striped table-hover table-bordered table-sm m-0">
                   <thead>
                     <tr class="text-light">

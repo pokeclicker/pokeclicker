@@ -1,6 +1,6 @@
 <script type="text/html" id="pokemonSpriteTemplate">
     <img class="enemy"
-        data-bind="attr:{ src: PokemonHelper.getImage($data.pokemon, $data.pokemon.shiny, $data.pokemon.gender) }"
+        data-bind="attr:{ src: PokemonHelper.getImage($data.pokemon.id, $data.pokemon.shiny, $data.pokemon.gender == GameConstants.GENDER_FEMALE) }"
         src=""/>
 </script>
 

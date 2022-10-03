@@ -177,40 +177,6 @@ class PokedexHelper {
         return res;
     }
 
-    public static getImage(id: number) {
-        const pokemon = PokemonHelper.getPokemonById(id);
-        let src = 'assets/images/';
-        // Shiny
-        if (App.game.party.alreadyCaughtPokemon(id, true) && !this.hideShinyImages()) {
-            src += 'shiny';
-        }
-        // Female
-        let genderString = '';
-        if (pokemon.gender.difference) {
-            if (this.showFemaleImages()) {
-                genderString = '-f';
-            }
-        }
-        
-        src += `pokemon/${id}${genderString}.png`;
-        return src;
-    }
-
-    public static getImageStatistics(id: number) {
-        const pokemon = PokemonHelper.getPokemonById(id);
-        let src = 'assets/images/';
-        if (App.game.party.alreadyCaughtPokemon(id, true) && this.toggleStatisticShiny()) {
-            src += 'shiny';
-        }
-        // Female
-        let genderString = '';
-        if (App.game.party.alreadyCaughtPokemon(id) && App.game.party.getPokemon(id).defaultFemaleSprite() && pokemon.gender.difference) {
-            genderString = '-f';
-        }
-        src += `pokemon/${id}${genderString}.png`;
-        return src;
-    }
-
     // Gender ratio
     public static getGenderRatioData(pokemon) {
         const genderType = pokemon.gender.type;
