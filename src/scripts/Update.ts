@@ -1005,7 +1005,9 @@ class Update implements Saveable {
             renamePokemon(saveData, 'Minior (Yellow-core)', 'Minior (Yellow Core)');
 
             // Start Galactic questline if player has Coal Badge already
-            if (saveData.badgeCase[40]) {
+            // Don't start completed questline again if updating from v0.9.8/9 to v0.9.16+
+            const aNewWorld = saveData.quests.questLines.find(ql => ql.name == 'A new world');
+            if (saveData.badgeCase[40] && !aNewWorld) {
                 Update.startQuestLine(saveData, 'A New World');
             }
 
@@ -1203,6 +1205,12 @@ class Update implements Saveable {
         '0.9.17': ({ playerData, saveData }) => {
             // Add Sudowoodo Temporary Battle
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 7);
+
+            // Fix A New World questline for players updating from v0.9.8/9 to v0.9.16+
+            const aNewWorld = saveData.quests.questLines.find(ql => ql.name == 'A New World');
+            if (aNewWorld.state === 1 && aNewWorld.quest <= 3) {
+                saveData.statistics.temporaryBattleDefeated[27] = 0;
+            }
         },
     };
 
