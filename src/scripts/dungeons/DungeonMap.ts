@@ -85,23 +85,19 @@ class DungeonMap {
     }
 
     public showChestTiles(): void {
-        for (let s = 0; s < this.board().length; s++) {
-            for (let i = 0; i < this.board()[s].length; i++) {
-                for (let j = 0; j < this.board()[s][i].length; j++) {
-                    if (this.board()[s][i][j].type() == GameConstants.DungeonTile.chest) {
-                        this.board()[s][i][j].isVisible = true;
-                    }
+        for (let i = 0; i < this.board()[this.playerPosition().floor].length; i++) {
+            for (let j = 0; j < this.board()[this.playerPosition().floor][i].length; j++) {
+                if (this.board()[this.playerPosition().floor][i][j].type() == GameConstants.DungeonTile.chest) {
+                    this.board()[this.playerPosition().floor][i][j].isVisible = true;
                 }
             }
         }
     }
 
     public showAllTiles(): void {
-        for (let s = 0; s < this.board().length; s++) {
-            for (let i = 0; i < this.board()[s].length; i++) {
-                for (let j = 0; j < this.board()[s][i].length; j++) {
-                    this.board()[s][i][j].isVisible = true;
-                }
+        for (let i = 0; i < this.board()[this.playerPosition().floor].length; i++) {
+            for (let j = 0; j < this.board()[this.playerPosition().floor][i].length; j++) {
+                this.board()[this.playerPosition().floor][i][j].isVisible = true;
             }
         }
     }
