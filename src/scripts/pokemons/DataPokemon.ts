@@ -14,7 +14,7 @@ class DataPokemon implements PokemonInterface {
         public exp: number,
         public eggCycles: number,
         public heldItem: BagItem | null,
-        public gender,
+        public gender
     ) {
         this.shiny = false;
     }

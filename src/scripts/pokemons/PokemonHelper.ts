@@ -72,7 +72,7 @@ class PokemonHelper {
         return PokemonType[id];
     }
 
-    public static getImage(pokemonId: number, shiny: boolean = false, gender: boolean = false): string {
+    public static getImage(pokemonId: number, shiny = false, gender = false): string {
         let src = 'assets/images/';
         if (shiny) {
             src += 'shiny';
@@ -81,7 +81,7 @@ class PokemonHelper {
         // If Pokémon is female, use the female sprite, otherwise use the male/genderless one
         const hasDiff = this.getPokemonById(pokemonId).gender.difference;
         if (hasDiff) {
-            if (gender) { 
+            if (gender) {
                 genderString = '-f';
             }
         }
@@ -143,7 +143,7 @@ class PokemonHelper {
             'ShinyFemaleDefeated': App.game.statistics.shinyFemalePokemonDefeated[pokemonId],
             'ShinyFemaleEncountered': App.game.statistics.shinyFemalePokemonEncountered[pokemonId],
             'ShinyFemaleHatched': App.game.statistics.shinyFemalePokemonHatched[pokemonId],
-        }
+        };
         const totalStatistics = {
             'Captured': App.game.statistics.totalPokemonCaptured,
             'Defeated': App.game.statistics.totalPokemonDefeated,
@@ -177,16 +177,14 @@ class PokemonHelper {
             'ShinyGenderlessDefeated': App.game.statistics.totalShinyGenderlessPokemonDefeated,
             'ShinyGenderlessEncountered': App.game.statistics.totalShinyGenderlessPokemonEncountered,
             'ShinyGenderlessHatched': App.game.statistics.totalShinyGenderlessPokemonHatched,
-        }
+        };
         let genderString = '';
         // Gender Statistics
         if (gender === GameConstants.GENDER_MALE) {
             genderString = 'Male';
-        }
-        else if (gender === GameConstants.GENDER_FEMALE) {
+        } else if (gender === GameConstants.GENDER_FEMALE) {
             genderString = 'Female';
-        }
-        else if (gender === GameConstants.NO_GENDER) {
+        } else if (gender === GameConstants.NO_GENDER) {
             genderString = 'Genderless';
         }
         GameHelper.incrementObservable(pokemonStatistics[statistic]);

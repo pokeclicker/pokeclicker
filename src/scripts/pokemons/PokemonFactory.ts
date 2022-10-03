@@ -316,7 +316,7 @@ class PokemonFactory {
      * @param genderType Gender type (Genderless, male only, etc.), should be from GameConstants under Gender Types comment
      * @returns {number} 0 = Genderless, 1 = male, 2 = female
      */
-     public static generateGender(chance: number, genderType: number): number {
+    public static generateGender(chance: number, genderType: number): number {
         let gender;
         switch (genderType) {
             case GameConstants.GENDERLESS:

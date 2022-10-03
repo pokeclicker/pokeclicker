@@ -607,7 +607,7 @@ namespace GameConstants {
     declare const MALE_ONLY;
     declare const FEMALE_ONLY;
     declare const MALE_FEMALE;
-    
+
     // Gender Ratio
     declare const MALE_12_5;
     declare const MALE_25;
