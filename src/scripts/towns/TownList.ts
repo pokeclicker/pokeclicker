@@ -536,7 +536,7 @@ const SeviiGideon2 = new NPC ('Gideon', [
 });
 const SixIslandSeviiRoamerNPC = new RoamerNPC('Bug Catcher John', [
     'Apparently some kid released one of his Pokémon around here. That Pokémon, it\'s partner, and for whatever reason, the Legendary Beasts from Johto have been seen roaming on {ROUTE_NAME}.',
-], GameConstants.Region.kanto, RoamingPokemonList.findGroup(GameConstants.Region.kanto, GameConstants.KantoSubRegions.Sevii4567), undefined, new GymBadgeRequirement(BadgeEnums.Elite_OrangeChampion));
+], GameConstants.Region.kanto, RoamingPokemonList.findGroup(GameConstants.Region.kanto, GameConstants.KantoSubRegions.Sevii4567), 'assets/images/trainers/Bug Catcher.png', new GymBadgeRequirement(BadgeEnums.Elite_OrangeChampion));
 const AlteringCaveRuinManiac1 = new NPC ('Ruin Maniac', [
     'Hello. You want to know what I\'m doing in this pointless dead end cave?',
     'Well, I\m trying to dig to a secluded island north of here. I\'ve heard there are some unusual Pokémon there.',
@@ -1343,7 +1343,7 @@ const EcruteakKimonoGirl = new NPC('Kimono Girl', [
 
 const OlivineSSAquaCaptain = new NPC('S.S. Aqua Captain', [
     'Aye! At this here dock you can travel to far away regions! But only ones you’ve travelled to before; I’ve heard the Professor has his own vessel to take ye’ to new lands!',
-]);
+], {image: 'assets/images/npcs/Sailor.png'});
 
 const CianwoodPhotographyAide = new NPC('Photography Aide', [
     'Cameron the Photographer isn’t here right now; he’s off taking photos of Pokémon on Berry Farms. Did you know that some Berries can even attract rare Pokémon?',
@@ -2798,7 +2798,7 @@ const ExcitedChild = new NPC('Excited Child', [
 const CasteliaMusician = new NPC('Musician', [
     'Sup. Ya like jazz? No? Well then you should check out me and my band at the Sonata Cafe where we never play Jazz.',
     'Sometimes a cool singing Pokémon shows up and joins in on our set. I’ve heard that trainers as strong as the Champion have found it roaming around the region looking for Pokémon battles… but even I wouldn’t challenge it to a Music battle.',
-], {image: 'assets/images/trainers/Musician.png'});
+], {image: 'assets/images/npcs/Musician.png'});
 
 const PlasmaGrunt1 = new NPC('Team Plasma Grunt', [
     'Why hello there. Nothing strange going on here. Please move along.',
@@ -4508,7 +4508,7 @@ const CirchesterGuitarist = new NPC('Guitarist Justin', [
     'I caught this Snom on Steamdrift Way and we’ve become really good mates.',
     'I thought that friendship was all Snom needed to evolve, but I kept trying to give it a Soothe Bell during the day and nothing happened!',
     'I’m too busy playing gigs to scamper around with Snom in the evening!',
-], {image: 'assets/images/trainers/Guitarist (male).png'});
+], {image: 'assets/images/npcs/Guitarist (male).png'});
 
 const TeamYellGrunts = new NPC('Team Yell Grunts', [
     'Our Marnie’s Morpeko is so cute, don’tcha think?',
