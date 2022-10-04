@@ -6312,7 +6312,7 @@ dungeonList['Santalune Forest'] = new Dungeon('Santalune Forest',
             {loot: 'Insect Plate'},
             {loot: 'Fist Plate'},
         ],
-        legendary: [{loot: 'SmallRestore'},],
+        legendary: [{loot: 'SmallRestore'}],
     },
     5803020,
     [
