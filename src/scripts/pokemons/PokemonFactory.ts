@@ -273,6 +273,7 @@ class PokemonFactory {
             case 'Rusted_Sword':
             case 'Rusted_Shield':
                 chance = GameConstants.RUST_ITEM_CHANCE;
+                break;
             case 'Black_mane_hair':
             case 'White_mane_hair':
                 chance = GameConstants.MANE_ITEM_CHANCE;
