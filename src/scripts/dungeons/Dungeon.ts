@@ -7995,7 +7995,6 @@ dungeonList['Aether Foundation'] = new Dungeon('Aether Foundation',
         legendary: [
             {loot: 'LargeRestore'},
             {loot: 'Max Revive'},
-            {loot: 'Leek'},
             {loot: 'Protein', requirement: new ClearDungeonRequirement(200, GameConstants.getDungeonIndex('Aether Foundation'))},
         ],
     },

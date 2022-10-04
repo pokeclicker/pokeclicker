@@ -3087,7 +3087,6 @@ const pokemonList = createPokemonArray(
             'specialDefense': 62,
             'speed': 60,
         },
-        'heldItem': {type: ItemType.item, id: 'Leek'},
     },
     {
         'id': 83.1,
