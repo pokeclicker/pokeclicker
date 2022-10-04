@@ -1203,6 +1203,9 @@ class Update implements Saveable {
         '0.9.17': ({ playerData, saveData }) => {
             // Add Sudowoodo Temporary Battle
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 7);
+
+            // Pinkan Berry - Obtained Statistics
+            saveData.statistics.berriesObtained = Update.moveIndex(saveData.statistics.berriesObtained, 35);
         },
     };
 
