@@ -268,6 +268,12 @@ class PokemonFactory {
             case 'White_DNA':
                 chance = GameConstants.DNA_ITEM_CHANCE;
                 break;
+            case 'Solar_light':
+                chance = GameConstants.LIGHT_ITEM_CHANCE;
+                break;
+            case 'Lunar_light':
+                chance = GameConstants.LIGHT_ITEM_CHANCE;
+                break;
             case 'Rusted_Sword':
                 chance = GameConstants.RUST_ITEM_CHANCE;
                 break;

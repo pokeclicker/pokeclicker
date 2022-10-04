@@ -3853,6 +3853,17 @@ const SeafolkCaptain = new NPC('Captain Mina', [
     'If you can clear my trial you\'ll find our Kahuna on Exeggutor Island.',
 ], {image: 'assets/images/gymLeaders/Mina.png'});
 
+const LanakilaColress = new NPC('Colress', [
+    'It\'s been a while. You must be a formidable Trainer indeed if you are able to get Necrozma as one of your allies.',
+    'Good! And this is from me! The Ultra Recon Squad asked me to develop a device that would be able to control Necrozma. But I improved it to my own liking! And now it is a device that makes it possible to draw out even more power from Necrozma! Yes, in short, it makes it possible for Necrozma to fuse with the light of the Legendary Pokémon Solgaleo! This is the Colress Machine No. 1198, officially dubbed the N-Solarizer!',
+    'In addition, this is the Colress Machine No. 1199, officially dubbed the N-Lunarizer! It makes it possible for Necrozma to fuse with the light of the Legendary Pokémon, Lunala!',
+    'If you wish to make use of them, you will require light from Solgaleo and Lunala respectively. I believe that they may drop the crystallised form of this light if you defeat them in battle!',
+    'I believe that a Trainer like you will be able to use both Alola\'s Legendary Pokémon and the fearsome power of Necrozma properly! I happen to know quite a bit about Pokémon fusion myself... But that is a different tale. Good luck in your battles!',
+], {
+    image: 'assets/images/temporaryBattle/Colress.png',
+    requirement: new ObtainedPokemonRequirement(pokemonMap.Necrozma),
+});
+
 const AetherParadiseAlolaRoamerNPC = new RoamerNPC('Assistant Branch Chief Wicke', [
     'Some very rare Pokémon have been sighted on {ROUTE_NAME}. I hope we can learn more about them.',
 ], GameConstants.Region.alola, RoamingPokemonList.findGroup(GameConstants.Region.alola, GameConstants.AlolaSubRegions.AkalaIsland), 'assets/images/npcs/Assistant Branch Chief Wicke.png');
@@ -4236,7 +4247,9 @@ TownList['Mina\'s Houseboat'] = new DungeonTown(
 TownList['Mount Lanakila'] = new DungeonTown(
     'Mount Lanakila',
     GameConstants.Region.alola,
-    [new GymBadgeRequirement(BadgeEnums.GroundiumZ)]
+    [new GymBadgeRequirement(BadgeEnums.GroundiumZ)],
+    [],
+    [LanakilaColress]
 );
 TownList['Lake of the Sunne and Moone'] = new DungeonTown(
     'Lake of the Sunne and Moone',
