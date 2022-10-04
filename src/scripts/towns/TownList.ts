@@ -4491,7 +4491,7 @@ const CirchesterHop = new NPC('Hop', [
     'Do you think...it could’ve been one of them? I mean the sword or the shield Pokémon?',
     'Perhaps when their duty was completed, they went into some kind of sleep?',
 ], {
-    image: 'assets/images/temporaryBattle/Hop.png',
+    image: 'assets/images/gymLeaders/Hop.png',
     requirement: new MultiRequirement([new TemporaryBattleRequirement('Hop7'), new QuestLineCompletedRequirement('The Darkest Day', GameConstants.AchievementOption.less)]),
 });
 
@@ -4560,14 +4560,14 @@ const Klara1 = new NPC ('Klara', [
     'Hold up a sec! *wheeze*... *wheeze*... Hellooo, what\'s this?! Three Max Mushrooms in one spot? Here I thought I\'d need to go find them one by one! I saw those mushrooms first! I swear! I\'ve been at the dojo longer and all. Sooo... It\'s only fair you let me have \'em. Riiight?',
     'Waaait... What\'s this, now? Are you givin\' me attitude? Pityin\' me, are you?! Gosh, you\'re such a pain in the neck... You just show up outta nowhere, and just happen to be young and talented... If you\'re looking to get in my way, well, I think some vile poisons will take care of that!',
 ], {
-    image: 'assets/images/temporaryBattle/Klara.png',
+    image: 'assets/images/gymLeaders/Klara.png',
     requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 5), new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 7, GameConstants.AchievementOption.less )]),
 });
 const Avery1 = new NPC ('Avery', [
     'Wait just one moment! *pant*... *pant*... Hah! Just as I expected! Multiple Max Mushrooms growing in a bunch! My psychic powers picked up on these Max Mushrooms eons before you found them. I believe I should be the first one to get those Max Mushrooms. First come, first served, and all!',
     'What\'s this? Are you trying to show you\'re stronger than me? How distasteful! I find your presence most disturbing! You show up at the dojo unannounced and go on to show such talent, even though you\'re still so young... You dare get in my way? I warned you about my psychic powers, and now you\'ll experience them firsthand!',
 ], {
-    image: 'assets/images/temporaryBattle/Avery.png',
+    image: 'assets/images/gymLeaders/Avery.png',
     requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 5), new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 7, GameConstants.AchievementOption.less )]),
 });
 const Mustard5 = new NPC ('Mustard', [
@@ -4586,7 +4586,7 @@ const Klara2 = new NPC ('Klara', [
     'When I beat you, I\'ll get the secret armor... and then I\'ll become a Poison-type Gym Leader! I\'ve got to win, no matter what.. I\'m gonna go all out and totally beat you. You ready?',
     'I\'m not holding a single thing back anymore. Time to settle this-fair and square! Oh, and maybe watch your step... Looks like some Toxic Spikes somehow got on the Battle Court!',
 ], {
-    image: 'assets/images/temporaryBattle/Klara.png',
+    image: 'assets/images/gymLeaders/Klara.png',
     requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 8), new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 10, GameConstants.AchievementOption.less )]),
 });
 const Avery2 = new NPC ('Avery', [
@@ -4594,13 +4594,13 @@ const Avery2 = new NPC ('Avery', [
     'Defeating you will grant me the secret armor...then I will at last have what I need to become a Psychic-type Gym Leader! No matter what it takes, I refuse to accept anything but a complete and utter victory... I\'m coming at you with everything I have.',
     'Heh. Let us have an elegant battle worthy of being called a finale. Prepare to sink into despair...and into the weird battlefield beneath your feet!',
 ], {
-    image: 'assets/images/temporaryBattle/Avery.png',
+    image: 'assets/images/gymLeaders/Avery.png',
     requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 8), new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 10, GameConstants.AchievementOption.less )]),
 });
 const Mustard6 = new NPC ('Mustard', [
     'The victor has been decided! The one to complete the third trial is you, our newest student! You gave it your best and triumphed, even when faced with an unfair challenge. To you, who has completed all the trials... I grant the secret armor of the Master Dojo!',
     'Now then... Come on out! This Pokémon is in fact the secret armor of the Master Dojo! Say hello to...Kubfu!',
-    '<img src="assets/images/npcs/textbody/kubfu.png">',
+    '<img src="assets/images/pokemon/891.png">',
     'I know... I know... It\'s tiny... But raise it with diligence, and it\'ll become strong enough to see you through any battle, just like a suit of armor. No opponent will be able to get past it!',
     'Now, I give you permission to catch it!',
 ], {
@@ -4748,7 +4748,7 @@ const Calyrex4 = new NPC ('Calyrex', [
     'They can be used to combine myself and my steeds. However, it is incomplete. They must have have hair from the manes of my steeds intertwined to work.',
     'And to that point... I have a suggestion. If you are able to capture me, it will prove your worth beyond any doubt, and I will lend you my strength on your journey. Once you have readied yourself, come face me!',
 ], {
-    image: 'assets/images/temporaryBattle/Calyrex.png',
+    image: 'assets/images/npcs/Possessed Peony.png',
     requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Crown of Galar', 7), new QuestLineStepCompletedRequirement('The Crown of Galar', 9, GameConstants.AchievementOption.less )]),
 });
 const CrownPeony2 = new NPC ('Peony', [
