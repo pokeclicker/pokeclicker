@@ -1100,8 +1100,7 @@ const pokemonList = createPokemonArray(
             'defense': 40,
             'specialDefense': 50,
             'speed': 90,
-        },
-        'heldItem': {type: ItemType.item, id: 'Light_Ball'},
+        }
     },
     {
         'id': 25.01,
@@ -1118,8 +1117,7 @@ const pokemonList = createPokemonArray(
             'defense': 40,
             'specialDefense': 50,
             'speed': 90,
-        },
-        'heldItem': {type: ItemType.item, id: 'Light_Ball'},
+        }
     },
     {
         'id': 25.02,
@@ -1136,8 +1134,7 @@ const pokemonList = createPokemonArray(
             'defense': 40,
             'specialDefense': 50,
             'speed': 90,
-        },
-        'heldItem': {type: ItemType.item, id: 'Light_Ball'},
+        }
     },
     {
         'id': 25.03,
@@ -1154,8 +1151,7 @@ const pokemonList = createPokemonArray(
             'defense': 40,
             'specialDefense': 50,
             'speed': 90,
-        },
-        'heldItem': {type: ItemType.item, id: 'Light_Ball'},
+        }
     },
     {
         'id': 25.04,
@@ -1172,8 +1168,7 @@ const pokemonList = createPokemonArray(
             'defense': 40,
             'specialDefense': 50,
             'speed': 90,
-        },
-        'heldItem': {type: ItemType.item, id: 'Light_Ball'},
+        }
     },
     {
         'id': 25.05,
@@ -1190,8 +1185,7 @@ const pokemonList = createPokemonArray(
             'defense': 40,
             'specialDefense': 50,
             'speed': 90,
-        },
-        'heldItem': {type: ItemType.item, id: 'Light_Ball'},
+        }
     },
     {
         'id': 25.06,
@@ -1208,8 +1202,7 @@ const pokemonList = createPokemonArray(
             'defense': 40,
             'specialDefense': 50,
             'speed': 90,
-        },
-        'heldItem': {type: ItemType.item, id: 'Light_Ball'},
+        }
     },
     {
         'id': 25.07,
@@ -1226,8 +1219,7 @@ const pokemonList = createPokemonArray(
             'defense': 40,
             'specialDefense': 50,
             'speed': 90,
-        },
-        'heldItem': {type: ItemType.item, id: 'Light_Ball'},
+        }
     },
     {
         'id': 25.08,
@@ -1244,8 +1236,7 @@ const pokemonList = createPokemonArray(
             'defense': 40,
             'specialDefense': 50,
             'speed': 90,
-        },
-        'heldItem': {type: ItemType.item, id: 'Light_Ball'},
+        }
     },
     {
         'id': 25.09,
@@ -1262,8 +1253,7 @@ const pokemonList = createPokemonArray(
             'defense': 40,
             'specialDefense': 50,
             'speed': 90,
-        },
-        'heldItem': {type: ItemType.item, id: 'Light_Ball'},
+        }
     },
     {
         'id': 25.10,
@@ -1280,8 +1270,7 @@ const pokemonList = createPokemonArray(
             'defense': 40,
             'specialDefense': 50,
             'speed': 90,
-        },
-        'heldItem': {type: ItemType.item, id: 'Light_Ball'},
+        }
     },
     {
         'id': 25.11,
@@ -1298,8 +1287,7 @@ const pokemonList = createPokemonArray(
             'defense': 40,
             'specialDefense': 50,
             'speed': 90,
-        },
-        'heldItem': {type: ItemType.item, id: 'Light_Ball'},
+        }
     },
     {
         'id': 25.12,
@@ -1316,8 +1304,7 @@ const pokemonList = createPokemonArray(
             'defense': 40,
             'specialDefense': 50,
             'speed': 90,
-        },
-        'heldItem': {type: ItemType.item, id: 'Light_Ball'},
+        }
     },
     {
         'id': 25.13,
@@ -1334,8 +1321,7 @@ const pokemonList = createPokemonArray(
             'defense': 40,
             'specialDefense': 50,
             'speed': 90,
-        },
-        'heldItem': {type: ItemType.item, id: 'Light_Ball'},
+        }
     },
     {
         'id': 25.14,
@@ -1353,8 +1339,7 @@ const pokemonList = createPokemonArray(
             'defense': 40,
             'specialDefense': 50,
             'speed': 90,
-        },
-        'heldItem': {type: ItemType.item, id: 'Light_Ball'},
+        }
     },
     {
         'id': 25.15,
@@ -1372,8 +1357,7 @@ const pokemonList = createPokemonArray(
             'defense': 40,
             'specialDefense': 50,
             'speed': 90,
-        },
-        'heldItem': {type: ItemType.item, id: 'Light_Ball'},
+        }
     },
     {
         'id': 26,
