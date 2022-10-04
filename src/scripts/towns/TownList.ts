@@ -3855,7 +3855,10 @@ const SeafolkCaptain = new NPC('Captain Mina', [
 
 const LanakilaColress = new NPC('Colress', [
     'It\'s been a while. You must be a formidable Trainer indeed if you are able to get Necrozma as one of your allies.',
-    'Good! And this is from me! The Ultra Recon Squad asked me to develop a device that would be able to control Necrozma. But I improved it to my own liking! And now it is a device that makes it possible to draw out even more power from Necrozma! Yes, in short, it makes it possible for Necrozma to fuse with the light of the Legendary Pokémon Solgaleo! This is the Colress Machine No. 1198, officially dubbed the N-Solarizer!',
+    'Good! And this is from me! The Ultra Recon Squad asked me to develop a device that would be able to control Necrozma. But I improved it to my own liking! And now it is a device that makes it possible to draw out even more power from Necrozma!',
+    '<img src="assets/images/npcs/textbody/N-Solarizer.png">',
+    'Yes, in short, it makes it possible for Necrozma to fuse with the light of the Legendary Pokémon Solgaleo! This is the Colress Machine No. 1198, officially dubbed the N-Solarizer!',
+    '<img src="assets/images/npcs/textbody/N-Lunarizer.png">',
     'In addition, this is the Colress Machine No. 1199, officially dubbed the N-Lunarizer! It makes it possible for Necrozma to fuse with the light of the Legendary Pokémon, Lunala!',
     'If you wish to make use of them, you will require light from Solgaleo and Lunala respectively. I believe that they may drop the crystallised form of this light if you defeat them in battle!',
     'I believe that a Trainer like you will be able to use both Alola\'s Legendary Pokémon and the fearsome power of Necrozma properly! I happen to know quite a bit about Pokémon fusion myself... But that is a different tale. Good luck in your battles!',
