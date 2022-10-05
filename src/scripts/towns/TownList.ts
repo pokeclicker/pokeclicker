@@ -536,7 +536,7 @@ const SeviiGideon2 = new NPC ('Gideon', [
 });
 const SixIslandSeviiRoamerNPC = new RoamerNPC('Bug Catcher John', [
     'Apparently some kid released one of his Pokémon around here. That Pokémon, it\'s partner, and for whatever reason, the Legendary Beasts from Johto have been seen roaming on {ROUTE_NAME}.',
-], GameConstants.Region.kanto, RoamingPokemonList.findGroup(GameConstants.Region.kanto, GameConstants.KantoSubRegions.Sevii4567), undefined, new GymBadgeRequirement(BadgeEnums.Elite_OrangeChampion));
+], GameConstants.Region.kanto, RoamingPokemonList.findGroup(GameConstants.Region.kanto, GameConstants.KantoSubRegions.Sevii4567), 'assets/images/trainers/Bug Catcher.png', new GymBadgeRequirement(BadgeEnums.Elite_OrangeChampion));
 const AlteringCaveRuinManiac1 = new NPC ('Ruin Maniac', [
     'Hello. You want to know what I\'m doing in this pointless dead end cave?',
     'Well, I\m trying to dig to a secluded island north of here. I\'ve heard there are some unusual Pokémon there.',
@@ -1343,7 +1343,7 @@ const EcruteakKimonoGirl = new NPC('Kimono Girl', [
 
 const OlivineSSAquaCaptain = new NPC('S.S. Aqua Captain', [
     'Aye! At this here dock you can travel to far away regions! But only ones you’ve travelled to before; I’ve heard the Professor has his own vessel to take ye’ to new lands!',
-]);
+], {image: 'assets/images/npcs/Sailor.png'});
 
 const CianwoodPhotographyAide = new NPC('Photography Aide', [
     'Cameron the Photographer isn’t here right now; he’s off taking photos of Pokémon on Berry Farms. Did you know that some Berries can even attract rare Pokémon?',
@@ -2798,7 +2798,7 @@ const ExcitedChild = new NPC('Excited Child', [
 const CasteliaMusician = new NPC('Musician', [
     'Sup. Ya like jazz? No? Well then you should check out me and my band at the Sonata Cafe where we never play Jazz.',
     'Sometimes a cool singing Pokémon shows up and joins in on our set. I’ve heard that trainers as strong as the Champion have found it roaming around the region looking for Pokémon battles… but even I wouldn’t challenge it to a Music battle.',
-], {image: 'assets/images/trainers/Musician.png'});
+], {image: 'assets/images/npcs/Musician.png'});
 
 const PlasmaGrunt1 = new NPC('Team Plasma Grunt', [
     'Why hello there. Nothing strange going on here. Please move along.',
@@ -4507,7 +4507,7 @@ const CirchesterHop = new NPC('Hop', [
     'Do you think...it could’ve been one of them? I mean the sword or the shield Pokémon?',
     'Perhaps when their duty was completed, they went into some kind of sleep?',
 ], {
-    image: 'assets/images/temporaryBattle/Hop.png',
+    image: 'assets/images/gymLeaders/Hop.png',
     requirement: new MultiRequirement([new TemporaryBattleRequirement('Hop7'), new QuestLineStepCompletedRequirement('The Darkest Day', 6, GameConstants.AchievementOption.less)]),
 });
 
@@ -4524,7 +4524,7 @@ const CirchesterGuitarist = new NPC('Guitarist Justin', [
     'I caught this Snom on Steamdrift Way and we’ve become really good mates.',
     'I thought that friendship was all Snom needed to evolve, but I kept trying to give it a Soothe Bell during the day and nothing happened!',
     'I’m too busy playing gigs to scamper around with Snom in the evening!',
-], {image: 'assets/images/trainers/Guitarist (male).png'});
+], {image: 'assets/images/npcs/Guitarist (male).png'});
 
 const TeamYellGrunts = new NPC('Team Yell Grunts', [
     'Our Marnie’s Morpeko is so cute, don’tcha think?',
@@ -4551,7 +4551,7 @@ const WyndonHop = new NPC('Hop', [
     'That\'s it! I\'m sure it\'s got to be the Slumbering Weald! Those illusions you tried to fight off that day—they must\'ve been the Pokémon that are supposed to be sleeping there!',
     'Let\'s go back to the Slumbering Weald! If we\'re lucky, we\'ll find something that can help!',
 ], {
-    image: 'assets/images/temporaryBattle/Hop.png',
+    image: 'assets/images/gymLeaders/Hop.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Darkest Day', 11), new QuestLineStepCompletedRequirement('The Darkest Day', 13, GameConstants.AchievementOption.less)]),
 });
 
@@ -4561,7 +4561,7 @@ const SlumberingHop1 = new NPC('Hop', [
     'I don\'t know if these rusty old things will really be able to stop the Darkest Day, but... Well, I guess it can\'t hurt to have them along! Let\'s hope they bring us some good luck!',
     'Maybe the Pokémon themselves really are still asleep somewhere. So it seems we\'re on our own if we want to go help Lee. This is all the help we\'ve got!',
 ], {
-    image: 'assets/images/temporaryBattle/Hop.png',
+    image: 'assets/images/gymLeaders/Hop.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Darkest Day', 13), new QuestLineStepCompletedRequirement('The Darkest Day', 15, GameConstants.AchievementOption.less)]),
 });
 
@@ -4595,7 +4595,7 @@ const SlumberingHop2 = new NPC('Hop', [
     'Really... You\'re amazing. So amazing, maybe, that I don\'t even realize just how amazing you really are!',
     'So, do you think... Would you be up for one more battle?',
 ], {
-    image: 'assets/images/temporaryBattle/Hop.png',
+    image: 'assets/images/gymLeaders/Hop.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Sword and Shield', 0), new QuestLineStepCompletedRequirement('Sword and Shield', 1, GameConstants.AchievementOption.less)]),
 });
 
@@ -4660,7 +4660,7 @@ const EnergyPlantHop = new NPC('Hop', [
     'But when you caught them, neither were using them. But they must still have them, right?',
     'So.... Maybe if you keep defeating them, they\'ll occasionally drop them?',
 ], {
-    image: 'assets/images/temporaryBattle/Hop.png',
+    image: 'assets/images/gymLeaders/Hop.png',
     requirement: new MultiRequirement([new QuestLineCompletedRequirement('Sword and Shield')]),
 });
 
@@ -4708,14 +4708,14 @@ const Klara1 = new NPC ('Klara', [
     'Hold up a sec! *wheeze*... *wheeze*... Hellooo, what\'s this?! Three Max Mushrooms in one spot? Here I thought I\'d need to go find them one by one! I saw those mushrooms first! I swear! I\'ve been at the dojo longer and all. Sooo... It\'s only fair you let me have \'em. Riiight?',
     'Waaait... What\'s this, now? Are you givin\' me attitude? Pityin\' me, are you?! Gosh, you\'re such a pain in the neck... You just show up outta nowhere, and just happen to be young and talented... If you\'re looking to get in my way, well, I think some vile poisons will take care of that!',
 ], {
-    image: 'assets/images/temporaryBattle/Klara.png',
+    image: 'assets/images/gymLeaders/Klara.png',
     requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 5), new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 7, GameConstants.AchievementOption.less )]),
 });
 const Avery1 = new NPC ('Avery', [
     'Wait just one moment! *pant*... *pant*... Hah! Just as I expected! Multiple Max Mushrooms growing in a bunch! My psychic powers picked up on these Max Mushrooms eons before you found them. I believe I should be the first one to get those Max Mushrooms. First come, first served, and all!',
     'What\'s this? Are you trying to show you\'re stronger than me? How distasteful! I find your presence most disturbing! You show up at the dojo unannounced and go on to show such talent, even though you\'re still so young... You dare get in my way? I warned you about my psychic powers, and now you\'ll experience them firsthand!',
 ], {
-    image: 'assets/images/temporaryBattle/Avery.png',
+    image: 'assets/images/gymLeaders/Avery.png',
     requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 5), new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 7, GameConstants.AchievementOption.less )]),
 });
 const Mustard5 = new NPC ('Mustard', [
@@ -4734,7 +4734,7 @@ const Klara2 = new NPC ('Klara', [
     'When I beat you, I\'ll get the secret armor... and then I\'ll become a Poison-type Gym Leader! I\'ve got to win, no matter what.. I\'m gonna go all out and totally beat you. You ready?',
     'I\'m not holding a single thing back anymore. Time to settle this-fair and square! Oh, and maybe watch your step... Looks like some Toxic Spikes somehow got on the Battle Court!',
 ], {
-    image: 'assets/images/temporaryBattle/Klara.png',
+    image: 'assets/images/gymLeaders/Klara.png',
     requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 8), new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 10, GameConstants.AchievementOption.less )]),
 });
 const Avery2 = new NPC ('Avery', [
@@ -4742,13 +4742,13 @@ const Avery2 = new NPC ('Avery', [
     'Defeating you will grant me the secret armor...then I will at last have what I need to become a Psychic-type Gym Leader! No matter what it takes, I refuse to accept anything but a complete and utter victory... I\'m coming at you with everything I have.',
     'Heh. Let us have an elegant battle worthy of being called a finale. Prepare to sink into despair...and into the weird battlefield beneath your feet!',
 ], {
-    image: 'assets/images/temporaryBattle/Avery.png',
+    image: 'assets/images/gymLeaders/Avery.png',
     requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 8), new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 10, GameConstants.AchievementOption.less )]),
 });
 const Mustard6 = new NPC ('Mustard', [
     'The victor has been decided! The one to complete the third trial is you, our newest student! You gave it your best and triumphed, even when faced with an unfair challenge. To you, who has completed all the trials... I grant the secret armor of the Master Dojo!',
     'Now then... Come on out! This Pokémon is in fact the secret armor of the Master Dojo! Say hello to...Kubfu!',
-    '<img src="assets/images/npcs/textbody/kubfu.png">',
+    '<img src="assets/images/pokemon/891.png">',
     'I know... I know... It\'s tiny... But raise it with diligence, and it\'ll become strong enough to see you through any battle, just like a suit of armor. No opponent will be able to get past it!',
     'Now, I give you permission to catch it!',
 ], {
@@ -4896,14 +4896,14 @@ const Calyrex4 = new NPC ('Calyrex', [
     'They can be used to combine myself and my steeds. However, it is incomplete. They must have have hair from the manes of my steeds intertwined to work. I expect they will occasionally leave such hair behind upon being defeated.',
     'And to that point... I have a suggestion. If you are able to capture me, it will prove your worth beyond any doubt, and I will lend you my strength on your journey. Once you have readied yourself, come face me!',
 ], {
-    image: 'assets/images/temporaryBattle/Possessed Peony.png',
+    image: 'assets/images/npcs/Possessed Peony.png',
     requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Crown of Galar', 7), new QuestLineStepCompletedRequirement('The Crown of Galar', 9, GameConstants.AchievementOption.less )]),
 });
 const Calyrex5 = new NPC ('Calyrex', [
     '<i>Human child... I look forward to what adventures we might have together.</i>',
     '<i>May I remind you, if you ever wish to return my steeds and I to our true power, you must gather some hair from the manes of my steeds as they roam the Crown Tundra, and intertwine such hair with the Reins of Unity.</i>',
 ], {
-    image: 'assets/images/temporaryBattle/Calyrex.png',
+    image: 'assets/images/pokemon/898.png',
     requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Crown of Galar', 9)]),
 });
 const CrownPeony2 = new NPC ('Peony', [
