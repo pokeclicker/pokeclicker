@@ -3863,7 +3863,7 @@ const LanakilaColress = new NPC('Colress', [
     'If you wish to make use of them, you will require light from Solgaleo and Lunala respectively. I believe that they may drop the crystallised form of this light if you defeat them in battle!',
     'I believe that a Trainer like you will be able to use both Alola\'s Legendary Pokémon and the fearsome power of Necrozma properly! I happen to know quite a bit about Pokémon fusion myself... But that is a different tale. Good luck in your battles!',
 ], {
-    image: 'assets/images/temporaryBattle/Colress.png',
+    image: 'assets/images/trainers/Team Plasma (colress).png',
     requirement: new ObtainedPokemonRequirement(pokemonMap.Necrozma),
 });
 
