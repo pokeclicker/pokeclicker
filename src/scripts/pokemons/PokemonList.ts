@@ -20576,6 +20576,7 @@ const pokemonList = createPokemonArray(
         'gender': {
             'type': GameConstants.GENDERLESS,
         },
+        'heldItem': {type: ItemType.item, id: 'Solar_light'},
     },
     {
         'id': 792,
@@ -20596,6 +20597,7 @@ const pokemonList = createPokemonArray(
         'gender': {
             'type': GameConstants.GENDERLESS,
         },
+        'heldItem': {type: ItemType.item, id: 'Lunar_light'},
     },
     {
         'id': 793,
@@ -20745,6 +20747,10 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 270,
         'catchRate': 255,
+        'evolutions': [
+            new StoneEvolution('Necrozma', 'Necrozma (Dusk Mane)', GameConstants.StoneType.Solar_light),
+            new StoneEvolution('Necrozma', 'Necrozma (Dawn Wings)', GameConstants.StoneType.Lunar_light),
+        ],
         'base': {
             'hitpoints': 97,
             'attack': 107,
