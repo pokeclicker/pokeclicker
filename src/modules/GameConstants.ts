@@ -11,6 +11,7 @@ export const BATTLE_FRONTIER_TICK = 0.5 * SECOND;
 export const UNDERGROUND_TICK = 1 * SECOND;
 export const DUNGEON_TIME = 60 * SECOND;
 export const DUNGEON_TICK = 0.1 * SECOND;
+export const DUNGEON_LADDER_BONUS = 10 * SECOND;
 export const EFFECT_ENGINE_TICK = 1 * SECOND;
 export const SAVE_TICK = 10 * SECOND;
 export const GYM_TIME = 30 * SECOND;
@@ -108,6 +109,7 @@ export const BerryColor = [
 // Dungeons
 export const BASE_DUNGEON_SIZE = 5;
 export const MIN_DUNGEON_SIZE = 5;
+export const MAX_DUNGEON_SIZE = 10;
 export const DUNGEON_CHEST_SHOW = 2;
 export const DUNGEON_MAP_SHOW = 4;
 
@@ -150,6 +152,7 @@ export enum DungeonTile {
     enemy,
     chest,
     boss,
+    ladder,
 }
 
 // Held item chance
