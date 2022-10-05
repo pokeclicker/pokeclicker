@@ -61,6 +61,8 @@ type ItemNameType
     | 'Sachet'
     | 'Whipped_dream'
     | 'Ice_stone'
+    | 'Solar_light'
+    | 'Lunar_light'
     | 'Sweet_apple'
     | 'Tart_apple'
     | 'Cracked_pot'
