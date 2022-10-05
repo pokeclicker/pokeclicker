@@ -3070,6 +3070,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 62,
             'speed': 55,
         },
+        'heldItem': {type: ItemType.item, id: 'Leek'},
     },
     {
         'id': 84,
@@ -19023,6 +19024,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 89,
             'speed': 97,
         },
+        'heldItem': {type: ItemType.item, id: 'Solar_light'},
     },
     {
         'id': 792,
@@ -19040,6 +19042,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 107,
             'speed': 97,
         },
+        'heldItem': {type: ItemType.item, id: 'Lunar_light'},
     },
     {
         'id': 793,
@@ -19168,6 +19171,10 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 270,
         'catchRate': 255,
+        'evolutions': [
+            new StoneEvolution('Necrozma', 'Necrozma (Dusk Mane)', GameConstants.StoneType.Solar_light),
+            new StoneEvolution('Necrozma', 'Necrozma (Dawn Wings)', GameConstants.StoneType.Lunar_light),
+        ],
         'base': {
             'hitpoints': 97,
             'attack': 107,
@@ -20807,6 +20814,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 177,
         'catchRate': 45,
+        'heldItem': {type: ItemType.item, id: 'Leek'},
     },
     {
         'id': 866,
@@ -22409,9 +22417,11 @@ const pokemonList = createPokemonArray(
             'speed': 138,
         },
         'eggCycles': 120,
+        'evolutions': [new HeldItemLevelEvolution('Zacian (Battle Hero)', 'Zacian (Crowned Sword)', 100, 'Rusted_Sword')],
         'levelType': LevelType.slow,
         'exp': 335,
         'catchRate': 10,
+        'heldItem': {type: ItemType.item, id: 'Rusted_Sword'},
     },
     {
         'id': 888.1,
@@ -22429,6 +22439,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 335,
         'catchRate': 10,
+        'heldItem': {type: ItemType.item, id: 'Rusted_Sword'},
     },
     {
         'id': 889,
@@ -22443,9 +22454,11 @@ const pokemonList = createPokemonArray(
             'speed': 138,
         },
         'eggCycles': 120,
+        'evolutions': [new HeldItemLevelEvolution('Zamazenta (Battle Hero)', 'Zamazenta (Crowned Shield)', 100, 'Rusted_Shield')],
         'levelType': LevelType.slow,
         'exp': 335,
         'catchRate': 10,
+        'heldItem': {type: ItemType.item, id: 'Rusted_Shield'},
     },
     {
         'id': 889.1,
@@ -22463,6 +22476,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 335,
         'catchRate': 10,
+        'heldItem': {type: ItemType.item, id: 'Rusted_Shield'},
     },
     {
         'id': 890,
@@ -22694,6 +22708,7 @@ const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': 335,
+        'heldItem': {type: ItemType.item, id: 'White_mane_hair'},
     },
     {
         'id': 897,
@@ -22711,6 +22726,7 @@ const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': 335,
+        'heldItem': {type: ItemType.item, id: 'Black_mane_hair'},
     },
     {
         'id': 898,
@@ -22725,6 +22741,10 @@ const pokemonList = createPokemonArray(
             'speed': 80,
         },
         'catchRate': 3,
+        'evolutions': [
+            new StoneEvolution('Calyrex', 'Shadow Rider Calyrex', GameConstants.StoneType.Black_mane_hair),
+            new StoneEvolution('Calyrex', 'Ice Rider Calyrex', GameConstants.StoneType.White_mane_hair),
+        ],
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': 335,

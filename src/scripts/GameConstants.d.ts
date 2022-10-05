@@ -98,7 +98,8 @@ namespace GameConstants {
         'Farming',
         'Quest',
         'Battle Frontier',
-        'Protein'
+        'Protein',
+        'Pokérus',
     }
     declare enum DungeonTile {
         empty,
@@ -148,6 +149,9 @@ namespace GameConstants {
     declare const EP_EV_RATIO: number;
     declare const EP_CHALLENGE_MODIFIER: number;
     declare const DNA_ITEM_CHANCE: number;
+    declare const LIGHT_ITEM_CHANCE: number;
+    declare const RUST_ITEM_CHANCE: number;
+    declare const MANE_ITEM_CHANCE: number;
     declare enum GameState {
         idle,
         paused,
@@ -277,11 +281,15 @@ namespace GameConstants {
         'Sachet',
         'Whipped_dream',
         'Ice_stone',
+        'Solar_light',
+        'Lunar_light',
         'Sweet_apple',
         'Tart_apple',
         'Cracked_pot',
         'Galarica_cuff',
         'Galarica_wreath',
+        'Black_mane_hair',
+        'White_mane_hair',
     }
     declare enum FossilPieceType {
         'None',
@@ -595,5 +603,31 @@ namespace GameConstants {
         NorthGalar,
         IsleofArmor,
         CrownTundra,
+    }
+
+
+    declare enum AlcremieSweet {
+        'Strawberry Sweet',
+        'Love Sweet',
+        'Berry Sweet',
+        'Clover Sweet',
+        'Flower Sweet',
+        'Star Sweet',
+        'Ribbon Sweet'
+    }
+    declare enum AlcremieSpins {
+        dayClockwiseBelow5,
+        dayCounterclockwiseBelow5,
+        nightClockwiseBelow5,
+        nightCounterclockwiseAbove5,
+        nightClockwiseAbove5,
+        nightCounterclockwiseBelow5,
+        dayClockwiseAbove5,
+        dayCounterclockwiseAbove5,
+        at7Above10
+    }
+    declare enum ExtraAchievementCategories {
+        global,
+        sevii,
     }
 }

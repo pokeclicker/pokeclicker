@@ -62,22 +62,22 @@
             <div class="form-group col-md-6 col-6 p-0">
                 <label for="protein-search">Search</label>
                 <input id="protein-search" autocomplete="off" class="form-control" placeholder="search here"
-                    data-bind="textInput: ProteinFilters.search.value"
+                    data-bind="textInput: Settings.getSetting('proteinSearchFilter').observableValue"
                 />
             </div>
             <div class="form-group col-md-3 col-3 p-0">
                 <label for="protein-region-filter">Region</label>
-                <select id="protein-region-filter" name="proteinRegionFilter" autocomplete="off" class="custom-select" onchange="ProteinFilters.region.value(+this.value), Settings.setSettingByName(this.name, this.value)">
+                <select id="protein-region-filter" name="proteinRegionFilter" autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, +this.value)">
                     <!-- ko foreach: Settings.getSetting('proteinRegionFilter').options.filter(r => r.value <= player.highestRegion()) -->
-                    <option data-bind="attr: { value: $data.value }, text: $data.text">Region</option>
+                    <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('proteinRegionFilter').value === $data.value }, text: $data.text">Region</option>
                     <!-- /ko -->
                 </select>
             </div>
             <div class="form-group col-md-3 col-3 p-0">
                 <label for="protein-type-filter">Type</label>
-                <select id="protein-type-filter" name="proteinTypeFilter" autocomplete="off" class="custom-select" onchange="ProteinFilters.type.value(+this.value), Settings.setSettingByName(this.name, this.value)">
+                <select id="protein-type-filter" name="proteinTypeFilter" autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, +this.value)">
                     <!-- ko foreach: Settings.getSetting('proteinTypeFilter').options -->
-                    <option data-bind="attr: { value: $data.value }, text: $data.text">Type</option>
+                    <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('proteinTypeFilter').value === $data.value }, text: $data.text">Type</option>
                     <!-- /ko -->
                 </select>
             </div>
