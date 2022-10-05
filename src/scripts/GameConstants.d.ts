@@ -152,6 +152,7 @@ namespace GameConstants {
     declare const EP_EV_RATIO: number;
     declare const EP_CHALLENGE_MODIFIER: number;
     declare const DNA_ITEM_CHANCE: number;
+    declare const LIGHT_ITEM_CHANCE: number;
     declare const RUST_ITEM_CHANCE: number;
     declare const MANE_ITEM_CHANCE: number;
     declare enum GameState {
@@ -283,6 +284,8 @@ namespace GameConstants {
         'Sachet',
         'Whipped_dream',
         'Ice_stone',
+        'Solar_light',
+        'Lunar_light',
         'Sweet_apple',
         'Tart_apple',
         'Cracked_pot',

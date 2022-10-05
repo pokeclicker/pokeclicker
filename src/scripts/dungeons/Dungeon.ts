@@ -8235,8 +8235,8 @@ dungeonList['Lake of the Sunne and Moone'] = new Dungeon('Lake of the Sunne and 
     16435490,
     [
         new DungeonBossPokemon('Cosmog', 82177450, 70),
-        new DungeonBossPokemon('Lunala', 90673816, 100, {requirement: new ObtainedPokemonRequirement(pokemonMap.Lunala)}),
-        new DungeonBossPokemon('Solgaleo', 90673816, 100, {requirement: new ObtainedPokemonRequirement(pokemonMap.Solgaleo)}),
+        new DungeonBossPokemon('Lunala', 90673816, 100, {requirement: new MultiRequirement([new ObtainedPokemonRequirement(pokemonMap.Lunala), new ObtainedPokemonRequirement(pokemonMap.Necrozma)])}),
+        new DungeonBossPokemon('Solgaleo', 90673816, 100, {requirement: new MultiRequirement([new ObtainedPokemonRequirement(pokemonMap.Solgaleo), new ObtainedPokemonRequirement(pokemonMap.Necrozma)])}),
     ],
     1200000, 27);
 
@@ -8625,8 +8625,8 @@ dungeonList['Energy Plant'] = new Dungeon('Energy Plant',
                 new GymPokemon('Gigantamax Copperajah', 26704124, 52),
             ],
             { weight: 3 }, 'Rose', '(rose)'),
-        new DungeonBossPokemon('Zacian (Battle Hero)', 169578810, 70, {requirement: new QuestLineStepCompletedRequirement('Sword and Shield', 12)}),
-        new DungeonBossPokemon('Zamazenta (Battle Hero)', 169578810, 70, {requirement: new QuestLineStepCompletedRequirement('Sword and Shield', 12)}),
+        new DungeonBossPokemon('Zacian (Battle Hero)', 169578810, 70, {requirement: new QuestLineStepCompletedRequirement('Sword and Shield', 18)}),
+        new DungeonBossPokemon('Zamazenta (Battle Hero)', 169578810, 70, {requirement: new QuestLineStepCompletedRequirement('Sword and Shield', 18)}),
     ],
     1850000, 32);
 
