@@ -76,10 +76,10 @@
                     <tr>
                       <td class="text-left align-middle">Gender Ratio</td>
                       <td class="text-justify tight">
-                        <!-- ko if: pokemonMap[$data].gender.type === GameConstants.GENDERLESS -->
+                        <!-- ko if: pokemonMap[$data].gender.type === GameConstants.Genders.Genderless -->
                           <code data-bind="html: 'Genderless'"></code>
                         <!-- /ko -->
-                        <!-- ko if: pokemonMap[$data].gender.type != GameConstants.GENDERLESS -->
+                        <!-- ko if: pokemonMap[$data].gender.type != GameConstants.Genders.Genderless -->
                           <code data-bind="html: '♂: '"></code>
                           <code data-bind="html: PokedexHelper.getGenderRatioData(pokemonMap[$data]).male + '%'"></code>
                           <br />
@@ -88,7 +88,7 @@
                         <!-- /ko -->
                       </td>
                     </tr>
-                    <!-- ko if: App.game.party.alreadyCaughtPokemon($data) && pokemonMap[$data].gender.difference -->
+                    <!-- ko if: App.game.party.alreadyCaughtPokemon($data) && pokemonMap[$data].gender.visualDifference -->
                     <tr>
                       <td class="text-left align-middle">Default sprite</td>
                       <td class="text-left tight">
@@ -129,7 +129,7 @@
                     </tr>
 
                     <!-- Gender Statistics -->
-                    <!-- ko if: pokemonMap[$data].gender.type == GameConstants.MALE_FEMALE -->
+                    <!-- ko if: pokemonMap[$data].gender.type == GameConstants.Genders.MaleFemale -->
                     <tr>
                       <td class="text-left align-middle">Male/Female Encountered</td>
                       <td class="text-left tight">
@@ -190,7 +190,7 @@
                     </tr>
 
                     <!-- Gender Statistics -->
-                    <!-- ko if: pokemonMap[$data].gender.type == GameConstants.MALE_FEMALE -->
+                    <!-- ko if: pokemonMap[$data].gender.type == GameConstants.Genders.MaleFemale -->
                     <tr>
                       <td class="text-left align-middle">Shiny Male/Female Encountered</td>
                       <td class="text-left tight">

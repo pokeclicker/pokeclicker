@@ -11,7 +11,7 @@ class PokemonFactory {
      */
     public static generateWildPokemon(route: number, region: GameConstants.Region, subRegion: SubRegion): BattlePokemon {
         if (!MapHelper.validRoute(route, region)) {
-            return new BattlePokemon('MissingNo.', 0, PokemonType.None, PokemonType.None, 0, 0, 0, 0, new Amount(0, GameConstants.Currency.money), false, 0, GameConstants.NO_GENDER);
+            return new BattlePokemon('MissingNo.', 0, PokemonType.None, PokemonType.None, 0, 0, 0, 0, new Amount(0, GameConstants.Currency.money), false, 0, GameConstants.BattlePokemonGender.NoGender);
         }
         let name: PokemonNameType;
 
@@ -110,7 +110,7 @@ class PokemonFactory {
         return false;
     }
 
-    public static generatePartyPokemon(id: number, shiny = false, gender = GameConstants.NO_GENDER): PartyPokemon {
+    public static generatePartyPokemon(id: number, shiny = false, gender = GameConstants.BattlePokemonGender.NoGender): PartyPokemon {
         const dataPokemon = PokemonHelper.getPokemonById(id);
         return new PartyPokemon(dataPokemon.id, dataPokemon.name, dataPokemon.evolutions, dataPokemon.attack, shiny, gender);
     }
@@ -317,20 +317,20 @@ class PokemonFactory {
     public static generateGender(chance: number, genderType: number): number {
         let gender;
         switch (genderType) {
-            case GameConstants.GENDERLESS:
-                gender = GameConstants.NO_GENDER;
+            case GameConstants.Genders.Genderless:
+                gender = GameConstants.BattlePokemonGender.NoGender;
                 break;
-            case GameConstants.MALE_ONLY:
-                gender = GameConstants.GENDER_MALE;
+            case GameConstants.Genders.MaleOnly:
+                gender = GameConstants.BattlePokemonGender.GenderMale;
                 break;
-            case GameConstants.FEMALE_ONLY:
-                gender = GameConstants.GENDER_FEMALE;
+            case GameConstants.Genders.FemaleOnly:
+                gender = GameConstants.BattlePokemonGender.GenderFemale;
                 break;
-            case GameConstants.MALE_FEMALE:
+            case GameConstants.Genders.MaleFemale:
                 if (Rand.chance(chance)) { // Female
-                    gender = GameConstants.GENDER_FEMALE;
+                    gender = GameConstants.BattlePokemonGender.GenderFemale;
                 } else { // Male
-                    gender = GameConstants.GENDER_MALE;
+                    gender = GameConstants.BattlePokemonGender.GenderMale;
                 }
                 break;
             default:
@@ -342,13 +342,13 @@ class PokemonFactory {
     public static genderText(gender: number) {
         let genderText;
         switch (gender) {
-            case GameConstants.NO_GENDER:
+            case GameConstants.BattlePokemonGender.NoGender:
                 genderText = GameConstants.TEXT_GENDERLESS;
                 break;
-            case GameConstants.GENDER_MALE:
+            case GameConstants.BattlePokemonGender.GenderMale:
                 genderText = GameConstants.TEXT_MALE;
                 break;
-            case GameConstants.GENDER_FEMALE:
+            case GameConstants.BattlePokemonGender.GenderFemale:
                 genderText = GameConstants.TEXT_FEMALE;
                 break;
             default:

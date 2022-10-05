@@ -155,7 +155,7 @@ class PokedexHelper {
             }
 
             // Only pokemon with gender differences
-            if (filter['gender-diff'] && !(pokemon as PokemonListData).gender.difference) {
+            if (filter['gender-diff'] && !(pokemon as PokemonListData).gender.visualDifference) {
                 return false;
             }
 
@@ -183,10 +183,10 @@ class PokedexHelper {
         const genderRatio = pokemon.gender.ratio;
         const genderObject = {'male': 0, 'female': 0};
         // console.log(pokemon);
-        if (genderType === GameConstants.MALE_ONLY) {
+        if (genderType === GameConstants.Genders.MaleOnly) {
             genderObject.male = 100;
             genderObject.female = 0;
-        } else if (genderType === GameConstants.FEMALE_ONLY) {
+        } else if (genderType === GameConstants.Genders.FemaleOnly) {
             genderObject.male = 0;
             genderObject.female = 100;
         } else {

@@ -609,10 +609,12 @@ namespace GameConstants {
     }
 
     // Gender Types
-    declare const GENDERLESS;
-    declare const MALE_ONLY;
-    declare const FEMALE_ONLY;
-    declare const MALE_FEMALE;
+    declare enum Genders {
+        Genderless,
+        MaleOnly,
+        FemaleOnly,
+        MaleFemale,
+    }
 
     // Gender Ratio
     declare const MALE_12_5;
@@ -627,9 +629,11 @@ namespace GameConstants {
     declare const TEXT_FEMALE;
 
     // Current Pokémon Gender
-    declare const NO_GENDER;
-    declare const GENDER_MALE;
-    declare const GENDER_FEMALE;
+    declare enum BattlePokemonGender {
+        NoGender,
+        GenderMale,
+        GenderFemale,
+    }
 
     // Pokemon Statistics
     declare const STATISTIC_CAPTURED;

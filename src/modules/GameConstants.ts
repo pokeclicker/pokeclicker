@@ -1579,10 +1579,12 @@ export enum GalarSubRegions {
 }
 
 // Gender Types
-export const GENDERLESS = 0;
-export const MALE_ONLY = 1;
-export const FEMALE_ONLY = 2;
-export const MALE_FEMALE = 3; // Default
+export enum Genders {
+    Genderless = 0,
+    MaleOnly,
+    FemaleOnly,
+    MaleFemale, // Default
+}
 
 // Gender Ratio
 export const MALE_12_5 = 8 / 7;
@@ -1597,15 +1599,18 @@ export const TEXT_MALE = '<i class="gender-icon-male">♂</i>'; // If Bootstrap 
 export const TEXT_FEMALE = '<i class="gender-icon-female">♀</i>'; // If Bootstrap Icons: <i class="bi bi-gender-female gender-icon-female"></i>
 
 // Wild/Trainer/BF Pokémon Gender
-export const NO_GENDER = 0;
-export const GENDER_MALE = 1;
-export const GENDER_FEMALE = 2;
+export enum BattlePokemonGender {
+    NoGender = 0,
+    GenderMale,
+    GenderFemale,
+}
 
 // Pokemon Statistics
 export const STATISTIC_CAPTURED = 'Captured';
 export const STATISTIC_DEFEATED = 'Defeated';
 export const STATISTIC_ENCOUNTERED = 'Encountered';
 export const STATISTIC_HATCHED = 'Hatched';
+
 export enum AlcremieSweet {
     'Strawberry Sweet',
     'Love Sweet',

@@ -79,7 +79,7 @@ class PokemonHelper {
         }
         let genderString = '';
         // If Pokémon is female, use the female sprite, otherwise use the male/genderless one
-        const hasDiff = this.getPokemonById(pokemonId).gender.difference;
+        const hasDiff = this.getPokemonById(pokemonId).gender.visualDifference;
         if (hasDiff) {
             if (gender) {
                 genderString = '-f';
@@ -180,17 +180,17 @@ class PokemonHelper {
         };
         let genderString = '';
         // Gender Statistics
-        if (gender === GameConstants.GENDER_MALE) {
+        if (gender === GameConstants.BattlePokemonGender.GenderMale) {
             genderString = 'Male';
-        } else if (gender === GameConstants.GENDER_FEMALE) {
+        } else if (gender === GameConstants.BattlePokemonGender.GenderFemale) {
             genderString = 'Female';
-        } else if (gender === GameConstants.NO_GENDER) {
+        } else if (gender === GameConstants.BattlePokemonGender.NoGender) {
             genderString = 'Genderless';
         }
         GameHelper.incrementObservable(pokemonStatistics[statistic]);
         GameHelper.incrementObservable(totalStatistics[statistic]);
         // Gender
-        if (gender != GameConstants.NO_GENDER) {
+        if (gender != GameConstants.BattlePokemonGender.NoGender) {
             GameHelper.incrementObservable(pokemonStatistics[genderString + statistic]);
         }
         GameHelper.incrementObservable(totalStatistics[genderString + statistic]);
@@ -199,7 +199,7 @@ class PokemonHelper {
             GameHelper.incrementObservable(pokemonStatistics[shinyString + statistic]);
             GameHelper.incrementObservable(totalStatistics[shinyString + statistic]);
             // Gender
-            if (gender != GameConstants.NO_GENDER) {
+            if (gender != GameConstants.BattlePokemonGender.NoGender) {
                 GameHelper.incrementObservable(pokemonStatistics[shinyString + genderString + statistic]);
             }
             GameHelper.incrementObservable(totalStatistics[shinyString + genderString + statistic]);
