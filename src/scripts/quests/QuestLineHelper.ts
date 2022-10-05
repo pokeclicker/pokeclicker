@@ -1283,6 +1283,9 @@ class QuestLineHelper {
         const talktoLeon = new TalkToNPCQuest(Leon, 'After all those interruptions, it\'s finally time for the Championship match! Talk to Leon at Wyndon Stadium.');
         darkestDayQuestLine.addQuest(talktoLeon);
 
+        const clearLeon = new CustomQuest(1, 0, 'Defeat Leon to become the Champion of Galar!', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Champion Leon')]());
+        darkestDayQuestLine.addQuest(clearLeon);
+
         App.game.quests.questLines().push(darkestDayQuestLine);
     }
 
