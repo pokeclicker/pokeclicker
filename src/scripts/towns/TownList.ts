@@ -4596,7 +4596,7 @@ const SlumberingHop2 = new NPC('Hop', [
     'So, do you think... Would you be up for one more battle?',
 ], {
     image: 'assets/images/gymLeaders/Hop.png',
-    requirement: new MultiRequirement([new QuestLineStartedRequirementompletedRequirement('Sword and Shield'), new QuestLineStepCompletedRequirement('Sword and Shield', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('Sword and Shield'), new QuestLineStepCompletedRequirement('Sword and Shield', 1, GameConstants.AchievementOption.less)]),
 });
 
 const SordwardShielbert1 = new NPC('Sordward & Shielbert', [
