@@ -4543,7 +4543,7 @@ const RoseBroadcast = new NPC('Broadcast of Chairman Rose', [
 });
 
 const WyndonHop = new NPC('Hop', [
-    'That video stream... That was from Hammerlocke Stadium, right? What in the world did the chairman do...?"',
+    'That video stream... That was from Hammerlocke Stadium, right? What in the world did the chairman do...?',
     'I want to help my brother! I\'ve got to! But I can\'t even manage to beat you, so what sort of help could I ever be...?',
     'Hold the phone... The chairman was talking about the Darkest Day. That\'s the thing where the sky went all dark once, ages and ages ago, right? What does he mean, he\'s bringing that about? And where did we even hear that name...?',
     'Ah! That statue of the hero in Motostoke! Sonia said something back then, didn\'t she... Though it turned out to be wrong, since there were actually two heroes and all that.',
@@ -4566,7 +4566,7 @@ const SlumberingHop1 = new NPC('Hop', [
 });
 
 const EnergyPlantRose = new NPC('Chairman Rose', [
-    'Most impressive! I wouldn\'t expect any less from a challenger endorsed by the strongest Champion ever to grace our beloved Galar region!"',
+    'Most impressive! I wouldn\'t expect any less from a challenger endorsed by the strongest Champion ever to grace our beloved Galar region!',
     'I really do wish I could have seen the Championship Match between you two. And I\'m terribly sorry to have ruined the whole Gym Challenge and everything!',
     'It\'s too bad, but it can\'t be helped... In order to solve the energy issue as soon as possible, we awakened Eternatus. But we couldn\'t control it. The Champion came to aid me, even at the cost of abandoning the match. Indeed, just like a knight in shining armor coming to rescue a princess from a dragon!',
     'I do tend to ramble on, I know. I love to make speeches. But I think I can stop talking now. I think the Champion should have captured Eternatus by now. If you\'re curious, you can take the lift up.',
