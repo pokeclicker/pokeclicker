@@ -320,12 +320,6 @@ class PokemonFactory {
             case GameConstants.Genders.Genderless:
                 gender = GameConstants.BattlePokemonGender.NoGender;
                 break;
-            case GameConstants.Genders.MaleOnly:
-                gender = GameConstants.BattlePokemonGender.GenderMale;
-                break;
-            case GameConstants.Genders.FemaleOnly:
-                gender = GameConstants.BattlePokemonGender.GenderFemale;
-                break;
             case GameConstants.Genders.MaleFemale:
                 if (Rand.chance(chance)) { // Female
                     gender = GameConstants.BattlePokemonGender.GenderFemale;

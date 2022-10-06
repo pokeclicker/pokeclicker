@@ -611,17 +611,17 @@ namespace GameConstants {
     // Gender Types
     declare enum Genders {
         Genderless,
-        MaleOnly,
-        FemaleOnly,
         MaleFemale,
     }
 
     // Gender Ratio
-    declare const MALE_12_5;
-    declare const MALE_25;
-    declare const MALE_50;
-    declare const MALE_75;
-    declare const MALE_87_5;
+    declare const FEMALE_0;
+    declare const FEMALE_12_5;
+    declare const FEMALE_25;
+    declare const FEMALE_50;
+    declare const FEMALE_75;
+    declare const FEMALE_87_5;
+    declare const FEMALE_100;
 
     // Gender Text
     declare const TEXT_GENDERLESS;

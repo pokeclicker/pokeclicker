@@ -183,16 +183,8 @@ class PokedexHelper {
         const genderRatio = pokemon.gender.ratio;
         const genderObject = {'male': 0, 'female': 0};
         // console.log(pokemon);
-        if (genderType === GameConstants.Genders.MaleOnly) {
-            genderObject.male = 100;
-            genderObject.female = 0;
-        } else if (genderType === GameConstants.Genders.FemaleOnly) {
-            genderObject.male = 0;
-            genderObject.female = 100;
-        } else {
-            genderObject.male = 100 - (100 / genderRatio);
-            genderObject.female = 100 / genderRatio;
-        }
+        genderObject.male = 100 - (100 * genderRatio);
+        genderObject.female = 100 * genderRatio;
         return genderObject;
     }
 

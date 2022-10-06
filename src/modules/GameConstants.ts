@@ -1581,17 +1581,17 @@ export enum GalarSubRegions {
 // Gender Types
 export enum Genders {
     Genderless = 0,
-    MaleOnly,
-    FemaleOnly,
     MaleFemale, // Default
 }
 
 // Gender Ratio
-export const MALE_12_5 = 8 / 7;
-export const MALE_25 = 4 / 3;
-export const MALE_50 = 2; // Default
-export const MALE_75 = 4;
-export const MALE_87_5 = 8;
+export const FEMALE_0 = 0;
+export const FEMALE_12_5 = 0.125;
+export const FEMALE_25 = 0.25;
+export const FEMALE_50 = 0.5; // Default
+export const FEMALE_75 = 0.75;
+export const FEMALE_87_5 = 0.875;
+export const FEMALE_100 = 1;
 
 // Gender Text
 export const TEXT_GENDERLESS = '';
