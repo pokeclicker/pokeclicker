@@ -77,7 +77,10 @@ class BattlePokemon implements EnemyPokemonInterface {
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.Items.dropped_item,
             });
-            App.game.logbook.newLog(LogBookTypes.FOUND, `An enemy ${msg}`);
+            App.game.logbook.newLog(
+                LogBookTypes.FOUND,
+                createLogContent.enemyDrop({ pokemon: this.displayName, item: name })
+            );
         }
         App.game.party.gainExp(this.exp, this.level, trainer);
         App.game.gems.gainGems(this.gemReward, this.type1);

@@ -1,6 +1,7 @@
 /* eslint-disable class-methods-use-this */
 import { Observable, ObservableArray, PureComputed } from 'knockout';
 import { Feature } from '../DataStore/common/Feature';
+import { LogContent } from './helpers';
 import LogBookLog from './LogBookLog';
 import { LogBookType, LogBookTypes } from './LogBookTypes';
 
@@ -13,8 +14,8 @@ export default class LogBook implements Feature {
     public logs: ObservableArray<LogBookLog> = ko.observableArray([]);
     public filteredLogs: PureComputed<LogBookLog[]> = ko.pureComputed(() => this.logs().filter((log) => this.filters[log.type.label]?.()));
 
-    newLog(type: LogBookType, message: string) {
-        const length = this.logs.unshift(new LogBookLog(type, message));
+    newLog(type: LogBookType, content: LogContent) {
+        const length = this.logs.unshift(new LogBookLog(type, content));
         if (length > 1000) {
             this.logs.pop();
         }
@@ -26,7 +27,7 @@ export default class LogBook implements Feature {
         }
 
         json.logs?.forEach((entry) => {
-            this.logs.push(new LogBookLog(entry.type, entry.description, entry.date));
+            this.logs.push(new LogBookLog(entry.type, entry.content, entry.date));
         });
 
         Object.entries(json.filters || {}).forEach(([key, value]: [string, boolean]) => {
@@ -34,7 +35,7 @@ export default class LogBook implements Feature {
         });
     }
 
-    toJSON(): { logs: Array<{ type: LogBookType; description: string; date: number }> } {
+    toJSON(): { logs: Array<{ type: LogBookType; content: LogContent; date: number }> } {
         return ko.toJS({
             logs: this.logs.slice(0, 100),
             filters: this.filters,

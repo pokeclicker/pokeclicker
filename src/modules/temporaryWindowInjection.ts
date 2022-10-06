@@ -123,6 +123,7 @@ import Translate from './translation/Translation';
 import DayOfWeekRequirement from './requirements/DayOfWeekRequirement';
 import SaveReminder from './saveReminder/SaveReminder';
 import lazyLoad from './utilities/LazyLoader';
+import { createLogContent } from './logbook/helpers';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -167,6 +168,7 @@ Object.assign(<any>window, {
     AchievementSortOptions,
     LogBook,
     LogBookTypes,
+    createLogContent,
     ChangelogItems,
     RedeemableCode,
     RedeemableCodes,

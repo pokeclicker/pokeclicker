@@ -7,6 +7,7 @@ import AchievementRequirement from '../requirements/AchievementRequirement';
 import * as GameConstants from '../GameConstants';
 import { LogBookTypes } from '../logbook/LogBookTypes';
 import LogEvent from '../LogEvent';
+import { createLogContent } from '../logbook/helpers';
 
 export default class Achievement {
     public isCompleted: KnockoutComputed<boolean> = ko.pureComputed(() => this.achievable() && (this.unlocked || this.property.isCompleted()));
@@ -35,7 +36,7 @@ export default class Achievement {
             });
             App.game.logbook.newLog(
                 LogBookTypes.ACHIEVE,
-                `Earned "${this.name}".`,
+                createLogContent.earnedAchievement({ name: this.name }),
             );
             this.unlocked = true;
             // TODO: refilter within achievement bonus

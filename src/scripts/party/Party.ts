@@ -52,7 +52,12 @@ class Party implements Feature {
             GameHelper.incrementObservable(App.game.statistics.shinyPokemonCaptured[pokemon.id]);
             GameHelper.incrementObservable(App.game.statistics.totalShinyPokemonCaptured);
             // Add all shiny catches to the log book
-            App.game.logbook.newLog(LogBookTypes.CAUGHT, `You have captured a shiny ${pokemon.displayName}! ${this.alreadyCaughtPokemon(pokemon.id, true) ? '(duplicate)' : ''}`);
+            App.game.logbook.newLog(
+                LogBookTypes.CAUGHT,
+                this.alreadyCaughtPokemon(pokemon.id, true)
+                    ? createLogContent.capturedShinyDupe({ pokemon: pokemon.displayName })
+                    : createLogContent.capturedShiny({ pokemon: pokemon.displayName })
+            );
             // Already caught (shiny)
             if (this.alreadyCaughtPokemon(pokemon.id, true)) {
                 return;
@@ -86,7 +91,10 @@ class Party implements Feature {
             });
         }
 
-        App.game.logbook.newLog(LogBookTypes.CAUGHT, `You have captured ${GameHelper.anOrA(pokemon.name)} ${pokemon.displayName}!`);
+        App.game.logbook.newLog(
+            LogBookTypes.CAUGHT,
+            createLogContent.captured({ pokemon: pokemon.displayName })
+        );
         this._caughtPokemon.push(pokemon);
     }
 

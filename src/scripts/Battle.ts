@@ -117,9 +117,21 @@ class Battle {
         if (enemyPokemon.shiny) {
             GameHelper.incrementObservable(App.game.statistics.shinyPokemonEncountered[enemyPokemon.id]);
             GameHelper.incrementObservable(App.game.statistics.totalShinyPokemonEncountered);
-            App.game.logbook.newLog(LogBookTypes.SHINY, `[${Routes.getRoute(player.region, player.route()).routeName}] You encountered a wild shiny ${enemyPokemon.displayName}.`);
+            App.game.logbook.newLog(
+                LogBookTypes.SHINY,
+                createLogContent.encounterShiny({
+                    location: Routes.getRoute(player.region, player.route()).routeName,
+                    pokemon: enemyPokemon.displayName,
+                })
+            );
         } else if (!App.game.party.alreadyCaughtPokemon(enemyPokemon.id) && enemyPokemon.health()) {
-            App.game.logbook.newLog(LogBookTypes.NEW, `[${Routes.getRoute(player.region, player.route()).routeName}] You encountered a wild ${enemyPokemon.displayName}.`);
+            App.game.logbook.newLog(
+                LogBookTypes.NEW,
+                createLogContent.encounterWild({
+                    location: Routes.getRoute(player.region, player.route()).routeName,
+                    pokemon: enemyPokemon.displayName,
+                })
+            );
         }
     }
 
@@ -145,9 +157,15 @@ class Battle {
         if (Rand.chance(this.catchRateActual() / 100)) { // Caught
             this.catchPokemon(enemyPokemon, route, region);
         } else if (enemyPokemon.shiny) { // Failed to catch, Shiny
-            App.game.logbook.newLog(LogBookTypes.ESCAPED, `The shiny ${enemyPokemon.displayName} escaped!`);
+            App.game.logbook.newLog(
+                LogBookTypes.ESCAPED,
+                createLogContent.escapedShiny({ pokemon: enemyPokemon.displayName })
+            );
         } else if (!App.game.party.alreadyCaughtPokemon(enemyPokemon.id)) { // Failed to catch, Uncaught
-            App.game.logbook.newLog(LogBookTypes.ESCAPED, `The wild ${enemyPokemon.displayName} escaped!`);
+            App.game.logbook.newLog(
+                LogBookTypes.ESCAPED,
+                createLogContent.escapedWild({ pokemon: enemyPokemon.displayName})
+            );
         }
         this.catching(false);
         this.catchRateActual(null);

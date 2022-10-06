@@ -36,7 +36,12 @@ abstract class Evolution {
 
         // Add shiny to logbook
         if (shiny) {
-            App.game.logbook.newLog(LogBookTypes.SHINY, `Your ${this.basePokemon} evolved into a shiny ${evolvedPokemon}! ${App.game.party.alreadyCaughtPokemonByName(evolvedPokemon, true) ? '(duplicate)' : ''}`);
+            App.game.logbook.newLog(
+                LogBookTypes.SHINY,
+                App.game.party.alreadyCaughtPokemonByName(evolvedPokemon, true)
+                    ? createLogContent.evolvedShinyDupe({ basePokemon: this.basePokemon, evolvedPokemon})
+                    : createLogContent.evolvedShiny({ basePokemon: this.basePokemon, evolvedPokemon })
+            );
         }
 
         App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(evolvedPokemon).id, shiny, true);

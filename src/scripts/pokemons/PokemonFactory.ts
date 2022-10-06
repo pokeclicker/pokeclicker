@@ -57,7 +57,13 @@ class PokemonFactory {
                 sound: NotificationConstants.NotificationSound.General.roaming,
                 setting: NotificationConstants.NotificationSetting.General.encountered_roaming,
             });
-            App.game.logbook.newLog(LogBookTypes.ROAMER, `[${Routes.getRoute(player.region, player.route()).routeName}] You encountered a ${shiny ? 'shiny' : ''} roaming ${name}!`);
+            App.game.logbook.newLog(
+                LogBookTypes.ROAMER,
+                (shiny ? createLogContent.roamerShiny : createLogContent.roamer)({
+                    location: Routes.getRoute(player.region, player.route()).routeName,
+                    pokemon: name,
+                })
+            );
         }
         const ep = GameConstants.BASE_EP_YIELD * (roaming ? GameConstants.ROAMER_EP_MODIFIER : 1);
         return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, 1, heldItem, ep);
