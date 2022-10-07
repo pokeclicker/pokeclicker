@@ -10,6 +10,7 @@ class DungeonRunner {
     public static fighting: KnockoutObservable<boolean> = ko.observable(false);
     public static map: DungeonMap;
     public static chestsOpened: KnockoutObservable<number> = ko.observable(0);
+    private static chestsOpenedPerFloor: number[];
     public static currentTileType;
     public static encountersWon: KnockoutObservable<number> = ko.observable(0);
     public static fightingBoss: KnockoutObservable<boolean> = ko.observable(false);
@@ -49,6 +50,7 @@ class DungeonRunner {
 
         DungeonRunner.chestsOpened(0);
         DungeonRunner.encountersWon(0);
+        DungeonRunner.chestsOpenedPerFloor = new Array<number>(DungeonRunner.map.board().length).fill(0);
         DungeonRunner.currentTileType = ko.pureComputed(() => {
             return DungeonRunner.map.currentTile().type;
         });
@@ -101,6 +103,8 @@ class DungeonRunner {
             DungeonRunner.openChest();
         } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.boss && !DungeonRunner.fightingBoss()) {
             DungeonRunner.startBossFight();
+        } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.ladder) {
+            DungeonRunner.nextFloor();
         }
     }
 
@@ -110,6 +114,7 @@ class DungeonRunner {
         }
 
         GameHelper.incrementObservable(DungeonRunner.chestsOpened);
+        DungeonRunner.chestsOpenedPerFloor[DungeonRunner.map.playerPosition().floor]++;
 
         const clears = App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]();
         const tier = DungeonRunner.dungeon.getRandomLootTier(clears, player.highestRegion());
@@ -137,10 +142,10 @@ class DungeonRunner {
 
         DungeonRunner.map.currentTile().type(GameConstants.DungeonTile.empty);
         DungeonRunner.map.currentTile().calculateCssClass();
-        if (DungeonRunner.chestsOpened() == Math.floor(DungeonRunner.map.size / 3)) {
+        if (DungeonRunner.chestsOpenedPerFloor[DungeonRunner.map.playerPosition().floor] == Math.floor(DungeonRunner.map.floorSizes[DungeonRunner.map.playerPosition().floor] / 3)) {
             DungeonRunner.map.showChestTiles();
         }
-        if (DungeonRunner.chestsOpened() == Math.ceil(DungeonRunner.map.size / 2)) {
+        if (DungeonRunner.chestsOpenedPerFloor[DungeonRunner.map.playerPosition().floor] == Math.ceil(DungeonRunner.map.floorSizes[DungeonRunner.map.playerPosition().floor] / 2)) {
             DungeonRunner.map.showAllTiles();
         }
     }
@@ -210,6 +215,17 @@ class DungeonRunner {
 
         DungeonRunner.fightingBoss(true);
         DungeonBattle.generateNewBoss();
+    }
+
+    public static nextFloor() {
+        DungeonRunner.map.moveToCoordinates(
+            Math.floor(DungeonRunner.map.floorSizes[DungeonRunner.map.playerPosition().floor + 1] / 2),
+            DungeonRunner.map.floorSizes[DungeonRunner.map.playerPosition().floor + 1] - 1,
+            DungeonRunner.map.playerPosition().floor + 1
+        );
+        DungeonRunner.map.playerPosition.notifySubscribers();
+        DungeonRunner.timeLeft(DungeonRunner.timeLeft() + GameConstants.DUNGEON_LADDER_BONUS);
+        DungeonRunner.map.playerMoved(false);
     }
 
     public static async dungeonLeave(shouldConfirm = Settings.getSetting('confirmLeaveDungeon').observableValue()): Promise<void> {
