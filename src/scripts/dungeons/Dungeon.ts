@@ -8227,8 +8227,8 @@ dungeonList['Lake of the Sunne and Moone'] = new Dungeon('Lake of the Sunne and 
     16435490,
     [
         new DungeonBossPokemon('Cosmog', 82177450, 70),
-        new DungeonBossPokemon('Lunala', 90673816, 100, {requirement: new ObtainedPokemonRequirement(pokemonMap.Lunala)}),
-        new DungeonBossPokemon('Solgaleo', 90673816, 100, {requirement: new ObtainedPokemonRequirement(pokemonMap.Solgaleo)}),
+        new DungeonBossPokemon('Lunala', 90673816, 100, {requirement: new MultiRequirement([new ObtainedPokemonRequirement(pokemonMap.Lunala), new ObtainedPokemonRequirement(pokemonMap.Necrozma)])}),
+        new DungeonBossPokemon('Solgaleo', 90673816, 100, {requirement: new MultiRequirement([new ObtainedPokemonRequirement(pokemonMap.Solgaleo), new ObtainedPokemonRequirement(pokemonMap.Necrozma)])}),
     ],
     1200000, 27);
 
