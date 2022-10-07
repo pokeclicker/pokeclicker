@@ -347,13 +347,13 @@ class QuestLineHelper {
         const talktoZuki = new TalkToNPCQuest(Zuki, 'Talk to Kimono Girl Zuki in Violet City.');
         lugiaJohtoQuestLine.addQuest(talktoZuki);
 
-        const helpZuki = new HatchEggsQuest(10, 0);
+        const helpZuki = new HatchEggsQuest(25, 0);
         lugiaJohtoQuestLine.addQuest(helpZuki);
 
         const talktoNaoko = new TalkToNPCQuest(Naoko, 'Talk to Kimono Girl Naoko in the Ilex Forest.');
         lugiaJohtoQuestLine.addQuest(talktoNaoko);
 
-        const helpNaoko = new CustomQuest(1, 0, 'Lead Naoko out of Ilex Forest.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Ilex Forest')]());
+        const helpNaoko = new CustomQuest(1, 0, 'Clear Ilex Forest to lead Naoko to safety.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Ilex Forest')]());
         lugiaJohtoQuestLine.addQuest(helpNaoko);
 
         const kimonoReward = () => {
@@ -372,13 +372,13 @@ class QuestLineHelper {
         const talktoSayo = new TalkToNPCQuest(Sayo, 'Talk to Kimono Girl Sayo in the Ice Path.');
         lugiaJohtoQuestLine.addQuest(talktoSayo);
 
-        const helpSayo = new CustomQuest(1, 0, 'Navigate the Ice Path to give Sayo a push.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Ice Path')]());
+        const helpSayo = new CustomQuest(1, 0, 'Clear the Ice Path to give Sayo a push.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Ice Path')]());
         lugiaJohtoQuestLine.addQuest(helpSayo);
 
         const talktoKuni = new TalkToNPCQuest(Kuni, 'Talk to Kimono Girl Kuni in Goldenrod City.');
         lugiaJohtoQuestLine.addQuest(talktoKuni);
 
-        const helpKuni = new CustomQuest(1, 0, 'Check the Radio Tower for any lingering Team Rocket activity.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Radio Tower')]());
+        const helpKuni = new CustomQuest(1, 0, 'Clear the Radio Tower to get rid of any lingering Team Rocket activity.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Radio Tower')]());
         lugiaJohtoQuestLine.addQuest(helpKuni);
 
         const talktoKimonoGirlsWhirl = new TalkToNPCQuest(KimonoGirlsWhirl, 'Meet the Kimono Girls at the Whirl Islands.');
@@ -400,7 +400,7 @@ class QuestLineHelper {
     // Ho-oh Quest
 
     public static createhoohJohtoQuestLine() {
-        const hoohJohtoQuestLine = new QuestLine('Rainbow Guardian', 'The Kimono Girls of Ecruteak City wish to speak with you again.', new MultiRequirement([new QuestLineCompletedRequirement('Whirl Guardian'), new ObtainedPokemonRequirement(pokemonMap.Raikou), new ObtainedPokemonRequirement(pokemonMap.Entei), new ObtainedPokemonRequirement(pokemonMap.Suicune)]), GameConstants.BulletinBoards.Johto);
+        const hoohJohtoQuestLine = new QuestLine('Rainbow Guardian', 'The Kimono Girls of Ecruteak City wish to speak with you again.', new MultiRequirement([new QuestLineStepCompletedRequirement('Whirl Guardian', 9), new ObtainedPokemonRequirement(pokemonMap.Raikou), new ObtainedPokemonRequirement(pokemonMap.Entei), new ObtainedPokemonRequirement(pokemonMap.Suicune)]), GameConstants.BulletinBoards.Johto);
         const talkKimonoGirlsEcruteak = new TalkToNPCQuest(KimonoGirlsEcruteak, 'Meet the Kimono Girls at the Ecruteak Dance Theatre');
         hoohJohtoQuestLine.addQuest(talkKimonoGirlsEcruteak);
 
