@@ -1886,7 +1886,7 @@ const BrailleEnthusiast1 = new NPC('Braille Enthusiast', [
 
 const BrailleEnthusiast2 = new NPC('Braille Enthusiast', [
     'There are a few carvings inside this maze. The shortest says "LEFT", the longest says "STRAIGHT", and the one that is five characters long says "RIGHT"',
-    'If you get totally lost, just wander around. You will find the right path eventually.'
+    'If you get totally lost, just wander around. You will find the right path eventually.',
 ], {image: 'assets/images/npcs/Ruin Maniac.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Three Golems', 1), new QuestLineStepCompletedRequirement('The Three Golems', 6, GameConstants.AchievementOption.less)]),
 });
