@@ -6,6 +6,10 @@ import GameHelper from '../GameHelper';
 import type Setting from '../settings/Setting';
 import memoize from '../utilities/memoize';
 import Language from './Language';
+import { PokemonNameType } from '../pokemons/PokemonNameType';
+
+export type TranslationVar = string | number | PokemonNameType;
+export type TranslationVars = Record<string, TranslationVar>;
 
 const getTranslatedMemoResolver = (
     key: string,

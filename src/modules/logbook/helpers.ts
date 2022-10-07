@@ -1,21 +1,10 @@
-type RecordOf<Keys extends string[]> = {
-    [K in Keys[number]]: string;
-};
-
-type ContentHelper<Vars = undefined>
-    = Vars extends undefined ? () => { key: LogContentKey }
-        : Vars extends string[] ? (vars: RecordOf<Vars>) => { key: LogContentKey; vars: RecordOf<Vars>; }
-            : never;
+import { PokemonNameType } from '../pokemons/PokemonNameType';
+import { TranslationVars } from '../translation/Translation';
 
 export type LogContent = {
     key: LogContentKey,
-    vars?: Record<string, string>
+    vars?: TranslationVars
 };
-
-const contentHelper = <Vars>(key: LogContentKey) => (vars?: Vars) => ({
-    key,
-    vars,
-});
 
 // These should match the translation keys in the translation repo
 export enum LogContentKey {
@@ -51,68 +40,35 @@ export enum LogContentKey {
     'questLevelUp' = 'questLevelUp',
 }
 
-// helper functions to make sure we don't forget any needed parameters
-// parameters for each translation are defined as a type level list
-const notTranslated: ContentHelper<['text']> = contentHelper(LogContentKey.notTranslated);
-const earnedAchievement: ContentHelper<['name']> = contentHelper(LogContentKey.earnedAchievement);
-const escapedShiny: ContentHelper<['pokemon']> = contentHelper(LogContentKey.escapedShiny);
-const escapedWild: ContentHelper<['pokemon']> = contentHelper(LogContentKey.escapedWild);
-const encounterShiny: ContentHelper<['location', 'pokemon']> = contentHelper(LogContentKey.encounterShiny);
-const encounterWild: ContentHelper<['location', 'pokemon']> = contentHelper(LogContentKey.encounterWild);
-const gainBattleFrontierReward: ContentHelper<['reward', 'stage']> = contentHelper(LogContentKey.gainBattleFrontierReward);
-const gainBattleFrontierPoints: ContentHelper<['stage', 'points']> = contentHelper(LogContentKey.gainBattleFrontierPoints);
-const hatchedShiny: ContentHelper<['pokemon']> = contentHelper(LogContentKey.hatchedShiny);
-const hatchedShinyDupe: ContentHelper<['pokemon']> = contentHelper(LogContentKey.hatchedShinyDupe);
-const unableToPayHatcheryHelper: ContentHelper<['currency', 'name']> = contentHelper(LogContentKey.unableToPayHatcheryHelper);
-const unableToPayFarmHand: ContentHelper<['name']> = contentHelper(LogContentKey.unableToPayFarmHand);
-const registeredBerry: ContentHelper<['berry']> = contentHelper(LogContentKey.registeredBerry);
-const shinyWander: ContentHelper<['pokemon']> = contentHelper(LogContentKey.shinyWander);
-const shinyWanderDupe: ContentHelper<['pokemon']> = contentHelper(LogContentKey.shinyWanderDupe);
-const wildWander: ContentHelper<['pokemon']> = contentHelper(LogContentKey.wildWander);
-const fluteRanOutOfGems: ContentHelper<['flute']> = contentHelper(LogContentKey.fluteRanOutOfGems);
-const purchasedShiny: ContentHelper<['pokemon']> = contentHelper(LogContentKey.purchasedShiny);
-const purchasedShinyDupe: ContentHelper<['pokemon']> = contentHelper(LogContentKey.purchasedShinyDupe);
-const evolvedShiny: ContentHelper<['basePokemon', 'evolvedPokemon']> = contentHelper(LogContentKey.evolvedShiny);
-const evolvedShinyDupe: ContentHelper<['basePokemon', 'evolvedPokemon']> = contentHelper(LogContentKey.evolvedShinyDupe);
-const captured: ContentHelper<['pokemon']> = contentHelper(LogContentKey.captured);
-const capturedShiny: ContentHelper<['pokemon']> = contentHelper(LogContentKey.capturedShiny);
-const capturedShinyDupe: ContentHelper<['pokemon']> = contentHelper(LogContentKey.capturedShinyDupe);
-const enemyDrop: ContentHelper<['pokemon', 'item']> = contentHelper(LogContentKey.enemyDrop);
-const roamer: ContentHelper<['location', 'pokemon']> = contentHelper(LogContentKey.roamer);
-const roamerShiny: ContentHelper<['location', 'pokemon']> = contentHelper(LogContentKey.roamerShiny);
-const completedQuest: ContentHelper<['quest']> = contentHelper(LogContentKey.completedQuest);
-const completedQuestWithPoints: ContentHelper<['quest', 'questPoints']> = contentHelper(LogContentKey.completedQuestWithPoints);
-const questLevelUp: ContentHelper<['level']> = contentHelper(LogContentKey.questLevelUp);
-
-export const createLogContent = {
-    notTranslated,
-    earnedAchievement,
-    escapedShiny,
-    escapedWild,
-    encounterShiny,
-    encounterWild,
-    gainBattleFrontierReward,
-    gainBattleFrontierPoints,
-    hatchedShiny,
-    hatchedShinyDupe,
-    unableToPayHatcheryHelper,
-    unableToPayFarmHand,
-    registeredBerry,
-    shinyWander,
-    shinyWanderDupe,
-    wildWander,
-    fluteRanOutOfGems,
-    purchasedShiny,
-    purchasedShinyDupe,
-    evolvedShiny,
-    evolvedShinyDupe,
-    captured,
-    capturedShiny,
-    capturedShinyDupe,
-    enemyDrop,
-    roamer,
-    roamerShiny,
-    completedQuest,
-    completedQuestWithPoints,
-    questLevelUp,
+export const createLogContent: Record<LogContentKey, (vars?: TranslationVars) => LogContent> = {
+    notTranslated: (vars: { text: string }) => ({ key: LogContentKey.notTranslated, vars }),
+    earnedAchievement: (vars: { name: string }) => ({ key: LogContentKey.earnedAchievement, vars }),
+    escapedShiny: (vars: { pokemon: PokemonNameType }) => ({ key: LogContentKey.escapedShiny, vars }),
+    escapedWild: (vars: { pokemon: PokemonNameType }) => ({ key: LogContentKey.escapedWild, vars }),
+    encounterShiny: (vars: { location: string, pokemon: PokemonNameType }) => ({ key: LogContentKey.encounterShiny, vars }),
+    encounterWild: (vars: { location: string, pokemon: PokemonNameType }) => ({ key: LogContentKey.encounterWild, vars }),
+    gainBattleFrontierReward: (vars: { reward: string, stage: number }) => ({ key: LogContentKey.gainBattleFrontierReward, vars }),
+    gainBattleFrontierPoints: (vars: { points: number, stage: number }) => ({ key: LogContentKey.gainBattleFrontierPoints, vars }),
+    hatchedShiny: (vars: { pokemon: PokemonNameType }) => ({ key: LogContentKey.hatchedShiny, vars }),
+    hatchedShinyDupe: (vars: { pokemon: PokemonNameType }) => ({ key: LogContentKey.hatchedShinyDupe, vars }),
+    unableToPayHatcheryHelper: (vars: { currency: string, name: string }) => ({ key: LogContentKey.unableToPayHatcheryHelper, vars }),
+    unableToPayFarmHand: (vars: { name: string }) => ({ key: LogContentKey.unableToPayFarmHand, vars }),
+    registeredBerry: (vars: { berry: string }) => ({ key: LogContentKey.registeredBerry, vars }),
+    shinyWander: (vars: { pokemon: PokemonNameType }) => ({ key: LogContentKey.shinyWander, vars }),
+    shinyWanderDupe: (vars: { pokemon: PokemonNameType }) => ({ key: LogContentKey.shinyWanderDupe, vars }),
+    wildWander: (vars: { pokemon: PokemonNameType }) => ({ key: LogContentKey.wildWander, vars }),
+    fluteRanOutOfGems: (vars: { flute: string }) => ({ key: LogContentKey.fluteRanOutOfGems, vars }),
+    purchasedShiny: (vars: { pokemon: PokemonNameType }) => ({ key: LogContentKey.hatchedShiny, vars }),
+    purchasedShinyDupe: (vars: { pokemon: PokemonNameType }) => ({ key: LogContentKey.hatchedShinyDupe, vars }),
+    evolvedShiny: (vars: { basePokemon: PokemonNameType, evolvedPokemon: PokemonNameType }) => ({ key: LogContentKey.hatchedShiny, vars }),
+    evolvedShinyDupe: (vars: { basePokemon: PokemonNameType, evolvedPokemon: PokemonNameType }) => ({ key: LogContentKey.hatchedShinyDupe, vars }),
+    captured: (vars: { pokemon: PokemonNameType }) => ({ key: LogContentKey.captured, vars }),
+    capturedShiny: (vars: { pokemon: PokemonNameType }) => ({ key: LogContentKey.capturedShiny, vars }),
+    capturedShinyDupe: (vars: { pokemon: PokemonNameType }) => ({ key: LogContentKey.capturedShinyDupe, vars }),
+    enemyDrop: (vars: { pokemon: PokemonNameType, item: string }) => ({ key: LogContentKey.enemyDrop, vars }),
+    roamer: (vars: { location: string, pokemon: PokemonNameType }) => ({ key: LogContentKey.roamer, vars }),
+    roamerShiny: (vars: { location: string, pokemon: PokemonNameType }) => ({ key: LogContentKey.roamerShiny, vars }),
+    completedQuest: (vars: { quest: string }) => ({ key: LogContentKey.completedQuest, vars }),
+    completedQuestWithPoints: (vars: { quest: string, points: number }) => ({ key: LogContentKey.completedQuestWithPoints, vars }),
+    questLevelUp: (vars: { level: number }) => ({ key: LogContentKey.questLevelUp, vars }),
 };
