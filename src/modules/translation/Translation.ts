@@ -1,5 +1,6 @@
 import i18next, { TOptions } from 'i18next';
-import Backend from 'i18next-http-backend';
+import Backend from 'i18next-chained-backend';
+import HttpBackend from 'i18next-http-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import type { PureComputed, Observable } from 'knockout';
 import GameHelper from '../GameHelper';
@@ -50,7 +51,12 @@ export default class Translate {
                 ns: ['pokemon', 'logbook'],
                 fallbackLng: 'en',
                 backend: {
-                    loadPath: '$TRANSLATIONS_URL/locales/{{lng}}/{{ns}}.json',
+                    // Two backend sources - tries the TRANSLATION_URL first, falls back to copy taken at build time
+                    backends: [HttpBackend, HttpBackend],
+                    backendOptions: [
+                        { loadPath: '$TRANSLATIONS_URL/locales/{{lng}}/{{ns}}.json' },
+                        { loadPath: './locales/{{lng}}/{{ns}}.json' },
+                    ],
                 },
                 returnEmptyString: false,
                 interpolation: {
