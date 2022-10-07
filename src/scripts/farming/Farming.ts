@@ -14,20 +14,13 @@ class Farming implements Feature {
     mutationCounter = 0;
     wanderCounter = 0;
 
-    // You may be wondering why this is necessary.
-    // It turns out for some reason the plot age doesn't update in time in the same tick.
-    // This means that if we attempt to reset the auras in the same tick, the plant that changed stages
-    // will still act like it's in the previous stage, which means the wrong aura is applied.
-    // Queueing an aura reset in later ticks fixes this issue, and is barely noticable to the player.
-    queuedAuraReset = -1;
-
     defaults = {
         berryList: Array<number>(GameHelper.enumLength(BerryType) - 1).fill(0),
         unlockedBerries: Array<boolean>(GameHelper.enumLength(BerryType) - 1).fill(false),
         mulchList: Array<number>(GameHelper.enumLength(MulchType)).fill(0),
         plotList: new Array(GameConstants.FARM_PLOT_WIDTH * GameConstants.FARM_PLOT_HEIGHT).fill(null).map((value, index) => {
             const middle = Math.floor(GameConstants.FARM_PLOT_HEIGHT / 2) * GameConstants.FARM_PLOT_WIDTH + Math.floor(GameConstants.FARM_PLOT_WIDTH / 2);
-            return new Plot(index === middle, BerryType.None, 0, MulchType.None, 0);
+            return new Plot(index === middle, BerryType.None, 0, MulchType.None, 0, index);
         }),
         shovelAmt: 0,
         mulchShovelAmt: 0,
@@ -53,11 +46,11 @@ class Farming implements Feature {
         this.mulchShovelAmt = ko.observable(this.defaults.mulchShovelAmt);
 
         this.externalAuras = [];
-        this.externalAuras[AuraType.Attract] = ko.observable<number>(1);
-        this.externalAuras[AuraType.Egg] = ko.observable<number>(1);
-        this.externalAuras[AuraType.Shiny] = ko.observable<number>(1);
-        this.externalAuras[AuraType.Roaming] = ko.observable<number>(1);
-        this.externalAuras[AuraType.Ev] = ko.observable<number>(1);
+        this.externalAuras[AuraType.Attract] = ko.pureComputed<number>(() => this.multiplyPlotAuras(AuraType.Attract));
+        this.externalAuras[AuraType.Egg] = ko.pureComputed<number>(() => this.multiplyPlotAuras(AuraType.Egg));
+        this.externalAuras[AuraType.Shiny] = ko.pureComputed<number>(() => this.multiplyPlotAuras(AuraType.Shiny));
+        this.externalAuras[AuraType.Roaming] = ko.pureComputed<number>(() => this.multiplyPlotAuras(AuraType.Roaming));
+        this.externalAuras[AuraType.Ev] = ko.pureComputed<number>(() => this.multiplyPlotAuras(AuraType.Ev));
 
         this.multiplier.addBonus('shiny', () => this.externalAuras[AuraType.Shiny]());
         this.multiplier.addBonus('eggStep', () => this.externalAuras[AuraType.Egg]());
@@ -161,7 +154,7 @@ class Farming implements Feature {
             ['This Berry is very big and sour. The juiciness of the pulp accentuates the sourness.'], undefined, ['Flabébé (Yellow)', 'Oricorio (Pom-Pom)']);
 
         this.berryData[BerryType.Lum]       = new Berry(BerryType.Lum,      [3000, 3200, 3400, 3600, 43200],
-            1, 0, 1000, 3,
+            1, 0, 540, 3,
             [10, 10, 10, 10, 0], BerryColor.Green,
             [
                 'This Berry\'s gradual process of storing nutrients beneficial to Pokémon health causes it to mature slowly.',
@@ -382,18 +375,21 @@ class Farming implements Feature {
             [0, 0, 0, 40, 10], BerryColor.Yellow,
             [
                 'The cluster of drupelets that make up this Berry pop rhythmically if the Berry is handled roughly.',
-                'The sound of these Berries attracts wild Pokémon.',
+                'The sound of these Berries attracts rare wild Pokémon.',
             ], new Aura(AuraType.Roaming, [1.005, 1.01, 1.015]), ['Flabébé (Yellow)', 'Oricorio (Pom-Pom)']);
         this.berryData[BerryType.Rowap]     = new Berry(BerryType.Rowap,    [5760, 9000, 14040, 21240, 42480],
             1, 0.05, 2900, 20,
             [10, 0, 0, 0, 40], BerryColor.Blue,
-            ['In days of old, people worked the top-shaped pieces of this Berry free and used them as toys.'], new Aura(AuraType.Ev, [1.005, 1.01, 1.015]), ['Flabébé (Blue)']);
+            [
+                'In days of old, people worked the top-shaped pieces of this Berry free and used them as toys.',
+                'These berries make catching efforts worth more.',
+            ], new Aura(AuraType.Ev, [1.005, 1.01, 1.015]), ['Flabébé (Blue)']);
         this.berryData[BerryType.Kee]       = new Berry(BerryType.Kee,      [4680, 9360, 18360, 36360, 72720],
             1, 0.05, 3000, 20,
             [30, 30, 10, 10, 10], BerryColor.Yellow,
             ['This Berry remains poisonous until fully ripened. Once ripe it has a spicy and sweet complex flavor.'], undefined, ['Flabébé (Yellow)', 'Oricorio (Pom-Pom)']);
         this.berryData[BerryType.Maranga]   = new Berry(BerryType.Maranga,  [5040, 10080, 20160, 40320, 80640],
-            1, 0.05, 3100, 20,
+            1, 0.05, 8000, 20,
             [10, 10, 30, 30, 10], BerryColor.Blue,
             ['This Berry resembles the Durin Berry, though its spikes are less pronounced. It is quite delicious when roasted.'], undefined, ['Flabébé (Blue)']);
 
@@ -917,14 +913,6 @@ class Farming implements Feature {
 
         let change = false;
 
-        // Handle updating auras
-        if (this.queuedAuraReset >= 0) {
-            this.queuedAuraReset -= 1;
-            if (this.queuedAuraReset === 0) {
-                this.resetAuras();
-            }
-        }
-
         // Updating Berries
         this.plotList.forEach(plot => {
             if (plot.update(timeToReduce)) {
@@ -964,11 +952,6 @@ class Farming implements Feature {
             }
             this.wanderCounter = 0;
 
-        }
-
-        // Handle queueing aura reset
-        if (change) {
-            this.queuedAuraReset = 2;
         }
 
         if (notifications.size) {
@@ -1038,27 +1021,10 @@ class Farming implements Feature {
         });
     }
 
-    resetAuras() {
-        this.externalAuras[AuraType.Attract](1);
-        this.externalAuras[AuraType.Egg](1);
-        this.externalAuras[AuraType.Shiny](1);
-        this.externalAuras[AuraType.Roaming](1);
-        this.externalAuras[AuraType.Ev](1);
-        this.plotList.forEach(plot => plot.clearAuras());
-
-        // Handle Boost Auras first
-        this.plotList.forEach((plot, idx) => {
-            if (plot.berryData?.aura && plot.berryData?.aura.auraType === AuraType.Boost) {
-                plot.emitAura(idx);
-            }
-        });
-
-        // Handle rest of Auras
-        this.plotList.forEach((plot, idx) => {
-            if (!plot.berryData?.aura || plot.berryData?.aura.auraType !== AuraType.Boost) {
-                plot.emitAura(idx);
-            }
-        });
+    multiplyPlotAuras(auraType: AuraType): number {
+        return this.plotList
+            .filter(p => p.emittingAura.type() === auraType)
+            .reduce((acc, p) => acc * (p.emittingAura.value() ?? 1), 1);
     }
 
     //#region Plot Unlocking
@@ -1117,7 +1083,7 @@ class Farming implements Feature {
         this.plotList[index].isSafeLocked = !this.plotList[index].isSafeLocked;
     }
 
-    plant(index: number, berry: BerryType, suppressResetAura = false) {
+    plant(index: number, berry: BerryType) {
         const plot = this.plotList[index];
         if (!plot.isEmpty() || !plot.isUnlocked || !this.hasBerry(berry) || plot.isSafeLocked) {
             return;
@@ -1125,24 +1091,19 @@ class Farming implements Feature {
 
         GameHelper.incrementObservable(this.berryList[berry], -1);
         plot.plant(berry);
-
-        if (!suppressResetAura) {
-            this.resetAuras();
-        }
     }
 
     plantAll(berry: BerryType) {
         this.plotList.forEach((plot, index) => {
-            this.plant(index, berry, true);
+            this.plant(index, berry);
         });
-        this.resetAuras();
     }
 
     /**
      * Harvest a plot at the given index
      * @param index The index of the plot to harvest
      */
-    harvest(index: number, suppressResetAura = false): void {
+    harvest(index: number): void {
         const plot = this.plotList[index];
         if (plot.berry === BerryType.None || plot.stage() != PlotStage.Berry || plot.isSafeLocked) {
             return;
@@ -1160,10 +1121,6 @@ class Farming implements Feature {
         player.lowerItemMultipliers(MultiplierDecreaser.Berry, this.berryData[plot.berry].exp);
 
         plot.die(true);
-
-        if (!suppressResetAura) {
-            this.resetAuras();
-        }
     }
 
     /**
@@ -1171,9 +1128,8 @@ class Farming implements Feature {
      */
     public harvestAll() {
         this.plotList.forEach((plot, index) => {
-            this.harvest(index, true);
+            this.harvest(index);
         });
-        this.resetAuras();
     }
 
     /**
@@ -1201,8 +1157,6 @@ class Farming implements Feature {
         plot.die(true);
         GameHelper.incrementObservable(this.shovelAmt, -1);
         GameHelper.incrementObservable(App.game.statistics.totalShovelsUsed, 1);
-
-        this.resetAuras();
     }
 
     /**
@@ -1222,8 +1176,6 @@ class Farming implements Feature {
             GameHelper.incrementObservable(this.mulchShovelAmt, -1);
             GameHelper.incrementObservable(App.game.statistics.totalShovelsUsed, 1);
         }
-
-        this.resetAuras();
     }
 
     /**
@@ -1246,8 +1198,6 @@ class Farming implements Feature {
 
         plot.mulch = +mulch;
         plot.mulchTimeLeft += GameConstants.MULCH_USE_TIME * amount;
-
-        this.resetAuras();
     }
 
     /**
@@ -1398,7 +1348,7 @@ class Farming implements Feature {
             this.plotList = this.defaults.plotList;
         } else {
             (savedPlots as Record<string, any>[]).forEach((value: Record<string, any>, index: number) => {
-                const plot: Plot = new Plot(false, BerryType.None, 0, MulchType.None, 0);
+                const plot: Plot = new Plot(false, BerryType.None, 0, MulchType.None, 0, index);
                 plot.fromJSON(value);
                 this.plotList[index] = plot;
             });

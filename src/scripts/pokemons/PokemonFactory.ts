@@ -269,10 +269,20 @@ class PokemonFactory {
         // Apply drop chance by item ID
         switch (item.id) {
             case 'Black_DNA':
-                chance = GameConstants.DNA_ITEM_CHANCE;
-                break;
             case 'White_DNA':
                 chance = GameConstants.DNA_ITEM_CHANCE;
+                break;
+            case 'Solar_light':
+            case 'Lunar_light':
+                chance = GameConstants.LIGHT_ITEM_CHANCE;
+                break;
+            case 'Rusted_Sword':
+            case 'Rusted_Shield':
+                chance = GameConstants.RUST_ITEM_CHANCE;
+                break;
+            case 'Black_mane_hair':
+            case 'White_mane_hair':
+                chance = GameConstants.MANE_ITEM_CHANCE;
                 break;
         }
 
