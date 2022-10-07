@@ -79,7 +79,7 @@ class BattlePokemon implements EnemyPokemonInterface {
             });
             App.game.logbook.newLog(
                 LogBookTypes.FOUND,
-                createLogContent.enemyDrop({ pokemon: this.displayName, item: name })
+                createLogContent.enemyDrop({ pokemon: this.name, item: name })
             );
         }
         App.game.party.gainExp(this.exp, this.level, trainer);

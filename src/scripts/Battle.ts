@@ -121,7 +121,7 @@ class Battle {
                 LogBookTypes.SHINY,
                 createLogContent.encounterShiny({
                     location: Routes.getRoute(player.region, player.route()).routeName,
-                    pokemon: enemyPokemon.displayName,
+                    pokemon: enemyPokemon.name,
                 })
             );
         } else if (!App.game.party.alreadyCaughtPokemon(enemyPokemon.id) && enemyPokemon.health()) {
@@ -129,7 +129,7 @@ class Battle {
                 LogBookTypes.NEW,
                 createLogContent.encounterWild({
                     location: Routes.getRoute(player.region, player.route()).routeName,
-                    pokemon: enemyPokemon.displayName,
+                    pokemon: enemyPokemon.name,
                 })
             );
         }
@@ -159,12 +159,12 @@ class Battle {
         } else if (enemyPokemon.shiny) { // Failed to catch, Shiny
             App.game.logbook.newLog(
                 LogBookTypes.ESCAPED,
-                createLogContent.escapedShiny({ pokemon: enemyPokemon.displayName })
+                createLogContent.escapedShiny({ pokemon: enemyPokemon.name })
             );
         } else if (!App.game.party.alreadyCaughtPokemon(enemyPokemon.id)) { // Failed to catch, Uncaught
             App.game.logbook.newLog(
                 LogBookTypes.ESCAPED,
-                createLogContent.escapedWild({ pokemon: enemyPokemon.displayName})
+                createLogContent.escapedWild({ pokemon: enemyPokemon.name})
             );
         }
         this.catching(false);

@@ -65,6 +65,8 @@ export default class Translate {
             }
         });
 
+        i18next.services.formatter.add('pokemon', (val, lng, opts) => this.get(val, 'pokemon', opts)());
+
         languageSetting.observableValue.subscribe((val) => {
             i18next.changeLanguage(val, () => {
                 GameHelper.incrementObservable(this.languageUpdated);

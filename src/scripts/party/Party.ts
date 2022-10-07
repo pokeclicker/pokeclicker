@@ -55,8 +55,8 @@ class Party implements Feature {
             App.game.logbook.newLog(
                 LogBookTypes.CAUGHT,
                 this.alreadyCaughtPokemon(pokemon.id, true)
-                    ? createLogContent.capturedShinyDupe({ pokemon: pokemon.displayName })
-                    : createLogContent.capturedShiny({ pokemon: pokemon.displayName })
+                    ? createLogContent.capturedShinyDupe({ pokemon: pokemon.name })
+                    : createLogContent.capturedShiny({ pokemon: pokemon.name })
             );
             // Already caught (shiny)
             if (this.alreadyCaughtPokemon(pokemon.id, true)) {
@@ -93,7 +93,7 @@ class Party implements Feature {
 
         App.game.logbook.newLog(
             LogBookTypes.CAUGHT,
-            createLogContent.captured({ pokemon: pokemon.displayName })
+            createLogContent.captured({ pokemon: pokemon.name })
         );
         this._caughtPokemon.push(pokemon);
     }

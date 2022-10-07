@@ -140,7 +140,7 @@ class DungeonBattle extends Battle {
                     LogBookTypes.SHINY,
                     createLogContent.encounterShiny({
                         location: player.town().dungeon.name,
-                        pokemon: this.enemyPokemon().displayName,
+                        pokemon: this.enemyPokemon().name,
                     })
                 );
             } else if (!App.game.party.alreadyCaughtPokemon(this.enemyPokemon().id)) {
@@ -148,7 +148,7 @@ class DungeonBattle extends Battle {
                     LogBookTypes.NEW,
                     createLogContent.encounterWild({
                         location: player.town().dungeon.name,
-                        pokemon: this.enemyPokemon().displayName,
+                        pokemon: this.enemyPokemon().name,
                     })
                 );
             }
@@ -180,7 +180,7 @@ class DungeonBattle extends Battle {
                 LogBookTypes.SHINY,
                 createLogContent.encounterShiny({
                     location: player.town().dungeon.name,
-                    pokemon: this.enemyPokemon().displayName,
+                    pokemon: this.enemyPokemon().name,
                 })
             );
         } else if (!App.game.party.alreadyCaughtPokemon(this.enemyPokemon().id)) {
@@ -188,7 +188,7 @@ class DungeonBattle extends Battle {
                 LogBookTypes.NEW,
                 createLogContent.encounterWild({
                     location: player.town().dungeon.name,
-                    pokemon: this.enemyPokemon().displayName,
+                    pokemon: this.enemyPokemon().name,
                 })
             );
         }
@@ -229,7 +229,7 @@ class DungeonBattle extends Battle {
                     LogBookTypes.SHINY,
                     createLogContent.encounterShiny({
                         location: player.town().dungeon.name,
-                        pokemon: this.enemyPokemon().displayName,
+                        pokemon: this.enemyPokemon().name,
                     })
                 );
             } else if (!App.game.party.alreadyCaughtPokemon(this.enemyPokemon().id)) {
@@ -237,7 +237,7 @@ class DungeonBattle extends Battle {
                     LogBookTypes.NEW,
                     createLogContent.encounterWild({
                         location: player.town().dungeon.name,
-                        pokemon: this.enemyPokemon().displayName,
+                        pokemon: this.enemyPokemon().name,
                     })
                 );
             }

@@ -364,7 +364,7 @@ class Plot implements Saveable {
             const shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_FARM);
 
             // Add to log book
-            const pokemon = PokemonHelper.displayName(wanderPokemon)();
+            const pokemon = wanderPokemon;
             if (shiny) {
                 App.game.logbook.newLog(
                     LogBookTypes.SHINY,

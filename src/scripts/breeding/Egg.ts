@@ -144,7 +144,7 @@ class Egg implements Saveable {
                 sound: NotificationConstants.NotificationSound.General.shiny_long,
                 setting: NotificationConstants.NotificationSetting.Hatchery.hatched_shiny,
             });
-            const pokemon = PokemonHelper.displayName(PokemonHelper.getPokemonById(this.pokemon).name)();
+            const pokemon = PokemonHelper.getPokemonById(this.pokemon).name;
             App.game.logbook.newLog(
                 LogBookTypes.SHINY,
                 App.game.party.alreadyCaughtPokemon(pokemonID, true)
