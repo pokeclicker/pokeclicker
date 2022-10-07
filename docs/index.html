@@ -17,10 +17,10 @@
     <script src="libs/Sortable.min.js"></script>
 
     <!-- New module-based code from './modules' -->
-    <script src="scripts/modules.min.js?v=0.9.17"></script>
+    <script src="scripts/modules.min.js?v=0.9.16"></script>
 
     <!--Minified scripts-->
-    <script src="scripts/script.min.js?v=0.9.17"></script>
+    <script src="scripts/script.min.js?v=0.9.16"></script>
 
     <!--Popper.js-->
     <script src="libs/popper.min.js"></script>
@@ -38,9 +38,27 @@
     <link href="libs/introjs-modern.css" rel="stylesheet">
 
     <!--Minified styles-->
-    <link href="styles/styles.min.css?v=0.9.17" rel="stylesheet">
+    <link href="styles/styles.min.css?v=0.9.16" rel="stylesheet">
 
     <!-- Google Analytics-->
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-171657234-1"></script>
+    <script>
+        if (true) {
+            window.dataLayer = window.dataLayer || [];
+
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+
+            gtag('js', new Date());
+
+            gtag('config', 'UA-171657234-1');
+        } else {
+            function gtag(){};
+        }
+    </script>
+
     <style>
         #game.loading {
             display: none !important;
@@ -466,10 +484,7 @@
                     <div id="itemBag" class="tab-pane p-3">
                         <div class="row justify-content-sm-center">
                             <div class="row col-10">
-                                <div class="btn btn-primary col-2 item-bag-item" data-bind="template: { name: 'otherItemTemplate', data: 'Protein'}, click: () => $('#pokemonSelectorModal').modal('show')"></div>
-                            <!-- ko foreach: HeldItem.getHeldItems() -->
-                                <div class="btn btn-primary col-2 item-bag-item" data-bind="template: { name: 'otherItemTemplate', data: $data.name}, click: () => { HeldItem.heldItemSelected($data); $('#heldItemModal').modal('show'); }, visible: $data.isUnlocked()"></div>
-                            <!-- /ko -->
+                                <div class="btn btn-primary col-2" data-bind="template: { name: 'otherItemTemplate', data: 'Protein'}, click: () => $('#pokemonSelectorModal').modal('show')"></div>
                             </div>
                         </div>
                     </div>
@@ -1198,11 +1213,6 @@
             <button class="btn btn-danger dungeon-button">Start Bossfight</button>
         </div>
         <!-- /ko -->
-        <!-- ko if: (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.ladder) -->
-        <div>
-            <button class="btn btn-warning dungeon-button">Go to next floor</button>
-        </div>
-        <!-- /ko -->
         <!-- ko if: DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.entrance && DungeonRunner.map.playerMoved() -->
         <div>
             <button class="btn btn-warning dungeon-button">Leave Dungeon</button>
@@ -1582,7 +1592,7 @@
                 </div>
                 <div class="card-body p-0 text-center">
                     <table class="dungeon-board">
-                      <tbody data-bind="foreach: DungeonRunner.map.board()[DungeonRunner.map.playerPosition().floor]">
+                      <tbody data-bind="foreach: DungeonRunner.map.board()">
                         <tr data-bind="foreach: $data">
                             <td data-bind=" click: function(){DungeonRunner.map.moveToCoordinates($context.$index(), $parentContext.$index()) }, attr: { class: $data.cssClass}"></td>
                         </tr>
@@ -1750,8 +1760,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.kanto, 'Kanto').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/kanto-kanto.png?v=0.9.17',
-            href:'assets/images/kanto-kanto.png?v=0.9.17'
+            'xlink:href':'assets/images/kanto-kanto.png?v=0.9.16',
+            href:'assets/images/kanto-kanto.png?v=0.9.16'
         }"></image>
 
         <!-- ------ -->
@@ -3872,8 +3882,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.kanto, 'Sevii Islands 123').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/kanto-sevii123.png?v=0.9.17',
-            href:'assets/images/kanto-sevii123.png?v=0.9.17'
+            'xlink:href':'assets/images/kanto-sevii123.png?v=0.9.16',
+            href:'assets/images/kanto-sevii123.png?v=0.9.16'
         }"></image>
 
         <!-- ------ -->
@@ -4254,8 +4264,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.kanto, 'Sevii Islands 4567').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/kanto-sevii4567.png?v=0.9.17',
-            href:'assets/images/kanto-sevii4567.png?v=0.9.17'
+            'xlink:href':'assets/images/kanto-sevii4567.png?v=0.9.16',
+            href:'assets/images/kanto-sevii4567.png?v=0.9.16'
         }"></image>
 
         <!-- ------ -->
@@ -5760,8 +5770,8 @@
 
                             <g data-bind='visible: player.region == GameConstants.Region.johto'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/johto.png?v=0.9.17',
-        href:'assets/images/johto.png?v=0.9.17'
+        'xlink:href':'assets/images/johto.png?v=0.9.16',
+        href:'assets/images/johto.png?v=0.9.16'
     }"></image>
 
     <!-- ------ -->
@@ -6043,18 +6053,18 @@
     <rect data-route='33'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(33, 1) }"
         height="48"
-        width="192"
-        x="528" y="880">
+        width="176"
+        x="544" y="880">
     </rect>
 
     <text style="font-size: 32px"
-        x="608"
+        x="616"
         y="914"
         data-bind="visible: !MapHelper.isRouteCurrentLocation(33, 1)">
         33
     </text>
     <image width="48" height="48"
-        x="600"
+        x="608"
         y="880"
         class="iconLocation"
         transform='rotate(0)'
@@ -6809,7 +6819,7 @@
 
 <rect class="city"
     data-town="Azalea Town"
-    x="464"
+    x="480"
     y="864"
     height="64"
     width="64"
@@ -6820,7 +6830,7 @@
 </rect>
 
     <image width="48" height="48"
-        x="472"
+        x="488"
         y="872"
         class="iconLocation"
         data-bind="visible: MapHelper.isTownCurrentLocation('Azalea Town')
@@ -7192,7 +7202,7 @@
 
     <rect class="city"
         data-town="Slowpoke Well"
-        x="544"
+        x="560"
         y="832"
         height="48"
         width="64"
@@ -7202,7 +7212,7 @@
 
 
     <image width="48" height="48"
-        x="552"
+        x="568"
         y="832"
         class="iconLocation"
         data-bind="visible: MapHelper.isTownCurrentLocation('Slowpoke Well')
@@ -7739,31 +7749,6 @@
 </image>
 
 
-     
-
-<image href="assets/images/map/sudowoodooverworld.png" xlink:href="assets/images/map/sudowoodooverworld.png"
-    x="520"
-    y="272"
-    height="64"
-    width="64"
-    data-bind="visible: TemporaryBattleList[&#39;Sudowoodo&#39;] &amp;&amp; TemporaryBattleList[&#39;Sudowoodo&#39;].isVisible()"/>
-<rect class="city"
-    data-town="Sudowoodo"
-    x="520"
-    y="272"
-    height="64"
-    width="64"
-    data-bind="visible: TemporaryBattleList[&#39;Sudowoodo&#39;] &amp;&amp; TemporaryBattleList[&#39;Sudowoodo&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Sudowoodo&#39;].protectedOnclick(), attr: { class: TemporaryBattleList[&#39;Sudowoodo&#39;].isUnlocked() ? &#39;&#39; : &#39;locked&#39; }">
-</rect>
-<image width="48" height="48"
-    x="528"
-    y="280"
-    class="iconLocation"
-    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Sudowoodo&#39;] &amp;&amp; TemporaryBattleList[&#39;Sudowoodo&#39;].isVisible()
-    , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
-</image>
-
-
     
 
 <image href="assets/images/map/suicune.png" xlink:href="assets/images/map/suicune.png"
@@ -7868,8 +7853,8 @@
 
                             <g data-bind='visible: player.region == GameConstants.Region.hoenn'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/hoenn.png?v=0.9.17',
-        href:'assets/images/hoenn.png?v=0.9.17'
+        'xlink:href':'assets/images/hoenn.png?v=0.9.16',
+        href:'assets/images/hoenn.png?v=0.9.16'
     }"></image>
 
     <!-- ------ -->
@@ -10473,8 +10458,8 @@
 
                             <g data-bind='visible: player.region == GameConstants.Region.sinnoh'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/sinnoh.png?v=0.9.17',
-        href:'assets/images/sinnoh.png?v=0.9.17'
+        'xlink:href':'assets/images/sinnoh.png?v=0.9.16',
+        href:'assets/images/sinnoh.png?v=0.9.16'
     }"></image>
 
     <!-- ------ -->
@@ -13146,8 +13131,8 @@
 
                             <g data-bind='visible: player.region == GameConstants.Region.unova'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/unova.png?v=0.9.17',
-        href:'assets/images/unova.png?v=0.9.17'
+        'xlink:href':'assets/images/unova.png?v=0.9.16',
+        href:'assets/images/unova.png?v=0.9.16'
     }"></image>
 
     <!-- ------ -->
@@ -15786,8 +15771,8 @@
 
                             <g data-bind='visible: player.region == GameConstants.Region.kalos'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/kalos.png?v=0.9.17',
-        href:'assets/images/kalos.png?v=0.9.17'
+        'xlink:href':'assets/images/kalos.png?v=0.9.16',
+        href:'assets/images/kalos.png?v=0.9.16'
     }"></image>
 
     <!-- ------ -->
@@ -17861,8 +17846,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Melemele Island').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-melemele.png?v=0.9.17',
-            href:'assets/images/alola-melemele.png?v=0.9.17'
+            'xlink:href':'assets/images/alola-melemele.png?v=0.9.16',
+            href:'assets/images/alola-melemele.png?v=0.9.16'
         }"></image>
 
         <!-- ------ -->
@@ -21082,8 +21067,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Akala Island').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-akala.png?v=0.9.17',
-            href:'assets/images/alola-akala.png?v=0.9.17'
+            'xlink:href':'assets/images/alola-akala.png?v=0.9.16',
+            href:'assets/images/alola-akala.png?v=0.9.16'
         }"></image>
 
         <!-- ------ -->
@@ -23122,8 +23107,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Ula\'ula Island').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-ulaula.png?v=0.9.17',
-            href:'assets/images/alola-ulaula.png?v=0.9.17'
+            'xlink:href':'assets/images/alola-ulaula.png?v=0.9.16',
+            href:'assets/images/alola-ulaula.png?v=0.9.16'
         }"></image>
 
         <!-- ------ -->
@@ -25673,8 +25658,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Poni Island').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-poni.png?v=0.9.17',
-            href:'assets/images/alola-poni.png?v=0.9.17'
+            'xlink:href':'assets/images/alola-poni.png?v=0.9.16',
+            href:'assets/images/alola-poni.png?v=0.9.16'
         }"></image>
 
         <!-- ------ -->
@@ -27718,8 +27703,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'South Galar').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/galar-south.png?v=0.9.17',
-            href:'assets/images/galar-south.png?v=0.9.17'
+            'xlink:href':'assets/images/galar-south.png?v=0.9.16',
+            href:'assets/images/galar-south.png?v=0.9.16'
         }"></image>
 
         <!-- ------ -->
@@ -29536,28 +29521,6 @@
 
         
 
-<rect class="city"
-    data-town="Farm" 
-    x="832"
-    y="864"
-    height="48"
-    width="48"
-    data-bind="click:function(){FarmController.openFarmModal()}, attr: { class: App.game.farming.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
-</rect>
-
-        
-
-<rect class="city"
-    data-town="Pokémon Day Care" 
-    x="640"
-    y="64"
-    height="56"
-    width="64"
-    data-bind="click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
-</rect>
-
-        
-
 <image href="assets/images/map/blimp_empty.png" xlink:href="assets/images/map/blimp_empty.png"
     x="784"
     y="864"
@@ -29708,8 +29671,8 @@
     </g>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'North Galar').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/galar-north.png?v=0.9.17',
-            href:'assets/images/galar-north.png?v=0.9.17'
+            'xlink:href':'assets/images/galar-north.png?v=0.9.16',
+            href:'assets/images/galar-north.png?v=0.9.16'
         }"></image>
 
         <!-- ------ -->
@@ -30591,17 +30554,6 @@
 
         
 
-<rect class="city"
-    data-town="Underground Entrance" 
-    x="592"
-    y="816"
-    height="64"
-    width="48"
-    data-bind="click:function(){App.game.underground.openUndergroundModal()}, attr: { class: App.game.underground.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
-</rect>
-
-        
-
 <image href="assets/images/map/hop.png" xlink:href="assets/images/map/hop.png"
     x="576"
     y="784"
@@ -30678,22 +30630,22 @@
            
 
 <image href="assets/images/map/marnie.png" xlink:href="assets/images/map/marnie.png"
-    x="1136"
-    y="896"
+    x="1104"
+    y="864"
     height="64"
     width="64"
     data-bind="visible: TemporaryBattleList[&#39;Marnie2&#39;] &amp;&amp; TemporaryBattleList[&#39;Marnie2&#39;].isVisible()"/>
 <rect class="city"
     data-town="Pokémon Trainer Marnie"
-    x="1136"
-    y="896"
+    x="1104"
+    y="864"
     height="64"
     width="64"
     data-bind="visible: TemporaryBattleList[&#39;Marnie2&#39;] &amp;&amp; TemporaryBattleList[&#39;Marnie2&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Marnie2&#39;].protectedOnclick()">
 </rect>
 <image width="48" height="48"
-    x="1144"
-    y="904"
+    x="1112"
+    y="872"
     class="iconLocation"
     data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Marnie2&#39;] &amp;&amp; TemporaryBattleList[&#39;Marnie2&#39;].isVisible()
     , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
@@ -30702,8 +30654,8 @@
     </g>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'Isle of Armor').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/galar-isle-of-armor.png?v=0.9.17',
-            href:'assets/images/galar-isle-of-armor.png?v=0.9.17'
+            'xlink:href':'assets/images/galar-isle-of-armor.png?v=0.9.16',
+            href:'assets/images/galar-isle-of-armor.png?v=0.9.16'
         }"></image>
 
         <!-- ------ -->
@@ -30855,23 +30807,6 @@
         height="32"
         width="64"
         x="736" y="816">
-    </rect>
-
-
-</g>
-
-
-        <!--Fields of Honour extension-->
-        
-
-<g
-
-    data-bind="click:function(){ MapHelper.moveToRoute(33, 7); } ">
-    <rect data-route='33'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(33, 7) }"
-        height="16"
-        width="32"
-        x="832" y="704">
     </rect>
 
 
@@ -31138,23 +31073,6 @@
         height="32"
         width="160"
         x="576" y="576">
-    </rect>
-
-
-</g>
-
-
-        <!--Challenge Beach extension-->
-        
-
-<g
-
-    data-bind="click:function(){ MapHelper.moveToRoute(36, 7); } ">
-    <rect data-route='36'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(36, 7) }"
-        height="16"
-        width="16"
-        x="576" y="448">
     </rect>
 
 
@@ -31517,7 +31435,7 @@
     <rect data-route='41'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(41, 7) }"
         height="16"
-        width="160"
+        width="176"
         x="1104" y="368">
     </rect>
 
@@ -32547,7 +32465,7 @@
     data-bind="click:function(){ MapHelper.moveToRoute(44, 7); } ">
     <rect data-route='44'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(44, 7) }"
-        height="48"
+        height="56"
         width="160"
         x="576" y="320">
     </rect>
@@ -32564,9 +32482,9 @@
     data-bind="click:function(){ MapHelper.moveToRoute(44, 7); } ">
     <rect data-route='44'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(44, 7) }"
-        height="32"
-        width="80"
-        x="656" y="368">
+        height="24"
+        width="96"
+        x="640" y="376">
     </rect>
 
 
@@ -32582,25 +32500,8 @@
     <rect data-route='44'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(44, 7) }"
         height="48"
-        width="32"
-        x="656" y="400">
-    </rect>
-
-
-</g>
-
-
-        <!--Honeycalm Sea extension-->
-        
-
-<g
-
-    data-bind="click:function(){ MapHelper.moveToRoute(44, 7); } ">
-    <rect data-route='44'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(44, 7) }"
-        height="80"
-        width="16"
-        x="576" y="368">
+        width="48"
+        x="640" y="400">
     </rect>
 
 
@@ -32991,8 +32892,8 @@
     <rect class="city"
         data-town="Tower of Darkness"
         x="1008"
-        y="160"
-        height="96"
+        y="168"
+        height="88"
         width="64"
         data-bind="click:function(){MapHelper.moveToTown('Tower of Darkness')},
             attr: { class: MapHelper.calculateTownCssClass('Tower of Darkness') }">
@@ -33001,7 +32902,7 @@
 
     <image width="48" height="48"
         x="1016"
-        y="184"
+        y="188"
         class="iconLocation"
         data-bind="visible: MapHelper.isTownCurrentLocation('Tower of Darkness')
         , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
@@ -33015,9 +32916,9 @@
 
     <rect class="city"
         data-town="Tower of Waters"
-        x="592"
-        y="368"
-        height="96"
+        x="576"
+        y="376"
+        height="88"
         width="64"
         data-bind="click:function(){MapHelper.moveToTown('Tower of Waters')},
             attr: { class: MapHelper.calculateTownCssClass('Tower of Waters') }">
@@ -33025,8 +32926,8 @@
 
 
     <image width="48" height="48"
-        x="600"
-        y="392"
+        x="584"
+        y="396"
         class="iconLocation"
         data-bind="visible: MapHelper.isTownCurrentLocation('Tower of Waters')
         , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
@@ -33175,8 +33076,8 @@
     </g>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'Crown Tundra').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/galar-crown-tundra.png?v=0.9.17',
-            href:'assets/images/galar-crown-tundra.png?v=0.9.17'
+            'xlink:href':'assets/images/galar-crown-tundra.png?v=0.9.16',
+            href:'assets/images/galar-crown-tundra.png?v=0.9.16'
         }"></image>
 
         <!-- ------ -->
@@ -35285,10 +35186,10 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                                     </select>
                                 </div>
                                 <div class="form-group col-md-3 col-6">
-                                    <label>Category</label>
-                                    <select name="achievementsCategory" class="custom-select" onchange="AchievementHandler.filter.category(this.value), Settings.setSettingByName(this.name, this.value)">
-                                        <!-- ko foreach: Settings.getSetting('achievementsCategory').options.filter(r => r.value == 'all' || AchievementHandler.getAchievementCategories().find((c) => c.name == r.value).isUnlocked()) -->
-                                        <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('achievementsCategory').value === $data.value }, text: $data.text">Category</option>
+                                    <label>Region</label>
+                                    <select name="achievementsRegion" class="custom-select" onchange="AchievementHandler.filter.region(this.value), Settings.setSettingByName(this.name, this.value)">
+                                        <!-- ko foreach: Settings.getSetting('achievementsRegion').options.filter(r => r.value <= player.highestRegion()) -->
+                                        <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('achievementsRegion').value === $data.value }, text: $data.text">Region</option>
                                         <!-- /ko -->
                                     </select>
                                 </div>
@@ -35687,7 +35588,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                             <table class="table table-striped table-hover m-0">
                                 <tbody>
                                 <!-- ko foreach: Object.values(NotificationConstants.NotificationSound[$data]) -->
-                                    <tr data-bind="template: { name: 'SoundSettingTemplate', data: { sound, setting: Settings.getSetting(`sound.${$data.name}`) } }"></tr>
+                                    <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting(`sound.${$data.name}`)}"></tr>
                                 <!-- /ko -->
                                 </tbody>
                             </table>
@@ -35924,45 +35825,6 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
         <input class="clickable" type="checkbox"
             data-bind="checked: $data.observableValue(), attr: {name, id: 'checkbox-' + $data.name }"
             onchange="Settings.setSettingByName(this.name, this.checked)"/>
-    </td>
-</script>
-
-<script type="text/html" id="BooleanSettingSliderTemplate">
-    <td class="p-2">
-        <label class="m-0" data-bind="attr: { for: 'checkbox-' + $data.name }, text: `${$data.displayName}:`">
-            setting name
-        </label>
-    </td>
-    <td class="p-2">
-        <label class="form-check-label toggler-wrapper style-1 m-auto">
-            <input class="clickable" type="checkbox"
-                data-bind="checked: $data.observableValue(), attr: {name, id: 'checkbox-' + $data.name }"
-                onchange="Settings.setSettingByName(this.name, this.checked)"/>
-            <div class="toggler-slider">
-                <div class="toggler-knob"></div>
-            </div>
-        </label>
-    </td>
-</script>
-
-<script type="text/html" id="SoundSettingTemplate">
-    <td class="p-2">
-        <label class="m-0" data-bind="attr: { for: 'checkbox-' + $data.setting.name }, text: `${$data.setting.displayName}:`">
-            setting name
-        </label>
-    </td>
-    <td class="p-1 tight">
-        <button class="btn btn-info btn-sm" data-bind="click: () => $data.sound.play()"><i class="play-button"></i></button>
-    </td>
-    <td class="p-2 tight">
-        <label class="form-check-label toggler-wrapper style-1 m-auto">
-            <input class="clickable" type="checkbox"
-                data-bind="checked: $data.setting.observableValue(), attr: {name: $data.setting.name, id: 'checkbox-' + $data.setting.name }"
-                onchange="Settings.setSettingByName(this.name, this.checked)"/>
-            <div class="toggler-slider">
-                <div class="toggler-knob"></div>
-            </div>
-        </label>
     </td>
 </script>
 
@@ -36558,7 +36420,7 @@ aria-labelledby="hallOfFameModalLabel" aria-hidden="true">
                     You are the new Alola League champion!
                 </p>
                 <p data-bind="visible: player.region == GameConstants.Region.galar">
-                    Professor Magnolia told me that you just beat the Galar Pokémon League! Congratulations!<br/>
+                    Professor Sonia told me that you just beat the Galar Pokémon League! Congratulations!<br/>
                     You are the new Galar League champion!
                 </p>
 
@@ -37708,22 +37570,22 @@ aria-labelledby="pokedexModalLabel">
             <div class="form-group col-md-6 col-6 p-0">
                 <label for="protein-search">Search</label>
                 <input id="protein-search" autocomplete="off" class="form-control" placeholder="search here"
-                    data-bind="textInput: Settings.getSetting('proteinSearchFilter').observableValue"
+                    data-bind="textInput: ProteinFilters.search.value"
                 />
             </div>
             <div class="form-group col-md-3 col-3 p-0">
                 <label for="protein-region-filter">Region</label>
-                <select id="protein-region-filter" name="proteinRegionFilter" autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, +this.value)">
+                <select id="protein-region-filter" name="proteinRegionFilter" autocomplete="off" class="custom-select" onchange="ProteinFilters.region.value(+this.value), Settings.setSettingByName(this.name, this.value)">
                     <!-- ko foreach: Settings.getSetting('proteinRegionFilter').options.filter(r => r.value <= player.highestRegion()) -->
-                    <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('proteinRegionFilter').value === $data.value }, text: $data.text">Region</option>
+                    <option data-bind="attr: { value: $data.value }, text: $data.text">Region</option>
                     <!-- /ko -->
                 </select>
             </div>
             <div class="form-group col-md-3 col-3 p-0">
                 <label for="protein-type-filter">Type</label>
-                <select id="protein-type-filter" name="proteinTypeFilter" autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, +this.value)">
+                <select id="protein-type-filter" name="proteinTypeFilter" autocomplete="off" class="custom-select" onchange="ProteinFilters.type.value(+this.value), Settings.setSettingByName(this.name, this.value)">
                     <!-- ko foreach: Settings.getSetting('proteinTypeFilter').options -->
-                    <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('proteinTypeFilter').value === $data.value }, text: $data.text">Type</option>
+                    <option data-bind="attr: { value: $data.value }, text: $data.text">Type</option>
                     <!-- /ko -->
                 </select>
             </div>
@@ -38564,14 +38426,7 @@ aria-labelledby="badgeCaseModalLabel">
                                                 html: true
                                               }">
                                     </td>
-                                    <td class='vertical-middle' data-bind='attr: { rowspan: $parent.berries.length }'>
-                                        <span data-bind='text: $parent.item.amount + " × " + $parent.item.itemType.displayName'></span>
-                                        <knockout data-bind="if: ($parent.item.itemType instanceof CaughtIndicatingItem)">
-                                            <span style="float:right; margin-right: 5px"
-                                                  data-bind="template: { name: 'caughtStatusTemplate', data: {'status': $parent.item.itemType.getCaughtStatus()}}">
-                                            </span>
-                                        </knockout>
-                                    </td>
+                                    <td class='vertical-middle' data-bind='attr: { rowspan: $parent.berries.length }, text: $parent.item.amount + " × " + $parent.item.itemType.displayName'></td>
                                     <td class='vertical-middle' data-bind="attr: { rowspan: $parent.berries.length }">
                                         <div class="btn-group btn-block" data-bind="let: { tradeAmount: ko.observable(1) }">
                                             <button class='btn btn-success btn-block' data-bind='click: function(){BerryDeal.use(ShopHandler.shopObservable()?.location, $parentContext.$index(), tradeAmount())}, css: { disabled: !BerryDeal.canUse(ShopHandler.shopObservable()?.location, $parentContext.$index()) }'>
@@ -39343,133 +39198,6 @@ aria-labelledby="bulletinBoardModalLabel" aria-hidden="true">
             <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
         </div>
     </div>
-</div>
-</div>
-
-
-<div class="modal noselect fade" id="heldItemModal" tabindex="-1" role="dialog" aria-labelledby="heldItemModal">
-    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
-        <div class="modal-content">
-            <!-- ko if: modalUtils.observableState['heldItemModal'] === 'show' -->
-            <div class="modal-header bg-dark text-light" style='justify-content: space-around;'>
-                <h5 class="modal-title text-light">Select a Pokémon</h5>&nbsp;
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body p-0">
-                <img data-bind="attr: { src: HeldItem.heldItemSelected().image }" width="40%"/>
-                <br/>
-                <div class="sticky-top bg-dark text-light">
-                  <div class="btn-group btn-block m-0" role="group" aria-label="Basic example">
-                    <button class="btn btn-block btn-secondary btn-static" data-bind="text: HeldItem.heldItemSelected().displayName + ': ' + player.amountOfItem(HeldItem.heldItemSelected().name)"></button>
-                  </div>
-                  <div class="input-group" data-bind="with: Settings.getSetting('heldItemSort')">
-                      <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])"
-                          data-bind="foreach: $data.options, attr: {name}, selectedOptions: [$data.observableValue()]">
-                          <option data-bind="text: $data.text, value: $data.value"></option>
-                      </select>
-                      <div class="input-group-append bg-primary text-light">
-                          <label for="heldItemSortDirection" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;" data-bind="text: Settings.getSetting('heldItemSortDirection').observableValue() ? '⥄' : '⥂'">⥂</label>
-                          <input id="heldItemSortDirection" style="vertical-align: middle" class="hidden" type='checkbox'
-                              data-bind="checked: Settings.getSetting('heldItemSortDirection').observableValue()"
-                              onchange="Settings.setSettingByName('heldItemSortDirection', this.checked)"/>
-                      </div>
-                  </div>
-                </div>
-                <table class="table table-striped table-hover table-bordered table-sm m-0">
-                  <thead>
-                    <tr class="text-light">
-                      <th class="text-left bg-dark align-middle">Pokemon</th>
-                      <th class="text-center bg-dark align-middle">Current item</th>
-                    </tr>
-                  </thead>
-                  <tbody id="pokemonsWithHeldItems" data-bind="foreach: PartyController.getPokemonsWithHeldItemSortedList()">
-                    <tr class="clickable" data-bind="click: () => $data.giveHeldItem(HeldItem.heldItemSelected())">
-                      <td class="text-left"><knockout data-bind="text: $data.name"></knockout><sup data-bind="visible: $data.shiny">✨</sup></td>
-                      <td class="text-center tight" data-bind="
-                        text: $data.heldItem() == undefined ? '' : $data.heldItem().displayName,
-                        tooltip: $data.heldItem() != undefined ? { title: $data.heldItem().description, placement: 'bottom', trigger: 'hover'} : undefined
-                      "></td>
-                    </tr>
-                  </tbody>
-                  <tbody data-bind="foreach: new Array(6 - PartyController.getPokemonsWithHeldItemSortedList().length)">
-                    <tr><td colspan="2">Held item slot left</td></tr>
-                  </tbody>
-                  <thead>
-                      <tr class="text-light">
-                          <th colspan="2" class="text-left bg-dark align-middle">Pokemons without held items</th>
-                      </tr>
-                  </thead>
-                  <tbody data-bind="foreach: PartyController.getHeldItemSortedList()">
-                    <tr class="clickable" data-bind="click: () => $data.giveHeldItem(HeldItem.heldItemSelected()), visible: !$data.heldItem() && HeldItem.heldItemSelected().canUse($data)">
-                      <td class="text-left" colspan="2"><knockout data-bind="text: $data.name"></knockout><sup data-bind="visible: $data.shiny">✨</sup></td>
-                    </tr>
-                  </tbody>
-                </table>
-            </div>
-            <!-- /ko -->
-        </div>
-    </div>
-</div>
-
-
-<!-- Battle Cafe Modal -->
-<div class="modal fade noselect" id="battleCafeModal" tabindex="-1" role="dialog"
-aria-labelledby="battleCafeModal"Label">
-<div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-   <div class="modal-content">
-       <div class="modal-header">
-           <h5 class="modal-title">Battle Café</h5>
-       </div>
-       <div class="modal-body">
-            <div>
-                <h4>Select a Sweet</h4>
-                <div class="row col-15 justify-content-center">
-                    <!-- ko foreach: GameHelper.enumStrings(GameConstants.AlcremieSweet) -->
-                    <div class="clickable col-4" data-bind="
-                        click: () => BattleCafeController.selectedSweet(GameConstants.AlcremieSweet[$data]),
-                        css: { 'bg-primary': BattleCafeController.selectedSweet() == GameConstants.AlcremieSweet[$data]}
-                    ">
-                        <h5>
-                            <span data-bind="text: $data"></span>
-                            <img data-bind="attr: { src: 'assets/images/sweets/' + $data + '.png' }"/>
-                        </h5>
-                        <div>
-                            <!-- ko foreach: BattleCafeController.getPrice(GameConstants.AlcremieSweet[$data]) -->
-                            <div>
-                                <img style="width: 30px;" data-bind="attr: { src: FarmController.getBerryImage($data.berry) }"/>
-                                <span data-bind="text: $data.amount.toLocaleString('en-US')"></span>/<span data-bind="text: App.game.farming.berryList[$data.berry]().toLocaleString('en-US')"></span>
-                            </div>
-                            <!-- /ko -->
-                        </div>
-                    </div>
-                    <!-- /ko -->
-                </div>
-            </div>
-            <h4>Spin!</h4>
-            <div>
-                <span>Spins left today: </span><span data-bind="text: BattleCafeController.spinsLeft()"></span>
-            </div>
-            <div>
-                <img style="width: 60px;" data-bind="
-                attr: { src: `assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png` },
-                class: BattleCafeController.isSpinning() ? 'player-animated' + (BattleCafeController.clockwise() ? '' : '-counter') : ''
-                " src="assets/images/profile/trainer-1.png">
-            </div>
-            <div>
-                <button class="btn btn-primary" onclick="BattleCafeController.spin(true);">Clockwise</button>
-                <button class="btn btn-primary" onclick="BattleCafeController.spin(false);">Counter-Clockwise</button>
-            </div>
-            <div class="input-group justify-content-center">
-                <label for="battleCafeDuration">Spin duration:</label><input class="form-control col-4" id="battleCafeDuration" type="number" min="1" max="20" value="3"/>
-            </div>
-        </div>
-
-       <div class="modal-footer">
-           <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-       </div>
-   </div>
 </div>
 </div>
 
