@@ -65,6 +65,10 @@ class PartyPokemon implements Saveable {
         });
         this.evs.subscribe((newValue) => {
             if (this.pokerus && this.pokerus < GameConstants.Pokerus.Resistant && newValue >= 50) {
+                Notifier.notify({
+                    message: `${this.name} has become Resistant to the Pokérus virus`,
+                    type: NotificationConstants.NotificationOption.info,
+                });
                 this.pokerus = GameConstants.Pokerus.Resistant;
             }
         });
