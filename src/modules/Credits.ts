@@ -15,6 +15,7 @@ export const SpriteCredits: Credit[] = [
         link: 'https://discordapp.com/users/200069836724764673/',
         resources: [
             'Pinkan Scyther',
+            'Sealed Chamber Braille',
         ],
         // Notes: Made specifically for PokéClicker.
     },

@@ -619,7 +619,7 @@ class QuestLineHelper {
                 regiHint1,
                 regiHint2,
                 regiHint3,
-            ], 'Explore Hoenn to release the Regi Trio.'));
+            ], 'Explore Hoenn by defeating pokémon on the hinted routes to release the Regi Trio.'));
 
         const catchRegirock = new CaptureSpecificPokemonQuest('Regirock', 'Catch Regirock');
 
