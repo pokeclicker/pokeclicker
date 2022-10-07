@@ -1,7 +1,3 @@
 {
-  "minKBReduced": null,
-  "ignoredFiles": [
-    "docs/**",
-    "other/**"
-  ]
+  "minKBReduced": null
 }

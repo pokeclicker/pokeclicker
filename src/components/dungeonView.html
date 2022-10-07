@@ -108,11 +108,6 @@
             <button class="btn btn-danger dungeon-button">Start Bossfight</button>
         </div>
         <!-- /ko -->
-        <!-- ko if: (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.ladder) -->
-        <div>
-            <button class="btn btn-warning dungeon-button">Go to next floor</button>
-        </div>
-        <!-- /ko -->
         <!-- ko if: DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.entrance && DungeonRunner.map.playerMoved() -->
         <div>
             <button class="btn btn-warning dungeon-button">Leave Dungeon</button>

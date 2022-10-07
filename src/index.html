@@ -366,7 +366,7 @@
                 </div>
                 <div class="card-body p-0 text-center">
                     <table class="dungeon-board">
-                      <tbody data-bind="foreach: DungeonRunner.map.board()[DungeonRunner.map.playerPosition().floor]">
+                      <tbody data-bind="foreach: DungeonRunner.map.board()">
                         <tr data-bind="foreach: $data">
                             <td data-bind=" click: function(){DungeonRunner.map.moveToCoordinates($context.$index(), $parentContext.$index()) }, attr: { class: $data.cssClass}"></td>
                         </tr>

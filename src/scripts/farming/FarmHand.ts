@@ -202,6 +202,7 @@ class FarmHand {
                     if (this.focus() == FarmHandBerryTypes.Replant) {
                         App.game.farming.plant(readyPlotIndex, berry);
                         workTimes--;
+                        worked = true;
                     }
                 }
             } while (readyPlotIndex >= 0 && workTimes > 0);
@@ -210,13 +211,13 @@ class FarmHand {
         // Planting berries
         if (this.focus() != FarmHandBerryTypes.None) {
             let emptyPlotIndex;
-            let berry;
             do {
                 // Find empty plots
                 emptyPlotIndex = App.game.farming.plotList.findIndex((p, i) => p.isUnlocked && p.berry == BerryType.None && this.plots().includes(i) && !p.isSafeLocked);
                 // Plant the berry
                 if (emptyPlotIndex >= 0 && workTimes > 0) {
                     // Plant the expected berry
+                    let berry;
                     switch (this.focus()) {
                         case FarmHandBerryTypes.Replant: // Re-plant last berry used
                             berry = App.game.farming.plotList[emptyPlotIndex].lastPlanted;
@@ -229,14 +230,11 @@ class FarmHand {
                     }
                     // If we somehow didn't find a berry to use, just plant a Cheri..
                     berry = berry < 0 ? BerryType.Cheri : berry;
-                    // Only plant and work if the player has a berry to plant
-                    if (App.game.farming.hasBerry(berry)) {
-                        App.game.farming.plant(emptyPlotIndex, berry as BerryType);
-                        workTimes--;
-                        worked = true;
-                    }
+                    App.game.farming.plant(emptyPlotIndex, berry as BerryType);
+                    workTimes--;
+                    worked = true;
                 }
-            } while (emptyPlotIndex >= 0 && workTimes > 0 && App.game.farming.hasBerry(berry));
+            } while (emptyPlotIndex >= 0 && workTimes > 0);
         }
 
         if (!worked) {

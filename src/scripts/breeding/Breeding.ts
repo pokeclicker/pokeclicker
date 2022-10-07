@@ -197,7 +197,7 @@ class Breeding implements Feature {
         amount *= this.getStepMultiplier();
 
         amount = Math.round(amount);
-        let index = this.eggList.length;
+        let index =  this.eggList.length;
         while (index-- > 0) {
             const helper = this.hatcheryHelpers.hired()[index];
             if (helper) {
@@ -206,7 +206,7 @@ class Breeding implements Feature {
             const egg = this.eggList[index]();
             const partyPokemon = egg.partyPokemon();
             if (!egg.isNone() && partyPokemon && partyPokemon.canCatchPokerus() && partyPokemon.pokerus == GameConstants.Pokerus.Uninfected) {
-                partyPokemon.calculatePokerus(index);
+                partyPokemon.calculatePokerus();
             }
             egg.addSteps(amount, this.multiplier);
             if (this._queueList().length && egg.canHatch()) {

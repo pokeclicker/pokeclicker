@@ -71,4 +71,4 @@ ItemList.Time_Flute        = new FluteItem(GameConstants.FluteItemType.Time_Flut
 ItemList.Black_Flute        = new FluteItem(GameConstants.FluteItemType.Black_Flute, 'Click Attack', ['Dark', 'Psychic', 'Fighting'], 'clickAttack', 1.02);
 ItemList.Red_Flute         = new FluteItem(GameConstants.FluteItemType.Red_Flute, 'Egg Steps', ['Fire', 'Rock', 'Dragon'], 'eggStep', 1.02);
 ItemList.White_Flute         = new FluteItem(GameConstants.FluteItemType.White_Flute, 'Shiny Chance', ['Normal', 'Fairy', 'Ice'], 'shiny', 1.02);
-ItemList.Blue_Flute        = new FluteItem(GameConstants.FluteItemType.Blue_Flute, 'EV Yield', ['Water', 'Bug', 'Ghost'], 'ev', 1.02);
+ItemList.Blue_Flute        = new FluteItem(GameConstants.FluteItemType.Blue_Flute, 'Dungeon Token Yield', ['Water', 'Bug', 'Ghost'], 'dungeonToken', 1.02);

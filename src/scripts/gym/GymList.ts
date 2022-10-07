@@ -1788,7 +1788,7 @@ GymList['Champion Leon'] = new Champion(
     BadgeEnums.Elite_GalarChampion,
     250000,
     'My time as Champion is over... But what a champion time it\'s been! Thank you for the greatest battle I\'ve ever had!',
-    [new QuestLineStepCompletedRequirement('The Darkest Day', 19)],
+    [new TemporaryBattleRequirement('The Darkest Day')],
     // Grookey
     [
         new GymPokemon('Seismitoad', 133481036, 64),
