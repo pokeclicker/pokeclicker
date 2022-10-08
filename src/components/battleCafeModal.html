@@ -16,7 +16,7 @@ aria-labelledby="battleCafeModal"Label">
                     ">
                         <h5>
                             <span data-bind="text: $data"></span>
-                            <img data-bind="attr: { src: 'assets/images/sweets/' + $data + '.png' }"/>
+                            <img style="max-width: 40px;" data-bind="attr: { src: 'assets/images/sweets/' + $data + '.png' }"/>
                         </h5>
                         <div>
                             <!-- ko foreach: BattleCafeController.getPrice(GameConstants.AlcremieSweet[$data]) -->
