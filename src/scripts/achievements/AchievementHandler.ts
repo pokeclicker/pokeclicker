@@ -377,8 +377,8 @@ class AchievementHandler {
 
         AchievementHandler.addAchievement('Oh, an other quest slot!', 'Reach quest level 5', new QuestLevelRequirement(5), 0.2);
         AchievementHandler.addAchievement('I am getting good at questing!', 'Reach quest level 10', new QuestLevelRequirement(10), 0.3);
-        AchievementHandler.addAchievement('What do i gain from leveling this?', 'Reach quest level 25', new QuestLevelRequirement(25), 0.5);
-        AchievementHandler.addAchievement('Quest master', 'Reach quest level 40', new QuestLevelRequirement(40), 0.8);
+        AchievementHandler.addAchievement('What do i gain from leveling this?', 'Reach quest level 20', new QuestLevelRequirement(20), 0.5);
+        AchievementHandler.addAchievement('Quest master', 'Reach quest level 30', new QuestLevelRequirement(30), 0.8);
 
         /*
          * REGIONAL
