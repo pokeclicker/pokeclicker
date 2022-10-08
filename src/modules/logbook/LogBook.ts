@@ -5,6 +5,8 @@ import { LogContent } from './helpers';
 import LogBookLog from './LogBookLog';
 import { LogBookType, LogBookTypes } from './LogBookTypes';
 
+type SavedLog = { type: LogBookType; content: LogContent; date: number };
+
 export default class LogBook implements Feature {
     name = 'Log Book';
     saveKey = 'logbook';
@@ -26,7 +28,7 @@ export default class LogBook implements Feature {
             return;
         }
 
-        json.logs?.forEach((entry) => {
+        json.logs?.forEach((entry: SavedLog) => {
             this.logs.push(new LogBookLog(entry.type, entry.content, entry.date));
         });
 
@@ -35,9 +37,9 @@ export default class LogBook implements Feature {
         });
     }
 
-    toJSON(): { logs: Array<{ type: LogBookType; content: LogContent; date: number }> } {
+    toJSON(): { logs: Array<SavedLog> } {
         return ko.toJS({
-            logs: this.logs.slice(0, 100),
+            logs: this.logs.slice(0, 100).map((log) => ({ type: log.type, content: log.content, date: log.date })),
             filters: this.filters,
         });
     }
