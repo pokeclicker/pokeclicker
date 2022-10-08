@@ -140,6 +140,7 @@ namespace GameConstants {
     declare const QUEST_CLICKS_PER_SECOND: number;
     declare const QUESTS_PER_SET: number;
     declare const BASE_EP_YIELD: number;
+    declare const TRAINER_EP_YIELD: number;
     declare const STONE_EP_YIELD: number;
     declare const WANDERER_EP_YIELD: number;
     declare const SHOPMON_EP_YIELD: number;

@@ -46,6 +46,7 @@ import RedeemableCode from './codes/RedeemableCode';
 import RedeemableCodes from './codes/RedeemableCodes';
 import RedeemableCodeController from './codes/RedeemableCodeController';
 import EggType from './breeding/EggType';
+import TrainerEVType from './pokemons/TrainerEVType';
 import Multiplier from './multiplier/Multiplier';
 import MultiplierType from './multiplier/MultiplierType';
 import SpecialEvent from './specialEvents/SpecialEvent';
@@ -177,6 +178,7 @@ Object.assign(<any>window, {
     RedeemableCodes,
     RedeemableCodeController,
     EggType,
+    TrainerEVType,
     Multiplier,
     MultiplierType,
     SpecialEvent,

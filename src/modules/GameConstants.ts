@@ -237,6 +237,7 @@ export const QUESTS_PER_SET = 10;
 
 // EVs
 export const BASE_EP_YIELD = 100;
+export const TRAINER_EP_YIELD = 10;
 export const STONE_EP_YIELD = 1000;
 export const WANDERER_EP_YIELD = 500;
 export const SHOPMON_EP_YIELD = 1000;

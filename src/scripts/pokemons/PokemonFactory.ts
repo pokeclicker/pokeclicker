@@ -126,7 +126,8 @@ class PokemonFactory {
 
         const exp: number = basePokemon.exp;
         const shiny = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
-        return new BattlePokemon(pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, 0, exp, new Amount(0, GameConstants.Currency.money), shiny, GameConstants.GYM_GEMS);
+        const ep = GameConstants.TRAINER_EP_YIELD;
+        return new BattlePokemon(pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, 0, exp, new Amount(0, GameConstants.Currency.money), shiny, GameConstants.GYM_GEMS, undefined, ep);
     }
 
     public static generateDungeonPokemon(name: PokemonNameType, chestsOpened: number, baseHealth: number, level: number): BattlePokemon {
@@ -138,6 +139,7 @@ class PokemonFactory {
         const money = 0;
         const heldItem = this.generateHeldItem(basePokemon.heldItem, GameConstants.DUNGEON_HELD_ITEM_MODIFIER);
         const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_DUNGEON);
+        const ep = GameConstants.BASE_EP_YIELD * GameConstants.DUNGEON_EP_MODIFIER;
         if (shiny) {
             Notifier.notify({
                 message: `✨ You encountered a shiny ${name}! ✨`,
@@ -150,8 +152,6 @@ class PokemonFactory {
             LogEvent('encountered shiny', 'shiny pokemon', 'dungeon encounter',
                 Math.floor(App.game.statistics.totalPokemonEncountered() / App.game.statistics.totalShinyPokemonEncountered()));
         }
-
-        const ep = GameConstants.BASE_EP_YIELD * GameConstants.DUNGEON_EP_MODIFIER;
         return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, GameConstants.DUNGEON_GEMS, heldItem, ep);
     }
 
@@ -164,7 +164,8 @@ class PokemonFactory {
         const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_DUNGEON);
         // Reward 2% or 5% (boss) of dungeon DT cost when the trainer mons are defeated
         const money = 0;
-        return new BattlePokemon(name, basePokemon.id, basePokemon.type1, basePokemon.type2, maxHealth, level, 0, exp, new Amount(money, GameConstants.Currency.money), shiny, GameConstants.DUNGEON_GEMS);
+        const ep = GameConstants.TRAINER_EP_YIELD * (DungeonRunner.fightingBoss() ? GameConstants.DUNGEON_BOSS_EP_MODIFIER : GameConstants.DUNGEON_EP_MODIFIER);
+        return new BattlePokemon(name, basePokemon.id, basePokemon.type1, basePokemon.type2, maxHealth, level, 0, exp, new Amount(money, GameConstants.Currency.money), shiny, GameConstants.DUNGEON_GEMS, undefined, ep);
     }
 
     public static generateDungeonBoss(bossPokemon: DungeonBossPokemon, chestsOpened: number): BattlePokemon {
@@ -177,6 +178,7 @@ class PokemonFactory {
         const money = 0;
         const heldItem = this.generateHeldItem(basePokemon.heldItem, GameConstants.DUNGEON_BOSS_HELD_ITEM_MODIFIER);
         const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_DUNGEON);
+        const ep = GameConstants.BASE_EP_YIELD * GameConstants.DUNGEON_BOSS_EP_MODIFIER;
         if (shiny) {
             Notifier.notify({
                 message: `✨ You encountered a shiny ${name}! ✨`,
@@ -189,7 +191,7 @@ class PokemonFactory {
             LogEvent('encountered shiny', 'shiny pokemon', 'dungeon boss encounter',
                 Math.floor(App.game.statistics.totalPokemonEncountered() / App.game.statistics.totalShinyPokemonEncountered()));
         }
-        const ep = GameConstants.BASE_EP_YIELD * GameConstants.DUNGEON_BOSS_EP_MODIFIER;
+
         return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, bossPokemon.level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, GameConstants.DUNGEON_BOSS_GEMS, heldItem, ep);
     }
 
