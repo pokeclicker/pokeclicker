@@ -262,7 +262,7 @@ Settings.add(new Setting<string>('achievementsCategory', 'achievementsCategory',
             .filter((r) => r !== 'none' && r !== 'final')
             .map((r) => new SettingOption(camelCaseToString(r), r)),
     ],
-    '-2'));
+    'all'));
 
 // Save menu sorting
 Settings.add(new Setting('sort.saveSelector', 'Saves sort order', [], ''));
