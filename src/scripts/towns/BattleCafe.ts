@@ -50,14 +50,15 @@ class BattleCafeController {
 
         BattleCafeController.clockwise(clockwise);
         BattleCafeController.isSpinning(true);
-        BattleCafeController.spinsLeft(BattleCafeController.spinsLeft() - 1);
         const spinTime = +$('#battleCafeDuration').val();
         const sweet = BattleCafeController.selectedSweet();
-        BattleCafeController.getPrice(sweet).forEach(b => GameHelper.incrementObservable(App.game.farming.berryList[b.berry], b.amount * -1));
+
 
         setTimeout(() => {
             BattleCafeController.isSpinning(false);
             BattleCafeController.unlockAlcremie(clockwise, spinTime, sweet);
+            BattleCafeController.spinsLeft(BattleCafeController.spinsLeft() - 1);
+            BattleCafeController.getPrice(sweet).forEach(b => GameHelper.incrementObservable(App.game.farming.berryList[b.berry], b.amount * -1));
         },
         spinTime * 1000);
     }
