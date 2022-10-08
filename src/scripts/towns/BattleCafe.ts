@@ -113,6 +113,13 @@ class BattleCafeController {
             });
             return false;
         }
+        if (+$('#battleCafeDuration').val() > 20) {
+            Notifier.notify({
+                message: 'Can\'t spin for more than 20 seconds',
+                type: NotificationConstants.NotificationOption.danger,
+            });
+            return false;
+        }
         return BattleCafeController.getPrice(BattleCafeController.selectedSweet()).every(b => {
             if (App.game.farming.berryList[b.berry]() < b.amount) {
                 Notifier.notify({
