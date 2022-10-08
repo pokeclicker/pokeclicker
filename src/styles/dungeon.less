@@ -66,6 +66,20 @@
   }
 }
 
+.tile-ladder {
+    background-color: #747252;
+    &::after {
+      position: absolute;
+      top: 15%;
+      left: 15%;
+      content: '';
+      display: block;
+      height: 90%;
+      width: 70%;
+      background: center / contain no-repeat url('../assets/images/dungeons/ladder.png');
+    }
+  }
+
 .healthbar-boss {
   background-color: #9b59b6;
 }
