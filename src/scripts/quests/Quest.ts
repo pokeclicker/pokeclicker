@@ -67,7 +67,7 @@ abstract class Quest {
                     LogBookTypes.QUEST,
                     createLogContent.completedQuestWithPoints({
                         quest: this.description,
-                        questPoints: this.pointsReward.toLocaleString('en-US'),
+                        points: this.pointsReward.toLocaleString('en-US'),
                     })
                 );
             } else {

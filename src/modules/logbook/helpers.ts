@@ -40,15 +40,15 @@ export enum LogContentKey {
     'questLevelUp' = 'questLevelUp',
 }
 
-export const createLogContent: Record<LogContentKey, (vars?: TranslationVars) => LogContent> = {
+export const createLogContent = {
     notTranslated: (vars: { text: string }) => ({ key: LogContentKey.notTranslated, vars }),
     earnedAchievement: (vars: { name: string }) => ({ key: LogContentKey.earnedAchievement, vars }),
     escapedShiny: (vars: { pokemon: PokemonNameType }) => ({ key: LogContentKey.escapedShiny, vars }),
     escapedWild: (vars: { pokemon: PokemonNameType }) => ({ key: LogContentKey.escapedWild, vars }),
     encounterShiny: (vars: { location: string, pokemon: PokemonNameType }) => ({ key: LogContentKey.encounterShiny, vars }),
     encounterWild: (vars: { location: string, pokemon: PokemonNameType }) => ({ key: LogContentKey.encounterWild, vars }),
-    gainBattleFrontierReward: (vars: { reward: string, stage: number }) => ({ key: LogContentKey.gainBattleFrontierReward, vars }),
-    gainBattleFrontierPoints: (vars: { points: number, stage: number }) => ({ key: LogContentKey.gainBattleFrontierPoints, vars }),
+    gainBattleFrontierReward: (vars: { reward: string, stage: string }) => ({ key: LogContentKey.gainBattleFrontierReward, vars }),
+    gainBattleFrontierPoints: (vars: { points: string, stage: string }) => ({ key: LogContentKey.gainBattleFrontierPoints, vars }),
     hatchedShiny: (vars: { pokemon: PokemonNameType }) => ({ key: LogContentKey.hatchedShiny, vars }),
     hatchedShinyDupe: (vars: { pokemon: PokemonNameType }) => ({ key: LogContentKey.hatchedShinyDupe, vars }),
     unableToPayHatcheryHelper: (vars: { currency: string, name: string }) => ({ key: LogContentKey.unableToPayHatcheryHelper, vars }),
@@ -69,6 +69,6 @@ export const createLogContent: Record<LogContentKey, (vars?: TranslationVars) =>
     roamer: (vars: { location: string, pokemon: PokemonNameType }) => ({ key: LogContentKey.roamer, vars }),
     roamerShiny: (vars: { location: string, pokemon: PokemonNameType }) => ({ key: LogContentKey.roamerShiny, vars }),
     completedQuest: (vars: { quest: string }) => ({ key: LogContentKey.completedQuest, vars }),
-    completedQuestWithPoints: (vars: { quest: string, points: number }) => ({ key: LogContentKey.completedQuestWithPoints, vars }),
-    questLevelUp: (vars: { level: number }) => ({ key: LogContentKey.questLevelUp, vars }),
+    completedQuestWithPoints: (vars: { quest: string, points: string }) => ({ key: LogContentKey.completedQuestWithPoints, vars }),
+    questLevelUp: (vars: { level: string }) => ({ key: LogContentKey.questLevelUp, vars }),
 };
