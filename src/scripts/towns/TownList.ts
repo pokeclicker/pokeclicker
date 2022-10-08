@@ -3449,6 +3449,11 @@ const MysteryFan = new NPC('Mystery Fan', [
     'I\'ve heard a Pokémon detective is sniffing around here for mysteries! He might be interested in an enigmatic berry, too.',
 ]);
 
+const Spelunker = new NPC('Spelunker', [
+    'I\'ve heard that a hidden realm lies beneath this cave, ruled by a Pokémon Princess. She might come out for a powerful and helpful trainer.',
+    'That would be big news, sure to be reported on local bulletin boards!',
+]);
+
 const ExamineAegislash = new NPC('Examine Your Doublade', [
     '<i>Your Doublade evolves and shifts into an aggressive stance, revealing its Blade Forme.</i>',
 ], {
@@ -3644,7 +3649,9 @@ TownList['Glittering Cave'] = new DungeonTown(
 TownList['Reflection Cave'] = new DungeonTown(
     'Reflection Cave',
     GameConstants.Region.kalos,
-    [new RouteKillRequirement(10, GameConstants.Region.kalos, 11)]
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 11)],
+    [],
+    [Spelunker]
 );
 //Tower of Mastery?
 TownList['Sea Spirit\'s Den'] = new DungeonTown(
