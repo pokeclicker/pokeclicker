@@ -1206,6 +1206,9 @@ class Update implements Saveable {
             // Add Sudowoodo Temporary Battle
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 7);
 
+            // Pinkan Berry - Obtained Statistics
+            saveData.statistics.berriesObtained = Update.moveIndex(saveData.statistics.berriesObtained, 35);
+
             // Fix A New World questline for players updating from v0.9.8/9 to v0.9.16+
             const aNewWorld = saveData.quests.questLines.find(ql => ql.name == 'A New World');
             if (aNewWorld.state === 1 && aNewWorld.quest <= 3) {
