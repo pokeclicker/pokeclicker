@@ -398,6 +398,7 @@ class AchievementHandler {
             // Routes
             Routes.getRoutesByRegion(region).forEach(route => {
                 let category = region;
+                // Split Sevii islands into it's own achievement pool
                 if (region == GameConstants.Region.kanto && (route.subRegion == GameConstants.KantoSubRegions.Sevii123 || route.subRegion == GameConstants.KantoSubRegions.Sevii4567)) {
                     category = GameConstants.ExtraAchievementCategories.sevii;
                 }
@@ -413,6 +414,7 @@ class AchievementHandler {
             // Dungeons
             GameConstants.RegionDungeons[region]?.forEach(dungeon => {
                 let category = region;
+                // Split Sevii islands into it's own achievement pool
                 if (region == GameConstants.Region.kanto && (TownList[dungeon].subRegion == GameConstants.KantoSubRegions.Sevii123 || TownList[dungeon].subRegion == GameConstants.KantoSubRegions.Sevii4567)) {
                     category = GameConstants.ExtraAchievementCategories.sevii;
                 }
