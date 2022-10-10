@@ -355,7 +355,7 @@ class AchievementHandler {
         AchievementHandler.addAchievement('A literal mountain of muscle', 'Obtain 50,000 Proteins', new ProteinObtainRequirement(50000), 0.70);
 
         AchievementHandler.addAchievement('Some nice help for the Day Care', 'Unlock 5 Hatchery Helpers', new HatcheryHelperRequirement(5, 0), 0.1);
-        AchievementHandler.addAchievement('Why do they have to work in shifts?', 'Unlock 10 Hatchery Helpers', new HatcheryHelperRequirement(10, 0), 0.3);
+        AchievementHandler.addAchievement('Why do they have to work in shifts?', 'Unlock 11 Hatchery Helpers', new HatcheryHelperRequirement(11, 0), 0.3);
         AchievementHandler.addAchievement('My loyal helpers', 'Get 3 Hatchery Helpers to 10% bonus efficiency', new HatcheryHelperRequirement(3, 10), 0.4);
         AchievementHandler.addAchievement('Let\'s try some other helpers too?', 'Get 5 Hatchery Helpers to 10% bonus efficiency', new HatcheryHelperRequirement(5, 10), 0.5);
         AchievementHandler.addAchievement('Sam just wants to help', 'Get 10 Hatchery Helpers to 10% bonus efficiency', new HatcheryHelperRequirement(10, 10), 1);
@@ -363,7 +363,7 @@ class AchievementHandler {
 
         AchievementHandler.addAchievement('Getting some help at the farm', 'Unlock 3 Farm Hands', new FarmHandRequirement(3), 0.2);
         AchievementHandler.addAchievement('Starting a farming empire', 'Unlock 6 Farm Hands', new FarmHandRequirement(6), 0.3);
-        AchievementHandler.addAchievement('Will I ever need all this help?', 'Unlock 10 Farm Hands', new FarmHandRequirement(10), 0.4);
+        AchievementHandler.addAchievement('Will I ever need all this help?', 'Unlock 9 Farm Hands', new FarmHandRequirement(9), 0.4);
 
         AchievementHandler.addAchievement('I hope it\'s not dangerous', 'Infect 20 Pokémon with Pokérus', new PokerusStatusRequirement(20, GameConstants.Pokerus.Infected), 0.1);
         AchievementHandler.addAchievement('Anyway to get rid of it?', 'Infect 50 Pokémon with Pokérus', new PokerusStatusRequirement(50, GameConstants.Pokerus.Infected), 0.2);
