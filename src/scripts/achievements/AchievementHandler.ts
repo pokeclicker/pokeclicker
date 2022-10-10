@@ -363,7 +363,7 @@ class AchievementHandler {
 
         AchievementHandler.addAchievement('Getting some help at the farm', 'Unlock 3 Farm Hands', new FarmHandRequirement(3), 0.2);
         AchievementHandler.addAchievement('Starting a farming empire', 'Unlock 6 Farm Hands', new FarmHandRequirement(6), 0.3);
-        AchievementHandler.addAchievement('Will I ever need all this help?', 'Unlock 9 Farm Hands', new FarmHandRequirement(9), 0.4);
+        AchievementHandler.addAchievement('Will I ever need all this help?', 'Unlock 10 Farm Hands', new FarmHandRequirement(10), 0.4);
 
         AchievementHandler.addAchievement('I hope it\'s not dangerous', 'Infect 20 Pokémon with Pokérus', new PokerusStatusRequirement(20, GameConstants.Pokerus.Infected), 0.1);
         AchievementHandler.addAchievement('Anyway to get rid of it?', 'Infect 50 Pokémon with Pokérus', new PokerusStatusRequirement(50, GameConstants.Pokerus.Infected), 0.2);
