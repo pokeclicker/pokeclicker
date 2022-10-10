@@ -10,6 +10,10 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.9.18
+    new ChangelogUpdate('v0.9.18', new Date(2022, 9, 10)),
+    new Changelog(changelogType.FIXED, 'Some saves not being able to update to v0.9.17'),
+
     // v0.9.17
     new ChangelogUpdate('v0.9.17', new Date(2022, 9, 10)),
     new Changelog(changelogType.NEW, 'Held items [BETA]'),
