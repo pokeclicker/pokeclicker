@@ -1791,6 +1791,7 @@ const HoennBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations[
     ItemList.Mulch_Shovel,
     ItemList.Sprinklotad,
     ItemList.FarmHandKerry,
+    ItemList.HatcheryHelperCameron,
 ]);
 
 //Hoenn Flute Master
