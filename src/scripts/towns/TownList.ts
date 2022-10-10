@@ -2209,7 +2209,9 @@ TownList['Sealed Chamber'] = new DungeonTown(
         new RouteKillRequirement(10, GameConstants.Region.hoenn, 134),
         new GymBadgeRequirement(BadgeEnums.Mind)],
     [],
-    [SCEntrance, MazeHintLeft, MazeHintRight, MazeHintStraight, SCMazeLeft, SCMazeLeftWrong, SCMazeRight, SCMazeRightWrong, SCMazeStraight, SCMazeStraightWrong, SCHints, BrailleEnthusiast1, BrailleEnthusiast2, BrailleEnthusiast3]
+    {
+        npcs: [SCEntrance, MazeHintLeft, MazeHintRight, MazeHintStraight, SCMazeLeft, SCMazeLeftWrong, SCMazeRight, SCMazeRightWrong, SCMazeStraight, SCMazeStraightWrong, SCHints, BrailleEnthusiast1, BrailleEnthusiast2, BrailleEnthusiast3],
+    }
 );
 
 //Sinnoh Shops
