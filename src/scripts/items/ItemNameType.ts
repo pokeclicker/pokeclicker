@@ -91,6 +91,7 @@ type ItemNameType
     | 'Light_Ball'
     | 'Quick_Powder'
     | 'Thick_Club'
+    | 'Soul_Dew'
     | 'Rusted_Sword'
     | 'Rusted_Shield'
     | 'Black_Belt'
