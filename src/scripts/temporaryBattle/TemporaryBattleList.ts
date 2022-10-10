@@ -228,6 +228,18 @@ TemporaryBattleList['Suicune 6'] = new TemporaryBattle(
         isTrainerBattle: false,
     }
 );
+TemporaryBattleList['Kimono Girls'] = new TemporaryBattle(
+    'Kimono Girls',
+    [
+        new GymPokemon('Umbreon', 660000, 42),
+        new GymPokemon('Espeon', 660000, 43),
+        new GymPokemon('Flareon', 660000, 46),
+        new GymPokemon('Jolteon', 660000, 40),
+        new GymPokemon('Vaporeon', 660000, 40),
+    ],
+    'You have beautifully proven that the bond between people can be extended to the bond between people and Pokémon. We all appreciate that you have lived up to our expectations. This Clear Bell will signal to Ho-oh that you are worthy of its attentions.',
+    [new QuestLineStepCompletedRequirement('Rainbow Guardian', 0)]
+);
 TemporaryBattleList['Spiky-eared Pichu'] = new TemporaryBattle(
     'Spiky-eared Pichu',
     [new GymPokemon('Spiky-eared Pichu', 3178500, 20)],

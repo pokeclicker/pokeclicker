@@ -1215,6 +1215,11 @@ class Update implements Saveable {
                 saveData.statistics.temporaryBattleDefeated[27] = 0;
             }
         },
+
+        '0.9.19': ({ playerData, saveData }) => {
+            // Add Kimono Girls Temporary Battles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 25);
+        },
     };
 
     constructor() {

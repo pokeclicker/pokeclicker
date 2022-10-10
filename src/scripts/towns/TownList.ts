@@ -1370,11 +1370,53 @@ const EcruteakPokéfan = new NPC('Pokéfan Derek', [
     requirement: new QuestLineStepCompletedRequirement('The Legendary Beasts', 1),
 });
 
-const EcruteakKimonoGirl = new NPC('Kimono Girl', [
-    'Legends say that Ho-Oh is searching for a trainer of pure heart.',
-    'To prove yourself, you must tame the three legendary beasts of Johto, and bring them to the nearby Tin Tower.',
+const Zuki = new NPC('Kimono Girl Zuki', [
+    'Professor Elm tells me you are a master trainer. Please, show me your skills by training your Pokémon.',
 ], {
-    requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Burned Tower')),
+    image: 'assets/images/trainers/Kimono Girl.png',
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('Whirl Guardian'), new QuestLineStepCompletedRequirement('Whirl Guardian', 1, GameConstants.AchievementOption.less)]),
+});
+
+const Naoko = new NPC('Kimono Girl Naoko', [
+    'I seem to have lost my way in the forest. Can you show me the way out?',
+], {
+    image: 'assets/images/trainers/Kimono Girl.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Whirl Guardian', 1), new QuestLineStepCompletedRequirement('Whirl Guardian', 3, GameConstants.AchievementOption.less)]),
+});
+
+const Miki = new NPC('Kimono Girl Miki', [
+    'My sisters Zuki and Naoko tell me you have helped them, and I thank you. Please help find my other two sisters, Sayo and Kuni. Please accept this as a token of my gratitude.',
+], {
+    image: 'assets/images/trainers/Kimono Girl.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Whirl Guardian', 3), new QuestLineStepCompletedRequirement('Whirl Guardian', 5, GameConstants.AchievementOption.less)]),
+});
+
+const Sayo = new NPC('Kimono Girl Sayo', [
+    'Excuse me! I\'m stuck out here on the ice, can you give me a quick push?',
+], {
+    image: 'assets/images/trainers/Kimono Girl.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Whirl Guardian', 4), new QuestLineStepCompletedRequirement('Whirl Guardian', 6, GameConstants.AchievementOption.less)]),
+});
+
+const Kuni = new NPC('Kimono Girl Kuni', [
+    'I\'m supposed to meet my sisters, but the streets here just aren\'t safe! Can you protect me from Team Rocket?',
+], {
+    image: 'assets/images/trainers/Kimono Girl.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Whirl Guardian', 6), new QuestLineStepCompletedRequirement('Whirl Guardian', 8, GameConstants.AchievementOption.less)]),
+});
+
+const KimonoGirlsWhirl = new NPC('Kimono Girls', [
+    'With the power of the Tidal Bell, we call to Lugia! Guardian of the Whirl Islands!',
+], {
+    image: 'assets/images/trainers/Kimono Girl.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Whirl Guardian', 8), new QuestLineStepCompletedRequirement('Whirl Guardian', 10, GameConstants.AchievementOption.less)]),
+});
+
+const KimonoGirlsEcruteak = new NPC('Kimono Girls', [
+    'We have been watching you, and see that you have tamed the three Pokémon revived by Ho-oh in the Burned Tower. Show us your power and we shall give you the Clear Bell, which will call Ho-oh to the Tin Tower.',
+], {
+    image: 'assets/images/trainers/Kimono Girl.png',
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('Rainbow Guardian'), new QuestLineStepCompletedRequirement('Rainbow Guardian', 1, GameConstants.AchievementOption.less)]),
 });
 
 const OlivineSSAquaCaptain = new NPC('S.S. Aqua Captain', [
@@ -1488,7 +1530,7 @@ TownList['Violet City'] = new Town(
     [VioletCityShop, new MoveToDungeon(dungeonList['Sprout Tower'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 31)],
-        npcs: [VioletEarlDervish],
+        npcs: [VioletEarlDervish, Zuki],
     }
 );
 TownList['Azalea Town'] = new Town(
@@ -1506,16 +1548,16 @@ TownList['Goldenrod City'] = new Town(
     [GoldenrodDepartmentStoreShop, JohtoBerryMaster, new MoveToDungeon(dungeonList['Radio Tower']), TemporaryBattleList['Aipom Alley'], TemporaryBattleList.Imposter, TemporaryBattleList['Possessed Mewtwo']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 34)],
-        npcs: [searchForClues, HowardClifford1, HowardClifford2, HowardClifford3],
+        npcs: [searchForClues, HowardClifford1, HowardClifford2, HowardClifford3, Kuni],
     }
 );
 TownList['Ecruteak City'] = new Town(
     'Ecruteak City',
     GameConstants.Region.johto,
-    [EcruteakCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Ecruteak City']), new MoveToDungeon(dungeonList['Burned Tower']), new MoveToDungeon(dungeonList['Tin Tower'])],
+    [EcruteakCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Ecruteak City']), new MoveToDungeon(dungeonList['Burned Tower']), new MoveToDungeon(dungeonList['Tin Tower']), TemporaryBattleList['Kimono Girls']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 37)],
-        npcs: [EcruteakBill, EcruteakEusine, EcruteakPokéfan, EcruteakKimonoGirl],
+        npcs: [EcruteakBill, EcruteakEusine, EcruteakPokéfan, Miki, KimonoGirlsEcruteak],
     }
 );
 TownList['Olivine City'] = new Town(
@@ -1596,7 +1638,7 @@ TownList['Ilex Forest'] = new DungeonTown(
     [new GymBadgeRequirement(BadgeEnums.Hive)],
     [TemporaryBattleList['Spiky-eared Pichu']],
     {
-        npcs: [IlexForestShrine1, IlexForestShrine2],
+        npcs: [IlexForestShrine1, IlexForestShrine2, Naoko],
     }
 );
 TownList['Burned Tower'] = new DungeonTown(
@@ -1612,7 +1654,11 @@ TownList['Tin Tower'] = new DungeonTown(
 TownList['Whirl Islands'] = new DungeonTown(
     'Whirl Islands',
     GameConstants.Region.johto,
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Radio Tower'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Radio Tower'))],
+    [],
+    {
+        npcs: [KimonoGirlsWhirl],
+    }
 );
 TownList['Mt. Mortar'] = new DungeonTown(
     'Mt. Mortar',
@@ -1635,7 +1681,11 @@ TownList['Radio Tower'] = new DungeonTown(
 TownList['Ice Path'] = new DungeonTown(
     'Ice Path',
     GameConstants.Region.johto,
-    [new RouteKillRequirement(10, GameConstants.Region.johto, 44)]
+    [new RouteKillRequirement(10, GameConstants.Region.johto, 44)],
+    [],
+    {
+        npcs: [Sayo],
+    }
 );
 TownList['Dark Cave'] = new DungeonTown(
     'Dark Cave',
