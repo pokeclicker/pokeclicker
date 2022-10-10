@@ -1018,12 +1018,20 @@ TownList['Pokémon Mansion'] = new DungeonTown(
 TownList['Mt. Ember Summit'] = new DungeonTown(
     'Mt. Ember Summit',
     GameConstants.Region.kanto,
-    [new RouteKillRequirement(10, GameConstants.Region.kanto, 27)]
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 27)],
+    [],
+    {
+        subRegion: GameConstants.KantoSubRegions.Sevii123,
+    }
 );
 TownList['Berry Forest'] = new DungeonTown(
     'Berry Forest',
     GameConstants.Region.kanto,
-    [new RouteKillRequirement(10, GameConstants.Region.kanto, 29)]
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 29)],
+    [],
+    {
+        subRegion: GameConstants.KantoSubRegions.Sevii123,
+    }
 );
 TownList['Victory Road'] = new DungeonTown(
     'Victory Road',
@@ -1041,43 +1049,67 @@ TownList['Ruby Path'] = new DungeonTown(
     GameConstants.Region.kanto,
     [new QuestLineStepCompletedRequirement('Celio\'s Errand', 2)],
     [],
-    [SeviiRuby]
+    {
+        npcs: [SeviiRuby],
+        subRegion: GameConstants.KantoSubRegions.Sevii4567,
+    }
 );
 TownList['Icefall Cave'] = new DungeonTown(
     'Icefall Cave',
     GameConstants.Region.kanto,
     [new QuestLineStepCompletedRequirement('Celio\'s Errand', 5)],
     [],
-    [SeviiLorelei]
+    {
+        npcs: [SeviiLorelei],
+        subRegion: GameConstants.KantoSubRegions.Sevii4567,
+    }
 );
 TownList['Sunburst Island'] = new DungeonTown(
     'Sunburst Island',
     GameConstants.Region.kanto,
-    [new RouteKillRequirement(10, GameConstants.Region.kanto, 31)]
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 31)],
+    [],
+    {
+        subRegion: GameConstants.KantoSubRegions.Sevii4567,
+    }
 );
 TownList['Lost Cave'] = new DungeonTown(
     'Lost Cave',
     GameConstants.Region.kanto,
-    [new RouteKillRequirement(10, GameConstants.Region.kanto, 33)]
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 33)],
+    [],
+    {
+        subRegion: GameConstants.KantoSubRegions.Sevii4567,
+    }
 );
 TownList['Pattern Bush'] = new DungeonTown(
     'Pattern Bush',
     GameConstants.Region.kanto,
-    [new RouteKillRequirement(10, GameConstants.Region.kanto, 34)]
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 34)],
+    [],
+    {
+        subRegion: GameConstants.KantoSubRegions.Sevii4567,
+    }
 );
 TownList['Altering Cave'] = new DungeonTown(
     'Altering Cave',
     GameConstants.Region.kanto,
     [new RouteKillRequirement(10, GameConstants.Region.kanto, 36)],
     [],
-    [AlteringCaveRuinManiac1, AlteringCaveRuinManiac2]
+    {
+        npcs: [AlteringCaveRuinManiac1, AlteringCaveRuinManiac2],
+        subRegion: GameConstants.KantoSubRegions.Sevii4567,
+    }
 );
 TownList['Tanoby Ruins'] = new DungeonTown(
     'Tanoby Ruins',
     GameConstants.Region.kanto,
     [new RouteKillRequirement(10, GameConstants.Region.kanto, 39)],
     [TanobyRuinsShop],
-    [TanobyProfIvy]
+    {
+        npcs: [TanobyProfIvy],
+        subRegion: GameConstants.KantoSubRegions.Sevii4567,
+    }
 );
 TownList['Pinkan Mountain'] = new DungeonTown(
     'Pinkan Mountain',
@@ -1085,7 +1117,11 @@ TownList['Pinkan Mountain'] = new DungeonTown(
     [
         new RouteKillRequirement(10, GameConstants.Region.kanto, 42),
         new GymBadgeRequirement(BadgeEnums.Elite_OrangeChampion),
-    ]
+    ],
+    [],
+    {
+        subRegion: GameConstants.KantoSubRegions.Sevii4567,
+    }
 );
 
 //Johto Shops
@@ -1559,7 +1595,9 @@ TownList['Ilex Forest'] = new DungeonTown(
     GameConstants.Region.johto,
     [new GymBadgeRequirement(BadgeEnums.Hive)],
     [TemporaryBattleList['Spiky-eared Pichu']],
-    [IlexForestShrine1, IlexForestShrine2]
+    {
+        npcs: [IlexForestShrine1, IlexForestShrine2],
+    }
 );
 TownList['Burned Tower'] = new DungeonTown(
     'Burned Tower',
@@ -1609,7 +1647,9 @@ TownList['Tohjo Falls'] = new DungeonTown(
     GameConstants.Region.johto,
     [new GymBadgeRequirement(BadgeEnums.Rising)],
     [TemporaryBattleList['Rocket Boss Giovanni']],
-    [TohjoFallsCelebiTimeDistortion]
+    {
+        npcs: [TohjoFallsCelebiTimeDistortion],
+    }
 );
 TownList['Victory Road Johto'] = new DungeonTown(
     'Victory Road Johto',
@@ -3248,7 +3288,9 @@ TownList['Relic Castle'] = new DungeonTown(
     GameConstants.Region.unova,
     [new RouteKillRequirement(10, GameConstants.Region.unova, 25)],
     [],
-    [RelicCastleRuinmaniac]
+    {
+        npcs: [RelicCastleRuinmaniac],
+    }
 );
 TownList['Lostlorn Forest'] = new DungeonTown(
     'Lostlorn Forest',
@@ -3304,7 +3346,9 @@ TownList['Giant Chasm'] = new DungeonTown(
         new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 15),
     ],
     [TemporaryBattleList.Colress, TemporaryBattleList['Plasma Shadow 2'], TemporaryBattleList['Plasma Shadow 3'], TemporaryBattleList['Plasma Shadow 4'], TemporaryBattleList['Ghetsis 1'], TemporaryBattleList['Ghetsis 2']],
-    [GiantChasmColress, GiantChasmShadowTriad]
+    {
+        npcs: [GiantChasmColress, GiantChasmShadowTriad],
+    }
 );
 TownList['Cave of Being'] = new DungeonTown(
     'Cave of Being',
@@ -3370,7 +3414,9 @@ TownList['P2 Laboratory'] = new DungeonTown(
     GameConstants.Region.unova,
     [new RouteKillRequirement(10, GameConstants.Region.unova, 17)],
     [],
-    [P2LaboratoryColress]
+    {
+        npcs: [P2LaboratoryColress],
+    }
 );
 
 //Kalos Shops
@@ -3529,6 +3575,11 @@ const ProfSycamore = new ProfNPC('Prof. Sycamore',
 
 const MysteryFan = new NPC('Mystery Fan', [
     'I\'ve heard a Pokémon detective is sniffing around here for mysteries! He might be interested in an enigmatic berry, too.',
+]);
+
+const Spelunker = new NPC('Spelunker', [
+    'I\'ve heard that a hidden realm lies beneath this cave, ruled by a Pokémon Princess. She might come out for a powerful and helpful trainer.',
+    'That would be big news, sure to be reported on local bulletin boards!',
 ]);
 
 const ExamineAegislash = new NPC('Examine Your Doublade', [
@@ -3726,7 +3777,11 @@ TownList['Glittering Cave'] = new DungeonTown(
 TownList['Reflection Cave'] = new DungeonTown(
     'Reflection Cave',
     GameConstants.Region.kalos,
-    [new RouteKillRequirement(10, GameConstants.Region.kalos, 11)]
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 11)],
+    [],
+    {
+        npcs: [Spelunker],
+    }
 );
 //Tower of Mastery?
 TownList['Sea Spirit\'s Den'] = new DungeonTown(
@@ -4334,7 +4389,9 @@ TownList['Mount Lanakila'] = new DungeonTown(
     GameConstants.Region.alola,
     [new GymBadgeRequirement(BadgeEnums.GroundiumZ)],
     [],
-    [LanakilaColress]
+    {
+        npcs: [LanakilaColress],
+    }
 );
 TownList['Lake of the Sunne and Moone'] = new DungeonTown(
     'Lake of the Sunne and Moone',
@@ -5262,7 +5319,9 @@ TownList['Slumbering Weald Shrine'] = new DungeonTown(
     GameConstants.Region.galar,
     [new QuestLineStepCompletedRequirement('The Darkest Day', 12)],
     [TemporaryBattleList.Hop8, TemporaryBattleList.Sordward1, TemporaryBattleList.Shielbert1],
-    [SlumberingHop1, SlumberingHop2, SordwardShielbert1]
+    {
+        npcs: [SlumberingHop1, SlumberingHop2, SordwardShielbert1],
+    }
 );
 TownList['Galar Mine'] = new DungeonTown(
     'Galar Mine',
@@ -5281,7 +5340,9 @@ TownList['Glimwood Tangle'] = new DungeonTown(
     GameConstants.Region.galar,
     [new QuestLineStepCompletedRequirement('The Darkest Day', 2)],
     [TemporaryBattleList['Zarude Tribe 1'], TemporaryBattleList['Zarude Tribe 2'], TemporaryBattleList['Zarude Tribe 3'], TemporaryBattleList['Zarude (Dada)'], TemporaryBattleList['Flowering Celebi'], GlimwoodTangleShop],
-    [JungleKoko1, JungleKoko2, JungleKoko3, JungleKoko4, JungleKoko5, JungleAsh3, JungleKoko6]
+    {
+        npcs: [JungleKoko1, JungleKoko2, JungleKoko3, JungleKoko4, JungleKoko5, JungleAsh3, JungleKoko6],
+    }
 );
 TownList['Rose Tower'] = new DungeonTown(
     'Rose Tower',
@@ -5293,7 +5354,9 @@ TownList['Energy Plant'] = new DungeonTown(
     GameConstants.Region.galar,
     [new QuestLineStepCompletedRequirement('The Darkest Day', 14)],
     [TemporaryBattleList.Eternatus, TemporaryBattleList.Sordward2, TemporaryBattleList.Shielbert2, TemporaryBattleList['Rampaging Zacian'], TemporaryBattleList['Rampaging Zamazenta'], TemporaryBattleList['The Darkest Day']],
-    [EnergyPlantRose, SordwardShielbert3, SordwardShielbert4, Piers, EnergyPlantHop]
+    {
+        npcs: [EnergyPlantRose, SordwardShielbert3, SordwardShielbert4, Piers, EnergyPlantHop],
+    }
 );
 TownList['Dusty Bowl'] = new DungeonTown(
     'Dusty Bowl',
@@ -5327,7 +5390,9 @@ TownList['Warm-Up Tunnel'] = new DungeonTown(
     GameConstants.Region.galar,
     [new RouteKillRequirement(10, GameConstants.Region.galar, 38)],
     [TemporaryBattleList.Klara2, TemporaryBattleList.Avery2],
-    [Klara1, Avery1]
+    {
+        npcs: [Klara1, Avery1],
+    }
 );
 TownList['Tower of Darkness'] = new DungeonTown(
     'Tower of Darkness',
@@ -5339,7 +5404,9 @@ TownList['Tower of Darkness'] = new DungeonTown(
         ]),
     ],
     [],
-    [Mustard10]
+    {
+        npcs: [Mustard10],
+    }
 );
 TownList['Tower of Waters'] = new DungeonTown(
     'Tower of Waters',
@@ -5352,7 +5419,9 @@ TownList['Tower of Waters'] = new DungeonTown(
         ]),
     ],
     [],
-    [Mustard10]
+    {
+        npcs: [Mustard10],
+    }
 );
 TownList['Roaring-Sea Caves'] = new DungeonTown(
     'Roaring-Sea Caves',
@@ -5400,7 +5469,9 @@ TownList['Crown Shrine'] = new DungeonTown(
     GameConstants.Region.galar,
     [new RouteKillRequirement(10, GameConstants.Region.galar, 55)],
     [],
-    [Calyrex4, Calyrex5, CrownShrineExplorer]
+    {
+        npcs: [Calyrex4, Calyrex5, CrownShrineExplorer],
+    }
 );
 
 // Used to check if next region can be reached, for example for professor NPC

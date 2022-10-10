@@ -10,6 +10,33 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.9.18
+    new ChangelogUpdate('v0.9.18', new Date(2022, 9, 10)),
+    new Changelog(changelogType.FIXED, 'Some saves not being able to update to v0.9.17'),
+
+    // v0.9.17
+    new ChangelogUpdate('v0.9.17', new Date(2022, 9, 10)),
+    new Changelog(changelogType.NEW, 'Held items [BETA]'),
+    new Changelog(changelogType.NEW, 'Sudowoodo overworld battles added'),
+    new Changelog(changelogType.NEW, 'Sevii now has it\'s own achievement pool'),
+    new Changelog(changelogType.NEW, 'Dungeon floors added for dungeons of size 10 or bigger'),
+    new Changelog(changelogType.CHANGE, 'Updated Kalos route 1 encounters'),
+    new Changelog(changelogType.CHANGE, 'Hoenn badge requirement ordering'),
+    new Changelog(changelogType.CHANGE, 'Updated typed egg pools'),
+    new Changelog(changelogType.CHANGE, 'Caught indicator for berry deals'),
+    new Changelog(changelogType.CHANGE, 'Dungeon Token flute now helps with EVs instead'),
+    new Changelog(changelogType.CHANGE, 'Farm hands will no longer attempt to place berries you do not have'),
+    new Changelog(changelogType.CHANGE, 'Global achievement bonus increased to 150%'),
+    new Changelog(changelogType.CHANGE, 'Improved Hatchery and Pokédex loading times'),
+    new Changelog(changelogType.CHANGE, 'Adjusted Underground layer generation'),
+    new Changelog(changelogType.CHANGE, 'Misc text changes'),
+    new Changelog(changelogType.CHANGE, 'Misc UI changes'),
+    new Changelog(changelogType.CHANGE, 'Misc image changes'),
+    new Changelog(changelogType.FIXED, 'Enigma will now show the full hint once unlocked'),
+    new Changelog(changelogType.FIXED, 'Diancie Questline requirements'),
+    new Changelog(changelogType.FIXED, 'Farm aura calculations'),
+    new Changelog(changelogType.FIXED, 'Pokérus spreading between helpers'),
+
     // v0.9.16
     new ChangelogUpdate('v0.9.16', new Date(2022, 8, 21)),
     new Changelog(changelogType.NEW, 'New Furfrou form added'),
