@@ -5890,7 +5890,7 @@ dungeonList['Dragonspiral Tower'] = new Dungeon('Dragonspiral Tower',
     5203000,
     [
         new DungeonBossPokemon('Dragonite', 48000000, 100),
-        new DungeonBossPokemon('Reshiram', 48000000, 100),
+        new DungeonBossPokemon('Reshiram', 50000000, 100),
         new DungeonBossPokemon('Zekrom', 50000000, 100),
     ],
     356500, 7);
@@ -8671,8 +8671,8 @@ dungeonList['Energy Plant'] = new Dungeon('Energy Plant',
                 new GymPokemon('Gigantamax Copperajah', 26704124, 52),
             ],
             { weight: 3 }, 'Rose', '(rose)'),
-        new DungeonBossPokemon('Zacian (Battle Hero)', 169578810, 70, {requirement: new QuestLineStepCompletedRequirement('Sword and Shield', 18)}),
-        new DungeonBossPokemon('Zamazenta (Battle Hero)', 169578810, 70, {requirement: new QuestLineStepCompletedRequirement('Sword and Shield', 18)}),
+        new DungeonBossPokemon('Zacian (Battle Hero)', 169578810, 70, {hide: true, requirement: new QuestLineStepCompletedRequirement('Sword and Shield', 18)}),
+        new DungeonBossPokemon('Zamazenta (Battle Hero)', 169578810, 70, {hide: true, requirement: new QuestLineStepCompletedRequirement('Sword and Shield', 18)}),
     ],
     1850000, 32);
 
@@ -8992,7 +8992,7 @@ dungeonList['Rock Peak Ruins'] = new Dungeon('Rock Peak Ruins',
     31507840,
     [
         new DungeonBossPokemon('Relicanth', 149662240, 60),
-        new DungeonBossPokemon('Regirock', 157539200, 70, { requirement: new QuestLineStepCompletedRequirement('The Ancient Golems', 4) }),
+        new DungeonBossPokemon('Regirock', 157539200, 70, { hide: true, requirement: new QuestLineStepCompletedRequirement('The Ancient Golems', 4) }),
     ],
     1920000, 48);
 
@@ -9013,7 +9013,7 @@ dungeonList['Iron Ruins'] = new Dungeon('Iron Ruins',
     31507840,
     [
         new DungeonBossPokemon('Metagross', 149662240, 60),
-        new DungeonBossPokemon('Registeel', 157539200, 70, { requirement: new QuestLineStepCompletedRequirement('The Ancient Golems', 4) }),
+        new DungeonBossPokemon('Registeel', 157539200, 70, { hide: true, requirement: new QuestLineStepCompletedRequirement('The Ancient Golems', 4) }),
     ],
     1920000, 48);
 
@@ -9038,7 +9038,7 @@ dungeonList['Iceberg Ruins'] = new Dungeon('Iceberg Ruins',
     31507840,
     [
         new DungeonBossPokemon('Glalie', 149662240, 60),
-        new DungeonBossPokemon('Regice', 157539200, 70, { requirement: new QuestLineStepCompletedRequirement('The Ancient Golems', 4) }),
+        new DungeonBossPokemon('Regice', 157539200, 70, { hide: true, requirement: new QuestLineStepCompletedRequirement('The Ancient Golems', 4) }),
     ],
     1920000, 54);
 
@@ -9173,7 +9173,7 @@ dungeonList['Crown Shrine'] = new Dungeon('Crown Shrine',
         ],
         legendary: [{loot: 'Max Revive'}],
         mythic: [
-            {loot: 'Heart Scale'},
+            {loot: 'Heart Scale', weight: 2},
             {loot: 'Galarian Darmanitan (Zen)'},
         ],
     },
@@ -9183,6 +9183,6 @@ dungeonList['Crown Shrine'] = new Dungeon('Crown Shrine',
         new DungeonBossPokemon('Abomasnow', 161099869, 60),
         new DungeonBossPokemon('Trevenant', 161099869, 60),
         new DungeonBossPokemon('Weavile', 161099869, 60),
-        new DungeonBossPokemon('Calyrex', 169578810, 80, { requirement: new QuestLineStepCompletedRequirement('The Crown of Galar', 8) }),
+        new DungeonBossPokemon('Calyrex', 169578810, 80, { hide: true, requirement: new QuestLineStepCompletedRequirement('The Crown of Galar', 8) }),
     ],
     2200000, 55);

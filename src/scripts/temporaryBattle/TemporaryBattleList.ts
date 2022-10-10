@@ -38,6 +38,7 @@ TemporaryBattleList['Snorlax route 12'] = new TemporaryBattle(
     [new TemporaryBattleRequirement('Snorlax route 12'), new ObtainedPokemonRequirement(pokemonMap.Snorlax)],
     {
         displayName: 'Snorlax',
+        returnTown: 'Lavender Town',
         isTrainerBattle: false,
         hideTrainer: true,
         visibleRequirement: new OneFromManyRequirement([new RouteKillRequirement(10, GameConstants.Region.kanto, 11), new RouteKillRequirement(5, GameConstants.Region.kanto, 12)]),
@@ -51,6 +52,7 @@ TemporaryBattleList['Snorlax route 16'] = new TemporaryBattle(
     [new TemporaryBattleRequirement('Snorlax route 16'), new ObtainedPokemonRequirement(pokemonMap.Snorlax)],
     {
         displayName: 'Snorlax',
+        returnTown: 'Celadon City',
         isTrainerBattle: false,
         hideTrainer: true,
         visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.kanto, 7),
@@ -118,6 +120,7 @@ TemporaryBattleList.Sudowoodo = new TemporaryBattle(
     [new TemporaryBattleRequirement('Sudowoodo'), new ObtainedPokemonRequirement(pokemonMap.Sudowoodo)],
     {
         isTrainerBattle: false,
+        returnTown: 'Goldenrod City',
         hideTrainer: true,
         visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.johto, 36),
     }

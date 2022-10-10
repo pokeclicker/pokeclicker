@@ -82,6 +82,7 @@ type ItemNameType
     | 'Blue_Flute'
     | 'HatcheryHelperJasmine'
     | 'HatcheryHelperDakota'
+    | 'HatcheryHelperCameron'
     | 'HatcheryHelperCarey'
     | 'HatcheryHelperKris'
     | 'HatcheryHelperNoel'
