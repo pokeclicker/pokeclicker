@@ -4895,7 +4895,7 @@ const Mustard10 = new NPC ('Mustard', [
 const JungleAsh1 = new NPC ('Ash Ketchum', [
     'Hey! I didn\'t expect to see you again here. Fancy a ba-. Actually, no, I\'d like to ask a favour of you; a friend of mine living in Glimwood Tangle called me asking for some help.',
     'I would go myself, but I promised one of the students here a battle and I don\'t want to bail on them. Would you be able to go for me?',
-    'Great! My friends name is Koko, tell him I sent you. This battle shouldn\'t take me too long, so come ask for my help if you need it!',
+    'Great! My friend\'s name is Koko, tell him I sent you. This battle shouldn\'t take me too long, so come ask for my help if you need it!',
 ], {
     image: 'assets/images/temporaryBattle/Ash Ketchum.png',
     requirement: new MultiRequirement([new QuestLineStartedRequirement('Secrets of the Jungle'), new QuestLineStepCompletedRequirement('Secrets of the Jungle', 1, GameConstants.AchievementOption.less )]),
