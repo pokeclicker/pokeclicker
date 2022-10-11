@@ -36,8 +36,8 @@ class TrainerEVList {
           });
       });
 
-      const evListFiltered = Array.from(pList).filter(pokemon => !(Array.from(notIncluded).includes(pokemon)));
+      const evListFiltered = new Set([...pList].filter((pokemon) => !notIncluded.has(pokemon)));
       //const evListSorted = evListFiltered.sort((a,b) => pokemonMap[a].id - pokemonMap[b].id);
-      TrainerEVList.list = new Set(evListFiltered);
+      TrainerEVList.list = evListFiltered;
   }
 }
