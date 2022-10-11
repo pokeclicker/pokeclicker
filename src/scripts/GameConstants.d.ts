@@ -24,6 +24,7 @@ namespace GameConstants {
     declare const UNDERGROUND_TICK: number;
     declare const DUNGEON_TIME: number;
     declare const DUNGEON_TICK: number;
+    declare const DUNGEON_LADDER_BONUS: number;
     declare const EFFECT_ENGINE_TICK: number;
     declare const SAVE_TICK: number;
     declare const GYM_TIME: number;
@@ -68,6 +69,7 @@ namespace GameConstants {
     declare const BerryColor: string[];
     declare const BASE_DUNGEON_SIZE: number;
     declare const MIN_DUNGEON_SIZE: number;
+    declare const MAX_DUNGEON_SIZE: number;
     declare const DUNGEON_CHEST_SHOW: number;
     declare const DUNGEON_MAP_SHOW: number;
     declare enum AchievementOption {
@@ -107,6 +109,7 @@ namespace GameConstants {
         enemy,
         chest,
         boss,
+        ladder,
     }
     declare const ROUTE_HELD_ITEM_MODIFIER: number;
     declare const DUNGEON_HELD_ITEM_MODIFIER: number;
@@ -149,6 +152,9 @@ namespace GameConstants {
     declare const EP_EV_RATIO: number;
     declare const EP_CHALLENGE_MODIFIER: number;
     declare const DNA_ITEM_CHANCE: number;
+    declare const LIGHT_ITEM_CHANCE: number;
+    declare const RUST_ITEM_CHANCE: number;
+    declare const MANE_ITEM_CHANCE: number;
     declare enum GameState {
         idle,
         paused,
@@ -278,11 +284,15 @@ namespace GameConstants {
         'Sachet',
         'Whipped_dream',
         'Ice_stone',
+        'Solar_light',
+        'Lunar_light',
         'Sweet_apple',
         'Tart_apple',
         'Cracked_pot',
         'Galarica_cuff',
         'Galarica_wreath',
+        'Black_mane_hair',
+        'White_mane_hair',
     }
     declare enum FossilPieceType {
         'None',

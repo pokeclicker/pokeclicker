@@ -95,21 +95,21 @@ class BattleCafeController {
     private static canSpin() {
         if (BattleCafeController.selectedSweet() == undefined) {
             Notifier.notify({
-                message: 'No sweet selected',
+                message: 'No sweet selected.',
                 type: NotificationConstants.NotificationOption.danger,
             });
             return false;
         }
         if (BattleCafeController.isSpinning()) {
             Notifier.notify({
-                message: 'Already spinning',
+                message: 'Already spinning.',
                 type: NotificationConstants.NotificationOption.danger,
             });
             return false;
         }
         if (BattleCafeController.spinsLeft() < 1) {
             Notifier.notify({
-                message: 'No spins left',
+                message: 'No spins left today.',
                 type: NotificationConstants.NotificationOption.danger,
             });
             return false;
@@ -124,7 +124,7 @@ class BattleCafeController {
         return BattleCafeController.getPrice(BattleCafeController.selectedSweet()).every(b => {
             if (App.game.farming.berryList[b.berry]() < b.amount) {
                 Notifier.notify({
-                    message: 'Not enough berries',
+                    message: 'Not enough berries for this sweet.',
                     type: NotificationConstants.NotificationOption.danger,
                 });
                 return false;
