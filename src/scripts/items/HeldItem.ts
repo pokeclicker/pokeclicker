@@ -18,8 +18,12 @@ class HeldItem extends Item {
         this.regionUnlocked = regionUnlocked;
     }
 
-    public static getHeldItems() {
-        return Object.values(ItemList).filter(i => i instanceof HeldItem);
+    public static getSortedHeldItems() {
+        return Object.values(ItemList).filter(i => i instanceof HeldItem).sort((a, b) => {
+            const heldItem1 = a as HeldItem;
+            const heldItem2 = b as HeldItem;
+            return heldItem1.regionUnlocked - heldItem2.regionUnlocked;
+        });
     }
 
     public isUnlocked() {

@@ -81,7 +81,7 @@
                             </div>
                             <h4>Held items</h4>
                             <div class="row">
-                                <!-- ko foreach: HeldItem.getHeldItems() -->
+                                <!-- ko foreach: HeldItem.getSortedHeldItems() -->
                                     <div class="btn btn-primary col-2 item-bag-item" data-bind="template: { name: 'otherItemTemplate', data: $data.name}, click: () => { HeldItem.heldItemSelected($data); $('#heldItemModal').modal('show'); }, visible: $data.isUnlocked()"></div>
                                 <!-- /ko -->
                             </div>
