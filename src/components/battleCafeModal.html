@@ -18,6 +18,7 @@ aria-labelledby="battleCafeModal"Label">
                         <h5>
                             <span data-bind="text: $data"></span>
                             <img style="max-width: 40px;" data-bind="attr: { src: 'assets/images/sweets/' + $data + '.png' }"/>
+                            <knockout data-bind="template: { name: 'caughtStatusTemplate', data: {'status': BattleCafeController.getCaughtStatus(GameConstants.AlcremieSweet[$data])()}}"></knockout>
                         </h5>
                         <div>
                             <!-- ko foreach: BattleCafeController.getPrice(GameConstants.AlcremieSweet[$data]) -->

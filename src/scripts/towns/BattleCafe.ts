@@ -142,6 +142,12 @@ class BattleCafeController {
         });
     }
 
+    public static getCaughtStatus(sweet: GameConstants.AlcremieSweet) : KnockoutComputed<CaughtStatus> {
+        return ko.pureComputed(() => {
+            return Math.min(...Object.values(BattleCafeController.evolutions[sweet]).map((pokemon: PokemonItem) => pokemon.getCaughtStatus()));
+        });
+    }
+
 
     private static getPrice(sweet: GameConstants.AlcremieSweet) : {berry: BerryType, amount: number}[] {
         switch (sweet) {
