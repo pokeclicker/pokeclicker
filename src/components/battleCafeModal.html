@@ -12,7 +12,8 @@ aria-labelledby="battleCafeModal"Label">
                     <!-- ko foreach: GameHelper.enumStrings(GameConstants.AlcremieSweet) -->
                     <div class="clickable col-4" data-bind="
                         click: () => BattleCafeController.selectedSweet(GameConstants.AlcremieSweet[$data]),
-                        css: { 'bg-primary': BattleCafeController.selectedSweet() == GameConstants.AlcremieSweet[$data]}
+                        css: { 'bg-primary': BattleCafeController.selectedSweet() == GameConstants.AlcremieSweet[$data] },
+                        style: { 'opacity' : BattleCafeController.canBuySweet(GameConstants.AlcremieSweet[$data])() ? '1' : '0.5' }
                     ">
                         <h5>
                             <span data-bind="text: $data"></span>

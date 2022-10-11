@@ -121,15 +121,24 @@ class BattleCafeController {
             });
             return false;
         }
-        return BattleCafeController.getPrice(BattleCafeController.selectedSweet()).every(b => {
-            if (App.game.farming.berryList[b.berry]() < b.amount) {
-                Notifier.notify({
-                    message: 'Not enough berries for this sweet.',
-                    type: NotificationConstants.NotificationOption.danger,
-                });
-                return false;
-            }
-            return true;
+        if (!BattleCafeController.canBuySweet(BattleCafeController.selectedSweet())()) {
+            Notifier.notify({
+                message: 'Not enough berries for this sweet.',
+                type: NotificationConstants.NotificationOption.danger,
+            });
+            return false;
+        }
+        return true;
+    }
+
+    public static canBuySweet(sweet: GameConstants.AlcremieSweet) : KnockoutComputed<boolean> {
+        return ko.pureComputed(() => {
+            return BattleCafeController.getPrice(sweet).every(b => {
+                if (App.game.farming.berryList[b.berry]() < b.amount) {
+                    return false;
+                }
+                return true;
+            });
         });
     }
 
