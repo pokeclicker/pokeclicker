@@ -167,7 +167,7 @@ class Egg implements Saveable {
                 sound: NotificationConstants.NotificationSound.General.new_catch,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
             });
-            App.game.party.gainPokemonById(baseForm.id);
+            App.game.party.gainPokemonById(baseForm.id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SHOP));
         }
 
         // Update statistics
