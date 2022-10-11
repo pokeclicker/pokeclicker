@@ -1018,12 +1018,20 @@ TownList['Pokémon Mansion'] = new DungeonTown(
 TownList['Mt. Ember Summit'] = new DungeonTown(
     'Mt. Ember Summit',
     GameConstants.Region.kanto,
-    [new RouteKillRequirement(10, GameConstants.Region.kanto, 27)]
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 27)],
+    [],
+    {
+        subRegion: GameConstants.KantoSubRegions.Sevii123,
+    }
 );
 TownList['Berry Forest'] = new DungeonTown(
     'Berry Forest',
     GameConstants.Region.kanto,
-    [new RouteKillRequirement(10, GameConstants.Region.kanto, 29)]
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 29)],
+    [],
+    {
+        subRegion: GameConstants.KantoSubRegions.Sevii123,
+    }
 );
 TownList['Victory Road'] = new DungeonTown(
     'Victory Road',
@@ -1041,43 +1049,67 @@ TownList['Ruby Path'] = new DungeonTown(
     GameConstants.Region.kanto,
     [new QuestLineStepCompletedRequirement('Celio\'s Errand', 2)],
     [],
-    [SeviiRuby]
+    {
+        npcs: [SeviiRuby],
+        subRegion: GameConstants.KantoSubRegions.Sevii4567,
+    }
 );
 TownList['Icefall Cave'] = new DungeonTown(
     'Icefall Cave',
     GameConstants.Region.kanto,
     [new QuestLineStepCompletedRequirement('Celio\'s Errand', 5)],
     [],
-    [SeviiLorelei]
+    {
+        npcs: [SeviiLorelei],
+        subRegion: GameConstants.KantoSubRegions.Sevii4567,
+    }
 );
 TownList['Sunburst Island'] = new DungeonTown(
     'Sunburst Island',
     GameConstants.Region.kanto,
-    [new RouteKillRequirement(10, GameConstants.Region.kanto, 31)]
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 31)],
+    [],
+    {
+        subRegion: GameConstants.KantoSubRegions.Sevii4567,
+    }
 );
 TownList['Lost Cave'] = new DungeonTown(
     'Lost Cave',
     GameConstants.Region.kanto,
-    [new RouteKillRequirement(10, GameConstants.Region.kanto, 33)]
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 33)],
+    [],
+    {
+        subRegion: GameConstants.KantoSubRegions.Sevii4567,
+    }
 );
 TownList['Pattern Bush'] = new DungeonTown(
     'Pattern Bush',
     GameConstants.Region.kanto,
-    [new RouteKillRequirement(10, GameConstants.Region.kanto, 34)]
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 34)],
+    [],
+    {
+        subRegion: GameConstants.KantoSubRegions.Sevii4567,
+    }
 );
 TownList['Altering Cave'] = new DungeonTown(
     'Altering Cave',
     GameConstants.Region.kanto,
     [new RouteKillRequirement(10, GameConstants.Region.kanto, 36)],
     [],
-    [AlteringCaveRuinManiac1, AlteringCaveRuinManiac2]
+    {
+        npcs: [AlteringCaveRuinManiac1, AlteringCaveRuinManiac2],
+        subRegion: GameConstants.KantoSubRegions.Sevii4567,
+    }
 );
 TownList['Tanoby Ruins'] = new DungeonTown(
     'Tanoby Ruins',
     GameConstants.Region.kanto,
     [new RouteKillRequirement(10, GameConstants.Region.kanto, 39)],
     [TanobyRuinsShop],
-    [TanobyProfIvy]
+    {
+        npcs: [TanobyProfIvy],
+        subRegion: GameConstants.KantoSubRegions.Sevii4567,
+    }
 );
 TownList['Pinkan Mountain'] = new DungeonTown(
     'Pinkan Mountain',
@@ -1085,7 +1117,11 @@ TownList['Pinkan Mountain'] = new DungeonTown(
     [
         new RouteKillRequirement(10, GameConstants.Region.kanto, 42),
         new GymBadgeRequirement(BadgeEnums.Elite_OrangeChampion),
-    ]
+    ],
+    [],
+    {
+        subRegion: GameConstants.KantoSubRegions.Sevii4567,
+    }
 );
 
 //Johto Shops
@@ -1334,11 +1370,53 @@ const EcruteakPokéfan = new NPC('Pokéfan Derek', [
     requirement: new QuestLineStepCompletedRequirement('The Legendary Beasts', 1),
 });
 
-const EcruteakKimonoGirl = new NPC('Kimono Girl', [
-    'Legends say that Ho-Oh is searching for a trainer of pure heart.',
-    'To prove yourself, you must tame the three legendary beasts of Johto, and bring them to the nearby Tin Tower.',
+const Zuki = new NPC('Kimono Girl Zuki', [
+    'Professor Elm tells me you are a master trainer. Please, show me your skills by training your Pokémon.',
 ], {
-    requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Burned Tower')),
+    image: 'assets/images/trainers/Kimono Girl.png',
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('Whirl Guardian'), new QuestLineStepCompletedRequirement('Whirl Guardian', 1, GameConstants.AchievementOption.less)]),
+});
+
+const Naoko = new NPC('Kimono Girl Naoko', [
+    'I seem to have lost my way in the forest. Can you show me the way out?',
+], {
+    image: 'assets/images/trainers/Kimono Girl.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Whirl Guardian', 1), new QuestLineStepCompletedRequirement('Whirl Guardian', 3, GameConstants.AchievementOption.less)]),
+});
+
+const Miki = new NPC('Kimono Girl Miki', [
+    'My sisters Zuki and Naoko tell me you have helped them, and I thank you. Please help find my other two sisters, Sayo and Kuni. Please accept this as a token of my gratitude.',
+], {
+    image: 'assets/images/trainers/Kimono Girl.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Whirl Guardian', 3), new QuestLineStepCompletedRequirement('Whirl Guardian', 5, GameConstants.AchievementOption.less)]),
+});
+
+const Sayo = new NPC('Kimono Girl Sayo', [
+    'Excuse me! I\'m stuck out here on the ice, can you give me a quick push?',
+], {
+    image: 'assets/images/trainers/Kimono Girl.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Whirl Guardian', 4), new QuestLineStepCompletedRequirement('Whirl Guardian', 6, GameConstants.AchievementOption.less)]),
+});
+
+const Kuni = new NPC('Kimono Girl Kuni', [
+    'I\'m supposed to meet my sisters, but the streets here just aren\'t safe! Can you protect me from Team Rocket?',
+], {
+    image: 'assets/images/trainers/Kimono Girl.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Whirl Guardian', 6), new QuestLineStepCompletedRequirement('Whirl Guardian', 8, GameConstants.AchievementOption.less)]),
+});
+
+const KimonoGirlsWhirl = new NPC('Kimono Girls', [
+    'With the power of the Tidal Bell, we call to Lugia! Guardian of the Whirl Islands!',
+], {
+    image: 'assets/images/trainers/Kimono Girl.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Whirl Guardian', 8), new QuestLineStepCompletedRequirement('Whirl Guardian', 10, GameConstants.AchievementOption.less)]),
+});
+
+const KimonoGirlsEcruteak = new NPC('Kimono Girls', [
+    'We have been watching you, and see that you have tamed the three Pokémon revived by Ho-oh in the Burned Tower. Show us your power and we shall give you the Clear Bell, which will call Ho-oh to the Tin Tower.',
+], {
+    image: 'assets/images/trainers/Kimono Girl.png',
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('Rainbow Guardian'), new QuestLineStepCompletedRequirement('Rainbow Guardian', 1, GameConstants.AchievementOption.less)]),
 });
 
 const OlivineSSAquaCaptain = new NPC('S.S. Aqua Captain', [
@@ -1452,7 +1530,7 @@ TownList['Violet City'] = new Town(
     [VioletCityShop, new MoveToDungeon(dungeonList['Sprout Tower'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 31)],
-        npcs: [VioletEarlDervish],
+        npcs: [VioletEarlDervish, Zuki],
     }
 );
 TownList['Azalea Town'] = new Town(
@@ -1470,16 +1548,16 @@ TownList['Goldenrod City'] = new Town(
     [GoldenrodDepartmentStoreShop, JohtoBerryMaster, new MoveToDungeon(dungeonList['Radio Tower']), TemporaryBattleList['Aipom Alley'], TemporaryBattleList.Imposter, TemporaryBattleList['Possessed Mewtwo']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 34)],
-        npcs: [searchForClues, HowardClifford1, HowardClifford2, HowardClifford3],
+        npcs: [searchForClues, HowardClifford1, HowardClifford2, HowardClifford3, Kuni],
     }
 );
 TownList['Ecruteak City'] = new Town(
     'Ecruteak City',
     GameConstants.Region.johto,
-    [EcruteakCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Ecruteak City']), new MoveToDungeon(dungeonList['Burned Tower']), new MoveToDungeon(dungeonList['Tin Tower'])],
+    [EcruteakCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Ecruteak City']), new MoveToDungeon(dungeonList['Burned Tower']), new MoveToDungeon(dungeonList['Tin Tower']), TemporaryBattleList['Kimono Girls']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 37)],
-        npcs: [EcruteakBill, EcruteakEusine, EcruteakPokéfan, EcruteakKimonoGirl],
+        npcs: [EcruteakBill, EcruteakEusine, EcruteakPokéfan, Miki, KimonoGirlsEcruteak],
     }
 );
 TownList['Olivine City'] = new Town(
@@ -1559,7 +1637,9 @@ TownList['Ilex Forest'] = new DungeonTown(
     GameConstants.Region.johto,
     [new GymBadgeRequirement(BadgeEnums.Hive)],
     [TemporaryBattleList['Spiky-eared Pichu']],
-    [IlexForestShrine1, IlexForestShrine2]
+    {
+        npcs: [IlexForestShrine1, IlexForestShrine2, Naoko],
+    }
 );
 TownList['Burned Tower'] = new DungeonTown(
     'Burned Tower',
@@ -1574,7 +1654,11 @@ TownList['Tin Tower'] = new DungeonTown(
 TownList['Whirl Islands'] = new DungeonTown(
     'Whirl Islands',
     GameConstants.Region.johto,
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Radio Tower'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Radio Tower'))],
+    [],
+    {
+        npcs: [KimonoGirlsWhirl],
+    }
 );
 TownList['Mt. Mortar'] = new DungeonTown(
     'Mt. Mortar',
@@ -1597,7 +1681,11 @@ TownList['Radio Tower'] = new DungeonTown(
 TownList['Ice Path'] = new DungeonTown(
     'Ice Path',
     GameConstants.Region.johto,
-    [new RouteKillRequirement(10, GameConstants.Region.johto, 44)]
+    [new RouteKillRequirement(10, GameConstants.Region.johto, 44)],
+    [],
+    {
+        npcs: [Sayo],
+    }
 );
 TownList['Dark Cave'] = new DungeonTown(
     'Dark Cave',
@@ -1609,7 +1697,9 @@ TownList['Tohjo Falls'] = new DungeonTown(
     GameConstants.Region.johto,
     [new GymBadgeRequirement(BadgeEnums.Rising)],
     [TemporaryBattleList['Rocket Boss Giovanni']],
-    [TohjoFallsCelebiTimeDistortion]
+    {
+        npcs: [TohjoFallsCelebiTimeDistortion],
+    }
 );
 TownList['Victory Road Johto'] = new DungeonTown(
     'Victory Road Johto',
@@ -1751,6 +1841,7 @@ const HoennBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations[
     ItemList.Mulch_Shovel,
     ItemList.Sprinklotad,
     ItemList.FarmHandKerry,
+    ItemList.HatcheryHelperCameron,
 ]);
 
 //Hoenn Flute Master
@@ -3166,7 +3257,9 @@ TownList['Relic Castle'] = new DungeonTown(
     GameConstants.Region.unova,
     [new RouteKillRequirement(10, GameConstants.Region.unova, 25)],
     [],
-    [RelicCastleRuinmaniac]
+    {
+        npcs: [RelicCastleRuinmaniac],
+    }
 );
 TownList['Lostlorn Forest'] = new DungeonTown(
     'Lostlorn Forest',
@@ -3222,7 +3315,9 @@ TownList['Giant Chasm'] = new DungeonTown(
         new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 15),
     ],
     [TemporaryBattleList.Colress, TemporaryBattleList['Plasma Shadow 2'], TemporaryBattleList['Plasma Shadow 3'], TemporaryBattleList['Plasma Shadow 4'], TemporaryBattleList['Ghetsis 1'], TemporaryBattleList['Ghetsis 2']],
-    [GiantChasmColress, GiantChasmShadowTriad]
+    {
+        npcs: [GiantChasmColress, GiantChasmShadowTriad],
+    }
 );
 TownList['Cave of Being'] = new DungeonTown(
     'Cave of Being',
@@ -3288,7 +3383,9 @@ TownList['P2 Laboratory'] = new DungeonTown(
     GameConstants.Region.unova,
     [new RouteKillRequirement(10, GameConstants.Region.unova, 17)],
     [],
-    [P2LaboratoryColress]
+    {
+        npcs: [P2LaboratoryColress],
+    }
 );
 
 //Kalos Shops
@@ -3447,6 +3544,11 @@ const ProfSycamore = new ProfNPC('Prof. Sycamore',
 
 const MysteryFan = new NPC('Mystery Fan', [
     'I\'ve heard a Pokémon detective is sniffing around here for mysteries! He might be interested in an enigmatic berry, too.',
+]);
+
+const Spelunker = new NPC('Spelunker', [
+    'I\'ve heard that a hidden realm lies beneath this cave, ruled by a Pokémon Princess. She might come out for a powerful and helpful trainer.',
+    'That would be big news, sure to be reported on local bulletin boards!',
 ]);
 
 const ExamineAegislash = new NPC('Examine Your Doublade', [
@@ -3644,7 +3746,11 @@ TownList['Glittering Cave'] = new DungeonTown(
 TownList['Reflection Cave'] = new DungeonTown(
     'Reflection Cave',
     GameConstants.Region.kalos,
-    [new RouteKillRequirement(10, GameConstants.Region.kalos, 11)]
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 11)],
+    [],
+    {
+        npcs: [Spelunker],
+    }
 );
 //Tower of Mastery?
 TownList['Sea Spirit\'s Den'] = new DungeonTown(
@@ -4252,7 +4358,9 @@ TownList['Mount Lanakila'] = new DungeonTown(
     GameConstants.Region.alola,
     [new GymBadgeRequirement(BadgeEnums.GroundiumZ)],
     [],
-    [LanakilaColress]
+    {
+        npcs: [LanakilaColress],
+    }
 );
 TownList['Lake of the Sunne and Moone'] = new DungeonTown(
     'Lake of the Sunne and Moone',
@@ -4543,7 +4651,7 @@ const RoseBroadcast = new NPC('Broadcast of Chairman Rose', [
 });
 
 const WyndonHop = new NPC('Hop', [
-    'That video stream... That was from Hammerlocke Stadium, right? What in the world did the chairman do...?"',
+    'That video stream... That was from Hammerlocke Stadium, right? What in the world did the chairman do...?',
     'I want to help my brother! I\'ve got to! But I can\'t even manage to beat you, so what sort of help could I ever be...?',
     'Hold the phone... The chairman was talking about the Darkest Day. That\'s the thing where the sky went all dark once, ages and ages ago, right? What does he mean, he\'s bringing that about? And where did we even hear that name...?',
     'Ah! That statue of the hero in Motostoke! Sonia said something back then, didn\'t she... Though it turned out to be wrong, since there were actually two heroes and all that.',
@@ -4566,7 +4674,7 @@ const SlumberingHop1 = new NPC('Hop', [
 });
 
 const EnergyPlantRose = new NPC('Chairman Rose', [
-    'Most impressive! I wouldn\'t expect any less from a challenger endorsed by the strongest Champion ever to grace our beloved Galar region!"',
+    'Most impressive! I wouldn\'t expect any less from a challenger endorsed by the strongest Champion ever to grace our beloved Galar region!',
     'I really do wish I could have seen the Championship Match between you two. And I\'m terribly sorry to have ruined the whole Gym Challenge and everything!',
     'It\'s too bad, but it can\'t be helped... In order to solve the energy issue as soon as possible, we awakened Eternatus. But we couldn\'t control it. The Champion came to aid me, even at the cost of abandoning the match. Indeed, just like a knight in shining armor coming to rescue a princess from a dragon!',
     'I do tend to ramble on, I know. I love to make speeches. But I think I can stop talking now. I think the Champion should have captured Eternatus by now. If you\'re curious, you can take the lift up.',
@@ -4580,7 +4688,7 @@ const Leon = new NPC('Leon', [
     'My matches are always sold out, but this... I\'ve never seen a crowd this wild!',
     'Everyone knows what you did for us this week... They know you\'re the one who caught Eternatus and saved the future of the Galar region.',
     'A real hero, who battled alongside the Legendary Pokémon, Zacian and Zamazenta... I couldn\'t have dreamed of a better challenger to help increase my winning streak!',
-    'Oh... And you\'ve even added Eternatus to your party. The greatest challenger along with the most powerful Pokémon—is that it? Now you\'re really getting me excited',
+    'Oh... And you\'ve even added Eternatus to your party. The greatest challenger along with the most powerful Pokémon—is that it? Now you\'re really getting me excited!',
     'Now that I\'ve seen just what kind of strength you possess as the greatest of challengers...crushing you into the dirt will show everyone just how strong their Champion truly is!',
     'Come on, now! Let\'s make this a final match that\'ll go down in Galar\'s history! No! A match that\'ll change Galar forever!',
     'We\'re gonna have an absolutely champion time!',
@@ -4596,7 +4704,7 @@ const SlumberingHop2 = new NPC('Hop', [
     'So, do you think... Would you be up for one more battle?',
 ], {
     image: 'assets/images/gymLeaders/Hop.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Sword and Shield', 0), new QuestLineStepCompletedRequirement('Sword and Shield', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('Sword and Shield'), new QuestLineStepCompletedRequirement('Sword and Shield', 1, GameConstants.AchievementOption.less)]),
 });
 
 const SordwardShielbert1 = new NPC('Sordward & Shielbert', [
@@ -4697,7 +4805,7 @@ const Mustard3 = new NPC ('Mustard', [
     requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 3), new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 4, GameConstants.AchievementOption.less )]),
 });
 const Mustard4 = new NPC ('Mustard', [
-    'Hey! My bad, my bad! Hey, <player>! My bad, my bad! It just dawned on me that you\'re brand-new to the Isle of Armor! I bet you have no idea where to even begin looking for Max Mushrooms! C\'mon--let\'s go for a walk, and I\'ll show you some mushroom hot spots.',
+    'Hey! My bad, my bad! It just dawned on me that you\'re brand-new to the Isle of Armor! I bet you have no idea where to even begin looking for Max Mushrooms! C\'mon--let\'s go for a walk, and I\'ll show you some mushroom hot spots.',
     'Dum dum dee dee... La la de daaa... Now, usually the Forest of Focus is chock-full of Max Mushrooms. But the thing is, a swarm of Greedent came through and ate every last one here! So I\'m thinking maybe you\'ll have more luck finding Max Mushrooms if you go check Warm-Up Tunnel.',
     'It\'s out on the other side of the forest! Just watch where you\'re going in the forest, \'K? It\'s easy to get lost! Anyhoo... Good luck with the hunt for Max Mushrooms! Catch you back at the dojo!',
 ], {
@@ -4720,10 +4828,10 @@ const Avery1 = new NPC ('Avery', [
 });
 const Mustard5 = new NPC ('Mustard', [
     'Hey there! Welcome back! Looks like you nailed the trial! Congrats on finding the Max Mushrooms! Trial number two was no problem for you!',
-    'All my other students ended up getting lost in the forest... Turns out finding Max Mushrooms was the least of their problems! It\'s a shame, but I guess everyone other than <player> will fail the trial...',
+    'All my other students ended up getting lost in the forest... Turns out finding Max Mushrooms was the least of their problems! It\'s a shame, but I guess everyone other than you will fail the trial...',
     'Oh! Klara and Avery! You two look out of breath... But you have some Max Mushrooms, so it looks like you both pass the second trial as well!',
     'Right! Well, I\'ve decided that you three... will now take the Master Dojo\'s...final...last...ultimate...third trial!',
-    'You two are the only ones who successfully finished the second trial! You\'ve pushed each other to greater heights and helped each other grow. So I\'d say it\'s time to finally see who is stronger... in a Pokémon battle!',
+    'You three are the only ones who successfully finished the second trial! You\'ve pushed each other to greater heights and helped each other grow. So I\'d say it\'s time to finally see who is stronger... in a Pokémon battle!',
     'Yep! The rules are simple. Whoever wins will complete the trial! The winner will be granted the secret armor of the Master Dojo!',
 ], {
     image: 'assets/images/temporaryBattle/Mustard.png',
@@ -5180,7 +5288,9 @@ TownList['Slumbering Weald Shrine'] = new DungeonTown(
     GameConstants.Region.galar,
     [new QuestLineStepCompletedRequirement('The Darkest Day', 12)],
     [TemporaryBattleList.Hop8, TemporaryBattleList.Sordward1, TemporaryBattleList.Shielbert1],
-    [SlumberingHop1, SlumberingHop2, SordwardShielbert1]
+    {
+        npcs: [SlumberingHop1, SlumberingHop2, SordwardShielbert1],
+    }
 );
 TownList['Galar Mine'] = new DungeonTown(
     'Galar Mine',
@@ -5199,7 +5309,9 @@ TownList['Glimwood Tangle'] = new DungeonTown(
     GameConstants.Region.galar,
     [new QuestLineStepCompletedRequirement('The Darkest Day', 2)],
     [TemporaryBattleList['Zarude Tribe 1'], TemporaryBattleList['Zarude Tribe 2'], TemporaryBattleList['Zarude Tribe 3'], TemporaryBattleList['Zarude (Dada)'], TemporaryBattleList['Flowering Celebi'], GlimwoodTangleShop],
-    [JungleKoko1, JungleKoko2, JungleKoko3, JungleKoko4, JungleKoko5, JungleAsh3, JungleKoko6]
+    {
+        npcs: [JungleKoko1, JungleKoko2, JungleKoko3, JungleKoko4, JungleKoko5, JungleAsh3, JungleKoko6],
+    }
 );
 TownList['Rose Tower'] = new DungeonTown(
     'Rose Tower',
@@ -5211,7 +5323,9 @@ TownList['Energy Plant'] = new DungeonTown(
     GameConstants.Region.galar,
     [new QuestLineStepCompletedRequirement('The Darkest Day', 14)],
     [TemporaryBattleList.Eternatus, TemporaryBattleList.Sordward2, TemporaryBattleList.Shielbert2, TemporaryBattleList['Rampaging Zacian'], TemporaryBattleList['Rampaging Zamazenta'], TemporaryBattleList['The Darkest Day']],
-    [EnergyPlantRose, SordwardShielbert3, SordwardShielbert4, Piers, EnergyPlantHop]
+    {
+        npcs: [EnergyPlantRose, SordwardShielbert3, SordwardShielbert4, Piers, EnergyPlantHop],
+    }
 );
 TownList['Dusty Bowl'] = new DungeonTown(
     'Dusty Bowl',
@@ -5245,7 +5359,9 @@ TownList['Warm-Up Tunnel'] = new DungeonTown(
     GameConstants.Region.galar,
     [new RouteKillRequirement(10, GameConstants.Region.galar, 38)],
     [TemporaryBattleList.Klara2, TemporaryBattleList.Avery2],
-    [Klara1, Avery1]
+    {
+        npcs: [Klara1, Avery1],
+    }
 );
 TownList['Tower of Darkness'] = new DungeonTown(
     'Tower of Darkness',
@@ -5257,7 +5373,9 @@ TownList['Tower of Darkness'] = new DungeonTown(
         ]),
     ],
     [],
-    [Mustard10]
+    {
+        npcs: [Mustard10],
+    }
 );
 TownList['Tower of Waters'] = new DungeonTown(
     'Tower of Waters',
@@ -5270,7 +5388,9 @@ TownList['Tower of Waters'] = new DungeonTown(
         ]),
     ],
     [],
-    [Mustard10]
+    {
+        npcs: [Mustard10],
+    }
 );
 TownList['Roaring-Sea Caves'] = new DungeonTown(
     'Roaring-Sea Caves',
@@ -5318,7 +5438,9 @@ TownList['Crown Shrine'] = new DungeonTown(
     GameConstants.Region.galar,
     [new RouteKillRequirement(10, GameConstants.Region.galar, 55)],
     [],
-    [Calyrex4, Calyrex5, CrownShrineExplorer]
+    {
+        npcs: [Calyrex4, Calyrex5, CrownShrineExplorer],
+    }
 );
 
 // Used to check if next region can be reached, for example for professor NPC

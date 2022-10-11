@@ -10302,6 +10302,7 @@ const pokemonList = createPokemonArray(
         'gender': {
             'ratio': GameConstants.FEMALE_100,
         },
+        'heldItem': {type: ItemType.item, id: 'Soul_Dew'},
     },
     {
         'id': 381,
@@ -10322,6 +10323,7 @@ const pokemonList = createPokemonArray(
         'gender': {
             'ratio': GameConstants.FEMALE_0,
         },
+        'heldItem': {type: ItemType.item, id: 'Soul_Dew'},
     },
     {
         'id': 382,
