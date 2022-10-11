@@ -1976,8 +1976,8 @@ const BrailleEnthusiast1 = new NPC('Braille Enthusiast', [
 });
 
 const BrailleEnthusiast2 = new NPC('Braille Enthusiast', [
-    'There are a few carvings inside this maze. The carving with five dots on the top row says "LEFT".', 
-    'The carving with nine dots on the top row says "STRAIGHT".', 
+    'There are a few carvings inside this maze. The carving with five dots on the top row says "LEFT".',
+    'The carving with nine dots on the top row says "STRAIGHT".',
     'The carving with six dots on the top row says "RIGHT".',
     'If you get totally lost, just wander around. You will find the right path eventually.',
 ], {image: 'assets/images/npcs/Ruin Maniac.png',
