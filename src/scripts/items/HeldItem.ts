@@ -97,6 +97,8 @@ ItemList.Quick_Powder = new AttackBonusHeldItem('Quick_Powder', 10000, GameConst
     (pokemon) => Math.floor(pokemon.id) == 132);
 ItemList.Thick_Club = new AttackBonusHeldItem('Thick_Club', 10000, GameConstants.Currency.money, undefined, 'Thick Club', 1.2, GameConstants.Region.final /* GameConstants.Region.johto */, 'Cubone or Marowak',
     (pokemon) => Math.floor(pokemon.id) == 104 ||  Math.floor(pokemon.id) == 105);
+ItemList.Soul_Dew = new AttackBonusHeldItem('Soul_Dew', 10000, GameConstants.Currency.money, undefined, 'Soul Dew', 1.5, GameConstants.Region.sinnoh, 'Latias or Latios',
+    (pokemon) => Math.floor(pokemon.id) == 380 ||  Math.floor(pokemon.id) == 381);
 ItemList.Leek = new AttackBonusHeldItem('Leek', 10000, GameConstants.Currency.money, undefined, 'Leek', 1.2, GameConstants.Region.galar, 'Farfetch\'d or Sirfetch\'d',
     (pokemon) => Math.floor(pokemon.id) == 83 ||  Math.floor(pokemon.id) == 865);
 ItemList.Rusted_Sword = new AttackBonusHeldItem('Rusted_Sword', 10000, GameConstants.Currency.money, undefined, 'Rusted Sword', 1.5, GameConstants.Region.galar, 'Zacian',
@@ -107,7 +109,7 @@ ItemList.Rusted_Shield = new AttackBonusHeldItem('Rusted_Shield', 10000, GameCon
 ItemList.Black_Belt = new TypeRestrictedAttackBonusHeldItem('Black_Belt', 10000, GameConstants.Currency.money, undefined, 'Black Belt', 1.1, PokemonType.Fighting, GameConstants.Region.johto);
 ItemList.Black_Glasses = new TypeRestrictedAttackBonusHeldItem('Black_Glasses', 10000, GameConstants.Currency.money, undefined, 'Black Glasses', 1.1, PokemonType.Dark, GameConstants.Region.johto);
 ItemList.Charcoal = new TypeRestrictedAttackBonusHeldItem('Charcoal', 10000, GameConstants.Currency.money, undefined, 'Charcoal', 1.1, PokemonType.Fire, GameConstants.Region.johto);
-ItemList.Dragon_Fang = new TypeRestrictedAttackBonusHeldItem('Dragon_Fang', 10000, GameConstants.Currency.money, undefined, 'Dragon Fang', 1.1, PokemonType.Dragon, GameConstants.Region.final /* GameConstants.Region.johto */);
+ItemList.Dragon_Fang = new TypeRestrictedAttackBonusHeldItem('Dragon_Fang', 10000, GameConstants.Currency.money, undefined, 'Dragon Fang', 1.1, PokemonType.Dragon, GameConstants.Region.johto);
 // TODO: Hard Stone is in the underground. We can keep it there, and give it two uses.
 ItemList.Magnet = new TypeRestrictedAttackBonusHeldItem('Magnet', 10000, GameConstants.Currency.money, undefined, 'Magnet', 1.1, PokemonType.Electric, GameConstants.Region.johto);
 // TODO: Metal Coat is a evo-stone. Can be turned into a held item evolution

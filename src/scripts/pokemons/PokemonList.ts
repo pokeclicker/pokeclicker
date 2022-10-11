@@ -9525,6 +9525,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 130,
             'speed': 110,
         },
+        'heldItem': {type: ItemType.item, id: 'Soul_Dew'},
     },
     {
         'id': 381,
@@ -9542,6 +9543,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 110,
             'speed': 110,
         },
+        'heldItem': {type: ItemType.item, id: 'Soul_Dew'},
     },
     {
         'id': 382,

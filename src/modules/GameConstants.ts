@@ -1313,6 +1313,7 @@ export const TemporaryBattles = [
     'Suicune 4',
     'Suicune 5',
     'Suicune 6',
+    'Kimono Girls',
     'Spiky-eared Pichu',
     'Rocket Boss Giovanni',
     'Silver 6',

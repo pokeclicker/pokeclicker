@@ -126,6 +126,7 @@ TemporaryBattleList['Snorlax route 12'] = new TemporaryBattle(
     [new TemporaryBattleRequirement('Snorlax route 12'), new ObtainedPokemonRequirement(pokemonMap.Snorlax)],
     {
         displayName: 'Snorlax',
+        returnTown: 'Lavender Town',
         isTrainerBattle: false,
         hideTrainer: true,
         visibleRequirement: new OneFromManyRequirement([new RouteKillRequirement(10, GameConstants.Region.kanto, 11), new RouteKillRequirement(5, GameConstants.Region.kanto, 12)]),
@@ -139,6 +140,7 @@ TemporaryBattleList['Snorlax route 16'] = new TemporaryBattle(
     [new TemporaryBattleRequirement('Snorlax route 16'), new ObtainedPokemonRequirement(pokemonMap.Snorlax)],
     {
         displayName: 'Snorlax',
+        returnTown: 'Celadon City',
         isTrainerBattle: false,
         hideTrainer: true,
         visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.kanto, 7),
@@ -301,6 +303,7 @@ TemporaryBattleList.Sudowoodo = new TemporaryBattle(
     [new TemporaryBattleRequirement('Sudowoodo'), new ObtainedPokemonRequirement(pokemonMap.Sudowoodo)],
     {
         isTrainerBattle: false,
+        returnTown: 'Goldenrod City',
         hideTrainer: true,
         visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.johto, 36),
 
@@ -471,6 +474,22 @@ TemporaryBattleList['Suicune 6'] = new TemporaryBattle(
         imageName: '../pokemon/245',
         hideTrainer: true,
         isTrainerBattle: false,
+    }
+);
+TemporaryBattleList['Kimono Girls'] = new TemporaryBattle(
+    'Kimono Girls',
+    [
+        new GymPokemon('Umbreon', 660000, 42),
+        new GymPokemon('Espeon', 660000, 43),
+        new GymPokemon('Flareon', 660000, 46),
+        new GymPokemon('Jolteon', 660000, 40),
+        new GymPokemon('Vaporeon', 660000, 40),
+    ],
+    'You have beautifully proven that the bond between people can be extended to the bond between people and Pokémon. We all appreciate that you have lived up to our expectations. This Clear Bell will signal to Ho-oh that you are worthy of its attentions.',
+    [new QuestLineStepCompletedRequirement('Rainbow Guardian', 0)],
+    undefined,
+    {
+        imageName: '../trainers/Kimono Girl',
     }
 );
 TemporaryBattleList['Spiky-eared Pichu'] = new TemporaryBattle(
