@@ -1,5 +1,4 @@
 /// <reference path="../../declarations/GameHelper.d.ts" />
-///<reference path="../../declarations/pokemons/TrainerEVType.d.ts"/>
 
 class BattlePokemon implements EnemyPokemonInterface {
 
@@ -82,7 +81,7 @@ class BattlePokemon implements EnemyPokemonInterface {
         App.game.gems.gainGems(this.gemReward, this.type1);
         App.game.gems.gainGems(this.gemReward, this.type2);
 
-        if (trainer && App.game.gameState != GameConstants.GameState.battleFrontier && TrainerEVType[this.name]) {
+        if (trainer && App.game.gameState != GameConstants.GameState.battleFrontier && TrainerEVList.list.has(this.name)) {
             const partyPokemon = App.game.party.getPokemon(this.id);
             partyPokemon.effortPoints += App.game.party.calculateEffortPoints(partyPokemon, this.shiny, this.ep);
         }

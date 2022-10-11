@@ -101,6 +101,7 @@ class Game {
         Weather.generateWeather(now);
         GemDeal.generateDeals();
         ShardDeal.generateDeals();
+        TrainerEVList.generateList();
         RoamingPokemonList.generateIncreasedChanceRoutes(now);
 
         if (Settings.getSetting('disableOfflineProgress').value === false) {
