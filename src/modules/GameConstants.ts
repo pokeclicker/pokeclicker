@@ -1417,6 +1417,15 @@ export const TemporaryBattles = [
     'Glastrier',
     'Spectrier',
     'Dyna Tree Birds',
+    'Galarian Articuno 1',
+    'Galarian Articuno 2',
+    'Galarian Articuno 3',
+    'Galarian Zapdos 1',
+    'Galarian Zapdos 2',
+    'Galarian Zapdos 3',
+    'Galarian Moltres 1',
+    'Galarian Moltres 2',
+    'Galarian Moltres 3',
     'Regigigas',
 ];
 

@@ -1910,11 +1910,110 @@ TemporaryBattleList['Dyna Tree Birds'] = new TemporaryBattle(
         new GymPokemon('Galarian Zapdos', 710987746, 70),
         new GymPokemon('Galarian Moltres', 710987746, 70),
     ],
-    '<i>The legendary birds fled to roam the region.</i>',
+    '<i>The legendary birds fled in different directions.</i>',
     [new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 1)],
     undefined,
     {
         hideTrainer: true,
+    }
+);
+TemporaryBattleList['Galarian Articuno 1'] = new TemporaryBattle(
+    'Galarian Articuno 1',
+    [new GymPokemon('Galarian Articuno', 2031393560, 100)],
+    '<i>Galarian Articuno fled to elsewhere in the Crown Tundra.</i>',
+    [new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 3)],
+    undefined,
+    {
+        hideTrainer: true,
+        imageName: '../pokemon/144.1',
+    }
+);
+TemporaryBattleList['Galarian Articuno 2'] = new TemporaryBattle(
+    'Galarian Articuno 2',
+    [new GymPokemon('Galarian Articuno', 2031393560, 100)],
+    '<i>Galarian Articuno fled to elsewhere in the Crown Tundra.</i>',
+    [new TemporaryBattleRequirement('Galarian Articuno 1')],
+    undefined,
+    {
+        hideTrainer: true,
+        imageName: '../pokemon/144.1',
+    }
+);
+TemporaryBattleList['Galarian Articuno 3'] = new TemporaryBattle(
+    'Galarian Articuno 3',
+    [new GymPokemon('Galarian Articuno', 2031393560, 100)],
+    '<i>Galarian Articuno fled to elsewhere in the Crown Tundra.</i>',
+    [new TemporaryBattleRequirement('Galarian Articuno 2')],
+    undefined,
+    {
+        hideTrainer: true,
+        imageName: '../pokemon/144.1',
+    }
+);
+TemporaryBattleList['Galarian Zapdos 1'] = new TemporaryBattle(
+    'Galarian Zapdos 1',
+    [new GymPokemon('Galarian Zapdos', 2031393560, 100)],
+    '<i>Galarian Zapdos fled to elsewhere in the Wild Area.</i>',
+    [new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 3)],
+    undefined,
+    {
+        hideTrainer: true,
+        imageName: '../pokemon/145.1',
+    }
+);
+TemporaryBattleList['Galarian Zapdos 2'] = new TemporaryBattle(
+    'Galarian Zapdos 2',
+    [new GymPokemon('Galarian Zapdos', 2031393560, 100)],
+    '<i>Galarian Zapdos fled to elsewhere in the Wild Area.</i>',
+    [new TemporaryBattleRequirement('Galarian Zapdos 1')],
+    undefined,
+    {
+        hideTrainer: true,
+        imageName: '../pokemon/145.1',
+    }
+);
+TemporaryBattleList['Galarian Zapdos 3'] = new TemporaryBattle(
+    'Galarian Zapdos 3',
+    [new GymPokemon('Galarian Zapdos', 2031393560, 100)],
+    '<i>Galarian Zapdos fled to elsewhere in the Wild Area.</i>',
+    [new TemporaryBattleRequirement('Galarian Zapdos 2')],
+    undefined,
+    {
+        hideTrainer: true,
+        imageName: '../pokemon/145.1',
+    }
+);
+TemporaryBattleList['Galarian Moltres 1'] = new TemporaryBattle(
+    'Galarian Moltres 1',
+    [new GymPokemon('Galarian Moltres', 2031393560, 100)],
+    '<i>Galarian Moltres fled to elsewhere in the Isle of Armor.</i>',
+    [new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 3)],
+    undefined,
+    {
+        hideTrainer: true,
+        imageName: '../pokemon/146.1',
+    }
+);
+TemporaryBattleList['Galarian Moltres 2'] = new TemporaryBattle(
+    'Galarian Moltres 2',
+    [new GymPokemon('Galarian Moltres', 2031393560, 100)],
+    '<i>Galarian Moltres fled to elsewhere in the Isle of Armor.</i>',
+    [new TemporaryBattleRequirement('Galarian Moltres 1')],
+    undefined,
+    {
+        hideTrainer: true,
+        imageName: '../pokemon/146.1',
+    }
+);
+TemporaryBattleList['Galarian Moltres 3'] = new TemporaryBattle(
+    'Galarian Moltres 3',
+    [new GymPokemon('Galarian Moltres', 2031393560, 100)],
+    '<i>Galarian Moltres fled to elsewhere in the Isle of Armor.</i>',
+    [new TemporaryBattleRequirement('Galarian Moltres 2')],
+    undefined,
+    {
+        hideTrainer: true,
+        imageName: '../pokemon/146.1',
     }
 );
 TemporaryBattleList.Regigigas = new TemporaryBattle(

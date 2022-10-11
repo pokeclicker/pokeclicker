@@ -4924,20 +4924,29 @@ const BirdPeony1 = new NPC ('Peony', [
 const BirdPeony2 = new NPC ('Peony', [
     'You\'re saying you saw some Pokémon that looked like.... Hang on, Chief! There\'s breaking news on the telly! They\'re sayin\' dodgy bird Pokémon are poppin\' up left and right!',
     'There\'s this fancy graceful one\'s apparently flyin\' about the Crown Tundra!',
-    'And there\'s this pointy feathered one runnin\' about in Southern Galar!',
+    'And there\'s this pointy feathered one runnin\' about in the Wild Area of Southern Galar!',
     'Plus a fiery-lookin\' one out on the Isle of Armor!',
-    'You\'re sayin\' you saw them and that\'s what you were tellin\' me about? Ah, sorry \'bout that. Anyway, you should go find \'em!',
+    'You\'re sayin\' you saw them and that\'s what you were tellin\' me about? Ah, sorry \'bout that. Anyway, you should go find \'em.',
+    'They look real strong, so you probably can\'t catch \'em right off the bat. I\'d try weakening them first.',
 ], {
     image: 'assets/images/temporaryBattle/Peony.png',
     requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 2), new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 4, GameConstants.AchievementOption.less )]),
 });
-const BirdPeony3 = new NPC ('Peony', [
+const BirdPeony2 = new NPC ('Peony', [
+    'Hang on--you really caught up to all three of them dodgy birds? Multiple times each? That\'s pretty impressive!',
+    'I think they should all be weakened enough that you can catch \'em now!',
+    'I\'d imagine they\'d be in the same areas you chased \'em about in.',
+], {
+    image: 'assets/images/temporaryBattle/Peony.png',
+    requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 4), new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 6, GameConstants.AchievementOption.less )]),
+});
+const BirdPeony4 = new NPC ('Peony', [
     'Wait--you really caught Articuno, Moltres, and Zapdos from the legends?! Thats\'s ultra-mega-brilliant! Report away!',
     'So that\'s them is it? I can definitely see the resemblance, but they don\'t seem quite the same...',
     'Maybe they\'re regional variants or somethin\'? At an rate, that\'s good enough for me. Let\'s call this expedition a success!',
 ], {
     image: 'assets/images/temporaryBattle/Peony.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 4), new QuestLineCompletedRequirement('The Birds of the Dyna Tree', GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', ), new QuestLineCompletedRequirement('The Birds of the Dyna Tree', GameConstants.AchievementOption.less)]),
 });
 const GolemPeony1 = new NPC ('Peony', [
     'Hey, Chief! I was talking to the locals and they mentioned some weird purple and yellow ruins at Three-Point Pass. You should go check \'em out!',
@@ -5169,7 +5178,7 @@ TownList.Freezington = new Town(
     [new BulletinBoard(GameConstants.BulletinBoards.Crown), GymList['Elite Trainer Peony'], TemporaryBattleList.Calyrex, TemporaryBattleList.Glastrier, TemporaryBattleList.Spectrier, FreezingtonShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 46)],
-        npcs: [CrownPeony1, Calyrex1, Calyrex2, Calyrex3, CrownPeony2, BirdPeony1, BirdPeony2, BirdPeony3, GolemPeony1, GolemPeony2, GolemPeony3, GolemPeony4, GolemPeony5, GolemPeony6, PeonyComplete, CrownTundraRoamerNPC],
+        npcs: [CrownPeony1, Calyrex1, Calyrex2, Calyrex3, CrownPeony2, BirdPeony1, BirdPeony2, BirdPeony3, BirdPeony4, GolemPeony1, GolemPeony2, GolemPeony3, GolemPeony4, GolemPeony5, GolemPeony6, PeonyComplete, CrownTundraRoamerNPC],
     }
 );
 
@@ -5305,8 +5314,7 @@ TownList['Lakeside Cave'] = new DungeonTown(
 TownList['Dyna Tree Hill'] = new DungeonTown(
     'Dyna Tree Hill',
     GameConstants.Region.galar,
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 53)],
-    [TemporaryBattleList['Dyna Tree Birds']]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 53)]
 );
 TownList['Tunnel to the Top'] = new DungeonTown(
     'Tunnel to the Top',
