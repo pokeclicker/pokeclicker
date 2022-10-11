@@ -1912,7 +1912,7 @@ const ProfBirch = new ProfNPC('Prof. Birch',
 const SCEntrance = new NPC('Strange Markings', [
     '<i>These strange markings seem to spell something out. The nearby Braille Enthusiast may know more.</i>',
 ], {image: 'assets/images/npcs/Regi Entrance.png',
-    requirement: new QuestLineStepCompletedRequirement('The Three Golems', 0),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Three Golems', 0), new QuestLineStepCompletedRequirement('The Three Golems', 1, GameConstants.AchievementOption.less)]),
 });
 
 const MazeHintLeft = new NPC('Room Engraving', [
@@ -1976,7 +1976,9 @@ const BrailleEnthusiast1 = new NPC('Braille Enthusiast', [
 });
 
 const BrailleEnthusiast2 = new NPC('Braille Enthusiast', [
-    'There are a few carvings inside this maze. The shortest says "LEFT", the longest says "STRAIGHT", and the one that is five characters long says "RIGHT"',
+    'There are a few carvings inside this maze. The carving with five dots on the top row says "LEFT".', 
+    'The carving with nine dots on the top row says "STRAIGHT".', 
+    'The carving with six dots on the top row says "RIGHT".',
     'If you get totally lost, just wander around. You will find the right path eventually.',
 ], {image: 'assets/images/npcs/Ruin Maniac.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Three Golems', 1), new QuestLineStepCompletedRequirement('The Three Golems', 6, GameConstants.AchievementOption.less)]),
