@@ -181,6 +181,7 @@ export const SpriteCredits: Credit[] = [
             'Dungeon Ladder',
             'Galar fossils items',
             'Galarica cuff and wreath icons',
+            'Linking cord cartoon style',
             'Luana',
             'Merilyn',
             'Pinkan Arbok',
