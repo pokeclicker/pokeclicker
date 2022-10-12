@@ -268,6 +268,18 @@ class PokemonFactory {
             case 'White_DNA':
                 chance = GameConstants.DNA_ITEM_CHANCE;
                 break;
+            case 'Rusted_Sword':
+                chance = GameConstants.RUST_ITEM_CHANCE;
+                break;
+            case 'Rusted_Shield':
+                chance = GameConstants.RUST_ITEM_CHANCE;
+                break;
+            case 'Black_mane_hair':
+                chance = GameConstants.MANE_ITEM_CHANCE;
+                break;
+            case 'White_mane_hair':
+                chance = GameConstants.MANE_ITEM_CHANCE;
+                break;
         }
 
         chance /= modifier;
