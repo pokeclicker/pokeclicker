@@ -52,7 +52,7 @@ class TypeRestrictedAttackBonusHeldItem extends AttackBonusHeldItem {
         public attackBonus: number,
         type: PokemonType,
         regionUnlocked: GameConstants.Region) {
-        super(name, basePrice, currency, shopOptions, displayName, attackBonus, regionUnlocked, `a Pokémon of type ${PokemonType[type]}`, (pokemon: PartyPokemon) => {
+        super(name, basePrice, currency, shopOptions, displayName, attackBonus, regionUnlocked, `${GameHelper.anOrA(PokemonType[type])} ${PokemonType[type]}-type Pokémon`, (pokemon: PartyPokemon) => {
             const dataPokemon = PokemonHelper.getPokemonById(pokemon.id);
             return dataPokemon.type1 == type || dataPokemon.type2 == type;
         }
@@ -69,7 +69,7 @@ class EVsGainedBonusHeldItem extends HeldItem {
         displayName: string,
         public gainedBonus: number,
         regionUnlocked: GameConstants.Region) {
-        super(name, basePrice, currency, shopOptions, displayName, `A held item that increases the EVs the pokémon gains by ${((gainedBonus - 1) * 100).toFixed(0)}%.`, regionUnlocked, (pokemon: PartyPokemon) => {
+        super(name, basePrice, currency, shopOptions, displayName, `A held item that increases the EVs the holding Pokémon gains by ${((gainedBonus - 1) * 100).toFixed(0)}%.`, regionUnlocked, (pokemon: PartyPokemon) => {
             return pokemon.pokerus > GameConstants.Pokerus.Uninfected;
         });
     }
@@ -85,7 +85,7 @@ class ExpGainedBonusHeldItem extends HeldItem {
         public gainedBonus: number,
         regionUnlocked: GameConstants.Region,
         canUse = (pokemon: PartyPokemon) => true) {
-        super(name, basePrice, currency, shopOptions, displayName, `A held item that earns the Pokémon ${((gainedBonus - 1) * 100).toFixed(0)}% bonus Experience Points.`, regionUnlocked, canUse);
+        super(name, basePrice, currency, shopOptions, displayName, `A held item that earns the holding Pokémon ${((gainedBonus - 1) * 100).toFixed(0)}% bonus Experience Points.`, regionUnlocked, canUse);
     }
 }
 
