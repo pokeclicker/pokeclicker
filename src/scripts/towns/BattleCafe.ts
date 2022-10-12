@@ -121,6 +121,13 @@ class BattleCafeController {
             });
             return false;
         }
+        if (+$('#battleCafeDuration').val() < 1) {
+            Notifier.notify({
+                message: 'It only counts as spinning, if you spin for some time...',
+                type: NotificationConstants.NotificationOption.danger,
+            });
+            return false;
+        }
         if (!BattleCafeController.canBuySweet(BattleCafeController.selectedSweet())()) {
             Notifier.notify({
                 message: 'Not enough berries for this sweet.',
