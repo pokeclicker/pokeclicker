@@ -1,6 +1,6 @@
 class TrainerEVList {
 
-  /*
+    /*
   Generates a list of all Pokémon that are on Dungeon Trainer teams, Gym Trainer teams, Berry Wanderers, (maybe more?)
   that are also not standard Dungeon encounters, Dungeon Boss encounters, or Route encounters
   */
