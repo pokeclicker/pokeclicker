@@ -90,6 +90,7 @@ class ExpGainedBonusHeldItem extends HeldItem {
 }
 
 ItemList.Wonder_Chest = new ExpGainedBonusHeldItem('Wonder_Chest', 10000, GameConstants.Currency.money, undefined, 'Wonder Chest', 1.15, GameConstants.Region.johto);
+ItemList.Life_Orb = new AttackBonusHeldItem('Life_Orb', 1000, GameConstants.Currency.battlePoint, undefined, 'Life Orb', 1.05, GameConstants.Region.hoenn);
 // Pokemon specific items
 ItemList.Light_Ball = new AttackBonusHeldItem('Light_Ball', 10000, GameConstants.Currency.money, undefined, 'Light Ball', 1.2, GameConstants.Region.final /* GameConstants.Region.johto */, 'any Pikachu',
     (pokemon) => Math.floor(pokemon.id) == 25 );
