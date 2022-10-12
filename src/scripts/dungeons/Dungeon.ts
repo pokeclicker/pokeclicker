@@ -2329,6 +2329,7 @@ dungeonList['Radio Tower'] = new Dungeon('Radio Tower',
         ],
         legendary: [
             {loot: 'Ultraball'},
+            {loot: 'Magnet'},
             {loot: 'Pink_Bow'},
         ],
         mythic: [
