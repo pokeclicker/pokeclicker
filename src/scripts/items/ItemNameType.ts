@@ -110,6 +110,7 @@ type ItemNameType
     | 'Soft_Sand'
     | 'Spell_Tag'
     | 'Twisted_Spoon'
+    | 'Pink_Bow'
     | 'Macho_Brace'
     | 'Boost_Mulch'
     | 'Rich_Mulch'
