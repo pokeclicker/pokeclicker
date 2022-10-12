@@ -340,6 +340,87 @@ class QuestLineHelper {
         App.game.quests.questLines().push(johtoSuicuneQuestLine);
     }
 
+    // Lugia Quest
+    public static createlugiaJohtoQuestLine() {
+        const lugiaJohtoQuestLine = new QuestLine('Whirl Guardian', 'The Kimono Girls of Ecruteak City need help.', new QuestLineCompletedRequirement('Team Rocket Again'), GameConstants.BulletinBoards.Johto);
+
+        const talktoZuki = new TalkToNPCQuest(Zuki, 'Talk to Kimono Girl Zuki in Violet City.');
+        lugiaJohtoQuestLine.addQuest(talktoZuki);
+
+        const helpZuki = new HatchEggsQuest(25, 0);
+        lugiaJohtoQuestLine.addQuest(helpZuki);
+
+        const talktoNaoko = new TalkToNPCQuest(Naoko, 'Talk to Kimono Girl Naoko in the Ilex Forest.');
+        lugiaJohtoQuestLine.addQuest(talktoNaoko);
+
+        const helpNaoko = new CustomQuest(1, 0, 'Clear Ilex Forest to lead Naoko to safety.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Ilex Forest')]());
+        lugiaJohtoQuestLine.addQuest(helpNaoko);
+
+        const kimonoReward = () => {
+            App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Ultraball, 50, false);
+            Notifier.notify({
+                title: lugiaJohtoQuestLine.name,
+                message: 'Kimono Girl Miki has given you a package containing 50 Ultraballs.',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
+        const talktoMiki = new TalkToNPCQuest(Miki, 'Talk to Kimono Girl Miki at the Ecruteak City Dance Theatre.', kimonoReward);
+        lugiaJohtoQuestLine.addQuest(talktoMiki);
+
+        const talktoSayo = new TalkToNPCQuest(Sayo, 'Talk to Kimono Girl Sayo in the Ice Path.');
+        lugiaJohtoQuestLine.addQuest(talktoSayo);
+
+        const helpSayo = new CustomQuest(1, 0, 'Clear the Ice Path to give Sayo a push.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Ice Path')]());
+        lugiaJohtoQuestLine.addQuest(helpSayo);
+
+        const talktoKuni = new TalkToNPCQuest(Kuni, 'Talk to Kimono Girl Kuni in Goldenrod City.');
+        lugiaJohtoQuestLine.addQuest(talktoKuni);
+
+        const helpKuni = new CustomQuest(1, 0, 'Clear the Radio Tower to get rid of any lingering Team Rocket activity.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Radio Tower')]());
+        lugiaJohtoQuestLine.addQuest(helpKuni);
+
+        const talktoKimonoGirlsWhirl = new TalkToNPCQuest(KimonoGirlsWhirl, 'Meet the Kimono Girls at the Whirl Islands.');
+        lugiaJohtoQuestLine.addQuest(talktoKimonoGirlsWhirl);
+
+        const LugiaCatch = new CaptureSpecificPokemonQuest(
+            'Lugia',
+            'Catch Lugia in the Whirl Islands.',
+            1,
+            false,
+            undefined,
+            undefined
+        );
+
+        lugiaJohtoQuestLine.addQuest(LugiaCatch);
+
+        App.game.quests.questLines().push(lugiaJohtoQuestLine);
+    }
+    // Ho-oh Quest
+
+    public static createhoohJohtoQuestLine() {
+        const hoohJohtoQuestLine = new QuestLine('Rainbow Guardian', 'The Kimono Girls of Ecruteak City wish to speak with you again.', new MultiRequirement([new QuestLineStepCompletedRequirement('Whirl Guardian', 9), new ObtainedPokemonRequirement(pokemonMap.Raikou), new ObtainedPokemonRequirement(pokemonMap.Entei), new ObtainedPokemonRequirement(pokemonMap.Suicune)]), GameConstants.BulletinBoards.Johto);
+        const talkKimonoGirlsEcruteak = new TalkToNPCQuest(KimonoGirlsEcruteak, 'Meet the Kimono Girls at the Ecruteak Dance Theatre');
+        hoohJohtoQuestLine.addQuest(talkKimonoGirlsEcruteak);
+
+        const clearKimonoGirls = new CustomQuest (1, 0, 'Prove your abilities as a trainer to the Kimono Girls of Ecruteak City.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Kimono Girls')]());
+        hoohJohtoQuestLine.addQuest(clearKimonoGirls);
+
+        const HoohCatch = new CaptureSpecificPokemonQuest(
+            'Ho-Oh',
+            'Catch Ho-oh in the Tin Tower.',
+            1,
+            false,
+            undefined,
+            undefined
+        );
+
+        hoohJohtoQuestLine.addQuest(HoohCatch);
+
+        App.game.quests.questLines().push(hoohJohtoQuestLine);
+    }
+
     public static createCelebiJohtoQuestLine() {
         const celebiJohtoQuestLine = new QuestLine('Unfinished Business', 'A request from Professor Oak.', new QuestLineCompletedRequirement('Bill\'s Errand'), GameConstants.BulletinBoards.Kanto);
 
@@ -979,7 +1060,7 @@ class QuestLineHelper {
             });
         };
 
-        const bladeForme = new TalkToNPCQuest(ExamineAegislash, 'Your Doublade learned something from the Steels, examine it to find out what!', BladeAegislashReward);
+        const bladeForme = new TalkToNPCQuest(ExamineAegislash, 'Your Doublade learned something from the Steels, examine it in Shalour City to find out what!', BladeAegislashReward);
         princessDiancieQuestLine.addQuest(bladeForme);
 
         const heartDiamond = new CustomQuest(1000, undefined, 'Diancie needs help building a Heart Diamond to stabilize the Diamond Domain. Gather some Fairy Gems for her.', App.game.statistics.gemsGained[17]);
@@ -1252,7 +1333,7 @@ class QuestLineHelper {
         const talktoHop2 = new TalkToNPCQuest(WyndonHop, 'Talk to Hop in Wyndon Stadium.');
         darkestDayQuestLine.addQuest(talktoHop2);
 
-        const clearSlumberingWeald = new CustomQuest(1, 0, 'Chairman Rose has interrupted your fight with Leon and brought about the Darkest Day. Clear Slu', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Energy Plant')]());
+        const clearSlumberingWeald = new CustomQuest(1, 0, 'Chairman Rose has interrupted your fight with Leon and brought about the Darkest Day. Clear Slumbering Weald Shrine', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Slumbering Weald Shrine')]());
         darkestDayQuestLine.addQuest(clearSlumberingWeald);
 
         const talktoHop3 = new TalkToNPCQuest(SlumberingHop1, 'Talk to Hop in Slumbering Weald Shrine.');
@@ -1282,6 +1363,9 @@ class QuestLineHelper {
 
         const talktoLeon = new TalkToNPCQuest(Leon, 'After all those interruptions, it\'s finally time for the Championship match! Talk to Leon at Wyndon Stadium.');
         darkestDayQuestLine.addQuest(talktoLeon);
+
+        const clearLeon = new CustomQuest(1, 0, 'Defeat Leon to become the Champion of Galar!', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Champion Leon')]());
+        darkestDayQuestLine.addQuest(clearLeon);
 
         App.game.quests.questLines().push(darkestDayQuestLine);
     }
@@ -1819,6 +1903,8 @@ class QuestLineHelper {
         this.createRocketJohtoQuestLine();
         this.createJohtoBeastsQuestLine();
         this.createJohtoSuicuneQuestLine();
+        this.createlugiaJohtoQuestLine();
+        this.createhoohJohtoQuestLine();
         this.createCelebiJohtoQuestLine();
         this.createAquaMagmaHoennQuestLine();
         this.createDeoxysQuestLine();

@@ -11,6 +11,7 @@ export const BATTLE_FRONTIER_TICK = 0.5 * SECOND;
 export const UNDERGROUND_TICK = 1 * SECOND;
 export const DUNGEON_TIME = 60 * SECOND;
 export const DUNGEON_TICK = 0.1 * SECOND;
+export const DUNGEON_LADDER_BONUS = 10 * SECOND;
 export const EFFECT_ENGINE_TICK = 1 * SECOND;
 export const SAVE_TICK = 10 * SECOND;
 export const GYM_TIME = 30 * SECOND;
@@ -108,6 +109,7 @@ export const BerryColor = [
 // Dungeons
 export const BASE_DUNGEON_SIZE = 5;
 export const MIN_DUNGEON_SIZE = 5;
+export const MAX_DUNGEON_SIZE = 10;
 export const DUNGEON_CHEST_SHOW = 2;
 export const DUNGEON_MAP_SHOW = 4;
 
@@ -150,6 +152,7 @@ export enum DungeonTile {
     enemy,
     chest,
     boss,
+    ladder,
 }
 
 // Held item chance
@@ -159,6 +162,7 @@ export const DUNGEON_BOSS_HELD_ITEM_MODIFIER = DUNGEON_HELD_ITEM_MODIFIER * 1.5;
 export const HELD_ITEM_CHANCE = 512;
 export const HELD_UNDERGROUND_ITEM_CHANCE = 2048;
 export const DNA_ITEM_CHANCE = 60;
+export const LIGHT_ITEM_CHANCE = 100;
 export const RUST_ITEM_CHANCE = 90;
 export const MANE_ITEM_CHANCE = 10;
 
@@ -662,6 +666,8 @@ export enum StoneType {
     'Sachet',
     'Whipped_dream',
     'Ice_stone',
+    'Solar_light',
+    'Lunar_light',
     'Sweet_apple',
     'Tart_apple',
     'Cracked_pot',
@@ -1306,6 +1312,7 @@ export const TemporaryBattles = [
     'Scientist Gideon',
     'Pinkan Jessie & James',
     'Pinkan Officer Jenny',
+    'Kimono Girls',
     'Spiky-eared Pichu',
     'Rocket Boss Giovanni',
     'Galactic Boss Cyrus',

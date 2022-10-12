@@ -355,7 +355,7 @@ class AchievementHandler {
         AchievementHandler.addAchievement('A literal mountain of muscle', 'Obtain 50,000 Proteins', new ProteinObtainRequirement(50000), 0.70);
 
         AchievementHandler.addAchievement('Some nice help for the Day Care', 'Unlock 5 Hatchery Helpers', new HatcheryHelperRequirement(5, 0), 0.1);
-        AchievementHandler.addAchievement('Why do they have to work in shifts?', 'Unlock 10 Hatchery Helpers', new HatcheryHelperRequirement(10, 0), 0.3);
+        AchievementHandler.addAchievement('Why do they have to work in shifts?', 'Unlock 11 Hatchery Helpers', new HatcheryHelperRequirement(11, 0), 0.3);
         AchievementHandler.addAchievement('My loyal helpers', 'Get 3 Hatchery Helpers to 10% bonus efficiency', new HatcheryHelperRequirement(3, 10), 0.4);
         AchievementHandler.addAchievement('Let\'s try some other helpers too?', 'Get 5 Hatchery Helpers to 10% bonus efficiency', new HatcheryHelperRequirement(5, 10), 0.5);
         AchievementHandler.addAchievement('Sam just wants to help', 'Get 10 Hatchery Helpers to 10% bonus efficiency', new HatcheryHelperRequirement(10, 10), 1);
@@ -377,8 +377,8 @@ class AchievementHandler {
 
         AchievementHandler.addAchievement('Oh, an other quest slot!', 'Reach quest level 5', new QuestLevelRequirement(5), 0.2);
         AchievementHandler.addAchievement('I am getting good at questing!', 'Reach quest level 10', new QuestLevelRequirement(10), 0.3);
-        AchievementHandler.addAchievement('What do i gain from leveling this?', 'Reach quest level 25', new QuestLevelRequirement(25), 0.5);
-        AchievementHandler.addAchievement('Quest master', 'Reach quest level 40', new QuestLevelRequirement(40), 0.8);
+        AchievementHandler.addAchievement('What do i gain from leveling this?', 'Reach quest level 20', new QuestLevelRequirement(20), 0.5);
+        AchievementHandler.addAchievement('Quest master', 'Reach quest level 30', new QuestLevelRequirement(30), 0.8);
 
         /*
          * REGIONAL
@@ -398,6 +398,7 @@ class AchievementHandler {
             // Routes
             Routes.getRoutesByRegion(region).forEach(route => {
                 let category = region;
+                // Split Sevii islands into it's own achievement pool
                 if (region == GameConstants.Region.kanto && (route.subRegion == GameConstants.KantoSubRegions.Sevii123 || route.subRegion == GameConstants.KantoSubRegions.Sevii4567)) {
                     category = GameConstants.ExtraAchievementCategories.sevii;
                 }
@@ -412,10 +413,15 @@ class AchievementHandler {
             }
             // Dungeons
             GameConstants.RegionDungeons[region]?.forEach(dungeon => {
-                AchievementHandler.addAchievement(`${dungeon} explorer`, `Clear ${dungeon} 10 times`, new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[0], GameConstants.getDungeonIndex(dungeon)), 0.8, region);
-                AchievementHandler.addAchievement(`${dungeon} expert`, `Clear ${dungeon} 100 times`, new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[1], GameConstants.getDungeonIndex(dungeon)), 1.2, region);
-                AchievementHandler.addAchievement(`${dungeon} hermit`, `Clear ${dungeon} 250 times`, new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[2], GameConstants.getDungeonIndex(dungeon)), 1.6, region);
-                AchievementHandler.addAchievement(`${dungeon} dweller`, `Clear ${dungeon} 500 times`, new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[3], GameConstants.getDungeonIndex(dungeon)), 2.4, region);
+                let category = region;
+                // Split Sevii islands into it's own achievement pool
+                if (region == GameConstants.Region.kanto && (TownList[dungeon].subRegion == GameConstants.KantoSubRegions.Sevii123 || TownList[dungeon].subRegion == GameConstants.KantoSubRegions.Sevii4567)) {
+                    category = GameConstants.ExtraAchievementCategories.sevii;
+                }
+                AchievementHandler.addAchievement(`${dungeon} explorer`, `Clear ${dungeon} 10 times`, new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[0], GameConstants.getDungeonIndex(dungeon)), 0.8, category);
+                AchievementHandler.addAchievement(`${dungeon} expert`, `Clear ${dungeon} 100 times`, new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[1], GameConstants.getDungeonIndex(dungeon)), 1.2, category);
+                AchievementHandler.addAchievement(`${dungeon} hermit`, `Clear ${dungeon} 250 times`, new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[2], GameConstants.getDungeonIndex(dungeon)), 1.6, category);
+                AchievementHandler.addAchievement(`${dungeon} dweller`, `Clear ${dungeon} 500 times`, new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[3], GameConstants.getDungeonIndex(dungeon)), 2.4, category);
             });
             // Unique Pokémon
             const amt10 = Math.floor(PokemonHelper.calcUniquePokemonsByRegion(region) * .1);

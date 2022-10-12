@@ -9525,6 +9525,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 130,
             'speed': 110,
         },
+        'heldItem': {type: ItemType.item, id: 'Soul_Dew'},
     },
     {
         'id': 381,
@@ -9542,6 +9543,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 110,
             'speed': 110,
         },
+        'heldItem': {type: ItemType.item, id: 'Soul_Dew'},
     },
     {
         'id': 382,
@@ -18526,7 +18528,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Normal],
         'eggCycles': 120,
         'levelType': LevelType.slow,
-        'exp': null,
+        'exp': 257,
         'catchRate': 3,
         'base': {
             'hitpoints': 95,
@@ -18907,7 +18909,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Electric, PokemonType.Fairy],
         'eggCycles': 15,
         'levelType': LevelType.slow,
-        'exp': null,
+        'exp': 257,
         'catchRate': 3,
         'base': {
             'hitpoints': 70,
@@ -18924,7 +18926,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Psychic, PokemonType.Fairy],
         'eggCycles': 15,
         'levelType': LevelType.slow,
-        'exp': null,
+        'exp': 257,
         'catchRate': 3,
         'base': {
             'hitpoints': 70,
@@ -18941,7 +18943,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Grass, PokemonType.Fairy],
         'eggCycles': 15,
         'levelType': LevelType.slow,
-        'exp': null,
+        'exp': 257,
         'catchRate': 3,
         'base': {
             'hitpoints': 70,
@@ -18958,7 +18960,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Water, PokemonType.Fairy],
         'eggCycles': 15,
         'levelType': LevelType.slow,
-        'exp': null,
+        'exp': 257,
         'catchRate': 3,
         'base': {
             'hitpoints': 70,
@@ -18993,7 +18995,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Psychic],
         'eggCycles': 120,
         'levelType': LevelType.slow,
-        'exp': null,
+        'exp': 140,
         'catchRate': 45,
         'evolutions': [
             new LevelEvolution('Cosmoem', 'Solgaleo', 53),
@@ -19014,7 +19016,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Psychic, PokemonType.Steel],
         'eggCycles': 120,
         'levelType': LevelType.slow,
-        'exp': null,
+        'exp': 306,
         'catchRate': 45,
         'base': {
             'hitpoints': 137,
@@ -19024,6 +19026,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 89,
             'speed': 97,
         },
+        'heldItem': {type: ItemType.item, id: 'Solar_light'},
     },
     {
         'id': 792,
@@ -19031,7 +19034,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Psychic, PokemonType.Ghost],
         'eggCycles': 120,
         'levelType': LevelType.slow,
-        'exp': null,
+        'exp': 306,
         'catchRate': 45,
         'base': {
             'hitpoints': 137,
@@ -19041,6 +19044,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 107,
             'speed': 97,
         },
+        'heldItem': {type: ItemType.item, id: 'Lunar_light'},
     },
     {
         'id': 793,
@@ -19065,7 +19069,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Bug, PokemonType.Fighting],
         'eggCycles': 120,
         'levelType': LevelType.slow,
-        'exp': null,
+        'exp': 257,
         'catchRate': 45,
         'base': {
             'hitpoints': 107,
@@ -19082,7 +19086,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Bug, PokemonType.Fighting],
         'eggCycles': 120,
         'levelType': LevelType.slow,
-        'exp': null,
+        'exp': 257,
         'catchRate': 45,
         'base': {
             'hitpoints': 71,
@@ -19099,7 +19103,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Electric],
         'eggCycles': 120,
         'levelType': LevelType.slow,
-        'exp': null,
+        'exp': 257,
         'catchRate': 45,
         'base': {
             'hitpoints': 83,
@@ -19116,7 +19120,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Steel, PokemonType.Flying],
         'eggCycles': 120,
         'levelType': LevelType.slow,
-        'exp': null,
+        'exp': 257,
         'catchRate': 45,
         'base': {
             'hitpoints': 97,
@@ -19133,7 +19137,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Grass, PokemonType.Steel],
         'eggCycles': 120,
         'levelType': LevelType.slow,
-        'exp': null,
+        'exp': 257,
         'catchRate': 45,
         'base': {
             'hitpoints': 59,
@@ -19150,7 +19154,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Dark, PokemonType.Dragon],
         'eggCycles': 120,
         'levelType': LevelType.slow,
-        'exp': null,
+        'exp': 257,
         'catchRate': 45,
         'base': {
             'hitpoints': 223,
@@ -19169,6 +19173,10 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 270,
         'catchRate': 255,
+        'evolutions': [
+            new StoneEvolution('Necrozma', 'Necrozma (Dusk Mane)', GameConstants.StoneType.Solar_light),
+            new StoneEvolution('Necrozma', 'Necrozma (Dawn Wings)', GameConstants.StoneType.Lunar_light),
+        ],
         'base': {
             'hitpoints': 97,
             'attack': 107,
@@ -19235,7 +19243,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Steel, PokemonType.Fairy],
         'eggCycles': 120,
         'levelType': LevelType.slow,
-        'exp': null,
+        'exp': 270,
         'catchRate': 3,
         'base': {
             'hitpoints': 80,
@@ -19252,7 +19260,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Steel, PokemonType.Fairy],
         'eggCycles': 120,
         'levelType': LevelType.slow,
-        'exp': null,
+        'exp': 270,
         'catchRate': 3,
         'base': {
             'hitpoints': 80,
@@ -19269,7 +19277,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Fighting, PokemonType.Ghost],
         'eggCycles': 120,
         'levelType': LevelType.slow,
-        'exp': null,
+        'exp': 270,
         'catchRate': 3,
         'base': {
             'hitpoints': 90,
