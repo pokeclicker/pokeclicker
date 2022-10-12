@@ -87,6 +87,7 @@ type ItemNameType
     | 'HatcheryHelperKris'
     | 'HatcheryHelperNoel'
     | 'Wonder_Chest'
+    | 'Life_Orb'
     | 'Leek'
     | 'Light_Ball'
     | 'Quick_Powder'
