@@ -1195,6 +1195,16 @@
          %>
 
          <%- include('templates/mapOverlay',
+             { name: "Pokémon Trainer Bede"
+             , x: 25, y: 43
+             , width: 4, height: 4
+             , databind: "click: () => TemporaryBattleList['Bede3'].protectedOnclick()"
+             , visible:  "TemporaryBattleList['Bede3'] && TemporaryBattleList['Bede3'].isVisible()"
+             , image: "assets/images/map/bede.png"
+             })
+          %>
+
+         <%- include('templates/mapOverlay',
              { name: "Pokémon Trainer Hop"
              , x: 56, y: 54
              , width: 4, height: 4
@@ -3060,19 +3070,28 @@
         <%- include('templates/mapOverlay',
             { name: "Dyna Tree Birds"
             , x: 46, y: 55
-            , width: 8, height: 3
+            , width: 4, height: 3
             , databind: "click: () => TemporaryBattleList['Dyna Tree Birds'].protectedOnclick()"
             , visible:  "TemporaryBattleList['Dyna Tree Birds'] && TemporaryBattleList['Dyna Tree Birds'].isVisible()"
-            , image: "assets/images/map/dynatreebirds.png"
+            , image: "assets/images/map/galarianmoltres.png"
             })
          %>
+         <%- include('templates/mapOverlay',
+             { name: "Dyna Tree Birds"
+             , x: 50, y: 55
+             , width: 4, height: 3
+             , databind: "click: () => TemporaryBattleList['Dyna Tree Birds'].protectedOnclick()"
+             , visible:  "TemporaryBattleList['Dyna Tree Birds'] && TemporaryBattleList['Dyna Tree Birds'].isVisible()"
+             , image: "assets/images/map/galarianarticuno.png"
+             })
+          %>
          <%- include('templates/mapOverlay',
              { name: "Dyna Tree Birds"
              , x: 48, y: 52
              , width: 4, height: 3
              , databind: "click: () => TemporaryBattleList['Dyna Tree Birds'].protectedOnclick()"
              , visible:  "TemporaryBattleList['Dyna Tree Birds'] && TemporaryBattleList['Dyna Tree Birds'].isVisible()"
-             , image: "assets/images/map/dynatreebirds.png"
+             , image: "assets/images/map/galarianzapdos.png"
              })
           %>
 
