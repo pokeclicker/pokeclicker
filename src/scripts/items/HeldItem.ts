@@ -69,7 +69,7 @@ class EVsGainedBonusHeldItem extends HeldItem {
         displayName: string,
         public gainedBonus: number,
         regionUnlocked: GameConstants.Region) {
-        super(name, basePrice, currency, shopOptions, displayName, `A held item that increases the EVs the holding Pokémon gains by ${((gainedBonus - 1) * 100).toFixed(0)}%.`, regionUnlocked, (pokemon: PartyPokemon) => {
+        super(name, basePrice, currency, shopOptions, displayName, `A held item that increases EV gains for the holding Pokémon gains by ${((gainedBonus - 1) * 100).toFixed(0)}%.`, regionUnlocked, (pokemon: PartyPokemon) => {
             return pokemon.pokerus > GameConstants.Pokerus.Uninfected;
         });
     }
