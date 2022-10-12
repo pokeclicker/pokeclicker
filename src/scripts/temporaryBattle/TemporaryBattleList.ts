@@ -854,7 +854,7 @@ TemporaryBattleList.AZ = new TemporaryBattle(
     undefined,
     {
         firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonById(670.05);
+            App.game.party.gainPokemonById(670.05, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_GIFTED));
         },
     }
 );
@@ -990,7 +990,7 @@ TemporaryBattleList['Ash Ketchum Pinkan'] = new TemporaryBattle(
         returnTown: 'Pinkan Mountain',
         imageName: 'Ash Ketchum',
         firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonById(25.13);
+            App.game.party.gainPokemonById(25.13, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_GIFTED));
         },
     }
 );
@@ -1172,7 +1172,7 @@ TemporaryBattleList['Ash Ketchum Alola'] = new TemporaryBattle(
         returnTown: 'Seafolk Village',
         imageName: 'Ash Ketchum',
         firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonById(25.07);
+            App.game.party.gainPokemonById(25.07, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_GIFTED));
         },
     }
 );
@@ -1411,7 +1411,7 @@ TemporaryBattleList['The Darkest Day'] = new TemporaryBattle(
     undefined,
     {
         firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonById(890);
+            App.game.party.gainPokemonById(890, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_GIFTED));
         },
         hideTrainer: true,
         imageName: '../pokemon/890',

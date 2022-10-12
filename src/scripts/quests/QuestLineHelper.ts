@@ -446,7 +446,7 @@ class QuestLineHelper {
         celebiJohtoQuestLine.addQuest(talktoIlexForestShrine1);
 
         const SpikyEaredPichuReward = () => {
-            App.game.party.gainPokemonById(172.1);
+            App.game.party.gainPokemonById(172.1, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_GIFTED));
             Notifier.notify({
                 title: celebiJohtoQuestLine.name,
                 message: 'You captured the Spiky-eared Pichu!',
@@ -887,7 +887,7 @@ class QuestLineHelper {
         detectivePikachuQuestLine.addQuest(searchForClues10);
 
         const DetectiveRaichuReward = () => {
-            App.game.party.gainPokemonById(26.02);
+            App.game.party.gainPokemonById(26.02, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_GIFTED));
             Notifier.notify({
                 title: detectivePikachuQuestLine.name,
                 message: 'Detective Pikachu\'s partner has been nursed back to health!',
@@ -1015,7 +1015,7 @@ class QuestLineHelper {
         ashKetchumQuestLine.addQuest(clearUnovaAsh);
 
         const AshKetchumReward = () => {
-            App.game.party.gainPokemonById(658.01);
+            App.game.party.gainPokemonById(658.01, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_GIFTED));
             Notifier.notify({
                 title: ashKetchumQuestLine.name,
                 message: 'You obtained Ash-Greninja!',
@@ -1051,7 +1051,7 @@ class QuestLineHelper {
         princessDiancieQuestLine.addQuest(fightSteels);
 
         const BladeAegislashReward = () => {
-            App.game.party.gainPokemonById(681.1);
+            App.game.party.gainPokemonById(681.1, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_GIFTED));
             Notifier.notify({
                 title: princessDiancieQuestLine.name,
                 message: 'Your Doublade has evolved into Blade Forme Aegislash!',
@@ -1798,7 +1798,7 @@ class QuestLineHelper {
             ]), GameConstants.BulletinBoards.Galar);
 
         const mysteryGift = new TalkToNPCQuest(MagearnaMysteryGift, 'Go home and open your Mystery Gift', () => {
-            App.game.party.gainPokemonById(801.1);
+            App.game.party.gainPokemonById(801.1, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_GIFTED));
             Notifier.notify({
                 title: magearnaQuestLine.name,
                 message: 'You obtained Magearna (Original Color)!',
@@ -1856,7 +1856,7 @@ class QuestLineHelper {
             dungeonList['Petalburg Woods'].bossList.push(new DungeonTrainer('Egg Hunter', [new GymPokemon('Surprise Togepi', 2700000, 100)], { weight: 1, requirement: new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion) }));
         };
         const afterDefeatingTogepiInHoenn = () => {
-            App.game.party.gainPokemonById(surpriseTogepi.id);
+            App.game.party.gainPokemonById(surpriseTogepi.id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_GIFTED));
             Notifier.notify({
                 title: findSurpriseTogepiForEasterQuestLine.name,
                 message: 'You found the special Togepi!',
