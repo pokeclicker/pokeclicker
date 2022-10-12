@@ -35,8 +35,9 @@ aria-labelledby="battleCafeModal"Label">
                     <!-- /ko -->
                 </div>
             </div>
+            <hr/>
             <h4>Spin!</h4>
-            <div>
+            <div class="pb-2">
                 <span>Spins left today: </span><span data-bind="text: BattleCafeController.spinsLeft()"></span>
             </div>
             <div>
@@ -45,12 +46,12 @@ aria-labelledby="battleCafeModal"Label">
                 class: BattleCafeController.isSpinning() ? 'player-animated' + (BattleCafeController.clockwise() ? '' : '-counter') : ''
                 " src="assets/images/profile/trainer-1.png">
             </div>
-            <div>
+            <div class="pt-3">
                 <button class="btn btn-primary" onclick="BattleCafeController.spin(true);">Clockwise</button>
                 <button class="btn btn-primary" onclick="BattleCafeController.spin(false);">Counter-Clockwise</button>
             </div>
-            <div class="input-group justify-content-center">
-                <label for="battleCafeDuration">Spin duration:</label><input class="form-control col-4" id="battleCafeDuration" type="number" min="1" max="20" value="3"/>
+            <div class="input-group justify-content-center align-items-center pt-2">
+                <label class="m-0" for="battleCafeDuration">Spin duration:</label><input class="form-control col-4" id="battleCafeDuration" type="number" min="1" max="20" value="3"/>
             </div>
         </div>
 
