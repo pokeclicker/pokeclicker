@@ -3,7 +3,7 @@ import AchievementRequirement from './AchievementRequirement';
 
 export default class DefeatedRequirement extends AchievementRequirement {
     constructor(value: number, option: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
-        super(value, option, GameConstants.AchievementType.Defeated);
+        super(value, option, GameConstants.AchievementType['Total Defeated']);
     }
 
     public getProgress() {
