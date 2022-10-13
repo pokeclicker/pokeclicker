@@ -11,6 +11,8 @@ class DreamOrb {
 
 class DreamOrbController implements Saveable {
     public selectedOrb: KnockoutObservable<DreamOrb>;
+    public opening: KnockoutObservable<boolean>;
+    public item: KnockoutObservable<DreamOrbLoot>;
 
     constructor() {
         this.selectedOrb = ko.observable(this.orbs[0]);
