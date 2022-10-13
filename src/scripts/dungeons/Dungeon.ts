@@ -7197,10 +7197,7 @@ dungeonList['Trainers\' School'] = new Dungeon('Trainers\' School',
             {loot: 'Flame Plate'},
             {loot: 'Greatball'},
         ],
-        legendary: [
-            {loot: 'SmallRestore'},
-            {loot: 'Pink_Bow'},
-        ],
+        legendary: [{loot: 'SmallRestore'}],
     },
     11407338,
     [
