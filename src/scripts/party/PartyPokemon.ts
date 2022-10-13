@@ -208,6 +208,16 @@ class PartyPokemon implements Saveable {
         }
     }
 
+    public useCalcium(amount: number): void {
+        // The lowest number of amount they want to use, total in inventory
+        amount = Math.min(amount, player.itemList.Protein());
+
+        // Apply the proteins
+        if (ItemHandler.useItem('Calcium', amount)) {
+            this.effortPoints += GameConstants.BASE_EP_YIELD;
+        }
+    }
+
     proteinUsesRemaining = (): number => {
         // Allow 5 for every region visited (including Kanto)
         return (player.highestRegion() + 1) * 5 - this.proteinsUsed();
@@ -233,6 +243,25 @@ class PartyPokemon implements Saveable {
             return true;
         }
         if (this._shiny() && Settings.getSetting('proteinHideShinyPokemon').observableValue()) {
+            return true;
+        }
+        return false;
+    });
+
+    public hideFromCalciumList = ko.pureComputed(() => {
+        if (this._breeding()) {
+            return true;
+        }
+        if (!new RegExp(Settings.getSetting('calciumSearchFilter').observableValue() , 'i').test(this.name)) {
+            return true;
+        }
+        if (Settings.getSetting('calciumRegionFilter').observableValue() > -2) {
+            if (PokemonHelper.calcNativeRegion(this.name) !== Settings.getSetting('proteinRegionFilter').observableValue()) {
+                return true;
+            }
+        }
+        const type = Settings.getSetting('calciumTypeFilter').observableValue();
+        if (type > -2 && !pokemonMap[this.name].type.includes(type)) {
             return true;
         }
         return false;

@@ -79,11 +79,21 @@ class PartyController {
     private static proteinSortedList = [];
     static getProteinSortedList = ko.pureComputed(() => {
         // If the protein modal is open, we should sort it.
-        if (modalUtils.observableState.pokemonSelectorModal === 'show') {
+        if (modalUtils.observableState.proteinSelectorModal === 'show') {
             PartyController.proteinSortedList = [...App.game.party.caughtPokemon];
             return PartyController.proteinSortedList.sort(PartyController.compareBy(Settings.getSetting('proteinSort').observableValue(), Settings.getSetting('proteinSortDirection').observableValue()));
         }
         return PartyController.proteinSortedList;
+    }).extend({ rateLimit: 500 });
+
+    private static calciumSortedList = [];
+    static getCalciumSortedList = ko.pureComputed(() => {
+        // If the calcium modal is open, we should sort it.
+        if (modalUtils.observableState.calciumSelectorModal === 'show') {
+            PartyController.calciumSortedList = [...App.game.party.caughtPokemon];
+            return PartyController.calciumSortedList.sort(PartyController.compareBy(Settings.getSetting('calciumSort').observableValue(), Settings.getSetting('proteinSortDirection').observableValue()));
+        }
+        return PartyController.calciumSortedList;
     }).extend({ rateLimit: 500 });
 
     private static heldItemSortedList = [];

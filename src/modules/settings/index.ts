@@ -201,6 +201,16 @@ const heldItemSortSettings = Object.keys(SortOptionConfigs).map((opt) => (
 Settings.add(new Setting<number>('heldItemSort', 'Sort:', heldItemSortSettings, SortOptions.id));
 Settings.add(new BooleanSetting('heldItemSortDirection', 'reverse', false));
 
+// Calcium Sorting
+const calciumSortSettings = Object.keys(SortOptionConfigs).map((opt) => (
+    new SettingOption<number>(SortOptionConfigs[opt].text, parseInt(opt, 10))
+));
+Settings.add(new Setting<number>('calciumSort', 'Sort:', calciumSortSettings, SortOptions.id));
+Settings.add(new BooleanSetting('calciumSortDirection', 'reverse', false));
+Settings.add(new Setting<string>('calciumSearchFilter', 'Search', [], ''));
+Settings.add(new Setting<number>('calciumRegionFilter', 'Region', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(Region)], -2));
+Settings.add(new Setting<number>('calciumTypeFilter', 'Type', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None')], -2));
+
 // Breeding Filters
 Object.keys(BreedingFilters).forEach((key) => {
     // One-off because search isn't stored in settings

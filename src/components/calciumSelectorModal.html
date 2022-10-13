@@ -1,0 +1,90 @@
+<div class="modal noselect fade" id="calciumSelectorModal" tabindex="-1" role="dialog" aria-labelledby="pokemonSelectorModal">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <!-- ko if: modalUtils.observableState['calciumSelectorModal'] === 'show' -->
+            <div class="modal-header bg-dark text-light" style='justify-content: space-around;'>
+                <h5 class="modal-title text-light">Select a Pokémon</h5>&nbsp;
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body p-0">
+                <img src="assets/images/items/Calcium.png" width="40%"/>
+                <br/>
+                <div class="sticky-top bg-dark text-light">
+                  <div class="btn-group btn-block m-0" role="group" aria-label="Basic example">
+                    <button class="btn btn-block btn-secondary btn-static" data-bind="text: 'Calcium: ' + player.itemList.Calcium().toLocaleString('en-US')"></button>
+                    <button type="button" class="btn btn-sm btn-primary"
+                      data-bind="text: VitaminController.multiplier[VitaminController.multiplierIndex()]"
+                      onclick="VitaminController.incrementMultiplier()"
+                      oncontextmenu="VitaminController.decrementMultiplier(); return false"
+                      title="Multiplier"
+                      data-toggle="popover"
+                      data-html="true"
+                      data-content="Left/right click to cycle amount<br/>Click on Pokémon to use"
+                      data-placement="right"
+                      data-trigger="hover">
+                    </button>
+                  </div>
+                  <div class="input-group" data-bind="with: Settings.getSetting('calciumSort')">
+                      <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])"
+                          data-bind="foreach: $data.options, attr: {name}, selectedOptions: [$data.observableValue()]">
+                          <option data-bind="text: $data.text, value: $data.value"></option>
+                      </select>
+                      <div class="input-group-append bg-primary text-light">
+                          <label for="calciumSortDirection" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;" data-bind="
+                            text: Settings.getSetting('calciumSortDirection').observableValue() ? '⥄' : '⥂',
+                            tooltip: { title: Settings.getSetting('calciumSortDirection').observableValue() ? 'Descending (highest value first)' : 'Ascending (lowest value first)', trigger: 'hover', placement:'top', html: true }
+                            ">⥂</label>
+                          <input id="calciumSortDirection" style="vertical-align: middle" class="hidden" type='checkbox'
+                              data-bind="checked: Settings.getSetting('calciumSortDirection').observableValue()"
+                              onchange="Settings.setSettingByName('calciumSortDirection', this.checked)"/>
+                      </div>
+                  </div>
+          <div class="form-row m-0" id="calcium-filter">
+            <div class="form-group col-md-6 col-6 p-0">
+                <label for="calcium-search">Search</label>
+                <input id="calcium-search" autocomplete="off" class="form-control" placeholder="search here"
+                    data-bind="textInput: Settings.getSetting('calciumSearchFilter').observableValue"
+                />
+            </div>
+            <div class="form-group col-md-3 col-3 p-0">
+                <label for="calcium-region-filter">Region</label>
+                <select id="calcium-region-filter" name="calciumRegionFilter" autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, +this.value)">
+                    <!-- ko foreach: Settings.getSetting('calciumRegionFilter').options.filter(r => r.value <= player.highestRegion()) -->
+                    <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('calciumRegionFilter').value === $data.value }, text: $data.text">Region</option>
+                    <!-- /ko -->
+                </select>
+            </div>
+            <div class="form-group col-md-3 col-3 p-0">
+                <label for="calcium-type-filter">Type</label>
+                <select id="calcium-type-filter" name="calciumTypeFilter" autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, +this.value)">
+                    <!-- ko foreach: Settings.getSetting('calciumTypeFilter').options -->
+                    <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('calciumTypeFilter').value === $data.value }, text: $data.text">Type</option>
+                    <!-- /ko -->
+                </select>
+            </div>
+          </div>
+              </div>
+                <table class="table table-striped table-hover table-bordered table-sm m-0">
+                  <thead>
+                    <tr class="text-light">
+                      <th class="text-left bg-dark align-middle">Pokemon</th>
+                      <th class="text-center bg-dark align-middle">EVs</th>
+                      <th class="text-center bg-dark align-middle">EV Attack Bonus</th>
+                    </tr>
+                  </thead>
+                  <tbody data-bind="foreach: PartyController.getCalciumSortedList()">
+                    <tr class="clickable" data-bind="click: () => $data.useCalcium(VitaminController.getMultiplier()), hidden: $data.hideFromCalciumList()">
+                      <td class="text-left"><knockout data-bind="text: $data.name"></knockout><sup data-bind="visible: $data.shiny">✨</sup></td>
+                      <td class="text-center tight" data-bind="text: $data.evs().toLocaleString('en-US')">-</td>
+                      <td class="text-center tight" data-bind="text: $data.calculateEVAttackBonus().toLocaleString('en-US')">-</td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+            <!-- /ko -->
+            <span class="bg-dark text-light text-right align-right p-1"  data-bind="text:`Showing ${PartyController.getCalciumSortedList().filter(p => !p.hideFromCalciumList()).length} Pokémon`"></span>
+        </div>
+    </div>
+</div>
