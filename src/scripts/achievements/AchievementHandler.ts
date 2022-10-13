@@ -243,7 +243,7 @@ class AchievementHandler {
         AchievementHandler.addAchievement('I\'ve Got My Hands Full With All of These', 'Level 3 Oak Items to the maximum level.', new MaxLevelOakItemRequirement(3), 0.1, GameConstants.ExtraAchievementCategories.global, () => !challenges.list.disableOakItems.active());
         AchievementHandler.addAchievement('Professor Oak Is the Best!', 'Level 8 Oak Items to the maximum level.', new MaxLevelOakItemRequirement(8), 0.14, GameConstants.ExtraAchievementCategories.global, () => !challenges.list.disableOakItems.active());
         AchievementHandler.addAchievement('Almost Prepared for Anything!', 'Level 11 Oak Items to the maximum level.', new MaxLevelOakItemRequirement(11), 0.18, GameConstants.ExtraAchievementCategories.global, () => !challenges.list.disableOakItems.active() && challenges.list.disableClickAttack.active());
-        AchievementHandler.addAchievement('Prepared for Anything!', 'Level 12 Oak Items to the maximum level.', new MaxLevelOakItemRequirement(12), 0.18, GameConstants.ExtraAchievementCategories.global, () => !challenges.list.disableOakItems.active() && !challenges.list.disableClickAttack.active());
+        AchievementHandler.addAchievement('Prepared for Anything!', 'Level all 12 Oak Items to the maximum level.', new MaxLevelOakItemRequirement(12), 0.18, GameConstants.ExtraAchievementCategories.global, () => !challenges.list.disableOakItems.active() && !challenges.list.disableClickAttack.active());
 
         AchievementHandler.addAchievement('First Team', 'Capture 100 Pokémon.', new CapturedRequirement(100), 0.05);
         AchievementHandler.addAchievement('Filling the PC', 'Capture 1,000 Pokémon.', new CapturedRequirement(1000), 0.10);
