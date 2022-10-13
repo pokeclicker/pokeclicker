@@ -262,7 +262,7 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Wonderful! Do You Like To Collect Things?', 'Capture 50 unique Pokémon.', new CaughtPokemonRequirement(50), 0.10);
         AchievementHandler.addAchievement('Surpassing Ash', 'Capture 100 unique Pokémon.', new CaughtPokemonRequirement(100), 0.20);
         AchievementHandler.addAchievement('Enough for a Zoo', 'Capture 500 unique Pokémon.', new CaughtPokemonRequirement(500), 0.30);
-        AchievementHandler.addAchievement('The PC Will Be Filled', 'Capture 1000 unique Pokémon.', new CaughtPokemonRequirement(1000), 0.40);
+        AchievementHandler.addAchievement('The PC Will Be Filled', 'Capture 1,000 unique Pokémon.', new CaughtPokemonRequirement(1000), 0.40);
 
         AchievementHandler.addAchievement('I\'d Rather Be Shiny', 'Capture your first Shiny Pokémon.', new ShinyPokemonRequirement(1), 0.03);
         AchievementHandler.addAchievement('These Pokémon Must Be Sick', 'Capture 10 unique Shiny Pokémon.', new ShinyPokemonRequirement(10), 0.06);
@@ -324,11 +324,20 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Farming Apprentice', 'Unlock 36 Berries.', new BerriesUnlockedRequirement(36), 0.3);
         AchievementHandler.addAchievement('Master Farmer', 'Unlock all 68 Berries.', new BerriesUnlockedRequirement(68), 0.4);
 
+        AchievementHandler.addAchievement('Getting Some Help at the Farm', 'Unlock 3 Farm Hands.', new FarmHandRequirement(3), 0.2);
+        AchievementHandler.addAchievement('Starting a Farming Empire', 'Unlock 6 Farm Hands.', new FarmHandRequirement(6), 0.3);
+        AchievementHandler.addAchievement('Will I Ever Need All This Help?', 'Unlock all 9 Farm Hands.', new FarmHandRequirement(9), 0.4);
+
         AchievementHandler.addAchievement('Can You Do This for Me?', 'Complete your first quest.', new QuestRequirement(1), 0.05);
         AchievementHandler.addAchievement('One More Favor', 'Complete 10 quests.', new QuestRequirement(10), 0.15);
         AchievementHandler.addAchievement('YES MAN!', 'Complete 100 quests.', new QuestRequirement(100), 0.25);
         AchievementHandler.addAchievement('I Just Love Green Coins', 'Complete 1,000 quests.', new QuestRequirement(1000), 0.4);
         AchievementHandler.addAchievement('I Want To Be Ready for the Next Region', 'Complete 5,000 quests.', new QuestRequirement(5000), 0.6);
+
+        AchievementHandler.addAchievement('Oh, an Other Quest Slot!', 'Reach Quest Level 5.', new QuestLevelRequirement(5), 0.2);
+        AchievementHandler.addAchievement('I Am Getting Good at Questing!', 'Reach Quest Level 10.', new QuestLevelRequirement(10), 0.3);
+        AchievementHandler.addAchievement('What Do I Gain From Leveling This?', 'Reach Quest Level 20.', new QuestLevelRequirement(20), 0.5);
+        AchievementHandler.addAchievement('Quest Master', 'Reach Quest Level 30.', new QuestLevelRequirement(30), 0.8);
 
         AchievementHandler.addAchievement('Fighting Novice', 'Complete stage 100 in the Battle Frontier.', new BattleFrontierHighestStageRequirement(100), 0.05);
         AchievementHandler.addAchievement('Competent Fighter', 'Complete stage 250 in the Battle Frontier.', new BattleFrontierHighestStageRequirement(250), 0.15);
@@ -361,10 +370,6 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Sam Just Wants To Help', 'Get 10 Hatchery Helpers to 10% bonus efficiency.', new HatcheryHelperRequirement(10, 10), 1);
         AchievementHandler.addAchievement('When Are You Going to Breed Yourself?', 'Get 10 Hatchery Helpers to 25% bonus efficiency.', new HatcheryHelperRequirement(10, 25), 1.3);
 
-        AchievementHandler.addAchievement('Getting Some Help at the Farm', 'Unlock 3 Farm Hands.', new FarmHandRequirement(3), 0.2);
-        AchievementHandler.addAchievement('Starting a Farming Empire', 'Unlock 6 Farm Hands.', new FarmHandRequirement(6), 0.3);
-        AchievementHandler.addAchievement('Will I Ever Need All This Help?', 'Unlock all 9 Farm Hands.', new FarmHandRequirement(9), 0.4);
-
         AchievementHandler.addAchievement('I Hope It\'s Not Dangerous', 'Infect 20 Pokémon with Pokérus.', new PokerusStatusRequirement(20, GameConstants.Pokerus.Infected), 0.1);
         AchievementHandler.addAchievement('Any Way To Get Rid of It?', 'Infect 50 Pokémon with Pokérus.', new PokerusStatusRequirement(50, GameConstants.Pokerus.Infected), 0.2);
         AchievementHandler.addAchievement('It Is the Flu Season', 'Infect 100 Pokémon with Pokérus.', new PokerusStatusRequirement(100, GameConstants.Pokerus.Infected), 0.3);
@@ -375,11 +380,6 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Pokémon Center Regular', 'Have 50 Pokémon Resistant to Pokérus.', new PokerusStatusRequirement(50, GameConstants.Pokerus.Resistant), 0.5);
         AchievementHandler.addAchievement('Doctor in Training', 'Have 250 Pokémon Resistant to Pokérus.', new PokerusStatusRequirement(250, GameConstants.Pokerus.Resistant), 1);
         AchievementHandler.addAchievement('I Should Open My Own Pokémon Center', 'Have 500 Pokémon Resistant to Pokérus.', new PokerusStatusRequirement(500, GameConstants.Pokerus.Resistant), 1.5);
-
-        AchievementHandler.addAchievement('Oh, an Other Quest Slot!', 'Reach Quest Level 5.', new QuestLevelRequirement(5), 0.2);
-        AchievementHandler.addAchievement('I Am Getting Good at Questing!', 'Reach Quest Level 10.', new QuestLevelRequirement(10), 0.3);
-        AchievementHandler.addAchievement('What Do I Gain From Leveling This?', 'Reach Quest Level 20.', new QuestLevelRequirement(20), 0.5);
-        AchievementHandler.addAchievement('Quest Master', 'Reach Quest Level 30.', new QuestLevelRequirement(30), 0.8);
 
         /*
          * REGIONAL
