@@ -360,7 +360,7 @@ class QuestLineHelper {
             App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Ultraball, 50, false);
             Notifier.notify({
                 title: lugiaJohtoQuestLine.name,
-                message: 'Kimono Girl Miki has given you a package containing 50 Ultraballs.',
+                message: 'Kimono Girl Miki has given you a package containing 50 Ultra Balls.',
                 type: NotificationConstants.NotificationOption.success,
                 timeout: 3e4,
             });
@@ -392,16 +392,15 @@ class QuestLineHelper {
             undefined,
             undefined
         );
-
         lugiaJohtoQuestLine.addQuest(LugiaCatch);
 
         App.game.quests.questLines().push(lugiaJohtoQuestLine);
     }
-    // Ho-oh Quest
 
+    // Ho-Oh Quest
     public static createhoohJohtoQuestLine() {
         const hoohJohtoQuestLine = new QuestLine('Rainbow Guardian', 'The Kimono Girls of Ecruteak City wish to speak with you again.', new MultiRequirement([new QuestLineStepCompletedRequirement('Whirl Guardian', 9), new ObtainedPokemonRequirement(pokemonMap.Raikou), new ObtainedPokemonRequirement(pokemonMap.Entei), new ObtainedPokemonRequirement(pokemonMap.Suicune)]), GameConstants.BulletinBoards.Johto);
-        const talkKimonoGirlsEcruteak = new TalkToNPCQuest(KimonoGirlsEcruteak, 'Meet the Kimono Girls at the Ecruteak Dance Theatre');
+        const talkKimonoGirlsEcruteak = new TalkToNPCQuest(KimonoGirlsEcruteak, 'Meet the Kimono Girls at the Ecruteak Dance Theatre.');
         hoohJohtoQuestLine.addQuest(talkKimonoGirlsEcruteak);
 
         const clearKimonoGirls = new CustomQuest (1, 0, 'Prove your abilities as a trainer to the Kimono Girls of Ecruteak City.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Kimono Girls')]());
@@ -409,13 +408,12 @@ class QuestLineHelper {
 
         const HoohCatch = new CaptureSpecificPokemonQuest(
             'Ho-Oh',
-            'Catch Ho-oh in the Tin Tower.',
+            'Catch Ho-Oh in the Tin Tower.',
             1,
             false,
             undefined,
             undefined
         );
-
         hoohJohtoQuestLine.addQuest(HoohCatch);
 
         App.game.quests.questLines().push(hoohJohtoQuestLine);
