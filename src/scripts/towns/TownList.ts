@@ -2577,7 +2577,7 @@ TownList['Pokémon League Sinnoh'] = new Town(
 TownList['Fight Area'] = new Town(
     'Fight Area',
     GameConstants.Region.sinnoh,
-    [FightAreaShop],
+    [FightAreaShop, new DreamOrbTownContent()],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)],
         npcs: [FightAreaAceTrainer],

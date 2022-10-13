@@ -43,7 +43,8 @@ class Game {
         public battleFrontier: BattleFrontier,
         public multiplier: Multiplier,
         public saveReminder: SaveReminder,
-        public battleCafe: BattleCafeSaveObject
+        public battleCafe: BattleCafeSaveObject,
+        public dreamOrbController: DreamOrbController
     ) {
         this._gameState = ko.observable(GameConstants.GameState.paused);
     }

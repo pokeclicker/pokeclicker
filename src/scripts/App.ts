@@ -49,7 +49,8 @@ class App {
                 new BattleFrontier(),
                 multiplier,
                 new SaveReminder(),
-                new BattleCafeSaveObject()
+                new BattleCafeSaveObject(),
+                new DreamOrbController()
             );
 
             console.log(`[${GameConstants.formatDate(new Date())}] %cGame loaded`, 'color:#2ecc71;font-weight:900;');
