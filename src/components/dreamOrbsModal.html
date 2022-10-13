@@ -1,6 +1,6 @@
 <div class="modal fade noselect" id="dreamOrbsModal" tabindex="-1" role="dialog"
-aria-labelledby="dreamOrbsModal"Label">
-<div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+aria-labelledby="dreamOrbsModalLabel">
+<div class="modal-dialog modal-dialog-scrollable" role="document">
     <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title">Open Dream Orbs</h5>
@@ -11,11 +11,13 @@ aria-labelledby="dreamOrbsModal"Label">
                 <option data-bind="attr: { value: $data.color }, text: $data.color"></option>
                 <!-- /ko -->
             </select>
-            <img data-bind="attr: { src: 'assets/images/dreamOrbs/dream_orb_' +
+            <img data-bind="attr: { src: App.game.dreamOrbController.item() ? BagHandler.image(App.game.dreamOrbController.item().item) :
+                ('assets/images/dreamOrbs/dream_orb_' +
                 App.game.dreamOrbController.selectedOrb().color.toLowerCase() +
-                '.png'
+                (App.game.dreamOrbController.opening() ? '_animated' : '') +
+                '.png')
             }"/>
-            <button>Open</button>
+            <div><button class="btn btn-primary" onclick="App.game.dreamOrbController.open()">Open</button></div>
             <div>Orbs left: <span data-bind="text: App.game.dreamOrbController.selectedOrb().amount"></span></div>
         </div>
         <div class="modal-footer">

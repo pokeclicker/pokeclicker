@@ -4,7 +4,7 @@ class DreamOrbLoot {
 }
 
 class DreamOrb {
-    public amount = 0;
+    public amount = ko.observable(100); //TODO: change to 0 before merge
     constructor(public color: string, public requirement: Requirement, public items: DreamOrbLoot[]) {
     }
 }
@@ -16,6 +16,8 @@ class DreamOrbController implements Saveable {
 
     constructor() {
         this.selectedOrb = ko.observable(this.orbs[0]);
+        this.opening = ko.observable(false);
+        this.item = ko.observable(undefined);
     }
 
     public orbs = [
@@ -29,19 +31,38 @@ class DreamOrbController implements Saveable {
         ]),
     ]
 
+    public open() {
+        if (!this.selectedOrb().amount) {
+            Notifier.notify({
+                message: 'No orbs left.',
+                type: NotificationConstants.NotificationOption.danger,
+            });
+            return;
+        }
+        this.opening(true);
+        this.item(undefined);
+        GameHelper.incrementObservable(this.selectedOrb().amount, -1);
+        const item = Rand.fromWeightedArray(this.selectedOrb().items, this.selectedOrb().items.map((i) => i.weight));
+        BagHandler.gainItem(item.item);
+        setTimeout(() => {
+            this.item(item);
+            this.opening(false);
+        }, 1800);
+    }
+
     saveKey = 'dream-orbs';
     defaults: Record<string, any>;
     toJSON(): Record<string, any> {
         return {
             orbs: [
                 ...this.orbs.map((o) => {
-                    return {amount: o.amount, color: o.color};
+                    return {amount: o.amount(), color: o.color};
                 }),
             ],
         };
     }
     fromJSON(json: Record<string, any>): void {
-        json?.orbs?.forEach((o) => this.orbs.find((o2) => o2.color == o.color).amount = o.amount);
+        json?.orbs?.forEach((o) => this.orbs.find((o2) => o2.color == o.color).amount(o.amount));
     }
 }
 
