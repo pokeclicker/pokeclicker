@@ -5,7 +5,7 @@ class BattleFrontierMilestonePokemon extends BattleFrontierMilestone {
         super(
             stage,
             () => {
-                App.game.party.gainPokemonById(pokemonMap[pokemonName].id);
+                App.game.party.gainPokemonById(pokemonMap[pokemonName].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_BATTLEFRONTIER));
             },
             requirement,
             image,

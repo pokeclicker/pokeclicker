@@ -3,7 +3,7 @@ import AchievementRequirement from './AchievementRequirement';
 
 export default class ClickRequirement extends AchievementRequirement {
     constructor(value: number, option: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
-        super(value, option, GameConstants.AchievementType.Click);
+        super(value, option, GameConstants.AchievementType.Attack);
     }
 
     public getProgress() {
