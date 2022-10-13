@@ -117,6 +117,7 @@ ItemList.Magnet = new TypeRestrictedAttackBonusHeldItem('Magnet', 10000, GameCon
 ItemList.Miracle_Seed = new TypeRestrictedAttackBonusHeldItem('Miracle_Seed', 10000, GameConstants.Currency.money, undefined, 'Miracle Seed', 1.1, PokemonType.Grass, GameConstants.Region.johto);
 ItemList.Mystic_Water = new TypeRestrictedAttackBonusHeldItem('Mystic_Water', 10000, GameConstants.Currency.money, undefined, 'Mystic Water', 1.1, PokemonType.Water, GameConstants.Region.johto);
 ItemList.Never_Melt_Ice = new TypeRestrictedAttackBonusHeldItem('Never_Melt_Ice', 10000, GameConstants.Currency.money, undefined, 'Never-Melt Ice', 1.1, PokemonType.Ice, GameConstants.Region.johto);
+ItemList.Pink_Bow = new TypeRestrictedAttackBonusHeldItem('Pink_Bow', 10000, GameConstants.Currency.money, undefined, 'Pink Bow', 1.1, PokemonType.Fairy, GameConstants.Region.johto);
 ItemList.Poison_Barb = new TypeRestrictedAttackBonusHeldItem('Poison_Barb', 10000, GameConstants.Currency.money, undefined, 'Poison Barb', 1.1, PokemonType.Poison, GameConstants.Region.johto);
 ItemList.Sharp_Beak = new TypeRestrictedAttackBonusHeldItem('Sharp_Beak', 10000, GameConstants.Currency.money, undefined, 'Sharp Beak', 1.1, PokemonType.Flying, GameConstants.Region.johto);
 ItemList.Silk_Scarf = new TypeRestrictedAttackBonusHeldItem('Silk_Scarf', 10000, GameConstants.Currency.money, undefined, 'Silk Scarf', 1.1, PokemonType.Normal, GameConstants.Region.johto);
