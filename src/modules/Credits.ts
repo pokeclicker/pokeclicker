@@ -186,6 +186,7 @@ export const SpriteCredits: Credit[] = [
             'Merilyn',
             'Pinkan Arbok',
             'Pinkan Bellsprout',
+            'Pink Bow',
             'Pink Butterfree',
             'Pinkan Caterpie',
             'Pinkan Diglett',
