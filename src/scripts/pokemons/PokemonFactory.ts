@@ -332,22 +332,4 @@ class PokemonFactory {
         }
         return gender;
     }
-
-    public static genderText(gender: number) {
-        let genderText;
-        switch (gender) {
-            case GameConstants.BattlePokemonGender.NoGender:
-                genderText = GameConstants.TEXT_GENDERLESS;
-                break;
-            case GameConstants.BattlePokemonGender.GenderMale:
-                genderText = GameConstants.TEXT_MALE;
-                break;
-            case GameConstants.BattlePokemonGender.GenderFemale:
-                genderText = GameConstants.TEXT_FEMALE;
-                break;
-            default:
-                console.warn('Invalid gender');
-        }
-        return genderText;
-    }
 }

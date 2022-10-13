@@ -1592,11 +1592,6 @@ export const FEMALE_75 = 0.75;
 export const FEMALE_87_5 = 0.875;
 export const FEMALE_100 = 1;
 
-// Gender Text
-export const TEXT_GENDERLESS = '';
-export const TEXT_MALE = '<i class="gender-icon-male">♂</i>'; // If Bootstrap Icons: <i class="bi bi-gender-male gender-icon-male"></i>
-export const TEXT_FEMALE = '<i class="gender-icon-female">♀</i>'; // If Bootstrap Icons: <i class="bi bi-gender-female gender-icon-female"></i>
-
 // Wild/Trainer/BF Pokémon Gender
 export enum BattlePokemonGender {
     NoGender = 0,

@@ -1,5 +1,6 @@
 <script type="text/html" id="pokemonNameTemplate">
-    <knockout data-bind="html: $data.pokemon.name"></knockout><!-- + ' ' + PokemonFactory.genderText($data.pokemon.gender)-->
+    <knockout data-bind="html: $data.pokemon.name"></knockout>
+    <knockout data-bind="template: { name: 'pokemonGenderTemplate', data: { 'pokemon': $data.pokemon } }">Pokémon gender</knockout>
 </script>
 
 <!-- Example usage -->

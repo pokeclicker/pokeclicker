@@ -621,11 +621,6 @@ namespace GameConstants {
     declare const FEMALE_87_5;
     declare const FEMALE_100;
 
-    // Gender Text
-    declare const TEXT_GENDERLESS;
-    declare const TEXT_MALE;
-    declare const TEXT_FEMALE;
-
     // Current Pokémon Gender
     declare enum BattlePokemonGender {
         NoGender,
