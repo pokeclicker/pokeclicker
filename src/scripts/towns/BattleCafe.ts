@@ -158,44 +158,56 @@ class BattleCafeController {
 
     private static getPrice(sweet: GameConstants.AlcremieSweet) : {berry: BerryType, amount: number}[] {
         switch (sweet) {
+            // should be easy to do, without touching the farm
             case GameConstants.AlcremieSweet['Strawberry Sweet']:
                 return [
                     {berry: BerryType.Cheri, amount: 500},
-                    {berry: BerryType.Leppa, amount: 400},
-                    {berry: BerryType.Razz, amount: 30},
+                    {berry: BerryType.Leppa, amount: 500},
+                    {berry: BerryType.Razz, amount: 50},
                 ];
-            case GameConstants.AlcremieSweet['Love Sweet']:
-                return [
-                    {berry: BerryType.Roseli, amount: 20},
-                    {berry: BerryType.Liechi, amount: 3},
-                ];
-            case GameConstants.AlcremieSweet['Berry Sweet']:
-                return [
-                    {berry: BerryType.Yache, amount: 25},
-                    {berry: BerryType.Haban, amount: 25},
-                    {berry: BerryType.Wiki, amount: 150},
-                ];
+            // max gen 2
             case GameConstants.AlcremieSweet['Clover Sweet']:
                 return [
-                    {berry: BerryType.Wepear, amount: 30},
-                    {berry: BerryType.Aguav, amount: 30},
+                    {berry: BerryType.Wepear, amount: 50},
+                    {berry: BerryType.Aguav, amount: 50},
                     {berry: BerryType.Lum, amount: 5},
                 ];
-            case GameConstants.AlcremieSweet['Flower Sweet']:
-                return [
-                    {berry: BerryType.Pomeg, amount: 30},
-                    {berry: BerryType.Nomel, amount: 30},
-                ];
+            // max gen 3
             case GameConstants.AlcremieSweet['Star Sweet']:
                 return [
-                    {berry: BerryType.Starf, amount: 3},
-                    {berry: BerryType.Lansat, amount: 3},
+                    {berry: BerryType.Pinap, amount: 50},
+                    {berry: BerryType.Grepa, amount: 30},
+                    {berry: BerryType.Nomel, amount: 30},
                 ];
+            // max gen 4
+            case GameConstants.AlcremieSweet['Berry Sweet']:
+                return [
+                    {berry: BerryType.Yache, amount: 10},
+                    {berry: BerryType.Coba, amount: 10},
+                    {berry: BerryType.Passho, amount: 10},
+                ];
+            // max gen 4
             case GameConstants.AlcremieSweet['Ribbon Sweet']:
                 return [
-                    {berry: BerryType.Chople, amount: 20},
-                    {berry: BerryType.Haban, amount: 20},
+                    {berry: BerryType.Bluk, amount: 50},
+                    {berry: BerryType.Pamtre, amount: 30},
+                    {berry: BerryType.Payapa, amount: 10},
                 ];
+            // max gen 5
+            case GameConstants.AlcremieSweet['Flower Sweet']:
+                return [
+                    {berry: BerryType.Figy, amount: 50},
+                    {berry: BerryType.Iapapa, amount: 50},
+                    {berry: BerryType.Liechi, amount: 3},
+                ];
+            // max gen 5
+            case GameConstants.AlcremieSweet['Love Sweet']:
+                return [
+                    {berry: BerryType.Roseli, amount: 10},
+                    {berry: BerryType.Haban, amount: 10},
+                    {berry: BerryType.Lansat, amount: 3},
+                ];
+
         }
     }
 
