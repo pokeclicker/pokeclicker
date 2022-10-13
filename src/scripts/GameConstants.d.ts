@@ -46,6 +46,7 @@ namespace GameConstants {
     declare const SHINY_CHANCE_BATTLE: number;
     declare const SHINY_CHANCE_DUNGEON: number;
     declare const SHINY_CHANCE_SHOP: number;
+    declare const SHINY_CHANCE_BATTLEFRONTIER: number;
     declare const SHINY_CHANCE_STONE: number;
     declare const SHINY_CHANCE_SAFARI: number;
     declare const SHINY_CHANCE_BREEDING: number;

@@ -67,6 +67,7 @@ export const SHINY_CHANCE_DUNGEON = 4096;
 export const SHINY_CHANCE_STONE = 2048;
 export const SHINY_CHANCE_SAFARI = 2048;
 export const SHINY_CHANCE_SHOP = 1024;
+export const SHINY_CHANCE_BATTLEFRONTIER = 1024;
 export const SHINY_CHANCE_BREEDING = 1024;
 export const SHINY_CHANCE_FARM = 1024;
 
