@@ -3,7 +3,7 @@ import AchievementRequirement from './AchievementRequirement';
 
 export default class UndergroundLayersMinedRequirement extends AchievementRequirement {
     constructor(value: number, option: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
-        super(value, option, GameConstants.AchievementType['Underground Layers Mined']);
+        super(value, option, GameConstants.AchievementType.Underground);
     }
 
     public getProgress() {
