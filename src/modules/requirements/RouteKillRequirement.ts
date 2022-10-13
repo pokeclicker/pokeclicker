@@ -14,7 +14,7 @@ export default class RouteKillRequirement extends AchievementRequirement {
         public route: number,
         option: AchievementOption = AchievementOption.more,
     ) {
-        super(value, option, AchievementType['Route Defeat']);
+        super(value, option, AchievementType['Route Defeats']);
     }
 
     public getProgress() {
