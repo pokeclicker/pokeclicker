@@ -210,41 +210,6 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Farm Legend', 'Obtain 1,000,000 Farm Points.', new FarmPointsRequirement(1000000), 0.30);
         AchievementHandler.addAchievement('Farm Myth', 'Obtain 20,000,000 Farm Points.', new FarmPointsRequirement(20000000), 0.60);
 
-        AchievementHandler.addAchievement('Basic Trainer', 'Have 100 Attack.', new AttackRequirement(100), 0.05);
-        AchievementHandler.addAchievement('Improving', 'Have 1,000 Attack.', new AttackRequirement(1000), 0.10);
-        AchievementHandler.addAchievement('An Unrelenting Force', 'Have 5,000 Attack.', new AttackRequirement(5000), 0.15);
-        AchievementHandler.addAchievement('FUS DOH RAH', 'Have 10,000 Attack.', new AttackRequirement(10000), 0.20);
-        AchievementHandler.addAchievement('OK, I Have Enough Attack Already...', 'Have 25,000 Attack.', new AttackRequirement(25000), 0.25);
-        AchievementHandler.addAchievement('Silver Attack Button!', 'Have 100,000 Attack.', new AttackRequirement(100000), 0.30);
-        AchievementHandler.addAchievement('Pesky Roamers, I Need to One-Shot Routes for Them...', 'Have 250,000 Attack.', new AttackRequirement(250000), 0.35);
-        AchievementHandler.addAchievement('You Pressed F12 by Any Chance?', 'Have 500,000 Attack.', new AttackRequirement(500000), 0.40);
-        AchievementHandler.addAchievement('Left-Left-Right-Right-A-B-A-B - Hey, 1 Million!', 'Have 1,000,000 Attack.', new AttackRequirement(1000000), 0.40);
-        AchievementHandler.addAchievement('Can I Beat Diantha Yet?', 'Have 5,000,000 Attack.', new AttackRequirement(5000000), 0.45);
-        AchievementHandler.addAchievement('No One Can Challenge Me!', 'Have 20,000,000 Attack.', new AttackRequirement(20000000), 0.60);
-
-        AchievementHandler.addAchievement('Bling', 'Obtain 100 Diamonds.', new DiamondRequirement(100), 0.05);
-        AchievementHandler.addAchievement('Bling x10!', 'Obtain 1,000 Diamonds.', new DiamondRequirement(1000), 0.15);
-        AchievementHandler.addAchievement('If You Like It, Then You Should\'ve Put a Ring on It', 'Obtain 10,000 Diamonds.', new DiamondRequirement(10000), 0.25);
-        AchievementHandler.addAchievement('Just Keep Trading!', 'Obtain 25,000 Diamonds.', new DiamondRequirement(25000), 0.4);
-        AchievementHandler.addAchievement('Got All Upgrades Yet?', 'Obtain 100,000 Diamonds.', new DiamondRequirement(100000), 0.6);
-
-        AchievementHandler.addAchievement('Is My Thumb Green Yet?', 'Dig up 1 item in the Underground.', new UndergroundItemsFoundRequirement(1), 0.01);
-        AchievementHandler.addAchievement('My Shovel Is Starting To Crack', 'Dig up 10 items in the Underground.', new UndergroundItemsFoundRequirement(10), 0.02);
-        AchievementHandler.addAchievement('Why Can\'t I Make a Diamond Shovel?', 'Dig up 100 items in the Underground.', new UndergroundItemsFoundRequirement(100), 0.08);
-        AchievementHandler.addAchievement('This Is Definitely Not Minecraft', 'Dig up 1,000 items in the Underground.', new UndergroundItemsFoundRequirement(1000), 0.1);
-        AchievementHandler.addAchievement('I Wonder How Much Is Down There...', 'Dig up 10,000 items in the Underground.', new UndergroundItemsFoundRequirement(10000), 0.4);
-
-        AchievementHandler.addAchievement('The Earth Is Like Onions', 'Dig deeper into the Underground 1 time.', new UndergroundLayersMinedRequirement(1), 0.01);
-        AchievementHandler.addAchievement('This Takes Foreverrrrrrr', 'Dig deeper into the Underground 10 times.', new UndergroundLayersMinedRequirement(10), 0.03);
-        AchievementHandler.addAchievement('DigDug Ain\'t Got Nothin\' on Me', 'Dig deeper into the Underground 100 times.', new UndergroundLayersMinedRequirement(100), 0.1);
-        AchievementHandler.addAchievement('Both My Thumbs Are Green! This Can\'t Be Healthy', 'Dig deeper into the Underground 1,000 times.', new UndergroundLayersMinedRequirement(1000), 0.3);
-
-        AchievementHandler.addAchievement('Is That How I Use This?', 'Level 1 Oak Item to the maximum level.', new MaxLevelOakItemRequirement(1), 0.05, GameConstants.ExtraAchievementCategories.global, () => !challenges.list.disableOakItems.active());
-        AchievementHandler.addAchievement('I\'ve Got My Hands Full With All of These', 'Level 3 Oak Items to the maximum level.', new MaxLevelOakItemRequirement(3), 0.1, GameConstants.ExtraAchievementCategories.global, () => !challenges.list.disableOakItems.active());
-        AchievementHandler.addAchievement('Professor Oak Is the Best!', 'Level 8 Oak Items to the maximum level.', new MaxLevelOakItemRequirement(8), 0.14, GameConstants.ExtraAchievementCategories.global, () => !challenges.list.disableOakItems.active());
-        AchievementHandler.addAchievement('Almost Prepared for Anything!', 'Level 11 Oak Items to the maximum level.', new MaxLevelOakItemRequirement(11), 0.18, GameConstants.ExtraAchievementCategories.global, () => !challenges.list.disableOakItems.active() && challenges.list.disableClickAttack.active());
-        AchievementHandler.addAchievement('Prepared for Anything!', 'Level all 12 Oak Items to the maximum level.', new MaxLevelOakItemRequirement(12), 0.18, GameConstants.ExtraAchievementCategories.global, () => !challenges.list.disableOakItems.active() && !challenges.list.disableClickAttack.active());
-
         AchievementHandler.addAchievement('First Team', 'Capture 100 Pokémon.', new CapturedRequirement(100), 0.05);
         AchievementHandler.addAchievement('Filling the PC', 'Capture 1,000 Pokémon.', new CapturedRequirement(1000), 0.10);
         AchievementHandler.addAchievement('Pokémon Army', 'Capture 10,000 Pokémon.', new CapturedRequirement(10000), 0.15);
@@ -277,13 +242,22 @@ class AchievementHandler {
         AchievementHandler.addAchievement('What Were the Odds Again?', 'Capture 500 unique Shiny Pokémon!', new ShinyPokemonRequirement(500), 1.30);
         AchievementHandler.addAchievement('Non-Shiny Is Now Becoming Rare', 'Capture 1,000 unique Shiny Pokémon!', new ShinyPokemonRequirement(1000), 1.50);
 
-        AchievementHandler.addAchievement('Pokémon Nursery', 'Hatch 1 egg.', new HatchRequirement(1), 0.01);
-        AchievementHandler.addAchievement('A Lot of Running', 'Hatch 10 eggs.', new HatchRequirement(10), 0.04);
-        AchievementHandler.addAchievement('Marathon Runner', 'Hatch 100 eggs.', new HatchRequirement(100), 0.15);
-        AchievementHandler.addAchievement('Egg Factory', 'Hatch 1,000 eggs.', new HatchRequirement(1000), 0.3);
-        AchievementHandler.addAchievement('Offical Easter Bunny', 'Hatch 10,000 eggs.', new HatchRequirement(10000), 0.4);
-        AchievementHandler.addAchievement('What Do You Do With All the Eggshells?', 'Hatch 100,000 eggs.', new HatchRequirement(100000), 0.5);
-        AchievementHandler.addAchievement('Day Care Is My Home', 'Hatch 250,000 eggs.', new HatchRequirement(250000), 0.7);
+        AchievementHandler.addAchievement('Basic Trainer', 'Have 100 Attack.', new AttackRequirement(100), 0.05);
+        AchievementHandler.addAchievement('Improving', 'Have 1,000 Attack.', new AttackRequirement(1000), 0.10);
+        AchievementHandler.addAchievement('An Unrelenting Force', 'Have 5,000 Attack.', new AttackRequirement(5000), 0.15);
+        AchievementHandler.addAchievement('FUS DOH RAH', 'Have 10,000 Attack.', new AttackRequirement(10000), 0.20);
+        AchievementHandler.addAchievement('OK, I Have Enough Attack Already...', 'Have 25,000 Attack.', new AttackRequirement(25000), 0.25);
+        AchievementHandler.addAchievement('Silver Attack Button!', 'Have 100,000 Attack.', new AttackRequirement(100000), 0.30);
+        AchievementHandler.addAchievement('Pesky Roamers, I Need to One-Shot Routes for Them...', 'Have 250,000 Attack.', new AttackRequirement(250000), 0.35);
+        AchievementHandler.addAchievement('You Pressed F12 by Any Chance?', 'Have 500,000 Attack.', new AttackRequirement(500000), 0.40);
+        AchievementHandler.addAchievement('Left-Left-Right-Right-A-B-A-B - Hey, 1 Million!', 'Have 1,000,000 Attack.', new AttackRequirement(1000000), 0.40);
+        AchievementHandler.addAchievement('Can I Beat Diantha Yet?', 'Have 5,000,000 Attack.', new AttackRequirement(5000000), 0.45);
+        AchievementHandler.addAchievement('No One Can Challenge Me!', 'Have 20,000,000 Attack.', new AttackRequirement(20000000), 0.60);
+
+        AchievementHandler.addAchievement('A Few Clicks In', 'Click Attack 10 times.', new ClickRequirement(10, 1), 0.02, GameConstants.ExtraAchievementCategories.global, () => !challenges.list.disableClickAttack.active());
+        AchievementHandler.addAchievement('Clicking Pro', 'Click Attack 100 times.', new ClickRequirement(100, 1), 0.05, GameConstants.ExtraAchievementCategories.global, () => !challenges.list.disableClickAttack.active());
+        AchievementHandler.addAchievement('Ultra Clicker', 'Click Attack 1,000 times.', new ClickRequirement(1000, 1), 0.10, GameConstants.ExtraAchievementCategories.global, () => !challenges.list.disableClickAttack.active());
+        AchievementHandler.addAchievement('Need a New Mouse Yet?', 'Click Attack 10,000 times.', new ClickRequirement(10000, 1), 0.25, GameConstants.ExtraAchievementCategories.global, () => !challenges.list.disableClickAttack.active());
 
         AchievementHandler.addAchievement('Why Is My Voltorb Upside Down?', 'Purchase your first Poké Ball.', new PokeballRequirement(1, GameConstants.Pokeball.Pokeball), 0.01);
         AchievementHandler.addAchievement('Starting a Collection', 'Purchase 10 Poké Balls.', new PokeballRequirement(10, GameConstants.Pokeball.Pokeball), 0.03);
@@ -310,10 +284,37 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Legendaries Hate That Guy', 'Obtain 10 Master Balls.', new PokeballRequirement(10, GameConstants.Pokeball.Masterball), 0.30);
         AchievementHandler.addAchievement('No Pokémon in the World Can Run Away From Me Now!', 'Obtain 100 Master Balls.', new PokeballRequirement(100, GameConstants.Pokeball.Masterball), 0.40);
 
-        AchievementHandler.addAchievement('A Few Clicks In', 'Click Attack 10 times.', new ClickRequirement(10, 1), 0.02, GameConstants.ExtraAchievementCategories.global, () => !challenges.list.disableClickAttack.active());
-        AchievementHandler.addAchievement('Clicking Pro', 'Click Attack 100 times.', new ClickRequirement(100, 1), 0.05, GameConstants.ExtraAchievementCategories.global, () => !challenges.list.disableClickAttack.active());
-        AchievementHandler.addAchievement('Ultra Clicker', 'Click Attack 1,000 times.', new ClickRequirement(1000, 1), 0.10, GameConstants.ExtraAchievementCategories.global, () => !challenges.list.disableClickAttack.active());
-        AchievementHandler.addAchievement('Need a New Mouse Yet?', 'Click Attack 10,000 times.', new ClickRequirement(10000, 1), 0.25, GameConstants.ExtraAchievementCategories.global, () => !challenges.list.disableClickAttack.active());
+        AchievementHandler.addAchievement('Can You Do This for Me?', 'Complete your first quest.', new QuestRequirement(1), 0.05);
+        AchievementHandler.addAchievement('One More Favor', 'Complete 10 quests.', new QuestRequirement(10), 0.15);
+        AchievementHandler.addAchievement('YES MAN!', 'Complete 100 quests.', new QuestRequirement(100), 0.25);
+        AchievementHandler.addAchievement('I Just Love Green Coins', 'Complete 1,000 quests.', new QuestRequirement(1000), 0.4);
+        AchievementHandler.addAchievement('I Want To Be Ready for the Next Region', 'Complete 5,000 quests.', new QuestRequirement(5000), 0.6);
+
+        AchievementHandler.addAchievement('Oh, an Other Quest Slot!', 'Reach Quest Level 5.', new QuestLevelRequirement(5), 0.2);
+        AchievementHandler.addAchievement('I Am Getting Good at Questing!', 'Reach Quest Level 10.', new QuestLevelRequirement(10), 0.3);
+        AchievementHandler.addAchievement('What Do I Gain From Leveling This?', 'Reach Quest Level 20.', new QuestLevelRequirement(20), 0.5);
+        AchievementHandler.addAchievement('Quest Master', 'Reach Quest Level 30.', new QuestLevelRequirement(30), 0.8);
+
+        AchievementHandler.addAchievement('Is That How I Use This?', 'Level 1 Oak Item to the maximum level.', new MaxLevelOakItemRequirement(1), 0.05, GameConstants.ExtraAchievementCategories.global, () => !challenges.list.disableOakItems.active());
+        AchievementHandler.addAchievement('I\'ve Got My Hands Full With All of These', 'Level 3 Oak Items to the maximum level.', new MaxLevelOakItemRequirement(3), 0.1, GameConstants.ExtraAchievementCategories.global, () => !challenges.list.disableOakItems.active());
+        AchievementHandler.addAchievement('Professor Oak Is the Best!', 'Level 8 Oak Items to the maximum level.', new MaxLevelOakItemRequirement(8), 0.14, GameConstants.ExtraAchievementCategories.global, () => !challenges.list.disableOakItems.active());
+        AchievementHandler.addAchievement('Almost Prepared for Anything!', 'Level 11 Oak Items to the maximum level.', new MaxLevelOakItemRequirement(11), 0.18, GameConstants.ExtraAchievementCategories.global, () => !challenges.list.disableOakItems.active() && challenges.list.disableClickAttack.active());
+        AchievementHandler.addAchievement('Prepared for Anything!', 'Level all 12 Oak Items to the maximum level.', new MaxLevelOakItemRequirement(12), 0.18, GameConstants.ExtraAchievementCategories.global, () => !challenges.list.disableOakItems.active() && !challenges.list.disableClickAttack.active());
+
+        AchievementHandler.addAchievement('Pokémon Nursery', 'Hatch 1 egg.', new HatchRequirement(1), 0.01);
+        AchievementHandler.addAchievement('A Lot of Running', 'Hatch 10 eggs.', new HatchRequirement(10), 0.04);
+        AchievementHandler.addAchievement('Marathon Runner', 'Hatch 100 eggs.', new HatchRequirement(100), 0.15);
+        AchievementHandler.addAchievement('Egg Factory', 'Hatch 1,000 eggs.', new HatchRequirement(1000), 0.3);
+        AchievementHandler.addAchievement('Offical Easter Bunny', 'Hatch 10,000 eggs.', new HatchRequirement(10000), 0.4);
+        AchievementHandler.addAchievement('What Do You Do With All the Eggshells?', 'Hatch 100,000 eggs.', new HatchRequirement(100000), 0.5);
+        AchievementHandler.addAchievement('Day Care Is My Home', 'Hatch 250,000 eggs.', new HatchRequirement(250000), 0.7);
+
+        AchievementHandler.addAchievement('Some Nice Help for the Day Care', 'Unlock 5 Hatchery Helpers.', new HatcheryHelperRequirement(5, 0), 0.1);
+        AchievementHandler.addAchievement('Why Do They Have To Work in Shifts?', 'Unlock all 11 Hatchery Helpers.', new HatcheryHelperRequirement(11, 0), 0.3);
+        AchievementHandler.addAchievement('My Loyal Helpers', 'Get 3 Hatchery Helpers to 10% bonus efficiency.', new HatcheryHelperRequirement(3, 10), 0.4);
+        AchievementHandler.addAchievement('Let\'s Try Some Other Helpers Too?', 'Get 5 Hatchery Helpers to 10% bonus efficiency.', new HatcheryHelperRequirement(5, 10), 0.5);
+        AchievementHandler.addAchievement('Sam Just Wants To Help', 'Get 10 Hatchery Helpers to 10% bonus efficiency.', new HatcheryHelperRequirement(10, 10), 1);
+        AchievementHandler.addAchievement('When Are You Going to Breed Yourself?', 'Get 10 Hatchery Helpers to 25% bonus efficiency.', new HatcheryHelperRequirement(10, 25), 1.3);
 
         AchievementHandler.addAchievement('My New Dirty Hobby', 'Unlock 3 Plots in the Farm.', new FarmPlotsUnlockedRequirement(3), 0.05);
         AchievementHandler.addAchievement('Allotment Gardener', 'Unlock 9 Plots in the Farm.', new FarmPlotsUnlockedRequirement(9), 0.15);
@@ -328,16 +329,33 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Starting a Farming Empire', 'Unlock 6 Farm Hands.', new FarmHandRequirement(6), 0.3);
         AchievementHandler.addAchievement('Will I Ever Need All This Help?', 'Unlock all 9 Farm Hands.', new FarmHandRequirement(9), 0.4);
 
-        AchievementHandler.addAchievement('Can You Do This for Me?', 'Complete your first quest.', new QuestRequirement(1), 0.05);
-        AchievementHandler.addAchievement('One More Favor', 'Complete 10 quests.', new QuestRequirement(10), 0.15);
-        AchievementHandler.addAchievement('YES MAN!', 'Complete 100 quests.', new QuestRequirement(100), 0.25);
-        AchievementHandler.addAchievement('I Just Love Green Coins', 'Complete 1,000 quests.', new QuestRequirement(1000), 0.4);
-        AchievementHandler.addAchievement('I Want To Be Ready for the Next Region', 'Complete 5,000 quests.', new QuestRequirement(5000), 0.6);
+        AchievementHandler.addAchievement('Bling', 'Obtain 100 Diamonds.', new DiamondRequirement(100), 0.05);
+        AchievementHandler.addAchievement('Bling x10!', 'Obtain 1,000 Diamonds.', new DiamondRequirement(1000), 0.15);
+        AchievementHandler.addAchievement('If You Like It, Then You Should\'ve Put a Ring on It', 'Obtain 10,000 Diamonds.', new DiamondRequirement(10000), 0.25);
+        AchievementHandler.addAchievement('Just Keep Trading!', 'Obtain 25,000 Diamonds.', new DiamondRequirement(25000), 0.4);
+        AchievementHandler.addAchievement('Got All Upgrades Yet?', 'Obtain 100,000 Diamonds.', new DiamondRequirement(100000), 0.6);
 
-        AchievementHandler.addAchievement('Oh, an Other Quest Slot!', 'Reach Quest Level 5.', new QuestLevelRequirement(5), 0.2);
-        AchievementHandler.addAchievement('I Am Getting Good at Questing!', 'Reach Quest Level 10.', new QuestLevelRequirement(10), 0.3);
-        AchievementHandler.addAchievement('What Do I Gain From Leveling This?', 'Reach Quest Level 20.', new QuestLevelRequirement(20), 0.5);
-        AchievementHandler.addAchievement('Quest Master', 'Reach Quest Level 30.', new QuestLevelRequirement(30), 0.8);
+        AchievementHandler.addAchievement('Is My Thumb Green Yet?', 'Dig up 1 item in the Underground.', new UndergroundItemsFoundRequirement(1), 0.01);
+        AchievementHandler.addAchievement('My Shovel Is Starting To Crack', 'Dig up 10 items in the Underground.', new UndergroundItemsFoundRequirement(10), 0.02);
+        AchievementHandler.addAchievement('Why Can\'t I Make a Diamond Shovel?', 'Dig up 100 items in the Underground.', new UndergroundItemsFoundRequirement(100), 0.08);
+        AchievementHandler.addAchievement('This Is Definitely Not Minecraft', 'Dig up 1,000 items in the Underground.', new UndergroundItemsFoundRequirement(1000), 0.1);
+        AchievementHandler.addAchievement('I Wonder How Much Is Down There...', 'Dig up 10,000 items in the Underground.', new UndergroundItemsFoundRequirement(10000), 0.4);
+
+        AchievementHandler.addAchievement('The Earth Is Like Onions', 'Dig deeper into the Underground 1 time.', new UndergroundLayersMinedRequirement(1), 0.01);
+        AchievementHandler.addAchievement('This Takes Foreverrrrrrr', 'Dig deeper into the Underground 10 times.', new UndergroundLayersMinedRequirement(10), 0.03);
+        AchievementHandler.addAchievement('DigDug Ain\'t Got Nothin\' on Me', 'Dig deeper into the Underground 100 times.', new UndergroundLayersMinedRequirement(100), 0.1);
+        AchievementHandler.addAchievement('Both My Thumbs Are Green! This Can\'t Be Healthy', 'Dig deeper into the Underground 1,000 times.', new UndergroundLayersMinedRequirement(1000), 0.3);
+
+        AchievementHandler.addAchievement('Let\'s Try This Out', 'Obtain your first Protein.', new ProteinObtainRequirement(1), 0.01);
+        AchievementHandler.addAchievement('Pre-Workout Supplements', 'Obtain 5 Proteins.', new ProteinObtainRequirement(5), 0.02);
+        AchievementHandler.addAchievement('Well-Stocked Medicine Cabinet', 'Obtain 10 Proteins.', new ProteinObtainRequirement(10), 0.04);
+        AchievementHandler.addAchievement('I Can\'t Hold All These Proteins!', 'Obtain 50 Proteins.', new ProteinObtainRequirement(50), 0.08);
+        AchievementHandler.addAchievement('Essential Nutrients', 'Obtain 100 Proteins.', new ProteinObtainRequirement(100), 0.10);
+        AchievementHandler.addAchievement('Putting the \'Bulk\' in Bulk-Buy', 'Obtain 500 Proteins.', new ProteinObtainRequirement(500), 0.15);
+        AchievementHandler.addAchievement('Protein Stockpile', 'Obtain 1,000 Proteins.', new ProteinObtainRequirement(1000), 0.20);
+        AchievementHandler.addAchievement('Fish, Eggs, Nuts, and Cheese', 'Obtain 5,000 Proteins.', new ProteinObtainRequirement(5000), 0.35);
+        AchievementHandler.addAchievement('Does This Powder Come With Flavours?', 'Obtain 10,000 Proteins.', new ProteinObtainRequirement(10000), 0.50);
+        AchievementHandler.addAchievement('A Literal Mountain of Muscle', 'Obtain 50,000 Proteins.', new ProteinObtainRequirement(50000), 0.70);
 
         AchievementHandler.addAchievement('Fighting Novice', 'Complete stage 100 in the Battle Frontier.', new BattleFrontierHighestStageRequirement(100), 0.05);
         AchievementHandler.addAchievement('Competent Fighter', 'Complete stage 250 in the Battle Frontier.', new BattleFrontierHighestStageRequirement(250), 0.15);
@@ -351,24 +369,6 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Need More Battle Points', 'Complete 5,000 total stages in the Battle Frontier.', new BattleFrontierTotalStageRequirement(5000), 0.4);
         AchievementHandler.addAchievement('I Can Do It This Time!', 'Complete 25,000 total stages in the Battle Frontier.', new BattleFrontierTotalStageRequirement(25000), 0.5);
         AchievementHandler.addAchievement('King of the Hill', 'Complete 100,000 total stages in the Battle Frontier.', new BattleFrontierTotalStageRequirement(100000), 0.7);
-
-        AchievementHandler.addAchievement('Let\'s Try This Out', 'Obtain your first Protein.', new ProteinObtainRequirement(1), 0.01);
-        AchievementHandler.addAchievement('Pre-Workout Supplements', 'Obtain 5 Proteins.', new ProteinObtainRequirement(5), 0.02);
-        AchievementHandler.addAchievement('Well-Stocked Medicine Cabinet', 'Obtain 10 Proteins.', new ProteinObtainRequirement(10), 0.04);
-        AchievementHandler.addAchievement('I Can\'t Hold All These Proteins!', 'Obtain 50 Proteins.', new ProteinObtainRequirement(50), 0.08);
-        AchievementHandler.addAchievement('Essential Nutrients', 'Obtain 100 Proteins.', new ProteinObtainRequirement(100), 0.10);
-        AchievementHandler.addAchievement('Putting the \'Bulk\' in Bulk-Buy', 'Obtain 500 Proteins.', new ProteinObtainRequirement(500), 0.15);
-        AchievementHandler.addAchievement('Protein Stockpile', 'Obtain 1,000 Proteins.', new ProteinObtainRequirement(1000), 0.20);
-        AchievementHandler.addAchievement('Fish, Eggs, Nuts, and Cheese', 'Obtain 5,000 Proteins.', new ProteinObtainRequirement(5000), 0.35);
-        AchievementHandler.addAchievement('Does This Powder Come With Flavours?', 'Obtain 10,000 Proteins.', new ProteinObtainRequirement(10000), 0.50);
-        AchievementHandler.addAchievement('A Literal Mountain of Muscle', 'Obtain 50,000 Proteins.', new ProteinObtainRequirement(50000), 0.70);
-
-        AchievementHandler.addAchievement('Some Nice Help for the Day Care', 'Unlock 5 Hatchery Helpers.', new HatcheryHelperRequirement(5, 0), 0.1);
-        AchievementHandler.addAchievement('Why Do They Have To Work in Shifts?', 'Unlock all 11 Hatchery Helpers.', new HatcheryHelperRequirement(11, 0), 0.3);
-        AchievementHandler.addAchievement('My Loyal Helpers', 'Get 3 Hatchery Helpers to 10% bonus efficiency.', new HatcheryHelperRequirement(3, 10), 0.4);
-        AchievementHandler.addAchievement('Let\'s Try Some Other Helpers Too?', 'Get 5 Hatchery Helpers to 10% bonus efficiency.', new HatcheryHelperRequirement(5, 10), 0.5);
-        AchievementHandler.addAchievement('Sam Just Wants To Help', 'Get 10 Hatchery Helpers to 10% bonus efficiency.', new HatcheryHelperRequirement(10, 10), 1);
-        AchievementHandler.addAchievement('When Are You Going to Breed Yourself?', 'Get 10 Hatchery Helpers to 25% bonus efficiency.', new HatcheryHelperRequirement(10, 25), 1.3);
 
         AchievementHandler.addAchievement('I Hope It\'s Not Dangerous', 'Infect 20 Pokémon with Pokérus.', new PokerusStatusRequirement(20, GameConstants.Pokerus.Infected), 0.1);
         AchievementHandler.addAchievement('Any Way To Get Rid of It?', 'Infect 50 Pokémon with Pokérus.', new PokerusStatusRequirement(50, GameConstants.Pokerus.Infected), 0.2);
