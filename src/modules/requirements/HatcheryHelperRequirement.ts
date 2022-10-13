@@ -3,7 +3,7 @@ import AchievementRequirement from './AchievementRequirement';
 
 export default class HatcheryHelperRequirement extends AchievementRequirement {
     constructor(helpersUnlocked: number, private bonusRequired: number) {
-        super(helpersUnlocked, GameConstants.AchievementOption.more, GameConstants.AchievementType.Hatch);
+        super(helpersUnlocked, GameConstants.AchievementOption.more, GameConstants.AchievementType.Hatchery);
     }
 
     public getProgress() {
@@ -11,6 +11,6 @@ export default class HatcheryHelperRequirement extends AchievementRequirement {
     }
 
     public hint(): string {
-        return `${this.requiredValue} Hatchery helpers need at least ${this.bonusRequired} bonus.`;
+        return `${this.requiredValue} Hatchery Helpers need at least ${this.bonusRequired} bonus.`;
     }
 }
