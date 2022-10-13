@@ -485,7 +485,7 @@ TemporaryBattleList['Kimono Girls'] = new TemporaryBattle(
         new GymPokemon('Jolteon', 660000, 40),
         new GymPokemon('Vaporeon', 660000, 40),
     ],
-    'You have beautifully proven that the bond between people can be extended to the bond between people and Pokémon. We all appreciate that you have lived up to our expectations. This Clear Bell will signal to Ho-oh that you are worthy of its attentions.',
+    'You have beautifully proven that the bond between people can be extended to the bond between people and Pokémon. We all appreciate that you have lived up to our expectations. This Clear Bell will signal to Ho-Oh that you are worthy of its attentions.',
     [new QuestLineStepCompletedRequirement('Rainbow Guardian', 0)],
     undefined,
     {
