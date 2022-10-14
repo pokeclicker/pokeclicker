@@ -660,3 +660,37 @@ td.tight {
   top: 3px;
   background-color: #fff;
 }
+
+/* Checkbox Toggles - Gender*/
+.gender-toggle.toggler-wrapper .toggler-knob:after {
+  content: 'M';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  font-size: 65%;
+  text-transform: uppercase;
+  color: black;
+}
+.gender-toggle.toggler-wrapper .toggler-slider{
+  background-color: #499FFF;
+}
+
+.gender-toggle.toggler-wrapper.style-1 input[type="checkbox"]:checked+.toggler-slider .toggler-knob:after {
+  content: 'F';
+}
+.gender-toggle.toggler-wrapper input[type="checkbox"]:checked+.toggler-slider {
+  background-color: #F6807A;
+}
+
+/* Gender Icons */
+.gender-icon-female{
+  color:#F6807A;
+}
+.gender-icon-male{
+  color:#499FFF;
+}
+i[class*="gender-icon-"] {
+  font-size: 24px;
+}
