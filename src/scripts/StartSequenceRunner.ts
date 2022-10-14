@@ -17,7 +17,7 @@ class StartSequenceRunner {
         $('#pickStarterTutorialModal').modal('hide');
         const dataPokemon = PokemonHelper.getPokemonByName(GameConstants.Starter[this.starterPicked]);
         const shiny: boolean = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
-        const gender = PokemonFactory.generateGender(dataPokemon.gender.ratio, dataPokemon.gender.type);
+        const gender = PokemonFactory.generateGender(dataPokemon.gender.femaleRatio, dataPokemon.gender.type);
 
         App.game.gameState = GameConstants.GameState.fighting;
 

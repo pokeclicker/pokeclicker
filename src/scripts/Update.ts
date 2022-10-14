@@ -1317,7 +1317,7 @@ class Update implements Saveable {
                 let shinyHatchedStatistic = saveData.statistics.shinyPokemonHatched[pokemon.id] || 0;
                 
                 if (pokemonMap[pokemon.id].gender.type == GameConstants.Genders.MaleFemale) { // No genderless
-                    if (pokemonMap[pokemon.id].gender.ratio != 1) { // Anything but female-only
+                    if (pokemonMap[pokemon.id].gender.femaleRatio != 1) { // Anything but female-only
                         saveData.statistics.malePokemonCaptured[pokemon.id] = capturedStatistic;
                         saveData.statistics.malePokemonDefeated[pokemon.id] = defeatedStatistic;
                         saveData.statistics.malePokemonEncountered[pokemon.id] = encounteredStatistic;

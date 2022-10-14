@@ -173,7 +173,7 @@ class PokedexHelper {
     // Gender ratio
     public static getGenderRatioData(pokemon) {
         const genderType = pokemon.gender.type;
-        const genderRatio = pokemon.gender.ratio;
+        const genderRatio = pokemon.gender.femaleRatio;
         const genderObject = {'male': 0, 'female': 0};
         // console.log(pokemon);
         genderObject.male = 100 - (100 * genderRatio);

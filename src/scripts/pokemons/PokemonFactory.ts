@@ -60,7 +60,7 @@ class PokemonFactory {
             App.game.logbook.newLog(LogBookTypes.ROAMER, `[${Routes.getRoute(player.region, player.route()).routeName}] You encountered a ${shiny ? 'shiny' : ''} roaming ${name}!`);
         }
         const ep = GameConstants.BASE_EP_YIELD * (roaming ? GameConstants.ROAMER_EP_MODIFIER : 1);
-        const gender = this.generateGender(basePokemon.gender.ratio, basePokemon.gender.type);
+        const gender = this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
         return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, 1, gender, heldItem, ep);
     }
 
@@ -127,7 +127,7 @@ class PokemonFactory {
 
         const exp: number = basePokemon.exp;
         const shiny = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
-        const gender = this.generateGender(basePokemon.gender.ratio, basePokemon.gender.type);
+        const gender = this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
         return new BattlePokemon(pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, 0, exp, new Amount(0, GameConstants.Currency.money), shiny, GameConstants.GYM_GEMS, gender);
     }
 
@@ -154,7 +154,7 @@ class PokemonFactory {
         }
 
         const ep = GameConstants.BASE_EP_YIELD * GameConstants.DUNGEON_EP_MODIFIER;
-        const gender = this.generateGender(basePokemon.gender.ratio, basePokemon.gender.type);
+        const gender = this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
         return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, GameConstants.DUNGEON_GEMS, gender, heldItem, ep);
     }
 
@@ -167,7 +167,7 @@ class PokemonFactory {
         const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_DUNGEON);
         // Reward 2% or 5% (boss) of dungeon DT cost when the trainer mons are defeated
         const money = 0;
-        const gender = this.generateGender(basePokemon.gender.ratio, basePokemon.gender.type);
+        const gender = this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
         return new BattlePokemon(name, basePokemon.id, basePokemon.type1, basePokemon.type2, maxHealth, level, 0, exp, new Amount(money, GameConstants.Currency.money), shiny, GameConstants.DUNGEON_GEMS, gender);
     }
 
@@ -194,7 +194,7 @@ class PokemonFactory {
                 Math.floor(App.game.statistics.totalPokemonEncountered() / App.game.statistics.totalShinyPokemonEncountered()));
         }
         const ep = GameConstants.BASE_EP_YIELD * GameConstants.DUNGEON_BOSS_EP_MODIFIER;
-        const gender = this.generateGender(basePokemon.gender.ratio, basePokemon.gender.type);
+        const gender = this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
         return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, bossPokemon.level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, GameConstants.DUNGEON_BOSS_GEMS, gender, heldItem, ep);
     }
 
@@ -205,7 +205,7 @@ class PokemonFactory {
 
         const exp: number = basePokemon.exp;
         const shiny = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
-        const gender = this.generateGender(basePokemon.gender.ratio, basePokemon.gender.type);
+        const gender = this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
         return new BattlePokemon(pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, catchRate, exp, new Amount(0, GameConstants.Currency.money), shiny, GameConstants.GYM_GEMS, gender);
     }
 
@@ -305,7 +305,7 @@ class PokemonFactory {
      */
     public static generateGenderById(id) {
         const pokemon = PokemonHelper.getPokemonById(id);
-        return this.generateGender(pokemon.gender.ratio, pokemon.gender.type);
+        return this.generateGender(pokemon.gender.femaleRatio, pokemon.gender.type);
     }
 
     /**
