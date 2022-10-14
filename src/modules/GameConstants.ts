@@ -1583,15 +1583,6 @@ export enum Genders {
     MaleFemale, // Default
 }
 
-// Gender Ratio
-export const FEMALE_0 = 0;
-export const FEMALE_12_5 = 0.125;
-export const FEMALE_25 = 0.25;
-export const FEMALE_50 = 0.5; // Default
-export const FEMALE_75 = 0.75;
-export const FEMALE_87_5 = 0.875;
-export const FEMALE_100 = 1;
-
 // Wild/Trainer/BF Pokémon Gender
 export enum BattlePokemonGender {
     NoGender = 0,

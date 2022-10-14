@@ -612,15 +612,6 @@ namespace GameConstants {
         MaleFemale,
     }
 
-    // Gender Ratio
-    declare const FEMALE_0;
-    declare const FEMALE_12_5;
-    declare const FEMALE_25;
-    declare const FEMALE_50;
-    declare const FEMALE_75;
-    declare const FEMALE_87_5;
-    declare const FEMALE_100;
-
     // Current Pokémon Gender
     declare enum BattlePokemonGender {
         NoGender,

@@ -80,6 +80,7 @@ class PokemonHelper {
         if (gender === undefined) {
             gender = App.game.party.getPokemon(pokemonId).defaultFemaleSprite();
         }
+        
         if (shiny) {
             src += 'shiny';
         }
