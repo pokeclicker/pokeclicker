@@ -22,15 +22,44 @@ class DreamOrbController implements Saveable {
 
     public orbs = [
         new DreamOrb('Pink', undefined, [
-            new DreamOrbLoot({type: ItemType.item, id: 'Tornadus (Therian)'}, 0.01),
-            new DreamOrbLoot({type: ItemType.underground, id: 'Red Shard'}, 0.01),
+            new DreamOrbLoot({type: ItemType.item, id: 'Shuckle'}, 0.125),
+            new DreamOrbLoot({type: ItemType.item, id: 'Swablu'}, 0.125),
+            new DreamOrbLoot({type: ItemType.item, id: 'Riolu'}, 0.125),
+            new DreamOrbLoot({type: ItemType.item, id: 'Munna'}, 0.125),
+            new DreamOrbLoot({type: ItemType.item, id: 'Tornadus (Therian)'}, 0.075),
+            new DreamOrbLoot({type: ItemType.underground, id: 'Sun Stone'}, 0.15),
+            new DreamOrbLoot({type: ItemType.underground, id: 'Water Stone'}, 0.15),
+            new DreamOrbLoot({type: ItemType.underground, id: 'Revive'}, 0.125),
+
         ]),
         new DreamOrb('Green', new ObtainedPokemonRequirement(pokemonMap['Tornadus (Therian)']), [
-            new DreamOrbLoot({type: ItemType.item, id: 'Thundurus (Therian)'}, 0.01),
-            new DreamOrbLoot({type: ItemType.underground, id: 'Moon Stone'}, 0.01),
+            new DreamOrbLoot({type: ItemType.item, id: 'Drifloon'}, 0.15),
+            new DreamOrbLoot({type: ItemType.item, id: 'Bronzor'}, 0.15),
+            new DreamOrbLoot({type: ItemType.item, id: 'Sigilyph'}, 0.125),
+            new DreamOrbLoot({type: ItemType.item, id: 'Thundurus (Therian)'}, 0.075),
+            new DreamOrbLoot({type: ItemType.underground, id: 'Red Shard'}, 0.125),
+            new DreamOrbLoot({type: ItemType.underground, id: 'Blue Shard'}, 0.125),
+            new DreamOrbLoot({type: ItemType.underground, id: 'Yellow Shard'}, 0.125),
+            new DreamOrbLoot({type: ItemType.underground, id: 'Green Shard'}, 0.125),
         ]),
-        new DreamOrb('Orange', new ObtainedPokemonRequirement(pokemonMap['Landorus (Therian)']), [new DreamOrbLoot({type: ItemType.item, id: 'Landorus (Therian)'}, 0.01)]),
+        new DreamOrb('Orange', new ObtainedPokemonRequirement(pokemonMap['Thundurus (Therian)']), [
+
+            new DreamOrbLoot({type: ItemType.item, id: 'Staryu'}, 0.133),
+            new DreamOrbLoot({type: ItemType.item, id: 'Ralts'}, 0.133),
+            new DreamOrbLoot({type: ItemType.item, id: 'Rotom'}, 0.134),
+            new DreamOrbLoot({type: ItemType.item, id: 'Landorus (Therian)'}, 0.075),
+            new DreamOrbLoot({type: ItemType.underground, id: 'Fire Stone'}, 0.25),
+            new DreamOrbLoot({type: ItemType.item, id: 'RareCandy'}, 0.275),
+        ]),
         //new DreamOrb('Blue', new ObtainedPokemonRequirement(pokemonMap['Enamorus (Therian)']), [new DreamOrbLoot({type: ItemType.item, id: 'Enamorus (Therian)'}, 0.01)]),
+        //new DreamOrbLoot({type: ItemType.item, id: 'Igglybuff'}, 0.2),
+        //new DreamOrbLoot({type: ItemType.item, id: 'Smoochum'}, 0.2),
+        //new DreamOrbLoot({type: ItemType.item, id: 'Enamorus (Therian)'}, 0.075),
+        //new DreamOrbLoot({type: ItemType.underground, id: 'Moon Stone'}, 0.1),
+        //new DreamOrbLoot({type: ItemType.underground, id: 'Leaf Stone'}, 0.1),
+        //new DreamOrbLoot({type: ItemType.underground, id: 'Thunder Stone'}, 0.1),
+        //new DreamOrbLoot({type: ItemType.underground, id: 'Heart Scale'}, 0.125),
+        //new DreamOrbLoot({type: ItemType.underground, id: 'Max Revive'}, 0.1),
     ]
 
     public open() {
