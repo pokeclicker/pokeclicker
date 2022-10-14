@@ -3,7 +3,7 @@ import AchievementRequirement from './AchievementRequirement';
 
 export default class PokerusStatusRequirement extends AchievementRequirement {
     constructor(pokemonRequired: number, private statusRequired: GameConstants.Pokerus) {
-        super(pokemonRequired, GameConstants.AchievementOption.more, GameConstants.AchievementType.Pokérus);
+        super(pokemonRequired, GameConstants.AchievementOption.more, GameConstants.AchievementType.Pokerus);
     }
 
     public getProgress() {
