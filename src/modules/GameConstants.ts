@@ -1577,6 +1577,25 @@ export enum GalarSubRegions {
     CrownTundra,
 }
 
+// Gender Types
+export enum Genders {
+    Genderless = 0,
+    MaleFemale, // Default
+}
+
+// Wild/Trainer/BF Pokémon Gender
+export enum BattlePokemonGender {
+    NoGender = 0,
+    Male,
+    Female,
+}
+
+// Pokemon Statistics
+export const STATISTIC_CAPTURED = 'Captured';
+export const STATISTIC_DEFEATED = 'Defeated';
+export const STATISTIC_ENCOUNTERED = 'Encountered';
+export const STATISTIC_HATCHED = 'Hatched';
+
 export enum AlcremieSweet {
     'Strawberry Sweet',
     'Love Sweet',

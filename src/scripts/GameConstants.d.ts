@@ -606,6 +606,24 @@ namespace GameConstants {
         CrownTundra,
     }
 
+    // Gender Types
+    declare enum Genders {
+        Genderless,
+        MaleFemale,
+    }
+
+    // Current Pokémon Gender
+    declare enum BattlePokemonGender {
+        NoGender,
+        Male,
+        Female,
+    }
+
+    // Pokemon Statistics
+    declare const STATISTIC_CAPTURED;
+    declare const STATISTIC_DEFEATED;
+    declare const STATISTIC_ENCOUNTERED;
+    declare const STATISTIC_HATCHED;
 
     declare enum AlcremieSweet {
         'Strawberry Sweet',
