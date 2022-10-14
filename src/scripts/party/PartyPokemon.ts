@@ -68,8 +68,17 @@ class PartyPokemon implements Saveable {
             return Math.floor(this.effortPoints / GameConstants.EP_EV_RATIO / power);
         });
         this.evs.subscribe((newValue) => {
+            // Change Pokerus status to Resistant when reaching 50 EVs
             if (this.pokerus && this.pokerus < GameConstants.Pokerus.Resistant && newValue >= 50) {
                 this.pokerus = GameConstants.Pokerus.Resistant;
+
+                // Log and notify player
+                Notifier.notify({
+                    message: `${this.name} has become Resistant to Pokérus.`,
+                    type: NotificationConstants.NotificationOption.info,
+                    setting: NotificationConstants.NotificationSetting.General.pokerus,
+                });
+                App.game.logbook.newLog(LogBookTypes.NEW, `${this.name} has become Resistant to Pokérus.`);
             }
         });
         this._attack = ko.pureComputed(() => this.calculateAttack());
