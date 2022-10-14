@@ -29,6 +29,8 @@ class DreamOrbController implements Saveable {
             new DreamOrbLoot({type: ItemType.item, id: 'Thundurus (Therian)'}, 0.01),
             new DreamOrbLoot({type: ItemType.underground, id: 'Moon Stone'}, 0.01),
         ]),
+        new DreamOrb('Orange', new ObtainedPokemonRequirement(pokemonMap['Landorus (Therian)']), [new DreamOrbLoot({type: ItemType.item, id: 'Landorus (Therian)'}, 0.01)]),
+        //new DreamOrb('Blue', new ObtainedPokemonRequirement(pokemonMap['Enamorus (Therian)']), [new DreamOrbLoot({type: ItemType.item, id: 'Enamorus (Therian)'}, 0.01)]),
     ]
 
     public open() {

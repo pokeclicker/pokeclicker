@@ -178,6 +178,7 @@ export const SpriteCredits: Credit[] = [
             'Danny',
             'Dracovish shop image',
             'Dracozolt shop image',
+            'Dream Orbs',
             'Dungeon Ladder',
             'Galar fossils items',
             'Galarica cuff and wreath icons',
