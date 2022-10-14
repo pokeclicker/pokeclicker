@@ -1928,7 +1928,7 @@ const SCEntrance = new NPC('Strange Markings', [
 
 const MazeHintLeft = new NPC('Room Engraving', [
     '<i>These strange markings seem to spell something out. The nearby Braille Enthusiast may know more.</i>',
-], {image: 'assets/images/npcs/Left.png',
+], {image: 'assets/images/npcs/LeftBraille.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Three Golems', 1), new QuestLineStepCompletedRequirement('The Three Golems', 3, GameConstants.AchievementOption.less)]),
 });
 
@@ -1944,7 +1944,7 @@ const SCMazeLeftWrong = new NPC('Go Left', [
 
 const MazeHintRight = new NPC('Room Engraving', [
     '<i>These strange markings seem to spell something out. The nearby Braille Enthusiast may know more.</i>',
-], {image: 'assets/images/npcs/Right.png',
+], {image: 'assets/images/npcs/RightBraille.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Three Golems', 5), new QuestLineStepCompletedRequirement('The Three Golems', 6, GameConstants.AchievementOption.less)]),
 });
 
@@ -1960,7 +1960,7 @@ const SCMazeRightWrong = new NPC('Go Right', [
 
 const MazeHintStraight = new NPC('Room Engraving', [
     '<i>These strange markings seem to spell something out. The nearby Braille Enthusiast may know more.</i>',
-], {image: 'assets/images/npcs/Straight.png',
+], {image: 'assets/images/npcs/StraightBraille.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Three Golems', 3), new QuestLineStepCompletedRequirement('The Three Golems', 5, GameConstants.AchievementOption.less)]),
 });
 
