@@ -1,9 +1,9 @@
 <script type="text/html" id="pokemonGenderTemplate">
-    <!-- ko if: $data.pokemon.gender == GameConstants.BattlePokemonGender.GenderMale -->
+    <!-- ko if: $data.pokemon.gender == GameConstants.BattlePokemonGender.Male -->
     <knockout data-bind="html: `<i class='gender-icon-male'>♂</i>`"></knockout>
     <!-- /ko -->
 
-    <!-- ko if: $data.pokemon.gender == GameConstants.BattlePokemonGender.GenderFemale -->
+    <!-- ko if: $data.pokemon.gender == GameConstants.BattlePokemonGender.Female -->
     <knockout data-bind="html: `<i class='gender-icon-female'>♀</i>`"></knockout>
     <!-- /ko -->
 </script>

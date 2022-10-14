@@ -80,7 +80,7 @@ class PokemonHelper {
         if (gender === undefined) {
             gender = App.game.party.getPokemon(pokemonId).defaultFemaleSprite();
         }
-        
+
         if (shiny) {
             src += 'shiny';
         }
@@ -187,9 +187,9 @@ class PokemonHelper {
         };
         let genderString = '';
         // Gender Statistics
-        if (gender === GameConstants.BattlePokemonGender.GenderMale) {
+        if (gender === GameConstants.BattlePokemonGender.Male) {
             genderString = 'Male';
-        } else if (gender === GameConstants.BattlePokemonGender.GenderFemale) {
+        } else if (gender === GameConstants.BattlePokemonGender.Female) {
             genderString = 'Female';
         } else if (gender === GameConstants.BattlePokemonGender.NoGender) {
             genderString = 'Genderless';

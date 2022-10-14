@@ -322,9 +322,9 @@ class PokemonFactory {
                 break;
             case GameConstants.Genders.MaleFemale:
                 if (Rand.chance(chance)) { // Female
-                    gender = GameConstants.BattlePokemonGender.GenderFemale;
+                    gender = GameConstants.BattlePokemonGender.Female;
                 } else { // Male
-                    gender = GameConstants.BattlePokemonGender.GenderMale;
+                    gender = GameConstants.BattlePokemonGender.Male;
                 }
                 break;
             default:

@@ -1586,8 +1586,8 @@ export enum Genders {
 // Wild/Trainer/BF Pokémon Gender
 export enum BattlePokemonGender {
     NoGender = 0,
-    GenderMale,
-    GenderFemale,
+    Male,
+    Female,
 }
 
 // Pokemon Statistics

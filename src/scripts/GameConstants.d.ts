@@ -615,8 +615,8 @@ namespace GameConstants {
     // Current Pokémon Gender
     declare enum BattlePokemonGender {
         NoGender,
-        GenderMale,
-        GenderFemale,
+        Male,
+        Female,
     }
 
     // Pokemon Statistics
