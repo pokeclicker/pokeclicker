@@ -3,7 +3,6 @@ import TypeColor = GameConstants.TypeColor;
 class PokedexHelper {
     public static toggleStatisticShiny = ko.observable(true);
     public static hideShinyImages = ko.observable(false);
-    public static showFemaleImages = ko.observable(false);
 
     public static getBackgroundColors(name: PokemonNameType): string {
         const pokemon = PokemonHelper.getPokemonByName(name);
@@ -154,11 +153,6 @@ class PokedexHelper {
                 return false;
             }
 
-            // Only pokemon with gender differences
-            if (filter['gender-diff'] && !(pokemon as PokemonListData).gender.visualDifference) {
-                return false;
-            }
-
             return true;
         });
     }
@@ -173,7 +167,6 @@ class PokedexHelper {
         res['status-pokerus'] = $('#pokedex-filter-pokerus-status').val();
         res['held-item'] = $('#pokedex-filter-held-item').is(':checked');
         res['hide-alternate'] = $('#pokedex-filter-hide-alternate').is(':checked');
-        res['gender-diff'] = $('#pokedex-filter-gender-diff').is(':checked');
         return res;
     }
 
