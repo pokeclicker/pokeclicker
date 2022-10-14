@@ -12,14 +12,21 @@ class PokemonItem extends CaughtIndicatingItem {
     gain(amt: number) {
         let shiny = false;
         let numShiny = 0;
+        const pokemonName = this.name as PokemonNameType;
+        const pokemonID = PokemonHelper.getPokemonByName(pokemonName).id;
         for (let i = 0; i < amt; i++) {
             const shinyBool = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SHOP);
             if (shinyBool) {
                 numShiny++;
             }
             shiny = shiny || shinyBool;
+
+            // Statistics
+            if (i < amt - 1) { // -1 because gainPokemonById will add 1 to statistics
+                const gender = PokemonFactory.generateGenderById(pokemonID);
+                PokemonHelper.incrementPokemonStatistics(pokemonID, GameConstants.STATISTIC_CAPTURED, shinyBool, gender);
+            }
         }
-        const pokemonName = this.name as PokemonNameType;
 
         if (shiny || !App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(pokemonName).id)) {
             Notifier.notify({
@@ -33,7 +40,6 @@ class PokemonItem extends CaughtIndicatingItem {
             App.game.logbook.newLog(LogBookTypes.SHINY, `The purchased ${pokemonName} turned out to be shiny! ${App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(pokemonName).id, true) ? '(duplicate)' : ''}`);
         }
 
-        const pokemonID = PokemonHelper.getPokemonByName(pokemonName).id;
         App.game.party.gainPokemonById(pokemonID, shiny, true);
 
         const partyPokemon = App.game.party.getPokemon(pokemonID);
