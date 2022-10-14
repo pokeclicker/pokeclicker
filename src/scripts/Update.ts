@@ -1307,15 +1307,15 @@ class Update implements Saveable {
 
             // Assign generic Pokemon statistics to the gendered Pokemon ones
             saveData.party.caughtPokemon?.forEach(pokemon => {
-                let capturedStatistic = saveData.statistics.pokemonCaptured[pokemon.id] || 0;
-                let defeatedStatistic = saveData.statistics.pokemonDefeated[pokemon.id] || 0;
-                let encounteredStatistic = saveData.statistics.pokemonEncountered[pokemon.id] || 0;
-                let hatchedStatistic = saveData.statistics.pokemonHatched[pokemon.id] || 0;
-                let shinyCapturedStatistic = saveData.statistics.shinyPokemonCaptured[pokemon.id] || 0;
-                let shinyDefeatedStatistic = saveData.statistics.shinyPokemonDefeated[pokemon.id] || 0;
-                let shinyEncounteredStatistic = saveData.statistics.shinyPokemonEncountered[pokemon.id] || 0;
-                let shinyHatchedStatistic = saveData.statistics.shinyPokemonHatched[pokemon.id] || 0;
-                
+                const capturedStatistic = saveData.statistics.pokemonCaptured[pokemon.id] || 0;
+                const defeatedStatistic = saveData.statistics.pokemonDefeated[pokemon.id] || 0;
+                const encounteredStatistic = saveData.statistics.pokemonEncountered[pokemon.id] || 0;
+                const hatchedStatistic = saveData.statistics.pokemonHatched[pokemon.id] || 0;
+                const shinyCapturedStatistic = saveData.statistics.shinyPokemonCaptured[pokemon.id] || 0;
+                const shinyDefeatedStatistic = saveData.statistics.shinyPokemonDefeated[pokemon.id] || 0;
+                const shinyEncounteredStatistic = saveData.statistics.shinyPokemonEncountered[pokemon.id] || 0;
+                const shinyHatchedStatistic = saveData.statistics.shinyPokemonHatched[pokemon.id] || 0;
+
                 if (pokemonMap[pokemon.id].gender.type == GameConstants.Genders.MaleFemale) { // No genderless
                     if (pokemonMap[pokemon.id].gender.femaleRatio != 1) { // Anything but female-only
                         saveData.statistics.malePokemonCaptured[pokemon.id] = capturedStatistic;
@@ -1338,8 +1338,7 @@ class Update implements Saveable {
                         saveData.statistics.totalShinyMalePokemonDefeated += shinyDefeatedStatistic;
                         saveData.statistics.totalShinyMalePokemonEncountered += shinyEncounteredStatistic;
                         saveData.statistics.totalShinyMalePokemonHatched += shinyHatchedStatistic;
-                    }
-                    else { // Female-only
+                    } else { // Female-only
                         saveData.statistics.femalePokemonCaptured[pokemon.id] = capturedStatistic;
                         saveData.statistics.femalePokemonDefeated[pokemon.id] = defeatedStatistic;
                         saveData.statistics.femalePokemonEncountered[pokemon.id] = encounteredStatistic;
@@ -1361,8 +1360,7 @@ class Update implements Saveable {
                         saveData.statistics.totalShinyFemalePokemonEncountered += shinyEncounteredStatistic;
                         saveData.statistics.totalShinyFemalePokemonHatched += shinyHatchedStatistic;
                     }
-                }
-                else { // Genderless
+                } else { // Genderless
                     // Assign the generic total ones to the genderless ones
                     saveData.statistics.totalGenderlessPokemonCaptured += capturedStatistic;
                     saveData.statistics.totalGenderlessPokemonDefeated += defeatedStatistic;
