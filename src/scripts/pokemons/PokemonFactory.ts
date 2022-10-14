@@ -154,8 +154,6 @@ class PokemonFactory {
             LogEvent('encountered shiny', 'shiny pokemon', 'dungeon encounter',
                 Math.floor(App.game.statistics.totalPokemonEncountered() / App.game.statistics.totalShinyPokemonEncountered()));
         }
-
-        const ep = GameConstants.BASE_EP_YIELD * GameConstants.DUNGEON_EP_MODIFIER;
         const gender = this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
         return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, GameConstants.DUNGEON_GEMS, gender, heldItem, ep);
     }
@@ -197,7 +195,6 @@ class PokemonFactory {
             LogEvent('encountered shiny', 'shiny pokemon', 'dungeon boss encounter',
                 Math.floor(App.game.statistics.totalPokemonEncountered() / App.game.statistics.totalShinyPokemonEncountered()));
         }
-        const ep = GameConstants.BASE_EP_YIELD * GameConstants.DUNGEON_BOSS_EP_MODIFIER;
         const gender = this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
         return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, bossPokemon.level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, GameConstants.DUNGEON_BOSS_GEMS, gender, heldItem, ep);
     }
