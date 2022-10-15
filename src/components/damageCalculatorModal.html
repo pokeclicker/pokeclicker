@@ -1,7 +1,7 @@
 <script type="text/html" id="damageDetailTemplate">
   <tr>
       <td>
-          <img class="smallImage" data-bind="attr:{ src: PokemonHelper.getImage($data, App.game.party.alreadyCaughtPokemon($data.id, true)) }" src=""/>
+          <img class="smallImage" data-bind="attr:{ src: PokemonHelper.getImage($data.id) }" src=""/>
       <td class="text-nowrap">
           <span data-bind="text: name">Name</span><sup data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)">✨</sup>
       </td>

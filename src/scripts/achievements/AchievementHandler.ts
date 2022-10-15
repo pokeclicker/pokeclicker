@@ -210,18 +210,6 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Farm Legend', 'Obtain 1,000,000 Farm Points.', new FarmPointsRequirement(1000000), 0.30);
         AchievementHandler.addAchievement('Farm Myth', 'Obtain 20,000,000 Farm Points.', new FarmPointsRequirement(20000000), 0.60);
 
-        AchievementHandler.addAchievement('First Team', 'Capture 100 Pokémon.', new CapturedRequirement(100), 0.05);
-        AchievementHandler.addAchievement('Filling the PC', 'Capture 1,000 Pokémon.', new CapturedRequirement(1000), 0.10);
-        AchievementHandler.addAchievement('Pokémon Army', 'Capture 10,000 Pokémon.', new CapturedRequirement(10000), 0.15);
-        AchievementHandler.addAchievement('Pokémon Collector', 'Capture 100,000 Pokémon.', new CapturedRequirement(100000), 0.25);
-        AchievementHandler.addAchievement('You Get a Pokémon, You Get a Pokémon, Everyone Gets a Pokémon!', 'Capture 1,000,000 Pokémon.', new CapturedRequirement(1000000), 0.50);
-
-        AchievementHandler.addAchievement('A Long Road Ahead', 'Defeat 100 Pokémon.', new DefeatedRequirement(100), 0.05);
-        AchievementHandler.addAchievement('Highway to Pallet Town', 'Defeat 1,000 Pokémon.', new DefeatedRequirement(1000), 0.10);
-        AchievementHandler.addAchievement('Overleveled', 'Defeat 10,000 Pokémon.', new DefeatedRequirement(10000), 0.15);
-        AchievementHandler.addAchievement('The Cake Is a Lie, but the Grind Is Real', 'Defeat 100,000 Pokémon.', new DefeatedRequirement(100000), 0.25);
-        AchievementHandler.addAchievement('Are There Any Left?', 'Defeat 1,000,000 Pokémon.', new DefeatedRequirement(1000000), 0.50);
-
         AchievementHandler.addAchievement('Startin\' Out', 'Capture your first Pokémon.', new CaughtPokemonRequirement(1), 0.01);
         AchievementHandler.addAchievement('Better Than Season 1 Ash', 'Capture 15 unique Pokémon.', new CaughtPokemonRequirement(15), 0.05);
         AchievementHandler.addAchievement('Wonderful! Do You Like To Collect Things?', 'Capture 50 unique Pokémon.', new CaughtPokemonRequirement(50), 0.10);
@@ -233,7 +221,7 @@ class AchievementHandler {
         AchievementHandler.addAchievement('These Pokémon Must Be Sick', 'Capture 10 unique Shiny Pokémon.', new ShinyPokemonRequirement(10), 0.06);
         AchievementHandler.addAchievement('Why Am I Doing This?', 'Capture 20 unique Shiny Pokémon.', new ShinyPokemonRequirement(20), 0.09);
         AchievementHandler.addAchievement('Why Am I Still Doing This?!', 'Capture 30 unique Shiny Pokémon.', new ShinyPokemonRequirement(30), 0.12);
-        AchievementHandler.addAchievement('Okay fine, I can do a few more', 'Capture 40 unique Shiny Pokémon.', new ShinyPokemonRequirement(40), 0.15);
+        AchievementHandler.addAchievement('Okay Fine, I Can Do a Few More', 'Capture 40 unique Shiny Pokémon.', new ShinyPokemonRequirement(40), 0.15);
         AchievementHandler.addAchievement('Where Did All the Shiny Pokémon Go?', 'Capture 50 unique Shiny Pokémon.', new ShinyPokemonRequirement(50), 0.30);
         AchievementHandler.addAchievement('Nvm, Found Some More', 'Capture 75 unique Shiny Pokémon.', new ShinyPokemonRequirement(75), 0.45);
         AchievementHandler.addAchievement('Just Keep Swimming Just Keep Swimming - Oooo Shiny!', 'Capture 100 unique Shiny Pokémon.', new ShinyPokemonRequirement(100), 0.60);
@@ -241,6 +229,18 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Will Need Sunglasses', 'Capture 250 unique Shiny Pokémon!', new ShinyPokemonRequirement(250), 1.20);
         AchievementHandler.addAchievement('What Were the Odds Again?', 'Capture 500 unique Shiny Pokémon!', new ShinyPokemonRequirement(500), 1.30);
         AchievementHandler.addAchievement('Non-Shiny Is Now Becoming Rare', 'Capture 1,000 unique Shiny Pokémon!', new ShinyPokemonRequirement(1000), 1.50);
+
+        AchievementHandler.addAchievement('First Team', 'Capture 100 Pokémon.', new CapturedRequirement(100), 0.05);
+        AchievementHandler.addAchievement('Filling the PC', 'Capture 1,000 Pokémon.', new CapturedRequirement(1000), 0.10);
+        AchievementHandler.addAchievement('Pokémon Army', 'Capture 10,000 Pokémon.', new CapturedRequirement(10000), 0.15);
+        AchievementHandler.addAchievement('Pokémon Collector', 'Capture 100,000 Pokémon.', new CapturedRequirement(100000), 0.25);
+        AchievementHandler.addAchievement('You Get a Pokémon, You Get a Pokémon, Everyone Gets a Pokémon!', 'Capture 1,000,000 Pokémon.', new CapturedRequirement(1000000), 0.50);
+
+        AchievementHandler.addAchievement('A Long Road Ahead', 'Defeat 100 Pokémon.', new DefeatedRequirement(100), 0.05);
+        AchievementHandler.addAchievement('Highway to Pallet Town', 'Defeat 1,000 Pokémon.', new DefeatedRequirement(1000), 0.10);
+        AchievementHandler.addAchievement('Overleveled', 'Defeat 10,000 Pokémon.', new DefeatedRequirement(10000), 0.15);
+        AchievementHandler.addAchievement('The Cake Is a Lie, but the Grind Is Real', 'Defeat 100,000 Pokémon.', new DefeatedRequirement(100000), 0.25);
+        AchievementHandler.addAchievement('Are There Any Left?', 'Defeat 1,000,000 Pokémon.', new DefeatedRequirement(1000000), 0.50);
 
         AchievementHandler.addAchievement('Basic Trainer', 'Have 100 Attack.', new AttackRequirement(100), 0.05);
         AchievementHandler.addAchievement('Improving', 'Have 1,000 Attack.', new AttackRequirement(1000), 0.10);
@@ -290,7 +290,7 @@ class AchievementHandler {
         AchievementHandler.addAchievement('I Just Love Green Coins', 'Complete 1,000 quests.', new QuestRequirement(1000), 0.4);
         AchievementHandler.addAchievement('I Want To Be Ready for the Next Region', 'Complete 5,000 quests.', new QuestRequirement(5000), 0.6);
 
-        AchievementHandler.addAchievement('Oh, an Other Quest Slot!', 'Reach Quest Level 5.', new QuestLevelRequirement(5), 0.2);
+        AchievementHandler.addAchievement('Oh, Another Quest Slot!', 'Reach Quest Level 5.', new QuestLevelRequirement(5), 0.2);
         AchievementHandler.addAchievement('I Am Getting Good at Questing!', 'Reach Quest Level 10.', new QuestLevelRequirement(10), 0.3);
         AchievementHandler.addAchievement('What Do I Gain From Leveling This?', 'Reach Quest Level 20.', new QuestLevelRequirement(20), 0.5);
         AchievementHandler.addAchievement('Quest Master', 'Reach Quest Level 30.', new QuestLevelRequirement(30), 0.8);
@@ -298,10 +298,10 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Is That How I Use This?', 'Level 1 Oak Item to the maximum level.', new MaxLevelOakItemRequirement(1), 0.05, GameConstants.ExtraAchievementCategories.global, () => !challenges.list.disableOakItems.active());
         AchievementHandler.addAchievement('I\'ve Got My Hands Full With All of These', 'Level 3 Oak Items to the maximum level.', new MaxLevelOakItemRequirement(3), 0.1, GameConstants.ExtraAchievementCategories.global, () => !challenges.list.disableOakItems.active());
         AchievementHandler.addAchievement('Professor Oak Is the Best!', 'Level 8 Oak Items to the maximum level.', new MaxLevelOakItemRequirement(8), 0.14, GameConstants.ExtraAchievementCategories.global, () => !challenges.list.disableOakItems.active());
-        AchievementHandler.addAchievement('Almost Prepared for Anything!', 'Level 11 Oak Items to the maximum level.', new MaxLevelOakItemRequirement(11), 0.18, GameConstants.ExtraAchievementCategories.global, () => !challenges.list.disableOakItems.active() && challenges.list.disableClickAttack.active());
+        AchievementHandler.addAchievement('Almost Prepared for Anything', 'Level 11 Oak Items to the maximum level.', new MaxLevelOakItemRequirement(11), 0.18, GameConstants.ExtraAchievementCategories.global, () => !challenges.list.disableOakItems.active() && challenges.list.disableClickAttack.active());
         AchievementHandler.addAchievement('Prepared for Anything!', 'Level all 12 Oak Items to the maximum level.', new MaxLevelOakItemRequirement(12), 0.18, GameConstants.ExtraAchievementCategories.global, () => !challenges.list.disableOakItems.active() && !challenges.list.disableClickAttack.active());
 
-        AchievementHandler.addAchievement('Pokémon Nursery', 'Hatch 1 egg.', new HatchRequirement(1), 0.01);
+        AchievementHandler.addAchievement('Pokémon Nursery', 'Hatch your first egg.', new HatchRequirement(1), 0.01);
         AchievementHandler.addAchievement('A Lot of Running', 'Hatch 10 eggs.', new HatchRequirement(10), 0.04);
         AchievementHandler.addAchievement('Marathon Runner', 'Hatch 100 eggs.', new HatchRequirement(100), 0.15);
         AchievementHandler.addAchievement('Egg Factory', 'Hatch 1,000 eggs.', new HatchRequirement(1000), 0.3);
@@ -335,13 +335,13 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Just Keep Trading!', 'Obtain 25,000 Diamonds.', new DiamondRequirement(25000), 0.4);
         AchievementHandler.addAchievement('Got All Upgrades Yet?', 'Obtain 100,000 Diamonds.', new DiamondRequirement(100000), 0.6);
 
-        AchievementHandler.addAchievement('Is My Thumb Green Yet?', 'Dig up 1 item in the Underground.', new UndergroundItemsFoundRequirement(1), 0.01);
+        AchievementHandler.addAchievement('Is My Thumb Green Yet?', 'Dig up an item in the Underground for the first time.', new UndergroundItemsFoundRequirement(1), 0.01);
         AchievementHandler.addAchievement('My Shovel Is Starting To Crack', 'Dig up 10 items in the Underground.', new UndergroundItemsFoundRequirement(10), 0.02);
         AchievementHandler.addAchievement('Why Can\'t I Make a Diamond Shovel?', 'Dig up 100 items in the Underground.', new UndergroundItemsFoundRequirement(100), 0.08);
         AchievementHandler.addAchievement('This Is Definitely Not Minecraft', 'Dig up 1,000 items in the Underground.', new UndergroundItemsFoundRequirement(1000), 0.1);
         AchievementHandler.addAchievement('I Wonder How Much Is Down There...', 'Dig up 10,000 items in the Underground.', new UndergroundItemsFoundRequirement(10000), 0.4);
 
-        AchievementHandler.addAchievement('The Earth Is Like Onions', 'Dig deeper into the Underground 1 time.', new UndergroundLayersMinedRequirement(1), 0.01);
+        AchievementHandler.addAchievement('The Earth Is Like Onions', 'Dig deeper into the Underground for the first time.', new UndergroundLayersMinedRequirement(1), 0.01);
         AchievementHandler.addAchievement('This Takes Foreverrrrrrr', 'Dig deeper into the Underground 10 times.', new UndergroundLayersMinedRequirement(10), 0.03);
         AchievementHandler.addAchievement('DigDug Ain\'t Got Nothin\' on Me', 'Dig deeper into the Underground 100 times.', new UndergroundLayersMinedRequirement(100), 0.1);
         AchievementHandler.addAchievement('Both My Thumbs Are Green! This Can\'t Be Healthy', 'Dig deeper into the Underground 1,000 times.', new UndergroundLayersMinedRequirement(1000), 0.3);

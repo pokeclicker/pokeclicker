@@ -36,7 +36,7 @@ class AttackBonusHeldItem extends HeldItem {
         displayName: string,
         public attackBonus: number,
         regionUnlocked: GameConstants.Region,
-        pokemonDescription = 'the pokémon',
+        pokemonDescription = 'the Pokémon',
         canUse = (pokemon: PartyPokemon) => true) {
         super(name, basePrice, currency, shopOptions, displayName, `A held item that raises the attack of ${pokemonDescription} by ${((attackBonus - 1) * 100).toFixed(0)}%.`, regionUnlocked, canUse);
     }
