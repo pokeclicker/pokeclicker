@@ -61,27 +61,13 @@
           <table width="100%">
               <tr>
                 <td width="50%">
-                    <span style="display: inline;">
-                        Pokémon Attack:
-                        <span data-bind="
-                            text: App.game.party.pokemonAttackObservable().toLocaleString('en-US'),
-                            tooltip: {
-                                title: Battle.enemyPokemon()
-                                    ? `${App.game.party.calculatePokemonAttack(
-                                        Battle.enemyPokemon().type1,
-                                        Battle.enemyPokemon().type2
-                                    ).toLocaleString('en-US')} against ${Battle.enemyPokemon().name}`
-                                    : '',
-                                trigger: 'hover',
-                            }
-                        "></span>
+                    <knockout data-bind="template: { name: 'pokemonAttackTemplate', data: { 'pokemon': Battle.enemyPokemon() } }"></knockout>
+                </td>
+                <td width="50%" data-bind="css: { 'text-muted': App.game.challenges.list.disableClickAttack.active() }">
+                    <span style="display: inline;">Click Attack:
+                        <span data-bind="text: App.game.party.calculateClickAttack().toLocaleString('en-US')"></span>
                     </span>
                 </td>
-                  <td width="50%" data-bind="css: { 'text-muted': App.game.challenges.list.disableClickAttack.active() }">
-                      <span style="display: inline;">Click Attack:
-                          <span data-bind="text: App.game.party.calculateClickAttack().toLocaleString('en-US')"></span>
-                      </span>
-                  </td>
               </tr>
           </table>
         </h2>

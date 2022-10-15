@@ -38,28 +38,9 @@
         <h2 class="pageItemFooter" style="display: block; font-size: 1rem;">
           <table width="100%">
               <tr>
-                  <td>
-                      <span style="display: inline;">
-                          Pokémon Attack:
-                          <span data-bind="
-                              text: App.game.party.calculatePokemonAttack(
-                                  PokemonType.None,
-                                  PokemonType.None,
-                                  true,
-                              ).toLocaleString('en-US'),
-                              tooltip: {
-                                  title: Battle.enemyPokemon()
-                                      ? `${App.game.party.calculatePokemonAttack(
-                                          Battle.enemyPokemon().type1,
-                                          Battle.enemyPokemon().type2,
-                                          true,
-                                      ).toLocaleString('en-US')} against ${Battle.enemyPokemon().name}`
-                                      : '',
-                                  trigger: 'hover',
-                              }
-                          "></span>
-                      </span>
-                  </td>
+                <td>
+                    <knockout data-bind="template: { name: 'pokemonAttackTemplate', data: { 'pokemon': Battle.enemyPokemon() } }"></knockout>
+                </td>
               </tr>
           </table>
         </h2>

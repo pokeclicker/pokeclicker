@@ -48,7 +48,7 @@ class RouteHelper {
      */
 
     public static routeCompleted(route: number, region: GameConstants.Region, includeShiny: boolean, includeHeadbutt = true): boolean {
-        return RouteHelper.listCompleted(RouteHelper.getPossibleRoutePokemon(route, region, includeHeadbutt), includeShiny);
+        return RouteHelper.listCompleted(RouteHelper.getAvailablePokemonList(route, region, includeHeadbutt), includeShiny);
     }
 
     public static listCompleted(possiblePokemon: PokemonNameType[], includeShiny: boolean) {
@@ -61,10 +61,6 @@ class RouteHelper {
             }
         }
         return true;
-    }
-
-    public static getPossibleRoutePokemon(route: number, region: GameConstants.Region, includeHeadbutt = true): PokemonNameType[] {
-        return RouteHelper.getAvailablePokemonList(route, region, includeHeadbutt);
     }
 
     public static minPokerus(possiblePokemon: PokemonNameType[]): number {
