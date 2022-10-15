@@ -70,10 +70,6 @@ class PartyPokemon implements Saveable {
         this.evs.subscribe((newValue) => {
             // Change Pokerus status to Resistant when reaching 50 EVs
             if (this.pokerus && this.pokerus < GameConstants.Pokerus.Resistant && newValue >= 50) {
-                Notifier.notify({
-                    message: `${this.name} has become Resistant to the Pokérus virus`,
-                    type: NotificationConstants.NotificationOption.info,
-                });
                 this.pokerus = GameConstants.Pokerus.Resistant;
 
                 // Log and notify player
