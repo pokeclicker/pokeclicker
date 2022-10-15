@@ -1,14 +1,13 @@
 
 <div class="row justify-content-center no-gutters" data-bind="if: App.game.gameState === GameConstants.GameState.gym">
-    <div class="col no-gutters clickable" data-bind="click: function() {GymBattle.clickAttack()}" style="height: 220px; display: block;">
+    <div class="col no-gutters clickable" data-bind="click: function() {GymBattle.clickAttack()}" style="height: 280px; display: block;">
         <h2 class="pageItemTitle" style="display: block;">
-
             <knockout class="left">
                 <knockout data-bind="text: GymBattle.gym.leaderName.replace(/\d/g,'')"></knockout>
             </knockout>
 
             <knockout>
-                <knockout data-bind="text: GymBattle.enemyPokemon().name">Pokémon name</knockout>
+                <knockout data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': GymBattle.enemyPokemon() } }">Pokémon name</knockout>
             </knockout>
 
             <knockout class="right">
@@ -43,7 +42,7 @@
         </div>
 
         <div>
-            <img class="enemy" data-bind="attr:{ src: PokemonHelper.getImage(GymBattle.enemyPokemon(), GymBattle.enemyPokemon().shiny) }" src=""/>
+            <knockout data-bind="template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': GymBattle.enemyPokemon() } }">Pokémon sprite</knockout>
         </div>
 
         <div class="progress hitpoints" style="height: 20px;">
@@ -58,5 +57,19 @@
                 onclick="GymRunner.autoRestart(false)">
             Stop Auto
         </button>
+        <h2 class="pageItemFooter" style="display: block;">
+          <table width="100%">
+              <tr>
+                <td width="50%">
+                    <knockout data-bind="template: { name: 'pokemonAttackTemplate', data: { 'pokemon': Battle.enemyPokemon() } }"></knockout>
+                </td>
+                <td width="50%" data-bind="css: { 'text-muted': App.game.challenges.list.disableClickAttack.active() }">
+                    <span style="display: inline;">Click Attack:
+                        <span data-bind="text: App.game.party.calculateClickAttack().toLocaleString('en-US')"></span>
+                    </span>
+                </td>
+              </tr>
+          </table>
+        </h2>
     </div>
 </div>

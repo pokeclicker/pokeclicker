@@ -103,6 +103,7 @@ type ItemNameType
     | 'Miracle_Seed'
     | 'Mystic_Water'
     | 'Never_Melt_Ice'
+    | 'Pink_Bow'
     | 'Poison_Barb'
     | 'Sharp_Beak'
     | 'Silk_Scarf'
