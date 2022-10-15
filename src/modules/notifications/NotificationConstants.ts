@@ -49,6 +49,7 @@ const NotificationConstants = {
             achievement_complete: new NotificationSetting('notification.achievement_complete', 'Achievement complete', true, true),
             new_catch: new NotificationSetting('notification.new_catch', 'New Pokémon/shiny captured', true, true),
             battle_frontier: new NotificationSetting('notification.battle_frontier', 'Battle Frontier', true, true),
+            pokerus: new NotificationSetting('notification.pokerus', 'Pokémon has become Resistant to Pokérus', true),
         },
         Hatchery: {
             ready_to_hatch: new NotificationSetting('notification.ready_to_hatch', 'Egg ready to hatch', true),

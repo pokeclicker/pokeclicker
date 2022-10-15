@@ -8,7 +8,7 @@
             </knockout>
 
             <knockout>
-                <knockout data-bind="text: TemporaryBattleBattle.enemyPokemon().name">Pokémon name</knockout>
+                <knockout data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': TemporaryBattleBattle.enemyPokemon() } }">Pokémon name</knockout>
             </knockout>
 
             <knockout class="right">
@@ -43,7 +43,7 @@
         </div>
 
         <div data-bind="ifnot: TemporaryBattleBattle.catching">
-            <img class="enemy" data-bind="attr:{ src: PokemonHelper.getImage(TemporaryBattleBattle.enemyPokemon(), TemporaryBattleBattle.enemyPokemon().shiny) }" src=""/>
+            <knockout data-bind="template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': TemporaryBattleBattle.enemyPokemon() } }">Pokémon sprite</knockout>
         </div>
 
         <div data-bind="if: TemporaryBattleBattle.catching" class="catchChance">

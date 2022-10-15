@@ -11,8 +11,8 @@
                           </knockout>
 
                           <knockout>
-                              <knockout data-bind="text: SafariBattle.enemy.name">Pokémon name</knockout>
-                              <knockout data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(SafariBattle.enemy.id)}}"></knockout>
+                                <knockout data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': SafariBattle.enemy } }">Pokémon name</knockout>
+                                <knockout data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(SafariBattle.enemy.id)}}"></knockout>
                           </knockout>
 
                           <knockout class="right">
@@ -20,7 +20,7 @@
                       </h2>
 
                       <div>
-                          <img class="enemy" data-bind="attr: { src: `assets/images/${SafariBattle.enemy.shiny ? 'shiny' : ''}pokemon/${SafariBattle.enemy.id}.png` }" src=""/>
+                          <knockout data-bind="template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': SafariBattle.enemy } }">Pokémon sprite</knockout>
                       </div>
 
                       <h2 class="pageItemFooter" style="display: block;">
