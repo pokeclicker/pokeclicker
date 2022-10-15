@@ -6,9 +6,9 @@ aria-labelledby="dreamOrbsModalLabel">
             <h5 class="modal-title">Open Dream Orbs</h5>
         </div>
         <div class="modal-body">
-            <select id="dream-orbs-selector" class="custom-select" onchange="App.game.dreamOrbController.selectedOrb(this.value); App.game.dreamOrbController.item(undefined)" style="margin-right: 8px">
+            <select id="dream-orbs-selector" class="custom-select" onchange="App.game.dreamOrbController.selectedOrb(App.game.dreamOrbController.orbs[this.value]); App.game.dreamOrbController.item(undefined)" style="margin-right: 8px">
                 <!-- ko foreach: App.game.dreamOrbController.orbs.filter((o) => !o.requirement ||o.requirement.isCompleted()) -->
-                <option data-bind="attr: { value: $data.color }, text: $data.color"></option>
+                <option data-bind="attr: { value: $index }, text: $data.color"></option>
                 <!-- /ko -->
             </select>
             <img data-bind="attr: { src: App.game.dreamOrbController.item() ? BagHandler.image(App.game.dreamOrbController.item().item) :

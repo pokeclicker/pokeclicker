@@ -63,6 +63,9 @@ class DreamOrbController implements Saveable {
     ]
 
     public open() {
+        if (this.opening()) {
+            return;
+        }
         if (!this.selectedOrb().amount) {
             Notifier.notify({
                 message: 'No orbs left.',
