@@ -1935,39 +1935,59 @@ TemporaryBattleList['Dyna Tree Birds'] = new TemporaryBattle(
     undefined,
     {
         hideTrainer: true,
+        returnTown: 'Dyna Tree Hill',
     }
 );
 TemporaryBattleList['Galarian Articuno 1'] = new TemporaryBattle(
     'Galarian Articuno 1',
     [new GymPokemon('Galarian Articuno', 2031393560, 100)],
     '<i>Galarian Articuno fled to elsewhere in the Crown Tundra.</i>',
-    [new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 3)],
+    [
+        new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 3),
+        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Roaring Sea Caves')),
+    ],
     undefined,
     {
         hideTrainer: true,
+        displayName: 'Galarian Articuno',
+        returnTown: 'Roaring Sea Caves',
         imageName: '../pokemon/144.1',
+        visibleRequirement: new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 3),
     }
 );
 TemporaryBattleList['Galarian Articuno 2'] = new TemporaryBattle(
     'Galarian Articuno 2',
     [new GymPokemon('Galarian Articuno', 2031393560, 100)],
     '<i>Galarian Articuno fled to elsewhere in the Crown Tundra.</i>',
-    [new TemporaryBattleRequirement('Galarian Articuno 1')],
+    [
+        new TemporaryBattleRequirement('Galarian Articuno 1'),
+        new RouteKillRequirement(10, GameConstants.Region.galar, 51),
+    ],
     undefined,
     {
         hideTrainer: true,
+        displayName: 'Galarian Articuno',
+        returnTown: 'Roaring Sea Caves',
         imageName: '../pokemon/144.1',
+        visibleRequirement: new TemporaryBattleRequirement('Galarian Articuno 1'),
     }
 );
 TemporaryBattleList['Galarian Articuno 3'] = new TemporaryBattle(
     'Galarian Articuno 3',
     [new GymPokemon('Galarian Articuno', 2031393560, 100)],
     '<i>Galarian Articuno fled to elsewhere in the Crown Tundra.</i>',
-    [new TemporaryBattleRequirement('Galarian Articuno 2')],
+    [
+        new TemporaryBattleRequirement('Galarian Articuno 2'),
+        new RouteKillRequirement(10, GameConstants.Region.galar, 55),
+    ],
     undefined,
     {
         hideTrainer: true,
+        displayName: 'Galarian Articuno',
+        returnTown: 'Tunnel to the Top',
         imageName: '../pokemon/144.1',
+        visibleRequirement: new TemporaryBattleRequirement('Galarian Articuno 2'),
+
     }
 );
 TemporaryBattleList['Galarian Zapdos 1'] = new TemporaryBattle(
@@ -1978,6 +1998,8 @@ TemporaryBattleList['Galarian Zapdos 1'] = new TemporaryBattle(
     undefined,
     {
         hideTrainer: true,
+        displayName: 'Galarian Zapdos',
+        returnTown: 'Motostoke',
         imageName: '../pokemon/145.1',
     }
 );
@@ -1985,55 +2007,85 @@ TemporaryBattleList['Galarian Zapdos 2'] = new TemporaryBattle(
     'Galarian Zapdos 2',
     [new GymPokemon('Galarian Zapdos', 2031393560, 100)],
     '<i>Galarian Zapdos fled to elsewhere in the Wild Area.</i>',
-    [new TemporaryBattleRequirement('Galarian Zapdos 1')],
+    [
+        new TemporaryBattleRequirement('Galarian Zapdos 1'),
+        new RouteKillRequirement(10, GameConstants.Region.galar, 19),
+    ],
     undefined,
     {
         hideTrainer: true,
+        displayName: 'Galarian Zapdos',
+        returnTown: 'Dusty Bowl',
         imageName: '../pokemon/145.1',
+        visibleRequirement: new TemporaryBattleRequirement('Galarian Zapdos 1'),
     }
 );
 TemporaryBattleList['Galarian Zapdos 3'] = new TemporaryBattle(
     'Galarian Zapdos 3',
     [new GymPokemon('Galarian Zapdos', 2031393560, 100)],
     '<i>Galarian Zapdos fled to elsewhere in the Wild Area.</i>',
-    [new TemporaryBattleRequirement('Galarian Zapdos 2')],
+    [
+        new TemporaryBattleRequirement('Galarian Zapdos 2'),
+        new RouteKillRequirement(10, GameConstants.Region.galar, 7),
+    ],
     undefined,
     {
         hideTrainer: true,
+        displayName: 'Galarian Zapdos',
+        returnTown: 'Motostoke',
         imageName: '../pokemon/145.1',
+        visibleRequirement: new TemporaryBattleRequirement('Galarian Zapdos 2'),
     }
 );
 TemporaryBattleList['Galarian Moltres 1'] = new TemporaryBattle(
     'Galarian Moltres 1',
     [new GymPokemon('Galarian Moltres', 2031393560, 100)],
     '<i>Galarian Moltres fled to elsewhere in the Isle of Armor.</i>',
-    [new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 3)],
+    [
+        new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 3),
+        new RouteKillRequirement(10, GameConstants.Region.galar, 37),
+    ],
     undefined,
     {
         hideTrainer: true,
+        displayName: 'Galarian Moltres',
+        returnTown: 'Courageous Cavern',
         imageName: '../pokemon/146.1',
+        visibleRequirement: new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 3),
     }
 );
 TemporaryBattleList['Galarian Moltres 2'] = new TemporaryBattle(
     'Galarian Moltres 2',
     [new GymPokemon('Galarian Moltres', 2031393560, 100)],
     '<i>Galarian Moltres fled to elsewhere in the Isle of Armor.</i>',
-    [new TemporaryBattleRequirement('Galarian Moltres 1')],
+    [
+      new TemporaryBattleRequirement('Galarian Moltres 1'),
+      new RouteKillRequirement(10, GameConstants.Region.galar, 41),
+    ],
     undefined,
     {
         hideTrainer: true,
+        displayName: 'Galarian Moltres',
+        returnTown: 'Master Dojo',
         imageName: '../pokemon/146.1',
+        visibleRequirement: new TemporaryBattleRequirement('Galarian Moltres 1'),
     }
 );
 TemporaryBattleList['Galarian Moltres 3'] = new TemporaryBattle(
     'Galarian Moltres 3',
     [new GymPokemon('Galarian Moltres', 2031393560, 100)],
     '<i>Galarian Moltres fled to elsewhere in the Isle of Armor.</i>',
-    [new TemporaryBattleRequirement('Galarian Moltres 2')],
+    [
+        new TemporaryBattleRequirement('Galarian Moltres 2'),
+        new RouteKillRequirement(10, GameConstants.Region.galar, 34),
+    ],
     undefined,
     {
         hideTrainer: true,
+        displayName: 'Galarian Moltres',
+        returnTown: 'Master Dojo',
         imageName: '../pokemon/146.1',
+        visibleRequirement: new TemporaryBattleRequirement('Galarian Moltres 2'),
     }
 );
 TemporaryBattleList.Regigigas = new TemporaryBattle(
