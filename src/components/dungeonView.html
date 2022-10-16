@@ -6,8 +6,14 @@
                 <knockout data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': DungeonBattle.enemyPokemon() } }">Pokémon name</knockout>
                 <!-- ko if: !DungeonBattle.trainer() -->
                 <knockout data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(DungeonBattle.enemyPokemon().id)}}"></knockout>
-                <knockout data-bind="if: RouteHelper.minPokerusCheck(RouteHelper.getAvailablePokemonList(player.route(), player.region, true))">
-                    <img data-bind="attr:{ src: 'assets/images/breeding/pokerus/' + GameConstants.Pokerus[RouteHelper.minPokerus(RouteHelper.getAvailablePokemonList(player.route(), player.region, true))] + '.png'}"
+                <knockout data-bind="if: App.game.party.getPokemonByName(Battle.enemyPokemon().name)?.pokerus > GameConstants.Pokerus.Uninfected">
+                    <img data-bind="attr:{ src: 'assets/images/breeding/pokerus/' + GameConstants.Pokerus[App.game.party.getPokemonByName(DungeonBattle.enemyPokemon().name).pokerus] + '.png'}"
+                  src=""/>
+                </knockout>
+                <!-- /ko -->
+                <!-- ko if: DungeonBattle.trainer() -->
+                <knockout data-bind="if: App.game.party.getPokemonByName(Battle.enemyPokemon().name)?.pokerus > GameConstants.Pokerus.Uninfected && TrainerEVList.list.has(Battle.enemyPokemon().name)">
+                    <img data-bind="attr:{ src: 'assets/images/breeding/pokerus/' + GameConstants.Pokerus[App.game.party.getPokemonByName(DungeonBattle.enemyPokemon().name).pokerus] + '.png'}"
                   src=""/>
                 </knockout>
                 <!-- /ko -->
@@ -119,8 +125,8 @@
                   </knockout>
 
                   <!--Pokérus image-->
-                  <knockout data-bind="if: RouteHelper.minPokerusCheck(DungeonRunner.dungeon.allAvailablePokemon())">
-                      <img data-bind="attr:{ src: 'assets/images/breeding/pokerus/' + GameConstants.Pokerus[RouteHelper.minPokerus(DungeonRunner.dungeon.allAvailablePokemon())] + '.png'}"
+                  <knockout data-bind="if: RouteHelper.minPokerusCheck(DungeonRunner.dungeon.allAvailablePokemon(true))">
+                      <img data-bind="attr:{ src: 'assets/images/breeding/pokerus/' + GameConstants.Pokerus[RouteHelper.minPokerus(DungeonRunner.dungeon.allAvailablePokemon(true))] + '.png'}"
                     src=""/>
                   </knockout>
                 </td>

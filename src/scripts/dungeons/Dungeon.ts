@@ -172,7 +172,7 @@ class Dungeon {
     /**
      * Gets all available Pokemon in the dungeon
      */
-    public allAvailablePokemon(): PokemonNameType[] {
+    public allAvailablePokemon(trainer = false): PokemonNameType[] {
         const encounterInfo = [];
 
         // Handling minions
@@ -193,7 +193,13 @@ class Dungeon {
                 }
                 encounterInfo.push(pokemonName);
             // Handling Trainers
-            } else { /* We don't include Trainers */ }
+            } else if (trainer) {
+                if (enemy instanceof DungeonTrainer) {
+                    enemy.team.forEach(p => {
+                        encounterInfo.push(p.name);
+                    });
+                }
+            }
         });
 
         // Handling Bosses
@@ -208,7 +214,13 @@ class Dungeon {
                 const pokemonName = boss.name;
                 encounterInfo.push(pokemonName);
             // Handling Trainer
-            } else { /* We don't include Trainers */ }
+            } else if (trainer) {
+                if (boss instanceof DungeonTrainer) {
+                    boss.team.forEach(p => {
+                        encounterInfo.push(p.name);
+                    });
+                }
+            }
         });
 
         return encounterInfo;

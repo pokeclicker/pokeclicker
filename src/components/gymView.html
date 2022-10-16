@@ -8,6 +8,10 @@
 
             <knockout>
                 <knockout data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': GymBattle.enemyPokemon() } }">Pokémon name</knockout>
+                <knockout data-bind="if: App.game.party.getPokemonByName(Battle.enemyPokemon().name)?.pokerus > GameConstants.Pokerus.Uninfected && TrainerEVList.list.has(Battle.enemyPokemon().name)">
+                    <img data-bind="attr:{ src: 'assets/images/breeding/pokerus/' + GameConstants.Pokerus[App.game.party.getPokemonByName(DungeonBattle.enemyPokemon().name).pokerus] + '.png'}"
+                  src=""/>
+                </knockout>
             </knockout>
 
             <knockout class="right">
