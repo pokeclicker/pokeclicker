@@ -184,7 +184,7 @@ class BattleCafeController {
                 return [
                     {berry: BerryType.Yache, amount: 75},
                     {berry: BerryType.Coba, amount: 150},
-                    {berry: BerryType.Passho, amount: 100},
+                    {berry: BerryType.Passho, amount: 1000},
                 ];
             // max gen 4
             case GameConstants.AlcremieSweet['Ribbon Sweet']:
