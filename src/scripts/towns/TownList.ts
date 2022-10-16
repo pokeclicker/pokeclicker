@@ -4932,7 +4932,7 @@ const BirdPeony2 = new NPC ('Peony', [
     image: 'assets/images/temporaryBattle/Peony.png',
     requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 2), new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 4, GameConstants.AchievementOption.less )]),
 });
-const BirdPeony2 = new NPC ('Peony', [
+const BirdPeony3 = new NPC ('Peony', [
     'Hang on--you really caught up to all three of them dodgy birds? Multiple times each? That\'s pretty impressive!',
     'I think they should all be weakened enough that you can catch \'em now!',
     'I\'d imagine they\'d be in the same areas you chased \'em about in.',
