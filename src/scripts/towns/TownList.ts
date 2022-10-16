@@ -2577,7 +2577,7 @@ TownList['Pokémon League Sinnoh'] = new Town(
 TownList['Fight Area'] = new Town(
     'Fight Area',
     GameConstants.Region.sinnoh,
-    [FightAreaShop, new DreamOrbTownContent()],
+    [FightAreaShop],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)],
         npcs: [FightAreaAceTrainer],
@@ -3163,7 +3163,7 @@ TownList['Icirrus City'] = new Town(
 TownList['Black and White Park'] = new Town(
     'Black and White Park',
     GameConstants.Region.unova,
-    [BlackAndWhiteParkShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Black and White Park'])],
+    [new DreamOrbTownContent(), BlackAndWhiteParkShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Black and White Park'])],
     {
         requirements: [new OneFromManyRequirement([
             new MultiRequirement([
