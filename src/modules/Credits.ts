@@ -15,6 +15,7 @@ export const SpriteCredits: Credit[] = [
         link: 'https://discordapp.com/users/200069836724764673/',
         resources: [
             'Pinkan Scyther',
+            'Sealed Chamber Braille',
         ],
         // Notes: Made specifically for PokéClicker.
     },
@@ -181,10 +182,12 @@ export const SpriteCredits: Credit[] = [
             'Dungeon Ladder',
             'Galar fossils items',
             'Galarica cuff and wreath icons',
+            'Linking cord cartoon style',
             'Luana',
             'Merilyn',
             'Pinkan Arbok',
             'Pinkan Bellsprout',
+            'Pink Bow',
             'Pink Butterfree',
             'Pinkan Caterpie',
             'Pinkan Diglett',
@@ -398,8 +401,12 @@ export const SpriteCredits: Credit[] = [
             'Gen 8 Reporter (Lucy Stevens)',
             'Hex Maniac',
             'Hiker (Gen 8)',
+            'Kurt',
             'Looker',
             'Mr. Fuji',
+            'Prof. Birch',
+            'Prof. Elm',
+            'Prof. Rowan',
             'Punk Girl',
             'Punk Guy',
             'Rail Staff',
@@ -589,9 +596,7 @@ export const SpriteCredits: Credit[] = [
         image: 'https://a.deviantart.net/avatars-big/v/i/victorv111.png',
         resources: [
             'Celio',
-            'Kurt',
             'Mr. Pokémon',
-            'Professor Elm',
             'Professor Ivy',
         ],
         // Notes: Permission given on image page if credited.

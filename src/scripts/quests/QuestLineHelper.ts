@@ -360,7 +360,7 @@ class QuestLineHelper {
             App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Ultraball, 50, false);
             Notifier.notify({
                 title: lugiaJohtoQuestLine.name,
-                message: 'Kimono Girl Miki has given you a package containing 50 Ultraballs.',
+                message: 'Kimono Girl Miki has given you a package containing 50 Ultra Balls.',
                 type: NotificationConstants.NotificationOption.success,
                 timeout: 3e4,
             });
@@ -392,16 +392,15 @@ class QuestLineHelper {
             undefined,
             undefined
         );
-
         lugiaJohtoQuestLine.addQuest(LugiaCatch);
 
         App.game.quests.questLines().push(lugiaJohtoQuestLine);
     }
-    // Ho-oh Quest
 
+    // Ho-Oh Quest
     public static createhoohJohtoQuestLine() {
         const hoohJohtoQuestLine = new QuestLine('Rainbow Guardian', 'The Kimono Girls of Ecruteak City wish to speak with you again.', new MultiRequirement([new QuestLineStepCompletedRequirement('Whirl Guardian', 9), new ObtainedPokemonRequirement(pokemonMap.Raikou), new ObtainedPokemonRequirement(pokemonMap.Entei), new ObtainedPokemonRequirement(pokemonMap.Suicune)]), GameConstants.BulletinBoards.Johto);
-        const talkKimonoGirlsEcruteak = new TalkToNPCQuest(KimonoGirlsEcruteak, 'Meet the Kimono Girls at the Ecruteak Dance Theatre');
+        const talkKimonoGirlsEcruteak = new TalkToNPCQuest(KimonoGirlsEcruteak, 'Meet the Kimono Girls at the Ecruteak Dance Theatre.');
         hoohJohtoQuestLine.addQuest(talkKimonoGirlsEcruteak);
 
         const clearKimonoGirls = new CustomQuest (1, 0, 'Prove your abilities as a trainer to the Kimono Girls of Ecruteak City.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Kimono Girls')]());
@@ -409,13 +408,12 @@ class QuestLineHelper {
 
         const HoohCatch = new CaptureSpecificPokemonQuest(
             'Ho-Oh',
-            'Catch Ho-oh in the Tin Tower.',
+            'Catch Ho-Oh in the Tin Tower.',
             1,
             false,
             undefined,
             undefined
         );
-
         hoohJohtoQuestLine.addQuest(HoohCatch);
 
         App.game.quests.questLines().push(hoohJohtoQuestLine);
@@ -661,6 +659,62 @@ class QuestLineHelper {
         App.game.quests.questLines().push(pinkanThemeparkQuestLine);
     }
 
+    //Regi Trio Quest
+    public static createRegiTrioQuestLine() {
+        const regiTrioQuestLine = new QuestLine('The Three Golems', 'Discover the secrets of the Sealed Chamber.', new GymBadgeRequirement(BadgeEnums.Mind), GameConstants.BulletinBoards.Hoenn);
+
+        const clearSealedChamber = new CustomQuest(1, 0, 'Enter the Sealed Chamber to find clues.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Sealed Chamber')]());
+        regiTrioQuestLine.addQuest(clearSealedChamber);
+
+        const readEntranceSign = new TalkToNPCQuest(SCEntrance, 'Investigate the strange markings in the Sealed Chamber.');
+        regiTrioQuestLine.addQuest(readEntranceSign);
+
+        const mazeStep1 = new TalkToNPCQuest(SCMazeLeft, 'Navigate the maze inside the Sealed Chamber.');
+        regiTrioQuestLine.addQuest(mazeStep1);
+
+        const mazeStep2 = new TalkToNPCQuest(SCMazeLeft, 'Navigate the maze inside the Sealed Chamber.');
+        regiTrioQuestLine.addQuest(mazeStep2);
+
+        const mazeStep3 = new TalkToNPCQuest(SCMazeStraight, 'Navigate the maze inside the Sealed Chamber.');
+        regiTrioQuestLine.addQuest(mazeStep3);
+
+        const mazeStep4 = new TalkToNPCQuest(SCMazeStraight, 'Navigate the maze inside the Sealed Chamber.');
+        regiTrioQuestLine.addQuest(mazeStep4);
+
+        const mazeStep5 = new TalkToNPCQuest(SCMazeRight, 'Navigate the maze inside the Sealed Chamber.');
+        regiTrioQuestLine.addQuest(mazeStep5);
+
+        const readSCHints = new TalkToNPCQuest(SCHints, 'Investigate the hidden message at the end of the Sealed Chamber maze.');
+        regiTrioQuestLine.addQuest(readSCHints);
+
+        const regiHint1 = new DefeatPokemonsQuest(100, 0, 111, GameConstants.Region.hoenn, 'Release Regirock');
+
+        const regiHint2 = new DefeatPokemonsQuest(100, 0, 105, GameConstants.Region.hoenn, 'Release Regice');
+
+        const regiHint3 = new DefeatPokemonsQuest(100, 0, 120, GameConstants.Region.hoenn, 'Release Registeel');
+
+        regiTrioQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                regiHint1,
+                regiHint2,
+                regiHint3,
+            ], 'Explore Hoenn by defeating pokémon on the hinted routes to release the Regi Trio.'));
+
+        const catchRegirock = new CaptureSpecificPokemonQuest('Regirock', 'Catch Regirock');
+
+        const catchRegice = new CaptureSpecificPokemonQuest('Regice', 'Catch Regice');
+
+        const catchRegisteel = new CaptureSpecificPokemonQuest('Registeel', 'Catch Registeel');
+
+        regiTrioQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                catchRegirock,
+                catchRegice,
+                catchRegisteel,
+            ], 'Catch the Regi Trio.'));
+
+        App.game.quests.questLines().push(regiTrioQuestLine);
+    }
     // Sinnoh QuestLines
     // Started upon defeating Oreburgh City's gym.
     public static createGalacticSinnohQuestLine() {
@@ -1910,6 +1964,7 @@ class QuestLineHelper {
         this.createDeoxysQuestLine();
         this.createRubySapphireSeviiQuestLine();
         this.createPinkanThemeparkQuestLine();
+        this.createRegiTrioQuestLine();
         this.createGalacticSinnohQuestLine();
         this.createPlasmaUnovaQuestLine();
         this.createDetectivePikachuQuestLine();
