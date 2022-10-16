@@ -2521,7 +2521,7 @@ const Arceus1 = new NPC('Arceus', [
     'I shalt take thou to the past of this place. There thou art needed greatly.',
     'Seek out all Pokémon, and thou shalt find my once more.',
 ], {
-    image: 'assets/images/npcs/Arceus.png',
+    imageName: 'assets/images/pokemon/493',
     requirement: new MultiRequirement([new QuestLineStartedRequirement('The Noble Light of Arceus'), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
 });
 

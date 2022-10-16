@@ -2139,6 +2139,7 @@ TemporaryBattleList['Alpha Kricketune'] = new TemporaryBattle(
     {
         isTrainerBattle: false,
         hideTrainer: true,
+        imageName: '../pokemon/402',
     }
 );
 TemporaryBattleList['Warden Lian'] = new TemporaryBattle(
@@ -2167,7 +2168,7 @@ TemporaryBattleList['Noble Kleavor 1'] = new TemporaryBattle(
     {
         displayName: 'Lord of the Woods: Kleavor',
         hideTrainer: true,
-        imageName: 'Noble Kleavor',
+        imageName: '../pokemon/900.1',
     }
 );
 TemporaryBattleList['Akari 2'] = new TemporaryBattle(
@@ -2203,6 +2204,7 @@ TemporaryBattleList.Ursaluna = new TemporaryBattle(
     undefined,
     {
         hideTrainer: true,
+        imageName: '../pokemon/901',
     }
 );
 TemporaryBattleList['Noble Lilligant 1'] = new TemporaryBattle(
@@ -2214,7 +2216,7 @@ TemporaryBattleList['Noble Lilligant 1'] = new TemporaryBattle(
     {
         displayName: 'Lady of the Ridge: Lilligant',
         hideTrainer: true,
-        imageName: 'Noble Lilligant',
+        imageName: '../pokemon/549.2',
     }
 );
 TemporaryBattleList['Irida 2'] = new TemporaryBattle(
@@ -2240,7 +2242,7 @@ TemporaryBattleList['Noble Arcanine 1'] = new TemporaryBattle(
     {
         displayName: 'Lord of the Isles: Arcanine',
         hideTrainer: true,
-        imageName: 'Noble Arcanine',
+        imageName: '../pokemon/59.2',
     }
 );
 TemporaryBattleList['Adaman 1'] = new TemporaryBattle(
@@ -2302,7 +2304,7 @@ TemporaryBattleList['Noble Electrode 1'] = new TemporaryBattle(
     {
         displayName: 'Lord of the Hollow: Electrode',
         hideTrainer: true,
-        imageName: 'Noble Electrode',
+        imageName: '../pokemon/101.2',
     }
 );
 TemporaryBattleList['Warden Gaeric'] = new TemporaryBattle(
@@ -2332,6 +2334,7 @@ TemporaryBattleList['Hisuian Braviary'] = new TemporaryBattle(
     undefined,
     {
         hideTrainer: true,
+        imageName: '../pokemon/628.1',
     }
 );
 TemporaryBattleList['Noble Avalugg 1'] = new TemporaryBattle(
@@ -2343,7 +2346,7 @@ TemporaryBattleList['Noble Avalugg 1'] = new TemporaryBattle(
     {
         displayName: 'Lord of the Tundra: Avalugg',
         hideTrainer: true,
-        imageName: 'Noble Avalugg',
+        imageName: '../pokemon/713.2',
     }
 );
 TemporaryBattleList['Beni'] = new TemporaryBattle(
@@ -2386,7 +2389,7 @@ TemporaryBattleList['Dialga (Origin) 1'] = new TemporaryBattle(
     {
         displayName: 'Dialga - Origin Form',
         hideTrainer: true,
-        imageName: 'Dialga (Origin)',
+        imageName: '../pokemon/483.1',
     }
 );
 TemporaryBattleList['Palkia (Origin) 1'] = new TemporaryBattle(
@@ -2398,7 +2401,7 @@ TemporaryBattleList['Palkia (Origin) 1'] = new TemporaryBattle(
     {
         displayName: 'Palkia - Origin Form',
         hideTrainer: true,
-        imageName: 'Palkia (Origin)',
+        imageName: '../pokemon/484.1',
     }
 );
 TemporaryBattleList['Kamado 2'] = new TemporaryBattle(
@@ -2428,7 +2431,7 @@ TemporaryBattleList['Noble Kleavor 2'] = new TemporaryBattle(
         isTrainerBattle: false,
         displayName: 'Lord of the Woods: Kleavor',
         hideTrainer: true,
-        imageName: 'Noble Kleavor',
+        imageName: '../pokemon/900.1',
     }
 );
 TemporaryBattleList['Noble Lilligant 2'] = new TemporaryBattle(
@@ -2441,7 +2444,7 @@ TemporaryBattleList['Noble Lilligant 2'] = new TemporaryBattle(
         isTrainerBattle: false,
         displayName: 'Lady of the Ridge: Lilligant',
         hideTrainer: true,
-        imageName: 'Noble Lilligant',
+        imageName: '../pokemon/549.2',
     }
 );
 TemporaryBattleList['Noble Arcanine 2'] = new TemporaryBattle(
@@ -2454,7 +2457,7 @@ TemporaryBattleList['Noble Arcanine 2'] = new TemporaryBattle(
         isTrainerBattle: false,
         displayName: 'Lord of the Isles: Arcanine',
         hideTrainer: true,
-        imageName: 'Noble Arcanine',
+        imageName: '../pokemon/59.2',
     }
 );
 TemporaryBattleList['Noble Electrode 2'] = new TemporaryBattle(
@@ -2467,7 +2470,7 @@ TemporaryBattleList['Noble Electrode 2'] = new TemporaryBattle(
         isTrainerBattle: false,
         displayName: 'Lord of the Hollow: Electrode',
         hideTrainer: true,
-        imageName: 'Noble Electrode',
+        imageName: '../pokemon/101.2',
     }
 );
 TemporaryBattleList['Noble Avalugg 2'] = new TemporaryBattle(
@@ -2480,7 +2483,7 @@ TemporaryBattleList['Noble Avalugg 2'] = new TemporaryBattle(
         isTrainerBattle: false,
         displayName: 'Lord of the Tundra: Avalugg',
         hideTrainer: true,
-        imageName: 'Noble Avalugg',
+        imageName: '../pokemon/713.2',
     }
 );
 TemporaryBattleList['Adaman 2'] = new TemporaryBattle(
@@ -2523,7 +2526,7 @@ TemporaryBattleList['Dialga (Origin) 2'] = new TemporaryBattle(
         isTrainerBattle: false,
         displayName: 'Dialga - Origin Form',
         hideTrainer: true,
-        imageName: 'Dialga (Origin)',
+        imageName: '../pokemon/483.1',
     }
 );
 TemporaryBattleList['Palkia (Origin) 2'] = new TemporaryBattle(
@@ -2536,7 +2539,7 @@ TemporaryBattleList['Palkia (Origin) 2'] = new TemporaryBattle(
         isTrainerBattle: false,
         displayName: 'Palkia (Origin)',
         hideTrainer: true,
-        imageName: 'Palkia (Origin)',
+        imageName: '../pokemon/484.1',
     }
 );
 TemporaryBattleList['Volo 3'] = new TemporaryBattle(
@@ -2579,7 +2582,7 @@ TemporaryBattleList['Giratina (Origin)'] = new TemporaryBattle(
     [new ObtainedPokemonRequirement(pokemonMap['Giratina (Origin)'])],
     {
         isTrainerBattle: false,
-        displayName: 'Giratina (Origin)',
+        imageName: '../pokemon/487.1',
         hideTrainer: true,
     }
 );
@@ -2592,6 +2595,7 @@ TemporaryBattleList.Tornadus = new TemporaryBattle(
     {
         isTrainerBattle: false,
         hideTrainer: true,
+        imageName: '../pokemon/641',
     }
 );
 TemporaryBattleList.Thundurus = new TemporaryBattle(
@@ -2603,6 +2607,7 @@ TemporaryBattleList.Thundurus = new TemporaryBattle(
     {
         isTrainerBattle: false,
         hideTrainer: true,
+        imageName: '../pokemon/642',
     }
 );
 TemporaryBattleList.Landorus = new TemporaryBattle(
@@ -2614,6 +2619,7 @@ TemporaryBattleList.Landorus = new TemporaryBattle(
     {
         isTrainerBattle: false,
         hideTrainer: true,
+        imageName: '../pokemon/645',
     }
 );
 TemporaryBattleList.Enamorus = new TemporaryBattle(
@@ -2624,6 +2630,7 @@ TemporaryBattleList.Enamorus = new TemporaryBattle(
     undefined,
     {
         hideTrainer: true,
+        imageName: '../pokemon/905',
     }
 );
 TemporaryBattleList.Arceus = new TemporaryBattle(
@@ -2634,5 +2641,6 @@ TemporaryBattleList.Arceus = new TemporaryBattle(
     undefined,
     {
         hideTrainer: true,
+        imageName: '../pokemon/493',
     }
 );
