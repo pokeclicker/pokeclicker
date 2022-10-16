@@ -66,6 +66,10 @@ class BattleCafeController {
     private static unlockAlcremie(clockwise: boolean, spinTime: number, sweet: GameConstants.AlcremieSweet) {
         let spin: GameConstants.AlcremieSpins;
         const curHour = (new Date()).getHours();
+        if (spinTime == 3600) {
+            (new PokemonItem('Milcery (Cheesy)', 0)).gain(1);
+            return;
+        }
         if (curHour == 18 && !clockwise && spinTime > 10) {
             spin = GameConstants.AlcremieSpins.at7Above10;
         } else if (curHour >= 5 && curHour < 19) { // Is day
@@ -114,7 +118,7 @@ class BattleCafeController {
             });
             return false;
         }
-        if (+$('#battleCafeDuration').val() > 20) {
+        if (+$('#battleCafeDuration').val() > 20 && +$('#battleCafeDuration').val() != 3600) {
             Notifier.notify({
                 message: 'Can\'t spin for more than 20 seconds',
                 type: NotificationConstants.NotificationOption.danger,

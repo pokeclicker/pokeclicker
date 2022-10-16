@@ -185,6 +185,7 @@ export const SpriteCredits: Credit[] = [
             'Linking cord cartoon style',
             'Luana',
             'Merilyn',
+            'Milcery (Cheesy)',
             'Pinkan Arbok',
             'Pinkan Bellsprout',
             'Pink Bow',
