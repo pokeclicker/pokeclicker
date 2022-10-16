@@ -2059,8 +2059,8 @@ TemporaryBattleList['Galarian Moltres 2'] = new TemporaryBattle(
     [new GymPokemon('Galarian Moltres', 2031393560, 100)],
     '<i>Galarian Moltres fled to elsewhere in the Isle of Armor.</i>',
     [
-      new TemporaryBattleRequirement('Galarian Moltres 1'),
-      new RouteKillRequirement(10, GameConstants.Region.galar, 41),
+        new TemporaryBattleRequirement('Galarian Moltres 1'),
+        new RouteKillRequirement(10, GameConstants.Region.galar, 41),
     ],
     undefined,
     {
