@@ -1331,6 +1331,7 @@ TemporaryBattleList.Bede3 = new TemporaryBattle(
     undefined,
     {
         displayName: 'Pokémon Trainer Bede',
+        returnTown: 'Stow-on-Side',
         imageName: 'Bede',
     }
 );
