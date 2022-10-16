@@ -68,8 +68,9 @@ class BattleFrontierBattle extends Battle {
         const shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
         // Give 1 extra gem per pokemon defeated after every 80 stages
         const gems = Math.ceil(BattleFrontierRunner.stage() / 80);
+        const gender = PokemonFactory.generateGender(enemy.gender.femaleRatio, enemy.gender.type);
 
-        const enemyPokemon = new BattlePokemon(enemy.name, enemy.id, enemy.type[0], enemy.type[1], health, level, 0, enemy.exp, new Amount(money, GameConstants.Currency.money), shiny, gems);
+        const enemyPokemon = new BattlePokemon(enemy.name, enemy.id, enemy.type[0], enemy.type[1], health, level, 0, enemy.exp, new Amount(money, GameConstants.Currency.money), shiny, gems, gender);
         this.enemyPokemon(enemyPokemon);
     }
 }
