@@ -2416,6 +2416,15 @@ const SinnohBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations
     ItemList.FarmHandRiley,
 ]);
 
+//Hisui shops
+const JubilifeVillageShop = new Shop([
+    ItemList.Pokeball,
+    ItemList.Greatball,
+    ItemList.Ultraball,
+    ItemList.Black_augurite,
+    ItemList.Peat_block,
+]);
+
 //Sinnoh NPCs
 
 const TwinleafContestChampion = new NPC('Contest Champion', [
@@ -2505,6 +2514,15 @@ const LucyStevens1 = new NPC('Lucy Stevens', [
 ], {
     image: 'assets/images/npcs/Lucy Stevens.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 7), new QuestLineStepCompletedRequirement('Detective Pikachu', 9, GameConstants.AchievementOption.less)]),
+});
+const Arceus1 = new NPC('Arceus', [
+    'Welcome to my realm, located beyond both time and space. It is well that thou art here. I am that which humans call Arceus.',
+    'Soon thou shalt find thyself in a world strange to thee... A world inhabited by wondrous creatures that humans call "Pokémon."',
+    'I shalt take thou to the past of this place. There thou art needed greatly.',
+    'Seek out all Pokémon, and thou shalt find my once more.',
+], {
+    image: 'assets/images/npcs/Arceus.png',
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('The Noble Light of Arceus'), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
 });
 
 
@@ -2698,6 +2716,248 @@ TownList['Pokémon League Sinnoh'] = new Town(
     }
 );
 
+//Hisui Towns
+TownList['Prelude Beach'] = new Town(
+    'Prelude Beach',
+    GameConstants.Region.sinnoh,
+    [TemporaryBattleList['Kamado 2'], new DockTownContent()],
+    {
+        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    }
+);
+TownList['Jubilife Village'] = new Town(
+    'Jubilife Village',
+    GameConstants.Region.sinnoh,
+    [JubilifeVillageShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Jubilife Village']), TemporaryBattleList['Volo 1'], TemporaryBattleList['Akari 1'], TemporaryBattleList['Akari 2'], TemporaryBattleList['Adaman 1']],
+    {
+        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    }
+);
+TownList['Galaxy Hall'] = new Town(
+    'Galaxy Hall',
+    GameConstants.Region.sinnoh,
+    [new BulletinBoard(GameConstants.BulletinBoards.Hisui)],
+    {
+        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    }
+);
+TownList['Fieldlands Camp'] = new Town(
+    'Fieldlands Camp',
+    GameConstants.Region.sinnoh,
+    [TemporaryBattleList['Warden Mai']],
+    {
+        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    }
+);
+TownList['Heights Camp'] = new Town(
+    'Heights Camp',
+    GameConstants.Region.sinnoh,
+    [TemporaryBattleList['Alpha Kricketune']],
+    {
+        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    }
+);
+TownList['Grandtree Arena'] = new Town(
+    'Grandtree Arena',
+    GameConstants.Region.sinnoh,
+    [TemporaryBattleList['Warden Lian'], TemporaryBattleList['Irida 1'], TemporaryBattleList['Noble Kleavor 1'], TemporaryBattleList['Noble Kleavor 2']],
+    {
+        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    }
+);
+TownList['Mirelands Camp'] = new Town(
+    'Mirelands Camp',
+    GameConstants.Region.sinnoh,
+    [],
+    {
+        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    }
+);
+TownList['Bogbound Camp'] = new Town(
+    'Bogbound Camp',
+    GameConstants.Region.sinnoh,
+    [],
+    {
+        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    }
+);
+TownList['Ancient Solaceon Ruins'] = new Town(
+    'Ancient Solaceon Ruins',
+    GameConstants.Region.sinnoh,
+    [TemporaryBattleList['Volo 2']],
+    {
+        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    }
+);
+TownList['Sludge Mound'] = new Town(
+    'Sludge Mound',
+    GameConstants.Region.sinnoh,
+    [TemporaryBattleList['Ursaluna']],
+    {
+        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    }
+);
+TownList['Diamond Settlement'] = new Town(
+    'Diamond Settlement',
+    GameConstants.Region.sinnoh,
+    [],
+    {
+        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    }
+);
+TownList['Brava Arena'] = new Town(
+    'Brava Arena',
+    GameConstants.Region.sinnoh,
+    [TemporaryBattleList['Noble Lilligant 1'], TemporaryBattleList['Noble Lilligant 2']],
+    {
+        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    }
+);
+TownList['Beachside Camp'] = new Town(
+    'Beachside Camp',
+    GameConstants.Region.sinnoh,
+    [TemporaryBattleList['Irida 2']],
+    {
+        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    }
+);
+TownList['Coastlands Camp'] = new Town(
+    'Coastlands Camp',
+    GameConstants.Region.sinnoh,
+    [],
+    {
+        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    }
+);
+TownList['Molten Arena'] = new Town(
+    'Molten Arena',
+    GameConstants.Region.sinnoh,
+    [TemporaryBattleList['Noble Arcanine 1'], TemporaryBattleList['Noble Arcanine 2']],
+    {
+        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    }
+);
+TownList['Highlands Camp'] = new Town(
+    'Highlands Camp',
+    GameConstants.Region.sinnoh,
+    [],
+    {
+        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    }
+);
+TownList['Mountain Camp'] = new Town(
+    'Mountain Camp',
+    GameConstants.Region.sinnoh,
+    [],
+    {
+        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    }
+);
+TownList['Summit Camp'] = new Town(
+    'Summit Camp',
+    GameConstants.Region.sinnoh,
+    [],
+    {
+        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    }
+);
+TownList['Moonview Arena'] = new Town(
+    'Moonview Arena',
+    GameConstants.Region.sinnoh,
+    [TemporaryBattleList['Melli 2'], TemporaryBattleList['Noble Electrode 1'], TemporaryBattleList['Noble Electrode 2']],
+    {
+        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    }
+);
+TownList['Snowfields Camp'] = new Town(
+    'Snowfields Camp',
+    GameConstants.Region.sinnoh,
+    [],
+    {
+        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    }
+);
+TownList['Icepeak Camp'] = new Town(
+    'Icepeak Camp',
+    GameConstants.Region.sinnoh,
+    [],
+    {
+        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    }
+);
+TownList['Legacy Icecap'] = new Town(
+    'Legacy Icecap',
+    GameConstants.Region.sinnoh,
+    [TemporaryBattleList['Warden Gaeric']],
+    {
+        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    }
+);
+TownList['Pearl Settlement'] = new Town(
+    'Pearl Settlement',
+    GameConstants.Region.sinnoh,
+    [TemporaryBattleList['Irida 3']],
+    {
+        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    }
+);
+TownList['Icepeak Arena'] = new Town(
+    'Icepeak Arena',
+    GameConstants.Region.sinnoh,
+    [TemporaryBattleList['Noble Avalugg 1'], TemporaryBattleList['Noble Avalugg 2']],
+    {
+        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    }
+);
+TownList['Ancient Retreat'] = new Town(
+    'Ancient Retreat',
+    GameConstants.Region.sinnoh,
+    [],
+    {
+        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    }
+);
+TownList['Stone Portal'] = new Town(
+    'Stone Portal',
+    GameConstants.Region.sinnoh,
+    [TemporaryBattleList['Beni']],
+    {
+        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    }
+);
+TownList['Primeval Grotto'] = new Town(
+    'Primeval Grotto',
+    GameConstants.Region.sinnoh,
+    [],
+    {
+        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    }
+);
+TownList['Temple of Sinnoh'] = new Town(
+    'Temple of Sinnoh',
+    GameConstants.Region.sinnoh,
+    [TemporaryBattleList['Kamado 1'], TemporaryBattleList['Dialga (Origin) 1'], TemporaryBattleList['Palkia (Origin) 1'], TemporaryBattleList['Dialga (Origin) 2'], TemporaryBattleList['Palkia (Origin) 2'], TemporaryBattleList['Volo 3'], TemporaryBattleList['Volo 4']],
+    {
+        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    }
+);
+TownList['Turnback Cave'] = new Town(
+    'Turnback Cave',
+    GameConstants.Region.sinnoh,
+    [TemporaryBattleList['Giratina (Origin)']],
+    {
+        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    }
+);
+TownList['Ancient Hall of Origin'] = new Town(
+    'Ancient Hall of Origin',
+    GameConstants.Region.sinnoh,
+    [TemporaryBattleList.Arceus],
+    {
+        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    }
+);
+
 //Sinnoh Dungeons
 TownList['Oreburgh Gate'] = new DungeonTown(
     'Oreburgh Gate',
@@ -2804,7 +3064,9 @@ TownList['Sendoff Spring'] = new DungeonTown(
 TownList['Hall of Origin'] = new DungeonTown(
     'Hall of Origin',
     GameConstants.Region.sinnoh,
-    [new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)],
+    [],
+    [Arceus1]
 );
 TownList['Fullmoon Island'] = new DungeonTown(
     'Fullmoon Island',
@@ -2833,6 +3095,95 @@ TownList['Snowpoint Temple'] = new DungeonTown(
     'Snowpoint Temple',
     GameConstants.Region.sinnoh,
     [new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)]
+);
+
+//Hisui Dungeons
+TownList['Oreburrow Tunnel'] = new DungeonTown(
+    'Oreburrow Tunnel',
+    GameConstants.Region.sinnoh,
+    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)]
+);
+TownList.Heartwood = new DungeonTown(
+    'Heartwood',
+    GameConstants.Region.sinnoh,
+    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)]
+);
+TownList['Shrouded Ruins'] = new DungeonTown(
+    'Shrouded Ruins',
+    GameConstants.Region.sinnoh,
+    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)]
+);
+TownList['Firespit Island'] = new DungeonTown(
+    'Firespit Island',
+    GameConstants.Region.sinnoh,
+    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)]
+);
+TownList['Ancient Wayward Cave'] = new DungeonTown(
+    'Ancient Wayward Cave',
+    GameConstants.Region.sinnoh,
+    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    [TemporaryBattleList['Melli 1']]
+);
+TownList['Ancient Quarry'] = new DungeonTown(
+    'Ancient Quarry',
+    GameConstants.Region.sinnoh,
+    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)]
+);
+TownList['Celestica Ruins'] = new DungeonTown(
+    'Celestica Ruins',
+    GameConstants.Region.sinnoh,
+    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    [TemporaryBattleList['Warden Ingo']]// Should be in Clamberclaw Cliffs but that is a route for now. Might get an overworld sprite if possible
+);
+TownList['Sacred Plaza'] = new DungeonTown(
+    'Sacred Plaza',
+    GameConstants.Region.sinnoh,
+    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)]
+);
+TownList['Crevasse Passage'] = new DungeonTown(
+    'Crevasse Passage',
+    GameConstants.Region.sinnoh,
+    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)]
+);
+TownList['Ice Column Chamber'] = new DungeonTown(
+    'Ice Column Chamber',
+    GameConstants.Region.sinnoh,
+    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)]
+);
+TownList['Icepeak Cavern'] = new DungeonTown(
+    'Icepeak Cavern',
+    GameConstants.Region.sinnoh,
+    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)]
+);
+TownList['Ancient Snowpoint Temple'] = new DungeonTown(
+    'Ancient Snowpoint Temple',
+    GameConstants.Region.sinnoh,
+    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    [TemporaryBattleList['Warden Sabi'], TemporaryBattleList['Hisuian Braviary']]
+);
+TownList['Seaside Hollow'] = new DungeonTown(
+    'Seaside Hollow',
+    GameConstants.Region.sinnoh,
+    [
+        new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0),
+        new ObtainedPokemonRequirement(pokemonMap.Overqwil),
+    ]
+);
+TownList['Ancient Lake Verity'] = new DungeonTown(
+    'Ancient Lake Verity',
+    GameConstants.Region.sinnoh,
+    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)]
+);
+TownList['Ancient Lake Valor'] = new DungeonTown(
+    'Ancient Lake Valor',
+    GameConstants.Region.sinnoh,
+    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    [TemporaryBattleList['Adaman 2']]
+);
+TownList['Ancient Lake Acuity'] = new DungeonTown(
+    'Ancient Lake Acuity',
+    GameConstants.Region.sinnoh,
+    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)]
 );
 
 //Unova Shops

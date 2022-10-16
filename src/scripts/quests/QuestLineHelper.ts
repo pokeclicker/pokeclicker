@@ -1890,6 +1890,304 @@ class QuestLineHelper {
         App.game.quests.questLines().push(magearnaQuestLine);
     }
 
+    public static createHisuiNobleQuestLine() {
+        const hisuiNobleQuestLine = new QuestLine('The Noble Light of Arceus', 'Uncover the Arceus in Hisui, the ancient past of the Sinnoh region.', new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion), GameConstants.BulletinBoards.Galar);
+
+        const talktoArceus1 = new TalkToNPCQuest(Arceus1, 'Speak to Arceus at the Hall of Origin in Sinnoh.');
+        hisuiNobleQuestLine.addQuest(talktoArceus1);
+
+        const talktoLaventon1 = new TalkToNPCQuest(Laventon1, 'Use the Subregional Travel button at the top of the map to travel to Hisui and speak with Professor Laventon at Prelude Beach.');
+        hisuiNobleQuestLine.addQuest(talktoLaventon1);
+
+        const talktoArcPhone = new TalkToNPCQuest(ArcPhone, 'Pick up the Arc Phone at Prelude Beach.');
+        hisuiNobleQuestLine.addQuest(talktoArcPhone);
+
+        const talktoLaventon2 = new TalkToNPCQuest(Laventon2, 'Speak with Professor Laventon at Prelude Beach.');
+        hisuiNobleQuestLine.addQuest(talktoLaventon2);
+
+        const catchRowlet = new CaptureSpecificPokemonQuest('Rowlet', 'Catch Rowlet.', 1, false, 0, undefined);
+        const catchCyndaquil = new CaptureSpecificPokemonQuest('Cyndaquil', 'Catch Cyndaquil.', 1, false, 0, undefined);
+        const catchOshawott = new CaptureSpecificPokemonQuest('Oshawott', 'Catch Oshawott.', 1, false, 0, undefined);
+        hisuiNobleQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                catchRowlet,
+                catchCyndaquil,
+                catchOshawott,
+            ], 'Catch Rowlet, Cyndaquil and Oshawott at Prelude Beach.'));
+
+        const talktoLaventon3 = new TalkToNPCQuest(Laventon3, 'Speak with Professor Laventon at Prelude Beach.');
+        hisuiNobleQuestLine.addQuest(talktoLaventon3);
+
+        const talktoLaventon4 = new TalkToNPCQuest(Laventon4, 'Speak with Professor Laventon in Jubilife Village.');
+        hisuiNobleQuestLine.addQuest(talktoLaventon4);
+
+        const talktoBeni1 = new TalkToNPCQuest(Beni1, 'Talk to Beni in Jubilife Village.');
+        hisuiNobleQuestLine.addQuest(talktoBeni1);
+
+        const talktoAkari1 = new TalkToNPCQuest(Akari1, 'Talk to Akari in Jubilife Village.');
+        hisuiNobleQuestLine.addQuest(talktoAkari1);
+
+        const talktoCyllene1 = new TalkToNPCQuest(Cyllene1, 'Speak with Captain Cyllene in Jubilife Village.');
+        hisuiNobleQuestLine.addQuest(talktoCyllene1);
+
+        const talktoLaventon5 = new TalkToNPCQuest(Laventon5, 'Speak with Professor Laventon in Jubilife Village.');
+        hisuiNobleQuestLine.addQuest(talktoLaventon5);
+
+        const talktoCyllene2 = new TalkToNPCQuest(Cyllene2, 'Speak with Captain Cyllene in Jubilife Village.');
+        hisuiNobleQuestLine.addQuest(talktoCyllene2);
+
+        const talktoCyllene3 = new TalkToNPCQuest(Cyllene3, 'Speak with Captain Cyllene in Galaxy Hall.');
+        hisuiNobleQuestLine.addQuest(talktoCyllene3);
+
+        //Would be neat but kinda unnecessary to have a starter choice here
+        const talktoLaventon6 = new TalkToNPCQuest(Laventon6, 'Speak with Professor Laventon in Galaxy Hall.');
+        hisuiNobleQuestLine.addQuest(talktoLaventon6);
+
+        const talktoVolo1 = new TalkToNPCQuest(Volo1, 'Talk to Volo in Jubilife Village.');
+        hisuiNobleQuestLine.addQuest(talktoVolo1);
+
+        const clearVolo1 = new CustomQuest(1, 0, 'Defeat Volo in Jubilife Village.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Volo 1')]());
+        hisuiNobleQuestLine.addQuest(clearVolo1);
+
+        const talktoAkari2 = new TalkToNPCQuest(Akari2, 'Talk to Akari at Fieldlands Camp.');
+        hisuiNobleQuestLine.addQuest(talktoAkari2);
+
+        const catchBidoof = new CaptureSpecificPokemonQuest('Bidoof', 'Catch Bidoof.', 1, false, 0, undefined);
+        const catchStarly = new CaptureSpecificPokemonQuest('Starly', 'Catch Starly.', 1, false, 0, undefined);
+        const catchShinx = new CaptureSpecificPokemonQuest('Shinx', 'Catch Shinx.', 1, false, 0, undefined);
+        hisuiNobleQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                catchBidoof,
+                catchStarly,
+                catchShinx,
+            ], 'Catch Bidoof, Starly and Shinx.'));
+
+        const talktoLaventon7 = new TalkToNPCQuest(Laventon7, 'Speak with Professor Laventon at Fieldlands Camp.');
+        hisuiNobleQuestLine.addQuest(talktoLaventon7);
+
+        const talktoCyllene4 = new TalkToNPCQuest(Cyllene4, 'Speak with Captain Cyllene in Galaxy Hall.');
+        hisuiNobleQuestLine.addQuest(talktoCyllene4);
+
+        const talktoKamado1 = new TalkToNPCQuest(Kamado1, 'Speak with Commander Kamado in Galaxy Hall.');
+        hisuiNobleQuestLine.addQuest(talktoKamado1);
+
+        const talktoAkari3 = new TalkToNPCQuest(Akari3, 'Talk to Akari in Jubilife Village.');
+        hisuiNobleQuestLine.addQuest(talktoAkari3);
+
+        const clearAkari1 = new CustomQuest(1, 0, 'Defeat Akari in Jubilife Village.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Akari 1')]());
+        hisuiNobleQuestLine.addQuest(clearAkari1);
+
+        const talktoAkari4 = new TalkToNPCQuest(Akari4, 'Talk to Akari in Jubilife Village.');
+        hisuiNobleQuestLine.addQuest(talktoAkari4);
+
+        const talktoMai1 = new TalkToNPCQuest(Mai1, 'Talk to Warden Mai at Fieldlands Camp.');
+        hisuiNobleQuestLine.addQuest(talktoMai1);
+
+        const clearMai = new CustomQuest(1, 0, 'Defeat Warden Mai at Fieldlands Camp.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Warden Mai')]());
+        hisuiNobleQuestLine.addQuest(clearMai);
+
+        const talktoMai2 = new TalkToNPCQuest(Mai2, 'Talk to Warden Mai at Fieldlands Camp.');
+        hisuiNobleQuestLine.addQuest(talktoMai2);
+
+        const talktoMai3 = new TalkToNPCQuest(Mai3, 'Talk to Warden Mai at Heights Camp.');
+        hisuiNobleQuestLine.addQuest(talktoMai3);
+
+        const clearAlphaKricketune = new CustomQuest(1, 0, 'Defeat Alpha Kricketune at Heights Camp.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Alpha Kricketune')]());
+        hisuiNobleQuestLine.addQuest(clearAlphaKricketune);
+
+        const talktoMai4 = new TalkToNPCQuest(Mai4, 'Talk to Warden Mai at Heights Camp.');
+        hisuiNobleQuestLine.addQuest(talktoMai4);
+
+        const talktoBeni2 = new TalkToNPCQuest(Beni2, 'Talk to Beni in Jubilife Village.');
+        hisuiNobleQuestLine.addQuest(talktoBeni2);
+
+        const talktoAdamanIrida1 = new TalkToNPCQuest(AdamanIrida1, 'Listen to Adaman and Irida in Jubilife Village.');
+        hisuiNobleQuestLine.addQuest(talktoAdamanIrida1);
+
+        const talktoAkari5 = new TalkToNPCQuest(Akari5, 'Talk to Akari in Jubilife Village.');
+        hisuiNobleQuestLine.addQuest(talktoAkari5);
+
+        const talktoAdamanIridaKamado1 = new TalkToNPCQuest(AdamanIridaKamado1, 'Speak with Adaman, Irida and Kamado in Galaxy Hall.');
+        hisuiNobleQuestLine.addQuest(talktoAdamanIridaKamado1);
+
+        const talktoLaventonCyllene1 = new TalkToNPCQuest(LaventonCyllene1, 'Speak with Laventon and Cyllene in Galaxy Hall.');
+        hisuiNobleQuestLine.addQuest(talktoLaventonCyllene1);
+
+        const talktoAdamanMai1 = new TalkToNPCQuest(AdamanMai1, 'Talk to Adaman and Mai in Galaxy Hall.');
+        hisuiNobleQuestLine.addQuest(talktoAdamanMai1);
+
+        const talktoLian1 = new TalkToNPCQuest(Lian1, 'Talk to Warden Lian at Grandtree Arena.');
+        hisuiNobleQuestLine.addQuest(talktoLian1);
+
+        const clearLian = new CustomQuest(1, 0, 'Defeat Warden Lian at Grandtree Arena.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Warden Lian')]());
+        hisuiNobleQuestLine.addQuest(clearLian);
+
+        const talktoLianIrida1 = new TalkToNPCQuest(LianIrida1, 'Talk to Lian and Irida at Grandtree Arena.');
+        hisuiNobleQuestLine.addQuest(talktoLianIrida1);
+
+        const talktoLaventon8 = new TalkToNPCQuest(Laventon8, 'Speak with Professor Laventon at Fieldlands Camp.');
+        hisuiNobleQuestLine.addQuest(talktoLaventon8);
+
+        const talktoLaventon9 = new TalkToNPCQuest(Laventon9, 'Speak with Professor Laventon in Galaxy Hall.');
+        hisuiNobleQuestLine.addQuest(talktoLaventon9);
+
+        const talktoMai5 = new TalkToNPCQuest(Mai5, 'Talk to Warden Mai in Jubilife Village.');
+        hisuiNobleQuestLine.addQuest(talktoMai5);
+
+        const SacredMindPlateReward = () => {
+            BagHandler.gainItem({type: ItemType.item, id: 'Sacred Mind Plate'}, 1);
+            Notifier.notify({
+                title: hisuiNobleQuestLine.name,
+                message: 'You recieved the Sacred Mind Plate from Wyrdeer!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
+        const talktoAdamanMai2 = new TalkToNPCQuest(AdamanMai2, 'Talk to Adaman and Mai at Heights Camp.', SacredMindPlateReward);
+        hisuiNobleQuestLine.addQuest(talktoAdamanMai2);
+
+        const talktoLianIrida2 = new TalkToNPCQuest(LianIrida2, 'Talk to Lian and Irida at Grandtree Arena.');
+        hisuiNobleQuestLine.addQuest(talktoLianIrida2);
+
+        const clearIrida1 = new CustomQuest(1, 0, 'Defeat Clan Leader Irida at Grandtree Arena.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Irida 1')]());
+        hisuiNobleQuestLine.addQuest(clearIrida1);
+
+        const talktoLianIrida3 = new TalkToNPCQuest(LianIrida3, 'Talk to Lian and Irida at Grandtree Arena.');
+        hisuiNobleQuestLine.addQuest(talktoLianIrida3);
+
+        const SacredInsectPlateReward = () => {
+            BagHandler.gainItem({type: ItemType.item, id: 'Sacred Insect Plate'}, 1);
+            Notifier.notify({
+                title: hisuiNobleQuestLine.name,
+                message: 'You recieved the Sacred Insect Plate from Kleavor!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
+        const clearNobleKleavor = new CustomQuest(1, SacredInsectPlateReward, 'Defeat the Lord of the Woods, Kleavor, at Grandtree Arena.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Noble Kleavor 1')]());
+        hisuiNobleQuestLine.addQuest(clearNobleKleavor);
+
+        const talktoLianIrida4 = new TalkToNPCQuest(LianIrida4, 'Talk to Lian and Irida at Grandtree Arena.');
+        hisuiNobleQuestLine.addQuest(talktoLianIrida4);
+
+        const talktoVolo2 = new TalkToNPCQuest(Volo2, 'Talk to Volo in Jubilife Village.');
+        hisuiNobleQuestLine.addQuest(talktoVolo2);
+
+        const talktoKamado2 = new TalkToNPCQuest(Kamado2, 'Speak with Commander Kamado in Galaxy Hall.');
+        hisuiNobleQuestLine.addQuest(talktoKamado2);
+
+        const talktoArezu1 = new TalkToNPCQuest(Arezu1, 'Talk to Warden Arezu in Jubilife Village.');
+        hisuiNobleQuestLine.addQuest(talktoArezu1);
+
+        const talktoKamadoArezu1 = new TalkToNPCQuest(KamadoArezu1, 'Talk to Kamado and Arezu in Galaxy Hall.');
+        hisuiNobleQuestLine.addQuest(talktoKamadoArezu1);
+
+        const talktoCyllene5 = new TalkToNPCQuest(Cyllene5, 'Speak with Captain Cyllene in Galaxy Hall.');
+        hisuiNobleQuestLine.addQuest(talktoCyllene5);
+
+        const talktoAkari6 = new TalkToNPCQuest(Akari6, 'Talk to Akari in Jubilife Village.');
+        hisuiNobleQuestLine.addQuest(talktoAkari6);
+
+        const clearAkari2 = new CustomQuest(1, 0, 'Defeat Akari in Jubilife Village.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Akari 2')]());
+        hisuiNobleQuestLine.addQuest(clearAkari2);
+
+        const talktoLaventonAkari1 = new TalkToNPCQuest(LaventonAkari1, 'Speak with Laventon and Akari at Mirelands Camp.');
+        hisuiNobleQuestLine.addQuest(talktoLaventonAkari1);
+
+        const talktoCalaba1 = new TalkToNPCQuest(Calaba1, 'Speak to Warden Calaba in Ancient Solaceon Ruins.');
+        hisuiNobleQuestLine.addQuest(talktoCalaba1);
+
+        const talktoVolo3 = new TalkToNPCQuest(Volo3, 'Talk to Volo in Ancient Solaceon Ruins.');
+        hisuiNobleQuestLine.addQuest(talktoVolo3);
+
+        const clearVolo2 = new CustomQuest(1, 0, 'Defeat Volo in Ancient Solaceon Ruins.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Volo 2')]());
+        hisuiNobleQuestLine.addQuest(clearVolo2);
+
+        const talktoVolo4 = new TalkToNPCQuest(Volo4, 'Talk to Volo in Ancient Solaceon Ruins.');
+        hisuiNobleQuestLine.addQuest(talktoVolo4);
+
+        const talktoCharmCloverCoin1 = new TalkToNPCQuest(CharmCloverCoin1, 'Talk to Charm, Clover and Coin at Mirelands Camp.');
+        hisuiNobleQuestLine.addQuest(talktoCharmCloverCoin1);
+
+        const clearCoin1 = new CustomQuest(1, 0, 'Defeat Coin at Mirelands Camp.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Coin 1')]());
+        hisuiNobleQuestLine.addQuest(clearCoin1);
+
+        const talktoCharmCloverCoin2 = new TalkToNPCQuest(CharmCloverCoin2, 'Talk to Charm, Clover and Coin at Mirelands Camp.');
+        hisuiNobleQuestLine.addQuest(talktoCharmCloverCoin2);
+
+        const talktoVolo5 = new TalkToNPCQuest(Volo5, 'Talk to Volo in Ancient Solaceon Ruins.');
+        hisuiNobleQuestLine.addQuest(talktoVolo5);
+
+        const talktoCalaba2 = new TalkToNPCQuest(Calaba2, 'Speak to Warden Calaba in Ancient Solaceon Ruins.');
+        hisuiNobleQuestLine.addQuest(talktoCalaba2);
+
+        const talktoCalaba3 = new TalkToNPCQuest(Calaba3, 'Speak to Warden Calaba at Sludge Mound.');
+        hisuiNobleQuestLine.addQuest(talktoCalaba3);
+
+        const clearUrsaluna = new CustomQuest(1, 0, 'Defeat Ursaluna at Sludge Mound.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ursaluna')]());
+        hisuiNobleQuestLine.addQuest(clearUrsaluna);
+
+        const SacredEarthPlateReward = () => {
+            BagHandler.gainItem({type: ItemType.item, id: 'Sacred Ursaluna Plate'}, 1);
+            Notifier.notify({
+                title: hisuiNobleQuestLine.name,
+                message: 'You recieved the Sacred Earth Plate from Ursaluna!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
+        const talktoCalaba4 = new TalkToNPCQuest(Calaba4, 'Speak to Warden Calaba at Sludge Mound.', SacredEarthPlateReward);
+        hisuiNobleQuestLine.addQuest(talktoCalaba4);
+
+        const talktoBeniAdamanKamado1 = new TalkToNPCQuest(BeniAdamanKamado1, 'Speak to Beni, Adaman and Kamado at Galaxy Hall.');
+        hisuiNobleQuestLine.addQuest(talktoBeniAdamanKamado1);
+
+        const arezuSearch = new DefeatPokemonsQuest(100, 0, ?, GameConstants.Region.sinnoh, 'Search the Crimson Mirelands for Arezu.');
+        hisuiNobleQuestLine.addQuest(arezuSearch);
+
+        const talktoArezuCalabaAdaman1 = new TalkToNPCQuest(ArezuCalabaAdaman1, 'Speak to Arezu, Calaba and Adaman at Diamond Settlement.');
+        hisuiNobleQuestLine.addQuest(talktoArezuCalabaAdaman1);
+
+        const talktoArezuCalabaAdaman2 = new TalkToNPCQuest(ArezuCalabaAdaman2, 'Speak to Arezu, Calaba and Adaman at Brava Arena.');
+        hisuiNobleQuestLine.addQuest(talktoArezuCalabaAdaman2);
+
+        const SacredMeadowPlateReward = () => {
+            BagHandler.gainItem({type: ItemType.item, id: 'Sacred Meadow Plate'}, 1);
+            Notifier.notify({
+                title: hisuiNobleQuestLine.name,
+                message: 'You recieved the Sacred Meadow Plate from Lilligant!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
+        const clearNobleLilligant = new CustomQuest(1, SacredMeadowPlateReward, 'Defeat the Lady of the Ridge, Lilligant, at Brava Arena.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Noble Lilligant 1')]());
+        hisuiNobleQuestLine.addQuest(clearNobleLilligant);
+
+        /*
+        Seek out all Pokémon Quest. No idea how to do this. The closest I could get it to work is this, but that counted every catch of the relevant Pokémon.
+        Would also take up like a thousand lines like this. Probably best to find another way.
+
+        const seekOutAllPokemon = new CustomQuest (905+regionalvariants, 0, 'Seek out all Pokémon.', () =>
+            App.game.statistics.pokemonCaptured[pokemonMap.Bulbasaur.id](), 0 +
+            App.game.statistics.pokemonCaptured[pokemonMap.Ivysaur.id](), 0 +
+            App.game.statistics.pokemonCaptured[pokemonMap.Venusaur.id](), 0
+            etc
+        );
+        hisuiNobleQuestLine.addQuest(seekOutAllPokemon);
+        */
+
+        App.game.quests.questLines().push(hisuiNobleQuestLine);
+    }
+
+    public static createHisuiForcesQuestLine() {
+        const hisuiForcesQuestLine = new QuestLine('Incarnate Forces of Hisui', 'Something something Cogita something something Forces of Nature', new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion), GameConstants.BulletinBoards.Hisui);
+
+        App.game.quests.questLines().push(hisuiForcesQuestLine);
+
     // Event QuestLines
     // Open the game between April 8-29.
     public static createFindSurpriseTogepiForEasterQuestLine() {
@@ -2007,6 +2305,8 @@ class QuestLineHelper {
         this.createDynaTreeBirdsQuestLine();
         this.createAncientGolemsQuestLine();
         this.createOriginalColorMagearnaQuestLine();
+        this.createHisuiNobleQuestLine();
+        this.createHisuiForcesQuestLine();
         this.createFindSurpriseTogepiForEasterQuestLine();
         this.createHoopaDayPikabluQuestLine();
     }

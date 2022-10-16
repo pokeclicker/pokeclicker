@@ -54,6 +54,7 @@ SubRegions.addSubRegion(Region.johto, new SubRegion('Johto', JohtoSubRegions.Joh
 SubRegions.addSubRegion(Region.hoenn, new SubRegion('Hoenn', HoennSubRegions.Hoenn));
 
 SubRegions.addSubRegion(Region.sinnoh, new SubRegion('Sinnoh', SinnohSubRegions.Sinnoh));
+SubRegions.addSubRegion(Region.sinnoh, new SubRegion('Hisui', SinnohSubRegions.Hisui, new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1), 'Prelude Beach'));
 
 SubRegions.addSubRegion(Region.unova, new SubRegion('Unova', UnovaSubRegions.Unova));
 

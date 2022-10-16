@@ -719,6 +719,25 @@ class ShardDeal {
                     1),
             ]
         );
+        // Hisui Shard Traders
+        ShardDeal.list[GameConstants.ShardTraderLocations['Jubilife Village']] = ko.observableArray(
+            [
+                new ShardDeal(
+                    [
+                        {shardTypeString: 'Red Shard', amount: 50},
+                        {shardTypeString: 'Beige Shard', amount: 75},
+                    ],
+                    ItemList.Black_augurite,
+                    1),
+                new ShardDeal(
+                    [
+                        {shardTypeString: 'Yellow Shard', amount: 50},
+                        {shardTypeString: 'Beige Shard', amount: 75},
+                    ],
+                    ItemList.Peat_block,
+                    1),
+            ]
+        );
     }
 
     public static generateUnovaDeals() {

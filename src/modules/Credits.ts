@@ -512,8 +512,17 @@ export const SpriteCredits: Credit[] = [
         // Notes: Permission given via Discord #development-chat
     },
     {
-        name: 'Qwertypop04',
+        name: 'QDylm',
         link: 'https://discordapp.com/users/345944451472031744/',
+        image: 'https://a.deviantart.net/avatars-big/q/d/qdylm.jpg',
+        resources: [
+            'Adaman',
+        ],
+        // Notes: Permission given with credit.
+    },
+    {
+        name: 'Qwertypop04',
+        link: 'https://www.deviantart.com/qdylm',
         resources: [
             'Pinkan Rhydon',
         ],

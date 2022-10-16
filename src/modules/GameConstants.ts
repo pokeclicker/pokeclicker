@@ -41,7 +41,7 @@ export enum Region {
     final = 8,
 }
 
-export const MAX_AVAILABLE_REGION = Region.alola;
+export const MAX_AVAILABLE_REGION = Region.galar;
 
 export const MaxIDPerRegion = [
     151, // 151 - Kanto
@@ -51,7 +51,7 @@ export const MaxIDPerRegion = [
     649, // 156 - Unova
     721, // 72 - Kalos
     809, // 88 - Alola
-    898, // 89 - Galar
+    905, // 96 - 89 Galar + 7 Hisui
 ];
 
 // Battle Items
@@ -673,6 +673,8 @@ export enum StoneType {
     'Galarica_wreath',
     'Black_mane_hair',
     'White_mane_hair',
+    'Black_augurite',
+    'Peat_block',
 }
 
 export enum FossilPieceType {
@@ -797,6 +799,7 @@ export enum BulletinBoards {
     Galar,
     Armor,
     Crown,
+    Hisui,
 }
 
 export const EnergyRestoreEffect = {
@@ -1117,6 +1120,23 @@ export const SinnohDungeons = [
     'Snowpoint Temple',
     'Stark Mountain',
     'Hall of Origin', // 79
+    // Hisui
+    'Oreburrow Tunnel',
+    'Heartwood',
+    'Shrouded Ruins',
+    'Firespit Island',
+    'Ancient Wayward Cave',
+    'Ancient Quarry',
+    'Celestica Ruins',
+    'Sacred Plaza',
+    'Crevasse Passage',
+    'Ice Column Chamber',
+    'Icepeak Cavern',
+    'Ancient Snowpoint Temple',
+    'Seaside Hollow',
+    'Ancient Lake Verity',
+    'Ancient Lake Valor',
+    'Ancient Lake Acuity',
 ];
 
 export const UnovaDungeons = [
@@ -1426,6 +1446,50 @@ export const TemporaryBattles = [
     'Galarian Moltres 2',
     'Galarian Moltres 3',
     'Regigigas',
+    'Volo 1',
+    'Akari 1',
+    'Warden Mai',
+    'Alpha Kricketune',
+    'Warden Lian',
+    'Irida 1',
+    'Noble Kleavor 1',
+    'Akari 2',
+    'Volo 2',
+    'Ursaluna',
+    'Noble Lilligant 1',
+    'Irida 2',
+    'Noble Arcanine 1',
+    'Adaman 1',
+    'Melli 1',
+    'Warden Ingo',
+    'Melli 2',
+    'Noble Electrode 1',
+    'Warden Gaeric',
+    'Warden Sabi',
+    'Hisuian Braviary',
+    'Noble Avalugg 1',
+    'Beni',
+    'Kamado 1',
+    'Dialga (Origin) 1',
+    'Palkia (Origin) 1',
+    'Kamado 2',
+    'Noble Kleavor 2',
+    'Noble Lilligant 2',
+    'Noble Arcanine 2',
+    'Noble Electrode 2',
+    'Noble Avalugg 2',
+    'Adaman 2',
+    'Irida 3',
+    'Dialga (Origin) 2',
+    'Palkia (Origin) 2',
+    'Volo 3',
+    'Volo 4',
+    'Giratina (Origin)',
+    'Tornadus',
+    'Thundurus',
+    'Landorus',
+    'Enamorus',
+    'Arceus',
 ];
 
 export enum ShardTraderLocations {
@@ -1467,6 +1531,7 @@ export enum ShardTraderLocations {
     'Sunyshore City',
     'Survival Area',
     'Resort Area',
+    'Jubilife Village',
     'Castelia City',
     'Nimbasa City',
     'Driftveil City',
@@ -1562,6 +1627,7 @@ export enum HoennSubRegions {
 
 export enum SinnohSubRegions {
     Sinnoh = 0,
+    Hisui,
 }
 
 export enum UnovaSubRegions {
@@ -1629,4 +1695,5 @@ export enum AlcremieSpins {
 export enum ExtraAchievementCategories {
     global = Region.final,
     sevii,
+    hisui,
 }

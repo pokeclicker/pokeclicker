@@ -291,6 +291,8 @@ namespace GameConstants {
         'Galarica_wreath',
         'Black_mane_hair',
         'White_mane_hair',
+        'Black_augurite',
+        'Peat_block',
     }
     declare enum FossilPieceType {
         'None',
@@ -406,7 +408,8 @@ namespace GameConstants {
         Alola,
         Galar,
         Armor,
-        Crown
+        Crown,
+        Hisui
     }
     declare const EnergyRestoreEffect: {
         SmallRestore: number;
@@ -525,6 +528,7 @@ namespace GameConstants {
         'Sunyshore City',
         'Survival Area',
         'Resort Area',
+        'Jubilife Village',
         'Castelia City',
         'Nimbasa City',
         'Driftveil City',
@@ -586,6 +590,7 @@ namespace GameConstants {
     }
     declare enum SinnohSubRegions {
         Sinnoh,
+        Hisui,
     }
     declare enum UnovaSubRegions {
         Unova,
@@ -648,5 +653,6 @@ namespace GameConstants {
     declare enum ExtraAchievementCategories {
         global,
         sevii,
+        hisui,
     }
 }

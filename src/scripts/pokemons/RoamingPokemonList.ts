@@ -8,7 +8,7 @@ class RoamingPokemonList {
         [[GameConstants.KantoSubRegions.Kanto], [GameConstants.KantoSubRegions.Sevii123, GameConstants.KantoSubRegions.Sevii4567]],
         [[GameConstants.JohtoSubRegions.Johto]],
         [[GameConstants.HoennSubRegions.Hoenn]],
-        [[GameConstants.SinnohSubRegions.Sinnoh]],
+        [[GameConstants.SinnohSubRegions.Sinnoh], [GameConstants.SinnohSubRegions.Hisui]],
         [[GameConstants.UnovaSubRegions.Unova]],
         [[GameConstants.KalosSubRegions.Kalos]],
         [[GameConstants.AlolaSubRegions.MelemeleIsland, GameConstants.AlolaSubRegions.AkalaIsland, GameConstants.AlolaSubRegions.UlaulaIsland, GameConstants.AlolaSubRegions.PoniIsland]],
@@ -95,6 +95,9 @@ RoamingPokemonList.add(GameConstants.Region.hoenn, 0, new RoamingPokemon('Jirach
 RoamingPokemonList.add(GameConstants.Region.sinnoh, 0, new RoamingPokemon('Manaphy'));
 RoamingPokemonList.add(GameConstants.Region.sinnoh, 0, new RoamingPokemon('Mesprit', new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Distortion World'))));
 RoamingPokemonList.add(GameConstants.Region.sinnoh, 0, new RoamingPokemon('Cresselia', new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Fullmoon Island'))));
+
+// Hisui
+RoamingPokemonList.add(GameConstants.Region.sinnoh, 1, new RoamingPokemon('Enamorus', new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 0)));
 
 // Unova
 RoamingPokemonList.add(GameConstants.Region.unova, 0, new RoamingPokemon('Tornadus', new GymBadgeRequirement(BadgeEnums.Legend)));

@@ -87,3 +87,5 @@ ItemList.Galarica_cuff     = new EvolutionStone(GameConstants.StoneType.Galarica
 ItemList.Galarica_wreath   = new EvolutionStone(GameConstants.StoneType.Galarica_wreath, 5000, undefined , 'Galarica Wreath');
 ItemList.Black_mane_hair   = new EvolutionStone(GameConstants.StoneType.Black_mane_hair, 2500, undefined, 'Black Mane Hair');
 ItemList.White_mane_hair   = new EvolutionStone(GameConstants.StoneType.White_mane_hair, 2500, undefined, 'White Mane Hair');
+ItemList.Black_augurite     = new EvolutionStone(GameConstants.StoneType.Black_augurite, 5000, undefined , 'Black Augurite');
+ItemList.Peat_block   = new EvolutionStone(GameConstants.StoneType.Peat_block, 5000, undefined , 'Peat Block');
