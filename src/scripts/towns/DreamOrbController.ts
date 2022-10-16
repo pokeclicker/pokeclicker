@@ -4,7 +4,7 @@ class DreamOrbLoot {
 }
 
 class DreamOrb {
-    public amount = ko.observable(100); //TODO: change to 0 before merge
+    public amount = ko.observable(0);
     constructor(public color: string, public requirement: Requirement, public items: DreamOrbLoot[]) {
     }
 }
