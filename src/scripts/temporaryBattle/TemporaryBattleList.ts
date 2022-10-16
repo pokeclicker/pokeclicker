@@ -1944,13 +1944,13 @@ TemporaryBattleList['Galarian Articuno 1'] = new TemporaryBattle(
     '<i>Galarian Articuno fled to elsewhere in the Crown Tundra.</i>',
     [
         new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 3),
-        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Roaring Sea Caves')),
+        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Roaring-Sea Caves')),
     ],
     undefined,
     {
         hideTrainer: true,
         displayName: 'Galarian Articuno',
-        returnTown: 'Roaring Sea Caves',
+        returnTown: 'Roaring-Sea Caves',
         imageName: '../pokemon/144.1',
         visibleRequirement: new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 3),
     }
@@ -1967,7 +1967,7 @@ TemporaryBattleList['Galarian Articuno 2'] = new TemporaryBattle(
     {
         hideTrainer: true,
         displayName: 'Galarian Articuno',
-        returnTown: 'Roaring Sea Caves',
+        returnTown: 'Roaring-Sea Caves',
         imageName: '../pokemon/144.1',
         visibleRequirement: new TemporaryBattleRequirement('Galarian Articuno 1'),
     }
