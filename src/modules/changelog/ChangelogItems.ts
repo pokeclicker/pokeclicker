@@ -10,6 +10,68 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.9.18
+    new ChangelogUpdate('v0.9.18', new Date(2022, 9, 10)),
+    new Changelog(changelogType.FIXED, 'Some saves not being able to update to v0.9.17'),
+
+    // v0.9.17
+    new ChangelogUpdate('v0.9.17', new Date(2022, 9, 10)),
+    new Changelog(changelogType.NEW, 'Held items [BETA]'),
+    new Changelog(changelogType.NEW, 'Sudowoodo overworld battles added'),
+    new Changelog(changelogType.NEW, 'Sevii now has it\'s own achievement pool'),
+    new Changelog(changelogType.NEW, 'Dungeon floors added for dungeons of size 10 or bigger'),
+    new Changelog(changelogType.CHANGE, 'Updated Kalos route 1 encounters'),
+    new Changelog(changelogType.CHANGE, 'Hoenn badge requirement ordering'),
+    new Changelog(changelogType.CHANGE, 'Updated typed egg pools'),
+    new Changelog(changelogType.CHANGE, 'Caught indicator for berry deals'),
+    new Changelog(changelogType.CHANGE, 'Dungeon Token flute now helps with EVs instead'),
+    new Changelog(changelogType.CHANGE, 'Farm hands will no longer attempt to place berries you do not have'),
+    new Changelog(changelogType.CHANGE, 'Global achievement bonus increased to 150%'),
+    new Changelog(changelogType.CHANGE, 'Improved Hatchery and Pokédex loading times'),
+    new Changelog(changelogType.CHANGE, 'Adjusted Underground layer generation'),
+    new Changelog(changelogType.CHANGE, 'Misc text changes'),
+    new Changelog(changelogType.CHANGE, 'Misc UI changes'),
+    new Changelog(changelogType.CHANGE, 'Misc image changes'),
+    new Changelog(changelogType.FIXED, 'Enigma will now show the full hint once unlocked'),
+    new Changelog(changelogType.FIXED, 'Diancie Questline requirements'),
+    new Changelog(changelogType.FIXED, 'Farm aura calculations'),
+    new Changelog(changelogType.FIXED, 'Pokérus spreading between helpers'),
+
+    // v0.9.16
+    new ChangelogUpdate('v0.9.16', new Date(2022, 8, 21)),
+    new Changelog(changelogType.NEW, 'New Furfrou form added'),
+    new Changelog(changelogType.CHANGE, 'Buffed Pinkan berry harvest rate'),
+    new Changelog(changelogType.CHANGE, 'Misc text changes'),
+    new Changelog(changelogType.CHANGE, 'Misc UI changes'),
+    new Changelog(changelogType.CHANGE, 'Misc image changes'),
+    new Changelog(changelogType.CHANGE, 'Added a Dock to Seafolk Village'),
+    new Changelog(changelogType.CHANGE, 'Re-adjusted when hatchery sounds play'),
+    new Changelog(changelogType.FIXED, 'Fix farm harvested statistics'),
+    new Changelog(changelogType.FIXED, 'Master Farmer achievement'),
+
+    // v0.9.15
+    new ChangelogUpdate('v0.9.15', new Date(2022, 8, 20)),
+    new Changelog(changelogType.NEW, 'More Pokémon forms added'),
+    new Changelog(changelogType.NEW, 'More one off battles added'),
+    new Changelog(changelogType.NEW, 'New questlines'),
+    new Changelog(changelogType.NEW, 'New setting added for quest modal'),
+    new Changelog(changelogType.NEW, 'Hatchery size settings'),
+    new Changelog(changelogType.NEW, 'Updated Alola maps'),
+    new Changelog(changelogType.NEW, 'Added Pinkan berry'),
+    new Changelog(changelogType.CHANGE, 'Unova, Kalos and Alola Elite 4 can now be challenged in any order'),
+    new Changelog(changelogType.CHANGE, 'Misc text changes'),
+    new Changelog(changelogType.CHANGE, 'Misc UI changes'),
+    new Changelog(changelogType.CHANGE, 'Misc map changes'),
+    new Changelog(changelogType.CHANGE, 'Misc Pokémon stats updated'),
+    new Changelog(changelogType.CHANGE, 'Misc NPC changes'),
+    new Changelog(changelogType.CHANGE, 'Improved load times for Pokédex and Hatchery'),
+    new Changelog(changelogType.FIXED, 'Harvest rates for berries with a 0.5 harvest rate'),
+    new Changelog(changelogType.FIXED, 'Farm hands not remembering to focus Cheri berries'),
+    new Changelog(changelogType.FIXED, 'Farm hands not ignoring locked plots'),
+    new Changelog(changelogType.FIXED, 'Discord login should be more consistent'),
+    new Changelog(changelogType.FIXED, 'Fixed disappearing Pokémon bug for most players'),
+    new Changelog(changelogType.FIXED, 'Buying multiple Pokémon at the shop now applies the correct amount of EVs'),
+
     // v0.9.14
     new ChangelogUpdate('v0.9.14', new Date(2022, 8, 2)),
     new Changelog(changelogType.CHANGE, 'Pinkan Dodrio is now purchasable in place of Pinkan Exeggutor'),

@@ -50,10 +50,13 @@ class Egg implements Saveable {
             this.pokemonType2 = PokemonType.Normal;
         }
 
-        // Deferring this because it wants to access App.game.party, which isn't avaliable yet
-        setTimeout(() => {
+        this.setPartyPokemon();
+    }
+
+    setPartyPokemon() {
+        if (!this.partyPokemon() && App.game?.party) {
             this.partyPokemon(this.type !== EggType.None ? App.game.party.getPokemon(PokemonHelper.getPokemonById(this.pokemon).id) : null);
-        }, 0);
+        }
     }
 
     isNone() {
@@ -76,7 +79,7 @@ class Egg implements Saveable {
         }
         this.updateShinyChance(amount, multiplier);
         this.steps(this.steps() + amount);
-        if (this.canHatch() && helper == false && App.game.breeding.queueList().length == 0) {
+        if (this.canHatch() && !helper) {
             if (this.type == EggType.Pokemon) {
                 Notifier.notify({
                     message: `${PokemonHelper.getPokemonById(this.pokemon).name} is ready to hatch!`,
@@ -110,6 +113,7 @@ class Egg implements Saveable {
         // If the party pokemon exist, increase it's damage output
 
         const pokemonID = PokemonHelper.getPokemonById(this.pokemon).id;
+        const gender = PokemonFactory.generateGenderById(pokemonID);
         if (partyPokemon) {
             // Increase attack
             partyPokemon.attackBonusPercent += Math.max(1, Math.round(GameConstants.BREEDING_ATTACK_BONUS * (efficiency / 100)));
@@ -142,8 +146,6 @@ class Egg implements Saveable {
                 setting: NotificationConstants.NotificationSetting.Hatchery.hatched_shiny,
             });
             App.game.logbook.newLog(LogBookTypes.SHINY, `You hatched a shiny ${PokemonHelper.getPokemonById(this.pokemon).name}! ${App.game.party.alreadyCaughtPokemon(pokemonID, true) ? '(duplicate)' : ''}`);
-            GameHelper.incrementObservable(App.game.statistics.shinyPokemonHatched[pokemonID]);
-            GameHelper.incrementObservable(App.game.statistics.totalShinyPokemonHatched);
         } else {
             Notifier.notify({
                 message: `You hatched ${GameHelper.anOrA(PokemonHelper.getPokemonById(this.pokemon).name)} ${PokemonHelper.getPokemonById(this.pokemon).name}!`,
@@ -151,7 +153,7 @@ class Egg implements Saveable {
                 setting: NotificationConstants.NotificationSetting.Hatchery.hatched,
             });
         }
-        App.game.party.gainPokemonById(pokemonID, shiny);
+        App.game.party.gainPokemonById(pokemonID, shiny, undefined, gender);
 
         // Capture base form if not already caught. This helps players get Gen2 Pokemon that are base form of Gen1
         const pokemonName = PokemonHelper.getPokemonById(this.pokemon).name;
@@ -164,12 +166,11 @@ class Egg implements Saveable {
                 sound: NotificationConstants.NotificationSound.General.new_catch,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
             });
-            App.game.party.gainPokemonById(baseForm.id);
+            App.game.party.gainPokemonById(baseForm.id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_BREEDING));
         }
 
         // Update statistics
-        GameHelper.incrementObservable(App.game.statistics.pokemonHatched[pokemonID]);
-        GameHelper.incrementObservable(App.game.statistics.totalPokemonHatched);
+        PokemonHelper.incrementPokemonStatistics(pokemonID, GameConstants.STATISTIC_HATCHED, shiny, gender);
         App.game.oakItems.use(OakItemType.Blaze_Cassette);
         return true;
     }

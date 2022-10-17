@@ -4,6 +4,7 @@
 /// <reference path="./GymRestriction.ts" />
 /// <reference path="./TimedRestriction.ts" />
 /// <reference path="./EnvironmentRestriction.ts" />
+/// <reference path="./QuestlineRestriction.ts" />
 
 // Used for custom time ranges
 function TimeRestrictedBase<T extends MinimalEvo>(Base: T) {
@@ -57,3 +58,6 @@ const RegionDayTimedLevelEvolution = RegionRestricted(DayTimedLevelEvolution);
 
 // new RegionLevelEvolution(region: GameConstants.Region, basePokemon: string, evolvedPokemon: string, level: number)
 const RegionNightTimedLevelEvolution = RegionRestricted(NightTimedLevelEvolution);
+
+// new QuestlineLevelEvolution(region: GameConstants.Region, basePokemon: string, evolvedPokemon: string, level: number)
+const QuestlineLevelEvolution = QuestlineRestricted(LevelEvolution);

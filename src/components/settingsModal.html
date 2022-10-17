@@ -67,7 +67,7 @@
                             <table class="table table-striped table-hover m-0">
                                 <tbody>
                                 <!-- ko foreach: Object.values(NotificationConstants.NotificationSound[$data]) -->
-                                    <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting(`sound.${$data.name}`)}"></tr>
+                                    <tr data-bind="template: { name: 'SoundSettingTemplate', data: { sound, setting: Settings.getSetting(`sound.${$data.name}`) } }"></tr>
                                 <!-- /ko -->
                                 </tbody>
                             </table>
@@ -251,6 +251,21 @@
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('disableAutoDownloadBackupSaveOnUpdate')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('useWebWorkerForGameTicks')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('disableOfflineProgress')}"></tr>
+                                <tr data-bind="visible: player.highestRegion() > 0, with: Settings.getSetting('breedingQueueSizeSetting')">
+                                    <td class="p-2" data-bind="text: `${$data.displayName}:`">setting name</td>
+                                    <td class="p-0">
+                                        <input type="text" class="form-control"
+                                            data-bind="attr: { name: $data.name, id: `setting-${$data.name}` }, value: $data.observableValue, tooltip: {
+                                                title: `Restrict your hatchery queue to a specific size or disable entirely. Enter a value between 1 and your current max size (${App.game.breeding.queueSlots()}), zero (0) to disable the queue entirely, or -1 for no limit.`,
+                                                trigger: 'hover'
+                                            }"
+                                            onchange="(() => {
+                                                const val = Number.isNaN(parseInt(this.value)) ? -1 : +this.value;
+                                                this.value = val < -1 ? -1 : Math.min(val, App.game.breeding.queueSlots());
+                                            })(), App.game.breeding.updateQueueSizeLimit(+this.value), Settings.setSettingByName(this.name, this.value)
+                                        ">
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                         <div class="btn-group btn-block">
@@ -289,6 +304,45 @@
         <input class="clickable" type="checkbox"
             data-bind="checked: $data.observableValue(), attr: {name, id: 'checkbox-' + $data.name }"
             onchange="Settings.setSettingByName(this.name, this.checked)"/>
+    </td>
+</script>
+
+<script type="text/html" id="BooleanSettingSliderTemplate">
+    <td class="p-2">
+        <label class="m-0" data-bind="attr: { for: 'checkbox-' + $data.name }, text: `${$data.displayName}:`">
+            setting name
+        </label>
+    </td>
+    <td class="p-2">
+        <label class="form-check-label toggler-wrapper style-1 m-auto">
+            <input class="clickable" type="checkbox"
+                data-bind="checked: $data.observableValue(), attr: {name, id: 'checkbox-' + $data.name }"
+                onchange="Settings.setSettingByName(this.name, this.checked)"/>
+            <div class="toggler-slider">
+                <div class="toggler-knob"></div>
+            </div>
+        </label>
+    </td>
+</script>
+
+<script type="text/html" id="SoundSettingTemplate">
+    <td class="p-2">
+        <label class="m-0" data-bind="attr: { for: 'checkbox-' + $data.setting.name }, text: `${$data.setting.displayName}:`">
+            setting name
+        </label>
+    </td>
+    <td class="p-1 tight">
+        <button class="btn btn-info btn-sm" data-bind="click: () => $data.sound.play()"><i class="play-button"></i></button>
+    </td>
+    <td class="p-2 tight">
+        <label class="form-check-label toggler-wrapper style-1 m-auto">
+            <input class="clickable" type="checkbox"
+                data-bind="checked: $data.setting.observableValue(), attr: {name: $data.setting.name, id: 'checkbox-' + $data.setting.name }"
+                onchange="Settings.setSettingByName(this.name, this.checked)"/>
+            <div class="toggler-slider">
+                <div class="toggler-knob"></div>
+            </div>
+        </label>
     </td>
 </script>
 

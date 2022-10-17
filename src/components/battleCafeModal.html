@@ -1,0 +1,57 @@
+<div class="modal fade noselect" id="battleCafeModal" tabindex="-1" role="dialog"
+aria-labelledby="battleCafeModal"Label">
+<div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+   <div class="modal-content">
+       <div class="modal-header">
+           <h5 class="modal-title">Battle Café</h5>
+       </div>
+       <div class="modal-body">
+            <div>
+                <h4>Select a Sweet</h4>
+                <div class="row col-15 justify-content-center">
+                    <!-- ko foreach: GameHelper.enumStrings(GameConstants.AlcremieSweet) -->
+                    <div class="clickable col-4" data-bind="
+                        click: () => BattleCafeController.selectedSweet(GameConstants.AlcremieSweet[$data]),
+                        css: { 'bg-primary': BattleCafeController.selectedSweet() == GameConstants.AlcremieSweet[$data]}
+                    ">
+                        <h5>
+                            <span data-bind="text: $data"></span>
+                            <img style="max-width: 40px;" data-bind="attr: { src: 'assets/images/sweets/' + $data + '.png' }"/>
+                        </h5>
+                        <div>
+                            <!-- ko foreach: BattleCafeController.getPrice(GameConstants.AlcremieSweet[$data]) -->
+                            <div>
+                                <img style="width: 30px;" data-bind="attr: { src: FarmController.getBerryImage($data.berry) }"/>
+                                <span data-bind="text: $data.amount.toLocaleString('en-US')"></span>/<span data-bind="text: App.game.farming.berryList[$data.berry]().toLocaleString('en-US')"></span>
+                            </div>
+                            <!-- /ko -->
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                </div>
+            </div>
+            <h4>Spin!</h4>
+            <div>
+                <span>Spins left today: </span><span data-bind="text: BattleCafeController.spinsLeft()"></span>
+            </div>
+            <div>
+                <img style="width: 60px;" data-bind="
+                attr: { src: `assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png` },
+                class: BattleCafeController.isSpinning() ? 'player-animated' + (BattleCafeController.clockwise() ? '' : '-counter') : ''
+                " src="assets/images/profile/trainer-1.png">
+            </div>
+            <div>
+                <button class="btn btn-primary" onclick="BattleCafeController.spin(true);">Clockwise</button>
+                <button class="btn btn-primary" onclick="BattleCafeController.spin(false);">Counter-Clockwise</button>
+            </div>
+            <div class="input-group justify-content-center">
+                <label for="battleCafeDuration">Spin duration:</label><input class="form-control col-4" id="battleCafeDuration" type="number" min="1" max="20" value="3"/>
+            </div>
+        </div>
+
+       <div class="modal-footer">
+           <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+       </div>
+   </div>
+</div>
+</div>
