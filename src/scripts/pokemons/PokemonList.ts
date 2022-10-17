@@ -272,6 +272,7 @@ const pokemonList = createPokemonArray(
         },
         'gender': {
             'femaleRatio': 0.125,
+            'visualDifference': true,
         },
     },
     {
@@ -719,6 +720,9 @@ const pokemonList = createPokemonArray(
             'specialDefense': 80,
             'speed': 70,
         },
+        'gender': {
+            'visualDifference': true,
+        },
     },
     {
         'id': 12.02,
@@ -995,6 +999,9 @@ const pokemonList = createPokemonArray(
             'specialDefense': 35,
             'speed': 72,
         },
+        'gender': {
+            'visualDifference': true,
+        },
     },
     {
         'id': 20,
@@ -1067,6 +1074,9 @@ const pokemonList = createPokemonArray(
             'defense': 60,
             'specialDefense': 70,
             'speed': 97,
+        },
+        'gender': {
+            'visualDifference': true,
         },
     },
     {
@@ -2118,6 +2128,9 @@ const pokemonList = createPokemonArray(
             'defense': 85,
             'specialDefense': 90,
             'speed': 50,
+        },
+        'gender': {
+            'visualDifference': true,
         },
     },
     {
@@ -3362,6 +3375,9 @@ const pokemonList = createPokemonArray(
             'specialDefense': 60,
             'speed': 110,
         },
+        'gender': {
+            'visualDifference': true,
+        },
     },
     {
         'id': 86,
@@ -4066,6 +4082,9 @@ const pokemonList = createPokemonArray(
             'specialDefense': 30,
             'speed': 25,
         },
+        'gender': {
+            'visualDifference': true,
+        },
     },
     {
         'id': 112,
@@ -4103,6 +4122,9 @@ const pokemonList = createPokemonArray(
             'defense': 120,
             'specialDefense': 45,
             'speed': 40,
+        },
+        'gender': {
+            'visualDifference': true,
         },
     },
     {
@@ -4357,6 +4379,9 @@ const pokemonList = createPokemonArray(
             'defense': 80,
             'specialDefense': 80,
             'speed': 105,
+        },
+        'gender': {
+            'visualDifference': true,
         },
     },
     {
@@ -6869,6 +6894,9 @@ const pokemonList = createPokemonArray(
             'defense': 200,
             'specialDefense': 65,
             'speed': 30,
+        },
+        'gender': {
+            'visualDifference': true,
         },
     },
     {
