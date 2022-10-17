@@ -360,7 +360,7 @@ class QuestLineHelper {
             App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Ultraball, 50, false);
             Notifier.notify({
                 title: lugiaJohtoQuestLine.name,
-                message: 'Kimono Girl Miki has given you a package containing 50 Ultraballs.',
+                message: 'Kimono Girl Miki has given you a package containing 50 Ultra Balls.',
                 type: NotificationConstants.NotificationOption.success,
                 timeout: 3e4,
             });
@@ -392,16 +392,15 @@ class QuestLineHelper {
             undefined,
             undefined
         );
-
         lugiaJohtoQuestLine.addQuest(LugiaCatch);
 
         App.game.quests.questLines().push(lugiaJohtoQuestLine);
     }
-    // Ho-oh Quest
 
+    // Ho-Oh Quest
     public static createhoohJohtoQuestLine() {
         const hoohJohtoQuestLine = new QuestLine('Rainbow Guardian', 'The Kimono Girls of Ecruteak City wish to speak with you again.', new MultiRequirement([new QuestLineStepCompletedRequirement('Whirl Guardian', 9), new ObtainedPokemonRequirement(pokemonMap.Raikou), new ObtainedPokemonRequirement(pokemonMap.Entei), new ObtainedPokemonRequirement(pokemonMap.Suicune)]), GameConstants.BulletinBoards.Johto);
-        const talkKimonoGirlsEcruteak = new TalkToNPCQuest(KimonoGirlsEcruteak, 'Meet the Kimono Girls at the Ecruteak Dance Theatre');
+        const talkKimonoGirlsEcruteak = new TalkToNPCQuest(KimonoGirlsEcruteak, 'Meet the Kimono Girls at the Ecruteak Dance Theatre.');
         hoohJohtoQuestLine.addQuest(talkKimonoGirlsEcruteak);
 
         const clearKimonoGirls = new CustomQuest (1, 0, 'Prove your abilities as a trainer to the Kimono Girls of Ecruteak City.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Kimono Girls')]());
@@ -409,13 +408,12 @@ class QuestLineHelper {
 
         const HoohCatch = new CaptureSpecificPokemonQuest(
             'Ho-Oh',
-            'Catch Ho-oh in the Tin Tower.',
+            'Catch Ho-Oh in the Tin Tower.',
             1,
             false,
             undefined,
             undefined
         );
-
         hoohJohtoQuestLine.addQuest(HoohCatch);
 
         App.game.quests.questLines().push(hoohJohtoQuestLine);
@@ -661,6 +659,62 @@ class QuestLineHelper {
         App.game.quests.questLines().push(pinkanThemeparkQuestLine);
     }
 
+    //Regi Trio Quest
+    public static createRegiTrioQuestLine() {
+        const regiTrioQuestLine = new QuestLine('The Three Golems', 'Discover the secrets of the Sealed Chamber.', new GymBadgeRequirement(BadgeEnums.Mind), GameConstants.BulletinBoards.Hoenn);
+
+        const clearSealedChamber = new CustomQuest(1, 0, 'Enter the Sealed Chamber to find clues.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Sealed Chamber')]());
+        regiTrioQuestLine.addQuest(clearSealedChamber);
+
+        const readEntranceSign = new TalkToNPCQuest(SCEntrance, 'Investigate the strange markings in the Sealed Chamber.');
+        regiTrioQuestLine.addQuest(readEntranceSign);
+
+        const mazeStep1 = new TalkToNPCQuest(SCMazeLeft, 'Navigate the maze inside the Sealed Chamber.');
+        regiTrioQuestLine.addQuest(mazeStep1);
+
+        const mazeStep2 = new TalkToNPCQuest(SCMazeLeft, 'Navigate the maze inside the Sealed Chamber.');
+        regiTrioQuestLine.addQuest(mazeStep2);
+
+        const mazeStep3 = new TalkToNPCQuest(SCMazeStraight, 'Navigate the maze inside the Sealed Chamber.');
+        regiTrioQuestLine.addQuest(mazeStep3);
+
+        const mazeStep4 = new TalkToNPCQuest(SCMazeStraight, 'Navigate the maze inside the Sealed Chamber.');
+        regiTrioQuestLine.addQuest(mazeStep4);
+
+        const mazeStep5 = new TalkToNPCQuest(SCMazeRight, 'Navigate the maze inside the Sealed Chamber.');
+        regiTrioQuestLine.addQuest(mazeStep5);
+
+        const readSCHints = new TalkToNPCQuest(SCHints, 'Investigate the hidden message at the end of the Sealed Chamber maze.');
+        regiTrioQuestLine.addQuest(readSCHints);
+
+        const regiHint1 = new DefeatPokemonsQuest(100, 0, 111, GameConstants.Region.hoenn, 'Release Regirock');
+
+        const regiHint2 = new DefeatPokemonsQuest(100, 0, 105, GameConstants.Region.hoenn, 'Release Regice');
+
+        const regiHint3 = new DefeatPokemonsQuest(100, 0, 120, GameConstants.Region.hoenn, 'Release Registeel');
+
+        regiTrioQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                regiHint1,
+                regiHint2,
+                regiHint3,
+            ], 'Explore Hoenn by defeating pokémon on the hinted routes to release the Regi Trio.'));
+
+        const catchRegirock = new CaptureSpecificPokemonQuest('Regirock', 'Catch Regirock');
+
+        const catchRegice = new CaptureSpecificPokemonQuest('Regice', 'Catch Regice');
+
+        const catchRegisteel = new CaptureSpecificPokemonQuest('Registeel', 'Catch Registeel');
+
+        regiTrioQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                catchRegirock,
+                catchRegice,
+                catchRegisteel,
+            ], 'Catch the Regi Trio.'));
+
+        App.game.quests.questLines().push(regiTrioQuestLine);
+    }
     // Sinnoh QuestLines
     // Started upon defeating Oreburgh City's gym.
     public static createGalacticSinnohQuestLine() {
@@ -1705,6 +1759,31 @@ class QuestLineHelper {
         const talktoBirdPeony2 = new TalkToNPCQuest(BirdPeony2, 'Tell Peony about your encounter with the birds resembling Articuno, Zapdos and Moltres.');
         dynaTreeBirdsQuestLine.addQuest(talktoBirdPeony2);
 
+        const chaseGalarianArticuno = new CustomQuest (3, 0, 'Search for Galarian Articuno in the Crown Tundra.', () =>
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Galarian Articuno 1')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Galarian Articuno 2')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Galarian Articuno 3')]()
+        );
+        const chaseGalarianZapdos = new CustomQuest (3, 0, 'Search for Galarian Zapdos in the Wild Area of Southern Galar.', () =>
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Galarian Zapdos 1')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Galarian Zapdos 2')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Galarian Zapdos 3')]()
+        );
+        const chaseGalarianMoltres = new CustomQuest (3, 0, 'Search for Galarian Moltres in the Isle of Armor.', () =>
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Galarian Moltres 1')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Galarian Moltres 2')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Galarian Moltres 3')]()
+        );
+        dynaTreeBirdsQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                chaseGalarianArticuno,
+                chaseGalarianZapdos,
+                chaseGalarianMoltres,
+            ], 'Galarian Articuno, Zapdos and Moltres have fled to the Crown Tundra, Southern Galar and the Isle of Armor respectively. Search for them.'));
+
+        const talktoBirdPeony3 = new TalkToNPCQuest(BirdPeony3, 'You defeated Galarian Articuno, Zapdos and Moltres multiple times each. Ask Peony what to do next.');
+        dynaTreeBirdsQuestLine.addQuest(talktoBirdPeony3);
+
         const catchGalarianArticuno = new CaptureSpecificPokemonQuest('Galarian Articuno', 'Catch Galarian Articuno.', 1, false, 0, undefined);
         const catchGalarianZapdos = new CaptureSpecificPokemonQuest('Galarian Zapdos', 'Catch Galarian Zapdos.', 1, false, 0, undefined);
         const catchGalarianMoltres = new CaptureSpecificPokemonQuest('Galarian Moltres', 'Catch Galarian Moltres.', 1, false, 0, undefined);
@@ -1713,10 +1792,10 @@ class QuestLineHelper {
                 catchGalarianArticuno,
                 catchGalarianZapdos,
                 catchGalarianMoltres,
-            ], 'The Galarian forms of Articuno, Zapdos and Moltres are roaming in the Crown Tundra, Southern Galar and the Isle of Armor respectively. Catch them when the opportunity arises!'));
+            ], 'Galarian Articuno, Zapdos and Moltres are now roaming in the Crown Tundra, Southern Galar and the Isle of Armor respectively. Catch them when the opportunity arises!'));
 
-        const talktoBirdPeony3 = new TalkToNPCQuest(BirdPeony3, 'Now that you have captured Galarian Articuno, Zapdos and Moltres, go report back to Peony!.');
-        dynaTreeBirdsQuestLine.addQuest(talktoBirdPeony3);
+        const talktoBirdPeony4 = new TalkToNPCQuest(BirdPeony4, 'Now that you have captured Galarian Articuno, Zapdos and Moltres, go report back to Peony!.');
+        dynaTreeBirdsQuestLine.addQuest(talktoBirdPeony4);
 
         App.game.quests.questLines().push(dynaTreeBirdsQuestLine);
     }
@@ -1910,6 +1989,7 @@ class QuestLineHelper {
         this.createDeoxysQuestLine();
         this.createRubySapphireSeviiQuestLine();
         this.createPinkanThemeparkQuestLine();
+        this.createRegiTrioQuestLine();
         this.createGalacticSinnohQuestLine();
         this.createPlasmaUnovaQuestLine();
         this.createDetectivePikachuQuestLine();

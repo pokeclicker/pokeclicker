@@ -68,9 +68,6 @@ export const SHINY_CHANCE_STONE = 2048;
 export const SHINY_CHANCE_SAFARI = 2048;
 export const SHINY_CHANCE_SHOP = 1024;
 export const SHINY_CHANCE_BATTLEFRONTIER = 1024;
-export const SHINY_CHANCE_STARTER = 1024;
-export const SHINY_CHANCE_GIFTED = 1024;
-export const SHINY_CHANCE_BABY = 1024;
 export const SHINY_CHANCE_BREEDING = 1024;
 export const SHINY_CHANCE_FARM = 1024;
 
@@ -126,28 +123,25 @@ export enum AchievementOption {
 
 export enum AchievementType {
     'None' = -1,
-    'Money' = 0,
-    'Token',
-    'Attack',
-    'Diamond',
-    'Underground Items Found',
-    'Underground Layers Mined',
-    'Max Level Oak Item',
-    'Captured',
-    'Defeated',
+    'Pokedollars' = 0,
+    'Dungeon Token',
     'Caught Pokemon',
     'Shiny Pokemon',
-    'Hatch',
-    'Pokeball',
-    'Click',
-    'Route Defeat',
+    'Total Captured',
+    'Total Defeated',
+    'Attack',
+    'Poke Balls',
+    'Route Defeats',
     'Clear Gym',
     'Clear Dungeon',
-    'Farming',
     'Quest',
+    'Max Level Oak Item',
+    'Hatchery',
+    'Farming',
+    'Underground',
     'Battle Frontier',
     'Protein',
-    'Pokérus',
+    'Pokerus',
 }
 
 export enum DungeonTile {
@@ -1422,6 +1416,15 @@ export const TemporaryBattles = [
     'Glastrier',
     'Spectrier',
     'Dyna Tree Birds',
+    'Galarian Articuno 1',
+    'Galarian Articuno 2',
+    'Galarian Articuno 3',
+    'Galarian Zapdos 1',
+    'Galarian Zapdos 2',
+    'Galarian Zapdos 3',
+    'Galarian Moltres 1',
+    'Galarian Moltres 2',
+    'Galarian Moltres 3',
     'Regigigas',
 ];
 
@@ -1582,6 +1585,25 @@ export enum GalarSubRegions {
     IsleofArmor,
     CrownTundra,
 }
+
+// Gender Types
+export enum Genders {
+    Genderless = 0,
+    MaleFemale, // Default
+}
+
+// Wild/Trainer/BF Pokémon Gender
+export enum BattlePokemonGender {
+    NoGender = 0,
+    Male,
+    Female,
+}
+
+// Pokemon Statistics
+export const STATISTIC_CAPTURED = 'Captured';
+export const STATISTIC_DEFEATED = 'Defeated';
+export const STATISTIC_ENCOUNTERED = 'Encountered';
+export const STATISTIC_HATCHED = 'Hatched';
 
 export enum AlcremieSweet {
     'Strawberry Sweet',
