@@ -20607,6 +20607,9 @@ const pokemonList = createPokemonArray(
             'specialDefense': 89,
             'speed': 97,
         },
+        'gender': {
+            'type': GameConstants.Genders.Genderless,
+        },
         'heldItem': {type: ItemType.item, id: 'Solar_light'},
     },
     {
@@ -20646,6 +20649,9 @@ const pokemonList = createPokemonArray(
             'defense': 89,
             'specialDefense': 107,
             'speed': 97,
+        },
+        'gender': {
+            'type': GameConstants.Genders.Genderless,
         },
         'heldItem': {type: ItemType.item, id: 'Lunar_light'},
     },
