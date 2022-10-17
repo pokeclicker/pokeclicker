@@ -2187,6 +2187,7 @@ class QuestLineHelper {
         const hisuiForcesQuestLine = new QuestLine('Incarnate Forces of Hisui', 'Something something Cogita something something Forces of Nature', new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion), GameConstants.BulletinBoards.Hisui);
 
         App.game.quests.questLines().push(hisuiForcesQuestLine);
+    }
 
     // Event QuestLines
     // Open the game between April 8-29.

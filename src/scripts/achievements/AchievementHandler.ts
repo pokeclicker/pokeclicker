@@ -404,7 +404,7 @@ class AchievementHandler {
                 if (region == GameConstants.Region.kanto && (route.subRegion == GameConstants.KantoSubRegions.Sevii123 || route.subRegion == GameConstants.KantoSubRegions.Sevii4567)) {
                     category = GameConstants.ExtraAchievementCategories.sevii;
                 }
-                if (region == GameConstants.Region.sinnoh && (route.subRegion == GameConstants.KantoSubRegions.Hisui)) {
+                if (region == GameConstants.Region.sinnoh && (route.subRegion == GameConstants.SinnohSubRegions.Hisui)) {
                     category = GameConstants.ExtraAchievementCategories.hisui;
                 }
                 const routeName = Routes.getName(route.number, region, true);
@@ -423,7 +423,7 @@ class AchievementHandler {
                 if (region == GameConstants.Region.kanto && (TownList[dungeon].subRegion == GameConstants.KantoSubRegions.Sevii123 || TownList[dungeon].subRegion == GameConstants.KantoSubRegions.Sevii4567)) {
                     category = GameConstants.ExtraAchievementCategories.sevii;
                 }
-                if (region == GameConstants.Region.sinnoh && (TownList[dungeon].subRegion == GameConstants.KantoSubRegions.Hisui)) {
+                if (region == GameConstants.Region.sinnoh && (TownList[dungeon].subRegion == GameConstants.SinnohSubRegions.Hisui)) {
                     category = GameConstants.ExtraAchievementCategories.hisui;
                 }
                 AchievementHandler.addAchievement(`${dungeon} Explorer`, `Clear ${dungeon} 10 times.`, new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[0], GameConstants.getDungeonIndex(dungeon)), 0.8, category);
