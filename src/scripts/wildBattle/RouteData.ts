@@ -4,6 +4,7 @@
 /// <reference path="../../declarations/weather/WeatherType.d.ts"/>
 /// <reference path="../../declarations/requirements/WeatherRequirement.d.ts"/>
 /// <reference path="../../declarations/subRegion/SubRegions.d.ts"/>
+///<reference path="../../declarations/requirements/MultiRequirement.d.ts"/>
 /*
 KANTO
 */
