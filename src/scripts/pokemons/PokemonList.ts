@@ -12710,6 +12710,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 306,
         'catchRate': 3,
+        'heldItem': {type: ItemType.item, id: 'Adamant_Orb'},
         'base': {
             'hitpoints': 100,
             'attack': 120,
@@ -12730,6 +12731,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 306,
         'catchRate': 3,
+        'heldItem': {type: ItemType.item, id: 'Lustrous_Orb'},
         'base': {
             'hitpoints': 90,
             'attack': 120,
