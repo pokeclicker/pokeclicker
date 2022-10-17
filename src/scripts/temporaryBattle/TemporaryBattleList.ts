@@ -240,7 +240,7 @@ TemporaryBattleList['Kimono Girls'] = new TemporaryBattle(
         new GymPokemon('Jolteon', 660000, 40),
         new GymPokemon('Vaporeon', 660000, 40),
     ],
-    'You have beautifully proven that the bond between people can be extended to the bond between people and Pokémon. We all appreciate that you have lived up to our expectations. This Clear Bell will signal to Ho-oh that you are worthy of its attentions.',
+    'You have beautifully proven that the bond between people can be extended to the bond between people and Pokémon. We all appreciate that you have lived up to our expectations. This Clear Bell will signal to Ho-Oh that you are worthy of its attentions.',
     [new QuestLineStepCompletedRequirement('Rainbow Guardian', 0)],
     undefined,
     {
@@ -854,7 +854,7 @@ TemporaryBattleList.AZ = new TemporaryBattle(
     undefined,
     {
         firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonById(670.05, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_GIFTED));
+            App.game.party.gainPokemonById(670.05, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SHOP));
         },
     }
 );
@@ -990,7 +990,7 @@ TemporaryBattleList['Ash Ketchum Pinkan'] = new TemporaryBattle(
         returnTown: 'Pinkan Mountain',
         imageName: 'Ash Ketchum',
         firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonById(25.13, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_GIFTED));
+            App.game.party.gainPokemonById(25.13, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SHOP));
         },
     }
 );
@@ -1172,7 +1172,7 @@ TemporaryBattleList['Ash Ketchum Alola'] = new TemporaryBattle(
         returnTown: 'Seafolk Village',
         imageName: 'Ash Ketchum',
         firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonById(25.07, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_GIFTED));
+            App.game.party.gainPokemonById(25.07, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SHOP));
         },
     }
 );
@@ -1411,7 +1411,7 @@ TemporaryBattleList['The Darkest Day'] = new TemporaryBattle(
     undefined,
     {
         firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonById(890, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_GIFTED));
+            App.game.party.gainPokemonById(890, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SHOP));
         },
         hideTrainer: true,
         imageName: '../pokemon/890',

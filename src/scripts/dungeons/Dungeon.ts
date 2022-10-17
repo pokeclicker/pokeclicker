@@ -8880,7 +8880,7 @@ dungeonList['Tower of Darkness'] = new Dungeon('Tower of Darkness',
     ],
     2000000, 40,
     () => {
-        App.game.party.gainPokemonById(892, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_GIFTED));
+        App.game.party.gainPokemonById(892, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SHOP));
         Notifier.notify({
             message: 'Kubfu evolved into Urshifu (Single Strike)!',
             type: NotificationConstants.NotificationOption.success,
@@ -8921,7 +8921,7 @@ dungeonList['Tower of Waters'] = new Dungeon('Tower of Waters',
     ],
     2000000, 36,
     () => {
-        App.game.party.gainPokemonById(892.1, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_GIFTED));
+        App.game.party.gainPokemonById(892.1, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SHOP));
         Notifier.notify({
             message: 'Kubfu evolved into Urshifu (Rapid Strike)!',
             type: NotificationConstants.NotificationOption.success,

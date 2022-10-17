@@ -360,7 +360,7 @@ class QuestLineHelper {
             App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Ultraball, 50, false);
             Notifier.notify({
                 title: lugiaJohtoQuestLine.name,
-                message: 'Kimono Girl Miki has given you a package containing 50 Ultraballs.',
+                message: 'Kimono Girl Miki has given you a package containing 50 Ultra Balls.',
                 type: NotificationConstants.NotificationOption.success,
                 timeout: 3e4,
             });
@@ -392,16 +392,15 @@ class QuestLineHelper {
             undefined,
             undefined
         );
-
         lugiaJohtoQuestLine.addQuest(LugiaCatch);
 
         App.game.quests.questLines().push(lugiaJohtoQuestLine);
     }
-    // Ho-oh Quest
 
+    // Ho-Oh Quest
     public static createhoohJohtoQuestLine() {
         const hoohJohtoQuestLine = new QuestLine('Rainbow Guardian', 'The Kimono Girls of Ecruteak City wish to speak with you again.', new MultiRequirement([new QuestLineStepCompletedRequirement('Whirl Guardian', 9), new ObtainedPokemonRequirement(pokemonMap.Raikou), new ObtainedPokemonRequirement(pokemonMap.Entei), new ObtainedPokemonRequirement(pokemonMap.Suicune)]), GameConstants.BulletinBoards.Johto);
-        const talkKimonoGirlsEcruteak = new TalkToNPCQuest(KimonoGirlsEcruteak, 'Meet the Kimono Girls at the Ecruteak Dance Theatre');
+        const talkKimonoGirlsEcruteak = new TalkToNPCQuest(KimonoGirlsEcruteak, 'Meet the Kimono Girls at the Ecruteak Dance Theatre.');
         hoohJohtoQuestLine.addQuest(talkKimonoGirlsEcruteak);
 
         const clearKimonoGirls = new CustomQuest (1, 0, 'Prove your abilities as a trainer to the Kimono Girls of Ecruteak City.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Kimono Girls')]());
@@ -409,13 +408,12 @@ class QuestLineHelper {
 
         const HoohCatch = new CaptureSpecificPokemonQuest(
             'Ho-Oh',
-            'Catch Ho-oh in the Tin Tower.',
+            'Catch Ho-Oh in the Tin Tower.',
             1,
             false,
             undefined,
             undefined
         );
-
         hoohJohtoQuestLine.addQuest(HoohCatch);
 
         App.game.quests.questLines().push(hoohJohtoQuestLine);
@@ -446,7 +444,7 @@ class QuestLineHelper {
         celebiJohtoQuestLine.addQuest(talktoIlexForestShrine1);
 
         const SpikyEaredPichuReward = () => {
-            App.game.party.gainPokemonById(172.1, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_GIFTED));
+            App.game.party.gainPokemonById(172.1, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SHOP));
             Notifier.notify({
                 title: celebiJohtoQuestLine.name,
                 message: 'You captured the Spiky-eared Pichu!',
@@ -887,7 +885,7 @@ class QuestLineHelper {
         detectivePikachuQuestLine.addQuest(searchForClues10);
 
         const DetectiveRaichuReward = () => {
-            App.game.party.gainPokemonById(26.02, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_GIFTED));
+            App.game.party.gainPokemonById(26.02, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SHOP));
             Notifier.notify({
                 title: detectivePikachuQuestLine.name,
                 message: 'Detective Pikachu\'s partner has been nursed back to health!',
@@ -1015,7 +1013,7 @@ class QuestLineHelper {
         ashKetchumQuestLine.addQuest(clearUnovaAsh);
 
         const AshKetchumReward = () => {
-            App.game.party.gainPokemonById(658.01, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_GIFTED));
+            App.game.party.gainPokemonById(658.01, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SHOP));
             Notifier.notify({
                 title: ashKetchumQuestLine.name,
                 message: 'You obtained Ash-Greninja!',
@@ -1051,7 +1049,7 @@ class QuestLineHelper {
         princessDiancieQuestLine.addQuest(fightSteels);
 
         const BladeAegislashReward = () => {
-            App.game.party.gainPokemonById(681.1, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_GIFTED));
+            App.game.party.gainPokemonById(681.1, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SHOP));
             Notifier.notify({
                 title: princessDiancieQuestLine.name,
                 message: 'Your Doublade has evolved into Blade Forme Aegislash!',
@@ -1798,7 +1796,7 @@ class QuestLineHelper {
             ]), GameConstants.BulletinBoards.Galar);
 
         const mysteryGift = new TalkToNPCQuest(MagearnaMysteryGift, 'Go home and open your Mystery Gift', () => {
-            App.game.party.gainPokemonById(801.1, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_GIFTED));
+            App.game.party.gainPokemonById(801.1, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SHOP));
             Notifier.notify({
                 title: magearnaQuestLine.name,
                 message: 'You obtained Magearna (Original Color)!',
@@ -1856,7 +1854,7 @@ class QuestLineHelper {
             dungeonList['Petalburg Woods'].bossList.push(new DungeonTrainer('Egg Hunter', [new GymPokemon('Surprise Togepi', 2700000, 100)], { weight: 1, requirement: new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion) }));
         };
         const afterDefeatingTogepiInHoenn = () => {
-            App.game.party.gainPokemonById(surpriseTogepi.id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_GIFTED));
+            App.game.party.gainPokemonById(surpriseTogepi.id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SHOP));
             Notifier.notify({
                 title: findSurpriseTogepiForEasterQuestLine.name,
                 message: 'You found the special Togepi!',

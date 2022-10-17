@@ -47,9 +47,6 @@ namespace GameConstants {
     declare const SHINY_CHANCE_DUNGEON: number;
     declare const SHINY_CHANCE_SHOP: number;
     declare const SHINY_CHANCE_BATTLEFRONTIER: number;
-    declare const SHINY_CHANCE_GIFTED: number;
-    declare const SHINY_CHANCE_STARTER: number;
-    declare const SHINY_CHANCE_BABY: number;
     declare const SHINY_CHANCE_STONE: number;
     declare const SHINY_CHANCE_SAFARI: number;
     declare const SHINY_CHANCE_BREEDING: number;
@@ -84,28 +81,25 @@ namespace GameConstants {
 
     declare enum AchievementType {
         'None',
-        'Money',
-        'Token',
-        'Attack',
-        'Diamond',
-        'Underground Items Found',
-        'Underground Layers Mined',
-        'Max Level Oak Item',
-        'Captured',
-        'Defeated',
+        'Pokedollars',
+        'Dungeon Token',
+        'Total Captured',
+        'Total Defeated',
         'Caught Pokemon',
         'Shiny Pokemon',
-        'Hatch',
-        'Pokeball',
-        'Click',
-        'Route Defeat',
+        'Attack',
+        'Poke Balls',
+        'Route Defeats',
         'Clear Gym',
         'Clear Dungeon',
-        'Farming',
         'Quest',
+        'Max Level Oak Item',
+        'Hatchery',
+        'Farming',
+        'Underground',
         'Battle Frontier',
         'Protein',
-        'Pokérus',
+        'Pokerus',
     }
     declare enum DungeonTile {
         empty,
