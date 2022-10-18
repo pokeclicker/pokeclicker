@@ -1759,6 +1759,31 @@ class QuestLineHelper {
         const talktoBirdPeony2 = new TalkToNPCQuest(BirdPeony2, 'Tell Peony about your encounter with the birds resembling Articuno, Zapdos and Moltres.');
         dynaTreeBirdsQuestLine.addQuest(talktoBirdPeony2);
 
+        const chaseGalarianArticuno = new CustomQuest (3, 0, 'Search for Galarian Articuno in the Crown Tundra.', () =>
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Galarian Articuno 1')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Galarian Articuno 2')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Galarian Articuno 3')]()
+        );
+        const chaseGalarianZapdos = new CustomQuest (3, 0, 'Search for Galarian Zapdos in the Wild Area of Southern Galar.', () =>
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Galarian Zapdos 1')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Galarian Zapdos 2')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Galarian Zapdos 3')]()
+        );
+        const chaseGalarianMoltres = new CustomQuest (3, 0, 'Search for Galarian Moltres in the Isle of Armor.', () =>
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Galarian Moltres 1')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Galarian Moltres 2')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Galarian Moltres 3')]()
+        );
+        dynaTreeBirdsQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                chaseGalarianArticuno,
+                chaseGalarianZapdos,
+                chaseGalarianMoltres,
+            ], 'Galarian Articuno, Zapdos and Moltres have fled to the Crown Tundra, Southern Galar and the Isle of Armor respectively. Search for them.'));
+
+        const talktoBirdPeony3 = new TalkToNPCQuest(BirdPeony3, 'You defeated Galarian Articuno, Zapdos and Moltres multiple times each. Ask Peony what to do next.');
+        dynaTreeBirdsQuestLine.addQuest(talktoBirdPeony3);
+
         const catchGalarianArticuno = new CaptureSpecificPokemonQuest('Galarian Articuno', 'Catch Galarian Articuno.', 1, false, 0, undefined);
         const catchGalarianZapdos = new CaptureSpecificPokemonQuest('Galarian Zapdos', 'Catch Galarian Zapdos.', 1, false, 0, undefined);
         const catchGalarianMoltres = new CaptureSpecificPokemonQuest('Galarian Moltres', 'Catch Galarian Moltres.', 1, false, 0, undefined);
@@ -1767,10 +1792,10 @@ class QuestLineHelper {
                 catchGalarianArticuno,
                 catchGalarianZapdos,
                 catchGalarianMoltres,
-            ], 'The Galarian forms of Articuno, Zapdos and Moltres are roaming in the Crown Tundra, Southern Galar and the Isle of Armor respectively. Catch them when the opportunity arises!'));
+            ], 'Galarian Articuno, Zapdos and Moltres are now roaming in the Crown Tundra, Southern Galar and the Isle of Armor respectively. Catch them when the opportunity arises!'));
 
-        const talktoBirdPeony3 = new TalkToNPCQuest(BirdPeony3, 'Now that you have captured Galarian Articuno, Zapdos and Moltres, go report back to Peony!.');
-        dynaTreeBirdsQuestLine.addQuest(talktoBirdPeony3);
+        const talktoBirdPeony4 = new TalkToNPCQuest(BirdPeony4, 'Now that you have captured Galarian Articuno, Zapdos and Moltres, go report back to Peony!.');
+        dynaTreeBirdsQuestLine.addQuest(talktoBirdPeony4);
 
         App.game.quests.questLines().push(dynaTreeBirdsQuestLine);
     }
