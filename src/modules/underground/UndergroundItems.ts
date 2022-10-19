@@ -1,6 +1,6 @@
 import PokemonType from '../enums/PokemonType';
 import UndergroundItemValueType from '../enums/UndergroundItemValueType';
-import { Region, StoneType } from '../GameConstants';
+import { FossilToPokemon, Region, StoneType } from '../GameConstants';
 import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
 import Rand from '../utilities/Rand';
 import UndergroundEvolutionItem from './UndergroundEvolutionItem';
@@ -25,7 +25,15 @@ export default class UndergroundItems {
     // Returns a random unlocked item
     public static getRandomItem(): UndergroundItem {
         const unlockedItems = this.list.filter((item) => item.isUnlocked());
-        return Rand.fromArray(unlockedItems) || this.list[0];
+        const weights = {};
+
+        // Give undiscovered fossils a slightly higher chance to appear
+        const missingFossils = unlockedItems.filter((i) => i.valueType === UndergroundItemValueType.Fossil
+            && !App.game.party.alreadyCaughtPokemonByName(FossilToPokemon[i.name])
+            && player.getUndergroundItemAmount(i.id) === 0);
+        Object.assign(weights, ...missingFossils.map((f) => ({ [f.id]: 1.5 })));
+
+        return Rand.fromWeightedArray(unlockedItems, unlockedItems.map((i) => weights[i.id] || 1)) || this.list[0];
     }
 
     public static getFullResourceName(item: UndergroundItem, amt: number): string {
