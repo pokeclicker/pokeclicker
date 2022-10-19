@@ -675,6 +675,37 @@ export enum StoneType {
     'White_mane_hair',
 }
 
+export enum HeldItemType {
+    'None' = -1,
+    'Wonder_Chest',
+    'Muscle_Band',
+    'Leek',
+    'Light_Ball',
+    'Quick_Powder',
+    'Thick_Club',
+    'Soul_Dew',
+    'Rusted_Sword',
+    'Rusted_Shield',
+    'Black_Belt',
+    'Black_Glasses',
+    'Charcoal',
+    'Dragon_Fang',
+    'Hard_Stone',
+    'Magnet',
+    'Miracle_Seed',
+    'Mystic_Water',
+    'Never_Melt_Ice',
+    'Pink_Bow',
+    'Poison_Barb',
+    'Sharp_Beak',
+    'Silk_Scarf',
+    'Silver_Powder',
+    'Soft_Sand',
+    'Spell_Tag',
+    'Twisted_Spoon',
+    'Macho_Brace',
+}
+
 export enum FossilPieceType {
     'None' = -1,
     'Fossilized Bird',

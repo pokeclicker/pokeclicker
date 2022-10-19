@@ -99,6 +99,7 @@ type ItemNameType
     | 'Black_Glasses'
     | 'Charcoal'
     | 'Dragon_Fang'
+    | 'Hard_Stone'
     | 'Magnet'
     | 'Miracle_Seed'
     | 'Mystic_Water'

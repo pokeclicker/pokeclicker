@@ -1,6 +1,6 @@
 import UndergroundItemValueType from '../enums/UndergroundItemValueType';
 import Requirement from '../requirements/Requirement';
-import { StoneType } from '../GameConstants';
+import { StoneType, HeldItemType } from '../GameConstants';
 
 export default class UndergroundItem {
     public space: Array<Array<any>>;
@@ -39,6 +39,8 @@ export default class UndergroundItem {
                 return `assets/images/items/evolution/${StoneType[this.type]}.png`;
             case UndergroundItemValueType.Fossil:
                 return `assets/images/breeding/${this.name}.png`;
+            case UndergroundItemValueType.HeldItem:
+                return `assets/images/items/heldItems/${HeldItemType[this.type]}.png`;
             default:
                 return `assets/images/items/underground/${this.name}.png`;
         }

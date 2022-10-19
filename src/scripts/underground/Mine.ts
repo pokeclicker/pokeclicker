@@ -210,13 +210,16 @@ class Mine {
                 case UndergroundItemValueType.EvolutionItem:
                     res.evoItems++;
                     break;
+                case UndergroundItemValueType.HeldItem:
+                    res.heldItems++;
+                    break;
                 case UndergroundItemValueType.Gem:
                     res.plates++;
                     break;
                 default:
             }
             return res;
-        }, {fossils: 0, fossilpieces: 0, plates: 0, evoItems: 0, totalValue: 0, shards: 0});
+        }, {fossils: 0, fossilpieces: 0, plates: 0, evoItems: 0, totalValue: 0, shards: 0, heldItems: 0});
     }
 
     private static updatesurveyResult(summary) {
@@ -229,6 +232,9 @@ class Mine {
         }
         if (summary.evoItems) {
             text.push(`Evolution Items: ${summary.evoItems}`);
+        }
+        if (summary.heldItems) {
+            text.push(`Held Items: ${summary.heldItems}`);
         }
         if (summary.plates) {
             text.push(`Gem Plates: ${summary.plates}`);

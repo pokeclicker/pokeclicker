@@ -111,7 +111,7 @@ ItemList.Black_Belt = new TypeRestrictedAttackBonusHeldItem('Black_Belt', 10000,
 ItemList.Black_Glasses = new TypeRestrictedAttackBonusHeldItem('Black_Glasses', 10000, GameConstants.Currency.money, undefined, 'Black Glasses', 1.1, PokemonType.Dark, GameConstants.Region.johto);
 ItemList.Charcoal = new TypeRestrictedAttackBonusHeldItem('Charcoal', 10000, GameConstants.Currency.money, undefined, 'Charcoal', 1.1, PokemonType.Fire, GameConstants.Region.johto);
 ItemList.Dragon_Fang = new TypeRestrictedAttackBonusHeldItem('Dragon_Fang', 10000, GameConstants.Currency.money, undefined, 'Dragon Fang', 1.1, PokemonType.Dragon, GameConstants.Region.johto);
-// TODO: Hard Stone is in the underground. We can keep it there, and give it two uses.
+ItemList.Hard_Stone = new TypeRestrictedAttackBonusHeldItem('Hard_Stone', 10000, GameConstants.Currency.money, undefined, 'Hard Stone', 1.1, PokemonType.Rock, GameConstants.Region.johto);
 ItemList.Magnet = new TypeRestrictedAttackBonusHeldItem('Magnet', 10000, GameConstants.Currency.money, undefined, 'Magnet', 1.1, PokemonType.Electric, GameConstants.Region.johto);
 // TODO: Metal Coat is a evo-stone. Can be turned into a held item evolution
 ItemList.Miracle_Seed = new TypeRestrictedAttackBonusHeldItem('Miracle_Seed', 10000, GameConstants.Currency.money, undefined, 'Miracle Seed', 1.1, PokemonType.Grass, GameConstants.Region.johto);

@@ -1,10 +1,11 @@
 import PokemonType from '../enums/PokemonType';
 import UndergroundItemValueType from '../enums/UndergroundItemValueType';
-import { Region, StoneType } from '../GameConstants';
+import { Region, StoneType, HeldItemType } from '../GameConstants';
 import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
 import Rand from '../utilities/Rand';
 import UndergroundEvolutionItem from './UndergroundEvolutionItem';
 import UndergroundGemItem from './UndergroundGemItem';
+import UndergroundHeldItem from './UndergroundHeldItem';
 import UndergroundItem from './UndergroundItem';
 
 export default class UndergroundItems {
@@ -54,13 +55,12 @@ UndergroundItems.addItem(new UndergroundItem('Iron Ball', 5, [[1, 1, 1], [1, 1, 
 UndergroundItems.addItem(new UndergroundItem('Heart Scale', 6, [[1, 0], [1, 1]], 10));
 UndergroundItems.addItem(new UndergroundItem('Light Clay', 7, [[1, 0, 1, 0], [1, 1, 1, 0], [1, 1, 1, 1], [0, 1, 0, 1]], 2));
 UndergroundItems.addItem(new UndergroundItem('Odd Keystone', 8, [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], 6));
-UndergroundItems.addItem(new UndergroundItem('Hard Stone', 9, [[1, 1], [1, 1]], 4));
-UndergroundItems.addItem(new UndergroundItem('Oval Stone', 10, [[1, 1, 1], [1, 1, 1], [1, 1, 1]], 3));
-UndergroundItems.addItem(new UndergroundItem('Everstone', 11, [[1, 1, 1, 1], [1, 1, 1, 1]], 3));
-UndergroundItems.addItem(new UndergroundItem('Smooth Rock', 12, [[0, 0, 1, 0], [1, 1, 1, 0], [0, 1, 1, 1], [0, 1, 0, 0]], 2));
-UndergroundItems.addItem(new UndergroundItem('Heat Rock', 13, [[1, 0, 1, 0], [1, 1, 1, 1], [1, 1, 1, 1]], 2));
-UndergroundItems.addItem(new UndergroundItem('Icy Rock', 14, [[0, 1, 1, 0], [1, 1, 1, 1], [1, 1, 1, 1], [1, 0, 0, 1]], 2));
-UndergroundItems.addItem(new UndergroundItem('Damp Rock', 15, [[1, 1, 1], [1, 1, 1], [1, 0, 1]], 2));
+UndergroundItems.addItem(new UndergroundItem('Oval Stone', 9, [[1, 1, 1], [1, 1, 1], [1, 1, 1]], 3));
+UndergroundItems.addItem(new UndergroundItem('Everstone', 10, [[1, 1, 1, 1], [1, 1, 1, 1]], 3));
+UndergroundItems.addItem(new UndergroundItem('Smooth Rock', 11, [[0, 0, 1, 0], [1, 1, 1, 0], [0, 1, 1, 1], [0, 1, 0, 0]], 2));
+UndergroundItems.addItem(new UndergroundItem('Heat Rock', 12, [[1, 0, 1, 0], [1, 1, 1, 1], [1, 1, 1, 1]], 2));
+UndergroundItems.addItem(new UndergroundItem('Icy Rock', 13, [[0, 1, 1, 0], [1, 1, 1, 1], [1, 1, 1, 1], [1, 0, 0, 1]], 2));
+UndergroundItems.addItem(new UndergroundItem('Damp Rock', 14, [[1, 1, 1], [1, 1, 1], [1, 0, 1]], 2));
 
 // Gem Plates
 UndergroundItems.addItem(new UndergroundGemItem('Draco Plate', 100, [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], 100, PokemonType.Dragon));
@@ -132,3 +132,6 @@ UndergroundItems.addItem(new UndergroundItem('Pink Shard', 411, [[1, 1, 1, 1], [
 UndergroundItems.addItem(new UndergroundItem('Cyan Shard', 412, [[1, 1, 1, 1], [0, 1, 1, 1], [0, 0, 1, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.alola)));
 UndergroundItems.addItem(new UndergroundItem('Rose Shard', 413, [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.galar)));
 UndergroundItems.addItem(new UndergroundItem('Brown Shard', 414, [[1, 1, 0], [1, 1, 0], [1, 1, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.galar)));
+
+// Held Items
+UndergroundItems.addItem(new UndergroundHeldItem('Hard_Stone', 500, [[1, 1], [1, 1]], 1, HeldItemType.Hard_Stone, new MaxRegionRequirement(Region.johto)));

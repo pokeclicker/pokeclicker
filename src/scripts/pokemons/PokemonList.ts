@@ -3018,7 +3018,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 45,
             'speed': 35,
         },
-        'heldItem': {type: ItemType.underground, id: 'Hard Stone'},
+        'heldItem': {type: ItemType.item, id: 'Hard_Stone'},
     },
     {
         'id': 75.01,
@@ -3055,7 +3055,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 65,
             'speed': 45,
         },
-        'heldItem': {type: ItemType.underground, id: 'Hard Stone'},
+        'heldItem': {type: ItemType.item, id: 'Hard_Stone'},
     },
     {
         'id': 76.01,
@@ -3609,7 +3609,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 45,
             'speed': 70,
         },
-        'heldItem': {type: ItemType.underground, id: 'Hard Stone'},
+        'heldItem': {type: ItemType.item, id: 'Hard_Stone'},
     },
     {
         'id': 95.01,
@@ -3628,7 +3628,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 45,
             'speed': 70,
         },
-        'heldItem': {type: ItemType.underground, id: 'Hard Stone'},
+        'heldItem': {type: ItemType.item, id: 'Hard_Stone'},
     },
     {
         'id': 96,
@@ -7163,7 +7163,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 95,
             'speed': 35,
         },
-        'heldItem': {type: ItemType.underground, id: 'Hard Stone'},
+        'heldItem': {type: ItemType.item, id: 'Hard_Stone'},
         'gender': {
             'femaleRatio': 0.75,
         },
@@ -8755,7 +8755,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 90,
             'speed': 30,
         },
-        'heldItem': {type: ItemType.underground, id: 'Hard Stone'},
+        'heldItem': {type: ItemType.item, id: 'Hard_Stone'},
     },
     {
         'id': 300,
@@ -8850,7 +8850,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 40,
             'speed': 30,
         },
-        'heldItem': {type: ItemType.underground, id: 'Hard Stone'},
+        'heldItem': {type: ItemType.item, id: 'Hard_Stone'},
     },
     {
         'id': 305,
@@ -8869,7 +8869,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 50,
             'speed': 40,
         },
-        'heldItem': {type: ItemType.underground, id: 'Hard Stone'},
+        'heldItem': {type: ItemType.item, id: 'Hard_Stone'},
     },
     {
         'id': 306,
@@ -8887,7 +8887,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 60,
             'speed': 50,
         },
-        'heldItem': {type: ItemType.underground, id: 'Hard Stone'},
+        'heldItem': {type: ItemType.item, id: 'Hard_Stone'},
     },
     {
         'id': 307,
@@ -12463,7 +12463,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 150,
             'speed': 40,
         },
-        'heldItem': {type: ItemType.underground, id: 'Hard Stone'},
+        'heldItem': {type: ItemType.item, id: 'Hard_Stone'},
     },
     {
         'id': 477,

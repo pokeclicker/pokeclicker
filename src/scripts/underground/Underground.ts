@@ -179,6 +179,12 @@ class Underground implements Feature {
             return;
         }
 
+        if (item.valueType == UndergroundItemValueType.HeldItem) {
+            const helditem: HeldItem = (ItemList[GameConstants.StoneType[item.type]] as HeldItem);
+            helditem.gain(num);
+            return;
+        }
+
         if (index == -1) {
             const tempItem = {
                 name: item.name,

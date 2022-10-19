@@ -5,6 +5,7 @@ enum UndergroundItemValueType {
     Fossil,
     FossilPiece,
     EvolutionItem,
+    HeldItem,
 }
 
 export default UndergroundItemValueType;

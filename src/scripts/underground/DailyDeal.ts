@@ -48,10 +48,11 @@ class DailyDeal {
             return false;
         }
 
-        // Left side item cannot be Evolution Item or Shard
+        // Left side item cannot be Evolution Item, Shard, or Held Item
         if (
             this.item1.valueType == UndergroundItemValueType.EvolutionItem
             || this.item1.valueType == UndergroundItemValueType.Shard
+            || this.item1.valueType == UndergroundItemValueType.HeldItem
         ) {
             return false;
         }
