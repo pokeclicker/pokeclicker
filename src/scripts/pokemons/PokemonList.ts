@@ -272,6 +272,7 @@ const pokemonList = createPokemonArray(
         },
         'gender': {
             'femaleRatio': 0.125,
+            'visualDifference': true,
         },
     },
     {
@@ -719,6 +720,9 @@ const pokemonList = createPokemonArray(
             'specialDefense': 80,
             'speed': 70,
         },
+        'gender': {
+            'visualDifference': true,
+        },
     },
     {
         'id': 12.02,
@@ -995,6 +999,9 @@ const pokemonList = createPokemonArray(
             'specialDefense': 35,
             'speed': 72,
         },
+        'gender': {
+            'visualDifference': true,
+        },
     },
     {
         'id': 20,
@@ -1067,6 +1074,9 @@ const pokemonList = createPokemonArray(
             'defense': 60,
             'specialDefense': 70,
             'speed': 97,
+        },
+        'gender': {
+            'visualDifference': true,
         },
     },
     {
@@ -1625,6 +1635,9 @@ const pokemonList = createPokemonArray(
             'specialDefense': 40,
             'speed': 41,
         },
+        'gender': {
+            'femaleRatio': 1,
+        },
     },
     {
         'id': 29.01,
@@ -2115,6 +2128,9 @@ const pokemonList = createPokemonArray(
             'defense': 85,
             'specialDefense': 90,
             'speed': 50,
+        },
+        'gender': {
+            'visualDifference': true,
         },
     },
     {
@@ -3359,6 +3375,9 @@ const pokemonList = createPokemonArray(
             'specialDefense': 60,
             'speed': 110,
         },
+        'gender': {
+            'visualDifference': true,
+        },
     },
     {
         'id': 86,
@@ -4063,6 +4082,9 @@ const pokemonList = createPokemonArray(
             'specialDefense': 30,
             'speed': 25,
         },
+        'gender': {
+            'visualDifference': true,
+        },
     },
     {
         'id': 112,
@@ -4100,6 +4122,9 @@ const pokemonList = createPokemonArray(
             'defense': 120,
             'specialDefense': 45,
             'speed': 40,
+        },
+        'gender': {
+            'visualDifference': true,
         },
     },
     {
@@ -4354,6 +4379,9 @@ const pokemonList = createPokemonArray(
             'defense': 80,
             'specialDefense': 80,
             'speed': 105,
+        },
+        'gender': {
+            'visualDifference': true,
         },
     },
     {
@@ -6866,6 +6894,9 @@ const pokemonList = createPokemonArray(
             'defense': 200,
             'specialDefense': 65,
             'speed': 30,
+        },
+        'gender': {
+            'visualDifference': true,
         },
     },
     {
@@ -20567,6 +20598,28 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 306,
         'catchRate': 45,
+        'evolutions': [new StoneEvolution('Solgaleo', 'Solgaleo (Radiant Sun)', GameConstants.StoneType.Solar_light)],
+        'base': {
+            'hitpoints': 137,
+            'attack': 137,
+            'specialAttack': 113,
+            'defense': 107,
+            'specialDefense': 89,
+            'speed': 97,
+        },
+        'gender': {
+            'type': GameConstants.Genders.Genderless,
+        },
+        'heldItem': {type: ItemType.item, id: 'Solar_light'},
+    },
+    {
+        'id': 791.1,
+        'name': 'Solgaleo (Radiant Sun)',
+        'type': [PokemonType.Psychic, PokemonType.Steel],
+        'eggCycles': 120,
+        'levelType': LevelType.slow,
+        'exp': null,
+        'catchRate': 45,
         'base': {
             'hitpoints': 137,
             'attack': 137,
@@ -20587,6 +20640,28 @@ const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': 306,
+        'catchRate': 45,
+        'evolutions': [new StoneEvolution('Lunala', 'Lunala (Full Moon)', GameConstants.StoneType.Lunar_light)],
+        'base': {
+            'hitpoints': 137,
+            'attack': 113,
+            'specialAttack': 137,
+            'defense': 89,
+            'specialDefense': 107,
+            'speed': 97,
+        },
+        'gender': {
+            'type': GameConstants.Genders.Genderless,
+        },
+        'heldItem': {type: ItemType.item, id: 'Lunar_light'},
+    },
+    {
+        'id': 792.1,
+        'name': 'Lunala (Full Moon)',
+        'type': [PokemonType.Psychic, PokemonType.Ghost],
+        'eggCycles': 120,
+        'levelType': LevelType.slow,
+        'exp': null,
         'catchRate': 45,
         'base': {
             'hitpoints': 137,
