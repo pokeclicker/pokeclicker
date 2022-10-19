@@ -22644,6 +22644,26 @@ const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 868.01,
+        'name': 'Milcery (Cheesy)',
+        'type': [PokemonType.Fairy],
+        'base': {
+            'hitpoints': 45,
+            'attack': 40,
+            'specialAttack': 50,
+            'defense': 40,
+            'specialDefense': 61,
+            'speed': 34,
+        },
+        'eggCycles': 20,
+        'levelType': LevelType.mediumfast,
+        'exp': 54,
+        'catchRate': 200,
+        'gender': {
+            'femaleRatio': 1,
+        },
+    },
+    {
         'id': 869,
         'name': 'Alcremie (Strawberry Vanilla)',
         'type': [PokemonType.Fairy],
