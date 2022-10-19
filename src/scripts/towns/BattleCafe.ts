@@ -70,7 +70,7 @@ class BattleCafeController {
             (new PokemonItem('Milcery (Cheesy)', 0)).gain(1);
             return;
         }
-        if (curHour == 18 && !clockwise && spinTime > 10) {
+        if (curHour == 19 && !clockwise && spinTime > 10) {
             spin = GameConstants.AlcremieSpins.at7Above10;
         } else if (curHour >= 5 && curHour < 19) { // Is day
             if (clockwise && spinTime < 5) {
