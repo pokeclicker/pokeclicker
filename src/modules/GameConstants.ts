@@ -125,10 +125,10 @@ export enum AchievementType {
     'None' = -1,
     'Pokedollars' = 0,
     'Dungeon Token',
-    'Total Captured',
-    'Total Defeated',
     'Caught Pokemon',
     'Shiny Pokemon',
+    'Total Captured',
+    'Total Defeated',
     'Attack',
     'Poke Balls',
     'Route Defeats',
@@ -1416,6 +1416,15 @@ export const TemporaryBattles = [
     'Glastrier',
     'Spectrier',
     'Dyna Tree Birds',
+    'Galarian Articuno 1',
+    'Galarian Articuno 2',
+    'Galarian Articuno 3',
+    'Galarian Zapdos 1',
+    'Galarian Zapdos 2',
+    'Galarian Zapdos 3',
+    'Galarian Moltres 1',
+    'Galarian Moltres 2',
+    'Galarian Moltres 3',
     'Regigigas',
 ];
 
@@ -1576,6 +1585,25 @@ export enum GalarSubRegions {
     IsleofArmor,
     CrownTundra,
 }
+
+// Gender Types
+export enum Genders {
+    Genderless = 0,
+    MaleFemale, // Default
+}
+
+// Wild/Trainer/BF Pokémon Gender
+export enum BattlePokemonGender {
+    NoGender = 0,
+    Male,
+    Female,
+}
+
+// Pokemon Statistics
+export const STATISTIC_CAPTURED = 'Captured';
+export const STATISTIC_DEFEATED = 'Defeated';
+export const STATISTIC_ENCOUNTERED = 'Encountered';
+export const STATISTIC_HATCHED = 'Hatched';
 
 export enum AlcremieSweet {
     'Strawberry Sweet',

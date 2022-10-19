@@ -15,6 +15,7 @@ export const SpriteCredits: Credit[] = [
         link: 'https://discordapp.com/users/200069836724764673/',
         resources: [
             'Pinkan Scyther',
+            'Sealed Chamber Braille',
         ],
         // Notes: Made specifically for PokéClicker.
     },
@@ -180,6 +181,9 @@ export const SpriteCredits: Credit[] = [
             'Dracozolt shop image',
             'Dungeon Ladder',
             'Galar fossils items',
+            'Galarian Articuno overworld image',
+            'Galarian Moltres overworld image',
+            'Galarian Zapdos overworld image',
             'Galarica cuff and wreath icons',
             'Linking cord cartoon style',
             'Luana',
@@ -552,6 +556,7 @@ export const SpriteCredits: Credit[] = [
         name: 'Someone Soul',
         link: 'https://discordapp.com/users/824384977633411082',
         resources: [
+            'Bede overworld image',
             'Cissy',
             'Detective Pikachu',
             'Detective Raichu',
