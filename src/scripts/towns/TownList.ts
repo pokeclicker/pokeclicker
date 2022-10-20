@@ -1896,7 +1896,7 @@ const FortreeRanger = new NPC('Pokémon Ranger Catherine', [
     'Have you seen this? It\'s horrific. Absolutely despicable.',
     'Disposable Dowsing Machines! Who even came up with this?! People leave these everywhere. It\'s absolutely terrible for the environment. Some poor innocent Pokémon could choke on it!',
     'Please recycle your used Dowsing Machines.',
-]);
+], {image: 'assets/images/npcs/Pokemon Ranger (female).png'});
 
 const MossdeepAstronomer = new NPC('Astronomer', [
     'Hey did you know about the Millennium Comet? We can see it in the sky right now, and it only comes around once every thousand years!',
@@ -1922,61 +1922,61 @@ const ProfBirch = new ProfNPC('Prof. Birch',
 
 const SCEntrance = new NPC('Strange Markings', [
     '<i>These strange markings seem to spell something out. The nearby Braille Enthusiast may know more.</i>',
-], {image: 'assets/images/npcs/Regi Entrance.png',
+], {image: 'assets/images/npcs/other/Regi Entrance.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Three Golems', 0), new QuestLineStepCompletedRequirement('The Three Golems', 1, GameConstants.AchievementOption.less)]),
 });
 
 const MazeHintLeft = new NPC('Room Engraving', [
     '<i>These strange markings seem to spell something out. The nearby Braille Enthusiast may know more.</i>',
-], {image: 'assets/images/npcs/LeftBraille.png',
+], {image: 'assets/images/npcs/other/LeftBraille.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Three Golems', 1), new QuestLineStepCompletedRequirement('The Three Golems', 3, GameConstants.AchievementOption.less)]),
 });
 
 const SCMazeLeft = new NPC('Go Left', [
-    '<i>You turn left and proceed to the next room</i>',
+    '<i>You turn left and proceed to the next room.</i>',
 ],  {requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Three Golems', 1), new QuestLineStepCompletedRequirement('The Three Golems', 3, GameConstants.AchievementOption.less)]),
 });
 
 const SCMazeLeftWrong = new NPC('Go Left', [
-    '<i>You turn left, but it is a dead end</i>',
+    '<i>You turn left, but it is a dead end.</i>',
 ],  {requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Three Golems', 3), new QuestLineStepCompletedRequirement('The Three Golems', 6, GameConstants.AchievementOption.less)]),
 });
 
 const MazeHintRight = new NPC('Room Engraving', [
     '<i>These strange markings seem to spell something out. The nearby Braille Enthusiast may know more.</i>',
-], {image: 'assets/images/npcs/RightBraille.png',
+], {image: 'assets/images/npcs/other/RightBraille.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Three Golems', 5), new QuestLineStepCompletedRequirement('The Three Golems', 6, GameConstants.AchievementOption.less)]),
 });
 
 const SCMazeRight = new NPC('Go Right', [
-    '<i>You turn right and proceed to the next room</i>',
+    '<i>You turn right and proceed to the next room.</i>',
 ],  {requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Three Golems', 5), new QuestLineStepCompletedRequirement('The Three Golems', 6, GameConstants.AchievementOption.less)]),
 });
 
 const SCMazeRightWrong = new NPC('Go Right', [
-    '<i>You turn right, but it is a dead end</i>',
+    '<i>You turn right, but it is a dead end.</i>',
 ],  {requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Three Golems', 1), new QuestLineStepCompletedRequirement('The Three Golems', 5, GameConstants.AchievementOption.less)]),
 });
 
 const MazeHintStraight = new NPC('Room Engraving', [
     '<i>These strange markings seem to spell something out. The nearby Braille Enthusiast may know more.</i>',
-], {image: 'assets/images/npcs/StraightBraille.png',
+], {image: 'assets/images/npcs/other/StraightBraille.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Three Golems', 3), new QuestLineStepCompletedRequirement('The Three Golems', 5, GameConstants.AchievementOption.less)]),
 });
 
 const SCMazeStraight = new NPC('Go Straight', [
-    '<i>You go straight and proceed to the next room</i>',
+    '<i>You go straight and proceed to the next room.</i>',
 ],  {requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Three Golems', 3), new QuestLineStepCompletedRequirement('The Three Golems', 5, GameConstants.AchievementOption.less)]),
 });
 
 const SCMazeStraightWrong = new NPC('Go Straight', [
-    '<i>You go straight, but it is a dead end</i>',
+    '<i>You go straight, but it is a dead end.</i>',
 ],  {requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Three Golems', 1), new QuestLineStepCompletedRequirement('The Three Golems', 3, GameConstants.AchievementOption.less)]),
 });
 
 const SCHints = new NPC('Hidden Message', [
     '<i>These strange markings seem to spell something out. The nearby Braille Enthusiast may know more.</i>',
-], {image: 'assets/images/npcs/Regi Hints.png',
+], {image: 'assets/images/npcs/other/Regi Hints.png',
     requirement: new QuestLineStepCompletedRequirement('The Three Golems', 6),
 });
 
@@ -4007,7 +4007,7 @@ const IkiOutskirtsMom = new NPC('Scratch Cat Girl', [
     'Out of all the doglike Pokémon, I think Rockruff is definitely the most adorable. And it even has three evolutions! One during the day, one at night and one in between, from 5 to 6 o\'clock.',
     'What\'s that? AM or PM?',
     'Yes.',
-]);
+], {image: 'assets/images/npcs/Scratch Cat Girl.png'});
 const KukuisLabProfessor = new NPC('Professor Kukui', [
     'Are you looking for some rare Pokémon? Maybe I can help with that. Ask away!',
     'Meltan? What\'s a Meltan? Nope, don\'t know about that one.',
@@ -4025,7 +4025,7 @@ const HeaheaCafeOwner = new NPC('Café Owner', [
     'Captain Lana\'s trial in Brooklet Hill, Captain Kiawe\'s trial in Wela Volcano Park and Captain Mallow\'s trial in Lush Jungle.',
     'For what it\'s worth, I say don\'t go to any of those places. Too wet, too hot and too... jungly. Why not stay here? Have a coffee! Enjoy the city!',
     'Or go to Konikoni City down south. You might even meet our Kahuna there!',
-]);
+], {image: 'assets/images/npcs/Owner.png'});
 const PaniolaTownActor = new NPC('Actor Meredith', [
     'I love Oricorio. I can tell you all about it!',
     'Each of the four islands in Alola has its own meadow, and each meadow has its own form of Oricorio. Each island, except for Akala Island. So you\'d think there\'s only three forms of Oricorio, right?',
@@ -4167,11 +4167,11 @@ const RoadsideMotelAnabel5 = new NPC('Anabel', [
 });
 const BattleTreeRed = new NPC('Red', [
     '...',
-]);
+], {image: 'assets/images/npcs/Red-masters.png'});
 const BattleTreeBlue = new NPC('Blue', [
     'Hello there champ! Fancy seeing you here.',
     'We just planted this sapling here. Maybe it will grow into something great some day.',
-]);
+], {image: 'assets/images/npcs/Blue-masters.png'});
 
 //Alola Towns
 
