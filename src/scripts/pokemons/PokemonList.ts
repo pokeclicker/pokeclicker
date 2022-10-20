@@ -2360,6 +2360,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 40,
             'speed': 90,
         },
+        'heldItem': {type: ItemType.underground, id: 'Nugget'},
     },
     {
         'id': 52.01,
@@ -3431,6 +3432,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 50,
             'speed': 25,
         },
+        'heldItem': {type: ItemType.underground, id: 'Nugget'},
     },
     {
         'id': 88.01,
@@ -3467,6 +3469,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 100,
             'speed': 50,
         },
+        'heldItem': {type: ItemType.underground, id: 'Nugget'},
     },
     {
         'id': 89.01,
@@ -14821,6 +14824,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 62,
             'speed': 65,
         },
+        'heldItem': {type: ItemType.underground, id: 'Nugget'},
     },
     {
         'id': 569,
@@ -14838,6 +14842,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 82,
             'speed': 75,
         },
+        'heldItem': {type: ItemType.underground, id: 'Nugget'},
     },
     {
         'id': 569.1,
