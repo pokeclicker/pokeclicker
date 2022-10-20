@@ -1189,6 +1189,7 @@ export type PokemonNameType
     | 'Mr. Rime'
     | 'Runerigus'
     | 'Milcery'
+    | 'Milcery (Cheesy)'
     | 'Alcremie (Strawberry Vanilla)'
     | 'Alcremie (Strawberry Lemon)'
     | 'Alcremie (Strawberry Mint)'

@@ -4559,7 +4559,7 @@ const StowonSideShop = new Shop([
 ]);
 const GlimwoodTangleShop = new Shop([
     ItemList['Zarude (Dada)'],
-], undefined, [new QuestLineCompletedRequirement('Secrets of the Jungle')]);
+], 'Zarude Village', [new QuestLineCompletedRequirement('Secrets of the Jungle')]);
 const BallonleaShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
