@@ -55,12 +55,13 @@ UndergroundItems.addItem(new UndergroundItem('Iron Ball', 5, [[1, 1, 1], [1, 1, 
 UndergroundItems.addItem(new UndergroundItem('Heart Scale', 6, [[1, 0], [1, 1]], 10));
 UndergroundItems.addItem(new UndergroundItem('Light Clay', 7, [[1, 0, 1, 0], [1, 1, 1, 0], [1, 1, 1, 1], [0, 1, 0, 1]], 2));
 UndergroundItems.addItem(new UndergroundItem('Odd Keystone', 8, [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], 6));
-UndergroundItems.addItem(new UndergroundItem('Oval Stone', 9, [[1, 1, 1], [1, 1, 1], [1, 1, 1]], 3));
-UndergroundItems.addItem(new UndergroundItem('Everstone', 10, [[1, 1, 1, 1], [1, 1, 1, 1]], 3));
-UndergroundItems.addItem(new UndergroundItem('Smooth Rock', 11, [[0, 0, 1, 0], [1, 1, 1, 0], [0, 1, 1, 1], [0, 1, 0, 0]], 2));
-UndergroundItems.addItem(new UndergroundItem('Heat Rock', 12, [[1, 0, 1, 0], [1, 1, 1, 1], [1, 1, 1, 1]], 2));
-UndergroundItems.addItem(new UndergroundItem('Icy Rock', 13, [[0, 1, 1, 0], [1, 1, 1, 1], [1, 1, 1, 1], [1, 0, 0, 1]], 2));
-UndergroundItems.addItem(new UndergroundItem('Damp Rock', 14, [[1, 1, 1], [1, 1, 1], [1, 0, 1]], 2));
+UndergroundItems.addItem(new UndergroundItem('Nugget', 9, [[1, 1], [1, 1]], 4));
+UndergroundItems.addItem(new UndergroundItem('Oval Stone', 10, [[1, 1, 1], [1, 1, 1], [1, 1, 1]], 3));
+UndergroundItems.addItem(new UndergroundItem('Everstone', 11, [[1, 1, 1, 1], [1, 1, 1, 1]], 3));
+UndergroundItems.addItem(new UndergroundItem('Smooth Rock', 12, [[0, 0, 1, 0], [1, 1, 1, 0], [0, 1, 1, 1], [0, 1, 0, 0]], 2));
+UndergroundItems.addItem(new UndergroundItem('Heat Rock', 13, [[1, 0, 1, 0], [1, 1, 1, 1], [1, 1, 1, 1]], 2));
+UndergroundItems.addItem(new UndergroundItem('Icy Rock', 14, [[0, 1, 1, 0], [1, 1, 1, 1], [1, 1, 1, 1], [1, 0, 0, 1]], 2));
+UndergroundItems.addItem(new UndergroundItem('Damp Rock', 15, [[1, 1, 1], [1, 1, 1], [1, 0, 1]], 2));
 
 // Gem Plates
 UndergroundItems.addItem(new UndergroundGemItem('Draco Plate', 100, [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], 100, PokemonType.Dragon));

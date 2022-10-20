@@ -18,7 +18,7 @@ type UndergroundItemNameType
     | 'Heart Scale'
     | 'Light Clay'
     | 'Odd Keystone'
-    | 'Hard Stone'
+    | 'Nugget'
     | 'Oval Stone'
     | 'Everstone'
     | 'Smooth Rock'
@@ -81,6 +81,7 @@ type UndergroundItemNameType
     | 'Pink Shard'
     | 'Cyan Shard'
     | 'Rose Shard'
-    | 'Brown Shard';
+    | 'Brown Shard'
+    | 'Hard Stone';
 
 export default UndergroundItemNameType;
