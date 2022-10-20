@@ -20607,6 +20607,9 @@ const pokemonList = createPokemonArray(
             'specialDefense': 89,
             'speed': 97,
         },
+        'gender': {
+            'type': GameConstants.Genders.Genderless,
+        },
         'heldItem': {type: ItemType.item, id: 'Solar_light'},
     },
     {
@@ -20646,6 +20649,9 @@ const pokemonList = createPokemonArray(
             'defense': 89,
             'specialDefense': 107,
             'speed': 97,
+        },
+        'gender': {
+            'type': GameConstants.Genders.Genderless,
         },
         'heldItem': {type: ItemType.item, id: 'Lunar_light'},
     },
@@ -22620,6 +22626,26 @@ const pokemonList = createPokemonArray(
     {
         'id': 868,
         'name': 'Milcery',
+        'type': [PokemonType.Fairy],
+        'base': {
+            'hitpoints': 45,
+            'attack': 40,
+            'specialAttack': 50,
+            'defense': 40,
+            'specialDefense': 61,
+            'speed': 34,
+        },
+        'eggCycles': 20,
+        'levelType': LevelType.mediumfast,
+        'exp': 54,
+        'catchRate': 200,
+        'gender': {
+            'femaleRatio': 1,
+        },
+    },
+    {
+        'id': 868.01,
+        'name': 'Milcery (Cheesy)',
         'type': [PokemonType.Fairy],
         'base': {
             'hitpoints': 45,
