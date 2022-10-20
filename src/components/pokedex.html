@@ -11,7 +11,7 @@ aria-labelledby="pokedexModalLabel">
        </div>
        <div class="modal-body" style="background-color: inherit;">
             <div class="containers-holder" style="background-color: inherit;">
-                <div class="position-sticky" style="background-color: inherit; top: 0; z-index: 100;">
+                <div class="position-sticky filters-container" style="background-color: inherit; top: 0; z-index: 100;">
                     <!-- ko if: PokedexHelper.filteredList().length == 0 -->
                     <div class="pokedex-border-bottom mb-2">
                         <h4>No Pokémon found</h4>
@@ -81,8 +81,9 @@ aria-labelledby="pokedexModalLabel">
                                         <!-- /ko -->
                                     </select>
                                 </div>
+
                                 <!--Rare Hold Item-->
-                                <div class="col-4">
+                                <div class="col-md-4 col-12">
                                     <div class="form-group my-2">
                                         <span>Rare Hold Item</span>
                                         <label class="form-check-label toggler-wrapper style-1 float-right">
@@ -96,7 +97,7 @@ aria-labelledby="pokedexModalLabel">
                                 </div>
 
                                 <!--Hide shiny images-->
-                                <div class="col-4 checkbox-border-x">
+                                <div class="col-md-4 col-12 checkbox-border-x">
                                     <div class="form-group my-2">
                                         <span>Hide shiny image</span>
                                         <label class="form-check-label toggler-wrapper style-1 float-right">
@@ -110,7 +111,7 @@ aria-labelledby="pokedexModalLabel">
                                 </div>
 
                                 <!--Hide alternate forms-->
-                                <div class="col-4">
+                                <div class="col-md-4 col-12">
                                     <div class="form-group my-2">
                                         <span>Hide alternate forms</span>
                                         <label class="form-check-label toggler-wrapper style-1 float-right">

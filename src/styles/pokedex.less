@@ -56,11 +56,20 @@
   overflow-y: auto;
 }
 
+@media (max-width: 768px) {
+  .filters-container {
+    overflow-y: auto;
+    max-height: calc(100vh - 200px);
+  }
+}
+
 /* Borders */
 .pokedex-border-bottom {
   border-bottom: 1px solid grey;
 }
-.checkbox-border-x {
-  border-left: 1px solid grey;
-  border-right: 1px solid grey;
+@media (min-width: 768px) {
+  .checkbox-border-x {
+    border-left: 1px solid grey;
+    border-right: 1px solid grey;
+  }
 }
