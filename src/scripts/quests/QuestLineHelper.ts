@@ -1794,7 +1794,7 @@ class QuestLineHelper {
                 catchGalarianMoltres,
             ], 'Galarian Articuno, Zapdos and Moltres are now roaming in the Crown Tundra, Southern Galar and the Isle of Armor respectively. Catch them when the opportunity arises!'));
 
-        const talktoBirdPeony4 = new TalkToNPCQuest(BirdPeony4, 'Now that you have captured Galarian Articuno, Zapdos and Moltres, go report back to Peony!.');
+        const talktoBirdPeony4 = new TalkToNPCQuest(BirdPeony4, 'Now that you have captured Galarian Articuno, Zapdos and Moltres, go report back to Peony!');
         dynaTreeBirdsQuestLine.addQuest(talktoBirdPeony4);
 
         App.game.quests.questLines().push(dynaTreeBirdsQuestLine);
