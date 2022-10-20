@@ -34,7 +34,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                 You don't have any free egg slots.
             </p>
             <p class="bg-danger my-0" data-bind="visible: !App.game.breeding.hasFreeQueueSlot() && App.game.breeding.queueSlots()">
-                Your breeding queue is full.
+                Your breeding queue is full or disabled.
             </p>
 
             <div class="tab-content p-3">
@@ -56,15 +56,6 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             </div>
                             <div class="form-group col-md-3 col-6">
                                 <label>Regions</label><br/>
-                                <!--<button type="button" class="col-12 btn btn-secondary" href="#breedingRegionModal" data-toggle="modal" data-bind="text :'Selected : ' + Settings.getSetting('breedingRegionFilter').observableValue().toString(2).split('').reduce(function(s,n){ return s + (n == '1' ? 1 : 0)}, 0)">
-									Regions
-								</button> -->
-								<!--<select name="breedingRegionFilter" autocomplete="off" class="custom-select" data-bind="text : 'Selected : ' +
-									Settings.getSetting('breedingRegionFilter').observableValue().toString(2).split('').reduce(function(s,n){ return s + (n == '1' ? 1 : 0)}, 0)">
-                                    <!-- ko foreach: Object.keys(GameConstants.Region).filter(function(r){ return r <= player.highestRegion() && r >= 0; }) --><!--
-                                    <option data-bind="attr: { value: $data, selected: Settings.getSetting('breedingRegionFilter').value & $data }, text: GameConstants.camelCaseToString(GameConstants.Region[$data])">Region</option>
-                                    <!-- /ko --><!--
-                                </select> -->
 								<div class="dropdown show">
 									<button type="button" class="text-left custom-select col-12 btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bind="text : BreedingFilters.region.value() ? GameConstants.camelCaseToString(GameConstants.Region[Math.floor(Math.log2(BreedingFilters.region.value()))]) + (BreedingFilters.region.value().toString(2).split('').reduce(function(s,n){ return s + (n == '1' ? 1 : 0)}, 0) > 1 ? ' & more' : '') : 'None'">
 										Regions
@@ -166,7 +157,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             Unfortunately, you don't have any Pokémon of level 100 to breed.
                         </p>
                         <!-- ko if: App.game.party.hasMaxLevelPokemon() -->
-                        <ul class="row justify-content-center p-0" data-bind="foreach: PartyController.getHatcherySortedList(BreedingController.regionalAttackDebuff())">
+                        <ul class="row justify-content-center p-0" data-bind="foreach: lazyLoad($element, PartyController.getHatcherySortedList)">
                             <li class="eggSlot col-sm-4 col-md-3 col-lg-2 pokedexEntry text-nowrap" data-bind="visible: BreedingController.visible($data), style:{background: PokedexHelper.getBackgroundColors($data.name)}, class: App.game.breeding.hasFreeEggSlot() || App.game.breeding.hasFreeQueueSlot() ? '' : 'disabled'">
                                 <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: $data.name">name</span>
                                 <div data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)" style="position: absolute;right: 1px;top: -2px;height: 24px">✨</div>

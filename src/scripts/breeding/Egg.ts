@@ -50,10 +50,13 @@ class Egg implements Saveable {
             this.pokemonType2 = PokemonType.Normal;
         }
 
-        // Deferring this because it wants to access App.game.party, which isn't avaliable yet
-        setTimeout(() => {
+        this.setPartyPokemon();
+    }
+
+    setPartyPokemon() {
+        if (!this.partyPokemon() && App.game?.party) {
             this.partyPokemon(this.type !== EggType.None ? App.game.party.getPokemon(PokemonHelper.getPokemonById(this.pokemon).id) : null);
-        }, 0);
+        }
     }
 
     isNone() {
@@ -67,7 +70,7 @@ class Egg implements Saveable {
         this.shinyChance = newChance;
     }
 
-    addSteps(amount: number, multiplier: Multiplier) {
+    addSteps(amount: number, multiplier: Multiplier, helper = false) {
         if (this.isNone() || this.notified) {
             return;
         }
@@ -76,7 +79,7 @@ class Egg implements Saveable {
         }
         this.updateShinyChance(amount, multiplier);
         this.steps(this.steps() + amount);
-        if (this.canHatch()) {
+        if (this.canHatch() && !helper) {
             if (this.type == EggType.Pokemon) {
                 Notifier.notify({
                     message: `${PokemonHelper.getPokemonById(this.pokemon).name} is ready to hatch!`,
