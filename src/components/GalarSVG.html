@@ -792,6 +792,36 @@
                , image: "assets/images/map/hop.png"
                })
             %>
+
+            <%- include('templates/mapOverlay',
+                { name: "Galarian Zapdos"
+                , x: 46, y: 24
+                , width: 4, height: 3
+                , databind: "click: () => TemporaryBattleList['Galarian Zapdos 1'].protectedOnclick()"
+                , visible:  "TemporaryBattleList['Galarian Zapdos 1'] && TemporaryBattleList['Galarian Zapdos 1'].isVisible()"
+                , image: "assets/images/map/galarianzapdos.png"
+                })
+             %>
+
+             <%- include('templates/mapOverlay',
+                 { name: "Galarian Zapdos"
+                 , x: 55, y: 2
+                 , width: 4, height: 3
+                 , databind: "click: () => TemporaryBattleList['Galarian Zapdos 2'].protectedOnclick(), attr: { class: TemporaryBattleList['Galarian Zapdos 2'].isUnlocked() ? '' : 'locked' }"
+                 , visible:  "TemporaryBattleList['Galarian Zapdos 2'] && TemporaryBattleList['Galarian Zapdos 2'].isVisible()"
+                 , image: "assets/images/map/galarianzapdos.png"
+                 })
+              %>
+
+              <%- include('templates/mapOverlay',
+                  { name: "Galarian Zapdos"
+                  , x: 56.5, y: 36
+                  , width: 4, height: 3
+                  , databind: "click: () => TemporaryBattleList['Galarian Zapdos 3'].protectedOnclick(), attr: { class: TemporaryBattleList['Galarian Zapdos 3'].isUnlocked() ? '' : 'locked' }"
+                  , visible:  "TemporaryBattleList['Galarian Zapdos 3'] && TemporaryBattleList['Galarian Zapdos 3'].isVisible()"
+                  , image: "assets/images/map/galarianzapdos.png"
+                  })
+               %>
     </g>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'North Galar').id">
         <image width="1600" height="960" data-bind="attr: {
@@ -1163,6 +1193,16 @@
             , image: "assets/images/map/hop.png"
             })
          %>
+
+         <%- include('templates/mapOverlay',
+             { name: "Pokémon Trainer Bede"
+             , x: 25, y: 43
+             , width: 4, height: 4
+             , databind: "click: () => TemporaryBattleList['Bede3'].protectedOnclick()"
+             , visible:  "TemporaryBattleList['Bede3'] && TemporaryBattleList['Bede3'].isVisible()"
+             , image: "assets/images/map/bede.png"
+             })
+          %>
 
          <%- include('templates/mapOverlay',
              { name: "Pokémon Trainer Hop"
@@ -2340,6 +2380,36 @@
                , image: "assets/images/map/ashketchumoverworld.png"
                })
             %>
+
+            <%- include('templates/mapOverlay',
+                { name: "Galarian Moltres"
+                , x: 40, y: 43
+                , width: 4, height: 3
+                , databind: "click: () => TemporaryBattleList['Galarian Moltres 1'].protectedOnclick(), attr: { class: TemporaryBattleList['Galarian Moltres 1'].isUnlocked() ? '' : 'locked' }"
+                , visible:  "TemporaryBattleList['Galarian Moltres 1'] && TemporaryBattleList['Galarian Moltres 1'].isVisible()"
+                , image: "assets/images/map/galarianmoltres.png"
+                })
+             %>
+
+             <%- include('templates/mapOverlay',
+                 { name: "Galarian Moltres"
+                 , x: 71.5, y: 38
+                 , width: 4, height: 3
+                 , databind: "click: () => TemporaryBattleList['Galarian Moltres 2'].protectedOnclick(), attr: { class: TemporaryBattleList['Galarian Moltres 2'].isUnlocked() ? '' : 'locked' }"
+                 , visible:  "TemporaryBattleList['Galarian Moltres 2'] && TemporaryBattleList['Galarian Moltres 2'].isVisible()"
+                 , image: "assets/images/map/galarianmoltres.png"
+                 })
+              %>
+
+              <%- include('templates/mapOverlay',
+                  { name: "Galarian Moltres"
+                  , x: 52, y: 35
+                  , width: 4, height: 3
+                  , databind: "click: () => TemporaryBattleList['Galarian Moltres 3'].protectedOnclick(), attr: { class: TemporaryBattleList['Galarian Moltres 3'].isUnlocked() ? '' : 'locked' }"
+                  , visible:  "TemporaryBattleList['Galarian Moltres 3'] && TemporaryBattleList['Galarian Moltres 3'].isVisible()"
+                  , image: "assets/images/map/galarianmoltres.png"
+                  })
+               %>
     </g>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'Crown Tundra').id">
         <image width="1600" height="960" data-bind="attr: {
@@ -2996,6 +3066,64 @@
             , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Crown Tundra Station') }"
             })
         %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Dyna Tree Birds"
+            , x: 46, y: 55
+            , width: 4, height: 3
+            , databind: "click: () => TemporaryBattleList['Dyna Tree Birds'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Dyna Tree Birds'] && TemporaryBattleList['Dyna Tree Birds'].isVisible()"
+            , image: "assets/images/map/galarianmoltres.png"
+            })
+         %>
+         <%- include('templates/mapOverlay',
+             { name: "Dyna Tree Birds"
+             , x: 50, y: 55
+             , width: 4, height: 3
+             , databind: "click: () => TemporaryBattleList['Dyna Tree Birds'].protectedOnclick()"
+             , visible:  "TemporaryBattleList['Dyna Tree Birds'] && TemporaryBattleList['Dyna Tree Birds'].isVisible()"
+             , image: "assets/images/map/galarianarticuno.png"
+             })
+          %>
+         <%- include('templates/mapOverlay',
+             { name: "Dyna Tree Birds"
+             , x: 48, y: 52
+             , width: 4, height: 3
+             , databind: "click: () => TemporaryBattleList['Dyna Tree Birds'].protectedOnclick()"
+             , visible:  "TemporaryBattleList['Dyna Tree Birds'] && TemporaryBattleList['Dyna Tree Birds'].isVisible()"
+             , image: "assets/images/map/galarianzapdos.png"
+             })
+          %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Galarian Articuno"
+            , x: 61.5, y: 16
+            , width: 4, height: 3
+            , databind: "click: () => TemporaryBattleList['Galarian Articuno 1'].protectedOnclick(), attr: { class: TemporaryBattleList['Galarian Articuno 1'].isUnlocked() ? '' : 'locked' }"
+            , visible:  "TemporaryBattleList['Galarian Articuno 1'] && TemporaryBattleList['Galarian Articuno 1'].isVisible()"
+            , image: "assets/images/map/galarianarticuno.png"
+            })
+         %>
+
+         <%- include('templates/mapOverlay',
+             { name: "Galarian Articuno"
+             , x: 79, y: 20
+             , width: 4, height: 3
+             , databind: "click: () => TemporaryBattleList['Galarian Articuno 2'].protectedOnclick(), attr: { class: TemporaryBattleList['Galarian Articuno 2'].isUnlocked() ? '' : 'locked' }"
+             , visible:  "TemporaryBattleList['Galarian Articuno 2'] && TemporaryBattleList['Galarian Articuno 2'].isVisible()"
+             , image: "assets/images/map/galarianarticuno.png"
+             })
+          %>
+
+          <%- include('templates/mapOverlay',
+              { name: "Galarian Articuno"
+              , x: 47, y: 3
+              , width: 4, height: 3
+              , databind: "click: () => TemporaryBattleList['Galarian Articuno 3'].protectedOnclick(), attr: { class: TemporaryBattleList['Galarian Articuno 3'].isUnlocked() ? '' : 'locked' }"
+              , visible:  "TemporaryBattleList['Galarian Articuno 3'] && TemporaryBattleList['Galarian Articuno 3'].isVisible()"
+              , image: "assets/images/map/galarianarticuno.png"
+              })
+           %>
 
         <%- include('templates/mapOverlay',
             { name: "Regigigas"
