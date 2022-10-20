@@ -17,10 +17,10 @@
     <script src="libs/Sortable.min.js"></script>
 
     <!-- New module-based code from './modules' -->
-    <script src="scripts/modules.min.js?v=0.9.14"></script>
+    <script src="scripts/modules.min.js?v=0.9.18"></script>
 
     <!--Minified scripts-->
-    <script src="scripts/script.min.js?v=0.9.14"></script>
+    <script src="scripts/script.min.js?v=0.9.18"></script>
 
     <!--Popper.js-->
     <script src="libs/popper.min.js"></script>
@@ -38,7 +38,7 @@
     <link href="libs/introjs-modern.css" rel="stylesheet">
 
     <!--Minified styles-->
-    <link href="styles/styles.min.css?v=0.9.14" rel="stylesheet">
+    <link href="styles/styles.min.css?v=0.9.18" rel="stylesheet">
 
     <!-- Google Analytics-->
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -484,7 +484,10 @@
                     <div id="itemBag" class="tab-pane p-3">
                         <div class="row justify-content-sm-center">
                             <div class="row col-10">
-                                <div class="btn btn-primary col-2" data-bind="template: { name: 'otherItemTemplate', data: 'Protein'}, click: () => $('#pokemonSelectorModal').modal('show')"></div>
+                                <div class="btn btn-primary col-2 item-bag-item" data-bind="template: { name: 'otherItemTemplate', data: 'Protein'}, click: () => $('#pokemonSelectorModal').modal('show')"></div>
+                            <!-- ko foreach: HeldItem.getHeldItems() -->
+                                <div class="btn btn-primary col-2 item-bag-item" data-bind="template: { name: 'otherItemTemplate', data: $data.name}, click: () => { HeldItem.heldItemSelected($data); $('#heldItemModal').modal('show'); }, visible: $data.isUnlocked()"></div>
+                            <!-- /ko -->
                             </div>
                         </div>
                     </div>
@@ -1213,6 +1216,11 @@
             <button class="btn btn-danger dungeon-button">Start Bossfight</button>
         </div>
         <!-- /ko -->
+        <!-- ko if: (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.ladder) -->
+        <div>
+            <button class="btn btn-warning dungeon-button">Go to next floor</button>
+        </div>
+        <!-- /ko -->
         <!-- ko if: DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.entrance && DungeonRunner.map.playerMoved() -->
         <div>
             <button class="btn btn-warning dungeon-button">Leave Dungeon</button>
@@ -1263,10 +1271,11 @@
           </div>
         </div>
 
+        <div style="position:absolute; left:65%;">
+            <img data-bind="attr:{ src: GymBattle.gym.imagePath }" onerror="this.src='assets/images/trainers/Mysterious Trainer.png';"/>
+        </div>
+
         <div>
-            <!-- TODO: Add after all Gym Leader images are formatted correctly (same sizes, style etc)
-            <img style="position:absolute; left:65%; top: 64px; height: 64px" data-bind="attr:{ src: GymBattle.gym.imagePath }" onerror="this.src = 'assets/images/transparent.png'"/>
-            -->
             <img class="enemy" data-bind="attr:{ src: PokemonHelper.getImage(GymBattle.enemyPokemon(), GymBattle.enemyPokemon().shiny) }" src=""/>
         </div>
 
@@ -1327,8 +1336,21 @@
           </div>
         </div>
 
-        <div>
+        <div style="position:absolute; left:65%;" data-bind="if: !TemporaryBattleRunner.battleObservable().optionalArgs.hideTrainer">
+            <img data-bind="attr:{ src: TemporaryBattleRunner.battleObservable().getImage() }" onerror="this.src='assets/images/trainers/Mysterious Trainer.png';"/>
+        </div>
+
+        <div data-bind="ifnot: TemporaryBattleBattle.catching">
             <img class="enemy" data-bind="attr:{ src: PokemonHelper.getImage(TemporaryBattleBattle.enemyPokemon(), TemporaryBattleBattle.enemyPokemon().shiny) }" src=""/>
+        </div>
+
+        <div data-bind="if: TemporaryBattleBattle.catching" class="catchChance">
+            <img class="pokeball-animated"
+                 data-bind="attr:{ src: 'assets/images/pokeball/' + GameConstants.Pokeball[TemporaryBattleBattle.pokeball()] + '.svg' }"
+                 src=""/>
+            <br>
+            Catch Chance:
+            <knockout data-bind="text: Math.floor(TemporaryBattleBattle.catchRateActual()) + '%'">Catch Rate</knockout>
         </div>
 
         <div class="progress hitpoints" style="height: 20px;">
@@ -1578,7 +1600,7 @@
                 </div>
                 <div class="card-body p-0 text-center">
                     <table class="dungeon-board">
-                      <tbody data-bind="foreach: DungeonRunner.map.board()">
+                      <tbody data-bind="foreach: DungeonRunner.map.board()[DungeonRunner.map.playerPosition().floor]">
                         <tr data-bind="foreach: $data">
                             <td data-bind=" click: function(){DungeonRunner.map.moveToCoordinates($context.$index(), $parentContext.$index()) }, attr: { class: $data.cssClass}"></td>
                         </tr>
@@ -1746,8 +1768,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.kanto, 'Kanto').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/kanto-kanto.png?v=0.9.14',
-            href:'assets/images/kanto-kanto.png?v=0.9.14'
+            'xlink:href':'assets/images/kanto-kanto.png?v=0.9.18',
+            href:'assets/images/kanto-kanto.png?v=0.9.18'
         }"></image>
 
         <!-- ------ -->
@@ -3713,12 +3735,163 @@
     , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
 </image>
 
+
+        
+
+<image href="assets/images/map/suicune.png" xlink:href="assets/images/map/suicune.png"
+    x="1056"
+    y="544"
+    height="64"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Suicune 3&#39;] &amp;&amp; TemporaryBattleList[&#39;Suicune 3&#39;].isVisible()"/>
+<rect class="city"
+    data-town="Suicune"
+    x="1056"
+    y="544"
+    height="64"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Suicune 3&#39;] &amp;&amp; TemporaryBattleList[&#39;Suicune 3&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Suicune 3&#39;].protectedOnclick()">
+</rect>
+<image width="48" height="48"
+    x="1056"
+    y="552"
+    class="iconLocation"
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Suicune 3&#39;] &amp;&amp; TemporaryBattleList[&#39;Suicune 3&#39;].isVisible()
+    , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+</image>
+
+
+        
+
+<image href="assets/images/map/suicune.png" xlink:href="assets/images/map/suicune.png"
+    x="1200"
+    y="688"
+    height="64"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Suicune 4&#39;] &amp;&amp; TemporaryBattleList[&#39;Suicune 4&#39;].isVisible()"/>
+<rect class="city"
+    data-town="Suicune"
+    x="1200"
+    y="688"
+    height="64"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Suicune 4&#39;] &amp;&amp; TemporaryBattleList[&#39;Suicune 4&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Suicune 4&#39;].protectedOnclick()">
+</rect>
+<image width="48" height="48"
+    x="1200"
+    y="696"
+    class="iconLocation"
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Suicune 4&#39;] &amp;&amp; TemporaryBattleList[&#39;Suicune 4&#39;].isVisible()
+    , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+</image>
+
+
+        
+
+<image href="assets/images/map/suicune.png" xlink:href="assets/images/map/suicune.png"
+    x="1280"
+    y="16"
+    height="64"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Suicune 5&#39;] &amp;&amp; TemporaryBattleList[&#39;Suicune 5&#39;].isVisible()"/>
+<rect class="city"
+    data-town="Suicune"
+    x="1280"
+    y="16"
+    height="64"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Suicune 5&#39;] &amp;&amp; TemporaryBattleList[&#39;Suicune 5&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Suicune 5&#39;].protectedOnclick()">
+</rect>
+<image width="48" height="48"
+    x="1280"
+    y="24"
+    class="iconLocation"
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Suicune 5&#39;] &amp;&amp; TemporaryBattleList[&#39;Suicune 5&#39;].isVisible()
+    , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+</image>
+
+
+        
+
+<image href="assets/images/map/suicune.png" xlink:href="assets/images/map/suicune.png"
+    x="1280"
+    y="16"
+    height="64"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Suicune 6&#39;] &amp;&amp; TemporaryBattleList[&#39;Suicune 6&#39;].isVisible()"/>
+<rect class="city"
+    data-town="Suicune"
+    x="1280"
+    y="16"
+    height="64"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Suicune 6&#39;] &amp;&amp; TemporaryBattleList[&#39;Suicune 6&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Suicune 6&#39;].protectedOnclick()">
+</rect>
+<image width="48" height="48"
+    x="1280"
+    y="24"
+    class="iconLocation"
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Suicune 6&#39;] &amp;&amp; TemporaryBattleList[&#39;Suicune 6&#39;].isVisible()
+    , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+</image>
+
+
+        
+
+<image href="assets/images/map/snorlaxoverworld.png" xlink:href="assets/images/map/snorlaxoverworld.png"
+    x="576"
+    y="304"
+    height="64"
+    width="64"
+    data-bind="visible: TemporaryBattleList[&#39;Snorlax route 16&#39;] &amp;&amp; TemporaryBattleList[&#39;Snorlax route 16&#39;].isVisible()"/>
+<rect class="city"
+    data-town="Snorlax"
+    x="576"
+    y="304"
+    height="64"
+    width="64"
+    data-bind="visible: TemporaryBattleList[&#39;Snorlax route 16&#39;] &amp;&amp; TemporaryBattleList[&#39;Snorlax route 16&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Snorlax route 16&#39;].protectedOnclick(), attr: { class: TemporaryBattleList[&#39;Snorlax route 16&#39;].isUnlocked() ? &#39;&#39; : &#39;locked&#39; }">
+</rect>
+<image width="48" height="48"
+    x="584"
+    y="312"
+    class="iconLocation"
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Snorlax route 16&#39;] &amp;&amp; TemporaryBattleList[&#39;Snorlax route 16&#39;].isVisible()
+    , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+</image>
+
+        
+        
+
+<image href="assets/images/map/snorlaxoverworld.png" xlink:href="assets/images/map/snorlaxoverworld.png"
+    x="1392"
+    y="512"
+    height="64"
+    width="64"
+    data-bind="visible: TemporaryBattleList[&#39;Snorlax route 12&#39;] &amp;&amp; TemporaryBattleList[&#39;Snorlax route 12&#39;].isVisible()"/>
+<rect class="city"
+    data-town="Snorlax"
+    x="1392"
+    y="512"
+    height="64"
+    width="64"
+    data-bind="visible: TemporaryBattleList[&#39;Snorlax route 12&#39;] &amp;&amp; TemporaryBattleList[&#39;Snorlax route 12&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Snorlax route 12&#39;].protectedOnclick(), attr: { class: TemporaryBattleList[&#39;Snorlax route 12&#39;].isUnlocked() ? &#39;&#39; : &#39;locked&#39; }">
+</rect>
+<image width="48" height="48"
+    x="1400"
+    y="520"
+    class="iconLocation"
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Snorlax route 12&#39;] &amp;&amp; TemporaryBattleList[&#39;Snorlax route 12&#39;].isVisible()
+    , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+</image>
+
+    
     </g>
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.kanto, 'Sevii Islands 123').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/kanto-sevii123.png?v=0.9.14',
-            href:'assets/images/kanto-sevii123.png?v=0.9.14'
+            'xlink:href':'assets/images/kanto-sevii123.png?v=0.9.18',
+            href:'assets/images/kanto-sevii123.png?v=0.9.18'
         }"></image>
 
         <!-- ------ -->
@@ -4099,8 +4272,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.kanto, 'Sevii Islands 4567').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/kanto-sevii4567.png?v=0.9.14',
-            href:'assets/images/kanto-sevii4567.png?v=0.9.14'
+            'xlink:href':'assets/images/kanto-sevii4567.png?v=0.9.18',
+            href:'assets/images/kanto-sevii4567.png?v=0.9.18'
         }"></image>
 
         <!-- ------ -->
@@ -5605,8 +5778,8 @@
 
                             <g data-bind='visible: player.region == GameConstants.Region.johto'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/johto.png?v=0.9.14',
-        href:'assets/images/johto.png?v=0.9.14'
+        'xlink:href':'assets/images/johto.png?v=0.9.18',
+        href:'assets/images/johto.png?v=0.9.18'
     }"></image>
 
     <!-- ------ -->
@@ -5888,18 +6061,18 @@
     <rect data-route='33'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(33, 1) }"
         height="48"
-        width="208"
-        x="512" y="880">
+        width="192"
+        x="528" y="880">
     </rect>
 
     <text style="font-size: 32px"
-        x="600"
+        x="608"
         y="914"
         data-bind="visible: !MapHelper.isRouteCurrentLocation(33, 1)">
         33
     </text>
     <image width="48" height="48"
-        x="592"
+        x="600"
         y="880"
         class="iconLocation"
         transform='rotate(0)'
@@ -5922,18 +6095,18 @@
     <rect data-route='34'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(34, 1) }"
         height="48"
-        width="144"
+        width="176"
         x="384" y="608">
     </rect>
 
     <text style="font-size: 32px"
-        x="440"
+        x="456"
         y="642"
         data-bind="visible: !MapHelper.isRouteCurrentLocation(34, 1)">
         34
     </text>
     <image width="48" height="48"
-        x="432"
+        x="448"
         y="608"
         class="iconLocation"
         transform='rotate(-90)'
@@ -5941,42 +6114,6 @@
             attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
     </image>
     
-
-</g>
-
-     <!--Extra bit of Route 34-->
-     
-
-<g
-
-    transform="rotate(90 ,384, 848)"
-
-    data-bind="click:function(){ MapHelper.moveToRoute(34, 1); } ">
-    <rect data-route='34'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(34, 1) }"
-        height="48"
-        width="80"
-        x="384" y="800">
-    </rect>
-
-
-</g>
-
-      <!--Extra bit of Route 34-->
-      
-
-<g
-
-    transform="rotate(90 ,432, 880)"
-
-    data-bind="click:function(){ MapHelper.moveToRoute(34, 1); } ">
-    <rect data-route='34'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(34, 1) }"
-        height="16"
-        width="48"
-        x="432" y="864">
-    </rect>
-
 
 </g>
 
@@ -6690,7 +6827,7 @@
 
 <rect class="city"
     data-town="Azalea Town"
-    x="448"
+    x="464"
     y="864"
     height="64"
     width="64"
@@ -6701,7 +6838,7 @@
 </rect>
 
     <image width="48" height="48"
-        x="456"
+        x="472"
         y="872"
         class="iconLocation"
         data-bind="visible: MapHelper.isTownCurrentLocation('Azalea Town')
@@ -7073,7 +7210,7 @@
 
     <rect class="city"
         data-town="Slowpoke Well"
-        x="512"
+        x="544"
         y="832"
         height="48"
         width="64"
@@ -7083,7 +7220,7 @@
 
 
     <image width="48" height="48"
-        x="520"
+        x="552"
         y="832"
         class="iconLocation"
         data-bind="visible: MapHelper.isTownCurrentLocation('Slowpoke Well')
@@ -7098,18 +7235,18 @@
 
     <rect class="city"
         data-town="Ilex Forest"
-        x="384"
-        y="800"
-        height="48"
-        width="64"
+        x="352"
+        y="832"
+        height="112"
+        width="112"
         data-bind="click:function(){MapHelper.moveToTown('Ilex Forest')},
             attr: { class: MapHelper.calculateTownCssClass('Ilex Forest') }">
     </rect>
 
 
     <image width="48" height="48"
-        x="392"
-        y="800"
+        x="384"
+        y="864"
         class="iconLocation"
         data-bind="visible: MapHelper.isTownCurrentLocation('Ilex Forest')
         , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
@@ -7622,6 +7759,106 @@
 
      
 
+<image href="assets/images/map/sudowoodooverworld.png" xlink:href="assets/images/map/sudowoodooverworld.png"
+    x="520"
+    y="272"
+    height="64"
+    width="64"
+    data-bind="visible: TemporaryBattleList[&#39;Sudowoodo&#39;] &amp;&amp; TemporaryBattleList[&#39;Sudowoodo&#39;].isVisible()"/>
+<rect class="city"
+    data-town="Sudowoodo"
+    x="520"
+    y="272"
+    height="64"
+    width="64"
+    data-bind="visible: TemporaryBattleList[&#39;Sudowoodo&#39;] &amp;&amp; TemporaryBattleList[&#39;Sudowoodo&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Sudowoodo&#39;].protectedOnclick(), attr: { class: TemporaryBattleList[&#39;Sudowoodo&#39;].isUnlocked() ? &#39;&#39; : &#39;locked&#39; }">
+</rect>
+<image width="48" height="48"
+    x="528"
+    y="280"
+    class="iconLocation"
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Sudowoodo&#39;] &amp;&amp; TemporaryBattleList[&#39;Sudowoodo&#39;].isVisible()
+    , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+</image>
+
+
+    
+
+<image href="assets/images/map/suicune.png" xlink:href="assets/images/map/suicune.png"
+    x="128"
+    y="624"
+    height="64"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Suicune 1&#39;] &amp;&amp; TemporaryBattleList[&#39;Suicune 1&#39;].isVisible()"/>
+<rect class="city"
+    data-town="Suicune"
+    x="128"
+    y="624"
+    height="64"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Suicune 1&#39;] &amp;&amp; TemporaryBattleList[&#39;Suicune 1&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Suicune 1&#39;].protectedOnclick()">
+</rect>
+<image width="48" height="48"
+    x="128"
+    y="632"
+    class="iconLocation"
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Suicune 1&#39;] &amp;&amp; TemporaryBattleList[&#39;Suicune 1&#39;].isVisible()
+    , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+</image>
+
+
+    
+
+<image href="assets/images/map/eusine.png" xlink:href="assets/images/map/eusine.png"
+    x="128"
+    y="624"
+    height="64"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Eusine&#39;] &amp;&amp; TemporaryBattleList[&#39;Eusine&#39;].isVisible()"/>
+<rect class="city"
+    data-town="Eusine"
+    x="128"
+    y="624"
+    height="64"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Eusine&#39;] &amp;&amp; TemporaryBattleList[&#39;Eusine&#39;].isVisible(), click: () =&gt; TemporaryBattleList.Eusine.protectedOnclick()">
+</rect>
+<image width="48" height="48"
+    x="128"
+    y="632"
+    class="iconLocation"
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Eusine&#39;] &amp;&amp; TemporaryBattleList[&#39;Eusine&#39;].isVisible()
+    , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+</image>
+
+
+    
+
+<image href="assets/images/map/suicune.png" xlink:href="assets/images/map/suicune.png"
+    x="704"
+    y="144"
+    height="64"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Suicune 2&#39;] &amp;&amp; TemporaryBattleList[&#39;Suicune 2&#39;].isVisible()"/>
+<rect class="city"
+    data-town="Suicune"
+    x="704"
+    y="144"
+    height="64"
+    width="48"
+    data-bind="visible: TemporaryBattleList[&#39;Suicune 2&#39;] &amp;&amp; TemporaryBattleList[&#39;Suicune 2&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Suicune 2&#39;].protectedOnclick()">
+</rect>
+<image width="48" height="48"
+    x="704"
+    y="152"
+    class="iconLocation"
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Suicune 2&#39;] &amp;&amp; TemporaryBattleList[&#39;Suicune 2&#39;].isVisible()
+    , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+</image>
+
+
+     
+
 <image href="assets/images/map/ashketchumoverworld.png" xlink:href="assets/images/map/ashketchumoverworld.png"
     x="0"
     y="336"
@@ -7649,8 +7886,8 @@
 
                             <g data-bind='visible: player.region == GameConstants.Region.hoenn'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/hoenn.png?v=0.9.14',
-        href:'assets/images/hoenn.png?v=0.9.14'
+        'xlink:href':'assets/images/hoenn.png?v=0.9.18',
+        href:'assets/images/hoenn.png?v=0.9.18'
     }"></image>
 
     <!-- ------ -->
@@ -10254,8 +10491,8 @@
 
                             <g data-bind='visible: player.region == GameConstants.Region.sinnoh'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/sinnoh.png?v=0.9.14',
-        href:'assets/images/sinnoh.png?v=0.9.14'
+        'xlink:href':'assets/images/sinnoh.png?v=0.9.18',
+        href:'assets/images/sinnoh.png?v=0.9.18'
     }"></image>
 
     <!-- ------ -->
@@ -12927,8 +13164,8 @@
 
                             <g data-bind='visible: player.region == GameConstants.Region.unova'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/unova.png?v=0.9.14',
-        href:'assets/images/unova.png?v=0.9.14'
+        'xlink:href':'assets/images/unova.png?v=0.9.18',
+        href:'assets/images/unova.png?v=0.9.18'
     }"></image>
 
     <!-- ------ -->
@@ -15567,8 +15804,8 @@
 
                             <g data-bind='visible: player.region == GameConstants.Region.kalos'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/kalos.png?v=0.9.14',
-        href:'assets/images/kalos.png?v=0.9.14'
+        'xlink:href':'assets/images/kalos.png?v=0.9.18',
+        href:'assets/images/kalos.png?v=0.9.18'
     }"></image>
 
     <!-- ------ -->
@@ -17642,8 +17879,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Melemele Island').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-melemele.png?v=0.9.14',
-            href:'assets/images/alola-melemele.png?v=0.9.14'
+            'xlink:href':'assets/images/alola-melemele.png?v=0.9.18',
+            href:'assets/images/alola-melemele.png?v=0.9.18'
         }"></image>
 
         <!-- ------ -->
@@ -20863,8 +21100,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Akala Island').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-akala.png?v=0.9.14',
-            href:'assets/images/alola-akala.png?v=0.9.14'
+            'xlink:href':'assets/images/alola-akala.png?v=0.9.18',
+            href:'assets/images/alola-akala.png?v=0.9.18'
         }"></image>
 
         <!-- ------ -->
@@ -22901,10 +23138,10 @@
 </rect>
     </g>
 
-    <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Ula\'ula & Poni Islands').id">
+    <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Ula\'ula Island').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola2.png?v=0.9.14',
-            href:'assets/images/alola2.png?v=0.9.14'
+            'xlink:href':'assets/images/alola-ulaula.png?v=0.9.18',
+            href:'assets/images/alola-ulaula.png?v=0.9.18'
         }"></image>
 
         <!-- ------ -->
@@ -22920,25 +23157,144 @@
     <rect data-route='10'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(10, 6) }"
         height="48"
-        width="144"
-        x="1024" y="304">
+        width="128"
+        x="800" y="336">
     </rect>
 
     <text style="font-size: 32px"
-        x="1080"
-        y="338"
+        x="848"
+        y="370"
         data-bind="visible: !MapHelper.isRouteCurrentLocation(10, 6)">
         10
     </text>
     <image width="48" height="48"
-        x="1072"
-        y="304"
+        x="840"
+        y="336"
         class="iconLocation"
         transform='rotate(0)'
         data-bind="visible: MapHelper.isRouteCurrentLocation(10, 6),
             attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
     </image>
     
+
+</g>
+
+
+        <!--Route 10 extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(10, 6); } ">
+    <rect data-route='10'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(10, 6) }"
+        height="32"
+        width="48"
+        x="928" y="336">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 10 extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(10, 6); } ">
+    <rect data-route='10'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(10, 6) }"
+        height="16"
+        width="32"
+        x="944" y="320">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 10 extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(10, 6); } ">
+    <rect data-route='10'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(10, 6) }"
+        height="16"
+        width="16"
+        x="816" y="320">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 10 extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(10, 6); } ">
+    <rect data-route='10'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(10, 6) }"
+        height="48"
+        width="16"
+        x="800" y="288">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 10 extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(10, 6); } ">
+    <rect data-route='10'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(10, 6) }"
+        height="96"
+        width="16"
+        x="784" y="272">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 10 extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(10, 6); } ">
+    <rect data-route='10'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(10, 6) }"
+        height="112"
+        width="16"
+        x="768" y="240">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 10 extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(10, 6); } ">
+    <rect data-route='10'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(10, 6) }"
+        height="64"
+        width="16"
+        x="752" y="240">
+    </rect>
+
 
 </g>
 
@@ -22951,26 +23307,111 @@
     data-bind="click:function(){ MapHelper.moveToRoute(22, 6); } ">
     <rect data-route='22'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(22, 6) }"
-        height="96"
-        width="48"
-        x="1024" y="208">
+        height="80"
+        width="32"
+        x="800" y="176">
     </rect>
 
     <text style="font-size: 32px"
-        x="1032"
-        y="266"
+        x="784"
+        y="226"
         data-bind="visible: !MapHelper.isRouteCurrentLocation(22, 6)">
-        MH
+        M.H.
     </text>
     <image width="48" height="48"
-        x="1024"
-        y="232"
+        x="792"
+        y="192"
         class="iconLocation"
         transform='rotate(0)'
         data-bind="visible: MapHelper.isRouteCurrentLocation(22, 6),
             attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
     </image>
     
+
+</g>
+
+
+        <!--Mount Hokulani extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(22, 6); } ">
+    <rect data-route='22'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(22, 6) }"
+        height="16"
+        width="32"
+        x="816" y="160">
+    </rect>
+
+
+</g>
+
+
+        <!--Mount Hokulani extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(22, 6); } ">
+    <rect data-route='22'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(22, 6) }"
+        height="16"
+        width="16"
+        x="832" y="176">
+    </rect>
+
+
+</g>
+
+
+        <!--Mount Hokulani extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(22, 6); } ">
+    <rect data-route='22'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(22, 6) }"
+        height="16"
+        width="16"
+        x="832" y="240">
+    </rect>
+
+
+</g>
+
+
+        <!--Mount Hokulani extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(22, 6); } ">
+    <rect data-route='22'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(22, 6) }"
+        height="16"
+        width="80"
+        x="816" y="256">
+    </rect>
+
+
+</g>
+
+
+        <!--Mount Hokulani extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(22, 6); } ">
+    <rect data-route='22'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(22, 6) }"
+        height="16"
+        width="64"
+        x="832" y="272">
+    </rect>
+
 
 </g>
 
@@ -22983,20 +23424,20 @@
     data-bind="click:function(){ MapHelper.moveToRoute(11, 6); } ">
     <rect data-route='11'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(11, 6) }"
-        height="112"
-        width="48"
-        x="1168" y="352">
+        height="48"
+        width="112"
+        x="992" y="368">
     </rect>
 
     <text style="font-size: 32px"
-        x="1176"
-        y="418"
+        x="1032"
+        y="402"
         data-bind="visible: !MapHelper.isRouteCurrentLocation(11, 6)">
         11
     </text>
     <image width="48" height="48"
-        x="1168"
-        y="384"
+        x="1024"
+        y="368"
         class="iconLocation"
         transform='rotate(0)'
         data-bind="visible: MapHelper.isRouteCurrentLocation(11, 6),
@@ -23016,8 +23457,59 @@
     <rect data-route='11'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(11, 6) }"
         height="48"
-        width="96"
-        x="1216" y="416">
+        width="48"
+        x="1104" y="384">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 11 Extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(11, 6); } ">
+    <rect data-route='11'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(11, 6) }"
+        height="16"
+        width="32"
+        x="1152" y="400">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 11 Extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(11, 6); } ">
+    <rect data-route='11'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(11, 6) }"
+        height="48"
+        width="48"
+        x="1152" y="416">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 11 Extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(11, 6); } ">
+    <rect data-route='11'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(11, 6) }"
+        height="16"
+        width="32"
+        x="1120" y="432">
     </rect>
 
 
@@ -23032,20 +23524,20 @@
     data-bind="click:function(){ MapHelper.moveToRoute(12, 6); } ">
     <rect data-route='12'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(12, 6) }"
-        height="192"
+        height="176"
         width="48"
-        x="1344" y="496">
+        x="1248" y="512">
     </rect>
 
     <text style="font-size: 32px"
-        x="1352"
-        y="602"
+        x="1256"
+        y="610"
         data-bind="visible: !MapHelper.isRouteCurrentLocation(12, 6)">
         12
     </text>
     <image width="48" height="48"
-        x="1344"
-        y="568"
+        x="1248"
+        y="576"
         class="iconLocation"
         transform='rotate(0)'
         data-bind="visible: MapHelper.isRouteCurrentLocation(12, 6),
@@ -23064,60 +23556,9 @@
     data-bind="click:function(){ MapHelper.moveToRoute(12, 6); } ">
     <rect data-route='12'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(12, 6) }"
-        height="64"
-        width="16"
-        x="1312" y="416">
-    </rect>
-
-
-</g>
-
-
-        <!--Route 12 Extension-->
-        
-
-<g
-
-    data-bind="click:function(){ MapHelper.moveToRoute(12, 6); } ">
-    <rect data-route='12'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(12, 6) }"
-        height="64"
-        width="16"
-        x="1328" y="432">
-    </rect>
-
-
-</g>
-
-
-        <!--Route 12 Extension-->
-        
-
-<g
-
-    data-bind="click:function(){ MapHelper.moveToRoute(12, 6); } ">
-    <rect data-route='12'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(12, 6) }"
         height="48"
-        width="16"
-        x="1344" y="448">
-    </rect>
-
-
-</g>
-
-
-        <!--Route 12 Extension-->
-        
-
-<g
-
-    data-bind="click:function(){ MapHelper.moveToRoute(12, 6); } ">
-    <rect data-route='12'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(12, 6) }"
-        height="32"
-        width="16"
-        x="1360" y="464">
+        width="32"
+        x="1200" y="432">
     </rect>
 
 
@@ -23134,7 +23575,41 @@
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(12, 6) }"
         height="16"
         width="16"
-        x="1376" y="480">
+        x="1232" y="448">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 12 Extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(12, 6); } ">
+    <rect data-route='12'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(12, 6) }"
+        height="16"
+        width="32"
+        x="1232" y="464">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 12 Extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(12, 6); } ">
+    <rect data-route='12'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(12, 6) }"
+        height="32"
+        width="64"
+        x="1216" y="480">
     </rect>
 
 
@@ -23151,7 +23626,58 @@
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(12, 6) }"
         height="16"
         width="16"
-        x="1376" y="688">
+        x="1232" y="656">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 12 Extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(12, 6); } ">
+    <rect data-route='12'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(12, 6) }"
+        height="16"
+        width="32"
+        x="1216" y="672">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 12 Extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(12, 6); } ">
+    <rect data-route='12'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(12, 6) }"
+        height="16"
+        width="64"
+        x="1216" y="688">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 12 Extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(12, 6); } ">
+    <rect data-route='12'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(12, 6) }"
+        height="16"
+        width="32"
+        x="1232" y="704">
     </rect>
 
 
@@ -23167,8 +23693,76 @@
     <rect data-route='12'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(12, 6) }"
         height="32"
+        width="48"
+        x="1184" y="704">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 12 Extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(12, 6); } ">
+    <rect data-route='12'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(12, 6) }"
+        height="16"
         width="16"
-        x="1360" y="688">
+        x="1200" y="736">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 12 Extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(12, 6); } ">
+    <rect data-route='12'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(12, 6) }"
+        height="48"
+        width="48"
+        x="1152" y="736">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 12 Extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(12, 6); } ">
+    <rect data-route='12'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(12, 6) }"
+        height="16"
+        width="16"
+        x="1152" y="784">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 12 Extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(12, 6); } ">
+    <rect data-route='12'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(12, 6) }"
+        height="16"
+        width="16"
+        x="1120" y="752">
     </rect>
 
 
@@ -23185,41 +23779,7 @@
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(12, 6) }"
         height="48"
         width="16"
-        x="1344" y="688">
-    </rect>
-
-
-</g>
-
-
-        <!--Route 12 Extension-->
-        
-
-<g
-
-    data-bind="click:function(){ MapHelper.moveToRoute(12, 6); } ">
-    <rect data-route='12'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(12, 6) }"
-        height="64"
-        width="16"
-        x="1328" y="688">
-    </rect>
-
-
-</g>
-
-
-        <!--Route 12 Extension-->
-        
-
-<g
-
-    data-bind="click:function(){ MapHelper.moveToRoute(12, 6); } ">
-    <rect data-route='12'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(12, 6) }"
-        height="48"
-        width="16"
-        x="1312" y="704">
+        x="1136" y="752">
     </rect>
 
 
@@ -23235,25 +23795,93 @@
     <rect data-route='13'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(13, 6) }"
         height="48"
-        width="224"
-        x="1088" y="704">
+        width="112"
+        x="1024" y="768">
     </rect>
 
     <text style="font-size: 32px"
-        x="1184"
-        y="738"
+        x="1064"
+        y="802"
         data-bind="visible: !MapHelper.isRouteCurrentLocation(13, 6)">
         13
     </text>
     <image width="48" height="48"
-        x="1176"
-        y="704"
+        x="1056"
+        y="768"
         class="iconLocation"
         transform='rotate(0)'
         data-bind="visible: MapHelper.isRouteCurrentLocation(13, 6),
             attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
     </image>
     
+
+</g>
+
+
+        <!--Route 13 Extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(13, 6); } ">
+    <rect data-route='13'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(13, 6) }"
+        height="64"
+        width="32"
+        x="992" y="720">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 13 Extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(13, 6); } ">
+    <rect data-route='13'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(13, 6) }"
+        height="48"
+        width="16"
+        x="976" y="736">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 13 Extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(13, 6); } ">
+    <rect data-route='13'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(13, 6) }"
+        height="16"
+        width="48"
+        x="928" y="768">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 13 Extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(13, 6); } ">
+    <rect data-route='13'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(13, 6) }"
+        height="32"
+        width="16"
+        x="928" y="784">
+    </rect>
+
 
 </g>
 
@@ -23266,26 +23894,128 @@
     data-bind="click:function(){ MapHelper.moveToRoute(23, 6); } ">
     <rect data-route='23'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(23, 6) }"
-        height="160"
-        width="48"
-        x="1168" y="544">
+        height="104"
+        width="96"
+        x="976" y="472">
     </rect>
 
     <text style="font-size: 32px"
-        x="1176"
-        y="634"
+        x="992"
+        y="534"
         data-bind="visible: !MapHelper.isRouteCurrentLocation(23, 6)">
-        HD
+        H.D.
     </text>
     <image width="48" height="48"
-        x="1168"
-        y="600"
+        x="1000"
+        y="500"
         class="iconLocation"
         transform='rotate(0)'
         data-bind="visible: MapHelper.isRouteCurrentLocation(23, 6),
             attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
     </image>
     
+
+</g>
+
+
+        <!--Haina Desert extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(23, 6); } ">
+    <rect data-route='23'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(23, 6) }"
+        height="40"
+        width="24"
+        x="976" y="432">
+    </rect>
+
+
+</g>
+
+
+        <!--Haina Desert extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(23, 6); } ">
+    <rect data-route='23'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(23, 6) }"
+        height="40"
+        width="24"
+        x="1048" y="432">
+    </rect>
+
+
+</g>
+
+
+        <!--Haina Desert extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(23, 6); } ">
+    <rect data-route='23'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(23, 6) }"
+        height="96"
+        width="16"
+        x="1072" y="448">
+    </rect>
+
+
+</g>
+
+
+        <!--Haina Desert extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(23, 6); } ">
+    <rect data-route='23'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(23, 6) }"
+        height="32"
+        width="48"
+        x="976" y="576">
+    </rect>
+
+
+</g>
+
+
+        <!--Haina Desert extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(23, 6); } ">
+    <rect data-route='23'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(23, 6) }"
+        height="16"
+        width="32"
+        x="1024" y="576">
+    </rect>
+
+
+</g>
+
+
+        <!--Haina Desert extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(23, 6); } ">
+    <rect data-route='23'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(23, 6) }"
+        height="64"
+        width="16"
+        x="992" y="608">
+    </rect>
+
 
 </g>
 
@@ -23298,20 +24028,20 @@
     data-bind="click:function(){ MapHelper.moveToRoute(14, 6); } ">
     <rect data-route='14'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(14, 6) }"
-        height="112"
-        width="48"
-        x="992" y="752">
+        height="48"
+        width="176"
+        x="864" y="880">
     </rect>
 
     <text style="font-size: 32px"
-        x="1000"
-        y="818"
+        x="936"
+        y="914"
         data-bind="visible: !MapHelper.isRouteCurrentLocation(14, 6)">
         14
     </text>
     <image width="48" height="48"
-        x="992"
-        y="784"
+        x="928"
+        y="880"
         class="iconLocation"
         transform='rotate(0)'
         data-bind="visible: MapHelper.isRouteCurrentLocation(14, 6),
@@ -23330,9 +24060,111 @@
     data-bind="click:function(){ MapHelper.moveToRoute(14, 6); } ">
     <rect data-route='14'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(14, 6) }"
+        height="80"
+        width="96"
+        x="832" y="800">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 14 Extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(14, 6); } ">
+    <rect data-route='14'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(14, 6) }"
+        height="80"
+        width="32"
+        x="800" y="816">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 14 Extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(14, 6); } ">
+    <rect data-route='14'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(14, 6) }"
         height="48"
-        width="48"
-        x="1040" y="816">
+        width="16"
+        x="784" y="832">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 14 Extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(14, 6); } ">
+    <rect data-route='14'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(14, 6) }"
+        height="32"
+        width="32"
+        x="832" y="880">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 14 Extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(14, 6); } ">
+    <rect data-route='14'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(14, 6) }"
+        height="32"
+        width="96"
+        x="928" y="928">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 14 Extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(14, 6); } ">
+    <rect data-route='14'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(14, 6) }"
+        height="16"
+        width="32"
+        x="896" y="928">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 14 Extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(14, 6); } ">
+    <rect data-route='14'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(14, 6) }"
+        height="16"
+        width="16"
+        x="1040" y="880">
     </rect>
 
 
@@ -23347,20 +24179,20 @@
     data-bind="click:function(){ MapHelper.moveToRoute(15, 6); } ">
     <rect data-route='15'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(15, 6) }"
-        height="192"
-        width="64"
-        x="848" y="560">
+        height="320"
+        width="192"
+        x="416" y="528">
     </rect>
 
     <text style="font-size: 32px"
-        x="864"
-        y="666"
+        x="496"
+        y="698"
         data-bind="visible: !MapHelper.isRouteCurrentLocation(15, 6)">
         15
     </text>
     <image width="48" height="48"
-        x="856"
-        y="632"
+        x="488"
+        y="664"
         class="iconLocation"
         transform='rotate(0)'
         data-bind="visible: MapHelper.isRouteCurrentLocation(15, 6),
@@ -23380,8 +24212,8 @@
     <rect data-route='15'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(15, 6) }"
         height="64"
-        width="80"
-        x="912" y="688">
+        width="16"
+        x="608" y="752">
     </rect>
 
 
@@ -23397,8 +24229,280 @@
     <rect data-route='15'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(15, 6) }"
         height="48"
+        width="240"
+        x="624" y="752">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 15 Extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(15, 6); } ">
+    <rect data-route='15'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(15, 6) }"
+        height="112"
+        width="80"
+        x="608" y="640">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 15 Extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(15, 6); } ">
+    <rect data-route='15'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(15, 6) }"
+        height="64"
         width="32"
-        x="992" y="704">
+        x="608" y="576">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 15 Extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(15, 6); } ">
+    <rect data-route='15'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(15, 6) }"
+        height="16"
+        width="16"
+        x="640" y="624">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 15 Extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(15, 6); } ">
+    <rect data-route='15'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(15, 6) }"
+        height="32"
+        width="16"
+        x="608" y="544">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 15 Extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(15, 6); } ">
+    <rect data-route='15'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(15, 6) }"
+        height="16"
+        width="160"
+        x="416" y="848">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 15 Extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(15, 6); } ">
+    <rect data-route='15'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(15, 6) }"
+        height="16"
+        width="96"
+        x="448" y="864">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 15 Extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(15, 6); } ">
+    <rect data-route='15'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(15, 6) }"
+        height="288"
+        width="80"
+        x="336" y="480">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 15 Extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(15, 6); } ">
+    <rect data-route='15'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(15, 6) }"
+        height="16"
+        width="48"
+        x="368" y="768">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 15 Extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(15, 6); } ">
+    <rect data-route='15'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(15, 6) }"
+        height="32"
+        width="16"
+        x="400" y="784">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 15 Extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(15, 6); } ">
+    <rect data-route='15'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(15, 6) }"
+        height="224"
+        width="16"
+        x="320" y="496">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 15 Extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(15, 6); } ">
+    <rect data-route='15'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(15, 6) }"
+        height="160"
+        width="16"
+        x="304" y="528">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 15 Extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(15, 6); } ">
+    <rect data-route='15'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(15, 6) }"
+        height="16"
+        width="64"
+        x="400" y="448">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 15 Extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(15, 6); } ">
+    <rect data-route='15'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(15, 6) }"
+        height="16"
+        width="112"
+        x="368" y="464">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 15 Extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(15, 6); } ">
+    <rect data-route='15'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(15, 6) }"
+        height="48"
+        width="80"
+        x="416" y="480">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 15 Extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(15, 6); } ">
+    <rect data-route='15'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(15, 6) }"
+        height="32"
+        width="64"
+        x="496" y="496">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 15 Extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(15, 6); } ">
+    <rect data-route='15'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(15, 6) }"
+        height="16"
+        width="32"
+        x="560" y="512">
     </rect>
 
 
@@ -23413,26 +24517,145 @@
     data-bind="click:function(){ MapHelper.moveToRoute(16, 6); } ">
     <rect data-route='16'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(16, 6) }"
-        height="96"
-        width="48"
-        x="864" y="464">
+        height="48"
+        width="64"
+        x="592" y="480">
     </rect>
 
     <text style="font-size: 32px"
-        x="872"
-        y="522"
+        x="608"
+        y="514"
         data-bind="visible: !MapHelper.isRouteCurrentLocation(16, 6)">
         16
     </text>
     <image width="48" height="48"
-        x="864"
-        y="488"
+        x="600"
+        y="480"
         class="iconLocation"
         transform='rotate(0)'
         data-bind="visible: MapHelper.isRouteCurrentLocation(16, 6),
             attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
     </image>
     
+
+</g>
+
+
+        <!--Route 16 extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(16, 6); } ">
+    <rect data-route='16'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(16, 6) }"
+        height="32"
+        width="32"
+        x="560" y="480">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 16 extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(16, 6); } ">
+    <rect data-route='16'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(16, 6) }"
+        height="16"
+        width="80"
+        x="464" y="448">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 16 extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(16, 6); } ">
+    <rect data-route='16'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(16, 6) }"
+        height="16"
+        width="96"
+        x="480" y="464">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 16 extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(16, 6); } ">
+    <rect data-route='16'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(16, 6) }"
+        height="16"
+        width="64"
+        x="496" y="480">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 16 extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(16, 6); } ">
+    <rect data-route='16'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(16, 6) }"
+        height="16"
+        width="16"
+        x="608" y="528">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 16 extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(16, 6); } ">
+    <rect data-route='16'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(16, 6) }"
+        height="48"
+        width="32"
+        x="624" y="528">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 16 extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(16, 6); } ">
+    <rect data-route='16'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(16, 6) }"
+        height="48"
+        width="16"
+        x="640" y="576">
+    </rect>
+
 
 </g>
 
@@ -23445,20 +24668,20 @@
     data-bind="click:function(){ MapHelper.moveToRoute(17, 6); } ">
     <rect data-route='17'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(17, 6) }"
-        height="224"
+        height="80"
         width="48"
-        x="864" y="192">
+        x="608" y="288">
     </rect>
 
     <text style="font-size: 32px"
-        x="872"
-        y="314"
+        x="616"
+        y="338"
         data-bind="visible: !MapHelper.isRouteCurrentLocation(17, 6)">
         17
     </text>
     <image width="48" height="48"
-        x="864"
-        y="280"
+        x="608"
+        y="304"
         class="iconLocation"
         transform='rotate(0)'
         data-bind="visible: MapHelper.isRouteCurrentLocation(17, 6),
@@ -23477,14 +24700,1004 @@
     data-bind="click:function(){ MapHelper.moveToRoute(17, 6); } ">
     <rect data-route='17'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(17, 6) }"
-        height="48"
-        width="32"
-        x="832" y="192">
+        height="32"
+        width="64"
+        x="640" y="256">
     </rect>
 
 
 </g>
 
+
+        <!--Route 17 Extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(17, 6); } ">
+    <rect data-route='17'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(17, 6) }"
+        height="32"
+        width="64"
+        x="640" y="256">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 17 Extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(17, 6); } ">
+    <rect data-route='17'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(17, 6) }"
+        height="16"
+        width="16"
+        x="624" y="272">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 17 Extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(17, 6); } ">
+    <rect data-route='17'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(17, 6) }"
+        height="16"
+        width="16"
+        x="656" y="304">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 17 Extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(17, 6); } ">
+    <rect data-route='17'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(17, 6) }"
+        height="16"
+        width="32"
+        x="656" y="288">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 17 Extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(17, 6); } ">
+    <rect data-route='17'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(17, 6) }"
+        height="16"
+        width="16"
+        x="656" y="240">
+    </rect>
+
+
+</g>
+
+
+        <!--Route 17 Extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(17, 6); } ">
+    <rect data-route='17'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(17, 6) }"
+        height="48"
+        width="48"
+        x="672" y="208">
+    </rect>
+
+
+</g>
+
+
+        <!-- ----- -->
+        <!-- TOWNS -->
+        <!-- ----- -->
+
+        <!--Malie City-->
+        
+
+<rect class="city"
+    data-town="Malie City"
+    x="1216"
+    y="320"
+    height="64"
+    width="64"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Malie City')},
+        attr: { class: MapHelper.calculateTownCssClass('Malie City') },
+        ">
+</rect>
+
+    <image width="48" height="48"
+        x="1224"
+        y="328"
+        class="iconLocation"
+        data-bind="visible: MapHelper.isTownCurrentLocation('Malie City')
+        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+
+
+
+        <!--Malie City Extension-->
+        
+
+<rect class="city"
+    data-town="Malie City"
+    x="1280"
+    y="288"
+    height="80"
+    width="96"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Malie City')},
+        attr: { class: MapHelper.calculateTownCssClass('Malie City') },
+        ">
+</rect>
+
+
+
+        <!--Malie City Extension-->
+        
+
+<rect class="city"
+    data-town="Malie City"
+    x="1280"
+    y="368"
+    height="16"
+    width="80"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Malie City')},
+        attr: { class: MapHelper.calculateTownCssClass('Malie City') },
+        ">
+</rect>
+
+
+
+        <!--Malie City Extension-->
+        
+
+<rect class="city"
+    data-town="Malie City"
+    x="1152"
+    y="328"
+    height="40"
+    width="64"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Malie City')},
+        attr: { class: MapHelper.calculateTownCssClass('Malie City') },
+        ">
+</rect>
+
+
+
+        <!--Malie City Extension-->
+        
+
+<rect class="city"
+    data-town="Malie City"
+    x="1104"
+    y="336"
+    height="48"
+    width="48"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Malie City')},
+        attr: { class: MapHelper.calculateTownCssClass('Malie City') },
+        ">
+</rect>
+
+
+
+        <!--Malie City Extension-->
+        
+
+<rect class="city"
+    data-town="Malie City"
+    x="976"
+    y="336"
+    height="32"
+    width="128"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Malie City')},
+        attr: { class: MapHelper.calculateTownCssClass('Malie City') },
+        ">
+</rect>
+
+
+
+        <!--Malie City Extension-->
+        
+
+<rect class="city"
+    data-town="Malie City"
+    x="1200"
+    y="368"
+    height="16"
+    width="16"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Malie City')},
+        attr: { class: MapHelper.calculateTownCssClass('Malie City') },
+        ">
+</rect>
+
+
+
+        <!--Malie City Extension-->
+        
+
+<rect class="city"
+    data-town="Malie City"
+    x="976"
+    y="280"
+    height="56"
+    width="144"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Malie City')},
+        attr: { class: MapHelper.calculateTownCssClass('Malie City') },
+        ">
+</rect>
+
+
+
+        <!--Malie City Extension-->
+        
+
+<rect class="city"
+    data-town="Malie City"
+    x="1024"
+    y="264"
+    height="16"
+    width="64"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Malie City')},
+        attr: { class: MapHelper.calculateTownCssClass('Malie City') },
+        ">
+</rect>
+
+
+
+        <!--Tapu Village-->
+        
+
+<rect class="city"
+    data-town="Tapu Village"
+    x="864"
+    y="736"
+    height="64"
+    width="64"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Tapu Village')},
+        attr: { class: MapHelper.calculateTownCssClass('Tapu Village') },
+        ">
+</rect>
+
+    <image width="48" height="48"
+        x="872"
+        y="744"
+        class="iconLocation"
+        data-bind="visible: MapHelper.isTownCurrentLocation('Tapu Village')
+        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+
+
+
+        <!--Pokémon League Alola-->
+        
+
+<rect class="city"
+    data-town="Pokémon League Alola"
+    x="816"
+    y="448"
+    height="88"
+    width="144"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Pokémon League Alola')},
+        attr: { class: MapHelper.calculateTownCssClass('Pokémon League Alola') },
+        ">
+</rect>
+
+    <image width="48" height="48"
+        x="864"
+        y="468"
+        class="iconLocation"
+        data-bind="visible: MapHelper.isTownCurrentLocation('Pokémon League Alola')
+        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+
+
+
+        <!--Pokémon League Alola Extension-->
+        
+
+<rect class="city"
+    data-town="Pokémon League Alola"
+    x="864"
+    y="536"
+    height="8"
+    width="48"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Pokémon League Alola')},
+        attr: { class: MapHelper.calculateTownCssClass('Pokémon League Alola') },
+        ">
+</rect>
+
+
+
+        <!-- -------- -->
+        <!-- DUNGEONS -->
+        <!-- -------- -->
+
+        <!--Malie Garden-->
+        
+
+
+    <rect class="city"
+        data-town="Malie Garden"
+        x="1120"
+        y="256"
+        height="72"
+        width="80"
+        data-bind="click:function(){MapHelper.moveToTown('Malie Garden')},
+            attr: { class: MapHelper.calculateTownCssClass('Malie Garden') }">
+    </rect>
+
+
+    <image width="48" height="48"
+        x="1136"
+        y="268"
+        class="iconLocation"
+        data-bind="visible: MapHelper.isTownCurrentLocation('Malie Garden')
+        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+
+
+
+        <!--Malie Garden extension-->
+        
+
+
+    <rect class="city"
+        data-town="Malie Garden"
+        x="1120"
+        y="328"
+        height="8"
+        width="32"
+        data-bind="click:function(){MapHelper.moveToTown('Malie Garden')},
+            attr: { class: MapHelper.calculateTownCssClass('Malie Garden') }">
+    </rect>
+
+
+
+
+        <!--Malie Garden extension-->
+        
+
+
+    <rect class="city"
+        data-town="Malie Garden"
+        x="1088"
+        y="256"
+        height="24"
+        width="32"
+        data-bind="click:function(){MapHelper.moveToTown('Malie Garden')},
+            attr: { class: MapHelper.calculateTownCssClass('Malie Garden') }">
+    </rect>
+
+
+
+
+        <!--Hokulani Observatory-->
+        
+
+
+    <rect class="city"
+        data-town="Hokulani Observatory"
+        x="864"
+        y="128"
+        height="48"
+        width="64"
+        data-bind="click:function(){MapHelper.moveToTown('Hokulani Observatory')},
+            attr: { class: MapHelper.calculateTownCssClass('Hokulani Observatory') }">
+    </rect>
+
+
+    <image width="48" height="48"
+        x="872"
+        y="128"
+        class="iconLocation"
+        data-bind="visible: MapHelper.isTownCurrentLocation('Hokulani Observatory')
+        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+
+
+
+        <!--Hokulani Observatory extension-->
+        
+
+
+    <rect class="city"
+        data-town="Hokulani Observatory"
+        x="880"
+        y="176"
+        height="40"
+        width="48"
+        data-bind="click:function(){MapHelper.moveToTown('Hokulani Observatory')},
+            attr: { class: MapHelper.calculateTownCssClass('Hokulani Observatory') }">
+    </rect>
+
+
+
+
+        <!--Hokulani Observatory extension-->
+        
+
+
+    <rect class="city"
+        data-town="Hokulani Observatory"
+        x="880"
+        y="120"
+        height="8"
+        width="32"
+        data-bind="click:function(){MapHelper.moveToTown('Hokulani Observatory')},
+            attr: { class: MapHelper.calculateTownCssClass('Hokulani Observatory') }">
+    </rect>
+
+
+
+
+        <!--Thrifty Megamart-->
+        
+
+
+    <rect class="city"
+        data-town="Thrifty Megamart"
+        x="944"
+        y="784"
+        height="96"
+        width="80"
+        data-bind="click:function(){MapHelper.moveToTown('Thrifty Megamart')},
+            attr: { class: MapHelper.calculateTownCssClass('Thrifty Megamart') }">
+    </rect>
+
+
+    <image width="48" height="48"
+        x="960"
+        y="808"
+        class="iconLocation"
+        data-bind="visible: MapHelper.isTownCurrentLocation('Thrifty Megamart')
+        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+
+
+
+        <!--Ula'ula Meadow-->
+        
+
+
+    <rect class="city"
+        data-town="Ula&#39;ula Meadow"
+        x="560"
+        y="384"
+        height="80"
+        width="112"
+        data-bind="click:function(){MapHelper.moveToTown('Ula\&#39;ula Meadow')},
+            attr: { class: MapHelper.calculateTownCssClass('Ula\&#39;ula Meadow') }">
+    </rect>
+
+
+    <image width="48" height="48"
+        x="592"
+        y="400"
+        class="iconLocation"
+        data-bind="visible: MapHelper.isTownCurrentLocation('Ula\&#39;ula Meadow')
+        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+
+
+
+        <!--Ula'ula Meadow extension-->
+        
+
+
+    <rect class="city"
+        data-town="Ula&#39;ula Meadow"
+        x="544"
+        y="400"
+        height="48"
+        width="16"
+        data-bind="click:function(){MapHelper.moveToTown('Ula\&#39;ula Meadow')},
+            attr: { class: MapHelper.calculateTownCssClass('Ula\&#39;ula Meadow') }">
+    </rect>
+
+
+
+
+        <!--Ula'ula Meadow extension-->
+        
+
+
+    <rect class="city"
+        data-town="Ula&#39;ula Meadow"
+        x="672"
+        y="400"
+        height="48"
+        width="16"
+        data-bind="click:function(){MapHelper.moveToTown('Ula\&#39;ula Meadow')},
+            attr: { class: MapHelper.calculateTownCssClass('Ula\&#39;ula Meadow') }">
+    </rect>
+
+
+
+
+        <!--Ula'ula Meadow extension-->
+        
+
+
+    <rect class="city"
+        data-town="Ula&#39;ula Meadow"
+        x="576"
+        y="368"
+        height="16"
+        width="80"
+        data-bind="click:function(){MapHelper.moveToTown('Ula\&#39;ula Meadow')},
+            attr: { class: MapHelper.calculateTownCssClass('Ula\&#39;ula Meadow') }">
+    </rect>
+
+
+
+
+        <!--Ula'ula Meadow extension-->
+        
+
+
+    <rect class="city"
+        data-town="Ula&#39;ula Meadow"
+        x="576"
+        y="464"
+        height="16"
+        width="80"
+        data-bind="click:function(){MapHelper.moveToTown('Ula\&#39;ula Meadow')},
+            attr: { class: MapHelper.calculateTownCssClass('Ula\&#39;ula Meadow') }">
+    </rect>
+
+
+
+
+        <!--Po Town-->
+        
+
+
+    <rect class="city"
+        data-town="Po Town"
+        x="624"
+        y="48"
+        height="112"
+        width="160"
+        data-bind="click:function(){MapHelper.moveToTown('Po Town')},
+            attr: { class: MapHelper.calculateTownCssClass('Po Town') }">
+    </rect>
+
+
+    <image width="48" height="48"
+        x="680"
+        y="80"
+        class="iconLocation"
+        data-bind="visible: MapHelper.isTownCurrentLocation('Po Town')
+        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+
+
+
+        <!--Po Town extension-->
+        
+
+
+    <rect class="city"
+        data-town="Po Town"
+        x="640"
+        y="160"
+        height="16"
+        width="16"
+        data-bind="click:function(){MapHelper.moveToTown('Po Town')},
+            attr: { class: MapHelper.calculateTownCssClass('Po Town') }">
+    </rect>
+
+
+
+
+        <!--Po Town extension-->
+        
+
+
+    <rect class="city"
+        data-town="Po Town"
+        x="656"
+        y="160"
+        height="32"
+        width="128"
+        data-bind="click:function(){MapHelper.moveToTown('Po Town')},
+            attr: { class: MapHelper.calculateTownCssClass('Po Town') }">
+    </rect>
+
+
+
+
+        <!--Po Town extension-->
+        
+
+
+    <rect class="city"
+        data-town="Po Town"
+        x="672"
+        y="192"
+        height="16"
+        width="96"
+        data-bind="click:function(){MapHelper.moveToTown('Po Town')},
+            attr: { class: MapHelper.calculateTownCssClass('Po Town') }">
+    </rect>
+
+
+
+
+        <!--Po Town extension-->
+        
+
+
+    <rect class="city"
+        data-town="Po Town"
+        x="608"
+        y="48"
+        height="96"
+        width="16"
+        data-bind="click:function(){MapHelper.moveToTown('Po Town')},
+            attr: { class: MapHelper.calculateTownCssClass('Po Town') }">
+    </rect>
+
+
+
+
+        <!--Po Town extension-->
+        
+
+
+    <rect class="city"
+        data-town="Po Town"
+        x="624"
+        y="32"
+        height="16"
+        width="16"
+        data-bind="click:function(){MapHelper.moveToTown('Po Town')},
+            attr: { class: MapHelper.calculateTownCssClass('Po Town') }">
+    </rect>
+
+
+
+
+        <!--Po Town extension-->
+        
+
+
+    <rect class="city"
+        data-town="Po Town"
+        x="640"
+        y="8"
+        height="40"
+        width="64"
+        data-bind="click:function(){MapHelper.moveToTown('Po Town')},
+            attr: { class: MapHelper.calculateTownCssClass('Po Town') }">
+    </rect>
+
+
+
+
+        <!--Po Town extension-->
+        
+
+
+    <rect class="city"
+        data-town="Po Town"
+        x="704"
+        y="16"
+        height="32"
+        width="24"
+        data-bind="click:function(){MapHelper.moveToTown('Po Town')},
+            attr: { class: MapHelper.calculateTownCssClass('Po Town') }">
+    </rect>
+
+
+
+
+        <!--Po Town extension-->
+        
+
+
+    <rect class="city"
+        data-town="Po Town"
+        x="728"
+        y="32"
+        height="16"
+        width="24"
+        data-bind="click:function(){MapHelper.moveToTown('Po Town')},
+            attr: { class: MapHelper.calculateTownCssClass('Po Town') }">
+    </rect>
+
+
+
+
+        <!--Mount Lanakila-->
+        
+
+
+    <rect class="city"
+        data-town="Mount Lanakila"
+        x="800"
+        y="544"
+        height="112"
+        width="176"
+        data-bind="click:function(){MapHelper.moveToTown('Mount Lanakila')},
+            attr: { class: MapHelper.calculateTownCssClass('Mount Lanakila') }">
+    </rect>
+
+
+    <image width="48" height="48"
+        x="864"
+        y="576"
+        class="iconLocation"
+        data-bind="visible: MapHelper.isTownCurrentLocation('Mount Lanakila')
+        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+
+
+
+        <!--Mount Lanakila extension-->
+        
+
+
+    <rect class="city"
+        data-town="Mount Lanakila"
+        x="816"
+        y="536"
+        height="8"
+        width="48"
+        data-bind="click:function(){MapHelper.moveToTown('Mount Lanakila')},
+            attr: { class: MapHelper.calculateTownCssClass('Mount Lanakila') }">
+    </rect>
+
+
+
+
+        <!--Mount Lanakila extension-->
+        
+
+
+    <rect class="city"
+        data-town="Mount Lanakila"
+        x="912"
+        y="536"
+        height="8"
+        width="48"
+        data-bind="click:function(){MapHelper.moveToTown('Mount Lanakila')},
+            attr: { class: MapHelper.calculateTownCssClass('Mount Lanakila') }">
+    </rect>
+
+
+
+
+        <!--Mount Lanakila extension-->
+        
+
+
+    <rect class="city"
+        data-town="Mount Lanakila"
+        x="768"
+        y="512"
+        height="32"
+        width="48"
+        data-bind="click:function(){MapHelper.moveToTown('Mount Lanakila')},
+            attr: { class: MapHelper.calculateTownCssClass('Mount Lanakila') }">
+    </rect>
+
+
+
+
+        <!--Mount Lanakila extension-->
+        
+
+
+    <rect class="city"
+        data-town="Mount Lanakila"
+        x="768"
+        y="544"
+        height="112"
+        width="32"
+        data-bind="click:function(){MapHelper.moveToTown('Mount Lanakila')},
+            attr: { class: MapHelper.calculateTownCssClass('Mount Lanakila') }">
+    </rect>
+
+
+
+
+        <!--Mount Lanakila extension-->
+        
+
+
+    <rect class="city"
+        data-town="Mount Lanakila"
+        x="960"
+        y="512"
+        height="32"
+        width="16"
+        data-bind="click:function(){MapHelper.moveToTown('Mount Lanakila')},
+            attr: { class: MapHelper.calculateTownCssClass('Mount Lanakila') }">
+    </rect>
+
+
+
+
+        <!--Mount Lanakila extension-->
+        
+
+
+    <rect class="city"
+        data-town="Mount Lanakila"
+        x="816"
+        y="656"
+        height="32"
+        width="32"
+        data-bind="click:function(){MapHelper.moveToTown('Mount Lanakila')},
+            attr: { class: MapHelper.calculateTownCssClass('Mount Lanakila') }">
+    </rect>
+
+
+
+
+        <!--Mount Lanakila extension-->
+        
+
+
+    <rect class="city"
+        data-town="Mount Lanakila"
+        x="848"
+        y="656"
+        height="16"
+        width="96"
+        data-bind="click:function(){MapHelper.moveToTown('Mount Lanakila')},
+            attr: { class: MapHelper.calculateTownCssClass('Mount Lanakila') }">
+    </rect>
+
+
+
+
+        <!--Mount Lanakila extension-->
+        
+
+
+    <rect class="city"
+        data-town="Mount Lanakila"
+        x="944"
+        y="656"
+        height="48"
+        width="32"
+        data-bind="click:function(){MapHelper.moveToTown('Mount Lanakila')},
+            attr: { class: MapHelper.calculateTownCssClass('Mount Lanakila') }">
+    </rect>
+
+
+
+
+        <!--Mount Lanakila extension-->
+        
+
+
+    <rect class="city"
+        data-town="Mount Lanakila"
+        x="976"
+        y="624"
+        height="48"
+        width="16"
+        data-bind="click:function(){MapHelper.moveToTown('Mount Lanakila')},
+            attr: { class: MapHelper.calculateTownCssClass('Mount Lanakila') }">
+    </rect>
+
+
+
+
+        <!--Ruins of Abundance-->
+        
+
+
+    <rect class="city"
+        data-town="Ruins of Abundance"
+        x="1000"
+        y="416"
+        height="56"
+        width="48"
+        data-bind="click:function(){MapHelper.moveToTown('Ruins of Abundance')},
+            attr: { class: MapHelper.calculateTownCssClass('Ruins of Abundance') }">
+    </rect>
+
+
+    <image width="48" height="48"
+        x="1000"
+        y="420"
+        class="iconLocation"
+        data-bind="visible: MapHelper.isTownCurrentLocation('Ruins of Abundance')
+        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+
+
+
+        <!--Lake of the Sunne and Moone-->
+        
+
+
+    <rect class="city"
+        data-town="Lake of the Sunne and Moone"
+        x="704"
+        y="384"
+        height="96"
+        width="96"
+        data-bind="click:function(){MapHelper.moveToTown('Lake of the Sunne and Moone')},
+            attr: { class: MapHelper.calculateTownCssClass('Lake of the Sunne and Moone') }">
+    </rect>
+
+
+    <image width="48" height="48"
+        x="728"
+        y="408"
+        class="iconLocation"
+        data-bind="visible: MapHelper.isTownCurrentLocation('Lake of the Sunne and Moone')
+        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+
+
+
+        <!-- ------------------ -->
+        <!-- PLACES OF INTEREST -->
+        <!-- ------------------ -->
+
+        <!--Dock-->
+        
+
+<rect class="city"
+    data-town="Dock" 
+    x="1328"
+    y="384"
+    height="32"
+    width="48"
+    data-bind="click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass(&#39;Malie City&#39;) }">
+</rect>
+    </g>
+
+    <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Poni Island').id">
+        <image width="1600" height="960" data-bind="attr: {
+            'xlink:href':'assets/images/alola-poni.png?v=0.9.18',
+            href:'assets/images/alola-poni.png?v=0.9.18'
+        }"></image>
+
+        <!-- ------ -->
+        <!-- ROUTES -->
+        <!-- ------ -->
 
         <!--Poni Wilds-->
         
@@ -23494,20 +25707,20 @@
     data-bind="click:function(){ MapHelper.moveToRoute(24, 6); } ">
     <rect data-route='24'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(24, 6) }"
-        height="48"
-        width="192"
-        x="256" y="608">
+        height="112"
+        width="176"
+        x="512" y="496">
     </rect>
 
     <text style="font-size: 32px"
-        x="336"
-        y="642"
+        x="520"
+        y="562"
         data-bind="visible: !MapHelper.isRouteCurrentLocation(24, 6)">
-        PW
+        Poni Wilds
     </text>
     <image width="48" height="48"
-        x="328"
-        y="608"
+        x="576"
+        y="528"
         class="iconLocation"
         transform='rotate(0)'
         data-bind="visible: MapHelper.isRouteCurrentLocation(24, 6),
@@ -23517,8 +25730,103 @@
 
 </g>
 
+        <!--Poni Wilds extension-->
+        
 
-        <!--Poni Wilds Extension-->
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(24, 6); } ">
+    <rect data-route='24'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(24, 6) }"
+        height="144"
+        width="112"
+        x="400" y="448">
+    </rect>
+
+
+</g>
+
+        <!--Poni Wilds extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(24, 6); } ">
+    <rect data-route='24'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(24, 6) }"
+        height="96"
+        width="16"
+        x="384" y="464">
+    </rect>
+
+
+</g>
+
+        <!--Poni Wilds extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(24, 6); } ">
+    <rect data-route='24'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(24, 6) }"
+        height="32"
+        width="16"
+        x="368" y="496">
+    </rect>
+
+
+</g>
+
+        <!--Poni Wilds extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(24, 6); } ">
+    <rect data-route='24'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(24, 6) }"
+        height="16"
+        width="32"
+        x="496" y="400">
+    </rect>
+
+
+</g>
+
+        <!--Poni Wilds extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(24, 6); } ">
+    <rect data-route='24'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(24, 6) }"
+        height="16"
+        width="80"
+        x="464" y="416">
+    </rect>
+
+
+</g>
+
+        <!--Poni Wilds extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(24, 6); } ">
+    <rect data-route='24'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(24, 6) }"
+        height="16"
+        width="128"
+        x="432" y="432">
+    </rect>
+
+
+</g>
+
+        <!--Poni Wilds extension-->
         
 
 <g
@@ -23527,15 +25835,14 @@
     <rect data-route='24'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(24, 6) }"
         height="48"
-        width="64"
-        x="400" y="656">
+        width="48"
+        x="512" y="448">
     </rect>
 
 
 </g>
 
-
-        <!--Poni Wilds Extension-->
+        <!--Poni Wilds extension-->
         
 
 <g
@@ -23543,9 +25850,121 @@
     data-bind="click:function(){ MapHelper.moveToRoute(24, 6); } ">
     <rect data-route='24'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(24, 6) }"
-        height="8"
+        height="32"
+        width="16"
+        x="560" y="464">
+    </rect>
+
+
+</g>
+
+        <!--Poni Wilds extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(24, 6); } ">
+    <rect data-route='24'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(24, 6) }"
+        height="16"
+        width="64"
+        x="576" y="480">
+    </rect>
+
+
+</g>
+
+        <!--Poni Wilds extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(24, 6); } ">
+    <rect data-route='24'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(24, 6) }"
+        height="16"
+        width="32"
+        x="416" y="592">
+    </rect>
+
+
+</g>
+
+        <!--Poni Wilds extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(24, 6); } ">
+    <rect data-route='24'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(24, 6) }"
+        height="16"
+        width="16"
+        x="672" y="608">
+    </rect>
+
+
+</g>
+
+        <!--Poni Wilds extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(24, 6); } ">
+    <rect data-route='24'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(24, 6) }"
+        height="64"
         width="48"
-        x="256" y="656">
+        x="688" y="576">
+    </rect>
+
+
+</g>
+
+        <!--Poni Wilds extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(24, 6); } ">
+    <rect data-route='24'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(24, 6) }"
+        height="32"
+        width="16"
+        x="736" y="592">
+    </rect>
+
+
+</g>
+
+        <!--Poni Wilds extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(24, 6); } ">
+    <rect data-route='24'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(24, 6) }"
+        height="16"
+        width="32"
+        x="688" y="560">
+    </rect>
+
+
+</g>
+
+        <!--Poni Wilds extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(24, 6); } ">
+    <rect data-route='24'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(24, 6) }"
+        height="48"
+        width="16"
+        x="688" y="512">
     </rect>
 
 
@@ -23560,20 +25979,20 @@
     data-bind="click:function(){ MapHelper.moveToRoute(25, 6); } ">
     <rect data-route='25'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(25, 6) }"
-        height="48"
-        width="112"
-        x="464" y="656">
+        height="32"
+        width="176"
+        x="752" y="656">
     </rect>
 
     <text style="font-size: 32px"
-        x="496"
-        y="690"
+        x="800"
+        y="682"
         data-bind="visible: !MapHelper.isRouteCurrentLocation(25, 6)">
-        APP
+        A.P.P
     </text>
     <image width="48" height="48"
-        x="496"
-        y="656"
+        x="816"
+        y="648"
         class="iconLocation"
         transform='rotate(0)'
         data-bind="visible: MapHelper.isRouteCurrentLocation(25, 6),
@@ -23583,8 +26002,7 @@
 
 </g>
 
-
-        <!--Ancient Poni Path Extension-->
+        <!--Ancient Poni Path extension-->
         
 
 <g
@@ -23592,9 +26010,105 @@
     data-bind="click:function(){ MapHelper.moveToRoute(25, 6); } ">
     <rect data-route='25'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(25, 6) }"
-        height="96"
+        height="128"
+        width="32"
+        x="816" y="528">
+    </rect>
+
+
+</g>
+
+        <!--Ancient Poni Path extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(25, 6); } ">
+    <rect data-route='25'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(25, 6) }"
+        height="16"
         width="48"
-        x="464" y="560">
+        x="896" y="640">
+    </rect>
+
+
+</g>
+
+        <!--Ancient Poni Path extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(25, 6); } ">
+    <rect data-route='25'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(25, 6) }"
+        height="16"
+        width="16"
+        x="928" y="656">
+    </rect>
+
+
+</g>
+
+        <!--Ancient Poni Path extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(25, 6); } ">
+    <rect data-route='25'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(25, 6) }"
+        height="16"
+        width="32"
+        x="880" y="688">
+    </rect>
+
+
+</g>
+
+        <!--Ancient Poni Path extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(25, 6); } ">
+    <rect data-route='25'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(25, 6) }"
+        height="16"
+        width="32"
+        x="736" y="624">
+    </rect>
+
+
+</g>
+
+        <!--Ancient Poni Path extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(25, 6); } ">
+    <rect data-route='25'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(25, 6) }"
+        height="16"
+        width="64"
+        x="720" y="640">
+    </rect>
+
+
+</g>
+
+        <!--Ancient Poni Path extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(25, 6); } ">
+    <rect data-route='25'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(25, 6) }"
+        height="16"
+        width="16"
+        x="736" y="656">
     </rect>
 
 
@@ -23610,18 +26124,18 @@
     <rect data-route='26'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(26, 6) }"
         height="48"
-        width="128"
-        x="496" y="704">
+        width="208"
+        x="880" y="704">
     </rect>
 
     <text style="font-size: 32px"
-        x="536"
+        x="944"
         y="738"
         data-bind="visible: !MapHelper.isRouteCurrentLocation(26, 6)">
-        PBC
+        P.B.C
     </text>
     <image width="48" height="48"
-        x="536"
+        x="960"
         y="704"
         class="iconLocation"
         transform='rotate(0)'
@@ -23629,6 +26143,198 @@
             attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
     </image>
     
+
+</g>
+
+        <!--Poni Breaker Coast extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(26, 6); } ">
+    <rect data-route='26'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(26, 6) }"
+        height="32"
+        width="112"
+        x="960" y="672">
+    </rect>
+
+
+</g>
+
+        <!--Poni Breaker Coast extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(26, 6); } ">
+    <rect data-route='26'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(26, 6) }"
+        height="32"
+        width="16"
+        x="864" y="704">
+    </rect>
+
+
+</g>
+
+        <!--Poni Breaker Coast extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(26, 6); } ">
+    <rect data-route='26'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(26, 6) }"
+        height="16"
+        width="112"
+        x="896" y="752">
+    </rect>
+
+
+</g>
+
+        <!--Poni Breaker Coast extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(26, 6); } ">
+    <rect data-route='26'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(26, 6) }"
+        height="16"
+        width="64"
+        x="912" y="768">
+    </rect>
+
+
+</g>
+
+        <!--Poni Breaker Coast extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(26, 6); } ">
+    <rect data-route='26'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(26, 6) }"
+        height="16"
+        width="16"
+        x="944" y="688">
+    </rect>
+
+
+</g>
+
+        <!--Poni Breaker Coast extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(26, 6); } ">
+    <rect data-route='26'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(26, 6) }"
+        height="32"
+        width="64"
+        x="1008" y="640">
+    </rect>
+
+
+</g>
+
+        <!--Poni Breaker Coast extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(26, 6); } ">
+    <rect data-route='26'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(26, 6) }"
+        height="16"
+        width="16"
+        x="992" y="656">
+    </rect>
+
+
+</g>
+
+        <!--Poni Breaker Coast extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(26, 6); } ">
+    <rect data-route='26'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(26, 6) }"
+        height="16"
+        width="16"
+        x="1072" y="688">
+    </rect>
+
+
+</g>
+
+        <!--Poni Breaker Coast extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(26, 6); } ">
+    <rect data-route='26'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(26, 6) }"
+        height="16"
+        width="80"
+        x="1040" y="752">
+    </rect>
+
+
+</g>
+
+        <!--Poni Breaker Coast extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(26, 6); } ">
+    <rect data-route='26'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(26, 6) }"
+        height="16"
+        width="48"
+        x="1056" y="768">
+    </rect>
+
+
+</g>
+
+        <!--Poni Breaker Coast extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(26, 6); } ">
+    <rect data-route='26'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(26, 6) }"
+        height="32"
+        width="32"
+        x="1088" y="720">
+    </rect>
+
+
+</g>
+
+        <!--Poni Breaker Coast extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(26, 6); } ">
+    <rect data-route='26'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(26, 6) }"
+        height="16"
+        width="16"
+        x="1120" y="720">
+    </rect>
+
 
 </g>
 
@@ -23642,25 +26348,121 @@
     <rect data-route='27'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(27, 6) }"
         height="80"
-        width="48"
-        x="528" y="576">
+        width="240"
+        x="912" y="528">
     </rect>
 
     <text style="font-size: 32px"
-        x="528"
-        y="626"
+        x="952"
+        y="578"
         data-bind="visible: !MapHelper.isRouteCurrentLocation(27, 6)">
-        PGr
+        Poni Grove
     </text>
     <image width="48" height="48"
-        x="528"
-        y="592"
+        x="1008"
+        y="544"
         class="iconLocation"
         transform='rotate(0)'
         data-bind="visible: MapHelper.isRouteCurrentLocation(27, 6),
             attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
     </image>
     
+
+</g>
+
+        <!--Poni Grove extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(27, 6); } ">
+    <rect data-route='27'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(27, 6) }"
+        height="48"
+        width="16"
+        x="1152" y="528">
+    </rect>
+
+
+</g>
+
+        <!--Poni Grove extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(27, 6); } ">
+    <rect data-route='27'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(27, 6) }"
+        height="16"
+        width="16"
+        x="1168" y="528">
+    </rect>
+
+
+</g>
+
+        <!--Poni Grove extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(27, 6); } ">
+    <rect data-route='27'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(27, 6) }"
+        height="16"
+        width="208"
+        x="912" y="608">
+    </rect>
+
+
+</g>
+
+        <!--Poni Grove extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(27, 6); } ">
+    <rect data-route='27'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(27, 6) }"
+        height="16"
+        width="176"
+        x="912" y="624">
+    </rect>
+
+
+</g>
+
+        <!--Poni Grove extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(27, 6); } ">
+    <rect data-route='27'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(27, 6) }"
+        height="16"
+        width="64"
+        x="944" y="640">
+    </rect>
+
+
+</g>
+
+        <!--Poni Grove extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(27, 6); } ">
+    <rect data-route='27'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(27, 6) }"
+        height="16"
+        width="16"
+        x="976" y="656">
+    </rect>
+
 
 </g>
 
@@ -23673,20 +26475,20 @@
     data-bind="click:function(){ MapHelper.moveToRoute(28, 6); } ">
     <rect data-route='28'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(28, 6) }"
-        height="48"
-        width="112"
-        x="576" y="576">
+        height="96"
+        width="272"
+        x="928" y="416">
     </rect>
 
     <text style="font-size: 32px"
-        x="616"
-        y="610"
+        x="976"
+        y="474"
         data-bind="visible: !MapHelper.isRouteCurrentLocation(28, 6)">
-        PP
+        Poni Plains
     </text>
     <image width="48" height="48"
-        x="608"
-        y="576"
+        x="1040"
+        y="440"
         class="iconLocation"
         transform='rotate(0)'
         data-bind="visible: MapHelper.isRouteCurrentLocation(28, 6),
@@ -23696,8 +26498,105 @@
 
 </g>
 
+        <!--Poni Plains extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(28, 6); } ">
+    <rect data-route='28'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(28, 6) }"
+        height="64"
+        width="48"
+        x="912" y="352">
+    </rect>
+
+
+</g>
+
+        <!--Poni Plains extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(28, 6); } ">
+    <rect data-route='28'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(28, 6) }"
+        height="16"
+        width="32"
+        x="960" y="400">
+    </rect>
+
+
+</g>
+
+        <!--Poni Plains extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(28, 6); } ">
+    <rect data-route='28'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(28, 6) }"
+        height="16"
+        width="80"
+        x="1120" y="400">
+    </rect>
+
+
+</g>
+
+        <!--Poni Plains extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(28, 6); } ">
+    <rect data-route='28'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(28, 6) }"
+        height="16"
+        width="256"
+        x="928" y="512">
+    </rect>
+
+
+</g>
+
 
         <!--Poni Coast-->
+        
+
+<g
+
+    transform="rotate(90 ,1120, 224)"
+
+    data-bind="click:function(){ MapHelper.moveToRoute(29, 6); } ">
+    <rect data-route='29'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(29, 6) }"
+        height="48"
+        width="176"
+        x="1120" y="176">
+    </rect>
+
+    <text style="font-size: 32px"
+        x="1128"
+        y="210"
+        data-bind="visible: !MapHelper.isRouteCurrentLocation(29, 6)">
+        Poni Coast
+    </text>
+    <image width="48" height="48"
+        x="1184"
+        y="176"
+        class="iconLocation"
+        transform='rotate(-90)'
+        data-bind="visible: MapHelper.isRouteCurrentLocation(29, 6),
+            attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+    
+
+</g>
+
+        <!--Poni Coast extension-->
         
 
 <g
@@ -23705,26 +26604,107 @@
     data-bind="click:function(){ MapHelper.moveToRoute(29, 6); } ">
     <rect data-route='29'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(29, 6) }"
-        height="128"
-        width="48"
-        x="640" y="448">
+        height="32"
+        width="16"
+        x="1088" y="224">
     </rect>
 
-    <text style="font-size: 32px"
-        x="648"
-        y="522"
-        data-bind="visible: !MapHelper.isRouteCurrentLocation(29, 6)">
-        PC
-    </text>
-    <image width="48" height="48"
-        x="640"
-        y="488"
-        class="iconLocation"
-        transform='rotate(0)'
-        data-bind="visible: MapHelper.isRouteCurrentLocation(29, 6),
-            attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
-    </image>
-    
+
+</g>
+
+        <!--Poni Coast extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(29, 6); } ">
+    <rect data-route='29'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(29, 6) }"
+        height="64"
+        width="16"
+        x="1104" y="208">
+    </rect>
+
+
+</g>
+
+        <!--Poni Coast extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(29, 6); } ">
+    <rect data-route='29'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(29, 6) }"
+        height="32"
+        width="16"
+        x="1120" y="192">
+    </rect>
+
+
+</g>
+
+        <!--Poni Coast extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(29, 6); } ">
+    <rect data-route='29'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(29, 6) }"
+        height="16"
+        width="16"
+        x="1136" y="208">
+    </rect>
+
+
+</g>
+
+        <!--Poni Coast extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(29, 6); } ">
+    <rect data-route='29'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(29, 6) }"
+        height="144"
+        width="16"
+        x="1168" y="256">
+    </rect>
+
+
+</g>
+
+        <!--Poni Coast extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(29, 6); } ">
+    <rect data-route='29'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(29, 6) }"
+        height="96"
+        width="16"
+        x="1184" y="304">
+    </rect>
+
+
+</g>
+
+        <!--Poni Coast extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(29, 6); } ">
+    <rect data-route='29'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(29, 6) }"
+        height="16"
+        width="16"
+        x="1072" y="240">
+    </rect>
+
 
 </g>
 
@@ -23737,20 +26717,20 @@
     data-bind="click:function(){ MapHelper.moveToRoute(30, 6); } ">
     <rect data-route='30'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(30, 6) }"
-        height="48"
-        width="112"
-        x="512" y="368">
+        height="32"
+        width="208"
+        x="864" y="160">
     </rect>
 
     <text style="font-size: 32px"
-        x="544"
-        y="402"
+        x="864"
+        y="186"
         data-bind="visible: !MapHelper.isRouteCurrentLocation(30, 6)">
-        PGa
+        Poni Gauntlet
     </text>
     <image width="48" height="48"
-        x="544"
-        y="368"
+        x="944"
+        y="152"
         class="iconLocation"
         transform='rotate(0)'
         data-bind="visible: MapHelper.isRouteCurrentLocation(30, 6),
@@ -23760,8 +26740,7 @@
 
 </g>
 
-
-        <!--Poni Gauntlet Extension-->
+        <!--Poni Gauntlet extension-->
         
 
 <g
@@ -23770,49 +26749,14 @@
     <rect data-route='30'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(30, 6) }"
         height="16"
-        width="16"
-        x="608" y="416">
+        width="32"
+        x="848" y="112">
     </rect>
 
 
 </g>
 
-
-        <!--Poni Gauntlet Extension-->
-        
-
-<g
-
-    data-bind="click:function(){ MapHelper.moveToRoute(30, 6); } ">
-    <rect data-route='30'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(30, 6) }"
-        height="64"
-        width="16"
-        x="624" y="384">
-    </rect>
-
-
-</g>
-
-
-        <!--Poni Gauntlet Extension-->
-        
-
-<g
-
-    data-bind="click:function(){ MapHelper.moveToRoute(30, 6); } ">
-    <rect data-route='30'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(30, 6) }"
-        height="48"
-        width="16"
-        x="640" y="400">
-    </rect>
-
-
-</g>
-
-
-        <!--Poni Gauntlet Extension-->
+        <!--Poni Gauntlet extension-->
         
 
 <g
@@ -23821,15 +26765,94 @@
     <rect data-route='30'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(30, 6) }"
         height="32"
-        width="16"
-        x="656" y="416">
+        width="160"
+        x="832" y="128">
     </rect>
 
 
 </g>
 
+        <!--Poni Gauntlet extension-->
+        
 
-        <!--Poni Gauntlet Extension-->
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(30, 6); } ">
+    <rect data-route='30'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(30, 6) }"
+        height="16"
+        width="48"
+        x="816" y="160">
+    </rect>
+
+
+</g>
+
+        <!--Poni Gauntlet extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(30, 6); } ">
+    <rect data-route='30'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(30, 6) }"
+        height="16"
+        width="32"
+        x="992" y="144">
+    </rect>
+
+
+</g>
+
+        <!--Poni Gauntlet extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(30, 6); } ">
+    <rect data-route='30'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(30, 6) }"
+        height="16"
+        width="48"
+        x="1072" y="176">
+    </rect>
+
+
+</g>
+
+        <!--Poni Gauntlet extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(30, 6); } ">
+    <rect data-route='30'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(30, 6) }"
+        height="16"
+        width="208"
+        x="912" y="192">
+    </rect>
+
+
+</g>
+
+        <!--Poni Gauntlet extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(30, 6); } ">
+    <rect data-route='30'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(30, 6) }"
+        height="16"
+        width="144"
+        x="960" y="208">
+    </rect>
+
+
+</g>
+
+        <!--Poni Gauntlet extension-->
         
 
 <g
@@ -23839,7 +26862,23 @@
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(30, 6) }"
         height="16"
         width="16"
-        x="672" y="432">
+        x="816" y="128">
+    </rect>
+
+
+</g>
+
+        <!--Poni Gauntlet extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(30, 6); } ">
+    <rect data-route='30'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(30, 6) }"
+        height="16"
+        width="64"
+        x="1024" y="224">
     </rect>
 
 
@@ -23850,107 +26889,15 @@
         <!-- TOWNS -->
         <!-- ----- -->
 
-        <!--Aether Paradise-->
-        
-
-<rect class="city"
-    data-town="Aether Paradise"
-    x="640"
-    y="24"
-    height="72"
-    width="80"
-    data-bind="
-        click:function(){MapHelper.moveToTown('Aether Paradise')},
-        attr: { class: MapHelper.calculateTownCssClass('Aether Paradise') },
-        ">
-</rect>
-
-    <image width="48" height="48"
-        x="656"
-        y="36"
-        class="iconLocation"
-        data-bind="visible: MapHelper.isTownCurrentLocation('Aether Paradise')
-        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
-    </image>
-
-
-
-        <!--Malie City-->
-        
-
-<rect class="city"
-    data-town="Malie City"
-    x="1232"
-    y="280"
-    height="72"
-    width="80"
-    data-bind="
-        click:function(){MapHelper.moveToTown('Malie City')},
-        attr: { class: MapHelper.calculateTownCssClass('Malie City') },
-        ">
-</rect>
-
-    <image width="48" height="48"
-        x="1248"
-        y="292"
-        class="iconLocation"
-        data-bind="visible: MapHelper.isTownCurrentLocation('Malie City')
-        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
-    </image>
-
-
-
-        <!--Malie City Extension-->
-        
-
-<rect class="city"
-    data-town="Malie City"
-    x="1168"
-    y="288"
-    height="64"
-    width="64"
-    data-bind="
-        click:function(){MapHelper.moveToTown('Malie City')},
-        attr: { class: MapHelper.calculateTownCssClass('Malie City') },
-        ">
-</rect>
-
-
-
-        <!--Tapu Village-->
-        
-
-<rect class="city"
-    data-town="Tapu Village"
-    x="1024"
-    y="688"
-    height="64"
-    width="64"
-    data-bind="
-        click:function(){MapHelper.moveToTown('Tapu Village')},
-        attr: { class: MapHelper.calculateTownCssClass('Tapu Village') },
-        ">
-</rect>
-
-    <image width="48" height="48"
-        x="1032"
-        y="696"
-        class="iconLocation"
-        data-bind="visible: MapHelper.isTownCurrentLocation('Tapu Village')
-        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
-    </image>
-
-
-
         <!--Seafolk Village-->
         
 
 <rect class="city"
     data-town="Seafolk Village"
-    x="240"
-    y="664"
-    height="72"
-    width="80"
+    x="512"
+    y="608"
+    height="112"
+    width="144"
     data-bind="
         click:function(){MapHelper.moveToTown('Seafolk Village')},
         attr: { class: MapHelper.calculateTownCssClass('Seafolk Village') },
@@ -23958,12 +26905,44 @@
 </rect>
 
     <image width="48" height="48"
-        x="256"
-        y="676"
+        x="560"
+        y="640"
         class="iconLocation"
         data-bind="visible: MapHelper.isTownCurrentLocation('Seafolk Village')
         , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
     </image>
+
+
+        <!--Seafolk Village extension-->
+        
+
+<rect class="city"
+    data-town="Seafolk Village"
+    x="528"
+    y="720"
+    height="32"
+    width="80"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Seafolk Village')},
+        attr: { class: MapHelper.calculateTownCssClass('Seafolk Village') },
+        ">
+</rect>
+
+
+        <!--Seafolk Village extension-->
+        
+
+<rect class="city"
+    data-town="Seafolk Village"
+    x="544"
+    y="752"
+    height="16"
+    width="48"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Seafolk Village')},
+        attr: { class: MapHelper.calculateTownCssClass('Seafolk Village') },
+        ">
+</rect>
 
 
 
@@ -23972,9 +26951,9 @@
 
 <rect class="city"
     data-town="Exeggutor Island"
-    x="80"
-    y="688"
-    height="64"
+    x="208"
+    y="704"
+    height="96"
     width="64"
     data-bind="
         click:function(){MapHelper.moveToTown('Exeggutor Island')},
@@ -23983,12 +26962,92 @@
 </rect>
 
     <image width="48" height="48"
-        x="88"
-        y="696"
+        x="216"
+        y="728"
         class="iconLocation"
         data-bind="visible: MapHelper.isTownCurrentLocation('Exeggutor Island')
         , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
     </image>
+
+
+        <!--Exeggutor Island-->
+        
+
+<rect class="city"
+    data-town="Exeggutor Island"
+    x="192"
+    y="720"
+    height="64"
+    width="16"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Exeggutor Island')},
+        attr: { class: MapHelper.calculateTownCssClass('Exeggutor Island') },
+        ">
+</rect>
+
+
+        <!--Exeggutor Island-->
+        
+
+<rect class="city"
+    data-town="Exeggutor Island"
+    x="272"
+    y="688"
+    height="96"
+    width="16"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Exeggutor Island')},
+        attr: { class: MapHelper.calculateTownCssClass('Exeggutor Island') },
+        ">
+</rect>
+
+
+        <!--Exeggutor Island-->
+        
+
+<rect class="city"
+    data-town="Exeggutor Island"
+    x="288"
+    y="704"
+    height="32"
+    width="16"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Exeggutor Island')},
+        attr: { class: MapHelper.calculateTownCssClass('Exeggutor Island') },
+        ">
+</rect>
+
+
+        <!--Exeggutor Island-->
+        
+
+<rect class="city"
+    data-town="Exeggutor Island"
+    x="304"
+    y="704"
+    height="16"
+    width="64"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Exeggutor Island')},
+        attr: { class: MapHelper.calculateTownCssClass('Exeggutor Island') },
+        ">
+</rect>
+
+
+        <!--Exeggutor Island-->
+        
+
+<rect class="city"
+    data-town="Exeggutor Island"
+    x="208"
+    y="688"
+    height="16"
+    width="48"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Exeggutor Island')},
+        attr: { class: MapHelper.calculateTownCssClass('Exeggutor Island') },
+        ">
+</rect>
 
 
 
@@ -23997,10 +27056,10 @@
 
 <rect class="city"
     data-town="Altar of the Sunne and Moone"
-    x="400"
-    y="400"
-    height="64"
-    width="64"
+    x="704"
+    y="256"
+    height="112"
+    width="96"
     data-bind="
         click:function(){MapHelper.moveToTown('Altar of the Sunne and Moone')},
         attr: { class: MapHelper.calculateTownCssClass('Altar of the Sunne and Moone') },
@@ -24008,52 +27067,227 @@
 </rect>
 
     <image width="48" height="48"
-        x="408"
-        y="408"
+        x="728"
+        y="288"
         class="iconLocation"
         data-bind="visible: MapHelper.isTownCurrentLocation('Altar of the Sunne and Moone')
         , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
     </image>
 
 
-
-        <!--Pokémon League Alola-->
+        <!--Altar of the Sunne and Moone-->
         
 
 <rect class="city"
-    data-town="Pokémon League Alola"
-    x="976"
-    y="528"
-    height="88"
-    width="144"
+    data-town="Altar of the Sunne and Moone"
+    x="752"
+    y="224"
+    height="16"
+    width="16"
     data-bind="
-        click:function(){MapHelper.moveToTown('Pokémon League Alola')},
-        attr: { class: MapHelper.calculateTownCssClass('Pokémon League Alola') },
+        click:function(){MapHelper.moveToTown('Altar of the Sunne and Moone')},
+        attr: { class: MapHelper.calculateTownCssClass('Altar of the Sunne and Moone') },
+        ">
+</rect>
+
+
+        <!--Altar of the Sunne and Moone-->
+        
+
+<rect class="city"
+    data-town="Altar of the Sunne and Moone"
+    x="736"
+    y="240"
+    height="16"
+    width="48"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Altar of the Sunne and Moone')},
+        attr: { class: MapHelper.calculateTownCssClass('Altar of the Sunne and Moone') },
+        ">
+</rect>
+
+
+        <!--Altar of the Sunne and Moone-->
+        
+
+<rect class="city"
+    data-town="Altar of the Sunne and Moone"
+    x="640"
+    y="320"
+    height="32"
+    width="16"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Altar of the Sunne and Moone')},
+        attr: { class: MapHelper.calculateTownCssClass('Altar of the Sunne and Moone') },
+        ">
+</rect>
+
+
+        <!--Altar of the Sunne and Moone-->
+        
+
+<rect class="city"
+    data-town="Altar of the Sunne and Moone"
+    x="656"
+    y="304"
+    height="64"
+    width="16"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Altar of the Sunne and Moone')},
+        attr: { class: MapHelper.calculateTownCssClass('Altar of the Sunne and Moone') },
+        ">
+</rect>
+
+
+        <!--Altar of the Sunne and Moone-->
+        
+
+<rect class="city"
+    data-town="Altar of the Sunne and Moone"
+    x="672"
+    y="288"
+    height="80"
+    width="16"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Altar of the Sunne and Moone')},
+        attr: { class: MapHelper.calculateTownCssClass('Altar of the Sunne and Moone') },
+        ">
+</rect>
+
+
+        <!--Altar of the Sunne and Moone-->
+        
+
+<rect class="city"
+    data-town="Altar of the Sunne and Moone"
+    x="688"
+    y="272"
+    height="96"
+    width="16"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Altar of the Sunne and Moone')},
+        attr: { class: MapHelper.calculateTownCssClass('Altar of the Sunne and Moone') },
+        ">
+</rect>
+
+
+        <!--Altar of the Sunne and Moone-->
+        
+
+<rect class="city"
+    data-town="Altar of the Sunne and Moone"
+    x="800"
+    y="272"
+    height="96"
+    width="16"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Altar of the Sunne and Moone')},
+        attr: { class: MapHelper.calculateTownCssClass('Altar of the Sunne and Moone') },
+        ">
+</rect>
+
+
+        <!--Altar of the Sunne and Moone-->
+        
+
+<rect class="city"
+    data-town="Altar of the Sunne and Moone"
+    x="816"
+    y="288"
+    height="80"
+    width="16"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Altar of the Sunne and Moone')},
+        attr: { class: MapHelper.calculateTownCssClass('Altar of the Sunne and Moone') },
+        ">
+</rect>
+
+
+        <!--Altar of the Sunne and Moone-->
+        
+
+<rect class="city"
+    data-town="Altar of the Sunne and Moone"
+    x="832"
+    y="304"
+    height="48"
+    width="16"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Altar of the Sunne and Moone')},
+        attr: { class: MapHelper.calculateTownCssClass('Altar of the Sunne and Moone') },
+        ">
+</rect>
+
+
+        <!--Altar of the Sunne and Moone-->
+        
+
+<rect class="city"
+    data-town="Altar of the Sunne and Moone"
+    x="752"
+    y="368"
+    height="16"
+    width="32"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Altar of the Sunne and Moone')},
+        attr: { class: MapHelper.calculateTownCssClass('Altar of the Sunne and Moone') },
+        ">
+</rect>
+
+
+
+        <!--A Tree Maybe-->
+        
+
+<rect class="city"
+    data-town="A Tree Maybe"
+    x="736"
+    y="80"
+    height="80"
+    width="64"
+    data-bind="
+        click:function(){MapHelper.moveToTown('A Tree Maybe')},
+        attr: { class: MapHelper.calculateTownCssClass('A Tree Maybe') },
         ">
 </rect>
 
     <image width="48" height="48"
-        x="1024"
-        y="548"
+        x="744"
+        y="96"
         class="iconLocation"
-        data-bind="visible: MapHelper.isTownCurrentLocation('Pokémon League Alola')
+        data-bind="visible: MapHelper.isTownCurrentLocation('A Tree Maybe')
         , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
     </image>
 
 
-
-        <!--Pokémon League Alola Extension-->
+        <!--A Tree Maybe extension-->
         
 
 <rect class="city"
-    data-town="Pokémon League Alola"
-    x="1024"
-    y="616"
-    height="24"
-    width="48"
+    data-town="A Tree Maybe"
+    x="720"
+    y="96"
+    height="64"
+    width="16"
     data-bind="
-        click:function(){MapHelper.moveToTown('Pokémon League Alola')},
-        attr: { class: MapHelper.calculateTownCssClass('Pokémon League Alola') },
+        click:function(){MapHelper.moveToTown('A Tree Maybe')},
+        attr: { class: MapHelper.calculateTownCssClass('A Tree Maybe') },
+        ">
+</rect>
+
+
+        <!--A Tree Maybe extension-->
+        
+
+<rect class="city"
+    data-town="A Tree Maybe"
+    x="800"
+    y="96"
+    height="48"
+    width="16"
+    data-bind="
+        click:function(){MapHelper.moveToTown('A Tree Maybe')},
+        attr: { class: MapHelper.calculateTownCssClass('A Tree Maybe') },
         ">
 </rect>
 
@@ -24063,195 +27297,148 @@
         <!-- DUNGEONS -->
         <!-- -------- -->
 
+        <!--Exeggutor Island Hill-->
         
 
 
     <rect class="city"
-        data-town="Malie Garden"
-        x="1168"
-        y="240"
-        height="48"
-        width="64"
-        data-bind="click:function(){MapHelper.moveToTown('Malie Garden')},
-            attr: { class: MapHelper.calculateTownCssClass('Malie Garden') }">
+        data-town="Exeggutor Island Hill"
+        x="288"
+        y="624"
+        height="80"
+        width="96"
+        data-bind="click:function(){MapHelper.moveToTown('Exeggutor Island Hill')},
+            attr: { class: MapHelper.calculateTownCssClass('Exeggutor Island Hill') }">
     </rect>
 
 
     <image width="48" height="48"
-        x="1176"
-        y="240"
-        class="iconLocation"
-        data-bind="visible: MapHelper.isTownCurrentLocation('Malie Garden')
-        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
-    </image>
-
-
-
-        
-
-
-    <rect class="city"
-        data-town="Hokulani Observatory"
-        x="1024"
-        y="144"
-        height="64"
-        width="64"
-        data-bind="click:function(){MapHelper.moveToTown('Hokulani Observatory')},
-            attr: { class: MapHelper.calculateTownCssClass('Hokulani Observatory') }">
-    </rect>
-
-
-    <image width="48" height="48"
-        x="1032"
-        y="152"
-        class="iconLocation"
-        data-bind="visible: MapHelper.isTownCurrentLocation('Hokulani Observatory')
-        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
-    </image>
-
-
-
-        
-
-
-    <rect class="city"
-        data-town="Thrifty Megamart"
-        x="1040"
-        y="768"
-        height="48"
-        width="64"
-        data-bind="click:function(){MapHelper.moveToTown('Thrifty Megamart')},
-            attr: { class: MapHelper.calculateTownCssClass('Thrifty Megamart') }">
-    </rect>
-
-
-    <image width="48" height="48"
-        x="1048"
-        y="768"
-        class="iconLocation"
-        data-bind="visible: MapHelper.isTownCurrentLocation('Thrifty Megamart')
-        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
-    </image>
-
-
-
-        
-
-
-    <rect class="city"
-        data-town="Ula&#39;ula Meadow"
-        x="848"
-        y="416"
-        height="48"
-        width="64"
-        data-bind="click:function(){MapHelper.moveToTown('Ula\&#39;ula Meadow')},
-            attr: { class: MapHelper.calculateTownCssClass('Ula\&#39;ula Meadow') }">
-    </rect>
-
-
-    <image width="48" height="48"
-        x="856"
-        y="416"
-        class="iconLocation"
-        data-bind="visible: MapHelper.isTownCurrentLocation('Ula\&#39;ula Meadow')
-        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
-    </image>
-
-
-
-        
-
-
-    <rect class="city"
-        data-town="Po Town"
-        x="832"
-        y="144"
-        height="48"
-        width="64"
-        data-bind="click:function(){MapHelper.moveToTown('Po Town')},
-            attr: { class: MapHelper.calculateTownCssClass('Po Town') }">
-    </rect>
-
-
-    <image width="48" height="48"
-        x="840"
-        y="144"
-        class="iconLocation"
-        data-bind="visible: MapHelper.isTownCurrentLocation('Po Town')
-        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
-    </image>
-
-
-
-        
-
-
-    <rect class="city"
-        data-town="Mount Lanakila"
-        x="1024"
-        y="640"
-        height="48"
-        width="64"
-        data-bind="click:function(){MapHelper.moveToTown('Mount Lanakila')},
-            attr: { class: MapHelper.calculateTownCssClass('Mount Lanakila') }">
-    </rect>
-
-
-    <image width="48" height="48"
-        x="1032"
+        x="312"
         y="640"
         class="iconLocation"
-        data-bind="visible: MapHelper.isTownCurrentLocation('Mount Lanakila')
+        data-bind="visible: MapHelper.isTownCurrentLocation('Exeggutor Island Hill')
         , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
     </image>
 
 
-
+        <!--Exeggutor Island Hill-->
         
 
 
     <rect class="city"
-        data-town="Ruins of Abundance"
-        x="1168"
-        y="496"
-        height="48"
+        data-town="Exeggutor Island Hill"
+        x="304"
+        y="608"
+        height="16"
         width="64"
-        data-bind="click:function(){MapHelper.moveToTown('Ruins of Abundance')},
-            attr: { class: MapHelper.calculateTownCssClass('Ruins of Abundance') }">
+        data-bind="click:function(){MapHelper.moveToTown('Exeggutor Island Hill')},
+            attr: { class: MapHelper.calculateTownCssClass('Exeggutor Island Hill') }">
     </rect>
 
 
-    <image width="48" height="48"
-        x="1176"
-        y="496"
-        class="iconLocation"
-        data-bind="visible: MapHelper.isTownCurrentLocation('Ruins of Abundance')
-        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
-    </image>
 
 
-
+        <!--Vast Poni Canyon-->
         
 
 
     <rect class="city"
         data-town="Vast Poni Canyon"
-        x="464"
-        y="496"
-        height="64"
-        width="64"
+        x="752"
+        y="416"
+        height="48"
+        width="128"
         data-bind="click:function(){MapHelper.moveToTown('Vast Poni Canyon')},
             attr: { class: MapHelper.calculateTownCssClass('Vast Poni Canyon') }">
     </rect>
 
 
     <image width="48" height="48"
-        x="472"
-        y="504"
+        x="792"
+        y="416"
         class="iconLocation"
         data-bind="visible: MapHelper.isTownCurrentLocation('Vast Poni Canyon')
         , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
     </image>
+
+
+        <!--Vast Poni Canyon extension-->
+        
+
+
+    <rect class="city"
+        data-town="Vast Poni Canyon"
+        x="768"
+        y="464"
+        height="16"
+        width="112"
+        data-bind="click:function(){MapHelper.moveToTown('Vast Poni Canyon')},
+            attr: { class: MapHelper.calculateTownCssClass('Vast Poni Canyon') }">
+    </rect>
+
+
+
+        <!--Vast Poni Canyon extension-->
+        
+
+
+    <rect class="city"
+        data-town="Vast Poni Canyon"
+        x="784"
+        y="480"
+        height="32"
+        width="96"
+        data-bind="click:function(){MapHelper.moveToTown('Vast Poni Canyon')},
+            attr: { class: MapHelper.calculateTownCssClass('Vast Poni Canyon') }">
+    </rect>
+
+
+
+        <!--Vast Poni Canyon extension-->
+        
+
+
+    <rect class="city"
+        data-town="Vast Poni Canyon"
+        x="800"
+        y="512"
+        height="16"
+        width="64"
+        data-bind="click:function(){MapHelper.moveToTown('Vast Poni Canyon')},
+            attr: { class: MapHelper.calculateTownCssClass('Vast Poni Canyon') }">
+    </rect>
+
+
+
+        <!--Vast Poni Canyon extension-->
+        
+
+
+    <rect class="city"
+        data-town="Vast Poni Canyon"
+        x="736"
+        y="400"
+        height="16"
+        width="112"
+        data-bind="click:function(){MapHelper.moveToTown('Vast Poni Canyon')},
+            attr: { class: MapHelper.calculateTownCssClass('Vast Poni Canyon') }">
+    </rect>
+
+
+
+        <!--Vast Poni Canyon extension-->
+        
+
+
+    <rect class="city"
+        data-town="Vast Poni Canyon"
+        x="736"
+        y="384"
+        height="16"
+        width="96"
+        data-bind="click:function(){MapHelper.moveToTown('Vast Poni Canyon')},
+            attr: { class: MapHelper.calculateTownCssClass('Vast Poni Canyon') }">
+    </rect>
 
 
 
@@ -24260,10 +27447,20 @@
         
 
 
+    <rect class="city"
+        data-town="Mina&#39;s Houseboat"
+        x="608"
+        y="720"
+        height="40"
+        width="88"
+        data-bind="click:function(){MapHelper.moveToTown('Mina\&#39;s Houseboat')},
+            attr: { class: MapHelper.calculateTownCssClass('Mina\&#39;s Houseboat') }">
+    </rect>
+
 
     <image width="48" height="48"
-        x="256"
-        y="676"
+        x="628"
+        y="716"
         class="iconLocation"
         data-bind="visible: MapHelper.isTownCurrentLocation('Mina\&#39;s Houseboat')
         , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
@@ -24271,153 +27468,209 @@
 
 
 
-        <!--Exeggutor Island Hill-->
-        
-
-
-
-    <image width="48" height="48"
-        x="88"
-        y="696"
-        class="iconLocation"
-        data-bind="visible: MapHelper.isTownCurrentLocation('Exeggutor Island Hill')
-        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
-    </image>
-
-
-
-        <!--Vast Poni Canyon Extension-->
-        
-
-
-    <rect class="city"
-        data-town="Vast Poni Canyon"
-        x="400"
-        y="464"
-        height="48"
-        width="64"
-        data-bind="click:function(){MapHelper.moveToTown('Vast Poni Canyon')},
-            attr: { class: MapHelper.calculateTownCssClass('Vast Poni Canyon') }">
-    </rect>
-
-
-
-
-        <!--Vast Poni Canyon Extension-->
-        
-
-
-    <rect class="city"
-        data-town="Vast Poni Canyon"
-        x="448"
-        y="512"
-        height="16"
-        width="16"
-        data-bind="click:function(){MapHelper.moveToTown('Vast Poni Canyon')},
-            attr: { class: MapHelper.calculateTownCssClass('Vast Poni Canyon') }">
-    </rect>
-
-
-
-
-        <!--Vast Poni Canyon Extension-->
-        
-
-
-    <rect class="city"
-        data-town="Vast Poni Canyon"
-        x="464"
-        y="480"
-        height="16"
-        width="32"
-        data-bind="click:function(){MapHelper.moveToTown('Vast Poni Canyon')},
-            attr: { class: MapHelper.calculateTownCssClass('Vast Poni Canyon') }">
-    </rect>
-
-
-
-
-        <!--Lake of the Sunne and Moone-->
-        
-
-
-    <rect class="city"
-        data-town="Lake of the Sunne and Moone"
-        x="912"
-        y="416"
-        height="48"
-        width="64"
-        data-bind="click:function(){MapHelper.moveToTown('Lake of the Sunne and Moone')},
-            attr: { class: MapHelper.calculateTownCssClass('Lake of the Sunne and Moone') }">
-    </rect>
-
-
-    <image width="48" height="48"
-        x="920"
-        y="416"
-        class="iconLocation"
-        data-bind="visible: MapHelper.isTownCurrentLocation('Lake of the Sunne and Moone')
-        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
-    </image>
-
-
-
-        
-
-
-    <rect class="city"
-        data-town="Ruins of Hope"
-        x="576"
-        y="656"
-        height="48"
-        width="64"
-        data-bind="click:function(){MapHelper.moveToTown('Ruins of Hope')},
-            attr: { class: MapHelper.calculateTownCssClass('Ruins of Hope') }">
-    </rect>
-
-
-    <image width="48" height="48"
-        x="584"
-        y="656"
-        class="iconLocation"
-        data-bind="visible: MapHelper.isTownCurrentLocation('Ruins of Hope')
-        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
-    </image>
-
-
-
+        <!--Poni Meadow-->
         
 
 
     <rect class="city"
         data-town="Poni Meadow"
-        x="576"
-        y="528"
-        height="48"
-        width="64"
+        x="1008"
+        y="304"
+        height="64"
+        width="80"
         data-bind="click:function(){MapHelper.moveToTown('Poni Meadow')},
             attr: { class: MapHelper.calculateTownCssClass('Poni Meadow') }">
     </rect>
 
 
     <image width="48" height="48"
-        x="584"
-        y="528"
+        x="1024"
+        y="312"
         class="iconLocation"
         data-bind="visible: MapHelper.isTownCurrentLocation('Poni Meadow')
         , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
     </image>
 
 
+        <!--Poni Meadow extension-->
+        
 
+
+    <rect class="city"
+        data-town="Poni Meadow"
+        x="1024"
+        y="256"
+        height="16"
+        width="32"
+        data-bind="click:function(){MapHelper.moveToTown('Poni Meadow')},
+            attr: { class: MapHelper.calculateTownCssClass('Poni Meadow') }">
+    </rect>
+
+
+
+        <!--Poni Meadow extension-->
+        
+
+
+    <rect class="city"
+        data-town="Poni Meadow"
+        x="1008"
+        y="272"
+        height="16"
+        width="48"
+        data-bind="click:function(){MapHelper.moveToTown('Poni Meadow')},
+            attr: { class: MapHelper.calculateTownCssClass('Poni Meadow') }">
+    </rect>
+
+
+
+        <!--Poni Meadow extension-->
+        
+
+
+    <rect class="city"
+        data-town="Poni Meadow"
+        x="992"
+        y="288"
+        height="16"
+        width="80"
+        data-bind="click:function(){MapHelper.moveToTown('Poni Meadow')},
+            attr: { class: MapHelper.calculateTownCssClass('Poni Meadow') }">
+    </rect>
+
+
+
+        <!--Poni Meadow extension-->
+        
+
+
+    <rect class="city"
+        data-town="Poni Meadow"
+        x="992"
+        y="304"
+        height="48"
+        width="16"
+        data-bind="click:function(){MapHelper.moveToTown('Poni Meadow')},
+            attr: { class: MapHelper.calculateTownCssClass('Poni Meadow') }">
+    </rect>
+
+
+
+        <!--Poni Meadow extension-->
+        
+
+
+    <rect class="city"
+        data-town="Poni Meadow"
+        x="1024"
+        y="368"
+        height="48"
+        width="48"
+        data-bind="click:function(){MapHelper.moveToTown('Poni Meadow')},
+            attr: { class: MapHelper.calculateTownCssClass('Poni Meadow') }">
+    </rect>
+
+
+
+
+        <!--Ruins of Hope-->
+        
+
+
+    <rect class="city"
+        data-town="Ruins of Hope"
+        x="1088"
+        y="624"
+        height="80"
+        width="80"
+        data-bind="click:function(){MapHelper.moveToTown('Ruins of Hope')},
+            attr: { class: MapHelper.calculateTownCssClass('Ruins of Hope') }">
+    </rect>
+
+
+    <image width="48" height="48"
+        x="1104"
+        y="640"
+        class="iconLocation"
+        data-bind="visible: MapHelper.isTownCurrentLocation('Ruins of Hope')
+        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+
+
+        <!--Ruins of Hope extension-->
+        
+
+
+    <rect class="city"
+        data-town="Ruins of Hope"
+        x="1072"
+        y="640"
+        height="48"
+        width="16"
+        data-bind="click:function(){MapHelper.moveToTown('Ruins of Hope')},
+            attr: { class: MapHelper.calculateTownCssClass('Ruins of Hope') }">
+    </rect>
+
+
+
+        <!--Ruins of Hope extension-->
+        
+
+
+    <rect class="city"
+        data-town="Ruins of Hope"
+        x="1120"
+        y="608"
+        height="16"
+        width="32"
+        data-bind="click:function(){MapHelper.moveToTown('Ruins of Hope')},
+            attr: { class: MapHelper.calculateTownCssClass('Ruins of Hope') }">
+    </rect>
+
+
+
+        <!--Ruins of Hope extension-->
+        
+
+
+    <rect class="city"
+        data-town="Ruins of Hope"
+        x="1168"
+        y="640"
+        height="48"
+        width="16"
+        data-bind="click:function(){MapHelper.moveToTown('Ruins of Hope')},
+            attr: { class: MapHelper.calculateTownCssClass('Ruins of Hope') }">
+    </rect>
+
+
+
+        <!--Ruins of Hope extension-->
+        
+
+
+    <rect class="city"
+        data-town="Ruins of Hope"
+        x="1088"
+        y="704"
+        height="16"
+        width="64"
+        data-bind="click:function(){MapHelper.moveToTown('Ruins of Hope')},
+            attr: { class: MapHelper.calculateTownCssClass('Ruins of Hope') }">
+    </rect>
+
+
+
+
+        <!--Resolution Cave-->
         
 
 
     <rect class="city"
         data-town="Resolution Cave"
-        x="576"
-        y="480"
-        height="48"
+        x="928"
+        y="256"
+        height="80"
         width="64"
         data-bind="click:function(){MapHelper.moveToTown('Resolution Cave')},
             attr: { class: MapHelper.calculateTownCssClass('Resolution Cave') }">
@@ -24425,8 +27678,8 @@
 
 
     <image width="48" height="48"
-        x="584"
-        y="480"
+        x="936"
+        y="272"
         class="iconLocation"
         data-bind="visible: MapHelper.isTownCurrentLocation('Resolution Cave')
         , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
@@ -24443,36 +27696,38 @@
 
 <rect class="city"
     data-town="Dock" 
-    x="1312"
-    y="288"
-    height="64"
-    width="48"
-    data-bind="click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass(&#39;Malie City&#39;) }">
+    x="480"
+    y="656"
+    height="32"
+    width="32"
+    data-bind="click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass(&#39;Seafolk Village&#39;) }">
 </rect>
 
         
 
 <image href="assets/images/map/ashketchumoverworld.png" xlink:href="assets/images/map/ashketchumoverworld.png"
-    x="512"
-    y="304"
+    x="720"
+    y="160"
     height="64"
     width="64"
     data-bind="visible: TemporaryBattleList[&#39;Ash Ketchum Alola&#39;] &amp;&amp; TemporaryBattleList[&#39;Ash Ketchum Alola&#39;].isVisible()"/>
 <rect class="city"
     data-town="Ash Ketchum"
-    x="512"
-    y="304"
+    x="720"
+    y="160"
     height="64"
     width="64"
     data-bind="visible: TemporaryBattleList[&#39;Ash Ketchum Alola&#39;] &amp;&amp; TemporaryBattleList[&#39;Ash Ketchum Alola&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Ash Ketchum Alola&#39;].protectedOnclick()">
 </rect>
 <image width="48" height="48"
-    x="520"
-    y="312"
+    x="728"
+    y="168"
     class="iconLocation"
     data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Ash Ketchum Alola&#39;] &amp;&amp; TemporaryBattleList[&#39;Ash Ketchum Alola&#39;].isVisible()
     , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
 </image>
+
+
 
     </g>
 </g>
@@ -24481,8 +27736,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'South Galar').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/galar-south.png?v=0.9.14',
-            href:'assets/images/galar-south.png?v=0.9.14'
+            'xlink:href':'assets/images/galar-south.png?v=0.9.18',
+            href:'assets/images/galar-south.png?v=0.9.18'
         }"></image>
 
         <!-- ------ -->
@@ -26299,6 +29554,28 @@
 
         
 
+<rect class="city"
+    data-town="Farm" 
+    x="832"
+    y="864"
+    height="48"
+    width="48"
+    data-bind="click:function(){FarmController.openFarmModal()}, attr: { class: App.game.farming.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
+</rect>
+
+        
+
+<rect class="city"
+    data-town="Pokémon Day Care" 
+    x="640"
+    y="64"
+    height="56"
+    width="64"
+    data-bind="click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
+</rect>
+
+        
+
 <image href="assets/images/map/blimp_empty.png" xlink:href="assets/images/map/blimp_empty.png"
     x="784"
     y="864"
@@ -26449,8 +29726,8 @@
     </g>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'North Galar').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/galar-north.png?v=0.9.14',
-            href:'assets/images/galar-north.png?v=0.9.14'
+            'xlink:href':'assets/images/galar-north.png?v=0.9.18',
+            href:'assets/images/galar-north.png?v=0.9.18'
         }"></image>
 
         <!-- ------ -->
@@ -26792,18 +30069,18 @@
     <rect data-route='31'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(31, 7) }"
         height="32"
-        width="160"
-        x="736" y="624">
+        width="112"
+        x="784" y="624">
     </rect>
 
     <text style="font-size: 32px"
-        x="792"
+        x="816"
         y="650"
         data-bind="visible: !MapHelper.isRouteCurrentLocation(31, 7)">
         WHS
     </text>
     <image width="48" height="48"
-        x="792"
+        x="816"
         y="616"
         class="iconLocation"
         transform='rotate(0)'
@@ -27173,8 +30450,8 @@
     <rect class="city"
         data-town="Glimwood Tangle"
         x="400"
-        y="608"
-        height="96"
+        y="592"
+        height="112"
         width="96"
         data-bind="click:function(){MapHelper.moveToTown('Glimwood Tangle')},
             attr: { class: MapHelper.calculateTownCssClass('Glimwood Tangle') }">
@@ -27183,28 +30460,11 @@
 
     <image width="48" height="48"
         x="424"
-        y="632"
+        y="624"
         class="iconLocation"
         data-bind="visible: MapHelper.isTownCurrentLocation('Glimwood Tangle')
         , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
     </image>
-
-
-
-        <!--Glimwood Tangle extension-->
-        
-
-
-    <rect class="city"
-        data-town="Glimwood Tangle"
-        x="432"
-        y="592"
-        height="16"
-        width="64"
-        data-bind="click:function(){MapHelper.moveToTown('Glimwood Tangle')},
-            attr: { class: MapHelper.calculateTownCssClass('Glimwood Tangle') }">
-    </rect>
-
 
 
 
@@ -27249,17 +30509,17 @@
     <rect class="city"
         data-town="Rose Tower"
         x="768"
-        y="208"
-        height="64"
-        width="48"
+        y="176"
+        height="48"
+        width="64"
         data-bind="click:function(){MapHelper.moveToTown('Rose Tower')},
             attr: { class: MapHelper.calculateTownCssClass('Rose Tower') }">
     </rect>
 
 
     <image width="48" height="48"
-        x="768"
-        y="216"
+        x="776"
+        y="176"
         class="iconLocation"
         data-bind="visible: MapHelper.isTownCurrentLocation('Rose Tower')
         , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
@@ -27273,10 +30533,10 @@
 
     <rect class="city"
         data-town="Rose Tower"
-        x="768"
-        y="32"
-        height="176"
-        width="48"
+        x="784"
+        y="224"
+        height="8"
+        width="32"
         data-bind="click:function(){MapHelper.moveToTown('Rose Tower')},
             attr: { class: MapHelper.calculateTownCssClass('Rose Tower') }">
     </rect>
@@ -27290,10 +30550,10 @@
 
     <rect class="city"
         data-town="Rose Tower"
-        x="720"
-        y="40"
-        height="224"
-        width="48"
+        x="784"
+        y="144"
+        height="32"
+        width="32"
         data-bind="click:function(){MapHelper.moveToTown('Rose Tower')},
             attr: { class: MapHelper.calculateTownCssClass('Rose Tower') }">
     </rect>
@@ -27307,9 +30567,9 @@
 
     <rect class="city"
         data-town="Rose Tower"
-        x="816"
-        y="40"
-        height="224"
+        x="776"
+        y="96"
+        height="48"
         width="48"
         data-bind="click:function(){MapHelper.moveToTown('Rose Tower')},
             attr: { class: MapHelper.calculateTownCssClass('Rose Tower') }">
@@ -27345,6 +30605,17 @@
     height="32"
     width="48"
     data-bind="click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass(&#39;Spikemuth&#39;) }">
+</rect>
+
+        
+
+<rect class="city"
+    data-town="Underground Entrance" 
+    x="592"
+    y="816"
+    height="64"
+    width="48"
+    data-bind="click:function(){App.game.underground.openUndergroundModal()}, attr: { class: App.game.underground.canAccess() ? &#39;completed&#39; : &#39;locked&#39; }">
 </rect>
 
         
@@ -27425,22 +30696,22 @@
            
 
 <image href="assets/images/map/marnie.png" xlink:href="assets/images/map/marnie.png"
-    x="1104"
-    y="864"
+    x="1136"
+    y="896"
     height="64"
     width="64"
     data-bind="visible: TemporaryBattleList[&#39;Marnie2&#39;] &amp;&amp; TemporaryBattleList[&#39;Marnie2&#39;].isVisible()"/>
 <rect class="city"
     data-town="Pokémon Trainer Marnie"
-    x="1104"
-    y="864"
+    x="1136"
+    y="896"
     height="64"
     width="64"
     data-bind="visible: TemporaryBattleList[&#39;Marnie2&#39;] &amp;&amp; TemporaryBattleList[&#39;Marnie2&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Marnie2&#39;].protectedOnclick()">
 </rect>
 <image width="48" height="48"
-    x="1112"
-    y="872"
+    x="1144"
+    y="904"
     class="iconLocation"
     data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Marnie2&#39;] &amp;&amp; TemporaryBattleList[&#39;Marnie2&#39;].isVisible()
     , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
@@ -27449,8 +30720,8 @@
     </g>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'Isle of Armor').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/galar-isle-of-armor.png?v=0.9.14',
-            href:'assets/images/galar-isle-of-armor.png?v=0.9.14'
+            'xlink:href':'assets/images/galar-isle-of-armor.png?v=0.9.18',
+            href:'assets/images/galar-isle-of-armor.png?v=0.9.18'
         }"></image>
 
         <!-- ------ -->
@@ -27515,8 +30786,8 @@
     <rect data-route='33'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(33, 7) }"
         height="32"
-        width="176"
-        x="832" y="688">
+        width="144"
+        x="864" y="688">
     </rect>
 
 
@@ -27532,8 +30803,8 @@
     <rect data-route='33'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(33, 7) }"
         height="16"
-        width="80"
-        x="832" y="672">
+        width="48"
+        x="864" y="672">
     </rect>
 
 
@@ -27602,6 +30873,23 @@
         height="32"
         width="64"
         x="736" y="816">
+    </rect>
+
+
+</g>
+
+
+        <!--Fields of Honour extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(33, 7); } ">
+    <rect data-route='33'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(33, 7) }"
+        height="16"
+        width="32"
+        x="832" y="704">
     </rect>
 
 
@@ -27868,6 +31156,23 @@
         height="32"
         width="160"
         x="576" y="576">
+    </rect>
+
+
+</g>
+
+
+        <!--Challenge Beach extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(36, 7); } ">
+    <rect data-route='36'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(36, 7) }"
+        height="16"
+        width="16"
+        x="576" y="448">
     </rect>
 
 
@@ -28230,7 +31535,7 @@
     <rect data-route='41'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(41, 7) }"
         height="16"
-        width="176"
+        width="160"
         x="1104" y="368">
     </rect>
 
@@ -29260,7 +32565,7 @@
     data-bind="click:function(){ MapHelper.moveToRoute(44, 7); } ">
     <rect data-route='44'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(44, 7) }"
-        height="56"
+        height="48"
         width="160"
         x="576" y="320">
     </rect>
@@ -29277,9 +32582,9 @@
     data-bind="click:function(){ MapHelper.moveToRoute(44, 7); } ">
     <rect data-route='44'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(44, 7) }"
-        height="24"
-        width="96"
-        x="640" y="376">
+        height="32"
+        width="80"
+        x="656" y="368">
     </rect>
 
 
@@ -29295,8 +32600,25 @@
     <rect data-route='44'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(44, 7) }"
         height="48"
-        width="48"
-        x="640" y="400">
+        width="32"
+        x="656" y="400">
+    </rect>
+
+
+</g>
+
+
+        <!--Honeycalm Sea extension-->
+        
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(44, 7); } ">
+    <rect data-route='44'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(44, 7) }"
+        height="80"
+        width="16"
+        x="576" y="368">
     </rect>
 
 
@@ -29423,18 +32745,18 @@
 
 
 
-        <!--Master Dojo Battlefield-->
+        <!--Master Dojo Battle Court-->
         
 
 <rect class="city"
-    data-town="Master Dojo Battlefield"
+    data-town="Master Dojo Battle Court"
     x="944"
     y="576"
     height="42.72"
     width="48"
     data-bind="
-        click:function(){MapHelper.moveToTown('Master Dojo Battlefield')},
-        attr: { class: MapHelper.calculateTownCssClass('Master Dojo Battlefield') },
+        click:function(){MapHelper.moveToTown('Master Dojo Battle Court')},
+        attr: { class: MapHelper.calculateTownCssClass('Master Dojo Battle Court') },
         ">
 </rect>
 
@@ -29442,24 +32764,24 @@
         x="944"
         y="573.36"
         class="iconLocation"
-        data-bind="visible: MapHelper.isTownCurrentLocation('Master Dojo Battlefield')
+        data-bind="visible: MapHelper.isTownCurrentLocation('Master Dojo Battle Court')
         , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
     </image>
 
 
 
-        <!--Master Dojo Battlefield extension-->
+        <!--Master Dojo Battle Court extension-->
         
 
 <rect class="city"
-    data-town="Master Dojo Battlefield"
+    data-town="Master Dojo Battle Court"
     x="992"
     y="576"
     height="48"
     width="16"
     data-bind="
-        click:function(){MapHelper.moveToTown('Master Dojo Battlefield')},
-        attr: { class: MapHelper.calculateTownCssClass('Master Dojo Battlefield') },
+        click:function(){MapHelper.moveToTown('Master Dojo Battle Court')},
+        attr: { class: MapHelper.calculateTownCssClass('Master Dojo Battle Court') },
         ">
 </rect>
 
@@ -29521,6 +32843,23 @@
         y="640"
         height="16"
         width="96"
+        data-bind="click:function(){MapHelper.moveToTown('Courageous Cavern')},
+            attr: { class: MapHelper.calculateTownCssClass('Courageous Cavern') }">
+    </rect>
+
+
+
+
+        <!--Courageous Cavern extension-->
+        
+
+
+    <rect class="city"
+        data-town="Courageous Cavern"
+        x="832"
+        y="672"
+        height="32"
+        width="32"
         data-bind="click:function(){MapHelper.moveToTown('Courageous Cavern')},
             attr: { class: MapHelper.calculateTownCssClass('Courageous Cavern') }">
     </rect>
@@ -29670,8 +33009,8 @@
     <rect class="city"
         data-town="Tower of Darkness"
         x="1008"
-        y="168"
-        height="88"
+        y="160"
+        height="96"
         width="64"
         data-bind="click:function(){MapHelper.moveToTown('Tower of Darkness')},
             attr: { class: MapHelper.calculateTownCssClass('Tower of Darkness') }">
@@ -29680,7 +33019,7 @@
 
     <image width="48" height="48"
         x="1016"
-        y="188"
+        y="184"
         class="iconLocation"
         data-bind="visible: MapHelper.isTownCurrentLocation('Tower of Darkness')
         , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
@@ -29694,9 +33033,9 @@
 
     <rect class="city"
         data-town="Tower of Waters"
-        x="576"
-        y="376"
-        height="88"
+        x="592"
+        y="368"
+        height="96"
         width="64"
         data-bind="click:function(){MapHelper.moveToTown('Tower of Waters')},
             attr: { class: MapHelper.calculateTownCssClass('Tower of Waters') }">
@@ -29704,8 +33043,8 @@
 
 
     <image width="48" height="48"
-        x="584"
-        y="396"
+        x="600"
+        y="392"
         class="iconLocation"
         data-bind="visible: MapHelper.isTownCurrentLocation('Tower of Waters')
         , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
@@ -29826,11 +33165,36 @@
     , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
 </image>
 
+
+            
+
+<image href="assets/images/map/ashketchumoverworld.png" xlink:href="assets/images/map/ashketchumoverworld.png"
+    x="896"
+    y="688"
+    height="64"
+    width="64"
+    data-bind="visible: TemporaryBattleList[&#39;Ash Ketchum Galar&#39;] &amp;&amp; TemporaryBattleList[&#39;Ash Ketchum Galar&#39;].isVisible()"/>
+<rect class="city"
+    data-town="Ash Ketchum"
+    x="896"
+    y="688"
+    height="64"
+    width="64"
+    data-bind="visible: TemporaryBattleList[&#39;Ash Ketchum Galar&#39;] &amp;&amp; TemporaryBattleList[&#39;Ash Ketchum Galar&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Ash Ketchum Galar&#39;].protectedOnclick()">
+</rect>
+<image width="48" height="48"
+    x="904"
+    y="696"
+    class="iconLocation"
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Ash Ketchum Galar&#39;] &amp;&amp; TemporaryBattleList[&#39;Ash Ketchum Galar&#39;].isVisible()
+    , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+</image>
+
     </g>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'Crown Tundra').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/galar-crown-tundra.png?v=0.9.14',
-            href:'assets/images/galar-crown-tundra.png?v=0.9.14'
+            'xlink:href':'assets/images/galar-crown-tundra.png?v=0.9.18',
+            href:'assets/images/galar-crown-tundra.png?v=0.9.18'
         }"></image>
 
         <!-- ------ -->
@@ -31631,6 +34995,20 @@
         <img src="" data-bind="attr: { src: PokemonHelper.getImage(pokemonMap[$data], App.game.party.alreadyCaughtPokemon(pokemonMap[$data].id, true)) }">
       </div>
     </div>
+    <div id="hatcheryQueueInfo" class="card-footer p-0 small">
+        <span style="line-height: 30px;"
+            data-bind="
+                text: App.game.breeding.queueList().length + ' / ' + App.game.breeding.usableQueueSlots(),
+                tooltip: { title: BreedingController.queueSizeLimit() > -1 ? 'Queue is currently limited by your Queue Size setting.' : '', trigger: 'hover' }
+            "></span>
+        <button class="btn btn-sm btn-danger" style="position: absolute; right: 0; width: auto;"
+                data-bind="
+                    click: () => App.game.breeding.clearQueue(true),
+                    tooltip: { title: 'Remove all Pokémon from the queue.', trigger: 'hover' }
+                ">
+            Clear
+        </button>
+    </div>
     <!-- /ko -->
 </div>
 
@@ -31868,7 +35246,7 @@ aria-labelledby="receiveBadgeModalLabel" aria-hidden="true">
 aria-labelledby="temporaryBattleWonModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-dialog-scrollable" role="document">
    <div class="modal-content">
-    <!-- ko if: TemporaryBattleRunner.battleObservable() -->
+    <!-- ko if: TemporaryBattleRunner.battleObservable()?.defeatMessage -->
        <div class="modal-header">
            <div style="width: 100%;">
                <img src="" onerror="this.src='assets/images/trainers/Mysterious Trainer.png'"
@@ -31925,10 +35303,10 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                                     </select>
                                 </div>
                                 <div class="form-group col-md-3 col-6">
-                                    <label>Region</label>
-                                    <select name="achievementsRegion" class="custom-select" onchange="AchievementHandler.filter.region(this.value), Settings.setSettingByName(this.name, this.value)">
-                                        <!-- ko foreach: Settings.getSetting('achievementsRegion').options.filter(r => r.value <= player.highestRegion()) -->
-                                        <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('achievementsRegion').value === $data.value }, text: $data.text">Region</option>
+                                    <label>Category</label>
+                                    <select name="achievementsCategory" class="custom-select" onchange="AchievementHandler.filter.category(this.value), Settings.setSettingByName(this.name, this.value)">
+                                        <!-- ko foreach: Settings.getSetting('achievementsCategory').options.filter(r => r.value == 'all' || AchievementHandler.getAchievementCategories().find((c) => c.name == r.value).isUnlocked()) -->
+                                        <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('achievementsCategory').value === $data.value }, text: $data.text">Category</option>
                                         <!-- /ko -->
                                     </select>
                                 </div>
@@ -32296,6 +35674,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('eggAnimation')}"></tr>
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('hideHatchery')}"></tr>
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('farmDisplay')}"></tr>
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('hideQuestsOnFull')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showCurrencyGainedAnimation')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showCurrencyLostAnimation')}"></tr>
                                 <tr data-bind="visible: Object.values(App.game.challenges.list).filter(c => c.active()).length > 0, template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('hideChallengeRelatedModules')}"></tr>
@@ -32326,7 +35705,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                             <table class="table table-striped table-hover m-0">
                                 <tbody>
                                 <!-- ko foreach: Object.values(NotificationConstants.NotificationSound[$data]) -->
-                                    <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting(`sound.${$data.name}`)}"></tr>
+                                    <tr data-bind="template: { name: 'SoundSettingTemplate', data: { sound, setting: Settings.getSetting(`sound.${$data.name}`) } }"></tr>
                                 <!-- /ko -->
                                 </tbody>
                             </table>
@@ -32510,6 +35889,21 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('disableAutoDownloadBackupSaveOnUpdate')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('useWebWorkerForGameTicks')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('disableOfflineProgress')}"></tr>
+                                <tr data-bind="visible: player.highestRegion() > 0, with: Settings.getSetting('breedingQueueSizeSetting')">
+                                    <td class="p-2" data-bind="text: `${$data.displayName}:`">setting name</td>
+                                    <td class="p-0">
+                                        <input type="text" class="form-control"
+                                            data-bind="attr: { name: $data.name, id: `setting-${$data.name}` }, value: $data.observableValue, tooltip: {
+                                                title: `Restrict your hatchery queue to a specific size or disable entirely. Enter a value between 1 and your current max size (${App.game.breeding.queueSlots()}), zero (0) to disable the queue entirely, or -1 for no limit.`,
+                                                trigger: 'hover'
+                                            }"
+                                            onchange="(() => {
+                                                const val = Number.isNaN(parseInt(this.value)) ? -1 : +this.value;
+                                                this.value = val < -1 ? -1 : Math.min(val, App.game.breeding.queueSlots());
+                                            })(), App.game.breeding.updateQueueSizeLimit(+this.value), Settings.setSettingByName(this.name, this.value)
+                                        ">
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                         <div class="btn-group btn-block">
@@ -32548,6 +35942,45 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
         <input class="clickable" type="checkbox"
             data-bind="checked: $data.observableValue(), attr: {name, id: 'checkbox-' + $data.name }"
             onchange="Settings.setSettingByName(this.name, this.checked)"/>
+    </td>
+</script>
+
+<script type="text/html" id="BooleanSettingSliderTemplate">
+    <td class="p-2">
+        <label class="m-0" data-bind="attr: { for: 'checkbox-' + $data.name }, text: `${$data.displayName}:`">
+            setting name
+        </label>
+    </td>
+    <td class="p-2">
+        <label class="form-check-label toggler-wrapper style-1 m-auto">
+            <input class="clickable" type="checkbox"
+                data-bind="checked: $data.observableValue(), attr: {name, id: 'checkbox-' + $data.name }"
+                onchange="Settings.setSettingByName(this.name, this.checked)"/>
+            <div class="toggler-slider">
+                <div class="toggler-knob"></div>
+            </div>
+        </label>
+    </td>
+</script>
+
+<script type="text/html" id="SoundSettingTemplate">
+    <td class="p-2">
+        <label class="m-0" data-bind="attr: { for: 'checkbox-' + $data.setting.name }, text: `${$data.setting.displayName}:`">
+            setting name
+        </label>
+    </td>
+    <td class="p-1 tight">
+        <button class="btn btn-info btn-sm" data-bind="click: () => $data.sound.play()"><i class="play-button"></i></button>
+    </td>
+    <td class="p-2 tight">
+        <label class="form-check-label toggler-wrapper style-1 m-auto">
+            <input class="clickable" type="checkbox"
+                data-bind="checked: $data.setting.observableValue(), attr: {name: $data.setting.name, id: 'checkbox-' + $data.setting.name }"
+                onchange="Settings.setSettingByName(this.name, this.checked)"/>
+            <div class="toggler-slider">
+                <div class="toggler-knob"></div>
+            </div>
+        </label>
     </td>
 </script>
 
@@ -32777,7 +36210,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
             <p><strong>What do the Pokérus status filters mean?</strong><br/>
             <span class="text-muted"><code>None</code>: Pokémon that have not been infected with Pokérus.<br/>
             <span class="text-muted"><code>Contagious</code>: Pokémon with less than 50 EVs.<br/>
-            <span class="text-muted"><code>Cured</code>: Pokémon with more than 50 EVs. These Pokémon will still be able to spread Pokérus<br/>
+            <span class="text-muted"><code>Resistant</code>: Pokémon with more than 50 EVs. These Pokémon will still be able to spread Pokérus<br/>
             
             <p><h5 class="text-primary"><strong>Development:</strong></h5></p>
             <p><strong>When will the development version be fully released?</strong><br/>
@@ -33143,7 +36576,7 @@ aria-labelledby="hallOfFameModalLabel" aria-hidden="true">
                     You are the new Alola League champion!
                 </p>
                 <p data-bind="visible: player.region == GameConstants.Region.galar">
-                    Professor Sonia told me that you just beat the Galar Pokémon League! Congratulations!<br/>
+                    Professor Magnolia told me that you just beat the Galar Pokémon League! Congratulations!<br/>
                     You are the new Galar League champion!
                 </p>
 
@@ -33299,7 +36732,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                 You don't have any free egg slots.
             </p>
             <p class="bg-danger my-0" data-bind="visible: !App.game.breeding.hasFreeQueueSlot() && App.game.breeding.queueSlots()">
-                Your breeding queue is full.
+                Your breeding queue is full or disabled.
             </p>
 
             <div class="tab-content p-3">
@@ -33406,7 +36839,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             Unfortunately, you don't have any Pokémon of level 100 to breed.
                         </p>
                         <!-- ko if: App.game.party.hasMaxLevelPokemon() -->
-                        <ul class="row justify-content-center p-0" data-bind="foreach: PartyController.getHatcherySortedList(BreedingController.regionalAttackDebuff())">
+                        <ul class="row justify-content-center p-0" data-bind="foreach: lazyLoad($element, PartyController.getHatcherySortedList)">
                             <li class="eggSlot col-sm-4 col-md-3 col-lg-2 pokedexEntry text-nowrap" data-bind="visible: BreedingController.visible($data), style:{background: PokedexHelper.getBackgroundColors($data.name)}, class: App.game.breeding.hasFreeEggSlot() || App.game.breeding.hasFreeQueueSlot() ? '' : 'disabled'">
                                 <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: $data.name">name</span>
                                 <div data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)" style="position: absolute;right: 1px;top: -2px;height: 24px">✨</div>
@@ -33674,9 +37107,9 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                     </div>
                     <div class='row no-gutters'>
                         <button class='col-12 col-md-4 btn btn-primary' onClick='Mine.toolSelected(Mine.Tool.Hammer)'
-                        data-bind="tooltip: {title: 'Hammer will mine 1 layer of all 9 tiles in a chosen 3x3 area.', trigger: 'hover', placement: 'top'}">Hammer (<knockout data-bind="text: Underground.HAMMER_ENERGY"></knockout> energy)</button>
+                        data-bind="tooltip: {title: 'Hammer will mine 1 layer of all 9 tiles in a chosen 3x3 area.', trigger: 'hover', placement: 'top', boundary: 'window'}">Hammer (<knockout data-bind="text: Underground.HAMMER_ENERGY"></knockout> energy)</button>
                         <button class='col-12 col-md-4 btn btn-info' onClick='Mine.toolSelected(Mine.Tool.Chisel)'
-                        data-bind="tooltip: {title: 'Chisel will mine 2 layers on a single chosen tile.', trigger: 'hover', placement: 'top'}">Chisel (<knockout data-bind="text: Underground.CHISEL_ENERGY"></knockout> energy)</button>
+                        data-bind="tooltip: {title: 'Chisel will mine 2 layers on a single chosen tile.', trigger: 'hover', placement: 'top', boundary: 'window'}">Chisel (<knockout data-bind="text: Underground.CHISEL_ENERGY"></knockout> energy)</button>
                         <button class="col-12 col-md-4 btn btn-secondary"
                             id="mine-survey-result"
                             data-bind="
@@ -33685,21 +37118,22 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                     title: () =>
                                         Mine.surveyResult() || 'Conduct a Survey to get more details',
                                         trigger: 'hover',
-                                        placement:'top',
+                                        placement: 'top',
+                                        boundary: 'window',
                                         html: true,
                                 }"
                             >
                         </button>
                         <button class='col-12 col-md-4 btn btn-success'
                                 onClick='Mine.survey(); $(this).tooltip("hide")'
-                                data-bind="disable: Mine.surveyResult() ? true : false, tooltip: {title: `Survey gives you information about the items to be found on this layer. It also fully damages ${App.game.underground.getSurvey_Efficiency()} (cleared or uncleared) random tile${App.game.underground.getSurvey_Efficiency() > 1 ? 's' : ''}.`, trigger: 'hover', placement: 'top'}">
+                                data-bind="disable: Mine.surveyResult() ? true : false, tooltip: {title: `Survey gives you information about the items to be found on this layer. It also fully damages ${App.game.underground.getSurvey_Efficiency()} (cleared or uncleared) random tile${App.game.underground.getSurvey_Efficiency() > 1 ? 's' : ''}.`, trigger: 'hover', placement: 'bottom', boundary: 'window'}">
                             Survey (<knockout data-bind="text: App.game.underground.getSurvey_Cost()"></knockout> energy)
                         </button>
                         <!-- FIX NUMBER-->
                         <button class='col-12 col-md-4 btn btn-warning' onClick='Mine.bomb()'
-                        data-bind="tooltip: {title: `Bomb will mine 2 layers of ${App.game.underground.getBombEfficiency()} (cleared or uncleared) random tiles.`, trigger: 'hover', placement: 'top'}">Bomb (<knockout data-bind="text: Underground.BOMB_ENERGY"></knockout> energy)</button>
+                        data-bind="tooltip: {title: `Bomb will mine 2 layers of ${App.game.underground.getBombEfficiency()} (cleared or uncleared) random tiles.`, trigger: 'hover', placement: 'bottom', boundary: 'window'}">Bomb (<knockout data-bind="text: Underground.BOMB_ENERGY"></knockout> energy)</button>
                         <button class='col-12 col-md-4 btn btn-danger' onClick='Mine.skipLayer(true)'
-                        data-bind="tooltip: {title: `Skips the current layer. Fully mine a layer to recover one Skip.`, trigger: 'hover', placement: 'top'}">Skip (<knockout data-bind="text: `${Mine.skipsRemaining()} / ${Mine.maxSkips}`"></knockout>)</button>
+                        data-bind="tooltip: {title: `Skips the current layer. Fully mine a layer to recover one Skip.`, trigger: 'hover', placement: 'bottom', boundary: 'window'}">Skip (<knockout data-bind="text: `${Mine.skipsRemaining()} / ${Mine.maxSkips}`"></knockout>)</button>
                     </div>
                 </div>
                 <div id="treasures" class="tab-pane fade">
@@ -34059,7 +37493,7 @@ aria-labelledby="pokedexModalLabel">
 
            </div>
            <div>
-               <ul class="row justify-content-center p-0" data-bind="foreach: PokedexHelper.filteredList()"
+               <ul class="row justify-content-center p-0" data-bind="foreach: lazyLoad($element, PokedexHelper.filteredList)"
                    style="max-width: 100%; padding:0; margin:0;">
                    <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry"
                         data-bind="style:{background: PokedexHelper.getBackgroundColors($data.name)}">
@@ -34292,22 +37726,22 @@ aria-labelledby="pokedexModalLabel">
             <div class="form-group col-md-6 col-6 p-0">
                 <label for="protein-search">Search</label>
                 <input id="protein-search" autocomplete="off" class="form-control" placeholder="search here"
-                    data-bind="textInput: ProteinFilters.search.value"
+                    data-bind="textInput: Settings.getSetting('proteinSearchFilter').observableValue"
                 />
             </div>
             <div class="form-group col-md-3 col-3 p-0">
                 <label for="protein-region-filter">Region</label>
-                <select id="protein-region-filter" name="proteinRegionFilter" autocomplete="off" class="custom-select" onchange="ProteinFilters.region.value(+this.value), Settings.setSettingByName(this.name, this.value)">
+                <select id="protein-region-filter" name="proteinRegionFilter" autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, +this.value)">
                     <!-- ko foreach: Settings.getSetting('proteinRegionFilter').options.filter(r => r.value <= player.highestRegion()) -->
-                    <option data-bind="attr: { value: $data.value }, text: $data.text">Region</option>
+                    <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('proteinRegionFilter').value === $data.value }, text: $data.text">Region</option>
                     <!-- /ko -->
                 </select>
             </div>
             <div class="form-group col-md-3 col-3 p-0">
                 <label for="protein-type-filter">Type</label>
-                <select id="protein-type-filter" name="proteinTypeFilter" autocomplete="off" class="custom-select" onchange="ProteinFilters.type.value(+this.value), Settings.setSettingByName(this.name, this.value)">
+                <select id="protein-type-filter" name="proteinTypeFilter" autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, +this.value)">
                     <!-- ko foreach: Settings.getSetting('proteinTypeFilter').options -->
-                    <option data-bind="attr: { value: $data.value }, text: $data.text">Type</option>
+                    <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('proteinTypeFilter').value === $data.value }, text: $data.text">Type</option>
                     <!-- /ko -->
                 </select>
             </div>
@@ -34494,7 +37928,6 @@ aria-labelledby="badgeCaseModalLabel">
                                 data-bind='visible: App.game.quests.canStartNewQuest() && !$data.inProgress() && !$data.isCompleted() && !$data.claimed(),
                                 click: function(){
                                     App.game.quests.beginQuest($data.index);
-                                    if (!App.game.quests.canStartNewQuest()) {$("#QuestModal").modal("hide");}
                                 }'>
                                 Start
                             </button>
@@ -34525,7 +37958,7 @@ aria-labelledby="badgeCaseModalLabel">
                         <span data-bind="template: { name: 'amountTemplate', data: App.game.quests.getRefreshCost() }"></span> - Refresh
                     </button>
                     <!-- /ko -->
-                    
+
                 </div>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>
@@ -35131,7 +38564,7 @@ aria-labelledby="badgeCaseModalLabel">
                                     <th></th>
                                 </tr>
                             </thead>
-                            <tbody data-bind='foreach: BerryDeal.getDeals(player.region)'>
+                            <tbody data-bind='foreach: BerryDeal.getDeals(ShopHandler.shopObservable().location)'>
                                 <!-- ko foreach: berries -->
                                 <tr>
                                     <td data-bind="text: App.game.farming.berryList[$data.berryType]()"></td>
@@ -35149,13 +38582,20 @@ aria-labelledby="badgeCaseModalLabel">
                                                 html: true
                                               }">
                                     </td>
-                                    <td class='vertical-middle' data-bind='attr: { rowspan: $parent.berries.length }, text: $parent.item.amount + " × " + $parent.item.itemType.displayName'></td>
+                                    <td class='vertical-middle' data-bind='attr: { rowspan: $parent.berries.length }'>
+                                        <span data-bind='text: $parent.item.amount + " × " + $parent.item.itemType.displayName'></span>
+                                        <knockout data-bind="if: ($parent.item.itemType instanceof CaughtIndicatingItem)">
+                                            <span style="float:right; margin-right: 5px"
+                                                  data-bind="template: { name: 'caughtStatusTemplate', data: {'status': $parent.item.itemType.getCaughtStatus()}}">
+                                            </span>
+                                        </knockout>
+                                    </td>
                                     <td class='vertical-middle' data-bind="attr: { rowspan: $parent.berries.length }">
                                         <div class="btn-group btn-block" data-bind="let: { tradeAmount: ko.observable(1) }">
-                                            <button class='btn btn-success btn-block' data-bind='click: function(){BerryDeal.use(player.region, $parentContext.$index(), tradeAmount())}, css: { disabled: !BerryDeal.canUse(player.region, $parentContext.$index()) }'>
+                                            <button class='btn btn-success btn-block' data-bind='click: function(){BerryDeal.use(ShopHandler.shopObservable()?.location, $parentContext.$index(), tradeAmount())}, css: { disabled: !BerryDeal.canUse(ShopHandler.shopObservable()?.location, $parentContext.$index()) }'>
                                                 Trade
                                             </button>
-                                            <button type="button" data-bind="text: tradeAmount() + '&nbsp;', css: { disabled: !BerryDeal.canUse(player.region, $parentContext.$index()) }" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <button type="button" data-bind="text: tradeAmount() + '&nbsp;', css: { disabled: !BerryDeal.canUse(ShopHandler.shopObservable()?.location, $parentContext.$index()) }" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             </button>
                                             <div class="dropdown-menu" data-bind="foreach: [1, 10, 100, 1000, Infinity]">
                                                 <button class="dropdown-item" type="button" data-bind="click: function(){tradeAmount($data)}, text: $data"></button>
@@ -35259,9 +38699,9 @@ aria-labelledby="badgeCaseModalLabel">
                             <tbody data-bind='foreach: GemDeal.getDeals(player.region)'>
                                 <!-- ko foreach: gems -->
                                 <tr>
-                                    <td data-bind="text: App.game.gems.gemWallet[$data.gemType]()"></td>
+                                    <td data-bind="text: App.game.gems.gemWallet[$data.gemType]().toLocaleString('en-US')"></td>
                                     <td><img height="24px" data-bind="attr: {src: Gems.image($data.gemType) }"></img></td>
-                                    <td data-bind="text: amount + ' x ' + PokemonType[$data.gemType]"></td>
+                                    <td data-bind="text: amount.toLocaleString('en-US') + ' x ' + PokemonType[$data.gemType]"></td>
                                     <!-- ko if: $index() === 0 -->
                                     <td class='vertical-middle' data-bind="attr: { rowspan: $parent.gems.length }">→</td>
                                     <td class='vertical-middle' data-bind="attr: { rowspan: $parent.gems.length }">
@@ -35359,7 +38799,7 @@ aria-labelledby="badgeCaseModalLabel">
                                     <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length }, text: player.itemList[$parent.item.itemType.name]()"></td>
                                     <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length }">
                                         <div class="btn-group btn-block" data-bind="let: { tradeAmount: ko.observable(1) }">
-                                            <button class='btn btn-success btn-block' data-bind='click: function(){ShardDeal.use(player.town().name, $parentContext.$index(), tradeAmount())}, css: { disabled: !ShardDeal.canUse(player.town().name, $parentContext.$index()) }'>
+                                            <button class='btn btn-success btn-block' data-bind='click: function(){ShardDeal.use(ShopHandler.shopObservable()?.location, $parentContext.$index(), tradeAmount())}, css: { disabled: !ShardDeal.canUse(ShopHandler.shopObservable()?.location, $parentContext.$index()) }'>
                                                 <knockout data-bind="text: !ItemList[$parent.item.itemType.name].isSoldOut() ? 'Trade' : 'Sold out'"></knockout>
                                             </button>
                                             <button type="button" data-bind="visible: ItemList[$parent.item.itemType.name].maxAmount > 1, text: tradeAmount() + '&nbsp;'" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"'>
@@ -35921,6 +39361,133 @@ aria-labelledby="bulletinBoardModalLabel" aria-hidden="true">
             <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
         </div>
     </div>
+</div>
+</div>
+
+
+<div class="modal noselect fade" id="heldItemModal" tabindex="-1" role="dialog" aria-labelledby="heldItemModal">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content">
+            <!-- ko if: modalUtils.observableState['heldItemModal'] === 'show' -->
+            <div class="modal-header bg-dark text-light" style='justify-content: space-around;'>
+                <h5 class="modal-title text-light">Select a Pokémon</h5>&nbsp;
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body p-0">
+                <img data-bind="attr: { src: HeldItem.heldItemSelected().image }" width="40%"/>
+                <br/>
+                <div class="sticky-top bg-dark text-light">
+                  <div class="btn-group btn-block m-0" role="group" aria-label="Basic example">
+                    <button class="btn btn-block btn-secondary btn-static" data-bind="text: HeldItem.heldItemSelected().displayName + ': ' + player.amountOfItem(HeldItem.heldItemSelected().name)"></button>
+                  </div>
+                  <div class="input-group" data-bind="with: Settings.getSetting('heldItemSort')">
+                      <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])"
+                          data-bind="foreach: $data.options, attr: {name}, selectedOptions: [$data.observableValue()]">
+                          <option data-bind="text: $data.text, value: $data.value"></option>
+                      </select>
+                      <div class="input-group-append bg-primary text-light">
+                          <label for="heldItemSortDirection" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;" data-bind="text: Settings.getSetting('heldItemSortDirection').observableValue() ? '⥄' : '⥂'">⥂</label>
+                          <input id="heldItemSortDirection" style="vertical-align: middle" class="hidden" type='checkbox'
+                              data-bind="checked: Settings.getSetting('heldItemSortDirection').observableValue()"
+                              onchange="Settings.setSettingByName('heldItemSortDirection', this.checked)"/>
+                      </div>
+                  </div>
+                </div>
+                <table class="table table-striped table-hover table-bordered table-sm m-0">
+                  <thead>
+                    <tr class="text-light">
+                      <th class="text-left bg-dark align-middle">Pokemon</th>
+                      <th class="text-center bg-dark align-middle">Current item</th>
+                    </tr>
+                  </thead>
+                  <tbody id="pokemonsWithHeldItems" data-bind="foreach: PartyController.getPokemonsWithHeldItemSortedList()">
+                    <tr class="clickable" data-bind="click: () => $data.giveHeldItem(HeldItem.heldItemSelected())">
+                      <td class="text-left"><knockout data-bind="text: $data.name"></knockout><sup data-bind="visible: $data.shiny">✨</sup></td>
+                      <td class="text-center tight" data-bind="
+                        text: $data.heldItem() == undefined ? '' : $data.heldItem().displayName,
+                        tooltip: $data.heldItem() != undefined ? { title: $data.heldItem().description, placement: 'bottom', trigger: 'hover'} : undefined
+                      "></td>
+                    </tr>
+                  </tbody>
+                  <tbody data-bind="foreach: new Array(6 - PartyController.getPokemonsWithHeldItemSortedList().length)">
+                    <tr><td colspan="2">Held item slot left</td></tr>
+                  </tbody>
+                  <thead>
+                      <tr class="text-light">
+                          <th colspan="2" class="text-left bg-dark align-middle">Pokemons without held items</th>
+                      </tr>
+                  </thead>
+                  <tbody data-bind="foreach: PartyController.getHeldItemSortedList()">
+                    <tr class="clickable" data-bind="click: () => $data.giveHeldItem(HeldItem.heldItemSelected()), visible: !$data.heldItem() && HeldItem.heldItemSelected().canUse($data)">
+                      <td class="text-left" colspan="2"><knockout data-bind="text: $data.name"></knockout><sup data-bind="visible: $data.shiny">✨</sup></td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+            <!-- /ko -->
+        </div>
+    </div>
+</div>
+
+
+<!-- Battle Cafe Modal -->
+<div class="modal fade noselect" id="battleCafeModal" tabindex="-1" role="dialog"
+aria-labelledby="battleCafeModal"Label">
+<div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+   <div class="modal-content">
+       <div class="modal-header">
+           <h5 class="modal-title">Battle Café</h5>
+       </div>
+       <div class="modal-body">
+            <div>
+                <h4>Select a Sweet</h4>
+                <div class="row col-15 justify-content-center">
+                    <!-- ko foreach: GameHelper.enumStrings(GameConstants.AlcremieSweet) -->
+                    <div class="clickable col-4" data-bind="
+                        click: () => BattleCafeController.selectedSweet(GameConstants.AlcremieSweet[$data]),
+                        css: { 'bg-primary': BattleCafeController.selectedSweet() == GameConstants.AlcremieSweet[$data]}
+                    ">
+                        <h5>
+                            <span data-bind="text: $data"></span>
+                            <img style="max-width: 40px;" data-bind="attr: { src: 'assets/images/sweets/' + $data + '.png' }"/>
+                        </h5>
+                        <div>
+                            <!-- ko foreach: BattleCafeController.getPrice(GameConstants.AlcremieSweet[$data]) -->
+                            <div>
+                                <img style="width: 30px;" data-bind="attr: { src: FarmController.getBerryImage($data.berry) }"/>
+                                <span data-bind="text: $data.amount.toLocaleString('en-US')"></span>/<span data-bind="text: App.game.farming.berryList[$data.berry]().toLocaleString('en-US')"></span>
+                            </div>
+                            <!-- /ko -->
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                </div>
+            </div>
+            <h4>Spin!</h4>
+            <div>
+                <span>Spins left today: </span><span data-bind="text: BattleCafeController.spinsLeft()"></span>
+            </div>
+            <div>
+                <img style="width: 60px;" data-bind="
+                attr: { src: `assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png` },
+                class: BattleCafeController.isSpinning() ? 'player-animated' + (BattleCafeController.clockwise() ? '' : '-counter') : ''
+                " src="assets/images/profile/trainer-1.png">
+            </div>
+            <div>
+                <button class="btn btn-primary" onclick="BattleCafeController.spin(true);">Clockwise</button>
+                <button class="btn btn-primary" onclick="BattleCafeController.spin(false);">Counter-Clockwise</button>
+            </div>
+            <div class="input-group justify-content-center">
+                <label for="battleCafeDuration">Spin duration:</label><input class="form-control col-4" id="battleCafeDuration" type="number" min="1" max="20" value="3"/>
+            </div>
+        </div>
+
+       <div class="modal-footer">
+           <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+       </div>
+   </div>
 </div>
 </div>
 

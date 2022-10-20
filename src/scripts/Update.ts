@@ -672,7 +672,7 @@ class Update implements Saveable {
 
             // Start Galactic questline if player has Coal Badge already
             if (saveData.badgeCase[40]) {
-                Update.startQuestLine(saveData, 'A new world');
+                Update.startQuestLine(saveData, 'A New World');
             }
 
             // Clear Valley Windworks Clears
@@ -1005,8 +1005,10 @@ class Update implements Saveable {
             renamePokemon(saveData, 'Minior (Yellow-core)', 'Minior (Yellow Core)');
 
             // Start Galactic questline if player has Coal Badge already
-            if (saveData.badgeCase[40]) {
-                Update.startQuestLine(saveData, 'A new world');
+            // Don't start completed questline again if updating from v0.9.8/9 to v0.9.16+
+            const aNewWorld = saveData.quests.questLines.find(ql => ql.name == 'A new world');
+            if (saveData.badgeCase[40] && !aNewWorld) {
+                Update.startQuestLine(saveData, 'A New World');
             }
 
             // Update mine inventory
@@ -1143,6 +1145,15 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 1);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 2);
 
+            // Add Suicune Temporary Battles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 7);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 8);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 9);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 10);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 11);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 12);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 13);
+
             // Pinkan Berry
             saveData.farming.berryList = Update.moveIndex(saveData.farming.berryList, 35);
             saveData.farming.unlockedBerries = Update.moveIndex(saveData.farming.unlockedBerries, 35);
@@ -1152,19 +1163,216 @@ class Update implements Saveable {
                     p.berry++;
                 }
             });
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 15);
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 16);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 22);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 23);
 
             // Add Princess Diancie Temporary Battles
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 46);
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 47);
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 48);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 53);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 54);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 55);
 
             // Replace Pokémon names to IDs
             const eggList = saveData.breeding.eggList;
             const queueList = saveData.breeding.queueList;
             Update.changePokemonNameToId(saveData, eggList);
             Update.changePokemonNameToId(saveData, queueList);
+
+            // Adding more Galar badges
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 109);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 110);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 111);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 112);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 113);
+        },
+
+        '0.9.16': ({ playerData, saveData }) => {
+            // Pinkan Berry
+            saveData.statistics.berriesHarvested = Update.moveIndex(saveData.statistics.berriesHarvested, 35);
+
+            // Rename Pinkan Rocket questline and Sinnoh questline
+            saveData.quests.questLines.forEach(v => {
+                if (v.name === 'Team Rocket\'s Pinkan Themepark') {
+                    v.name = 'Team Rocket\'s Pinkan Theme Park';
+                }
+            });
+            saveData.quests.questLines.forEach(v => {
+                if (v.name === 'A new world') {
+                    v.name = 'A New World';
+                }
+            });
+        },
+
+        '0.9.17': ({ playerData, saveData }) => {
+            // Add Sudowoodo Temporary Battle
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 7);
+
+            // Pinkan Berry - Obtained Statistics
+            saveData.statistics.berriesObtained = Update.moveIndex(saveData.statistics.berriesObtained, 35);
+
+            // Fix A New World questline for players updating from v0.9.8/9 to v0.9.16+
+            const aNewWorld = saveData.quests.questLines.find(ql => ql.name == 'A New World') || {};
+            if (aNewWorld.state === 1 && aNewWorld.quest <= 3) {
+                saveData.statistics.temporaryBattleDefeated[27] = 0;
+            }
+        },
+
+        '0.9.19': ({ playerData, saveData }) => {
+            // Add Kimono Girls Temporary Battles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 25);
+
+            // Create new Pokemon Gender Statistics if they don't exist
+            // Male
+            if (!saveData.statistics.malePokemonCaptured) {
+                saveData.statistics.malePokemonCaptured = {};
+            }
+            if (!saveData.statistics.malePokemonDefeated) {
+                saveData.statistics.malePokemonDefeated = {};
+            }
+            if (!saveData.statistics.malePokemonEncountered) {
+                saveData.statistics.malePokemonEncountered = {};
+            }
+            if (!saveData.statistics.malePokemonHatched) {
+                saveData.statistics.malePokemonHatched = {};
+            }
+            // Shiny male
+            if (!saveData.statistics.shinyMalePokemonCaptured) {
+                saveData.statistics.shinyMalePokemonCaptured = {};
+            }
+            if (!saveData.statistics.shinyMalePokemonDefeated) {
+                saveData.statistics.shinyMalePokemonDefeated = {};
+            }
+            if (!saveData.statistics.shinyMalePokemonEncountered) {
+                saveData.statistics.shinyMalePokemonEncountered = {};
+            }
+            if (!saveData.statistics.shinyMalePokemonHatched) {
+                saveData.statistics.shinyMalePokemonHatched = {};
+            }
+            // Female
+            if (!saveData.statistics.femalePokemonCaptured) {
+                saveData.statistics.femalePokemonCaptured = {};
+            }
+            if (!saveData.statistics.femalePokemonDefeated) {
+                saveData.statistics.femalePokemonDefeated = {};
+            }
+            if (!saveData.statistics.femalePokemonEncountered) {
+                saveData.statistics.femalePokemonEncountered = {};
+            }
+            if (!saveData.statistics.femalePokemonHatched) {
+                saveData.statistics.femalePokemonHatched = {};
+            }
+            // Shiny female
+            if (!saveData.statistics.shinyFemalePokemonCaptured) {
+                saveData.statistics.shinyFemalePokemonCaptured = {};
+            }
+            if (!saveData.statistics.shinyFemalePokemonDefeated) {
+                saveData.statistics.shinyFemalePokemonDefeated = {};
+            }
+            if (!saveData.statistics.shinyFemalePokemonEncountered) {
+                saveData.statistics.shinyFemalePokemonEncountered = {};
+            }
+            if (!saveData.statistics.shinyFemalePokemonHatched) {
+                saveData.statistics.shinyFemalePokemonHatched = {};
+            }
+
+            // Initialize total statistics
+            saveData.statistics.totalMalePokemonCaptured = 0;
+            saveData.statistics.totalMalePokemonDefeated = 0;
+            saveData.statistics.totalMalePokemonEncountered = 0;
+            saveData.statistics.totalMalePokemonHatched = 0;
+
+            saveData.statistics.totalShinyMalePokemonCaptured = 0;
+            saveData.statistics.totalShinyMalePokemonDefeated = 0;
+            saveData.statistics.totalShinyMalePokemonEncountered = 0;
+            saveData.statistics.totalShinyMalePokemonHatched = 0;
+
+            saveData.statistics.totalFemalePokemonCaptured = 0;
+            saveData.statistics.totalFemalePokemonDefeated = 0;
+            saveData.statistics.totalFemalePokemonEncountered = 0;
+            saveData.statistics.totalFemalePokemonHatched = 0;
+
+            saveData.statistics.totalShinyFemalePokemonCaptured = 0;
+            saveData.statistics.totalShinyFemalePokemonDefeated = 0;
+            saveData.statistics.totalShinyFemalePokemonEncountered = 0;
+            saveData.statistics.totalShinyFemalePokemonHatched = 0;
+
+            saveData.statistics.totalGenderlessPokemonCaptured = 0;
+            saveData.statistics.totalGenderlessPokemonDefeated = 0;
+            saveData.statistics.totalGenderlessPokemonEncountered = 0;
+            saveData.statistics.totalGenderlessPokemonHatched = 0;
+
+            saveData.statistics.totalShinyGenderlessPokemonCaptured = 0;
+            saveData.statistics.totalShinyGenderlessPokemonDefeated = 0;
+            saveData.statistics.totalShinyGenderlessPokemonEncountered = 0;
+            saveData.statistics.totalShinyGenderlessPokemonHatched = 0;
+
+            // Assign generic Pokemon statistics to the gendered Pokemon ones
+            saveData.party.caughtPokemon?.forEach(pokemon => {
+                const capturedStatistic = saveData.statistics.pokemonCaptured[pokemon.id] || 0;
+                const defeatedStatistic = saveData.statistics.pokemonDefeated[pokemon.id] || 0;
+                const encounteredStatistic = saveData.statistics.pokemonEncountered[pokemon.id] || 0;
+                const hatchedStatistic = saveData.statistics.pokemonHatched[pokemon.id] || 0;
+                const shinyCapturedStatistic = saveData.statistics.shinyPokemonCaptured[pokemon.id] || 0;
+                const shinyDefeatedStatistic = saveData.statistics.shinyPokemonDefeated[pokemon.id] || 0;
+                const shinyEncounteredStatistic = saveData.statistics.shinyPokemonEncountered[pokemon.id] || 0;
+                const shinyHatchedStatistic = saveData.statistics.shinyPokemonHatched[pokemon.id] || 0;
+
+                if (pokemonMap[pokemon.id].gender.type == GameConstants.Genders.MaleFemale) { // No genderless
+                    if (pokemonMap[pokemon.id].gender.femaleRatio != 1) { // Anything but female-only
+                        saveData.statistics.malePokemonCaptured[pokemon.id] = capturedStatistic;
+                        saveData.statistics.malePokemonDefeated[pokemon.id] = defeatedStatistic;
+                        saveData.statistics.malePokemonEncountered[pokemon.id] = encounteredStatistic;
+                        saveData.statistics.malePokemonHatched[pokemon.id] = hatchedStatistic;
+
+                        saveData.statistics.shinyMalePokemonCaptured[pokemon.id] = shinyCapturedStatistic;
+                        saveData.statistics.shinyMalePokemonDefeated[pokemon.id] = shinyDefeatedStatistic;
+                        saveData.statistics.shinyMalePokemonEncountered[pokemon.id] = shinyEncounteredStatistic;
+                        saveData.statistics.shinyMalePokemonHatched[pokemon.id] = shinyHatchedStatistic;
+
+                        // Assign the generic total ones to the male ones
+                        saveData.statistics.totalMalePokemonCaptured += capturedStatistic;
+                        saveData.statistics.totalMalePokemonDefeated += defeatedStatistic;
+                        saveData.statistics.totalMalePokemonEncountered += encounteredStatistic;
+                        saveData.statistics.totalMalePokemonHatched += hatchedStatistic;
+
+                        saveData.statistics.totalShinyMalePokemonCaptured += shinyCapturedStatistic;
+                        saveData.statistics.totalShinyMalePokemonDefeated += shinyDefeatedStatistic;
+                        saveData.statistics.totalShinyMalePokemonEncountered += shinyEncounteredStatistic;
+                        saveData.statistics.totalShinyMalePokemonHatched += shinyHatchedStatistic;
+                    } else { // Female-only
+                        saveData.statistics.femalePokemonCaptured[pokemon.id] = capturedStatistic;
+                        saveData.statistics.femalePokemonDefeated[pokemon.id] = defeatedStatistic;
+                        saveData.statistics.femalePokemonEncountered[pokemon.id] = encounteredStatistic;
+                        saveData.statistics.femalePokemonHatched[pokemon.id] = hatchedStatistic;
+
+                        saveData.statistics.shinyFemalePokemonCaptured[pokemon.id] = shinyCapturedStatistic;
+                        saveData.statistics.shinyFemalePokemonDefeated[pokemon.id] = shinyDefeatedStatistic;
+                        saveData.statistics.shinyFemalePokemonEncountered[pokemon.id] = shinyEncounteredStatistic;
+                        saveData.statistics.shinyFemalePokemonHatched[pokemon.id] = shinyHatchedStatistic;
+
+                        // Assign the generic total ones to the female ones
+                        saveData.statistics.totalFemalePokemonCaptured += capturedStatistic;
+                        saveData.statistics.totalFemalePokemonDefeated += defeatedStatistic;
+                        saveData.statistics.totalFemalePokemonEncountered += encounteredStatistic;
+                        saveData.statistics.totalFemalePokemonHatched += hatchedStatistic;
+
+                        saveData.statistics.totalShinyFemalePokemonCaptured += shinyCapturedStatistic;
+                        saveData.statistics.totalShinyFemalePokemonDefeated += shinyDefeatedStatistic;
+                        saveData.statistics.totalShinyFemalePokemonEncountered += shinyEncounteredStatistic;
+                        saveData.statistics.totalShinyFemalePokemonHatched += shinyHatchedStatistic;
+                    }
+                } else { // Genderless
+                    // Assign the generic total ones to the genderless ones
+                    saveData.statistics.totalGenderlessPokemonCaptured += capturedStatistic;
+                    saveData.statistics.totalGenderlessPokemonDefeated += defeatedStatistic;
+                    saveData.statistics.totalGenderlessPokemonEncountered += encounteredStatistic;
+                    saveData.statistics.totalGenderlessPokemonHatched += hatchedStatistic;
+
+                    saveData.statistics.totalShinyGenderlessPokemonCaptured += shinyCapturedStatistic;
+                    saveData.statistics.totalShinyGenderlessPokemonDefeated += shinyDefeatedStatistic;
+                    saveData.statistics.totalShinyGenderlessPokemonEncountered += shinyEncounteredStatistic;
+                    saveData.statistics.totalShinyGenderlessPokemonHatched += shinyHatchedStatistic;
+                }
+            });
         },
     };
 
