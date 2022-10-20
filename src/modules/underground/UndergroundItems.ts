@@ -134,4 +134,4 @@ UndergroundItems.addItem(new UndergroundItem('Rose Shard', 413, [[1, 1, 1, 1], [
 UndergroundItems.addItem(new UndergroundItem('Brown Shard', 414, [[1, 1, 0], [1, 1, 0], [1, 1, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.galar)));
 
 // Held Items
-UndergroundItems.addItem(new UndergroundHeldItem('Hard_Stone', 500, [[1, 1], [1, 1]], 1, HeldItemType.Hard_Stone, new MaxRegionRequirement(Region.johto)));
+UndergroundItems.addItem(new UndergroundHeldItem('Hard Stone', 500, [[1, 1], [1, 1]], 1, HeldItemType.Hard_Stone, new MaxRegionRequirement(Region.johto)));
