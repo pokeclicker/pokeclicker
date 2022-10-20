@@ -293,7 +293,7 @@ namespace GameConstants {
         'White_mane_hair',
     }
     declare enum HeldItemType {
-        'None' = -1,
+        'None',
         'Wonder_Chest',
         'Muscle_Band',
         'Leek',
