@@ -268,10 +268,6 @@ class PokemonFactory {
 
         // Apply drop chance by item ID
         switch (item.id) {
-            case 'Adamant_Orb':
-            case 'Lustrous_Orb':
-                chance = GameConstants.ORB_ITEM_CHANCE;
-                break;
             case 'Black_DNA':
             case 'White_DNA':
                 chance = GameConstants.DNA_ITEM_CHANCE;
