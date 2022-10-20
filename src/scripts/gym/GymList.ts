@@ -456,7 +456,7 @@ GymList['Mauville City'] = new Gym(
     BadgeEnums.Dynamo,
     3000,
     'Wahahahah! Fine, I lost! You ended up giving me a thrill! Take this Badge!',
-    [new GymBadgeRequirement(BadgeEnums.Knuckle)],
+    undefined,
     () => {
         App.game.quests.getQuestLine('Land vs. Water').beginQuest();
     }
@@ -486,7 +486,10 @@ GymList['Petalburg City'] = new Gym(
     BadgeEnums.Balance,
     5000,
     '… I… I can\'t… I can\'t believe it. I lost to you? But, rules are rules! Here, take this.',
-    [new GymBadgeRequirement(BadgeEnums.Heat)]
+    [
+        new GymBadgeRequirement(BadgeEnums.Knuckle),
+        new GymBadgeRequirement(BadgeEnums.Heat),
+    ]
 );
 GymList['Fortree City'] = new Gym(
     'Winona',
@@ -545,7 +548,10 @@ GymList['Elite Sidney'] = new Gym(
     BadgeEnums.Elite_Sidney,
     15000,
     'Well, listen to what this loser has to say. You\'ve got what it takes to go far. Now, go on to the next room and enjoy your next battle!',
-    [new GymBadgeRequirement(BadgeEnums.Rain)]
+    [
+        new GymBadgeRequirement(BadgeEnums.Feather),
+        new GymBadgeRequirement(BadgeEnums.Rain),
+    ]
 );
 GymList['Elite Phoebe'] = new Gym(
     'Phoebe',
@@ -1060,12 +1066,12 @@ GymList['Champion Iris'] = new Champion(
     'Iris',
     'Champion Iris',
     [
-        new GymPokemon('Hydreigon', 12458300, 58),
-        new GymPokemon('Salamence', 12462000, 58),
-        new GymPokemon('Aggron', 12464000, 58),
-        new GymPokemon('Archeops', 12460250, 60),
-        new GymPokemon('Lapras', 12470000, 58),
-        new GymPokemon('Haxorus', 14570000, 62),
+        new GymPokemon('Hydreigon', 12458300, 61),
+        new GymPokemon('Druddigon', 12462000, 61),
+        new GymPokemon('Archeops', 12464000, 61),
+        new GymPokemon('Aggron', 12460250, 61),
+        new GymPokemon('Lapras', 12470000, 61),
+        new GymPokemon('Haxorus', 14570000, 63),
     ],
     BadgeEnums.Elite_UnovaChampion,
     64000,
@@ -1619,8 +1625,14 @@ GymList['Stow-on-Side1'] = new Gym(
     ],
     BadgeEnums.Galar_Fighting,
     80000,
-    'Your strength nearly made me want to turn and run in my bare feet',
-    [new TemporaryBattleRequirement('Hop5')]
+    'Your strength nearly made me want to turn and run in my bare feet.',
+    [new TemporaryBattleRequirement('Hop5')],
+    // Starts Galar story quest if both Stow-on-Side gyms are defeated.
+    () => {
+        if (App.game.badgeCase.hasBadge(BadgeEnums.Galar_Ghost)) {
+            App.game.quests.getQuestLine('The Darkest Day').beginQuest();
+        }
+    }
 );
 GymList['Stow-on-Side2'] = new Gym(
     'Allister',
@@ -1634,7 +1646,13 @@ GymList['Stow-on-Side2'] = new Gym(
     BadgeEnums.Galar_Ghost,
     80000,
     'Maybe my mask... kept me from seeing just how strong you really are...',
-    [new TemporaryBattleRequirement('Hop5')]
+    [new TemporaryBattleRequirement('Hop5')],
+    // Starts Galar story quest if both Stow-on-Side gyms are defeated.
+    () => {
+        if (App.game.badgeCase.hasBadge(BadgeEnums.Galar_Fighting)) {
+            App.game.quests.getQuestLine('The Darkest Day').beginQuest();
+        }
+    }
 );
 GymList.Ballonlea = new Gym(
     'Opal',
@@ -1759,7 +1777,6 @@ GymList['Elite Trainer Hop'] = new Gym(
     // [new GymPokemon('Cinderace', 137833678, 60)]
 );
 // Galar Champion
-//TODO: rewards/hp rebalance
 GymList['Champion Leon'] = new Champion(
     'Leon',
     'Champion Leon',
@@ -1771,7 +1788,7 @@ GymList['Champion Leon'] = new Champion(
     BadgeEnums.Elite_GalarChampion,
     250000,
     'My time as Champion is over... But what a champion time it\'s been! Thank you for the greatest battle I\'ve ever had!',
-    [new TemporaryBattleRequirement('The Darkest Day')],
+    [new QuestLineStepCompletedRequirement('The Darkest Day', 19)],
     // Grookey
     [
         new GymPokemon('Seismitoad', 133481036, 64),
@@ -1792,7 +1809,7 @@ GymList['Champion Leon'] = new Champion(
     ]
 );
 
-// Armor + crown gyms
+// Armor + Crown gyms
 GymList['Elite Gym Leader Klara'] = new Gym(
     'Klara',
     'Elite Gym Leader Klara',
@@ -1806,12 +1823,7 @@ GymList['Elite Gym Leader Klara'] = new Gym(
     BadgeEnums.Elite_ArmorPoison,
     150000,
     'Aww, come on! What a drag! But...I guess it was also kinda fun!',
-    [
-        new MultiRequirement([
-            new ObtainedPokemonRequirement(pokemonMap['Urshifu (Single Strike)']),
-            new ObtainedPokemonRequirement(pokemonMap['Urshifu (Rapid Strike)']),
-        ]),
-    ]
+    [new QuestLineCompletedRequirement('The Dojo\'s Armor')]
 );
 GymList['Elite Gym Leader Avery'] = new Gym(
     'Avery',
@@ -1826,12 +1838,7 @@ GymList['Elite Gym Leader Avery'] = new Gym(
     BadgeEnums.Elite_ArmorPsychic,
     150000,
     'More! I require more! Show me your Stored Power!',
-    [
-        new MultiRequirement([
-            new ObtainedPokemonRequirement(pokemonMap['Urshifu (Single Strike)']),
-            new ObtainedPokemonRequirement(pokemonMap['Urshifu (Rapid Strike)']),
-        ]),
-    ]
+    [new QuestLineCompletedRequirement('The Dojo\'s Armor')]
 );
 GymList['Elite Dojo Matron Honey'] = new Gym(
     'Honey',
