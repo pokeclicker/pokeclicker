@@ -61,6 +61,9 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
 										Regions
 									</button>
 									<div class="border-secondary dropdown-menu col-12">
+										<div class="dropdown-item" data-bind="click : function(){ BreedingFilters.region.value(2 ** (player.highestRegion() + 1) - 1); Settings.setSettingByName('breedingRegionFilter', BreedingFilters.region.value()) }">
+											All
+										</div>
 										<!-- ko foreach : Object.keys(GameConstants.Region).filter(function(r){ return r <= player.highestRegion() && r >= 0; }) -->
 										<div class="dropdown-item" data-bind="class : Settings.getSetting('breedingRegionFilter').observableValue() & (2 ** $data) ? 'bg-success' : '',
 											text : GameConstants.camelCaseToString(GameConstants.Region[$data]),
