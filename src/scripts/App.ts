@@ -48,7 +48,8 @@ class App {
                 new Challenges(),
                 new BattleFrontier(),
                 multiplier,
-                new SaveReminder()
+                new SaveReminder(),
+                new BattleCafeSaveObject()
             );
 
             console.log(`[${GameConstants.formatDate(new Date())}] %cGame loaded`, 'color:#2ecc71;font-weight:900;');
