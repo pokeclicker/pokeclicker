@@ -117,8 +117,14 @@ class DungeonRunner {
         DungeonRunner.chestsOpenedPerFloor[DungeonRunner.map.playerPosition().floor]++;
 
         const clears = App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]();
-        const tier = DungeonRunner.dungeon.getRandomLootTier(clears, player.highestRegion());
-        const loot = DungeonRunner.dungeon.getRandomLoot(tier);
+        // Ignores debuff on first attempt to get undebuffable loot.
+        let tier = DungeonRunner.dungeon.getRandomLootTier(clears, 0);
+        let loot = DungeonRunner.dungeon.getRandomLoot(tier);
+        if (!loot.undebuffable) {
+            tier = DungeonRunner.dungeon.getRandomLootTier(clears, player.highestRegion());
+            loot = DungeonRunner.dungeon.getRandomLoot(tier, true);
+        }
+
         let amount = loot.amount || 1;
 
         const tierWeight = {

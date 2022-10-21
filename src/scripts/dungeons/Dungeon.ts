@@ -26,6 +26,7 @@ interface Loot {
     weight?: number,
     requirement?: MultiRequirement | OneFromManyRequirement | Requirement,
     amount?: number,
+    undebuffable?: boolean,
 }
 
 type LootTier = 'common' | 'rare' | 'epic' | 'legendary' | 'mythic';
@@ -219,8 +220,8 @@ class Dungeon {
         return Rand.fromWeightedArray(Object.keys(tierWeights), Object.values(tierWeights)) as LootTier;
     }
 
-    public getRandomLoot(tier: LootTier): Loot {
-        const lootTable = this.lootTable[tier].filter((loot) => !loot.requirement || loot.requirement.isCompleted());
+    public getRandomLoot(tier: LootTier, debuffed = false): Loot {
+        const lootTable = this.lootTable[tier].filter((loot) => (!loot.requirement || loot.requirement.isCompleted()) && (!debuffed || debuffed && !loot.undebuffable));
         return Rand.fromWeightedArray(lootTable, lootTable.map((loot) => loot.weight ?? 1));
     }
 
