@@ -682,15 +682,15 @@
         %>
 
         <%- include('templates/mapOverlay',
-
             { name: "Rainbow Rocket Grunt"
             , x: 26, y: 25
             , width: 4, height: 4
             , databind: "click: () => TemporaryBattleList['Rainbow Rocket Grunt 66'].protectedOnclick()"
             , visible:  "TemporaryBattleList['Rainbow Rocket Grunt 66'] && TemporaryBattleList['Rainbow Rocket Grunt 66'].isVisible()"
             , image: "assets/images/map/RainbowGruntM_Overworld.png"
+            })
         %>
-        
+
         <%- include('templates/mapOverlay',
             { name: "Snorlax"
             , x: 87, y: 32
@@ -698,8 +698,9 @@
             , databind: "click: () => TemporaryBattleList['Snorlax route 12'].protectedOnclick(), attr: { class: TemporaryBattleList['Snorlax route 12'].isUnlocked() ? '' : 'locked' }"
             , visible:  "TemporaryBattleList['Snorlax route 12'] && TemporaryBattleList['Snorlax route 12'].isVisible()"
             , image: "assets/images/map/snorlaxoverworld.png"
+            })
         %>
-        
+
         <%- include('templates/mapOverlay',
             { name: "Suicune"
             , x: 66, y: 34
@@ -829,7 +830,7 @@
             , image: "assets/images/map/snorlaxoverworld.png"
             })
         %>
-        
+
         <%- include('templates/mapOverlay',
         { name: "Snorlax"
             , x: 87, y: 32
