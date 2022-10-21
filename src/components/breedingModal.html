@@ -55,12 +55,41 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                 </select>
                             </div>
                             <div class="form-group col-md-3 col-6">
-                                <label>Region</label>
-                                <select name="breedingRegionFilter" autocomplete="off" class="custom-select" onchange="BreedingFilters.region.value(+this.value), Settings.setSettingByName(this.name, this.value)">
-                                    <!-- ko foreach: Settings.getSetting('breedingRegionFilter').options.filter(r => r.value <= player.highestRegion()) -->
-                                    <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('breedingRegionFilter').value === $data.value }, text: $data.text">Region</option>
-                                    <!-- /ko -->
-                                </select>
+                                <label>Regions</label><br/>
+                                <div class="dropdown show">
+                                    <button type="button" class="text-left custom-select col-12 btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bind="text :
+                                        BreedingFilters.region.value() == 2 ** (player.highestRegion() + 1) - 1 ?
+                                            'All' :
+                                            (BreedingFilters.region.value() ?
+                                                GameConstants.camelCaseToString(GameConstants.Region[Math.floor(Math.log2(BreedingFilters.region.value()))]) + (BreedingFilters.region.value()
+                                                    .toString(2).split('')
+                                                    .reduce(function(s,n){ return s + (n == '1' ? 1 : 0)}, 0) > 1 ? ' & more' : '') :
+                                                'None')
+                                        ">
+                                        Regions
+                                    </button>
+                                    <div class="border-secondary dropdown-menu col-12">
+                                        <div class="dropdown-item" data-bind="click : function(){ BreedingFilters.region.value(2 ** (player.highestRegion() + 1) - 1); Settings.setSettingByName('breedingRegionFilter', BreedingFilters.region.value()) }">
+                                            All
+                                        </div>
+                                        <div class="dropdown-divider"></div>
+                                        <!-- ko foreach : Object.keys(GameConstants.Region).filter(function(r){ return r <= player.highestRegion() && r >= 0; }) -->
+                                        <div class="dropdown-item" data-bind="class : Settings.getSetting('breedingRegionFilter').observableValue() & (2 ** $data) ? 'bg-success' : '',
+                                            text : GameConstants.camelCaseToString(GameConstants.Region[$data]),
+                                            click : function(){ BreedingFilters.region.value(2 ** $data); Settings.setSettingByName('breedingRegionFilter', 2 ** $data) },
+                                            attr : { 'oncontextmenu' : 'var powValue = ' + 2 ** $data + ';' +
+                                                'if(!(BreedingFilters.region.value() & powValue))' +
+                                                    'GameHelper.incrementObservable(BreedingFilters.region.value, powValue);' +
+                                                'else ' +
+                                                    'GameHelper.incrementObservable(BreedingFilters.region.value, -powValue);' +
+                                                'Settings.setSettingByName(\'breedingRegionFilter\', BreedingFilters.region.value());' +
+                                                'return false;'
+                                            }">
+                                        </div>
+                                        <!-- /ko-->
+                                    </div>
+                                </div>
+
                             </div>
                             <div class="form-group col-md-3 col-6">
                                 <label>Shiny Status</label>
@@ -351,7 +380,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                     html: true,
                 }">
             </knockout>
-		   <button id="breeding-fireall" type="button" class="btn btn-danger" data-bind="attr : {disabled : !App.game.breeding.hatcheryHelpers.hired().length}, click: function(){App.game.breeding.hatcheryHelpers.hired().forEach(function(h){h.fire();})}" style="display : none;">Fire All</button>
+           <button id="breeding-fireall" type="button" class="btn btn-danger" data-bind="attr : {disabled : !App.game.breeding.hatcheryHelpers.hired().length}, click: function(){App.game.breeding.hatcheryHelpers.hired().forEach(function(h){h.fire();})}" style="display : none;">Fire All</button>
            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
        </div>
    </div>

@@ -1134,7 +1134,7 @@ class Update implements Saveable {
             }
         },
 
-        '0.9.15': ({ playerData, saveData }) => {
+        '0.9.15': ({ playerData, saveData, settingsData }) => {
             // Aegislash and Pumpkaboo line renames
             const renamePokemon = Update.changeHatcheryKey;
             renamePokemon(saveData, 'Aegislash', 'Aegislash (Shield)');
@@ -1202,7 +1202,7 @@ class Update implements Saveable {
             });
         },
 
-        '0.9.17': ({ playerData, saveData }) => {
+        '0.9.17': ({ playerData, saveData, settingsData }) => {
             // Add Sudowoodo Temporary Battle
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 7);
 
@@ -1216,7 +1216,7 @@ class Update implements Saveable {
             }
         },
 
-        '0.9.19': ({ playerData, saveData }) => {
+        '0.9.19': ({ playerData, saveData, settingsData }) => {
             // Add Kimono Girls Temporary Battles
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 25);
 
@@ -1373,6 +1373,12 @@ class Update implements Saveable {
                     saveData.statistics.totalShinyGenderlessPokemonHatched += shinyHatchedStatistic;
                 }
             });
+            // Update Region filter from integer to bitfield.
+            if (settingsData.breedingRegionFilter == -2) {
+                settingsData.breedingRegionFilter = 2 ** (playerData.highestRegion + 1) - 1;
+            } else {
+                settingsData.breedingRegionFilter = 2 ** settingsData.breedingRegionFilter;
+            }
         },
     };
 
