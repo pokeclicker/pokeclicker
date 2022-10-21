@@ -7,6 +7,7 @@ import DataStore from './DataStore';
 import * as GameConstants from './GameConstants';
 import GameHelper from './GameHelper';
 import LogEvent from './LogEvent';
+import Caching from './caching/Caching';
 // enums
 import AuraType from './enums/AuraType';
 import BadgeEnums from './enums/Badges';
@@ -135,6 +136,7 @@ Object.assign(<any>window, {
     GameConstants,
     GameHelper,
     LogEvent,
+    Caching,
     DataStore,
     BadgeCase: DataStore.badge,
     Statistics: DataStore.statistics,

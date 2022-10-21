@@ -1,6 +1,6 @@
 import { CacheContainer } from 'node-ts-cache';
 import { MemoryStorage } from 'node-ts-cache-storage-memory';
-import Settings from '../settings';
+import Settings from '../settings/Settings';
 
 export default class Caching {
     private static caches: Map<string, CacheContainer> = new Map();
@@ -15,8 +15,9 @@ export default class Caching {
     public static get(cacheName: string, key: string): any {
         if (Settings.getSetting('cacheTtlInSeconds').value) {
             // TODO remove this log
-            console.log('Cache get ' + cacheName + ' - ' + key);
-            return this.getCache(cacheName).getItem(key);
+            let val = this.getCache(cacheName).getItem(key);
+            console.log('Cache get ' + cacheName + ' - ' + key + ' - ' + val);
+            return val;
         }
         return null;
     }

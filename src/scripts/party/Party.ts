@@ -1,7 +1,7 @@
 /// <reference path="../../declarations/GameHelper.d.ts" />
 /// <reference path="../../declarations/DataStore/common/Feature.d.ts" />
 /// <reference path="../../declarations/enums/CaughtStatus.d.ts"/>
-import Caching from '../../modules/caching/Caching';
+/// <reference path="../../declarations/caching/Caching.d.ts"/>
 
 class Party implements Feature {
     name = 'Pokemon Party';
