@@ -57,7 +57,15 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             <div class="form-group col-md-3 col-6">
                                 <label>Regions</label><br/>
                                 <div class="dropdown show">
-                                    <button type="button" class="text-left custom-select col-12 btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bind="text : BreedingFilters.region.value() ? GameConstants.camelCaseToString(GameConstants.Region[Math.floor(Math.log2(BreedingFilters.region.value()))]) + (BreedingFilters.region.value().toString(2).split('').reduce(function(s,n){ return s + (n == '1' ? 1 : 0)}, 0) > 1 ? ' & more' : '') : 'None'">
+                                    <button type="button" class="text-left custom-select col-12 btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bind="text :
+                                        BreedingFilters.region.value() == 2 ** (player.highestRegion() + 1) - 1 ?
+                                            'All' :
+                                            (BreedingFilters.region.value() ?
+                                                GameConstants.camelCaseToString(GameConstants.Region[Math.floor(Math.log2(BreedingFilters.region.value()))]) + (BreedingFilters.region.value()
+                                                    .toString(2).split('')
+                                                    .reduce(function(s,n){ return s + (n == '1' ? 1 : 0)}, 0) > 1 ? ' & more' : '') :
+                                                'None')
+                                        ">
                                         Regions
                                     </button>
                                     <div class="border-secondary dropdown-menu col-12">
