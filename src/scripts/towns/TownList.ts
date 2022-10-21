@@ -1896,7 +1896,7 @@ const FortreeRanger = new NPC('Pokémon Ranger Catherine', [
     'Have you seen this? It\'s horrific. Absolutely despicable.',
     'Disposable Dowsing Machines! Who even came up with this?! People leave these everywhere. It\'s absolutely terrible for the environment. Some poor innocent Pokémon could choke on it!',
     'Please recycle your used Dowsing Machines.',
-]);
+], {image: 'assets/images/npcs/Pokemon Ranger (female).png'});
 
 const MossdeepAstronomer = new NPC('Astronomer', [
     'Hey did you know about the Millennium Comet? We can see it in the sky right now, and it only comes around once every thousand years!',
@@ -1919,6 +1919,89 @@ const ProfBirch = new ProfNPC('Prof. Birch',
     'That\'s another regional Pokédex completed! Fantastic.',
     'I really appreciate being able to see your outstanding progress, thank you! Sinnoh is next up.',
     'assets/images/npcs/Professor Birch.png');
+
+const SCEntrance = new NPC('Strange Markings', [
+    '<i>These strange markings seem to spell something out. The nearby Braille Enthusiast may know more.</i>',
+], {image: 'assets/images/npcs/other/Regi Entrance.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Three Golems', 0), new QuestLineStepCompletedRequirement('The Three Golems', 1, GameConstants.AchievementOption.less)]),
+});
+
+const MazeHintLeft = new NPC('Room Engraving', [
+    '<i>These strange markings seem to spell something out. The nearby Braille Enthusiast may know more.</i>',
+], {image: 'assets/images/npcs/other/LeftBraille.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Three Golems', 1), new QuestLineStepCompletedRequirement('The Three Golems', 3, GameConstants.AchievementOption.less)]),
+});
+
+const SCMazeLeft = new NPC('Go Left', [
+    '<i>You turn left and proceed to the next room.</i>',
+],  {requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Three Golems', 1), new QuestLineStepCompletedRequirement('The Three Golems', 3, GameConstants.AchievementOption.less)]),
+});
+
+const SCMazeLeftWrong = new NPC('Go Left', [
+    '<i>You turn left, but it is a dead end.</i>',
+],  {requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Three Golems', 3), new QuestLineStepCompletedRequirement('The Three Golems', 6, GameConstants.AchievementOption.less)]),
+});
+
+const MazeHintRight = new NPC('Room Engraving', [
+    '<i>These strange markings seem to spell something out. The nearby Braille Enthusiast may know more.</i>',
+], {image: 'assets/images/npcs/other/RightBraille.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Three Golems', 5), new QuestLineStepCompletedRequirement('The Three Golems', 6, GameConstants.AchievementOption.less)]),
+});
+
+const SCMazeRight = new NPC('Go Right', [
+    '<i>You turn right and proceed to the next room.</i>',
+],  {requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Three Golems', 5), new QuestLineStepCompletedRequirement('The Three Golems', 6, GameConstants.AchievementOption.less)]),
+});
+
+const SCMazeRightWrong = new NPC('Go Right', [
+    '<i>You turn right, but it is a dead end.</i>',
+],  {requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Three Golems', 1), new QuestLineStepCompletedRequirement('The Three Golems', 5, GameConstants.AchievementOption.less)]),
+});
+
+const MazeHintStraight = new NPC('Room Engraving', [
+    '<i>These strange markings seem to spell something out. The nearby Braille Enthusiast may know more.</i>',
+], {image: 'assets/images/npcs/other/StraightBraille.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Three Golems', 3), new QuestLineStepCompletedRequirement('The Three Golems', 5, GameConstants.AchievementOption.less)]),
+});
+
+const SCMazeStraight = new NPC('Go Straight', [
+    '<i>You go straight and proceed to the next room.</i>',
+],  {requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Three Golems', 3), new QuestLineStepCompletedRequirement('The Three Golems', 5, GameConstants.AchievementOption.less)]),
+});
+
+const SCMazeStraightWrong = new NPC('Go Straight', [
+    '<i>You go straight, but it is a dead end.</i>',
+],  {requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Three Golems', 1), new QuestLineStepCompletedRequirement('The Three Golems', 3, GameConstants.AchievementOption.less)]),
+});
+
+const SCHints = new NPC('Hidden Message', [
+    '<i>These strange markings seem to spell something out. The nearby Braille Enthusiast may know more.</i>',
+], {image: 'assets/images/npcs/other/Regi Hints.png',
+    requirement: new QuestLineStepCompletedRequirement('The Three Golems', 6),
+});
+
+const BrailleEnthusiast1 = new NPC('Braille Enthusiast', [
+    'The markings at the entrance to the Sealed Chamber seem to say that some sort of secret is inside. Try to find more braille messages, and I can decode them for you!',
+], {image: 'assets/images/npcs/Ruin Maniac.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Three Golems', 0), new QuestLineStepCompletedRequirement('The Three Golems', 1, GameConstants.AchievementOption.less)]),
+});
+
+const BrailleEnthusiast2 = new NPC('Braille Enthusiast', [
+    'There are a few carvings inside this maze. The carving with five dots on the top row says "LEFT".',
+    'The carving with nine dots on the top row says "STRAIGHT".',
+    'The carving with six dots on the top row says "RIGHT".',
+    'If you get totally lost, just wander around. You will find the right path eventually.',
+], {image: 'assets/images/npcs/Ruin Maniac.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Three Golems', 1), new QuestLineStepCompletedRequirement('The Three Golems', 6, GameConstants.AchievementOption.less)]),
+});
+
+const BrailleEnthusiast3 = new NPC('Braille Enthusiast', [
+    'The first carving says DESERT. There is a desert near Route 111, right?',
+    'The second carving says ISLAND. There are a lot of islands on Route 105.',
+    'The third carving says ANCIENT. I remember seeing some ancient ruins on Route 120.',
+], {image: 'assets/images/npcs/Ruin Maniac.png',
+    requirement: new QuestLineStepCompletedRequirement('The Three Golems', 6),
+});
 
 //Hoenn Towns
 TownList['Littleroot Town'] = new Town(
@@ -2188,8 +2271,11 @@ TownList['Sealed Chamber'] = new DungeonTown(
     GameConstants.Region.hoenn,
     [
         new RouteKillRequirement(10, GameConstants.Region.hoenn, 134),
-        new GymBadgeRequirement(BadgeEnums.Mind),
-    ]
+        new GymBadgeRequirement(BadgeEnums.Mind)],
+    [],
+    {
+        npcs: [SCEntrance, MazeHintLeft, MazeHintRight, MazeHintStraight, SCMazeLeft, SCMazeLeftWrong, SCMazeRight, SCMazeRightWrong, SCMazeStraight, SCMazeStraightWrong, SCHints, BrailleEnthusiast1, BrailleEnthusiast2, BrailleEnthusiast3],
+    }
 );
 
 //Sinnoh Shops
@@ -3921,7 +4007,7 @@ const IkiOutskirtsMom = new NPC('Scratch Cat Girl', [
     'Out of all the doglike Pokémon, I think Rockruff is definitely the most adorable. And it even has three evolutions! One during the day, one at night and one in between, from 5 to 6 o\'clock.',
     'What\'s that? AM or PM?',
     'Yes.',
-]);
+], {image: 'assets/images/npcs/Scratch Cat Girl.png'});
 const KukuisLabProfessor = new NPC('Professor Kukui', [
     'Are you looking for some rare Pokémon? Maybe I can help with that. Ask away!',
     'Meltan? What\'s a Meltan? Nope, don\'t know about that one.',
@@ -3939,7 +4025,7 @@ const HeaheaCafeOwner = new NPC('Café Owner', [
     'Captain Lana\'s trial in Brooklet Hill, Captain Kiawe\'s trial in Wela Volcano Park and Captain Mallow\'s trial in Lush Jungle.',
     'For what it\'s worth, I say don\'t go to any of those places. Too wet, too hot and too... jungly. Why not stay here? Have a coffee! Enjoy the city!',
     'Or go to Konikoni City down south. You might even meet our Kahuna there!',
-]);
+], {image: 'assets/images/npcs/Owner.png'});
 const PaniolaTownActor = new NPC('Actor Meredith', [
     'I love Oricorio. I can tell you all about it!',
     'Each of the four islands in Alola has its own meadow, and each meadow has its own form of Oricorio. Each island, except for Akala Island. So you\'d think there\'s only three forms of Oricorio, right?',
@@ -4081,11 +4167,11 @@ const RoadsideMotelAnabel5 = new NPC('Anabel', [
 });
 const BattleTreeRed = new NPC('Red', [
     '...',
-]);
+], {image: 'assets/images/npcs/Red-masters.png'});
 const BattleTreeBlue = new NPC('Blue', [
     'Hello there champ! Fancy seeing you here.',
     'We just planted this sapling here. Maybe it will grow into something great some day.',
-]);
+], {image: 'assets/images/npcs/Blue-masters.png'});
 
 //Alola Towns
 
@@ -4473,7 +4559,7 @@ const StowonSideShop = new Shop([
 ]);
 const GlimwoodTangleShop = new Shop([
     ItemList['Zarude (Dada)'],
-], undefined, [new QuestLineCompletedRequirement('Secrets of the Jungle')]);
+], 'Zarude Village', [new QuestLineCompletedRequirement('Secrets of the Jungle')]);
 const BallonleaShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
@@ -5043,20 +5129,29 @@ const BirdPeony1 = new NPC ('Peony', [
 const BirdPeony2 = new NPC ('Peony', [
     'You\'re saying you saw some Pokémon that looked like.... Hang on, Chief! There\'s breaking news on the telly! They\'re sayin\' dodgy bird Pokémon are poppin\' up left and right!',
     'There\'s this fancy graceful one\'s apparently flyin\' about the Crown Tundra!',
-    'And there\'s this pointy feathered one runnin\' about in Southern Galar!',
+    'And there\'s this pointy feathered one runnin\' about in the Wild Area of Southern Galar!',
     'Plus a fiery-lookin\' one out on the Isle of Armor!',
-    'You\'re sayin\' you saw them and that\'s what you were tellin\' me about? Ah, sorry \'bout that. Anyway, you should go find \'em!',
+    'You\'re sayin\' you saw them and that\'s what you were tellin\' me about? Ah, sorry \'bout that. Anyway, you should go find \'em.',
+    'They look real strong, so you probably can\'t catch \'em right off the bat. I\'d try weakening them first.',
 ], {
     image: 'assets/images/temporaryBattle/Peony.png',
     requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 2), new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 4, GameConstants.AchievementOption.less )]),
 });
 const BirdPeony3 = new NPC ('Peony', [
+    'Hang on--you really caught up to all three of them dodgy birds? Multiple times each? That\'s pretty impressive!',
+    'I think they should all be weakened enough that you can catch \'em now!',
+    'I\'d imagine they\'d be in the same areas you chased \'em about in.',
+], {
+    image: 'assets/images/temporaryBattle/Peony.png',
+    requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 4), new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 6, GameConstants.AchievementOption.less )]),
+});
+const BirdPeony4 = new NPC ('Peony', [
     'Wait--you really caught Articuno, Moltres, and Zapdos from the legends?! Thats\'s ultra-mega-brilliant! Report away!',
     'So that\'s them is it? I can definitely see the resemblance, but they don\'t seem quite the same...',
     'Maybe they\'re regional variants or somethin\'? At an rate, that\'s good enough for me. Let\'s call this expedition a success!',
 ], {
     image: 'assets/images/temporaryBattle/Peony.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 4), new QuestLineCompletedRequirement('The Birds of the Dyna Tree', GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 6), new QuestLineCompletedRequirement('The Birds of the Dyna Tree', GameConstants.AchievementOption.less)]),
 });
 const GolemPeony1 = new NPC ('Peony', [
     'Hey, Chief! I was talking to the locals and they mentioned some weird purple and yellow ruins at Three-Point Pass. You should go check \'em out!',
@@ -5185,7 +5280,7 @@ TownList.Hulbury = new Town(
 TownList['Stow-on-Side'] = new Town(
     'Stow-on-Side',
     GameConstants.Region.galar,
-    [TemporaryBattleList.Bede3, TemporaryBattleList['Rampaging Conkeldurr'], TemporaryBattleList['Rampaging Dusknoir'], GymList['Stow-on-Side1'], GymList['Stow-on-Side2'], StowonSideShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Stow-on-Side']), new ShardTraderShop(GameConstants.ShardTraderLocations['Route 6'], 'Fossil Master')],
+    [TemporaryBattleList['Rampaging Conkeldurr'], TemporaryBattleList['Rampaging Dusknoir'], GymList['Stow-on-Side1'], GymList['Stow-on-Side2'], StowonSideShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Stow-on-Side']), new ShardTraderShop(GameConstants.ShardTraderLocations['Route 6'], 'Fossil Master')],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 23)],
         npcs: [AncientMural1, AncientMural2, StowonSideSonia, Archaeologist],
@@ -5288,7 +5383,7 @@ TownList.Freezington = new Town(
     [new BulletinBoard(GameConstants.BulletinBoards.Crown), GymList['Elite Trainer Peony'], TemporaryBattleList.Calyrex, TemporaryBattleList.Glastrier, TemporaryBattleList.Spectrier, FreezingtonShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 46)],
-        npcs: [CrownPeony1, Calyrex1, Calyrex2, Calyrex3, CrownPeony2, BirdPeony1, BirdPeony2, BirdPeony3, GolemPeony1, GolemPeony2, GolemPeony3, GolemPeony4, GolemPeony5, GolemPeony6, PeonyComplete, CrownTundraRoamerNPC],
+        npcs: [CrownPeony1, Calyrex1, Calyrex2, Calyrex3, CrownPeony2, BirdPeony1, BirdPeony2, BirdPeony3, BirdPeony4, GolemPeony1, GolemPeony2, GolemPeony3, GolemPeony4, GolemPeony5, GolemPeony6, PeonyComplete, CrownTundraRoamerNPC],
     }
 );
 
@@ -5346,14 +5441,7 @@ TownList['Dusty Bowl'] = new DungeonTown(
 TownList['Courageous Cavern'] = new DungeonTown(
     'Courageous Cavern',
     GameConstants.Region.galar,
-    [
-        new OneFromManyRequirement([
-            new RouteKillRequirement(10, GameConstants.Region.galar, 33),
-            new RouteKillRequirement(10, GameConstants.Region.galar, 34),
-            new RouteKillRequirement(10, GameConstants.Region.galar, 36),
-            new RouteKillRequirement(10, GameConstants.Region.galar, 37),
-        ]),
-    ]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 33)]
 );
 TownList['Brawlers Cave'] = new DungeonTown(
     'Brawlers Cave',
@@ -5436,8 +5524,7 @@ TownList['Lakeside Cave'] = new DungeonTown(
 TownList['Dyna Tree Hill'] = new DungeonTown(
     'Dyna Tree Hill',
     GameConstants.Region.galar,
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 53)],
-    [TemporaryBattleList['Dyna Tree Birds']]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 53)]
 );
 TownList['Tunnel to the Top'] = new DungeonTown(
     'Tunnel to the Top',

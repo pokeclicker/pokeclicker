@@ -72,13 +72,13 @@ class PokemonHelper {
         return PokemonType[id];
     }
 
-    public static getImage(pokemonId: number, shiny = undefined, gender = undefined): string {
+    public static getImage(pokemonId: number, shiny: boolean = undefined, gender: boolean = undefined): string {
         let src = 'assets/images/';
         if (shiny === undefined) {
             shiny = App.game.party.alreadyCaughtPokemon(pokemonId, true);
         }
         if (gender === undefined) {
-            gender = App.game.party.getPokemon(pokemonId).defaultFemaleSprite();
+            gender = App.game.party.getPokemon(pokemonId)?.defaultFemaleSprite() ?? false;
         }
 
         if (shiny) {

@@ -50,14 +50,15 @@ class BattleCafeController {
 
         BattleCafeController.clockwise(clockwise);
         BattleCafeController.isSpinning(true);
-        BattleCafeController.spinsLeft(BattleCafeController.spinsLeft() - 1);
         const spinTime = +$('#battleCafeDuration').val();
         const sweet = BattleCafeController.selectedSweet();
-        BattleCafeController.getPrice(sweet).forEach(b => GameHelper.incrementObservable(App.game.farming.berryList[b.berry], b.amount * -1));
+
 
         setTimeout(() => {
             BattleCafeController.isSpinning(false);
             BattleCafeController.unlockAlcremie(clockwise, spinTime, sweet);
+            BattleCafeController.spinsLeft(BattleCafeController.spinsLeft() - 1);
+            BattleCafeController.getPrice(sweet).forEach(b => GameHelper.incrementObservable(App.game.farming.berryList[b.berry], b.amount * -1));
         },
         spinTime * 1000);
     }
@@ -65,7 +66,11 @@ class BattleCafeController {
     private static unlockAlcremie(clockwise: boolean, spinTime: number, sweet: GameConstants.AlcremieSweet) {
         let spin: GameConstants.AlcremieSpins;
         const curHour = (new Date()).getHours();
-        if (curHour == 18 && !clockwise && spinTime > 10) {
+        if (spinTime == 3600) {
+            (new PokemonItem('Milcery (Cheesy)', 0)).gain(1);
+            return;
+        }
+        if (curHour == 19 && !clockwise && spinTime > 10) {
             spin = GameConstants.AlcremieSpins.at7Above10;
         } else if (curHour >= 5 && curHour < 19) { // Is day
             if (clockwise && spinTime < 5) {
@@ -113,59 +118,100 @@ class BattleCafeController {
             });
             return false;
         }
-        return BattleCafeController.getPrice(BattleCafeController.selectedSweet()).every(b => {
-            if (App.game.farming.berryList[b.berry]() < b.amount) {
-                Notifier.notify({
-                    message: 'Not enough berries for this sweet.',
-                    type: NotificationConstants.NotificationOption.danger,
-                });
-                return false;
-            }
-            return true;
+        if (+$('#battleCafeDuration').val() > 20 && +$('#battleCafeDuration').val() != 3600) {
+            Notifier.notify({
+                message: 'Can\'t spin for more than 20 seconds',
+                type: NotificationConstants.NotificationOption.danger,
+            });
+            return false;
+        }
+        if (+$('#battleCafeDuration').val() < 1) {
+            Notifier.notify({
+                message: 'It only counts as spinning, if you spin for some time...',
+                type: NotificationConstants.NotificationOption.danger,
+            });
+            return false;
+        }
+        if (!BattleCafeController.canBuySweet(BattleCafeController.selectedSweet())()) {
+            Notifier.notify({
+                message: 'Not enough berries for this sweet.',
+                type: NotificationConstants.NotificationOption.danger,
+            });
+            return false;
+        }
+        return true;
+    }
+
+    public static canBuySweet(sweet: GameConstants.AlcremieSweet) : KnockoutComputed<boolean> {
+        return ko.pureComputed(() => {
+            return BattleCafeController.getPrice(sweet).every(b => {
+                if (App.game.farming.berryList[b.berry]() < b.amount) {
+                    return false;
+                }
+                return true;
+            });
+        });
+    }
+
+    public static getCaughtStatus(sweet: GameConstants.AlcremieSweet) : KnockoutComputed<CaughtStatus> {
+        return ko.pureComputed(() => {
+            return Math.min(...Object.values(BattleCafeController.evolutions[sweet]).map((pokemon: PokemonItem) => pokemon.getCaughtStatus()));
         });
     }
 
 
     private static getPrice(sweet: GameConstants.AlcremieSweet) : {berry: BerryType, amount: number}[] {
         switch (sweet) {
+            // should be easy to do, without touching the farm
             case GameConstants.AlcremieSweet['Strawberry Sweet']:
                 return [
                     {berry: BerryType.Cheri, amount: 500},
-                    {berry: BerryType.Leppa, amount: 400},
-                    {berry: BerryType.Razz, amount: 30},
+                    {berry: BerryType.Leppa, amount: 500},
+                    {berry: BerryType.Razz, amount: 50},
                 ];
-            case GameConstants.AlcremieSweet['Love Sweet']:
-                return [
-                    {berry: BerryType.Roseli, amount: 20},
-                    {berry: BerryType.Liechi, amount: 10},
-                ];
-            case GameConstants.AlcremieSweet['Berry Sweet']:
-                return [
-                    {berry: BerryType.Yache, amount: 25},
-                    {berry: BerryType.Haban, amount: 25},
-                    {berry: BerryType.Wiki, amount: 150},
-                ];
+            // max gen 2
             case GameConstants.AlcremieSweet['Clover Sweet']:
                 return [
-                    {berry: BerryType.Wepear, amount: 30},
-                    {berry: BerryType.Aguav, amount: 30},
-                    {berry: BerryType.Lum, amount: 5},
+                    {berry: BerryType.Wepear, amount: 1000},
+                    {berry: BerryType.Aguav, amount: 2000},
+                    {berry: BerryType.Lum, amount: 10},
                 ];
-            case GameConstants.AlcremieSweet['Flower Sweet']:
-                return [
-                    {berry: BerryType.Pomeg, amount: 30},
-                    {berry: BerryType.Nomel, amount: 30},
-                ];
+            // max gen 3
             case GameConstants.AlcremieSweet['Star Sweet']:
                 return [
-                    {berry: BerryType.Starf, amount: 3},
-                    {berry: BerryType.Lansat, amount: 3},
+                    {berry: BerryType.Pinap, amount: 2000},
+                    {berry: BerryType.Grepa, amount: 100},
+                    {berry: BerryType.Nomel, amount: 50},
                 ];
+            // max gen 4
+            case GameConstants.AlcremieSweet['Berry Sweet']:
+                return [
+                    {berry: BerryType.Yache, amount: 75},
+                    {berry: BerryType.Coba, amount: 150},
+                    {berry: BerryType.Passho, amount: 1000},
+                ];
+            // max gen 4
             case GameConstants.AlcremieSweet['Ribbon Sweet']:
                 return [
-                    {berry: BerryType.Chople, amount: 20},
-                    {berry: BerryType.Haban, amount: 20},
+                    {berry: BerryType.Bluk, amount: 3000},
+                    {berry: BerryType.Pamtre, amount: 50},
+                    {berry: BerryType.Payapa, amount: 100},
                 ];
+            // max gen 5
+            case GameConstants.AlcremieSweet['Flower Sweet']:
+                return [
+                    {berry: BerryType.Figy, amount: 15000},
+                    {berry: BerryType.Iapapa, amount: 20000},
+                    {berry: BerryType.Liechi, amount: 3},
+                ];
+            // max gen 5
+            case GameConstants.AlcremieSweet['Love Sweet']:
+                return [
+                    {berry: BerryType.Roseli, amount: 700},
+                    {berry: BerryType.Haban, amount: 200},
+                    {berry: BerryType.Lansat, amount: 5},
+                ];
+
         }
     }
 

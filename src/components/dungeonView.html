@@ -1,11 +1,15 @@
 <div class="row justify-content-center no-gutters" data-bind="if: App.game.gameState === GameConstants.GameState.dungeon">
-    <div class="col no-gutters clickable" style="height: 220px; display: block;"
+    <div class="col no-gutters clickable" style="height: 280px; display: block;"
         data-bind="click: function() { DungeonRunner.handleClick() }">
         <h2 class="pageItemTitle" style="display: block;">
             <knockout data-bind="if: DungeonBattle.enemyPokemon() && DungeonBattle.enemyPokemon().health()">
                 <knockout data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': DungeonBattle.enemyPokemon() } }">Pokémon name</knockout>
                 <!-- ko if: !DungeonBattle.trainer() -->
                 <knockout data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(DungeonBattle.enemyPokemon().id)}}"></knockout>
+                <knockout data-bind="if: RouteHelper.minPokerusCheck(RouteHelper.getAvailablePokemonList(player.route(), player.region, true))">
+                    <img data-bind="attr:{ src: 'assets/images/breeding/pokerus/' + GameConstants.Pokerus[RouteHelper.minPokerus(RouteHelper.getAvailablePokemonList(player.route(), player.region, true))] + '.png'}"
+                  src=""/>
+                </knockout>
                 <!-- /ko -->
             </knockout>
             <knockout data-bind="if: !DungeonBattle.enemyPokemon() || !DungeonBattle.enemyPokemon().health()">
@@ -13,28 +17,8 @@
             </knockout>
 
             <knockout class="left">
-                <!-- ko if: !DungeonBattle.trainer() -->
-                <knockout data-bind="text: DungeonRunner.dungeon.name">Dungeon name</knockout>
-                <!-- /ko -->
                 <!-- ko if: DungeonBattle.trainer() -->
                 <knockout data-bind="text: DungeonBattle.trainer().name">Trainer name</knockout>
-                <!-- /ko -->
-
-                <!-- ko if: !DungeonBattle.trainer() -->
-
-                <!--If all Pokémon in the dungeon are caught-->
-                <knockout data-bind="if: (!DungeonRunner.dungeonCompleted(DungeonRunner.dungeon, true) && DungeonRunner.dungeonCompleted(DungeonRunner.dungeon, false))">
-                    <img title="You have captured all Pokémon in this dungeon!" class="pokeball-smallest"
-                         src="assets/images/pokeball/Pokeball.svg"/>
-                </knockout>
-
-                <!--If all Pokémon in the dungeon are caught shiny-->
-                <knockout data-bind="if: DungeonRunner.dungeonCompleted(DungeonRunner.dungeon, true)">
-                    <img title="You have captured all Pokémon shiny in this dungeon!"
-                         class="pokeball-smallest"
-                         src="assets/images/pokeball/Pokeball-shiny.svg"/>
-                </knockout>
-
                 <!-- /ko -->
             </knockout>
 
@@ -116,5 +100,47 @@
             <button class="btn btn-warning dungeon-button">Leave Dungeon</button>
         </div>
         <!-- /ko -->
+        <h2 class="pageItemFooter" style="display: block; font-size: 1rem;">
+          <table width="100%">
+              <tr>
+                <td width="50%">
+                  <knockout data-bind="text: DungeonRunner.dungeon.name">Dungeon name</knockout>
+                  <!--If all Pokémon in the dungeon are caught-->
+                  <knockout data-bind="if: (!DungeonRunner.dungeonCompleted(DungeonRunner.dungeon, true) && DungeonRunner.dungeonCompleted(DungeonRunner.dungeon, false))">
+                      <img title="You have captured all Pokémon in this dungeon!" class="pokeball-smallest"
+                           src="assets/images/pokeball/Pokeball.svg"/>
+                  </knockout>
+
+                  <!--If all Pokémon in the dungeon are caught shiny-->
+                  <knockout data-bind="if: DungeonRunner.dungeonCompleted(DungeonRunner.dungeon, true)">
+                      <img title="You have captured all Pokémon shiny in this dungeon!"
+                           class="pokeball-smallest"
+                           src="assets/images/pokeball/Pokeball-shiny.svg"/>
+                  </knockout>
+
+                  <!--Pokérus image-->
+                  <knockout data-bind="if: RouteHelper.minPokerusCheck(DungeonRunner.dungeon.allAvailablePokemon())">
+                      <img data-bind="attr:{ src: 'assets/images/breeding/pokerus/' + GameConstants.Pokerus[RouteHelper.minPokerus(DungeonRunner.dungeon.allAvailablePokemon())] + '.png'}"
+                    src=""/>
+                  </knockout>
+                </td>
+                <td width="50%">
+                  <knockout data-bind="using: App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]()"</knockout>
+                  <knockout data-bind="text: $data.toLocaleString('en-US')">0</knockout>
+                  &nbsp;Clears
+                </td>
+              </tr>
+              <tr>
+                <td width="50%">
+                    <knockout data-bind="template: { name: 'pokemonAttackTemplate', data: { 'pokemon': Battle.enemyPokemon() } }"></knockout>
+                </td>
+                <td width="50%" data-bind="css: { 'text-muted': App.game.challenges.list.disableClickAttack.active() }">
+                    <span style="display: inline;">Click Attack:
+                        <span data-bind="text: App.game.party.calculateClickAttack().toLocaleString('en-US')"></span>
+                    </span>
+                </td>
+              </tr>
+          </table>
+        </h2>
     </div>
 </div>

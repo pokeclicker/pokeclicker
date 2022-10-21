@@ -93,6 +93,8 @@ type ItemNameType
     | 'Quick_Powder'
     | 'Thick_Club'
     | 'Soul_Dew'
+    | 'Adamant_Orb'
+    | 'Lustrous_Orb'
     | 'Rusted_Sword'
     | 'Rusted_Shield'
     | 'Black_Belt'
