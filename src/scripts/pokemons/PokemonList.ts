@@ -4643,6 +4643,7 @@ const pokemonList = createPokemonArray(
         },
         'gender': {
             'femaleRatio': 0.125,
+             'visualDifference': true,
         },
     },
     {
