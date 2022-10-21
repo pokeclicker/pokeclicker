@@ -38,7 +38,7 @@
           </div>
         </div>
 
-        <div style="position:absolute; left:65%;" data-bind="if: !TemporaryBattleRunner.battleObservable().optionalArgs.hideTrainer">
+        <div style="position:absolute; left:65%; top: 25%;" data-bind="if: !TemporaryBattleRunner.battleObservable().optionalArgs.hideTrainer">
             <img data-bind="attr:{ src: TemporaryBattleRunner.battleObservable().getImage() }" onerror="this.src='assets/images/trainers/Mysterious Trainer.png';"/>
         </div>
 
@@ -62,7 +62,7 @@
                 <span data-bind="text: TemporaryBattleBattle.enemyPokemon().health().toLocaleString('en-US') + ' / ' + TemporaryBattleBattle.enemyPokemon().maxHealth().toLocaleString('en-US')" style="font-size: 12px;"></span>
             </div>
         </div>
-        <h2 class="pageItemFooter" style="display: block;">
+        <h2 class="pageItemFooter" style="display: block; font-size: 1rem;">
           <table width="100%">
               <tr>
                 <td width="50%">

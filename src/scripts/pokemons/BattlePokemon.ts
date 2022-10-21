@@ -68,7 +68,7 @@ class BattlePokemon implements EnemyPokemonInterface {
             BagHandler.gainItem(this.heldItem);
             const msg = `${this.name} dropped ${GameHelper.anOrA(name)} ${name}!`;
             Notifier.notify({
-                message: `The enemy ${msg}`,
+                message: `The enemy ${msg} <img src="${BagHandler.image(this.heldItem)}" height="24px"/>`,
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.Items.dropped_item,
             });

@@ -9036,7 +9036,10 @@ dungeonList['Iron Ruins'] = new Dungeon('Iron Ruins',
     1920000, 48);
 
 dungeonList['Iceberg Ruins'] = new Dungeon('Iceberg Ruins',
-    ['Cryogonal', 'Beartic', 'Galarian Darumaka', 'Aurorus', 'Weavile', 'Vanilluxe', 'Froslass', 'Delibird'],
+    [
+        'Cryogonal', 'Beartic', 'Galarian Darumaka', 'Weavile', 'Vanilluxe', 'Froslass', 'Delibird',
+        {pokemon: 'Aurorus', options: { hide: true, requirement: new ObtainedPokemonRequirement(pokemonMap.Aurorus)}},
+    ],
     {
         common: [
             {loot: 'Dowsing_machine', weight: 3},
