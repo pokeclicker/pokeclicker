@@ -15,11 +15,11 @@ class Berry {
         'Tangela', 'Scyther',
         'Pineco', 'Heracross',
         'Volbeat', 'Illumise',
-        'Burmy (Plant)', 'Combee', 'Cherubi', 'Munchlax',
+        'Burmy (Plant)', 'Combee', 'Cherubi',
         'Sewaddle', 'Karrablast',
         'Scatterbug',
         'Cutiefly', 'Bounsweet',
-        'Sizzlipede', 'Applin',
+        'Blipbug', 'Gossifleur',
     ];
 
     constructor(
