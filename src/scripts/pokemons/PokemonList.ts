@@ -1417,7 +1417,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 50,
             'speed': 90,
         },
-         'gender': {
+        'gender': {
             'femaleRatio': 1,
         },
     },
@@ -4643,7 +4643,7 @@ const pokemonList = createPokemonArray(
         },
         'gender': {
             'femaleRatio': 0.125,
-             'visualDifference': true,
+            'visualDifference': true,
         },
     },
     {
