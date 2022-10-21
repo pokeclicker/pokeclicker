@@ -19,7 +19,7 @@ class Berry {
         'Sewaddle', 'Karrablast',
         'Scatterbug',
         'Cutiefly', 'Bounsweet',
-        'Blipbug', 'Glossifleur',
+        'Blipbug', 'Gossifleur',
     ];
 
     constructor(
