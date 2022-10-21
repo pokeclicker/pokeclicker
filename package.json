@@ -83,8 +83,7 @@
     "intro.js": "^2.9.3",
     "jquery": "^3.5.1",
     "knockout": "^3.5.1",
-    "node-ts-cache": "^4.4.0",
-    "node-ts-cache-storage-memory": "^4.4.0",
+    "node-cache": "^5.1.2",
     "popper.js": "^1.16.0",
     "sortablejs": "^1.10.2"
   }

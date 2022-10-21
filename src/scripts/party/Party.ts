@@ -28,7 +28,7 @@ class Party implements Feature {
                 }
             }
             return false;
-        }).extend({rateLimit: 1000});
+        }).extend({ rateLimit: 1000 });
 
         // This will be completely rebuilt each time a pokemon is caught.
         // Not ideal but still better than mutliple locations scanning through the list to find what they want
@@ -112,7 +112,8 @@ class Party implements Feature {
      */
 
     public calculatePokemonAttack(type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, ignoreRegionMultiplier = false, region: GameConstants.Region = player.region, includeBreeding = false, useBaseAttack = false, overrideWeather?: WeatherType, ignoreLevel = false, includeFlute = true): number {
-        const cachedPokemonAttack = Caching.get(this.saveKey, 'pokemonAttack');
+        const cacheKey = `${type1}${type2}${ignoreRegionMultiplier}${region}${includeBreeding}${useBaseAttack}${includeBreeding}${useBaseAttack}${overrideWeather}${ignoreLevel}${includeFlute}`;
+        const cachedPokemonAttack = Caching.get(this.saveKey, cacheKey);
         if (cachedPokemonAttack) {
             return cachedPokemonAttack;
         }
@@ -124,7 +125,7 @@ class Party implements Feature {
         const bonus = this.multiplier.getBonus('pokemonAttack');
 
         attack = Math.round(attack * bonus);
-        Caching.set(this.saveKey, 'pokemonAttack', attack);
+        Caching.set(this.saveKey, cacheKey, attack);
         return attack;
     }
 
@@ -205,7 +206,7 @@ class Party implements Feature {
 
     public pokemonAttackObservable: KnockoutComputed<number> = ko.pureComputed(() => {
         return App.game.party.calculatePokemonAttack();
-    }).extend({rateLimit: 1000});
+    }).extend({ rateLimit: 1000 });
 
     public getPokemon(id: number): PartyPokemon | undefined {
         return this._caughtPokemonLookup().get(id);

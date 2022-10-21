@@ -83,8 +83,7 @@ const srcs = {
         'node_modules/knockout/build/output/knockout-latest.js',
         'node_modules/bootstrap-notify/bootstrap-notify.min.js',
         'node_modules/sortablejs/Sortable.min.js',
-        'node_modules/node-ts-cache/dist/index.js',
-        'node_modules/node-ts-cache-storage-memory/dist/index.js',
+        'node_modules/node-cache/lib/node_cache.js',
         'src/libs/*.js',
     ],
 };
@@ -104,19 +103,7 @@ gulp.task('copy', (done) => {
     // Copy package.json to our base directory
     gulp.src('./package.json').pipe(gulp.dest(`${dests.base}/`));
 
-    gulp.src(srcs.libs, { base: process.cwd() })
-        .pipe(rename((libPath) => {
-            const originalBaseName = libPath.basename;
-            if (originalBaseName == 'index') {
-                const firstSlashIndex = libPath.dirname.indexOf('/') + 1;
-                const secondSlashIndex = libPath.dirname.indexOf('/', firstSlashIndex);
-                const newName = libPath.dirname.substring(firstSlashIndex, secondSlashIndex);
-                libPath.basename = newName;
-                process.stdout.write(`\nRenamed ${originalBaseName} to ${newName}`);
-            }
-            libPath.dirname = '.';
-            return libPath;
-        }))
+    gulp.src(srcs.libs)
         .pipe(gulp.dest(dests.libs))
         .pipe(browserSync.reload({ stream: true }));
 
