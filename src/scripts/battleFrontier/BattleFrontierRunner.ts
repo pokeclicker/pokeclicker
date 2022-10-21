@@ -62,8 +62,12 @@ class BattleFrontierRunner {
         const stageBeaten = this.stage() - 1;
         // Give Battle Points and Money based on how far the user got
         const battleMultiplier = Math.max(stageBeaten / 100, 1);
-        const battlePointsEarned = Math.round(stageBeaten * battleMultiplier);
-        const moneyEarned = stageBeaten * 100 * battleMultiplier;
+        let battlePointsEarned = Math.round(stageBeaten * battleMultiplier);
+        let moneyEarned = stageBeaten * 100 * battleMultiplier;
+
+        // Award battle points and dollars and retrieve their computed values
+        battlePointsEarned = App.game.wallet.gainBattlePoints(battlePointsEarned).amount;
+        moneyEarned = App.game.wallet.gainMoney(moneyEarned, true).amount;
 
         Notifier.notify({
             title: 'Battle Frontier',
@@ -75,11 +79,6 @@ class BattleFrontierRunner {
             timeout: 30 * GameConstants.MINUTE,
         });
         App.game.logbook.newLog(LogBookTypes.FRONTIER, `Cleared stage ${stageBeaten.toLocaleString('en-US')} of the Battle Frontier and received ${battlePointsEarned.toLocaleString('en-US')} Battle Points.`);
-
-        // Award battle points
-        App.game.wallet.gainBattlePoints(battlePointsEarned);
-        App.game.wallet.gainMoney(moneyEarned);
-        const reward = BattleFrontierMilestones.nextMileStone();
 
         this.checkpoint(1);
 
