@@ -83,7 +83,8 @@ const srcs = {
         'node_modules/knockout/build/output/knockout-latest.js',
         'node_modules/bootstrap-notify/bootstrap-notify.min.js',
         'node_modules/sortablejs/Sortable.min.js',
-        'node_modules/node-cache/index.js',
+        'node_modules/node-ts-cache/dist/index.js',
+        'node_modules/node-ts-cache-storage-memory/dist/index.js',
         'src/libs/*.js',
     ],
 };
@@ -103,9 +104,21 @@ gulp.task('copy', (done) => {
     // Copy package.json to our base directory
     gulp.src('./package.json').pipe(gulp.dest(`${dests.base}/`));
 
-    gulp.src(srcs.libs)
+    gulp.src(srcs.libs, { base: process.cwd() })
+        .pipe(rename((libPath) => {
+            const originalBaseName = libPath.basename;
+            if (originalBaseName == 'index') {
+                const firstSlashIndex = libPath.dirname.indexOf('/') + 1;
+                const secondSlashIndex = libPath.dirname.indexOf('/', firstSlashIndex);
+                const newName = libPath.dirname.substring(firstSlashIndex, secondSlashIndex);
+                libPath.basename = newName;
+                process.stdout.write(`\nRenamed ${originalBaseName} to ${newName}`);
+            }
+            libPath.dirname = '.';
+            return libPath;
+        }))
         .pipe(gulp.dest(dests.libs))
-        .pipe(browserSync.reload({stream: true}));
+        .pipe(browserSync.reload({ stream: true }));
 
     done();
 });
@@ -113,7 +126,7 @@ gulp.task('copy', (done) => {
 gulp.task('assets', () => gulp.src(srcs.assets)
     .pipe(changed(dests.assets))
     .pipe(gulp.dest(dests.assets))
-    .pipe(browserSync.reload({stream: true})));
+    .pipe(browserSync.reload({ stream: true })));
 
 gulp.task('browserSync', () => {
     browserSync({
@@ -146,7 +159,7 @@ gulp.task('compile-html', (done) => {
         .pipe(replace('$FEATURE_FLAGS', process.env.NODE_ENV === 'production' ? '{}' : JSON.stringify(config.FEATURE_FLAGS)))
         .pipe(ejs())
         .pipe(gulp.dest(htmlDest))
-        .pipe(browserSync.reload({stream: true}));
+        .pipe(browserSync.reload({ stream: true }));
     done();
 });
 
@@ -205,7 +218,7 @@ gulp.task('scripts', () => {
                 .pipe(replace('$DISCORD_LOGIN_PROXY', config.DISCORD_LOGIN_PROXY))
                 .pipe(tsProject())
                 .pipe(gulp.dest(dests.scripts))
-                .pipe(browserSync.reload({stream: true}));
+                .pipe(browserSync.reload({ stream: true }));
             return streamToPromise(compileScripts);
         });
 });
@@ -216,7 +229,7 @@ gulp.task('styles', () => gulp.src(srcs.styles)
     .pipe(autoprefix('last 2 versions'))
     .pipe(minifyCSS())
     .pipe(gulp.dest(dests.styles))
-    .pipe(browserSync.reload({stream: true})));
+    .pipe(browserSync.reload({ stream: true })));
 
 gulp.task('cleanWebsite', () => del([dests.githubPages]));
 
