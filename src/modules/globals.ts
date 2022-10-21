@@ -15,6 +15,7 @@ import PokemonCategories from './party/Category';
 import OakItems from './oakItems/OakItems';
 import OakItemLoadouts from './oakItems/OakItemLoadouts';
 import SaveReminder from './saveReminder/SaveReminder';
+import Caching from './caching/Caching';
 
 // These types are only temporary while we are converting things to modules
 // As things are converted, we should import their types here for use,
@@ -48,6 +49,7 @@ type TmpGameType = {
     challenges: Challenges,
     multiplier: Multiplier,
     saveReminder: SaveReminder,
+    caching: Caching
 
     // There are functions we could mention too,
     // but they aren't mentioned in any modules (yet?)

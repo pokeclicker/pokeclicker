@@ -1,6 +1,7 @@
 /// <reference path="../../declarations/GameHelper.d.ts" />
 /// <reference path="../../declarations/DataStore/common/Feature.d.ts" />
-///<reference path="../../declarations/enums/CaughtStatus.d.ts"/>
+/// <reference path="../../declarations/enums/CaughtStatus.d.ts"/>
+import Caching from '../../modules/caching/Caching';
 
 class Party implements Feature {
     name = 'Pokemon Party';
@@ -111,6 +112,10 @@ class Party implements Feature {
      */
 
     public calculatePokemonAttack(type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, ignoreRegionMultiplier = false, region: GameConstants.Region = player.region, includeBreeding = false, useBaseAttack = false, overrideWeather?: WeatherType, ignoreLevel = false, includeFlute = true): number {
+        const cachedPokemonAttack = Caching.get(this.saveKey, 'pokemonAttack');
+        if (cachedPokemonAttack) {
+            return cachedPokemonAttack;
+        }
         let attack = 0;
         for (const pokemon of this.caughtPokemon) {
             attack += this.calculateOnePokemonAttack(pokemon, type1, type2, region, ignoreRegionMultiplier, includeBreeding, useBaseAttack, overrideWeather, ignoreLevel, includeFlute);
@@ -118,7 +123,9 @@ class Party implements Feature {
 
         const bonus = this.multiplier.getBonus('pokemonAttack');
 
-        return Math.round(attack * bonus);
+        attack = Math.round(attack * bonus);
+        Caching.set(this.saveKey, 'pokemonAttack', attack);
+        return attack;
     }
 
     public calculateOnePokemonAttack(pokemon: PartyPokemon, type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, region: GameConstants.Region = player.region, ignoreRegionMultiplier = false, includeBreeding = false, useBaseAttack = false, overrideWeather: WeatherType, ignoreLevel = false, includeFlute = true): number {

@@ -83,6 +83,7 @@ const srcs = {
         'node_modules/knockout/build/output/knockout-latest.js',
         'node_modules/bootstrap-notify/bootstrap-notify.min.js',
         'node_modules/sortablejs/Sortable.min.js',
+        'node_modules/node-cache/index.js',
         'src/libs/*.js',
     ],
 };
