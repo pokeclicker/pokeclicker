@@ -2084,7 +2084,7 @@ class QuestLineHelper {
 
         // Multi-step #10
 
-        const meltanCatch400Meltan = new CaptureSpecificPokemonQuest('Meltan','Catch 400 Meltan', 400, false, 0, undefined);
+        const meltanCatch400Meltan = new CaptureSpecificPokemonQuest('Meltan','Catch 400 Meltan in Alola', 400, false, 0, undefined);
         const meltanRainbowRocket = new CustomQuest(1, 0, 'Defeat Team Rainbow Leader Giovanni.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Rainbow Leader Giovanni')]());
 
         const meltanGetMelmetal = () => {
