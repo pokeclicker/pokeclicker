@@ -9129,7 +9129,7 @@ dungeonList['Dyna Tree Hill'] = new Dungeon('Dyna Tree Hill',
     1920000, 53);
 
 dungeonList['Tunnel to the Top'] = new Dungeon('Tunnel to the Top',
-    ['Zubat', 'Aron', 'Carbink', 'Carkol', 'Ferroseed', 'Mawile', 'Sableye', 'Audino', 'Lairon'],
+    ['Zubat', 'Golbat', 'Carbink', 'Snorunt', 'Gible', 'Bagon', 'Clefairy', 'Clefable', 'Audino', 'Druddigon'],
     {
         common: [
             {loot: 'Rawst'},
@@ -9159,9 +9159,9 @@ dungeonList['Tunnel to the Top'] = new Dungeon('Tunnel to the Top',
     },
     33565196,
     [
-        new DungeonBossPokemon('Noivern', 167825980, 60),
-        new DungeonBossPokemon('Aggron', 167825980, 60),
-        new DungeonBossPokemon('Coalossal', 167825980, 60),
+        new DungeonBossPokemon('Froslass', 167825980, 60),
+        new DungeonBossPokemon('Garchomp', 167825980, 60),
+        new DungeonBossPokemon('Salamence', 167825980, 60),
     ],
     2000000, 54);
 
