@@ -58,7 +58,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                 <label>Regions</label><br/>
                                 <div class="dropdown show">
                                     <button type="button" class="text-left custom-select col-12 btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bind="text :
-                                        BreedingFilters.region.value() == 2 ** (player.highestRegion() + 1) - 1 ?
+                                        BreedingFilters.region.value() || BreedingFilters.region.value() == 2 ** (player.highestRegion() + 1) - 1 ?
                                             'All' :
                                             (BreedingFilters.region.value() ?
                                                 GameConstants.camelCaseToString(GameConstants.Region[Math.floor(Math.log2(BreedingFilters.region.value()))]) + (BreedingFilters.region.value()
