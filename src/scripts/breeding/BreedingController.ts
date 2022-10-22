@@ -161,10 +161,8 @@ class BreedingController {
             }
 
             // Check based on native region
-            if (BreedingFilters.region.value() > -2) {
-                if (PokemonHelper.calcNativeRegion(partyPokemon.name) !== BreedingFilters.region.value()) {
-                    return false;
-                }
+            if (!(2 ** PokemonHelper.calcNativeRegion(partyPokemon.name) & BreedingFilters.region.value())) {
+                return false;
             }
 
             // check based on Pokerus status
