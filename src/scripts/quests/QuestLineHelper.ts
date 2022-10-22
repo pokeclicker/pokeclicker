@@ -2107,7 +2107,7 @@ class QuestLineHelper {
     }
 
     public static createRainbowRocketQuestLine() {
-        const rainbowQuestLine = new QuestLine('Defeat Rainbow Rocket', 'description', new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9));
+        const rainbowQuestLine = new QuestLine('Defeat Rainbow Rocket', 'Team Rainbow Rocket has stolen the Meltan research! Defeat them to get it back!', new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9));
 
         const rainbowInvasion = new CustomQuest (50, 0, 'Defeat 50 Rocket Grunts.', () =>
             App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Rainbow Rocket Grunt 1')]() +
