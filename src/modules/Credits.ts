@@ -302,6 +302,7 @@ export const SpriteCredits: Credit[] = [
         name: 'Farboo171',
         link: 'https://github.com/Farboo171',
         resources: [
+            'Flowering Celebi',
             'Freeze Mulch',
             'Underground Fossilized Dino',
             'Underground Fossilized Drake',
