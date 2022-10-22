@@ -422,6 +422,7 @@ export const SpriteCredits: Credit[] = [
             'Sightseer (male)',
             'Sky Trainer (female)',
             'Sky Trainer (male)',
+            'Triathlete',
             'Tourist (female)',
             'Tourist (male)',
             'Worker (female)',
