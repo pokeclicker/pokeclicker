@@ -138,7 +138,6 @@ export default class Notifier {
 
             $(`#modal${modalID}`).modal({
                 backdrop: 'static',
-                show: true,
             });
 
             // Once the modal is shown, hide it after specified timeout
@@ -214,7 +213,6 @@ export default class Notifier {
 
             $(`#modal${modalID}`).modal({
                 backdrop: 'static',
-                show: true,
             });
 
             // Once the modal is shown, hide it after specified timeout

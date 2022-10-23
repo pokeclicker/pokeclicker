@@ -79,7 +79,7 @@ const srcs = {
         'node_modules/intro.js/introjs.css',
         'node_modules/intro.js/themes/introjs-modern.css',
         'node_modules/jquery/dist/jquery.min.js',
-        'node_modules/popper.js/dist/umd/popper.min.js',
+        'node_modules/@popperjs/core/dist/umd/popper.min.js',
         'node_modules/knockout/build/output/knockout-latest.js',
         'node_modules/bootstrap-notify/bootstrap-notify.min.js',
         'node_modules/sortablejs/Sortable.min.js',

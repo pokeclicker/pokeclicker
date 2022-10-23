@@ -29,7 +29,7 @@
   "homepage": "https://github.com/pokeclicker/pokeclicker#readme",
   "devDependencies": {
     "@types/gtag.js": "0.0.4",
-    "@types/jquery": "^3.5.2",
+    "@types/jquery": "^3.5.14",
     "@types/sortablejs": "^1.10.5",
     "@typescript-eslint/eslint-plugin": "^4.4.0",
     "babel-core": "^6.26.3",
@@ -73,17 +73,17 @@
     "webpack-stream": "^6.1.0"
   },
   "dependencies": {
-    "@types/bootstrap": "^4.3.1",
-    "@types/bootstrap-notify": "^3.1.34",
-    "@types/intro.js": "^2.4.7",
-    "@types/knockout": "^3.4.66",
+    "@popperjs/core": "^2.11.6",
+    "@types/bootstrap": "^5.2.5",
+    "@types/bootstrap-notify": "^3.1.36",
+    "@types/intro.js": "^5.1.0",
+    "@types/knockout": "^3.4.72",
     "@typescript-eslint/parser": "^3.6.1",
-    "bootstrap": "^4.5.3",
+    "bootstrap": "^5.2.2",
     "eslint": "^7.4.0",
-    "intro.js": "^2.9.3",
-    "jquery": "^3.5.1",
+    "intro.js": "^6.0.0",
+    "jquery": "^3.6.1",
     "knockout": "^3.5.1",
-    "popper.js": "^1.16.0",
     "sortablejs": "^1.10.2"
   }
 }
