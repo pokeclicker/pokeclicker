@@ -4820,7 +4820,7 @@ const SordwardShielbert1 = new NPC('Sordward & Shielbert', [
 
 const SordwardShielbert2 = new NPC('Sordward & Shielbert', [
     'We know all the Wishing Stars that Chairman Rose had gathered are here. We celebrities have an advanced level of insight into such things!',
-    'You noncelebrities are not suited to having such valuable things. Hand them over to us.',
+    'You non-celebrities are not suited to having such valuable things. Hand them over to us.',
     'You wish to keep them from us? No matter. This time we\'ve brought much stronger Pokémon to thoroughly trounce you with!',
 ], {
     image: 'assets/images/temporaryBattle/Sordward & Shielbert.png',
