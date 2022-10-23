@@ -5443,8 +5443,8 @@ TownList['Courageous Cavern'] = new DungeonTown(
     GameConstants.Region.galar,
     [new RouteKillRequirement(10, GameConstants.Region.galar, 33)]
 );
-TownList['Brawlers Cave'] = new DungeonTown(
-    'Brawlers Cave',
+TownList['Brawlers\' Cave'] = new DungeonTown(
+    'Brawlers\' Cave',
     GameConstants.Region.galar,
     [
         new OneFromManyRequirement([

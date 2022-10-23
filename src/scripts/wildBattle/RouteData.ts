@@ -2723,7 +2723,7 @@ Routes.add(new RegionRoute(
     [
         new OneFromManyRequirement([
             new RouteKillRequirement(10, GameConstants.Region.galar, 35),
-            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Brawlers Cave')),
+            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Brawlers\' Cave')),
             new RouteKillRequirement(10, GameConstants.Region.galar, 44),
         ]),
     ],
@@ -2769,7 +2769,7 @@ Routes.add(new RegionRoute(
     [
         new OneFromManyRequirement([
             new RouteKillRequirement(10, GameConstants.Region.galar, 38),
-            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Brawlers Cave')),
+            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Brawlers\' Cave')),
         ]),
     ],
     undefined,
