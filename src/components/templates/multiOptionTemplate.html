@@ -2,7 +2,7 @@
     <div class="btn-group" data-bind="foreach: $data.optionValues">
         <button class="btn btn-secondary amount-button list-group-item-action"
                 data-bind="click: function() {$parent.observable($data)},
-                          text: $data,
+                          text: $data.toLocaleString('en-US'),
                           css:{ 'pokemon-selected': $parent.observable() === $data}">
         </button>
     </div>
