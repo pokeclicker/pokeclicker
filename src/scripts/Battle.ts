@@ -168,4 +168,8 @@ class Battle {
         }
     }
 
+    public static pokemonAttackByTypeTooltipObservable: KnockoutComputed<string> = ko.pureComputed(() => {
+        return App.game.party.calculatePokemonAttack(Battle.enemyPokemon().type1, Battle.enemyPokemon().type2).toLocaleString('en-US');
+    }).extend({rateLimit: 1000});
+
 }
