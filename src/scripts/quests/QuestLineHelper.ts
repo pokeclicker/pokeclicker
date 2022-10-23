@@ -1467,7 +1467,7 @@ class QuestLineHelper {
                 clearRampagingDusknoir,
             ], 'Sordward and Shielbert have forced a Conkeldurr and a Dusknoir to rampage in Stow-on-Side Stadium. Defeat them both.'));
 
-        const clearGymLeaderBede2 = new CustomQuest(1, 0, 'There were rampaging Pokémon at Ballonlea Stadium but Bede already defeated them. There are no more rampaging Pokémon for now, and he wants to battle.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Gym Leader Bede')]());
+        const clearGymLeaderBede2 = new CustomQuest(1, 0, 'There were rampaging Pokémon at Ballonlea Stadium, but Bede already defeated them. There are no more rampaging Pokémon for now, and he wants to battle.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Gym Leader Bede')]());
         swordShieldQuestLine.addQuest(clearGymLeaderBede2);
 
         const clearRampagingGigalith = new CustomQuest(1, 0, 'Defeat Gigalith.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Rampaging Gigalith')]());
@@ -1753,10 +1753,10 @@ class QuestLineHelper {
         const clearDynaTreeHill = new CustomQuest(1, 0, 'Some unknown bird Pokémon have been sighted near Dyna Tree Hill in Ballimere Lake. Explore the area to see for yourself.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Dyna Tree Hill')]());
         dynaTreeBirdsQuestLine.addQuest(clearDynaTreeHill);
 
-        const clearDynaTreeBirds = new CustomQuest(1, 0, 'You witnessed 3 powerful looking bird pokemon resembling Articuno, Zapdos and Moltres fighting over the fruit of the Dyna Tree. Upon noticing you, they attack!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Dyna Tree Birds')]());
+        const clearDynaTreeBirds = new CustomQuest(1, 0, 'You witnessed 3 powerful looking bird pokemon resembling Articuno, Zapdos, and Moltres fighting over the fruit of the Dyna Tree. Upon noticing you, they attack!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Dyna Tree Birds')]());
         dynaTreeBirdsQuestLine.addQuest(clearDynaTreeBirds);
 
-        const talktoBirdPeony2 = new TalkToNPCQuest(BirdPeony2, 'Tell Peony about your encounter with the birds resembling Articuno, Zapdos and Moltres.');
+        const talktoBirdPeony2 = new TalkToNPCQuest(BirdPeony2, 'Tell Peony about your encounter with the birds resembling Articuno, Zapdos, and Moltres.');
         dynaTreeBirdsQuestLine.addQuest(talktoBirdPeony2);
 
         const chaseGalarianArticuno = new CustomQuest (3, 0, 'Search for Galarian Articuno in the Crown Tundra.', () =>
@@ -1779,9 +1779,9 @@ class QuestLineHelper {
                 chaseGalarianArticuno,
                 chaseGalarianZapdos,
                 chaseGalarianMoltres,
-            ], 'Galarian Articuno, Zapdos and Moltres have fled to the Crown Tundra, Southern Galar and the Isle of Armor respectively. Search for them.'));
+            ], 'Galarian Articuno, Zapdos, and Moltres have fled to the Crown Tundra, Southern Galar, and the Isle of Armor respectively. Search for them.'));
 
-        const talktoBirdPeony3 = new TalkToNPCQuest(BirdPeony3, 'You defeated Galarian Articuno, Zapdos and Moltres multiple times each. Ask Peony what to do next.');
+        const talktoBirdPeony3 = new TalkToNPCQuest(BirdPeony3, 'You defeated Galarian Articuno, Zapdos, and Moltres multiple times each. Ask Peony what to do next.');
         dynaTreeBirdsQuestLine.addQuest(talktoBirdPeony3);
 
         const catchGalarianArticuno = new CaptureSpecificPokemonQuest('Galarian Articuno', 'Catch Galarian Articuno.', 1, false, 0, undefined);
@@ -1792,9 +1792,9 @@ class QuestLineHelper {
                 catchGalarianArticuno,
                 catchGalarianZapdos,
                 catchGalarianMoltres,
-            ], 'Galarian Articuno, Zapdos and Moltres are now roaming in the Crown Tundra, Southern Galar and the Isle of Armor respectively. Catch them when the opportunity arises!'));
+            ], 'Galarian Articuno, Zapdos, and Moltres are now roaming in the Crown Tundra, Southern Galar, and the Isle of Armor respectively. Catch them when the opportunity arises!'));
 
-        const talktoBirdPeony4 = new TalkToNPCQuest(BirdPeony4, 'Now that you have captured Galarian Articuno, Zapdos and Moltres, go report back to Peony!');
+        const talktoBirdPeony4 = new TalkToNPCQuest(BirdPeony4, 'Now that you have captured Galarian Articuno, Zapdos, and Moltres, go report back to Peony!');
         dynaTreeBirdsQuestLine.addQuest(talktoBirdPeony4);
 
         App.game.quests.questLines().push(dynaTreeBirdsQuestLine);
@@ -1820,7 +1820,7 @@ class QuestLineHelper {
                 clearRockPeakRuins,
                 clearIcebergRuins,
                 clearIronRuins,
-            ], 'Clear Rock Peak Ruins, Iceberg Ruins and Iron ruins 10 times each.'));
+            ], 'Clear Rock Peak Ruins, Iceberg Ruins, and Iron Ruins 10 times each.'));
 
         const talktoGolemPeony3 = new TalkToNPCQuest(GolemPeony3, 'The ruins are still locked, report to Peony.');
         ancientGolemsQuestLine.addQuest(talktoGolemPeony3);
@@ -1833,18 +1833,18 @@ class QuestLineHelper {
                 catchRegirock,
                 catchRegice,
                 catchRegisteel,
-            ], 'Catch Regirock, Regice and Registeel in the Rock Peak Ruins, Iceberg Ruins and Iron Ruins respectively.'));
+            ], 'Catch Regirock, Regice, and Registeel in the Rock Peak Ruins, Iceberg Ruins, and Iron Ruins respectively.'));
 
-        const talktoGolemPeony4 = new TalkToNPCQuest(GolemPeony4, 'You have captured Regirock, Regice and Registeel, now go report back to Peony.');
+        const talktoGolemPeony4 = new TalkToNPCQuest(GolemPeony4, 'You have captured Regirock, Regice, and Registeel, now go report back to Peony.');
         ancientGolemsQuestLine.addQuest(talktoGolemPeony4);
 
-        const clearRegigigas = new CustomQuest(1, 0, 'Defeat Regigigas at Giants bed!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Regigigas')]());
+        const clearRegigigas = new CustomQuest(1, 0, 'Defeat Regigigas at Giant\'s Bed!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Regigigas')]());
         const catchRegigigas = new CaptureSpecificPokemonQuest('Regigigas', 'Catch Regigigas.', 1, false, 0, undefined);
         ancientGolemsQuestLine.addQuest(new MultipleQuestsQuest(
             [
                 clearRegigigas,
                 catchRegigigas,
-            ], 'After you caught three of the legendary golems it created, Regigigas appeared in Giants Bed. Defeat and catch it!'));
+            ], 'After you caught three of the legendary golems it created, Regigigas appeared in Giant\'s Bed. Defeat and catch it!'));
 
         const talktoGolemPeony5 = new TalkToNPCQuest(GolemPeony5, 'You have captured Regigigas, now go report back to Peony.');
         ancientGolemsQuestLine.addQuest(talktoGolemPeony5);
