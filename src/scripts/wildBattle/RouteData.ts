@@ -2980,7 +2980,7 @@ Routes.add(new RegionRoute(
     GameConstants.GalarSubRegions.CrownTundra
 ));
 Routes.add(new RegionRoute(
-    'Giants Foot', GameConstants.Region.galar, 50,
+    'Giant\'s Foot', GameConstants.Region.galar, 50,
     new RoutePokemon({
         land: ['Copperajah', 'Bronzong', 'Stonjourner', 'Audino', 'Claydol', 'Mime Jr.', 'Cufant', 'Bronzor'],
         water: ['Magikarp', 'Barboach', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Gyarados', 'Whiscash', 'Feebas'],
