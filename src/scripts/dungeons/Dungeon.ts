@@ -8818,7 +8818,7 @@ dungeonList['Courageous Cavern'] = new Dungeon('Courageous Cavern',
     ],
     1730000, 33);
 
-dungeonList['Brawlers Cave'] = new Dungeon('Brawlers Cave',
+dungeonList['Brawlers\' Cave'] = new Dungeon('Brawlers\' Cave',
     ['Whismur', 'Woobat', 'Azurill', 'Lickitung', 'Loudred', 'Swoobat', 'Golduck', 'Poliwag', 'Barboach', 'Whiscash', 'Chansey', 'Psyduck'],
     {
         common: [
@@ -8843,7 +8843,7 @@ dungeonList['Brawlers Cave'] = new Dungeon('Brawlers Cave',
             {loot: 'Star Piece'},
             {loot: 'LargeRestore'},
         ],
-        mythic: [{loot: 'Protein', requirement: new ClearDungeonRequirement(150, GameConstants.getDungeonIndex('Brawlers Cave'))}],
+        mythic: [{loot: 'Protein', requirement: new ClearDungeonRequirement(150, GameConstants.getDungeonIndex('Brawlers\' Cave'))}],
     },
     27009504,
     [
