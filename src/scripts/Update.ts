@@ -1383,8 +1383,8 @@ class Update implements Saveable {
 
         '0.10.1': ({ playerData, saveData }) => {
             // Brawlers Cave renamed
-            if (playerData._townName == ('Brawlers Cave')) {
-                playerData._townName = ('Brawlers\' Cave');
+            if (playerData._townName == 'Brawlers Cave') {
+                playerData._townName = 'Brawlers\' Cave';
             }
         },
     };
