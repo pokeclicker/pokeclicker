@@ -7796,7 +7796,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 100,
             'speed': 100,
         },
-        'heldItem': { type: ItemType.berry, id: BerryType.Lum },
+        'heldItem': {type: ItemType.berry, id: BerryType.Lum},
         'gender': {
             'type': GameConstants.Genders.Genderless,
         },
