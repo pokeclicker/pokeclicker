@@ -224,9 +224,9 @@ class PartyPokemon implements Saveable {
 
     public useCalcium(amount: number): void {
         // The lowest number of amount they want to use, total in inventory
-        amount = Math.min(amount, player.itemList.Protein());
+        amount = Math.min(amount, player.itemList.Calcium());
 
-        // Apply the proteins
+        // Apply the calciums
         if (ItemHandler.useItem('Calcium', amount)) {
             this.effortPoints += GameConstants.BASE_EP_YIELD;
         }
