@@ -26,6 +26,7 @@ interface Loot {
     weight?: number,
     requirement?: MultiRequirement | OneFromManyRequirement | Requirement,
     amount?: number,
+    ignoreDebuff?: boolean,
 }
 
 type LootTier = 'common' | 'rare' | 'epic' | 'legendary' | 'mythic';
@@ -214,18 +215,18 @@ class Dungeon {
         return encounterInfo;
     }
 
-    public getRandomLootTier(clears: number, highestRegion: GameConstants.Region): LootTier {
-        const tierWeights = this.getLootTierWeights(clears, highestRegion);
+    public getRandomLootTier(clears: number, debuffed = false): LootTier {
+        const tierWeights = this.getLootTierWeights(clears, debuffed);
         return Rand.fromWeightedArray(Object.keys(tierWeights), Object.values(tierWeights)) as LootTier;
     }
 
-    public getRandomLoot(tier: LootTier): Loot {
-        const lootTable = this.lootTable[tier].filter((loot) => !loot.requirement || loot.requirement.isCompleted());
+    public getRandomLoot(tier: LootTier, onlyDebuffable = false): Loot {
+        const lootTable = this.lootTable[tier].filter((loot) => (!loot.requirement || loot.requirement.isCompleted()) && !(onlyDebuffable && loot.ignoreDebuff));
         return Rand.fromWeightedArray(lootTable, lootTable.map((loot) => loot.weight ?? 1));
     }
 
-    public getLootTierWeights(clears: number, highestRegion: GameConstants.Region): Record<LootTier, number> {
-        if ((this.optionalParameters?.dungeonRegionalDifficulty ?? GameConstants.getDungeonRegion(this.name)) < highestRegion - 2) {
+    public getLootTierWeights(clears: number, debuffed : boolean): Record<LootTier, number> {
+        if (debuffed) {
             return Object.entries(nerfedLootTierChance).reduce((chances, [tier, chance]) => {
                 if (tier in this.lootTable &&
                     this.lootTable[tier].some((loot) => !loot.requirement || loot.requirement.isCompleted())) {
@@ -4842,7 +4843,7 @@ dungeonList['Relic Castle'] = new Dungeon('Relic Castle',
         ],
         mythic: [
             {loot: 'Heart Scale'},
-            {loot: 'Darmanitan (Zen)'},
+            {loot: 'Darmanitan (Zen)', ignoreDebuff : true},
         ],
     },
     2803000,
