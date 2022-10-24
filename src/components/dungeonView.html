@@ -1,5 +1,5 @@
-<div class="row justify-content-center no-gutters" data-bind="if: App.game.gameState === GameConstants.GameState.dungeon">
-    <div class="col no-gutters clickable" style="height: 280px; display: block;"
+<div class="row justify-content-center g-0" data-bind="if: App.game.gameState === GameConstants.GameState.dungeon">
+    <div class="col g-0 clickable" style="height: 280px; display: block;"
         data-bind="click: function() { DungeonRunner.handleClick() }">
         <h2 class="pageItemTitle" style="display: block;">
             <knockout data-bind="if: DungeonBattle.enemyPokemon() && DungeonBattle.enemyPokemon().health()">

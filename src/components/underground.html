@@ -25,7 +25,7 @@
             </div>
             <div class="modal-body tab-content p-0">
                 <div id="dig" class="tab-pane fade in active show" data-bind="class: Mine.itemsFound() === Mine.itemsBuried() ? 'disabled' : ''">
-                    <div class="row no-gutters" data-bind="foreach: ['SmallRestore','MediumRestore','LargeRestore']">
+                    <div class="row g-0" data-bind="foreach: ['SmallRestore','MediumRestore','LargeRestore']">
                         <button class="col-4 btn btn-secondary" data-bind="
                                 click: function(){ ItemList[$data].use();},
                                 css: { disabled: player._itemList[$data]() <= 0}">
@@ -34,7 +34,7 @@
                             <span data-bind="text: ' +' + App.game.underground.calculateItemEffect(GameConstants.EnergyRestoreSize[$data])">&nbsp;+? energy</span>
                         </button>
                     </div>
-                    <div class='row no-gutters' style="text-align:center;">
+                    <div class='row g-0' style="text-align:center;">
                         <div class='progress'>
                             <div id='mineEnergyBar' class='progress-bar bg-warning' role='progressbar'
                                  aria-valuemin='0' aria-valuemax='100'
@@ -45,7 +45,7 @@
                     </div>
                     <div id="mineBody" class="container" style="margin:auto">
                     </div>
-                    <div class='row no-gutters'>
+                    <div class='row g-0'>
                         <button class='col-12 col-md-4 btn btn-primary' onClick='Mine.toolSelected(Mine.Tool.Hammer)'
                         data-bind="tooltip: {title: 'Hammer will mine 1 layer of all 9 tiles in a chosen 3x3 area.', trigger: 'hover', placement: 'top', boundary: 'window'}">Hammer (<knockout data-bind="text: Underground.HAMMER_ENERGY"></knockout> energy)</button>
                         <button class='col-12 col-md-4 btn btn-info' onClick='Mine.toolSelected(Mine.Tool.Chisel)'

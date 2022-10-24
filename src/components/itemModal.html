@@ -66,7 +66,7 @@
                         <p data-bind="visible: PartyController.hasMultipleStoneEvolutionsAvailable(ItemHandler.pokemonSelected(), GameConstants.StoneType[ItemHandler.stoneSelected()])">
                             <i>If the requirements for more than one evolution is fulfilled, a random evolution will be selected.</i>
                         </p>
-                        <div class="row no-gutters justify-content-sm-center">
+                        <div class="row g-0 justify-content-sm-center">
                             <div class="row justify-content-center" style="padding:15px;">
                                 <button data-bind="click: function(){ItemHandler.useStones()}" class="btn btn-lg btn-success">Use evolution items!</button>
                             </div>
@@ -86,7 +86,7 @@
 
                     <div id="keyItems" class="tab-pane p-3">
                         <div class="m-0">
-                            <div class="row no-gutters justify-content-sm-center"
+                            <div class="row g-0 justify-content-sm-center"
                                 data-bind="foreach: App.game.keyItems.itemList">
                                 <div class="col-2">
                                     <img class="clickable key-item" src=""

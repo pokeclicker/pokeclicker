@@ -220,13 +220,13 @@
                 <!--RouteBattleView-->
                 <!--Use the base battle layout for fighting, dungeons and battle frontier.-->
 
-                <div class="battle-view card-body p-0 justify-content-center no-gutters no-select"
+                <div class="battle-view card-body p-0 justify-content-center g-0 no-select"
                     data-bind="if: (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.dungeon || App.game.gameState === GameConstants.GameState.paused || App.game.gameState === GameConstants.GameState.town || App.game.gameState === GameConstants.GameState.gym || App.game.gameState == GameConstants.GameState.battleFrontier || App.game.gameState == GameConstants.GameState.temporaryBattle),
                         class: MapHelper.calculateBattleCssClass()">
 
                     <!-- Route Battles -->
-                    <div class="row justify-content-center no-gutters" data-bind="if: App.game.gameState === GameConstants.GameState.fighting">
-                        <div class="col no-gutters clickable" data-bind="click: function() {Battle.clickAttack()}" style="height: 280px; display: block;">
+                    <div class="row justify-content-center g-0" data-bind="if: App.game.gameState === GameConstants.GameState.fighting">
+                        <div class="col g-0 clickable" data-bind="click: function() {Battle.clickAttack()}" style="height: 280px; display: block;">
                             <h2 class="pageItemTitle" style="display: block;">
                                 <knockout>
                                     <knockout data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': Battle.enemyPokemon() } }">Pokémon name</knockout>

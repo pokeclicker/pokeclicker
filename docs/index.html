@@ -157,9 +157,9 @@
 
 <template id="trainerCardTemplate">
     <div class="trainer-card-container mb-3 col-lg-4 col-md-6 col-sm-12 xol-xs-12">
-        <div class="trainer-card clickable card font-weight-bold">
+        <div class="trainer-card clickable card fw-bold">
             <div class="card-body">
-                <h5 class="align-middle font-weight-bold">
+                <h5 class="align-middle fw-bold">
                     <img class="trainer-image"/>
                     <span class="trainer-name"></span>
                 </h5>
@@ -474,7 +474,7 @@
                         <p data-bind="visible: PartyController.hasMultipleStoneEvolutionsAvailable(ItemHandler.pokemonSelected(), GameConstants.StoneType[ItemHandler.stoneSelected()])">
                             <i>If the requirements for more than one evolution is fulfilled, a random evolution will be selected.</i>
                         </p>
-                        <div class="row no-gutters justify-content-sm-center">
+                        <div class="row g-0 justify-content-sm-center">
                             <div class="row justify-content-center" style="padding:15px;">
                                 <button data-bind="click: function(){ItemHandler.useStones()}" class="btn btn-lg btn-success">Use evolution items!</button>
                             </div>
@@ -494,7 +494,7 @@
 
                     <div id="keyItems" class="tab-pane p-3">
                         <div class="m-0">
-                            <div class="row no-gutters justify-content-sm-center"
+                            <div class="row g-0 justify-content-sm-center"
                                 data-bind="foreach: App.game.keyItems.itemList">
                                 <div class="col-2">
                                     <img class="clickable key-item" src=""
@@ -879,7 +879,7 @@
 
                     <!-- Pokémon List container-->
                     <script type="text/html" id="PartySortSettingTemplate">
-    <div class="row no-gutters" style="align-items: center">
+    <div class="row g-0" style="align-items: center">
         <div class="input-group">
             <select
                 class="custom-select"
@@ -1093,13 +1093,13 @@
                 <!--RouteBattleView-->
                 <!--Use the base battle layout for fighting, dungeons and battle frontier.-->
 
-                <div class="battle-view card-body p-0 justify-content-center no-gutters no-select"
+                <div class="battle-view card-body p-0 justify-content-center g-0 no-select"
                     data-bind="if: (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.dungeon || App.game.gameState === GameConstants.GameState.paused || App.game.gameState === GameConstants.GameState.town || App.game.gameState === GameConstants.GameState.gym || App.game.gameState == GameConstants.GameState.battleFrontier || App.game.gameState == GameConstants.GameState.temporaryBattle),
                         class: MapHelper.calculateBattleCssClass()">
 
                     <!-- Route Battles -->
-                    <div class="row justify-content-center no-gutters" data-bind="if: App.game.gameState === GameConstants.GameState.fighting">
-                        <div class="col no-gutters clickable" data-bind="click: function() {Battle.clickAttack()}" style="height: 280px; display: block;">
+                    <div class="row justify-content-center g-0" data-bind="if: App.game.gameState === GameConstants.GameState.fighting">
+                        <div class="col g-0 clickable" data-bind="click: function() {Battle.clickAttack()}" style="height: 280px; display: block;">
                             <h2 class="pageItemTitle" style="display: block;">
                                 <knockout>
                                     <knockout data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': Battle.enemyPokemon() } }">Pokémon name</knockout>
@@ -1183,8 +1183,8 @@
                     </div>
 
                     <!-- Dungeon Battles -->
-                    <div class="row justify-content-center no-gutters" data-bind="if: App.game.gameState === GameConstants.GameState.dungeon">
-    <div class="col no-gutters clickable" style="height: 280px; display: block;"
+                    <div class="row justify-content-center g-0" data-bind="if: App.game.gameState === GameConstants.GameState.dungeon">
+    <div class="col g-0 clickable" style="height: 280px; display: block;"
         data-bind="click: function() { DungeonRunner.handleClick() }">
         <h2 class="pageItemTitle" style="display: block;">
             <knockout data-bind="if: DungeonBattle.enemyPokemon() && DungeonBattle.enemyPokemon().health()">
@@ -1333,8 +1333,8 @@
 
                     <!-- Gym Battles -->
 
-<div class="row justify-content-center no-gutters" data-bind="if: App.game.gameState === GameConstants.GameState.gym">
-    <div class="col no-gutters clickable" data-bind="click: function() {GymBattle.clickAttack()}" style="height: 280px; display: block;">
+<div class="row justify-content-center g-0" data-bind="if: App.game.gameState === GameConstants.GameState.gym">
+    <div class="col g-0 clickable" data-bind="click: function() {GymBattle.clickAttack()}" style="height: 280px; display: block;">
         <h2 class="pageItemTitle" style="display: block;">
             <knockout class="left">
                 <knockout data-bind="text: GymBattle.gym.leaderName.replace(/\d/g,'')"></knockout>
@@ -1411,8 +1411,8 @@
 
                     <!-- One Time Battles -->
 
-<div class="row justify-content-center no-gutters" data-bind="if: App.game.gameState === GameConstants.GameState.temporaryBattle">
-    <div class="col no-gutters clickable" data-bind="click: function() {TemporaryBattleBattle.clickAttack()}" style="height: 280px; display: block;">
+<div class="row justify-content-center g-0" data-bind="if: App.game.gameState === GameConstants.GameState.temporaryBattle">
+    <div class="col g-0 clickable" data-bind="click: function() {TemporaryBattleBattle.clickAttack()}" style="height: 280px; display: block;">
         <h2 class="pageItemTitle" style="display: block;">
 
             <knockout class="left">
@@ -1494,8 +1494,8 @@
 
                     <!-- Battle Frontier Battles -->
 
-<div class="row justify-content-center no-gutters" data-bind="if: App.game.gameState == GameConstants.GameState.battleFrontier">
-    <div class="col no-gutters" data-bind="if: BattleFrontierBattle.enemyPokemon" style="height: 280px; display: block;">
+<div class="row justify-content-center g-0" data-bind="if: App.game.gameState == GameConstants.GameState.battleFrontier">
+    <div class="col g-0" data-bind="if: BattleFrontierBattle.enemyPokemon" style="height: 280px; display: block;">
         <h2 class="pageItemTitle" style="display: block;">
 
             <knockout class="left">
@@ -1546,9 +1546,9 @@
                     <!--TownView-->
                     <knockout data-bind="if: App.game.gameState === GameConstants.GameState.town">
 <div id="townView" data-bind="style: { backgroundImage: `url('assets/images/towns/${player.town().name.replace(/'/, `\\'`)}.png')` }"
-     class="justify-content-center no-gutters no-select">
-    <div class="row justify-content-center no-gutters">
-        <div class="col no-gutters">
+     class="justify-content-center g-0 no-select">
+    <div class="row justify-content-center g-0">
+        <div class="col g-0">
             <button type="button" class="btn btn-outline-info" style="float: right;"
             data-bind="visible: player.town() instanceof DungeonTown && !QuestLineHelper.isQuestLineCompleted('Tutorial Quests'), tooltip: { title: 'Capture Pokémon to gain Dungeon Tokens in order to battle dungeons.', trigger: 'hover', placement:'left' }">?</button>
             <h2 class="pageItemTitle">
@@ -1576,8 +1576,8 @@
             </h2>
         </div>
     </div>
-    <div class="row no-gutters">
-       <div class="col-4 no-gutters">
+    <div class="row g-0">
+       <div class="col-4 g-0">
            <div class="list-group">
                 <button class="btn btn-secondary p-0"
                         onclick="DungeonRunner.initializeDungeon(player.town().dungeon)"
@@ -1606,7 +1606,7 @@
            </div>
        </div>
        <div class="col-5"></div>
-       <div class="col-3 no-gutters">
+       <div class="col-3 g-0">
            <div class="list-group" data-bind="foreach: player.town().npcs">
                <!-- ko if: $data.isVisible() -->
                 <button class="btn btn-info"
@@ -35500,7 +35500,7 @@
                             placement: 'bottom',
                             trigger: 'hover'
                         }">
-                            <td class="text-left font-weight-bold" data-bind="text: $data.type"></td>
+                            <td class="text-left fw-bold" data-bind="text: $data.type"></td>
                             <td class="p-1">
                                 <!-- ko if: !$data.active() && player.starter() == GameConstants.Starter.None --><button class="btn btn-warning btn-block" data-bind="click: ()=>{$data.activate();}">ACTIVATE</button><!-- /ko -->
                                 <!-- ko if: !$data.active() && player.starter() != GameConstants.Starter.None --><button class="btn btn-secondary btn-block disabled">DISABLED</button><!-- /ko -->
@@ -37564,7 +37564,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
             </div>
             <div class="modal-body tab-content p-0">
                 <div id="dig" class="tab-pane fade in active show" data-bind="class: Mine.itemsFound() === Mine.itemsBuried() ? 'disabled' : ''">
-                    <div class="row no-gutters" data-bind="foreach: ['SmallRestore','MediumRestore','LargeRestore']">
+                    <div class="row g-0" data-bind="foreach: ['SmallRestore','MediumRestore','LargeRestore']">
                         <button class="col-4 btn btn-secondary" data-bind="
                                 click: function(){ ItemList[$data].use();},
                                 css: { disabled: player._itemList[$data]() <= 0}">
@@ -37573,7 +37573,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             <span data-bind="text: ' +' + App.game.underground.calculateItemEffect(GameConstants.EnergyRestoreSize[$data])">&nbsp;+? energy</span>
                         </button>
                     </div>
-                    <div class='row no-gutters' style="text-align:center;">
+                    <div class='row g-0' style="text-align:center;">
                         <div class='progress'>
                             <div id='mineEnergyBar' class='progress-bar bg-warning' role='progressbar'
                                  aria-valuemin='0' aria-valuemax='100'
@@ -37584,7 +37584,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                     </div>
                     <div id="mineBody" class="container" style="margin:auto">
                     </div>
-                    <div class='row no-gutters'>
+                    <div class='row g-0'>
                         <button class='col-12 col-md-4 btn btn-primary' onClick='Mine.toolSelected(Mine.Tool.Hammer)'
                         data-bind="tooltip: {title: 'Hammer will mine 1 layer of all 9 tiles in a chosen 3x3 area.', trigger: 'hover', placement: 'top', boundary: 'window'}">Hammer (<knockout data-bind="text: Underground.HAMMER_ENERGY"></knockout> energy)</button>
                         <button class='col-12 col-md-4 btn btn-info' onClick='Mine.toolSelected(Mine.Tool.Chisel)'
@@ -38413,7 +38413,7 @@ aria-labelledby="badgeCaseModalLabel">
             <div data-bind="foreach: Object.entries(BadgeCaseController.getDisplayableBadges())">
                 <div>
                     <h4 data-bind="text: $data[0]"></h4>
-                    <div class="row no-gutters justify-content-center"
+                    <div class="row g-0 justify-content-center"
                         data-bind="foreach: $data[1]">
                         <div class="col-3 badgeEntry">
                             <img src="" width="60px"
@@ -39616,8 +39616,8 @@ aria-labelledby="badgeCaseModalLabel">
        <div class="modal-content">
            <div class="modal-body p-0">
               <div class="battle-view">
-                <div class="row justify-content-center no-gutters" data-bind="if: Safari.inBattle">
-                  <div class="col no-gutters clickable" data-bind="click: function() {BattleFrontierBattle.clickAttack()}" style="height: 280px; display: block;">
+                <div class="row justify-content-center g-0" data-bind="if: Safari.inBattle">
+                  <div class="col g-0 clickable" data-bind="click: function() {BattleFrontierBattle.clickAttack()}" style="height: 280px; display: block;">
                       <h2 class="pageItemTitle" style="display: block;">
 
                           <knockout class="left">

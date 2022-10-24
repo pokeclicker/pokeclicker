@@ -15,13 +15,13 @@
             </a>
         </div>
         <div class="save-container justify-content-center container row"></div>
-        
+
         <div class="new-import-buttons justify-content-center container row">
             <label class="btn btn-success col-md-4 col-xs-12 mx-1" onclick="Save.key = Rand.string(6); document.querySelector('#saveSelector').remove(); App.start();">New Save</label>
             <label for="import-save" class="btn btn-warning col-md-4 col-xs-12 mx-1" onclick="Save.key = Rand.string(6);">Import Save</label>
         </div>
     </div>
-    
+
     <div class="dropdown-menu py-0" id="saveSelectorContextMenu">
         <a class="dropdown-item" href="#">Action</a>
         <a class="dropdown-item" href="#">Another action</a>
@@ -31,9 +31,9 @@
 
 <template id="trainerCardTemplate">
     <div class="trainer-card-container mb-3 col-lg-4 col-md-6 col-sm-12 xol-xs-12">
-        <div class="trainer-card clickable card font-weight-bold">
+        <div class="trainer-card clickable card fw-bold">
             <div class="card-body">
-                <h5 class="align-middle font-weight-bold">
+                <h5 class="align-middle fw-bold">
                     <img class="trainer-image"/>
                     <span class="trainer-name"></span>
                 </h5>

@@ -1,8 +1,8 @@
 <knockout data-bind="if: App.game.gameState === GameConstants.GameState.town">
 <div id="townView" data-bind="style: { backgroundImage: `url('assets/images/towns/${player.town().name.replace(/'/, `\\'`)}.png')` }"
-     class="justify-content-center no-gutters no-select">
-    <div class="row justify-content-center no-gutters">
-        <div class="col no-gutters">
+     class="justify-content-center g-0 no-select">
+    <div class="row justify-content-center g-0">
+        <div class="col g-0">
             <button type="button" class="btn btn-outline-info" style="float: right;"
             data-bind="visible: player.town() instanceof DungeonTown && !QuestLineHelper.isQuestLineCompleted('Tutorial Quests'), tooltip: { title: 'Capture Pokémon to gain Dungeon Tokens in order to battle dungeons.', trigger: 'hover', placement:'left' }">?</button>
             <h2 class="pageItemTitle">
@@ -30,8 +30,8 @@
             </h2>
         </div>
     </div>
-    <div class="row no-gutters">
-       <div class="col-4 no-gutters">
+    <div class="row g-0">
+       <div class="col-4 g-0">
            <div class="list-group">
                 <button class="btn btn-secondary p-0"
                         onclick="DungeonRunner.initializeDungeon(player.town().dungeon)"
@@ -60,7 +60,7 @@
            </div>
        </div>
        <div class="col-5"></div>
-       <div class="col-3 no-gutters">
+       <div class="col-3 g-0">
            <div class="list-group" data-bind="foreach: player.town().npcs">
                <!-- ko if: $data.isVisible() -->
                 <button class="btn btn-info"
