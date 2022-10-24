@@ -2402,6 +2402,7 @@ const ResortAreaShop = new Shop([
     ItemList.Protector,
     ItemList.Dubious_disc,
     ItemList.Reaper_cloth,
+    new Vitamin(GameConstants.VitaminType.Calcium, 1000000, GameConstants.Currency.money, { multiplier: 1.01, multiplierDecrease: false, saveName: `${GameConstants.VitaminType[GameConstants.VitaminType.Calcium]}|${GameConstants.Currency[GameConstants.Currency.money]}` }, 'Calcium'),
 ]);
 
 //Sinnoh Berry Master
@@ -2966,6 +2967,7 @@ const NuvemaTownShop = new Shop([
     ItemList.Ultraball,
     ItemList.Electirizer,
     ItemList.Magmarizer,
+    new Vitamin(GameConstants.VitaminType.Calcium, 1000000, GameConstants.Currency.money, { multiplier: 1.01, multiplierDecrease: false, saveName: `${GameConstants.VitaminType[GameConstants.VitaminType.Calcium]}|${GameConstants.Currency[GameConstants.Currency.money]}` }, 'Calcium'),
 ]);
 const AnvilleTownShop = new Shop([
     ItemList['Meloetta (Pirouette)'],
@@ -3600,6 +3602,7 @@ const SnowbelleCityShop = new Shop([
     ItemList.Protector,
     ItemList.Dubious_disc,
     ItemList.Reaper_cloth,
+    new Vitamin(GameConstants.VitaminType.Calcium, 1000000, GameConstants.Currency.money, { multiplier: 1.01, multiplierDecrease: false, saveName: `${GameConstants.VitaminType[GameConstants.VitaminType.Calcium]}|${GameConstants.Currency[GameConstants.Currency.money]}` }, 'Calcium'),
 ]);
 
 //Kalos NPCs
@@ -3998,6 +4001,7 @@ const AltaroftheSunneandMooneShop = new Shop([
     ItemList.Moon_stone,
     ItemList.Sun_stone,
     ItemList.Poipole,
+    new Vitamin(GameConstants.VitaminType.Calcium, 1000000, GameConstants.Currency.money, { multiplier: 1.01, multiplierDecrease: false, saveName: `${GameConstants.VitaminType[GameConstants.VitaminType.Calcium]}|${GameConstants.Currency[GameConstants.Currency.money]}` }, 'Calcium'),
 ]);
 
 //Alola NPCs
@@ -4613,6 +4617,7 @@ const FreezingtonShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
     ItemList.Ultraball,
+    new Vitamin(GameConstants.VitaminType.Calcium, 1000000, GameConstants.Currency.money, { multiplier: 1.01, multiplierDecrease: false, saveName: `${GameConstants.VitaminType[GameConstants.VitaminType.Calcium]}|${GameConstants.Currency[GameConstants.Currency.money]}` }, 'Calcium'),
 ]);
 
 
