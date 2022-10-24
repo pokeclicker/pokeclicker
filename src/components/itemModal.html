@@ -12,9 +12,9 @@
 
             <div class="modal-body p-0">
                 <ul class="nav nav-tabs nav-fill">
-                    <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#evoStones">Evolution Items</a></li>
-                    <li class="nav-item"><a data-toggle='tab' class='nav-link' href="#itemBag">Item Bag</a></li>
-                    <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#keyItems">Key Items</a></li>
+                    <li class="nav-item"><a data-bs-toggle='tab' class='nav-link active' href="#evoStones">Evolution Items</a></li>
+                    <li class="nav-item"><a data-bs-toggle='tab' class='nav-link' href="#itemBag">Item Bag</a></li>
+                    <li class='nav-item'><a data-bs-toggle='tab' class='nav-link' href="#keyItems">Key Items</a></li>
                 </ul>
                 <div class="tab-content">
                     <div id="evoStones" class="tab-pane active p-3">
@@ -132,7 +132,7 @@
 </div>
 
 <script type="text/html" id="otherItemTemplate">
-    <div data-container="body" data-bind="tooltip: {
+    <div data-bs-container="body" data-bind="tooltip: {
         title: ItemList[$data] ? `<u>${ItemList[$data].displayName}</u><br/>${ItemList[$data].description || ''}` : '',
         trigger: 'hover',
         placement:'top',

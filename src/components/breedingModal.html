@@ -4,15 +4,15 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
    <div class="modal-content">
        <div class="modal-header justify-content-start align-items-center">
             <h5 class="modal-title" id="breedingModalLabel">Day Care</h5>
-            <button class="btn btn-secondary" type="button" data-toggle="collapse" style="margin-left: 25px;"
+            <button class="btn btn-secondary" type="button" data-bs-toggle="collapse" style="margin-left: 25px;"
                     data-target="#breeding-filter" aria-expanded="false" aria-controls="breeding-filter">
                 Filters
             </button>
-            <button class="btn btn-secondary" type="button" data-toggle="collapse" style="margin-left: 25px;"
+            <button class="btn btn-secondary" type="button" data-bs-toggle="collapse" style="margin-left: 25px;"
                     data-target="#breeding-settings" aria-expanded="false" aria-controls="breeding-settings">
                 Settings
             </button>
-            <button class="btn btn-secondary" type="button" style="margin-left: 25px;" href="#categoryModal" data-toggle="modal">
+            <button class="btn btn-secondary" type="button" style="margin-left: 25px;" href="#categoryModal" data-bs-toggle="modal">
                 Categories
             </button>
             <button type="button" class="btn btn-info"
@@ -23,11 +23,11 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
        </div>
        <div class="modal-body p-0">
            <ul class="nav nav-tabs nav-fill">
-                <li class="nav-item"><a class="nav-link active" href="#breeding-pokemon" data-toggle="tab" onclick="$('#breeding-fireall').hide()">Pokémon</a></li>
-                <li class="nav-item"><a class="nav-link" href="#breeding-eggs" data-toggle="tab" onclick="$('#breeding-fireall').hide()">Eggs</a></li>
-                <li class="nav-item"><a class="nav-link" href="#breeding-fossils" data-toggle="tab" onclick="$('#breeding-fireall').hide()">Fossils</a></li>
-                <li class="nav-item" data-bind="visible: App.game.breeding.hatcheryHelpers.isUnlocked()" onclick="$('#breeding-fireall').show()"><a class="nav-link" href="#breeding-helpers" data-toggle="tab">Helpers (BETA)</a></li>
-                <li class="nav-item"><a class="nav-link" href="#breeding-help" data-toggle="tab" onclick="$('#breeding-fireall').hide()">Help</a></li>
+                <li class="nav-item"><a class="nav-link active" href="#breeding-pokemon" data-bs-toggle="tab" onclick="$('#breeding-fireall').hide()">Pokémon</a></li>
+                <li class="nav-item"><a class="nav-link" href="#breeding-eggs" data-bs-toggle="tab" onclick="$('#breeding-fireall').hide()">Eggs</a></li>
+                <li class="nav-item"><a class="nav-link" href="#breeding-fossils" data-bs-toggle="tab" onclick="$('#breeding-fireall').hide()">Fossils</a></li>
+                <li class="nav-item" data-bind="visible: App.game.breeding.hatcheryHelpers.isUnlocked()" onclick="$('#breeding-fireall').show()"><a class="nav-link" href="#breeding-helpers" data-bs-toggle="tab">Helpers (BETA)</a></li>
+                <li class="nav-item"><a class="nav-link" href="#breeding-help" data-bs-toggle="tab" onclick="$('#breeding-fireall').hide()">Help</a></li>
             </ul>
 
             <p class="bg-warning my-0" data-bind="visible: !App.game.breeding.hasFreeEggSlot()">
@@ -57,7 +57,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             <div class="form-group col-md-3 col-6">
                                 <label>Regions</label><br/>
                                 <div class="dropdown show">
-                                    <button type="button" class="text-left custom-select col-12 btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bind="text :
+                                    <button type="button" class="text-left custom-select col-12 btn" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bind="text :
                                         BreedingFilters.region.value() == 2 ** (player.highestRegion() + 1) - 1 ?
                                             'All' :
                                             (BreedingFilters.region.value() ?
@@ -181,12 +181,12 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                 <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: BreedingController.getDisplayValue($data)">value</span>
                                 <a class="overlay" href="#breed" data-bind="click: function() { App.game.breeding.addPokemonToHatchery($data); App.game.breeding.checkCloseModal();}"></a>
                                 <div class="pokemonCategory dropdown">
-                                    <button data-toggle="dropdown" data-bind="class: `category-${$data.category + 1}`"></button>
+                                    <button data-bs-toggle="dropdown" data-bind="class: `category-${$data.category + 1}`"></button>
                                     <div class="dropdown-menu p-0">
                                         <!-- ko foreach: PokemonCategories.categories -->
                                         <a class="dropdown-item category" href="#" data-bind="text: $data.name, style: { background: $data.color }, click: () => { $parent.category = $index() }">Category</a>
                                         <!-- /ko -->
-                                        <a class="dropdown-item bg-dark py-1" href="#categoryModal" data-toggle="modal"><i>Edit</i></a>
+                                        <a class="dropdown-item bg-dark py-1" href="#categoryModal" data-bs-toggle="modal"><i>Edit</i></a>
                                     </div>
                                 </div>
                             </li>

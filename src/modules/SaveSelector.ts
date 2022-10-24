@@ -20,7 +20,7 @@ export default class SaveSelector {
             newImportButton.style.display = 'none';
         }
 
-        $('[data-toggle="tooltip"]').tooltip();
+        $('[data-bs-toggle="tooltip"]').tooltip();
 
         $(container).on('contextmenu', '.trainer-card.clickable', (e) => {
             const top = e.pageY;

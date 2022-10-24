@@ -1,5 +1,5 @@
 <div id="battleItemContainer" class="card sortable border-secondary mb-3" data-bind="visible: !(Settings.getSetting('hideChallengeRelatedModules').observableValue() && App.game.challenges.list.disableBattleItems.active())">
-    <div class="card-header p-0" data-toggle="collapse" href="#battleItemContainerBody">
+    <div class="card-header p-0" data-bs-toggle="collapse" href="#battleItemContainerBody">
       <span>Battle Items</span>
     </div>
     <button type="button" class="btn btn-sm btn-primary"
@@ -8,7 +8,7 @@
             onclick="EffectEngineRunner.incrementMultiplier()"
             oncontextmenu="EffectEngineRunner.decrementMultiplier(); return false"
             title="Controls"
-            data-toggle="popover"
+            data-bs-toggle="popover"
             data-html="true"
             data-content="Left/right click to cycle amount<br/>Click on item image to use"
             data-placement="right"
@@ -58,7 +58,7 @@
         </tbody>
       </table>
     </div>
-    <div class="card-header p-0" data-toggle="collapse" href="#fluteItemContainerBody" data-bind="visible: App.game.badgeCase.hasBadge(BadgeEnums.Heat)">
+    <div class="card-header p-0" data-bs-toggle="collapse" href="#fluteItemContainerBody" data-bind="visible: App.game.badgeCase.hasBadge(BadgeEnums.Heat)">
       <span>Flutes</span>
     </div>
     <div id="fluteItemContainerBody" class="card-body p-0 show">

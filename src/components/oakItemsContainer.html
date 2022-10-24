@@ -1,8 +1,8 @@
 <div id="oakItemsContainer" class="card sortable border-secondary mb-3" data-bind="visible: App.game.oakItems.canAccess() && !(Settings.getSetting('hideChallengeRelatedModules').observableValue() && App.game.challenges.list.disableOakItems.active())">
-    <div class="card-header p-0" data-toggle="collapse" href="#oakItemsBody">
+    <div class="card-header p-0" data-bs-toggle="collapse" href="#oakItemsBody">
         <span style="text-align:center">Oak Items</span>
     </div>
-    <button class='btn btn-sm btn-primary' style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;" href="#oakItemsModal" data-toggle="modal">
+    <button class='btn btn-sm btn-primary' style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;" href="#oakItemsModal" data-bs-toggle="modal">
         List
     </button>
     <div id="oakItemsBody" class="card-body show p-0">
@@ -10,7 +10,7 @@
         <!--
         <thead>
           <tr>
-            <td class="clickable table-primary p-0" colspan="2" href="#oakItemsModal" data-toggle="modal">
+            <td class="clickable table-primary p-0" colspan="2" href="#oakItemsModal" data-bs-toggle="modal">
               Open menu
             </td>
           <tr>
@@ -19,7 +19,7 @@
         <tbody data-bind="foreach: App.game.oakItems.itemList">
           <tr data-bind="if: $data.isActive, tooltip: { html: true, title: $data.tooltip, trigger: 'hover', placement:'bottom' }">
             <td class="tight p-1">
-              <img class="clickable" href="#oakItemsModal" data-toggle="modal" src="" data-bind="attr:{ src: 'assets/images/oakitems/' + OakItemType[$data.name] + '.png'}" width="32px">
+              <img class="clickable" href="#oakItemsModal" data-bs-toggle="modal" src="" data-bind="attr:{ src: 'assets/images/oakitems/' + OakItemType[$data.name] + '.png'}" width="32px">
             </td>
             <td class="p-0">
               <div class="progress" style="height: 40px;">
@@ -50,7 +50,7 @@
         <!-- ko if: App.game.oakItems.hasAvailableSlot() && !App.game.challenges.list.disableOakItems.active() -->
         <tfoot>
           <tr>
-            <td class="clickable table-warning text-light" colspan="2" href="#oakItemsModal" data-toggle="modal">
+            <td class="clickable table-warning text-light" colspan="2" href="#oakItemsModal" data-bs-toggle="modal">
               Equip another Oak Item!
             </td>
           </tr>
@@ -59,7 +59,7 @@
         <!-- ko if: App.game.challenges.list.disableOakItems.active() -->
         <tfoot>
           <tr>
-            <td class="clickable table-danger text-light" colspan="2" href="#oakItemsModal" data-toggle="modal">
+            <td class="clickable table-danger text-light" colspan="2" href="#oakItemsModal" data-bs-toggle="modal">
               Oak Items are disabled.
             </td>
           </tr>

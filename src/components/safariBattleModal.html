@@ -45,7 +45,7 @@
                             <div style="display:inline"><img width=16px data-bind="attr: { src: BaitList[BaitType[baitType()]].image }"></div>
                             <span data-bind="text: BaitList[BaitType[baitType()]].btnName">Bait (∞)</span>
                         </button>
-                        <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split active" data-bind="text: '&nbsp;'" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split active" data-bind="text: '&nbsp;'" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         </button>
                         <div class="dropdown-menu dropdown-menu-right" data-bind="foreach: GameHelper.enumNumbers(BaitType)">
                             <button class="dropdown-item" type="button" data-bind="click: function(){baitType($data)}, text: BaitList[BaitType[$data]].btnName"></button>

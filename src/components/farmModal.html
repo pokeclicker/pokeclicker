@@ -5,10 +5,10 @@
         <div class="modal-content">
             <div class="modal-header p-0">
                 <ul class="nav nav-tabs nav-fill">
-                    <li class="nav-item" onclick="FarmController.farmingModalTabSelected('berryFarmView')"><a data-toggle='tab' class='nav-link active' href="#berryFarmView">Farm</a></li>
-                    <li class='nav-item' onclick="FarmController.farmingModalTabSelected('farmHandsView')" data-bind="visible: App.game.farming.farmHands.isUnlocked()"><a data-toggle='tab' class='nav-link' href="#farmHandsView">Farm Hands (BETA)</a></li>
-                    <li class='nav-item' onclick="FarmController.farmingModalTabSelected('berryDexView')"><a data-toggle='tab' class='nav-link' href="#berryDexView">Berrydex</a></li>
-                    <li class='nav-item' onclick="FarmController.farmingModalTabSelected('helpView')"><a data-toggle='tab' class='nav-link' href="#helpView">Help</a></li>
+                    <li class="nav-item" onclick="FarmController.farmingModalTabSelected('berryFarmView')"><a data-bs-toggle='tab' class='nav-link active' href="#berryFarmView">Farm</a></li>
+                    <li class='nav-item' onclick="FarmController.farmingModalTabSelected('farmHandsView')" data-bind="visible: App.game.farming.farmHands.isUnlocked()"><a data-bs-toggle='tab' class='nav-link' href="#farmHandsView">Farm Hands (BETA)</a></li>
+                    <li class='nav-item' onclick="FarmController.farmingModalTabSelected('berryDexView')"><a data-bs-toggle='tab' class='nav-link' href="#berryDexView">Berrydex</a></li>
+                    <li class='nav-item' onclick="FarmController.farmingModalTabSelected('helpView')"><a data-bs-toggle='tab' class='nav-link' href="#helpView">Help</a></li>
                     <btn class="btn btn-primary">
                         <span data-bind="template: { name: 'currencyTemplate', data: {'amount': App.game.wallet.currencies[GameConstants.Currency.farmPoint](), 'currency': GameConstants.Currency.farmPoint}}"></span>
                     </btn>
@@ -23,8 +23,8 @@
 
 
                             <ul class="nav nav-tabs nav-fill">
-                                <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#seeds" data-bind="click: function(){FarmController.berryListVisible(true);}">Berries</a></li>
-                                <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#mulches" data-bind="click: function(){FarmController.berryListVisible(false);}">Mulch</a></li>
+                                <li class="nav-item"><a data-bs-toggle='tab' class='nav-link active' href="#seeds" data-bind="click: function(){FarmController.berryListVisible(true);}">Berries</a></li>
+                                <li class='nav-item'><a data-bs-toggle='tab' class='nav-link' href="#mulches" data-bind="click: function(){FarmController.berryListVisible(false);}">Mulch</a></li>
                             </ul>
 
                             <div class="tab-content">
@@ -97,7 +97,7 @@
                                             onclick="FarmController.incrementMultiplier()"
                                             oncontextmenu="FarmController.decrementMultiplier(); return false"
                                             title="Multiplier"
-                                            data-toggle="popover"
+                                            data-bs-toggle="popover"
                                             data-html="true"
                                             data-content="Left/right click to cycle amount<br/>Applies to single and Mulch All"
                                             data-placement="right"
@@ -197,7 +197,7 @@
                                      <img src="" width=80px style="padding: 20px 0px;" data-bind="css: { 'pokemon-not-seen': !App.game.farming.unlockedBerries[$data]() }, attr:{ src: FarmController.getBerryImage($data)}">
                                      <!-- ko if: App.game.farming.unlockedBerries[$data]() -->
                                      <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: BerryType[$data]">name</span>
-                                     <a class="overlay" href="#berryDexModal" data-toggle="modal"
+                                     <a class="overlay" href="#berryDexModal" data-bs-toggle="modal"
                                         data-bind="click: ()=>{App.game.statistics.selectedBerryID($data)}"></a>
                                      <!-- /ko -->
                             </li>
@@ -347,7 +347,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="2" class="clickable" data-toggle="collapse" data-bind="attr: { href: `#allowedPlots${$data.name}`}" >Allowed Plots:</td>
+                                            <td colspan="2" class="clickable" data-bs-toggle="collapse" data-bind="attr: { href: `#allowedPlots${$data.name}`}" >Allowed Plots:</td>
                                         </tr>
                                         <tr>
                                             <td class="p-0" colspan="2">

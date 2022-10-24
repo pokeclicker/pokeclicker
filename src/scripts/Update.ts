@@ -1558,7 +1558,7 @@ class Update implements Saveable {
             this.automaticallyDownloadBackup(backupButton, settingsData);
             Notifier.notify({
                 title: `[v${this.version}] Game has been updated!`,
-                message: `Check the <a class="text-light" href="#changelogModal" data-toggle="modal"><u>changelog</u></a> for details!\n\n${backupButton.outerHTML}`,
+                message: `Check the <a class="text-light" href="#changelogModal" data-bs-toggle="modal"><u>changelog</u></a> for details!\n\n${backupButton.outerHTML}`,
                 type: NotificationConstants.NotificationOption.primary,
                 timeout: 6e4,
             });
@@ -1566,7 +1566,7 @@ class Update implements Saveable {
             console.error('Error trying to convert backup save', err);
             Notifier.notify({
                 title: `[v${this.version}] Game has been updated!`,
-                message: 'Check the <a class="text-light" href="#changelogModal" data-toggle="modal"><u>changelog</u></a> for details!\n\n<i>Failed to download old save, Please check the console for errors, and report them on our <a class="text-light" href="https://discord.gg/a6DFe4p"><u>Discord</u></a>.</i>',
+                message: 'Check the <a class="text-light" href="#changelogModal" data-bs-toggle="modal"><u>changelog</u></a> for details!\n\n<i>Failed to download old save, Please check the console for errors, and report them on our <a class="text-light" href="https://discord.gg/a6DFe4p"><u>Discord</u></a>.</i>',
                 type: NotificationConstants.NotificationOption.primary,
                 timeout: 6e4,
             });

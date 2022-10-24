@@ -42,8 +42,8 @@ class GameController {
     }
 
     static bindToolTips() {
-        $('[data-toggle="popover"]').popover();
-        $('[data-toggle="tooltip"]').tooltip();
+        $('[data-bs-toggle="popover"]').popover();
+        $('[data-bs-toggle="tooltip"]').tooltip();
 
 
         (ko as any).bindingHandlers.tooltip = {
@@ -68,19 +68,20 @@ class GameController {
                 ko.utils.extend(options, local);
 
                 // Update the config of the tooltip
-                const tooltipData = $(element).data('bs.tooltip');
-                tooltipData.config.title = (options as any).title;
+                const tooltip = bootstrap.Tooltip.getInstance(element);
+                tooltip.setContent({ '.tooltip-inner': (options as any).title });
 
-                // If the tooltip is visible, update its text
-                const tooltipInner = tooltipData.tip && tooltipData.tip.querySelector('.tooltip-inner');
-                if (tooltipInner) {
-                    tooltipInner.innerHTML = tooltipData.config.title || '';
-                }
-                if (tooltipData && tooltipData.config) {
-                    if (tooltipData.config.title === '') {
-                        $(element).tooltip('hide');
-                    }
-                }
+                //TODO is this really needed?
+                // // If the tooltip is visible, update its text
+                // const tooltipInner = tooltipData.tip && tooltipData.tip.querySelector('.tooltip-inner');
+                // if (tooltipInner) {
+                //     tooltipInner.innerHTML = tooltipData.config.title || '';
+                // }
+                // if (tooltipData && tooltipData.config) {
+                //     if (tooltipData.config.title === '') {
+                //         $(element).tooltip('hide');
+                //     }
+                // }
             },
             options: {
                 placement: 'bottom',

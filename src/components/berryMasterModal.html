@@ -8,8 +8,8 @@
             </div>
             <div>
                 <ul class="nav nav-tabs nav-fill">
-                    <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#berryMasterShop" data-bind="click: function(){shopVisible(true);}">Shop</a></li>
-                    <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#berryMasterTrade" data-bind="click: function(){shopVisible(false);}">Trades</a></li>
+                    <li class="nav-item"><a data-bs-toggle='tab' class='nav-link active' href="#berryMasterShop" data-bind="click: function(){shopVisible(true);}">Shop</a></li>
+                    <li class='nav-item'><a data-bs-toggle='tab' class='nav-link' href="#berryMasterTrade" data-bind="click: function(){shopVisible(false);}">Trades</a></li>
                 </ul>
             </div>
             <div class="modal-body tab-content">
@@ -61,7 +61,7 @@
                                             <button class='btn btn-success btn-block' data-bind='click: function(){BerryDeal.use(ShopHandler.shopObservable()?.location, $parentContext.$index(), tradeAmount())}, css: { disabled: !BerryDeal.canUse(ShopHandler.shopObservable()?.location, $parentContext.$index()) }'>
                                                 Trade
                                             </button>
-                                            <button type="button" data-bind="text: tradeAmount() + '&nbsp;', css: { disabled: !BerryDeal.canUse(ShopHandler.shopObservable()?.location, $parentContext.$index()) }" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <button type="button" data-bind="text: tradeAmount() + '&nbsp;', css: { disabled: !BerryDeal.canUse(ShopHandler.shopObservable()?.location, $parentContext.$index()) }" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             </button>
                                             <div class="dropdown-menu" data-bind="foreach: [1, 10, 100, 1000, Infinity]">
                                                 <button class="dropdown-item" type="button" data-bind="click: function(){tradeAmount($data)}, text: $data.toLocaleString('en-US')"></button>

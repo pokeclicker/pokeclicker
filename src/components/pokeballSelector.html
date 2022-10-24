@@ -1,5 +1,5 @@
 <div id="pokeballSelector" class="card sortable border-secondary mb-3" data-bind="visible: player.starter() != GameConstants.Starter.None">
-    <div class="card-header p-0" data-toggle="collapse" href="#pokeballSelectorBody">
+    <div class="card-header p-0" data-bs-toggle="collapse" href="#pokeballSelectorBody">
         <span>Poké Balls</span>
     </div>
     <button type="button" class="btn btn-info"
@@ -11,10 +11,10 @@
         <table class="table table-sm m-0">
             <thead>
                 <tr>
-                    <th width="20%" data-toggle="tooltip" title="Previously captured Pokémon will use this ball selection">Caught</th>
-                    <th width="20%" data-toggle="tooltip" title="Previously captured Shiny Pokémon will use this ball selection" style="filter: grayscale(80%);">✨</th>
-                    <th width="20%" data-toggle="tooltip" title="Uncaptured Pokémon will use this ball selection">New</th>
-                    <th width="20%" data-toggle="tooltip" title="Uncaptured Shiny Pokémon will use this ball selection">✨</th>
+                    <th width="20%" data-bs-toggle="tooltip" title="Previously captured Pokémon will use this ball selection">Caught</th>
+                    <th width="20%" data-bs-toggle="tooltip" title="Previously captured Shiny Pokémon will use this ball selection" style="filter: grayscale(80%);">✨</th>
+                    <th width="20%" data-bs-toggle="tooltip" title="Uncaptured Pokémon will use this ball selection">New</th>
+                    <th width="20%" data-bs-toggle="tooltip" title="Uncaptured Shiny Pokémon will use this ball selection">✨</th>
                 </tr>
                 <tr>
                     <td data-bind="template: {name: 'selectedPokeballDisplayTemplate', data: { 'value': App.game.pokeballs.alreadyCaughtSelection, 'field': App.game.pokeballs._alreadyCaughtSelection, 'title': 'Already Caught Pokémon' }}"></td>

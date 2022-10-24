@@ -3,13 +3,13 @@
   class="card sortable border-secondary mb-3"
   data-bind="visible: App.game.achievementTracker.canAccess()"
 >
-  <div class="card-header p-0" data-toggle="collapse" href="#achievementTrackerBody">
+  <div class="card-header p-0" data-bs-toggle="collapse" href="#achievementTrackerBody">
     <span style="text-align: center">Achievement Tracker</span>
   </div>
   <button
     class="btn btn-sm btn-primary"
     style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;"
-    data-toggle="modal"
+    data-bs-toggle="modal"
     href="#achievementsModal"
     onclick="AchievementHandler.filterAchievementList(true);"
   >
@@ -23,7 +23,7 @@
     <div
       class="clickable table-warning text-light p-2"
       href="#achievementsModal"
-      data-toggle="modal"
+      data-bs-toggle="modal"
     >
       Select an achievement to track!
     </div>
