@@ -562,7 +562,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.unova]: new Set(['Relic Castle', 'Relic Passage', 'Seaside Cave', 'Victory Road Unova', 'Twist Mountain']),
         [Region.kalos]: new Set([9, 13, 'Connecting Cave', 'Kiloude City', 'Terminus Cave', 'Victory Road Kalos']),
         [Region.alola]: new Set([12, 22, 29, 'Verdant Cavern', 'Seaward Cave', 'Ten Carat Hill', 'Diglett\'s Tunnel', 'Vast Poni Canyon']),
-        [Region.galar]: new Set(['Warm-Up Tunnel', 'Courageous Cavern', 'Brawlers Cave', 'Rock Peak Ruins', 'Split-Decision Ruins', 'Lakeside Cave', 'Tunnel to the Top', 18]),
+        [Region.galar]: new Set(['Warm-Up Tunnel', 'Courageous Cavern', 'Brawlers\' Cave', 'Rock Peak Ruins', 'Split-Decision Ruins', 'Lakeside Cave', 'Tunnel to the Top', 18]),
     },
 
     GemCave: {
@@ -1206,7 +1206,7 @@ export const GalarDungeons = [
     'Energy Plant',
     'Dusty Bowl',
     'Courageous Cavern',
-    'Brawlers Cave',
+    'Brawlers\' Cave',
     'Warm-Up Tunnel',
     'Tower of Darkness',
     'Tower of Waters',
