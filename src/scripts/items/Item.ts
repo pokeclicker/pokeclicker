@@ -14,6 +14,7 @@ enum MultiplierDecreaser {
 interface ShopOptions {
     saveName?: string,
     maxAmount?: number,
+    maxPriceMultiplier?: number,
     multiplier?: number,
     multiplierDecrease?: boolean,
     multiplierDecreaser?: MultiplierDecreaser,
@@ -25,6 +26,7 @@ class Item {
 
     // Shop Details
     price: KnockoutObservable<number>;
+    maxPriceMultiplier: number;
     multiplier: number;
     multiplierDecrease: boolean;
     multiplierDecreaser: MultiplierDecreaser;
@@ -41,6 +43,7 @@ class Item {
         {
             saveName = '',
             maxAmount = Number.MAX_SAFE_INTEGER,
+            maxPriceMultiplier = 100,
             multiplier = GameConstants.ITEM_PRICE_MULTIPLIER,
             multiplierDecrease = true,
             multiplierDecreaser = MultiplierDecreaser.Battle,
@@ -54,6 +57,7 @@ class Item {
         this.saveName = saveName || name || `${name}|${GameConstants.Currency[currency]}`;
         this.maxAmount = maxAmount || Number.MAX_SAFE_INTEGER;
         // Multiplier needs to be above 1
+        this.maxPriceMultiplier = maxPriceMultiplier ?? 100;
         this.multiplier = Math.max(1, multiplier || GameConstants.ITEM_PRICE_MULTIPLIER);
         this.multiplierDecrease = multiplierDecrease;
         this.multiplierDecreaser = multiplierDecreaser || MultiplierDecreaser.Battle;
@@ -172,7 +176,7 @@ class Item {
     }
 
     increasePriceMultiplier(amount = 1) {
-        player.itemMultipliers[this.saveName] = Math.min(100, (player.itemMultipliers[this.saveName] || 1) * Math.pow(this.multiplier, amount));
+        player.itemMultipliers[this.saveName] = Math.min(this.maxPriceMultiplier, (player.itemMultipliers[this.saveName] || 1) * Math.pow(this.multiplier, amount));
         this.price(Math.round(this.basePrice * player.itemMultipliers[this.saveName]));
     }
 
