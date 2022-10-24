@@ -321,7 +321,7 @@ class Update implements Saveable {
                     title: 'Active Challenge Mode?',
                     message: `Do you want to activate No Click Attack challenge mode?
 
-                    <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableClickAttack.activate();" data-dismiss="toast">Activate</button>`,
+                    <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableClickAttack.activate();" data-bs-dismiss="toast">Activate</button>`,
                     timeout: GameConstants.HOUR,
                 });
             }
@@ -330,7 +330,7 @@ class Update implements Saveable {
                 title: 'Active Challenge Mode?',
                 message: `Do you want to activate No Battle Item challenge mode?
 
-                <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableBattleItems.activate(); Object.values(player.effectList).forEach(e => e(0));" data-dismiss="toast">Activate</button>`,
+                <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableBattleItems.activate(); Object.values(player.effectList).forEach(e => e(0));" data-bs-dismiss="toast">Activate</button>`,
                 timeout: GameConstants.HOUR,
             });
             // Disable Master Balls
@@ -339,7 +339,7 @@ class Update implements Saveable {
                     title: 'Active Challenge Mode?',
                     message: `Do you want to activate No Masterball challenge mode?
 
-                    <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableMasterballs.activate();" data-dismiss="toast">Activate</button>`,
+                    <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableMasterballs.activate();" data-bs-dismiss="toast">Activate</button>`,
                     timeout: GameConstants.HOUR,
                 });
             }
@@ -349,7 +349,7 @@ class Update implements Saveable {
                     title: 'Active Challenge Mode?',
                     message: `Do you want to activate No Oak Item challenge mode?
 
-                    <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableOakItems.activate();" data-dismiss="toast">Activate</button>`,
+                    <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableOakItems.activate();" data-bs-dismiss="toast">Activate</button>`,
                     timeout: GameConstants.HOUR,
                 });
             }
@@ -359,7 +359,7 @@ class Update implements Saveable {
                     title: 'Active Challenge Mode?',
                     message: `Do you want to activate No Shard challenge mode?
 
-                    <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableShards.activate();" data-dismiss="toast">Activate</button>`,
+                    <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableShards.activate();" data-bs-dismiss="toast">Activate</button>`,
                     timeout: GameConstants.HOUR,
                 });
             }
@@ -369,7 +369,7 @@ class Update implements Saveable {
                     title: 'Active Challenge Mode?',
                     message: `Do you want to activate No Protein challenge mode?
 
-                    <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableProteins.activate();" data-dismiss="toast">Activate</button>`,
+                    <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableProteins.activate();" data-bs-dismiss="toast">Activate</button>`,
                     timeout: GameConstants.HOUR,
                 });
             }

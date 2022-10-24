@@ -57,12 +57,12 @@ export default class Notifier {
                     ${image ? `<img src="${image}" class="icon" />` : ''}
                     <strong class="mr-auto text-primary">${title || ''}</strong>
                     <small class="text-muted">${time}</small>
-                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">×</button>
+                    <button type="button" class="ml-2 mb-1 close" data-bs-dismiss="toast">×</button>
                 </div>` : ''}
                 <div class="toast-body text-light">
                     ${!title && image ? `<img src="${image}" class="icon" />` : ''}
                     ${message.replace(/\n/g, '<br/>')}
-                    ${title ? '' : '<button type="button" class="ml-2 mb-1 close" data-dismiss="toast">×</button>'}
+                    ${title ? '' : '<button type="button" class="ml-2 mb-1 close" data-bs-dismiss="toast">×</button>'}
                 </div>
                 </div>`;
 
