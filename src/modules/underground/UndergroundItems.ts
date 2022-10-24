@@ -25,7 +25,7 @@ export default class UndergroundItems {
     // Returns a random unlocked item
     public static getRandomItem(): UndergroundItem {
         const unlockedItems = this.list.filter((item) => item.isUnlocked());
-        return Rand.fromArray(unlockedItems) || this.list[0];
+        return Rand.fromWeightedArray(unlockedItems, unlockedItems.map((i) => i.getWeight())) || this.list[0];
     }
 
     public static getFullResourceName(item: UndergroundItem, amt: number): string {
@@ -82,11 +82,16 @@ UndergroundItems.addItem(new UndergroundGemItem('Zap Plate', 115, [[1, 1, 1, 1],
 UndergroundItems.addItem(new UndergroundGemItem('Pixie Plate', 116, [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], 100, PokemonType.Fairy));
 
 // Fossils/Fossil Pieces
-UndergroundItems.addItem(new UndergroundItem('Helix Fossil', 200, [[0, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 0]], 0, UndergroundItemValueType.Fossil));
-UndergroundItems.addItem(new UndergroundItem('Dome Fossil', 201, [[1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [0, 1, 1, 1, 0]], 0, UndergroundItemValueType.Fossil));
-UndergroundItems.addItem(new UndergroundItem('Old Amber', 202, [[0, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 0]], 0, UndergroundItemValueType.Fossil));
-UndergroundItems.addItem(new UndergroundItem('Root Fossil', 203, [[0, 0, 1, 1, 1], [0, 0, 1, 1, 1], [1, 0, 0, 1, 1], [1, 1, 1, 1, 1], [0, 1, 1, 1, 0]], 0, UndergroundItemValueType.Fossil, new MaxRegionRequirement(Region.hoenn)));
-UndergroundItems.addItem(new UndergroundItem('Claw Fossil', 204, [[1, 1, 1, 0, 0], [1, 1, 1, 1, 0], [0, 1, 1, 1, 1], [0, 0, 0, 1, 1]], 0, UndergroundItemValueType.Fossil, new MaxRegionRequirement(Region.hoenn)));
+UndergroundItems.addItem(new UndergroundItem('Helix Fossil', 200, [[0, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 0]], 0, UndergroundItemValueType.Fossil, null,
+    () => (App.game.party.alreadyCaughtPokemonByName('Omanyte') || player.getUndergroundItemAmount(200) > 0 ? 1 : 1.5)));
+UndergroundItems.addItem(new UndergroundItem('Dome Fossil', 201, [[1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [0, 1, 1, 1, 0]], 0, UndergroundItemValueType.Fossil, null,
+    () => (App.game.party.alreadyCaughtPokemonByName('Kabuto') || player.getUndergroundItemAmount(201) > 0 ? 1 : 1.5)));
+UndergroundItems.addItem(new UndergroundItem('Old Amber', 202, [[0, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 0]], 0, UndergroundItemValueType.Fossil, null,
+    () => (App.game.party.alreadyCaughtPokemonByName('Aerodactyl') || player.getUndergroundItemAmount(202) > 0 ? 1 : 1.5)));
+UndergroundItems.addItem(new UndergroundItem('Root Fossil', 203, [[0, 0, 1, 1, 1], [0, 0, 1, 1, 1], [1, 0, 0, 1, 1], [1, 1, 1, 1, 1], [0, 1, 1, 1, 0]], 0, UndergroundItemValueType.Fossil, new MaxRegionRequirement(Region.hoenn),
+    () => (App.game.party.alreadyCaughtPokemonByName('Lileep') || player.getUndergroundItemAmount(203) > 0 ? 1 : 1.5)));
+UndergroundItems.addItem(new UndergroundItem('Claw Fossil', 204, [[1, 1, 1, 0, 0], [1, 1, 1, 1, 0], [0, 1, 1, 1, 1], [0, 0, 0, 1, 1]], 0, UndergroundItemValueType.Fossil, new MaxRegionRequirement(Region.hoenn),
+    () => (App.game.party.alreadyCaughtPokemonByName('Anorith') || player.getUndergroundItemAmount(204) > 0 ? 1 : 1.5)));
 UndergroundItems.addItem(new UndergroundItem('Armor Fossil', 205, [[0, 1, 1, 1, 0], [0, 1, 1, 1, 0], [1, 1, 1, 1, 1], [0, 1, 1, 1, 0]], 0, UndergroundItemValueType.Fossil, new MaxRegionRequirement(Region.sinnoh)));
 UndergroundItems.addItem(new UndergroundItem('Skull Fossil', 206, [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1], [0, 1, 1, 0]], 0, UndergroundItemValueType.Fossil, new MaxRegionRequirement(Region.sinnoh)));
 UndergroundItems.addItem(new UndergroundItem('Cover Fossil', 207, [[1, 1, 1, 1, 0], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [0, 1, 1, 1, 1]], 0, UndergroundItemValueType.Fossil, new MaxRegionRequirement(Region.unova)));

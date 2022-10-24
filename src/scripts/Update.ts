@@ -1216,7 +1216,7 @@ class Update implements Saveable {
             }
         },
 
-        '0.9.19': ({ playerData, saveData, settingsData }) => {
+        '0.10.0': ({ playerData, saveData, settingsData }) => {
             // Add Kimono Girls Temporary Battles
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 25);
 
@@ -1378,6 +1378,13 @@ class Update implements Saveable {
                 settingsData.breedingRegionFilter = 2 ** (playerData.highestRegion + 1) - 1;
             } else {
                 settingsData.breedingRegionFilter = 2 ** settingsData.breedingRegionFilter;
+            }
+        },
+
+        '0.10.1': ({ playerData, saveData }) => {
+            // Brawlers Cave renamed
+            if (playerData._townName == 'Brawlers Cave') {
+                playerData._townName = 'Brawlers\' Cave';
             }
         },
     };
