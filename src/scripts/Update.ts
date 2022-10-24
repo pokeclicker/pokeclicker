@@ -199,18 +199,6 @@ class Update implements Saveable {
         },
 
         '0.6.0': ({ saveData }) => {
-            // Award Deoxys forms for completed Battle Frontier milestones
-            const maxBattleFrontierStage = saveData.statistics.battleFrontierHighestStageCompleted;
-            if (maxBattleFrontierStage >= 151) {
-                Update.addPokemonToSaveData(saveData, 386.1); // Deoxys (attack)
-            }
-            if (maxBattleFrontierStage >= 251) {
-                Update.addPokemonToSaveData(saveData, 386.2); // Deoxys (defense)
-            }
-            if (maxBattleFrontierStage >= 386) {
-                Update.addPokemonToSaveData(saveData, 386.3); // Deoxys (speed)
-            }
-
             // Update the attack bonus percentages
             saveData.party.caughtPokemon = saveData.party.caughtPokemon.map(p => {
                 p.attackBonusPercent = p.attackBonus;
@@ -1386,6 +1374,26 @@ class Update implements Saveable {
             if (playerData._townName == 'Brawlers Cave') {
                 playerData._townName = 'Brawlers\' Cave';
             }
+
+            // Remove cleared BF milestones from save if corresponding Pokémon is not in party
+            if (saveData?.battleFrontier?.milestones?.length) {
+                const pokemonRewards = [
+                    ['Deoxys', 386],
+                    ['Deoxys (Attack)', 386.1],
+                    ['Deoxys (Defense)', 386.2],
+                    ['Deoxys (Speed)', 386.3],
+                    ['Vivillon (Poké Ball)', 666.01],
+                ];
+
+                // Find Pokémon rewards that are not in our party
+                pokemonRewards.filter(([name, id]) => {
+                    return saveData.party.caughtPokemon.filter(p => p.id === id).length < 1
+                })
+                // And remove any cleared milestones corresponding to missing Pokémon
+                .forEach(([name, id]) => {
+                    saveData.battleFrontier.milestones = saveData.battleFrontier.milestones.filter(milestone => milestone[1] !== name);
+                });
+            }
         },
     };
 
@@ -1595,25 +1603,6 @@ class Update implements Saveable {
         const end = arr.splice(to);
         arr = [...arr, ...temp, ...end];
         return arr;
-    }
-
-    static addPokemonToSaveData = (saveData, pokemonId) => {
-        if (saveData.party.caughtPokemon.filter(p => p.id === pokemonId).length > 0) {
-            return;
-        }
-
-        const pokemon: PartyPokemon = PokemonFactory.generatePartyPokemon(pokemonId, false);
-        saveData.statistics.pokemonCaptured[pokemonId] = 1;
-        saveData.statistics.totalPokemonCaptured++;
-        saveData.logbook.logs.unshift({
-            date: Date.now(),
-            description: `You have captured ${GameHelper.anOrA(pokemon.name)} ${pokemon.name}!`,
-            type: {
-                display: 'success',
-                label: 'CAUGHT',
-            },
-        });
-        saveData.party.caughtPokemon.push(pokemon);
     }
 
     // If any pokemon names change in the data rename them,
