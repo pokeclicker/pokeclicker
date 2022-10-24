@@ -1386,13 +1386,14 @@ class Update implements Saveable {
                 ];
 
                 // Find Pokémon rewards that are not in our party
-                pokemonRewards.filter(([name, id]) => {
-                    return saveData.party.caughtPokemon.filter(p => p.id === id).length < 1
-                })
-                // And remove any cleared milestones corresponding to missing Pokémon
-                .forEach(([name, id]) => {
-                    saveData.battleFrontier.milestones = saveData.battleFrontier.milestones.filter(milestone => milestone[1] !== name);
-                });
+                pokemonRewards
+                    .filter(([name, id]) => {
+                        return saveData.party.caughtPokemon.filter(p => p.id === id).length < 1;
+                    })
+                    // And remove any cleared milestones corresponding to missing Pokémon
+                    .forEach(([name, id]) => {
+                        saveData.battleFrontier.milestones = saveData.battleFrontier.milestones.filter(milestone => milestone[1] !== name);
+                    });
             }
         },
     };
