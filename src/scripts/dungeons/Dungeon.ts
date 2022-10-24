@@ -8830,7 +8830,7 @@ dungeonList['Courageous Cavern'] = new Dungeon('Courageous Cavern',
     ],
     1730000, 33);
 
-dungeonList['Brawlers Cave'] = new Dungeon('Brawlers Cave',
+dungeonList['Brawlers\' Cave'] = new Dungeon('Brawlers\' Cave',
     ['Whismur', 'Woobat', 'Azurill', 'Lickitung', 'Loudred', 'Swoobat', 'Golduck', 'Poliwag', 'Barboach', 'Whiscash', 'Chansey', 'Psyduck'],
     {
         common: [
@@ -8855,7 +8855,7 @@ dungeonList['Brawlers Cave'] = new Dungeon('Brawlers Cave',
             {loot: 'Star Piece'},
             {loot: 'LargeRestore'},
         ],
-        mythic: [{loot: 'Protein', requirement: new ClearDungeonRequirement(150, GameConstants.getDungeonIndex('Brawlers Cave'))}],
+        mythic: [{loot: 'Protein', requirement: new ClearDungeonRequirement(150, GameConstants.getDungeonIndex('Brawlers\' Cave'))}],
     },
     27009504,
     [
@@ -9140,7 +9140,7 @@ dungeonList['Dyna Tree Hill'] = new Dungeon('Dyna Tree Hill',
     1920000, 53);
 
 dungeonList['Tunnel to the Top'] = new Dungeon('Tunnel to the Top',
-    ['Zubat', 'Aron', 'Carbink', 'Carkol', 'Ferroseed', 'Mawile', 'Sableye', 'Audino', 'Lairon'],
+    ['Zubat', 'Golbat', 'Carbink', 'Snorunt', 'Gible', 'Bagon', 'Clefairy', 'Clefable', 'Audino', 'Druddigon'],
     {
         common: [
             {loot: 'Rawst'},
@@ -9170,9 +9170,9 @@ dungeonList['Tunnel to the Top'] = new Dungeon('Tunnel to the Top',
     },
     33565196,
     [
-        new DungeonBossPokemon('Noivern', 167825980, 60),
-        new DungeonBossPokemon('Aggron', 167825980, 60),
-        new DungeonBossPokemon('Coalossal', 167825980, 60),
+        new DungeonBossPokemon('Froslass', 167825980, 60),
+        new DungeonBossPokemon('Garchomp', 167825980, 60),
+        new DungeonBossPokemon('Salamence', 167825980, 60),
     ],
     2000000, 54);
 
