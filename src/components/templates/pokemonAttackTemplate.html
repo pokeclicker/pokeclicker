@@ -4,9 +4,7 @@
       <span data-bind="
          text: App.game.party.pokemonAttackObservable().toLocaleString('en-US'),
          tooltip: {
-            title: Battle?.enemyPokemon()
-                ? `${Battle.pokemonAttackByTypeTooltipObservable()} against ${Battle.enemyPokemon().name}`
-                : '',
+            title: Battle.pokemonAttackTooltip(),
             trigger: 'hover',
          }
          "></span>
