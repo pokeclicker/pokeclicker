@@ -31,17 +31,25 @@ class BattleCafeSaveObject implements Saveable {
         if (!json) {
             return;
         }
-        BattleCafeController.spinsLeft(json.spinsLeft ?? BattleCafeController.defaultSpins);
+        BattleCafeController.spinsLeft(json.spinsLeft ?? BattleCafeController.spinsPerDay(true));
     }
 
 }
 
 class BattleCafeController {
-    static defaultSpins = 3;
     static selectedSweet = ko.observable<GameConstants.AlcremieSweet>(undefined);
-    static spinsLeft = ko.observable<number>(BattleCafeController.defaultSpins);
+    static spinsLeft = ko.observable<number>(BattleCafeController.spinsPerDay(true));
     static isSpinning = ko.observable<boolean>(false);
     static clockwise = ko.observable<boolean>(false);
+
+    static spinsPerDay(isLoading = false) : number {
+        if (isLoading) {
+            return 3;
+        }
+        return 3 + GameHelper.enumStrings(GameConstants.AlcremieSweet)
+            .filter((s) => BattleCafeController.getCaughtStatus(GameConstants.AlcremieSweet[s])() >= CaughtStatus.Caught)
+            .length;
+    }
 
     public static spin(clockwise: boolean) {
         if (!BattleCafeController.canSpin()) {
