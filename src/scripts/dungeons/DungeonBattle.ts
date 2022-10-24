@@ -35,7 +35,7 @@ class DungeonBattle extends Battle {
         DungeonRunner.fighting(false);
         if (DungeonRunner.fightingLootEnemy) {
             DungeonRunner.fightingLootEnemy = false;
-        } else {
+        } else if (!DungeonRunner.fightingBoss()) {
             GameHelper.incrementObservable(DungeonRunner.encountersWon);
         }
 

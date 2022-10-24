@@ -185,6 +185,7 @@ export const SpriteCredits: Credit[] = [
             'Galarian Moltres overworld image',
             'Galarian Zapdos overworld image',
             'Galarica cuff and wreath icons',
+            'Honey',
             'Linking cord cartoon style',
             'Luana',
             'Merilyn',
