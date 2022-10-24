@@ -270,7 +270,7 @@ class PartyPokemon implements Saveable {
             return true;
         }
         if (Settings.getSetting('calciumRegionFilter').observableValue() > -2) {
-            if (PokemonHelper.calcNativeRegion(this.name) !== Settings.getSetting('proteinRegionFilter').observableValue()) {
+            if (PokemonHelper.calcNativeRegion(this.name) !== Settings.getSetting('calciumRegionFilter').observableValue()) {
                 return true;
             }
         }

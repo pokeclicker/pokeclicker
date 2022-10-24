@@ -91,7 +91,7 @@ class PartyController {
         // If the calcium modal is open, we should sort it.
         if (modalUtils.observableState.calciumSelectorModal === 'show') {
             PartyController.calciumSortedList = [...App.game.party.caughtPokemon];
-            return PartyController.calciumSortedList.sort(PartyController.compareBy(Settings.getSetting('calciumSort').observableValue(), Settings.getSetting('proteinSortDirection').observableValue()));
+            return PartyController.calciumSortedList.sort(PartyController.compareBy(Settings.getSetting('calciumSort').observableValue(), Settings.getSetting('calciumSortDirection').observableValue()));
         }
         return PartyController.calciumSortedList;
     }).extend({ rateLimit: 500 });
