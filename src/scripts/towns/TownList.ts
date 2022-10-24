@@ -4861,7 +4861,7 @@ const Piers = new NPC('Piers', [
 
 const EnergyPlantHop = new NPC('Hop', [
     'Huh? Oh, hi. I forgot to say, congrats on catching Zacian and Zamazenta!',
-    'Y\'know, we gave Zacian and Zamazenta got the Rusted Sword and the Rusted Shield back, right?',
+    'Y\'know, Zacian and Zamazenta got the Rusted Sword and the Rusted Shield back, right?',
     'But when you caught them, neither were using them. But they must still have them, right?',
     'So.... Maybe if you keep defeating them, they\'ll occasionally drop them?',
 ], {
