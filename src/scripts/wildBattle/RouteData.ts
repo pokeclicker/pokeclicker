@@ -2723,7 +2723,7 @@ Routes.add(new RegionRoute(
     [
         new OneFromManyRequirement([
             new RouteKillRequirement(10, GameConstants.Region.galar, 35),
-            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Brawlers Cave')),
+            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Brawlers\' Cave')),
             new RouteKillRequirement(10, GameConstants.Region.galar, 44),
         ]),
     ],
@@ -2769,7 +2769,7 @@ Routes.add(new RegionRoute(
     [
         new OneFromManyRequirement([
             new RouteKillRequirement(10, GameConstants.Region.galar, 38),
-            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Brawlers Cave')),
+            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Brawlers\' Cave')),
         ]),
     ],
     undefined,
@@ -2937,7 +2937,7 @@ Routes.add(new RegionRoute(
     GameConstants.GalarSubRegions.CrownTundra
 ));
 Routes.add(new RegionRoute(
-    'Giants Bed', GameConstants.Region.galar, 48,
+    'Giant\'s Bed', GameConstants.Region.galar, 48,
     new RoutePokemon({
         land: ['Nidoran(M)', 'Nidoran(F)', 'Stonjourner', 'Bronzong', 'Audino', 'Mime Jr.', 'Shelmet', 'Nidorino', 'Nidorina'],
         water: ['Magikarp', 'Barboach', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Gyarados', 'Whiscash', 'Feebas'],
@@ -2980,7 +2980,7 @@ Routes.add(new RegionRoute(
     GameConstants.GalarSubRegions.CrownTundra
 ));
 Routes.add(new RegionRoute(
-    'Giants Foot', GameConstants.Region.galar, 50,
+    'Giant\'s Foot', GameConstants.Region.galar, 50,
     new RoutePokemon({
         land: ['Copperajah', 'Bronzong', 'Stonjourner', 'Audino', 'Claydol', 'Mime Jr.', 'Cufant', 'Bronzor'],
         water: ['Magikarp', 'Barboach', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Gyarados', 'Whiscash', 'Feebas'],
