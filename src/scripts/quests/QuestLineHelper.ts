@@ -1638,7 +1638,7 @@ class QuestLineHelper {
         const talktoJungleKoko1 = new TalkToNPCQuest(JungleKoko1, 'Talk to Ash Ketchum\'s friend, Koko, in Glimwood Tangle.');
         jungleSecretsQuestLine.addQuest(talktoJungleKoko1);
 
-        const catchZarude = new CaptureSpecificPokemonQuest('Zarude', 'Catch the missing Zarude roaming around the Isle of Armor', 1, false, 0, undefined);
+        const catchZarude = new CaptureSpecificPokemonQuest('Zarude', 'Catch the missing Zarude roaming around the Isle of Armor.', 1, false, 0, undefined);
         jungleSecretsQuestLine.addQuest(catchZarude);
 
         const talktoJungleKoko2 = new TalkToNPCQuest(JungleKoko2, 'Take Zarude back to Koko in Glimwood Tangle.');
