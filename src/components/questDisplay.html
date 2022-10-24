@@ -44,8 +44,8 @@
                 </tr>
             </tbody>
             <!-- List of quest line quests -->
-            <tbody id="questLines" data-bind="foreach: App.game.quests.questLines()">
-                <!-- ko if: $data.state() == QuestLineState.started -->
+			<!-- foreach: App.game.quests.questLines() -->
+				<tbody id="questLines" data-bind="if: $data.state() == QuestLineState.started">
                     <tr>
                         <td colspan="2">
                             <div class="card-header">
@@ -54,6 +54,8 @@
                             </div>
                         </td>
                     </tr>
+				</tbody>
+				<tbody>
                     <tr class="text-center">
                         <td colspan="2" data-bind="text: $data.curQuestObject().description"></td>
                     </tr>
@@ -90,8 +92,8 @@
                             </tr>
                         <!-- /ko -->
                     <!-- /ko -->
-                <!-- /ko -->
-            </tbody>
+				</tbody>
+			<!-- /ko -->
         </table>
   </div>
 </div>
