@@ -83,6 +83,9 @@ abstract class Quest {
     }
 
     quit(shouldConfirm = false) {
+        if (this.progress() == 0) {
+            shouldConfirm = false;
+        }
         if (shouldConfirm) {
             Notifier.confirm({
                 title: 'Quit Quest',
