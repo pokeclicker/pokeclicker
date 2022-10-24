@@ -19,13 +19,13 @@ aria-labelledby="pokedexModalLabel">
                         </div>
                     </div>
                     <!-- /ko -->
-                    
+
                     <!-- ko if: PokedexHelper.filteredList().length != 0 -->
                     <div class="pokedex-border-bottom pt-2">
                         <h4 data-bind="text: `Showing ${PokedexHelper.filteredList().length} Pokémon`"></h4>
                     </div>
                     <!-- /ko -->
-                    
+
                     <div class="collapse" id="pokedex-filter-container" style="margin-bottom: 0.5rem;">
                         <div class="container-fluid py-3">
                             <div class="form-row text-left">
@@ -126,7 +126,7 @@ aria-labelledby="pokedexModalLabel">
                         </div>
                     </div>
                 </div>
-                    
+
                 <div class="pokemon-list">
                     <ul class="row justify-content-center p-0" data-bind="foreach: lazyLoad($element, PokedexHelper.filteredList)"
                         style="max-width: 100%; padding:0; margin:0;">
@@ -165,7 +165,7 @@ aria-labelledby="pokedexModalLabel">
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

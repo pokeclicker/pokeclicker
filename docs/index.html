@@ -304,7 +304,7 @@
                 <span data-bind="html:  App.game.keyItems.itemList[KeyItemController.latestGainedItem()].description">Description</span>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="click: App.game.keyItems.itemList[KeyItemController.latestGainedItem()].unlockRewardOnClose">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" data-bind="click: App.game.keyItems.itemList[KeyItemController.latestGainedItem()].unlockRewardOnClose">Close</button>
             </div>
         </div>
     </div>
@@ -317,7 +317,7 @@
         <div class="modal-content">
             <div class="modal-header" style='justify-content: space-around;'>
                 <h5 class="modal-title">Profile</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -359,7 +359,7 @@
         <div class="modal-content">
             <div class="modal-header" style='justify-content: space-around;'>
                 <h5 class="modal-title">Select a Trainer</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -384,7 +384,7 @@
         <div class="modal-content">
             <div class="modal-header" style='justify-content: space-around;'>
                 <h5 class="modal-title">Select a Background</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -413,7 +413,7 @@
         <div class="modal-content" style="text-align: center">
             <div class="modal-header" style='justify-content: space-around;'>
                 <h5 class="modal-title">Items</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -533,7 +533,7 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -35483,7 +35483,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Challenge Modes</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -35510,7 +35510,7 @@
                     </tbody>
                 </table>
                 <br/>
-               <button class="btn btn-primary btn-block" data-dismiss="modal">Done!</button>
+               <button class="btn btn-primary btn-block" data-bs-dismiss="modal">Done!</button>
             </div>
        </div>
     </div>
@@ -35524,7 +35524,7 @@
         <div class="modal-content">
             <div class="modal-header text-center">
                 <h4 data-bind="text: ShopHandler.shopObservable().displayName">Shop</h4>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">&times;</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
                 <div>
@@ -35642,12 +35642,12 @@ aria-labelledby="receiveBadgeModalLabel" aria-hidden="true">
        </div>
        <div data-bind="ifnot: GymRunner.gymObservable() instanceof Champion">
            <div class="modal-footer">
-               <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+               <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
            </div>
        </div>
        <div data-bind="if: GymRunner.gymObservable() instanceof Champion">
            <div class="modal-footer">
-               <button type="button" class="btn btn-primary" data-dismiss="modal"
+               <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
                        onclick="$('#hallOfFameModal').modal('show')">
                    Next
                </button>
@@ -35679,7 +35679,7 @@ aria-labelledby="temporaryBattleWonModalLabel" aria-hidden="true">
 
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
         </div>
     <!-- /ko -->
    </div>
@@ -35694,7 +35694,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 data-bind="tooltip: { title: 'As you earn achievements, you gain up to: 150% (global), 100% (per region), and 50% (per special subregion). Earning bonuses to Click Attack, Flute Effects, Pokédollar / Dungeon Token gains, and Experience earned from all sources.', trigger: 'hover', placement:'right' }">Achievements Bonus: <u class="text-primary" data-bind="text: AchievementHandler.achievementBonusPercent()"></u></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -35830,7 +35830,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
             <li class="nav-item"><a data-bs-toggle='tab' class='p-2 nav-link active' href="#oakItemSelector">Selector</a></li>
             <li class='nav-item'><a data-bs-toggle='tab' class='p-2 nav-link' href="#oakItemLoadouts">Loadouts</a></li>
         </ul>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -35977,7 +35977,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
         <div class="modal-content">
             <div class="modal-header" style='justify-content: space-around;'>
                 <h5 class="modal-title">Statistics</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -36018,7 +36018,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                         data-target="#log-book-filter" aria-expanded="false" aria-controls="breeding-filter">
                     Filters
                 </button>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -36046,7 +36046,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -36059,7 +36059,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
         <div class="modal-content">
             <div class="modal-header" style='justify-content: space-around;'>
                 <h5 class="modal-title">Settings</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -36334,7 +36334,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -36502,7 +36502,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
      <div class="modal-content">
          <div class="modal-header">
              <h5>Frequently Asked Questions</h5>
-             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                  <span aria-hidden="true">&times;</span>
              </button>
          </div>
@@ -36679,7 +36679,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
          </div>
 
          <div class="modal-footer">
-             <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+             <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
          </div>
      </div>
   </div>
@@ -36692,7 +36692,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
        <div class="modal-content">
            <div class="modal-header">
                <h5>Changelog</h5>
-               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                    <span aria-hidden="true">&times;</span>
                </button>
            </div>
@@ -36715,7 +36715,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
            </div>
 
            <div class="modal-footer">
-               <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+               <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
            </div>
        </div>
     </div>
@@ -36728,7 +36728,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
         <div class="modal-content">
             <div class="modal-header" style='justify-content: space-around;'>
                 <h5 class="modal-title">Credits</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -36783,7 +36783,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
        <div class="modal-content">
            <div class="modal-header">
                <h5>Events</h5>
-               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                    <span aria-hidden="true">&times;</span>
                </button>
            </div>
@@ -36812,7 +36812,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
            </div>
 
            <div class="modal-footer">
-               <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+               <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
            </div>
        </div>
     </div>
@@ -36843,7 +36843,7 @@ aria-labelledby="startSequenceModalLabel" aria-hidden="true">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-warning mr-auto" href="#challengeModeModal" data-bs-toggle="modal">Challenge Modes</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Next</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Next</button>
             </div>
         </div>
     </div>
@@ -36974,7 +36974,7 @@ aria-labelledby="starterCaughtModalLabel" aria-hidden="true">
 
        </div>
        <div class="modal-footer">
-           <button type="button" class="btn btn-primary" data-dismiss="modal">Next</button>
+           <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Next</button>
        </div>
    </div>
 </div>
@@ -37036,7 +37036,7 @@ aria-labelledby="hallOfFameModalLabel" aria-hidden="true">
            </p>
        </div>
        <div class="modal-footer">
-           <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+           <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
        </div>
    </div>
 </div>
@@ -37049,7 +37049,7 @@ aria-labelledby="hallOfFameModalLabel" aria-hidden="true">
         <div class="modal-content">
            <div class="modal-header">
                <h5 class="modal-title" data-bind="text: `Travel to ${GameConstants.camelCaseToString(GameConstants.Region[player.highestRegion() + 1])}`">Travel to next region</h5>
-               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                    <span aria-hidden="true">&times;</span>
                </button>
            </div>
@@ -37065,7 +37065,7 @@ aria-labelledby="hallOfFameModalLabel" aria-hidden="true">
                    <!-- /ko -->
                    You will also have to progress to the Dock in <span data-bind="text: GameConstants.camelCaseToString(GameConstants.Region[player.highestRegion() + 1])"></span> before you are able to travel between regions again.
                </p>
-               <button class="btn btn-success btn-block" onclick="MapHelper.travelToNextRegion()" data-dismiss="modal">Let's Go!</button>
+               <button class="btn btn-success btn-block" onclick="MapHelper.travelToNextRegion()" data-bs-dismiss="modal">Let's Go!</button>
            </div>
        </div>
     </div>
@@ -37138,7 +37138,7 @@ aria-labelledby="hallOfFameModalLabel" aria-hidden="true">
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -37529,7 +37529,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                 }">
             </knockout>
            <button id="breeding-fireall" type="button" class="btn btn-danger" data-bind="attr : {disabled : !App.game.breeding.hatcheryHelpers.hired().length}, click: function(){App.game.breeding.hatcheryHelpers.hired().forEach(function(h){h.fire();})}" style="display : none;">Fire All</button>
-           <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+           <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
        </div>
    </div>
 </div>
@@ -37759,7 +37759,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                     <span>Total net worth: <b><span data-bind="text: Underground.getDiamondNetWorth().toLocaleString('en-US')">-</span></b></span>
                     <img src='assets/images/underground/diamond.svg' width="20px'">
                 </button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -37853,7 +37853,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                 <button type="button" class="btn mr-auto btn-danger" data-bind="click: function(){Underground.sellAllMineItems()}">
                     <span>Confirm sell</span>
                 </button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -38039,7 +38039,7 @@ aria-labelledby="pokedexModalLabel">
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -38056,7 +38056,7 @@ aria-labelledby="pokedexModalLabel">
                 <h5 class="modal-title text-light" data-bind="if: App.game.party.getPokemon(pokemonMap[$data].id)">
                     <img width="18px" src="" data-bind="attr: { src: `assets/images/pokeball/Pokeball${App.game.party.alreadyCaughtPokemon(pokemonMap[$data].id, true) && PokedexHelper.toggleStatisticShiny() ? '-shiny' : ''}.svg`}, click: () => PokedexHelper.toggleStatisticShiny(!PokedexHelper.toggleStatisticShiny())"/>
                 </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -38288,7 +38288,7 @@ aria-labelledby="pokedexModalLabel">
             <!-- ko if: modalUtils.observableState['pokemonSelectorModal'] === 'show' -->
             <div class="modal-header bg-dark text-light" style='justify-content: space-around;'>
                 <h5 class="modal-title text-light">Select a Pokémon</h5>&nbsp;
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -38405,7 +38405,7 @@ aria-labelledby="badgeCaseModalLabel">
                         placement:'top',
                         html: true,
                     }">ⓘ</button>
-           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                <span aria-hidden="true">&times;</span>
            </button>
        </div>
@@ -38429,7 +38429,7 @@ aria-labelledby="badgeCaseModalLabel">
         </div>
 
        <div class="modal-footer">
-           <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+           <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
        </div>
    </div>
 </div>
@@ -38443,7 +38443,7 @@ aria-labelledby="badgeCaseModalLabel">
         <div class="modal-content">
             <div class="modal-header" style='justify-content: space-around;'>
                 <h5 class="modal-title">Save Data</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -38495,7 +38495,7 @@ aria-labelledby="badgeCaseModalLabel">
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -38580,7 +38580,7 @@ aria-labelledby="badgeCaseModalLabel">
                     <!-- /ko -->
 
                 </div>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -39016,7 +39016,7 @@ aria-labelledby="badgeCaseModalLabel">
                     </div>
                 </div>
 
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -39030,7 +39030,7 @@ aria-labelledby="badgeCaseModalLabel">
             <div class="modal-header bg-dark text-light" style='justify-content: space-around;'>
                 <h5 class="modal-title text-muted" data-bind="text: `#${(Number($data) + 1).toString().padStart(2,0)}&nbsp;&nbsp;`"></h5>
                 <h5 class="modal-title text-light" data-bind="text: BerryType[$data]">Berry Statistics</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -39158,7 +39158,7 @@ aria-labelledby="badgeCaseModalLabel">
         <div class="modal-content" data-bind="let: { shopVisible: ko.observable(true) }">
             <div class="modal-header text-center">
                 <h4>Berry Master</h4>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">&times;</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">&times;</button>
             </div>
             <div>
                 <ul class="nav nav-tabs nav-fill">
@@ -39279,7 +39279,7 @@ aria-labelledby="badgeCaseModalLabel">
                 </div>
                 <!-- /ko -->
                 <!-- ko if: !shopVisible() -->
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
                 <!-- /ko -->
             </div>
         </div>
@@ -39294,7 +39294,7 @@ aria-labelledby="badgeCaseModalLabel">
         <div class="modal-content">
             <div class="modal-header text-center">
                 <h4>Gem Master</h4>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">&times;</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">&times;</button>
             </div>
             <div>
                 <ul class="nav nav-tabs nav-fill">
@@ -39357,7 +39357,7 @@ aria-labelledby="badgeCaseModalLabel">
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -39371,7 +39371,7 @@ aria-labelledby="badgeCaseModalLabel">
         <div class="modal-content">
             <div class="modal-header text-center">
                 <h4 data-bind='text: ShopHandler.shopObservable?.().name'></h4>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">&times;</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">&times;</button>
             </div>
             <div>
                 <ul class="nav nav-tabs nav-fill">
@@ -39440,7 +39440,7 @@ aria-labelledby="badgeCaseModalLabel">
             <div class="modal-footer">
                 <span>Total Quest Points: <span data-bind="text: App.game.wallet.currencies[GameConstants.Currency.questPoint]().toLocaleString('en-US')">-</span></span>
                    <img src='assets/images/currency/questPoint.svg' width="20px'">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -39453,7 +39453,7 @@ aria-labelledby="badgeCaseModalLabel">
         <div class="modal-content">
             <div class="modal-header" style='justify-content: space-around;'>
                 <h5 class="modal-title">Subregional Travel</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -39483,7 +39483,7 @@ aria-labelledby="badgeCaseModalLabel">
         <div class="modal-content">
             <div class="modal-header" style='justify-content: space-around;'>
                 <h5 class="modal-title">Regional Travel</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -39681,7 +39681,7 @@ aria-labelledby="badgeCaseModalLabel">
         <u><h5 class="npc-name">NPC Name</h5></u>
         <img class="npc-image" src=""/>
         <div class="npc-dialog"></div>
-        <button type="button" class="btn btn-primary btn-block" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary btn-block" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -39695,7 +39695,7 @@ aria-labelledby="badgeCaseModalLabel">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="pokeballSelectorModalLabel">Poké Ball Selection</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -39729,7 +39729,7 @@ aria-labelledby="badgeCaseModalLabel">
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -39876,7 +39876,7 @@ aria-labelledby="damageCalculatorModalLabel" aria-hidden="true">
             </div>
        </div>
        <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
        </div>
        <!-- /ko -->
    </div>
@@ -39890,7 +39890,7 @@ aria-labelledby="damageCalculatorModalLabel" aria-hidden="true">
        <div class="modal-content">
            <div class="modal-header">
                <h5>Categories</h5>
-               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                    <span aria-hidden="true">&times;</span>
                </button>
            </div>
@@ -39925,7 +39925,7 @@ aria-labelledby="damageCalculatorModalLabel" aria-hidden="true">
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-danger mr-auto" data-bind="click: async () => { if (await Notifier.confirm({ title: 'Reset Categories', message: 'Are you sure you want to reset all of your categories to defaults?', confirm: 'Reset' })) PokemonCategories.reset(); }">Reset</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
           </div>
       </div>
   </div>
@@ -39978,7 +39978,7 @@ aria-labelledby="bulletinBoardModalLabel" aria-hidden="true">
             </table>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
         </div>
     </div>
 </div>
@@ -39991,7 +39991,7 @@ aria-labelledby="bulletinBoardModalLabel" aria-hidden="true">
             <!-- ko if: modalUtils.observableState['heldItemModal'] === 'show' -->
             <div class="modal-header bg-dark text-light" style='justify-content: space-around;'>
                 <h5 class="modal-title text-light">Select a Pokémon</h5>&nbsp;
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -40111,7 +40111,7 @@ aria-labelledby="battleCafeModal"Label">
         </div>
 
        <div class="modal-footer">
-           <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+           <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
        </div>
    </div>
 </div>

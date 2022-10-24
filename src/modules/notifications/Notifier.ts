@@ -112,7 +112,7 @@ export default class Notifier {
         <div class="modal-content">
             <div class="modal-header modal-header pb-0 pt-2 px-2 bg-${NotificationOption[type]}">
                 <h5>${title}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -123,7 +123,7 @@ export default class Notifier {
                 <input class="outline-dark form-control" placeholder="Type here.." id="promptInput${modalID}" type="text">
             </div>
             <div class="modal-footer p-2">
-                <button class="btn btn-block outline-dark btn-${NotificationOption[type]}" data-dismiss="modal">Submit</button>
+                <button class="btn btn-block outline-dark btn-${NotificationOption[type]}" data-bs-dismiss="modal">Submit</button>
             </div>
         </div>
     </div>
@@ -191,7 +191,7 @@ export default class Notifier {
         <div class="modal-content">
             <div class="modal-header modal-header pb-0 pt-2 px-2 bg-${NotificationOption[type]}">
                 <h5>${title}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -199,8 +199,8 @@ export default class Notifier {
                 ${message.replace(/\n/g, '<br/>')}
             </div>
             <div class="modal-footer p-2">
-                <button class="btn col outline-dark btn-${NotificationOption[type]}" data-dismiss="modal" id="modalConfirm${modalID}">${confirm}</button>
-                <button class="btn col outline-dark btn-secondary" data-dismiss="modal">${cancel}</button>
+                <button class="btn col outline-dark btn-${NotificationOption[type]}" data-bs-dismiss="modal" id="modalConfirm${modalID}">${confirm}</button>
+                <button class="btn col outline-dark btn-secondary" data-bs-dismiss="modal">${cancel}</button>
             </div>
         </div>
     </div>

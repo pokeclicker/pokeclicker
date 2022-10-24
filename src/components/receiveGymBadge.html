@@ -20,12 +20,12 @@ aria-labelledby="receiveBadgeModalLabel" aria-hidden="true">
        </div>
        <div data-bind="ifnot: GymRunner.gymObservable() instanceof Champion">
            <div class="modal-footer">
-               <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+               <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
            </div>
        </div>
        <div data-bind="if: GymRunner.gymObservable() instanceof Champion">
            <div class="modal-footer">
-               <button type="button" class="btn btn-primary" data-dismiss="modal"
+               <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
                        onclick="$('#hallOfFameModal').modal('show')">
                    Next
                </button>

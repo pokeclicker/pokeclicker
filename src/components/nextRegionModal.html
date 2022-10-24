@@ -3,7 +3,7 @@
         <div class="modal-content">
            <div class="modal-header">
                <h5 class="modal-title" data-bind="text: `Travel to ${GameConstants.camelCaseToString(GameConstants.Region[player.highestRegion() + 1])}`">Travel to next region</h5>
-               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                    <span aria-hidden="true">&times;</span>
                </button>
            </div>
@@ -19,7 +19,7 @@
                    <!-- /ko -->
                    You will also have to progress to the Dock in <span data-bind="text: GameConstants.camelCaseToString(GameConstants.Region[player.highestRegion() + 1])"></span> before you are able to travel between regions again.
                </p>
-               <button class="btn btn-success btn-block" onclick="MapHelper.travelToNextRegion()" data-dismiss="modal">Let's Go!</button>
+               <button class="btn btn-success btn-block" onclick="MapHelper.travelToNextRegion()" data-bs-dismiss="modal">Let's Go!</button>
            </div>
        </div>
     </div>
