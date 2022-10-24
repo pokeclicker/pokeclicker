@@ -26,7 +26,7 @@ interface Loot {
     weight?: number,
     requirement?: MultiRequirement | OneFromManyRequirement | Requirement,
     amount?: number,
-    undebuffable?: boolean,
+    ignoreDebuff?: boolean,
 }
 
 type LootTier = 'common' | 'rare' | 'epic' | 'legendary' | 'mythic';
@@ -221,7 +221,7 @@ class Dungeon {
     }
 
     public getRandomLoot(tier: LootTier, onlyDebuffable = false): Loot {
-        const lootTable = this.lootTable[tier].filter((loot) => (!loot.requirement || loot.requirement.isCompleted()) && !(onlyDebuffable && loot.undebuffable));
+        const lootTable = this.lootTable[tier].filter((loot) => (!loot.requirement || loot.requirement.isCompleted()) && !(onlyDebuffable && loot.ignoreDebuff));
         return Rand.fromWeightedArray(lootTable, lootTable.map((loot) => loot.weight ?? 1));
     }
 
@@ -4843,7 +4843,7 @@ dungeonList['Relic Castle'] = new Dungeon('Relic Castle',
         ],
         mythic: [
             {loot: 'Heart Scale'},
-            {loot: 'Darmanitan (Zen)', undebuffable : true},
+            {loot: 'Darmanitan (Zen)', ignoreDebuff : true},
         ],
     },
     2803000,
