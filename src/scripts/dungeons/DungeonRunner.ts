@@ -118,10 +118,10 @@ class DungeonRunner {
 
         const clears = App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]();
         const debuffed = (DungeonRunner.dungeon.optionalParameters?.dungeonRegionalDifficulty ?? GameConstants.getDungeonRegion(DungeonRunner.dungeon.name)) < player.highestRegion() - 2;
-        // Ignores debuff on first attempt to get undebuffable loot.
+        // Ignores debuff on first attempt to get loot that ignores debuff.
         let tier = DungeonRunner.dungeon.getRandomLootTier(clears);
         let loot = DungeonRunner.dungeon.getRandomLoot(tier);
-        if (!loot.undebuffable && debuffed) {
+        if (!loot.ignoreDebuff && debuffed) {
             tier = DungeonRunner.dungeon.getRandomLootTier(clears, debuffed);
             loot = DungeonRunner.dungeon.getRandomLoot(tier, true);
         }
