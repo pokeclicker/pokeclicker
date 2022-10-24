@@ -3211,7 +3211,7 @@ dungeonList['Sky Pillar'] = new Dungeon('Sky Pillar',
     34000, 101);
 
 dungeonList['Sealed Chamber'] = new Dungeon('Sealed Chamber',
-    ['Zubat', 'Golbat', 'Tentacool'],
+    ['Zubat','Magikarp', 'Tentacool', 'Wailmer', 'Horsea'],
     {
         common: [
             {loot: 'xClick'},
@@ -3234,9 +3234,10 @@ dungeonList['Sealed Chamber'] = new Dungeon('Sealed Chamber',
     },
     500000,
     [
-        new DungeonBossPokemon('Regirock', 4500000, 20),
-        new DungeonBossPokemon('Regice', 4500000, 20),
-        new DungeonBossPokemon('Registeel', 4500000, 20),
+        new DungeonBossPokemon('Golbat', 4500000, 20, {hide: true, requirement: new QuestLineStepCompletedRequirement('The Three Golems', 8, GameConstants.AchievementOption.less)}),
+        new DungeonBossPokemon('Regirock', 4500000, 20, {requirement: new QuestLineStepCompletedRequirement('The Three Golems', 8)}),
+        new DungeonBossPokemon('Regice', 4500000, 20, {requirement: new QuestLineStepCompletedRequirement('The Three Golems', 8)}),
+        new DungeonBossPokemon('Registeel', 4500000, 20, {requirement: new QuestLineStepCompletedRequirement('The Three Golems', 8)}),
     ],
     36000, 101);
 
@@ -9023,7 +9024,10 @@ dungeonList['Iron Ruins'] = new Dungeon('Iron Ruins',
     1920000, 48);
 
 dungeonList['Iceberg Ruins'] = new Dungeon('Iceberg Ruins',
-    ['Cryogonal', 'Beartic', 'Galarian Darumaka', 'Aurorus', 'Weavile', 'Vanilluxe', 'Froslass', 'Delibird'],
+    [
+        'Cryogonal', 'Beartic', 'Galarian Darumaka', 'Weavile', 'Vanilluxe', 'Froslass', 'Delibird',
+        {pokemon: 'Aurorus', options: { hide: true, requirement: new ObtainedPokemonRequirement(pokemonMap.Aurorus)}},
+    ],
     {
         common: [
             {loot: 'Dowsing_machine', weight: 3},
@@ -9124,7 +9128,7 @@ dungeonList['Dyna Tree Hill'] = new Dungeon('Dyna Tree Hill',
     1920000, 53);
 
 dungeonList['Tunnel to the Top'] = new Dungeon('Tunnel to the Top',
-    ['Zubat', 'Aron', 'Carbink', 'Carkol', 'Ferroseed', 'Mawile', 'Sableye', 'Audino', 'Lairon'],
+    ['Zubat', 'Golbat', 'Carbink', 'Snorunt', 'Gible', 'Bagon', 'Clefairy', 'Clefable', 'Audino', 'Druddigon'],
     {
         common: [
             {loot: 'Rawst'},
@@ -9154,9 +9158,9 @@ dungeonList['Tunnel to the Top'] = new Dungeon('Tunnel to the Top',
     },
     33565196,
     [
-        new DungeonBossPokemon('Noivern', 167825980, 60),
-        new DungeonBossPokemon('Aggron', 167825980, 60),
-        new DungeonBossPokemon('Coalossal', 167825980, 60),
+        new DungeonBossPokemon('Froslass', 167825980, 60),
+        new DungeonBossPokemon('Garchomp', 167825980, 60),
+        new DungeonBossPokemon('Salamence', 167825980, 60),
     ],
     2000000, 54);
 

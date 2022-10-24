@@ -12,17 +12,22 @@ aria-labelledby="battleCafeModal"Label">
                     <!-- ko foreach: GameHelper.enumStrings(GameConstants.AlcremieSweet) -->
                     <div class="clickable col-4" data-bind="
                         click: () => BattleCafeController.selectedSweet(GameConstants.AlcremieSweet[$data]),
-                        css: { 'bg-primary': BattleCafeController.selectedSweet() == GameConstants.AlcremieSweet[$data]}
+                        css: { 'bg-info': BattleCafeController.selectedSweet() == GameConstants.AlcremieSweet[$data] },
+                        style: { 'opacity' : BattleCafeController.canBuySweet(GameConstants.AlcremieSweet[$data])() ? '1' : '0.5' }
                     ">
                         <h5>
                             <span data-bind="text: $data"></span>
                             <img style="max-width: 40px;" data-bind="attr: { src: 'assets/images/sweets/' + $data + '.png' }"/>
+                            <knockout data-bind="template: { name: 'caughtStatusTemplate', data: {'status': BattleCafeController.getCaughtStatus(GameConstants.AlcremieSweet[$data])()}}"></knockout>
                         </h5>
                         <div>
                             <!-- ko foreach: BattleCafeController.getPrice(GameConstants.AlcremieSweet[$data]) -->
                             <div>
-                                <img style="width: 30px;" data-bind="attr: { src: FarmController.getBerryImage($data.berry) }"/>
-                                <span data-bind="text: $data.amount.toLocaleString('en-US')"></span>/<span data-bind="text: App.game.farming.berryList[$data.berry]().toLocaleString('en-US')"></span>
+                                <img style="width: 30px;" data-bind="
+                                    attr: { src: FarmController.getBerryImage($data.berry) },
+                                    tooltip: { title: BerryType[$data.berry], trigger: 'hover', placement: 'left' }
+                                "/>
+                                <span data-bind="text: $data.amount.toLocaleString('en-US')"></span> (<span data-bind="text: App.game.farming.berryList[$data.berry]().toLocaleString('en-US')"></span>)
                             </div>
                             <!-- /ko -->
                         </div>
@@ -30,8 +35,9 @@ aria-labelledby="battleCafeModal"Label">
                     <!-- /ko -->
                 </div>
             </div>
+            <hr/>
             <h4>Spin!</h4>
-            <div>
+            <div class="pb-2">
                 <span>Spins left today: </span><span data-bind="text: BattleCafeController.spinsLeft()"></span>
             </div>
             <div>
@@ -40,12 +46,12 @@ aria-labelledby="battleCafeModal"Label">
                 class: BattleCafeController.isSpinning() ? 'player-animated' + (BattleCafeController.clockwise() ? '' : '-counter') : ''
                 " src="assets/images/profile/trainer-1.png">
             </div>
-            <div>
-                <button class="btn btn-primary" onclick="BattleCafeController.spin(true);">Clockwise</button>
-                <button class="btn btn-primary" onclick="BattleCafeController.spin(false);">Counter-Clockwise</button>
+            <div class="input-group justify-content-center align-items-center pt-3">
+                <label class="m-0 pr-1" for="battleCafeDuration">Spin duration:</label><input style="max-width: 100px;" class="form-control col-4" id="battleCafeDuration" type="number" min="1" max="20" value="3"/>
             </div>
-            <div class="input-group justify-content-center">
-                <label for="battleCafeDuration">Spin duration:</label><input class="form-control col-4" id="battleCafeDuration" type="number" min="1" max="20" value="3"/>
+            <div class="pt-2">
+                <button style="width: 200px;" class="btn btn-primary" onclick="BattleCafeController.spin(true);">Clockwise</button>
+                <button style="width: 200px;" class="btn btn-primary" onclick="BattleCafeController.spin(false);">Counter-Clockwise</button>
             </div>
         </div>
 

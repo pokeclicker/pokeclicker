@@ -1,6 +1,6 @@
 
 <div class="row justify-content-center no-gutters" data-bind="if: App.game.gameState == GameConstants.GameState.battleFrontier">
-    <div class="col no-gutters" data-bind="if: BattleFrontierBattle.enemyPokemon" style="height: 220px; display: block;">
+    <div class="col no-gutters" data-bind="if: BattleFrontierBattle.enemyPokemon" style="height: 280px; display: block;">
         <h2 class="pageItemTitle" style="display: block;">
 
             <knockout class="left">
@@ -35,5 +35,14 @@
                     <span data-bind="text: BattleFrontierBattle.enemyPokemon().health().toLocaleString('en-US') + ' / ' + BattleFrontierBattle.enemyPokemon().maxHealth().toLocaleString('en-US')" style="font-size: 12px;"></span>
             </div>
         </div>
+        <h2 class="pageItemFooter" style="display: block; font-size: 1rem;">
+          <table width="100%">
+              <tr>
+                <td>
+                    <knockout data-bind="template: { name: 'pokemonAttackTemplate', data: { 'pokemon': Battle.enemyPokemon() } }"></knockout>
+                </td>
+              </tr>
+          </table>
+        </h2>
     </div>
 </div>
