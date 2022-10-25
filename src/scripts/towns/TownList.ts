@@ -2528,7 +2528,7 @@ const FightAreaAceTrainer = new NPC('Ace Trainer Quinn', [
 const FightAreaZero1 = new NPC('Zero', [
     'You\'re the Champion, right? I need your help on a small errand.',
     'My old friend Newton used to study the Distortion World, he was working on opening a gate to it. I\'ve heard that you were able to enter the Distortion World from a portal at the top of Mt. Coronet, so I was wondering if you could help me open a new portal to fufill my friend\'s wish.',
-    'An old book about Sinnoh\'s history was recently discovered at the Canalave City Library, it may have usefull information.',
+    'An old book about Sinnoh\'s history was recently discovered at the Canalave City Library, it may have useful information.',
 ], {
     image: 'assets/images/temporaryBattle/Zero.png',
     requirement: new MultiRequirement([new QuestLineStartedRequirement('Zero\'s Ambition'), new QuestLineStepCompletedRequirement('Zero\'s Ambition', 1, GameConstants.AchievementOption.less)]),
