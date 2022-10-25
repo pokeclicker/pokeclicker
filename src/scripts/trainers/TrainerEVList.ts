@@ -73,7 +73,7 @@ class TrainerEVList {
           });
       });
       Routes.regionRoutes.forEach(x => {
-          RouteHelper.getAvailablePokemonList(x.number,x.region, true).forEach(e => {
+          RouteHelper.getAvailablePokemonList(x.number,x.region, true, false).forEach(e => {
               notIncluded.add(e);
           });
       });

@@ -12,7 +12,7 @@ class RouteHelper {
      * @param includeHeadbutt
      * @returns {string[]} list of all Pokémon that can be caught
      */
-    public static getAvailablePokemonList(route: number, region: GameConstants.Region, includeHeadbutt = true): PokemonNameType[] {
+    public static getAvailablePokemonList(route: number, region: GameConstants.Region, includeHeadbutt = true, requirementCheck = true): PokemonNameType[] {
         // If the route is somehow higher than allowed, use the first route to generateWildPokemon Pokémon
         const possiblePokemons = Routes.getRoute(region, route)?.pokemon;
         if (!possiblePokemons) {
@@ -33,7 +33,11 @@ class RouteHelper {
         }
 
         // Special requirement Pokémon
-        pokemonList = pokemonList.concat(...possiblePokemons.special.filter(p => p.isAvailable()).map(p => p.pokemon));
+        if (requirementCheck) {
+            pokemonList = pokemonList.concat(...possiblePokemons.special.filter(p => p.isAvailable()).map(p => p.pokemon));
+        } else {
+            pokemonList = pokemonList.concat(...possiblePokemons.special.map(p => p.pokemon));
+        }
 
         return pokemonList;
     }
