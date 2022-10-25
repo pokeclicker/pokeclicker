@@ -37,15 +37,15 @@
           </div>
         </div>
 
-        <div class="gym-trainer">
+        <div class="trainer">
             <img data-bind="attr:{ src: GymBattle.gym.imagePath }" onerror="this.src='assets/images/trainers/Mysterious Trainer.png';"/>
         </div>
 
-        <div class="gym-enemy">
+        <div class="trainer-enemy">
             <knockout data-bind="template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': GymBattle.enemyPokemon() } }">Pokémon sprite</knockout>
         </div>
 
-        <div class="progress hitpoints gymhitpoints">
+        <div class="progress hitpoints trainerhitpoints">
             <div class="progress-bar bg-danger" role="progressbar"
                     data-bind="attr:{ style: 'width:' + GymBattle.enemyPokemon().healthPercentage() + '%' }"
                     aria-valuemin="0" aria-valuemax="100">

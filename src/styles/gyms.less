@@ -12,20 +12,20 @@
   height: 100%;
 }
 
-// Applied to gym and tempBattle trainer sprites
-.gym-trainer {
+// Applied to gym, dungeon, and tempBattle trainer sprites
+.trainer {
   position: absolute;
   left: 65%;
   top: 25%;
 }
 
 // Applied to gym, tempBattle, and Battle Frontier Pokemon
-.gym-enemy {
+.trainer-enemy {
   margin-top: 20px;
 }
 
 // Applied to gym, tempBattle, and Battle Frontier
-.progress.hitpoints.gymhitpoints {
+.progress.hitpoints.trainerhitpoints {
   height: 20px;
   bottom: 50px;
 }
@@ -38,13 +38,13 @@
 
 // Mobile screen specific stylings
 @media (max-width: 768px) {
-  .gym-trainer {
+  .trainer {
     top: 30%
   }
-  .gym-enemy {
+  .trainer-enemy {
     margin-top: 0px;
   }
-  .progress.hitpoints.gymhitpoints {
+  .trainerhitpoints {
     bottom: 50px;
   }
   .stop-auto {

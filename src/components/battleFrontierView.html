@@ -25,10 +25,10 @@
 
         </h2>
 
-        <div class="gym-enemy">
+        <div class="trainer-enemy">
             <knockout data-bind="template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': BattleFrontierBattle.enemyPokemon() } }">Pokémon sprite</knockout>
         </div>
-        <div class="progress hitpoints gymhitpoints">
+        <div class="progress hitpoints trainerhitpoints">
             <div class="progress-bar bg-danger" role="progressbar"
                     data-bind="attr:{ style: 'width:' + BattleFrontierBattle.enemyPokemon().healthPercentage() + '%' }"
                     aria-valuemin="0" aria-valuemax="100">
