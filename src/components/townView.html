@@ -5,7 +5,7 @@
         <div class="col g-0">
             <button type="button" class="btn btn-outline-info" style="float: right;"
             data-bind="visible: player.town() instanceof DungeonTown && !QuestLineHelper.isQuestLineCompleted('Tutorial Quests'), tooltip: { title: 'Capture Pokémon to gain Dungeon Tokens in order to battle dungeons.', trigger: 'hover', placement:'left' }">?</button>
-            <h2 class="pageItemTitle">
+            <h2 class="pageItemTitle col">
               <knockout data-bind="text: player.town().name">Town Name</knockout>
               <knockout data-bind="if: player.town() instanceof DungeonTown && player.town().dungeon">
                   <!-- ko if: QuestLineHelper.isQuestLineCompleted('Tutorial Quests') -->

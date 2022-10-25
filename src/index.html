@@ -227,7 +227,7 @@
                     <!-- Route Battles -->
                     <div class="row justify-content-center g-0" data-bind="if: App.game.gameState === GameConstants.GameState.fighting">
                         <div class="col g-0 clickable" data-bind="click: function() {Battle.clickAttack()}" style="height: 280px; display: block;">
-                            <h2 class="pageItemTitle" style="display: block;">
+                            <h2 class="pageItemTitle col" style="display: block;">
                                 <knockout>
                                     <knockout data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': Battle.enemyPokemon() } }">Pokémon name</knockout>
                                     <knockout data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(Battle.enemyPokemon().id)}}"></knockout>

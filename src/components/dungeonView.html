@@ -1,7 +1,7 @@
 <div class="row justify-content-center g-0" data-bind="if: App.game.gameState === GameConstants.GameState.dungeon">
     <div class="col g-0 clickable" style="height: 280px; display: block;"
         data-bind="click: function() { DungeonRunner.handleClick() }">
-        <h2 class="pageItemTitle" style="display: block;">
+        <h2 class="pageItemTitle col" style="display: block;">
             <knockout data-bind="if: DungeonBattle.enemyPokemon() && DungeonBattle.enemyPokemon().health()">
                 <knockout data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': DungeonBattle.enemyPokemon() } }">Pokémon name</knockout>
                 <!-- ko if: !DungeonBattle.trainer() -->

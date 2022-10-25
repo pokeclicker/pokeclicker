@@ -1,7 +1,7 @@
 
 <div class="row justify-content-center g-0" data-bind="if: App.game.gameState === GameConstants.GameState.gym">
     <div class="col g-0 clickable" data-bind="click: function() {GymBattle.clickAttack()}" style="height: 280px; display: block;">
-        <h2 class="pageItemTitle" style="display: block;">
+        <h2 class="pageItemTitle col" style="display: block;">
             <knockout class="left">
                 <knockout data-bind="text: GymBattle.gym.leaderName.replace(/\d/g,'')"></knockout>
             </knockout>
