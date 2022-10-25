@@ -32,17 +32,19 @@
                             </div>
                         </label>
                     </div>
+                    <!-- ko if: PokemonHelper.getPokemonById(App.game.profile.pokemon()).gender.visualDifference -->
                     <div class="form-group col-6">
                         <label>Gender</label>
                         <label class="form-check-label toggler-wrapper style-1 float-right"
                             data-bind="css: { 'gender-toggle': PokemonHelper.getPokemonById(App.game.profile.pokemon()).gender.visualDifference }">
                             <input class="form-check-input" type="checkbox" id="profile-female-toggle"
                                 data-bind="checked: App.game.profile.pokemonFemale, enable: PokemonHelper.getPokemonById(App.game.profile.pokemon()).gender.visualDifference">
-                            <div class="toggler-slider" data-bind="tooltip: { title: !PokemonHelper.getPokemonById(App.game.profile.pokemon()).gender.visualDifference ? `${PokemonHelper.getPokemonById(App.game.profile.pokemon()).name} has no gender differences` : '', trigger: 'hover' }">
-                                <div class="toggler-knob" data-bind="css: { 'checkbox-disabled': !PokemonHelper.getPokemonById(App.game.profile.pokemon()).gender.visualDifference }"></div>
+                            <div class="toggler-slider">
+                                <div class="toggler-knob"></div>
                             </div>
                         </label>
                     </div>
+                    <!-- /ko -->
                     <div class="form-group col-12">
                         <label>Text Color</label>
                         <p class="p-0" data-bind="style: { background: App.game.profile.textColor() }">
