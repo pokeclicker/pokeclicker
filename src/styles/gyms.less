@@ -11,3 +11,43 @@
   width: 100%;
   height: 100%;
 }
+
+// Applied to gym, dungeon, and tempBattle trainer sprites
+.trainer {
+  position: absolute;
+  left: 65%;
+  top: 25%;
+}
+
+// Applied to gym, tempBattle, and Battle Frontier Pokemon
+.trainer-enemy {
+  margin-top: 20px;
+}
+
+// Applied to gym, tempBattle, and Battle Frontier
+.progress.hitpoints.trainerhitpoints {
+  height: 20px;
+  bottom: 50px;
+}
+
+.stop-auto {
+  position: absolute;
+  top: 68px;
+  left: 10px;
+}
+
+// Mobile screen specific stylings
+@media (max-width: 768px) {
+  .trainer {
+    top: 30%
+  }
+  .trainer-enemy {
+    margin-top: 0px;
+  }
+  .trainerhitpoints {
+    bottom: 50px;
+  }
+  .stop-auto {
+    top: 85px;
+  }
+}
