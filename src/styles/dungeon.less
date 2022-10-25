@@ -13,19 +13,6 @@
   }
 }
 
-// Mobile screen specific styling
-@media (max-width: 768px) {
-  .dungeon-chest {
-    position: absolute;
-    left: 10%;
-  }
-  .chest-button {
-    position: absolute;
-    margin-top: 30px;
-    right: 10%;
-  }
-}
-
 .tile-invisible {
   background-color: #333;
 }
@@ -117,10 +104,17 @@
   margin-top: 25px;
   @media (max-width: 768px) {
     margin-top: 20px;
+    position: absolute;
+    left: 10%;
   }
 }
 
 .chest-button {
+  @media (max-width:768px) {
+    position: absolute;
+    margin-top: 30px;
+    right: 10%;
+  }
   p {
     font-size: small;
     margin-bottom: 0;
