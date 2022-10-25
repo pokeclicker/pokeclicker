@@ -54,17 +54,17 @@
   #gameTitle {
     margin-right: 160px;
   }
-  .enemy {
-    margin-top: 25px !important;
+  .mobileBattleTitle {
+    height: 29%;
+    .left, .right {
+      margin-top: 52px;
+    }
   }
   .hitpoints {
-    bottom: 90px !important;
-  }
-  .pokeball-animated {
-    margin-top: 10px !important;
+    bottom: 85px;
   }
   .pageItemFooter {
-    font-size: 13px !important;
+    font-size: 14px !important;
   }
 }
 
@@ -388,6 +388,9 @@ img {
 .enemy {
   min-height: 96px;
   margin-top: 40px;
+  @media (max-width: 768px) {
+    margin-top: 20px;
+  }
 }
 
 .battle-view {
@@ -459,6 +462,9 @@ img {
 
   .pokeball-animated {
     margin-top: 25px;
+    @media (max-width: 768px) {
+      margin-top: 10px;
+    }
   }
 
   .catchChance {
@@ -471,6 +477,9 @@ img {
     bottom: 70px;
     width: 90%;
     left: 5%;
+    @media (max-width: 768px) {
+      bottom: 90px;
+    }
   }
 }
 
