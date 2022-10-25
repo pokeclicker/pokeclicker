@@ -222,6 +222,7 @@ export const SpriteCredits: Credit[] = [
             'Valencian Paras',
             'White mane hair icon',
             'Zarude (Dada) shop image',
+            'Zero',
         ],
         // Notes: Made specifically for PokéClicker.
     },
