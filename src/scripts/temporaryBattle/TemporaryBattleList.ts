@@ -430,6 +430,34 @@ TemporaryBattleList['Galactic Boss Cyrus'] = new TemporaryBattle(
     undefined,
     {imageName: '../trainers/Galactic Boss (cyrus)'}
 );
+TemporaryBattleList['Giratina'] = new TemporaryBattle(
+    'Giratina',
+    [new GymPokemon('Giratina (Origin)', 12510000, 47)],
+    '<i>You managed to calm Giratina.</i>',
+    [new QuestLineCompletedRequirement('A New World')],
+    undefined,
+    {
+        displayName: 'Giratina',
+        returnTown: 'Mt. Coronet',
+        hideTrainer: true,
+        imageName: '../pokemon/487',
+        firstTimeRewardFunction: () => {
+            App.game.party.gainPokemonById(487);
+            },
+    }
+);
+TemporaryBattleList['Zero'] = new TemporaryBattle(
+    'Zero',
+    [
+        new GymPokemon('Magnemite', 13120000, 70),
+        new GymPokemon('Magneton', 13870000, 72),
+        new GymPokemon('Magnezone', 14130000, 75),
+    ],
+    'Argh! I can\'t believe I lost to someone like you! You can keep the key for now, but I\'ll get my revenge one day.',
+    [new QuestLineStepCompletedRequirement('Zero\'s Ambition', 12)],
+    undefined,
+    {imageName: 'Zero'}
+);
 
 // Unova Temporary Battles
 TemporaryBattleList['Team Plasma Grunt 1'] = new TemporaryBattle(
