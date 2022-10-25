@@ -2047,6 +2047,7 @@ class QuestLineHelper {
         this.createPinkanThemeparkQuestLine();
         this.createRegiTrioQuestLine();
         this.createGalacticSinnohQuestLine();
+        this.createGiratinaOriginQuestLine();
         this.createPlasmaUnovaQuestLine();
         this.createDetectivePikachuQuestLine();
         this.createVivillonQuestLine();
