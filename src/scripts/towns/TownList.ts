@@ -2471,10 +2471,46 @@ const CanalaveYoungBoy = new NPC('Young Boy', [
     'Maybe if you can prove yourself by conquering that island, you could find Cresselia roaming around the region...',
 ]);
 
+const CanalaveSinnohMyth = new NPC('Sinnoh\'s Myth', [
+    '<i>Three Pokémon there were.</i>',
+    '<i>Into the lakes they dove.</i>',
+    '<i>Deep, deep, drawing no breath.</i>',
+    '<i>Deeper, deeper they dove.</i>',
+    '<i>Into suffocating depths they dove.</i>',
+    '<i>Deeper, then deepest they alight.</i>',
+    '<i>From the lake floor they rise.</i>',
+    '<i>Bearing with them the power to make vast lands, they rise again.</i>',
+],{
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Zero\'s Ambition', 0), new QuestLineStepCompletedRequirement('Zero\'s Ambition', 2, GameConstants.AchievementOption.less)]),});
+
+const VerityMesprit = new NPC('Mesprit', [
+    '<i>You are the trainer looking for the Distortion World, right?</i>',
+    '<i>We can help you in your mission, but we will need a few materials.</i>',
+    '<i>Collect 10 Purple Shards and then visit my two siblings. They will also help you in your quest.</i>',
+],{
+    image: 'assets/images/pokemon/481.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Zero\'s Ambition', 2), new QuestLineStepCompletedRequirement('Zero\'s Ambition', 4, GameConstants.AchievementOption.less)]),});
+
+const ValorAzelf = new NPC('Azelf', [
+    '<i>Mesprit told me you would come.</i>',
+    '<i>In order to enter the Distortion World, we need to open a gate to it. The materials you gathered for Mesprit are only a third of the ones needed to open such gate.</i>',
+    '<i>Obtain 10 Ochre Shards and then visit Uxie at Lake Acuity.</i>',
+],{
+    image: 'assets/images/pokemon/482.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Zero\'s Ambition', 4), new QuestLineStepCompletedRequirement('Zero\'s Ambition', 6, GameConstants.AchievementOption.less)]),});
+
 const SnowpointYoungGirl = new NPC('Young Girl', [
     'Someone told me that training an Eevee in Lake Acuity will make it evolve.',
     'They must be lying, how can that be true?!',
 ]);
+
+const AcuityUxie = new NPC('Uxie', [
+    '<i>My siblings had informed me of your arrival.</i>',
+    '<i>Looks like you have already gathered more than half of the necessary materials. The only materials left to make the key are 10 Crimson Shards.</i>',
+    '<i>We will be waiting at Sendoff Spring, meet us there after you have collected the shards.</i>',
+],{
+    image: 'assets/images/pokemon/480.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Zero\'s Ambition', 6), new QuestLineStepCompletedRequirement('Zero\'s Ambition', 8, GameConstants.AchievementOption.less)]),});
 
 const SunyshoreRibbonerJulia = new NPC('Ribboner Julia', [
     'Oh! I don’t get visitors often. My husband is a sailor who visits far away lands… he always tells me these fantastic things.',
@@ -2486,12 +2522,47 @@ const SunyshoreRibbonerJulia = new NPC('Ribboner Julia', [
 const FightAreaAceTrainer = new NPC('Ace Trainer Quinn', [
     'Something amazing happened on top of Mt. Coronet. We could see it all the way from here. I\'m sure everyone in the entire region saw it.',
     'What? You were there? What happened? What was that purple thing?',
-    'The Distortion World? Hold on, I think I\'ve read about that in an old book in the Canalave City library. But according to that book the only entrance to the Distortion World is hidden deep within Sendoff Spring. This is quite the discovery my friend.',
+    'The Distortion World? Hold on, I think I\'ve heard that name before, there was a guy around here named Zero looking for a way to enter that place.',
 ], {image: 'assets/images/trainers/Ace Trainer (male).png'});
+
+const FightAreaZero1 = new NPC('Zero', [
+    'You\'re the Champion, right? I need your help on a small errand.',
+    'My old friend Newton used to study the Distortion World, he was working on opening a gate to it. I\'ve heard that you were able to enter the Distortion World from a portal at the top of Mt. Coronet, so I was wondering if you could help me open a new portal to fufill my friend\'s wish.',
+    'An old book about Sinnoh\'s history was recently discovered at the Canalave City Library, it may have usefull information.',
+], {
+    image: 'assets/images/temporaryBattle/Zero.png',
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('Zero\'s Ambition'), new QuestLineStepCompletedRequirement('Zero\'s Ambition', 1, GameConstants.AchievementOption.less)]),
+});
+
+const FightAreaZero2 = new NPC('Zero', [
+    'What was in that book? Did you find any information on the Distortion World?',
+    'It didn\' mention it once? That\'s a shame.',
+    'Wait, you said the book mentioned the Lake Trio, right? Legends say they have existed since the creation of the world, they may know how to enter the Distortion World.',
+], {
+    image: 'assets/images/temporaryBattle/Zero.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Zero\'s Ambition', 1), new QuestLineStepCompletedRequirement('Zero\'s Ambition', 2, GameConstants.AchievementOption.less)]),
+});
 
 const SurvivalAreaSinnohRoamerNPC = new RoamerNPC('Hiker Kevin', [
     'I spotted a bunch of roaming Pokémon on {ROUTE_NAME}!',
 ], GameConstants.Region.sinnoh, RoamingPokemonList.findGroup(GameConstants.Region.sinnoh, GameConstants.SinnohSubRegions.Sinnoh), 'assets/images/trainers/Hiker.png');
+
+const SendoffSpringLakeTrio = new NPC('Lake Trio', [
+    '<i>You are finally here.</i>',
+    '<i>We have been able to create a key to the Distortion World using the materials you collected, but it is unable to work in it\'s current state.</i>',
+    '<i>We bestow it upon you, charge it with the ghostly energy of the Distortion World.</i>',
+],{
+    image: 'assets/images/npcs/Lake Trio.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Zero\'s Ambition', 9), new QuestLineStepCompletedRequirement('Zero\'s Ambition', 11, GameConstants.AchievementOption.less)]),});
+
+const SendoffSpringZero = new NPC('Zero', [
+    'I couldn\'t wait anymore for you to report about your progress, so I asked around and discovered you were coming here.',
+    'Wait, is that the key to the Distortion World? With that, I could open the gate myself.',
+    'You know what? You are fired, I no longer need you. Now, give me the key to the Distortion World or I will take it by force!',
+], {
+    image: 'assets/images/temporaryBattle/Zero.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Zero\'s Ambition', 11), new QuestLineStepCompletedRequirement('Zero\'s Ambition', 12, GameConstants.AchievementOption.less)]),
+});
 
 const ProfRowan = new ProfNPC('Prof. Rowan',
     GameConstants.Region.sinnoh,
@@ -2512,7 +2583,7 @@ const LucyStevens1 = new NPC('Lucy Stevens', [
 TownList['Twinleaf Town'] = new Town(
     'Twinleaf Town',
     GameConstants.Region.sinnoh,
-    [],
+    [new BulletinBoard(GameConstants.BulletinBoards.Sinnoh)],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
         npcs: [TwinleafContestChampion],
@@ -2631,7 +2702,7 @@ TownList['Canalave City'] = new Town(
     [CanalaveCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Canalave City'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 218)],
-        npcs: [CanalaveRiley, CanalaveYoungBoy],
+        npcs: [CanalaveRiley, CanalaveYoungBoy, CanalaveSinnohMyth],
     }
 );
 TownList['Snowpoint City'] = new Town(
@@ -2666,7 +2737,7 @@ TownList['Fight Area'] = new Town(
     [FightAreaShop],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)],
-        npcs: [FightAreaAceTrainer],
+        npcs: [FightAreaAceTrainer, FightAreaZero1, FightAreaZero2],
     }
 );
 TownList['Survival Area'] = new Town(
@@ -2756,12 +2827,20 @@ TownList['Iron Island'] = new DungeonTown(
 TownList['Lake Valor'] = new DungeonTown(
     'Lake Valor',
     GameConstants.Region.sinnoh,
-    [new GymBadgeRequirement(BadgeEnums.Mine)]
+     [new GymBadgeRequirement(BadgeEnums.Mine)],
+    [],
+    {
+        npcs: [ValorAzelf],
+    }
 );
 TownList['Lake Verity'] = new DungeonTown(
     'Lake Verity',
     GameConstants.Region.sinnoh,
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Lake Valor'))]
+     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Lake Valor'))],
+    [],
+    {
+        npcs: [VerityMesprit],
+    }
 );
 TownList['Mt. Coronet North'] = new DungeonTown(
     'Mt. Coronet North',
@@ -2774,7 +2853,11 @@ TownList['Mt. Coronet North'] = new DungeonTown(
 TownList['Lake Acuity'] = new DungeonTown(
     'Lake Acuity',
     GameConstants.Region.sinnoh,
-    [new GymBadgeRequirement(BadgeEnums.Icicle)]
+    [new GymBadgeRequirement(BadgeEnums.Icicle)],
+    [],
+    {
+        npcs: [AcuityUxie],
+    }
 );
 TownList['Team Galactic HQ'] = new DungeonTown(
     'Team Galactic HQ',
@@ -2789,7 +2872,8 @@ TownList['Spear Pillar'] = new DungeonTown(
 TownList['Distortion World'] = new DungeonTown(
     'Distortion World',
     GameConstants.Region.sinnoh,
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Spear Pillar'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Spear Pillar'))],
+    [TemporaryBattleList['Giratina']],
 );
 TownList['Victory Road Sinnoh'] = new DungeonTown(
     'Victory Road Sinnoh',
@@ -2799,7 +2883,11 @@ TownList['Victory Road Sinnoh'] = new DungeonTown(
 TownList['Sendoff Spring'] = new DungeonTown(
     'Sendoff Spring',
     GameConstants.Region.sinnoh,
-    [new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)]
+    [new QuestLineStepCompletedRequirement('Zero\'s Ambition', 8)],
+    [TemporaryBattleList['Zero']],
+    {
+        npcs: [SendoffSpringLakeTrio, SendoffSpringZero],
+    }
 );
 TownList['Hall of Origin'] = new DungeonTown(
     'Hall of Origin',
