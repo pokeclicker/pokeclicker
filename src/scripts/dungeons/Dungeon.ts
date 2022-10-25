@@ -4208,7 +4208,7 @@ dungeonList['Distortion World'] = new Dungeon('Distortion World',
                 new GymPokemon('Gyarados', 1128000, 46),
                 new GymPokemon('Weavile', 1128000, 47),
             ], { weight: 1 }, 'Cyrus', '(cyrus)'),
-        new DungeonBossPokemon('Giratina (Altered)', 11880000, 45, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)}),
+        new DungeonBossPokemon('Giratina (Origin)', 13350000, 47, {requirement: new TemporaryBattleRequirement('Zero')}),
     ],
     86500, 217);
 
