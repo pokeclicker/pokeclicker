@@ -1,7 +1,7 @@
 
 <div class="row justify-content-center no-gutters" data-bind="if: App.game.gameState === GameConstants.GameState.temporaryBattle">
     <div class="col no-gutters clickable" data-bind="click: function() {TemporaryBattleBattle.clickAttack()}" style="height: 280px; display: block;">
-        <h2 class="pageItemTitle" style="display: block;">
+        <h2 class="pageItemTitle mobileBattleTitle" style="display: block;">
 
             <knockout class="left">
                 <knockout data-bind="text: TemporaryBattleBattle.battle.getDisplayName()"></knockout>
@@ -38,11 +38,11 @@
           </div>
         </div>
 
-        <div style="position:absolute; left:65%; top: 25%;" data-bind="if: !TemporaryBattleRunner.battleObservable().optionalArgs.hideTrainer">
+        <div class="trainer" data-bind="if: !TemporaryBattleRunner.battleObservable().optionalArgs.hideTrainer">
             <img data-bind="attr:{ src: TemporaryBattleRunner.battleObservable().getImage() }" onerror="this.src='assets/images/trainers/Mysterious Trainer.png';"/>
         </div>
 
-        <div data-bind="ifnot: TemporaryBattleBattle.catching">
+        <div class="trainer-enemy" data-bind="ifnot: TemporaryBattleBattle.catching">
             <knockout data-bind="template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': TemporaryBattleBattle.enemyPokemon() } }">Pokémon sprite</knockout>
         </div>
 
@@ -55,7 +55,7 @@
             <knockout data-bind="text: Math.floor(TemporaryBattleBattle.catchRateActual()) + '%'">Catch Rate</knockout>
         </div>
 
-        <div class="progress hitpoints" style="height: 20px;">
+        <div class="progress hitpoints trainerhitpoints">
             <div class="progress-bar bg-danger" role="progressbar"
                     data-bind="attr:{ style: 'width:' + TemporaryBattleBattle.enemyPokemon().healthPercentage() + '%' }"
                     aria-valuemin="0" aria-valuemax="100">
