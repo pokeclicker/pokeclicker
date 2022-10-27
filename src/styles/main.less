@@ -49,6 +49,25 @@
   }
 }
 
+// Mobile screen specific stylings
+@media (max-width: 768px) {
+  #gameTitle {
+    margin-right: 160px;
+  }
+  .mobileBattleTitle {
+    height: 29%;
+    .left, .right {
+      margin-top: 52px;
+    }
+  }
+  .hitpoints {
+    bottom: 85px;
+  }
+  .pageItemFooter {
+    font-size: 14px !important;
+  }
+}
+
 .bg-ocean {
   background: url('../assets/images/safari/5.png');
 }
@@ -368,7 +387,10 @@ img {
 
 .enemy {
   min-height: 96px;
-  margin-top: 55px;
+  margin-top: 40px;
+  @media (max-width: 768px) {
+    margin-top: 20px;
+  }
 }
 
 .battle-view {
@@ -440,6 +462,9 @@ img {
 
   .pokeball-animated {
     margin-top: 25px;
+    @media (max-width: 768px) {
+      margin-top: 10px;
+    }
   }
 
   .catchChance {
@@ -449,9 +474,12 @@ img {
   .hitpoints {
     height: 20px;
     position: absolute;
-    bottom: 60px;
+    bottom: 70px;
     width: 90%;
     left: 5%;
+    @media (max-width: 768px) {
+      bottom: 90px;
+    }
   }
 }
 
