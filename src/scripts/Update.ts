@@ -1374,13 +1374,6 @@ class Update implements Saveable {
             if (playerData._townName == 'Brawlers Cave') {
                 playerData._townName = 'Brawlers\' Cave';
             }
-            // Lake Axewells renamed
-            if (playerData._townName == 'West Lake Axwell') {
-                playerData._townName = 'West Lake Axewell';
-            }
-            if (playerData._townName == 'East Lake Axwell') {
-                playerData._townName = 'East Lake Axewell';
-            }
 
             // Remove cleared BF milestones from save if corresponding Pokémon is not in party
             if (saveData?.battleFrontier?.milestones?.length) {
