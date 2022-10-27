@@ -2051,7 +2051,7 @@ Routes.add(new RegionRoute(
     GameConstants.GalarSubRegions.SouthGalar
 ));
 Routes.add(new RegionRoute(
-    'West Lake Axwell', GameConstants.Region.galar, 5,
+    'West Lake Axewell', GameConstants.Region.galar, 5,
     new RoutePokemon({
         water: ['Goldeen', 'Magikarp', 'Remoraid', 'Wishiwashi (Solo)', 'Drednaw', 'Gyarados'],
         special:
@@ -2072,7 +2072,7 @@ Routes.add(new RegionRoute(
     GameConstants.GalarSubRegions.SouthGalar
 ));
 Routes.add(new RegionRoute(
-    'East Lake Axwell', GameConstants.Region.galar, 6,
+    'East Lake Axewell', GameConstants.Region.galar, 6,
     new RoutePokemon({
         land: ['Stufful', 'Butterfree', 'Pidove'],
         water: ['Shellder', 'Magikarp', 'Goldeen', 'Wishiwashi (Solo)', 'Gyarados', 'Wingull'],
