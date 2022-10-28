@@ -14,11 +14,11 @@
             When you are ready, click Start!<br/>
             <i>Note: there is no click damage in the Battle Frontier.</i>
         </p>
-        <a class="btn btn-block btn-success text-light" onclick="BattleFrontierRunner.start(false)">Start</a>
+        <a class="btn w-100 btn-success text-light" onclick="BattleFrontierRunner.start(false)">Start</a>
         <!-- ko if: BattleFrontierRunner.hasCheckpoint() -->
-            <a class="btn btn-block btn-success text-light" onclick="BattleFrontierRunner.start(true)">Start at latest checkpoint (Stage <knockout data-bind="text: BattleFrontierRunner.checkpoint">0</knockout>)</a>
+            <a class="btn w-100 btn-success text-light" onclick="BattleFrontierRunner.start(true)">Start at latest checkpoint (Stage <knockout data-bind="text: BattleFrontierRunner.checkpoint">0</knockout>)</a>
         <!-- /ko -->
-        <a class="btn btn-block btn-danger text-light" onclick="App.game.battleFrontier.leave()">Leave</a>
+        <a class="btn w-100 btn-danger text-light" onclick="App.game.battleFrontier.leave()">Leave</a>
     </div>
     <!-- /ko -->
     <!-- ko if: BattleFrontierRunner.started -->
@@ -43,7 +43,7 @@
                 </tr>
             </tbody>
         </table>
-        <a class="btn btn-block btn-danger text-light" onclick="BattleFrontierRunner.battleQuit()">Quit Battle</a>
+        <a class="btn w-100 btn-danger text-light" onclick="BattleFrontierRunner.battleQuit()">Quit Battle</a>
     </div>
     <!-- /ko -->
 </div>

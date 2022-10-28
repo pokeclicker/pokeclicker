@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const settings = localStorage.getItem('settings');
         Settings.fromJSON(JSON.parse(settings));
         document.body.className = `no-select ${Settings.getSetting('theme').observableValue()} ${Settings.getSetting('backgroundImage').observableValue()}`;
-        (document.getElementById('theme-link') as HTMLLinkElement).href = `https://bootswatch.com/4/${Settings.getSetting('theme').observableValue()}/bootstrap.min.css`;
+        (document.getElementById('theme-link') as HTMLLinkElement).href = `https://bootswatch.com/5/${Settings.getSetting('theme').observableValue()}/bootstrap.min.css`;
 
     } catch (e) {}
     // Load list of saves

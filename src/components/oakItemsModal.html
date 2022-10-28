@@ -6,9 +6,7 @@
             <li class="nav-item"><a data-bs-toggle='tab' class='p-2 nav-link active' href="#oakItemSelector">Selector</a></li>
             <li class='nav-item'><a data-bs-toggle='tab' class='p-2 nav-link' href="#oakItemLoadouts">Loadouts</a></li>
         </ul>
-        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div data-bind="visible: App.game.challenges.list.disableOakItems.active()" class="modal-body bg-danger my-0 py-0">
         Oak Items are disabled.
@@ -45,7 +43,7 @@
           </div>
           <div id="oakItemLoadouts" class="tab-pane fade">
             <div class="modal-header p-1">
-              <select name="loadoutSelector" autocomplete="off" class="custom-select"
+              <select name="loadoutSelector" autocomplete="off" class="form-select"
                 onchange="App.game.oakItemLoadouts.selectedLoadout(this.value)">
                 <!-- ko foreach: App.game.oakItemLoadouts.loadouts -->
                 <option data-bind="text: $data.name, value: $index(), attr:{ selected: App.game.oakItemLoadouts.selectedLoadout() == $data.value}"></option>

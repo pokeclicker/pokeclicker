@@ -31,12 +31,12 @@
                     </td>
                     <td width="30%" class="p-0">
                         <!-- ko ifnot: $data.isCompleted() -->
-                        <button class="btn btn-danger btn-sm btn-block p-0" data-bind="click: () => { App.game.quests.quitQuest($data.index, true) }">
+                        <button class="btn btn-danger btn-sm w-100 p-0" data-bind="click: () => { App.game.quests.quitQuest($data.index, true) }">
                             Quit
                         </button>
                         <!-- /ko -->
                         <!-- ko if: $data.isCompleted() -->
-                        <button class="btn btn-success btn-sm btn-block p-0" data-bind="click: () => { App.game.quests.claimQuest($data.index) }">
+                        <button class="btn btn-success btn-sm w-100 p-0" data-bind="click: () => { App.game.quests.claimQuest($data.index) }">
                             Claim
                         </button>
                         <!-- /ko -->

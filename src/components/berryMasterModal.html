@@ -57,8 +57,8 @@
                                         </knockout>
                                     </td>
                                     <td class='vertical-middle' data-bind="attr: { rowspan: $parent.berries.length }">
-                                        <div class="btn-group btn-block" data-bind="let: { tradeAmount: ko.observable(1) }">
-                                            <button class='btn btn-success btn-block' data-bind='click: function(){BerryDeal.use(ShopHandler.shopObservable()?.location, $parentContext.$index(), tradeAmount())}, css: { disabled: !BerryDeal.canUse(ShopHandler.shopObservable()?.location, $parentContext.$index()) }'>
+                                        <div class="btn-group w-100" data-bind="let: { tradeAmount: ko.observable(1) }">
+                                            <button class='btn btn-success w-100' data-bind='click: function(){BerryDeal.use(ShopHandler.shopObservable()?.location, $parentContext.$index(), tradeAmount())}, css: { disabled: !BerryDeal.canUse(ShopHandler.shopObservable()?.location, $parentContext.$index()) }'>
                                                 Trade
                                             </button>
                                             <button type="button" data-bind="text: tradeAmount() + '&nbsp;', css: { disabled: !BerryDeal.canUse(ShopHandler.shopObservable()?.location, $parentContext.$index()) }" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

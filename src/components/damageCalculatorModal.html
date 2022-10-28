@@ -45,7 +45,7 @@ aria-labelledby="damageCalculatorModalLabel" aria-hidden="true">
                         <!-- ko if: App.game.challenges.list.regionalAttackDebuff.active() -->
                         <div class="form-group col-lg-3 col-6">
                             <label>Region</label>
-                            <select autocomplete="off" class="custom-select" data-bind="value: DamageCalculator.region">
+                            <select autocomplete="off" class="form-select" data-bind="value: DamageCalculator.region">
                                 <!-- ko foreach: GameHelper.enumStrings(GameConstants.Region).filter(r => r != 'none' && GameConstants.Region[r] <= player.highestRegion()) -->
                                 <option data-bind="attr: { value: GameConstants.Region[$data] }, text: GameConstants.camelCaseToString($data)">Region</option>
                                 <!-- /ko -->
@@ -55,7 +55,7 @@ aria-labelledby="damageCalculatorModalLabel" aria-hidden="true">
                         <!-- /ko -->
                         <div class="form-group col-lg-3 col-6">
                             <label>Weather</label>
-                            <select autocomplete="off" class="custom-select" data-bind="value: DamageCalculator.weather">
+                            <select autocomplete="off" class="form-select" data-bind="value: DamageCalculator.weather">
                                 <!-- ko foreach: GameHelper.enumStrings(WeatherType) -->
                                 <option data-bind="attr: { value: WeatherType[$data] }, text: GameConstants.camelCaseToString($data)">Weather</option>
                                 <!-- /ko -->
@@ -63,7 +63,7 @@ aria-labelledby="damageCalculatorModalLabel" aria-hidden="true">
                         </div>
                         <div class="form-group col-lg-3 col-6">
                             <label>Type 1</label>
-                            <select autocomplete="off" class="custom-select" data-bind="value: DamageCalculator.type1">
+                            <select autocomplete="off" class="form-select" data-bind="value: DamageCalculator.type1">
                                 <!-- ko foreach: GameHelper.enumStrings(PokemonType) -->
                                 <option data-bind="attr: { value: PokemonType[$data] }, text: $data">Type</option>
                                 <!-- /ko -->
@@ -71,7 +71,7 @@ aria-labelledby="damageCalculatorModalLabel" aria-hidden="true">
                         </div>
                         <div class="form-group col-lg-3 col-6">
                             <label>Type 2</label>
-                            <select autocomplete="off" class="custom-select" data-bind="value: DamageCalculator.type2">
+                            <select autocomplete="off" class="form-select" data-bind="value: DamageCalculator.type2">
                                 <!-- ko foreach: GameHelper.enumStrings(PokemonType) -->
                                 <option data-bind="attr: { value: PokemonType[$data] }, text: $data">Type</option>
                                 <!-- /ko -->

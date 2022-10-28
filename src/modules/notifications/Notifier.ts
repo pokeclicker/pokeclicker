@@ -55,14 +55,14 @@ export default class Notifier {
             const toastHTML = `<div id="${toastID}" class="toast bg-${NotificationOption[type]}" data-autohide="false">
                 ${title ? `<div class="toast-header">
                     ${image ? `<img src="${image}" class="icon" />` : ''}
-                    <strong class="mr-auto text-primary">${title || ''}</strong>
+                    <strong class="me-auto text-primary">${title || ''}</strong>
                     <small class="text-muted">${time}</small>
-                    <button type="button" class="ml-2 mb-1 close" data-bs-dismiss="toast">×</button>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
                 </div>` : ''}
                 <div class="toast-body text-light">
                     ${!title && image ? `<img src="${image}" class="icon" />` : ''}
-                    ${message.replace(/\n/g, '<br/>')}
-                    ${title ? '' : '<button type="button" class="ml-2 mb-1 close" data-bs-dismiss="toast">×</button>'}
+                    <div class="me-auto">${message.replace(/\n/g, '<br/>')}</div>
+                    ${title ? '' : '<button type="button" class="btn-close btn-close-white float-end" style="margin-top: -20px" data-bs-dismiss="toast" aria-label="Close"></button>'}
                 </div>
                 </div>`;
 
@@ -112,8 +112,7 @@ export default class Notifier {
         <div class="modal-content">
             <div class="modal-header modal-header pb-0 pt-2 px-2 bg-${NotificationOption[type]}">
                 <h5>${title}</h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                 </button>
             </div>
             <div class="modal-body py-2 px-2 text-left">
@@ -150,7 +149,7 @@ export default class Notifier {
                 }
             });
 
-            // Once hidden remove the element
+            // // Once hidden remove the element
             $(`#modal${modalID}`).on('hidden.bs.modal', () => {
                 const inputEl = document.getElementById(`promptInput${modalID}`) as HTMLInputElement;
                 const inputValue = inputEl?.value;
@@ -191,8 +190,7 @@ export default class Notifier {
         <div class="modal-content">
             <div class="modal-header modal-header pb-0 pt-2 px-2 bg-${NotificationOption[type]}">
                 <h5>${title}</h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                 </button>
             </div>
             <div class="modal-body py-2 px-2 text-left">

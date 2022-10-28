@@ -47,7 +47,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             </div>
                             <div class="form-group col-md-3 col-6">
                                 <label>Category</label>
-                                <select name="breedingCategoryFilter" autocomplete="off" class="custom-select" onchange="BreedingFilters.category.value(+this.value), Settings.setSettingByName(this.name, this.value)">
+                                <select name="breedingCategoryFilter" autocomplete="off" class="form-select" onchange="BreedingFilters.category.value(+this.value), Settings.setSettingByName(this.name, this.value)">
                                     <option value="-1">All</option>
                                     <!-- ko foreach: PokemonCategories.categories -->
                                     <option style="color: whitesmoke" data-bind="attr: { value: $index, selected: Settings.getSetting('breedingCategoryFilter').value == $index() }, text: $data.name, style: { background: $data.color }">Category</option>
@@ -57,7 +57,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             <div class="form-group col-md-3 col-6">
                                 <label>Regions</label><br/>
                                 <div class="dropdown show">
-                                    <button type="button" class="text-left custom-select col-12 btn" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bind="text :
+                                    <button type="button" class="text-left form-select col-12 btn" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bind="text :
                                         BreedingFilters.region.value() == 2 ** (player.highestRegion() + 1) - 1 ?
                                             'All' :
                                             (BreedingFilters.region.value() ?
@@ -93,7 +93,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             </div>
                             <div class="form-group col-md-3 col-6">
                                 <label>Shiny Status</label>
-                                <select name="breedingShinyFilter" autocomplete="off" class="custom-select" onchange="BreedingFilters.shinyStatus.value(+this.value), Settings.setSettingByName(this.name, this.value)">
+                                <select name="breedingShinyFilter" autocomplete="off" class="form-select" onchange="BreedingFilters.shinyStatus.value(+this.value), Settings.setSettingByName(this.name, this.value)">
                                     <option value="-1" data-bind="attr: { selected: Settings.getSetting('breedingShinyFilter').value === '-1' }">All</option>
                                     <option value="0" data-bind="attr: { selected: Settings.getSetting('breedingShinyFilter').value === '0' }">Not Shiny</option>
                                     <option value="1" data-bind="attr: { selected: Settings.getSetting('breedingShinyFilter').value === '1' }">Shiny</option>
@@ -101,7 +101,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             </div>
                             <div class="form-group col-md-3 col-6">
                                 <label>Type</label>
-                                <select name="breedingTypeFilter1" autocomplete="off" class="custom-select" onchange="BreedingFilters.type1.value(+this.value), Settings.setSettingByName(this.name, this.value)">
+                                <select name="breedingTypeFilter1" autocomplete="off" class="form-select" onchange="BreedingFilters.type1.value(+this.value), Settings.setSettingByName(this.name, this.value)">
                                     <!-- ko foreach: Settings.getSetting('breedingTypeFilter1').options -->
                                     <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('breedingTypeFilter1').value === $data.value }, text: $data.text">Type</option>
                                     <!-- /ko -->
@@ -109,7 +109,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             </div>
                             <div class="form-group col-md-3 col-6">
                                 <label>Type</label>
-                                <select name="breedingTypeFilter2" autocomplete="off" class="custom-select" onchange="BreedingFilters.type2.value(+this.value), Settings.setSettingByName(this.name, this.value)">
+                                <select name="breedingTypeFilter2" autocomplete="off" class="form-select" onchange="BreedingFilters.type2.value(+this.value), Settings.setSettingByName(this.name, this.value)">
                                     <!-- ko foreach: Settings.getSetting('breedingTypeFilter2').options -->
                                     <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('breedingTypeFilter2').value === $data.value }, text: $data.text">Type</option>
                                     <!-- /ko -->
@@ -117,7 +117,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             </div>
                             <div class="form-group col-md-3 col-6">
                                 <label>Pokérus Status</label>
-                                <select name="breedingPokerusFilter" autocomplete="off" class="custom-select" onchange="BreedingFilters.pokerus.value(+this.value), Settings.setSettingByName(this.name, this.value)">
+                                <select name="breedingPokerusFilter" autocomplete="off" class="form-select" onchange="BreedingFilters.pokerus.value(+this.value), Settings.setSettingByName(this.name, this.value)">
                                     <!-- ko foreach: Settings.getSetting('breedingPokerusFilter').options -->
                                     <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('breedingPokerusFilter').value === $data.value }, text: $data.text"></option>
                                     <!-- /ko -->
@@ -127,7 +127,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                         <div class="form-row collapse" id="breeding-settings">
                             <div class="form-group col-md-3 col-6">
                                 <label>Display Value</label>
-                                <select name="breedingDisplayFilter" autocomplete="off" class="custom-select" onchange="BreedingController.displayValue(this.value), Settings.setSettingByName(this.name, this.value)">
+                                <select name="breedingDisplayFilter" autocomplete="off" class="form-select" onchange="BreedingController.displayValue(this.value), Settings.setSettingByName(this.name, this.value)">
                                     <!-- ko foreach: Settings.getSetting('breedingDisplayFilter').options -->
                                     <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('breedingDisplayFilter').value === $data.value }, text: $data.text">Type</option>
                                     <!-- /ko -->
@@ -136,7 +136,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             <!-- ko if: App.game.challenges.list.regionalAttackDebuff.active() -->
                             <div class="form-group col-md-3 col-6">
                                 <label>Regional Debuff</label>
-                                <select name="breedingRegionalAttackDebuffSetting" autocomplete="off" class="custom-select" onchange="BreedingController.regionalAttackDebuff(+this.value), Settings.setSettingByName(this.name, this.value)">
+                                <select name="breedingRegionalAttackDebuffSetting" autocomplete="off" class="form-select" onchange="BreedingController.regionalAttackDebuff(+this.value), Settings.setSettingByName(this.name, this.value)">
                                     <!-- ko foreach: Settings.getSetting('breedingRegionalAttackDebuffSetting').options.filter(r => r.value <= player.highestRegion()) -->
                                     <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('breedingRegionalAttackDebuffSetting').value === $data.value }, text: $data.text">Type</option>
                                     <!-- /ko -->
@@ -146,12 +146,12 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             <div class="form-group col-md-6 col-12" style="max-width: 100%; flex-grow: 1" data-bind="with: Settings.getSetting('hatcherySort')">
                                 <label>Sort</label>
                                 <div class="input-group">
-                                    <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])"
+                                    <select autocomplete="off" class="form-select" onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])"
                                         data-bind="foreach: $data.options, attr: {name}, selectedOptions: [$data.observableValue()]">
                                         <option data-bind="text: $data.text, value: $data.value"></option>
                                     </select>
                                     <div class="input-group-append bg-primary text-light">
-                                        <label for="hatcherySortDirection" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;" data-bind="
+                                        <label for="hatcherySortDirection" class="clickable m-0 px-2" style="font-size: 22px;" data-bind="
                                         text: Settings.getSetting('hatcherySortDirection').observableValue() ? '⥄' : '⥂',
                                         tooltip: { title: Settings.getSetting('hatcherySortDirection').observableValue() ? 'Descending (highest value first)' : 'Ascending (lowest value first)', trigger: 'hover', placement:'top', html: true }
 
@@ -310,7 +310,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                             <td class="text-left align-middle">Sort:</td>
                                             <td class="text-center align-middle">
                                                 <div class="input-group input-group-sm">
-                                                    <select autocomplete="off" class="custom-select" data-bind="options: GameHelper.enumSelectOption(SortOptions), optionsValue: 'value', optionsText: i => GameConstants.camelCaseToString(i.name), value: $data.sortOption"></select>
+                                                    <select autocomplete="off" class="form-select" data-bind="options: GameHelper.enumSelectOption(SortOptions), optionsValue: 'value', optionsText: i => GameConstants.camelCaseToString(i.name), value: $data.sortOption"></select>
                                                     <div class="input-group-append bg-primary text-light">
                                                         <label class="clickable m-0 px-2" style="font-size: 20px;" data-bind="
                                                             attr: {for: 'hatcheryHelperSortDirection' + $index() },
@@ -328,7 +328,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                     <tfoot>
                                         <tr>
                                             <td colspan="2">
-                                                <button class="btn btn-block" data-bind="attr: { disabled: !$data.hired() && !App.game.breeding.hatcheryHelpers.canHire() }, css: { 'btn-success': !$data.hired(), 'btn-danger': $data.hired() }, click: () => !$data.hired() ? $data.hire() : $data.fire(), text: !$data.hired() ? 'Hire!' : 'Fire!'">Hire!</button>
+                                                <button class="btn w-100" data-bind="attr: { disabled: !$data.hired() && !App.game.breeding.hatcheryHelpers.canHire() }, css: { 'btn-success': !$data.hired(), 'btn-danger': $data.hired() }, click: () => !$data.hired() ? $data.hire() : $data.fire(), text: !$data.hired() ? 'Hire!' : 'Fire!'">Hire!</button>
                                             </td>
                                         </tr>
                                     </tfoot>

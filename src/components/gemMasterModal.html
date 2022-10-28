@@ -47,8 +47,8 @@
                                     </td>
                                     <td class='vertical-middle' data-bind='attr: { rowspan: $parent.gems.length }, text: $parent.item.amount + " × " + $parent.item.itemType.displayName'></td>
                                     <td class='vertical-middle' data-bind="attr: { rowspan: $parent.gems.length }">
-                                        <div class="btn-group btn-block" data-bind="let: { tradeAmount: ko.observable(1) }">
-                                            <button class='btn btn-success btn-block' data-bind='click: function(){GemDeal.use(player.region, $parentContext.$index(), tradeAmount())}, css: { disabled: !GemDeal.canUse(player.region, $parentContext.$index()) }'>
+                                        <div class="btn-group w-100" data-bind="let: { tradeAmount: ko.observable(1) }">
+                                            <button class='btn btn-success w-100' data-bind='click: function(){GemDeal.use(player.region, $parentContext.$index(), tradeAmount())}, css: { disabled: !GemDeal.canUse(player.region, $parentContext.$index()) }'>
                                                 <knockout data-bind="text: !ItemList[$parent.item.itemType.name].isSoldOut() ? 'Trade' : 'Sold out'"></knockout>
                                             </button>
                                             <button type="button" data-bind="visible: ItemList[$parent.item.itemType.name].maxAmount > 1, text: tradeAmount() + '&nbsp;'" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"'>

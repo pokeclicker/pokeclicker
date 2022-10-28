@@ -51,8 +51,8 @@
                                     <td class='vertical-middle' data-bind='attr: { rowspan: $parent.shards.length }, text: $parent.item.amount + " × " + $parent.item.itemType.displayName'></td>
                                     <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length }, text: player.itemList[$parent.item.itemType.name]().toLocaleString('en-US')"></td>
                                     <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length }">
-                                        <div class="btn-group btn-block" data-bind="let: { tradeAmount: ko.observable(1) }">
-                                            <button class='btn btn-success btn-block' data-bind='click: function(){ShardDeal.use(ShopHandler.shopObservable()?.location, $parentContext.$index(), tradeAmount())}, css: { disabled: !ShardDeal.canUse(ShopHandler.shopObservable()?.location, $parentContext.$index()) }'>
+                                        <div class="btn-group w-100" data-bind="let: { tradeAmount: ko.observable(1) }">
+                                            <button class='btn btn-success w-100' data-bind='click: function(){ShardDeal.use(ShopHandler.shopObservable()?.location, $parentContext.$index(), tradeAmount())}, css: { disabled: !ShardDeal.canUse(ShopHandler.shopObservable()?.location, $parentContext.$index()) }'>
                                                 <knockout data-bind="text: !ItemList[$parent.item.itemType.name].isSoldOut() ? 'Trade' : 'Sold out'"></knockout>
                                             </button>
                                             <button type="button" data-bind="visible: ItemList[$parent.item.itemType.name].maxAmount > 1, text: tradeAmount() + '&nbsp;'" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"'>

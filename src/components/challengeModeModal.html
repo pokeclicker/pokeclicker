@@ -3,9 +3,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Challenge Modes</h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <p>
@@ -22,15 +20,15 @@
                         }">
                             <td class="text-left fw-bold" data-bind="text: $data.type"></td>
                             <td class="p-1">
-                                <!-- ko if: !$data.active() && player.starter() == GameConstants.Starter.None --><button class="btn btn-warning btn-block" data-bind="click: ()=>{$data.activate();}">ACTIVATE</button><!-- /ko -->
-                                <!-- ko if: !$data.active() && player.starter() != GameConstants.Starter.None --><button class="btn btn-secondary btn-block disabled">DISABLED</button><!-- /ko -->
-                                <!-- ko if: $data.active() --><button class="btn btn-success btn-block" data-bind="click: ()=>{$data.disable();}">ACTIVE</button><!-- /ko -->
+                                <!-- ko if: !$data.active() && player.starter() == GameConstants.Starter.None --><button class="btn btn-warning w-100" data-bind="click: ()=>{$data.activate();}">ACTIVATE</button><!-- /ko -->
+                                <!-- ko if: !$data.active() && player.starter() != GameConstants.Starter.None --><button class="btn btn-secondary w-100 disabled">DISABLED</button><!-- /ko -->
+                                <!-- ko if: $data.active() --><button class="btn btn-success w-100" data-bind="click: ()=>{$data.disable();}">ACTIVE</button><!-- /ko -->
                             </td>
                         </tr>
                     </tbody>
                 </table>
                 <br/>
-               <button class="btn btn-primary btn-block" data-bs-dismiss="modal">Done!</button>
+               <button class="btn btn-primary w-100" data-bs-dismiss="modal">Done!</button>
             </div>
        </div>
     </div>

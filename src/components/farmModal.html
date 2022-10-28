@@ -44,7 +44,7 @@
 
                                     <div class="row justify-content-center align-items-center py-1">
                                         <div class="col-4 pr-0">
-                                            <button class="btn btn-block btn-secondary"
+                                            <button class="btn w-100 btn-secondary"
                                                 onclick="FarmController.navigateLeft()"
                                                 data-bind="disable: FarmController.navigateIndex() === 0,
                                                     css: { disabled: FarmController.navigateIndex() === 0 }">
@@ -53,7 +53,7 @@
                                         </div>
                                         <div class="col-4" data-bind="text: FarmController.navigateIndex()+1 + '/' + (FarmController.numberOfTabs()+1)"></div>
                                         <div class="col-4 pl-0">
-                                            <button class="btn btn-block btn-secondary"
+                                            <button class="btn w-100 btn-secondary"
                                                 onclick="FarmController.navigateRight()"
                                                 data-bind="disable: FarmController.navigateIndex() ===  FarmController.numberOfTabs(),
                                                     css: { disabled: FarmController.navigateIndex() ===  FarmController.numberOfTabs() }">
@@ -64,12 +64,12 @@
 
                                     <div class="row justify-content-center py-1">
                                         <div class="col-6 pr-0">
-                                            <button class="btn btn-primary btn-block" data-bind="click: function(){App.game.farming.plantAll(FarmController.selectedBerry())}">
+                                            <button class="btn btn-primary w-100" data-bind="click: function(){App.game.farming.plantAll(FarmController.selectedBerry())}">
                                                 Plant All
                                             </button>
                                         </div>
                                         <div class="col-6 pl-0">
-                                            <button class="btn btn-success btn-block" data-bind="click: function(){App.game.farming.harvestAll()}">
+                                            <button class="btn btn-success w-100" data-bind="click: function(){App.game.farming.harvestAll()}">
                                                 Harvest All
                                             </button>
                                         </div>
@@ -91,7 +91,7 @@
                                         <!-- /ko -->
                                     </ul>
                                     <div class="justify-content-center py-1">
-                                        <div class="btn-group btn-block">
+                                        <div class="btn-group w-100">
                                             <button type="button" class="btn btn-sm btn-secondary col-3"
                                             data-bind="text: FarmController.multipliers[FarmController.multIndex()]"
                                             onclick="FarmController.incrementMultiplier()"
@@ -103,7 +103,7 @@
                                             data-placement="right"
                                             data-trigger="hover">
                                             </button>
-                                            <button class="btn btn-primary btn-block" data-bind="click: function(){ FarmController.mulchAll(); }">
+                                            <button class="btn btn-primary w-100" data-bind="click: function(){ FarmController.mulchAll(); }">
                                                 Mulch All
                                             </button>
                                         </div>
@@ -343,7 +343,7 @@
                                         <tr>
                                             <td class="text-left align-middle">Berry Planting:</td>
                                             <td class="text-right tight">
-                                                <select autocomplete="off" class="custom-select custom-select-sm" data-bind="options: App.game.farming.farmHands.availableBerries, optionsText: i => FarmHandBerryTypes[i], value: $data.focus"></select>
+                                                <select autocomplete="off" class="form-select form-select-sm" data-bind="options: App.game.farming.farmHands.availableBerries, optionsText: i => FarmHandBerryTypes[i], value: $data.focus"></select>
                                             </td>
                                         </tr>
                                         <tr>
@@ -369,7 +369,7 @@
                                     <tfoot>
                                         <tr>
                                             <td colspan="2">
-                                                <button class="btn btn-block" data-bind="attr: { disabled: !$data.hired() && !App.game.farming.farmHands.canHire() }, css: { 'btn-success': !$data.hired(), 'btn-danger': $data.hired() }, click: () => !$data.hired() ? $data.hire() : $data.fire(), text: !$data.hired() ? 'Hire!' : 'Fire!'">Hire!</button>
+                                                <button class="btn w-100" data-bind="attr: { disabled: !$data.hired() && !App.game.farming.farmHands.canHire() }, css: { 'btn-success': !$data.hired(), 'btn-danger': $data.hired() }, click: () => !$data.hired() ? $data.hire() : $data.fire(), text: !$data.hired() ? 'Hire!' : 'Fire!'">Hire!</button>
                                             </td>
                                         </tr>
                                     </tfoot>

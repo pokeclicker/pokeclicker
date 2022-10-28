@@ -48,7 +48,7 @@
                         <div class="modal-body p-0">
 
                             <div id="safariEntrance" data-bind="if: !Safari.inProgress()">
-                                <button id="paySafariButton" class="btn btn-block" onclick="Safari.payEntranceFee()"
+                                <button id="paySafariButton" class="btn w-100" onclick="Safari.payEntranceFee()"
                                     data-bind="class: Safari.canPay() ? 'btn-primary' : 'disabled btn-danger'">
                                     Pay Entrance Fee <knockout id='safariEntranceCost' data-bind="template: { name: 'currencyTemplate', data: {'amount': Safari.cost().amount, 'currency': Safari.cost().currency}}"></knockout>
                                 </button>

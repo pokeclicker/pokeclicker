@@ -3,16 +3,14 @@
         <div class="modal-content">
             <div class="modal-header" style='justify-content: space-around;'>
                 <h5 class="modal-title">Subregional Travel</h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <h5 data-bind="text: GameConstants.camelCaseToString(GameConstants.Region[player.region])">Region</h5>
             <div class="modal-body bg-ocean">
                 <img class="my-5" src='assets/images/boat.png' style='width: 40%;'>
                 <div style='margin-top:20px' data-bind="foreach: SubRegions.getSubRegions(player.region)">
                     <!-- ko if: $data !== 'none' -->
-                    <button style="position: relative;" class='btn btn-block btn-success'
+                    <button style="position: relative;" class='btn w-100 btn-success'
                         data-dismiss='modal'
                         data-bind='visible: $data.unlocked(),
                         click: () => { player.subregion = $data.id; $("#SubregionModal").modal("hide"); },

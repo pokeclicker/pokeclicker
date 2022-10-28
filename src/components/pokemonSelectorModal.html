@@ -4,21 +4,19 @@
             <!-- ko if: modalUtils.observableState['pokemonSelectorModal'] === 'show' -->
             <div class="modal-header bg-dark text-light" style='justify-content: space-around;'>
                 <h5 class="modal-title text-light">Select a Pokémon</h5>&nbsp;
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body p-0">
                 <img src="assets/images/items/vitamin/Protein.png" width="40%"/>
                 <br/>
                 <div class="sticky-top bg-dark text-light">
                   <!-- ko if: App.game.challenges.list.disableProteins.active() -->
-                  <span class="btn btn-block btn-danger btn-static m-0">
+                  <span class="btn w-100 btn-danger btn-static m-0">
                     Proteins are disabled.
                   </span>
                   <!-- /ko -->
-                  <div class="btn-group btn-block m-0" role="group" aria-label="Basic example">
-                    <button class="btn btn-block btn-secondary btn-static" data-bind="text: 'Proteins: ' + player.itemList.Protein().toLocaleString('en-US')"></button>
+                  <div class="btn-group w-100 m-0" role="group" aria-label="Basic example">
+                    <button class="btn w-100 btn-secondary btn-static" data-bind="text: 'Proteins: ' + player.itemList.Protein().toLocaleString('en-US')"></button>
                     <button type="button" class="btn btn-sm btn-primary"
                       data-bind="text: VitaminController.multiplier[VitaminController.multiplierIndex()]"
                       onclick="VitaminController.incrementMultiplier()"
@@ -32,12 +30,12 @@
                     </button>
                   </div>
                   <div class="input-group" data-bind="with: Settings.getSetting('proteinSort')">
-                      <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])"
+                      <select autocomplete="off" class="form-select" onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])"
                           data-bind="foreach: $data.options, attr: {name}, selectedOptions: [$data.observableValue()]">
                           <option data-bind="text: $data.text, value: $data.value"></option>
                       </select>
                       <div class="input-group-append bg-primary text-light">
-                          <label for="proteinSortDirection" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;" data-bind="
+                          <label for="proteinSortDirection" class="clickable m-0 px-2" style="font-size: 22px;" data-bind="
                             text: Settings.getSetting('proteinSortDirection').observableValue() ? '⥄' : '⥂',
                             tooltip: { title: Settings.getSetting('proteinSortDirection').observableValue() ? 'Descending (highest value first)' : 'Ascending (lowest value first)', trigger: 'hover', placement:'top', html: true }
                             ">⥂</label>
@@ -67,7 +65,7 @@
             </div>
             <div class="form-group col-md-3 col-3 p-0">
                 <label for="protein-region-filter">Region</label>
-                <select id="protein-region-filter" name="proteinRegionFilter" autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, +this.value)">
+                <select id="protein-region-filter" name="proteinRegionFilter" autocomplete="off" class="form-select" onchange="Settings.setSettingByName(this.name, +this.value)">
                     <!-- ko foreach: Settings.getSetting('proteinRegionFilter').options.filter(r => r.value <= player.highestRegion()) -->
                     <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('proteinRegionFilter').value === $data.value }, text: $data.text">Region</option>
                     <!-- /ko -->
@@ -75,7 +73,7 @@
             </div>
             <div class="form-group col-md-3 col-3 p-0">
                 <label for="protein-type-filter">Type</label>
-                <select id="protein-type-filter" name="proteinTypeFilter" autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, +this.value)">
+                <select id="protein-type-filter" name="proteinTypeFilter" autocomplete="off" class="form-select" onchange="Settings.setSettingByName(this.name, +this.value)">
                     <!-- ko foreach: Settings.getSetting('proteinTypeFilter').options -->
                     <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('proteinTypeFilter').value === $data.value }, text: $data.text">Type</option>
                     <!-- /ko -->

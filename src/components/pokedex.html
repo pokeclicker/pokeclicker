@@ -39,7 +39,7 @@ aria-labelledby="pokedexModalLabel">
                                 <!--Region-->
                                 <div class="form-group col-md-6 col-6">
                                     <label>Region</label>
-                                    <select id="pokedex-filter-region" class="custom-select"
+                                    <select id="pokedex-filter-region" class="form-select"
                                             oninput="PokedexHelper.updateList()" style="margin-right: 8px">
                                         <option value="" selected>All</option>
                                     </select>
@@ -48,14 +48,14 @@ aria-labelledby="pokedexModalLabel">
                                 <!--Types-->
                                 <div class="form-group col-md-6 col-6">
                                     <label>Type</label>
-                                    <select id="pokedex-filter-type1" class="custom-select"
+                                    <select id="pokedex-filter-type1" class="form-select"
                                             oninput="PokedexHelper.updateList()" style="margin-right: 8px">
                                         <option value="" selected>All</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-md-6 col-6">
                                     <label>Type</label>
-                                    <select id="pokedex-filter-type2" class="custom-select"
+                                    <select id="pokedex-filter-type2" class="form-select"
                                             oninput="PokedexHelper.updateList()">
                                         <option value="" selected>All</option>
                                     </select>
@@ -63,7 +63,7 @@ aria-labelledby="pokedexModalLabel">
 
                                 <div class="form-group col-md-6 col-6">
                                     <label for="pokedex-filter-shiny-caught">Caught Status</label>
-                                    <select id="pokedex-filter-shiny-caught" autocomplete="off" class="custom-select" onchange="PokedexHelper.updateList()">
+                                    <select id="pokedex-filter-shiny-caught" autocomplete="off" class="form-select" onchange="PokedexHelper.updateList()">
                                         <option value="all" selected>All</option>
                                         <option value="uncaught">Uncaught</option>
                                         <option value="caught">Caught</option>
@@ -74,7 +74,7 @@ aria-labelledby="pokedexModalLabel">
 
                                 <div class="form-group col-md-6 col-6">
                                     <label for="pokedex-filter-pokerus-status">Pokerus Status</label>
-                                    <select id="pokedex-filter-pokerus-status" autocomplete="off" class="custom-select" onchange="PokedexHelper.updateList()">
+                                    <select id="pokedex-filter-pokerus-status" autocomplete="off" class="form-select" onchange="PokedexHelper.updateList()">
                                         <!-- ko foreach: Settings.getSetting('breedingPokerusFilter').options -->
                                         <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('breedingPokerusFilter').value === $data.value }, text: $data.text"></option>
                                         <!-- /ko -->

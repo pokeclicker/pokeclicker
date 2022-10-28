@@ -7,21 +7,21 @@
         <tbody>
           <tr data-bind="visible: App.game.underground.canAccess">
             <td class="p-0">
-              <button class="btn btn-block btn-primary m-0" onclick="App.game.underground.openUndergroundModal()">
+              <button class="btn w-100 btn-primary m-0" onclick="App.game.underground.openUndergroundModal()">
                   Underground
               </button>
             </td>
           </tr>
           <tr data-bind="visible: App.game.farming.canAccess">
             <td class="p-0">
-              <button class="btn btn-block btn-primary m-0" onclick="FarmController.openFarmModal()">
+              <button class="btn w-100 btn-primary m-0" onclick="FarmController.openFarmModal()">
                   Farm
               </button>
             </td>
           </tr>
           <tr data-bind="visible: App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Champion Lance')]">
             <td class="p-0">
-              <button class="btn btn-block btn-primary m-0" onclick="ShopHandler.showShop(pokeMartShop);" href="#shopModal" data-bs-toggle="modal">
+              <button class="btn w-100 btn-primary m-0" onclick="ShopHandler.showShop(pokeMartShop);" href="#shopModal" data-bs-toggle="modal">
                   Poké Mart
               </button>
             </td>

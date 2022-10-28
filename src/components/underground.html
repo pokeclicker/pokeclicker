@@ -90,7 +90,7 @@
                             <tbody data-bind="template: { name: 'treasureListTemplate', foreach: player.mineInventory()}">
                             </tbody>
                         </table>
-                        <button type="button" class="btn btn-success btn-block" onclick="App.game.underground.openUndergroundSellAllModal()">
+                        <button type="button" class="btn btn-success w-100" onclick="App.game.underground.openUndergroundSellAllModal()">
                             <span>Sell all treasures</span>
                         </button>
                     </div>
@@ -189,8 +189,8 @@
                                     </td>
                                     <td class='vertical-middle' data-bind='text: amount2 + " × " + item2.name'></td>
                                     <td class='vertical-middle'>
-                                        <div class="btn-group btn-block" data-bind="let: { tradeAmount: ko.observable(1) }">
-                                            <button class='btn btn-success btn-block' data-bind='click: function(){DailyDeal.use($index(), tradeAmount())}, css: { disabled: !DailyDeal.canUse($index()) }'>
+                                        <div class="btn-group w-100" data-bind="let: { tradeAmount: ko.observable(1) }">
+                                            <button class='btn btn-success w-100' data-bind='click: function(){DailyDeal.use($index(), tradeAmount())}, css: { disabled: !DailyDeal.canUse($index()) }'>
                                                 Trade
                                             </button>
                                             <button type="button" data-bind="text: tradeAmount() + '&nbsp;', css: { disabled: !DailyDeal.canUse($index()) }" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -232,7 +232,7 @@
         <td class='vertical-middle'
             data-bind="text: upgrade.isMaxLevel() ? '' : upgrade.calculateCost().amount.toLocaleString('en-US') + ' Diamonds'"></td>
         <td class='vertical-middle'>
-            <button class='btn btn-success btn-block'
+            <button class='btn btn-success w-100'
                     data-bind='css: { disabled: !upgrade.canBuy() },
                                 text: upgrade.isMaxLevel() ? "Max" : "Upgrade",
                                 click: function(){upgrade.buy(); DailyDeal.generateDeals(App.game.underground.getDailyDealsMax(), new Date());}'>
@@ -255,7 +255,7 @@
             <!-- /ko -->
             <td class='vertical-middle'>
                 <!-- ko ifnot: valueType == UndergroundItemValueType.Shard || valueType == UndergroundItemValueType.FossilPiece -->
-                <div class="btn-group btn-block" data-bind="let: { sellAmount: ko.observable(1) }">
+                <div class="btn-group w-100" data-bind="let: { sellAmount: ko.observable(1) }">
                     <!-- ko ifnot: valueType == UndergroundItemValueType.Fossil -->
                     <label
                     class="input-group-prepend btn btn-success active clickable m-0"
@@ -267,7 +267,7 @@
                         data-bind="checked: sellLocked(), attr: { id: 'sellLockedIndicatorOfItem' + id }, event: { change: function(){Underground.setSellLockOfMineItem(id, !sellLocked())} }"
                     />
                     <!-- /ko -->
-                    <button class='btn btn-success btn-block'
+                    <button class='btn btn-success w-100'
                             data-bind="attr: { 'data-itemid': id },
                             css: { disabled: amount() <= 0 || sellLocked() || (valueType === UndergroundItemValueType.Fossil && !App.game.breeding.hasFreeEggSlot()) },
                                     text: valueType === UndergroundItemValueType.Fossil ? 'Breed' : 'Sell',

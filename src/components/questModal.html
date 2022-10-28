@@ -39,19 +39,19 @@
                             <span data-bind="template: { name: 'currencyTemplate', data: {'amount':  pointsReward, 'currency': GameConstants.Currency.questPoint}}"></span>
                         </td>
                         <td class="align-middle py-0">
-                            <button class='btn btn-primary btn-sm btn-block'
+                            <button class='btn btn-primary btn-sm w-100'
                                 data-bind='visible: App.game.quests.canStartNewQuest() && !$data.inProgress() && !$data.isCompleted() && !$data.claimed(),
                                 click: function(){
                                     App.game.quests.beginQuest($data.index);
                                 }'>
                                 Start
                             </button>
-                            <button class='btn btn-success btn-sm btn-block' data-bind='visible: !$data.claimed() && $data.isCompleted(),
+                            <button class='btn btn-success btn-sm w-100' data-bind='visible: !$data.claimed() && $data.isCompleted(),
                                                                 click: () => { App.game.quests.claimQuest($data.index) }'>
                                 Claim
                             </button>
                             <span data-bind='visible: $data.inProgress() && !$data.isCompleted(), text: Math.floor(progress()*100) + "%"'></span>
-                            <button class='btn btn-success btn-sm btn-block' disabled data-bind='visible: $data.claimed()'>Completed</button>
+                            <button class='btn btn-success btn-sm w-100' disabled data-bind='visible: $data.claimed()'>Completed</button>
                         </td>
                     </tr>
                     </tbody>

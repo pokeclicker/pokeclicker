@@ -4,24 +4,22 @@
             <!-- ko if: modalUtils.observableState['heldItemModal'] === 'show' -->
             <div class="modal-header bg-dark text-light" style='justify-content: space-around;'>
                 <h5 class="modal-title text-light">Select a Pokémon</h5>&nbsp;
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body p-0">
                 <img data-bind="attr: { src: HeldItem.heldItemSelected().image }" width="40%"/>
                 <br/>
                 <div class="sticky-top bg-dark text-light">
-                  <div class="btn-group btn-block m-0" role="group" aria-label="Basic example">
-                    <button class="btn btn-block btn-secondary btn-static" data-bind="text: HeldItem.heldItemSelected().displayName + ': ' + player.amountOfItem(HeldItem.heldItemSelected().name)"></button>
+                  <div class="btn-group w-100 m-0" role="group" aria-label="Basic example">
+                    <button class="btn w-100 btn-secondary btn-static" data-bind="text: HeldItem.heldItemSelected().displayName + ': ' + player.amountOfItem(HeldItem.heldItemSelected().name)"></button>
                   </div>
                   <div class="input-group" data-bind="with: Settings.getSetting('heldItemSort')">
-                      <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])"
+                      <select autocomplete="off" class="form-select" onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])"
                           data-bind="foreach: $data.options, attr: {name}, selectedOptions: [$data.observableValue()]">
                           <option data-bind="text: $data.text, value: $data.value"></option>
                       </select>
                       <div class="input-group-append bg-primary text-light">
-                          <label for="heldItemSortDirection" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;" data-bind="text: Settings.getSetting('heldItemSortDirection').observableValue() ? '⥄' : '⥂'">⥂</label>
+                          <label for="heldItemSortDirection" class="clickable m-0 px-2" style="font-size: 22px;" data-bind="text: Settings.getSetting('heldItemSortDirection').observableValue() ? '⥄' : '⥂'">⥂</label>
                           <input id="heldItemSortDirection" style="vertical-align: middle" class="hidden" type='checkbox'
                               data-bind="checked: Settings.getSetting('heldItemSortDirection').observableValue()"
                               onchange="Settings.setSettingByName('heldItemSortDirection', this.checked)"/>

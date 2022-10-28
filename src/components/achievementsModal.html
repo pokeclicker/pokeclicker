@@ -4,9 +4,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 data-bind="tooltip: { title: 'As you earn achievements, you gain up to: 150% (global), 100% (per region), and 50% (per special subregion). Earning bonuses to Click Attack, Flute Effects, Pokédollar / Dungeon Token gains, and Experience earned from all sources.', trigger: 'hover', placement:'right' }">Achievements Bonus: <u class="text-primary" data-bind="text: AchievementHandler.achievementBonusPercent()"></u></h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
             <div class="modal-body table-responsive p-0">
@@ -16,7 +14,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                             <div class="form-row">
                                 <div class="form-group col-md-3 col-6">
                                     <label>Status</label>
-                                    <select name="achievementsStatus" class="custom-select" onchange="AchievementHandler.filter.status(this.value), Settings.setSettingByName(this.name, this.value)">
+                                    <select name="achievementsStatus" class="form-select" onchange="AchievementHandler.filter.status(this.value), Settings.setSettingByName(this.name, this.value)">
                                         <!-- ko foreach: Settings.getSetting('achievementsStatus').options -->
                                         <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('achievementsStatus').value === $data.value }, text: $data.text">Status</option>
                                         <!-- /ko -->
@@ -24,7 +22,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                                 </div>
                                 <div class="form-group col-md-3 col-6">
                                     <label>Type</label>
-                                    <select name="achievementsType" class="custom-select" onchange="AchievementHandler.filter.type(this.value), Settings.setSettingByName(this.name, this.value)">
+                                    <select name="achievementsType" class="form-select" onchange="AchievementHandler.filter.type(this.value), Settings.setSettingByName(this.name, this.value)">
                                         <!-- ko foreach: Settings.getSetting('achievementsType').options.filter(r => r.value !== -1) -->
                                         <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('achievementsType').value === $data.value }, text: $data.text.replace(/Poke/g, 'Poké')">Type</option>
                                         <!-- /ko -->
@@ -32,7 +30,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                                 </div>
                                 <div class="form-group col-md-3 col-6">
                                     <label>Category</label>
-                                    <select name="achievementsCategory" class="custom-select" onchange="AchievementHandler.filter.category(this.value), Settings.setSettingByName(this.name, this.value)">
+                                    <select name="achievementsCategory" class="form-select" onchange="AchievementHandler.filter.category(this.value), Settings.setSettingByName(this.name, this.value)">
                                         <!-- ko foreach: Settings.getSetting('achievementsCategory').options.filter(r => r.value == 'all' || AchievementHandler.getAchievementCategories().find((c) => c.name == r.value).isUnlocked()) -->
                                         <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('achievementsCategory').value === $data.value }, text: $data.text">Category</option>
                                         <!-- /ko -->
@@ -41,12 +39,12 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                                 <div class="form-group col-md-3 col-6">
                                     <label>Sort</label>
                                     <div class="input-group" data-bind="with: Settings.getSetting('achievementSort')">
-                                        <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, AchievementSortOptions[AchievementSortOptions[this.value]])"
+                                        <select autocomplete="off" class="form-select" onchange="Settings.setSettingByName(this.name, AchievementSortOptions[AchievementSortOptions[this.value]])"
                                                 data-bind="foreach: $data.options, attr: {name}, selectedOptions: [$data.observableValue()]">
                                             <option data-bind="text: $data.text, value: $data.value"></option>
                                         </select>
                                         <div class="input-group-append bg-primary text-light">
-                                            <label for="achievementSortDirection" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;" data-bind="
+                                            <label for="achievementSortDirection" class="clickable m-0 px-2" style="font-size: 22px;" data-bind="
                                             text: Settings.getSetting('achievementSortDirection').observableValue() ? '⥄' : '⥂',
                                             tooltip: { title: Settings.getSetting('achievementSortDirection').observableValue() ? 'Descending (highest value first)' : 'Ascending (lowest value first)', trigger: 'hover', placement:'top', html: true }
                                             ">⥂</label>

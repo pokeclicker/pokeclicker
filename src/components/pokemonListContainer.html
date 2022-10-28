@@ -2,7 +2,7 @@
     <div class="row g-0" style="align-items: center">
         <div class="input-group col">
             <select
-                class="custom-select"
+                class="form-select"
                 onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])"
                 data-bind="foreach: $data.options, attr: {name}"
             >
@@ -11,7 +11,7 @@
             <div class="input-group-append bg-primary text-light">
                 <label
                     for="partySortDirection"
-                    class="clickable m-0 pl-2 pr-2"
+                    class="clickable m-0 px-2"
                     style="font-size: 22px;"
                     data-bind="
                         text: Settings.getSetting('partySortDirection').observableValue() ? '⥄' : '⥂',
