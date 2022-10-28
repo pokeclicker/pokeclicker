@@ -19,10 +19,8 @@ class HeldItem extends Item {
     }
 
     public static getSortedHeldItems() {
-        return Object.values(ItemList).filter(i => i instanceof HeldItem).sort((a, b) => {
-            const heldItem1 = a as HeldItem;
-            const heldItem2 = b as HeldItem;
-            return heldItem1.regionUnlocked - heldItem2.regionUnlocked;
+        return Object.values(ItemList).filter(i => i instanceof HeldItem).sort((a: HeldItem, b: HeldItem) => {
+            return a.regionUnlocked - b.regionUnlocked;
         });
     }
 
