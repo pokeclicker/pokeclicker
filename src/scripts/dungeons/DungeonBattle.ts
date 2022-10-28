@@ -76,7 +76,7 @@ class DungeonBattle extends Battle {
      * Handles defeating a trainer Pokemon
      */
     private static defeatTrainerPokemon() {
-        this.enemyPokemon().defeat(true);
+        this.enemyPokemon().defeat({trainer : true});
 
         GameHelper.incrementObservable(this.trainerPokemonIndex);
         App.game.breeding.progressEggsBattle(DungeonRunner.dungeon.difficultyRoute, player.region);

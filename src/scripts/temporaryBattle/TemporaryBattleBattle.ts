@@ -48,7 +48,7 @@ class TemporaryBattleBattle extends Battle {
             TemporaryBattleBattle.generateNewEnemy();
         }
 
-        TemporaryBattleBattle.enemyPokemon().defeat(this.battle.optionalArgs.isTrainerBattle ?? true);
+        TemporaryBattleBattle.enemyPokemon().defeat({trainer : this.battle.optionalArgs.isTrainerBattle});
 
         TemporaryBattleBattle.index(TemporaryBattleBattle.index() + 1);
 

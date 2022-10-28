@@ -1,5 +1,10 @@
 /// <reference path="../../declarations/GameHelper.d.ts" />
 
+interface battleDefeatOptions {
+    trainer? : boolean,
+    battleFrontier? : boolean,
+}
+
 class BattlePokemon implements EnemyPokemonInterface {
 
     health: KnockoutObservable<number>;
@@ -56,8 +61,10 @@ class BattlePokemon implements EnemyPokemonInterface {
         this.healthPercentage(Math.floor(this.health() / this.maxHealth() * 100));
     }
 
-    public defeat(trainer = false): void {
-        PokemonHelper.incrementPokemonStatistics(this.id, GameConstants.STATISTIC_DEFEATED, this.shiny, this.gender);
+    public defeat(options : battleDefeatOptions = {}): void {
+        if (!options.battleFrontier) {
+            PokemonHelper.incrementPokemonStatistics(this.id, GameConstants.STATISTIC_DEFEATED, this.shiny, this.gender);
+        }
 
         if (this.reward.amount > 0) {
             App.game.wallet.addAmount(this.reward);
@@ -74,7 +81,7 @@ class BattlePokemon implements EnemyPokemonInterface {
             });
             App.game.logbook.newLog(LogBookTypes.FOUND, `An enemy ${msg}`);
         }
-        App.game.party.gainExp(this.exp, this.level, trainer);
+        App.game.party.gainExp(this.exp, this.level, options.trainer);
         App.game.gems.gainGems(this.gemReward, this.type1);
         App.game.gems.gainGems(this.gemReward, this.type2);
     }

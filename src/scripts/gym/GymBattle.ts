@@ -20,7 +20,7 @@ class GymBattle extends Battle {
      * Award the player with exp, and go to the next pokemon
      */
     public static defeatPokemon() {
-        this.enemyPokemon().defeat(true);
+        this.enemyPokemon().defeat({trainer : true});
 
         // Make gym "route" regionless
         App.game.breeding.progressEggsBattle(this.gym.badgeReward * 3 + 1, GameConstants.Region.none);
