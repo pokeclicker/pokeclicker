@@ -1030,7 +1030,7 @@ class Update implements Saveable {
             });
         },
 
-        '0.9.11': ({ playerData, saveData }) => {
+        '0.10.1': ({ playerData, saveData }) => {
             // Add Delta Petalburg Woods
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 108);
             // Add Delta Rusturf Tunnel
