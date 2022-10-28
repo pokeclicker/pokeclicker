@@ -1,5 +1,3 @@
-/// <reference path="../../declarations/settings/ProteinFilters.d.ts" />
-
 enum PartyPokemonSaveKeys {
     attackBonusPercent = 0,
     attackBonusAmount,
@@ -11,6 +9,9 @@ enum PartyPokemonSaveKeys {
     levelEvolutionTriggered,
     pokerus,
     effortPoints,
+    heldItem,
+    defaultFemaleSprite,
+    hideShinyImage
 }
 
 class PartyPokemon implements Saveable {
@@ -28,8 +29,10 @@ class PartyPokemon implements Saveable {
         shiny: false,
         category: 0,
         levelEvolutionTriggered: false,
-        pokerus: GameConstants.Pokerus.None,
+        pokerus: GameConstants.Pokerus.Uninfected,
         effortPoints: 0,
+        defaultFemaleSprite: false,
+        hideShinyImage: false,
     };
 
     // Saveable observables
@@ -42,13 +45,17 @@ class PartyPokemon implements Saveable {
     _pokerus: KnockoutObservable<GameConstants.Pokerus>;
     proteinsUsed: KnockoutObservable<number>;
     _effortPoints: KnockoutObservable<number>;
+    heldItem: KnockoutObservable<HeldItem>;
+    defaultFemaleSprite: KnockoutObservable<boolean>;
+    hideShinyImage: KnockoutObservable<boolean>;
 
     constructor(
         public id: number,
         public name: PokemonNameType,
         public evolutions: Evolution[],
         public baseAttack: number,
-        shiny = false
+        shiny = false,
+        public gender
     ) {
         this.proteinsUsed = ko.observable(0).extend({ numeric: 0 });
         this._breeding = ko.observable(false).extend({ boolean: null });
@@ -57,27 +64,45 @@ class PartyPokemon implements Saveable {
         this._attackBonusPercent = ko.observable(0).extend({ numeric: 0 });
         this._attackBonusAmount = ko.observable(0).extend({ numeric: 0 });
         this._category = ko.observable(0).extend({ numeric: 0 });
-        this._pokerus = ko.observable(GameConstants.Pokerus.None).extend({ numeric: 0 });
+        this._pokerus = ko.observable(GameConstants.Pokerus.Uninfected).extend({ numeric: 0 });
         this._effortPoints = ko.observable(0).extend({ numeric: 0 });
         this.evs = ko.pureComputed(() => {
             const power = App.game.challenges.list.slowEVs.active() ? GameConstants.EP_CHALLENGE_MODIFIER : 1;
             return Math.floor(this.effortPoints / GameConstants.EP_EV_RATIO / power);
         });
+        this.evs.subscribe((newValue) => {
+            // Change Pokerus status to Resistant when reaching 50 EVs
+            if (this.pokerus && this.pokerus < GameConstants.Pokerus.Resistant && newValue >= 50) {
+                this.pokerus = GameConstants.Pokerus.Resistant;
+
+                // Log and notify player
+                Notifier.notify({
+                    message: `${this.name} has become Resistant to Pokérus.`,
+                    type: NotificationConstants.NotificationOption.info,
+                    setting: NotificationConstants.NotificationSetting.General.pokerus,
+                });
+                App.game.logbook.newLog(LogBookTypes.NEW, `${this.name} has become Resistant to Pokérus.`);
+            }
+        });
         this._attack = ko.pureComputed(() => this.calculateAttack());
+        this.heldItem = ko.observable(undefined);
+        this.defaultFemaleSprite = ko.observable(false);
+        this.hideShinyImage = ko.observable(false);
     }
 
     public calculateAttack(ignoreLevel = false): number {
         const attackBonusMultiplier = 1 + (this.attackBonusPercent / 100);
         const levelMultiplier = ignoreLevel ? 1 : this.level / 100;
         const evsMultiplier = this.calculateEVAttackBonus();
-        return Math.max(1, Math.floor((this.baseAttack * attackBonusMultiplier + this.attackBonusAmount) * levelMultiplier * evsMultiplier));
+        const heldItemMultiplier = this.heldItem && this.heldItem() instanceof AttackBonusHeldItem ? (this.heldItem() as AttackBonusHeldItem).attackBonus : 1;
+        return Math.max(1, Math.floor((this.baseAttack * attackBonusMultiplier + this.attackBonusAmount) * levelMultiplier * evsMultiplier * heldItemMultiplier));
     }
 
     public calculateEVAttackBonus(): number {
         if (this.pokerus < GameConstants.Pokerus.Contagious) {
             return 1;
         }
-        return (this.evs() < 50) ? (1 + 0.01 * this.evs()) : (1 + Math.min(1, Math.pow((this.evs() - 30),0.075) - 0.75));
+        return (this.evs() < 50) ? (1 + 0.01 * this.evs()) : (Math.pow(this.evs(),Math.log(1.5) / Math.log(50)));
     }
 
     public canCatchPokerus(): boolean {
@@ -105,17 +130,17 @@ class PartyPokemon implements Saveable {
         return eggTypes;
     }
 
-    public calculatePokerus() {
+    public calculatePokerus(index: number) {
         const eggTypes = this.calculatePokerusTypes();
-        return App.game.breeding.eggList.forEach(p => {
-            const pokemon = p().partyPokemon();
-            if (pokemon && pokemon.pokerus == GameConstants.Pokerus.None) {
+        for (let i = index; i < App.game.breeding.eggList.length; i++) {
+            const pokemon = App.game.breeding.eggList[i]().partyPokemon();
+            if (pokemon && pokemon.pokerus == GameConstants.Pokerus.Uninfected) {
                 const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
                 if (eggTypes.has(dataPokemon.type1) || eggTypes.has(dataPokemon.type2)) {
                     pokemon.pokerus = GameConstants.Pokerus.Infected;
                 }
             }
-        });
+        }
     }
 
     calculateLevelFromExp() {
@@ -129,13 +154,21 @@ class PartyPokemon implements Saveable {
     }
 
     public gainExp(exp: number) {
-        this.exp += exp;
+        this.exp += exp * this.getExpMultiplier();
         const oldLevel = this.level;
         const newLevel = this.calculateLevelFromExp();
         if (oldLevel !== newLevel) {
             this.level = newLevel;
             this.checkForLevelEvolution();
         }
+    }
+
+    private getExpMultiplier() {
+        let result = 1;
+        if (this.heldItem() && this.heldItem() instanceof ExpGainedBonusHeldItem) {
+            result *= (this.heldItem() as ExpGainedBonusHeldItem).gainedBonus;
+        }
+        return result;
     }
 
     public checkForLevelEvolution() {
@@ -198,32 +231,87 @@ class PartyPokemon implements Saveable {
         return (player.highestRegion() + 1) * 5 - this.proteinsUsed();
     };
 
-    public hideFromProteinList = (): boolean => {
-        const hidden = ko.pureComputed(() => {
-            if (!new RegExp(ProteinFilters.search.value(), 'i').test(this.name)) {
+    public hideFromProteinList = ko.pureComputed(() => {
+        if (this._breeding()) {
+            return true;
+        }
+        if (!new RegExp(Settings.getSetting('proteinSearchFilter').observableValue() , 'i').test(this.name)) {
+            return true;
+        }
+        if (Settings.getSetting('proteinRegionFilter').observableValue() > -2) {
+            if (PokemonHelper.calcNativeRegion(this.name) !== Settings.getSetting('proteinRegionFilter').observableValue()) {
                 return true;
             }
+        }
+        const type = Settings.getSetting('proteinTypeFilter').observableValue();
+        if (type > -2 && !pokemonMap[this.name].type.includes(type)) {
+            return true;
+        }
+        if (this.proteinUsesRemaining() == 0 && Settings.getSetting('proteinHideMaxedPokemon').observableValue()) {
+            return true;
+        }
+        if (this._shiny() && Settings.getSetting('proteinHideShinyPokemon').observableValue()) {
+            return true;
+        }
+        return false;
+    });
 
-            // Check based on native region
-            if (ProteinFilters.region.value() > -2) {
-                if (PokemonHelper.calcNativeRegion(this.name) !== ProteinFilters.region.value()) {
-                    return true;
-                }
+    public giveHeldItem = (heldItem: HeldItem): void => {
+        if (!this.heldItem() || heldItem.name != this.heldItem().name) {
+            if (heldItem && !heldItem.canUse(this)) {
+                Notifier.notify({
+                    message: `This pokémon cannot use ${heldItem.displayName}.`,
+                    type: NotificationConstants.NotificationOption.warning,
+                });
+                return;
+            }
+            if (player.amountOfItem(heldItem.name) < 1) {
+                Notifier.notify({
+                    message: `You don't have any ${heldItem.displayName} left.`,
+                    type: NotificationConstants.NotificationOption.warning,
+                });
+                return;
+            }
+            if (App.game.party.caughtPokemon.some(p => p.heldItem() && p.heldItem().name == heldItem.name)) {
+                Notifier.notify({
+                    message: 'Only one of each held items can be used.',
+                    type: NotificationConstants.NotificationOption.warning,
+                });
+                return;
             }
 
-            // Check if either of the types match
-            const type: (PokemonType | null) = ProteinFilters.type.value() > -2 ? ProteinFilters.type.value() : null;
-            if (type !== null) {
-                const { type: types } = pokemonMap[this.name];
-                if (type !== null && !types.includes(type)) {
-                    return true;
-                }
+            if (App.game.party.caughtPokemon.filter(p => p.heldItem()).length >= 6) {
+                Notifier.notify({
+                    message: 'Only 6 pokemons can hold items at a time.',
+                    type: NotificationConstants.NotificationOption.warning,
+                });
+                return;
             }
-            return false;
-        }, this)();
-        return this.breeding || hidden ||
-            (this.proteinUsesRemaining() == 0 && Settings.getSetting('proteinHideMaxedPokemon').observableValue()) ||
-            (this.shiny && Settings.getSetting('proteinHideShinyPokemon').observableValue());
+        }
+
+        if (this.heldItem()) {
+            Notifier.confirm({
+                title: 'Remove held item',
+                message: 'Held items are one time use only.\nRemoved items will be lost.\nAre you sure you want to remove it?',
+                confirm: 'Remove',
+                type: NotificationConstants.NotificationOption.warning,
+            }).then((confirmed) => {
+                if (confirmed) {
+                    this.addOrRemoveHeldItem(heldItem);
+                }
+            });
+        } else { // Notifier.confirm is async
+            this.addOrRemoveHeldItem(heldItem);
+        }
+
+    }
+    private addOrRemoveHeldItem(heldItem: HeldItem) {
+        if (this.heldItem() && this.heldItem().name == heldItem.name) {
+            this.heldItem(undefined);
+        } else {
+            player.loseItem(heldItem.name, 1);
+            this.heldItem(heldItem);
+        }
     }
 
     public fromJSON(json: Record<string, any>): void {
@@ -245,6 +333,9 @@ class PartyPokemon implements Saveable {
         this.level = this.calculateLevelFromExp();
         this.pokerus = json[PartyPokemonSaveKeys.pokerus] ?? this.defaults.pokerus;
         this.effortPoints = json[PartyPokemonSaveKeys.effortPoints] ?? this.defaults.effortPoints;
+        this.heldItem(json[PartyPokemonSaveKeys.heldItem] && ItemList[json[PartyPokemonSaveKeys.heldItem]] instanceof HeldItem ? ItemList[json[PartyPokemonSaveKeys.heldItem]] as HeldItem : undefined);
+        this.defaultFemaleSprite(json[PartyPokemonSaveKeys.defaultFemaleSprite] ?? this.defaults.defaultFemaleSprite);
+        this.hideShinyImage(json[PartyPokemonSaveKeys.hideShinyImage] ?? this.defaults.hideShinyImage);
 
         if (this.evolutions != null) {
             for (const evolution of this.evolutions) {
@@ -276,6 +367,9 @@ class PartyPokemon implements Saveable {
             [PartyPokemonSaveKeys.category]: this.category,
             [PartyPokemonSaveKeys.pokerus]: this.pokerus,
             [PartyPokemonSaveKeys.effortPoints]: this.effortPoints,
+            [PartyPokemonSaveKeys.heldItem]: this.heldItem()?.name,
+            [PartyPokemonSaveKeys.defaultFemaleSprite]: this.defaultFemaleSprite(),
+            [PartyPokemonSaveKeys.hideShinyImage]: this.hideShinyImage(),
         };
 
         // Don't save anything that is the default option

@@ -157,10 +157,10 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Kanto Route 12', GameConstants.Region.kanto, 12,
     new RoutePokemon({
-        land: ['Pidgey', 'Oddish', 'Gloom', 'Venonat', 'Bellsprout', 'Weepinbell', 'Farfetch\'d', 'Snorlax'],
+        land: ['Pidgey', 'Oddish', 'Gloom', 'Venonat', 'Bellsprout', 'Weepinbell', 'Farfetch\'d'],
         water: ['Poliwag', 'Slowpoke', 'Slowbro', 'Goldeen', 'Magikarp'],
     }),
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Tower'))],
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 10)],
     undefined,
     GameConstants.KantoSubRegions.Kanto
 ));
@@ -172,7 +172,7 @@ Routes.add(new RegionRoute(
     }),
     [
         new OneFromManyRequirement([
-            new RouteKillRequirement(10, GameConstants.Region.kanto, 12),
+            new TemporaryBattleRequirement('Snorlax route 12'),
             new RouteKillRequirement(10, GameConstants.Region.kanto, 14),
         ]),
     ],
@@ -210,9 +210,14 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Kanto Route 16', GameConstants.Region.kanto, 16,
     new RoutePokemon({
-        land: ['Rattata', 'Raticate', 'Spearow', 'Doduo', 'Snorlax'],
+        land: ['Rattata', 'Raticate', 'Spearow', 'Doduo'],
     }),
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Tower'))],
+    [
+        new OneFromManyRequirement([
+            new TemporaryBattleRequirement('Snorlax route 16'),
+            new RouteKillRequirement(10, GameConstants.Region.kanto, 17),
+        ]),
+    ],
     undefined,
     GameConstants.KantoSubRegions.Kanto
 ));
@@ -338,6 +343,158 @@ Routes.add(new RegionRoute(
     true,
     37487
 ));
+Routes.add(new RegionRoute(
+    'Five Isle Meadow', GameConstants.Region.kanto, 30,
+    new RoutePokemon({
+        land: ['Sentret', 'Pidgey', 'Pidgeotto', 'Hoppip', 'Meowth', 'Persian', 'Psyduck', 'Slowpoke'],
+        water: ['Tentacool', 'Tentacruel', 'Magikarp', 'Horsea', 'Krabby', 'Qwilfish', 'Remoraid', 'Gyarados', 'Seadra', 'Kingler'],
+    }),
+    [new QuestLineStepCompletedRequirement('Celio\'s Errand', 5)],
+    undefined,
+    GameConstants.KantoSubRegions.Sevii4567,
+    true,
+    1050000
+));
+Routes.add(new RegionRoute(
+    'Memorial Pillar', GameConstants.Region.kanto, 31,
+    new RoutePokemon({
+        water: ['Hoppip', 'Tentacool', 'Tentacruel', 'Magikarp', 'Horsea', 'Krabby', 'Qwilfish', 'Remoraid', 'Gyarados', 'Seadra', 'Kingler', 'Psyduck', 'Slowpoke'],
+    }),
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 30)],
+    undefined,
+    GameConstants.KantoSubRegions.Sevii4567,
+    true,
+    1050000
+));
+Routes.add(new RegionRoute(
+    'Water Labyrinth', GameConstants.Region.kanto, 32,
+    new RoutePokemon({
+        water: ['Hoppip', 'Tentacool', 'Tentacruel', 'Magikarp', 'Horsea', 'Krabby', 'Qwilfish', 'Remoraid', 'Gyarados', 'Seadra', 'Kingler', 'Psyduck', 'Slowpoke'],
+    }),
+    [new QuestLineStepCompletedRequirement('Celio\'s Errand', 5)],
+    undefined,
+    GameConstants.KantoSubRegions.Sevii4567,
+    true,
+    1050000
+));
+Routes.add(new RegionRoute(
+    'Resort Gorgeous', GameConstants.Region.kanto, 33,
+    new RoutePokemon({
+        water: ['Hoppip', 'Tentacool', 'Tentacruel', 'Magikarp', 'Horsea', 'Krabby', 'Qwilfish', 'Remoraid', 'Gyarados', 'Seadra', 'Kingler', 'Psyduck', 'Slowpoke'],
+    }),
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 32)],
+    undefined,
+    GameConstants.KantoSubRegions.Sevii4567,
+    true,
+    1050000
+));
+Routes.add(new RegionRoute(
+    'Water Path', GameConstants.Region.kanto, 34,
+    new RoutePokemon({
+        land: ['Sentret', 'Spearow', 'Fearow', 'Oddish', 'Bellsprout', 'Meowth', 'Gloom', 'Weepinbell', 'Persian', 'Psyduck', 'Slowpoke'],
+        water: ['Tentacool', 'Tentacruel', 'Magikarp', 'Horsea', 'Krabby', 'Qwilfish', 'Remoraid', 'Gyarados', 'Seadra', 'Kingler'],
+    }),
+    [new QuestLineStepCompletedRequirement('Celio\'s Errand', 5)],
+    undefined,
+    GameConstants.KantoSubRegions.Sevii4567,
+    true,
+    1050000
+));
+Routes.add(new RegionRoute(
+    'Green Path', GameConstants.Region.kanto, 35,
+    new RoutePokemon({
+        water: ['Tentacool', 'Tentacruel', 'Magikarp', 'Horsea', 'Krabby', 'Qwilfish', 'Remoraid', 'Gyarados', 'Seadra', 'Kingler', 'Psyduck', 'Slowpoke'],
+    }),
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pattern Bush'))],
+    undefined,
+    GameConstants.KantoSubRegions.Sevii4567,
+    true,
+    1050000
+));
+Routes.add(new RegionRoute(
+    'Outcast Island', GameConstants.Region.kanto, 36,
+    new RoutePokemon({
+        water: ['Tentacool', 'Tentacruel', 'Magikarp', 'Horsea', 'Krabby', 'Qwilfish', 'Remoraid', 'Gyarados', 'Seadra', 'Kingler', 'Psyduck', 'Slowpoke'],
+    }),
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 35)],
+    undefined,
+    GameConstants.KantoSubRegions.Sevii4567,
+    true,
+    1050000
+));
+Routes.add(new RegionRoute(
+    'Ruin Valley', GameConstants.Region.kanto, 37,
+    new RoutePokemon({
+        land: ['Natu', 'Spearow', 'Fearow', 'Meowth', 'Yanma', 'Wooper', 'Marill', 'Persian', 'Psyduck', 'Slowpoke', 'Wobbuffet'],
+        water: ['Magikarp', 'Poliwag', 'Goldeen', 'Poliwhirl', 'Gyarados'],
+    }),
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 34)],
+    undefined,
+    GameConstants.KantoSubRegions.Sevii4567,
+    true,
+    1050000
+));
+Routes.add(new RegionRoute(
+    'Canyon Entrance', GameConstants.Region.kanto, 38,
+    new RoutePokemon({
+        land: ['Sentret', 'Spearow', 'Fearow', 'Phanpy', 'Meowth', 'Persian', 'Psyduck', 'Slowpoke'],
+    }),
+    [new QuestLineStepCompletedRequirement('Celio\'s Errand', 5)],
+    undefined,
+    GameConstants.KantoSubRegions.Sevii4567,
+    true,
+    1050000
+));
+Routes.add(new RegionRoute(
+    'Sevault Canyon', GameConstants.Region.kanto, 39,
+    new RoutePokemon({
+        land: ['Geodude', 'Phanpy', 'Fearow', 'Meowth', 'Cubone', 'Marowak', 'Persian', 'Onix', 'Skarmory', 'Larvitar'],
+        headbutt: ['Graveler'],
+    }),
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 38)],
+    undefined,
+    GameConstants.KantoSubRegions.Sevii4567,
+    true,
+    1050000
+));
+Routes.add(new RegionRoute(
+    'Valencia Island', GameConstants.Region.kanto, 40,
+    new RoutePokemon({
+        land: ['Valencian Butterfree', 'Valencian Raticate', 'Valencian Vileplume', 'Valencian Paras', 'Valencian Weepinbell', 'Nidoran(M)', 'Nidoran(F)', 'Nidorina'],
+        water: ['Gyarados', 'Cloyster', 'Poliwhirl'],
+    }),
+    [new GymBadgeRequirement(BadgeEnums.Jade_Star)],
+    undefined,
+    GameConstants.KantoSubRegions.Sevii4567,
+    true,
+    1250000
+));
+
+Routes.add(new RegionRoute(
+    'Pinkan Forest', GameConstants.Region.kanto, 41,
+    new RoutePokemon({
+        land: ['Pinkan Caterpie', 'Pinkan Weedle', 'Pinkan Pidgey', 'Pinkan Vileplume', 'Pinkan Paras', 'Pinkan Venonat', 'Pinkan Mankey', 'Pinkan Exeggutor'],
+    }),
+    [
+        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Altering Cave')),
+        new QuestLineCompletedRequirement('Celio\'s Errand'),
+    ],
+    undefined,
+    GameConstants.KantoSubRegions.Sevii4567,
+    true,
+    1250000
+));
+Routes.add(new RegionRoute(
+    'Pinkan Plains', GameConstants.Region.kanto, 42,
+    new RoutePokemon({
+        land: ['Pinkan Pidgey', 'Pinkan Rattata', 'Pinkan Nidoran(M)', 'Pinkan Nidoran(F)', 'Pinkan Diglett', 'Pinkan Bellsprout'],
+    }),
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 41)],
+    undefined,
+    GameConstants.KantoSubRegions.Sevii4567,
+    true,
+    1250000
+));
 
 /*
 JOHTO
@@ -406,7 +563,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Johto Route 36', GameConstants.Region.johto, 36,
     new RoutePokemon({
-        land: ['Pidgey', 'Nidoran(M)', 'Nidoran(F)', 'Vulpix', 'Growlithe', 'Hoothoot', 'Stantler', 'Sudowoodo'],
+        land: ['Pidgey', 'Nidoran(M)', 'Nidoran(F)', 'Vulpix', 'Growlithe', 'Hoothoot', 'Stantler'],
         headbutt: ['Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Pineco'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Plain)]
@@ -417,7 +574,7 @@ Routes.add(new RegionRoute(
         land: ['Pidgey', 'Pidgeotto', 'Vulpix', 'Growlithe', 'Hoothoot', 'Ledyba', 'Spinarak', 'Stantler'],
         headbutt: ['Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Pineco'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.johto, 36)]
+    [new TemporaryBattleRequirement('Sudowoodo')]
 ));
 Routes.add(new RegionRoute(
     'Johto Route 38', GameConstants.Region.johto, 38,
@@ -539,7 +696,7 @@ Routes.add(new RegionRoute(
         water: ['Tentacool', 'Tentacruel', 'Magikarp', 'Shellder', 'Chinchou', 'Lanturn'],
         headbutt: ['Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Pineco'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.Rising)],
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Tohjo Falls'))],
     49
 ));
 Routes.add(new RegionRoute(
@@ -649,10 +806,7 @@ Routes.add(new RegionRoute(
         land: ['Poochyena', 'Gulpin', 'Minun', 'Oddish', 'Wingull', 'Plusle'],
         water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer'],
     }),
-    [
-        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Granite Cave')),
-        new GymBadgeRequirement(BadgeEnums.Knuckle),
-    ]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Granite Cave'))]
 ));
 Routes.add(new RegionRoute(
     'Hoenn Route 111', GameConstants.Region.hoenn, 111,
@@ -766,10 +920,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo'],
     }),
-    [
-        new RouteKillRequirement(10, GameConstants.Region.hoenn, 121),
-        new GymBadgeRequirement(BadgeEnums.Feather),
-    ]
+    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 121)]
 ));
 Routes.add(new RegionRoute(
     'Hoenn Route 123', GameConstants.Region.hoenn, 123,
@@ -1129,7 +1280,11 @@ Routes.add(new RegionRoute(
         land: ['Sandile', 'Darumaka', 'Trubbish', 'Minccino', 'Scraggy'],
         water: ['Frillish'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.Toxic)]
+    [
+        new GymBadgeRequirement(BadgeEnums.Toxic),
+        new TemporaryBattleRequirement('Team Plasma Grunt 1'),
+        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 1),
+    ]
 ));
 Routes.add(new RegionRoute(
     'Desert Resort', GameConstants.Region.unova, 25,
@@ -1140,6 +1295,7 @@ Routes.add(new RegionRoute(
     [
         new RouteKillRequirement(10, GameConstants.Region.unova, 4),
         new GymBadgeRequirement(BadgeEnums.Insect),
+        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 2),
     ],
     4
 ));
@@ -1151,6 +1307,7 @@ Routes.add(new RegionRoute(
     [
         new RouteKillRequirement(10, GameConstants.Region.unova, 4),
         new GymBadgeRequirement(BadgeEnums.Insect),
+        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 2),
     ]
 ));
 Routes.add(new RegionRoute(
@@ -1162,6 +1319,7 @@ Routes.add(new RegionRoute(
 
         new RouteKillRequirement(10, GameConstants.Region.unova, 4),
         new GymBadgeRequirement(BadgeEnums.Insect),
+        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 2),
     ],
     5
 ));
@@ -1174,6 +1332,9 @@ Routes.add(new RegionRoute(
     [
         new RouteKillRequirement(10, GameConstants.Region.unova, 5),
         new GymBadgeRequirement(BadgeEnums.Bolt),
+        new TemporaryBattleRequirement('Team Plasma Grunt 2'),
+        new TemporaryBattleRequirement('Team Plasma Grunt 3'),
+        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 4),
     ]
 ));
 Routes.add(new RegionRoute(
@@ -1184,6 +1345,7 @@ Routes.add(new RegionRoute(
     [
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Chargestone Cave')),
         new GymBadgeRequirement(BadgeEnums.Quake),
+        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 7),
     ]
 ));
 Routes.add(new RegionRoute(
@@ -1217,7 +1379,11 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Pinsir', 'Heracross', 'Roselia', 'Combee', 'Tranquill', 'Sewaddle'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.unova, 13)],
+    [
+        new RouteKillRequirement(10, GameConstants.Region.unova, 13),
+        new TemporaryBattleRequirement('Zinzolin 1'),
+        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 10),
+    ],
     13.1
 ));
 Routes.add(new RegionRoute(
@@ -1258,7 +1424,11 @@ Routes.add(new RegionRoute(
         land: ['Golduck', 'Gligar', 'Amoonguss', 'Mienfoo', 'Bouffalant', 'Rufflet', 'Vullaby'],
         water: ['Buizel', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
     }),
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Giant Chasm'))]
+    [
+        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Giant Chasm')),
+        new TemporaryBattleRequirement('Ghetsis 2'),
+        new QuestLineCompletedRequirement('Quest for the DNA Splicers'),
+    ]
 ));
 Routes.add(new RegionRoute(
     'Unova Route 8', GameConstants.Region.unova, 8,
@@ -1339,7 +1509,7 @@ KALOS
 Routes.add(new RegionRoute(
     'Kalos Route 1', GameConstants.Region.kalos, 1,
     new RoutePokemon({
-        land: ['Rattata'],
+        land: ['Bunnelby', 'Fletchling'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)],
     undefined,
@@ -1493,7 +1663,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Kalos Route 16', GameConstants.Region.kalos, 16,
     new RoutePokemon({
-        land: ['Weepinbell', 'Floatzel', 'Skorupi', 'Foongus', 'Klefki', 'Phantump', 'Pumpkaboo'],
+        land: ['Weepinbell', 'Floatzel', 'Skorupi', 'Foongus', 'Klefki', 'Phantump', 'Pumpkaboo (Average)', 'Pumpkaboo (Small)', 'Pumpkaboo (Large)', 'Pumpkaboo (Super Size)'],
         water: ['Poliwag', 'Poliwhirl', 'Lombre', 'Floatzel', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 15)],
@@ -2151,7 +2321,7 @@ Routes.add(new RegionRoute(
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Malie Garden'))],
     undefined,
-    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
+    GameConstants.AlolaSubRegions.UlaulaIsland
 ));
 Routes.add(new RegionRoute(
     'Mount Hokulani', GameConstants.Region.alola, 22,
@@ -2160,7 +2330,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.alola, 10)],
     10.1,
-    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
+    GameConstants.AlolaSubRegions.UlaulaIsland
 ));
 Routes.add(new RegionRoute(
     'Alola Route 11', GameConstants.Region.alola, 11,
@@ -2169,7 +2339,7 @@ Routes.add(new RegionRoute(
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Malie Garden'))],
     undefined,
-    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
+    GameConstants.AlolaSubRegions.UlaulaIsland
 ));
 Routes.add(new RegionRoute(
     'Alola Route 12', GameConstants.Region.alola, 12,
@@ -2181,7 +2351,7 @@ Routes.add(new RegionRoute(
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Hokulani Observatory')),
     ],
     undefined,
-    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
+    GameConstants.AlolaSubRegions.UlaulaIsland
 ));
 Routes.add(new RegionRoute(
     'Alola Route 13', GameConstants.Region.alola, 13,
@@ -2190,7 +2360,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.alola, 12)],
     undefined,
-    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
+    GameConstants.AlolaSubRegions.UlaulaIsland
 ));
 Routes.add(new RegionRoute(
     'Alola Route 14', GameConstants.Region.alola, 14,
@@ -2199,7 +2369,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.alola, 13)],
     undefined,
-    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
+    GameConstants.AlolaSubRegions.UlaulaIsland
 ));
 Routes.add(new RegionRoute(
     'Haina Desert', GameConstants.Region.alola, 23,
@@ -2209,7 +2379,7 @@ Routes.add(new RegionRoute(
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Thrifty Megamart'))],
     undefined,
-    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
+    GameConstants.AlolaSubRegions.UlaulaIsland
 ));
 Routes.add(new RegionRoute(
     'Alola Route 15', GameConstants.Region.alola, 15,
@@ -2219,7 +2389,7 @@ Routes.add(new RegionRoute(
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Thrifty Megamart'))],
     undefined,
-    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
+    GameConstants.AlolaSubRegions.UlaulaIsland
 ));
 Routes.add(new RegionRoute(
     'Alola Route 16', GameConstants.Region.alola, 16,
@@ -2228,7 +2398,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.alola, 15)],
     undefined,
-    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
+    GameConstants.AlolaSubRegions.UlaulaIsland
 ));
 Routes.add(new RegionRoute(
     'Alola Route 17', GameConstants.Region.alola, 17,
@@ -2238,7 +2408,7 @@ Routes.add(new RegionRoute(
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Ula\'ula Meadow'))],
     undefined,
-    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
+    GameConstants.AlolaSubRegions.UlaulaIsland
 ));
 Routes.add(new RegionRoute(
     'Poni Wilds', GameConstants.Region.alola, 24,
@@ -2247,7 +2417,7 @@ Routes.add(new RegionRoute(
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Aether Foundation'))],
     undefined,
-    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
+    GameConstants.AlolaSubRegions.PoniIsland
 ));
 Routes.add(new RegionRoute(
     'Ancient Poni Path', GameConstants.Region.alola, 25,
@@ -2256,7 +2426,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.alola, 24)],
     undefined,
-    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
+    GameConstants.AlolaSubRegions.PoniIsland
 ));
 Routes.add(new RegionRoute(
     'Poni Breaker Coast', GameConstants.Region.alola, 26,
@@ -2265,7 +2435,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.alola, 25)],
     undefined,
-    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
+    GameConstants.AlolaSubRegions.PoniIsland
 ));
 Routes.add(new RegionRoute(
     'Poni Grove', GameConstants.Region.alola, 27,
@@ -2278,7 +2448,7 @@ Routes.add(new RegionRoute(
     }),
     [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
     undefined,
-    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
+    GameConstants.AlolaSubRegions.PoniIsland
 ));
 Routes.add(new RegionRoute(
     'Poni Plains', GameConstants.Region.alola, 28,
@@ -2287,7 +2457,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.alola, 27)],
     undefined,
-    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
+    GameConstants.AlolaSubRegions.PoniIsland
 ));
 Routes.add(new RegionRoute(
     'Poni Coast', GameConstants.Region.alola, 29,
@@ -2296,7 +2466,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.alola, 28)],
     undefined,
-    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
+    GameConstants.AlolaSubRegions.PoniIsland
 ));
 Routes.add(new RegionRoute(
     'Poni Gauntlet', GameConstants.Region.alola, 30,
@@ -2306,7 +2476,7 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, GameConstants.Region.alola, 29)],
     undefined,
-    GameConstants.AlolaSubRegions.UlaulaAndPoniIslands
+    GameConstants.AlolaSubRegions.PoniIsland
 ));
 
 /*
@@ -2380,20 +2550,20 @@ Routes.add(new RegionRoute(
     GameConstants.GalarSubRegions.SouthGalar
 ));
 Routes.add(new RegionRoute(
-    'West Lake Axwell', GameConstants.Region.galar, 5,
+    'West Lake Axewell', GameConstants.Region.galar, 5,
     new RoutePokemon({
         water: ['Goldeen', 'Magikarp', 'Remoraid', 'Wishiwashi (Solo)', 'Drednaw', 'Gyarados'],
         special:
       [
-          new SpecialRoutePokemon(['Krabby', 'Wooper', 'Wingull', 'Bounsweet', 'Purrloin', 'Tympole', 'Frillish', 'Kingler', 'Quagsire', 'Pelipper', 'Grapploct', 'Cloyster', 'Lapras', 'Seaking'], new WeatherRequirement([WeatherType.Clear])),
-          new SpecialRoutePokemon(['Krabby', 'Wooper', 'Tyrogue', 'Pancham', 'Lotad', 'Seedot', 'Budew', 'Purrloin', 'Tympole', 'Frillish', 'Palpitoad', 'Quagsire', 'Pelipper', 'Grapploct', 'Jellicent', 'Seaking'], new WeatherRequirement([WeatherType.Overcast])),
+          new SpecialRoutePokemon(['Krabby', 'Wooper', 'Wingull', 'Bounsweet', 'Purrloin', 'Tympole', 'Frillish', 'Kingler', 'Quagsire', 'Pelipper', 'Cloyster', 'Lapras', 'Seaking'], new WeatherRequirement([WeatherType.Clear])),
+          new SpecialRoutePokemon(['Krabby', 'Wooper', 'Tyrogue', 'Pancham', 'Lotad', 'Seedot', 'Budew', 'Purrloin', 'Tympole', 'Frillish', 'Palpitoad', 'Quagsire', 'Pelipper', 'Jellicent', 'Seaking'], new WeatherRequirement([WeatherType.Overcast])),
           new SpecialRoutePokemon(['Krabby', 'Wooper', 'Wingull', 'Tympole', 'Frillish', 'Pelipper', 'Quagsire', 'Jellicent', 'Lapras'], new WeatherRequirement([WeatherType.Rain])),
           new SpecialRoutePokemon(['Krabby', 'Electrike', 'Tympole', 'Joltik', 'Wooper', 'Wingull', 'Chinchou', 'Pelipper', 'Quagsire', 'Lanturn', 'Lapras'], new WeatherRequirement([WeatherType.Thunderstorm])),
-          new SpecialRoutePokemon(['Delibird', 'Wingull', 'Snorunt', 'Vanillite', 'Purrloin', 'Tympole', 'Shellder', 'Frillish', 'Palpitoad', 'Diggersby', 'Vanilluxe', 'Grapploct', 'Lapras'], new WeatherRequirement([WeatherType.Snow])),
-          new SpecialRoutePokemon(['Delibird', 'Vanillite', 'Klink', 'Bunnelby', 'Krabby', 'Tympole', 'Frillish', 'Palpitoad', 'Vanilluxe', 'Grapploct', 'Lapras'], new WeatherRequirement([WeatherType.Blizzard])),
-          new SpecialRoutePokemon(['Vulpix', 'Growlithe', 'Baltoy', 'Bunnelby', 'Pancham', 'Purrloin', 'Dwebble', 'Frillish', 'Diggersby', 'Pelipper', 'Grapploct'], new WeatherRequirement([WeatherType.Sunny])),
-          new SpecialRoutePokemon(['Wooper', 'Nincada', 'Baltoy', 'Mudbray', 'Purrloin', 'Dwebble', 'Bunnelby', 'Frillish', 'Palpitoad', 'Diggersby', 'Seaking', 'Grapploct'], new WeatherRequirement([WeatherType.Sandstorm])),
-          new SpecialRoutePokemon(['Krabby', 'Natu', 'Wingull', 'Ralts', 'Wooper', 'Purrloin', 'Tympole', 'Frillish', 'Palpitoad', 'Quagsire', 'Jellicent', 'Grapploct', 'Cloyster', 'Lapras'], new WeatherRequirement([WeatherType.Fog])),
+          new SpecialRoutePokemon(['Delibird', 'Wingull', 'Snorunt', 'Vanillite', 'Purrloin', 'Tympole', 'Shellder', 'Frillish', 'Palpitoad', 'Diggersby', 'Vanilluxe', 'Lapras'], new WeatherRequirement([WeatherType.Snow])),
+          new SpecialRoutePokemon(['Delibird', 'Vanillite', 'Klink', 'Bunnelby', 'Krabby', 'Tympole', 'Frillish', 'Palpitoad', 'Vanilluxe', 'Lapras'], new WeatherRequirement([WeatherType.Blizzard])),
+          new SpecialRoutePokemon(['Vulpix', 'Growlithe', 'Baltoy', 'Bunnelby', 'Pancham', 'Purrloin', 'Dwebble', 'Frillish', 'Diggersby', 'Pelipper'], new WeatherRequirement([WeatherType.Sunny])),
+          new SpecialRoutePokemon(['Wooper', 'Nincada', 'Baltoy', 'Mudbray', 'Purrloin', 'Dwebble', 'Bunnelby', 'Frillish', 'Palpitoad', 'Diggersby', 'Seaking'], new WeatherRequirement([WeatherType.Sandstorm])),
+          new SpecialRoutePokemon(['Krabby', 'Natu', 'Wingull', 'Ralts', 'Wooper', 'Purrloin', 'Tympole', 'Frillish', 'Palpitoad', 'Quagsire', 'Jellicent', 'Cloyster', 'Lapras'], new WeatherRequirement([WeatherType.Fog])),
       ],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.galar, 3)],
@@ -2401,7 +2571,7 @@ Routes.add(new RegionRoute(
     GameConstants.GalarSubRegions.SouthGalar
 ));
 Routes.add(new RegionRoute(
-    'East Lake Axwell', GameConstants.Region.galar, 6,
+    'East Lake Axewell', GameConstants.Region.galar, 6,
     new RoutePokemon({
         land: ['Stufful', 'Butterfree', 'Pidove'],
         water: ['Shellder', 'Magikarp', 'Goldeen', 'Wishiwashi (Solo)', 'Gyarados', 'Wingull'],
@@ -2504,20 +2674,21 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Axew\'s Eye', GameConstants.Region.galar, 10,
     new RoutePokemon({
-        land: ['Diggersby', 'Cramorant', 'Bewear'],
+        land: ['Diggersby', 'Bewear'],
         headbutt: ['Greedent', 'Cherubi'],
         water: ['Octillery', 'Magikarp', 'Wishiwashi (Solo)', 'Gyarados'],
         special:
       [
-          new SpecialRoutePokemon(['Kingler', 'Axew', 'Machoke', 'Unfezant', 'Steenee', 'Haxorus'], new WeatherRequirement([WeatherType.Clear])),
-          new SpecialRoutePokemon(['Machoke', 'Axew', 'Kingler', 'Roselia', 'Gloom', 'Unfezant', 'Haxorus'], new WeatherRequirement([WeatherType.Overcast])),
-          new SpecialRoutePokemon(['Crawdaunt', 'Axew', 'Seismitoad', 'Pelipper', 'Charjabug', 'Unfezant', 'Haxorus'], new WeatherRequirement([WeatherType.Rain])),
-          new SpecialRoutePokemon(['Seismitoad', 'Crawdaunt', 'Kingler', 'Manectric', 'Unfezant'], new WeatherRequirement([WeatherType.Thunderstorm])),
-          new SpecialRoutePokemon(['Snover', 'Vanillish', 'Delibird', 'Unfezant', 'Abomasnow'], new WeatherRequirement([WeatherType.Snow])),
-          new SpecialRoutePokemon(['Snover', 'Bronzong', 'Vanillish', 'Klink', 'Delibird', 'Abomasnow'], new WeatherRequirement([WeatherType.Blizzard])),
-          new SpecialRoutePokemon(['Crustle', 'Mudsdale', 'Vulpix', 'Growlithe', 'Unfezant', 'Haxorus'], new WeatherRequirement([WeatherType.Sunny])),
-          new SpecialRoutePokemon(['Mudsdale', 'Crustle', 'Claydol', 'Baltoy', 'Haxorus'], new WeatherRequirement([WeatherType.Sandstorm])),
-          new SpecialRoutePokemon(['Drifblim', 'Claydol', 'Axew', 'Munna', 'Liepard', 'Unfezant', 'Haxorus'], new WeatherRequirement([WeatherType.Fog])),
+          new SpecialRoutePokemon(['Kingler', 'Axew', 'Machoke', 'Unfezant', 'Steenee', 'Haxorus', 'Cramorant'], new WeatherRequirement([WeatherType.Clear])),
+          new SpecialRoutePokemon(['Machoke', 'Axew', 'Kingler', 'Roselia', 'Gloom', 'Unfezant', 'Haxorus', 'Cramorant'], new WeatherRequirement([WeatherType.Overcast])),
+          new SpecialRoutePokemon(['Crawdaunt', 'Axew', 'Seismitoad', 'Pelipper', 'Charjabug', 'Unfezant', 'Haxorus', 'Cramorant (Gulping)'], new WeatherRequirement([WeatherType.Rain])),
+          new SpecialRoutePokemon(['Seismitoad', 'Crawdaunt', 'Kingler', 'Manectric', 'Unfezant', 'Cramorant (Gorging)'], new WeatherRequirement([WeatherType.Thunderstorm])),
+          new SpecialRoutePokemon(['Snover', 'Vanillish', 'Delibird', 'Unfezant', 'Abomasnow', 'Cramorant'], new WeatherRequirement([WeatherType.Snow])),
+          new SpecialRoutePokemon(['Cramorant'], new WeatherRequirement([WeatherType.Hail, WeatherType.Windy])),
+          new SpecialRoutePokemon(['Snover', 'Bronzong', 'Vanillish', 'Klink', 'Delibird', 'Abomasnow', 'Cramorant'], new WeatherRequirement([WeatherType.Blizzard])),
+          new SpecialRoutePokemon(['Crustle', 'Mudsdale', 'Vulpix', 'Growlithe', 'Unfezant', 'Haxorus', 'Cramorant'], new WeatherRequirement([WeatherType.Sunny])),
+          new SpecialRoutePokemon(['Mudsdale', 'Crustle', 'Claydol', 'Baltoy', 'Haxorus', 'Cramorant'], new WeatherRequirement([WeatherType.Sandstorm])),
+          new SpecialRoutePokemon(['Drifblim', 'Claydol', 'Axew', 'Munna', 'Liepard', 'Unfezant', 'Haxorus', 'Cramorant'], new WeatherRequirement([WeatherType.Fog])),
       ],
     }),
     [
@@ -2570,7 +2741,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Galar Route 4', GameConstants.Region.galar, 13,
     new RoutePokemon({
-        land: ['Yamper', 'Cutiefly', 'Wooloo', 'Milcery', 'Galarian Meowth', 'Budew', 'Ferroseed', 'Joltik', 'Pikachu', 'Eevee', 'Electrike', 'Pumpkaboo', 'Diglett'],
+        land: ['Yamper', 'Cutiefly', 'Wooloo', 'Milcery', 'Galarian Meowth', 'Budew', 'Ferroseed', 'Joltik', 'Pikachu', 'Eevee', 'Electrike', 'Pumpkaboo (Average)', 'Pumpkaboo (Small)', 'Pumpkaboo (Large)', 'Pumpkaboo (Super Size)', 'Diglett'],
         water: ['Magikarp', 'Goldeen', 'Chewtle'],
         headbutt: ['Skwovet'],
     }),
@@ -2634,9 +2805,9 @@ Routes.add(new RegionRoute(
         headbutt: ['Greedent', 'Cherubi'],
         special:
       [
-          new SpecialRoutePokemon(['Cutiefly', 'Wobbuffet', 'Liepard', 'Togepi', 'Ribombee', 'Golisopod', 'Bewear', 'Seismitoad', 'Beheeyem', 'Noivern', 'Gallade', 'Seaking'], new WeatherRequirement([WeatherType.Clear])),
+          new SpecialRoutePokemon(['Cutiefly', 'Wobbuffet', 'Liepard', 'Togepi', 'Ribombee', 'Golisopod', 'Bewear', 'Seismitoad', 'Beheeyem', 'Noivern', 'Gallade', 'Seaking', 'Cufant'], new WeatherRequirement([WeatherType.Clear])),
           new SpecialRoutePokemon(['Cutiefly', 'Scraggy', 'Croagunk', 'Sawk', 'Throh', 'Elgyem', 'Cufant', 'Karrablast', 'Thievul', 'Diggersby', 'Shelmet', 'Togepi', 'Ribombee', 'Drapion', 'Pangoro', 'Seismitoad', 'Beheeyem', 'Noivern', 'Gallade', 'Seaking'], new WeatherRequirement([WeatherType.Overcast])),
-          new SpecialRoutePokemon(['Stufful', 'Cramorant', 'Bronzor', 'Binacle', 'Shellos (East)', 'Wimpod', 'Golisopod', 'Bewear', 'Seismitoad', 'Bronzong', 'Noivern', 'Gallade', 'Jellicent'], new WeatherRequirement([WeatherType.Rain])),
+          new SpecialRoutePokemon(['Stufful', 'Cramorant (Gulping)', 'Bronzor', 'Binacle', 'Shellos (East)', 'Wimpod', 'Golisopod', 'Bewear', 'Seismitoad', 'Bronzong', 'Noivern', 'Gallade', 'Jellicent'], new WeatherRequirement([WeatherType.Rain])),
           new SpecialRoutePokemon(['Stufful', 'Frillish', 'Bronzor', 'Binacle', 'Shellos (East)', 'Bewear', 'Golisopod', 'Seismitoad', 'Bronzong', 'Noivern', 'Gallade'], new WeatherRequirement([WeatherType.Thunderstorm])),
           new SpecialRoutePokemon(['Cubchoo', 'Sneasel', 'Stufful', 'Thievul', 'Vanillite', 'Vanilluxe', 'Bewear', 'Beheeyem', 'Noctowl', 'Beartic'], new WeatherRequirement([WeatherType.Snow])),
           new SpecialRoutePokemon(['Sneasel', 'Cubchoo', 'Cufant', 'Mawile', 'Vanillite', 'Vanilluxe', 'Bewear', 'Beheeyem', 'Noivern', 'Weavile'], new WeatherRequirement([WeatherType.Blizzard])),
@@ -2657,7 +2828,7 @@ Routes.add(new RegionRoute(
       [
           new SpecialRoutePokemon(['Galarian Zigzagoon', 'Ninjask', 'Tyrogue', 'Gurdurr', 'Boldore', 'Ribombee', 'Impidimp', 'Eldegoss', 'Claydol', 'Tsareena', 'Crustle'], new WeatherRequirement([WeatherType.Clear])),
           new SpecialRoutePokemon(['Machoke', 'Scraggy', 'Croagunk', 'Galarian Zigzagoon', 'Cottonee', 'Swirlix', 'Spritzee', 'Ribombee', 'Impidimp', 'Claydol', 'Tsareena', 'Crustle', 'Unfezant'], new WeatherRequirement([WeatherType.Overcast])),
-          new SpecialRoutePokemon(['Ninjask', 'Dewpider', 'Galarian Zigzagoon', 'Cramorant', 'Bronzor', 'Barboach', 'Shellos (East)', 'Impidimp', 'Pikachu', 'Bronzong', 'Araquanid'], new WeatherRequirement([WeatherType.Rain])),
+          new SpecialRoutePokemon(['Ninjask', 'Dewpider', 'Galarian Zigzagoon', 'Cramorant (Gulping)', 'Bronzor', 'Barboach', 'Shellos (East)', 'Impidimp', 'Pikachu', 'Bronzong', 'Araquanid'], new WeatherRequirement([WeatherType.Rain])),
           new SpecialRoutePokemon(['Yamper', 'Dewpider', 'Pikachu', 'Bronzor', 'Gurdurr', 'Boldore', 'Impidimp', 'Applin', 'Bronzong', 'Araquanid'], new WeatherRequirement([WeatherType.Thunderstorm])),
           new SpecialRoutePokemon(['Cubchoo', 'Galarian Zigzagoon', 'Sneasel', 'Bronzor', 'Impidimp', 'Gurdurr', 'Boldore', 'Bronzong', 'Tsareena', 'Crustle'], new WeatherRequirement([WeatherType.Snow])),
           new SpecialRoutePokemon(['Sneasel', 'Cubchoo', 'Galarian Zigzagoon', 'Ferroseed', 'Bronzor', 'Pawniard', 'Impidimp', 'Bronzong', 'Tsareena', 'Crustle'], new WeatherRequirement([WeatherType.Blizzard])),
@@ -2678,7 +2849,7 @@ Routes.add(new RegionRoute(
         headbutt: ['Greedent', 'Cherubi'],
         special:
       [
-          new SpecialRoutePokemon(['Woobat', 'Pumpkaboo', 'Nickit', 'Gloom', 'Skorupi', 'Dottler', 'Budew', 'Machamp', 'Bellossom', 'Unfezant', 'Frillish'], new WeatherRequirement([WeatherType.Clear])),
+          new SpecialRoutePokemon(['Woobat', 'Pumpkaboo (Average)', 'Pumpkaboo (Small)', 'Pumpkaboo (Large)', 'Pumpkaboo (Super Size)', 'Nickit', 'Gloom', 'Skorupi', 'Dottler', 'Budew', 'Machamp', 'Bellossom', 'Unfezant', 'Frillish'], new WeatherRequirement([WeatherType.Clear])),
           new SpecialRoutePokemon(['Butterfree', 'Sawk', 'Throh', 'Galarian Farfetch\'d', 'Gloom', 'Skorupi', 'Roselia', 'Dottler', 'Machamp', 'Vileplume', 'Unfezant', 'Frillish'], new WeatherRequirement([WeatherType.Overcast])),
           new SpecialRoutePokemon(['Wimpod', 'Palpitoad', 'Natu', 'Chewtle', 'Gloom', 'Skorupi', 'Dottler', 'Seismitoad', 'Vileplume', 'Xatu', 'Frillish'], new WeatherRequirement([WeatherType.Rain])),
           new SpecialRoutePokemon(['Helioptile', 'Joltik', 'Yamper', 'Natu', 'Gloom', 'Applin', 'Skorupi', 'Machamp', 'Vileplume', 'Xatu', 'Frillish'], new WeatherRequirement([WeatherType.Thunderstorm])),
@@ -2714,7 +2885,7 @@ Routes.add(new RegionRoute(
           new SpecialRoutePokemon(['Sneasel', 'Vanillite', 'Galarian Linoone', 'Riolu', 'Snorunt', 'Pawniard', 'Delibird', 'Dottler', 'Doublade', 'Glalie', 'Gengar'], new WeatherRequirement([WeatherType.Blizzard])),
           new SpecialRoutePokemon(['Carkol', 'Diggersby', 'Torkoal', 'Noctowl', 'Golett', 'Baltoy', 'Drilbur', 'Dugtrio', 'Doublade', 'Excadrill', 'Gengar'], new WeatherRequirement([WeatherType.Sunny])),
           new SpecialRoutePokemon(['Carkol', 'Diggersby', 'Noctowl', 'Shuckle', 'Golett', 'Drilbur', 'Mudbray', 'Dottler', 'Doublade', 'Excadrill', 'Gengar'], new WeatherRequirement([WeatherType.Sandstorm])),
-          new SpecialRoutePokemon(['Gothita', 'Solosis', 'Clefairy', 'Noctowl', 'Galarian Linoone', 'Munna', 'Dottler', 'Duskull', 'Eldegoss', 'Aegislash', 'Cinccino', 'Gengar'], new WeatherRequirement([WeatherType.Fog])),
+          new SpecialRoutePokemon(['Gothita', 'Solosis', 'Clefairy', 'Noctowl', 'Galarian Linoone', 'Munna', 'Dottler', 'Duskull', 'Eldegoss', 'Aegislash (Shield)', 'Cinccino', 'Gengar'], new WeatherRequirement([WeatherType.Fog])),
       ],
     }),
     [
@@ -2730,20 +2901,20 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Lake of Outrage', GameConstants.Region.galar, 21,
     new RoutePokemon({
-        land: ['Golurk', 'Ditto', 'Corviknight', 'Hatterene', 'Grapploct'],
+        land: ['Golurk', 'Ditto', 'Corviknight', 'Hatterene'],
         water: ['Mantyke', 'Mantine', 'Barraskewda', 'Lanturn', 'Qwilfish', 'Gyarados'],
         headbutt: ['Greedent', 'Cherubi'],
         special:
       [
           new SpecialRoutePokemon(['Beheeyem', 'Braviary', 'Mandibuzz', 'Sigilyph', 'Obstagoon', 'Bewear', 'Orbeetle', 'Leafeon', 'Gardevoir', 'Seaking', 'Lapras', 'Jellicent'], new WeatherRequirement([WeatherType.Clear])),
-          new SpecialRoutePokemon(['Garbodor', 'Drapion', 'Galarian Weezing', 'Hitmontop', 'Drakloak', 'Skuntank', 'Grimmsnarl', 'Pangoro', 'Falinks', 'Jangmo-o', 'Espeon', 'Shiinotic', 'Seaking', 'Jellicent'], new WeatherRequirement([WeatherType.Overcast])),
-          new SpecialRoutePokemon(['Seismitoad', 'Araquanid', 'Golisopod', 'Drakloak', 'Rotom', 'Pelipper', 'Cramorant', 'Quagsire', 'Barbaracle', 'Deino', 'Goomy', 'Vaporeon', 'Shiinotic', 'Lapras', 'Jellicent'], new WeatherRequirement([WeatherType.Rain])),
-          new SpecialRoutePokemon(['Galvantula', 'Noivern', 'Drakloak', 'Haxorus', 'Morpeko', 'Morpeko (Hangry)', 'Rotom', 'Boltund', 'Jellicent', 'Zweilous', 'Drampa', 'Sliggoo', 'Hakamo-o', 'Jolteon', 'Gardevoir', 'Shiinotic', 'Seaking', 'Lapras', 'Jellicent'], new WeatherRequirement([WeatherType.Thunderstorm])),
+          new SpecialRoutePokemon(['Garbodor', 'Drapion', 'Galarian Weezing', 'Hitmontop', 'Skuntank', 'Grimmsnarl', 'Pangoro', 'Falinks', 'Jangmo-o', 'Espeon', 'Shiinotic', 'Seaking', 'Jellicent'], new WeatherRequirement([WeatherType.Overcast])),
+          new SpecialRoutePokemon(['Seismitoad', 'Araquanid', 'Golisopod', 'Rotom', 'Pelipper', 'Cramorant (Gulping)', 'Quagsire', 'Barbaracle', 'Deino', 'Goomy', 'Vaporeon', 'Shiinotic', 'Lapras', 'Jellicent'], new WeatherRequirement([WeatherType.Rain])),
+          new SpecialRoutePokemon(['Galvantula', 'Noivern', 'Haxorus', 'Morpeko', 'Rotom', 'Boltund', 'Jellicent', 'Zweilous', 'Drampa', 'Sliggoo', 'Hakamo-o', 'Jolteon', 'Gardevoir', 'Shiinotic', 'Seaking', 'Lapras', 'Jellicent'], new WeatherRequirement([WeatherType.Thunderstorm])),
           new SpecialRoutePokemon(['Glalie', 'Vanilluxe', 'Abomasnow', 'Bergmite', 'Snom', 'Piloswine', 'Galarian Mr. Mime', 'Obstagoon', 'Eiscue (Ice Face)', 'Glaceon', 'Avalugg', 'Lapras'], new WeatherRequirement([WeatherType.Snow])),
           new SpecialRoutePokemon(['Klinklang', 'Bisharp', 'Vanilluxe', 'Copperajah', 'Perrserker', 'Doublade', 'Togedemaru', 'Duraludon', 'Eiscue (Ice Face)', 'Glaceon', 'Avalugg', 'Lapras'], new WeatherRequirement([WeatherType.Blizzard])),
           new SpecialRoutePokemon(['Ninetales', 'Arcanine', 'Durant', 'Heatmor', 'Lampent', 'Flygon', 'Rhydon', 'Coalossal', 'Sandaconda', 'Turtonator', 'Stonjourner', 'Jangmo-o', 'Larvitar', 'Flareon', 'Chandelure', 'Seaking', 'Pelipper', 'Jellicent'], new WeatherRequirement([WeatherType.Sunny])),
           new SpecialRoutePokemon(['Excadrill', 'Boldore', 'Zweilous', 'Pupitar', 'Dugtrio', 'Hippowdon', 'Obstagoon', 'Stonjourner', 'Umbreon', 'Rhydon', 'Seaking'], new WeatherRequirement([WeatherType.Sandstorm])),
-          new SpecialRoutePokemon(['Wobbuffet', 'Gothitelle', 'Reuniclus', 'Drakloak', 'Claydol', 'Bronzong', 'Gardevoir', 'Sylveon', 'Milotic', 'Lapras', 'Seaking'], new WeatherRequirement([WeatherType.Fog])),
+          new SpecialRoutePokemon(['Wobbuffet', 'Gothitelle', 'Reuniclus', 'Claydol', 'Bronzong', 'Gardevoir', 'Sylveon', 'Milotic', 'Lapras', 'Seaking'], new WeatherRequirement([WeatherType.Fog])),
       ],
     }),
     [
@@ -2758,7 +2929,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Hammerlocke Hills', GameConstants.Region.galar, 22,
     new RoutePokemon({
-        land: ['Pumpkaboo', 'Klink', 'Unfezant', 'Corvisquire', 'Hawlucha', 'Corviknight', 'Copperajah', 'Gourgeist'],
+        land: ['Pumpkaboo (Average)', 'Pumpkaboo (Small)', 'Pumpkaboo (Large)', 'Pumpkaboo (Super Size)', 'Klink', 'Unfezant', 'Corvisquire', 'Hawlucha', 'Corviknight', 'Copperajah', 'Gourgeist (Average)', 'Gourgeist (Small)', 'Gourgeist (Large)', 'Gourgeist (Super Size)'],
         special:
       [
           new SpecialRoutePokemon(['Espurr', 'Inkay', 'Dubwool', 'Machoke', 'Sudowoodo', 'Wobbuffet', 'Stufful', 'Vileplume', 'Klang'], new WeatherRequirement([WeatherType.Clear])),
@@ -2795,7 +2966,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Galar Route 7', GameConstants.Region.galar, 24,
     new RoutePokemon({
-        land: ['Thievul', 'Corviknight', 'Perrserker', 'Morpeko', 'Morpeko (Hangry)', 'Liepard', 'Seismitoad', 'Karrablast', 'Shelmet', 'Meowstic', 'Galvantula', 'Inkay'],
+        land: ['Thievul', 'Corviknight', 'Perrserker', 'Morpeko', 'Liepard', 'Seismitoad', 'Karrablast', 'Shelmet', 'Meowstic', 'Galvantula', 'Inkay'],
         headbutt: ['Greedent'],
     }),
     [new TemporaryBattleRequirement('Hop6')],
@@ -2805,7 +2976,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Galar Route 8', GameConstants.Region.galar, 25,
     new RoutePokemon({
-        land: ['Sandaconda', 'Haunter', 'Rhyhorn', 'Dusclops', 'Bronzong', 'Hippowdon', 'Drapion', 'Solrock', 'Lunatone', 'Boldore', 'Gurdurr', 'Golett', 'Pawniard', 'Rufflet', 'Vullaby', 'Togedemaru', 'Crustle'],
+        land: ['Sandaconda', 'Haunter', 'Rhyhorn', 'Dusclops', 'Bronzong', 'Hippowdon', 'Drapion', 'Solrock', 'Lunatone', 'Boldore', 'Gurdurr', 'Golett', 'Pawniard', 'Rufflet', 'Vullaby', 'Togedemaru', 'Crustle', 'Falinks'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.galar, 24)],
     undefined,
@@ -2833,18 +3004,30 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Galar Route 9', GameConstants.Region.galar, 28,
     new RoutePokemon({
-        land: ['Cramorant', 'Octillery', 'Kingler', 'Pyukumuku', 'Gastrodon (East)', 'Jellicent', 'Mareanie', 'Glalie', 'Pelipper', 'Pincurchin'],
+        land: ['Octillery', 'Kingler', 'Pyukumuku', 'Gastrodon (East)', 'Jellicent', 'Mareanie', 'Glalie', 'Pelipper', 'Pincurchin'],
         water: ['Wishiwashi (Solo)', 'Qwilfish', 'Mantyke'],
+        special:
+      [
+          new SpecialRoutePokemon(['Cramorant'], new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Snow, WeatherType.Hail, WeatherType.Blizzard, WeatherType.Sunny, WeatherType.Sandstorm, WeatherType.Fog, WeatherType.Windy])),
+          new SpecialRoutePokemon(['Cramorant (Gulping)'], new WeatherRequirement([WeatherType.Rain])),
+          new SpecialRoutePokemon(['Cramorant (Gorging)'], new WeatherRequirement([WeatherType.Thunderstorm])),
+      ],
     }),
-    [new TemporaryBattleRequirement('Hop7')],
+    [new QuestLineStepCompletedRequirement('The Darkest Day', 5)],
     undefined,
     GameConstants.GalarSubRegions.NorthGalar
 ));
 Routes.add(new RegionRoute(
     'Circhester Bay', GameConstants.Region.galar, 29,
     new RoutePokemon({
-        land: ['Gastrodon (East)', 'Inkay', 'Cramorant', 'Octillery', 'Barbaracle', 'Bergmite', 'Toxapex', 'Dhelmise', 'Clobbopus', 'Pincurchin'],
-        water: ['Lapras', 'Mantine', 'Mantyke', 'Wailmer', 'Wailord', 'Remoraid', 'Grapploct'],
+        land: ['Gastrodon (East)', 'Inkay', 'Octillery', 'Barbaracle', 'Bergmite', 'Toxapex', 'Dhelmise', 'Pincurchin'],
+        water: ['Lapras', 'Mantine', 'Mantyke', 'Wailmer', 'Wailord', 'Remoraid'],
+        special:
+      [
+          new SpecialRoutePokemon(['Cramorant'], new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Snow, WeatherType.Hail, WeatherType.Blizzard, WeatherType.Sunny, WeatherType.Sandstorm, WeatherType.Fog, WeatherType.Windy])),
+          new SpecialRoutePokemon(['Cramorant (Gulping)'], new WeatherRequirement([WeatherType.Rain])),
+          new SpecialRoutePokemon(['Cramorant (Gorging)'], new WeatherRequirement([WeatherType.Thunderstorm])),
+      ],
         headbutt: ['Greedent'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.galar, 28)],
@@ -2854,7 +3037,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Outer Spikemuth', GameConstants.Region.galar, 30,
     new RoutePokemon({
-        land: ['Liepard', 'Thievul', 'Perrserker','Morpeko', 'Morpeko (Hangry)', 'Jellicent', 'Bergmite', 'Mareanie','Toxapex', 'Dhelmise', 'Clobbopus'],
+        land: ['Liepard', 'Thievul', 'Perrserker','Morpeko', 'Jellicent', 'Bergmite', 'Mareanie','Toxapex', 'Dhelmise'],
         headbutt: ['Greedent'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.galar, 29)],
@@ -2873,7 +3056,12 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Galar Route 10', GameConstants.Region.galar, 32,
     new RoutePokemon({
-        land: ['Snom', 'Duraludon', 'Stonjourner', 'Eiscue (Ice Face)', 'Beartic', 'Vanillish', 'Abomasnow', 'Galarian Darumaka','Galarian Mr. Mime', 'Sneasel', 'Snover', 'Cubchoo'],
+        land: ['Snom', 'Duraludon', 'Stonjourner', 'Beartic', 'Vanillish', 'Abomasnow', 'Galarian Darumaka','Galarian Mr. Mime', 'Sneasel', 'Snover', 'Cubchoo'],
+        special:
+      [
+          new SpecialRoutePokemon(['Eiscue (Ice Face)'], new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Rain, WeatherType.Thunderstorm, WeatherType.Snow, WeatherType.Hail, WeatherType.Blizzard, WeatherType.Sandstorm, WeatherType.Fog, WeatherType.Windy])),
+          new SpecialRoutePokemon(['Eiscue (No Ice Face)'], new WeatherRequirement([WeatherType.Sunny])),
+      ],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.galar, 31)],
     undefined,
@@ -2926,15 +3114,7 @@ Routes.add(new RegionRoute(
       ],
         headbutt: ['Skwovet', 'Applin'],
     }),
-    [
-        new OneFromManyRequirement([
-            new RouteKillRequirement(10, GameConstants.Region.galar, 33),
-            new RouteKillRequirement(10, GameConstants.Region.galar, 35),
-            new RouteKillRequirement(10, GameConstants.Region.galar, 36),
-            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Courageous Cavern')),
-            new RouteKillRequirement(10, GameConstants.Region.galar, 40),
-        ]),
-    ],
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 33)],
     undefined,
     GameConstants.GalarSubRegions.IsleofArmor
 ));
@@ -2942,16 +3122,17 @@ Routes.add(new RegionRoute(
     'Forest of Focus', GameConstants.Region.galar, 35,
     new RoutePokemon({
         land: ['Venipede', 'Foongus', 'Tangela', 'Pikachu', 'Passimian', 'Oranguru', 'Happiny', 'Karrablast'],
-        water: ['Magikarp', 'Goldeen', 'Arrokuda', 'Corphish', 'Cramorant'],
+        water: ['Magikarp', 'Goldeen', 'Arrokuda', 'Corphish'],
         special:
       [
-          new SpecialRoutePokemon(['Chansey', 'Tangrowth', 'Amoonguss', 'Whiscash'], new WeatherRequirement([WeatherType.Clear])),
-          new SpecialRoutePokemon(['Chansey', 'Pawniard', 'Croagunk', 'Amoonguss', 'Scolipede', 'Crawdaunt', 'Whiscash'], new WeatherRequirement([WeatherType.Overcast])),
-          new SpecialRoutePokemon(['Chansey', 'Corphish', 'Crawdaunt', 'Shelmet', 'Accelgor', 'Goomy', 'Golduck', 'Amoonguss', 'Barraskewda'], new WeatherRequirement([WeatherType.Rain])),
-          new SpecialRoutePokemon(['Chansey', 'Corphish', 'Goomy', 'Raichu', 'Luxray', 'Pichu', 'Shelmet', 'Crawdaunt', 'Barraskewda'], new WeatherRequirement([WeatherType.Thunderstorm])),
-          new SpecialRoutePokemon(['Chansey', 'Fomantis', 'Pinsir', 'Heracross', 'Tangrowth', 'Lurantis', 'Larvesta', 'Comfey', 'Amoonguss', 'Whiscash'], new WeatherRequirement([WeatherType.Sunny])),
-          new SpecialRoutePokemon(['Chansey', 'Silicobra', 'Sandslash', 'Escavalier', 'Cubone', 'Whiscash'], new WeatherRequirement([WeatherType.Sandstorm])),
-          new SpecialRoutePokemon(['Blissey', 'Zorua', 'Wigglytuff', 'Comfey', 'Azumarill', 'Gardevoir', 'Jigglypuff', 'Barraskewda'], new WeatherRequirement([WeatherType.Fog])),
+          new SpecialRoutePokemon(['Chansey', 'Tangrowth', 'Amoonguss', 'Whiscash', 'Cramorant'], new WeatherRequirement([WeatherType.Clear])),
+          new SpecialRoutePokemon(['Chansey', 'Pawniard', 'Croagunk', 'Amoonguss', 'Scolipede', 'Crawdaunt', 'Whiscash', 'Cramorant'], new WeatherRequirement([WeatherType.Overcast])),
+          new SpecialRoutePokemon(['Chansey', 'Corphish', 'Crawdaunt', 'Shelmet', 'Accelgor', 'Goomy', 'Golduck', 'Amoonguss', 'Barraskewda', 'Cramorant (Gulping)'], new WeatherRequirement([WeatherType.Rain])),
+          new SpecialRoutePokemon(['Chansey', 'Corphish', 'Goomy', 'Raichu', 'Luxray', 'Pichu', 'Shelmet', 'Crawdaunt', 'Barraskewda', 'Cramorant (Gorging)'], new WeatherRequirement([WeatherType.Thunderstorm])),
+          new SpecialRoutePokemon(['Chansey', 'Fomantis', 'Pinsir', 'Heracross', 'Tangrowth', 'Lurantis', 'Larvesta', 'Comfey', 'Amoonguss', 'Whiscash', 'Cramorant'], new WeatherRequirement([WeatherType.Sunny])),
+          new SpecialRoutePokemon(['Cramorant'], new WeatherRequirement([WeatherType.Snow, WeatherType.Hail, WeatherType.Blizzard, WeatherType.Windy])),
+          new SpecialRoutePokemon(['Chansey', 'Silicobra', 'Sandslash', 'Escavalier', 'Cubone', 'Whiscash', 'Cramorant'], new WeatherRequirement([WeatherType.Sandstorm])),
+          new SpecialRoutePokemon(['Blissey', 'Zorua', 'Wigglytuff', 'Comfey', 'Azumarill', 'Gardevoir', 'Jigglypuff', 'Barraskewda', 'Cramorant'], new WeatherRequirement([WeatherType.Fog])),
       ],
         headbutt: ['Skwovet', 'Applin', 'Emolga'],
     }),
@@ -2968,14 +3149,15 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Challenge Beach', GameConstants.Region.galar, 36,
     new RoutePokemon({
-        land: ['Magnemite', 'Psyduck', 'Dedenne', 'Morpeko', 'Morpeko (Hangry)', 'Blipbug', 'Buneary', 'Jigglypuff', 'Happiny'],
+        land: ['Magnemite', 'Psyduck', 'Dedenne', 'Morpeko', 'Blipbug', 'Buneary', 'Jigglypuff', 'Happiny'],
         water: ['Magikarp', 'Wishiwashi (Solo)', 'Dhelmise', 'Staryu', 'Pelipper', 'Tentacool', 'Wingull'],
         special:
       [
           new SpecialRoutePokemon(['Chansey', 'Lopunny', 'Comfey', 'Drednaw', 'Marill', 'Cramorant', 'Kingler', 'Starmie', 'Tentacruel', 'Gyarados', 'Octillery', 'Barraskewda'], new WeatherRequirement([WeatherType.Clear])),
           new SpecialRoutePokemon(['Chansey', 'Inkay', 'Drapion', 'Malamar', 'Drednaw', 'Crawdaunt', 'Drifblim', 'Swoobat', 'Cramorant', 'Toxapex', 'Starmie', 'Tentacruel', 'Jellicent'], new WeatherRequirement([WeatherType.Overcast])),
-          new SpecialRoutePokemon(['Chansey', 'Shinx', 'Malamar', 'Crawdaunt', 'Golisopod', 'Cramorant', 'Drapion', 'Starmie', 'Kingler', 'Toxapex', 'Tentacruel', 'Cloyster', 'Gyarados', 'Jellicent', 'Barraskewda'], new WeatherRequirement([WeatherType.Rain])),
-          new SpecialRoutePokemon(['Chansey', 'Shinx', 'Magneton', 'Raichu', 'Drednaw', 'Golduck', 'Luxray', 'Magnezone', 'Starmie', 'Toxapex', 'Lanturn', 'Barraskewda'], new WeatherRequirement([WeatherType.Thunderstorm])),
+          new SpecialRoutePokemon(['Chansey', 'Shinx', 'Malamar', 'Crawdaunt', 'Golisopod', 'Cramorant (Gulping)', 'Drapion', 'Starmie', 'Kingler', 'Toxapex', 'Tentacruel', 'Cloyster', 'Gyarados', 'Jellicent', 'Barraskewda'], new WeatherRequirement([WeatherType.Rain])),
+          new SpecialRoutePokemon(['Chansey', 'Shinx', 'Magneton', 'Raichu', 'Drednaw', 'Golduck', 'Luxray', 'Magnezone', 'Starmie', 'Toxapex', 'Lanturn', 'Barraskewda', 'Cramorant (Gorging)'], new WeatherRequirement([WeatherType.Thunderstorm])),
+          new SpecialRoutePokemon(['Cramorant'], new WeatherRequirement([WeatherType.Snow, WeatherType.Hail, WeatherType.Blizzard, WeatherType.Windy])),
           new SpecialRoutePokemon(['Chansey', 'Fomantis', 'Lilligant', 'Lurantis', 'Fletchinder', 'Drednaw', 'Golduck', 'Volcarona', 'Cramorant', 'Kingler', 'Starmie', 'Tentacruel', 'Gyarados', 'Octillery', 'Barraskewda'], new WeatherRequirement([WeatherType.Sunny])),
           new SpecialRoutePokemon(['Chansey', 'Lopunny', 'Drednaw', 'Cramorant', 'Marill', 'Kingler', 'Starmie', 'Tentacruel', 'Gyarados', 'Octillery', 'Barraskewda'], new WeatherRequirement([WeatherType.Sandstorm])),
           new SpecialRoutePokemon(['Blissey', 'Wigglytuff', 'Comfey', 'Lopunny', 'Drifblim', 'Azumarill', 'Cramorant', 'Starmie', 'Toxapex', 'Cloyster', 'Lanturn', 'Jellicent', 'Barraskewda'], new WeatherRequirement([WeatherType.Fog])),
@@ -2996,17 +3178,17 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Loop Lagoon', GameConstants.Region.galar, 37,
     new RoutePokemon({
-        land: ['Sandygast', 'Clobbopus', 'Wingull', 'Mareanie', 'Pincurchin', 'Dwebble', 'Blipbug', 'Happiny'],
+        land: ['Sandygast', 'Wingull', 'Mareanie', 'Pincurchin', 'Dwebble', 'Blipbug', 'Happiny'],
         water: ['Magikarp', 'Shellder', 'Cloyster'],
         special:
       [
-          new SpecialRoutePokemon(['Chansey', 'Drednaw', 'Grapploct', 'Alakazam', 'Rockruff', 'Gyarados', 'Tentacruel', 'Octillery'], new WeatherRequirement([WeatherType.Clear])),
-          new SpecialRoutePokemon(['Chansey', 'Inkay', 'Malamar', 'Toxapex', 'Grapploct', 'Palossand', 'Zoroark', 'Tentacruel', 'Jellicent'], new WeatherRequirement([WeatherType.Overcast])),
+          new SpecialRoutePokemon(['Chansey', 'Drednaw', 'Alakazam', 'Rockruff', 'Gyarados', 'Tentacruel', 'Octillery'], new WeatherRequirement([WeatherType.Clear])),
+          new SpecialRoutePokemon(['Chansey', 'Inkay', 'Malamar', 'Toxapex', 'Palossand', 'Zoroark', 'Tentacruel', 'Jellicent'], new WeatherRequirement([WeatherType.Overcast])),
           new SpecialRoutePokemon(['Chansey', 'Krabby', 'Malamar', 'Toxapex', 'Alakazam', 'Pelipper', 'Tentacruel', 'Gyarados'], new WeatherRequirement([WeatherType.Rain])),
           new SpecialRoutePokemon(['Chansey', 'Krabby', 'Luxio', 'Magnezone', 'Luxray', 'Lanturn', 'Gyarados'], new WeatherRequirement([WeatherType.Thunderstorm])),
-          new SpecialRoutePokemon(['Chansey', 'Fletchling', 'Drednaw', 'Grapploct', 'Larvesta', 'Talonflame', 'Tentacruel', 'Octillery', 'Gyarados'], new WeatherRequirement([WeatherType.Sunny])),
-          new SpecialRoutePokemon(['Chansey', 'Drednaw', 'Grapploct', 'Palossand', 'Alakazam', 'Larvesta', 'Tentacruel', 'Octillery', 'Gyarados'], new WeatherRequirement([WeatherType.Sandstorm])),
-          new SpecialRoutePokemon(['Blissey', 'Drifloon', 'Wigglytuff', 'Toxapex', 'Grapploct', 'Palossand', 'Zoroark', 'Jellicent'], new WeatherRequirement([WeatherType.Fog])),
+          new SpecialRoutePokemon(['Chansey', 'Fletchling', 'Drednaw', 'Larvesta', 'Talonflame', 'Tentacruel', 'Octillery', 'Gyarados'], new WeatherRequirement([WeatherType.Sunny])),
+          new SpecialRoutePokemon(['Chansey', 'Drednaw', 'Palossand', 'Alakazam', 'Larvesta', 'Tentacruel', 'Octillery', 'Gyarados'], new WeatherRequirement([WeatherType.Sandstorm])),
+          new SpecialRoutePokemon(['Blissey', 'Drifloon', 'Wigglytuff', 'Toxapex', 'Palossand', 'Zoroark', 'Jellicent'], new WeatherRequirement([WeatherType.Fog])),
       ],
         headbutt: ['Skwovet', 'Applin'],
     }),
@@ -3023,23 +3205,24 @@ Routes.add(new RegionRoute(
     'Training Lowlands', GameConstants.Region.galar, 38,
     new RoutePokemon({
         land: ['Lillipup', 'Tauros', 'Miltank', 'Scyther', 'Pinsir', 'Heracross', 'Blipbug', 'Happiny'],
-        water: ['Magikarp', 'Carvanha', 'Sharpedo', 'Corphish', 'Arrokuda', 'Cramorant', 'Staryu'],
+        water: ['Magikarp', 'Carvanha', 'Sharpedo', 'Corphish', 'Arrokuda', 'Staryu'],
         special:
       [
-          new SpecialRoutePokemon(['Chansey', 'Stoutland', 'Kangaskhan', 'Herdier', 'Golduck', 'Kingler', 'Barraskewda'], new WeatherRequirement([WeatherType.Clear])),
-          new SpecialRoutePokemon(['Chansey', 'Inkay', 'Bisharp', 'Drapion', 'Swoobat', 'Kangaskhan', 'Karrablast', 'Golduck', 'Malamar', 'Kingler', 'Crawdaunt'], new WeatherRequirement([WeatherType.Overcast])),
-          new SpecialRoutePokemon(['Chansey', 'Shinx', 'Kingler', 'Pelipper', 'Malamar', 'Shelmet', 'Scrafty', 'Toxicroak', 'Golduck', 'Barraskewda'], new WeatherRequirement([WeatherType.Rain])),
-          new SpecialRoutePokemon(['Chansey', 'Shinx', 'Luxray', 'Luxio', 'Magneton', 'Accelgor', 'Scrafty', 'Toxicroak', 'Golduck', 'Kingler', 'Barraskewda'], new WeatherRequirement([WeatherType.Thunderstorm])),
-          new SpecialRoutePokemon(['Chansey', 'Fomantis', 'Lilligant', 'Fletchinder', 'Talonflame', 'Drapion', 'Golduck', 'Kingler', 'Barraskewda'], new WeatherRequirement([WeatherType.Sunny])),
-          new SpecialRoutePokemon(['Chansey', 'Silicobra', 'Scizor', 'Crustle', 'Skarmory', 'Escavalier', 'Jangmo-o', 'Kingler', 'Barraskewda'], new WeatherRequirement([WeatherType.Sandstorm])),
-          new SpecialRoutePokemon(['Blissey', 'Wigglytuff', 'Comfey', 'Drifblim', 'Herdier', 'Azumarill', 'Gardevoir', 'Barraskewda'], new WeatherRequirement([WeatherType.Fog])),
+          new SpecialRoutePokemon(['Chansey', 'Stoutland', 'Kangaskhan', 'Herdier', 'Golduck', 'Kingler', 'Barraskewda', 'Cramorant'], new WeatherRequirement([WeatherType.Clear])),
+          new SpecialRoutePokemon(['Chansey', 'Inkay', 'Bisharp', 'Drapion', 'Swoobat', 'Kangaskhan', 'Karrablast', 'Golduck', 'Malamar', 'Kingler', 'Crawdaunt', 'Cramorant'], new WeatherRequirement([WeatherType.Overcast])),
+          new SpecialRoutePokemon(['Chansey', 'Shinx', 'Kingler', 'Pelipper', 'Malamar', 'Shelmet', 'Scrafty', 'Toxicroak', 'Golduck', 'Barraskewda', 'Cramorant (Gulping)'], new WeatherRequirement([WeatherType.Rain])),
+          new SpecialRoutePokemon(['Chansey', 'Shinx', 'Luxray', 'Luxio', 'Magneton', 'Accelgor', 'Scrafty', 'Toxicroak', 'Golduck', 'Kingler', 'Barraskewda', 'Cramorant (Gorging)'], new WeatherRequirement([WeatherType.Thunderstorm])),
+          new SpecialRoutePokemon(['Cramorant'], new WeatherRequirement([WeatherType.Snow, WeatherType.Hail, WeatherType.Blizzard, WeatherType.Windy])),
+          new SpecialRoutePokemon(['Chansey', 'Fomantis', 'Lilligant', 'Fletchinder', 'Talonflame', 'Drapion', 'Golduck', 'Kingler', 'Barraskewda', 'Cramorant'], new WeatherRequirement([WeatherType.Sunny])),
+          new SpecialRoutePokemon(['Chansey', 'Silicobra', 'Scizor', 'Crustle', 'Skarmory', 'Escavalier', 'Jangmo-o', 'Kingler', 'Barraskewda', 'Cramorant'], new WeatherRequirement([WeatherType.Sandstorm])),
+          new SpecialRoutePokemon(['Blissey', 'Wigglytuff', 'Comfey', 'Drifblim', 'Herdier', 'Azumarill', 'Gardevoir', 'Barraskewda', 'Cramorant'], new WeatherRequirement([WeatherType.Fog])),
       ],
         headbutt: ['Skwovet', 'Applin'],
     }),
     [
         new OneFromManyRequirement([
             new RouteKillRequirement(10, GameConstants.Region.galar, 35),
-            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Brawlers Cave')),
+            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Brawlers\' Cave')),
             new RouteKillRequirement(10, GameConstants.Region.galar, 44),
         ]),
     ],
@@ -3085,7 +3268,7 @@ Routes.add(new RegionRoute(
     [
         new OneFromManyRequirement([
             new RouteKillRequirement(10, GameConstants.Region.galar, 38),
-            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Brawlers Cave')),
+            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Brawlers\' Cave')),
         ]),
     ],
     undefined,
@@ -3108,13 +3291,7 @@ Routes.add(new RegionRoute(
       ],
         headbutt: ['Skwovet', 'Applin'],
     }),
-    [
-        new OneFromManyRequirement([
-            new RouteKillRequirement(10, GameConstants.Region.galar, 33),
-            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Brawlers Cave')),
-            new RouteKillRequirement(10, GameConstants.Region.galar, 42),
-        ]),
-    ],
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 33)],
     undefined,
     GameConstants.GalarSubRegions.IsleofArmor
 ));
@@ -3125,12 +3302,11 @@ Routes.add(new RegionRoute(
         water: ['Magikarp', 'Wishiwashi (Solo)', 'Sharpedo', 'Tentacool', 'Frillish', 'Gyarados', 'Clauncher', 'Skrelp', 'Clawitzer', 'Dragalge'],
         special:
       [
-          new SpecialRoutePokemon(['Chansey', 'Mantyke'], new WeatherRequirement([WeatherType.Clear])),
+          new SpecialRoutePokemon(['Chansey', 'Mantyke'], new WeatherRequirement([WeatherType.Clear, WeatherType.Sandstorm])),
           new SpecialRoutePokemon(['Chansey', 'Tentacruel', 'Jellicent'], new WeatherRequirement([WeatherType.Overcast])),
           new SpecialRoutePokemon(['Chansey', 'Pelipper'], new WeatherRequirement([WeatherType.Rain])),
           new SpecialRoutePokemon(['Chansey', 'Pelipper', 'Chinchou', 'Lanturn'], new WeatherRequirement([WeatherType.Thunderstorm])),
           new SpecialRoutePokemon(['Chansey', 'Fletchinder'], new WeatherRequirement([WeatherType.Sunny])),
-          new SpecialRoutePokemon(['Chansey', 'Mantyke'], new WeatherRequirement([WeatherType.Sandstorm])),
           new SpecialRoutePokemon(['Blissey', 'Drifloon', 'Jellicent'], new WeatherRequirement([WeatherType.Fog])),
       ],
         headbutt: ['Skwovet', 'Applin'],
@@ -3154,12 +3330,11 @@ Routes.add(new RegionRoute(
         water: ['Magikarp', 'Wishiwashi (Solo)', 'Sharpedo', 'Tentacool', 'Horsea', 'Gyarados', 'Clauncher', 'Skrelp', 'Clawitzer', 'Dragalge'],
         special:
       [
-          new SpecialRoutePokemon(['Exeggutor', 'Mantyke'], new WeatherRequirement([WeatherType.Clear])),
+          new SpecialRoutePokemon(['Exeggutor', 'Mantyke'], new WeatherRequirement([WeatherType.Clear, WeatherType.Sandstorm])),
           new SpecialRoutePokemon(['Zoroark', 'Pelipper', 'Tentacruel', 'Jellicent'], new WeatherRequirement([WeatherType.Overcast])),
           new SpecialRoutePokemon(['Exeggutor', 'Pelipper'], new WeatherRequirement([WeatherType.Rain])),
           new SpecialRoutePokemon(['Magnezone', 'Pelipper', 'Chinchou', 'Lanturn'], new WeatherRequirement([WeatherType.Thunderstorm])),
           new SpecialRoutePokemon(['Volcarona', 'Exeggutor', 'Fletchinder'], new WeatherRequirement([WeatherType.Sunny])),
-          new SpecialRoutePokemon(['Exeggutor', 'Mantyke'], new WeatherRequirement([WeatherType.Sandstorm])),
           new SpecialRoutePokemon(['Alakazam', 'Comfey', 'Drifloon', 'Jellicent'], new WeatherRequirement([WeatherType.Fog])),
       ],
         headbutt: ['Skwovet', 'Applin'],
@@ -3179,12 +3354,11 @@ Routes.add(new RegionRoute(
         water: ['Tentacool', 'Magikarp', 'Wishiwashi (Solo)', 'Sharpedo', 'Wingull', 'Wailmer', 'Clauncher', 'Skrelp', 'Gyarados', 'Clawitzer', 'Dragalge'],
         special:
       [
-          new SpecialRoutePokemon(['Mantyke', 'Seadra'], new WeatherRequirement([WeatherType.Clear])),
+          new SpecialRoutePokemon(['Mantyke', 'Seadra'], new WeatherRequirement([WeatherType.Clear, WeatherType.Sandstorm])),
           new SpecialRoutePokemon(['Tentacruel', 'Jellicent', 'Seadra'], new WeatherRequirement([WeatherType.Overcast])),
           new SpecialRoutePokemon(['Pelipper', 'Seadra'], new WeatherRequirement([WeatherType.Rain])),
           new SpecialRoutePokemon(['Pelipper', 'Chinchou', 'Lanturn', 'Kingdra'], new WeatherRequirement([WeatherType.Thunderstorm])),
           new SpecialRoutePokemon(['Fletchinder', 'Seadra'], new WeatherRequirement([WeatherType.Sunny])),
-          new SpecialRoutePokemon(['Mantyke', 'Seadra'], new WeatherRequirement([WeatherType.Sandstorm])),
           new SpecialRoutePokemon(['Drifloon', 'Jellicent', 'Seadra'], new WeatherRequirement([WeatherType.Fog])),
       ],
     }),
@@ -3206,12 +3380,11 @@ Routes.add(new RegionRoute(
         water: ['Magikarp', 'Wishiwashi (Solo)', 'Wingull', 'Tentacool', 'Wailmer', 'Gyarados', 'Clauncher', 'Skrelp', 'Clawitzer', 'Dragalge'],
         special:
       [
-          new SpecialRoutePokemon(['Chansey', 'Lilligant', 'Mantyke'], new WeatherRequirement([WeatherType.Clear])),
+          new SpecialRoutePokemon(['Chansey', 'Lilligant', 'Mantyke'], new WeatherRequirement([WeatherType.Clear, WeatherType.Sandstorm])),
           new SpecialRoutePokemon(['Chansey', 'Tentacruel', 'Jellicent'], new WeatherRequirement([WeatherType.Overcast])),
           new SpecialRoutePokemon(['Chansey', 'Pelipper'], new WeatherRequirement([WeatherType.Rain])),
           new SpecialRoutePokemon(['Chansey', 'Pelipper', 'Chinchou', 'Lanturn'], new WeatherRequirement([WeatherType.Thunderstorm])),
           new SpecialRoutePokemon(['Chansey', 'Lilligant', 'Fletchinder'], new WeatherRequirement([WeatherType.Sunny])),
-          new SpecialRoutePokemon(['Chansey', 'Lilligant', 'Mantyke'], new WeatherRequirement([WeatherType.Sandstorm])),
           new SpecialRoutePokemon(['Blissey', 'Comfey', 'Drifloon', 'Jellicent'], new WeatherRequirement([WeatherType.Fog])),
       ],
         headbutt: ['Skwovet', 'Applin'],
@@ -3225,7 +3398,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Slippery Slope', GameConstants.Region.galar, 46,
     new RoutePokemon({
-        land: ['Snom', 'Piloswine', 'Jynx', 'Amaura', 'Audino', 'Mime Jr.', 'Smoochum', 'Swinub'],
+        land: ['Snom', 'Piloswine', 'Jynx', 'Audino', 'Mime Jr.', 'Smoochum', 'Swinub'],
         special:
       [
           new SpecialRoutePokemon(['Dubwool', 'Wooloo', 'Mamoswine', 'Snorlax'],  new WeatherRequirement([WeatherType.Clear])),
@@ -3234,6 +3407,7 @@ Routes.add(new RegionRoute(
           new SpecialRoutePokemon(['Cryogonal', 'Mamoswine', 'Glalie', 'Froslass'],  new WeatherRequirement([WeatherType.Blizzard])),
           new SpecialRoutePokemon(['Dubwool', 'Magmar', 'Wooloo', 'Magby', 'Snorlax', 'Magmar', 'Mamoswine', 'Magmortar'],  new WeatherRequirement([WeatherType.Sunny])),
           new SpecialRoutePokemon(['Hatenna', 'Impidimp', 'Gothorita', 'Mimikyu', 'Duosion', 'Gothita', 'Solosis', 'Hattrem', 'Grimmsnarl', 'Gothitelle', 'Reuniclus'],  new WeatherRequirement([WeatherType.Fog])),
+          new SpecialRoutePokemon(['Amaura'], new ObtainedPokemonRequirement(pokemonMap.Amaura)),
       ],
         headbutt: ['Skwovet', 'Greedent'],
     }),
@@ -3244,7 +3418,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Frostpoint Field', GameConstants.Region.galar, 47,
     new RoutePokemon({
-        land: ['Abomasnow', 'Jynx', 'Amaura', 'Audino', 'Mime Jr.', 'Snover', 'Smoochum'],
+        land: ['Abomasnow', 'Jynx', 'Audino', 'Mime Jr.', 'Snover', 'Smoochum'],
         special:
       [
           new SpecialRoutePokemon(['Dubwool', 'Wooloo', 'Nidoran(M)', 'Nidoran(F)', 'Snorlax'],  new WeatherRequirement([WeatherType.Clear])),
@@ -3253,6 +3427,7 @@ Routes.add(new RegionRoute(
           new SpecialRoutePokemon(['Cryogonal', 'Vanillish', 'Vanillite', 'Nidoran(M)', 'Nidoran(F)', 'Vanilluxe', 'Absol', 'Eevee'],  new WeatherRequirement([WeatherType.Blizzard])),
           new SpecialRoutePokemon(['Dubwool', 'Magmar', 'Magby', 'Nidoran(M)', 'Nidoran(F)', 'Snorlax', 'Magmar'],  new WeatherRequirement([WeatherType.Sunny])),
           new SpecialRoutePokemon(['Hattrem', 'Gothorita', 'Duosion', 'Mimikyu', 'Hatenna', 'Gothita', 'Solosis', 'Hatterene', 'Gothitelle', 'Reuniclus'],  new WeatherRequirement([WeatherType.Fog])),
+          new SpecialRoutePokemon(['Amaura'], new ObtainedPokemonRequirement(pokemonMap.Amaura)),
       ],
         headbutt: ['Skwovet', 'Greedent'],
     }),
@@ -3261,10 +3436,10 @@ Routes.add(new RegionRoute(
     GameConstants.GalarSubRegions.CrownTundra
 ));
 Routes.add(new RegionRoute(
-    'Giants Bed', GameConstants.Region.galar, 48,
+    'Giant\'s Bed', GameConstants.Region.galar, 48,
     new RoutePokemon({
-        land: ['Nidoran(M)', 'Nidoran(F)', 'Stonjourner', 'Bronzong', 'Audino', 'Mime Jr.', 'Shelmet', 'Nidorino', 'Nidorina', 'Aerodactyl'],
-        water: ['Magikarp', 'Barboach', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Gyarados', 'Whiscash', 'Lileep', 'Feebas'],
+        land: ['Nidoran(M)', 'Nidoran(F)', 'Stonjourner', 'Bronzong', 'Audino', 'Mime Jr.', 'Shelmet', 'Nidorino', 'Nidorina'],
+        water: ['Magikarp', 'Barboach', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Gyarados', 'Whiscash', 'Feebas'],
         special:
       [
           new SpecialRoutePokemon(['Dubwool', 'Gurdurr', 'Eevee', 'Wooloo', 'Nidoking', 'Nidoqueen', 'Conkeldurr', 'Leafeon', 'Snorlax'],  new WeatherRequirement([WeatherType.Clear])),
@@ -3275,6 +3450,8 @@ Routes.add(new RegionRoute(
           new SpecialRoutePokemon(['Snorunt', 'Cryogonal', 'Vanillish', 'Absol', 'Vanillite', 'Glalie', 'Froslass', 'Glaceon', 'Greedent', 'Nidoking', 'Nidoqueen', 'Vanilluxe', 'Snorlax'],  new WeatherRequirement([WeatherType.Blizzard])),
           new SpecialRoutePokemon(['Dubwool', 'Magmar', 'Heatmor', 'Durant', 'Wooloo', 'Magby', 'Nidoqueen', 'Flareon', 'Magmortar', 'Snorlax'],  new WeatherRequirement([WeatherType.Sunny])),
           new SpecialRoutePokemon(['Hattrem', 'Morgrem', 'Lampent', 'Clefairy', 'Mimikyu', 'Hatenna', 'Nidoking', 'Nidoqueen', 'Grimmsnarl', 'Hatterene', 'Clefable', 'Snorlax', 'Sylveon', 'Chandelure', 'Milotic'],  new WeatherRequirement([WeatherType.Fog])),
+          new SpecialRoutePokemon(['Aerodactyl'], new ObtainedPokemonRequirement(pokemonMap.Aerodactyl)),
+          new SpecialRoutePokemon(['Lileep'], new ObtainedPokemonRequirement(pokemonMap.Lileep)),
       ],
         headbutt: ['Skwovet', 'Greedent'],
     }),
@@ -3285,16 +3462,15 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Old Cemetery', GameConstants.Region.galar, 49,
     new RoutePokemon({
-        land: ['Nidoran(M)', 'Nidoran(F)', 'Sinistea', 'Drakloak', 'Audino', 'Mime Jr.', 'Karrablast'],
+        land: ['Nidoran(M)', 'Nidoran(F)', 'Sinistea', 'Audino', 'Mime Jr.', 'Karrablast'],
         special:
       [
-          new SpecialRoutePokemon(['Dragapult'],  new WeatherRequirement([WeatherType.Clear])),
-          new SpecialRoutePokemon(['Lampent', 'Phantump', 'Trevenant', 'Dragapult'],  new WeatherRequirement([WeatherType.Overcast])),
-          new SpecialRoutePokemon(['Araquanid', 'Dewpider', 'Dragapult'],  new WeatherRequirement([WeatherType.Rain])),
-          new SpecialRoutePokemon(['Araquanid', 'Galvantula', 'Electabuzz', 'Elekid', 'Dragapult'],  new WeatherRequirement([WeatherType.Thunderstorm])),
-          new SpecialRoutePokemon(['Cryogonal', 'Vanillish', 'Vanillite', 'Froslass', 'Dragapult'],  new WeatherRequirement([WeatherType.Snow])),
+          new SpecialRoutePokemon(['Lampent', 'Phantump', 'Trevenant'],  new WeatherRequirement([WeatherType.Overcast])),
+          new SpecialRoutePokemon(['Araquanid', 'Dewpider'],  new WeatherRequirement([WeatherType.Rain])),
+          new SpecialRoutePokemon(['Araquanid', 'Galvantula', 'Electabuzz', 'Elekid'],  new WeatherRequirement([WeatherType.Thunderstorm])),
+          new SpecialRoutePokemon(['Cryogonal', 'Vanillish', 'Vanillite', 'Froslass'],  new WeatherRequirement([WeatherType.Snow])),
           new SpecialRoutePokemon(['Cryogonal', 'Vanillish', 'Absol', 'Vanillite', 'Froslass'],  new WeatherRequirement([WeatherType.Blizzard])),
-          new SpecialRoutePokemon(['Magmar', 'Heatmor', 'Durant', 'Magby', 'Dragapult'],  new WeatherRequirement([WeatherType.Sunny])),
+          new SpecialRoutePokemon(['Magmar', 'Heatmor', 'Durant', 'Magby'],  new WeatherRequirement([WeatherType.Sunny])),
           new SpecialRoutePokemon(['Hattrem', 'Lampent', 'Galarian Ponyta', 'Mimikyu', 'Hatenna', 'Galarian Rapidash'],  new WeatherRequirement([WeatherType.Fog])),
       ],
     }),
@@ -3303,10 +3479,10 @@ Routes.add(new RegionRoute(
     GameConstants.GalarSubRegions.CrownTundra
 ));
 Routes.add(new RegionRoute(
-    'Giants Foot', GameConstants.Region.galar, 50,
+    'Giant\'s Foot', GameConstants.Region.galar, 50,
     new RoutePokemon({
-        land: ['Copperajah', 'Bronzong', 'Stonjourner', 'Archen', 'Audino', 'Claydol', 'Mime Jr.', 'Cufant', 'Bronzor'],
-        water: ['Magikarp', 'Barboach', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Gyarados', 'Whiscash', 'Lileep', 'Feebas', 'Omanyte', 'Kabuto'],
+        land: ['Copperajah', 'Bronzong', 'Stonjourner', 'Audino', 'Claydol', 'Mime Jr.', 'Cufant', 'Bronzor'],
+        water: ['Magikarp', 'Barboach', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Gyarados', 'Whiscash', 'Feebas'],
         special:
       [
           new SpecialRoutePokemon(['Centiskorch', 'Gurdurr', 'Sizzlipede'],  new WeatherRequirement([WeatherType.Clear])),
@@ -3317,6 +3493,10 @@ Routes.add(new RegionRoute(
           new SpecialRoutePokemon(['Snorunt', 'Cryogonal', 'Vanillish', 'Vanillite', 'Absol'],  new WeatherRequirement([WeatherType.Blizzard])),
           new SpecialRoutePokemon(['Centiskorch', 'Magmar', 'Sizzlipede' , 'Magby'], new WeatherRequirement([WeatherType.Sunny])),
           new SpecialRoutePokemon(['Hattrem', 'Morgrem', 'Mimikyu', 'Hatenna'],  new WeatherRequirement([WeatherType.Fog])),
+          new SpecialRoutePokemon(['Omanyte'], new ObtainedPokemonRequirement(pokemonMap.Omanyte)),
+          new SpecialRoutePokemon(['Kabuto'], new ObtainedPokemonRequirement(pokemonMap.Kabuto)),
+          new SpecialRoutePokemon(['Lileep'], new ObtainedPokemonRequirement(pokemonMap.Lileep)),
+          new SpecialRoutePokemon(['Archen'], new ObtainedPokemonRequirement(pokemonMap.Archen)),
       ],
         headbutt: ['Skwovet', 'Greedent'],
     }),
@@ -3328,16 +3508,20 @@ Routes.add(new RegionRoute(
     'Frigid Sea', GameConstants.Region.galar, 51,
     new RoutePokemon({
         land: ['Bergmite', 'Mime Jr.', 'Audino'],
-        water: ['Magikarp', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Wailmer', 'Gyarados', 'Dhelmise', 'Spheal', 'Avalugg', 'Eiscue (Ice Face)', 'Tirtouga', 'Wailmer'],
+        water: ['Magikarp', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Wailmer', 'Gyarados', 'Dhelmise', 'Spheal', 'Avalugg', 'Wailmer'],
         special:
       [
-          new SpecialRoutePokemon(['Sealeo', 'Walrein', 'Carracosta'],  new WeatherRequirement([WeatherType.Clear])),
-          new SpecialRoutePokemon(['Swablu', 'Sneasel', 'Altaria', 'Sealeo', 'Walrein'],  new WeatherRequirement([WeatherType.Overcast])),
-          new SpecialRoutePokemon(['Araquanid', 'Dewpider', 'Sealeo', 'Carracosta'],  new WeatherRequirement([WeatherType.Rain])),
-          new SpecialRoutePokemon(['Araquanid', 'Electabuzz', 'Pincurchin', 'Dewpider', 'Elekid', 'Electivire', 'Sealeo', 'Carracosta'],  new WeatherRequirement([WeatherType.Thunderstorm])),
-          new SpecialRoutePokemon(['Vanillish', 'Beartic', 'Vanillite', 'Sealeo', 'Walrein', 'Cryogonal', 'Lapras'],  new WeatherRequirement([WeatherType.Snow])),
-          new SpecialRoutePokemon(['Vanillish', 'Beartic', 'Vanillite', 'Sealeo', 'Walrein', 'Cryogonal', 'Lapras', 'Beartic', 'Lapras', 'Absol'],  new WeatherRequirement([WeatherType.Blizzard])),
-          new SpecialRoutePokemon(['Hattrem', 'Mimikyu', 'Hatenna', 'Hatterene', 'Sealeo', 'Walrein'],  new WeatherRequirement([WeatherType.Fog])),
+          new SpecialRoutePokemon(['Sealeo', 'Walrein', 'Eiscue (Ice Face)'],  new WeatherRequirement([WeatherType.Clear])),
+          new SpecialRoutePokemon(['Swablu', 'Sneasel', 'Altaria', 'Sealeo', 'Walrein', 'Eiscue (Ice Face)'],  new WeatherRequirement([WeatherType.Overcast])),
+          new SpecialRoutePokemon(['Araquanid', 'Dewpider', 'Sealeo', 'Eiscue (Ice Face)'],  new WeatherRequirement([WeatherType.Rain])),
+          new SpecialRoutePokemon(['Araquanid', 'Electabuzz', 'Pincurchin', 'Dewpider', 'Elekid', 'Electivire', 'Sealeo', 'Eiscue (Ice Face)'],  new WeatherRequirement([WeatherType.Thunderstorm])),
+          new SpecialRoutePokemon(['Vanillish', 'Beartic', 'Vanillite', 'Sealeo', 'Walrein', 'Cryogonal', 'Lapras', 'Eiscue (Ice Face)'],  new WeatherRequirement([WeatherType.Snow])),
+          new SpecialRoutePokemon(['Eiscue (Ice Face)'],  new WeatherRequirement([WeatherType.Hail, WeatherType.Sandstorm, WeatherType.Windy])),
+          new SpecialRoutePokemon(['Eiscue (No Ice Face)'],  new WeatherRequirement([WeatherType.Sunny])),
+          new SpecialRoutePokemon(['Vanillish', 'Beartic', 'Vanillite', 'Sealeo', 'Walrein', 'Cryogonal', 'Lapras', 'Beartic', 'Lapras', 'Absol', 'Eiscue (Ice Face)'],  new WeatherRequirement([WeatherType.Blizzard])),
+          new SpecialRoutePokemon(['Hattrem', 'Mimikyu', 'Hatenna', 'Hatterene', 'Sealeo', 'Walrein', 'Eiscue (Ice Face)'],  new WeatherRequirement([WeatherType.Fog])),
+          new SpecialRoutePokemon(['Tirtouga'], new ObtainedPokemonRequirement(pokemonMap.Tirtouga)),
+          new SpecialRoutePokemon(['Carracosta'], new MultiRequirement([new ObtainedPokemonRequirement(pokemonMap.Carracosta), new WeatherRequirement([WeatherType.Clear, WeatherType.Rain, WeatherType.Thunderstorm])])),
       ],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Roaring-Sea Caves'))],
@@ -3350,14 +3534,14 @@ Routes.add(new RegionRoute(
         land: ['Bronzong', 'Avalugg', 'Claydol', 'Golurk', 'Audino', 'Mime Jr.', 'Bronzor', 'Bergmite'],
         special:
       [
-          new SpecialRoutePokemon(['Dubwool', 'Wooloo', 'Dragapult'],  new WeatherRequirement([WeatherType.Clear])),
-          new SpecialRoutePokemon(['Swablu', 'Phantump', 'Dragapult'],  new WeatherRequirement([WeatherType.Overcast])),
-          new SpecialRoutePokemon(['Araquanid', 'Dewpider', 'Dragapult'],  new WeatherRequirement([WeatherType.Rain])),
+          new SpecialRoutePokemon(['Dubwool', 'Wooloo'],  new WeatherRequirement([WeatherType.Clear])),
+          new SpecialRoutePokemon(['Swablu', 'Phantump'],  new WeatherRequirement([WeatherType.Overcast])),
+          new SpecialRoutePokemon(['Araquanid', 'Dewpider'],  new WeatherRequirement([WeatherType.Rain])),
           new SpecialRoutePokemon(['Araquanid', 'Galvantula', 'Electabuzz', 'Dewpider', 'Elekid', 'Electivire'],  new WeatherRequirement([WeatherType.Thunderstorm])),
-          new SpecialRoutePokemon(['Cryogonal', 'Vanillish', 'Vanillite', 'Dragapult'],  new WeatherRequirement([WeatherType.Snow])),
-          new SpecialRoutePokemon(['Cryogonal', 'Vanillish', 'Absol', 'Vanillite', 'Dragapult'],  new WeatherRequirement([WeatherType.Blizzard])),
-          new SpecialRoutePokemon(['Dubwool', 'Magmar', 'Druddigon', 'Heatmor', 'Durant', 'Wooloo', 'Magby', 'Dragapult'],  new WeatherRequirement([WeatherType.Sunny])),
-          new SpecialRoutePokemon(['Hattrem', 'Mimikyu', 'Hatenna', 'Dragapult'],  new WeatherRequirement([WeatherType.Fog])),
+          new SpecialRoutePokemon(['Cryogonal', 'Vanillish', 'Vanillite'],  new WeatherRequirement([WeatherType.Snow])),
+          new SpecialRoutePokemon(['Cryogonal', 'Vanillish', 'Absol', 'Vanillite'],  new WeatherRequirement([WeatherType.Blizzard])),
+          new SpecialRoutePokemon(['Dubwool', 'Magmar', 'Druddigon', 'Heatmor', 'Durant', 'Wooloo', 'Magby'],  new WeatherRequirement([WeatherType.Sunny])),
+          new SpecialRoutePokemon(['Hattrem', 'Mimikyu', 'Hatenna'],  new WeatherRequirement([WeatherType.Fog])),
       ],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.galar, 51)],
@@ -3367,17 +3551,21 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Ballimere Lake', GameConstants.Region.galar, 53,
     new RoutePokemon({
-        land: ['Boltund', 'Tyrunt', 'Audino', 'Skwovet', 'Yamper', 'Mime Jr.', 'Tyrantrum', 'Aron'],
-        water: ['Magikarp', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Barboach', 'Gyarados', 'Whiscash', 'Feebas', 'Dratini', 'Anorith', 'Relicanth'],
+        land: ['Boltund', 'Audino', 'Skwovet', 'Yamper', 'Mime Jr.', 'Aron'],
+        water: ['Magikarp', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Barboach', 'Gyarados', 'Whiscash', 'Feebas', 'Dratini', 'Relicanth'],
         special:
       [
           new SpecialRoutePokemon(['Gossifleur', 'Cottonee', 'Corvisquire', 'Shuckle', 'Eevee', 'Corviknight', 'Whimsicott', 'Coalossal'],  new WeatherRequirement([WeatherType.Clear])),
-          new SpecialRoutePokemon(['Swablu', 'Linoone', 'Morpeko', 'Morpeko (Hangry)', 'Noivern', 'Altaria', 'Obstagoon'],  new WeatherRequirement([WeatherType.Overcast])),
-          new SpecialRoutePokemon(['Araquanid', 'Cottonee', 'Noivern', 'Dewpider', 'Whimsicott', 'Dragonite', 'Eldegoss', 'Armaldo'],  new WeatherRequirement([WeatherType.Rain])),
-          new SpecialRoutePokemon(['Araquanid', 'Galvantula', 'Electabuzz', 'Morpeko', 'Morpeko (Hangry)', 'Dewpider', 'Elekid', 'Electivire', 'Dragonite', 'Armaldo', 'Coalossal', 'Dragonair'],  new WeatherRequirement([WeatherType.Thunderstorm])),
+          new SpecialRoutePokemon(['Swablu', 'Galarian Linoone', 'Morpeko', 'Noivern', 'Altaria', 'Obstagoon'],  new WeatherRequirement([WeatherType.Overcast])),
+          new SpecialRoutePokemon(['Araquanid', 'Cottonee', 'Noivern', 'Dewpider', 'Whimsicott', 'Dragonite', 'Eldegoss'],  new WeatherRequirement([WeatherType.Rain])),
+          new SpecialRoutePokemon(['Araquanid', 'Galvantula', 'Electabuzz', 'Morpeko', 'Dewpider', 'Elekid', 'Electivire', 'Dragonite', 'Coalossal', 'Dragonair'],  new WeatherRequirement([WeatherType.Thunderstorm])),
           new SpecialRoutePokemon(['Cryogonal', 'Vanillish', 'Corvisquire', 'Vanillite', 'Vanilluxe', 'Coalossal'],  new WeatherRequirement([WeatherType.Snow])),
           new SpecialRoutePokemon(['Carkol', 'Magmar', 'Gossifleur', 'Shuckle', 'Magby', 'Magmortar'],  new WeatherRequirement([WeatherType.Sunny])),
           new SpecialRoutePokemon(['Hattrem', 'Mimikyu', 'Hatenna', 'Hatterene', 'Coalossal', 'Dragonair'],  new WeatherRequirement([WeatherType.Fog])),
+          new SpecialRoutePokemon(['Anorith'], new ObtainedPokemonRequirement(pokemonMap.Anorith)),
+          new SpecialRoutePokemon(['Armaldo'], new MultiRequirement([new ObtainedPokemonRequirement(pokemonMap.Armaldo), new WeatherRequirement([WeatherType.Rain, WeatherType.Thunderstorm])])),
+          new SpecialRoutePokemon(['Tyrunt'], new ObtainedPokemonRequirement(pokemonMap.Tyrunt)),
+          new SpecialRoutePokemon(['Tyrantrum'], new ObtainedPokemonRequirement(pokemonMap.Tyrantrum)),
       ],
         headbutt: ['Skwovet', 'Greedent', 'Munchlax'],
     }),
@@ -3388,16 +3576,18 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Snowslide Slope', GameConstants.Region.galar, 54,
     new RoutePokemon({
-        land: ['Snom', 'Beldum', 'Amaura', 'Audino', 'Mime Jr.', 'Metang', 'Metagross'],
+        land: ['Snom', 'Beldum', 'Audino', 'Mime Jr.', 'Metang', 'Metagross'],
         water: ['Magikarp', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Gyarados'],
         special:
       [
-          new SpecialRoutePokemon(['Dubwool', 'Druddigon', 'Wooloo', 'Aurorus'],  new WeatherRequirement([WeatherType.Clear])),
-          new SpecialRoutePokemon(['Phantump', 'Sneasel', 'Weavile', 'Trevenant', 'Aurorus'],  new WeatherRequirement([WeatherType.Overcast])),
-          new SpecialRoutePokemon(['Cryogonal', 'Snorunt', 'Vanillish', 'Beartic', 'Delibird', 'Vanillite', 'Glalie', 'Vanilluxe', 'Froslass', 'Aurorus'],  new WeatherRequirement([WeatherType.Snow])),
-          new SpecialRoutePokemon(['Cryogonal', 'Snorunt', 'Vanillish', 'Beartic', 'Delibird', 'Vanillite', 'Glalie', 'Vanilluxe', 'Froslass', 'Aurorus', 'Galarian Darumaka', 'Absol'],  new WeatherRequirement([WeatherType.Blizzard])),
+          new SpecialRoutePokemon(['Dubwool', 'Druddigon', 'Wooloo'],  new WeatherRequirement([WeatherType.Clear])),
+          new SpecialRoutePokemon(['Phantump', 'Sneasel', 'Weavile', 'Trevenant'],  new WeatherRequirement([WeatherType.Overcast])),
+          new SpecialRoutePokemon(['Cryogonal', 'Snorunt', 'Vanillish', 'Beartic', 'Delibird', 'Vanillite', 'Glalie', 'Vanilluxe', 'Froslass'],  new WeatherRequirement([WeatherType.Snow])),
+          new SpecialRoutePokemon(['Cryogonal', 'Snorunt', 'Vanillish', 'Beartic', 'Delibird', 'Vanillite', 'Glalie', 'Vanilluxe', 'Froslass', 'Galarian Darumaka', 'Absol'],  new WeatherRequirement([WeatherType.Blizzard])),
           new SpecialRoutePokemon(['Dubwool', 'Magmar', 'Wooloo', 'Magby', 'Magmortar'],  new WeatherRequirement([WeatherType.Sunny])),
-          new SpecialRoutePokemon(['Morgrem', 'Mimikyu', 'Clefairy', 'Clefable', 'Grimmsnarl', 'Aurorus'],  new WeatherRequirement([WeatherType.Fog])),
+          new SpecialRoutePokemon(['Morgrem', 'Mimikyu', 'Clefairy', 'Clefable', 'Grimmsnarl'],  new WeatherRequirement([WeatherType.Fog])),
+          new SpecialRoutePokemon(['Amaura'], new ObtainedPokemonRequirement(pokemonMap.Amaura)),
+          new SpecialRoutePokemon(['Aurorus'], new MultiRequirement([new ObtainedPokemonRequirement(pokemonMap.Aurorus), new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Snow, WeatherType.Blizzard, WeatherType.Fog])])),
       ],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.galar, 48)],

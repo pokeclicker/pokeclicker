@@ -717,6 +717,22 @@
             })
         %>
 
+        <%- include('templates/mapPOI',
+           { name: "Farm"
+           , x: 52, y: 54
+           , width: 3, height: 3
+           , databind: "click:function(){FarmController.openFarmModal()}, attr: { class: App.game.farming.canAccess() ? 'completed' : 'locked' }"
+           })
+        %>
+
+        <%- include('templates/mapPOI',
+           { name: "Pokémon Day Care"
+           , x: 40, y: 4
+           , width: 4, height: 3.5
+           , databind: "click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? 'completed' : 'locked' }"
+           })
+        %>
+
         <%- include('templates/mapOverlay',
             { name: "Professor Magnolia's Blimp"
             , x: 49, y: 54
@@ -776,6 +792,36 @@
                , image: "assets/images/map/hop.png"
                })
             %>
+
+            <%- include('templates/mapOverlay',
+                { name: "Galarian Zapdos"
+                , x: 46, y: 24
+                , width: 4, height: 3
+                , databind: "click: () => TemporaryBattleList['Galarian Zapdos 1'].protectedOnclick()"
+                , visible:  "TemporaryBattleList['Galarian Zapdos 1'] && TemporaryBattleList['Galarian Zapdos 1'].isVisible()"
+                , image: "assets/images/map/galarianzapdos.png"
+                })
+             %>
+
+             <%- include('templates/mapOverlay',
+                 { name: "Galarian Zapdos"
+                 , x: 55, y: 2
+                 , width: 4, height: 3
+                 , databind: "click: () => TemporaryBattleList['Galarian Zapdos 2'].protectedOnclick(), attr: { class: TemporaryBattleList['Galarian Zapdos 2'].isUnlocked() ? '' : 'locked' }"
+                 , visible:  "TemporaryBattleList['Galarian Zapdos 2'] && TemporaryBattleList['Galarian Zapdos 2'].isVisible()"
+                 , image: "assets/images/map/galarianzapdos.png"
+                 })
+              %>
+
+              <%- include('templates/mapOverlay',
+                  { name: "Galarian Zapdos"
+                  , x: 56.5, y: 36
+                  , width: 4, height: 3
+                  , databind: "click: () => TemporaryBattleList['Galarian Zapdos 3'].protectedOnclick(), attr: { class: TemporaryBattleList['Galarian Zapdos 3'].isUnlocked() ? '' : 'locked' }"
+                  , visible:  "TemporaryBattleList['Galarian Zapdos 3'] && TemporaryBattleList['Galarian Zapdos 3'].isVisible()"
+                  , image: "assets/images/map/galarianzapdos.png"
+                  })
+               %>
     </g>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'North Galar').id">
         <image width="1600" height="960" data-bind="attr: {
@@ -900,8 +946,8 @@
         <!--Winter Hill Station-->
         <%- include('templates/mapRoute',
             { route: 31, region: 7
-            , width: 10, height: 2
-            , x: 46, y: 39, name: "WHS"
+            , width: 7, height: 2
+            , x: 49, y: 39, name: "WHS"
             })
         %>
 
@@ -925,8 +971,8 @@
         <!--Route 10 extension-->
         <%- include('templates/mapRoute',
             { route: 32, region: 7
-            , width: 2, height: 6
-            , x: 49, y: 26, name: "10"
+            , width: 2, height: 2.5
+            , x: 49, y: 29.5, name: "10"
             , noText: true
             })
         %>
@@ -1052,17 +1098,8 @@
         <!--Glimwood Tangle-->
         <%- include('templates/mapDungeon',
             { name: "Glimwood Tangle"
-            , x: 25, y: 38
-            , width: 6, height: 6
-            })
-        %>
-
-        <!--Glimwood Tangle extension-->
-        <%- include('templates/mapDungeon',
-            { name: "Glimwood Tangle"
-            , x: 27, y: 37
-            , width: 4, height: 1
-            , isExtension: true
+            , x: 25, y: 37
+            , width: 6, height: 7
             })
         %>
 
@@ -1087,16 +1124,16 @@
         <!--Rose Tower-->
         <%- include('templates/mapDungeon',
             { name: "Rose Tower"
-            , x: 48, y: 13
-            , width: 3, height: 4
+            , x: 48, y: 11
+            , width: 4, height: 3
             })
         %>
 
         <!--Rose Tower extension-->
         <%- include('templates/mapDungeon',
             { name: "Rose Tower"
-            , x: 48, y: 2
-            , width: 3, height: 11
+            , x: 49, y: 14
+            , width: 2, height: 0.5
             , isExtension: true
             })
         %>
@@ -1104,8 +1141,8 @@
         <!--Rose Tower extension-->
         <%- include('templates/mapDungeon',
             { name: "Rose Tower"
-            , x: 45, y: 2.5
-            , width: 3, height: 14
+            , x: 49, y: 9
+            , width: 2, height: 2
             , isExtension: true
             })
         %>
@@ -1113,8 +1150,8 @@
         <!--Rose Tower extension-->
         <%- include('templates/mapDungeon',
             { name: "Rose Tower"
-            , x: 51, y: 2.5
-            , width: 3, height: 14
+            , x: 48.5, y: 6
+            , width: 3, height: 3
             , isExtension: true
             })
         %>
@@ -1139,6 +1176,14 @@
             })
         %>
 
+        <%- include('templates/mapPOI',
+           { name: "Underground Entrance"
+           , x: 37, y: 51
+           , width: 3, height: 4
+           , databind: "click:function(){App.game.underground.openUndergroundModal()}, attr: { class: App.game.underground.canAccess() ? 'completed' : 'locked' }"
+           })
+        %>
+
         <%- include('templates/mapOverlay',
             { name: "Pokémon Trainer Hop"
             , x: 36, y: 49
@@ -1148,6 +1193,16 @@
             , image: "assets/images/map/hop.png"
             })
          %>
+
+         <%- include('templates/mapOverlay',
+             { name: "Pokémon Trainer Bede"
+             , x: 25, y: 43
+             , width: 4, height: 4
+             , databind: "click: () => TemporaryBattleList['Bede3'].protectedOnclick()"
+             , visible:  "TemporaryBattleList['Bede3'] && TemporaryBattleList['Bede3'].isVisible()"
+             , image: "assets/images/map/bede.png"
+             })
+          %>
 
          <%- include('templates/mapOverlay',
              { name: "Pokémon Trainer Hop"
@@ -1171,7 +1226,7 @@
 
            <%- include('templates/mapOverlay',
                { name: "Pokémon Trainer Marnie"
-               , x: 69, y: 54
+               , x: 71, y: 56
                , width: 4, height: 4
                , databind: "click: () => TemporaryBattleList['Marnie2'].protectedOnclick()"
                , visible:  "TemporaryBattleList['Marnie2'] && TemporaryBattleList['Marnie2'].isVisible()"
@@ -1193,7 +1248,7 @@
         <%- include('templates/mapRoute',
             { route: 33, region: 7
             , width: 9, height: 3
-            , x: 52, y: 45, name: "FoO"
+            , x: 52, y: 45, name: "FoH"
             })
         %>
 
@@ -1201,7 +1256,7 @@
         <%- include('templates/mapRoute',
             { route: 33, region: 7
             , width: 1, height: 1
-            , x: 62, y: 42, name: "FoO"
+            , x: 62, y: 42, name: "FoH"
             , noText: true
             })
         %>
@@ -1209,35 +1264,8 @@
         <!--Fields of Honour extension-->
         <%- include('templates/mapRoute',
             { route: 33, region: 7
-            , width: 11, height: 2
-            , x: 52, y: 43, name: "FoO"
-            , noText: true
-            })
-        %>
-
-        <!--Fields of Honour extension-->
-        <%- include('templates/mapRoute',
-            { route: 33, region: 7
-            , width: 5, height: 1
-            , x: 52, y: 42, name: "FoO"
-            , noText: true
-            })
-        %>
-
-        <!--Fields of Honour extension-->
-        <%- include('templates/mapRoute',
-            { route: 33, region: 7
-            , width: 12, height: 1
-            , x: 49, y: 48, name: "FoO"
-            , noText: true
-            })
-        %>
-
-        <!--Fields of Honour extension-->
-        <%- include('templates/mapRoute',
-            { route: 33, region: 7
-            , width: 12, height: 1
-            , x: 48, y: 49, name: "FoO"
+            , width: 9, height: 2
+            , x: 54, y: 43, name: "FoH"
             , noText: true
             })
         %>
@@ -1246,7 +1274,34 @@
         <%- include('templates/mapRoute',
             { route: 33, region: 7
             , width: 3, height: 1
-            , x: 48, y: 50, name: "FoO"
+            , x: 54, y: 42, name: "FoH"
+            , noText: true
+            })
+        %>
+
+        <!--Fields of Honour extension-->
+        <%- include('templates/mapRoute',
+            { route: 33, region: 7
+            , width: 12, height: 1
+            , x: 49, y: 48, name: "FoH"
+            , noText: true
+            })
+        %>
+
+        <!--Fields of Honour extension-->
+        <%- include('templates/mapRoute',
+            { route: 33, region: 7
+            , width: 12, height: 1
+            , x: 48, y: 49, name: "FoH"
+            , noText: true
+            })
+        %>
+
+        <!--Fields of Honour extension-->
+        <%- include('templates/mapRoute',
+            { route: 33, region: 7
+            , width: 3, height: 1
+            , x: 48, y: 50, name: "FoH"
             , noText: true
             })
         %>
@@ -1255,7 +1310,16 @@
         <%- include('templates/mapRoute',
             { route: 33, region: 7
             , width: 4, height: 2
-            , x: 46, y: 51, name: "FoO"
+            , x: 46, y: 51, name: "FoH"
+            , noText: true
+            })
+        %>
+
+        <!--Fields of Honour extension-->
+        <%- include('templates/mapRoute',
+            { route: 33, region: 7
+            , width: 2, height: 1
+            , x: 52, y: 44, name: "FoH"
             , noText: true
             })
         %>
@@ -1374,6 +1438,15 @@
             })
         %>
 
+        <!--Challenge Beach extension-->
+        <%- include('templates/mapRoute',
+            { route: 36, region: 7
+            , width: 1, height: 1
+            , x: 36, y: 28, name: "CB"
+            , noText: true
+            })
+        %>
+
         <!--Loop Lagoon-->
         <%- include('templates/mapRoute',
             { route: 37, region: 7
@@ -1446,24 +1519,15 @@
         <!--Challenge Road-->
         <%- include('templates/mapRoute',
             { route: 40, region: 7
-            , width: 4, height: 1
-            , x: 63, y: 18, name: "CR"
+            , width: 2, height: 8
+            , x: 64, y: 16, name: "CR"
             })
         %>
 
         <!--Challenge Road extension-->
         <%- include('templates/mapRoute',
             { route: 40, region: 7
-            , width: 2, height: 1
-            , x: 64, y: 17, name: "CR"
-            , noText: true
-            })
-        %>
-
-        <!--Challenge Road extension-->
-        <%- include('templates/mapRoute',
-            { route: 40, region: 7
-            , width: 4, height: 1
+            , width: 1, height: 1
             , x: 63, y: 16, name: "CR"
             , noText: true
             })
@@ -1472,8 +1536,8 @@
         <!--Challenge Road extension-->
         <%- include('templates/mapRoute',
             { route: 40, region: 7
-            , width: 2, height: 1
-            , x: 64, y: 19, name: "CR"
+            , width: 1, height: 1
+            , x: 66, y: 16, name: "CR"
             , noText: true
             })
         %>
@@ -1481,7 +1545,25 @@
         <!--Challenge Road extension-->
         <%- include('templates/mapRoute',
             { route: 40, region: 7
-            , width: 4, height: 1
+            , width: 1, height: 1
+            , x: 63, y: 18, name: "CR"
+            , noText: true
+            })
+        %>
+
+        <!--Challenge Road extension-->
+        <%- include('templates/mapRoute',
+            { route: 40, region: 7
+            , width: 1, height: 1
+            , x: 66, y: 18, name: "CR"
+            , noText: true
+            })
+        %>
+
+        <!--Challenge Road extension-->
+        <%- include('templates/mapRoute',
+            { route: 40, region: 7
+            , width: 1, height: 1
             , x: 63, y: 20, name: "CR"
             , noText: true
             })
@@ -1490,8 +1572,8 @@
         <!--Challenge Road extension-->
         <%- include('templates/mapRoute',
             { route: 40, region: 7
-            , width: 2, height: 3
-            , x: 64, y: 21, name: "CR"
+            , width: 1, height: 1
+            , x: 66, y: 20, name: "CR"
             , noText: true
             })
         %>
@@ -1516,7 +1598,7 @@
         <!--Workout Sea extension-->
         <%- include('templates/mapRoute',
             { route: 41, region: 7
-            , width: 11, height: 1
+            , width: 10, height: 1
             , x: 69, y: 23, name: "WS"
             , noText: true
             })
@@ -2035,7 +2117,7 @@
         <!--Honeycalm Sea extension-->
         <%- include('templates/mapRoute',
             { route: 44, region: 7
-            , width: 10, height: 3.5
+            , width: 10, height: 3
             , x: 36, y: 20, name: "HS"
             , noText: true
             })
@@ -2044,8 +2126,8 @@
         <!--Honeycalm Sea extension-->
         <%- include('templates/mapRoute',
             { route: 44, region: 7
-            , width: 6, height: 1.5
-            , x: 40, y: 23.5, name: "HS"
+            , width: 5, height: 2
+            , x: 41, y: 23, name: "HS"
             , noText: true
             })
         %>
@@ -2053,8 +2135,17 @@
         <!--Honeycalm Sea extension-->
         <%- include('templates/mapRoute',
             { route: 44, region: 7
-            , width: 3, height: 3
-            , x: 40, y: 25, name: "HS"
+            , width: 2, height: 3
+            , x: 41, y: 25, name: "HS"
+            , noText: true
+            })
+        %>
+
+        <!--Honeycalm Sea extension-->
+        <%- include('templates/mapRoute',
+            { route: 44, region: 7
+            , width: 1, height: 5
+            , x: 36, y: 23, name: "HS"
             , noText: true
             })
         %>
@@ -2105,17 +2196,17 @@
             })
         %>
 
-        <!--Master Dojo Battlefield-->
+        <!--Master Dojo Battle Court-->
         <%- include('templates/mapTown',
-            { name: "Master Dojo Battlefield"
+            { name: "Master Dojo Battle Court"
             , x: 59, y: 36
             , width: 3, height: 2.67
             })
         %>
 
-        <!--Master Dojo Battlefield extension-->
+        <!--Master Dojo Battle Court extension-->
         <%- include('templates/mapTown',
-            { name: "Master Dojo Battlefield"
+            { name: "Master Dojo Battle Court"
             , x: 62, y: 36
             , width: 1, height: 3
             , isExtension: true
@@ -2152,53 +2243,62 @@
             })
         %>
 
-        <!--Brawlers Cave-->
+        <!--Courageous Cavern extension-->
         <%- include('templates/mapDungeon',
-            { name: "Brawlers Cave"
+            { name: "Courageous Cavern"
+            , x: 52, y: 42
+            , width: 2, height: 2
+            , isExtension: true
+            })
+        %>
+
+        <!--Brawlers' Cave-->
+        <%- include('templates/mapDungeon',
+            { name: "Brawlers' Cave"
             , x: 59, y: 26
             , width: 7, height: 3
             })
         %>
 
-        <!--Brawlers Cave extension-->
+        <!--Brawlers' Cave extension-->
         <%- include('templates/mapDungeon',
-            { name: "Brawlers Cave"
+            { name: "Brawlers' Cave"
             , x: 59, y: 24
             , width: 8, height: 1
             , isExtension: true
             })
         %>
 
-        <!--Brawlers Cave extension-->
+        <!--Brawlers' Cave extension-->
         <%- include('templates/mapDungeon',
-            { name: "Brawlers Cave"
+            { name: "Brawlers' Cave"
             , x: 59, y: 25
             , width: 9, height: 1
             , isExtension: true
             })
         %>
 
-        <!--Brawlers Cave extension-->
+        <!--Brawlers' Cave extension-->
         <%- include('templates/mapDungeon',
-            { name: "Brawlers Cave"
+            { name: "Brawlers' Cave"
             , x: 59, y: 23
             , width: 1, height: 1
             , isExtension: true
             })
         %>
 
-        <!--Brawlers Cave extension-->
+        <!--Brawlers' Cave extension-->
         <%- include('templates/mapDungeon',
-            { name: "Brawlers Cave"
+            { name: "Brawlers' Cave"
             , x: 59, y: 29
             , width: 4, height: 1
             , isExtension: true
             })
         %>
 
-        <!--Brawlers Cave extension-->
+        <!--Brawlers' Cave extension-->
         <%- include('templates/mapDungeon',
-            { name: "Brawlers Cave"
+            { name: "Brawlers' Cave"
             , x: 56, y: 30
             , width: 7, height: 3
             , isExtension: true
@@ -2216,16 +2316,16 @@
         <!--Tower of Darkness-->
         <%- include('templates/mapDungeon',
             { name: "Tower of Darkness"
-            , x: 63, y: 10.5
-            , width: 4, height: 5.5
+            , x: 63, y: 10
+            , width: 4, height: 6
             })
         %>
 
         <!--Tower of Waters-->
         <%- include('templates/mapDungeon',
             { name: "Tower of Waters"
-            , x: 36, y: 23.5
-            , width: 4, height: 5.5
+            , x: 37, y: 23
+            , width: 4, height: 6
             })
         %>
 
@@ -2279,6 +2379,46 @@
                , image: "assets/images/map/avery.png"
                })
             %>
+
+            <%- include('templates/mapOverlay',
+               { name: "Ash Ketchum"
+               , x: 56, y: 43
+               , width: 4, height: 4
+               , databind: "click: () => TemporaryBattleList['Ash Ketchum Galar'].protectedOnclick()"
+               , visible:  "TemporaryBattleList['Ash Ketchum Galar'] && TemporaryBattleList['Ash Ketchum Galar'].isVisible()"
+               , image: "assets/images/map/ashketchumoverworld.png"
+               })
+            %>
+
+            <%- include('templates/mapOverlay',
+                { name: "Galarian Moltres"
+                , x: 40, y: 43
+                , width: 4, height: 3
+                , databind: "click: () => TemporaryBattleList['Galarian Moltres 1'].protectedOnclick(), attr: { class: TemporaryBattleList['Galarian Moltres 1'].isUnlocked() ? '' : 'locked' }"
+                , visible:  "TemporaryBattleList['Galarian Moltres 1'] && TemporaryBattleList['Galarian Moltres 1'].isVisible()"
+                , image: "assets/images/map/galarianmoltres.png"
+                })
+             %>
+
+             <%- include('templates/mapOverlay',
+                 { name: "Galarian Moltres"
+                 , x: 71.5, y: 38
+                 , width: 4, height: 3
+                 , databind: "click: () => TemporaryBattleList['Galarian Moltres 2'].protectedOnclick(), attr: { class: TemporaryBattleList['Galarian Moltres 2'].isUnlocked() ? '' : 'locked' }"
+                 , visible:  "TemporaryBattleList['Galarian Moltres 2'] && TemporaryBattleList['Galarian Moltres 2'].isVisible()"
+                 , image: "assets/images/map/galarianmoltres.png"
+                 })
+              %>
+
+              <%- include('templates/mapOverlay',
+                  { name: "Galarian Moltres"
+                  , x: 52, y: 35
+                  , width: 4, height: 3
+                  , databind: "click: () => TemporaryBattleList['Galarian Moltres 3'].protectedOnclick(), attr: { class: TemporaryBattleList['Galarian Moltres 3'].isUnlocked() ? '' : 'locked' }"
+                  , visible:  "TemporaryBattleList['Galarian Moltres 3'] && TemporaryBattleList['Galarian Moltres 3'].isVisible()"
+                  , image: "assets/images/map/galarianmoltres.png"
+                  })
+               %>
     </g>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'Crown Tundra').id">
         <image width="1600" height="960" data-bind="attr: {
@@ -2351,7 +2491,7 @@
             })
         %>
 
-        <!--Giants Bed-->
+        <!--Giant's Bed-->
         <%- include('templates/mapRoute',
             { route: 48, region: 7
             , width: 27, height: 8
@@ -2359,7 +2499,7 @@
             })
         %>
 
-        <!--Giants Bed extension-->
+        <!--Giant's Bed extension-->
         <%- include('templates/mapRoute',
             { route: 48, region: 7
             , width: 26, height: 2
@@ -2368,7 +2508,7 @@
             })
         %>
 
-        <!--Giants Bed extension-->
+        <!--Giant's Bed extension-->
         <%- include('templates/mapRoute',
             { route: 48, region: 7
             , width: 7, height: 6
@@ -2377,7 +2517,7 @@
             })
         %>
 
-        <!--Giants Bed extension-->
+        <!--Giant's Bed extension-->
         <%- include('templates/mapRoute',
             { route: 48, region: 7
             , width: 7, height: 3
@@ -2386,7 +2526,7 @@
             })
         %>
 
-        <!--Giants Bed extension-->
+        <!--Giant's Bed extension-->
         <%- include('templates/mapRoute',
             { route: 48, region: 7
             , width: 6, height: 1
@@ -2395,7 +2535,7 @@
             })
         %>
 
-        <!--Giants Bed extension-->
+        <!--Giant's Bed extension-->
         <%- include('templates/mapRoute',
             { route: 48, region: 7
             , width: 15, height: 3
@@ -2404,7 +2544,7 @@
             })
         %>
 
-        <!--Giants Bed extension-->
+        <!--Giant's Bed extension-->
         <%- include('templates/mapRoute',
             { route: 48, region: 7
             , width: 14, height: 1
@@ -2413,7 +2553,7 @@
             })
         %>
 
-        <!--Giants Bed extension-->
+        <!--Giant's Bed extension-->
         <%- include('templates/mapRoute',
             { route: 48, region: 7
             , width: 8, height: 1
@@ -2422,7 +2562,7 @@
             })
         %>
 
-        <!--Giants Bed extension-->
+        <!--Giant's Bed extension-->
         <%- include('templates/mapRoute',
             { route: 48, region: 7
             , width: 21, height: 2
@@ -2439,7 +2579,7 @@
             })
         %>
 
-        <!--Giants Foot-->
+        <!--Giant's Foot-->
         <%- include('templates/mapRoute',
             { route: 50, region: 7
             , width: 9, height: 8
@@ -2935,6 +3075,64 @@
             , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Crown Tundra Station') }"
             })
         %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Dyna Tree Birds"
+            , x: 46, y: 55
+            , width: 4, height: 3
+            , databind: "click: () => TemporaryBattleList['Dyna Tree Birds'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Dyna Tree Birds'] && TemporaryBattleList['Dyna Tree Birds'].isVisible()"
+            , image: "assets/images/map/galarianmoltres.png"
+            })
+         %>
+         <%- include('templates/mapOverlay',
+             { name: "Dyna Tree Birds"
+             , x: 50, y: 55
+             , width: 4, height: 3
+             , databind: "click: () => TemporaryBattleList['Dyna Tree Birds'].protectedOnclick()"
+             , visible:  "TemporaryBattleList['Dyna Tree Birds'] && TemporaryBattleList['Dyna Tree Birds'].isVisible()"
+             , image: "assets/images/map/galarianarticuno.png"
+             })
+          %>
+         <%- include('templates/mapOverlay',
+             { name: "Dyna Tree Birds"
+             , x: 48, y: 52
+             , width: 4, height: 3
+             , databind: "click: () => TemporaryBattleList['Dyna Tree Birds'].protectedOnclick()"
+             , visible:  "TemporaryBattleList['Dyna Tree Birds'] && TemporaryBattleList['Dyna Tree Birds'].isVisible()"
+             , image: "assets/images/map/galarianzapdos.png"
+             })
+          %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Galarian Articuno"
+            , x: 61.5, y: 16
+            , width: 4, height: 3
+            , databind: "click: () => TemporaryBattleList['Galarian Articuno 1'].protectedOnclick(), attr: { class: TemporaryBattleList['Galarian Articuno 1'].isUnlocked() ? '' : 'locked' }"
+            , visible:  "TemporaryBattleList['Galarian Articuno 1'] && TemporaryBattleList['Galarian Articuno 1'].isVisible()"
+            , image: "assets/images/map/galarianarticuno.png"
+            })
+         %>
+
+         <%- include('templates/mapOverlay',
+             { name: "Galarian Articuno"
+             , x: 79, y: 20
+             , width: 4, height: 3
+             , databind: "click: () => TemporaryBattleList['Galarian Articuno 2'].protectedOnclick(), attr: { class: TemporaryBattleList['Galarian Articuno 2'].isUnlocked() ? '' : 'locked' }"
+             , visible:  "TemporaryBattleList['Galarian Articuno 2'] && TemporaryBattleList['Galarian Articuno 2'].isVisible()"
+             , image: "assets/images/map/galarianarticuno.png"
+             })
+          %>
+
+          <%- include('templates/mapOverlay',
+              { name: "Galarian Articuno"
+              , x: 47, y: 3
+              , width: 4, height: 3
+              , databind: "click: () => TemporaryBattleList['Galarian Articuno 3'].protectedOnclick(), attr: { class: TemporaryBattleList['Galarian Articuno 3'].isUnlocked() ? '' : 'locked' }"
+              , visible:  "TemporaryBattleList['Galarian Articuno 3'] && TemporaryBattleList['Galarian Articuno 3'].isVisible()"
+              , image: "assets/images/map/galarianarticuno.png"
+              })
+           %>
 
         <%- include('templates/mapOverlay',
             { name: "Regigigas"

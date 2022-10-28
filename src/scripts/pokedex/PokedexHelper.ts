@@ -148,6 +148,11 @@ class PokedexHelper {
                 return false;
             }
 
+            // Only pokemon uninfected by pokerus || None
+            if (filter['status-pokerus'] != -1 && filter['status-pokerus'] != App.game.party.getPokemon(pokemon.id)?.pokerus) {
+                return false;
+            }
+
             return true;
         });
     }
@@ -159,27 +164,21 @@ class PokedexHelper {
         res.type2 = $('#pokedex-filter-type2').val();
         res.region = $('#pokedex-filter-region').val();
         res['caught-shiny'] = $('#pokedex-filter-shiny-caught').val();
+        res['status-pokerus'] = $('#pokedex-filter-pokerus-status').val();
         res['held-item'] = $('#pokedex-filter-held-item').is(':checked');
         res['hide-alternate'] = $('#pokedex-filter-hide-alternate').is(':checked');
         return res;
     }
 
-    public static getImage(id: number) {
-        let src = 'assets/images/';
-        if (App.game.party.alreadyCaughtPokemon(id, true) && !this.hideShinyImages()) {
-            src += 'shiny';
-        }
-        src += `pokemon/${id}.png`;
-        return src;
-    }
-
-    public static getImageStatistics(id: number) {
-        let src = 'assets/images/';
-        if (App.game.party.alreadyCaughtPokemon(id, true) && this.toggleStatisticShiny()) {
-            src += 'shiny';
-        }
-        src += `pokemon/${id}.png`;
-        return src;
+    // Gender ratio
+    public static getGenderRatioData(pokemon) {
+        const genderType = pokemon.gender.type;
+        const genderRatio = pokemon.gender.femaleRatio;
+        const genderObject = {'male': 0, 'female': 0};
+        // console.log(pokemon);
+        genderObject.male = 100 - (100 * genderRatio);
+        genderObject.female = 100 * genderRatio;
+        return genderObject;
     }
 
     private static isPureType(pokemon: PokemonListData, type: (PokemonType | null)): boolean {

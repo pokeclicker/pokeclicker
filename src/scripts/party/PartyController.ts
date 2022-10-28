@@ -65,17 +65,16 @@ class PartyController {
     }).extend({ rateLimit: 500 });
 
     private static hatcherySortedList = [];
-    static getHatcherySortedList = (region = -1) => {
-        return ko.pureComputed(() => {
-            // If the breeding modal is open, we should sort it.
-            if (modalUtils.observableState.breedingModal === 'show') {
-                PartyController.hatcherySortedList = [...App.game.party.caughtPokemon];
-                return PartyController.hatcherySortedList.sort(PartyController.compareBy(Settings.getSetting('hatcherySort').observableValue(), Settings.getSetting('hatcherySortDirection').observableValue(), region));
-            }
-            return PartyController.hatcherySortedList;
-        }).extend({ rateLimit: 500 });
-    };
-
+    static getHatcherySortedList = ko.pureComputed(() => {
+        // If the breeding modal is open, we should sort it.
+        if (modalUtils.observableState.breedingModal === 'show') {
+            // Don't adjust attack based on region if debuff is disabled
+            const region = App.game.challenges.list.regionalAttackDebuff.active() ? BreedingController.regionalAttackDebuff() : -1;
+            PartyController.hatcherySortedList = [...App.game.party.caughtPokemon];
+            return PartyController.hatcherySortedList.sort(PartyController.compareBy(Settings.getSetting('hatcherySort').observableValue(), Settings.getSetting('hatcherySortDirection').observableValue(), region));
+        }
+        return PartyController.hatcherySortedList;
+    }).extend({ rateLimit: 500 });
 
     private static proteinSortedList = [];
     static getProteinSortedList = ko.pureComputed(() => {
@@ -86,6 +85,27 @@ class PartyController {
         }
         return PartyController.proteinSortedList;
     }).extend({ rateLimit: 500 });
+
+    private static heldItemSortedList = [];
+    static getHeldItemSortedList = ko.pureComputed(() => {
+        // If the held item modal is open, we should sort it.
+        if (modalUtils.observableState.heldItemModal === 'show') {
+            PartyController.heldItemSortedList = [...App.game.party.caughtPokemon];
+            return PartyController.heldItemSortedList.sort(PartyController.compareBy(Settings.getSetting('heldItemSort').observableValue(), Settings.getSetting('heldItemSortDirection').observableValue()));
+        }
+        return PartyController.heldItemSortedList;
+    }).extend({ rateLimit: 500 });
+
+    private static pokemonsWithHeldItemSortedList = [];
+    static getPokemonsWithHeldItemSortedList = ko.pureComputed(() => {
+        // If the held item modal is open, we should sort it.
+        if (modalUtils.observableState.heldItemModal === 'show') {
+            PartyController.pokemonsWithHeldItemSortedList = [...App.game.party.caughtPokemon.filter(p => p.heldItem())];
+            return PartyController.pokemonsWithHeldItemSortedList.sort(PartyController.compareBy(Settings.getSetting('heldItemSort').observableValue(), Settings.getSetting('heldItemSortDirection').observableValue()));
+        }
+        return PartyController.pokemonsWithHeldItemSortedList;
+    }).extend({ rateLimit: 500 });
+
 
     public static calculateRegionalMultiplier(pokemon: PartyPokemon, region: number): number {
         if (region > -1 && PokemonHelper.calcNativeRegion(pokemon.name) !== region) {

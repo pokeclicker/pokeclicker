@@ -42,7 +42,8 @@ class Game {
         public challenges: Challenges,
         public battleFrontier: BattleFrontier,
         public multiplier: Multiplier,
-        public saveReminder: SaveReminder
+        public saveReminder: SaveReminder,
+        public battleCafe: BattleCafeSaveObject
     ) {
         this._gameState = ko.observable(GameConstants.GameState.paused);
     }
@@ -86,10 +87,9 @@ class Game {
         if (player.starter() != GameConstants.Starter.None) {
             Battle.generateNewEnemy();
         } else {
-            const battlePokemon = new BattlePokemon('MissingNo.', 0, PokemonType.None, PokemonType.None, 0, 0, 0, 0, new Amount(0, GameConstants.Currency.money), false);
+            const battlePokemon = new BattlePokemon('MissingNo.', 0, PokemonType.None, PokemonType.None, 0, 0, 0, 0, new Amount(0, GameConstants.Currency.money), false, 0, GameConstants.BattlePokemonGender.NoGender);
             Battle.enemyPokemon(battlePokemon);
         }
-        this.farming.resetAuras();
         //Safari.load();
         Underground.energyTick(this.underground.getEnergyRegenTime());
         AchievementHandler.calculateMaxBonus(); //recalculate bonus based on active challenges
@@ -218,9 +218,13 @@ class Game {
         // Check for breeding pokemons not in queue
         const breeding = [...App.game.breeding.eggList.map((l) => l().pokemon), ...App.game.breeding.queueList()];
         App.game.party._caughtPokemon().filter((p) => p.breeding).forEach((p) => {
-            if (!breeding.includes(p.name)) {
+            if (!breeding.includes(p.id)) {
                 p.breeding = false;
             }
+        });
+        // Egg partyPokemon requires App.game.party and cannot be set until after loading is complete
+        App.game.breeding.eggList.filter(e => e().pokemon).forEach(e => {
+            e().setPartyPokemon();
         });
     }
 
@@ -386,6 +390,9 @@ class Game {
                         timeout: 3e4,
                     });
                 }
+                // Give the players more Battle Cafe spins
+                BattleCafeController.spinsLeft(BattleCafeController.spinsPerDay());
+
                 DayOfWeekRequirement.date(now.getDay());
             }
 

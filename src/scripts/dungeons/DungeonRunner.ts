@@ -10,6 +10,7 @@ class DungeonRunner {
     public static fighting: KnockoutObservable<boolean> = ko.observable(false);
     public static map: DungeonMap;
     public static chestsOpened: KnockoutObservable<number> = ko.observable(0);
+    private static chestsOpenedPerFloor: number[];
     public static currentTileType;
     public static encountersWon: KnockoutObservable<number> = ko.observable(0);
     public static fightingBoss: KnockoutObservable<boolean> = ko.observable(false);
@@ -40,7 +41,7 @@ class DungeonRunner {
 
         DungeonRunner.timeLeftPercentage(100);
         // Dungeon size increases with each region
-        let dungeonSize = GameConstants.BASE_DUNGEON_SIZE + player.region;
+        let dungeonSize = GameConstants.BASE_DUNGEON_SIZE + (dungeon.optionalParameters.dungeonRegionalDifficulty ?? player.region);
         // Decrease dungeon size by 1 for every 10, 100, 1000 etc completes
         dungeonSize -= Math.max(0, App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]().toString().length - 1);
         const flash = App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]() >= 200;
@@ -49,6 +50,7 @@ class DungeonRunner {
 
         DungeonRunner.chestsOpened(0);
         DungeonRunner.encountersWon(0);
+        DungeonRunner.chestsOpenedPerFloor = new Array<number>(DungeonRunner.map.board().length).fill(0);
         DungeonRunner.currentTileType = ko.pureComputed(() => {
             return DungeonRunner.map.currentTile().type;
         });
@@ -101,6 +103,8 @@ class DungeonRunner {
             DungeonRunner.openChest();
         } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.boss && !DungeonRunner.fightingBoss()) {
             DungeonRunner.startBossFight();
+        } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.ladder) {
+            DungeonRunner.nextFloor();
         }
     }
 
@@ -110,10 +114,18 @@ class DungeonRunner {
         }
 
         GameHelper.incrementObservable(DungeonRunner.chestsOpened);
+        DungeonRunner.chestsOpenedPerFloor[DungeonRunner.map.playerPosition().floor]++;
 
         const clears = App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]();
-        const tier = DungeonRunner.dungeon.getRandomLootTier(clears, player.highestRegion());
-        const loot = DungeonRunner.dungeon.getRandomLoot(tier);
+        const debuffed = (DungeonRunner.dungeon.optionalParameters?.dungeonRegionalDifficulty ?? GameConstants.getDungeonRegion(DungeonRunner.dungeon.name)) < player.highestRegion() - 2;
+        // Ignores debuff on first attempt to get loot that ignores debuff.
+        let tier = DungeonRunner.dungeon.getRandomLootTier(clears);
+        let loot = DungeonRunner.dungeon.getRandomLoot(tier);
+        if (!loot.ignoreDebuff && debuffed) {
+            tier = DungeonRunner.dungeon.getRandomLootTier(clears, debuffed);
+            loot = DungeonRunner.dungeon.getRandomLoot(tier, true);
+        }
+
         let amount = loot.amount || 1;
 
         const tierWeight = {
@@ -129,7 +141,7 @@ class DungeonRunner {
             const magnetChance = 0.5 / (4 / (tierWeight + 1));
             if (Rand.chance(magnetChance)) {
                 // Gain more items in higher regions
-                amount += Math.max(1, Math.round(Math.max(tierWeight,2) / 8 * (GameConstants.getDungeonRegion(DungeonRunner.dungeon.name) + 1)));
+                amount += Math.max(1, Math.round(Math.max(tierWeight, 2) / 8 * (GameConstants.getDungeonRegion(DungeonRunner.dungeon.name) + 1)));
             }
         }
 
@@ -137,10 +149,10 @@ class DungeonRunner {
 
         DungeonRunner.map.currentTile().type(GameConstants.DungeonTile.empty);
         DungeonRunner.map.currentTile().calculateCssClass();
-        if (DungeonRunner.chestsOpened() == Math.floor(DungeonRunner.map.size / 3)) {
+        if (DungeonRunner.chestsOpenedPerFloor[DungeonRunner.map.playerPosition().floor] == Math.floor(DungeonRunner.map.floorSizes[DungeonRunner.map.playerPosition().floor] / 3)) {
             DungeonRunner.map.showChestTiles();
         }
-        if (DungeonRunner.chestsOpened() == Math.ceil(DungeonRunner.map.size / 2)) {
+        if (DungeonRunner.chestsOpenedPerFloor[DungeonRunner.map.playerPosition().floor] == Math.ceil(DungeonRunner.map.floorSizes[DungeonRunner.map.playerPosition().floor] / 2)) {
             DungeonRunner.map.showAllTiles();
         }
     }
@@ -179,7 +191,7 @@ class DungeonRunner {
         let setting = NotificationConstants.NotificationSetting.Dungeons.common_dungeon_item_found;
 
         if (typeof BerryType[input] == 'number') {
-            const berryPlural = (amount < 2) ? 'Berry' : 'Berries';
+            const berryPlural = (amount === 1) ? 'Berry' : 'Berries';
             message = `Found ${Math.floor(amount)} × <img src="${image}" height="24px"/> ${GameConstants.humanifyString(input)} ${berryPlural} in a dungeon chest.`;
         } if (ItemList[input] instanceof PokeballItem) {
             message = `Found ${amount} × <img src="${image}" height ="24px"/> ${ItemList[input].displayName}${multiple} in a dungeon chest.`;
@@ -210,6 +222,17 @@ class DungeonRunner {
 
         DungeonRunner.fightingBoss(true);
         DungeonBattle.generateNewBoss();
+    }
+
+    public static nextFloor() {
+        DungeonRunner.map.moveToCoordinates(
+            Math.floor(DungeonRunner.map.floorSizes[DungeonRunner.map.playerPosition().floor + 1] / 2),
+            DungeonRunner.map.floorSizes[DungeonRunner.map.playerPosition().floor + 1] - 1,
+            DungeonRunner.map.playerPosition().floor + 1
+        );
+        DungeonRunner.map.playerPosition.notifySubscribers();
+        DungeonRunner.timeLeft(DungeonRunner.timeLeft() + GameConstants.DUNGEON_LADDER_BONUS);
+        DungeonRunner.map.playerMoved(false);
     }
 
     public static async dungeonLeave(shouldConfirm = Settings.getSetting('confirmLeaveDungeon').observableValue()): Promise<void> {

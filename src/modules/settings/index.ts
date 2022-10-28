@@ -13,10 +13,13 @@ import {
     AchievementType,
     HOUR,
     DAY,
+    ExtraAchievementCategories,
+    camelCaseToString,
 } from '../GameConstants';
 import HotkeySetting from './HotkeySetting';
 import BreedingFilters from './BreedingFilters';
-import ProteinFilters from './ProteinFilters';
+import GameHelper from '../GameHelper';
+import PokemonType from '../enums/PokemonType';
 
 export default Settings;
 
@@ -69,6 +72,7 @@ Settings.add(new BooleanSetting('resetShopAmountOnPurchase', 'Reset buy quantity
 Settings.add(new BooleanSetting('showCurrencyGainedAnimation', 'Show currency gained animation', true));
 Settings.add(new BooleanSetting('showCurrencyLostAnimation', 'Show currency lost animation', true));
 Settings.add(new BooleanSetting('hideChallengeRelatedModules', 'Hide challenge related modules', false));
+Settings.add(new BooleanSetting('disableRightClickMenu', 'Disable the right click menu', true));
 Settings.add(new Setting<string>('backgroundImage', 'Background image',
     [
         new SettingOption('Day', 'background-day'),
@@ -90,6 +94,7 @@ Settings.add(new Setting<string>('hideHatchery', 'Hide Hatchery Modal',
         new SettingOption('Queue Slots Full', 'queue'),
     ],
     'queue'));
+Settings.add(new BooleanSetting('hideQuestsOnFull', 'Hide Quest Menu on full questslots', true));
 Settings.add(new Setting<string>('farmDisplay', 'Farm timer display',
     [
         new SettingOption('To Next Stage', 'nextStage'),
@@ -139,6 +144,7 @@ Settings.add(new Setting<string>('saveReminder', 'Save reminder interval (in gam
         new SettingOption('7 Days', (7 * DAY).toString()),
     ],
     (12 * HOUR).toString()));
+Settings.add(new Setting('breedingQueueSizeSetting', 'Breeding Queue Size', [], '-1'));
 
 // Sound settings
 Object.values(NotificationConstants.NotificationSound).forEach((soundGroup) => {
@@ -184,16 +190,16 @@ Settings.add(new Setting<number>('proteinSort', 'Sort', proteinSortSettings, Sor
 Settings.add(new BooleanSetting('proteinSortDirection', 'reverse', false));
 Settings.add(new BooleanSetting('proteinHideMaxedPokemon', 'Hide Pokémon with max protein', false));
 Settings.add(new BooleanSetting('proteinHideShinyPokemon', 'Hide shiny Pokémon', false));
+Settings.add(new Setting<string>('proteinSearchFilter', 'Search', [], ''));
+Settings.add(new Setting<number>('proteinRegionFilter', 'Region', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(Region)], -2));
+Settings.add(new Setting<number>('proteinTypeFilter', 'Type', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None')], -2));
 
-// Protein filters
-Object.keys(ProteinFilters).forEach((key) => {
-    // One-off because search isn't stored in settings
-    if (key === 'search') {
-        return;
-    }
-    const filter = ProteinFilters[key];
-    Settings.add(new Setting<string>(filter.optionName, filter.displayName, filter.options || [], filter.value().toString()));
-});
+// Held Item Sorting
+const heldItemSortSettings = Object.keys(SortOptionConfigs).map((opt) => (
+    new SettingOption<number>(SortOptionConfigs[opt].text, parseInt(opt, 10))
+));
+Settings.add(new Setting<number>('heldItemSort', 'Sort:', heldItemSortSettings, SortOptions.id));
+Settings.add(new BooleanSetting('heldItemSortDirection', 'reverse', false));
 
 // Breeding Filters
 Object.keys(BreedingFilters).forEach((key) => {
@@ -248,12 +254,15 @@ Settings.add(new Setting<string>('achievementsType', 'achievementsType',
         ...Settings.enumToSettingOptionArray(AchievementType, (a) => a !== 'None'),
     ],
     '-2'));
-Settings.add(new Setting<string>('achievementsRegion', 'achievementsRegion',
+Settings.add(new Setting<string>('achievementsCategory', 'achievementsCategory',
     [
-        new SettingOption('All', '-2'),
-        ...Settings.enumToSettingOptionArray(Region),
+        new SettingOption('All', 'all'),
+        ...GameHelper.enumStrings(Region)
+            .concat(GameHelper.enumStrings(ExtraAchievementCategories))
+            .filter((r) => r !== 'none' && r !== 'final')
+            .map((r) => new SettingOption(camelCaseToString(r), r)),
     ],
-    '-2'));
+    'all'));
 
 // Save menu sorting
 Settings.add(new Setting('sort.saveSelector', 'Saves sort order', [], ''));

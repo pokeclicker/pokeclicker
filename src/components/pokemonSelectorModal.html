@@ -9,7 +9,7 @@
                 </button>
             </div>
             <div class="modal-body p-0">
-                <img src="assets/images/items/Protein.png" width="40%"/>
+                <img src="assets/images/items/vitamin/Protein.png" width="40%"/>
                 <br/>
                 <div class="sticky-top bg-dark text-light">
                   <!-- ko if: App.game.challenges.list.disableProteins.active() -->
@@ -61,23 +61,23 @@
           <div class="form-row m-0" id="protein-filter">
             <div class="form-group col-md-6 col-6 p-0">
                 <label for="protein-search">Search</label>
-                <input id="protein-search" autocomplete="off" class="form-control" placeholder="search here"
-                    data-bind="textInput: ProteinFilters.search.value"
+                <input id="protein-search" autocomplete="off" class="form-control" placeholder="Search here"
+                    data-bind="textInput: Settings.getSetting('proteinSearchFilter').observableValue"
                 />
             </div>
             <div class="form-group col-md-3 col-3 p-0">
                 <label for="protein-region-filter">Region</label>
-                <select id="protein-region-filter" name="proteinRegionFilter" autocomplete="off" class="custom-select" onchange="ProteinFilters.region.value(+this.value), Settings.setSettingByName(this.name, this.value)">
+                <select id="protein-region-filter" name="proteinRegionFilter" autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, +this.value)">
                     <!-- ko foreach: Settings.getSetting('proteinRegionFilter').options.filter(r => r.value <= player.highestRegion()) -->
-                    <option data-bind="attr: { value: $data.value }, text: $data.text">Region</option>
+                    <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('proteinRegionFilter').value === $data.value }, text: $data.text">Region</option>
                     <!-- /ko -->
                 </select>
             </div>
             <div class="form-group col-md-3 col-3 p-0">
                 <label for="protein-type-filter">Type</label>
-                <select id="protein-type-filter" name="proteinTypeFilter" autocomplete="off" class="custom-select" onchange="ProteinFilters.type.value(+this.value), Settings.setSettingByName(this.name, this.value)">
+                <select id="protein-type-filter" name="proteinTypeFilter" autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, +this.value)">
                     <!-- ko foreach: Settings.getSetting('proteinTypeFilter').options -->
-                    <option data-bind="attr: { value: $data.value }, text: $data.text">Type</option>
+                    <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('proteinTypeFilter').value === $data.value }, text: $data.text">Type</option>
                     <!-- /ko -->
                 </select>
             </div>
@@ -86,7 +86,7 @@
                 <table class="table table-striped table-hover table-bordered table-sm m-0">
                   <thead>
                     <tr class="text-light">
-                      <th class="text-left bg-dark align-middle">Pokemon</th>
+                      <th class="text-left bg-dark align-middle">Pokémon</th>
                       <th class="text-center bg-dark align-middle">Proteins Used</th>
                       <th class="text-center bg-dark align-middle">Attack Bonus</th>
                     </tr>
@@ -101,6 +101,7 @@
                 </table>
             </div>
             <!-- /ko -->
+            <span class="bg-dark text-light text-right align-right p-1"  data-bind="text:`Showing ${PartyController.getProteinSortedList().filter(p => !p.hideFromProteinList()).length} Pokémon`"></span>
         </div>
     </div>
 </div>

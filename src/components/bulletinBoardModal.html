@@ -3,7 +3,7 @@ aria-labelledby="bulletinBoardModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document" data-bind="if: BulletinBoard.selectedBulletinBoard()">
     <div class="modal-content">
        <div class="modal-header justify-content-start align-items-center">
-            <h5 class="modal-title" id="bulletinBoardModalLabel">Bulletin board</h5>
+            <h5 class="modal-title" id="bulletinBoardModalLabel">Bulletin Board</h5>
         </div>
         <div class="modal-body p-0">
             <table class="table m-0">
@@ -17,7 +17,7 @@ aria-labelledby="bulletinBoardModalLabel" aria-hidden="true">
                                     <h5 class="card-title m-0" data-bind="text: $data.name">Card title</h5>
                                 </div>
                                 <div class="card-body">
-                                    <p class="card-text" data-bind="text: $data.description" style="font-size: 1.3rem;">Description</p>
+                                    <p class="card-text" data-bind="text: $data.description">Description</p>
                                 </div>
                                 <div class="card-footer p-0">
                                     <button class="btn btn-primary btn-block" data-bind="visible: !$data.state(), click: () => { $data.beginQuest(0, undefined, true); }">Accept</button>

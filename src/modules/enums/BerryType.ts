@@ -38,6 +38,7 @@ enum BerryType {
     Watmel,
     Durin,
     Belue,
+    Pinkan,
     // Fourth Generation (Typed)
     Occa,
     Passho,

@@ -77,7 +77,7 @@ class FarmHand {
         public unlockRequirement?: Requirement | MultiRequirement | OneFromManyRequirement
     ) {
         SeededRand.seed(parseInt(this.name, 36));
-        this.trainerSprite = SeededRand.intBetween(0, Profile.MAX_TRAINER - 1);
+        this.trainerSprite = SeededRand.intBetween(0, 118);
         // Negative value so they are charged on the first tick and work on the first tick
         this.workTicks(-GameConstants.TICK_TIME);
         this.costTicks(-GameConstants.TICK_TIME);
@@ -193,7 +193,7 @@ class FarmHand {
         if (this.shouldHarvest()) {
             let readyPlotIndex;
             do {
-                readyPlotIndex = App.game.farming.plotList.findIndex((p, i) => p.isUnlocked && p.berry !== BerryType.None && p.stage() >= PlotStage.Berry && this.plots().includes(i));
+                readyPlotIndex = App.game.farming.plotList.findIndex((p, i) => p.isUnlocked && p.berry !== BerryType.None && p.stage() >= PlotStage.Berry && this.plots().includes(i) && !p.isSafeLocked);
                 if (readyPlotIndex >= 0 && workTimes > 0) {
                     const berry = App.game.farming.plotList[readyPlotIndex].berry;
                     App.game.farming.harvest(readyPlotIndex);
@@ -202,7 +202,6 @@ class FarmHand {
                     if (this.focus() == FarmHandBerryTypes.Replant) {
                         App.game.farming.plant(readyPlotIndex, berry);
                         workTimes--;
-                        worked = true;
                     }
                 }
             } while (readyPlotIndex >= 0 && workTimes > 0);
@@ -211,13 +210,13 @@ class FarmHand {
         // Planting berries
         if (this.focus() != FarmHandBerryTypes.None) {
             let emptyPlotIndex;
+            let berry;
             do {
                 // Find empty plots
-                emptyPlotIndex = App.game.farming.plotList.findIndex((p, i) => p.isUnlocked && p.berry == BerryType.None && this.plots().includes(i));
+                emptyPlotIndex = App.game.farming.plotList.findIndex((p, i) => p.isUnlocked && p.berry == BerryType.None && this.plots().includes(i) && !p.isSafeLocked);
                 // Plant the berry
                 if (emptyPlotIndex >= 0 && workTimes > 0) {
                     // Plant the expected berry
-                    let berry;
                     switch (this.focus()) {
                         case FarmHandBerryTypes.Replant: // Re-plant last berry used
                             berry = App.game.farming.plotList[emptyPlotIndex].lastPlanted;
@@ -230,11 +229,14 @@ class FarmHand {
                     }
                     // If we somehow didn't find a berry to use, just plant a Cheri..
                     berry = berry < 0 ? BerryType.Cheri : berry;
-                    App.game.farming.plant(emptyPlotIndex, berry as BerryType);
-                    workTimes--;
-                    worked = true;
+                    // Only plant and work if the player has a berry to plant
+                    if (App.game.farming.hasBerry(berry)) {
+                        App.game.farming.plant(emptyPlotIndex, berry as BerryType);
+                        workTimes--;
+                        worked = true;
+                    }
                 }
-            } while (emptyPlotIndex >= 0 && workTimes > 0);
+            } while (emptyPlotIndex >= 0 && workTimes > 0 && App.game.farming.hasBerry(berry));
         }
 
         if (!worked) {
@@ -303,13 +305,13 @@ class FarmHand {
         if (!json) {
             return;
         }
-        this.focus(json.focus || this.defaults.focus);
-        this.shouldHarvest(json.shouldHarvest || this.defaults.shouldHarvest);
-        this.workTicks(json.workTicks || this.defaults.workTicks);
-        this.costTicks(json.costTicks || this.defaults.costTicks);
-        this.energy(json.energy || this.defaults.energy);
-        this.hired(json.hired || this.defaults.hired);
-        this.plots(json.plots || this.defaults.plots);
+        this.focus(json.focus ?? this.defaults.focus);
+        this.shouldHarvest(json.shouldHarvest ?? this.defaults.shouldHarvest);
+        this.workTicks(json.workTicks ?? this.defaults.workTicks);
+        this.costTicks(json.costTicks ?? this.defaults.costTicks);
+        this.energy(json.energy ?? this.defaults.energy);
+        this.hired(json.hired ?? this.defaults.hired);
+        this.plots(json.plots ?? this.defaults.plots);
     }
 }
 

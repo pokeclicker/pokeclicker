@@ -24,6 +24,7 @@ namespace GameConstants {
     declare const UNDERGROUND_TICK: number;
     declare const DUNGEON_TIME: number;
     declare const DUNGEON_TICK: number;
+    declare const DUNGEON_LADDER_BONUS: number;
     declare const EFFECT_ENGINE_TICK: number;
     declare const SAVE_TICK: number;
     declare const GYM_TIME: number;
@@ -45,6 +46,7 @@ namespace GameConstants {
     declare const SHINY_CHANCE_BATTLE: number;
     declare const SHINY_CHANCE_DUNGEON: number;
     declare const SHINY_CHANCE_SHOP: number;
+    declare const SHINY_CHANCE_BATTLEFRONTIER: number;
     declare const SHINY_CHANCE_STONE: number;
     declare const SHINY_CHANCE_SAFARI: number;
     declare const SHINY_CHANCE_BREEDING: number;
@@ -68,6 +70,7 @@ namespace GameConstants {
     declare const BerryColor: string[];
     declare const BASE_DUNGEON_SIZE: number;
     declare const MIN_DUNGEON_SIZE: number;
+    declare const MAX_DUNGEON_SIZE: number;
     declare const DUNGEON_CHEST_SHOW: number;
     declare const DUNGEON_MAP_SHOW: number;
     declare enum AchievementOption {
@@ -78,27 +81,25 @@ namespace GameConstants {
 
     declare enum AchievementType {
         'None',
-        'Money',
-        'Token',
-        'Attack',
-        'Diamond',
-        'Underground Items Found',
-        'Underground Layers Mined',
-        'Max Level Oak Item',
-        'Captured',
-        'Defeated',
+        'Pokedollars',
+        'Dungeon Token',
         'Caught Pokemon',
         'Shiny Pokemon',
-        'Hatch',
-        'Pokeball',
-        'Click',
-        'Route Defeat',
+        'Total Captured',
+        'Total Defeated',
+        'Attack',
+        'Poke Balls',
+        'Route Defeats',
         'Clear Gym',
         'Clear Dungeon',
-        'Farming',
         'Quest',
+        'Max Level Oak Item',
+        'Hatchery',
+        'Farming',
+        'Underground',
         'Battle Frontier',
-        'Protein'
+        'Protein',
+        'Pokerus',
     }
     declare enum DungeonTile {
         empty,
@@ -106,6 +107,7 @@ namespace GameConstants {
         enemy,
         chest,
         boss,
+        ladder,
     }
     declare const ROUTE_HELD_ITEM_MODIFIER: number;
     declare const DUNGEON_HELD_ITEM_MODIFIER: number;
@@ -148,6 +150,9 @@ namespace GameConstants {
     declare const EP_EV_RATIO: number;
     declare const EP_CHALLENGE_MODIFIER: number;
     declare const DNA_ITEM_CHANCE: number;
+    declare const LIGHT_ITEM_CHANCE: number;
+    declare const RUST_ITEM_CHANCE: number;
+    declare const MANE_ITEM_CHANCE: number;
     declare enum GameState {
         idle,
         paused,
@@ -277,29 +282,15 @@ namespace GameConstants {
         'Sachet',
         'Whipped_dream',
         'Ice_stone',
+        'Solar_light',
+        'Lunar_light',
         'Sweet_apple',
         'Tart_apple',
         'Cracked_pot',
         'Galarica_cuff',
         'Galarica_wreath',
-    }
-    declare enum ShardType {
-        'None',
-        'Red Shard',
-        'Yellow Shard',
-        'Green Shard',
-        'Blue Shard',
-        'Grey Shard',
-        'Purple Shard',
-        'Ochre Shard',
-        'Black Shard',
-        'Crimson Shard',
-        'Lime Shard',
-        'White Shard',
-        'Pink Shard',
-        'Cyan Shard',
-        'Rose Shard',
-        'Brown Shard',
+        'Black_mane_hair',
+        'White_mane_hair',
     }
     declare enum FossilPieceType {
         'None',
@@ -331,11 +322,20 @@ namespace GameConstants {
         //'Grass_Flute' = '',
     }
     declare enum PokemonItemType {
+        'Pinkan Arbok',
+        'Pinkan Oddish',
+        'Pinkan Poliwhirl',
+        'Pinkan Geodude',
+        'Pinkan Dodrio',
+        'Lickitung',
+        'Pinkan Weezing',
+        'Mr. Mime',
+        'Pinkan Scyther',
+        'Jynx',
+        'Pinkan Electabuzz',
+        'Magikarp',
         'Eevee',
         'Porygon',
-        'Jynx',
-        'Mr. Mime',
-        'Lickitung',
         'Togepi',
         'Beldum',
         'Skorupi',
@@ -351,6 +351,7 @@ namespace GameConstants {
         'Arctozolt',
         'Dracovish',
         'Arctovish',
+        'Zarude (Dada)',
     }
 
     declare enum UltraBeastType {
@@ -397,6 +398,10 @@ namespace GameConstants {
     export enum BulletinBoards {
         None = -2,
         All = -1,
+        Kanto,
+        Johto,
+        Hoenn,
+        Sevii4567,
         Kalos,
         DeltaEpisode,
         Alola,
@@ -442,6 +447,7 @@ namespace GameConstants {
     declare const UnovaGyms: string[];
     declare const KalosGyms: string[];
     declare const GalarGyms: string[];
+    declare const OrangeGyms: string[];
     declare const RegionGyms: string[][];
     declare function getGymIndex(gym: string): number;
     declare function getGymRegion(gym: string): Region;
@@ -471,10 +477,16 @@ namespace GameConstants {
         'Saturday',
     }
     declare enum Pokerus {
-        'None',
+        'Uninfected',
         'Infected',
         'Contagious',
-        'Cured',
+        'Resistant',
+    }
+    declare enum BerryTraderLocations {
+        'Goldenrod City',
+        'Mauville City',
+        'Pinkan Pokémon Reserve',
+        'Hearthome City',
     }
     declare enum ShardTraderLocations {
         'Cerulean City',
@@ -565,6 +577,7 @@ namespace GameConstants {
     declare enum KantoSubRegions {
         Kanto,
         Sevii123,
+        Sevii4567,
     }
     declare enum JohtoSubRegions {
         Johto,
@@ -585,14 +598,57 @@ namespace GameConstants {
     declare enum AlolaSubRegions {
         MelemeleIsland,
         AkalaIsland,
-        UlaulaAndPoniIslands,
-        // UlaulaIsland,
-        // PoniIsland,
+        UlaulaIsland,
+        PoniIsland,
     }
     declare enum GalarSubRegions {
         SouthGalar,
         NorthGalar,
         IsleofArmor,
         CrownTundra,
+    }
+
+    // Gender Types
+    declare enum Genders {
+        Genderless,
+        MaleFemale,
+    }
+
+    // Current Pokémon Gender
+    declare enum BattlePokemonGender {
+        NoGender,
+        Male,
+        Female,
+    }
+
+    // Pokemon Statistics
+    declare const STATISTIC_CAPTURED;
+    declare const STATISTIC_DEFEATED;
+    declare const STATISTIC_ENCOUNTERED;
+    declare const STATISTIC_HATCHED;
+
+    declare enum AlcremieSweet {
+        'Strawberry Sweet',
+        'Love Sweet',
+        'Berry Sweet',
+        'Clover Sweet',
+        'Flower Sweet',
+        'Star Sweet',
+        'Ribbon Sweet'
+    }
+    declare enum AlcremieSpins {
+        dayClockwiseBelow5,
+        dayCounterclockwiseBelow5,
+        nightClockwiseBelow5,
+        nightCounterclockwiseAbove5,
+        nightClockwiseAbove5,
+        nightCounterclockwiseBelow5,
+        dayClockwiseAbove5,
+        dayCounterclockwiseAbove5,
+        at7Above10
+    }
+    declare enum ExtraAchievementCategories {
+        global,
+        sevii,
     }
 }
