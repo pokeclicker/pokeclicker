@@ -4,14 +4,9 @@
       <span data-bind="
          text: App.game.party.pokemonAttackObservable().toLocaleString('en-US'),
          tooltip: {
-            title: $data.pokemon
-                ? `${App.game.party.calculatePokemonAttack(
-                    $data.pokemon.type1,
-                    $data.pokemon.type2
-                ).toLocaleString('en-US')} against ${$data.pokemon.name}`
-                : '',
+            title: Battle.pokemonAttackTooltip,
             trigger: 'hover',
-        }
+         }
          "></span>
   </span>
 </script>
