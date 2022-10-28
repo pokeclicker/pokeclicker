@@ -1131,7 +1131,7 @@ class QuestLineHelper {
             undefined,
             undefined
         );
-        
+
         princessDiancieQuestLine.addQuest(DiancieCatch);
 
         App.game.quests.questLines().push(princessDiancieQuestLine);
@@ -1176,6 +1176,12 @@ class QuestLineHelper {
         const catchExploud = new CaptureSpecificPokemonQuest(
             'Exploud',
             'Catch Exploud.',
+            1,
+            false,
+            undefined,
+            undefined
+        );
+
         const clearCaveofOrigin = new CustomQuest(5, 0, 'Clear Delta Cave of Origin', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Delta Cave of Origin')]());
 
         primalsQuestLine.addQuest(new MultipleQuestsQuest(
