@@ -1,0 +1,101 @@
+<div aria-labelledby="bugCatchingModal" class="modal fade noselect" id="bugCatchingModal" role="dialog" style="cursor:default" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content">
+            <div class="controls" data-bind="visible: BugCatching.inProgress() && !BugCatching.inBattle()">
+                <div style="width:120px">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 411 411">
+                        <g>
+                          <path fill="whitesmoke" d="M382 137h-89c-11 0-19-8-19-19V29c0-16-13-29-29-29h-79c-16 0-29 13-29 29v89c0 11-8 19-19 19H29c-16 0-29 13-29 29v79c0 16 13 29 29 29h89c11 0 19 8 19 19v89c0 16 13 29 29 29h79c16 0 29-13 29-29v-89c0-11 8-19 19-19h89c16 0 29-13 29-29v-79c0-16-13-29-29-29zM93 244c0 2-2 3-4 2l-52-38c-2-1-2-4 0-5l52-38c2-1 4 0 4 3v76zm72-155l38-52c1-2 4-2 5 0l38 52c1 2 0 4-2 4h-76c-3 0-4-2-3-4zm81 233l-38 52c-1 2-4 2-5 0l-38-52c-1-2 0-4 3-4h76c2 0 3 2 2 4zm-40-69a47 47 0 110-94 47 47 0 010 94zm168-45l-52 38c-2 1-4 0-4-2v-76c0-3 2-4 4-3l52 38c2 1 2 4 0 5z"/>
+                          <path fill="transparent" d="M135 1h142v137H135z"   onmousedown="GameController.simulateKey('ArrowUp')" onmouseout="GameController.simulateKey('ArrowUp', 'up')" onmouseup="GameController.simulateKey('ArrowUp', 'up')" ontouchstart="GameController.simulateKey('ArrowUp')"/><!-- up -->
+                          <path fill="transparent" d="M1 137h142v137H1z"     onmousedown="GameController.simulateKey('ArrowLeft')" onmouseout="GameController.simulateKey('ArrowLeft', 'up')" onmouseup="GameController.simulateKey('ArrowLeft', 'up')" ontouchstart="GameController.simulateKey('ArrowLeft')"/><!-- left -->
+                          <path fill="transparent" d="M135 273h142v137H135z" onmousedown="GameController.simulateKey('ArrowDown')" onmouseout="GameController.simulateKey('ArrowDown', 'up')" onmouseup="GameController.simulateKey('ArrowDown', 'up')" ontouchstart="GameController.simulateKey('ArrowDown')"/><!-- down -->
+                          <path fill="transparent" d="M268 137h142v137H268z" onmousedown="GameController.simulateKey('ArrowRight')" onmouseout="GameController.simulateKey('ArrowRight', 'up')" onmouseup="GameController.simulateKey('ArrowRight', 'up')" ontouchstart="GameController.simulateKey('ArrowRight')"/><!-- right -->
+                        </g>
+                    </svg>
+                </div>
+            </div>
+            <div class="modal-header">
+                <h4 style='text-align:center' class="modal-title">
+                    Bug Catching Contest
+                    <span data-bind="if: BugCatching.completed()">
+                        <img class="pokeball-smallest"
+                            data-bind='attr:{
+                                title:"You have captured all of the National Park Pokémon" + (BugCatching.completed(true) ? " shiny" : "") + "!",
+                                src:"assets/images/pokeball/Pokeball" + (BugCatching.completed(true) ? "-shiny" : "") + ".svg"
+                            }'
+                        />
+                    </span>
+                </h4>
+                <button class='btn btn-danger modalClose' onclick='BugCatching.closeModal()'>Leave</button>
+            </div>
+
+            <div class="modal-body p-0">
+                <!-- Tab Titles -->
+                <ul style="width:100%" class="nav nav-tabs nav-fill">
+                    <li class="nav-item">
+                        <a data-toggle='tab' class='nav-link active' href="#bugCatchingExplore">Explore</a>
+                    </li>
+                    <li class='nav-item'>
+                        <a class='nav-link' href="#bugCatchingHelp" data-bind="attr: {'data-toggle': BugCatching.inBattle() ? '' : 'tab'}">Help</a>
+                    </li>
+                </ul>
+
+                <!-- Tab Contents -->
+                <div class=tab-content>
+
+                    <!-- Main tab -->
+                    <div  id="bugCatchingExplore" class="tab-pane fade in active show">
+                        <div class="modal-body p-0">
+
+                            <div id="bugCatchingEntrance" data-bind="if: !BugCatching.inProgress()">
+                                <button id="payBugCatchingButton" class="btn btn-block" onclick="BugCatching.payEntranceFee()"
+                                    data-bind="class: BugCatching.canPay() ? 'btn-primary' : 'disabled btn-danger'">
+                                    Pay Entrance Fee <knockout id='bugCatchingEntranceCost' data-bind="template: { name: 'currencyTemplate', data: {'amount': BugCatching.cost().amount, 'currency': BugCatching.cost().currency}}"></knockout>
+                                </button>
+                                <img class='fit-width' src="assets/images/towns/National Park.png" />
+                            </div>
+
+                            <div style="position: relative;">
+                                <div id="bugCatchingBody"
+                                    class='container-fluid'
+                                    data-bind="visible: BugCatching.inProgress()">
+                                </div>
+                                <!-- ko foreach: BugCatching.pokemonGrid -->
+                                    <div class="pokemonSprite walkDown" data-bind="css: { shiny: $data.shiny },
+                                    style: {
+                                        backgroundImage: `${$data.shiny ? 'url(\'assets/images/dynamic-background/pokemon/sparkle.png\'), ' : ''}url('assets/images/dynamic-background/pokemon/${$data.id.toString().padStart(3, '0')}${$data.shiny ? 's' : ''}.png')`,
+                                        top: `${32 * $data.y - 8}px`,
+                                        left: `${32 * $data.x - 4}px`,
+                                    }"></div>
+                                <!-- /ko -->
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Help tab -->
+                    <div  id="bugCatchingHelp" class="tab-pane fade">
+                        <div class="modal-body" style="width: 80%;margin: auto;">
+                            <div id="bugCatchingHelpText">
+                                <p>PLEASE REPLACE ME I AM THE HELP TEXT</p>
+                                <p>After paying the entrance fee, you will be able to walk around in the bugCatching Zone. To encounter Pokémon, you must either walk in the tall grass or walk into Pokémon that randomly appear on the map.</p>
+                                <p>
+                                    When you have encountered a Pokémon, you will be given 4 options:
+                                    <ul>
+                                        <li>Ball: This will throw a Poké Ball and give you a chance of capturing the Pokémon.</li>
+                                        <li>Rock: Throwing a rock will make the Pokémon more likely to flee, but easier to catch.</li>
+                                        <li>Bait: Throwing bait will make the Pokémon less likely to flee, but harder to catch. If you have Razz or Nanab berries, you can use them as bait for special effects.</li>
+                                        <li>Run: This will end the encounter.</li>
+                                    </ul>
+                                </p>
+                                <p>After your turn of the encounter, if it did not result in the encounter ending, the wild Pokémon will have a chance of running away.</p>
+                                <p>Your bugCatching exploration will end when you have run out of Poké Balls. You can freely leave and re-enter without having to pay the fee again as long as you still have Poké Balls remaining.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -165,6 +165,30 @@ class GameController {
                 // We don't want to process any other keys while in the Safari zone
                 return e.preventDefault();
             }
+            // Bug Catching Contest
+            if (App.game.gameState === GameConstants.GameState.bugCatching) {
+                switch (key) {
+                    case 'ArrowUp':
+                    case Settings.getSetting('hotkey.dungeon.up').value:
+                        BugCatching.move('up');
+                        break;
+                    case 'ArrowLeft':
+                    case Settings.getSetting('hotkey.dungeon.left').value:
+                        BugCatching.move('left');
+                        break;
+                    case 'ArrowDown':
+                    case Settings.getSetting('hotkey.dungeon.down').value:
+                        BugCatching.move('down');
+                        break;
+                    case 'ArrowRight':
+                    case Settings.getSetting('hotkey.dungeon.right').value:
+                        BugCatching.move('right');
+                        break;
+                }
+
+                // We don't want to process any other keys while in the Bug Catching Contest
+                return e.preventDefault();
+            }
 
             // Within modals
             if ($farmsModal.data('bs.modal')?._isShown) {
@@ -465,7 +489,26 @@ class GameController {
                         return e.preventDefault();
                 }
             }
-
+            if (App.game.gameState === GameConstants.GameState.bugCatching) {
+                switch (key) {
+                    case 'ArrowUp':
+                    case Settings.getSetting('hotkey.dungeon.up').value:
+                        BugCatching.stop('up');
+                        return e.preventDefault();
+                    case 'ArrowLeft':
+                    case Settings.getSetting('hotkey.dungeon.left').value:
+                        BugCatching.stop('left');
+                        return e.preventDefault();
+                    case 'ArrowDown':
+                    case Settings.getSetting('hotkey.dungeon.down').value:
+                        BugCatching.stop('down');
+                        return e.preventDefault();
+                    case 'ArrowRight':
+                    case Settings.getSetting('hotkey.dungeon.right').value:
+                        BugCatching.stop('right');
+                        return e.preventDefault();
+                }
+            }
             if (key === 'Space') {
                 return e.preventDefault();
             }

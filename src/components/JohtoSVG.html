@@ -674,6 +674,14 @@
         })
      %>
 
+        <%- include('templates/mapPOI',
+        { name: "National Park"
+        , x: 22.9, y: 18.5
+        , width: 5, height: 3.5
+            , databind: "click:function(){BugCatching.openModal()}, attr: { class: BugCatching.canAccess() ? 'completed' : 'locked' }"
+        })
+     %>
+
      <%- include('templates/mapOverlay',
          { name: "Professor Elm's Blimp"
          , x: 74, y: 45

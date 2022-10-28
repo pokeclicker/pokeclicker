@@ -51,6 +51,7 @@ namespace GameConstants {
     declare const SHINY_CHANCE_SAFARI: number;
     declare const SHINY_CHANCE_BREEDING: number;
     declare const SHINY_CHANCE_FARM: number;
+    declare const SHINY_CHANCE_BUGCATCHING: number;
     declare const ITEM_PRICE_MULTIPLIER: number;
     declare const ITEM_PRICE_DEDUCT: number;
     declare const PLATE_VALUE: number;
@@ -124,6 +125,9 @@ namespace GameConstants {
     declare const SAFARI_BASE_POKEBALL_COUNT: number;
     declare const LEGAL_WALK_BLOCKS: number[];
     declare const SAFARI_OUT_OF_BALLS: string;
+    declare const BUGCATCHING_BATTLE_CHANCE: number;
+    //declare const BUGCATCHING_BASE_POKEBALL_COUNT: number; TODO Determine if this needs to be added
+    declare const BUGCATCHING_OUT_OF_BALLS: string;
     declare const GAIN_MONEY_BASE_REWARD: number;
     declare const HATCH_EGGS_BASE_REWARD: number;
     declare const SHINY_BASE_REWARD: number;
@@ -142,6 +146,7 @@ namespace GameConstants {
     declare const WANDERER_EP_YIELD: number;
     declare const SHOPMON_EP_YIELD: number;
     declare const SAFARI_EP_YIELD: number;
+    declare const BUGCATCHING_EP_YIELD: number;
     declare const SHINY_EP_MODIFIER: number;
     declare const REPEATBALL_EP_MODIFIER: number;
     declare const DUNGEON_EP_MODIFIER: number;
@@ -160,6 +165,7 @@ namespace GameConstants {
         gym,
         dungeon,
         safari,
+        bugCatching,
         town,
         shop,
         battleFrontier,
