@@ -4861,7 +4861,7 @@ const Piers = new NPC('Piers', [
 
 const EnergyPlantHop = new NPC('Hop', [
     'Huh? Oh, hi. I forgot to say, congrats on catching Zacian and Zamazenta!',
-    'Y\'know, we gave Zacian and Zamazenta got the Rusted Sword and the Rusted Shield back, right?',
+    'Y\'know, Zacian and Zamazenta got the Rusted Sword and the Rusted Shield back, right?',
     'But when you caught them, neither were using them. But they must still have them, right?',
     'So.... Maybe if you keep defeating them, they\'ll occasionally drop them?',
 ], {
@@ -5000,12 +5000,12 @@ const JungleAsh1 = new NPC ('Ash Ketchum', [
 const JungleKoko1 = new NPC ('Koko', [
     'Hmm? Who are you? Oh, so Ash sent you to help me? That\'s great!',
     'So, I\'m part of a tribe of Pokémon called Zarude, I was raised by them despite being a human. One of them has gone missing, I\'ve been told they were seen roaming, completely lost, around the Isle of Armor.',
-    'Could you go and catch it and bring it back here? If you need help locating it, I\'m sure one of the students at the dojo they have there could help you',
+    'Could you go catch it and bring it back here? If you need help locating it, I\'m sure one of the students at the dojo they have there could help you.',
 ],
 { requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('Secrets of the Jungle', 0), new QuestLineStepCompletedRequirement('Secrets of the Jungle', 2, GameConstants.AchievementOption.less )])});
 const JungleKoko2 = new NPC ('Koko', [
     'Great, you found it! Now if you could release it... hmm? It seems to like you. Well, if it wants to stay with you, that\'s it\s choice, so I guess it\'s fine.',
-    'Oh, it looks like a group of Zarude from the tribe are here..... They... are angry, they think you caught Zarude against it\'s will. I\'ll try and talk sense into them,',
+    'Oh, it looks like a group of Zarude from the tribe are here..... They... are angry, they think you caught Zarude against its will. I\'ll try and talk sense into them,',
     'Zaruza! Zaru Zaru! Zarude!.. Nope, they\'re too angry to listen. Looks like you\'ll have to fight them if we want to calm them down. Zarude are strong, but I\'m sure you\'ll be fine if you are anywhere near as strong as Ash.',
 ],
 { requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('Secrets of the Jungle', 2), new QuestLineStepCompletedRequirement('Secrets of the Jungle', 4, GameConstants.AchievementOption.less )])});
@@ -5148,7 +5148,7 @@ const BirdPeony3 = new NPC ('Peony', [
 const BirdPeony4 = new NPC ('Peony', [
     'Wait--you really caught Articuno, Moltres, and Zapdos from the legends?! Thats\'s ultra-mega-brilliant! Report away!',
     'So that\'s them is it? I can definitely see the resemblance, but they don\'t seem quite the same...',
-    'Maybe they\'re regional variants or somethin\'? At an rate, that\'s good enough for me. Let\'s call this expedition a success!',
+    'Maybe they\'re regional variants or somethin\'? At any rate, that\'s good enough for me. Let\'s call this expedition a success!',
 ], {
     image: 'assets/images/temporaryBattle/Peony.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 6), new QuestLineCompletedRequirement('The Birds of the Dyna Tree', GameConstants.AchievementOption.less)]),
