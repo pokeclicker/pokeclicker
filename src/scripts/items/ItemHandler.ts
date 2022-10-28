@@ -41,7 +41,7 @@ class ItemHandler {
     public static useStones() {
         if (!this.pokemonSelected()) {
             return Notifier.notify({
-                message: 'No Pokémon selected',
+                message: 'No Pokémon selected.',
                 type: NotificationConstants.NotificationOption.danger,
             });
         }
@@ -65,9 +65,10 @@ class ItemHandler {
             }
         }
         const multiple = amountUsed == 1 ? '' : 's';
+        const stoneUsed = ItemList[this.stoneSelected()];
         Notifier.notify({
             // TODO: PMX - Update plural system to handle all cases
-            message: `You used ${amountUsed.toLocaleString('en-US')} ${ItemList[this.stoneSelected()].displayName}${multiple}.`,
+            message: `You used ${amountUsed.toLocaleString('en-US')} × <img src="${stoneUsed.image}" height="24px"/> ${stoneUsed.displayName}${multiple} on ${this.pokemonSelected()}.`,
             type: NotificationConstants.NotificationOption.success,
         });
     }

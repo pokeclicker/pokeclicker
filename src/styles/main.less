@@ -49,6 +49,25 @@
   }
 }
 
+// Mobile screen specific stylings
+@media (max-width: 768px) {
+  #gameTitle {
+    margin-right: 160px;
+  }
+  .mobileBattleTitle {
+    height: 29%;
+    .left, .right {
+      margin-top: 52px;
+    }
+  }
+  .hitpoints {
+    bottom: 85px;
+  }
+  .pageItemFooter {
+    font-size: 14px !important;
+  }
+}
+
 .bg-ocean {
   background: url('../assets/images/safari/5.png');
 }
@@ -368,11 +387,14 @@ img {
 
 .enemy {
   min-height: 96px;
-  margin-top: 25px;
+  margin-top: 40px;
+  @media (max-width: 768px) {
+    margin-top: 20px;
+  }
 }
 
 .battle-view {
-  min-height: 220px !important;
+  min-height: 280px !important;
 
   background-image: url(../assets/images/battleBackground/default.png);
   background-size: cover;
@@ -440,6 +462,9 @@ img {
 
   .pokeball-animated {
     margin-top: 25px;
+    @media (max-width: 768px) {
+      margin-top: 10px;
+    }
   }
 
   .catchChance {
@@ -449,9 +474,12 @@ img {
   .hitpoints {
     height: 20px;
     position: absolute;
-    bottom: 20px;
+    bottom: 70px;
     width: 90%;
     left: 5%;
+    @media (max-width: 768px) {
+      bottom: 90px;
+    }
   }
 }
 
@@ -659,4 +687,38 @@ td.tight {
   left: 3px;
   top: 3px;
   background-color: #fff;
+}
+
+/* Checkbox Toggles - Gender*/
+.gender-toggle.toggler-wrapper .toggler-knob:after {
+  content: 'M';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  font-size: 65%;
+  text-transform: uppercase;
+  color: black;
+}
+.gender-toggle.toggler-wrapper .toggler-slider{
+  background-color: #499FFF;
+}
+
+.gender-toggle.toggler-wrapper.style-1 input[type="checkbox"]:checked+.toggler-slider .toggler-knob:after {
+  content: 'F';
+}
+.gender-toggle.toggler-wrapper input[type="checkbox"]:checked+.toggler-slider {
+  background-color: #F6807A;
+}
+
+/* Gender Icons */
+.gender-icon-female{
+  color:#F6807A;
+}
+.gender-icon-male{
+  color:#499FFF;
+}
+i[class*="gender-icon-"] {
+  font-size: 24px;
 }

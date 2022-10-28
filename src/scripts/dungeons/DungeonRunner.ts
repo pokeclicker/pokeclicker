@@ -117,8 +117,15 @@ class DungeonRunner {
         DungeonRunner.chestsOpenedPerFloor[DungeonRunner.map.playerPosition().floor]++;
 
         const clears = App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]();
-        const tier = DungeonRunner.dungeon.getRandomLootTier(clears, player.highestRegion());
-        const loot = DungeonRunner.dungeon.getRandomLoot(tier);
+        const debuffed = (DungeonRunner.dungeon.optionalParameters?.dungeonRegionalDifficulty ?? GameConstants.getDungeonRegion(DungeonRunner.dungeon.name)) < player.highestRegion() - 2;
+        // Ignores debuff on first attempt to get loot that ignores debuff.
+        let tier = DungeonRunner.dungeon.getRandomLootTier(clears);
+        let loot = DungeonRunner.dungeon.getRandomLoot(tier);
+        if (!loot.ignoreDebuff && debuffed) {
+            tier = DungeonRunner.dungeon.getRandomLootTier(clears, debuffed);
+            loot = DungeonRunner.dungeon.getRandomLoot(tier, true);
+        }
+
         let amount = loot.amount || 1;
 
         const tierWeight = {
@@ -134,7 +141,7 @@ class DungeonRunner {
             const magnetChance = 0.5 / (4 / (tierWeight + 1));
             if (Rand.chance(magnetChance)) {
                 // Gain more items in higher regions
-                amount += Math.max(1, Math.round(Math.max(tierWeight,2) / 8 * (GameConstants.getDungeonRegion(DungeonRunner.dungeon.name) + 1)));
+                amount += Math.max(1, Math.round(Math.max(tierWeight, 2) / 8 * (GameConstants.getDungeonRegion(DungeonRunner.dungeon.name) + 1)));
             }
         }
 
