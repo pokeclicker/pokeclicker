@@ -873,7 +873,7 @@ Routes.add(new RegionRoute(
     [
         new SpecialRoutePokemon(['Roselia'], new ObtainedPokemonRequirement(pokemonMap.Roselia)),
     ],
-}),
+    }),
     [new RouteKillRequirement(10, GameConstants.Region.hoenn, 110)],
     110.1
 ));
@@ -884,8 +884,8 @@ Routes.add(new RegionRoute(
         water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Carvanha', 'Sharpedo'],
         special:
     [
-            new SpecialRoutePokemon(['Electrike'], new ObtainedPokemonRequirement(pokemonMap.Electrike)),
-            new SpecialRoutePokemon(['Manectric'], new ObtainedPokemonRequirement(pokemonMap.Manectric)),
+        new SpecialRoutePokemon(['Electrike'], new ObtainedPokemonRequirement(pokemonMap.Electrike)),
+        new SpecialRoutePokemon(['Manectric'], new ObtainedPokemonRequirement(pokemonMap.Manectric)),
     ],
     }),
     [new GymBadgeRequirement(BadgeEnums.Balance)]
@@ -1425,7 +1425,7 @@ Routes.add(new RegionRoute(
         land: ['Muk', 'Liepard', 'Garbodor', 'Minccino', 'Gothorita', 'Duosion', 'Pawniard'],
         special:
     [
-            new SpecialRoutePokemon(['Swalot'], new ObtainedPokemonRequirement(pokemonMap.Swalot)),
+        new SpecialRoutePokemon(['Swalot'], new ObtainedPokemonRequirement(pokemonMap.Swalot)),
     ],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.unova, 11)],
@@ -1790,7 +1790,7 @@ Routes.add(new RegionRoute(
         water: ['Tentacool', 'Shellder', 'Magikarp', 'Remoraid', 'Wingull', 'Finneon', 'Mantyke', 'Wishiwashi (Solo)'],
         special: 
     [
-            new SpecialRoutePokemon(['Shelgon'], new ObtainedPokemonRequirement(pokemonMap.Shelgon)),
+        new SpecialRoutePokemon(['Shelgon'], new ObtainedPokemonRequirement(pokemonMap.Shelgon)),
     ],
     }),
     [
@@ -2045,7 +2045,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Pelipper', 'Lickitung', 'Golduck', 'Granbull', 'Inkay', 'Bewear'],
         water: ['Magikarp', 'Dratini', 'Barboach'],
-            special:
+        special:
     [
         new SpecialRoutePokemon(['Dragonair'], new ObtainedPokemonRequirement(pokemonMap.Dragonair)),
     ],
