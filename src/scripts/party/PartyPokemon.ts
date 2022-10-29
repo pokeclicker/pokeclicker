@@ -10,6 +10,8 @@ enum PartyPokemonSaveKeys {
     pokerus,
     effortPoints,
     heldItem,
+    defaultFemaleSprite,
+    hideShinyImage
 }
 
 class PartyPokemon implements Saveable {
@@ -29,6 +31,8 @@ class PartyPokemon implements Saveable {
         levelEvolutionTriggered: false,
         pokerus: GameConstants.Pokerus.Uninfected,
         effortPoints: 0,
+        defaultFemaleSprite: false,
+        hideShinyImage: false,
     };
 
     // Saveable observables
@@ -43,13 +47,16 @@ class PartyPokemon implements Saveable {
     proteinsUsed: KnockoutObservable<number>;
     _effortPoints: KnockoutObservable<number>;
     heldItem: KnockoutObservable<HeldItem>;
+    defaultFemaleSprite: KnockoutObservable<boolean>;
+    hideShinyImage: KnockoutObservable<boolean>;
 
     constructor(
         public id: number,
         public name: PokemonNameType,
         public evolutions: Evolution[],
         public baseAttack: number,
-        shiny = false
+        shiny = false,
+        public gender
     ) {
         this.proteinsUsed = ko.observable(0).extend({ numeric: 0 });
         this._breeding = ko.observable(false).extend({ boolean: null });
@@ -66,12 +73,23 @@ class PartyPokemon implements Saveable {
             return Math.floor(this.effortPoints / GameConstants.EP_EV_RATIO / power);
         });
         this.evs.subscribe((newValue) => {
+            // Change Pokerus status to Resistant when reaching 50 EVs
             if (this.pokerus && this.pokerus < GameConstants.Pokerus.Resistant && newValue >= 50) {
                 this.pokerus = GameConstants.Pokerus.Resistant;
+
+                // Log and notify player
+                Notifier.notify({
+                    message: `${this.name} has become Resistant to Pokérus.`,
+                    type: NotificationConstants.NotificationOption.info,
+                    setting: NotificationConstants.NotificationSetting.General.pokerus,
+                });
+                App.game.logbook.newLog(LogBookTypes.NEW, createLogContent.resistantToPokerus({ pokemon: this.name }));
             }
         });
         this._attack = ko.pureComputed(() => this.calculateAttack());
         this.heldItem = ko.observable(undefined);
+        this.defaultFemaleSprite = ko.observable(false);
+        this.hideShinyImage = ko.observable(false);
     }
 
     public calculateAttack(ignoreLevel = false): number {
@@ -318,6 +336,8 @@ class PartyPokemon implements Saveable {
         this.pokerus = json[PartyPokemonSaveKeys.pokerus] ?? this.defaults.pokerus;
         this.effortPoints = json[PartyPokemonSaveKeys.effortPoints] ?? this.defaults.effortPoints;
         this.heldItem(json[PartyPokemonSaveKeys.heldItem] && ItemList[json[PartyPokemonSaveKeys.heldItem]] instanceof HeldItem ? ItemList[json[PartyPokemonSaveKeys.heldItem]] as HeldItem : undefined);
+        this.defaultFemaleSprite(json[PartyPokemonSaveKeys.defaultFemaleSprite] ?? this.defaults.defaultFemaleSprite);
+        this.hideShinyImage(json[PartyPokemonSaveKeys.hideShinyImage] ?? this.defaults.hideShinyImage);
 
         if (this.evolutions != null) {
             for (const evolution of this.evolutions) {
@@ -350,6 +370,8 @@ class PartyPokemon implements Saveable {
             [PartyPokemonSaveKeys.pokerus]: this.pokerus,
             [PartyPokemonSaveKeys.effortPoints]: this.effortPoints,
             [PartyPokemonSaveKeys.heldItem]: this.heldItem()?.name,
+            [PartyPokemonSaveKeys.defaultFemaleSprite]: this.defaultFemaleSprite(),
+            [PartyPokemonSaveKeys.hideShinyImage]: this.hideShinyImage(),
         };
 
         // Don't save anything that is the default option

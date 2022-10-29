@@ -41,7 +41,7 @@ export enum Region {
     final = 8,
 }
 
-export const MAX_AVAILABLE_REGION = Region.alola;
+export const MAX_AVAILABLE_REGION = Region.galar;
 
 export const MaxIDPerRegion = [
     151, // 151 - Kanto
@@ -67,6 +67,7 @@ export const SHINY_CHANCE_DUNGEON = 4096;
 export const SHINY_CHANCE_STONE = 2048;
 export const SHINY_CHANCE_SAFARI = 2048;
 export const SHINY_CHANCE_SHOP = 1024;
+export const SHINY_CHANCE_BATTLEFRONTIER = 1024;
 export const SHINY_CHANCE_BREEDING = 1024;
 export const SHINY_CHANCE_FARM = 1024;
 
@@ -122,28 +123,25 @@ export enum AchievementOption {
 
 export enum AchievementType {
     'None' = -1,
-    'Money' = 0,
-    'Token',
-    'Attack',
-    'Diamond',
-    'Underground Items Found',
-    'Underground Layers Mined',
-    'Max Level Oak Item',
-    'Captured',
-    'Defeated',
+    'Pokedollars' = 0,
+    'Dungeon Token',
     'Caught Pokemon',
     'Shiny Pokemon',
-    'Hatch',
-    'Pokeball',
-    'Click',
-    'Route Defeat',
+    'Total Captured',
+    'Total Defeated',
+    'Attack',
+    'Poke Balls',
+    'Route Defeats',
     'Clear Gym',
     'Clear Dungeon',
-    'Farming',
     'Quest',
+    'Max Level Oak Item',
+    'Hatchery',
+    'Farming',
+    'Underground',
     'Battle Frontier',
     'Protein',
-    'Pokérus',
+    'Pokerus',
 }
 
 export enum DungeonTile {
@@ -537,7 +535,7 @@ export const Environments: Record<string, EnvironmentData> = {
     Fire: {
         [Region.kanto]: new Set(['Cinnabar Island', 'Mt. Ember', 'Mt. Ember Summit', 'Ruby Path']),
         [Region.johto]: new Set(),
-        [Region.hoenn]: new Set(['Lavaridge Town', 'Fiery Path', 'Mt. Chimney', 'Mt. Chimney Crater']),
+        [Region.hoenn]: new Set(['Lavaridge Town', 'Fiery Path', 'Mt. Chimney', 'Mt. Chimney Crater', 'Magma Hideout']),
         [Region.sinnoh]: new Set(['Stark Mountain']),
         [Region.unova]: new Set(['Reversal Mountain']),
         [Region.kalos]: new Set(),
@@ -559,12 +557,12 @@ export const Environments: Record<string, EnvironmentData> = {
     Cave: {
         [Region.kanto]: new Set([37, 39, 'Pewter City', 'Diglett\'s Cave', 'Mt. Moon', 'Rock Tunnel', 'Victory Road', 'Lost Cave', 'Altering Cave', 'Tanoby Ruins']),
         [Region.johto]: new Set(['Cianwood City', 'Ruins of Alph', 'Union Cave', 'Mt. Mortar', 'Dark Cave', 'Tohjo Falls', 'Victory Road Johto']),
-        [Region.hoenn]: new Set(['Rustboro City', 'Dewford Town', 'Rusturf Tunnel', 'Granite Cave', 'Meteor Falls', 'Seafloor Cavern', 'Victory Road Hoenn']),
+        [Region.hoenn]: new Set(['Rustboro City', 'Dewford Town', 'Rusturf Tunnel', 'Granite Cave', 'Meteor Falls', 'Jagged Pass', 'Seafloor Cavern', 'Victory Road Hoenn']),
         [Region.sinnoh]: new Set(['Oreburgh City', 'Oreburgh Gate', 'Wayward Cave', 'Mt. Coronet', 'Mt. Coronet South', 'Iron Island', 'Mt. Coronet North', 'Victory Road Sinnoh']),
         [Region.unova]: new Set(['Relic Castle', 'Relic Passage', 'Seaside Cave', 'Victory Road Unova', 'Twist Mountain']),
         [Region.kalos]: new Set([9, 13, 'Connecting Cave', 'Kiloude City', 'Terminus Cave', 'Victory Road Kalos']),
         [Region.alola]: new Set([12, 22, 29, 'Verdant Cavern', 'Seaward Cave', 'Ten Carat Hill', 'Diglett\'s Tunnel', 'Vast Poni Canyon']),
-        [Region.galar]: new Set(['Warm-Up Tunnel', 'Courageous Cavern', 'Brawlers Cave', 'Rock Peak Ruins', 'Split-Decision Ruins', 'Lakeside Cave', 'Tunnel to the Top', 18]),
+        [Region.galar]: new Set(['Warm-Up Tunnel', 'Courageous Cavern', 'Brawlers\' Cave', 'Rock Peak Ruins', 'Split-Decision Ruins', 'Lakeside Cave', 'Tunnel to the Top', 18]),
     },
 
     GemCave: {
@@ -581,7 +579,7 @@ export const Environments: Record<string, EnvironmentData> = {
     PowerPlant: {
         [Region.kanto]: new Set(['Vermilion City', 'Rocket Game Corner', 'Power Plant']),
         [Region.johto]: new Set(['Tin Tower', 'Team Rocket\'s Hideout', 'Radio Tower']),
-        [Region.hoenn]: new Set(['Mauville City', 'New Mauville', 'Weather Institute']),
+        [Region.hoenn]: new Set(['Mauville City', 'New Mauville', 'Weather Institute', 'Aqua Hideout']),
         [Region.sinnoh]: new Set(['Sunyshore City', 'Valley Windworks', 'Team Galactic Eterna Building', 'Team Galactic HQ']),
         [Region.unova]: new Set(['Castelia Sewers', 'Virbank City', 'Nimbasa City', 'A Totally Unsuspicious Frigate', 'Plasma Frigate']),
         [Region.kalos]: new Set(['Lumiose City', 'Kalos Power Plant', 'Poké Ball Factory', 'Team Flare Secret HQ']),
@@ -592,12 +590,12 @@ export const Environments: Record<string, EnvironmentData> = {
     Mansion: {
         [Region.kanto]: new Set(['Silph Co.', 'Pokémon Mansion']),
         [Region.johto]: new Set(['Olivine City', 'Sprout Tower', 'Burned Tower']),
-        [Region.hoenn]: new Set(['Petalburg City', 'Jagged Pass']),
+        [Region.hoenn]: new Set(['Petalburg City']),
         [Region.sinnoh]: new Set(['Veilstone City', 'Canalave City', 'Snowpoint Temple']),
         [Region.unova]: new Set(['Castelia City', 'Mistralton City', 'Opelucid City', 'Liberty Garden', 'Dragonspiral Tower', 'Dreamyard']),
         [Region.kalos]: new Set(['Parfum Palace', 'Lost Hotel']),
         [Region.alola]: new Set(['Trainers\' School', 'Thrifty Megamart', 'Po Town', 'Ruins of Conflict', 'Ruins of Life', 'Ruins of Abundance', 'Ruins of Hope']),
-        [Region.galar]: new Set(['Rose Tower', 'Hammerlocke', 'Stow-on-Side', 'Tower of Darkness', 'Tower of waters', 'Professor Magnolia\'s House', 'Wyndon', 'Wyndon Stadium', 'Master Dojo', 11]),
+        [Region.galar]: new Set(['Rose Tower', 'Hammerlocke', 'Stow-on-Side', 'Tower of Darkness', 'Tower of Waters', 'Professor Magnolia\'s House', 'Wyndon', 'Wyndon Stadium', 'Master Dojo', 11]),
     },
 
     Graveyard: {
@@ -1207,7 +1205,7 @@ export const GalarDungeons = [
     'Energy Plant',
     'Dusty Bowl',
     'Courageous Cavern',
-    'Brawlers Cave',
+    'Brawlers\' Cave',
     'Warm-Up Tunnel',
     'Tower of Darkness',
     'Tower of Waters',
@@ -1312,6 +1310,7 @@ export const TemporaryBattles = [
     'Scientist Gideon',
     'Pinkan Jessie & James',
     'Pinkan Officer Jenny',
+    'Kimono Girls',
     'Spiky-eared Pichu',
     'Rocket Boss Giovanni',
     'Galactic Boss Cyrus',
@@ -1417,6 +1416,15 @@ export const TemporaryBattles = [
     'Glastrier',
     'Spectrier',
     'Dyna Tree Birds',
+    'Galarian Articuno 1',
+    'Galarian Articuno 2',
+    'Galarian Articuno 3',
+    'Galarian Zapdos 1',
+    'Galarian Zapdos 2',
+    'Galarian Zapdos 3',
+    'Galarian Moltres 1',
+    'Galarian Moltres 2',
+    'Galarian Moltres 3',
     'Regigigas',
 ];
 
@@ -1577,6 +1585,25 @@ export enum GalarSubRegions {
     IsleofArmor,
     CrownTundra,
 }
+
+// Gender Types
+export enum Genders {
+    Genderless = 0,
+    MaleFemale, // Default
+}
+
+// Wild/Trainer/BF Pokémon Gender
+export enum BattlePokemonGender {
+    NoGender = 0,
+    Male,
+    Female,
+}
+
+// Pokemon Statistics
+export const STATISTIC_CAPTURED = 'Captured';
+export const STATISTIC_DEFEATED = 'Defeated';
+export const STATISTIC_ENCOUNTERED = 'Encountered';
+export const STATISTIC_HATCHED = 'Hatched';
 
 export enum AlcremieSweet {
     'Strawberry Sweet',

@@ -113,6 +113,7 @@ class Egg implements Saveable {
         // If the party pokemon exist, increase it's damage output
 
         const pokemonID = PokemonHelper.getPokemonById(this.pokemon).id;
+        const gender = PokemonFactory.generateGenderById(pokemonID);
         if (partyPokemon) {
             // Increase attack
             partyPokemon.attackBonusPercent += Math.max(1, Math.round(GameConstants.BREEDING_ATTACK_BONUS * (efficiency / 100)));
@@ -151,8 +152,6 @@ class Egg implements Saveable {
                     ? createLogContent.hatchedShinyDupe({ pokemon })
                     : createLogContent.hatchedShiny({ pokemon })
             );
-            GameHelper.incrementObservable(App.game.statistics.shinyPokemonHatched[pokemonID]);
-            GameHelper.incrementObservable(App.game.statistics.totalShinyPokemonHatched);
         } else {
             Notifier.notify({
                 message: `You hatched ${GameHelper.anOrA(PokemonHelper.getPokemonById(this.pokemon).name)} ${PokemonHelper.displayName(PokemonHelper.getPokemonById(this.pokemon).name)()}!`,
@@ -160,7 +159,7 @@ class Egg implements Saveable {
                 setting: NotificationConstants.NotificationSetting.Hatchery.hatched,
             });
         }
-        App.game.party.gainPokemonById(pokemonID, shiny);
+        App.game.party.gainPokemonById(pokemonID, shiny, undefined, gender);
 
         // Capture base form if not already caught. This helps players get Gen2 Pokemon that are base form of Gen1
         const pokemonName = PokemonHelper.getPokemonById(this.pokemon).name;
@@ -173,12 +172,11 @@ class Egg implements Saveable {
                 sound: NotificationConstants.NotificationSound.General.new_catch,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
             });
-            App.game.party.gainPokemonById(baseForm.id);
+            App.game.party.gainPokemonById(baseForm.id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_BREEDING));
         }
 
         // Update statistics
-        GameHelper.incrementObservable(App.game.statistics.pokemonHatched[pokemonID]);
-        GameHelper.incrementObservable(App.game.statistics.totalPokemonHatched);
+        PokemonHelper.incrementPokemonStatistics(pokemonID, GameConstants.STATISTIC_HATCHED, shiny, gender);
         App.game.oakItems.use(OakItemType.Blaze_Cassette);
         return true;
     }

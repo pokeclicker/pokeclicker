@@ -19,6 +19,7 @@ class BattlePokemon implements EnemyPokemonInterface {
      * @param exp base exp reward for defeating this Pokémon
      * @param reward currency reward for defeating this Pokémon
      * @param shiny is a shiny variant
+     * @param gender Pokémon gender
      * @param [heldItem] item to possibly gain for defeating this Pokémon
      */
 
@@ -34,6 +35,7 @@ class BattlePokemon implements EnemyPokemonInterface {
         public reward: Amount = new Amount(0, GameConstants.Currency.money),
         public shiny: boolean,
         public gemReward = 1,
+        public gender: number,
         public heldItem?: BagItem,
         public ep?: number
     ) {
@@ -57,12 +59,7 @@ class BattlePokemon implements EnemyPokemonInterface {
     }
 
     public defeat(trainer = false): void {
-        GameHelper.incrementObservable(App.game.statistics.pokemonDefeated[this.id]);
-        GameHelper.incrementObservable(App.game.statistics.totalPokemonDefeated);
-        if (this.shiny) {
-            GameHelper.incrementObservable(App.game.statistics.shinyPokemonDefeated[this.id]);
-            GameHelper.incrementObservable(App.game.statistics.totalShinyPokemonDefeated);
-        }
+        PokemonHelper.incrementPokemonStatistics(this.id, GameConstants.STATISTIC_DEFEATED, this.shiny, this.gender);
 
         if (this.reward.amount > 0) {
             App.game.wallet.addAmount(this.reward);
@@ -73,7 +70,7 @@ class BattlePokemon implements EnemyPokemonInterface {
             BagHandler.gainItem(this.heldItem);
             const msg = `${this.displayName} dropped ${GameHelper.anOrA(name)} ${name}!`;
             Notifier.notify({
-                message: `The enemy ${msg}`,
+                message: `The enemy ${msg} <img src="${BagHandler.image(this.heldItem)}" height="24px"/>`,
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.Items.dropped_item,
             });
