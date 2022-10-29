@@ -4962,13 +4962,13 @@ const Mustard6 = new NPC ('Mustard', [
 });
 const Mustard7 = new NPC ('Mustard', [
     'Good! Now then... The first thing for you to do is become best friends with Kubfu! You need to build trust! Kubfu hasn\'t really had a chance to explore the world outside the dojo, so... Maybe it\'ll help you become better friends if you train alongside it!',
-    'Hmm. Maybe you should train against Dark and Water types. It will be useful for it to know their weaknesses, since they will be its own weaknesses when it evolves.',
+    'Hmm. Maybe you should train against Dark and Water-types. It will be useful for it to know their weaknesses, since they will be its own weaknesses when it evolves.',
 ], {
     image: 'assets/images/temporaryBattle/Mustard.png',
     requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 12), new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 14, GameConstants.AchievementOption.less )]),
 });
 const Mustard8 = new NPC ('Mustard', [
-    'You\'re back! I can see already you look closer to Kubfu, and its training is going well! It isn\'t quite ready yet, however! To switch it up a little, you should now have it help you with catching some Water and Dark type Pokémon!',
+    'You\'re back! I can see already you look closer to Kubfu, and its training is going well! It isn\'t quite ready yet, however! To switch it up a little, you should now have it help you with catching some Water and Dark-type Pokémon!',
 ], {
     image: 'assets/images/temporaryBattle/Mustard.png',
     requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 14), new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 16, GameConstants.AchievementOption.less )]),
