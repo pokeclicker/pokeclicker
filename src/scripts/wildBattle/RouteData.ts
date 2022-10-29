@@ -474,9 +474,9 @@ Routes.add(new RegionRoute(
     'Pinkan Forest', GameConstants.Region.kanto, 41,
     new RoutePokemon({
         land: ['Pinkan Caterpie', 'Pinkan Weedle', 'Pinkan Pidgey', 'Pinkan Vileplume', 'Pinkan Paras', 'Pinkan Venonat', 'Pinkan Mankey', 'Pinkan Exeggutor'],
-                special: 
+        special: 
     [
-            new SpecialRoutePokemon(['Pinkan Pidgeotto'], new ObtainedPokemonRequirement(pokemonMap['Pinkan Pidgeotto'])),           
+            new SpecialRoutePokemon(['Pinkan Pidgeotto'], new ObtainedPokemonRequirement(pokemonMap['Pinkan Pidgeotto'])), 
     ],
     }),
     [
@@ -809,7 +809,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Poochyena', 'Gulpin', 'Minun', 'Oddish', 'Wingull', 'Plusle'],
         water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer'],
-        special: 
+        special:
     [
             new SpecialRoutePokemon(['Electrike'], new ObtainedPokemonRequirement(pokemonMap.Electrike)),
     ],
@@ -869,9 +869,9 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Surskit', 'Poochyena', 'Oddish', 'Marill', 'Illumise', 'Volbeat', 'Seedot'],
         water: ['Marill', 'Goldeen', 'Magikarp', 'Corphish'],
-        special: 
+        special:
     [
-            new SpecialRoutePokemon(['Roselia'], new ObtainedPokemonRequirement(pokemonMap.Roselia)),
+        new SpecialRoutePokemon(['Roselia'], new ObtainedPokemonRequirement(pokemonMap.Roselia)),
     ],
 }),
     [new RouteKillRequirement(10, GameConstants.Region.hoenn, 110)],
@@ -882,7 +882,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Zigzagoon', 'Linoone', 'Wingull', 'Kecleon'],
         water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Carvanha', 'Sharpedo'],
-        special: 
+        special:
     [
             new SpecialRoutePokemon(['Electrike'], new ObtainedPokemonRequirement(pokemonMap.Electrike)),
             new SpecialRoutePokemon(['Manectric'], new ObtainedPokemonRequirement(pokemonMap.Manectric)),
@@ -1357,7 +1357,7 @@ Routes.add(new RegionRoute(
     'Unova Route 7', GameConstants.Region.unova, 7,
     new RoutePokemon({
         land: ['Zangoose', 'Seviper', 'Cubchoo', 'Deerling (Summer)', 'Deerling (Winter)', 'Watchog', 'Tranquill', 'Foongus'],
-        special: 
+        special:
     [
             new SpecialRoutePokemon(['Zebstrika'], new ObtainedPokemonRequirement(pokemonMap.Zebstrika)),
     ],
@@ -1398,7 +1398,7 @@ Routes.add(new RegionRoute(
     'Unova Route 12', GameConstants.Region.unova, 12,
     new RoutePokemon({
         land: ['Pinsir', 'Heracross', 'Roselia', 'Combee', 'Tranquill', 'Sewaddle'],
-        special: 
+        special:
     [
             new SpecialRoutePokemon(['Vespiquen'], new ObtainedPokemonRequirement(pokemonMap.Vespiquen)),
     ],
@@ -1423,7 +1423,7 @@ Routes.add(new RegionRoute(
     'Unova Route 9', GameConstants.Region.unova, 9,
     new RoutePokemon({
         land: ['Muk', 'Liepard', 'Garbodor', 'Minccino', 'Gothorita', 'Duosion', 'Pawniard'],
-        special: 
+        special:
     [
             new SpecialRoutePokemon(['Swalot'], new ObtainedPokemonRequirement(pokemonMap.Swalot)),
     ],
@@ -1451,7 +1451,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Golduck', 'Gligar', 'Amoonguss', 'Mienfoo', 'Bouffalant', 'Rufflet', 'Vullaby'],
         water: ['Buizel', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
-        special: 
+        special:
     [
             new SpecialRoutePokemon(['Sawk'], new ObtainedPokemonRequirement(pokemonMap.Sawk)),
             new SpecialRoutePokemon(['Throh'], new ObtainedPokemonRequirement(pokemonMap.Throh)),           
@@ -1535,7 +1535,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Tropius', 'Carnivine', 'Watchog', 'Crustle', 'Scrafty'],
         water: ['Frillish', 'Alomomola'],
-        special: 
+        special:
     [
             new SpecialRoutePokemon(['Sawk'], new ObtainedPokemonRequirement(pokemonMap.Sawk)),
             new SpecialRoutePokemon(['Throh'], new ObtainedPokemonRequirement(pokemonMap.Throh)),            
@@ -1714,7 +1714,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Scyther', 'Ursaring', 'Spinda', 'Altaria', 'Floatzel'],
         water: ['Poliwag', 'Poliwhirl', 'Lombre', 'Floatzel', 'Basculin (Red-Striped)', 'Dratini'],
-        special: 
+        special:
     [
             new SpecialRoutePokemon(['Dragonair'], new ObtainedPokemonRequirement(pokemonMap.Dragonair)),
     ],
