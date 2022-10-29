@@ -475,9 +475,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Pinkan Caterpie', 'Pinkan Weedle', 'Pinkan Pidgey', 'Pinkan Vileplume', 'Pinkan Paras', 'Pinkan Venonat', 'Pinkan Mankey', 'Pinkan Exeggutor'],
         special:
-    [
-        new SpecialRoutePokemon(['Pinkan Pidgeotto'], new ObtainedPokemonRequirement(pokemonMap['Pinkan Pidgeotto'])),
-    ],
+    [new SpecialRoutePokemon(['Pinkan Pidgeotto'], new ObtainedPokemonRequirement(pokemonMap['Pinkan Pidgeotto']))],
     }),
     [
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Altering Cave')),
@@ -810,9 +808,7 @@ Routes.add(new RegionRoute(
         land: ['Poochyena', 'Gulpin', 'Minun', 'Oddish', 'Wingull', 'Plusle'],
         water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer'],
         special:
-    [
-        new SpecialRoutePokemon(['Electrike'], new ObtainedPokemonRequirement(pokemonMap.Electrike)),
-    ],
+    [new SpecialRoutePokemon(['Electrike'], new ObtainedPokemonRequirement(pokemonMap.Electrike))],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Granite Cave'))]
 ));
@@ -870,9 +866,7 @@ Routes.add(new RegionRoute(
         land: ['Surskit', 'Poochyena', 'Oddish', 'Marill', 'Illumise', 'Volbeat', 'Seedot'],
         water: ['Marill', 'Goldeen', 'Magikarp', 'Corphish'],
         special:
-    [
-        new SpecialRoutePokemon(['Roselia'], new ObtainedPokemonRequirement(pokemonMap.Roselia)),
-    ],
+    [new SpecialRoutePokemon(['Roselia'], new ObtainedPokemonRequirement(pokemonMap.Roselia))],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.hoenn, 110)],
     110.1
@@ -1358,9 +1352,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Zangoose', 'Seviper', 'Cubchoo', 'Deerling (Summer)', 'Deerling (Winter)', 'Watchog', 'Tranquill', 'Foongus'],
         special:
-    [
-        new SpecialRoutePokemon(['Zebstrika'], new ObtainedPokemonRequirement(pokemonMap.Zebstrika)),
-    ],
+    [new SpecialRoutePokemon(['Zebstrika'], new ObtainedPokemonRequirement(pokemonMap.Zebstrika))],
     }),
     [
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Chargestone Cave')),
@@ -1399,9 +1391,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Pinsir', 'Heracross', 'Roselia', 'Combee', 'Tranquill', 'Sewaddle'],
         special:
-    [
-        new SpecialRoutePokemon(['Vespiquen'], new ObtainedPokemonRequirement(pokemonMap.Vespiquen)),
-    ],
+    [new SpecialRoutePokemon(['Vespiquen'], new ObtainedPokemonRequirement(pokemonMap.Vespiquen))],
     }),
     [
         new RouteKillRequirement(10, GameConstants.Region.unova, 13),
@@ -1424,9 +1414,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Muk', 'Liepard', 'Garbodor', 'Minccino', 'Gothorita', 'Duosion', 'Pawniard'],
         special:
-    [
-        new SpecialRoutePokemon(['Swalot'], new ObtainedPokemonRequirement(pokemonMap.Swalot)),
-    ],
+    [new SpecialRoutePokemon(['Swalot'], new ObtainedPokemonRequirement(pokemonMap.Swalot))],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.unova, 11)],
     13.3
@@ -1498,9 +1486,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Yanma', 'Watchog', 'Herdier', 'Purrloin', 'Tranquill'],
         special:
-    [
-        new SpecialRoutePokemon(['Yanmega'], new ObtainedPokemonRequirement(pokemonMap.Yanmega)),
-    ],
+    [new SpecialRoutePokemon(['Yanmega'], new ObtainedPokemonRequirement(pokemonMap.Yanmega))],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pinwheel Forest'))],
     23.1
@@ -1715,9 +1701,7 @@ Routes.add(new RegionRoute(
         land: ['Scyther', 'Ursaring', 'Spinda', 'Altaria', 'Floatzel'],
         water: ['Poliwag', 'Poliwhirl', 'Lombre', 'Floatzel', 'Basculin (Red-Striped)', 'Dratini'],
         special:
-    [
-        new SpecialRoutePokemon(['Dragonair'], new ObtainedPokemonRequirement(pokemonMap.Dragonair)),
-    ],
+    [new SpecialRoutePokemon(['Dragonair'], new ObtainedPokemonRequirement(pokemonMap.Dragonair))],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 19)]
 ));
@@ -1789,9 +1773,7 @@ Routes.add(new RegionRoute(
         land: ['Alolan Rattata', 'Slowpoke', 'Wingull', 'Bagon', 'Yungoos'],
         water: ['Tentacool', 'Shellder', 'Magikarp', 'Remoraid', 'Wingull', 'Finneon', 'Mantyke', 'Wishiwashi (Solo)'],
         special:
-    [
-        new SpecialRoutePokemon(['Shelgon'], new ObtainedPokemonRequirement(pokemonMap.Shelgon)),
-    ],
+    [new SpecialRoutePokemon(['Shelgon'], new ObtainedPokemonRequirement(pokemonMap.Shelgon))],
     }),
     [
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Seaward Cave')),
@@ -1856,9 +1838,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         water: ['Magikarp', 'Corsola', 'Luvdisc', 'Wishiwashi (Solo)', 'Mareanie'],
         special:
-    [
-        new SpecialRoutePokemon(['Clobbopus'], new ObtainedPokemonRequirement(pokemonMap.Clobbopus)),
-    ],
+    [new SpecialRoutePokemon(['Clobbopus'], new ObtainedPokemonRequirement(pokemonMap.Clobbopus))],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Diglett\'s Tunnel'))],
     undefined,
@@ -2046,9 +2026,7 @@ Routes.add(new RegionRoute(
         land: ['Pelipper', 'Lickitung', 'Golduck', 'Granbull', 'Inkay', 'Bewear'],
         water: ['Magikarp', 'Dratini', 'Barboach'],
         special:
-    [
-        new SpecialRoutePokemon(['Dragonair'], new ObtainedPokemonRequirement(pokemonMap.Dragonair)),
-    ],
+    [new SpecialRoutePokemon(['Dragonair'], new ObtainedPokemonRequirement(pokemonMap.Dragonair))],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.alola, 29)],
     undefined,
