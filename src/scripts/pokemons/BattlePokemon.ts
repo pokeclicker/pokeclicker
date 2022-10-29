@@ -1,6 +1,6 @@
 /// <reference path="../../declarations/GameHelper.d.ts" />
 
-interface battleDefeatOptions {
+interface BattleDefeatOptions {
     trainer? : boolean,
     battleFrontier? : boolean,
 }
@@ -61,7 +61,7 @@ class BattlePokemon implements EnemyPokemonInterface {
         this.healthPercentage(Math.floor(this.health() / this.maxHealth() * 100));
     }
 
-    public defeat(options : battleDefeatOptions = {}): void {
+    public defeat(options : BattleDefeatOptions = {}): void {
         if (!options.battleFrontier) {
             PokemonHelper.incrementPokemonStatistics(this.id, GameConstants.STATISTIC_DEFEATED, this.shiny, this.gender);
         }
