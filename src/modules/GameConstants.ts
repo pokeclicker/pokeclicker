@@ -1538,6 +1538,21 @@ export enum DayOfWeek {
     'Saturday',
 }
 
+export enum MonthOfYear {
+    'January' = 0,
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+}
+
 export enum Pokerus {
     'Uninfected' = 0,
     'Infected',

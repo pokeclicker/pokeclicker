@@ -4,6 +4,7 @@
 ///<reference path="../../declarations/requirements/MultiRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/SeededDateRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/DayOfWeekRequirement.d.ts"/>
+///<reference path="../../declarations/requirements/MonthOfYearRequirement.d.ts"/>
 ///<reference path="../../declarations/utilities/SeededDateRand.d.ts"/>
 ///<reference path="../achievements/ObtainedPokemonRequirement.ts"/>
 ///<reference path="./DungeonTrainer.ts"/>
@@ -5871,7 +5872,13 @@ dungeonList['Twist Mountain'] = new Dungeon('Twist Mountain',
     356500, 7);
 
 dungeonList['Dragonspiral Tower'] = new Dungeon('Dragonspiral Tower',
-    ['Dratini', 'Tranquill', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Vanillish', 'Sawsbuck (Autumn)', 'Sawsbuck (Winter)', 'Beartic', 'Mienfoo', 'Mienshao', 'Druddigon', 'Golett', 'Golurk'],
+    [
+        'Dratini', 'Tranquill', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Vanillish', 'Beartic', 'Mienfoo', 'Mienshao', 'Druddigon', 'Golett', 'Golurk',
+        {pokemon: 'Sawsbuck (Spring)', options: { hide: true, requirement: new MonthOfYearRequirement([GameConstants.MonthOfYear.January, GameConstants.MonthOfYear.May, GameConstants.MonthOfYear.September]) }},
+        {pokemon: 'Sawsbuck (Summer)', options: { hide: true, requirement: new MonthOfYearRequirement([GameConstants.MonthOfYear.February, GameConstants.MonthOfYear.June, GameConstants.MonthOfYear.October]) }},
+        {pokemon: 'Sawsbuck (Autumn)', options: { hide: true, requirement: new MonthOfYearRequirement([GameConstants.MonthOfYear.March, GameConstants.MonthOfYear.July, GameConstants.MonthOfYear.November]) }},
+        {pokemon: 'Sawsbuck (Winter)', options: { hide: true, requirement: new MonthOfYearRequirement([GameConstants.MonthOfYear.April, GameConstants.MonthOfYear.August, GameConstants.MonthOfYear.December]) }},
+    ],
     {
         common: [
             {loot: 'xAttack', weight: 2},
@@ -5972,7 +5979,13 @@ dungeonList['Moor of Icirrus'] = new Dungeon('Moor of Icirrus',
     356500, 8);
 
 dungeonList['Pledge Grove'] = new Dungeon('Pledge Grove',
-    ['Fearow', 'Furret', 'Ledian', 'Sudowoodo', 'Stantler', 'Breloom', 'Unfezant', 'Sawsbuck (Autumn)', 'Sawsbuck (Winter)'],
+    [
+        'Fearow', 'Furret', 'Ledian', 'Sudowoodo', 'Stantler', 'Breloom', 'Unfezant',
+        {pokemon: 'Sawsbuck (Spring)', options: { hide: true, requirement: new MonthOfYearRequirement([GameConstants.MonthOfYear.January, GameConstants.MonthOfYear.May, GameConstants.MonthOfYear.September]) }},
+        {pokemon: 'Sawsbuck (Summer)', options: { hide: true, requirement: new MonthOfYearRequirement([GameConstants.MonthOfYear.February, GameConstants.MonthOfYear.June, GameConstants.MonthOfYear.October]) }},
+        {pokemon: 'Sawsbuck (Autumn)', options: { hide: true, requirement: new MonthOfYearRequirement([GameConstants.MonthOfYear.March, GameConstants.MonthOfYear.July, GameConstants.MonthOfYear.November]) }},
+        {pokemon: 'Sawsbuck (Winter)', options: { hide: true, requirement: new MonthOfYearRequirement([GameConstants.MonthOfYear.April, GameConstants.MonthOfYear.August, GameConstants.MonthOfYear.December]) }},
+    ],
     {
         common: [
             {loot: 'Lucky_egg'},

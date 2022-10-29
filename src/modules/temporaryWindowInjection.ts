@@ -126,6 +126,7 @@ import QuestLineStepCompletedRequirement from './requirements/QuestLineStepCompl
 import QuestLineStartedRequirement from './requirements/QuestLineStartedRequirement';
 import TemporaryBattleRequirement from './requirements/TemporaryBattleRequirement';
 import DayOfWeekRequirement from './requirements/DayOfWeekRequirement';
+import MonthOfYearRequirement from './requirements/MonthOfYearRequirement';
 import SaveReminder from './saveReminder/SaveReminder';
 import lazyLoad from './utilities/LazyLoader';
 
@@ -260,6 +261,7 @@ Object.assign(<any>window, {
     QuestLineStartedRequirement,
     TemporaryBattleRequirement,
     DayOfWeekRequirement,
+    MonthOfYearRequirement,
     SaveReminder,
     lazyLoad,
 });

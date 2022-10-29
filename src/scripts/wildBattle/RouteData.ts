@@ -1326,8 +1326,14 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Unova Route 6', GameConstants.Region.unova, 6,
     new RoutePokemon({
-        land: ['Marill', 'Deerling (Spring)', 'Deerling (Autumn)', 'Karrablast', 'Tranquill', 'Foongus', 'Swadloon', 'Vanillite', 'Shelmet'],
+        land: ['Marill', 'Karrablast', 'Tranquill', 'Foongus', 'Swadloon', 'Vanillite', 'Shelmet'],
         water: ['Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
+        special: [
+            new SpecialRoutePokemon(['Deerling (Spring)'], new MonthOfYearRequirement([GameConstants.MonthOfYear.January, GameConstants.MonthOfYear.May, GameConstants.MonthOfYear.September])),
+            new SpecialRoutePokemon(['Deerling (Summer)'], new MonthOfYearRequirement([GameConstants.MonthOfYear.February, GameConstants.MonthOfYear.June, GameConstants.MonthOfYear.October])),
+            new SpecialRoutePokemon(['Deerling (Autumn)'], new MonthOfYearRequirement([GameConstants.MonthOfYear.March, GameConstants.MonthOfYear.July, GameConstants.MonthOfYear.November])),
+            new SpecialRoutePokemon(['Deerling (Winter)'], new MonthOfYearRequirement([GameConstants.MonthOfYear.April, GameConstants.MonthOfYear.August, GameConstants.MonthOfYear.December])),
+        ],
     }),
     [
         new RouteKillRequirement(10, GameConstants.Region.unova, 5),
@@ -1340,7 +1346,13 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Unova Route 7', GameConstants.Region.unova, 7,
     new RoutePokemon({
-        land: ['Zangoose', 'Seviper', 'Cubchoo', 'Deerling (Summer)', 'Deerling (Winter)', 'Watchog', 'Tranquill', 'Foongus'],
+        land: ['Zangoose', 'Seviper', 'Cubchoo', 'Watchog', 'Tranquill', 'Foongus'],
+        special: [
+            new SpecialRoutePokemon(['Deerling (Spring)'], new MonthOfYearRequirement([GameConstants.MonthOfYear.January, GameConstants.MonthOfYear.May, GameConstants.MonthOfYear.September])),
+            new SpecialRoutePokemon(['Deerling (Summer)'], new MonthOfYearRequirement([GameConstants.MonthOfYear.February, GameConstants.MonthOfYear.June, GameConstants.MonthOfYear.October])),
+            new SpecialRoutePokemon(['Deerling (Autumn)'], new MonthOfYearRequirement([GameConstants.MonthOfYear.March, GameConstants.MonthOfYear.July, GameConstants.MonthOfYear.November])),
+            new SpecialRoutePokemon(['Deerling (Winter)'], new MonthOfYearRequirement([GameConstants.MonthOfYear.April, GameConstants.MonthOfYear.August, GameConstants.MonthOfYear.December])),
+        ],
     }),
     [
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Chargestone Cave')),

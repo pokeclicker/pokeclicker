@@ -394,6 +394,7 @@ class Game {
                 BattleCafeController.spinsLeft(BattleCafeController.spinsPerDay());
 
                 DayOfWeekRequirement.date(now.getDay());
+                MonthOfYearRequirement.date(now.getMonth());
             }
 
             // Check if it's a new hour

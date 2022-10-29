@@ -475,6 +475,20 @@ namespace GameConstants {
         'Friday',
         'Saturday',
     }
+    declare enum MonthOfYear {
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',
+    }
     declare enum Pokerus {
         'Uninfected',
         'Infected',
