@@ -1586,6 +1586,10 @@ export enum GalarSubRegions {
     CrownTundra,
 }
 
+export enum FinalSubRegions {
+    Final = 0,
+}
+
 // Gender Types
 export enum Genders {
     Genderless = 0,
