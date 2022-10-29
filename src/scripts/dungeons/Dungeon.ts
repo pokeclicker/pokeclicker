@@ -8445,7 +8445,7 @@ dungeonList['Poni Meadow'] = new Dungeon('Poni Meadow',
     16659968,
     [
         new DungeonBossPokemon('Oricorio (Sensu)', 83299840, 70),
-        new DungeonBossPokemon('Floette (Red)', 83299840, 70),
+        new DungeonBossPokemon('Floette (Blue)', 83299840, 70),
     ],
     1225000, 28);
 
