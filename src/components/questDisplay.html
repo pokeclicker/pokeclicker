@@ -44,8 +44,8 @@
                 </tr>
             </tbody>
             <!-- List of quest line quests -->
-			<!-- foreach: App.game.quests.questLines() -->
-				<tbody id="questLines" data-bind="if: $data.state() == QuestLineState.started">
+			<!-- ko foreach: App.game.quests.questLines() -->
+				<tbody data-bind="if: $data.state() == QuestLineState.started, attr : {'data-target' : '#q_' + $data.name}" data-toggle="collapse">
                     <tr>
                         <td colspan="2">
                             <div class="card-header">
@@ -55,7 +55,7 @@
                         </td>
                     </tr>
 				</tbody>
-				<tbody>
+				<tbody class="collapse" data-bind="if: $data.state() == QuestLineState.started, attr : {id : 'q_' + $data.name}">
                     <tr class="text-center">
                         <td colspan="2" data-bind="text: $data.curQuestObject().description"></td>
                     </tr>
