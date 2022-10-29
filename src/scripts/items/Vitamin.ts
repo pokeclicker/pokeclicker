@@ -9,6 +9,10 @@ class Vitamin extends Item {
     use(): boolean {
         return true;
     }
+
+    get image() {
+        return `assets/images/items/vitamin/${this.displayName}.png`;
+    }
 }
 
 ItemList.RareCandy = new Vitamin(GameConstants.VitaminType.RareCandy, Infinity, undefined, undefined, 'Rare Candy', 'A rare-to-find candy that currently has no use.');

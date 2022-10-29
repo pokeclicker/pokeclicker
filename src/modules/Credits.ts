@@ -215,6 +215,8 @@ export const SpriteCredits: Credit[] = [
             'Team Flare Admin (male)',
             'Team Flare Admin (female)',
             'Team Flare Aliana',
+            'Team Magma and Aqua Admins',
+            'Team Magma Grunts',
             'Tourist Couple/Bellhop',
             'Tower of Darkness',
             'Tower of Waters',
