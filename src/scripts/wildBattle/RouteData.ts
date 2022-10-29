@@ -1788,7 +1788,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Alolan Rattata', 'Slowpoke', 'Wingull', 'Bagon', 'Yungoos'],
         water: ['Tentacool', 'Shellder', 'Magikarp', 'Remoraid', 'Wingull', 'Finneon', 'Mantyke', 'Wishiwashi (Solo)'],
-        special: 
+        special:
     [
         new SpecialRoutePokemon(['Shelgon'], new ObtainedPokemonRequirement(pokemonMap.Shelgon)),
     ],
