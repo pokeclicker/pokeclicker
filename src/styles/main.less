@@ -293,7 +293,10 @@ td {
   .pokemonLevel { text-align: right; }
 
   .col-lg-6 & {
-    .pokemonName { max-width: 55%; text-align: left; }
+    thead { line-height: 10px;
+      .pokemonName { margin-right: 15px; }
+     }
+    .pokemonName { width: 100%; }
     .pokemonAttack { text-align: left; }
   }
 }
