@@ -11,7 +11,8 @@ export default class UndergroundGemItem extends UndergroundItem {
         public value = 1,
         public type: PokemonType,
         public requirement?: Requirement,
+        weight?: (() => number) | number,
     ) {
-        super(name, id, space, value, UndergroundItemValueType.Gem, requirement);
+        super(name, id, space, value, UndergroundItemValueType.Gem, requirement, weight);
     }
 }

@@ -115,7 +115,7 @@ class Battle {
         PokemonHelper.incrementPokemonStatistics(enemyPokemon.id, GameConstants.STATISTIC_ENCOUNTERED, enemyPokemon.shiny, enemyPokemon.gender);
         // Shiny
         if (enemyPokemon.shiny) {
-            App.game.logbook.newLog(LogBookTypes.SHINY, `[${Routes.getRoute(player.region, player.route()).routeName}] You encountered a wild shiny ${enemyPokemon.name}.`);
+            App.game.logbook.newLog(LogBookTypes.SHINY, `[${Routes.getRoute(player.region, player.route()).routeName}] You encountered a wild shiny ${enemyPokemon.name}. ${App.game.party.alreadyCaughtPokemon(enemyPokemon.id, true) ? '(duplicate)' : ''}`);
         } else if (!App.game.party.alreadyCaughtPokemon(enemyPokemon.id) && enemyPokemon.health()) {
             App.game.logbook.newLog(LogBookTypes.NEW, `[${Routes.getRoute(player.region, player.route()).routeName}] You encountered a wild ${enemyPokemon.name}.`);
         }
@@ -143,7 +143,7 @@ class Battle {
         if (Rand.chance(this.catchRateActual() / 100)) { // Caught
             this.catchPokemon(enemyPokemon, route, region);
         } else if (enemyPokemon.shiny) { // Failed to catch, Shiny
-            App.game.logbook.newLog(LogBookTypes.ESCAPED, `The shiny ${enemyPokemon.name} escaped!`);
+            App.game.logbook.newLog(LogBookTypes.ESCAPED, `The shiny ${enemyPokemon.name} escaped! ${App.game.party.alreadyCaughtPokemon(enemyPokemon.id, true) ? '(duplicate)' : ''}`);
         } else if (!App.game.party.alreadyCaughtPokemon(enemyPokemon.id)) { // Failed to catch, Uncaught
             App.game.logbook.newLog(LogBookTypes.ESCAPED, `The wild ${enemyPokemon.name} escaped!`);
         }
@@ -167,5 +167,14 @@ class Battle {
             App.game.farming.gainRandomBerry();
         }
     }
+
+    public static pokemonAttackTooltip: KnockoutComputed<string> = ko.pureComputed(() => {
+        if (Battle.enemyPokemon()) {
+            const pokemonAttack = App.game.party.calculatePokemonAttack(Battle.enemyPokemon().type1, Battle.enemyPokemon().type2);
+            return `${pokemonAttack.toLocaleString('en-US')} against ${Battle.enemyPokemon().name}`;
+        } else {
+            return '';
+        }
+    }).extend({rateLimit: 1000});
 
 }
