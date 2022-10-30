@@ -60,7 +60,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                     <button type="button" class="text-left custom-select col-12 btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bind="text :
                                         BreedingFilters.region.value() == 2 ** (player.highestRegion() + 1) - 1 ?
                                             'All' :
-                                            (BreedingFilters.region.value() ?
+                                            (BreedingFilters.region.value() > 0 && BreedingFilters.region.value() ?
                                                 GameConstants.camelCaseToString(GameConstants.Region[Math.floor(Math.log2(BreedingFilters.region.value()))]) + (BreedingFilters.region.value()
                                                     .toString(2).split('')
                                                     .reduce(function(s,n){ return s + (n == '1' ? 1 : 0)}, 0) > 1 ? ' & more' : '') :
@@ -177,7 +177,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                 <div data-bind="if: App.game.party.getPokemon($data.id)?.pokerus" style="position: absolute;left: 2px;top:10px;">
                                     <img width="32px" src="" data-bind="attr: { src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[App.game.party.getPokemon($data.id).pokerus]}.png`}"/>
                                 </div>
-                                <img src="" width="80px" data-bind="attr:{ src: PokemonHelper.getImage($data.id, undefined, App.game.party.alreadyCaughtPokemon($data.id) && App.game.party.getPokemon($data.id).defaultFemaleSprite()) }">
+                                <img src="" width="80px" data-bind="attr:{ src: PokemonHelper.getImage($data.id) }">
                                 <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: BreedingController.getDisplayValue($data)">value</span>
                                 <a class="overlay" href="#breed" data-bind="click: function() { App.game.breeding.addPokemonToHatchery($data); App.game.breeding.checkCloseModal();}"></a>
                                 <div class="pokemonCategory dropdown">
