@@ -2481,7 +2481,7 @@ const CanalaveSinnohMyth = new NPC('Sinnoh\'s Myth', [
     '<i>From the lake floor they rise.</i>',
     '<i>Bearing with them the power to make vast lands, they rise again.</i>',
 ],{
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Zero\'s Ambition', 0), new QuestLineStepCompletedRequirement('Zero\'s Ambition', 2, GameConstants.AchievementOption.less)]),});
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Zero\'s Ambition', 0), new QuestLineStepCompletedRequirement('Zero\'s Ambition', 2, GameConstants.AchievementOption.less)])});
 
 const VerityMesprit = new NPC('Mesprit', [
     '<i>You are the trainer looking for the Distortion World, right?</i>',
@@ -2489,7 +2489,7 @@ const VerityMesprit = new NPC('Mesprit', [
     '<i>Collect 10 Purple Shards and then visit my two siblings. They will also help you in your quest.</i>',
 ],{
     image: 'assets/images/pokemon/481.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Zero\'s Ambition', 2), new QuestLineStepCompletedRequirement('Zero\'s Ambition', 4, GameConstants.AchievementOption.less)]),});
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Zero\'s Ambition', 2), new QuestLineStepCompletedRequirement('Zero\'s Ambition', 4, GameConstants.AchievementOption.less)])});
 
 const ValorAzelf = new NPC('Azelf', [
     '<i>Mesprit told me you would come.</i>',
@@ -2497,7 +2497,7 @@ const ValorAzelf = new NPC('Azelf', [
     '<i>Obtain 10 Ochre Shards and then visit Uxie at Lake Acuity.</i>',
 ],{
     image: 'assets/images/pokemon/482.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Zero\'s Ambition', 4), new QuestLineStepCompletedRequirement('Zero\'s Ambition', 6, GameConstants.AchievementOption.less)]),});
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Zero\'s Ambition', 4), new QuestLineStepCompletedRequirement('Zero\'s Ambition', 6, GameConstants.AchievementOption.less)])});
 
 const SnowpointYoungGirl = new NPC('Young Girl', [
     'Someone told me that training an Eevee in Lake Acuity will make it evolve.',
@@ -2510,7 +2510,7 @@ const AcuityUxie = new NPC('Uxie', [
     '<i>We will be waiting at Sendoff Spring, meet us there after you have collected the shards.</i>',
 ],{
     image: 'assets/images/pokemon/480.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Zero\'s Ambition', 6), new QuestLineStepCompletedRequirement('Zero\'s Ambition', 8, GameConstants.AchievementOption.less)]),});
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Zero\'s Ambition', 6), new QuestLineStepCompletedRequirement('Zero\'s Ambition', 8, GameConstants.AchievementOption.less)])});
 
 const SunyshoreRibbonerJulia = new NPC('Ribboner Julia', [
     'Oh! I don’t get visitors often. My husband is a sailor who visits far away lands… he always tells me these fantastic things.',
@@ -2553,7 +2553,7 @@ const SendoffSpringLakeTrio = new NPC('Lake Trio', [
     '<i>We bestow it upon you, charge it with the ghostly energy of the Distortion World.</i>',
 ],{
     image: 'assets/images/npcs/Lake Trio.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Zero\'s Ambition', 9), new QuestLineStepCompletedRequirement('Zero\'s Ambition', 11, GameConstants.AchievementOption.less)]),});
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Zero\'s Ambition', 9), new QuestLineStepCompletedRequirement('Zero\'s Ambition', 11, GameConstants.AchievementOption.less)])});
 
 const SendoffSpringZero = new NPC('Zero', [
     'I couldn\'t wait anymore for you to report about your progress, so I asked around and discovered you were coming here.',
@@ -2827,7 +2827,7 @@ TownList['Iron Island'] = new DungeonTown(
 TownList['Lake Valor'] = new DungeonTown(
     'Lake Valor',
     GameConstants.Region.sinnoh,
-     [new GymBadgeRequirement(BadgeEnums.Mine)],
+    [new GymBadgeRequirement(BadgeEnums.Mine)],
     [],
     {
         npcs: [ValorAzelf],
@@ -2836,7 +2836,7 @@ TownList['Lake Valor'] = new DungeonTown(
 TownList['Lake Verity'] = new DungeonTown(
     'Lake Verity',
     GameConstants.Region.sinnoh,
-     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Lake Valor'))],
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Lake Valor'))],
     [],
     {
         npcs: [VerityMesprit],
@@ -2873,7 +2873,7 @@ TownList['Distortion World'] = new DungeonTown(
     'Distortion World',
     GameConstants.Region.sinnoh,
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Spear Pillar'))],
-    [TemporaryBattleList['Giratina']],
+    [TemporaryBattleList.Giratina]
 );
 TownList['Victory Road Sinnoh'] = new DungeonTown(
     'Victory Road Sinnoh',
@@ -2884,7 +2884,7 @@ TownList['Sendoff Spring'] = new DungeonTown(
     'Sendoff Spring',
     GameConstants.Region.sinnoh,
     [new QuestLineStepCompletedRequirement('Zero\'s Ambition', 8)],
-    [TemporaryBattleList['Zero']],
+    [TemporaryBattleList.Zero],
     {
         npcs: [SendoffSpringLakeTrio, SendoffSpringZero],
     }

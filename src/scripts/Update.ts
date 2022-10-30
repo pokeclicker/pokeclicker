@@ -1374,7 +1374,7 @@ class Update implements Saveable {
             if (playerData._townName == 'Brawlers Cave') {
                 playerData._townName = 'Brawlers\' Cave';
             }
-            
+
             // Add Giratina and Zero Temporary Battles
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 29);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 30);

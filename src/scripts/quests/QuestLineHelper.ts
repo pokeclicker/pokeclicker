@@ -765,7 +765,7 @@ class QuestLineHelper {
 
         App.game.quests.questLines().push(galacticSinnohQuestLine);
     }
-    
+
     //Giratina Origin quest
     public static createGiratinaOriginQuestLine() {
         const giratinaOriginQuestLine = new QuestLine('Zero\'s Ambition', 'Help Zero find an entrance to the Distortion World.', new MultiRequirement([new TemporaryBattleRequirement('Giratina'), new ObtainedPokemonRequirement(pokemonMap.Uxie), new ObtainedPokemonRequirement(pokemonMap.Mesprit), new ObtainedPokemonRequirement(pokemonMap.Azelf), new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)]), GameConstants.BulletinBoards.Sinnoh);
