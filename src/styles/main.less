@@ -286,15 +286,18 @@ td {
   .pokemonName { flex-grow: 10; }
   .pokemonAttack, .pokemonLevel {
     flex-grow: 1;
-    min-width: 60px;
+    min-width: 45px;
   }
 
   .pokemonAttack { text-align: left; }
   .pokemonLevel { text-align: right; }
 
   .col-lg-6 & {
-    .pokemonName { width: auto; }
-    .pokemonAttack { text-align: right; }
+    thead { line-height: 10px;
+      .pokemonName { margin-right: 15px; }
+     }
+    .pokemonName { width: 100%; }
+    .pokemonAttack { text-align: left; }
   }
 }
 
@@ -721,4 +724,15 @@ td.tight {
 }
 i[class*="gender-icon-"] {
   font-size: 24px;
+}
+
+/* Profile card */
+#profile-trainer-card{
+  max-width: 330px;
+  margin: auto;
+}
+
+/* Checkbox disabled */
+.checkbox-disabled {
+  opacity: .5;
 }
