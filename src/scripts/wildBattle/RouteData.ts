@@ -1187,7 +1187,7 @@ Routes.add(new RegionRoute(
         land: ['Magnemite', 'Magneton', 'Electabuzz', 'Wingull', 'Pelipper', 'Luxio', 'Floatzel', 'Gastrodon (East)', 'Glameow', 'Purugly', 'Chatot'],
         water: ['Tentacool', 'Tentacruel', 'Magikarp', 'Gyarados', 'Remoraid', 'Octillery', 'Wingull', 'Pelipper', 'Sharpedo'],
     }),
-    [new TemporaryBattleRequirement('Giratina')]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Distortion World'))]
 ));
 Routes.add(new RegionRoute(
     'Sinnoh Route 223', GameConstants.Region.sinnoh, 223,
