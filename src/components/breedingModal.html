@@ -60,7 +60,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                     <button type="button" class="text-left form-select col-12 btn" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bind="text :
                                         BreedingFilters.region.value() == 2 ** (player.highestRegion() + 1) - 1 ?
                                             'All' :
-                                            (BreedingFilters.region.value() ?
+                                            (BreedingFilters.region.value() > 0 && BreedingFilters.region.value() ?
                                                 GameConstants.camelCaseToString(GameConstants.Region[Math.floor(Math.log2(BreedingFilters.region.value()))]) + (BreedingFilters.region.value()
                                                     .toString(2).split('')
                                                     .reduce(function(s,n){ return s + (n == '1' ? 1 : 0)}, 0) > 1 ? ' & more' : '') :
