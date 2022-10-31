@@ -17,10 +17,10 @@
     <script src="libs/Sortable.min.js"></script>
 
     <!-- New module-based code from './modules' -->
-    <script src="scripts/modules.min.js?v=0.10.0"></script>
+    <script src="scripts/modules.min.js?v=0.10.1"></script>
 
     <!--Minified scripts-->
-    <script src="scripts/script.min.js?v=0.10.0"></script>
+    <script src="scripts/script.min.js?v=0.10.1"></script>
 
     <!--Popper.js-->
     <script src="libs/popper.min.js"></script>
@@ -38,7 +38,7 @@
     <link href="libs/introjs-modern.css" rel="stylesheet">
 
     <!--Minified styles-->
-    <link href="styles/styles.min.css?v=0.10.0" rel="stylesheet">
+    <link href="styles/styles.min.css?v=0.10.1" rel="stylesheet">
 
     <!-- Google Analytics-->
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -313,7 +313,7 @@
 
 <!-- Show profile modal -->
 <div class="modal noselect fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="profileModal">
-    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
         <div class="modal-content">
             <div class="modal-header" style='justify-content: space-around;'>
                 <h5 class="modal-title">Profile</h5>
@@ -323,28 +323,52 @@
             </div>
             <div class="modal-body text-left p-2">
                 <div class="form-row p-0" id="profileEdit">
-                    <div class="form-group col-12">
+                    <div class="form-group col-6">
                         <label>Name</label>
                         <input autocomplete="off" class="form-control" oninput="App.game.profile.name(this.value)" placeholder="name" data-bind="value: App.game.profile.name()"/>
                     </div>
-                    <div class="form-group col-12">
-                        <label>Pokemon</label>
-                        <select autocomplete="off" class="custom-select" onchange="App.game.profile.pokemon(+this.value)">
+                    <div class="form-group col-6">
+                        <label>Pokémon</label>
+                        <select autocomplete="off" class="custom-select" onchange="App.game.profile.pokemon(+this.value), App.game.profile.pokemonShiny(false), App.game.profile.pokemonFemale(false)">
                             <!-- ko foreach: App.game.party.caughtPokemon.sort((a, b) => a.id - b.id) -->
                             <option data-bind="attr: { value: $data.id, selected: App.game.profile.pokemon() === $data.id }, text: '#'+($data.id > 0 ? Math.floor($data.id) + '' : '???').padStart(3, 0)+' '+$data.name">Pokemon</option>
                             <!-- /ko -->
                         </select>
                     </div>
+                    
+                    <div class="form-group col-6">
+                        <label>Shiny</label>
+                        <label class="form-check-label toggler-wrapper style-1 float-right">
+                            <input class="form-check-input" type="checkbox" id="profile-shiny-toggle"
+                                data-bind="checked: App.game.profile.pokemonShiny, enable: App.game.party.alreadyCaughtPokemon(App.game.profile.pokemon(), true)">
+                            <div class="toggler-slider" data-bind="tooltip: { title: !App.game.party.alreadyCaughtPokemon(App.game.profile.pokemon(), true) ? `Shiny ${PokemonHelper.getPokemonById(App.game.profile.pokemon()).name} is not unlocked yet` : '', trigger: 'hover' }">
+                                <div class="toggler-knob" data-bind="css: { 'checkbox-disabled': !App.game.party.alreadyCaughtPokemon(App.game.profile.pokemon(), true) }"></div>
+                            </div>
+                        </label>
+                    </div>
+                    <!-- ko if: PokemonHelper.getPokemonById(App.game.profile.pokemon()).gender.visualDifference -->
+                    <div class="form-group col-6">
+                        <label>Gender</label>
+                        <label class="form-check-label toggler-wrapper style-1 float-right"
+                            data-bind="css: { 'gender-toggle': PokemonHelper.getPokemonById(App.game.profile.pokemon()).gender.visualDifference }">
+                            <input class="form-check-input" type="checkbox" id="profile-female-toggle"
+                                data-bind="checked: App.game.profile.pokemonFemale, enable: PokemonHelper.getPokemonById(App.game.profile.pokemon()).gender.visualDifference">
+                            <div class="toggler-slider">
+                                <div class="toggler-knob"></div>
+                            </div>
+                        </label>
+                    </div>
+                    <!-- /ko -->
                     <div class="form-group col-12">
                         <label>Text Color</label>
                         <p class="p-0" data-bind="style: { background: App.game.profile.textColor() }">
                           <label style="width:100%; min-height: 28px; padding:0px; margin: 0px;"><input style="opacity: 0;" type="color" data-bind="value: App.game.profile.textColor"/></label>
                         </p>
                     </div>
-                    <div class="form-group col-12">
+                    <div class="form-group col-6">
                         <a class="btn btn-block btn-primary text-left" href="#profileTrainerModal" data-toggle="modal">Trainer <img style="position:absolute; right: 10px;" data-bind="attr: { src: `assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png` }"/></a>
                     </div>
-                    <div class="form-group col-12">
+                    <div class="form-group col-6">
                         <a class="btn btn-block btn-primary text-left" href="#profileBackgroundModal" data-toggle="modal">Background <knockout style="position:absolute; right: 10px;" data-bind="text: `#${App.game.profile.background()}`"></knockout></a>
                     </div>
                 </div>
@@ -482,12 +506,16 @@
                     </div>
 
                     <div id="itemBag" class="tab-pane p-3">
-                        <div class="row justify-content-sm-center">
-                            <div class="row col-10">
+                        <div>
+                            <h4>Vitamins</h4>
+                            <div class="row">
                                 <div class="btn btn-primary col-2 item-bag-item" data-bind="template: { name: 'otherItemTemplate', data: 'Protein'}, click: () => $('#pokemonSelectorModal').modal('show')"></div>
-                            <!-- ko foreach: HeldItem.getHeldItems() -->
-                                <div class="btn btn-primary col-2 item-bag-item" data-bind="template: { name: 'otherItemTemplate', data: $data.name}, click: () => { HeldItem.heldItemSelected($data); $('#heldItemModal').modal('show'); }, visible: $data.isUnlocked()"></div>
-                            <!-- /ko -->
+                            </div>
+                            <h4>Held items</h4>
+                            <div class="row">
+                                <!-- ko foreach: HeldItem.getSortedHeldItems() -->
+                                    <div class="btn btn-primary col-2 item-bag-item" data-bind="template: { name: 'otherItemTemplate', data: $data.name}, click: () => { HeldItem.heldItemSelected($data); $('#heldItemModal').modal('show'); }, visible: $data.isUnlocked()"></div>
+                                <!-- /ko -->
                             </div>
                         </div>
                     </div>
@@ -634,7 +662,7 @@
     <div class="btn-group" data-bind="foreach: $data.optionValues">
         <button class="btn btn-secondary amount-button list-group-item-action"
                 data-bind="click: function() {$parent.observable($data)},
-                          text: $data,
+                          text: $data.toLocaleString('en-US'),
                           css:{ 'pokemon-selected': $parent.observable() === $data}">
         </button>
     </div>
@@ -673,14 +701,9 @@
       <span data-bind="
          text: App.game.party.pokemonAttackObservable().toLocaleString('en-US'),
          tooltip: {
-            title: Battle?.enemyPokemon()
-                ? `${App.game.party.calculatePokemonAttack(
-                    Battle.enemyPokemon().type1,
-                    Battle.enemyPokemon().type2
-                ).toLocaleString('en-US')} against ${Battle.enemyPokemon().name}`
-                : '',
+            title: Battle.pokemonAttackTooltip,
             trigger: 'hover',
-        }
+         }
          "></span>
   </span>
 </script>
@@ -1161,7 +1184,7 @@
                                     <td width="50%">
                                       <knockout data-bind="using: App.game.statistics.routeKills[player.region][player.route()]()">
                                           <knockout data-bind="text: $data.toLocaleString('en-US')">0</knockout>
-                                          <knockout data-bind="visible: $data < GameConstants.ROUTE_KILLS_NEEDED">/10</knockout>
+                                          <knockout data-bind="visible: $data < GameConstants.ROUTE_KILLS_NEEDED">/ 10</knockout>
                                           &nbsp;Pokémon defeated
                                       </knockout>
                                     </td>
@@ -1186,13 +1209,13 @@
                     <div class="row justify-content-center no-gutters" data-bind="if: App.game.gameState === GameConstants.GameState.dungeon">
     <div class="col no-gutters clickable" style="height: 280px; display: block;"
         data-bind="click: function() { DungeonRunner.handleClick() }">
-        <h2 class="pageItemTitle" style="display: block;">
+        <h2 class="pageItemTitle mobileBattleTitle" style="display: block;">
             <knockout data-bind="if: DungeonBattle.enemyPokemon() && DungeonBattle.enemyPokemon().health()">
                 <knockout data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': DungeonBattle.enemyPokemon() } }">Pokémon name</knockout>
                 <!-- ko if: !DungeonBattle.trainer() -->
                 <knockout data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(DungeonBattle.enemyPokemon().id)}}"></knockout>
-                <knockout data-bind="if: RouteHelper.minPokerusCheck(RouteHelper.getAvailablePokemonList(player.route(), player.region, true))">
-                    <img data-bind="attr:{ src: 'assets/images/breeding/pokerus/' + GameConstants.Pokerus[RouteHelper.minPokerus(RouteHelper.getAvailablePokemonList(player.route(), player.region, true))] + '.png'}"
+                <knockout data-bind="if: App.game.party.getPokemonByName(Battle.enemyPokemon().name)?.pokerus > GameConstants.Pokerus.Uninfected">
+                   <img data-bind="attr:{ src: 'assets/images/breeding/pokerus/' + GameConstants.Pokerus[App.game.party.getPokemonByName(Battle.enemyPokemon().name)?.pokerus] + '.png'}"
                   src=""/>
                 </knockout>
                 <!-- /ko -->
@@ -1234,10 +1257,10 @@
 
         <!-- ko if: (DungeonRunner.fighting() || DungeonBattle.catching)  -->
         <div data-bind="if: DungeonBattle.enemyPokemon">
-            <div style="position:absolute; left:65%;" data-bind="if: DungeonBattle.trainer()">
+            <div class="trainer" data-bind="if: DungeonBattle.trainer()">
                 <img data-bind="attr:{ src: DungeonBattle.trainer().image }" onerror="this.src='assets/images/trainers/Mysterious Trainer.png';"/>
             </div>
-            <div>
+            <div class="dungeon-enemy">
                 <div data-bind="ifnot: DungeonBattle.catching">
                     <knockout data-bind="template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': DungeonBattle.enemyPokemon() } }">Pokémon sprite</knockout>
                 </div>
@@ -1250,7 +1273,7 @@
                     <knockout data-bind="text: Math.floor(DungeonBattle.catchRateActual()) + '%'">Catch Rate</knockout>
                 </div>
             </div>
-            <div class="progress hitpoints" style="height: 20px;">
+            <div class="progress hitpoints dungeonhitpoints" style="height: 20px;">
                 <div class="progress-bar bg-danger" role="progressbar"
                      data-bind="attr:{ style: 'width:' + DungeonBattle.enemyPokemon().healthPercentage() + '%'}, css: { 'healthbar-boss': DungeonRunner.fightingBoss(), 'bg-danger': !DungeonRunner.fightingBoss()}"
                      aria-valuemin="0" aria-valuemax="100">
@@ -1335,7 +1358,7 @@
                     
 <div class="row justify-content-center no-gutters" data-bind="if: App.game.gameState === GameConstants.GameState.gym">
     <div class="col no-gutters clickable" data-bind="click: function() {GymBattle.clickAttack()}" style="height: 280px; display: block;">
-        <h2 class="pageItemTitle" style="display: block;">
+        <h2 class="pageItemTitle mobileBattleTitle" style="display: block;">
             <knockout class="left">
                 <knockout data-bind="text: GymBattle.gym.leaderName.replace(/\d/g,'')"></knockout>
             </knockout>
@@ -1371,15 +1394,15 @@
           </div>
         </div>
 
-        <div style="position:absolute; left:65%; top: 25%;">
+        <div class="trainer">
             <img data-bind="attr:{ src: GymBattle.gym.imagePath }" onerror="this.src='assets/images/trainers/Mysterious Trainer.png';"/>
         </div>
 
-        <div>
+        <div class="trainer-enemy">
             <knockout data-bind="template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': GymBattle.enemyPokemon() } }">Pokémon sprite</knockout>
         </div>
 
-        <div class="progress hitpoints" style="height: 20px;">
+        <div class="progress hitpoints trainerhitpoints">
             <div class="progress-bar bg-danger" role="progressbar"
                     data-bind="attr:{ style: 'width:' + GymBattle.enemyPokemon().healthPercentage() + '%' }"
                     aria-valuemin="0" aria-valuemax="100">
@@ -1387,7 +1410,7 @@
             </div>
         </div>
 
-        <button class="btn btn-sm btn-danger" style="position: absolute; top: 68px; left: 10px;" data-bind="visible: GymRunner.autoRestart()"
+        <button class="btn btn-sm btn-danger stop-auto" data-bind="visible: GymRunner.autoRestart()"
                 onclick="GymRunner.autoRestart(false)">
             Stop Auto
         </button>
@@ -1413,7 +1436,7 @@
                     
 <div class="row justify-content-center no-gutters" data-bind="if: App.game.gameState === GameConstants.GameState.temporaryBattle">
     <div class="col no-gutters clickable" data-bind="click: function() {TemporaryBattleBattle.clickAttack()}" style="height: 280px; display: block;">
-        <h2 class="pageItemTitle" style="display: block;">
+        <h2 class="pageItemTitle mobileBattleTitle" style="display: block;">
 
             <knockout class="left">
                 <knockout data-bind="text: TemporaryBattleBattle.battle.getDisplayName()"></knockout>
@@ -1450,11 +1473,11 @@
           </div>
         </div>
 
-        <div style="position:absolute; left:65%; top: 25%;" data-bind="if: !TemporaryBattleRunner.battleObservable().optionalArgs.hideTrainer">
+        <div class="trainer" data-bind="if: !TemporaryBattleRunner.battleObservable().optionalArgs.hideTrainer">
             <img data-bind="attr:{ src: TemporaryBattleRunner.battleObservable().getImage() }" onerror="this.src='assets/images/trainers/Mysterious Trainer.png';"/>
         </div>
 
-        <div data-bind="ifnot: TemporaryBattleBattle.catching">
+        <div class="trainer-enemy" data-bind="ifnot: TemporaryBattleBattle.catching">
             <knockout data-bind="template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': TemporaryBattleBattle.enemyPokemon() } }">Pokémon sprite</knockout>
         </div>
 
@@ -1467,7 +1490,7 @@
             <knockout data-bind="text: Math.floor(TemporaryBattleBattle.catchRateActual()) + '%'">Catch Rate</knockout>
         </div>
 
-        <div class="progress hitpoints" style="height: 20px;">
+        <div class="progress hitpoints trainerhitpoints">
             <div class="progress-bar bg-danger" role="progressbar"
                     data-bind="attr:{ style: 'width:' + TemporaryBattleBattle.enemyPokemon().healthPercentage() + '%' }"
                     aria-valuemin="0" aria-valuemax="100">
@@ -1496,7 +1519,7 @@
                     
 <div class="row justify-content-center no-gutters" data-bind="if: App.game.gameState == GameConstants.GameState.battleFrontier">
     <div class="col no-gutters" data-bind="if: BattleFrontierBattle.enemyPokemon" style="height: 280px; display: block;">
-        <h2 class="pageItemTitle" style="display: block;">
+        <h2 class="pageItemTitle mobileBattleTitle" style="display: block;">
 
             <knockout class="left">
                 Stage <knockout data-bind="text: BattleFrontierRunner.stage">0</knockout> / <knockout data-bind="text: BattleFrontierRunner.highest">0</knockout>
@@ -1520,10 +1543,10 @@
 
         </h2>
 
-        <div>
+        <div class="trainer-enemy">
             <knockout data-bind="template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': BattleFrontierBattle.enemyPokemon() } }">Pokémon sprite</knockout>
         </div>
-        <div class="progress hitpoints" style="height: 20px;">
+        <div class="progress hitpoints trainerhitpoints">
             <div class="progress-bar bg-danger" role="progressbar"
                     data-bind="attr:{ style: 'width:' + BattleFrontierBattle.enemyPokemon().healthPercentage() + '%' }"
                     aria-valuemin="0" aria-valuemax="100">
@@ -1534,8 +1557,27 @@
           <table width="100%">
               <tr>
                 <td>
-                    <knockout data-bind="template: { name: 'pokemonAttackTemplate', data: { 'pokemon': Battle.enemyPokemon() } }"></knockout>
-                </td>
+                    <span style="display: inline;">
+                        Pokémon Attack:
+                        <span data-bind="
+                            text: App.game.party.calculatePokemonAttack(
+                                PokemonType.None,
+                                PokemonType.None,
+                                true,
+                            ).toLocaleString('en-US'),
+                            tooltip: {
+                                title: Battle.enemyPokemon()
+                                    ? `${App.game.party.calculatePokemonAttack(
+                                        Battle.enemyPokemon().type1,
+                                        Battle.enemyPokemon().type2,
+                                        true,
+                                    ).toLocaleString('en-US')} against ${Battle.enemyPokemon().name}`
+                                    : '',
+                                trigger: 'hover',
+                            }
+                        "></span>
+                    </span>
+                  </td>
               </tr>
           </table>
         </h2>
@@ -1571,6 +1613,12 @@
                       <img title="You have captured all Pokémon shiny in this dungeon!"
                            class="pokeball-smallest"
                            src="assets/images/pokeball/Pokeball-shiny.svg"/>
+                  </knockout>
+
+                  <!--Pokérus image-->
+                  <knockout data-bind="if: RouteHelper.minPokerusCheck(player.town().dungeon.allAvailablePokemon())">
+                      <img data-bind="attr:{ src: 'assets/images/breeding/pokerus/' + GameConstants.Pokerus[RouteHelper.minPokerus(player.town().dungeon.allAvailablePokemon())] + '.png'}"
+                    src=""/>
                   </knockout>
               </knockout>
             </h2>
@@ -1846,8 +1894,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.kanto, 'Kanto').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/kanto-kanto.png?v=0.10.0',
-            href:'assets/images/kanto-kanto.png?v=0.10.0'
+            'xlink:href':'assets/images/kanto-kanto.png?v=0.10.1',
+            href:'assets/images/kanto-kanto.png?v=0.10.1'
         }"></image>
 
         <!-- ------ -->
@@ -3968,8 +4016,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.kanto, 'Sevii Islands 123').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/kanto-sevii123.png?v=0.10.0',
-            href:'assets/images/kanto-sevii123.png?v=0.10.0'
+            'xlink:href':'assets/images/kanto-sevii123.png?v=0.10.1',
+            href:'assets/images/kanto-sevii123.png?v=0.10.1'
         }"></image>
 
         <!-- ------ -->
@@ -4350,8 +4398,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.kanto, 'Sevii Islands 4567').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/kanto-sevii4567.png?v=0.10.0',
-            href:'assets/images/kanto-sevii4567.png?v=0.10.0'
+            'xlink:href':'assets/images/kanto-sevii4567.png?v=0.10.1',
+            href:'assets/images/kanto-sevii4567.png?v=0.10.1'
         }"></image>
 
         <!-- ------ -->
@@ -5856,8 +5904,8 @@
 
                             <g data-bind='visible: player.region == GameConstants.Region.johto'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/johto.png?v=0.10.0',
-        href:'assets/images/johto.png?v=0.10.0'
+        'xlink:href':'assets/images/johto.png?v=0.10.1',
+        href:'assets/images/johto.png?v=0.10.1'
     }"></image>
 
     <!-- ------ -->
@@ -7964,8 +8012,8 @@
 
                             <g data-bind='visible: player.region == GameConstants.Region.hoenn'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/hoenn.png?v=0.10.0',
-        href:'assets/images/hoenn.png?v=0.10.0'
+        'xlink:href':'assets/images/hoenn.png?v=0.10.1',
+        href:'assets/images/hoenn.png?v=0.10.1'
     }"></image>
 
     <!-- ------ -->
@@ -10569,8 +10617,8 @@
 
                             <g data-bind='visible: player.region == GameConstants.Region.sinnoh'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/sinnoh.png?v=0.10.0',
-        href:'assets/images/sinnoh.png?v=0.10.0'
+        'xlink:href':'assets/images/sinnoh.png?v=0.10.1',
+        href:'assets/images/sinnoh.png?v=0.10.1'
     }"></image>
 
     <!-- ------ -->
@@ -13242,8 +13290,8 @@
 
                             <g data-bind='visible: player.region == GameConstants.Region.unova'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/unova.png?v=0.10.0',
-        href:'assets/images/unova.png?v=0.10.0'
+        'xlink:href':'assets/images/unova.png?v=0.10.1',
+        href:'assets/images/unova.png?v=0.10.1'
     }"></image>
 
     <!-- ------ -->
@@ -15882,8 +15930,8 @@
 
                             <g data-bind='visible: player.region == GameConstants.Region.kalos'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/kalos.png?v=0.10.0',
-        href:'assets/images/kalos.png?v=0.10.0'
+        'xlink:href':'assets/images/kalos.png?v=0.10.1',
+        href:'assets/images/kalos.png?v=0.10.1'
     }"></image>
 
     <!-- ------ -->
@@ -17957,8 +18005,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Melemele Island').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-melemele.png?v=0.10.0',
-            href:'assets/images/alola-melemele.png?v=0.10.0'
+            'xlink:href':'assets/images/alola-melemele.png?v=0.10.1',
+            href:'assets/images/alola-melemele.png?v=0.10.1'
         }"></image>
 
         <!-- ------ -->
@@ -21178,8 +21226,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Akala Island').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-akala.png?v=0.10.0',
-            href:'assets/images/alola-akala.png?v=0.10.0'
+            'xlink:href':'assets/images/alola-akala.png?v=0.10.1',
+            href:'assets/images/alola-akala.png?v=0.10.1'
         }"></image>
 
         <!-- ------ -->
@@ -23218,8 +23266,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Ula\'ula Island').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-ulaula.png?v=0.10.0',
-            href:'assets/images/alola-ulaula.png?v=0.10.0'
+            'xlink:href':'assets/images/alola-ulaula.png?v=0.10.1',
+            href:'assets/images/alola-ulaula.png?v=0.10.1'
         }"></image>
 
         <!-- ------ -->
@@ -25769,8 +25817,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Poni Island').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-poni.png?v=0.10.0',
-            href:'assets/images/alola-poni.png?v=0.10.0'
+            'xlink:href':'assets/images/alola-poni.png?v=0.10.1',
+            href:'assets/images/alola-poni.png?v=0.10.1'
         }"></image>
 
         <!-- ------ -->
@@ -27814,8 +27862,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'South Galar').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/galar-south.png?v=0.10.0',
-            href:'assets/images/galar-south.png?v=0.10.0'
+            'xlink:href':'assets/images/galar-south.png?v=0.10.1',
+            href:'assets/images/galar-south.png?v=0.10.1'
         }"></image>
 
         <!-- ------ -->
@@ -29879,8 +29927,8 @@
     </g>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'North Galar').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/galar-north.png?v=0.10.0',
-            href:'assets/images/galar-north.png?v=0.10.0'
+            'xlink:href':'assets/images/galar-north.png?v=0.10.1',
+            href:'assets/images/galar-north.png?v=0.10.1'
         }"></image>
 
         <!-- ------ -->
@@ -30898,8 +30946,8 @@
     </g>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'Isle of Armor').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/galar-isle-of-armor.png?v=0.10.0',
-            href:'assets/images/galar-isle-of-armor.png?v=0.10.0'
+            'xlink:href':'assets/images/galar-isle-of-armor.png?v=0.10.1',
+            href:'assets/images/galar-isle-of-armor.png?v=0.10.1'
         }"></image>
 
         <!-- ------ -->
@@ -33062,18 +33110,18 @@
 
 
 
-        <!--Brawlers Cave-->
+        <!--Brawlers' Cave-->
         
 
 
     <rect class="city"
-        data-town="Brawlers Cave"
+        data-town="Brawlers&#39; Cave"
         x="944"
         y="416"
         height="48"
         width="112"
-        data-bind="click:function(){MapHelper.moveToTown('Brawlers Cave')},
-            attr: { class: MapHelper.calculateTownCssClass('Brawlers Cave') }">
+        data-bind="click:function(){MapHelper.moveToTown('Brawlers\&#39; Cave')},
+            attr: { class: MapHelper.calculateTownCssClass('Brawlers\&#39; Cave') }">
     </rect>
 
 
@@ -33081,92 +33129,92 @@
         x="976"
         y="416"
         class="iconLocation"
-        data-bind="visible: MapHelper.isTownCurrentLocation('Brawlers Cave')
+        data-bind="visible: MapHelper.isTownCurrentLocation('Brawlers\&#39; Cave')
         , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
     </image>
 
 
 
-        <!--Brawlers Cave extension-->
+        <!--Brawlers' Cave extension-->
         
 
 
     <rect class="city"
-        data-town="Brawlers Cave"
+        data-town="Brawlers&#39; Cave"
         x="944"
         y="384"
         height="16"
         width="128"
-        data-bind="click:function(){MapHelper.moveToTown('Brawlers Cave')},
-            attr: { class: MapHelper.calculateTownCssClass('Brawlers Cave') }">
+        data-bind="click:function(){MapHelper.moveToTown('Brawlers\&#39; Cave')},
+            attr: { class: MapHelper.calculateTownCssClass('Brawlers\&#39; Cave') }">
     </rect>
 
 
 
 
-        <!--Brawlers Cave extension-->
+        <!--Brawlers' Cave extension-->
         
 
 
     <rect class="city"
-        data-town="Brawlers Cave"
+        data-town="Brawlers&#39; Cave"
         x="944"
         y="400"
         height="16"
         width="144"
-        data-bind="click:function(){MapHelper.moveToTown('Brawlers Cave')},
-            attr: { class: MapHelper.calculateTownCssClass('Brawlers Cave') }">
+        data-bind="click:function(){MapHelper.moveToTown('Brawlers\&#39; Cave')},
+            attr: { class: MapHelper.calculateTownCssClass('Brawlers\&#39; Cave') }">
     </rect>
 
 
 
 
-        <!--Brawlers Cave extension-->
+        <!--Brawlers' Cave extension-->
         
 
 
     <rect class="city"
-        data-town="Brawlers Cave"
+        data-town="Brawlers&#39; Cave"
         x="944"
         y="368"
         height="16"
         width="16"
-        data-bind="click:function(){MapHelper.moveToTown('Brawlers Cave')},
-            attr: { class: MapHelper.calculateTownCssClass('Brawlers Cave') }">
+        data-bind="click:function(){MapHelper.moveToTown('Brawlers\&#39; Cave')},
+            attr: { class: MapHelper.calculateTownCssClass('Brawlers\&#39; Cave') }">
     </rect>
 
 
 
 
-        <!--Brawlers Cave extension-->
+        <!--Brawlers' Cave extension-->
         
 
 
     <rect class="city"
-        data-town="Brawlers Cave"
+        data-town="Brawlers&#39; Cave"
         x="944"
         y="464"
         height="16"
         width="64"
-        data-bind="click:function(){MapHelper.moveToTown('Brawlers Cave')},
-            attr: { class: MapHelper.calculateTownCssClass('Brawlers Cave') }">
+        data-bind="click:function(){MapHelper.moveToTown('Brawlers\&#39; Cave')},
+            attr: { class: MapHelper.calculateTownCssClass('Brawlers\&#39; Cave') }">
     </rect>
 
 
 
 
-        <!--Brawlers Cave extension-->
+        <!--Brawlers' Cave extension-->
         
 
 
     <rect class="city"
-        data-town="Brawlers Cave"
+        data-town="Brawlers&#39; Cave"
         x="896"
         y="480"
         height="48"
         width="112"
-        data-bind="click:function(){MapHelper.moveToTown('Brawlers Cave')},
-            attr: { class: MapHelper.calculateTownCssClass('Brawlers Cave') }">
+        data-bind="click:function(){MapHelper.moveToTown('Brawlers\&#39; Cave')},
+            attr: { class: MapHelper.calculateTownCssClass('Brawlers\&#39; Cave') }">
     </rect>
 
 
@@ -33463,8 +33511,8 @@
     </g>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'Crown Tundra').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/galar-crown-tundra.png?v=0.10.0',
-            href:'assets/images/galar-crown-tundra.png?v=0.10.0'
+            'xlink:href':'assets/images/galar-crown-tundra.png?v=0.10.1',
+            href:'assets/images/galar-crown-tundra.png?v=0.10.1'
         }"></image>
 
         <!-- ------ -->
@@ -33620,7 +33668,7 @@
 </g>
 
 
-        <!--Giants Bed-->
+        <!--Giant's Bed-->
         
 
 <g
@@ -33652,7 +33700,7 @@
 </g>
 
 
-        <!--Giants Bed extension-->
+        <!--Giant's Bed extension-->
         
 
 <g
@@ -33669,7 +33717,7 @@
 </g>
 
 
-        <!--Giants Bed extension-->
+        <!--Giant's Bed extension-->
         
 
 <g
@@ -33686,7 +33734,7 @@
 </g>
 
 
-        <!--Giants Bed extension-->
+        <!--Giant's Bed extension-->
         
 
 <g
@@ -33703,7 +33751,7 @@
 </g>
 
 
-        <!--Giants Bed extension-->
+        <!--Giant's Bed extension-->
         
 
 <g
@@ -33720,7 +33768,7 @@
 </g>
 
 
-        <!--Giants Bed extension-->
+        <!--Giant's Bed extension-->
         
 
 <g
@@ -33737,7 +33785,7 @@
 </g>
 
 
-        <!--Giants Bed extension-->
+        <!--Giant's Bed extension-->
         
 
 <g
@@ -33754,7 +33802,7 @@
 </g>
 
 
-        <!--Giants Bed extension-->
+        <!--Giant's Bed extension-->
         
 
 <g
@@ -33771,7 +33819,7 @@
 </g>
 
 
-        <!--Giants Bed extension-->
+        <!--Giant's Bed extension-->
         
 
 <g
@@ -33820,7 +33868,7 @@
 </g>
 
 
-        <!--Giants Foot-->
+        <!--Giant's Foot-->
         
 
 <g
@@ -35565,7 +35613,7 @@
                                     +100
                                 </button>
                                 <button class="btn btn-secondary smallButton smallFont" type="button" onclick="ShopHandler.increaseAmount(1000)">
-                                    +1000
+                                    +1,000
                                 </button>
                             <!-- /ko -->
                             <button class="btn btn-primary smallButton smallFont" type="button" onclick="ShopHandler.maxAmount()">
@@ -37208,7 +37256,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                     <button type="button" class="text-left custom-select col-12 btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bind="text :
                                         BreedingFilters.region.value() == 2 ** (player.highestRegion() + 1) - 1 ?
                                             'All' :
-                                            (BreedingFilters.region.value() ?
+                                            (BreedingFilters.region.value() > 0 && BreedingFilters.region.value() ?
                                                 GameConstants.camelCaseToString(GameConstants.Region[Math.floor(Math.log2(BreedingFilters.region.value()))]) + (BreedingFilters.region.value()
                                                     .toString(2).split('')
                                                     .reduce(function(s,n){ return s + (n == '1' ? 1 : 0)}, 0) > 1 ? ' & more' : '') :
@@ -37325,7 +37373,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                 <div data-bind="if: App.game.party.getPokemon($data.id)?.pokerus" style="position: absolute;left: 2px;top:10px;">
                                     <img width="32px" src="" data-bind="attr: { src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[App.game.party.getPokemon($data.id).pokerus]}.png`}"/>
                                 </div>
-                                <img src="" width="80px" data-bind="attr:{ src: PokemonHelper.getImage($data.id, undefined, App.game.party.alreadyCaughtPokemon($data.id) && App.game.party.getPokemon($data.id).defaultFemaleSprite()) }">
+                                <img src="" width="80px" data-bind="attr:{ src: PokemonHelper.getImage($data.id) }">
                                 <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: BreedingController.getDisplayValue($data)">value</span>
                                 <a class="overlay" href="#breed" data-bind="click: function() { App.game.breeding.addPokemonToHatchery($data); App.game.breeding.checkCloseModal();}"></a>
                                 <div class="pokemonCategory dropdown">
@@ -37735,7 +37783,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                             <button type="button" data-bind="text: tradeAmount() + '&nbsp;', css: { disabled: !DailyDeal.canUse($index()) }" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             </button>
                                             <div class="dropdown-menu" data-bind="foreach: [1, 10, 100, 1000, Infinity]">
-                                                <button class="dropdown-item" type="button" data-bind="click: function(){tradeAmount($data)}, text: $data"></button>
+                                                <button class="dropdown-item" type="button" data-bind="click: function(){tradeAmount($data)}, text: $data.toLocaleString('en-US')"></button>
                                             </div>
                                         </div>
                                     </td>
@@ -37816,7 +37864,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                     <button type="button" data-bind="text: sellAmount() + '&nbsp;', css: { disabled: sellLocked() }" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     </button>
                     <div class="dropdown-menu" data-bind="foreach: [1, 10, 100, 1000, Infinity]">
-                        <button class="dropdown-item" type="button" data-bind="click: function(){sellAmount($data)}, text: $data"></button>
+                        <button class="dropdown-item" type="button" data-bind="click: function(){sellAmount($data)}, text: $data.toLocaleString('en-US')"></button>
                     </div>
                     <!-- /ko -->
                 </div>
@@ -38143,8 +38191,23 @@ aria-labelledby="pokedexModalLabel">
                       <td class="text-left tight">
                           <label class="form-check-label toggler-wrapper style-1 gender-toggle float-left">
                               <input class="form-check-input" type="checkbox" id=""
-                                  value="false" 
+                                  value="false"
                                   data-bind="checked: App.game.party.getPokemon($data).defaultFemaleSprite">
+                              <div class="toggler-slider">
+                                  <div class="toggler-knob"></div>
+                              </div>
+                          </label>
+                      </td>
+                    </tr>
+                    <!-- /ko -->
+                    <!-- ko if: App.game.party.alreadyCaughtPokemon($data) && App.game.party.getPokemon($data)?.shiny -->
+                    <tr>
+                      <td class="text-left align-middle">Hide Party Pokémon shiny</td>
+                      <td class="text-left tight">
+                          <label class="form-check-label toggler-wrapper style-1 float-left">
+                              <input class="form-check-input" type="checkbox" id=""
+                                  value="false"
+                                  data-bind="checked: App.game.party.getPokemon($data).hideShinyImage">
                               <div class="toggler-slider">
                                   <div class="toggler-knob"></div>
                               </div>
@@ -38293,7 +38356,7 @@ aria-labelledby="pokedexModalLabel">
                 </button>
             </div>
             <div class="modal-body p-0">
-                <img src="assets/images/items/Protein.png" width="40%"/>
+                <img src="assets/images/items/vitamin/Protein.png" width="40%"/>
                 <br/>
                 <div class="sticky-top bg-dark text-light">
                   <!-- ko if: App.game.challenges.list.disableProteins.active() -->
@@ -39218,7 +39281,7 @@ aria-labelledby="badgeCaseModalLabel">
                                             <button type="button" data-bind="text: tradeAmount() + '&nbsp;', css: { disabled: !BerryDeal.canUse(ShopHandler.shopObservable()?.location, $parentContext.$index()) }" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             </button>
                                             <div class="dropdown-menu" data-bind="foreach: [1, 10, 100, 1000, Infinity]">
-                                                <button class="dropdown-item" type="button" data-bind="click: function(){tradeAmount($data)}, text: $data"></button>
+                                                <button class="dropdown-item" type="button" data-bind="click: function(){tradeAmount($data)}, text: $data.toLocaleString('en-US')"></button>
                                             </div>
                                         </div>
                                     </td>
@@ -39265,7 +39328,7 @@ aria-labelledby="badgeCaseModalLabel">
                                     +100
                                 </button>
                                 <button class="btn btn-secondary smallButton smallFont" type="button" onclick="ShopHandler.increaseAmount(1000)">
-                                    +1000
+                                    +1,000
                                 </button>
                             <!-- /ko -->
                             <button class="btn btn-primary smallButton smallFont" type="button" onclick="ShopHandler.maxAmount()">
@@ -39398,13 +39461,13 @@ aria-labelledby="badgeCaseModalLabel">
                             <tbody data-bind='foreach: ShardDeal.getDeals(ShopHandler.shopObservable().location)'>
                                 <!-- ko foreach: shards -->
                                 <tr>
-                                    <td data-bind="text: player.getUndergroundItemAmount($data.shardType.id)"></td>
+                                    <td data-bind="text: player.getUndergroundItemAmount($data.shardType.id).toLocaleString('en-US')"></td>
                                     <td class='vertical-middle'>
                                         <img class='mineInventoryItem' data-bind='attr: {src: $data.shardType.image }'>
                                     </td>
-                                    <td data-bind="text: amount + ' x ' + $data.shardType.name"></td>
+                                    <td data-bind="text: amount.toLocaleString('en-US') + ' x ' + $data.shardType.name"></td>
                                     <!-- ko if: $index() === 0 -->
-                                    <td class='vertical-middle' data-bind='attr: { rowspan: $parent.shards.length }, text: $parent.questPointCost'></td>
+                                    <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length }, text: $parent.questPointCost.toLocaleString('en-US')"></td>
                                     <!-- TODO: Make the QP symbol appear in the same TD as the QP Cost -->
                                     <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length }">
                                           <img src='assets/images/currency/questPoint.svg' width="20px'">
@@ -39416,7 +39479,7 @@ aria-labelledby="badgeCaseModalLabel">
                                           }">
                                     </td>
                                     <td class='vertical-middle' data-bind='attr: { rowspan: $parent.shards.length }, text: $parent.item.amount + " × " + $parent.item.itemType.displayName'></td>
-                                    <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length }, text: player.itemList[$parent.item.itemType.name]()"></td>
+                                    <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length }, text: player.itemList[$parent.item.itemType.name]().toLocaleString('en-US')"></td>
                                     <td class='vertical-middle' data-bind="attr: { rowspan: $parent.shards.length }">
                                         <div class="btn-group btn-block" data-bind="let: { tradeAmount: ko.observable(1) }">
                                             <button class='btn btn-success btn-block' data-bind='click: function(){ShardDeal.use(ShopHandler.shopObservable()?.location, $parentContext.$index(), tradeAmount())}, css: { disabled: !ShardDeal.canUse(ShopHandler.shopObservable()?.location, $parentContext.$index()) }'>
@@ -39938,7 +40001,7 @@ aria-labelledby="bulletinBoardModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document" data-bind="if: BulletinBoard.selectedBulletinBoard()">
     <div class="modal-content">
        <div class="modal-header justify-content-start align-items-center">
-            <h5 class="modal-title" id="bulletinBoardModalLabel">Bulletin board</h5>
+            <h5 class="modal-title" id="bulletinBoardModalLabel">Bulletin Board</h5>
         </div>
         <div class="modal-body p-0">
             <table class="table m-0">
