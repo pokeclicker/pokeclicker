@@ -28,16 +28,16 @@ aria-labelledby="pokedexModalLabel">
 
                     <div class="collapse" id="pokedex-filter-container" style="margin-bottom: 0.5rem;">
                         <div class="container-fluid py-3">
-                            <div class="form-row text-left">
+                            <div class="row text-start">
                                 <!--Name-->
-                                <div class="form-group col-md-6 col-6">
+                                <div class="mb-3 col-md-6 col-6">
                                     <label>Name</label>
                                     <input id="nameFilter" class="form-control" placeholder="Bulbasaur" value=""
                                         oninput="PokedexHelper.updateList()">
                                 </div>
 
                                 <!--Region-->
-                                <div class="form-group col-md-6 col-6">
+                                <div class="mb-3 col-md-6 col-6">
                                     <label>Region</label>
                                     <select id="pokedex-filter-region" class="form-select"
                                             oninput="PokedexHelper.updateList()" style="margin-right: 8px">
@@ -46,14 +46,14 @@ aria-labelledby="pokedexModalLabel">
                                 </div>
 
                                 <!--Types-->
-                                <div class="form-group col-md-6 col-6">
+                                <div class="mb-3 col-md-6 col-6">
                                     <label>Type</label>
                                     <select id="pokedex-filter-type1" class="form-select"
                                             oninput="PokedexHelper.updateList()" style="margin-right: 8px">
                                         <option value="" selected>All</option>
                                     </select>
                                 </div>
-                                <div class="form-group col-md-6 col-6">
+                                <div class="mb-3 col-md-6 col-6">
                                     <label>Type</label>
                                     <select id="pokedex-filter-type2" class="form-select"
                                             oninput="PokedexHelper.updateList()">
@@ -61,7 +61,7 @@ aria-labelledby="pokedexModalLabel">
                                     </select>
                                 </div>
 
-                                <div class="form-group col-md-6 col-6">
+                                <div class="mb-3 col-md-6 col-6">
                                     <label for="pokedex-filter-shiny-caught">Caught Status</label>
                                     <select id="pokedex-filter-shiny-caught" autocomplete="off" class="form-select" onchange="PokedexHelper.updateList()">
                                         <option value="all" selected>All</option>
@@ -72,7 +72,7 @@ aria-labelledby="pokedexModalLabel">
                                     </select>
                                 </div>
 
-                                <div class="form-group col-md-6 col-6">
+                                <div class="mb-3 col-md-6 col-6">
                                     <label for="pokedex-filter-pokerus-status">Pokerus Status</label>
                                     <select id="pokedex-filter-pokerus-status" autocomplete="off" class="form-select" onchange="PokedexHelper.updateList()">
                                         <!-- ko foreach: Settings.getSetting('breedingPokerusFilter').options -->
@@ -83,9 +83,9 @@ aria-labelledby="pokedexModalLabel">
 
                                 <!--Rare Hold Item-->
                                 <div class="col-md-4 col-12">
-                                    <div class="form-group my-2">
+                                    <div class="mb-3 my-2">
                                         <span>Rare Hold Item</span>
-                                        <label class="form-check-label toggler-wrapper style-1 float-right">
+                                        <label class="form-check-label toggler-wrapper style-1 float-end">
                                             <input class="form-check-input" type="checkbox" id="pokedex-filter-held-item"
                                                 value="false" onclick="PokedexHelper.updateList()">
                                             <div class="toggler-slider">
@@ -97,9 +97,9 @@ aria-labelledby="pokedexModalLabel">
 
                                 <!--Hide shiny images-->
                                 <div class="col-md-4 col-12 checkbox-border-x">
-                                    <div class="form-group my-2">
+                                    <div class="mb-3 my-2">
                                         <span>Hide shiny image</span>
-                                        <label class="form-check-label toggler-wrapper style-1 float-right">
+                                        <label class="form-check-label toggler-wrapper style-1 float-end">
                                             <input class="form-check-input" type="checkbox" id="pokedex-filter-hide-shiny"
                                                 value="false" data-bind="checked: PokedexHelper.hideShinyImages">
                                             <div class="toggler-slider">
@@ -111,9 +111,9 @@ aria-labelledby="pokedexModalLabel">
 
                                 <!--Hide alternate forms-->
                                 <div class="col-md-4 col-12">
-                                    <div class="form-group my-2">
+                                    <div class="mb-3 my-2">
                                         <span>Hide alternate forms</span>
-                                        <label class="form-check-label toggler-wrapper style-1 float-right">
+                                        <label class="form-check-label toggler-wrapper style-1 float-end">
                                             <input class="form-check-input" type="checkbox" id="pokedex-filter-hide-alternate"
                                                 value="false" onclick="PokedexHelper.updateList()">
                                             <div class="toggler-slider">
@@ -130,7 +130,7 @@ aria-labelledby="pokedexModalLabel">
                 <div class="pokemon-list">
                     <ul class="row justify-content-center p-0" data-bind="foreach: lazyLoad($element, PokedexHelper.filteredList)"
                         style="max-width: 100%; padding:0; margin:0;">
-                        <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry"
+                        <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry position-relative"
                                 data-bind="style:{background: PokedexHelper.getBackgroundColors($data.name)}">
                                 <span class="id" style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: ($data.id > 0 ? Math.floor($data.id) + '' : '???').padStart(3, 0)">number</span>
                                     <div data-bind="visible: App.game.party.alreadyCaughtPokemonByName(name)" style="position: absolute;right: 2px;top: -15px;">

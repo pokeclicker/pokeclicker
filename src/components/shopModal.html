@@ -23,7 +23,7 @@
                                 value="1" min="1" required name="amountOfItems"
                                 oninput="ShopHandler.amount(parseInt($(this).val().toString(), 10) || 0);"
                                 onchange="ShopHandler.amount(parseInt($(this).val().toString(), 10) || 0);" title=""/>
-                        <div class="input-group-append">
+                        <div class="d-flex">
                             <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'original' -->
                                 <button class="btn btn-secondary smallButton smallFont" type="button" onclick="ShopHandler.increaseAmount(10)">
                                     +10

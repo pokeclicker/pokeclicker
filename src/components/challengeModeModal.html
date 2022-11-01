@@ -18,7 +18,7 @@
                             placement: 'bottom',
                             trigger: 'hover'
                         }">
-                            <td class="text-left fw-bold" data-bind="text: $data.type"></td>
+                            <td class="text-start fw-bold" data-bind="text: $data.type"></td>
                             <td class="p-1">
                                 <!-- ko if: !$data.active() && player.starter() == GameConstants.Starter.None --><button class="btn btn-warning w-100" data-bind="click: ()=>{$data.activate();}">ACTIVATE</button><!-- /ko -->
                                 <!-- ko if: !$data.active() && player.starter() != GameConstants.Starter.None --><button class="btn btn-secondary w-100 disabled">DISABLED</button><!-- /ko -->

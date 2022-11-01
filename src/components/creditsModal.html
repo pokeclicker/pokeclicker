@@ -18,10 +18,10 @@
                         <td class="text-center tight p-0">
                           <img src="" height="28px" data-bind="attr: { src: image }" onerror="this.src='assets/images/profile/trainer-0.png';"/>
                         </td>
-                        <td class="text-left">
+                        <td class="text-start">
                           <a href="#" data-bind="text: name, attr: { href: link ? link : '#' }" target="_blank">-</span>
                         </td>
-                        <td class="text-left tight text-muted" data-bind="foreach: resources"><span data-bind="text: $data">-</span><br/></td>
+                        <td class="text-start tight text-muted" data-bind="foreach: resources"><span data-bind="text: $data">-</span><br/></td>
                       </tr>
                     </tbody>
                 </table>
@@ -37,10 +37,10 @@
                         <td class="text-center tight p-0">
                           <img src="" height="28px" data-bind="attr: { src: image }" onerror="this.src='assets/images/profile/trainer-0.png';"/>
                         </td>
-                        <td class="text-left">
+                        <td class="text-start">
                           <a href="#" data-bind="text: name, attr: { href: link ? link : '#' }" target="_blank">-</span>
                         </td>
-                        <td class="text-left tight text-muted" data-bind="foreach: resources"><span data-bind="text: $data.toLocaleString('en-US')">-</span><br/></td>
+                        <td class="text-start tight text-muted" data-bind="foreach: resources"><span data-bind="text: $data.toLocaleString('en-US')">-</span><br/></td>
                       </tr>
                     </tbody>
                 </table>

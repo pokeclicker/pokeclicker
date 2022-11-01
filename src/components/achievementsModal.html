@@ -10,9 +10,9 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
             <div class="modal-body table-responsive p-0">
                 <div class="tab-content p-3">
                     <div class="tab-pane active">
-                        <div class="text-left">
-                            <div class="form-row">
-                                <div class="form-group col-md-3 col-6">
+                        <div class="text-start">
+                            <div class="row">
+                                <div class="mb-3 col-md-3 col-6">
                                     <label>Status</label>
                                     <select name="achievementsStatus" class="form-select" onchange="AchievementHandler.filter.status(this.value), Settings.setSettingByName(this.name, this.value)">
                                         <!-- ko foreach: Settings.getSetting('achievementsStatus').options -->
@@ -20,7 +20,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                                         <!-- /ko -->
                                     </select>
                                 </div>
-                                <div class="form-group col-md-3 col-6">
+                                <div class="mb-3 col-md-3 col-6">
                                     <label>Type</label>
                                     <select name="achievementsType" class="form-select" onchange="AchievementHandler.filter.type(this.value), Settings.setSettingByName(this.name, this.value)">
                                         <!-- ko foreach: Settings.getSetting('achievementsType').options.filter(r => r.value !== -1) -->
@@ -28,7 +28,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                                         <!-- /ko -->
                                     </select>
                                 </div>
-                                <div class="form-group col-md-3 col-6">
+                                <div class="mb-3 col-md-3 col-6">
                                     <label>Category</label>
                                     <select name="achievementsCategory" class="form-select" onchange="AchievementHandler.filter.category(this.value), Settings.setSettingByName(this.name, this.value)">
                                         <!-- ko foreach: Settings.getSetting('achievementsCategory').options.filter(r => r.value == 'all' || AchievementHandler.getAchievementCategories().find((c) => c.name == r.value).isUnlocked()) -->
@@ -36,7 +36,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                                         <!-- /ko -->
                                     </select>
                                 </div>
-                                <div class="form-group col-md-3 col-6">
+                                <div class="mb-3 col-md-3 col-6">
                                     <label>Sort</label>
                                     <div class="input-group" data-bind="with: Settings.getSetting('achievementSort')">
                                         <select autocomplete="off" class="form-select" onchange="Settings.setSettingByName(this.name, AchievementSortOptions[AchievementSortOptions[this.value]])"

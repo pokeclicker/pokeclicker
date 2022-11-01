@@ -15,13 +15,13 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <td class="text-left">Time Played</td>
-                        <td class="text-left tight text-muted" data-bind="html: GameConstants.formatSecondsToTime(App.game.statistics['secondsPlayed']())">-</td>
+                        <td class="text-start">Time Played</td>
+                        <td class="text-start tight text-muted" data-bind="html: GameConstants.formatSecondsToTime(App.game.statistics['secondsPlayed']())">-</td>
                       </tr>
                       <!-- ko foreach: App.game.statistics.observables -->
                       <tr>
-                        <td class="text-left" data-bind="text: GameConstants.camelCaseToString($data)">-</td>
-                        <td class="text-left tight text-muted" data-bind="text: App.game.statistics[$data]().toLocaleString('en-US')">-</td>
+                        <td class="text-start" data-bind="text: GameConstants.camelCaseToString($data)">-</td>
+                        <td class="text-start tight text-muted" data-bind="text: App.game.statistics[$data]().toLocaleString('en-US')">-</td>
                       </tr>
                       <!-- /ko -->
                     </tbody>

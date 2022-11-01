@@ -17,7 +17,7 @@
         </thead>
         -->
         <tbody data-bind="foreach: App.game.oakItems.itemList">
-          <tr data-bind="if: $data.isActive, tooltip: { html: true, title: $data.tooltip, trigger: 'hover', placement:'bottom' }">
+          <tr data-bind="if: $data.isActive, tooltip: { html: true, title: $data.tooltip(), trigger: 'hover', placement:'bottom' }">
             <td class="tight p-1">
               <img class="clickable" href="#oakItemsModal" data-bs-toggle="modal" src="" data-bind="attr:{ src: 'assets/images/oakitems/' + OakItemType[$data.name] + '.png'}" width="32px">
             </td>

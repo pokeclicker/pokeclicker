@@ -22,6 +22,9 @@
   .toast {
     pointer-events: all;
   }
+  .toast:not(:last-child) {
+    margin-bottom: 0.75rem;
+  }
   .toast-body .close {
     color: whitesmoke;
   }
@@ -638,7 +641,7 @@ td.tight {
 /* Checkbox slider */
 /*
   Example usage:
-  <label class="form-check-label toggler-wrapper style-1 float-right">
+  <label class="form-check-label toggler-wrapper style-1 float-end">
     <input class="form-check-input" type="checkbox" id="checkbox_id"
         value="false" onclick="function()">
     <div class="toggler-slider">

@@ -52,7 +52,7 @@ export default class Notifier {
 
             // Get the notification ready to display
             const toastID = Rand.string(7);
-            const toastHTML = `<div id="${toastID}" class="toast bg-${NotificationOption[type]}" data-autohide="false">
+            const toastHTML = `<div id="${toastID}" class="toast bg-${NotificationOption[type]}" data-bs-autohide="false">
                 ${title ? `<div class="toast-header">
                     ${image ? `<img src="${image}" class="icon" />` : ''}
                     <strong class="me-auto text-primary">${title || ''}</strong>
@@ -115,7 +115,7 @@ export default class Notifier {
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                 </button>
             </div>
-            <div class="modal-body py-2 px-2 text-left">
+            <div class="modal-body py-2 px-2 text-start">
                 ${message.replace(/\n/g, '<br/>')}
                 <br/>
                 <br/>
@@ -193,7 +193,7 @@ export default class Notifier {
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                 </button>
             </div>
-            <div class="modal-body py-2 px-2 text-left">
+            <div class="modal-body py-2 px-2 text-start">
                 ${message.replace(/\n/g, '<br/>')}
             </div>
             <div class="modal-footer p-2">

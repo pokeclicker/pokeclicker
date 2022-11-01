@@ -30,13 +30,13 @@
                 </tr>
                 <tr>
                     <th>Stage</th>
-                    <th class="text-left">Reward</th>
+                    <th class="text-start">Reward</th>
                 </tr>
             </thead>
             <tbody data-bind="foreach: BattleFrontierMilestones.availableMilestones().slice(0, 4)">
                 <tr>
                     <th class="tight" data-bind="text: $data.stage"></td>
-                    <td class="text-left">
+                    <td class="text-start">
                         <img width="28px" data-bind="attr:{ src: $data.image }" />
                         <knockout data-bind="text: $data.description"></knockout>
                     </td>

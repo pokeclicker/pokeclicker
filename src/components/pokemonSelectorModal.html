@@ -56,14 +56,14 @@
 						  onchange="Settings.setSettingByName('proteinHideShinyPokemon', this.checked)"/>
 					  <label for="hide-shiny-pokemons" class="form-check-label">Hide shiny Pokémon</label>
           </div>
-          <div class="form-row m-0" id="protein-filter">
-            <div class="form-group col-md-6 col-6 p-0">
+          <div class="row m-0" id="protein-filter">
+            <div class="mb-3 col-md-6 col-6 p-0">
                 <label for="protein-search">Search</label>
                 <input id="protein-search" autocomplete="off" class="form-control" placeholder="Search here"
                     data-bind="textInput: Settings.getSetting('proteinSearchFilter').observableValue"
                 />
             </div>
-            <div class="form-group col-md-3 col-3 p-0">
+            <div class="mb-3 col-md-3 col-3 p-0">
                 <label for="protein-region-filter">Region</label>
                 <select id="protein-region-filter" name="proteinRegionFilter" autocomplete="off" class="form-select" onchange="Settings.setSettingByName(this.name, +this.value)">
                     <!-- ko foreach: Settings.getSetting('proteinRegionFilter').options.filter(r => r.value <= player.highestRegion()) -->
@@ -71,7 +71,7 @@
                     <!-- /ko -->
                 </select>
             </div>
-            <div class="form-group col-md-3 col-3 p-0">
+            <div class="mb-3 col-md-3 col-3 p-0">
                 <label for="protein-type-filter">Type</label>
                 <select id="protein-type-filter" name="proteinTypeFilter" autocomplete="off" class="form-select" onchange="Settings.setSettingByName(this.name, +this.value)">
                     <!-- ko foreach: Settings.getSetting('proteinTypeFilter').options -->
@@ -84,14 +84,14 @@
                 <table class="table table-striped table-hover table-bordered table-sm m-0">
                   <thead>
                     <tr class="text-light">
-                      <th class="text-left bg-dark align-middle">Pokémon</th>
+                      <th class="text-start bg-dark align-middle">Pokémon</th>
                       <th class="text-center bg-dark align-middle">Proteins Used</th>
                       <th class="text-center bg-dark align-middle">Attack Bonus</th>
                     </tr>
                   </thead>
                   <tbody data-bind="foreach: PartyController.getProteinSortedList()">
                     <tr class="clickable" data-bind="click: () => $data.useProtein(VitaminController.getMultiplier()), hidden: $data.hideFromProteinList()">
-                      <td class="text-left"><knockout data-bind="text: $data.name"></knockout><sup data-bind="visible: $data.shiny">✨</sup></td>
+                      <td class="text-start"><knockout data-bind="text: $data.name"></knockout><sup data-bind="visible: $data.shiny">✨</sup></td>
                       <td class="text-center tight" data-bind="text: $data.proteinsUsed().toLocaleString('en-US')">-</td>
                       <td class="text-center tight" data-bind="text: Math.floor($data.baseAttack * (GameConstants.BREEDING_ATTACK_BONUS / 100) + $data.proteinsUsed()).toLocaleString('en-US')">-</td>
                     </tr>
@@ -99,7 +99,7 @@
                 </table>
             </div>
             <!-- /ko -->
-            <span class="bg-dark text-light text-right align-right p-1"  data-bind="text:`Showing ${PartyController.getProteinSortedList().filter(p => !p.hideFromProteinList()).length} Pokémon`"></span>
+            <span class="bg-dark text-light text-end align-right p-1"  data-bind="text:`Showing ${PartyController.getProteinSortedList().filter(p => !p.hideFromProteinList()).length} Pokémon`"></span>
         </div>
     </div>
 </div>

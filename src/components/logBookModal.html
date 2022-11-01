@@ -11,7 +11,7 @@
             </div>
 
             <div class="modal-body p-0">
-                <div class="form-row collapse" id="log-book-filter" style="width: 100%" data-bind="foreach: Object.keys(App.game.logbook.filters)">
+                <div class="row collapse" id="log-book-filter" style="width: 100%" data-bind="foreach: Object.keys(App.game.logbook.filters)">
                       <button class="btn col" data-bind="text: $data.replace(/_/g, ' '), css: { [`btn-outline-${LogBookTypes[$data].display}`]: !App.game.logbook.filters[$data](), [`btn-${LogBookTypes[$data].display}`]: App.game.logbook.filters[$data]() }, click: () => App.game.logbook.filters[$data](!App.game.logbook.filters[$data]())" onclick="this.blur()">filter</button>
                 </div>
                 <table class="table table-striped table-hover table-bordered table-sm m-0">
@@ -25,8 +25,8 @@
                     <tbody data-bind="foreach: App.game.logbook.filteredLogs()">
                       <tr>
                         <td class="tight" data-bind="html:type.label, class: 'table-' + type.display"></td>
-                        <td class="text-left" data-bind="text:description">-</td>
-                        <td class="text-left"><code data-bind="text:new Date(date).toLocaleString()">-</code></td>
+                        <td class="text-start" data-bind="text:description">-</td>
+                        <td class="text-start"><code data-bind="text:new Date(date).toLocaleString()">-</code></td>
                       </tr>
                     </tbody>
                 </table>

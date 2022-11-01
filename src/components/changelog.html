@@ -17,7 +17,7 @@
                    <tbody data-bind="foreach: ChangelogItems">
                      <tr data-bind="css: { 'table-dark': type.label == 'UPDATE' }">
                        <td class="tight" data-bind="html: type.label, class: 'table-' + type.display"></td>
-                       <td class="text-left" data-bind="html: description">-</td>
+                       <td class="text-start" data-bind="html: description">-</td>
                      </tr>
                    </tbody>
                </table>
