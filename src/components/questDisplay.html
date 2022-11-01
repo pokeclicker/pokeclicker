@@ -9,7 +9,7 @@
         </button>
     <!-- /ko -->
 
-    <div id="dailyQuestDisplayBody" class="card-body p-0 show">
+    <div id="dailyQuestDisplayBody" class="card-body p-0 show questDisplayBlock">
         <!-- ko if: App.game.quests.currentQuests().length == 0 && App.game.quests.isDailyQuestsUnlocked() -->
             <span class="pt-2 pb-2">No active quest</span>
         <!-- /ko -->
@@ -47,8 +47,8 @@
 		</div>
         <!-- List of quest line quests -->
 		<!-- ko foreach: App.game.quests.questLines().filter(function(ql){return ql.state() == QuestLineState.started;}) -->
-		<div class="card">
-			<div class="card-header" data-toggle="collapse" data-bind="attr : {href : '#qlcard_' + $index()}">
+		<div class="questDisplayBlock questLine">
+			<div class="card-header"  data-toggle="collapse" data-bind="attr : {href : '#qlcard_' + $index()}">
 				<knockout data-bind="text: $data.name"></knockout>
 				<knockout class="info text-primary" data-bind="tooltip: { title: $data.description, trigger: 'hover', placement:'left' }">ⓘ</knockout>
 			</div>
