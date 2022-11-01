@@ -1,3 +1,4 @@
+import { Modal } from 'bootstrap';
 import NotificationOption from './NotificationOption';
 import Sound from '../utilities/Sound';
 import Rand from '../utilities/Rand';
@@ -107,7 +108,7 @@ export default class Notifier {
             // Get the notification ready to display
             const modalID = Rand.string(7);
             const html = `
-<div class="modal fade noselect" id="modal${modalID}" tabindex="-1" role="dialog" aria-badgeledby="prompt">
+<div class="modal fade noselect" id="modal${modalID}" tabindex="-1" role="dialog" aria-badgeledby="prompt" data-bs-backdrop="static">
     <div class="modal-dialog modal-dialog-scrollable modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header modal-header pb-0 pt-2 px-2 bg-${NotificationOption[type]}">
@@ -135,16 +136,15 @@ export default class Notifier {
                 }
             });
 
-            $(`#modal${modalID}`).modal({
-                backdrop: 'static',
-            });
+            const modal = Modal.getOrCreateInstance(document.getElementById(`modal${modalID}`));
+            modal.show();
 
             // Once the modal is shown, hide it after specified timeout
             $(`#modal${modalID}`).on('shown.bs.modal', () => {
                 (document.getElementById(`promptInput${modalID}`) as HTMLInputElement).focus();
                 if (timeout > 0) {
                     setTimeout(() => {
-                        $(`#modal${modalID}`).modal('hide');
+                        modal.hide();
                     }, timeout);
                 }
             });
@@ -185,7 +185,7 @@ export default class Notifier {
             // Get the notification ready to display
             const modalID = Rand.string(7);
             const html = `
-<div class="modal fade noselect" id="modal${modalID}" tabindex="-1" role="dialog" aria-badgeledby="prompt">
+<div class="modal fade noselect" id="modal${modalID}" tabindex="-1" role="dialog" aria-badgeledby="prompt" data-bs-backdrop="static">
     <div class="modal-dialog modal-dialog-scrollable modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header modal-header pb-0 pt-2 px-2 bg-${NotificationOption[type]}">
@@ -209,15 +209,14 @@ export default class Notifier {
                 resolve(true);
             });
 
-            $(`#modal${modalID}`).modal({
-                backdrop: 'static',
-            });
+            const modal = Modal.getOrCreateInstance(document.getElementById(`modal${modalID}`));
+            modal.show();
 
             // Once the modal is shown, hide it after specified timeout
             $(`#modal${modalID}`).on('shown.bs.modal', () => {
                 if (timeout > 0) {
                     setTimeout(() => {
-                        $(`#modal${modalID}`).modal('hide');
+                        modal.hide();
                     }, timeout);
                 }
             });

@@ -29,7 +29,7 @@ class NPC {
         } else {
             $('#npc-modal .npc-image').hide();
         }
-        $('#npc-modal').modal();
+        bootstrap.Modal.getOrCreateInstance(document.getElementById('npc-modal')).show();
         this.talkedTo(true);
         return;
     }

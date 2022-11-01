@@ -69,7 +69,9 @@ class GameController {
 
                 // Update the config of the tooltip
                 const tooltip = bootstrap.Tooltip.getInstance(element);
-                tooltip.setContent({ '.tooltip-inner': (options as any).title });
+                if (tooltip) {
+                    tooltip.setContent({ '.tooltip-inner': (options as any).title });
+                }
 
                 //TODO is this really needed?
                 // // If the tooltip is visible, update its text
