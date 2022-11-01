@@ -31,7 +31,7 @@
                     </td>
                     <td width="30%" class="p-0">
                         <!-- ko ifnot: $data.isCompleted() -->
-                        <button class="btn btn-danger btn-sm btn-block p-0" data-bind="click: () => { App.game.quests.quitQuest($data.index, true) }">
+                        <button class="btn btn-danger btn-sm btn-block p-0" data-bind="click: () => { App.game.quests.quitQuest($data.index, $data.progress() > 0) }">
                             Quit
                         </button>
                         <!-- /ko -->
