@@ -81,7 +81,10 @@ export default class Notifier {
 
             // Once hidden remove the element
             $(`#${toastID}`).on('hidden.bs.toast', () => {
-                document.getElementById(toastID).remove();
+                const element = document.getElementById(toastID);
+                if (element) {
+                    element.remove();
+                }
             });
         });
     }

@@ -162,7 +162,7 @@ class Underground implements Feature {
     }
 
     public static calculateCssClass(i: number, j: number): string {
-        return `col-sm-1 rock${Math.max(Mine.grid[i][j](), 0)} mineSquare ${Mine.Tool[Mine.toolSelected()]}Selected`;
+        return `col-sm-1 rock${Math.max(Mine.grid[i][j](), 0)} mineSquare position-relative ${Mine.Tool[Mine.toolSelected()]}Selected`;
     }
 
     private static rewardCssClass: KnockoutComputed<string> = ko.pureComputed(() => {

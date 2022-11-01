@@ -378,7 +378,7 @@
 
 <script type="text/html" id="RangeSettingTemplate">
     <label data-bind="text: `${$data.displayName}: ${$data.observableValue()}`, attr: { for: `setting-${$data.name}` }">setting name</label>
-    <input type="range" class="custom-range pl-3 pr-3"
+    <input type="range" class="custom-range px-3"
             data-bind="attr: { name: $data.name, id: `setting-${$data.name}`, min: $data.minValue, max: $data.maxValue, step: $data.step},
                        value: $data.observableValue"
             oninput="Settings.setSettingByName(this.name, this.value)">

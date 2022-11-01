@@ -43,7 +43,7 @@
                                     </ul>
 
                                     <div class="row justify-content-center align-items-center py-1">
-                                        <div class="col-4 pr-0">
+                                        <div class="col-4 pe-0">
                                             <button class="btn w-100 btn-secondary"
                                                 onclick="FarmController.navigateLeft()"
                                                 data-bind="disable: FarmController.navigateIndex() === 0,
@@ -52,7 +52,7 @@
                                             </button>
                                         </div>
                                         <div class="col-4" data-bind="text: FarmController.navigateIndex()+1 + '/' + (FarmController.numberOfTabs()+1)"></div>
-                                        <div class="col-4 pl-0">
+                                        <div class="col-4 ps-0">
                                             <button class="btn w-100 btn-secondary"
                                                 onclick="FarmController.navigateRight()"
                                                 data-bind="disable: FarmController.navigateIndex() ===  FarmController.numberOfTabs(),
@@ -63,12 +63,12 @@
                                     </div>
 
                                     <div class="row justify-content-center py-1">
-                                        <div class="col-6 pr-0">
+                                        <div class="col-6 pe-0">
                                             <button class="btn btn-primary w-100" data-bind="click: function(){App.game.farming.plantAll(FarmController.selectedBerry())}">
                                                 Plant All
                                             </button>
                                         </div>
-                                        <div class="col-6 pl-0">
+                                        <div class="col-6 ps-0">
                                             <button class="btn btn-success w-100" data-bind="click: function(){App.game.farming.harvestAll()}">
                                                 Harvest All
                                             </button>
