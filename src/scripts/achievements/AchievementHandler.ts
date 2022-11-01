@@ -64,7 +64,7 @@ class AchievementHandler {
         ));
         AchievementHandler.cachedSortedList = achievementSortedList;
         return achievementSortedList;
-    }).extend({ rateLimit: 1000 });
+    }).extend({ rateLimit: 100 });
 
     public static filterAchievementList(retainPage = false) {
         this.achievementListFiltered(this.achievementList.filter((a) => (
