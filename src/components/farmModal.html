@@ -383,7 +383,7 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn mr-auto"
+                <button type="button" class="btn me-auto"
                     data-bind="visible: FarmController.additionalInfoTooltip().length !== 0,
                     tooltip: {
                         title: FarmController.additionalInfoTooltip(),
@@ -391,7 +391,7 @@
                         placement:'top',
                         html: true,
                     }">ⓘ</button>
-                <knockout class="mr-auto" data-bind="foreach: App.game.farming.farmHands.hired()">
+                <knockout class="me-auto" data-bind="foreach: App.game.farming.farmHands.hired()">
                     <img class="pixelated" src="" height="24px" data-bind="attr:{ src: `assets/images/profile/trainer-${$data.trainerSprite}.png` },
                     tooltip: {
                         title: $data.tooltip(),

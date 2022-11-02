@@ -35,7 +35,6 @@
     "babel-core": "^6.26.3",
     "babel-preset-env": "^1.7.0",
     "babel-register": "^6.26.0",
-    "bootstrap-notify": "^3.1.3",
     "browser-sync": "^2.27.10",
     "cross-env": "^7.0.2",
     "del": "^5.1.0",
@@ -73,9 +72,7 @@
     "webpack-stream": "^6.1.0"
   },
   "dependencies": {
-    "@popperjs/core": "^2.11.6",
-    "@types/bootstrap": "^5.2.5",
-    "@types/bootstrap-notify": "^3.1.36",
+    "@types/bootstrap": "^5.2.2",
     "@types/intro.js": "^5.1.0",
     "@types/knockout": "^3.4.72",
     "@typescript-eslint/parser": "^3.6.1",

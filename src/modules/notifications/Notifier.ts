@@ -111,7 +111,7 @@ export default class Notifier {
             // Get the notification ready to display
             const modalID = Rand.string(7);
             const html = `
-<div class="modal fade noselect" id="modal${modalID}" tabindex="-1" role="dialog" aria-badgeledby="prompt" data-bs-backdrop="static">
+<div class="modal fade noselect" id="modal${modalID}" tabindex="-1" role="dialog" aria-labelledby="prompt" data-bs-backdrop="static">
     <div class="modal-dialog modal-dialog-scrollable modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header modal-header pb-0 pt-2 px-2 bg-${NotificationOption[type]}">
@@ -188,7 +188,7 @@ export default class Notifier {
             // Get the notification ready to display
             const modalID = Rand.string(7);
             const html = `
-<div class="modal fade noselect" id="modal${modalID}" tabindex="-1" role="dialog" aria-badgeledby="prompt" data-bs-backdrop="static">
+<div class="modal fade noselect" id="modal${modalID}" tabindex="-1" role="dialog" aria-labelledby="prompt" data-bs-backdrop="static">
     <div class="modal-dialog modal-dialog-scrollable modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header modal-header pb-0 pt-2 px-2 bg-${NotificationOption[type]}">
