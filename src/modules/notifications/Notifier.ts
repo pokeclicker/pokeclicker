@@ -1,4 +1,4 @@
-import { Modal } from 'bootstrap';
+import * as bootstrap from 'bootstrap';
 import NotificationOption from './NotificationOption';
 import Sound from '../utilities/Sound';
 import Rand from '../utilities/Rand';
@@ -139,7 +139,7 @@ export default class Notifier {
                 }
             });
 
-            const modal = Modal.getOrCreateInstance(document.getElementById(`modal${modalID}`));
+            const modal = bootstrap.Modal.getOrCreateInstance(document.getElementById(`modal${modalID}`));
             modal.show();
 
             // Once the modal is shown, hide it after specified timeout
@@ -152,7 +152,7 @@ export default class Notifier {
                 }
             });
 
-            // // Once hidden remove the element
+            // Once hidden remove the element
             $(`#modal${modalID}`).on('hidden.bs.modal', () => {
                 const inputEl = document.getElementById(`promptInput${modalID}`) as HTMLInputElement;
                 const inputValue = inputEl?.value;
@@ -212,7 +212,7 @@ export default class Notifier {
                 resolve(true);
             });
 
-            const modal = Modal.getOrCreateInstance(document.getElementById(`modal${modalID}`));
+            const modal = bootstrap.Modal.getOrCreateInstance(document.getElementById(`modal${modalID}`));
             modal.show();
 
             // Once the modal is shown, hide it after specified timeout

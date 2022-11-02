@@ -1,6 +1,6 @@
 // TODO: Remove temporary code after all code in ../scripts has been ported.
 // This is only here so that the code in ../scripts can use the new functionality
-
+import * as bootstrap from 'bootstrap';
 import SaveSelector from './SaveSelector';
 import Profile from './profile/Profile';
 import DataStore from './DataStore';
@@ -262,4 +262,5 @@ Object.assign(<any>window, {
     DayOfWeekRequirement,
     SaveReminder,
     lazyLoad,
+    bootstrap,
 });
