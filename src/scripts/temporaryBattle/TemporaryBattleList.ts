@@ -19,7 +19,7 @@ TemporaryBattleList['Fighting Dojo'] = new TemporaryBattle(
         firstTimeRewardFunction: () => {
             BagHandler.gainItem({type: ItemType.item, id: 'Fighting_egg'}, 1);
             Notifier.notify({
-                message: 'You were awarded a Fighting Egg for defeating the Fighting Dojo',
+                message: 'You were awarded a Fighting Egg for defeating the Fighting Dojo!',
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.Dungeons.rare_dungeon_item_found,
             });
