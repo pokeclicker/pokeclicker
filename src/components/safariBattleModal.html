@@ -39,8 +39,8 @@
            <div class="modal-footer p-0 bg-dark text-light">
                 <div class="message" data-bind='html: SafariBattle.text'></div>
                 <div class="row" style="width: 100%;">
-                    <button type="button" class="btn btn-primary w-100 col-6 m-0" onclick="this.blur();SafariBattle.throwBall()" data-bind='disable: SafariBattle.busy(), text: "Ball (" + Safari.balls() + ")"'>Ball (30)</button>
-                    <div class="btn-group w-100 col-6 m-0 dropup" style="padding:0px;" data-bind="let: { baitType: ko.observable(BaitType.Bait) }">
+                    <button type="button" class="btn btn-primary col-6 m-0" onclick="this.blur();SafariBattle.throwBall()" data-bind='disable: SafariBattle.busy(), text: "Ball (" + Safari.balls() + ")"'>Ball (30)</button>
+                    <div class="btn-group col-6 m-0 dropup" style="padding:0px;" data-bind="let: { baitType: ko.observable(BaitType.Bait) }">
                         <button type="button" class='btn btn-primary w-100' onclick="this.blur();" data-bind='{ click: function(){SafariBattle.throwBait(baitType());}, disable: BaitList[BaitType[baitType()]].amount() <= 0 || SafariBattle.busy() }'>
                             <div style="display:inline"><img width=16px data-bind="attr: { src: BaitList[BaitType[baitType()]].image }"></div>
                             <span data-bind="text: BaitList[BaitType[baitType()]].btnName">Bait (∞)</span>
@@ -51,8 +51,8 @@
                             <button class="dropdown-item" type="button" data-bind="click: function(){baitType($data)}, text: BaitList[BaitType[$data]].btnName"></button>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-primary w-100 col-6 m-0" onclick="this.blur();SafariBattle.throwRock()" data-bind="disable: SafariBattle.busy()">Rock (∞)</button>
-                    <button type="button" class="btn btn-primary w-100 col-6 m-0" onclick="this.blur();SafariBattle.run()" data-bind="disable: SafariBattle.busy()">Run</button>
+                    <button type="button" class="btn btn-primary col-6 m-0" onclick="this.blur();SafariBattle.throwRock()" data-bind="disable: SafariBattle.busy()">Rock (∞)</button>
+                    <button type="button" class="btn btn-primary col-6 m-0" onclick="this.blur();SafariBattle.run()" data-bind="disable: SafariBattle.busy()">Run</button>
                 </div>
            </div>
        </div>

@@ -54,10 +54,10 @@ class GameController {
                 ko.utils.extend(options, ko.bindingHandlers.tooltip.options);
                 ko.utils.extend(options, local);
 
-                $(element).tooltip(options);
+                const tooltip = new bootstrap.Tooltip(element, options);
 
                 ko.utils.domNodeDisposal.addDisposeCallback(element, () => {
-                    $(element).tooltip('dispose');
+                    tooltip.dispose();
                 });
             },
             'update': function (element, valueAccessor) {

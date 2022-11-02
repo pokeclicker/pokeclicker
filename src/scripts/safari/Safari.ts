@@ -122,7 +122,8 @@ class Safari {
     public static openModal() {
         if (this.canAccess()) {
             App.game.gameState = GameConstants.GameState.safari;
-            $('#safariModal').modal({backdrop: 'static', keyboard: false});
+            const modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('safariModal'), {backdrop: 'static', keyboard: false});
+            modal.show();
         } else {
             Notifier.notify({
                 message: 'You need the Safari Pass to access this location.\n<i>Visit the Gym in Fuschia City</i>',

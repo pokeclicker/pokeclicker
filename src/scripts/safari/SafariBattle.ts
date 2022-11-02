@@ -24,7 +24,9 @@ class SafariBattle {
         Safari.inBattle(true);
         SafariBattle.text('What will you do?');
         SafariBattle.escapeAttempts = 0;
-        $('#safariBattleModal').modal({ backdrop: 'static', keyboard: false });
+
+        const modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('safariBattleModal'), {backdrop: 'static', keyboard: false});
+        modal.show();
     }
 
     public static throwBall() {
