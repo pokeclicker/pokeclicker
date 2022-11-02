@@ -19,13 +19,13 @@ aria-labelledby="pokedexModalLabel">
                         </div>
                     </div>
                     <!-- /ko -->
-                    
+
                     <!-- ko if: PokedexHelper.filteredList().length != 0 -->
                     <div class="pokedex-border-bottom pt-2">
                         <h4 data-bind="text: `Showing ${PokedexHelper.filteredList().length} Pokémon`"></h4>
                     </div>
                     <!-- /ko -->
-                    
+
                     <div class="collapse" id="pokedex-filter-container" style="margin-bottom: 0.5rem;">
                         <div class="container-fluid py-3">
                             <div class="form-row text-left">
@@ -33,51 +33,57 @@ aria-labelledby="pokedexModalLabel">
                                 <div class="form-group col-md-6 col-6">
                                     <label>Name</label>
                                     <input id="nameFilter" class="form-control" placeholder="Bulbasaur" value=""
-                                        oninput="PokedexHelper.updateList()">
+                                        data-bind="textInput: PokedexHelper.filters.name">
                                 </div>
 
                                 <!--Region-->
                                 <div class="form-group col-md-6 col-6">
                                     <label>Region</label>
-                                    <select id="pokedex-filter-region" class="custom-select"
-                                            oninput="PokedexHelper.updateList()" style="margin-right: 8px">
-                                        <option value="" selected>All</option>
+                                    <select id="pokedex-filter-region" class="custom-select" style="margin-right: 8px"
+                                            data-bind="options: [{ name: 'All', value: null }, ...GameHelper.enumSelectOption(GameConstants.Region).filter(opt => !['none', 'final'].includes(opt.name))],
+                                                       optionsValue: 'value',
+                                                       optionsText: i => GameConstants.camelCaseToString(i.name),
+                                                       value: PokedexHelper.filters.region">
                                     </select>
                                 </div>
 
                                 <!--Types-->
                                 <div class="form-group col-md-6 col-6">
                                     <label>Type</label>
-                                    <select id="pokedex-filter-type1" class="custom-select"
-                                            oninput="PokedexHelper.updateList()" style="margin-right: 8px">
-                                        <option value="" selected>All</option>
+                                    <select id="pokedex-filter-type1" class="custom-select" style="margin-right: 8px"
+                                            data-bind="options: [{ name: 'All', value: null }, ...GameHelper.enumSelectOption(PokemonType)],
+                                                       optionsValue: 'value',
+                                                       optionsText: 'name',
+                                                       value: PokedexHelper.filters.type1">
                                     </select>
                                 </div>
                                 <div class="form-group col-md-6 col-6">
                                     <label>Type</label>
                                     <select id="pokedex-filter-type2" class="custom-select"
-                                            oninput="PokedexHelper.updateList()">
-                                        <option value="" selected>All</option>
+                                            data-bind="options: [{ name: 'All', value: null }, ...GameHelper.enumSelectOption(PokemonType)],
+                                                       optionsValue: 'value',
+                                                       optionsText: 'name',
+                                                       value: PokedexHelper.filters.type2">
                                     </select>
                                 </div>
 
                                 <div class="form-group col-md-6 col-6">
                                     <label for="pokedex-filter-shiny-caught">Caught Status</label>
-                                    <select id="pokedex-filter-shiny-caught" autocomplete="off" class="custom-select" onchange="PokedexHelper.updateList()">
-                                        <option value="all" selected>All</option>
-                                        <option value="uncaught">Uncaught</option>
-                                        <option value="caught">Caught</option>
-                                        <option value="caught-not-shiny">Caught not Shiny</option>
-                                        <option value="caught-shiny">Caught Shiny</option>
+                                    <select id="pokedex-filter-shiny-caught" autocomplete="off" class="custom-select"
+                                        data-bind="options: [['all', 'All'], ['uncaught', 'Uncaught'], ['caught', 'Caught'], ['caught-not-shiny', 'Caught not Shiny'], ['caught-shiny', 'Caught Shiny']],
+                                                   optionsValue: '0',
+                                                   optionsText: '1',
+                                                   value: PokedexHelper.filters.caughtShiny">
                                     </select>
                                 </div>
 
                                 <div class="form-group col-md-6 col-6">
                                     <label for="pokedex-filter-pokerus-status">Pokerus Status</label>
-                                    <select id="pokedex-filter-pokerus-status" autocomplete="off" class="custom-select" onchange="PokedexHelper.updateList()">
-                                        <!-- ko foreach: Settings.getSetting('breedingPokerusFilter').options -->
-                                        <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('breedingPokerusFilter').value === $data.value }, text: $data.text"></option>
-                                        <!-- /ko -->
+                                    <select id="pokedex-filter-pokerus-status" autocomplete="off" class="custom-select"
+                                        data-bind="options: Settings.getSetting('breedingPokerusFilter').options,
+                                                   optionsValue: 'value',
+                                                   optionsText: 'text',
+                                                   value: PokedexHelper.filters.statusPokerus">
                                     </select>
                                 </div>
 
@@ -87,7 +93,7 @@ aria-labelledby="pokedexModalLabel">
                                         <span>Rare Hold Item</span>
                                         <label class="form-check-label toggler-wrapper style-1 float-right">
                                             <input class="form-check-input" type="checkbox" id="pokedex-filter-held-item"
-                                                value="false" onclick="PokedexHelper.updateList()">
+                                                data-bind="checked: PokedexHelper.filters.heldItem">
                                             <div class="toggler-slider">
                                                 <div class="toggler-knob"></div>
                                             </div>
@@ -115,7 +121,7 @@ aria-labelledby="pokedexModalLabel">
                                         <span>Hide alternate forms</span>
                                         <label class="form-check-label toggler-wrapper style-1 float-right">
                                             <input class="form-check-input" type="checkbox" id="pokedex-filter-hide-alternate"
-                                                value="false" onclick="PokedexHelper.updateList()">
+                                                data-bind="checked: PokedexHelper.filters.hideAlternate">
                                             <div class="toggler-slider">
                                                 <div class="toggler-knob"></div>
                                             </div>
@@ -126,7 +132,7 @@ aria-labelledby="pokedexModalLabel">
                         </div>
                     </div>
                 </div>
-                    
+
                 <div class="pokemon-list">
                     <ul class="row justify-content-center p-0" data-bind="foreach: lazyLoad($element, PokedexHelper.filteredList)"
                         style="max-width: 100%; padding:0; margin:0;">

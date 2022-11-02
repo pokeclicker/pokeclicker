@@ -60,9 +60,6 @@ class App {
             GameController.bindToolTips();
             GameController.addKeyListeners();
 
-            PokedexHelper.populateFilters();
-            PokedexHelper.updateList();
-
             App.game.initialize();
 
             // Fixes custom theme css if Default theme was different from save theme (must be done before bindings)
