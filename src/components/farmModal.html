@@ -197,8 +197,7 @@
                                      <img src="" width=80px style="padding: 20px 0px;" data-bind="css: { 'pokemon-not-seen': !App.game.farming.unlockedBerries[$data]() }, attr:{ src: FarmController.getBerryImage($data)}">
                                      <!-- ko if: App.game.farming.unlockedBerries[$data]() -->
                                      <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: BerryType[$data]">name</span>
-                                     <a class="overlay" href="#berryDexModal" data-bs-toggle="modal"
-                                        data-bind="click: ()=>{App.game.statistics.selectedBerryID($data)}"></a>
+                                     <a class="overlay" href="javascript:;" data-bind="click: ()=>{App.game.statistics.selectedBerryID($data); $('#berryDexModal').modal('show');}"></a>
                                      <!-- /ko -->
                             </li>
                         </ul>
