@@ -30,6 +30,10 @@
                       <td class="text-left">Total Life Span</td>
                       <td class="text-left tight"><code data-bind="html: GameConstants.formatSecondsToTime(App.game.farming.berryData[$data].growthTime[4])">-</code></td>
                     </tr>
+					<tr>
+                      <td class="text-left">Growth Time</td>
+                      <td class="text-left tight"><code data-bind="html: GameConstants.formatSecondsToTime(App.game.farming.berryData[$data].growthTime[3])">-</code></td>
+                    </tr>
                     <tr>
                       <td class="text-left">Harvest Amount</td>
                       <td class="text-left tight"><code data-bind="text: App.game.farming.berryData[$data].harvestAmount.toLocaleString('en-US')">-</code></td>
