@@ -1,6 +1,6 @@
 <div id="questDisplayContainer" class="card sortable border-secondary mb-3">
     <!-- ko if: App.game.quests.isDailyQuestsUnlocked() -->
-        <div class="card-header p-0" data-toggle="collapse" href="#questDisplayBody">
+        <div class="card-header p-0" data-toggle="collapse" href="#dailyQuestDisplayBody">
             <span data-bind='text: "Quests (" + App.game.quests.currentQuests().length + "/" + App.game.quests.questSlots() + ")"'></span>
         </div>
         <button class="btn btn-sm btn-primary" style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;"
@@ -9,7 +9,7 @@
         </button>
     <!-- /ko -->
 
-    <div id="questDisplayBody" class="card-body p-0 show">
+    <div id="dailyQuestDisplayBody" class="card-body p-0 show questDisplayBlock">
         <!-- ko if: App.game.quests.currentQuests().length == 0 && App.game.quests.isDailyQuestsUnlocked() -->
             <span class="pt-2 pb-2">No active quest</span>
         <!-- /ko -->
@@ -43,55 +43,57 @@
                     </td>
                 </tr>
             </tbody>
-            <!-- List of quest line quests -->
-            <tbody id="questLines" data-bind="foreach: App.game.quests.questLines()">
-                <!-- ko if: $data.state() == QuestLineState.started -->
-                    <tr>
-                        <td colspan="2">
-                            <div class="card-header">
-                                <knockout data-bind="text: $data.name"></knockout>
-                                <knockout class="info text-primary" data-bind="tooltip: { title: $data.description, trigger: 'hover', placement:'left' }">ⓘ</knockout>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr class="text-center">
-                        <td colspan="2" data-bind="text: $data.curQuestObject().description"></td>
-                    </tr>
-                    <!-- ko ifnot: $data.curQuestObject().quests -->
-                    <tr>
-                        <td colspan="2" class="p-0">
-                            <div class="progress p-0">
-                                <div class="progress-bar bg-success" role="progressbar"
-                                    data-bind="attr:{ style: 'width:' + ($data.curQuestObject().progress() * 100) + '%'}"
-                                    aria-valuemin="0" aria-valuemax="100">
-                                    <span data-bind="text: ko.pureComputed(function(){return $data.curQuestObject().progressText()})">0/1000</span>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <!-- /ko -->
-                    <!-- ko if: $data.curQuestObject().quests -->
-                        <!-- ko foreach: $data.curQuestObject().quests -->
-                            <!-- ko if: $data.description-->
-                                <tr class="text-center font-italic">
-                                    <td colspan="2" data-bind="text: $data.description"></td>
-                                </tr>
-                            <!-- /ko -->
-                            <tr>
-                                <td colspan="2">
-                                    <div class="progress p-0">
-                                        <div class="progress-bar bg-success" role="progressbar"
-                                            data-bind="attr:{ style: 'width:' + ($data.progress() * 100) + '%'}"
-                                            aria-valuemin="0" aria-valuemax="100">
-                                            <span data-bind="text: ko.pureComputed(function(){return $data.progressText()})">0/1000</span>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        <!-- /ko -->
-                    <!-- /ko -->
-                <!-- /ko -->
-            </tbody>
-        </table>
-  </div>
+		</table>
+		</div>
+        <!-- List of quest line quests -->
+		<!-- ko foreach: App.game.quests.questLines().filter(function(ql){return ql.state() == QuestLineState.started;}) -->
+		<div class="questDisplayBlock questLine">
+			<div class="card-header"  data-toggle="collapse" data-bind="attr : {href : '#qlcard_' + $index()}">
+				<knockout data-bind="text: $data.name"></knockout>
+				<knockout class="info text-primary" data-bind="tooltip: { title: $data.description, trigger: 'hover', placement:'left' }">ⓘ</knockout>
+			</div>
+			<div class="card-body p-0 show"  data-bind="attr : {id : 'qlcard_' + $index()}">
+				<table width="100%">
+					<tbody>
+						<tr class="text-center">
+							<td colspan="2" data-bind="text: $data.curQuestObject().description"></td>
+						</tr>
+						<!-- ko ifnot: $data.curQuestObject().quests -->
+						<tr>
+							<td colspan="2" class="p-0">
+								<div class="progress p-0">
+									<div class="progress-bar bg-success" role="progressbar"
+										data-bind="attr:{ style: 'width:' + ($data.curQuestObject().progress() * 100) + '%'}"
+										aria-valuemin="0" aria-valuemax="100">
+										<span data-bind="text: ko.pureComputed(function(){return $data.curQuestObject().progressText()})">0/1000</span>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<!-- /ko -->
+						<!-- ko if: $data.curQuestObject().quests -->
+							<!-- ko foreach: $data.curQuestObject().quests -->
+								<!-- ko if: $data.description-->
+									<tr class="text-center font-italic">
+										<td colspan="2" data-bind="text: $data.description"></td>
+									</tr>
+								<!-- /ko -->
+								<tr>
+									<td colspan="2">
+										<div class="progress p-0">
+											<div class="progress-bar bg-success" role="progressbar"
+												data-bind="attr:{ style: 'width:' + ($data.progress() * 100) + '%'}"
+												aria-valuemin="0" aria-valuemax="100">
+												<span data-bind="text: ko.pureComputed(function(){return $data.progressText()})">0/1000</span>
+											</div>
+										</div>
+									</td>
+								</tr>
+							<!-- /ko -->
+						<!-- /ko -->
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!-- /ko -->
 </div>
