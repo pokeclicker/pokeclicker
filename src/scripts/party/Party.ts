@@ -40,17 +40,17 @@ class Party implements Feature {
 
     }
 
-    gainPokemonById(id: number, shiny = false, suppressNotification = false) {
-        this.gainPokemon(PokemonFactory.generatePartyPokemon(id, shiny), suppressNotification);
+    gainPokemonById(id: number, shiny = false, suppressNotification = false, gender = -1) {
+        // If no gender defined, calculate it
+        if (gender === -1) {
+            gender = PokemonFactory.generateGenderById(id);
+        }
+        this.gainPokemon(PokemonFactory.generatePartyPokemon(id, shiny, gender), suppressNotification);
     }
 
     gainPokemon(pokemon: PartyPokemon, suppressNotification = false) {
-        GameHelper.incrementObservable(App.game.statistics.pokemonCaptured[pokemon.id]);
-        GameHelper.incrementObservable(App.game.statistics.totalPokemonCaptured);
-
+        PokemonHelper.incrementPokemonStatistics(pokemon.id, GameConstants.STATISTIC_CAPTURED, pokemon.shiny, pokemon.gender);
         if (pokemon.shiny) {
-            GameHelper.incrementObservable(App.game.statistics.shinyPokemonCaptured[pokemon.id]);
-            GameHelper.incrementObservable(App.game.statistics.totalShinyPokemonCaptured);
             // Add all shiny catches to the log book
             App.game.logbook.newLog(LogBookTypes.CAUGHT, `You have captured a shiny ${pokemon.name}! ${this.alreadyCaughtPokemon(pokemon.id, true) ? '(duplicate)' : ''}`);
             // Already caught (shiny)
