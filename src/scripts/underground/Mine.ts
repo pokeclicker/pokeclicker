@@ -349,7 +349,7 @@ class Mine {
                 let amount = 1;
                 const itemName = UndergroundItems.getById(Mine.rewardNumbers[i]).name;
                 Notifier.notify({
-                    message: `You found ${GameHelper.anOrA(itemName)} ${GameConstants.humanifyString(itemName)}`,
+                    message: `You found ${GameHelper.anOrA(itemName)} ${GameConstants.humanifyString(itemName)}.`,
                     type: NotificationConstants.NotificationOption.success,
                     setting: NotificationConstants.NotificationSetting.Underground.underground_item_found,
                 });
