@@ -1,30 +1,21 @@
-///<reference path="../shop/ShopHandler.ts"/>
+/* eslint-disable no-underscore-dangle */
 
-/**
- * Source event for decreasing shop multipliers
- */
-enum MultiplierDecreaser {
-    Battle = 0,
-    Berry,
-}
+import { Observable } from 'knockout';
+import {
+    Currency, ITEM_PRICE_MULTIPLIER, Pokeball, humanifyString, camelCaseToString,
+} from '../GameConstants';
+import GameHelper from '../GameHelper';
+import NotificationConstants from '../notifications/NotificationConstants';
+import Notifier from '../notifications/Notifier';
+import Amount from '../wallet/Amount';
+import { MultiplierDecreaser, ShopOptions } from './types';
 
-/**
- * Additional shop options for an item
- */
-interface ShopOptions {
-    saveName?: string,
-    maxAmount?: number,
-    multiplier?: number,
-    multiplierDecrease?: boolean,
-    multiplierDecreaser?: MultiplierDecreaser,
-}
-
-class Item {
+export default class Item {
     saveName: string;
     type: any;
 
     // Shop Details
-    price: KnockoutObservable<number>;
+    price: Observable<number>;
     multiplier: number;
     multiplierDecrease: boolean;
     multiplierDecreaser: MultiplierDecreaser;
@@ -37,29 +28,31 @@ class Item {
     constructor(
         public name: string,
         public basePrice: number,
-        public currency: GameConstants.Currency = GameConstants.Currency.money,
+        public currency: Currency = Currency.money,
         {
             saveName = '',
             maxAmount = Number.MAX_SAFE_INTEGER,
-            multiplier = GameConstants.ITEM_PRICE_MULTIPLIER,
+            multiplier = ITEM_PRICE_MULTIPLIER,
             multiplierDecrease = true,
             multiplierDecreaser = MultiplierDecreaser.Battle,
         } : ShopOptions = {},
         displayName?: string,
         description?: string,
-        imageDirectory?: string) {
-
+        imageDirectory?: string,
+    ) {
         this.price = ko.observable(this.basePrice);
         // If no custom save name specified, default to item name
-        this.saveName = saveName || name || `${name}|${GameConstants.Currency[currency]}`;
+        this.saveName = saveName || name || `${name}|${Currency[currency]}`;
         this.maxAmount = maxAmount || Number.MAX_SAFE_INTEGER;
         // Multiplier needs to be above 1
-        this.multiplier = Math.max(1, multiplier || GameConstants.ITEM_PRICE_MULTIPLIER);
+        this.multiplier = Math.max(1, multiplier || ITEM_PRICE_MULTIPLIER);
         this.multiplierDecrease = multiplierDecrease;
         this.multiplierDecreaser = multiplierDecreaser || MultiplierDecreaser.Battle;
-        if (!ItemList[this.saveName]) {
-            ItemList[this.saveName] = this;
-        }
+
+        // TODO: figure out if this is needed
+        // if (!ItemList[this.saveName]) {
+        //     ItemList[this.saveName] = this;
+        // }
 
         this._displayName = displayName ?? name;
         this._description = description;
@@ -67,34 +60,35 @@ class Item {
     }
 
     totalPrice(amount: number): number {
-        if (this.name == GameConstants.Pokeball[GameConstants.Pokeball.Pokeball]) {
+        if (this.name === Pokeball[Pokeball.Pokeball]) {
             return Math.max(0, this.basePrice * amount);
-        } else {
-            // multiplier should be capped at 100, so work out how many to buy at increasing price and how many at max
-            //    (m_start) * (m^k) = 100
-            // => k = (2 - log(m_start)) / log(m)
-            const mStart = Math.max(player.itemMultipliers[this.saveName] || 1, 1);
-            const k = (mStart < 100)
-                ? Math.ceil((2 - Math.log10(mStart)) / Math.log10(this.multiplier))
-                : 0;
-            const incAmount = Math.min(k, amount);
-
-            const incCost = (this.price() * (1 - Math.pow(this.multiplier, incAmount))) / (1 - this.multiplier);
-            const maxCost = (this.basePrice * 100 * (amount - incAmount));
-            const total = incCost + maxCost;
-
-            return Math.max(0, Math.round(total));
         }
+
+        // multiplier should be capped at 100, so work out how many to buy at increasing price and how many at max
+        //    (m_start) * (m^k) = 100
+        // => k = (2 - log(m_start)) / log(m)
+        const mStart = Math.max(player.itemMultipliers[this.saveName] || 1, 1);
+        const k = (mStart < 100)
+            ? Math.ceil((2 - Math.log10(mStart)) / Math.log10(this.multiplier))
+            : 0;
+        const incAmount = Math.min(k, amount);
+
+        const incCost = (this.price() * (1 - (this.multiplier ** incAmount))) / (1 - this.multiplier);
+        const maxCost = (this.basePrice * 100 * (amount - incAmount));
+        const total = incCost + maxCost;
+
+        return Math.max(0, Math.round(total));
     }
 
-    buy(n: number) {
-        if (n <= 0) {
+    buy(amt: number) {
+        if (amt <= 0) {
             return;
         }
 
+        let n = amt;
         if (n > this.maxAmount) {
             Notifier.notify({
-                message: `You can only buy ${this.maxAmount.toLocaleString('en-US')} &times; ${GameConstants.humanifyString(this.displayName)}!`,
+                message: `You can only buy ${this.maxAmount.toLocaleString('en-US')} &times; ${humanifyString(this.displayName)}!`,
                 type: NotificationConstants.NotificationOption.danger,
             });
             n = this.maxAmount;
@@ -102,7 +96,7 @@ class Item {
 
         if (!this.isAvailable()) {
             Notifier.notify({
-                message: `${GameConstants.humanifyString(this.displayName)} is sold out!`,
+                message: `${humanifyString(this.displayName)} is sold out!`,
                 type: NotificationConstants.NotificationOption.danger,
             });
             return;
@@ -114,14 +108,14 @@ class Item {
             this.gain(n);
             this.increasePriceMultiplier(n);
             Notifier.notify({
-                message: `You bought ${n.toLocaleString('en-US')} × <img src="${this.image}" height="24px"/> ${GameConstants.humanifyString(this.displayName)}${multiple}.`,
+                message: `You bought ${n.toLocaleString('en-US')} × <img src="${this.image}" height="24px"/> ${humanifyString(this.displayName)}${multiple}.`,
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.Items.item_bought,
             });
         } else {
-            let curr = GameConstants.camelCaseToString(GameConstants.Currency[this.currency]);
+            let curr = camelCaseToString(Currency[this.currency]);
             switch (this.currency) {
-                case GameConstants.Currency.money:
+                case Currency.money:
                     curr = 'Pokédollars';
                     break;
                 default:
@@ -129,7 +123,7 @@ class Item {
                     break;
             }
             Notifier.notify({
-                message: `You don't have enough ${curr} to buy ${n.toLocaleString('en-US')} ${GameConstants.humanifyString(this.displayName) + multiple}!`,
+                message: `You don't have enough ${curr} to buy ${n.toLocaleString('en-US')} ${humanifyString(this.displayName) + multiple}!`,
                 type: NotificationConstants.NotificationOption.danger,
             });
         }
@@ -138,20 +132,21 @@ class Item {
     gain(n: number) {
         player.gainItem(this.name, n);
 
-        if (this.name == 'Protein') {
+        if (this.name === 'Protein') {
             GameHelper.incrementObservable(App.game.statistics.totalProteinsPurchased, n);
             GameHelper.incrementObservable(App.game.statistics.totalProteinsObtained, n);
         }
     }
 
-    use(): boolean {
+    // eslint-disable-next-line class-methods-use-this, @typescript-eslint/no-unused-vars
+    use(amount: number = 1, ...rest: any[]): boolean {
         return false;
     }
 
     checkCanUse(): boolean {
         if (!player.itemList[this.name]()) {
             Notifier.notify({
-                message: `You don't have any ${ItemList[this.name].displayName}s left...`,
+                message: `You don't have any ${this.displayName}s left...`,
                 type: NotificationConstants.NotificationOption.danger,
             });
             return false;
@@ -159,10 +154,12 @@ class Item {
         return true;
     }
 
+    // eslint-disable-next-line class-methods-use-this
     isAvailable(): boolean {
         return true;
     }
 
+    // eslint-disable-next-line class-methods-use-this
     isSoldOut(): boolean {
         return false;
     }
@@ -172,7 +169,7 @@ class Item {
     }
 
     increasePriceMultiplier(amount = 1) {
-        player.itemMultipliers[this.saveName] = Math.min(100, (player.itemMultipliers[this.saveName] || 1) * Math.pow(this.multiplier, amount));
+        player.itemMultipliers[this.saveName] = Math.min(100, (player.itemMultipliers[this.saveName] || 1) * (this.multiplier ** amount));
         this.price(Math.round(this.basePrice * player.itemMultipliers[this.saveName]));
     }
 
@@ -183,8 +180,13 @@ class Item {
         if (this.multiplierDecreaser !== multiplierDecreaser) {
             return;
         }
-        player.itemMultipliers[this.saveName] = Math.max(1, (player.itemMultipliers[this.saveName] || 1) / Math.pow(this.multiplier, amount));
+        player.itemMultipliers[this.saveName] = Math.max(1, (player.itemMultipliers[this.saveName] || 1) / (this.multiplier ** amount));
         this.price(Math.round(this.basePrice * player.itemMultipliers[this.saveName]));
+    }
+
+    // eslint-disable-next-line class-methods-use-this
+    init() {
+        // Override in specific item class for any item specific initialization needed
     }
 
     get description() {
@@ -192,14 +194,11 @@ class Item {
     }
 
     get displayName() {
-        return GameConstants.humanifyString(this._displayName);
+        return humanifyString(this._displayName);
     }
 
     get image() {
         const subDirectory = this.imageDirectory ? `${this.imageDirectory}/` : '';
         return `assets/images/items/${subDirectory}${this.name}.png`;
     }
-
 }
-
-const ItemList: { [name: string]: Item } = {};
