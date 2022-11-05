@@ -49,11 +49,6 @@ export default class Item {
         this.multiplierDecrease = multiplierDecrease;
         this.multiplierDecreaser = multiplierDecreaser || MultiplierDecreaser.Battle;
 
-        // TODO: figure out if this is needed
-        // if (!ItemList[this.saveName]) {
-        //     ItemList[this.saveName] = this;
-        // }
-
         this._displayName = displayName ?? name;
         this._description = description;
         this.imageDirectory = imageDirectory;
