@@ -114,6 +114,13 @@ class PokedexHelper {
             if (!alreadyCaught && pokemon.id != Math.floor(pokemon.id)) {
                 return false;
             }
+            if (Number.isInteger(pokemon.id) && ((pokemon.id+0.01) || (pokemon.id+0.1)) != null) {
+                for (let i = 1; i <=99; i++) {
+                    if (App.game.party.alreadyCaughtPokemon(pokemon.id+(0.01*i))) {
+                return false;
+                    }
+                }
+            }
 
             // Only uncaught
             if (filter['caught-shiny'] == 'uncaught' && alreadyCaught) {
