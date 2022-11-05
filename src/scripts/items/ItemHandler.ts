@@ -86,11 +86,11 @@ class ItemHandler {
                 // Filter to only include pokemon that make use of this evolution stone
                 (p as PokemonListData).nativeRegion > GameConstants.Region.none &&
                 (p as PokemonListData).evolutions != undefined &&
-                (p as PokemonListData).evolutions.some(e => e instanceof StoneEvolution && e.stone == evoStone.type)
+                (p as PokemonListData).evolutions.some(e => e.trigger === EvoTrigger.STONE && (e as StoneEvoData).stone == evoStone.type)
             ).map(p => {
                 // Map to the native region for evolutions that use this stone
-                return Math.min(...(p as PokemonListData).evolutions.filter(e => e instanceof StoneEvolution && e.stone == evoStone.type)
-                    .map(e => Math.max((p as PokemonListData).nativeRegion, PokemonHelper.calcNativeRegion(e.getEvolvedPokemon())))
+                return Math.min(...(p as PokemonListData).evolutions.filter(e => e.trigger === EvoTrigger.STONE && (e as StoneEvoData).stone == evoStone.type)
+                    .map(e => Math.max((p as PokemonListData).nativeRegion, PokemonHelper.calcNativeRegion(e.evolvedPokemon)))
                     .filter(r => r > GameConstants.Region.none));
             })
             );

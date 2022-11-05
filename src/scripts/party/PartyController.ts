@@ -24,9 +24,9 @@ class PartyController {
         if (pokemon) {
             for (const evolution of pokemon.evolutions) {
                 // skip other Restrictions to show all eevee evolutions for the region
-                const regionStatisfied = PokemonHelper.calcNativeRegion(evolution.getEvolvedPokemon()) <= player.highestRegion();
-                if (evolution instanceof StoneEvolution && evolution.stone == evoType && regionStatisfied) {
-                    const pStatus = this.getCaughtStatusByName(evolution.getEvolvedPokemon());
+                const regionStatisfied = PokemonHelper.calcNativeRegion(evolution.evolvedPokemon) <= player.highestRegion();
+                if (evolution.trigger === EvoTrigger.STONE && (evolution as StoneEvoData).stone == evoType && regionStatisfied) {
+                    const pStatus = this.getCaughtStatusByName(evolution.evolvedPokemon);
                     statuses.push(pStatus);
                 }
             }
@@ -40,7 +40,7 @@ class PartyController {
         let found = false;
         if (pokemon) {
             for (const evolution of pokemon.evolutions) {
-                if (evolution instanceof StoneEvolution && evolution.stone == evoType && evolution.isSatisfied()) {
+                if (evolution.trigger === EvoTrigger.STONE && (evolution as StoneEvoData).stone == evoType && EvolutionHandler.isSatisfied(evolution)) {
                     // If we've already found 1 evolution, then there are multiple possible evolutions
                     if (found) {
                         return true;

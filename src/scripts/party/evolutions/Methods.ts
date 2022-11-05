@@ -1,5 +1,5 @@
-/// <reference path="./Test.ts" />
 /// <reference path="./Restrictions.ts" />
+/// <reference path="./Base.ts" />
 
 // TimeRestrictedLevelEvolution(start: number, end: number, basePokemon: string, evolvedPokemon: string, level: number)
 const TimeRestrictedLevelEvolution = timeRestrict(LevelEvolution);

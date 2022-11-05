@@ -52,7 +52,7 @@ class PartyPokemon implements Saveable {
     constructor(
         public id: number,
         public name: PokemonNameType,
-        public evolutions: Evolution[],
+        public evolutions: EvoData[],
         public baseAttack: number,
         shiny = false,
         public gender
@@ -176,22 +176,22 @@ class PartyPokemon implements Saveable {
             return;
         }
 
-        for (const evolution of this.evolutions) {
-            if (evolution instanceof LevelEvolution && evolution.isSatisfied()) {
-                evolution.evolve();
+        for (const evo of this.evolutions) {
+            if (evo.trigger === EvoTrigger.LEVEL && EvolutionHandler.isSatisfied(evo)) {
+                EvolutionHandler.evolve(evo);
             }
         }
     }
 
     public useStone(stoneType: GameConstants.StoneType): boolean {
-        const possibleEvolutions = [];
-        for (const evolution of this.evolutions) {
-            if (evolution instanceof StoneEvolution && evolution.stone == stoneType && evolution.isSatisfied()) {
-                possibleEvolutions.push(evolution);
+        const possibleEvolutions: EvoData[] = [];
+        for (const evo of this.evolutions) {
+            if (evo.trigger === EvoTrigger.STONE && (evo as StoneEvoData).stone == stoneType && EvolutionHandler.isSatisfied(evo)) {
+                possibleEvolutions.push(evo);
             }
         }
         if (possibleEvolutions.length !== 0) {
-            return Rand.fromArray(possibleEvolutions).evolve();
+            return EvolutionHandler.evolve(Rand.fromArray(possibleEvolutions));
         }
         return false;
     }
@@ -339,8 +339,8 @@ class PartyPokemon implements Saveable {
 
         if (this.evolutions != null) {
             for (const evolution of this.evolutions) {
-                if (evolution instanceof LevelEvolution) {
-                    evolution.triggered = json[PartyPokemonSaveKeys.levelEvolutionTriggered] ?? this.defaults.levelEvolutionTriggered;
+                if (evolution.trigger === EvoTrigger.LEVEL) {
+                    (evolution as LevelEvoData).triggered(json[PartyPokemonSaveKeys.levelEvolutionTriggered] ?? this.defaults.levelEvolutionTriggered);
                 }
             }
         }
@@ -350,7 +350,7 @@ class PartyPokemon implements Saveable {
         let levelEvolutionTriggered = false;
         if (this.evolutions != null) {
             for (const evolution of this.evolutions) {
-                if (evolution instanceof LevelEvolution && evolution.triggered) {
+                if (evolution.trigger === EvoTrigger.LEVEL && (evolution as LevelEvoData).triggered()) {
                     levelEvolutionTriggered = true;
                 }
             }
