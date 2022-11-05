@@ -1,5 +1,3 @@
-/// <reference path="CaughtIndicatingItem.ts" />
-
 class EggItem extends CaughtIndicatingItem {
 
     type: GameConstants.EggItemType;

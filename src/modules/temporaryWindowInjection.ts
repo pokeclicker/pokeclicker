@@ -134,6 +134,8 @@ import { MultiplierDecreaser } from './items/types';
 import EnergyRestore from './items/EnergyRestore';
 import EffectEngineRunner from './effectEngine/effectEngineRunner';
 import ItemHandler from './items/ItemHandler';
+import CaughtIndicatingItem from './items/CaughtIndicatingItem';
+import PokeballItem from './items/PokeballItem';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -274,4 +276,6 @@ Object.assign(<any>window, {
     EnergyRestore,
     EffectEngineRunner,
     ItemHandler,
+    CaughtIndicatingItem,
+    PokeballItem,
 });

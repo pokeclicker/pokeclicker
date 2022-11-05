@@ -1,4 +1,3 @@
-/// <reference path="../../declarations/items/Item.d.ts"/>
 class EvolutionStone extends CaughtIndicatingItem {
 
     type: GameConstants.StoneType;
