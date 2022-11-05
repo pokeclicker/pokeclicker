@@ -2,6 +2,7 @@ import { Saveable } from '../DataStore/common/Saveable';
 import BerryType from '../enums/BerryType';
 import NotificationConstants from '../notifications/NotificationConstants';
 import Notifier from '../notifications/Notifier';
+import { pokemonMap } from '../pokemons/PokemonList';
 import RedeemableCode from './RedeemableCode';
 
 export default class RedeemableCodes implements Saveable {

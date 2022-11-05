@@ -1,5 +1,5 @@
-///<reference path="PokemonList.ts"/>
 ///<reference path="../GameConstants.d.ts"/>
+///<reference path="../../declarations/pokemons/PokemonHelper.d.ts"/>
 
 enum PokemonLocationType {
     Route,
@@ -111,13 +111,7 @@ class PokemonHelper {
 
 
     public static calcNativeRegion(pokemonName: PokemonNameType) {
-        const pokemon = pokemonMap[pokemonName];
-        if (pokemon.nativeRegion != undefined) {
-            return pokemon.nativeRegion;
-        }
-        const id = pokemon.id;
-        const region = GameConstants.MaxIDPerRegion.findIndex(maxRegionID => maxRegionID >= Math.floor(id));
-        return region >= 0 ? region : GameConstants.Region.none;
+        return TmpPokemonHelper.calcNativeRegion(pokemonName);
     }
 
     public static calcUniquePokemonsByRegion(region: GameConstants.Region) {

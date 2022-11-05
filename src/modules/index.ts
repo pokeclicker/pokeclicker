@@ -5,3 +5,5 @@ import './temporaryWindowInjection';
 
 // Ensure that the Knockout Extenders are injected
 import './koExtenders';
+
+import './pokemons/init';

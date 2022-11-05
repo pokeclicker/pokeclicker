@@ -1,4 +1,5 @@
 import { BREEDING_ATTACK_BONUS } from '../GameConstants';
+import { pokemonMap } from '../pokemons/PokemonList';
 
 export enum SortOptions {
     id = 0,

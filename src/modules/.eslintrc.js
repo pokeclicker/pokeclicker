@@ -20,9 +20,10 @@ module.exports = {
         gtag: 'readonly',
         App: 'readonly',
         player: 'readonly',
-        pokemonMap: 'readonly',
         Save: 'readonly',
         MapHelper: 'readonly',
+        DungeonRunner: 'readonly',
+        GymRunner: 'readonly',
     },
     rules: {
         indent: 'off',

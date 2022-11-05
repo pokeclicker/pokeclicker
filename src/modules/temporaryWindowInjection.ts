@@ -128,6 +128,12 @@ import TemporaryBattleRequirement from './requirements/TemporaryBattleRequiremen
 import DayOfWeekRequirement from './requirements/DayOfWeekRequirement';
 import SaveReminder from './saveReminder/SaveReminder';
 import lazyLoad from './utilities/LazyLoader';
+import {
+    beforeEvolve, EvoTrigger, LevelEvolution, StoneEvolution,
+} from './pokemons/evolutions/Base';
+import * as OtherEvos from './pokemons/evolutions/Methods';
+import { pokemonList, pokemonMap } from './pokemons/PokemonList';
+import { TmpPokemonHelper } from './pokemons/PokemonHelper';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -262,4 +268,12 @@ Object.assign(<any>window, {
     DayOfWeekRequirement,
     SaveReminder,
     lazyLoad,
+    LevelEvolution,
+    StoneEvolution,
+    EvoTrigger,
+    beforeEvolve,
+    ...OtherEvos,
+    pokemonList,
+    pokemonMap,
+    TmpPokemonHelper,
 });

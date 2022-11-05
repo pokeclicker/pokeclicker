@@ -6,6 +6,7 @@ import {
     MaxIDPerRegion,
     Region,
 } from '../GameConstants';
+import { pokemonMap } from '../pokemons/PokemonList';
 import Rand from '../utilities/Rand';
 
 export default class DynamicBackground {
