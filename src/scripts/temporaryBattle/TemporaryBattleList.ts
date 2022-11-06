@@ -272,12 +272,12 @@ TemporaryBattleList['Rocket Boss Giovanni'] = new TemporaryBattle(
 );
 
 // Hoenn Temporary Battles
-TemporaryBattleList.Kecleon1 = new TemporaryBattle(
-    'Kecleon1',
+TemporaryBattleList['Kecleon 1'] = new TemporaryBattle(
+    'Kecleon 1',
     [new GymPokemon('Kecleon', 6000000, 20)],
     undefined,
     [new RouteKillRequirement(10, GameConstants.Region.hoenn, 119)],
-    [new TemporaryBattleRequirement('Kecleon1'), new ObtainedPokemonRequirement(pokemonMap.Kecleon)],
+    [new TemporaryBattleRequirement('Kecleon 1'), new ObtainedPokemonRequirement(pokemonMap.Kecleon)],
     {
         isTrainerBattle: false,
         returnTown: 'Fortree City',
@@ -285,24 +285,24 @@ TemporaryBattleList.Kecleon1 = new TemporaryBattle(
         visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.hoenn, 119),
     }
 );
-TemporaryBattleList.Kecleon2 = new TemporaryBattle(
-    'Kecleon2',
+TemporaryBattleList['Kecleon 2'] = new TemporaryBattle(
+    'Kecleon 2',
     [new GymPokemon('Kecleon', 7000000, 20)],
     undefined,
-    [new TemporaryBattleRequirement('Kecleon1')],
-    [new TemporaryBattleRequirement('Kecleon2')],
+    [new TemporaryBattleRequirement('Kecleon 1')],
+    [new TemporaryBattleRequirement('Kecleon 2')],
     {
         isTrainerBattle: false,
         returnTown: 'Fortree City',
         hideTrainer: true,
     }
 );
-TemporaryBattleList.Kecleon3 = new TemporaryBattle(
-    'Kecleon3',
+TemporaryBattleList['Kecleon 3'] = new TemporaryBattle(
+    'Kecleon 3',
     [new GymPokemon('Kecleon', 7000000, 20)],
     undefined,
-    [new TemporaryBattleRequirement('Kecleon2')],
-    [new TemporaryBattleRequirement('Kecleon3')],
+    [new TemporaryBattleRequirement('Kecleon 2')],
+    [new TemporaryBattleRequirement('Kecleon 3')],
     {
         isTrainerBattle: false,
         returnTown: 'Fortree City',
