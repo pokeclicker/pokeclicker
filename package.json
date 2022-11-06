@@ -9,7 +9,7 @@
     "ts-test": "gulp scripts",
     "eslint": "eslint --ext ts ./src/scripts ./src/modules",
     "eslint-fix": "eslint --ext ts --fix ./src/scripts ./src/modules",
-    "website": "npm test && cross-env NODE_ENV=production gulp website",
+    "website": "npm run tl:update && npm test && cross-env NODE_ENV=production gulp website",
     "publish": "npm test && git push origin develop:master",
     "tl:init": "git submodule update --init",
     "tl:update": "git submodule update --remote",
