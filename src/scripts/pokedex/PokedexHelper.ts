@@ -3,16 +3,6 @@ import TypeColor = GameConstants.TypeColor;
 class PokedexHelper {
     public static toggleStatisticShiny = ko.observable(true);
     public static hideShinyImages = ko.observable(false);
-    public static filters = {
-        name: ko.observable(),
-        type1: ko.observable(),
-        type2: ko.observable(),
-        region: ko.observable(),
-        caughtShiny: ko.observable(),
-        statusPokerus: ko.observable(-1),
-        heldItem: ko.observable(),
-        hideAlternate: ko.observable(),
-    }
 
     public static getBackgroundColors(name: PokemonNameType): string {
         const pokemon = PokemonHelper.getPokemonByName(name);
@@ -52,8 +42,6 @@ class PokedexHelper {
     })
 
     public static getList(): typeof pokemonList {
-        const filter = PokedexHelper.filters;
-
         // Peek a computed to avoid subscribing to 1000s of statistics
         const highestDex = ko.pureComputed(() => {
             const highestEncountered = App.game.statistics.pokemonEncountered.highestID;
@@ -74,7 +62,7 @@ class PokedexHelper {
             }
 
             // If not showing this region
-            const region: (GameConstants.Region | null) = filter.region() ?? null;
+            const region: (GameConstants.Region | null) = PokedexFilters.region.value() ?? null;
             if (region != null && region != nativeRegion) {
                 return false;
             }
@@ -90,13 +78,14 @@ class PokedexHelper {
             }
 
             // Check if the name contains the string
-            if (filter.name() && !pokemon.name.toLowerCase().includes(filter.name().toLowerCase().trim())) {
+            const name = PokedexFilters.name.value().trim();
+            if (name && !(new RegExp(name, 'i').test(pokemon.name))) {
                 return false;
             }
 
             // Check if either of the types match
-            const type1: (PokemonType | null) = filter.type1() ? parseInt(filter.type1(), 10) : null;
-            const type2: (PokemonType | null) = filter.type2() ? parseInt(filter.type2(), 10) : null;
+            const type1: (PokemonType | null) = PokedexFilters.type1.value();
+            const type2: (PokemonType | null) = PokedexFilters.type2.value();
             if ([type1, type2].includes(PokemonType.None)) {
                 const type = (type1 == PokemonType.None) ? type2 : type1;
                 if (!PokedexHelper.isPureType(pokemon, type)) {
@@ -111,23 +100,24 @@ class PokedexHelper {
                 return false;
             }
 
+            const caughtShiny = PokedexFilters.caughtShiny.value();
             // Only uncaught
-            if (filter.caughtShiny() == 'uncaught' && alreadyCaught) {
+            if (caughtShiny == 'uncaught' && alreadyCaught) {
                 return false;
             }
 
             // All caught
-            if (filter.caughtShiny() == 'caught' && !alreadyCaught) {
+            if (caughtShiny == 'caught' && !alreadyCaught) {
                 return false;
             }
 
             // Only caught not shiny
-            if (filter.caughtShiny() == 'caught-not-shiny' && (!alreadyCaught || alreadyCaughtShiny)) {
+            if (caughtShiny == 'caught-not-shiny' && (!alreadyCaught || alreadyCaughtShiny)) {
                 return false;
             }
 
             // Only caught shiny
-            if (filter.caughtShiny() == 'caught-shiny' && !alreadyCaughtShiny) {
+            if (caughtShiny == 'caught-shiny' && !alreadyCaughtShiny) {
                 return false;
             }
 
@@ -135,17 +125,17 @@ class PokedexHelper {
              * if Mega are not alternative pokemon, this work
              * else change condition by `filter['hide-alternate'] && (!Number.isInteger(pokemon.id) || Math.sign(pokemon.id) === -1)`
              */
-            if (filter.hideAlternate() && !Number.isInteger(pokemon.id)) {
+            if (PokedexFilters.hideAlternate.value() && !Number.isInteger(pokemon.id)) {
                 return false;
             }
 
             // Only pokemon with a hold item
-            if (filter.heldItem() && !BagHandler.displayName((pokemon as PokemonListData).heldItem)) {
+            if (PokedexFilters.heldItem.value() && !BagHandler.displayName((pokemon as PokemonListData).heldItem)) {
                 return false;
             }
 
             // Only pokemon uninfected by pokerus || None
-            if (filter.statusPokerus() != -1 && filter.statusPokerus() != App.game.party.getPokemon(pokemon.id)?.pokerus) {
+            if (PokedexFilters.statusPokerus.value() != -1 && PokedexFilters.statusPokerus.value() != App.game.party.getPokemon(pokemon.id)?.pokerus) {
                 return false;
             }
 

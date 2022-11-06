@@ -128,6 +128,7 @@ import TemporaryBattleRequirement from './requirements/TemporaryBattleRequiremen
 import DayOfWeekRequirement from './requirements/DayOfWeekRequirement';
 import SaveReminder from './saveReminder/SaveReminder';
 import lazyLoad from './utilities/LazyLoader';
+import PokedexFilters from './settings/PokedexFilters';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -262,4 +263,5 @@ Object.assign(<any>window, {
     DayOfWeekRequirement,
     SaveReminder,
     lazyLoad,
+    PokedexFilters,
 });
