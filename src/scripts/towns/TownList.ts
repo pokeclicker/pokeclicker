@@ -1476,7 +1476,7 @@ const MahoganySouvenirShopAttendant = new NPC('Souvenir Shop Attendant', [
 ]);
 
 const MahoganyEusine = new NPC('Eusine', [
-    'Suicune... How brave it is! How refreshing it is! How beautiful it is! And how quickly it moves! It seems to be heading east.',
+    'Suicune... How brave it is! How refreshing it is! How beautiful it is! And how quickly it moves! It seems to be heading east to Kanto.',
     'You seem to be around where Suicune would appear. Well, that\'s OK. My desire to search for Suicune is far beyond yours... My grandpa was...quite into myths. I\'ve heard so many stories about Suicune from him.',
     'Suicune... I won\'t stop following you until I\'ve found out what you\'re after... You hear me!',
 ],
