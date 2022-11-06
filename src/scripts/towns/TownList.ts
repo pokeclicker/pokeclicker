@@ -1962,7 +1962,7 @@ const Steven1 = new NPC('Steven', [
 });
 
 const Steven2 = new NPC('Steven', [
-    'Behold! A picture of a camouflaged Kecleon! That is your reward.',
+    'Thank you for finding the hidden Kecleons for me! Please accept this picture of a camouflaged Kecleon as your reward.',
 ], {image: 'assets/images/npcs/other/KecleonDrawing.png',
     requirement: new TemporaryBattleRequirement('Kecleon 3'),
 });
