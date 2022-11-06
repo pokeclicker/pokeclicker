@@ -10,7 +10,8 @@ abstract class Evolution {
 
     isSatisfied(): boolean {
         // Check that evolution is within reached regions
-        return PokemonHelper.calcNativeRegion(this.getEvolvedPokemon()) <= player.highestRegion();
+        // The player might not have the pokemon if realEvolutions is active and there are more than one evolution
+        return App.game.party.alreadyCaughtPokemonByName(this.basePokemon) && PokemonHelper.calcNativeRegion(this.getEvolvedPokemon()) <= player.highestRegion();
     }
 
     abstract getEvolvedPokemon(): PokemonNameType
@@ -24,8 +25,9 @@ abstract class Evolution {
         }
         const shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_STONE);
 
-        // Notify the player if they haven't already caught the evolution, it's shiny, or notifications are forced
-        if (!App.game.party.alreadyCaughtPokemonByName(evolvedPokemon) || shiny || notification) {
+        const newPokemon = !App.game.party.alreadyCaughtPokemonByName(evolvedPokemon);
+        if (newPokemon || shiny || notification) {
+            // Notify the player if they haven't already caught the evolution, or notifications are forced
             Notifier.notify({
                 message: `Your ${this.basePokemon} evolved into ${shiny ? 'a shiny' : GameHelper.anOrA(evolvedPokemon)} ${evolvedPokemon}!`,
                 type: NotificationConstants.NotificationOption.success,
@@ -41,8 +43,20 @@ abstract class Evolution {
 
         App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(evolvedPokemon).id, shiny, true);
 
-        // EVs
         const evolvedPartyPokemon = App.game.party.getPokemonByName(evolvedPokemon);
+        if (newPokemon && App.game.challenges.list.realEvolutions.active()) {
+            const basePartyPokemon = App.game.party.getPokemon(PokemonHelper.getPokemonByName(this.basePokemon).id);
+            evolvedPartyPokemon.effortPoints = basePartyPokemon.effortPoints;
+            evolvedPartyPokemon.pokerus = basePartyPokemon.pokerus;
+            evolvedPartyPokemon.shiny = evolvedPartyPokemon.shiny || basePartyPokemon.shiny;
+            evolvedPartyPokemon.attackBonusAmount = basePartyPokemon.attackBonusAmount;
+            evolvedPartyPokemon.attackBonusPercent = basePartyPokemon.attackBonusPercent;
+            evolvedPartyPokemon.proteinsUsed = basePartyPokemon.proteinsUsed;
+            evolvedPartyPokemon.heldItem = basePartyPokemon.heldItem;
+            App.game.party.removePokemonByName(this.basePokemon);
+        }
+
+        // EVs
         evolvedPartyPokemon.effortPoints += App.game.party.calculateEffortPoints(evolvedPartyPokemon, shiny, GameConstants.STONE_EP_YIELD);
         return shiny;
     }
