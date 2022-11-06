@@ -1,4 +1,4 @@
-///<reference path="Item.ts"/>
+/// <reference path="../../declarations/items/Item.d.ts"/>
 
 class HatcheryHelperItem extends Item {
 

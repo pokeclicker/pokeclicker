@@ -1300,6 +1300,9 @@ export const TemporaryBattles = [
     'Suicune 4',
     'Suicune 5',
     'Suicune 6',
+    'Kecleon 1',
+    'Kecleon 2',
+    'Kecleon 3',
     'Sevii Rocket Grunt 1',
     'Sevii Rocket Grunt 2',
     'Sevii Rocket Grunt 3',
@@ -1585,6 +1588,21 @@ export enum GalarSubRegions {
     IsleofArmor,
     CrownTundra,
 }
+
+export enum FinalSubRegions {
+    Final = 0,
+}
+
+export type SubRegions =
+    | KantoSubRegions
+    | JohtoSubRegions
+    | HoennSubRegions
+    | SinnohSubRegions
+    | UnovaSubRegions
+    | KalosSubRegions
+    | AlolaSubRegions
+    | GalarSubRegions
+    | FinalSubRegions;
 
 // Gender Types
 export enum Genders {
