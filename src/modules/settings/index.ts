@@ -200,6 +200,7 @@ const heldItemSortSettings = Object.keys(SortOptionConfigs).map((opt) => (
 ));
 Settings.add(new Setting<number>('heldItemSort', 'Sort:', heldItemSortSettings, SortOptions.id));
 Settings.add(new BooleanSetting('heldItemSortDirection', 'reverse', false));
+Settings.add(new Setting<string>('heldItemSearchFilter', 'Search', [], ''));
 
 // Breeding Filters
 Object.keys(BreedingFilters).forEach((key) => {
