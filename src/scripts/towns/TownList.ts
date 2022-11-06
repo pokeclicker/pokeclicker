@@ -3028,7 +3028,7 @@ TownList['Sendoff Spring'] = new DungeonTown(
     [new QuestLineStepCompletedRequirement('Zero\'s Ambition', 8)],
     [TemporaryBattleList.Zero],
     {
-        npcs: [SendoffSpringLakeTrio, SendoffSpringZero],
+        npcs: [SendoffSpringLakeTrio, SendoffSpringZero, SendoffSpringZero2],
     }
 );
 TownList['Hall of Origin'] = new DungeonTown(
