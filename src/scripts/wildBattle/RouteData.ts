@@ -903,7 +903,6 @@ Routes.add(new RegionRoute(
         water: ['Marill', 'Goldeen', 'Magikarp', 'Barboach'],
     }),
     [
-        new RouteKillRequirement(10, GameConstants.Region.hoenn, 119),
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Weather Institute')),
         new TemporaryBattleRequirement('Kecleon1'),
     ]
