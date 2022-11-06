@@ -2981,7 +2981,7 @@ TownList['Lake Acuity'] = new DungeonTown(
     'Lake Acuity',
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Sinnoh,
-    [new GymBadgeRequirement(BadgeEnums.Icicle)]],
+    [new GymBadgeRequirement(BadgeEnums.Icicle)],
     [],
     {
         npcs: [AcuityUxie],
