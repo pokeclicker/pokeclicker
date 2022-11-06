@@ -78,6 +78,7 @@ class DamageCalculator {
                 DamageCalculator.weather(),
                 DamageCalculator.ignoreLevel()
             ),
+            displayName: pokemon._displayName,
         };
     }
 }
@@ -87,5 +88,6 @@ type TypeDetail = {
   name: string,
   type1: PokemonType,
   type2: PokemonType,
-  damage: number
+  damage: number,
+  displayName: KnockoutObservable<string>,
 }

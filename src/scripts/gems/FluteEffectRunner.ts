@@ -33,7 +33,10 @@ class FluteEffectRunner {
                         setting: NotificationConstants.NotificationSetting.Items.battle_item_timer,
                         timeout: 1 * GameConstants.MINUTE,
                     });
-                    App.game.logbook.newLog(LogBookTypes.OTHER, `You ran out of gems for the ${GameConstants.humanifyString(itemName)}!`);
+                    App.game.logbook.newLog(
+                        LogBookTypes.OTHER,
+                        createLogContent.fluteRanOutOfGems({ flute: GameConstants.humanifyString(itemName) })
+                    );
                 }
             }
         });

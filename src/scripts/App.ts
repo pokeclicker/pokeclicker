@@ -5,6 +5,7 @@ class App {
 
     static readonly debug = false;
     static game: Game;
+    static translation = new Translate(Settings.getSetting('translation.language'));
 
     static start() {
         // Hide tooltips that stay on game load
