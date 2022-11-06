@@ -48,9 +48,6 @@ export default class Item {
         this.multiplier = Math.max(1, multiplier || ITEM_PRICE_MULTIPLIER);
         this.multiplierDecrease = multiplierDecrease;
         this.multiplierDecreaser = multiplierDecreaser || MultiplierDecreaser.Battle;
-        if (!ItemList[this.saveName]) {
-            ItemList[this.saveName] = this;
-        }
 
         this._displayName = displayName ?? name;
         this._description = description;
