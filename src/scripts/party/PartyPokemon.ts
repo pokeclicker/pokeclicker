@@ -36,6 +36,7 @@ class PartyPokemon implements Saveable {
     };
 
     // Saveable observables
+    // Consider the Real evolution challenge before adding stuff here
     _breeding: KnockoutObservable<boolean>;
     _shiny: KnockoutObservable<boolean>;
     _level: KnockoutObservable<number>;
