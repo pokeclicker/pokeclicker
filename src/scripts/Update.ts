@@ -1375,9 +1375,6 @@ class Update implements Saveable {
                 playerData._townName = 'Brawlers\' Cave';
             }
 
-            // Add Zero Temporary Battle
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 29);
-
             // Remove cleared BF milestones from save if corresponding Pokémon is not in party
             if (saveData?.battleFrontier?.milestones?.length) {
                 const pokemonRewards = [
@@ -1398,6 +1395,10 @@ class Update implements Saveable {
                         saveData.battleFrontier.milestones = saveData.battleFrontier.milestones.filter(milestone => milestone[1] !== name);
                     });
             }
+        },
+        '0.10.2': ({ playerData, saveData }) => {
+            // Add Zero Temporary Battle
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 29);
         },
     };
 
