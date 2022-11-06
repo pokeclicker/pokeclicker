@@ -1599,7 +1599,7 @@ export type SubRegions =
     | KalosSubRegions
     | AlolaSubRegions
     | GalarSubRegions
-    | FinalSubRegions
+    | FinalSubRegions;
 
 // Gender Types
 export enum Genders {
