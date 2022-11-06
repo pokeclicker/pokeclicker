@@ -107,7 +107,7 @@ TemporaryBattleList['Fighting Dojo'] = new TemporaryBattle(
         firstTimeRewardFunction: () => {
             BagHandler.gainItem({type: ItemType.item, id: 'Fighting_egg'}, 1);
             Notifier.notify({
-                message: 'You were awarded a Fighting Egg for defeating the Fighting Dojo',
+                message: 'You were awarded a Fighting Egg for defeating the Fighting Dojo!',
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.Dungeons.rare_dungeon_item_found,
             });
@@ -646,6 +646,43 @@ TemporaryBattleList['May 4'] = new TemporaryBattle(
         displayName: 'Pokémon Trainer May',
         returnTown: 'Fortree City',
         imageName: 'May',
+    }
+);
+TemporaryBattleList['Kecleon 1'] = new TemporaryBattle(
+    'Kecleon 1',
+    [new GymPokemon('Kecleon', 6000000, 20)],
+    undefined,
+    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 119)],
+    [new TemporaryBattleRequirement('Kecleon 1'), new ObtainedPokemonRequirement(pokemonMap.Kecleon)],
+    {
+        isTrainerBattle: false,
+        returnTown: 'Fortree City',
+        hideTrainer: true,
+        visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.hoenn, 119),
+    }
+);
+TemporaryBattleList['Kecleon 2'] = new TemporaryBattle(
+    'Kecleon 2',
+    [new GymPokemon('Kecleon', 7000000, 20)],
+    undefined,
+    [new TemporaryBattleRequirement('Kecleon 1')],
+    [new TemporaryBattleRequirement('Kecleon 2')],
+    {
+        isTrainerBattle: false,
+        returnTown: 'Fortree City',
+        hideTrainer: true,
+    }
+);
+TemporaryBattleList['Kecleon 3'] = new TemporaryBattle(
+    'Kecleon 3',
+    [new GymPokemon('Kecleon', 7000000, 20)],
+    undefined,
+    [new TemporaryBattleRequirement('Kecleon 2')],
+    [new TemporaryBattleRequirement('Kecleon 3')],
+    {
+        isTrainerBattle: false,
+        returnTown: 'Fortree City',
+        hideTrainer: true,
     }
 );
 TemporaryBattleList['May 5'] = new TemporaryBattle(

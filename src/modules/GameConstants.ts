@@ -595,7 +595,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.unova]: new Set(['Castelia City', 'Mistralton City', 'Opelucid City', 'Liberty Garden', 'Dragonspiral Tower', 'Dreamyard']),
         [Region.kalos]: new Set(['Parfum Palace', 'Lost Hotel']),
         [Region.alola]: new Set(['Trainers\' School', 'Thrifty Megamart', 'Po Town', 'Ruins of Conflict', 'Ruins of Life', 'Ruins of Abundance', 'Ruins of Hope']),
-        [Region.galar]: new Set(['Rose Tower', 'Hammerlocke', 'Stow-on-Side', 'Tower of Darkness', 'Tower of waters', 'Professor Magnolia\'s House', 'Wyndon', 'Wyndon Stadium', 'Master Dojo', 11]),
+        [Region.galar]: new Set(['Rose Tower', 'Hammerlocke', 'Stow-on-Side', 'Tower of Darkness', 'Tower of Waters', 'Professor Magnolia\'s House', 'Wyndon', 'Wyndon Stadium', 'Master Dojo', 11]),
     },
 
     Graveyard: {
@@ -1321,6 +1321,9 @@ export const TemporaryBattles = [
     'May 3',
     'Wally 1',
     'May 4',
+    'Kecleon 1',
+    'Kecleon 2',
+    'Kecleon 3',
     'May 5',
     'Wally 2',
     'Sevii Rocket Grunt 1',
@@ -1650,6 +1653,21 @@ export enum GalarSubRegions {
     IsleofArmor,
     CrownTundra,
 }
+
+export enum FinalSubRegions {
+    Final = 0,
+}
+
+export type SubRegions =
+    | KantoSubRegions
+    | JohtoSubRegions
+    | HoennSubRegions
+    | SinnohSubRegions
+    | UnovaSubRegions
+    | KalosSubRegions
+    | AlolaSubRegions
+    | GalarSubRegions
+    | FinalSubRegions;
 
 // Gender Types
 export enum Genders {

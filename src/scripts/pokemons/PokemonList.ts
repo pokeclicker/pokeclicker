@@ -1388,7 +1388,7 @@ const pokemonList = createPokemonArray(
         'id': 25.10,
         'name': 'Pikachu (Gengar)',
         'catchRate': 50,
-        'type': [PokemonType.Electric],
+        'type': [PokemonType.Electric, PokemonType.Ghost],
         'levelType': LevelType.mediumfast,
         'exp': 112,
         'eggCycles': 10,
@@ -1399,6 +1399,9 @@ const pokemonList = createPokemonArray(
             'defense': 40,
             'specialDefense': 50,
             'speed': 90,
+        },
+        'gender': {
+            'femaleRatio': 0,
         },
     },
     {
@@ -1416,6 +1419,9 @@ const pokemonList = createPokemonArray(
             'defense': 40,
             'specialDefense': 50,
             'speed': 90,
+        },
+        'gender': {
+            'femaleRatio': 1,
         },
     },
     {
@@ -1454,6 +1460,9 @@ const pokemonList = createPokemonArray(
             'specialDefense': 50,
             'speed': 90,
         },
+        'gender': {
+            'femaleRatio': 0,
+        },
     },
     {
         'id': 25.14,
@@ -1489,6 +1498,9 @@ const pokemonList = createPokemonArray(
             'defense': 40,
             'specialDefense': 50,
             'speed': 90,
+        },
+        'gender': {
+            'femaleRatio': 0,
         },
     },
     {
@@ -4637,6 +4649,7 @@ const pokemonList = createPokemonArray(
         },
         'gender': {
             'femaleRatio': 0.125,
+            'visualDifference': true,
         },
     },
     {
@@ -4656,7 +4669,7 @@ const pokemonList = createPokemonArray(
             'speed': 55,
         },
         'gender': {
-            'femaleRatio': 0.125,
+            'femaleRatio': 0,
         },
     },
     {
@@ -5127,7 +5140,7 @@ const pokemonList = createPokemonArray(
         'id': 150.1,
         'name': 'Armored Mewtwo',
         'catchRate': 2,
-        'type': [PokemonType.Psychic],
+        'type': [PokemonType.Psychic, PokemonType.Steel],
         'levelType': LevelType.slow,
         'exp': 306,
         'eggCycles': 120,
@@ -5661,10 +5674,12 @@ const pokemonList = createPokemonArray(
         'id': 175.1,
         'name': 'Spooky Togepi',
         'catchRate': 30,
-        'type': [PokemonType.Fairy],
+        'type': [PokemonType.Ghost],
         'levelType': LevelType.fast,
         'exp': 49,
-        'eggCycles': 8,//Lowered to match base form
+        'eggCycles': 10,
+        'evolutions': [new StoneEvolution('Spooky Togepi', 'Spooky Togetic', GameConstants.StoneType.Soothe_bell)],
+        'baby': true,
         'base': {
             'hitpoints': 35,
             'attack': 25,
@@ -5706,6 +5721,27 @@ const pokemonList = createPokemonArray(
         'exp': 142,
         'eggCycles': 10,
         'evolutions': [new StoneEvolution('Togetic', 'Togekiss', GameConstants.StoneType.Shiny_stone)],
+        'base': {
+            'hitpoints': 55,
+            'attack': 40,
+            'specialAttack': 80,
+            'defense': 85,
+            'specialDefense': 105,
+            'speed': 40,
+        },
+        'gender': {
+            'femaleRatio': 0.125,
+        },
+    },
+    {
+        'id': 176.1,
+        'name': 'Spooky Togetic',
+        'catchRate': 75,
+        'type': [PokemonType.Ghost, PokemonType.Flying],
+        'levelType': LevelType.fast,
+        'exp': 142,
+        'eggCycles': 10,
+        'evolutions': [new StoneEvolution('Spooky Togetic', 'Spooky Togekiss', GameConstants.StoneType.Shiny_stone)],
         'base': {
             'hitpoints': 55,
             'attack': 40,
@@ -7763,7 +7799,7 @@ const pokemonList = createPokemonArray(
         'id': 251.1,
         'name': 'Grinch Celebi',
         'catchRate': 45,
-        'type': [PokemonType.Psychic, PokemonType.Grass],
+        'type': [PokemonType.Dark, PokemonType.Grass],
         'levelType': LevelType.mediumslow,
         'exp': 270,
         'eggCycles': 120,
@@ -12300,6 +12336,26 @@ const pokemonList = createPokemonArray(
         'id': 468,
         'name': 'Togekiss',
         'type': [PokemonType.Fairy, PokemonType.Flying],
+        'eggCycles': 10,
+        'levelType': LevelType.fast,
+        'exp': 245,
+        'catchRate': 30,
+        'base': {
+            'hitpoints': 85,
+            'attack': 50,
+            'specialAttack': 120,
+            'defense': 95,
+            'specialDefense': 115,
+            'speed': 80,
+        },
+        'gender': {
+            'femaleRatio': 0.125,
+        },
+    },
+    {
+        'id': 468.1,
+        'name': 'Spooky Togekiss',
+        'type': [PokemonType.Ghost, PokemonType.Flying],
         'eggCycles': 10,
         'levelType': LevelType.fast,
         'exp': 245,

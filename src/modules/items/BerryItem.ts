@@ -1,9 +1,11 @@
-///<reference path="Item.ts"/>
+import BerryType from '../enums/BerryType';
+import { Currency } from '../GameConstants';
+import Item from './Item';
 
-class BerryItem extends Item {
+export default class BerryItem extends Item {
     public berryName: string;
 
-    constructor(public berry: BerryType, basePrice: number, currency = GameConstants.Currency.farmPoint, public berryReq?: BerryType) {
+    constructor(public berry: BerryType, basePrice: number, currency = Currency.farmPoint, public berryReq?: BerryType) {
         super(`${BerryType[berry]}Berry`, basePrice, currency, { maxAmount: 1 }, `${BerryType[berry]} Berry`);
         this.berryName = BerryType[berry];
     }
@@ -27,8 +29,3 @@ class BerryItem extends Item {
         return `assets/images/items/berry/${this.berryName}.png`;
     }
 }
-
-ItemList.ChopleBerry   = new BerryItem(BerryType.Chople, 10000, GameConstants.Currency.farmPoint, BerryType.Spelon);
-ItemList.KebiaBerry   = new BerryItem(BerryType.Kebia, 10000, GameConstants.Currency.farmPoint, BerryType.Pamtre);
-ItemList.ShucaBerry   = new BerryItem(BerryType.Shuca, 10000, GameConstants.Currency.farmPoint, BerryType.Watmel);
-ItemList.ChartiBerry   = new BerryItem(BerryType.Charti, 10000, GameConstants.Currency.farmPoint, BerryType.Cornn);

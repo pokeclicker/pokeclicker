@@ -1,7 +1,7 @@
 
 <div class="row justify-content-center no-gutters" data-bind="if: App.game.gameState === GameConstants.GameState.gym">
     <div class="col no-gutters clickable" data-bind="click: function() {GymBattle.clickAttack()}" style="height: 280px; display: block;">
-        <h2 class="pageItemTitle" style="display: block;">
+        <h2 class="pageItemTitle mobileBattleTitle" style="display: block;">
             <knockout class="left">
                 <knockout data-bind="text: GymBattle.gym.leaderName.replace(/\d/g,'')"></knockout>
             </knockout>
@@ -37,15 +37,15 @@
           </div>
         </div>
 
-        <div style="position:absolute; left:65%; top: 25%;">
+        <div class="trainer">
             <img data-bind="attr:{ src: GymBattle.gym.imagePath }" onerror="this.src='assets/images/trainers/Mysterious Trainer.png';"/>
         </div>
 
-        <div>
+        <div class="trainer-enemy">
             <knockout data-bind="template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': GymBattle.enemyPokemon() } }">Pokémon sprite</knockout>
         </div>
 
-        <div class="progress hitpoints" style="height: 20px;">
+        <div class="progress hitpoints trainerhitpoints">
             <div class="progress-bar bg-danger" role="progressbar"
                     data-bind="attr:{ style: 'width:' + GymBattle.enemyPokemon().healthPercentage() + '%' }"
                     aria-valuemin="0" aria-valuemax="100">
@@ -53,7 +53,7 @@
             </div>
         </div>
 
-        <button class="btn btn-sm btn-danger" style="position: absolute; top: 68px; left: 10px;" data-bind="visible: GymRunner.autoRestart()"
+        <button class="btn btn-sm btn-danger stop-auto" data-bind="visible: GymRunner.autoRestart()"
                 onclick="GymRunner.autoRestart(false)">
             Stop Auto
         </button>
