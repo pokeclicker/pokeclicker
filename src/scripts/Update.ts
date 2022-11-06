@@ -1400,6 +1400,13 @@ class Update implements Saveable {
                     });
             }
         },
+        '0.10.2': ({ playerData, saveData }) => {
+            //Kecleon Fights
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 15);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 16);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 17);
+
+        },
     };
 
     constructor() {

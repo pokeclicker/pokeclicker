@@ -1,3 +1,5 @@
+/// <reference path="./Shop.ts"/>
+
 class ShardTraderShop extends Shop {
     constructor(
         public location: GameConstants.ShardTraderLocations,

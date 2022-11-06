@@ -1,3 +1,5 @@
+/// <reference path="./Shop.ts"/>
+
 class BerryMasterShop extends Shop {
     constructor(
         public location: GameConstants.BerryTraderLocations,
