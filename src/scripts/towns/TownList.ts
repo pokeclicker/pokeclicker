@@ -1482,7 +1482,7 @@ const MahoganySouvenirShopAttendant = new NPC('Souvenir Shop Attendant', [
 ]);
 
 const MahoganyEusine = new NPC('Eusine', [
-    'Suicune... How brave it is! How refreshing it is! How beautiful it is! And how quickly it moves! It seems to be heading east to Kanto.',
+    'Suicune... How brave it is! How refreshing it is! How beautiful it is! And how quickly it moves! It seems to be heading east.',
     'You seem to be around where Suicune would appear. Well, that\'s OK. My desire to search for Suicune is far beyond yours... My grandpa was...quite into myths. I\'ve heard so many stories about Suicune from him.',
     'Suicune... I won\'t stop following you until I\'ve found out what you\'re after... You hear me!',
 ],
@@ -1505,6 +1505,10 @@ const TohjoFallsCelebiTimeDistortion = new NPC('Investigate the Time Distortion'
     image: 'assets/images/npcs/other/Tohjo Falls.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Unfinished Business', 8), new QuestLineStepCompletedRequirement('Unfinished Business', 10, GameConstants.AchievementOption.less), new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Tohjo Falls'))]),
 });
+
+const IndigoHiker = new NPC('Hiker', [
+    'This is the best place to take a break in the whole region! I can reach all of Johto from here, and Kanto is just a short hike away, to the east!',
+], { image: 'assets/images/trainers/Hiker.png' });
 
 const ProfElm = new ProfNPC('Prof. Elm',
     GameConstants.Region.johto,
@@ -1659,6 +1663,7 @@ TownList['Indigo Plateau Johto'] = new Town(
             new RouteKillRequirement(10, GameConstants.Region.johto, 26),
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Johto')),
         ],
+        npcs: [IndigoHiker],
     }
 );
 
