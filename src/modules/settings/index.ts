@@ -17,6 +17,7 @@ import {
     camelCaseToString,
 } from '../GameConstants';
 import HotkeySetting from './HotkeySetting';
+import Language, { LanguageNames } from '../translation/Language';
 import BreedingFilters from './BreedingFilters';
 import GameHelper from '../GameHelper';
 import PokemonType from '../enums/PokemonType';
@@ -303,3 +304,6 @@ Settings.getSetting('backgroundImage').observableValue.subscribe((newValue) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     newValue === 'background-dynamic' ? DynamicBackground.startScene() : DynamicBackground.stopScene();
 });
+
+// Translation
+Settings.add(new Setting<Language>('translation.language', 'Language (beta)', Settings.enumToSettingOptionArray(Language, () => true, LanguageNames) as unknown as SettingOption<Language>[], Language.en));

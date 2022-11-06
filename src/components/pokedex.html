@@ -19,13 +19,13 @@ aria-labelledby="pokedexModalLabel">
                         </div>
                     </div>
                     <!-- /ko -->
-                    
+
                     <!-- ko if: PokedexHelper.filteredList().length != 0 -->
                     <div class="pokedex-border-bottom pt-2">
                         <h4 data-bind="text: `Showing ${PokedexHelper.filteredList().length} Pokémon`"></h4>
                     </div>
                     <!-- /ko -->
-                    
+
                     <div class="collapse" id="pokedex-filter-container" style="margin-bottom: 0.5rem;">
                         <div class="container-fluid py-3">
                             <div class="form-row text-left">
@@ -126,7 +126,7 @@ aria-labelledby="pokedexModalLabel">
                         </div>
                     </div>
                 </div>
-                    
+
                 <div class="pokemon-list">
                     <ul class="row justify-content-center p-0" data-bind="foreach: lazyLoad($element, PokedexHelper.filteredList)"
                         style="max-width: 100%; padding:0; margin:0;">
@@ -143,7 +143,7 @@ aria-labelledby="pokedexModalLabel">
                                     <!-- /ko -->
                                     <img src="" width="80px" data-bind="css: { 'pokemon-not-seen': !PokedexHelper.pokemonSeen($data.id)(), 'pokemon-seen-but-not-caught': !App.game.party.alreadyCaughtPokemonByName(name) && PokedexHelper.pokemonSeen($data.id)() }, attr:{ src: PokemonHelper.getImage($data.id, App.game.party.alreadyCaughtPokemon($data.id, true) && !PokedexHelper.hideShinyImages())}">
                                     <!-- ko if: PokedexHelper.pokemonSeen($data.id) -->
-                                    <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: $data.name">name</span>
+                                    <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: PokemonHelper.displayName($data.name)">name</span>
                                     <a class="overlay" href="#pokemonStatisticsModal" data-toggle="modal" data-bind="click: () => {App.game.statistics.selectedPokemonID($data.id)},
                                         tooltip: {
                                             html: true,

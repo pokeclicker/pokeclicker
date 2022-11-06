@@ -125,9 +125,11 @@ import QuestLineCompletedRequirement from './requirements/QuestLineCompletedRequ
 import QuestLineStepCompletedRequirement from './requirements/QuestLineStepCompletedRequirement';
 import QuestLineStartedRequirement from './requirements/QuestLineStartedRequirement';
 import TemporaryBattleRequirement from './requirements/TemporaryBattleRequirement';
+import Translate from './translation/Translation';
 import DayOfWeekRequirement from './requirements/DayOfWeekRequirement';
 import SaveReminder from './saveReminder/SaveReminder';
 import lazyLoad from './utilities/LazyLoader';
+import { createLogContent } from './logbook/helpers';
 import { ItemList } from './items/ItemList';
 import Item from './items/Item';
 import { MultiplierDecreaser } from './items/types';
@@ -180,6 +182,7 @@ Object.assign(<any>window, {
     AchievementCategory,
     LogBook,
     LogBookTypes,
+    createLogContent,
     ChangelogItems,
     RedeemableCode,
     RedeemableCodes,
@@ -267,6 +270,7 @@ Object.assign(<any>window, {
     QuestLineStepCompletedRequirement,
     QuestLineStartedRequirement,
     TemporaryBattleRequirement,
+    Translate,
     DayOfWeekRequirement,
     SaveReminder,
     lazyLoad,
