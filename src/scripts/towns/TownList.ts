@@ -2580,7 +2580,7 @@ const CanalaveSinnohMyth = new NPC('Sinnoh\'s Myth', [
 const VerityMesprit = new NPC('Mesprit', [
     '<i>You are the trainer looking for the Distortion World, right?</i>',
     '<i>We can help you in your mission, but we will need a few materials.</i>',
-    '<i>Collect 10 Purple Shards and then visit my two siblings. They will also help you in your quest.</i>',
+    '<i>Collect 10 Purple Shards in dungeons from the Johto region and then visit my two siblings. They will also help you in your quest.</i>',
 ],{
     image: 'assets/images/pokemon/481.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Zero\'s Ambition', 2), new QuestLineStepCompletedRequirement('Zero\'s Ambition', 4, GameConstants.AchievementOption.less)])});
@@ -2588,7 +2588,7 @@ const VerityMesprit = new NPC('Mesprit', [
 const ValorAzelf = new NPC('Azelf', [
     '<i>Mesprit told me you would come.</i>',
     '<i>In order to enter the Distortion World, we need to open a gate to it. The materials you gathered for Mesprit are only a third of the ones needed to open such gate.</i>',
-    '<i>Obtain 10 Ochre Shards and then visit Uxie at Lake Acuity.</i>',
+    '<i>Obtain 10 Ochre Shards and then visit Uxie at Lake Acuity. These Shards can be found in a few dungeons from the Hoenn region.</i>',
 ],{
     image: 'assets/images/pokemon/482.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Zero\'s Ambition', 4), new QuestLineStepCompletedRequirement('Zero\'s Ambition', 6, GameConstants.AchievementOption.less)])});
@@ -2600,7 +2600,7 @@ const SnowpointYoungGirl = new NPC('Young Girl', [
 
 const AcuityUxie = new NPC('Uxie', [
     '<i>My siblings had informed me of your arrival.</i>',
-    '<i>Looks like you have already gathered more than half of the necessary materials. The only materials left to make the key are 10 Crimson Shards.</i>',
+    '<i>Looks like you have already gathered more than half of the necessary materials. The only materials left to make the key are 10 Crimson Shards, which can be found in various Sinnoh Dungeons.</i>',
     '<i>We will be waiting at Sendoff Spring, meet us there after you have collected the shards.</i>',
 ],{
     image: 'assets/images/pokemon/480.png',
@@ -2645,6 +2645,7 @@ const SendoffSpringLakeTrio = new NPC('Lake Trio', [
     '<i>You are finally here.</i>',
     '<i>We have been able to create a key to the Distortion World using the materials you collected, but it is unable to work in it\'s current state.</i>',
     '<i>We bestow it upon you, charge it with the ghostly energy of the Distortion World.</i>',
+    '<i>In order to do so, you must collect Ghost gems by defeating Ghost type Pokémon and find a Spooky Plate. There should be some in these dungeon, we can sense their energy.</i>',
 ],{
     image: 'assets/images/npcs/Lake Trio.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Zero\'s Ambition', 9), new QuestLineStepCompletedRequirement('Zero\'s Ambition', 11, GameConstants.AchievementOption.less)])});
@@ -2656,6 +2657,15 @@ const SendoffSpringZero = new NPC('Zero', [
 ], {
     image: 'assets/images/temporaryBattle/Zero.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Zero\'s Ambition', 11), new QuestLineStepCompletedRequirement('Zero\'s Ambition', 12, GameConstants.AchievementOption.less)]),
+});
+
+const SendoffSpringZero2 = new NPC('Zero', [
+    'Seems like you have managed to catch the Pokémon that rules the Distortion World.',
+    'But this doesn\'t look like the Renegade Pokémon from legend, it seems like some sort of altered form.',
+    'I once read that, deep within the Distortion World, there is an object capable of carrying the realm\'s power. Maybe, if you train Giratina while it has such object equipped, it can turn into it\'s true form.',
+], {
+    image: 'assets/images/temporaryBattle/Zero.png',
+    requirement: new QuestLineCompletedRequirement('Zero\'s Ambition'),
 });
 
 const ProfRowan = new ProfNPC('Prof. Rowan',
