@@ -10,7 +10,8 @@ abstract class Evolution {
 
     isSatisfied(): boolean {
         // Check that evolution is within reached regions
-        return PokemonHelper.calcNativeRegion(this.getEvolvedPokemon()) <= player.highestRegion();
+        // The player might not have the pokemon if realEvolutions is active and there are more than one evolution
+        return App.game.party.alreadyCaughtPokemonByName(this.basePokemon) && PokemonHelper.calcNativeRegion(this.getEvolvedPokemon()) <= player.highestRegion();
     }
 
     abstract getEvolvedPokemon(): PokemonNameType
