@@ -904,7 +904,7 @@ Routes.add(new RegionRoute(
     }),
     [
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Weather Institute')),
-        new TemporaryBattleRequirement('Kecleon1'),
+        new TemporaryBattleRequirement('Kecleon 1'),
     ]
 ));
 Routes.add(new RegionRoute(
