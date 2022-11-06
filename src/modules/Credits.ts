@@ -570,6 +570,7 @@ export const SpriteCredits: Credit[] = [
         link: 'https://discordapp.com/users/824384977633411082',
         resources: [
             'Bede overworld image',
+            'Camouflaged Kecleon image',
             'Cissy',
             'Detective Pikachu',
             'Detective Raichu',
