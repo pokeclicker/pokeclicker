@@ -349,7 +349,7 @@ class Mine {
                 let amount = 1;
                 const itemName = UndergroundItems.getById(Mine.rewardNumbers[i]).name;
                 Notifier.notify({
-                    message: `You found ${GameHelper.anOrA(itemName)} ${GameConstants.humanifyString(itemName)}`,
+                    message: `You found ${GameHelper.anOrA(itemName)} ${GameConstants.humanifyString(itemName)}.`,
                     type: NotificationConstants.NotificationOption.success,
                     setting: NotificationConstants.NotificationSetting.Underground.underground_item_found,
                 });
@@ -363,6 +363,7 @@ class Mine {
                             type: NotificationConstants.NotificationOption.success,
                             title: 'Treasure Scanner',
                             timeout: 4000,
+                            setting: NotificationConstants.NotificationSetting.Underground.underground_item_found,
                         });
 
                         if (Rand.chance(giveDouble)) {
@@ -372,6 +373,7 @@ class Mine {
                                 type: NotificationConstants.NotificationOption.success,
                                 title: 'Treasure Scanner',
                                 timeout: 6000,
+                                setting: NotificationConstants.NotificationSetting.Underground.underground_item_found,
                             });
 
                             if (Rand.chance(giveDouble)) {
@@ -381,6 +383,7 @@ class Mine {
                                     type: NotificationConstants.NotificationOption.success,
                                     title: 'Treasure Scanner',
                                     timeout: 8000,
+                                    setting: NotificationConstants.NotificationSetting.Underground.underground_item_found,
                                 });
                             }
                         }

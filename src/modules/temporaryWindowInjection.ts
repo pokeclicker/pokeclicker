@@ -28,7 +28,6 @@ import RangeSetting from './settings/RangeSetting';
 import Setting from './settings/Setting';
 import SettingOption from './settings/SettingOption';
 import BreedingFilters from './settings/BreedingFilters';
-import ProteinFilters from './settings/ProteinFilters';
 import WeatherType from './weather/WeatherType';
 import Weather from './weather/Weather';
 import SeededRand from './utilities/SeededRand';
@@ -37,6 +36,7 @@ import Rand from './utilities/Rand';
 import Settings from './settings/index';
 import { SortOptionConfigs, SortOptions } from './settings/SortOptions';
 import { AchievementSortOptionConfigs, AchievementSortOptions } from './achievements/AchievementSortOptions';
+import AchievementCategory from './achievements/AchievementCategory';
 import NotificationConstants from './notifications/NotificationConstants';
 import Notifier from './notifications/Notifier';
 import LogBook from './logbook/LogBook';
@@ -89,17 +89,23 @@ import ClearGymRequirement from './requirements/ClearGymRequirement';
 import ClickRequirement from './requirements/ClickRequirement';
 import DefeatedRequirement from './requirements/DefeatedRequirement';
 import DiamondRequirement from './requirements/DiamondRequirement';
+import FarmHandRequirement from './requirements/FarmHandRequirement';
 import FarmPlotsUnlockedRequirement from './requirements/FarmPlotsUnlockedRequirement';
+import FarmPointsRequirement from './requirements/FarmPointsRequirement';
 import GymBadgeRequirement from './requirements/GymBadgeRequirement';
 import HatchRequirement from './requirements/HatchRequirement';
+import HatcheryHelperRequirement from './requirements/HatcheryHelperRequirement';
 import MoneyRequirement from './requirements/MoneyRequirement';
 import MaxLevelOakItemRequirement from './requirements/MaxLevelOakItemRequirement';
 import MaxRegionRequirement from './requirements/MaxRegionRequirement';
 import PokeballRequirement from './requirements/PokeballRequirement';
+import PokerusStatusRequirement from './requirements/PokerusStatusRequirement';
 import ProteinObtainRequirement from './requirements/ProteinObtainRequirement';
 import QuestRequirement from './requirements/QuestRequirement';
+import QuestLevelRequirement from './requirements/QuestLevelRequirement';
 import RouteKillRequirement from './requirements/RouteKillRequirement';
 import SeededDateRequirement from './requirements/SeededDateRequirement';
+import SeviiCaughtRequirement from './requirements/SeviiCaughtRequirement';
 import ShinyPokemonRequirement from './requirements/ShinyPokemonRequirement';
 import SubregionRequirement from './requirements/SubregionRequirement';
 import TokenRequirement from './requirements/TokenRequirement';
@@ -122,6 +128,14 @@ import TemporaryBattleRequirement from './requirements/TemporaryBattleRequiremen
 import DayOfWeekRequirement from './requirements/DayOfWeekRequirement';
 import SaveReminder from './saveReminder/SaveReminder';
 import lazyLoad from './utilities/LazyLoader';
+import { ItemList } from './items/ItemList';
+import Item from './items/Item';
+import { MultiplierDecreaser } from './items/types';
+import EnergyRestore from './items/EnergyRestore';
+import EffectEngineRunner from './effectEngine/effectEngineRunner';
+import ItemHandler from './items/ItemHandler';
+import CaughtIndicatingItem from './items/CaughtIndicatingItem';
+import PokeballItem from './items/PokeballItem';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -158,12 +172,12 @@ Object.assign(<any>window, {
     Settings,
     NotificationConstants,
     Notifier,
-    ProteinFilters,
     BreedingFilters,
     SortOptionConfigs,
     SortOptions,
     AchievementSortOptionConfigs,
     AchievementSortOptions,
+    AchievementCategory,
     LogBook,
     LogBookTypes,
     ChangelogItems,
@@ -216,17 +230,23 @@ Object.assign(<any>window, {
     ClickRequirement,
     DefeatedRequirement,
     DiamondRequirement,
+    FarmHandRequirement,
     FarmPlotsUnlockedRequirement,
+    FarmPointsRequirement,
     GymBadgeRequirement,
     HatchRequirement,
+    HatcheryHelperRequirement,
     MoneyRequirement,
     MaxLevelOakItemRequirement,
     MaxRegionRequirement,
     PokeballRequirement,
+    PokerusStatusRequirement,
     ProteinObtainRequirement,
     QuestRequirement,
+    QuestLevelRequirement,
     RouteKillRequirement,
     SeededDateRequirement,
+    SeviiCaughtRequirement,
     ShinyPokemonRequirement,
     SubregionRequirement,
     TokenRequirement,
@@ -250,4 +270,12 @@ Object.assign(<any>window, {
     DayOfWeekRequirement,
     SaveReminder,
     lazyLoad,
+    ItemList,
+    Item,
+    MultiplierDecreaser,
+    EnergyRestore,
+    EffectEngineRunner,
+    ItemHandler,
+    CaughtIndicatingItem,
+    PokeballItem,
 });

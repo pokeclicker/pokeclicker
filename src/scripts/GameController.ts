@@ -196,11 +196,11 @@ class GameController {
                 }
                 if (isNumberKey) {
                     if (numberKey === 0) {
-                        ItemList.SmallRestore.use();
+                        ItemList.SmallRestore.use(1);
                     } else if (numberKey === 1) {
-                        ItemList.MediumRestore.use();
+                        ItemList.MediumRestore.use(1);
                     } else if (numberKey === 2) {
-                        ItemList.LargeRestore.use();
+                        ItemList.LargeRestore.use(1);
                     }
                     return e.preventDefault();
                 }
@@ -343,6 +343,8 @@ class GameController {
                                 DungeonRunner.openChest();
                             } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.boss && !DungeonRunner.fightingBoss()) {
                                 DungeonRunner.startBossFight();
+                            } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.ladder) {
+                                DungeonRunner.nextFloor();
                             }
                             return e.preventDefault();
                     }

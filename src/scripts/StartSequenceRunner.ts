@@ -17,10 +17,11 @@ class StartSequenceRunner {
         $('#pickStarterTutorialModal').modal('hide');
         const dataPokemon = PokemonHelper.getPokemonByName(GameConstants.Starter[this.starterPicked]);
         const shiny: boolean = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
+        const gender = PokemonFactory.generateGender(dataPokemon.gender.femaleRatio, dataPokemon.gender.type);
 
         App.game.gameState = GameConstants.GameState.fighting;
 
-        const battlePokemon = new BattlePokemon(dataPokemon.name, dataPokemon.id, dataPokemon.type1, dataPokemon.type2, 10, 1, 100, 0, new Amount(0, GameConstants.Currency.money), shiny);
+        const battlePokemon = new BattlePokemon(dataPokemon.name, dataPokemon.id, dataPokemon.type1, dataPokemon.type2, 10, 1, 100, 0, new Amount(0, GameConstants.Currency.money), shiny, 0, gender);
         Battle.enemyPokemon(battlePokemon);
 
         // Show the help information text
