@@ -272,6 +272,43 @@ TemporaryBattleList['Rocket Boss Giovanni'] = new TemporaryBattle(
 );
 
 // Hoenn Temporary Battles
+TemporaryBattleList['Kecleon 1'] = new TemporaryBattle(
+    'Kecleon 1',
+    [new GymPokemon('Kecleon', 6000000, 20)],
+    undefined,
+    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 119)],
+    [new TemporaryBattleRequirement('Kecleon 1'), new ObtainedPokemonRequirement(pokemonMap.Kecleon)],
+    {
+        isTrainerBattle: false,
+        returnTown: 'Fortree City',
+        hideTrainer: true,
+        visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.hoenn, 119),
+    }
+);
+TemporaryBattleList['Kecleon 2'] = new TemporaryBattle(
+    'Kecleon 2',
+    [new GymPokemon('Kecleon', 7000000, 20)],
+    undefined,
+    [new TemporaryBattleRequirement('Kecleon 1')],
+    [new TemporaryBattleRequirement('Kecleon 2')],
+    {
+        isTrainerBattle: false,
+        returnTown: 'Fortree City',
+        hideTrainer: true,
+    }
+);
+TemporaryBattleList['Kecleon 3'] = new TemporaryBattle(
+    'Kecleon 3',
+    [new GymPokemon('Kecleon', 7000000, 20)],
+    undefined,
+    [new TemporaryBattleRequirement('Kecleon 2')],
+    [new TemporaryBattleRequirement('Kecleon 3')],
+    {
+        isTrainerBattle: false,
+        returnTown: 'Fortree City',
+        hideTrainer: true,
+    }
+);
 TemporaryBattleList['Sevii Rocket Grunt 1'] = new TemporaryBattle(
     'Sevii Rocket Grunt 1',
     [
