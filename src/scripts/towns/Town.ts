@@ -18,12 +18,12 @@ class Town {
     public npcs?: NPC[];
     public startingTown: boolean;
     public content: TownContent[];
-    public subRegion: GameConstants.SubRegion;
+    public subRegion: GameConstants.SubRegions;
 
     constructor(
         name: string,
         region: GameConstants.Region,
-        subRegion: GameConstants.SubRegion,
+        subRegion: GameConstants.SubRegions,
         content: TownContent[] = [],
         // Optional arguments are in a named object, so that we don't need
         // to pass undefined to get to the one we want
@@ -60,7 +60,7 @@ class Town {
 class DungeonTown extends Town {
     dungeon: Dungeon
 
-    constructor(name: string, region: GameConstants.Region, subregion: GameConstants.SubRegion, requirements: Requirement[] = [], content: TownContent[] = [], optional: TownOptionalArgument = {}) {
+    constructor(name: string, region: GameConstants.Region, subregion: GameConstants.SubRegions, requirements: Requirement[] = [], content: TownContent[] = [], optional: TownOptionalArgument = {}) {
         optional.requirements = requirements;
         super(name, region, subregion, content, optional);
         this.dungeon = dungeonList[name];
