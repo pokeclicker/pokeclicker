@@ -128,6 +128,14 @@ import TemporaryBattleRequirement from './requirements/TemporaryBattleRequiremen
 import DayOfWeekRequirement from './requirements/DayOfWeekRequirement';
 import SaveReminder from './saveReminder/SaveReminder';
 import lazyLoad from './utilities/LazyLoader';
+import { ItemList } from './items/ItemList';
+import Item from './items/Item';
+import { MultiplierDecreaser } from './items/types';
+import EnergyRestore from './items/EnergyRestore';
+import EffectEngineRunner from './effectEngine/effectEngineRunner';
+import ItemHandler from './items/ItemHandler';
+import CaughtIndicatingItem from './items/CaughtIndicatingItem';
+import PokeballItem from './items/PokeballItem';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -262,4 +270,12 @@ Object.assign(<any>window, {
     DayOfWeekRequirement,
     SaveReminder,
     lazyLoad,
+    ItemList,
+    Item,
+    MultiplierDecreaser,
+    EnergyRestore,
+    EffectEngineRunner,
+    ItemHandler,
+    CaughtIndicatingItem,
+    PokeballItem,
 });

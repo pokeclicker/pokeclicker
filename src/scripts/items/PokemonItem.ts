@@ -1,5 +1,3 @@
-/// <reference path="CaughtIndicatingItem.ts" />
-
 class PokemonItem extends CaughtIndicatingItem {
 
     type: PokemonNameType;

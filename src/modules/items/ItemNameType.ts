@@ -9,7 +9,7 @@ copy(`type ItemNameType
 Replace the everything in this file (except for this comment) with what was copied
 */
 
-type ItemNameType
+export type ItemNameType
     = 'xAttack'
     | 'xClick'
     | 'Lucky_egg'
