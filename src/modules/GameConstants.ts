@@ -1590,6 +1590,17 @@ export enum FinalSubRegions {
     Final = 0,
 }
 
+export type SubRegions =
+    | KantoSubRegions
+    | JohtoSubRegions
+    | HoennSubRegions
+    | SinnohSubRegions
+    | UnovaSubRegions
+    | KalosSubRegions
+    | AlolaSubRegions
+    | GalarSubRegions
+    | FinalSubRegions
+
 // Gender Types
 export enum Genders {
     Genderless = 0,
