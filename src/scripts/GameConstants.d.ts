@@ -609,7 +609,7 @@ namespace GameConstants {
         Final,
     }
 
-    declare type SubRegion =
+    declare type SubRegions =
         | KantoSubRegions
         | JohtoSubRegions
         | HoennSubRegions
