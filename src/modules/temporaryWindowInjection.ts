@@ -129,6 +129,7 @@ import Translate from './translation/Translation';
 import DayOfWeekRequirement from './requirements/DayOfWeekRequirement';
 import SaveReminder from './saveReminder/SaveReminder';
 import lazyLoad from './utilities/LazyLoader';
+import PokedexFilters from './settings/PokedexFilters';
 import { createLogContent } from './logbook/helpers';
 import { ItemList } from './items/ItemList';
 import Item from './items/Item';
@@ -274,6 +275,7 @@ Object.assign(<any>window, {
     DayOfWeekRequirement,
     SaveReminder,
     lazyLoad,
+    PokedexFilters,
     ItemList,
     Item,
     MultiplierDecreaser,
