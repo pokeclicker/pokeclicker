@@ -560,6 +560,13 @@ export const SpriteCredits: Credit[] = [
         ],
     },
     {
+        name: 'SageDeoxys, Wolfang62, LarryTurbo, tammyclaydon',
+        link: 'https://www.pokecommunity.com/showthread.php?t=474312',
+        resources: [
+            'Dynamic BG Galar (Gen 8) sprites',
+        ],
+    },
+    {
         name: 'Sandi315',
         link: 'https://www.reddit.com/user/Sandi315/',
         resources: [
