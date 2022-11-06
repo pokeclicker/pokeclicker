@@ -61,7 +61,11 @@ export const SortOptionConfigs: Record<SortOptions, SortOptionConfig> = {
 
     [SortOptions.breedingEfficiency]: {
         text: 'Breeding Efficiency',
-        getValue: (p) => (((p.baseAttack * (BREEDING_ATTACK_BONUS / 100) + p.proteinsUsed()) * (Settings.getSetting('breedingEfficiency+').observableValue() ? p.calculateEVAttackBonus() : 1)) / pokemonMap[p.name].eggCycles),
+        getValue: (p) => (
+            (
+                (p.baseAttack * (BREEDING_ATTACK_BONUS / 100) + p.proteinsUsed())
+            * (Settings.getSetting('breedingEfficiency+').observableValue() ? p.calculateEVAttackBonus() : 1))
+            / pokemonMap[p.name].eggCycles),
     },
 
     [SortOptions.eggCycles]: {

@@ -162,6 +162,18 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                     </div>
                                 </div>
                             </div>
+                            <!--Breeding Efficiency Toggle-->
+                            <div class="form-group col-md-3 col-6" style="max-width: 100%; flex-grow: 1">
+                                    <label>Breeding Efficiency+<label>
+                                    <label class="form-check-label toggler-wrapper style-1">
+                                        <input class="form-check-input" type="checkbox" id="breeding-efficiency-+-toggle"
+                                            data-bind="checked: Settings.getSetting('breedingEfficiency+').observableValue()"
+                                            onchange="Settings.setSettingByName('breedingEfficiency+', this.checked)">
+                                        <div class="toggler-slider">
+                                            <div class="toggler-knob"></div>
+                                        </div>
+                                    </label>
+                            </div>
                         </div>
                     </div>
                     <div>
