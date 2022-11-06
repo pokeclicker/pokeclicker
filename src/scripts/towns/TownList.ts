@@ -2,7 +2,7 @@
 ///<reference path="../../declarations/requirements/RouteKillRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/GymBadgeRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/OneFromManyRequirement.d.ts"/>
-///<reference path="../Quests/BulletinBoard.ts"/>
+///<reference path="../quests/BulletinBoard.ts"/>
 ///<reference path="BattleCafe.ts"/>
 ///<reference path="../../declarations/requirements/MultiRequirement.d.ts"/>
 
@@ -1087,14 +1087,20 @@ TownList['Ruby Path'] = new DungeonTown(
     GameConstants.Region.kanto,
     GameConstants.KantoSubRegions.Sevii4567,
     [new QuestLineStepCompletedRequirement('Celio\'s Errand', 2)],
-    []
+    [],
+    {
+        npcs: [SeviiRuby],
+    }
 );
 TownList['Icefall Cave'] = new DungeonTown(
     'Icefall Cave',
     GameConstants.Region.kanto,
     GameConstants.KantoSubRegions.Sevii4567,
     [new QuestLineStepCompletedRequirement('Celio\'s Errand', 5)],
-    []
+    [],
+    {
+        npcs: [SeviiLorelei],
+    }
 );
 TownList['Sunburst Island'] = new DungeonTown(
     'Sunburst Island',
@@ -1949,6 +1955,18 @@ const FortreeRanger = new NPC('Pokémon Ranger Catherine', [
     'Please recycle your used Dowsing Machines.',
 ], {image: 'assets/images/npcs/Pokemon Ranger (female).png'});
 
+const Steven1 = new NPC('Steven', [
+    'I have been investigating the behavior of Kecleon, the Color Swap Pokémon.',
+    'There are a few hidden near the city. If you can find them all, I will give you a wonderful prize!'],
+{requirement: new TemporaryBattleRequirement('Kecleon 3', 1, GameConstants.AchievementOption.less),
+});
+
+const Steven2 = new NPC('Steven', [
+    'Thank you for finding the hidden Kecleons for me! Please accept this picture of a camouflaged Kecleon as your reward.',
+], {image: 'assets/images/npcs/other/KecleonDrawing.png',
+    requirement: new TemporaryBattleRequirement('Kecleon 3'),
+});
+
 const MossdeepAstronomer = new NPC('Astronomer', [
     'Hey did you know about the Millennium Comet? We can see it in the sky right now, and it only comes around once every thousand years!',
     'There’s a legend that a mythical Wish Pokémon awakens when it passes over us. If you’re as strong as the Champion, maybe you’ll find it roaming around Hoenn granting wishes!',
@@ -2165,7 +2183,7 @@ TownList['Fortree City'] = new Town(
     [FortreeCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Fortree City'])],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Weather Institute'))],
-        npcs: [FortreeWeatherman, FortreeRanger],
+        npcs: [FortreeWeatherman, FortreeRanger, Steven1, Steven2],
     }
 );
 TownList['Lilycove City'] = new Town(
