@@ -60,10 +60,10 @@ const PokedexFilters: Record<string, FilterOption> = {
     statusPokerus: new FilterOption<number>(
         'Pokerus',
         ko.observable(-1).extend({ numeric: 0 }),
-        'breedingPokerusFilter',
+        'pokdexPokerusFilter',
         [
             new SettingOption('All', '-1'),
-            ...Settings.enumToSettingOptionArray(Pokerus, (t) => t !== 'Infected'),
+            ...Settings.enumToNumberSettingOptionArray(Pokerus, (t) => t !== 'Infected'),
         ],
     ),
     heldItem: new FilterOption<boolean>(
