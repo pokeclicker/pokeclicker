@@ -1958,13 +1958,13 @@ const FortreeRanger = new NPC('Pokémon Ranger Catherine', [
 const Steven1 = new NPC('Steven', [
     'I have been investigating the behavior of Kecleon, the Color Swap Pokémon.',
     'There are a few hidden near the city. If you can find them all, I will give you a wonderful prize!'],
-{requirement: new TemporaryBattleRequirement('Kecleon3', 1, GameConstants.AchievementOption.less),
+{requirement: new TemporaryBattleRequirement('Kecleon 3', 1, GameConstants.AchievementOption.less),
 });
 
 const Steven2 = new NPC('Steven', [
     'Behold! A picture of a camouflaged Kecleon! That is your reward.',
 ], {image: 'assets/images/npcs/other/KecleonDrawing.png',
-    requirement: new TemporaryBattleRequirement('Kecleon3'),
+    requirement: new TemporaryBattleRequirement('Kecleon 3'),
 });
 
 const MossdeepAstronomer = new NPC('Astronomer', [
