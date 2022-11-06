@@ -1087,14 +1087,20 @@ TownList['Ruby Path'] = new DungeonTown(
     GameConstants.Region.kanto,
     GameConstants.KantoSubRegions.Sevii4567,
     [new QuestLineStepCompletedRequirement('Celio\'s Errand', 2)],
-    []
+    [],
+    {
+        npcs: [SeviiRuby],
+    }
 );
 TownList['Icefall Cave'] = new DungeonTown(
     'Icefall Cave',
     GameConstants.Region.kanto,
     GameConstants.KantoSubRegions.Sevii4567,
     [new QuestLineStepCompletedRequirement('Celio\'s Errand', 5)],
-    []
+    [],
+    {
+        npcs: [SeviiLorelei],
+    }
 );
 TownList['Sunburst Island'] = new DungeonTown(
     'Sunburst Island',
