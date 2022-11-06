@@ -32,7 +32,7 @@ First make sure you have git and npm available as command-line utilities (so you
 
 Open a command line interface in the directory that contains this README file, and use the following command to install PokéClicker's other dependencies locally:
 ```cmd
-npm clean-install
+npm run clean
 ```
 
 Then finally, run the following command in the command line interface to start a browser running PokéClicker.

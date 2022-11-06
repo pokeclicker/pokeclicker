@@ -10,7 +10,10 @@
     "eslint": "eslint --ext ts ./src/scripts ./src/modules",
     "eslint-fix": "eslint --ext ts --fix ./src/scripts ./src/modules",
     "website": "npm test && cross-env NODE_ENV=production gulp website",
-    "publish": "npm test && git push origin develop:master"
+    "publish": "npm test && git push origin develop:master",
+    "tl:init": "git submodule update --init",
+    "tl:update": "git submodule update --remote",
+    "clean": "npm ci && npm run tl:init"
   },
   "repository": {
     "type": "git",
