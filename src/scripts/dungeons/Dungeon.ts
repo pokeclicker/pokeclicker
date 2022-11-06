@@ -584,7 +584,7 @@ dungeonList['Rock Tunnel'] = new Dungeon('Rock Tunnel',
         new DungeonTrainer('Hiker',
             [
                 new GymPokemon('Geodude', 500, 19),
-                new GymPokemon('Onix', 500, 19),
+                new GymPokemon('Machop', 500, 19),
                 new GymPokemon('Geodude', 500, 19),
                 new GymPokemon('Geodude', 500, 19),
             ], { weight: 1 }, 'Lenny'),
