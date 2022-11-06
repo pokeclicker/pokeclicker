@@ -1599,7 +1599,7 @@ GymList.Hulbury = new Gym(
     BadgeEnums.Galar_Water,
     60000,
     'I may proudly be the strongest member of this Gym, but I was totally washed away!',
-    [new TemporaryBattleRequirement('Hop4')]
+    [new TemporaryBattleRequirement('Hop 4')]
 );
 GymList.Motostoke = new Gym(
     'Kabu',
@@ -1612,7 +1612,7 @@ GymList.Motostoke = new Gym(
     BadgeEnums.Galar_Fire,
     60000,
     'I\'m often regarded as the first real roadblock of the Gym Challenge, and yet you defeated me! Clearly, your talent surpassed my many years of experience. I still have much to learn!',
-    [new TemporaryBattleRequirement('Marnie1')]
+    [new TemporaryBattleRequirement('Marnie 1')]
 );
 GymList['Stow-on-Side1'] = new Gym(
     'Bea',
@@ -1626,7 +1626,7 @@ GymList['Stow-on-Side1'] = new Gym(
     BadgeEnums.Galar_Fighting,
     80000,
     'Your strength nearly made me want to turn and run in my bare feet.',
-    [new TemporaryBattleRequirement('Hop5')],
+    [new TemporaryBattleRequirement('Hop 5')],
     // Starts Galar story quest if both Stow-on-Side gyms are defeated.
     () => {
         if (App.game.badgeCase.hasBadge(BadgeEnums.Galar_Ghost)) {
@@ -1646,7 +1646,7 @@ GymList['Stow-on-Side2'] = new Gym(
     BadgeEnums.Galar_Ghost,
     80000,
     'Maybe my mask... kept me from seeing just how strong you really are...',
-    [new TemporaryBattleRequirement('Hop5')],
+    [new TemporaryBattleRequirement('Hop 5')],
     // Starts Galar story quest if both Stow-on-Side gyms are defeated.
     () => {
         if (App.game.badgeCase.hasBadge(BadgeEnums.Galar_Fighting)) {
@@ -1708,7 +1708,7 @@ GymList.Spikemuth = new Gym(
     BadgeEnums.Galar_Dark,
     96000,
     'Me an\' my team gave it our best. Let\'s meet up again for a battle some time...',
-    [new TemporaryBattleRequirement('Marnie2')]
+    [new TemporaryBattleRequirement('Marnie 2')]
 );
 GymList.Hammerlocke = new Gym(
     'Raihan',
