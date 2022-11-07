@@ -1,7 +1,7 @@
 
 <div class="row justify-content-center no-gutters" data-bind="if: App.game.gameState == GameConstants.GameState.battleFrontier">
     <div class="col no-gutters" data-bind="if: BattleFrontierBattle.enemyPokemon" style="height: 280px; display: block;">
-        <h2 class="pageItemTitle" style="display: block;">
+        <h2 class="pageItemTitle mobileBattleTitle" style="display: block;">
 
             <knockout class="left">
                 Stage <knockout data-bind="text: BattleFrontierRunner.stage">0</knockout> / <knockout data-bind="text: BattleFrontierRunner.highest">0</knockout>
@@ -25,10 +25,10 @@
 
         </h2>
 
-        <div>
+        <div class="trainer-enemy">
             <knockout data-bind="template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': BattleFrontierBattle.enemyPokemon() } }">Pokémon sprite</knockout>
         </div>
-        <div class="progress hitpoints" style="height: 20px;">
+        <div class="progress hitpoints trainerhitpoints">
             <div class="progress-bar bg-danger" role="progressbar"
                     data-bind="attr:{ style: 'width:' + BattleFrontierBattle.enemyPokemon().healthPercentage() + '%' }"
                     aria-valuemin="0" aria-valuemax="100">
@@ -39,8 +39,27 @@
           <table width="100%">
               <tr>
                 <td>
-                    <knockout data-bind="template: { name: 'pokemonAttackTemplate', data: { 'pokemon': Battle.enemyPokemon() } }"></knockout>
-                </td>
+                    <span style="display: inline;">
+                        Pokémon Attack:
+                        <span data-bind="
+                            text: App.game.party.calculatePokemonAttack(
+                                PokemonType.None,
+                                PokemonType.None,
+                                true,
+                            ).toLocaleString('en-US'),
+                            tooltip: {
+                                title: Battle.enemyPokemon()
+                                    ? `${App.game.party.calculatePokemonAttack(
+                                        Battle.enemyPokemon().type1,
+                                        Battle.enemyPokemon().type2,
+                                        true,
+                                    ).toLocaleString('en-US')} against ${Battle.enemyPokemon().name}`
+                                    : '',
+                                trigger: 'hover',
+                            }
+                        "></span>
+                    </span>
+                  </td>
               </tr>
           </table>
         </h2>

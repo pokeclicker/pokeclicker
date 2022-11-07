@@ -873,6 +873,35 @@
          , image: "assets/images/map/blimp_pikachu.png"
          })
     %>
+     <%- include('templates/mapOverlay',
+         { name: "Kecleon"
+        , x: 46, y: 3
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Kecleon 1'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Kecleon 1'] && TemporaryBattleList['Kecleon 1'].isVisible()"
+         , image: "assets/images/map/kecleonoverworld.png"
+         })
+     %>
+	 
+     <%- include('templates/mapOverlay',
+         { name: "Kecleon"
+        , x: 41, y: 10
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Kecleon 2'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Kecleon 2'] && TemporaryBattleList['Kecleon 2'].isVisible()"
+         , image: "assets/images/map/kecleoncamooverworld.png"
+         })
+     %>
+	 
+     <%- include('templates/mapOverlay',
+         { name: "Kecleon"
+        , x: 48, y: 8
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Kecleon 3'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Kecleon 3'] && TemporaryBattleList['Kecleon 3'].isVisible()"
+         , image: "assets/images/map/kecleoncamooverworld.png"
+         })
+     %>
 
      <%- include('templates/mapOverlay',
          { name: "Ash Ketchum"

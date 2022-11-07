@@ -1,4 +1,4 @@
-///<reference path="Item.ts"/>
+/// <reference path="../../declarations/items/Item.d.ts"/>
 
 class HeldItem extends Item {
     public static heldItemSelected: KnockoutObservable<HeldItem> = ko.observable(undefined);
@@ -18,8 +18,10 @@ class HeldItem extends Item {
         this.regionUnlocked = regionUnlocked;
     }
 
-    public static getHeldItems() {
-        return Object.values(ItemList).filter(i => i instanceof HeldItem);
+    public static getSortedHeldItems() {
+        return Object.values(ItemList).filter(i => i instanceof HeldItem).sort((a: HeldItem, b: HeldItem) => {
+            return a.regionUnlocked - b.regionUnlocked;
+        });
     }
 
     public isUnlocked() {

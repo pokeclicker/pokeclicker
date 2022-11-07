@@ -311,7 +311,7 @@ class Breeding implements Feature {
                 this.gainEgg(nextEgg);
                 if (!this._queueList().length) {
                     Notifier.notify({
-                        message: 'Hatchery queue is empty',
+                        message: 'Hatchery queue is empty.',
                         type: NotificationConstants.NotificationOption.success,
                         timeout: 1e4,
                         sound: NotificationConstants.NotificationSound.Hatchery.empty_queue,
