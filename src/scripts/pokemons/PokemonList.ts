@@ -25189,8 +25189,8 @@ const pokemonList = createPokemonArray(
             'speed': 130,
         },
         'gender': {
-           'type': GameConstants.Genders.Genderless,
-       },
+            'type': GameConstants.Genders.Genderless,
+        },
     },
     {
         'id': -114,
@@ -25209,8 +25209,8 @@ const pokemonList = createPokemonArray(
             'speed': 140,
         },
         'gender': {
-           'type': GameConstants.Genders.Genderless,
-       },
+            'type': GameConstants.Genders.Genderless,
+        },
     },
     // {
     //     'id': -115,
