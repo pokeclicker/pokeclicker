@@ -584,7 +584,7 @@ dungeonList['Rock Tunnel'] = new Dungeon('Rock Tunnel',
         new DungeonTrainer('Hiker',
             [
                 new GymPokemon('Geodude', 500, 19),
-                new GymPokemon('Onix', 500, 19),
+                new GymPokemon('Machop', 500, 19),
                 new GymPokemon('Geodude', 500, 19),
                 new GymPokemon('Geodude', 500, 19),
             ], { weight: 1 }, 'Lenny'),
@@ -1806,10 +1806,6 @@ dungeonList['Ruins of Alph'] = new Dungeon('Ruins of Alph',
     },
     60600,
     [
-        new DungeonBossPokemon('Unown (A)', 280000, 14, {
-            hide: true,
-            requirement: new ObtainedPokemonRequirement(pokemonMap['Unown (A)'], true),
-        }),
         ...AlphUnownList.map((char) => new DungeonBossPokemon(`Unown (${char})` as PokemonNameType, 280000, 14, {
             hide: true,
             requirement: new SeededDateRequirement(() => SeededDateRand.fromArray(AlphUnownList) == char),
