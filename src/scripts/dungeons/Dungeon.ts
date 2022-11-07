@@ -5210,6 +5210,7 @@ dungeonList['Reversal Mountain'] = new Dungeon('Reversal Mountain',
     4003000,
     [
         new DungeonBossPokemon('Cacturne', 24000000, 100),
+        new DungeonBossPokemon('Vibrava', 24000000, 100),
         new DungeonBossPokemon('Excadrill', 26000000, 100),
         new DungeonBossPokemon('Heatran', 30000000, 100, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)}),
     ],
