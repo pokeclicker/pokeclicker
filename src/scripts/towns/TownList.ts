@@ -1506,6 +1506,10 @@ const TohjoFallsCelebiTimeDistortion = new NPC('Investigate the Time Distortion'
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Unfinished Business', 8), new QuestLineStepCompletedRequirement('Unfinished Business', 10, GameConstants.AchievementOption.less), new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Tohjo Falls'))]),
 });
 
+const IndigoHiker = new NPC('Hiker', [
+    'This is the best place to take a break in the whole region! I can reach all of Johto from here, and Kanto is just a short hike away, to the east!',
+], { image: 'assets/images/trainers/Hiker.png' });
+
 const ProfElm = new ProfNPC('Prof. Elm',
     GameConstants.Region.johto,
     'Oh, another regional Pokédex completed so soon?',
@@ -1659,6 +1663,7 @@ TownList['Indigo Plateau Johto'] = new Town(
             new RouteKillRequirement(10, GameConstants.Region.johto, 26),
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Johto')),
         ],
+        npcs: [IndigoHiker],
     }
 );
 
