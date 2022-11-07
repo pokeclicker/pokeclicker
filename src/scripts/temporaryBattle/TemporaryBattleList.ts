@@ -1216,8 +1216,8 @@ TemporaryBattleList['Ash Ketchum Alola'] = new TemporaryBattle(
 
 //Galar Temporary Battles
 //TODO: Have Hop's starter depend on the players Galar starter
-TemporaryBattleList.Hop1 = new TemporaryBattle(
-    'Hop1',
+TemporaryBattleList['Hop 1'] = new TemporaryBattle(
+    'Hop 1',
     [
         new GymPokemon('Wooloo', 96928085, 3),
         new GymPokemon('Sobble', 105005426, 5),
@@ -1238,14 +1238,14 @@ TemporaryBattleList.Mirages = new TemporaryBattle(
         new GymPokemon('Zamazenta (Battle Hero)', 114428989, 70),
     ],
     '<i>The Pokémon fled.</i>',
-    [new TemporaryBattleRequirement('Hop1')],
+    [new TemporaryBattleRequirement('Hop 1')],
     undefined,
     {
         hideTrainer: true,
     }
 );
-TemporaryBattleList.Hop2 = new TemporaryBattle(
-    'Hop2',
+TemporaryBattleList['Hop 2'] = new TemporaryBattle(
+    'Hop 2',
     [
         new GymPokemon('Wooloo', 88822988, 6),
         new GymPokemon('Rookidee', 88822988, 5),
@@ -1260,8 +1260,8 @@ TemporaryBattleList.Hop2 = new TemporaryBattle(
         imageName: '../gymLeaders/Hop',
     }
 );
-TemporaryBattleList.Hop3 = new TemporaryBattle(
-    'Hop3',
+TemporaryBattleList['Hop 3'] = new TemporaryBattle(
+    'Hop 3',
     [
         new GymPokemon('Wooloo', 102249719, 11),
         new GymPokemon('Rookidee', 102249719, 12),
@@ -1276,8 +1276,8 @@ TemporaryBattleList.Hop3 = new TemporaryBattle(
         imageName: '../gymLeaders/Hop',
     }
 );
-TemporaryBattleList.Bede1 = new TemporaryBattle(
-    'Bede1',
+TemporaryBattleList['Bede 1'] = new TemporaryBattle(
+    'Bede 1',
     [
         new GymPokemon('Solosis', 110628515, 13),
         new GymPokemon('Gothita', 110628515, 15),
@@ -1291,8 +1291,8 @@ TemporaryBattleList.Bede1 = new TemporaryBattle(
         imageName: 'Bede',
     }
 );
-TemporaryBattleList.Hop4 = new TemporaryBattle(
-    'Hop4',
+TemporaryBattleList['Hop 4'] = new TemporaryBattle(
+    'Hop 4',
     [
         new GymPokemon('Wooloo', 145167441, 18),
         new GymPokemon('Corvisquire', 145167441, 19),
@@ -1307,8 +1307,8 @@ TemporaryBattleList.Hop4 = new TemporaryBattle(
         imageName: '../gymLeaders/Hop',
     }
 );
-TemporaryBattleList.Bede2 = new TemporaryBattle(
-    'Bede2',
+TemporaryBattleList['Bede 2'] = new TemporaryBattle(
+    'Bede 2',
     [
         new GymPokemon('Solosis', 135596164, 21),
         new GymPokemon('Gothita', 135596164, 22),
@@ -1323,8 +1323,8 @@ TemporaryBattleList.Bede2 = new TemporaryBattle(
         imageName: 'Bede',
     }
 );
-TemporaryBattleList.Marnie1 = new TemporaryBattle(
-    'Marnie1',
+TemporaryBattleList['Marnie 1'] = new TemporaryBattle(
+    'Marnie 1',
     [
         new GymPokemon('Croagunk', 183113060, 24),
         new GymPokemon('Scraggy', 183113060, 24),
@@ -1338,8 +1338,8 @@ TemporaryBattleList.Marnie1 = new TemporaryBattle(
         imageName: '../gymLeaders/Marnie',
     }
 );
-TemporaryBattleList.Hop5 = new TemporaryBattle(
-    'Hop5',
+TemporaryBattleList['Hop 5'] = new TemporaryBattle(
+    'Hop 5',
     [
         new GymPokemon('Cramorant', 184350136, 28),
         new GymPokemon('Toxel', 184350136, 29),
@@ -1355,8 +1355,8 @@ TemporaryBattleList.Hop5 = new TemporaryBattle(
         imageName: '../gymLeaders/Hop',
     }
 );
-TemporaryBattleList.Bede3 = new TemporaryBattle(
-    'Bede3',
+TemporaryBattleList['Bede 3'] = new TemporaryBattle(
+    'Bede 3',
     [
         new GymPokemon('Duosion', 197836220, 32),
         new GymPokemon('Gothorita', 197836220, 32),
@@ -1372,8 +1372,8 @@ TemporaryBattleList.Bede3 = new TemporaryBattle(
         imageName: 'Bede',
     }
 );
-TemporaryBattleList.Hop6 = new TemporaryBattle(
-    'Hop6',
+TemporaryBattleList['Hop 6'] = new TemporaryBattle(
+    'Hop 6',
     [
         new GymPokemon('Trevenant', 164138786, 34),
         new GymPokemon('Heatmor', 164138786, 34),
@@ -1390,8 +1390,8 @@ TemporaryBattleList.Hop6 = new TemporaryBattle(
         imageName: '../gymLeaders/Hop',
     }
 );
-TemporaryBattleList.Hop7 = new TemporaryBattle(
-    'Hop7',
+TemporaryBattleList['Hop 7'] = new TemporaryBattle(
+    'Hop 7',
     [
         new GymPokemon('Dubwool', 169633690, 40),
         new GymPokemon('Corviknight', 169633690, 40),
@@ -1413,8 +1413,8 @@ TemporaryBattleList.Hop7 = new TemporaryBattle(
         imageName: '../gymLeaders/Hop',
     }
 );
-TemporaryBattleList.Marnie2 = new TemporaryBattle(
-    'Marnie2',
+TemporaryBattleList['Marnie 2'] = new TemporaryBattle(
+    'Marnie 2',
     [
         new GymPokemon('Liepard', 214035920, 42),
         new GymPokemon('Toxicroak', 214035920, 43),
@@ -1455,8 +1455,8 @@ TemporaryBattleList['The Darkest Day'] = new TemporaryBattle(
         imageName: '../pokemon/890',
     }
 );
-TemporaryBattleList.Hop8 = new TemporaryBattle(
-    'Hop8',
+TemporaryBattleList['Hop 8'] = new TemporaryBattle(
+    'Hop 8',
     [
         new GymPokemon('Dubwool', 372064692, 59),
         new GymPokemon('Pincurchin', 372064692, 59),
@@ -1473,8 +1473,8 @@ TemporaryBattleList.Hop8 = new TemporaryBattle(
         imageName: '../gymLeaders/Hop',
     }
 );
-TemporaryBattleList.Sordward1 = new TemporaryBattle(
-    'Sordward1',
+TemporaryBattleList['Sordward 1'] = new TemporaryBattle(
+    'Sordward 1',
     [
         new GymPokemon('Sirfetch\'d', 443615594, 60),
         new GymPokemon('Golisopod', 443615594, 60),
@@ -1489,8 +1489,8 @@ TemporaryBattleList.Sordward1 = new TemporaryBattle(
         imageName: 'Sordward',
     }
 );
-TemporaryBattleList.Shielbert1 = new TemporaryBattle(
-    'Shielbert1',
+TemporaryBattleList['Shielbert 1'] = new TemporaryBattle(
+    'Shielbert 1',
     [
         new GymPokemon('Sirfetch\'d', 443615594, 60),
         new GymPokemon('Bronzong', 443615594, 60),
@@ -1637,8 +1637,8 @@ TemporaryBattleList['Rampaging Haxorus'] = new TemporaryBattle(
         imageName: '../pokemon/612',
     }
 );
-TemporaryBattleList.Sordward2 = new TemporaryBattle(
-    'Sordward2',
+TemporaryBattleList['Sordward 2'] = new TemporaryBattle(
+    'Sordward 2',
     [
         new GymPokemon('Sirfetch\'d', 554746301, 64),
         new GymPokemon('Golisopod', 554746301, 64),
@@ -1653,8 +1653,8 @@ TemporaryBattleList.Sordward2 = new TemporaryBattle(
         imageName: 'Sordward',
     }
 );
-TemporaryBattleList.Shielbert2 = new TemporaryBattle(
-    'Shielbert2',
+TemporaryBattleList['Shielbert 2'] = new TemporaryBattle(
+    'Shielbert 2',
     [
         new GymPokemon('Sirfetch\'d', 554746301, 64),
         new GymPokemon('Bronzong', 554746301, 64),
@@ -1691,8 +1691,8 @@ TemporaryBattleList['Rampaging Zamazenta'] = new TemporaryBattle(
         imageName: '../pokemon/889.1',
     }
 );
-TemporaryBattleList.Klara1 = new TemporaryBattle(
-    'Klara1',
+TemporaryBattleList['Klara 1'] = new TemporaryBattle(
+    'Klara 1',
     [
         new GymPokemon('Venipede', 799982445, 58),
         new GymPokemon('Galarian Slowpoke', 816143704, 60),
@@ -1706,8 +1706,8 @@ TemporaryBattleList.Klara1 = new TemporaryBattle(
         imageName: '../gymLeaders/Klara',
     }
 );
-TemporaryBattleList.Avery1 = new TemporaryBattle(
-    'Avery1',
+TemporaryBattleList['Avery 1'] = new TemporaryBattle(
+    'Avery 1',
     [
         new GymPokemon('Abra', 799982445, 58),
         new GymPokemon('Galarian Slowpoke', 816143704, 60),
@@ -1734,8 +1734,8 @@ TemporaryBattleList.Mustard = new TemporaryBattle(
         displayName: 'Dojo Master Mustard',
     }
 );
-TemporaryBattleList.Klara2 = new TemporaryBattle(
-    'Klara2',
+TemporaryBattleList['Klara 2'] = new TemporaryBattle(
+    'Klara 2',
     [
         new GymPokemon('Galarian Slowpoke', 564237041, 62),
         new GymPokemon('Koffing', 564237041, 62),
@@ -1752,8 +1752,8 @@ TemporaryBattleList.Klara2 = new TemporaryBattle(
         imageName: '../gymLeaders/Klara',
     }
 );
-TemporaryBattleList.Avery2 = new TemporaryBattle(
-    'Avery2',
+TemporaryBattleList['Avery 2'] = new TemporaryBattle(
+    'Avery 2',
     [
         new GymPokemon('Galarian Slowpoke', 564237041, 62),
         new GymPokemon('Woobat', 564237041, 62),
@@ -1770,8 +1770,8 @@ TemporaryBattleList.Avery2 = new TemporaryBattle(
         imageName: '../gymLeaders/Avery',
     }
 );
-TemporaryBattleList.Klara3 = new TemporaryBattle(
-    'Klara3',
+TemporaryBattleList['Klara 3'] = new TemporaryBattle(
+    'Klara 3',
     [
         new GymPokemon('Skorupi', 452051518, 65),
         new GymPokemon('Galarian Weezing', 452051518, 66),
@@ -1787,8 +1787,8 @@ TemporaryBattleList.Klara3 = new TemporaryBattle(
         imageName: '../gymLeaders/Klara',
     }
 );
-TemporaryBattleList.Avery3 = new TemporaryBattle(
-    'Avery3',
+TemporaryBattleList['Avery 3'] = new TemporaryBattle(
+    'Avery 3',
     [
         new GymPokemon('Galarian Ponyta', 452051518, 65),
         new GymPokemon('Swoobat', 452051518, 66),

@@ -1,0 +1,3 @@
+[submodule "src/translations"]
+	path = src/translations
+	url = git@github.com:pokeclicker/pokeclicker-translations.git

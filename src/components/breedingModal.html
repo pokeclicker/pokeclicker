@@ -162,6 +162,18 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                     </div>
                                 </div>
                             </div>
+                            <!--Breeding Efficiency Toggle-->
+                            <div class="form-group col-md-3 col-6" style="max-width: 100%; flex-grow: 1">
+                                    <label>Include EV bonus</label>
+                                    <label class="form-check-label toggler-wrapper style-1">
+                                        <input class="form-check-input" type="checkbox" id="breeding-include-ev-bonus"
+                                            data-bind="checked: Settings.getSetting('breedingIncludeEVBonus').observableValue()"
+                                            onchange="Settings.setSettingByName('breedingIncludeEVBonus', this.checked)">
+                                        <div class="toggler-slider">
+                                            <div class="toggler-knob"></div>
+                                        </div>
+                                    </label>
+                            </div>
                         </div>
                     </div>
                     <div>
@@ -172,7 +184,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                         <!-- ko if: App.game.party.hasMaxLevelPokemon() -->
                         <ul class="row justify-content-center p-0" data-bind="foreach: lazyLoad($element, PartyController.getHatcherySortedList)">
                             <li class="eggSlot col-sm-4 col-md-3 col-lg-2 pokedexEntry" data-bind="visible: BreedingController.visible($data), style:{background: PokedexHelper.getBackgroundColors($data.name)}, class: App.game.breeding.hasFreeEggSlot() || App.game.breeding.hasFreeQueueSlot() ? '' : 'disabled'">
-                                <span class="breedingListPokemonName" data-bind="text: $data.name">name</span>
+                                <span class="breedingListPokemonName" data-bind="text: $data.displayName">name</span>
                                 <div class="breedingListShiny" data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)">✨</div>
                                 <div class="breedingListPokerus" data-bind="if: App.game.party.getPokemon($data.id)?.pokerus">
                                     <img width="32px" src="" data-bind="attr: { src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[App.game.party.getPokemon($data.id).pokerus]}.png`}"/>

@@ -266,7 +266,10 @@ class FarmHand {
                 timeout: 30 * GameConstants.MINUTE,
             });
             this.hired(false);
-            App.game.logbook.newLog(LogBookTypes.OTHER, `You ran out of Farm Points to pay Farm Hand ${this.name}!`);
+            App.game.logbook.newLog(
+                LogBookTypes.OTHER,
+                createLogContent.unableToPayFarmHand({ name: this.name})
+            );
             return;
         }
         // Charge the player for the hour
