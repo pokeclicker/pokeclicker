@@ -64,7 +64,7 @@ export const SortOptionConfigs: Record<SortOptions, SortOptionConfig> = {
         getValue: (p) => (
             (
                 (p.baseAttack * (BREEDING_ATTACK_BONUS / 100) + p.proteinsUsed())
-            * (Settings.getSetting('breedingEfficiency+').observableValue() ? p.calculateEVAttackBonus() : 1))
+            * (Settings.getSetting('breedingIncludeEVBonus').observableValue() ? p.calculateEVAttackBonus() : 1))
             / pokemonMap[p.name].eggCycles),
     },
 
