@@ -912,8 +912,8 @@ Routes.add(new RegionRoute(
         water: ['Marill', 'Goldeen', 'Magikarp', 'Barboach'],
     }),
     [
-        new RouteKillRequirement(10, GameConstants.Region.hoenn, 119),
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Weather Institute')),
+        new TemporaryBattleRequirement('Kecleon 1'),
     ]
 ));
 Routes.add(new RegionRoute(
@@ -2052,7 +2052,7 @@ Routes.add(new RegionRoute(
           new SpecialRoutePokemon(['Mudsdale', 'Natu', 'Munna', 'Ralts', 'Kirlia', 'Roselia', 'Gardevoir'], new WeatherRequirement([WeatherType.Fog])),
       ],
     }),
-    [new TemporaryBattleRequirement('Hop2')],
+    [new TemporaryBattleRequirement('Hop 2')],
     undefined,
     GameConstants.GalarSubRegions.SouthGalar
 ));
@@ -2264,7 +2264,7 @@ Routes.add(new RegionRoute(
         land: ['Gossifleur', 'Corvisquire', 'Rookidee', 'Rolycoly', 'Sizzlipede', 'Vulpix', 'Growlithe', 'Tyrogue', 'Galarian Zigzagoon', 'Stunky', 'Trubbish', 'Cherubi', 'Mudbray','Pancham', 'Klink', 'Machop'],
         headbutt: ['Skwovet', 'Cherubi'],
     }),
-    [new TemporaryBattleRequirement('Hop3')],
+    [new TemporaryBattleRequirement('Hop 3')],
     undefined,
     GameConstants.GalarSubRegions.SouthGalar
 ));
@@ -2275,7 +2275,7 @@ Routes.add(new RegionRoute(
         water: ['Magikarp', 'Goldeen', 'Chewtle'],
         headbutt: ['Skwovet'],
     }),
-    [new TemporaryBattleRequirement('Bede1')],
+    [new TemporaryBattleRequirement('Bede 1')],
     undefined,
     GameConstants.GalarSubRegions.SouthGalar
 ));
@@ -2295,7 +2295,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Impidimp', 'Chewtle', 'Koffing', 'Hatenna', 'Noctowl', 'Throh', 'Sawk', 'Sudowoodo', 'Salandit', 'Pawniard', 'Scraggy', 'Croagunk', 'Roggenrola'],
     }),
-    [new TemporaryBattleRequirement('Bede2')],
+    [new TemporaryBattleRequirement('Bede 2')],
     undefined,
     GameConstants.GalarSubRegions.SouthGalar
 ));
@@ -2501,7 +2501,7 @@ Routes.add(new RegionRoute(
         land: ['Thievul', 'Corviknight', 'Perrserker', 'Morpeko', 'Liepard', 'Seismitoad', 'Karrablast', 'Shelmet', 'Meowstic', 'Galvantula', 'Inkay'],
         headbutt: ['Greedent'],
     }),
-    [new TemporaryBattleRequirement('Hop6')],
+    [new TemporaryBattleRequirement('Hop 6')],
     undefined,
     GameConstants.GalarSubRegions.NorthGalar
 ));
@@ -2622,8 +2622,8 @@ Routes.add(new RegionRoute(
     }),
     [
         new MultiRequirement([
-            new TemporaryBattleRequirement('Klara1'),
-            new TemporaryBattleRequirement('Avery1'),
+            new TemporaryBattleRequirement('Klara 1'),
+            new TemporaryBattleRequirement('Avery 1'),
         ]),
     ],
     undefined,
