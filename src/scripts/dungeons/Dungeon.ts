@@ -1806,10 +1806,6 @@ dungeonList['Ruins of Alph'] = new Dungeon('Ruins of Alph',
     },
     60600,
     [
-        new DungeonBossPokemon('Unown (A)', 280000, 14, {
-            hide: true,
-            requirement: new ObtainedPokemonRequirement(pokemonMap['Unown (A)'], true),
-        }),
         ...AlphUnownList.map((char) => new DungeonBossPokemon(`Unown (${char})` as PokemonNameType, 280000, 14, {
             hide: true,
             requirement: new SeededDateRequirement(() => SeededDateRand.fromArray(AlphUnownList) == char),
