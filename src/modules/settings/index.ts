@@ -17,9 +17,12 @@ import {
     camelCaseToString,
 } from '../GameConstants';
 import HotkeySetting from './HotkeySetting';
+import Language, { LanguageNames } from '../translation/Language';
 import BreedingFilters from './BreedingFilters';
 import GameHelper from '../GameHelper';
 import PokemonType from '../enums/PokemonType';
+import PokedexFilters from './PokedexFilters';
+import FilterSetting from './FilterSetting';
 
 export default Settings;
 
@@ -211,6 +214,16 @@ Object.keys(BreedingFilters).forEach((key) => {
     Settings.add(new Setting<string>(filter.optionName, filter.displayName, filter.options || [], filter.value().toString()));
 });
 
+// Pokedex Filters
+Object.keys(PokedexFilters).forEach((key) => {
+    // dont store name filter
+    if (key === 'name') {
+        return;
+    }
+    const filter = PokedexFilters[key];
+    Settings.add(new FilterSetting(filter));
+});
+
 Settings.add(new Setting<string>('breedingDisplayFilter', 'breedingDisplayFilter',
     [
         new SettingOption('Attack', 'attack'),
@@ -303,3 +316,6 @@ Settings.getSetting('backgroundImage').observableValue.subscribe((newValue) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     newValue === 'background-dynamic' ? DynamicBackground.startScene() : DynamicBackground.stopScene();
 });
+
+// Translation
+Settings.add(new Setting<Language>('translation.language', 'Language (beta)', Settings.enumToSettingOptionArray(Language, () => true, LanguageNames) as unknown as SettingOption<Language>[], Language.en));

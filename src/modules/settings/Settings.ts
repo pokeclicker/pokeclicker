@@ -37,12 +37,18 @@ export default class Settings {
         Object.entries(dict || {})?.forEach(([name, value]) => this.setSettingByName(name, value));
     }
 
-    static enumToSettingOptionArray(obj: any, filter: (v) => boolean = () => true) {
-        return GameHelper.enumStrings(obj).filter(filter).map((val) => new SettingOption(camelCaseToString(val), `${obj[val]}`));
+    static enumToSettingOptionArray<T extends Record<string, unknown>>(obj: T, filter: (v) => boolean = () => true, displayNames?: Record<keyof T, string>) {
+        return GameHelper.enumStrings(obj).filter(filter).map(
+            (val) => new SettingOption(displayNames ? displayNames[val] : camelCaseToString(val), `${obj[val]}`),
+        );
     }
 
     static enumToNumberSettingOptionArray(obj: any, filter: (v) => boolean = () => true) {
         return GameHelper.enumStrings(obj).filter(filter).map((val) => new SettingOption(camelCaseToString(val), obj[val]));
+    }
+
+    static selectOptionsToSettingOptions<T>(opts: Array<{ name: string, value: T}>) {
+        return opts.map(({ name, value }) => new SettingOption(camelCaseToString(name), value));
     }
 
     static saveDefault() {

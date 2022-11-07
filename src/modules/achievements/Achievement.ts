@@ -6,6 +6,7 @@ import Notifier from '../notifications/Notifier';
 import AchievementRequirement from '../requirements/AchievementRequirement';
 import { LogBookTypes } from '../logbook/LogBookTypes';
 import LogEvent from '../LogEvent';
+import { createLogContent } from '../logbook/helpers';
 import AchievementCategory from './AchievementCategory';
 
 export default class Achievement {
@@ -35,7 +36,7 @@ export default class Achievement {
             });
             App.game.logbook.newLog(
                 LogBookTypes.ACHIEVE,
-                `Earned "${this.name}".`,
+                createLogContent.earnedAchievement({ name: this.name }),
             );
             this.unlocked = true;
             // TODO: refilter within achievement bonus

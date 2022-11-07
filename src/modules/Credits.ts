@@ -122,6 +122,7 @@ export const SpriteCredits: Credit[] = [
             'Recolours of Duncapham\'s sprite revamps',
             'Sounds for Wanderer/Roamer',
             'Sounds for BF finish & empty queue',
+            'Dynamic BG Shiny Meltan/Melmetal',
         ],
         // Notes: Made specifically for PokéClicker.
     },
@@ -436,6 +437,16 @@ export const SpriteCredits: Credit[] = [
         // Notes: Permission given on image page if credited.
     },
     {
+        name: 'Larryturbo',
+        link: 'https://www.deviantart.com/larryturbo',
+        image: 'https://a.deviantart.net/avatars-big/l/a/larryturbo.png',
+        resources: [
+            'Dynamic BG Meltan',
+            'Dynamic BG Melmetal',
+        ],
+        // Notes: Permission given on image page if credited.
+    },
+    {
         name: 'Leaf',
         link: 'https://twitter.com/Leafalie',
         resources: [
@@ -549,6 +560,13 @@ export const SpriteCredits: Credit[] = [
         ],
     },
     {
+        name: 'SageDeoxys, Wolfang62, LarryTurbo, tammyclaydon',
+        link: 'https://www.pokecommunity.com/showthread.php?t=474312',
+        resources: [
+            'Dynamic BG Galar (Gen 8) sprites',
+        ],
+    },
+    {
         name: 'Sandi315',
         link: 'https://www.reddit.com/user/Sandi315/',
         resources: [
@@ -570,6 +588,7 @@ export const SpriteCredits: Credit[] = [
         link: 'https://discordapp.com/users/824384977633411082',
         resources: [
             'Bede overworld image',
+            'Camouflaged Kecleon image',
             'Cissy',
             'Detective Pikachu',
             'Detective Raichu',
@@ -633,6 +652,8 @@ export const SpriteCredits: Credit[] = [
         image: 'https://a.deviantart.net/avatars-big/w/o/wolfang62.jpg',
         resources: [
             'Overworld Hop',
+            'Dynamic BG Meltan',
+            'Dynamic BG Melmetal',
         ],
         // Notes: Permission given on image page if credited.
     },
