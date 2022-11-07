@@ -196,11 +196,11 @@ class GameController {
                 }
                 if (isNumberKey) {
                     if (numberKey === 0) {
-                        ItemList.SmallRestore.use();
+                        ItemList.SmallRestore.use(1);
                     } else if (numberKey === 1) {
-                        ItemList.MediumRestore.use();
+                        ItemList.MediumRestore.use(1);
                     } else if (numberKey === 2) {
-                        ItemList.LargeRestore.use();
+                        ItemList.LargeRestore.use(1);
                     }
                     return e.preventDefault();
                 }
@@ -472,10 +472,6 @@ class GameController {
         });
     }
 }
-
-$(document).ready(() => {
-    $('#pokedexModal').on('show.bs.modal', PokedexHelper.updateList);
-});
 
 // when stacking modals allow scrolling after top modal hidden
 $(document).on('hidden.bs.modal', '.modal', () => {

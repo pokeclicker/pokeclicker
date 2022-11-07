@@ -17,7 +17,7 @@
                         <label>Pokémon</label>
                         <select autocomplete="off" class="custom-select" onchange="App.game.profile.pokemon(+this.value), App.game.profile.pokemonShiny(false), App.game.profile.pokemonFemale(false)">
                             <!-- ko foreach: App.game.party.caughtPokemon.sort((a, b) => a.id - b.id) -->
-                            <option data-bind="attr: { value: $data.id, selected: App.game.profile.pokemon() === $data.id }, text: '#'+($data.id > 0 ? Math.floor($data.id) + '' : '???').padStart(3, 0)+' '+$data.name">Pokemon</option>
+                            <option data-bind="attr: { value: $data.id, selected: App.game.profile.pokemon() === $data.id }, text: '#'+($data.id > 0 ? Math.floor($data.id) + '' : '???').padStart(3, 0)+' '+$data.displayName">Pokemon</option>
                             <!-- /ko -->
                         </select>
                     </div>

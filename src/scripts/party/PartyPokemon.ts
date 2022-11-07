@@ -36,12 +36,14 @@ class PartyPokemon implements Saveable {
     };
 
     // Saveable observables
+    // Consider the Real evolution challenge before adding stuff here
     _breeding: KnockoutObservable<boolean>;
     _shiny: KnockoutObservable<boolean>;
     _level: KnockoutObservable<number>;
     _attackBonusPercent: KnockoutObservable<number>;
     _attackBonusAmount: KnockoutObservable<number>;
     _category: KnockoutObservable<number>;
+    _displayName: KnockoutObservable<string>;
     _pokerus: KnockoutObservable<GameConstants.Pokerus>;
     proteinsUsed: KnockoutObservable<number>;
     _effortPoints: KnockoutObservable<number>;
@@ -64,6 +66,7 @@ class PartyPokemon implements Saveable {
         this._attackBonusPercent = ko.observable(0).extend({ numeric: 0 });
         this._attackBonusAmount = ko.observable(0).extend({ numeric: 0 });
         this._category = ko.observable(0).extend({ numeric: 0 });
+        this._displayName = PokemonHelper.displayName(name);
         this._pokerus = ko.observable(GameConstants.Pokerus.Uninfected).extend({ numeric: 0 });
         this._effortPoints = ko.observable(0).extend({ numeric: 0 });
         this.evs = ko.pureComputed(() => {
@@ -81,7 +84,7 @@ class PartyPokemon implements Saveable {
                     type: NotificationConstants.NotificationOption.info,
                     setting: NotificationConstants.NotificationSetting.General.pokerus,
                 });
-                App.game.logbook.newLog(LogBookTypes.NEW, `${this.name} has become Resistant to Pokérus.`);
+                App.game.logbook.newLog(LogBookTypes.NEW, createLogContent.resistantToPokerus({ pokemon: this.name }));
             }
         });
         this._attack = ko.pureComputed(() => this.calculateAttack());
@@ -449,5 +452,9 @@ class PartyPokemon implements Saveable {
 
     set category(index: number) {
         this._category(index);
+    }
+
+    get displayName(): string {
+        return this._displayName();
     }
 }
