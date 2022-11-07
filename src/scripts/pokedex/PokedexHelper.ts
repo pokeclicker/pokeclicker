@@ -99,13 +99,9 @@ class PokedexHelper {
             if (!alreadyCaught && pokemon.id != Math.floor(pokemon.id)) {
                 return false;
             }
-            // Alternate forms that are caught without base form
-            if (!alreadyCaught && pokemon.id == Math.floor(pokemon.id) && ((pokemon.id + 0.01) || (pokemon.id + 0.1)) != null) {
-                for (let i = 1; i <= 99; i++) {
-                    if (App.game.party.alreadyCaughtPokemon(pokemon.id + (0.01 * i))) {
-                        return false;
-                    }
-                }
+            // Hide uncaught base forms if alternative form is caught
+            if (!alreadyCaught && pokemon.id == Math.floor(pokemon.id) && App.game.party._caughtPokemon().some((p) => Math.floor(p.id) == pokemon.id)) {
+                return false;
             }
 
             const caughtShiny = PokedexFilters.caughtShiny.value();
