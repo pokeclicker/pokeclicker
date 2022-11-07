@@ -1282,7 +1282,9 @@ class Farming implements Feature {
                 setting: NotificationConstants.NotificationSetting.Farming.berry_discovered,
                 sound: NotificationConstants.NotificationSound.Farming.berry_discovered,
             });
-            App.game.logbook.newLog(LogBookTypes.NEW, `You've registered the ${BerryType[berry]} Berry in your BerryDex!`);
+            App.game.logbook.newLog(
+                LogBookTypes.NEW,
+                createLogContent.registeredBerry({ berry: BerryType[berry] }));
             this.unlockedBerries[berry](true);
         }
     }

@@ -4995,7 +4995,7 @@ const CirchesterHop = new NPC('Hop', [
     'Perhaps when their duty was completed, they went into some kind of sleep?',
 ], {
     image: 'assets/images/gymLeaders/Hop.png',
-    requirement: new MultiRequirement([new TemporaryBattleRequirement('Hop7'), new QuestLineStepCompletedRequirement('The Darkest Day', 6, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new TemporaryBattleRequirement('Hop 7'), new QuestLineStepCompletedRequirement('The Darkest Day', 6, GameConstants.AchievementOption.less)]),
 });
 
 const CirchesterSonia = new NPC('Sonia', [
@@ -5004,7 +5004,7 @@ const CirchesterSonia = new NPC('Sonia', [
     'I think I’ll have to look more into the history of the Slumbering Weald.',
 ], {
     image: 'assets/images/npcs/Sonia.png',
-    requirement: new MultiRequirement([new TemporaryBattleRequirement('Hop7'), new QuestLineStepCompletedRequirement('The Darkest Day', 6, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new TemporaryBattleRequirement('Hop 7'), new QuestLineStepCompletedRequirement('The Darkest Day', 6, GameConstants.AchievementOption.less)]),
 });
 
 const CirchesterGuitarist = new NPC('Guitarist Justin', [
@@ -5513,7 +5513,7 @@ TownList['Slumbering Weald'] = new Town(
     GameConstants.GalarSubRegions.SouthGalar,
     [TemporaryBattleList.Mirages, new MoveToDungeon(dungeonList['Slumbering Weald Shrine'])],
     {
-        requirements: [new TemporaryBattleRequirement('Hop1')],
+        requirements: [new TemporaryBattleRequirement('Hop 1')],
     }
 );
 TownList.Wedgehurst = new Town(
@@ -5540,7 +5540,7 @@ TownList.Motostoke = new Town(
     'Motostoke',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.SouthGalar,
-    [TemporaryBattleList.Marnie1, TemporaryBattleList['Rampaging Torkoal'], MotostokeShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Motostoke), new BattleCafe()],
+    [TemporaryBattleList['Marnie 1'], TemporaryBattleList['Rampaging Torkoal'], MotostokeShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Motostoke), new BattleCafe()],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 6)],
         npcs: [BattleCafeMaster, MotostokeArtist],
@@ -5562,7 +5562,7 @@ TownList.Hulbury = new Town(
     GameConstants.GalarSubRegions.SouthGalar,
     [TemporaryBattleList['Rampaging Gyarados'], HulburyShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Hulbury)],
     {
-        requirements: [new TemporaryBattleRequirement('Hop4')],
+        requirements: [new TemporaryBattleRequirement('Hop 4')],
         npcs: [Meteorologist],
     }
 );
@@ -5613,7 +5613,7 @@ TownList.Spikemuth = new Town(
     GameConstants.GalarSubRegions.NorthGalar,
     [TemporaryBattleList['Gym Leader Marnie'], SpikemuthShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Spikemuth)],
     {
-        requirements: [new TemporaryBattleRequirement('Marnie2')],
+        requirements: [new TemporaryBattleRequirement('Marnie 2')],
         npcs: [TeamYellGrunts],
     }
 );
@@ -5695,7 +5695,7 @@ TownList['Slumbering Weald Shrine'] = new DungeonTown(
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.SouthGalar,
     [new QuestLineStepCompletedRequirement('The Darkest Day', 12)],
-    [TemporaryBattleList.Hop8, TemporaryBattleList.Sordward1, TemporaryBattleList.Shielbert1],
+    [TemporaryBattleList['Hop 8'], TemporaryBattleList['Sordward 1'], TemporaryBattleList['Shielbert 1']],
     {
         npcs: [SlumberingHop1, SlumberingHop2, SordwardShielbert1],
     }
@@ -5705,14 +5705,14 @@ TownList['Galar Mine'] = new DungeonTown(
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.SouthGalar,
     [new RouteKillRequirement(10, GameConstants.Region.galar, 12)],
-    [TemporaryBattleList.Bede1]
+    [TemporaryBattleList['Bede 1']]
 );
 TownList['Galar Mine No. 2'] = new DungeonTown(
     'Galar Mine No. 2',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.SouthGalar,
     [new GymBadgeRequirement(BadgeEnums.Galar_Water)],
-    [TemporaryBattleList.Bede2]
+    [TemporaryBattleList['Bede 2']]
 );
 TownList['Glimwood Tangle'] = new DungeonTown(
     'Glimwood Tangle',
@@ -5735,7 +5735,7 @@ TownList['Energy Plant'] = new DungeonTown(
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.NorthGalar,
     [new QuestLineStepCompletedRequirement('The Darkest Day', 14)],
-    [TemporaryBattleList.Eternatus, TemporaryBattleList.Sordward2, TemporaryBattleList.Shielbert2, TemporaryBattleList['Rampaging Zacian'], TemporaryBattleList['Rampaging Zamazenta'], TemporaryBattleList['The Darkest Day']],
+    [TemporaryBattleList.Eternatus, TemporaryBattleList['Sordward 2'], TemporaryBattleList['Shielbert 2'], TemporaryBattleList['Rampaging Zacian'], TemporaryBattleList['Rampaging Zamazenta'], TemporaryBattleList['The Darkest Day']],
     {
         npcs: [EnergyPlantRose, SordwardShielbert3, SordwardShielbert4, Piers, EnergyPlantHop],
     }
@@ -5768,7 +5768,7 @@ TownList['Warm-Up Tunnel'] = new DungeonTown(
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.IsleofArmor,
     [new RouteKillRequirement(10, GameConstants.Region.galar, 38)],
-    [TemporaryBattleList.Klara2, TemporaryBattleList.Avery2],
+    [TemporaryBattleList['Klara 2'], TemporaryBattleList['Avery 2']],
     {
         npcs: [Klara1, Avery1],
     }
