@@ -99,6 +99,10 @@ class PokedexHelper {
             if (!alreadyCaught && pokemon.id != Math.floor(pokemon.id)) {
                 return false;
             }
+            // Hide uncaught base forms if alternative form is caught
+            if (!alreadyCaught && pokemon.id == Math.floor(pokemon.id) && App.game.party._caughtPokemon().some((p) => Math.floor(p.id) == pokemon.id)) {
+                return false;
+            }
 
             const caughtShiny = PokedexFilters.caughtShiny.value();
             // Only uncaught

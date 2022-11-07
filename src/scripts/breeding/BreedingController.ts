@@ -206,7 +206,12 @@ class BreedingController {
             case 'baseAttack': return `Base Attack: ${pokemon.baseAttack.toLocaleString('en-US')}`;
             case 'eggSteps': return `Egg Steps: ${App.game.breeding.getSteps(pokemonData.eggCycles).toLocaleString('en-US')}`;
             case 'timesHatched': return `Hatches: ${App.game.statistics.pokemonHatched[pokemonData.id]().toLocaleString('en-US')}`;
-            case 'breedingEfficiency': return `Efficiency: ${((pokemon.baseAttack * (GameConstants.BREEDING_ATTACK_BONUS / 100) + pokemon.proteinsUsed()) * BreedingController.calculateRegionalMultiplier(pokemon) / pokemonMap[pokemon.name].eggCycles).toLocaleString('en-US', { maximumSignificantDigits: 2 })}`;
+            case 'breedingEfficiency': return `Efficiency: ${
+                (
+                    (pokemon.baseAttack * (GameConstants.BREEDING_ATTACK_BONUS / 100) + pokemon.proteinsUsed())
+                * BreedingController.calculateRegionalMultiplier(pokemon) / pokemonMap[pokemon.name].eggCycles
+                * (Settings.getSetting('breedingIncludeEVBonus').observableValue() ? pokemon.calculateEVAttackBonus() : 1)
+                ).toLocaleString('en-US', { maximumSignificantDigits: 2 })}`;
             case 'stepsPerAttack': return `Steps/Att: ${(App.game.breeding.getSteps(pokemonMap[pokemon.name].eggCycles) / ((pokemon.baseAttack * (GameConstants.BREEDING_ATTACK_BONUS / 100) + pokemon.proteinsUsed()) * BreedingController.calculateRegionalMultiplier(pokemon))).toLocaleString('en-US', { maximumSignificantDigits: 2 })}`;
             case 'dexId': return `#${pokemon.id <= 0 ? '???' : Math.floor(pokemon.id).toString().padStart(3,'0')}`;
             case 'proteins': return `Proteins: ${pokemon.proteinsUsed()}`;
