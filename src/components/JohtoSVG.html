@@ -1,5 +1,8 @@
 <g data-bind='visible: player.region == GameConstants.Region.johto'>
-    <image width="1600" height="960" xlink:href="assets/images/johto.png" href="assets/images/johto.png"></image>
+    <image width="1600" height="960" data-bind="attr: {
+        'xlink:href':'assets/images/johto.png?v=$VERSION',
+        href:'assets/images/johto.png?v=$VERSION'
+    }"></image>
 
     <!-- ------ -->
     <!-- ROUTES -->
@@ -85,37 +88,19 @@
     <!--Route 33-->
     <%- include('templates/mapRoute',
         { route: 33, region: 1
-        , width: 13, height: 3
-        , x: 32, y: 55
+        , width: 12, height: 3
+        , x: 33, y: 55
         })
      %>
 
     <!--Route 34-->
     <%- include('templates/mapRoute',
         { route: 34, region: 1
-        , width: 9, height: 3
+        , width: 11, height: 3
         , x: 24, y: 41
         , rotate: true
         })
      %>
-     <!--Extra bit of Route 34-->
-     <%- include('templates/mapRoute',
-         { route: 34, region: 1
-         , width: 5, height: 3
-         , x: 24, y: 53
-         , noText: true
-         , rotate: true
-         })
-      %>
-      <!--Extra bit of Route 34-->
-      <%- include('templates/mapRoute',
-          { route: 34, region: 1
-          , width: 3, height: 1
-          , x: 27, y: 55
-          , noText: true
-          , rotate: true
-          })
-       %>
 
     <!--Route 35-->
     <%- include('templates/mapRoute',
@@ -348,7 +333,8 @@
     <!--Azalea Town-->
     <%- include('templates/mapTown',
         { name: "Azalea Town"
-        , x: 28, y: 54
+        , x: 29, y: 54
+        , width: 4, height: 4
         })
      %>
 
@@ -359,12 +345,13 @@
         , width: 5, height: 4.5
         })
      %>
-    
+
     <!--Goldenrod City Extension-->
     <%- include('templates/mapTown',
         { name: "Goldenrod City"
         , x: 23, y: 36
         , width: 5, height: 5
+        , isExtension: true
         })
      %>
 
@@ -373,6 +360,7 @@
         { name: "Goldenrod City"
         , x: 22, y: 35
         , width: 3, height: 1
+        , isExtension: true
         })
      %>
 
@@ -381,6 +369,7 @@
         { name: "Goldenrod City"
         , x: 27, y: 31
         , width: 3, height: 0.5
+        , isExtension: true
         })
      %>
 
@@ -402,6 +391,7 @@
      <%- include('templates/mapTown',
          { name: "Olivine City"
          , x: 14, y: 19
+         , isExtension: true
          })
       %>
 
@@ -429,24 +419,17 @@
     <!--Indigo Plateau 2.0-->
     <%- include('templates/mapTown',
         { name: "Indigo Plateau Johto"
-        , x: 89, y: 3
-        , width: 11, height: 8
+        , x: 90, y: 4
+        , width: 9, height: 5.5
         })
      %>
 
     <!--Indigo Plateau 2.0 Extension-->
     <%- include('templates/mapTown',
         { name: "Indigo Plateau Johto"
-        , x: 92, y: 11
-        , width: 5, height: 3
-        })
-     %>
-
-    <!--Indigo Plateau 2.0 Extension-->
-    <%- include('templates/mapTown',
-        { name: "Indigo Plateau Johto"
-        , x: 93, y: 14
-        , width: 3, height: 5
+        , x: 93, y: 9.5
+        , width: 3, height: 9.5
+        , isExtension: true
         })
      %>
 
@@ -469,6 +452,7 @@
         { name: "Sprout Tower"
         , x: 45, y: 18
         , width: 3, height: 1
+        , isExtension: true
         })
     %>
 
@@ -491,14 +475,15 @@
     <!--Slowpoke Well-->
     <%- include('templates/mapDungeon',
         { name: "Slowpoke Well"
-        , x: 32, y: 52
+        , x: 34, y: 52
         })
      %>
 
     <!--Ilex Forest-->
     <%- include('templates/mapDungeon',
         { name: "Ilex Forest"
-        , x: 24, y: 50
+        , x: 22, y: 52
+        , width: 7, height: 7
         })
      %>
 
@@ -514,6 +499,7 @@
          { name: "Burned Tower"
          , x: 26, y: 9
          , width: 6, height: 1
+         , isExtension: true
          })
       %>
 
@@ -529,6 +515,7 @@
         { name: "Tin Tower"
          , x: 36, y: 9
          , width: 6, height: 1
+         , isExtension: true
          })
       %>
 
@@ -539,19 +526,30 @@
         })
      %>
 
-    <!--Mt Mortar-->
+    <!--Mt. Mortar-->
     <%- include('templates/mapDungeon',
-        { name: "Mt Mortar"
+        { name: "Mt. Mortar"
         , x: 48, y: 8
         })
      %>
-     <!--Mt Mortar Extension-->
+     <!--Mt. Mortar Extension-->
      <%- include('templates/mapDungeon',
-         { name: "Mt Mortar"
+         { name: "Mt. Mortar"
          , x: 52, y: 6
          , width: 2, height: 4
+         , isExtension: true
          })
       %>
+
+    <!--Team Rocket's Hideout-->
+    <%- include('templates/mapDungeon',
+        { name: "Team Rocket's Hideout"
+        , x: 55, y: 9
+        , height: 4
+        , moveToTown: "Mahogany Town"
+        , invisible: true
+        })
+    %>
 
     <!--Radio Tower-->
     <%- include('templates/mapDungeon',
@@ -566,6 +564,7 @@
         { name: "Radio Tower"
         , x: 25, y: 29
         , width: 2, height: 2.5
+        , isExtension: true
         })
      %>
 
@@ -580,6 +579,7 @@
          { name: "Ice Path"
          , x: 73, y: 11
          , width: 1, height: 1
+         , isExtension: true
          })
       %>
 
@@ -594,6 +594,7 @@
          { name: "Dark Cave"
          , x: 70, y: 30
          , width: 1, height: 1
+         , isExtension: true
          })
       %>
      <!--Dark Cave Extension-->
@@ -604,6 +605,13 @@
          })
       %>
 
+    <!--Tohjo Falls-->
+    <%- include('templates/mapDungeon',
+        { name: "Tohjo Falls"
+        , x: 77, y: 39
+        })
+    %>
+
     <!--Victory Road Johto-->
     <%- include('templates/mapDungeon',
         { name: "Victory Road Johto"
@@ -611,18 +619,19 @@
         })
      %>
 
-    <!--Mt Silver-->
+    <!--Mt. Silver-->
     <%- include('templates/mapDungeon',
-        { name: "Mt Silver"
+        { name: "Mt. Silver"
         , x: 74, y: 31
         , width: 7, height: 5
         })
      %>
-     <!--Mt Silver Extension-->
+     <!--Mt. Silver Extension-->
      <%- include('templates/mapDungeon',
-         { name: "Mt Silver"
+         { name: "Mt. Silver"
          , x: 78, y: 36
          , width: 1, height: 1
+         , isExtension: true
          })
       %>
 
@@ -658,7 +667,7 @@
      %>
 
      <%- include('templates/mapPOI',
-        { name: "Pokemon Day Care"
+        { name: "Pokémon Day Care"
         , x: 28, y: 38
         , width: 4, height: 4
         , databind: "click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? 'completed' : 'locked' }"
@@ -684,5 +693,55 @@
          , image: "assets/images/map/blimp_pikachu.png"
          })
      %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Sudowoodo"
+         , x: 32.5, y: 17
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Sudowoodo'].protectedOnclick(), attr: { class: TemporaryBattleList['Sudowoodo'].isUnlocked() ? '' : 'locked' }"
+         , visible:  "TemporaryBattleList['Sudowoodo'] && TemporaryBattleList['Sudowoodo'].isVisible()"
+         , image: "assets/images/map/sudowoodooverworld.png"
+         })
+     %>
+
+    <%- include('templates/mapOverlay',
+        { name: "Suicune"
+        , x: 8, y: 39
+        , width: 3, height: 4
+        , databind: "click: () => TemporaryBattleList['Suicune 1'].protectedOnclick()"
+        , visible:  "TemporaryBattleList['Suicune 1'] && TemporaryBattleList['Suicune 1'].isVisible()"
+        , image: "assets/images/map/suicune.png"
+        })
+    %>
+
+    <%- include('templates/mapOverlay',
+        { name: "Eusine"
+        , x: 8, y: 39
+        , width: 3, height: 4
+        , databind: "click: () => TemporaryBattleList.Eusine.protectedOnclick()"
+        , visible:  "TemporaryBattleList['Eusine'] && TemporaryBattleList['Eusine'].isVisible()"
+        , image: "assets/images/map/eusine.png"
+        })
+    %>
+
+    <%- include('templates/mapOverlay',
+        { name: "Suicune"
+        , x: 44, y: 9
+        , width: 3, height: 4
+        , databind: "click: () => TemporaryBattleList['Suicune 2'].protectedOnclick()"
+        , visible:  "TemporaryBattleList['Suicune 2'] && TemporaryBattleList['Suicune 2'].isVisible()"
+        , image: "assets/images/map/suicune.png"
+        })
+    %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Ash Ketchum"
+         , x: 0, y: 21
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Ash Ketchum Johto'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Ash Ketchum Johto'] && TemporaryBattleList['Ash Ketchum Johto'].isVisible()"
+         , image: "assets/images/map/ashketchumoverworld.png"
+         })
+    %>
 
 </g>

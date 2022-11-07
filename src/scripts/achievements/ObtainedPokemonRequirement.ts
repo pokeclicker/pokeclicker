@@ -3,8 +3,9 @@
 class ObtainedPokemonRequirement extends Requirement {
     public pokemonID: number;
 
-    constructor(pokemon: PokemonListData, value = 1, option: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
-        super(value, option);
+    constructor(pokemon: PokemonListData, uncaught = false) {
+        const option = uncaught ? GameConstants.AchievementOption.less : GameConstants.AchievementOption.more;
+        super(1, option);
         this.pokemonID = pokemon.id;
     }
 
@@ -13,6 +14,8 @@ class ObtainedPokemonRequirement extends Requirement {
     }
 
     public hint(): string {
-        return `${pokemonMap[this.pokemonID].name} needs to be caught.`;
+        return this.option == GameConstants.AchievementOption.more ?
+            `${pokemonMap[this.pokemonID].name} needs to be caught.` :
+            `${pokemonMap[this.pokemonID].name} cannot be caught yet.`;
     }
 }

@@ -3,7 +3,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 data-bind="tooltip: { title: 'As you earn achievements, you gain up to 100% (per region) more Click Attack, Money, Dungeon Tokens and Experience from all sources.', trigger: 'hover', placement:'right' }">Achievements Bonus: <u class="text-primary" data-bind="text: AchievementHandler.achievementBonusPercent()"></u></h5>
+                <h5 data-bind="tooltip: { title: 'As you earn achievements, you gain up to: 150% (global), 100% (per region), and 50% (per special subregion). Earning bonuses to Click Attack, Flute Effects, Pokédollar / Dungeon Token gains, and Experience earned from all sources.', trigger: 'hover', placement:'right' }">Achievements Bonus: <u class="text-primary" data-bind="text: AchievementHandler.achievementBonusPercent()"></u></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -14,7 +14,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                     <div class="tab-pane active">
                         <div class="text-left">
                             <div class="form-row">
-                                <div class="form-group col-md-4 col-4">
+                                <div class="form-group col-md-3 col-6">
                                     <label>Status</label>
                                     <select name="achievementsStatus" class="custom-select" onchange="AchievementHandler.filter.status(this.value), Settings.setSettingByName(this.name, this.value)">
                                         <!-- ko foreach: Settings.getSetting('achievementsStatus').options -->
@@ -22,7 +22,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                                         <!-- /ko -->
                                     </select>
                                 </div>
-                                <div class="form-group col-md-4 col-4">
+                                <div class="form-group col-md-3 col-6">
                                     <label>Type</label>
                                     <select name="achievementsType" class="custom-select" onchange="AchievementHandler.filter.type(this.value), Settings.setSettingByName(this.name, this.value)">
                                         <!-- ko foreach: Settings.getSetting('achievementsType').options.filter(r => r.value !== -1) -->
@@ -30,13 +30,31 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                                         <!-- /ko -->
                                     </select>
                                 </div>
-                                <div class="form-group col-md-4 col-4">
-                                    <label>Region</label>
-                                    <select name="achievementsRegion" class="custom-select" onchange="AchievementHandler.filter.region(this.value), Settings.setSettingByName(this.name, this.value)">
-                                        <!-- ko foreach: Settings.getSetting('achievementsRegion').options.filter(r => r.value <= player.highestRegion()) -->
-                                        <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('achievementsRegion').value === $data.value }, text: $data.text">Region</option>
+                                <div class="form-group col-md-3 col-6">
+                                    <label>Category</label>
+                                    <select name="achievementsCategory" class="custom-select" onchange="AchievementHandler.filter.category(this.value), Settings.setSettingByName(this.name, this.value)">
+                                        <!-- ko foreach: Settings.getSetting('achievementsCategory').options.filter(r => r.value == 'all' || AchievementHandler.getAchievementCategories().find((c) => c.name == r.value).isUnlocked()) -->
+                                        <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('achievementsCategory').value === $data.value }, text: $data.text">Category</option>
                                         <!-- /ko -->
                                     </select>
+                                </div>
+                                <div class="form-group col-md-3 col-6">
+                                    <label>Sort</label>
+                                    <div class="input-group" data-bind="with: Settings.getSetting('achievementSort')">
+                                        <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, AchievementSortOptions[AchievementSortOptions[this.value]])"
+                                                data-bind="foreach: $data.options, attr: {name}, selectedOptions: [$data.observableValue()]">
+                                            <option data-bind="text: $data.text, value: $data.value"></option>
+                                        </select>
+                                        <div class="input-group-append bg-primary text-light">
+                                            <label for="achievementSortDirection" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;" data-bind="
+                                            text: Settings.getSetting('achievementSortDirection').observableValue() ? '⥄' : '⥂',
+                                            tooltip: { title: Settings.getSetting('achievementSortDirection').observableValue() ? 'Descending (highest value first)' : 'Ascending (lowest value first)', trigger: 'hover', placement:'top', html: true }
+                                            ">⥂</label>
+                                            <input id="achievementSortDirection" style="vertical-align: middle" class="hidden" type='checkbox'
+                                                   data-bind="checked: Settings.getSetting('achievementSortDirection').observableValue()"
+                                                   onchange="Settings.setSettingByName('achievementSortDirection', this.checked)"/>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -102,8 +120,8 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                 <small><span data-bind="text: description">Description</span></small>
             </td>
 
-            <td style="vertical-align:middle;"><span data-bind="text: getProgress()">1</span>/<span
-                    data-bind="text: property.requiredValue">2</span>
+            <td style="vertical-align:middle;"><span data-bind="text: getProgress().toLocaleString('en-US')">1</span>/<span
+                    data-bind="text: property.requiredValue.toLocaleString('en-US')">2</span>
             </td>
             <td style="vertical-align:middle;"><span data-bind="text: getProgressPercentage()"></span>%</td>
 

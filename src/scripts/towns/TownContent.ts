@@ -24,6 +24,9 @@ abstract class TownContent {
     }
 
     public protectedOnclick(): void {
+        if (!this.isVisible()) {
+            return;
+        }
         const reqsList = [];
         this.requirements?.forEach(requirement => {
             if (!requirement.isCompleted()) {
@@ -32,7 +35,7 @@ abstract class TownContent {
         });
         if (reqsList.length) {
             Notifier.notify({
-                message: `You don't have access yet.\n${reqsList.join('\n')}`,
+                message: `You don't have access yet.\n<i>${reqsList.join('\n')}</i>`,
                 type: NotificationConstants.NotificationOption.warning,
             });
         } else {
@@ -40,7 +43,7 @@ abstract class TownContent {
         }
     }
 
-    constructor(requirements: (Requirement | OneFromManyRequirement)[] = []) {
+    constructor(requirements: Requirement[] = []) {
         this.requirements = requirements;
     }
 }
@@ -100,10 +103,9 @@ class NextRegionTownContent extends TownContent {
 }
 
 class MoveToDungeon extends TownContent {
-    dungeon: Dungeon;
-    constructor(dungeon: Dungeon) {
+
+    constructor(private dungeon: Dungeon, private visibleRequirement: Requirement = undefined) {
         super([]);
-        this.dungeon = dungeon;
     }
 
     public cssClass() {
@@ -113,7 +115,7 @@ class MoveToDungeon extends TownContent {
         return this.dungeon.name;
     }
     public isVisible(): boolean {
-        return true;
+        return this.visibleRequirement?.isCompleted() ?? true;
     }
     public onclick(): void {
         MapHelper.moveToTown(this.dungeon.name);
@@ -122,16 +124,7 @@ class MoveToDungeon extends TownContent {
         return TownList[this.dungeon.name].isUnlocked();
     }
     public areaStatus(): areaStatus {
-        const dungeonAccess = MapHelper.calculateTownCssClass(this.dungeon.name);
-        switch (dungeonAccess) {
-            // if dungeon completed or locked, ignore it
-            case 'completed':
-            case 'locked':
-                return areaStatus.completed;
-            // Return the dungeons state
-            default:
-                return areaStatus[dungeonAccess];
-        }
+        return areaStatus[MapHelper.calculateTownCssClass(this.dungeon.name)];
     }
     public clears() {
         if (!QuestLineHelper.isQuestLineCompleted('Tutorial Quests')) {

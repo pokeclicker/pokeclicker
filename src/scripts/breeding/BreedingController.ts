@@ -1,4 +1,5 @@
-///<reference path="../../declarations/enums/CaughtStatus.d.ts"/>
+/// <reference path="../../declarations/settings/BreedingFilters.d.ts" />
+/// <reference path="../../declarations/enums/CaughtStatus.d.ts"/>
 /// <reference path="../../declarations/breeding/EggType.d.ts" />
 
 class BreedingController {
@@ -96,7 +97,7 @@ class BreedingController {
             $('#breedingModal').modal('show');
         } else {
             Notifier.notify({
-                message: 'You do not have access to the Day Care yet.\n<i>Clear route 5 first</i>',
+                message: 'You do not have access to the Day Care yet.\n<i>Clear Route 5 first.</i>',
                 type: NotificationConstants.NotificationOption.warning,
             });
         }
@@ -105,10 +106,10 @@ class BreedingController {
     public static getEggImage(egg: Egg): string {
         let eggType = EggType[egg.type].toLowerCase();
         if (eggType == 'pokemon') {
-            const dataPokemon: DataPokemon = PokemonHelper.getPokemonByName(egg.pokemon);
+            const dataPokemon: DataPokemon = PokemonHelper.getPokemonById(egg.pokemon);
             eggType = String(PokemonType[dataPokemon.type1]).toLowerCase();
         } else if (eggType == 'fossil') {
-            eggType = GameConstants.PokemonToFossil[egg.pokemon];
+            eggType = GameConstants.PokemonToFossil[PokemonHelper.getPokemonById(egg.pokemon).name];
         }
         return `assets/images/breeding/${eggType}.png`;
     }
@@ -134,16 +135,6 @@ class BreedingController {
         return SeededRand.fromArray(this.spotTypes);
     }
 
-    public static filter = {
-        search: ko.observable(new RegExp('', 'i')),
-        category: ko.observable(-1).extend({ numeric: 0 }),
-        shinyStatus: ko.observable(-1).extend({ numeric: 0 }),
-        // All = -2
-        type1: ko.observable(-2).extend({ numeric: 0 }),
-        type2: ko.observable(-2).extend({ numeric: 0 }),
-        region: ko.observable(-2).extend({ numeric: 0 }),
-    }
-
     public static visible(partyPokemon: PartyPokemon) {
         return ko.pureComputed(() => {
             // Only breedable Pokemon
@@ -151,34 +142,39 @@ class BreedingController {
                 return false;
             }
 
-            if (!BreedingController.filter.search().test(partyPokemon.name)) {
+            if (!BreedingFilters.search.value().test(partyPokemon.displayName)) {
                 return false;
             }
 
             // Check based on category
-            if (BreedingController.filter.category() >= 0) {
-                if (partyPokemon.category !== BreedingController.filter.category()) {
+            if (BreedingFilters.category.value() >= 0) {
+                if (partyPokemon.category !== BreedingFilters.category.value()) {
                     return false;
                 }
             }
 
             // Check based on shiny status
-            if (BreedingController.filter.shinyStatus() >= 0) {
-                if (+partyPokemon.shiny !== BreedingController.filter.shinyStatus()) {
+            if (BreedingFilters.shinyStatus.value() >= 0) {
+                if (+partyPokemon.shiny !== BreedingFilters.shinyStatus.value()) {
                     return false;
                 }
             }
 
             // Check based on native region
-            if (BreedingController.filter.region() > -2) {
-                if (PokemonHelper.calcNativeRegion(partyPokemon.name) !== BreedingController.filter.region()) {
+            if (!(2 ** PokemonHelper.calcNativeRegion(partyPokemon.name) & BreedingFilters.region.value())) {
+                return false;
+            }
+
+            // check based on Pokerus status
+            if (BreedingFilters.pokerus.value() > -1) {
+                if (partyPokemon.pokerus !== BreedingFilters.pokerus.value()) {
                     return false;
                 }
             }
 
             // Check if either of the types match
-            const type1: (PokemonType | null) = BreedingController.filter.type1() > -2 ? BreedingController.filter.type1() : null;
-            const type2: (PokemonType | null) = BreedingController.filter.type2() > -2 ? BreedingController.filter.type2() : null;
+            const type1: (PokemonType | null) = BreedingFilters.type1.value() > -2 ? BreedingFilters.type1.value() : null;
+            const type2: (PokemonType | null) = BreedingFilters.type2.value() > -2 ? BreedingFilters.type2.value() : null;
             if (type1 !== null || type2 !== null) {
                 const { type: types } = pokemonMap[partyPokemon.name];
                 if ([type1, type2].includes(PokemonType.None)) {
@@ -205,14 +201,33 @@ class BreedingController {
     public static getDisplayValue(pokemon: PartyPokemon): string {
         const pokemonData = pokemonMap[pokemon.name];
         switch (this.displayValue()) {
-            case 'attack': return `Attack: ${pokemon.attack.toLocaleString('en-US')}`;
-            case 'attackBonus': return `Attack Bonus: ${Math.floor(pokemon.baseAttack * (GameConstants.BREEDING_ATTACK_BONUS / 100) + pokemon.proteinsUsed()).toLocaleString('en-US')}`;
+            case 'attack': return `Attack: ${Math.floor(pokemon.attack * BreedingController.calculateRegionalMultiplier(pokemon)).toLocaleString('en-US')}`;
+            case 'attackBonus': return `Attack Bonus: ${Math.floor((pokemon.baseAttack * (GameConstants.BREEDING_ATTACK_BONUS / 100) + pokemon.proteinsUsed()) * BreedingController.calculateRegionalMultiplier(pokemon)).toLocaleString('en-US')}`;
             case 'baseAttack': return `Base Attack: ${pokemon.baseAttack.toLocaleString('en-US')}`;
             case 'eggSteps': return `Egg Steps: ${App.game.breeding.getSteps(pokemonData.eggCycles).toLocaleString('en-US')}`;
             case 'timesHatched': return `Hatches: ${App.game.statistics.pokemonHatched[pokemonData.id]().toLocaleString('en-US')}`;
-            case 'breedingEfficiency': return `Efficiency: ${((pokemon.baseAttack * (GameConstants.BREEDING_ATTACK_BONUS / 100) + pokemon.proteinsUsed()) / pokemonMap[pokemon.name].eggCycles).toLocaleString('en-US', { maximumSignificantDigits: 2 })}`;
-            case 'stepsPerAttack': return `Steps/Att: ${(App.game.breeding.getSteps(pokemonMap[pokemon.name].eggCycles) / (pokemon.baseAttack * (GameConstants.BREEDING_ATTACK_BONUS / 100) + pokemon.proteinsUsed())).toLocaleString('en-US', { maximumSignificantDigits: 2 })}`;
+            case 'breedingEfficiency': return `Efficiency: ${((pokemon.baseAttack * (GameConstants.BREEDING_ATTACK_BONUS / 100) + pokemon.proteinsUsed()) * BreedingController.calculateRegionalMultiplier(pokemon) / pokemonMap[pokemon.name].eggCycles).toLocaleString('en-US', { maximumSignificantDigits: 2 })}`;
+            case 'stepsPerAttack': return `Steps/Att: ${(App.game.breeding.getSteps(pokemonMap[pokemon.name].eggCycles) / ((pokemon.baseAttack * (GameConstants.BREEDING_ATTACK_BONUS / 100) + pokemon.proteinsUsed()) * BreedingController.calculateRegionalMultiplier(pokemon))).toLocaleString('en-US', { maximumSignificantDigits: 2 })}`;
             case 'dexId': return `#${pokemon.id <= 0 ? '???' : Math.floor(pokemon.id).toString().padStart(3,'0')}`;
+            case 'proteins': return `Proteins: ${pokemon.proteinsUsed()}`;
+            case 'evs': return `EVs: ${pokemon.evs()}`;
         }
     }
+
+    // Applied regional debuff
+    public static regionalAttackDebuff = ko.observable(-1);
+
+    public static calculateRegionalMultiplier(pokemon: PartyPokemon): number {
+        // Check if reginal debnuff is active
+        if (App.game.challenges.list.regionalAttackDebuff.active()) {
+            // Check if regional debuff being applied for sorting
+            if (BreedingController.regionalAttackDebuff() > -1 && PokemonHelper.calcNativeRegion(pokemon.name) !== BreedingController.regionalAttackDebuff()) {
+                return App.game.party.getRegionAttackMultiplier();
+            }
+        }
+        return 1.0;
+    }
+
+    // Queue size limit setting
+    public static queueSizeLimit = ko.observable(-1);
 }

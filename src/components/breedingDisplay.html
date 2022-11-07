@@ -18,12 +18,12 @@
                 <button class='btn btn-primary' onclick='App.game.breeding.buyEggSlot()'
                         data-bind='css: {disabled: App.game.wallet.currencies[GameConstants.Currency.questPoint]() <= App.game.breeding.nextEggSlotCost().amount}'>Unlock</button>
             </div>
-            <div data-bind="visible: $index() > App.game.breeding.eggSlots" style="margin-top: 20px;">
-                <img src="assets/images/breeding/lock.svg">
+            <div data-bind="visible: $index() > App.game.breeding.eggSlots">
+                <img class="lockedSlotImage" src="assets/images/breeding/lock.svg">
             </div>
             <div data-bind="if: App.game.breeding.hatcheryHelpers.hired()[$index()]">
               <div data-bind="with: App.game.breeding.hatcheryHelpers.hired()[$index()]">
-                <img class="hatcheryHelperImage" data-bind="attr:{ src: `assets/images/profile/trainer-${$data.trainerSprite}.png` }, 
+                <img class="hatcheryHelperImage" data-bind="attr:{ src: `assets/images/profile/trainer-${$data.trainerSprite}.png` },
                   tooltip: {
                     title: $data.tooltip(),
                     trigger: 'hover',
@@ -35,12 +35,16 @@
             <!-- ko ifnot: $data.isNone() -->
             <div style="margin-top: 20px;" class="clickable" data-bind="click: function(){ if (progress() >= 100) App.game.breeding.hatchPokemonEgg($index()) }">
                 <!-- ko if: $data.type == EggType.Fossil -->
-                <img data-bind="attr: {src: BreedingController.getEggImage($data)}, class: BreedingController.getEggCssClass($data)"/>
+                <img class="egg" data-bind="attr: {src: BreedingController.getEggImage($data)}, class: BreedingController.getEggCssClass($data)"/>
                 <!-- /ko -->
                 <!-- ko ifnot: $data.type == EggType.Fossil -->
                 <div data-bind="template: { name: 'eggSVGTemplate', data: $data}, class: BreedingController.getEggCssClass($data)"></div>
+                    <!-- ko if: $data.type == EggType.Pokemon -->
+                    <div data-bind="if: $data.partyPokemon()?.pokerus > GameConstants.Pokerus.Uninfected" style="position: absolute;right: 2px;top: -3px;">
+                        <img width="40px" src="" data-bind="attr: { src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[$data.partyPokemon()?.pokerus]}.png`}"/>
+                    </div>
+                    <!-- /ko -->
                 <!-- /ko -->
-
                 <div class="progress" data-bind='visible: progress() < 100'>
                     <div class="progress-bar bg-success" role="progressbar"
                          data-bind="attr:{ style: 'width:' + $data.progress() + '%' }"
@@ -68,8 +72,22 @@
     <!-- ko if: App.game.breeding.queueList().length -->
     <div id="hatcheryQueue" class="card-footer p-1" data-bind="foreach: App.game.breeding.queueList()">
       <div class="queuePokemon clickable bg-primary" data-bind="click: function(){ App.game.breeding.removeFromQueue($index()) }">
-        <img src="" data-bind="attr: { src: PokemonHelper.getImage(pokemonMap[$data], App.game.party.alreadyCaughtPokemon(pokemonMap[$data].id, true)) }">
+        <img src="" data-bind="attr: { src: PokemonHelper.getImage(pokemonMap[$data].id) }">
       </div>
+    </div>
+    <div id="hatcheryQueueInfo" class="card-footer p-0 small">
+        <span style="line-height: 30px;"
+            data-bind="
+                text: App.game.breeding.queueList().length + ' / ' + App.game.breeding.usableQueueSlots(),
+                tooltip: { title: BreedingController.queueSizeLimit() > -1 ? 'Queue is currently limited by your Queue Size setting.' : '', trigger: 'hover' }
+            "></span>
+        <button class="btn btn-sm btn-danger" style="position: absolute; right: 0; width: auto;"
+                data-bind="
+                    click: () => App.game.breeding.clearQueue(true),
+                    tooltip: { title: 'Remove all Pokémon from the queue.', trigger: 'hover' }
+                ">
+            Clear
+        </button>
     </div>
     <!-- /ko -->
 </div>

@@ -19,12 +19,12 @@ class GainTokensQuest extends Quest implements QuestInterface {
     }
 
     get description(): string {
-        return `Gain ${this.amount.toLocaleString('en-US')} dungeon tokens.`;
+        return `Gain ${this.amount.toLocaleString('en-US')} Dungeon Tokens.`;
     }
 
     toJSON() {
         const json = super.toJSON();
-        json['name'] = this.constructor.name;
+        json.name = this.constructor.name;
         return json;
     }
 }

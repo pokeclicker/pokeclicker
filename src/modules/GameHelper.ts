@@ -105,6 +105,15 @@ export default class GameHelper {
         return array;
     }
 
+    // Filter out any falsy values from the end of an array
+    public static filterArrayEnd(arr) {
+        let check = false;
+        return [...arr].reverse().filter((v) => {
+            check = check || !!v;
+            return check;
+        }).reverse();
+    }
+
     public static anOrA(name: string): string {
         return ['a', 'e', 'i', 'o', 'u'].includes(name[0].toLowerCase()) ? 'an' : 'a';
     }
@@ -128,6 +137,17 @@ export default class GameHelper {
         const [newMin, newMax] = testTooHigh(mid) ? [min, mid] : [mid, max];
 
         return this.binarySearch(testTooHigh, newMin, newMax);
+    }
+
+    public static chunk<T>(size: number, array: Array<T>): Array<Array<T>> {
+        let i = 0;
+        let residx = 0;
+        const res = [];
+        while (i < array.length) {
+            res[residx] = array.slice(i, i += size);
+            residx += 1;
+        }
+        return res;
     }
 
     private static getTomorrow() {

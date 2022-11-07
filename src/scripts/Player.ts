@@ -16,8 +16,6 @@
 
 class Player {
 
-    public achievementsCompleted: { [name: string]: boolean };
-
     private _route: KnockoutObservable<number>;
     private _region: KnockoutObservable<GameConstants.Region>;
     private _subregion: KnockoutObservable<number>;
@@ -26,6 +24,8 @@ class Player {
     private starter: KnockoutObservable<GameConstants.Starter>;
     private _timeTraveller = false;
     private _origins: Array<any>;
+    public regionStarters: Array<KnockoutObservable<number>>;
+    public subregionObject: KnockoutObservable<SubRegion>;
 
     constructor(savedPlayer?) {
         const saved: boolean = (savedPlayer != null);
@@ -38,7 +38,7 @@ class Player {
         if (this._lastSeen > Date.now()) {
             Notifier.notify({
                 title: 'Welcome Time Traveller!',
-                message: 'Please ensure you keep a backup of your old save as travelling through time can cause some serious problems.\n\nAny Pokemon you may have obtained in the future could cease to exist which could corrupt your save file!',
+                message: 'Please ensure you keep a backup of your old save as travelling through time can cause some serious problems.\n\nAny Pokémon you may have obtained in the future could cease to exist which could corrupt your save file!',
                 type: NotificationConstants.NotificationOption.danger,
                 timeout: GameConstants.HOUR,
             });
@@ -46,6 +46,7 @@ class Player {
         }
         this._region = ko.observable(savedPlayer._region);
         this._subregion = ko.observable(savedPlayer._subregion || 0);
+        this.subregionObject = ko.pureComputed(() => SubRegions.getSubRegionById(this._region(), this._subregion()));
         this._route = ko.observable(savedPlayer._route);
         // Check that the route is valid, otherwise set it to the regions starting route (route 0 means they are in a town)
         if (this._route() > 0 && !MapHelper.validRoute(this._route(), this._region())) {
@@ -55,7 +56,46 @@ class Player {
         this._townName = TownList[savedPlayer._townName] ? savedPlayer._townName : GameConstants.StartingTowns[this._region()];
         this._town = ko.observable(TownList[this._townName]);
         this._town.subscribe(value => this._townName = value.name);
+
         this.starter = ko.observable(savedPlayer.starter != undefined ? savedPlayer.starter : GameConstants.Starter.None);
+        this.regionStarters = new Array<KnockoutObservable<number>>();
+        if (savedPlayer.regionStarters && savedPlayer.regionStarters[0]) {
+            this.regionStarters.push(ko.observable(savedPlayer.regionStarters[0]));
+        } else {
+            switch (this.starter()) {
+                case GameConstants.Starter.None:
+                    this.regionStarters.push(ko.observable(undefined));
+                    break;
+                case GameConstants.Starter.Bulbasaur:
+                    this.regionStarters.push(ko.observable(0));
+                    break;
+                case GameConstants.Starter.Charmander:
+                    this.regionStarters.push(ko.observable(1));
+                    break;
+                case GameConstants.Starter.Squirtle:
+                    this.regionStarters.push(ko.observable(2));
+                    break;
+            }
+        }
+        for (let i = 1; i <= GameConstants.MAX_AVAILABLE_REGION; i++) {
+            if (savedPlayer.regionStarters && savedPlayer.regionStarters[i] != undefined) {
+                this.regionStarters.push(ko.observable(savedPlayer.regionStarters[i]));
+            } else if (i < (savedPlayer.highestRegion ?? 0)) {
+                this.regionStarters.push(ko.observable(0));
+            } else if (i == (savedPlayer.highestRegion ?? 0)) {
+                this.regionStarters.push(ko.observable(undefined));
+                if (this._region() != i) {
+                    this._region(i);
+                    this._subregion(0);
+                    this.route(undefined);
+                    this._townName = GameConstants.StartingTowns[i];
+                    this._town = ko.observable(TownList[this._townName]);
+                }
+                $('#pickStarterModal').modal('show');
+            } else {
+                this.regionStarters.push(ko.observable(undefined));
+            }
+        }
 
         this._itemList = Save.initializeItemlist();
         if (savedPlayer._itemList) {
@@ -77,15 +117,13 @@ class Player {
             }));
         this.mineInventory = ko.observableArray(mineInventory);
 
-        this.achievementsCompleted = savedPlayer.achievementsCompleted || {};
-
         this.effectList = Save.initializeEffects(savedPlayer.effectList || {});
-        this.effectTimer = Save.initializeEffectTimer(savedPlayer.effectTimer || {});
+        this.effectTimer = Save.initializeEffectTimer();
         this.highestRegion = ko.observable(savedPlayer.highestRegion || 0);
         this.highestSubRegion = ko.observable(savedPlayer.highestSubRegion || 0);
 
         // Save game origins, useful for tracking down any errors that may not be related to the main game
-        this._origins = [...new Set((savedPlayer.origin || [])).add(window.location?.origin)];
+        this._origins = [...new Set((savedPlayer._origins || [])).add(window.location?.origin)];
     }
 
     private _itemList: { [name: string]: KnockoutObservable<number> };
@@ -203,8 +241,10 @@ class Player {
         if (mineItem) {
             return mineItem.amount();
         }
-        const itemAmount = player.itemList[Underground.getMineItemById(id)?.valueType];
-        return itemAmount?.() || 0;
+        if (UndergroundItems.getById(id)?.valueType == UndergroundItemValueType.EvolutionItem) {
+            return player.itemList[GameConstants.StoneType[UndergroundItems.getById(id).type]]?.() ?? 0;
+        }
+        return 0;
     }
 
     public toJSON() {
@@ -218,20 +258,30 @@ class Player {
             'starter',
             // TODO(@Isha) remove.
             'mineInventory',
-            // TODO(@Isha) remove.
-            '_mineLayersCleared',
-            'achievementsCompleted',
             '_lastSeen',
             '_timeTraveller',
             '_origins',
-            'gymDefeats',
-            'achievementsCompleted',
             'effectList',
-            'effectTimer',
             'highestRegion',
             'highestSubRegion',
+            'regionStarters',
         ];
         const plainJS = ko.toJS(this);
+        Object.entries(plainJS._itemMultipliers).forEach(([key, value]) => {
+            if (value <= 1) {
+                delete plainJS._itemMultipliers[key];
+            }
+        });
+        Object.entries(plainJS._itemList).forEach(([key, value]) => {
+            if (!value) {
+                delete plainJS._itemList[key];
+            }
+        });
+        Object.entries(plainJS.effectList).forEach(([key, value]) => {
+            if (!value) {
+                delete plainJS.effectList[key];
+            }
+        });
         return Save.filter(plainJS, keep);
     }
 }

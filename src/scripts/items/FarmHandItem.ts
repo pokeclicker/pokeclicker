@@ -1,4 +1,4 @@
-///<reference path="Item.ts"/>
+/// <reference path="../../declarations/items/Item.d.ts"/>
 
 class FarmHandItem extends Item {
 
@@ -30,9 +30,9 @@ class FarmHandItem extends Item {
 }
 
 // Berry Masters
-ItemList['FarmHandBailey']   = new FarmHandItem('Bailey', 50000, GameConstants.Currency.farmPoint); // Johto (50k)
-ItemList['FarmHandKerry']   = new FarmHandItem('Kerry', 100000, GameConstants.Currency.farmPoint); // Hoenn (100k)
-ItemList['FarmHandRiley']   = new FarmHandItem('Riley', 200000, GameConstants.Currency.farmPoint); // Sinnoh (200k)
+ItemList.FarmHandBailey   = new FarmHandItem('Bailey', 50000, GameConstants.Currency.farmPoint); // Johto (50k)
+ItemList.FarmHandKerry   = new FarmHandItem('Kerry', 100000, GameConstants.Currency.farmPoint); // Hoenn (100k)
+ItemList.FarmHandRiley   = new FarmHandItem('Riley', 200000, GameConstants.Currency.farmPoint); // Sinnoh (200k)
 //ItemList['FarmHandJessie']   = new FarmHandItem('Jessie', 500000, GameConstants.Currency.farmPoint); // Alola (500k) (not implemented)
 // Battle Frontier
-ItemList['FarmHandJamie']   = new FarmHandItem('Jamie', 20000, GameConstants.Currency.battlePoint);
+ItemList.FarmHandJamie   = new FarmHandItem('Jamie', 20000, GameConstants.Currency.battlePoint);

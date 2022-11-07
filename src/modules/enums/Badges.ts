@@ -42,6 +42,12 @@ enum BadgeEnums {
     'Elite_Glacia',
     'Elite_Drake',
     'Elite_HoennChampion',
+    // Orange league
+    'Coral-Eye',
+    'Sea_Ruby',
+    'Spike_Shell',
+    'Jade_Star',
+    'Elite_OrangeChampion',
     // Sinnoh
     'Coal',
     'Forest',
@@ -92,12 +98,10 @@ enum BadgeEnums {
     'FiriumZ',
     'GrassiumZ',
     'RockiumZ',
-    'Elite_Nihilego',
     'ElectriumZ',
     'GhostiumZ',
     'DarkiniumZ',
     'DragoniumZ',
-    'Elite_UltraNecrozma',
     'FairiumZ',
     'GroundiumZ',
     'Elite_Olivia',
@@ -120,10 +124,10 @@ enum BadgeEnums {
     'Elite_Bede',
     'Elite_Hop',
     'Elite_GalarChampion',
-    // TODO: figure out a better way to handle DLC/non main regions
     // Armor
     'Elite_ArmorPoison',
     'Elite_ArmorPsychic',
+    'Elite_ArmorMatron',
     'Elite_ArmorChampion',
     // Crown
     'Elite_CrownChampion',

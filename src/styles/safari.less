@@ -31,6 +31,48 @@
   height: 32px;
   width: 32px;
   z-index: 1;
+  background-image: url('../assets/images/safari/player.png');
+  background-size: 400% 400%;
+
+  &.walkdown {
+    background-position: 0.00000% 0.00000%;
+  }
+  &.walkleft {
+    background-position: 0.00000% 33.3333%;
+  }
+  &.walkright {
+    background-position: 0.00000% 66.6666%;
+  }
+  &.walkup {
+    background-position: 0.00000% 100.000%;
+  }
+
+  &.moving {
+    &.walkdown {
+      animation: walkdown 0.6s steps(4) infinite;
+    }
+    @keyframes walkdown {
+      100% { background-position: 133.333% 0.00000%; }
+    }
+    &.walkleft {
+      animation: walkleft 0.6s steps(4) infinite;
+    }
+    @keyframes walkleft {
+      100% { background-position: 133.333% 33.3333%; }
+    }
+    &.walkright {
+      animation: walkright 0.6s steps(4) infinite;
+    }
+    @keyframes walkright {
+      100% { background-position: 133.333% 66.6666%; }
+    }
+    &.walkup {
+      animation: walkup 0.6s steps(4) infinite;
+    }
+    @keyframes walkup {
+      100% { background-position: 133.333% 100.000%; }
+    }
+  }
 }
 
 .bounce {
@@ -94,7 +136,7 @@
   animation-name: spin;
   animation-duration: 750ms;
   animation-iteration-count: infinite;
-  animation-timing-function: linear; 
+  animation-timing-function: linear;
 }
 @keyframes spin {
     from {
@@ -117,5 +159,18 @@
   .message {
     width: 100%;
     text-align: center;
+  }
+  .modal-body.p-0 {
+    overflow: hidden;
+  }
+  .pageItemFooter {
+    @media (max-width: 768px) {
+      font-size: 25px;
+    }
+  }
+  .enemy {
+    @media (max-width: 768px) {
+      margin-top: 50px;
+    }
   }
 }

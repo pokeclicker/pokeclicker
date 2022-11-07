@@ -47,7 +47,7 @@ export default class TypeHelper {
     public static typeMatrix: Array<Array<number>> = (() => {
         const imm = TypeEffectivenessValue.Immune;
         const not = TypeEffectivenessValue.NotVery;
-        const nrm = TypeEffectivenessValue.Normal;
+        const neu = TypeEffectivenessValue.Neutral;
         const vry = TypeEffectivenessValue.Very;
         return [
             //                 E              F
@@ -58,24 +58,24 @@ export default class TypeHelper {
             //  M    I    T    R    A    I    I    S    U    I    H    B    O    O    G    A    E    I   Attack type
             //  A    R    E    I    S    C    N    O    N    N    I    U    C    S    O    R    E    R        |
             //  L    E    R    C    S    E    G    N    D    G    C    G    K    T    N    K    L    Y        v
-            [nrm, nrm, nrm, nrm, nrm, nrm, nrm, nrm, nrm, nrm, nrm, nrm, not, imm, nrm, nrm, not, nrm], // NORMAL
-            [nrm, not, not, nrm, vry, vry, nrm, nrm, nrm, nrm, nrm, vry, not, nrm, not, nrm, vry, nrm], // FIRE
-            [nrm, vry, not, nrm, not, nrm, nrm, nrm, vry, nrm, nrm, nrm, vry, nrm, not, nrm, nrm, nrm], // WATER
-            [nrm, nrm, vry, not, not, nrm, nrm, nrm, imm, vry, nrm, nrm, nrm, nrm, not, nrm, nrm, nrm], // ELECTRIC
-            [nrm, not, vry, nrm, not, nrm, nrm, not, vry, not, nrm, not, vry, nrm, not, nrm, not, nrm], // GRASS
-            [nrm, not, not, nrm, vry, not, nrm, nrm, vry, vry, nrm, nrm, nrm, nrm, vry, nrm, not, nrm], // ICE
-            [vry, nrm, nrm, nrm, nrm, vry, nrm, not, nrm, not, not, not, vry, imm, nrm, vry, vry, not], // FIGHTING
-            [nrm, nrm, nrm, nrm, vry, nrm, nrm, not, not, nrm, nrm, nrm, not, not, nrm, nrm, imm, vry], // POISON
-            [nrm, vry, nrm, vry, not, nrm, nrm, vry, nrm, imm, nrm, not, vry, nrm, nrm, nrm, vry, nrm], // GROUND
-            [nrm, nrm, nrm, not, vry, nrm, vry, nrm, nrm, nrm, nrm, vry, not, nrm, nrm, nrm, not, nrm], // FLYING
-            [nrm, nrm, nrm, nrm, nrm, nrm, vry, vry, nrm, nrm, not, nrm, nrm, nrm, nrm, imm, not, nrm], // PSYCHIC
-            [nrm, not, nrm, nrm, vry, nrm, not, not, nrm, not, vry, nrm, nrm, not, nrm, vry, not, not], // BUG
-            [nrm, vry, nrm, nrm, nrm, vry, not, nrm, not, vry, nrm, vry, nrm, nrm, nrm, nrm, not, nrm], // ROCK
-            [imm, nrm, nrm, nrm, nrm, nrm, nrm, nrm, nrm, nrm, vry, nrm, nrm, vry, nrm, not, nrm, nrm], // GHOST
-            [nrm, nrm, nrm, nrm, nrm, nrm, nrm, nrm, nrm, nrm, nrm, nrm, nrm, nrm, vry, nrm, not, imm], // DRAGON
-            [nrm, nrm, nrm, nrm, nrm, nrm, not, nrm, nrm, nrm, vry, nrm, nrm, vry, nrm, not, nrm, not], // DARK
-            [nrm, not, not, not, nrm, vry, nrm, nrm, nrm, nrm, nrm, nrm, vry, nrm, nrm, nrm, not, vry], // STEEL
-            [nrm, not, nrm, nrm, nrm, nrm, vry, not, nrm, nrm, nrm, nrm, nrm, nrm, vry, vry, not, nrm], // FAIRY
+            [neu, neu, neu, neu, neu, neu, neu, neu, neu, neu, neu, neu, not, imm, neu, neu, not, neu], // NORMAL
+            [neu, not, not, neu, vry, vry, neu, neu, neu, neu, neu, vry, not, neu, not, neu, vry, neu], // FIRE
+            [neu, vry, not, neu, not, neu, neu, neu, vry, neu, neu, neu, vry, neu, not, neu, neu, neu], // WATER
+            [neu, neu, vry, not, not, neu, neu, neu, imm, vry, neu, neu, neu, neu, not, neu, neu, neu], // ELECTRIC
+            [neu, not, vry, neu, not, neu, neu, not, vry, not, neu, not, vry, neu, not, neu, not, neu], // GRASS
+            [neu, not, not, neu, vry, not, neu, neu, vry, vry, neu, neu, neu, neu, vry, neu, not, neu], // ICE
+            [vry, neu, neu, neu, neu, vry, neu, not, neu, not, not, not, vry, imm, neu, vry, vry, not], // FIGHTING
+            [neu, neu, neu, neu, vry, neu, neu, not, not, neu, neu, neu, not, not, neu, neu, imm, vry], // POISON
+            [neu, vry, neu, vry, not, neu, neu, vry, neu, imm, neu, not, vry, neu, neu, neu, vry, neu], // GROUND
+            [neu, neu, neu, not, vry, neu, vry, neu, neu, neu, neu, vry, not, neu, neu, neu, not, neu], // FLYING
+            [neu, neu, neu, neu, neu, neu, vry, vry, neu, neu, not, neu, neu, neu, neu, imm, not, neu], // PSYCHIC
+            [neu, not, neu, neu, vry, neu, not, not, neu, not, vry, neu, neu, not, neu, vry, not, not], // BUG
+            [neu, vry, neu, neu, neu, vry, not, neu, not, vry, neu, vry, neu, neu, neu, neu, not, neu], // ROCK
+            [imm, neu, neu, neu, neu, neu, neu, neu, neu, neu, vry, neu, neu, vry, neu, not, neu, neu], // GHOST
+            [neu, neu, neu, neu, neu, neu, neu, neu, neu, neu, neu, neu, neu, neu, vry, neu, not, imm], // DRAGON
+            [neu, neu, neu, neu, neu, neu, not, neu, neu, neu, vry, neu, neu, vry, neu, not, neu, not], // DARK
+            [neu, not, not, not, neu, vry, neu, neu, neu, neu, neu, neu, vry, neu, neu, neu, not, vry], // STEEL
+            [neu, not, neu, neu, neu, neu, vry, not, neu, neu, neu, neu, neu, neu, vry, vry, not, neu], // FAIRY
         ];
     })();
 
@@ -117,9 +117,9 @@ export default class TypeHelper {
                 return TypeEffectiveness.NotVery;
             case TypeEffectivenessValue.Very:
                 return TypeEffectiveness.Very;
-            case TypeEffectivenessValue.Normal:
+            case TypeEffectivenessValue.Neutral:
             default:
-                return TypeEffectiveness.Normal;
+                return TypeEffectiveness.Neutral;
         }
     }
 }

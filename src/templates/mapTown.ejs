@@ -22,10 +22,13 @@ Parameters:
         Used to indicate that this is the home town for a region.
         Will add the flashy thing when the player is able to trabel to the next region.
 
+    - notMain : Optional : Boolean
+        Used to indicate that this is a extension to town, to not add two player icons in the same town.
+
 <% */ %>
 
 <rect class="city"
-    data-town="<%= locals.name %>" 
+    data-town="<%= locals.name %>"
     x="<%= locals.x * 16 %>"
     y="<%= locals.y * 16 %>"
     height="<%= (locals.height || 4) * 16 %>"
@@ -37,3 +40,12 @@ Parameters:
             css: { flash: MapHelper.ableToTravel() }
         <% } %>">
 </rect>
+<% if (!locals.isExtension) { %>
+    <image width="48" height="48"
+        x="<%= locals.x * 16 + ((locals.width || 4) * 16) / 2 - 24 %>"
+        y="<%= locals.y * 16 + ((locals.height || 4) * 16) / 2 - 24 %>"
+        class="iconLocation"
+        data-bind="visible: MapHelper.isTownCurrentLocation('<%= locals.name.replace(/'/g, '\\\'') %>')
+        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+<% } %>

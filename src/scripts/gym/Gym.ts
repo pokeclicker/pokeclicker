@@ -39,12 +39,14 @@ class Gym extends TownContent {
     };
 
     public areaStatus(): areaStatus {
-        if (this.isUnlocked()) {
-            if (!App.game.badgeCase.hasBadge(this.badgeReward)) {
-                return areaStatus.unlockedUnfinished;
-            } else if (!Gym.isAchievementsComplete(this)) {
-                return areaStatus.missingAchievement;
-            }
+        if (!this.isUnlocked()) {
+            return areaStatus.locked;
+        } else if (!App.game.badgeCase.hasBadge(this.badgeReward)) {
+            return areaStatus.unlockedUnfinished;
+        } else if (this.isThereQuestAtLocation()) {
+            return areaStatus.questAtLocation;
+        } else if (!this.isAchievementsComplete()) {
+            return areaStatus.missingAchievement;
         }
         return areaStatus.completed;
     }
@@ -63,7 +65,7 @@ class Gym extends TownContent {
         public badgeReward: BadgeEnums,
         public moneyReward: number,
         public defeatMessage: string,
-        requirements: (OneFromManyRequirement | Requirement)[] = [],
+        requirements: Requirement[] = [],
         public rewardFunction = () => {},
         {
             quest = true,
@@ -73,13 +75,23 @@ class Gym extends TownContent {
         super(requirements);
         this.flags.quest = quest;
         this.flags.achievement = achievement;
-        this.buttonText = leaderName.replace(/\d/g,'');
+        if (!town.includes('Elite') && !town.includes('Champion')) {
+            this.buttonText = `${leaderName.replace(/\d/g,'')}'s gym`;
+        } else {
+            this.buttonText = leaderName.replace(/\d/g,'');
+        }
     }
 
-    public static isAchievementsComplete(gym: Gym) {
-        const gymIndex = GameConstants.getGymIndex(gym.town);
+    private isAchievementsComplete() {
+        const gymIndex = GameConstants.getGymIndex(this.town);
         return AchievementHandler.achievementList.every(achievement => {
             return !(achievement.property instanceof ClearGymRequirement && achievement.property.gymIndex === gymIndex && !achievement.isCompleted());
+        });
+    }
+
+    private isThereQuestAtLocation() {
+        return App.game.quests.currentQuests().some(q => {
+            return q instanceof DefeatGymQuest && q.gymTown == this.town;
         });
     }
 

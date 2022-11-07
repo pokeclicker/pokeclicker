@@ -35,10 +35,14 @@ class Preload {
     public static hideSplashScreen(fast = false) {
         $('#game').removeClass('loading');
         if (fast) {
-            $('.loader').hide();
+            $('#loader').hide();
         } else {
-            $('.loader').fadeOut('slow');
+            $('#loader').fadeOut('slow');
         }
+        // Remove the splash screen
+        setTimeout(() => {
+            $('#loader').remove();
+        }, 1000);
     }
 
     public static load(skipWait = false): Promise<void> {
@@ -47,8 +51,8 @@ class Preload {
             return new Promise(resolve => {
                 //If you want to skip waiting, resolve immediately
                 resolve();
-                Preload.loadTowns();
-                Preload.loadUndergroundItems();
+                // Preload.loadTowns();
+                // Preload.loadUndergroundItems();
                 // Preload.loadMap();
                 // Preload.loadPokemon(),
                 Preload.hideSplashScreen(true);
@@ -62,8 +66,8 @@ class Preload {
                 }, GameConstants.MAX_LOAD_TIME);
 
                 Promise.all([
-                    Preload.loadTowns(),
-                    Preload.loadUndergroundItems(),
+                    // Preload.loadTowns(),
+                    // Preload.loadUndergroundItems(),
                     // Preload.loadMap(),
                     // Preload.loadPokemon(),
                     Preload.minimumTime(),
@@ -140,7 +144,7 @@ class Preload {
 
     private static loadUndergroundItems() {
         const p = Array<Promise<void>>();
-        UndergroundItem.list.forEach(item => {
+        UndergroundItems.list.forEach(item => {
             Preload.itemLoading(item.id);
             p.push(new Promise<void>(resolve => {
                 const img = new Image();

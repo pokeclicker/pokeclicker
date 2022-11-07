@@ -12,7 +12,7 @@
 
             <div class="modal-body p-0">
                 <ul class="nav nav-tabs nav-fill">
-                    <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#evoStones">Evolution Stones</a></li>
+                    <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#evoStones">Evolution Items</a></li>
                     <li class="nav-item"><a data-toggle='tab' class='nav-link' href="#itemBag">Item Bag</a></li>
                     <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#keyItems">Key Items</a></li>
                 </ul>
@@ -27,7 +27,7 @@
                                             click: function(){ ItemHandler.stoneSelected($data); ItemHandler.pokemonSelected('')},
                                             visible: ItemList[$data].unlockedRegion <= player.highestRegion() || player.amountOfItem($data) > 0">
                                     <img data-bind="attr: {src: ItemList[$data].image }" style="max-width: 32px;">
-                                    <div data-bind="text: player._itemList[$data]()"></div>
+                                    <div data-bind="text: player._itemList[$data]().toLocaleString('en-US')"></div>
                                 </div>
                             </div>
                         </div>
@@ -35,13 +35,13 @@
                         <hr/>
 
                         <div class="row justify-content-sm-center" >
-                            <div class="row col-lg-10 col-md-12 offset-md-0 col-sm-12 offset-sm-0"
+                            <div class="row col-lg-11 offset-md-0"
                                 data-bind="foreach: PokemonHelper.getPokemonsWithEvolution(GameConstants.StoneType[ItemHandler.stoneSelected()])">
                                 <div class="col-md-6 col-sm-10 col-lg-4 offset-sm-1 offset-md-0 offset-md-0 breedingListItem">
                                     <button class="btn btn-secondary smallButton list-group-item-action" style="padding-right:15px"
                                             data-bind="click: function() {ItemHandler.pokemonSelected(name)}, css:{ 'pokemon-selected': ItemHandler.pokemonSelected() === name}">
                                         <img class="smallImage" data-bind="attr:{src: 'assets/images/' + (App.game.party.alreadyCaughtPokemon($data.id, true) ? 'shiny' : '') + 'pokemon/' + id +'.png' }"/>
-                                        <span data-bind="text: name" style="margin-left: 20px">Name</span>
+                                        <span data-bind="text: displayName" style="margin-left: 20px">Name</span>
 
                                         <span style="float:right; margin-top:8px"  data-bind="using: { statuses: PartyController.getStoneEvolutionsCaughtStatus($data.id, GameConstants.StoneType[ItemHandler.stoneSelected()]) }">
                                             <div class="row" data-bind="foreach: statuses">
@@ -62,21 +62,28 @@
                                                           }
                                                   }">
                         </div>
-                        <p><i>Stops using evolution stones once a shiny is encountered</i></p>
+                        <p><i>Stops using evolution items once a shiny is encountered.</i></p>
                         <p data-bind="visible: PartyController.hasMultipleStoneEvolutionsAvailable(ItemHandler.pokemonSelected(), GameConstants.StoneType[ItemHandler.stoneSelected()])">
-                            <i>If the requirements for more than one evolution is fulfilled, a random evolution will be selected</i>
+                            <i>If the requirements for more than one evolution is fulfilled, a random evolution will be selected.</i>
                         </p>
                         <div class="row no-gutters justify-content-sm-center">
                             <div class="row justify-content-center" style="padding:15px;">
-                                <button data-bind="click: function(){ItemHandler.useStones()}" class="btn btn-lg btn-success">Use evolution stones!</button>
+                                <button data-bind="click: function(){ItemHandler.useStones()}" class="btn btn-lg btn-success">Use evolution items!</button>
                             </div>
                         </div>
                     </div>
 
                     <div id="itemBag" class="tab-pane p-3">
-                        <div class="row justify-content-sm-center">
-                            <div class="row col-10">
-                                <div class="btn btn-primary col-2" data-bind="template: { name: 'otherItemTemplate', data: 'Protein'}, click: () => $('#pokemonSelectorModal').modal('show')"></div>
+                        <div>
+                            <h4>Vitamins</h4>
+                            <div class="row">
+                                <div class="btn btn-primary col-2 item-bag-item" data-bind="template: { name: 'otherItemTemplate', data: 'Protein'}, click: () => $('#pokemonSelectorModal').modal('show')"></div>
+                            </div>
+                            <h4>Held items</h4>
+                            <div class="row">
+                                <!-- ko foreach: HeldItem.getSortedHeldItems() -->
+                                    <div class="btn btn-primary col-2 item-bag-item" data-bind="template: { name: 'otherItemTemplate', data: $data.name}, click: () => { HeldItem.heldItemSelected($data); $('#heldItemModal').modal('show'); }, visible: $data.isUnlocked()"></div>
+                                <!-- /ko -->
                             </div>
                         </div>
                     </div>
@@ -137,6 +144,6 @@
         boundary: document.getElementById('showItemsModal'),
     }">
         <img data-bind="attr: {src: ItemList[$data].image }" style="max-width: 32px;">
-        <div data-bind="text: player._itemList[$data]()"></div>
+        <div data-bind="text: player._itemList[$data]().toLocaleString('en-US')"></div>
     </div>
 </script>

@@ -32,7 +32,7 @@
                         <td><h5>Status</h5></td>
                     </tr>
                     </thead>
-                    <tbody data-bind="foreach: App.game.quests.questList" >
+                    <tbody data-bind="foreach: App.game.quests.sortedQuestList" >
                     <tr>
                         <td class="align-middle" style="text-align:left" data-bind='text: description'></td>
                         <td class="align-middle py-0" style="text-align:left">
@@ -43,7 +43,6 @@
                                 data-bind='visible: App.game.quests.canStartNewQuest() && !$data.inProgress() && !$data.isCompleted() && !$data.claimed(),
                                 click: function(){
                                     App.game.quests.beginQuest($data.index);
-                                    if (!App.game.quests.canStartNewQuest()) {$("#QuestModal").modal("hide");}
                                 }'>
                                 Start
                             </button>
@@ -74,7 +73,7 @@
                         <span data-bind="template: { name: 'amountTemplate', data: App.game.quests.getRefreshCost() }"></span> - Refresh
                     </button>
                     <!-- /ko -->
-                    
+
                 </div>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>

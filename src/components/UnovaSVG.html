@@ -1,5 +1,8 @@
 <g data-bind='visible: player.region == GameConstants.Region.unova'>
-    <image width="1600" height="960" xlink:href="assets/images/unova.png" href="assets/images/unova.png"></image>
+    <image width="1600" height="960" data-bind="attr: {
+        'xlink:href':'assets/images/unova.png?v=$VERSION',
+        href:'assets/images/unova.png?v=$VERSION'
+    }"></image>
 
     <!-- ------ -->
     <!-- ROUTES -->
@@ -39,7 +42,7 @@
         , rotate: true
         })
     %>
-    <!--extra Route 4-->
+    <!--Route 4 extension-->
     <%- include('templates/mapRoute',
         { route: 4, region: 4
         , width: 1, height: 0.5
@@ -53,6 +56,13 @@
         { route: 25, region: 4
         , width: 4, height: 3
         , x: 47, y: 38, name: "D.R."
+        })
+    %>
+    <!--Desert Resort extension-->
+    <%- include('templates/mapRoute',
+        { route: 25, region: 4
+        , width: 1, height: 2
+        , x: 46, y: 39, noText: true
         })
     %>
 
@@ -71,7 +81,7 @@
         , x: 18, y: 29
         })
     %>
-    <!--Extra bit of Route 6-->
+    <!--Route 6 extension-->
     <%- include('templates/mapRoute',
         { route: 6, region: 4
         , width: 3, height: 3
@@ -87,7 +97,7 @@
         , x: 18, y: 16
         })
     %>
-     <!--Extra bit of Route 7-->
+     <!--Route 7 extension-->
     <%- include('templates/mapRoute',
         { route: 7, region: 4
         , width: 3, height: 3
@@ -135,7 +145,7 @@
         , x: 74, y: 13
         })
     %>
-    <!--Extra bit of Route 13-->
+    <!--Route 13 extension-->
     <%- include('templates/mapRoute',
         { route: 13, region: 4
         , width: 3, height: 1
@@ -143,7 +153,7 @@
         , noText: true
         })
     %>
-    <!--Extra bit of Route 13-->
+    <!--Route 13 extension-->
     <%- include('templates/mapRoute',
         { route: 13, region: 4
         , width: 9, height: 2.5
@@ -151,7 +161,7 @@
         , noText: true
         })
     %>
-    <!--Extra bit of Route 13-->
+    <!--Route 13 extension-->
     <%- include('templates/mapRoute',
         { route: 13, region: 4
         , width: 1, height: 0.5
@@ -159,7 +169,7 @@
         , noText: true
         })
     %>
-    <!--Extra bit of Route 13-->
+    <!--Route 13 extension-->
     <%- include('templates/mapRoute',
         { route: 13, region: 4
         , width: 3, height: 0.5
@@ -175,7 +185,7 @@
         , x: 74, y: 25
         })
     %>
-    <!--Extra bit of Route 14-->
+    <!--Route 14 extension-->
     <%- include('templates/mapRoute',
         { route: 14, region: 4
         , width: 3, height: 1
@@ -183,7 +193,7 @@
         , noText: true
         })
     %>
-    <!--Extra bit of Route 14-->
+    <!--Route 14 extension-->
     <%- include('templates/mapRoute',
         { route: 14, region: 4
         , width: 3, height: 3
@@ -215,7 +225,7 @@
         , x: 70, y: 55
         })
     %>
-    <!--Extra bit of Route 17-->
+    <!--Route 17 extension-->
     <%- include('templates/mapRoute',
         { route: 17, region: 4
         , width: 4, height: 3
@@ -223,7 +233,7 @@
         , noText: true
         })
     %>
-    <!--Extra bit of Route 17-->
+    <!--Route 17 extension-->
     <%- include('templates/mapRoute',
         { route: 17, region: 4
         , width: 1, height: 2
@@ -248,7 +258,7 @@
         , rotate: true
         })
      %>
-     <!--Extra bit of Route 19-->
+     <!--Route 19 extension-->
      <%- include('templates/mapRoute',
         { route: 19, region: 4
         , width: 1, height: 3
@@ -281,7 +291,6 @@
         , x: 88, y: 21, name: "U.B."
         })
     %>
-
     <!--Undella Bay extension-->
     <%- include('templates/mapRoute',
         { route: 24, region: 4
@@ -306,7 +315,7 @@
         , x: 74, y: 5
         })
     %>
-    <!--Extra bit of Route 23-->
+    <!--Route 23 extension-->
     <%- include('templates/mapRoute',
         { route: 23, region: 4
         , width: 7, height: 3
@@ -314,7 +323,7 @@
         , noText: true
         })
     %>
-    <!--Extra bit of Route 23-->
+    <!--Route 23 extension-->
     <%- include('templates/mapRoute',
         { route: 23, region: 4
         , width: 5, height: 3
@@ -322,11 +331,11 @@
         , noText: true
         })
     %>
-    <!--Extra bit of Route 23-->
+    <!--Route 23 extension-->
     <%- include('templates/mapRoute',
         { route: 23, region: 4
-        , width: 0.5, height: 3
-        , x: 65.5, y: 2
+        , width: 1, height: 3
+        , x: 65, y: 2
         , noText: true
         })
     %>
@@ -371,10 +380,23 @@
         , width: 5, height: 4.5
         })
     %>
-    <!--Castelia City Extension-->
+    <!--Castelia City extension-->
     <%- include('templates/mapTown',
         { name: "Castelia City"
         , x: 53, y: 49
+        , isExtension: true
+        })
+    %>
+
+    <!--A Perfectly Ordinary Frigate-->
+    <%- include('templates/mapOverlay',
+        { name: "A Perfectly Ordinary Frigate"
+        , x: 39, y: 52
+        , width: 4, height: 9
+        , databind: "click:function(){MapHelper.moveToTown('A Perfectly Ordinary Frigate')}, attr:{ class: MapHelper.calculateTownCssClass('A Perfectly Ordinary Frigate') }"
+        , visible:  "(App.game.quests.getQuestLine('Quest for the DNA Splicers').curQuest() >= 1 || App.game.quests.getQuestLine('Quest for the DNA Splicers').state() == 2) && (App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Plasma Grunt 2')]() == 0 || App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Plasma Grunt 3')]() == 0 || (App.game.quests.getQuestLine('Quest for the DNA Splicers').curQuest() <= 4 && App.game.quests.getQuestLine('Quest for the DNA Splicers').state() == 1))"
+        , image: "assets/images/map/plasmafrigate_ship.png"
+        , connectedToTown: "A Perfectly Ordinary Frigate"
         })
     %>
 
@@ -385,10 +407,11 @@
         , width: 5, height: 4.5
         })
     %>
-    <!--Nimbasa City Extension-->
+    <!--Nimbasa City extension-->
     <%- include('templates/mapTown',
         { name: "Nimbasa City"
         , x: 52, y: 31
+        , isExtension: true
         })
     %>
 
@@ -399,10 +422,23 @@
         , width: 5, height: 4.5
         })
     %>
-    <!--Driftveil City Extension-->
+    <!--Driftveil City extension-->
     <%- include('templates/mapTown',
         { name: "Driftveil City"
         , x: 30, y: 31
+        , isExtension: true
+        })
+    %>
+
+    <!--A Totally Unsuspicious Frigate-->
+    <%- include('templates/mapOverlay',
+        { name: "A Totally Unsuspicious Frigate"
+        , x: 36, y: 35
+        , width: 4, height: 9
+        , databind: "click:function(){MapHelper.moveToTown('A Totally Unsuspicious Frigate')}, attr:{ class: MapHelper.calculateTownCssClass('A Totally Unsuspicious Frigate') }"
+        , visible:  "App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Plasma Grunt 2')]() >= 1 && App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Plasma Grunt 3')]() >= 1 && (App.game.quests.getQuestLine('Quest for the DNA Splicers').curQuest() >= 5 || App.game.quests.getQuestLine('Quest for the DNA Splicers').state() == 2) && (App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Plasma Grunt 4')]() == 0 || App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Plasma Grunt 5')]() == 0 || App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Plasma Grunts 1')]() == 0 || App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Plasma Grunts 2')]() == 0 || (App.game.quests.getQuestLine('Quest for the DNA Splicers').curQuest() <= 7 && App.game.quests.getQuestLine('Quest for the DNA Splicers').state() == 1))"
+        , image: "assets/images/map/plasmafrigate_ship.png"
+        , connectedToTown: "A Totally Unsuspicious Frigate"
         })
     %>
 
@@ -413,10 +449,11 @@
         , width: 5, height: 4.5
         })
     %>
-    <!--Mistralton City Extension-->
+    <!--Mistralton City extension-->
     <%- include('templates/mapTown',
         { name: "Mistralton City"
         , x: 17, y: 22
+        , isExtension: true
         })
     %>
 
@@ -427,10 +464,11 @@
         , width: 5, height: 4.5
         })
     %>
-    <!--Icirrus City Extension-->
+    <!--Icirrus City extension-->
     <%- include('templates/mapTown',
         { name: "Icirrus City"
         , x: 30, y: 12
+        , isExtension: true
         })
     %>
 
@@ -441,10 +479,23 @@
         , width: 5, height: 4.5
         })
     %>
-    <!--Opelucid City Extension-->
+    <!--Opelucid City extension-->
     <%- include('templates/mapTown',
         { name: "Opelucid City"
         , x: 52, y: 12
+        , isExtension: true
+        })
+    %>
+
+    <!--Team Plasma Assault-->
+    <%- include('templates/mapOverlay',
+        { name: "Team Plasma Assault"
+        , x: 47, y: 5
+        , width: 9, height: 6.5
+        , databind: "click:function(){MapHelper.moveToTown('Team Plasma Assault')}, attr:{ class: MapHelper.calculateTownCssClass('Team Plasma Assault') }"
+        , visible:  "App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Opelucid City')]() >= 1 && App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Zinzolin 1')]() >= 1 && (App.game.quests.getQuestLine('Quest for the DNA Splicers').curQuest() >= 12 || App.game.quests.getQuestLine('Quest for the DNA Splicers').state() == 2) && (App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Plasma Shadow 1')]() == 0 || (App.game.quests.getQuestLine('Quest for the DNA Splicers').curQuest() <= 14 && App.game.quests.getQuestLine('Quest for the DNA Splicers').state() == 1))"
+        , image: "assets/images/map/plasmafrigate_airship.png"
+        , connectedToTown: "Team Plasma Assault"
         })
     %>
 
@@ -470,10 +521,11 @@
         , width: 5, height: 4.5
         })
     %>
-    <!--Undella Town Extension-->
+    <!--Undella Town extension-->
     <%- include('templates/mapTown',
         { name: "Undella Town"
         , x: 84, y: 20
+        , isExtension: true
         })
     %>
 
@@ -491,10 +543,11 @@
         , width: 5, height: 4.5
         })
     %>
-    <!--Black and White Park-->
+    <!--Black and White Park extension-->
     <%- include('templates/mapTown',
         { name: "Black and White Park"
         , x: 73, y: 31
+        , isExtension: true
         })
     %>
 
@@ -539,8 +592,16 @@
     <!--Pokémon League Unova-->
     <%- include('templates/mapTown',
         { name: "Pokémon League Unova"
-        , x: 55.5, y: 0.25
-        , width: 10, height: 6.75
+        , x: 56, y: 0
+        , width: 9, height: 5.5
+        })
+    %>
+    <!--Pokémon League Unova extension-->
+    <%- include('templates/mapTown',
+        { name: "Pokémon League Unova"
+        , x: 59, y: 5.5
+        , width: 3, height: 0.5
+        , isExtension: true
         })
     %>
 
@@ -548,34 +609,25 @@
     <!-- DUNGEONS -->
     <!-- -------- -->
 
-    <!--P2 Laboratory-->
+    <!--Pledge Grove-->
     <%- include('templates/mapDungeon',
-        { name: "P2 Laboratory"
-        , x: 78, y: 52
+        { name: "Pledge Grove"
+        , x: 11, y: 39
+        })
+    %>
+
+    <!--Floccesy Ranch-->
+    <%- include('templates/mapDungeon',
+        { name: "Floccesy Ranch"
+        , x: 17, y: 40
         , width: 4, height: 3
         })
     %>
 
-    <!--Seaside Cave-->
+    <!--Liberty Garden-->
     <%- include('templates/mapDungeon',
-        { name: "Seaside Cave"
-        , x: 91, y: 16
-        , width: 4, height: 3
-        })
-    %>
-
-    <!--Dreamyard-->
-    <%- include('templates/mapDungeon',
-        { name: "Dreamyard"
-        , x: 90, y: 40
-        , width: 4, height: 3
-        })
-    %>
-
-    <!--Pinwheel Forest-->
-    <%- include('templates/mapDungeon',
-        { name: "Pinwheel Forest"
-        , x: 72, y: 40
+        { name: "Liberty Garden"
+        , x: 28, y: 52
         , width: 4, height: 3
         })
     %>
@@ -588,34 +640,33 @@
         })
     %>
 
-    <!-- Desert Resort
+    <!--Relic Passage-->
     <%- include('templates/mapDungeon',
-        { name: "Desert Resort"
-        , x: 47, y: 41
-        , width: 4, height: 3
+        { name: "Relic Passage"
+        , x: 33, y: 35
+        , width: 3, height: 4
         })
-    %> -->
+    %>
+    <!--Relic Passage extension-->
+    <%- include('templates/mapDungeon',
+        { name: "Relic Passage"
+        , x: 43, y: 39
+        , width: 3, height: 4
+        })
+    %>
 
     <!--Relic Castle-->
     <%- include('templates/mapDungeon',
         { name: "Relic Castle"
-        , x: 43, y: 38
+        , x: 43, y: 36
         , width: 4, height: 3
         })
     %>
 
-    <!--Relic Passage-->
+    <!--Lostlorn Forest-->
     <%- include('templates/mapDungeon',
-        { name: "Relic Passage"
-        , x: 37, y: 40
-        , width: 6, height: 3
-        })
-    %>
-
-    <!--Mistralton Cave-->
-    <%- include('templates/mapDungeon',
-        { name: "Mistralton Cave"
-        , x: 23, y: 26
+        { name: "Lostlorn Forest"
+        , x: 59, y: 29
         , width: 4, height: 3
         })
     %>
@@ -628,10 +679,109 @@
         })
     %>
 
+    <!--Mistralton Cave-->
+    <%- include('templates/mapDungeon',
+        { name: "Mistralton Cave"
+        , x: 23, y: 26
+        , width: 4, height: 3
+        })
+    %>
+
     <!--Celestial Tower-->
     <%- include('templates/mapDungeon',
         { name: "Celestial Tower"
         , x: 17, y: 13
+        , width: 4, height: 3
+        })
+    %>
+
+    <!--Reversal Mountain-->
+    <%- include('templates/mapDungeon',
+        { name: "Reversal Mountain"
+        , x: 74, y: 20
+        , width: 5, height: 5
+        })
+    %>
+    <!--Reversal Mountain extension-->
+    <%- include('templates/mapDungeon',
+        { name: "Reversal Mountain"
+        , x: 71, y: 21
+        , width: 3, height: 3
+        , isExtension: true
+        })
+    %>
+
+    <!--Seaside Cave-->
+    <%- include('templates/mapDungeon',
+        { name: "Seaside Cave"
+        , x: 91, y: 16
+        , width: 4, height: 3
+        })
+    %>
+
+    <!--Plasma Frigate-->
+    <%- include('templates/mapOverlay',
+        { name: "Plasma Frigate"
+        , x: 95, y: 16
+        , width: 4, height: 9
+        , databind: "click:function(){MapHelper.moveToTown('Plasma Frigate')}, attr:{ class: MapHelper.calculateTownCssClass('Plasma Frigate') }"
+        , visible:  "App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Plasma Shadow 1')]() >= 1 && (App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Plasma Frigate')]() == 0 || (App.game.quests.getQuestLine('Quest for the DNA Splicers').curQuest() <= 15 && App.game.quests.getQuestLine('Quest for the DNA Splicers').state() == 1)) && (App.game.quests.getQuestLine('Quest for the DNA Splicers').curQuest() >= 15 || App.game.quests.getQuestLine('Quest for the DNA Splicers').state() == 2)"
+        , image: "assets/images/map/plasmafrigate_ship.png"
+        , connectedToTown: "Plasma Frigate"
+        })
+    %>
+
+    <!--Plasma Frigate extension-->
+    <%- include('templates/mapOverlay',
+        { name: "Plasma Frigate"
+        , x: 95, y: 16
+        , width: 4, height: 9
+        , databind: "click:function(){MapHelper.moveToTown('Plasma Frigate')}, attr:{ class: MapHelper.calculateTownCssClass('Plasma Frigate') }"
+        , visible:  "App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ghetsis 2')]() >= 1"
+        , image: "assets/images/map/plasmafrigate_ship.png"
+        , connectedToTown: "Plasma Frigate"
+        })
+    %>
+
+    <!--Giant Chasm-->
+    <%- include('templates/mapDungeon',
+        { name: "Giant Chasm"
+        , x: 79, y: 7
+        , width: 4, height: 3
+        })
+    %>
+    <!--Giant Chasm extension-->
+    <%- include('templates/mapOverlay',
+        { name: "Giant Chasm"
+        , x: 77, y: 0.5
+        , width: 9, height: 6.5
+        , databind: "click:function(){MapHelper.moveToTown('Giant Chasm')}, attr:{ class: MapHelper.calculateTownCssClass('Giant Chasm') }"
+        , visible:  "App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Plasma Shadow 1')]() >= 1 && App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Plasma Frigate')]() >= 1 && App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ghetsis 2')]() == 0 && (App.game.quests.getQuestLine('Quest for the DNA Splicers').curQuest() >= 16 || App.game.quests.getQuestLine('Quest for the DNA Splicers').state() == 2)"
+        , image: "assets/images/map/plasmafrigate_airship.png"
+        , isExtension: true
+        })
+    %>
+
+    <!--Cave of Being-->
+    <%- include('templates/mapDungeon',
+        { name: "Cave of Being"
+        , x: 17, y: 46
+        , width: 4, height: 3
+        })
+    %>
+
+    <!--Abundant Shrine-->
+    <%- include('templates/mapDungeon',
+        { name: "Abundant Shrine"
+        , x: 70, y: 25
+        , width: 4, height: 3
+        })
+    %>
+
+    <!--Victory Road Unova-->
+    <%- include('templates/mapDungeon',
+        { name: "Victory Road Unova"
+        , x: 66, y: 2
         , width: 4, height: 3
         })
     %>
@@ -660,97 +810,27 @@
         })
     %>
 
-    <!--Reversal Mountain-->
+    <!--Pinwheel Forest-->
     <%- include('templates/mapDungeon',
-        { name: "Reversal Mountain"
-        , x: 74, y: 20
-        , width: 5, height: 5
-        })
-    %>
-
-    <!--Reversal Mountain extra-->
-    <%- include('templates/mapDungeon',
-        { name: "Reversal Mountain"
-        , x: 71, y: 21
-        , width: 3, height: 3
-        })
-    %>
-
-    <!--Abundant Shrine-->
-    <%- include('templates/mapDungeon',
-        { name: "Abundant Shrine"
-        , x: 70, y: 25
+        { name: "Pinwheel Forest"
+        , x: 72, y: 40
         , width: 4, height: 3
         })
     %>
 
-    <!--Lostlorn Forest-->
+    <!--Dreamyard-->
     <%- include('templates/mapDungeon',
-        { name: "Lostlorn Forest"
-        , x: 59, y: 29
+        { name: "Dreamyard"
+        , x: 90, y: 40
         , width: 4, height: 3
         })
     %>
 
-    <!--Floccesy Ranch-->
+    <!--P2 Laboratory-->
     <%- include('templates/mapDungeon',
-        { name: "Floccesy Ranch"
-        , x: 17, y: 40
+        { name: "P2 Laboratory"
+        , x: 78, y: 52
         , width: 4, height: 3
-        })
-    %>
-
-    <!--Cave of Being-->
-    <%- include('templates/mapDungeon',
-        { name: "Cave of Being"
-        , x: 17, y: 46
-        , width: 4, height: 3
-        })
-    %>
-
-    <!--Liberty Garden-->
-    <%- include('templates/mapDungeon',
-        { name: "Liberty Garden"
-        , x: 28, y: 52
-        , width: 4, height: 3
-        })
-    %>
-
-    <!--Giant Chasm-->
-    <%- include('templates/mapDungeon',
-        { name: "Giant Chasm"
-        , x: 79, y: 7
-        , width: 4, height: 3
-        })
-    %>
-
-    <!--Victory Road Unova-->
-    <%- include('templates/mapDungeon',
-        { name: "Victory Road Unova"
-        , x: 66, y: 2
-        , width: 4, height: 3
-        })
-    %>
-
-    <!--Pledge Grove-->
-    <%- include('templates/mapDungeon',
-        { name: "Pledge Grove"
-        , x: 11, y: 39
-        })
-    %>
-
-    <!--Plasma Frigate-->
-    <%- include('templates/mapDungeon',
-        { name: "Plasma Frigate"
-        , x: 96, y: 18
-        , width: 4, height: 3
-        })
-    %>
-    <!--Plasma Frigate Extension-->
-    <%- include('templates/mapDungeon',
-        { name: "Plasma Frigate"
-        , x: 95, y: 19
-        , width: 1, height: 1
         })
     %>
 
@@ -765,7 +845,7 @@
         })
      %>
 
-    <!--bridge-->
+    <!--Skyarrow Bridge-->
     <%- include('templates/mapPOI',
         { name: "Skyarrow Bridge"
         , width: 3, height: 7
@@ -776,7 +856,7 @@
             }`
         })
     %>
-    <!--bridge-->
+    <!--Skyarrow Bridge extension-->
     <%- include('templates/mapPOI',
         { name: "Skyarrow Bridge"
         , width: 7, height: 3
@@ -794,42 +874,52 @@
         , width: 3, height: 4
         , databind: "click:function(){App.game.underground.openUndergroundModal()}, attr: { class: App.game.underground.canAccess() ? 'completed' : 'locked' }"
         })
-     %>
+    %>
 
-     <%- include('templates/mapPOI',
+    <%- include('templates/mapPOI',
         { name: "Farm"
         , x: 21, y: 46
         , width: 3, height: 3
         , databind: "click:function(){FarmController.openFarmModal()}, attr: { class: App.game.farming.canAccess() ? 'completed' : 'locked' }"
         })
-     %>
+    %>
 
-     <%- include('templates/mapPOI',
-        { name: "Pokemon Day Care"
+    <%- include('templates/mapPOI',
+        { name: "Pokémon Day Care"
         , x: 81, y: 36
         , width: 4, height: 4
         , databind: "click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? 'completed' : 'locked' }"
         })
-     %>
+    %>
 
-     <%- include('templates/mapOverlay',
-         { name: "Professor Juniper's Blimp"
-         , x: 10, y: 48
-         , width: 6, height: 3
-         , databind: "click:function(){MapHelper.moveToTown('Aspertia City')}, attr:{ class: MapHelper.calculateTownCssClass('Aspertia City') }"
-         , visible:  "MapHelper.ableToTravel() && player.starter() != GameConstants.Starter.Pikachu"
-         , image: "assets/images/map/blimp_empty.png"
-         })
-     %>
+    <%- include('templates/mapOverlay',
+        { name: "Professor Juniper's Blimp"
+        , x: 10, y: 48
+        , width: 6, height: 3
+        , databind: "click:function(){MapHelper.moveToTown('Aspertia City')}, attr:{ class: MapHelper.calculateTownCssClass('Aspertia City') }"
+        , visible:  "MapHelper.ableToTravel() && player.starter() != GameConstants.Starter.Pikachu"
+        , image: "assets/images/map/blimp_empty.png"
+        })
+    %>
 
-     <%- include('templates/mapOverlay',
-         { name: "Professor Juniper's Blimp"
-         , x: 10, y: 48
-         , width: 6, height: 3
-         , databind: "click:function(){MapHelper.moveToTown('Aspertia City')}, attr:{ class: MapHelper.calculateTownCssClass('Aspertia City') }"
-         , visible:  "MapHelper.ableToTravel() && player.starter() == GameConstants.Starter.Pikachu"
-         , image: "assets/images/map/blimp_pikachu.png"
-         })
-     %>
+    <%- include('templates/mapOverlay',
+        { name: "Professor Juniper's Blimp"
+        , x: 10, y: 48
+        , width: 6, height: 3
+        , databind: "click:function(){MapHelper.moveToTown('Aspertia City')}, attr:{ class: MapHelper.calculateTownCssClass('Aspertia City') }"
+        , visible:  "MapHelper.ableToTravel() && player.starter() == GameConstants.Starter.Pikachu"
+        , image: "assets/images/map/blimp_pikachu.png"
+        })
+    %>
+
+    <%- include('templates/mapOverlay',
+        { name: "Ash Ketchum"
+        , x: 8, y: 27
+        , width: 4, height: 4
+        , databind: "click: () => TemporaryBattleList['Ash Ketchum Unova'].protectedOnclick()"
+        , visible:  "TemporaryBattleList['Ash Ketchum Unova'] && TemporaryBattleList['Ash Ketchum Unova'].isVisible()"
+        , image: "assets/images/map/ashketchumoverworld.png"
+        })
+    %>
 
 </g>

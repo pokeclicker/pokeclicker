@@ -12,6 +12,7 @@ export enum SortOptions {
     timesHatched = 8,
     category = 9,
     proteinsUsed = 10,
+    evs = 11,
 }
 
 export type SortOptionConfig = {
@@ -39,32 +40,27 @@ export const SortOptionConfigs: Record<SortOptions, SortOptionConfig> = {
 
     [SortOptions.attack]: {
         text: 'Attack',
-        getValue: (p) => p.calculateAttack(),
-        invert: true,
+        getValue: (p) => p.attack,
     },
 
     [SortOptions.level]: {
         text: 'Level',
         getValue: (p) => p.level,
-        invert: true,
     },
 
     [SortOptions.shiny]: {
         text: 'Shiny',
         getValue: (p) => p.shiny,
-        invert: true,
     },
 
     [SortOptions.baseAttack]: {
         text: 'Base Attack',
         getValue: (p) => p.baseAttack,
-        invert: true,
     },
 
     [SortOptions.breedingEfficiency]: {
         text: 'Breeding Efficiency',
         getValue: (p) => ((p.baseAttack * (BREEDING_ATTACK_BONUS / 100) + p.proteinsUsed()) / pokemonMap[p.name].eggCycles),
-        invert: true,
     },
 
     [SortOptions.eggCycles]: {
@@ -80,10 +76,16 @@ export const SortOptionConfigs: Record<SortOptions, SortOptionConfig> = {
     [SortOptions.category]: {
         text: 'Category',
         getValue: (p) => p.category,
+        invert: true,
     },
 
     [SortOptions.proteinsUsed]: {
         text: 'Proteins Used',
         getValue: (p) => p.proteinsUsed() || 0,
+    },
+
+    [SortOptions.evs]: {
+        text: 'EVs',
+        getValue: (p) => p.evs() || 0,
     },
 };

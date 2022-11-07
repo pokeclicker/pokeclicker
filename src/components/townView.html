@@ -16,15 +16,21 @@
                   <!-- /ko -->
                   <!--If all Pokémon in the dungeon are caught-->
                   <knockout data-bind="if: (!DungeonRunner.dungeonCompleted(player.town().dungeon, true) && DungeonRunner.dungeonCompleted(player.town().dungeon, false))">
-                      <img title="You have captured all Pokémon on this route!" class="pokeball-smallest"
+                      <img title="You have captured all Pokémon in this dungeon!" class="pokeball-smallest"
                            src="assets/images/pokeball/Pokeball.svg"/>
                   </knockout>
 
                   <!--If all Pokémon in the dungeon are caught shiny-->
                   <knockout data-bind="if: DungeonRunner.dungeonCompleted(player.town().dungeon, true)">
-                      <img title="You have captured all Pokémon shiny on this route!"
+                      <img title="You have captured all Pokémon shiny in this dungeon!"
                            class="pokeball-smallest"
                            src="assets/images/pokeball/Pokeball-shiny.svg"/>
+                  </knockout>
+
+                  <!--Pokérus image-->
+                  <knockout data-bind="if: RouteHelper.minPokerusCheck(player.town().dungeon.allAvailablePokemon())">
+                      <img data-bind="attr:{ src: 'assets/images/breeding/pokerus/' + GameConstants.Pokerus[RouteHelper.minPokerus(player.town().dungeon.allAvailablePokemon())] + '.png'}"
+                    src=""/>
                   </knockout>
               </knockout>
             </h2>
@@ -47,11 +53,11 @@
                         text: $data.text(),
                         visible: $data.isVisible(),
                         click: $data.protectedOnclick,
-                        tooltip: ($data.tooltip || $data.clears() ? { title: $data.clears() != undefined ? `Total Clears: ${$data.clears()}` : $data.tooltip, trigger: 'hover', placement: 'left' } : undefined)
+                        tooltip: ($data.tooltip || $data.clears() ? { title: $data.clears() != undefined ? `Total Clears: ${$data.clears().toLocaleString('en-US')}` : $data.tooltip, trigger: 'hover', placement: 'left' } : undefined)
                         "></button>
                     <!-- ko if: $data instanceof Gym -->
                     <button class="btn btn-info p-0 btn-gym-auto-restart" data-bind="
-                        tooltip: { html: true, title: `Auto restart Gym fight<br/>Cost: <img src='assets/images/currency/money.svg' height='18px'></button> ${($data.moneyReward * 2).toLocaleString('en-US')} per battle<br/><br/><i class='text-warning'>You will not receive money for clearing the gym</i>`, trigger: 'hover', placement:'right' },
+                        tooltip: { html: true, title: `Auto restart Gym fight<br/>Cost: <img src='assets/images/currency/money.svg' height='18px'></button> ${($data.moneyReward * 2).toLocaleString('en-US')} per battle<br/><br/><i class='text-warning'>You will not receive Pokédollars for clearing the gym</i>`, trigger: 'hover', placement:'right' },
                         click: () => GymRunner.startGym($data, true),
                         visible: $data.isUnlocked() && App.game.statistics.gymsDefeated[GameConstants.getGymIndex($data.town)]() >= 100">↻</button>
                     <!-- /ko -->
@@ -78,14 +84,14 @@
         <!--Display all available Pokémon in this dungeon-->
         <ul class="list-inline">
           <!-- ko foreach: player.town().dungeon.normalEncounterList -->
-          <li class="list-inline-item">
+          <li class="list-inline-item" data-bind="hidden: $data.hide">
             <img class="dungeon-pokemon-preview" src="" data-bind="attr:{ src: $data.image },
-            css: { 'dungeon-pokemon-locked': $data.hidden }" onerror="this.src='assets/images/trainers/Mysterious Trainer.png';"/>
+            css: { 'dungeon-pokemon-locked': $data.uncaught }" onerror="this.src='assets/images/trainers/Mysterious Trainer.png';"/>
             <sup class="shiny" data-bind="visible: $data.shiny">✨</sup>
             <img class="lock" src="assets/images/breeding/lock.svg" data-bind="
             hidden: !$data.lock,
             tooltip: {
-                title: 'Try talking to the locals. Sometimes they know more than you think.',
+                title: 'Try progressing in the story, catching new Pokémon, or talking to the locals!',
                 html: true,
                 placement: 'bottom',
                 trigger: 'hover'
@@ -97,11 +103,11 @@
           <li class="list-inline-item" data-bind="hidden: $data.hide">
             <img class="boss" src="assets/images/dungeons/boss.svg"/>
             <img class="dungeon-pokemon-preview" src="" data-bind="attr:{ src: $data.image },
-            css: { 'dungeon-pokemon-locked': $data.hidden }" onerror="this.src='assets/images/trainers/Mysterious Trainer.png';"/>
+            css: { 'dungeon-pokemon-locked': $data.uncaught }" onerror="this.src='assets/images/trainers/Mysterious Trainer.png';"/>
             <sup class="shiny" data-bind="visible: $data.shiny">✨</sup>
             <img class="lock" src="assets/images/breeding/lock.svg" data-bind="hidden: !$data.lock,
             tooltip: {
-                title: 'Try talking to the locals. Sometimes they know more than you think.',
+                title: 'Try progressing in the story, catching new Pokémon, or talking to the locals!',
                 html: true,
                 placement: 'bottom',
                 trigger: 'hover'

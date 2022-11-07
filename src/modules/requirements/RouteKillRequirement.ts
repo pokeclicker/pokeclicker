@@ -14,7 +14,7 @@ export default class RouteKillRequirement extends AchievementRequirement {
         public route: number,
         option: AchievementOption = AchievementOption.more,
     ) {
-        super(value, option, AchievementType['Route Kill']);
+        super(value, option, AchievementType['Route Defeats']);
     }
 
     public getProgress() {
@@ -24,9 +24,9 @@ export default class RouteKillRequirement extends AchievementRequirement {
 
     public hint(): string {
         if (this.requiredValue !== ROUTE_KILLS_NEEDED) {
-            return `${this.requiredValue} Pokémon need to be defeated on ${Routes.getName(this.route, this.region)}.`;
+            return `${this.requiredValue} Pokémon need to be defeated on ${Routes.getName(this.route, this.region, true)}.`;
         }
 
-        return `${Routes.getName(this.route, this.region)} still needs to be completed.`;
+        return `${Routes.getName(this.route, this.region, true)} still needs to be completed.`;
     }
 }

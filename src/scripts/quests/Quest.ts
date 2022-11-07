@@ -58,20 +58,28 @@ abstract class Quest {
             if (this.pointsReward) {
                 App.game.wallet.gainQuestPoints(this.pointsReward);
                 Notifier.notify({
-                    message: `You have completed your quest and claimed ${this.pointsReward} quest points!`,
+                    message: `You have completed your quest!\nYou claimed <img src="./assets/images/currency/questPoint.svg" height="24px"/> ${this.pointsReward.toLocaleString('en-US')}!`,
+                    strippedMessage: `You have completed your quest and claimed ${this.pointsReward.toLocaleString('en-US')} Quest Points!`,
                     type: NotificationConstants.NotificationOption.success,
+                    setting: NotificationConstants.NotificationSetting.General.quest_completed,
                 });
                 App.game.logbook.newLog(
                     LogBookTypes.QUEST,
-                    `Completed "${this.description}" for ${this.pointsReward} quest points.`);
+                    createLogContent.completedQuestWithPoints({
+                        quest: this.description,
+                        points: this.pointsReward.toLocaleString('en-US'),
+                    })
+                );
             } else {
                 Notifier.notify({
                     message: 'You have completed a quest!',
                     type: NotificationConstants.NotificationOption.success,
+                    setting: NotificationConstants.NotificationSetting.General.quest_completed,
                 });
                 App.game.logbook.newLog(
                     LogBookTypes.QUEST,
-                    `Completed "${this.description}".`);
+                    createLogContent.completedQuest({ quest: this.description })
+                );
             }
             GameHelper.incrementObservable(App.game.statistics.questsCompleted);
             return true;
@@ -82,10 +90,10 @@ abstract class Quest {
     quit(shouldConfirm = false) {
         if (shouldConfirm) {
             Notifier.confirm({
-                title: 'Quit quest',
+                title: 'Quit Quest',
                 message: 'Are you sure?\n\nYou can start the quest again later but you will lose all progress!',
                 type: NotificationConstants.NotificationOption.warning,
-                confirm: 'quit',
+                confirm: 'Quit',
             }).then(confirmed => {
                 if (confirmed) {
                     this.initial(null);
@@ -120,9 +128,9 @@ abstract class Quest {
 
         this.progressText = ko.pureComputed(() => {
             if (this.initial() !== null) {
-                return `${Math.min((this.focus() - this.initial()), this.amount)} / ${this.amount}`;
+                return `${Math.min((this.focus() - this.initial()), this.amount).toLocaleString('en-US')} / ${this.amount.toLocaleString('en-US')}`;
             } else {
-                return `0 / ${this.amount}`;
+                return `0 / ${this.amount.toLocaleString('en-US')}`;
             }
         });
 
@@ -137,7 +145,8 @@ abstract class Quest {
             const completed = this.progress() == 1 || this.claimed();
             if (!this.autoComplete && completed && !this.notified) {
                 Notifier.notify({
-                    message: `You can complete your quest for ${this.pointsReward} quest points!`,
+                    message: `You can complete your quest for <img src="./assets/images/currency/questPoint.svg" height="24px"/> ${this.pointsReward.toLocaleString('en-US')}!`,
+                    strippedMessage: `You can complete your quest for ${this.pointsReward.toLocaleString('en-US')} Quest Points!`,
                     type: NotificationConstants.NotificationOption.success,
                     timeout: 5e3,
                     sound: NotificationConstants.NotificationSound.Quests.quest_ready_to_complete,
@@ -172,7 +181,7 @@ abstract class Quest {
 
     //#endregion
 
-    toJSON() {
+    toJSON(): Record<string, any> {
         return {
             index: this.index || 0,
             customDescription: this.customDescription,
@@ -190,9 +199,9 @@ abstract class Quest {
             this.initial(null);
             this.notified = false;
         }
-        this.index = json.hasOwnProperty('index') ? json['index'] : 0;
-        this.claimed(json.hasOwnProperty('claimed') ? json['claimed'] : false);
-        this.initial(json.hasOwnProperty('initial') ? json['initial'] : null);
-        this.notified = json.hasOwnProperty('notified') ? json['notified'] : false;
+        this.index = json.hasOwnProperty('index') ? json.index : 0;
+        this.claimed(json.hasOwnProperty('claimed') ? json.claimed : false);
+        this.initial(json.hasOwnProperty('initial') ? json.initial : null);
+        this.notified = json.hasOwnProperty('notified') ? json.notified : false;
     }
 }

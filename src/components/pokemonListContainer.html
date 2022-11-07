@@ -13,7 +13,9 @@
                     for="partySortDirection"
                     class="clickable m-0 pl-2 pr-2"
                     style="font-size: 22px;"
-                    data-bind="text: Settings.getSetting('partySortDirection').observableValue() ? '⥄' : '⥂'"
+                    data-bind="
+                        text: Settings.getSetting('partySortDirection').observableValue() ? '⥄' : '⥂',
+                        tooltip: { title: Settings.getSetting('partySortDirection').observableValue() ? 'Descending (highest value first)' : 'Ascending (lowest value first)', trigger: 'hover', placement:'top', html: true }"
                 >⥂</label>
                 <input
                     id="partySortDirection"
@@ -57,7 +59,7 @@
                     <td>
                         <img
                             class="smallImage"
-                            data-bind="attr: { src: PokemonHelper.getImage($data, App.game.party.alreadyCaughtPokemon($data.id, true)) }"
+                            data-bind="attr: { src: PokemonHelper.getImage($data.id) }"
                             src=""
                             alt=""
                         />
@@ -65,10 +67,10 @@
                     <td>
                         <div>
                             <div class="pokemonName">
-                                <span data-bind="text: name">Name</span>
+                                <span data-bind="text: displayName">Name</span>
                                 <sup data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)">✨</sup>
                             </div>
-                            <div class="pokemonAttack" data-bind="text: attack.toLocaleString()"></div>
+                            <div class="pokemonAttack" data-bind="text: attack.toLocaleString('en-US')"></div>
                             <div class="pokemonLevel" data-bind="text: level"></div>
                         </div>
                     </td>
