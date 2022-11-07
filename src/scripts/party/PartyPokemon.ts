@@ -317,6 +317,19 @@ class PartyPokemon implements Saveable {
         }
     }
 
+    public hideFromHeldItemList = ko.pureComputed(() => {
+        if (this.heldItem()) {
+            return true;
+        }
+        if (!HeldItem.heldItemSelected().canUse(this)) {
+            return true;
+        }
+        if (!new RegExp(Settings.getSetting('heldItemSearchFilter').observableValue() , 'i').test(this.name)) {
+            return true;
+        }
+        return false;
+    });
+
     public fromJSON(json: Record<string, any>): void {
         if (json == null) {
             return;
