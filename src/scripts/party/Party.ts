@@ -40,26 +40,31 @@ class Party implements Feature {
 
     }
 
-    gainPokemonById(id: number, shiny = false, suppressNotification = false) {
-        this.gainPokemon(PokemonFactory.generatePartyPokemon(id, shiny), suppressNotification);
+    gainPokemonById(id: number, shiny = false, suppressNotification = false, gender = -1) {
+        // If no gender defined, calculate it
+        if (gender === -1) {
+            gender = PokemonFactory.generateGenderById(id);
+        }
+        this.gainPokemon(PokemonFactory.generatePartyPokemon(id, shiny, gender), suppressNotification);
     }
 
     gainPokemon(pokemon: PartyPokemon, suppressNotification = false) {
-        GameHelper.incrementObservable(App.game.statistics.pokemonCaptured[pokemon.id]);
-        GameHelper.incrementObservable(App.game.statistics.totalPokemonCaptured);
-
+        PokemonHelper.incrementPokemonStatistics(pokemon.id, GameConstants.STATISTIC_CAPTURED, pokemon.shiny, pokemon.gender);
         if (pokemon.shiny) {
-            GameHelper.incrementObservable(App.game.statistics.shinyPokemonCaptured[pokemon.id]);
-            GameHelper.incrementObservable(App.game.statistics.totalShinyPokemonCaptured);
             // Add all shiny catches to the log book
-            App.game.logbook.newLog(LogBookTypes.CAUGHT, `You have captured a shiny ${pokemon.name}! ${this.alreadyCaughtPokemon(pokemon.id, true) ? '(duplicate)' : ''}`);
+            App.game.logbook.newLog(
+                LogBookTypes.CAUGHT,
+                this.alreadyCaughtPokemon(pokemon.id, true)
+                    ? createLogContent.capturedShinyDupe({ pokemon: pokemon.name })
+                    : createLogContent.capturedShiny({ pokemon: pokemon.name })
+            );
             // Already caught (shiny)
             if (this.alreadyCaughtPokemon(pokemon.id, true)) {
                 return;
             }
             // Notify if not already caught
             Notifier.notify({
-                message: `✨ You have captured a shiny ${pokemon.name}! ✨`,
+                message: `✨ You have captured a shiny ${pokemon.displayName}! ✨`,
                 type: NotificationConstants.NotificationOption.warning,
                 sound: NotificationConstants.NotificationSound.General.new_catch,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
@@ -79,15 +84,22 @@ class Party implements Feature {
 
         if (!suppressNotification) {
             Notifier.notify({
-                message: `You have captured ${GameHelper.anOrA(pokemon.name)} ${pokemon.name}!`,
+                message: `You have captured ${GameHelper.anOrA(pokemon.name)} ${pokemon.displayName}!`,
                 type: NotificationConstants.NotificationOption.success,
                 sound: NotificationConstants.NotificationSound.General.new_catch,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
             });
         }
 
-        App.game.logbook.newLog(LogBookTypes.CAUGHT, `You have captured ${GameHelper.anOrA(pokemon.name)} ${pokemon.name}!`);
+        App.game.logbook.newLog(
+            LogBookTypes.CAUGHT,
+            createLogContent.captured({ pokemon: pokemon.name })
+        );
         this._caughtPokemon.push(pokemon);
+    }
+
+    public removePokemonByName(name: PokemonNameType) {
+        this._caughtPokemon.remove(p => p.name == name);
     }
 
     public gainExp(exp = 0, level = 1, trainer = false) {
@@ -184,6 +196,10 @@ class Party implements Feature {
         }
 
         let EPNum = number * App.game.multiplier.getBonus('ev');
+
+        if (pokemon.heldItem() && pokemon.heldItem() instanceof EVsGainedBonusHeldItem) {
+            EPNum *= (pokemon.heldItem() as EVsGainedBonusHeldItem).gainedBonus;
+        }
 
         if (shiny) {
             EPNum *= GameConstants.SHINY_EP_MODIFIER;

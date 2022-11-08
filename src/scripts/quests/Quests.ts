@@ -154,7 +154,10 @@ class Quests implements Saveable {
                 sound: NotificationConstants.NotificationSound.Quests.quest_level_increased,
             });
             this.freeRefresh(true);
-            App.game.logbook.newLog(LogBookTypes.QUEST, `Quest level increased to level ${this.level()}!`);
+            App.game.logbook.newLog(
+                LogBookTypes.QUEST,
+                createLogContent.questLevelUp({ level: this.level().toLocaleString() })
+            );
             // Track when users gains a quest level and how long it took in seconds
             LogEvent('gain quest level', 'quests', `level (${this.level()})`, App.game.statistics.secondsPlayed());
         }

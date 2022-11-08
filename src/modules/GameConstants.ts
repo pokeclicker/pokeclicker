@@ -11,6 +11,7 @@ export const BATTLE_FRONTIER_TICK = 0.5 * SECOND;
 export const UNDERGROUND_TICK = 1 * SECOND;
 export const DUNGEON_TIME = 60 * SECOND;
 export const DUNGEON_TICK = 0.1 * SECOND;
+export const DUNGEON_LADDER_BONUS = 10 * SECOND;
 export const EFFECT_ENGINE_TICK = 1 * SECOND;
 export const SAVE_TICK = 10 * SECOND;
 export const GYM_TIME = 30 * SECOND;
@@ -24,6 +25,8 @@ export const WANDER_TICK = 1.5 * SECOND;
 export const TEMP_BATTLE_TIME = 60 * SECOND;
 export const TEMP_BATTLE_TICK = 0.1 * SECOND;
 
+// Update the requirement for "Final Region Town" in TownList, when adding new regions.
+// Else the professor NPC won't work.
 export enum Region {
     none = -1,
     kanto = 0,
@@ -38,7 +41,7 @@ export enum Region {
     final = 8,
 }
 
-export const MAX_AVAILABLE_REGION = Region.alola;
+export const MAX_AVAILABLE_REGION = Region.galar;
 
 export const MaxIDPerRegion = [
     151, // 151 - Kanto
@@ -64,6 +67,7 @@ export const SHINY_CHANCE_DUNGEON = 4096;
 export const SHINY_CHANCE_STONE = 2048;
 export const SHINY_CHANCE_SAFARI = 2048;
 export const SHINY_CHANCE_SHOP = 1024;
+export const SHINY_CHANCE_BATTLEFRONTIER = 1024;
 export const SHINY_CHANCE_BREEDING = 1024;
 export const SHINY_CHANCE_FARM = 1024;
 
@@ -106,6 +110,7 @@ export const BerryColor = [
 // Dungeons
 export const BASE_DUNGEON_SIZE = 5;
 export const MIN_DUNGEON_SIZE = 5;
+export const MAX_DUNGEON_SIZE = 10;
 export const DUNGEON_CHEST_SHOW = 2;
 export const DUNGEON_MAP_SHOW = 4;
 
@@ -118,27 +123,25 @@ export enum AchievementOption {
 
 export enum AchievementType {
     'None' = -1,
-    'Money' = 0,
-    'Token',
-    'Attack',
-    'Diamond',
-    'Underground Items Found',
-    'Underground Layers Mined',
-    'Max Level Oak Item',
-    'Captured',
-    'Defeated',
+    'Pokedollars' = 0,
+    'Dungeon Token',
     'Caught Pokemon',
     'Shiny Pokemon',
-    'Hatch',
-    'Pokeball',
-    'Click',
-    'Route Defeat',
+    'Total Captured',
+    'Total Defeated',
+    'Attack',
+    'Poke Balls',
+    'Route Defeats',
     'Clear Gym',
     'Clear Dungeon',
-    'Farming',
     'Quest',
+    'Max Level Oak Item',
+    'Hatchery',
+    'Farming',
+    'Underground',
     'Battle Frontier',
     'Protein',
+    'Pokerus',
 }
 
 export enum DungeonTile {
@@ -147,6 +150,7 @@ export enum DungeonTile {
     enemy,
     chest,
     boss,
+    ladder,
 }
 
 // Held item chance
@@ -156,6 +160,9 @@ export const DUNGEON_BOSS_HELD_ITEM_MODIFIER = DUNGEON_HELD_ITEM_MODIFIER * 1.5;
 export const HELD_ITEM_CHANCE = 512;
 export const HELD_UNDERGROUND_ITEM_CHANCE = 2048;
 export const DNA_ITEM_CHANCE = 60;
+export const LIGHT_ITEM_CHANCE = 100;
+export const RUST_ITEM_CHANCE = 90;
+export const MANE_ITEM_CHANCE = 10;
 
 // Gems
 export const GEM_UPGRADE_COST = 500;
@@ -528,7 +535,7 @@ export const Environments: Record<string, EnvironmentData> = {
     Fire: {
         [Region.kanto]: new Set(['Cinnabar Island', 'Mt. Ember', 'Mt. Ember Summit', 'Ruby Path']),
         [Region.johto]: new Set(),
-        [Region.hoenn]: new Set(['Lavaridge Town', 'Fiery Path', 'Mt. Chimney', 'Mt. Chimney Crater']),
+        [Region.hoenn]: new Set(['Lavaridge Town', 'Fiery Path', 'Mt. Chimney', 'Mt. Chimney Crater', 'Magma Hideout']),
         [Region.sinnoh]: new Set(['Stark Mountain']),
         [Region.unova]: new Set(['Reversal Mountain']),
         [Region.kalos]: new Set(),
@@ -550,12 +557,12 @@ export const Environments: Record<string, EnvironmentData> = {
     Cave: {
         [Region.kanto]: new Set([37, 39, 'Pewter City', 'Diglett\'s Cave', 'Mt. Moon', 'Rock Tunnel', 'Victory Road', 'Lost Cave', 'Altering Cave', 'Tanoby Ruins']),
         [Region.johto]: new Set(['Cianwood City', 'Ruins of Alph', 'Union Cave', 'Mt. Mortar', 'Dark Cave', 'Tohjo Falls', 'Victory Road Johto']),
-        [Region.hoenn]: new Set(['Rustboro City', 'Dewford Town', 'Rusturf Tunnel', 'Granite Cave', 'Meteor Falls', 'Seafloor Cavern', 'Victory Road Hoenn']),
+        [Region.hoenn]: new Set(['Rustboro City', 'Dewford Town', 'Rusturf Tunnel', 'Granite Cave', 'Meteor Falls', 'Jagged Pass', 'Seafloor Cavern', 'Victory Road Hoenn']),
         [Region.sinnoh]: new Set(['Oreburgh City', 'Oreburgh Gate', 'Wayward Cave', 'Mt. Coronet', 'Mt. Coronet South', 'Iron Island', 'Mt. Coronet North', 'Victory Road Sinnoh']),
         [Region.unova]: new Set(['Relic Castle', 'Relic Passage', 'Seaside Cave', 'Victory Road Unova', 'Twist Mountain']),
         [Region.kalos]: new Set([9, 13, 'Connecting Cave', 'Kiloude City', 'Terminus Cave', 'Victory Road Kalos']),
         [Region.alola]: new Set([12, 22, 29, 'Verdant Cavern', 'Seaward Cave', 'Ten Carat Hill', 'Diglett\'s Tunnel', 'Vast Poni Canyon']),
-        [Region.galar]: new Set(['Warm-Up Tunnel', 'Courageous Cavern', 'Brawlers Cave', 'Rock Peak Ruins', 'Split-Decision Ruins', 'Lakeside Cave', 'Tunnel to the Top', 18]),
+        [Region.galar]: new Set(['Warm-Up Tunnel', 'Courageous Cavern', 'Brawlers\' Cave', 'Rock Peak Ruins', 'Split-Decision Ruins', 'Lakeside Cave', 'Tunnel to the Top', 18]),
     },
 
     GemCave: {
@@ -572,7 +579,7 @@ export const Environments: Record<string, EnvironmentData> = {
     PowerPlant: {
         [Region.kanto]: new Set(['Vermilion City', 'Rocket Game Corner', 'Power Plant']),
         [Region.johto]: new Set(['Tin Tower', 'Team Rocket\'s Hideout', 'Radio Tower']),
-        [Region.hoenn]: new Set(['Mauville City', 'New Mauville', 'Weather Institute']),
+        [Region.hoenn]: new Set(['Mauville City', 'New Mauville', 'Weather Institute', 'Aqua Hideout']),
         [Region.sinnoh]: new Set(['Sunyshore City', 'Valley Windworks', 'Team Galactic Eterna Building', 'Team Galactic HQ']),
         [Region.unova]: new Set(['Castelia Sewers', 'Virbank City', 'Nimbasa City', 'A Totally Unsuspicious Frigate', 'Plasma Frigate']),
         [Region.kalos]: new Set(['Lumiose City', 'Kalos Power Plant', 'Poké Ball Factory', 'Team Flare Secret HQ']),
@@ -583,12 +590,12 @@ export const Environments: Record<string, EnvironmentData> = {
     Mansion: {
         [Region.kanto]: new Set(['Silph Co.', 'Pokémon Mansion']),
         [Region.johto]: new Set(['Olivine City', 'Sprout Tower', 'Burned Tower']),
-        [Region.hoenn]: new Set(['Petalburg City', 'Jagged Pass']),
+        [Region.hoenn]: new Set(['Petalburg City']),
         [Region.sinnoh]: new Set(['Veilstone City', 'Canalave City', 'Snowpoint Temple']),
         [Region.unova]: new Set(['Castelia City', 'Mistralton City', 'Opelucid City', 'Liberty Garden', 'Dragonspiral Tower', 'Dreamyard']),
-        [Region.kalos]: new Set(['Lost Hotel']),
+        [Region.kalos]: new Set(['Parfum Palace', 'Lost Hotel']),
         [Region.alola]: new Set(['Trainers\' School', 'Thrifty Megamart', 'Po Town', 'Ruins of Conflict', 'Ruins of Life', 'Ruins of Abundance', 'Ruins of Hope']),
-        [Region.galar]: new Set(['Rose Tower', 'Hammerlocke', 'Stow-on-Side', 'Tower of Darkness', 'Tower of waters', 'Professor Magnolia\'s House', 'Wyndon', 'Wyndon Stadium', 'Master Dojo', 11]),
+        [Region.galar]: new Set(['Rose Tower', 'Hammerlocke', 'Stow-on-Side', 'Tower of Darkness', 'Tower of Waters', 'Professor Magnolia\'s House', 'Wyndon', 'Wyndon Stadium', 'Master Dojo', 11]),
     },
 
     Graveyard: {
@@ -657,28 +664,15 @@ export enum StoneType {
     'Sachet',
     'Whipped_dream',
     'Ice_stone',
+    'Solar_light',
+    'Lunar_light',
     'Sweet_apple',
     'Tart_apple',
     'Cracked_pot',
     'Galarica_cuff',
     'Galarica_wreath',
-}
-
-export enum ShardType {
-    'None' = -1,
-    'Red Shard',
-    'Yellow Shard',
-    'Green Shard',
-    'Blue Shard',
-    'Grey Shard',
-    'Purple Shard',
-    'Ochre Shard',
-    'Black Shard',
-    'Crimson Shard',
-    'Lime Shard',
-    'White Shard',
-    'Pink Shard',
-    'Cyan Shard',
+    'Black_mane_hair',
+    'White_mane_hair',
 }
 
 export enum FossilPieceType {
@@ -714,11 +708,20 @@ export enum FluteItemType {
 }
 
 export enum PokemonItemType {
+    'Pinkan Arbok',
+    'Pinkan Oddish',
+    'Pinkan Poliwhirl',
+    'Pinkan Geodude',
+    'Pinkan Dodrio',
+    'Lickitung',
+    'Pinkan Weezing',
+    'Mr. Mime',
+    'Pinkan Scyther',
+    'Jynx',
+    'Pinkan Electabuzz',
+    'Magikarp',
     'Eevee',
     'Porygon',
-    'Jynx',
-    'Mr. Mime',
-    'Lickitung',
     'Togepi',
     'Beldum',
     'Skorupi',
@@ -734,6 +737,7 @@ export enum PokemonItemType {
     'Arctozolt',
     'Dracovish',
     'Arctovish',
+    'Zarude (Dada)',
 }
 
 export enum UltraBeastType {
@@ -785,7 +789,9 @@ export enum BulletinBoards {
     None = -2,
     All = -1,
     Kanto,
+    Johto,
     Hoenn,
+    Sevii4567,
     Kalos,
     Alola,
     Galar,
@@ -956,10 +962,15 @@ export const GalarGyms = [
     'Circhester2',
     'Spikemuth',
     'Hammerlocke',
-    'Trainer Marnie',
-    'Trainer Hop',
-    'Gym Leader Bede',
+    'Elite Trainer Marnie',
+    'Elite Gym Leader Bede',
+    'Elite Trainer Hop',
     'Champion Leon',
+    'Elite Gym Leader Klara',
+    'Elite Gym Leader Avery',
+    'Elite Dojo Matron Honey',
+    'Elite Dojo Master Mustard',
+    'Elite Trainer Peony',
 ];
 
 export const OrangeGyms = [
@@ -1194,7 +1205,7 @@ export const GalarDungeons = [
     'Energy Plant',
     'Dusty Bowl',
     'Courageous Cavern',
-    'Brawlers Cave',
+    'Brawlers\' Cave',
     'Warm-Up Tunnel',
     'Tower of Darkness',
     'Tower of Waters',
@@ -1237,6 +1248,7 @@ export const StartingTowns = [
     'Vaniville Town', // Kalos
     'Iki Town Outskirts', // Alola
     'Postwick', // Galar
+    'Final Region Town', // Final
 ];
 
 export const StartingRoutes = [
@@ -1274,10 +1286,23 @@ export const RegionalStarters = [
 
 export const TemporaryBattles = [
     'Fighting Dojo',
+    'Snorlax route 12',
+    'Snorlax route 16',
     'Biker Goon 1',
     'Biker Goon 2',
     'Biker Goon 3',
     'Cue Ball Paxton',
+    'Sudowoodo',
+    'Suicune 1',
+    'Eusine',
+    'Suicune 2',
+    'Suicune 3',
+    'Suicune 4',
+    'Suicune 5',
+    'Suicune 6',
+    'Kecleon 1',
+    'Kecleon 2',
+    'Kecleon 3',
     'Sevii Rocket Grunt 1',
     'Sevii Rocket Grunt 2',
     'Sevii Rocket Grunt 3',
@@ -1286,6 +1311,9 @@ export const TemporaryBattles = [
     'Sevii Rocket Ariana',
     'Sevii Rocket Archer',
     'Scientist Gideon',
+    'Pinkan Jessie & James',
+    'Pinkan Officer Jenny',
+    'Kimono Girls',
     'Spiky-eared Pichu',
     'Rocket Boss Giovanni',
     'Galactic Boss Cyrus',
@@ -1315,6 +1343,9 @@ export const TemporaryBattles = [
     'Lab Ambush',
     'Imposter',
     'Possessed Mewtwo',
+    'Riot',
+    'Merilyn',
+    'Millis and Argus Steel',
     'AZ',
     'Ash Ketchum Kanto',
     'Ash Ketchum Johto',
@@ -1336,24 +1367,24 @@ export const TemporaryBattles = [
     'Captain Mina UB',
     'Kahuna Nanu UB',
     'Ash Ketchum Alola',
-    'Hop1',
+    'Hop 1',
     'Mirages',
-    'Hop2',
-    'Hop3',
-    'Bede1',
-    'Hop4',
-    'Bede2',
-    'Marnie1',
-    'Hop5',
-    'Bede3',
-    'Hop6',
-    'Hop7',
-    'Marnie2',
+    'Hop 2',
+    'Hop 3',
+    'Bede 1',
+    'Hop 4',
+    'Bede 2',
+    'Marnie 1',
+    'Hop 5',
+    'Bede 3',
+    'Hop 6',
+    'Hop 7',
+    'Marnie 2',
     'Eternatus',
     'The Darkest Day',
-    'Hop8',
-    'Sordward1',
-    'Shielbert1',
+    'Hop 8',
+    'Sordward 1',
+    'Shielbert 1',
     'Rampaging Tsareena',
     'Rampaging Gyarados',
     'Rampaging Torkoal',
@@ -1365,22 +1396,38 @@ export const TemporaryBattles = [
     'Rampaging Froslass',
     'Gym Leader Marnie',
     'Rampaging Haxorus',
-    'Sordward2',
-    'Shielbert2',
+    'Sordward 2',
+    'Shielbert 2',
     'Rampaging Zacian',
     'Rampaging Zamazenta',
-    'Klara1',
-    'Avery1',
+    'Klara 1',
+    'Avery 1',
     'Mustard',
-    'Klara2',
-    'Avery2',
-    'Klara3',
-    'Avery3',
+    'Klara 2',
+    'Avery 2',
+    'Klara 3',
+    'Avery 3',
+    'Kubfu',
+    'Zarude Tribe 1',
+    'Zarude Tribe 2',
+    'Zarude Tribe 3',
+    'Ash Ketchum Galar',
+    'Zarude (Dada)',
+    'Flowering Celebi',
     'Peony',
     'Calyrex',
     'Glastrier',
     'Spectrier',
     'Dyna Tree Birds',
+    'Galarian Articuno 1',
+    'Galarian Articuno 2',
+    'Galarian Articuno 3',
+    'Galarian Zapdos 1',
+    'Galarian Zapdos 2',
+    'Galarian Zapdos 3',
+    'Galarian Moltres 1',
+    'Galarian Moltres 2',
+    'Galarian Moltres 3',
     'Regigigas',
 ];
 
@@ -1472,6 +1519,14 @@ export enum ShardTraderLocations {
     'Master Dojo',
 }
 
+export enum BerryTraderLocations {
+    'None' = -1,
+    'Goldenrod City' = 0,
+    'Mauville City',
+    'Pinkan Pokémon Reserve',
+    'Hearthome City',
+}
+
 export function getTemporaryBattlesIndex(temporaryBattle: string): number {
     return TemporaryBattles.findIndex((t) => t === temporaryBattle);
 }
@@ -1523,9 +1578,8 @@ export enum KalosSubRegions {
 export enum AlolaSubRegions {
     MelemeleIsland = 0,
     AkalaIsland,
-    UlaulaAndPoniIslands,
-    // UlaulaIsland,
-    // PoniIsland,
+    UlaulaIsland,
+    PoniIsland,
 }
 
 export enum GalarSubRegions {
@@ -1533,4 +1587,64 @@ export enum GalarSubRegions {
     NorthGalar,
     IsleofArmor,
     CrownTundra,
+}
+
+export enum FinalSubRegions {
+    Final = 0,
+}
+
+export type SubRegions =
+    | KantoSubRegions
+    | JohtoSubRegions
+    | HoennSubRegions
+    | SinnohSubRegions
+    | UnovaSubRegions
+    | KalosSubRegions
+    | AlolaSubRegions
+    | GalarSubRegions
+    | FinalSubRegions;
+
+// Gender Types
+export enum Genders {
+    Genderless = 0,
+    MaleFemale, // Default
+}
+
+// Wild/Trainer/BF Pokémon Gender
+export enum BattlePokemonGender {
+    NoGender = 0,
+    Male,
+    Female,
+}
+
+// Pokemon Statistics
+export const STATISTIC_CAPTURED = 'Captured';
+export const STATISTIC_DEFEATED = 'Defeated';
+export const STATISTIC_ENCOUNTERED = 'Encountered';
+export const STATISTIC_HATCHED = 'Hatched';
+
+export enum AlcremieSweet {
+    'Strawberry Sweet',
+    'Love Sweet',
+    'Berry Sweet',
+    'Clover Sweet',
+    'Flower Sweet',
+    'Star Sweet',
+    'Ribbon Sweet',
+}
+export enum AlcremieSpins {
+    dayClockwiseBelow5,
+    dayCounterclockwiseBelow5,
+    nightClockwiseBelow5,
+    nightCounterclockwiseAbove5,
+    nightClockwiseAbove5,
+    nightCounterclockwiseBelow5,
+    dayClockwiseAbove5,
+    dayCounterclockwiseAbove5,
+    at7Above10,
+}
+
+export enum ExtraAchievementCategories {
+    global = Region.final,
+    sevii,
 }

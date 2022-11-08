@@ -136,7 +136,7 @@
   animation-name: spin;
   animation-duration: 750ms;
   animation-iteration-count: infinite;
-  animation-timing-function: linear; 
+  animation-timing-function: linear;
 }
 @keyframes spin {
     from {
@@ -159,5 +159,18 @@
   .message {
     width: 100%;
     text-align: center;
+  }
+  .modal-body.p-0 {
+    overflow: hidden;
+  }
+  .pageItemFooter {
+    @media (max-width: 768px) {
+      font-size: 25px;
+    }
+  }
+  .enemy {
+    @media (max-width: 768px) {
+      margin-top: 50px;
+    }
   }
 }

@@ -13,6 +13,8 @@ class Mine {
     // 0 represents the Mine.Tool.Chisel but it's not loaded here yet.
     public static toolSelected: KnockoutObservable<Mine.Tool> = ko.observable(0);
     private static loadingNewLayer = true;
+    // Number of times to try and place an item in a new layer before giving up, just a failsafe
+    private static maxPlacementAttempts = 1000;
 
     public static loadMine() {
         const tmpGrid = [];
@@ -33,29 +35,37 @@ class Mine {
         Mine.grid = tmpGrid;
         Mine.rewardGrid = tmpRewardGrid;
 
-        let added = 0;
-        for (let i = 0; i < App.game.underground.getMaxItems(); i++) {
-            const item = UndergroundItems.getRandomItem();
-            const x = Mine.getRandomCoord(Underground.sizeX, item.space[0].length);
-            const y = Mine.getRandomCoord(App.game.underground.getSizeY(), item.space.length);
-            const res = Mine.canAddReward(x, y, item);
-            if (res) {
-                Mine.addReward(x, y, item);
-                added = added + 1;
-            }
+        // Generate items for new layer
+        // Number of underground items must be >= min
+        // If max > min, randomly select the number of items for the layer
+        // Otherwise, the number of items must be equivalent to min
+        let numItems = App.game.underground.getMinItems();
+        if (App.game.underground.getMinItems() < App.game.underground.getMaxItems()) {
+            numItems = Rand.intBetween(App.game.underground.getMinItems(), App.game.underground.getMaxItems());
         }
 
-        // Check in case player upgrade min above max
-        const min = Math.min(App.game.underground.getMinItems(), App.game.underground.getMaxItems());
-        while (added < min) {
+        // Add numItems items to the layer
+        for (let i = 0; i < numItems; i++) {
+            let res = false;
+            let x = 0;
+            let y = 0;
             const item = UndergroundItems.getRandomItem();
-            const x = Mine.getRandomCoord(Underground.sizeX, item.space[0].length);
-            const y = Mine.getRandomCoord(App.game.underground.getSizeY(), item.space.length);
-            const res = Mine.canAddReward(x, y, item);
+            let attempts = 0;
+            // Keep checking random spots until a legal spot is found
+            // If too many failed attempts are made, break out as a failsafe
+            while (!res && attempts++ < this.maxPlacementAttempts) {
+                this.rotateReward(item);
+                x = Mine.getRandomCoord(Underground.sizeX, item.space[0].length);
+                y = Mine.getRandomCoord(App.game.underground.getSizeY(), item.space.length);
+                res = Mine.canAddReward(x, y, item);
+            }
+            // If item can be added, add it
+            // Else, if we haven't hit the minimum number of items yet, try again with a new random item
+            // Otherwise, just skip to next item
             if (res) {
                 Mine.addReward(x, y, item);
-                added = added + 1;
-                //This should loop until it's added.
+            } else if (i < App.game.underground.getMinItems()) {
+                i--;
             }
         }
 
@@ -83,7 +93,6 @@ class Mine {
         if (Mine.alreadyHasRewardId(reward.id)) {
             return false;
         }
-        this.rotateReward(reward);
         if (y + reward.space.length >= App.game.underground.getSizeY() || x + reward.space[0].length >= Underground.sizeX) {
             return false;
         }
@@ -340,7 +349,7 @@ class Mine {
                 let amount = 1;
                 const itemName = UndergroundItems.getById(Mine.rewardNumbers[i]).name;
                 Notifier.notify({
-                    message: `You found ${GameHelper.anOrA(itemName)} ${GameConstants.humanifyString(itemName)}`,
+                    message: `You found ${GameHelper.anOrA(itemName)} ${GameConstants.humanifyString(itemName)}.`,
                     type: NotificationConstants.NotificationOption.success,
                     setting: NotificationConstants.NotificationSetting.Underground.underground_item_found,
                 });
@@ -354,6 +363,7 @@ class Mine {
                             type: NotificationConstants.NotificationOption.success,
                             title: 'Treasure Scanner',
                             timeout: 4000,
+                            setting: NotificationConstants.NotificationSetting.Underground.underground_item_found,
                         });
 
                         if (Rand.chance(giveDouble)) {
@@ -363,6 +373,7 @@ class Mine {
                                 type: NotificationConstants.NotificationOption.success,
                                 title: 'Treasure Scanner',
                                 timeout: 6000,
+                                setting: NotificationConstants.NotificationSetting.Underground.underground_item_found,
                             });
 
                             if (Rand.chance(giveDouble)) {
@@ -372,6 +383,7 @@ class Mine {
                                     type: NotificationConstants.NotificationOption.success,
                                     title: 'Treasure Scanner',
                                     timeout: 8000,
+                                    setting: NotificationConstants.NotificationSetting.Underground.underground_item_found,
                                 });
                             }
                         }
