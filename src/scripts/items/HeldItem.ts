@@ -1,4 +1,4 @@
-///<reference path="Item.ts"/>
+/// <reference path="../../declarations/items/Item.d.ts"/>
 
 class HeldItem extends Item {
     public static heldItemSelected: KnockoutObservable<HeldItem> = ko.observable(undefined);

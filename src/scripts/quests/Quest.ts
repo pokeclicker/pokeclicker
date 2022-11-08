@@ -65,7 +65,11 @@ abstract class Quest {
                 });
                 App.game.logbook.newLog(
                     LogBookTypes.QUEST,
-                    `Completed "${this.description}" for ${this.pointsReward.toLocaleString('en-US')} Quest Points.`);
+                    createLogContent.completedQuestWithPoints({
+                        quest: this.description,
+                        points: this.pointsReward.toLocaleString('en-US'),
+                    })
+                );
             } else {
                 Notifier.notify({
                     message: 'You have completed a quest!',
@@ -74,7 +78,8 @@ abstract class Quest {
                 });
                 App.game.logbook.newLog(
                     LogBookTypes.QUEST,
-                    `Completed "${this.description}".`);
+                    createLogContent.completedQuest({ quest: this.description })
+                );
             }
             GameHelper.incrementObservable(App.game.statistics.questsCompleted);
             return true;
