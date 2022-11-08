@@ -1406,6 +1406,152 @@ class Update implements Saveable {
             saveData.logbook.logs.forEach(
                 log => log.content = createLogContent.notTranslated({ text: log.description })
             );
+
+            // Move IDs for consistency
+            const consistentIDs = [//Remember to change Gigantamax image numbers, even though they aren't here
+                [1.1, 1.01],
+                [1.2, 1.02],
+                [1.3, 1.03],
+                [2.1, 2.01],
+                [2.2, 2.02],
+                [2.3, 2.03],
+                [3.1, 3.02],
+                [3.2, 3.03],
+                [3.3, 3.04],
+                [4.1, 4.01],
+                [5.1, 5.01],
+                [6.1, 6.02],
+                [7.1, 7.01],
+                [8.1, 8.01],
+                [9.1, 9.02],
+                [12.01, 12.02],
+                [12.02, 12.03],
+                [12.03, 12.04],
+                [21.1, 21.01],
+                [25.07, 25.08],
+                [25.08, 25.10],
+                [25.09, 25.11],
+                [25.10, 25.12],
+                [25.11, 25.13],
+                [25.12, 25.07],
+                [25.13, 25.14],
+                [52.2, 52.02],
+                [77.1, 77.01],
+                [78.1, 78.01],
+                [79.1, 79.01],
+                [80.1, 80.01],
+                [83.1, 83.01],
+                [110.01, 110.02],
+                [110.1, 110.01],
+                [122.1, 122.01],
+                [133.1, 133.02],
+                [143.1, 143.02],
+                [144.1, 144.01],
+                [145.1, 145.01],
+                [146.1, 146.01],
+                [150.1, 150.01],
+                [172.1, 172.01],
+                [175.1, 175.01],
+                [175.2, 175.02],
+                [176.1, 176.01],
+                [199.1, 199.01],
+                [208.1, 208.01],
+                [222.1, 222.01],
+                [251.1, 251.01],
+                [251.2, 251.02],
+                [263.1, 263.01],
+                [264.1, 264.01],
+                [351.1, 351.01],
+                [351.2, 351.02],
+                [351.3, 351.03],
+                [386.1, 386.01],
+                [386.2, 386.02],
+                [386.3, 386.03],
+                [412.1, 412.01],
+                [412.2, 412.02],
+                [413.1, 413.01],
+                [413.2, 413.02],
+                [421.1, 421.01],
+                [422.1, 422.01],
+                [423.1, 423.01],
+                [446.1, 446.01],
+                [468.1, 468.01],
+                [479.1, 479.01],
+                [479.2, 479.02],
+                [479.3, 479.02],
+                [479.4, 479.04],
+                [479.5, 479.05],
+                [479.6, 479.06],
+                [487.1, 487.01],//Remove if this is merged before or at the same update as Giratina (Origin) is made available
+                [492.1, 492.01],
+                [554.1, 554.01],
+                [555.1, 555.01],
+                [555.2, 555.02],
+                [555.3, 555.03],
+                [562.1, 562.01],
+                [618.1, 618.01],
+                [646.1, 646.01],
+                [646.2, 646.02],
+                [647.1, 647.01],
+                [648.1, 648.01],
+                [681.1, 681.01],
+                [710.1, 710.01],
+                [710.2, 710.02],
+                [710.3, 710.03],
+                [711.1, 711.01],
+                [711.2, 711.02],
+                [711.3, 711.03],
+                [791.1, 791.01],
+                [792.1, 792.01],
+                [801.1, 801.01],
+                [845.1, 845.01],
+                [845.2, 845.02],
+                [849.1, 849.01],
+                //Alcremie
+                [875.1, 875.01],
+                [876.1, 876.01],
+                [877.1, 877.01],
+                [888.1, 888.01],
+                [889.1, 889.01],
+                [892.1, 892.01],
+                [893.1, 893.01],
+                [898.1, 898.01],
+                [898.2, 898.02],
+            ];
+
+            consistentIDs.forEach(([oldID, newID]) => {
+                const pokemon = saveData.party.caughtPokemon.find(p => p.id === oldID);
+                // If player hasn't caught this mon yet, return.
+                if (pokemon == undefined) {
+                    return;
+                }
+                // Update our ID
+                pokemon.id = newID;
+                if (!saveData.statistics.pokemonHatched) {
+                    saveData.statistics.pokemonHatched = {};
+                }
+                if (!saveData.statistics.shinyPokemonHatched) {
+                    saveData.statistics.shinyPokemonHatched = {};
+                }
+                // Update our statistics
+                saveData.statistics.pokemonEncountered[newID] = saveData.statistics.pokemonEncountered[oldID] || 0;
+                saveData.statistics.pokemonDefeated[newID] = saveData.statistics.pokemonDefeated[oldID] || 0;
+                saveData.statistics.pokemonCaptured[newID] = saveData.statistics.pokemonCaptured[oldID] || 0;
+                saveData.statistics.pokemonHatched[newID] = saveData.statistics.pokemonHatched[oldID] || 0;
+                saveData.statistics.shinyPokemonEncountered[newID] = saveData.statistics.shinyPokemonEncountered[oldID] || 0;
+                saveData.statistics.shinyPokemonDefeated[newID] = saveData.statistics.shinyPokemonDefeated[oldID] || 0;
+                saveData.statistics.shinyPokemonCaptured[newID] = saveData.statistics.shinyPokemonCaptured[oldID] || 0;
+                saveData.statistics.shinyPokemonHatched[newID] = saveData.statistics.shinyPokemonHatched[oldID] || 0;
+                // Delete our old statistics
+                delete saveData.statistics.pokemonEncountered[oldID];
+                delete saveData.statistics.pokemonDefeated[oldID];
+                delete saveData.statistics.pokemonCaptured[oldID];
+                delete saveData.statistics.pokemonHatched[oldID];
+                delete saveData.statistics.shinyPokemonEncountered[oldID];
+                delete saveData.statistics.shinyPokemonDefeated[oldID];
+                delete saveData.statistics.shinyPokemonCaptured[oldID];
+                delete saveData.statistics.shinyPokemonHatched[oldID];
+            });
         },
     };
 

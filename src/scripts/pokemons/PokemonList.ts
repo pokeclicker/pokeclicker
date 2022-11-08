@@ -87,7 +87,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 1.1,
+        'id': 1.01,
         'name': 'Bulbasaur (Clone)',
         'catchRate': 45,
         'type': [PokemonType.Grass, PokemonType.Poison],
@@ -108,7 +108,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 1.2,
+        'id': 1.02,
         'name': 'Spooky Bulbasaur',
         'catchRate': 25,
         'type': [PokemonType.Grass],
@@ -129,7 +129,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 1.3,
+        'id': 1.03,
         'name': 'Bulbasaur (Rose)',
         'catchRate': 25,
         'type': [PokemonType.Grass, PokemonType.Fairy],
@@ -171,7 +171,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 2.1,
+        'id': 2.01,
         'name': 'Ivysaur (Clone)',
         'catchRate': 45,
         'type': [PokemonType.Grass, PokemonType.Poison],
@@ -192,7 +192,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 2.2,
+        'id': 2.02,
         'name': 'Spooky Ivysaur',
         'catchRate': 45,
         'type': [PokemonType.Grass],
@@ -213,7 +213,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 2.3,
+        'id': 2.03,
         'name': 'Ivysaur (Rose)',
         'catchRate': 45,
         'type': [PokemonType.Grass, PokemonType.Fairy],
@@ -255,7 +255,28 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 3.1,
+        'id': 3.01,
+        'name': 'Gigantamax Venusaur',
+        'nativeRegion': GameConstants.Region.none,
+        'catchRate': 45,
+        'type': [PokemonType.Grass, PokemonType.Poison],
+        'levelType': LevelType.mediumslow,
+        'exp': 236,
+        'eggCycles': 20,
+        'base': {
+            'hitpoints': 160,
+            'attack': 82,
+            'specialAttack': 100,
+            'defense': 83,
+            'specialDefense': 100,
+            'speed': 80,
+        },
+        'gender': {
+            'femaleRatio': 0.125,
+        },
+    },
+    {
+        'id': 3.02,
         'name': 'Venusaur (Clone)',
         'catchRate': 45,
         'type': [PokemonType.Grass, PokemonType.Poison],
@@ -276,7 +297,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 3.2,
+        'id': 3.03,
         'name': 'Spooky Venusaur',
         'catchRate': 45,
         'type': [PokemonType.Grass, PokemonType.Dark],
@@ -296,7 +317,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 3.3,
+        'id': 3.04,
         'name': 'Venusaur (Rose)',
         'catchRate': 45,
         'type': [PokemonType.Grass, PokemonType.Fairy],
@@ -305,27 +326,6 @@ const pokemonList = createPokemonArray(
         'eggCycles': 20,
         'base': {
             'hitpoints': 80,
-            'attack': 82,
-            'specialAttack': 100,
-            'defense': 83,
-            'specialDefense': 100,
-            'speed': 80,
-        },
-        'gender': {
-            'femaleRatio': 0.125,
-        },
-    },
-    {
-        'id': 3.4,
-        'name': 'Gigantamax Venusaur',
-        'nativeRegion': GameConstants.Region.none,
-        'catchRate': 45,
-        'type': [PokemonType.Grass, PokemonType.Poison],
-        'levelType': LevelType.mediumslow,
-        'exp': 236,
-        'eggCycles': 20,
-        'base': {
-            'hitpoints': 160,
             'attack': 82,
             'specialAttack': 100,
             'defense': 83,
@@ -358,7 +358,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 4.1,
+        'id': 4.01,
         'name': 'Charmander (Clone)',
         'catchRate': 45,
         'type': [PokemonType.Fire],
@@ -400,7 +400,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 5.1,
+        'id': 5.01,
         'name': 'Charmeleon (Clone)',
         'catchRate': 45,
         'type': [PokemonType.Fire],
@@ -441,15 +441,16 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 6.1,
-        'name': 'Charizard (Clone)',
+        'id': 6.01,
+        'name': 'Gigantamax Charizard',
+        'nativeRegion': GameConstants.Region.none,
         'catchRate': 45,
         'type': [PokemonType.Fire, PokemonType.Flying],
         'levelType': LevelType.mediumslow,
         'exp': 240,
         'eggCycles': 20,
         'base': {
-            'hitpoints': 78,
+            'hitpoints': 156,
             'attack': 84,
             'specialAttack': 109,
             'defense': 78,
@@ -461,16 +462,15 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 6.2,
-        'name': 'Gigantamax Charizard',
-        'nativeRegion': GameConstants.Region.none,
+        'id': 6.02,
+        'name': 'Charizard (Clone)',
         'catchRate': 45,
         'type': [PokemonType.Fire, PokemonType.Flying],
         'levelType': LevelType.mediumslow,
         'exp': 240,
         'eggCycles': 20,
         'base': {
-            'hitpoints': 156,
+            'hitpoints': 78,
             'attack': 84,
             'specialAttack': 109,
             'defense': 78,
@@ -503,7 +503,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 7.1,
+        'id': 7.01,
         'name': 'Squirtle (Clone)',
         'catchRate': 45,
         'type': [PokemonType.Water],
@@ -545,7 +545,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 8.1,
+        'id': 8.01,
         'name': 'Wartortle (Clone)',
         'catchRate': 45,
         'type': [PokemonType.Water],
@@ -586,15 +586,16 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 9.1,
-        'name': 'Blastoise (Clone)',
+        'id': 9.01,
+        'name': 'Gigantamax Blastoise',
+        'nativeRegion': GameConstants.Region.none,
         'catchRate': 45,
         'type': [PokemonType.Water],
         'levelType': LevelType.mediumslow,
         'exp': 239,
         'eggCycles': 20,
         'base': {
-            'hitpoints': 79,
+            'hitpoints': 158,
             'attack': 83,
             'specialAttack': 85,
             'defense': 100,
@@ -606,16 +607,15 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 9.2,
-        'name': 'Gigantamax Blastoise',
-        'nativeRegion': GameConstants.Region.none,
+        'id': 9.02,
+        'name': 'Blastoise (Clone)',
         'catchRate': 45,
         'type': [PokemonType.Water],
         'levelType': LevelType.mediumslow,
         'exp': 239,
         'eggCycles': 20,
         'base': {
-            'hitpoints': 158,
+            'hitpoints': 79,
             'attack': 83,
             'specialAttack': 85,
             'defense': 100,
@@ -706,6 +706,24 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 12.01,
+        'name': 'Gigantamax Butterfree',
+        'nativeRegion': GameConstants.Region.none,
+        'catchRate': 45,
+        'type': [PokemonType.Bug, PokemonType.Flying],
+        'levelType': LevelType.mediumfast,
+        'exp': 178,
+        'eggCycles': 15,
+        'base': {
+            'hitpoints': 120,
+            'attack': 45,
+            'specialAttack': 90,
+            'defense': 50,
+            'specialDefense': 80,
+            'speed': 70,
+        },
+    },
+    {
+        'id': 12.02,
         'name': 'Valencian Butterfree',
         'catchRate': 45,
         'type': [PokemonType.Bug, PokemonType.Flying],
@@ -725,7 +743,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 12.02,
+        'id': 12.03,
         'name': 'Pink Butterfree',
         'catchRate': 45,
         'type': [PokemonType.Bug, PokemonType.Flying],
@@ -745,7 +763,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 12.03,
+        'id': 12.04,
         'name': 'Ash\'s Butterfree',
         'catchRate': 45,
         'type': [PokemonType.Bug, PokemonType.Flying],
@@ -762,24 +780,6 @@ const pokemonList = createPokemonArray(
         },
         'gender': {
             'femaleRatio': 0,
-        },
-    },
-    {
-        'id': 12.04,
-        'name': 'Gigantamax Butterfree',
-        'nativeRegion': GameConstants.Region.none,
-        'catchRate': 45,
-        'type': [PokemonType.Bug, PokemonType.Flying],
-        'levelType': LevelType.mediumfast,
-        'exp': 178,
-        'eggCycles': 15,
-        'base': {
-            'hitpoints': 120,
-            'attack': 45,
-            'specialAttack': 90,
-            'defense': 50,
-            'specialDefense': 80,
-            'speed': 70,
         },
     },
     {
@@ -1098,7 +1098,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 21.1,
+        'id': 21.01,
         'name': 'Red Spearow',
         'catchRate': 255,
         'type': [PokemonType.Normal, PokemonType.Flying],
@@ -1330,102 +1330,9 @@ const pokemonList = createPokemonArray(
             'femaleRatio': 0,
         },
     },
+
     {
         'id': 25.07,
-        'name': 'Pikachu (Partner Cap)',
-        'catchRate': 190,
-        'type': [PokemonType.Electric],
-        'levelType': LevelType.mediumfast,
-        'exp': 112,
-        'eggCycles': 10,
-        'base': {
-            'hitpoints': 35,
-            'attack': 55,
-            'specialAttack': 50,
-            'defense': 40,
-            'specialDefense': 50,
-            'speed': 90,
-        },
-        'gender': {
-            'femaleRatio': 0,
-        },
-    },
-    {
-        'id': 25.08,
-        'name': 'Flying Pikachu',
-        'catchRate': 50,
-        'type': [PokemonType.Electric, PokemonType.Flying],
-        'levelType': LevelType.mediumfast,
-        'exp': 112,
-        'eggCycles': 10,
-        'base': {
-            'hitpoints': 35,
-            'attack': 55,
-            'specialAttack': 50,
-            'defense': 40,
-            'specialDefense': 50,
-            'speed': 90,
-        },
-    },
-    {
-        'id': 25.09,
-        'name': 'Surfing Pikachu',
-        'catchRate': 50,
-        'type': [PokemonType.Electric, PokemonType.Water],
-        'levelType': LevelType.mediumfast,
-        'exp': 112,
-        'eggCycles': 10,
-        'base': {
-            'hitpoints': 35,
-            'attack': 55,
-            'specialAttack': 50,
-            'defense': 40,
-            'specialDefense': 50,
-            'speed': 90,
-        },
-    },
-    {
-        'id': 25.10,
-        'name': 'Pikachu (Gengar)',
-        'catchRate': 50,
-        'type': [PokemonType.Electric, PokemonType.Ghost],
-        'levelType': LevelType.mediumfast,
-        'exp': 112,
-        'eggCycles': 10,
-        'base': {
-            'hitpoints': 35,
-            'attack': 55,
-            'specialAttack': 50,
-            'defense': 40,
-            'specialDefense': 50,
-            'speed': 90,
-        },
-        'gender': {
-            'femaleRatio': 0,
-        },
-    },
-    {
-        'id': 25.11,
-        'name': 'Let\'s Go Pikachu',
-        'catchRate': 50,
-        'type': [PokemonType.Electric],
-        'levelType': LevelType.mediumfast,
-        'exp': 112,
-        'eggCycles': 10,
-        'base': {
-            'hitpoints': 35,
-            'attack': 55,
-            'specialAttack': 50,
-            'defense': 40,
-            'specialDefense': 50,
-            'speed': 90,
-        },
-        'gender': {
-            'femaleRatio': 1,
-        },
-    },
-    {
-        'id': 25.12,
         'name': 'Pikachu (World Cap)',
         'catchRate': 190,
         'type': [PokemonType.Electric],
@@ -1445,8 +1352,8 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 25.13,
-        'name': 'Pinkan Pikachu',
+        'id': 25.08,
+        'name': 'Pikachu (Partner Cap)',
         'catchRate': 190,
         'type': [PokemonType.Electric],
         'levelType': LevelType.mediumfast,
@@ -1465,7 +1372,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 25.14,
+        'id': 25.09,
         'name': 'Gigantamax Pikachu',
         'nativeRegion': GameConstants.Region.none,
         'catchRate': 190,
@@ -1480,6 +1387,100 @@ const pokemonList = createPokemonArray(
             'defense': 40,
             'specialDefense': 50,
             'speed': 90,
+        },
+    },
+    {
+        'id': 25.10,
+        'name': 'Flying Pikachu',
+        'catchRate': 50,
+        'type': [PokemonType.Electric, PokemonType.Flying],
+        'levelType': LevelType.mediumfast,
+        'exp': 112,
+        'eggCycles': 10,
+        'base': {
+            'hitpoints': 35,
+            'attack': 55,
+            'specialAttack': 50,
+            'defense': 40,
+            'specialDefense': 50,
+            'speed': 90,
+        },
+    },
+    {
+        'id': 25.11,
+        'name': 'Surfing Pikachu',
+        'catchRate': 50,
+        'type': [PokemonType.Electric, PokemonType.Water],
+        'levelType': LevelType.mediumfast,
+        'exp': 112,
+        'eggCycles': 10,
+        'base': {
+            'hitpoints': 35,
+            'attack': 55,
+            'specialAttack': 50,
+            'defense': 40,
+            'specialDefense': 50,
+            'speed': 90,
+        },
+    },
+    {
+        'id': 25.12,
+        'name': 'Pikachu (Gengar)',
+        'catchRate': 50,
+        'type': [PokemonType.Electric, PokemonType.Ghost],
+        'levelType': LevelType.mediumfast,
+        'exp': 112,
+        'eggCycles': 10,
+        'base': {
+            'hitpoints': 35,
+            'attack': 55,
+            'specialAttack': 50,
+            'defense': 40,
+            'specialDefense': 50,
+            'speed': 90,
+        },
+        'gender': {
+            'femaleRatio': 0,
+        },
+    },
+    {
+        'id': 25.13,
+        'name': 'Let\'s Go Pikachu',
+        'catchRate': 50,
+        'type': [PokemonType.Electric],
+        'levelType': LevelType.mediumfast,
+        'exp': 112,
+        'eggCycles': 10,
+        'base': {
+            'hitpoints': 35,
+            'attack': 55,
+            'specialAttack': 50,
+            'defense': 40,
+            'specialDefense': 50,
+            'speed': 90,
+        },
+        'gender': {
+            'femaleRatio': 1,
+        },
+    },
+    {
+        'id': 25.14,
+        'name': 'Pinkan Pikachu',
+        'catchRate': 190,
+        'type': [PokemonType.Electric],
+        'levelType': LevelType.mediumfast,
+        'exp': 112,
+        'eggCycles': 10,
+        'base': {
+            'hitpoints': 35,
+            'attack': 55,
+            'specialAttack': 50,
+            'defense': 40,
+            'specialDefense': 50,
+            'speed': 90,
+        },
+        'gender': {
+            'femaleRatio': 0,
         },
     },
     {
@@ -2393,7 +2394,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 52.2,
+        'id': 52.02,
         'name': 'Galarian Meowth',
         'nativeRegion': GameConstants.Region.galar,
         'catchRate': 255,
@@ -2412,7 +2413,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 52.3,
+        'id': 52.03,
         'name': 'Gigantamax Meowth',
         'nativeRegion': GameConstants.Region.none,
         'catchRate': 255,
@@ -2812,7 +2813,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 68.1,
+        'id': 68.01,
         'name': 'Gigantamax Machamp',
         'nativeRegion': GameConstants.Region.none,
         'catchRate': 45,
@@ -3106,7 +3107,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 77.1,
+        'id': 77.01,
         'name': 'Galarian Ponyta',
         'nativeRegion': GameConstants.Region.galar,
         'catchRate': 190,
@@ -3142,7 +3143,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 78.1,
+        'id': 78.01,
         'name': 'Galarian Rapidash',
         'nativeRegion': GameConstants.Region.galar,
         'catchRate': 60,
@@ -3182,7 +3183,7 @@ const pokemonList = createPokemonArray(
         'heldItem': {type: ItemType.item, id: 'Kings_rock'},
     },
     {
-        'id': 79.1,
+        'id': 79.01,
         'name': 'Galarian Slowpoke',
         'nativeRegion': GameConstants.Region.galar,
         'catchRate': 190,
@@ -3222,7 +3223,7 @@ const pokemonList = createPokemonArray(
         'heldItem': {type: ItemType.item, id: 'Kings_rock'},
     },
     {
-        'id': 80.1,
+        'id': 80.01,
         'name': 'Galarian Slowbro',
         'nativeRegion': GameConstants.Region.galar,
         'catchRate': 75,
@@ -3308,7 +3309,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 83.1,
+        'id': 83.01,
         'name': 'Galarian Farfetch\'d',
         'nativeRegion': GameConstants.Region.galar,
         'catchRate': 45,
@@ -3587,7 +3588,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 94.1,
+        'id': 94.01,
         'name': 'Gigantamax Gengar',
         'nativeRegion': GameConstants.Region.none,
         'catchRate': 45,
@@ -3716,7 +3717,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 99.1,
+        'id': 99.01,
         'name': 'Gigantamax Kingler',
         'nativeRegion': GameConstants.Region.none,
         'catchRate': 60,
@@ -4023,9 +4024,10 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 110.01,
-        'name': 'Pinkan Weezing',
+        'name': 'Galarian Weezing',
+        'nativeRegion': GameConstants.Region.galar,
         'catchRate': 60,
-        'type': [PokemonType.Poison],
+        'type': [PokemonType.Poison, PokemonType.Fairy],
         'levelType': LevelType.mediumfast,
         'exp': 172,
         'eggCycles': 20,
@@ -4039,11 +4041,10 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 110.1,
-        'name': 'Galarian Weezing',
-        'nativeRegion': GameConstants.Region.galar,
+        'id': 110.02,
+        'name': 'Pinkan Weezing',
         'catchRate': 60,
-        'type': [PokemonType.Poison, PokemonType.Fairy],
+        'type': [PokemonType.Poison],
         'levelType': LevelType.mediumfast,
         'exp': 172,
         'eggCycles': 20,
@@ -4337,7 +4338,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 122.1,
+        'id': 122.01,
         'name': 'Galarian Mr. Mime',
         'nativeRegion': GameConstants.Region.galar,
         'catchRate': 45,
@@ -4576,7 +4577,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 131.1,
+        'id': 131.01,
         'name': 'Gigantamax Lapras',
         'nativeRegion': GameConstants.Region.none,
         'catchRate': 45,
@@ -4653,27 +4654,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 133.1,
-        'name': 'Let\'s Go Eevee',
-        'catchRate': 50,
-        'type': [PokemonType.Normal],
-        'levelType': LevelType.mediumfast,
-        'exp': 65,
-        'eggCycles': 35,
-        'base': {
-            'hitpoints': 55,
-            'attack': 55,
-            'specialAttack': 45,
-            'defense': 50,
-            'specialDefense': 65,
-            'speed': 55,
-        },
-        'gender': {
-            'femaleRatio': 0,
-        },
-    },
-    {
-        'id': 133.2,
+        'id': 133.01,
         'name': 'Gigantamax Eevee',
         'nativeRegion': GameConstants.Region.none,
         'catchRate': 255,
@@ -4691,6 +4672,26 @@ const pokemonList = createPokemonArray(
         },
         'gender': {
             'femaleRatio': 0.125,
+        },
+    },
+    {
+        'id': 133.02,
+        'name': 'Let\'s Go Eevee',
+        'catchRate': 50,
+        'type': [PokemonType.Normal],
+        'levelType': LevelType.mediumfast,
+        'exp': 65,
+        'eggCycles': 35,
+        'base': {
+            'hitpoints': 55,
+            'attack': 55,
+            'specialAttack': 45,
+            'defense': 50,
+            'specialDefense': 65,
+            'speed': 55,
+        },
+        'gender': {
+            'femaleRatio': 0,
         },
     },
     {
@@ -4897,15 +4898,16 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 143.1,
-        'name': 'Santa Snorlax',
+        'id': 143.01,
+        'name': 'Gigantamax Snorlax',
+        'nativeRegion': GameConstants.Region.none,
         'catchRate': 25,
         'type': [PokemonType.Normal],
         'levelType': LevelType.slow,
         'exp': 189,
         'eggCycles': 40,
         'base': {
-            'hitpoints': 160,
+            'hitpoints': 320,
             'attack': 110,
             'specialAttack': 65,
             'defense': 65,
@@ -4917,16 +4919,15 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 143.2,
-        'name': 'Gigantamax Snorlax',
-        'nativeRegion': GameConstants.Region.none,
+        'id': 143.02,
+        'name': 'Santa Snorlax',
         'catchRate': 25,
         'type': [PokemonType.Normal],
         'levelType': LevelType.slow,
         'exp': 189,
         'eggCycles': 40,
         'base': {
-            'hitpoints': 320,
+            'hitpoints': 160,
             'attack': 110,
             'specialAttack': 65,
             'defense': 65,
@@ -4958,7 +4959,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 144.1,
+        'id': 144.01,
         'name': 'Galarian Articuno',
         'nativeRegion': GameConstants.Region.galar,
         'catchRate': 3,
@@ -4999,7 +5000,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 145.1,
+        'id': 145.01,
         'name': 'Galarian Zapdos',
         'nativeRegion': GameConstants.Region.galar,
         'catchRate': 3,
@@ -5040,7 +5041,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 146.1,
+        'id': 146.01,
         'name': 'Galarian Moltres',
         'nativeRegion': GameConstants.Region.galar,
         'catchRate': 3,
@@ -5137,7 +5138,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 150.1,
+        'id': 150.01,
         'name': 'Armored Mewtwo',
         'catchRate': 2,
         'type': [PokemonType.Psychic, PokemonType.Steel],
@@ -5584,7 +5585,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 172.1,
+        'id': 172.01,
         'name': 'Spiky-eared Pichu',
         'catchRate': 190,
         'type': [PokemonType.Electric],
@@ -5671,7 +5672,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 175.1,
+        'id': 175.01,
         'name': 'Spooky Togepi',
         'catchRate': 30,
         'type': [PokemonType.Ghost],
@@ -5693,7 +5694,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 175.2,
+        'id': 175.02,
         'name': 'Surprise Togepi',
         'catchRate': 30,
         'type': [PokemonType.Fairy],
@@ -5734,7 +5735,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 176.1,
+        'id': 176.01,
         'name': 'Spooky Togetic',
         'catchRate': 75,
         'type': [PokemonType.Ghost, PokemonType.Flying],
@@ -6186,7 +6187,7 @@ const pokemonList = createPokemonArray(
         'heldItem': {type: ItemType.item, id: 'Kings_rock'},
     },
     {
-        'id': 199.1,
+        'id': 199.01,
         'name': 'Galarian Slowking',
         'nativeRegion': GameConstants.Region.galar,
         'catchRate': 70,
@@ -6916,7 +6917,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 208.1,
+        'id': 208.01,
         'name': 'Crystal Steelix',
         'catchRate': 25,
         'type': [PokemonType.Steel, PokemonType.Ice],
@@ -7205,7 +7206,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 222.1,
+        'id': 222.01,
         'name': 'Galarian Corsola',
         'nativeRegion': GameConstants.Region.galar,
         'catchRate': 60,
@@ -7796,7 +7797,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 251.1,
+        'id': 251.01,
         'name': 'Grinch Celebi',
         'catchRate': 45,
         'type': [PokemonType.Dark, PokemonType.Grass],
@@ -7817,7 +7818,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 251.2,
+        'id': 251.02,
         'name': 'Flowering Celebi',
         'catchRate': 45,
         'type': [PokemonType.Psychic, PokemonType.Grass],
@@ -8080,7 +8081,7 @@ const pokemonList = createPokemonArray(
         'heldItem': {type: ItemType.underground, id: 'Revive'},
     },
     {
-        'id': 263.1,
+        'id': 263.01,
         'name': 'Galarian Zigzagoon',
         'nativeRegion': GameConstants.Region.galar,
         'type': [PokemonType.Dark, PokemonType.Normal],
@@ -8117,7 +8118,7 @@ const pokemonList = createPokemonArray(
         'heldItem': {type: ItemType.underground, id: 'Max Revive'},
     },
     {
-        'id': 264.1,
+        'id': 264.01,
         'name': 'Galarian Linoone',
         'nativeRegion': GameConstants.Region.galar,
         'type': [PokemonType.Dark, PokemonType.Normal],
@@ -9773,7 +9774,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 351.1,
+        'id': 351.01,
         'name': 'Castform (Sunny)',
         'type': [PokemonType.Fire],
         'eggCycles': 25,
@@ -9790,7 +9791,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 351.2,
+        'id': 351.02,
         'name': 'Castform (Rainy)',
         'type': [PokemonType.Water],
         'eggCycles': 25,
@@ -9807,7 +9808,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 351.3,
+        'id': 351.03,
         'name': 'Castform (Snowy)',
         'type': [PokemonType.Ice],
         'eggCycles': 25,
@@ -10497,7 +10498,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 386.1,
+        'id': 386.01,
         'name': 'Deoxys (Attack)',
         'type': [PokemonType.Psychic],
         'eggCycles': 120,
@@ -10517,7 +10518,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 386.2,
+        'id': 386.02,
         'name': 'Deoxys (Defense)',
         'type': [PokemonType.Psychic],
         'eggCycles': 120,
@@ -10537,7 +10538,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 386.3,
+        'id': 386.03,
         'name': 'Deoxys (Speed)',
         'type': [PokemonType.Psychic],
         'eggCycles': 120,
@@ -11096,7 +11097,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 412.1,
+        'id': 412.01,
         'name': 'Burmy (Sand)',
         'type': [PokemonType.Bug],
         'eggCycles': 15,
@@ -11117,7 +11118,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 412.2,
+        'id': 412.02,
         'name': 'Burmy (Trash)',
         'type': [PokemonType.Bug],
         'eggCycles': 15,
@@ -11158,7 +11159,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 413.1,
+        'id': 413.01,
         'name': 'Wormadam (Sand)',
         'type': [PokemonType.Bug, PokemonType.Ground],
         'eggCycles': 15,
@@ -11178,7 +11179,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 413.2,
+        'id': 413.02,
         'name': 'Wormadam (Trash)',
         'type': [PokemonType.Bug, PokemonType.Steel],
         'eggCycles': 15,
@@ -11351,7 +11352,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 421.1,
+        'id': 421.01,
         'name': 'Cherrim (Sunshine)',
         'type': [PokemonType.Grass],
         'eggCycles': 20,
@@ -11386,7 +11387,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 422.1,
+        'id': 422.01,
         'name': 'Shellos (East)',
         'type': [PokemonType.Water],
         'eggCycles': 20,
@@ -11421,7 +11422,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 423.1,
+        'id': 423.01,
         'name': 'Gastrodon (East)',
         'type': [PokemonType.Water, PokemonType.Ground],
         'eggCycles': 20,
@@ -11891,7 +11892,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 446.1,
+        'id': 446.01,
         'name': 'Elf Munchlax',
         'type': [PokemonType.Normal],
         'eggCycles': 40,
@@ -12353,7 +12354,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 468.1,
+        'id': 468.01,
         'name': 'Spooky Togekiss',
         'type': [PokemonType.Ghost, PokemonType.Flying],
         'eggCycles': 10,
@@ -12582,7 +12583,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 479.1,
+        'id': 479.01,
         'name': 'Rotom (Heat)',
         'type': [PokemonType.Electric, PokemonType.Fire],
         'eggCycles': 20,
@@ -12602,7 +12603,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 479.2,
+        'id': 479.02,
         'name': 'Rotom (Wash)',
         'type': [PokemonType.Electric, PokemonType.Water],
         'eggCycles': 20,
@@ -12622,7 +12623,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 479.3,
+        'id': 479.03,
         'name': 'Rotom (Frost)',
         'type': [PokemonType.Electric, PokemonType.Ice],
         'eggCycles': 20,
@@ -12642,7 +12643,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 479.4,
+        'id': 479.04,
         'name': 'Rotom (Fan)',
         'type': [PokemonType.Electric, PokemonType.Flying],
         'eggCycles': 20,
@@ -12662,7 +12663,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 479.5,
+        'id': 479.05,
         'name': 'Rotom (Mow)',
         'type': [PokemonType.Electric, PokemonType.Grass],
         'eggCycles': 20,
@@ -12682,7 +12683,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 479.6,
+        'id': 479.06,
         'name': 'Rotom (Discord)',
         'type': [PokemonType.Electric, PokemonType.Ghost],
         'eggCycles': 20,
@@ -12861,7 +12862,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 487.1,
+        'id': 487.01,
         'name': 'Giratina (Origin)',
         'type': [PokemonType.Ghost, PokemonType.Dragon],
         'eggCycles': 120,
@@ -12984,7 +12985,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 492.1,
+        'id': 492.01,
         'name': 'Shaymin (Sky)',
         'type': [PokemonType.Grass, PokemonType.Flying],
         'eggCycles': 120,
@@ -14532,7 +14533,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 554.1,
+        'id': 554.01,
         'name': 'Galarian Darumaka',
         'nativeRegion': GameConstants.Region.galar,
         'type': [PokemonType.Ice],
@@ -14571,7 +14572,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 555.1,
+        'id': 555.01,
         'name': 'Darmanitan (Zen)',
         'type': [PokemonType.Fire, PokemonType.Psychic],
         'eggCycles': 20,
@@ -14588,7 +14589,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 555.2,
+        'id': 555.02,
         'name': 'Galarian Darmanitan',
         'nativeRegion': GameConstants.Region.galar,
         'type': [PokemonType.Ice],
@@ -14606,7 +14607,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 555.3,
+        'id': 555.03,
         'name': 'Galarian Darmanitan (Zen)',
         'nativeRegion': GameConstants.Region.galar,
         'type': [PokemonType.Ice, PokemonType.Fire],
@@ -14748,7 +14749,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 562.1,
+        'id': 562.01,
         'name': 'Galarian Yamask',
         'nativeRegion': GameConstants.Region.galar,
         'type': [PokemonType.Ground, PokemonType.Ghost],
@@ -14901,7 +14902,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 569.1,
+        'id': 569.01,
         'name': 'Gigantamax Garbodor',
         'nativeRegion': GameConstants.Region.none,
         'type': [PokemonType.Poison],
@@ -15922,7 +15923,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 618.1,
+        'id': 618.01,
         'name': 'Galarian Stunfisk',
         'nativeRegion': GameConstants.Region.galar,
         'type': [PokemonType.Ground, PokemonType.Steel],
@@ -16370,7 +16371,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 641.1,
+        'id': 641.01,
         'name': 'Tornadus (Therian)',
         'type': [PokemonType.Flying],
         'eggCycles': 120,
@@ -16410,7 +16411,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 642.1,
+        'id': 642.01,
         'name': 'Thundurus (Therian)',
         'type': [PokemonType.Electric, PokemonType.Flying],
         'eggCycles': 120,
@@ -16492,7 +16493,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 645.1,
+        'id': 645.01,
         'name': 'Landorus (Therian)',
         'type': [PokemonType.Ground, PokemonType.Flying],
         'eggCycles': 120,
@@ -16536,7 +16537,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 646.1,
+        'id': 646.01,
         'name': 'Kyurem (White)',
         'type': [PokemonType.Dragon, PokemonType.Ice],
         'eggCycles': 120,
@@ -16556,7 +16557,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 646.2,
+        'id': 646.02,
         'name': 'Kyurem (Black)',
         'type': [PokemonType.Dragon, PokemonType.Ice],
         'eggCycles': 120,
@@ -16596,7 +16597,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 647.1,
+        'id': 647.01,
         'name': 'Keldeo (Resolute)',
         'type': [PokemonType.Water, PokemonType.Fighting],
         'eggCycles': 80,
@@ -16637,7 +16638,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 648.1,
+        'id': 648.01,
         'name': 'Meloetta (Pirouette)',
         'type': [PokemonType.Normal, PokemonType.Fighting],
         'eggCycles': 120,
@@ -18072,7 +18073,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 681.1,
+        'id': 681.01,
         'name': 'Aegislash (Blade)',
         'type': [PokemonType.Steel, PokemonType.Ghost],
         'eggCycles': 20,
@@ -18614,7 +18615,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 710.1,
+        'id': 710.01,
         'name': 'Pumpkaboo (Small)',
         'type': [PokemonType.Ghost, PokemonType.Grass],
         'eggCycles': 20,
@@ -18632,7 +18633,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 710.2,
+        'id': 710.02,
         'name': 'Pumpkaboo (Large)',
         'type': [PokemonType.Ghost, PokemonType.Grass],
         'eggCycles': 20,
@@ -18650,7 +18651,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 710.3,
+        'id': 710.03,
         'name': 'Pumpkaboo (Super Size)',
         'type': [PokemonType.Ghost, PokemonType.Grass],
         'eggCycles': 20,
@@ -20674,7 +20675,7 @@ const pokemonList = createPokemonArray(
         'heldItem': {type: ItemType.item, id: 'Solar_light'},
     },
     {
-        'id': 791.1,
+        'id': 791.01,
         'name': 'Solgaleo (Radiant Sun)',
         'type': [PokemonType.Psychic, PokemonType.Steel],
         'eggCycles': 120,
@@ -20943,7 +20944,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 800.03,
-        'name': 'Necrozma (Ultra)',
+        'name': 'Ultra Necrozma',
         'type': [PokemonType.Psychic, PokemonType.Dragon],
         'eggCycles': 120,
         'levelType': LevelType.slow,
@@ -20982,7 +20983,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 801.1,
+        'id': 801.01,
         'name': 'Magearna (Original Color)',
         'type': [PokemonType.Steel, PokemonType.Fairy],
         'eggCycles': 120,
@@ -21166,7 +21167,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 809.1,
+        'id': 809.01,
         'name': 'Gigantamax Melmetal',
         'nativeRegion': GameConstants.Region.none,
         'type': [PokemonType.Steel],
@@ -21249,7 +21250,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 812.1,
+        'id': 812.01,
         'name': 'Gigantamax Rillaboom',
         'nativeRegion': GameConstants.Region.none,
         'type': [PokemonType.Grass],
@@ -21332,7 +21333,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 815.1,
+        'id': 815.01,
         'name': 'Gigantamax Cinderace',
         'nativeRegion': GameConstants.Region.none,
         'type': [PokemonType.Fire],
@@ -21415,7 +21416,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 818.1,
+        'id': 818.01,
         'name': 'Gigantamax Inteleon',
         'nativeRegion': GameConstants.Region.none,
         'type': [PokemonType.Water],
@@ -21527,7 +21528,7 @@ const pokemonList = createPokemonArray(
         'catchRate': 45,
     },
     {
-        'id': 823.1,
+        'id': 823.01,
         'name': 'Gigantamax Corviknight',
         'nativeRegion': GameConstants.Region.none,
         'type': [
@@ -21607,7 +21608,7 @@ const pokemonList = createPokemonArray(
         'catchRate': 45,
     },
     {
-        'id': 826.1,
+        'id': 826.01,
         'name': 'Gigantamax Orbeetle',
         'nativeRegion': GameConstants.Region.none,
         'type': [
@@ -21771,7 +21772,7 @@ const pokemonList = createPokemonArray(
         'catchRate': 75,
     },
     {
-        'id': 834.1,
+        'id': 834.01,
         'name': 'Gigantamax Drednaw',
         'nativeRegion': GameConstants.Region.none,
         'type': [
@@ -21886,7 +21887,7 @@ const pokemonList = createPokemonArray(
         'catchRate': 45,
     },
     {
-        'id': 839.1,
+        'id': 839.01,
         'name': 'Gigantamax Coalossal',
         'nativeRegion': GameConstants.Region.none,
         'type': [
@@ -21951,7 +21952,7 @@ const pokemonList = createPokemonArray(
         'catchRate': 45,
     },
     {
-        'id': 841.1,
+        'id': 841.01,
         'name': 'Gigantamax Flapple',
         'nativeRegion': GameConstants.Region.none,
         'type': [
@@ -21992,7 +21993,7 @@ const pokemonList = createPokemonArray(
         'catchRate': 45,
     },
     {
-        'id': 842.1,
+        'id': 842.01,
         'name': 'Gigantamax Appletun',
         'nativeRegion': GameConstants.Region.none,
         'type': [
@@ -22048,7 +22049,7 @@ const pokemonList = createPokemonArray(
         'catchRate': 120,
     },
     {
-        'id': 844.1,
+        'id': 844.01,
         'name': 'Gigantamax Sandaconda',
         'nativeRegion': GameConstants.Region.none,
         'type': [PokemonType.Ground],
@@ -22086,7 +22087,7 @@ const pokemonList = createPokemonArray(
         'catchRate': 45,
     },
     {
-        'id': 845.1,
+        'id': 845.01,
         'name': 'Cramorant (Gulping)',
         'type': [
             PokemonType.Flying,
@@ -22106,7 +22107,7 @@ const pokemonList = createPokemonArray(
         'catchRate': 45,
     },
     {
-        'id': 845.2,
+        'id': 845.02,
         'name': 'Cramorant (Gorging)',
         'type': [
             PokemonType.Flying,
@@ -22206,7 +22207,7 @@ const pokemonList = createPokemonArray(
         'catchRate': 45,
     },
     {
-        'id': 849.1,
+        'id': 849.01,
         'name': 'Toxtricity (Low Key)',
         'type': [
             PokemonType.Electric,
@@ -22226,7 +22227,7 @@ const pokemonList = createPokemonArray(
         'catchRate': 45,
     },
     {
-        'id': 849.2,
+        'id': 849.02,
         'name': 'Gigantamax Toxtricity',
         'nativeRegion': GameConstants.Region.none,
         'type': [
@@ -22288,7 +22289,7 @@ const pokemonList = createPokemonArray(
         'catchRate': 75,
     },
     {
-        'id': 851.1,
+        'id': 851.01,
         'name': 'Gigantamax Centiskorch',
         'nativeRegion': GameConstants.Region.none,
         'type': [
@@ -22450,7 +22451,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 858.1,
+        'id': 858.01,
         'name': 'Gigantamax Hatterene',
         'nativeRegion': GameConstants.Region.none,
         'type': [
@@ -22545,7 +22546,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 861.1,
+        'id': 861.01,
         'name': 'Gigantamax Grimmsnarl',
         'nativeRegion': GameConstants.Region.none,
         'type': [
@@ -23985,7 +23986,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 869.7,
+        'id': 869.70,
         'name': 'Gigantamax Alcremie',
         'nativeRegion': GameConstants.Region.none,
         'type': [PokemonType.Fairy],
@@ -24118,7 +24119,7 @@ const pokemonList = createPokemonArray(
         'catchRate': 60,
     },
     {
-        'id': 875.1,
+        'id': 875.01,
         'name': 'Eiscue (No Ice Face)',
         'type': [PokemonType.Ice],
         'base': {
@@ -24158,7 +24159,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 876.1,
+        'id': 876.01,
         'name': 'Indeedee (Female)',
         'type': [
             PokemonType.Psychic,
@@ -24201,7 +24202,7 @@ const pokemonList = createPokemonArray(
         'catchRate': 180,
     },
     {
-        'id': 877.1,
+        'id': 877.01,
         'name': 'Morpeko (Hangry)',
         'type': [
             PokemonType.Electric,
@@ -24256,7 +24257,7 @@ const pokemonList = createPokemonArray(
         'catchRate': 90,
     },
     {
-        'id': 879.1,
+        'id': 879.01,
         'name': 'Gigantamax Copperajah',
         'nativeRegion': GameConstants.Region.none,
         'type': [PokemonType.Steel],
@@ -24386,7 +24387,7 @@ const pokemonList = createPokemonArray(
         'catchRate': 45,
     },
     {
-        'id': 884.1,
+        'id': 884.01,
         'name': 'Gigantamax Duraludon',
         'nativeRegion': GameConstants.Region.none,
         'type': [
@@ -24491,7 +24492,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 888.1,
+        'id': 888.01,
         'name': 'Zacian (Crowned Sword)',
         'type': [PokemonType.Fairy, PokemonType.Steel],
         'base': {
@@ -24534,7 +24535,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 889.1,
+        'id': 889.01,
         'name': 'Zamazenta (Crowned Shield)',
         'type': [PokemonType.Fighting, PokemonType.Steel],
         'base': {
@@ -24578,7 +24579,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 890.1,
+        'id': 890.01,
         'name': 'Eternamax Eternatus',
         'nativeRegion': GameConstants.Region.none,
         'type': [
@@ -24645,7 +24646,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 892.1,
+        'id': 892.01,
         'name': 'Urshifu (Rapid Strike)',
         'type': [
             PokemonType.Fighting,
@@ -24668,7 +24669,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 892.2,
+        'id': 892.02,
         'name': 'Gigantamax Urshifu (Single Strike)',
         'nativeRegion': GameConstants.Region.none,
         'type': [
@@ -24692,7 +24693,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 892.3,
+        'id': 892.03,
         'name': 'Gigantamax Urshifu (Rapid Strike)',
         'nativeRegion': GameConstants.Region.none,
         'type': [
@@ -24739,7 +24740,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 893.1,
+        'id': 893.01,
         'name': 'Zarude (Dada)',
         'type': [
             PokemonType.Dark,
@@ -24868,7 +24869,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 898.1,
+        'id': 898.01,
         'name': 'Ice Rider Calyrex',
         'type': [PokemonType.Psychic, PokemonType.Ice],
         'base': {
@@ -24888,7 +24889,7 @@ const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 898.2,
+        'id': 898.02,
         'name': 'Shadow Rider Calyrex',
         'type': [PokemonType.Psychic, PokemonType.Ghost],
         'base': {
