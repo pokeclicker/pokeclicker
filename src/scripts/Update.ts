@@ -1397,8 +1397,17 @@ class Update implements Saveable {
             }
         },
         '0.10.2': ({ playerData, saveData }) => {
-            // Add Zero Temporary Battle
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 29);
+            // Kecleon Fights
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 15);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 16);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 17);
+            // Zero Temporary Battle 
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 32);
+
+            // Translations
+            saveData.logbook.logs.forEach(
+                log => log.content = createLogContent.notTranslated({ text: log.description })
+            );
         },
     };
 
