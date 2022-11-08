@@ -95,6 +95,7 @@ export type ItemNameType
     | 'Soul_Dew'
     | 'Adamant_Orb'
     | 'Lustrous_Orb'
+    | 'Griseous_Orb'
     | 'Rusted_Sword'
     | 'Rusted_Shield'
     | 'Black_Belt'

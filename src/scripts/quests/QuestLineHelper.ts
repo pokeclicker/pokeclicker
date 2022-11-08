@@ -810,7 +810,7 @@ class QuestLineHelper {
             ], 'Charge the key to the Distortion World.');
         giratinaQuestLine.addQuest(chargeDistortionKey);
 
-        const talktoZero3 = new TalkToNPCQuest(SendoffSpringZero, 'Talk to Zero in Sendoff Spring.');
+        const talktoZero3 = new TalkToNPCQuest(SendoffSpringZero1, 'Talk to Zero in Sendoff Spring.');
         giratinaQuestLine.addQuest(talktoZero3);
 
         const clearZero = new CustomQuest (1, 0, 'Defeat Zero to protect the key.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Zero')]());
@@ -818,6 +818,9 @@ class QuestLineHelper {
 
         const catchGiratina = new CaptureSpecificPokemonQuest('Giratina (Altered)', 'Catch the ruler of the Distortion World', 1, false, 0, undefined);
         giratinaQuestLine.addQuest(catchGiratina);
+
+        const talktoZero4 = new TalkToNPCQuest(SendoffSpringZero2, 'Talk to Zero in Sendoff Spring.');
+        giratinaQuestLine.addQuest(talktoZero4);
 
         App.game.quests.questLines().push(giratinaQuestLine);
     }

@@ -2662,12 +2662,12 @@ const SendoffSpringLakeTrio = new NPC('Lake Trio', [
     '<i>You are finally here.</i>',
     '<i>We have been able to create a key to the Distortion World using the materials you collected, but it is unable to work in it\'s current state.</i>',
     '<i>We bestow it upon you, charge it with the ghostly energy of the Distortion World.</i>',
-    '<i>In order to do so, you must collect Ghost gems by defeating Ghost type Pokémon and find a Spooky Plate. There should be some in these dungeon, we can sense their energy.</i>',
+    '<i>In order to do so, you must collect Ghost gems by defeating Ghost type Pokémon and find a Spooky Plate. There should be some in this dungeon, we can sense their energy.</i>',
 ],{
     image: 'assets/images/npcs/Lake Trio.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Zero\'s Ambition', 9), new QuestLineStepCompletedRequirement('Zero\'s Ambition', 11, GameConstants.AchievementOption.less)])});
 
-const SendoffSpringZero = new NPC('Zero', [
+const SendoffSpringZero1 = new NPC('Zero', [
     'I couldn\'t wait anymore for you to report about your progress, so I asked around and discovered you were coming here.',
     'Wait, is that the key to the Distortion World? With that, I could open the gate myself.',
     'You know what? You are fired, I no longer need you. Now, give me the key to the Distortion World or I will take it by force!',
@@ -2682,7 +2682,7 @@ const SendoffSpringZero2 = new NPC('Zero', [
     'I once read that, deep within the Distortion World, there is an object capable of carrying the realm\'s power. Maybe, if you train Giratina while it has such object equipped, it can turn into it\'s true form.',
 ], {
     image: 'assets/images/temporaryBattle/Zero.png',
-    requirement: new QuestLineCompletedRequirement('Zero\'s Ambition'),
+    requirement: new QuestLineStepCompletedRequirement('Zero\'s Ambition', 14),
 });
 
 const ProfRowan = new ProfNPC('Prof. Rowan',
@@ -3045,7 +3045,7 @@ TownList['Sendoff Spring'] = new DungeonTown(
     [new QuestLineStepCompletedRequirement('Zero\'s Ambition', 8)],
     [TemporaryBattleList.Zero],
     {
-        npcs: [SendoffSpringLakeTrio, SendoffSpringZero, SendoffSpringZero2],
+        npcs: [SendoffSpringLakeTrio, SendoffSpringZero1, SendoffSpringZero2],
     }
 );
 TownList['Hall of Origin'] = new DungeonTown(
