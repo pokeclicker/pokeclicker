@@ -2679,7 +2679,7 @@ const SendoffSpringZero1 = new NPC('Zero', [
 const SendoffSpringZero2 = new NPC('Zero', [
     'Seems like you have managed to catch the Pokémon that rules the Distortion World.',
     'But this doesn\'t look like the Renegade Pokémon from legend, it seems like some sort of altered form.',
-    'I once read that, deep within the Distortion World, there is an object capable of carrying the realm\'s power. Maybe, if you train Giratina while it has such object equipped, it can turn into it\'s true form.',
+    'I once read that, deep within the Distortion World, there is an object capable of carrying the realm\'s power. Maybe, if you train Giratina while it has such object equipped, it can turn into its true form.',
 ], {
     image: 'assets/images/temporaryBattle/Zero.png',
     requirement: new QuestLineStepCompletedRequirement('Zero\'s Ambition', 14),
