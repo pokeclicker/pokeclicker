@@ -1,12 +1,12 @@
-/// <reference path="CaughtIndicatingItem.ts" />
-
 class PokemonItem extends CaughtIndicatingItem {
 
     type: PokemonNameType;
+    private _translatedName: KnockoutObservable<string>;
 
     constructor(pokemon: PokemonNameType, basePrice: number, currency: GameConstants.Currency = GameConstants.Currency.questPoint) {
         super(pokemon, basePrice, currency, undefined, undefined, `Add ${pokemon} to your party.`, 'pokemonItem');
         this.type = pokemon;
+        this._translatedName = PokemonHelper.displayName(pokemon);
     }
 
     gain(amt: number) {
@@ -37,7 +37,12 @@ class PokemonItem extends CaughtIndicatingItem {
             });
         }
         if (shiny) {
-            App.game.logbook.newLog(LogBookTypes.SHINY, `The purchased ${pokemonName} turned out to be shiny! ${App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(pokemonName).id, true) ? '(duplicate)' : ''}`);
+            App.game.logbook.newLog(
+                LogBookTypes.SHINY,
+                App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(pokemonName).id, true)
+                    ? createLogContent.purchasedShinyDupe({ pokemon: pokemonName })
+                    : createLogContent.purchasedShiny({ pokemon: pokemonName })
+            );
         }
 
         App.game.party.gainPokemonById(pokemonID, shiny, true);
@@ -54,6 +59,10 @@ class PokemonItem extends CaughtIndicatingItem {
     get image() {
         const subDirectory = this.imageDirectory ? `${this.imageDirectory}/` : '';
         return `assets/images/items/${subDirectory}${this.name.replace(/[^\s\w.()-]/g, '')}.png`;
+    }
+
+    get displayName(): string {
+        return this._translatedName();
     }
 }
 

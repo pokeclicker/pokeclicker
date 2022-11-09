@@ -31,17 +31,24 @@ class BattleCafeSaveObject implements Saveable {
         if (!json) {
             return;
         }
-        BattleCafeController.spinsLeft(json.spinsLeft ?? BattleCafeController.defaultSpins);
+        BattleCafeController.spinsLeft(json.spinsLeft ?? BattleCafeController.baseDailySpins);
     }
 
 }
 
 class BattleCafeController {
-    static defaultSpins = 3;
     static selectedSweet = ko.observable<GameConstants.AlcremieSweet>(undefined);
-    static spinsLeft = ko.observable<number>(BattleCafeController.defaultSpins);
+    static baseDailySpins = 3;
+    static spinsLeft = ko.observable<number>(BattleCafeController.baseDailySpins);
     static isSpinning = ko.observable<boolean>(false);
     static clockwise = ko.observable<boolean>(false);
+
+    static spinsPerDay() : number {
+        // Give additional spins for each sweet type completed
+        return this.baseDailySpins + GameHelper.enumStrings(GameConstants.AlcremieSweet)
+            .filter((s) => BattleCafeController.getCaughtStatus(GameConstants.AlcremieSweet[s])() >= CaughtStatus.Caught)
+            .length;
+    }
 
     public static spin(clockwise: boolean) {
         if (!BattleCafeController.canSpin()) {
@@ -186,9 +193,9 @@ class BattleCafeController {
             // max gen 4
             case GameConstants.AlcremieSweet['Berry Sweet']:
                 return [
+                    {berry: BerryType.Passho, amount: 1000},
                     {berry: BerryType.Yache, amount: 75},
                     {berry: BerryType.Coba, amount: 150},
-                    {berry: BerryType.Passho, amount: 1000},
                 ];
             // max gen 4
             case GameConstants.AlcremieSweet['Ribbon Sweet']:
@@ -207,8 +214,8 @@ class BattleCafeController {
             // max gen 5
             case GameConstants.AlcremieSweet['Love Sweet']:
                 return [
-                    {berry: BerryType.Roseli, amount: 700},
                     {berry: BerryType.Haban, amount: 200},
+                    {berry: BerryType.Roseli, amount: 700},
                     {berry: BerryType.Lansat, amount: 5},
                 ];
 

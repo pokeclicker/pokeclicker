@@ -288,7 +288,7 @@
                                     <td width="50%">
                                       <knockout data-bind="using: App.game.statistics.routeKills[player.region][player.route()]()">
                                           <knockout data-bind="text: $data.toLocaleString('en-US')">0</knockout>
-                                          <knockout data-bind="visible: $data < GameConstants.ROUTE_KILLS_NEEDED">/10</knockout>
+                                          <knockout data-bind="visible: $data < GameConstants.ROUTE_KILLS_NEEDED">/ 10</knockout>
                                           &nbsp;Pokémon defeated
                                       </knockout>
                                     </td>

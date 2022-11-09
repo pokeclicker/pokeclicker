@@ -1,6 +1,8 @@
 /// <reference path="../declarations/DataStore/BadgeCase.d.ts" />
 /// <reference path="../declarations/GameHelper.d.ts" />
 /// <reference path="../declarations/party/Category.d.ts"/>
+/// <reference path="../declarations/effectEngine/effectEngineRunner.d.ts"/>
+/// <reference path="../declarations/items/ItemHandler.d.ts"/>
 
 /**
  * Main game class.
@@ -68,7 +70,7 @@ class Game {
     initialize() {
         AchievementHandler.initialize(this.multiplier, this.challenges);
         FarmController.initialize();
-        EffectEngineRunner.initialize(this.multiplier);
+        EffectEngineRunner.initialize(this.multiplier, GameHelper.enumStrings(GameConstants.BattleItemType).map((name) => ItemList[name]));
         FluteEffectRunner.initialize(this.multiplier);
         ItemHandler.initilizeEvoStones();
         this.profile.initialize();
@@ -408,7 +410,7 @@ class Game {
                     });
                 }
                 // Give the players more Battle Cafe spins
-                BattleCafeController.spinsLeft(BattleCafeController.defaultSpins);
+                BattleCafeController.spinsLeft(BattleCafeController.spinsPerDay());
 
                 DayOfWeekRequirement.date(now.getDay());
             }
