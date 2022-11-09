@@ -88,11 +88,7 @@ class DreamOrbController implements Saveable {
     defaults: Record<string, any>;
     toJSON(): Record<string, any> {
         return {
-            orbs: [
-                ...this.orbs.map((o) => {
-                    return {amount: o.amount(), color: o.color};
-                }),
-            ],
+            orbs: this.orbs.map((o) => ({ amount: o.amount(), color: o.color })),
         };
     }
     fromJSON(json: Record<string, any>): void {
