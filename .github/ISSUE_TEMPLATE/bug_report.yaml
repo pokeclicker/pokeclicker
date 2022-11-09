@@ -53,8 +53,10 @@ body:
         - Firefox
         - Chrome
         - Safari
+        - Opera
         - Microsoft Edge
         - Desktop Client
+        - Other (Tell us in Additional Information)
     validations:
       required: true
   - type: textarea
