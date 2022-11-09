@@ -92,7 +92,7 @@ class DreamOrbController implements Saveable {
         };
     }
     fromJSON(json: Record<string, any>): void {
-        json?.orbs?.forEach((o) => this.orbs.find((o2) => o2.color == o.color).amount(o.amount));
+        json?.orbs?.forEach((o) => this.orbs.find((o2) => o2.color == o.color)?.amount(o.amount));
     }
 }
 
