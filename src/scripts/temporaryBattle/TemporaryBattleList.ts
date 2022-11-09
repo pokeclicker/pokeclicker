@@ -97,8 +97,8 @@ TemporaryBattleList['Biker Goon 3'] = new TemporaryBattle(
 TemporaryBattleList['Cue Ball Paxton'] = new TemporaryBattle(
     'Cue Ball Paxton',
     [
-        new GymPokemon('Weezing', 221664, 39),
-        new GymPokemon('Muk', 221664, 39),
+        new GymPokemon('Koffing', 221664, 39),
+        new GymPokemon('Grimer', 221664, 39),
     ],
     'All right, enough! We\'ll leave like you wanted! We\'ll be happy to see the last of this boring island!',
     [
