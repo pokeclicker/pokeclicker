@@ -1395,6 +1395,156 @@ class Update implements Saveable {
                         saveData.battleFrontier.milestones = saveData.battleFrontier.milestones.filter(milestone => milestone[1] !== name);
                     });
             }
+
+            // Migrate old form ID's to new ones
+            const formIDs = [
+            // Pikachu (World Cap) before eventchus
+                [25.08, 25.09],
+                [25.09, 25.1],
+                [25.1, 25.11],
+                [25.11, 25.12],
+                [25.12, 25.08],
+            // Vivillon (swap Icy Snow and Meadow, put Poke Ball before Fancy)
+                [666, 666.06],
+                [666.01, 666.18],
+                [666.02, 666.01],
+                [666.03, 666.02],
+                [666.04, 666.03],
+                [666.05, 666.04],
+                [666.06, 666.05],
+                [666.07, 666],
+                [666.08, 666.07],
+                [666.09, 666.08],
+                [666.1, 666.09],
+                [666.11, 666.1],
+                [666.12, 666.11],
+                [666.13, 666.12],
+                [666.14, 666.13],
+                [666.15, 666.14],
+                [666.16, 666.15],
+                [666.17, 666.16],
+                [666.18, 666.17],
+            // Flabebe line (swap Blue and Orange)
+                [669.02, 669.03],
+                [669.03, 669.02],
+                [670.02, 670.03],
+                [670.03, 670.02],
+                [671.02, 671.03],
+                [671.03, 671.02],
+            // ROYGBIV Minior instead of BGIORVY
+                [774.01, 774.05],
+                [774.02, 774.04],
+                [774.03, 774.06],
+                [774.04, 774.02],
+                [774.05, 774.01],
+                [774.06, 774.07],
+                [774.07, 774.03],
+            // Alcremie (unordered sweets -> ordered by cream)
+            // Strawberry
+                [869.01, 869.4],
+                [869.02, 869.3],
+                [869.03, 869.2],
+                [869.04, 869.1],
+                [869.05, 869.7],
+                [869.06, 869.8],
+                [869.07, 869.6],
+                [869.08, 869.5],
+            // Berry
+                [869.1, 869.01],
+                [869.11, 869.41],
+                [869.12, 869.31],
+                [869.13, 869.21],
+                [869.14, 869.11],
+                [869.15, 869.71],
+                [869.16, 869.81],
+                [869.17, 869.61],
+                [869.18, 869.51],
+            // Love
+                [869.2, 869.02],
+                [869.21, 869.42],
+                [869.22, 869.32],
+                [869.23, 869.22],
+                [869.24, 869.12],
+                [869.25, 869.72],
+                [869.26, 869.82],
+                [869.27, 869.62],
+                [869.28, 869.52],
+            // Star
+                [869.3, 869.03],
+                [869.31, 869.43],
+                [869.32, 869.33],
+                [869.33, 869.23],
+                [869.34, 869.13],
+                [869.35, 869.73],
+                [869.36, 869.83],
+                [869.37, 869.63],
+                [869.38, 869.53],
+            // Clover
+                [869.4, 869.04],
+                [869.41, 869.44],
+                [869.42, 869.34],
+                [869.43, 869.24],
+                [869.44, 869.14],
+                [869.45, 869.74],
+                [869.46, 869.84],
+                [869.47, 869.64],
+                [869.48, 869.54],
+            // Flower
+                [869.5, 869.05],
+                [869.51, 869.45],
+                [869.52, 869.35],
+                [869.53, 869.25],
+                [869.54, 869.15],
+                [869.55, 869.75],
+                [869.56, 869.85],
+                [869.57, 869.65],
+                [869.58, 869.55],
+            // Ribbon
+                [869.6, 869.06],
+                [869.61, 869.46],
+                [869.62, 869.36],
+                [869.63, 869.26],
+                [869.64, 869.16],
+                [869.65, 869.76],
+                [869.66, 869.86],
+                [869.67, 869.66],
+                [869.68, 869.56],
+            ];
+
+            formIDs.forEach(([oldformID, newformID]) => {
+                const pokemon = saveData.party.caughtPokemon.find(p => p.id === oldformID);
+                // If player hasn't caught this mon yet, return.
+                if (pokemon == undefined) {
+                    return;
+                }
+                // Update our ID
+                pokemon.id = newformID;
+                if (!saveData.statistics.pokemonHatched) {
+                    saveData.statistics.pokemonHatched = {};
+                }
+                if (!saveData.statistics.shinyPokemonHatched) {
+                    saveData.statistics.shinyPokemonHatched = {};
+                }
+                // Update our statistics
+                saveData.statistics.pokemonEncountered[newformID] = saveData.statistics.pokemonEncountered[oldformID] || 0;
+                saveData.statistics.pokemonDefeated[newformID] = saveData.statistics.pokemonDefeated[oldformID] || 0;
+                saveData.statistics.pokemonCaptured[newformID] = saveData.statistics.pokemonCaptured[oldformID] || 0;
+                saveData.statistics.pokemonHatched[newformID] = saveData.statistics.pokemonHatched[oldformID] || 0;
+                saveData.statistics.shinyPokemonEncountered[newformID] = saveData.statistics.shinyPokemonEncountered[oldformID] || 0;
+                saveData.statistics.shinyPokemonDefeated[newformID] = saveData.statistics.shinyPokemonDefeated[oldformID] || 0;
+                saveData.statistics.shinyPokemonCaptured[newformID] = saveData.statistics.shinyPokemonCaptured[oldformID] || 0;
+                saveData.statistics.shinyPokemonHatched[newformID] = saveData.statistics.shinyPokemonHatched[oldformID] || 0;
+                // Delete our old statistics
+                delete saveData.statistics.pokemonEncountered[oldformID];
+                delete saveData.statistics.pokemonDefeated[oldformID];
+                delete saveData.statistics.pokemonCaptured[oldformID];
+                delete saveData.statistics.pokemonHatched[oldformID];
+                delete saveData.statistics.shinyPokemonEncountered[oldformID];
+                delete saveData.statistics.shinyPokemonDefeated[oldformID];
+                delete saveData.statistics.shinyPokemonCaptured[oldformID];
+                delete saveData.statistics.shinyPokemonHatched[oldformID];
+            });
+
         },
         '0.10.2': ({ playerData, saveData }) => {
             // Kecleon Fights
