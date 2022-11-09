@@ -1,6 +1,6 @@
 name: Suggestion
 description: Use this to suggest new features or changes to the game
-title: "[SUGGESTION] "
+title: "[SUGGESTION]: "
 labels: ["suggestion"]
 body:
   - type: markdown
@@ -28,10 +28,6 @@ body:
   - type: textarea
     attributes:
       label: Detailed Description
-      description: Provide a detailed description of the change or addition you are proposing
+      description: Provide a detailed description of the change or addition you are proposing. You can add screenshots here to help explain your suggestion
     validations:
       required: true
-  - type: textarea
-    attributes:
-      label: Screenshots
-      description: If applicable, add screenshots to help explain your suggestion
