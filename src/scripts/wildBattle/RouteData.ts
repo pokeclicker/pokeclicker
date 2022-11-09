@@ -806,9 +806,7 @@ Routes.add(new RegionRoute(
         land: ['Poochyena', 'Gulpin', 'Minun', 'Oddish', 'Wingull', 'Plusle'],
         water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer'],
         special:
-        [
-            new SpecialRoutePokemon(['Electrike'], new ObtainedPokemonRequirement(pokemonMap.Electrike)),
-        ],
+        [new SpecialRoutePokemon(['Electrike'], new ObtainedPokemonRequirement(pokemonMap.Electrike))],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Granite Cave'))]
 ));
@@ -866,9 +864,7 @@ Routes.add(new RegionRoute(
         land: ['Surskit', 'Poochyena', 'Oddish', 'Marill', 'Illumise', 'Volbeat', 'Seedot'],
         water: ['Marill', 'Goldeen', 'Magikarp', 'Corphish'],
         special:
-        [
-            new SpecialRoutePokemon(['Roselia'], new ObtainedPokemonRequirement(pokemonMap.Roselia)),
-        ],
+        [new SpecialRoutePokemon(['Roselia'], new ObtainedPokemonRequirement(pokemonMap.Roselia))],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.hoenn, 110)],
     110.1
@@ -1354,9 +1350,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Zangoose', 'Seviper', 'Cubchoo', 'Deerling (Summer)', 'Deerling (Winter)', 'Watchog', 'Tranquill', 'Foongus'],
         special:
-        [
-            new SpecialRoutePokemon(['Zebstrika'], new ObtainedPokemonRequirement(pokemonMap.Zebstrika)),
-        ],
+        [new SpecialRoutePokemon(['Zebstrika'], new ObtainedPokemonRequirement(pokemonMap.Zebstrika))],
     }),
     [
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Chargestone Cave')),
@@ -1869,9 +1863,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Parasect', 'Ledian', 'Ariados', 'Pancham', 'Trumbeak', 'Toucannon', 'Komala'],
         special:
-        [
-            new SpecialRoutePokemon(['Shiinotic'], new ObtainedPokemonRequirement(pokemonMap.Shiinotic)),
-        ],
+        [new SpecialRoutePokemon(['Shiinotic'], new ObtainedPokemonRequirement(pokemonMap.Shiinotic))],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Malie Garden'))],
     undefined,
