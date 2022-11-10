@@ -867,6 +867,7 @@ TownList['Professor Ivy\'s Lab'] = new Town(
 TownList['Client Island'] = new Town(
     'Client Island',
     GameConstants.Region.kanto,
+    GameConstants.KantoSubRegions.Sevii123,
     [ClientIslandShop],
     {
         requirements: [new ClientRequirement(), new GymBadgeRequirement(BadgeEnums.Volcano)],

@@ -176,6 +176,7 @@ export const SpriteCredits: Credit[] = [
             'Ash\'s Butterfree',
             'Black mane hair big icon',
             'Blimp base',
+            'Client Island town image',
             'Cracked pot big icon',
             'Danny',
             'Dracovish shop image',
