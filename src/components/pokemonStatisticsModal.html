@@ -3,7 +3,7 @@
         <div class="modal-content" data-bind="with: App.game.statistics.selectedPokemonID()">
             <div class="modal-header bg-dark text-light" style='justify-content: space-around;'>
                 <h5 class="modal-title text-muted" data-bind="text: `#${pokemonMap[$data].id <= 0 ? '???' : Math.floor(pokemonMap[$data].id).toString().padStart(3,0)}&nbsp;&nbsp;`"></h5>
-                <h5 class="modal-title text-light" data-bind="text: pokemonMap[$data].name">Pokémon Statistics</h5>&nbsp;
+                <h5 class="modal-title text-light" data-bind="text: PokemonHelper.displayName(pokemonMap[$data].name)">Pokémon Statistics</h5>&nbsp;
                 <h5 class="modal-title text-light" data-bind="if: App.game.party.getPokemon(pokemonMap[$data].id)">
                     <img width="18px" src="" data-bind="attr: { src: `assets/images/pokeball/Pokeball${App.game.party.alreadyCaughtPokemon(pokemonMap[$data].id, true) && PokedexHelper.toggleStatisticShiny() ? '-shiny' : ''}.svg`}, click: () => PokedexHelper.toggleStatisticShiny(!PokedexHelper.toggleStatisticShiny())"/>
                 </h5>
@@ -94,8 +94,23 @@
                       <td class="text-left tight">
                           <label class="form-check-label toggler-wrapper style-1 gender-toggle float-left">
                               <input class="form-check-input" type="checkbox" id=""
-                                  value="false" 
+                                  value="false"
                                   data-bind="checked: App.game.party.getPokemon($data).defaultFemaleSprite">
+                              <div class="toggler-slider">
+                                  <div class="toggler-knob"></div>
+                              </div>
+                          </label>
+                      </td>
+                    </tr>
+                    <!-- /ko -->
+                    <!-- ko if: App.game.party.alreadyCaughtPokemon($data) && App.game.party.getPokemon($data)?.shiny -->
+                    <tr>
+                      <td class="text-left align-middle">Hide Party Pokémon shiny</td>
+                      <td class="text-left tight">
+                          <label class="form-check-label toggler-wrapper style-1 float-left">
+                              <input class="form-check-input" type="checkbox" id=""
+                                  value="false"
+                                  data-bind="checked: App.game.party.getPokemon($data).hideShinyImage">
                               <div class="toggler-slider">
                                   <div class="toggler-knob"></div>
                               </div>

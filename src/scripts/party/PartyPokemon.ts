@@ -11,6 +11,7 @@ enum PartyPokemonSaveKeys {
     effortPoints,
     heldItem,
     defaultFemaleSprite,
+    hideShinyImage
 }
 
 class PartyPokemon implements Saveable {
@@ -31,20 +32,24 @@ class PartyPokemon implements Saveable {
         pokerus: GameConstants.Pokerus.Uninfected,
         effortPoints: 0,
         defaultFemaleSprite: false,
+        hideShinyImage: false,
     };
 
     // Saveable observables
+    // Consider the Real evolution challenge before adding stuff here
     _breeding: KnockoutObservable<boolean>;
     _shiny: KnockoutObservable<boolean>;
     _level: KnockoutObservable<number>;
     _attackBonusPercent: KnockoutObservable<number>;
     _attackBonusAmount: KnockoutObservable<number>;
     _category: KnockoutObservable<number>;
+    _displayName: KnockoutObservable<string>;
     _pokerus: KnockoutObservable<GameConstants.Pokerus>;
     proteinsUsed: KnockoutObservable<number>;
     _effortPoints: KnockoutObservable<number>;
     heldItem: KnockoutObservable<HeldItem>;
     defaultFemaleSprite: KnockoutObservable<boolean>;
+    hideShinyImage: KnockoutObservable<boolean>;
 
     constructor(
         public id: number,
@@ -61,6 +66,7 @@ class PartyPokemon implements Saveable {
         this._attackBonusPercent = ko.observable(0).extend({ numeric: 0 });
         this._attackBonusAmount = ko.observable(0).extend({ numeric: 0 });
         this._category = ko.observable(0).extend({ numeric: 0 });
+        this._displayName = PokemonHelper.displayName(name);
         this._pokerus = ko.observable(GameConstants.Pokerus.Uninfected).extend({ numeric: 0 });
         this._effortPoints = ko.observable(0).extend({ numeric: 0 });
         this.evs = ko.pureComputed(() => {
@@ -78,12 +84,13 @@ class PartyPokemon implements Saveable {
                     type: NotificationConstants.NotificationOption.info,
                     setting: NotificationConstants.NotificationSetting.General.pokerus,
                 });
-                App.game.logbook.newLog(LogBookTypes.NEW, `${this.name} has become Resistant to Pokérus.`);
+                App.game.logbook.newLog(LogBookTypes.NEW, createLogContent.resistantToPokerus({ pokemon: this.name }));
             }
         });
         this._attack = ko.pureComputed(() => this.calculateAttack());
         this.heldItem = ko.observable(undefined);
         this.defaultFemaleSprite = ko.observable(false);
+        this.hideShinyImage = ko.observable(false);
     }
 
     public calculateAttack(ignoreLevel = false): number {
@@ -310,6 +317,19 @@ class PartyPokemon implements Saveable {
         }
     }
 
+    public hideFromHeldItemList = ko.pureComputed(() => {
+        if (this.heldItem()) {
+            return true;
+        }
+        if (!HeldItem.heldItemSelected().canUse(this)) {
+            return true;
+        }
+        if (!new RegExp(Settings.getSetting('heldItemSearchFilter').observableValue() , 'i').test(this.name)) {
+            return true;
+        }
+        return false;
+    });
+
     public fromJSON(json: Record<string, any>): void {
         if (json == null) {
             return;
@@ -331,6 +351,7 @@ class PartyPokemon implements Saveable {
         this.effortPoints = json[PartyPokemonSaveKeys.effortPoints] ?? this.defaults.effortPoints;
         this.heldItem(json[PartyPokemonSaveKeys.heldItem] && ItemList[json[PartyPokemonSaveKeys.heldItem]] instanceof HeldItem ? ItemList[json[PartyPokemonSaveKeys.heldItem]] as HeldItem : undefined);
         this.defaultFemaleSprite(json[PartyPokemonSaveKeys.defaultFemaleSprite] ?? this.defaults.defaultFemaleSprite);
+        this.hideShinyImage(json[PartyPokemonSaveKeys.hideShinyImage] ?? this.defaults.hideShinyImage);
 
         if (this.evolutions != null) {
             for (const evolution of this.evolutions) {
@@ -364,6 +385,7 @@ class PartyPokemon implements Saveable {
             [PartyPokemonSaveKeys.effortPoints]: this.effortPoints,
             [PartyPokemonSaveKeys.heldItem]: this.heldItem()?.name,
             [PartyPokemonSaveKeys.defaultFemaleSprite]: this.defaultFemaleSprite(),
+            [PartyPokemonSaveKeys.hideShinyImage]: this.hideShinyImage(),
         };
 
         // Don't save anything that is the default option
@@ -443,5 +465,9 @@ class PartyPokemon implements Saveable {
 
     set category(index: number) {
         this._category(index);
+    }
+
+    get displayName(): string {
+        return this._displayName();
     }
 }

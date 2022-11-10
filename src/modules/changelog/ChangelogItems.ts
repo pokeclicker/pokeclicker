@@ -10,6 +10,34 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.10.1
+    new ChangelogUpdate('v0.10.1', new Date(2022, 9, 31)),
+    new Changelog(changelogType.NEW, 'Spooky Togepi evolution line'),
+    new Changelog(changelogType.CHANGE, 'Increased chance of undiscovered fossils appearing in the Underground'),
+    new Changelog(changelogType.CHANGE, 'Adjusted held item drop locations'),
+    new Changelog(changelogType.CHANGE, 'Adjusted battle café spins per day'),
+    new Changelog(changelogType.CHANGE, 'More profile options'),
+    new Changelog(changelogType.CHANGE, 'Misc text changes'),
+    new Changelog(changelogType.CHANGE, 'Misc UI changes'),
+    new Changelog(changelogType.CHANGE, 'Misc image changes'),
+    new Changelog(changelogType.FIXED, 'Some people not being able to create a new save'),
+
+    // v0.10.0
+    new ChangelogUpdate('v0.10.0 - Galar', new Date(2022, 9, 22)),
+    new Changelog(changelogType.NEW, 'The Galar region is now available'),
+    new Changelog(changelogType.NEW, 'Farm Point hatchery helper added'),
+    new Changelog(changelogType.NEW, 'More questlines'),
+    new Changelog(changelogType.NEW, 'More held items'),
+    new Changelog(changelogType.NEW, 'Pokémon now have genders'),
+    new Changelog(changelogType.NEW, 'Routes and dungeons now show the EV status of all encounters'),
+    new Changelog(changelogType.CHANGE, 'Battle Frontier reward Pokémon now have a chance to be shiny'),
+    new Changelog(changelogType.CHANGE, 'Adjusted shard prices'),
+    new Changelog(changelogType.CHANGE, 'Adjusted farm wanderers'),
+    new Changelog(changelogType.CHANGE, 'Misc text changes'),
+    new Changelog(changelogType.CHANGE, 'Misc UI changes'),
+    new Changelog(changelogType.CHANGE, 'Misc image changes'),
+    new Changelog(changelogType.FIXED, 'Town to be sent to after snorlax and sudowoodo battles'),
+
     // v0.9.18
     new ChangelogUpdate('v0.9.18', new Date(2022, 9, 10)),
     new Changelog(changelogType.FIXED, 'Some saves not being able to update to v0.9.17'),

@@ -27,4 +27,8 @@ class BattleFrontierMilestone {
     get description() {
         return this._description;
     }
+
+    get displayName(): string | KnockoutObservable<string> {
+        return this.description;
+    }
 }

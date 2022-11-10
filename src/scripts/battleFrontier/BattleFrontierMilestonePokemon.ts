@@ -1,7 +1,5 @@
 class BattleFrontierMilestonePokemon extends BattleFrontierMilestone {
-    pokemonName: string;
-
-    constructor (stage: number, pokemonName: string, requirement?: Requirement, image = `assets/images/items/pokemonItem/${pokemonName}.png`) {
+    constructor (stage: number, private pokemonName: string, requirement?: Requirement, image = `assets/images/items/pokemonItem/${pokemonName}.png`) {
         super(
             stage,
             () => {
@@ -11,5 +9,9 @@ class BattleFrontierMilestonePokemon extends BattleFrontierMilestone {
             image,
             pokemonName
         );
+    }
+
+    get displayName() {
+        return PokemonHelper.displayName(this.pokemonName);
     }
 }

@@ -50,7 +50,13 @@ class BattleFrontierMilestones {
                 setting: NotificationConstants.NotificationSetting.General.battle_frontier,
                 timeout: 1e4,
             });
-            App.game.logbook.newLog(LogBookTypes.FRONTIER, `Received ${reward.description} for defeating stage ${defeatedStage.toLocaleString('en-US')} of the Battle Frontier!`);
+            App.game.logbook.newLog(
+                LogBookTypes.FRONTIER,
+                createLogContent.gainBattleFrontierReward({
+                    reward: reward.description,
+                    stage: defeatedStage.toLocaleString('en-US'),
+                })
+            );
             reward.gain();
         }
     }

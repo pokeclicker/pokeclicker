@@ -3,7 +3,7 @@
       <td>
           <img class="smallImage" data-bind="attr:{ src: PokemonHelper.getImage($data.id) }" src=""/>
       <td class="text-nowrap">
-          <span data-bind="text: name">Name</span><sup data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)">✨</sup>
+          <span data-bind="text: $data.displayName">Name</span><sup data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)">✨</sup>
       </td>
       <td data-bind="text: Math.round(damage).toLocaleString('en-US')">Damage</td>
       <td data-bind="text: PokemonType[type1]">Type 1</td>

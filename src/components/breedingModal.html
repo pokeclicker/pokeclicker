@@ -55,12 +55,41 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                 </select>
                             </div>
                             <div class="form-group col-md-3 col-6">
-                                <label>Region</label>
-                                <select name="breedingRegionFilter" autocomplete="off" class="custom-select" onchange="BreedingFilters.region.value(+this.value), Settings.setSettingByName(this.name, this.value)">
-                                    <!-- ko foreach: Settings.getSetting('breedingRegionFilter').options.filter(r => r.value <= player.highestRegion()) -->
-                                    <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('breedingRegionFilter').value === $data.value }, text: $data.text">Region</option>
-                                    <!-- /ko -->
-                                </select>
+                                <label>Regions</label><br/>
+                                <div class="dropdown show">
+                                    <button type="button" class="text-left custom-select col-12 btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bind="text :
+                                        BreedingFilters.region.value() == 2 ** (player.highestRegion() + 1) - 1 ?
+                                            'All' :
+                                            (BreedingFilters.region.value() > 0 && BreedingFilters.region.value() ?
+                                                GameConstants.camelCaseToString(GameConstants.Region[Math.floor(Math.log2(BreedingFilters.region.value()))]) + (BreedingFilters.region.value()
+                                                    .toString(2).split('')
+                                                    .reduce(function(s,n){ return s + (n == '1' ? 1 : 0)}, 0) > 1 ? ' & more' : '') :
+                                                'None')
+                                        ">
+                                        Regions
+                                    </button>
+                                    <div class="border-secondary dropdown-menu col-12">
+                                        <div class="dropdown-item" data-bind="click : function(){ BreedingFilters.region.value(2 ** (player.highestRegion() + 1) - 1); Settings.setSettingByName('breedingRegionFilter', BreedingFilters.region.value()) }">
+                                            All
+                                        </div>
+                                        <div class="dropdown-divider"></div>
+                                        <!-- ko foreach : Object.keys(GameConstants.Region).filter(function(r){ return r <= player.highestRegion() && r >= 0; }) -->
+                                        <div class="dropdown-item" data-bind="class : Settings.getSetting('breedingRegionFilter').observableValue() & (2 ** $data) ? 'bg-success' : '',
+                                            text : GameConstants.camelCaseToString(GameConstants.Region[$data]),
+                                            click : function(){ BreedingFilters.region.value(2 ** $data); Settings.setSettingByName('breedingRegionFilter', 2 ** $data) },
+                                            attr : { 'oncontextmenu' : 'var powValue = ' + 2 ** $data + ';' +
+                                                'if(!(BreedingFilters.region.value() & powValue))' +
+                                                    'GameHelper.incrementObservable(BreedingFilters.region.value, powValue);' +
+                                                'else ' +
+                                                    'GameHelper.incrementObservable(BreedingFilters.region.value, -powValue);' +
+                                                'Settings.setSettingByName(\'breedingRegionFilter\', BreedingFilters.region.value());' +
+                                                'return false;'
+                                            }">
+                                        </div>
+                                        <!-- /ko-->
+                                    </div>
+                                </div>
+
                             </div>
                             <div class="form-group col-md-3 col-6">
                                 <label>Shiny Status</label>
@@ -133,6 +162,18 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                     </div>
                                 </div>
                             </div>
+                            <!--Breeding Efficiency Toggle-->
+                            <div class="form-group col-md-3 col-6" style="max-width: 100%; flex-grow: 1">
+                                    <label>Include EV bonus</label>
+                                    <label class="form-check-label toggler-wrapper style-1">
+                                        <input class="form-check-input" type="checkbox" id="breeding-include-ev-bonus"
+                                            data-bind="checked: Settings.getSetting('breedingIncludeEVBonus').observableValue()"
+                                            onchange="Settings.setSettingByName('breedingIncludeEVBonus', this.checked)">
+                                        <div class="toggler-slider">
+                                            <div class="toggler-knob"></div>
+                                        </div>
+                                    </label>
+                            </div>
                         </div>
                     </div>
                     <div>
@@ -142,14 +183,14 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                         </p>
                         <!-- ko if: App.game.party.hasMaxLevelPokemon() -->
                         <ul class="row justify-content-center p-0" data-bind="foreach: lazyLoad($element, PartyController.getHatcherySortedList)">
-                            <li class="eggSlot col-sm-4 col-md-3 col-lg-2 pokedexEntry text-nowrap" data-bind="visible: BreedingController.visible($data), style:{background: PokedexHelper.getBackgroundColors($data.name)}, class: App.game.breeding.hasFreeEggSlot() || App.game.breeding.hasFreeQueueSlot() ? '' : 'disabled'">
-                                <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: $data.name">name</span>
-                                <div data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)" style="position: absolute;right: 1px;top: -2px;height: 24px">✨</div>
-                                <div data-bind="if: App.game.party.getPokemon($data.id)?.pokerus" style="position: absolute;left: 2px;top:10px;">
+                            <li class="eggSlot col-sm-4 col-md-3 col-lg-2 pokedexEntry" data-bind="visible: BreedingController.visible($data), style:{background: PokedexHelper.getBackgroundColors($data.name)}, class: App.game.breeding.hasFreeEggSlot() || App.game.breeding.hasFreeQueueSlot() ? '' : 'disabled'">
+                                <span class="breedingListPokemonName" data-bind="text: $data.displayName">name</span>
+                                <div class="breedingListShiny" data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)">✨</div>
+                                <div class="breedingListPokerus" data-bind="if: App.game.party.getPokemon($data.id)?.pokerus">
                                     <img width="32px" src="" data-bind="attr: { src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[App.game.party.getPokemon($data.id).pokerus]}.png`}"/>
                                 </div>
-                                <img src="" width="80px" data-bind="attr:{ src: PokemonHelper.getImage($data.id, undefined, App.game.party.alreadyCaughtPokemon($data.id) && App.game.party.getPokemon($data.id).defaultFemaleSprite()) }">
-                                <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: BreedingController.getDisplayValue($data)">value</span>
+                                <img src="" width="80px" data-bind="attr:{ src: PokemonHelper.getImage($data.id) }">
+                                <span class="breedingListDisplayValue" data-bind="text: BreedingController.getDisplayValue($data)">value</span>
                                 <a class="overlay" href="#breed" data-bind="click: function() { App.game.breeding.addPokemonToHatchery($data); App.game.breeding.checkCloseModal();}"></a>
                                 <div class="pokemonCategory dropdown">
                                     <button data-toggle="dropdown" data-bind="class: `category-${$data.category + 1}`"></button>
@@ -351,7 +392,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                     html: true,
                 }">
             </knockout>
-		   <button id="breeding-fireall" type="button" class="btn btn-danger" data-bind="attr : {disabled : !App.game.breeding.hatcheryHelpers.hired().length}, click: function(){App.game.breeding.hatcheryHelpers.hired().forEach(function(h){h.fire();})}" style="display : none;">Fire All</button>
+           <button id="breeding-fireall" type="button" class="btn btn-danger" data-bind="attr : {disabled : !App.game.breeding.hatcheryHelpers.hired().length}, click: function(){App.game.breeding.hatcheryHelpers.hired().forEach(function(h){h.fire();})}" style="display : none;">Fire All</button>
            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
        </div>
    </div>

@@ -1,4 +1,4 @@
-///<reference path="Item.ts"/>
+/// <reference path="../../declarations/items/Item.d.ts"/>
 
 class HeldItem extends Item {
     public static heldItemSelected: KnockoutObservable<HeldItem> = ko.observable(undefined);
@@ -18,8 +18,10 @@ class HeldItem extends Item {
         this.regionUnlocked = regionUnlocked;
     }
 
-    public static getHeldItems() {
-        return Object.values(ItemList).filter(i => i instanceof HeldItem);
+    public static getSortedHeldItems() {
+        return Object.values(ItemList).filter(i => i instanceof HeldItem).sort((a: HeldItem, b: HeldItem) => {
+            return a.regionUnlocked - b.regionUnlocked;
+        });
     }
 
     public isUnlocked() {
@@ -100,6 +102,10 @@ ItemList.Thick_Club = new AttackBonusHeldItem('Thick_Club', 10000, GameConstants
     (pokemon) => Math.floor(pokemon.id) == 104 ||  Math.floor(pokemon.id) == 105);
 ItemList.Soul_Dew = new AttackBonusHeldItem('Soul_Dew', 10000, GameConstants.Currency.money, undefined, 'Soul Dew', 1.5, GameConstants.Region.sinnoh, 'Latias or Latios',
     (pokemon) => Math.floor(pokemon.id) == 380 ||  Math.floor(pokemon.id) == 381);
+ItemList.Adamant_Orb = new AttackBonusHeldItem('Adamant_Orb', 10000, GameConstants.Currency.money, undefined, 'Adamant Orb', 1.5, GameConstants.Region.sinnoh, 'Dialga',
+    (pokemon) => Math.floor(pokemon.id) == 483);
+ItemList.Lustrous_Orb = new AttackBonusHeldItem('Lustrous_Orb', 10000, GameConstants.Currency.money, undefined, 'Lustrous Orb', 1.5, GameConstants.Region.sinnoh, 'Palkia',
+    (pokemon) => Math.floor(pokemon.id) == 484);
 ItemList.Leek = new AttackBonusHeldItem('Leek', 10000, GameConstants.Currency.money, undefined, 'Leek', 1.2, GameConstants.Region.galar, 'Farfetch\'d or Sirfetch\'d',
     (pokemon) => Math.floor(pokemon.id) == 83 ||  Math.floor(pokemon.id) == 865);
 ItemList.Rusted_Sword = new AttackBonusHeldItem('Rusted_Sword', 10000, GameConstants.Currency.money, undefined, 'Rusted Sword', 1.5, GameConstants.Region.galar, 'Zacian',

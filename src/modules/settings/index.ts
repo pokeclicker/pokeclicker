@@ -17,9 +17,12 @@ import {
     camelCaseToString,
 } from '../GameConstants';
 import HotkeySetting from './HotkeySetting';
+import Language, { LanguageNames } from '../translation/Language';
 import BreedingFilters from './BreedingFilters';
 import GameHelper from '../GameHelper';
 import PokemonType from '../enums/PokemonType';
+import PokedexFilters from './PokedexFilters';
+import FilterSetting from './FilterSetting';
 
 export default Settings;
 
@@ -101,6 +104,7 @@ Settings.add(new Setting<string>('farmDisplay', 'Farm timer display',
         new SettingOption('Ripe/Death', 'ripeDeath'),
     ],
     'ripeDeath'));
+Settings.add(new BooleanSetting('breedingIncludeEVBonus', 'Include EVs in Breeding Efficiency Calculation', false));
 Settings.add(new BooleanSetting('currencyMainDisplayReduced', 'Shorten currency amount shown on main screen', false));
 Settings.add(new BooleanSetting('currencyMainDisplayExtended', 'Show Diamonds, Farm Points and Battle Points on main screen', false));
 Settings.add(new BooleanSetting('confirmLeaveDungeon', 'Confirm before leaving dungeons', false));
@@ -200,6 +204,7 @@ const heldItemSortSettings = Object.keys(SortOptionConfigs).map((opt) => (
 ));
 Settings.add(new Setting<number>('heldItemSort', 'Sort:', heldItemSortSettings, SortOptions.id));
 Settings.add(new BooleanSetting('heldItemSortDirection', 'reverse', false));
+Settings.add(new Setting<string>('heldItemSearchFilter', 'Search', [], ''));
 
 // Breeding Filters
 Object.keys(BreedingFilters).forEach((key) => {
@@ -209,6 +214,16 @@ Object.keys(BreedingFilters).forEach((key) => {
     }
     const filter = BreedingFilters[key];
     Settings.add(new Setting<string>(filter.optionName, filter.displayName, filter.options || [], filter.value().toString()));
+});
+
+// Pokedex Filters
+Object.keys(PokedexFilters).forEach((key) => {
+    // dont store name filter
+    if (key === 'name') {
+        return;
+    }
+    const filter = PokedexFilters[key];
+    Settings.add(new FilterSetting(filter));
 });
 
 Settings.add(new Setting<string>('breedingDisplayFilter', 'breedingDisplayFilter',
@@ -303,3 +318,6 @@ Settings.getSetting('backgroundImage').observableValue.subscribe((newValue) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     newValue === 'background-dynamic' ? DynamicBackground.startScene() : DynamicBackground.stopScene();
 });
+
+// Translation
+Settings.add(new Setting<Language>('translation.language', 'Language (beta)', Settings.enumToSettingOptionArray(Language, () => true, LanguageNames) as unknown as SettingOption<Language>[], Language.en));

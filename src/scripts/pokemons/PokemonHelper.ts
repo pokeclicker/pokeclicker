@@ -72,13 +72,14 @@ class PokemonHelper {
         return PokemonType[id];
     }
 
-    public static getImage(pokemonId: number, shiny = undefined, gender = undefined): string {
+    public static getImage(pokemonId: number, shiny: boolean = undefined, gender: boolean = undefined): string {
         let src = 'assets/images/';
         if (shiny === undefined) {
-            shiny = App.game.party.alreadyCaughtPokemon(pokemonId, true);
+            shiny = App.game.party.alreadyCaughtPokemon(pokemonId, true) &&
+                !App.game.party.getPokemon(pokemonId)?.hideShinyImage();
         }
         if (gender === undefined) {
-            gender = App.game.party.getPokemon(pokemonId).defaultFemaleSprite();
+            gender = App.game.party.getPokemon(pokemonId)?.defaultFemaleSprite() ?? false;
         }
 
         if (shiny) {
@@ -535,5 +536,9 @@ class PokemonHelper {
 
         // Return the list of items
         return encounterTypes;
+    }
+
+    public static displayName(englishName: string): KnockoutComputed<string> {
+        return App.translation.get(englishName, 'pokemon');
     }
 }

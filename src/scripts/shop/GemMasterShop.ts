@@ -1,3 +1,5 @@
+/// <reference path="./Shop.ts"/>
+
 class GemMasterShop extends Shop {
     constructor(
         public name: string = 'Gem Master'
