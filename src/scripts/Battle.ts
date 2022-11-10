@@ -115,9 +115,26 @@ class Battle {
         PokemonHelper.incrementPokemonStatistics(enemyPokemon.id, GameConstants.STATISTIC_ENCOUNTERED, enemyPokemon.shiny, enemyPokemon.gender);
         // Shiny
         if (enemyPokemon.shiny) {
-            App.game.logbook.newLog(LogBookTypes.SHINY, `[${Routes.getRoute(player.region, player.route()).routeName}] You encountered a wild shiny ${enemyPokemon.name}. ${App.game.party.alreadyCaughtPokemon(enemyPokemon.id, true) ? '(duplicate)' : ''}`);
+            App.game.logbook.newLog(
+                LogBookTypes.SHINY,
+                App.game.party.alreadyCaughtPokemon(enemyPokemon.id, true)
+                    ? createLogContent.encounterShinyDupe({
+                        location: Routes.getRoute(player.region, player.route()).routeName,
+                        pokemon: enemyPokemon.name,
+                    })
+                    : createLogContent.encounterShiny({
+                        location: Routes.getRoute(player.region, player.route()).routeName,
+                        pokemon: enemyPokemon.name,
+                    })
+            );
         } else if (!App.game.party.alreadyCaughtPokemon(enemyPokemon.id) && enemyPokemon.health()) {
-            App.game.logbook.newLog(LogBookTypes.NEW, `[${Routes.getRoute(player.region, player.route()).routeName}] You encountered a wild ${enemyPokemon.name}.`);
+            App.game.logbook.newLog(
+                LogBookTypes.NEW,
+                createLogContent.encounterWild({
+                    location: Routes.getRoute(player.region, player.route()).routeName,
+                    pokemon: enemyPokemon.name,
+                })
+            );
         }
     }
 
@@ -143,9 +160,17 @@ class Battle {
         if (Rand.chance(this.catchRateActual() / 100)) { // Caught
             this.catchPokemon(enemyPokemon, route, region);
         } else if (enemyPokemon.shiny) { // Failed to catch, Shiny
-            App.game.logbook.newLog(LogBookTypes.ESCAPED, `The shiny ${enemyPokemon.name} escaped! ${App.game.party.alreadyCaughtPokemon(enemyPokemon.id, true) ? '(duplicate)' : ''}`);
+            App.game.logbook.newLog(
+                LogBookTypes.ESCAPED,
+                App.game.party.alreadyCaughtPokemon(enemyPokemon.id, true)
+                    ? createLogContent.escapedShinyDupe({ pokemon: enemyPokemon.name })
+                    : createLogContent.escapedShiny({ pokemon: enemyPokemon.name })
+            );
         } else if (!App.game.party.alreadyCaughtPokemon(enemyPokemon.id)) { // Failed to catch, Uncaught
-            App.game.logbook.newLog(LogBookTypes.ESCAPED, `The wild ${enemyPokemon.name} escaped!`);
+            App.game.logbook.newLog(
+                LogBookTypes.ESCAPED,
+                createLogContent.escapedWild({ pokemon: enemyPokemon.name})
+            );
         }
         this.catching(false);
         this.catchRateActual(null);
@@ -171,7 +196,7 @@ class Battle {
     public static pokemonAttackTooltip: KnockoutComputed<string> = ko.pureComputed(() => {
         if (Battle.enemyPokemon()) {
             const pokemonAttack = App.game.party.calculatePokemonAttack(Battle.enemyPokemon().type1, Battle.enemyPokemon().type2);
-            return `${pokemonAttack.toLocaleString('en-US')} against ${Battle.enemyPokemon().name}`;
+            return `${pokemonAttack.toLocaleString('en-US')} against ${Battle.enemyPokemon().displayName}`;
         } else {
             return '';
         }

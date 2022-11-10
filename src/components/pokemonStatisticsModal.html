@@ -3,7 +3,7 @@
         <div class="modal-content" data-bind="with: App.game.statistics.selectedPokemonID()">
             <div class="modal-header bg-dark text-light" style='justify-content: space-around;'>
                 <h5 class="modal-title text-muted" data-bind="text: `#${pokemonMap[$data].id <= 0 ? '???' : Math.floor(pokemonMap[$data].id).toString().padStart(3,0)}&nbsp;&nbsp;`"></h5>
-                <h5 class="modal-title text-light" data-bind="text: pokemonMap[$data].name">Pokémon Statistics</h5>&nbsp;
+                <h5 class="modal-title text-light" data-bind="text: PokemonHelper.displayName(pokemonMap[$data].name)">Pokémon Statistics</h5>&nbsp;
                 <h5 class="modal-title text-light" data-bind="if: App.game.party.getPokemon(pokemonMap[$data].id)">
                     <img width="18px" src="" data-bind="attr: { src: `assets/images/pokeball/Pokeball${App.game.party.alreadyCaughtPokemon(pokemonMap[$data].id, true) && PokedexHelper.toggleStatisticShiny() ? '-shiny' : ''}.svg`}, click: () => PokedexHelper.toggleStatisticShiny(!PokedexHelper.toggleStatisticShiny())"/>
                 </h5>

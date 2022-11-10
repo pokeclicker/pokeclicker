@@ -128,7 +128,13 @@ class HatcheryHelper {
                 timeout: 30 * GameConstants.MINUTE,
             });
             this.hired(false);
-            App.game.logbook.newLog(LogBookTypes.OTHER, `You ran out of ${this.currencyString()} to pay Hatchery Helper ${this.name}!`);
+            App.game.logbook.newLog(
+                LogBookTypes.OTHER,
+                createLogContent.unableToPayHatcheryHelper({
+                    currency: this.currencyString(),
+                    name: this.name,
+                })
+            );
             return;
         }
     }

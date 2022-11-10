@@ -1806,10 +1806,6 @@ dungeonList['Ruins of Alph'] = new Dungeon('Ruins of Alph',
     },
     60600,
     [
-        new DungeonBossPokemon('Unown (A)', 280000, 14, {
-            hide: true,
-            requirement: new ObtainedPokemonRequirement(pokemonMap['Unown (A)'], true),
-        }),
         ...AlphUnownList.map((char) => new DungeonBossPokemon(`Unown (${char})` as PokemonNameType, 280000, 14, {
             hide: true,
             requirement: new SeededDateRequirement(() => SeededDateRand.fromArray(AlphUnownList) == char),
@@ -5202,6 +5198,7 @@ dungeonList['Reversal Mountain'] = new Dungeon('Reversal Mountain',
     4003000,
     [
         new DungeonBossPokemon('Cacturne', 24000000, 100),
+        new DungeonBossPokemon('Vibrava', 24000000, 100),
         new DungeonBossPokemon('Excadrill', 26000000, 100),
         new DungeonBossPokemon('Heatran', 30000000, 100, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)}),
     ],
@@ -8437,7 +8434,7 @@ dungeonList['Poni Meadow'] = new Dungeon('Poni Meadow',
     16659968,
     [
         new DungeonBossPokemon('Oricorio (Sensu)', 83299840, 70),
-        new DungeonBossPokemon('Floette (Red)', 83299840, 70),
+        new DungeonBossPokemon('Floette (Blue)', 83299840, 70),
     ],
     1225000, 28);
 

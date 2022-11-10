@@ -5,6 +5,7 @@ class App {
 
     static readonly debug = false;
     static game: Game;
+    static translation = new Translate(Settings.getSetting('translation.language'));
 
     static start() {
         // Hide tooltips that stay on game load
@@ -49,7 +50,8 @@ class App {
                 new BattleFrontier(),
                 multiplier,
                 new SaveReminder(),
-                new BattleCafeSaveObject()
+                new BattleCafeSaveObject(),
+                new DreamOrbController()
             );
 
             console.log(`[${GameConstants.formatDate(new Date())}] %cGame loaded`, 'color:#2ecc71;font-weight:900;');
@@ -59,9 +61,6 @@ class App {
 
             GameController.bindToolTips();
             GameController.addKeyListeners();
-
-            PokedexHelper.populateFilters();
-            PokedexHelper.updateList();
 
             App.game.initialize();
 

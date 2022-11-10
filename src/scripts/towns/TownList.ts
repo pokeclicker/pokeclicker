@@ -1508,6 +1508,10 @@ const TohjoFallsCelebiTimeDistortion = new NPC('Investigate the Time Distortion'
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Unfinished Business', 8), new QuestLineStepCompletedRequirement('Unfinished Business', 10, GameConstants.AchievementOption.less), new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Tohjo Falls'))]),
 });
 
+const IndigoHiker = new NPC('Hiker', [
+    'This is the best place to take a break in the whole region! I can reach all of Johto from here, and Kanto is just a short hike away, to the east!',
+], { image: 'assets/images/trainers/Hiker.png' });
+
 const ProfElm = new ProfNPC('Prof. Elm',
     GameConstants.Region.johto,
     'Oh, another regional Pokédex completed so soon?',
@@ -1661,6 +1665,7 @@ TownList['Indigo Plateau Johto'] = new Town(
             new RouteKillRequirement(10, GameConstants.Region.johto, 26),
             new TemporaryBattleRequirement('Silver 5'),
         ],
+        npcs: [IndigoHiker],
     }
 );
 
@@ -3425,7 +3430,7 @@ TownList['Black and White Park'] = new Town(
     'Black and White Park',
     GameConstants.Region.unova,
     GameConstants.UnovaSubRegions.Unova,
-    [BlackAndWhiteParkShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Black and White Park'])],
+    [new DreamOrbTownContent(), BlackAndWhiteParkShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Black and White Park'])],
     {
         requirements: [new OneFromManyRequirement([
             new MultiRequirement([
@@ -4997,7 +5002,7 @@ const CirchesterHop = new NPC('Hop', [
     'Perhaps when their duty was completed, they went into some kind of sleep?',
 ], {
     image: 'assets/images/gymLeaders/Hop.png',
-    requirement: new MultiRequirement([new TemporaryBattleRequirement('Hop7'), new QuestLineStepCompletedRequirement('The Darkest Day', 6, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new TemporaryBattleRequirement('Hop 7'), new QuestLineStepCompletedRequirement('The Darkest Day', 6, GameConstants.AchievementOption.less)]),
 });
 
 const CirchesterSonia = new NPC('Sonia', [
@@ -5006,7 +5011,7 @@ const CirchesterSonia = new NPC('Sonia', [
     'I think I’ll have to look more into the history of the Slumbering Weald.',
 ], {
     image: 'assets/images/npcs/Sonia.png',
-    requirement: new MultiRequirement([new TemporaryBattleRequirement('Hop7'), new QuestLineStepCompletedRequirement('The Darkest Day', 6, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new TemporaryBattleRequirement('Hop 7'), new QuestLineStepCompletedRequirement('The Darkest Day', 6, GameConstants.AchievementOption.less)]),
 });
 
 const CirchesterGuitarist = new NPC('Guitarist Justin', [

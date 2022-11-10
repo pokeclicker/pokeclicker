@@ -40,24 +40,31 @@ class AchievementHandler {
     }
 
     public static getAchievementListWithIndex() {
-        return this.getAchievementList().slice(this.navigateIndex() * 10, (this.navigateIndex() * 10) + 10);
+        return this.achievementSortedList().slice(this.navigateIndex() * 10, (this.navigateIndex() * 10) + 10);
     }
 
-    public static getAchievementList() {
+    public static cachedSortedList: Achievement[];
+    public static achievementSortedList = ko.pureComputed(() => {
         const achievementSortValue = Settings.getSetting('achievementSort').observableValue();
+
+        if (modalUtils.observableState.achievementsModal !== 'show') {
+            return AchievementHandler.cachedSortedList || AchievementHandler.achievementListFiltered();
+        }
 
         // Checks if the user has selected the default sorting option
         if (achievementSortValue === AchievementSortOptions.default) {
             // ... in this case, returns the filtered list without sorting.
-            return this.achievementListFiltered();
+            return AchievementHandler.achievementListFiltered();
         }
 
         // ... otherwise, returns a copy of the filtered list sorted by provided property.
-        const achievementSortedList = [...this.achievementListFiltered()];
-        return achievementSortedList.sort(AchievementHandler.compareBy(
+        const achievementSortedList = [...AchievementHandler.achievementListFiltered()];
+        achievementSortedList.sort(AchievementHandler.compareBy(
             achievementSortValue, Settings.getSetting('achievementSortDirection').observableValue()
         ));
-    }
+        AchievementHandler.cachedSortedList = achievementSortedList;
+        return achievementSortedList;
+    }).extend({ rateLimit: 100 });
 
     public static filterAchievementList(retainPage = false) {
         this.achievementListFiltered(this.achievementList.filter((a) => (
