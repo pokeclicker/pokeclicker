@@ -45,7 +45,8 @@ class Game {
         public battleFrontier: BattleFrontier,
         public multiplier: Multiplier,
         public saveReminder: SaveReminder,
-        public battleCafe: BattleCafeSaveObject
+        public battleCafe: BattleCafeSaveObject,
+        public dreamOrbController: DreamOrbController
     ) {
         this._gameState = ko.observable(GameConstants.GameState.paused);
     }
@@ -154,6 +155,24 @@ class Game {
                 timeout: 2 * GameConstants.MINUTE,
                 setting: NotificationConstants.NotificationSetting.General.offline_earnings,
             });
+
+            // Dream orbs
+            if ((new DreamOrbTownContent()).isUnlocked()) {
+                const orbsUnlocked = App.game.dreamOrbController.orbs.filter((o) => !o.requirement || o.requirement.isCompleted());
+                const orbsEarned = Math.floor(timeDiffOverride / 3600);
+                if (orbsEarned > 0) {
+                    for (let i = 0; i < orbsEarned; i++) {
+                        GameHelper.incrementObservable(Rand.fromArray(orbsUnlocked).amount);
+                    }
+                    Notifier.notify({
+                        type: NotificationConstants.NotificationOption.info,
+                        title: 'Dream Orbs earned',
+                        message: `Gained ${orbsEarned} Orbs while offline`,
+                        timeout: 2 * GameConstants.MINUTE,
+                        setting: NotificationConstants.NotificationSetting.General.offline_earnings,
+                    });
+                }
+            }
         }
     }
 
