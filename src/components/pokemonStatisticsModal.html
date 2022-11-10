@@ -88,7 +88,8 @@
                         <!-- /ko -->
                       </td>
                     </tr>
-                    <!-- ko if: App.game.party.alreadyCaughtPokemon($data) && pokemonMap[$data].gender.visualDifference -->
+                    <!-- ko if: App.game.party.alreadyCaughtPokemon($data) -->
+                    <!-- ko if: pokemonMap[$data].gender.visualDifference -->
                     <tr>
                       <td class="text-left align-middle">Party Pokémon gender</td>
                       <td class="text-left tight">
@@ -103,7 +104,7 @@
                       </td>
                     </tr>
                     <!-- /ko -->
-                    <!-- ko if: App.game.party.alreadyCaughtPokemon($data) && App.game.party.getPokemon($data)?.shiny -->
+                    <!-- ko if: App.game.party.getPokemon($data)?.shiny -->
                     <tr>
                       <td class="text-left align-middle">Hide Party Pokémon shiny</td>
                       <td class="text-left tight">
@@ -117,6 +118,13 @@
                           </label>
                       </td>
                     </tr>
+                    <!-- /ko -->
+                    <tr>
+                        <td class="text-left align-middle">Party Nickname</td>
+                        <td class="text-left tight">
+                            <input type="text" class="form-control" data-bind="value: App.game.party.getPokemon($data).nickname"/>
+                        </td>
+                      </tr>
                     <!-- /ko -->
                   </tbody>
                   <thead>
