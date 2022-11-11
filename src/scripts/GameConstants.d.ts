@@ -605,6 +605,20 @@ namespace GameConstants {
         IsleofArmor,
         CrownTundra,
     }
+    declare enum FinalSubRegions {
+        Final,
+    }
+
+    declare type SubRegions =
+        | KantoSubRegions
+        | JohtoSubRegions
+        | HoennSubRegions
+        | SinnohSubRegions
+        | UnovaSubRegions
+        | KalosSubRegions
+        | AlolaSubRegions
+        | GalarSubRegions
+        | FinalSubRegions
 
     // Gender Types
     declare enum Genders {

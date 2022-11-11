@@ -1300,6 +1300,9 @@ export const TemporaryBattles = [
     'Suicune 4',
     'Suicune 5',
     'Suicune 6',
+    'Kecleon 1',
+    'Kecleon 2',
+    'Kecleon 3',
     'Sevii Rocket Grunt 1',
     'Sevii Rocket Grunt 2',
     'Sevii Rocket Grunt 3',
@@ -1364,24 +1367,24 @@ export const TemporaryBattles = [
     'Captain Mina UB',
     'Kahuna Nanu UB',
     'Ash Ketchum Alola',
-    'Hop1',
+    'Hop 1',
     'Mirages',
-    'Hop2',
-    'Hop3',
-    'Bede1',
-    'Hop4',
-    'Bede2',
-    'Marnie1',
-    'Hop5',
-    'Bede3',
-    'Hop6',
-    'Hop7',
-    'Marnie2',
+    'Hop 2',
+    'Hop 3',
+    'Bede 1',
+    'Hop 4',
+    'Bede 2',
+    'Marnie 1',
+    'Hop 5',
+    'Bede 3',
+    'Hop 6',
+    'Hop 7',
+    'Marnie 2',
     'Eternatus',
     'The Darkest Day',
-    'Hop8',
-    'Sordward1',
-    'Shielbert1',
+    'Hop 8',
+    'Sordward 1',
+    'Shielbert 1',
     'Rampaging Tsareena',
     'Rampaging Gyarados',
     'Rampaging Torkoal',
@@ -1393,17 +1396,17 @@ export const TemporaryBattles = [
     'Rampaging Froslass',
     'Gym Leader Marnie',
     'Rampaging Haxorus',
-    'Sordward2',
-    'Shielbert2',
+    'Sordward 2',
+    'Shielbert 2',
     'Rampaging Zacian',
     'Rampaging Zamazenta',
-    'Klara1',
-    'Avery1',
+    'Klara 1',
+    'Avery 1',
     'Mustard',
-    'Klara2',
-    'Avery2',
-    'Klara3',
-    'Avery3',
+    'Klara 2',
+    'Avery 2',
+    'Klara 3',
+    'Avery 3',
     'Kubfu',
     'Zarude Tribe 1',
     'Zarude Tribe 2',
@@ -1585,6 +1588,21 @@ export enum GalarSubRegions {
     IsleofArmor,
     CrownTundra,
 }
+
+export enum FinalSubRegions {
+    Final = 0,
+}
+
+export type SubRegions =
+    | KantoSubRegions
+    | JohtoSubRegions
+    | HoennSubRegions
+    | SinnohSubRegions
+    | UnovaSubRegions
+    | KalosSubRegions
+    | AlolaSubRegions
+    | GalarSubRegions
+    | FinalSubRegions;
 
 // Gender Types
 export enum Genders {

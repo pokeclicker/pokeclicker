@@ -1194,10 +1194,10 @@ GymList['Elite Malva'] = new Gym(
     'Malva',
     'Elite Malva',
     [
-        new GymPokemon('Pyroar', 54696969, 63),
-        new GymPokemon('Torkoal', 55048300, 63),
-        new GymPokemon('Chandelure', 55052000, 63),
-        new GymPokemon('Talonflame', 55557000, 65),
+        new GymPokemon('Pyroar', 46492423, 63),
+        new GymPokemon('Torkoal', 46791055, 63),
+        new GymPokemon('Chandelure', 46794200, 63),
+        new GymPokemon('Talonflame', 47223450, 65),
     ],
     BadgeEnums.Elite_Malva,
     64000,
@@ -1208,10 +1208,10 @@ GymList['Elite Siebold'] = new Gym(
     'Siebold',
     'Elite Siebold',
     [
-        new GymPokemon('Clawitzer', 54696969, 63),
-        new GymPokemon('Gyarados', 55405330, 63),
-        new GymPokemon('Starmie', 55405330, 63),
-        new GymPokemon('Barbaracle', 55557000, 65),
+        new GymPokemon('Clawitzer', 46492423, 63),
+        new GymPokemon('Gyarados', 47094530, 63),
+        new GymPokemon('Starmie', 47094530, 63),
+        new GymPokemon('Barbaracle', 47223450, 65),
     ],
     BadgeEnums.Elite_Siebold,
     64000,
@@ -1222,10 +1222,10 @@ GymList['Elite Wikstrom'] = new Gym(
     'Wikstrom',
     'Elite Wikstrom',
     [
-        new GymPokemon('Klefki', 54696969, 63),
-        new GymPokemon('Probopass', 55405330, 63),
-        new GymPokemon('Scizor', 55405330, 63),
-        new GymPokemon('Aegislash (Shield)', 55557000, 65),
+        new GymPokemon('Klefki', 46492423, 63),
+        new GymPokemon('Probopass', 47094530, 63),
+        new GymPokemon('Scizor', 47094530, 63),
+        new GymPokemon('Aegislash (Shield)', 47223450, 65),
     ],
     BadgeEnums.Elite_Wikstrom,
     64000,
@@ -1236,10 +1236,10 @@ GymList['Elite Drasna'] = new Gym(
     'Drasna',
     'Elite Drasna',
     [
-        new GymPokemon('Dragalge', 54696969, 63),
-        new GymPokemon('Druddigon', 55405330, 63),
-        new GymPokemon('Altaria', 55405330, 63),
-        new GymPokemon('Noivern', 55557000, 65),
+        new GymPokemon('Dragalge', 46492423, 63),
+        new GymPokemon('Druddigon', 47094530, 63),
+        new GymPokemon('Altaria', 47094530, 63),
+        new GymPokemon('Noivern', 47223450, 65),
     ],
     BadgeEnums.Elite_Drasna,
     64000,
@@ -1252,12 +1252,12 @@ GymList['Champion Diantha'] = new Champion(
     'Diantha',
     'Champion Diantha',
     [
-        new GymPokemon('Hawlucha', 60083000, 64),
-        new GymPokemon('Tyrantrum', 62057000, 65),
-        new GymPokemon('Aurorus', 62057000, 65),
-        new GymPokemon('Gourgeist (Average)', 62557000, 65),
-        new GymPokemon('Goodra', 62170000, 66),
-        new GymPokemon('Mega Gardevoir', 63070000, 68),
+        new GymPokemon('Hawlucha', 35749385, 64),
+        new GymPokemon('Tyrantrum', 36923915, 65),
+        new GymPokemon('Aurorus', 36923915, 65),
+        new GymPokemon('Gourgeist (Average)', 37221415, 65),
+        new GymPokemon('Goodra', 36991150, 66),
+        new GymPokemon('Mega Gardevoir', 37526650, 68),
     ],
     BadgeEnums.Elite_KalosChampion,
     128000,
@@ -1599,7 +1599,7 @@ GymList.Hulbury = new Gym(
     BadgeEnums.Galar_Water,
     60000,
     'I may proudly be the strongest member of this Gym, but I was totally washed away!',
-    [new TemporaryBattleRequirement('Hop4')]
+    [new TemporaryBattleRequirement('Hop 4')]
 );
 GymList.Motostoke = new Gym(
     'Kabu',
@@ -1612,7 +1612,7 @@ GymList.Motostoke = new Gym(
     BadgeEnums.Galar_Fire,
     60000,
     'I\'m often regarded as the first real roadblock of the Gym Challenge, and yet you defeated me! Clearly, your talent surpassed my many years of experience. I still have much to learn!',
-    [new TemporaryBattleRequirement('Marnie1')]
+    [new TemporaryBattleRequirement('Marnie 1')]
 );
 GymList['Stow-on-Side1'] = new Gym(
     'Bea',
@@ -1626,7 +1626,7 @@ GymList['Stow-on-Side1'] = new Gym(
     BadgeEnums.Galar_Fighting,
     80000,
     'Your strength nearly made me want to turn and run in my bare feet.',
-    [new TemporaryBattleRequirement('Hop5')],
+    [new TemporaryBattleRequirement('Hop 5')],
     // Starts Galar story quest if both Stow-on-Side gyms are defeated.
     () => {
         if (App.game.badgeCase.hasBadge(BadgeEnums.Galar_Ghost)) {
@@ -1646,7 +1646,7 @@ GymList['Stow-on-Side2'] = new Gym(
     BadgeEnums.Galar_Ghost,
     80000,
     'Maybe my mask... kept me from seeing just how strong you really are...',
-    [new TemporaryBattleRequirement('Hop5')],
+    [new TemporaryBattleRequirement('Hop 5')],
     // Starts Galar story quest if both Stow-on-Side gyms are defeated.
     () => {
         if (App.game.badgeCase.hasBadge(BadgeEnums.Galar_Fighting)) {
@@ -1708,7 +1708,7 @@ GymList.Spikemuth = new Gym(
     BadgeEnums.Galar_Dark,
     96000,
     'Me an\' my team gave it our best. Let\'s meet up again for a battle some time...',
-    [new TemporaryBattleRequirement('Marnie2')]
+    [new TemporaryBattleRequirement('Marnie 2')]
 );
 GymList.Hammerlocke = new Gym(
     'Raihan',

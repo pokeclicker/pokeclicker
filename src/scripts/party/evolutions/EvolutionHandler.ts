@@ -1,10 +1,12 @@
 class EvolutionHandler {
     static isSatisfied(data: EvoData): boolean {
-        return data.restrictions.every(fn => fn());
+        return App.game.party.alreadyCaughtPokemonByName(this.basePokemon)
+            && data.restrictions.every(fn => fn());
     }
 
     static evolve(data: EvoData, notification = false) {
-        if (beforeEvolve[data.trigger] && !beforeEvolve[data.trigger](data)) {
+        // compare to false because it could be undefined
+        if (beforeEvolve[data.trigger]?.(data) === false) {
             return false;
         }
 
@@ -16,10 +18,11 @@ class EvolutionHandler {
         }
         const shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_STONE);
 
-        // Notify the player if they haven't already caught the evolution, it's shiny, or notifications are forced
-        if (!App.game.party.alreadyCaughtPokemonByName(evolvedPokemon) || shiny || notification) {
+        const newPokemon = !App.game.party.alreadyCaughtPokemonByName(evolvedPokemon);
+        if (newPokemon || shiny || notification) {
+            // Notify the player if they haven't already caught the evolution, or notifications are forced
             Notifier.notify({
-                message: `Your ${data.basePokemon} evolved into ${shiny ? 'a shiny' : GameHelper.anOrA(evolvedPokemon)} ${evolvedPokemon}!`,
+                message: `Your ${PokemonHelper.displayName(data.basePokemon)()} evolved into ${shiny ? 'a shiny' : GameHelper.anOrA(evolvedPokemon)} ${PokemonHelper.displayName(evolvedPokemon)()}!`,
                 type: NotificationConstants.NotificationOption.success,
                 sound: NotificationConstants.NotificationSound.General.new_catch,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
@@ -28,13 +31,30 @@ class EvolutionHandler {
 
         // Add shiny to logbook
         if (shiny) {
-            App.game.logbook.newLog(LogBookTypes.SHINY, `Your ${data.basePokemon} evolved into a shiny ${evolvedPokemon}! ${App.game.party.alreadyCaughtPokemonByName(evolvedPokemon, true) ? '(duplicate)' : ''}`);
+            App.game.logbook.newLog(
+                LogBookTypes.SHINY,
+                App.game.party.alreadyCaughtPokemonByName(evolvedPokemon, true)
+                    ? createLogContent.evolvedShinyDupe({ basePokemon: data.basePokemon, evolvedPokemon})
+                    : createLogContent.evolvedShiny({ basePokemon: data.basePokemon, evolvedPokemon })
+            );
         }
 
         App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(evolvedPokemon).id, shiny, true);
 
-        // EVs
         const evolvedPartyPokemon = App.game.party.getPokemonByName(evolvedPokemon);
+        if (newPokemon && App.game.challenges.list.realEvolutions.active()) {
+            const basePartyPokemon = App.game.party.getPokemon(PokemonHelper.getPokemonByName(data.basePokemon).id);
+            evolvedPartyPokemon.effortPoints = basePartyPokemon.effortPoints;
+            evolvedPartyPokemon.pokerus = basePartyPokemon.pokerus;
+            evolvedPartyPokemon.shiny = evolvedPartyPokemon.shiny || basePartyPokemon.shiny;
+            evolvedPartyPokemon.attackBonusAmount = basePartyPokemon.attackBonusAmount;
+            evolvedPartyPokemon.attackBonusPercent = basePartyPokemon.attackBonusPercent;
+            evolvedPartyPokemon.proteinsUsed = basePartyPokemon.proteinsUsed;
+            evolvedPartyPokemon.heldItem = basePartyPokemon.heldItem;
+            App.game.party.removePokemonByName(data.basePokemon);
+        }
+
+        // EVs
         evolvedPartyPokemon.effortPoints += App.game.party.calculateEffortPoints(evolvedPartyPokemon, shiny, GameConstants.STONE_EP_YIELD);
         return shiny;
     }

@@ -78,7 +78,13 @@ class BattleFrontierRunner {
             sound: NotificationConstants.NotificationSound.General.battle_frontier,
             timeout: 30 * GameConstants.MINUTE,
         });
-        App.game.logbook.newLog(LogBookTypes.FRONTIER, `Cleared stage ${stageBeaten.toLocaleString('en-US')} of the Battle Frontier and received ${battlePointsEarned.toLocaleString('en-US')} Battle Points.`);
+        App.game.logbook.newLog(
+            LogBookTypes.FRONTIER,
+            createLogContent.gainBattleFrontierPoints({
+                stage: stageBeaten.toLocaleString('en-US'),
+                points: battlePointsEarned.toLocaleString('en-US'),
+            })
+        );
 
         this.checkpoint(1);
 
