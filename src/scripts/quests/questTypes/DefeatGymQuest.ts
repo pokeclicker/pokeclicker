@@ -51,7 +51,7 @@ class DefeatGymQuest extends Quest implements QuestInterface {
         } else {
             desc.push(`Defeat ${leaderName}'s ${trial ? 'trial' : 'gym'} at ${townName}`);
         }
-        desc.push(`in ${GymList[this.gymTown]?.flags?.subregion ? GymList[this.gymTown]?.flags?.subregion : GameConstants.camelCaseToString(GameConstants.Region[this.region])}`);
+        desc.push(`in ${GameConstants.camelCaseToString(GameConstants.Region[this.region])}`);
         desc.push(`${this.amount.toLocaleString('en-US')} times.`);
         return desc.join(' ');
     }

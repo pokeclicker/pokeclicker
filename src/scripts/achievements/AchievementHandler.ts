@@ -399,7 +399,7 @@ class AchievementHandler {
 
                 const leaderName: string = !gym.includes('Elite') && !gym.includes('Champion') && !gym.includes('Gym') ? `${GymList[gym].leaderName.replace(/\d/g, '')}'s` : '';
 
-                const gymRegion: string = subregion ? subregion : GameConstants.camelCaseToString(GameConstants.Region[GameConstants.getGymRegion(gym)]);
+                const gymRegion = subregion ? subregion : GameConstants.camelCaseToString(GameConstants.Region[GameConstants.getGymRegion(gym)]);
 
                 if (GymList[gym]?.flags?.achievement) {
                     AchievementHandler.addAchievement(`${gymTitle} Regular`, `Defeat ${displayName ? displayName : `${leaderName} ${gymTitle}`} in ${gymRegion} 10 times.`, new ClearGymRequirement(GameConstants.ACHIEVEMENT_DEFEAT_GYM_VALUES[0], GameConstants.getGymIndex(gym)), 1, category);
