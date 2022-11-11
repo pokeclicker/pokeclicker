@@ -134,7 +134,7 @@ import {
     beforeEvolve, EvoTrigger, LevelEvolution, StoneEvolution,
 } from './pokemons/evolutions/Base';
 import * as OtherEvos from './pokemons/evolutions/Methods';
-import { pokemonList, pokemonMap } from './pokemons/PokemonList';
+import { pokemonBabyPrevolutionMap, pokemonList, pokemonMap } from './pokemons/PokemonList';
 import { TmpPokemonHelper } from './pokemons/PokemonHelper';
 import PokedexFilters from './settings/PokedexFilters';
 import { createLogContent } from './logbook/helpers';
@@ -290,6 +290,7 @@ Object.assign(<any>window, {
     ...OtherEvos,
     pokemonList,
     pokemonMap,
+    pokemonBabyPrevolutionMap,
     TmpPokemonHelper,
     PokedexFilters,
     ItemList,

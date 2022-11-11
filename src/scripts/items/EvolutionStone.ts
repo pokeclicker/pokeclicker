@@ -56,9 +56,9 @@ class EvolutionStone extends CaughtIndicatingItem {
             // Filter to only include pokemon that make use of this evolution stone
             (p as PokemonListData).nativeRegion > GameConstants.Region.none
             && (p as PokemonListData).evolutions != undefined
-            && (p as PokemonListData).evolutions.some(e => e.trigger === EvoTrigger.STONE && (e as StoneEvoData).stone == evoStone.type)).map((p) =>
+            && (p as PokemonListData).evolutions.some(e => e.trigger === EvoTrigger.STONE && (e as StoneEvoData).stone == this.type)).map((p) =>
             // Map to the native region for evolutions that use this stone
-            Math.min(...(p as PokemonListData).evolutions.filter(e => e.trigger === EvoTrigger.STONE && (e as StoneEvoData).stone == evoStone.type)
+            Math.min(...(p as PokemonListData).evolutions.filter(e => e.trigger === EvoTrigger.STONE && (e as StoneEvoData).stone == this.type)
                 .map((e) => Math.max((p as PokemonListData).nativeRegion, PokemonHelper.calcNativeRegion(e.evolvedPokemon)))
                 .filter((r) => r > GameConstants.Region.none))));
     }

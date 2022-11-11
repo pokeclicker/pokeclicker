@@ -34,7 +34,10 @@ export const Evo = (basePokemon: PokemonNameType, evolvedPokemon: PokemonNameTyp
     basePokemon,
     evolvedPokemon,
     trigger,
-    restrictions: [() => calcNativeRegion(evolvedPokemon) <= player.highestRegion()],
+    restrictions: [
+        () => App.game.party.alreadyCaughtPokemonByName(basePokemon),
+        () => calcNativeRegion(evolvedPokemon) <= player.highestRegion(),
+    ],
 });
 
 export const restrict = <T extends EvoData>(evo: T, ...restrictions: EvoData['restrictions']): T => {

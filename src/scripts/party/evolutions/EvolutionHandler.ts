@@ -1,7 +1,6 @@
 class EvolutionHandler {
     static isSatisfied(data: EvoData): boolean {
-        return App.game.party.alreadyCaughtPokemonByName(this.basePokemon)
-            && data.restrictions.every(fn => fn());
+        return data.restrictions.every(fn => fn());
     }
 
     static evolve(data: EvoData, notification = false) {
