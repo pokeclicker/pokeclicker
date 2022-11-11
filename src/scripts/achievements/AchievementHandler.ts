@@ -391,13 +391,20 @@ class AchievementHandler {
         /*
          * REGIONAL
          */
-        const addGymAchievements = (gyms: string[], category: GameConstants.Region | GameConstants.ExtraAchievementCategories) => {
+        const addGymAchievements = (gyms: string[], category: GameConstants.Region | GameConstants.ExtraAchievementCategories, subregion?: string) => {
             gyms.forEach(gym => {
-                const gymTitle: string = gym.includes('Elite') || gym.includes('Champion') ? gym : `${gym} Gym`;
+                const displayName = GymList[gym]?.displayName;
+
+                const gymTitle: string = gym.includes('Elite') || gym.includes('Champion') || gym.includes('Gym') ? gym.replace(/\d/g, '') : `${gym.replace(/\d/g, '')} Gym`;
+
+                const leaderName: string = !gym.includes('Elite') && !gym.includes('Champion') && !gym.includes('Gym') ? `${GymList[gym].leaderName.replace(/\d/g, '')}'s` : '';
+
+                const gymRegion: string = subregion ? subregion : GameConstants.camelCaseToString(GameConstants.Region[GameConstants.getGymRegion(gym)]);
+
                 if (GymList[gym]?.flags?.achievement) {
-                    AchievementHandler.addAchievement(`${gym} Gym Regular`, `Clear ${gymTitle} 10 times.`, new ClearGymRequirement(GameConstants.ACHIEVEMENT_DEFEAT_GYM_VALUES[0], GameConstants.getGymIndex(gym)), 1, category);
-                    AchievementHandler.addAchievement(`${gym} Gym Ruler`, `Clear ${gymTitle} 100 times.`, new ClearGymRequirement(GameConstants.ACHIEVEMENT_DEFEAT_GYM_VALUES[1], GameConstants.getGymIndex(gym)), 2, category);
-                    AchievementHandler.addAchievement(`${gym} Gym Owner`, `Clear ${gymTitle} 1,000 times.`, new ClearGymRequirement(GameConstants.ACHIEVEMENT_DEFEAT_GYM_VALUES[2], GameConstants.getGymIndex(gym)), 3, category);
+                    AchievementHandler.addAchievement(`${gymTitle} Regular`, `Defeat ${displayName ? displayName : `${leaderName} ${gymTitle}`} in ${gymRegion} 10 times.`, new ClearGymRequirement(GameConstants.ACHIEVEMENT_DEFEAT_GYM_VALUES[0], GameConstants.getGymIndex(gym)), 1, category);
+                    AchievementHandler.addAchievement(`${gymTitle} Ruler`, `Defeat ${displayName ? displayName : `${leaderName} ${gymTitle}`} in ${gymRegion} 100 times.`, new ClearGymRequirement(GameConstants.ACHIEVEMENT_DEFEAT_GYM_VALUES[1], GameConstants.getGymIndex(gym)), 2, category);
+                    AchievementHandler.addAchievement(`${gymTitle} Owner`, `Defeat ${displayName ? displayName : `${leaderName} ${gymTitle}`} in ${gymRegion} 1,000 times.`, new ClearGymRequirement(GameConstants.ACHIEVEMENT_DEFEAT_GYM_VALUES[2], GameConstants.getGymIndex(gym)), 3, category);
                 }
             });
         };
@@ -448,7 +455,7 @@ class AchievementHandler {
         /*
          * MINIREGIONS
          */
-        addGymAchievements(GameConstants.RegionGyms[GameConstants.Region.final], GameConstants.ExtraAchievementCategories.sevii);
+        addGymAchievements(GameConstants.RegionGyms[GameConstants.Region.final], GameConstants.ExtraAchievementCategories.sevii, 'Sevii Islands');
         AchievementHandler.addAchievement('Sevii Trainer', 'Catch 15 unique Pokémon native to the Sevii Islands.', new SeviiCaughtRequirement(15, false), 3, GameConstants.ExtraAchievementCategories.sevii);
         AchievementHandler.addAchievement('Sevii Master', 'Catch 35 unique Pokémon native to the Sevii Islands.', new SeviiCaughtRequirement(35, false), 6, GameConstants.ExtraAchievementCategories.sevii);
         AchievementHandler.addAchievement('Sevii Shiny Trainer', 'Catch 15 unique Shiny Pokémon native to the Sevii Islands.', new SeviiCaughtRequirement(15, true), 5, GameConstants.ExtraAchievementCategories.sevii);

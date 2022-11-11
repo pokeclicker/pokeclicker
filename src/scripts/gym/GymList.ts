@@ -1283,7 +1283,9 @@ GymList['Iki Town'] = new Gym(
     BadgeEnums.FightiniumZ,
     128000,
     'The results come as no surprise to me. What a fine Trainer...and what fine Pokémon, too!',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Melemele Meadow'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Melemele Meadow'))],
+    undefined, undefined,
+    'Hala\'s Grand Trial'
 );
 GymList['Konikoni City'] = new Gym(
     'Olivia',
@@ -1299,7 +1301,8 @@ GymList['Konikoni City'] = new Gym(
     [new RouteKillRequirement(10, GameConstants.Region.alola, 9)],
     () => {
         App.game.quests.getQuestLine('Eater of Light').beginQuest();
-    }
+    },
+    undefined, 'Olivia\'s Grand Trial'
 );
 GymList['Malie City'] = new Gym(
     'Nanu',
@@ -1312,7 +1315,8 @@ GymList['Malie City'] = new Gym(
     BadgeEnums.DarkiniumZ,
     128000,
     'Hmph...',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Po Town'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Po Town'))], undefined, undefined,
+    'Nanu\'s Grand Trial'
 );
 GymList['Exeggutor Island'] = new Gym(
     'Hapu',
@@ -1326,7 +1330,9 @@ GymList['Exeggutor Island'] = new Gym(
     BadgeEnums.GroundiumZ,
     128000,
     'You have succeeded in your final grand trial!',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mina\'s Houseboat'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mina\'s Houseboat'))],
+    undefined, undefined,
+    'Hapu\'s Grand Trial'
 );
 //trials
 GymList['Ilima\'s Trial'] = new Gym(
