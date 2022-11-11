@@ -64,6 +64,7 @@ export const SpriteCredits: Credit[] = [
             'Rising Star (male)',
             'Sightseer (female)',
             'Sophocles',
+            'Teacher (Gen 7)',
             'Team Skull Boss (guzma)',
             'Wicke',
             'Youth Athlete (female)',
