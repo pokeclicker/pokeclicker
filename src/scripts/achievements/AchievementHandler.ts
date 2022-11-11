@@ -395,6 +395,7 @@ class AchievementHandler {
             gyms.forEach(gym => {
                 const displayName = GymList[gym]?.displayName;
 
+                // Name of person's title if elite/champion, else the gym's town name
                 const gymTitle: string = gym.includes('Elite') || gym.includes('Champion') || gym.includes('Gym') ? gym.replace(/\d/g, '') : `${gym.replace(/\d/g, '')} Gym`;
 
                 const leaderName: string = !gym.includes('Elite') && !gym.includes('Champion') && !gym.includes('Gym') ? `${GymList[gym].leaderName.replace(/\d/g, '')}'s` : '';
