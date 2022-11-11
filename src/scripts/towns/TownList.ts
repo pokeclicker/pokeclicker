@@ -670,13 +670,13 @@ const ClientSignpost = new NPC('Welcome Sign', [
     '<i>This island is exclusive to those dedicated to reducing server load by downloading the client.</i>',
     '<i>Without your support, Red Spearow here wouldn\'t have any time to relax!</i>',
     '<i>Please drop by the Gift Shop on your way out to make a whole new line of friends.</i>',
-]);
+], {image: 'assets/images/npcs/other/signpost.png'});
 
 const RedSpearow = new NPC('Red Spearow', [
     '<b><i>SQUAWK! SQUAWK!</i></b>',
     '...',
     '<i>The Red Spearow seems to appreciate your visit.</i>',
-]);
+], {image: 'assets/images/pokemon/21.1.png'});
 
 //Kanto Towns
 TownList['Pallet Town'] = new Town(
