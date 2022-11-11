@@ -98,6 +98,7 @@ import HatcheryHelperRequirement from './requirements/HatcheryHelperRequirement'
 import MoneyRequirement from './requirements/MoneyRequirement';
 import MaxLevelOakItemRequirement from './requirements/MaxLevelOakItemRequirement';
 import MaxRegionRequirement from './requirements/MaxRegionRequirement';
+import ObtainedPokemonRequirement from './requirements/ObtainedPokemonRequirement';
 import PokeballRequirement from './requirements/PokeballRequirement';
 import PokerusStatusRequirement from './requirements/PokerusStatusRequirement';
 import ProteinObtainRequirement from './requirements/ProteinObtainRequirement';
@@ -250,6 +251,7 @@ Object.assign(<any>window, {
     MoneyRequirement,
     MaxLevelOakItemRequirement,
     MaxRegionRequirement,
+    ObtainedPokemonRequirement,
     PokeballRequirement,
     PokerusStatusRequirement,
     ProteinObtainRequirement,

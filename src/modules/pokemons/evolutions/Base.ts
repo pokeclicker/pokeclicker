@@ -1,5 +1,11 @@
 import { Observable as KnockoutObservable } from 'knockout';
 import { StoneType } from '../../GameConstants';
+import CustomRequirement from '../../requirements/CustomRequirement';
+import LazyRequirementWrapper from '../../requirements/LazyRequirementWrapper';
+import MaxRegionRequirement from '../../requirements/MaxRegionRequirement';
+import ObtainedPokemonRequirement from '../../requirements/ObtainedPokemonRequirement';
+import PokemonLevelRequirement from '../../requirements/PokemonLevelRequirement';
+import Requirement from '../../requirements/Requirement';
 import { calcNativeRegion } from '../PokemonHelper';
 import { PokemonNameType } from '../PokemonNameType';
 
@@ -12,7 +18,7 @@ export interface EvoData {
     basePokemon: PokemonNameType;
     evolvedPokemon: PokemonNameType;
     trigger: EvoTrigger;
-    restrictions: Array<() => boolean>;
+    restrictions: Array<Requirement>;
 }
 
 export interface LevelEvoData extends EvoData {
@@ -35,8 +41,13 @@ export const Evo = (basePokemon: PokemonNameType, evolvedPokemon: PokemonNameTyp
     evolvedPokemon,
     trigger,
     restrictions: [
-        () => App.game.party.alreadyCaughtPokemonByName(basePokemon),
-        () => calcNativeRegion(evolvedPokemon) <= player.highestRegion(),
+        new ObtainedPokemonRequirement(basePokemon),
+        new LazyRequirementWrapper(
+            // wrapping because pokemonMap is needed to calcNativeRegion,
+            // but we use Evos while making pokemonMap...
+            // wrapping here delays execution until later, after pokemon is available
+            () => new MaxRegionRequirement(calcNativeRegion(evolvedPokemon)),
+        ),
     ],
 });
 
@@ -49,9 +60,9 @@ export const LevelEvolution = (basePokemon: PokemonNameType, evolvedPokemon: Pok
     const triggered = ko.observable(false);
     return restrict(
         { ...Evo(basePokemon, evolvedPokemon, EvoTrigger.LEVEL), triggered },
-        () => !triggered(),
-        () => App.game.party.getPokemonByName(basePokemon).level >= level,
-        () => !App.game.party.alreadyCaughtPokemonByName(evolvedPokemon),
+        new CustomRequirement(triggered, false, 'The evolution can\'t have already happened'),
+        new PokemonLevelRequirement(basePokemon, level),
+        new ObtainedPokemonRequirement(evolvedPokemon, true),
     );
 };
 

@@ -1,7 +1,14 @@
 import { GameState, Region, Environment } from '../../GameConstants';
 import { ItemNameType } from '../../items/ItemNameType';
-import QuestLineState from '../../quests/QuestLineState';
-import Weather from '../../weather/Weather';
+import GameStateRequirement from '../../requirements/GameStateRequirement';
+import HoldingItemRequirement from '../../requirements/HoldingItemRequirement';
+import InDungeonRequirement from '../../requirements/InDungeonRequirement';
+import InEnvironmentRequirement from '../../requirements/InEnvironmentRequirement';
+import InGymRequirement from '../../requirements/InGymRequirement';
+import InRegionRequirement from '../../requirements/InRegionRequirement';
+import QuestLineRequirement from '../../requirements/QuestLineRequirement';
+import TimeRequirement from '../../requirements/TimeRequirement';
+import WeatherRequirement from '../../requirements/WeatherRequirement';
 import WeatherType from '../../weather/WeatherType';
 import { EvoData, restrict } from './Base';
 
@@ -11,7 +18,7 @@ export const anyDungeonRestrict = (evo: EvoFn) => (
     ...rest: Parameters<EvoFn>
 ) => restrict(
     evo(...rest),
-    () => App.game.gameState === GameState.dungeon,
+    new GameStateRequirement(GameState.dungeon),
 );
 
 export const dungeonRestrict = <T extends EvoFn>(evo: T) => (
@@ -19,14 +26,14 @@ export const dungeonRestrict = <T extends EvoFn>(evo: T) => (
     ...rest: Parameters<T>
 ) => restrict(
     anyDungeonRestrict(evo)(...rest),
-    () => DungeonRunner.dungeon.name === dungeon,
+    new InDungeonRequirement(dungeon),
 );
 
 export const anyGymRestrict = (evo: EvoFn) => (
     ...rest: Parameters<EvoFn>
 ) => restrict(
     evo(...rest),
-    () => App.game.gameState === GameState.gym,
+    new GameStateRequirement(GameState.gym),
 );
 
 export const GymRestrict = <T extends EvoFn>(evo: T) => (
@@ -34,7 +41,7 @@ export const GymRestrict = <T extends EvoFn>(evo: T) => (
     ...rest: Parameters<T>
 ) => restrict(
     anyGymRestrict(evo)(...rest),
-    () => GymRunner.gymObservable().town === town,
+    new InGymRequirement(town),
 );
 
 export const regionRestrict = <T extends EvoFn>(evo: T) => (
@@ -42,7 +49,7 @@ export const regionRestrict = <T extends EvoFn>(evo: T) => (
     ...rest: Parameters<T>
 ) => restrict(
     evo(...rest),
-    () => regions.includes(player.region),
+    new InRegionRequirement(regions),
 );
 
 export const environmentRestrict = <T extends EvoFn>(evo: T) => (
@@ -50,7 +57,7 @@ export const environmentRestrict = <T extends EvoFn>(evo: T) => (
     ...rest: Parameters<T>
 ) => restrict(
     evo(...rest),
-    () => MapHelper.getCurrentEnvironment() === environment,
+    new InEnvironmentRequirement(environment),
 );
 
 export const heldItemRestrict = <T extends EvoFn>(evo: T) => (
@@ -60,10 +67,7 @@ export const heldItemRestrict = <T extends EvoFn>(evo: T) => (
     const data = evo(...rest);
     return restrict(
         data,
-        () => {
-            const heldItem = App.game.party.getPokemonByName(data.basePokemon).heldItem();
-            return heldItem && heldItem.name === heldItemName;
-        },
+        new HoldingItemRequirement(data.basePokemon, heldItemName),
     );
 };
 
@@ -72,7 +76,7 @@ export const questlineRestrict = <T extends EvoFn>(evo: T) => (
     ...rest: Parameters<T>
 ) => restrict(
     evo(...rest),
-    () => App.game.quests.getQuestLine(questName).state() === QuestLineState.ended,
+    new QuestLineRequirement(questName),
 );
 
 export const weatherRestrict = <T extends EvoFn>(evo: T) => (
@@ -80,7 +84,7 @@ export const weatherRestrict = <T extends EvoFn>(evo: T) => (
     ...rest: Parameters<T>
 ) => restrict(
     evo(...rest),
-    () => weather.includes(Weather.currentWeather()),
+    new WeatherRequirement(weather),
 );
 
 export const timeRestrict = <T extends EvoFn>(evo: T) => (
@@ -89,14 +93,7 @@ export const timeRestrict = <T extends EvoFn>(evo: T) => (
     ...rest: Parameters<T>
 ) => restrict(
     evo(...rest),
-    () => {
-        const currentHour = new Date().getHours();
-        return startHour < endHour
-            // If the start time is before the end time, both need to be true
-            ? currentHour >= startHour && currentHour < endHour
-            // If the start time is after the end time, only 1 needs to be true
-            : currentHour >= startHour || currentHour < endHour;
-    },
+    new TimeRequirement(startHour, endHour),
 );
 
 export const dayRestrict = <T extends EvoFn>(evo: T) => (

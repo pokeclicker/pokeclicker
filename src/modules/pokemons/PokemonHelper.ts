@@ -1,11 +1,9 @@
 import { MaxIDPerRegion, Region } from '../GameConstants';
-import type { PokemonMapProxy } from './PokemonList';
 import { PokemonNameType } from './PokemonNameType';
-
-let pokemonMap: PokemonMapProxy;
+import P from './mapProvider';
 
 export function calcNativeRegion(pokemonName: PokemonNameType) {
-    const pokemon = pokemonMap[pokemonName];
+    const pokemon = P.pokemonMap[pokemonName];
     if (pokemon.nativeRegion !== undefined) {
         return pokemon.nativeRegion;
     }
@@ -17,7 +15,3 @@ export function calcNativeRegion(pokemonName: PokemonNameType) {
 export const TmpPokemonHelper = {
     calcNativeRegion,
 };
-
-export function setPokemonMap(map: PokemonMapProxy) {
-    pokemonMap = map;
-}

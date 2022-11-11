@@ -3504,7 +3504,7 @@ TownList['Anville Town'] = new Town(
     [AnvilleTownShop],
     {
         requirements: [
-            new ObtainedPokemonRequirement(pokemonMap['Meloetta (Aria)']),
+            new ObtainedPokemonRequirement('Meloetta (Aria)'),
             new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion),
         ],
     }
@@ -3528,7 +3528,7 @@ TownList['Pledge Grove'] = new DungeonTown(
     GameConstants.Region.unova,
     GameConstants.UnovaSubRegions.Unova,
     [
-        new ObtainedPokemonRequirement(pokemonMap.Keldeo),
+        new ObtainedPokemonRequirement('Keldeo'),
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Moor of Icirrus')),
     ]
 );
@@ -3649,8 +3649,8 @@ TownList['Abundant Shrine'] = new DungeonTown(
     [
         new RouteKillRequirement(10, GameConstants.Region.unova, 23),
         new RouteKillRequirement(10, GameConstants.Region.unova, 14),
-        new ObtainedPokemonRequirement(pokemonMap.Tornadus),
-        new ObtainedPokemonRequirement(pokemonMap.Thundurus),
+        new ObtainedPokemonRequirement('Tornadus'),
+        new ObtainedPokemonRequirement('Thundurus'),
     ]
 );
 TownList['Victory Road Unova'] = new DungeonTown(
@@ -3686,9 +3686,9 @@ TownList['Moor of Icirrus'] = new DungeonTown(
     GameConstants.UnovaSubRegions.Unova,
     [
         new RouteKillRequirement(10, GameConstants.Region.unova, 8),
-        new ObtainedPokemonRequirement(pokemonMap.Cobalion),
-        new ObtainedPokemonRequirement(pokemonMap.Terrakion),
-        new ObtainedPokemonRequirement(pokemonMap.Virizion),
+        new ObtainedPokemonRequirement('Cobalion'),
+        new ObtainedPokemonRequirement('Terrakion'),
+        new ObtainedPokemonRequirement('Virizion'),
     ]
 );
 TownList['Pinwheel Forest'] = new DungeonTown(
@@ -4327,7 +4327,7 @@ const LanakilaColress = new NPC('Colress', [
     'I believe that a Trainer like you will be able to use both Alola\'s Legendary Pokémon and the fearsome power of Necrozma properly! I happen to know quite a bit about Pokémon fusion myself... But that is a different tale. Good luck in your battles!',
 ], {
     image: 'assets/images/trainers/Team Plasma (colress).png',
-    requirement: new ObtainedPokemonRequirement(pokemonMap.Necrozma),
+    requirement: new ObtainedPokemonRequirement('Necrozma'),
 });
 
 const AetherParadiseAlolaRoamerNPC = new RoamerNPC('Assistant Branch Chief Wicke', [

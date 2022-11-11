@@ -1,6 +1,6 @@
 class EvolutionHandler {
     static isSatisfied(data: EvoData): boolean {
-        return data.restrictions.every(fn => fn());
+        return data.restrictions.every(req => req.isCompleted());
     }
 
     static evolve(data: EvoData, notification = false) {

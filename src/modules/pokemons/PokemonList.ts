@@ -28,6 +28,7 @@ import GenericProxy from '../utilities/GenericProxy';
 import Rand from '../utilities/Rand';
 import WeatherType from '../weather/WeatherType';
 import { PokemonNameType } from './PokemonNameType';
+import { setPokemonMap } from './mapProvider';
 
 export const pokemonBabyPrevolutionMap: { [name: string]: PokemonNameType } = {};
 
@@ -26058,3 +26059,5 @@ PokemonMapProxy
         }
     },
 });
+
+setPokemonMap(pokemonMap);

@@ -35,7 +35,7 @@ TemporaryBattleList['Snorlax route 12'] = new TemporaryBattle(
         new RouteKillRequirement(10, GameConstants.Region.kanto, 12),
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Tower')),
     ],
-    [new TemporaryBattleRequirement('Snorlax route 12'), new ObtainedPokemonRequirement(pokemonMap.Snorlax)],
+    [new TemporaryBattleRequirement('Snorlax route 12'), new ObtainedPokemonRequirement('Snorlax')],
     {
         displayName: 'Snorlax',
         returnTown: 'Lavender Town',
@@ -49,7 +49,7 @@ TemporaryBattleList['Snorlax route 16'] = new TemporaryBattle(
     [new GymPokemon('Snorlax', 189990, 30)],
     undefined,
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Tower'))],
-    [new TemporaryBattleRequirement('Snorlax route 16'), new ObtainedPokemonRequirement(pokemonMap.Snorlax)],
+    [new TemporaryBattleRequirement('Snorlax route 16'), new ObtainedPokemonRequirement('Snorlax')],
     {
         displayName: 'Snorlax',
         returnTown: 'Celadon City',
@@ -117,7 +117,7 @@ TemporaryBattleList.Sudowoodo = new TemporaryBattle(
         new GymBadgeRequirement(BadgeEnums.Plain),
         new RouteKillRequirement(10, GameConstants.Region.johto, 36),
     ],
-    [new TemporaryBattleRequirement('Sudowoodo'), new ObtainedPokemonRequirement(pokemonMap.Sudowoodo)],
+    [new TemporaryBattleRequirement('Sudowoodo'), new ObtainedPokemonRequirement('Sudowoodo')],
     {
         isTrainerBattle: false,
         returnTown: 'Goldenrod City',
@@ -277,7 +277,7 @@ TemporaryBattleList['Kecleon 1'] = new TemporaryBattle(
     [new GymPokemon('Kecleon', 6000000, 20)],
     undefined,
     [new RouteKillRequirement(10, GameConstants.Region.hoenn, 119)],
-    [new TemporaryBattleRequirement('Kecleon 1'), new ObtainedPokemonRequirement(pokemonMap.Kecleon)],
+    [new TemporaryBattleRequirement('Kecleon 1'), new ObtainedPokemonRequirement('Kecleon')],
     {
         isTrainerBattle: false,
         returnTown: 'Fortree City',
@@ -1809,7 +1809,7 @@ TemporaryBattleList.Kubfu = new TemporaryBattle(
     [new GymPokemon('Kubfu', 1886555626, 50)],
     undefined,
     [new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 11)],
-    [new ObtainedPokemonRequirement(pokemonMap.Kubfu)],
+    [new ObtainedPokemonRequirement('Kubfu')],
     {
         isTrainerBattle: false,
         hideTrainer: true,
@@ -1907,7 +1907,7 @@ TemporaryBattleList['Flowering Celebi'] = new TemporaryBattle(
     [new GymPokemon('Flowering Celebi', 2132963238, 100)],
     'Cel Cel! Celebi!',
     [new QuestLineStepCompletedRequirement('Secrets of the Jungle', 12)],
-    [new ObtainedPokemonRequirement(pokemonMap['Flowering Celebi'])],
+    [new ObtainedPokemonRequirement('Flowering Celebi')],
     {
         isTrainerBattle: false,
         hideTrainer: true,
