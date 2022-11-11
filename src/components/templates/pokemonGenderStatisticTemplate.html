@@ -1,0 +1,22 @@
+<script type="text/html" id="pokemonGenderStatisticTemplate">
+    <div class="overlay" data-bind="tooltip: { 
+        title: `♂: ${$data.maleStat.toLocaleString('en-US')}
+                <br/>
+                ♀: ${$data.femaleStat.toLocaleString('en-US')}`,
+        html: true,
+        trigger: 'hover',
+        placement: 'top',
+        boundary: 'window'
+    }"></div>
+  </script>
+
+<!-- Example usage -->
+<!-- 
+<knockout data-bind="template: { 
+    name: 'pokemonGenderStatisticTemplate', 
+    data: { 
+        'maleStat': App.game.statistics.malePokemonEncountered[$data](),
+        'femaleStat': App.game.statistics.femalePokemonEncountered[$data](),
+    } 
+}">Pokémon gender statistic</knockout> 
+-->
