@@ -358,7 +358,7 @@ class PartyPokemon implements Saveable {
         this.heldItem(json[PartyPokemonSaveKeys.heldItem] && ItemList[json[PartyPokemonSaveKeys.heldItem]] instanceof HeldItem ? ItemList[json[PartyPokemonSaveKeys.heldItem]] as HeldItem : undefined);
         this.defaultFemaleSprite(json[PartyPokemonSaveKeys.defaultFemaleSprite] ?? this.defaults.defaultFemaleSprite);
         this.hideShinyImage(json[PartyPokemonSaveKeys.hideShinyImage] ?? this.defaults.hideShinyImage);
-        this._nickname(json[PartyPokemonSaveKeys.nickname] ?? this.defaults.nickname);
+        this._nickname(json[PartyPokemonSaveKeys.nickname] ? decodeURI(json[PartyPokemonSaveKeys.nickname]) : this.defaults.nickname);
 
         if (this.evolutions != null) {
             for (const evolution of this.evolutions) {
@@ -393,7 +393,7 @@ class PartyPokemon implements Saveable {
             [PartyPokemonSaveKeys.heldItem]: this.heldItem()?.name,
             [PartyPokemonSaveKeys.defaultFemaleSprite]: this.defaultFemaleSprite(),
             [PartyPokemonSaveKeys.hideShinyImage]: this.hideShinyImage(),
-            [PartyPokemonSaveKeys.nickname]: this.nickname,
+            [PartyPokemonSaveKeys.nickname]: this.nickname ? encodeURI(this.nickname) : undefined,
         };
 
         // Don't save anything that is the default option
