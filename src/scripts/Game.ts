@@ -149,7 +149,7 @@ class Game {
 
             Notifier.notify({
                 type: NotificationConstants.NotificationOption.info,
-                title: 'Offline-time Bonus',
+                title: 'Offline Bonus',
                 message: `Defeated: ${numberOfPokemonDefeated.toLocaleString('en-US')} Pokémon\nEarned: <img src="./assets/images/currency/money.svg" height="24px"/> ${moneyToEarn.toLocaleString('en-US')}`,
                 strippedMessage: `Defeated: ${numberOfPokemonDefeated.toLocaleString('en-US')} Pokémon\nEarned: ${moneyToEarn.toLocaleString('en-US')} Pokédollars`,
                 timeout: 2 * GameConstants.MINUTE,
@@ -166,8 +166,8 @@ class Game {
                     }
                     Notifier.notify({
                         type: NotificationConstants.NotificationOption.info,
-                        title: 'Dream Orbs earned',
-                        message: `Gained ${orbsEarned} Orbs while offline`,
+                        title: 'Dream Orbs',
+                        message: `Gained ${orbsEarned} Dream Orbs while offline.`,
                         timeout: 2 * GameConstants.MINUTE,
                         setting: NotificationConstants.NotificationSetting.General.offline_earnings,
                     });

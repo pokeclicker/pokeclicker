@@ -15,6 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
         (document.getElementById('theme-link') as HTMLLinkElement).href = `https://bootswatch.com/4/${Settings.getSetting('theme').observableValue()}/bootstrap.min.css`;
 
     } catch (e) {}
+    if (!App.isUsingClient) {
+        document.getElementById('use-our-client-message').style.display = 'block';
+    }
     // Load list of saves
     SaveSelector.loadSaves();
 });

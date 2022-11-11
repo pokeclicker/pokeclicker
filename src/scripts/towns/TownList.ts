@@ -149,6 +149,9 @@ const ThreeIslandShop = new Shop([
     ItemList.Ultraball,
     ItemList.Token_collector,
 ]);
+const ClientIslandShop = new Shop([
+    ItemList['Charity Chansey'],
+], 'Gift Shop');
 const FourIslandShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
@@ -662,6 +665,19 @@ const DetectiveRaichu = new NPC('Detective Raichu', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 16), new QuestLineStepCompletedRequirement('Detective Pikachu', 17, GameConstants.AchievementOption.less)]),
 });
 
+const ClientSignpost = new NPC('Welcome Sign', [
+    '<i>Welcome to Client Island!</i>',
+    '<i>This island is exclusive to those dedicated to reducing server load by downloading the client.</i>',
+    '<i>Without your support, Red Spearow here wouldn\'t have any time to relax!</i>',
+    '<i>Please drop by the Gift Shop on your way out to make a whole new line of friends.</i>',
+], {image: 'assets/images/npcs/other/signpost.png'});
+
+const RedSpearow = new NPC('Red Spearow', [
+    '<b><i>SQUAWK! SQUAWK!</i></b>',
+    '...',
+    '<i>The Red Spearow seems to appreciate your visit.</i>',
+], {image: 'assets/images/pokemon/21.1.png'});
+
 //Kanto Towns
 TownList['Pallet Town'] = new Town(
     'Pallet Town',
@@ -846,6 +862,16 @@ TownList['Professor Ivy\'s Lab'] = new Town(
     {
         requirements: [new QuestLineStepCompletedRequirement('Unfinished Business', 0)],
         npcs: [CelebiProfIvy],
+    }
+);
+TownList['Client Island'] = new Town(
+    'Client Island',
+    GameConstants.Region.kanto,
+    GameConstants.KantoSubRegions.Sevii123,
+    [ClientIslandShop],
+    {
+        requirements: [new ClientRequirement(), new GymBadgeRequirement(BadgeEnums.Volcano)],
+        npcs: [ClientSignpost, RedSpearow],
     }
 );
 TownList['Four Island'] = new Town(
@@ -4238,10 +4264,15 @@ const AltaroftheSunneandMooneShop = new Shop([
 
 const IkiOutskirtsMom = new NPC('Scratch Cat Girl', [
     'I love cats very much, but dogs aren\'t so bad either.',
-    'Out of all the doglike Pokémon, I think Rockruff is definitely the most adorable. And it even has three evolutions! One during the day, one at night and one in between, from 5 to 6 o\'clock.',
+    'Out of all the dog-like Pokémon, I think Rockruff is definitely the most adorable. And it even has three evolutions! One during the day, one at night and one in between, from 5 to 6 o\'clock.',
     'What\'s that? AM or PM?',
     'Yes.',
 ], {image: 'assets/images/npcs/Scratch Cat Girl.png'});
+const TrainerSchoolTeacher = new NPC('Teacher Emily', [
+    'Just as Alola has multiple islands, its dungeons have multiple floors! Hurry to the ladder to find your way to the next floor.',
+    'Watch the clock, if you make it to the next floor you\'ll get a time boost to help you find the boss.',
+    'Good luck with your island challenge!',
+], {image: 'assets/images/npcs/Teacher-gen7.png'});
 const KukuisLabProfessor = new NPC('Professor Kukui', [
     'Are you looking for some rare Pokémon? Maybe I can help with that. Ask away!',
     'Meltan? What\'s a Meltan? Nope, don\'t know about that one.',
@@ -4592,7 +4623,9 @@ TownList['Trainers\' School'] = new DungeonTown(
     'Trainers\' School',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MelemeleIsland,
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 18)]
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 18)],
+    undefined,
+    { npcs: [TrainerSchoolTeacher] }
 );
 TownList['Hau\'oli Cemetery'] = new DungeonTown(
     'Hau\'oli Cemetery',
