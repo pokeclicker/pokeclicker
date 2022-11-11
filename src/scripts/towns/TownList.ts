@@ -149,6 +149,9 @@ const ThreeIslandShop = new Shop([
     ItemList.Ultraball,
     ItemList.Token_collector,
 ]);
+const ClientIslandShop = new Shop([
+    ItemList['Charity Chansey'],
+], 'Gift Shop');
 const FourIslandShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
@@ -662,6 +665,19 @@ const DetectiveRaichu = new NPC('Detective Raichu', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 16), new QuestLineStepCompletedRequirement('Detective Pikachu', 17, GameConstants.AchievementOption.less)]),
 });
 
+const ClientSignpost = new NPC('Welcome Sign', [
+    '<i>Welcome to Client Island!</i>',
+    '<i>This island is exclusive to those dedicated to reducing server load by downloading the client.</i>',
+    '<i>Without your support, Red Spearow here wouldn\'t have any time to relax!</i>',
+    '<i>Please drop by the Gift Shop on your way out to make a whole new line of friends.</i>',
+]);
+
+const RedSpearow = new NPC('Red Spearow', [
+    '<b><i>SQUAWK! SQUAWK!</i></b>',
+    '...',
+    '<i>The Red Spearow seems to appreciate your visit.</i>',
+]);
+
 //Kanto Towns
 TownList['Pallet Town'] = new Town(
     'Pallet Town',
@@ -846,6 +862,16 @@ TownList['Professor Ivy\'s Lab'] = new Town(
     {
         requirements: [new QuestLineStepCompletedRequirement('Unfinished Business', 0)],
         npcs: [CelebiProfIvy],
+    }
+);
+TownList['Client Island'] = new Town(
+    'Client Island',
+    GameConstants.Region.kanto,
+    GameConstants.KantoSubRegions.Sevii123,
+    [ClientIslandShop],
+    {
+        requirements: [new ClientRequirement(), new GymBadgeRequirement(BadgeEnums.Volcano)],
+        npcs: [ClientSignpost, RedSpearow],
     }
 );
 TownList['Four Island'] = new Town(
