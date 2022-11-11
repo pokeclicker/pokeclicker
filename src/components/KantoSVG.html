@@ -682,16 +682,6 @@
         %>
 
         <%- include('templates/mapOverlay',
-            { name: "Snorlax"
-            , x: 87, y: 32
-            , width: 4, height: 4
-            , databind: "click: () => TemporaryBattleList['Snorlax route 12'].protectedOnclick(), attr: { class: TemporaryBattleList['Snorlax route 12'].isUnlocked() ? '' : 'locked' }"
-            , visible:  "TemporaryBattleList['Snorlax route 12'] && TemporaryBattleList['Snorlax route 12'].isVisible()"
-            , image: "assets/images/map/snorlaxoverworld.png"
-            })
-        %>
-
-        <%- include('templates/mapOverlay',
             { name: "Suicune"
             , x: 66, y: 34
             , width: 3, height: 4
