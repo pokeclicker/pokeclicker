@@ -56,6 +56,7 @@ type TmpGameType = {
 
 type TmpAppType = {
     game: TmpGameType,
+    isUsingClient: boolean,
     translation: Translate,
     start: ()=>void
 };
