@@ -4238,10 +4238,15 @@ const AltaroftheSunneandMooneShop = new Shop([
 
 const IkiOutskirtsMom = new NPC('Scratch Cat Girl', [
     'I love cats very much, but dogs aren\'t so bad either.',
-    'Out of all the doglike Pokémon, I think Rockruff is definitely the most adorable. And it even has three evolutions! One during the day, one at night and one in between, from 5 to 6 o\'clock.',
+    'Out of all the dog-like Pokémon, I think Rockruff is definitely the most adorable. And it even has three evolutions! One during the day, one at night and one in between, from 5 to 6 o\'clock.',
     'What\'s that? AM or PM?',
     'Yes.',
 ], {image: 'assets/images/npcs/Scratch Cat Girl.png'});
+const TrainerSchoolTeacher = new NPC('Teacher Emily', [
+    'Just as Alola has multiple islands, its dungeons have multiple floors! Hurry to the ladder to find your way to the next floor.',
+    'Watch the clock, if you make it to the next floor you\'ll get a time boost to help you find the boss.',
+    'Good luck with your island challenge!',
+], {image: 'assets/images/npcs/Teacher-gen7.png'});
 const KukuisLabProfessor = new NPC('Professor Kukui', [
     'Are you looking for some rare Pokémon? Maybe I can help with that. Ask away!',
     'Meltan? What\'s a Meltan? Nope, don\'t know about that one.',
@@ -4592,7 +4597,9 @@ TownList['Trainers\' School'] = new DungeonTown(
     'Trainers\' School',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MelemeleIsland,
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 18)]
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 18)],
+    undefined,
+    { npcs: [TrainerSchoolTeacher] }
 );
 TownList['Hau\'oli Cemetery'] = new DungeonTown(
     'Hau\'oli Cemetery',
