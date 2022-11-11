@@ -116,6 +116,7 @@
 @import "templates/pokemonSpriteTemplate.html"
 @import "templates/pokemonGenderTemplate.html"
 @import "templates/pokemonAttackTemplate.html"
+@import "templates/pokemonGenderStatisticTemplate.html"
 
 <div id="game" class="container loading" data-bind="css: {'container': Settings.getSetting('gameDisplayStyle').observableValue() === 'standard3', 'container-fluid': Settings.getSetting('gameDisplayStyle').observableValue() !== 'standard3'}">
     <div class="row justify-content-center">
@@ -634,6 +635,9 @@
 
 <!-- Battle Cafe Modal -->
 @import "battleCafeModal.html"
+
+<!-- Dream Orbs Modal -->
+@import "dreamOrbsModal.html"
 
 </body>
 </html>
