@@ -128,6 +128,7 @@ import TemporaryBattleRequirement from './requirements/TemporaryBattleRequiremen
 import Translate from './translation/Translation';
 import DayOfWeekRequirement from './requirements/DayOfWeekRequirement';
 import SaveReminder from './saveReminder/SaveReminder';
+import ClientRequirement from './requirements/ClientRequirement';
 import lazyLoad from './utilities/LazyLoader';
 import PokedexFilters from './settings/PokedexFilters';
 import { createLogContent } from './logbook/helpers';
@@ -274,6 +275,7 @@ Object.assign(<any>window, {
     Translate,
     DayOfWeekRequirement,
     SaveReminder,
+    ClientRequirement,
     lazyLoad,
     PokedexFilters,
     ItemList,

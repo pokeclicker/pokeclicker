@@ -5,6 +5,7 @@ class App {
 
     static readonly debug = false;
     static game: Game;
+    static readonly isUsingClient = typeof navigator === 'object' && typeof navigator.userAgent === 'string' && navigator.userAgent.indexOf('Electron') >= 0;
     static translation = new Translate(Settings.getSetting('translation.language'));
 
     static start() {
@@ -50,7 +51,8 @@ class App {
                 new BattleFrontier(),
                 multiplier,
                 new SaveReminder(),
-                new BattleCafeSaveObject()
+                new BattleCafeSaveObject(),
+                new DreamOrbController()
             );
 
             console.log(`[${GameConstants.formatDate(new Date())}] %cGame loaded`, 'color:#2ecc71;font-weight:900;');

@@ -1,0 +1,33 @@
+name: Suggestion
+description: Use this to suggest new features or changes to the game
+title: "[SUGGESTION]: "
+labels: ["suggestion"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Provide a general summary of the suggestion in the Title above
+  - type: textarea
+    attributes:
+      label: Current Behavior
+      description: Tell us what the game currently does (if anything)
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Improved Behavior
+      description: Tell us what you would like to see instead
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Reason for change
+      description: Explain why this is an improvement
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Detailed Description
+      description: Provide a detailed description of the change or addition you are proposing. You can add screenshots here to help explain your suggestion
+    validations:
+      required: true
