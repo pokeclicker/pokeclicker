@@ -3983,7 +3983,7 @@ TownList['Shalour City'] = new Town(
     'Shalour City',
     GameConstants.Region.kalos,
     GameConstants.KalosSubRegions.Kalos,
-    [ShalourCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Shalour City']), TemporaryBattleList.Riot, TemporaryBattleList['Millis and Argus Steel']],
+    [ShalourCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Shalour City']), TemporaryBattleList.Korrina, TemporaryBattleList.Riot, TemporaryBattleList['Millis and Argus Steel']],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Reflection Cave'))],
         npcs: [ExamineAegislash, ThanksDiancie],

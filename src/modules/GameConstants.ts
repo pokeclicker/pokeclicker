@@ -1338,6 +1338,7 @@ export const TemporaryBattles = [
     'Plasma Shadow 4',
     'Ghetsis 1',
     'Ghetsis 2',
+    'Korrina',
     'Aipom Alley',
     'Mime Interview',
     'Underground Fighting Ring',

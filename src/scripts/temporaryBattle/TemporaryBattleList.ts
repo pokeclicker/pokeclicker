@@ -776,6 +776,17 @@ TemporaryBattleList['Ghetsis 2'] = new TemporaryBattle(
 );
 
 // Kalos Temporary Battles
+TemporaryBattleList.Korrina = new TemporaryBattle(
+    'Korrina',
+    [new GymPokemon('Mega Lucario', 135000000, 32)],
+    'Here is a stone!',
+    [new GymBadgeRequirement(BadgeEnums.Rumble), new ObtainedPokemonRequirement('Lucario')],
+    undefined,
+    {
+        imageName: '../gymLeaders/Korrina',
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Lucario').giveMegastone(),
+    }
+);
 TemporaryBattleList['Aipom Alley'] = new TemporaryBattle(
     'Aipom Alley',
     [
