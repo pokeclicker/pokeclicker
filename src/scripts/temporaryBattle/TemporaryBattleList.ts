@@ -123,7 +123,7 @@ TemporaryBattleList['Snorlax route 12'] = new TemporaryBattle(
         new RouteKillRequirement(10, GameConstants.Region.kanto, 12),
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Tower')),
     ],
-    [new TemporaryBattleRequirement('Snorlax route 12'), new ObtainedPokemonRequirement(pokemonMap.Snorlax)],
+    [new TemporaryBattleRequirement('Snorlax route 12'), new ObtainedPokemonRequirement('Snorlax')],
     {
         displayName: 'Snorlax',
         returnTown: 'Lavender Town',
@@ -137,7 +137,7 @@ TemporaryBattleList['Snorlax route 16'] = new TemporaryBattle(
     [new GymPokemon('Snorlax', 189990, 30)],
     undefined,
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Tower'))],
-    [new TemporaryBattleRequirement('Snorlax route 16'), new ObtainedPokemonRequirement(pokemonMap.Snorlax)],
+    [new TemporaryBattleRequirement('Snorlax route 16'), new ObtainedPokemonRequirement('Snorlax')],
     {
         displayName: 'Snorlax',
         returnTown: 'Celadon City',
@@ -300,7 +300,7 @@ TemporaryBattleList.Sudowoodo = new TemporaryBattle(
         new GymBadgeRequirement(BadgeEnums.Plain),
         new RouteKillRequirement(10, GameConstants.Region.johto, 36),
     ],
-    [new TemporaryBattleRequirement('Sudowoodo'), new ObtainedPokemonRequirement(pokemonMap.Sudowoodo)],
+    [new TemporaryBattleRequirement('Sudowoodo'), new ObtainedPokemonRequirement('Sudowoodo')],
     {
         isTrainerBattle: false,
         returnTown: 'Goldenrod City',
@@ -653,7 +653,7 @@ TemporaryBattleList['Kecleon 1'] = new TemporaryBattle(
     [new GymPokemon('Kecleon', 6000000, 20)],
     undefined,
     [new RouteKillRequirement(10, GameConstants.Region.hoenn, 119)],
-    [new TemporaryBattleRequirement('Kecleon 1'), new ObtainedPokemonRequirement(pokemonMap.Kecleon)],
+    [new TemporaryBattleRequirement('Kecleon 1'), new ObtainedPokemonRequirement('Kecleon')],
     {
         isTrainerBattle: false,
         returnTown: 'Fortree City',
@@ -1545,6 +1545,93 @@ TemporaryBattleList['Hugh 7'] = new TemporaryBattle(
 );
 
 //Kalos Temporary Battles
+TemporaryBattleList['Shauna 1'] = new TemporaryBattle(
+    'Shauna 1',
+    [
+        new GymPokemon('Froakie', 24906504, 5/*, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Grass)*/),
+        new GymPokemon('Chespin', 24906504, 5/*, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Fire)*/),
+        new GymPokemon('Fennekin', 24906504, 5/*, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Water)*/),
+    ],
+    'Hey! I wasn\'t done watching my cute Li\'l Pokémon yet!',
+    [new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Shauna',
+        returnTown: 'Aquacorde Town',
+        imageName: 'Shauna',
+    }
+);
+TemporaryBattleList['Sycamore 1'] = new TemporaryBattle(
+    'Sycamore 1',
+    [
+        new GymPokemon('Bulbasaur', 17568392, 10),
+        new GymPokemon('Charmander', 17568392, 10),
+        new GymPokemon('Squirtle', 17568392, 10),
+    ],
+    'Ha ha! You\'re too much for me! You\'re really something, aren\'t you?',
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 4)],
+    undefined,
+    {
+        displayName: 'Pokémon Professor Sycamore',
+        imageName: 'Sycamore',
+    }
+);
+TemporaryBattleList['Tierno 1'] = new TemporaryBattle(
+    'Tierno 1',
+    [new GymPokemon('Corphish', 40132328, 12)],
+    'That was some nice footwork!',
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 5)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Tierno',
+        returnTown: 'Camphrier Town',
+        imageName: 'Tierno',
+    }
+);
+TemporaryBattleList['Trevor & Tierno'] = new TemporaryBattle(
+    'Trevor & Tierno',
+    [
+        new GymPokemon('Pikachu', 23154377, 14),
+        new GymPokemon('Corphish', 23856025, 16),
+        new GymPokemon('Flabébé (Orange)', 23154377, 14),
+    ],
+    'So you can\'t learn everything just from the Pokédex... I see!',
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 7)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Trevor & Pokémon Trainer Tierno',
+        returnTown: 'Camphrier Town',
+    }
+);
+TemporaryBattleList['Calem 1'] = new TemporaryBattle(
+    'Calem 1',
+    [
+        new GymPokemon('Meowstic', 40271251, 28),
+        new GymPokemon('Absol', 40271251, 28),
+        new GymPokemon('Braixen', 41888812, 30/*, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Grass)*/),
+        new GymPokemon('Frogadier', 41888812, 30/*, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Fire)*/),
+        new GymPokemon('Quilladin', 41888812, 30/*, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Water)*/),
+    ],
+    'Your bonds with your Pokémon are really strong. Although, I don\'t like losing much...',
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Reflection Cave'))],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Calem',
+        returnTown: 'Shalour City',
+        imageName: 'Calem',
+    }
+);
+TemporaryBattleList.Korrina = new TemporaryBattle(
+    'Korrina',
+    [new GymPokemon('Mega Lucario', 135000000, 32)],
+    'What an incredible bond you have! What amazing power! You and Lucario are worthy of this Lucarionite!</br><img src="assets/images/megaStone/448.png"/>',
+    [new GymBadgeRequirement(BadgeEnums.Rumble), new ObtainedPokemonRequirement('Lucario')],
+    undefined,
+    {
+        imageName: '../gymLeaders/Korrina',
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Lucario').giveMegastone(),
+    }
+);
 TemporaryBattleList['Aipom Alley'] = new TemporaryBattle(
     'Aipom Alley',
     [
@@ -1647,82 +1734,6 @@ TemporaryBattleList['Millis and Argus Steel'] = new TemporaryBattle(
     ],
     'Our plans are ruined! Retreat!',
     [new QuestLineStepCompletedRequirement('Princess Diancie', 3)]
-);
-TemporaryBattleList['Shauna 1'] = new TemporaryBattle(
-    'Shauna 1',
-    [
-        new GymPokemon('Froakie', 24906504, 5/*, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Grass)*/),
-        new GymPokemon('Chespin', 24906504, 5/*, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Fire)*/),
-        new GymPokemon('Fennekin', 24906504, 5/*, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Water)*/),
-    ],
-    'Hey! I wasn\'t done watching my cute Li\'l Pokémon yet!',
-    [new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)],
-    undefined,
-    {
-        displayName: 'Pokémon Trainer Shauna',
-        returnTown: 'Aquacorde Town',
-        imageName: 'Shauna',
-    }
-);
-TemporaryBattleList['Sycamore 1'] = new TemporaryBattle(
-    'Sycamore 1',
-    [
-        new GymPokemon('Bulbasaur', 17568392, 10),
-        new GymPokemon('Charmander', 17568392, 10),
-        new GymPokemon('Squirtle', 17568392, 10),
-    ],
-    'Ha ha! You\'re too much for me! You\'re really something, aren\'t you?',
-    [new RouteKillRequirement(10, GameConstants.Region.kalos, 4)],
-    undefined,
-    {
-        displayName: 'Pokémon Professor Sycamore',
-        imageName: 'Sycamore',
-    }
-);
-TemporaryBattleList['Tierno 1'] = new TemporaryBattle(
-    'Tierno 1',
-    [new GymPokemon('Corphish', 40132328, 12)],
-    'That was some nice footwork!',
-    [new RouteKillRequirement(10, GameConstants.Region.kalos, 5)],
-    undefined,
-    {
-        displayName: 'Pokémon Trainer Tierno',
-        returnTown: 'Camphrier Town',
-        imageName: 'Tierno',
-    }
-);
-TemporaryBattleList['Trevor & Tierno'] = new TemporaryBattle(
-    'Trevor & Tierno',
-    [
-        new GymPokemon('Pikachu', 23154377, 14),
-        new GymPokemon('Corphish', 23856025, 16),
-        new GymPokemon('Flabébé (Orange)', 23154377, 14),
-    ],
-    'So you can\'t learn everything just from the Pokédex... I see!',
-    [new RouteKillRequirement(10, GameConstants.Region.kalos, 7)],
-    undefined,
-    {
-        displayName: 'Pokémon Trainer Trevor & Pokémon Trainer Tierno',
-        returnTown: 'Camphrier Town',
-    }
-);
-TemporaryBattleList['Calem 1'] = new TemporaryBattle(
-    'Calem 1',
-    [
-        new GymPokemon('Meowstic', 40271251, 28),
-        new GymPokemon('Absol', 40271251, 28),
-        new GymPokemon('Braixen', 41888812, 30/*, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Grass)*/),
-        new GymPokemon('Frogadier', 41888812, 30/*, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Fire)*/),
-        new GymPokemon('Quilladin', 41888812, 30/*, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Water)*/),
-    ],
-    'Your bonds with your Pokémon are really strong. Although, I don\'t like losing much...',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Reflection Cave'))],
-    undefined,
-    {
-        displayName: 'Pokémon Trainer Calem',
-        returnTown: 'Shalour City',
-        imageName: 'Calem',
-    }
 );
 TemporaryBattleList['Calem 2'] = new TemporaryBattle(
     'Calem 2',
@@ -3057,7 +3068,7 @@ TemporaryBattleList.Kubfu = new TemporaryBattle(
     [new GymPokemon('Kubfu', 1886555626, 50)],
     undefined,
     [new QuestLineStepCompletedRequirement('The Dojo\'s Armor', 11)],
-    [new ObtainedPokemonRequirement(pokemonMap.Kubfu)],
+    [new ObtainedPokemonRequirement('Kubfu')],
     {
         isTrainerBattle: false,
         hideTrainer: true,
@@ -3155,7 +3166,7 @@ TemporaryBattleList['Flowering Celebi'] = new TemporaryBattle(
     [new GymPokemon('Flowering Celebi', 2132963238, 100)],
     'Cel Cel! Celebi!',
     [new QuestLineStepCompletedRequirement('Secrets of the Jungle', 12)],
-    [new ObtainedPokemonRequirement(pokemonMap['Flowering Celebi'])],
+    [new ObtainedPokemonRequirement('Flowering Celebi')],
     {
         isTrainerBattle: false,
         hideTrainer: true,

@@ -6,11 +6,7 @@ import type Statistics from './DataStore/StatisticStore';
 import type Challenges from './challenges/Challenges';
 import type Multiplier from './multiplier/Multiplier';
 import type { Environment, GameState, Region } from './GameConstants';
-import type PokemonType from './enums/PokemonType';
-import type BagItem from './interfaces/BagItem';
-import type LevelType from './party/LevelType';
 import type Wallet from './wallet/Wallet';
-import { PokemonNameType } from './pokemons/PokemonNameType';
 import PokemonCategories from './party/Category';
 import OakItems from './oakItems/OakItems';
 import OakItemLoadouts from './oakItems/OakItemLoadouts';
@@ -56,31 +52,9 @@ type TmpGameType = {
 
 type TmpAppType = {
     game: TmpGameType,
+    isUsingClient: boolean,
     translation: Translate,
     start: ()=>void
-};
-
-type TmpPokemonListData = {
-    id: number;
-    name: PokemonNameType;
-    nativeRegion?: Region;
-    catchRate: number;
-    evolutions?: any[]; // No Evolutions in modules yet :(
-    type: PokemonType[];
-    base: {
-        hitpoints: number;
-        attack: number;
-        specialAttack: number;
-        defense: number;
-        specialDefense: number;
-        speed: number;
-    };
-    levelType: LevelType;
-    exp: number;
-    eggCycles: number;
-    baby?: boolean;
-    attack?: number;
-    heldItem?: BagItem;
 };
 
 type TmpSaveType = {
@@ -104,19 +78,26 @@ type TmpMapHelperType = {
     travelToNextRegion: ()=>void;
 };
 
-type TmpPokemonMapProxy
-    = Record<PokemonNameType | number, TmpPokemonListData>
-    & {
-        random: (max?: number, min?: number) => TmpPokemonListData,
-        randomRegion: (max?: Region, min?: Region) => TmpPokemonListData,
-    }
-    & Array<TmpPokemonListData>;
+type TmpDungeonRunner = {
+    dungeon: {
+        name: string
+    };
+};
+
+type TmpGym = {
+    town: string;
+};
+
+type TmpGymRunner = {
+    gymObservable: () => TmpGym;
+};
 
 // Where all the magic happens
 declare global {
     const App: TmpAppType;
-    const pokemonMap: TmpPokemonMapProxy;
     const player: any;
     const Save: TmpSaveType;
     const MapHelper: TmpMapHelperType;
+    const DungeonRunner: TmpDungeonRunner;
+    const GymRunner: TmpGymRunner;
 }

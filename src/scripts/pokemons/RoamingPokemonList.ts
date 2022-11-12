@@ -77,7 +77,7 @@ RoamingPokemonList.add(GameConstants.Region.kanto, 0, new RoamingPokemon('Mew'))
 //Kanto - Sevii Islands
 RoamingPokemonList.add(GameConstants.Region.kanto, 1, new RoamingPokemon('Raikou', new QuestLineCompletedRequirement('Celio\'s Errand')));
 RoamingPokemonList.add(GameConstants.Region.kanto, 1, new RoamingPokemon('Entei', new QuestLineCompletedRequirement('Celio\'s Errand')));
-RoamingPokemonList.add(GameConstants.Region.kanto, 1, new RoamingPokemon('Suicune', new MultiRequirement([new QuestLineCompletedRequirement('Celio\'s Errand'), new ObtainedPokemonRequirement(pokemonMap.Suicune)])));
+RoamingPokemonList.add(GameConstants.Region.kanto, 1, new RoamingPokemon('Suicune', new MultiRequirement([new QuestLineCompletedRequirement('Celio\'s Errand'), new ObtainedPokemonRequirement('Suicune')])));
 RoamingPokemonList.add(GameConstants.Region.kanto, 1, new RoamingPokemon('Pink Butterfree', new GymBadgeRequirement(BadgeEnums.Elite_OrangeChampion)));
 RoamingPokemonList.add(GameConstants.Region.kanto, 1, new RoamingPokemon('Ash\'s Butterfree', new GymBadgeRequirement(BadgeEnums.Elite_OrangeChampion)));
 

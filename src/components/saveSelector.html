@@ -14,14 +14,19 @@
                 <img alt="Check out the Wiki!" src="https://img.shields.io/badge/wiki-link-blue?logo=wikimedia-commons&style=for-the-badge">
             </a>
         </div>
+        <div id="use-our-client-message" style="color: white; display: none;">
+            To help reduce server load, please download our desktop client <b><a href="https://github.com/RedSparr0w/Pokeclicker-desktop/releases/latest" target="_blank">here</a></b>.
+            You can even find a Pokémon exclusive to the client when you reach the Sevii Islands!<br/><br/>
+        </div>
         <div class="save-container justify-content-center container row"></div>
-        
+
         <div class="new-import-buttons justify-content-center container row">
             <label class="btn btn-success col-md-4 col-xs-12 mx-1" onclick="Save.key = Rand.string(6); document.querySelector('#saveSelector').remove(); App.start();">New Save</label>
             <label for="import-save" class="btn btn-warning col-md-4 col-xs-12 mx-1" onclick="Save.key = Rand.string(6);">Import Save</label>
         </div>
+
     </div>
-    
+
     <div class="dropdown-menu py-0" id="saveSelectorContextMenu">
         <a class="dropdown-item" href="#">Action</a>
         <a class="dropdown-item" href="#">Another action</a>

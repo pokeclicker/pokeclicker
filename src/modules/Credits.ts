@@ -68,6 +68,7 @@ export const SpriteCredits: Credit[] = [
             'Rising Star (male)',
             'Sightseer (female)',
             'Sophocles',
+            'Teacher (Gen 7)',
             'Team Skull Boss (guzma)',
             'Wicke',
             'Youth Athlete (female)',
@@ -161,6 +162,14 @@ export const SpriteCredits: Credit[] = [
         // Notes: DaleArwin aka IanWalder, a GitHub contributor to this project, gives his permission
     },
     {
+        name: 'DapperDwarf',
+        link: 'https://discordapp.com/users/385866382593622018/',
+        resources: [
+            'Pokerus Resistant Icon (colorblind friendly)',
+        ],
+        // Notes: Made specifically for PokéClicker.
+    },
+    {
         name: 'Data',
         link: 'https://discordapp.com/users/240607391807307777/',
         resources: [
@@ -180,6 +189,7 @@ export const SpriteCredits: Credit[] = [
             'Ash\'s Butterfree',
             'Black mane hair big icon',
             'Blimp base',
+            'Client Island town image',
             'Cracked pot big icon',
             'Danny',
             'Dracovish shop image',
@@ -192,6 +202,7 @@ export const SpriteCredits: Credit[] = [
             'Galarian Zapdos overworld image',
             'Galarica cuff and wreath icons',
             'Honey',
+            'Key Stone',
             'Linking cord cartoon style',
             'Luana',
             'Merilyn',
@@ -495,8 +506,12 @@ export const SpriteCredits: Credit[] = [
         name: 'NiCeDiCe',
         link: 'https://twitter.com/NiCeDiCe90',
         resources: [
+            'Blessing Blissey',
+            'Bulbasaur (Rose)',
+            'Charity Chansey',
             'Crystal Onix',
             'Crystal Steelix',
+            'Handout Happiny',
             'Pinkan Rhyhorn (non shiny)',
             'Red Spearow',
             'shiny Totem Ribombee',

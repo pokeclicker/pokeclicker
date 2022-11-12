@@ -15,7 +15,7 @@ export default class Notifier {
         image = null,
         strippedMessage = null,
     }: {
-        message: string;
+        message?: string;
         type?: NotificationOption;
         title?: string;
         timeout?: number;
