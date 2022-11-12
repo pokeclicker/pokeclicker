@@ -341,8 +341,14 @@ class PartyPokemon implements Saveable {
     });
 
     public giveMegastone(notifiy = true) {
-        if (this.evolutions?.some((evo) => evo.restrictions.some(r => r instanceof MegaEvolveRequirement))) {
+        if (!this._megaStone() && this.evolutions?.some((evo) => evo.restrictions.some(r => r instanceof MegaEvolveRequirement))) {
             this._megaStone(new MegaStone(this.id, this.baseAttack, this._attack));
+            if (notifiy) {
+                Notifier.notify({
+                    message: `${this.displayName} has gained a Mega Stone!`,
+                    type: NotificationConstants.NotificationOption.success,
+                });
+            }
         }
     }
 
