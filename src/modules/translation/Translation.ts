@@ -48,7 +48,7 @@ export default class Translate {
             .use(LanguageDetector)
             .init({
                 debug: true,
-                ns: ['pokemon', 'logbook'],
+                ns: ['pokemon', 'logbook', 'settings'],
                 fallbackLng: 'en',
                 backend: {
                     // Two backend sources - tries the TRANSLATION_URL first, falls back to copy taken at build time
