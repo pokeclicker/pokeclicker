@@ -58,10 +58,7 @@ class PokedexHelper {
             // If the Pokemon shouldn't be unlocked yet
             const nativeRegion = PokemonHelper.calcNativeRegion(pokemon.name);
             if (nativeRegion > GameConstants.MAX_AVAILABLE_REGION || nativeRegion == GameConstants.Region.none) {
-                // Check for Meltan / Melmetal
-                //if (pokemon.id != 808 && pokemon.id != 809) {
                 return false;
-                //}
             }
 
             // If not showing this region
