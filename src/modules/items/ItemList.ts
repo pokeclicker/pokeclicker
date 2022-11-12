@@ -16,7 +16,7 @@ import {
 } from '../GameConstants';
 import { ShovelItem, MulchShovelItem } from './ShovelItem';
 import PokeBlock from './PokeBlock';
-import MegaStoneItem from './megaStoneItem';
+import MegaStoneItem from './MegaStoneItem';
 
 // eslint-disable-next-line import/prefer-default-export
 export const ItemList: { [name: string]: Item } = {};
