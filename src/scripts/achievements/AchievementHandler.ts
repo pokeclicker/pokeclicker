@@ -393,13 +393,13 @@ class AchievementHandler {
          */
         const addGymAchievements = (gyms: string[], category: GameConstants.Region | GameConstants.ExtraAchievementCategories, subregion?: string) => {
             gyms.forEach(gym => {
-                const elite = gym.includes('Elite') || gym.includes('Champion');
+                const elite = gym.includes('Elite') || gym.includes('Champion') || gym.includes('Supreme');
                 const displayName = GymList[gym]?.displayName;
 
                 const gymRegion = subregion ? subregion : GameConstants.camelCaseToString(GameConstants.Region[GameConstants.getGymRegion(gym)]);
 
                 // Name of person's title if elite/champion, else the gym's town name + 'Gym'
-                const gymTitle: string = displayName ?? !elite ? `${gym} Gym` : gym;
+                const gymTitle: string = displayName ?? (!elite ? `${gym} Gym` : gym);
 
                 const leaderName: string = !elite && !displayName ? `${GymList[gym].leaderName.replace(/\d/g, '')}'s` : '';
 

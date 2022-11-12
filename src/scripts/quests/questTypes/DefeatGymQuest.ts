@@ -45,15 +45,13 @@ class DefeatGymQuest extends Quest implements QuestInterface {
         const desc = [];
 
         desc.push('Defeat');
-
-        if (GymList[this.gymTown]?.displayName?.includes('Trial')) {
+        if (displayName?.includes('Trial')) {
             desc.push(`${displayName} at ${this.gymTown}`);
         } else if (displayName || elite) {
             desc.push(displayName ?? this.gymTown);
         } else {
-            desc.push(`${leaderName}'s ${this.gymTown} Gym`);
+            desc.push(`${leaderName}'s Gym at ${this.gymTown}`);
         }
-
         desc.push(`in ${GameConstants.camelCaseToString(GameConstants.Region[this.region])}`);
         desc.push(`${this.amount.toLocaleString('en-US')} times.`);
         return desc.join(' ');

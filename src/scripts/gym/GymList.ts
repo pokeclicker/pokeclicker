@@ -690,8 +690,7 @@ GymList['Supreme Gym Leader Drake'] = new Gym(
     ],
     BadgeEnums.Elite_OrangeChampion,
     4800,
-    'You really deserve that trophy. You\'re a great Pokémon trainer.',
-    undefined, undefined, undefined, 'Supreme Gym Leader Drake'
+    'You really deserve that trophy. You\'re a great Pokémon trainer.'
 );
 
 //Sinnoh Gyms
