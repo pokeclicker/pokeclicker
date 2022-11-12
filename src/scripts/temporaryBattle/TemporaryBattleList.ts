@@ -779,7 +779,7 @@ TemporaryBattleList['Ghetsis 2'] = new TemporaryBattle(
 TemporaryBattleList.Korrina = new TemporaryBattle(
     'Korrina',
     [new GymPokemon('Mega Lucario', 135000000, 32)],
-    'What an incredible bond you have! What amazing power! You and Lucario are worthy of this Lucarionite!',
+    'What an incredible bond you have! What amazing power! You and Lucario are worthy of this Lucarionite!</br><img src="assets/images/megaStone/448.png"/>',
     [new GymBadgeRequirement(BadgeEnums.Rumble), new ObtainedPokemonRequirement('Lucario')],
     undefined,
     {
