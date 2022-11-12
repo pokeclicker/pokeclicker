@@ -8,10 +8,13 @@ export default class Setting<T> {
     value: T;
     observableValue: KnockoutObservable<T>;
 
+    // We can't set this up in the constructor because App.translation doesn't exist yet
+    private cachedTranslatedName: KnockoutComputed<string>;
+
     // Leave options array empty to allow all options.
     constructor(
         public name: string,
-        public displayName: string,
+        private defaultDisplayName: string,
         public options: SettingOption<T>[],
         public defaultValue: T,
     ) {
@@ -53,5 +56,16 @@ export default class Setting<T> {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars, class-methods-use-this
     isUnlocked(value: T): boolean {
         return true;
+    }
+
+    get displayName(): string {
+        if (!this.cachedTranslatedName) {
+            this.cachedTranslatedName = App.translation.get(
+                this.name,
+                'settings',
+                { defaultValue: this.defaultDisplayName },
+            );
+        }
+        return this.cachedTranslatedName();
     }
 }

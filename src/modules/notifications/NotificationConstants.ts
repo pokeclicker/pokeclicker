@@ -17,6 +17,7 @@ const NotificationConstants = {
             battle_item_timer: new Sound('battle_item_timer', 'Battle item about to wear off'),
             underground_energy_full: new Sound('underground_energy_full', 'Mining energy reached maximum capacity'),
             battle_frontier: new Sound('battle_frontier', 'Battle Frontier'),
+            dream_orb: new Sound('dream_orb', 'Opening Dream Orb'),
         },
         Hatchery: {
             ready_to_hatch: new Sound('ready_to_hatch', 'Egg ready to hatch'),
@@ -49,6 +50,7 @@ const NotificationConstants = {
             achievement_complete: new NotificationSetting('notification.achievement_complete', 'Achievement complete', true, true),
             new_catch: new NotificationSetting('notification.new_catch', 'New Pokémon/shiny captured', true, true),
             battle_frontier: new NotificationSetting('notification.battle_frontier', 'Battle Frontier', true, true),
+            pokerus: new NotificationSetting('notification.pokerus', 'Pokémon has become Resistant to Pokérus', true),
         },
         Hatchery: {
             ready_to_hatch: new NotificationSetting('notification.ready_to_hatch', 'Egg ready to hatch', true),

@@ -164,7 +164,7 @@ class SafariBattle {
                 }, 1500);
                 return;
             }
-            SafariBattle.text(`You throw ${bait.useName} at ${SafariBattle.enemy.name}`);
+            SafariBattle.text(`You throw ${bait.useName} at ${SafariBattle.enemy.displayName}`);
             bait.use(SafariBattle.enemy);
             const enemy = $('#safariBattleModal .enemy').offset();
             enemy.left += 30;
@@ -177,7 +177,7 @@ class SafariBattle {
     public static throwRock() {
         if (!SafariBattle.busy()) {
             SafariBattle.busy(true);
-            SafariBattle.text(`You throw a rock at ${SafariBattle.enemy.name}`);
+            SafariBattle.text(`You throw a rock at ${SafariBattle.enemy.displayName}`);
             SafariBattle.enemy.angry = Math.max(SafariBattle.enemy.angry, Rand.intBetween(2, 6));
             SafariBattle.enemy.eating = 0;
             const enemy = $('#safariBattleModal .enemy').offset();
@@ -224,14 +224,14 @@ class SafariBattle {
     private static enemyTurn() {
         // Enemy turn to flee;
         if (Rand.chance(SafariBattle.enemy.escapeFactor / 100)) {
-            SafariBattle.text(`${SafariBattle.enemy.name} has fled.`);
+            SafariBattle.text(`${SafariBattle.enemy.displayName} has fled.`);
             setTimeout(SafariBattle.endBattle, 1000);
         } else if (SafariBattle.enemy.eating > 0) {
-            SafariBattle.text(`${SafariBattle.enemy.name} is eating..`);
+            SafariBattle.text(`${SafariBattle.enemy.displayName} is eating..`);
         } else if (SafariBattle.enemy.angry > 0) {
-            SafariBattle.text(`${SafariBattle.enemy.name} is angry!`);
+            SafariBattle.text(`${SafariBattle.enemy.displayName} is angry!`);
         } else {
-            SafariBattle.text(`${SafariBattle.enemy.name} is watching carefully...`);
+            SafariBattle.text(`${SafariBattle.enemy.displayName} is watching carefully...`);
         }
         SafariBattle.enemy.eating = Math.max(0, SafariBattle.enemy.eating - 1);
         SafariBattle.enemy.angry = Math.max(0, SafariBattle.enemy.angry - 1);

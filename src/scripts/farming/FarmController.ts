@@ -30,7 +30,7 @@ class FarmController {
         });
 
         this.berryListEnd = ko.pureComputed(() => {
-            const highestMutation = App.game.farming.mutations.slice().reverse().find(mut => mut._hintSeen() && !App.game.farming.unlockedBerries[mut.mutatedBerry]());
+            const highestMutation = App.game.farming.mutations.slice().sort((a, b) => b.mutatedBerry - a.mutatedBerry).find(mut => mut._hintSeen() && !App.game.farming.unlockedBerries[mut.mutatedBerry]());
             const highestMutationHint = highestMutation?.mutatedBerry ?? 0;
             return Math.max(App.game.farming.highestUnlockedBerry(), highestMutationHint);
         });

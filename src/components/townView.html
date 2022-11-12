@@ -26,6 +26,12 @@
                            class="pokeball-smallest"
                            src="assets/images/pokeball/Pokeball-shiny.svg"/>
                   </knockout>
+
+                  <!--Pokérus image-->
+                  <knockout data-bind="if: RouteHelper.minPokerusCheck(player.town().dungeon.allAvailablePokemon())">
+                      <img data-bind="attr:{ src: 'assets/images/breeding/pokerus/' + GameConstants.Pokerus[RouteHelper.minPokerus(player.town().dungeon.allAvailablePokemon())] + '.png'}"
+                    src=""/>
+                  </knockout>
               </knockout>
             </h2>
         </div>
