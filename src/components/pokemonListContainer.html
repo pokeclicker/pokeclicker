@@ -69,7 +69,7 @@
                             <div class="pokemonName">
                                 <span data-bind="text: displayName">Name</span>
                                 <sup data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)">✨</sup>
-                                <img data-bind="visible: $data.megaStone,
+                                <img width="20px" data-bind="visible: $data.megaStone,
                                     attr: {src: $data.megaStone?.getImage()},
                                     tooltip:  { title: $data.megaStone?.getTooltipText() ?? '', trigger: 'hover', placement:'bottom' }
                                     "/>
