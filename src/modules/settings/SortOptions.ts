@@ -37,7 +37,7 @@ export const SortOptionConfigs: Record<SortOptions, SortOptionConfig> = {
 
     [SortOptions.name]: {
         text: 'Name',
-        getValue: (p) => p.name,
+        getValue: (p) => p.displayName,
     },
 
     [SortOptions.attack]: {

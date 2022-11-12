@@ -752,6 +752,7 @@ class QuestLineHelper {
 
         const DistortionWorldReward = () => {
             App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1, false);
+            MapHelper.moveToTown('Mt. Coronet');
             Notifier.notify({
                 title: galacticSinnohQuestLine.name,
                 message: 'You found a Master Ball!',
