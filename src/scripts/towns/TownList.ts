@@ -3846,9 +3846,10 @@ const CamphrierFlabébéEnthusiast = new NPC('Flabébé Enthusiast', [
 ]);
 
 const SharlourKorrina = new NPC('Korrina', [
-    'To Mega Evolve your Lucario, you need a stronger bond.',
+    'What an explosive battle! I could tell that you didn\'t hold anything back!',
+    'To Mega Evolve your Lucario, you need an even stronger bond!',
     'You can follow your progress in your Pokédex.',
-    'When your bond is strong enough, you can buy a Key Stone in this city!',
+    'When your bond is strong enough, you can Mega Evolve it using a Key Stone! You can buy them in this city!',
 ], {
     image: 'assets/images/gymLeaders/Korrina.png',
     requirement: new TemporaryBattleRequirement('Korrina'),

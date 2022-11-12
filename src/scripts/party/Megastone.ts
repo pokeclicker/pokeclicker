@@ -14,9 +14,9 @@ class MegaStone {
 
     public getTooltipText() {
         if (this.canEvolve()) {
-            return 'Use a keystone to evolve.';
+            return 'Use a keystone to Mega Evolve.';
         } else {
-            return `Needs at least ${this.attackRequired.toLocaleString('en-US')} attack to mega evolve.`;
+            return `Needs at least ${this.attackRequired.toLocaleString('en-US')} attack to Mega Evolve.`;
         }
     }
 
