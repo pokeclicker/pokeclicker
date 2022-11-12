@@ -96,6 +96,7 @@ export type ItemNameType
     | 'Ice_stone'
     | 'Solar_light'
     | 'Lunar_light'
+    | 'Pure_light'
     | 'Sweet_apple'
     | 'Tart_apple'
     | 'Cracked_pot'
