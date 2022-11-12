@@ -77,4 +77,4 @@ ItemList.PokeBlock_Purple = new PokeBlock(PokeBlockColor.Purple, Infinity);
 ItemList.PokeBlock_Gray   = new PokeBlock(PokeBlockColor.Gray, Infinity);
 ItemList.PokeBlock_White  = new PokeBlock(PokeBlockColor.White, Infinity);
 
-ItemList.Abomasite        = new MegaStoneItem(460, 'Abomasite', 10000);
+ItemList.Abomasite        = new MegaStoneItem('Abomasnow', 'Abomasite', 10000);
