@@ -142,9 +142,12 @@ aria-labelledby="pokedexModalLabel">
                                     <div data-bind="visible: App.game.party.alreadyCaughtPokemonByName(name)" style="position: absolute;right: 2px;top: -15px;">
                                         <img width="18px" src="" data-bind="attr: { src: `assets/images/pokeball/Pokeball${App.game.party.alreadyCaughtPokemon($data.id, true) ? '-shiny' : ''}.svg`}"/>
                                     </div>
-                                    <!-- ko ifnot: App.game.party.getPokemon($data.id) == undefined -->
-                                    <div data-bind="if: App.game.party.alreadyCaughtPokemonByName(name) && App.game.party.getPokemon($data.id)?.pokerus" style="position: absolute;left: 2px;top: -11px;">
+                                    <!-- ko if: App.game.party.alreadyCaughtPokemonByName(name) -->
+                                    <div data-bind="if: App.game.party.getPokemon($data.id)?.pokerus" style="position: absolute;left: 2px;top: -11px;">
                                         <img width="32px" src="" data-bind="attr: { src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[App.game.party.getPokemon($data.id)?.pokerus]}.png`}"/>
+                                    </div>
+                                    <div data-bind="if: App.game.party.getPokemon($data.id)?.megaStone" style="position: absolute;right: 1px;top: 4px;">
+                                        <img width="20px" data-bind="attr: { src: App.game.party.getPokemon($data.id).megaStone.getImage()}"/>
                                     </div>
                                     <!-- /ko -->
                                     <img src="" width="80px" data-bind="css: { 'pokemon-not-seen': !PokedexHelper.pokemonSeen($data.id)(), 'pokemon-seen-but-not-caught': !App.game.party.alreadyCaughtPokemonByName(name) && PokedexHelper.pokemonSeen($data.id)() }, attr:{ src: PokemonHelper.getImage($data.id, App.game.party.alreadyCaughtPokemon($data.id, true) && !PokedexHelper.hideShinyImages())}">
@@ -160,6 +163,9 @@ aria-labelledby="pokedexModalLabel">
                                                 (App.game.party.getPokemon($data.id)?.pokerus >= GameConstants.Pokerus.Contagious ?
                                                     `<br/>EVs: <strong>${App.game.party.getPokemon($data.id).evs().toLocaleString('en-US')}</strong>
                                                     <br/>EV bonus: <strong>×${App.game.party.getPokemon($data.id).calculateEVAttackBonus().toLocaleString('en-US')}</strong>`
+                                                    : '') +
+                                                (App.game.party.getPokemon($data.id)?.megaStone ?
+                                                    `<br/>${App.game.party.getPokemon($data.id).megaStone.getTooltipText()}`
                                                     : ''),
                                             trigger: 'hover',
                                             placement:'bottom'

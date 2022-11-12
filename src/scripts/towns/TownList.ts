@@ -3773,6 +3773,7 @@ const ShalourCityShop = new Shop([
     ItemList.Fighting_egg,
     ItemList.Linking_cord,
     ItemList.Metal_coat,
+    ItemList.Key_stone,
 ]);
 const CoumarineCityShop = new Shop([
     ItemList.Pokeball,
@@ -3843,6 +3844,16 @@ const CamphrierFlabébéEnthusiast = new NPC('Flabébé Enthusiast', [
     'If you\'re searching for the yellow and blue kinds, look no further than the Farm!',
     'They simply can\'t resist berries that match their colors - just plant a few and they\'ll soon come wandering in.',
 ]);
+
+const SharlourKorrina = new NPC('Korrina', [
+    'What an explosive battle! I could tell that you didn\'t hold anything back!',
+    'To Mega Evolve your Lucario, you need an even stronger bond!',
+    'You can follow your progress in your Pokédex.',
+    'When your bond is strong enough, you can Mega Evolve it using a Key Stone! You can buy them in this city!',
+], {
+    image: 'assets/images/gymLeaders/Korrina.png',
+    requirement: new TemporaryBattleRequirement('Korrina'),
+});
 
 const CoumarineBirdwatcher = new NPC('Birdwatcher', [
     'I\'ve heard there is a cave you can find if you go out on the ocean a little ways.',
@@ -3982,10 +3993,10 @@ TownList['Shalour City'] = new Town(
     'Shalour City',
     GameConstants.Region.kalos,
     GameConstants.KalosSubRegions.Kalos,
-    [ShalourCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Shalour City']), TemporaryBattleList.Riot, TemporaryBattleList['Millis and Argus Steel']],
+    [ShalourCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Shalour City']), TemporaryBattleList.Korrina, TemporaryBattleList.Riot, TemporaryBattleList['Millis and Argus Steel']],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Reflection Cave'))],
-        npcs: [ExamineAegislash, ThanksDiancie],
+        npcs: [SharlourKorrina, ExamineAegislash, ThanksDiancie],
     }
 );
 TownList['Coumarine City'] = new Town(
