@@ -1687,6 +1687,43 @@ class Update implements Saveable {
         // Fixup queue
         saveData.breeding.queueList = saveData.breeding.queueList?.map(p => p == oldName ? newName : p) || [];
     }
+    
+    // Swapping or Rotating Pokemon IDs
+    static rotatePokemonIDs = (saveData, olderID, newerID) => {
+            forEach(([olderID, newerID]) => {
+                const pokemon = saveData.party.caughtPokemon.find(p => p.id === olderID);
+                // If player hasn't caught this mon yet, return.
+                if (pokemon == undefined) {
+                    return;
+                }
+                // Update our ID
+                pokemon.id = newerID;
+                if (!saveData.statistics.pokemonHatched) {
+                    saveData.statistics.pokemonHatched = {};
+                }
+                if (!saveData.statistics.shinyPokemonHatched) {
+                    saveData.statistics.shinyPokemonHatched = {};
+                }
+                // Update our statistics
+                saveData.statistics.pokemonEncountered[newerID] = saveData.statistics.pokemonEncountered[olderID] || 0;
+                saveData.statistics.pokemonDefeated[newerID] = saveData.statistics.pokemonDefeated[olderID] || 0;
+                saveData.statistics.pokemonCaptured[newerID] = saveData.statistics.pokemonCaptured[olderID] || 0;
+                saveData.statistics.pokemonHatched[newerID] = saveData.statistics.pokemonHatched[olderID] || 0;
+                saveData.statistics.shinyPokemonEncountered[newerID] = saveData.statistics.shinyPokemonEncountered[olderID] || 0;
+                saveData.statistics.shinyPokemonDefeated[newerID] = saveData.statistics.shinyPokemonDefeated[olderID] || 0;
+                saveData.statistics.shinyPokemonCaptured[newerID] = saveData.statistics.shinyPokemonCaptured[olderID] || 0;
+                saveData.statistics.shinyPokemonHatched[newerID] = saveData.statistics.shinyPokemonHatched[olderID] || 0;
+                // Delete our old statistics
+                delete saveData.statistics.pokemonEncountered[olderID];
+                delete saveData.statistics.pokemonDefeated[olderID];
+                delete saveData.statistics.pokemonCaptured[olderID];
+                delete saveData.statistics.pokemonHatched[olderID];
+                delete saveData.statistics.shinyPokemonEncountered[olderID];
+                delete saveData.statistics.shinyPokemonDefeated[olderID];
+                delete saveData.statistics.shinyPokemonCaptured[olderID];
+                delete saveData.statistics.shinyPokemonHatched[olderID];
+            }
+    };
 
     // Replaces Pokémon names to IDs in the save data
     static changePokemonNameToId(saveData, pokemonArray) {
