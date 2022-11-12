@@ -93,6 +93,7 @@ export type ItemNameType
     | 'White_DNA'
     | 'Sachet'
     | 'Whipped_dream'
+    | 'Key_stone'
     | 'Ice_stone'
     | 'Solar_light'
     | 'Lunar_light'

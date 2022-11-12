@@ -1,10 +1,11 @@
-class MegaStone implements Saveable {
+class MegaStone {
     saveKey = 'megastone';
     defaults: Record<string, any>;
 
-    public hasEvolved : boolean;
+    private attackRequired: number;
 
-    constructor(public pokemonId: number) {
+    constructor(public pokemonId: number, pokemonBaseAttack: number, private pokemonAttack: KnockoutObservable<number>) {
+        this.attackRequired = pokemonBaseAttack * 40;
     }
 
     public getImage() {
@@ -12,15 +13,14 @@ class MegaStone implements Saveable {
     }
 
     public getTooltipText() {
-        return 'Still need to do stuff to mega evolve';
+        if (this.canEvolve()) {
+            return 'Use a keystone to evolve.';
+        } else {
+            return `Needs at least ${this.attackRequired.toLocaleString('en-US')} attack to mega evolve.`;
+        }
     }
 
-    toJSON(): Record<string, any> {
-        return {
-            hasEvolved: this.hasEvolved,
-        };
-    }
-    fromJSON(json: Record<string, any>): void {
-        this.hasEvolved = json?.hasEvolved ?? false;
+    public canEvolve() : boolean {
+        return this.pokemonAttack() >= this.attackRequired;
     }
 }

@@ -3773,6 +3773,7 @@ const ShalourCityShop = new Shop([
     ItemList.Fighting_egg,
     ItemList.Linking_cord,
     ItemList.Metal_coat,
+    ItemList.Key_stone,
 ]);
 const CoumarineCityShop = new Shop([
     ItemList.Pokeball,

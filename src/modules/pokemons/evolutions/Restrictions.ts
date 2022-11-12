@@ -10,6 +10,7 @@ import QuestLineRequirement from '../../requirements/QuestLineRequirement';
 import TimeRequirement from '../../requirements/TimeRequirement';
 import WeatherRequirement from '../../requirements/WeatherRequirement';
 import WeatherType from '../../weather/WeatherType';
+import MegaEvolveRequirement from '../../requirements/MegaEvolveRequirement';
 import { EvoData, restrict } from './Base';
 
 export type EvoFn = (...args: unknown[]) => EvoData;
@@ -103,3 +104,13 @@ export const dayRestrict = <T extends EvoFn>(evo: T) => (
 export const nightRestrict = <T extends EvoFn>(evo: T) => (
     ...rest: Parameters<T>
 ) => timeRestrict(evo)(18, 6, ...rest);
+
+export const megaEvolveRestrict = <T extends EvoFn>(evo: T) => (
+    ...rest: Parameters<T>
+) => {
+    const data = evo(...rest);
+    return restrict(
+        data,
+        new MegaEvolveRequirement(data.basePokemon),
+    );
+};

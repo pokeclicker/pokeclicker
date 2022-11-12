@@ -340,8 +340,10 @@ class PartyPokemon implements Saveable {
         return false;
     });
 
-    public giveMegastone() {
-        this._megaStone(new MegaStone(this.id));
+    public giveMegastone(notifiy = true) {
+        if (this.evolutions?.some((evo) => evo.restrictions.some(r => r instanceof MegaEvolveRequirement))) {
+            this._megaStone(new MegaStone(this.id, this.baseAttack, this._attack));
+        }
     }
 
     public fromJSON(json: Record<string, any>): void {
@@ -368,8 +370,7 @@ class PartyPokemon implements Saveable {
         this.hideShinyImage(json[PartyPokemonSaveKeys.hideShinyImage] ?? this.defaults.hideShinyImage);
         this._nickname(json[PartyPokemonSaveKeys.nickname] ? decodeURI(json[PartyPokemonSaveKeys.nickname]) : this.defaults.nickname);
         if (json[PartyPokemonSaveKeys.megaStone]) {
-            this.giveMegastone();
-            this._megaStone().fromJSON(json[PartyPokemonSaveKeys.megaStone]);
+            this.giveMegastone(false);
         }
 
         if (this.evolutions != null) {
@@ -406,11 +407,8 @@ class PartyPokemon implements Saveable {
             [PartyPokemonSaveKeys.defaultFemaleSprite]: this.defaultFemaleSprite(),
             [PartyPokemonSaveKeys.hideShinyImage]: this.hideShinyImage(),
             [PartyPokemonSaveKeys.nickname]: this.nickname ? encodeURI(this.nickname) : undefined,
+            [PartyPokemonSaveKeys.megaStone]: this.megaStone ? true : false,
         };
-
-        if (this._megaStone()) {
-            output[PartyPokemonSaveKeys.megaStone] = this._megaStone().toJSON();
-        }
 
         // Don't save anything that is the default option
         Object.entries(output).forEach(([key, value]) => {
