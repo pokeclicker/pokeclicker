@@ -14,6 +14,7 @@ import {
     WeatherRestrictedLevelEvolution,
     DayTimedLevelEvolution,
     TimeRestrictedLevelEvolution,
+    MegaEvolution,
 } from './evolutions/Methods';
 import BerryType from '../enums/BerryType';
 import ItemType from '../enums/ItemType';
@@ -12024,6 +12025,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 184,
         'catchRate': 45,
+        'evolutions': [MegaEvolution('Lucario', 'Mega Lucario')],
         'base': {
             'hitpoints': 70,
             'attack': 110,
@@ -12031,6 +12033,26 @@ export const pokemonList = createPokemonArray(
             'defense': 70,
             'specialDefense': 70,
             'speed': 90,
+        },
+        'gender': {
+            'femaleRatio': 0.125,
+        },
+    },
+    {
+        'id': 448.01,
+        'name': 'Mega Lucario',
+        'type': [PokemonType.Fighting, PokemonType.Steel],
+        'eggCycles': 120,
+        'levelType': LevelType.mediumslow,
+        'exp': 347,
+        'catchRate': 2,
+        'base': {
+            'hitpoints': 70,
+            'attack': 145,
+            'specialAttack': 140,
+            'defense': 88,
+            'specialDefense': 70,
+            'speed': 112,
         },
         'gender': {
             'femaleRatio': 0.125,
@@ -25833,26 +25855,6 @@ export const pokemonList = createPokemonArray(
     //         'speed': 92,
     //     },
     // },
-    {
-        'id': -145,
-        'name': 'Mega Lucario',
-        'type': [PokemonType.Fighting, PokemonType.Steel],
-        'eggCycles': 120,
-        'levelType': LevelType.mediumslow,
-        'exp': 347,
-        'catchRate': 2,
-        'base': {
-            'hitpoints': 70,
-            'attack': 145,
-            'specialAttack': 140,
-            'defense': 88,
-            'specialDefense': 70,
-            'speed': 112,
-        },
-        'gender': {
-            'femaleRatio': 0.125,
-        },
-    },
     // {
     //     'id': -146,
     //     'name': 'Mega Abomasnow',
