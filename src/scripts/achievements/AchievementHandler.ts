@@ -399,7 +399,7 @@ class AchievementHandler {
                 const gymRegion = subregion ? subregion : GameConstants.camelCaseToString(GameConstants.Region[GameConstants.getGymRegion(gym)]);
 
                 // Name of person's title if elite/champion, else the gym's town name + 'Gym'
-                const gymTitle: string = displayName ? displayName : !elite ? `${gym} Gym` : gym;
+                const gymTitle: string = displayName ?? !elite ? `${gym} Gym` : gym;
 
                 const leaderName: string = !elite && !displayName ? `${GymList[gym].leaderName.replace(/\d/g, '')}'s` : '';
 

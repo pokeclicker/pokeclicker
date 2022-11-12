@@ -49,7 +49,7 @@ class DefeatGymQuest extends Quest implements QuestInterface {
         if (GymList[this.gymTown]?.displayName?.includes('Trial')) {
             desc.push(`${displayName} at ${this.gymTown}`);
         } else if (displayName || elite) {
-            desc.push(displayName ? displayName : this.gymTown);
+            desc.push(displayName ?? this.gymTown);
         } else {
             desc.push(`${leaderName}'s ${this.gymTown} Gym`);
         }
