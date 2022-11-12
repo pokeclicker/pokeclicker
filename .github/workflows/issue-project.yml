@@ -1,0 +1,32 @@
+name: Add Issue to Project
+
+on:
+  issues:
+    types:
+      - labeled
+
+jobs:
+  approved:
+    if: github.event.label.name == 'approved'
+    uses: ./.github/workflows/add-to-project.yml
+    secrets: inherit
+    with:
+      project-url: https://github.com/orgs/pokeclicker/projects/1
+      
+  suggestion:
+    if: github.event.label.name == 'suggestion'
+    uses: ./.github/workflows/add-to-project.yml
+    secrets: inherit
+    with:
+      project-url: https://github.com/orgs/pokeclicker/projects/2
+      field-keys: Created On,Iteration
+      field-values: ${{ github.event.issue.created_at }},[1]
+  
+  bug:
+    if: github.event.label.name == 'bug'
+    uses: ./.github/workflows/add-to-project.yml
+    secrets: inherit
+    with:
+      project-url: https://github.com/orgs/pokeclicker/projects/3
+      field-keys: Created On
+      field-values: ${{ github.event.issue.created_at }}

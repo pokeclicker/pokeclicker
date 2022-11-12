@@ -98,6 +98,7 @@ import HatcheryHelperRequirement from './requirements/HatcheryHelperRequirement'
 import MoneyRequirement from './requirements/MoneyRequirement';
 import MaxLevelOakItemRequirement from './requirements/MaxLevelOakItemRequirement';
 import MaxRegionRequirement from './requirements/MaxRegionRequirement';
+import ObtainedPokemonRequirement from './requirements/ObtainedPokemonRequirement';
 import PokeballRequirement from './requirements/PokeballRequirement';
 import PokerusStatusRequirement from './requirements/PokerusStatusRequirement';
 import ProteinObtainRequirement from './requirements/ProteinObtainRequirement';
@@ -128,7 +129,14 @@ import TemporaryBattleRequirement from './requirements/TemporaryBattleRequiremen
 import Translate from './translation/Translation';
 import DayOfWeekRequirement from './requirements/DayOfWeekRequirement';
 import SaveReminder from './saveReminder/SaveReminder';
+import ClientRequirement from './requirements/ClientRequirement';
 import lazyLoad from './utilities/LazyLoader';
+import {
+    beforeEvolve, EvoTrigger, LevelEvolution, StoneEvolution,
+} from './pokemons/evolutions/Base';
+import * as OtherEvos from './pokemons/evolutions/Methods';
+import { pokemonBabyPrevolutionMap, pokemonList, pokemonMap } from './pokemons/PokemonList';
+import { TmpPokemonHelper } from './pokemons/PokemonHelper';
 import PokedexFilters from './settings/PokedexFilters';
 import { createLogContent } from './logbook/helpers';
 import { ItemList } from './items/ItemList';
@@ -243,6 +251,7 @@ Object.assign(<any>window, {
     MoneyRequirement,
     MaxLevelOakItemRequirement,
     MaxRegionRequirement,
+    ObtainedPokemonRequirement,
     PokeballRequirement,
     PokerusStatusRequirement,
     ProteinObtainRequirement,
@@ -274,7 +283,17 @@ Object.assign(<any>window, {
     Translate,
     DayOfWeekRequirement,
     SaveReminder,
+    ClientRequirement,
     lazyLoad,
+    LevelEvolution,
+    StoneEvolution,
+    EvoTrigger,
+    beforeEvolve,
+    ...OtherEvos,
+    pokemonList,
+    pokemonMap,
+    pokemonBabyPrevolutionMap,
+    TmpPokemonHelper,
     PokedexFilters,
     ItemList,
     Item,

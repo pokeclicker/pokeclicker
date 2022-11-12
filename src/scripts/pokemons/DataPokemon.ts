@@ -5,7 +5,7 @@ class DataPokemon implements PokemonInterface {
         public id: number,
         public name: PokemonNameType,
         public catchRate: number,
-        public evolutions: Evolution[],
+        public evolutions: EvoData[],
         public type1: PokemonType,
         public type2: PokemonType,
         public attack: number,
