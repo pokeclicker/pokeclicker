@@ -3845,6 +3845,15 @@ const CamphrierFlabébéEnthusiast = new NPC('Flabébé Enthusiast', [
     'They simply can\'t resist berries that match their colors - just plant a few and they\'ll soon come wandering in.',
 ]);
 
+const SharlourKorrina = new NPC('Korrina', [
+    'To Mega Evolve your Lucario, you need a stronger bond.',
+    'You can follow your progress in your Pokédex.',
+    'When your bond is strong enough, you can buy a Key Stone in this city!',
+], {
+    image: 'assets/images/gymLeaders/Korrina.png',
+    requirement: new TemporaryBattleRequirement('Korrina'),
+});
+
 const CoumarineBirdwatcher = new NPC('Birdwatcher', [
     'I\'ve heard there is a cave you can find if you go out on the ocean a little ways.',
     'Apparently defeating a strong creature there unleashes some energy.',
@@ -3986,7 +3995,7 @@ TownList['Shalour City'] = new Town(
     [ShalourCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Shalour City']), TemporaryBattleList.Korrina, TemporaryBattleList.Riot, TemporaryBattleList['Millis and Argus Steel']],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Reflection Cave'))],
-        npcs: [ExamineAegislash, ThanksDiancie],
+        npcs: [SharlourKorrina, ExamineAegislash, ThanksDiancie],
     }
 );
 TownList['Coumarine City'] = new Town(
