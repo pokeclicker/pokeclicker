@@ -25,15 +25,15 @@ class EvolutionStone extends CaughtIndicatingItem {
             // only include base Pokémon we have caught
             .filter(p => PartyController.getCaughtStatusByName(p.name))
             // Map to the evolution which uses this stone type
-            .map((p: PokemonListData) => p.evolutions.filter(e => e.type.includes(EvolutionType.Stone) && (e as StoneEvolution).stone === this.type))
+            .map((p: PokemonListData) => p.evolutions.filter(e => e.trigger === EvoTrigger.STONE && (e as StoneEvoData).stone === this.type))
             // Flatten the array (in case of multiple evolutions)
             .flat()
             // Ensure the we actually found an evolution
             .filter(evolution => evolution)
             // Filter out any Pokémon which can't be obtained yet (future region)
-            .filter(evolution => PokemonHelper.calcNativeRegion(evolution.getEvolvedPokemon()) <= player.highestRegion())
+            .filter(evolution => PokemonHelper.calcNativeRegion(evolution.evolvedPokemon) <= player.highestRegion())
             // Finally get the evolution
-            .map(evolution => evolution.getEvolvedPokemon());
+            .map(evolution => evolution.evolvedPokemon);
 
         if (unlockedEvolutions.length == 0) {
             return undefined;
@@ -56,10 +56,10 @@ class EvolutionStone extends CaughtIndicatingItem {
             // Filter to only include pokemon that make use of this evolution stone
             (p as PokemonListData).nativeRegion > GameConstants.Region.none
             && (p as PokemonListData).evolutions != undefined
-            && (p as PokemonListData).evolutions.some((e) => e instanceof StoneEvolution && e.stone == this.type)).map((p) =>
+            && (p as PokemonListData).evolutions.some(e => e.trigger === EvoTrigger.STONE && (e as StoneEvoData).stone == this.type)).map((p) =>
             // Map to the native region for evolutions that use this stone
-            Math.min(...(p as PokemonListData).evolutions.filter((e) => e instanceof StoneEvolution && e.stone == this.type)
-                .map((e) => Math.max((p as PokemonListData).nativeRegion, PokemonHelper.calcNativeRegion(e.getEvolvedPokemon())))
+            Math.min(...(p as PokemonListData).evolutions.filter(e => e.trigger === EvoTrigger.STONE && (e as StoneEvoData).stone == this.type)
+                .map((e) => Math.max((p as PokemonListData).nativeRegion, PokemonHelper.calcNativeRegion(e.evolvedPokemon)))
                 .filter((r) => r > GameConstants.Region.none))));
     }
 }
