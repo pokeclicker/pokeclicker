@@ -10,6 +10,18 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.10.1
+    new ChangelogUpdate('v0.10.1', new Date(2022, 9, 31)),
+    new Changelog(changelogType.NEW, 'Spooky Togepi evolution line'),
+    new Changelog(changelogType.CHANGE, 'Increased chance of undiscovered fossils appearing in the Underground'),
+    new Changelog(changelogType.CHANGE, 'Adjusted held item drop locations'),
+    new Changelog(changelogType.CHANGE, 'Adjusted battle café spins per day'),
+    new Changelog(changelogType.CHANGE, 'More profile options'),
+    new Changelog(changelogType.CHANGE, 'Misc text changes'),
+    new Changelog(changelogType.CHANGE, 'Misc UI changes'),
+    new Changelog(changelogType.CHANGE, 'Misc image changes'),
+    new Changelog(changelogType.FIXED, 'Some people not being able to create a new save'),
+
     // v0.10.0
     new ChangelogUpdate('v0.10.0 - Galar', new Date(2022, 9, 22)),
     new Changelog(changelogType.NEW, 'The Galar region is now available'),

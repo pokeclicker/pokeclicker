@@ -41,6 +41,12 @@
   }
 }
 
+#breeding-helpers {
+  .progress {
+    height: 25px;
+  }
+}
+
 .breedingListItem {
   text-align: left;
   margin-bottom: 3px;
@@ -58,7 +64,6 @@
 }
 
 .eggSlot {
-  white-space: nowrap;
   box-sizing: border-box;
   background-image: url('../assets/images/breeding/breedingSlot.png');
   background-repeat: no-repeat;
@@ -67,6 +72,27 @@
   &.disabled {
     opacity: .5;
     pointer-events: none;
+  }
+  .breedingListPokemonName {
+    top: 0px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+  }
+  .breedingListShiny {
+    position: absolute;
+    right: 2px;
+    bottom: 35px;
+  }
+  .breedingListPokerus {
+    position: absolute;
+    display: flex;
+    right: 2px;
+    bottom: 7px;
+  }
+  .breedingListDisplayValue {
+    bottom: 0px;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
   }
   .content {
     position: absolute;
@@ -252,7 +278,7 @@
 .pokemonCategory {
   position: absolute !important;
   left: 2px;
-  top: -2px;
+  bottom: 18px;
   height: 24px;
   padding-top: 4px;
 

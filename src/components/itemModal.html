@@ -41,7 +41,7 @@
                                     <button class="btn btn-secondary smallButton list-group-item-action" style="padding-right:15px"
                                             data-bind="click: function() {ItemHandler.pokemonSelected(name)}, css:{ 'pokemon-selected': ItemHandler.pokemonSelected() === name}">
                                         <img class="smallImage" data-bind="attr:{src: 'assets/images/' + (App.game.party.alreadyCaughtPokemon($data.id, true) ? 'shiny' : '') + 'pokemon/' + id +'.png' }"/>
-                                        <span data-bind="text: name" style="margin-left: 20px">Name</span>
+                                        <span data-bind="text: displayName" style="margin-left: 20px">Name</span>
 
                                         <span style="float:right; margin-top:8px"  data-bind="using: { statuses: PartyController.getStoneEvolutionsCaughtStatus($data.id, GameConstants.StoneType[ItemHandler.stoneSelected()]) }">
                                             <div class="row" data-bind="foreach: statuses">

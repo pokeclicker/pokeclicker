@@ -5,6 +5,7 @@ class BattlePokemon implements EnemyPokemonInterface {
     health: KnockoutObservable<number>;
     maxHealth: KnockoutObservable<number>;
     healthPercentage: KnockoutObservable<number>;
+    _displayName: KnockoutObservable<string>;
 
     /**
      * In case you want to manually create a Pokémon instead of generating it from the route number
@@ -41,6 +42,7 @@ class BattlePokemon implements EnemyPokemonInterface {
         this.health = ko.observable(maxHealth);
         this.maxHealth = ko.observable(maxHealth);
         this.healthPercentage = ko.observable(100);
+        this._displayName = PokemonHelper.displayName(name);
     }
 
     public isAlive(): boolean {
@@ -66,16 +68,23 @@ class BattlePokemon implements EnemyPokemonInterface {
         if (this.heldItem) {
             const name = BagHandler.displayName(this.heldItem);
             BagHandler.gainItem(this.heldItem);
-            const msg = `${this.name} dropped ${GameHelper.anOrA(name)} ${name}!`;
+            const msg = `${this.displayName} dropped ${GameHelper.anOrA(name)} ${name}!`;
             Notifier.notify({
                 message: `The enemy ${msg} <img src="${BagHandler.image(this.heldItem)}" height="24px"/>`,
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.Items.dropped_item,
             });
-            App.game.logbook.newLog(LogBookTypes.FOUND, `An enemy ${msg}`);
+            App.game.logbook.newLog(
+                LogBookTypes.FOUND,
+                createLogContent.enemyDrop({ pokemon: this.name, item: name })
+            );
         }
         App.game.party.gainExp(this.exp, this.level, trainer);
         App.game.gems.gainGems(this.gemReward, this.type1);
         App.game.gems.gainGems(this.gemReward, this.type2);
+    }
+
+    get displayName(): string {
+        return this._displayName();
     }
 }
