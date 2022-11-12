@@ -98,6 +98,7 @@ ItemList.Key_stone          = new EvolutionStone(GameConstants.StoneType.Key_sto
 ItemList.Ice_stone         = new EvolutionStone(GameConstants.StoneType.Ice_stone, 2500, undefined , 'Ice Stone');
 ItemList.Solar_light       = new EvolutionStone(GameConstants.StoneType.Solar_light, 2500, undefined, 'Solar Light');
 ItemList.Lunar_light       = new EvolutionStone(GameConstants.StoneType.Lunar_light, 2500, undefined, 'Lunar Light');
+ItemList.Pure_light       = new EvolutionStone(GameConstants.StoneType.Pure_light, 2500, undefined, 'Pure Light');
 ItemList.Sweet_apple       = new EvolutionStone(GameConstants.StoneType.Sweet_apple, 5000, undefined , 'Sweet Apple');
 ItemList.Tart_apple        = new EvolutionStone(GameConstants.StoneType.Tart_apple, 5000, undefined , 'Tart Apple');
 ItemList.Cracked_pot       = new EvolutionStone(GameConstants.StoneType.Cracked_pot, 5000, undefined , 'Cracked Pot');

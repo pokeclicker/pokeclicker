@@ -4339,8 +4339,9 @@ const LanakilaColress = new NPC('Colress', [
     'Yes, in short, it makes it possible for Necrozma to fuse with the light of the Legendary Pokémon Solgaleo! This is the Colress Machine No. 1198, officially dubbed the N-Solarizer!',
     '<img src="assets/images/npcs/textbody/N-Lunarizer.png">',
     'In addition, this is the Colress Machine No. 1199, officially dubbed the N-Lunarizer! It makes it possible for Necrozma to fuse with the light of the Legendary Pokémon, Lunala!',
-    'If you wish to make use of them, you will require light from Solgaleo and Lunala respectively. I believe that they may drop the crystallised form of this light if you defeat them in battle!',
-    'I believe that a Trainer like you will be able to use both Alola\'s Legendary Pokémon and the fearsome power of Necrozma properly! I happen to know quite a bit about Pokémon fusion myself... But that is a different tale. Good luck in your battles!',
+    'If you wish to make use of them, you will require light from Solgaleo and Lunala respectively. I believe that they may drop the crystallised form of this light if you defeat them in battle! I believe each of them will be able to make good use of their own light, as well.',
+    'I believe Necrozma may drop a crystal of its own light, as well. Although I doubt it can make any use of it in its current state. Perhaps if it was already fused with the light of Solgaleo or Lunala....',
+    'At any rate, I believe that a Trainer like you will be able to use both Alola\'s Legendary Pokémon and the fearsome power of Necrozma properly! I happen to know quite a bit about Pokémon fusion myself... But that is a different tale. Good luck in your battles!',
 ], {
     image: 'assets/images/trainers/Team Plasma (colress).png',
     requirement: new ObtainedPokemonRequirement('Necrozma'),
