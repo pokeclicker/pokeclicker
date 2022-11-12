@@ -393,19 +393,26 @@ class AchievementHandler {
          */
         const addGymAchievements = (gyms: string[], category: GameConstants.Region | GameConstants.ExtraAchievementCategories, subregion?: string) => {
             gyms.forEach(gym => {
+                const elite = gym.includes('Elite') || gym.includes('Champion');
                 const displayName = GymList[gym]?.displayName;
-
-                // Name of person's title if elite/champion, else the gym's town name
-                const gymTitle: string = gym.includes('Elite') || gym.includes('Champion') || gym.includes('Gym') ? gym.replace(/\d/g, '') : `${gym.replace(/\d/g, '')} Gym`;
-
-                const leaderName: string = !gym.includes('Elite') && !gym.includes('Champion') && !gym.includes('Gym') ? `${GymList[gym].leaderName.replace(/\d/g, '')}'s` : '';
 
                 const gymRegion = subregion ? subregion : GameConstants.camelCaseToString(GameConstants.Region[GameConstants.getGymRegion(gym)]);
 
+                // Name of person's title if elite/champion, else the gym's town name + 'Gym'
+                const gymTitle: string = displayName ? displayName : !elite ? `${gym} Gym` : gym;
+
+                const leaderName: string = !elite && !displayName ? `${GymList[gym].leaderName.replace(/\d/g, '')}'s` : '';
+
                 if (GymList[gym]?.flags?.achievement) {
-                    AchievementHandler.addAchievement(`${gymTitle} Regular`, `Defeat ${displayName ? displayName : `${leaderName} ${gymTitle}`} in ${gymRegion} 10 times.`, new ClearGymRequirement(GameConstants.ACHIEVEMENT_DEFEAT_GYM_VALUES[0], GameConstants.getGymIndex(gym)), 1, category);
-                    AchievementHandler.addAchievement(`${gymTitle} Ruler`, `Defeat ${displayName ? displayName : `${leaderName} ${gymTitle}`} in ${gymRegion} 100 times.`, new ClearGymRequirement(GameConstants.ACHIEVEMENT_DEFEAT_GYM_VALUES[1], GameConstants.getGymIndex(gym)), 2, category);
-                    AchievementHandler.addAchievement(`${gymTitle} Owner`, `Defeat ${displayName ? displayName : `${leaderName} ${gymTitle}`} in ${gymRegion} 1,000 times.`, new ClearGymRequirement(GameConstants.ACHIEVEMENT_DEFEAT_GYM_VALUES[2], GameConstants.getGymIndex(gym)), 3, category);
+                    AchievementHandler.addAchievement(
+                        `${elite ? gymRegion : ''} ${gymTitle} Regular`,
+                        `Defeat ${leaderName} ${gymTitle} in ${gymRegion} 10 times.`, new ClearGymRequirement(GameConstants.ACHIEVEMENT_DEFEAT_GYM_VALUES[0], GameConstants.getGymIndex(gym)), 1, category);
+                    AchievementHandler.addAchievement(
+                        `${elite ? gymRegion : ''} ${gymTitle} Ruler`,
+                        `Defeat ${leaderName} ${gymTitle} in ${gymRegion} 100 times.`, new ClearGymRequirement(GameConstants.ACHIEVEMENT_DEFEAT_GYM_VALUES[1], GameConstants.getGymIndex(gym)), 2, category);
+                    AchievementHandler.addAchievement(
+                        `${elite ? gymRegion : ''} ${gymTitle} Owner`,
+                        `Defeat ${leaderName} ${gymTitle} in ${gymRegion} 1,000 times.`, new ClearGymRequirement(GameConstants.ACHIEVEMENT_DEFEAT_GYM_VALUES[2], GameConstants.getGymIndex(gym)), 3, category);
                 }
             });
         };

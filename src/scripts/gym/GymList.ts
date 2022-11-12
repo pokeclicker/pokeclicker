@@ -368,7 +368,8 @@ GymList['Elite Koga'] = new Gym(
     BadgeEnums.Elite_Koga,
     7500,
     'I subjected you to everything I could muster. But my efforts failed. I must hone my skills. Go on to the next room, and put your abilities to the test!',
-    [new GymBadgeRequirement(BadgeEnums.Elite_Will)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_Will)],
+    undefined, undefined, 'Elite Koga'
 );
 GymList['Elite Bruno2'] = new Gym(
     'Bruno2',
@@ -383,7 +384,8 @@ GymList['Elite Bruno2'] = new Gym(
     BadgeEnums.Elite_Bruno2,
     7500,
     'Having lost, I have no right to say anything… Go face your next challenge!',
-    [new GymBadgeRequirement(BadgeEnums.Elite_Koga)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_Koga)],
+    undefined, undefined, 'Elite Bruno'
 );
 GymList['Elite Karen'] = new Gym(
     'Karen',
@@ -688,7 +690,8 @@ GymList['Supreme Gym Leader Drake'] = new Gym(
     ],
     BadgeEnums.Elite_OrangeChampion,
     4800,
-    'You really deserve that trophy. You\'re a great Pokémon trainer.'
+    'You really deserve that trophy. You\'re a great Pokémon trainer.',
+    undefined, undefined, undefined, 'Supreme Gym Leader Drake'
 );
 
 //Sinnoh Gyms
@@ -1581,7 +1584,6 @@ GymList['Champion Hau'] = new Champion(
 );
 
 //Galar Leaders
-//TODO Addition of G-Max forms?
 GymList.Turffield = new Gym(
     'Milo',
     'Turffield',
@@ -1638,7 +1640,7 @@ GymList['Stow-on-Side1'] = new Gym(
         if (App.game.badgeCase.hasBadge(BadgeEnums.Galar_Ghost)) {
             App.game.quests.getQuestLine('The Darkest Day').beginQuest();
         }
-    }
+    }, undefined, 'Bea\'s Stow-on-Side Gym'
 );
 GymList['Stow-on-Side2'] = new Gym(
     'Allister',
@@ -1658,7 +1660,7 @@ GymList['Stow-on-Side2'] = new Gym(
         if (App.game.badgeCase.hasBadge(BadgeEnums.Galar_Fighting)) {
             App.game.quests.getQuestLine('The Darkest Day').beginQuest();
         }
-    }
+    }, undefined, 'Allister\'s Stow-on-Side Gym'
 );
 GymList.Ballonlea = new Gym(
     'Opal',
@@ -1686,7 +1688,8 @@ GymList.Circhester1 = new Gym(
     BadgeEnums.Galar_Rock,
     80000,
     'I just want to climb into a hole... Well, I guess it\'d be more like falling from here.',
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 26)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 26)],
+    undefined, undefined, 'Gordie\'s Circhester Gym'
 );
 GymList.Circhester2 = new Gym(
     'Melony',
@@ -1700,7 +1703,8 @@ GymList.Circhester2 = new Gym(
     BadgeEnums.Galar_Ice,
     80000,
     'I think you took breaking the ice a little too literally...',
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 26)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 26)],
+    undefined, undefined, 'Melony\'s Circhester Gym'
 );
 GymList.Spikemuth = new Gym(
     'Piers',
