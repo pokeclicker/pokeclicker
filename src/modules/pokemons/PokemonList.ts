@@ -1,70 +1,92 @@
-/// <reference path="../party/evolutions/EvolutionMethods.ts" />
-/// <reference path="../party/evolutions/WeatherRestrictedLevelEvolution.ts" />
-/// <reference path="../party/evolutions/HeldItemLevelEvolution.ts" />
-/// <reference path="../GameConstants.d.ts" />
-/// <reference path="../../declarations/weather/WeatherType.d.ts" />
-/// <reference path="../../declarations/enums/PokemonType.d.ts" />
-/// <reference path="../../declarations/interfaces/BagItem.d.ts" />
-/// <reference path="../../declarations/utilities/Rand.d.ts" />
-/// <reference path="../../declarations/enums/BerryType.d.ts"/>
+/* eslint-disable no-param-reassign */
+/* eslint-disable quote-props */
+import {
+    QuestlineLevelEvolution,
+    NightTimedLevelEvolution,
+    RegionStoneEvolution,
+    DungeonRestrictedLevelEvolution,
+    HeldItemLevelEvolution,
+    RegionLevelEvolution,
+    RegionNightTimedLevelEvolution,
+    DayTimedStoneEvolution,
+    NightTimedStoneEvolution,
+    EnvironmentRestrictedLevelEvolution,
+    WeatherRestrictedLevelEvolution,
+    DayTimedLevelEvolution,
+    TimeRestrictedLevelEvolution,
+} from './evolutions/Methods';
+import BerryType from '../enums/BerryType';
+import ItemType from '../enums/ItemType';
+import PokemonType from '../enums/PokemonType';
+import {
+    Region, StoneType, Genders, MaxIDPerRegion,
+} from '../GameConstants';
+import BagItem from '../interfaces/BagItem';
+import { EvoData, LevelEvolution, StoneEvolution } from './evolutions/Base';
+import LevelType from '../party/LevelType';
+import GenericProxy from '../utilities/GenericProxy';
+import Rand from '../utilities/Rand';
+import WeatherType from '../weather/WeatherType';
+import { PokemonNameType } from './PokemonNameType';
+import { setPokemonMap } from './mapProvider';
 
-const pokemonBabyPrevolutionMap: { [name: string]: PokemonNameType } = {};
+export const pokemonBabyPrevolutionMap: { [name: string]: PokemonNameType } = {};
 
-//For regional evolutions, so it evolves in the respective region and not with a random chance
-const alolaOnly: Array<GameConstants.Region> = [GameConstants.Region.alola];
-const galarOnly: Array<GameConstants.Region> = [GameConstants.Region.galar];
-const allButAlola: Array<GameConstants.Region> = [
-    GameConstants.Region.kanto,
-    GameConstants.Region.johto,
-    GameConstants.Region.hoenn,
-    GameConstants.Region.sinnoh,
-    GameConstants.Region.unova,
-    GameConstants.Region.kalos,
-    GameConstants.Region.galar,
+// For regional evolutions, so it evolves in the respective region and not with a random chance
+const alolaOnly: Array<Region> = [Region.alola];
+const galarOnly: Array<Region> = [Region.galar];
+const allButAlola: Array<Region> = [
+    Region.kanto,
+    Region.johto,
+    Region.hoenn,
+    Region.sinnoh,
+    Region.unova,
+    Region.kalos,
+    Region.galar,
 ];
-const allButGalar: Array<GameConstants.Region> = [
-    GameConstants.Region.kanto,
-    GameConstants.Region.johto,
-    GameConstants.Region.hoenn,
-    GameConstants.Region.sinnoh,
-    GameConstants.Region.unova,
-    GameConstants.Region.kalos,
-    GameConstants.Region.alola,
+const allButGalar: Array<Region> = [
+    Region.kanto,
+    Region.johto,
+    Region.hoenn,
+    Region.sinnoh,
+    Region.unova,
+    Region.kalos,
+    Region.alola,
 ];
 
-type PokemonListData = {
-  id: number;
-  name: PokemonNameType;
-  nativeRegion?: GameConstants.Region;
-  catchRate: number;
-  evolutions?: Evolution[];
-  type: PokemonType[];
-  base: {
-    hitpoints: number;
-    attack: number;
-    specialAttack: number;
-    defense: number;
-    specialDefense: number;
-    speed: number;
-  };
-  levelType: LevelType;
-  exp: number;
-  eggCycles: number;
-  baby?: boolean;
-  attack?: number;
-  heldItem?: BagItem;
-  gender?: {
-    type?: number;
-    femaleRatio?: number;
-    visualDifference?: boolean;
-  }
-}
+export type PokemonListData = {
+    id: number;
+    name: PokemonNameType;
+    nativeRegion?: Region;
+    catchRate: number;
+    evolutions?: EvoData[];
+    type: PokemonType[];
+    base: {
+        hitpoints: number;
+        attack: number;
+        specialAttack: number;
+        defense: number;
+        specialDefense: number;
+        speed: number;
+    };
+    levelType: LevelType;
+    exp: number;
+    eggCycles: number;
+    baby?: boolean;
+    attack?: number;
+    heldItem?: BagItem;
+    gender?: {
+        type?: number;
+        femaleRatio?: number;
+        visualDifference?: boolean;
+    }
+};
 
 function createPokemonArray<T extends readonly PokemonListData[] & Array<{name: V}>, V extends string>(...args: T) {
     return args;
 }
 
-const pokemonList = createPokemonArray(
+export const pokemonList = createPokemonArray(
     {
         'id': 1,
         'name': 'Bulbasaur',
@@ -73,7 +95,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 64,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Bulbasaur', 'Ivysaur', 16)],
+        'evolutions': [LevelEvolution('Bulbasaur', 'Ivysaur', 16)],
         'base': {
             'hitpoints': 45,
             'attack': 49,
@@ -94,7 +116,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 64,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Bulbasaur (Clone)', 'Ivysaur (Clone)', 16)],
+        'evolutions': [LevelEvolution('Bulbasaur (Clone)', 'Ivysaur (Clone)', 16)],
         'base': {
             'hitpoints': 45,
             'attack': 49,
@@ -115,7 +137,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 64,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Spooky Bulbasaur', 'Spooky Ivysaur', 16)],
+        'evolutions': [LevelEvolution('Spooky Bulbasaur', 'Spooky Ivysaur', 16)],
         'base': {
             'hitpoints': 45,
             'attack': 49,
@@ -136,7 +158,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 64,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Bulbasaur (Rose)', 'Ivysaur (Rose)', 16)],
+        'evolutions': [LevelEvolution('Bulbasaur (Rose)', 'Ivysaur (Rose)', 16)],
         'base': {
             'hitpoints': 45,
             'attack': 49,
@@ -157,7 +179,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 142,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Ivysaur', 'Venusaur', 32)],
+        'evolutions': [LevelEvolution('Ivysaur', 'Venusaur', 32)],
         'base': {
             'hitpoints': 60,
             'attack': 62,
@@ -178,7 +200,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 142,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Ivysaur (Clone)', 'Venusaur (Clone)', 32)],
+        'evolutions': [LevelEvolution('Ivysaur (Clone)', 'Venusaur (Clone)', 32)],
         'base': {
             'hitpoints': 60,
             'attack': 62,
@@ -199,7 +221,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 142,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Spooky Ivysaur', 'Spooky Venusaur', 32)],
+        'evolutions': [LevelEvolution('Spooky Ivysaur', 'Spooky Venusaur', 32)],
         'base': {
             'hitpoints': 60,
             'attack': 62,
@@ -220,7 +242,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 142,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Ivysaur (Rose)', 'Venusaur (Rose)', 32)],
+        'evolutions': [LevelEvolution('Ivysaur (Rose)', 'Venusaur (Rose)', 32)],
         'base': {
             'hitpoints': 60,
             'attack': 62,
@@ -318,7 +340,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 3.4,
         'name': 'Gigantamax Venusaur',
-        'nativeRegion': GameConstants.Region.none,
+        'nativeRegion': Region.none,
         'catchRate': 45,
         'type': [PokemonType.Grass, PokemonType.Poison],
         'levelType': LevelType.mediumslow,
@@ -344,7 +366,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 62,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Charmander', 'Charmeleon', 16)],
+        'evolutions': [LevelEvolution('Charmander', 'Charmeleon', 16)],
         'base': {
             'hitpoints': 39,
             'attack': 52,
@@ -365,7 +387,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 62,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Charmander (Clone)', 'Charmeleon (Clone)', 16)],
+        'evolutions': [LevelEvolution('Charmander (Clone)', 'Charmeleon (Clone)', 16)],
         'base': {
             'hitpoints': 39,
             'attack': 52,
@@ -386,7 +408,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 142,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Charmeleon', 'Charizard', 36)],
+        'evolutions': [LevelEvolution('Charmeleon', 'Charizard', 36)],
         'base': {
             'hitpoints': 58,
             'attack': 64,
@@ -407,7 +429,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 142,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Charmeleon (Clone)', 'Charizard (Clone)', 36)],
+        'evolutions': [LevelEvolution('Charmeleon (Clone)', 'Charizard (Clone)', 36)],
         'base': {
             'hitpoints': 58,
             'attack': 64,
@@ -463,7 +485,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 6.2,
         'name': 'Gigantamax Charizard',
-        'nativeRegion': GameConstants.Region.none,
+        'nativeRegion': Region.none,
         'catchRate': 45,
         'type': [PokemonType.Fire, PokemonType.Flying],
         'levelType': LevelType.mediumslow,
@@ -489,7 +511,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 63,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Squirtle', 'Wartortle', 16)],
+        'evolutions': [LevelEvolution('Squirtle', 'Wartortle', 16)],
         'base': {
             'hitpoints': 44,
             'attack': 48,
@@ -510,7 +532,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 63,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Squirtle (Clone)', 'Wartortle (Clone)', 16)],
+        'evolutions': [LevelEvolution('Squirtle (Clone)', 'Wartortle (Clone)', 16)],
         'base': {
             'hitpoints': 44,
             'attack': 48,
@@ -531,7 +553,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 142,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Wartortle', 'Blastoise', 36)],
+        'evolutions': [LevelEvolution('Wartortle', 'Blastoise', 36)],
         'base': {
             'hitpoints': 59,
             'attack': 63,
@@ -552,7 +574,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 142,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Wartortle (Clone)', 'Blastoise (Clone)', 36)],
+        'evolutions': [LevelEvolution('Wartortle (Clone)', 'Blastoise (Clone)', 36)],
         'base': {
             'hitpoints': 59,
             'attack': 63,
@@ -608,7 +630,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 9.2,
         'name': 'Gigantamax Blastoise',
-        'nativeRegion': GameConstants.Region.none,
+        'nativeRegion': Region.none,
         'catchRate': 45,
         'type': [PokemonType.Water],
         'levelType': LevelType.mediumslow,
@@ -634,7 +656,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 39,
         'eggCycles': 15,
-        'evolutions': [new LevelEvolution('Caterpie', 'Metapod', 7)],
+        'evolutions': [LevelEvolution('Caterpie', 'Metapod', 7)],
         'base': {
             'hitpoints': 45,
             'attack': 30,
@@ -670,10 +692,10 @@ const pokemonList = createPokemonArray(
         'exp': 72,
         'eggCycles': 15,
         'evolutions': [
-            new LevelEvolution('Metapod', 'Butterfree', 10),
-            new LevelEvolution('Metapod', 'Valencian Butterfree', 10000),
-            new LevelEvolution('Metapod', 'Pink Butterfree', 10000),
-            new LevelEvolution('Metapod', 'Ash\'s Butterfree', 10000),
+            LevelEvolution('Metapod', 'Butterfree', 10),
+            LevelEvolution('Metapod', 'Valencian Butterfree', 10000),
+            LevelEvolution('Metapod', 'Pink Butterfree', 10000),
+            LevelEvolution('Metapod', 'Ash\'s Butterfree', 10000),
         ],
         'base': {
             'hitpoints': 50,
@@ -767,7 +789,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 12.04,
         'name': 'Gigantamax Butterfree',
-        'nativeRegion': GameConstants.Region.none,
+        'nativeRegion': Region.none,
         'catchRate': 45,
         'type': [PokemonType.Bug, PokemonType.Flying],
         'levelType': LevelType.mediumfast,
@@ -790,7 +812,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 39,
         'eggCycles': 15,
-        'evolutions': [new LevelEvolution('Weedle', 'Kakuna', 7)],
+        'evolutions': [LevelEvolution('Weedle', 'Kakuna', 7)],
         'base': {
             'hitpoints': 40,
             'attack': 35,
@@ -825,7 +847,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 72,
         'eggCycles': 15,
-        'evolutions': [new LevelEvolution('Kakuna', 'Beedrill', 10)],
+        'evolutions': [LevelEvolution('Kakuna', 'Beedrill', 10)],
         'base': {
             'hitpoints': 45,
             'attack': 25,
@@ -860,7 +882,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 50,
         'eggCycles': 15,
-        'evolutions': [new LevelEvolution('Pidgey', 'Pidgeotto', 18)],
+        'evolutions': [LevelEvolution('Pidgey', 'Pidgeotto', 18)],
         'base': {
             'hitpoints': 40,
             'attack': 45,
@@ -878,7 +900,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 50,
         'eggCycles': 15,
-        'evolutions': [new QuestlineLevelEvolution('Team Rocket\'s Pinkan Theme Park', 'Pinkan Pidgey', 'Pinkan Pidgeotto', 18)],
+        'evolutions': [QuestlineLevelEvolution('Team Rocket\'s Pinkan Theme Park', 'Pinkan Pidgey', 'Pinkan Pidgeotto', 18)],
         'base': {
             'hitpoints': 40,
             'attack': 45,
@@ -896,7 +918,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 122,
         'eggCycles': 15,
-        'evolutions': [new LevelEvolution('Pidgeotto', 'Pidgeot', 36)],
+        'evolutions': [LevelEvolution('Pidgeotto', 'Pidgeot', 36)],
         'base': {
             'hitpoints': 63,
             'attack': 60,
@@ -949,8 +971,8 @@ const pokemonList = createPokemonArray(
         'exp': 51,
         'eggCycles': 15,
         'evolutions': [
-            new LevelEvolution('Rattata', 'Raticate', 20),
-            new LevelEvolution('Rattata', 'Valencian Raticate', 20000),
+            LevelEvolution('Rattata', 'Raticate', 20),
+            LevelEvolution('Rattata', 'Valencian Raticate', 20000),
         ],
         'base': {
             'hitpoints': 30,
@@ -967,13 +989,13 @@ const pokemonList = createPokemonArray(
     {
         'id': 19.01,
         'name': 'Alolan Rattata',
-        'nativeRegion': GameConstants.Region.alola,
+        'nativeRegion': Region.alola,
         'catchRate': 255,
         'type': [PokemonType.Dark, PokemonType.Normal],
         'levelType': LevelType.mediumfast,
         'exp': 51,
         'eggCycles': 15,
-        'evolutions': [new NightTimedLevelEvolution('Alolan Rattata', 'Alolan Raticate', 20)],
+        'evolutions': [NightTimedLevelEvolution('Alolan Rattata', 'Alolan Raticate', 20)],
         'base': {
             'hitpoints': 30,
             'attack': 56,
@@ -1026,7 +1048,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 20.01,
         'name': 'Alolan Raticate',
-        'nativeRegion': GameConstants.Region.alola,
+        'nativeRegion': Region.alola,
         'catchRate': 127,
         'type': [PokemonType.Dark, PokemonType.Normal],
         'levelType': LevelType.mediumfast,
@@ -1044,7 +1066,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 20.02,
         'name': 'Totem Raticate',
-        'nativeRegion': GameConstants.Region.alola,
+        'nativeRegion': Region.alola,
         'catchRate': 127,
         'type': [PokemonType.Dark, PokemonType.Normal],
         'levelType': LevelType.mediumfast,
@@ -1087,7 +1109,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 52,
         'eggCycles': 15,
-        'evolutions': [new LevelEvolution('Spearow', 'Fearow', 20)],
+        'evolutions': [LevelEvolution('Spearow', 'Fearow', 20)],
         'base': {
             'hitpoints': 40,
             'attack': 60,
@@ -1140,8 +1162,8 @@ const pokemonList = createPokemonArray(
         'exp': 58,
         'eggCycles': 20,
         'evolutions': [
-            new LevelEvolution('Ekans', 'Arbok', 22),
-            new LevelEvolution('Ekans', 'Pinkan Arbok', 22000),
+            LevelEvolution('Ekans', 'Arbok', 22),
+            LevelEvolution('Ekans', 'Pinkan Arbok', 22000),
         ],
         'base': {
             'hitpoints': 35,
@@ -1195,8 +1217,8 @@ const pokemonList = createPokemonArray(
         'exp': 112,
         'eggCycles': 10,
         'evolutions': [
-            new RegionStoneEvolution(allButAlola, 'Pikachu', 'Raichu', GameConstants.StoneType.Thunder_stone),
-            new RegionStoneEvolution(alolaOnly, 'Pikachu', 'Alolan Raichu', GameConstants.StoneType.Thunder_stone),
+            RegionStoneEvolution(allButAlola, 'Pikachu', 'Raichu', StoneType.Thunder_stone),
+            RegionStoneEvolution(alolaOnly, 'Pikachu', 'Alolan Raichu', StoneType.Thunder_stone),
         ],
         'base': {
             'hitpoints': 35,
@@ -1467,7 +1489,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 25.14,
         'name': 'Gigantamax Pikachu',
-        'nativeRegion': GameConstants.Region.none,
+        'nativeRegion': Region.none,
         'catchRate': 190,
         'type': [PokemonType.Electric],
         'levelType': LevelType.mediumfast,
@@ -1490,7 +1512,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 112,
         'eggCycles': 10,
-        'evolutions': [new LevelEvolution('Detective Pikachu', 'Detective Raichu', 1234)],
+        'evolutions': [LevelEvolution('Detective Pikachu', 'Detective Raichu', 1234)],
         'base': {
             'hitpoints': 35,
             'attack': 55,
@@ -1526,7 +1548,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 26.01,
         'name': 'Alolan Raichu',
-        'nativeRegion': GameConstants.Region.alola,
+        'nativeRegion': Region.alola,
         'catchRate': 75,
         'type': [PokemonType.Electric, PokemonType.Psychic],
         'levelType': LevelType.mediumfast,
@@ -1566,7 +1588,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 60,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Sandshrew', 'Sandslash', 22)],
+        'evolutions': [LevelEvolution('Sandshrew', 'Sandslash', 22)],
         'base': {
             'hitpoints': 50,
             'attack': 75,
@@ -1579,13 +1601,13 @@ const pokemonList = createPokemonArray(
     {
         'id': 27.01,
         'name': 'Alolan Sandshrew',
-        'nativeRegion': GameConstants.Region.alola,
+        'nativeRegion': Region.alola,
         'catchRate': 255,
         'type': [PokemonType.Ice, PokemonType.Steel],
         'levelType': LevelType.mediumfast,
         'exp': 60,
         'eggCycles': 20,
-        'evolutions': [new StoneEvolution('Alolan Sandshrew', 'Alolan Sandslash', GameConstants.StoneType.Ice_stone)],
+        'evolutions': [StoneEvolution('Alolan Sandshrew', 'Alolan Sandslash', StoneType.Ice_stone)],
         'base': {
             'hitpoints': 50,
             'attack': 75,
@@ -1615,7 +1637,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 28.01,
         'name': 'Alolan Sandslash',
-        'nativeRegion': GameConstants.Region.alola,
+        'nativeRegion': Region.alola,
         'catchRate': 90,
         'type': [PokemonType.Ice, PokemonType.Steel],
         'levelType': LevelType.mediumfast,
@@ -1638,7 +1660,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 55,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Nidoran(F)', 'Nidorina', 16)],
+        'evolutions': [LevelEvolution('Nidoran(F)', 'Nidorina', 16)],
         'base': {
             'hitpoints': 55,
             'attack': 47,
@@ -1679,7 +1701,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 128,
         'eggCycles': 20,
-        'evolutions': [new StoneEvolution('Nidorina', 'Nidoqueen', GameConstants.StoneType.Moon_stone)],
+        'evolutions': [StoneEvolution('Nidorina', 'Nidoqueen', StoneType.Moon_stone)],
         'base': {
             'hitpoints': 70,
             'attack': 62,
@@ -1720,7 +1742,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 55,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Nidoran(M)', 'Nidorino', 16)],
+        'evolutions': [LevelEvolution('Nidoran(M)', 'Nidorino', 16)],
         'base': {
             'hitpoints': 46,
             'attack': 57,
@@ -1762,8 +1784,8 @@ const pokemonList = createPokemonArray(
         'exp': 128,
         'eggCycles': 20,
         'evolutions': [
-            new StoneEvolution('Nidorino', 'Nidoking', GameConstants.StoneType.Moon_stone),
-            new LevelEvolution('Nidorino', 'Pinkan Nidoking', 33000),
+            StoneEvolution('Nidorino', 'Nidoking', StoneType.Moon_stone),
+            LevelEvolution('Nidorino', 'Pinkan Nidoking', 33000),
         ],
         'base': {
             'hitpoints': 61,
@@ -1825,7 +1847,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 113,
         'eggCycles': 10,
-        'evolutions': [new StoneEvolution('Clefairy', 'Clefable', GameConstants.StoneType.Moon_stone)],
+        'evolutions': [StoneEvolution('Clefairy', 'Clefable', StoneType.Moon_stone)],
         'base': {
             'hitpoints': 70,
             'attack': 45,
@@ -1834,7 +1856,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 65,
             'speed': 35,
         },
-        'heldItem': {type: ItemType.item, id: 'Moon_stone'},
+        'heldItem': { type: ItemType.item, id: 'Moon_stone' },
         'gender': {
             'femaleRatio': 0.75,
         },
@@ -1855,7 +1877,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 90,
             'speed': 60,
         },
-        'heldItem': {type: ItemType.item, id: 'Moon_stone'},
+        'heldItem': { type: ItemType.item, id: 'Moon_stone' },
         'gender': {
             'femaleRatio': 0.75,
         },
@@ -1868,7 +1890,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 60,
         'eggCycles': 20,
-        'evolutions': [new StoneEvolution('Vulpix', 'Ninetales', GameConstants.StoneType.Fire_stone)],
+        'evolutions': [StoneEvolution('Vulpix', 'Ninetales', StoneType.Fire_stone)],
         'base': {
             'hitpoints': 38,
             'attack': 41,
@@ -1884,13 +1906,13 @@ const pokemonList = createPokemonArray(
     {
         'id': 37.01,
         'name': 'Alolan Vulpix',
-        'nativeRegion': GameConstants.Region.alola,
+        'nativeRegion': Region.alola,
         'catchRate': 190,
         'type': [PokemonType.Ice],
         'levelType': LevelType.mediumfast,
         'exp': 60,
         'eggCycles': 20,
-        'evolutions': [new StoneEvolution('Alolan Vulpix', 'Alolan Ninetales', GameConstants.StoneType.Ice_stone)],
+        'evolutions': [StoneEvolution('Alolan Vulpix', 'Alolan Ninetales', StoneType.Ice_stone)],
         'base': {
             'hitpoints': 38,
             'attack': 41,
@@ -1926,7 +1948,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 38.01,
         'name': 'Alolan Ninetales',
-        'nativeRegion': GameConstants.Region.alola,
+        'nativeRegion': Region.alola,
         'catchRate': 75,
         'type': [PokemonType.Ice, PokemonType.Fairy],
         'levelType': LevelType.mediumfast,
@@ -1952,7 +1974,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 95,
         'eggCycles': 10,
-        'evolutions': [new StoneEvolution('Jigglypuff', 'Wigglytuff', GameConstants.StoneType.Moon_stone)],
+        'evolutions': [StoneEvolution('Jigglypuff', 'Wigglytuff', StoneType.Moon_stone)],
         'base': {
             'hitpoints': 115,
             'attack': 45,
@@ -1993,7 +2015,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 49,
         'eggCycles': 15,
-        'evolutions': [new LevelEvolution('Zubat', 'Golbat', 22)],
+        'evolutions': [LevelEvolution('Zubat', 'Golbat', 22)],
         'base': {
             'hitpoints': 40,
             'attack': 45,
@@ -2014,7 +2036,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 159,
         'eggCycles': 15,
-        'evolutions': [new StoneEvolution('Golbat', 'Crobat', GameConstants.StoneType.Soothe_bell)],
+        'evolutions': [StoneEvolution('Golbat', 'Crobat', StoneType.Soothe_bell)],
         'base': {
             'hitpoints': 75,
             'attack': 80,
@@ -2035,7 +2057,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 64,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Oddish', 'Gloom', 21)],
+        'evolutions': [LevelEvolution('Oddish', 'Gloom', 21)],
         'base': {
             'hitpoints': 45,
             'attack': 50,
@@ -2071,10 +2093,10 @@ const pokemonList = createPokemonArray(
         'exp': 138,
         'eggCycles': 20,
         'evolutions': [
-            new StoneEvolution('Gloom', 'Vileplume', GameConstants.StoneType.Leaf_stone),
-            new LevelEvolution('Gloom', 'Valencian Vileplume', 44000),
-            new LevelEvolution('Gloom', 'Pinkan Vileplume', 44000),
-            new StoneEvolution('Gloom', 'Bellossom', GameConstants.StoneType.Sun_stone),
+            StoneEvolution('Gloom', 'Vileplume', StoneType.Leaf_stone),
+            LevelEvolution('Gloom', 'Valencian Vileplume', 44000),
+            LevelEvolution('Gloom', 'Pinkan Vileplume', 44000),
+            StoneEvolution('Gloom', 'Bellossom', StoneType.Sun_stone),
         ],
         'base': {
             'hitpoints': 60,
@@ -2153,7 +2175,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 57,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Paras', 'Parasect', 24)],
+        'evolutions': [LevelEvolution('Paras', 'Parasect', 24)],
         'base': {
             'hitpoints': 35,
             'attack': 70,
@@ -2222,7 +2244,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 61,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Venonat', 'Venomoth', 31)],
+        'evolutions': [LevelEvolution('Venonat', 'Venomoth', 31)],
         'base': {
             'hitpoints': 60,
             'attack': 55,
@@ -2274,7 +2296,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 53,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Diglett', 'Dugtrio', 26)],
+        'evolutions': [LevelEvolution('Diglett', 'Dugtrio', 26)],
         'base': {
             'hitpoints': 10,
             'attack': 55,
@@ -2287,13 +2309,13 @@ const pokemonList = createPokemonArray(
     {
         'id': 50.01,
         'name': 'Alolan Diglett',
-        'nativeRegion': GameConstants.Region.alola,
+        'nativeRegion': Region.alola,
         'catchRate': 255,
         'type': [PokemonType.Ground, PokemonType.Steel],
         'levelType': LevelType.mediumfast,
         'exp': 53,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Alolan Diglett', 'Alolan Dugtrio', 26)],
+        'evolutions': [LevelEvolution('Alolan Diglett', 'Alolan Dugtrio', 26)],
         'base': {
             'hitpoints': 10,
             'attack': 55,
@@ -2340,7 +2362,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 51.01,
         'name': 'Alolan Dugtrio',
-        'nativeRegion': GameConstants.Region.alola,
+        'nativeRegion': Region.alola,
         'catchRate': 50,
         'type': [PokemonType.Ground, PokemonType.Steel],
         'levelType': LevelType.mediumfast,
@@ -2363,7 +2385,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 58,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Meowth', 'Persian', 28)],
+        'evolutions': [LevelEvolution('Meowth', 'Persian', 28)],
         'base': {
             'hitpoints': 40,
             'attack': 45,
@@ -2376,13 +2398,13 @@ const pokemonList = createPokemonArray(
     {
         'id': 52.01,
         'name': 'Alolan Meowth',
-        'nativeRegion': GameConstants.Region.alola,
+        'nativeRegion': Region.alola,
         'catchRate': 255,
         'type': [PokemonType.Dark],
         'levelType': LevelType.mediumfast,
         'exp': 58,
         'eggCycles': 20,
-        'evolutions': [new StoneEvolution('Alolan Meowth', 'Alolan Persian', GameConstants.StoneType.Soothe_bell)],
+        'evolutions': [StoneEvolution('Alolan Meowth', 'Alolan Persian', StoneType.Soothe_bell)],
         'base': {
             'hitpoints': 40,
             'attack': 35,
@@ -2395,13 +2417,13 @@ const pokemonList = createPokemonArray(
     {
         'id': 52.2,
         'name': 'Galarian Meowth',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': Region.galar,
         'catchRate': 255,
         'type': [PokemonType.Steel],
         'levelType': LevelType.mediumfast,
         'exp': 58,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Galarian Meowth', 'Perrserker', 28)],
+        'evolutions': [LevelEvolution('Galarian Meowth', 'Perrserker', 28)],
         'base': {
             'hitpoints': 50,
             'attack': 65,
@@ -2414,7 +2436,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 52.3,
         'name': 'Gigantamax Meowth',
-        'nativeRegion': GameConstants.Region.none,
+        'nativeRegion': Region.none,
         'catchRate': 255,
         'type': [PokemonType.Normal],
         'levelType': LevelType.mediumfast,
@@ -2449,7 +2471,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 53.01,
         'name': 'Alolan Persian',
-        'nativeRegion': GameConstants.Region.alola,
+        'nativeRegion': Region.alola,
         'catchRate': 90,
         'type': [PokemonType.Dark],
         'levelType': LevelType.mediumfast,
@@ -2472,7 +2494,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 64,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Psyduck', 'Golduck', 33)],
+        'evolutions': [LevelEvolution('Psyduck', 'Golduck', 33)],
         'base': {
             'hitpoints': 50,
             'attack': 52,
@@ -2507,7 +2529,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 61,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Mankey', 'Primeape', 28)],
+        'evolutions': [LevelEvolution('Mankey', 'Primeape', 28)],
         'base': {
             'hitpoints': 40,
             'attack': 80,
@@ -2525,7 +2547,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 61,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Pinkan Mankey', 'Pinkan Primeape', 28)],
+        'evolutions': [LevelEvolution('Pinkan Mankey', 'Pinkan Primeape', 28)],
         'base': {
             'hitpoints': 40,
             'attack': 80,
@@ -2577,7 +2599,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 70,
         'eggCycles': 20,
-        'evolutions': [new StoneEvolution('Growlithe', 'Arcanine', GameConstants.StoneType.Fire_stone)],
+        'evolutions': [StoneEvolution('Growlithe', 'Arcanine', StoneType.Fire_stone)],
         'base': {
             'hitpoints': 55,
             'attack': 70,
@@ -2619,8 +2641,8 @@ const pokemonList = createPokemonArray(
         'exp': 60,
         'eggCycles': 20,
         'evolutions': [
-            new LevelEvolution('Poliwag', 'Poliwhirl', 25),
-            new LevelEvolution('Poliwag', 'Pinkan Poliwhirl', 25000),
+            LevelEvolution('Poliwag', 'Poliwhirl', 25),
+            LevelEvolution('Poliwag', 'Pinkan Poliwhirl', 25000),
         ],
         'base': {
             'hitpoints': 40,
@@ -2639,7 +2661,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 135,
         'eggCycles': 20,
-        'evolutions': [new StoneEvolution('Poliwhirl', 'Poliwrath', GameConstants.StoneType.Water_stone), new StoneEvolution('Poliwhirl', 'Politoed', GameConstants.StoneType.Kings_rock)],
+        'evolutions': [StoneEvolution('Poliwhirl', 'Poliwrath', StoneType.Water_stone), StoneEvolution('Poliwhirl', 'Politoed', StoneType.Kings_rock)],
         'base': {
             'hitpoints': 65,
             'attack': 65,
@@ -2648,7 +2670,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 50,
             'speed': 90,
         },
-        'heldItem': {type: ItemType.item, id: 'Kings_rock'},
+        'heldItem': { type: ItemType.item, id: 'Kings_rock' },
     },
     {
         'id': 61.01,
@@ -2683,7 +2705,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 90,
             'speed': 70,
         },
-        'heldItem': {type: ItemType.item, id: 'Kings_rock'},
+        'heldItem': { type: ItemType.item, id: 'Kings_rock' },
     },
     {
         'id': 63,
@@ -2693,7 +2715,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 62,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Abra', 'Kadabra', 16)],
+        'evolutions': [LevelEvolution('Abra', 'Kadabra', 16)],
         'base': {
             'hitpoints': 25,
             'attack': 20,
@@ -2714,7 +2736,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 140,
         'eggCycles': 20,
-        'evolutions': [new StoneEvolution('Kadabra', 'Alakazam', GameConstants.StoneType.Linking_cord)],
+        'evolutions': [StoneEvolution('Kadabra', 'Alakazam', StoneType.Linking_cord)],
         'base': {
             'hitpoints': 40,
             'attack': 35,
@@ -2757,7 +2779,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 61,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Machop', 'Machoke', 28)],
+        'evolutions': [LevelEvolution('Machop', 'Machoke', 28)],
         'base': {
             'hitpoints': 70,
             'attack': 80,
@@ -2778,7 +2800,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 142,
         'eggCycles': 20,
-        'evolutions': [new StoneEvolution('Machoke', 'Machamp', GameConstants.StoneType.Linking_cord)],
+        'evolutions': [StoneEvolution('Machoke', 'Machamp', StoneType.Linking_cord)],
         'base': {
             'hitpoints': 80,
             'attack': 100,
@@ -2814,7 +2836,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 68.1,
         'name': 'Gigantamax Machamp',
-        'nativeRegion': GameConstants.Region.none,
+        'nativeRegion': Region.none,
         'catchRate': 45,
         'type': [PokemonType.Fighting],
         'levelType': LevelType.mediumslow,
@@ -2841,8 +2863,8 @@ const pokemonList = createPokemonArray(
         'exp': 60,
         'eggCycles': 20,
         'evolutions': [
-            new LevelEvolution('Bellsprout', 'Weepinbell', 21),
-            new LevelEvolution('Bellsprout', 'Valencian Weepinbell', 21000),
+            LevelEvolution('Bellsprout', 'Weepinbell', 21),
+            LevelEvolution('Bellsprout', 'Valencian Weepinbell', 21000),
         ],
         'base': {
             'hitpoints': 50,
@@ -2878,7 +2900,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 137,
         'eggCycles': 20,
-        'evolutions': [new StoneEvolution('Weepinbell', 'Victreebel', GameConstants.StoneType.Leaf_stone)],
+        'evolutions': [StoneEvolution('Weepinbell', 'Victreebel', StoneType.Leaf_stone)],
         'base': {
             'hitpoints': 65,
             'attack': 90,
@@ -2930,7 +2952,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 67,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Tentacool', 'Tentacruel', 30)],
+        'evolutions': [LevelEvolution('Tentacool', 'Tentacruel', 30)],
         'base': {
             'hitpoints': 40,
             'attack': 40,
@@ -2965,7 +2987,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 60,
         'eggCycles': 15,
-        'evolutions': [new LevelEvolution('Geodude', 'Graveler', 25)],
+        'evolutions': [LevelEvolution('Geodude', 'Graveler', 25)],
         'base': {
             'hitpoints': 40,
             'attack': 80,
@@ -2974,18 +2996,18 @@ const pokemonList = createPokemonArray(
             'specialDefense': 30,
             'speed': 20,
         },
-        'heldItem': {type: ItemType.underground, id: 'Everstone'},
+        'heldItem': { type: ItemType.underground, id: 'Everstone' },
     },
     {
         'id': 74.01,
         'name': 'Alolan Geodude',
-        'nativeRegion': GameConstants.Region.alola,
+        'nativeRegion': Region.alola,
         'catchRate': 255,
         'type': [PokemonType.Rock, PokemonType.Electric],
         'levelType': LevelType.mediumslow,
         'exp': 60,
         'eggCycles': 15,
-        'evolutions': [new LevelEvolution('Alolan Geodude', 'Alolan Graveler', 25)],
+        'evolutions': [LevelEvolution('Alolan Geodude', 'Alolan Graveler', 25)],
         'base': {
             'hitpoints': 40,
             'attack': 80,
@@ -3011,7 +3033,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 30,
             'speed': 20,
         },
-        'heldItem': {type: ItemType.underground, id: 'Everstone'},
+        'heldItem': { type: ItemType.underground, id: 'Everstone' },
     },
     {
         'id': 75,
@@ -3021,7 +3043,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 137,
         'eggCycles': 15,
-        'evolutions': [new StoneEvolution('Graveler', 'Golem', GameConstants.StoneType.Linking_cord)],
+        'evolutions': [StoneEvolution('Graveler', 'Golem', StoneType.Linking_cord)],
         'base': {
             'hitpoints': 55,
             'attack': 95,
@@ -3030,18 +3052,18 @@ const pokemonList = createPokemonArray(
             'specialDefense': 45,
             'speed': 35,
         },
-        'heldItem': {type: ItemType.underground, id: 'Hard Stone'},
+        'heldItem': { type: ItemType.underground, id: 'Hard Stone' },
     },
     {
         'id': 75.01,
         'name': 'Alolan Graveler',
-        'nativeRegion': GameConstants.Region.alola,
+        'nativeRegion': Region.alola,
         'catchRate': 120,
         'type': [PokemonType.Rock, PokemonType.Electric],
         'levelType': LevelType.mediumslow,
         'exp': 137,
         'eggCycles': 15,
-        'evolutions': [new StoneEvolution('Alolan Graveler', 'Alolan Golem', GameConstants.StoneType.Linking_cord)],
+        'evolutions': [StoneEvolution('Alolan Graveler', 'Alolan Golem', StoneType.Linking_cord)],
         'base': {
             'hitpoints': 55,
             'attack': 95,
@@ -3067,12 +3089,12 @@ const pokemonList = createPokemonArray(
             'specialDefense': 65,
             'speed': 45,
         },
-        'heldItem': {type: ItemType.underground, id: 'Hard Stone'},
+        'heldItem': { type: ItemType.underground, id: 'Hard Stone' },
     },
     {
         'id': 76.01,
         'name': 'Alolan Golem',
-        'nativeRegion': GameConstants.Region.alola,
+        'nativeRegion': Region.alola,
         'catchRate': 45,
         'type': [PokemonType.Rock, PokemonType.Electric],
         'levelType': LevelType.mediumslow,
@@ -3095,7 +3117,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 82,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Ponyta', 'Rapidash', 40)],
+        'evolutions': [LevelEvolution('Ponyta', 'Rapidash', 40)],
         'base': {
             'hitpoints': 50,
             'attack': 85,
@@ -3108,13 +3130,13 @@ const pokemonList = createPokemonArray(
     {
         'id': 77.1,
         'name': 'Galarian Ponyta',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': Region.galar,
         'catchRate': 190,
         'type': [PokemonType.Psychic],
         'levelType': LevelType.mediumfast,
         'exp': 82,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Galarian Ponyta', 'Galarian Rapidash', 40)],
+        'evolutions': [LevelEvolution('Galarian Ponyta', 'Galarian Rapidash', 40)],
         'base': {
             'hitpoints': 50,
             'attack': 85,
@@ -3144,7 +3166,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 78.1,
         'name': 'Galarian Rapidash',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': Region.galar,
         'catchRate': 60,
         'type': [PokemonType.Psychic, PokemonType.Fairy],
         'levelType': LevelType.mediumfast,
@@ -3168,8 +3190,8 @@ const pokemonList = createPokemonArray(
         'exp': 63,
         'eggCycles': 20,
         'evolutions': [
-            new LevelEvolution('Slowpoke', 'Slowbro', 37),
-            new StoneEvolution('Slowpoke', 'Slowking', GameConstants.StoneType.Kings_rock),
+            LevelEvolution('Slowpoke', 'Slowbro', 37),
+            StoneEvolution('Slowpoke', 'Slowking', StoneType.Kings_rock),
         ],
         'base': {
             'hitpoints': 90,
@@ -3179,20 +3201,20 @@ const pokemonList = createPokemonArray(
             'specialDefense': 40,
             'speed': 15,
         },
-        'heldItem': {type: ItemType.item, id: 'Kings_rock'},
+        'heldItem': { type: ItemType.item, id: 'Kings_rock' },
     },
     {
         'id': 79.1,
         'name': 'Galarian Slowpoke',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': Region.galar,
         'catchRate': 190,
         'type': [PokemonType.Psychic],
         'levelType': LevelType.mediumfast,
         'exp': 63,
         'eggCycles': 20,
         'evolutions': [
-            new StoneEvolution('Galarian Slowpoke', 'Galarian Slowbro', GameConstants.StoneType.Galarica_cuff),
-            new StoneEvolution('Galarian Slowpoke', 'Galarian Slowking', GameConstants.StoneType.Galarica_wreath),
+            StoneEvolution('Galarian Slowpoke', 'Galarian Slowbro', StoneType.Galarica_cuff),
+            StoneEvolution('Galarian Slowpoke', 'Galarian Slowking', StoneType.Galarica_wreath),
         ],
         'base': {
             'hitpoints': 90,
@@ -3219,12 +3241,12 @@ const pokemonList = createPokemonArray(
             'specialDefense': 80,
             'speed': 30,
         },
-        'heldItem': {type: ItemType.item, id: 'Kings_rock'},
+        'heldItem': { type: ItemType.item, id: 'Kings_rock' },
     },
     {
         'id': 80.1,
         'name': 'Galarian Slowbro',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': Region.galar,
         'catchRate': 75,
         'type': [PokemonType.Poison, PokemonType.Psychic],
         'levelType': LevelType.mediumfast,
@@ -3247,7 +3269,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 65,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Magnemite', 'Magneton', 30)],
+        'evolutions': [LevelEvolution('Magnemite', 'Magneton', 30)],
         'base': {
             'hitpoints': 25,
             'attack': 35,
@@ -3256,9 +3278,9 @@ const pokemonList = createPokemonArray(
             'specialDefense': 55,
             'speed': 45,
         },
-        'heldItem': {type: ItemType.item, id: 'Metal_coat'},
+        'heldItem': { type: ItemType.item, id: 'Metal_coat' },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -3270,12 +3292,12 @@ const pokemonList = createPokemonArray(
         'exp': 163,
         'eggCycles': 20,
         'evolutions': [
-            new DungeonRestrictedLevelEvolution('Mt. Coronet North', 'Magneton', 'Magnezone', 20),
-            new DungeonRestrictedLevelEvolution('Mt. Coronet South', 'Magneton', 'Magnezone', 20),
-            new DungeonRestrictedLevelEvolution('Chargestone Cave', 'Magneton', 'Magnezone', 20),
-            new DungeonRestrictedLevelEvolution('Kalos Power Plant', 'Magneton', 'Magnezone', 20),
-            new DungeonRestrictedLevelEvolution('Vast Poni Canyon', 'Magneton', 'Magnezone', 20),
-            new RegionStoneEvolution(galarOnly, 'Magneton', 'Magnezone', GameConstants.StoneType.Thunder_stone),
+            DungeonRestrictedLevelEvolution('Mt. Coronet North', 'Magneton', 'Magnezone', 20),
+            DungeonRestrictedLevelEvolution('Mt. Coronet South', 'Magneton', 'Magnezone', 20),
+            DungeonRestrictedLevelEvolution('Chargestone Cave', 'Magneton', 'Magnezone', 20),
+            DungeonRestrictedLevelEvolution('Kalos Power Plant', 'Magneton', 'Magnezone', 20),
+            DungeonRestrictedLevelEvolution('Vast Poni Canyon', 'Magneton', 'Magnezone', 20),
+            RegionStoneEvolution(galarOnly, 'Magneton', 'Magnezone', StoneType.Thunder_stone),
         ],
         'base': {
             'hitpoints': 50,
@@ -3285,9 +3307,9 @@ const pokemonList = createPokemonArray(
             'specialDefense': 70,
             'speed': 70,
         },
-        'heldItem': {type: ItemType.item, id: 'Metal_coat'},
+        'heldItem': { type: ItemType.item, id: 'Metal_coat' },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -3310,13 +3332,13 @@ const pokemonList = createPokemonArray(
     {
         'id': 83.1,
         'name': 'Galarian Farfetch\'d',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': Region.galar,
         'catchRate': 45,
         'type': [PokemonType.Fighting],
         'levelType': LevelType.mediumfast,
         'exp': 132,
         'eggCycles': 20,
-        'evolutions': [new HeldItemLevelEvolution('Galarian Farfetch\'d', 'Sirfetch\'d', 20, 'Leek')],
+        'evolutions': [HeldItemLevelEvolution('Leek', 'Galarian Farfetch\'d', 'Sirfetch\'d', 20)],
         'base': {
             'hitpoints': 52,
             'attack': 95,
@@ -3325,7 +3347,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 62,
             'speed': 55,
         },
-        'heldItem': {type: ItemType.item, id: 'Leek'},
+        'heldItem': { type: ItemType.item, id: 'Leek' },
     },
     {
         'id': 84,
@@ -3336,8 +3358,8 @@ const pokemonList = createPokemonArray(
         'exp': 62,
         'eggCycles': 20,
         'evolutions': [
-            new LevelEvolution('Doduo', 'Dodrio', 31),
-            new LevelEvolution('Doduo', 'Pinkan Dodrio', 31000),
+            LevelEvolution('Doduo', 'Dodrio', 31),
+            LevelEvolution('Doduo', 'Pinkan Dodrio', 31000),
         ],
         'base': {
             'hitpoints': 35,
@@ -3399,7 +3421,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 65,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Seel', 'Dewgong', 34)],
+        'evolutions': [LevelEvolution('Seel', 'Dewgong', 34)],
         'base': {
             'hitpoints': 65,
             'attack': 45,
@@ -3434,7 +3456,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 65,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Grimer', 'Muk', 38)],
+        'evolutions': [LevelEvolution('Grimer', 'Muk', 38)],
         'base': {
             'hitpoints': 80,
             'attack': 80,
@@ -3447,13 +3469,13 @@ const pokemonList = createPokemonArray(
     {
         'id': 88.01,
         'name': 'Alolan Grimer',
-        'nativeRegion': GameConstants.Region.alola,
+        'nativeRegion': Region.alola,
         'catchRate': 190,
         'type': [PokemonType.Poison, PokemonType.Dark],
         'levelType': LevelType.mediumfast,
         'exp': 65,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Alolan Grimer', 'Alolan Muk', 38)],
+        'evolutions': [LevelEvolution('Alolan Grimer', 'Alolan Muk', 38)],
         'base': {
             'hitpoints': 80,
             'attack': 80,
@@ -3483,7 +3505,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 89.01,
         'name': 'Alolan Muk',
-        'nativeRegion': GameConstants.Region.alola,
+        'nativeRegion': Region.alola,
         'catchRate': 75,
         'type': [PokemonType.Poison, PokemonType.Dark],
         'levelType': LevelType.mediumfast,
@@ -3506,7 +3528,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 61,
         'eggCycles': 20,
-        'evolutions': [new StoneEvolution('Shellder', 'Cloyster', GameConstants.StoneType.Water_stone)],
+        'evolutions': [StoneEvolution('Shellder', 'Cloyster', StoneType.Water_stone)],
         'base': {
             'hitpoints': 30,
             'attack': 65,
@@ -3541,7 +3563,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 62,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Gastly', 'Haunter', 25)],
+        'evolutions': [LevelEvolution('Gastly', 'Haunter', 25)],
         'base': {
             'hitpoints': 30,
             'attack': 35,
@@ -3559,7 +3581,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 142,
         'eggCycles': 20,
-        'evolutions': [new StoneEvolution('Haunter', 'Gengar', GameConstants.StoneType.Linking_cord)],
+        'evolutions': [StoneEvolution('Haunter', 'Gengar', StoneType.Linking_cord)],
         'base': {
             'hitpoints': 45,
             'attack': 50,
@@ -3589,7 +3611,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 94.1,
         'name': 'Gigantamax Gengar',
-        'nativeRegion': GameConstants.Region.none,
+        'nativeRegion': Region.none,
         'catchRate': 45,
         'type': [PokemonType.Ghost, PokemonType.Poison],
         'levelType': LevelType.mediumslow,
@@ -3612,7 +3634,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 77,
         'eggCycles': 25,
-        'evolutions': [new StoneEvolution('Onix', 'Steelix', GameConstants.StoneType.Metal_coat)],
+        'evolutions': [StoneEvolution('Onix', 'Steelix', StoneType.Metal_coat)],
         'base': {
             'hitpoints': 35,
             'attack': 45,
@@ -3621,7 +3643,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 45,
             'speed': 70,
         },
-        'heldItem': {type: ItemType.underground, id: 'Hard Stone'},
+        'heldItem': { type: ItemType.underground, id: 'Hard Stone' },
     },
     {
         'id': 95.01,
@@ -3631,7 +3653,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 77,
         'eggCycles': 25,
-        'evolutions': [new StoneEvolution('Crystal Onix', 'Crystal Steelix', GameConstants.StoneType.Ice_stone)],
+        'evolutions': [StoneEvolution('Crystal Onix', 'Crystal Steelix', StoneType.Ice_stone)],
         'base': {
             'hitpoints': 35,
             'attack': 45,
@@ -3640,7 +3662,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 45,
             'speed': 70,
         },
-        'heldItem': {type: ItemType.underground, id: 'Hard Stone'},
+        'heldItem': { type: ItemType.underground, id: 'Hard Stone' },
     },
     {
         'id': 96,
@@ -3650,7 +3672,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 66,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Drowzee', 'Hypno', 26)],
+        'evolutions': [LevelEvolution('Drowzee', 'Hypno', 26)],
         'base': {
             'hitpoints': 60,
             'attack': 48,
@@ -3688,7 +3710,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 65,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Krabby', 'Kingler', 28)],
+        'evolutions': [LevelEvolution('Krabby', 'Kingler', 28)],
         'base': {
             'hitpoints': 30,
             'attack': 105,
@@ -3718,7 +3740,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 99.1,
         'name': 'Gigantamax Kingler',
-        'nativeRegion': GameConstants.Region.none,
+        'nativeRegion': Region.none,
         'catchRate': 60,
         'type': [PokemonType.Water],
         'levelType': LevelType.mediumfast,
@@ -3741,7 +3763,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 66,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Voltorb', 'Electrode', 30)],
+        'evolutions': [LevelEvolution('Voltorb', 'Electrode', 30)],
         'base': {
             'hitpoints': 40,
             'attack': 30,
@@ -3751,7 +3773,7 @@ const pokemonList = createPokemonArray(
             'speed': 100,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -3771,7 +3793,7 @@ const pokemonList = createPokemonArray(
             'speed': 150,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -3783,9 +3805,9 @@ const pokemonList = createPokemonArray(
         'exp': 65,
         'eggCycles': 20,
         'evolutions': [
-            new RegionStoneEvolution(allButAlola, 'Exeggcute', 'Exeggutor', GameConstants.StoneType.Leaf_stone),
-            new RegionStoneEvolution(alolaOnly, 'Exeggcute', 'Alolan Exeggutor', GameConstants.StoneType.Leaf_stone),
-            new LevelEvolution('Exeggcute', 'Pinkan Exeggutor', 31000),
+            RegionStoneEvolution(allButAlola, 'Exeggcute', 'Exeggutor', StoneType.Leaf_stone),
+            RegionStoneEvolution(alolaOnly, 'Exeggcute', 'Alolan Exeggutor', StoneType.Leaf_stone),
+            LevelEvolution('Exeggcute', 'Pinkan Exeggutor', 31000),
         ],
         'base': {
             'hitpoints': 60,
@@ -3816,7 +3838,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 103.01,
         'name': 'Alolan Exeggutor',
-        'nativeRegion': GameConstants.Region.alola,
+        'nativeRegion': Region.alola,
         'catchRate': 45,
         'type': [PokemonType.Grass, PokemonType.Dragon],
         'levelType': LevelType.slow,
@@ -3857,8 +3879,8 @@ const pokemonList = createPokemonArray(
         'exp': 64,
         'eggCycles': 20,
         'evolutions': [
-            new RegionLevelEvolution(allButAlola, 'Cubone', 'Marowak', 28),
-            new RegionNightTimedLevelEvolution(alolaOnly, 'Cubone', 'Alolan Marowak', 28),
+            RegionLevelEvolution(allButAlola, 'Cubone', 'Marowak', 28),
+            RegionNightTimedLevelEvolution(alolaOnly, 'Cubone', 'Alolan Marowak', 28),
         ],
         'base': {
             'hitpoints': 50,
@@ -3868,7 +3890,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 50,
             'speed': 35,
         },
-        'heldItem': {type: ItemType.underground, id: 'Rare Bone'},
+        'heldItem': { type: ItemType.underground, id: 'Rare Bone' },
     },
     {
         'id': 105,
@@ -3886,12 +3908,12 @@ const pokemonList = createPokemonArray(
             'specialDefense': 80,
             'speed': 45,
         },
-        'heldItem': {type: ItemType.underground, id: 'Rare Bone'},
+        'heldItem': { type: ItemType.underground, id: 'Rare Bone' },
     },
     {
         'id': 105.01,
         'name': 'Alolan Marowak',
-        'nativeRegion': GameConstants.Region.alola,
+        'nativeRegion': Region.alola,
         'catchRate': 75,
         'type': [PokemonType.Fire, PokemonType.Ghost],
         'levelType': LevelType.mediumfast,
@@ -3909,7 +3931,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 105.02,
         'name': 'Totem Marowak',
-        'nativeRegion': GameConstants.Region.alola,
+        'nativeRegion': Region.alola,
         'catchRate': 75,
         'type': [PokemonType.Fire, PokemonType.Ghost],
         'levelType': LevelType.mediumfast,
@@ -3971,7 +3993,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Normal],
         'levelType': LevelType.mediumfast,
         'exp': 77,
-        'evolutions': [new LevelEvolution('Lickitung', 'Lickilicky', 33)],
+        'evolutions': [LevelEvolution('Lickitung', 'Lickilicky', 33)],
         'eggCycles': 20,
         'base': {
             'hitpoints': 90,
@@ -3991,9 +4013,9 @@ const pokemonList = createPokemonArray(
         'exp': 68,
         'eggCycles': 20,
         'evolutions': [
-            new RegionLevelEvolution(allButGalar, 'Koffing', 'Weezing', 35),
-            new RegionLevelEvolution(galarOnly, 'Koffing', 'Galarian Weezing', 35),
-            new LevelEvolution('Koffing', 'Pinkan Weezing', 35000),
+            RegionLevelEvolution(allButGalar, 'Koffing', 'Weezing', 35),
+            RegionLevelEvolution(galarOnly, 'Koffing', 'Galarian Weezing', 35),
+            LevelEvolution('Koffing', 'Pinkan Weezing', 35000),
         ],
         'base': {
             'hitpoints': 40,
@@ -4041,7 +4063,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 110.1,
         'name': 'Galarian Weezing',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': Region.galar,
         'catchRate': 60,
         'type': [PokemonType.Poison, PokemonType.Fairy],
         'levelType': LevelType.mediumfast,
@@ -4064,7 +4086,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 69,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Rhyhorn', 'Rhydon', 42)],
+        'evolutions': [LevelEvolution('Rhyhorn', 'Rhydon', 42)],
         'base': {
             'hitpoints': 80,
             'attack': 85,
@@ -4085,7 +4107,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 69,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Pinkan Rhyhorn', 'Pinkan Rhydon', 42)],
+        'evolutions': [LevelEvolution('Pinkan Rhyhorn', 'Pinkan Rhydon', 42)],
         'base': {
             'hitpoints': 80,
             'attack': 85,
@@ -4106,7 +4128,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 170,
         'eggCycles': 20,
-        'evolutions': [new StoneEvolution('Rhydon', 'Rhyperior', GameConstants.StoneType.Protector)],
+        'evolutions': [StoneEvolution('Rhydon', 'Rhyperior', StoneType.Protector)],
         'base': {
             'hitpoints': 105,
             'attack': 130,
@@ -4147,7 +4169,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 395,
         'eggCycles': 40,
-        'evolutions': [new StoneEvolution('Chansey', 'Blissey', GameConstants.StoneType.Soothe_bell)],
+        'evolutions': [StoneEvolution('Chansey', 'Blissey', StoneType.Soothe_bell)],
         'base': {
             'hitpoints': 250,
             'attack': 5,
@@ -4156,7 +4178,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 105,
             'speed': 50,
         },
-        'heldItem': {type: ItemType.underground, id: 'Oval Stone'},
+        'heldItem': { type: ItemType.underground, id: 'Oval Stone' },
         'gender': {
             'femaleRatio': 1,
         },
@@ -4169,7 +4191,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 395,
         'eggCycles': 40,
-        'evolutions': [new StoneEvolution('Charity Chansey', 'Blessing Blissey', GameConstants.StoneType.Soothe_bell)],
+        'evolutions': [StoneEvolution('Charity Chansey', 'Blessing Blissey', StoneType.Soothe_bell)],
         'base': {
             'hitpoints': 250,
             'attack': 5,
@@ -4178,7 +4200,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 105,
             'speed': 50,
         },
-        'heldItem': {type: ItemType.underground, id: 'Oval Stone'},
+        'heldItem': { type: ItemType.underground, id: 'Oval Stone' },
     },
     {
         'id': 114,
@@ -4188,7 +4210,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 87,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Tangela', 'Tangrowth', 33)],
+        'evolutions': [LevelEvolution('Tangela', 'Tangrowth', 33)],
         'base': {
             'hitpoints': 65,
             'attack': 55,
@@ -4226,7 +4248,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 59,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Horsea', 'Seadra', 32)],
+        'evolutions': [LevelEvolution('Horsea', 'Seadra', 32)],
         'base': {
             'hitpoints': 30,
             'attack': 40,
@@ -4235,7 +4257,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 25,
             'speed': 60,
         },
-        'heldItem': {type: ItemType.item, id: 'Dragon_scale'},
+        'heldItem': { type: ItemType.item, id: 'Dragon_scale' },
     },
     {
         'id': 117,
@@ -4245,7 +4267,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 154,
         'eggCycles': 20,
-        'evolutions': [new StoneEvolution('Seadra', 'Kingdra', GameConstants.StoneType.Dragon_scale)],
+        'evolutions': [StoneEvolution('Seadra', 'Kingdra', StoneType.Dragon_scale)],
         'base': {
             'hitpoints': 55,
             'attack': 65,
@@ -4254,7 +4276,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 45,
             'speed': 85,
         },
-        'heldItem': {type: ItemType.item, id: 'Dragon_scale'},
+        'heldItem': { type: ItemType.item, id: 'Dragon_scale' },
     },
     {
         'id': 118,
@@ -4264,7 +4286,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 64,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Goldeen', 'Seaking', 33)],
+        'evolutions': [LevelEvolution('Goldeen', 'Seaking', 33)],
         'base': {
             'hitpoints': 45,
             'attack': 67,
@@ -4305,7 +4327,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 68,
         'eggCycles': 20,
-        'evolutions': [new StoneEvolution('Staryu', 'Starmie', GameConstants.StoneType.Water_stone)],
+        'evolutions': [StoneEvolution('Staryu', 'Starmie', StoneType.Water_stone)],
         'base': {
             'hitpoints': 30,
             'attack': 45,
@@ -4315,7 +4337,7 @@ const pokemonList = createPokemonArray(
             'speed': 85,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -4335,7 +4357,7 @@ const pokemonList = createPokemonArray(
             'speed': 115,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -4358,13 +4380,13 @@ const pokemonList = createPokemonArray(
     {
         'id': 122.1,
         'name': 'Galarian Mr. Mime',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': Region.galar,
         'catchRate': 45,
         'type': [PokemonType.Ice, PokemonType.Psychic],
         'levelType': LevelType.mediumfast,
         'exp': 161,
         'eggCycles': 25,
-        'evolutions': [new LevelEvolution('Galarian Mr. Mime', 'Mr. Rime', 42)],
+        'evolutions': [LevelEvolution('Galarian Mr. Mime', 'Mr. Rime', 42)],
         'base': {
             'hitpoints': 50,
             'attack': 65,
@@ -4382,7 +4404,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 100,
         'eggCycles': 25,
-        'evolutions': [new StoneEvolution('Scyther', 'Scizor', GameConstants.StoneType.Metal_coat)],
+        'evolutions': [StoneEvolution('Scyther', 'Scizor', StoneType.Metal_coat)],
         'base': {
             'hitpoints': 70,
             'attack': 110,
@@ -4443,7 +4465,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 172,
         'eggCycles': 25,
-        'evolutions': [new StoneEvolution('Electabuzz', 'Electivire', GameConstants.StoneType.Electirizer)],
+        'evolutions': [StoneEvolution('Electabuzz', 'Electivire', StoneType.Electirizer)],
         'base': {
             'hitpoints': 65,
             'attack': 83,
@@ -4452,7 +4474,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 85,
             'speed': 105,
         },
-        'heldItem': {type: ItemType.item, id: 'Electirizer'},
+        'heldItem': { type: ItemType.item, id: 'Electirizer' },
         'gender': {
             'femaleRatio': 0.25,
         },
@@ -4485,7 +4507,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 173,
         'eggCycles': 25,
-        'evolutions': [new StoneEvolution('Magmar', 'Magmortar', GameConstants.StoneType.Magmarizer)],
+        'evolutions': [StoneEvolution('Magmar', 'Magmortar', StoneType.Magmarizer)],
         'base': {
             'hitpoints': 65,
             'attack': 95,
@@ -4494,7 +4516,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 85,
             'speed': 93,
         },
-        'heldItem': {type: ItemType.item, id: 'Magmarizer'},
+        'heldItem': { type: ItemType.item, id: 'Magmarizer' },
         'gender': {
             'femaleRatio': 0.25,
         },
@@ -4544,7 +4566,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 40,
         'eggCycles': 5,
-        'evolutions': [new LevelEvolution('Magikarp', 'Gyarados', 20)],
+        'evolutions': [LevelEvolution('Magikarp', 'Gyarados', 20)],
         'base': {
             'hitpoints': 20,
             'attack': 10,
@@ -4597,7 +4619,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 131.1,
         'name': 'Gigantamax Lapras',
-        'nativeRegion': GameConstants.Region.none,
+        'nativeRegion': Region.none,
         'catchRate': 45,
         'type': [PokemonType.Water, PokemonType.Ice],
         'levelType': LevelType.slow,
@@ -4629,7 +4651,7 @@ const pokemonList = createPokemonArray(
             'speed': 48,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -4641,22 +4663,22 @@ const pokemonList = createPokemonArray(
         'exp': 65,
         'eggCycles': 35,
         'evolutions': [
-            new StoneEvolution('Eevee', 'Vaporeon', GameConstants.StoneType.Water_stone),
-            new StoneEvolution('Eevee', 'Jolteon', GameConstants.StoneType.Thunder_stone),
-            new StoneEvolution('Eevee', 'Flareon', GameConstants.StoneType.Fire_stone),
-            new DayTimedStoneEvolution('Eevee', 'Espeon', GameConstants.StoneType.Soothe_bell),
-            new NightTimedStoneEvolution('Eevee', 'Umbreon', GameConstants.StoneType.Soothe_bell),
-            new DungeonRestrictedLevelEvolution('Eterna Forest', 'Eevee', 'Leafeon', 20),
-            new DungeonRestrictedLevelEvolution('Pinwheel Forest', 'Eevee', 'Leafeon', 20),
-            new DungeonRestrictedLevelEvolution('Pokémon Village', 'Eevee', 'Leafeon', 20),
-            new DungeonRestrictedLevelEvolution('Lush Jungle', 'Eevee', 'Leafeon', 20),
-            new DungeonRestrictedLevelEvolution('Lake Acuity','Eevee','Glaceon', 20),
-            new DungeonRestrictedLevelEvolution('Twist Mountain','Eevee','Glaceon', 20),
-            new DungeonRestrictedLevelEvolution('Frost Cavern','Eevee','Glaceon', 20),
-            new DungeonRestrictedLevelEvolution('Mount Lanakila','Eevee','Glaceon', 20),
-            new LevelEvolution('Eevee', 'Sylveon', 29),
-            new RegionStoneEvolution(galarOnly, 'Eevee', 'Leafeon', GameConstants.StoneType.Leaf_stone),
-            new RegionStoneEvolution(galarOnly, 'Eevee', 'Glaceon', GameConstants.StoneType.Ice_stone),
+            StoneEvolution('Eevee', 'Vaporeon', StoneType.Water_stone),
+            StoneEvolution('Eevee', 'Jolteon', StoneType.Thunder_stone),
+            StoneEvolution('Eevee', 'Flareon', StoneType.Fire_stone),
+            DayTimedStoneEvolution('Eevee', 'Espeon', StoneType.Soothe_bell),
+            NightTimedStoneEvolution('Eevee', 'Umbreon', StoneType.Soothe_bell),
+            DungeonRestrictedLevelEvolution('Eterna Forest', 'Eevee', 'Leafeon', 20),
+            DungeonRestrictedLevelEvolution('Pinwheel Forest', 'Eevee', 'Leafeon', 20),
+            DungeonRestrictedLevelEvolution('Pokémon Village', 'Eevee', 'Leafeon', 20),
+            DungeonRestrictedLevelEvolution('Lush Jungle', 'Eevee', 'Leafeon', 20),
+            DungeonRestrictedLevelEvolution('Lake Acuity', 'Eevee', 'Glaceon', 20),
+            DungeonRestrictedLevelEvolution('Twist Mountain', 'Eevee', 'Glaceon', 20),
+            DungeonRestrictedLevelEvolution('Frost Cavern', 'Eevee', 'Glaceon', 20),
+            DungeonRestrictedLevelEvolution('Mount Lanakila', 'Eevee', 'Glaceon', 20),
+            LevelEvolution('Eevee', 'Sylveon', 29),
+            RegionStoneEvolution(galarOnly, 'Eevee', 'Leafeon', StoneType.Leaf_stone),
+            RegionStoneEvolution(galarOnly, 'Eevee', 'Glaceon', StoneType.Ice_stone),
         ],
         'base': {
             'hitpoints': 55,
@@ -4694,7 +4716,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 133.2,
         'name': 'Gigantamax Eevee',
-        'nativeRegion': GameConstants.Region.none,
+        'nativeRegion': Region.none,
         'catchRate': 255,
         'type': [PokemonType.Normal],
         'levelType': LevelType.mediumfast,
@@ -4780,7 +4802,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 79,
         'eggCycles': 20,
-        'evolutions': [new StoneEvolution('Porygon', 'Porygon2', GameConstants.StoneType.Upgrade)],
+        'evolutions': [StoneEvolution('Porygon', 'Porygon2', StoneType.Upgrade)],
         'base': {
             'hitpoints': 65,
             'attack': 60,
@@ -4790,7 +4812,7 @@ const pokemonList = createPokemonArray(
             'speed': 40,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -4801,7 +4823,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 71,
         'eggCycles': 30,
-        'evolutions': [new LevelEvolution('Omanyte', 'Omastar', 40)],
+        'evolutions': [LevelEvolution('Omanyte', 'Omastar', 40)],
         'base': {
             'hitpoints': 35,
             'attack': 40,
@@ -4842,7 +4864,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 71,
         'eggCycles': 30,
-        'evolutions': [new LevelEvolution('Kabuto', 'Kabutops', 40)],
+        'evolutions': [LevelEvolution('Kabuto', 'Kabutops', 40)],
         'base': {
             'hitpoints': 30,
             'attack': 80,
@@ -4938,7 +4960,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 143.2,
         'name': 'Gigantamax Snorlax',
-        'nativeRegion': GameConstants.Region.none,
+        'nativeRegion': Region.none,
         'catchRate': 25,
         'type': [PokemonType.Normal],
         'levelType': LevelType.slow,
@@ -4973,13 +4995,13 @@ const pokemonList = createPokemonArray(
             'speed': 85,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
         'id': 144.1,
         'name': 'Galarian Articuno',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': Region.galar,
         'catchRate': 3,
         'type': [PokemonType.Psychic, PokemonType.Flying],
         'levelType': LevelType.slow,
@@ -4994,7 +5016,7 @@ const pokemonList = createPokemonArray(
             'speed': 95,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -5014,13 +5036,13 @@ const pokemonList = createPokemonArray(
             'speed': 100,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
         'id': 145.1,
         'name': 'Galarian Zapdos',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': Region.galar,
         'catchRate': 3,
         'type': [PokemonType.Fighting, PokemonType.Flying],
         'levelType': LevelType.slow,
@@ -5035,7 +5057,7 @@ const pokemonList = createPokemonArray(
             'speed': 100,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -5055,13 +5077,13 @@ const pokemonList = createPokemonArray(
             'speed': 90,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
         'id': 146.1,
         'name': 'Galarian Moltres',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': Region.galar,
         'catchRate': 3,
         'type': [PokemonType.Dark, PokemonType.Flying],
         'levelType': LevelType.slow,
@@ -5076,7 +5098,7 @@ const pokemonList = createPokemonArray(
             'speed': 90,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -5087,7 +5109,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 60,
         'eggCycles': 40,
-        'evolutions': [new LevelEvolution('Dratini', 'Dragonair', 30)],
+        'evolutions': [LevelEvolution('Dratini', 'Dragonair', 30)],
         'base': {
             'hitpoints': 41,
             'attack': 64,
@@ -5096,7 +5118,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 50,
             'speed': 50,
         },
-        'heldItem': {type: ItemType.item, id: 'Dragon_scale'},
+        'heldItem': { type: ItemType.item, id: 'Dragon_scale' },
     },
     {
         'id': 148,
@@ -5106,7 +5128,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 147,
         'eggCycles': 40,
-        'evolutions': [new LevelEvolution('Dragonair', 'Dragonite', 55)],
+        'evolutions': [LevelEvolution('Dragonair', 'Dragonite', 55)],
         'base': {
             'hitpoints': 61,
             'attack': 84,
@@ -5115,7 +5137,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 70,
             'speed': 70,
         },
-        'heldItem': {type: ItemType.item, id: 'Dragon_scale'},
+        'heldItem': { type: ItemType.item, id: 'Dragon_scale' },
     },
     {
         'id': 149,
@@ -5133,7 +5155,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 100,
             'speed': 80,
         },
-        'heldItem': {type: ItemType.item, id: 'Dragon_scale'},
+        'heldItem': { type: ItemType.item, id: 'Dragon_scale' },
     },
     {
         'id': 150,
@@ -5152,7 +5174,7 @@ const pokemonList = createPokemonArray(
             'speed': 130,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -5172,7 +5194,7 @@ const pokemonList = createPokemonArray(
             'speed': 130,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -5191,9 +5213,9 @@ const pokemonList = createPokemonArray(
             'specialDefense': 100,
             'speed': 100,
         },
-        'heldItem': {type: ItemType.berry, id: BerryType.Lum},
+        'heldItem': { type: ItemType.berry, id: BerryType.Lum },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -5204,7 +5226,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 64,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Chikorita', 'Bayleef', 16)],
+        'evolutions': [LevelEvolution('Chikorita', 'Bayleef', 16)],
         'base': {
             'hitpoints': 45,
             'attack': 49,
@@ -5225,7 +5247,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 142,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Bayleef', 'Meganium', 32)],
+        'evolutions': [LevelEvolution('Bayleef', 'Meganium', 32)],
         'base': {
             'hitpoints': 60,
             'attack': 62,
@@ -5267,7 +5289,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 62,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Cyndaquil', 'Quilava', 14)],
+        'evolutions': [LevelEvolution('Cyndaquil', 'Quilava', 14)],
         'base': {
             'hitpoints': 39,
             'attack': 52,
@@ -5288,7 +5310,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 142,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Quilava', 'Typhlosion', 36)],
+        'evolutions': [LevelEvolution('Quilava', 'Typhlosion', 36)],
         'base': {
             'hitpoints': 58,
             'attack': 64,
@@ -5329,7 +5351,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 63,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Totodile', 'Croconaw', 18)],
+        'evolutions': [LevelEvolution('Totodile', 'Croconaw', 18)],
         'base': {
             'hitpoints': 50,
             'attack': 65,
@@ -5350,7 +5372,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 142,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Croconaw', 'Feraligatr', 30)],
+        'evolutions': [LevelEvolution('Croconaw', 'Feraligatr', 30)],
         'base': {
             'hitpoints': 65,
             'attack': 80,
@@ -5391,7 +5413,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 43,
         'eggCycles': 15,
-        'evolutions': [new LevelEvolution('Sentret', 'Furret', 15)],
+        'evolutions': [LevelEvolution('Sentret', 'Furret', 15)],
         'base': {
             'hitpoints': 35,
             'attack': 46,
@@ -5426,7 +5448,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 52,
         'eggCycles': 15,
-        'evolutions': [new LevelEvolution('Hoothoot', 'Noctowl', 20)],
+        'evolutions': [LevelEvolution('Hoothoot', 'Noctowl', 20)],
         'base': {
             'hitpoints': 60,
             'attack': 30,
@@ -5461,7 +5483,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 53,
         'eggCycles': 15,
-        'evolutions': [new LevelEvolution('Ledyba', 'Ledian', 18)],
+        'evolutions': [LevelEvolution('Ledyba', 'Ledian', 18)],
         'base': {
             'hitpoints': 40,
             'attack': 20,
@@ -5502,7 +5524,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 50,
         'eggCycles': 15,
-        'evolutions': [new LevelEvolution('Spinarak', 'Ariados', 22)],
+        'evolutions': [LevelEvolution('Spinarak', 'Ariados', 22)],
         'base': {
             'hitpoints': 40,
             'attack': 60,
@@ -5554,7 +5576,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 66,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Chinchou', 'Lanturn', 27)],
+        'evolutions': [LevelEvolution('Chinchou', 'Lanturn', 27)],
         'base': {
             'hitpoints': 75,
             'attack': 38,
@@ -5563,7 +5585,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 56,
             'speed': 67,
         },
-        'heldItem': {type: ItemType.item, id: 'Deepsea_scale'},
+        'heldItem': { type: ItemType.item, id: 'Deepsea_scale' },
     },
     {
         'id': 171,
@@ -5581,7 +5603,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 76,
             'speed': 67,
         },
-        'heldItem': {type: ItemType.item, id: 'Deepsea_scale'},
+        'heldItem': { type: ItemType.item, id: 'Deepsea_scale' },
     },
     {
         'id': 172,
@@ -5591,7 +5613,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 41,
         'eggCycles': 10,
-        'evolutions': [new StoneEvolution('Pichu', 'Pikachu', GameConstants.StoneType.Soothe_bell)],
+        'evolutions': [StoneEvolution('Pichu', 'Pikachu', StoneType.Soothe_bell)],
         'baby': true,
         'base': {
             'hitpoints': 20,
@@ -5609,7 +5631,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Electric],
         'levelType': LevelType.mediumfast,
         'exp': 41,
-        'eggCycles': 8,//Lowered to match base form
+        'eggCycles': 8, // Lowered to match base form
         'base': {
             'hitpoints': 20,
             'attack': 40,
@@ -5630,7 +5652,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 44,
         'eggCycles': 10,
-        'evolutions': [new StoneEvolution('Cleffa', 'Clefairy', GameConstants.StoneType.Soothe_bell)],
+        'evolutions': [StoneEvolution('Cleffa', 'Clefairy', StoneType.Soothe_bell)],
         'baby': true,
         'base': {
             'hitpoints': 50,
@@ -5640,7 +5662,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 55,
             'speed': 15,
         },
-        'heldItem': {type: ItemType.item, id: 'Moon_stone'},
+        'heldItem': { type: ItemType.item, id: 'Moon_stone' },
         'gender': {
             'femaleRatio': 0.75,
         },
@@ -5653,7 +5675,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 42,
         'eggCycles': 10,
-        'evolutions': [new StoneEvolution('Igglybuff', 'Jigglypuff', GameConstants.StoneType.Soothe_bell)],
+        'evolutions': [StoneEvolution('Igglybuff', 'Jigglypuff', StoneType.Soothe_bell)],
         'baby': true,
         'base': {
             'hitpoints': 90,
@@ -5675,7 +5697,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 49,
         'eggCycles': 10,
-        'evolutions': [new StoneEvolution('Togepi', 'Togetic', GameConstants.StoneType.Soothe_bell)],
+        'evolutions': [StoneEvolution('Togepi', 'Togetic', StoneType.Soothe_bell)],
         'baby': true,
         'base': {
             'hitpoints': 35,
@@ -5697,7 +5719,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 49,
         'eggCycles': 10,
-        'evolutions': [new StoneEvolution('Spooky Togepi', 'Spooky Togetic', GameConstants.StoneType.Soothe_bell)],
+        'evolutions': [StoneEvolution('Spooky Togepi', 'Spooky Togetic', StoneType.Soothe_bell)],
         'baby': true,
         'base': {
             'hitpoints': 35,
@@ -5718,7 +5740,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Fairy],
         'levelType': LevelType.fast,
         'exp': 49,
-        'eggCycles': 8,//lowered to match base form
+        'eggCycles': 8, // lowered to match base form
         'base': {
             'hitpoints': 35,
             'attack': 25,
@@ -5739,7 +5761,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 142,
         'eggCycles': 10,
-        'evolutions': [new StoneEvolution('Togetic', 'Togekiss', GameConstants.StoneType.Shiny_stone)],
+        'evolutions': [StoneEvolution('Togetic', 'Togekiss', StoneType.Shiny_stone)],
         'base': {
             'hitpoints': 55,
             'attack': 40,
@@ -5760,7 +5782,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 142,
         'eggCycles': 10,
-        'evolutions': [new StoneEvolution('Spooky Togetic', 'Spooky Togekiss', GameConstants.StoneType.Shiny_stone)],
+        'evolutions': [StoneEvolution('Spooky Togetic', 'Spooky Togekiss', StoneType.Shiny_stone)],
         'base': {
             'hitpoints': 55,
             'attack': 40,
@@ -5781,7 +5803,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 64,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Natu', 'Xatu', 25)],
+        'evolutions': [LevelEvolution('Natu', 'Xatu', 25)],
         'base': {
             'hitpoints': 40,
             'attack': 50,
@@ -5819,7 +5841,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 56,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Mareep', 'Flaaffy', 15)],
+        'evolutions': [LevelEvolution('Mareep', 'Flaaffy', 15)],
         'base': {
             'hitpoints': 55,
             'attack': 40,
@@ -5837,7 +5859,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 128,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Flaaffy', 'Ampharos', 30)],
+        'evolutions': [LevelEvolution('Flaaffy', 'Ampharos', 30)],
         'base': {
             'hitpoints': 70,
             'attack': 55,
@@ -5889,7 +5911,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 88,
         'eggCycles': 10,
-        'evolutions': [new LevelEvolution('Marill', 'Azumarill', 18)],
+        'evolutions': [LevelEvolution('Marill', 'Azumarill', 18)],
         'base': {
             'hitpoints': 70,
             'attack': 20,
@@ -5952,7 +5974,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 100,
             'speed': 70,
         },
-        'heldItem': {type: ItemType.item, id: 'Kings_rock'},
+        'heldItem': { type: ItemType.item, id: 'Kings_rock' },
         'gender': {
             'visualDifference': true,
         },
@@ -5965,7 +5987,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 50,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Hoppip', 'Skiploom', 18)],
+        'evolutions': [LevelEvolution('Hoppip', 'Skiploom', 18)],
         'base': {
             'hitpoints': 35,
             'attack': 35,
@@ -5983,7 +6005,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 119,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Skiploom', 'Jumpluff', 27)],
+        'evolutions': [LevelEvolution('Skiploom', 'Jumpluff', 27)],
         'base': {
             'hitpoints': 55,
             'attack': 45,
@@ -6016,7 +6038,7 @@ const pokemonList = createPokemonArray(
         'catchRate': 45,
         'type': [PokemonType.Normal],
         'levelType': LevelType.fast,
-        'evolutions': [new LevelEvolution('Aipom', 'Ambipom', 32)],
+        'evolutions': [LevelEvolution('Aipom', 'Ambipom', 32)],
         'exp': 72,
         'eggCycles': 20,
         'base': {
@@ -6039,7 +6061,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 36,
         'eggCycles': 20,
-        'evolutions': [new StoneEvolution('Sunkern', 'Sunflora', GameConstants.StoneType.Sun_stone)],
+        'evolutions': [StoneEvolution('Sunkern', 'Sunflora', StoneType.Sun_stone)],
         'base': {
             'hitpoints': 30,
             'attack': 30,
@@ -6074,7 +6096,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 78,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Yanma', 'Yanmega', 33)],
+        'evolutions': [LevelEvolution('Yanma', 'Yanmega', 33)],
         'base': {
             'hitpoints': 65,
             'attack': 65,
@@ -6092,7 +6114,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 42,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Wooper', 'Quagsire', 20)],
+        'evolutions': [LevelEvolution('Wooper', 'Quagsire', 20)],
         'base': {
             'hitpoints': 55,
             'attack': 45,
@@ -6173,7 +6195,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 81,
         'eggCycles': 20,
-        'evolutions': [new StoneEvolution('Murkrow', 'Honchkrow', GameConstants.StoneType.Dusk_stone)],
+        'evolutions': [StoneEvolution('Murkrow', 'Honchkrow', StoneType.Dusk_stone)],
         'base': {
             'hitpoints': 60,
             'attack': 85,
@@ -6202,12 +6224,12 @@ const pokemonList = createPokemonArray(
             'specialDefense': 110,
             'speed': 30,
         },
-        'heldItem': {type: ItemType.item, id: 'Kings_rock'},
+        'heldItem': { type: ItemType.item, id: 'Kings_rock' },
     },
     {
         'id': 199.1,
         'name': 'Galarian Slowking',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': Region.galar,
         'catchRate': 70,
         'type': [PokemonType.Poison, PokemonType.Psychic],
         'levelType': LevelType.mediumfast,
@@ -6230,7 +6252,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 87,
         'eggCycles': 25,
-        'evolutions': [new StoneEvolution('Misdreavus', 'Mismagius', GameConstants.StoneType.Dusk_stone)],
+        'evolutions': [StoneEvolution('Misdreavus', 'Mismagius', StoneType.Dusk_stone)],
         'base': {
             'hitpoints': 60,
             'attack': 60,
@@ -6257,7 +6279,7 @@ const pokemonList = createPokemonArray(
             'speed': 48,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -6277,7 +6299,7 @@ const pokemonList = createPokemonArray(
             'speed': 48,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -6297,7 +6319,7 @@ const pokemonList = createPokemonArray(
             'speed': 48,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -6317,7 +6339,7 @@ const pokemonList = createPokemonArray(
             'speed': 48,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -6337,7 +6359,7 @@ const pokemonList = createPokemonArray(
             'speed': 48,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -6357,7 +6379,7 @@ const pokemonList = createPokemonArray(
             'speed': 48,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -6377,7 +6399,7 @@ const pokemonList = createPokemonArray(
             'speed': 48,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -6397,7 +6419,7 @@ const pokemonList = createPokemonArray(
             'speed': 48,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -6417,7 +6439,7 @@ const pokemonList = createPokemonArray(
             'speed': 48,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -6437,7 +6459,7 @@ const pokemonList = createPokemonArray(
             'speed': 48,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -6457,7 +6479,7 @@ const pokemonList = createPokemonArray(
             'speed': 48,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -6477,7 +6499,7 @@ const pokemonList = createPokemonArray(
             'speed': 48,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -6497,7 +6519,7 @@ const pokemonList = createPokemonArray(
             'speed': 48,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -6517,7 +6539,7 @@ const pokemonList = createPokemonArray(
             'speed': 48,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -6537,7 +6559,7 @@ const pokemonList = createPokemonArray(
             'speed': 48,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -6557,7 +6579,7 @@ const pokemonList = createPokemonArray(
             'speed': 48,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -6577,7 +6599,7 @@ const pokemonList = createPokemonArray(
             'speed': 48,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -6597,7 +6619,7 @@ const pokemonList = createPokemonArray(
             'speed': 48,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -6617,7 +6639,7 @@ const pokemonList = createPokemonArray(
             'speed': 48,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -6637,7 +6659,7 @@ const pokemonList = createPokemonArray(
             'speed': 48,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -6657,7 +6679,7 @@ const pokemonList = createPokemonArray(
             'speed': 48,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -6677,7 +6699,7 @@ const pokemonList = createPokemonArray(
             'speed': 48,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -6697,7 +6719,7 @@ const pokemonList = createPokemonArray(
             'speed': 48,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -6717,7 +6739,7 @@ const pokemonList = createPokemonArray(
             'speed': 48,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -6737,7 +6759,7 @@ const pokemonList = createPokemonArray(
             'speed': 48,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -6757,7 +6779,7 @@ const pokemonList = createPokemonArray(
             'speed': 48,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -6777,7 +6799,7 @@ const pokemonList = createPokemonArray(
             'speed': 48,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -6797,7 +6819,7 @@ const pokemonList = createPokemonArray(
             'speed': 48,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -6848,7 +6870,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 58,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Pineco', 'Forretress', 31)],
+        'evolutions': [LevelEvolution('Pineco', 'Forretress', 31)],
         'base': {
             'hitpoints': 50,
             'attack': 65,
@@ -6900,7 +6922,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 86,
         'eggCycles': 20,
-        'evolutions': [new NightTimedStoneEvolution('Gligar', 'Gliscor', GameConstants.StoneType.Razor_fang)],
+        'evolutions': [NightTimedStoneEvolution('Gligar', 'Gliscor', StoneType.Razor_fang)],
         'base': {
             'hitpoints': 65,
             'attack': 75,
@@ -6929,7 +6951,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 65,
             'speed': 30,
         },
-        'heldItem': {type: ItemType.item, id: 'Metal_coat'},
+        'heldItem': { type: ItemType.item, id: 'Metal_coat' },
         'gender': {
             'visualDifference': true,
         },
@@ -6962,7 +6984,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 60,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Snubbull', 'Granbull', 23)],
+        'evolutions': [LevelEvolution('Snubbull', 'Granbull', 23)],
         'base': {
             'hitpoints': 60,
             'attack': 80,
@@ -7077,7 +7099,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 86,
         'eggCycles': 20,
-        'evolutions': [new NightTimedStoneEvolution('Sneasel', 'Weavile', GameConstants.StoneType.Razor_claw)],
+        'evolutions': [NightTimedStoneEvolution('Sneasel', 'Weavile', StoneType.Razor_claw)],
         'base': {
             'hitpoints': 55,
             'attack': 95,
@@ -7098,7 +7120,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 66,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Teddiursa', 'Ursaring', 30)],
+        'evolutions': [LevelEvolution('Teddiursa', 'Ursaring', 30)],
         'base': {
             'hitpoints': 60,
             'attack': 80,
@@ -7136,7 +7158,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 50,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Slugma', 'Magcargo', 38)],
+        'evolutions': [LevelEvolution('Slugma', 'Magcargo', 38)],
         'base': {
             'hitpoints': 40,
             'attack': 40,
@@ -7171,7 +7193,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 50,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Swinub', 'Piloswine', 33)],
+        'evolutions': [LevelEvolution('Swinub', 'Piloswine', 33)],
         'base': {
             'hitpoints': 50,
             'attack': 50,
@@ -7189,7 +7211,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 158,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Piloswine', 'Mamoswine', 53)],
+        'evolutions': [LevelEvolution('Piloswine', 'Mamoswine', 53)],
         'base': {
             'hitpoints': 100,
             'attack': 100,
@@ -7218,7 +7240,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 95,
             'speed': 35,
         },
-        'heldItem': {type: ItemType.underground, id: 'Hard Stone'},
+        'heldItem': { type: ItemType.underground, id: 'Hard Stone' },
         'gender': {
             'femaleRatio': 0.75,
         },
@@ -7226,13 +7248,13 @@ const pokemonList = createPokemonArray(
     {
         'id': 222.1,
         'name': 'Galarian Corsola',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': Region.galar,
         'catchRate': 60,
         'type': [PokemonType.Ghost],
         'levelType': LevelType.fast,
         'exp': 144,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Galarian Corsola', 'Cursola', 38)],
+        'evolutions': [LevelEvolution('Galarian Corsola', 'Cursola', 38)],
         'base': {
             'hitpoints': 60,
             'attack': 55,
@@ -7253,7 +7275,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 60,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Remoraid', 'Octillery', 25)],
+        'evolutions': [LevelEvolution('Remoraid', 'Octillery', 25)],
         'base': {
             'hitpoints': 35,
             'attack': 65,
@@ -7333,7 +7355,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 70,
             'speed': 70,
         },
-        'heldItem': {type: ItemType.item, id: 'Metal_coat'},
+        'heldItem': { type: ItemType.item, id: 'Metal_coat' },
     },
     {
         'id': 228,
@@ -7343,7 +7365,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 66,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Houndour', 'Houndoom', 24)],
+        'evolutions': [LevelEvolution('Houndour', 'Houndoom', 24)],
         'base': {
             'hitpoints': 45,
             'attack': 60,
@@ -7389,7 +7411,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 95,
             'speed': 85,
         },
-        'heldItem': {type: ItemType.item, id: 'Dragon_scale'},
+        'heldItem': { type: ItemType.item, id: 'Dragon_scale' },
     },
     {
         'id': 231,
@@ -7399,7 +7421,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 66,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Phanpy', 'Donphan', 25)],
+        'evolutions': [LevelEvolution('Phanpy', 'Donphan', 25)],
         'base': {
             'hitpoints': 90,
             'attack': 60,
@@ -7437,7 +7459,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 180,
         'eggCycles': 20,
-        'evolutions': [new StoneEvolution('Porygon2', 'Porygon-Z', GameConstants.StoneType.Dubious_disc)],
+        'evolutions': [StoneEvolution('Porygon2', 'Porygon-Z', StoneType.Dubious_disc)],
         'base': {
             'hitpoints': 85,
             'attack': 80,
@@ -7446,9 +7468,9 @@ const pokemonList = createPokemonArray(
             'specialDefense': 95,
             'speed': 60,
         },
-        'heldItem': {type: ItemType.item, id: 'Upgrade'},
+        'heldItem': { type: ItemType.item, id: 'Upgrade' },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -7494,9 +7516,9 @@ const pokemonList = createPokemonArray(
         'exp': 42,
         'eggCycles': 25,
         'evolutions': [
-            new LevelEvolution('Tyrogue', 'Hitmonlee', 20),
-            new LevelEvolution('Tyrogue', 'Hitmonchan', 20),
-            new LevelEvolution('Tyrogue', 'Hitmontop', 20),
+            LevelEvolution('Tyrogue', 'Hitmonlee', 20),
+            LevelEvolution('Tyrogue', 'Hitmonchan', 20),
+            LevelEvolution('Tyrogue', 'Hitmontop', 20),
         ],
         'baby': true,
         'base': {
@@ -7539,7 +7561,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 61,
         'eggCycles': 25,
-        'evolutions': [new LevelEvolution('Smoochum', 'Jynx', 30)],
+        'evolutions': [LevelEvolution('Smoochum', 'Jynx', 30)],
         'baby': true,
         'base': {
             'hitpoints': 45,
@@ -7561,7 +7583,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 72,
         'eggCycles': 25,
-        'evolutions': [new LevelEvolution('Elekid', 'Electabuzz', 30)],
+        'evolutions': [LevelEvolution('Elekid', 'Electabuzz', 30)],
         'baby': true,
         'base': {
             'hitpoints': 45,
@@ -7571,7 +7593,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 55,
             'speed': 95,
         },
-        'heldItem': {type: ItemType.item, id: 'Electirizer'},
+        'heldItem': { type: ItemType.item, id: 'Electirizer' },
         'gender': {
             'femaleRatio': 0.25,
         },
@@ -7584,7 +7606,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 73,
         'eggCycles': 25,
-        'evolutions': [new LevelEvolution('Magby', 'Magmar', 30)],
+        'evolutions': [LevelEvolution('Magby', 'Magmar', 30)],
         'baby': true,
         'base': {
             'hitpoints': 45,
@@ -7594,7 +7616,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 55,
             'speed': 83,
         },
-        'heldItem': {type: ItemType.item, id: 'Magmarizer'},
+        'heldItem': { type: ItemType.item, id: 'Magmarizer' },
         'gender': {
             'femaleRatio': 0.25,
         },
@@ -7635,7 +7657,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 135,
             'speed': 55,
         },
-        'heldItem': {type: ItemType.underground, id: 'Oval Stone'},
+        'heldItem': { type: ItemType.underground, id: 'Oval Stone' },
         'gender': {
             'femaleRatio': 1,
         },
@@ -7656,7 +7678,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 135,
             'speed': 55,
         },
-        'heldItem': {type: ItemType.underground, id: 'Oval Stone'},
+        'heldItem': { type: ItemType.underground, id: 'Oval Stone' },
     },
     {
         'id': 243,
@@ -7675,7 +7697,7 @@ const pokemonList = createPokemonArray(
             'speed': 115,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -7695,7 +7717,7 @@ const pokemonList = createPokemonArray(
             'speed': 100,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -7715,7 +7737,7 @@ const pokemonList = createPokemonArray(
             'speed': 85,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -7726,7 +7748,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 60,
         'eggCycles': 40,
-        'evolutions': [new LevelEvolution('Larvitar', 'Pupitar', 30)],
+        'evolutions': [LevelEvolution('Larvitar', 'Pupitar', 30)],
         'base': {
             'hitpoints': 50,
             'attack': 64,
@@ -7744,7 +7766,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 144,
         'eggCycles': 40,
-        'evolutions': [new LevelEvolution('Pupitar', 'Tyranitar', 55)],
+        'evolutions': [LevelEvolution('Pupitar', 'Tyranitar', 55)],
         'base': {
             'hitpoints': 70,
             'attack': 84,
@@ -7788,7 +7810,7 @@ const pokemonList = createPokemonArray(
             'speed': 110,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -7808,7 +7830,7 @@ const pokemonList = createPokemonArray(
             'speed': 90,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -7827,9 +7849,9 @@ const pokemonList = createPokemonArray(
             'specialDefense': 100,
             'speed': 100,
         },
-        'heldItem': {type: ItemType.berry, id: BerryType.Lum},
+        'heldItem': { type: ItemType.berry, id: BerryType.Lum },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -7848,9 +7870,9 @@ const pokemonList = createPokemonArray(
             'specialDefense': 100,
             'speed': 100,
         },
-        'heldItem': {type: ItemType.berry, id: BerryType.Lum},
+        'heldItem': { type: ItemType.berry, id: BerryType.Lum },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -7869,9 +7891,9 @@ const pokemonList = createPokemonArray(
             'specialDefense': 100,
             'speed': 100,
         },
-        'heldItem': {type: ItemType.berry, id: BerryType.Lum},
+        'heldItem': { type: ItemType.berry, id: BerryType.Lum },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -7882,7 +7904,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 62,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Treecko', 'Grovyle', 16)],
+        'evolutions': [LevelEvolution('Treecko', 'Grovyle', 16)],
         'base': {
             'hitpoints': 40,
             'attack': 45,
@@ -7903,7 +7925,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 142,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Grovyle', 'Sceptile', 36)],
+        'evolutions': [LevelEvolution('Grovyle', 'Sceptile', 36)],
         'base': {
             'hitpoints': 50,
             'attack': 65,
@@ -7944,7 +7966,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 62,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Torchic', 'Combusken', 16)],
+        'evolutions': [LevelEvolution('Torchic', 'Combusken', 16)],
         'base': {
             'hitpoints': 45,
             'attack': 60,
@@ -7965,7 +7987,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 142,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Combusken', 'Blaziken', 36)],
+        'evolutions': [LevelEvolution('Combusken', 'Blaziken', 36)],
         'base': {
             'hitpoints': 60,
             'attack': 85,
@@ -8008,7 +8030,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 62,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Mudkip', 'Marshtomp', 16)],
+        'evolutions': [LevelEvolution('Mudkip', 'Marshtomp', 16)],
         'base': {
             'hitpoints': 50,
             'attack': 70,
@@ -8029,7 +8051,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 142,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Marshtomp', 'Swampert', 36)],
+        'evolutions': [LevelEvolution('Marshtomp', 'Swampert', 36)],
         'base': {
             'hitpoints': 70,
             'attack': 85,
@@ -8070,7 +8092,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 56,
         'catchRate': 255,
-        'evolutions': [new LevelEvolution('Poochyena', 'Mightyena', 18)],
+        'evolutions': [LevelEvolution('Poochyena', 'Mightyena', 18)],
         'base': {
             'hitpoints': 35,
             'attack': 55,
@@ -8105,7 +8127,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 56,
         'catchRate': 255,
-        'evolutions': [new LevelEvolution('Zigzagoon', 'Linoone', 20)],
+        'evolutions': [LevelEvolution('Zigzagoon', 'Linoone', 20)],
         'base': {
             'hitpoints': 38,
             'attack': 30,
@@ -8114,18 +8136,18 @@ const pokemonList = createPokemonArray(
             'specialDefense': 41,
             'speed': 60,
         },
-        'heldItem': {type: ItemType.underground, id: 'Revive'},
+        'heldItem': { type: ItemType.underground, id: 'Revive' },
     },
     {
         'id': 263.1,
         'name': 'Galarian Zigzagoon',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': Region.galar,
         'type': [PokemonType.Dark, PokemonType.Normal],
         'eggCycles': 15,
         'levelType': LevelType.mediumfast,
         'exp': 56,
         'catchRate': 255,
-        'evolutions': [new LevelEvolution('Galarian Zigzagoon', 'Galarian Linoone', 20)],
+        'evolutions': [LevelEvolution('Galarian Zigzagoon', 'Galarian Linoone', 20)],
         'base': {
             'hitpoints': 38,
             'attack': 30,
@@ -8151,18 +8173,18 @@ const pokemonList = createPokemonArray(
             'specialDefense': 61,
             'speed': 100,
         },
-        'heldItem': {type: ItemType.underground, id: 'Max Revive'},
+        'heldItem': { type: ItemType.underground, id: 'Max Revive' },
     },
     {
         'id': 264.1,
         'name': 'Galarian Linoone',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': Region.galar,
         'type': [PokemonType.Dark, PokemonType.Normal],
         'eggCycles': 15,
         'levelType': LevelType.mediumfast,
         'exp': 147,
         'catchRate': 90,
-        'evolutions': [new NightTimedLevelEvolution('Galarian Linoone', 'Obstagoon', 35)],
+        'evolutions': [NightTimedLevelEvolution('Galarian Linoone', 'Obstagoon', 35)],
         'base': {
             'hitpoints': 78,
             'attack': 70,
@@ -8181,8 +8203,8 @@ const pokemonList = createPokemonArray(
         'exp': 56,
         'catchRate': 255,
         'evolutions': [
-            new LevelEvolution('Wurmple', 'Silcoon', 7),
-            new LevelEvolution('Wurmple', 'Cascoon', 7),
+            LevelEvolution('Wurmple', 'Silcoon', 7),
+            LevelEvolution('Wurmple', 'Cascoon', 7),
         ],
         'base': {
             'hitpoints': 45,
@@ -8201,7 +8223,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 72,
         'catchRate': 120,
-        'evolutions': [new LevelEvolution('Silcoon', 'Beautifly', 10)],
+        'evolutions': [LevelEvolution('Silcoon', 'Beautifly', 10)],
         'base': {
             'hitpoints': 50,
             'attack': 35,
@@ -8239,7 +8261,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 72,
         'catchRate': 120,
-        'evolutions': [new LevelEvolution('Cascoon', 'Dustox', 10)],
+        'evolutions': [LevelEvolution('Cascoon', 'Dustox', 10)],
         'base': {
             'hitpoints': 50,
             'attack': 35,
@@ -8277,7 +8299,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 44,
         'catchRate': 255,
-        'evolutions': [new LevelEvolution('Lotad', 'Lombre', 14)],
+        'evolutions': [LevelEvolution('Lotad', 'Lombre', 14)],
         'base': {
             'hitpoints': 40,
             'attack': 30,
@@ -8295,7 +8317,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 119,
         'catchRate': 120,
-        'evolutions': [new StoneEvolution('Lombre', 'Ludicolo', GameConstants.StoneType.Water_stone)],
+        'evolutions': [StoneEvolution('Lombre', 'Ludicolo', StoneType.Water_stone)],
         'base': {
             'hitpoints': 60,
             'attack': 50,
@@ -8333,7 +8355,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 44,
         'catchRate': 255,
-        'evolutions': [new LevelEvolution('Seedot', 'Nuzleaf', 14)],
+        'evolutions': [LevelEvolution('Seedot', 'Nuzleaf', 14)],
         'base': {
             'hitpoints': 40,
             'attack': 40,
@@ -8351,7 +8373,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 119,
         'catchRate': 120,
-        'evolutions': [new StoneEvolution('Nuzleaf', 'Shiftry', GameConstants.StoneType.Leaf_stone)],
+        'evolutions': [StoneEvolution('Nuzleaf', 'Shiftry', StoneType.Leaf_stone)],
         'base': {
             'hitpoints': 70,
             'attack': 70,
@@ -8392,7 +8414,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 54,
         'catchRate': 200,
-        'evolutions': [new LevelEvolution('Taillow', 'Swellow', 22)],
+        'evolutions': [LevelEvolution('Taillow', 'Swellow', 22)],
         'base': {
             'hitpoints': 40,
             'attack': 55,
@@ -8427,7 +8449,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 54,
         'catchRate': 190,
-        'evolutions': [new LevelEvolution('Wingull', 'Pelipper', 25)],
+        'evolutions': [LevelEvolution('Wingull', 'Pelipper', 25)],
         'base': {
             'hitpoints': 40,
             'attack': 30,
@@ -8462,7 +8484,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 40,
         'catchRate': 235,
-        'evolutions': [new LevelEvolution('Ralts', 'Kirlia', 20)],
+        'evolutions': [LevelEvolution('Ralts', 'Kirlia', 20)],
         'base': {
             'hitpoints': 28,
             'attack': 25,
@@ -8481,8 +8503,8 @@ const pokemonList = createPokemonArray(
         'exp': 97,
         'catchRate': 120,
         'evolutions': [
-            new LevelEvolution('Kirlia', 'Gardevoir', 30),
-            new StoneEvolution('Kirlia', 'Gallade', GameConstants.StoneType.Dawn_stone),
+            LevelEvolution('Kirlia', 'Gardevoir', 30),
+            StoneEvolution('Kirlia', 'Gallade', StoneType.Dawn_stone),
         ],
         'base': {
             'hitpoints': 38,
@@ -8518,7 +8540,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 54,
         'catchRate': 200,
-        'evolutions': [new LevelEvolution('Surskit', 'Masquerain', 22)],
+        'evolutions': [LevelEvolution('Surskit', 'Masquerain', 22)],
         'base': {
             'hitpoints': 40,
             'attack': 30,
@@ -8553,7 +8575,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.fluctuating,
         'exp': 59,
         'catchRate': 255,
-        'evolutions': [new LevelEvolution('Shroomish', 'Breloom', 23)],
+        'evolutions': [LevelEvolution('Shroomish', 'Breloom', 23)],
         'base': {
             'hitpoints': 60,
             'attack': 40,
@@ -8588,7 +8610,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 56,
         'catchRate': 255,
-        'evolutions': [new LevelEvolution('Slakoth', 'Vigoroth', 18)],
+        'evolutions': [LevelEvolution('Slakoth', 'Vigoroth', 18)],
         'base': {
             'hitpoints': 60,
             'attack': 60,
@@ -8606,7 +8628,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 154,
         'catchRate': 120,
-        'evolutions': [new LevelEvolution('Vigoroth', 'Slaking', 36)],
+        'evolutions': [LevelEvolution('Vigoroth', 'Slaking', 36)],
         'base': {
             'hitpoints': 80,
             'attack': 80,
@@ -8642,8 +8664,8 @@ const pokemonList = createPokemonArray(
         'exp': 53,
         'catchRate': 255,
         'evolutions': [
-            new LevelEvolution('Nincada', 'Ninjask', 20),
-            new LevelEvolution('Nincada', 'Shedinja', 20),
+            LevelEvolution('Nincada', 'Ninjask', 20),
+            LevelEvolution('Nincada', 'Shedinja', 20),
         ],
         'base': {
             'hitpoints': 31,
@@ -8688,7 +8710,7 @@ const pokemonList = createPokemonArray(
             'speed': 40,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -8699,7 +8721,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 48,
         'catchRate': 190,
-        'evolutions': [new LevelEvolution('Whismur', 'Loudred', 20)],
+        'evolutions': [LevelEvolution('Whismur', 'Loudred', 20)],
         'base': {
             'hitpoints': 64,
             'attack': 51,
@@ -8717,7 +8739,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 126,
         'catchRate': 120,
-        'evolutions': [new LevelEvolution('Loudred', 'Exploud', 40)],
+        'evolutions': [LevelEvolution('Loudred', 'Exploud', 40)],
         'base': {
             'hitpoints': 84,
             'attack': 71,
@@ -8752,7 +8774,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.fluctuating,
         'exp': 47,
         'catchRate': 180,
-        'evolutions': [new LevelEvolution('Makuhita', 'Hariyama', 24)],
+        'evolutions': [LevelEvolution('Makuhita', 'Hariyama', 24)],
         'base': {
             'hitpoints': 72,
             'attack': 60,
@@ -8781,7 +8803,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 60,
             'speed': 50,
         },
-        'heldItem': {type: ItemType.item, id: 'Kings_rock'},
+        'heldItem': { type: ItemType.item, id: 'Kings_rock' },
         'gender': {
             'femaleRatio': 0.25,
         },
@@ -8794,7 +8816,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 38,
         'catchRate': 150,
-        'evolutions': [new StoneEvolution('Azurill', 'Marill', GameConstants.StoneType.Soothe_bell)],
+        'evolutions': [StoneEvolution('Azurill', 'Marill', StoneType.Soothe_bell)],
         'baby': true,
         'base': {
             'hitpoints': 50,
@@ -8817,11 +8839,11 @@ const pokemonList = createPokemonArray(
         'exp': 75,
         'catchRate': 255,
         'evolutions': [
-            new DungeonRestrictedLevelEvolution('Mt. Coronet North', 'Nosepass', 'Probopass', 20),
-            new DungeonRestrictedLevelEvolution('Mt. Coronet South', 'Nosepass', 'Probopass', 20),
-            new DungeonRestrictedLevelEvolution('Chargestone Cave', 'Nosepass', 'Probopass', 20),
-            new DungeonRestrictedLevelEvolution('Kalos Power Plant', 'Nosepass', 'Probopass', 20),
-            new DungeonRestrictedLevelEvolution('Vast Poni Canyon', 'Nosepass', 'Probopass', 20),
+            DungeonRestrictedLevelEvolution('Mt. Coronet North', 'Nosepass', 'Probopass', 20),
+            DungeonRestrictedLevelEvolution('Mt. Coronet South', 'Nosepass', 'Probopass', 20),
+            DungeonRestrictedLevelEvolution('Chargestone Cave', 'Nosepass', 'Probopass', 20),
+            DungeonRestrictedLevelEvolution('Kalos Power Plant', 'Nosepass', 'Probopass', 20),
+            DungeonRestrictedLevelEvolution('Vast Poni Canyon', 'Nosepass', 'Probopass', 20),
         ],
         'base': {
             'hitpoints': 30,
@@ -8831,7 +8853,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 90,
             'speed': 30,
         },
-        'heldItem': {type: ItemType.underground, id: 'Hard Stone'},
+        'heldItem': { type: ItemType.underground, id: 'Hard Stone' },
     },
     {
         'id': 300,
@@ -8841,7 +8863,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 52,
         'catchRate': 255,
-        'evolutions': [new StoneEvolution('Skitty', 'Delcatty', GameConstants.StoneType.Moon_stone)],
+        'evolutions': [StoneEvolution('Skitty', 'Delcatty', StoneType.Moon_stone)],
         'base': {
             'hitpoints': 50,
             'attack': 45,
@@ -8907,7 +8929,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 55,
             'speed': 50,
         },
-        'heldItem': {type: ItemType.underground, id: 'Iron Ball'},
+        'heldItem': { type: ItemType.underground, id: 'Iron Ball' },
     },
     {
         'id': 304,
@@ -8917,7 +8939,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 66,
         'catchRate': 180,
-        'evolutions': [new LevelEvolution('Aron', 'Lairon', 32)],
+        'evolutions': [LevelEvolution('Aron', 'Lairon', 32)],
         'base': {
             'hitpoints': 50,
             'attack': 70,
@@ -8926,7 +8948,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 40,
             'speed': 30,
         },
-        'heldItem': {type: ItemType.underground, id: 'Hard Stone'},
+        'heldItem': { type: ItemType.underground, id: 'Hard Stone' },
     },
     {
         'id': 305,
@@ -8936,7 +8958,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 151,
         'catchRate': 90,
-        'evolutions': [new LevelEvolution('Lairon', 'Aggron', 42)],
+        'evolutions': [LevelEvolution('Lairon', 'Aggron', 42)],
         'base': {
             'hitpoints': 60,
             'attack': 90,
@@ -8945,7 +8967,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 50,
             'speed': 40,
         },
-        'heldItem': {type: ItemType.underground, id: 'Hard Stone'},
+        'heldItem': { type: ItemType.underground, id: 'Hard Stone' },
     },
     {
         'id': 306,
@@ -8963,7 +8985,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 60,
             'speed': 50,
         },
-        'heldItem': {type: ItemType.underground, id: 'Hard Stone'},
+        'heldItem': { type: ItemType.underground, id: 'Hard Stone' },
     },
     {
         'id': 307,
@@ -8973,7 +8995,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 56,
         'catchRate': 180,
-        'evolutions': [new LevelEvolution('Meditite', 'Medicham', 37)],
+        'evolutions': [LevelEvolution('Meditite', 'Medicham', 37)],
         'base': {
             'hitpoints': 30,
             'attack': 40,
@@ -9014,7 +9036,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 59,
         'catchRate': 120,
-        'evolutions': [new LevelEvolution('Electrike', 'Manectric', 26)],
+        'evolutions': [LevelEvolution('Electrike', 'Manectric', 26)],
         'base': {
             'hitpoints': 40,
             'attack': 45,
@@ -9123,7 +9145,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 140,
         'catchRate': 150,
-        'evolutions': [new StoneEvolution('Roselia', 'Roserade', GameConstants.StoneType.Shiny_stone)],
+        'evolutions': [StoneEvolution('Roselia', 'Roserade', StoneType.Shiny_stone)],
         'base': {
             'hitpoints': 50,
             'attack': 60,
@@ -9144,7 +9166,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.fluctuating,
         'exp': 60,
         'catchRate': 225,
-        'evolutions': [new LevelEvolution('Gulpin', 'Swalot', 26)],
+        'evolutions': [LevelEvolution('Gulpin', 'Swalot', 26)],
         'base': {
             'hitpoints': 70,
             'attack': 43,
@@ -9185,7 +9207,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 61,
         'catchRate': 225,
-        'evolutions': [new LevelEvolution('Carvanha', 'Sharpedo', 30)],
+        'evolutions': [LevelEvolution('Carvanha', 'Sharpedo', 30)],
         'base': {
             'hitpoints': 45,
             'attack': 90,
@@ -9194,7 +9216,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 20,
             'speed': 65,
         },
-        'heldItem': {type: ItemType.item, id: 'Deepsea_tooth'},
+        'heldItem': { type: ItemType.item, id: 'Deepsea_tooth' },
     },
     {
         'id': 319,
@@ -9212,7 +9234,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 40,
             'speed': 95,
         },
-        'heldItem': {type: ItemType.item, id: 'Deepsea_tooth'},
+        'heldItem': { type: ItemType.item, id: 'Deepsea_tooth' },
     },
     {
         'id': 320,
@@ -9222,7 +9244,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.fluctuating,
         'exp': 80,
         'catchRate': 125,
-        'evolutions': [new LevelEvolution('Wailmer', 'Wailord', 40)],
+        'evolutions': [LevelEvolution('Wailmer', 'Wailord', 40)],
         'base': {
             'hitpoints': 130,
             'attack': 70,
@@ -9257,7 +9279,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 61,
         'catchRate': 255,
-        'evolutions': [new LevelEvolution('Numel', 'Camerupt', 33)],
+        'evolutions': [LevelEvolution('Numel', 'Camerupt', 33)],
         'base': {
             'hitpoints': 60,
             'attack': 60,
@@ -9315,7 +9337,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 66,
         'catchRate': 255,
-        'evolutions': [new LevelEvolution('Spoink', 'Grumpig', 32)],
+        'evolutions': [LevelEvolution('Spoink', 'Grumpig', 32)],
         'base': {
             'hitpoints': 60,
             'attack': 25,
@@ -9367,7 +9389,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 58,
         'catchRate': 255,
-        'evolutions': [new LevelEvolution('Trapinch', 'Vibrava', 35)],
+        'evolutions': [LevelEvolution('Trapinch', 'Vibrava', 35)],
         'base': {
             'hitpoints': 45,
             'attack': 100,
@@ -9385,7 +9407,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 119,
         'catchRate': 120,
-        'evolutions': [new LevelEvolution('Vibrava', 'Flygon', 45)],
+        'evolutions': [LevelEvolution('Vibrava', 'Flygon', 45)],
         'base': {
             'hitpoints': 50,
             'attack': 70,
@@ -9420,7 +9442,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 67,
         'catchRate': 190,
-        'evolutions': [new LevelEvolution('Cacnea', 'Cacturne', 32)],
+        'evolutions': [LevelEvolution('Cacnea', 'Cacturne', 32)],
         'base': {
             'hitpoints': 50,
             'attack': 85,
@@ -9458,7 +9480,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.erratic,
         'exp': 62,
         'catchRate': 255,
-        'evolutions': [new LevelEvolution('Swablu', 'Altaria', 35)],
+        'evolutions': [LevelEvolution('Swablu', 'Altaria', 35)],
         'base': {
             'hitpoints': 45,
             'attack': 40,
@@ -9535,9 +9557,9 @@ const pokemonList = createPokemonArray(
             'specialDefense': 85,
             'speed': 70,
         },
-        'heldItem': {type: ItemType.item, id: 'Moon_stone'},
+        'heldItem': { type: ItemType.item, id: 'Moon_stone' },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -9556,9 +9578,9 @@ const pokemonList = createPokemonArray(
             'specialDefense': 65,
             'speed': 70,
         },
-        'heldItem': {type: ItemType.item, id: 'Sun_stone'},
+        'heldItem': { type: ItemType.item, id: 'Sun_stone' },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -9569,7 +9591,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 58,
         'catchRate': 190,
-        'evolutions': [new LevelEvolution('Barboach', 'Whiscash', 30)],
+        'evolutions': [LevelEvolution('Barboach', 'Whiscash', 30)],
         'base': {
             'hitpoints': 50,
             'attack': 48,
@@ -9604,7 +9626,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.fluctuating,
         'exp': 62,
         'catchRate': 205,
-        'evolutions': [new LevelEvolution('Corphish', 'Crawdaunt', 30)],
+        'evolutions': [LevelEvolution('Corphish', 'Crawdaunt', 30)],
         'base': {
             'hitpoints': 43,
             'attack': 80,
@@ -9639,7 +9661,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 60,
         'catchRate': 255,
-        'evolutions': [new LevelEvolution('Baltoy', 'Claydol', 36)],
+        'evolutions': [LevelEvolution('Baltoy', 'Claydol', 36)],
         'base': {
             'hitpoints': 40,
             'attack': 40,
@@ -9649,7 +9671,7 @@ const pokemonList = createPokemonArray(
             'speed': 55,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -9669,7 +9691,7 @@ const pokemonList = createPokemonArray(
             'speed': 75,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -9680,7 +9702,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.erratic,
         'exp': 71,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Lileep', 'Cradily', 40)],
+        'evolutions': [LevelEvolution('Lileep', 'Cradily', 40)],
         'base': {
             'hitpoints': 66,
             'attack': 41,
@@ -9721,7 +9743,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.erratic,
         'exp': 71,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Anorith', 'Armaldo', 40)],
+        'evolutions': [LevelEvolution('Anorith', 'Armaldo', 40)],
         'base': {
             'hitpoints': 45,
             'attack': 95,
@@ -9762,7 +9784,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.erratic,
         'exp': 40,
         'catchRate': 255,
-        'evolutions': [new StoneEvolution('Feebas', 'Milotic', GameConstants.StoneType.Prism_scale)],
+        'evolutions': [StoneEvolution('Feebas', 'Milotic', StoneType.Prism_scale)],
         'base': {
             'hitpoints': 20,
             'attack': 15,
@@ -9885,7 +9907,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 59,
         'catchRate': 225,
-        'evolutions': [new LevelEvolution('Shuppet', 'Banette', 37)],
+        'evolutions': [LevelEvolution('Shuppet', 'Banette', 37)],
         'base': {
             'hitpoints': 44,
             'attack': 75,
@@ -9920,7 +9942,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 59,
         'catchRate': 190,
-        'evolutions': [new LevelEvolution('Duskull', 'Dusclops', 37)],
+        'evolutions': [LevelEvolution('Duskull', 'Dusclops', 37)],
         'base': {
             'hitpoints': 20,
             'attack': 40,
@@ -9938,7 +9960,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 159,
         'catchRate': 90,
-        'evolutions': [new StoneEvolution('Dusclops', 'Dusknoir', GameConstants.StoneType.Reaper_cloth)],
+        'evolutions': [StoneEvolution('Dusclops', 'Dusknoir', StoneType.Reaper_cloth)],
         'base': {
             'hitpoints': 40,
             'attack': 70,
@@ -10007,7 +10029,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 52,
         'catchRate': 125,
-        'evolutions': [new LevelEvolution('Wynaut', 'Wobbuffet', 15)],
+        'evolutions': [LevelEvolution('Wynaut', 'Wobbuffet', 15)],
         'baby': true,
         'base': {
             'hitpoints': 95,
@@ -10027,8 +10049,8 @@ const pokemonList = createPokemonArray(
         'exp': 60,
         'catchRate': 190,
         'evolutions': [
-            new LevelEvolution('Snorunt', 'Glalie', 42),
-            new StoneEvolution('Snorunt', 'Froslass', GameConstants.StoneType.Dawn_stone),
+            LevelEvolution('Snorunt', 'Glalie', 42),
+            StoneEvolution('Snorunt', 'Froslass', StoneType.Dawn_stone),
         ],
         'base': {
             'hitpoints': 50,
@@ -10064,7 +10086,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 58,
         'catchRate': 255,
-        'evolutions': [new LevelEvolution('Spheal', 'Sealeo', 32)],
+        'evolutions': [LevelEvolution('Spheal', 'Sealeo', 32)],
         'base': {
             'hitpoints': 70,
             'attack': 40,
@@ -10082,7 +10104,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 144,
         'catchRate': 120,
-        'evolutions': [new LevelEvolution('Sealeo', 'Walrein', 44)],
+        'evolutions': [LevelEvolution('Sealeo', 'Walrein', 44)],
         'base': {
             'hitpoints': 90,
             'attack': 60,
@@ -10118,8 +10140,8 @@ const pokemonList = createPokemonArray(
         'exp': 69,
         'catchRate': 255,
         'evolutions': [
-            new StoneEvolution('Clamperl', 'Huntail', GameConstants.StoneType.Deepsea_tooth),
-            new StoneEvolution('Clamperl', 'Gorebyss', GameConstants.StoneType.Deepsea_scale),
+            StoneEvolution('Clamperl', 'Huntail', StoneType.Deepsea_tooth),
+            StoneEvolution('Clamperl', 'Gorebyss', StoneType.Deepsea_scale),
         ],
         'base': {
             'hitpoints': 35,
@@ -10146,7 +10168,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 75,
             'speed': 52,
         },
-        'heldItem': {type: ItemType.item, id: 'Deepsea_tooth'},
+        'heldItem': { type: ItemType.item, id: 'Deepsea_tooth' },
     },
     {
         'id': 368,
@@ -10164,7 +10186,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 75,
             'speed': 52,
         },
-        'heldItem': {type: ItemType.item, id: 'Deepsea_scale'},
+        'heldItem': { type: ItemType.item, id: 'Deepsea_scale' },
     },
     {
         'id': 369,
@@ -10182,7 +10204,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 65,
             'speed': 55,
         },
-        'heldItem': {type: ItemType.item, id: 'Deepsea_scale'},
+        'heldItem': { type: ItemType.item, id: 'Deepsea_scale' },
         'gender': {
             'femaleRatio': 0.125,
             'visualDifference': true,
@@ -10204,7 +10226,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 65,
             'speed': 97,
         },
-        'heldItem': {type: ItemType.underground, id: 'Heart Scale'},
+        'heldItem': { type: ItemType.underground, id: 'Heart Scale' },
         'gender': {
             'femaleRatio': 0.75,
         },
@@ -10217,7 +10239,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 60,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Bagon', 'Shelgon', 30)],
+        'evolutions': [LevelEvolution('Bagon', 'Shelgon', 30)],
         'base': {
             'hitpoints': 45,
             'attack': 75,
@@ -10226,7 +10248,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 30,
             'speed': 50,
         },
-        'heldItem': {type: ItemType.item, id: 'Dragon_scale'},
+        'heldItem': { type: ItemType.item, id: 'Dragon_scale' },
     },
     {
         'id': 372,
@@ -10236,7 +10258,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 147,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Shelgon', 'Salamence', 50)],
+        'evolutions': [LevelEvolution('Shelgon', 'Salamence', 50)],
         'base': {
             'hitpoints': 65,
             'attack': 95,
@@ -10245,7 +10267,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 50,
             'speed': 50,
         },
-        'heldItem': {type: ItemType.item, id: 'Dragon_scale'},
+        'heldItem': { type: ItemType.item, id: 'Dragon_scale' },
     },
     {
         'id': 373,
@@ -10263,7 +10285,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 80,
             'speed': 100,
         },
-        'heldItem': {type: ItemType.item, id: 'Dragon_scale'},
+        'heldItem': { type: ItemType.item, id: 'Dragon_scale' },
     },
     {
         'id': 374,
@@ -10273,7 +10295,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 60,
         'catchRate': 3,
-        'evolutions': [new LevelEvolution('Beldum', 'Metang', 20)],
+        'evolutions': [LevelEvolution('Beldum', 'Metang', 20)],
         'base': {
             'hitpoints': 40,
             'attack': 55,
@@ -10282,9 +10304,9 @@ const pokemonList = createPokemonArray(
             'specialDefense': 60,
             'speed': 30,
         },
-        'heldItem': {type: ItemType.item, id: 'Metal_coat'},
+        'heldItem': { type: ItemType.item, id: 'Metal_coat' },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -10295,7 +10317,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 147,
         'catchRate': 3,
-        'evolutions': [new LevelEvolution('Metang', 'Metagross', 45)],
+        'evolutions': [LevelEvolution('Metang', 'Metagross', 45)],
         'base': {
             'hitpoints': 60,
             'attack': 75,
@@ -10304,9 +10326,9 @@ const pokemonList = createPokemonArray(
             'specialDefense': 80,
             'speed': 50,
         },
-        'heldItem': {type: ItemType.item, id: 'Metal_coat'},
+        'heldItem': { type: ItemType.item, id: 'Metal_coat' },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -10325,9 +10347,9 @@ const pokemonList = createPokemonArray(
             'specialDefense': 90,
             'speed': 70,
         },
-        'heldItem': {type: ItemType.item, id: 'Metal_coat'},
+        'heldItem': { type: ItemType.item, id: 'Metal_coat' },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -10347,7 +10369,7 @@ const pokemonList = createPokemonArray(
             'speed': 50,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -10367,7 +10389,7 @@ const pokemonList = createPokemonArray(
             'speed': 50,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -10387,7 +10409,7 @@ const pokemonList = createPokemonArray(
             'speed': 50,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -10409,7 +10431,7 @@ const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 1,
         },
-        'heldItem': {type: ItemType.item, id: 'Soul_Dew'},
+        'heldItem': { type: ItemType.item, id: 'Soul_Dew' },
     },
     {
         'id': 381,
@@ -10430,7 +10452,7 @@ const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 0,
         },
-        'heldItem': {type: ItemType.item, id: 'Soul_Dew'},
+        'heldItem': { type: ItemType.item, id: 'Soul_Dew' },
     },
     {
         'id': 382,
@@ -10449,7 +10471,7 @@ const pokemonList = createPokemonArray(
             'speed': 90,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -10469,7 +10491,7 @@ const pokemonList = createPokemonArray(
             'speed': 90,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -10489,7 +10511,7 @@ const pokemonList = createPokemonArray(
             'speed': 95,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -10508,9 +10530,9 @@ const pokemonList = createPokemonArray(
             'specialDefense': 100,
             'speed': 100,
         },
-        'heldItem': {type: ItemType.underground, id: 'Star Piece'},
+        'heldItem': { type: ItemType.underground, id: 'Star Piece' },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -10530,7 +10552,7 @@ const pokemonList = createPokemonArray(
             'speed': 150,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -10550,7 +10572,7 @@ const pokemonList = createPokemonArray(
             'speed': 150,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -10570,7 +10592,7 @@ const pokemonList = createPokemonArray(
             'speed': 90,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -10590,7 +10612,7 @@ const pokemonList = createPokemonArray(
             'speed': 180,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -10601,7 +10623,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 64,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Turtwig', 'Grotle', 18)],
+        'evolutions': [LevelEvolution('Turtwig', 'Grotle', 18)],
         'base': {
             'hitpoints': 55,
             'attack': 68,
@@ -10622,7 +10644,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 142,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Grotle', 'Torterra', 32)],
+        'evolutions': [LevelEvolution('Grotle', 'Torterra', 32)],
         'base': {
             'hitpoints': 75,
             'attack': 89,
@@ -10663,7 +10685,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 62,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Chimchar', 'Monferno', 14)],
+        'evolutions': [LevelEvolution('Chimchar', 'Monferno', 14)],
         'base': {
             'hitpoints': 44,
             'attack': 58,
@@ -10684,7 +10706,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 142,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Monferno', 'Infernape', 36)],
+        'evolutions': [LevelEvolution('Monferno', 'Infernape', 36)],
         'base': {
             'hitpoints': 64,
             'attack': 78,
@@ -10725,7 +10747,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 63,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Piplup', 'Prinplup', 16)],
+        'evolutions': [LevelEvolution('Piplup', 'Prinplup', 16)],
         'base': {
             'hitpoints': 53,
             'attack': 51,
@@ -10746,7 +10768,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 142,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Prinplup', 'Empoleon', 36)],
+        'evolutions': [LevelEvolution('Prinplup', 'Empoleon', 36)],
         'base': {
             'hitpoints': 64,
             'attack': 66,
@@ -10787,7 +10809,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 49,
         'catchRate': 255,
-        'evolutions': [new LevelEvolution('Starly', 'Staravia', 14)],
+        'evolutions': [LevelEvolution('Starly', 'Staravia', 14)],
         'base': {
             'hitpoints': 40,
             'attack': 55,
@@ -10808,7 +10830,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 119,
         'catchRate': 120,
-        'evolutions': [new LevelEvolution('Staravia', 'Staraptor', 34)],
+        'evolutions': [LevelEvolution('Staravia', 'Staraptor', 34)],
         'base': {
             'hitpoints': 55,
             'attack': 75,
@@ -10849,7 +10871,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 50,
         'catchRate': 255,
-        'evolutions': [new LevelEvolution('Bidoof', 'Bibarel', 15)],
+        'evolutions': [LevelEvolution('Bidoof', 'Bibarel', 15)],
         'base': {
             'hitpoints': 59,
             'attack': 45,
@@ -10890,7 +10912,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 39,
         'catchRate': 255,
-        'evolutions': [new LevelEvolution('Kricketot', 'Kricketune', 10)],
+        'evolutions': [LevelEvolution('Kricketot', 'Kricketune', 10)],
         'base': {
             'hitpoints': 37,
             'attack': 25,
@@ -10931,7 +10953,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 53,
         'catchRate': 235,
-        'evolutions': [new LevelEvolution('Shinx', 'Luxio', 15)],
+        'evolutions': [LevelEvolution('Shinx', 'Luxio', 15)],
         'base': {
             'hitpoints': 45,
             'attack': 65,
@@ -10952,7 +10974,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 127,
         'catchRate': 120,
-        'evolutions': [new LevelEvolution('Luxio', 'Luxray', 30)],
+        'evolutions': [LevelEvolution('Luxio', 'Luxray', 30)],
         'base': {
             'hitpoints': 60,
             'attack': 85,
@@ -10993,7 +11015,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 56,
         'catchRate': 255,
-        'evolutions': [new DayTimedStoneEvolution('Budew', 'Roselia', GameConstants.StoneType.Soothe_bell)],
+        'evolutions': [DayTimedStoneEvolution('Budew', 'Roselia', StoneType.Soothe_bell)],
         'baby': true,
         'base': {
             'hitpoints': 40,
@@ -11032,7 +11054,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.erratic,
         'exp': 70,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Cranidos', 'Rampardos', 30)],
+        'evolutions': [LevelEvolution('Cranidos', 'Rampardos', 30)],
         'base': {
             'hitpoints': 67,
             'attack': 125,
@@ -11073,7 +11095,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.erratic,
         'exp': 70,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Shieldon', 'Bastiodon', 30)],
+        'evolutions': [LevelEvolution('Shieldon', 'Bastiodon', 30)],
         'base': {
             'hitpoints': 30,
             'attack': 42,
@@ -11115,13 +11137,13 @@ const pokemonList = createPokemonArray(
         'exp': 45,
         'catchRate': 120,
         'evolutions': [
-            new LevelEvolution('Burmy (Plant)', 'Wormadam (Plant)', 20),
-            new LevelEvolution('Burmy (Plant)', 'Mothim', 20),
-            new EnvironmentRestrictedLevelEvolution('Cave', 'Burmy (Plant)', 'Burmy (Sand)', 1),
-            new EnvironmentRestrictedLevelEvolution('GemCave', 'Burmy (Plant)', 'Burmy (Sand)', 1),
-            new EnvironmentRestrictedLevelEvolution('PowerPlant', 'Burmy (Plant)', 'Burmy (Trash)', 1),
-            new EnvironmentRestrictedLevelEvolution('Mansion', 'Burmy (Plant)', 'Burmy (Trash)', 1),
-            new EnvironmentRestrictedLevelEvolution('Graveyard', 'Burmy (Plant)', 'Burmy (Trash)', 1),
+            LevelEvolution('Burmy (Plant)', 'Wormadam (Plant)', 20),
+            LevelEvolution('Burmy (Plant)', 'Mothim', 20),
+            EnvironmentRestrictedLevelEvolution('Cave', 'Burmy (Plant)', 'Burmy (Sand)', 1),
+            EnvironmentRestrictedLevelEvolution('GemCave', 'Burmy (Plant)', 'Burmy (Sand)', 1),
+            EnvironmentRestrictedLevelEvolution('PowerPlant', 'Burmy (Plant)', 'Burmy (Trash)', 1),
+            EnvironmentRestrictedLevelEvolution('Mansion', 'Burmy (Plant)', 'Burmy (Trash)', 1),
+            EnvironmentRestrictedLevelEvolution('Graveyard', 'Burmy (Plant)', 'Burmy (Trash)', 1),
         ],
         'base': {
             'hitpoints': 40,
@@ -11141,8 +11163,8 @@ const pokemonList = createPokemonArray(
         'exp': 45,
         'catchRate': 120,
         'evolutions': [
-            new LevelEvolution('Burmy (Sand)', 'Wormadam (Sand)', 20),
-            new LevelEvolution('Burmy (Sand)', 'Mothim', 20),
+            LevelEvolution('Burmy (Sand)', 'Wormadam (Sand)', 20),
+            LevelEvolution('Burmy (Sand)', 'Mothim', 20),
         ],
         'base': {
             'hitpoints': 40,
@@ -11162,8 +11184,8 @@ const pokemonList = createPokemonArray(
         'exp': 45,
         'catchRate': 120,
         'evolutions': [
-            new LevelEvolution('Burmy (Trash)', 'Wormadam (Trash)', 20),
-            new LevelEvolution('Burmy (Trash)', 'Mothim', 20),
+            LevelEvolution('Burmy (Trash)', 'Wormadam (Trash)', 20),
+            LevelEvolution('Burmy (Trash)', 'Mothim', 20),
         ],
         'base': {
             'hitpoints': 40,
@@ -11262,7 +11284,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 49,
         'catchRate': 120,
-        'evolutions': [new LevelEvolution('Combee', 'Vespiquen', 21)],
+        'evolutions': [LevelEvolution('Combee', 'Vespiquen', 21)],
         'base': {
             'hitpoints': 30,
             'attack': 30,
@@ -11324,7 +11346,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 66,
         'catchRate': 190,
-        'evolutions': [new LevelEvolution('Buizel', 'Floatzel', 26)],
+        'evolutions': [LevelEvolution('Buizel', 'Floatzel', 26)],
         'base': {
             'hitpoints': 55,
             'attack': 65,
@@ -11359,7 +11381,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 55,
         'catchRate': 190,
-        'evolutions': [new LevelEvolution('Cherubi', 'Cherrim (Overcast)', 25)],
+        'evolutions': [LevelEvolution('Cherubi', 'Cherrim (Overcast)', 25)],
         'base': {
             'hitpoints': 45,
             'attack': 35,
@@ -11377,7 +11399,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 158,
         'catchRate': 75,
-        'evolutions': [new WeatherRestrictedLevelEvolution('Cherrim (Overcast)', 'Cherrim (Sunshine)', 1, [WeatherType.Sunny])],
+        'evolutions': [WeatherRestrictedLevelEvolution([WeatherType.Sunny], 'Cherrim (Overcast)', 'Cherrim (Sunshine)', 1)],
         'base': {
             'hitpoints': 70,
             'attack': 60,
@@ -11412,7 +11434,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 65,
         'catchRate': 190,
-        'evolutions': [new LevelEvolution('Shellos (West)', 'Gastrodon (West)', 30)],
+        'evolutions': [LevelEvolution('Shellos (West)', 'Gastrodon (West)', 30)],
         'base': {
             'hitpoints': 76,
             'attack': 48,
@@ -11430,7 +11452,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 65,
         'catchRate': 190,
-        'evolutions': [new LevelEvolution('Shellos (East)', 'Gastrodon (East)', 30)],
+        'evolutions': [LevelEvolution('Shellos (East)', 'Gastrodon (East)', 30)],
         'base': {
             'hitpoints': 76,
             'attack': 48,
@@ -11502,7 +11524,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.fluctuating,
         'exp': 70,
         'catchRate': 125,
-        'evolutions': [new LevelEvolution('Drifloon', 'Drifblim', 28)],
+        'evolutions': [LevelEvolution('Drifloon', 'Drifblim', 28)],
         'base': {
             'hitpoints': 90,
             'attack': 50,
@@ -11537,7 +11559,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 70,
         'catchRate': 190,
-        'evolutions': [new StoneEvolution('Buneary', 'Lopunny', GameConstants.StoneType.Soothe_bell)],
+        'evolutions': [StoneEvolution('Buneary', 'Lopunny', StoneType.Soothe_bell)],
         'base': {
             'hitpoints': 55,
             'attack': 66,
@@ -11606,7 +11628,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 62,
         'catchRate': 190,
-        'evolutions': [new LevelEvolution('Glameow', 'Purugly', 38)],
+        'evolutions': [LevelEvolution('Glameow', 'Purugly', 38)],
         'base': {
             'hitpoints': 49,
             'attack': 55,
@@ -11647,7 +11669,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 57,
         'catchRate': 120,
-        'evolutions': [new NightTimedStoneEvolution('Chingling', 'Chimecho', GameConstants.StoneType.Soothe_bell)],
+        'evolutions': [NightTimedStoneEvolution('Chingling', 'Chimecho', StoneType.Soothe_bell)],
         'baby': true,
         'base': {
             'hitpoints': 45,
@@ -11666,7 +11688,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 66,
         'catchRate': 225,
-        'evolutions': [new LevelEvolution('Stunky', 'Skuntank', 34)],
+        'evolutions': [LevelEvolution('Stunky', 'Skuntank', 34)],
         'base': {
             'hitpoints': 63,
             'attack': 63,
@@ -11701,7 +11723,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 60,
         'catchRate': 255,
-        'evolutions': [new LevelEvolution('Bronzor', 'Bronzong', 33)],
+        'evolutions': [LevelEvolution('Bronzor', 'Bronzong', 33)],
         'base': {
             'hitpoints': 57,
             'attack': 24,
@@ -11710,9 +11732,9 @@ const pokemonList = createPokemonArray(
             'specialDefense': 86,
             'speed': 23,
         },
-        'heldItem': {type: ItemType.item, id: 'Metal_coat'},
+        'heldItem': { type: ItemType.item, id: 'Metal_coat' },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -11731,9 +11753,9 @@ const pokemonList = createPokemonArray(
             'specialDefense': 116,
             'speed': 33,
         },
-        'heldItem': {type: ItemType.item, id: 'Metal_coat'},
+        'heldItem': { type: ItemType.item, id: 'Metal_coat' },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -11747,7 +11769,7 @@ const pokemonList = createPokemonArray(
         'evolutions': [
             // Evolves when leveled up while knowing Mimic
             // Learns mimic at level 16
-            new LevelEvolution('Bonsly', 'Sudowoodo', 32),
+            LevelEvolution('Bonsly', 'Sudowoodo', 32),
         ],
         'baby': true,
         'base': {
@@ -11770,8 +11792,8 @@ const pokemonList = createPokemonArray(
         'evolutions': [
             // Evolves when leveled up while knowing Mimic
             // Learns mimic at level 32
-            new RegionLevelEvolution(allButGalar, 'Mime Jr.', 'Mr. Mime', 32),
-            new RegionLevelEvolution(galarOnly, 'Mime Jr.', 'Galarian Mr. Mime', 32),
+            RegionLevelEvolution(allButGalar, 'Mime Jr.', 'Mr. Mime', 32),
+            RegionLevelEvolution(galarOnly, 'Mime Jr.', 'Galarian Mr. Mime', 32),
         ],
         'baby': true,
         'base': {
@@ -11793,7 +11815,7 @@ const pokemonList = createPokemonArray(
         'catchRate': 130,
         'evolutions': [
             // TODO: Evolves while holding an Oval Stone during the Day time
-            new StoneEvolution('Happiny', 'Chansey', GameConstants.StoneType.None),
+            StoneEvolution('Happiny', 'Chansey', StoneType.None),
         ],
         'baby': true,
         'base': {
@@ -11804,7 +11826,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 65,
             'speed': 30,
         },
-        'heldItem': {type: ItemType.underground, id: 'Oval Stone'},
+        'heldItem': { type: ItemType.underground, id: 'Oval Stone' },
         'gender': {
             'femaleRatio': 1,
         },
@@ -11819,7 +11841,7 @@ const pokemonList = createPokemonArray(
         'catchRate': 130,
         'evolutions': [
             // TODO: Evolves while holding an Oval Stone during the Day time
-            new StoneEvolution('Handout Happiny', 'Charity Chansey', GameConstants.StoneType.None),
+            StoneEvolution('Handout Happiny', 'Charity Chansey', StoneType.None),
         ],
         'baby': true,
         'base': {
@@ -11830,7 +11852,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 65,
             'speed': 30,
         },
-        'heldItem': {type: ItemType.underground, id: 'Oval Stone'},
+        'heldItem': { type: ItemType.underground, id: 'Oval Stone' },
     },
     {
         'id': 441,
@@ -11874,7 +11896,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 60,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Gible', 'Gabite', 24)],
+        'evolutions': [LevelEvolution('Gible', 'Gabite', 24)],
         'base': {
             'hitpoints': 58,
             'attack': 70,
@@ -11895,7 +11917,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 144,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Gabite', 'Garchomp', 48)],
+        'evolutions': [LevelEvolution('Gabite', 'Garchomp', 48)],
         'base': {
             'hitpoints': 68,
             'attack': 90,
@@ -11936,7 +11958,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 78,
         'catchRate': 50,
-        'evolutions': [new StoneEvolution('Munchlax', 'Snorlax', GameConstants.StoneType.Soothe_bell)],
+        'evolutions': [StoneEvolution('Munchlax', 'Snorlax', StoneType.Soothe_bell)],
         'baby': true,
         'base': {
             'hitpoints': 135,
@@ -11958,7 +11980,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 78,
         'catchRate': 50,
-        'evolutions': [new StoneEvolution('Elf Munchlax', 'Santa Snorlax', GameConstants.StoneType.Soothe_bell)],
+        'evolutions': [StoneEvolution('Elf Munchlax', 'Santa Snorlax', StoneType.Soothe_bell)],
         'baby': true,
         'base': {
             'hitpoints': 135,
@@ -11980,7 +12002,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 57,
         'catchRate': 75,
-        'evolutions': [new DayTimedStoneEvolution('Riolu', 'Lucario', GameConstants.StoneType.Soothe_bell)],
+        'evolutions': [DayTimedStoneEvolution('Riolu', 'Lucario', StoneType.Soothe_bell)],
         'baby': true,
         'base': {
             'hitpoints': 40,
@@ -12022,7 +12044,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 66,
         'catchRate': 140,
-        'evolutions': [new LevelEvolution('Hippopotas', 'Hippowdon', 34)],
+        'evolutions': [LevelEvolution('Hippopotas', 'Hippowdon', 34)],
         'base': {
             'hitpoints': 68,
             'attack': 72,
@@ -12063,7 +12085,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 66,
         'catchRate': 120,
-        'evolutions': [new LevelEvolution('Skorupi', 'Drapion', 40)],
+        'evolutions': [LevelEvolution('Skorupi', 'Drapion', 40)],
         'base': {
             'hitpoints': 40,
             'attack': 50,
@@ -12098,7 +12120,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 60,
         'catchRate': 140,
-        'evolutions': [new LevelEvolution('Croagunk', 'Toxicroak', 37)],
+        'evolutions': [LevelEvolution('Croagunk', 'Toxicroak', 37)],
         'base': {
             'hitpoints': 48,
             'attack': 61,
@@ -12156,7 +12178,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.erratic,
         'exp': 66,
         'catchRate': 190,
-        'evolutions': [new LevelEvolution('Finneon', 'Lumineon', 31)],
+        'evolutions': [LevelEvolution('Finneon', 'Lumineon', 31)],
         'base': {
             'hitpoints': 49,
             'attack': 49,
@@ -12199,7 +12221,7 @@ const pokemonList = createPokemonArray(
         'catchRate': 25,
         'evolutions': [
             // TODO: Evolves when leveled up with a Remoraid in the party
-            new StoneEvolution('Mantyke', 'Mantine', GameConstants.StoneType.None),
+            StoneEvolution('Mantyke', 'Mantine', StoneType.None),
         ],
         'baby': true,
         'base': {
@@ -12219,7 +12241,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 67,
         'catchRate': 120,
-        'evolutions': [new LevelEvolution('Snover', 'Abomasnow', 40)],
+        'evolutions': [LevelEvolution('Snover', 'Abomasnow', 40)],
         'base': {
             'hitpoints': 60,
             'attack': 62,
@@ -12288,9 +12310,9 @@ const pokemonList = createPokemonArray(
             'specialDefense': 90,
             'speed': 60,
         },
-        'heldItem': {type: ItemType.item, id: 'Metal_coat'},
+        'heldItem': { type: ItemType.item, id: 'Metal_coat' },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -12366,7 +12388,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 85,
             'speed': 95,
         },
-        'heldItem': {type: ItemType.item, id: 'Electirizer'},
+        'heldItem': { type: ItemType.item, id: 'Electirizer' },
         'gender': {
             'femaleRatio': 0.25,
         },
@@ -12387,7 +12409,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 95,
             'speed': 83,
         },
-        'heldItem': {type: ItemType.item, id: 'Magmarizer'},
+        'heldItem': { type: ItemType.item, id: 'Magmarizer' },
         'gender': {
             'femaleRatio': 0.25,
         },
@@ -12543,7 +12565,7 @@ const pokemonList = createPokemonArray(
             'speed': 90,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -12582,7 +12604,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 150,
             'speed': 40,
         },
-        'heldItem': {type: ItemType.underground, id: 'Hard Stone'},
+        'heldItem': { type: ItemType.underground, id: 'Hard Stone' },
     },
     {
         'id': 477,
@@ -12638,7 +12660,7 @@ const pokemonList = createPokemonArray(
             'speed': 91,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -12658,7 +12680,7 @@ const pokemonList = createPokemonArray(
             'speed': 86,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -12678,7 +12700,7 @@ const pokemonList = createPokemonArray(
             'speed': 86,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -12698,7 +12720,7 @@ const pokemonList = createPokemonArray(
             'speed': 86,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -12718,7 +12740,7 @@ const pokemonList = createPokemonArray(
             'speed': 86,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -12738,7 +12760,7 @@ const pokemonList = createPokemonArray(
             'speed': 86,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -12758,7 +12780,7 @@ const pokemonList = createPokemonArray(
             'speed': 86,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -12778,7 +12800,7 @@ const pokemonList = createPokemonArray(
             'speed': 95,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -12798,7 +12820,7 @@ const pokemonList = createPokemonArray(
             'speed': 80,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -12818,7 +12840,7 @@ const pokemonList = createPokemonArray(
             'speed': 115,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -12829,7 +12851,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 306,
         'catchRate': 3,
-        'heldItem': {type: ItemType.item, id: 'Adamant_Orb'},
+        'heldItem': { type: ItemType.item, id: 'Adamant_Orb' },
         'base': {
             'hitpoints': 100,
             'attack': 120,
@@ -12839,7 +12861,7 @@ const pokemonList = createPokemonArray(
             'speed': 90,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -12850,7 +12872,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 306,
         'catchRate': 3,
-        'heldItem': {type: ItemType.item, id: 'Lustrous_Orb'},
+        'heldItem': { type: ItemType.item, id: 'Lustrous_Orb' },
         'base': {
             'hitpoints': 90,
             'attack': 120,
@@ -12860,7 +12882,7 @@ const pokemonList = createPokemonArray(
             'speed': 100,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -12897,7 +12919,7 @@ const pokemonList = createPokemonArray(
             'speed': 100,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -12917,7 +12939,7 @@ const pokemonList = createPokemonArray(
             'speed': 90,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -12937,7 +12959,7 @@ const pokemonList = createPokemonArray(
             'speed': 90,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -12955,7 +12977,8 @@ const pokemonList = createPokemonArray(
             'defense': 120,
             'specialDefense': 130,
             'speed': 85,
-        },'gender': {
+        },
+        'gender': {
             'femaleRatio': 1,
         },
     },
@@ -12967,7 +12990,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 216,
         // 69420 to prevent evolution ingame, evolution needed for baby form to be obtainable
-        'evolutions': [new LevelEvolution('Phione', 'Manaphy', 69420)],
+        'evolutions': [LevelEvolution('Phione', 'Manaphy', 69420)],
         'baby': true,
         'catchRate': 30,
         'base': {
@@ -12979,7 +13002,7 @@ const pokemonList = createPokemonArray(
             'speed': 80,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -12999,7 +13022,7 @@ const pokemonList = createPokemonArray(
             'speed': 100,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -13019,7 +13042,7 @@ const pokemonList = createPokemonArray(
             'speed': 125,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -13038,9 +13061,9 @@ const pokemonList = createPokemonArray(
             'specialDefense': 100,
             'speed': 100,
         },
-        'heldItem': {type: ItemType.berry, id: BerryType.Lum},
+        'heldItem': { type: ItemType.berry, id: BerryType.Lum },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -13060,7 +13083,7 @@ const pokemonList = createPokemonArray(
             'speed': 127,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -13080,7 +13103,7 @@ const pokemonList = createPokemonArray(
             'speed': 120,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -13100,7 +13123,7 @@ const pokemonList = createPokemonArray(
             'speed': 120,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -13120,7 +13143,7 @@ const pokemonList = createPokemonArray(
             'speed': 120,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -13140,7 +13163,7 @@ const pokemonList = createPokemonArray(
             'speed': 120,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -13160,7 +13183,7 @@ const pokemonList = createPokemonArray(
             'speed': 120,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -13180,7 +13203,7 @@ const pokemonList = createPokemonArray(
             'speed': 120,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -13200,7 +13223,7 @@ const pokemonList = createPokemonArray(
             'speed': 120,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -13220,7 +13243,7 @@ const pokemonList = createPokemonArray(
             'speed': 120,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -13240,7 +13263,7 @@ const pokemonList = createPokemonArray(
             'speed': 120,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -13260,7 +13283,7 @@ const pokemonList = createPokemonArray(
             'speed': 120,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -13280,7 +13303,7 @@ const pokemonList = createPokemonArray(
             'speed': 120,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -13300,7 +13323,7 @@ const pokemonList = createPokemonArray(
             'speed': 120,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -13320,7 +13343,7 @@ const pokemonList = createPokemonArray(
             'speed': 120,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -13340,7 +13363,7 @@ const pokemonList = createPokemonArray(
             'speed': 120,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -13360,7 +13383,7 @@ const pokemonList = createPokemonArray(
             'speed': 120,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -13380,7 +13403,7 @@ const pokemonList = createPokemonArray(
             'speed': 120,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -13400,7 +13423,7 @@ const pokemonList = createPokemonArray(
             'speed': 120,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -13420,7 +13443,7 @@ const pokemonList = createPokemonArray(
             'speed': 120,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -13440,7 +13463,7 @@ const pokemonList = createPokemonArray(
             'speed': 100,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -13451,7 +13474,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 62,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Snivy', 'Servine', 17)],
+        'evolutions': [LevelEvolution('Snivy', 'Servine', 17)],
         'base': {
             'hitpoints': 45,
             'attack': 45,
@@ -13472,7 +13495,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 145,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Servine', 'Serperior', 36)],
+        'evolutions': [LevelEvolution('Servine', 'Serperior', 36)],
         'base': {
             'hitpoints': 60,
             'attack': 60,
@@ -13513,7 +13536,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 62,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Tepig', 'Pignite', 17)],
+        'evolutions': [LevelEvolution('Tepig', 'Pignite', 17)],
         'base': {
             'hitpoints': 65,
             'attack': 63,
@@ -13534,7 +13557,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 146,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Pignite', 'Emboar', 36)],
+        'evolutions': [LevelEvolution('Pignite', 'Emboar', 36)],
         'base': {
             'hitpoints': 90,
             'attack': 93,
@@ -13575,7 +13598,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 62,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Oshawott', 'Dewott', 17)],
+        'evolutions': [LevelEvolution('Oshawott', 'Dewott', 17)],
         'base': {
             'hitpoints': 55,
             'attack': 55,
@@ -13596,7 +13619,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 145,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Dewott', 'Samurott', 36)],
+        'evolutions': [LevelEvolution('Dewott', 'Samurott', 36)],
         'base': {
             'hitpoints': 75,
             'attack': 75,
@@ -13637,7 +13660,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 51,
         'catchRate': 255,
-        'evolutions': [new LevelEvolution('Patrat', 'Watchog', 20)],
+        'evolutions': [LevelEvolution('Patrat', 'Watchog', 20)],
         'base': {
             'hitpoints': 45,
             'attack': 55,
@@ -13672,7 +13695,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 55,
         'catchRate': 255,
-        'evolutions': [new LevelEvolution('Lillipup', 'Herdier', 16)],
+        'evolutions': [LevelEvolution('Lillipup', 'Herdier', 16)],
         'base': {
             'hitpoints': 45,
             'attack': 60,
@@ -13690,7 +13713,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 130,
         'catchRate': 120,
-        'evolutions': [new LevelEvolution('Herdier', 'Stoutland', 32)],
+        'evolutions': [LevelEvolution('Herdier', 'Stoutland', 32)],
         'base': {
             'hitpoints': 65,
             'attack': 80,
@@ -13725,7 +13748,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 56,
         'catchRate': 255,
-        'evolutions': [new LevelEvolution('Purrloin', 'Liepard', 20)],
+        'evolutions': [LevelEvolution('Purrloin', 'Liepard', 20)],
         'base': {
             'hitpoints': 41,
             'attack': 50,
@@ -13760,7 +13783,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 63,
         'catchRate': 190,
-        'evolutions': [new StoneEvolution('Pansage', 'Simisage', GameConstants.StoneType.Leaf_stone)],
+        'evolutions': [StoneEvolution('Pansage', 'Simisage', StoneType.Leaf_stone)],
         'base': {
             'hitpoints': 50,
             'attack': 53,
@@ -13801,7 +13824,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 63,
         'catchRate': 190,
-        'evolutions': [new StoneEvolution('Pansear', 'Simisear', GameConstants.StoneType.Fire_stone)],
+        'evolutions': [StoneEvolution('Pansear', 'Simisear', StoneType.Fire_stone)],
         'base': {
             'hitpoints': 50,
             'attack': 53,
@@ -13842,7 +13865,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 63,
         'catchRate': 190,
-        'evolutions': [new StoneEvolution('Panpour', 'Simipour', GameConstants.StoneType.Water_stone)],
+        'evolutions': [StoneEvolution('Panpour', 'Simipour', StoneType.Water_stone)],
         'base': {
             'hitpoints': 50,
             'attack': 53,
@@ -13883,7 +13906,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 58,
         'catchRate': 190,
-        'evolutions': [new StoneEvolution('Munna', 'Musharna', GameConstants.StoneType.Moon_stone)],
+        'evolutions': [StoneEvolution('Munna', 'Musharna', StoneType.Moon_stone)],
         'base': {
             'hitpoints': 76,
             'attack': 25,
@@ -13918,7 +13941,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 53,
         'catchRate': 255,
-        'evolutions': [new LevelEvolution('Pidove', 'Tranquill', 21)],
+        'evolutions': [LevelEvolution('Pidove', 'Tranquill', 21)],
         'base': {
             'hitpoints': 50,
             'attack': 55,
@@ -13936,7 +13959,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 125,
         'catchRate': 120,
-        'evolutions': [new LevelEvolution('Tranquill', 'Unfezant', 32)],
+        'evolutions': [LevelEvolution('Tranquill', 'Unfezant', 32)],
         'base': {
             'hitpoints': 62,
             'attack': 77,
@@ -13974,7 +13997,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 59,
         'catchRate': 190,
-        'evolutions': [new LevelEvolution('Blitzle', 'Zebstrika', 27)],
+        'evolutions': [LevelEvolution('Blitzle', 'Zebstrika', 27)],
         'base': {
             'hitpoints': 45,
             'attack': 60,
@@ -14009,7 +14032,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 56,
         'catchRate': 255,
-        'evolutions': [new LevelEvolution('Roggenrola', 'Boldore', 25)],
+        'evolutions': [LevelEvolution('Roggenrola', 'Boldore', 25)],
         'base': {
             'hitpoints': 55,
             'attack': 75,
@@ -14018,7 +14041,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 25,
             'speed': 15,
         },
-        'heldItem': {type: ItemType.underground, id: 'Everstone'},
+        'heldItem': { type: ItemType.underground, id: 'Everstone' },
     },
     {
         'id': 525,
@@ -14028,7 +14051,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 137,
         'catchRate': 120,
-        'evolutions': [new StoneEvolution('Boldore', 'Gigalith', GameConstants.StoneType.Linking_cord)],
+        'evolutions': [StoneEvolution('Boldore', 'Gigalith', StoneType.Linking_cord)],
         'base': {
             'hitpoints': 70,
             'attack': 105,
@@ -14037,7 +14060,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 40,
             'speed': 20,
         },
-        'heldItem': {type: ItemType.underground, id: 'Everstone'},
+        'heldItem': { type: ItemType.underground, id: 'Everstone' },
     },
     {
         'id': 526,
@@ -14055,7 +14078,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 80,
             'speed': 25,
         },
-        'heldItem': {type: ItemType.underground, id: 'Everstone'},
+        'heldItem': { type: ItemType.underground, id: 'Everstone' },
     },
     {
         'id': 527,
@@ -14065,7 +14088,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 65,
         'catchRate': 190,
-        'evolutions': [new StoneEvolution('Woobat', 'Swoobat', GameConstants.StoneType.Soothe_bell)],
+        'evolutions': [StoneEvolution('Woobat', 'Swoobat', StoneType.Soothe_bell)],
         'base': {
             'hitpoints': 65,
             'attack': 45,
@@ -14100,7 +14123,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 66,
         'catchRate': 120,
-        'evolutions': [new LevelEvolution('Drilbur', 'Excadrill', 31)],
+        'evolutions': [LevelEvolution('Drilbur', 'Excadrill', 31)],
         'base': {
             'hitpoints': 60,
             'attack': 85,
@@ -14152,7 +14175,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 61,
         'catchRate': 180,
-        'evolutions': [new LevelEvolution('Timburr', 'Gurdurr', 25)],
+        'evolutions': [LevelEvolution('Timburr', 'Gurdurr', 25)],
         'base': {
             'hitpoints': 75,
             'attack': 80,
@@ -14173,7 +14196,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 142,
         'catchRate': 90,
-        'evolutions': [new StoneEvolution('Gurdurr', 'Conkeldurr', GameConstants.StoneType.Linking_cord)],
+        'evolutions': [StoneEvolution('Gurdurr', 'Conkeldurr', StoneType.Linking_cord)],
         'base': {
             'hitpoints': 85,
             'attack': 105,
@@ -14214,7 +14237,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 59,
         'catchRate': 255,
-        'evolutions': [new LevelEvolution('Tympole', 'Palpitoad', 25)],
+        'evolutions': [LevelEvolution('Tympole', 'Palpitoad', 25)],
         'base': {
             'hitpoints': 50,
             'attack': 50,
@@ -14232,7 +14255,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 134,
         'catchRate': 120,
-        'evolutions': [new LevelEvolution('Palpitoad', 'Seismitoad', 36)],
+        'evolutions': [LevelEvolution('Palpitoad', 'Seismitoad', 36)],
         'base': {
             'hitpoints': 75,
             'attack': 65,
@@ -14307,7 +14330,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 62,
         'catchRate': 255,
-        'evolutions': [new LevelEvolution('Sewaddle', 'Swadloon', 20)],
+        'evolutions': [LevelEvolution('Sewaddle', 'Swadloon', 20)],
         'base': {
             'hitpoints': 45,
             'attack': 53,
@@ -14325,7 +14348,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 133,
         'catchRate': 120,
-        'evolutions': [new StoneEvolution('Swadloon', 'Leavanny', GameConstants.StoneType.Soothe_bell)],
+        'evolutions': [StoneEvolution('Swadloon', 'Leavanny', StoneType.Soothe_bell)],
         'base': {
             'hitpoints': 55,
             'attack': 63,
@@ -14360,7 +14383,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 52,
         'catchRate': 255,
-        'evolutions': [new LevelEvolution('Venipede', 'Whirlipede', 22)],
+        'evolutions': [LevelEvolution('Venipede', 'Whirlipede', 22)],
         'base': {
             'hitpoints': 30,
             'attack': 45,
@@ -14378,7 +14401,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 126,
         'catchRate': 120,
-        'evolutions': [new LevelEvolution('Whirlipede', 'Scolipede', 30)],
+        'evolutions': [LevelEvolution('Whirlipede', 'Scolipede', 30)],
         'base': {
             'hitpoints': 40,
             'attack': 55,
@@ -14413,7 +14436,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 56,
         'catchRate': 190,
-        'evolutions': [new StoneEvolution('Cottonee', 'Whimsicott', GameConstants.StoneType.Sun_stone)],
+        'evolutions': [StoneEvolution('Cottonee', 'Whimsicott', StoneType.Sun_stone)],
         'base': {
             'hitpoints': 40,
             'attack': 27,
@@ -14448,7 +14471,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 56,
         'catchRate': 190,
-        'evolutions': [new StoneEvolution('Petilil', 'Lilligant', GameConstants.StoneType.Sun_stone)],
+        'evolutions': [StoneEvolution('Petilil', 'Lilligant', StoneType.Sun_stone)],
         'base': {
             'hitpoints': 45,
             'attack': 35,
@@ -14497,7 +14520,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 55,
             'speed': 98,
         },
-        'heldItem': {type: ItemType.item, id: 'Deepsea_tooth'},
+        'heldItem': { type: ItemType.item, id: 'Deepsea_tooth' },
     },
     {
         'id': 550.01,
@@ -14515,7 +14538,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 55,
             'speed': 98,
         },
-        'heldItem': {type: ItemType.item, id: 'Deepsea_scale'},
+        'heldItem': { type: ItemType.item, id: 'Deepsea_scale' },
     },
     {
         'id': 551,
@@ -14525,7 +14548,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 58,
         'catchRate': 180,
-        'evolutions': [new LevelEvolution('Sandile', 'Krokorok', 29)],
+        'evolutions': [LevelEvolution('Sandile', 'Krokorok', 29)],
         'base': {
             'hitpoints': 50,
             'attack': 72,
@@ -14543,7 +14566,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 123,
         'catchRate': 90,
-        'evolutions': [new LevelEvolution('Krokorok', 'Krookodile', 40)],
+        'evolutions': [LevelEvolution('Krokorok', 'Krookodile', 40)],
         'base': {
             'hitpoints': 60,
             'attack': 82,
@@ -14579,8 +14602,8 @@ const pokemonList = createPokemonArray(
         'exp': 63,
         'catchRate': 120,
         'evolutions': [
-            new LevelEvolution('Darumaka', 'Darmanitan', 35),
-            new LevelEvolution('Darumaka', 'Darmanitan (Zen)', 1234),
+            LevelEvolution('Darumaka', 'Darmanitan', 35),
+            LevelEvolution('Darumaka', 'Darmanitan (Zen)', 1234),
         ],
         'base': {
             'hitpoints': 70,
@@ -14594,15 +14617,15 @@ const pokemonList = createPokemonArray(
     {
         'id': 554.1,
         'name': 'Galarian Darumaka',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': Region.galar,
         'type': [PokemonType.Ice],
         'eggCycles': 20,
         'levelType': LevelType.mediumslow,
         'exp': 63,
         'catchRate': 120,
         'evolutions': [
-            new StoneEvolution('Galarian Darumaka', 'Galarian Darmanitan', GameConstants.StoneType.Ice_stone),
-            new LevelEvolution('Galarian Darumaka', 'Galarian Darmanitan (Zen)', 1234),
+            StoneEvolution('Galarian Darumaka', 'Galarian Darmanitan', StoneType.Ice_stone),
+            LevelEvolution('Galarian Darumaka', 'Galarian Darmanitan (Zen)', 1234),
         ],
         'base': {
             'hitpoints': 70,
@@ -14650,7 +14673,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 555.2,
         'name': 'Galarian Darmanitan',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': Region.galar,
         'type': [PokemonType.Ice],
         'eggCycles': 20,
         'levelType': LevelType.mediumslow,
@@ -14668,7 +14691,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 555.3,
         'name': 'Galarian Darmanitan (Zen)',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': Region.galar,
         'type': [PokemonType.Ice, PokemonType.Fire],
         'eggCycles': 20,
         'levelType': LevelType.mediumslow,
@@ -14708,7 +14731,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 65,
         'catchRate': 190,
-        'evolutions': [new LevelEvolution('Dwebble', 'Crustle', 34)],
+        'evolutions': [LevelEvolution('Dwebble', 'Crustle', 34)],
         'base': {
             'hitpoints': 50,
             'attack': 65,
@@ -14717,7 +14740,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 35,
             'speed': 55,
         },
-        'heldItem': {type: ItemType.underground, id: 'Rare Bone'},
+        'heldItem': { type: ItemType.underground, id: 'Rare Bone' },
     },
     {
         'id': 558,
@@ -14735,7 +14758,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 75,
             'speed': 45,
         },
-        'heldItem': {type: ItemType.underground, id: 'Rare Bone'},
+        'heldItem': { type: ItemType.underground, id: 'Rare Bone' },
     },
     {
         'id': 559,
@@ -14745,7 +14768,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 70,
         'catchRate': 180,
-        'evolutions': [new LevelEvolution('Scraggy', 'Scrafty', 39)],
+        'evolutions': [LevelEvolution('Scraggy', 'Scrafty', 39)],
         'base': {
             'hitpoints': 50,
             'attack': 75,
@@ -14797,7 +14820,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 61,
         'catchRate': 190,
-        'evolutions': [new LevelEvolution('Yamask', 'Cofagrigus', 34)],
+        'evolutions': [LevelEvolution('Yamask', 'Cofagrigus', 34)],
         'base': {
             'hitpoints': 38,
             'attack': 30,
@@ -14810,13 +14833,13 @@ const pokemonList = createPokemonArray(
     {
         'id': 562.1,
         'name': 'Galarian Yamask',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': Region.galar,
         'type': [PokemonType.Ground, PokemonType.Ghost],
         'eggCycles': 25,
         'levelType': LevelType.mediumfast,
         'exp': 61,
         'catchRate': 190,
-        'evolutions': [new DungeonRestrictedLevelEvolution('Dusty Bowl', 'Galarian Yamask', 'Runerigus', 34)],
+        'evolutions': [DungeonRestrictedLevelEvolution('Dusty Bowl', 'Galarian Yamask', 'Runerigus', 34)],
         'base': {
             'hitpoints': 38,
             'attack': 55,
@@ -14851,7 +14874,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 71,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Tirtouga', 'Carracosta', 37)],
+        'evolutions': [LevelEvolution('Tirtouga', 'Carracosta', 37)],
         'base': {
             'hitpoints': 54,
             'attack': 78,
@@ -14892,7 +14915,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 71,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Archen', 'Archeops', 37)],
+        'evolutions': [LevelEvolution('Archen', 'Archeops', 37)],
         'base': {
             'hitpoints': 55,
             'attack': 112,
@@ -14933,7 +14956,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 66,
         'catchRate': 190,
-        'evolutions': [new LevelEvolution('Trubbish', 'Garbodor', 36)],
+        'evolutions': [LevelEvolution('Trubbish', 'Garbodor', 36)],
         'base': {
             'hitpoints': 50,
             'attack': 50,
@@ -14963,7 +14986,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 569.1,
         'name': 'Gigantamax Garbodor',
-        'nativeRegion': GameConstants.Region.none,
+        'nativeRegion': Region.none,
         'type': [PokemonType.Poison],
         'eggCycles': 20,
         'levelType': LevelType.mediumfast,
@@ -14986,7 +15009,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 66,
         'catchRate': 75,
-        'evolutions': [new LevelEvolution('Zorua', 'Zoroark', 30)],
+        'evolutions': [LevelEvolution('Zorua', 'Zoroark', 30)],
         'base': {
             'hitpoints': 40,
             'attack': 65,
@@ -15027,7 +15050,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 60,
         'catchRate': 255,
-        'evolutions': [new StoneEvolution('Minccino', 'Cinccino', GameConstants.StoneType.Shiny_stone)],
+        'evolutions': [StoneEvolution('Minccino', 'Cinccino', StoneType.Shiny_stone)],
         'base': {
             'hitpoints': 55,
             'attack': 50,
@@ -15068,7 +15091,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 58,
         'catchRate': 200,
-        'evolutions': [new LevelEvolution('Gothita', 'Gothorita', 32)],
+        'evolutions': [LevelEvolution('Gothita', 'Gothorita', 32)],
         'base': {
             'hitpoints': 45,
             'attack': 30,
@@ -15089,7 +15112,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 137,
         'catchRate': 100,
-        'evolutions': [new LevelEvolution('Gothorita', 'Gothitelle', 41)],
+        'evolutions': [LevelEvolution('Gothorita', 'Gothitelle', 41)],
         'base': {
             'hitpoints': 60,
             'attack': 45,
@@ -15130,7 +15153,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 58,
         'catchRate': 200,
-        'evolutions': [new LevelEvolution('Solosis', 'Duosion', 32)],
+        'evolutions': [LevelEvolution('Solosis', 'Duosion', 32)],
         'base': {
             'hitpoints': 45,
             'attack': 30,
@@ -15148,7 +15171,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 130,
         'catchRate': 100,
-        'evolutions': [new LevelEvolution('Duosion', 'Reuniclus', 41)],
+        'evolutions': [LevelEvolution('Duosion', 'Reuniclus', 41)],
         'base': {
             'hitpoints': 65,
             'attack': 40,
@@ -15183,7 +15206,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 61,
         'catchRate': 190,
-        'evolutions': [new LevelEvolution('Ducklett', 'Swanna', 35)],
+        'evolutions': [LevelEvolution('Ducklett', 'Swanna', 35)],
         'base': {
             'hitpoints': 62,
             'attack': 44,
@@ -15218,7 +15241,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 61,
         'catchRate': 255,
-        'evolutions': [new LevelEvolution('Vanillite', 'Vanillish', 35)],
+        'evolutions': [LevelEvolution('Vanillite', 'Vanillish', 35)],
         'base': {
             'hitpoints': 36,
             'attack': 50,
@@ -15236,7 +15259,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 138,
         'catchRate': 120,
-        'evolutions': [new LevelEvolution('Vanillish', 'Vanilluxe', 47)],
+        'evolutions': [LevelEvolution('Vanillish', 'Vanilluxe', 47)],
         'base': {
             'hitpoints': 51,
             'attack': 65,
@@ -15271,7 +15294,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 67,
         'catchRate': 190,
-        'evolutions': [new LevelEvolution('Deerling (Spring)', 'Sawsbuck (Spring)', 34)],
+        'evolutions': [LevelEvolution('Deerling (Spring)', 'Sawsbuck (Spring)', 34)],
         'base': {
             'hitpoints': 60,
             'attack': 60,
@@ -15289,7 +15312,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 67,
         'catchRate': 190,
-        'evolutions': [new LevelEvolution('Deerling (Summer)', 'Sawsbuck (Summer)', 34)],
+        'evolutions': [LevelEvolution('Deerling (Summer)', 'Sawsbuck (Summer)', 34)],
         'base': {
             'hitpoints': 60,
             'attack': 60,
@@ -15307,7 +15330,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 67,
         'catchRate': 190,
-        'evolutions': [new LevelEvolution('Deerling (Autumn)', 'Sawsbuck (Autumn)', 34)],
+        'evolutions': [LevelEvolution('Deerling (Autumn)', 'Sawsbuck (Autumn)', 34)],
         'base': {
             'hitpoints': 60,
             'attack': 60,
@@ -15325,7 +15348,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 67,
         'catchRate': 190,
-        'evolutions': [new LevelEvolution('Deerling (Winter)', 'Sawsbuck (Winter)', 34)],
+        'evolutions': [LevelEvolution('Deerling (Winter)', 'Sawsbuck (Winter)', 34)],
         'base': {
             'hitpoints': 60,
             'attack': 60,
@@ -15428,7 +15451,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 63,
         'catchRate': 200,
-        'evolutions': [new StoneEvolution('Karrablast', 'Escavalier', GameConstants.StoneType.Linking_cord)],
+        'evolutions': [StoneEvolution('Karrablast', 'Escavalier', StoneType.Linking_cord)],
         'base': {
             'hitpoints': 50,
             'attack': 75,
@@ -15463,7 +15486,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 59,
         'catchRate': 190,
-        'evolutions': [new LevelEvolution('Foongus', 'Amoonguss', 39)],
+        'evolutions': [LevelEvolution('Foongus', 'Amoonguss', 39)],
         'base': {
             'hitpoints': 69,
             'attack': 55,
@@ -15498,7 +15521,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 67,
         'catchRate': 190,
-        'evolutions': [new LevelEvolution('Frillish', 'Jellicent', 40)],
+        'evolutions': [LevelEvolution('Frillish', 'Jellicent', 40)],
         'base': {
             'hitpoints': 55,
             'attack': 40,
@@ -15556,7 +15579,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 64,
         'catchRate': 190,
-        'evolutions': [new LevelEvolution('Joltik', 'Galvantula', 36)],
+        'evolutions': [LevelEvolution('Joltik', 'Galvantula', 36)],
         'base': {
             'hitpoints': 50,
             'attack': 47,
@@ -15591,7 +15614,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 61,
         'catchRate': 255,
-        'evolutions': [new LevelEvolution('Ferroseed', 'Ferrothorn', 40)],
+        'evolutions': [LevelEvolution('Ferroseed', 'Ferrothorn', 40)],
         'base': {
             'hitpoints': 44,
             'attack': 50,
@@ -15626,7 +15649,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 60,
         'catchRate': 130,
-        'evolutions': [new LevelEvolution('Klink', 'Klang', 38)],
+        'evolutions': [LevelEvolution('Klink', 'Klang', 38)],
         'base': {
             'hitpoints': 40,
             'attack': 55,
@@ -15636,7 +15659,7 @@ const pokemonList = createPokemonArray(
             'speed': 30,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -15647,7 +15670,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 154,
         'catchRate': 60,
-        'evolutions': [new LevelEvolution('Klang', 'Klinklang', 49)],
+        'evolutions': [LevelEvolution('Klang', 'Klinklang', 49)],
         'base': {
             'hitpoints': 60,
             'attack': 80,
@@ -15657,7 +15680,7 @@ const pokemonList = createPokemonArray(
             'speed': 50,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -15677,7 +15700,7 @@ const pokemonList = createPokemonArray(
             'speed': 90,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -15688,7 +15711,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 55,
         'catchRate': 190,
-        'evolutions': [new LevelEvolution('Tynamo', 'Eelektrik', 39)],
+        'evolutions': [LevelEvolution('Tynamo', 'Eelektrik', 39)],
         'base': {
             'hitpoints': 35,
             'attack': 55,
@@ -15706,7 +15729,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 142,
         'catchRate': 60,
-        'evolutions': [new StoneEvolution('Eelektrik', 'Eelektross', GameConstants.StoneType.Thunder_stone)],
+        'evolutions': [StoneEvolution('Eelektrik', 'Eelektross', StoneType.Thunder_stone)],
         'base': {
             'hitpoints': 65,
             'attack': 85,
@@ -15741,7 +15764,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 67,
         'catchRate': 255,
-        'evolutions': [new LevelEvolution('Elgyem', 'Beheeyem', 42)],
+        'evolutions': [LevelEvolution('Elgyem', 'Beheeyem', 42)],
         'base': {
             'hitpoints': 55,
             'attack': 55,
@@ -15776,7 +15799,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 55,
         'catchRate': 190,
-        'evolutions': [new LevelEvolution('Litwick', 'Lampent', 41)],
+        'evolutions': [LevelEvolution('Litwick', 'Lampent', 41)],
         'base': {
             'hitpoints': 50,
             'attack': 30,
@@ -15794,7 +15817,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 130,
         'catchRate': 90,
-        'evolutions': [new StoneEvolution('Lampent', 'Chandelure', GameConstants.StoneType.Dusk_stone)],
+        'evolutions': [StoneEvolution('Lampent', 'Chandelure', StoneType.Dusk_stone)],
         'base': {
             'hitpoints': 60,
             'attack': 40,
@@ -15829,7 +15852,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 64,
         'catchRate': 75,
-        'evolutions': [new LevelEvolution('Axew', 'Fraxure', 38)],
+        'evolutions': [LevelEvolution('Axew', 'Fraxure', 38)],
         'base': {
             'hitpoints': 46,
             'attack': 87,
@@ -15847,7 +15870,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 144,
         'catchRate': 60,
-        'evolutions': [new LevelEvolution('Fraxure', 'Haxorus', 48)],
+        'evolutions': [LevelEvolution('Fraxure', 'Haxorus', 48)],
         'base': {
             'hitpoints': 66,
             'attack': 117,
@@ -15882,7 +15905,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 61,
         'catchRate': 120,
-        'evolutions': [new LevelEvolution('Cubchoo', 'Beartic', 37)],
+        'evolutions': [LevelEvolution('Cubchoo', 'Beartic', 37)],
         'base': {
             'hitpoints': 55,
             'attack': 70,
@@ -15926,7 +15949,7 @@ const pokemonList = createPokemonArray(
             'speed': 105,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -15937,7 +15960,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 61,
         'catchRate': 200,
-        'evolutions': [new StoneEvolution('Shelmet', 'Accelgor', GameConstants.StoneType.Linking_cord)],
+        'evolutions': [StoneEvolution('Shelmet', 'Accelgor', StoneType.Linking_cord)],
         'base': {
             'hitpoints': 50,
             'attack': 40,
@@ -15984,7 +16007,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 618.1,
         'name': 'Galarian Stunfisk',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': Region.galar,
         'type': [PokemonType.Ground, PokemonType.Steel],
         'eggCycles': 20,
         'levelType': LevelType.mediumfast,
@@ -16007,7 +16030,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 70,
         'catchRate': 180,
-        'evolutions': [new LevelEvolution('Mienfoo', 'Mienshao', 50)],
+        'evolutions': [LevelEvolution('Mienfoo', 'Mienshao', 50)],
         'base': {
             'hitpoints': 45,
             'attack': 85,
@@ -16059,7 +16082,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 61,
         'catchRate': 190,
-        'evolutions': [new LevelEvolution('Golett', 'Golurk', 43)],
+        'evolutions': [LevelEvolution('Golett', 'Golurk', 43)],
         'base': {
             'hitpoints': 59,
             'attack': 74,
@@ -16069,7 +16092,7 @@ const pokemonList = createPokemonArray(
             'speed': 35,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -16089,7 +16112,7 @@ const pokemonList = createPokemonArray(
             'speed': 55,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -16100,7 +16123,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 68,
         'catchRate': 120,
-        'evolutions': [new LevelEvolution('Pawniard', 'Bisharp', 52)],
+        'evolutions': [LevelEvolution('Pawniard', 'Bisharp', 52)],
         'base': {
             'hitpoints': 45,
             'attack': 85,
@@ -16152,7 +16175,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 70,
         'catchRate': 190,
-        'evolutions': [new LevelEvolution('Rufflet', 'Braviary', 54)],
+        'evolutions': [LevelEvolution('Rufflet', 'Braviary', 54)],
         'base': {
             'hitpoints': 70,
             'attack': 83,
@@ -16193,7 +16216,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 74,
         'catchRate': 190,
-        'evolutions': [new LevelEvolution('Vullaby', 'Mandibuzz', 54)],
+        'evolutions': [LevelEvolution('Vullaby', 'Mandibuzz', 54)],
         'base': {
             'hitpoints': 70,
             'attack': 55,
@@ -16268,7 +16291,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 60,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Deino', 'Zweilous', 50)],
+        'evolutions': [LevelEvolution('Deino', 'Zweilous', 50)],
         'base': {
             'hitpoints': 52,
             'attack': 65,
@@ -16286,7 +16309,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 147,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Zweilous', 'Hydreigon', 64)],
+        'evolutions': [LevelEvolution('Zweilous', 'Hydreigon', 64)],
         'base': {
             'hitpoints': 72,
             'attack': 85,
@@ -16321,7 +16344,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 72,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Larvesta', 'Volcarona', 59)],
+        'evolutions': [LevelEvolution('Larvesta', 'Volcarona', 59)],
         'baby': true,
         'base': {
             'hitpoints': 55,
@@ -16366,7 +16389,7 @@ const pokemonList = createPokemonArray(
             'speed': 108,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -16386,7 +16409,7 @@ const pokemonList = createPokemonArray(
             'speed': 108,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -16406,7 +16429,7 @@ const pokemonList = createPokemonArray(
             'speed': 108,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -16505,9 +16528,9 @@ const pokemonList = createPokemonArray(
             'specialDefense': 120,
             'speed': 90,
         },
-        'heldItem': {type: ItemType.item, id: 'White_DNA'},
+        'heldItem': { type: ItemType.item, id: 'White_DNA' },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -16526,9 +16549,9 @@ const pokemonList = createPokemonArray(
             'specialDefense': 100,
             'speed': 90,
         },
-        'heldItem': {type: ItemType.item, id: 'Black_DNA'},
+        'heldItem': { type: ItemType.item, id: 'Black_DNA' },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -16580,8 +16603,8 @@ const pokemonList = createPokemonArray(
         'exp': 297,
         'catchRate': 3,
         'evolutions': [
-            new StoneEvolution('Kyurem', 'Kyurem (Black)', GameConstants.StoneType.Black_DNA),
-            new StoneEvolution('Kyurem', 'Kyurem (White)', GameConstants.StoneType.White_DNA),
+            StoneEvolution('Kyurem', 'Kyurem (Black)', StoneType.Black_DNA),
+            StoneEvolution('Kyurem', 'Kyurem (White)', StoneType.White_DNA),
         ],
         'base': {
             'hitpoints': 125,
@@ -16592,7 +16615,7 @@ const pokemonList = createPokemonArray(
             'speed': 95,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -16612,7 +16635,7 @@ const pokemonList = createPokemonArray(
             'speed': 95,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -16632,7 +16655,7 @@ const pokemonList = createPokemonArray(
             'speed': 95,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -16652,7 +16675,7 @@ const pokemonList = createPokemonArray(
             'speed': 108,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -16672,7 +16695,7 @@ const pokemonList = createPokemonArray(
             'speed': 108,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -16691,9 +16714,9 @@ const pokemonList = createPokemonArray(
             'specialDefense': 128,
             'speed': 90,
         },
-        'heldItem': {type: ItemType.underground, id: 'Star Piece'},
+        'heldItem': { type: ItemType.underground, id: 'Star Piece' },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -16713,7 +16736,7 @@ const pokemonList = createPokemonArray(
             'speed': 128,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -16733,7 +16756,7 @@ const pokemonList = createPokemonArray(
             'speed': 99,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -16744,7 +16767,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 63,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Chespin', 'Quilladin', 16)],
+        'evolutions': [LevelEvolution('Chespin', 'Quilladin', 16)],
         'base': {
             'hitpoints': 56,
             'attack': 61,
@@ -16765,7 +16788,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 142,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Quilladin', 'Chesnaught', 36)],
+        'evolutions': [LevelEvolution('Quilladin', 'Chesnaught', 36)],
         'base': {
             'hitpoints': 61,
             'attack': 78,
@@ -16806,7 +16829,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 61,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Fennekin', 'Braixen', 16)],
+        'evolutions': [LevelEvolution('Fennekin', 'Braixen', 16)],
         'base': {
             'hitpoints': 40,
             'attack': 45,
@@ -16827,7 +16850,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 143,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Braixen', 'Delphox', 36)],
+        'evolutions': [LevelEvolution('Braixen', 'Delphox', 36)],
         'base': {
             'hitpoints': 59,
             'attack': 59,
@@ -16868,7 +16891,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 63,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Froakie', 'Frogadier', 16)],
+        'evolutions': [LevelEvolution('Froakie', 'Frogadier', 16)],
         'base': {
             'hitpoints': 41,
             'attack': 56,
@@ -16889,7 +16912,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 142,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Frogadier', 'Greninja', 36)],
+        'evolutions': [LevelEvolution('Frogadier', 'Greninja', 36)],
         'base': {
             'hitpoints': 54,
             'attack': 63,
@@ -16950,7 +16973,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 47,
         'catchRate': 255,
-        'evolutions': [new LevelEvolution('Bunnelby', 'Diggersby', 20)],
+        'evolutions': [LevelEvolution('Bunnelby', 'Diggersby', 20)],
         'base': {
             'hitpoints': 38,
             'attack': 36,
@@ -16985,7 +17008,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 56,
         'catchRate': 255,
-        'evolutions': [new LevelEvolution('Fletchling', 'Fletchinder', 17)],
+        'evolutions': [LevelEvolution('Fletchling', 'Fletchinder', 17)],
         'base': {
             'hitpoints': 45,
             'attack': 50,
@@ -17003,7 +17026,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 134,
         'catchRate': 120,
-        'evolutions': [new LevelEvolution('Fletchinder', 'Talonflame', 35)],
+        'evolutions': [LevelEvolution('Fletchinder', 'Talonflame', 35)],
         'base': {
             'hitpoints': 62,
             'attack': 73,
@@ -17038,7 +17061,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 40,
         'catchRate': 255,
-        'evolutions': [new LevelEvolution('Scatterbug', 'Spewpa', 9)],
+        'evolutions': [LevelEvolution('Scatterbug', 'Spewpa', 9)],
         'base': {
             'hitpoints': 38,
             'attack': 35,
@@ -17056,7 +17079,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 75,
         'catchRate': 120,
-        'evolutions': [new LevelEvolution('Spewpa', 'Vivillon (Meadow)', 12)],
+        'evolutions': [LevelEvolution('Spewpa', 'Vivillon (Meadow)', 12)],
         'base': {
             'hitpoints': 45,
             'attack': 22,
@@ -17433,7 +17456,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 74,
         'catchRate': 220,
-        'evolutions': [new LevelEvolution('Litleo', 'Pyroar', 35)],
+        'evolutions': [LevelEvolution('Litleo', 'Pyroar', 35)],
         'base': {
             'hitpoints': 62,
             'attack': 50,
@@ -17475,7 +17498,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 61,
         'catchRate': 225,
-        'evolutions': [new LevelEvolution('Flabébé (Red)', 'Floette (Red)', 19)],
+        'evolutions': [LevelEvolution('Flabébé (Red)', 'Floette (Red)', 19)],
         'base': {
             'hitpoints': 44,
             'attack': 38,
@@ -17496,7 +17519,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 61,
         'catchRate': 225,
-        'evolutions': [new LevelEvolution('Flabébé (Yellow)', 'Floette (Yellow)', 19)],
+        'evolutions': [LevelEvolution('Flabébé (Yellow)', 'Floette (Yellow)', 19)],
         'base': {
             'hitpoints': 44,
             'attack': 38,
@@ -17517,7 +17540,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 61,
         'catchRate': 225,
-        'evolutions': [new LevelEvolution('Flabébé (Blue)', 'Floette (Blue)', 19)],
+        'evolutions': [LevelEvolution('Flabébé (Blue)', 'Floette (Blue)', 19)],
         'base': {
             'hitpoints': 44,
             'attack': 38,
@@ -17538,7 +17561,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 61,
         'catchRate': 225,
-        'evolutions': [new LevelEvolution('Flabébé (Orange)', 'Floette (Orange)', 19)],
+        'evolutions': [LevelEvolution('Flabébé (Orange)', 'Floette (Orange)', 19)],
         'base': {
             'hitpoints': 44,
             'attack': 38,
@@ -17559,7 +17582,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 61,
         'catchRate': 225,
-        'evolutions': [new LevelEvolution('Flabébé (White)', 'Floette (White)', 19)],
+        'evolutions': [LevelEvolution('Flabébé (White)', 'Floette (White)', 19)],
         'base': {
             'hitpoints': 44,
             'attack': 38,
@@ -17580,7 +17603,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 130,
         'catchRate': 120,
-        'evolutions': [new StoneEvolution('Floette (Red)', 'Florges (Red)', GameConstants.StoneType.Shiny_stone)],
+        'evolutions': [StoneEvolution('Floette (Red)', 'Florges (Red)', StoneType.Shiny_stone)],
         'base': {
             'hitpoints': 54,
             'attack': 45,
@@ -17601,7 +17624,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 130,
         'catchRate': 120,
-        'evolutions': [new StoneEvolution('Floette (Yellow)', 'Florges (Yellow)', GameConstants.StoneType.Shiny_stone)],
+        'evolutions': [StoneEvolution('Floette (Yellow)', 'Florges (Yellow)', StoneType.Shiny_stone)],
         'base': {
             'hitpoints': 54,
             'attack': 45,
@@ -17622,7 +17645,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 130,
         'catchRate': 120,
-        'evolutions': [new StoneEvolution('Floette (Blue)', 'Florges (Blue)', GameConstants.StoneType.Shiny_stone)],
+        'evolutions': [StoneEvolution('Floette (Blue)', 'Florges (Blue)', StoneType.Shiny_stone)],
         'base': {
             'hitpoints': 54,
             'attack': 45,
@@ -17643,7 +17666,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 130,
         'catchRate': 120,
-        'evolutions': [new StoneEvolution('Floette (Orange)', 'Florges (Orange)', GameConstants.StoneType.Shiny_stone)],
+        'evolutions': [StoneEvolution('Floette (Orange)', 'Florges (Orange)', StoneType.Shiny_stone)],
         'base': {
             'hitpoints': 54,
             'attack': 45,
@@ -17664,7 +17687,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 130,
         'catchRate': 120,
-        'evolutions': [new StoneEvolution('Floette (White)', 'Florges (White)', GameConstants.StoneType.Shiny_stone)],
+        'evolutions': [StoneEvolution('Floette (White)', 'Florges (White)', StoneType.Shiny_stone)],
         'base': {
             'hitpoints': 54,
             'attack': 45,
@@ -17805,7 +17828,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 70,
         'catchRate': 200,
-        'evolutions': [new LevelEvolution('Skiddo', 'Gogoat', 32)],
+        'evolutions': [LevelEvolution('Skiddo', 'Gogoat', 32)],
         'base': {
             'hitpoints': 66,
             'attack': 65,
@@ -17840,7 +17863,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 70,
         'catchRate': 220,
-        'evolutions': [new LevelEvolution('Pancham', 'Pangoro', 32)],
+        'evolutions': [LevelEvolution('Pancham', 'Pangoro', 32)],
         'base': {
             'hitpoints': 67,
             'attack': 82,
@@ -18045,7 +18068,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 71,
         'catchRate': 190,
-        'evolutions': [new LevelEvolution('Espurr', 'Meowstic', 25)],
+        'evolutions': [LevelEvolution('Espurr', 'Meowstic', 25)],
         'base': {
             'hitpoints': 62,
             'attack': 48,
@@ -18083,7 +18106,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 65,
         'catchRate': 180,
-        'evolutions': [new LevelEvolution('Honedge', 'Doublade', 35)],
+        'evolutions': [LevelEvolution('Honedge', 'Doublade', 35)],
         'base': {
             'hitpoints': 45,
             'attack': 80,
@@ -18102,8 +18125,8 @@ const pokemonList = createPokemonArray(
         'exp': 157,
         'catchRate': 90,
         'evolutions': [
-            new StoneEvolution('Doublade', 'Aegislash (Shield)', GameConstants.StoneType.Dusk_stone),
-            new LevelEvolution('Doublade', 'Aegislash (Blade)', 4777),
+            StoneEvolution('Doublade', 'Aegislash (Shield)', StoneType.Dusk_stone),
+            LevelEvolution('Doublade', 'Aegislash (Blade)', 4777),
         ],
         'base': {
             'hitpoints': 59,
@@ -18156,7 +18179,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 68,
         'catchRate': 200,
-        'evolutions': [new StoneEvolution('Spritzee', 'Aromatisse', GameConstants.StoneType.Sachet)],
+        'evolutions': [StoneEvolution('Spritzee', 'Aromatisse', StoneType.Sachet)],
         'base': {
             'hitpoints': 78,
             'attack': 52,
@@ -18191,7 +18214,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 68,
         'catchRate': 200,
-        'evolutions': [new StoneEvolution('Swirlix', 'Slurpuff', GameConstants.StoneType.Whipped_dream)],
+        'evolutions': [StoneEvolution('Swirlix', 'Slurpuff', StoneType.Whipped_dream)],
         'base': {
             'hitpoints': 62,
             'attack': 48,
@@ -18226,7 +18249,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 58,
         'catchRate': 190,
-        'evolutions': [new LevelEvolution('Inkay', 'Malamar', 30)],
+        'evolutions': [LevelEvolution('Inkay', 'Malamar', 30)],
         'base': {
             'hitpoints': 53,
             'attack': 54,
@@ -18261,7 +18284,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 61,
         'catchRate': 120,
-        'evolutions': [new LevelEvolution('Binacle', 'Barbaracle', 39)],
+        'evolutions': [LevelEvolution('Binacle', 'Barbaracle', 39)],
         'base': {
             'hitpoints': 42,
             'attack': 52,
@@ -18296,7 +18319,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 64,
         'catchRate': 225,
-        'evolutions': [new LevelEvolution('Skrelp', 'Dragalge', 48)],
+        'evolutions': [LevelEvolution('Skrelp', 'Dragalge', 48)],
         'base': {
             'hitpoints': 50,
             'attack': 60,
@@ -18331,7 +18354,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 66,
         'catchRate': 225,
-        'evolutions': [new LevelEvolution('Clauncher', 'Clawitzer', 37)],
+        'evolutions': [LevelEvolution('Clauncher', 'Clawitzer', 37)],
         'base': {
             'hitpoints': 50,
             'attack': 53,
@@ -18366,7 +18389,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 58,
         'catchRate': 190,
-        'evolutions': [new StoneEvolution('Helioptile', 'Heliolisk', GameConstants.StoneType.Sun_stone)],
+        'evolutions': [StoneEvolution('Helioptile', 'Heliolisk', StoneType.Sun_stone)],
         'base': {
             'hitpoints': 44,
             'attack': 38,
@@ -18401,7 +18424,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 72,
         'catchRate': 45,
-        'evolutions': [new DayTimedLevelEvolution('Tyrunt', 'Tyrantrum', 39)],
+        'evolutions': [DayTimedLevelEvolution('Tyrunt', 'Tyrantrum', 39)],
         'base': {
             'hitpoints': 58,
             'attack': 89,
@@ -18442,7 +18465,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 72,
         'catchRate': 45,
-        'evolutions': [new NightTimedLevelEvolution('Amaura', 'Aurorus', 39)],
+        'evolutions': [NightTimedLevelEvolution('Amaura', 'Aurorus', 39)],
         'base': {
             'hitpoints': 77,
             'attack': 59,
@@ -18511,7 +18534,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 63,
             'speed': 118,
         },
-        'heldItem': {type: ItemType.item, id: 'Kings_rock'},
+        'heldItem': { type: ItemType.item, id: 'Kings_rock' },
     },
     {
         'id': 702,
@@ -18547,7 +18570,7 @@ const pokemonList = createPokemonArray(
             'speed': 50,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -18558,7 +18581,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 60,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Goomy', 'Sliggoo', 40)],
+        'evolutions': [LevelEvolution('Goomy', 'Sliggoo', 40)],
         'base': {
             'hitpoints': 45,
             'attack': 50,
@@ -18576,7 +18599,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 158,
         'catchRate': 45,
-        'evolutions': [new WeatherRestrictedLevelEvolution('Sliggoo', 'Goodra', 50, [WeatherType.Rain, WeatherType.Fog, WeatherType.Thunderstorm])],
+        'evolutions': [WeatherRestrictedLevelEvolution([WeatherType.Rain, WeatherType.Fog, WeatherType.Thunderstorm], 'Sliggoo', 'Goodra', 50)],
         'base': {
             'hitpoints': 68,
             'attack': 75,
@@ -18628,7 +18651,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 62,
         'catchRate': 120,
-        'evolutions': [new StoneEvolution('Phantump', 'Trevenant', GameConstants.StoneType.Linking_cord)],
+        'evolutions': [StoneEvolution('Phantump', 'Trevenant', StoneType.Linking_cord)],
         'base': {
             'hitpoints': 43,
             'attack': 70,
@@ -18663,7 +18686,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 67,
         'catchRate': 120,
-        'evolutions': [new StoneEvolution('Pumpkaboo (Average)', 'Gourgeist (Average)', GameConstants.StoneType.Linking_cord)],
+        'evolutions': [StoneEvolution('Pumpkaboo (Average)', 'Gourgeist (Average)', StoneType.Linking_cord)],
         'base': {
             'hitpoints': 49,
             'attack': 66,
@@ -18681,7 +18704,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 67,
         'catchRate': 130,
-        'evolutions': [new StoneEvolution('Pumpkaboo (Small)', 'Gourgeist (Small)', GameConstants.StoneType.Linking_cord)],
+        'evolutions': [StoneEvolution('Pumpkaboo (Small)', 'Gourgeist (Small)', StoneType.Linking_cord)],
         'base': {
             'hitpoints': 44,
             'attack': 66,
@@ -18699,7 +18722,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 67,
         'catchRate': 110,
-        'evolutions': [new StoneEvolution('Pumpkaboo (Large)', 'Gourgeist (Large)', GameConstants.StoneType.Linking_cord)],
+        'evolutions': [StoneEvolution('Pumpkaboo (Large)', 'Gourgeist (Large)', StoneType.Linking_cord)],
         'base': {
             'hitpoints': 54,
             'attack': 66,
@@ -18717,7 +18740,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 67,
         'catchRate': 100,
-        'evolutions': [new StoneEvolution('Pumpkaboo (Super Size)', 'Gourgeist (Super Size)', GameConstants.StoneType.Linking_cord)],
+        'evolutions': [StoneEvolution('Pumpkaboo (Super Size)', 'Gourgeist (Super Size)', StoneType.Linking_cord)],
         'base': {
             'hitpoints': 59,
             'attack': 66,
@@ -18803,7 +18826,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 61,
         'catchRate': 190,
-        'evolutions': [new LevelEvolution('Bergmite', 'Avalugg', 37)],
+        'evolutions': [LevelEvolution('Bergmite', 'Avalugg', 37)],
         'base': {
             'hitpoints': 55,
             'attack': 69,
@@ -18838,7 +18861,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 49,
         'catchRate': 190,
-        'evolutions': [new LevelEvolution('Noibat', 'Noivern', 48)],
+        'evolutions': [LevelEvolution('Noibat', 'Noivern', 48)],
         'base': {
             'hitpoints': 40,
             'attack': 30,
@@ -18882,7 +18905,7 @@ const pokemonList = createPokemonArray(
             'speed': 99,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -18902,7 +18925,7 @@ const pokemonList = createPokemonArray(
             'speed': 99,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -18922,7 +18945,7 @@ const pokemonList = createPokemonArray(
             'speed': 95,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -18942,7 +18965,7 @@ const pokemonList = createPokemonArray(
             'speed': 50,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -18962,7 +18985,7 @@ const pokemonList = createPokemonArray(
             'speed': 70,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -18982,7 +19005,7 @@ const pokemonList = createPokemonArray(
             'speed': 70,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -18993,7 +19016,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 64,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Rowlet', 'Dartrix', 17)],
+        'evolutions': [LevelEvolution('Rowlet', 'Dartrix', 17)],
         'base': {
             'hitpoints': 68,
             'attack': 55,
@@ -19014,7 +19037,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 147,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Dartrix', 'Decidueye', 34)],
+        'evolutions': [LevelEvolution('Dartrix', 'Decidueye', 34)],
         'base': {
             'hitpoints': 78,
             'attack': 75,
@@ -19055,7 +19078,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 64,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Litten', 'Torracat', 17)],
+        'evolutions': [LevelEvolution('Litten', 'Torracat', 17)],
         'base': {
             'hitpoints': 45,
             'attack': 65,
@@ -19076,7 +19099,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 147,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Torracat', 'Incineroar', 34)],
+        'evolutions': [LevelEvolution('Torracat', 'Incineroar', 34)],
         'base': {
             'hitpoints': 65,
             'attack': 85,
@@ -19117,7 +19140,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 64,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Popplio', 'Brionne', 17)],
+        'evolutions': [LevelEvolution('Popplio', 'Brionne', 17)],
         'base': {
             'hitpoints': 50,
             'attack': 54,
@@ -19138,7 +19161,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 147,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Brionne', 'Primarina', 34)],
+        'evolutions': [LevelEvolution('Brionne', 'Primarina', 34)],
         'base': {
             'hitpoints': 60,
             'attack': 69,
@@ -19179,7 +19202,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 53,
         'catchRate': 255,
-        'evolutions': [new LevelEvolution('Pikipek', 'Trumbeak', 14)],
+        'evolutions': [LevelEvolution('Pikipek', 'Trumbeak', 14)],
         'base': {
             'hitpoints': 35,
             'attack': 75,
@@ -19197,7 +19220,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 124,
         'catchRate': 120,
-        'evolutions': [new LevelEvolution('Trumbeak', 'Toucannon', 28)],
+        'evolutions': [LevelEvolution('Trumbeak', 'Toucannon', 28)],
         'base': {
             'hitpoints': 55,
             'attack': 85,
@@ -19232,7 +19255,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 51,
         'catchRate': 255,
-        'evolutions': [new DayTimedLevelEvolution('Yungoos', 'Gumshoos', 20)],
+        'evolutions': [DayTimedLevelEvolution('Yungoos', 'Gumshoos', 20)],
         'base': {
             'hitpoints': 48,
             'attack': 70,
@@ -19284,7 +19307,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 60,
         'catchRate': 255,
-        'evolutions': [new LevelEvolution('Grubbin', 'Charjabug', 20)],
+        'evolutions': [LevelEvolution('Grubbin', 'Charjabug', 20)],
         'base': {
             'hitpoints': 47,
             'attack': 62,
@@ -19303,12 +19326,12 @@ const pokemonList = createPokemonArray(
         'exp': 140,
         'catchRate': 120,
         'evolutions': [
-            new DungeonRestrictedLevelEvolution('Mt. Coronet North', 'Charjabug', 'Vikavolt', 20),
-            new DungeonRestrictedLevelEvolution('Mt. Coronet South', 'Charjabug', 'Vikavolt', 20),
-            new DungeonRestrictedLevelEvolution('Chargestone Cave', 'Charjabug', 'Vikavolt', 20),
-            new DungeonRestrictedLevelEvolution('Kalos Power Plant', 'Charjabug', 'Vikavolt', 20),
-            new DungeonRestrictedLevelEvolution('Vast Poni Canyon', 'Charjabug', 'Vikavolt', 20),
-            new RegionStoneEvolution(galarOnly, 'Charjabug', 'Vikavolt', GameConstants.StoneType.Thunder_stone),
+            DungeonRestrictedLevelEvolution('Mt. Coronet North', 'Charjabug', 'Vikavolt', 20),
+            DungeonRestrictedLevelEvolution('Mt. Coronet South', 'Charjabug', 'Vikavolt', 20),
+            DungeonRestrictedLevelEvolution('Chargestone Cave', 'Charjabug', 'Vikavolt', 20),
+            DungeonRestrictedLevelEvolution('Kalos Power Plant', 'Charjabug', 'Vikavolt', 20),
+            DungeonRestrictedLevelEvolution('Vast Poni Canyon', 'Charjabug', 'Vikavolt', 20),
+            RegionStoneEvolution(galarOnly, 'Charjabug', 'Vikavolt', StoneType.Thunder_stone),
         ],
         'base': {
             'hitpoints': 57,
@@ -19361,7 +19384,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 68,
         'catchRate': 225,
-        'evolutions': [new DungeonRestrictedLevelEvolution('Mount Lanakila','Crabrawler','Crabominable', 20)],
+        'evolutions': [DungeonRestrictedLevelEvolution('Mount Lanakila', 'Crabrawler', 'Crabominable', 20)],
         'base': {
             'hitpoints': 47,
             'attack': 82,
@@ -19476,7 +19499,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 61,
         'catchRate': 190,
-        'evolutions': [new LevelEvolution('Cutiefly', 'Ribombee', 25)],
+        'evolutions': [LevelEvolution('Cutiefly', 'Ribombee', 25)],
         'base': {
             'hitpoints': 40,
             'attack': 45,
@@ -19602,7 +19625,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 61,
         'catchRate': 60,
-        'evolutions': [new LevelEvolution('Wishiwashi (Solo)', 'Wishiwashi (School)', 20)],
+        'evolutions': [LevelEvolution('Wishiwashi (Solo)', 'Wishiwashi (School)', 20)],
         'base': {
             'hitpoints': 45,
             'attack': 20,
@@ -19654,7 +19677,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 61,
         'catchRate': 190,
-        'evolutions': [new LevelEvolution('Mareanie', 'Toxapex', 38)],
+        'evolutions': [LevelEvolution('Mareanie', 'Toxapex', 38)],
         'base': {
             'hitpoints': 50,
             'attack': 53,
@@ -19689,7 +19712,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 77,
         'catchRate': 190,
-        'evolutions': [new LevelEvolution('Mudbray', 'Mudsdale', 30)],
+        'evolutions': [LevelEvolution('Mudbray', 'Mudsdale', 30)],
         'base': {
             'hitpoints': 70,
             'attack': 100,
@@ -19724,7 +19747,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 54,
         'catchRate': 200,
-        'evolutions': [new LevelEvolution('Dewpider', 'Araquanid', 22)],
+        'evolutions': [LevelEvolution('Dewpider', 'Araquanid', 22)],
         'base': {
             'hitpoints': 38,
             'attack': 40,
@@ -19776,7 +19799,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 50,
         'catchRate': 190,
-        'evolutions': [new DayTimedLevelEvolution('Fomantis', 'Lurantis', 34)],
+        'evolutions': [DayTimedLevelEvolution('Fomantis', 'Lurantis', 34)],
         'base': {
             'hitpoints': 40,
             'attack': 55,
@@ -19828,7 +19851,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 57,
         'catchRate': 190,
-        'evolutions': [new LevelEvolution('Morelull', 'Shiinotic', 24)],
+        'evolutions': [LevelEvolution('Morelull', 'Shiinotic', 24)],
         'base': {
             'hitpoints': 40,
             'attack': 35,
@@ -19863,7 +19886,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 64,
         'catchRate': 120,
-        'evolutions': [new LevelEvolution('Salandit', 'Salazzle', 33)],
+        'evolutions': [LevelEvolution('Salandit', 'Salazzle', 33)],
         'base': {
             'hitpoints': 48,
             'attack': 44,
@@ -19924,7 +19947,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 68,
         'catchRate': 140,
-        'evolutions': [new LevelEvolution('Stufful', 'Bewear', 27)],
+        'evolutions': [LevelEvolution('Stufful', 'Bewear', 27)],
         'base': {
             'hitpoints': 70,
             'attack': 75,
@@ -19959,7 +19982,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 42,
         'catchRate': 235,
-        'evolutions': [new LevelEvolution('Bounsweet', 'Steenee', 18)],
+        'evolutions': [LevelEvolution('Bounsweet', 'Steenee', 18)],
         'base': {
             'hitpoints': 42,
             'attack': 30,
@@ -19980,7 +20003,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 102,
         'catchRate': 120,
-        'evolutions': [new LevelEvolution('Steenee', 'Tsareena', 29)],
+        'evolutions': [LevelEvolution('Steenee', 'Tsareena', 29)],
         'base': {
             'hitpoints': 52,
             'attack': 40,
@@ -20075,7 +20098,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 46,
         'catchRate': 90,
-        'evolutions': [new LevelEvolution('Wimpod', 'Golisopod', 30)],
+        'evolutions': [LevelEvolution('Wimpod', 'Golisopod', 30)],
         'base': {
             'hitpoints': 25,
             'attack': 35,
@@ -20110,7 +20133,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 64,
         'catchRate': 140,
-        'evolutions': [new LevelEvolution('Sandygast', 'Palossand', 42)],
+        'evolutions': [LevelEvolution('Sandygast', 'Palossand', 42)],
         'base': {
             'hitpoints': 55,
             'attack': 55,
@@ -20162,7 +20185,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 107,
         'catchRate': 3,
-        'evolutions': [new StoneEvolution('Type: Null', 'Silvally', GameConstants.StoneType.Soothe_bell)],
+        'evolutions': [StoneEvolution('Type: Null', 'Silvally', StoneType.Soothe_bell)],
         'base': {
             'hitpoints': 95,
             'attack': 95,
@@ -20172,7 +20195,7 @@ const pokemonList = createPokemonArray(
             'speed': 59,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -20192,7 +20215,7 @@ const pokemonList = createPokemonArray(
             'speed': 95,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -20211,9 +20234,9 @@ const pokemonList = createPokemonArray(
             'specialDefense': 100,
             'speed': 60,
         },
-        'heldItem': {type: ItemType.underground, id: 'Star Piece'},
+        'heldItem': { type: ItemType.underground, id: 'Star Piece' },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -20233,7 +20256,7 @@ const pokemonList = createPokemonArray(
             'speed': 120,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -20253,7 +20276,7 @@ const pokemonList = createPokemonArray(
             'speed': 120,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -20273,7 +20296,7 @@ const pokemonList = createPokemonArray(
             'speed': 120,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -20293,7 +20316,7 @@ const pokemonList = createPokemonArray(
             'speed': 120,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -20313,7 +20336,7 @@ const pokemonList = createPokemonArray(
             'speed': 120,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -20333,7 +20356,7 @@ const pokemonList = createPokemonArray(
             'speed': 120,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -20353,7 +20376,7 @@ const pokemonList = createPokemonArray(
             'speed': 120,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -20474,7 +20497,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 70,
             'speed': 92,
         },
-        'heldItem': {type: ItemType.item, id: 'Razor_fang'},
+        'heldItem': { type: ItemType.item, id: 'Razor_fang' },
     },
     {
         'id': 780,
@@ -20510,7 +20533,7 @@ const pokemonList = createPokemonArray(
             'speed': 40,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -20521,7 +20544,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 60,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Jangmo-o', 'Hakamo-o', 35)],
+        'evolutions': [LevelEvolution('Jangmo-o', 'Hakamo-o', 35)],
         'base': {
             'hitpoints': 45,
             'attack': 55,
@@ -20530,7 +20553,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 45,
             'speed': 45,
         },
-        'heldItem': {type: ItemType.item, id: 'Razor_claw'},
+        'heldItem': { type: ItemType.item, id: 'Razor_claw' },
     },
     {
         'id': 783,
@@ -20540,7 +20563,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 147,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Hakamo-o', 'Kommo-o', 45)],
+        'evolutions': [LevelEvolution('Hakamo-o', 'Kommo-o', 45)],
         'base': {
             'hitpoints': 55,
             'attack': 75,
@@ -20549,7 +20572,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 70,
             'speed': 65,
         },
-        'heldItem': {type: ItemType.item, id: 'Razor_claw'},
+        'heldItem': { type: ItemType.item, id: 'Razor_claw' },
     },
     {
         'id': 784,
@@ -20567,7 +20590,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 105,
             'speed': 85,
         },
-        'heldItem': {type: ItemType.item, id: 'Razor_claw'},
+        'heldItem': { type: ItemType.item, id: 'Razor_claw' },
     },
     {
         'id': 784.01,
@@ -20603,7 +20626,7 @@ const pokemonList = createPokemonArray(
             'speed': 130,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -20623,7 +20646,7 @@ const pokemonList = createPokemonArray(
             'speed': 95,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -20643,7 +20666,7 @@ const pokemonList = createPokemonArray(
             'speed': 75,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -20663,7 +20686,7 @@ const pokemonList = createPokemonArray(
             'speed': 85,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -20674,7 +20697,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 40,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Cosmog', 'Cosmoem', 43)],
+        'evolutions': [LevelEvolution('Cosmog', 'Cosmoem', 43)],
         'base': {
             'hitpoints': 43,
             'attack': 29,
@@ -20684,7 +20707,7 @@ const pokemonList = createPokemonArray(
             'speed': 37,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -20696,8 +20719,8 @@ const pokemonList = createPokemonArray(
         'exp': 140,
         'catchRate': 45,
         'evolutions': [
-            new LevelEvolution('Cosmoem', 'Solgaleo', 53),
-            new LevelEvolution('Cosmoem', 'Lunala', 53),
+            LevelEvolution('Cosmoem', 'Solgaleo', 53),
+            LevelEvolution('Cosmoem', 'Lunala', 53),
         ],
         'base': {
             'hitpoints': 43,
@@ -20708,7 +20731,7 @@ const pokemonList = createPokemonArray(
             'speed': 37,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -20719,7 +20742,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 306,
         'catchRate': 45,
-        'evolutions': [new StoneEvolution('Solgaleo', 'Solgaleo (Radiant Sun)', GameConstants.StoneType.Solar_light)],
+        'evolutions': [StoneEvolution('Solgaleo', 'Solgaleo (Radiant Sun)', StoneType.Solar_light)],
         'base': {
             'hitpoints': 137,
             'attack': 137,
@@ -20729,9 +20752,9 @@ const pokemonList = createPokemonArray(
             'speed': 97,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
-        'heldItem': {type: ItemType.item, id: 'Solar_light'},
+        'heldItem': { type: ItemType.item, id: 'Solar_light' },
     },
     {
         'id': 791.1,
@@ -20750,9 +20773,9 @@ const pokemonList = createPokemonArray(
             'speed': 97,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
-        'heldItem': {type: ItemType.item, id: 'Solar_light'},
+        'heldItem': { type: ItemType.item, id: 'Solar_light' },
     },
     {
         'id': 792,
@@ -20762,7 +20785,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 306,
         'catchRate': 45,
-        'evolutions': [new StoneEvolution('Lunala', 'Lunala (Full Moon)', GameConstants.StoneType.Lunar_light)],
+        'evolutions': [StoneEvolution('Lunala', 'Lunala (Full Moon)', StoneType.Lunar_light)],
         'base': {
             'hitpoints': 137,
             'attack': 113,
@@ -20772,9 +20795,9 @@ const pokemonList = createPokemonArray(
             'speed': 97,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
-        'heldItem': {type: ItemType.item, id: 'Lunar_light'},
+        'heldItem': { type: ItemType.item, id: 'Lunar_light' },
     },
     {
         'id': 792.1,
@@ -20793,9 +20816,9 @@ const pokemonList = createPokemonArray(
             'speed': 97,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
-        'heldItem': {type: ItemType.item, id: 'Lunar_light'},
+        'heldItem': { type: ItemType.item, id: 'Lunar_light' },
     },
     {
         'id': 793,
@@ -20814,7 +20837,7 @@ const pokemonList = createPokemonArray(
             'speed': 103,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -20834,7 +20857,7 @@ const pokemonList = createPokemonArray(
             'speed': 79,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -20854,7 +20877,7 @@ const pokemonList = createPokemonArray(
             'speed': 151,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -20874,7 +20897,7 @@ const pokemonList = createPokemonArray(
             'speed': 83,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -20894,7 +20917,7 @@ const pokemonList = createPokemonArray(
             'speed': 61,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -20914,7 +20937,7 @@ const pokemonList = createPokemonArray(
             'speed': 109,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -20934,7 +20957,7 @@ const pokemonList = createPokemonArray(
             'speed': 43,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -20946,8 +20969,8 @@ const pokemonList = createPokemonArray(
         'exp': 270,
         'catchRate': 255,
         'evolutions': [
-            new StoneEvolution('Necrozma', 'Necrozma (Dusk Mane)', GameConstants.StoneType.Solar_light),
-            new StoneEvolution('Necrozma', 'Necrozma (Dawn Wings)', GameConstants.StoneType.Lunar_light),
+            StoneEvolution('Necrozma', 'Necrozma (Dusk Mane)', StoneType.Solar_light),
+            StoneEvolution('Necrozma', 'Necrozma (Dawn Wings)', StoneType.Lunar_light),
         ],
         'base': {
             'hitpoints': 97,
@@ -20958,7 +20981,7 @@ const pokemonList = createPokemonArray(
             'speed': 79,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -20978,7 +21001,7 @@ const pokemonList = createPokemonArray(
             'speed': 77,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -20998,7 +21021,7 @@ const pokemonList = createPokemonArray(
             'speed': 77,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -21018,7 +21041,7 @@ const pokemonList = createPokemonArray(
             'speed': 129,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -21038,7 +21061,7 @@ const pokemonList = createPokemonArray(
             'speed': 65,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -21058,7 +21081,7 @@ const pokemonList = createPokemonArray(
             'speed': 65,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -21078,7 +21101,7 @@ const pokemonList = createPokemonArray(
             'speed': 125,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -21089,7 +21112,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 189,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Poipole', 'Naganadel', 41)],
+        'evolutions': [LevelEvolution('Poipole', 'Naganadel', 41)],
         'base': {
             'hitpoints': 67,
             'attack': 73,
@@ -21099,7 +21122,7 @@ const pokemonList = createPokemonArray(
             'speed': 73,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -21119,7 +21142,7 @@ const pokemonList = createPokemonArray(
             'speed': 121,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -21139,7 +21162,7 @@ const pokemonList = createPokemonArray(
             'speed': 13,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -21159,7 +21182,7 @@ const pokemonList = createPokemonArray(
             'speed': 107,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -21179,19 +21202,19 @@ const pokemonList = createPokemonArray(
             'speed': 143,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
         'id': 808,
         'name': 'Meltan',
-        'nativeRegion': GameConstants.Region.none,
+        'nativeRegion': Region.none,
         'type': [PokemonType.Steel],
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': 135,
         'catchRate': 3,
-        'evolutions': [new StoneEvolution('Meltan', 'Melmetal', GameConstants.StoneType.None)],
+        'evolutions': [StoneEvolution('Meltan', 'Melmetal', StoneType.None)],
         'base': {
             'hitpoints': 46,
             'attack': 65,
@@ -21201,13 +21224,13 @@ const pokemonList = createPokemonArray(
             'speed': 34,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
         'id': 809,
         'name': 'Melmetal',
-        'nativeRegion': GameConstants.Region.none,
+        'nativeRegion': Region.none,
         'type': [PokemonType.Steel],
         'eggCycles': 120,
         'levelType': LevelType.slow,
@@ -21222,13 +21245,13 @@ const pokemonList = createPokemonArray(
             'speed': 34,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
         'id': 809.1,
         'name': 'Gigantamax Melmetal',
-        'nativeRegion': GameConstants.Region.none,
+        'nativeRegion': Region.none,
         'type': [PokemonType.Steel],
         'eggCycles': 120,
         'levelType': LevelType.slow,
@@ -21243,7 +21266,7 @@ const pokemonList = createPokemonArray(
             'speed': 34,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -21262,7 +21285,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 62,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Grookey', 'Thwackey', 16)],
+        'evolutions': [LevelEvolution('Grookey', 'Thwackey', 16)],
         'gender': {
             'femaleRatio': 0.125,
         },
@@ -21283,7 +21306,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 147,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Thwackey', 'Rillaboom', 35)],
+        'evolutions': [LevelEvolution('Thwackey', 'Rillaboom', 35)],
         'gender': {
             'femaleRatio': 0.125,
         },
@@ -21311,7 +21334,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 812.1,
         'name': 'Gigantamax Rillaboom',
-        'nativeRegion': GameConstants.Region.none,
+        'nativeRegion': Region.none,
         'type': [PokemonType.Grass],
         'base': {
             'hitpoints': 200,
@@ -21345,7 +21368,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 62,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Scorbunny', 'Raboot', 16)],
+        'evolutions': [LevelEvolution('Scorbunny', 'Raboot', 16)],
         'gender': {
             'femaleRatio': 0.125,
         },
@@ -21366,7 +21389,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 147,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Raboot', 'Cinderace', 35)],
+        'evolutions': [LevelEvolution('Raboot', 'Cinderace', 35)],
         'gender': {
             'femaleRatio': 0.125,
         },
@@ -21394,7 +21417,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 815.1,
         'name': 'Gigantamax Cinderace',
-        'nativeRegion': GameConstants.Region.none,
+        'nativeRegion': Region.none,
         'type': [PokemonType.Fire],
         'base': {
             'hitpoints': 160,
@@ -21428,7 +21451,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 62,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Sobble', 'Drizzile', 16)],
+        'evolutions': [LevelEvolution('Sobble', 'Drizzile', 16)],
         'gender': {
             'femaleRatio': 0.125,
         },
@@ -21449,7 +21472,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 147,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Drizzile', 'Inteleon', 35)],
+        'evolutions': [LevelEvolution('Drizzile', 'Inteleon', 35)],
         'gender': {
             'femaleRatio': 0.125,
         },
@@ -21477,7 +21500,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 818.1,
         'name': 'Gigantamax Inteleon',
-        'nativeRegion': GameConstants.Region.none,
+        'nativeRegion': Region.none,
         'type': [PokemonType.Water],
         'base': {
             'hitpoints': 140,
@@ -21511,7 +21534,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 55,
         'catchRate': 255,
-        'evolutions': [new LevelEvolution('Skwovet', 'Greedent', 24)],
+        'evolutions': [LevelEvolution('Skwovet', 'Greedent', 24)],
     },
     {
         'id': 820,
@@ -21546,7 +21569,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 49,
         'catchRate': 255,
-        'evolutions': [new LevelEvolution('Rookidee', 'Corvisquire', 18)],
+        'evolutions': [LevelEvolution('Rookidee', 'Corvisquire', 18)],
     },
     {
         'id': 822,
@@ -21564,7 +21587,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 128,
         'catchRate': 120,
-        'evolutions': [new LevelEvolution('Corvisquire', 'Corviknight', 38)],
+        'evolutions': [LevelEvolution('Corvisquire', 'Corviknight', 38)],
     },
     {
         'id': 823,
@@ -21589,7 +21612,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 823.1,
         'name': 'Gigantamax Corviknight',
-        'nativeRegion': GameConstants.Region.none,
+        'nativeRegion': Region.none,
         'type': [
             PokemonType.Flying,
             PokemonType.Steel,
@@ -21623,7 +21646,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 36,
         'catchRate': 255,
-        'evolutions': [new LevelEvolution('Blipbug', 'Dottler', 10)],
+        'evolutions': [LevelEvolution('Blipbug', 'Dottler', 10)],
     },
     {
         'id': 825,
@@ -21644,7 +21667,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 117,
         'catchRate': 120,
-        'evolutions': [new LevelEvolution('Dottler', 'Orbeetle', 30)],
+        'evolutions': [LevelEvolution('Dottler', 'Orbeetle', 30)],
     },
     {
         'id': 826,
@@ -21669,7 +21692,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 826.1,
         'name': 'Gigantamax Orbeetle',
-        'nativeRegion': GameConstants.Region.none,
+        'nativeRegion': Region.none,
         'type': [
             PokemonType.Bug,
             PokemonType.Psychic,
@@ -21703,7 +21726,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 49,
         'catchRate': 255,
-        'evolutions': [new LevelEvolution('Nickit', 'Thievul', 18)],
+        'evolutions': [LevelEvolution('Nickit', 'Thievul', 18)],
     },
     {
         'id': 828,
@@ -21738,7 +21761,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 50,
         'catchRate': 190,
-        'evolutions': [new LevelEvolution('Gossifleur', 'Eldegoss', 20)],
+        'evolutions': [LevelEvolution('Gossifleur', 'Eldegoss', 20)],
     },
     {
         'id': 830,
@@ -21773,7 +21796,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 122,
         'catchRate': 255,
-        'evolutions': [new LevelEvolution('Wooloo', 'Dubwool', 24)],
+        'evolutions': [LevelEvolution('Wooloo', 'Dubwool', 24)],
     },
     {
         'id': 832,
@@ -21808,7 +21831,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 57,
         'catchRate': 255,
-        'evolutions': [new LevelEvolution('Chewtle', 'Drednaw', 22)],
+        'evolutions': [LevelEvolution('Chewtle', 'Drednaw', 22)],
     },
     {
         'id': 834,
@@ -21833,7 +21856,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 834.1,
         'name': 'Gigantamax Drednaw',
-        'nativeRegion': GameConstants.Region.none,
+        'nativeRegion': Region.none,
         'type': [
             PokemonType.Water,
             PokemonType.Rock,
@@ -21867,7 +21890,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 54,
         'catchRate': 255,
-        'evolutions': [new LevelEvolution('Yamper', 'Boltund', 25)],
+        'evolutions': [LevelEvolution('Yamper', 'Boltund', 25)],
     },
     {
         'id': 836,
@@ -21902,7 +21925,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 48,
         'catchRate': 255,
-        'evolutions': [new LevelEvolution('Rolycoly', 'Carkol', 18)],
+        'evolutions': [LevelEvolution('Rolycoly', 'Carkol', 18)],
     },
     {
         'id': 838,
@@ -21923,7 +21946,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 144,
         'catchRate': 120,
-        'evolutions': [new LevelEvolution('Carkol', 'Coalossal', 34)],
+        'evolutions': [LevelEvolution('Carkol', 'Coalossal', 34)],
     },
     {
         'id': 839,
@@ -21948,7 +21971,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 839.1,
         'name': 'Gigantamax Coalossal',
-        'nativeRegion': GameConstants.Region.none,
+        'nativeRegion': Region.none,
         'type': [
             PokemonType.Rock,
             PokemonType.Fire,
@@ -21983,8 +22006,8 @@ const pokemonList = createPokemonArray(
         },
         'eggCycles': 20,
         'evolutions': [
-            new StoneEvolution('Applin', 'Flapple', GameConstants.StoneType.Tart_apple),
-            new StoneEvolution('Applin', 'Appletun', GameConstants.StoneType.Sweet_apple),
+            StoneEvolution('Applin', 'Flapple', StoneType.Tart_apple),
+            StoneEvolution('Applin', 'Appletun', StoneType.Sweet_apple),
         ],
         'levelType': LevelType.erratic,
         'exp': 52,
@@ -22013,7 +22036,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 841.1,
         'name': 'Gigantamax Flapple',
-        'nativeRegion': GameConstants.Region.none,
+        'nativeRegion': Region.none,
         'type': [
             PokemonType.Grass,
             PokemonType.Dragon,
@@ -22054,7 +22077,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 842.1,
         'name': 'Gigantamax Appletun',
-        'nativeRegion': GameConstants.Region.none,
+        'nativeRegion': Region.none,
         'type': [
             PokemonType.Grass,
             PokemonType.Dragon,
@@ -22088,7 +22111,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 63,
         'catchRate': 255,
-        'evolutions': [new LevelEvolution('Silicobra', 'Sandaconda', 36)],
+        'evolutions': [LevelEvolution('Silicobra', 'Sandaconda', 36)],
     },
     {
         'id': 844,
@@ -22110,7 +22133,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 844.1,
         'name': 'Gigantamax Sandaconda',
-        'nativeRegion': GameConstants.Region.none,
+        'nativeRegion': Region.none,
         'type': [PokemonType.Ground],
         'base': {
             'hitpoints': 144,
@@ -22201,7 +22224,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 56,
         'catchRate': 255,
-        'evolutions': [new LevelEvolution('Arrokuda', 'Barraskewda', 26)],
+        'evolutions': [LevelEvolution('Arrokuda', 'Barraskewda', 26)],
     },
     {
         'id': 847,
@@ -22241,8 +22264,8 @@ const pokemonList = createPokemonArray(
         'catchRate': 75,
         'baby': true,
         'evolutions': [
-            new LevelEvolution('Toxel', 'Toxtricity (Amped)', 30),
-            new LevelEvolution('Toxel', 'Toxtricity (Low Key)', 30),
+            LevelEvolution('Toxel', 'Toxtricity (Amped)', 30),
+            LevelEvolution('Toxel', 'Toxtricity (Low Key)', 30),
         ],
     },
     {
@@ -22288,7 +22311,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 849.2,
         'name': 'Gigantamax Toxtricity',
-        'nativeRegion': GameConstants.Region.none,
+        'nativeRegion': Region.none,
         'type': [
             PokemonType.Electric,
             PokemonType.Poison,
@@ -22325,7 +22348,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 61,
         'catchRate': 190,
-        'evolutions': [new LevelEvolution('Sizzlipede', 'Centiskorch', 28)],
+        'evolutions': [LevelEvolution('Sizzlipede', 'Centiskorch', 28)],
     },
     {
         'id': 851,
@@ -22350,7 +22373,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 851.1,
         'name': 'Gigantamax Centiskorch',
-        'nativeRegion': GameConstants.Region.none,
+        'nativeRegion': Region.none,
         'type': [
             PokemonType.Fire,
             PokemonType.Bug,
@@ -22384,7 +22407,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 62,
         'catchRate': 180,
-        'evolutions': [new LevelEvolution('Clobbopus', 'Grapploct', 35)],
+        'evolutions': [LevelEvolution('Clobbopus', 'Grapploct', 35)],
     },
     {
         'id': 853,
@@ -22416,12 +22439,12 @@ const pokemonList = createPokemonArray(
             'speed': 50,
         },
         'eggCycles': 20,
-        'evolutions': [new StoneEvolution('Sinistea', 'Polteageist', GameConstants.StoneType.Cracked_pot)],
+        'evolutions': [StoneEvolution('Sinistea', 'Polteageist', StoneType.Cracked_pot)],
         'levelType': LevelType.mediumfast,
         'exp': 62,
         'catchRate': 120,
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -22441,7 +22464,7 @@ const pokemonList = createPokemonArray(
         'exp': 178,
         'catchRate': 60,
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -22460,7 +22483,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 53,
         'catchRate': 235,
-        'evolutions': [new LevelEvolution('Hatenna', 'Hattrem', 32)],
+        'evolutions': [LevelEvolution('Hatenna', 'Hattrem', 32)],
         'gender': {
             'femaleRatio': 1,
         },
@@ -22481,7 +22504,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 130,
         'catchRate': 120,
-        'evolutions': [new LevelEvolution('Hattrem', 'Hatterene', 42)],
+        'evolutions': [LevelEvolution('Hattrem', 'Hatterene', 42)],
         'gender': {
             'femaleRatio': 1,
         },
@@ -22512,7 +22535,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 858.1,
         'name': 'Gigantamax Hatterene',
-        'nativeRegion': GameConstants.Region.none,
+        'nativeRegion': Region.none,
         'type': [
             PokemonType.Psychic,
             PokemonType.Fairy,
@@ -22552,7 +22575,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 53,
         'catchRate': 255,
-        'evolutions': [new LevelEvolution('Impidimp', 'Morgrem', 32)],
+        'evolutions': [LevelEvolution('Impidimp', 'Morgrem', 32)],
         'gender': {
             'femaleRatio': 0,
         },
@@ -22576,7 +22599,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 130,
         'catchRate': 120,
-        'evolutions': [new LevelEvolution('Morgrem', 'Grimmsnarl', 42)],
+        'evolutions': [LevelEvolution('Morgrem', 'Grimmsnarl', 42)],
         'gender': {
             'femaleRatio': 0,
         },
@@ -22607,7 +22630,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 861.1,
         'name': 'Gigantamax Grimmsnarl',
-        'nativeRegion': GameConstants.Region.none,
+        'nativeRegion': Region.none,
         'type': [
             PokemonType.Dark,
             PokemonType.Fairy,
@@ -22651,7 +22674,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 863,
         'name': 'Perrserker',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': Region.galar,
         'type': [PokemonType.Steel],
         'base': {
             'hitpoints': 70,
@@ -22702,7 +22725,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 177,
         'catchRate': 45,
-        'heldItem': {type: ItemType.item, id: 'Leek'},
+        'heldItem': { type: ItemType.item, id: 'Leek' },
     },
     {
         'id': 866,
@@ -24047,7 +24070,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 869.7,
         'name': 'Gigantamax Alcremie',
-        'nativeRegion': GameConstants.Region.none,
+        'nativeRegion': Region.none,
         'type': [PokemonType.Fairy],
         'base': {
             'hitpoints': 130,
@@ -24082,7 +24105,7 @@ const pokemonList = createPokemonArray(
         'exp': 165,
         'catchRate': 45,
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -24121,7 +24144,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 37,
         'catchRate': 190,
-        'evolutions': [new NightTimedStoneEvolution('Snom', 'Frosmoth', GameConstants.StoneType.Soothe_bell)],
+        'evolutions': [NightTimedStoneEvolution('Snom', 'Frosmoth', StoneType.Soothe_bell)],
     },
     {
         'id': 873,
@@ -24296,7 +24319,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 66,
         'catchRate': 190,
-        'evolutions': [new LevelEvolution('Cufant', 'Copperajah', 34)],
+        'evolutions': [LevelEvolution('Cufant', 'Copperajah', 34)],
     },
     {
         'id': 879,
@@ -24318,7 +24341,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 879.1,
         'name': 'Gigantamax Copperajah',
-        'nativeRegion': GameConstants.Region.none,
+        'nativeRegion': Region.none,
         'type': [PokemonType.Steel],
         'base': {
             'hitpoints': 244,
@@ -24353,7 +24376,7 @@ const pokemonList = createPokemonArray(
         'exp': 177,
         'catchRate': 45,
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -24376,7 +24399,7 @@ const pokemonList = createPokemonArray(
         'exp': 177,
         'catchRate': 45,
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -24399,7 +24422,7 @@ const pokemonList = createPokemonArray(
         'exp': 177,
         'catchRate': 45,
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -24422,7 +24445,7 @@ const pokemonList = createPokemonArray(
         'exp': 177,
         'catchRate': 45,
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -24448,7 +24471,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 884.1,
         'name': 'Gigantamax Duraludon',
-        'nativeRegion': GameConstants.Region.none,
+        'nativeRegion': Region.none,
         'type': [
             PokemonType.Steel,
             PokemonType.Dragon,
@@ -24485,7 +24508,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 54,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Dreepy', 'Drakloak', 50)],
+        'evolutions': [LevelEvolution('Dreepy', 'Drakloak', 50)],
     },
     {
         'id': 886,
@@ -24506,7 +24529,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 144,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Drakloak', 'Dragapult', 60)],
+        'evolutions': [LevelEvolution('Drakloak', 'Dragapult', 60)],
     },
     {
         'id': 887,
@@ -24541,13 +24564,13 @@ const pokemonList = createPokemonArray(
             'speed': 138,
         },
         'eggCycles': 120,
-        'evolutions': [new HeldItemLevelEvolution('Zacian (Battle Hero)', 'Zacian (Crowned Sword)', 100, 'Rusted_Sword')],
+        'evolutions': [HeldItemLevelEvolution('Rusted_Sword', 'Zacian (Battle Hero)', 'Zacian (Crowned Sword)', 100)],
         'levelType': LevelType.slow,
         'exp': 335,
         'catchRate': 10,
-        'heldItem': {type: ItemType.item, id: 'Rusted_Sword'},
+        'heldItem': { type: ItemType.item, id: 'Rusted_Sword' },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -24566,9 +24589,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 335,
         'catchRate': 10,
-        'heldItem': {type: ItemType.item, id: 'Rusted_Sword'},
+        'heldItem': { type: ItemType.item, id: 'Rusted_Sword' },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -24584,13 +24607,13 @@ const pokemonList = createPokemonArray(
             'speed': 138,
         },
         'eggCycles': 120,
-        'evolutions': [new HeldItemLevelEvolution('Zamazenta (Battle Hero)', 'Zamazenta (Crowned Shield)', 100, 'Rusted_Shield')],
+        'evolutions': [HeldItemLevelEvolution('Rusted_Shield', 'Zamazenta (Battle Hero)', 'Zamazenta (Crowned Shield)', 100)],
         'levelType': LevelType.slow,
         'exp': 335,
         'catchRate': 10,
-        'heldItem': {type: ItemType.item, id: 'Rusted_Shield'},
+        'heldItem': { type: ItemType.item, id: 'Rusted_Shield' },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -24609,9 +24632,9 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 335,
         'catchRate': 10,
-        'heldItem': {type: ItemType.item, id: 'Rusted_Shield'},
+        'heldItem': { type: ItemType.item, id: 'Rusted_Shield' },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -24634,13 +24657,13 @@ const pokemonList = createPokemonArray(
         'exp': 345,
         'catchRate': 255,
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
         'id': 890.1,
         'name': 'Eternamax Eternatus',
-        'nativeRegion': GameConstants.Region.none,
+        'nativeRegion': Region.none,
         'type': [
             PokemonType.Poison,
             PokemonType.Dragon,
@@ -24658,7 +24681,7 @@ const pokemonList = createPokemonArray(
         'exp': 345,
         'catchRate': 255,
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -24730,7 +24753,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 892.2,
         'name': 'Gigantamax Urshifu (Single Strike)',
-        'nativeRegion': GameConstants.Region.none,
+        'nativeRegion': Region.none,
         'type': [
             PokemonType.Fighting,
             PokemonType.Dark,
@@ -24754,7 +24777,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 892.3,
         'name': 'Gigantamax Urshifu (Rapid Strike)',
-        'nativeRegion': GameConstants.Region.none,
+        'nativeRegion': Region.none,
         'type': [
             PokemonType.Fighting,
             PokemonType.Water,
@@ -24795,7 +24818,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 335,
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -24818,7 +24841,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 335,
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -24838,7 +24861,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 335,
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -24858,7 +24881,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 335,
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -24877,9 +24900,9 @@ const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': 335,
-        'heldItem': {type: ItemType.item, id: 'White_mane_hair'},
+        'heldItem': { type: ItemType.item, id: 'White_mane_hair' },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -24898,9 +24921,9 @@ const pokemonList = createPokemonArray(
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': 335,
-        'heldItem': {type: ItemType.item, id: 'Black_mane_hair'},
+        'heldItem': { type: ItemType.item, id: 'Black_mane_hair' },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -24917,14 +24940,14 @@ const pokemonList = createPokemonArray(
         },
         'catchRate': 3,
         'evolutions': [
-            new StoneEvolution('Calyrex', 'Shadow Rider Calyrex', GameConstants.StoneType.Black_mane_hair),
-            new StoneEvolution('Calyrex', 'Ice Rider Calyrex', GameConstants.StoneType.White_mane_hair),
+            StoneEvolution('Calyrex', 'Shadow Rider Calyrex', StoneType.Black_mane_hair),
+            StoneEvolution('Calyrex', 'Ice Rider Calyrex', StoneType.White_mane_hair),
         ],
         'eggCycles': 120,
         'levelType': LevelType.slow,
         'exp': 335,
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -24944,7 +24967,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 335,
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     {
@@ -24964,14 +24987,14 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 335,
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     // Missingno.
     {
         'id': 0,
         'name': 'MissingNo.',
-        'nativeRegion': GameConstants.Region.none,
+        'nativeRegion': Region.none,
         'catchRate': 45,
         'type': [PokemonType.Flying, PokemonType.Normal],
         'levelType': LevelType.mediumslow,
@@ -24986,14 +25009,14 @@ const pokemonList = createPokemonArray(
             'speed': 0,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     // Megas only between -100 → -199
     {
         'id': -100,
         'name': 'Mega Venusaur',
-        'nativeRegion': GameConstants.Region.kanto,
+        'nativeRegion': Region.kanto,
         'type': [PokemonType.Grass, PokemonType.Poison],
         'eggCycles': 120,
         'levelType': LevelType.mediumslow,
@@ -25014,7 +25037,7 @@ const pokemonList = createPokemonArray(
     {
         'id': -101,
         'name': 'Mega Charizard X',
-        'nativeRegion': GameConstants.Region.kanto,
+        'nativeRegion': Region.kanto,
         'type': [PokemonType.Fire, PokemonType.Dragon],
         'eggCycles': 120,
         'levelType': LevelType.mediumslow,
@@ -25197,7 +25220,7 @@ const pokemonList = createPokemonArray(
     {
         'id': -111,
         'name': 'Mega Gyarados',
-        'nativeRegion': GameConstants.Region.kanto,
+        'nativeRegion': Region.kanto,
         'type': [PokemonType.Water, PokemonType.Dark],
         'eggCycles': 120,
         'levelType': LevelType.slow,
@@ -25249,7 +25272,7 @@ const pokemonList = createPokemonArray(
     //         'speed': 130,
     //     },
     //     'gender': {
-    //         'type': GameConstants.Genders.Genderless,
+    //         'type': Genders.Genderless,
     //     },
     // },
     // {
@@ -25269,7 +25292,7 @@ const pokemonList = createPokemonArray(
     //         'speed': 140,
     //     },
     //     'gender': {
-    //         'type': GameConstants.Genders.Genderless,
+    //         'type': Genders.Genderless,
     //     },
     // },
     // {
@@ -25672,7 +25695,7 @@ const pokemonList = createPokemonArray(
     //         'speed': 110,
     //     },
     //     'gender': {
-    //         'type': GameConstants.Genders.Genderless,
+    //         'type': Genders.Genderless,
     //     },
     // },
     // {
@@ -25732,7 +25755,7 @@ const pokemonList = createPokemonArray(
     //         'speed': 90,
     //     },
     //     'gender': {
-    //         'type': GameConstants.Genders.Genderless,
+    //         'type': Genders.Genderless,
     //     },
     // },
     // {
@@ -25752,13 +25775,13 @@ const pokemonList = createPokemonArray(
     //         'speed': 90,
     //     },
     //     'gender': {
-    //         'type': GameConstants.Genders.Genderless,
+    //         'type': Genders.Genderless,
     //     },
     // },
     {
         'id': -142,
         'name': 'Mega Rayquaza',
-        'nativeRegion': GameConstants.Region.hoenn,
+        'nativeRegion': Region.hoenn,
         'type': [PokemonType.Dragon, PokemonType.Flying],
         'eggCycles': 120,
         'levelType': LevelType.slow,
@@ -25773,7 +25796,7 @@ const pokemonList = createPokemonArray(
             'speed': 115,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
     },
     // {
@@ -25901,13 +25924,13 @@ const pokemonList = createPokemonArray(
     //         'speed': 110,
     //     },
     //     'gender': {
-    //         'type': GameConstants.Genders.Genderless,
+    //         'type': Genders.Genderless,
     //     },
     // },
     {
         'id': -793,
         'name': '???',
-        'nativeRegion': GameConstants.Region.alola,
+        'nativeRegion': Region.alola,
         'type': [PokemonType.Rock, PokemonType.Poison],
         'eggCycles': 120,
         'levelType': LevelType.slow,
@@ -25922,75 +25945,74 @@ const pokemonList = createPokemonArray(
             'speed': 103,
         },
         'gender': {
-            'type': GameConstants.Genders.Genderless,
+            'type': Genders.Genderless,
         },
-    }
+    },
 );
 
 const pokemonNameIndex = {};
-const maxEggCycles = Math.max(...pokemonList.map(p => p.eggCycles));
+const maxEggCycles = Math.max(...pokemonList.map((p) => p.eggCycles));
 
 // This needs to be initiallised before pokemonMap as some other things rely on it for data
 // Specifically Roamers not sure what else.
-pokemonList.forEach(p => {
+pokemonList.forEach((p) => {
     // Calculate our attack values
     const baseOffense = 2 * Math.round(Math.sqrt(p.base.attack * p.base.specialAttack) + Math.sqrt(p.base.speed));
     const baseDefense = 2 * Math.round(Math.sqrt(p.base.defense * p.base.specialDefense) + Math.sqrt(p.base.speed));
     const baseStamina = 2 * p.base.hitpoints;
-    (p as PokemonListData).attack = Math.max(10, Math.floor(Math.sqrt(baseDefense * baseStamina) * baseOffense / 250));
+    (p as PokemonListData).attack = Math.max(10, Math.floor(Math.sqrt(baseDefense * baseStamina) * (baseOffense / 250)));
 
     if ((p as PokemonListData).baby) {
         // Calculate prevolutions/baby pokemon
         // Egg steps should be lower than evolved form
-        (p as PokemonListData).evolutions?.forEach(evo => {
-            pokemonBabyPrevolutionMap[evo.getEvolvedPokemon()] = evo.basePokemon;
+        (p as PokemonListData).evolutions?.forEach((evo) => {
+            pokemonBabyPrevolutionMap[evo.evolvedPokemon] = evo.basePokemon;
             // Do another loop for adding last stage of evolution on "reproductive" pokemon
-            (pokemonList.find(_p => _p.name == evo.getEvolvedPokemon()) as PokemonListData).evolutions?.forEach(lastStage => {
-                pokemonBabyPrevolutionMap[lastStage.getEvolvedPokemon()] = lastStage.basePokemon;
+            (pokemonList.find((_p) => _p.name === evo.evolvedPokemon) as PokemonListData).evolutions?.forEach((lastStage) => {
+                pokemonBabyPrevolutionMap[lastStage.evolvedPokemon] = lastStage.basePokemon;
             });
 
-            const eggCycles = pokemonList.find(_p => _p.name == evo.getEvolvedPokemon()).eggCycles;
+            const { eggCycles } = pokemonList.find((_p) => _p.name === evo.evolvedPokemon);
             p.eggCycles = Math.round(eggCycles * 0.8);
         });
     } else {
         // Calculate evolutions egg steps to be higher than the base forms
-        (p as PokemonListData).evolutions?.forEach(evo => {
-            const poke = pokemonList.find(_p => _p.name == evo.getEvolvedPokemon());
+        (p as PokemonListData).evolutions?.forEach((evo) => {
+            const poke = pokemonList.find((_p) => _p.name === evo.evolvedPokemon);
             poke.eggCycles = Math.min(maxEggCycles, Math.round(p.eggCycles * 1.5));
         });
     }
     // Calculate this pokemons native region
-    (p as PokemonListData).nativeRegion = (p as PokemonListData).nativeRegion || GameConstants.MaxIDPerRegion.findIndex(maxRegionID => maxRegionID >= Math.floor(p.id));
+    (p as PokemonListData).nativeRegion = (p as PokemonListData).nativeRegion || MaxIDPerRegion.findIndex((maxRegionID) => maxRegionID >= Math.floor(p.id));
     // Create an index of pokemon
     pokemonNameIndex[p.name.toLowerCase()] = p;
 
     // Fill gender object as default
-    (p as PokemonListData).gender = (p as PokemonListData).gender === undefined ? {'type': GameConstants.Genders.MaleFemale, 'femaleRatio': 0.5, 'visualDifference': false} : (p as PokemonListData).gender;
-    // Add GameConstants.Genders.MaleFemale as default gender type
-    (p as PokemonListData).gender.type = (p as PokemonListData).gender.type === undefined ? GameConstants.Genders.MaleFemale : (p as PokemonListData).gender.type;
+    (p as PokemonListData).gender = (p as PokemonListData).gender === undefined ? { 'type': Genders.MaleFemale, 'femaleRatio': 0.5, 'visualDifference': false } : (p as PokemonListData).gender;
+    // Add Genders.MaleFemale as default gender type
+    (p as PokemonListData).gender.type = (p as PokemonListData).gender.type === undefined ? Genders.MaleFemale : (p as PokemonListData).gender.type;
     // Add 0.5 as default gender ratio
     (p as PokemonListData).gender.femaleRatio = (p as PokemonListData).gender.femaleRatio === undefined ? 0.5 : (p as PokemonListData).gender.femaleRatio;
     // Add false as default gender visual difference
     (p as PokemonListData).gender.visualDifference = (p as PokemonListData).gender.visualDifference === undefined ? false : (p as PokemonListData).gender.visualDifference;
-}
-);
+});
 
-type PokemonMapProxy
+export type PokemonMapProxy
     = Record<PokemonNameType | number, PokemonListData>
     & {
         random: (max?: number, min?: number) => PokemonListData,
-        randomRegion: (max?: GameConstants.Region, min?: GameConstants.Region) => PokemonListData,
+        randomRegion: (max?: Region, min?: Region) => PokemonListData,
     }
     & Array<PokemonListData>;
 
-const pokemonMap = new GenericProxy<
+export const pokemonMap = new GenericProxy<
     typeof pokemonList,
-    PokemonMapProxy
+PokemonMapProxy
 >(pokemonList, {
     get: (pokemon, prop: PokemonNameType | 'random' | 'randomRegion') => {
-        if (!isNaN(+prop)) {
+        if (!Number.isNaN(+prop)) {
             const id: number = +prop;
-            const pokemonByID = pokemon.find(p => p.id == id);
+            const pokemonByID = pokemon.find((p) => p.id === id);
             if (pokemonByID) {
                 return pokemonByID;
             }
@@ -26003,27 +26025,39 @@ const pokemonMap = new GenericProxy<
                     // maximum is same as however many pokemon are available
                     const max = Math.min(pokemon.length, Math.max(_min, _max));
                     // Decide on a base ID first (so we aren't weighted towards pokemon with multiple forms such as Alcremie)
-                    const basePokemonIDs: number[] = [...new Set(pokemon.filter(p => p.id >= min && p.id <= max).map(p => Math.floor(p.id)))];
+                    const basePokemonIDs: number[] = [...new Set(pokemon.filter((p) => p.id >= min && p.id <= max).map((p) => Math.floor(p.id)))];
                     const ID: number = Rand.fromArray(basePokemonIDs);
                     // Choose a Pokemon with that base ID
-                    const poke: PokemonListData = Rand.fromArray(pokemon.filter(p => Math.floor(p.id) === ID && p.id >= min && p.id <= max));
-                    return poke || (pokemon.find(p => p.id == 0) as PokemonListData);
+                    const poke: PokemonListData = Rand.fromArray(pokemon.filter((p) => Math.floor(p.id) === ID && p.id >= min && p.id <= max));
+                    return poke || (pokemon.find((p) => p.id === 0) as PokemonListData);
                 };
             case 'randomRegion':
-                return (_max = GameConstants.Region.kanto, _min = GameConstants.Region.kanto) => {
+                return (_max = Region.kanto, _min = Region.kanto) => {
                     // minimum 0 (Kanto)
-                    const min = Math.max(GameConstants.Region.kanto, Math.min(_min, _max));
-                    const max = Math.max(GameConstants.Region.kanto, _min, _max);
+                    const min = Math.max(Region.kanto, Math.min(_min, _max));
+                    const max = Math.max(Region.kanto, _min, _max);
                     // Decide on a base ID first (so we aren't weighted towards pokemon with multiple forms such as Alcremie)
-                    const basePokemonIDs: number[] = [...new Set(pokemon.filter(p => p.id > 0 && (p as PokemonListData).nativeRegion >= min && (p as PokemonListData).nativeRegion <= max).map(p => Math.floor(p.id)))];
+                    const basePokemonIDs: number[] = [
+                        ...new Set(pokemon.filter(
+                            (p) => p.id > 0
+                            && (p as PokemonListData).nativeRegion >= min
+                            && (p as PokemonListData).nativeRegion <= max,
+                        ).map((p) => Math.floor(p.id))),
+                    ];
                     const ID: number = Rand.fromArray(basePokemonIDs);
                     // Choose a Pokemon with that base ID
-                    const poke: PokemonListData = Rand.fromArray(pokemon.filter(p => Math.floor(p.id) === ID && (p as PokemonListData).nativeRegion >= min && (p as PokemonListData).nativeRegion <= max));
+                    const poke: PokemonListData = Rand.fromArray(pokemon.filter(
+                        (p) => Math.floor(p.id) === ID
+                        && (p as PokemonListData).nativeRegion >= min
+                        && (p as PokemonListData).nativeRegion <= max,
+                    ));
                     // return a random Pokemon or MissingNo if none found
-                    return poke || (pokemon.find(p => p.id == 0) as PokemonListData);
+                    return poke || (pokemon.find((p) => p.id === 0) as PokemonListData);
                 };
             default:
-                return pokemonNameIndex[prop.toLowerCase()] || pokemon[prop]?.bind?.call(pokemon[prop],pokemon) || pokemon[prop] || pokemon.find(p => p.id == 0);
+                return pokemonNameIndex[prop.toLowerCase()] || pokemon[prop]?.bind?.call(pokemon[prop], pokemon) || pokemon[prop] || pokemon.find((p) => p.id === 0);
         }
     },
 });
+
+setPokemonMap(pokemonMap);

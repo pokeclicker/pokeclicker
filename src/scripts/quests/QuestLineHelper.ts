@@ -399,7 +399,7 @@ class QuestLineHelper {
 
     // Ho-Oh Quest
     public static createhoohJohtoQuestLine() {
-        const hoohJohtoQuestLine = new QuestLine('Rainbow Guardian', 'The Kimono Girls of Ecruteak City wish to speak with you again.', new MultiRequirement([new QuestLineStepCompletedRequirement('Whirl Guardian', 9), new ObtainedPokemonRequirement(pokemonMap.Raikou), new ObtainedPokemonRequirement(pokemonMap.Entei), new ObtainedPokemonRequirement(pokemonMap.Suicune)]), GameConstants.BulletinBoards.Johto);
+        const hoohJohtoQuestLine = new QuestLine('Rainbow Guardian', 'The Kimono Girls of Ecruteak City wish to speak with you again.', new MultiRequirement([new QuestLineStepCompletedRequirement('Whirl Guardian', 9), new ObtainedPokemonRequirement('Raikou'), new ObtainedPokemonRequirement('Entei'), new ObtainedPokemonRequirement('Suicune')]), GameConstants.BulletinBoards.Johto);
         const talkKimonoGirlsEcruteak = new TalkToNPCQuest(KimonoGirlsEcruteak, 'Meet the Kimono Girls at the Ecruteak Dance Theatre.');
         hoohJohtoQuestLine.addQuest(talkKimonoGirlsEcruteak);
 
@@ -752,6 +752,7 @@ class QuestLineHelper {
 
         const DistortionWorldReward = () => {
             App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1, false);
+            MapHelper.moveToTown('Mt. Coronet');
             Notifier.notify({
                 title: galacticSinnohQuestLine.name,
                 message: 'You found a Master Ball!',
@@ -887,7 +888,7 @@ class QuestLineHelper {
 
     // Kalos QuestLines
     public static createDetectivePikachuQuestLine() {
-        const detectivePikachuQuestLine = new QuestLine('Detective Pikachu', 'Detective Pikachu\'s partner has gone missing, and he needs your help!', new MultiRequirement([new ObtainedPokemonRequirement(pokemonMap['Detective Pikachu']), new GymBadgeRequirement(BadgeEnums.Bug)]) , GameConstants.BulletinBoards.Kalos);
+        const detectivePikachuQuestLine = new QuestLine('Detective Pikachu', 'Detective Pikachu\'s partner has gone missing, and he needs your help!', new MultiRequirement([new ObtainedPokemonRequirement('Detective Pikachu'), new GymBadgeRequirement(BadgeEnums.Bug)]) , GameConstants.BulletinBoards.Kalos);
 
         const searchForClues1 = new TalkToNPCQuest(searchForClues, 'Search Goldenrod City for clues.');
         detectivePikachuQuestLine.addQuest(searchForClues1);
@@ -1085,7 +1086,7 @@ class QuestLineHelper {
     }
 
     public static createPrincessDiancieQuestLine() {
-        const princessDiancieQuestLine = new QuestLine('Princess Diancie', 'Princess Diancie has been spotted in Kalos! She\'s searching for something.', new MultiRequirement([new ObtainedPokemonRequirement(pokemonMap.Doublade), new GymBadgeRequirement(BadgeEnums.Elite_Malva), new GymBadgeRequirement(BadgeEnums.Elite_Siebold), new GymBadgeRequirement(BadgeEnums.Elite_Wikstrom), new GymBadgeRequirement(BadgeEnums.Elite_Drasna)]) , GameConstants.BulletinBoards.Kalos);
+        const princessDiancieQuestLine = new QuestLine('Princess Diancie', 'Princess Diancie has been spotted in Kalos! She\'s searching for something.', new MultiRequirement([new ObtainedPokemonRequirement('Doublade'), new GymBadgeRequirement(BadgeEnums.Elite_Malva), new GymBadgeRequirement(BadgeEnums.Elite_Siebold), new GymBadgeRequirement(BadgeEnums.Elite_Wikstrom), new GymBadgeRequirement(BadgeEnums.Elite_Drasna)]) , GameConstants.BulletinBoards.Kalos);
 
         const catchFairy = new CustomQuest(100, undefined, 'Capture 100 Fairy-type Pokémon to follow Diancie\'s Fairy Aura.', () => {
             return pokemonMap.filter(p => p.type.includes(PokemonType.Fairy)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
