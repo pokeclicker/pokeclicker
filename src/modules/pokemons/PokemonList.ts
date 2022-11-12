@@ -12284,6 +12284,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 173,
         'catchRate': 60,
+        'evolutions': [MegaEvolution('Abomasnow', 'Mega Abomasnow')],
         'base': {
             'hitpoints': 90,
             'attack': 92,
@@ -12294,6 +12295,23 @@ export const pokemonList = createPokemonArray(
         },
         'gender': {
             'visualDifference': true,
+        },
+    },
+    {
+        'id': 460.01,
+        'name': 'Mega Abomasnow',
+        'type': [PokemonType.Grass, PokemonType.Ice],
+        'eggCycles': 120,
+        'levelType': LevelType.slow,
+        'exp': 347,
+        'catchRate': 2,
+        'base': {
+            'hitpoints': 90,
+            'attack': 132,
+            'specialAttack': 132,
+            'defense': 105,
+            'specialDefense': 105,
+            'speed': 30,
         },
     },
     {
@@ -25853,23 +25871,6 @@ export const pokemonList = createPokemonArray(
     //         'defense': 115,
     //         'specialDefense': 95,
     //         'speed': 92,
-    //     },
-    // },
-    // {
-    //     'id': -146,
-    //     'name': 'Mega Abomasnow',
-    //     'type': [PokemonType.Grass, PokemonType.Ice],
-    //     'eggCycles': 120,
-    //     'levelType': LevelType.slow,
-    //     'exp': 347,
-    //     'catchRate': 2,
-    //     'base': {
-    //         'hitpoints': 90,
-    //         'attack': 132,
-    //         'specialAttack': 132,
-    //         'defense': 105,
-    //         'specialDefense': 105,
-    //         'speed': 30,
     //     },
     // },
     // {

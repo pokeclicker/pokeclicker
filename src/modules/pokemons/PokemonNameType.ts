@@ -643,6 +643,7 @@ export type PokemonNameType
     | 'Mantyke'
     | 'Snover'
     | 'Abomasnow'
+    | 'Mega Abomasnow'
     | 'Weavile'
     | 'Magnezone'
     | 'Lickilicky'
