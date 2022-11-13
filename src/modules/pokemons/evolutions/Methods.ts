@@ -1,3 +1,5 @@
+import { StoneType } from '../../GameConstants';
+import { PokemonNameType } from '../PokemonNameType';
 import { LevelEvolution, StoneEvolution } from './Base';
 import {
     timeRestrict,
@@ -11,6 +13,7 @@ import {
     questlineRestrict,
     heldItemRestrict,
     weatherRestrict,
+    megaEvolveRestrict,
 } from './Restrictions';
 
 // TimeRestrictedLevelEvolution(start: number, end: number, basePokemon: string, evolvedPokemon: string, level: number)
@@ -65,3 +68,7 @@ export const QuestlineLevelEvolution = questlineRestrict(LevelEvolution);
 export const HeldItemLevelEvolution = heldItemRestrict(LevelEvolution);
 
 export const WeatherRestrictedLevelEvolution = weatherRestrict(LevelEvolution);
+
+const KeyStoneEvolution = (basePokemon: PokemonNameType, evolvedPokemon: PokemonNameType) => StoneEvolution(basePokemon, evolvedPokemon, StoneType.Key_stone);
+
+export const MegaEvolution = megaEvolveRestrict(KeyStoneEvolution);
