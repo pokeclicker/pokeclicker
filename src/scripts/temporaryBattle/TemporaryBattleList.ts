@@ -2046,7 +2046,7 @@ TemporaryBattleList['Calem 6'] = new TemporaryBattle(
         new GymPokemon('Mega Absol', 190460928, 68),
     ],
     'Here, this is for you!</br><img src="assets/images/megaStone/359.png"/></br>That\'s right. It\'s Absolite. I found two of them. After everything we said to Lysandre, it just wouldn\'t be right if I didn\'t share one with you.',
-    [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion, new ObtainedPokemonRequirement('Absol')],
+    [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion), new ObtainedPokemonRequirement('Absol')],
     undefined,
     {
         displayName: 'Pokémon Trainer Calem',
