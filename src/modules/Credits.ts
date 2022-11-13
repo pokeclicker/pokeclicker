@@ -554,7 +554,6 @@ export const SpriteCredits: Credit[] = [
         // Notes: Permission given to SomeoneAlive via Discord DM
     },
     {
-    {
         name: 'PhoenixOfLight92',
         link: 'https://www.deviantart.com/phoenixoflight92',
         image: 'https://a.deviantart.net/avatars-big/p/h/phoenixoflight92.png',
