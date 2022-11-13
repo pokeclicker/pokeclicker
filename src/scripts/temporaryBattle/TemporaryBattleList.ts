@@ -776,6 +776,17 @@ TemporaryBattleList['Ghetsis 2'] = new TemporaryBattle(
 );
 
 // Kalos Temporary Battles
+TemporaryBattleList.Korrina = new TemporaryBattle(
+    'Korrina',
+    [new GymPokemon('Mega Lucario', 135000000, 32)],
+    'What an incredible bond you have! What amazing power! You and Lucario are worthy of this Lucarionite!</br><img src="assets/images/megaStone/448.png"/>',
+    [new GymBadgeRequirement(BadgeEnums.Rumble), new ObtainedPokemonRequirement('Lucario')],
+    undefined,
+    {
+        imageName: '../gymLeaders/Korrina',
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Lucario').giveMegastone(),
+    }
+);
 TemporaryBattleList['Aipom Alley'] = new TemporaryBattle(
     'Aipom Alley',
     [
@@ -1046,7 +1057,7 @@ TemporaryBattleList['Ultra Wormhole'] = new TemporaryBattle(
 );
 TemporaryBattleList['Ultra Megalopolis'] = new TemporaryBattle(
     'Ultra Megalopolis',
-    [new GymPokemon('Necrozma (Ultra)', 282601920, 60)],
+    [new GymPokemon('Ultra Necrozma', 282601920, 60)],
     '<i>Necrozma fled.</i>',
     [new GymBadgeRequirement(BadgeEnums.DarkiniumZ)],
     undefined,
