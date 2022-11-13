@@ -4291,12 +4291,6 @@ const TrainerSchoolTeacher = new NPC('Teacher Emily', [
     'Watch the clock, if you make it to the next floor you\'ll get a time boost to help you find the boss.',
     'Good luck with your island challenge!',
 ], {image: 'assets/images/npcs/Teacher-gen7.png'});
-const KukuisLabProfessor = new NPC('Professor Kukui', [
-    'Are you looking for some rare Pokémon? Maybe I can help with that. Ask away!',
-    'Meltan? What\'s a Meltan? Nope, don\'t know about that one.',
-    'You seem very sure about this. Look, if you\'re so certain that this thing you are talking about is real, I\'m sure it will show up sooner or later. If you\'re patient...',
-    'You got me all excited. We\'ll WAIT FOR this new rare Pokémon together. Hold on, let me just UPDATE my calendar. Just to be sure I\'m free to investigate this new Pokémon that only you know about when it shows up. I wouldn\'t miss this for the world.',
-], {image: 'assets/images/npcs/Professor Kukui.png'});
 const IkiKahuna = new NPC('Kahuna Hala', [
     'Welcome to Alola!',
     'Here we don\'t have gyms. We have the Island Challenge. On each of our four islands you will complete one or more trials.',
@@ -4346,8 +4340,9 @@ const LanakilaColress = new NPC('Colress', [
     'Yes, in short, it makes it possible for Necrozma to fuse with the light of the Legendary Pokémon Solgaleo! This is the Colress Machine No. 1198, officially dubbed the N-Solarizer!',
     '<img src="assets/images/npcs/textbody/N-Lunarizer.png">',
     'In addition, this is the Colress Machine No. 1199, officially dubbed the N-Lunarizer! It makes it possible for Necrozma to fuse with the light of the Legendary Pokémon, Lunala!',
-    'If you wish to make use of them, you will require light from Solgaleo and Lunala respectively. I believe that they may drop the crystallised form of this light if you defeat them in battle!',
-    'I believe that a Trainer like you will be able to use both Alola\'s Legendary Pokémon and the fearsome power of Necrozma properly! I happen to know quite a bit about Pokémon fusion myself... But that is a different tale. Good luck in your battles!',
+    'If you wish to make use of them, you will require light from Solgaleo and Lunala respectively. I believe that they may drop the crystallised form of this light if you defeat them in battle! I believe each of them will be able to make good use of their own light, as well.',
+    'I believe Necrozma may drop a crystal of its own light, as well. Although I doubt it can make any use of it in its current state. Perhaps if it was already fused with the light of Solgaleo or Lunala....',
+    'At any rate, I believe that a Trainer like you will be able to use both Alola\'s Legendary Pokémon and the fearsome power of Necrozma properly! I happen to know quite a bit about Pokémon fusion myself... But that is a different tale. Good luck in your battles!',
 ], {
     image: 'assets/images/trainers/Team Plasma (colress).png',
     requirement: new ObtainedPokemonRequirement('Necrozma'),
@@ -4485,7 +4480,7 @@ TownList['Professor Kukui\'s Lab'] = new Town(
     [new BulletinBoard(GameConstants.BulletinBoards.Alola)],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 18)],
-        npcs: [KukuisLabProfessor/*ProfKukui*/], // TODO: replace the NPC when all pokemons are catchable
+        npcs: [ProfKukui],
     }
 );
 TownList['Hau\'oli City'] = new Town(
@@ -4560,7 +4555,12 @@ TownList['Aether Paradise'] = new Town(
     'Aether Paradise',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.AkalaIsland,
-    [TemporaryBattleList['Ultra Wormhole'], AetherParadiseShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Aether Paradise']), new MoveToDungeon(dungeonList['Aether Foundation'])],
+    [
+        TemporaryBattleList['Ultra Wormhole'],
+        AetherParadiseShop,
+        new ShardTraderShop(GameConstants.ShardTraderLocations['Aether Paradise']),
+        new MoveToDungeon(dungeonList['Aether Foundation']),
+    ],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.RockiumZ)],
         npcs: [AetherParadiseAlolaRoamerNPC],
@@ -4755,7 +4755,16 @@ TownList['Aether Foundation'] = new DungeonTown(
     'Aether Foundation',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.AkalaIsland,
-    [new GymBadgeRequirement(BadgeEnums.DarkiniumZ)]
+    [new GymBadgeRequirement(BadgeEnums.DarkiniumZ)],
+    [
+        TemporaryBattleList['Aether Branch Chief Faba'],
+        TemporaryBattleList['Team Aqua Leader Archie'],
+        TemporaryBattleList['Team Magma Leader Maxie'],
+        TemporaryBattleList['Team Galactic Leader Cyrus'],
+        TemporaryBattleList['Team Flare Leader Lysandre'],
+        TemporaryBattleList['Team Plasma Leader Ghetsis'],
+        TemporaryBattleList['Team Rainbow Leader Giovanni'],
+    ]
 );
 TownList['Exeggutor Island Hill'] = new DungeonTown(
     'Exeggutor Island Hill',

@@ -234,8 +234,12 @@ class Party implements Feature {
 
     calculateClickAttack(useItem = false): number {
         // Base power
-        // Shiny pokemon help with a 50% boost
-        const clickAttack = Math.pow(this.caughtPokemon.length + (this.caughtPokemon.filter(p => p.shiny).length / 2) + 1, 1.4) * (1 + AchievementHandler.achievementBonus());
+        // Shiny pokemon help with a 100% boost
+        // Resistant pokemon give a 100% boost
+        const caught = this.caughtPokemon.length;
+        const shiny = this.caughtPokemon.filter(p => p.shiny).length;
+        const resistant = this.caughtPokemon.filter(p => p.pokerus >= GameConstants.Pokerus.Resistant).length;
+        const clickAttack = Math.pow(caught + shiny + resistant + 1, 1.4) * (1 + AchievementHandler.achievementBonus());
 
         const bonus = this.multiplier.getBonus('clickAttack', useItem);
 

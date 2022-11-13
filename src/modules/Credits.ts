@@ -125,9 +125,14 @@ export const SpriteCredits: Credit[] = [
         link: 'https://linktr.ee/CorgiOnNeptune',
         resources: [
             'Recolours of Duncapham\'s sprite revamps',
-            'Sounds for Wanderer/Roamer',
-            'Sounds for BF finish & empty queue',
             'Dynamic BG Shiny Meltan/Melmetal',
+            'Rainbow Rocket sprite re-colours',
+            'Sounds:',
+            ' - Wandering encounter',
+            ' - Roaming encounter',
+            ' - Battle Frontier',
+            ' - Empty Queue',
+            ' - Dream Orbs',
         ],
         // Notes: Made specifically for PokéClicker.
     },
@@ -283,6 +288,7 @@ export const SpriteCredits: Credit[] = [
             'Steven revamp',
             'Tamer revamp',
             'Tate & Liza revamp',
+            'Team Rocket Grunt revamps',
             'Wally revamp',
             'Winona revamp',
         ],
@@ -548,6 +554,7 @@ export const SpriteCredits: Credit[] = [
         // Notes: Permission given to SomeoneAlive via Discord DM
     },
     {
+    {
         name: 'PhoenixOfLight92',
         link: 'https://www.deviantart.com/phoenixoflight92',
         image: 'https://a.deviantart.net/avatars-big/p/h/phoenixoflight92.png',
@@ -555,6 +562,16 @@ export const SpriteCredits: Credit[] = [
             'Shauna',
         ],
         // Notes: Permission given on image page if credited.
+    },
+    {
+        name: 'Prodigal96',
+        link: 'https://www.deviantart.com/prodigal96',
+        image: 'https://a.deviantart.net/avatars-big/p/r/prodigal96.jpg',
+        resources: [
+            'Rainbow Rocket overworld sprites',
+        ],
+        // Notes: Free to use, no credit required
+    },
     },
     {
         name: 'procompyart',

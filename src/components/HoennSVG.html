@@ -859,7 +859,7 @@
          , x: 19, y: 43
          , width: 6, height: 3
          , databind: "click:function(){MapHelper.moveToTown('Littleroot Town')}, attr:{ class: MapHelper.calculateTownCssClass('Littleroot Town') }"
-         , visible:  "MapHelper.ableToTravel() && player.starter() != GameConstants.Starter.Pikachu"
+         , visible:  "MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.Special"
          , image: "assets/images/map/blimp_empty.png"
          })
     %>
@@ -869,7 +869,7 @@
          , x: 19, y: 43
          , width: 6, height: 3
          , databind: "click:function(){MapHelper.moveToTown('Littleroot Town')}, attr:{ class: MapHelper.calculateTownCssClass('Littleroot Town') }"
-         , visible:  "MapHelper.ableToTravel() && player.starter() == GameConstants.Starter.Pikachu"
+         , visible:  "MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() == GameConstants.Starter.Special"
          , image: "assets/images/map/blimp_pikachu.png"
          })
     %>
@@ -882,7 +882,7 @@
          , image: "assets/images/map/kecleonoverworld.png"
          })
      %>
-	 
+
      <%- include('templates/mapOverlay',
          { name: "Kecleon"
         , x: 41, y: 10
@@ -892,7 +892,7 @@
          , image: "assets/images/map/kecleoncamooverworld.png"
          })
      %>
-	 
+
      <%- include('templates/mapOverlay',
          { name: "Kecleon"
         , x: 48, y: 8
@@ -972,5 +972,4 @@
          , image: "assets/images/map/ashketchumoverworld.png"
          })
      %>
-
 </g>

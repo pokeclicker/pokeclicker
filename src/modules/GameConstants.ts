@@ -625,11 +625,11 @@ export const EnvironmentCssClass: Record<Environment, string> = {
 };
 
 export enum Starter {
-    'None' = -1,
-    'Bulbasaur' = 0,
-    'Charmander' = 1,
-    'Squirtle' = 2,
-    'Pikachu' = 3,
+    None = -1,
+    Grass = 0,
+    Fire = 1,
+    Water = 2,
+    Special = 3,
 }
 
 export enum StoneType {
@@ -667,6 +667,7 @@ export enum StoneType {
     'Ice_stone',
     'Solar_light',
     'Lunar_light',
+    'Pure_light',
     'Sweet_apple',
     'Tart_apple',
     'Cracked_pot',
@@ -1275,7 +1276,7 @@ export const DockTowns = [
 ];
 
 export const RegionalStarters = [
-    [1, 4, 7], // Kanto
+    [1, 4, 7, 25], // Kanto
     [152, 155, 158], // Johto
     [252, 255, 258], // Hoenn
     [387, 390, 393], // Sinnoh
@@ -1434,6 +1435,15 @@ export const TemporaryBattles = [
     'Captain Mina UB',
     'Kahuna Nanu UB',
     'Ash Ketchum Alola',
+    'Rainbow Rocket Grunt 1',
+    'Rainbow Rocket Grunt 2',
+    'Aether Branch Chief Faba',
+    'Team Aqua Leader Archie',
+    'Team Magma Leader Maxie',
+    'Team Galactic Leader Cyrus',
+    'Team Flare Leader Lysandre',
+    'Team Plasma Leader Ghetsis',
+    'Team Rainbow Leader Giovanni',
     'Hop 1',
     'Mirages',
     'Hop 2',

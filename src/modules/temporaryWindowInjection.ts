@@ -109,6 +109,7 @@ import SeededDateRequirement from './requirements/SeededDateRequirement';
 import SeviiCaughtRequirement from './requirements/SeviiCaughtRequirement';
 import ShinyPokemonRequirement from './requirements/ShinyPokemonRequirement';
 import SubregionRequirement from './requirements/SubregionRequirement';
+import StarterRequirement from './requirements/StarterRequirement';
 import TokenRequirement from './requirements/TokenRequirement';
 import UndergroundItemsFoundRequirement from './requirements/UndergroundItemsFoundRequirement';
 import UndergroundItemValueType from './enums/UndergroundItemValueType';
@@ -148,6 +149,9 @@ import EffectEngineRunner from './effectEngine/effectEngineRunner';
 import ItemHandler from './items/ItemHandler';
 import CaughtIndicatingItem from './items/CaughtIndicatingItem';
 import PokeballItem from './items/PokeballItem';
+import RoamingPokemonList from './pokemons/RoamingPokemonList';
+import DataPokemon from './pokemons/DataPokemon';
+import MegaStoneItem from './items/MegaStoneItem';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -263,6 +267,7 @@ Object.assign(<any>window, {
     SeviiCaughtRequirement,
     ShinyPokemonRequirement,
     SubregionRequirement,
+    StarterRequirement,
     TokenRequirement,
     UndergroundItemsFoundRequirement,
     UndergroundItemValueType,
@@ -305,4 +310,7 @@ Object.assign(<any>window, {
     ItemHandler,
     CaughtIndicatingItem,
     PokeballItem,
+    RoamingPokemonList,
+    DataPokemon,
+    MegaStoneItem,
 });
