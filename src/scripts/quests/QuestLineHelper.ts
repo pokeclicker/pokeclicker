@@ -1398,7 +1398,7 @@ class QuestLineHelper {
 
         const meltanCatch10Magnemite = new CaptureSpecificPokemonQuest('Magnemite', 'Catch 10 Magnemite', 10, true, 0, undefined);
         const meltanCatch10Exeggcute = new CaptureSpecificPokemonQuest('Exeggcute', 'Catch 10 Exeggcute', 10, true, 0, undefined);
-        const meltanDefeatAcerola10 = new DefeatGymQuest(10 / 5, 0, 'Elite Acerola');
+        const meltanDefeatAcerola10 = new DefeatGymQuest(10, 0, 'Elite Acerola');
 
         meltanQuestLine.addQuest(new MultipleQuestsQuest([
             meltanCatch10Magnemite,
@@ -1424,7 +1424,7 @@ class QuestLineHelper {
 
         const meltanCatch20Kabuto = new CaptureSpecificPokemonQuest('Kabuto', 'Catch 20 Kabuto', 20, true, 0, undefined);
         const meltanCatch20Omanyte = new CaptureSpecificPokemonQuest('Omanyte', 'Catch 20 Omanyte', 20, true, 0, undefined); // Praise Lord Helix
-        const meltanDig30 = new MineLayersQuest(30 / 5, 0);
+        const meltanDig30 = new MineLayersQuest(30, 0);
 
         meltanQuestLine.addQuest(new MultipleQuestsQuest([
             meltanCatch20Kabuto,
