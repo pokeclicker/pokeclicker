@@ -70,7 +70,7 @@ GymList['Saffron City'] = new Gym(
     BadgeEnums.Marsh,
     2500,
     'This loss shocks me! But a loss is a loss. I admit I didn\'t work hard enough to win. You earned the MarshBadge.',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Silph Co.'))]
+    [new TemporaryBattleRequirement('Blue 5')]
 );
 GymList['Fuchsia City'] = new Gym(
     'Koga',
@@ -502,7 +502,7 @@ GymList['Fortree City'] = new Gym(
     BadgeEnums.Feather,
     6000,
     'Never before have I seen a Trainer command Pokémon with more grace than I... In recognition of your prowess, I present to you this Gym Badge.',
-    [new TemporaryBattleRequirement('May 4')]
+    [new TemporaryBattleRequirement('Kecleon 1')]
 );
 GymList['Mossdeep City'] = new Gym(
     'Tate & Liza',

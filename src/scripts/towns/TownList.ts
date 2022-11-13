@@ -747,7 +747,7 @@ TownList['Lavender Town'] = new Town(
     'Lavender Town',
     GameConstants.Region.kanto,
     GameConstants.KantoSubRegions.Kanto,
-    [TemporaryBattleList['Blue 4'], LavenderTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Lavender Town']), new MoveToDungeon(dungeonList['Pokémon Tower'])],
+    [LavenderTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Lavender Town']), new MoveToDungeon(dungeonList['Pokémon Tower'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 10)],
         npcs: [LavenderMrFuji, LavenderChanneler],
@@ -1047,14 +1047,15 @@ TownList['Pokémon Tower'] = new DungeonTown(
     [
         new RouteKillRequirement(10, GameConstants.Region.kanto, 7),
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rocket Game Corner')),
-        new TemporaryBattleRequirement('Blue 4'),
-    ]
+    ],
+    [TemporaryBattleList['Blue 4']]
 );
 TownList['Silph Co.'] = new DungeonTown(
     'Silph Co.',
     GameConstants.Region.kanto,
     GameConstants.KantoSubRegions.Kanto,
-    [new TemporaryBattleRequirement('Blue 5')]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Tower'))],
+    [TemporaryBattleList['Blue 5']]
 );
 TownList['Power Plant'] = new DungeonTown(
     'Power Plant',
@@ -1087,15 +1088,13 @@ TownList['Mt. Ember Summit'] = new DungeonTown(
     'Mt. Ember Summit',
     GameConstants.Region.kanto,
     GameConstants.KantoSubRegions.Sevii123,
-    [new RouteKillRequirement(10, GameConstants.Region.kanto, 27)],
-    []
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 27)]
 );
 TownList['Berry Forest'] = new DungeonTown(
     'Berry Forest',
     GameConstants.Region.kanto,
     GameConstants.KantoSubRegions.Sevii123,
-    [new RouteKillRequirement(10, GameConstants.Region.kanto, 29)],
-    []
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 29)]
 );
 TownList['Victory Road'] = new DungeonTown(
     'Victory Road',
@@ -1108,7 +1107,6 @@ TownList['Cerulean Cave'] = new DungeonTown(
     GameConstants.Region.kanto,
     GameConstants.KantoSubRegions.Kanto,
     [new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion)]
-
 );
 TownList['Ruby Path'] = new DungeonTown(
     'Ruby Path',

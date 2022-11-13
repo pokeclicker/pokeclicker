@@ -81,11 +81,10 @@ TemporaryBattleList['Blue 4'] = new TemporaryBattle(
         new GymPokemon('Ivysaur', 33438, 25, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Special)),
     ],
     'What? You stinker! I took it easy on you, too!',
-    [new RouteKillRequirement(10, GameConstants.Region.kanto, 10)],
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Tower'))],
     undefined,
     {
         displayName: 'Rival Blue',
-        returnTown: 'Lavender Town',
         imageName: 'Blue2',
     }
 );
@@ -121,7 +120,7 @@ TemporaryBattleList['Snorlax route 12'] = new TemporaryBattle(
     undefined,
     [
         new RouteKillRequirement(10, GameConstants.Region.kanto, 12),
-        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Tower')),
+        new TemporaryBattleRequirement('Blue 4'),
     ],
     [new TemporaryBattleRequirement('Snorlax route 12'), new ObtainedPokemonRequirement('Snorlax')],
     {
@@ -136,7 +135,7 @@ TemporaryBattleList['Snorlax route 16'] = new TemporaryBattle(
     'Snorlax route 16',
     [new GymPokemon('Snorlax', 189990, 30)],
     undefined,
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Tower'))],
+    [new TemporaryBattleRequirement('Blue 4')],
     [new TemporaryBattleRequirement('Snorlax route 16'), new ObtainedPokemonRequirement('Snorlax')],
     {
         displayName: 'Snorlax',
@@ -165,11 +164,10 @@ TemporaryBattleList['Blue 5'] = new TemporaryBattle(
         new GymPokemon('Venusaur', 44113, 40, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Special)),
     ],
     'I\'m moving on up and ahead! I\'m going to the Pokémon League to boot out the Elite Four! I\'ll become the world\'s most powerful Trainer! Well, good luck to you! Don\'t sweat it! Smell ya!',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Tower'))],
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Silph Co.'))],
     undefined,
     {
         displayName: 'Rival Blue',
-        returnTown: 'Saffron City',
         imageName: 'Blue2',
         firstTimeRewardFunction: () => {
             App.game.party.gainPokemonById(131);
@@ -652,7 +650,7 @@ TemporaryBattleList['Kecleon 1'] = new TemporaryBattle(
     'Kecleon 1',
     [new GymPokemon('Kecleon', 6000000, 20)],
     undefined,
-    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 119)],
+    [new TemporaryBattleRequirement('May 4')],
     [new TemporaryBattleRequirement('Kecleon 1'), new ObtainedPokemonRequirement('Kecleon')],
     {
         isTrainerBattle: false,

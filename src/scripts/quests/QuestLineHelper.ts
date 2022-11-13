@@ -278,6 +278,9 @@ class QuestLineHelper {
         const clearBurnedTower = new CustomQuest(1, 0, 'Clear the Burned Tower.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Burned Tower')]());
         johtoBeastsQuestLine.addQuest(clearBurnedTower);
 
+        const clearSilver = new CustomQuest(1, 0, 'Defeat Silver.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Silver 3')]());
+        johtoBeastsQuestLine.addQuest(clearSilver);
+
         const talktoPokéfanDerek = new TalkToNPCQuest(EcruteakPokéfan, 'Talk to Pokéfan Derek in Ecruteak City.');
         johtoBeastsQuestLine.addQuest(talktoPokéfanDerek);
 
@@ -298,7 +301,7 @@ class QuestLineHelper {
     }
 
     public static createJohtoSuicuneQuestLine() {
-        const johtoSuicuneQuestLine = new QuestLine('Eusine\'s Chase', 'Eusine is looking for Suicune.', new QuestLineStepCompletedRequirement('The Legendary Beasts', 2), GameConstants.BulletinBoards.Johto);
+        const johtoSuicuneQuestLine = new QuestLine('Eusine\'s Chase', 'Eusine is looking for Suicune.', new QuestLineStepCompletedRequirement('The Legendary Beasts', 3), GameConstants.BulletinBoards.Johto);
 
         const clearCianwoodSuicune = new CustomQuest(1, 0, 'Find Suicune.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Suicune 1')]());
         johtoSuicuneQuestLine.addQuest(clearCianwoodSuicune);
