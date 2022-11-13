@@ -23936,7 +23936,7 @@ export const pokemonList = createPokemonArray(
     },
     {
         'id': 869.08,
-        'name': 'Alcremie (Strawberry Rainbow)',Rainbow
+        'name': 'Alcremie (Strawberry Rainbow)',
         'type': [PokemonType.Fairy],
         'base': {
             'hitpoints': 65,
