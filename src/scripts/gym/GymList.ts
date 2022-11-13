@@ -1758,21 +1758,14 @@ GymList['Elite Trainer Hop'] = new Gym(
         new GymPokemon('Pincurchin', 124130462, 58),
         new GymPokemon('Snorlax', 124130462, 58),
         new GymPokemon('Corviknight', 131993475, 60),
-        new GymPokemon('Gigantamax Inteleon', 139216928, 59/*, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Grass)*/),
-        new GymPokemon('Gigantamax Rillaboom', 139216928, 59/*, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Fire)*/),
-        new GymPokemon('Gigantamax Cinderace', 139216928, 59/*, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Water)*/),
+        new GymPokemon('Gigantamax Inteleon', 139216928, 59, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Grass)),
+        new GymPokemon('Gigantamax Rillaboom', 139216928, 59, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Fire)),
+        new GymPokemon('Gigantamax Cinderace', 139216928, 59, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Water)),
     ],
     BadgeEnums.Elite_Hop,
     200000,
     'Thanks, mate. I\'m really glad you were the one here with me.',
     [new GymBadgeRequirement(BadgeEnums.Elite_Bede)]
-    // TODO: Add ability to change gym leaders pokemon based on your starter
-    // Grookey
-    // [new GymPokemon('Inteleon', 137833678, 60)],
-    // Scorbunny
-    // [new GymPokemon('Rillaboom', 137833678, 60)],
-    // Sobble
-    // [new GymPokemon('Cinderace', 137833678, 60)]
 );
 // Galar Champion
 GymList['Champion Leon'] = new Gym(
@@ -1788,7 +1781,7 @@ GymList['Champion Leon'] = new Gym(
         new GymPokemon('Inteleon', 137833678, 64, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Fire)),
         new GymPokemon('Rhyperior', 133481036, 64, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Water)),
         new GymPokemon('Rillaboom', 137833678, 64, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Water)),
-        new GymPokemon('Gigantamax Charizard', 145088083, 65),
+        new GymPokemon('Gigantamax Charizard', 145088006, 65),
     ],
     BadgeEnums.Elite_GalarChampion,
     250000,
