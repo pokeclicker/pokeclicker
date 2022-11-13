@@ -9831,7 +9831,7 @@ export const pokemonList = createPokemonArray(
             'defense': 70,
             'specialDefense': 65,
             'speed': 105,
-       },
+        },
     },
     {
         'id': 320,
