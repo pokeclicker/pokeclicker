@@ -128,6 +128,7 @@ export const SpriteCredits: Credit[] = [
             ' - Roaming encounter',
             ' - Battle Frontier',
             ' - Empty Queue',
+            ' - Dream Orbs',
         ],
         // Notes: Made specifically for PokéClicker.
     },
