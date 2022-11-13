@@ -172,6 +172,9 @@ class DungeonRunner {
             DungeonRunner.lootNotification(input, amount, weight, image);
             DungeonRunner.fightingLootEnemy = true;
             return DungeonBattle.generateNewLootEnemy(input);
+        } else if (ItemList[input] instanceof MegaStoneItem) {
+            DungeonRunner.lootNotification(input, amount, weight, ItemList[input].image);
+            ItemList[input].gain(1);
         } else if (ItemList[input] instanceof EvolutionStone || EggItem || BattleItem || Vitamin || EnergyRestore) {
             if (ItemList[input] instanceof Vitamin) {
                 GameHelper.incrementObservable(App.game.statistics.totalProteinsObtained, amount);
