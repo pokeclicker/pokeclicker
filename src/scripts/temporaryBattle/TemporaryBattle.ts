@@ -11,7 +11,6 @@ type TemporaryBattleOptionalArgument = {
 
 class TemporaryBattle extends TownContent {
     completeRequirements: (Requirement | OneFromManyRequirement)[];
-    pokemons: GymPokemon[];
 
     public cssClass(): string {
         return 'btn btn-secondary';
@@ -52,7 +51,7 @@ class TemporaryBattle extends TownContent {
 
     constructor(
         public name: string,
-        pokemons: GymPokemon[],
+        private pokemons: GymPokemon[],
         public defeatMessage: string,
         requirements: Requirement[] = [],
         completeRequirements: Requirement[] = undefined,
@@ -66,7 +65,6 @@ class TemporaryBattle extends TownContent {
             optionalArgs.isTrainerBattle = true;
         }
         this.completeRequirements = completeRequirements;
-        this.pokemons = pokemons;
     }
 
     public getPokemonList() {

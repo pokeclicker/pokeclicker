@@ -18,7 +18,6 @@ interface gymFlags {
  */
 class Gym extends TownContent {
     buttonText: string;
-    pokemons: GymPokemon[];
     public tooltip = 'Battle Gym Leaders to earn badges';
     public cssClass() {
         if (App.game.badgeCase.hasBadge(this.badgeReward)) {
@@ -64,7 +63,7 @@ class Gym extends TownContent {
     constructor(
         public leaderName: string,
         public town: string,
-        pokemons: GymPokemon[],
+        private pokemons: GymPokemon[],
         public badgeReward: BadgeEnums,
         public moneyReward: number,
         public defeatMessage: string,
@@ -80,7 +79,6 @@ class Gym extends TownContent {
         this.flags.quest = quest;
         this.flags.achievement = achievement;
         this.flags.champion = champion;
-        this.pokemons = pokemons;
         if (!town.includes('Elite') && !town.includes('Champion')) {
             this.buttonText = `${leaderName.replace(/\d/g,'')}'s gym`;
         } else {

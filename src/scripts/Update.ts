@@ -709,9 +709,6 @@ class Update implements Saveable {
             // Remove the Elite_ULtraNecrozma Gym, now a temporary battle instead of a gym
             saveData.statistics.gymsDefeated.splice(88, 1);
             saveData.badgeCase.splice(88, 1);
-
-            // We now have starters for each region
-            playerData.regionStarters = [playerData.starter];
         },
 
         '0.9.6': ({ playerData, saveData }) => {
@@ -1423,6 +1420,11 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 89);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 90);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 91);
+
+            // Kanto starter should be saved in regionStarter, unless they update a very old save
+            if (!playerData.regionStarters) {
+                playerData.regionStarters = [playerData.starter];
+            }
         },
     };
 
