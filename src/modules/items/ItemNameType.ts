@@ -203,4 +203,5 @@ export type ItemNameType
     | 'Thundurus (Therian)'
     | 'Landorus (Therian)'
     | 'RareCandy'
-    | 'Protein';
+    | 'Protein'
+    | 'Abomasite';

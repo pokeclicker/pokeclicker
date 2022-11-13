@@ -16,6 +16,7 @@ import {
 } from '../GameConstants';
 import { ShovelItem, MulchShovelItem } from './ShovelItem';
 import PokeBlock from './PokeBlock';
+import MegaStoneItem from './MegaStoneItem';
 
 // eslint-disable-next-line import/prefer-default-export
 export const ItemList: { [name: string]: Item } = {};
@@ -75,3 +76,5 @@ ItemList.PokeBlock_Gold   = new PokeBlock(PokeBlockColor.Gold, Infinity);
 ItemList.PokeBlock_Purple = new PokeBlock(PokeBlockColor.Purple, Infinity);
 ItemList.PokeBlock_Gray   = new PokeBlock(PokeBlockColor.Gray, Infinity);
 ItemList.PokeBlock_White  = new PokeBlock(PokeBlockColor.White, Infinity);
+
+ItemList.Abomasite        = new MegaStoneItem('Abomasnow', 'Abomasite', 10000);

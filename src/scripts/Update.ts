@@ -1410,8 +1410,19 @@ class Update implements Saveable {
                 log => log.content = createLogContent.notTranslated({ text: log.description })
             );
 
+            // Meltan Temp Battles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 83);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 84);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 85);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 86);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 87);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 88);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 89);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 90);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 91);
+
             // Move IDs for consistency
-            const consistentIDs = [//Remember to change Gigantamax image numbers, even though they aren't here
+            const consistentIDs = [
                 [1.1, 1.01],
                 [1.2, 1.02],
                 [1.3, 1.03],
@@ -1486,7 +1497,6 @@ class Update implements Saveable {
                 [479.4, 479.04],
                 [479.5, 479.05],
                 [479.6, 479.06],
-                [487.1, 487.01],//Remove if this is merged before or at the same update as Giratina (Origin) is made available
                 [492.1, 492.01],
                 [554.1, 554.01],
                 [555.1, 555.01],
