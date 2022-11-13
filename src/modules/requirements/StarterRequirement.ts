@@ -1,19 +1,20 @@
-import { AchievementOption, Region, Starter } from '../GameConstants';
+import {
+    AchievementOption, Region, RegionalStarters, Starter,
+} from '../GameConstants';
+import { pokemonList } from '../pokemons/PokemonList';
 import Requirement from './Requirement';
 
 export default class StarterRequirement extends Requirement {
-    region: Region;
-    constructor(region: Region, starter: Starter) {
+    constructor(private region: Region, private starter: Starter) {
         super(starter, AchievementOption.equal);
-        this.region = region;
     }
 
     public getProgress() {
         return player.regionStarters[this.region]();
     }
 
-    // eslint-disable-next-line class-methods-use-this
     public hint(): string {
-        return 'Wrong starter.';
+        const starter = pokemonList.find((p) => p.id === RegionalStarters[this.region][this.starter]).name;
+        return `Requires ${starter} to be chosen as your ${Region[this.region]} starter Pokémon`;
     }
 }
