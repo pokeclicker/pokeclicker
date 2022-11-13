@@ -150,6 +150,7 @@ import CaughtIndicatingItem from './items/CaughtIndicatingItem';
 import PokeballItem from './items/PokeballItem';
 import RoamingPokemonList from './pokemons/RoamingPokemonList';
 import DataPokemon from './pokemons/DataPokemon';
+import MegaStoneItem from './items/MegaStoneItem';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -309,4 +310,5 @@ Object.assign(<any>window, {
     PokeballItem,
     RoamingPokemonList,
     DataPokemon,
+    MegaStoneItem,
 });
