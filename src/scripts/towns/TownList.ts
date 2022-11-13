@@ -3504,7 +3504,7 @@ TownList['Anville Town'] = new Town(
     [AnvilleTownShop],
     {
         requirements: [
-            new ObtainedPokemonRequirement(pokemonMap['Meloetta (Aria)']),
+            new ObtainedPokemonRequirement('Meloetta (Aria)'),
             new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion),
         ],
     }
@@ -3528,7 +3528,7 @@ TownList['Pledge Grove'] = new DungeonTown(
     GameConstants.Region.unova,
     GameConstants.UnovaSubRegions.Unova,
     [
-        new ObtainedPokemonRequirement(pokemonMap.Keldeo),
+        new ObtainedPokemonRequirement('Keldeo'),
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Moor of Icirrus')),
     ]
 );
@@ -3649,8 +3649,8 @@ TownList['Abundant Shrine'] = new DungeonTown(
     [
         new RouteKillRequirement(10, GameConstants.Region.unova, 23),
         new RouteKillRequirement(10, GameConstants.Region.unova, 14),
-        new ObtainedPokemonRequirement(pokemonMap.Tornadus),
-        new ObtainedPokemonRequirement(pokemonMap.Thundurus),
+        new ObtainedPokemonRequirement('Tornadus'),
+        new ObtainedPokemonRequirement('Thundurus'),
     ]
 );
 TownList['Victory Road Unova'] = new DungeonTown(
@@ -3686,9 +3686,9 @@ TownList['Moor of Icirrus'] = new DungeonTown(
     GameConstants.UnovaSubRegions.Unova,
     [
         new RouteKillRequirement(10, GameConstants.Region.unova, 8),
-        new ObtainedPokemonRequirement(pokemonMap.Cobalion),
-        new ObtainedPokemonRequirement(pokemonMap.Terrakion),
-        new ObtainedPokemonRequirement(pokemonMap.Virizion),
+        new ObtainedPokemonRequirement('Cobalion'),
+        new ObtainedPokemonRequirement('Terrakion'),
+        new ObtainedPokemonRequirement('Virizion'),
     ]
 );
 TownList['Pinwheel Forest'] = new DungeonTown(
@@ -3773,6 +3773,7 @@ const ShalourCityShop = new Shop([
     ItemList.Fighting_egg,
     ItemList.Linking_cord,
     ItemList.Metal_coat,
+    ItemList.Key_stone,
 ]);
 const CoumarineCityShop = new Shop([
     ItemList.Pokeball,
@@ -3843,6 +3844,16 @@ const CamphrierFlabébéEnthusiast = new NPC('Flabébé Enthusiast', [
     'If you\'re searching for the yellow and blue kinds, look no further than the Farm!',
     'They simply can\'t resist berries that match their colors - just plant a few and they\'ll soon come wandering in.',
 ]);
+
+const SharlourKorrina = new NPC('Korrina', [
+    'What an explosive battle! I could tell that you didn\'t hold anything back!',
+    'To Mega Evolve your Lucario, you need an even stronger bond!',
+    'You can follow your progress in your Pokédex.',
+    'When your bond is strong enough, you can Mega Evolve it using a Key Stone! You can buy them in this city!',
+], {
+    image: 'assets/images/gymLeaders/Korrina.png',
+    requirement: new TemporaryBattleRequirement('Korrina'),
+});
 
 const CoumarineBirdwatcher = new NPC('Birdwatcher', [
     'I\'ve heard there is a cave you can find if you go out on the ocean a little ways.',
@@ -3982,10 +3993,10 @@ TownList['Shalour City'] = new Town(
     'Shalour City',
     GameConstants.Region.kalos,
     GameConstants.KalosSubRegions.Kalos,
-    [ShalourCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Shalour City']), TemporaryBattleList.Riot, TemporaryBattleList['Millis and Argus Steel']],
+    [ShalourCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Shalour City']), TemporaryBattleList.Korrina, TemporaryBattleList.Riot, TemporaryBattleList['Millis and Argus Steel']],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Reflection Cave'))],
-        npcs: [ExamineAegislash, ThanksDiancie],
+        npcs: [SharlourKorrina, ExamineAegislash, ThanksDiancie],
     }
 );
 TownList['Coumarine City'] = new Town(
@@ -4328,11 +4339,12 @@ const LanakilaColress = new NPC('Colress', [
     'Yes, in short, it makes it possible for Necrozma to fuse with the light of the Legendary Pokémon Solgaleo! This is the Colress Machine No. 1198, officially dubbed the N-Solarizer!',
     '<img src="assets/images/npcs/textbody/N-Lunarizer.png">',
     'In addition, this is the Colress Machine No. 1199, officially dubbed the N-Lunarizer! It makes it possible for Necrozma to fuse with the light of the Legendary Pokémon, Lunala!',
-    'If you wish to make use of them, you will require light from Solgaleo and Lunala respectively. I believe that they may drop the crystallised form of this light if you defeat them in battle!',
-    'I believe that a Trainer like you will be able to use both Alola\'s Legendary Pokémon and the fearsome power of Necrozma properly! I happen to know quite a bit about Pokémon fusion myself... But that is a different tale. Good luck in your battles!',
+    'If you wish to make use of them, you will require light from Solgaleo and Lunala respectively. I believe that they may drop the crystallised form of this light if you defeat them in battle! I believe each of them will be able to make good use of their own light, as well.',
+    'I believe Necrozma may drop a crystal of its own light, as well. Although I doubt it can make any use of it in its current state. Perhaps if it was already fused with the light of Solgaleo or Lunala....',
+    'At any rate, I believe that a Trainer like you will be able to use both Alola\'s Legendary Pokémon and the fearsome power of Necrozma properly! I happen to know quite a bit about Pokémon fusion myself... But that is a different tale. Good luck in your battles!',
 ], {
     image: 'assets/images/trainers/Team Plasma (colress).png',
-    requirement: new ObtainedPokemonRequirement(pokemonMap.Necrozma),
+    requirement: new ObtainedPokemonRequirement('Necrozma'),
 });
 
 const AetherParadiseAlolaRoamerNPC = new RoamerNPC('Assistant Branch Chief Wicke', [

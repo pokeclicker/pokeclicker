@@ -198,6 +198,7 @@ export const SpriteCredits: Credit[] = [
             'Galarian Zapdos overworld image',
             'Galarica cuff and wreath icons',
             'Honey',
+            'Key Stone',
             'Linking cord cartoon style',
             'Luana',
             'Merilyn',

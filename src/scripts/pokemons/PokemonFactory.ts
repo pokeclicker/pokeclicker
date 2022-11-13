@@ -285,6 +285,7 @@ class PokemonFactory {
                 break;
             case 'Solar_light':
             case 'Lunar_light':
+            case 'Pure_light':
                 chance = GameConstants.LIGHT_ITEM_CHANCE;
                 break;
             case 'Rusted_Sword':

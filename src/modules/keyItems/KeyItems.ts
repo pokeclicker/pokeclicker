@@ -6,6 +6,7 @@ import { Feature } from '../DataStore/common/Feature';
 import {
     getDungeonIndex, Region, ROUTE_KILLS_NEEDED, Starter, Pokerus,
 } from '../GameConstants';
+import { pokemonMap } from '../pokemons/PokemonList';
 
 export default class KeyItems implements Feature {
     name = 'Key Items';
