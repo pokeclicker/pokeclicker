@@ -52,6 +52,20 @@ SpecialEvents.newEvent('Lunar New Year', 'Encounter Fancy Pattern Vivillon for a
         RoamingPokemonList.remove(GameConstants.Region.kalos, 0, 'Vivillon (Fancy)');
     }
 );
+//Hoopa Day
+SpecialEvents.newEvent('Hoopa Day', 'The Mischief Pokémon unleashes his tricks upon the world.',
+    // Start
+    new Date(new Date().getFullYear(), 3, 1, 1), () => {
+        const pikabluQuestLine = App.game.quests.getQuestLine('How blu mouse?');
+        if (pikabluQuestLine.state() == QuestLineState.inactive) {
+            App.game.quests.getQuestLine('How blu mouse?').beginQuest();
+        }
+    },
+    // End
+    new Date(new Date().getFullYear(), 3, 2, 1), () => {
+        // do not end questline, so ppl can finish it
+    }
+);
 // Easter
 SpecialEvents.newEvent('Easter', 'Encounter Surprise Togepi for a limited time with a dedicated Quest Line.',
     // Start
@@ -84,16 +98,16 @@ SpecialEvents.newEvent('Mewtwo strikes back!', 'Encounter Armored Mewtwo for a l
     // Start
     new Date(new Date().getFullYear(), 6, 18, 1), () => {
         dungeonList['Cerulean Cave'].bossList.push(new DungeonBossPokemon('Armored Mewtwo', 1000000, 80));
-        RoamingPokemonList.add(GameConstants.Region.kanto, 0, new RoamingPokemon('Bulbasaur (clone)'));
-        RoamingPokemonList.add(GameConstants.Region.kanto, 0, new RoamingPokemon('Charmander (clone)'));
-        RoamingPokemonList.add(GameConstants.Region.kanto, 0, new RoamingPokemon('Squirtle (clone)'));
+        RoamingPokemonList.add(GameConstants.Region.kanto, 0, new RoamingPokemon('Bulbasaur (Clone)'));
+        RoamingPokemonList.add(GameConstants.Region.kanto, 0, new RoamingPokemon('Charmander (Clone)'));
+        RoamingPokemonList.add(GameConstants.Region.kanto, 0, new RoamingPokemon('Squirtle (Clone)'));
     },
     // End
     new Date(new Date().getFullYear(), 6, 24, 23), () => {
         dungeonList['Cerulean Cave'].bossList = dungeonList['Cerulean Cave'].bossList.filter(boss => boss.name != 'Armored Mewtwo');
-        RoamingPokemonList.remove(GameConstants.Region.kanto, 0, 'Bulbasaur (clone)');
-        RoamingPokemonList.remove(GameConstants.Region.kanto, 0, 'Charmander (clone)');
-        RoamingPokemonList.remove(GameConstants.Region.kanto, 0, 'Squirtle (clone)');
+        RoamingPokemonList.remove(GameConstants.Region.kanto, 0, 'Bulbasaur (Clone)');
+        RoamingPokemonList.remove(GameConstants.Region.kanto, 0, 'Charmander (Clone)');
+        RoamingPokemonList.remove(GameConstants.Region.kanto, 0, 'Squirtle (Clone)');
     }
 );
 // Halloween

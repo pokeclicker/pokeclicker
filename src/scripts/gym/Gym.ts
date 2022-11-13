@@ -68,7 +68,7 @@ class Gym extends TownContent {
         public badgeReward: BadgeEnums,
         public moneyReward: number,
         public defeatMessage: string,
-        requirements: (OneFromManyRequirement | Requirement)[] = [],
+        requirements: Requirement[] = [],
         public rewardFunction = () => {},
         {
             quest = true,

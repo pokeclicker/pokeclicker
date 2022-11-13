@@ -85,7 +85,7 @@ class Update implements Saveable {
             saveData.badgeCase = saveData.badgeCase || [];
             // Not using game constants incase the value isn't 39 in the future
             if (saveData.badgeCase[39]) {
-                saveData.quests.questLines.push({state: 1, name: 'Mystery of Deoxys', quest: 0});
+                Update.startQuestLine(saveData, 'Mystery of Deoxys');
             }
         },
 
@@ -112,7 +112,7 @@ class Update implements Saveable {
             // If the player has the Soul Badge already
             // Not using game constants incase the badge value isn't 5 in the future
             if (saveData.badgeCase[5]) {
-                saveData.quests.questLines.push({state: 1, name: 'Mining Expedition', quest: 0});
+                Update.startQuestLine(saveData, 'Mining Expedition');
             }
         },
 
@@ -199,18 +199,6 @@ class Update implements Saveable {
         },
 
         '0.6.0': ({ saveData }) => {
-            // Award Deoxys forms for completed Battle Frontier milestones
-            const maxBattleFrontierStage = saveData.statistics.battleFrontierHighestStageCompleted;
-            if (maxBattleFrontierStage >= 151) {
-                Update.addPokemonToSaveData(saveData, 386.1); // Deoxys (attack)
-            }
-            if (maxBattleFrontierStage >= 251) {
-                Update.addPokemonToSaveData(saveData, 386.2); // Deoxys (defense)
-            }
-            if (maxBattleFrontierStage >= 386) {
-                Update.addPokemonToSaveData(saveData, 386.3); // Deoxys (speed)
-            }
-
             // Update the attack bonus percentages
             saveData.party.caughtPokemon = saveData.party.caughtPokemon.map(p => {
                 p.attackBonusPercent = p.attackBonus;
@@ -387,8 +375,8 @@ class Update implements Saveable {
         },
 
         '0.7.6': ({ playerData, saveData }) => {
-            Update.renamePokemonInSaveData(saveData, 'Lets go Pikachu', 'Let\'s Go Pikachu');
-            Update.renamePokemonInSaveData(saveData, 'Lets go Eevee', 'Let\'s Go Eevee');
+            Update.changeHatcheryKey(saveData, 'Lets go Pikachu', 'Let\'s Go Pikachu');
+            Update.changeHatcheryKey(saveData, 'Lets go Eevee', 'Let\'s Go Eevee');
 
             // Check if the Let's Go Pikachu is hidden due to MissingNo (reset breeding status)
             const pikachu = saveData.party.caughtPokemon.find(p => p.id == -8);
@@ -422,7 +410,7 @@ class Update implements Saveable {
             saveData.badgeCase = saveData.badgeCase || [];
             // Not using game constants incase the value isn't 73 in the future
             if (saveData.badgeCase[73]) { // Iceberg badge
-                saveData.quests.questLines.push({state: 1, name: 'The Great Vivillon Hunt!', quest: 0});
+                Update.startQuestLine(saveData, 'The Great Vivillon Hunt!');
             }
 
             // Add missing key items if the player has the badge
@@ -440,7 +428,7 @@ class Update implements Saveable {
 
         '0.8.4': ({ playerData, saveData }) => {
             // Update Pokemon names
-            Update.renamePokemonInSaveData(saveData, 'Vivillon', 'Vivillon (Meadow)');
+            Update.changeHatcheryKey(saveData, 'Vivillon', 'Vivillon (Meadow)');
 
             // Track Battle Frontier milestones earned
             const milestones = [
@@ -523,7 +511,7 @@ class Update implements Saveable {
             // If the player has the Fog Badge already
             // Not using game constants incase the badge value isn't 17 in the future
             if (saveData.badgeCase[17]) {
-                saveData.quests.questLines.push({state: 1, name: 'Team Rocket Again', quest: 0});
+                Update.startQuestLine(saveData, 'Team Rocket Again');
             }
 
             setTimeout(async () => {
@@ -540,7 +528,7 @@ class Update implements Saveable {
         '0.8.14': ({ playerData, saveData }) => {
             // Start Aqua Magma questline if player has Dynamo Badge already
             if (saveData.badgeCase[29]) {
-                saveData.quests.questLines.push({state: 1, name: 'Land vs. Water', quest: 0});
+                Update.startQuestLine(saveData, 'Land vs. Water');
             }
 
             // Just incase statistics is not set
@@ -559,7 +547,7 @@ class Update implements Saveable {
         '0.8.15': ({ playerData, saveData }) => {
             // Start Plasma questline if player has Jet Badge already
             if (saveData.badgeCase[58]) {
-                saveData.quests.questLines.push({state: 1, name: 'Quest for the DNA Splicers', quest: 0});
+                Update.startQuestLine(saveData, 'Quest for the DNA Splicers');
             }
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 2, 1); // Digletts Cave
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 5, 4); // Power Plant
@@ -672,7 +660,7 @@ class Update implements Saveable {
 
             // Start Galactic questline if player has Coal Badge already
             if (saveData.badgeCase[40]) {
-                saveData.quests.questLines.push({state: 1, name: 'A new world', quest: 0});
+                Update.startQuestLine(saveData, 'A New World');
             }
 
             // Clear Valley Windworks Clears
@@ -736,7 +724,7 @@ class Update implements Saveable {
 
             // Start Mina's Trial questline if player has cleared Ultra Necrozma already
             if (saveData.statistics.temporaryBattleDefeated[1]) {
-                saveData.quests.questLines.push({state: 1, name: 'Mina\'s Trial', quest: 0});
+                Update.startQuestLine(saveData, 'Mina\'s Trial');
             }
 
             // Add Rocket Game Corner
@@ -745,7 +733,7 @@ class Update implements Saveable {
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 6);
             // Start Team Rocket Kanto questline if player has Cascade Badge already
             if (saveData.badgeCase[2]) {
-                saveData.quests.questLines.push({state: 1, name: 'Team Rocket', quest: 0});
+                Update.startQuestLine(saveData, 'Team Rocket');
             }
 
             // Rename Land vs. Water questline, so QuestLineCompletedRequirement will work
@@ -803,41 +791,78 @@ class Update implements Saveable {
         },
 
         '0.9.8': ({ playerData, saveData, settingsData }) => {
+            // Add names to oak item loadouts
             saveData.oakItemLoadouts = saveData.oakItemLoadouts?.map((list, index) => ({ name: `Loadout ${index + 1}`, loadout: list })) || [];
 
-            // Fix pokerus
+            // Fix pokerus & EVs moved from statistics
             saveData.party.caughtPokemon.forEach(p => {
+                // If has pokerus, set to "contagious"
                 let status = (p[8]) ? 2 : 0;
-                const requiredForCured = saveData.challenges.list.slowEVs ? 5000 : 500;
-                if (saveData.statistics.effortPoints?.[p.id] >= requiredForCured) {
+                // Get effort points (0 if not infected), Multiply by 100 for finer control
+                const effortPoints = status ? saveData.statistics.effortPoints?.[p.id] * 100 || 0 : 0;
+                // Set to cured if reached required amount of EVs
+                const requiredForCured = saveData.challenges.list.slowEVs ? 500000 : 50000;
+                if (effortPoints >= requiredForCured) {
                     status = 3;
                 }
+                // Update status and EVs
                 p[8] = status;
+                p[9] = effortPoints;
             });
 
             // Give the players Linking Cords in place of Trade Stones
-            playerData._itemList.Linking_cord = playerData._itemList.Trade_stone;
+            playerData._itemList.Linking_cord = playerData._itemList.Trade_stone || 0;
             delete playerData._itemList.Trade_stone;
 
-            // Fix quest default color
-            if (settingsData) {
-                if (settingsData && settingsData['--questAtLocation'] && settingsData['--questAtLocation'] === '#34BF45') {
-                    settingsData['--questAtLocation'] = '#55ff00';
-                }
-                delete settingsData['--currentPlace'];
+            // Start Sevii questline if player has Volcano Badge already
+            if (saveData.badgeCase[7]) {
+                Update.startQuestLine(saveData, 'Bill\'s Errand');
+            }
+            // Start Persons of Interest questline if player has Earth Badge already
+            if (saveData.badgeCase[8]) {
+                Update.startQuestLine(saveData, 'Persons of Interest');
             }
 
-            // Add total proteins obtained
             // Just incase statistics is not set
             saveData.statistics = saveData.statistics || {};
-            // Set new statistic
-            saveData.statistics = {
-                ...saveData.statistics,
-                totalProteinsPurchased: saveData.statistics.totalProteinsObtained || 0,
-            };
 
-            // Split dungeon loot notification into two
+            // Add new statistic
+            saveData.statistics.totalProteinsPurchased = saveData.statistics.totalProteinsObtained || 0;
+
+            // Add Mt. Ember Summit
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 10);
+
+            // Add Berry Forest
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 11);
+
+            // Add Biker Gang Temporary Battles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 1);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 2);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 3);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 4);
+
+            // Add Galactic Boss Cyrus Temporary Battle
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 5);
+
+            // Add Ash Ketchum Temporary Battles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 7);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 8);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 9);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 10);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 11);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 12);
+
+            // Update settings
             if (settingsData) {
+                // Update our default quest location color
+                if (settingsData['--questAtLocation'] === '#34BF45') {
+                    settingsData['--questAtLocation'] = '#55ff00';
+                }
+
+                // Remove current location color
+                delete settingsData['--currentPlace'];
+
+                // Split dungeon loot notifications into two
                 settingsData['notification.common_dungeon_item_found'] = settingsData['notification.dungeon_item_found'] ?? true;
                 settingsData['notification.common_dungeon_item_found.desktop'] = settingsData['notification.dungeon_item_found.desktop'] ?? false;
                 settingsData['notification.rare_dungeon_item_found'] = settingsData['notification.dungeon_item_found'] ?? true;
@@ -845,33 +870,559 @@ class Update implements Saveable {
                 delete settingsData['notification.dungeon_item_found'];
                 delete settingsData['notification.dungeon_item_found.desktop'];
             }
+        },
 
-            // Moved EVs from statistics
+        '0.9.9': ({ playerData, saveData }) => {
+            // Fix pokemon having Pokérus early (key item not unlocked)
+            if (!saveData.keyItems.Pokerus_virus) {
+                saveData.party.caughtPokemon.forEach(p => {
+                    // Pokérus State
+                    p[8] = 0;
+                    // Effort Points
+                    p[9] = 0;
+                });
+            }
+        },
+
+        '0.9.10': ({ playerData, saveData }) => {
+            // Rename statistic
+            saveData.statistics.pokeballsPurchased = saveData.statistics.pokeballsBought;
+
+            // Update total proteins obtained to be equal to the total purchased (or whichever is higher)
+            saveData.statistics.totalProteinsObtained = Math.max(saveData.statistics.totalProteinsPurchased, saveData.statistics.totalProteinsObtained);
+
+            // If Pokémon doesn't have Pokérus yet, it shouldn't have Effort Points
             saveData.party.caughtPokemon.forEach(p => {
-                p[9] = saveData.statistics.effortPoints?.[p.id] || 0;
+                // Check Pokérus state
+                if (!p[8]) {
+                    // Reset Effort Points
+                    p[9] = 0;
+                }
             });
 
-            // Add Galactic Boss Cyrus TemporaryBattle
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 1);
+            // Turn Parfum Palace into a town
+            saveData.statistics.dungeonsCleared.splice(96, 1);
 
-            // Start Sevii questline if player has Volcano Badge already
-            if (saveData.badgeCase[7]) {
-                saveData.quests.questLines.push({state: 1, name: 'Bill\'s Errand', quest: 0});
+            // Filter already earned milestones due to item/Pokémon name updates
+            const milestones = [
+                [5, '25 x Poké Ball'],
+                [10, '100 x Poké Ball'],
+                [20, '100 x Great Ball'],
+                [30, '100 x Ultra Ball'],
+                [35, '100 x X Click'],
+                [40, '100 x X Attack'],
+                [50, '100 x Small Restore'],
+                [100, 'Deoxys'],
+                [110, '10 x Water Stone'],
+                [120, '10 x Leaf Stone'],
+                [130, '10 x Thunder Stone'],
+                [140, '10 x Fire Stone'],
+                [150, '200 x Medium Restore'],
+                [151, 'Deoxys (Attack)'],
+                [160, '100 x Lucky Egg'],
+                [170, '100 x Lucky Incense'],
+                [180, '100 x Dowsing Machine'],
+                [190, '10 x Mystery Egg'],
+                [200, '100 x Large Restore'],
+                [210, '40 x Water Stone'],
+                [220, '40 x Leaf Stone'],
+                [230, '40 x Thunder Stone'],
+                [240, '40 x Moon Stone'],
+                [250, '6,400 x Ultra Ball'],
+                [251, 'Deoxys (Defense)'],
+                [300, '100 x Linking Cord'],
+                [386, 'Deoxys (Speed)'],
+            ];
+            const highestStageCompleted = saveData.statistics?.battleFrontierHighestStageCompleted || 0;
+            saveData.battleFrontier = {
+                milestones: milestones.filter(([stage]) => stage <= highestStageCompleted),
+                checkpoint: saveData.battleFrontier.checkpoint,
+            };
+
+            // Update Pokemon name changes for hatchery/queue
+            const renamePokemon = Update.changeHatcheryKey;
+            renamePokemon(saveData, 'Bulbasaur (clone)', 'Bulbasaur (Clone)');
+            renamePokemon(saveData, 'Ivysaur (clone)', 'Ivysaur (Clone)');
+            renamePokemon(saveData, 'Venusaur (clone)', 'Venusaur (Clone)');
+            renamePokemon(saveData, 'Charmander (clone)', 'Charmander (Clone)');
+            renamePokemon(saveData, 'Charmeleon (clone)', 'Charmeleon (Clone)');
+            renamePokemon(saveData, 'Charizard (clone)', 'Charizard (Clone)');
+            renamePokemon(saveData, 'Pikachu (Original cap)', 'Pikachu (Original Cap)');
+            renamePokemon(saveData, 'Pikachu (Hoenn cap)', 'Pikachu (Hoenn Cap)');
+            renamePokemon(saveData, 'Pikachu (Sinnoh cap)', 'Pikachu (Sinnoh Cap)');
+            renamePokemon(saveData, 'Pikachu (Unova cap)', 'Pikachu (Unova Cap)');
+            renamePokemon(saveData, 'Pikachu (Kalos cap)', 'Pikachu (Kalos Cap)');
+            renamePokemon(saveData, 'Pikachu (Alola cap)', 'Pikachu (Alola Cap)');
+            renamePokemon(saveData, 'Pikachu (Partner cap)', 'Pikachu (Partner Cap)');
+            renamePokemon(saveData, 'Castform (sunny)', 'Castform (Sunny)');
+            renamePokemon(saveData, 'Castform (rainy)', 'Castform (Rainy)');
+            renamePokemon(saveData, 'Castform (snowy)', 'Castform (Snowy)');
+            renamePokemon(saveData, 'Deoxys (attack)', 'Deoxys (Attack)');
+            renamePokemon(saveData, 'Deoxys (defense)', 'Deoxys (Defense)');
+            renamePokemon(saveData, 'Deoxys (speed)', 'Deoxys (Speed)');
+            renamePokemon(saveData, 'Burmy (plant)', 'Burmy (Plant)');
+            renamePokemon(saveData, 'Burmy (sand)', 'Burmy (Sand)');
+            renamePokemon(saveData, 'Burmy (trash)', 'Burmy (Trash)');
+            renamePokemon(saveData, 'Wormadam (plant)', 'Wormadam (Plant)');
+            renamePokemon(saveData, 'Wormadam (sand)', 'Wormadam (Sand)');
+            renamePokemon(saveData, 'Wormadam (trash)', 'Wormadam (Trash)');
+            renamePokemon(saveData, 'Cherrim (overcast)', 'Cherrim (Overcast)');
+            renamePokemon(saveData, 'Cherrim (sunshine)', 'Cherrim (Sunshine)');
+            renamePokemon(saveData, 'Shellos (west)', 'Shellos (West)');
+            renamePokemon(saveData, 'Shellos (east)', 'Shellos (East)');
+            renamePokemon(saveData, 'Gastrodon (west)', 'Gastrodon (West)');
+            renamePokemon(saveData, 'Gastrodon (east)', 'Gastrodon (East)');
+            renamePokemon(saveData, 'Rotom (heat)', 'Rotom (Heat)');
+            renamePokemon(saveData, 'Rotom (wash)', 'Rotom (Wash)');
+            renamePokemon(saveData, 'Rotom (frost)', 'Rotom (Frost)');
+            renamePokemon(saveData, 'Rotom (fan)', 'Rotom (Fan)');
+            renamePokemon(saveData, 'Rotom (mow)', 'Rotom (Mow)');
+            renamePokemon(saveData, 'Rotom (discord)', 'Rotom (Discord)');
+            renamePokemon(saveData, 'Giratina (altered)', 'Giratina (Altered)');
+            renamePokemon(saveData, 'Shaymin (land)', 'Shaymin (Land)');
+            renamePokemon(saveData, 'Shaymin (sky)', 'Shaymin (Sky)');
+            renamePokemon(saveData, 'Arceus (normal)', 'Arceus (Normal)');
+            renamePokemon(saveData, 'Meloetta (aria)', 'Meloetta (Aria)');
+            renamePokemon(saveData, 'Meloetta (pirouette)', 'Meloetta (Pirouette)');
+            renamePokemon(saveData, 'Ash Greninja', 'Ash-Greninja');
+            renamePokemon(saveData, 'Vivillon (Pokéball)', 'Vivillon (Poké Ball)');
+            renamePokemon(saveData, 'Oricorio (Pom-pom)', 'Oricorio (Pom-Pom)');
+            renamePokemon(saveData, 'Minior (Blue-core)', 'Minior (Blue Core)');
+            renamePokemon(saveData, 'Minior (Green-core)', 'Minior (Green Core)');
+            renamePokemon(saveData, 'Minior (Indigo-core)', 'Minior (Indigo Core)');
+            renamePokemon(saveData, 'Minior (Orange-core)', 'Minior (Orange Core)');
+            renamePokemon(saveData, 'Minior (Red-core)', 'Minior (Red Core)');
+            renamePokemon(saveData, 'Minior (Violet-core)', 'Minior (Violet Core)');
+            renamePokemon(saveData, 'Minior (Yellow-core)', 'Minior (Yellow Core)');
+
+            // Start Galactic questline if player has Coal Badge already
+            // Don't start completed questline again if updating from v0.9.8/9 to v0.9.16+
+            const aNewWorld = saveData.quests.questLines.find(ql => ql.name == 'A new world');
+            if (saveData.badgeCase[40] && !aNewWorld) {
+                Update.startQuestLine(saveData, 'A New World');
             }
-            // Add Mt. Ember Summit
-            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 10);
-            // Add Berry Forest
-            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 11);
-            // Add Biker Gang TemporaryBattles
+
+            // Update mine inventory
+            playerData.mineInventory.forEach(i => {
+                if (i.valueType == 'Diamond') {
+                    // Shards
+                    if (i.name.includes('Shard')) {
+                        i.valueType = 2;
+                    } else { // Diamond items
+                        i.valueType = 0;
+                    }
+                }
+                // Fossils
+                if (i.valueType == 'Mine Egg') {
+                    i.valueType = 3;
+                }
+                // Gems
+                if (i.value == 100) {
+                    i.valueType = 1;
+                }
+            });
+        },
+
+        '0.9.11': ({ playerData, saveData }) => {
+            // Add Tohjo Falls
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 27);
+            // Add Celebi Temporary Battles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 5);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 6);
+        },
+
+        '0.9.12': ({ playerData, saveData }) => {
+            // Revert player back to Alola if in Galar
+            if (playerData._region >= 7) {
+                playerData._region = 6;
+                playerData._subregion = 0;
+                playerData._route = 0;
+                playerData._townName = 'Iki Town Outskirts';
+            }
+        },
+
+        '0.9.13': ({ playerData, saveData }) => {
+            // Add sevii4567 temp battles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 5);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 6);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 7);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 8);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 9);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 10);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 11);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 12);
+            // Pinkan Ash
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 23);
+            // Add sevii4567 dungeons
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 14);
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 15);
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 16);
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 17);
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 18);
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 19);
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 20);
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 21);
+            // Add orange league badges
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 40);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 41);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 42);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 43);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 44);
+
+
+            // Start Plasma questline if player has Toxic Badge already
+            if (saveData.badgeCase[59]) {
+                Update.startQuestLine(saveData, 'Quest for the DNA Splicers');
+            }
+            // Remove Team Plasma Assault dungeon
+            saveData.statistics.dungeonsCleared.splice(90, 1);
+            // Add Team Plasma Temporary Battles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 16);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 17);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 18);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 19);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 20);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 21);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 22);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 23);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 24);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 25);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 26);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 27);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 28);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 29);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 30);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 31);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 32);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 33);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 34);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 35);
+            // Move player out of Team Plasma Assault
+            if (playerData._townName == ('Team Plasma Assault')) {
+                playerData._townName = ('Opelucid City');
+            }
+            // Move player out of Plasma Frigate
+            if (playerData._townName == ('Plasma Frigate')) {
+                playerData._townName = ('Humilau City');
+            }
+            // Move player out of Giant Chasm
+            if (playerData._townName == ('Giant Chasm')) {
+                playerData._townName = ('Humilau City');
+            }
+
+            // Add Detective Pikachu TemporaryBattles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 36);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 37);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 38);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 39);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 40);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 41);
+        },
+
+        '0.9.14': ({ playerData, saveData }) => {
+            if (saveData.party.caughtPokemon.filter(p => p.id === 103.02).length) {
+                saveData.wallet.currencies[1] += 50000;
+            }
+        },
+
+        '0.9.15': ({ playerData, saveData, settingsData }) => {
+            // Aegislash and Pumpkaboo line renames
+            const renamePokemon = Update.changeHatcheryKey;
+            renamePokemon(saveData, 'Aegislash', 'Aegislash (Shield)');
+            renamePokemon(saveData, 'Pumpkaboo', 'Pumpkaboo (Average)');
+            renamePokemon(saveData, 'Gourgeist', 'Gourgeist (Average)');
+
+            // Add Snorlax Temporary Battles
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 1);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 2);
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 3);
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 4);
 
-            // Start Persons of Interest questline if player has Earth Badge already
-            if (saveData.badgeCase[8]) {
-                saveData.quests.questLines.push({state: 1, name: 'Persons of Interest', quest: 0});
+            // Add Suicune Temporary Battles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 7);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 8);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 9);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 10);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 11);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 12);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 13);
+
+            // Pinkan Berry
+            saveData.farming.berryList = Update.moveIndex(saveData.farming.berryList, 35);
+            saveData.farming.unlockedBerries = Update.moveIndex(saveData.farming.unlockedBerries, 35);
+            saveData.farming.mutations = Update.moveIndex(saveData.farming.mutations, 28);
+            saveData.farming.plotList.forEach(p => {
+                if (p.berry >= 35) {
+                    p.berry++;
+                }
+            });
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 22);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 23);
+
+            // Add Princess Diancie Temporary Battles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 53);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 54);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 55);
+
+            // Replace Pokémon names to IDs
+            const eggList = saveData.breeding.eggList;
+            const queueList = saveData.breeding.queueList;
+            Update.changePokemonNameToId(saveData, eggList);
+            Update.changePokemonNameToId(saveData, queueList);
+
+            // Adding more Galar badges
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 109);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 110);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 111);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 112);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 113);
+        },
+
+        '0.9.16': ({ playerData, saveData }) => {
+            // Pinkan Berry
+            saveData.statistics.berriesHarvested = Update.moveIndex(saveData.statistics.berriesHarvested, 35);
+
+            // Rename Pinkan Rocket questline and Sinnoh questline
+            saveData.quests.questLines.forEach(v => {
+                if (v.name === 'Team Rocket\'s Pinkan Themepark') {
+                    v.name = 'Team Rocket\'s Pinkan Theme Park';
+                }
+            });
+            saveData.quests.questLines.forEach(v => {
+                if (v.name === 'A new world') {
+                    v.name = 'A New World';
+                }
+            });
+        },
+
+        '0.9.17': ({ playerData, saveData, settingsData }) => {
+            // Add Sudowoodo Temporary Battle
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 7);
+
+            // Pinkan Berry - Obtained Statistics
+            saveData.statistics.berriesObtained = Update.moveIndex(saveData.statistics.berriesObtained, 35);
+
+            // Fix A New World questline for players updating from v0.9.8/9 to v0.9.16+
+            const aNewWorld = saveData.quests.questLines.find(ql => ql.name == 'A New World') || {};
+            if (aNewWorld.state === 1 && aNewWorld.quest <= 3) {
+                saveData.statistics.temporaryBattleDefeated[27] = 0;
             }
+        },
+
+        '0.10.0': ({ playerData, saveData, settingsData }) => {
+            // Add Kimono Girls Temporary Battles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 25);
+
+            // Create new Pokemon Gender Statistics if they don't exist
+            // Male
+            if (!saveData.statistics.malePokemonCaptured) {
+                saveData.statistics.malePokemonCaptured = {};
+            }
+            if (!saveData.statistics.malePokemonDefeated) {
+                saveData.statistics.malePokemonDefeated = {};
+            }
+            if (!saveData.statistics.malePokemonEncountered) {
+                saveData.statistics.malePokemonEncountered = {};
+            }
+            if (!saveData.statistics.malePokemonHatched) {
+                saveData.statistics.malePokemonHatched = {};
+            }
+            // Shiny male
+            if (!saveData.statistics.shinyMalePokemonCaptured) {
+                saveData.statistics.shinyMalePokemonCaptured = {};
+            }
+            if (!saveData.statistics.shinyMalePokemonDefeated) {
+                saveData.statistics.shinyMalePokemonDefeated = {};
+            }
+            if (!saveData.statistics.shinyMalePokemonEncountered) {
+                saveData.statistics.shinyMalePokemonEncountered = {};
+            }
+            if (!saveData.statistics.shinyMalePokemonHatched) {
+                saveData.statistics.shinyMalePokemonHatched = {};
+            }
+            // Female
+            if (!saveData.statistics.femalePokemonCaptured) {
+                saveData.statistics.femalePokemonCaptured = {};
+            }
+            if (!saveData.statistics.femalePokemonDefeated) {
+                saveData.statistics.femalePokemonDefeated = {};
+            }
+            if (!saveData.statistics.femalePokemonEncountered) {
+                saveData.statistics.femalePokemonEncountered = {};
+            }
+            if (!saveData.statistics.femalePokemonHatched) {
+                saveData.statistics.femalePokemonHatched = {};
+            }
+            // Shiny female
+            if (!saveData.statistics.shinyFemalePokemonCaptured) {
+                saveData.statistics.shinyFemalePokemonCaptured = {};
+            }
+            if (!saveData.statistics.shinyFemalePokemonDefeated) {
+                saveData.statistics.shinyFemalePokemonDefeated = {};
+            }
+            if (!saveData.statistics.shinyFemalePokemonEncountered) {
+                saveData.statistics.shinyFemalePokemonEncountered = {};
+            }
+            if (!saveData.statistics.shinyFemalePokemonHatched) {
+                saveData.statistics.shinyFemalePokemonHatched = {};
+            }
+
+            // Initialize total statistics
+            saveData.statistics.totalMalePokemonCaptured = 0;
+            saveData.statistics.totalMalePokemonDefeated = 0;
+            saveData.statistics.totalMalePokemonEncountered = 0;
+            saveData.statistics.totalMalePokemonHatched = 0;
+
+            saveData.statistics.totalShinyMalePokemonCaptured = 0;
+            saveData.statistics.totalShinyMalePokemonDefeated = 0;
+            saveData.statistics.totalShinyMalePokemonEncountered = 0;
+            saveData.statistics.totalShinyMalePokemonHatched = 0;
+
+            saveData.statistics.totalFemalePokemonCaptured = 0;
+            saveData.statistics.totalFemalePokemonDefeated = 0;
+            saveData.statistics.totalFemalePokemonEncountered = 0;
+            saveData.statistics.totalFemalePokemonHatched = 0;
+
+            saveData.statistics.totalShinyFemalePokemonCaptured = 0;
+            saveData.statistics.totalShinyFemalePokemonDefeated = 0;
+            saveData.statistics.totalShinyFemalePokemonEncountered = 0;
+            saveData.statistics.totalShinyFemalePokemonHatched = 0;
+
+            saveData.statistics.totalGenderlessPokemonCaptured = 0;
+            saveData.statistics.totalGenderlessPokemonDefeated = 0;
+            saveData.statistics.totalGenderlessPokemonEncountered = 0;
+            saveData.statistics.totalGenderlessPokemonHatched = 0;
+
+            saveData.statistics.totalShinyGenderlessPokemonCaptured = 0;
+            saveData.statistics.totalShinyGenderlessPokemonDefeated = 0;
+            saveData.statistics.totalShinyGenderlessPokemonEncountered = 0;
+            saveData.statistics.totalShinyGenderlessPokemonHatched = 0;
+
+            // Assign generic Pokemon statistics to the gendered Pokemon ones
+            saveData.party.caughtPokemon?.forEach(pokemon => {
+                const capturedStatistic = saveData.statistics.pokemonCaptured[pokemon.id] || 0;
+                const defeatedStatistic = saveData.statistics.pokemonDefeated[pokemon.id] || 0;
+                const encounteredStatistic = saveData.statistics.pokemonEncountered[pokemon.id] || 0;
+                const hatchedStatistic = saveData.statistics.pokemonHatched[pokemon.id] || 0;
+                const shinyCapturedStatistic = saveData.statistics.shinyPokemonCaptured[pokemon.id] || 0;
+                const shinyDefeatedStatistic = saveData.statistics.shinyPokemonDefeated[pokemon.id] || 0;
+                const shinyEncounteredStatistic = saveData.statistics.shinyPokemonEncountered[pokemon.id] || 0;
+                const shinyHatchedStatistic = saveData.statistics.shinyPokemonHatched[pokemon.id] || 0;
+
+                if (pokemonMap[pokemon.id].gender.type == GameConstants.Genders.MaleFemale) { // No genderless
+                    if (pokemonMap[pokemon.id].gender.femaleRatio != 1) { // Anything but female-only
+                        saveData.statistics.malePokemonCaptured[pokemon.id] = capturedStatistic;
+                        saveData.statistics.malePokemonDefeated[pokemon.id] = defeatedStatistic;
+                        saveData.statistics.malePokemonEncountered[pokemon.id] = encounteredStatistic;
+                        saveData.statistics.malePokemonHatched[pokemon.id] = hatchedStatistic;
+
+                        saveData.statistics.shinyMalePokemonCaptured[pokemon.id] = shinyCapturedStatistic;
+                        saveData.statistics.shinyMalePokemonDefeated[pokemon.id] = shinyDefeatedStatistic;
+                        saveData.statistics.shinyMalePokemonEncountered[pokemon.id] = shinyEncounteredStatistic;
+                        saveData.statistics.shinyMalePokemonHatched[pokemon.id] = shinyHatchedStatistic;
+
+                        // Assign the generic total ones to the male ones
+                        saveData.statistics.totalMalePokemonCaptured += capturedStatistic;
+                        saveData.statistics.totalMalePokemonDefeated += defeatedStatistic;
+                        saveData.statistics.totalMalePokemonEncountered += encounteredStatistic;
+                        saveData.statistics.totalMalePokemonHatched += hatchedStatistic;
+
+                        saveData.statistics.totalShinyMalePokemonCaptured += shinyCapturedStatistic;
+                        saveData.statistics.totalShinyMalePokemonDefeated += shinyDefeatedStatistic;
+                        saveData.statistics.totalShinyMalePokemonEncountered += shinyEncounteredStatistic;
+                        saveData.statistics.totalShinyMalePokemonHatched += shinyHatchedStatistic;
+                    } else { // Female-only
+                        saveData.statistics.femalePokemonCaptured[pokemon.id] = capturedStatistic;
+                        saveData.statistics.femalePokemonDefeated[pokemon.id] = defeatedStatistic;
+                        saveData.statistics.femalePokemonEncountered[pokemon.id] = encounteredStatistic;
+                        saveData.statistics.femalePokemonHatched[pokemon.id] = hatchedStatistic;
+
+                        saveData.statistics.shinyFemalePokemonCaptured[pokemon.id] = shinyCapturedStatistic;
+                        saveData.statistics.shinyFemalePokemonDefeated[pokemon.id] = shinyDefeatedStatistic;
+                        saveData.statistics.shinyFemalePokemonEncountered[pokemon.id] = shinyEncounteredStatistic;
+                        saveData.statistics.shinyFemalePokemonHatched[pokemon.id] = shinyHatchedStatistic;
+
+                        // Assign the generic total ones to the female ones
+                        saveData.statistics.totalFemalePokemonCaptured += capturedStatistic;
+                        saveData.statistics.totalFemalePokemonDefeated += defeatedStatistic;
+                        saveData.statistics.totalFemalePokemonEncountered += encounteredStatistic;
+                        saveData.statistics.totalFemalePokemonHatched += hatchedStatistic;
+
+                        saveData.statistics.totalShinyFemalePokemonCaptured += shinyCapturedStatistic;
+                        saveData.statistics.totalShinyFemalePokemonDefeated += shinyDefeatedStatistic;
+                        saveData.statistics.totalShinyFemalePokemonEncountered += shinyEncounteredStatistic;
+                        saveData.statistics.totalShinyFemalePokemonHatched += shinyHatchedStatistic;
+                    }
+                } else { // Genderless
+                    // Assign the generic total ones to the genderless ones
+                    saveData.statistics.totalGenderlessPokemonCaptured += capturedStatistic;
+                    saveData.statistics.totalGenderlessPokemonDefeated += defeatedStatistic;
+                    saveData.statistics.totalGenderlessPokemonEncountered += encounteredStatistic;
+                    saveData.statistics.totalGenderlessPokemonHatched += hatchedStatistic;
+
+                    saveData.statistics.totalShinyGenderlessPokemonCaptured += shinyCapturedStatistic;
+                    saveData.statistics.totalShinyGenderlessPokemonDefeated += shinyDefeatedStatistic;
+                    saveData.statistics.totalShinyGenderlessPokemonEncountered += shinyEncounteredStatistic;
+                    saveData.statistics.totalShinyGenderlessPokemonHatched += shinyHatchedStatistic;
+                }
+            });
+            // Update Region filter from integer to bitfield.
+            if (settingsData.breedingRegionFilter == -2) {
+                settingsData.breedingRegionFilter = 2 ** (playerData.highestRegion + 1) - 1;
+            } else {
+                settingsData.breedingRegionFilter = 2 ** settingsData.breedingRegionFilter;
+            }
+        },
+
+        '0.10.1': ({ playerData, saveData }) => {
+            // Brawlers Cave renamed
+            if (playerData._townName == 'Brawlers Cave') {
+                playerData._townName = 'Brawlers\' Cave';
+            }
+
+            // Remove cleared BF milestones from save if corresponding Pokémon is not in party
+            if (saveData?.battleFrontier?.milestones?.length) {
+                const pokemonRewards = [
+                    ['Deoxys', 386],
+                    ['Deoxys (Attack)', 386.1],
+                    ['Deoxys (Defense)', 386.2],
+                    ['Deoxys (Speed)', 386.3],
+                    ['Vivillon (Poké Ball)', 666.01],
+                ];
+
+                // Find Pokémon rewards that are not in our party
+                pokemonRewards
+                    .filter(([name, id]) => {
+                        return saveData.party.caughtPokemon.filter(p => p.id === id).length < 1;
+                    })
+                    // And remove any cleared milestones corresponding to missing Pokémon
+                    .forEach(([name, id]) => {
+                        saveData.battleFrontier.milestones = saveData.battleFrontier.milestones.filter(milestone => milestone[1] !== name);
+                    });
+            }
+        },
+        '0.10.2': ({ playerData, saveData }) => {
+            // Kecleon Fights
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 15);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 16);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 17);
+
+            // Korrina fight
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 52);
+
+            // Translations
+            saveData.logbook.logs.forEach(
+                log => log.content = createLogContent.notTranslated({ text: log.description })
+            );
+
+            // Meltan Temp Battles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 83);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 84);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 85);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 86);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 87);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 88);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 89);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 90);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 91);
         },
     };
 
@@ -1083,28 +1634,9 @@ class Update implements Saveable {
         return arr;
     }
 
-    static addPokemonToSaveData = (saveData, pokemonId) => {
-        if (saveData.party.caughtPokemon.filter(p => p.id === pokemonId).length > 0) {
-            return;
-        }
-
-        const pokemon: PartyPokemon = PokemonFactory.generatePartyPokemon(pokemonId, false);
-        saveData.statistics.pokemonCaptured[pokemonId] = 1;
-        saveData.statistics.totalPokemonCaptured++;
-        saveData.logbook.logs.unshift({
-            date: Date.now(),
-            description: `You have captured ${GameHelper.anOrA(pokemon.name)} ${pokemon.name}!`,
-            type: {
-                display: 'success',
-                label: 'CAUGHT',
-            },
-        });
-        saveData.party.caughtPokemon.push(pokemon);
-    }
-
     // If any pokemon names change in the data rename them,
     // note that name isn't used in party.
-    static renamePokemonInSaveData = (saveData, oldName, newName) => {
+    static changeHatcheryKey = (saveData, oldName, newName) => {
         if (!saveData.breeding) {
             return;
         }
@@ -1117,6 +1649,25 @@ class Update implements Saveable {
 
         // Fixup queue
         saveData.breeding.queueList = saveData.breeding.queueList?.map(p => p == oldName ? newName : p) || [];
+    }
+
+    // Replaces Pokémon names to IDs in the save data
+    static changePokemonNameToId(saveData, pokemonArray) {
+        pokemonArray?.forEach(pokemonName => {
+            const pokemon = PokemonHelper.getPokemonByName(pokemonName);
+            Update.changeHatcheryKey(saveData, pokemonName, pokemon.id);
+        });
+    }
+
+    static startQuestLine = (saveData, questLineName: string) => {
+        const questLine = saveData.quests.questLines.find(ql => ql.name == questLineName);
+        if (questLine) {
+            // Set to started if not yet started, otherwise leave in it's current state
+            questLine.state = questLine.state == 0 ? 1 : questLine.state;
+        } else {
+            // Push the quest, doesn't exist in save data yet
+            saveData.quests.questLines.push({ state: 1, name: questLineName, quest: 0 });
+        }
     }
 
     getPlayerData() {

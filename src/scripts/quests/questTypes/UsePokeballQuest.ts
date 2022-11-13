@@ -25,7 +25,7 @@ class UsePokeballQuest extends Quest implements QuestInterface {
     }
 
     get description(): string {
-        return `Use ${this.amount.toLocaleString('en-US')} ${GameConstants.Pokeball[this.pokeball]}s.`;
+        return `Use ${this.amount.toLocaleString('en-US')} ${ItemList[GameConstants.Pokeball[this.pokeball]].displayName}s.`;
     }
 
     toJSON() {

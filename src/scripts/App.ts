@@ -5,8 +5,13 @@ class App {
 
     static readonly debug = false;
     static game: Game;
+    static readonly isUsingClient = typeof navigator === 'object' && typeof navigator.userAgent === 'string' && navigator.userAgent.indexOf('Electron') >= 0;
+    static translation = new Translate(Settings.getSetting('translation.language'));
 
     static start() {
+        // Hide tooltips that stay on game load
+        $('.tooltip').tooltip('hide');
+
         if (!App.debug) {
             Object.freeze(GameConstants);
         }
@@ -45,7 +50,9 @@ class App {
                 new Challenges(),
                 new BattleFrontier(),
                 multiplier,
-                new SaveReminder()
+                new SaveReminder(),
+                new BattleCafeSaveObject(),
+                new DreamOrbController()
             );
 
             console.log(`[${GameConstants.formatDate(new Date())}] %cGame loaded`, 'color:#2ecc71;font-weight:900;');
@@ -55,9 +62,6 @@ class App {
 
             GameController.bindToolTips();
             GameController.addKeyListeners();
-
-            PokedexHelper.populateFilters();
-            PokedexHelper.updateList();
 
             App.game.initialize();
 

@@ -3,7 +3,7 @@ import AchievementRequirement from './AchievementRequirement';
 
 export default class PokeballRequirement extends AchievementRequirement {
     constructor(value: number, private pokeball: GameConstants.Pokeball, option: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
-        super(value, option, GameConstants.AchievementType.Pokeball);
+        super(value, option, GameConstants.AchievementType['Poke Balls']);
     }
 
     public getProgress() {

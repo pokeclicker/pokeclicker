@@ -168,9 +168,15 @@ class GameController {
 
             // Within modals
             if ($farmsModal.data('bs.modal')?._isShown) {
-                if (key == Settings.getSetting('hotkey.farm.toggleShovel').value) {
-                    FarmController.selectedShovel() ? FarmController.selectedShovel(false) : FarmController.selectedShovel(true);
-                    return e.preventDefault();
+                switch (key) {
+                    case Settings.getSetting('hotkey.farm.toggleShovel').value:
+                        FarmController.selectedShovel() ? FarmController.selectedShovel(false) : FarmController.selectedShovel(true);
+                        FarmController.selectedPlotSafeLock(false);
+                        return e.preventDefault();
+                    case Settings.getSetting('hotkey.farm.togglePlotSafeLock').value:
+                        FarmController.selectedPlotSafeLock() ? FarmController.selectedPlotSafeLock(false) : FarmController.selectedPlotSafeLock(true);
+                        FarmController.selectedShovel(false);
+                        return e.preventDefault();
                 }
             }
             if ($undergroundModal.data('bs.modal')?._isShown) {
@@ -190,11 +196,11 @@ class GameController {
                 }
                 if (isNumberKey) {
                     if (numberKey === 0) {
-                        ItemList.SmallRestore.use();
+                        ItemList.SmallRestore.use(1);
                     } else if (numberKey === 1) {
-                        ItemList.MediumRestore.use();
+                        ItemList.MediumRestore.use(1);
                     } else if (numberKey === 2) {
-                        ItemList.LargeRestore.use();
+                        ItemList.LargeRestore.use(1);
                     }
                     return e.preventDefault();
                 }
@@ -337,6 +343,8 @@ class GameController {
                                 DungeonRunner.openChest();
                             } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.boss && !DungeonRunner.fightingBoss()) {
                                 DungeonRunner.startBossFight();
+                            } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.ladder) {
+                                DungeonRunner.nextFloor();
                             }
                             return e.preventDefault();
                     }
@@ -353,11 +361,12 @@ class GameController {
                         return e.preventDefault();
                     } else if (isNumberKey) {
                         // Check if a number higher than 0 and less than our towns content was pressed
-                        const filteredConent = player.town().content.filter(c => c.isVisible());
-                        if (numberKey < filteredConent.length) {
-                            filteredConent[numberKey].protectedOnclick();
-                        } else if (player.town().npcs && numberKey < filteredConent.length + player.town().npcs.length) {
-                            player.town().npcs[numberKey - filteredConent.length].openDialog();
+                        const filteredContent = player.town().content.filter(c => c.isVisible());
+                        const filteredNPCs = player.town().npcs?.filter(n => n.isVisible());
+                        if (numberKey < filteredContent.length) {
+                            filteredContent[numberKey].protectedOnclick();
+                        } else if (filteredNPCs && numberKey < filteredContent.length + filteredNPCs.length) {
+                            filteredNPCs[numberKey - filteredContent.length].openDialog();
                         }
                         return e.preventDefault();
                     }
@@ -464,10 +473,6 @@ class GameController {
         });
     }
 }
-
-$(document).ready(() => {
-    $('#pokedexModal').on('show.bs.modal', PokedexHelper.updateList);
-});
 
 // when stacking modals allow scrolling after top modal hidden
 $(document).on('hidden.bs.modal', '.modal', () => {

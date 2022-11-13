@@ -114,8 +114,9 @@ class EnigmaMutation extends GrowMutation {
         }
 
         const hints = [];
+        const unlocked = App.game.farming.unlockedBerries[this.mutatedBerry]();
         this.hintsSeen.forEach((hintSeen, idx) => {
-            if (!hintSeen()) {
+            if (!hintSeen() && !unlocked) {
                 return false;
             }
             hints.push(this.getHint(idx));

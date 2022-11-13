@@ -28,7 +28,6 @@ import RangeSetting from './settings/RangeSetting';
 import Setting from './settings/Setting';
 import SettingOption from './settings/SettingOption';
 import BreedingFilters from './settings/BreedingFilters';
-import ProteinFilters from './settings/ProteinFilters';
 import WeatherType from './weather/WeatherType';
 import Weather from './weather/Weather';
 import SeededRand from './utilities/SeededRand';
@@ -37,6 +36,7 @@ import Rand from './utilities/Rand';
 import Settings from './settings/index';
 import { SortOptionConfigs, SortOptions } from './settings/SortOptions';
 import { AchievementSortOptionConfigs, AchievementSortOptions } from './achievements/AchievementSortOptions';
+import AchievementCategory from './achievements/AchievementCategory';
 import NotificationConstants from './notifications/NotificationConstants';
 import Notifier from './notifications/Notifier';
 import LogBook from './logbook/LogBook';
@@ -89,24 +89,35 @@ import ClearGymRequirement from './requirements/ClearGymRequirement';
 import ClickRequirement from './requirements/ClickRequirement';
 import DefeatedRequirement from './requirements/DefeatedRequirement';
 import DiamondRequirement from './requirements/DiamondRequirement';
+import FarmHandRequirement from './requirements/FarmHandRequirement';
 import FarmPlotsUnlockedRequirement from './requirements/FarmPlotsUnlockedRequirement';
+import FarmPointsRequirement from './requirements/FarmPointsRequirement';
 import GymBadgeRequirement from './requirements/GymBadgeRequirement';
 import HatchRequirement from './requirements/HatchRequirement';
+import HatcheryHelperRequirement from './requirements/HatcheryHelperRequirement';
 import MoneyRequirement from './requirements/MoneyRequirement';
 import MaxLevelOakItemRequirement from './requirements/MaxLevelOakItemRequirement';
 import MaxRegionRequirement from './requirements/MaxRegionRequirement';
+import ObtainedPokemonRequirement from './requirements/ObtainedPokemonRequirement';
 import PokeballRequirement from './requirements/PokeballRequirement';
+import PokerusStatusRequirement from './requirements/PokerusStatusRequirement';
 import ProteinObtainRequirement from './requirements/ProteinObtainRequirement';
 import QuestRequirement from './requirements/QuestRequirement';
+import QuestLevelRequirement from './requirements/QuestLevelRequirement';
 import RouteKillRequirement from './requirements/RouteKillRequirement';
 import SeededDateRequirement from './requirements/SeededDateRequirement';
+import SeviiCaughtRequirement from './requirements/SeviiCaughtRequirement';
 import ShinyPokemonRequirement from './requirements/ShinyPokemonRequirement';
 import SubregionRequirement from './requirements/SubregionRequirement';
 import StarterRequirement from './requirements/StarterRequirement';
 import TokenRequirement from './requirements/TokenRequirement';
 import UndergroundItemsFoundRequirement from './requirements/UndergroundItemsFoundRequirement';
+import UndergroundItemValueType from './enums/UndergroundItemValueType';
+import UndergroundItem from './underground/UndergroundItem';
+import UndergroundItems from './underground/UndergroundItems';
 import UndergroundLayersMinedRequirement from './requirements/UndergroundLayersMinedRequirement';
 import WeatherRequirement from './requirements/WeatherRequirement';
+import MegaEvolveRequirement from './requirements/MegaEvolveRequirement';
 import { SortModules, SortSaves } from './Sortable';
 import KeyItemController from './keyItems/KeyItemController';
 import KeyItem from './keyItems/KeyItem';
@@ -115,9 +126,32 @@ import Achievement from './achievements/Achievement';
 import Gems from './gems/Gems';
 import QuestLineCompletedRequirement from './requirements/QuestLineCompletedRequirement';
 import QuestLineStepCompletedRequirement from './requirements/QuestLineStepCompletedRequirement';
+import QuestLineStartedRequirement from './requirements/QuestLineStartedRequirement';
 import TemporaryBattleRequirement from './requirements/TemporaryBattleRequirement';
+import Translate from './translation/Translation';
 import DayOfWeekRequirement from './requirements/DayOfWeekRequirement';
 import SaveReminder from './saveReminder/SaveReminder';
+import ClientRequirement from './requirements/ClientRequirement';
+import lazyLoad from './utilities/LazyLoader';
+import {
+    beforeEvolve, EvoTrigger, LevelEvolution, StoneEvolution,
+} from './pokemons/evolutions/Base';
+import * as OtherEvos from './pokemons/evolutions/Methods';
+import { pokemonBabyPrevolutionMap, pokemonList, pokemonMap } from './pokemons/PokemonList';
+import { TmpPokemonHelper } from './pokemons/PokemonHelper';
+import PokedexFilters from './settings/PokedexFilters';
+import { createLogContent } from './logbook/helpers';
+import { ItemList } from './items/ItemList';
+import Item from './items/Item';
+import { MultiplierDecreaser } from './items/types';
+import EnergyRestore from './items/EnergyRestore';
+import EffectEngineRunner from './effectEngine/effectEngineRunner';
+import ItemHandler from './items/ItemHandler';
+import CaughtIndicatingItem from './items/CaughtIndicatingItem';
+import PokeballItem from './items/PokeballItem';
+import RoamingPokemonList from './pokemons/RoamingPokemonList';
+import DataPokemon from './pokemons/DataPokemon';
+import MegaStoneItem from './items/MegaStoneItem';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -154,14 +188,15 @@ Object.assign(<any>window, {
     Settings,
     NotificationConstants,
     Notifier,
-    ProteinFilters,
     BreedingFilters,
     SortOptionConfigs,
     SortOptions,
     AchievementSortOptionConfigs,
     AchievementSortOptions,
+    AchievementCategory,
     LogBook,
     LogBookTypes,
+    createLogContent,
     ChangelogItems,
     RedeemableCode,
     RedeemableCodes,
@@ -212,24 +247,35 @@ Object.assign(<any>window, {
     ClickRequirement,
     DefeatedRequirement,
     DiamondRequirement,
+    FarmHandRequirement,
     FarmPlotsUnlockedRequirement,
+    FarmPointsRequirement,
     GymBadgeRequirement,
     HatchRequirement,
+    HatcheryHelperRequirement,
     MoneyRequirement,
     MaxLevelOakItemRequirement,
     MaxRegionRequirement,
+    ObtainedPokemonRequirement,
     PokeballRequirement,
+    PokerusStatusRequirement,
     ProteinObtainRequirement,
     QuestRequirement,
+    QuestLevelRequirement,
     RouteKillRequirement,
     SeededDateRequirement,
+    SeviiCaughtRequirement,
     ShinyPokemonRequirement,
     SubregionRequirement,
     StarterRequirement,
     TokenRequirement,
     UndergroundItemsFoundRequirement,
+    UndergroundItemValueType,
+    UndergroundItem,
+    UndergroundItems,
     UndergroundLayersMinedRequirement,
     WeatherRequirement,
+    MegaEvolveRequirement,
     SortModules,
     SortSaves,
     KeyItemController,
@@ -239,7 +285,32 @@ Object.assign(<any>window, {
     Gems,
     QuestLineCompletedRequirement,
     QuestLineStepCompletedRequirement,
+    QuestLineStartedRequirement,
     TemporaryBattleRequirement,
+    Translate,
     DayOfWeekRequirement,
     SaveReminder,
+    ClientRequirement,
+    lazyLoad,
+    LevelEvolution,
+    StoneEvolution,
+    EvoTrigger,
+    beforeEvolve,
+    ...OtherEvos,
+    pokemonList,
+    pokemonMap,
+    pokemonBabyPrevolutionMap,
+    TmpPokemonHelper,
+    PokedexFilters,
+    ItemList,
+    Item,
+    MultiplierDecreaser,
+    EnergyRestore,
+    EffectEngineRunner,
+    ItemHandler,
+    CaughtIndicatingItem,
+    PokeballItem,
+    RoamingPokemonList,
+    DataPokemon,
+    MegaStoneItem,
 });

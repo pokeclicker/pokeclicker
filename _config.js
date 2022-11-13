@@ -7,4 +7,5 @@ module.exports = {
     FEATURE_FLAGS: {                                                            // optional - Toggle feature flags for development
         preloadUnreleasedTowns: (() => process.env.NODE_ENV != 'production')(), // optional (false) - Enable preloading images for unreleased towns
     },
+    TRANSLATIONS_URL: 'https://translations.pokeclicker.com',                   // optional - URL to load translation files from
 };

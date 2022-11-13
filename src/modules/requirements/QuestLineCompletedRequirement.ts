@@ -1,17 +1,23 @@
 import { AchievementOption } from '../GameConstants';
+import QuestLineState from '../quests/QuestLineState';
 
 import Requirement from './Requirement';
 
 export default class QuestLineCompletedRequirement extends Requirement {
-    questLineName: string;
+    cachedQuest: any;
+    get quest() {
+        if (!this.cachedQuest) {
+            this.cachedQuest = App.game.quests.getQuestLine(this.questLineName);
+        }
+        return this.cachedQuest;
+    }
 
-    constructor(questLineName: string, option = AchievementOption.equal) {
+    constructor(private questLineName: string, option = AchievementOption.equal) {
         super(1, option);
-        this.questLineName = questLineName;
     }
 
     public getProgress(): number {
-        return App.game.quests.getQuestLine(this.questLineName).state() === 2 ? 1 : 0;
+        return this.quest.state() === QuestLineState.ended ? 1 : 0;
     }
 
     public hint(): string {

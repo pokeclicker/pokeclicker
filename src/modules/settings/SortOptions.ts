@@ -1,4 +1,6 @@
 import { BREEDING_ATTACK_BONUS } from '../GameConstants';
+import { pokemonMap } from '../pokemons/PokemonList';
+import Settings from './Settings';
 
 export enum SortOptions {
     id = 0,
@@ -35,7 +37,7 @@ export const SortOptionConfigs: Record<SortOptions, SortOptionConfig> = {
 
     [SortOptions.name]: {
         text: 'Name',
-        getValue: (p) => p.name,
+        getValue: (p) => p.displayName,
     },
 
     [SortOptions.attack]: {
@@ -60,7 +62,11 @@ export const SortOptionConfigs: Record<SortOptions, SortOptionConfig> = {
 
     [SortOptions.breedingEfficiency]: {
         text: 'Breeding Efficiency',
-        getValue: (p) => ((p.baseAttack * (BREEDING_ATTACK_BONUS / 100) + p.proteinsUsed()) / pokemonMap[p.name].eggCycles),
+        getValue: (p) => (
+            (
+                (p.baseAttack * (BREEDING_ATTACK_BONUS / 100) + p.proteinsUsed())
+            * (Settings.getSetting('breedingIncludeEVBonus').observableValue() ? p.calculateEVAttackBonus() : 1))
+            / pokemonMap[p.name].eggCycles),
     },
 
     [SortOptions.eggCycles]: {

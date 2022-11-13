@@ -14,7 +14,7 @@ class GemDeal {
     }
 
     public static generateDeals() {
-        const gemMasterRegions = [GameConstants.Region.hoenn, GameConstants.Region.unova];
+        const gemMasterRegions = [GameConstants.Region.hoenn, GameConstants.Region.unova, GameConstants.Region.kalos];
 
         for (const region of gemMasterRegions) {
             if (!GemDeal.list[region]) {
@@ -26,6 +26,7 @@ class GemDeal {
 
         GemDeal.list[GameConstants.Region.hoenn].push(...this.generateHoennFluteDeals());
         GemDeal.list[GameConstants.Region.unova].push(...this.generateUnovaFluteDeals());
+        GemDeal.list[GameConstants.Region.kalos].push(...this.generateFurfrouDeal());
     }
 
     private static generateHoennFluteDeals() {
@@ -89,6 +90,36 @@ class GemDeal {
                 {gemType: PokemonType.Ghost, amount: 10000},
             ],
             ItemList.Blue_Flute,
+            1
+        ));
+        return list;
+    }
+
+    private static generateFurfrouDeal() {
+        const list = [];
+
+        list.push(new GemDeal(
+            [
+                {gemType: PokemonType.Normal, amount: 1000000},
+                {gemType: PokemonType.Water, amount: 1000000},
+                {gemType: PokemonType.Grass, amount: 500000},
+                {gemType: PokemonType.Fighting, amount: 500000},
+                {gemType: PokemonType.Poison, amount: 500000},
+                {gemType: PokemonType.Ground, amount: 500000},
+                {gemType: PokemonType.Flying, amount: 500000},
+                {gemType: PokemonType.Bug, amount: 500000},
+                {gemType: PokemonType.Rock, amount: 500000},
+                {gemType: PokemonType.Fire, amount: 250000},
+                {gemType: PokemonType.Electric, amount: 250000},
+                {gemType: PokemonType.Ice, amount: 250000},
+                {gemType: PokemonType.Ghost, amount: 250000},
+                {gemType: PokemonType.Steel, amount: 250000},
+                {gemType: PokemonType.Psychic, amount: 250000},
+                {gemType: PokemonType.Dragon, amount: 100000},
+                {gemType: PokemonType.Dark, amount: 100000},
+                {gemType: PokemonType.Fairy, amount: 100000},
+            ],
+            ItemList['Furfrou (La Reine)'],
             1
         ));
         return list;

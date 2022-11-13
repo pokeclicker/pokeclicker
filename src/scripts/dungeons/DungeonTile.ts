@@ -57,7 +57,7 @@ class DungeonTile {
             css.push('tile-visited');
         }
         // Add the tile type class
-        css .push(`tile-${GameConstants.DungeonTile[this.type()]}`);
+        css.push(`tile-${GameConstants.DungeonTile[this.type()]}`);
         // Join all the classes
         this.cssClass(css.join(' '));
     }

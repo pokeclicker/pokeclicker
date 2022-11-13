@@ -27,7 +27,7 @@ aria-labelledby="badgeCaseModalLabel">
                                 css: { 'badge-not-acquired': !App.game.badgeCase.hasBadge(BadgeEnums[$data])}">
 
                             <p style="bottom: 0;"
-                                data-bind="text: $data">name</p>
+                                data-bind="text: $data.replace(/_/g, ' ')">name</p>
                         </div>
                     </div>
                 </div>

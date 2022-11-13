@@ -4,9 +4,11 @@ class RoamerNPC extends NPC {
         public name: string,
         public dialog: string[],
         public region: GameConstants.Region,
-        public subRegionRoamerGroup: number
+        public subRegionRoamerGroup: number,
+        image: string = undefined,
+        requirement?: Requirement | MultiRequirement | OneFromManyRequirement
     ) {
-        super(name, dialog);
+        super(name, dialog, {image: image, requirement: requirement});
     }
 
     get dialogHTML(): string {
@@ -18,7 +20,7 @@ class RoamerNPC extends NPC {
             return `There hasn't been any reports of roaming Pokémon around ${GameConstants.camelCaseToString(GameConstants.Region[this.region])} lately.`;
         }
 
-        const roamersHTML = roamers.map(r => `<img width="64px" src="assets/images/pokemon/${r.pokemon.id}.png" />`).join('');
+        const roamersHTML = roamers.map(r => `<img class="npc-roamer-image" src="assets/images/pokemon/${r.pokemon.id}.png" />`).join('');
 
         return super.dialogHTML.replace(/{ROUTE_NAME}/g, route()?.routeName) + roamersHTML;
     }

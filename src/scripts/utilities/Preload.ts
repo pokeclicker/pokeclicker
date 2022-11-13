@@ -144,7 +144,7 @@ class Preload {
 
     private static loadUndergroundItems() {
         const p = Array<Promise<void>>();
-        UndergroundItem.list.forEach(item => {
+        UndergroundItems.list.forEach(item => {
             Preload.itemLoading(item.id);
             p.push(new Promise<void>(resolve => {
                 const img = new Image();

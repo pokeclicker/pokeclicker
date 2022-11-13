@@ -4,9 +4,10 @@ import {
 import NotificationConstants from '../notifications/NotificationConstants';
 import Notifier from '../notifications/Notifier';
 import AchievementRequirement from '../requirements/AchievementRequirement';
-import * as GameConstants from '../GameConstants';
 import { LogBookTypes } from '../logbook/LogBookTypes';
 import LogEvent from '../LogEvent';
+import { createLogContent } from '../logbook/helpers';
+import AchievementCategory from './AchievementCategory';
 
 export default class Achievement {
     public isCompleted: KnockoutComputed<boolean> = ko.pureComputed(() => this.achievable() && (this.unlocked || this.property.isCompleted()));
@@ -19,7 +20,7 @@ export default class Achievement {
         public description: string,
         public property: AchievementRequirement,
         public bonusWeight: number,
-        public region: GameConstants.Region,
+        public category: AchievementCategory,
         public achievableFunction: () => boolean | null = null,
     ) {}
 
@@ -35,7 +36,7 @@ export default class Achievement {
             });
             App.game.logbook.newLog(
                 LogBookTypes.ACHIEVE,
-                `Earned "${this.name}".`,
+                createLogContent.earnedAchievement({ name: this.name }),
             );
             this.unlocked = true;
             // TODO: refilter within achievement bonus

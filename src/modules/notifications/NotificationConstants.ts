@@ -16,7 +16,8 @@ const NotificationConstants = {
             achievement: new Sound('achievement', 'New achievement earned'),
             battle_item_timer: new Sound('battle_item_timer', 'Battle item about to wear off'),
             underground_energy_full: new Sound('underground_energy_full', 'Mining energy reached maximum capacity'),
-            battle_frontier: new Sound('quest_ready_to_complete', 'Battle Frontier'),
+            battle_frontier: new Sound('battle_frontier', 'Battle Frontier'),
+            dream_orb: new Sound('dream_orb', 'Opening Dream Orb'),
         },
         Hatchery: {
             ready_to_hatch: new Sound('ready_to_hatch', 'Egg ready to hatch'),
@@ -27,14 +28,14 @@ const NotificationConstants = {
             quest_level_increased: new Sound('quest_level_increased', 'Quest level increased'),
         },
         Farming: {
-            berry_discovered: new Sound('quest_ready_to_complete', 'New Berry discovered'),
+            berry_discovered: new Sound('berry_discovered', 'New Berry discovered'),
             ready_to_harvest: new Sound('ready_to_harvest', 'Berry ready to harvest'),
             berry_wither: new Sound('ready_to_harvest', 'Berry about to wither/has withered'),
             berry_mutated: new Sound('ready_to_harvest', 'Berry has mutated'),
             berry_replanted: new Sound('ready_to_harvest', 'Berry has been replanted'),
             berry_dropped: new Sound('ready_to_harvest', 'Berry has been dropped'),
             mulch_ran_out: new Sound('ready_to_harvest', 'Mulch has run out'),
-            wandering_pokemon: new Sound('ready_to_harvest', 'Wandering Pokémon encountered'),
+            wandering_pokemon: new Sound('wandering', 'Wandering Pokémon encountered'),
         },
     },
     NotificationSetting: {
@@ -49,6 +50,7 @@ const NotificationConstants = {
             achievement_complete: new NotificationSetting('notification.achievement_complete', 'Achievement complete', true, true),
             new_catch: new NotificationSetting('notification.new_catch', 'New Pokémon/shiny captured', true, true),
             battle_frontier: new NotificationSetting('notification.battle_frontier', 'Battle Frontier', true, true),
+            pokerus: new NotificationSetting('notification.pokerus', 'Pokémon has become Resistant to Pokérus', true),
         },
         Hatchery: {
             ready_to_hatch: new NotificationSetting('notification.ready_to_hatch', 'Egg ready to hatch', true),

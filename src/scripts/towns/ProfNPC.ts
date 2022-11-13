@@ -5,9 +5,10 @@ class ProfNPC extends NPC {
         public region: GameConstants.Region,
         public pokedexCompleteText: string,
         public nextRegionUnlockedText: string,
-        image: string = undefined
+        image: string = undefined,
+        requirement?: Requirement | MultiRequirement | OneFromManyRequirement
     ) {
-        super(name, undefined, { image: image });
+        super(name, undefined, { image: image, requirement: requirement});
     }
 
     get dialogHTML(): string {

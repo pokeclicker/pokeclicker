@@ -13,10 +13,16 @@ import {
     AchievementType,
     HOUR,
     DAY,
+    ExtraAchievementCategories,
+    camelCaseToString,
 } from '../GameConstants';
 import HotkeySetting from './HotkeySetting';
+import Language, { LanguageNames } from '../translation/Language';
 import BreedingFilters from './BreedingFilters';
-import ProteinFilters from './ProteinFilters';
+import GameHelper from '../GameHelper';
+import PokemonType from '../enums/PokemonType';
+import PokedexFilters from './PokedexFilters';
+import FilterSetting from './FilterSetting';
 
 export default Settings;
 
@@ -52,13 +58,13 @@ Settings.add(
         ],
         'yeti'),
 );
-Settings.add(new Setting<string>('breedingDisplay', 'Breeding progress display:',
+Settings.add(new Setting<string>('breedingDisplay', 'Breeding progress display',
     [
         new SettingOption('Percentage', 'percentage'),
         new SettingOption('Step count', 'stepCount'),
     ],
     'percentage'));
-Settings.add(new Setting<string>('shopButtons', 'Shop amount buttons:',
+Settings.add(new Setting<string>('shopButtons', 'Shop amount buttons',
     [
         new SettingOption('+10, +100', 'original'),
         new SettingOption('+100, +1000', 'bigplus'),
@@ -69,39 +75,48 @@ Settings.add(new BooleanSetting('resetShopAmountOnPurchase', 'Reset buy quantity
 Settings.add(new BooleanSetting('showCurrencyGainedAnimation', 'Show currency gained animation', true));
 Settings.add(new BooleanSetting('showCurrencyLostAnimation', 'Show currency lost animation', true));
 Settings.add(new BooleanSetting('hideChallengeRelatedModules', 'Hide challenge related modules', false));
-Settings.add(new Setting<string>('backgroundImage', 'Background image:',
+Settings.add(new BooleanSetting('disableRightClickMenu', 'Disable the right click menu', true));
+Settings.add(new Setting<string>('backgroundImage', 'Background image',
     [
         new SettingOption('Day', 'background-day'),
         new SettingOption('Night', 'background-night'),
         new SettingOption('Dynamic', 'background-dynamic'),
     ],
     'background-day'));
-Settings.add(new Setting<string>('eggAnimation', 'Egg Hatching Animation:',
+Settings.add(new Setting<string>('eggAnimation', 'Egg Hatching Animation',
     [
         new SettingOption('None', 'none'),
         new SettingOption('Almost & fully ready', 'almost'),
         new SettingOption('Fully ready', 'full'),
     ],
     'full'));
-Settings.add(new Setting<string>('hideHatchery', 'Hide Hatchery Modal:',
+Settings.add(new Setting<string>('hideHatchery', 'Hide Hatchery Modal',
     [
         new SettingOption('Never', 'never'),
         new SettingOption('Egg Slots Full', 'egg'),
         new SettingOption('Queue Slots Full', 'queue'),
     ],
     'queue'));
-Settings.add(new Setting<string>('farmDisplay', 'Farm timer display:',
+Settings.add(new BooleanSetting('hideQuestsOnFull', 'Hide Quest Menu on full questslots', true));
+Settings.add(new Setting<string>('farmDisplay', 'Farm timer display',
     [
         new SettingOption('To Next Stage', 'nextStage'),
         new SettingOption('Ripe/Death', 'ripeDeath'),
     ],
     'ripeDeath'));
+Settings.add(new BooleanSetting('breedingIncludeEVBonus', 'Include EVs in Breeding Efficiency Calculation', false));
 Settings.add(new BooleanSetting('currencyMainDisplayReduced', 'Shorten currency amount shown on main screen', false));
 Settings.add(new BooleanSetting('currencyMainDisplayExtended', 'Show Diamonds, Farm Points and Battle Points on main screen', false));
 Settings.add(new BooleanSetting('confirmLeaveDungeon', 'Confirm before leaving dungeons', false));
 Settings.add(new BooleanSetting('confirmBeformeMulchingAllPlots', 'Confirm before mulching all plots', false));
 Settings.add(new BooleanSetting('showGymGoAnimation', 'Show Gym GO animation', true));
-Settings.add(new BooleanSetting('fullWidthContainer', 'Increase game width', false));
+Settings.add(new Setting<string>('gameDisplayStyle', 'Game display style',
+    [
+        new SettingOption('Standard (3 columns)', 'standard3'),
+        new SettingOption('Full width (3 columns)', 'fullWidth3'),
+        new SettingOption('Full width (5 columns)', 'fullWidth5'),
+    ],
+    'standard3'));
 
 // CSS variable settings
 Settings.add(new CssVariableSetting('locked', 'Locked Location', [], '#000000'));
@@ -117,7 +132,7 @@ Settings.add(new CssVariableSetting('completed', 'Completed Location', [], '#fff
 Settings.add(new BooleanSetting('disableAutoDownloadBackupSaveOnUpdate', 'Disable automatic backup save downloading when game updates', false));
 Settings.add(new BooleanSetting('useWebWorkerForGameTicks', 'Make use of web workers for game ticks (more consistent game speed)', true));
 Settings.add(new BooleanSetting('disableOfflineProgress', 'Disable offline progress', false));
-Settings.add(new Setting<string>('saveReminder', 'Save reminder interval (in game time):',
+Settings.add(new Setting<string>('saveReminder', 'Save reminder interval (in game time)',
     [
         new SettingOption('Never', '0'),
         new SettingOption('1 Hour', (1 * HOUR).toString()),
@@ -133,6 +148,7 @@ Settings.add(new Setting<string>('saveReminder', 'Save reminder interval (in gam
         new SettingOption('7 Days', (7 * DAY).toString()),
     ],
     (12 * HOUR).toString()));
+Settings.add(new Setting('breedingQueueSizeSetting', 'Breeding Queue Size', [], '-1'));
 
 // Sound settings
 Object.values(NotificationConstants.NotificationSound).forEach((soundGroup) => {
@@ -160,34 +176,35 @@ Object.values(NotificationConstants.NotificationSetting).forEach((settingsGroup)
 const partySortSettings = Object.keys(SortOptionConfigs).map((opt) => (
     new SettingOption<number>(SortOptionConfigs[opt].text, parseInt(opt, 10))
 ));
-Settings.add(new Setting<number>('partySort', 'Sort:', partySortSettings, SortOptions.id));
+Settings.add(new Setting<number>('partySort', 'Sort', partySortSettings, SortOptions.id));
 Settings.add(new BooleanSetting('partySortDirection', 'reverse', false));
 
 // Hatchery Sorting
 const hatcherySortSettings = Object.keys(SortOptionConfigs).map((opt) => (
     new SettingOption<number>(SortOptionConfigs[opt].text, parseInt(opt, 10))
 ));
-Settings.add(new Setting<number>('hatcherySort', 'Sort:', hatcherySortSettings, SortOptions.id));
+Settings.add(new Setting<number>('hatcherySort', 'Sort', hatcherySortSettings, SortOptions.id));
 Settings.add(new BooleanSetting('hatcherySortDirection', 'reverse', false));
 
 // Protein Sorting
 const proteinSortSettings = Object.keys(SortOptionConfigs).map((opt) => (
     new SettingOption<number>(SortOptionConfigs[opt].text, parseInt(opt, 10))
 ));
-Settings.add(new Setting<number>('proteinSort', 'Sort:', proteinSortSettings, SortOptions.id));
+Settings.add(new Setting<number>('proteinSort', 'Sort', proteinSortSettings, SortOptions.id));
 Settings.add(new BooleanSetting('proteinSortDirection', 'reverse', false));
 Settings.add(new BooleanSetting('proteinHideMaxedPokemon', 'Hide Pokémon with max protein', false));
 Settings.add(new BooleanSetting('proteinHideShinyPokemon', 'Hide shiny Pokémon', false));
+Settings.add(new Setting<string>('proteinSearchFilter', 'Search', [], ''));
+Settings.add(new Setting<number>('proteinRegionFilter', 'Region', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(Region)], -2));
+Settings.add(new Setting<number>('proteinTypeFilter', 'Type', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None')], -2));
 
-// Protein filters
-Object.keys(ProteinFilters).forEach((key) => {
-    // One-off because search isn't stored in settings
-    if (key === 'search') {
-        return;
-    }
-    const filter = ProteinFilters[key];
-    Settings.add(new Setting<string>(filter.optionName, filter.displayName, filter.options || [], filter.value().toString()));
-});
+// Held Item Sorting
+const heldItemSortSettings = Object.keys(SortOptionConfigs).map((opt) => (
+    new SettingOption<number>(SortOptionConfigs[opt].text, parseInt(opt, 10))
+));
+Settings.add(new Setting<number>('heldItemSort', 'Sort:', heldItemSortSettings, SortOptions.id));
+Settings.add(new BooleanSetting('heldItemSortDirection', 'reverse', false));
+Settings.add(new Setting<string>('heldItemSearchFilter', 'Search', [], ''));
 
 // Breeding Filters
 Object.keys(BreedingFilters).forEach((key) => {
@@ -197,6 +214,16 @@ Object.keys(BreedingFilters).forEach((key) => {
     }
     const filter = BreedingFilters[key];
     Settings.add(new Setting<string>(filter.optionName, filter.displayName, filter.options || [], filter.value().toString()));
+});
+
+// Pokedex Filters
+Object.keys(PokedexFilters).forEach((key) => {
+    // dont store name filter
+    if (key === 'name') {
+        return;
+    }
+    const filter = PokedexFilters[key];
+    Settings.add(new FilterSetting(filter));
 });
 
 Settings.add(new Setting<string>('breedingDisplayFilter', 'breedingDisplayFilter',
@@ -224,7 +251,7 @@ Settings.add(new Setting<string>('breedingRegionalAttackDebuffSetting', 'breedin
 const achievementSortSettings = Object.keys(AchievementSortOptionConfigs).map((opt) => (
     new SettingOption<number>(AchievementSortOptionConfigs[opt].text, parseInt(opt, 10))
 ));
-Settings.add(new Setting<number>('achievementSort', 'Sort:', achievementSortSettings, AchievementSortOptions.default));
+Settings.add(new Setting<number>('achievementSort', 'Sort', achievementSortSettings, AchievementSortOptions.default));
 Settings.add(new BooleanSetting('achievementSortDirection', 'reverse', false));
 
 // Achievements Filters
@@ -242,12 +269,15 @@ Settings.add(new Setting<string>('achievementsType', 'achievementsType',
         ...Settings.enumToSettingOptionArray(AchievementType, (a) => a !== 'None'),
     ],
     '-2'));
-Settings.add(new Setting<string>('achievementsRegion', 'achievementsRegion',
+Settings.add(new Setting<string>('achievementsCategory', 'achievementsCategory',
     [
-        new SettingOption('All', '-2'),
-        ...Settings.enumToSettingOptionArray(Region),
+        new SettingOption('All', 'all'),
+        ...GameHelper.enumStrings(Region)
+            .concat(GameHelper.enumStrings(ExtraAchievementCategories))
+            .filter((r) => r !== 'none' && r !== 'final')
+            .map((r) => new SettingOption(camelCaseToString(r), r)),
     ],
-    '-2'));
+    'all'));
 
 // Save menu sorting
 Settings.add(new Setting('sort.saveSelector', 'Saves sort order', [], ''));
@@ -257,9 +287,10 @@ Settings.add(new HotkeySetting('hotkey.farm', 'Farm', 'F'));
 Settings.add(new HotkeySetting('hotkey.hatchery', 'Hatchery', 'H'));
 Settings.add(new HotkeySetting('hotkey.oakItems', 'Oak Items', 'O'));
 Settings.add(new HotkeySetting('hotkey.underground', 'Underground', 'U'));
-Settings.add(new HotkeySetting('hotkey.pokeballSelection', 'Pokéball Selection', 'P', { suffix: ' + Number' }));
+Settings.add(new HotkeySetting('hotkey.pokeballSelection', 'Poké Ball Selection', 'P', { suffix: ' + Number' }));
 
 Settings.add(new HotkeySetting('hotkey.farm.toggleShovel', 'Toggle Shovel', 'S'));
+Settings.add(new HotkeySetting('hotkey.farm.togglePlotSafeLock', 'Toggle Plot Lock', 'L', { suffix: ' or Shift + Click' }));
 
 Settings.add(new HotkeySetting('hotkey.underground.hammer', 'Switch to Hammer', 'H'));
 Settings.add(new HotkeySetting('hotkey.underground.chisel', 'Switch to Chisel', 'C'));
@@ -287,3 +318,6 @@ Settings.getSetting('backgroundImage').observableValue.subscribe((newValue) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     newValue === 'background-dynamic' ? DynamicBackground.startScene() : DynamicBackground.stopScene();
 });
+
+// Translation
+Settings.add(new Setting<Language>('translation.language', 'Language (beta)', Settings.enumToSettingOptionArray(Language, () => true, LanguageNames) as unknown as SettingOption<Language>[], Language.en));

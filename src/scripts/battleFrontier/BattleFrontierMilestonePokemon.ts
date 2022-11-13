@@ -1,14 +1,17 @@
 class BattleFrontierMilestonePokemon extends BattleFrontierMilestone {
-    pokemonName: string;
-
-    constructor (stage: number, pokemonName: string, image = 'assets/images/items/pokeball/Premierball.png') {
+    constructor (stage: number, private pokemonName: string, requirement?: Requirement, image = `assets/images/items/pokemonItem/${pokemonName}.png`) {
         super(
             stage,
             () => {
-                App.game.party.gainPokemonById(pokemonMap[pokemonName].id);
+                App.game.party.gainPokemonById(pokemonMap[pokemonName].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_BATTLEFRONTIER));
             },
+            requirement,
             image,
             pokemonName
         );
+    }
+
+    get displayName() {
+        return PokemonHelper.displayName(this.pokemonName);
     }
 }

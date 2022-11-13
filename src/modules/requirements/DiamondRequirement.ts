@@ -3,7 +3,7 @@ import AchievementRequirement from './AchievementRequirement';
 
 export default class DiamondRequirement extends AchievementRequirement {
     constructor(value: number, option: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
-        super(value, option, GameConstants.AchievementType.Diamond);
+        super(value, option, GameConstants.AchievementType.Underground);
     }
 
     public getProgress() {

@@ -3,7 +3,7 @@ import AchievementRequirement from './AchievementRequirement';
 
 export default class MoneyRequirement extends AchievementRequirement {
     constructor(requiredValue: number, option: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
-        super(requiredValue, option, GameConstants.AchievementType.Money);
+        super(requiredValue, option, GameConstants.AchievementType.Pokedollars);
     }
 
     public getProgress() {
