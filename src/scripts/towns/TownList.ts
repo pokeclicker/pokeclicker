@@ -4284,12 +4284,6 @@ const TrainerSchoolTeacher = new NPC('Teacher Emily', [
     'Watch the clock, if you make it to the next floor you\'ll get a time boost to help you find the boss.',
     'Good luck with your island challenge!',
 ], {image: 'assets/images/npcs/Teacher-gen7.png'});
-const KukuisLabProfessor = new NPC('Professor Kukui', [
-    'Are you looking for some rare Pokémon? Maybe I can help with that. Ask away!',
-    'Meltan? What\'s a Meltan? Nope, don\'t know about that one.',
-    'You seem very sure about this. Look, if you\'re so certain that this thing you are talking about is real, I\'m sure it will show up sooner or later. If you\'re patient...',
-    'You got me all excited. We\'ll WAIT FOR this new rare Pokémon together. Hold on, let me just UPDATE my calendar. Just to be sure I\'m free to investigate this new Pokémon that only you know about when it shows up. I wouldn\'t miss this for the world.',
-], {image: 'assets/images/npcs/Professor Kukui.png'});
 const IkiKahuna = new NPC('Kahuna Hala', [
     'Welcome to Alola!',
     'Here we don\'t have gyms. We have the Island Challenge. On each of our four islands you will complete one or more trials.',
@@ -4479,7 +4473,7 @@ TownList['Professor Kukui\'s Lab'] = new Town(
     [new BulletinBoard(GameConstants.BulletinBoards.Alola)],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 18)],
-        npcs: [KukuisLabProfessor/*ProfKukui*/], // TODO: replace the NPC when all pokemons are catchable
+        npcs: [ProfKukui],
     }
 );
 TownList['Hau\'oli City'] = new Town(
