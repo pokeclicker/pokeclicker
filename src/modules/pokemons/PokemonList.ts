@@ -25956,6 +25956,8 @@ export const pokemonList = createPokemonArray(
     },
 );
 
+export type PokemonList = typeof pokemonList;
+
 const pokemonNameIndex = {};
 const maxEggCycles = Math.max(...pokemonList.map((p) => p.eggCycles));
 
@@ -26066,4 +26068,4 @@ PokemonMapProxy
     },
 });
 
-setPokemonMap(pokemonMap);
+setPokemonMap(pokemonMap, pokemonList);
