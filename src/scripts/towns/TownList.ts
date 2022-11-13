@@ -767,7 +767,7 @@ TownList['Saffron City'] = new Town(
     'Saffron City',
     GameConstants.Region.kanto,
     GameConstants.KantoSubRegions.Kanto,
-    [TemporaryBattleList['Blue 5'], SaffronCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Saffron City']), new MoveToDungeon(dungeonList['Silph Co.']), TemporaryBattleList['Fighting Dojo'], TemporaryBattleList['Mime Interview']],
+    [SaffronCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Saffron City']), new MoveToDungeon(dungeonList['Silph Co.']), TemporaryBattleList['Fighting Dojo'], TemporaryBattleList['Mime Interview']],
     {
         requirements: [new OneFromManyRequirement([
             new GymBadgeRequirement(BadgeEnums.Rainbow),
@@ -1423,8 +1423,8 @@ const EcruteakEusine = new NPC('Eusine', [
     'Ho-Oh came down from the Tin Tower and revived those Pokémon. They became the Legendary Beasts. Some say these Beasts still inhabit the basement of the Burned Tower.',
     'Could you please clear Burned Tower for me and see if this is true?',
 ], {
-    image: 'assets/images/temporaryBattle/Euisine',
-    requirement: new TemporaryBattleRequirement('Silver 3', GameConstants.AchievementOption.less),
+    image: 'assets/images/temporaryBattle/Eusine',
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('The Legendary Beasts'), new QuestLineStepCompletedRequirement('The Legendary Beasts', 2, GameConstants.AchievementOption.less )]),
 });
 const EcruteakPokéfan = new NPC('Pokéfan Derek', [
     'I saw it! Did you see it?! I saw you go in there! I don\'t know what you did in the Burned Tower, but three great Beasts came running out of there!',
@@ -1432,7 +1432,7 @@ const EcruteakPokéfan = new NPC('Pokéfan Derek', [
     'Eusine was here a second ago. He seemed very excited, but then he suddenly left. I don\'t know where he went, but he seemed to be particularly interested in the blue one.',
 ], {
     image: 'assets/images/trainers/PokéManiac.png',
-    requirement: new TemporaryBattleRequirement('Silver 3'),
+    requirement: new QuestLineStepCompletedRequirement('The Legendary Beasts', 2),
 });
 
 const Zuki = new NPC('Kimono Girl Zuki', [
@@ -1735,7 +1735,7 @@ TownList['Burned Tower'] = new DungeonTown(
     'Burned Tower',
     GameConstants.Region.johto,
     GameConstants.JohtoSubRegions.Johto,
-    [new RouteKillRequirement(10, GameConstants.Region.johto, 37)],
+    [new QuestLineStepCompletedRequirement('The Legendary Beasts', 0)],
     [TemporaryBattleList['Silver 3']]
 );
 TownList['Tin Tower'] = new DungeonTown(

@@ -547,7 +547,7 @@ TemporaryBattleList['Silver 7'] = new TemporaryBattle(
     ],
     '...Oh, no... I still can\'t win after all that training... I...I have to believe more in my Pokémon... ...No big deal. Sorry to have got in the way. Don\'t forget to rest your Pokémon before you challenge the Champion again!',
     [new TemporaryBattleRequirement('Silver 6')],
-    undefined,
+    [new NullRequirement],
     {
         displayName: 'Rival Silver',
         returnTown: 'Indigo Plateau Johto',
@@ -716,7 +716,7 @@ TemporaryBattleList['Wally 2'] = new TemporaryBattle(
     ],
     'Wow! You are strong, after all! I couldn\'t beat you today, but one of these days, I\'ll catch up to you!',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Hoenn'))],
-    undefined,
+    [new NullRequirement],
     {
         displayName: 'Pokémon Trainer Wally',
         returnTown: 'Pokémon League Hoenn',
@@ -963,8 +963,6 @@ TemporaryBattleList['Galactic Boss Cyrus'] = new TemporaryBattle(
     undefined,
     {imageName: '../trainers/Galactic Boss (cyrus)'}
 );
-
-// Unova Temporary Battles
 TemporaryBattleList['Barry 5'] = new TemporaryBattle(
     'Barry 5',
     [
@@ -1036,7 +1034,7 @@ TemporaryBattleList['Barry 7'] = new TemporaryBattle(
         new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion),
         new RouteKillRequirement(10, GameConstants.Region.sinnoh, 225),
     ],
-    undefined,
+    [new NullRequirement],
     {
         displayName: 'Pokémon Trainer Barry',
         returnTown: 'Survival Area',
@@ -1105,7 +1103,7 @@ TemporaryBattleList['Colress 1'] = new TemporaryBattle(
     {
         displayName: 'Pokémon Trainer Colress',
         returnTown: 'Nimbasa City',
-        imageName: 'Colress',
+        imageName: '../trainers/Team Plasma (colress)'
     }
 );
 TemporaryBattleList['Team Plasma Grunt 2'] = new TemporaryBattle(
@@ -1171,7 +1169,7 @@ TemporaryBattleList.Cheren = new TemporaryBattle(
     {
         displayName: 'Pokémon Trainer Cheren',
         returnTown: 'Driftveil City',
-        imageName: 'Hugh',
+        imageName: '../gymLeaders/Cheren',
     }
 );
 TemporaryBattleList['Colress 2'] = new TemporaryBattle(
@@ -1187,7 +1185,7 @@ TemporaryBattleList['Colress 2'] = new TemporaryBattle(
     {
         displayName: 'Pokémon Trainer Colress',
         returnTown: 'Driftveil',
-        imageName: 'Colress',
+        imageName: '../trainers/Team Plasma (colress)'
     }
 );
 TemporaryBattleList['Team Plasma Grunt 4'] = new TemporaryBattle(
@@ -1534,7 +1532,7 @@ TemporaryBattleList['Hugh 7'] = new TemporaryBattle(
     ],
     'Just as I\'d expected! You are really drawing forth your Pokémon\'s power!... I suppose that\'s it. If winning in battles is strength, then believing that your Pokémon will come back and waiting for its return is also strength. Doing what you think is right no matter what anyone else says, like these guys do, is strength, too.',
     [new TemporaryBattleRequirement('Hugh 6')],
-    undefined,
+    [new NullRequirement],
     {
         displayName: 'Pokémon Trainer Hugh',
         returnTown: 'Driftveil City',
@@ -2045,7 +2043,7 @@ TemporaryBattleList['Calem 6'] = new TemporaryBattle(
     ],
     'Here, this is for you!</br><img src="assets/images/megaStone/359.png"/></br>That\'s right. It\'s Absolite. I found two of them. After everything we said to Lysandre, it just wouldn\'t be right if I didn\'t share one with you.',
     [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion), new ObtainedPokemonRequirement('Absol')],
-    undefined,
+    [new NullRequirement],
     {
         displayName: 'Pokémon Trainer Calem',
         imageName: 'Calem',
