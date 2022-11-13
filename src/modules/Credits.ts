@@ -572,7 +572,6 @@ export const SpriteCredits: Credit[] = [
         ],
         // Notes: Free to use, no credit required
     },
-    },
     {
         name: 'procompyart',
         link: 'https://www.instagram.com/procompyart/',
