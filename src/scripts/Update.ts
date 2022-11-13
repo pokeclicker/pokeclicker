@@ -1420,6 +1420,11 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 89);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 90);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 91);
+
+            // Kanto starter should be saved in regionStarter, unless they update a very old save
+            if (!playerData.regionStarters) {
+                playerData.regionStarters = [playerData.starter];
+            }
         },
     };
 
