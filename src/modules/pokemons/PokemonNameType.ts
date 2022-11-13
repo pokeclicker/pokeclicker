@@ -1309,5 +1309,7 @@ export type PokemonNameType
     | 'Mega Gyarados'
     | 'Mega Gardevoir'
     | 'Mega Rayquaza'
+    | 'Mega Mewtwo X'
+    | 'Mega Mewtwo Y'
     | 'Mega Lucario'
     | '???';
