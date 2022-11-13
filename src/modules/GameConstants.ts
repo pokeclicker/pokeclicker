@@ -1276,7 +1276,7 @@ export const DockTowns = [
 ];
 
 export const RegionalStarters = [
-    [1, 4, 7], // Kanto
+    [1, 4, 7, 25], // Kanto
     [152, 155, 158], // Johto
     [252, 255, 258], // Hoenn
     [387, 390, 393], // Sinnoh
