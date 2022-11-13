@@ -1103,7 +1103,7 @@ TemporaryBattleList['Colress 1'] = new TemporaryBattle(
     {
         displayName: 'Pokémon Trainer Colress',
         returnTown: 'Nimbasa City',
-        imageName: '../trainers/Team Plasma (colress)'
+        imageName: '../trainers/Team Plasma (colress)',
     }
 );
 TemporaryBattleList['Team Plasma Grunt 2'] = new TemporaryBattle(
@@ -1185,7 +1185,7 @@ TemporaryBattleList['Colress 2'] = new TemporaryBattle(
     {
         displayName: 'Pokémon Trainer Colress',
         returnTown: 'Driftveil',
-        imageName: '../trainers/Team Plasma (colress)'
+        imageName: '../trainers/Team Plasma (colress)',
     }
 );
 TemporaryBattleList['Team Plasma Grunt 4'] = new TemporaryBattle(
