@@ -1079,7 +1079,7 @@ GymList['Champion Iris'] = new Gym(
         new GymBadgeRequirement(BadgeEnums.Elite_Marshal),
         new GymBadgeRequirement(BadgeEnums.Elite_Grimsley),
         new GymBadgeRequirement(BadgeEnums.Elite_Caitlin),
-    ]
+    ],
     () => {},
     { champion: true }
 );
@@ -1267,7 +1267,7 @@ GymList['Champion Diantha'] = new Gym(
         new GymBadgeRequirement(BadgeEnums.Elite_Siebold),
         new GymBadgeRequirement(BadgeEnums.Elite_Wikstrom),
         new GymBadgeRequirement(BadgeEnums.Elite_Drasna),
-    ]
+    ],
     () => {},
     { champion: true }
 );
