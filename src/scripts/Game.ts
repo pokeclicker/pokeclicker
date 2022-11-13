@@ -182,7 +182,7 @@ class Game {
             if (App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Pewter City')]() >= 1) {
                 // Defeated Brock, Has completed the Tutorial
                 App.game.quests.getQuestLine('Tutorial Quests').state(QuestLineState.ended);
-            } else if (player.regionStarters[GameConstants.Region.kanto]() >= GameConstants.Starter.None) {
+            } else if (player.regionStarters[GameConstants.Region.kanto]() > GameConstants.Starter.None) {
                 // Has chosen a starter, Tutorial is started
                 App.game.quests.getQuestLine('Tutorial Quests').state(QuestLineState.started);
                 App.game.quests.getQuestLine('Tutorial Quests').beginQuest(App.game.quests.getQuestLine('Tutorial Quests').curQuest());
