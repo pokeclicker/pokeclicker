@@ -116,6 +116,7 @@ import UndergroundItem from './underground/UndergroundItem';
 import UndergroundItems from './underground/UndergroundItems';
 import UndergroundLayersMinedRequirement from './requirements/UndergroundLayersMinedRequirement';
 import WeatherRequirement from './requirements/WeatherRequirement';
+import MegaEvolveRequirement from './requirements/MegaEvolveRequirement';
 import { SortModules, SortSaves } from './Sortable';
 import KeyItemController from './keyItems/KeyItemController';
 import KeyItem from './keyItems/KeyItem';
@@ -147,6 +148,9 @@ import EffectEngineRunner from './effectEngine/effectEngineRunner';
 import ItemHandler from './items/ItemHandler';
 import CaughtIndicatingItem from './items/CaughtIndicatingItem';
 import PokeballItem from './items/PokeballItem';
+import RoamingPokemonList from './pokemons/RoamingPokemonList';
+import DataPokemon from './pokemons/DataPokemon';
+import MegaStoneItem from './items/MegaStoneItem';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -269,6 +273,7 @@ Object.assign(<any>window, {
     UndergroundItems,
     UndergroundLayersMinedRequirement,
     WeatherRequirement,
+    MegaEvolveRequirement,
     SortModules,
     SortSaves,
     KeyItemController,
@@ -303,4 +308,7 @@ Object.assign(<any>window, {
     ItemHandler,
     CaughtIndicatingItem,
     PokeballItem,
+    RoamingPokemonList,
+    DataPokemon,
+    MegaStoneItem,
 });

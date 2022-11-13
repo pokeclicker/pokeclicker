@@ -1,4 +1,4 @@
-import { AchievementOption, Region } from '../GameConstants';
+import { AchievementOption, camelCaseToString, Region } from '../GameConstants';
 import Requirement from './Requirement';
 
 export default class InRegionRequirement extends Requirement {
@@ -11,8 +11,12 @@ export default class InRegionRequirement extends Requirement {
     }
 
     public hint(): string {
-        return `You must be in one of the following regions: ${
-            this.regions.join(', ')
-        }`;
+        return this.regions.length > 1
+            ? `You must be in one of the following regions: ${
+                this.regions.map((r) => camelCaseToString(Region[r])).join(', ')
+            }`
+            : `You must be in the ${
+                camelCaseToString(Region[this.regions[0]])
+            } region`;
     }
 }

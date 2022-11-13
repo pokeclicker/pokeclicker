@@ -776,6 +776,17 @@ TemporaryBattleList['Ghetsis 2'] = new TemporaryBattle(
 );
 
 // Kalos Temporary Battles
+TemporaryBattleList.Korrina = new TemporaryBattle(
+    'Korrina',
+    [new GymPokemon('Mega Lucario', 135000000, 32)],
+    'What an incredible bond you have! What amazing power! You and Lucario are worthy of this Lucarionite!</br><img src="assets/images/megaStone/448.png"/>',
+    [new GymBadgeRequirement(BadgeEnums.Rumble), new ObtainedPokemonRequirement('Lucario')],
+    undefined,
+    {
+        imageName: '../gymLeaders/Korrina',
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Lucario').giveMegastone(),
+    }
+);
 TemporaryBattleList['Aipom Alley'] = new TemporaryBattle(
     'Aipom Alley',
     [
@@ -1046,7 +1057,7 @@ TemporaryBattleList['Ultra Wormhole'] = new TemporaryBattle(
 );
 TemporaryBattleList['Ultra Megalopolis'] = new TemporaryBattle(
     'Ultra Megalopolis',
-    [new GymPokemon('Necrozma (Ultra)', 282601920, 60)],
+    [new GymPokemon('Ultra Necrozma', 282601920, 60)],
     '<i>Necrozma fled.</i>',
     [new GymBadgeRequirement(BadgeEnums.DarkiniumZ)],
     undefined,
@@ -1212,6 +1223,162 @@ TemporaryBattleList['Ash Ketchum Alola'] = new TemporaryBattle(
             App.game.party.gainPokemonById(25.07);
         },
     }
+);
+
+TemporaryBattleList['Rainbow Rocket Grunt 1'] = new TemporaryBattle(
+    'Rainbow Rocket Grunt 1',
+    [
+        new GymPokemon('Golbat', 433000000, 100),
+        new GymPokemon('Raticate', 433000000, 100),
+        new GymPokemon('Persian', 450000000, 100),
+    ],
+    'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
+    [
+        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 0, GameConstants.AchievementOption.less ),
+    ],
+    undefined,
+    {
+        displayName: 'Rainbow Rocket Grunt',
+        returnTown: 'Aether Paradise',
+        imageName: 'Team Rainbow Rocket Grunt (female)',
+    }
+);
+TemporaryBattleList['Rainbow Rocket Grunt 2'] = new TemporaryBattle(
+    'Rainbow Rocket Grunt 2',
+    [
+        new GymPokemon('Weezing', 433000000, 100),
+        new GymPokemon('Electrode', 433000000, 100),
+        new GymPokemon('Cloyster', 450000000, 100),
+    ],
+    'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
+    [
+        new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9),
+        new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 0, GameConstants.AchievementOption.less ),
+    ],
+    undefined,
+    {
+        displayName: 'Rainbow Rocket Grunt',
+        returnTown: 'Aether Paradise',
+        imageName: 'Team Rainbow Rocket Grunt (male)',
+    }
+);
+
+TemporaryBattleList['Aether Branch Chief Faba'] = new TemporaryBattle(
+    'Aether Branch Chief Faba',
+    [
+        new GymPokemon('Claydol', 450000000, 60),
+        new GymPokemon('Bruxish', 450000000, 60),
+        new GymPokemon('Hypno', 480000000, 60),
+    ],
+    'Hmph! I\'ll have you know defeating me won\'t do you any good, anyway.',
+    [new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 0)],
+    undefined,
+    {
+        imageName: '../trainers/Aether Branch Chief (faba)',
+    }
+);
+
+TemporaryBattleList['Team Aqua Leader Archie'] = new TemporaryBattle(
+    'Team Aqua Leader Archie',
+    [
+        new GymPokemon('Mightyena', 270000000, 60),
+        new GymPokemon('Crobat', 270000000, 60),
+        new GymPokemon('Muk', 270000000, 60),
+        new GymPokemon('Sharpedo', 270000000, 60),
+        new GymPokemon('Kyogre', 300000000, 60),
+    ],
+    'You\'ve made your point. I can see you are not one to be trifled with.',
+    [new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1)],
+    undefined,
+    {
+        imageName: '../trainers/Aqua Leader',
+    }
+);
+
+TemporaryBattleList['Team Magma Leader Maxie'] = new TemporaryBattle(
+    'Team Magma Leader Maxie',
+    [
+        new GymPokemon('Mightyena', 270000000, 60),
+        new GymPokemon('Crobat', 270000000, 60),
+        new GymPokemon('Weezing', 270000000, 60),
+        new GymPokemon('Camerupt', 270000000, 60),
+        new GymPokemon('Groudon', 300000000, 60),
+    ],
+    'I fell behind, but only by an inch.',
+    [new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 1)],
+    undefined,
+    {
+        imageName: '../trainers/Magma Leader',
+    }
+);
+
+TemporaryBattleList['Team Galactic Leader Cyrus'] = new TemporaryBattle(
+    'Team Galactic Leader Cyrus',
+    [
+        new GymPokemon('Houndoom', 225000000, 60),
+        new GymPokemon('Honchkrow', 225000000, 60),
+        new GymPokemon('Crobat', 225000000, 60),
+        new GymPokemon('Weavile', 225000000, 60),
+        new GymPokemon('Dialga', 225000000, 60),
+        new GymPokemon('Palkia', 250000000, 60),
+    ],
+    'Impressive. Your prowess is notable.',
+    [new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 2)],
+    undefined,
+    {
+        imageName: '../trainers/Galactic Boss (cyrus)',
+    }
+);
+
+TemporaryBattleList['Team Flare Leader Lysandre'] = new TemporaryBattle(
+    'Team Flare Leader Lysandre',
+    [
+        new GymPokemon('Mienshao', 225000000, 60),
+        new GymPokemon('Pyroar', 225000000, 60),
+        new GymPokemon('Honchkrow', 225000000, 60),
+        new GymPokemon('Mega Gyarados', 225000000, 60),
+        new GymPokemon('Xerneas', 225000000, 60),
+        new GymPokemon('Yveltal', 250000000, 60),
+    ],
+    'I can feel the fire of your convictions burning deep within your heart!',
+    [new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 3)],
+    undefined,
+    {
+        imageName: '../trainers/Team Flare Lysandre',
+    }
+);
+
+TemporaryBattleList['Team Plasma Leader Ghetsis'] = new TemporaryBattle(
+    'Team Plasma Leader Ghetsis',
+    [
+        new GymPokemon('Cofagrigus', 225000000, 60),
+        new GymPokemon('Bouffalant', 225000000, 60),
+        new GymPokemon('Bisharp', 225000000, 60),
+        new GymPokemon('Hydreigon', 225000000, 60),
+        new GymPokemon('Zekrom', 225000000, 60),
+        new GymPokemon('Reshiram', 250000000, 60),
+    ],
+    'I couldn\'t have been defeated by some random Trainer from who knows where!',
+    [new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 4)],
+    undefined,
+    {
+        imageName: 'Ghetsis',
+    }
+);
+
+TemporaryBattleList['Team Rainbow Leader Giovanni'] = new TemporaryBattle(
+    'Team Rainbow Leader Giovanni',
+    [
+        new GymPokemon('Dugtrio', 230000000, 60),
+        new GymPokemon('Nidoking', 230000000, 60),
+        new GymPokemon('Nidoqueen', 230000000, 60),
+        new GymPokemon('Rhyperior', 230000000, 60),
+        new GymPokemon('Mega Mewtwo X', 230000000, 60),
+        new GymPokemon('Mega Mewtwo Y', 260000000, 60),
+    ],
+    'Ha! That was a truly intense fight!',
+    [new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 5)]
 );
 
 //Galar Temporary Battles

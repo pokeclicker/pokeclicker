@@ -198,6 +198,7 @@ export const SpriteCredits: Credit[] = [
             'Galarian Zapdos overworld image',
             'Galarica cuff and wreath icons',
             'Honey',
+            'Key Stone',
             'Linking cord cartoon style',
             'Luana',
             'Merilyn',
@@ -538,6 +539,15 @@ export const SpriteCredits: Credit[] = [
             'Underground Ice stone',
         ],
         // Notes: Permission given to SomeoneAlive via Discord DM
+    },
+    {
+        name: 'Prodigal96',
+        link: 'https://www.deviantart.com/prodigal96',
+        image: 'https://a.deviantart.net/avatars-big/p/r/prodigal96.jpg',
+        resources: [
+            'Rainbow Rocket overworld sprites',
+        ],
+        // Notes: Free to use, no credit required
     },
     {
         name: 'procompyart',

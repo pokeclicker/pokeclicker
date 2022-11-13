@@ -14,6 +14,7 @@ import {
     WeatherRestrictedLevelEvolution,
     DayTimedLevelEvolution,
     TimeRestrictedLevelEvolution,
+    MegaEvolution,
 } from './evolutions/Methods';
 import BerryType from '../enums/BerryType';
 import ItemType from '../enums/ItemType';
@@ -12024,6 +12025,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 184,
         'catchRate': 45,
+        'evolutions': [MegaEvolution('Lucario', 'Mega Lucario')],
         'base': {
             'hitpoints': 70,
             'attack': 110,
@@ -12031,6 +12033,26 @@ export const pokemonList = createPokemonArray(
             'defense': 70,
             'specialDefense': 70,
             'speed': 90,
+        },
+        'gender': {
+            'femaleRatio': 0.125,
+        },
+    },
+    {
+        'id': 448.01,
+        'name': 'Mega Lucario',
+        'type': [PokemonType.Fighting, PokemonType.Steel],
+        'eggCycles': 120,
+        'levelType': LevelType.mediumslow,
+        'exp': 347,
+        'catchRate': 2,
+        'base': {
+            'hitpoints': 70,
+            'attack': 145,
+            'specialAttack': 140,
+            'defense': 88,
+            'specialDefense': 70,
+            'speed': 112,
         },
         'gender': {
             'femaleRatio': 0.125,
@@ -12262,6 +12284,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 173,
         'catchRate': 60,
+        'evolutions': [MegaEvolution('Abomasnow', 'Mega Abomasnow')],
         'base': {
             'hitpoints': 90,
             'attack': 92,
@@ -12272,6 +12295,23 @@ export const pokemonList = createPokemonArray(
         },
         'gender': {
             'visualDifference': true,
+        },
+    },
+    {
+        'id': 460.01,
+        'name': 'Mega Abomasnow',
+        'type': [PokemonType.Grass, PokemonType.Ice],
+        'eggCycles': 120,
+        'levelType': LevelType.slow,
+        'exp': 347,
+        'catchRate': 2,
+        'base': {
+            'hitpoints': 90,
+            'attack': 132,
+            'specialAttack': 132,
+            'defense': 105,
+            'specialDefense': 105,
+            'speed': 30,
         },
     },
     {
@@ -20983,6 +21023,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'type': Genders.Genderless,
         },
+        'heldItem': { type: ItemType.item, id: 'Pure_light' },
     },
     {
         'id': 800.01,
@@ -20992,6 +21033,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 270,
         'catchRate': 255,
+        'evolutions': [StoneEvolution('Necrozma (Dusk Mane)', 'Ultra Necrozma', StoneType.Pure_light)],
         'base': {
             'hitpoints': 97,
             'attack': 157,
@@ -21012,6 +21054,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 270,
         'catchRate': 255,
+        'evolutions': [StoneEvolution('Necrozma (Dawn Wings)', 'Ultra Necrozma', StoneType.Pure_light)],
         'base': {
             'hitpoints': 97,
             'attack': 113,
@@ -21026,7 +21069,7 @@ export const pokemonList = createPokemonArray(
     },
     {
         'id': 800.03,
-        'name': 'Necrozma (Ultra)',
+        'name': 'Ultra Necrozma',
         'type': [PokemonType.Psychic, PokemonType.Dragon],
         'eggCycles': 120,
         'levelType': LevelType.slow,
@@ -25255,46 +25298,46 @@ export const pokemonList = createPokemonArray(
     //         'femaleRatio': 0.125,
     //     },
     // },
-    // {
-    //     'id': -113,
-    //     'name': 'Mega Mewtwo X',
-    //     'type': [PokemonType.Psychic, PokemonType.Fighting],
-    //     'eggCycles': 120,
-    //     'levelType': LevelType.slow,
-    //     'exp': 351,
-    //     'catchRate': 2,
-    //     'base': {
-    //         'hitpoints': 106,
-    //         'attack': 190,
-    //         'specialAttack': 154,
-    //         'defense': 100,
-    //         'specialDefense': 100,
-    //         'speed': 130,
-    //     },
-    //     'gender': {
-    //         'type': Genders.Genderless,
-    //     },
-    // },
-    // {
-    //     'id': -114,
-    //     'name': 'Mega Mewtwo Y',
-    //     'type': [PokemonType.Psychic],
-    //     'eggCycles': 120,
-    //     'levelType': LevelType.slow,
-    //     'exp': 351,
-    //     'catchRate': 2,
-    //     'base': {
-    //         'hitpoints': 106,
-    //         'attack': 150,
-    //         'specialAttack': 194,
-    //         'defense': 70,
-    //         'specialDefense': 120,
-    //         'speed': 140,
-    //     },
-    //     'gender': {
-    //         'type': Genders.Genderless,
-    //     },
-    // },
+    {
+        'id': -113,
+        'name': 'Mega Mewtwo X',
+        'type': [PokemonType.Psychic, PokemonType.Fighting],
+        'eggCycles': 120,
+        'levelType': LevelType.slow,
+        'exp': 351,
+        'catchRate': 2,
+        'base': {
+            'hitpoints': 106,
+            'attack': 190,
+            'specialAttack': 154,
+            'defense': 100,
+            'specialDefense': 100,
+            'speed': 130,
+        },
+        'gender': {
+            'type': Genders.Genderless,
+        },
+    },
+    {
+        'id': -114,
+        'name': 'Mega Mewtwo Y',
+        'type': [PokemonType.Psychic],
+        'eggCycles': 120,
+        'levelType': LevelType.slow,
+        'exp': 351,
+        'catchRate': 2,
+        'base': {
+            'hitpoints': 106,
+            'attack': 150,
+            'specialAttack': 194,
+            'defense': 70,
+            'specialDefense': 120,
+            'speed': 140,
+        },
+        'gender': {
+            'type': Genders.Genderless,
+        },
+    },
     // {
     //     'id': -115,
     //     'name': 'Mega Ampharos',
@@ -25831,43 +25874,6 @@ export const pokemonList = createPokemonArray(
     //         'defense': 115,
     //         'specialDefense': 95,
     //         'speed': 92,
-    //     },
-    // },
-    {
-        'id': -145,
-        'name': 'Mega Lucario',
-        'type': [PokemonType.Fighting, PokemonType.Steel],
-        'eggCycles': 120,
-        'levelType': LevelType.mediumslow,
-        'exp': 347,
-        'catchRate': 2,
-        'base': {
-            'hitpoints': 70,
-            'attack': 145,
-            'specialAttack': 140,
-            'defense': 88,
-            'specialDefense': 70,
-            'speed': 112,
-        },
-        'gender': {
-            'femaleRatio': 0.125,
-        },
-    },
-    // {
-    //     'id': -146,
-    //     'name': 'Mega Abomasnow',
-    //     'type': [PokemonType.Grass, PokemonType.Ice],
-    //     'eggCycles': 120,
-    //     'levelType': LevelType.slow,
-    //     'exp': 347,
-    //     'catchRate': 2,
-    //     'base': {
-    //         'hitpoints': 90,
-    //         'attack': 132,
-    //         'specialAttack': 132,
-    //         'defense': 105,
-    //         'specialDefense': 105,
-    //         'speed': 30,
     //     },
     // },
     // {
