@@ -43,9 +43,9 @@
                                         <img class="smallImage" data-bind="attr:{src: 'assets/images/' + (App.game.party.alreadyCaughtPokemon($data.id, true) ? 'shiny' : '') + 'pokemon/' + id +'.png' }"/>
                                         <span data-bind="text: displayName" style="margin-left: 20px">Name</span>
 
-                                        <span style="float:right; margin-top:8px"  data-bind="using: { statuses: PartyController.getStoneEvolutionsCaughtStatus($data.id, GameConstants.StoneType[ItemHandler.stoneSelected()]) }">
-                                            <div class="row" data-bind="foreach: statuses">
-                                                <div class="col-2" data-bind="template: { name: 'caughtStatusTemplate', data: { 'status': $data } }"></div>
+                                        <span style="float:right; margin-top:8px"  data-bind="using: { statuses: PartyController.getStoneEvolutionsCaughtData($data.id, GameConstants.StoneType[ItemHandler.stoneSelected()]) }">
+                                            <div class="row stoneEvolutionStatuses" data-bind="foreach: statuses">
+                                                <div class="col-2" data-bind="template: { name: 'caughtStatusTemplate', data: $data }"></div>
                                             </div>
                                         </span>
                                     </button>

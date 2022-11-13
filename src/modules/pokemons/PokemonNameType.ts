@@ -1107,7 +1107,7 @@ export type PokemonNameType
     | 'Necrozma'
     | 'Necrozma (Dusk Mane)'
     | 'Necrozma (Dawn Wings)'
-    | 'Necrozma (Ultra)'
+    | 'Ultra Necrozma'
     | 'Magearna'
     | 'Magearna (Original Color)'
     | 'Marshadow'
