@@ -148,6 +148,8 @@ import EffectEngineRunner from './effectEngine/effectEngineRunner';
 import ItemHandler from './items/ItemHandler';
 import CaughtIndicatingItem from './items/CaughtIndicatingItem';
 import PokeballItem from './items/PokeballItem';
+import RoamingPokemonList from './pokemons/RoamingPokemonList';
+import DataPokemon from './pokemons/DataPokemon';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -305,4 +307,6 @@ Object.assign(<any>window, {
     ItemHandler,
     CaughtIndicatingItem,
     PokeballItem,
+    RoamingPokemonList,
+    DataPokemon,
 });
