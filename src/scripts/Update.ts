@@ -1407,7 +1407,7 @@ class Update implements Saveable {
                 [774.02, 774.04],
                 [774.03, 774.06, 774.07],
             ];
-            rotatePokemonIDs(saveData, formIDs);
+            Update.rotatePokemonIDs(saveData, formIDs);
         },
         '0.10.2': ({ playerData, saveData }) => {
             // Kecleon Fights
@@ -1648,7 +1648,7 @@ class Update implements Saveable {
     }
     
     // Swapping or Rotating Pokemon IDs
-    static function (rotatePokemonIDs(saveData, rotationlist[]) {
+    static rotatePokemonIDs = (saveData, rotationlist[]) => {
         
         // Store values from first ID to not get overwritten
         const tempID = {            
@@ -1780,7 +1780,7 @@ class Update implements Saveable {
             saveData.statistics.shinyfemalePokemonDefeated[rotationlist[rotationlist.length]] = tempID.saveData.statistics.shinyfemalePokemonDefeated || 0;
             saveData.statistics.shinyfemalePokemonCaptured[rotationlist[rotationlist.length]] = tempID.saveData.statistics.shinyfemalePokemonCaptured || 0;
             saveData.statistics.shinyfemalePokemonHatched[rotationlist[rotationlist.length]] = tempID.saveData.statistics.shinyfemalePokemonHatched || 0;
-    });
+    }
 
     // Replaces Pokémon names to IDs in the save data
     static changePokemonNameToId(saveData, pokemonArray) {
