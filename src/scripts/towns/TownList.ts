@@ -1054,7 +1054,7 @@ TownList['Silph Co.'] = new DungeonTown(
     'Silph Co.',
     GameConstants.Region.kanto,
     GameConstants.KantoSubRegions.Kanto,
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Tower'))],
+    [new TemporaryBattleRequirement('Blue 4')],
     [TemporaryBattleList['Blue 5']]
 );
 TownList['Power Plant'] = new DungeonTown(
