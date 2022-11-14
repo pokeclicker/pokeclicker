@@ -1684,7 +1684,7 @@ GymList.Circhester2 = new Gym(
     [
         new GymPokemon('Frosmoth', 103122110, 40),
         new GymPokemon('Galarian Darmanitan', 103122110, 40),
-        new GymPokemon('Eiscue (Ice Face)', 103122110, 41, , new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Rain, WeatherType.Thunderstorm, WeatherType.Snow, WeatherType.Hail, WeatherType.Blizzard, WeatherType.Sandstorm, WeatherType.Fog, WeatherType.Windy])),
+        new GymPokemon('Eiscue (Ice Face)', 103122110, 41, new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Rain, WeatherType.Thunderstorm, WeatherType.Snow, WeatherType.Hail, WeatherType.Blizzard, WeatherType.Sandstorm, WeatherType.Fog, WeatherType.Windy])),
         new GymPokemon('Eiscue (No Ice Face)', 103122110, 41, new WeatherRequirement([WeatherType.Sunny])),
         new GymPokemon('Gigantamax Lapras', 111540241, 42),
     ],
