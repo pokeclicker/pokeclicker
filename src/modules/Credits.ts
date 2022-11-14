@@ -121,9 +121,14 @@ export const SpriteCredits: Credit[] = [
         link: 'https://linktr.ee/CorgiOnNeptune',
         resources: [
             'Recolours of Duncapham\'s sprite revamps',
-            'Sounds for Wanderer/Roamer',
-            'Sounds for BF finish & empty queue',
             'Dynamic BG Shiny Meltan/Melmetal',
+            'Rainbow Rocket sprite re-colours',
+            'Sounds:',
+            ' - Wandering encounter',
+            ' - Roaming encounter',
+            ' - Battle Frontier',
+            ' - Empty Queue',
+            ' - Dream Orbs',
         ],
         // Notes: Made specifically for PokéClicker.
     },
@@ -198,6 +203,7 @@ export const SpriteCredits: Credit[] = [
             'Galarian Zapdos overworld image',
             'Galarica cuff and wreath icons',
             'Honey',
+            'Key Stone',
             'Linking cord cartoon style',
             'Luana',
             'Merilyn',
@@ -277,6 +283,7 @@ export const SpriteCredits: Credit[] = [
             'Steven revamp',
             'Tamer revamp',
             'Tate & Liza revamp',
+            'Team Rocket Grunt revamps',
             'Winona revamp',
         ],
         // NOTES: Allowed use with credit given.
@@ -538,6 +545,15 @@ export const SpriteCredits: Credit[] = [
             'Underground Ice stone',
         ],
         // Notes: Permission given to SomeoneAlive via Discord DM
+    },
+    {
+        name: 'Prodigal96',
+        link: 'https://www.deviantart.com/prodigal96',
+        image: 'https://a.deviantart.net/avatars-big/p/r/prodigal96.jpg',
+        resources: [
+            'Rainbow Rocket overworld sprites',
+        ],
+        // Notes: Free to use, no credit required
     },
     {
         name: 'procompyart',

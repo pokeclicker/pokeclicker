@@ -1,4 +1,11 @@
-class DataPokemon implements PokemonInterface {
+import PokemonType from '../enums/PokemonType';
+import BagItem from '../interfaces/BagItem';
+import PokemonInterface from '../interfaces/Pokemon';
+import LevelType from '../party/LevelType';
+import { EvoData } from './evolutions/Base';
+import { PokemonNameType } from './PokemonNameType';
+
+export default class DataPokemon implements PokemonInterface {
     shiny: boolean;
 
     constructor(
@@ -14,9 +21,8 @@ class DataPokemon implements PokemonInterface {
         public exp: number,
         public eggCycles: number,
         public heldItem: BagItem | null,
-        public gender
+        public gender,
     ) {
         this.shiny = false;
     }
-
 }
