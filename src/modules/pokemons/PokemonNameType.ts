@@ -741,6 +741,7 @@ export type PokemonNameType
     | 'Drilbur'
     | 'Excadrill'
     | 'Audino'
+    | 'Mega Audino'
     | 'Timburr'
     | 'Gurdurr'
     | 'Conkeldurr'
