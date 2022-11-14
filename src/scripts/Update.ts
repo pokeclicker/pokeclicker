@@ -1407,7 +1407,7 @@ class Update implements Saveable {
                 [774.02, 774.04],
                 [774.03, 774.06, 774.07],
             ];
-            rotatePokemonIDs.formIDs;
+            Uptade.rotatePokemonIDs.formIDs;
         },
         '0.10.2': ({ playerData, saveData }) => {
             // Kecleon Fights
@@ -1648,7 +1648,7 @@ class Update implements Saveable {
     }
     
     // Swapping or Rotating Pokemon IDs
-    static rotatePokemonIDs(saveData, rotationlist: number[]) {
+    static rotatePokemonIDs(saveData, rotationlist[]) {
         
         // Store values from first ID to not get overwritten
         const tempID = {            
