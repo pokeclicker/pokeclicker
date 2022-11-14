@@ -21251,6 +21251,7 @@ export const pokemonList = createPokemonArray(
     {
         'id': 808,
         'name': 'Meltan',
+        'nativeRegion': Region.none,
         'type': [PokemonType.Steel],
         'eggCycles': 120,
         'levelType': LevelType.slow,
@@ -21272,6 +21273,7 @@ export const pokemonList = createPokemonArray(
     {
         'id': 809,
         'name': 'Melmetal',
+        'nativeRegion': Region.none,
         'type': [PokemonType.Steel],
         'eggCycles': 120,
         'levelType': LevelType.slow,
