@@ -1652,13 +1652,13 @@ class Update implements Saveable {
         
         // Store values from first ID to not get overwritten
         const tempID = {            
-            const firstpokemon = saveData.party.caughtPokemon.find(p => p.id === rotationlist[0]);
+            const firstpokemonID = saveData.party.caughtPokemon.find(p => p.id === rotationlist[0]);
             // If player hasn't caught this mon yet, return.
-            if (firstpokemon == undefined) {
+            if (firstpokemonID == undefined) {
                 return;
             }
             // Store our first ID
-            firstpokemon.id = rotationlist[0];
+            firstpokemonID.id = rotationlist[0];
             if (!saveData.statistics.pokemonHatched) {
                 saveData.statistics.pokemonHatched = {};
             }
