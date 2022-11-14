@@ -1648,7 +1648,7 @@ class Update implements Saveable {
     }
     
     // Swapping or Rotating Pokemon IDs
-    static rotatePokemonIDs(rotationlist: number[]) {
+    static rotatePokemonIDs(saveData, rotationlist: number[]) {
         
         // Store values from first ID to not get overwritten
         const tempID = {            
