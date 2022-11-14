@@ -1780,7 +1780,7 @@ class Update implements Saveable {
             saveData.statistics.shinyfemalePokemonDefeated[rotationlist[rotationlist.length]] = tempID.saveData.statistics.shinyfemalePokemonDefeated || 0;
             saveData.statistics.shinyfemalePokemonCaptured[rotationlist[rotationlist.length]] = tempID.saveData.statistics.shinyfemalePokemonCaptured || 0;
             saveData.statistics.shinyfemalePokemonHatched[rotationlist[rotationlist.length]] = tempID.saveData.statistics.shinyfemalePokemonHatched || 0;
-    };
+    }
 
     // Replaces Pokémon names to IDs in the save data
     static changePokemonNameToId(saveData, pokemonArray) {
