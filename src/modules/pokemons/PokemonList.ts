@@ -5724,7 +5724,7 @@ export const pokemonList = createPokemonArray(
         'baby': true,
         'base': {
             'hitpoints': 35,
-            'attack': 25,
+            'attack': 20,
             'specialAttack': 40,
             'defense': 65,
             'specialDefense': 65,
@@ -5744,7 +5744,7 @@ export const pokemonList = createPokemonArray(
         'eggCycles': 8, // lowered to match base form
         'base': {
             'hitpoints': 35,
-            'attack': 25,
+            'attack': 20,
             'specialAttack': 40,
             'defense': 65,
             'specialDefense': 65,
