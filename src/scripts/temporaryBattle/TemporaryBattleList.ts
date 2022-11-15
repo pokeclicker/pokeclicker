@@ -2375,14 +2375,13 @@ TemporaryBattleList['Irida 1'] = new TemporaryBattle(
         imageName: 'Irida',
     }
 );
-TemporaryBattleList['Noble Kleavor 1'] = new TemporaryBattle(
-    'Noble Kleavor 1',
+TemporaryBattleList['Lord of the Woods: Kleavor'] = new TemporaryBattle(
+    'Lord of the Woods: Kleavor',
     [new GymPokemon('Noble Kleavor', 2031393560, 18)],
     'The golden light was dispelled from Kleavor, calming it.',
     [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
     undefined,
     {
-        displayName: 'Lord of the Woods: Kleavor',
         hideTrainer: true,
         imageName: '../pokemon/900.1',
     }
@@ -2423,14 +2422,13 @@ TemporaryBattleList.Ursaluna = new TemporaryBattle(
         imageName: '../pokemon/901',
     }
 );
-TemporaryBattleList['Noble Lilligant 1'] = new TemporaryBattle(
-    'Noble Lilligant 1',
+TemporaryBattleList['Lady of the Ridge: Lilligant'] = new TemporaryBattle(
+    'Lady of the Ridge: Lilligant',
     [new GymPokemon('Noble Lilligant', 2031393560, 30)],
     'The golden light was dispelled from Lilligant, calming it.',
     [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
     undefined,
     {
-        displayName: 'Lady of the Ridge: Lilligant',
         hideTrainer: true,
         imageName: '../pokemon/549.2',
     }
@@ -2449,14 +2447,13 @@ TemporaryBattleList['Irida 2'] = new TemporaryBattle(
         imageName: 'Irida',
     }
 );
-TemporaryBattleList['Noble Arcanine 1'] = new TemporaryBattle(
-    'Noble Arcanine 1',
+TemporaryBattleList['Lord of the Isles: Arcanine'] = new TemporaryBattle(
+    'Lord of the Isles: Arcanine',
     [new GymPokemon('Noble Arcanine', 2031393560, 36)],
     'The golden light was dispelled from Arcanine, calming it.',
     [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
     undefined,
     {
-        displayName: 'Lord of the Isles: Arcanine',
         hideTrainer: true,
         imageName: '../pokemon/59.2',
     }
@@ -2511,14 +2508,13 @@ TemporaryBattleList['Melli 2'] = new TemporaryBattle(
         imageName: 'Melli',
     }
 );
-TemporaryBattleList['Noble Electrode 1'] = new TemporaryBattle(
-    'Noble Electrode 1',
+TemporaryBattleList['Lord of the Hollow: Electrode'] = new TemporaryBattle(
+    'Lord of the Hollow: Electrode',
     [new GymPokemon('Noble Electrode', 2031393560, 46)],
     'The golden light was dispelled from Electrode, calming it.',
     [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
     undefined,
     {
-        displayName: 'Lord of the Hollow: Electrode',
         hideTrainer: true,
         imageName: '../pokemon/101.2',
     }
@@ -2553,14 +2549,13 @@ TemporaryBattleList['Hisuian Braviary'] = new TemporaryBattle(
         imageName: '../pokemon/628.1',
     }
 );
-TemporaryBattleList['Noble Avalugg 1'] = new TemporaryBattle(
-    'Noble Avalugg 1',
+TemporaryBattleList['Lord of the Tundra: Avalugg'] = new TemporaryBattle(
+    'Lord of the Tundra: Avalugg',
     [new GymPokemon('Noble Avalugg', 2031393560, 56)],
     'The golden light was dispelled from Avalugg, calming it.',
     [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
     undefined,
     {
-        displayName: 'Lord of the Tundra: Avalugg',
         hideTrainer: true,
         imageName: '../pokemon/713.2',
     }
@@ -2635,71 +2630,6 @@ TemporaryBattleList['Kamado 2'] = new TemporaryBattle(
     {
         displayName: 'The Galaxy Team\'s Kamado',
         imageName: 'Kamado',
-    }
-);
-TemporaryBattleList['Noble Kleavor 2'] = new TemporaryBattle(
-    'Noble Kleavor 2',
-    [new GymPokemon('Noble Kleavor', 2031393560, 70)],
-    undefined,
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
-    [new ObtainedPokemonRequirement(pokemonMap['Noble Kleavor'])],
-    {
-        isTrainerBattle: false,
-        displayName: 'Lord of the Woods: Kleavor',
-        hideTrainer: true,
-        imageName: '../pokemon/900.1',
-    }
-);
-TemporaryBattleList['Noble Lilligant 2'] = new TemporaryBattle(
-    'Noble Lilligant 2',
-    [new GymPokemon('Noble Lilligant', 2031393560, 70)],
-    undefined,
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
-    [new ObtainedPokemonRequirement(pokemonMap['Noble Lilligant'])],
-    {
-        isTrainerBattle: false,
-        displayName: 'Lady of the Ridge: Lilligant',
-        hideTrainer: true,
-        imageName: '../pokemon/549.2',
-    }
-);
-TemporaryBattleList['Noble Arcanine 2'] = new TemporaryBattle(
-    'Noble Arcanine 2',
-    [new GymPokemon('Noble Arcanine', 2031393560, 70)],
-    undefined,
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
-    [new ObtainedPokemonRequirement(pokemonMap['Noble Arcanine'])],
-    {
-        isTrainerBattle: false,
-        displayName: 'Lord of the Isles: Arcanine',
-        hideTrainer: true,
-        imageName: '../pokemon/59.2',
-    }
-);
-TemporaryBattleList['Noble Electrode 2'] = new TemporaryBattle(
-    'Noble Electrode 2',
-    [new GymPokemon('Noble Electrode', 2031393560, 70)],
-    undefined,
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
-    [new ObtainedPokemonRequirement(pokemonMap['Noble Electrode'])],
-    {
-        isTrainerBattle: false,
-        displayName: 'Lord of the Hollow: Electrode',
-        hideTrainer: true,
-        imageName: '../pokemon/101.2',
-    }
-);
-TemporaryBattleList['Noble Avalugg 2'] = new TemporaryBattle(
-    'Noble Avalugg 2',
-    [new GymPokemon('Noble Avalugg', 2031393560, 70)],
-    undefined,
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
-    [new ObtainedPokemonRequirement(pokemonMap['Noble Avalugg'])],
-    {
-        isTrainerBattle: false,
-        displayName: 'Lord of the Tundra: Avalugg',
-        hideTrainer: true,
-        imageName: '../pokemon/713.2',
     }
 );
 TemporaryBattleList['Adaman 2'] = new TemporaryBattle(
