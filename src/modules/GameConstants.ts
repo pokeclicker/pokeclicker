@@ -159,6 +159,7 @@ export const DUNGEON_HELD_ITEM_MODIFIER = ROUTE_HELD_ITEM_MODIFIER * 4;
 export const DUNGEON_BOSS_HELD_ITEM_MODIFIER = DUNGEON_HELD_ITEM_MODIFIER * 1.5;
 export const HELD_ITEM_CHANCE = 512;
 export const HELD_UNDERGROUND_ITEM_CHANCE = 2048;
+export const GRISEOUS_ITEM_CHANCE = 80;
 export const DNA_ITEM_CHANCE = 60;
 export const LIGHT_ITEM_CHANCE = 100;
 export const RUST_ITEM_CHANCE = 90;
@@ -794,6 +795,7 @@ export enum BulletinBoards {
     Johto,
     Hoenn,
     Sevii4567,
+    Sinnoh,
     Kalos,
     Alola,
     Galar,
@@ -1346,6 +1348,7 @@ export const TemporaryBattles = [
     'Barry 5',
     'Barry 6',
     'Barry 7',
+    'Zero',
     'Hugh 1',
     'Hugh 2',
     'Team Plasma Grunt 1',

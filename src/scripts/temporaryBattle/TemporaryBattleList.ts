@@ -1044,6 +1044,16 @@ TemporaryBattleList['Barry 7'] = new TemporaryBattle(
             Notifier.notify({message: 'Congratulations on beating Barry at his best! Come back to fight him again at any time.'}),
     }
 );
+TemporaryBattleList.Zero = new TemporaryBattle(
+    'Zero',
+    [
+        new GymPokemon('Magnemite', 10120000, 70),
+        new GymPokemon('Magneton', 10870000, 72),
+        new GymPokemon('Magnezone', 11420000, 75),
+    ],
+    'Argh! I can\'t believe I lost to someone like you! You can keep the key for now, but I\'ll get my revenge one day.',
+    [new QuestLineStepCompletedRequirement('Zero\'s Ambition', 12)]
+);
 
 //Unova Temporary Battles
 TemporaryBattleList['Hugh 1'] = new TemporaryBattle(
