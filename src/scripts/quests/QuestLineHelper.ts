@@ -769,7 +769,7 @@ class QuestLineHelper {
 
     //Giratina quest
     public static createGiratinaQuestLine() {
-        const giratinaQuestLine = new QuestLine('Zero\'s Ambition', 'Help Zero find an entrance to the Distortion World.', new MultiRequirement([new ObtainedPokemonRequirement(pokemonMap.Uxie), new ObtainedPokemonRequirement(pokemonMap.Mesprit), new ObtainedPokemonRequirement(pokemonMap.Azelf), new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)]), GameConstants.BulletinBoards.Sinnoh);
+        const giratinaQuestLine = new QuestLine('Zero\'s Ambition', 'Help Zero find an entrance to the Distortion World.', new MultiRequirement([new ObtainedPokemonRequirement('Uxie'), new ObtainedPokemonRequirement('Mesprit'), new ObtainedPokemonRequirement('Azelf'), new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)]), GameConstants.BulletinBoards.Sinnoh);
 
         const talktoZero1 = new TalkToNPCQuest(FightAreaZero1, 'Talk to Zero in the Fight Area.');
         giratinaQuestLine.addQuest(talktoZero1);
