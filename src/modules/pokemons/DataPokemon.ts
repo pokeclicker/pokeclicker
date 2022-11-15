@@ -1,9 +1,9 @@
-import PokemonType from '../enums/PokemonType';
-import BagItem from '../interfaces/BagItem';
-import PokemonInterface from '../interfaces/Pokemon';
-import LevelType from '../party/LevelType';
-import { EvoData } from './evolutions/Base';
-import { PokemonNameType } from './PokemonNameType';
+import type PokemonType from '../enums/PokemonType';
+import type BagItem from '../interfaces/BagItem';
+import type PokemonInterface from '../interfaces/Pokemon';
+import type LevelType from '../party/LevelType';
+import type { EvoData } from './evolutions/Base';
+import type { PokemonNameType } from './PokemonNameType';
 
 export default class DataPokemon implements PokemonInterface {
     shiny: boolean;

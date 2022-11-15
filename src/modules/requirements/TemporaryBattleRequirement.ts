@@ -11,6 +11,6 @@ export default class TemporaryBattleRequirement extends Requirement {
     }
 
     public hint(): string {
-        return `Requires beating ${this.battleName}.`;
+        return `Requires beating ${this.battleName.replace(/\s(?=[\d])\d/g, '')}.`;
     }
 }
