@@ -1,6 +1,93 @@
 const TemporaryBattleList: { [battleName: string]: TemporaryBattle } = {};
 
 //Kanto Temporary Battles
+TemporaryBattleList['Blue 1'] = new TemporaryBattle(
+    'Blue 1',
+    [
+        new GymPokemon('Pidgey', 1040, 9),
+        new GymPokemon('Charmander', 1678, 9, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Grass)),
+        new GymPokemon('Squirtle', 1678, 9, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Fire)),
+        new GymPokemon('Bulbasaur', 1678, 9, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Water)),
+        new GymPokemon('Bulbasaur', 1678, 9, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Special)),
+    ],
+    'I heard the Pokémon League is crawling with tough Trainers. I have to figure out how to get past them. You should quit dawdling and get a move on!',
+    [
+        new RouteKillRequirement(10, GameConstants.Region.kanto, 22),
+        new GymBadgeRequirement(BadgeEnums.Boulder, GameConstants.AchievementOption.less),
+    ],
+    undefined,
+    {
+        displayName: 'Rival Blue',
+        returnTown: 'Viridian City',
+        imageName: 'Blue1',
+    }
+);
+TemporaryBattleList['Blue 2'] = new TemporaryBattle(
+    'Blue 2',
+    [
+        new GymPokemon('Pidgeotto', 3650, 17),
+        new GymPokemon('Abra', 3230, 16),
+        new GymPokemon('Rattata', 3370, 15),
+        new GymPokemon('Charmander', 3791, 18, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Grass)),
+        new GymPokemon('Squirtle', 3791, 18, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Fire)),
+        new GymPokemon('Bulbasaur', 3791, 18, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Water)),
+        new GymPokemon('Bulbasaur', 3791, 18, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Special)),
+    ],
+    'Hey! Take it easy! You won already!',
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 4)],
+    undefined,
+    {
+        displayName: 'Rival Blue',
+        returnTown: 'Cerulean City',
+        imageName: 'Blue1',
+    }
+);
+TemporaryBattleList['Blue 3'] = new TemporaryBattle(
+    'Blue 3',
+    [
+        new GymPokemon('Pidgeotto', 19998, 19),
+        new GymPokemon('Raticate', 19197, 16),
+        new GymPokemon('Kadabra', 19197, 18),
+        new GymPokemon('Charmeleon', 20797, 20, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Grass)),
+        new GymPokemon('Wartortle', 20797, 20, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Fire)),
+        new GymPokemon('Ivysaur', 20797, 20, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Water)),
+        new GymPokemon('Ivysaur', 20797, 20, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Special)),
+    ],
+    'Humph! At least you\'re raising your Pokémon!',
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 6)],
+    undefined,
+    {
+        displayName: 'Rival Blue',
+        returnTown: 'Vermilion City',
+        imageName: 'Blue2',
+    }
+);
+TemporaryBattleList['Blue 4'] = new TemporaryBattle(
+    'Blue 4',
+    [
+        new GymPokemon('Pidgeotto', 30398, 25),
+        new GymPokemon('Exeggcute', 28878, 23, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Grass)),
+        new GymPokemon('Growlithe', 28878, 23, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Fire)),
+        new GymPokemon('Gyarados', 28878, 23, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Water)),
+        new GymPokemon('Gyarados', 28878, 23, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Special)),
+        new GymPokemon('Gyarados', 28878, 22, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Grass)),
+        new GymPokemon('Exeggcute', 28878, 22, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Fire)),
+        new GymPokemon('Growlithe', 28878, 22, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Water)),
+        new GymPokemon('Growlithe', 28878, 22, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Special)),
+        new GymPokemon('Kadabra', 30398, 20),
+        new GymPokemon('Charmeleon', 33438, 25, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Grass)),
+        new GymPokemon('Wartortle', 33438, 25, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Fire)),
+        new GymPokemon('Ivysaur', 33438, 25, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Water)),
+        new GymPokemon('Ivysaur', 33438, 25, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Special)),
+    ],
+    'What? You stinker! I took it easy on you, too!',
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Tower'))],
+    undefined,
+    {
+        displayName: 'Rival Blue',
+        imageName: 'Blue2',
+    }
+);
 TemporaryBattleList['Fighting Dojo'] = new TemporaryBattle(
     'Fighting Dojo',
     [
@@ -33,7 +120,7 @@ TemporaryBattleList['Snorlax route 12'] = new TemporaryBattle(
     undefined,
     [
         new RouteKillRequirement(10, GameConstants.Region.kanto, 12),
-        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Tower')),
+        new TemporaryBattleRequirement('Blue 4'),
     ],
     [new TemporaryBattleRequirement('Snorlax route 12'), new ObtainedPokemonRequirement('Snorlax')],
     {
@@ -48,7 +135,7 @@ TemporaryBattleList['Snorlax route 16'] = new TemporaryBattle(
     'Snorlax route 16',
     [new GymPokemon('Snorlax', 189990, 30)],
     undefined,
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Tower'))],
+    [new TemporaryBattleRequirement('Blue 4')],
     [new TemporaryBattleRequirement('Snorlax route 16'), new ObtainedPokemonRequirement('Snorlax')],
     {
         displayName: 'Snorlax',
@@ -56,6 +143,35 @@ TemporaryBattleList['Snorlax route 16'] = new TemporaryBattle(
         isTrainerBattle: false,
         hideTrainer: true,
         visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.kanto, 7),
+    }
+);
+TemporaryBattleList['Blue 5'] = new TemporaryBattle(
+    'Blue 5',
+    [
+        new GymPokemon('Pidgeot', 41482, 37),
+        new GymPokemon('Exeggcute', 38447, 38, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Grass)),
+        new GymPokemon('Growlithe', 38447, 38, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Fire)),
+        new GymPokemon('Gyarados', 38447, 38, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Water)),
+        new GymPokemon('Gyarados', 38447, 38, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Special)),
+        new GymPokemon('Gyarados', 38447, 35, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Grass)),
+        new GymPokemon('Exeggcute', 38447, 35, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Fire)),
+        new GymPokemon('Growlithe', 38447, 35, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Water)),
+        new GymPokemon('Growlithe', 38447, 35, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Special)),
+        new GymPokemon('Alakazam', 41482, 35),
+        new GymPokemon('Charizard', 44113, 40, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Grass)),
+        new GymPokemon('Blastoise', 44113, 40, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Fire)),
+        new GymPokemon('Venusaur', 44113, 40, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Water)),
+        new GymPokemon('Venusaur', 44113, 40, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Special)),
+    ],
+    'I\'m moving on up and ahead! I\'m going to the Pokémon League to boot out the Elite Four! I\'ll become the world\'s most powerful Trainer! Well, good luck to you! Don\'t sweat it! Smell ya!',
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Silph Co.'))],
+    undefined,
+    {
+        displayName: 'Rival Blue',
+        imageName: 'Blue2',
+        firstTimeRewardFunction: () => {
+            App.game.party.gainPokemonById(131);
+        },
     }
 );
 TemporaryBattleList['Biker Goon 1'] = new TemporaryBattle(
@@ -107,8 +223,73 @@ TemporaryBattleList['Cue Ball Paxton'] = new TemporaryBattle(
         new TemporaryBattleRequirement('Biker Goon 3'),
     ]
 );
+TemporaryBattleList['Blue 6'] = new TemporaryBattle(
+    'Blue 6',
+    [
+        new GymPokemon('Pidgeot', 84840, 47),
+        new GymPokemon('Rhyhorn', 82269, 45),
+        new GymPokemon('Exeggcute', 82269, 45, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Grass)),
+        new GymPokemon('Growlithe', 82269, 45, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Fire)),
+        new GymPokemon('Gyarados', 82269, 45, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Water)),
+        new GymPokemon('Gyarados', 82269, 45, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Special)),
+        new GymPokemon('Gyarados', 82269, 45, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Grass)),
+        new GymPokemon('Exeggcute', 82269, 45, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Fire)),
+        new GymPokemon('Growlithe', 82269, 45, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Water)),
+        new GymPokemon('Growlithe', 82269, 45, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Special)),
+        new GymPokemon('Alakazam', 84840, 47),
+        new GymPokemon('Charizard', 92553, 53, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Grass)),
+        new GymPokemon('Blastoise', 92553, 53, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Fire)),
+        new GymPokemon('Venusaur', 92553, 53, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Water)),
+        new GymPokemon('Venusaur', 92553, 53, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Special)),
+    ],
+    'That loosened me up. I\'m ready for the Pokémon League! You need more practice! But hey, you know that! I\'m out of here. Smell ya!',
+    [
+        new RouteKillRequirement(10, GameConstants.Region.kanto, 22),
+        new GymBadgeRequirement(BadgeEnums.Earth),
+    ],
+    undefined,
+    {
+        displayName: 'Rival Blue',
+        returnTown: 'Viridian City',
+        imageName: 'Blue2',
+    }
+);
 
-// Johto Temporary Battles
+//Johto Temporary Battles
+TemporaryBattleList['Silver 1'] = new TemporaryBattle(
+    'Silver 1',
+    [
+        new GymPokemon('Cyndaquil', 176000, 5, new StarterRequirement(GameConstants.Region.johto, GameConstants.Starter.Grass)),
+        new GymPokemon('Totodile', 176000, 5, new StarterRequirement(GameConstants.Region.johto, GameConstants.Starter.Fire)),
+        new GymPokemon('Chikorita', 176000, 5, new StarterRequirement(GameConstants.Region.johto, GameConstants.Starter.Water)),
+    ],
+    '...Humph! Are you happy you won?',
+    [new RouteKillRequirement(10, GameConstants.Region.johto, 30)],
+    undefined,
+    {
+        displayName: 'Rival Silver',
+        returnTown: 'Cherrygrove City',
+        imageName: 'Silver',
+    }
+);
+TemporaryBattleList['Silver 2'] = new TemporaryBattle(
+    'Silver 2',
+    [
+        new GymPokemon('Gastly', 220788, 14),
+        new GymPokemon('Zubat', 220788, 16),
+        new GymPokemon('Quilava', 237772, 18, new StarterRequirement(GameConstants.Region.johto, GameConstants.Starter.Grass)),
+        new GymPokemon('Croconaw', 237772, 18, new StarterRequirement(GameConstants.Region.johto, GameConstants.Starter.Fire)),
+        new GymPokemon('Bayleef', 237772, 18, new StarterRequirement(GameConstants.Region.johto, GameConstants.Starter.Water)),
+    ],
+    '...Humph! Useless Pokémon! Listen, you. You only won because my Pokémon were weak.',
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 33)],
+    undefined,
+    {
+        displayName: 'Rival Silver',
+        returnTown: 'Azalea Town',
+        imageName: 'Silver',
+    }
+);
 TemporaryBattleList.Sudowoodo = new TemporaryBattle(
     'Sudowoodo',
     [new GymPokemon('Sudowoodo', 540000, 20)],
@@ -123,6 +304,67 @@ TemporaryBattleList.Sudowoodo = new TemporaryBattle(
         returnTown: 'Goldenrod City',
         hideTrainer: true,
         visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.johto, 36),
+    }
+);
+TemporaryBattleList['Silver 3'] = new TemporaryBattle(
+    'Silver 3',
+    [
+        new GymPokemon('Gastly', 227997, 20),
+        new GymPokemon('Zubat', 227997, 20),
+        new GymPokemon('Magnemite', 223344, 18),
+        new GymPokemon('Quilava', 251262, 22, new StarterRequirement(GameConstants.Region.johto, GameConstants.Starter.Grass)),
+        new GymPokemon('Croconaw', 251262, 22, new StarterRequirement(GameConstants.Region.johto, GameConstants.Starter.Fire)),
+        new GymPokemon('Bayleef', 251262, 22, new StarterRequirement(GameConstants.Region.johto, GameConstants.Starter.Water)),
+    ],
+    '...Humph! I\'m not fighting with another weakling ever again. It\'s just too much playing around.',
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Burned Tower'))],
+    undefined,
+    {
+        displayName: 'Rival Silver',
+        imageName: 'Silver',
+    }
+);
+TemporaryBattleList['Silver 4'] = new TemporaryBattle(
+    'Silver 4',
+    [
+        new GymPokemon('Golbat', 274520, 32),
+        new GymPokemon('Magnemite', 260794, 30),
+        new GymPokemon('Haunter', 260794, 30),
+        new GymPokemon('Sneasel', 281383, 34),
+        new GymPokemon('Quilava', 295109, 34, new StarterRequirement(GameConstants.Region.johto, GameConstants.Starter.Grass)),
+        new GymPokemon('Feraligatr', 295109, 32, new StarterRequirement(GameConstants.Region.johto, GameConstants.Starter.Fire)),
+        new GymPokemon('Meganium', 295109, 34, new StarterRequirement(GameConstants.Region.johto, GameConstants.Starter.Water)),
+    ],
+    '...Why... Why do I lose? I\'ve assembled the toughest Pokémon. I haven\'t eased up on the gas. So why do I lose?',
+    [
+        new GymBadgeRequirement(BadgeEnums.Mineral),
+        new GymBadgeRequirement(BadgeEnums.Glacier),
+    ],
+    undefined,
+    {
+        displayName: 'Rival Silver',
+        imageName: 'Silver',
+    }
+);
+TemporaryBattleList['Silver 5'] = new TemporaryBattle(
+    'Silver 5',
+    [
+        new GymPokemon('Sneasel', 363709, 36),
+        new GymPokemon('Golbat', 375075, 38),
+        new GymPokemon('Magneton', 375075, 37),
+        new GymPokemon('Kadabra', 363709, 37),
+        new GymPokemon('Haunter', 363709, 37),
+        new GymPokemon('Typhlosion', 397807, 40, new StarterRequirement(GameConstants.Region.johto, GameConstants.Starter.Grass)),
+        new GymPokemon('Feraligatr', 397807, 40, new StarterRequirement(GameConstants.Region.johto, GameConstants.Starter.Fire)),
+        new GymPokemon('Meganium', 397807, 40, new StarterRequirement(GameConstants.Region.johto, GameConstants.Starter.Water)),
+    ],
+    '.................. I haven\'t given up on becoming the greatest Trainer... I\'m going to find out why I can\'t win and become stronger... When I do, I will challenge you. I\'ll beat you down with all my power. ...Humph! You keep at it until then.',
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Johto'))],
+    undefined,
+    {
+        displayName: 'Rival Silver',
+        returnTown: 'Indigo Plateau Johto',
+        imageName: 'Silver',
     }
 );
 TemporaryBattleList['Suicune 1'] = new TemporaryBattle(
@@ -270,13 +512,146 @@ TemporaryBattleList['Rocket Boss Giovanni'] = new TemporaryBattle(
     'What in the world are you? How this is possible...? How can a kid like you manage to destroy my dream once again? The precious dream of Team Rocket has become little more than an illusion...',
     [new QuestLineStepCompletedRequirement('Unfinished Business', 9)]
 );
+TemporaryBattleList['Silver 6'] = new TemporaryBattle(
+    'Silver 6',
+    [
+        new GymPokemon('Sneasel', 540775, 46),
+        new GymPokemon('Golbat', 540775, 47),
+        new GymPokemon('Magneton', 554465, 46),
+        new GymPokemon('Alakazam', 554465, 48),
+        new GymPokemon('Gengar', 554465, 48),
+        new GymPokemon('Typhlosion', 581846, 50, new StarterRequirement(GameConstants.Region.johto, GameConstants.Starter.Grass)),
+        new GymPokemon('Feraligatr', 581846, 50, new StarterRequirement(GameConstants.Region.johto, GameConstants.Starter.Fire)),
+        new GymPokemon('Meganium', 581846, 50, new StarterRequirement(GameConstants.Region.johto, GameConstants.Starter.Water)),
+    ],
+    'My training\'s still not good enough...? My Pokémon are so weak, it makes me frustrated... But I can feel that they are getting better after each battle... .................. Tch! They\'re still too weak! I need to give them more training...',
+    [new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion)],
+    undefined,
+    {
+        displayName: 'Rival Silver',
+        imageName: 'Silver',
+    }
+);
+TemporaryBattleList['Silver 7'] = new TemporaryBattle(
+    'Silver 7',
+    [
+        new GymPokemon('Sneasel', 633820, 55),
+        new GymPokemon('Magneton', 653626, 55),
+        new GymPokemon('Gengar', 669472, 56),
+        new GymPokemon('Alakazam', 669472, 56),
+        new GymPokemon('Crobat', 693240, 58),
+        new GymPokemon('Typhlosion', 705124, 60, new StarterRequirement(GameConstants.Region.johto, GameConstants.Starter.Grass)),
+        new GymPokemon('Feraligatr', 705124, 60, new StarterRequirement(GameConstants.Region.johto, GameConstants.Starter.Fire)),
+        new GymPokemon('Meganium', 705124, 60, new StarterRequirement(GameConstants.Region.johto, GameConstants.Starter.Water)),
+    ],
+    '...Oh, no... I still can\'t win after all that training... I...I have to believe more in my Pokémon... ...No big deal. Sorry to have got in the way. Don\'t forget to rest your Pokémon before you challenge the Champion again!',
+    [new TemporaryBattleRequirement('Silver 6')],
+    [new NullRequirement],
+    {
+        displayName: 'Rival Silver',
+        returnTown: 'Indigo Plateau Johto',
+        imageName: 'Silver',
+        rewardFunction: () =>
+            Notifier.notify({message: 'Congratulations on beating Silver at his best! Come back to fight him again at any time.'}),
+    }
+);
 
-// Hoenn Temporary Battles
+//Hoenn Temporary Battles
+TemporaryBattleList['May 1'] = new TemporaryBattle(
+    'May 1',
+    [
+        new GymPokemon('Torchic', 823400, 5, new StarterRequirement(GameConstants.Region.hoenn, GameConstants.Starter.Grass)),
+        new GymPokemon('Mudkip', 823400, 5, new StarterRequirement(GameConstants.Region.hoenn, GameConstants.Starter.Fire)),
+        new GymPokemon('Treecko', 823400, 5, new StarterRequirement(GameConstants.Region.hoenn, GameConstants.Starter.Water)),
+    ],
+    'Wow! That\'s great! You\'re pretty good!',
+    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 103)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer May',
+        returnTown: 'Oldale Town',
+        imageName: 'May',
+    }
+);
+TemporaryBattleList['May 2'] = new TemporaryBattle(
+    'May 2',
+    [
+        new GymPokemon('Lotad', 1124608, 13, new StarterRequirement(GameConstants.Region.hoenn, GameConstants.Starter.Grass)),
+        new GymPokemon('Torkoal', 1124608, 13, new StarterRequirement(GameConstants.Region.hoenn, GameConstants.Starter.Fire)),
+        new GymPokemon('Wingull', 1124608, 13, new StarterRequirement(GameConstants.Region.hoenn, GameConstants.Starter.Water)),
+        new GymPokemon('Torchic', 1197952, 15, new StarterRequirement(GameConstants.Region.hoenn, GameConstants.Starter.Grass)),
+        new GymPokemon('Mudkip', 1197952, 15, new StarterRequirement(GameConstants.Region.hoenn, GameConstants.Starter.Fire)),
+        new GymPokemon('Treecko', 1197952, 15, new StarterRequirement(GameConstants.Region.hoenn, GameConstants.Starter.Water)),
+    ],
+    'Yikes! You\'re better than I expected!',
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rusturf Tunnel'))],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer May',
+        returnTown: 'Rustboro City',
+        imageName: 'May',
+    }
+);
+TemporaryBattleList['May 3'] = new TemporaryBattle(
+    'May 3',
+    [
+        new GymPokemon('Wingull', 1119525, 18, new StarterRequirement(GameConstants.Region.hoenn, GameConstants.Starter.Grass)),
+        new GymPokemon('Lombre', 1119525, 18, new StarterRequirement(GameConstants.Region.hoenn, GameConstants.Starter.Fire)),
+        new GymPokemon('Wingull', 1119525, 18, new StarterRequirement(GameConstants.Region.hoenn, GameConstants.Starter.Water)),
+        new GymPokemon('Lombre', 1119525, 18, new StarterRequirement(GameConstants.Region.hoenn, GameConstants.Starter.Grass)),
+        new GymPokemon('Slugma', 1119525, 18, new StarterRequirement(GameConstants.Region.hoenn, GameConstants.Starter.Fire)),
+        new GymPokemon('Slugma', 1119525, 18, new StarterRequirement(GameConstants.Region.hoenn, GameConstants.Starter.Water)),
+        new GymPokemon('Combusken', 1153450, 20, new StarterRequirement(GameConstants.Region.hoenn, GameConstants.Starter.Grass)),
+        new GymPokemon('Marshtomp', 1153450, 20, new StarterRequirement(GameConstants.Region.hoenn, GameConstants.Starter.Fire)),
+        new GymPokemon('Grovyle', 1153450, 20, new StarterRequirement(GameConstants.Region.hoenn, GameConstants.Starter.Water)),
+    ],
+    'Yikes! You\'re better than I expected!',
+    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 110)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer May',
+        returnTown: 'Mauville City',
+        imageName: 'May',
+    }
+);
+TemporaryBattleList['Wally 1'] = new TemporaryBattle(
+    'Wally 1',
+    [new GymPokemon('Ralts', 1234567, 16)],
+    '... ... ... ... ... ... ... ... ... ... ... ... ... ... ... I lost...',
+    [new TemporaryBattleRequirement('May 3')],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Wally',
+        imageName: 'Wally',
+    }
+);
+TemporaryBattleList['May 4'] = new TemporaryBattle(
+    'May 4',
+    [
+        new GymPokemon('Pelipper', 1832160, 29, new StarterRequirement(GameConstants.Region.hoenn, GameConstants.Starter.Grass)),
+        new GymPokemon('Lombre', 1832160, 29, new StarterRequirement(GameConstants.Region.hoenn, GameConstants.Starter.Fire)),
+        new GymPokemon('Slugma', 1832160, 29, new StarterRequirement(GameConstants.Region.hoenn, GameConstants.Starter.Water)),
+        new GymPokemon('Lombre', 1832160, 29, new StarterRequirement(GameConstants.Region.hoenn, GameConstants.Starter.Grass)),
+        new GymPokemon('Slugma', 1832160, 29, new StarterRequirement(GameConstants.Region.hoenn, GameConstants.Starter.Fire)),
+        new GymPokemon('Lombre', 1832160, 29, new StarterRequirement(GameConstants.Region.hoenn, GameConstants.Starter.Water)),
+        new GymPokemon('Combusken', 1887680, 31, new StarterRequirement(GameConstants.Region.hoenn, GameConstants.Starter.Grass)),
+        new GymPokemon('Marshtomp', 1887680, 31, new StarterRequirement(GameConstants.Region.hoenn, GameConstants.Starter.Fire)),
+        new GymPokemon('Grovyle', 1887680, 31, new StarterRequirement(GameConstants.Region.hoenn, GameConstants.Starter.Water)),
+    ],
+    'Achah! You\'re strong! I was worried that you might be struggling with your training.',
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Weather Institute'))],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer May',
+        returnTown: 'Fortree City',
+        imageName: 'May',
+    }
+);
 TemporaryBattleList['Kecleon 1'] = new TemporaryBattle(
     'Kecleon 1',
     [new GymPokemon('Kecleon', 6000000, 20)],
     undefined,
-    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 119)],
+    [new TemporaryBattleRequirement('May 4')],
     [new TemporaryBattleRequirement('Kecleon 1'), new ObtainedPokemonRequirement('Kecleon')],
     {
         isTrainerBattle: false,
@@ -307,6 +682,46 @@ TemporaryBattleList['Kecleon 3'] = new TemporaryBattle(
         isTrainerBattle: false,
         returnTown: 'Fortree City',
         hideTrainer: true,
+    }
+);
+TemporaryBattleList['May 5'] = new TemporaryBattle(
+    'May 5',
+    [
+        new GymPokemon('Tropius', 1932600, 31),
+        new GymPokemon('Pelipper', 2013125, 32, new StarterRequirement(GameConstants.Region.hoenn, GameConstants.Starter.Grass)),
+        new GymPokemon('Ludicolo', 2013125, 32, new StarterRequirement(GameConstants.Region.hoenn, GameConstants.Starter.Fire)),
+        new GymPokemon('Slugma', 2013125, 32, new StarterRequirement(GameConstants.Region.hoenn, GameConstants.Starter.Water)),
+        new GymPokemon('Ludicolo', 2013125, 32, new StarterRequirement(GameConstants.Region.hoenn, GameConstants.Starter.Grass)),
+        new GymPokemon('Slugma', 2013125, 32, new StarterRequirement(GameConstants.Region.hoenn, GameConstants.Starter.Fire)),
+        new GymPokemon('Pelipper', 2013125, 32, new StarterRequirement(GameConstants.Region.hoenn, GameConstants.Starter.Water)),
+        new GymPokemon('Combusken', 2133912, 34, new StarterRequirement(GameConstants.Region.hoenn, GameConstants.Starter.Grass)),
+        new GymPokemon('Marshtomp', 2133912, 34, new StarterRequirement(GameConstants.Region.hoenn, GameConstants.Starter.Fire)),
+        new GymPokemon('Grovyle', 2133912, 34, new StarterRequirement(GameConstants.Region.hoenn, GameConstants.Starter.Water)),
+    ],
+    'I remember the battle I had with you on Route 103. That battle helped you become this strong, didn\'t it?',
+    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 121)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer May',
+        imageName: 'May',
+    }
+);
+TemporaryBattleList['Wally 2'] = new TemporaryBattle(
+    'Wally 2',
+    [
+        new GymPokemon('Altaria', 2048719, 44),
+        new GymPokemon('Delcatty', 2048719, 43),
+        new GymPokemon('Roselia', 2048719, 44),
+        new GymPokemon('Magneton', 2048719, 41),
+        new GymPokemon('Gardevoir', 2206313, 45),
+    ],
+    'Wow! You are strong, after all! I couldn\'t beat you today, but one of these days, I\'ll catch up to you!',
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Hoenn'))],
+    [new NullRequirement],
+    {
+        displayName: 'Pokémon Trainer Wally',
+        returnTown: 'Pokémon League Hoenn',
+        imageName: 'Wally',
     }
 );
 TemporaryBattleList['Sevii Rocket Grunt 1'] = new TemporaryBattle(
@@ -454,7 +869,89 @@ TemporaryBattleList['Pinkan Officer Jenny'] = new TemporaryBattle(
     }
 );
 
-// Sinnoh Temporary Battles
+//Sinnoh Temporary Battles
+TemporaryBattleList['Barry 1'] = new TemporaryBattle(
+    'Barry 1',
+    [
+        new GymPokemon('Chimchar', 1689240, 5, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Grass)),
+        new GymPokemon('Piplup', 1689240, 5, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Fire)),
+        new GymPokemon('Turtwig', 1689240, 5, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Water)),
+    ],
+    'What are you saying?! We ended up losing?!',
+    [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Barry',
+        returnTown: 'Twinleaf Town',
+        imageName: 'Barry',
+    }
+);
+TemporaryBattleList['Barry 2'] = new TemporaryBattle(
+    'Barry 2',
+    [
+        new GymPokemon('Starly', 2886187, 7),
+        new GymPokemon('Chimchar', 3074416, 9, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Grass)),
+        new GymPokemon('Piplup', 3074416, 9, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Fire)),
+        new GymPokemon('Turtwig', 3074416, 9, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Water)),
+    ],
+    'What just happened? I lost?!',
+    [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 202)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Barry',
+        returnTown: 'Jubilife City',
+        imageName: 'Barry',
+    }
+);
+TemporaryBattleList['Barry 3'] = new TemporaryBattle(
+    'Barry 3',
+    [
+        new GymPokemon('Staravia', 2239850, 25),
+        new GymPokemon('Buizel', 2195053, 23, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Grass)),
+        new GymPokemon('Ponyta', 2195053, 23, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Fire)),
+        new GymPokemon('Buizel', 2195053, 23, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Water)),
+        new GymPokemon('Roselia', 2195053, 23, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Grass)),
+        new GymPokemon('Roselia', 2195053, 23, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Fire)),
+        new GymPokemon('Ponyta', 2195053, 23, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Water)),
+        new GymPokemon('Monferno', 2329444, 27, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Grass)),
+        new GymPokemon('Prinplup', 2329444, 27, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Fire)),
+        new GymPokemon('Grotle', 2329444, 27, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Water)),
+    ],
+    'Waaah! It goes to show my surefire winning strategy doesn\'t work',
+    [new GymBadgeRequirement(BadgeEnums.Relic)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Barry',
+        returnTown: 'Hearthome City',
+        imageName: 'Barry',
+    }
+);
+TemporaryBattleList['Barry 4'] = new TemporaryBattle(
+    'Barry 4',
+    [
+        new GymPokemon('Staravia', 2490700, 34),
+        new GymPokemon('Buizel', 2440886, 32, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Grass)),
+        new GymPokemon('Ponyta', 2440886, 32, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Fire)),
+        new GymPokemon('Buizel', 2440886, 32, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Water)),
+        new GymPokemon('Roselia', 2440886, 32, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Grass)),
+        new GymPokemon('Roselia', 2440886, 32, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Fire)),
+        new GymPokemon('Ponyta', 2440886, 32, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Water)),
+        new GymPokemon('Monferno', 2590328, 36, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Grass)),
+        new GymPokemon('Prinplup', 2590328, 36, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Fire)),
+        new GymPokemon('Grotle', 2590328, 36, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Water)),
+    ],
+    'Heh, yeah, maybe you did get a bit tougher since last time.',
+    [
+        new GymBadgeRequirement(BadgeEnums.Cobble),
+        new RouteKillRequirement(10, GameConstants.Region.sinnoh, 213),
+    ],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Barry',
+        returnTown: 'Pastoria City',
+        imageName: 'Barry',
+    }
+);
 TemporaryBattleList['Galactic Boss Cyrus'] = new TemporaryBattle(
     'Galactic Boss Cyrus',
     [
@@ -467,6 +964,86 @@ TemporaryBattleList['Galactic Boss Cyrus'] = new TemporaryBattle(
     undefined,
     {imageName: '../trainers/Galactic Boss (cyrus)'}
 );
+TemporaryBattleList['Barry 5'] = new TemporaryBattle(
+    'Barry 5',
+    [
+        new GymPokemon('Staraptor', 2104080, 36),
+        new GymPokemon('Heracross', 2104080, 37),
+        new GymPokemon('Floatzel', 2051478, 35, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Grass)),
+        new GymPokemon('Rapidash', 2051478, 35, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Fire)),
+        new GymPokemon('Floatzel', 2051478, 35, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Water)),
+        new GymPokemon('Roserade', 2051478, 35, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Grass)),
+        new GymPokemon('Roserade', 2051478, 35, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Fire)),
+        new GymPokemon('Rapidash', 2051478, 35, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Water)),
+        new GymPokemon('Infernape', 2209284, 38, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Grass)),
+        new GymPokemon('Empoleon', 2209284, 38, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Fire)),
+        new GymPokemon('Torterra', 2209284, 38, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Water)),
+    ],
+    'Yeah, yeah, you\'re just a bit better than me, as usual.',
+    [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 218)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Barry',
+        returnTown: 'Canalave City',
+        imageName: 'Barry',
+    }
+);
+TemporaryBattleList['Barry 6'] = new TemporaryBattle(
+    'Barry 6',
+    [
+        new GymPokemon('Staraptor', 3974738, 48),
+        new GymPokemon('Floatzel', 3740930, 47, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Grass)),
+        new GymPokemon('Rapidash', 3740930, 47, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Fire)),
+        new GymPokemon('Rapidash', 3740930, 47, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Water)),
+        new GymPokemon('Snorlax', 3857834, 49, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Grass)),
+        new GymPokemon('Snorlax', 3857834, 49, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Fire)),
+        new GymPokemon('Floatzel', 3740930, 47, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Water)),
+        new GymPokemon('Heracross', 3857834, 48),
+        new GymPokemon('Roserade', 3740930, 47, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Grass)),
+        new GymPokemon('Roserade', 3740930, 47, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Fire)),
+        new GymPokemon('Snorlax', 3857834, 49, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Water)),
+        new GymPokemon('Infernape', 4161784, 51, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Grass)),
+        new GymPokemon('Empoleon', 4161784, 51, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Fire)),
+        new GymPokemon('Torterra', 4161784, 51, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Water)),
+    ],
+    'I guess I\'m not ready for the Pokémon League if I\'m losing to you! Darn it! You watch, though! I\'ll get tougher and win my way through the Pokémon League! Because I\'m going to become the Champion, the toughest Trainer! You\'d better not lose to anyone before me!',
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Sinnoh'))],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Barry',
+        returnTown: 'Pokémon League Sinnoh',
+        imageName: 'Barry',
+    }
+);
+TemporaryBattleList['Barry 7'] = new TemporaryBattle(
+    'Barry 7',
+    [
+        new GymPokemon('Staraptor', 9727091, 81),
+        new GymPokemon('Floatzel', 9212128, 79, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Grass)),
+        new GymPokemon('Roserade', 9212128, 79, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Fire)),
+        new GymPokemon('Rapidash', 9212128, 79, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Water)),
+        new GymPokemon('Roserade', 9212128, 79, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Grass)),
+        new GymPokemon('Rapidash', 9212128, 79, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Fire)),
+        new GymPokemon('Floatzel', 9212128, 79, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Water)),
+        new GymPokemon('Heracross', 9498219, 81),
+        new GymPokemon('Snorlax', 9498219, 83),
+        new GymPokemon('Infernape', 10184837, 85, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Grass)),
+        new GymPokemon('Empoleon', 10184837, 85, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Fire)),
+        new GymPokemon('Torterra', 10184837, 85, new StarterRequirement(GameConstants.Region.sinnoh, GameConstants.Starter.Water)),
+    ],
+    '...! It\'s all right, though. Keep getting tougher. The more you do, the tougher my Pokémon and I get, too. There\'s no end to Pokémon. That\'s what I\'m saying!',
+    [
+        new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion),
+        new RouteKillRequirement(10, GameConstants.Region.sinnoh, 225),
+    ],
+    [new NullRequirement],
+    {
+        displayName: 'Pokémon Trainer Barry',
+        imageName: 'Barry',
+        rewardFunction: () =>
+            Notifier.notify({message: 'Congratulations on beating Barry at his best! Come back to fight him again at any time.'}),
+    }
+);
 TemporaryBattleList.Zero = new TemporaryBattle(
     'Zero',
     [
@@ -475,12 +1052,44 @@ TemporaryBattleList.Zero = new TemporaryBattle(
         new GymPokemon('Magnezone', 11420000, 75),
     ],
     'Argh! I can\'t believe I lost to someone like you! You can keep the key for now, but I\'ll get my revenge one day.',
-    [new QuestLineStepCompletedRequirement('Zero\'s Ambition', 12)],
-    undefined,
-    {imageName: 'Zero'}
+    [new QuestLineStepCompletedRequirement('Zero\'s Ambition', 12)]
 );
 
-// Unova Temporary Battles
+//Unova Temporary Battles
+TemporaryBattleList['Hugh 1'] = new TemporaryBattle(
+    'Hugh 1',
+    [
+        new GymPokemon('Tepig', 7269010, 5, new StarterRequirement(GameConstants.Region.unova, GameConstants.Starter.Grass)),
+        new GymPokemon('Oshawott', 7269010, 5, new StarterRequirement(GameConstants.Region.unova, GameConstants.Starter.Fire)),
+        new GymPokemon('Snivy', 7269010, 5, new StarterRequirement(GameConstants.Region.unova, GameConstants.Starter.Water)),
+    ],
+    'I couldn\'t achieve victory for my partner... I won\'t let myself forget this frustration!',
+    [new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Hugh',
+        returnTown: 'Aspertia City',
+        imageName: 'Hugh',
+    }
+);
+TemporaryBattleList['Hugh 2'] = new TemporaryBattle(
+    'Hugh 2',
+    [
+        new GymPokemon('Tepig', 11630416, 8, new StarterRequirement(GameConstants.Region.unova, GameConstants.Starter.Grass)),
+        new GymPokemon('Oshawott', 11630416, 8, new StarterRequirement(GameConstants.Region.unova, GameConstants.Starter.Fire)),
+        new GymPokemon('Snivy', 11630416, 8, new StarterRequirement(GameConstants.Region.unova, GameConstants.Starter.Water)),
+    ],
+    'It can\'t be! How could I have lost? I need to apologize to my partner...',
+    [
+        new RouteKillRequirement(10, GameConstants.Region.unova, 20),
+        new TemporaryBattleRequirement('Hugh 1'),
+    ],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Hugh',
+        imageName: 'Hugh',
+    }
+);
 TemporaryBattleList['Team Plasma Grunt 1'] = new TemporaryBattle(
     'Team Plasma Grunt 1',
     [new GymPokemon('Patrat', 5492150, 14)],
@@ -490,6 +1099,24 @@ TemporaryBattleList['Team Plasma Grunt 1'] = new TemporaryBattle(
     {
         displayName: 'Team Plasma Grunt',
         imageName: '../trainers/Team Plasma Grunt (male)',
+    }
+);
+TemporaryBattleList['Colress 1'] = new TemporaryBattle(
+    'Colress 1',
+    [
+        new GymPokemon('Magnemite', 15852768, 21),
+        new GymPokemon('Klink', 16843566, 23),
+    ],
+    'Splendid! You are quite the Trainer!',
+    [
+        new RouteKillRequirement(10, GameConstants.Region.unova, 4),
+        new GymBadgeRequirement(BadgeEnums.Insect),
+    ],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Colress',
+        returnTown: 'Nimbasa City',
+        imageName: '../trainers/Team Plasma (colress)',
     }
 );
 TemporaryBattleList['Team Plasma Grunt 2'] = new TemporaryBattle(
@@ -520,6 +1147,58 @@ TemporaryBattleList['Team Plasma Grunt 3'] = new TemporaryBattle(
     {
         displayName: 'Team Plasma Grunt',
         imageName: '../trainers/Team Plasma Grunt (female)',
+    }
+);
+TemporaryBattleList['Hugh 3'] = new TemporaryBattle(
+    'Hugh 3',
+    [
+        new GymPokemon('Pignite', 13864044, 25, new StarterRequirement(GameConstants.Region.unova, GameConstants.Starter.Grass)),
+        new GymPokemon('Dewott', 13864044, 25, new StarterRequirement(GameConstants.Region.unova, GameConstants.Starter.Fire)),
+        new GymPokemon('Servine', 13864044, 25, new StarterRequirement(GameConstants.Region.unova, GameConstants.Starter.Water)),
+        new GymPokemon('Simipour', 13456278, 25, new StarterRequirement(GameConstants.Region.unova, GameConstants.Starter.Grass)),
+        new GymPokemon('Simisage', 13456278, 25, new StarterRequirement(GameConstants.Region.unova, GameConstants.Starter.Fire)),
+        new GymPokemon('Tranquill', 13456278, 25),
+        new GymPokemon('Simisear', 13456278, 25, new StarterRequirement(GameConstants.Region.unova, GameConstants.Starter.Water)),
+    ],
+    'Man! I lost... You\'ve become way too tough! But, I\'m gonna get stronger, too!',
+    [new GymBadgeRequirement(BadgeEnums.Quake)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Hugh',
+        returnTown: 'Driftveil City',
+        imageName: 'Hugh',
+    }
+);
+TemporaryBattleList.Cheren = new TemporaryBattle(
+    'Cheren',
+    [
+        new GymPokemon('Stoutland', 14251644, 25),
+        new GymPokemon('Cinccino', 13832478, 25),
+        new GymPokemon('Watchog', 13832478, 25),
+    ],
+    'Fantastic! You and your Pokémon have grown much stronger!',
+    [new TemporaryBattleRequirement('Hugh 3')],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Cheren',
+        returnTown: 'Driftveil City',
+        imageName: '../gymLeaders/Cheren',
+    }
+);
+TemporaryBattleList['Colress 2'] = new TemporaryBattle(
+    'Colress 2',
+    [
+        new GymPokemon('Magneton', 14768444, 25),
+        new GymPokemon('Elgyem', 14334078, 25),
+        new GymPokemon('Klink', 14334078, 25),
+    ],
+    'Well done! I learned much from this battle!',
+    [new TemporaryBattleRequirement('Cheren')],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Colress',
+        returnTown: 'Driftveil',
+        imageName: '../trainers/Team Plasma (colress)',
     }
 );
 TemporaryBattleList['Team Plasma Grunt 4'] = new TemporaryBattle(
@@ -574,6 +1253,26 @@ TemporaryBattleList['Team Plasma Grunts 2'] = new TemporaryBattle(
     {
         displayName: 'Team Plasma Grunts',
         imageName: 'Team Plasma Grunts (male)',
+    }
+);
+TemporaryBattleList['Hugh 4'] = new TemporaryBattle(
+    'Hugh 4',
+    [
+        new GymPokemon('Unfezant', 16756278, 39),
+        new GymPokemon('Simipour', 16756278, 39, new StarterRequirement(GameConstants.Region.unova, GameConstants.Starter.Grass)),
+        new GymPokemon('Simisage', 16756278, 39, new StarterRequirement(GameConstants.Region.unova, GameConstants.Starter.Fire)),
+        new GymPokemon('Simisear', 16756278, 39, new StarterRequirement(GameConstants.Region.unova, GameConstants.Starter.Water)),
+        new GymPokemon('Emboar', 17264044, 41, new StarterRequirement(GameConstants.Region.unova, GameConstants.Starter.Grass)),
+        new GymPokemon('Samurott', 17264044, 41, new StarterRequirement(GameConstants.Region.unova, GameConstants.Starter.Fire)),
+        new GymPokemon('Serperior', 17264044, 41, new StarterRequirement(GameConstants.Region.unova, GameConstants.Starter.Water)),
+    ],
+    'I couldn\'t even draw out my team\'s real strength... How pathetic!',
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Reversal Mountain'))],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Hugh',
+        returnTown: 'Undella Town',
+        imageName: 'Hugh',
     }
 );
 TemporaryBattleList['Team Plasma Grunt 6'] = new TemporaryBattle(
@@ -686,8 +1385,8 @@ TemporaryBattleList['Plasma Shadow 1'] = new TemporaryBattle(
         imageName: 'Plasma Shadow',
     }
 );
-TemporaryBattleList.Colress = new TemporaryBattle(
-    'Colress',
+TemporaryBattleList['Colress 3'] = new TemporaryBattle(
+    'Colress 3',
     [
         new GymPokemon('Magneton', 13557307, 50),
         new GymPokemon('Metang', 13557307, 50),
@@ -712,7 +1411,7 @@ TemporaryBattleList['Plasma Shadow 2'] = new TemporaryBattle(
         new GymPokemon('Absol', 28025488, 51),
     ],
     'It doesn\'t bother us a bit if the stolen Pokémon cry or beg.',
-    [new TemporaryBattleRequirement('Colress')],
+    [new TemporaryBattleRequirement('Colress 3')],
     undefined,
     {
         displayName: 'Plasma Shadow',
@@ -727,7 +1426,7 @@ TemporaryBattleList['Plasma Shadow 3'] = new TemporaryBattle(
         new GymPokemon('Banette', 28025488, 51),
     ],
     'It doesn\'t bother us a bit if we have to use another Pokémon after one is defeated.',
-    [new TemporaryBattleRequirement('Colress')],
+    [new TemporaryBattleRequirement('Colress 3')],
     undefined,
     {
         displayName: 'Plasma Shadow',
@@ -742,7 +1441,7 @@ TemporaryBattleList['Plasma Shadow 4'] = new TemporaryBattle(
         new GymPokemon('Accelgor', 28025488, 51),
     ],
     'It doesn\'t bother us a bit if Pokémon win or lose.',
-    [new TemporaryBattleRequirement('Colress')],
+    [new TemporaryBattleRequirement('Colress 3')],
     undefined,
     {
         displayName: 'Plasma Shadow',
@@ -786,6 +1485,74 @@ TemporaryBattleList['Ghetsis 2'] = new TemporaryBattle(
         imageName: 'Ghetsis',
     }
 );
+TemporaryBattleList['Hugh 5'] = new TemporaryBattle(
+    'Hugh 5',
+    [
+        new GymPokemon('Unfezant', 23557462, 55),
+        new GymPokemon('Simipour', 23086313, 55, new StarterRequirement(GameConstants.Region.unova, GameConstants.Starter.Grass)),
+        new GymPokemon('Simisage', 23086313, 55, new StarterRequirement(GameConstants.Region.unova, GameConstants.Starter.Fire)),
+        new GymPokemon('Simisear', 23086313, 55, new StarterRequirement(GameConstants.Region.unova, GameConstants.Starter.Water)),
+        new GymPokemon('Bouffalant', 23557462, 55),
+        new GymPokemon('Emboar', 24217071, 57, new StarterRequirement(GameConstants.Region.unova, GameConstants.Starter.Grass)),
+        new GymPokemon('Samurott', 24217071, 57, new StarterRequirement(GameConstants.Region.unova, GameConstants.Starter.Fire)),
+        new GymPokemon('Serperior', 24217071, 57, new StarterRequirement(GameConstants.Region.unova, GameConstants.Starter.Water)),
+    ],
+    '...Phew! You\'re really something! Thanks to you, I accomplished what I set out to do during my journey! I think you\'re really amazing! So become the Champion! Get the proof that you\'re a Trainer your Pokémon can be proud of! See you!',
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Unova'))],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Hugh',
+        returnTown: 'Pokémon League Unova',
+        imageName: 'Hugh',
+    }
+);
+TemporaryBattleList['Hugh 6'] = new TemporaryBattle(
+    'Hugh 6',
+    [
+        new GymPokemon('Unfezant', 31270484, 62),
+        new GymPokemon('Simipour', 30507789, 62, new StarterRequirement(GameConstants.Region.unova, GameConstants.Starter.Grass)),
+        new GymPokemon('Simisage', 30507789, 62, new StarterRequirement(GameConstants.Region.unova, GameConstants.Starter.Fire)),
+        new GymPokemon('Simisear', 30507789, 62, new StarterRequirement(GameConstants.Region.unova, GameConstants.Starter.Water)),
+        new GymPokemon('Bouffalant', 31270484, 62),
+        new GymPokemon('Flygon', 30507789, 62),
+        new GymPokemon('Eelektross', 30507789, 62),
+        new GymPokemon('Emboar', 32605200, 64, new StarterRequirement(GameConstants.Region.unova, GameConstants.Starter.Grass)),
+        new GymPokemon('Samurott', 32605200, 64, new StarterRequirement(GameConstants.Region.unova, GameConstants.Starter.Fire)),
+        new GymPokemon('Serperior', 32605200, 64, new StarterRequirement(GameConstants.Region.unova, GameConstants.Starter.Water)),
+    ],
+    'This bitter...yet refreshing feeling.',
+    [new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Hugh',
+        returnTown: 'Undella Town',
+        imageName: 'Hugh',
+    }
+);
+TemporaryBattleList['Hugh 7'] = new TemporaryBattle(
+    'Hugh 7',
+    [
+        new GymPokemon('Unfezant', 35809748, 65),
+        new GymPokemon('Simipour', 34936339, 65, new StarterRequirement(GameConstants.Region.unova, GameConstants.Starter.Grass)),
+        new GymPokemon('Simisage', 34936339, 65, new StarterRequirement(GameConstants.Region.unova, GameConstants.Starter.Fire)),
+        new GymPokemon('Simisear', 34936339, 65, new StarterRequirement(GameConstants.Region.unova, GameConstants.Starter.Water)),
+        new GymPokemon('Bouffalant', 35809748, 65),
+        new GymPokemon('Flygon', 34936339, 65),
+        new GymPokemon('Eelektross', 34936339, 65),
+        new GymPokemon('Emboar', 37338212, 67, new StarterRequirement(GameConstants.Region.unova, GameConstants.Starter.Grass)),
+        new GymPokemon('Samurott', 37338212, 67, new StarterRequirement(GameConstants.Region.unova, GameConstants.Starter.Fire)),
+        new GymPokemon('Serperior', 37338212, 67, new StarterRequirement(GameConstants.Region.unova, GameConstants.Starter.Water)),
+    ],
+    'Just as I\'d expected! You are really drawing forth your Pokémon\'s power!... I suppose that\'s it. If winning in battles is strength, then believing that your Pokémon will come back and waiting for its return is also strength. Doing what you think is right no matter what anyone else says, like these guys do, is strength, too.',
+    [new TemporaryBattleRequirement('Hugh 6')],
+    [new NullRequirement],
+    {
+        displayName: 'Pokémon Trainer Hugh',
+        imageName: 'Hugh',
+        rewardFunction: () =>
+            Notifier.notify({message: 'Congratulations on beating Hugh at his best! Come back to fight him again at any time.'}),
+    }
+);
 TemporaryBattleList.DreamResearcher = new TemporaryBattle(
     'Dream Researcher',
     [new GymPokemon('Mega Audino', 125000000, 32)],
@@ -798,7 +1565,83 @@ TemporaryBattleList.DreamResearcher = new TemporaryBattle(
     }
 );
 
-// Kalos Temporary Battles
+//Kalos Temporary Battles
+TemporaryBattleList['Shauna 1'] = new TemporaryBattle(
+    'Shauna 1',
+    [
+        new GymPokemon('Froakie', 24906504, 5, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Grass)),
+        new GymPokemon('Chespin', 24906504, 5, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Fire)),
+        new GymPokemon('Fennekin', 24906504, 5, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Water)),
+    ],
+    'Hey! I wasn\'t done watching my cute Li\'l Pokémon yet!',
+    [new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Shauna',
+        returnTown: 'Aquacorde Town',
+        imageName: 'Shauna',
+    }
+);
+TemporaryBattleList['Sycamore 1'] = new TemporaryBattle(
+    'Sycamore 1',
+    [
+        new GymPokemon('Bulbasaur', 17568392, 10),
+        new GymPokemon('Charmander', 17568392, 10),
+        new GymPokemon('Squirtle', 17568392, 10),
+    ],
+    'Ha ha! You\'re too much for me! You\'re really something, aren\'t you?',
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 4)],
+    undefined,
+    {
+        displayName: 'Pokémon Professor Sycamore',
+        imageName: 'Sycamore',
+    }
+);
+TemporaryBattleList['Tierno 1'] = new TemporaryBattle(
+    'Tierno 1',
+    [new GymPokemon('Corphish', 40132328, 12)],
+    'That was some nice footwork!',
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 5)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Tierno',
+        returnTown: 'Camphrier Town',
+        imageName: 'Tierno',
+    }
+);
+TemporaryBattleList['Trevor & Tierno'] = new TemporaryBattle(
+    'Trevor & Tierno',
+    [
+        new GymPokemon('Pikachu', 23154377, 14),
+        new GymPokemon('Corphish', 23856025, 16),
+        new GymPokemon('Flabébé (Orange)', 23154377, 14),
+    ],
+    'So you can\'t learn everything just from the Pokédex... I see!',
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 7)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Trevor & Pokémon Trainer Tierno',
+        returnTown: 'Camphrier Town',
+    }
+);
+TemporaryBattleList['Calem 1'] = new TemporaryBattle(
+    'Calem 1',
+    [
+        new GymPokemon('Meowstic', 40271251, 28),
+        new GymPokemon('Absol', 40271251, 28),
+        new GymPokemon('Braixen', 41888812, 30, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Grass)),
+        new GymPokemon('Frogadier', 41888812, 30, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Fire)),
+        new GymPokemon('Quilladin', 41888812, 30, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Water)),
+    ],
+    'Your bonds with your Pokémon are really strong. Although, I don\'t like losing much...',
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Reflection Cave'))],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Calem',
+        returnTown: 'Shalour City',
+        imageName: 'Calem',
+    }
+);
 TemporaryBattleList.Korrina = new TemporaryBattle(
     'Korrina',
     [new GymPokemon('Mega Lucario', 135000000, 32)],
@@ -913,6 +1756,149 @@ TemporaryBattleList['Millis and Argus Steel'] = new TemporaryBattle(
     'Our plans are ruined! Retreat!',
     [new QuestLineStepCompletedRequirement('Princess Diancie', 3)]
 );
+TemporaryBattleList['Calem 2'] = new TemporaryBattle(
+    'Calem 2',
+    [
+        new GymPokemon('Meowstic', 52417332, 31),
+        new GymPokemon('Absol', 52417332, 31),
+        new GymPokemon('Braixen', 54231360, 33, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Grass)),
+        new GymPokemon('Frogadier', 54231360, 33, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Fire)),
+        new GymPokemon('Quilladin', 54231360, 33, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Water)),
+    ],
+    'Oof. I\'d kind of forgotten how strong you are.',
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 12)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Calem',
+        returnTown: 'Coumarine City',
+        imageName: 'Calem',
+    }
+);
+TemporaryBattleList['Calem 3'] = new TemporaryBattle(
+    'Calem 3',
+    [
+        new GymPokemon('Meowstic', 65491998, 35),
+        new GymPokemon('Absol', 65491998, 35),
+        new GymPokemon('Delphox', 67476604, 37, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Grass)),
+        new GymPokemon('Greninja', 67476604, 37, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Fire)),
+        new GymPokemon('Chesnaught', 67476604, 37, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Water)),
+    ],
+    'Battling with you is fun, but losing all the time doesn\'t really make me look all that good.',
+    [new GymBadgeRequirement(BadgeEnums.Voltage)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Calem',
+        returnTown: 'Lumiose City',
+        imageName: 'Calem',
+    }
+);
+TemporaryBattleList['Calem 4'] = new TemporaryBattle(
+    'Calem 4',
+    [
+        new GymPokemon('Meowstic', 60349527, 44),
+        new GymPokemon('Absol', 60349527, 44),
+        new GymPokemon('Jolteon', 61391150, 44, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Grass)),
+        new GymPokemon('Flareon', 61391150, 44, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Fire)),
+        new GymPokemon('Vaporeon', 61391150, 44, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Water)),
+        new GymPokemon('Delphox', 63846796, 46, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Grass)),
+        new GymPokemon('Greninja', 63846796, 46, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Fire)),
+        new GymPokemon('Chesnaught', 63846796, 46, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Water)),
+    ],
+    'Why am I still playing catch-up to you?!',
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 17)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Calem',
+        returnTown: 'Anistar City',
+        imageName: 'Calem',
+    }
+);
+TemporaryBattleList['Sycamore 2'] = new TemporaryBattle(
+    'Sycamore 2',
+    [
+        new GymPokemon('Venusaur', 88799088, 50),
+        new GymPokemon('Charizard', 88799088, 50),
+        new GymPokemon('Blastoise', 88799088, 50),
+    ],
+    'You are really something! You and your Pokémon have developed strong bonds by spending time together and by caring about one another. That\'s why you and your Pokémon are so strong.',
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 18)],
+    undefined,
+    {
+        displayName: 'Pokémon Professor Sycamore',
+        imageName: 'Sycamore',
+    }
+);
+TemporaryBattleList['Shauna 2'] = new TemporaryBattle(
+    'Shauna 2',
+    [
+        new GymPokemon('Delcatty', 91718405, 49),
+        new GymPokemon('Goodra', 91718405, 49),
+        new GymPokemon('Greninja', 94497751, 51, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Grass)),
+        new GymPokemon('Chesnaught', 94497751, 51, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Fire)),
+        new GymPokemon('Delphox', 94497751, 51, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Water)),
+    ],
+    'Battles with friends are really, really exciting!',
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 19)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Shauna',
+        returnTown: 'Couriway Town',
+        imageName: 'Shauna',
+    }
+);
+TemporaryBattleList['Tierno 2'] = new TemporaryBattle(
+    'Tierno 2',
+    [
+        new GymPokemon('Talonflame', 91601632, 48),
+        new GymPokemon('Roserade', 91718405, 49),
+        new GymPokemon('Crawdaunt', 94618062, 52),
+    ],
+    'It\'s weird, but… I don\'t get that down when I lose to you.',
+    [new TemporaryBattleRequirement('Shauna 2')],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Tierno',
+        returnTown: 'Couriway Town',
+        imageName: 'Tierno',
+    }
+);
+TemporaryBattleList.Trevor = new TemporaryBattle(
+    'Trevor',
+    [
+        new GymPokemon('Raichu', 91718405, 49),
+        new GymPokemon('Aerodactyl', 91718405, 49),
+        new GymPokemon('Florges (Orange)', 94858684, 51),
+    ],
+    'There is still so much I don\'t know. Do I just not have what it takes?',
+    [new TemporaryBattleRequirement('Tierno 2')],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Trevor',
+        returnTown: 'Couriway Town',
+    }
+);
+TemporaryBattleList['Calem 5'] = new TemporaryBattle(
+    'Calem 5',
+    [
+        new GymPokemon('Meowstic', 67294391, 57),
+        new GymPokemon('Jolteon', 67294391, 57, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Grass)),
+        new GymPokemon('Flareon', 67294391, 57, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Fire)),
+        new GymPokemon('Vaporeon', 67294391, 57, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Water)),
+        new GymPokemon('Altaria', 67294391, 58),
+        new GymPokemon('Absol', 71149798, 59),
+        new GymPokemon('Delphox', 76407173, 61, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Grass)),
+        new GymPokemon('Greninja', 76407173, 61, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Fire)),
+        new GymPokemon('Chesnaught', 76407173, 61, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Water)),
+    ],
+    'I\'m still no match for you... You know, it\'s because I met you that I was able to get this far... But our journey\'s just getting started. Who knows what heights we\'ll reach!',
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Kalos'))],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Calem',
+        returnTown: 'Pokémon League Kalos',
+        imageName: 'Calem',
+    }
+);
 TemporaryBattleList.AZ = new TemporaryBattle(
     'AZ',
     [
@@ -924,6 +1910,7 @@ TemporaryBattleList.AZ = new TemporaryBattle(
     [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
     undefined,
     {
+        displayName: 'Pokémon Trainer AZ',
         firstTimeRewardFunction: () => {
             App.game.party.gainPokemonById(670.05);
         },
@@ -1065,11 +2052,175 @@ TemporaryBattleList['Ash Ketchum Pinkan'] = new TemporaryBattle(
         },
     }
 );
+TemporaryBattleList['Calem 6'] = new TemporaryBattle(
+    'Calem 6',
+    [
+        new GymPokemon('Meowstic', 94468205, 66),
+        new GymPokemon('Clefable', 94468205, 68),
+        new GymPokemon('Jolteon', 99137044, 66, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Grass)),
+        new GymPokemon('Flareon', 99137044, 66, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Fire)),
+        new GymPokemon('Vaporeon', 99137044, 66, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Water)),
+        new GymPokemon('Altaria', 94468205, 67),
+        new GymPokemon('Delphox', 105685546, 70, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Grass)),
+        new GymPokemon('Greninja', 105685546, 70, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Fire)),
+        new GymPokemon('Chesnaught', 105685546, 70, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Water)),
+        new GymPokemon('Mega Absol', 118054939, 68),
+    ],
+    'Here, this is for you!</br><img src="assets/images/megaStone/359.png"/></br>That\'s right. It\'s Absolite. I found two of them. After everything we said to Lysandre, it just wouldn\'t be right if I didn\'t share one with you.',
+    [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion), new ObtainedPokemonRequirement('Absol')],
+    [new NullRequirement],
+    {
+        displayName: 'Pokémon Trainer Calem',
+        imageName: 'Calem',
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Absol').giveMegastone(),
+        rewardFunction: () =>
+            Notifier.notify({message: 'Congratulations on beating Calem at his best! Come back to fight him again at any time.'}),
+    }
+);
 
 //Alola Temporary Battles
+TemporaryBattleList['Hau 1'] = new TemporaryBattle(
+    'Hau 1',
+    [
+        new GymPokemon('Popplio', 71131094, 5, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Grass)),
+        new GymPokemon('Rowlet', 71131094, 5, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Fire)),
+        new GymPokemon('Litten', 71131094, 5, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Water)),
+    ],
+    'Whoa! That was awesome! You and your Pokémon were both so cool!',
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 1)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Hau',
+        returnTown: 'Iki Town',
+        imageName: 'Hau',
+    }
+);
+TemporaryBattleList['Hau 2'] = new TemporaryBattle(
+    'Hau 2',
+    [
+        new GymPokemon('Pichu', 75473838, 6),
+        new GymPokemon('Popplio', 81763320, 7, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Grass)),
+        new GymPokemon('Rowlet', 81763320, 7, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Fire)),
+        new GymPokemon('Litten', 81763320, 7, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Water)),
+    ],
+    'Phew... That was awesome! That was a really great battle! I had a blast fighting you!',
+    [new TemporaryBattleRequirement('Hau 1')],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Hau',
+        returnTown: 'Iki Town',
+        imageName: 'Hau',
+    }
+);
+TemporaryBattleList['Hau 3'] = new TemporaryBattle(
+    'Hau 3',
+    [
+        new GymPokemon('Popplio', 98160909, 13, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Grass)),
+        new GymPokemon('Rowlet', 98160909, 13, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Fire)),
+        new GymPokemon('Litten', 98160909, 13, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Water)),
+        new GymPokemon('Noibat', 92470422, 11),
+        new GymPokemon('Pikachu', 93893044, 12),
+    ],
+    'Aww, man! I wanted to show off my Pokémon\'s best side more!',
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Melemele Meadow'))],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Hau',
+        returnTown: 'Melemele Woods',
+        imageName: 'Hau',
+    }
+);
+TemporaryBattleList.Dexio = new TemporaryBattle(
+    'Dexio',
+    [
+        new GymPokemon('Mime Jr.', 184013368, 15),
+        new GymPokemon('Espeon', 195395639, 15),
+    ],
+    'That\'s what I would expect from a Trainer doing the island challenge. I felt the bond between you and your Pokémon!',
+    [new GymBadgeRequirement(BadgeEnums.FightiniumZ)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Dexio',
+    }
+);
+TemporaryBattleList.Sina = new TemporaryBattle(
+    'Sina',
+    [
+        new GymPokemon('Smoochum', 184013368, 15),
+        new GymPokemon('Glaceon', 195395639, 15),
+    ],
+    'I get it... Facing trials helps you grow close to your team. I think that\'s absolutely wonderful!',
+    [new GymBadgeRequirement(BadgeEnums.FightiniumZ)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Sina',
+    }
+);
+TemporaryBattleList['Hau 4'] = new TemporaryBattle(
+    'Hau 4',
+    [
+        new GymPokemon('Brionne', 99628133, 16, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Grass)),
+        new GymPokemon('Dartrix', 99628133, 16, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Fire)),
+        new GymPokemon('Torracat', 99628133, 16, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Water)),
+        new GymPokemon('Pikachu', 95796282, 15),
+        new GymPokemon('Noibat', 93880356, 14),
+        new GymPokemon('Eevee', 93880356, 14),
+    ],
+    'Nice! How\'d you come up with that kind of battle plan? You gotta tell me!',
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 4)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Hau',
+        returnTown: 'Paniola Town',
+        imageName: 'Hau',
+    }
+);
+TemporaryBattleList['Gladion 1'] = new TemporaryBattle(
+    'Gladion 1',
+    [
+        new GymPokemon('Zorua', 127447988, 17),
+        new GymPokemon('Zubat', 127447988, 17),
+        new GymPokemon('Type: Null', 135172109, 18),
+    ],
+    'Hmph... It\'s not like me to slip up like that. I\'ve got to keep fighting stronger opponents. Looks like I\'m still not ready...',
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 5)],
+    undefined,
+    {
+        displayName: 'Team Skull Gladion',
+        returnTown: 'Paniola Town',
+        imageName: 'Gladion',
+    }
+);
+TemporaryBattleList['Battle Royal'] = new TemporaryBattle(
+    'Battle Royal',
+    [
+        new GymPokemon('Type: Null', 132593929, 20),
+        new GymPokemon('Rockruff', 132593929, 20),
+        new GymPokemon('Brionne', 132593929, 20, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Grass)),
+        new GymPokemon('Dartrix', 132593929, 20, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Fire)),
+        new GymPokemon('Torracat', 132593929, 20, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Water)),
+    ],
+    'The battle is over!',
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 6)]
+);
+TemporaryBattleList['Plumeria 1'] = new TemporaryBattle(
+    'Plumeria 1',
+    [
+        new GymPokemon('Golbat', 190972759, 26),
+        new GymPokemon('Salandit', 202785507, 27),
+    ],
+    'Hmmph! You\'re pretty strong. I\'ll give you that. But mess with anyone in Team Skull again, and I\'ll show you how serious I can get.',
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 21)],
+    undefined,
+    {
+        displayName: 'Team Skull Admin Plumeria',
+        returnTown: 'Memorial Hill',
+        imageName: 'Plumeria',
+    }
+);
 TemporaryBattleList['Ultra Wormhole'] = new TemporaryBattle(
     'Ultra Wormhole',
-    [new GymPokemon('???', 264590972, 27)],
+    [new GymPokemon('???', 345252381, 27)],
     '<i>The creature escaped back into the ultra wormhole.</i>',
     [new GymBadgeRequirement(BadgeEnums.RockiumZ)],
     undefined,
@@ -1078,9 +2229,71 @@ TemporaryBattleList['Ultra Wormhole'] = new TemporaryBattle(
         imageName: 'Wormhole',
     }
 );
+TemporaryBattleList['Hau 5'] = new TemporaryBattle(
+    'Hau 5',
+    [
+        new GymPokemon('Brionne', 88240962, 30, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Grass)),
+        new GymPokemon('Dartrix', 88240962, 30, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Fire)),
+        new GymPokemon('Torracat', 88240962, 30, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Water)),
+        new GymPokemon('Flareon', 80032500, 28, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Grass)),
+        new GymPokemon('Vaporeon', 80032500, 28, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Fire)),
+        new GymPokemon('Leafeon', 80032500, 28, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Water)),
+        new GymPokemon('Noibat', 77980385, 28),
+        new GymPokemon('Tauros', 77980385, 28),
+        new GymPokemon('Alolan Raichu', 83521097, 29),
+    ],
+    'Bwah!! I had my breath held that whole battle!',
+    [new TemporaryBattleRequirement('Ultra Wormhole')],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Hau',
+        returnTown: 'Malie City',
+        imageName: 'Hau',
+    }
+);
+TemporaryBattleList['Plumeria 2'] = new TemporaryBattle(
+    'Plumeria 2',
+    [
+        new GymPokemon('Golbat', 200727520, 37),
+        new GymPokemon('Salazzle', 213143655, 38),
+    ],
+    'Hmmph. Guess you are pretty tough. Now I understand why my Grunts waste so much time battling kids. But if you want us to return the Pokémon, then you\'ll have to come to us. Alone. The boss is dying to meet you, hmmph! See you at our base in Po Town!',
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Thrifty Megamart'))],
+    undefined,
+    {
+        displayName: 'Team Skull Admin Plumeria',
+        returnTown: 'Tapu Village',
+        imageName: 'Plumeria',
+    }
+);
+TemporaryBattleList['Gladion 2'] = new TemporaryBattle(
+    'Gladion 2',
+    [
+        new GymPokemon('Golbat', 138153002, 42),
+        new GymPokemon('Zoroark', 138153002, 42),
+        new GymPokemon('Type: Null', 146525911, 43),
+    ],
+    'That was wrong of me... I shouldn\'t have dragged you into a meaningless battle like that...',
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Po Town'))],
+    undefined,
+    {
+        displayName: 'Team Skull Gladion',
+        returnTown: 'Tapu Village',
+        imageName: 'Gladion',
+    }
+);
+TemporaryBattleList.Necrozma = new TemporaryBattle(
+    'Necrozma',
+    [
+        new GymPokemon('Necrozma (Dusk Mane)', 267954010, 50),
+        new GymPokemon('Necrozma (Dawn Wings)', 267954010, 50),
+    ],
+    'Necrozma retreated into the Ultra Wormhole',
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Vast Poni Canyon'))]
+);
 TemporaryBattleList['Ultra Megalopolis'] = new TemporaryBattle(
     'Ultra Megalopolis',
-    [new GymPokemon('Ultra Necrozma', 282601920, 60)],
+    [new GymPokemon('Ultra Necrozma', 536098161, 60)],
     '<i>Necrozma fled.</i>',
     [new GymBadgeRequirement(BadgeEnums.DarkiniumZ)],
     undefined,
@@ -1095,9 +2308,9 @@ TemporaryBattleList['Ultra Megalopolis'] = new TemporaryBattle(
 TemporaryBattleList['Captain Mina'] = new TemporaryBattle(
     'Captain Mina',
     [
-        new GymPokemon('Mawile', 90200640, 51),
-        new GymPokemon('Granbull', 90200640, 51),
-        new GymPokemon('Ribombee', 102200640, 51),
+        new GymPokemon('Mawile', 189973142, 51),
+        new GymPokemon('Granbull', 189973142, 51),
+        new GymPokemon('Ribombee', 198608284, 51),
     ],
     'Woah! I\'m shocked at your strength!',
     [new TemporaryBattleRequirement('Ultra Megalopolis')],
@@ -1107,9 +2320,9 @@ TemporaryBattleList['Captain Mina'] = new TemporaryBattle(
 TemporaryBattleList['Captain Ilima'] = new TemporaryBattle(
     'Captain Ilima',
     [
-        new GymPokemon('Gumshoos', 90200640, 51),
-        new GymPokemon('Smeargle', 90200640, 51),
-        new GymPokemon('Komala', 102200640, 51),
+        new GymPokemon('Gumshoos', 189973142, 51),
+        new GymPokemon('Smeargle', 189973142, 51),
+        new GymPokemon('Komala', 198608284, 51),
     ],
     'Yes! You have emerged victorious!',
     [
@@ -1122,9 +2335,9 @@ TemporaryBattleList['Captain Ilima'] = new TemporaryBattle(
 TemporaryBattleList['Captain Mallow'] = new TemporaryBattle(
     'Captain Mallow',
     [
-        new GymPokemon('Trevenant', 90200640, 51),
-        new GymPokemon('Shiinotic', 90200640, 51),
-        new GymPokemon('Tsareena', 102200640, 51),
+        new GymPokemon('Trevenant', 189973142, 51),
+        new GymPokemon('Shiinotic', 189973142, 51),
+        new GymPokemon('Tsareena', 198608284, 51),
     ],
     'Sure enough, when it comes to you and Pokémon, the quality of the ingredients shines forth!',
     [new TemporaryBattleRequirement('Captain Ilima')],
@@ -1134,9 +2347,9 @@ TemporaryBattleList['Captain Mallow'] = new TemporaryBattle(
 TemporaryBattleList['Captain Lana'] = new TemporaryBattle(
     'Captain Lana',
     [
-        new GymPokemon('Lanturn', 90200640, 51),
-        new GymPokemon('Cloyster', 90200640, 51),
-        new GymPokemon('Araquanid', 102200640, 51),
+        new GymPokemon('Lanturn', 189973142, 51),
+        new GymPokemon('Cloyster', 189973142, 51),
+        new GymPokemon('Araquanid', 198608284, 51),
     ],
     'Well! Once again, you certainly reeled me in.',
     [new TemporaryBattleRequirement('Captain Mallow')],
@@ -1146,9 +2359,9 @@ TemporaryBattleList['Captain Lana'] = new TemporaryBattle(
 TemporaryBattleList['Captain Kiawe'] = new TemporaryBattle(
     'Captain Kiawe',
     [
-        new GymPokemon('Arcanine', 90200640, 51),
-        new GymPokemon('Talonflame', 90200640, 51),
-        new GymPokemon('Alolan Marowak', 102200640, 51),
+        new GymPokemon('Arcanine', 189973142, 51),
+        new GymPokemon('Talonflame', 189973142, 51),
+        new GymPokemon('Alolan Marowak', 198608284, 51),
     ],
     'Not enough dancing!',
     [new TemporaryBattleRequirement('Captain Lana')],
@@ -1158,9 +2371,9 @@ TemporaryBattleList['Captain Kiawe'] = new TemporaryBattle(
 TemporaryBattleList['Captain Sophocles'] = new TemporaryBattle(
     'Captain Sophocles',
     [
-        new GymPokemon('Togedemaru', 90200640, 51),
-        new GymPokemon('Magnezone', 90200640, 51),
-        new GymPokemon('Alolan Golem', 102200640, 51),
+        new GymPokemon('Togedemaru', 189973142, 51),
+        new GymPokemon('Magnezone', 189973142, 51),
+        new GymPokemon('Alolan Golem', 198608284, 51),
     ],
     'I couldn\'t get it done. Don\'t worry about it, my precious Pokémon...',
     [new TemporaryBattleRequirement('Captain Kiawe')],
@@ -1172,12 +2385,31 @@ TemporaryBattleList['Kahuna Nanu'] = new TemporaryBattle(
     [
         new GymPokemon('Sableye', 90200640, 51),
         new GymPokemon('Absol', 90200640, 51),
-        new GymPokemon('Alolan Persian', 102200640, 51),
+        new GymPokemon('Alolan Persian', 198608284, 51),
     ],
     '...',
     [new TemporaryBattleRequirement('Captain Sophocles')],
     undefined,
     {imageName: '../gymLeaders/Nanu'}
+);
+TemporaryBattleList['Gladion 3'] = new TemporaryBattle(
+    'Gladion 3',
+    [
+        new GymPokemon('Crobat', 190138197, 53),
+        new GymPokemon('Zoroark', 190138197, 53),
+        new GymPokemon('Lucario', 190138197, 53),
+        new GymPokemon('Silvally (Fire)', 209152017, 55, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Grass)),
+        new GymPokemon('Silvally (Water)', 209152017, 55, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Fire)),
+        new GymPokemon('Silvally (Grass)', 209152017, 55, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Water)),
+    ],
+    'You\'ve got good Pokémon. I know what kind of Trainer you are now. And what kind of journey you\'ve been through.',
+    [new GymBadgeRequirement(BadgeEnums.GroundiumZ)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer Gladion',
+        returnTown: 'Tapu Village',
+        imageName: 'Gladion',
+    }
 );
 TemporaryBattleList.Anabel = new TemporaryBattle(
     'Anabel',
@@ -1405,12 +2637,13 @@ TemporaryBattleList['Team Rainbow Leader Giovanni'] = new TemporaryBattle(
 );
 
 //Galar Temporary Battles
-//TODO: Have Hop's starter depend on the players Galar starter
 TemporaryBattleList['Hop 1'] = new TemporaryBattle(
     'Hop 1',
     [
         new GymPokemon('Wooloo', 96928085, 3),
-        new GymPokemon('Sobble', 105005426, 5),
+        new GymPokemon('Sobble', 105005426, 5, new StarterRequirement(GameConstants.Region.galar, GameConstants.Starter.Grass)),
+        new GymPokemon('Grookey', 105005426, 5, new StarterRequirement(GameConstants.Region.galar, GameConstants.Starter.Fire)),
+        new GymPokemon('Scorbunny', 105005426, 5, new StarterRequirement(GameConstants.Region.galar, GameConstants.Starter.Water)),
     ],
     'Well, that was a shock! Guess I know now why Lee thought he should give you a Pokémon, too...',
     [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
@@ -1439,7 +2672,9 @@ TemporaryBattleList['Hop 2'] = new TemporaryBattle(
     [
         new GymPokemon('Wooloo', 88822988, 6),
         new GymPokemon('Rookidee', 88822988, 5),
-        new GymPokemon('Sobble', 91598706, 8),
+        new GymPokemon('Sobble', 91598706, 8, new StarterRequirement(GameConstants.Region.galar, GameConstants.Starter.Grass)),
+        new GymPokemon('Grookey', 91598706, 8, new StarterRequirement(GameConstants.Region.galar, GameConstants.Starter.Fire)),
+        new GymPokemon('Scorbunny', 91598706, 8, new StarterRequirement(GameConstants.Region.galar, GameConstants.Starter.Water)),
     ],
     'And I even got my Pokéball throw perfect too!',
     [new RouteKillRequirement(10, GameConstants.Region.galar, 2)],
@@ -1455,7 +2690,9 @@ TemporaryBattleList['Hop 3'] = new TemporaryBattle(
     [
         new GymPokemon('Wooloo', 102249719, 11),
         new GymPokemon('Rookidee', 102249719, 12),
-        new GymPokemon('Sobble', 105348195, 14),
+        new GymPokemon('Sobble', 105348195, 14, new StarterRequirement(GameConstants.Region.galar, GameConstants.Starter.Grass)),
+        new GymPokemon('Grookey', 105348195, 14, new StarterRequirement(GameConstants.Region.galar, GameConstants.Starter.Fire)),
+        new GymPokemon('Scorbunny', 105348195, 14, new StarterRequirement(GameConstants.Region.galar, GameConstants.Starter.Water)),
     ],
     'Was that really good training? Looks like I\'d better keep my guard up!',
     [new RouteKillRequirement(10, GameConstants.Region.galar, 6)],
@@ -1486,7 +2723,9 @@ TemporaryBattleList['Hop 4'] = new TemporaryBattle(
     [
         new GymPokemon('Wooloo', 145167441, 18),
         new GymPokemon('Corvisquire', 145167441, 19),
-        new GymPokemon('Drizzile', 149566454, 21),
+        new GymPokemon('Drizzile', 149566454, 21, new StarterRequirement(GameConstants.Region.galar, GameConstants.Starter.Grass)),
+        new GymPokemon('Thwackey', 149566454, 21, new StarterRequirement(GameConstants.Region.galar, GameConstants.Starter.Fire)),
+        new GymPokemon('Raboot', 149566454, 21, new StarterRequirement(GameConstants.Region.galar, GameConstants.Starter.Water)),
     ],
     'We both got ourselves the same Grass Badge, so how come you\'re so much stronger?',
     [new RouteKillRequirement(10, GameConstants.Region.galar, 14)],
@@ -1534,7 +2773,9 @@ TemporaryBattleList['Hop 5'] = new TemporaryBattle(
         new GymPokemon('Cramorant', 184350136, 28),
         new GymPokemon('Toxel', 184350136, 29),
         new GymPokemon('Silicobra', 184350136, 30),
-        new GymPokemon('Drizzile', 190296915, 33),
+        new GymPokemon('Drizzile', 190296915, 33, new StarterRequirement(GameConstants.Region.galar, GameConstants.Starter.Grass)),
+        new GymPokemon('Thwackey', 190296915, 33, new StarterRequirement(GameConstants.Region.galar, GameConstants.Starter.Fire)),
+        new GymPokemon('Raboot', 190296915, 33, new StarterRequirement(GameConstants.Region.galar, GameConstants.Starter.Water)),
     ],
     'My strategy goes right to pot when I\'ve got all these bad thoughts running through my head...',
     [new RouteKillRequirement(10, GameConstants.Region.galar, 23)],
@@ -1569,7 +2810,9 @@ TemporaryBattleList['Hop 6'] = new TemporaryBattle(
         new GymPokemon('Heatmor', 164138786, 34),
         new GymPokemon('Snorlax', 164138786, 35),
         new GymPokemon('Boltund', 164138786, 35),
-        new GymPokemon('Inteleon', 169087694, 37),
+        new GymPokemon('Inteleon', 169087694, 37, new StarterRequirement(GameConstants.Region.galar, GameConstants.Starter.Grass)),
+        new GymPokemon('Rillaboom', 169087694, 37, new StarterRequirement(GameConstants.Region.galar, GameConstants.Starter.Fire)),
+        new GymPokemon('Cinderace', 169087694, 37, new StarterRequirement(GameConstants.Region.galar, GameConstants.Starter.Water)),
     ],
     'This is rubbish... My team can\'t perform if I can\'t get my own head straight as their Trainer...',
     [new GymBadgeRequirement(BadgeEnums.Galar_Fairy)],
@@ -1587,7 +2830,9 @@ TemporaryBattleList['Hop 7'] = new TemporaryBattle(
         new GymPokemon('Corviknight', 169633690, 40),
         new GymPokemon('Pincurchin', 169633690, 39),
         new GymPokemon('Snorlax', 169633690, 39),
-        new GymPokemon('Inteleon', 174748273, 41),
+        new GymPokemon('Inteleon', 174748273, 41, new StarterRequirement(GameConstants.Region.galar, GameConstants.Starter.Grass)),
+        new GymPokemon('Rillaboom', 174748273, 41, new StarterRequirement(GameConstants.Region.galar, GameConstants.Starter.Fire)),
+        new GymPokemon('Cinderace', 174748273, 41, new StarterRequirement(GameConstants.Region.galar, GameConstants.Starter.Water)),
     ],
     'I still can\'t even beat you, my true rival... But I think I\'m starting to see the light!',
     [
@@ -1653,7 +2898,9 @@ TemporaryBattleList['Hop 8'] = new TemporaryBattle(
         new GymPokemon('Cramorant', 372064692, 58),
         new GymPokemon('Snorlax', 372064692, 58),
         new GymPokemon('Corviknight', 372064692, 58),
-        new GymPokemon('Inteleon', 375642238, 60),
+        new GymPokemon('Inteleon', 375642238, 60, new StarterRequirement(GameConstants.Region.galar, GameConstants.Starter.Grass)),
+        new GymPokemon('Rillaboom', 375642238, 60, new StarterRequirement(GameConstants.Region.galar, GameConstants.Starter.Fire)),
+        new GymPokemon('Cinderace', 375642238, 60, new StarterRequirement(GameConstants.Region.galar, GameConstants.Starter.Water)),
     ],
     'I didn\'t expect there to be such a gap between you and me, mate...',
     [new QuestLineStepCompletedRequirement('Sword and Shield', 0)],
