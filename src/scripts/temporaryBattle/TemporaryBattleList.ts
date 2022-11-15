@@ -551,6 +551,8 @@ TemporaryBattleList['Silver 7'] = new TemporaryBattle(
         displayName: 'Rival Silver',
         returnTown: 'Indigo Plateau Johto',
         imageName: 'Silver',
+        rewardFunction: () =>
+            Notifier.notify({message: 'Congratulations on beating Silver at his best! Come back to fight him again at any time.'}),
     }
 );
 
@@ -1009,6 +1011,7 @@ TemporaryBattleList['Barry 6'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Pokémon Trainer Barry',
+        returnTown: 'Pokémon League Sinnoh',
         imageName: 'Barry',
     }
 );
@@ -1036,8 +1039,9 @@ TemporaryBattleList['Barry 7'] = new TemporaryBattle(
     [new NullRequirement],
     {
         displayName: 'Pokémon Trainer Barry',
-        returnTown: 'Survival Area',
         imageName: 'Barry',
+        rewardFunction: () =>
+            Notifier.notify({message: 'Congratulations on beating Barry at his best! Come back to fight him again at any time.'}),
     }
 );
 
@@ -1534,8 +1538,9 @@ TemporaryBattleList['Hugh 7'] = new TemporaryBattle(
     [new NullRequirement],
     {
         displayName: 'Pokémon Trainer Hugh',
-        returnTown: 'Driftveil City',
         imageName: 'Hugh',
+        rewardFunction: () =>
+            Notifier.notify({message: 'Congratulations on beating Hugh at his best! Come back to fight him again at any time.'}),
     }
 );
 TemporaryBattleList.DreamResearcher = new TemporaryBattle(
@@ -2058,6 +2063,8 @@ TemporaryBattleList['Calem 6'] = new TemporaryBattle(
         displayName: 'Pokémon Trainer Calem',
         imageName: 'Calem',
         firstTimeRewardFunction: () => App.game.party.getPokemonByName('Absol').giveMegastone(),
+        rewardFunction: () =>
+            Notifier.notify({message: 'Congratulations on beating Calem at his best! Come back to fight him again at any time.'}),
     }
 );
 
@@ -2390,7 +2397,7 @@ TemporaryBattleList['Gladion 3'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Pokémon Trainer Gladion',
-        returnTown: 'Mount Lanakila',
+        returnTown: 'Tapu Village',
         imageName: 'Gladion',
     }
 );
