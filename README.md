@@ -18,6 +18,7 @@ You can reach out on discord to discuss your ideas and how to implement them: ht
 - Make sure the build script is a success. We won't test PRs that fail the building script.
 - We won't accept balance PRs, unless it's from a developer or Code Contributor (discord roles).
 - Don't submit any changes within the `/docs` folder.
+- PRs adding new translatable content should link to a PR in the [translation repo](https://github.com/pokeclicker/pokeclicker-translations) adding your new strings. See the Developer instructions on that repo for more info.
 
 ## Editor/IDE setup
 
@@ -32,7 +33,7 @@ First make sure you have git and npm available as command-line utilities (so you
 
 Open a command line interface in the directory that contains this README file, and use the following command to install PokéClicker's other dependencies locally:
 ```cmd
-npm clean-install
+npm run clean
 ```
 
 Then finally, run the following command in the command line interface to start a browser running PokéClicker.

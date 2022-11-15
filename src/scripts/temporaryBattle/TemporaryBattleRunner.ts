@@ -23,7 +23,7 @@ class TemporaryBattleRunner {
         Battle.route = 0;
         Battle.catching(!(battle.optionalArgs.isTrainerBattle ?? true));
         TemporaryBattleBattle.battle = battle;
-        TemporaryBattleBattle.totalPokemons(battle.pokemons.length);
+        TemporaryBattleBattle.totalPokemons(battle.getPokemonList().length);
         TemporaryBattleBattle.index(0);
         TemporaryBattleBattle.generateNewEnemy();
         App.game.gameState = GameConstants.GameState.temporaryBattle;

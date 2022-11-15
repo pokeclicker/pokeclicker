@@ -1,13 +1,13 @@
 <div class="row justify-content-center no-gutters" data-bind="if: App.game.gameState === GameConstants.GameState.dungeon">
     <div class="col no-gutters clickable" style="height: 280px; display: block;"
         data-bind="click: function() { DungeonRunner.handleClick() }">
-        <h2 class="pageItemTitle" style="display: block;">
+        <h2 class="pageItemTitle mobileBattleTitle" style="display: block;">
             <knockout data-bind="if: DungeonBattle.enemyPokemon() && DungeonBattle.enemyPokemon().health()">
                 <knockout data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': DungeonBattle.enemyPokemon() } }">Pokémon name</knockout>
                 <!-- ko if: !DungeonBattle.trainer() -->
                 <knockout data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(DungeonBattle.enemyPokemon().id)}}"></knockout>
-                <knockout data-bind="if: RouteHelper.minPokerusCheck(RouteHelper.getAvailablePokemonList(player.route(), player.region, true))">
-                    <img data-bind="attr:{ src: 'assets/images/breeding/pokerus/' + GameConstants.Pokerus[RouteHelper.minPokerus(RouteHelper.getAvailablePokemonList(player.route(), player.region, true))] + '.png'}"
+                <knockout data-bind="if: App.game.party.getPokemonByName(Battle.enemyPokemon().name)?.pokerus > GameConstants.Pokerus.Uninfected">
+                   <img data-bind="attr:{ src: 'assets/images/breeding/pokerus/' + GameConstants.Pokerus[App.game.party.getPokemonByName(Battle.enemyPokemon().name)?.pokerus] + '.png'}"
                   src=""/>
                 </knockout>
                 <!-- /ko -->
@@ -49,10 +49,10 @@
 
         <!-- ko if: (DungeonRunner.fighting() || DungeonBattle.catching)  -->
         <div data-bind="if: DungeonBattle.enemyPokemon">
-            <div style="position:absolute; left:65%;" data-bind="if: DungeonBattle.trainer()">
+            <div class="trainer" data-bind="if: DungeonBattle.trainer()">
                 <img data-bind="attr:{ src: DungeonBattle.trainer().image }" onerror="this.src='assets/images/trainers/Mysterious Trainer.png';"/>
             </div>
-            <div>
+            <div class="dungeon-enemy">
                 <div data-bind="ifnot: DungeonBattle.catching">
                     <knockout data-bind="template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': DungeonBattle.enemyPokemon() } }">Pokémon sprite</knockout>
                 </div>
@@ -65,7 +65,7 @@
                     <knockout data-bind="text: Math.floor(DungeonBattle.catchRateActual()) + '%'">Catch Rate</knockout>
                 </div>
             </div>
-            <div class="progress hitpoints" style="height: 20px;">
+            <div class="progress hitpoints dungeonhitpoints" style="height: 20px;">
                 <div class="progress-bar bg-danger" role="progressbar"
                      data-bind="attr:{ style: 'width:' + DungeonBattle.enemyPokemon().healthPercentage() + '%'}, css: { 'healthbar-boss': DungeonRunner.fightingBoss(), 'bg-danger': !DungeonRunner.fightingBoss()}"
                      aria-valuemin="0" aria-valuemax="100">

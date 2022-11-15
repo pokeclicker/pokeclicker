@@ -51,7 +51,7 @@ class TemporaryBattle extends TownContent {
 
     constructor(
         public name: string,
-        public pokemons: GymPokemon[],
+        private pokemons: GymPokemon[],
         public defeatMessage: string,
         requirements: Requirement[] = [],
         completeRequirements: Requirement[] = undefined,
@@ -65,5 +65,9 @@ class TemporaryBattle extends TownContent {
             optionalArgs.isTrainerBattle = true;
         }
         this.completeRequirements = completeRequirements;
+    }
+
+    public getPokemonList() {
+        return this.pokemons.filter((p) => p.requirements.every((r => r.isCompleted())));
     }
 }

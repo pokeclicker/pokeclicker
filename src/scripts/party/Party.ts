@@ -52,14 +52,19 @@ class Party implements Feature {
         PokemonHelper.incrementPokemonStatistics(pokemon.id, GameConstants.STATISTIC_CAPTURED, pokemon.shiny, pokemon.gender);
         if (pokemon.shiny) {
             // Add all shiny catches to the log book
-            App.game.logbook.newLog(LogBookTypes.CAUGHT, `You have captured a shiny ${pokemon.name}! ${this.alreadyCaughtPokemon(pokemon.id, true) ? '(duplicate)' : ''}`);
+            App.game.logbook.newLog(
+                LogBookTypes.CAUGHT,
+                this.alreadyCaughtPokemon(pokemon.id, true)
+                    ? createLogContent.capturedShinyDupe({ pokemon: pokemon.name })
+                    : createLogContent.capturedShiny({ pokemon: pokemon.name })
+            );
             // Already caught (shiny)
             if (this.alreadyCaughtPokemon(pokemon.id, true)) {
                 return;
             }
             // Notify if not already caught
             Notifier.notify({
-                message: `✨ You have captured a shiny ${pokemon.name}! ✨`,
+                message: `✨ You have captured a shiny ${pokemon.displayName}! ✨`,
                 type: NotificationConstants.NotificationOption.warning,
                 sound: NotificationConstants.NotificationSound.General.new_catch,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
@@ -79,15 +84,22 @@ class Party implements Feature {
 
         if (!suppressNotification) {
             Notifier.notify({
-                message: `You have captured ${GameHelper.anOrA(pokemon.name)} ${pokemon.name}!`,
+                message: `You have captured ${GameHelper.anOrA(pokemon.name)} ${pokemon.displayName}!`,
                 type: NotificationConstants.NotificationOption.success,
                 sound: NotificationConstants.NotificationSound.General.new_catch,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
             });
         }
 
-        App.game.logbook.newLog(LogBookTypes.CAUGHT, `You have captured ${GameHelper.anOrA(pokemon.name)} ${pokemon.name}!`);
+        App.game.logbook.newLog(
+            LogBookTypes.CAUGHT,
+            createLogContent.captured({ pokemon: pokemon.name })
+        );
         this._caughtPokemon.push(pokemon);
+    }
+
+    public removePokemonByName(name: PokemonNameType) {
+        this._caughtPokemon.remove(p => p.name == name);
     }
 
     public gainExp(exp = 0, level = 1, trainer = false) {
@@ -222,8 +234,12 @@ class Party implements Feature {
 
     calculateClickAttack(useItem = false): number {
         // Base power
-        // Shiny pokemon help with a 50% boost
-        const clickAttack = Math.pow(this.caughtPokemon.length + (this.caughtPokemon.filter(p => p.shiny).length / 2) + 1, 1.4) * (1 + AchievementHandler.achievementBonus());
+        // Shiny pokemon help with a 100% boost
+        // Resistant pokemon give a 100% boost
+        const caught = this.caughtPokemon.length;
+        const shiny = this.caughtPokemon.filter(p => p.shiny).length;
+        const resistant = this.caughtPokemon.filter(p => p.pokerus >= GameConstants.Pokerus.Resistant).length;
+        const clickAttack = Math.pow(caught + shiny + resistant + 1, 1.4) * (1 + AchievementHandler.achievementBonus());
 
         const bonus = this.multiplier.getBonus('clickAttack', useItem);
 

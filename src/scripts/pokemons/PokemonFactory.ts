@@ -40,7 +40,7 @@ class PokemonFactory {
         const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
         if (shiny) {
             Notifier.notify({
-                message: `✨ You encountered a shiny ${name}! ✨`,
+                message: `✨ You encountered a shiny ${PokemonHelper.displayName(name)()}! ✨`,
                 type: NotificationConstants.NotificationOption.warning,
                 sound: NotificationConstants.NotificationSound.General.shiny_long,
                 setting: NotificationConstants.NotificationSetting.General.encountered_shiny,
@@ -57,7 +57,18 @@ class PokemonFactory {
                 sound: NotificationConstants.NotificationSound.General.roaming,
                 setting: NotificationConstants.NotificationSetting.General.encountered_roaming,
             });
-            App.game.logbook.newLog(LogBookTypes.ROAMER, `[${Routes.getRoute(player.region, player.route()).routeName}] You encountered a ${shiny ? 'shiny' : ''} roaming ${name}!`);
+            App.game.logbook.newLog(
+                LogBookTypes.ROAMER,
+                (shiny
+                    ? App.game.party.alreadyCaughtPokemon(id, true)
+                        ? createLogContent.roamerShinyDupe
+                        : createLogContent.roamerShiny
+                    : createLogContent.roamer
+                )({
+                    location: Routes.getRoute(player.region, player.route()).routeName,
+                    pokemon: name,
+                })
+            );
         }
         const ep = GameConstants.BASE_EP_YIELD * (roaming ? GameConstants.ROAMER_EP_MODIFIER : 1);
         const gender = this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
@@ -122,7 +133,7 @@ class PokemonFactory {
      * @returns {any}
      */
     public static generateGymPokemon(gym: Gym, index: number): BattlePokemon {
-        const pokemon = gym.pokemons[index];
+        const pokemon = gym.getPokemonList()[index];
         const basePokemon = PokemonHelper.getPokemonByName(pokemon.name);
 
         const exp: number = basePokemon.exp;
@@ -142,7 +153,7 @@ class PokemonFactory {
         const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_DUNGEON);
         if (shiny) {
             Notifier.notify({
-                message: `✨ You encountered a shiny ${name}! ✨`,
+                message: `✨ You encountered a shiny ${PokemonHelper.displayName(name)()}! ✨`,
                 type: NotificationConstants.NotificationOption.warning,
                 sound: NotificationConstants.NotificationSound.General.shiny_long,
                 setting: NotificationConstants.NotificationSetting.General.encountered_shiny,
@@ -183,7 +194,7 @@ class PokemonFactory {
         const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_DUNGEON);
         if (shiny) {
             Notifier.notify({
-                message: `✨ You encountered a shiny ${name}! ✨`,
+                message: `✨ You encountered a shiny ${PokemonHelper.displayName(name)()}! ✨`,
                 type: NotificationConstants.NotificationOption.warning,
                 sound: NotificationConstants.NotificationSound.General.shiny_long,
                 setting: NotificationConstants.NotificationSetting.General.encountered_shiny,
@@ -199,7 +210,7 @@ class PokemonFactory {
     }
 
     public static generateTemporaryBattlePokemon(battle: TemporaryBattle, index: number): BattlePokemon {
-        const pokemon = battle.pokemons[index];
+        const pokemon = battle.getPokemonList()[index];
         const basePokemon = PokemonHelper.getPokemonByName(pokemon.name);
         const catchRate: number = this.catchRateHelper(basePokemon.catchRate);
 
@@ -274,6 +285,7 @@ class PokemonFactory {
                 break;
             case 'Solar_light':
             case 'Lunar_light':
+            case 'Pure_light':
                 chance = GameConstants.LIGHT_ITEM_CHANCE;
                 break;
             case 'Rusted_Sword':

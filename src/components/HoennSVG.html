@@ -859,7 +859,7 @@
          , x: 19, y: 43
          , width: 6, height: 3
          , databind: "click:function(){MapHelper.moveToTown('Littleroot Town')}, attr:{ class: MapHelper.calculateTownCssClass('Littleroot Town') }"
-         , visible:  "MapHelper.ableToTravel() && player.starter() != GameConstants.Starter.Pikachu"
+         , visible:  "MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.Special"
          , image: "assets/images/map/blimp_empty.png"
          })
     %>
@@ -869,10 +869,39 @@
          , x: 19, y: 43
          , width: 6, height: 3
          , databind: "click:function(){MapHelper.moveToTown('Littleroot Town')}, attr:{ class: MapHelper.calculateTownCssClass('Littleroot Town') }"
-         , visible:  "MapHelper.ableToTravel() && player.starter() == GameConstants.Starter.Pikachu"
+         , visible:  "MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() == GameConstants.Starter.Special"
          , image: "assets/images/map/blimp_pikachu.png"
          })
     %>
+     <%- include('templates/mapOverlay',
+         { name: "Kecleon"
+        , x: 46, y: 3
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Kecleon 1'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Kecleon 1'] && TemporaryBattleList['Kecleon 1'].isVisible()"
+         , image: "assets/images/map/kecleonoverworld.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Kecleon"
+        , x: 41, y: 10
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Kecleon 2'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Kecleon 2'] && TemporaryBattleList['Kecleon 2'].isVisible()"
+         , image: "assets/images/map/kecleoncamooverworld.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Kecleon"
+        , x: 48, y: 8
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Kecleon 3'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Kecleon 3'] && TemporaryBattleList['Kecleon 3'].isVisible()"
+         , image: "assets/images/map/kecleoncamooverworld.png"
+         })
+     %>
 
      <%- include('templates/mapOverlay',
          { name: "Ash Ketchum"
@@ -883,5 +912,4 @@
          , image: "assets/images/map/ashketchumoverworld.png"
          })
      %>
-
 </g>

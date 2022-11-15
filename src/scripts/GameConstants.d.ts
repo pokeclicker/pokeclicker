@@ -244,11 +244,11 @@ namespace GameConstants {
     declare type Environment = keyof typeof Environments;
     declare const EnvironmentCssClass:Record<Environment, string>;
     declare enum Starter {
-        'None' = '',
-        'Bulbasaur',
-        'Charmander',
-        'Squirtle',
-        'Pikachu'
+        None = -1,
+        Grass = 0,
+        Fire = 1,
+        Water = 2,
+        Special = 3,
     }
     declare enum StoneType {
         'None',
@@ -281,9 +281,11 @@ namespace GameConstants {
         'White_DNA',
         'Sachet',
         'Whipped_dream',
+        'Key_stone',
         'Ice_stone',
         'Solar_light',
         'Lunar_light',
+        'Pure_light',
         'Sweet_apple',
         'Tart_apple',
         'Cracked_pot',
@@ -610,6 +612,20 @@ namespace GameConstants {
         IsleofArmor,
         CrownTundra,
     }
+    declare enum FinalSubRegions {
+        Final,
+    }
+
+    declare type SubRegions =
+        | KantoSubRegions
+        | JohtoSubRegions
+        | HoennSubRegions
+        | SinnohSubRegions
+        | UnovaSubRegions
+        | KalosSubRegions
+        | AlolaSubRegions
+        | GalarSubRegions
+        | FinalSubRegions
 
     // Gender Types
     declare enum Genders {

@@ -679,7 +679,7 @@
          , x: 74, y: 45
          , width: 6, height: 3
          , databind: "click:function(){MapHelper.moveToTown('New Bark Town')}, attr:{ class: MapHelper.calculateTownCssClass('New Bark Town') }"
-         , visible:  "MapHelper.ableToTravel() && player.starter() != GameConstants.Starter.Pikachu"
+         , visible:  "MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.Special"
          , image: "assets/images/map/blimp_empty.png"
          })
      %>
@@ -689,7 +689,7 @@
          , x: 74, y: 45
          , width: 6, height: 3
          , databind: "click:function(){MapHelper.moveToTown('New Bark Town')}, attr:{ class: MapHelper.calculateTownCssClass('New Bark Town') }"
-         , visible:  "MapHelper.ableToTravel() && player.starter() == GameConstants.Starter.Pikachu"
+         , visible:  "MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() == GameConstants.Starter.Special"
          , image: "assets/images/map/blimp_pikachu.png"
          })
      %>
@@ -743,5 +743,4 @@
          , image: "assets/images/map/ashketchumoverworld.png"
          })
     %>
-
 </g>

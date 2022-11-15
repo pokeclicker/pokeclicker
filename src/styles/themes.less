@@ -46,6 +46,23 @@
   }
 }
 
+.lux {
+  // Font was too large, covering other ui elements
+  .pageItemFooter {
+    font-size: 12px !important;
+  }
+  .pageItemTitle {
+    font-size: 30px !important;
+  }
+}
+
+.materia {
+  // Fixes button floating away on this theme
+  .stop-auto {
+    position: absolute;
+  }
+}
+
 .minty {
     // Button without color class text is light, but expected to be dark
     .btn:not([class*="btn-"]) {
@@ -83,6 +100,12 @@
 
   .modal-header {
     border-radius: 0px;
+  }
+
+  .pageItemFooter {
+    // Font was not visible on the footer of battle-views
+    color: rgba(0, 0, 0);
+    font-weight: 700;
   }
 }
 

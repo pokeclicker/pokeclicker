@@ -2514,6 +2514,16 @@
             })
         %>
 
+        <!--Aether Foundation Extension-->
+        <%- include('templates/mapOverlay',
+            { x: 9, y: 38
+            , width: 8, height: 5.5
+            , databind: "style: {'pointer-events': 'none'}"
+            , visible:  "App.game.quests.getQuestLine('Defeat Rainbow Rocket').state() == QuestLineState.started"
+            , image: "assets/images/map/rainbowrocketcastle.png"
+            })
+        %>
+
         <!--Aether Foundation-->
         <%- include('templates/mapDungeon',
             { name: "Aether Foundation"
@@ -2543,6 +2553,27 @@
         <!-- PLACES OF INTEREST -->
         <!-- ------------------ -->
 
+        <!--Rainbow Rocket Grunts-->
+        <%- include('templates/mapOverlay',
+            { name: "Rainbow Rocket Grunt"
+            , x: 7, y: 40
+            , width: 4, height: 4
+            , databind: "click: () => TemporaryBattleList['Rainbow Rocket Grunt 1'].protectedOnclick()"
+            , visible: "TemporaryBattleList['Rainbow Rocket Grunt 1'] && TemporaryBattleList['Rainbow Rocket Grunt 1'].isVisible()"
+            , image: "assets/images/map/RainbowGruntF_Overworld.png"
+            })
+        %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Rainbow Rocket Grunt"
+            , x: 15, y: 40
+            , width: 4, height: 4
+            , databind: "click: () => TemporaryBattleList['Rainbow Rocket Grunt 2'].protectedOnclick()"
+            , visible: "TemporaryBattleList['Rainbow Rocket Grunt 2'] && TemporaryBattleList['Rainbow Rocket Grunt 2'].isVisible()"
+            , image: "assets/images/map/RainbowGruntM_Overworld.png"
+            })
+        %>
+
         <!--Tunnel-->
         <%- include('templates/mapPOI',
             { name: "Dividing Peak Tunnel"
@@ -2550,7 +2581,7 @@
             , x: 79, y: 15
             , databind: `attr: { class: MapHelper.accessToRoute(8, GameConstants.Region.alola) ? 'unlockedRoute' : 'lockedRoute' },
                 click: () => {
-                    Notifier.notify({message: 'That sure is a tunnel'});
+                    Notifier.notify({message: 'That sure is a tunnel.'});
                 }`
             })
         %>
@@ -2562,7 +2593,7 @@
             , x: 80, y: 7
             , databind: `attr: { class: MapHelper.accessToRoute(8, GameConstants.Region.alola) ? 'unlockedRoute' : 'lockedRoute' },
                 click: () => {
-                    Notifier.notify({message: 'That sure is a tunnel'});
+                    Notifier.notify({message: 'That sure is a tunnel.'});
                 }`
             })
         %>
@@ -3311,15 +3342,6 @@
             { route: 17, region: 6
             , width: 3, height: 5
             , x: 38, y: 18
-            })
-        %>
-
-        <!--Route 17 Extension-->
-        <%- include('templates/mapRoute',
-            { route: 17, region: 6
-            , width: 4, height: 2
-            , x: 40, y: 16
-            , noText: true
             })
         %>
 
@@ -4789,7 +4811,5 @@
            , image: "assets/images/map/ashketchumoverworld.png"
            })
         %>
-
-
     </g>
 </g>
