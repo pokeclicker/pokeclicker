@@ -1689,7 +1689,7 @@ class Update implements Saveable {
         for (let i = 0; i < rotationlist.length - 1; i++) {
             const rotatingpokemon = saveData.party.caughtPokemon.find(p => p.id === rotationlist[i]);
             // Rotate our ID
-            rotatingpokemon.id = rotationlist[i+1];
+            rotatingpokemon.id = rotationlist[i + 1];
             // Rotate our statistics
             saveData.statistics.pokemonEncountered[rotationlist[i + 1]] = saveData.statistics.pokemonEncountered[rotationlist[i]];
             saveData.statistics.pokemonDefeated[rotationlist[i + 1]] = saveData.statistics.pokemonDefeated[rotationlist[i]];
@@ -1728,7 +1728,7 @@ class Update implements Saveable {
          saveData.statistics.pokemonDefeated[rotationlist[rotationlist.length]] = saveData.statistics.pokemonDefeated[tempIDvalues.statistics[1]];
          saveData.statistics.pokemonCaptured[rotationlist[rotationlist.length]] = saveData.statistics.pokemonCaptured[tempIDvalues.statistics[2]];
          saveData.statistics.pokemonHatched[rotationlist[rotationlist.length]] = saveData.statistics.pokemonHatched[tempIDvalues.statistics[3]];
-         saveData.statistics.shinyPokemonEncountered[rotationlist.length]] = saveData.statistics.shinyPokemonEncountered[tempIDvalues.statistics[4]];
+         saveData.statistics.shinyPokemonEncountered[rotationlist[rotationlist.length]] = saveData.statistics.shinyPokemonEncountered[tempIDvalues.statistics[4]];
          saveData.statistics.shinyPokemonDefeated[rotationlist[rotationlist.length]] = saveData.statistics.shinyPokemonDefeated[tempIDvalues.statistics[5]];
          saveData.statistics.shinyPokemonCaptured[rotationlist[rotationlist.length]] = saveData.statistics.shinyPokemonCaptured[tempIDvalues.statistics[6]];
          saveData.statistics.shinyPokemonHatched[rotationlist[rotationlist.length]] = saveData.statistics.shinyPokemonHatched[tempIDvalues.statistics[7]];
