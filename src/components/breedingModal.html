@@ -58,7 +58,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                 <label>Regions</label><br/>
                                 <div class="dropdown show">
                                     <button type="button" class="text-left custom-select col-12 btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bind="text :
-                                        BreedingFilters.region.value() == ~0 ?
+                                        BreedingFilters.region.value() == (2 << player.highestRegion()) - 1 ?
                                             'All' :
                                             (BreedingFilters.region.value() > 0 && BreedingFilters.region.value() ?
                                                 GameConstants.camelCaseToString(GameConstants.Region[Math.floor(Math.log2(BreedingFilters.region.value()))]) + (BreedingFilters.region.value()
@@ -69,7 +69,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                         Regions
                                     </button>
                                     <div class="border-secondary dropdown-menu col-12">
-                                        <div class="dropdown-item" data-bind="click : function(){ BreedingFilters.region.value(~0); Settings.setSettingByName('breedingRegionFilter', BreedingFilters.region.value()) }">
+                                        <div class="dropdown-item" data-bind="click : function(){ BreedingFilters.region.value((2 << player.highestRegion()) - 1); Settings.setSettingByName('breedingRegionFilter', BreedingFilters.region.value()) }">
                                             All
                                         </div>
                                         <div class="dropdown-divider"></div>
