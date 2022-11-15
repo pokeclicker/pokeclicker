@@ -1651,48 +1651,52 @@ class Update implements Saveable {
     static rotatePokemonIDs = (saveData, rotationlist) => {
         
         // Store values from first ID to not get overwritten
-//         const tempID = {            
-//             const firstpokemonID = saveData.party.caughtPokemon.find(p => p.id === rotationlist[0]);
-//             // If player hasn't caught this mon yet, return.
-//             if (firstpokemonID == undefined) {
-//                 return;
-//             }
-//             // Store our first ID
-//             firstpokemonID.id = rotationlist[0];
-//             if (!saveData.statistics.pokemonHatched) {
-//                 saveData.statistics.pokemonHatched = {};
-//             }
-//             if (!saveData.statistics.shinyPokemonHatched) {
-//                 saveData.statistics.shinyPokemonHatched = {};
-//             }
-//             // Store our first ID statistics
-//             saveData.statistics.pokemonEncountered[rotationlist[0]] || 0;
-//             saveData.statistics.pokemonDefeated[rotationlist[0]] || 0;
-//             saveData.statistics.pokemonCaptured[rotationlist[0]] || 0;
-//             saveData.statistics.pokemonHatched[rotationlist[0]] || 0;
-//             saveData.statistics.shinyPokemonEncountered[rotationlist[0]] || 0;
-//             saveData.statistics.shinyPokemonDefeated[rotationlist[0]] || 0;
-//             saveData.statistics.shinyPokemonCaptured[rotationlist[0]] || 0;
-//             saveData.statistics.shinyPokemonHatched[rotationlist[0]] || 0;
-            
-//             saveData.statistics.malepokemonEncountered[rotationlist[0]] || 0;
-//             saveData.statistics.malepokemonDefeated[rotationlist[0]] || 0;
-//             saveData.statistics.malepokemonCaptured[rotationlist[0]] || 0;
-//             saveData.statistics.malepokemonHatched[rotationlist[0]] || 0;
-//             saveData.statistics.shinymalePokemonEncountered[rotationlist[0]] || 0;
-//             saveData.statistics.shinymalePokemonDefeated[rotationlist[0]] || 0;
-//             saveData.statistics.shinymalePokemonCaptured[rotationlist[0]] || 0;
-//             saveData.statistics.shinymalePokemonHatched[rotationlist[0]] || 0;
+        const tempIDvalues = {
+            // If player hasn't caught this mon yet, return.
+            tempCaught:
+            if (saveData.party.caughtPokemon.find(p => p.id === rotationlist[0]) == undefined) {
+                return;
+            },
+            // Store our first ID
+            storedID: rotationlist[0],
+            tempHatched:
+            if (!saveData.statistics.pokemonHatched) {
+                saveData.statistics.pokemonHatched = {};
+            },
+            tempShinyHatched:
+            if (!saveData.statistics.shinyPokemonHatched) {
+                saveData.statistics.shinyPokemonHatched = {};
+            },
+            // Store our first ID statistics
+            statistics:[
+            saveData.statistics.pokemonEncountered[rotationlist[0]],
+            saveData.statistics.pokemonDefeated[rotationlist[0]],
+            saveData.statistics.pokemonCaptured[rotationlist[0]],
+            saveData.statistics.pokemonHatched[rotationlist[0]],
+            saveData.statistics.shinyPokemonEncountered[rotationlist[0]],
+            saveData.statistics.shinyPokemonDefeated[rotationlist[0]],
+            saveData.statistics.shinyPokemonCaptured[rotationlist[0]],
+            saveData.statistics.shinyPokemonHatched[rotationlist[0]],
 
-//             saveData.statistics.femalepokemonEncountered[rotationlist[0]] || 0;
-//             saveData.statistics.femalepokemonDefeated[rotationlist[0]] || 0;
-//             saveData.statistics.femalepokemonCaptured[rotationlist[0]] || 0;
-//             saveData.statistics.femalepokemonHatched[rotationlist[0]] || 0;
-//             saveData.statistics.shinyfemalePokemonEncountered[rotationlist[0]] || 0;
-//             saveData.statistics.shinyfemalePokemonDefeated[rotationlist[0]] || 0;
-//             saveData.statistics.shinyfemalePokemonCaptured[rotationlist[0]] || 0;
-//             saveData.statistics.shinyfemalePokemonHatched[rotationlist[0]] || 0;
-//         };
+            saveData.statistics.malepokemonEncountered[rotationlist[0]],
+            saveData.statistics.malepokemonDefeated[rotationlist[0]],
+            saveData.statistics.malepokemonCaptured[rotationlist[0]],
+            saveData.statistics.malepokemonHatched[rotationlist[0]],
+            saveData.statistics.shinymalePokemonEncountered[rotationlist[0]],
+            saveData.statistics.shinymalePokemonDefeated[rotationlist[0]],
+            saveData.statistics.shinymalePokemonCaptured[rotationlist[0]],
+            saveData.statistics.shinymalePokemonHatched[rotationlist[0]],
+
+            saveData.statistics.femalepokemonEncountered[rotationlist[0]],
+            saveData.statistics.femalepokemonDefeated[rotationlist[0]],
+            saveData.statistics.femalepokemonCaptured[rotationlist[0]],
+            saveData.statistics.femalepokemonHatched[rotationlist[0]],
+            saveData.statistics.shinyfemalePokemonEncountered[rotationlist[0]],
+            saveData.statistics.shinyfemalePokemonDefeated[rotationlist[0]],
+            saveData.statistics.shinyfemalePokemonCaptured[rotationlist[0]],
+            saveData.statistics.shinyfemalePokemonHatched[rotationlist[0]],
+            ]
+        };
         
         // Overwrite values of current ID with next ID
         for (let i = 0; i < rotationlist.length - 1; i++) {
@@ -1739,47 +1743,45 @@ class Update implements Saveable {
         }
         
         // Overwrite last values with first ID
-//         rotations[rotations.length - 1] = tempID;
-//             const lastpokemon = saveData.party.caughtPokemon.find(p => p.id === rotationlist[rotationlist.length]);
-//             // If player hasn't caught this mon yet, return.
-//             if (lastpokemon == undefined) {
-//                 return;
-//             }
-//             // Update our last ID
-//             lastpokemon.id = rotationlist[rotationlist.length];
-//             if (!saveData.statistics.pokemonHatched) {
-//                 saveData.statistics.pokemonHatched = {};
-//             }
-//             if (!saveData.statistics.shinyPokemonHatched) {
-//                 saveData.statistics.shinyPokemonHatched = {};
-//             }
-//             // Update last ID statistics
-//             saveData.statistics.pokemonEncountered[rotationlist[rotationlist.length]] = tempID.saveData.statistics.pokemonEncountered || 0;
-//             saveData.statistics.pokemonDefeated[rotationlist[rotationlist.length]] = tempID.saveData.statistics.pokemonDefeated || 0;
-//             saveData.statistics.pokemonCaptured[rotationlist[rotationlist.length]] = tempID.saveData.statistics.pokemonCaptured || 0;
-//             saveData.statistics.pokemonHatched[rotationlist[rotationlist.length]] = tempID.saveData.statistics.pokemonHatched || 0;
-//             saveData.statistics.shinyPokemonEncountered[rotationlist[i + 1]] = tempID.saveData.statistics.shinyPokemonEncountered || 0;
-//             saveData.statistics.shinyPokemonDefeated[rotationlist[rotationlist.length]] = tempID.saveData.statistics.shinyPokemonDefeated || 0;
-//             saveData.statistics.shinyPokemonCaptured[rotationlist[rotationlist.length]] = tempID.saveData.statistics.shinyPokemonCaptured || 0;
-//             saveData.statistics.shinyPokemonHatched[rotationlist[rotationlist.length]] = tempID.saveData.statistics.shinyPokemonHatched || 0;
+             // If player hasn't caught this mon yet, return.
+             if (saveData.party.caughtPokemon.find(p => p.id === tempIDvalues.tempCaught) == undefined) {
+                 return;
+             }
+             // Update our last ID
+             rotations[rotations.length] = tempIDvalues.storedID;
+             if (!tempIDvalues.tempHatched) {
+                 saveData.statistics.pokemonHatched = {};
+             }
+             if (!tempIDvalues.tempShinyHatched) {
+                 saveData.statistics.shinyPokemonHatched = {};
+             }
+             // Update last ID statistics
+             saveData.statistics.pokemonEncountered[rotationlist[rotationlist.length]] = saveData.statistics.pokemonEncountered[tempIDvalues.statistics[0]];
+             saveData.statistics.pokemonDefeated[rotationlist[rotationlist.length]] = saveData.statistics.pokemonDefeated[tempIDvalues.statistics[1]];
+             saveData.statistics.pokemonCaptured[rotationlist[rotationlist.length]] = saveData.statistics.pokemonCaptured[tempIDvalues.statistics[2]];
+             saveData.statistics.pokemonHatched[rotationlist[rotationlist.length]] = saveData.statistics.pokemonHatched[tempIDvalues.statistics[3]];
+             saveData.statistics.shinyPokemonEncountered[rotationlist[i + 1]] = saveData.statistics.shinyPokemonEncountered[tempIDvalues.statistics[4]];
+             saveData.statistics.shinyPokemonDefeated[rotationlist[rotationlist.length]] = saveData.statistics.shinyPokemonDefeated[tempIDvalues.statistics[5]];
+             saveData.statistics.shinyPokemonCaptured[rotationlist[rotationlist.length]] = saveData.statistics.shinyPokemonCaptured[tempIDvalues.statistics[6]];
+             saveData.statistics.shinyPokemonHatched[rotationlist[rotationlist.length]] = saveData.statistics.shinyPokemonHatched[tempIDvalues.statistics[7]];
 
-//             saveData.statistics.malepokemonEncountered[rotationlist[rotationlist.length]] = tempID.saveData.statistics.malepokemonEncountered || 0;
-//             saveData.statistics.malepokemonDefeated[rotationlist[rotationlist.length]] = tempID.saveData.statistics.malepokemonDefeated || 0;
-//             saveData.statistics.malepokemonCaptured[rotationlist[rotationlist.length]] = tempID.saveData.statistics.malepokemonCaptured || 0;
-//             saveData.statistics.malepokemonHatched[rotationlist[rotationlist.length]] = tempID.saveData.statistics.malepokemonHatched || 0;
-//             saveData.statistics.shinymalePokemonEncountered[rotationlist[rotationlist.length]] = tempID.saveData.statistics.shinymalePokemonEncountered || 0;
-//             saveData.statistics.shinymalePokemonDefeated[rotationlist[rotationlist.length]] = tempID.saveData.statistics.shinymalePokemonDefeated || 0;
-//             saveData.statistics.shinymalePokemonCaptured[rotationlist[rotationlist.length]] = tempID.saveData.statistics.shinymalePokemonCaptured || 0;
-//             saveData.statistics.shinymalePokemonHatched[rotationlist[rotationlist.length] = tempID.saveData.statistics.shinymalePokemonHatched || 0;
+             saveData.statistics.malepokemonEncountered[rotationlist[rotationlist.length]] = saveData.statistics.malepokemonEncountered[tempIDvalues.statistics[8]];
+             saveData.statistics.malepokemonDefeated[rotationlist[rotationlist.length]] = saveData.statistics.malepokemonDefeated[tempIDvalues.statistics[9]];
+             saveData.statistics.malepokemonCaptured[rotationlist[rotationlist.length]] = saveData.statistics.malepokemonCaptured[tempIDvalues.statistics[10]];
+             saveData.statistics.malepokemonHatched[rotationlist[rotationlist.length]] = saveData.statistics.malepokemonHatched[tempIDvalues.statistics[11]];
+             saveData.statistics.shinymalePokemonEncountered[rotationlist[rotationlist.length]] = saveData.statistics.shinymalePokemonEncountered[tempIDvalues.statistics[12]];
+             saveData.statistics.shinymalePokemonDefeated[rotationlist[rotationlist.length]] = saveData.statistics.shinymalePokemonDefeated[tempIDvalues.statistics[13]];
+             saveData.statistics.shinymalePokemonCaptured[rotationlist[rotationlist.length]] = saveData.statistics.shinymalePokemonCaptured[tempIDvalues.statistics[14]];
+             saveData.statistics.shinymalePokemonHatched[rotationlist[rotationlist.length] = saveData.statistics.shinymalePokemonHatched[tempIDvalues.statistics[15]];
 
-//             saveData.statistics.femalepokemonEncountered[rotationlist[rotationlist.length]] = tempID.saveData.statistics.femalepokemonEncountered || 0;
-//             saveData.statistics.femalepokemonDefeated[rotationlist[rotationlist.length]] = tempID.saveData.statistics.femalepokemonDefeated || 0;
-//             saveData.statistics.femalepokemonCaptured[rotationlist[rotationlist.length]] = tempID.saveData.statistics.femalepokemonCaptured || 0;
-//             saveData.statistics.femalepokemonHatched[rotationlist[rotationlist.length]] = tempID.saveData.statistics.femalepokemonHatched || 0;
-//             saveData.statistics.shinyfemalePokemonEncountered[rotationlist[rotationlist.length]] = tempID.saveData.statistics.shinyfemalePokemonEncountered || 0;
-//             saveData.statistics.shinyfemalePokemonDefeated[rotationlist[rotationlist.length]] = tempID.saveData.statistics.shinyfemalePokemonDefeated || 0;
-//             saveData.statistics.shinyfemalePokemonCaptured[rotationlist[rotationlist.length]] = tempID.saveData.statistics.shinyfemalePokemonCaptured || 0;
-//             saveData.statistics.shinyfemalePokemonHatched[rotationlist[rotationlist.length]] = tempID.saveData.statistics.shinyfemalePokemonHatched || 0;
+             saveData.statistics.femalepokemonEncountered[rotationlist[rotationlist.length]] = saveData.statistics.femalepokemonEncountered[tempIDvalues.statistics[16]];
+             saveData.statistics.femalepokemonDefeated[rotationlist[rotationlist.length]] = saveData.statistics.femalepokemonDefeated[tempIDvalues.statistics[17]];
+             saveData.statistics.femalepokemonCaptured[rotationlist[rotationlist.length]] = saveData.statistics.femalepokemonCaptured[tempIDvalues.statistics[18]];
+             saveData.statistics.femalepokemonHatched[rotationlist[rotationlist.length]] = saveData.statistics.femalepokemonHatched[tempIDvalues.statistics[19]];
+             saveData.statistics.shinyfemalePokemonEncountered[rotationlist[rotationlist.length]] = saveData.statistics.shinyfemalePokemonEncountered[tempIDvalues.statistics[20]];
+             saveData.statistics.shinyfemalePokemonDefeated[rotationlist[rotationlist.length]] = saveData.statistics.shinyfemalePokemonDefeated[tempIDvalues.statistics[21]];
+             saveData.statistics.shinyfemalePokemonCaptured[rotationlist[rotationlist.length]] = saveData.statistics.shinyfemalePokemonCaptured[tempIDvalues.statistics[22]];
+             saveData.statistics.shinyfemalePokemonHatched[rotationlist[rotationlist.length]] = saveData.statistics.shinyfemalePokemonHatched[tempIDvalues.statistics[23]];
     }
 
     // Replaces Pokémon names to IDs in the save data
