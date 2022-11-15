@@ -1728,7 +1728,7 @@ class Update implements Saveable {
          saveData.statistics.pokemonDefeated[rotationlist[rotationlist.length]] = saveData.statistics.pokemonDefeated[tempIDvalues.statistics[1]];
          saveData.statistics.pokemonCaptured[rotationlist[rotationlist.length]] = saveData.statistics.pokemonCaptured[tempIDvalues.statistics[2]];
          saveData.statistics.pokemonHatched[rotationlist[rotationlist.length]] = saveData.statistics.pokemonHatched[tempIDvalues.statistics[3]];
-         saveData.statistics.shinyPokemonEncountered[rotationlist[i + 1]] = saveData.statistics.shinyPokemonEncountered[tempIDvalues.statistics[4]];
+         saveData.statistics.shinyPokemonEncountered[rotationlist.length]] = saveData.statistics.shinyPokemonEncountered[tempIDvalues.statistics[4]];
          saveData.statistics.shinyPokemonDefeated[rotationlist[rotationlist.length]] = saveData.statistics.shinyPokemonDefeated[tempIDvalues.statistics[5]];
          saveData.statistics.shinyPokemonCaptured[rotationlist[rotationlist.length]] = saveData.statistics.shinyPokemonCaptured[tempIDvalues.statistics[6]];
          saveData.statistics.shinyPokemonHatched[rotationlist[rotationlist.length]] = saveData.statistics.shinyPokemonHatched[tempIDvalues.statistics[7]];
@@ -1740,7 +1740,7 @@ class Update implements Saveable {
          saveData.statistics.shinymalePokemonEncountered[rotationlist[rotationlist.length]] = saveData.statistics.shinymalePokemonEncountered[tempIDvalues.statistics[12]];
          saveData.statistics.shinymalePokemonDefeated[rotationlist[rotationlist.length]] = saveData.statistics.shinymalePokemonDefeated[tempIDvalues.statistics[13]];
          saveData.statistics.shinymalePokemonCaptured[rotationlist[rotationlist.length]] = saveData.statistics.shinymalePokemonCaptured[tempIDvalues.statistics[14]];
-         saveData.statistics.shinymalePokemonHatched[rotationlist[rotationlist.length] = saveData.statistics.shinymalePokemonHatched[tempIDvalues.statistics[15]];
+         saveData.statistics.shinymalePokemonHatched[rotationlist[rotationlist.length]] = saveData.statistics.shinymalePokemonHatched[tempIDvalues.statistics[15]];
 
          saveData.statistics.femalepokemonEncountered[rotationlist[rotationlist.length]] = saveData.statistics.femalepokemonEncountered[tempIDvalues.statistics[16]];
          saveData.statistics.femalepokemonDefeated[rotationlist[rotationlist.length]] = saveData.statistics.femalepokemonDefeated[tempIDvalues.statistics[17]];
