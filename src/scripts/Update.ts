@@ -1646,7 +1646,7 @@ class Update implements Saveable {
         // Fixup queue
         saveData.breeding.queueList = saveData.breeding.queueList?.map(p => p == oldName ? newName : p) || [];
     }
-    
+
     // Swapping or Rotating Pokemon IDs
     static rotatePokemonIDs = (saveData, rotationlist) => {
 
