@@ -1376,6 +1376,7 @@ export const TemporaryBattles = [
     'Hugh 5',
     'Hugh 6',
     'Hugh 7',
+    'Dream Researcher',
     'Shauna 1',
     'Sycamore 1',
     'Tierno 1',
