@@ -14,7 +14,7 @@ class TemporaryBattle extends TownContent {
 
     public cssClass(): string {
         return App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(this.name)]() ?
-            'btn btn-primary' :
+            'btn btn-success' :
             'btn btn-secondary';
     }
     public text(): string {
