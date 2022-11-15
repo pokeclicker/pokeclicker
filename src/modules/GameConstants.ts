@@ -625,11 +625,11 @@ export const EnvironmentCssClass: Record<Environment, string> = {
 };
 
 export enum Starter {
-    'None' = -1,
-    'Bulbasaur' = 0,
-    'Charmander' = 1,
-    'Squirtle' = 2,
-    'Pikachu' = 3,
+    None = -1,
+    Grass = 0,
+    Fire = 1,
+    Water = 2,
+    Special = 3,
 }
 
 export enum StoneType {
@@ -1276,7 +1276,7 @@ export const DockTowns = [
 ];
 
 export const RegionalStarters = [
-    [1, 4, 7], // Kanto
+    [1, 4, 7, 25], // Kanto
     [152, 155, 158], // Johto
     [252, 255, 258], // Hoenn
     [387, 390, 393], // Sinnoh
@@ -1339,6 +1339,7 @@ export const TemporaryBattles = [
     'Plasma Shadow 4',
     'Ghetsis 1',
     'Ghetsis 2',
+    'Dream Researcher',
     'Korrina',
     'Aipom Alley',
     'Mime Interview',

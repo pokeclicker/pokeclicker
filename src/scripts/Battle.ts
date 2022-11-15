@@ -48,7 +48,7 @@ class Battle {
      */
     public static clickAttack() {
         // click attacks disabled and we already beat the starter
-        if (App.game.challenges.list.disableClickAttack.active() && player.starter() != GameConstants.Starter.None) {
+        if (App.game.challenges.list.disableClickAttack.active() && player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.None) {
             return;
         }
         // TODO: figure out a better way of handling this

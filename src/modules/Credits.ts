@@ -121,9 +121,14 @@ export const SpriteCredits: Credit[] = [
         link: 'https://linktr.ee/CorgiOnNeptune',
         resources: [
             'Recolours of Duncapham\'s sprite revamps',
-            'Sounds for Wanderer/Roamer',
-            'Sounds for BF finish & empty queue',
             'Dynamic BG Shiny Meltan/Melmetal',
+            'Rainbow Rocket sprite re-colours',
+            'Sounds:',
+            ' - Wandering encounter',
+            ' - Roaming encounter',
+            ' - Battle Frontier',
+            ' - Empty Queue',
+            ' - Dream Orbs',
         ],
         // Notes: Made specifically for PokéClicker.
     },
@@ -278,6 +283,7 @@ export const SpriteCredits: Credit[] = [
             'Steven revamp',
             'Tamer revamp',
             'Tate & Liza revamp',
+            'Team Rocket Grunt revamps',
             'Winona revamp',
         ],
         // NOTES: Allowed use with credit given.
