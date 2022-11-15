@@ -467,6 +467,18 @@ TemporaryBattleList['Galactic Boss Cyrus'] = new TemporaryBattle(
     undefined,
     {imageName: '../trainers/Galactic Boss (cyrus)'}
 );
+TemporaryBattleList.Zero = new TemporaryBattle(
+    'Zero',
+    [
+        new GymPokemon('Magnemite', 10120000, 70),
+        new GymPokemon('Magneton', 10870000, 72),
+        new GymPokemon('Magnezone', 11420000, 75),
+    ],
+    'Argh! I can\'t believe I lost to someone like you! You can keep the key for now, but I\'ll get my revenge one day.',
+    [new QuestLineStepCompletedRequirement('Zero\'s Ambition', 12)],
+    undefined,
+    {imageName: 'Zero'}
+);
 
 // Unova Temporary Battles
 TemporaryBattleList['Team Plasma Grunt 1'] = new TemporaryBattle(

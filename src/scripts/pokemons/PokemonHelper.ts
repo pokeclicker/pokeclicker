@@ -1,5 +1,4 @@
 ///<reference path="../GameConstants.d.ts"/>
-///<reference path="../../declarations/pokemons/PokemonHelper.d.ts"/>
 
 enum PokemonLocationType {
     Route,
@@ -18,8 +17,10 @@ enum PokemonLocationType {
     Discord,
 }
 
-class PokemonHelper {
+class PokemonHelper extends TmpPokemonHelper {
 
+    // Can't move to modules yet because it wants to know what a PartyPokemon looks like
+    // TODO: Maybe this one should be on Party too...
     public static getPokemonsWithEvolution(evoType: GameConstants.StoneType): PartyPokemon[] {
         return App.game.party.caughtPokemon.filter((partyPokemon: PartyPokemon) => {
             if (!partyPokemon.evolutions) {
@@ -32,180 +33,6 @@ class PokemonHelper {
             }
             return false;
         }).sort((a, b) => a.id - b.id);
-    }
-
-    public static getEvolution(id: number, evoType: GameConstants.StoneType): string {
-        const pokemon = App.game.party.getPokemon(id);
-        if (pokemon) {
-            for (const evolution of pokemon.evolutions) {
-                if (evolution.trigger === EvoTrigger.STONE && (evolution as StoneEvoData).stone == evoType) {
-                    return evolution.evolvedPokemon;
-                }
-            }
-        }
-        return '';
-    }
-
-    public static getPokemonById(id: number): DataPokemon {
-        return this.getPokemonByName(pokemonMap[id].name);
-    }
-
-    public static getPokemonByName(name: PokemonNameType): DataPokemon {
-        const basePokemon = pokemonMap[name];
-        if (!basePokemon) {
-            console.warn('Could not find pokemon', name);
-            return;
-        }
-
-        const type1 = basePokemon.type[0];
-        const type2: PokemonType = basePokemon.type[1] ?? PokemonType.None;
-
-        const eggCycles: number = basePokemon.eggCycles || 20;
-        return new DataPokemon(basePokemon.id, basePokemon.name, basePokemon.catchRate, basePokemon.evolutions, type1, type2, basePokemon.attack, basePokemon.base.hitpoints, basePokemon.levelType, basePokemon.exp, eggCycles, basePokemon.heldItem, basePokemon.gender);
-    }
-
-    public static typeStringToId(id: string) {
-        return PokemonType[id];
-    }
-
-    public static typeIdToString(id: number) {
-        return PokemonType[id];
-    }
-
-    public static getImage(pokemonId: number, shiny: boolean = undefined, gender: boolean = undefined): string {
-        let src = 'assets/images/';
-        if (shiny === undefined) {
-            shiny = App.game.party.alreadyCaughtPokemon(pokemonId, true) &&
-                !App.game.party.getPokemon(pokemonId)?.hideShinyImage();
-        }
-        if (gender === undefined) {
-            gender = App.game.party.getPokemon(pokemonId)?.defaultFemaleSprite() ?? false;
-        }
-
-        if (shiny) {
-            src += 'shiny';
-        }
-        let genderString = '';
-        // If Pokémon is female, use the female sprite, otherwise use the male/genderless one
-        const hasDiff = this.getPokemonById(pokemonId).gender.visualDifference;
-        if (hasDiff) {
-            if (gender) {
-                genderString = '-f';
-            }
-        }
-        src += `pokemon/${pokemonId}${genderString}.png`;
-        return src;
-    }
-
-    public static getPokeballImage(pokemonName: PokemonNameType): string {
-        let src = '';
-        if (App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(pokemonName).id)) {
-            src = 'assets/images/pokeball/Pokeball-';
-            if (App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(pokemonName).id, true)) {
-                src += 'shiny-';
-            }
-            src += 'small.png';
-        }
-        return src;
-    }
-
-
-    public static calcNativeRegion(pokemonName: PokemonNameType) {
-        return TmpPokemonHelper.calcNativeRegion(pokemonName);
-    }
-
-    public static calcUniquePokemonsByRegion(region: GameConstants.Region) {
-        return new Set(pokemonList.filter(p => p.id > 0 && PokemonHelper.calcNativeRegion(p.name) === region).map(p => Math.floor(p.id))).size;
-    }
-
-    // To have encounter/caught/defeat/hatch statistics in a single place
-    public static incrementPokemonStatistics(pokemonId: number, statistic: string, shiny: boolean, gender: number) {
-        const pokemonStatistics = {
-            'Captured': App.game.statistics.pokemonCaptured[pokemonId],
-            'Defeated': App.game.statistics.pokemonDefeated[pokemonId],
-            'Encountered': App.game.statistics.pokemonEncountered[pokemonId],
-            'Hatched': App.game.statistics.pokemonHatched[pokemonId],
-            'MaleCaptured': App.game.statistics.malePokemonCaptured[pokemonId],
-            'MaleDefeated': App.game.statistics.malePokemonDefeated[pokemonId],
-            'MaleEncountered': App.game.statistics.malePokemonEncountered[pokemonId],
-            'MaleHatched': App.game.statistics.malePokemonHatched[pokemonId],
-            'FemaleCaptured': App.game.statistics.femalePokemonCaptured[pokemonId],
-            'FemaleDefeated': App.game.statistics.femalePokemonDefeated[pokemonId],
-            'FemaleEncountered': App.game.statistics.femalePokemonEncountered[pokemonId],
-            'FemaleHatched': App.game.statistics.femalePokemonHatched[pokemonId],
-            'ShinyCaptured': App.game.statistics.shinyPokemonCaptured[pokemonId],
-            'ShinyDefeated': App.game.statistics.shinyPokemonDefeated[pokemonId],
-            'ShinyEncountered': App.game.statistics.shinyPokemonEncountered[pokemonId],
-            'ShinyHatched': App.game.statistics.shinyPokemonHatched[pokemonId],
-            'ShinyMaleCaptured': App.game.statistics.shinyMalePokemonCaptured[pokemonId],
-            'ShinyMaleDefeated': App.game.statistics.shinyMalePokemonDefeated[pokemonId],
-            'ShinyMaleEncountered': App.game.statistics.shinyMalePokemonEncountered[pokemonId],
-            'ShinyMaleHatched': App.game.statistics.shinyMalePokemonHatched[pokemonId],
-            'ShinyFemaleCaptured': App.game.statistics.shinyFemalePokemonCaptured[pokemonId],
-            'ShinyFemaleDefeated': App.game.statistics.shinyFemalePokemonDefeated[pokemonId],
-            'ShinyFemaleEncountered': App.game.statistics.shinyFemalePokemonEncountered[pokemonId],
-            'ShinyFemaleHatched': App.game.statistics.shinyFemalePokemonHatched[pokemonId],
-        };
-        const totalStatistics = {
-            'Captured': App.game.statistics.totalPokemonCaptured,
-            'Defeated': App.game.statistics.totalPokemonDefeated,
-            'Encountered': App.game.statistics.totalPokemonEncountered,
-            'Hatched': App.game.statistics.totalPokemonHatched,
-            'MaleCaptured': App.game.statistics.totalMalePokemonCaptured,
-            'MaleDefeated': App.game.statistics.totalMalePokemonDefeated,
-            'MaleEncountered': App.game.statistics.totalMalePokemonEncountered,
-            'MaleHatched': App.game.statistics.totalMalePokemonHatched,
-            'FemaleCaptured': App.game.statistics.totalFemalePokemonCaptured,
-            'FemaleDefeated': App.game.statistics.totalFemalePokemonDefeated,
-            'FemaleEncountered': App.game.statistics.totalFemalePokemonEncountered,
-            'FemaleHatched': App.game.statistics.totalFemalePokemonHatched,
-            'GenderlessCaptured': App.game.statistics.totalGenderlessPokemonCaptured,
-            'GenderlessDefeated': App.game.statistics.totalGenderlessPokemonDefeated,
-            'GenderlessEncountered': App.game.statistics.totalGenderlessPokemonEncountered,
-            'GenderlessHatched': App.game.statistics.totalGenderlessPokemonHatched,
-            'ShinyCaptured': App.game.statistics.totalShinyPokemonCaptured,
-            'ShinyDefeated': App.game.statistics.totalShinyPokemonDefeated,
-            'ShinyEncountered': App.game.statistics.totalShinyPokemonEncountered,
-            'ShinyHatched': App.game.statistics.totalShinyPokemonHatched,
-            'ShinyMaleCaptured': App.game.statistics.totalShinyMalePokemonCaptured,
-            'ShinyMaleDefeated': App.game.statistics.totalShinyMalePokemonDefeated,
-            'ShinyMaleEncountered': App.game.statistics.totalShinyMalePokemonEncountered,
-            'ShinyMaleHatched': App.game.statistics.totalShinyMalePokemonHatched,
-            'ShinyFemaleCaptured': App.game.statistics.totalShinyFemalePokemonCaptured,
-            'ShinyFemaleDefeated': App.game.statistics.totalShinyFemalePokemonDefeated,
-            'ShinyFemaleEncountered': App.game.statistics.totalShinyFemalePokemonEncountered,
-            'ShinyFemaleHatched': App.game.statistics.totalShinyFemalePokemonHatched,
-            'ShinyGenderlessCaptured': App.game.statistics.totalShinyGenderlessPokemonCaptured,
-            'ShinyGenderlessDefeated': App.game.statistics.totalShinyGenderlessPokemonDefeated,
-            'ShinyGenderlessEncountered': App.game.statistics.totalShinyGenderlessPokemonEncountered,
-            'ShinyGenderlessHatched': App.game.statistics.totalShinyGenderlessPokemonHatched,
-        };
-        let genderString = '';
-        // Gender Statistics
-        if (gender === GameConstants.BattlePokemonGender.Male) {
-            genderString = 'Male';
-        } else if (gender === GameConstants.BattlePokemonGender.Female) {
-            genderString = 'Female';
-        } else if (gender === GameConstants.BattlePokemonGender.NoGender) {
-            genderString = 'Genderless';
-        }
-        GameHelper.incrementObservable(pokemonStatistics[statistic]);
-        GameHelper.incrementObservable(totalStatistics[statistic]);
-        // Gender
-        if (gender != GameConstants.BattlePokemonGender.NoGender) {
-            GameHelper.incrementObservable(pokemonStatistics[genderString + statistic]);
-        }
-        GameHelper.incrementObservable(totalStatistics[genderString + statistic]);
-        if (shiny) {
-            const shinyString = 'Shiny';
-            GameHelper.incrementObservable(pokemonStatistics[shinyString + statistic]);
-            GameHelper.incrementObservable(totalStatistics[shinyString + statistic]);
-            // Gender
-            if (gender != GameConstants.BattlePokemonGender.NoGender) {
-                GameHelper.incrementObservable(pokemonStatistics[shinyString + genderString + statistic]);
-            }
-            GameHelper.incrementObservable(totalStatistics[shinyString + genderString + statistic]);
-        }
     }
 
     /*
@@ -530,9 +357,5 @@ class PokemonHelper {
 
         // Return the list of items
         return encounterTypes;
-    }
-
-    public static displayName(englishName: string): KnockoutComputed<string> {
-        return App.translation.get(englishName, 'pokemon');
     }
 }

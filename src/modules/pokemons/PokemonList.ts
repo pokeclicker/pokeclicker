@@ -12990,6 +12990,8 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 306,
         'catchRate': 3,
+        'evolutions': [HeldItemLevelEvolution('Griseous_Orb', 'Giratina (Altered)', 'Giratina (Origin)', 70)],
+        'heldItem': { type: ItemType.item, id: 'Griseous_Orb' },
         'base': {
             'hitpoints': 150,
             'attack': 120,
@@ -25974,6 +25976,8 @@ export const pokemonList = createPokemonArray(
     },
 );
 
+export type PokemonList = typeof pokemonList;
+
 const pokemonNameIndex = {};
 const maxEggCycles = Math.max(...pokemonList.map((p) => p.eggCycles));
 
@@ -26084,4 +26088,4 @@ PokemonMapProxy
     },
 });
 
-setPokemonMap(pokemonMap);
+setPokemonMap(pokemonMap, pokemonList);
