@@ -5724,7 +5724,7 @@ export const pokemonList = createPokemonArray(
         'baby': true,
         'base': {
             'hitpoints': 35,
-            'attack': 25,
+            'attack': 20,
             'specialAttack': 40,
             'defense': 65,
             'specialDefense': 65,
@@ -5744,7 +5744,7 @@ export const pokemonList = createPokemonArray(
         'eggCycles': 8, // lowered to match base form
         'base': {
             'hitpoints': 35,
-            'attack': 25,
+            'attack': 20,
             'specialAttack': 40,
             'defense': 65,
             'specialDefense': 65,
@@ -14198,12 +14198,30 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 390,
         'catchRate': 255,
+        'evolutions': [MegaEvolution('Audino', 'Mega Audino')],
         'base': {
             'hitpoints': 103,
             'attack': 60,
             'specialAttack': 60,
             'defense': 86,
             'specialDefense': 86,
+            'speed': 50,
+        },
+    },
+    {
+        'id': 531.01,
+        'name': 'Mega Audino',
+        'type': [PokemonType.Normal],
+        'eggCycles': 20,
+        'levelType': LevelType.fast,
+        'exp': 425,
+        'catchRate': 255,
+        'base': {
+            'hitpoints': 103,
+            'attack': 60,
+            'specialAttack': 80,
+            'defense': 126,
+            'specialDefense': 126,
             'speed': 50,
         },
     },
