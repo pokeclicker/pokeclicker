@@ -1363,9 +1363,9 @@ class Update implements Saveable {
             });
             // Update Region filter from integer to bitfield.
             if (settingsData.breedingRegionFilter == -2) {
-                settingsData.breedingRegionFilter = 2 ** (playerData.highestRegion + 1) - 1;
+                settingsData.breedingRegionFilter = ~0;
             } else {
-                settingsData.breedingRegionFilter = 2 ** settingsData.breedingRegionFilter;
+                settingsData.breedingRegionFilter = 1 << settingsData.breedingRegionFilter;
             }
         },
 
