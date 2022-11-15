@@ -21,7 +21,7 @@ export default class Challenge {
 
     async disable(): Promise<void> {
         // If the player hasn't selected a starter yet, no need to confirm
-        if (player.starter() === GameConstants.Starter.None) {
+        if (player.regionStarters[GameConstants.Region.kanto]() === GameConstants.Starter.None) {
             this.active(false);
             return;
         }

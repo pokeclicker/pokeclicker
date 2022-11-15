@@ -133,7 +133,7 @@ class PokemonFactory {
      * @returns {any}
      */
     public static generateGymPokemon(gym: Gym, index: number): BattlePokemon {
-        const pokemon = gym.pokemons[index];
+        const pokemon = gym.getPokemonList()[index];
         const basePokemon = PokemonHelper.getPokemonByName(pokemon.name);
 
         const exp: number = basePokemon.exp;
@@ -210,7 +210,7 @@ class PokemonFactory {
     }
 
     public static generateTemporaryBattlePokemon(battle: TemporaryBattle, index: number): BattlePokemon {
-        const pokemon = battle.pokemons[index];
+        const pokemon = battle.getPokemonList()[index];
         const basePokemon = PokemonHelper.getPokemonByName(pokemon.name);
         const catchRate: number = this.catchRateHelper(basePokemon.catchRate);
 
@@ -288,6 +288,7 @@ class PokemonFactory {
                 break;
             case 'Solar_light':
             case 'Lunar_light':
+            case 'Pure_light':
                 chance = GameConstants.LIGHT_ITEM_CHANCE;
                 break;
             case 'Rusted_Sword':

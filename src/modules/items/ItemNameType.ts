@@ -93,9 +93,11 @@ export type ItemNameType
     | 'White_DNA'
     | 'Sachet'
     | 'Whipped_dream'
+    | 'Key_stone'
     | 'Ice_stone'
     | 'Solar_light'
     | 'Lunar_light'
+    | 'Pure_light'
     | 'Sweet_apple'
     | 'Tart_apple'
     | 'Cracked_pot'
@@ -202,4 +204,5 @@ export type ItemNameType
     | 'Thundurus (Therian)'
     | 'Landorus (Therian)'
     | 'RareCandy'
-    | 'Protein';
+    | 'Protein'
+    | 'Abomasite';
