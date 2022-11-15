@@ -12908,8 +12908,6 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 306,
         'catchRate': 3,
-        'evolutions': [new HeldItemLevelEvolution('Giratina (Altered)', 'Giratina (Origin)', 70, 'Griseous_Orb')],
-        'heldItem': {type: ItemType.item, id: 'Griseous_Orb'},
         'base': {
             'hitpoints': 150,
             'attack': 100,
