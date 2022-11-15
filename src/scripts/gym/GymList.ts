@@ -364,7 +364,8 @@ GymList['Elite Koga'] = new Gym(
     BadgeEnums.Elite_Koga,
     7500,
     'I subjected you to everything I could muster. But my efforts failed. I must hone my skills. Go on to the next room, and put your abilities to the test!',
-    [new GymBadgeRequirement(BadgeEnums.Elite_Will)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_Will)],
+    undefined, undefined, 'Elite Koga'
 );
 GymList['Elite Bruno2'] = new Gym(
     'Bruno2',
@@ -379,7 +380,8 @@ GymList['Elite Bruno2'] = new Gym(
     BadgeEnums.Elite_Bruno2,
     7500,
     'Having lost, I have no right to say anything… Go face your next challenge!',
-    [new GymBadgeRequirement(BadgeEnums.Elite_Koga)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_Koga)],
+    undefined, undefined, 'Elite Bruno'
 );
 GymList['Elite Karen'] = new Gym(
     'Karen',
@@ -1285,7 +1287,8 @@ GymList['Iki Town'] = new Gym(
     BadgeEnums.FightiniumZ,
     128000,
     'The results come as no surprise to me. What a fine Trainer...and what fine Pokémon, too!',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Melemele Meadow'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Melemele Meadow'))],
+    undefined, undefined, 'Hala\'s Grand Trial'
 );
 GymList['Konikoni City'] = new Gym(
     'Olivia',
@@ -1301,7 +1304,8 @@ GymList['Konikoni City'] = new Gym(
     [new RouteKillRequirement(10, GameConstants.Region.alola, 9)],
     () => {
         App.game.quests.getQuestLine('Eater of Light').beginQuest();
-    }
+    },
+    undefined, 'Olivia\'s Grand Trial'
 );
 GymList['Malie City'] = new Gym(
     'Nanu',
@@ -1314,7 +1318,7 @@ GymList['Malie City'] = new Gym(
     BadgeEnums.DarkiniumZ,
     128000,
     'Hmph...',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Po Town'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Po Town'))], undefined, undefined, 'Nanu\'s Grand Trial'
 );
 GymList['Exeggutor Island'] = new Gym(
     'Hapu',
@@ -1328,7 +1332,8 @@ GymList['Exeggutor Island'] = new Gym(
     BadgeEnums.GroundiumZ,
     128000,
     'You have succeeded in your final grand trial!',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mina\'s Houseboat'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mina\'s Houseboat'))],
+    undefined, undefined, 'Hapu\'s Grand Trial'
 );
 //trials
 GymList['Ilima\'s Trial'] = new Gym(
@@ -1570,7 +1575,6 @@ GymList['Champion Hau'] = new Gym(
 );
 
 //Galar Leaders
-//TODO Addition of G-Max forms?
 GymList.Turffield = new Gym(
     'Milo',
     'Turffield',
@@ -1627,7 +1631,7 @@ GymList['Stow-on-Side1'] = new Gym(
         if (App.game.badgeCase.hasBadge(BadgeEnums.Galar_Ghost)) {
             App.game.quests.getQuestLine('The Darkest Day').beginQuest();
         }
-    }
+    }, undefined, 'Bea\'s Stow-on-Side Gym'
 );
 GymList['Stow-on-Side2'] = new Gym(
     'Allister',
@@ -1647,7 +1651,7 @@ GymList['Stow-on-Side2'] = new Gym(
         if (App.game.badgeCase.hasBadge(BadgeEnums.Galar_Fighting)) {
             App.game.quests.getQuestLine('The Darkest Day').beginQuest();
         }
-    }
+    }, undefined, 'Allister\'s Stow-on-Side Gym'
 );
 GymList.Ballonlea = new Gym(
     'Opal',
@@ -1675,7 +1679,8 @@ GymList.Circhester1 = new Gym(
     BadgeEnums.Galar_Rock,
     80000,
     'I just want to climb into a hole... Well, I guess it\'d be more like falling from here.',
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 26)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 26)],
+    undefined, undefined, 'Gordie\'s Circhester Gym'
 );
 GymList.Circhester2 = new Gym(
     'Melony',
@@ -1689,7 +1694,8 @@ GymList.Circhester2 = new Gym(
     BadgeEnums.Galar_Ice,
     80000,
     'I think you took breaking the ice a little too literally...',
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 26)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 26)],
+    undefined, undefined, 'Melony\'s Circhester Gym'
 );
 GymList.Spikemuth = new Gym(
     'Piers',

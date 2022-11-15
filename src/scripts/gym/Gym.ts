@@ -73,16 +73,19 @@ class Gym extends TownContent {
             quest = true,
             achievement = true,
             champion = false,
-        }: gymFlags = {}
+        }: gymFlags = {},
+        public displayName?: string
     ) {
         super(requirements);
         this.flags.quest = quest;
         this.flags.achievement = achievement;
         this.flags.champion = champion;
-        if (!town.includes('Elite') && !town.includes('Champion')) {
-            this.buttonText = `${leaderName.replace(/\d/g,'')}'s gym`;
+        if (displayName && !displayName.includes('Gym')) {
+            this.buttonText = displayName;
+        } else if (!town.includes('Elite') && !town.includes('Champion') && !town.includes('Supreme')) {
+            this.buttonText = `${leaderName}'s Gym`;
         } else {
-            this.buttonText = leaderName.replace(/\d/g,'');
+            this.buttonText = town;
         }
     }
 
