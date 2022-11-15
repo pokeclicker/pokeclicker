@@ -14213,7 +14213,7 @@ export const pokemonList = createPokemonArray(
     {
         'id': 531.01,
         'name': 'Mega Audino',
-        'type': [PokemonType.Normal],
+        'type': [PokemonType.Normal, PokemonType.Fairy],
         'eggCycles': 20,
         'levelType': LevelType.fast,
         'exp': 425,
