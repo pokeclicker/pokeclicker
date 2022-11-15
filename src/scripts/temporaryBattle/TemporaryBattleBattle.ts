@@ -42,7 +42,7 @@ class TemporaryBattleBattle extends Battle {
     }
 
     private static endFight() {
-        if (TemporaryBattleBattle.index() >= TemporaryBattleBattle.battle.pokemons.length) {
+        if (TemporaryBattleBattle.index() >= TemporaryBattleBattle.battle.getPokemonList().length) {
             TemporaryBattleRunner.battleWon(TemporaryBattleBattle.battle);
         } else {
             TemporaryBattleBattle.generateNewEnemy();
@@ -52,7 +52,7 @@ class TemporaryBattleBattle extends Battle {
 
         TemporaryBattleBattle.index(TemporaryBattleBattle.index() + 1);
 
-        if (TemporaryBattleBattle.index() >= TemporaryBattleBattle.battle.pokemons.length) {
+        if (TemporaryBattleBattle.index() >= TemporaryBattleBattle.battle.getPokemonList().length) {
             TemporaryBattleRunner.battleWon(TemporaryBattleBattle.battle);
         } else {
             TemporaryBattleBattle.generateNewEnemy();
