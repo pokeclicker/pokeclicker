@@ -17186,7 +17186,7 @@ export const pokemonList = createPokemonArray(
     },
     {
         'id': 666.01,
-        'name': 'Vivillon (Poké Ball)',
+        'name': 'Vivillon (Icy Snow)',
         'type': [PokemonType.Bug, PokemonType.Flying],
         // Boosted to match standard Vivillon (Meadow)
         'eggCycles': 35,
@@ -17294,24 +17294,6 @@ export const pokemonList = createPokemonArray(
     },
     {
         'id': 666.07,
-        'name': 'Vivillon (Icy Snow)',
-        'type': [PokemonType.Bug, PokemonType.Flying],
-        // Boosted to match standard Vivillon (Meadow)
-        'eggCycles': 35,
-        'levelType': LevelType.mediumfast,
-        'exp': 185,
-        'catchRate': 45,
-        'base': {
-            'hitpoints': 80,
-            'attack': 52,
-            'specialAttack': 90,
-            'defense': 50,
-            'specialDefense': 50,
-            'speed': 89,
-        },
-    },
-    {
-        'id': 666.08,
         'name': 'Vivillon (Modern)',
         'type': [PokemonType.Bug, PokemonType.Flying],
         // Boosted to match standard Vivillon (Meadow)
@@ -17329,7 +17311,7 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 666.09,
+        'id': 666.08,
         'name': 'Vivillon (Marine)',
         'type': [PokemonType.Bug, PokemonType.Flying],
         // Boosted to match standard Vivillon (Meadow)
@@ -17347,7 +17329,7 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 666.10,
+        'id': 666.09,
         'name': 'Vivillon (Archipelago)',
         'type': [PokemonType.Bug, PokemonType.Flying],
         // Boosted to match standard Vivillon (Meadow)
@@ -17365,7 +17347,7 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 666.11,
+        'id': 666.10,
         'name': 'Vivillon (High Plains)',
         'type': [PokemonType.Bug, PokemonType.Flying],
         // Boosted to match standard Vivillon (Meadow)
@@ -17383,7 +17365,7 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 666.12,
+        'id': 666.11,
         'name': 'Vivillon (Sandstorm)',
         'type': [PokemonType.Bug, PokemonType.Flying],
         // Boosted to match standard Vivillon (Meadow)
@@ -17401,7 +17383,7 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 666.13,
+        'id': 666.12,
         'name': 'Vivillon (River)',
         'type': [PokemonType.Bug, PokemonType.Flying],
         // Boosted to match standard Vivillon (Meadow)
@@ -17419,7 +17401,7 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 666.14,
+        'id': 666.13,
         'name': 'Vivillon (Monsoon)',
         'type': [PokemonType.Bug, PokemonType.Flying],
         // Boosted to match standard Vivillon (Meadow)
@@ -17437,7 +17419,7 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 666.15,
+        'id': 666.14,
         'name': 'Vivillon (Savanna)',
         'type': [PokemonType.Bug, PokemonType.Flying],
         // Boosted to match standard Vivillon (Meadow)
@@ -17455,7 +17437,7 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 666.16,
+        'id': 666.15,
         'name': 'Vivillon (Sun)',
         'type': [PokemonType.Bug, PokemonType.Flying],
         // Boosted to match standard Vivillon (Meadow)
@@ -17473,7 +17455,7 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 666.17,
+        'id': 666.16,
         'name': 'Vivillon (Ocean)',
         'type': [PokemonType.Bug, PokemonType.Flying],
         // Boosted to match standard Vivillon (Meadow)
@@ -17491,8 +17473,26 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 666.18,
+        'id': 666.17,
         'name': 'Vivillon (Jungle)',
+        'type': [PokemonType.Bug, PokemonType.Flying],
+        // Boosted to match standard Vivillon (Meadow)
+        'eggCycles': 35,
+        'levelType': LevelType.mediumfast,
+        'exp': 185,
+        'catchRate': 45,
+        'base': {
+            'hitpoints': 80,
+            'attack': 52,
+            'specialAttack': 90,
+            'defense': 50,
+            'specialDefense': 50,
+            'speed': 89,
+        },
+    },
+    {
+        'id': 666.18,
+        'name': 'Vivillon (Poké Ball)',
         'type': [PokemonType.Bug, PokemonType.Flying],
         // Boosted to match standard Vivillon (Meadow)
         'eggCycles': 35,
