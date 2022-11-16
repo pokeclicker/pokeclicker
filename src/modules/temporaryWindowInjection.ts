@@ -152,6 +152,7 @@ import PokeballItem from './items/PokeballItem';
 import RoamingPokemonList from './pokemons/RoamingPokemonList';
 import DataPokemon from './pokemons/DataPokemon';
 import MegaStoneItem from './items/MegaStoneItem';
+import RoamingPokemon from './pokemons/RoamingPokemon';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -313,4 +314,5 @@ Object.assign(<any>window, {
     RoamingPokemonList,
     DataPokemon,
     MegaStoneItem,
+    RoamingPokemon,
 });
