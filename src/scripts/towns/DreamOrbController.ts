@@ -79,10 +79,10 @@ class DreamOrbController implements Saveable {
             sound: NotificationConstants.NotificationSound.General.dream_orb,
         });
         setTimeout(() => {
+            const item = Rand.fromWeightedArray(this.selectedOrb().items, this.selectedOrb().items.map((i) => i.weight));
             this.item(item);
             this.opening(false);
             GameHelper.incrementObservable(this.selectedOrb().amount, -1);
-            const item = Rand.fromWeightedArray(this.selectedOrb().items, this.selectedOrb().items.map((i) => i.weight));
             BagHandler.gainItem(item.item);
         }, 1800);
     }
