@@ -722,6 +722,8 @@ TemporaryBattleList['Wally 2'] = new TemporaryBattle(
     {
         displayName: 'Pokémon Trainer Wally',
         imageName: 'Wally',
+        rewardFunction: () =>
+            Notifier.notify({message: 'Congratulations on beating Wally at his best! Come back to fight him again at any time.'}),
     }
 );
 TemporaryBattleList['Sevii Rocket Grunt 1'] = new TemporaryBattle(
