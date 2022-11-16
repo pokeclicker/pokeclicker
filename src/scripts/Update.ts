@@ -1395,6 +1395,17 @@ class Update implements Saveable {
                         saveData.battleFrontier.milestones = saveData.battleFrontier.milestones.filter(milestone => milestone[1] !== name);
                     });
             }
+        },
+        '0.10.2': ({ playerData, saveData }) => {
+            // Kecleon Fights
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 15);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 16);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 17);
+
+            // Translations
+            saveData.logbook.logs.forEach(
+                log => log.content = createLogContent.notTranslated({ text: log.description })
+            );
 
             // Rotate form IDs
             const formIDs = [
@@ -1409,17 +1420,6 @@ class Update implements Saveable {
             ];
 
             formIDs.forEach(list => Update.rotatePokemonIDs(saveData, list));
-        },
-        '0.10.2': ({ playerData, saveData }) => {
-            // Kecleon Fights
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 15);
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 16);
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 17);
-
-            // Translations
-            saveData.logbook.logs.forEach(
-                log => log.content = createLogContent.notTranslated({ text: log.description })
-            );
         },
     };
 
@@ -1670,23 +1670,23 @@ class Update implements Saveable {
                 s.shinyPokemonCaptured[lastID],
                 s.shinyPokemonHatched[lastID],
 
-                s.malepokemonEncountered[lastID],
-                s.malepokemonDefeated[lastID],
-                s.malepokemonCaptured[lastID],
-                s.malepokemonHatched[lastID],
-                s.shinymalePokemonEncountered[lastID],
-                s.shinymalePokemonDefeated[lastID],
-                s.shinymalePokemonCaptured[lastID],
-                s.shinymalePokemonHatched[lastID],
+                s.malePokemonEncountered[lastID],
+                s.malePokemonDefeated[lastID],
+                s.malePokemonCaptured[lastID],
+                s.malePokemonHatched[lastID],
+                s.shinyMalePokemonEncountered[lastID],
+                s.shinyMalePokemonDefeated[lastID],
+                s.shinyMalePokemonCaptured[lastID],
+                s.shinyMalePokemonHatched[lastID],
 
-                s.femalepokemonEncountered[lastID],
-                s.femalepokemonDefeated[lastID],
-                s.femalepokemonCaptured[lastID],
-                s.femalepokemonHatched[lastID],
-                s.shinyfemalePokemonEncountered[lastID],
-                s.shinyfemalePokemonDefeated[lastID],
-                s.shinyfemalePokemonCaptured[lastID],
-                s.shinyfemalePokemonHatched[lastID],
+                s.femalePokemonEncountered[lastID],
+                s.femalePokemonDefeated[lastID],
+                s.femalePokemonCaptured[lastID],
+                s.femalePokemonHatched[lastID],
+                s.shinyFemalePokemonEncountered[lastID],
+                s.shinyFemalePokemonDefeated[lastID],
+                s.shinyFemalePokemonCaptured[lastID],
+                s.shinyFemalePokemonHatched[lastID],
             ],
         };
 
@@ -1712,23 +1712,23 @@ class Update implements Saveable {
             s.shinyPokemonCaptured[toID] = s.shinyPokemonCaptured[fromID];
             s.shinyPokemonHatched[toID] = s.shinyPokemonHatched[fromID];
 
-            s.malepokemonEncountered[toID] = s.malepokemonEncountered[fromID];
-            s.malepokemonDefeated[toID] = s.malepokemonDefeated[fromID];
-            s.malepokemonCaptured[toID] = s.malepokemonCaptured[fromID];
-            s.malepokemonHatched[toID] = s.malepokemonHatched[fromID];
-            s.shinymalePokemonEncountered[toID] = s.shinymalePokemonEncountered[fromID];
-            s.shinymalePokemonDefeated[toID] = s.shinymalePokemonDefeated[fromID];
-            s.shinymalePokemonCaptured[toID] = s.shinymalePokemonCaptured[fromID];
-            s.shinymalePokemonHatched[toID] = s.shinymalePokemonHatched[fromID];
+            s.malePokemonEncountered[toID] = s.malePokemonEncountered[fromID];
+            s.malePokemonDefeated[toID] = s.malePokemonDefeated[fromID];
+            s.malePokemonCaptured[toID] = s.malePokemonCaptured[fromID];
+            s.malePokemonHatched[toID] = s.malePokemonHatched[fromID];
+            s.shinyMalePokemonEncountered[toID] = s.shinyMalePokemonEncountered[fromID];
+            s.shinyMalePokemonDefeated[toID] = s.shinyMalePokemonDefeated[fromID];
+            s.shinyMalePokemonCaptured[toID] = s.shinyMalePokemonCaptured[fromID];
+            s.shinyMalePokemonHatched[toID] = s.shinyMalePokemonHatched[fromID];
 
-            s.femalepokemonEncountered[toID] = s.femalepokemonEncountered[fromID];
-            s.femalepokemonDefeated[toID] = s.femalepokemonDefeated[fromID];
-            s.femalepokemonCaptured[toID] = s.femalepokemonCaptured[fromID];
-            s.femalepokemonHatched[toID] = s.femalepokemonHatched[fromID];
-            s.shinyfemalePokemonEncountered[toID] = s.shinyfemalePokemonEncountered[fromID];
-            s.shinyfemalePokemonDefeated[toID] = s.shinyfemalePokemonDefeated[fromID];
-            s.shinyfemalePokemonCaptured[toID] = s.shinyfemalePokemonCaptured[fromID];
-            s.shinyfemalePokemonHatched[toID] = s.shinyfemalePokemonHatched[fromID];
+            s.femalePokemonEncountered[toID] = s.femalePokemonEncountered[fromID];
+            s.femalePokemonDefeated[toID] = s.femalePokemonDefeated[fromID];
+            s.femalePokemonCaptured[toID] = s.femalePokemonCaptured[fromID];
+            s.femalePokemonHatched[toID] = s.femalePokemonHatched[fromID];
+            s.shinyFemalePokemonEncountered[toID] = s.shinyFemalePokemonEncountered[fromID];
+            s.shinyFemalePokemonDefeated[toID] = s.shinyFemalePokemonDefeated[fromID];
+            s.shinyFemalePokemonCaptured[toID] = s.shinyFemalePokemonCaptured[fromID];
+            s.shinyFemalePokemonHatched[toID] = s.shinyFemalePokemonHatched[fromID];
         }
 
         const firstID = rotationlist[0];
@@ -1747,23 +1747,23 @@ class Update implements Saveable {
         s.shinyPokemonCaptured[firstID] = tempIDvalues.statistics[6];
         s.shinyPokemonHatched[firstID] = tempIDvalues.statistics[7];
 
-        s.malepokemonEncountered[firstID] = tempIDvalues.statistics[8];
-        s.malepokemonDefeated[firstID] = tempIDvalues.statistics[9];
-        s.malepokemonCaptured[firstID] = tempIDvalues.statistics[10];
-        s.malepokemonHatched[firstID] = tempIDvalues.statistics[11];
-        s.shinymalePokemonEncountered[firstID] = tempIDvalues.statistics[12];
-        s.shinymalePokemonDefeated[firstID] = tempIDvalues.statistics[13];
-        s.shinymalePokemonCaptured[firstID] = tempIDvalues.statistics[14];
-        s.shinymalePokemonHatched[firstID] = tempIDvalues.statistics[15];
+        s.malePokemonEncountered[firstID] = tempIDvalues.statistics[8];
+        s.malePokemonDefeated[firstID] = tempIDvalues.statistics[9];
+        s.malePokemonCaptured[firstID] = tempIDvalues.statistics[10];
+        s.malePokemonHatched[firstID] = tempIDvalues.statistics[11];
+        s.shinyMalePokemonEncountered[firstID] = tempIDvalues.statistics[12];
+        s.shinyMalePokemonDefeated[firstID] = tempIDvalues.statistics[13];
+        s.shinyMalePokemonCaptured[firstID] = tempIDvalues.statistics[14];
+        s.shinyMalePokemonHatched[firstID] = tempIDvalues.statistics[15];
 
-        s.femalepokemonEncountered[firstID] = tempIDvalues.statistics[16];
-        s.femalepokemonDefeated[firstID] = tempIDvalues.statistics[17];
-        s.femalepokemonCaptured[firstID] = tempIDvalues.statistics[18];
-        s.femalepokemonHatched[firstID] = tempIDvalues.statistics[19];
-        s.shinyfemalePokemonEncountered[firstID] = tempIDvalues.statistics[20];
-        s.shinyfemalePokemonDefeated[firstID] = tempIDvalues.statistics[21];
-        s.shinyfemalePokemonCaptured[firstID] = tempIDvalues.statistics[22];
-        s.shinyfemalePokemonHatched[firstID] = tempIDvalues.statistics[23];
+        s.femalePokemonEncountered[firstID] = tempIDvalues.statistics[16];
+        s.femalePokemonDefeated[firstID] = tempIDvalues.statistics[17];
+        s.femalePokemonCaptured[firstID] = tempIDvalues.statistics[18];
+        s.femalePokemonHatched[firstID] = tempIDvalues.statistics[19];
+        s.shinyFemalePokemonEncountered[firstID] = tempIDvalues.statistics[20];
+        s.shinyFemalePokemonDefeated[firstID] = tempIDvalues.statistics[21];
+        s.shinyFemalePokemonCaptured[firstID] = tempIDvalues.statistics[22];
+        s.shinyFemalePokemonHatched[firstID] = tempIDvalues.statistics[23];
     }
 
     // Replaces Pokémon names to IDs in the save data
