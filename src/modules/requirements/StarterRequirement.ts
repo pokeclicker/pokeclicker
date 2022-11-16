@@ -10,7 +10,8 @@ export default class StarterRequirement extends Requirement {
     }
 
     public getProgress() {
-        return player.regionStarters[this.region]();
+        const starter = player.regionStarters[this.region]();
+        return starter === Starter.None ? Starter.Grass : starter;
     }
 
     public hint(): string {
