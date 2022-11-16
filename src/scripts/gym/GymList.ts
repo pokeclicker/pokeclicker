@@ -41,7 +41,7 @@ GymList['Vermilion City'] = new Gym(
     1000,
     'Now that\'s a shocker! You\'re the real deal, kid! Fine, then, take the ThunderBadge!',
     [
-        new RouteKillRequirement(10, GameConstants.Region.kanto, 6),
+        new TemporaryBattleRequirement('Blue 3'),
         new GymBadgeRequirement(BadgeEnums.Cascade),
     ]
 );
@@ -70,7 +70,7 @@ GymList['Saffron City'] = new Gym(
     BadgeEnums.Marsh,
     2500,
     'This loss shocks me! But a loss is a loss. I admit I didn\'t work hard enough to win. You earned the MarshBadge.',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Silph Co.'))]
+    [new TemporaryBattleRequirement('Blue 5')]
 );
 GymList['Fuchsia City'] = new Gym(
     'Koga',
@@ -199,36 +199,32 @@ GymList['Elite Lance'] = new Gym(
     [new GymBadgeRequirement(BadgeEnums.Elite_Agatha)]
 );
 // Kanto Champion
-GymList['Champion Blue'] = new Champion(
+GymList['Champion Blue'] = new Gym(
     'Blue',
     'Champion Blue',
     [
         new GymPokemon('Pidgeot', 52340, 59),
         new GymPokemon('Alakazam', 56320, 57),
         new GymPokemon('Rhydon', 58340, 59),
+        new GymPokemon('Exeggutor', 57520, 59, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Grass)),
+        new GymPokemon('Gyarados', 65340, 61, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Grass)),
+        new GymPokemon('Charizard', 70000, 63, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Grass)),
+        new GymPokemon('Arcanine', 57520, 59, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Fire)),
+        new GymPokemon('Exeggutor', 65340, 61, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Fire)),
+        new GymPokemon('Blastoise', 70000, 63, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Fire)),
+        new GymPokemon('Gyarados', 57520, 59, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Water)),
+        new GymPokemon('Arcanine', 65340, 61, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Water)),
+        new GymPokemon('Venusaur', 70000, 63, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Water)),
+        new GymPokemon('Gyarados', 57520, 59, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Special)),
+        new GymPokemon('Arcanine', 65340, 61, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Special)),
+        new GymPokemon('Venusaur', 70000, 63, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Special)),
     ],
     BadgeEnums.Elite_KantoChampion,
     10000,
     'NO! That can\'t be! You beat me at my best! After all that work to become the League Champ? My reign is over already? It\'s not fair!',
     [new GymBadgeRequirement(BadgeEnums.Elite_Lance)],
-    // Bulbasaur
-    [
-        new GymPokemon('Exeggutor', 57520, 59),
-        new GymPokemon('Gyarados', 65340, 61),
-        new GymPokemon('Charizard', 70000, 63),
-    ],
-    // Charmander
-    [
-        new GymPokemon('Arcanine', 57520, 59),
-        new GymPokemon('Exeggutor', 65340, 61),
-        new GymPokemon('Blastoise', 70000, 63),
-    ],
-    // Squirtle/Pikachu
-    [
-        new GymPokemon('Gyarados', 57520, 59),
-        new GymPokemon('Arcanine', 65340, 61),
-        new GymPokemon('Venusaur', 70000, 63),
-    ]
+    () => {},
+    { champion: true }
 );
 
 //Johto Gyms
@@ -353,7 +349,7 @@ GymList['Elite Will'] = new Gym(
     BadgeEnums.Elite_Will,
     7500,
     'Even though I was defeated, I won\'t change my course. I will continue battling until I stand above all Trainers! Now move on and experience the true ferocity of the Elite Four.',
-    [new GymBadgeRequirement(BadgeEnums.Rising)]
+    [new TemporaryBattleRequirement('Silver 5')]
 );
 GymList['Elite Koga'] = new Gym(
     'Koga2',
@@ -368,7 +364,8 @@ GymList['Elite Koga'] = new Gym(
     BadgeEnums.Elite_Koga,
     7500,
     'I subjected you to everything I could muster. But my efforts failed. I must hone my skills. Go on to the next room, and put your abilities to the test!',
-    [new GymBadgeRequirement(BadgeEnums.Elite_Will)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_Will)],
+    undefined, undefined, 'Elite Koga'
 );
 GymList['Elite Bruno2'] = new Gym(
     'Bruno2',
@@ -383,7 +380,8 @@ GymList['Elite Bruno2'] = new Gym(
     BadgeEnums.Elite_Bruno2,
     7500,
     'Having lost, I have no right to say anything… Go face your next challenge!',
-    [new GymBadgeRequirement(BadgeEnums.Elite_Koga)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_Koga)],
+    undefined, undefined, 'Elite Bruno'
 );
 GymList['Elite Karen'] = new Gym(
     'Karen',
@@ -401,7 +399,7 @@ GymList['Elite Karen'] = new Gym(
     [new GymBadgeRequirement(BadgeEnums.Elite_Bruno2)]
 );
 // Johto Champion
-GymList['Champion Lance'] = new Champion(
+GymList['Champion Lance'] = new Gym(
     'Lance2',
     'Champion Lance',
     [
@@ -415,7 +413,9 @@ GymList['Champion Lance'] = new Champion(
     BadgeEnums.Elite_JohtoChampion,
     7500,
     '…It\'s over. But it\'s an odd feeling. I\'m not angry that I lost. In fact, I feel happy. Happy that I witnessed the rise of a great new Champion!',
-    [new GymBadgeRequirement(BadgeEnums.Elite_Karen)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_Karen)],
+    () => {},
+    { champion: true }
 );
 
 // Hoenn Gyms
@@ -456,7 +456,7 @@ GymList['Mauville City'] = new Gym(
     BadgeEnums.Dynamo,
     3000,
     'Wahahahah! Fine, I lost! You ended up giving me a thrill! Take this Badge!',
-    undefined,
+    [new TemporaryBattleRequirement('Wally 1')],
     () => {
         App.game.quests.getQuestLine('Land vs. Water').beginQuest();
     }
@@ -503,7 +503,8 @@ GymList['Fortree City'] = new Gym(
     ],
     BadgeEnums.Feather,
     6000,
-    'Never before have I seen a Trainer command Pokémon with more grace than I... In recognition of your prowess, I present to you this Gym Badge.'
+    'Never before have I seen a Trainer command Pokémon with more grace than I... In recognition of your prowess, I present to you this Gym Badge.',
+    [new TemporaryBattleRequirement('Kecleon 1')]
 );
 GymList['Mossdeep City'] = new Gym(
     'Tate & Liza',
@@ -550,7 +551,7 @@ GymList['Elite Sidney'] = new Gym(
     'Well, listen to what this loser has to say. You\'ve got what it takes to go far. Now, go on to the next room and enjoy your next battle!',
     [
         new GymBadgeRequirement(BadgeEnums.Feather),
-        new GymBadgeRequirement(BadgeEnums.Rain),
+        new TemporaryBattleRequirement('Wally 2'),
     ]
 );
 GymList['Elite Phoebe'] = new Gym(
@@ -600,7 +601,7 @@ GymList['Elite Drake'] = new Gym(
 );
 
 // Hoenn Champion
-GymList['Champion Wallace'] = new Champion(
+GymList['Champion Wallace'] = new Gym(
     'Wallace',
     'Champion Wallace',
     [
@@ -615,12 +616,10 @@ GymList['Champion Wallace'] = new Champion(
     16000,
     'I, the Champion, fall in defeat… That was wonderful work. You were elegant, infuriatingly so. And yet it was utterly glorious! Kudos to you! You are a truly noble Pokémon Trainer!',
     [new GymBadgeRequirement(BadgeEnums.Elite_Drake)],
-    undefined,
-    undefined,
-    undefined,
     () => {
         App.game.quests.getQuestLine('Mystery of Deoxys').beginQuest();
-    }
+    },
+    { champion: true }
 );
 
 // Orange league gyms
@@ -758,7 +757,7 @@ GymList['Pastoria City'] = new Gym(
     BadgeEnums.Fen,
     2500,
     'It seems the undertow pulled me under... But I had a great time battling with you! You\'ve earned this!',
-    [new GymBadgeRequirement(BadgeEnums.Cobble)]
+    [new TemporaryBattleRequirement('Barry 4')]
 );
 GymList['Canalave City'] = new Gym(
     'Byron',
@@ -771,7 +770,7 @@ GymList['Canalave City'] = new Gym(
     BadgeEnums.Mine,
     4800,
     'You were strong enough to take down my prized team of Pokémon. In recognition of that power, I give you this: the Mine Badge!',
-    [new GymBadgeRequirement(BadgeEnums.Fen)]
+    [new TemporaryBattleRequirement('Barry 5')]
 );
 GymList['Snowpoint City'] = new Gym(
     'Candice',
@@ -816,7 +815,7 @@ GymList['Elite Aaron'] = new Gym(
     BadgeEnums.Elite_Aaron,
     18000,
     'I lost with the most beautiful and toughest of the bug Pokémon... We lost because I wasn\'t good enough... That\'s it! Back to training camp! Let\'s hear it for me! No... That was wrong... Anyway... Go on to the next room! Three Trainers are waiting for you. They are all tougher than me.',
-    [new GymBadgeRequirement(BadgeEnums.Beacon)]
+    [new TemporaryBattleRequirement('Barry 6')]
 );
 GymList['Elite Bertha'] = new Gym(
     'Bertha',
@@ -865,7 +864,7 @@ GymList['Elite Lucian'] = new Gym(
 );
 
 // Sinnoh Champion
-GymList['Champion Cynthia'] = new Champion(
+GymList['Champion Cynthia'] = new Gym(
     'Cynthia',
     'Champion Cynthia',
     [
@@ -879,7 +878,9 @@ GymList['Champion Cynthia'] = new Champion(
     BadgeEnums.Elite_SinnohChampion,
     32000,
     'That was excellent. Truly, an outstanding battle. You gave the support your Pokémon needed to maximize their power. And you guided them with certainty to secure victory. You have both passion and calculating coolness. Together, you and your Pokémon can overcome any challenge that may come your way. Those are the impressions I got from our battle. I\'m glad I got to take part in the crowning of Sinnoh\'s new Champion!',
-    [new GymBadgeRequirement(BadgeEnums.Elite_Lucian)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_Lucian)],
+    () => {},
+    { champion: true }
 );
 
 //Unova Gyms
@@ -1062,7 +1063,7 @@ GymList['Elite Caitlin'] = new Gym(
 );
 
 // Unova Champion
-GymList['Champion Iris'] = new Champion(
+GymList['Champion Iris'] = new Gym(
     'Iris',
     'Champion Iris',
     [
@@ -1081,7 +1082,9 @@ GymList['Champion Iris'] = new Champion(
         new GymBadgeRequirement(BadgeEnums.Elite_Marshal),
         new GymBadgeRequirement(BadgeEnums.Elite_Grimsley),
         new GymBadgeRequirement(BadgeEnums.Elite_Caitlin),
-    ]
+    ],
+    () => {},
+    { champion: true }
 );
 
 //Kalos Gyms
@@ -1121,7 +1124,7 @@ GymList['Shalour City'] = new Gym(
     BadgeEnums.Rumble,
     3800,
     'Oh! I have been defeated! Alack, alay! Lady Korrina gave a terrible display! This is it. I must give up my title and admit that your strength far exceeds-- Just teasing! But here\'s your Badge. Boy, you\'ll be rolling in \'em soon!',
-    [new GymBadgeRequirement(BadgeEnums.Cliff)]
+    [new TemporaryBattleRequirement('Calem 1')]
 );
 GymList['Coumarine City'] = new Gym(
     'Ramos',
@@ -1134,7 +1137,7 @@ GymList['Coumarine City'] = new Gym(
     BadgeEnums.Plant,
     5500,
     'Yeh believe in yer Pokémon... And they believe in yeh, too... Mighty oaks from acorns grow. Go on, then. Yeh\'ve earned it. Here\'s yer own Plant Badge, sprout.',
-    [new GymBadgeRequirement(BadgeEnums.Rumble)]
+    [new TemporaryBattleRequirement('Calem 2')]
 );
 GymList['Lumiose City'] = new Gym(
     'Clemont',
@@ -1173,7 +1176,7 @@ GymList['Anistar City'] = new Gym(
     BadgeEnums.Psychic,
     30000,
     'Now, the Psychic Badge. A testament to your skill. Proof of your power.',
-    [new GymBadgeRequirement(BadgeEnums.Fairy)]
+    [new TemporaryBattleRequirement('Calem 4')]
 );
 GymList['Snowbelle City'] = new Gym(
     'Wulfric',
@@ -1248,7 +1251,7 @@ GymList['Elite Drasna'] = new Gym(
 );
 
 // Kalos Champion
-GymList['Champion Diantha'] = new Champion(
+GymList['Champion Diantha'] = new Gym(
     'Diantha',
     'Champion Diantha',
     [
@@ -1267,7 +1270,9 @@ GymList['Champion Diantha'] = new Champion(
         new GymBadgeRequirement(BadgeEnums.Elite_Siebold),
         new GymBadgeRequirement(BadgeEnums.Elite_Wikstrom),
         new GymBadgeRequirement(BadgeEnums.Elite_Drasna),
-    ]
+    ],
+    () => {},
+    { champion: true }
 );
 
 //Alola Gyms
@@ -1283,7 +1288,8 @@ GymList['Iki Town'] = new Gym(
     BadgeEnums.FightiniumZ,
     128000,
     'The results come as no surprise to me. What a fine Trainer...and what fine Pokémon, too!',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Melemele Meadow'))]
+    [new TemporaryBattleRequirement('Hau 3')],
+    undefined, undefined, 'Hala\'s Grand Trial'
 );
 GymList['Konikoni City'] = new Gym(
     'Olivia',
@@ -1296,10 +1302,11 @@ GymList['Konikoni City'] = new Gym(
     BadgeEnums.RockiumZ,
     128000,
     'How lovely.',
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 9)],
+    [new TemporaryBattleRequirement('Plumeria 1')],
     () => {
         App.game.quests.getQuestLine('Eater of Light').beginQuest();
-    }
+    },
+    undefined, 'Olivia\'s Grand Trial'
 );
 GymList['Malie City'] = new Gym(
     'Nanu',
@@ -1312,7 +1319,7 @@ GymList['Malie City'] = new Gym(
     BadgeEnums.DarkiniumZ,
     128000,
     'Hmph...',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Po Town'))]
+    [new TemporaryBattleRequirement('Gladion 2')], undefined, undefined, 'Nanu\'s Grand Trial'
 );
 GymList['Exeggutor Island'] = new Gym(
     'Hapu',
@@ -1326,7 +1333,8 @@ GymList['Exeggutor Island'] = new Gym(
     BadgeEnums.GroundiumZ,
     128000,
     'You have succeeded in your final grand trial!',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mina\'s Houseboat'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mina\'s Houseboat'))],
+    undefined, undefined, 'Hapu\'s Grand Trial'
 );
 //trials
 GymList['Ilima\'s Trial'] = new Gym(
@@ -1539,7 +1547,7 @@ GymList['Elite Kahili'] = new Gym(
 
 // Alola Champion
 // TODO: Balancing - Set HP
-GymList['Champion Hau'] = new Champion(
+GymList['Champion Hau'] = new Gym(
     'Hau',
     'Champion Hau',
     [
@@ -1547,6 +1555,12 @@ GymList['Champion Hau'] = new Champion(
         new GymPokemon('Tauros', 89636471, 58),
         new GymPokemon('Noivern', 89636471, 58),
         new GymPokemon('Crabominable', 91545555, 59),
+        new GymPokemon('Flareon', 89636471, 58, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Grass)),
+        new GymPokemon('Primarina', 96725389, 60, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Grass)),
+        new GymPokemon('Vaporeon', 89636471, 58, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Fire)),
+        new GymPokemon('Decidueye', 96725389, 60, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Fire)),
+        new GymPokemon('Leafeon', 89636471, 58, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Water)),
+        new GymPokemon('Incineroar', 96725389, 60, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Water)),
     ],
     BadgeEnums.Elite_AlolaChampion,
     100000,
@@ -1557,25 +1571,11 @@ GymList['Champion Hau'] = new Champion(
         new GymBadgeRequirement(BadgeEnums.Elite_Acerola),
         new GymBadgeRequirement(BadgeEnums.Elite_Kahili),
     ],
-    // Bulbasaur
-    [
-        new GymPokemon('Flareon', 89636471, 58),
-        new GymPokemon('Primarina', 96725389, 60),
-    ],
-    // Charmander
-    [
-        new GymPokemon('Vaporeon', 89636471, 58),
-        new GymPokemon('Decidueye', 96725389, 60),
-    ],
-    // Squirtle/Pikachu
-    [
-        new GymPokemon('Leafeon', 89636471, 58),
-        new GymPokemon('Incineroar', 96725389, 60),
-    ]
+    () => {},
+    { champion: true }
 );
 
 //Galar Leaders
-//TODO Addition of G-Max forms?
 GymList.Turffield = new Gym(
     'Milo',
     'Turffield',
@@ -1632,7 +1632,7 @@ GymList['Stow-on-Side1'] = new Gym(
         if (App.game.badgeCase.hasBadge(BadgeEnums.Galar_Ghost)) {
             App.game.quests.getQuestLine('The Darkest Day').beginQuest();
         }
-    }
+    }, undefined, 'Bea\'s Stow-on-Side Gym'
 );
 GymList['Stow-on-Side2'] = new Gym(
     'Allister',
@@ -1652,7 +1652,7 @@ GymList['Stow-on-Side2'] = new Gym(
         if (App.game.badgeCase.hasBadge(BadgeEnums.Galar_Fighting)) {
             App.game.quests.getQuestLine('The Darkest Day').beginQuest();
         }
-    }
+    }, undefined, 'Allister\'s Stow-on-Side Gym'
 );
 GymList.Ballonlea = new Gym(
     'Opal',
@@ -1680,7 +1680,8 @@ GymList.Circhester1 = new Gym(
     BadgeEnums.Galar_Rock,
     80000,
     'I just want to climb into a hole... Well, I guess it\'d be more like falling from here.',
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 26)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 26)],
+    undefined, undefined, 'Gordie\'s Circhester Gym'
 );
 GymList.Circhester2 = new Gym(
     'Melony',
@@ -1688,13 +1689,15 @@ GymList.Circhester2 = new Gym(
     [
         new GymPokemon('Frosmoth', 103122110, 40),
         new GymPokemon('Galarian Darmanitan', 103122110, 40),
-        new GymPokemon('Eiscue (Ice Face)', 103122110, 41),
+        new GymPokemon('Eiscue (Ice Face)', 103122110, 41, new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Rain, WeatherType.Thunderstorm, WeatherType.Snow, WeatherType.Hail, WeatherType.Blizzard, WeatherType.Sandstorm, WeatherType.Fog, WeatherType.Windy])),
+        new GymPokemon('Eiscue (No Ice Face)', 103122110, 41, new WeatherRequirement([WeatherType.Sunny])),
         new GymPokemon('Gigantamax Lapras', 111540241, 42),
     ],
     BadgeEnums.Galar_Ice,
     80000,
     'I think you took breaking the ice a little too literally...',
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 26)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 26)],
+    undefined, undefined, 'Melony\'s Circhester Gym'
 );
 GymList.Spikemuth = new Gym(
     'Piers',
@@ -1761,52 +1764,38 @@ GymList['Elite Trainer Hop'] = new Gym(
         new GymPokemon('Dubwool', 127578161, 59),
         new GymPokemon('Pincurchin', 124130462, 58),
         new GymPokemon('Snorlax', 124130462, 58),
-        new GymPokemon('Inteleon', 131993475, 59),
-        new GymPokemon('Gigantamax Corviknight', 139216928, 60),
+        new GymPokemon('Corviknight', 131993475, 60),
+        new GymPokemon('Gigantamax Inteleon', 139216928, 59, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Grass)),
+        new GymPokemon('Gigantamax Rillaboom', 139216928, 59, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Fire)),
+        new GymPokemon('Gigantamax Cinderace', 139216928, 59, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Water)),
     ],
     BadgeEnums.Elite_Hop,
     200000,
     'Thanks, mate. I\'m really glad you were the one here with me.',
     [new GymBadgeRequirement(BadgeEnums.Elite_Bede)]
-    // TODO: Add ability to change gym leaders pokemon based on your starter
-    // Grookey
-    // [new GymPokemon('Inteleon', 137833678, 60)],
-    // Scorbunny
-    // [new GymPokemon('Rillaboom', 137833678, 60)],
-    // Sobble
-    // [new GymPokemon('Cinderace', 137833678, 60)]
 );
 // Galar Champion
-GymList['Champion Leon'] = new Champion(
+GymList['Champion Leon'] = new Gym(
     'Leon',
     'Champion Leon',
     [
         new GymPokemon('Aegislash (Shield)', 130579274, 62),
         new GymPokemon('Dragapult', 130579274, 62),
         new GymPokemon('Haxorus', 130579274, 63),
+        new GymPokemon('Seismitoad', 133481036, 64, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Grass)),
+        new GymPokemon('Cinderace', 137833678, 64, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Grass)),
+        new GymPokemon('Mr. Rime', 133481036, 64, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Fire)),
+        new GymPokemon('Inteleon', 137833678, 64, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Fire)),
+        new GymPokemon('Rhyperior', 133481036, 64, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Water)),
+        new GymPokemon('Rillaboom', 137833678, 64, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Water)),
+        new GymPokemon('Gigantamax Charizard', 145088006, 65),
     ],
     BadgeEnums.Elite_GalarChampion,
     250000,
     'My time as Champion is over... But what a champion time it\'s been! Thank you for the greatest battle I\'ve ever had!',
     [new QuestLineStepCompletedRequirement('The Darkest Day', 19)],
-    // Grookey
-    [
-        new GymPokemon('Seismitoad', 133481036, 64),
-        new GymPokemon('Cinderace', 137833678, 64),
-        new GymPokemon('Gigantamax Charizard', 145088815, 65),
-    ],
-    // Scorbunny
-    [
-        new GymPokemon('Mr. Rime', 133481036, 64),
-        new GymPokemon('Inteleon', 137833678, 64),
-        new GymPokemon('Gigantamax Charizard', 145088818, 65),
-    ],
-    // Sobble
-    [
-        new GymPokemon('Rhyperior', 133481036, 64),
-        new GymPokemon('Rillaboom', 137833678, 64),
-        new GymPokemon('Gigantamax Charizard', 145088812, 65),
-    ]
+    () => {},
+    { champion: true }
 );
 
 // Armor + Crown gyms

@@ -45,7 +45,8 @@ class Game {
         public battleFrontier: BattleFrontier,
         public multiplier: Multiplier,
         public saveReminder: SaveReminder,
-        public battleCafe: BattleCafeSaveObject
+        public battleCafe: BattleCafeSaveObject,
+        public dreamOrbController: DreamOrbController
     ) {
         this._gameState = ko.observable(GameConstants.GameState.paused);
     }
@@ -86,7 +87,7 @@ class Game {
         AchievementHandler.preCheckAchievements();
 
         // TODO refactor to proper initialization methods
-        if (player.starter() != GameConstants.Starter.None) {
+        if (player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.None) {
             Battle.generateNewEnemy();
         } else {
             const battlePokemon = new BattlePokemon('MissingNo.', 0, PokemonType.None, PokemonType.None, 0, 0, 0, 0, new Amount(0, GameConstants.Currency.money), false, 0, GameConstants.BattlePokemonGender.NoGender);
@@ -148,12 +149,30 @@ class Game {
 
             Notifier.notify({
                 type: NotificationConstants.NotificationOption.info,
-                title: 'Offline-time Bonus',
+                title: 'Offline Bonus',
                 message: `Defeated: ${numberOfPokemonDefeated.toLocaleString('en-US')} Pokémon\nEarned: <img src="./assets/images/currency/money.svg" height="24px"/> ${moneyToEarn.toLocaleString('en-US')}`,
                 strippedMessage: `Defeated: ${numberOfPokemonDefeated.toLocaleString('en-US')} Pokémon\nEarned: ${moneyToEarn.toLocaleString('en-US')} Pokédollars`,
                 timeout: 2 * GameConstants.MINUTE,
                 setting: NotificationConstants.NotificationSetting.General.offline_earnings,
             });
+
+            // Dream orbs
+            if ((new DreamOrbTownContent()).isUnlocked()) {
+                const orbsUnlocked = App.game.dreamOrbController.orbs.filter((o) => !o.requirement || o.requirement.isCompleted());
+                const orbsEarned = Math.floor(timeDiffOverride / 3600);
+                if (orbsEarned > 0) {
+                    for (let i = 0; i < orbsEarned; i++) {
+                        GameHelper.incrementObservable(Rand.fromArray(orbsUnlocked).amount);
+                    }
+                    Notifier.notify({
+                        type: NotificationConstants.NotificationOption.info,
+                        title: 'Dream Orbs',
+                        message: `Gained ${orbsEarned} Dream Orbs while offline.`,
+                        timeout: 2 * GameConstants.MINUTE,
+                        setting: NotificationConstants.NotificationSetting.General.offline_earnings,
+                    });
+                }
+            }
         }
     }
 
@@ -163,7 +182,7 @@ class Game {
             if (App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Pewter City')]() >= 1) {
                 // Defeated Brock, Has completed the Tutorial
                 App.game.quests.getQuestLine('Tutorial Quests').state(QuestLineState.ended);
-            } else if (player.starter() >= 0) {
+            } else if (player.regionStarters[GameConstants.Region.kanto]() > GameConstants.Starter.None) {
                 // Has chosen a starter, Tutorial is started
                 App.game.quests.getQuestLine('Tutorial Quests').state(QuestLineState.started);
                 App.game.quests.getQuestLine('Tutorial Quests').beginQuest(App.game.quests.getQuestLine('Tutorial Quests').curQuest());
@@ -232,7 +251,7 @@ class Game {
 
     start() {
         console.log(`[${GameConstants.formatDate(new Date())}] %cGame started`, 'color:#2ecc71;font-weight:900;');
-        if (player.starter() === GameConstants.Starter.None) {
+        if (player.regionStarters[GameConstants.Region.kanto]() === GameConstants.Starter.None) {
             StartSequenceRunner.start();
         }
 

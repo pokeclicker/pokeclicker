@@ -1,4 +1,5 @@
 import { BREEDING_ATTACK_BONUS } from '../GameConstants';
+import { pokemonMap } from '../pokemons/PokemonList';
 import Settings from './Settings';
 
 export enum SortOptions {
@@ -36,7 +37,7 @@ export const SortOptionConfigs: Record<SortOptions, SortOptionConfig> = {
 
     [SortOptions.name]: {
         text: 'Name',
-        getValue: (p) => p.name,
+        getValue: (p) => p.displayName,
     },
 
     [SortOptions.attack]: {

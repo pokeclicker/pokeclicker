@@ -1614,6 +1614,36 @@
             , image: "assets/images/map/blimp_pikachu.png"
             })
         %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Pokémon Trainer Hau"
+            , x: 41, y: 24
+            , width: 4, height: 4
+            , databind: "click: () => TemporaryBattleList['Hau 1'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Hau 1'] && TemporaryBattleList['Hau 1'].isVisible()"
+            , image: "assets/images/map/hau.png"
+            })
+        %>
+        
+        <%- include('templates/mapOverlay',
+            { name: "Pokémon Trainer Hau"
+            , x: 35, y: 16
+            , width: 4, height: 4
+            , databind: "click : () => TemporaryBattleList['Hau 2'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Hau 2'] && TemporaryBattleList['Hau 2'].isVisible()"
+            , image: "assets/images/map/hau.png"
+            })
+        %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Pokémon Trainer Hau"
+            , x: 43, y: 7
+            , width: 4, height: 4
+            , databind: "click: () => TemporaryBattleList['Hau 3'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Hau 3'] && TemporaryBattleList['Hau 3'].isVisible()"
+            , image: "assets/images/map/hau.png"
+            })
+        %>
     </g>
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Akala Island').id">
@@ -2514,6 +2544,16 @@
             })
         %>
 
+        <!--Aether Foundation Extension-->
+        <%- include('templates/mapOverlay',
+            { x: 9, y: 38
+            , width: 8, height: 5.5
+            , databind: "style: {'pointer-events': 'none'}"
+            , visible:  "App.game.quests.getQuestLine('Defeat Rainbow Rocket').state() == QuestLineState.started"
+            , image: "assets/images/map/rainbowrocketcastle.png"
+            })
+        %>
+
         <!--Aether Foundation-->
         <%- include('templates/mapDungeon',
             { name: "Aether Foundation"
@@ -2543,6 +2583,27 @@
         <!-- PLACES OF INTEREST -->
         <!-- ------------------ -->
 
+        <!--Rainbow Rocket Grunts-->
+        <%- include('templates/mapOverlay',
+            { name: "Rainbow Rocket Grunt"
+            , x: 7, y: 40
+            , width: 4, height: 4
+            , databind: "click: () => TemporaryBattleList['Rainbow Rocket Grunt 1'].protectedOnclick()"
+            , visible: "TemporaryBattleList['Rainbow Rocket Grunt 1'] && TemporaryBattleList['Rainbow Rocket Grunt 1'].isVisible()"
+            , image: "assets/images/map/RainbowGruntF_Overworld.png"
+            })
+        %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Rainbow Rocket Grunt"
+            , x: 15, y: 40
+            , width: 4, height: 4
+            , databind: "click: () => TemporaryBattleList['Rainbow Rocket Grunt 2'].protectedOnclick()"
+            , visible: "TemporaryBattleList['Rainbow Rocket Grunt 2'] && TemporaryBattleList['Rainbow Rocket Grunt 2'].isVisible()"
+            , image: "assets/images/map/RainbowGruntM_Overworld.png"
+            })
+        %>
+
         <!--Tunnel-->
         <%- include('templates/mapPOI',
             { name: "Dividing Peak Tunnel"
@@ -2550,7 +2611,7 @@
             , x: 79, y: 15
             , databind: `attr: { class: MapHelper.accessToRoute(8, GameConstants.Region.alola) ? 'unlockedRoute' : 'lockedRoute' },
                 click: () => {
-                    Notifier.notify({message: 'That sure is a tunnel'});
+                    Notifier.notify({message: 'That sure is a tunnel.'});
                 }`
             })
         %>
@@ -2562,7 +2623,7 @@
             , x: 80, y: 7
             , databind: `attr: { class: MapHelper.accessToRoute(8, GameConstants.Region.alola) ? 'unlockedRoute' : 'lockedRoute' },
                 click: () => {
-                    Notifier.notify({message: 'That sure is a tunnel'});
+                    Notifier.notify({message: 'That sure is a tunnel.'});
                 }`
             })
         %>
@@ -2572,6 +2633,36 @@
             , x: 38, y: 40
             , width: 2, height: 3
             , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Heahea City') }"
+            })
+        %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Pokémon Trainer Hau"
+            , x: 58.5, y: 25
+            , width: 4, height: 4
+            , databind: "click: () => TemporaryBattleList['Hau 4'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Hau 4'] && TemporaryBattleList['Hau 4'].isVisible()"
+            , image: "assets/images/map/hau.png"
+            })
+        %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Team Skull Gladion"
+            , x: 62, y: 18
+            , width: 4, height: 4
+            , databind: "click: () => TemporaryBattleList['Gladion 1'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Gladion 1'] && TemporaryBattleList['Gladion 1'].isVisible()"
+            , image: "assets/images/map/gladion.png"
+            })
+        %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Team Skull Admin Plumeria"
+            , x: 59, y: 52
+            , width: 4, height: 4
+            , databind: "click: () => TemporaryBattleList['Plumeria 1'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Plumeria 1'] && TemporaryBattleList['Plumeria 1'].isVisible()"
+            , image: "assets/images/map/plumeria.png"
             })
         %>
     </g>
@@ -3782,6 +3873,46 @@
             , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Malie City') }"
             })
         %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Pokémon Trainer Hau"
+            , x: 71, y: 19
+            , width: 4, height: 4
+            , databind: "click: () => TemporaryBattleList['Hau 5'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Hau 5'] && TemporaryBattleList['Hau 5'].isVisible()"
+            , image: "assets/images/map/hau.png"
+            })
+        %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Team Skull Admin Plumeria"
+            , x: 46, y: 43
+            , width: 4, height: 4
+            , databind: "click: () => TemporaryBattleList['Plumeria 2'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Plumeria 2'] && TemporaryBattleList['Plumeria 2'].isVisible()"
+            , image: "assets/images/map/plumeria.png"
+            })
+        %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Team Skull Gladion"
+            , x: 46, y: 43
+            , width: 4, height: 4
+            , databind: "click: () => TemporaryBattleList['Gladion 2'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Gladion 2'] && TemporaryBattleList['Gladion 2'].isVisible()"
+            , image: "assets/images/map/gladion.png"
+            })
+        %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Pokémon Trainer Gladion"
+            , x: 54, y: 42
+            , width: 4, height: 4
+            , databind: "click: () => TemporaryBattleList['Gladion 3'].protectedOnclick()"
+            , visible:  "TemporaryBattleList['Gladion 3'] && TemporaryBattleList['Gladion 3'].isVisible()"
+            , image: "assets/images/map/gladion.png"
+            })
+        %>
     </g>
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Poni Island').id">
@@ -4780,7 +4911,5 @@
            , image: "assets/images/map/ashketchumoverworld.png"
            })
         %>
-
-
     </g>
 </g>

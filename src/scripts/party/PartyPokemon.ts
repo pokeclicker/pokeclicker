@@ -11,7 +11,9 @@ enum PartyPokemonSaveKeys {
     effortPoints,
     heldItem,
     defaultFemaleSprite,
-    hideShinyImage
+    hideShinyImage,
+    nickname,
+    megaStone
 }
 
 class PartyPokemon implements Saveable {
@@ -33,6 +35,8 @@ class PartyPokemon implements Saveable {
         effortPoints: 0,
         defaultFemaleSprite: false,
         hideShinyImage: false,
+        nickname: '',
+        megaStone: undefined,
     };
 
     // Saveable observables
@@ -43,18 +47,21 @@ class PartyPokemon implements Saveable {
     _attackBonusPercent: KnockoutObservable<number>;
     _attackBonusAmount: KnockoutObservable<number>;
     _category: KnockoutObservable<number>;
-    _displayName: KnockoutObservable<string>;
+    _translatedName: KnockoutObservable<string>;
+    _nickname: KnockoutObservable<string>;
+    _displayName: KnockoutComputed<string>;
     _pokerus: KnockoutObservable<GameConstants.Pokerus>;
     proteinsUsed: KnockoutObservable<number>;
     _effortPoints: KnockoutObservable<number>;
     heldItem: KnockoutObservable<HeldItem>;
     defaultFemaleSprite: KnockoutObservable<boolean>;
     hideShinyImage: KnockoutObservable<boolean>;
+    _megaStone: KnockoutObservable<MegaStone>;
 
     constructor(
         public id: number,
         public name: PokemonNameType,
-        public evolutions: Evolution[],
+        public evolutions: EvoData[],
         public baseAttack: number,
         shiny = false,
         public gender
@@ -66,7 +73,7 @@ class PartyPokemon implements Saveable {
         this._attackBonusPercent = ko.observable(0).extend({ numeric: 0 });
         this._attackBonusAmount = ko.observable(0).extend({ numeric: 0 });
         this._category = ko.observable(0).extend({ numeric: 0 });
-        this._displayName = PokemonHelper.displayName(name);
+        this._translatedName = PokemonHelper.displayName(name);
         this._pokerus = ko.observable(GameConstants.Pokerus.Uninfected).extend({ numeric: 0 });
         this._effortPoints = ko.observable(0).extend({ numeric: 0 });
         this.evs = ko.pureComputed(() => {
@@ -91,6 +98,9 @@ class PartyPokemon implements Saveable {
         this.heldItem = ko.observable(undefined);
         this.defaultFemaleSprite = ko.observable(false);
         this.hideShinyImage = ko.observable(false);
+        this._nickname = ko.observable();
+        this._displayName = ko.pureComputed(() => this._nickname() ? this._nickname() : this._translatedName());
+        this._megaStone = ko.observable(undefined);
     }
 
     public calculateAttack(ignoreLevel = false): number {
@@ -179,22 +189,22 @@ class PartyPokemon implements Saveable {
             return;
         }
 
-        for (const evolution of this.evolutions) {
-            if (evolution instanceof LevelEvolution && evolution.isSatisfied()) {
-                evolution.evolve();
+        for (const evo of this.evolutions) {
+            if (evo.trigger === EvoTrigger.LEVEL && EvolutionHandler.isSatisfied(evo)) {
+                EvolutionHandler.evolve(evo);
             }
         }
     }
 
     public useStone(stoneType: GameConstants.StoneType): boolean {
-        const possibleEvolutions = [];
-        for (const evolution of this.evolutions) {
-            if (evolution instanceof StoneEvolution && evolution.stone == stoneType && evolution.isSatisfied()) {
-                possibleEvolutions.push(evolution);
+        const possibleEvolutions: EvoData[] = [];
+        for (const evo of this.evolutions) {
+            if (evo.trigger === EvoTrigger.STONE && (evo as StoneEvoData).stone == stoneType && EvolutionHandler.isSatisfied(evo)) {
+                possibleEvolutions.push(evo);
             }
         }
         if (possibleEvolutions.length !== 0) {
-            return Rand.fromArray(possibleEvolutions).evolve();
+            return EvolutionHandler.evolve(Rand.fromArray(possibleEvolutions));
         }
         return false;
     }
@@ -330,6 +340,18 @@ class PartyPokemon implements Saveable {
         return false;
     });
 
+    public giveMegastone(notify = true) {
+        if (!this._megaStone() && this.evolutions?.some((evo) => evo.restrictions.some(r => r instanceof MegaEvolveRequirement))) {
+            this._megaStone(new MegaStone(this.id, this.baseAttack, this._attack));
+            if (notify) {
+                Notifier.notify({
+                    message: `${this.displayName} has gained a Mega Stone!`,
+                    type: NotificationConstants.NotificationOption.success,
+                });
+            }
+        }
+    }
+
     public fromJSON(json: Record<string, any>): void {
         if (json == null) {
             return;
@@ -352,11 +374,15 @@ class PartyPokemon implements Saveable {
         this.heldItem(json[PartyPokemonSaveKeys.heldItem] && ItemList[json[PartyPokemonSaveKeys.heldItem]] instanceof HeldItem ? ItemList[json[PartyPokemonSaveKeys.heldItem]] as HeldItem : undefined);
         this.defaultFemaleSprite(json[PartyPokemonSaveKeys.defaultFemaleSprite] ?? this.defaults.defaultFemaleSprite);
         this.hideShinyImage(json[PartyPokemonSaveKeys.hideShinyImage] ?? this.defaults.hideShinyImage);
+        this._nickname(json[PartyPokemonSaveKeys.nickname] ? decodeURI(json[PartyPokemonSaveKeys.nickname]) : this.defaults.nickname);
+        if (json[PartyPokemonSaveKeys.megaStone]) {
+            this.giveMegastone(false);
+        }
 
         if (this.evolutions != null) {
             for (const evolution of this.evolutions) {
-                if (evolution instanceof LevelEvolution) {
-                    evolution.triggered = json[PartyPokemonSaveKeys.levelEvolutionTriggered] ?? this.defaults.levelEvolutionTriggered;
+                if (evolution.trigger === EvoTrigger.LEVEL) {
+                    (evolution as LevelEvoData).triggered(json[PartyPokemonSaveKeys.levelEvolutionTriggered] ?? this.defaults.levelEvolutionTriggered);
                 }
             }
         }
@@ -366,7 +392,7 @@ class PartyPokemon implements Saveable {
         let levelEvolutionTriggered = false;
         if (this.evolutions != null) {
             for (const evolution of this.evolutions) {
-                if (evolution instanceof LevelEvolution && evolution.triggered) {
+                if (evolution.trigger === EvoTrigger.LEVEL && (evolution as LevelEvoData).triggered()) {
                     levelEvolutionTriggered = true;
                 }
             }
@@ -386,6 +412,8 @@ class PartyPokemon implements Saveable {
             [PartyPokemonSaveKeys.heldItem]: this.heldItem()?.name,
             [PartyPokemonSaveKeys.defaultFemaleSprite]: this.defaultFemaleSprite(),
             [PartyPokemonSaveKeys.hideShinyImage]: this.hideShinyImage(),
+            [PartyPokemonSaveKeys.nickname]: this.nickname ? encodeURI(this.nickname) : undefined,
+            [PartyPokemonSaveKeys.megaStone]: this.megaStone ? true : false,
         };
 
         // Don't save anything that is the default option
@@ -467,7 +495,19 @@ class PartyPokemon implements Saveable {
         this._category(index);
     }
 
+    get nickname(): string {
+        return this._nickname();
+    }
+
+    set nickname(nickname: string) {
+        this._nickname(nickname);
+    }
+
     get displayName(): string {
         return this._displayName();
+    }
+
+    get megaStone(): MegaStone {
+        return this._megaStone();
     }
 }

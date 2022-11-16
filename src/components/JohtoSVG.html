@@ -679,7 +679,7 @@
          , x: 74, y: 45
          , width: 6, height: 3
          , databind: "click:function(){MapHelper.moveToTown('New Bark Town')}, attr:{ class: MapHelper.calculateTownCssClass('New Bark Town') }"
-         , visible:  "MapHelper.ableToTravel() && player.starter() != GameConstants.Starter.Pikachu"
+         , visible:  "MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.Special"
          , image: "assets/images/map/blimp_empty.png"
          })
      %>
@@ -689,7 +689,7 @@
          , x: 74, y: 45
          , width: 6, height: 3
          , databind: "click:function(){MapHelper.moveToTown('New Bark Town')}, attr:{ class: MapHelper.calculateTownCssClass('New Bark Town') }"
-         , visible:  "MapHelper.ableToTravel() && player.starter() == GameConstants.Starter.Pikachu"
+         , visible:  "MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() == GameConstants.Starter.Special"
          , image: "assets/images/map/blimp_pikachu.png"
          })
      %>
@@ -735,6 +735,36 @@
     %>
 
      <%- include('templates/mapOverlay',
+         { name: "Rival Silver"
+         , x: 54, y: 41
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Silver 1'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Silver 1'] && TemporaryBattleList['Silver 1'].isVisible()"
+         , image: "assets/images/map/silver.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Rival Silver"
+         , x: 26, y: 54
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Silver 2'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Silver 2'] && TemporaryBattleList['Silver 2'].isVisible()"
+         , image: "assets/images/map/silver.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Rival Silver"
+         , x: 92.5, y: 14
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Silver 5'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Silver 5'] && TemporaryBattleList['Silver 5'].isVisible()"
+         , image: "assets/images/map/silver.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
          { name: "Ash Ketchum"
          , x: 0, y: 21
          , width: 4, height: 4
@@ -743,5 +773,4 @@
          , image: "assets/images/map/ashketchumoverworld.png"
          })
     %>
-
 </g>

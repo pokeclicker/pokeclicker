@@ -922,7 +922,7 @@
          , x: 74, y: 35
          , width: 5, height: 5
          , databind: "click:function(){MapHelper.moveToTown('Distortion World')}, attr:{ class: MapHelper.calculateTownCssClass('Distortion World') }"
-         , visible:  "App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Sendoff Spring')]() >= 1"
+         , visible:  "App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Zero')]() >= 1"
          , image: "assets/images/map/distortion_world.png"
          , connectedToTown: "Distortion World"
          })
@@ -933,7 +933,7 @@
          , x: 12, y: 53
          , width: 6, height: 3
          , databind: "click:function(){MapHelper.moveToTown('Twinleaf Town')}, attr:{ class: MapHelper.calculateTownCssClass('Twinleaf Town') }"
-         , visible:  "MapHelper.ableToTravel() && player.starter() != GameConstants.Starter.Pikachu"
+         , visible:  "MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.Special"
          , image: "assets/images/map/blimp_empty.png"
          })
      %>
@@ -943,8 +943,68 @@
          , x: 12, y: 53
          , width: 6, height: 3
          , databind: "click:function(){MapHelper.moveToTown('Twinleaf Town')}, attr:{ class: MapHelper.calculateTownCssClass('Twinleaf Town') }"
-         , visible:  "MapHelper.ableToTravel() && player.starter() == GameConstants.Starter.Pikachu"
+         , visible:  "MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() == GameConstants.Starter.Special"
          , image: "assets/images/map/blimp_pikachu.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Pokémon Trainer Barry"
+         , x: 7, y: 48
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Barry 1'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Barry 1'] && TemporaryBattleList['Barry 1'].isVisible()"
+         , image: "assets/images/map/barry.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Pokémon Trainer Barry"
+         , x: 22.5, y: 41
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Barry 2'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Barry 2'] && TemporaryBattleList['Barry 2'].isVisible()"
+         , image: "assets/images/map/barry.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Pokémon Trainer Barry"
+         , x: 52.5, y: 40
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Barry 3'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Barry 3'] && TemporaryBattleList['Barry 3'].isVisible()"
+         , image: "assets/images/map/barry.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Pokémon Trainer Barry"
+         , x: 62, y: 52
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Barry 4'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Barry 4'] && TemporaryBattleList['Barry 4'].isVisible()"
+         , image: "assets/images/map/barry.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Pokémon Trainer Barry"
+         , x: 7, y: 41
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Barry 5'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Barry 5'] && TemporaryBattleList['Barry 5'].isVisible()"
+         , image: "assets/images/map/barry.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Pokémon Trainer Barry"
+         , x: 83.5, y: 27
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Barry 6'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Barry 6'] && TemporaryBattleList['Barry 6'].isVisible()"
+         , image: "assets/images/map/barry.png"
          })
      %>
 

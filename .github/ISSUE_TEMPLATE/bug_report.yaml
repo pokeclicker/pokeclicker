@@ -1,0 +1,72 @@
+name: Bug Report
+description: Use this to report any bugs you have encountered in game.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Confirmations
+      description: Please confirm the below before continuing
+      options:
+        - label: I have searched open and closed issues for any existing report of my issue
+          required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect to happen?
+    validations:
+      required: true
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to Reproduce
+      description: Describe how we can make this bug happen ourselves.
+      placeholder: |
+        1. Go to '...'
+        2. Click on '...'
+        3. Scroll down to '...'
+        4. See error
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: What operating system are you using?
+      placeholder: e.g. Windows 10, iOS, Android
+  - type: dropdown
+    id: browsers
+    attributes:
+      label: What browsers are you seeing the problem on?
+      multiple: true
+      options:
+        - Firefox
+        - Chrome
+        - Safari
+        - Opera
+        - Microsoft Edge
+        - Desktop Client
+        - Other (Tell us in Additional Information)
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log output
+      description: Please check the game console for errors (press F12 on the website). Copy and paste any red entries into this box.
+      render: shell
+  - type: textarea
+    id: other-info
+    attributes:
+      label: Additional Information
+      description: "Leave any other relevant comments here. Tip: You can attach images by dragging them into this box!"

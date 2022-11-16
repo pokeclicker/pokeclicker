@@ -13,7 +13,7 @@ aria-labelledby="hallOfFameModalLabel" aria-hidden="true">
                 <p data-bind="visible: player.region == GameConstants.Region.kanto">
                     So, you won! Congratulations!<br/>
                     You are the new Pokémon League champion!<br/>
-                    You have grown up so much since you first left with <span data-bind="text: GameConstants.Starter[player.starter()]">starter</span>!<br/>
+                    You have grown up so much since you first left with <span data-bind="text: PokemonHelper.getPokemonById(GameConstants.RegionalStarters[GameConstants.Region.kanto][this.starterPicked]).name">starter</span>!<br/>
                     <br/>
                     There are many more regions to explore!
                 </p>

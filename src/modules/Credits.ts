@@ -35,6 +35,7 @@ export const SpriteCredits: Credit[] = [
         resources: [
             'Overworld Klara',
             'Overworld Avery',
+            'Trevor',
         ],
         // Notes: Gives credit on image page if asked.
     },
@@ -48,6 +49,7 @@ export const SpriteCredits: Credit[] = [
             'Aether Foundation Employee (female)',
             'Aether Foundation Employee (male)',
             'Aether President Lusamine',
+            'Gladion',
             'Hala',
             'Hapu',
             'Hau',
@@ -56,14 +58,17 @@ export const SpriteCredits: Credit[] = [
             'Kiawe',
             'Lana',
             'Mallow',
+            'Masked Royal',
             'Mina',
             'Molayne',
             'Nanu',
             'Olivia',
+            'Plumeria',
             'Professor Kukui',
             'Rising Star (male)',
             'Sightseer (female)',
             'Sophocles',
+            'Teacher (Gen 7)',
             'Team Skull Boss (guzma)',
             'Wicke',
             'Youth Athlete (female)',
@@ -120,9 +125,14 @@ export const SpriteCredits: Credit[] = [
         link: 'https://linktr.ee/CorgiOnNeptune',
         resources: [
             'Recolours of Duncapham\'s sprite revamps',
-            'Sounds for Wanderer/Roamer',
-            'Sounds for BF finish & empty queue',
             'Dynamic BG Shiny Meltan/Melmetal',
+            'Rainbow Rocket sprite re-colours',
+            'Sounds:',
+            ' - Wandering encounter',
+            ' - Roaming encounter',
+            ' - Battle Frontier',
+            ' - Empty Queue',
+            ' - Dream Orbs',
         ],
         // Notes: Made specifically for PokéClicker.
     },
@@ -157,6 +167,14 @@ export const SpriteCredits: Credit[] = [
         // Notes: DaleArwin aka IanWalder, a GitHub contributor to this project, gives his permission
     },
     {
+        name: 'DapperDwarf',
+        link: 'https://discordapp.com/users/385866382593622018/',
+        resources: [
+            'Pokerus Resistant Icon (colorblind friendly)',
+        ],
+        // Notes: Made specifically for PokéClicker.
+    },
+    {
         name: 'Data',
         link: 'https://discordapp.com/users/240607391807307777/',
         resources: [
@@ -176,10 +194,12 @@ export const SpriteCredits: Credit[] = [
             'Ash\'s Butterfree',
             'Black mane hair big icon',
             'Blimp base',
+            'Client Island town image',
             'Cracked pot big icon',
             'Danny',
             'Dracovish shop image',
             'Dracozolt shop image',
+            'Dream Orbs',
             'Dungeon Ladder',
             'Galar fossils items',
             'Galarian Articuno overworld image',
@@ -187,6 +207,7 @@ export const SpriteCredits: Credit[] = [
             'Galarian Zapdos overworld image',
             'Galarica cuff and wreath icons',
             'Honey',
+            'Key Stone',
             'Linking cord cartoon style',
             'Luana',
             'Merilyn',
@@ -228,6 +249,7 @@ export const SpriteCredits: Credit[] = [
             'Valencian Paras',
             'White mane hair icon',
             'Zarude (Dada) shop image',
+            'Zero',
         ],
         // Notes: Made specifically for PokéClicker.
     },
@@ -254,6 +276,7 @@ export const SpriteCredits: Credit[] = [
             'Crush Kin revamp',
             'Drake revamp',
             'Lady revamp',
+            'May revamp',
             'Norman revamp',
             'Old Couple revamp',
             'Painter revamp',
@@ -266,6 +289,8 @@ export const SpriteCredits: Credit[] = [
             'Steven revamp',
             'Tamer revamp',
             'Tate & Liza revamp',
+            'Team Rocket Grunt revamps',
+            'Wally revamp',
             'Winona revamp',
         ],
         // NOTES: Allowed use with credit given.
@@ -330,6 +355,7 @@ export const SpriteCredits: Credit[] = [
             'Siebold',
             'Team Flare Bryony',
             'Team Flare Xerosic',
+            'Tierno',
             'Valerie',
             'Viola',
             'Wikstrom',
@@ -487,8 +513,12 @@ export const SpriteCredits: Credit[] = [
         name: 'NiCeDiCe',
         link: 'https://twitter.com/NiCeDiCe90',
         resources: [
+            'Blessing Blissey',
+            'Bulbasaur (Rose)',
+            'Charity Chansey',
             'Crystal Onix',
             'Crystal Steelix',
+            'Handout Happiny',
             'Pinkan Rhyhorn (non shiny)',
             'Red Spearow',
             'shiny Totem Ribombee',
@@ -523,6 +553,24 @@ export const SpriteCredits: Credit[] = [
             'Underground Ice stone',
         ],
         // Notes: Permission given to SomeoneAlive via Discord DM
+    },
+    {
+        name: 'PhoenixOfLight92',
+        link: 'https://www.deviantart.com/phoenixoflight92',
+        image: 'https://a.deviantart.net/avatars-big/p/h/phoenixoflight92.png',
+        resources: [
+            'Shauna',
+        ],
+        // Notes: Permission given on image page if credited.
+    },
+    {
+        name: 'Prodigal96',
+        link: 'https://www.deviantart.com/prodigal96',
+        image: 'https://a.deviantart.net/avatars-big/p/r/prodigal96.jpg',
+        resources: [
+            'Rainbow Rocket overworld sprites',
+        ],
+        // Notes: Free to use, no credit required
     },
     {
         name: 'procompyart',
@@ -574,6 +622,15 @@ export const SpriteCredits: Credit[] = [
         ],
     },
     {
+        name: 'Similation',
+        link: 'https://www.deviantart.com/similation',
+        image: 'https://a.deviantart.net/avatars-big/s/i/similation.jpg',
+        resources: [
+            'Professor Sycamore',
+        ],
+        // Notes: Permission given on image page if credited
+    },
+    {
         name: 'Smogon Sprite Project',
         link: 'https://www.smogon.com/forums/forums/smeargles-laptop.325/',
         resources: [
@@ -614,6 +671,16 @@ export const SpriteCredits: Credit[] = [
         image: 'https://a.deviantart.net/avatars-big/t/e/tebited15.png',
         resources: [
             'Grant',
+            'Calem overworld',
+        ],
+        // Notes: Permission given on image page if credited.
+    },
+    {
+        name: 'TintjeMadelintje101',
+        link: 'https://www.deviantart.com/tintjemadelintje101',
+        image: 'https://a.deviantart.net/avatars-big/t/i/tintjemadelintje101.jpg',
+        resources: [
+            'Calem',
         ],
         // Notes: Permission given on image page if credited.
     },
@@ -665,6 +732,19 @@ export const SpriteCredits: Credit[] = [
             'Officer Jenny',
         ],
         // Notes: Permission given on image page.
+    },
+    {
+        name: 'Zender1752',
+        link: 'https://www.deviantart.com/zender1752',
+        image: 'https://a.deviantart.net/avatars-big/z/e/zender1752.png',
+        resources: [
+            'Hau overworld',
+            'Gladion overworld',
+            'Plumeria overworld',
+            'Overworld Klara',
+            'Overworld Avery',
+        ],
+        // Notes: Permission given on image page if credited
     },
 ].map((c) => {
     SeededRand.seed(parseInt(c.name, 36));

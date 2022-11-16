@@ -26,12 +26,9 @@ class DefeatGymQuest extends Quest implements QuestInterface {
 
     private static calcReward(amount: number, gymTown: string): number {
         const gym = GymList[gymTown];
-        if (gym instanceof Champion) {
-            gym.setPokemon(player.starter());
-        }
         const playerDamage = App.game.party.pokemonAttackObservable();
         let attacksToWin = 0;
-        for (const pokemon of gym.pokemons) {
+        for (const pokemon of gym.getPokemonList()) {
             attacksToWin += Math.ceil( Math.min( 4, pokemon.maxHealth / Math.max(1, playerDamage) ) );
         }
         const reward = Math.min(5000, Math.ceil(attacksToWin * GameConstants.DEFEAT_POKEMONS_BASE_REWARD * GameConstants.ACTIVE_QUEST_MULTIPLIER * amount));
@@ -39,10 +36,18 @@ class DefeatGymQuest extends Quest implements QuestInterface {
     }
 
     get description(): string {
+        const elite = this.gymTown.includes('Elite') || this.gymTown.includes('Champion');
+        const displayName = GymList[this.gymTown]?.displayName;
+        const leaderName = GymList[this.gymTown].leaderName.replace(/\d/g, '');
         const desc = [];
-        desc.push(`Defeat ${this.gymTown}`);
-        if (!this.gymTown.includes('Elite') && !this.gymTown.includes('Champion')) {
-            desc.push('gym');
+
+        desc.push('Defeat');
+        if (displayName?.includes('Trial')) {
+            desc.push(`${displayName} at ${this.gymTown}`);
+        } else if (displayName || elite) {
+            desc.push(displayName ?? this.gymTown);
+        } else {
+            desc.push(`${leaderName}'s Gym at ${this.gymTown}`);
         }
         desc.push(`in ${GameConstants.camelCaseToString(GameConstants.Region[this.region])}`);
         desc.push(`${this.amount.toLocaleString('en-US')} times.`);
