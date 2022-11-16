@@ -1441,7 +1441,7 @@ class QuestLineHelper {
 
         // Multi-step #4:
 
-        const meltanCatch5Grimer = new CaptureSpecificPokemonQuest('Grimer', 'Catch 5 Grimer.', 5, true, 0, undefined);
+        const meltanCatch5Grimer = new CaptureSpecificPokemonQuest('Alolan Grimer', 'Catch 5 Alolan Grimer.', 5, true, 0, undefined);
         const meltanCatch5Slugma = new CaptureSpecificPokemonQuest('Slugma', 'Catch 5 Slugma.', 5, true, 0, undefined);
         const meltanCatch10Gulpin = new CaptureSpecificPokemonQuest('Gulpin', 'Catch 10 Gulpin.', 10, true, 0, undefined);
 
