@@ -35,6 +35,7 @@ export const SpriteCredits: Credit[] = [
         resources: [
             'Overworld Klara',
             'Overworld Avery',
+            'Trevor',
         ],
         // Notes: Gives credit on image page if asked.
     },
@@ -57,6 +58,7 @@ export const SpriteCredits: Credit[] = [
             'Aether Foundation Employee (female)',
             'Aether Foundation Employee (male)',
             'Aether President Lusamine',
+            'Gladion',
             'Hala',
             'Hapu',
             'Hau',
@@ -65,10 +67,12 @@ export const SpriteCredits: Credit[] = [
             'Kiawe',
             'Lana',
             'Mallow',
+            'Masked Royal',
             'Mina',
             'Molayne',
             'Nanu',
             'Olivia',
+            'Plumeria',
             'Professor Kukui',
             'Rising Star (male)',
             'Sightseer (female)',
@@ -281,6 +285,7 @@ export const SpriteCredits: Credit[] = [
             'Crush Kin revamp',
             'Drake revamp',
             'Lady revamp',
+            'May revamp',
             'Norman revamp',
             'Old Couple revamp',
             'Painter revamp',
@@ -294,6 +299,7 @@ export const SpriteCredits: Credit[] = [
             'Tamer revamp',
             'Tate & Liza revamp',
             'Team Rocket Grunt revamps',
+            'Wally revamp',
             'Winona revamp',
         ],
         // NOTES: Allowed use with credit given.
@@ -358,6 +364,7 @@ export const SpriteCredits: Credit[] = [
             'Siebold',
             'Team Flare Bryony',
             'Team Flare Xerosic',
+            'Tierno',
             'Valerie',
             'Viola',
             'Wikstrom',
@@ -557,6 +564,15 @@ export const SpriteCredits: Credit[] = [
         // Notes: Permission given to SomeoneAlive via Discord DM
     },
     {
+        name: 'PhoenixOfLight92',
+        link: 'https://www.deviantart.com/phoenixoflight92',
+        image: 'https://a.deviantart.net/avatars-big/p/h/phoenixoflight92.png',
+        resources: [
+            'Shauna',
+        ],
+        // Notes: Permission given on image page if credited.
+    },
+    {
         name: 'Prodigal96',
         link: 'https://www.deviantart.com/prodigal96',
         image: 'https://a.deviantart.net/avatars-big/p/r/prodigal96.jpg',
@@ -615,6 +631,15 @@ export const SpriteCredits: Credit[] = [
         ],
     },
     {
+        name: 'Similation',
+        link: 'https://www.deviantart.com/similation',
+        image: 'https://a.deviantart.net/avatars-big/s/i/similation.jpg',
+        resources: [
+            'Professor Sycamore',
+        ],
+        // Notes: Permission given on image page if credited
+    },
+    {
         name: 'Smogon Sprite Project',
         link: 'https://www.smogon.com/forums/forums/smeargles-laptop.325/',
         resources: [
@@ -655,6 +680,16 @@ export const SpriteCredits: Credit[] = [
         image: 'https://a.deviantart.net/avatars-big/t/e/tebited15.png',
         resources: [
             'Grant',
+            'Calem overworld',
+        ],
+        // Notes: Permission given on image page if credited.
+    },
+    {
+        name: 'TintjeMadelintje101',
+        link: 'https://www.deviantart.com/tintjemadelintje101',
+        image: 'https://a.deviantart.net/avatars-big/t/i/tintjemadelintje101.jpg',
+        resources: [
+            'Calem',
         ],
         // Notes: Permission given on image page if credited.
     },
@@ -706,6 +741,19 @@ export const SpriteCredits: Credit[] = [
             'Officer Jenny',
         ],
         // Notes: Permission given on image page.
+    },
+    {
+        name: 'Zender1752',
+        link: 'https://www.deviantart.com/zender1752',
+        image: 'https://a.deviantart.net/avatars-big/z/e/zender1752.png',
+        resources: [
+            'Hau overworld',
+            'Gladion overworld',
+            'Plumeria overworld',
+            'Overworld Klara',
+            'Overworld Avery',
+        ],
+        // Notes: Permission given on image page if credited
     },
 ].map((c) => {
     SeededRand.seed(parseInt(c.name, 36));
