@@ -26270,7 +26270,7 @@ export const pokemonList = createPokemonArray(
             'type': Genders.Genderless,
         },
     },
-    
+
     // ???
     {
         'id': -793,

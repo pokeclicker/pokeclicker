@@ -1430,7 +1430,7 @@ class Update implements Saveable {
             if (!playerData.regionStarters) {
                 playerData.regionStarters = [playerData.starter];
             }
-            
+
             // Rivals Temp Battles
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 0);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 1);
