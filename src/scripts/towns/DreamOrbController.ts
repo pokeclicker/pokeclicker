@@ -66,7 +66,8 @@ class DreamOrbController implements Saveable {
         if (this.opening()) {
             return;
         }
-        if (!this.selectedOrb().amount()) {
+        const selectedOrb = this.selectedOrb();
+        if (!selectedOrb.amount()) {
             Notifier.notify({
                 message: 'No orbs left.',
                 type: NotificationConstants.NotificationOption.danger,
@@ -79,10 +80,10 @@ class DreamOrbController implements Saveable {
             sound: NotificationConstants.NotificationSound.General.dream_orb,
         });
         setTimeout(() => {
-            const item = Rand.fromWeightedArray(this.selectedOrb().items, this.selectedOrb().items.map((i) => i.weight));
+            const item = Rand.fromWeightedArray(selectedOrb.items, selectedOrb.items.map((i) => i.weight));
             this.item(item);
             this.opening(false);
-            GameHelper.incrementObservable(this.selectedOrb().amount, -1);
+            GameHelper.incrementObservable(selectedOrb.amount, -1);
             BagHandler.gainItem(item.item);
         }, 1800);
     }
