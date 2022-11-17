@@ -2888,15 +2888,6 @@ TownList['Sunyshore City'] = new Town(
         npcs: [SunyshoreRibbonerJulia],
     }
 );
-TownList['Pokémon League Sinnoh'] = new Town(
-    'Pokémon League Sinnoh',
-    GameConstants.Region.sinnoh,
-    GameConstants.SinnohSubRegions.Sinnoh,
-    [],
-    {
-        requirements: [new TemporaryBattleRequirement('Barry 6')],
-    }
-);
 TownList['Fight Area'] = new Town(
     'Fight Area',
     GameConstants.Region.sinnoh,
@@ -2934,7 +2925,7 @@ TownList['Pokémon League Sinnoh'] = new Town(
     {
         requirements: [
             new RouteKillRequirement(10, GameConstants.Region.sinnoh, 223),
-            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Sinnoh')),
+            new TemporaryBattleRequirement('Barry 6'),
         ],
     }
 );
