@@ -738,7 +738,7 @@
             , x: 49, y: 54
             , width: 6, height: 3
             , databind: "click:function(){MapHelper.moveToTown('Postwick')}, attr:{ class: MapHelper.calculateTownCssClass('Postwick') }"
-            , visible:  "MapHelper.ableToTravel() && player.starter() != GameConstants.Starter.Pikachu"
+            , visible:  "MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.Special"
             , image: "assets/images/map/blimp_empty.png"
             })
         %>
@@ -748,7 +748,7 @@
             , x: 49, y: 54
             , width: 6, height: 3
             , databind: "click:function(){MapHelper.moveToTown('Postwick')}, attr:{ class: MapHelper.calculateTownCssClass('Postwick') }"
-            , visible:  "MapHelper.ableToTravel() && player.starter() == GameConstants.Starter.Pikachu"
+            , visible:  "MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() == GameConstants.Starter.Special"
             , image: "assets/images/map/blimp_pikachu.png"
             })
         %>
