@@ -61,7 +61,7 @@ class Player {
             if (savedPlayer.regionStarters && savedPlayer.regionStarters[i] != undefined) {
                 this.regionStarters.push(ko.observable(savedPlayer.regionStarters[i]));
             } else if (i < (savedPlayer.highestRegion ?? 0)) {
-                this.regionStarters.push(ko.observable(0));
+                this.regionStarters.push(ko.observable(GameConstants.Starter.Grass));
             } else if (i == (savedPlayer.highestRegion ?? 0)) {
                 this.regionStarters.push(ko.observable(GameConstants.Starter.None));
                 if (i != GameConstants.Region.kanto) { // Kanto has it's own starter code
