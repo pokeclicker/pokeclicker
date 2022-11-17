@@ -1597,78 +1597,113 @@ class Update implements Saveable {
                 [893.1, 893.01],
                 [898.1, 898.01],
                 [898.2, 898.02],
-
-                // Move IDs for more logical orders
-                const reorderIDs = [
-                    [12.01, 12.02],
-                    [12.02, 12.03],
-                    [12.03, 12.04],
-                    [25.07, 25.08],
-                    [25.08, 25.10],
-                    [25.09, 25.11],
-                    [25.10, 25.12],
-                    [25.11, 25.13],
-                    [25.12, 25.07],
-                    [25.13, 25.14],
-                    [869.01, 869.06],
-                    [869.02, 869.07],
-                    [869.03, 869.04],
-                    [869.04, 869.01],
-                    [869.05, 869.02],
-                    [869.06, 869.08],
-                    [869.07, 869.03],
-                    [869.08, 869.05],
-                    [869.11, 869.16],
-                    [869.12, 869.17],
-                    [869.13, 869.14],
-                    [869.14, 869.11],
-                    [869.15, 869.12],
-                    [869.16, 869.18],
-                    [869.17, 869.13],
-                    [869.18, 869.15],
-                    [869.21, 869.26],
-                    [869.22, 869.27],
-                    [869.23, 869.24],
-                    [869.24, 869.21],
-                    [869.25, 869.22],
-                    [869.26, 869.28],
-                    [869.27, 869.23],
-                    [869.28, 869.25],
-                    [869.31, 869.36],
-                    [869.32, 869.37],
-                    [869.33, 869.34],
-                    [869.34, 869.31],
-                    [869.35, 869.32],
-                    [869.36, 869.38],
-                    [869.37, 869.33],
-                    [869.38, 869.35],
-                    [869.41, 869.46],
-                    [869.42, 869.47],
-                    [869.43, 869.44],
-                    [869.44, 869.41],
-                    [869.45, 869.42],
-                    [869.46, 869.48],
-                    [869.47, 869.43],
-                    [869.48, 869.45],
-                    [869.51, 869.56],
-                    [869.52, 869.57],
-                    [869.53, 869.54],
-                    [869.54, 869.51],
-                    [869.55, 869.52],
-                    [869.56, 869.58],
-                    [869.57, 869.53],
-                    [869.58, 869.55],
-                    [869.61, 869.66],
-                    [869.62, 869.67],
-                    [869.63, 869.64],
-                    [869.64, 869.61],
-                    [869.65, 869.62],
-                    [869.66, 869.68],
-                    [869.67, 869.63],
-                    [869.68, 869.65],
             ];
 
             consistentIDs.forEach(([oldID, newID]) => {
+                const pokemon = saveData.party.caughtPokemon.find(p => p.id === oldID);
+                // If player hasn't caught this mon yet, return.
+                if (pokemon == undefined) {
+                    return;
+                }
+                // Update our ID
+                pokemon.id = newID;
+                if (!saveData.statistics.pokemonHatched) {
+                    saveData.statistics.pokemonHatched = {};
+                }
+                if (!saveData.statistics.shinyPokemonHatched) {
+                    saveData.statistics.shinyPokemonHatched = {};
+                }
+                // Update our statistics
+                saveData.statistics.pokemonEncountered[newID] = saveData.statistics.pokemonEncountered[oldID] || 0;
+                saveData.statistics.pokemonDefeated[newID] = saveData.statistics.pokemonDefeated[oldID] || 0;
+                saveData.statistics.pokemonCaptured[newID] = saveData.statistics.pokemonCaptured[oldID] || 0;
+                saveData.statistics.pokemonHatched[newID] = saveData.statistics.pokemonHatched[oldID] || 0;
+                saveData.statistics.shinyPokemonEncountered[newID] = saveData.statistics.shinyPokemonEncountered[oldID] || 0;
+                saveData.statistics.shinyPokemonDefeated[newID] = saveData.statistics.shinyPokemonDefeated[oldID] || 0;
+                saveData.statistics.shinyPokemonCaptured[newID] = saveData.statistics.shinyPokemonCaptured[oldID] || 0;
+                saveData.statistics.shinyPokemonHatched[newID] = saveData.statistics.shinyPokemonHatched[oldID] || 0;
+                // Delete our old statistics
+                delete saveData.statistics.pokemonEncountered[oldID];
+                delete saveData.statistics.pokemonDefeated[oldID];
+                delete saveData.statistics.pokemonCaptured[oldID];
+                delete saveData.statistics.pokemonHatched[oldID];
+                delete saveData.statistics.shinyPokemonEncountered[oldID];
+                delete saveData.statistics.shinyPokemonDefeated[oldID];
+                delete saveData.statistics.shinyPokemonCaptured[oldID];
+                delete saveData.statistics.shinyPokemonHatched[oldID];
+            });
+
+            // Move IDs for more logical orders
+            const reorderIDs = [
+                [12.01, 12.02],
+                [12.02, 12.03],
+                [12.03, 12.04],
+                [25.07, 25.08],
+                [25.08, 25.10],
+                [25.09, 25.11],
+                [25.10, 25.12],
+                [25.11, 25.13],
+                [25.12, 25.07],
+                [25.13, 25.14],
+                [869.01, 869.06],
+                [869.02, 869.07],
+                [869.03, 869.04],
+                [869.04, 869.01],
+                [869.05, 869.02],
+                [869.06, 869.08],
+                [869.07, 869.03],
+                [869.08, 869.05],
+                [869.11, 869.16],
+                [869.12, 869.17],
+                [869.13, 869.14],
+                [869.14, 869.11],
+                [869.15, 869.12],
+                [869.16, 869.18],
+                [869.17, 869.13],
+                [869.18, 869.15],
+                [869.21, 869.26],
+                [869.22, 869.27],
+                [869.23, 869.24],
+                [869.24, 869.21],
+                [869.25, 869.22],
+                [869.26, 869.28],
+                [869.27, 869.23],
+                [869.28, 869.25],
+                [869.31, 869.36],
+                [869.32, 869.37],
+                [869.33, 869.34],
+                [869.34, 869.31],
+                [869.35, 869.32],
+                [869.36, 869.38],
+                [869.37, 869.33],
+                [869.38, 869.35],
+                [869.41, 869.46],
+                [869.42, 869.47],
+                [869.43, 869.44],
+                [869.44, 869.41],
+                [869.45, 869.42],
+                [869.46, 869.48],
+                [869.47, 869.43],
+                [869.48, 869.45],
+                [869.51, 869.56],
+                [869.52, 869.57],
+                [869.53, 869.54],
+                [869.54, 869.51],
+                [869.55, 869.52],
+                [869.56, 869.58],
+                [869.57, 869.53],
+                [869.58, 869.55],
+                [869.61, 869.66],
+                [869.62, 869.67],
+                [869.63, 869.64],
+                [869.64, 869.61],
+                [869.65, 869.62],
+                [869.66, 869.68],
+                [869.67, 869.63],
+                [869.68, 869.65],
+            ];
+
+            reorderIDs.forEach(([oldID, newID]) => {
                 const pokemon = saveData.party.caughtPokemon.find(p => p.id === oldID);
                 // If player hasn't caught this mon yet, return.
                 if (pokemon == undefined) {
