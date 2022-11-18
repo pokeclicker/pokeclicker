@@ -1418,7 +1418,7 @@ class Update implements Saveable {
             // Rotate form IDs
             const formIDs = [
                 // Vivillon (Poke Ball to before Fancy, Icy Snow to before Polar)
-                [666.01, 666.18, 666.17, 666.16, 666.15, 666.14, 666.13, 666.12, 666.11, 666.10, 666.09, 666.08, 666.07],
+                [666.01, 666.18, 666.17, 666.16, 666.15, 666.14, 666.13, 666.12, 666.11, 666.1, 666.09, 666.08, 666.07],
                 // Flabebe line (swap Blue and Orange)
                 [669.02, 669.03],
                 [670.02, 670.03],
