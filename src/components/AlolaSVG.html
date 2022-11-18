@@ -4912,4 +4912,198 @@
            })
         %>
     </g>
+
+    <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Magikarp Jump').id">
+        <image width="1600" height="960" data-bind="attr: {
+            'xlink:href':'assets/images/alola-magikarp-jump.png?v=$VERSION',
+            href:'assets/images/alola-magikarp-jump.png?v=$VERSION'
+        }"></image>
+
+        <!-- ------ -->
+        <!-- ROUTES -->
+        <!-- ------ -->
+
+        <!--Friend League Route-->
+        <%- include('templates/mapRoute',
+            { route: 31, region: 6
+            , width: 13, height: 2
+            , x: 33, y: 29
+            , name: "F.L."
+            })
+        %>
+
+        <!--Quick League Route-->
+        <%- include('templates/mapRoute',
+            { route: 32, region: 6
+            , width: 2, height: 9
+            , x: 52, y: 14
+            , name: "Q.L."
+            })
+        %>
+
+        <!--Heavy League Route-->
+        <%- include('templates/mapRoute',
+            { route: 33, region: 6
+            , width: 7, height: 2
+            , x: 62, y: 29
+            , name: "H.L."
+            })
+        %>
+
+        <!--Great League Route-->
+        <%- include('templates/mapRoute',
+            { route: 34, region: 6
+            , width: 2, height: 3
+            , x: 52, y: 37
+            , name: "G.L."
+            })
+        %>
+
+        <!--Fast League Route-->
+        <%- include('templates/mapRoute',
+            { route: 35, region: 6
+            , width: 2, height: 7
+            , x: 39, y: 22
+            , name: "F.L."
+            })
+        %>
+
+        <!--Luxury League Route-->
+        <%- include('templates/mapRoute',
+            { route: 36, region: 6
+            , width: 2, height: 9
+            , x: 60, y: 18
+            , name: "L.L."
+            })
+        %>
+
+        <!--Heal League Route-->
+        <%- include('templates/mapRoute',
+            { route: 37, region: 6
+            , width: 2, height: 6
+            , x: 60, y: 34
+            , name: "H.L."
+            })
+        %>
+
+        <!--Ultra League Route-->
+        <%- include('templates/mapRoute',
+            { route: 38, region: 6
+            , width: 2, height: 11
+            , x: 39, y: 31
+            , name: "U.L."
+            })
+        %>
+
+        <!--Elite Four League Route-->
+        <%- include('templates/mapRoute',
+            { route: 39, region: 6
+            , width: 2, height: 2
+            , x: 16, y: 29
+            , name: "E4.L."
+            })
+        %>
+
+        <!--Master League Route-->
+        <%- include('templates/mapRoute',
+            { route: 40, region: 6
+            , width: 2, height: 2
+            , x: 84, y: 30
+            , name: "M.L."
+            })
+        %>
+
+        <!-- ----- -->
+        <!-- TOWNS -->
+        <!-- ----- -->
+
+        <!--Hoppy Town-->
+        <%- include('templates/mapTown',
+            { name: "Hoppy Town"
+            , x: 47, y: 26
+            , width: 10, height: 8
+            })
+        %>
+
+        <!--Friend League-->
+        <%- include('templates/mapTown',
+            { name: "Friend League"
+            , x: 28, y: 26
+            , width: 4, height: 5
+            })
+        %>
+
+        <!--Quick League-->
+        <%- include('templates/mapTown',
+            { name: "Quick League"
+            , x: 51, y: 6
+            , width: 4, height: 5
+            })
+        %>
+
+        <!--Heavy League-->
+        <%- include('templates/mapTown',
+            { name: "Heavy League"
+            , x: 69, y: 26
+            , width: 4, height: 5
+            })
+        %>
+
+        <!--Great League-->
+        <%- include('templates/mapTown',
+            { name: "Great League"
+            , x: 50, y: 44
+            , width: 4, height: 5
+            })
+        %>
+
+        <!--Fast League-->
+        <%- include('templates/mapTown',
+            { name: "Fast League"
+            , x: 34, y: 11
+            , width: 4, height: 5
+            })
+        %>
+
+        <!--Luxury League-->
+        <%- include('templates/mapTown',
+            { name: "Luxury League"
+            , x: 68, y: 15
+            , width: 4, height: 5
+            })
+        %>
+
+        <!--Heal League-->
+        <%- include('templates/mapTown',
+            { name: "Heal League"
+            , x: 66, y: 39
+            , width: 4, height: 5
+            })
+        %>
+
+        <!--Ultra League-->
+        <%- include('templates/mapTown',
+            { name: "Ultra League"
+            , x: 32, y: 41
+            , width: 4, height: 5
+            })
+        %>
+
+        <!--Elite Four League-->
+        <%- include('templates/mapTown',
+            { name: "Elite Four League"
+            , x: 86, y: 28
+            , width: 6, height: 4
+            })
+        %>
+
+        <!--Master League-->
+        <%- include('templates/mapTown',
+            { name: "Master League"
+            , x: 9, y: 27
+            , width: 6, height: 4
+            })
+        %>
+
+    </g>
 </g>
