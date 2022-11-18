@@ -363,7 +363,7 @@ TemporaryBattleList['Silver 5'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Rival Silver',
-        returnTown: 'Indigo Plateau Johto',
+        returnTown: 'Victory Road Johto',
         imageName: 'Silver',
     }
 );
@@ -524,7 +524,7 @@ TemporaryBattleList['Silver 6'] = new TemporaryBattle(
         new GymPokemon('Feraligatr', 581846, 50, new StarterRequirement(GameConstants.Region.johto, GameConstants.Starter.Fire)),
         new GymPokemon('Meganium', 581846, 50, new StarterRequirement(GameConstants.Region.johto, GameConstants.Starter.Water)),
     ],
-    'My training\'s still not good enough...? My Pokémon are so weak, it makes me frustrated... But I can feel that they are getting better after each battle... .................. Tch! They\'re still too weak! I need to give them more training...',
+    'My training\'s still not good enough...? My Pokémon are so weak, it makes me frustrated... But I can feel that they are getting better after each battle.................. Tch! They\'re still too weak! I need to give them more training...',
     [new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion)],
     undefined,
     {
@@ -549,7 +549,6 @@ TemporaryBattleList['Silver 7'] = new TemporaryBattle(
     [new NullRequirement],
     {
         displayName: 'Rival Silver',
-        returnTown: 'Indigo Plateau Johto',
         imageName: 'Silver',
         rewardFunction: () =>
             Notifier.notify({message: 'Congratulations on beating Silver at his best! Come back to fight him again at any time.'}),
@@ -610,7 +609,7 @@ TemporaryBattleList['May 3'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Pokémon Trainer May',
-        returnTown: 'Mauville City',
+        returnTown: 'Slateport City',
         imageName: 'May',
     }
 );
@@ -622,6 +621,7 @@ TemporaryBattleList['Wally 1'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Pokémon Trainer Wally',
+        returnTown: 'Mauville City',
         imageName: 'Wally',
     }
 );
@@ -643,7 +643,7 @@ TemporaryBattleList['May 4'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Pokémon Trainer May',
-        returnTown: 'Fortree City',
+        returnTown: 'Weather Institute',
         imageName: 'May',
     }
 );
@@ -703,6 +703,7 @@ TemporaryBattleList['May 5'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Pokémon Trainer May',
+        returnTown: 'Lilycove City',
         imageName: 'May',
     }
 );
@@ -720,8 +721,9 @@ TemporaryBattleList['Wally 2'] = new TemporaryBattle(
     [new NullRequirement],
     {
         displayName: 'Pokémon Trainer Wally',
-        returnTown: 'Pokémon League Hoenn',
         imageName: 'Wally',
+        rewardFunction: () =>
+            Notifier.notify({message: 'Congratulations on beating Wally at his best! Come back to fight him again at any time.'}),
     }
 );
 TemporaryBattleList['Sevii Rocket Grunt 1'] = new TemporaryBattle(
@@ -1011,7 +1013,7 @@ TemporaryBattleList['Barry 6'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Pokémon Trainer Barry',
-        returnTown: 'Pokémon League Sinnoh',
+        returnTown: 'Victory Road Sinnoh',
         imageName: 'Barry',
     }
 );
@@ -1087,6 +1089,7 @@ TemporaryBattleList['Hugh 2'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Pokémon Trainer Hugh',
+        returnTown: 'Floccesy Town',
         imageName: 'Hugh',
     }
 );
@@ -1115,7 +1118,7 @@ TemporaryBattleList['Colress 1'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Pokémon Trainer Colress',
-        returnTown: 'Nimbasa City',
+        returnTown: 'Castelia City',
         imageName: '../trainers/Team Plasma (colress)',
     }
 );
@@ -1197,7 +1200,7 @@ TemporaryBattleList['Colress 2'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Pokémon Trainer Colress',
-        returnTown: 'Driftveil',
+        returnTown: 'Driftveil City',
         imageName: '../trainers/Team Plasma (colress)',
     }
 );
@@ -1502,7 +1505,7 @@ TemporaryBattleList['Hugh 5'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Pokémon Trainer Hugh',
-        returnTown: 'Pokémon League Unova',
+        returnTown: 'Victory Road Unova',
         imageName: 'Hugh',
     }
 );
@@ -1895,7 +1898,7 @@ TemporaryBattleList['Calem 5'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Pokémon Trainer Calem',
-        returnTown: 'Pokémon League Kalos',
+        returnTown: 'Victory Road Kalos',
         imageName: 'Calem',
     }
 );
@@ -2091,7 +2094,7 @@ TemporaryBattleList['Hau 1'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Pokémon Trainer Hau',
-        returnTown: 'Iki Town',
+        returnTown: 'Iki Town Outskirts',
         imageName: 'Hau',
     }
 );
@@ -2472,7 +2475,7 @@ TemporaryBattleList['Ash Ketchum Alola'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Ash Ketchum',
-        returnTown: 'Seafolk Village',
+        returnTown: 'A Tree Maybe',
         imageName: 'Ash Ketchum',
         firstTimeRewardFunction: () => {
             App.game.party.gainPokemonById(25.07);
