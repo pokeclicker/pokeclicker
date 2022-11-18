@@ -161,9 +161,10 @@ class BreedingController {
             }
 
             // Check based on native region
+            const showRegions = BreedingFilters.region.value();
             const region = PokemonHelper.calcNativeRegion(partyPokemon.name);
-            const regionBitInFilter = 1 << region & BreedingFilters.region.value();
-            const noneRegionCheck = BreedingFilters.region.value() === (2 << player.highestRegion()) - 1
+            const regionBitInFilter = 1 << region & showRegions;
+            const noneRegionCheck = (showRegions === 0 || showRegions === (2 << player.highestRegion()) - 1)
                 && region === GameConstants.Region.none;
             if (!regionBitInFilter && !noneRegionCheck) {
                 return false;
