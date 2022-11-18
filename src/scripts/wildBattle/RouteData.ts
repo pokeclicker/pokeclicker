@@ -2054,6 +2054,107 @@ Routes.add(new RegionRoute(
     GameConstants.AlolaSubRegions.PoniIsland
 ));
 
+Routes.add(new RegionRoute(
+    'Friend League Route', GameConstants.Region.alola, 31,
+    new RoutePokemon({
+        water: ['Magikarp'],
+    }),
+    [new NullRequirement()],
+    undefined,
+    GameConstants.AlolaSubRegions.MagikarpJump,
+    true
+));
+Routes.add(new RegionRoute(
+    'Quick League Route', GameConstants.Region.alola, 32,
+    new RoutePokemon({
+        water: ['Magikarp'],
+    }),
+    [new NullRequirement()],
+    undefined,
+    GameConstants.AlolaSubRegions.MagikarpJump,
+    true
+));
+Routes.add(new RegionRoute(
+    'Heavy League Route', GameConstants.Region.alola, 33,
+    new RoutePokemon({
+        water: ['Magikarp'],
+    }),
+    [new NullRequirement()],
+    undefined,
+    GameConstants.AlolaSubRegions.MagikarpJump,
+    true
+));
+Routes.add(new RegionRoute(
+    'Great League Route', GameConstants.Region.alola, 34,
+    new RoutePokemon({
+        water: ['Magikarp'],
+    }),
+    [new NullRequirement()],
+    undefined,
+    GameConstants.AlolaSubRegions.MagikarpJump,
+    true
+));
+Routes.add(new RegionRoute(
+    'Fast League Route', GameConstants.Region.alola, 35,
+    new RoutePokemon({
+        water: ['Magikarp'],
+    }),
+    [new NullRequirement()],
+    undefined,
+    GameConstants.AlolaSubRegions.MagikarpJump,
+    true
+));
+Routes.add(new RegionRoute(
+    'Luxury League Route', GameConstants.Region.alola, 36,
+    new RoutePokemon({
+        water: ['Magikarp'],
+    }),
+    [new NullRequirement()],
+    undefined,
+    GameConstants.AlolaSubRegions.MagikarpJump,
+    true
+));
+Routes.add(new RegionRoute(
+    'Heal League Route', GameConstants.Region.alola, 37,
+    new RoutePokemon({
+        water: ['Magikarp'],
+    }),
+    [new NullRequirement()],
+    undefined,
+    GameConstants.AlolaSubRegions.MagikarpJump,
+    true
+));
+Routes.add(new RegionRoute(
+    'Ultra League Route', GameConstants.Region.alola, 38,
+    new RoutePokemon({
+        water: ['Magikarp'],
+    }),
+    [new NullRequirement()],
+    undefined,
+    GameConstants.AlolaSubRegions.MagikarpJump,
+    true
+));
+Routes.add(new RegionRoute(
+    'Elite Four League Route', GameConstants.Region.alola, 39,
+    new RoutePokemon({
+        water: ['Magikarp'],
+    }),
+    [new NullRequirement()],
+    undefined,
+    GameConstants.AlolaSubRegions.MagikarpJump,
+    true
+));
+Routes.add(new RegionRoute(
+    'Master League Route', GameConstants.Region.alola, 40,
+    new RoutePokemon({
+        water: ['Magikarp'],
+    }),
+    [new NullRequirement()],
+    undefined,
+    GameConstants.AlolaSubRegions.MagikarpJump,
+    true
+));
+
 /*
 GALAR
 */

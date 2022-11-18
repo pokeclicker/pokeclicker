@@ -1661,6 +1661,7 @@ export enum AlolaSubRegions {
     AkalaIsland,
     UlaulaIsland,
     PoniIsland,
+    MagikarpJump,
 }
 
 export enum GalarSubRegions {
