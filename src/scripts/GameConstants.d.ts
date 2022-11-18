@@ -602,6 +602,7 @@ namespace GameConstants {
         AkalaIsland,
         UlaulaIsland,
         PoniIsland,
+        MagikarpJump,
     }
     declare enum GalarSubRegions {
         SouthGalar,

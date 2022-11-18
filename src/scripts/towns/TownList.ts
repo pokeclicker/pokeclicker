@@ -4740,6 +4740,118 @@ TownList['A Tree Maybe'] = new Town(
     }
 );
 
+TownList['Hoppy Town'] = new Town(
+    'Hoppy Town',
+    GameConstants.Region.alola,
+    GameConstants.AlolaSubRegions.MagikarpJump,
+    [],
+    {
+        requirements: [],
+        npcs: [],
+    }
+);
+
+TownList['Friend League'] = new Town(
+    'Friend League',
+    GameConstants.Region.alola,
+    GameConstants.AlolaSubRegions.MagikarpJump,
+    [],
+    {
+        requirements: [],
+    }
+);
+
+TownList['Quick League'] = new Town(
+    'Quick League',
+    GameConstants.Region.alola,
+    GameConstants.AlolaSubRegions.MagikarpJump,
+    [],
+    {
+        requirements: [],
+    }
+);
+
+TownList['Heavy League'] = new Town(
+    'Heavy League',
+    GameConstants.Region.alola,
+    GameConstants.AlolaSubRegions.MagikarpJump,
+    [],
+    {
+        requirements: [],
+    }
+);
+
+TownList['Great League'] = new Town(
+    'Great League',
+    GameConstants.Region.alola,
+    GameConstants.AlolaSubRegions.MagikarpJump,
+    [],
+    {
+        requirements: [],
+    }
+);
+
+TownList['Fast League'] = new Town(
+    'Fast League',
+    GameConstants.Region.alola,
+    GameConstants.AlolaSubRegions.MagikarpJump,
+    [],
+    {
+        requirements: [],
+    }
+);
+
+TownList['Luxury League'] = new Town(
+    'Luxury League',
+    GameConstants.Region.alola,
+    GameConstants.AlolaSubRegions.MagikarpJump,
+    [],
+    {
+        requirements: [],
+    }
+);
+
+TownList['Heal League'] = new Town(
+    'Heal League',
+    GameConstants.Region.alola,
+    GameConstants.AlolaSubRegions.MagikarpJump,
+    [],
+    {
+        requirements: [],
+    }
+);
+
+TownList['Ultra League'] = new Town(
+    'Ultra League',
+    GameConstants.Region.alola,
+    GameConstants.AlolaSubRegions.MagikarpJump,
+    [],
+    {
+        requirements: [],
+    }
+);
+
+TownList['Elite Four League'] = new Town(
+    'Elite Four League',
+    GameConstants.Region.alola,
+    GameConstants.AlolaSubRegions.MagikarpJump,
+    [],
+    {
+        requirements: [],
+    }
+);
+
+TownList['Master League'] = new Town(
+    'Master League',
+    GameConstants.Region.alola,
+    GameConstants.AlolaSubRegions.MagikarpJump,
+    [],
+    {
+        requirements: [],
+    }
+);
+
+
 //Alola Dungeons
 TownList['Trainers\' School'] = new DungeonTown(
     'Trainers\' School',
