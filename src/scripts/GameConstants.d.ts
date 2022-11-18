@@ -149,6 +149,7 @@ namespace GameConstants {
     declare const ROAMER_EP_MODIFIER: number;
     declare const EP_EV_RATIO: number;
     declare const EP_CHALLENGE_MODIFIER: number;
+    declare const GRISEOUS_ITEM_CHANCE: number;
     declare const DNA_ITEM_CHANCE: number;
     declare const LIGHT_ITEM_CHANCE: number;
     declare const RUST_ITEM_CHANCE: number;
@@ -406,6 +407,7 @@ namespace GameConstants {
         Johto,
         Hoenn,
         Sevii4567,
+        Sinnoh,
         Kalos,
         Alola,
         Galar,
@@ -605,6 +607,7 @@ namespace GameConstants {
         AkalaIsland,
         UlaulaIsland,
         PoniIsland,
+        MagikarpJump,
     }
     declare enum GalarSubRegions {
         SouthGalar,

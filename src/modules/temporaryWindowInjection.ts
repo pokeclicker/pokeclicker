@@ -139,7 +139,7 @@ import {
 } from './pokemons/evolutions/Base';
 import * as OtherEvos from './pokemons/evolutions/Methods';
 import { pokemonBabyPrevolutionMap, pokemonList, pokemonMap } from './pokemons/PokemonList';
-import { TmpPokemonHelper } from './pokemons/PokemonHelper';
+import TmpPokemonHelper from './pokemons/TmpPokemonHelper';
 import PokedexFilters from './settings/PokedexFilters';
 import { createLogContent } from './logbook/helpers';
 import { ItemList } from './items/ItemList';
@@ -153,6 +153,7 @@ import PokeballItem from './items/PokeballItem';
 import RoamingPokemonList from './pokemons/RoamingPokemonList';
 import DataPokemon from './pokemons/DataPokemon';
 import MegaStoneItem from './items/MegaStoneItem';
+import RoamingPokemon from './pokemons/RoamingPokemon';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -315,4 +316,5 @@ Object.assign(<any>window, {
     RoamingPokemonList,
     DataPokemon,
     MegaStoneItem,
+    RoamingPokemon,
 });
