@@ -1580,7 +1580,7 @@ GymList['Friend League'] = new Gym(
     'TODO',
     'Friend League',
     [new GymPokemon('Magikarp', 1, 20)],
-    BadgeEnums['Friend League'],
+    BadgeEnums.Friend_League,
     0, //TODO
     'TODO',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 31)]
@@ -1590,7 +1590,7 @@ GymList['Quick League'] = new Gym(
     'TODO',
     'Quick League',
     [new GymPokemon('Magikarp', 1, 20)],
-    BadgeEnums['Quick League'],
+    BadgeEnums.Quick_League,
     0, //TODO
     'TODO',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 32)]
@@ -1600,7 +1600,7 @@ GymList['Heavy League'] = new Gym(
     'TODO',
     'Heavy League',
     [new GymPokemon('Magikarp', 1, 20)],
-    BadgeEnums['Heavy League'],
+    BadgeEnums.Heavy_League,
     0, //TODO
     'TODO',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 33)]
@@ -1610,7 +1610,7 @@ GymList['Great League'] = new Gym(
     'TODO',
     'Great League',
     [new GymPokemon('Magikarp', 1, 20)],
-    BadgeEnums['Great League'],
+    BadgeEnums.Great_League,
     0, //TODO
     'TODO',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 34)]
@@ -1620,7 +1620,7 @@ GymList['Fast League'] = new Gym(
     'TODO',
     'Fast League',
     [new GymPokemon('Magikarp', 1, 20)],
-    BadgeEnums['Fast League'],
+    BadgeEnums.Fast_League,
     0, //TODO
     'TODO',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 35)]
@@ -1630,7 +1630,7 @@ GymList['Luxury League'] = new Gym(
     'TODO',
     'Luxury League',
     [new GymPokemon('Magikarp', 1, 20)],
-    BadgeEnums['Luxury League'],
+    BadgeEnums.Luxury_League,
     0, //TODO
     'TODO',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 36)]
@@ -1640,7 +1640,7 @@ GymList['Heal League'] = new Gym(
     'TODO',
     'Heal League',
     [new GymPokemon('Magikarp', 1, 20)],
-    BadgeEnums['Heal League'],
+    BadgeEnums.Heal_League,
     0, //TODO
     'TODO',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 37)]
@@ -1650,7 +1650,7 @@ GymList['Ultra League'] = new Gym(
     'TODO',
     'Ultra League',
     [new GymPokemon('Magikarp', 1, 20)],
-    BadgeEnums['Ultra League'],
+    BadgeEnums.Ultra_League,
     0, //TODO
     'TODO',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 38)]
@@ -1660,7 +1660,7 @@ GymList['Elite Four League'] = new Gym(
     'TODO',
     'Elite Four League',
     [new GymPokemon('Magikarp', 1, 20)],
-    BadgeEnums['Elite Four League'],
+    BadgeEnums.Elite_Four_League,
     0, //TODO
     'TODO',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 39)]
@@ -1670,7 +1670,7 @@ GymList['Master League'] = new Gym(
     'TODO',
     'Master League',
     [new GymPokemon('Magikarp', 1, 20)],
-    BadgeEnums['Master League'],
+    BadgeEnums.Master_League,
     0, //TODO
     'TODO',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 40)]
