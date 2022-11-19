@@ -1514,6 +1514,20 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 136);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 145);
         },
+
+        '0.10.3': ({ playerData, saveData }) => {
+            // Adding Magikarp Jump badges
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 101);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 102);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 103);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 104);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 105);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 106);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 107);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 108);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 109);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 110);
+        },
     };
 
     constructor() {
