@@ -10,6 +10,29 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.10.2
+    new ChangelogUpdate('v0.10.2', new Date(2022, 10, 19)),
+    new Changelog(changelogType.NEW, 'Kecleon overworld battles added'),
+    new Changelog(changelogType.NEW, 'New Challenge mode added'),
+    new Changelog(changelogType.NEW, 'Translations for some game componenets'),
+    new Changelog(changelogType.NEW, 'Desktop Client exclusive Pokémon'),
+    new Changelog(changelogType.NEW, 'Able to nickname Pokémon'),
+    new Changelog(changelogType.NEW, 'More offline progress rewards added'),
+    new Changelog(changelogType.NEW, 'Some mega evolutions are now available'),
+    new Changelog(changelogType.NEW, 'Meltan questline'),
+    new Changelog(changelogType.NEW, 'Giratina questline'),
+    new Changelog(changelogType.NEW, 'Rival battles'),
+    new Changelog(changelogType.CHANGE, 'Adjusted click attack calculations'),
+    new Changelog(changelogType.CHANGE, 'Adjusted Kalos Elite Four'),
+    new Changelog(changelogType.CHANGE, 'EV bonus now taken into account for Breeding Effeciency sorting'),
+    new Changelog(changelogType.CHANGE, 'Removed guaranteed Unown (A) from Ruins of Alph'),
+    new Changelog(changelogType.CHANGE, 'Adjusted some Pokémon teams'),
+    new Changelog(changelogType.CHANGE, 'Adjusted some Pokémon encounter locations'),
+    new Changelog(changelogType.CHANGE, 'Misc text changes'),
+    new Changelog(changelogType.CHANGE, 'Misc UI changes'),
+    new Changelog(changelogType.CHANGE, 'Misc image changes'),
+    new Changelog(changelogType.FIXED, 'Reduced some lag caused by achievements'),
+
     // v0.10.1
     new ChangelogUpdate('v0.10.1', new Date(2022, 9, 31)),
     new Changelog(changelogType.NEW, 'Spooky Togepi evolution line'),
