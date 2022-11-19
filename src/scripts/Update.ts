@@ -1755,6 +1755,22 @@ class Update implements Saveable {
                 saveData.statistics.shinyPokemonDefeated[newID] = saveData.statistics.shinyPokemonDefeated[oldID] || 0;
                 saveData.statistics.shinyPokemonCaptured[newID] = saveData.statistics.shinyPokemonCaptured[oldID] || 0;
                 saveData.statistics.shinyPokemonHatched[newID] = saveData.statistics.shinyPokemonHatched[oldID] || 0;
+                saveData.statistics.malePokemonEncountered[newID] = saveData.statistics.malePokemonEncountered[oldID] || 0;
+                saveData.statistics.malePokemonDefeated[newID] = saveData.statistics.malePokemonDefeated[oldID] || 0;
+                saveData.statistics.malePokemonCaptured[newID] = saveData.statistics.malePokemonCaptured[oldID] || 0;
+                saveData.statistics.malePokemonHatched[newID] = saveData.statistics.malePokemonHatched[oldID] || 0;
+                saveData.statistics.shinyMalePokemonEncountered[newID] = saveData.statistics.shinyMalePokemonEncountered[oldID] || 0;
+                saveData.statistics.shinyMalePokemonDefeated[newID] = saveData.statistics.shinyMalePokemonDefeated[oldID] || 0;
+                saveData.statistics.shinyMalePokemonCaptured[newID] = saveData.statistics.shinyMalePokemonCaptured[oldID] || 0;
+                saveData.statistics.shinyMalePokemonHatched[newID] = saveData.statistics.shinyMalePokemonHatched[oldID] || 0;
+                saveData.statistics.femalePokemonEncountered[newID] = saveData.statistics.femalePokemonEncountered[oldID] || 0;
+                saveData.statistics.femalePokemonDefeated[newID] = saveData.statistics.femalePokemonDefeated[oldID] || 0;
+                saveData.statistics.femalePokemonCaptured[newID] = saveData.statistics.femalePokemonCaptured[oldID] || 0;
+                saveData.statistics.femalePokemonHatched[newID] = saveData.statistics.femalePokemonHatched[oldID] || 0;
+                saveData.statistics.shinyFemalePokemonEncountered[newID] = saveData.statistics.shinyFemalePokemonEncountered[oldID] || 0;
+                saveData.statistics.shinyFemalePokemonDefeated[newID] = saveData.statistics.shinyFemalePokemonDefeated[oldID] || 0;
+                saveData.statistics.shinyFemalePokemonCaptured[newID] = saveData.statistics.shinyFemalePokemonCaptured[oldID] || 0;
+                saveData.statistics.shinyFemalePokemonHatched[newID] = saveData.statistics.shinyFemalePokemonHatched[oldID] || 0;
                 // Delete our old statistics
                 delete saveData.statistics.pokemonEncountered[oldID];
                 delete saveData.statistics.pokemonDefeated[oldID];
@@ -1764,6 +1780,22 @@ class Update implements Saveable {
                 delete saveData.statistics.shinyPokemonDefeated[oldID];
                 delete saveData.statistics.shinyPokemonCaptured[oldID];
                 delete saveData.statistics.shinyPokemonHatched[oldID];
+                delete saveData.statistics.malePokemonEncountered[oldID];
+                delete saveData.statistics.malePokemonDefeated[oldID];
+                delete saveData.statistics.malePokemonCaptured[oldID];
+                delete saveData.statistics.malePokemonHatched[oldID];
+                delete saveData.statistics.shinyMalePokemonEncountered[oldID];
+                delete saveData.statistics.shinyMalePokemonDefeated[oldID];
+                delete saveData.statistics.shinyMalePokemonCaptured[oldID];
+                delete saveData.statistics.shinyMalePokemonHatched[oldID];
+                delete saveData.statistics.femalePokemonEncountered[oldID];
+                delete saveData.statistics.femalePokemonDefeated[oldID];
+                delete saveData.statistics.femalePokemonCaptured[oldID];
+                delete saveData.statistics.femalePokemonHatched[oldID];
+                delete saveData.statistics.shinyFemalePokemonEncountered[oldID];
+                delete saveData.statistics.shinyFemalePokemonDefeated[oldID];
+                delete saveData.statistics.shinyFemalePokemonCaptured[oldID];
+                delete saveData.statistics.shinyFemalePokemonHatched[oldID];
             });
         },
     };
