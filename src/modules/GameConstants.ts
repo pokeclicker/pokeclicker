@@ -993,7 +993,7 @@ export const MagikarpJumpGyms = [
     'Luxury League',
     'Heal League',
     'Ultra League',
-    'Elite Four League',
+    'E4 League',
     'Master League',
 ];
 

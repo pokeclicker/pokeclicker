@@ -1656,11 +1656,11 @@ GymList['Ultra League'] = new Gym(
     [new RouteKillRequirement(10, GameConstants.Region.alola, 38)]
 );
 
-GymList['Elite Four League'] = new Gym(
+GymList['E4 League'] = new Gym(
     'TODO',
-    'Elite Four League',
+    'E4 League',
     [new GymPokemon('Magikarp', 1, 20)],
-    BadgeEnums.Elite_Four_League,
+    BadgeEnums.E4_League,
     0, //TODO
     'TODO',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 39)]

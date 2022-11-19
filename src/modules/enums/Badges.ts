@@ -118,7 +118,7 @@ enum BadgeEnums {
     'Luxury_League',
     'Heal_League',
     'Ultra_League',
-    'Elite_Four_League',
+    'E4_League',
     'Master_League',
     // Galar
     'Galar_Grass',
