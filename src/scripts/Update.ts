@@ -1516,8 +1516,12 @@ class Update implements Saveable {
         },
         '0.10.3': ({ playerData, saveData }) => {
             const johtoBeastQL = saveData.quests.questLines.find((q) => q.name == 'The Legendary Beasts');
-            if (johtoBeastQL.state == 1 && johtoBeastQL.quest == 3 && johtoBeastQL.initial instanceof Array) {
+            if (johtoBeastQL && johtoBeastQL.state == 1 && johtoBeastQL.quest == 3 && johtoBeastQL.initial instanceof Array) {
                 johtoBeastQL.quest = 4;
+            }
+            // On the Rival fight, but already beat it before the quest
+            if (johtoBeastQL && johtoBeastQL.state == 1 && johtoBeastQL.quest == 2 && johtoBeastQL.initial > 0) {
+                johtoBeastQL.initial = 0;
             }
         },
     };
