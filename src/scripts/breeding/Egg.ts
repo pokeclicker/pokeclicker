@@ -121,9 +121,6 @@ class Egg implements Saveable {
 
             // If breeding (not store egg), reset level, reset evolution check
             if (partyPokemon.breeding) {
-                if (partyPokemon.evolutions !== undefined) {
-                    partyPokemon.evolutions.forEach(evo => evo.trigger === EvoTrigger.LEVEL ? (evo as LevelEvoData).triggered(false) : undefined);
-                }
                 partyPokemon.exp = 0;
                 partyPokemon.level = 1;
                 partyPokemon.breeding = false;
