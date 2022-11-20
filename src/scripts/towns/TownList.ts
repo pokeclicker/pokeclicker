@@ -3991,7 +3991,7 @@ const KiloudeConfusedHiker = new NPC('Confused Hiker', [
 const ProfSycamore = new ProfNPC('Prof. Sycamore',
     GameConstants.Region.kalos,
     'You\'re encountering Pokémon at a really good clip, aren\'t you? Congratulations! You completed the Pokédex!',
-    'Onward to Alola, shall we?');
+    'Onward to Alola, shall we?', 'assets/images/temporaryBattle/Sycamore.png');
 
 const MysteryFan = new NPC('Mystery Fan', [
     'I\'ve heard a Pokémon detective is sniffing around here for mysteries! He might be interested in an enigmatic berry, too.',
