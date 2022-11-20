@@ -378,25 +378,9 @@ class PartyPokemon implements Saveable {
         if (json[PartyPokemonSaveKeys.megaStone]) {
             this.giveMegastone(false);
         }
-
-        if (this.evolutions != null) {
-            for (const evolution of this.evolutions) {
-                if (evolution.trigger === EvoTrigger.LEVEL) {
-                    (evolution as LevelEvoData).triggered(json[PartyPokemonSaveKeys.levelEvolutionTriggered] ?? this.defaults.levelEvolutionTriggered);
-                }
-            }
-        }
     }
 
     public toJSON() {
-        let levelEvolutionTriggered = false;
-        if (this.evolutions != null) {
-            for (const evolution of this.evolutions) {
-                if (evolution.trigger === EvoTrigger.LEVEL && (evolution as LevelEvoData).triggered()) {
-                    levelEvolutionTriggered = true;
-                }
-            }
-        }
         const output = {
             id: this.id,
             [PartyPokemonSaveKeys.attackBonusPercent]: this.attackBonusPercent,
@@ -405,7 +389,6 @@ class PartyPokemon implements Saveable {
             [PartyPokemonSaveKeys.exp]: this.exp,
             [PartyPokemonSaveKeys.breeding]: this.breeding,
             [PartyPokemonSaveKeys.shiny]: this.shiny,
-            [PartyPokemonSaveKeys.levelEvolutionTriggered]: levelEvolutionTriggered,
             [PartyPokemonSaveKeys.category]: this.category,
             [PartyPokemonSaveKeys.pokerus]: this.pokerus,
             [PartyPokemonSaveKeys.effortPoints]: this.effortPoints,
