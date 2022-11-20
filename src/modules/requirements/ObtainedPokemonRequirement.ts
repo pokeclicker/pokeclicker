@@ -1,6 +1,5 @@
 import { AchievementOption } from '../GameConstants';
 import Requirement from './Requirement';
-import P from '../pokemons/mapProvider';
 import { PokemonNameType } from '../pokemons/PokemonNameType';
 
 export default class ObtainedPokemonRequirement extends Requirement {
@@ -9,7 +8,7 @@ export default class ObtainedPokemonRequirement extends Requirement {
     }
 
     public getProgress() {
-        return Math.min(App.game?.statistics?.pokemonCaptured[P.pokemonMap[this.pokemon].id](), this.requiredValue);
+        return App.game.party.alreadyCaughtPokemonByName(this.pokemon) ? 1 : 0;
     }
 
     public hint(): string {
