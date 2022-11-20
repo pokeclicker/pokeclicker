@@ -232,8 +232,17 @@ class Game {
         // Check that none of our quest are less than their initial value
         App.game.quests.questLines().filter(q => q.state() == 1).forEach(questLine => {
             const quest = questLine.curQuestObject();
-            if (quest.initial() > quest.focus()) {
-                quest.initial(quest.focus());
+            if (quest instanceof MultipleQuestsQuest) {
+                quest.quests.forEach((q) => {
+                    if (q.initial() > q.focus()) {
+                        q.initial(q.focus());
+                    }
+                });
+            } else {
+                if (quest.initial() > quest.focus()) {
+                    quest.initial(quest.focus());
+                    questLine.curQuestInitial(quest.initial());
+                }
             }
         });
         // Check for breeding pokemons not in queue
