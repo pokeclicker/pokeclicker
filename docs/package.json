@@ -1,6 +1,6 @@
 {
   "name": "pokeclicker",
-  "version": "0.10.1",
+  "version": "0.10.2",
   "description": "PokéClicker repository",
   "main": "index.js",
   "scripts": {
@@ -9,8 +9,11 @@
     "ts-test": "gulp scripts",
     "eslint": "eslint --ext ts ./src/scripts ./src/modules",
     "eslint-fix": "eslint --ext ts --fix ./src/scripts ./src/modules",
-    "website": "npm test && cross-env NODE_ENV=production gulp website",
-    "publish": "npm test && git push origin develop:master"
+    "website": "npm run tl:update && npm test && cross-env NODE_ENV=production gulp website",
+    "publish": "npm test && git push origin develop:master",
+    "tl:init": "git submodule update --init",
+    "tl:update": "git submodule update --remote",
+    "clean": "npm ci && npm run tl:init"
   },
   "repository": {
     "type": "git",
@@ -80,6 +83,10 @@
     "@typescript-eslint/parser": "^3.6.1",
     "bootstrap": "^4.5.3",
     "eslint": "^7.4.0",
+    "i18next": "^21.9.2",
+    "i18next-browser-languagedetector": "^6.1.5",
+    "i18next-chained-backend": "^3.1.0",
+    "i18next-http-backend": "^1.4.4",
     "intro.js": "^2.9.3",
     "jquery": "^3.5.1",
     "knockout": "^3.5.1",
