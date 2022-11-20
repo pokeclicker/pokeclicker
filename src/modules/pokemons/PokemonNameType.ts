@@ -251,7 +251,7 @@ export type PokemonNameType
     | 'Magikarp'
     | 'Magikarp Skelly'
     | 'Magikarp Calico (Orange, White)'
-    | 'Magikarp Calico (Orange, White, Brown)'
+    | 'Magikarp Calico (Orange, White, Black)'
     | 'Magikarp Calico (White, Orange)'
     | 'Magikarp Calico (Orange, Gold)'
     | 'Magikarp Orange Two Tone'

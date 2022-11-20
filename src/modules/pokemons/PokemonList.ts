@@ -4622,7 +4622,7 @@ export const pokemonList = createPokemonArray(
     },
     {
         'id': 129.03,
-        'name': 'Magikarp Calico (Orange, White, Brown)',
+        'name': 'Magikarp Calico (Orange, White, Black)',
         'catchRate': 255,
         'type': [PokemonType.Water],
         'levelType': LevelType.slow,
