@@ -273,7 +273,7 @@ class PartyPokemon implements Saveable {
         if (!this.heldItem() || heldItem.name != this.heldItem().name) {
             if (heldItem && !heldItem.canUse(this)) {
                 Notifier.notify({
-                    message: `This pokémon cannot use ${heldItem.displayName}.`,
+                    message: `This Pokémon cannot use ${heldItem.displayName}.`,
                     type: NotificationConstants.NotificationOption.warning,
                 });
                 return;
@@ -295,7 +295,7 @@ class PartyPokemon implements Saveable {
 
             if (App.game.party.caughtPokemon.filter(p => p.heldItem()).length >= 6) {
                 Notifier.notify({
-                    message: 'Only 6 pokemons can hold items at a time.',
+                    message: 'Only 6 Pokémon can hold items at a time.',
                     type: NotificationConstants.NotificationOption.warning,
                 });
                 return;
