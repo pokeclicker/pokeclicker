@@ -1524,6 +1524,19 @@ class Update implements Saveable {
                 johtoBeastQL.initial = 0;
             }
         },
+        '0.10.4': ({ playerData, saveData }) => {
+            // Adding Magikarp Jump badges
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 101);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 102);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 103);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 104);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 105);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 106);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 107);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 108);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 109);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 110);
+        },
     };
 
     constructor() {

@@ -1575,6 +1575,107 @@ GymList['Champion Hau'] = new Gym(
     { champion: true }
 );
 
+// Magikarp Jump Gyms
+GymList['Friend League'] = new Gym(
+    'Karson',
+    'Friend League',
+    [new GymPokemon('Magikarp', 1, 20)],
+    BadgeEnums.Friend_League,
+    0, //TODO
+    'TODO',
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 31)]
+);
+
+GymList['Quick League'] = new Gym(
+    'Koichiro',
+    'Quick League',
+    [new GymPokemon('Magikarp', 1, 20)],
+    BadgeEnums.Quick_League,
+    0, //TODO
+    'TODO',
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 32)]
+);
+
+GymList['Heavy League'] = new Gym(
+    'Kareign',
+    'Heavy League',
+    [new GymPokemon('Magikarp', 1, 20)],
+    BadgeEnums.Heavy_League,
+    0, //TODO
+    'TODO',
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 33)]
+);
+
+GymList['Great League'] = new Gym(
+    'Karbuck',
+    'Great League',
+    [new GymPokemon('Magikarp', 1, 20)],
+    BadgeEnums.Great_League,
+    0, //TODO
+    'TODO',
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 34)]
+);
+
+GymList['Fast League'] = new Gym(
+    'Kareign 2',
+    'Fast League',
+    [new GymPokemon('Magikarp', 1, 20)],
+    BadgeEnums.Fast_League,
+    0, //TODO
+    'TODO',
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 35)]
+);
+
+GymList['Luxury League'] = new Gym(
+    'Jump Champ',
+    'Luxury League',
+    [new GymPokemon('Magikarp', 1, 20)],
+    BadgeEnums.Luxury_League,
+    0, //TODO
+    'TODO',
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 36)]
+);
+
+GymList['Heal League'] = new Gym(
+    'Karami',
+    'Heal League',
+    [new GymPokemon('Magikarp', 1, 20)],
+    BadgeEnums.Heal_League,
+    0, //TODO
+    'TODO',
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 37)]
+);
+
+GymList['Ultra League'] = new Gym(
+    'Jump Champ 2',
+    'Ultra League',
+    [new GymPokemon('Magikarp', 1, 20)],
+    BadgeEnums.Ultra_League,
+    0, //TODO
+    'TODO',
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 38)]
+);
+
+GymList['E4 League'] = new Gym(
+    'Jump Champ 3',
+    'E4 League',
+    [new GymPokemon('Magikarp', 1, 20)],
+    BadgeEnums.E4_League,
+    0, //TODO
+    'TODO',
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 39)]
+);
+
+GymList['Master League'] = new Gym(
+    'Magikarp',
+    'Master League',
+    [new GymPokemon('Magikarp', 1, 20)],
+    BadgeEnums.Master_League,
+    0, //TODO
+    'TODO',
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 40)]
+);
+
 //Galar Leaders
 GymList.Turffield = new Gym(
     'Milo',

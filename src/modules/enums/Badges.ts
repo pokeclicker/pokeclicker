@@ -109,6 +109,17 @@ enum BadgeEnums {
     'Elite_Molayne',
     'Elite_Kahili',
     'Elite_AlolaChampion',
+    // Magikarp Jump
+    'Friend_League',
+    'Quick_League',
+    'Heavy_League',
+    'Great_League',
+    'Fast_League',
+    'Luxury_League',
+    'Heal_League',
+    'Ultra_League',
+    'E4_League',
+    'Master_League',
     // Galar
     'Galar_Grass',
     'Galar_Water',
