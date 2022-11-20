@@ -10,6 +10,13 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.10.3
+    new ChangelogUpdate('v0.10.3', new Date(2022, 10, 20)),
+    new Changelog(changelogType.CHANGE, 'Misc text changes'),
+    new Changelog(changelogType.FIXED, 'Some questline steps causing players to be stuck'),
+    new Changelog(changelogType.FIXED, 'Real evolution challenge mode'),
+    new Changelog(changelogType.FIXED, 'Shard quests not updating in specific instances'),
+
     // v0.10.2
     new ChangelogUpdate('v0.10.2', new Date(2022, 10, 19)),
     new Changelog(changelogType.NEW, 'Kecleon overworld battles added'),
