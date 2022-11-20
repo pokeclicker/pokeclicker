@@ -3352,7 +3352,7 @@ const ProfBurnet = new NPC('Professor Burnet', [
 
 const DreamResearcher1 = new NPC('Dream Researcher', [
     'I have been helping Professor Burnet explore the Interdream Zone with the help of my Audino.',
-    'Audino\'s excellent hearing lets it pick up even the quietest hints from Dream Orbs. If you can help the professor advance his research, I may be able to help you in return.'],
+    'Audino\'s excellent hearing lets it pick up even the quietest hints from Dream Orbs. If you can help the professor advance her research, I may be able to help you in return.'],
 {requirement: new TemporaryBattleRequirement('Dream Researcher', 1, GameConstants.AchievementOption.less),
 });
 
