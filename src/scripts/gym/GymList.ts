@@ -1577,7 +1577,7 @@ GymList['Champion Hau'] = new Gym(
 
 // Magikarp Jump Gyms
 GymList['Friend League'] = new Gym(
-    'TODO',
+    'Karson',
     'Friend League',
     [new GymPokemon('Magikarp', 1, 20)],
     BadgeEnums.Friend_League,
@@ -1587,7 +1587,7 @@ GymList['Friend League'] = new Gym(
 );
 
 GymList['Quick League'] = new Gym(
-    'TODO',
+    'Koichiro',
     'Quick League',
     [new GymPokemon('Magikarp', 1, 20)],
     BadgeEnums.Quick_League,
@@ -1597,7 +1597,7 @@ GymList['Quick League'] = new Gym(
 );
 
 GymList['Heavy League'] = new Gym(
-    'TODO',
+    'Kareign',
     'Heavy League',
     [new GymPokemon('Magikarp', 1, 20)],
     BadgeEnums.Heavy_League,
@@ -1607,7 +1607,7 @@ GymList['Heavy League'] = new Gym(
 );
 
 GymList['Great League'] = new Gym(
-    'TODO',
+    'Karbuck',
     'Great League',
     [new GymPokemon('Magikarp', 1, 20)],
     BadgeEnums.Great_League,
@@ -1617,7 +1617,7 @@ GymList['Great League'] = new Gym(
 );
 
 GymList['Fast League'] = new Gym(
-    'TODO',
+    'Kareign 2',
     'Fast League',
     [new GymPokemon('Magikarp', 1, 20)],
     BadgeEnums.Fast_League,
@@ -1627,7 +1627,7 @@ GymList['Fast League'] = new Gym(
 );
 
 GymList['Luxury League'] = new Gym(
-    'TODO',
+    'Jump Champ',
     'Luxury League',
     [new GymPokemon('Magikarp', 1, 20)],
     BadgeEnums.Luxury_League,
@@ -1637,7 +1637,7 @@ GymList['Luxury League'] = new Gym(
 );
 
 GymList['Heal League'] = new Gym(
-    'TODO',
+    'Karami',
     'Heal League',
     [new GymPokemon('Magikarp', 1, 20)],
     BadgeEnums.Heal_League,
@@ -1647,7 +1647,7 @@ GymList['Heal League'] = new Gym(
 );
 
 GymList['Ultra League'] = new Gym(
-    'TODO',
+    'Jump Champ 2',
     'Ultra League',
     [new GymPokemon('Magikarp', 1, 20)],
     BadgeEnums.Ultra_League,
@@ -1657,7 +1657,7 @@ GymList['Ultra League'] = new Gym(
 );
 
 GymList['E4 League'] = new Gym(
-    'TODO',
+    'Jump Champ 3',
     'E4 League',
     [new GymPokemon('Magikarp', 1, 20)],
     BadgeEnums.E4_League,
@@ -1667,7 +1667,7 @@ GymList['E4 League'] = new Gym(
 );
 
 GymList['Master League'] = new Gym(
-    'TODO',
+    'Magikarp',
     'Master League',
     [new GymPokemon('Magikarp', 1, 20)],
     BadgeEnums.Master_League,
