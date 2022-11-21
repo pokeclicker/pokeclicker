@@ -4,7 +4,7 @@ import Information from '../utilities/Information';
 import KeyItemController from './KeyItemController';
 import { Feature } from '../DataStore/common/Feature';
 import {
-    getDungeonIndex, Region, ROUTE_KILLS_NEEDED, Pokerus,
+    getDungeonIndex, Region, RegionalStarters, ROUTE_KILLS_NEEDED, Pokerus,
 } from '../GameConstants';
 
 export default class KeyItems implements Feature {
@@ -56,7 +56,7 @@ export default class KeyItems implements Feature {
             new KeyItem(KeyItemType.Reins_of_unity, 'Reins that people presented to the king. They enhance Calyrex’s power over bountiful harvests and unite Calyrex with its beloved steeds.', undefined, undefined, undefined, 'Reins of Unity'),
             new KeyItem(KeyItemType.Pokerus_virus, 'A virus sample collected from the Hatchery.',
                 () => App.game.statistics.dungeonsCleared[getDungeonIndex('Distortion World')]() > 0,
-                undefined, () => { App.game.party.getPokemonById(player.regionStarters[Region.kanto]).pokerus = Pokerus.Contagious; }, 'Pokérus Virus'),
+                undefined, () => { App.game.party.getPokemon(RegionalStarters[Region.kanto][player.regionStarters[Region.kanto]()]).pokerus = Pokerus.Contagious; }, 'Pokérus Virus'),
         ];
     }
 
