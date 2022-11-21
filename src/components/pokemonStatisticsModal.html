@@ -77,7 +77,7 @@
                       <td class="text-left align-middle">Gender Ratio</td>
                       <td class="text-justify tight">
                         <!-- ko if: pokemonMap[$data].gender.type === GameConstants.Genders.Genderless -->
-                          <code data-bind="html: 'Genderless'"></code>
+                          <code>Genderless</code>
                         <!-- /ko -->
                         <!-- ko if: pokemonMap[$data].gender.type != GameConstants.Genders.Genderless -->
                           <code data-bind="text: '♂: ' + PokedexHelper.getGenderRatioData(pokemonMap[$data]).male + '%'"></code>
