@@ -420,6 +420,10 @@ class AchievementHandler {
         GameHelper.enumNumbers(GameConstants.Region).filter(r => r != GameConstants.Region.none && r <= GameConstants.MAX_AVAILABLE_REGION).forEach(region => {
             // Routes
             Routes.getRoutesByRegion(region).forEach(route => {
+                if (SubRegions.getSubRegionById(region, route.subRegion)?.requirement instanceof NullRequirement) {
+                    return;
+                }
+
                 let category = region;
                 // Split Sevii islands into it's own achievement pool
                 if (region == GameConstants.Region.kanto && (route.subRegion == GameConstants.KantoSubRegions.Sevii123 || route.subRegion == GameConstants.KantoSubRegions.Sevii4567)) {

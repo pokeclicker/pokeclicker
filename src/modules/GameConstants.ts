@@ -984,6 +984,18 @@ export const OrangeGyms = [
     'Kumquat Island',
     'Supreme Gym Leader Drake',
 ];
+export const MagikarpJumpGyms = [
+    'Friend League',
+    'Quick League',
+    'Heavy League',
+    'Great League',
+    'Fast League',
+    'Luxury League',
+    'Heal League',
+    'Ultra League',
+    'E4 League',
+    'Master League',
+];
 
 export const RegionGyms = [
     KantoGyms,
@@ -996,6 +1008,7 @@ export const RegionGyms = [
     GalarGyms,
     // Keep it at the bottom, as we want optional badges at the bottom
     OrangeGyms,
+    MagikarpJumpGyms,
 ];
 
 export function getGymIndex(gym: string): number {
