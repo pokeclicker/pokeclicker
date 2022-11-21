@@ -1427,11 +1427,6 @@ class Update implements Saveable {
                 [774.01, 774.05],
                 [774.02, 774.04],
                 [774.03, 774.06, 774.07],
-                // Butterfree (Gigantamax before others)
-                [12.01, 12.02, 12.03, 12.04],
-                //Pikachu (Put World Cap after Alola Cap, Gigantamax after Partner Cap)
-                [25.07, 25.08, 25.09, 25.10, 25.11, 25.12],
-                [25.09, 25.10, 25.11, 25.12, 25.13, 25.14],
             ];
 
             formIDs.forEach(list => Update.rotatePokemonIDs(saveData, list));
@@ -1518,6 +1513,40 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 135);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 136);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 145);
+        },
+        '0.10.3': ({ playerData, saveData }) => {
+            const johtoBeastQL = saveData.quests.questLines.find((q) => q.name == 'The Legendary Beasts');
+            if (johtoBeastQL && johtoBeastQL.state == 1 && johtoBeastQL.quest == 3 && johtoBeastQL.initial instanceof Array) {
+                johtoBeastQL.quest = 4;
+            }
+            // On the Rival fight, but already beat it before the quest
+            if (johtoBeastQL && johtoBeastQL.state == 1 && johtoBeastQL.quest == 2 && johtoBeastQL.initial > 0) {
+                johtoBeastQL.initial = 0;
+            }
+        },
+        '0.10.4': ({ playerData, saveData }) => {
+            // Adding Magikarp Jump badges
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 101);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 102);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 103);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 104);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 105);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 106);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 107);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 108);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 109);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 110);
+
+            // Rotate form IDs
+            const formIDs = [
+                // Butterfree (Gigantamax before others)
+                [12.01, 12.02, 12.03, 12.04],
+                //Pikachu (Put World Cap after Alola Cap, Gigantamax after Partner Cap)
+                [25.07, 25.08, 25.09, 25.10, 25.11, 25.12],
+                [25.09, 25.10, 25.11, 25.12, 25.13, 25.14],
+            ];
+
+            formIDs.forEach(list => Update.rotatePokemonIDs(saveData, list));
 
             // Move IDs from .x to .0x for consistency
             const consistentIDs = [
@@ -1797,29 +1826,6 @@ class Update implements Saveable {
                 delete saveData.statistics.shinyFemalePokemonCaptured[oldID];
                 delete saveData.statistics.shinyFemalePokemonHatched[oldID];
             });
-        },
-        '0.10.3': ({ playerData, saveData }) => {
-            const johtoBeastQL = saveData.quests.questLines.find((q) => q.name == 'The Legendary Beasts');
-            if (johtoBeastQL && johtoBeastQL.state == 1 && johtoBeastQL.quest == 3 && johtoBeastQL.initial instanceof Array) {
-                johtoBeastQL.quest = 4;
-            }
-            // On the Rival fight, but already beat it before the quest
-            if (johtoBeastQL && johtoBeastQL.state == 1 && johtoBeastQL.quest == 2 && johtoBeastQL.initial > 0) {
-                johtoBeastQL.initial = 0;
-            }
-        },
-        '0.10.4': ({ playerData, saveData }) => {
-            // Adding Magikarp Jump badges
-            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 101);
-            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 102);
-            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 103);
-            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 104);
-            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 105);
-            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 106);
-            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 107);
-            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 108);
-            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 109);
-            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 110);
         },
     };
 
