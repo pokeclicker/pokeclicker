@@ -2616,7 +2616,7 @@ export const pokemonList = createPokemonArray(
     {
         'id': 58.1,
         'name': 'Hisuian Growlithe',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': GameConstants.Region.final,
         'catchRate': 190,
         'type': [PokemonType.Fire, PokemonType.Rock],
         'levelType': LevelType.slow,
@@ -2655,7 +2655,7 @@ export const pokemonList = createPokemonArray(
     {
         'id': 59.1,
         'name': 'Hisuian Arcanine',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': GameConstants.Region.final,
         'catchRate': 75,
         'type': [PokemonType.Fire, PokemonType.Rock],
         'levelType': LevelType.slow,
@@ -2673,7 +2673,7 @@ export const pokemonList = createPokemonArray(
     {
         'id': 59.2,
         'name': 'Noble Arcanine',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': GameConstants.Region.final,
         'catchRate': 75,
         'type': [PokemonType.Fire, PokemonType.Rock],
         'levelType': LevelType.slow,
@@ -3835,7 +3835,7 @@ export const pokemonList = createPokemonArray(
     {
         'id': 100.1,
         'name': 'Hisuian Voltorb',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': GameConstants.Region.final,
         'catchRate': 190,
         'type': [PokemonType.Electric, PokemonType.Grass],
         'levelType': LevelType.mediumfast,
@@ -3874,7 +3874,7 @@ export const pokemonList = createPokemonArray(
     {
         'id': 101.1,
         'name': 'Hisuian Electrode',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': GameConstants.Region.final,
         'catchRate': 60,
         'type': [PokemonType.Electric, PokemonType.Grass],
         'levelType': LevelType.mediumfast,
@@ -3892,7 +3892,7 @@ export const pokemonList = createPokemonArray(
     {
         'id': 101.2,
         'name': 'Noble Electrode',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': GameConstants.Region.final,
         'catchRate': 60,
         'type': [PokemonType.Electric, PokemonType.Grass],
         'levelType': LevelType.mediumfast,
@@ -6083,7 +6083,7 @@ export const pokemonList = createPokemonArray(
     {
         'id': 157.1,
         'name': 'Hisuian Typhlosion',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': GameConstants.Region.final,
         'catchRate': 45,
         'type': [PokemonType.Fire, PokemonType.Ghost],
         'levelType': LevelType.mediumslow,
@@ -7792,7 +7792,7 @@ export const pokemonList = createPokemonArray(
     {
         'id': 211.1,
         'name': 'Hisuian Qwilfish',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': GameConstants.Region.final,
         'catchRate': 45,
         'type': [PokemonType.Dark, PokemonType.Poison],
         'levelType': LevelType.mediumfast,
@@ -7889,7 +7889,7 @@ export const pokemonList = createPokemonArray(
     {
         'id': 215.1,
         'name': 'Hisuian Sneasel',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': GameConstants.Region.final,
         'catchRate': 60,
         'type': [PokemonType.Fighting, PokemonType.Poison],
         'levelType': LevelType.mediumslow,
@@ -14546,7 +14546,7 @@ export const pokemonList = createPokemonArray(
     {
         'id': 503.1,
         'name': 'Hisuian Samurott',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': GameConstants.Region.final,
         'type': [PokemonType.Water, PokemonType.Dark],
         'eggCycles': 20,
         'levelType': LevelType.mediumslow,
@@ -15437,7 +15437,7 @@ export const pokemonList = createPokemonArray(
     {
         'id': 549.1,
         'name': 'Hisuian Lilligant',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': GameConstants.Region.final,
         'type': [PokemonType.Grass, PokemonType.Fighting],
         'eggCycles': 20,
         'levelType': LevelType.mediumfast,
@@ -15455,7 +15455,7 @@ export const pokemonList = createPokemonArray(
     {
         'id': 549.2,
         'name': 'Noble Lilligant',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': GameConstants.Region.final,
         'type': [PokemonType.Grass, PokemonType.Fighting],
         'eggCycles': 20,
         'levelType': LevelType.mediumfast,
@@ -15509,7 +15509,7 @@ export const pokemonList = createPokemonArray(
     {
         'id': 550.02,
         'name': 'Basculin (White-Striped)',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': GameConstants.Region.final,
         'type': [PokemonType.Water],
         'eggCycles': 40,
         'levelType': LevelType.mediumfast,
@@ -16013,7 +16013,7 @@ export const pokemonList = createPokemonArray(
     {
         'id': 570.1,
         'name': 'Hisuian Zorua',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': GameConstants.Region.final,
         'type': [PokemonType.Normal, PokemonType.Ghost],
         'eggCycles': 25,
         'levelType': LevelType.mediumslow,
@@ -16052,7 +16052,7 @@ export const pokemonList = createPokemonArray(
     {
         'id': 571.1,
         'name': 'Hisuian Zoroark',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': GameConstants.Region.final,
         'type': [PokemonType.Normal, PokemonType.Ghost],
         'eggCycles': 20,
         'levelType': LevelType.mediumslow,
@@ -17239,7 +17239,7 @@ export const pokemonList = createPokemonArray(
     {
         'id': 628.1,
         'name': 'Hisuian Braviary',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': GameConstants.Region.final,
         'type': [PokemonType.Psychic, PokemonType.Flying],
         'eggCycles': 20,
         'levelType': LevelType.slow,
@@ -19661,7 +19661,7 @@ export const pokemonList = createPokemonArray(
     {
         'id': 705.1,
         'name': 'Hisuian Sliggoo',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': GameConstants.Region.final,
         'type': [PokemonType.Steel, PokemonType.Dragon],
         'eggCycles': 40,
         'levelType': LevelType.slow,
@@ -19697,7 +19697,7 @@ export const pokemonList = createPokemonArray(
     {
         'id': 706.1,
         'name': 'Hisuian Goodra',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': GameConstants.Region.final,
         'type': [PokemonType.Steel, PokemonType.Dragon],
         'eggCycles': 40,
         'levelType': LevelType.slow,
@@ -19945,7 +19945,7 @@ export const pokemonList = createPokemonArray(
     {
         'id': 713.1,
         'name': 'Hisuian Avalugg',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': GameConstants.Region.final,
         'type': [PokemonType.Ice, PokemonType.Rock],
         'eggCycles': 20,
         'levelType': LevelType.mediumfast,
@@ -19963,7 +19963,7 @@ export const pokemonList = createPokemonArray(
     {
         'id': 713.2,
         'name': 'Noble Avalugg',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': GameConstants.Region.final,
         'type': [PokemonType.Ice, PokemonType.Rock],
         'eggCycles': 20,
         'levelType': LevelType.mediumfast,
@@ -20201,7 +20201,7 @@ export const pokemonList = createPokemonArray(
     {
         'id': 724.1,
         'name': 'Hisuian Decidueye',
-        'nativeRegion': GameConstants.Region.galar,
+        'nativeRegion': GameConstants.Region.final,
         'type': [PokemonType.Grass, PokemonType.Fighting],
         'eggCycles': 15,
         'levelType': LevelType.mediumslow,
@@ -26431,6 +26431,7 @@ export const pokemonList = createPokemonArray(
     {
         'id': 899,
         'name': 'Wyrdeer',
+        'nativeRegion': GameConstants.Region.final,
         'catchRate': 45,
         'type': [PokemonType.Normal, PokemonType.Psychic],
         'levelType': LevelType.slow,
@@ -26448,6 +26449,7 @@ export const pokemonList = createPokemonArray(
     {
         'id': 900,
         'name': 'Kleavor',
+        'nativeRegion': GameConstants.Region.final,
         'catchRate': 25,
         'type': [PokemonType.Bug, PokemonType.Rock],
         'levelType': LevelType.mediumfast,
@@ -26482,8 +26484,9 @@ export const pokemonList = createPokemonArray(
     {
         'id': 901,
         'name': 'Ursaluna',
-        'catchRate': 60,
-        'type': [PokemonType.Normal, PokemonType.Ground],
+        'nativeRegion': GameConstants.Region.final,
+        'catchRate': 75,
+        'type': [PokemonType.Ground, PokemonType.Normal],
         'levelType': LevelType.mediumfast,
         'exp': 175,
         'eggCycles': 20,
@@ -26499,6 +26502,7 @@ export const pokemonList = createPokemonArray(
     {
         'id': 902,
         'name': 'Basculegion (Male)',
+        'nativeRegion': GameConstants.Region.final,
         'type': [PokemonType.Water, PokemonType.Ghost],
         'eggCycles': 40,
         'levelType': LevelType.mediumfast,
@@ -26516,6 +26520,7 @@ export const pokemonList = createPokemonArray(
     {
         'id': 902.1,
         'name': 'Basculegion (Female)',
+        'nativeRegion': GameConstants.Region.final,
         'type': [PokemonType.Water, PokemonType.Ghost],
         'eggCycles': 40,
         'levelType': LevelType.mediumfast,
@@ -26533,11 +26538,12 @@ export const pokemonList = createPokemonArray(
     {
         'id': 903,
         'name': 'Sneasler',
+        'nativeRegion': GameConstants.Region.final,
         'type': [PokemonType.Fighting, PokemonType.Poison],
         'eggCycles': 20,
         'levelType': LevelType.mediumslow,
         'exp': 179,
-        'catchRate': 45,
+        'catchRate': 135,
         'base': {
             'hitpoints': 80,
             'attack': 130,
@@ -26550,7 +26556,8 @@ export const pokemonList = createPokemonArray(
     {
         'id': 904,
         'name': 'Overqwil',
-        'catchRate': 45,
+        'nativeRegion': GameConstants.Region.final,
+        'catchRate': 135,
         'type': [PokemonType.Dark, PokemonType.Poison],
         'levelType': LevelType.mediumfast,
         'exp': 88,
@@ -26567,6 +26574,7 @@ export const pokemonList = createPokemonArray(
     {
         'id': 905,
         'name': 'Enamorus',
+        'nativeRegion': GameConstants.Region.final,
         'type': [PokemonType.Fairy, PokemonType.Flying],
         'eggCycles': 120,
         'levelType': LevelType.slow,
@@ -26584,6 +26592,7 @@ export const pokemonList = createPokemonArray(
     {
         'id': 905.1,
         'name': 'Enamorus (Therian)',
+        'nativeRegion': GameConstants.Region.final,
         'type': [PokemonType.Fairy, PokemonType.Flying],
         'eggCycles': 120,
         'levelType': LevelType.slow,
