@@ -317,7 +317,7 @@ TemporaryBattleList['Silver 3'] = new TemporaryBattle(
         new GymPokemon('Bayleef', 251262, 22, new StarterRequirement(GameConstants.Region.johto, GameConstants.Starter.Water)),
     ],
     '...Humph! I\'m not fighting with another weakling ever again. It\'s just too much playing around.',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Burned Tower'))],
+    [new QuestLineStepCompletedRequirement('The Legendary Beasts', 1)],
     undefined,
     {
         displayName: 'Rival Silver',

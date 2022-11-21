@@ -646,7 +646,7 @@ class QuestLineHelper {
         const collectPinkanMaterials = new MultipleQuestsQuest(
             [
                 new GainGemsQuest(1000, 0, PokemonType.Fairy),
-                new CustomQuest(10, undefined, 'Gain 10 Pixie Plates', () => player.mineInventory().find(item => item.name == 'Pixie Plate').amount()),
+                new CustomQuest(10, undefined, 'Gain 10 Pixie Plates', () => player.mineInventory().find(item => item.name == 'Pixie Plate')?.amount() ?? 0),
             ], 'Collect Fairy Gems and Pixie Plates');
         pinkanThemeparkQuestLine.addQuest(collectPinkanMaterials);
 
@@ -786,19 +786,19 @@ class QuestLineHelper {
         const talktoMesprit = new TalkToNPCQuest(VerityMesprit, 'Ask Mesprit about the Distortion World in Lake Verity.');
         giratinaQuestLine.addQuest(talktoMesprit);
 
-        const obtain10PurpleShards = new CustomQuest(10, undefined, 'Obtain 10 Purple Shards.', () => player.mineInventory().find(item => item.name == 'Purple Shard').amount());
+        const obtain10PurpleShards = new CustomQuest(10, undefined, 'Obtain 10 Purple Shards.', () => player.mineInventory().find(item => item.name == 'Purple Shard')?.amount() ?? 0);
         giratinaQuestLine.addQuest(obtain10PurpleShards);
 
         const talktoAzelf = new TalkToNPCQuest(ValorAzelf, 'Ask Azelf about the Distortion World in Lake Valor.');
         giratinaQuestLine.addQuest(talktoAzelf);
 
-        const obtain10OchreShards = new CustomQuest(10, undefined, 'Obtain 10 Ochre Shards.', () => player.mineInventory().find(item => item.name == 'Ochre Shard').amount());
+        const obtain10OchreShards = new CustomQuest(10, undefined, 'Obtain 10 Ochre Shards.', () => player.mineInventory().find(item => item.name == 'Ochre Shard')?.amount() ?? 0);
         giratinaQuestLine.addQuest(obtain10OchreShards);
 
         const talktoUxie = new TalkToNPCQuest(AcuityUxie, 'Ask Uxie about the Distortion World in Lake Acuity.');
         giratinaQuestLine.addQuest(talktoUxie);
 
-        const obtain10CrimsonShards = new CustomQuest(10, undefined, 'Obtain 10 Crimson Shards.', () => player.mineInventory().find(item => item.name == 'Crimson Shard').amount());
+        const obtain10CrimsonShards = new CustomQuest(10, undefined, 'Obtain 10 Crimson Shards.', () => player.mineInventory().find(item => item.name == 'Crimson Shard')?.amount() ?? 0);
         giratinaQuestLine.addQuest(obtain10CrimsonShards);
 
         const clearSendoffSpring = new CustomQuest(1, 0, 'Clear Sendoff Spring to meet the Lake Trio.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Sendoff Spring')]());
@@ -810,7 +810,7 @@ class QuestLineHelper {
         const chargeDistortionKey = new MultipleQuestsQuest(
             [
                 new GainGemsQuest(500, 0, PokemonType.Ghost),
-                new CustomQuest(1, undefined, 'Gain 1 Spooky Plate.', () => player.mineInventory().find(item => item.name == 'Spooky Plate').amount()),
+                new CustomQuest(1, undefined, 'Gain 1 Spooky Plate.', () => player.mineInventory().find(item => item.name == 'Spooky Plate')?.amount() ?? 0),
             ], 'Charge the key to the Distortion World.');
         giratinaQuestLine.addQuest(chargeDistortionKey);
 

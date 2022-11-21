@@ -16,7 +16,7 @@ export const LanguageNames: Record<Language, string> = {
     'en': 'English',
     'es': 'Español',
     'fr': 'Français',
-    'it': 'italiano',
+    'it': 'Italiano',
     'ja': '日本語',
     'ko': '한국어',
     'zh-Hans': '简体中文',

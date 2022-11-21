@@ -1,6 +1,4 @@
-import { Observable as KnockoutObservable } from 'knockout';
 import { StoneType } from '../../GameConstants';
-import CustomRequirement from '../../requirements/CustomRequirement';
 import LazyRequirementWrapper from '../../requirements/LazyRequirementWrapper';
 import MaxRegionRequirement from '../../requirements/MaxRegionRequirement';
 import ObtainedPokemonRequirement from '../../requirements/ObtainedPokemonRequirement';
@@ -22,7 +20,6 @@ export interface EvoData {
 }
 
 export interface LevelEvoData extends EvoData {
-    triggered: KnockoutObservable<boolean>;
 }
 
 export interface StoneEvoData extends EvoData {
@@ -30,10 +27,7 @@ export interface StoneEvoData extends EvoData {
 }
 
 export const beforeEvolve: Partial<Record<EvoTrigger, (data: EvoData) => boolean>> = {
-    [EvoTrigger.LEVEL]: (data: LevelEvoData) => {
-        data.triggered(true);
-        return true;
-    },
+    [EvoTrigger.LEVEL]: () => true,
 };
 
 export const Evo = (basePokemon: PokemonNameType, evolvedPokemon: PokemonNameType, trigger: EvoTrigger): EvoData => ({
@@ -56,15 +50,11 @@ export const restrict = <T extends EvoData>(evo: T, ...restrictions: EvoData['re
     return evo;
 };
 
-export const LevelEvolution = (basePokemon: PokemonNameType, evolvedPokemon: PokemonNameType, level: number): LevelEvoData => {
-    const triggered = ko.observable(false);
-    return restrict(
-        { ...Evo(basePokemon, evolvedPokemon, EvoTrigger.LEVEL), triggered },
-        new CustomRequirement(triggered, false, 'The evolution can\'t have already happened'),
-        new PokemonLevelRequirement(basePokemon, level),
-        new ObtainedPokemonRequirement(evolvedPokemon, true),
-    );
-};
+export const LevelEvolution = (basePokemon: PokemonNameType, evolvedPokemon: PokemonNameType, level: number): LevelEvoData => restrict(
+    { ...Evo(basePokemon, evolvedPokemon, EvoTrigger.LEVEL) },
+    new PokemonLevelRequirement(basePokemon, level),
+    new ObtainedPokemonRequirement(evolvedPokemon, true),
+);
 
 export const StoneEvolution = (basePokemon: PokemonNameType, evolvedPokemon: PokemonNameType, stone: StoneType): StoneEvoData => ({
     ...Evo(basePokemon, evolvedPokemon, EvoTrigger.STONE),

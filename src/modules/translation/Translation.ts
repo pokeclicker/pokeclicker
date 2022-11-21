@@ -62,6 +62,7 @@ export default class Translate {
                 interpolation: {
                     nestingPrefix: '[[',
                     nestingSuffix: ']]',
+                    escapeValue: false,
                 },
             });
 
