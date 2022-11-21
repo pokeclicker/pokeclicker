@@ -148,7 +148,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                     <div class="input-group-append bg-primary text-light">
                                         <label for="hatcherySortDirection" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;" data-bind="
                                         text: Settings.getSetting('hatcherySortDirection').observableValue() ? '⥄' : '⥂',
-                                        tooltip: { title: Settings.getSetting('hatcherySortDirection').observableValue() ? 'Descending (highest value first)' : 'Ascending (lowest value first)', trigger: 'hover', placement:'top', html: true }
+                                        tooltip: { title: Settings.getSetting('hatcherySortDirection').observableValue() ? 'Descending (highest value first)' : 'Ascending (lowest value first)', trigger: 'hover', placement:'top' }
 
                                         ">⥂</label>
                                         <input id="hatcherySortDirection" style="vertical-align: middle" class="hidden" type='checkbox'
@@ -322,7 +322,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                         <label class="clickable m-0 px-2" style="font-size: 20px;" data-bind="
                                                             attr: {for: 'hatcheryHelperSortDirection' + $index() },
                                                             text: $data.sortDirection() ? '⥄' : '⥂',
-                                                            tooltip: { title: $data.sortDirection() ? 'Descending (highest value first)' : 'Ascending (lowest value first)', trigger: 'hover', placement:'top', html: true }
+                                                            tooltip: { title: $data.sortDirection() ? 'Descending (highest value first)' : 'Ascending (lowest value first)', trigger: 'hover', placement:'top' }
                                                             ">⥂</label>
                                                         <input class="hidden" type="checkbox"
                                                             data-bind="attr: { id: 'hatcheryHelperSortDirection' + $index() }, checked:  $data.sortDirection" />

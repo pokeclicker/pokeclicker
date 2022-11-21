@@ -436,6 +436,6 @@
                 blur: (s, e) => {
                     e.currentTarget.innerHTML = `<code>${s.prefix}</code>${s.observableValue()}<code>${s.suffix}</code>`;
                 }
-            }, html: `<code>${$data.prefix}</code>${$data.observableValue()}<code>${$data.suffix}</code>`">Key</kbd>
+            }"><code data-bind="text: $data.prefix"></code><ko data-bind="text: $data.observableValue()"></ko><code data-bind="text: $data.suffix"></code></kbd>
     </td>
 </script>
