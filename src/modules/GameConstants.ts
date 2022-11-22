@@ -1721,10 +1721,12 @@ export enum BattlePokemonGender {
 }
 
 // Pokemon Statistics
-export const STATISTIC_CAPTURED = 'Captured';
-export const STATISTIC_DEFEATED = 'Defeated';
-export const STATISTIC_ENCOUNTERED = 'Encountered';
-export const STATISTIC_HATCHED = 'Hatched';
+export enum PokemonStatiticsType {
+    Captured = 'Captured',
+    Defeated = 'Defeated',
+    Encountered = 'Encountered',
+    Hatched = 'Hatched',
+}
 
 // Alcremie
 
