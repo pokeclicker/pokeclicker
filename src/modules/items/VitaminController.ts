@@ -1,4 +1,4 @@
-class VitaminController {
+export default class VitaminController {
     public static multiplier = ['×1', '×5', 'x10', 'Max'];
     public static multiplierIndex = ko.observable(0);
 
@@ -11,6 +11,6 @@ class VitaminController {
     }
 
     public static getMultiplier() {
-        return Number(VitaminController.multiplier[VitaminController.multiplierIndex()].replace(/\D/g, '')) || Infinity;
+        return Number(this.multiplier[this.multiplierIndex()].replace(/\D/g, '')) || Infinity;
     }
 }

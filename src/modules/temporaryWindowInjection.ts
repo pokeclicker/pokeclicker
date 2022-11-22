@@ -148,10 +148,12 @@ import EnergyRestore from './items/EnergyRestore';
 import EffectEngineRunner from './effectEngine/effectEngineRunner';
 import ItemHandler from './items/ItemHandler';
 import CaughtIndicatingItem from './items/CaughtIndicatingItem';
+import MegaStoneItem from './items/MegaStoneItem';
 import PokeballItem from './items/PokeballItem';
+import Vitamin from './items/Vitamin';
+import VitaminController from './items/VitaminController';
 import RoamingPokemonList from './pokemons/RoamingPokemonList';
 import DataPokemon from './pokemons/DataPokemon';
-import MegaStoneItem from './items/MegaStoneItem';
 import RoamingPokemon from './pokemons/RoamingPokemon';
 
 Object.assign(<any>window, {
@@ -310,9 +312,11 @@ Object.assign(<any>window, {
     EffectEngineRunner,
     ItemHandler,
     CaughtIndicatingItem,
+    MegaStoneItem,
     PokeballItem,
+    Vitamin,
+    VitaminController,
     RoamingPokemonList,
     DataPokemon,
-    MegaStoneItem,
     RoamingPokemon,
 });
