@@ -1830,6 +1830,28 @@ class Update implements Saveable {
                 delete saveData.statistics.shinyFemalePokemonCaptured[oldID];
                 delete saveData.statistics.shinyFemalePokemonHatched[oldID];
             });
+            
+            // Update starter pokerus status if it wasn't infected after unlocking the key item
+            if (saveData.keyItems.Pokerus_virus) {
+                let starter;
+                switch (playerData.regionStarters[0]) {
+                    case 0:
+                        starter = saveData.party.caughtPokemon.find(p => p.id == 1);
+                        break;
+                    case 1:
+                        starter = saveData.party.caughtPokemon.find(p => p.id == 4);
+                        break;
+                    case 2:
+                        starter = saveData.party.caughtPokemon.find(p => p.id == 7);
+                        break;
+                    case 3:
+                        starter = saveData.party.caughtPokemon.find(p => p.id == 25);
+                        break;
+                }
+                if (starter && (!starter[8] || starter[8] == 0)) {
+                    starter[8] = 2;
+                }
+            }
         },
     };
 
