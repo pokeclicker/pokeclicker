@@ -1,5 +1,10 @@
 import { Computed } from 'knockout';
-import { MaxIDPerRegion, Region, BattlePokemonGender, PokemonStatiticsType } from '../GameConstants';
+import {
+    MaxIDPerRegion,
+    Region,
+    BattlePokemonGender,
+    PokemonStatiticsType,
+} from '../GameConstants';
 import { PokemonNameType } from './PokemonNameType';
 import P from './mapProvider';
 import PokemonType from '../enums/PokemonType';
