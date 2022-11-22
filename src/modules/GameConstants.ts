@@ -54,6 +54,63 @@ export const MaxIDPerRegion = [
     898, // 89 - Galar
 ];
 
+// Subregions
+export enum KantoSubRegions {
+    Kanto = 0,
+    Sevii123,
+    Sevii4567,
+}
+
+export enum JohtoSubRegions {
+    Johto = 0,
+}
+
+export enum HoennSubRegions {
+    Hoenn = 0,
+}
+
+export enum SinnohSubRegions {
+    Sinnoh = 0,
+}
+
+export enum UnovaSubRegions {
+    Unova = 0,
+}
+
+export enum KalosSubRegions {
+    Kalos = 0,
+}
+
+export enum AlolaSubRegions {
+    MelemeleIsland = 0,
+    AkalaIsland,
+    UlaulaIsland,
+    PoniIsland,
+    MagikarpJump,
+}
+
+export enum GalarSubRegions {
+    SouthGalar = 0,
+    NorthGalar,
+    IsleofArmor,
+    CrownTundra,
+}
+
+export enum FinalSubRegions {
+    Final = 0,
+}
+
+export type SubRegions =
+    | KantoSubRegions
+    | JohtoSubRegions
+    | HoennSubRegions
+    | SinnohSubRegions
+    | UnovaSubRegions
+    | KalosSubRegions
+    | AlolaSubRegions
+    | GalarSubRegions
+    | FinalSubRegions;
+
 // Battle Items
 export const ITEM_USE_TIME = 30;
 export const FLUTE_TYPE_ATTACK_MULTIPLIER = 1.005;
@@ -114,6 +171,15 @@ export const MAX_DUNGEON_SIZE = 10;
 export const DUNGEON_CHEST_SHOW = 2;
 export const DUNGEON_MAP_SHOW = 4;
 
+export enum DungeonTile {
+    empty,
+    entrance,
+    enemy,
+    chest,
+    boss,
+    ladder,
+}
+
 // Achievements
 export enum AchievementOption {
     less,
@@ -144,15 +210,6 @@ export enum AchievementType {
     'Pokerus',
 }
 
-export enum DungeonTile {
-    empty,
-    entrance,
-    enemy,
-    chest,
-    boss,
-    ladder,
-}
-
 // Held item chance
 export const ROUTE_HELD_ITEM_MODIFIER = 1;
 export const DUNGEON_HELD_ITEM_MODIFIER = ROUTE_HELD_ITEM_MODIFIER * 4;
@@ -175,6 +232,7 @@ export const DUNGEON_GEMS = 3;
 export const DUNGEON_BOSS_GEMS = 20;
 export const GYM_GEMS = 5;
 
+// Safari Zone
 export const SAFARI_BATTLE_CHANCE = 5;
 
 export const SAFARI_BASE_POKEBALL_COUNT = 30;
@@ -492,6 +550,9 @@ export const TypeColor = [
 ];
 
 export const ROUTE_KILLS_NEEDED = 10;
+
+// Achievements
+
 export const ACHIEVEMENT_DEFEAT_ROUTE_VALUES = [
     100,
     1000,
@@ -625,6 +686,8 @@ export const EnvironmentCssClass: Record<Environment, string> = {
     Graveyard: 'graveyard',
 };
 
+// Starter Pokémon
+
 export enum Starter {
     None = -1,
     Grass = 0,
@@ -632,6 +695,17 @@ export enum Starter {
     Water = 2,
     Special = 3,
 }
+
+export const RegionalStarters = [
+    [1, 4, 7, 25], // Kanto
+    [152, 155, 158], // Johto
+    [252, 255, 258], // Hoenn
+    [387, 390, 393], // Sinnoh
+    [495, 498, 501], // Unova
+    [650, 653, 656], // Kalos
+    [722, 725, 728], // Alola
+    [810, 813, 816], // Galar
+];
 
 export enum StoneType {
     'None' = -1,
@@ -771,12 +845,6 @@ export enum VitaminType {
     RareCandy,
 }
 
-export enum EnergyRestoreSize {
-    SmallRestore,
-    MediumRestore,
-    LargeRestore,
-}
-
 export enum EggItemType {
     'Fire_egg',
     'Water_egg',
@@ -801,6 +869,14 @@ export enum BulletinBoards {
     Galar,
     Armor,
     Crown,
+}
+
+// Underground
+
+export enum EnergyRestoreSize {
+    SmallRestore,
+    MediumRestore,
+    LargeRestore,
 }
 
 export const EnergyRestoreEffect = {
@@ -1290,17 +1366,6 @@ export const DockTowns = [
     'Hulbury', // Galar
 ];
 
-export const RegionalStarters = [
-    [1, 4, 7, 25], // Kanto
-    [152, 155, 158], // Johto
-    [252, 255, 258], // Hoenn
-    [387, 390, 393], // Sinnoh
-    [495, 498, 501], // Unova
-    [650, 653, 656], // Kalos
-    [722, 725, 728], // Alola
-    [810, 813, 816], // Galar
-];
-
 export const TemporaryBattles = [
     'Blue 1',
     'Blue 2',
@@ -1642,63 +1707,6 @@ export enum Pokerus {
     'Resistant',
 }
 
-// Subregions
-export enum KantoSubRegions {
-    Kanto = 0,
-    Sevii123,
-    Sevii4567,
-}
-
-export enum JohtoSubRegions {
-    Johto = 0,
-}
-
-export enum HoennSubRegions {
-    Hoenn = 0,
-}
-
-export enum SinnohSubRegions {
-    Sinnoh = 0,
-}
-
-export enum UnovaSubRegions {
-    Unova = 0,
-}
-
-export enum KalosSubRegions {
-    Kalos = 0,
-}
-
-export enum AlolaSubRegions {
-    MelemeleIsland = 0,
-    AkalaIsland,
-    UlaulaIsland,
-    PoniIsland,
-    MagikarpJump,
-}
-
-export enum GalarSubRegions {
-    SouthGalar = 0,
-    NorthGalar,
-    IsleofArmor,
-    CrownTundra,
-}
-
-export enum FinalSubRegions {
-    Final = 0,
-}
-
-export type SubRegions =
-    | KantoSubRegions
-    | JohtoSubRegions
-    | HoennSubRegions
-    | SinnohSubRegions
-    | UnovaSubRegions
-    | KalosSubRegions
-    | AlolaSubRegions
-    | GalarSubRegions
-    | FinalSubRegions;
-
 // Gender Types
 export enum Genders {
     Genderless = 0,
@@ -1717,6 +1725,8 @@ export const STATISTIC_CAPTURED = 'Captured';
 export const STATISTIC_DEFEATED = 'Defeated';
 export const STATISTIC_ENCOUNTERED = 'Encountered';
 export const STATISTIC_HATCHED = 'Hatched';
+
+// Alcremie
 
 export enum AlcremieSweet {
     'Strawberry Sweet',
