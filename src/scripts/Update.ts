@@ -1830,7 +1830,7 @@ class Update implements Saveable {
                 delete saveData.statistics.shinyFemalePokemonCaptured[oldID];
                 delete saveData.statistics.shinyFemalePokemonHatched[oldID];
             });
-            
+
             // Update starter pokerus status if it wasn't infected after unlocking the key item
             if (saveData.keyItems.Pokerus_virus) {
                 let starter;
