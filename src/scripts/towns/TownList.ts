@@ -2688,7 +2688,7 @@ const SurvivalAreaSinnohRoamerNPC = new RoamerNPC('Hiker Kevin', [
 
 const SendoffSpringLakeTrio = new NPC('Lake Trio', [
     '<i>You are finally here.</i>',
-    '<i>We have been able to create a key to the Distortion World using the materials you collected, but it is unable to work in it\'s current state.</i>',
+    '<i>We have been able to create a key to the Distortion World using the materials you collected, but it is unable to work in its current state.</i>',
     '<i>We bestow it upon you, charge it with the ghostly energy of the Distortion World.</i>',
     '<i>In order to do so, you must collect Ghost gems by defeating Ghost type Pokémon and find a Spooky Plate. There should be some in this dungeon, we can sense their energy.</i>',
 ],{
@@ -3991,7 +3991,7 @@ const KiloudeConfusedHiker = new NPC('Confused Hiker', [
 const ProfSycamore = new ProfNPC('Prof. Sycamore',
     GameConstants.Region.kalos,
     'You\'re encountering Pokémon at a really good clip, aren\'t you? Congratulations! You completed the Pokédex!',
-    'Onward to Alola, shall we?');
+    'Onward to Alola, shall we?', 'assets/images/temporaryBattle/Sycamore.png');
 
 const MysteryFan = new NPC('Mystery Fan', [
     'I\'ve heard a Pokémon detective is sniffing around here for mysteries! He might be interested in an enigmatic berry, too.',

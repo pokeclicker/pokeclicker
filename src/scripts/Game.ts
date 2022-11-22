@@ -230,7 +230,7 @@ class Game {
             App.game.keyItems.gainKeyItem(KeyItemType.Gem_case, true);
         }
         // Check that none of our quest are less than their initial value
-        App.game.quests.questLines().filter(q => q.state() == 1).forEach(questLine => {
+        App.game.quests.questLines().filter(q => q.state() == 1 && q.curQuest() < q.quests.length).forEach(questLine => {
             const quest = questLine.curQuestObject();
             if (quest instanceof MultipleQuestsQuest) {
                 quest.quests.forEach((q) => {
