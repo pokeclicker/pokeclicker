@@ -667,5 +667,6 @@ namespace GameConstants {
     declare enum ExtraAchievementCategories {
         global,
         sevii,
+        magikarpJump
     }
 }
