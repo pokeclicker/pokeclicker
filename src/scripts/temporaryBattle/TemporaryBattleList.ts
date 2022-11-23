@@ -418,9 +418,7 @@ TemporaryBattleList['Suicune 3'] = new TemporaryBattle(
     'Suicune 3',
     [new GymPokemon('Suicune', 3269100, 40)],
     '<i>Suicune fled.</i>',
-    [
-        new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion),
-    ],
+    [new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion)],
     undefined,
     {
         displayName: 'Suicune',
