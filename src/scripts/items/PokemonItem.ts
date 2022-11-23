@@ -3,7 +3,7 @@ class PokemonItem extends CaughtIndicatingItem {
     type: PokemonNameType;
     private _translatedName: KnockoutObservable<string>;
 
-    constructor(pokemon: PokemonNameType, basePrice: number, currency: GameConstants.Currency = GameConstants.Currency.questPoint) {
+    constructor(pokemon: PokemonNameType, basePrice: number, currency: GameConstants.Currency = GameConstants.Currency.questPoint, public ignoreEV = false) {
         super(pokemon, basePrice, currency, undefined, undefined, `Add ${pokemon} to your party.`, 'pokemonItem');
         this.type = pokemon;
         this._translatedName = PokemonHelper.displayName(pokemon);
@@ -48,8 +48,8 @@ class PokemonItem extends CaughtIndicatingItem {
         App.game.party.gainPokemonById(pokemonID, shiny, true);
 
         const partyPokemon = App.game.party.getPokemon(pokemonID);
-        partyPokemon.effortPoints += App.game.party.calculateEffortPoints(partyPokemon, false, GameConstants.SHOPMON_EP_YIELD * (amt - numShiny));
-        partyPokemon.effortPoints += App.game.party.calculateEffortPoints(partyPokemon, true, GameConstants.SHOPMON_EP_YIELD * numShiny);
+        partyPokemon.effortPoints += App.game.party.calculateEffortPoints(partyPokemon, false, GameConstants.SHOPMON_EP_YIELD * (amt - numShiny), this.ignoreEV);
+        partyPokemon.effortPoints += App.game.party.calculateEffortPoints(partyPokemon, true, GameConstants.SHOPMON_EP_YIELD * numShiny, this.ignoreEV);
     }
 
     getCaughtStatus(): CaughtStatus {
@@ -78,7 +78,7 @@ ItemList['Pinkan Scyther']  = new PokemonItem('Pinkan Scyther', undefined);
 ItemList['Mr. Mime']             = new PokemonItem('Mr. Mime', 1000);
 ItemList['Pinkan Electabuzz']  = new PokemonItem('Pinkan Electabuzz', undefined);
 ItemList.Jynx                 = new PokemonItem('Jynx', 2000);
-ItemList.Magikarp             = new PokemonItem('Magikarp', 50000, Currency.money);
+ItemList.Magikarp             = new PokemonItem('Magikarp', 50000, Currency.money, true);
 ItemList.Eevee                = new PokemonItem('Eevee', 4000);
 ItemList.Porygon              = new PokemonItem('Porygon', 2000);
 ItemList.Togepi               = new PokemonItem('Togepi', 15000);

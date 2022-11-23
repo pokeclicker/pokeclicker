@@ -10,6 +10,17 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.10.4
+    new ChangelogUpdate('v0.10.4', new Date(2022, 10, 22)),
+    new Changelog(changelogType.CHANGE, 'Shop Magikarp no longer awards EVs'),
+    new Changelog(changelogType.CHANGE, 'Base wandering Pokémon no longer award EVs'),
+    new Changelog(changelogType.CHANGE, 'Misc text changes'),
+    new Changelog(changelogType.CHANGE, 'Misc UI changes'),
+    new Changelog(changelogType.CHANGE, 'Misc image changes'),
+    new Changelog(changelogType.FIXED, 'Starter not gaining Pokérus status'),
+    new Changelog(changelogType.FIXED, 'Game not loading in special instances when you are at particular quest steps'),
+    new Changelog(changelogType.FIXED, 'Potential script execution exploit - Remember to only import trusted save files'),
+
     // v0.10.3
     new ChangelogUpdate('v0.10.3', new Date(2022, 10, 20)),
     new Changelog(changelogType.CHANGE, 'Misc text changes'),
