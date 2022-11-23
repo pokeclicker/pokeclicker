@@ -1534,7 +1534,7 @@ const TohjoFallsCelebiTimeDistortion = new NPC('Investigate the Time Distortion'
 });
 
 const Conductor = new NPC('Conductor', [
-    'We\'re working on construction of a Magent Train line to shuttle people east to Kanto. Once it\'s completed, people will be able to get to Saffron City in record time!',
+    'We\'re working on construction of a Magent Train line to shuttle people <b>east to Kanto</b>. Once it\'s completed, people will be able to get to Saffron City in record time!',
 ], { image: 'assets/images/trainers/Rail Staff.png' });
 
 const ProfElm = new ProfNPC('Prof. Elm',
