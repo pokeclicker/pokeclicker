@@ -4744,7 +4744,7 @@ TownList['Hoppy Town'] = new Town(
     'Hoppy Town',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MagikarpJump,
-    [],
+    [new DockTownContent()],
     {
         requirements: [],
         npcs: [],

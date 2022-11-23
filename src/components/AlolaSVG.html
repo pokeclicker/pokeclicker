@@ -5186,7 +5186,7 @@
         <%- include('templates/mapTown',
             { name: "Friend League"
             , x: 28, y: 26
-            , width: 4, height: 5
+            , width: 5, height: 6
             })
         %>
         <!--Friend League extension-->
@@ -5795,6 +5795,19 @@
             { name: "Master League"
             , x: 9, y: 27
             , width: 7, height: 5
+            })
+        %>
+
+        <!-- ------------------ -->
+        <!-- PLACES OF INTEREST -->
+        <!-- ------------------ -->
+
+        <!--Dock-->
+        <%- include('templates/mapPOI',
+            { name: "Dock"
+            , x: 45, y: 26
+            , width: 2, height: 3
+            , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Hoppy Town') }"
             })
         %>
 
