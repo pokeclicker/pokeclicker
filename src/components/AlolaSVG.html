@@ -4923,93 +4923,138 @@
         <!-- ROUTES -->
         <!-- ------ -->
 
-        <!--Friend League Route-->
+        <!--Friend League Bridge-->
         <%- include('templates/mapRoute',
             { route: 31, region: 6
             , width: 13, height: 2
             , x: 33, y: 29
-            , name: "F.L."
+            , name: "F.L.B."
             })
         %>
 
-        <!--Quick League Route-->
+        <!--Quick League Bridge-->
         <%- include('templates/mapRoute',
             { route: 32, region: 6
             , width: 2, height: 9
             , x: 52, y: 14
-            , name: "Q.L."
+            , name: "Q.L.B."
+            })
+        %>
+        <!--Quick League Bridge extension-->
+        <%- include('templates/mapRoute',
+            { route: 32, region: 6
+            , width: 1, height: 1
+            , x: 53, y: 23
+            , name: "Q.L.B."
+            , noText: true
             })
         %>
 
-        <!--Heavy League Route-->
+        <!--Heavy League Bridge-->
         <%- include('templates/mapRoute',
             { route: 33, region: 6
             , width: 7, height: 2
             , x: 62, y: 29
-            , name: "H.L."
+            , name: "H.L.B."
             })
         %>
 
-        <!--Great League Route-->
+        <!--Great League Bridge-->
         <%- include('templates/mapRoute',
             { route: 34, region: 6
-            , width: 2, height: 3
+            , width: 2, height: 10
+            , x: 54, y: 40
+            , name: "G.L.B."
+            })
+        %>
+        <!--Great League Bridge extension-->
+        <%- include('templates/mapRoute',
+            { route: 34, region: 6
+            , width: 2, height: 5
             , x: 52, y: 37
-            , name: "G.L."
+            , name: "G.L.B."
+            , noText: true
             })
         %>
 
-        <!--Fast League Route-->
+        <!--Fast League Bridge-->
         <%- include('templates/mapRoute',
             { route: 35, region: 6
             , width: 2, height: 7
             , x: 39, y: 22
-            , name: "F.L."
+            , name: "F.L.B."
             })
         %>
 
-        <!--Luxury League Route-->
+        <!--Luxury League Bridge-->
         <%- include('templates/mapRoute',
             { route: 36, region: 6
             , width: 2, height: 9
             , x: 60, y: 18
-            , name: "L.L."
+            , name: "L.L.B."
+            })
+        %>
+        <!--Luxury League Bridge extension-->
+        <%- include('templates/mapRoute',
+            { route: 36, region: 6
+            , width: 2, height: 9
+            , x: 60, y: 18
+            , name: "L.L.B."
+            , noText: true
             })
         %>
 
-        <!--Heal League Route-->
+        <!--Heal League Bridge-->
         <%- include('templates/mapRoute',
             { route: 37, region: 6
             , width: 2, height: 6
             , x: 60, y: 34
-            , name: "H.L."
+            , name: "H.L.B."
+            })
+        %>
+        <!--Heal League Bridge extension-->
+        <%- include('templates/mapRoute',
+            { route: 37, region: 6
+            , width: 2, height: 2
+            , x: 62, y: 38
+            , name: "H.L.B."
+            , noText: true
+            })
+        %>
+        <!--Heal League Bridge extension-->
+        <%- include('templates/mapRoute',
+            { route: 37, region: 6
+            , width: 2, height: 1
+            , x: 64, y: 38
+            , name: "H.L.B."
+            , noText: true
             })
         %>
 
-        <!--Ultra League Route-->
+        <!--Ultra League Bridge-->
         <%- include('templates/mapRoute',
             { route: 38, region: 6
             , width: 2, height: 11
             , x: 39, y: 31
-            , name: "U.L."
+            , name: "U.L.B."
             })
         %>
 
-        <!--Elite Four League Route-->
+        <!--Elite Four League Pier-->
         <%- include('templates/mapRoute',
             { route: 39, region: 6
-            , width: 2, height: 2
-            , x: 16, y: 29
-            , name: "E4.L."
+            , width: 4, height: 2
+            , x: 82, y: 30
+            , name: "E4.L.P."
             })
         %>
 
-        <!--Master League Route-->
+        <!--Master League Pier-->
         <%- include('templates/mapRoute',
             { route: 40, region: 6
-            , width: 2, height: 2
-            , x: 84, y: 30
-            , name: "M.L."
+            , width: 4, height: 2
+            , x: 16, y: 29
+            , name: "M.L.P."
             })
         %>
 
