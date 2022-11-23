@@ -282,6 +282,11 @@ class Game {
         App.game.breeding.eggList.filter(e => e().pokemon).forEach(e => {
             e().setPartyPokemon();
         });
+
+        // Kick player out of Client Island if they are not on the client
+        if (!App.isUsingClient && player._townName === 'Client Island') {
+            MapHelper.moveToTown('One Island');
+        }
     }
 
     start() {
