@@ -24,6 +24,7 @@ module.exports = {
         MapHelper: 'readonly',
         DungeonRunner: 'readonly',
         GymRunner: 'readonly',
+        AchievementHandler: 'readonly',
     },
     rules: {
         indent: 'off',
