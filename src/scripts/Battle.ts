@@ -112,7 +112,7 @@ class Battle {
         this.counter = 0;
         this.enemyPokemon(PokemonFactory.generateWildPokemon(player.route(), player.region, player.subregionObject()));
         const enemyPokemon = this.enemyPokemon();
-        PokemonHelper.incrementPokemonStatistics(enemyPokemon.id, GameConstants.STATISTIC_ENCOUNTERED, enemyPokemon.shiny, enemyPokemon.gender);
+        PokemonHelper.incrementPokemonStatistics(enemyPokemon.id, GameConstants.PokemonStatiticsType.Encountered, enemyPokemon.shiny, enemyPokemon.gender);
         // Shiny
         if (enemyPokemon.shiny) {
             App.game.logbook.newLog(
