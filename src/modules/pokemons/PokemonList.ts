@@ -529,7 +529,7 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 6.02,
+        'id': 6.03,
         'name': 'Gigantamax Charizard',
         'nativeRegion': Region.none,
         'catchRate': 45,
@@ -550,7 +550,7 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 6.02,
+        'id': 6.04,
         'name': 'Charizard (Clone)',
         'catchRate': 45,
         'type': [PokemonType.Fire, PokemonType.Flying],
@@ -716,7 +716,7 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 9.02,
+        'id': 9.03,
         'name': 'Blastoise (Clone)',
         'catchRate': 45,
         'type': [PokemonType.Water],
@@ -20333,7 +20333,7 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 711.1,
+        'id': 711.01,
         'name': 'Gourgeist (Small)',
         'type': [PokemonType.Ghost, PokemonType.Grass],
         'eggCycles': 20,
@@ -20350,7 +20350,7 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 711.2,
+        'id': 711.02,
         'name': 'Gourgeist (Large)',
         'type': [PokemonType.Ghost, PokemonType.Grass],
         'eggCycles': 20,
@@ -20367,7 +20367,7 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 711.3,
+        'id': 711.03,
         'name': 'Gourgeist (Super Size)',
         'type': [PokemonType.Ghost, PokemonType.Grass],
         'eggCycles': 20,
@@ -22675,7 +22675,7 @@ export const pokemonList = createPokemonArray(
         'heldItem': { type: ItemType.item, id: 'Lunar_light' },
     },
     {
-        'id': 792.1,
+        'id': 792.01,
         'name': 'Lunala (Full Moon)',
         'type': [PokemonType.Psychic, PokemonType.Ghost],
         'eggCycles': 120,
