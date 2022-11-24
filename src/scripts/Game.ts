@@ -222,31 +222,6 @@ class Game {
             }
         }
 
-        // Check and fix temp battles for Galar main story quest (from when Galar got accidental early release)
-        if (App.game.quests.getQuestLine('The Darkest Day').state() < QuestLineState.ended) {
-            const darkestDayQL = App.game.quests.getQuestLine('The Darkest Day');
-            // Fix temp battle indicies based on quest step.
-            if (darkestDayQL.curQuest() <= 1) {
-                App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Bede 3')](0);
-            }
-            if (darkestDayQL.curQuest() <= 3) {
-                App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Hop 6')](0);
-            }
-            if (darkestDayQL.curQuest() <= 4) {
-                App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Hop 7')](0);
-            }
-            if (darkestDayQL.curQuest() <= 17) {
-                App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Eternatus')](0);
-            }
-            if (darkestDayQL.curQuest() <= 18) {
-                App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('The Darkest Day')](0);
-            }
-            // Prevent players having -1 progress on reset temp battles for current step.
-            if (darkestDayQL.state() == QuestLineState.started) {
-                darkestDayQL.resumeAt(darkestDayQL.curQuest(), 0);
-            }
-        }
-
         // Check if Koga has been defeated, but have no safari ticket yet
         if (App.game.badgeCase.badgeList[BadgeEnums.Soul]() && !App.game.keyItems.itemList[KeyItemType.Safari_ticket].isUnlocked()) {
             App.game.keyItems.gainKeyItem(KeyItemType.Safari_ticket, true);
