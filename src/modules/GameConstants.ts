@@ -70,6 +70,7 @@ export const SHINY_CHANCE_SHOP = 1024;
 export const SHINY_CHANCE_BATTLEFRONTIER = 1024;
 export const SHINY_CHANCE_BREEDING = 1024;
 export const SHINY_CHANCE_FARM = 1024;
+export const SHINY_CHANCE_REWARD = 1024;
 
 export const ITEM_PRICE_MULTIPLIER = 1.00045;
 export const ITEM_PRICE_DEDUCT = 1.0005;
