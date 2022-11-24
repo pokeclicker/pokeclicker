@@ -1601,7 +1601,7 @@ GymList['Quick League'] = new Gym(
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
             });
-            App.game.party.gainPokemonById(pokemonMap['Magikarp Skelly'].id);
+            App.game.party.gainPokemonById(pokemonMap['Magikarp Skelly'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         }
     }
 );
@@ -1621,7 +1621,7 @@ GymList['Heavy League'] = new Gym(
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
             });
-            App.game.party.gainPokemonById(pokemonMap['Magikarp Orange Two Tone'].id);
+            App.game.party.gainPokemonById(pokemonMap['Magikarp Orange Two Tone'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         }
     }
 );
@@ -1651,7 +1651,7 @@ GymList['Fast League'] = new Gym(
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
             });
-            App.game.party.gainPokemonById(pokemonMap['Magikarp Pink Dapples'].id);
+            App.game.party.gainPokemonById(pokemonMap['Magikarp Pink Dapples'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         }
     }
 );
@@ -1671,7 +1671,7 @@ GymList['Luxury League'] = new Gym(
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
             });
-            App.game.party.gainPokemonById(pokemonMap['Magikarp Pink Orca'].id);
+            App.game.party.gainPokemonById(pokemonMap['Magikarp Pink Orca'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         }
     }
 );
@@ -1691,7 +1691,7 @@ GymList['Heal League'] = new Gym(
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
             });
-            App.game.party.gainPokemonById(pokemonMap['Magikarp Purple Bubbles'].id);
+            App.game.party.gainPokemonById(pokemonMap['Magikarp Purple Bubbles'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         }
     }
 );
@@ -1711,7 +1711,7 @@ GymList['Ultra League'] = new Gym(
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
             });
-            App.game.party.gainPokemonById(pokemonMap['Magikarp Brown Tiger'].id);
+            App.game.party.gainPokemonById(pokemonMap['Magikarp Brown Tiger'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         }
     }
 );
@@ -1731,7 +1731,7 @@ GymList['E4 League'] = new Gym(
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
             });
-            App.game.party.gainPokemonById(pokemonMap['Magikarp Orange Forehead'].id);
+            App.game.party.gainPokemonById(pokemonMap['Magikarp Orange Forehead'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         }
     }
 );
