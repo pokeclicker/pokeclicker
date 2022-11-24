@@ -173,7 +173,7 @@ class Egg implements Saveable {
         }
 
         // Update statistics
-        PokemonHelper.incrementPokemonStatistics(pokemonID, GameConstants.STATISTIC_HATCHED, shiny, gender);
+        PokemonHelper.incrementPokemonStatistics(pokemonID, GameConstants.PokemonStatiticsType.Hatched, shiny, gender);
         App.game.oakItems.use(OakItemType.Blaze_Cassette);
         return true;
     }

@@ -639,10 +639,12 @@ namespace GameConstants {
     }
 
     // Pokemon Statistics
-    declare const STATISTIC_CAPTURED;
-    declare const STATISTIC_DEFEATED;
-    declare const STATISTIC_ENCOUNTERED;
-    declare const STATISTIC_HATCHED;
+    declare enum PokemonStatiticsType {
+        Captured = 'Captured',
+        Defeated = 'Defeated',
+        Encountered = 'Encountered',
+        Hatched = 'Hatched',
+    }
 
     declare enum AlcremieSweet {
         'Strawberry Sweet',
