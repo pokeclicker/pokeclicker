@@ -4744,13 +4744,12 @@ TownList['Hoppy Town'] = new Town(
     'Hoppy Town',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MagikarpJump,
-    [],
+    [new DockTownContent()],
     {
         requirements: [],
         npcs: [],
     }
 );
-
 TownList['Friend League'] = new Town(
     'Friend League',
     GameConstants.Region.alola,
@@ -4760,7 +4759,6 @@ TownList['Friend League'] = new Town(
         requirements: [],
     }
 );
-
 TownList['Quick League'] = new Town(
     'Quick League',
     GameConstants.Region.alola,
@@ -4770,7 +4768,6 @@ TownList['Quick League'] = new Town(
         requirements: [],
     }
 );
-
 TownList['Heavy League'] = new Town(
     'Heavy League',
     GameConstants.Region.alola,
@@ -4780,7 +4777,6 @@ TownList['Heavy League'] = new Town(
         requirements: [],
     }
 );
-
 TownList['Great League'] = new Town(
     'Great League',
     GameConstants.Region.alola,
@@ -4790,7 +4786,6 @@ TownList['Great League'] = new Town(
         requirements: [],
     }
 );
-
 TownList['Fast League'] = new Town(
     'Fast League',
     GameConstants.Region.alola,
@@ -4800,7 +4795,6 @@ TownList['Fast League'] = new Town(
         requirements: [],
     }
 );
-
 TownList['Luxury League'] = new Town(
     'Luxury League',
     GameConstants.Region.alola,
@@ -4810,7 +4804,6 @@ TownList['Luxury League'] = new Town(
         requirements: [],
     }
 );
-
 TownList['Heal League'] = new Town(
     'Heal League',
     GameConstants.Region.alola,
@@ -4820,7 +4813,6 @@ TownList['Heal League'] = new Town(
         requirements: [],
     }
 );
-
 TownList['Ultra League'] = new Town(
     'Ultra League',
     GameConstants.Region.alola,
@@ -4830,7 +4822,6 @@ TownList['Ultra League'] = new Town(
         requirements: [],
     }
 );
-
 TownList['Elite Four League'] = new Town(
     'Elite Four League',
     GameConstants.Region.alola,
@@ -4840,7 +4831,6 @@ TownList['Elite Four League'] = new Town(
         requirements: [],
     }
 );
-
 TownList['Master League'] = new Town(
     'Master League',
     GameConstants.Region.alola,
