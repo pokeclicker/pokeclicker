@@ -215,8 +215,8 @@ class BreedingController {
             case 'breedingEfficiency': return `Efficiency: ${
                 (
                     // TODO VITAMINS: Recalculate how we figure this out with new vitamins
-                    (pokemon.baseAttack * (GameConstants.BREEDING_ATTACK_BONUS / 100) + pokemon.totalVitaminsUsed())
-                * BreedingController.calculateRegionalMultiplier(pokemon) / pokemonMap[pokemon.name].eggCycles
+                    (pokemon.baseAttack * ((GameConstants.BREEDING_ATTACK_BONUS + pokemon.vitaminsUsed[GameConstants.VitaminType.Calcium]()) / 100) + pokemon.vitaminsUsed[GameConstants.VitaminType.Protein]())
+                * BreedingController.calculateRegionalMultiplier(pokemon) / (pokemonMap[pokemon.name].eggCycles ** (1 - pokemon.vitaminsUsed[GameConstants.VitaminType.Carbos]() / 150))
                 * (Settings.getSetting('breedingIncludeEVBonus').observableValue() ? pokemon.calculateEVAttackBonus() : 1)
                 ).toLocaleString('en-US', { maximumSignificantDigits: 2 })}`;
                 // TODO VITAMINS: Recalculate how we figure this out with new vitamins

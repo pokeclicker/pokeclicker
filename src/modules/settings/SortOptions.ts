@@ -1,4 +1,4 @@
-import { BREEDING_ATTACK_BONUS } from '../GameConstants';
+import { BREEDING_ATTACK_BONUS, VitaminType } from '../GameConstants';
 import { pokemonMap } from '../pokemons/PokemonList';
 import Settings from './Settings';
 
@@ -65,9 +65,9 @@ export const SortOptionConfigs: Record<SortOptions, SortOptionConfig> = {
         getValue: (p) => (
             // TODO VITAMINS: Recalculate how we figure this out with new vitamins
             (
-                (p.baseAttack * (BREEDING_ATTACK_BONUS / 100) + p.totalVitaminsUsed())
+                (p.baseAttack * ((BREEDING_ATTACK_BONUS + p.vitaminsUsed[VitaminType.Calcium]()) / 100) + p.vitaminsUsed[VitaminType.Protein]())
             * (Settings.getSetting('breedingIncludeEVBonus').observableValue() ? p.calculateEVAttackBonus() : 1))
-            / pokemonMap[p.name].eggCycles),
+            / (pokemonMap[p.name].eggCycles ** (1 - (p.vitaminsUsed[VitaminType.Carbos]() / 150)))),
     },
 
     [SortOptions.eggCycles]: {
