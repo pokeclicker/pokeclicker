@@ -1861,6 +1861,17 @@ class Update implements Saveable {
             // Delete our old statistics
             delete saveData.statistics.totalProteinsObtained;
             delete saveData.statistics.totalProteinsPurchased;
+
+            // Update Vitamins used
+            saveData.party.caughtPokemon.forEach(p => {
+                // Check Proteins used
+                if (p[2]) {
+                    // Update Proteins used
+                    p[2] = {
+                        0: p[2],
+                    };
+                }
+            });
         },
     };
 

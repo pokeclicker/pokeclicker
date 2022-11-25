@@ -76,6 +76,7 @@ class PartyController {
         return PartyController.hatcherySortedList;
     }).extend({ rateLimit: 500 });
 
+    // TODO VITAMINS: Rename these or add other vitamins?
     private static proteinSortedList = [];
     static getProteinSortedList = ko.pureComputed(() => {
         // If the protein modal is open, we should sort it.

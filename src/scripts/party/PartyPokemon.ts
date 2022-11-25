@@ -1,7 +1,7 @@
 enum PartyPokemonSaveKeys {
     attackBonusPercent = 0,
     attackBonusAmount,
-    proteinsUsed,
+    vitaminsUsed,
     exp,
     breeding,
     shiny,
@@ -25,7 +25,7 @@ class PartyPokemon implements Saveable {
     defaults = {
         attackBonusPercent: 0,
         attackBonusAmount: 0,
-        proteinsUsed: 0,
+        vitaminsUsed: {},
         exp: 0,
         breeding: false,
         shiny: false,
@@ -51,7 +51,7 @@ class PartyPokemon implements Saveable {
     _nickname: KnockoutObservable<string>;
     _displayName: KnockoutComputed<string>;
     _pokerus: KnockoutObservable<GameConstants.Pokerus>;
-    proteinsUsed: KnockoutObservable<number>;
+    vitaminsUsed: Record<GameConstants.VitaminType, KnockoutObservable<number>>;
     _effortPoints: KnockoutObservable<number>;
     heldItem: KnockoutObservable<HeldItem>;
     defaultFemaleSprite: KnockoutObservable<boolean>;
@@ -66,7 +66,8 @@ class PartyPokemon implements Saveable {
         shiny = false,
         public gender
     ) {
-        this.proteinsUsed = ko.observable(0).extend({ numeric: 0 });
+        this.vitaminsUsed = {};
+        GameHelper.enumNumbers(GameConstants.VitaminType).forEach(i => this.vitaminsUsed[i] = ko.observable(0).extend({ numeric: 0 }));
         this._breeding = ko.observable(false).extend({ boolean: null });
         this._shiny = ko.observable(shiny).extend({ boolean: null });
         this._level = ko.observable(1).extend({ numeric: 0 });
@@ -209,7 +210,7 @@ class PartyPokemon implements Saveable {
         return false;
     }
 
-    public useProtein(amount: number): void {
+    public useVitamin(vitamin: GameConstants.VitaminType, amount: number): void {
         if (App.game.challenges.list.disableVitamins.active()) {
             Notifier.notify({
                 title: 'Challenge Mode',
@@ -219,9 +220,9 @@ class PartyPokemon implements Saveable {
             return;
         }
 
-        const usesRemaining = this.proteinUsesRemaining();
+        const usesRemaining = this.vitaminUsesRemaining();
 
-        // If no more proteins can be used on this Pokemon
+        // If no more vitamins can be used on this Pokemon
         if (!usesRemaining) {
             Notifier.notify({
                 message: 'This Pokémon cannot increase their power any higher!',
@@ -231,19 +232,24 @@ class PartyPokemon implements Saveable {
         }
 
         // The lowest number of amount they want to use, total in inventory, uses remaining for this Pokemon
-        amount = Math.min(amount, player.itemList.Protein(), usesRemaining);
+        amount = Math.min(amount, player.itemList[GameConstants.VitaminType[vitamin]](), usesRemaining);
 
-        // Apply the proteins
-        if (ItemHandler.useItem('Protein', amount)) {
-            GameHelper.incrementObservable(this.proteinsUsed, amount);
+        // Apply the vitamin
+        if (ItemHandler.useItem(GameConstants.VitaminType[vitamin], amount)) {
+            GameHelper.incrementObservable(this.vitaminsUsed[vitamin], amount);
         }
     }
 
-    proteinUsesRemaining = (): number => {
+    totalVitaminsUsed = (): number => {
+        return Object.values(this.vitaminsUsed).reduce((sum, obs) => sum + obs(), 0);
+    }
+
+    vitaminUsesRemaining = (): number => {
         // Allow 5 for every region visited (including Kanto)
-        return (player.highestRegion() + 1) * 5 - this.proteinsUsed();
+        return (player.highestRegion() + 1) * 5 - this.totalVitaminsUsed();
     };
 
+    // TODO: Update these from protein → vitamin (won't affect anything)
     public hideFromProteinList = ko.pureComputed(() => {
         if (this._breeding()) {
             return true;
@@ -260,7 +266,7 @@ class PartyPokemon implements Saveable {
         if (type > -2 && !pokemonMap[this.name].type.includes(type)) {
             return true;
         }
-        if (this.proteinUsesRemaining() == 0 && Settings.getSetting('proteinHideMaxedPokemon').observableValue()) {
+        if (this.vitaminUsesRemaining() == 0 && Settings.getSetting('proteinHideMaxedPokemon').observableValue()) {
             return true;
         }
         if (this._shiny() && Settings.getSetting('proteinHideShinyPokemon').observableValue()) {
@@ -363,7 +369,11 @@ class PartyPokemon implements Saveable {
 
         this.attackBonusPercent = json[PartyPokemonSaveKeys.attackBonusPercent] ?? this.defaults.attackBonusPercent;
         this.attackBonusAmount = json[PartyPokemonSaveKeys.attackBonusAmount] ?? this.defaults.attackBonusAmount;
-        this.proteinsUsed = ko.observable(json[PartyPokemonSaveKeys.proteinsUsed] ?? this.defaults.proteinsUsed);
+        if (json[PartyPokemonSaveKeys.vitaminsUsed]) {
+            Object.entries(json[PartyPokemonSaveKeys.vitaminsUsed]).forEach(([i, v]) => {
+                this.vitaminsUsed[i](v ?? 0);
+            });
+        }
         this.exp = json[PartyPokemonSaveKeys.exp] ?? this.defaults.exp;
         this.breeding = json[PartyPokemonSaveKeys.breeding] ?? this.defaults.breeding;
         this.shiny = json[PartyPokemonSaveKeys.shiny] ?? this.defaults.shiny;
@@ -385,7 +395,7 @@ class PartyPokemon implements Saveable {
             id: this.id,
             [PartyPokemonSaveKeys.attackBonusPercent]: this.attackBonusPercent,
             [PartyPokemonSaveKeys.attackBonusAmount]: this.attackBonusAmount,
-            [PartyPokemonSaveKeys.proteinsUsed]: this.proteinsUsed(),
+            [PartyPokemonSaveKeys.vitaminsUsed]: ko.toJS(this.vitaminsUsed),
             [PartyPokemonSaveKeys.exp]: this.exp,
             [PartyPokemonSaveKeys.breeding]: this.breeding,
             [PartyPokemonSaveKeys.shiny]: this.shiny,

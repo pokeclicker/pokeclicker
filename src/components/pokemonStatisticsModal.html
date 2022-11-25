@@ -33,8 +33,9 @@
                       <td class="text-left tight"><code data-bind="text: (App.game.party.getPokemon($data) ? App.game.party.getPokemon($data).attack : 0).toLocaleString('en-US')">-</code></td>
                     </tr>
                     <tr>
-                      <td class="text-left">Proteins Used</td>
-                      <td class="text-left tight"><code data-bind="text: (App.game.party.getPokemon($data) ? App.game.party.getPokemon($data).proteinsUsed() : 0).toLocaleString('en-US')">-</code></td>
+                      <!-- TODO VITAMINS: List how many of each have been used -->
+                      <td class="text-left">Vitamins Used</td>
+                      <td class="text-left tight"><code data-bind="text: (App.game.party.getPokemon($data) ? App.game.party.getPokemon($data).totalVitaminsUsed() : 0).toLocaleString('en-US')">-</code></td>
                     </tr>
                     <!-- ko if: App.game.party.getPokemon($data)?.pokerus -->
                       <tr>

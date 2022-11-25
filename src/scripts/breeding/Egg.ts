@@ -116,8 +116,8 @@ class Egg implements Saveable {
         const gender = PokemonFactory.generateGenderById(pokemonID);
         if (partyPokemon) {
             // Increase attack
-            partyPokemon.attackBonusPercent += Math.max(1, Math.round(GameConstants.BREEDING_ATTACK_BONUS * (efficiency / 100)));
-            partyPokemon.attackBonusAmount += Math.max(0, Math.round(partyPokemon.proteinsUsed() * (efficiency / 100)));
+            partyPokemon.attackBonusPercent += Math.max(1, Math.round((GameConstants.BREEDING_ATTACK_BONUS + partyPokemon.vitaminsUsed[GameConstants.VitaminType.Calcium]()) * (efficiency / 100)));
+            partyPokemon.attackBonusAmount += Math.max(0, Math.round(partyPokemon.vitaminsUsed[GameConstants.VitaminType.Protein]() * (efficiency / 100)));
 
             // If breeding (not store egg), reset level, reset evolution check
             if (partyPokemon.breeding) {

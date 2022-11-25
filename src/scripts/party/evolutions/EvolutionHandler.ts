@@ -48,7 +48,7 @@ class EvolutionHandler {
             evolvedPartyPokemon.shiny = evolvedPartyPokemon.shiny || basePartyPokemon.shiny;
             evolvedPartyPokemon.attackBonusAmount = basePartyPokemon.attackBonusAmount;
             evolvedPartyPokemon.attackBonusPercent = basePartyPokemon.attackBonusPercent;
-            evolvedPartyPokemon.proteinsUsed = basePartyPokemon.proteinsUsed;
+            evolvedPartyPokemon.vitaminsUsed = basePartyPokemon.vitaminsUsed;
             evolvedPartyPokemon.heldItem = basePartyPokemon.heldItem;
             App.game.party.removePokemonByName(data.basePokemon);
         }

@@ -92,10 +92,11 @@
                     </tr>
                   </thead>
                   <tbody data-bind="foreach: PartyController.getProteinSortedList()">
-                    <tr class="clickable" data-bind="click: () => $data.useProtein(VitaminController.getMultiplier()), hidden: $data.hideFromProteinList()">
+                    <tr class="clickable" data-bind="click: () => $data.useVitamin(VitaminController.currentlySelected(), VitaminController.getMultiplier()), hidden: $data.hideFromProteinList()">
                       <td class="text-left"><knockout data-bind="text: $data.displayName"></knockout><sup data-bind="visible: $data.shiny">✨</sup></td>
-                      <td class="text-center tight" data-bind="text: $data.proteinsUsed().toLocaleString('en-US')">-</td>
-                      <td class="text-center tight" data-bind="text: Math.floor($data.baseAttack * (GameConstants.BREEDING_ATTACK_BONUS / 100) + $data.proteinsUsed()).toLocaleString('en-US')">-</td>
+                      <td class="text-center tight" data-bind="text: $data.totalVitaminsUsed().toLocaleString('en-US')">-</td>
+                      <!-- TODO VITAMINS: Calculate the new bonus somewhere else -->
+                      <td class="text-center tight" data-bind="text: Math.floor($data.baseAttack * (GameConstants.BREEDING_ATTACK_BONUS / 100) + $data.vitaminsUsed[GameConstants.VitaminType.Protein]()).toLocaleString('en-US')">-</td>
                     </tr>
                   </tbody>
                 </table>
