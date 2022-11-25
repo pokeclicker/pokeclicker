@@ -9,16 +9,16 @@
                 </button>
             </div>
             <div class="modal-body p-0">
-                <img src="assets/images/items/vitamin/Protein.png" width="40%"/>
+                <img data-bind="attr: { src: VitaminController.getImage() }" width="40%"/>
                 <br/>
                 <div class="sticky-top bg-dark text-light">
                   <!-- ko if: App.game.challenges.list.disableProteins.active() -->
                   <span class="btn btn-block btn-danger btn-static m-0">
-                    Proteins are disabled.
+                    Vitamins are disabled.
                   </span>
                   <!-- /ko -->
                   <div class="btn-group btn-block m-0" role="group" aria-label="Basic example">
-                    <button class="btn btn-block btn-secondary btn-static" data-bind="text: 'Proteins: ' + player.itemList.Protein().toLocaleString('en-US')"></button>
+                    <button class="btn btn-block btn-secondary btn-static" data-bind="text: GameConstants.VitaminType[VitaminController.currentlySelected()] + ': ' + player.itemList[GameConstants.VitaminType[VitaminController.currentlySelected()]]().toLocaleString('en-US')"></button>
                     <button type="button" class="btn btn-sm btn-primary"
                       data-bind="text: VitaminController.multiplier[VitaminController.multiplierIndex()]"
                       onclick="VitaminController.incrementMultiplier()"
@@ -50,7 +50,7 @@
 					  <input type="checkbox" id="hide-max-protein-pokemons" class="form-check-input"
 						  data-bind="checked: Settings.getSetting('proteinHideMaxedPokemon').observableValue()"
 						  onchange="Settings.setSettingByName('proteinHideMaxedPokemon', this.checked)"/>
-					  <label for="hide-max-protein-pokemons" class="form-check-label">Hide Pokémon with max protein</label>
+					  <label for="hide-max-protein-pokemons" class="form-check-label">Hide Pokémon with max vitamins</label>
 				  </div>
           <div class="form-check">
 					  <input type="checkbox" id="hide-shiny-pokemons" class="form-check-input"
@@ -87,7 +87,7 @@
                   <thead>
                     <tr class="text-light">
                       <th class="text-left bg-dark align-middle">Pokémon</th>
-                      <th class="text-center bg-dark align-middle">Proteins Used</th>
+                      <th class="text-center bg-dark align-middle">Vitamins Used</th>
                       <th class="text-center bg-dark align-middle">Attack Bonus</th>
                     </tr>
                   </thead>

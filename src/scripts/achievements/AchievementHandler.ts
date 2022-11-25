@@ -353,16 +353,16 @@ class AchievementHandler {
         AchievementHandler.addAchievement('DigDug Ain\'t Got Nothin\' on Me', 'Dig deeper into the Underground 100 times.', new UndergroundLayersMinedRequirement(100), 0.1);
         AchievementHandler.addAchievement('Both My Thumbs Are Green! This Can\'t Be Healthy', 'Dig deeper into the Underground 1,000 times.', new UndergroundLayersMinedRequirement(1000), 0.3);
 
-        AchievementHandler.addAchievement('Let\'s Try This Out', 'Obtain your first Protein.', new ProteinObtainRequirement(1), 0.01);
-        AchievementHandler.addAchievement('Pre-Workout Supplements', 'Obtain 5 Proteins.', new ProteinObtainRequirement(5), 0.02);
-        AchievementHandler.addAchievement('Well-Stocked Medicine Cabinet', 'Obtain 10 Proteins.', new ProteinObtainRequirement(10), 0.04);
-        AchievementHandler.addAchievement('I Can\'t Hold All These Proteins!', 'Obtain 50 Proteins.', new ProteinObtainRequirement(50), 0.08);
-        AchievementHandler.addAchievement('Essential Nutrients', 'Obtain 100 Proteins.', new ProteinObtainRequirement(100), 0.10);
-        AchievementHandler.addAchievement('Putting the \'Bulk\' in Bulk-Buy', 'Obtain 500 Proteins.', new ProteinObtainRequirement(500), 0.15);
-        AchievementHandler.addAchievement('Protein Stockpile', 'Obtain 1,000 Proteins.', new ProteinObtainRequirement(1000), 0.20);
-        AchievementHandler.addAchievement('Fish, Eggs, Nuts, and Cheese', 'Obtain 5,000 Proteins.', new ProteinObtainRequirement(5000), 0.35);
-        AchievementHandler.addAchievement('Does This Powder Come With Flavours?', 'Obtain 10,000 Proteins.', new ProteinObtainRequirement(10000), 0.50);
-        AchievementHandler.addAchievement('A Literal Mountain of Muscle', 'Obtain 50,000 Proteins.', new ProteinObtainRequirement(50000), 0.70);
+        AchievementHandler.addAchievement('Let\'s Try This Out', 'Obtain your first Vitamin.', new VitaminObtainRequirement(1), 0.01);
+        AchievementHandler.addAchievement('Pre-Workout Supplements', 'Obtain 5 Vitamins.', new VitaminObtainRequirement(5), 0.02);
+        AchievementHandler.addAchievement('Well-Stocked Medicine Cabinet', 'Obtain 10 Vitamins.', new VitaminObtainRequirement(10), 0.04);
+        AchievementHandler.addAchievement('I Can\'t Hold All These Vitamins!', 'Obtain 50 Vitamins.', new VitaminObtainRequirement(50), 0.08);
+        AchievementHandler.addAchievement('Essential Nutrients', 'Obtain 100 Vitamins.', new VitaminObtainRequirement(100), 0.10);
+        AchievementHandler.addAchievement('Putting the \'Bulk\' in Bulk-Buy', 'Obtain 500 Vitamins.', new VitaminObtainRequirement(500), 0.15);
+        AchievementHandler.addAchievement('Vitamin Stockpile', 'Obtain 1,000 Vitamins.', new VitaminObtainRequirement(1000), 0.20);
+        AchievementHandler.addAchievement('Fish, Eggs, Nuts, and Cheese', 'Obtain 5,000 Vitamins.', new VitaminObtainRequirement(5000), 0.35);
+        AchievementHandler.addAchievement('Does This Powder Come With Flavours?', 'Obtain 10,000 Vitamins.', new VitaminObtainRequirement(10000), 0.50);
+        AchievementHandler.addAchievement('A Literal Mountain of Muscle', 'Obtain 50,000 Vitamins.', new VitaminObtainRequirement(50000), 0.70);
 
         AchievementHandler.addAchievement('Fighting Novice', 'Complete stage 100 in the Battle Frontier.', new BattleFrontierHighestStageRequirement(100), 0.05);
         AchievementHandler.addAchievement('Competent Fighter', 'Complete stage 250 in the Battle Frontier.', new BattleFrontierHighestStageRequirement(250), 0.15);

@@ -382,6 +382,7 @@ namespace GameConstants {
     }
     declare enum VitaminType {
         Protein,
+        Calcium,
         RareCandy
     }
     declare enum EnergyRestoreSize {

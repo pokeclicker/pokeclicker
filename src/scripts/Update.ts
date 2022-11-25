@@ -1853,6 +1853,13 @@ class Update implements Saveable {
                 delete saveData.statistics.shinyFemalePokemonCaptured[oldID];
                 delete saveData.statistics.shinyFemalePokemonHatched[oldID];
             });
+
+            // Update proteins → vitamins
+            saveData.statistics.totalVitaminsObtained = saveData.statistics.totalProteinsObtained || 0;
+            saveData.statistics.totalVitaminsPurchased = saveData.statistics.totalProteinsPurchased || 0;
+            // Delete our old statistics
+            delete saveData.statistics.totalProteinsObtained;
+            delete saveData.statistics.totalProteinsPurchased;
         },
     };
 

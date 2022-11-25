@@ -205,4 +205,5 @@ export type ItemNameType
     | 'Landorus (Therian)'
     | 'RareCandy'
     | 'Protein'
+    | 'Calcium'
     | 'Abomasite';
