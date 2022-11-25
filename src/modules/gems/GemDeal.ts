@@ -18,16 +18,16 @@ export type GemCost = {
 
 export default class GemDeal {
     public static list: Record<Region, KnockoutObservableArray<GemDeal>> = {
-        '-1': undefined,
-        0: undefined,
-        1: undefined,
-        2: undefined,
-        3: undefined,
-        4: undefined,
-        5: undefined,
-        6: undefined,
-        7: undefined,
-        8: undefined,
+        [Region.none]: undefined,
+        [Region.kanto]: undefined,
+        [Region.johto]: undefined,
+        [Region.hoenn]: undefined,
+        [Region.sinnoh]: undefined,
+        [Region.unova]: undefined,
+        [Region.kalos]: undefined,
+        [Region.alola]: undefined,
+        [Region.galar]: undefined,
+        [Region.final]: undefined,
     };
 
     public gems: GemCost[];
