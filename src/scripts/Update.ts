@@ -1789,9 +1789,8 @@ class Update implements Saveable {
             ];
 
             consistentIDs.forEach(([oldID, newID]) => {
-                // Update hatchery keys (even if player has not caught yet, as may be from typed egg)
-                Update.changeHatcheryKey(saveData, oldID, newID);
-                Update.rotatePokemonIDs(saveData, [newID, oldID], false);
+                // Update all the Pokemon IDs
+                Update.updatePokemonId(saveData, oldID, newID);
             });
         },
     };
@@ -2164,6 +2163,12 @@ class Update implements Saveable {
             delete s.shinyFemalePokemonCaptured[lastID];
             delete s.shinyFemalePokemonHatched[lastID];
         }
+    }
+
+    // Will move from the previous ID to the new ID and delete any old statistics
+    static updatePokemonId(saveData, oldID, newID) {
+        Update.rotatePokemonIDs(saveData, [newID, oldID], false);
+        Update.changeHatcheryKey(saveData, oldID, newID);
     }
 
     // Replaces Pokémon names to IDs in the save data
