@@ -1789,6 +1789,8 @@ class Update implements Saveable {
             ];
 
             consistentIDs.forEach(([oldID, newID]) => {
+                // Update hatchery keys (even if player has not caught yet, as may be from typed egg)
+                Update.changeHatcheryKey(saveData, oldID, newID);
                 const pokemon = saveData.party.caughtPokemon.find(p => p.id === oldID);
                 // If player hasn't caught this mon yet, return.
                 if (pokemon == undefined) {
