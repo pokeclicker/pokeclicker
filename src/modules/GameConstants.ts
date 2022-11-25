@@ -844,7 +844,7 @@ export enum PokeBlockColor {
 export enum VitaminType {
     Protein,
     Calcium,
-    RareCandy,
+    Carbos,
 }
 
 export enum EggItemType {

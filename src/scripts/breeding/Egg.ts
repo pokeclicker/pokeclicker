@@ -14,6 +14,7 @@ class Egg implements Saveable {
     progressText: KnockoutComputed<string>;
     stepsRemaining: KnockoutComputed<number>;
     partyPokemon: KnockoutObservable<PartyPokemon>;
+    stepsRequired: number;
 
     constructor(
         public type = EggType.None,
@@ -23,6 +24,7 @@ class Egg implements Saveable {
         public shinyChance = GameConstants.SHINY_CHANCE_BREEDING,
         public notified = false
     ) {
+        this.stepsRequired = this.totalSteps;
         this.steps = ko.observable(steps);
         this.partyPokemon = ko.observable();
         this.init();
@@ -30,15 +32,15 @@ class Egg implements Saveable {
 
     private init(initial = false) {
         this.progress = ko.pureComputed(function () {
-            return this.steps() / this.totalSteps * 100;
+            return this.steps() / this.stepsRequired * 100;
         }, this);
 
         this.progressText = ko.pureComputed(function () {
-            return `${this.steps().toLocaleString('en-US')} / ${this.totalSteps.toLocaleString('en-US')}`;
+            return `${this.steps().toLocaleString('en-US')} / ${this.stepsRequired.toLocaleString('en-US')}`;
         }, this);
 
         this.stepsRemaining = ko.pureComputed(function () {
-            return this.totalSteps - this.steps();
+            return this.stepsRequired - this.steps();
         }, this);
 
         if (this.pokemon) {
@@ -54,8 +56,14 @@ class Egg implements Saveable {
     }
 
     setPartyPokemon() {
+        // Bind the party pokemon
         if (!this.partyPokemon() && App.game?.party) {
             this.partyPokemon(this.type !== EggType.None ? App.game.party.getPokemon(PokemonHelper.getPokemonById(this.pokemon).id) : null);
+        }
+
+        // Reduce total steps based on amount of Carbos used
+        if (this.partyPokemon() && App.game?.party) {
+            this.stepsRequired = this.totalSteps - Math.floor((this.partyPokemon().vitaminsUsed[GameConstants.VitaminType.Carbos]() / 100) * this.totalSteps);
         }
     }
 
@@ -100,7 +108,7 @@ class Egg implements Saveable {
     }
 
     canHatch(): boolean {
-        return !this.isNone() && this.steps() >= this.totalSteps;
+        return !this.isNone() && this.steps() >= this.stepsRequired;
     }
 
     hatch(efficiency = 100, helper = false): boolean {
