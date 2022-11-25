@@ -2022,7 +2022,7 @@ class Update implements Saveable {
     }
 
     // Swapping or Rotating Pokemon IDs
-    static rotatePokemonIDs = (saveData, rotationlist: number[]) => {
+    static rotatePokemonIDs = (saveData, rotationlist: number[], keepLast = true) => {
         // save some characters
         const s = saveData.statistics;
 
@@ -2137,6 +2137,33 @@ class Update implements Saveable {
         s.shinyFemalePokemonDefeated[firstID] = tempIDvalues.statistics[21];
         s.shinyFemalePokemonCaptured[firstID] = tempIDvalues.statistics[22];
         s.shinyFemalePokemonHatched[firstID] = tempIDvalues.statistics[23];
+
+        if (!keepLast) {
+            delete s.pokemonEncountered[lastID];
+            delete s.pokemonDefeated[lastID];
+            delete s.pokemonCaptured[lastID];
+            delete s.pokemonHatched[lastID];
+            delete s.shinyPokemonEncountered[lastID];
+            delete s.shinyPokemonDefeated[lastID];
+            delete s.shinyPokemonCaptured[lastID];
+            delete s.shinyPokemonHatched[lastID];
+            delete s.malePokemonEncountered[lastID];
+            delete s.malePokemonDefeated[lastID];
+            delete s.malePokemonCaptured[lastID];
+            delete s.malePokemonHatched[lastID];
+            delete s.shinyMalePokemonEncountered[lastID];
+            delete s.shinyMalePokemonDefeated[lastID];
+            delete s.shinyMalePokemonCaptured[lastID];
+            delete s.shinyMalePokemonHatched[lastID];
+            delete s.femalePokemonEncountered[lastID];
+            delete s.femalePokemonDefeated[lastID];
+            delete s.femalePokemonCaptured[lastID];
+            delete s.femalePokemonHatched[lastID];
+            delete s.shinyFemalePokemonEncountered[lastID];
+            delete s.shinyFemalePokemonDefeated[lastID];
+            delete s.shinyFemalePokemonCaptured[lastID];
+            delete s.shinyFemalePokemonHatched[lastID];
+        }
     }
 
     // Replaces Pokémon names to IDs in the save data
