@@ -63,7 +63,6 @@ export const SortOptionConfigs: Record<SortOptions, SortOptionConfig> = {
     [SortOptions.breedingEfficiency]: {
         text: 'Breeding Efficiency',
         getValue: (p) => (
-            // TODO VITAMINS: Recalculate how we figure this out with new vitamins
             (
                 (p.baseAttack * ((BREEDING_ATTACK_BONUS + p.vitaminsUsed[VitaminType.Calcium]()) / 100) + p.vitaminsUsed[VitaminType.Protein]())
             * (Settings.getSetting('breedingIncludeEVBonus').observableValue() ? p.calculateEVAttackBonus() : 1))
