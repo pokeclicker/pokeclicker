@@ -124,7 +124,6 @@ import KeyItem from './keyItems/KeyItem';
 import KeyItems from './keyItems/KeyItems';
 import Achievement from './achievements/Achievement';
 import Gems from './gems/Gems';
-import FluteEffectRunner from './gems/FluteEffectRunner';
 import QuestLineCompletedRequirement from './requirements/QuestLineCompletedRequirement';
 import QuestLineStepCompletedRequirement from './requirements/QuestLineStepCompletedRequirement';
 import QuestLineStartedRequirement from './requirements/QuestLineStartedRequirement';
@@ -150,7 +149,6 @@ import EffectEngineRunner from './effectEngine/effectEngineRunner';
 import ItemHandler from './items/ItemHandler';
 import CaughtIndicatingItem from './items/CaughtIndicatingItem';
 import EggItem from './items/EggItem';
-import FluteItem from './items/FluteItem';
 import MegaStoneItem from './items/MegaStoneItem';
 import PokeballItem from './items/PokeballItem';
 import Vitamin from './items/Vitamin';
@@ -289,7 +287,6 @@ Object.assign(<any>window, {
     KeyItems,
     Achievement,
     Gems,
-    FluteEffectRunner,
     QuestLineCompletedRequirement,
     QuestLineStepCompletedRequirement,
     QuestLineStartedRequirement,
@@ -317,7 +314,6 @@ Object.assign(<any>window, {
     ItemHandler,
     CaughtIndicatingItem,
     EggItem,
-    FluteItem,
     MegaStoneItem,
     PokeballItem,
     Vitamin,
