@@ -1,6 +1,5 @@
 import { Currency, VitaminType } from '../GameConstants';
 import Item from './Item';
-import { ItemList } from './ItemList';
 import { ShopOptions } from './types';
 
 export default class Vitamin extends Item {
@@ -20,6 +19,3 @@ export default class Vitamin extends Item {
         return `assets/images/items/vitamin/${this.displayName}.png`;
     }
 }
-
-ItemList.RareCandy = new Vitamin(VitaminType.RareCandy, Infinity, undefined, undefined, 'Rare Candy', 'A rare-to-find candy that currently has no use.');
-ItemList.Protein = new Vitamin(VitaminType.Protein, 1e4, Currency.money, { multiplier: 1.1, multiplierDecrease: false, saveName: `${VitaminType[VitaminType.Protein]}|${Currency[Currency.money]}` }, undefined, 'Increases Pokémon attack bonus.<br/><i>(attack gained per breeding cycle)</i>');
