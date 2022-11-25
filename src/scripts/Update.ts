@@ -1560,6 +1560,7 @@ class Update implements Saveable {
             }
         },
         '0.10.5': ({ playerData, saveData }) => {
+            // Magikarp Jump Temp Battles
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 159);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 160);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 161);
