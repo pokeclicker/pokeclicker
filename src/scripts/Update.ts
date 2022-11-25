@@ -2026,6 +2026,7 @@ class Update implements Saveable {
         const s = saveData.statistics;
 
         const lastID = rotationlist[rotationlist.length - 1];
+        Update.changeHatcheryKey(saveData, lastID, 1e9);
         const lastPokemon = saveData.party.caughtPokemon.find(p => p.id === lastID);
         // Store values from last ID to not get overwritten
         const tempIDvalues = {
@@ -2067,6 +2068,7 @@ class Update implements Saveable {
         for (let i = rotationlist.length - 1; i > 0; i--) {
             const fromID = rotationlist[i - 1];
             const toID = rotationlist[i];
+            Update.changeHatcheryKey(saveData, fromID, toID);
 
             // Rotate our ID
             const pokemon = saveData.party.caughtPokemon.find(p => p.id === fromID);
@@ -2110,6 +2112,7 @@ class Update implements Saveable {
             lastPokemon.id = firstID;
         }
         // Update last ID statistics
+        Update.changeHatcheryKey(saveData, 1e9, firstID);
         s.pokemonEncountered[firstID] = tempIDvalues.statistics[0];
         s.pokemonDefeated[firstID] = tempIDvalues.statistics[1];
         s.pokemonCaptured[firstID] = tempIDvalues.statistics[2];
@@ -2168,7 +2171,6 @@ class Update implements Saveable {
     // Will move from the previous ID to the new ID and delete any old statistics
     static updatePokemonId(saveData, oldID, newID) {
         Update.rotatePokemonIDs(saveData, [newID, oldID], false);
-        Update.changeHatcheryKey(saveData, oldID, newID);
     }
 
     // Replaces Pokémon names to IDs in the save data
