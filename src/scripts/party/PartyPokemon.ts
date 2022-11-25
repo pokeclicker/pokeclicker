@@ -210,10 +210,10 @@ class PartyPokemon implements Saveable {
     }
 
     public useProtein(amount: number): void {
-        if (App.game.challenges.list.disableProteins.active()) {
+        if (App.game.challenges.list.disableVitamins.active()) {
             Notifier.notify({
                 title: 'Challenge Mode',
-                message: 'Proteins are disabled',
+                message: 'Vitamins are disabled',
                 type: NotificationConstants.NotificationOption.danger,
             });
             return;

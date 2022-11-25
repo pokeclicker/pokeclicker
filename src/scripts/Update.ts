@@ -357,7 +357,7 @@ class Update implements Saveable {
                     title: 'Active Challenge Mode?',
                     message: `Do you want to activate No Protein challenge mode?
 
-                    <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableProteins.activate();" data-dismiss="toast">Activate</button>`,
+                    <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableVitamins.activate();" data-dismiss="toast">Activate</button>`,
                     timeout: GameConstants.HOUR,
                 });
             }
@@ -1855,6 +1855,7 @@ class Update implements Saveable {
             });
 
             // Update proteins → vitamins
+            saveData.challenges.list.disableVitamins = saveData.challenges.list.disableProteins || false;
             saveData.statistics.totalVitaminsObtained = saveData.statistics.totalProteinsObtained || 0;
             saveData.statistics.totalVitaminsPurchased = saveData.statistics.totalProteinsPurchased || 0;
             // Delete our old statistics
