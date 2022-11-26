@@ -49,7 +49,7 @@ class Party implements Feature {
     }
 
     gainPokemon(pokemon: PartyPokemon, suppressNotification = false) {
-        PokemonHelper.incrementPokemonStatistics(pokemon.id, GameConstants.STATISTIC_CAPTURED, pokemon.shiny, pokemon.gender);
+        PokemonHelper.incrementPokemonStatistics(pokemon.id, GameConstants.PokemonStatiticsType.Captured, pokemon.shiny, pokemon.gender);
         if (pokemon.shiny) {
             // Add all shiny catches to the log book
             App.game.logbook.newLog(
@@ -190,8 +190,12 @@ class Party implements Feature {
         return Math.min(1, Math.max(0.2, 0.1 + (highestRegion / 10)));
     }
 
-    public calculateEffortPoints(pokemon: PartyPokemon, shiny: boolean, number = GameConstants.BASE_EP_YIELD): number {
+    public calculateEffortPoints(pokemon: PartyPokemon, shiny: boolean, number = GameConstants.BASE_EP_YIELD, ignore = false): number {
         if (pokemon.pokerus < GameConstants.Pokerus.Contagious) {
+            return 0;
+        }
+
+        if (ignore) {
             return 0;
         }
 

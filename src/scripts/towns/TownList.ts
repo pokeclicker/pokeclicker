@@ -2688,7 +2688,7 @@ const SurvivalAreaSinnohRoamerNPC = new RoamerNPC('Hiker Kevin', [
 
 const SendoffSpringLakeTrio = new NPC('Lake Trio', [
     '<i>You are finally here.</i>',
-    '<i>We have been able to create a key to the Distortion World using the materials you collected, but it is unable to work in it\'s current state.</i>',
+    '<i>We have been able to create a key to the Distortion World using the materials you collected, but it is unable to work in its current state.</i>',
     '<i>We bestow it upon you, charge it with the ghostly energy of the Distortion World.</i>',
     '<i>In order to do so, you must collect Ghost gems by defeating Ghost type Pokémon and find a Spooky Plate. There should be some in this dungeon, we can sense their energy.</i>',
 ],{
@@ -3991,7 +3991,7 @@ const KiloudeConfusedHiker = new NPC('Confused Hiker', [
 const ProfSycamore = new ProfNPC('Prof. Sycamore',
     GameConstants.Region.kalos,
     'You\'re encountering Pokémon at a really good clip, aren\'t you? Congratulations! You completed the Pokédex!',
-    'Onward to Alola, shall we?');
+    'Onward to Alola, shall we?', 'assets/images/temporaryBattle/Sycamore.png');
 
 const MysteryFan = new NPC('Mystery Fan', [
     'I\'ve heard a Pokémon detective is sniffing around here for mysteries! He might be interested in an enigmatic berry, too.',
@@ -4744,13 +4744,12 @@ TownList['Hoppy Town'] = new Town(
     'Hoppy Town',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MagikarpJump,
-    [],
+    [new DockTownContent()],
     {
         requirements: [],
         npcs: [],
     }
 );
-
 TownList['Friend League'] = new Town(
     'Friend League',
     GameConstants.Region.alola,
@@ -4760,7 +4759,6 @@ TownList['Friend League'] = new Town(
         requirements: [],
     }
 );
-
 TownList['Quick League'] = new Town(
     'Quick League',
     GameConstants.Region.alola,
@@ -4770,7 +4768,6 @@ TownList['Quick League'] = new Town(
         requirements: [],
     }
 );
-
 TownList['Heavy League'] = new Town(
     'Heavy League',
     GameConstants.Region.alola,
@@ -4780,7 +4777,6 @@ TownList['Heavy League'] = new Town(
         requirements: [],
     }
 );
-
 TownList['Great League'] = new Town(
     'Great League',
     GameConstants.Region.alola,
@@ -4790,7 +4786,6 @@ TownList['Great League'] = new Town(
         requirements: [],
     }
 );
-
 TownList['Fast League'] = new Town(
     'Fast League',
     GameConstants.Region.alola,
@@ -4800,7 +4795,6 @@ TownList['Fast League'] = new Town(
         requirements: [],
     }
 );
-
 TownList['Luxury League'] = new Town(
     'Luxury League',
     GameConstants.Region.alola,
@@ -4810,7 +4804,6 @@ TownList['Luxury League'] = new Town(
         requirements: [],
     }
 );
-
 TownList['Heal League'] = new Town(
     'Heal League',
     GameConstants.Region.alola,
@@ -4820,7 +4813,6 @@ TownList['Heal League'] = new Town(
         requirements: [],
     }
 );
-
 TownList['Ultra League'] = new Town(
     'Ultra League',
     GameConstants.Region.alola,
@@ -4830,7 +4822,6 @@ TownList['Ultra League'] = new Town(
         requirements: [],
     }
 );
-
 TownList['Elite Four League'] = new Town(
     'Elite Four League',
     GameConstants.Region.alola,
@@ -4840,7 +4831,6 @@ TownList['Elite Four League'] = new Town(
         requirements: [],
     }
 );
-
 TownList['Master League'] = new Town(
     'Master League',
     GameConstants.Region.alola,
