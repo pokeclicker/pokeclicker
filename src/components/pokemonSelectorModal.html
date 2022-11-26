@@ -97,7 +97,6 @@
                       <td class="text-left"><knockout data-bind="text: $data.displayName"></knockout><sup data-bind="visible: $data.shiny">✨</sup></td>
                       <td class="text-center tight" data-bind="text: $data.totalVitaminsUsed().toLocaleString('en-US')">-</td>
                       <td class="text-center tight" data-bind="text: $data.vitaminsUsed[VitaminController.currentlySelected()]().toLocaleString('en-US')">-</td>
-                      <!-- TODO VITAMINS: Calculate the new bonus somewhere else -->
                       <td class="text-center tight" data-bind="text: $data.getBreedingAttackBonus().toLocaleString('en-US')">-</td>
                     </tr>
                   </tbody>
