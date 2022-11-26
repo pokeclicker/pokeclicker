@@ -207,20 +207,21 @@ class BreedingController {
         const pokemonData = pokemonMap[pokemon.name];
         switch (this.displayValue()) {
             case 'attack': return `Attack: ${Math.floor(pokemon.attack * BreedingController.calculateRegionalMultiplier(pokemon)).toLocaleString('en-US')}`;
-            // TODO VITAMINS: Recalculate how we figure this out with new vitamins
-            case 'attackBonus': return `Attack Bonus: ${Math.floor((pokemon.baseAttack * (GameConstants.BREEDING_ATTACK_BONUS / 100) + pokemon.totalVitaminsUsed()) * BreedingController.calculateRegionalMultiplier(pokemon)).toLocaleString('en-US')}`;
+            case 'attackBonus': return `Attack Bonus: ${Math.floor(pokemon.getBreedingAttackBonus() * BreedingController.calculateRegionalMultiplier(pokemon)).toLocaleString('en-US')}`;
             case 'baseAttack': return `Base Attack: ${pokemon.baseAttack.toLocaleString('en-US')}`;
             case 'eggSteps': return `Egg Steps: ${pokemon.getEggSteps().toLocaleString('en-US')}`;
             case 'timesHatched': return `Hatches: ${App.game.statistics.pokemonHatched[pokemonData.id]().toLocaleString('en-US')}`;
             case 'breedingEfficiency': return `Efficiency: ${
                 (
-                    // TODO VITAMINS: Recalculate how we figure this out with new vitamins
-                    (pokemon.baseAttack * ((GameConstants.BREEDING_ATTACK_BONUS + pokemon.vitaminsUsed[GameConstants.VitaminType.Calcium]()) / 100) + pokemon.vitaminsUsed[GameConstants.VitaminType.Protein]())
-                * BreedingController.calculateRegionalMultiplier(pokemon) / pokemon.getEggSteps()
-                * (Settings.getSetting('breedingIncludeEVBonus').observableValue() ? pokemon.calculateEVAttackBonus() : 1)
+                    (
+                        (
+                            pokemon.getBreedingAttackBonus()
+                            * BreedingController.calculateRegionalMultiplier(pokemon)
+                            * (Settings.getSetting('breedingIncludeEVBonus').observableValue() ? pokemon.calculateEVAttackBonus() : 1)
+                        ) / pokemon.getEggSteps()
+                    ) * GameConstants.EGG_CYCLE_MULTIPLIER
                 ).toLocaleString('en-US', { maximumSignificantDigits: 2 })}`;
-                // TODO VITAMINS: Recalculate how we figure this out with new vitamins
-            case 'stepsPerAttack': return `Steps/Att: ${(pokemon.getEggSteps() / ((pokemon.baseAttack * ((GameConstants.BREEDING_ATTACK_BONUS + pokemon.vitaminsUsed[GameConstants.VitaminType.Calcium]()) / 100) + pokemon.totalVitaminsUsed()) * BreedingController.calculateRegionalMultiplier(pokemon))).toLocaleString('en-US', { maximumSignificantDigits: 2 })}`;
+            case 'stepsPerAttack': return `Steps/Att: ${(pokemon.getEggSteps() / (pokemon.getBreedingAttackBonus() * BreedingController.calculateRegionalMultiplier(pokemon))).toLocaleString('en-US', { maximumSignificantDigits: 2 })}`;
             case 'dexId': return `#${pokemon.id <= 0 ? '???' : Math.floor(pokemon.id).toString().padStart(3,'0')}`;
             case 'vitamins': return `Vitamins: ${pokemon.totalVitaminsUsed()}`;
             case 'evs': return `EVs: ${pokemon.evs()}`;

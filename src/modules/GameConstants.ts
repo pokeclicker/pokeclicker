@@ -135,6 +135,7 @@ export const ITEM_PRICE_DEDUCT = 1.0005;
 export const PLATE_VALUE = 100;
 
 // Breeding
+export const EGG_CYCLE_MULTIPLIER = 40;
 export const BREEDING_ATTACK_BONUS = 25;
 
 // Farming

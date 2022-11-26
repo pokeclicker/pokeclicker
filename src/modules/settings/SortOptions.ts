@@ -1,4 +1,4 @@
-import { BREEDING_ATTACK_BONUS, VitaminType } from '../GameConstants';
+import { EGG_CYCLE_MULTIPLIER } from '../GameConstants';
 import Settings from './Settings';
 
 export enum SortOptions {
@@ -62,10 +62,8 @@ export const SortOptionConfigs: Record<SortOptions, SortOptionConfig> = {
     [SortOptions.breedingEfficiency]: {
         text: 'Breeding Efficiency',
         getValue: (p) => (
-            (
-                (p.baseAttack * ((BREEDING_ATTACK_BONUS + p.vitaminsUsed[VitaminType.Calcium]()) / 100) + p.vitaminsUsed[VitaminType.Protein]())
-            * (Settings.getSetting('breedingIncludeEVBonus').observableValue() ? p.calculateEVAttackBonus() : 1))
-            / p.getEggSteps()),
+            ((p.getBreedingAttackBonus() * (Settings.getSetting('breedingIncludeEVBonus').observableValue() ? p.calculateEVAttackBonus() : 1)) / p.getEggSteps()) * EGG_CYCLE_MULTIPLIER
+        ),
     },
 
     [SortOptions.eggCycles]: {
