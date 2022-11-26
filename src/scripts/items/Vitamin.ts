@@ -9,10 +9,8 @@ class Vitamin extends Item {
     gain(n: number) {
         super.gain(n);
 
-        if (this.name === 'Protein') {
-            GameHelper.incrementObservable(App.game.statistics.totalVitaminsPurchased, n);
-            GameHelper.incrementObservable(App.game.statistics.totalVitaminsObtained, n);
-        }
+        GameHelper.incrementObservable(App.game.statistics.totalVitaminsPurchased, n);
+        GameHelper.incrementObservable(App.game.statistics.totalVitaminsObtained, n);
     }
 
     use(): boolean {
