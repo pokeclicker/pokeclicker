@@ -331,7 +331,7 @@
                         </tbody></table>
                         <span>Options:<br/>
                             <code data-bind="foreach: DiscordRichPresence.outputOptions">
-                                <a href="#" data-bind="click: Settings.setSettingByName(DiscordRichPresence.focusedElement.name, DiscordRichPresence.focusedElement.value += ` {${$data.key}}`), text: $data.key"></a>
+                                <a href="#" data-bind="click: Settings.setSettingByName(DiscordRichPresence.focusedElement.name, DiscordRichPresence.focusedElement.value += ` {${$data.key}}`), text: `{${$data.key}}`"></a>
                             </code>
                         </span>
                     </div>
