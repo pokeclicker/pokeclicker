@@ -220,7 +220,7 @@ class BreedingController {
                 * (Settings.getSetting('breedingIncludeEVBonus').observableValue() ? pokemon.calculateEVAttackBonus() : 1)
                 ).toLocaleString('en-US', { maximumSignificantDigits: 2 })}`;
                 // TODO VITAMINS: Recalculate how we figure this out with new vitamins
-            case 'stepsPerAttack': return `Steps/Att: ${pokemon.getEggSteps() / ((pokemon.baseAttack * ((GameConstants.BREEDING_ATTACK_BONUS + pokemon.vitaminsUsed[GameConstants.VitaminType.Calcium]()) / 100) + pokemon.totalVitaminsUsed()) * BreedingController.calculateRegionalMultiplier(pokemon))).toLocaleString('en-US', { maximumSignificantDigits: 2 })}`;
+            case 'stepsPerAttack': return `Steps/Att: ${(pokemon.getEggSteps() / ((pokemon.baseAttack * ((GameConstants.BREEDING_ATTACK_BONUS + pokemon.vitaminsUsed[GameConstants.VitaminType.Calcium]()) / 100) + pokemon.totalVitaminsUsed()) * BreedingController.calculateRegionalMultiplier(pokemon))).toLocaleString('en-US', { maximumSignificantDigits: 2 })}`;
             case 'dexId': return `#${pokemon.id <= 0 ? '???' : Math.floor(pokemon.id).toString().padStart(3,'0')}`;
             case 'vitamins': return `Vitamins: ${pokemon.totalVitaminsUsed()}`;
             case 'evs': return `EVs: ${pokemon.evs()}`;
