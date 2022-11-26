@@ -56,7 +56,7 @@ class SafariPokemon implements PokemonInterface {
         this.shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SAFARI);
         this._displayName = PokemonHelper.displayName(name);
         this.gender = PokemonFactory.generateGender(data.gender.femaleRatio, data.gender.type);
-        PokemonHelper.incrementPokemonStatistics(this.id, GameConstants.STATISTIC_ENCOUNTERED, this.shiny, this.gender);
+        PokemonHelper.incrementPokemonStatistics(this.id, GameConstants.PokemonStatiticsType.Encountered, this.shiny, this.gender);
         // Shiny
         if (this.shiny) {
             Notifier.notify({

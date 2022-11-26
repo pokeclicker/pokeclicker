@@ -121,9 +121,6 @@ class Egg implements Saveable {
 
             // If breeding (not store egg), reset level, reset evolution check
             if (partyPokemon.breeding) {
-                if (partyPokemon.evolutions !== undefined) {
-                    partyPokemon.evolutions.forEach(evo => evo instanceof LevelEvolution ? evo.triggered = false : undefined);
-                }
                 partyPokemon.exp = 0;
                 partyPokemon.level = 1;
                 partyPokemon.breeding = false;
@@ -176,7 +173,7 @@ class Egg implements Saveable {
         }
 
         // Update statistics
-        PokemonHelper.incrementPokemonStatistics(pokemonID, GameConstants.STATISTIC_HATCHED, shiny, gender);
+        PokemonHelper.incrementPokemonStatistics(pokemonID, GameConstants.PokemonStatiticsType.Hatched, shiny, gender);
         App.game.oakItems.use(OakItemType.Blaze_Cassette);
         return true;
     }

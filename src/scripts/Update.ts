@@ -1363,9 +1363,9 @@ class Update implements Saveable {
             });
             // Update Region filter from integer to bitfield.
             if (settingsData.breedingRegionFilter == -2) {
-                settingsData.breedingRegionFilter = 2 ** (playerData.highestRegion + 1) - 1;
+                settingsData.breedingRegionFilter = (2 << playerData.highestRegion) - 1;
             } else {
-                settingsData.breedingRegionFilter = 2 ** settingsData.breedingRegionFilter;
+                settingsData.breedingRegionFilter = 1 << settingsData.breedingRegionFilter;
             }
         },
 
@@ -1401,11 +1401,458 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 15);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 16);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 17);
+            // Zero Temporary Battle
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 32);
+
+            // Dream Researcher fight
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 53);
+
+            // Korrina fight
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 54);
 
             // Translations
             saveData.logbook.logs.forEach(
                 log => log.content = createLogContent.notTranslated({ text: log.description })
             );
+
+            // Rotate form IDs
+            const formIDs = [
+                // Vivillon (Poke Ball to before Fancy, Icy Snow to before Polar)
+                [666.01, 666.18, 666.17, 666.16, 666.15, 666.14, 666.13, 666.12, 666.11, 666.1, 666.09, 666.08, 666.07],
+                // Flabebe line (swap Blue and Orange)
+                [669.02, 669.03],
+                [670.02, 670.03],
+                [671.02, 671.03],
+                // ROYGBIV Minior instead of BGIORVY
+                [774.01, 774.05],
+                [774.02, 774.04],
+                [774.03, 774.06, 774.07],
+            ];
+
+            formIDs.forEach(list => Update.rotatePokemonIDs(saveData, list));
+
+            // Meltan  Temp Battles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 85);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 86);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 87);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 88);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 89);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 90);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 91);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 92);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 93);
+
+            // Kanto starter should be saved in regionStarter, unless they update a very old save
+            if (!playerData.regionStarters) {
+                playerData.regionStarters = [playerData.starter];
+            }
+
+            // Rivals Temp Battles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 0);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 1);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 2);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 3);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 7);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 12);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 13);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 14);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 16);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 17);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 18);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 26);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 27);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 28);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 29);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 30);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 31);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 32);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 36);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 37);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 51);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 52);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 53);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 54);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 56);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 57);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 58);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 60);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 61);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 63);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 66);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 67);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 68);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 73);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 87);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 88);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 89);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 91);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 92);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 93);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 94);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 95);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 103);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 104);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 105);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 106);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 107);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 108);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 109);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 110);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 122);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 123);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 124);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 125);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 126);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 127);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 128);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 129);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 130);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 131);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 133);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 134);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 135);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 136);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 145);
+        },
+        '0.10.3': ({ playerData, saveData }) => {
+            const johtoBeastQL = saveData.quests.questLines.find((q) => q.name == 'The Legendary Beasts');
+            if (johtoBeastQL && johtoBeastQL.state == 1 && johtoBeastQL.quest == 3 && johtoBeastQL.initial instanceof Array) {
+                johtoBeastQL.quest = 4;
+            }
+            // On the Rival fight, but already beat it before the quest
+            if (johtoBeastQL && johtoBeastQL.state == 1 && johtoBeastQL.quest == 2 && johtoBeastQL.initial > 0) {
+                johtoBeastQL.initial = 0;
+            }
+        },
+        '0.10.4': ({ playerData, saveData }) => {
+            // Adding Magikarp Jump badges
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 101);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 102);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 103);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 104);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 105);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 106);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 107);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 108);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 109);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 110);
+
+            // Update starter pokerus status if it wasn't infected after unlocking the key item
+            if (saveData.keyItems.Pokerus_virus) {
+                let starter;
+                switch (playerData.regionStarters[0]) {
+                    case 0:
+                        starter = saveData.party.caughtPokemon.find(p => p.id == 1);
+                        break;
+                    case 1:
+                        starter = saveData.party.caughtPokemon.find(p => p.id == 4);
+                        break;
+                    case 2:
+                        starter = saveData.party.caughtPokemon.find(p => p.id == 7);
+                        break;
+                    case 3:
+                        starter = saveData.party.caughtPokemon.find(p => p.id == 25);
+                        break;
+                }
+                if (starter && (!starter[8] || starter[8] == 0)) {
+                    starter[8] = 2;
+                }
+            }
+        },
+        '0.10.5': ({ playerData, saveData }) => {
+            // Rotate form IDs
+            const formIDs = [
+                // Butterfree (Gigantamax before others)
+                [12.01, 12.02, 12.03, 12.04],
+                //Pikachu (Put World Cap after Alola Cap, Gigantamax after Partner Cap)
+                [25.07, 25.08, 25.09, 25.10, 25.11, 25.12],
+                [25.09, 25.10, 25.11, 25.12, 25.13, 25.14],
+            ];
+
+            formIDs.forEach(list => Update.rotatePokemonIDs(saveData, list));
+
+            // Move IDs from .x to .0x for consistency
+            const consistentIDs = [
+                [1.1, 1.01],
+                [1.2, 1.02],
+                [1.3, 1.03],
+                [2.1, 2.01],
+                [2.2, 2.02],
+                [2.3, 2.03],
+                [3.1, 3.03],
+                [3.2, 3.04],
+                [3.3, 3.05],
+                [4.1, 4.01],
+                [5.1, 5.01],
+                [6.1, 6.04],
+                [7.1, 7.01],
+                [8.1, 8.01],
+                [9.1, 9.03],
+                [21.1, 21.01],
+                [52.01, 52.02],
+                [52.1, 52.03],
+                [77.1, 77.01],
+                [78.1, 78.01],
+                [79.1, 79.01],
+                [80.1, 80.02],
+                [83.1, 83.01],
+                [110.01, 110.02],
+                [110.1, 110.01],
+                [122.1, 122.01],
+                [133.1, 133.02],
+                [143.1, 143.02],
+                [144.1, 144.01],
+                [145.1, 145.01],
+                [146.1, 146.01],
+                [150.1, 150.03],
+                [172.1, 172.01],
+                [175.1, 175.01],
+                [175.2, 175.02],
+                [176.1, 176.01],
+                [199.1, 199.01],
+                [208.1, 208.02],
+                [222.1, 222.01],
+                [251.1, 251.02],
+                [251.2, 251.01],
+                [263.1, 263.01],
+                [264.1, 264.01],
+                [351.1, 351.01],
+                [351.2, 351.02],
+                [351.3, 351.03],
+                [386.1, 386.01],
+                [386.2, 386.02],
+                [386.3, 386.03],
+                [412.1, 412.01],
+                [412.2, 412.02],
+                [413.1, 413.01],
+                [413.2, 413.02],
+                [421.1, 421.01],
+                [422.1, 422.01],
+                [423.1, 423.01],
+                [446.1, 446.01],
+                [468.1, 468.01],
+                [479.1, 479.01],
+                [479.2, 479.02],
+                [479.3, 479.03],
+                [479.4, 479.04],
+                [479.5, 479.05],
+                [479.6, 479.06],
+                [487.1, 487.01],
+                [492.1, 492.01],
+                [554.1, 554.01],
+                [555.1, 555.01],
+                [555.2, 555.02],
+                [555.3, 555.03],
+                [562.1, 562.01],
+                [618.1, 618.01],
+                [641.1, 641.01],
+                [642.1, 642.01],
+                [645.1, 645.01],
+                [646.1, 646.01],
+                [646.2, 646.02],
+                [647.1, 647.01],
+                [648.1, 648.01],
+                [681.1, 681.01],
+                [710.1, 710.01],
+                [710.2, 710.02],
+                [710.3, 710.03],
+                [711.1, 711.01],
+                [711.2, 711.02],
+                [711.3, 711.03],
+                [791.1, 791.01],
+                [792.1, 792.01],
+                [801.1, 801.01],
+                [845.1, 845.01],
+                [845.2, 845.02],
+                [849.1, 849.01],
+                [869.01, -869.01],
+                [869.02, -869.02],
+                [869.03, -869.03],
+                [869.04, -869.04],
+                [869.05, -869.05],
+                [869.06, -869.06],
+                [869.07, -869.07],
+                [869.08, -869.08],
+                [869.11, -869.11],
+                [869.12, -869.12],
+                [869.13, -869.13],
+                [869.14, -869.14],
+                [869.15, -869.15],
+                [869.16, -869.16],
+                [869.17, -869.17],
+                [869.18, -869.18],
+                [869.21, -869.21],
+                [869.22, -869.22],
+                [869.23, -869.23],
+                [869.24, -869.24],
+                [869.25, -869.25],
+                [869.26, -869.26],
+                [869.27, -869.27],
+                [869.28, -869.28],
+                [869.31, -869.31],
+                [869.32, -869.32],
+                [869.33, -869.33],
+                [869.34, -869.34],
+                [869.35, -869.35],
+                [869.36, -869.36],
+                [869.37, -869.37],
+                [869.38, -869.38],
+                [869.41, -869.41],
+                [869.42, -869.42],
+                [869.43, -869.43],
+                [869.44, -869.44],
+                [869.45, -869.45],
+                [869.46, -869.46],
+                [869.47, -869.47],
+                [869.48, -869.48],
+                [869.51, -869.51],
+                [869.52, -869.52],
+                [869.53, -869.53],
+                [869.54, -869.54],
+                [869.55, -869.55],
+                [869.56, -869.56],
+                [869.57, -869.57],
+                [869.58, -869.58],
+                [869.61, -869.61],
+                [869.62, -869.62],
+                [869.63, -869.63],
+                [869.64, -869.64],
+                [869.65, -869.65],
+                [869.66, -869.66],
+                [869.67, -869.67],
+                [869.68, -869.68],
+                [-869.01, 869.06],
+                [-869.02, 869.07],
+                [-869.03, 869.04],
+                [-869.04, 869.01],
+                [-869.05, 869.02],
+                [-869.06, 869.08],
+                [-869.07, 869.03],
+                [-869.08, 869.05],
+                [-869.11, 869.16],
+                [-869.12, 869.17],
+                [-869.13, 869.14],
+                [-869.14, 869.11],
+                [-869.15, 869.12],
+                [-869.16, 869.18],
+                [-869.17, 869.13],
+                [-869.18, 869.15],
+                [-869.21, 869.26],
+                [-869.22, 869.27],
+                [-869.23, 869.24],
+                [-869.24, 869.21],
+                [-869.25, 869.22],
+                [-869.26, 869.28],
+                [-869.27, 869.23],
+                [-869.28, 869.25],
+                [-869.31, 869.36],
+                [-869.32, 869.37],
+                [-869.33, 869.34],
+                [-869.34, 869.31],
+                [-869.35, 869.32],
+                [-869.36, 869.38],
+                [-869.37, 869.33],
+                [-869.38, 869.35],
+                [-869.41, 869.46],
+                [-869.42, 869.47],
+                [-869.43, 869.44],
+                [-869.44, 869.41],
+                [-869.45, 869.42],
+                [-869.46, 869.48],
+                [-869.47, 869.43],
+                [-869.48, 869.45],
+                [-869.51, 869.56],
+                [-869.52, 869.57],
+                [-869.53, 869.54],
+                [-869.54, 869.51],
+                [-869.55, 869.52],
+                [-869.56, 869.58],
+                [-869.57, 869.53],
+                [-869.58, 869.55],
+                [-869.61, 869.66],
+                [-869.62, 869.67],
+                [-869.63, 869.64],
+                [-869.64, 869.61],
+                [-869.65, 869.62],
+                [-869.66, 869.68],
+                [-869.67, 869.63],
+                [-869.68, 869.65],
+                [875.1, 875.01],
+                [876.1, 876.01],
+                [877.1, 877.01],
+                [888.1, 888.01],
+                [889.1, 889.01],
+                [892.1, 892.01],
+                [893.1, 893.01],
+                [898.1, 898.01],
+                [898.2, 898.02],
+            ];
+
+            consistentIDs.forEach(([oldID, newID]) => {
+                const pokemon = saveData.party.caughtPokemon.find(p => p.id === oldID);
+                // If player hasn't caught this mon yet, return.
+                if (pokemon == undefined) {
+                    return;
+                }
+                // Update our ID
+                pokemon.id = newID;
+                if (!saveData.statistics.pokemonHatched) {
+                    saveData.statistics.pokemonHatched = {};
+                }
+                if (!saveData.statistics.shinyPokemonHatched) {
+                    saveData.statistics.shinyPokemonHatched = {};
+                }
+                // Update our statistics
+                saveData.statistics.pokemonEncountered[newID] = saveData.statistics.pokemonEncountered[oldID] || 0;
+                saveData.statistics.pokemonDefeated[newID] = saveData.statistics.pokemonDefeated[oldID] || 0;
+                saveData.statistics.pokemonCaptured[newID] = saveData.statistics.pokemonCaptured[oldID] || 0;
+                saveData.statistics.pokemonHatched[newID] = saveData.statistics.pokemonHatched[oldID] || 0;
+                saveData.statistics.shinyPokemonEncountered[newID] = saveData.statistics.shinyPokemonEncountered[oldID] || 0;
+                saveData.statistics.shinyPokemonDefeated[newID] = saveData.statistics.shinyPokemonDefeated[oldID] || 0;
+                saveData.statistics.shinyPokemonCaptured[newID] = saveData.statistics.shinyPokemonCaptured[oldID] || 0;
+                saveData.statistics.shinyPokemonHatched[newID] = saveData.statistics.shinyPokemonHatched[oldID] || 0;
+                saveData.statistics.malePokemonEncountered[newID] = saveData.statistics.malePokemonEncountered[oldID] || 0;
+                saveData.statistics.malePokemonDefeated[newID] = saveData.statistics.malePokemonDefeated[oldID] || 0;
+                saveData.statistics.malePokemonCaptured[newID] = saveData.statistics.malePokemonCaptured[oldID] || 0;
+                saveData.statistics.malePokemonHatched[newID] = saveData.statistics.malePokemonHatched[oldID] || 0;
+                saveData.statistics.shinyMalePokemonEncountered[newID] = saveData.statistics.shinyMalePokemonEncountered[oldID] || 0;
+                saveData.statistics.shinyMalePokemonDefeated[newID] = saveData.statistics.shinyMalePokemonDefeated[oldID] || 0;
+                saveData.statistics.shinyMalePokemonCaptured[newID] = saveData.statistics.shinyMalePokemonCaptured[oldID] || 0;
+                saveData.statistics.shinyMalePokemonHatched[newID] = saveData.statistics.shinyMalePokemonHatched[oldID] || 0;
+                saveData.statistics.femalePokemonEncountered[newID] = saveData.statistics.femalePokemonEncountered[oldID] || 0;
+                saveData.statistics.femalePokemonDefeated[newID] = saveData.statistics.femalePokemonDefeated[oldID] || 0;
+                saveData.statistics.femalePokemonCaptured[newID] = saveData.statistics.femalePokemonCaptured[oldID] || 0;
+                saveData.statistics.femalePokemonHatched[newID] = saveData.statistics.femalePokemonHatched[oldID] || 0;
+                saveData.statistics.shinyFemalePokemonEncountered[newID] = saveData.statistics.shinyFemalePokemonEncountered[oldID] || 0;
+                saveData.statistics.shinyFemalePokemonDefeated[newID] = saveData.statistics.shinyFemalePokemonDefeated[oldID] || 0;
+                saveData.statistics.shinyFemalePokemonCaptured[newID] = saveData.statistics.shinyFemalePokemonCaptured[oldID] || 0;
+                saveData.statistics.shinyFemalePokemonHatched[newID] = saveData.statistics.shinyFemalePokemonHatched[oldID] || 0;
+                // Delete our old statistics
+                delete saveData.statistics.pokemonEncountered[oldID];
+                delete saveData.statistics.pokemonDefeated[oldID];
+                delete saveData.statistics.pokemonCaptured[oldID];
+                delete saveData.statistics.pokemonHatched[oldID];
+                delete saveData.statistics.shinyPokemonEncountered[oldID];
+                delete saveData.statistics.shinyPokemonDefeated[oldID];
+                delete saveData.statistics.shinyPokemonCaptured[oldID];
+                delete saveData.statistics.shinyPokemonHatched[oldID];
+                delete saveData.statistics.malePokemonEncountered[oldID];
+                delete saveData.statistics.malePokemonDefeated[oldID];
+                delete saveData.statistics.malePokemonCaptured[oldID];
+                delete saveData.statistics.malePokemonHatched[oldID];
+                delete saveData.statistics.shinyMalePokemonEncountered[oldID];
+                delete saveData.statistics.shinyMalePokemonDefeated[oldID];
+                delete saveData.statistics.shinyMalePokemonCaptured[oldID];
+                delete saveData.statistics.shinyMalePokemonHatched[oldID];
+                delete saveData.statistics.femalePokemonEncountered[oldID];
+                delete saveData.statistics.femalePokemonDefeated[oldID];
+                delete saveData.statistics.femalePokemonCaptured[oldID];
+                delete saveData.statistics.femalePokemonHatched[oldID];
+                delete saveData.statistics.shinyFemalePokemonEncountered[oldID];
+                delete saveData.statistics.shinyFemalePokemonDefeated[oldID];
+                delete saveData.statistics.shinyFemalePokemonCaptured[oldID];
+                delete saveData.statistics.shinyFemalePokemonHatched[oldID];
+            });
         },
     };
 
@@ -1632,6 +2079,124 @@ class Update implements Saveable {
 
         // Fixup queue
         saveData.breeding.queueList = saveData.breeding.queueList?.map(p => p == oldName ? newName : p) || [];
+    }
+
+    // Swapping or Rotating Pokemon IDs
+    static rotatePokemonIDs = (saveData, rotationlist: number[]) => {
+        // save some characters
+        const s = saveData.statistics;
+
+        const lastID = rotationlist[rotationlist.length - 1];
+        const lastPokemon = saveData.party.caughtPokemon.find(p => p.id === lastID);
+        // Store values from last ID to not get overwritten
+        const tempIDvalues = {
+            // Store our last ID
+            storedID: lastID,
+            // Store our last ID statistics
+            statistics:[
+                s.pokemonEncountered[lastID],
+                s.pokemonDefeated[lastID],
+                s.pokemonCaptured[lastID],
+                s.pokemonHatched[lastID],
+                s.shinyPokemonEncountered[lastID],
+                s.shinyPokemonDefeated[lastID],
+                s.shinyPokemonCaptured[lastID],
+                s.shinyPokemonHatched[lastID],
+
+                s.malePokemonEncountered[lastID],
+                s.malePokemonDefeated[lastID],
+                s.malePokemonCaptured[lastID],
+                s.malePokemonHatched[lastID],
+                s.shinyMalePokemonEncountered[lastID],
+                s.shinyMalePokemonDefeated[lastID],
+                s.shinyMalePokemonCaptured[lastID],
+                s.shinyMalePokemonHatched[lastID],
+
+                s.femalePokemonEncountered[lastID],
+                s.femalePokemonDefeated[lastID],
+                s.femalePokemonCaptured[lastID],
+                s.femalePokemonHatched[lastID],
+                s.shinyFemalePokemonEncountered[lastID],
+                s.shinyFemalePokemonDefeated[lastID],
+                s.shinyFemalePokemonCaptured[lastID],
+                s.shinyFemalePokemonHatched[lastID],
+            ],
+        };
+
+        // Overwrite values of current ID with next ID
+        // Loop backwards so when rotating a -> b -> c, we don't overwrite b stats before needing them
+        for (let i = rotationlist.length - 1; i > 0; i--) {
+            const fromID = rotationlist[i - 1];
+            const toID = rotationlist[i];
+
+            // Rotate our ID
+            const pokemon = saveData.party.caughtPokemon.find(p => p.id === fromID);
+            if (pokemon) {
+                pokemon.id = toID;
+            }
+
+            // Rotate our statistics
+            s.pokemonEncountered[toID] = s.pokemonEncountered[fromID];
+            s.pokemonDefeated[toID] = s.pokemonDefeated[fromID];
+            s.pokemonCaptured[toID] = s.pokemonCaptured[fromID];
+            s.pokemonHatched[toID] = s.pokemonHatched[fromID];
+            s.shinyPokemonEncountered[toID] = s.shinyPokemonEncountered[fromID];
+            s.shinyPokemonDefeated[toID] = s.shinyPokemonDefeated[fromID];
+            s.shinyPokemonCaptured[toID] = s.shinyPokemonCaptured[fromID];
+            s.shinyPokemonHatched[toID] = s.shinyPokemonHatched[fromID];
+
+            s.malePokemonEncountered[toID] = s.malePokemonEncountered[fromID];
+            s.malePokemonDefeated[toID] = s.malePokemonDefeated[fromID];
+            s.malePokemonCaptured[toID] = s.malePokemonCaptured[fromID];
+            s.malePokemonHatched[toID] = s.malePokemonHatched[fromID];
+            s.shinyMalePokemonEncountered[toID] = s.shinyMalePokemonEncountered[fromID];
+            s.shinyMalePokemonDefeated[toID] = s.shinyMalePokemonDefeated[fromID];
+            s.shinyMalePokemonCaptured[toID] = s.shinyMalePokemonCaptured[fromID];
+            s.shinyMalePokemonHatched[toID] = s.shinyMalePokemonHatched[fromID];
+
+            s.femalePokemonEncountered[toID] = s.femalePokemonEncountered[fromID];
+            s.femalePokemonDefeated[toID] = s.femalePokemonDefeated[fromID];
+            s.femalePokemonCaptured[toID] = s.femalePokemonCaptured[fromID];
+            s.femalePokemonHatched[toID] = s.femalePokemonHatched[fromID];
+            s.shinyFemalePokemonEncountered[toID] = s.shinyFemalePokemonEncountered[fromID];
+            s.shinyFemalePokemonDefeated[toID] = s.shinyFemalePokemonDefeated[fromID];
+            s.shinyFemalePokemonCaptured[toID] = s.shinyFemalePokemonCaptured[fromID];
+            s.shinyFemalePokemonHatched[toID] = s.shinyFemalePokemonHatched[fromID];
+        }
+
+        const firstID = rotationlist[0];
+        // Overwrite last values with first ID
+        // Rotate our ID
+        if (lastPokemon) {
+            lastPokemon.id = firstID;
+        }
+        // Update last ID statistics
+        s.pokemonEncountered[firstID] = tempIDvalues.statistics[0];
+        s.pokemonDefeated[firstID] = tempIDvalues.statistics[1];
+        s.pokemonCaptured[firstID] = tempIDvalues.statistics[2];
+        s.pokemonHatched[firstID] = tempIDvalues.statistics[3];
+        s.shinyPokemonEncountered[firstID] = tempIDvalues.statistics[4];
+        s.shinyPokemonDefeated[firstID] = tempIDvalues.statistics[5];
+        s.shinyPokemonCaptured[firstID] = tempIDvalues.statistics[6];
+        s.shinyPokemonHatched[firstID] = tempIDvalues.statistics[7];
+
+        s.malePokemonEncountered[firstID] = tempIDvalues.statistics[8];
+        s.malePokemonDefeated[firstID] = tempIDvalues.statistics[9];
+        s.malePokemonCaptured[firstID] = tempIDvalues.statistics[10];
+        s.malePokemonHatched[firstID] = tempIDvalues.statistics[11];
+        s.shinyMalePokemonEncountered[firstID] = tempIDvalues.statistics[12];
+        s.shinyMalePokemonDefeated[firstID] = tempIDvalues.statistics[13];
+        s.shinyMalePokemonCaptured[firstID] = tempIDvalues.statistics[14];
+        s.shinyMalePokemonHatched[firstID] = tempIDvalues.statistics[15];
+
+        s.femalePokemonEncountered[firstID] = tempIDvalues.statistics[16];
+        s.femalePokemonDefeated[firstID] = tempIDvalues.statistics[17];
+        s.femalePokemonCaptured[firstID] = tempIDvalues.statistics[18];
+        s.femalePokemonHatched[firstID] = tempIDvalues.statistics[19];
+        s.shinyFemalePokemonEncountered[firstID] = tempIDvalues.statistics[20];
+        s.shinyFemalePokemonDefeated[firstID] = tempIDvalues.statistics[21];
+        s.shinyFemalePokemonCaptured[firstID] = tempIDvalues.statistics[22];
+        s.shinyFemalePokemonHatched[firstID] = tempIDvalues.statistics[23];
     }
 
     // Replaces Pokémon names to IDs in the save data

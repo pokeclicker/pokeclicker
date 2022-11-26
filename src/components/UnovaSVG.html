@@ -897,7 +897,7 @@
         , x: 10, y: 48
         , width: 6, height: 3
         , databind: "click:function(){MapHelper.moveToTown('Aspertia City')}, attr:{ class: MapHelper.calculateTownCssClass('Aspertia City') }"
-        , visible:  "MapHelper.ableToTravel() && player.starter() != GameConstants.Starter.Pikachu"
+        , visible:  "MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.Special"
         , image: "assets/images/map/blimp_empty.png"
         })
     %>
@@ -907,19 +907,109 @@
         , x: 10, y: 48
         , width: 6, height: 3
         , databind: "click:function(){MapHelper.moveToTown('Aspertia City')}, attr:{ class: MapHelper.calculateTownCssClass('Aspertia City') }"
-        , visible:  "MapHelper.ableToTravel() && player.starter() == GameConstants.Starter.Pikachu"
+        , visible:  "MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() == GameConstants.Starter.Special"
         , image: "assets/images/map/blimp_pikachu.png"
         })
     %>
 
     <%- include('templates/mapOverlay',
-        { name: "Ash Ketchum"
-        , x: 8, y: 27
+        { name: "Pokémon Trainer Hugh"
+        , x: 5, y: 49
         , width: 4, height: 4
-        , databind: "click: () => TemporaryBattleList['Ash Ketchum Unova'].protectedOnclick()"
-        , visible:  "TemporaryBattleList['Ash Ketchum Unova'] && TemporaryBattleList['Ash Ketchum Unova'].isVisible()"
-        , image: "assets/images/map/ashketchumoverworld.png"
+        , databind: "click: () => TemporaryBattleList['Hugh 1'].protectedOnclick()"
+        , visible:  "TemporaryBattleList['Hugh 1'] && TemporaryBattleList['Hugh 1'].isVisible()"
+        , image: "assets/images/map/hugh.png"
         })
     %>
+
+    <%- include('templates/mapOverlay',
+        { name: "Pokémon Trainer Hugh"
+        , x: 18, y: 40
+        , width: 4, height: 4
+        , databind: "click: () => TemporaryBattleList['Hugh 2'].protectedOnclick()"
+        , visible:  "TemporaryBattleList['Hugh 2'] && TemporaryBattleList['Hugh 2'].isVisible()"
+        , image: "assets/images/map/hugh.png"
+        })
+    %>
+
+    <%- include('templates/mapOverlay',
+        { name: "Pokémon Trainer Colress"
+        , x: 50.5, y: 38
+        , width: 4, height: 4
+        , databind: "click: () => TemporaryBattleList['Colress 1'].protectedOnclick()"
+        , visible:  "TemporaryBattleList['Colress 1'] && TemporaryBattleList['Colress 1'].isVisible()"
+        , image: "assets/images/map/colress.png"
+        })
+    %>
+
+    <%- include('templates/mapOverlay',
+        { name: "Pokémon Trainer Hugh"
+        , x: 29, y: 35
+        , width: 4, height: 4
+        , databind: "click: () => TemporaryBattleList['Hugh 3'].protectedOnclick()"
+        , visible:  "TemporaryBattleList['Hugh 3'] && TemporaryBattleList['Hugh 3'].isVisible()"
+        , image: "assets/images/map/hugh.png"
+        })
+    %>
+
+    <%- include('templates/mapOverlay',
+        { name: "Pokémon Trainer Cheren"
+        , x: 29, y: 35
+        , width: 4, height: 4
+        , databind: "click: () => TemporaryBattleList['Cheren'].protectedOnclick()"
+        , visible:  "TemporaryBattleList['Cheren'] && TemporaryBattleList['Cheren'].isVisible()"
+        , image: "assets/images/map/cheren.png"
+        })
+    %>
+
+    <%- include('templates/mapOverlay',
+        { name: "Pokémon Trainer Colress"
+        , x: 29, y: 35
+        , width: 4, height: 4
+        , databind: "click: () => TemporaryBattleList['Colress 2'].protectedOnclick()"
+        , visible:  "TemporaryBattleList['Colress 2'] && TemporaryBattleList['Colress 2'].isVisible()"
+        , image: "assets/images/map/colress.png"
+        })
+    %>
+
+    <%- include('templates/mapOverlay',
+        { name: "Pokémon Trainer Hugh"
+        , x: 84, y: 20
+        , width: 4, height: 4
+        , databind: "click: () => TemporaryBattleList['Hugh 4'].protectedOnclick()"
+        , visible:  "TemporaryBattleList['Hugh 4'] && TemporaryBattleList['Hugh 4'].isVisible()"
+        , image: "assets/images/map/hugh.png"
+        })
+    %>
+
+    <%- include('templates/mapOverlay',
+        { name: "Pokémon Trainer Hugh"
+        , x: 58.5, y: 2
+        , width: 4, height: 4
+        , databind: "click: () => TemporaryBattleList['Hugh 5'].protectedOnclick()"
+        , visible:  "TemporaryBattleList['Hugh 5'] && TemporaryBattleList['Hugh 5'].isVisible()"
+        , image: "assets/images/map/hugh.png"
+        })
+    %>
+
+    <%- include('templates/mapOverlay',
+        { name: "Pokémon Trainer Hugh"
+        , x: 84, y: 20
+        , width: 4, height: 4
+        , databind: "click: () => TemporaryBattleList['Hugh 6'].protectedOnclick()"
+        , visible:  "TemporaryBattleList['Hugh 6'] && TemporaryBattleList['Hugh 6'].isVisible()"
+        , image: "assets/images/map/hugh.png"
+        })
+    %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Ash Ketchum"
+         , x: 8, y: 27
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Ash Ketchum Unova'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Ash Ketchum Unova'] && TemporaryBattleList['Ash Ketchum Unova'].isVisible()"
+         , image: "assets/images/map/ashketchumoverworld.png"
+         })
+     %>
 
 </g>

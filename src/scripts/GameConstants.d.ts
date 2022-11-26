@@ -51,6 +51,7 @@ namespace GameConstants {
     declare const SHINY_CHANCE_SAFARI: number;
     declare const SHINY_CHANCE_BREEDING: number;
     declare const SHINY_CHANCE_FARM: number;
+    declare const SHINY_CHANCE_REWARD: number;
     declare const ITEM_PRICE_MULTIPLIER: number;
     declare const ITEM_PRICE_DEDUCT: number;
     declare const PLATE_VALUE: number;
@@ -149,6 +150,7 @@ namespace GameConstants {
     declare const ROAMER_EP_MODIFIER: number;
     declare const EP_EV_RATIO: number;
     declare const EP_CHALLENGE_MODIFIER: number;
+    declare const GRISEOUS_ITEM_CHANCE: number;
     declare const DNA_ITEM_CHANCE: number;
     declare const LIGHT_ITEM_CHANCE: number;
     declare const RUST_ITEM_CHANCE: number;
@@ -244,11 +246,11 @@ namespace GameConstants {
     declare type Environment = keyof typeof Environments;
     declare const EnvironmentCssClass:Record<Environment, string>;
     declare enum Starter {
-        'None' = '',
-        'Bulbasaur',
-        'Charmander',
-        'Squirtle',
-        'Pikachu'
+        None = -1,
+        Grass = 0,
+        Fire = 1,
+        Water = 2,
+        Special = 3,
     }
     declare enum StoneType {
         'None',
@@ -281,9 +283,11 @@ namespace GameConstants {
         'White_DNA',
         'Sachet',
         'Whipped_dream',
+        'Key_stone',
         'Ice_stone',
         'Solar_light',
         'Lunar_light',
+        'Pure_light',
         'Sweet_apple',
         'Tart_apple',
         'Cracked_pot',
@@ -402,6 +406,7 @@ namespace GameConstants {
         Johto,
         Hoenn,
         Sevii4567,
+        Sinnoh,
         Kalos,
         Alola,
         Galar,
@@ -598,6 +603,7 @@ namespace GameConstants {
         AkalaIsland,
         UlaulaIsland,
         PoniIsland,
+        MagikarpJump,
     }
     declare enum GalarSubRegions {
         SouthGalar,
@@ -634,10 +640,12 @@ namespace GameConstants {
     }
 
     // Pokemon Statistics
-    declare const STATISTIC_CAPTURED;
-    declare const STATISTIC_DEFEATED;
-    declare const STATISTIC_ENCOUNTERED;
-    declare const STATISTIC_HATCHED;
+    declare enum PokemonStatiticsType {
+        Captured = 'Captured',
+        Defeated = 'Defeated',
+        Encountered = 'Encountered',
+        Hatched = 'Hatched',
+    }
 
     declare enum AlcremieSweet {
         'Strawberry Sweet',

@@ -11,7 +11,7 @@ class BuyPokeballsQuest extends Quest implements QuestInterface {
     }
 
     get description(): string {
-        return `Buy ${this.amount.toLocaleString('en-US')} ${GameConstants.Pokeball[this.pokeball]}s.`;
+        return `Buy ${this.amount.toLocaleString('en-US')} ${ItemList[GameConstants.Pokeball[this.pokeball]].displayName}s.`;
     }
 
     toJSON() {

@@ -1,7 +1,7 @@
 /// <reference path="../../declarations/enums/Badges.d.ts"/>
 
 class BadgeCaseController {
-    private static optionalLeagueNames = ['Orange League'];
+    private static optionalLeagueNames = ['Orange League', 'Magikarp Jump'];
 
     static getDisplayableBadges() {
         const highestRegion = player.highestRegion();

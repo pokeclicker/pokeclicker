@@ -10,7 +10,7 @@ class DungeonBattle extends Battle {
         if (!DungeonBattle.trainer()) {
             return 0;
         }
-        return DungeonBattle.trainer().team.length - DungeonBattle.trainerPokemonIndex();
+        return DungeonBattle.trainer().getTeam().length - DungeonBattle.trainerPokemonIndex();
     });
 
     public static defeatedTrainerPokemon: KnockoutComputed<number> = ko.pureComputed(() => {
@@ -83,7 +83,7 @@ class DungeonBattle extends Battle {
         player.lowerItemMultipliers(MultiplierDecreaser.Battle);
 
         // No Pokemon left, trainer defeated
-        if (this.trainerPokemonIndex() >= this.trainer().team.length) {
+        if (this.trainerPokemonIndex() >= this.trainer().getTeam().length) {
             // rewards for defeating trainer
             if (this.trainer().options.reward) {
                 // Custom reward amount on defeat
@@ -131,7 +131,7 @@ class DungeonBattle extends Battle {
             const enemyPokemon = PokemonFactory.generateDungeonPokemon(pokemon, DungeonRunner.chestsOpened(), DungeonRunner.dungeon.baseHealth, DungeonRunner.dungeonLevel());
             this.enemyPokemon(enemyPokemon);
 
-            PokemonHelper.incrementPokemonStatistics(enemyPokemon.id, GameConstants.STATISTIC_ENCOUNTERED, enemyPokemon.shiny, enemyPokemon.gender);
+            PokemonHelper.incrementPokemonStatistics(enemyPokemon.id, GameConstants.PokemonStatiticsType.Encountered, enemyPokemon.shiny, enemyPokemon.gender);
             // Shiny
             if (enemyPokemon.shiny) {
                 App.game.logbook.newLog(
@@ -173,7 +173,7 @@ class DungeonBattle extends Battle {
         const enemyPokemon = PokemonFactory.generateDungeonPokemon(pokemon
             , DungeonRunner.chestsOpened(), DungeonRunner.dungeon.baseHealth * 2, DungeonRunner.dungeonLevel());
         this.enemyPokemon(enemyPokemon);
-        PokemonHelper.incrementPokemonStatistics(enemyPokemon.id, GameConstants.STATISTIC_ENCOUNTERED, enemyPokemon.shiny, enemyPokemon.gender);
+        PokemonHelper.incrementPokemonStatistics(enemyPokemon.id, GameConstants.PokemonStatiticsType.Encountered, enemyPokemon.shiny, enemyPokemon.gender);
         // Shiny
         if (enemyPokemon.shiny) {
             App.game.logbook.newLog(
@@ -206,7 +206,7 @@ class DungeonBattle extends Battle {
     public static generateTrainerPokemon() {
         this.counter = 0;
 
-        const pokemon = this.trainer().team[this.trainerPokemonIndex()];
+        const pokemon = this.trainer().getTeam()[this.trainerPokemonIndex()];
         const baseHealth = DungeonRunner.fightingBoss() ? pokemon.maxHealth : DungeonRunner.dungeon.baseHealth;
         const level = DungeonRunner.fightingBoss() ? pokemon.level : DungeonRunner.dungeonLevel();
         const enemyPokemon = PokemonFactory.generateDungeonTrainerPokemon(pokemon, DungeonRunner.chestsOpened(), baseHealth, level);
@@ -224,7 +224,7 @@ class DungeonBattle extends Battle {
         // Pokemon
         if (enemy instanceof DungeonBossPokemon) {
             this.enemyPokemon(PokemonFactory.generateDungeonBoss(enemy, DungeonRunner.chestsOpened()));
-            PokemonHelper.incrementPokemonStatistics(this.enemyPokemon().id, GameConstants.STATISTIC_ENCOUNTERED, this.enemyPokemon().shiny, this.enemyPokemon().gender);
+            PokemonHelper.incrementPokemonStatistics(this.enemyPokemon().id, GameConstants.PokemonStatiticsType.Encountered, this.enemyPokemon().shiny, this.enemyPokemon().gender);
             // Shiny
             if (this.enemyPokemon().shiny) {
                 App.game.logbook.newLog(

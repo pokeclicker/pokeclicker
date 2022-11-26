@@ -120,7 +120,7 @@
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.underground.bomb')}"></tr>
                                 <tr>
                                     <td class="p-2">
-                                        <knockout>Use Restore:</knockout>
+                                        <knockout data-bind="text: App.translation.get('hotkey.underground.useRestore', 'settings', { defaultValue: 'Use Restore'})"></knockout><span>:</span>
                                     </td>
                                     <td class="p-0" data-bind="tooltip: {
                                         title: 'Each number refers to a specific Restore',
@@ -136,7 +136,7 @@
                             <tbody>
                                 <tr>
                                     <td class="p-2">
-                                        <knockout>Toggle Oak Item:</knockout>
+                                        <knockout data-bind="text: App.translation.get('hotkey.oakItems.toggle', 'settings', { defaultValue: 'Toggle Oak Item'})"></knockout><span>:</span>
                                     </td>
                                     <td class="p-0" data-bind="tooltip: {
                                         title: 'Each number refers to a specific Oak Item',
@@ -152,7 +152,7 @@
                             <tbody>
                                 <tr>
                                     <td class="p-2">
-                                        <knockout>Select Poké Ball Type:</knockout>
+                                        <knockout data-bind="text: App.translation.get('hotkey.pokeballSelector.select', 'settings', { defaultValue: 'Select Poké Ball Type'})"></knockout><span>:</span>
                                     </td>
                                     <td class="p-0" data-bind="tooltip: {
                                         title: 'Each number refers to a specific Poké Ball',
@@ -179,7 +179,7 @@
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.town.start')}"></tr>
                                 <tr>
                                     <td class="p-2">
-                                        <knockout>Access the towns content:</knockout>
+                                        <knockout data-bind="text: App.translation.get('hotkey.town.accessContent', 'settings', { defaultValue: 'Access the towns content'})"></knockout><span>:</span>
                                     </td>
                                     <td class="p-0" data-bind="tooltip: {
                                         title: 'Can access anything from Gyms to NPCs. Each number is a button.',
@@ -195,7 +195,7 @@
                             <tbody>
                                 <tr>
                                     <td class="p-2">
-                                        <knockout>Select item:</knockout>
+                                        <knockout data-bind="text: App.translation.get('hotkey.shop.selectItem', 'settings', { defaultValue: 'Select item'})"></knockout><span>:</span>
                                     </td>
                                     <td class="p-0" data-bind="tooltip: {
                                         title: 'Each number selects an item in the shop.',
@@ -215,7 +215,7 @@
                             <tbody>
                                 <tr>
                                     <td class="p-2">
-                                        <knockout>Select region:</knockout>
+                                        <knockout data-bind="text: App.translation.get('hotkey.ship.selectRegion', 'settings', { defaultValue: 'Select region'})"></knockout><span>:</span>
                                     </td>
                                     <td class="p-0" data-bind="tooltip: {
                                         title: 'Each number selects a region.',
@@ -231,7 +231,7 @@
                             <tbody>
                                 <tr>
                                     <td class="p-2">
-                                        <knockout>Change Routes:</knockout>
+                                        <knockout data-bind="text: App.translation.get('hotkey.changeRoutes', 'settings', { defaultValue: 'Change Routes'})"></knockout><span>:</span>
                                     </td>
                                     <td class="p-0" data-bind="tooltip: {
                                         title: 'Change routes based on route order',
@@ -436,6 +436,6 @@
                 blur: (s, e) => {
                     e.currentTarget.innerHTML = `<code>${s.prefix}</code>${s.observableValue()}<code>${s.suffix}</code>`;
                 }
-            }, html: `<code>${$data.prefix}</code>${$data.observableValue()}<code>${$data.suffix}</code>`">Key</kbd>
+            }"><code data-bind="text: $data.prefix"></code><ko data-bind="text: $data.observableValue()"></ko><code data-bind="text: $data.suffix"></code></kbd>
     </td>
 </script>

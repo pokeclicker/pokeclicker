@@ -58,7 +58,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                 <label>Regions</label><br/>
                                 <div class="dropdown show">
                                     <button type="button" class="text-left custom-select col-12 btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bind="text :
-                                        BreedingFilters.region.value() == 2 ** (player.highestRegion() + 1) - 1 ?
+                                        BreedingFilters.region.value() == (2 << player.highestRegion()) - 1 ?
                                             'All' :
                                             (BreedingFilters.region.value() > 0 && BreedingFilters.region.value() ?
                                                 GameConstants.camelCaseToString(GameConstants.Region[Math.floor(Math.log2(BreedingFilters.region.value()))]) + (BreedingFilters.region.value()
@@ -69,21 +69,16 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                         Regions
                                     </button>
                                     <div class="border-secondary dropdown-menu col-12">
-                                        <div class="dropdown-item" data-bind="click : function(){ BreedingFilters.region.value(2 ** (player.highestRegion() + 1) - 1); Settings.setSettingByName('breedingRegionFilter', BreedingFilters.region.value()) }">
+                                        <div class="dropdown-item" data-bind="click : function(){ BreedingFilters.region.value((2 << player.highestRegion()) - 1); Settings.setSettingByName('breedingRegionFilter', BreedingFilters.region.value()) }">
                                             All
                                         </div>
                                         <div class="dropdown-divider"></div>
                                         <!-- ko foreach : Object.keys(GameConstants.Region).filter(function(r){ return r <= player.highestRegion() && r >= 0; }) -->
-                                        <div class="dropdown-item" data-bind="class : Settings.getSetting('breedingRegionFilter').observableValue() & (2 ** $data) ? 'bg-success' : '',
+                                        <div class="dropdown-item" data-bind="class : Settings.getSetting('breedingRegionFilter').observableValue() & (1 << $data) ? 'bg-success' : '',
                                             text : GameConstants.camelCaseToString(GameConstants.Region[$data]),
-                                            click : function(){ BreedingFilters.region.value(2 ** $data); Settings.setSettingByName('breedingRegionFilter', 2 ** $data) },
-                                            attr : { 'oncontextmenu' : 'var powValue = ' + 2 ** $data + ';' +
-                                                'if(!(BreedingFilters.region.value() & powValue))' +
-                                                    'GameHelper.incrementObservable(BreedingFilters.region.value, powValue);' +
-                                                'else ' +
-                                                    'GameHelper.incrementObservable(BreedingFilters.region.value, -powValue);' +
-                                                'Settings.setSettingByName(\'breedingRegionFilter\', BreedingFilters.region.value());' +
-                                                'return false;'
+                                            click : function(){ BreedingFilters.region.value(1 << $data); Settings.setSettingByName('breedingRegionFilter', 1 << $data) },
+                                            attr : { 'oncontextmenu' : 'BreedingFilters.region.value(BreedingFilters.region.value() ^ ' + (1 << $data) + ');' +
+                                                'Settings.setSettingByName(\'breedingRegionFilter\', BreedingFilters.region.value()); return false'
                                             }">
                                         </div>
                                         <!-- /ko-->
@@ -153,7 +148,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                     <div class="input-group-append bg-primary text-light">
                                         <label for="hatcherySortDirection" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;" data-bind="
                                         text: Settings.getSetting('hatcherySortDirection').observableValue() ? '⥄' : '⥂',
-                                        tooltip: { title: Settings.getSetting('hatcherySortDirection').observableValue() ? 'Descending (highest value first)' : 'Ascending (lowest value first)', trigger: 'hover', placement:'top', html: true }
+                                        tooltip: { title: Settings.getSetting('hatcherySortDirection').observableValue() ? 'Descending (highest value first)' : 'Ascending (lowest value first)', trigger: 'hover', placement:'top' }
 
                                         ">⥂</label>
                                         <input id="hatcherySortDirection" style="vertical-align: middle" class="hidden" type='checkbox'
@@ -291,7 +286,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                         </tr>
                                         <tr>
                                             <td colspan="2" class="p-0">
-                                                <div class="progress hitpoints" style="height: 25px;">
+                                                <div class="progress">
                                                     <!-- ko if: $data.hatchBonus() < 50 -->
                                                     <div class="progress-bar bg-primary" role="progressbar"
                                                         data-bind="attr:{ style: 'width:' + (($data.hatched() - $data.prevBonus()) / ($data.nextBonus() - $data.prevBonus())) * 100 + '%' }"
@@ -327,7 +322,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                         <label class="clickable m-0 px-2" style="font-size: 20px;" data-bind="
                                                             attr: {for: 'hatcheryHelperSortDirection' + $index() },
                                                             text: $data.sortDirection() ? '⥄' : '⥂',
-                                                            tooltip: { title: $data.sortDirection() ? 'Descending (highest value first)' : 'Ascending (lowest value first)', trigger: 'hover', placement:'top', html: true }
+                                                            tooltip: { title: $data.sortDirection() ? 'Descending (highest value first)' : 'Ascending (lowest value first)', trigger: 'hover', placement:'top' }
                                                             ">⥂</label>
                                                         <input class="hidden" type="checkbox"
                                                             data-bind="attr: { id: 'hatcheryHelperSortDirection' + $index() }, checked:  $data.sortDirection" />

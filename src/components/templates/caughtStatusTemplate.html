@@ -18,6 +18,15 @@
              src="assets/images/pokeball/Pokeball-shiny.svg"
         />
         <!-- /ko -->
+        <!-- ko if: $data.locked -->
+        <img class="lock" src="assets/images/breeding/lock.svg" data-bind="
+            tooltip: {
+                title: $data.lockHint,
+                html: true,
+                placement: 'top',
+                trigger: 'hover'
+            }">
+        <!-- /ko -->
     </knockout>
 </script>
 

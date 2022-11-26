@@ -54,6 +54,63 @@ export const MaxIDPerRegion = [
     898, // 89 - Galar
 ];
 
+// Subregions
+export enum KantoSubRegions {
+    Kanto = 0,
+    Sevii123,
+    Sevii4567,
+}
+
+export enum JohtoSubRegions {
+    Johto = 0,
+}
+
+export enum HoennSubRegions {
+    Hoenn = 0,
+}
+
+export enum SinnohSubRegions {
+    Sinnoh = 0,
+}
+
+export enum UnovaSubRegions {
+    Unova = 0,
+}
+
+export enum KalosSubRegions {
+    Kalos = 0,
+}
+
+export enum AlolaSubRegions {
+    MelemeleIsland = 0,
+    AkalaIsland,
+    UlaulaIsland,
+    PoniIsland,
+    MagikarpJump,
+}
+
+export enum GalarSubRegions {
+    SouthGalar = 0,
+    NorthGalar,
+    IsleofArmor,
+    CrownTundra,
+}
+
+export enum FinalSubRegions {
+    Final = 0,
+}
+
+export type SubRegions =
+    | KantoSubRegions
+    | JohtoSubRegions
+    | HoennSubRegions
+    | SinnohSubRegions
+    | UnovaSubRegions
+    | KalosSubRegions
+    | AlolaSubRegions
+    | GalarSubRegions
+    | FinalSubRegions;
+
 // Battle Items
 export const ITEM_USE_TIME = 30;
 export const FLUTE_TYPE_ATTACK_MULTIPLIER = 1.005;
@@ -65,11 +122,12 @@ export const ROAMING_MAX_CHANCE = 4096;
 export const SHINY_CHANCE_BATTLE = 8192;
 export const SHINY_CHANCE_DUNGEON = 4096;
 export const SHINY_CHANCE_STONE = 2048;
-export const SHINY_CHANCE_SAFARI = 2048;
+export const SHINY_CHANCE_SAFARI = 1024;
 export const SHINY_CHANCE_SHOP = 1024;
 export const SHINY_CHANCE_BATTLEFRONTIER = 1024;
 export const SHINY_CHANCE_BREEDING = 1024;
 export const SHINY_CHANCE_FARM = 1024;
+export const SHINY_CHANCE_REWARD = 1024;
 
 export const ITEM_PRICE_MULTIPLIER = 1.00045;
 export const ITEM_PRICE_DEDUCT = 1.0005;
@@ -114,6 +172,15 @@ export const MAX_DUNGEON_SIZE = 10;
 export const DUNGEON_CHEST_SHOW = 2;
 export const DUNGEON_MAP_SHOW = 4;
 
+export enum DungeonTile {
+    empty,
+    entrance,
+    enemy,
+    chest,
+    boss,
+    ladder,
+}
+
 // Achievements
 export enum AchievementOption {
     less,
@@ -144,21 +211,13 @@ export enum AchievementType {
     'Pokerus',
 }
 
-export enum DungeonTile {
-    empty,
-    entrance,
-    enemy,
-    chest,
-    boss,
-    ladder,
-}
-
 // Held item chance
 export const ROUTE_HELD_ITEM_MODIFIER = 1;
 export const DUNGEON_HELD_ITEM_MODIFIER = ROUTE_HELD_ITEM_MODIFIER * 4;
 export const DUNGEON_BOSS_HELD_ITEM_MODIFIER = DUNGEON_HELD_ITEM_MODIFIER * 1.5;
 export const HELD_ITEM_CHANCE = 512;
 export const HELD_UNDERGROUND_ITEM_CHANCE = 2048;
+export const GRISEOUS_ITEM_CHANCE = 80;
 export const DNA_ITEM_CHANCE = 60;
 export const LIGHT_ITEM_CHANCE = 100;
 export const RUST_ITEM_CHANCE = 90;
@@ -174,6 +233,7 @@ export const DUNGEON_GEMS = 3;
 export const DUNGEON_BOSS_GEMS = 20;
 export const GYM_GEMS = 5;
 
+// Safari Zone
 export const SAFARI_BATTLE_CHANCE = 5;
 
 export const SAFARI_BASE_POKEBALL_COUNT = 30;
@@ -491,6 +551,9 @@ export const TypeColor = [
 ];
 
 export const ROUTE_KILLS_NEEDED = 10;
+
+// Achievements
+
 export const ACHIEVEMENT_DEFEAT_ROUTE_VALUES = [
     100,
     1000,
@@ -624,13 +687,26 @@ export const EnvironmentCssClass: Record<Environment, string> = {
     Graveyard: 'graveyard',
 };
 
+// Starter Pokémon
+
 export enum Starter {
-    'None' = -1,
-    'Bulbasaur' = 0,
-    'Charmander' = 1,
-    'Squirtle' = 2,
-    'Pikachu' = 3,
+    None = -1,
+    Grass = 0,
+    Fire = 1,
+    Water = 2,
+    Special = 3,
 }
+
+export const RegionalStarters = [
+    [1, 4, 7, 25], // Kanto
+    [152, 155, 158], // Johto
+    [252, 255, 258], // Hoenn
+    [387, 390, 393], // Sinnoh
+    [495, 498, 501], // Unova
+    [650, 653, 656], // Kalos
+    [722, 725, 728], // Alola
+    [810, 813, 816], // Galar
+];
 
 export enum StoneType {
     'None' = -1,
@@ -663,9 +739,11 @@ export enum StoneType {
     'White_DNA',
     'Sachet',
     'Whipped_dream',
+    'Key_stone',
     'Ice_stone',
     'Solar_light',
     'Lunar_light',
+    'Pure_light',
     'Sweet_apple',
     'Tart_apple',
     'Cracked_pot',
@@ -768,12 +846,6 @@ export enum VitaminType {
     RareCandy,
 }
 
-export enum EnergyRestoreSize {
-    SmallRestore,
-    MediumRestore,
-    LargeRestore,
-}
-
 export enum EggItemType {
     'Fire_egg',
     'Water_egg',
@@ -792,11 +864,20 @@ export enum BulletinBoards {
     Johto,
     Hoenn,
     Sevii4567,
+    Sinnoh,
     Kalos,
     Alola,
     Galar,
     Armor,
     Crown,
+}
+
+// Underground
+
+export enum EnergyRestoreSize {
+    SmallRestore,
+    MediumRestore,
+    LargeRestore,
 }
 
 export const EnergyRestoreEffect = {
@@ -980,6 +1061,18 @@ export const OrangeGyms = [
     'Kumquat Island',
     'Supreme Gym Leader Drake',
 ];
+export const MagikarpJumpGyms = [
+    'Friend League',
+    'Quick League',
+    'Heavy League',
+    'Great League',
+    'Fast League',
+    'Luxury League',
+    'Heal League',
+    'Ultra League',
+    'E4 League',
+    'Master League',
+];
 
 export const RegionGyms = [
     KantoGyms,
@@ -992,6 +1085,7 @@ export const RegionGyms = [
     GalarGyms,
     // Keep it at the bottom, as we want optional badges at the bottom
     OrangeGyms,
+    MagikarpJumpGyms,
 ];
 
 export function getGymIndex(gym: string): number {
@@ -1273,26 +1367,26 @@ export const DockTowns = [
     'Hulbury', // Galar
 ];
 
-export const RegionalStarters = [
-    [1, 4, 7], // Kanto
-    [152, 155, 158], // Johto
-    [252, 255, 258], // Hoenn
-    [387, 390, 393], // Sinnoh
-    [495, 498, 501], // Unova
-    [650, 653, 656], // Kalos
-    [722, 725, 728], // Alola
-    [810, 813, 816], // Galar
-];
-
 export const TemporaryBattles = [
+    'Blue 1',
+    'Blue 2',
+    'Blue 3',
+    'Blue 4',
     'Fighting Dojo',
     'Snorlax route 12',
     'Snorlax route 16',
+    'Blue 5',
     'Biker Goon 1',
     'Biker Goon 2',
     'Biker Goon 3',
     'Cue Ball Paxton',
+    'Blue 6',
+    'Silver 1',
+    'Silver 2',
     'Sudowoodo',
+    'Silver 3',
+    'Silver 4',
+    'Silver 5',
     'Suicune 1',
     'Eusine',
     'Suicune 2',
@@ -1300,9 +1394,18 @@ export const TemporaryBattles = [
     'Suicune 4',
     'Suicune 5',
     'Suicune 6',
+    'Silver 6',
+    'Silver 7',
+    'May 1',
+    'May 2',
+    'May 3',
+    'Wally 1',
+    'May 4',
     'Kecleon 1',
     'Kecleon 2',
     'Kecleon 3',
+    'May 5',
+    'Wally 2',
     'Sevii Rocket Grunt 1',
     'Sevii Rocket Grunt 2',
     'Sevii Rocket Grunt 3',
@@ -1316,14 +1419,29 @@ export const TemporaryBattles = [
     'Kimono Girls',
     'Spiky-eared Pichu',
     'Rocket Boss Giovanni',
+    'Barry 1',
+    'Barry 2',
+    'Barry 3',
+    'Barry 4',
     'Galactic Boss Cyrus',
+    'Barry 5',
+    'Barry 6',
+    'Barry 7',
+    'Zero',
+    'Hugh 1',
+    'Hugh 2',
     'Team Plasma Grunt 1',
+    'Colress 1',
     'Team Plasma Grunt 2',
     'Team Plasma Grunt 3',
+    'Hugh 3',
+    'Cheren',
+    'Colress 2',
     'Team Plasma Grunt 4',
     'Team Plasma Grunt 5',
     'Team Plasma Grunts 1',
     'Team Plasma Grunts 2',
+    'Hugh 4',
     'Team Plasma Grunt 6',
     'Zinzolin 1',
     'Team Plasma Grunt 7',
@@ -1331,18 +1449,36 @@ export const TemporaryBattles = [
     'Team Plasma Grunt 9',
     'Zinzolin 2',
     'Plasma Shadow 1',
-    'Colress',
+    'Colress 3',
     'Plasma Shadow 2',
     'Plasma Shadow 3',
     'Plasma Shadow 4',
     'Ghetsis 1',
     'Ghetsis 2',
+    'Hugh 5',
+    'Hugh 6',
+    'Hugh 7',
+    'Dream Researcher',
+    'Shauna 1',
+    'Sycamore 1',
+    'Tierno 1',
+    'Trevor & Tierno',
+    'Calem 1',
+    'Korrina',
     'Aipom Alley',
     'Mime Interview',
     'Underground Fighting Ring',
     'Lab Ambush',
     'Imposter',
     'Possessed Mewtwo',
+    'Calem 2',
+    'Calem 3',
+    'Calem 4',
+    'Sycamore 2',
+    'Shauna 2',
+    'Tierno 2',
+    'Trevor',
+    'Calem 5',
     'Riot',
     'Merilyn',
     'Millis and Argus Steel',
@@ -1354,7 +1490,21 @@ export const TemporaryBattles = [
     'Ash Ketchum Unova',
     'Ash Ketchum Kalos',
     'Ash Ketchum Pinkan',
+    'Calem 6',
+    'Hau 1',
+    'Hau 2',
+    'Hau 3',
+    'Dexio',
+    'Sina',
+    'Hau 4',
+    'Gladion 1',
+    'Battle Royal',
+    'Plumeria 1',
     'Ultra Wormhole',
+    'Hau 5',
+    'Plumeria 2',
+    'Gladion 2',
+    'Necrozma',
     'Ultra Megalopolis',
     'Captain Mina',
     'Captain Ilima',
@@ -1363,10 +1513,20 @@ export const TemporaryBattles = [
     'Captain Kiawe',
     'Captain Sophocles',
     'Kahuna Nanu',
+    'Gladion 3',
     'Anabel',
     'Captain Mina UB',
     'Kahuna Nanu UB',
     'Ash Ketchum Alola',
+    'Rainbow Rocket Grunt 1',
+    'Rainbow Rocket Grunt 2',
+    'Aether Branch Chief Faba',
+    'Team Aqua Leader Archie',
+    'Team Magma Leader Maxie',
+    'Team Galactic Leader Cyrus',
+    'Team Flare Leader Lysandre',
+    'Team Plasma Leader Ghetsis',
+    'Team Rainbow Leader Giovanni',
     'Hop 1',
     'Mirages',
     'Hop 2',
@@ -1548,62 +1708,6 @@ export enum Pokerus {
     'Resistant',
 }
 
-// Subregions
-export enum KantoSubRegions {
-    Kanto = 0,
-    Sevii123,
-    Sevii4567,
-}
-
-export enum JohtoSubRegions {
-    Johto = 0,
-}
-
-export enum HoennSubRegions {
-    Hoenn = 0,
-}
-
-export enum SinnohSubRegions {
-    Sinnoh = 0,
-}
-
-export enum UnovaSubRegions {
-    Unova = 0,
-}
-
-export enum KalosSubRegions {
-    Kalos = 0,
-}
-
-export enum AlolaSubRegions {
-    MelemeleIsland = 0,
-    AkalaIsland,
-    UlaulaIsland,
-    PoniIsland,
-}
-
-export enum GalarSubRegions {
-    SouthGalar = 0,
-    NorthGalar,
-    IsleofArmor,
-    CrownTundra,
-}
-
-export enum FinalSubRegions {
-    Final = 0,
-}
-
-export type SubRegions =
-    | KantoSubRegions
-    | JohtoSubRegions
-    | HoennSubRegions
-    | SinnohSubRegions
-    | UnovaSubRegions
-    | KalosSubRegions
-    | AlolaSubRegions
-    | GalarSubRegions
-    | FinalSubRegions;
-
 // Gender Types
 export enum Genders {
     Genderless = 0,
@@ -1618,10 +1722,14 @@ export enum BattlePokemonGender {
 }
 
 // Pokemon Statistics
-export const STATISTIC_CAPTURED = 'Captured';
-export const STATISTIC_DEFEATED = 'Defeated';
-export const STATISTIC_ENCOUNTERED = 'Encountered';
-export const STATISTIC_HATCHED = 'Hatched';
+export enum PokemonStatiticsType {
+    Captured = 'Captured',
+    Defeated = 'Defeated',
+    Encountered = 'Encountered',
+    Hatched = 'Hatched',
+}
+
+// Alcremie
 
 export enum AlcremieSweet {
     'Strawberry Sweet',

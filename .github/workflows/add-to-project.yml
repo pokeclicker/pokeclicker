@@ -1,0 +1,45 @@
+name: Add Item to Project and Set Fields
+
+on:
+  workflow_call:
+    inputs:
+      project-url:
+        required: true
+        type: string
+      field-keys:
+        type: string
+      field-values:
+        type: string
+    secrets:
+      PROJECT_APP_ID:
+        required: true
+      PROJECT_APP_PEM:
+        required: true
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate Token
+        id: generate_token
+        uses: tibdex/github-app-token@v1.7.0
+        with:
+          app_id: ${{ secrets.PROJECT_APP_ID }}
+          private_key: ${{ secrets.PROJECT_APP_PEM }}
+      
+      - name: Add to Project
+        id: add_project
+        uses: actions/add-to-project@v0.3.0
+        with:
+          project-url: ${{ inputs.project-url }}
+          github-token: ${{ steps.generate_token.outputs.token }}
+          
+      - name: Set Project Fields
+        if: inputs.field-keys != ''
+        uses: titoportas/update-project-fields@v0.1.0
+        with:
+          project-url: ${{ inputs.project-url }}
+          github-token: ${{ steps.generate_token.outputs.token }}
+          item-id: ${{ steps.add_project.outputs.itemId }}
+          field-keys: ${{ inputs.field-keys }}
+          field-values: ${{ inputs.field-values }}

@@ -4,8 +4,8 @@
 ///<reference path="../../declarations/requirements/MultiRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/SeededDateRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/DayOfWeekRequirement.d.ts"/>
+///<reference path="../../declarations/requirements/ObtainedPokemonRequirement.d.ts"/>
 ///<reference path="../../declarations/utilities/SeededDateRand.d.ts"/>
-///<reference path="../achievements/ObtainedPokemonRequirement.ts"/>
 ///<reference path="./DungeonTrainer.ts"/>
 ///<reference path="../gym/GymPokemon.ts"/>
 
@@ -221,7 +221,7 @@ class Dungeon {
     }
 
     public getRandomLoot(tier: LootTier, onlyDebuffable = false): Loot {
-        const lootTable = this.lootTable[tier].filter((loot) => (!loot.requirement || loot.requirement.isCompleted()) && !(onlyDebuffable && loot.ignoreDebuff));
+        const lootTable = this.lootTable[tier].filter((loot) => ((!loot.requirement || loot.requirement.isCompleted()) && (!ItemList[loot.loot] || ItemList[loot.loot].isAvailable())) && !(onlyDebuffable && loot.ignoreDebuff));
         return Rand.fromWeightedArray(lootTable, lootTable.map((loot) => loot.weight ?? 1));
     }
 
@@ -3254,14 +3254,12 @@ dungeonList['Victory Road Hoenn'] = new Dungeon('Victory Road Hoenn',
         {pokemon: 'Whismur', options: { weight: 4 }},
         {pokemon: 'Loudred', options: { weight: 4 }},
         {pokemon: 'Makuhita', options: { weight: 4 }},
-        {pokemon: 'Hariyama', options: { weight: 4 }},
         {pokemon: 'Aron', options: { weight: 4 }},
         {pokemon: 'Lairon', options: { weight: 4 }},
         {pokemon: 'Mawile', options: { weight: 4 }},
         {pokemon: 'Meditite', options: { weight: 4 }},
         {pokemon: 'Medicham', options: { weight: 4 }},
         {pokemon: 'Barboach', options: { weight: 4 }},
-        {pokemon: 'Whiscash', options: { weight: 4 }},
         new DungeonTrainer('Cooltrainer',
             [
                 new GymPokemon('Magneton', 37000, 43),
@@ -3360,14 +3358,8 @@ dungeonList['Victory Road Hoenn'] = new Dungeon('Victory Road Hoenn',
     },
     560000,
     [
-        new DungeonTrainer('PKMN Trainer',
-            [
-                new GymPokemon('Altaria', 680000, 44),
-                new GymPokemon('Delcatty', 670000, 43),
-                new GymPokemon('Roselia', 680000, 44),
-                new GymPokemon('Magneton', 650000, 41),
-                new GymPokemon('Gardevoir', 690000, 45),
-            ], { weight: 1 }, 'Wally', '(wally)'),
+        new DungeonBossPokemon('Whiscash', 3003000, 14),
+        new DungeonBossPokemon('Hariyama', 3003000, 14),
     ],
     37000, 101);
 
@@ -3590,23 +3582,23 @@ dungeonList['Team Galactic Eterna Building'] = new Dungeon('Team Galactic Eterna
                 new GymPokemon('Skuntank', 2150000, 23),
             ], { weight: 1 }, 'Jupiter', '(jupiter)'),
         new DungeonBossPokemon('Rotom (Heat)', 4300000, 100, {requirement: new MultiRequirement([
-            new ObtainedPokemonRequirement(pokemonMap.Rotom),
+            new ObtainedPokemonRequirement('Rotom'),
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Galactic Eterna Building')),
         ])}),
         new DungeonBossPokemon('Rotom (Wash)', 4300000, 100, {requirement: new MultiRequirement([
-            new ObtainedPokemonRequirement(pokemonMap.Rotom),
+            new ObtainedPokemonRequirement('Rotom'),
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Galactic Eterna Building')),
         ])}),
         new DungeonBossPokemon('Rotom (Frost)', 4300000, 100, {requirement: new MultiRequirement([
-            new ObtainedPokemonRequirement(pokemonMap.Rotom),
+            new ObtainedPokemonRequirement('Rotom'),
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Galactic Eterna Building')),
         ])}),
         new DungeonBossPokemon('Rotom (Fan)', 4300000, 100, {requirement: new MultiRequirement([
-            new ObtainedPokemonRequirement(pokemonMap.Rotom),
+            new ObtainedPokemonRequirement('Rotom'),
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Galactic Eterna Building')),
         ])}),
         new DungeonBossPokemon('Rotom (Mow)', 4300000, 100, {requirement: new MultiRequirement([
-            new ObtainedPokemonRequirement(pokemonMap.Rotom),
+            new ObtainedPokemonRequirement('Rotom'),
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Galactic Eterna Building')),
         ])}),
     ],
@@ -4204,7 +4196,7 @@ dungeonList['Distortion World'] = new Dungeon('Distortion World',
                 new GymPokemon('Gyarados', 1128000, 46),
                 new GymPokemon('Weavile', 1128000, 47),
             ], { weight: 1 }, 'Cyrus', '(cyrus)'),
-        new DungeonBossPokemon('Giratina (Altered)', 11880000, 45, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)}),
+        new DungeonBossPokemon('Giratina (Altered)', 11880000, 45, {requirement: new TemporaryBattleRequirement('Zero')}),
     ],
     86500, 217);
 
@@ -4447,7 +4439,7 @@ dungeonList['Flower Paradise'] = new Dungeon('Flower Paradise',
         new DungeonBossPokemon('Parasect', 9900000, 50),
         new DungeonBossPokemon('Breloom', 11000000, 50),
         new DungeonBossPokemon('Shaymin (Land)', 11000000, 50),
-        new DungeonBossPokemon('Shaymin (Sky)', 11000000, 50, {requirement: new ObtainedPokemonRequirement(pokemonMap['Shaymin (Land)'])}),
+        new DungeonBossPokemon('Shaymin (Sky)', 11000000, 50, {requirement: new ObtainedPokemonRequirement('Shaymin (Land)')}),
     ],
     96500, 230);
 
@@ -5206,6 +5198,7 @@ dungeonList['Reversal Mountain'] = new Dungeon('Reversal Mountain',
     4003000,
     [
         new DungeonBossPokemon('Cacturne', 24000000, 100),
+        new DungeonBossPokemon('Vibrava', 24000000, 100),
         new DungeonBossPokemon('Excadrill', 26000000, 100),
         new DungeonBossPokemon('Heatran', 30000000, 100, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)}),
     ],
@@ -6835,6 +6828,7 @@ dungeonList['Frost Cavern'] = new Dungeon('Frost Cavern',
             {loot: 'MediumRestore', weight: 2},
             {loot: 'LargeRestore'},
             {loot: 'Never_Melt_Ice'},
+            {loot: 'Abomasite', ignoreDebuff: true},
         ],
         mythic: [{loot: 'Heart Scale'}],
     },
@@ -8309,8 +8303,8 @@ dungeonList['Lake of the Sunne and Moone'] = new Dungeon('Lake of the Sunne and 
     16435490,
     [
         new DungeonBossPokemon('Cosmog', 82177450, 70),
-        new DungeonBossPokemon('Lunala', 90673816, 100, {requirement: new MultiRequirement([new ObtainedPokemonRequirement(pokemonMap.Lunala), new ObtainedPokemonRequirement(pokemonMap.Necrozma)])}),
-        new DungeonBossPokemon('Solgaleo', 90673816, 100, {requirement: new MultiRequirement([new ObtainedPokemonRequirement(pokemonMap.Solgaleo), new ObtainedPokemonRequirement(pokemonMap.Necrozma)])}),
+        new DungeonBossPokemon('Lunala', 90673816, 100, {requirement: new MultiRequirement([new ObtainedPokemonRequirement('Lunala'), new ObtainedPokemonRequirement('Necrozma')])}),
+        new DungeonBossPokemon('Solgaleo', 90673816, 100, {requirement: new MultiRequirement([new ObtainedPokemonRequirement('Solgaleo'), new ObtainedPokemonRequirement('Necrozma')])}),
     ],
     1200000, 27);
 
@@ -8441,7 +8435,7 @@ dungeonList['Poni Meadow'] = new Dungeon('Poni Meadow',
     16659968,
     [
         new DungeonBossPokemon('Oricorio (Sensu)', 83299840, 70),
-        new DungeonBossPokemon('Floette (Red)', 83299840, 70),
+        new DungeonBossPokemon('Floette (Blue)', 83299840, 70),
     ],
     1225000, 28);
 
@@ -8965,8 +8959,8 @@ dungeonList['Tower of Waters'] = new Dungeon('Tower of Waters',
 dungeonList['Roaring-Sea Caves'] = new Dungeon('Roaring-Sea Caves',
     [
         'Zubat', 'Carbink', 'Piloswine', 'Deino', 'Larvitar', 'Riolu', 'Audino', 'Golbat', 'Barboach', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Magikarp', 'Feebas',
-        {pokemon: 'Omanyte', options: { hide: true, requirement: new ObtainedPokemonRequirement(pokemonMap.Omanyte)}},
-        {pokemon: 'Kabuto', options: { hide: true, requirement: new ObtainedPokemonRequirement(pokemonMap.Kabuto)}},
+        {pokemon: 'Omanyte', options: { hide: true, requirement: new ObtainedPokemonRequirement('Omanyte')}},
+        {pokemon: 'Kabuto', options: { hide: true, requirement: new ObtainedPokemonRequirement('Kabuto')}},
     ],
     {
         common: [
@@ -8993,8 +8987,8 @@ dungeonList['Roaring-Sea Caves'] = new Dungeon('Roaring-Sea Caves',
     },
     32184888,
     [
-        new DungeonBossPokemon('Kabutops', 160924440, 60, {hide: true, requirement: new ObtainedPokemonRequirement(pokemonMap.Kabutops)}),
-        new DungeonBossPokemon('Omastar', 160924440, 60, {hide: true, requirement: new ObtainedPokemonRequirement(pokemonMap.Omastar)}),
+        new DungeonBossPokemon('Kabutops', 160924440, 60, {hide: true, requirement: new ObtainedPokemonRequirement('Kabutops')}),
+        new DungeonBossPokemon('Omastar', 160924440, 60, {hide: true, requirement: new ObtainedPokemonRequirement('Omastar')}),
         new DungeonBossPokemon('Tyranitar', 160924440, 60),
         new DungeonBossPokemon('Hydreigon', 160924440, 60),
         new DungeonBossPokemon('Lucario', 160924440, 60),
@@ -9004,7 +8998,7 @@ dungeonList['Roaring-Sea Caves'] = new Dungeon('Roaring-Sea Caves',
 dungeonList['Rock Peak Ruins'] = new Dungeon('Rock Peak Ruins',
     [
         'Stonjourner', 'Rhyperior', 'Aggron', 'Coalossal', 'Barbaracle', 'Gigalith', 'Crustle',
-        {pokemon: 'Aerodactyl', options: { hide: true, requirement: new ObtainedPokemonRequirement(pokemonMap.Aerodactyl)}},
+        {pokemon: 'Aerodactyl', options: { hide: true, requirement: new ObtainedPokemonRequirement('Aerodactyl')}},
     ],
     {
         common: [
@@ -9052,7 +9046,7 @@ dungeonList['Iron Ruins'] = new Dungeon('Iron Ruins',
 dungeonList['Iceberg Ruins'] = new Dungeon('Iceberg Ruins',
     [
         'Cryogonal', 'Beartic', 'Galarian Darumaka', 'Weavile', 'Vanilluxe', 'Froslass', 'Delibird',
-        {pokemon: 'Aurorus', options: { hide: true, requirement: new ObtainedPokemonRequirement(pokemonMap.Aurorus)}},
+        {pokemon: 'Aurorus', options: { hide: true, requirement: new ObtainedPokemonRequirement('Aurorus')}},
     ],
     {
         common: [

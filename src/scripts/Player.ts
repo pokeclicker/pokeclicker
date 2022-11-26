@@ -21,10 +21,9 @@ class Player {
     private _subregion: KnockoutObservable<number>;
     private _townName: string;
     private _town: KnockoutObservable<Town>;
-    private starter: KnockoutObservable<GameConstants.Starter>;
     private _timeTraveller = false;
     private _origins: Array<any>;
-    public regionStarters: Array<KnockoutObservable<number>>;
+    public regionStarters: Array<KnockoutObservable<GameConstants.Starter>>;
     public subregionObject: KnockoutObservable<SubRegion>;
 
     constructor(savedPlayer?) {
@@ -57,43 +56,26 @@ class Player {
         this._town = ko.observable(TownList[this._townName]);
         this._town.subscribe(value => this._townName = value.name);
 
-        this.starter = ko.observable(savedPlayer.starter != undefined ? savedPlayer.starter : GameConstants.Starter.None);
         this.regionStarters = new Array<KnockoutObservable<number>>();
-        if (savedPlayer.regionStarters && savedPlayer.regionStarters[0]) {
-            this.regionStarters.push(ko.observable(savedPlayer.regionStarters[0]));
-        } else {
-            switch (this.starter()) {
-                case GameConstants.Starter.None:
-                    this.regionStarters.push(ko.observable(undefined));
-                    break;
-                case GameConstants.Starter.Bulbasaur:
-                    this.regionStarters.push(ko.observable(0));
-                    break;
-                case GameConstants.Starter.Charmander:
-                    this.regionStarters.push(ko.observable(1));
-                    break;
-                case GameConstants.Starter.Squirtle:
-                    this.regionStarters.push(ko.observable(2));
-                    break;
-            }
-        }
-        for (let i = 1; i <= GameConstants.MAX_AVAILABLE_REGION; i++) {
+        for (let i = 0; i <= GameConstants.MAX_AVAILABLE_REGION; i++) {
             if (savedPlayer.regionStarters && savedPlayer.regionStarters[i] != undefined) {
                 this.regionStarters.push(ko.observable(savedPlayer.regionStarters[i]));
             } else if (i < (savedPlayer.highestRegion ?? 0)) {
-                this.regionStarters.push(ko.observable(0));
+                this.regionStarters.push(ko.observable(GameConstants.Starter.Grass));
             } else if (i == (savedPlayer.highestRegion ?? 0)) {
-                this.regionStarters.push(ko.observable(undefined));
-                if (this._region() != i) {
-                    this._region(i);
-                    this._subregion(0);
-                    this.route(undefined);
-                    this._townName = GameConstants.StartingTowns[i];
-                    this._town = ko.observable(TownList[this._townName]);
+                this.regionStarters.push(ko.observable(GameConstants.Starter.None));
+                if (i != GameConstants.Region.kanto) { // Kanto has it's own starter code
+                    if (this._region() != i) {
+                        this._region(i);
+                        this._subregion(0);
+                        this.route(undefined);
+                        this._townName = GameConstants.StartingTowns[i];
+                        this._town = ko.observable(TownList[this._townName]);
+                    }
+                    $('#pickStarterModal').modal('show');
                 }
-                $('#pickStarterModal').modal('show');
             } else {
-                this.regionStarters.push(ko.observable(undefined));
+                this.regionStarters.push(ko.observable(GameConstants.Starter.None));
             }
         }
 
@@ -255,7 +237,6 @@ class Player {
             '_townName',
             '_itemList',
             '_itemMultipliers',
-            'starter',
             // TODO(@Isha) remove.
             'mineInventory',
             '_lastSeen',

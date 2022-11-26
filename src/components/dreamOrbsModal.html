@@ -1,0 +1,29 @@
+<div class="modal fade noselect" id="dreamOrbsModal" tabindex="-1" role="dialog"
+aria-labelledby="dreamOrbsModalLabel">
+<div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Open Dream Orbs</h5>
+        </div>
+        <div class="modal-body">
+            <select id="dream-orbs-selector" class="custom-select" onchange="App.game.dreamOrbController.item(undefined)" style="margin-right: 8px"
+                    data-bind="options: App.game.dreamOrbController.orbs.filter((o) => !o.requirement ||o.requirement.isCompleted()),
+                               optionsText: 'color',
+                               value: App.game.dreamOrbController.selectedOrb"
+            >
+            </select>
+            <img data-bind="attr: { src: App.game.dreamOrbController.item() ? BagHandler.image(App.game.dreamOrbController.item().item) :
+                ('assets/images/dreamOrbs/dream_orb_' +
+                App.game.dreamOrbController.selectedOrb().color.toLowerCase() +
+                (App.game.dreamOrbController.opening() ? '_animated' : '') +
+                '.png')
+            }"/>
+            <div><button class="btn btn-primary" onclick="App.game.dreamOrbController.open()">Open</button></div>
+            <div>Orbs left: <span data-bind="text: App.game.dreamOrbController.selectedOrb().amount().toLocaleString('en-US')"></span></div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+</div>
+</div>

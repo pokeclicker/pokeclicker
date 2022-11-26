@@ -1,6 +1,6 @@
 class BattleCafe extends TownContent {
     constructor() {
-        super([new ObtainedPokemonRequirement(pokemonMap.Milcery)]);
+        super([new ObtainedPokemonRequirement('Milcery')]);
     }
 
     public cssClass() {

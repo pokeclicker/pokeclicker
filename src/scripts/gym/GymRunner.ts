@@ -20,16 +20,13 @@ class GymRunner {
         this.autoRestart(autoRestart);
         this.running(false);
         this.gymObservable(gym);
-        if (gym instanceof Champion) {
-            gym.setPokemon(player.regionStarters[player.region]());
-        }
         App.game.gameState = GameConstants.GameState.idle;
         DungeonRunner.timeBonus(FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute));
         GymRunner.timeLeft(GameConstants.GYM_TIME * this.timeBonus());
         GymRunner.timeLeftPercentage(100);
 
         GymBattle.gym = gym;
-        GymBattle.totalPokemons(gym.pokemons.length);
+        GymBattle.totalPokemons(gym.getPokemonList().length);
         GymBattle.index(0);
         GymBattle.generateNewEnemy();
         App.game.gameState = GameConstants.GameState.gym;
@@ -92,7 +89,7 @@ class GymRunner {
         if (this.running()) {
             this.running(false);
             Notifier.notify({
-                message: `It appears you are not strong enough to defeat ${GymBattle.gym.leaderName}.`,
+                message: `It appears you are not strong enough to defeat ${GymBattle.gym.leaderName.replace(/\d/g, '')}.`,
                 type: NotificationConstants.NotificationOption.danger,
             });
             App.game.gameState = GameConstants.GameState.town;
@@ -103,7 +100,7 @@ class GymRunner {
         if (this.running()) {
             this.running(false);
             Notifier.notify({
-                message: `Congratulations, you defeated ${GymBattle.gym.leaderName}!`,
+                message: `Congratulations, you defeated ${GymBattle.gym.leaderName.replace(/\d/g, '')}!`,
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.General.gym_won,
             });
