@@ -63,6 +63,7 @@ class PartyPokemon implements Saveable {
         public name: PokemonNameType,
         public evolutions: EvoData[],
         public baseAttack: number,
+        public eggCycles: number,
         shiny = false,
         public gender
     ) {
@@ -248,6 +249,10 @@ class PartyPokemon implements Saveable {
         // Allow 5 for every region visited (including Kanto)
         return (player.highestRegion() + 1) * 5 - this.totalVitaminsUsed();
     };
+
+    getEggSteps = (): number => {
+        return Math.floor(App.game.breeding.getSteps(this.eggCycles) ** (1 - this.vitaminsUsed[GameConstants.VitaminType.Carbos]() / 150));
+    }
 
     // TODO: Update these from protein → vitamin (won't affect anything)
     public hideFromProteinList = ko.pureComputed(() => {

@@ -63,7 +63,7 @@ class Egg implements Saveable {
 
         // Reduce total steps based on amount of Carbos used
         if (this.partyPokemon() && App.game?.party) {
-            this.stepsRequired = this.totalSteps - Math.floor((this.partyPokemon().vitaminsUsed[GameConstants.VitaminType.Carbos]() / 100) * this.totalSteps);
+            this.stepsRequired = this.partyPokemon().getEggSteps();
         }
     }
 

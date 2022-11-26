@@ -68,7 +68,7 @@
                     </tr>
                     <tr>
                       <td class="text-left">Hatch Steps</td>
-                      <td class="text-left tight"><code data-bind="text: App.game.breeding.getSteps(pokemonMap[$data].eggCycles).toLocaleString('en-US')">-</code></td>
+                      <td class="text-left tight"><code data-bind="text: App.game.party.getPokemon($data)?.getEggSteps().toLocaleString('en-US') || 'Unknown'">-</code></td>
                     </tr>
                     <tr data-bind="if: BagHandler.displayName(pokemonMap[$data].heldItem)">
                       <td class="text-left">Rare Hold Item</td>

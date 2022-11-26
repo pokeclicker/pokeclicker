@@ -66,12 +66,12 @@ export const SortOptionConfigs: Record<SortOptions, SortOptionConfig> = {
             (
                 (p.baseAttack * ((BREEDING_ATTACK_BONUS + p.vitaminsUsed[VitaminType.Calcium]()) / 100) + p.vitaminsUsed[VitaminType.Protein]())
             * (Settings.getSetting('breedingIncludeEVBonus').observableValue() ? p.calculateEVAttackBonus() : 1))
-            / (pokemonMap[p.name].eggCycles ** (1 - (p.vitaminsUsed[VitaminType.Carbos]() / 150)))),
+            / p.getEggSteps()),
     },
 
     [SortOptions.eggCycles]: {
         text: 'Egg Steps',
-        getValue: (p) => pokemonMap[p.name].eggCycles,
+        getValue: (p) => p.getEggSteps(),
     },
 
     [SortOptions.timesHatched]: {
