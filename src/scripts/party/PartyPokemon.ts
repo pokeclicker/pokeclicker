@@ -241,6 +241,23 @@ class PartyPokemon implements Saveable {
         }
     }
 
+    public removeVitamin(vitamin: GameConstants.VitaminType, amount: number): void {
+        console.log(vitamin, amount);
+        const vitaminName = GameConstants.VitaminType[vitamin];
+        amount = Math.min(amount, this.vitaminsUsed[vitamin]());
+
+        if (amount <= 0) {
+            Notifier.notify({
+                message: `This Pokémon doesn't have any ${vitaminName} to remove!`,
+                type: NotificationConstants.NotificationOption.warning,
+            });
+            return;
+        }
+
+        GameHelper.incrementObservable(this.vitaminsUsed[vitamin], -amount);
+        GameHelper.incrementObservable(player.itemList[vitaminName], amount);
+    }
+
     totalVitaminsUsed = (): number => {
         return Object.values(this.vitaminsUsed).reduce((sum, obs) => sum + obs(), 0);
     }
