@@ -268,7 +268,8 @@ class PartyPokemon implements Saveable {
     };
 
     getEggSteps = (): number => {
-        return Math.floor(App.game.breeding.getSteps(this.eggCycles) ** (1 - this.vitaminsUsed[GameConstants.VitaminType.Carbos]() / 150));
+        const div = 300;
+        return Math.floor(((App.game.breeding.getSteps(this.eggCycles) / div) ** (1 - this.vitaminsUsed[GameConstants.VitaminType.Carbos]() / 70)) * div);
     }
 
     getBreedingAttackBonus = (): number => {
@@ -277,7 +278,7 @@ class PartyPokemon implements Saveable {
         return Math.floor(this.baseAttack * attackBonusPercent) + proteinsUsed;
     }
 
-    // TODO: Update these from protein → vitamin (won't affect anything)
+    // TODO VITAMINS: Update these from protein → vitamin (won't affect anything)
     public hideFromProteinList = ko.pureComputed(() => {
         if (this._breeding()) {
             return true;
