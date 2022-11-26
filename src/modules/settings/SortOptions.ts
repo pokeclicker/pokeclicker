@@ -1,5 +1,4 @@
 import { BREEDING_ATTACK_BONUS, VitaminType } from '../GameConstants';
-import { pokemonMap } from '../pokemons/PokemonList';
 import Settings from './Settings';
 
 export enum SortOptions {
