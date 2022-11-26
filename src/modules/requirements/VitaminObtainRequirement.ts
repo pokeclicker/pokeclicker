@@ -3,7 +3,7 @@ import AchievementRequirement from './AchievementRequirement';
 
 export default class VitaminObtainRequirement extends AchievementRequirement {
     constructor(value: number, option: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
-        super(value, option, GameConstants.AchievementType.Protein);
+        super(value, option, GameConstants.AchievementType.Vitamins);
     }
 
     public getProgress() {
