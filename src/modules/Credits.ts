@@ -40,6 +40,15 @@ export const SpriteCredits: Credit[] = [
         // Notes: Gives credit on image page if asked.
     },
     {
+        name: 'B1ackZer0',
+        link: 'https://discordapp.com/users/346730382009565196',
+        image: 'assets/images/profile/trainer-111.png',
+        resources: [
+            'Shiny Alcremie',
+        ],
+        // Notes: Made specifically for PokéClicker.
+    },
+    {
         name: 'Beliot419',
         link: 'https://www.deviantart.com/beliot419',
         image: 'https://a.deviantart.net/avatars-big/b/e/beliot419.png',
