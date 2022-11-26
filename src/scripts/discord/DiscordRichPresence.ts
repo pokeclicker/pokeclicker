@@ -1,5 +1,6 @@
 class DiscordRichPresence {
     static focusedElement = document.createElement('input');
+    static clientVersion = '';
 
     static startTimestamp = Date.now();
     static currentArea = '';
