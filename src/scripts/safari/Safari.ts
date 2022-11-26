@@ -59,7 +59,6 @@ class Safari {
         Safari.addRandomBody(new GrassBody());
         Safari.addRandomBody(new GrassBody());
         Safari.addRandomBody(new GrassBody());
-
         Safari.show();
     }
 
@@ -294,7 +293,7 @@ class Safari {
         if (!this.canMove(x, y) || (x == this.playerXY.x && y == this.playerXY.y) || this.pokemonGrid().find(p => p.x === x && p.y === y)) {
             return;
         }
-        const pokemon = SafariPokemon.random();
+        const pokemon = SafariPokemon.random(player.region);
 
         pokemon.x = x;
         pokemon.y = y;
@@ -374,8 +373,8 @@ class Safari {
         return GameConstants.SAFARI_BASE_POKEBALL_COUNT;
     }
 
-    static completed(shiny = false) {
-        return SafariPokemon.list.reduce((all,poke) => {
+    static completed(shiny = false, region) {
+        return SafariPokemonList.list[player.region]()[0].safariPokemon.reduce((all,poke) => {
             return all && App.game.party.alreadyCaughtPokemonByName(poke.name,shiny);
         }, true);
     }

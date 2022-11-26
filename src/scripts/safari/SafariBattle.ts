@@ -13,7 +13,7 @@ class SafariBattle {
         SafariBattle._enemy(pokemon);
     }
 
-    public static load(enemy = SafariPokemon.random()) {
+    public static load(enemy = SafariPokemon.random(player.region)) {
         // Stop left over keypresses
         GameController.simulateKey('ArrowUp', 'up');
         GameController.simulateKey('ArrowDown', 'up');
