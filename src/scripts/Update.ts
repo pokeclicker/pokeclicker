@@ -1560,6 +1560,9 @@ class Update implements Saveable {
             }
         },
         '0.10.5': ({ playerData, saveData }) => {
+            // Red temporary battle
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 28);
+
             // Rotate form IDs
             const formIDs = [
                 // Butterfree (Gigantamax before others)
