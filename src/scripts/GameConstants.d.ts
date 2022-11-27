@@ -51,6 +51,7 @@ namespace GameConstants {
     declare const SHINY_CHANCE_SAFARI: number;
     declare const SHINY_CHANCE_BREEDING: number;
     declare const SHINY_CHANCE_FARM: number;
+    declare const SHINY_CHANCE_REWARD: number;
     declare const ITEM_PRICE_MULTIPLIER: number;
     declare const ITEM_PRICE_DEDUCT: number;
     declare const PLATE_VALUE: number;

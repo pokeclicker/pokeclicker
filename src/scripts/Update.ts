@@ -1581,6 +1581,240 @@ class Update implements Saveable {
             }
 
         },
+        '0.10.5': ({ playerData, saveData }) => {
+            // Rotate form IDs
+            const formIDs = [
+                // Butterfree (Gigantamax before others)
+                [12.01, 12.02, 12.03, 12.04],
+                //Pikachu (Put World Cap after Alola Cap, Gigantamax after Partner Cap)
+                [25.07, 25.08, 25.09, 25.10, 25.11, 25.12],
+                [25.09, 25.10, 25.11, 25.12, 25.13, 25.14],
+            ];
+
+            formIDs.forEach(list => Update.rotatePokemonIDs(saveData, list));
+
+            // Move IDs from .x to .0x for consistency
+            const consistentIDs = [
+                [1.1, 1.01],
+                [1.2, 1.02],
+                [1.3, 1.03],
+                [2.1, 2.01],
+                [2.2, 2.02],
+                [2.3, 2.03],
+                [3.1, 3.03],
+                [3.2, 3.04],
+                [3.3, 3.05],
+                [4.1, 4.01],
+                [5.1, 5.01],
+                [6.1, 6.04],
+                [7.1, 7.01],
+                [8.1, 8.01],
+                [9.1, 9.03],
+                [21.1, 21.01],
+                [52.01, 52.02],
+                [52.2, 52.03],
+                [77.1, 77.01],
+                [78.1, 78.01],
+                [79.1, 79.01],
+                [80.1, 80.02],
+                [83.1, 83.01],
+                [110.01, 110.02],
+                [110.1, 110.01],
+                [122.1, 122.01],
+                [133.1, 133.02],
+                [143.1, 143.02],
+                [144.1, 144.01],
+                [145.1, 145.01],
+                [146.1, 146.01],
+                [150.1, 150.03],
+                [172.1, 172.01],
+                [175.1, 175.01],
+                [175.2, 175.02],
+                [176.1, 176.01],
+                [199.1, 199.01],
+                [208.1, 208.02],
+                [222.1, 222.01],
+                [251.1, 251.02],
+                [251.2, 251.01],
+                [263.1, 263.01],
+                [264.1, 264.01],
+                [351.1, 351.01],
+                [351.2, 351.02],
+                [351.3, 351.03],
+                [386.1, 386.01],
+                [386.2, 386.02],
+                [386.3, 386.03],
+                [412.1, 412.01],
+                [412.2, 412.02],
+                [413.1, 413.01],
+                [413.2, 413.02],
+                [421.1, 421.01],
+                [422.1, 422.01],
+                [423.1, 423.01],
+                [446.1, 446.01],
+                [468.1, 468.01],
+                [479.1, 479.01],
+                [479.2, 479.02],
+                [479.3, 479.03],
+                [479.4, 479.04],
+                [479.5, 479.05],
+                [479.6, 479.06],
+                [487.1, 487.01],
+                [492.1, 492.01],
+                [554.1, 554.01],
+                [555.1, 555.01],
+                [555.2, 555.02],
+                [555.3, 555.03],
+                [562.1, 562.01],
+                [618.1, 618.01],
+                [641.1, 641.01],
+                [642.1, 642.01],
+                [645.1, 645.01],
+                [646.1, 646.01],
+                [646.2, 646.02],
+                [647.1, 647.01],
+                [648.1, 648.01],
+                [681.1, 681.01],
+                [710.1, 710.01],
+                [710.2, 710.02],
+                [710.3, 710.03],
+                [711.1, 711.01],
+                [711.2, 711.02],
+                [711.3, 711.03],
+                [791.1, 791.01],
+                [792.1, 792.01],
+                [801.1, 801.01],
+                [845.1, 845.01],
+                [845.2, 845.02],
+                [849.1, 849.01],
+                [869.01, -869.01],
+                [869.02, -869.02],
+                [869.03, -869.03],
+                [869.04, -869.04],
+                [869.05, -869.05],
+                [869.06, -869.06],
+                [869.07, -869.07],
+                [869.08, -869.08],
+                [869.11, -869.11],
+                [869.12, -869.12],
+                [869.13, -869.13],
+                [869.14, -869.14],
+                [869.15, -869.15],
+                [869.16, -869.16],
+                [869.17, -869.17],
+                [869.18, -869.18],
+                [869.21, -869.21],
+                [869.22, -869.22],
+                [869.23, -869.23],
+                [869.24, -869.24],
+                [869.25, -869.25],
+                [869.26, -869.26],
+                [869.27, -869.27],
+                [869.28, -869.28],
+                [869.31, -869.31],
+                [869.32, -869.32],
+                [869.33, -869.33],
+                [869.34, -869.34],
+                [869.35, -869.35],
+                [869.36, -869.36],
+                [869.37, -869.37],
+                [869.38, -869.38],
+                [869.41, -869.41],
+                [869.42, -869.42],
+                [869.43, -869.43],
+                [869.44, -869.44],
+                [869.45, -869.45],
+                [869.46, -869.46],
+                [869.47, -869.47],
+                [869.48, -869.48],
+                [869.51, -869.51],
+                [869.52, -869.52],
+                [869.53, -869.53],
+                [869.54, -869.54],
+                [869.55, -869.55],
+                [869.56, -869.56],
+                [869.57, -869.57],
+                [869.58, -869.58],
+                [869.61, -869.61],
+                [869.62, -869.62],
+                [869.63, -869.63],
+                [869.64, -869.64],
+                [869.65, -869.65],
+                [869.66, -869.66],
+                [869.67, -869.67],
+                [869.68, -869.68],
+                [-869.01, 869.06],
+                [-869.02, 869.07],
+                [-869.03, 869.04],
+                [-869.04, 869.01],
+                [-869.05, 869.02],
+                [-869.06, 869.08],
+                [-869.07, 869.03],
+                [-869.08, 869.05],
+                [-869.11, 869.16],
+                [-869.12, 869.17],
+                [-869.13, 869.14],
+                [-869.14, 869.11],
+                [-869.15, 869.12],
+                [-869.16, 869.18],
+                [-869.17, 869.13],
+                [-869.18, 869.15],
+                [-869.21, 869.26],
+                [-869.22, 869.27],
+                [-869.23, 869.24],
+                [-869.24, 869.21],
+                [-869.25, 869.22],
+                [-869.26, 869.28],
+                [-869.27, 869.23],
+                [-869.28, 869.25],
+                [-869.31, 869.36],
+                [-869.32, 869.37],
+                [-869.33, 869.34],
+                [-869.34, 869.31],
+                [-869.35, 869.32],
+                [-869.36, 869.38],
+                [-869.37, 869.33],
+                [-869.38, 869.35],
+                [-869.41, 869.46],
+                [-869.42, 869.47],
+                [-869.43, 869.44],
+                [-869.44, 869.41],
+                [-869.45, 869.42],
+                [-869.46, 869.48],
+                [-869.47, 869.43],
+                [-869.48, 869.45],
+                [-869.51, 869.56],
+                [-869.52, 869.57],
+                [-869.53, 869.54],
+                [-869.54, 869.51],
+                [-869.55, 869.52],
+                [-869.56, 869.58],
+                [-869.57, 869.53],
+                [-869.58, 869.55],
+                [-869.61, 869.66],
+                [-869.62, 869.67],
+                [-869.63, 869.64],
+                [-869.64, 869.61],
+                [-869.65, 869.62],
+                [-869.66, 869.68],
+                [-869.67, 869.63],
+                [-869.68, 869.65],
+                [875.1, 875.01],
+                [876.1, 876.01],
+                [877.1, 877.01],
+                [888.1, 888.01],
+                [889.1, 889.01],
+                [892.1, 892.01],
+                [893.1, 893.01],
+                [898.1, 898.01],
+                [898.2, 898.02],
+            ];
+
+            consistentIDs.forEach(([oldID, newID]) => {
+                // Update all the Pokemon IDs
+                Update.updatePokemonId(saveData, oldID, newID);
+            });
+        },
     };
 
     constructor() {
@@ -1809,11 +2043,12 @@ class Update implements Saveable {
     }
 
     // Swapping or Rotating Pokemon IDs
-    static rotatePokemonIDs = (saveData, rotationlist: number[]) => {
+    static rotatePokemonIDs = (saveData, rotationlist: number[], keepLast = true) => {
         // save some characters
         const s = saveData.statistics;
 
         const lastID = rotationlist[rotationlist.length - 1];
+        Update.changeHatcheryKey(saveData, lastID, 1e9);
         const lastPokemon = saveData.party.caughtPokemon.find(p => p.id === lastID);
         // Store values from last ID to not get overwritten
         const tempIDvalues = {
@@ -1855,6 +2090,7 @@ class Update implements Saveable {
         for (let i = rotationlist.length - 1; i > 0; i--) {
             const fromID = rotationlist[i - 1];
             const toID = rotationlist[i];
+            Update.changeHatcheryKey(saveData, fromID, toID);
 
             // Rotate our ID
             const pokemon = saveData.party.caughtPokemon.find(p => p.id === fromID);
@@ -1898,6 +2134,7 @@ class Update implements Saveable {
             lastPokemon.id = firstID;
         }
         // Update last ID statistics
+        Update.changeHatcheryKey(saveData, 1e9, firstID);
         s.pokemonEncountered[firstID] = tempIDvalues.statistics[0];
         s.pokemonDefeated[firstID] = tempIDvalues.statistics[1];
         s.pokemonCaptured[firstID] = tempIDvalues.statistics[2];
@@ -1924,6 +2161,38 @@ class Update implements Saveable {
         s.shinyFemalePokemonDefeated[firstID] = tempIDvalues.statistics[21];
         s.shinyFemalePokemonCaptured[firstID] = tempIDvalues.statistics[22];
         s.shinyFemalePokemonHatched[firstID] = tempIDvalues.statistics[23];
+
+        if (!keepLast) {
+            delete s.pokemonEncountered[lastID];
+            delete s.pokemonDefeated[lastID];
+            delete s.pokemonCaptured[lastID];
+            delete s.pokemonHatched[lastID];
+            delete s.shinyPokemonEncountered[lastID];
+            delete s.shinyPokemonDefeated[lastID];
+            delete s.shinyPokemonCaptured[lastID];
+            delete s.shinyPokemonHatched[lastID];
+            delete s.malePokemonEncountered[lastID];
+            delete s.malePokemonDefeated[lastID];
+            delete s.malePokemonCaptured[lastID];
+            delete s.malePokemonHatched[lastID];
+            delete s.shinyMalePokemonEncountered[lastID];
+            delete s.shinyMalePokemonDefeated[lastID];
+            delete s.shinyMalePokemonCaptured[lastID];
+            delete s.shinyMalePokemonHatched[lastID];
+            delete s.femalePokemonEncountered[lastID];
+            delete s.femalePokemonDefeated[lastID];
+            delete s.femalePokemonCaptured[lastID];
+            delete s.femalePokemonHatched[lastID];
+            delete s.shinyFemalePokemonEncountered[lastID];
+            delete s.shinyFemalePokemonDefeated[lastID];
+            delete s.shinyFemalePokemonCaptured[lastID];
+            delete s.shinyFemalePokemonHatched[lastID];
+        }
+    }
+
+    // Will move from the previous ID to the new ID and delete any old statistics
+    static updatePokemonId(saveData, oldID, newID) {
+        Update.rotatePokemonIDs(saveData, [newID, oldID], false);
     }
 
     // Replaces Pokémon names to IDs in the save data
