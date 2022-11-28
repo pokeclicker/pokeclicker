@@ -23,10 +23,13 @@ export default class MegaStoneItem extends Item {
     }
 
     isAvailable(): boolean {
-        return super.isAvailable() && App.game.party.alreadyCaughtPokemonByName(this.pokemon) && !App.game.party.getPokemonByName(this.pokemon).megaStone;
+        return super.isAvailable() && App.game.party.alreadyCaughtPokemonByName(this.pokemon);
     }
 
     get image(): string {
         return `assets/images/megaStone/${pokemonMap[this.pokemon].id}.png`;
+    }
+    isSoldOut(): boolean {
+        return App.game.party.alreadyCaughtPokemonByName(this.pokemon) && App.game.party.getPokemonByName(this.pokemon).megaStone;
     }
 }

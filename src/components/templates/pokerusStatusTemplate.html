@@ -1,0 +1,7 @@
+<script type="text/html" id="pokerusStatusTemplate">
+    <knockout style="display: inline;">
+        <!-- ko if: $data.pokerus -->
+        <img width="" src="" data-bind="attr: { src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[$data.pokerus]}.png`, width: $data.width }"/>
+        <!-- /ko -->
+    </knockout>
+</script>
