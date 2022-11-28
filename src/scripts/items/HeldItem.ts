@@ -134,4 +134,5 @@ ItemList.Soft_Sand = new TypeRestrictedAttackBonusHeldItem('Soft_Sand', 10000, G
 ItemList.Spell_Tag = new TypeRestrictedAttackBonusHeldItem('Spell_Tag', 10000, GameConstants.Currency.money, undefined, 'Spell Tag', 1.1, PokemonType.Ghost, GameConstants.Region.johto);
 ItemList.Twisted_Spoon = new TypeRestrictedAttackBonusHeldItem('Twisted_Spoon', 10000, GameConstants.Currency.money, undefined, 'Twisted Spoon', 1.1, PokemonType.Psychic, GameConstants.Region.johto);
 
-ItemList.Macho_Brace = new EVsGainedBonusHeldItem('Macho_Brace', 2000, GameConstants.Currency.questPoint, undefined, 'Macho Brace', 2, GameConstants.Region.sinnoh);
+ItemList.Macho_Brace = new EVsGainedBonusHeldItem('Macho_Brace', 1500, GameConstants.Currency.questPoint, undefined, 'Macho Brace', 1.5, GameConstants.Region.sinnoh);
+ItemList.Power_Bracer = new EVsGainedBonusHeldItem('Power_Bracer', 2000, GameConstants.Currency.questPoint, undefined, 'Power Bracer', 2, GameConstants.Region.alola);

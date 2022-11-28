@@ -4381,6 +4381,10 @@ const AltaroftheSunneandMooneShop = new Shop([
     ItemList.Sun_stone,
     ItemList.Poipole,
 ]);
+const ATreeMaybeShop = new Shop([
+    ItemList.Power_Bracer,
+    ItemList.Key_stone,
+]);
 
 //Alola NPCs
 
@@ -4733,7 +4737,7 @@ TownList['A Tree Maybe'] = new Town(
     'A Tree Maybe',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.PoniIsland,
-    [],
+    [ATreeMaybeShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 30)],
         npcs: [BattleTreeRed, BattleTreeBlue],
