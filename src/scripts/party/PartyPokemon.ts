@@ -274,8 +274,8 @@ class PartyPokemon implements Saveable {
 
     getBreedingAttackBonus = (): number => {
         const attackBonusPercent = (GameConstants.BREEDING_ATTACK_BONUS + this.vitaminsUsed[GameConstants.VitaminType.Calcium]()) / 100;
-        const proteinsUsed = this.vitaminsUsed[GameConstants.VitaminType.Protein]();
-        return Math.floor(this.baseAttack * attackBonusPercent) + proteinsUsed;
+        const proteinBoost = (this.vitaminsUsed[GameConstants.VitaminType.Protein]() / 2) * Math.ceil(this.baseAttack / 100);
+        return Math.floor((this.baseAttack * attackBonusPercent) + proteinBoost);
     }
 
     // TODO VITAMINS: Update these from protein → vitamin (won't affect anything)
