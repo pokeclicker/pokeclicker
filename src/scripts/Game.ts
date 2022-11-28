@@ -57,12 +57,16 @@ class Game {
         const saveObject = JSON.parse(saveJSON || '{}');
 
         Object.keys(this).filter(key => this[key]?.saveKey).forEach(key => {
-            try {
-                const saveKey = this[key].saveKey;
-                // Load our save object or the default save data
-                this[key].fromJSON(saveObject[saveKey] || this[key].toJSON());
-            } catch (error) {
-                console.error('Unable to load sava data from JSON for:', key, '\nError:\n', error);
+            if (key !== "achievements") {
+                try {
+                    const saveKey = this[key].saveKey;
+                    // Load our save object or the default save data
+                    this[key].fromJSON(saveObject[saveKey] || this[key].toJSON());
+                } catch (error) {
+                    console.error('Unable to load sava data from JSON for:', key, '\nError:\n', error);
+                }
+            } else {
+                Object.keys(saveObject["achievements"]).forEach(achName => AchievementHandler.findByName(achName)?.unlocked = true);
             }
         });
     }
