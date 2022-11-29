@@ -278,27 +278,26 @@ class PartyPokemon implements Saveable {
         return Math.floor((this.baseAttack * attackBonusPercent) + proteinBoost);
     }
 
-    // TODO VITAMINS: Update these from protein → vitamin (won't affect anything)
     public hideFromProteinList = ko.pureComputed(() => {
         if (this._breeding()) {
             return true;
         }
-        if (!new RegExp(Settings.getSetting('proteinSearchFilter').observableValue() , 'i').test(this.name)) {
+        if (!new RegExp(Settings.getSetting('vitaminSearchFilter').observableValue() , 'i').test(this.name)) {
             return true;
         }
-        if (Settings.getSetting('proteinRegionFilter').observableValue() > -2) {
-            if (PokemonHelper.calcNativeRegion(this.name) !== Settings.getSetting('proteinRegionFilter').observableValue()) {
+        if (Settings.getSetting('vitaminRegionFilter').observableValue() > -2) {
+            if (PokemonHelper.calcNativeRegion(this.name) !== Settings.getSetting('vitaminRegionFilter').observableValue()) {
                 return true;
             }
         }
-        const type = Settings.getSetting('proteinTypeFilter').observableValue();
+        const type = Settings.getSetting('vitaminTypeFilter').observableValue();
         if (type > -2 && !pokemonMap[this.name].type.includes(type)) {
             return true;
         }
-        if (this.vitaminUsesRemaining() == 0 && Settings.getSetting('proteinHideMaxedPokemon').observableValue()) {
+        if (this.vitaminUsesRemaining() == 0 && Settings.getSetting('vitaminHideMaxedPokemon').observableValue()) {
             return true;
         }
-        if (this._shiny() && Settings.getSetting('proteinHideShinyPokemon').observableValue()) {
+        if (this._shiny() && Settings.getSetting('vitaminHideShinyPokemon').observableValue()) {
             return true;
         }
         return false;

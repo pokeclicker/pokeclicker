@@ -1559,7 +1559,7 @@ class Update implements Saveable {
                 }
             }
         },
-        '0.10.5': ({ playerData, saveData }) => {
+        '0.10.5': ({ playerData, saveData, settingsData }) => {
             // Rotate form IDs
             const formIDs = [
                 // Butterfree (Gigantamax before others)
@@ -1872,6 +1872,23 @@ class Update implements Saveable {
                     };
                 }
             });
+
+            // Update our settings
+            settingsData.vitaminSort = settingsData.proteinSort;
+            settingsData.vitaminSortDirection = settingsData.proteinSortDirection;
+            settingsData.vitaminHideMaxedPokemon = settingsData.proteinHideMaxedPokemon;
+            settingsData.vitaminHideShinyPokemon = settingsData.proteinHideShinyPokemon;
+            settingsData.vitaminSearchFilter = settingsData.proteinSearchFilter;
+            settingsData.vitaminRegionFilter = settingsData.proteinRegionFilter;
+            settingsData.vitaminTypeFilter = settingsData.proteinTypeFilter;
+            // Delete old settings
+            delete settingsData.proteinSort;
+            delete settingsData.proteinSortDirection;
+            delete settingsData.proteinHideMaxedPokemon;
+            delete settingsData.proteinHideShinyPokemon;
+            delete settingsData.proteinSearchFilter;
+            delete settingsData.proteinRegionFilter;
+            delete settingsData.proteinTypeFilter;
         },
     };
 
