@@ -15,16 +15,19 @@ class Save {
     }
 
     public static getSaveObject() {
-        const saveObject = {achievements : {}};
+        const saveObject = {achievements : []};
 
         Object.keys(App.game).filter(key => App.game[key].saveKey).forEach(key => {
             saveObject[App.game[key].saveKey] = App.game[key].toJSON();
         });
         AchievementHandler.achievementList.forEach(achievement => {
-            if (achievement.stored && achievement.unlocked) {
-                saveObject.achievements[achievement.name] = true;
+            if (achievement.stored && achievement.unlocked()) {
+                saveObject.achievements.push(achievement.name);
             }
         });
+        if (!saveObject.achievements.length) {
+            delete saveObject.achievements;
+        }
 
         return saveObject;
     }

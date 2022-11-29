@@ -70,7 +70,7 @@ class AchievementHandler {
         this.achievementListFiltered(this.achievementList.filter((a) => (
             a.category.isUnlocked() &&
             a.achievable() &&
-            (this.filter.status() == -2 || a.unlocked === !!this.filter.status()) &&
+            (this.filter.status() == -2 || a.unlocked() === !!this.filter.status()) &&
             (this.filter.type()   == -2 || a.property.achievementType === this.filter.type()) &&
             (this.filter.category() == 'all' || a.category.name === this.filter.category())
         )));
@@ -113,19 +113,19 @@ class AchievementHandler {
     public static preCheckAchievements() {
         // Check if our achievements are completed, we don't want to re-notify if already done
         for (let i = 0; i < AchievementHandler.achievementList.length; i++) {
-            AchievementHandler.achievementList[i].unlocked = AchievementHandler.achievementList[i].isCompleted();
+            AchievementHandler.achievementList[i].unlocked(AchievementHandler.achievementList[i].isCompleted());
         }
     }
 
     public static checkAchievements() {
         for (let i = 0; i < AchievementHandler.achievementList.length; i++) {
-            if (!AchievementHandler.achievementList[i].unlocked) {
+            if (!AchievementHandler.achievementList[i].unlocked()) {
                 AchievementHandler.achievementList[i].check();
             }
         }
     }
 
-    public static addAchievement(name: string, description: string, property: AchievementRequirement, bonus: number, category: GameConstants.Region | GameConstants.ExtraAchievementCategories = GameConstants.ExtraAchievementCategories.global, achievableFunction: () => boolean | null = null) {
+    public static addAchievement(name: string, description: string, property: AchievementRequirement, bonus: number, category: GameConstants.Region | GameConstants.ExtraAchievementCategories = GameConstants.ExtraAchievementCategories.global, achievableFunction: () => boolean | null = null, stored = false) {
         let categoryObj : AchievementCategory;
         // ExtraAchievementCategory always starts at finals index
         if (category >= GameConstants.Region.final) {
@@ -134,7 +134,7 @@ class AchievementHandler {
             categoryObj = AchievementHandler.getAchievementCategoryByRegion(category as GameConstants.Region);
         }
         categoryObj.totalWeight += bonus;
-        AchievementHandler.achievementList.push(new Achievement(name, description, property, bonus, categoryObj, achievableFunction));
+        AchievementHandler.achievementList.push(new Achievement(name, description, property, bonus, categoryObj, achievableFunction, stored));
     }
 
     public static calculateBonus(): void {
