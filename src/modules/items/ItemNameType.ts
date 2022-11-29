@@ -206,4 +206,5 @@ export type ItemNameType
     | 'Protein'
     | 'Calcium'
     | 'Carbos'
-    | 'Abomasite';
+    | 'Abomasite'
+    | 'Alakazite';

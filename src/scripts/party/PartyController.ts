@@ -18,6 +18,14 @@ class PartyController {
         return CaughtStatus.NotCaught;
     }
 
+    static getPokerusStatusByName(name: PokemonNameType): GameConstants.Pokerus {
+        return this.getPokerusStatus(PokemonHelper.getPokemonByName(name).id);
+    }
+
+    static getPokerusStatus(id: number): GameConstants.Pokerus {
+        return App.game.party.getPokemon(id)?.pokerus ?? GameConstants.Pokerus.Uninfected;
+    }
+
     static getStoneEvolutionsCaughtData(id: number, evoType?: GameConstants.StoneType): { status: CaughtStatus, locked: boolean, lockHint: string }[] {
         const pokemon = App.game.party.caughtPokemon.find(p => p.id == id);
         if (pokemon) {
