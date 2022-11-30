@@ -269,12 +269,14 @@ class PartyPokemon implements Saveable {
 
     getEggSteps = (): number => {
         const div = 300;
-        return Math.floor(((App.game.breeding.getSteps(this.eggCycles) / div) ** (1 - this.vitaminsUsed[GameConstants.VitaminType.Carbos]() / 70)) * div);
+        const extraCycles = (this.vitaminsUsed[GameConstants.VitaminType.Calcium]() + this.vitaminsUsed[GameConstants.VitaminType.Protein]()) / 2;
+        const steps = App.game.breeding.getSteps(this.eggCycles + extraCycles);
+        return Math.floor(((steps / div) ** (1 - this.vitaminsUsed[GameConstants.VitaminType.Carbos]() / 70)) * div);
     }
 
     getBreedingAttackBonus = (): number => {
         const attackBonusPercent = (GameConstants.BREEDING_ATTACK_BONUS + this.vitaminsUsed[GameConstants.VitaminType.Calcium]()) / 100;
-        const proteinBoost = (this.vitaminsUsed[GameConstants.VitaminType.Protein]() / 2) * Math.ceil(this.baseAttack / 100);
+        const proteinBoost = this.vitaminsUsed[GameConstants.VitaminType.Protein]();
         return Math.floor((this.baseAttack * attackBonusPercent) + proteinBoost);
     }
 
