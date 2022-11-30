@@ -90,6 +90,7 @@
                       <th class="text-center bg-dark align-middle">Vitamins Used</th>
                       <th class="text-center bg-dark align-middle" data-bind="text: `${GameConstants.VitaminType[VitaminController.currentlySelected()]} Used`">X Used</th>
                       <th class="text-center bg-dark align-middle">Attack Bonus</th>
+                      <th class="text-center bg-dark align-middle">Egg Steps</th>
                     </tr>
                   </thead>
                   <tbody data-bind="foreach: PartyController.getvitaminSortedList()">
@@ -98,6 +99,7 @@
                       <td class="text-center tight" data-bind="text: $data.totalVitaminsUsed().toLocaleString('en-US')">-</td>
                       <td class="text-center tight" data-bind="text: $data.vitaminsUsed[VitaminController.currentlySelected()]().toLocaleString('en-US')">-</td>
                       <td class="text-center tight" data-bind="text: $data.getBreedingAttackBonus().toLocaleString('en-US')">-</td>
+                      <td class="text-center tight" data-bind="text: $data.getEggSteps().toLocaleString('en-US')">-</td>
                     </tr>
                   </tbody>
                 </table>
