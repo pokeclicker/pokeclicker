@@ -23,7 +23,9 @@ import {
     Region, StoneType, Genders, MaxIDPerRegion,
 } from '../GameConstants';
 import BagItem from '../interfaces/BagItem';
-import { EvoData, DummyEvolution, LevelEvolution, StoneEvolution } from './evolutions/Base';
+import {
+    EvoData, DummyEvolution, LevelEvolution, StoneEvolution,
+} from './evolutions/Base';
 import LevelType from '../party/LevelType';
 import GenericProxy from '../utilities/GenericProxy';
 import Rand from '../utilities/Rand';
