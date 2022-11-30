@@ -105,7 +105,7 @@
                 </table>
             </div>
             <!-- /ko -->
-            <span class="bg-dark text-light text-right align-right p-1"  data-bind="text:`Showing ${PartyController.getvitaminSortedList().filter(p => !p.hideFromProteinList()).length} Pokémon`"></span>
+            <span class="bg-dark text-light text-right align-right p-1"  data-bind="text:`Showing ${PartyController.getvitaminSortedList().filter(p => !p.hideFromProteinList()).length.toLocaleString('en-US')} Pokémon`"></span>
         </div>
     </div>
 </div>
