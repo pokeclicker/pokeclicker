@@ -2838,6 +2838,7 @@ TemporaryBattleList['Hop 7'] = new TemporaryBattle(
     'I still can\'t even beat you, my true rival... But I think I\'m starting to see the light!',
     [
         new MultiRequirement([
+            new TemporaryBattleRequirement('Hop 6'),
             new GymBadgeRequirement(BadgeEnums.Galar_Rock),
             new GymBadgeRequirement(BadgeEnums.Galar_Ice),
         ]),
