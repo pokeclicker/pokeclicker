@@ -281,11 +281,7 @@ class QuestLineHelper {
         const clearSilver = new CustomQuest(1, 0, 'Defeat Silver.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Silver 3')]());
         johtoBeastsQuestLine.addQuest(clearSilver);
 
-        const talktoPokéfanDerek = new TalkToNPCQuest(EcruteakPokéfan, 'Talk to Pokéfan Derek in Ecruteak City.');
-
-        johtoBeastsQuestLine.addQuest(new MultipleQuestsQuest(
-            [talktoPokéfanDerek], 'Talk to Derek.',() => App.game.quests.getQuestLine('Eusine\'s Chase').beginQuest()));
-
+        const talktoPokéfanDerek = new TalkToNPCQuest(EcruteakPokéfan, 'Talk to Pokéfan Derek in Ecruteak City.', () => App.game.quests.getQuestLine('Eusine\'s Chase').beginQuest());
 
         const catchRaikou = new CaptureSpecificPokemonQuest('Raikou', 'Catch Raikou', 1, true);
 
