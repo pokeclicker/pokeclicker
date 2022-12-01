@@ -282,6 +282,7 @@ class QuestLineHelper {
         johtoBeastsQuestLine.addQuest(clearSilver);
 
         const talktoPokéfanDerek = new TalkToNPCQuest(EcruteakPokéfan, 'Talk to Pokéfan Derek in Ecruteak City.', () => App.game.quests.getQuestLine('Eusine\'s Chase').beginQuest());
+        johtoBeastsQuestLine.addQuest(talktoPokéfanDerek);
 
         const catchRaikou = new CaptureSpecificPokemonQuest('Raikou', 'Catch Raikou', 1, true);
 
