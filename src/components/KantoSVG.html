@@ -725,7 +725,7 @@
             { name: "Suicune"
             , x: 66, y: 34
             , width: 3, height: 4
-            , databind: "click: () => TemporaryBattleList['Suicune 3'].protectedOnclick()"
+            , databind: "click: () => TemporaryBattleList['Suicune 3'].protectedOnclick(), attr: { class: TemporaryBattleList['Suicune 3'].isUnlocked() ? '' : 'locked' }"
             , visible:  "TemporaryBattleList['Suicune 3'] && TemporaryBattleList['Suicune 3'].isVisible()"
             , image: "assets/images/map/suicune.png"
             })
