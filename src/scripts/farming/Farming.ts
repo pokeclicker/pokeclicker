@@ -312,7 +312,7 @@ class Farming implements Feature {
             [
                 'The flower grows at the tip of this Berry. It attracts Bug Pokémon by letting its stringy petals stream out.',
                 'The attracted Bug Pokémon decrease the amount of harvestable Berries in nearby plants.',
-            ], new Aura(AuraType.Harvest, [0.9, 0.8, 0.7]), ['Pinsir', 'Shuckle', 'Nincada', 'Combee', 'Sizzlipede']);
+            ], new Aura(AuraType.Harvest, [0.9, 0.8, 0.7]), ['Pinsir', 'Shuckle', 'Nincada', 'Combee', 'Spewpa', 'Sizzlipede']);
         this.berryData[BerryType.Charti]    = new Berry(BerryType.Charti,   [8600, 12960, 23040, 37800, 75600],
             32, 0.05, 2000, 15,
             [10, 20, 0, 0, 0], BerryColor.Yellow,
