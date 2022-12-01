@@ -74,12 +74,20 @@ class Pokeballs implements Feature {
             }, 1250, 'Increased catch rate on water routes', new RouteKillRequirement(10, GameConstants.Region.hoenn, 101)),
 
             new Pokeball(GameConstants.Pokeball.Lureball, () => {
-                const numLandPokemon = Routes.getRoute(player.region,player.route()).pokemon.land.length > 0;
-                const isWaterPokemon = Routes.getRoute(player.region,player.route()).pokemon.water.includes(Battle.enemyPokemon().name);
+                if (App.game.gameState == GameConstants.GameState.fighting && player.route()) {
+                    const numLandPokemon = Routes.getRoute(player.region,player.route()).pokemon.land.length > 0;
+                    const isWaterPokemon = Routes.getRoute(player.region,player.route()).pokemon.water.includes(Battle.enemyPokemon().name);
 
-                // If route has Land Pokémon and the current pokémon is a Water Pokémon
-                if (numLandPokemon == true && isWaterPokemon == true) {
-                    return 15;
+                    // If route has Land Pokémon and the current pokémon is a Water Pokémon
+                    if (numLandPokemon == true && isWaterPokemon == true) {
+                        return 15;
+                    }
+                }
+                if (App.game.gameState == GameConstants.GameState.dungeon) {
+                    // If player in a dungeon and the enemy pokémon is a water type
+                    if (Battle.enemyPokemon().type1 == PokemonType.Water || Battle.enemyPokemon().type2 == PokemonType.Water) {
+                        return 15;
+                    }
                 }
                 return 0;
             }, 1250, 'Increased catch rate on fished Pokémon', new RouteKillRequirement(10, GameConstants.Region.hoenn, 101)),
