@@ -271,14 +271,14 @@ class Farming implements Feature {
             [
                 'This Berry has a refreshing flavor that strikes a good balance of dryness and sourness. It tastes better chilled.',
                 'This Berry slows the growth of nearby Berries.',
-            ], new Aura(AuraType.Growth, [0.9, 0.8, 0.7]), ['Snover', 'Flabébé (Blue)', 'Snom']);
+            ], new Aura(AuraType.Growth, [0.9, 0.8, 0.7]), ['Jynx', 'Swinub', 'Spheal', 'Snover', 'Flabébé (Blue)', 'Snom']);
         this.berryData[BerryType.Chople]    = new Berry(BerryType.Chople,   [5400, 10800, 25200, 36000, 72000],
             26, 0.05, 1600, 15,
             [15, 0, 0, 10, 0], BerryColor.Red,
             [
                 'This Berry contains a substance that generates heat. It can even heat up a chilly heart.',
                 'Growing these Berries will promote Egg growth.',
-            ], new Aura(AuraType.Egg, [1.01, 1.02, 1.03]), ['Riolu', 'Scraggy', 'Crabrawler', 'Oricorio (Baile)']);
+            ], new Aura(AuraType.Egg, [1.01, 1.02, 1.03]), ['Mankey', 'Makuhita', 'Riolu', 'Scraggy', 'Crabrawler', 'Oricorio (Baile)']);
         this.berryData[BerryType.Kebia]     = new Berry(BerryType.Kebia,    [100, 200, 400, 600, 86400],
             1, 1, 50, 1,
             [0, 15, 0, 0, 10], BerryColor.Green,
@@ -286,79 +286,79 @@ class Farming implements Feature {
                 'This Berry is a brilliant green on the outside. Inside, it is packed with a dry-flavored, black-colored flesh.',
                 'It has a tendency to overtake nearby plants.',
                 'Due to its poisonous nature, it increases the chances of mutations near it.',
-            ], new Aura(AuraType.Mutation, [1.2, 1.4, 1.6]), ['Gulpin','Salandit', 'Toxel']);
+            ], new Aura(AuraType.Mutation, [1.2, 1.4, 1.6]), ['Grimer', 'Spinarak', 'Gulpin', 'Skorupi', 'Salandit', 'Toxel']);
         this.berryData[BerryType.Shuca]     = new Berry(BerryType.Shuca,    [7200, 16200, 32400, 39600, 79200],
             28, 1, 1700, 15,
             [10, 0, 15, 0, 0], BerryColor.Yellow,
             [
                 'The sweetness-laden pulp has just the hint of a hard-edged and fragrant bite to it.',
                 'Growing these Berries will soften the ground around it, increasing the chances of replanting.',
-            ], new Aura(AuraType.Replant, [1.01, 1.02, 1.03]), ['Larvitar', 'Flabébé (Yellow)', 'Oricorio (Pom-Pom)']);
+            ], new Aura(AuraType.Replant, [1.01, 1.02, 1.03]), ['Sandshrew', 'Larvitar', 'Numel', 'Hippopotas', 'Flabébé (Yellow)', 'Oricorio (Pom-Pom)']);
         this.berryData[BerryType.Coba]      = new Berry(BerryType.Coba,     [9000, 12600, 16200, 19800, 39600],
             29, 0.05, 1800, 15,
             [0, 10, 0, 15, 0], BerryColor.Blue,
             ['This Berry is said to be a new kind that is a cross of two Berries brought together by winds from far away.'],
-            undefined, ['Tropius', 'Flabébé (Blue)']);
+            undefined, ['Farfetch\'d', 'Murkrow', 'Tropius', 'Chatot', 'Flabébé (Blue)']);
         this.berryData[BerryType.Payapa]    = new Berry(BerryType.Payapa,   [4680, 11880, 23400, 34200, 68400],
             30, 0.05, 1900, 15,
             [0, 0, 10, 0, 15], BerryColor.Purple,
             [
                 'This Berry is said to sense human emotions for the way it swells roundly when a person approaches.',
                 'The same behavior affects nearby plants, causing additional mutations.',
-            ], new Aura(AuraType.Mutation, [1.1, 1.2, 1.3]), ['Natu', 'Ralts', 'Oricorio (Sensu)']);
+            ], new Aura(AuraType.Mutation, [1.1, 1.2, 1.3]), ['Mr. Mime', 'Natu', 'Ralts', 'Chingling', 'Oricorio (Sensu)']);
         this.berryData[BerryType.Tanga]     = new Berry(BerryType.Tanga,    [450, 900, 1800, 3600, 7200],
             3, 0.5, 500, 15,
             [20, 0, 0, 0, 10], BerryColor.Green,
             [
                 'The flower grows at the tip of this Berry. It attracts Bug Pokémon by letting its stringy petals stream out.',
                 'The attracted Bug Pokémon decrease the amount of harvestable Berries in nearby plants.',
-            ], new Aura(AuraType.Harvest, [0.9, 0.8, 0.7]), ['Shuckle', 'Nincada', 'Sizzlipede']);
+            ], new Aura(AuraType.Harvest, [0.9, 0.8, 0.7]), ['Pinsir', 'Shuckle', 'Nincada', 'Combee', 'Spewpa', 'Sizzlipede']);
         this.berryData[BerryType.Charti]    = new Berry(BerryType.Charti,   [8600, 12960, 23040, 37800, 75600],
             32, 0.05, 2000, 15,
             [10, 20, 0, 0, 0], BerryColor.Yellow,
             [
                 'It is often used for pickles because of its very dry flavor. It can also be eaten raw for its provocative taste.',
                 'This Berry plant hardens the surrounding soil, decreasing the chances of replanting.',
-            ], new Aura(AuraType.Replant, [0.99, 0.98, 0.97]), ['Sudowoodo', 'Flabébé (Yellow)', 'Oricorio (Pom-Pom)', 'Rockruff']);
+            ], new Aura(AuraType.Replant, [0.99, 0.98, 0.97]), ['Rhyhorn', 'Sudowoodo', 'Aron', 'Bonsly', 'Flabébé (Yellow)', 'Oricorio (Pom-Pom)', 'Rockruff']);
         this.berryData[BerryType.Kasib]     = new Berry(BerryType.Kasib,    [30, 60, 120, 300, 86400],
             1, 1, 25, 1,
             [0, 10, 20, 0, 0], BerryColor.Purple,
             [
                 'Considered to have a special power from the olden days, this Berry is sometimes dried and used as a good-luck charm.',
                 'This Berry causes other nearby Berries to wither away faster.',
-            ], new Aura(AuraType.Death, [1.25, 1.5, 2.0]), ['Shedinja', 'Oricorio (Sensu)']);
+            ], new Aura(AuraType.Death, [1.25, 1.5, 2.0]), ['Gastly', 'Misdreavus', 'Shedinja', 'Drifloon', 'Oricorio (Sensu)']);
         this.berryData[BerryType.Haban]     = new Berry(BerryType.Haban,    [10800, 21600, 43200, 86400, 172800],
             34, 0, 4000, 15,
             [0, 0, 10, 20, 0], BerryColor.Red,
             [
                 'If a large enough volume of this Berry is boiled down, its bitterness fades away. It makes a good jam.',
                 'This Berry requires a lot of energy to grow, stealing away nutrients from nearby plots.',
-            ], new Aura(AuraType.Growth, [0.8, 0.6, 0.5]), ['Bagon', 'Oricorio (Baile)', 'Druddigon', 'Drampa', 'Applin']);
+            ], new Aura(AuraType.Growth, [0.8, 0.6, 0.5]), ['Dratini', 'Bagon', 'Gible', 'Druddigon', 'Oricorio (Baile)', 'Drampa', 'Applin']);
         this.berryData[BerryType.Colbur]    = new Berry(BerryType.Colbur,   [2880, 10080, 19440, 27000, 54000],
             35, 0.05, 2300, 15,
             [0, 0, 0, 10, 20], BerryColor.Purple,
             [
                 'Tiny hooks grow on the surface of this Berry. It latches on to Pokémon so it can be carried to far-off places.',
                 'It has a tendency to overtake nearby plants.',
-            ], undefined, ['Absol', 'Oricorio (Sensu)']);
+            ], undefined, ['Houndour', 'Absol', 'Stunky', 'Zorua', 'Oricorio (Sensu)', 'Impidimp']);
         this.berryData[BerryType.Babiri]    = new Berry(BerryType.Babiri,   [7200, 16200, 32400, 64800, 129600],
             36, 0.05, 2400, 15,
             [25, 10, 0, 0, 0], BerryColor.Green,
             [
                 'This Berry is very tough with a strong flavor. It was used to make medicine by people in the past.',
                 'This Berry plant is very hardy and resistant, making it resistant to mutations, and also decreasing the chance of mutations around it.',
-            ], new Aura(AuraType.Mutation, [0.5, 0.25, 0.0]), ['Skarmory', 'Beldum', 'Cufant']);
+            ], new Aura(AuraType.Mutation, [0.5, 0.25, 0.0]), ['Magnemite', 'Skarmory', 'Beldum', 'Bronzor', 'Cufant']);
         this.berryData[BerryType.Chilan]    = new Berry(BerryType.Chilan,   [240, 1430, 2970, 7200, 14400],
             10, 0.05, 500, 15,
             [0, 25, 10, 0, 0], BerryColor.Yellow,
-            ['This Berry can be cored out and dried to make a whistle. Blowing through its hole makes an indescribable sound.'], undefined, ['Munchlax', 'Audino' ,'Flabébé (Yellow)', 'Oricorio (Pom-Pom)', 'Skwovet']);
+            ['This Berry can be cored out and dried to make a whistle. Blowing through its hole makes an indescribable sound.'], undefined, ['Snorlax', 'Girafarig', 'Swablu', 'Munchlax', 'Audino' ,'Flabébé (Yellow)', 'Oricorio (Pom-Pom)', 'Skwovet']);
         this.berryData[BerryType.Roseli]    = new Berry(BerryType.Roseli,   [2410, 5040, 12600, 25200, 50400],
             38, 0.05, 2500, 15,
             [0, 0, 25, 10, 0], BerryColor.Pink,
             [
                 'This Berry is sweet with a hint of bitterness and has a lingering sweet scent. It is often dried and used to make tea.',
                 'The scent of this Berry plant attracts wild Pokémon.',
-            ], new Aura(AuraType.Attract, [1.01, 1.02, 1.03]), ['Togepi', 'Oricorio (Pa\'u)']);
+            ], new Aura(AuraType.Attract, [1.01, 1.02, 1.03]), ['Clefairy', 'Togepi', 'Ralts', 'Oricorio (Pa\'u)']);
         //#endregion
 
         //#region Fifth Generation
