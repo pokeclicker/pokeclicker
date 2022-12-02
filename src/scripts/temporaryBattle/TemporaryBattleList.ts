@@ -418,16 +418,14 @@ TemporaryBattleList['Suicune 3'] = new TemporaryBattle(
     'Suicune 3',
     [new GymPokemon('Suicune', 3269100, 40)],
     '<i>Suicune fled.</i>',
-    [
-        new QuestLineStepCompletedRequirement('Eusine\'s Chase', 4),
-        new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion),
-    ],
+    [new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion)],
     undefined,
     {
         displayName: 'Suicune',
         returnTown: 'Vermilion City',
         imageName: '../pokemon/245',
         hideTrainer: true,
+        visibleRequirement: new QuestLineStepCompletedRequirement('Eusine\'s Chase', 4),
     }
 );
 TemporaryBattleList['Suicune 4'] = new TemporaryBattle(
@@ -2840,6 +2838,7 @@ TemporaryBattleList['Hop 7'] = new TemporaryBattle(
     'I still can\'t even beat you, my true rival... But I think I\'m starting to see the light!',
     [
         new MultiRequirement([
+            new TemporaryBattleRequirement('Hop 6'),
             new GymBadgeRequirement(BadgeEnums.Galar_Rock),
             new GymBadgeRequirement(BadgeEnums.Galar_Ice),
         ]),

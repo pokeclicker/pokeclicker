@@ -1558,6 +1558,7 @@ class Update implements Saveable {
                     starter[8] = 2;
                 }
             }
+
         },
         '0.10.5': ({ playerData, saveData }) => {
             // Rotate form IDs
@@ -1792,6 +1793,27 @@ class Update implements Saveable {
                 // Update all the Pokemon IDs
                 Update.updatePokemonId(saveData, oldID, newID);
             });
+
+            // Fix Galar main story temp battles
+            const darkestDayQL = saveData.quests.questLines.find((q) => q.name == 'The Darkest Day');
+            if (darkestDayQL.state < 2) {
+                // Fix temp battle indicies based on quest step.
+                if (darkestDayQL.quest <= 1) {
+                    saveData.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Bede 3')] = 0;
+                }
+                if (darkestDayQL.quest <= 3) {
+                    saveData.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Hop 6')] = 0;
+                }
+                if (darkestDayQL.quest <= 4) {
+                    saveData.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Hop 7')] = 0;
+                }
+                if (darkestDayQL.quest <= 17) {
+                    saveData.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Eternatus')] = 0;
+                }
+                if (darkestDayQL.quest <= 18) {
+                    saveData.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('The Darkest Day')] = 0;
+                }
+            }
         },
     };
 
