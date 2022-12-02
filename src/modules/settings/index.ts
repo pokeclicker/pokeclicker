@@ -63,7 +63,7 @@ Settings.add(new Setting<string>('breedingDisplay', 'Breeding progress display',
         new SettingOption('Percentage', 'percentage'),
         new SettingOption('Step count', 'stepCount'),
     ],
-    'percentage'));
+    'stepCount'));
 Settings.add(new Setting<string>('shopButtons', 'Shop amount buttons',
     [
         new SettingOption('+10, +100', 'original'),
