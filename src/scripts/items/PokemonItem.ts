@@ -56,6 +56,10 @@ class PokemonItem extends CaughtIndicatingItem {
         return PartyController.getCaughtStatusByName(this.name as PokemonNameType);
     }
 
+    getPokerusStatus(): GameConstants.Pokerus {
+        return PartyController.getPokerusStatusByName(this.name as PokemonNameType);
+    }
+
     get image() {
         const subDirectory = this.imageDirectory ? `${this.imageDirectory}/` : '';
         return `assets/images/items/${subDirectory}${this.name.replace(/[^\s\w.()-]/g, '')}.png`;

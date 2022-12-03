@@ -101,7 +101,7 @@ import MaxRegionRequirement from './requirements/MaxRegionRequirement';
 import ObtainedPokemonRequirement from './requirements/ObtainedPokemonRequirement';
 import PokeballRequirement from './requirements/PokeballRequirement';
 import PokerusStatusRequirement from './requirements/PokerusStatusRequirement';
-import ProteinObtainRequirement from './requirements/ProteinObtainRequirement';
+import VitaminObtainRequirement from './requirements/VitaminObtainRequirement';
 import QuestRequirement from './requirements/QuestRequirement';
 import QuestLevelRequirement from './requirements/QuestLevelRequirement';
 import RouteKillRequirement from './requirements/RouteKillRequirement';
@@ -263,7 +263,7 @@ Object.assign(<any>window, {
     ObtainedPokemonRequirement,
     PokeballRequirement,
     PokerusStatusRequirement,
-    ProteinObtainRequirement,
+    VitaminObtainRequirement,
     QuestRequirement,
     QuestLevelRequirement,
     RouteKillRequirement,

@@ -80,6 +80,7 @@ ItemList.PokeBlock_Gray   = new PokeBlock(PokeBlockColor.Gray, Infinity);
 ItemList.PokeBlock_White  = new PokeBlock(PokeBlockColor.White, Infinity);
 
 ItemList.Abomasite        = new MegaStoneItem('Abomasnow', 'Abomasite', 10000);
+ItemList.Alakazite        = new MegaStoneItem('Alakazam', 'Alakazite', 10000);
 
 // Eggs
 ItemList.Fire_egg = new EggItem(EggItemType.Fire_egg, 1000, undefined, 'Fire Egg');
@@ -92,5 +93,5 @@ ItemList.Pokemon_egg = new EggItem(EggItemType.Pokemon_egg, 1000, undefined, 'Po
 ItemList.Mystery_egg = new EggItem(EggItemType.Mystery_egg, 700, undefined, 'Mystery Egg');
 
 // Vitamins
-ItemList.RareCandy = new Vitamin(VitaminType.RareCandy, Infinity, undefined, undefined, 'Rare Candy', 'A rare-to-find candy that currently has no use.');
+// ItemList.RareCandy = new Vitamin(VitaminType.RareCandy, Infinity, undefined, undefined, 'Rare Candy', 'A rare-to-find candy that currently has no use.');
 ItemList.Protein = new Vitamin(VitaminType.Protein, 1e4, Currency.money, { multiplier: 1.1, multiplierDecrease: false, saveName: `${VitaminType[VitaminType.Protein]}|${Currency[Currency.money]}` }, undefined, 'Increases Pokémon attack bonus.<br/><i>(attack gained per breeding cycle)</i>');

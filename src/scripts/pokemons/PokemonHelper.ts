@@ -221,6 +221,10 @@ class PokemonHelper extends TmpPokemonHelper {
         const prevolutionPokemon = pokemonList.filter((p: PokemonListData) => p.evolutions?.find(e => e.evolvedPokemon == pokemonName));
         prevolutionPokemon.forEach((p: PokemonListData) => p.evolutions.forEach(e => {
             if (e.evolvedPokemon == pokemonName) {
+                // ignore dummy evolutions
+                if (e.trigger === EvoTrigger.NONE) {
+                    return false;
+                }
                 if (maxRegion != GameConstants.Region.none && p.nativeRegion > maxRegion) {
                     return false;
                 }
