@@ -88,6 +88,7 @@ import ClearDungeonRequirement from './requirements/ClearDungeonRequirement';
 import ClearGymRequirement from './requirements/ClearGymRequirement';
 import ClickRequirement from './requirements/ClickRequirement';
 import DefeatedRequirement from './requirements/DefeatedRequirement';
+import DevelopmentRequirement from './requirements/DevelopmentRequirement';
 import DiamondRequirement from './requirements/DiamondRequirement';
 import FarmHandRequirement from './requirements/FarmHandRequirement';
 import FarmPlotsUnlockedRequirement from './requirements/FarmPlotsUnlockedRequirement';
@@ -250,6 +251,7 @@ Object.assign(<any>window, {
     ClearGymRequirement,
     ClickRequirement,
     DefeatedRequirement,
+    DevelopmentRequirement,
     DiamondRequirement,
     FarmHandRequirement,
     FarmPlotsUnlockedRequirement,
