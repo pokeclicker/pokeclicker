@@ -1856,7 +1856,7 @@ class Update implements Saveable {
 
             // Fix Galar main story temp battles
             const darkestDayQL = saveData.quests.questLines.find((q) => q.name == 'The Darkest Day');
-            if (darkestDayQL.state < 2) {
+            if (darkestDayQL?.state < 2) {
                 // Fix temp battle indicies based on quest step.
                 if (darkestDayQL.quest <= 1) {
                     saveData.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Bede 3')] = 0;
