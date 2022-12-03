@@ -2834,8 +2834,8 @@ TemporaryBattleList['Magikarp Jump Kareign'] = new TemporaryBattle(
     }
 );
 
-TemporaryBattleList['Magikarp Jump Koylee'] = new TemporaryBattle(
-    'Magikarp Jump Koylee',
+TemporaryBattleList['Magikarp Jump Koylee 2'] = new TemporaryBattle(
+    'Magikarp Jump Koylee 2',
     [new GymPokemon('Magikarp Calico (Orange, White, Black)', 1, 20)],
     'TODO',
     [new TemporaryBattleRequirement('Magikarp Jump Kareign')],
