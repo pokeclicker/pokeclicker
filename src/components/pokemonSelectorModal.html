@@ -75,7 +75,12 @@
                         </tr>
                     </thead>
                     <tbody data-bind="foreach: PartyController.getvitaminSortedList()">
-                        <tr class="clickable" data-bind="click: () => $data.useVitamin(VitaminController.currentlySelected(), VitaminController.getMultiplier()), attr: { onContextMenu: `App.game.party.getPokemonByName('${$data.name}')?.removeVitamin(VitaminController.currentlySelected(), VitaminController.getMultiplier()); return false;` }, hidden: $data.hideFromProteinList()">
+                        <tr class="clickable" data-bind="
+                            click: () => $data.useVitamin(VitaminController.currentlySelected(), VitaminController.getMultiplier()),
+                            attr: {
+                                onContextMenu: `App.game.party.getPokemonByName('${$data.name}').removeVitamin(VitaminController.currentlySelected(), VitaminController.getMultiplier()); return false;`
+                            },
+                            hidden: $data.hideFromProteinList()">
                             <td class="text-left">
                                 <knockout data-bind="text: $data.displayName"></knockout>
                                 <sup data-bind="visible: $data.shiny">✨</sup>
