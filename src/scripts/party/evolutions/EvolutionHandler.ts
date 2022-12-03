@@ -43,12 +43,13 @@ class EvolutionHandler {
         const evolvedPartyPokemon = App.game.party.getPokemonByName(evolvedPokemon);
         if (newPokemon && App.game.challenges.list.realEvolutions.active()) {
             const basePartyPokemon = App.game.party.getPokemon(PokemonHelper.getPokemonByName(data.basePokemon).id);
+            evolvedPartyPokemon.exp = basePartyPokemon.exp;
             evolvedPartyPokemon.effortPoints = basePartyPokemon.effortPoints;
             evolvedPartyPokemon.pokerus = basePartyPokemon.pokerus;
             evolvedPartyPokemon.shiny = evolvedPartyPokemon.shiny || basePartyPokemon.shiny;
             evolvedPartyPokemon.attackBonusAmount = basePartyPokemon.attackBonusAmount;
             evolvedPartyPokemon.attackBonusPercent = basePartyPokemon.attackBonusPercent;
-            evolvedPartyPokemon.proteinsUsed = basePartyPokemon.proteinsUsed;
+            evolvedPartyPokemon.vitaminsUsed = basePartyPokemon.vitaminsUsed;
             evolvedPartyPokemon.heldItem = basePartyPokemon.heldItem;
             App.game.party.removePokemonByName(data.basePokemon);
         }

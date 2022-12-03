@@ -357,7 +357,7 @@ class Update implements Saveable {
                     title: 'Active Challenge Mode?',
                     message: `Do you want to activate No Protein challenge mode?
 
-                    <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableProteins.activate();" data-dismiss="toast">Activate</button>`,
+                    <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableVitamins.activate();" data-dismiss="toast">Activate</button>`,
                     timeout: GameConstants.HOUR,
                 });
             }
@@ -1558,8 +1558,10 @@ class Update implements Saveable {
                     starter[8] = 2;
                 }
             }
+
         },
-        '0.10.5': ({ playerData, saveData }) => {
+
+        '0.10.5': ({ playerData, saveData, settingsData }) => {
             // Magikarp Jump Temp Battles
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 159);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 160);
@@ -1613,7 +1615,7 @@ class Update implements Saveable {
                 [9.1, 9.03],
                 [21.1, 21.01],
                 [52.01, 52.02],
-                [52.1, 52.03],
+                [52.2, 52.03],
                 [77.1, 77.01],
                 [78.1, 78.01],
                 [79.1, 79.01],
@@ -1812,70 +1814,66 @@ class Update implements Saveable {
             ];
 
             consistentIDs.forEach(([oldID, newID]) => {
-                const pokemon = saveData.party.caughtPokemon.find(p => p.id === oldID);
-                // If player hasn't caught this mon yet, return.
-                if (pokemon == undefined) {
-                    return;
-                }
-                // Update our ID
-                pokemon.id = newID;
-                if (!saveData.statistics.pokemonHatched) {
-                    saveData.statistics.pokemonHatched = {};
-                }
-                if (!saveData.statistics.shinyPokemonHatched) {
-                    saveData.statistics.shinyPokemonHatched = {};
-                }
-                // Update our statistics
-                saveData.statistics.pokemonEncountered[newID] = saveData.statistics.pokemonEncountered[oldID] || 0;
-                saveData.statistics.pokemonDefeated[newID] = saveData.statistics.pokemonDefeated[oldID] || 0;
-                saveData.statistics.pokemonCaptured[newID] = saveData.statistics.pokemonCaptured[oldID] || 0;
-                saveData.statistics.pokemonHatched[newID] = saveData.statistics.pokemonHatched[oldID] || 0;
-                saveData.statistics.shinyPokemonEncountered[newID] = saveData.statistics.shinyPokemonEncountered[oldID] || 0;
-                saveData.statistics.shinyPokemonDefeated[newID] = saveData.statistics.shinyPokemonDefeated[oldID] || 0;
-                saveData.statistics.shinyPokemonCaptured[newID] = saveData.statistics.shinyPokemonCaptured[oldID] || 0;
-                saveData.statistics.shinyPokemonHatched[newID] = saveData.statistics.shinyPokemonHatched[oldID] || 0;
-                saveData.statistics.malePokemonEncountered[newID] = saveData.statistics.malePokemonEncountered[oldID] || 0;
-                saveData.statistics.malePokemonDefeated[newID] = saveData.statistics.malePokemonDefeated[oldID] || 0;
-                saveData.statistics.malePokemonCaptured[newID] = saveData.statistics.malePokemonCaptured[oldID] || 0;
-                saveData.statistics.malePokemonHatched[newID] = saveData.statistics.malePokemonHatched[oldID] || 0;
-                saveData.statistics.shinyMalePokemonEncountered[newID] = saveData.statistics.shinyMalePokemonEncountered[oldID] || 0;
-                saveData.statistics.shinyMalePokemonDefeated[newID] = saveData.statistics.shinyMalePokemonDefeated[oldID] || 0;
-                saveData.statistics.shinyMalePokemonCaptured[newID] = saveData.statistics.shinyMalePokemonCaptured[oldID] || 0;
-                saveData.statistics.shinyMalePokemonHatched[newID] = saveData.statistics.shinyMalePokemonHatched[oldID] || 0;
-                saveData.statistics.femalePokemonEncountered[newID] = saveData.statistics.femalePokemonEncountered[oldID] || 0;
-                saveData.statistics.femalePokemonDefeated[newID] = saveData.statistics.femalePokemonDefeated[oldID] || 0;
-                saveData.statistics.femalePokemonCaptured[newID] = saveData.statistics.femalePokemonCaptured[oldID] || 0;
-                saveData.statistics.femalePokemonHatched[newID] = saveData.statistics.femalePokemonHatched[oldID] || 0;
-                saveData.statistics.shinyFemalePokemonEncountered[newID] = saveData.statistics.shinyFemalePokemonEncountered[oldID] || 0;
-                saveData.statistics.shinyFemalePokemonDefeated[newID] = saveData.statistics.shinyFemalePokemonDefeated[oldID] || 0;
-                saveData.statistics.shinyFemalePokemonCaptured[newID] = saveData.statistics.shinyFemalePokemonCaptured[oldID] || 0;
-                saveData.statistics.shinyFemalePokemonHatched[newID] = saveData.statistics.shinyFemalePokemonHatched[oldID] || 0;
-                // Delete our old statistics
-                delete saveData.statistics.pokemonEncountered[oldID];
-                delete saveData.statistics.pokemonDefeated[oldID];
-                delete saveData.statistics.pokemonCaptured[oldID];
-                delete saveData.statistics.pokemonHatched[oldID];
-                delete saveData.statistics.shinyPokemonEncountered[oldID];
-                delete saveData.statistics.shinyPokemonDefeated[oldID];
-                delete saveData.statistics.shinyPokemonCaptured[oldID];
-                delete saveData.statistics.shinyPokemonHatched[oldID];
-                delete saveData.statistics.malePokemonEncountered[oldID];
-                delete saveData.statistics.malePokemonDefeated[oldID];
-                delete saveData.statistics.malePokemonCaptured[oldID];
-                delete saveData.statistics.malePokemonHatched[oldID];
-                delete saveData.statistics.shinyMalePokemonEncountered[oldID];
-                delete saveData.statistics.shinyMalePokemonDefeated[oldID];
-                delete saveData.statistics.shinyMalePokemonCaptured[oldID];
-                delete saveData.statistics.shinyMalePokemonHatched[oldID];
-                delete saveData.statistics.femalePokemonEncountered[oldID];
-                delete saveData.statistics.femalePokemonDefeated[oldID];
-                delete saveData.statistics.femalePokemonCaptured[oldID];
-                delete saveData.statistics.femalePokemonHatched[oldID];
-                delete saveData.statistics.shinyFemalePokemonEncountered[oldID];
-                delete saveData.statistics.shinyFemalePokemonDefeated[oldID];
-                delete saveData.statistics.shinyFemalePokemonCaptured[oldID];
-                delete saveData.statistics.shinyFemalePokemonHatched[oldID];
+                // Update all the Pokemon IDs
+                Update.updatePokemonId(saveData, oldID, newID);
             });
+
+            // Update proteins → vitamins
+            saveData.challenges.list.disableVitamins = saveData.challenges.list.disableProteins || false;
+            saveData.statistics.totalVitaminsObtained = saveData.statistics.totalProteinsObtained || 0;
+            saveData.statistics.totalVitaminsPurchased = saveData.statistics.totalProteinsPurchased || 0;
+            // Delete our old statistics
+            delete saveData.statistics.totalProteinsObtained;
+            delete saveData.statistics.totalProteinsPurchased;
+
+            // Update Vitamins used
+            saveData.party.caughtPokemon.forEach(p => {
+                // Check Proteins used
+                if (p[2]) {
+                    // Update Proteins used
+                    p[2] = {
+                        0: p[2],
+                    };
+                }
+            });
+
+            // Update our settings
+            settingsData.vitaminSort = settingsData.proteinSort;
+            settingsData.vitaminSortDirection = settingsData.proteinSortDirection;
+            settingsData.vitaminHideMaxedPokemon = settingsData.proteinHideMaxedPokemon;
+            settingsData.vitaminHideShinyPokemon = settingsData.proteinHideShinyPokemon;
+            settingsData.vitaminSearchFilter = settingsData.proteinSearchFilter;
+            settingsData.vitaminRegionFilter = settingsData.proteinRegionFilter;
+            settingsData.vitaminTypeFilter = settingsData.proteinTypeFilter;
+            // Delete old settings
+            delete settingsData.proteinSort;
+            delete settingsData.proteinSortDirection;
+            delete settingsData.proteinHideMaxedPokemon;
+            delete settingsData.proteinHideShinyPokemon;
+            delete settingsData.proteinSearchFilter;
+            delete settingsData.proteinRegionFilter;
+            delete settingsData.proteinTypeFilter;
+
+            // Fix Galar main story temp battles
+            const darkestDayQL = saveData.quests.questLines.find((q) => q.name == 'The Darkest Day');
+            if (darkestDayQL.state < 2) {
+                // Fix temp battle indicies based on quest step.
+                if (darkestDayQL.quest <= 1) {
+                    saveData.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Bede 3')] = 0;
+                }
+                if (darkestDayQL.quest <= 3) {
+                    saveData.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Hop 6')] = 0;
+                }
+                if (darkestDayQL.quest <= 4) {
+                    saveData.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Hop 7')] = 0;
+                }
+                if (darkestDayQL.quest <= 17) {
+                    saveData.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Eternatus')] = 0;
+                }
+                if (darkestDayQL.quest <= 18) {
+                    saveData.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('The Darkest Day')] = 0;
+                }
+            }
         },
     };
 
@@ -2105,11 +2103,12 @@ class Update implements Saveable {
     }
 
     // Swapping or Rotating Pokemon IDs
-    static rotatePokemonIDs = (saveData, rotationlist: number[]) => {
+    static rotatePokemonIDs = (saveData, rotationlist: number[], keepLast = true) => {
         // save some characters
         const s = saveData.statistics;
 
         const lastID = rotationlist[rotationlist.length - 1];
+        Update.changeHatcheryKey(saveData, lastID, 1e9);
         const lastPokemon = saveData.party.caughtPokemon.find(p => p.id === lastID);
         // Store values from last ID to not get overwritten
         const tempIDvalues = {
@@ -2151,6 +2150,7 @@ class Update implements Saveable {
         for (let i = rotationlist.length - 1; i > 0; i--) {
             const fromID = rotationlist[i - 1];
             const toID = rotationlist[i];
+            Update.changeHatcheryKey(saveData, fromID, toID);
 
             // Rotate our ID
             const pokemon = saveData.party.caughtPokemon.find(p => p.id === fromID);
@@ -2194,6 +2194,7 @@ class Update implements Saveable {
             lastPokemon.id = firstID;
         }
         // Update last ID statistics
+        Update.changeHatcheryKey(saveData, 1e9, firstID);
         s.pokemonEncountered[firstID] = tempIDvalues.statistics[0];
         s.pokemonDefeated[firstID] = tempIDvalues.statistics[1];
         s.pokemonCaptured[firstID] = tempIDvalues.statistics[2];
@@ -2220,6 +2221,38 @@ class Update implements Saveable {
         s.shinyFemalePokemonDefeated[firstID] = tempIDvalues.statistics[21];
         s.shinyFemalePokemonCaptured[firstID] = tempIDvalues.statistics[22];
         s.shinyFemalePokemonHatched[firstID] = tempIDvalues.statistics[23];
+
+        if (!keepLast) {
+            delete s.pokemonEncountered[lastID];
+            delete s.pokemonDefeated[lastID];
+            delete s.pokemonCaptured[lastID];
+            delete s.pokemonHatched[lastID];
+            delete s.shinyPokemonEncountered[lastID];
+            delete s.shinyPokemonDefeated[lastID];
+            delete s.shinyPokemonCaptured[lastID];
+            delete s.shinyPokemonHatched[lastID];
+            delete s.malePokemonEncountered[lastID];
+            delete s.malePokemonDefeated[lastID];
+            delete s.malePokemonCaptured[lastID];
+            delete s.malePokemonHatched[lastID];
+            delete s.shinyMalePokemonEncountered[lastID];
+            delete s.shinyMalePokemonDefeated[lastID];
+            delete s.shinyMalePokemonCaptured[lastID];
+            delete s.shinyMalePokemonHatched[lastID];
+            delete s.femalePokemonEncountered[lastID];
+            delete s.femalePokemonDefeated[lastID];
+            delete s.femalePokemonCaptured[lastID];
+            delete s.femalePokemonHatched[lastID];
+            delete s.shinyFemalePokemonEncountered[lastID];
+            delete s.shinyFemalePokemonDefeated[lastID];
+            delete s.shinyFemalePokemonCaptured[lastID];
+            delete s.shinyFemalePokemonHatched[lastID];
+        }
+    }
+
+    // Will move from the previous ID to the new ID and delete any old statistics
+    static updatePokemonId(saveData, oldID, newID) {
+        Update.rotatePokemonIDs(saveData, [newID, oldID], false);
     }
 
     // Replaces Pokémon names to IDs in the save data
