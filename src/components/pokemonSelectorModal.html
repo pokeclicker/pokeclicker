@@ -78,7 +78,7 @@
                         <tr class="clickable" data-bind="
                             click: () => $data.useVitamin(VitaminController.currentlySelected(), VitaminController.getMultiplier()),
                             attr: {
-                                onContextMenu: `App.game.party.getPokemonByName('${$data.name}').removeVitamin(VitaminController.currentlySelected(), VitaminController.getMultiplier()); return false;`
+                                onContextMenu: `App.game.party.getPokemon(${$data.id}).removeVitamin(VitaminController.currentlySelected(), VitaminController.getMultiplier()); return false;`
                             },
                             hidden: $data.hideFromProteinList()">
                             <td class="text-left">
