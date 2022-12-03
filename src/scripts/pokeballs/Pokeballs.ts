@@ -75,17 +75,11 @@ class Pokeballs implements Feature {
 
             new Pokeball(GameConstants.Pokeball.Lureball, () => {
                 if (App.game.gameState == GameConstants.GameState.fighting && player.route()) {
-                    const numLandPokemon = Routes.getRoute(player.region,player.route()).pokemon.land.length > 0;
+                    const hasLandPokemon = Routes.getRoute(player.region,player.route()).pokemon.land.length > 0;
                     const isWaterPokemon = Routes.getRoute(player.region,player.route()).pokemon.water.includes(Battle.enemyPokemon().name);
 
                     // If route has Land Pokémon and the current pokémon is a Water Pokémon
-                    if (numLandPokemon == true && isWaterPokemon == true) {
-                        return 15;
-                    }
-                }
-                if (App.game.gameState == GameConstants.GameState.dungeon) {
-                    // If player in a dungeon and the enemy pokémon is a water type
-                    if (Battle.enemyPokemon().type1 == PokemonType.Water || Battle.enemyPokemon().type2 == PokemonType.Water) {
+                    if (hasLandPokemon && isWaterPokemon) {
                         return 15;
                     }
                 }
