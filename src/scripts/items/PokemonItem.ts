@@ -24,7 +24,7 @@ class PokemonItem extends CaughtIndicatingItem {
             // Statistics
             if (i < amt - 1) { // -1 because gainPokemonById will add 1 to statistics
                 const gender = PokemonFactory.generateGenderById(pokemonID);
-                PokemonHelper.incrementPokemonStatistics(pokemonID, GameConstants.STATISTIC_CAPTURED, shinyBool, gender);
+                PokemonHelper.incrementPokemonStatistics(pokemonID, GameConstants.PokemonStatiticsType.Captured, shinyBool, gender);
             }
         }
 
@@ -54,6 +54,10 @@ class PokemonItem extends CaughtIndicatingItem {
 
     getCaughtStatus(): CaughtStatus {
         return PartyController.getCaughtStatusByName(this.name as PokemonNameType);
+    }
+
+    getPokerusStatus(): GameConstants.Pokerus {
+        return PartyController.getPokerusStatusByName(this.name as PokemonNameType);
     }
 
     get image() {

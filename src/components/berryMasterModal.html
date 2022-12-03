@@ -50,11 +50,17 @@
                                     </td>
                                     <td class='vertical-middle' data-bind='attr: { rowspan: $parent.berries.length }'>
                                         <span data-bind='text: $parent.item.amount + " × " + $parent.item.itemType.displayName'></span>
-                                        <knockout data-bind="if: ($parent.item.itemType instanceof CaughtIndicatingItem)">
-                                            <span style="float:right; margin-right: 5px"
-                                                  data-bind="template: { name: 'caughtStatusTemplate', data: {'status': $parent.item.itemType.getCaughtStatus()}}">
-                                            </span>
-                                        </knockout>
+                                        <span style="float: right; margin-right: 5px">
+                                            <knockout data-bind="if: ($parent.item.itemType instanceof CaughtIndicatingItem)">
+                                                <span data-bind="template: { name: 'caughtStatusTemplate', data: {'status': $parent.item.itemType.getCaughtStatus()}}"></span>
+                                            </knockout>
+                                            <knockout data-bind="if: ($parent.item.itemType instanceof PokemonItem)">
+                                                <span style="position: relative; top: -1px;"
+                                                    data-bind="template: { name: 'pokerusStatusTemplate',
+                                                        data: { 'pokerus': $parent.item.itemType.getPokerusStatus(), 'width': '32px' }}">
+                                                </span>
+                                            </knockout>
+                                        </span>
                                     </td>
                                     <td class='vertical-middle' data-bind="attr: { rowspan: $parent.berries.length }">
                                         <div class="btn-group btn-block" data-bind="let: { tradeAmount: ko.observable(1) }">
