@@ -65,6 +65,12 @@ class Game {
                 console.error('Unable to load sava data from JSON for:', key, '\nError:\n', error);
             }
         });
+        saveObject.achievements?.forEach(achName => {
+            const ach = AchievementHandler.findByName(achName);
+            if (ach) {
+                ach.unlocked(true);
+            }
+        });
     }
 
     initialize() {
@@ -221,6 +227,7 @@ class Game {
                 App.game.quests.getQuestLine('The Great Vivillon Hunt!').beginQuest(App.game.quests.getQuestLine('The Great Vivillon Hunt!').curQuest());
             }
         }
+
         // Check if Koga has been defeated, but have no safari ticket yet
         if (App.game.badgeCase.badgeList[BadgeEnums.Soul]() && !App.game.keyItems.itemList[KeyItemType.Safari_ticket].isUnlocked()) {
             App.game.keyItems.gainKeyItem(KeyItemType.Safari_ticket, true);

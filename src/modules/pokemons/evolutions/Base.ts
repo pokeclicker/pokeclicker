@@ -8,6 +8,7 @@ import { calcNativeRegion } from '../PokemonHelper';
 import { PokemonNameType } from '../PokemonNameType';
 
 export enum EvoTrigger {
+    NONE,
     LEVEL,
     STONE,
 }
@@ -17,6 +18,9 @@ export interface EvoData {
     evolvedPokemon: PokemonNameType;
     trigger: EvoTrigger;
     restrictions: Array<Requirement>;
+}
+
+export interface DummyEvoData extends EvoData {
 }
 
 export interface LevelEvoData extends EvoData {
@@ -49,6 +53,10 @@ export const restrict = <T extends EvoData>(evo: T, ...restrictions: EvoData['re
     evo.restrictions.push(...restrictions);
     return evo;
 };
+
+export const DummyEvolution = (basePokemon: PokemonNameType, evolvedPokemon: PokemonNameType): DummyEvoData => ({
+    ...Evo(basePokemon, evolvedPokemon, EvoTrigger.NONE),
+});
 
 export const LevelEvolution = (basePokemon: PokemonNameType, evolvedPokemon: PokemonNameType, level: number): LevelEvoData => restrict(
     { ...Evo(basePokemon, evolvedPokemon, EvoTrigger.LEVEL) },

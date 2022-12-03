@@ -28,13 +28,17 @@ export default class Settings {
     static toJSON() {
         const json = {};
         this.list.forEach((setting) => {
-            json[setting.name] = setting.value;
+            const v = typeof setting.value === 'string' ? encodeURI(setting.value) : setting.value;
+            json[setting.name] = v;
         });
         return json;
     }
 
     static fromJSON(dict) {
-        Object.entries(dict || {})?.forEach(([name, value]) => this.setSettingByName(name, value));
+        Object.entries(dict || {})?.forEach(([name, value]) => {
+            const v = typeof value === 'string' ? decodeURI(value) : value;
+            this.setSettingByName(name, v);
+        });
     }
 
     static enumToSettingOptionArray<T extends Record<string, unknown>>(obj: T, filter: (v) => boolean = () => true, displayNames?: Record<keyof T, string>) {

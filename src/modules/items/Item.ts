@@ -4,7 +4,6 @@ import { Observable } from 'knockout';
 import {
     Currency, ITEM_PRICE_MULTIPLIER, Pokeball, humanifyString, camelCaseToString,
 } from '../GameConstants';
-import GameHelper from '../GameHelper';
 import NotificationConstants from '../notifications/NotificationConstants';
 import Notifier from '../notifications/Notifier';
 import Amount from '../wallet/Amount';
@@ -126,11 +125,6 @@ export default class Item {
 
     gain(n: number) {
         player.gainItem(this.name, n);
-
-        if (this.name === 'Protein') {
-            GameHelper.incrementObservable(App.game.statistics.totalProteinsPurchased, n);
-            GameHelper.incrementObservable(App.game.statistics.totalProteinsObtained, n);
-        }
     }
 
     // eslint-disable-next-line class-methods-use-this, @typescript-eslint/no-unused-vars
