@@ -4557,6 +4557,10 @@ const BattleTreeBlue = new NPC('Blue', [
     'We just planted this sapling here. Maybe it will grow into something great some day.',
 ], {image: 'assets/images/npcs/Blue-masters.png'});
 
+const MagikarpJumpRoamerNPC = new RoamerNPC('Roddy Tackle', [
+    'TODO: something about rare patterns at {ROUTE_NAME}!',
+], GameConstants.Region.alola, RoamingPokemonList.findGroup(GameConstants.Region.alola, GameConstants.AlolaSubRegions.MagikarpJump), 'assets/images/npcs/Roddy Tackle.png');
+
 //Alola Towns
 
 TownList['Iki Town Outskirts'] = new Town(
@@ -4749,7 +4753,7 @@ TownList['Hoppy Town'] = new Town(
     [new DockTownContent()],
     {
         requirements: [],
-        npcs: [],
+        npcs: [MagikarpJumpRoamerNPC],
     }
 );
 TownList['Friend League'] = new Town(
