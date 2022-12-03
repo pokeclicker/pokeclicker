@@ -284,7 +284,11 @@ class PartyPokemon implements Saveable {
         if (this._breeding()) {
             return true;
         }
-        if (!new RegExp(Settings.getSetting('vitaminSearchFilter').observableValue() , 'i').test(this.name)) {
+        // Check if search matches nickname or translated name
+        if (
+            !new RegExp(Settings.getSetting('vitaminSearchFilter').observableValue() , 'i').test(this._translatedName())
+            && !new RegExp(Settings.getSetting('vitaminSearchFilter').observableValue() , 'i').test(this.displayName)
+        ) {
             return true;
         }
         if (Settings.getSetting('vitaminRegionFilter').observableValue() > -2) {

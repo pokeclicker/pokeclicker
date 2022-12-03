@@ -142,7 +142,11 @@ class BreedingController {
                 return false;
             }
 
-            if (!BreedingFilters.search.value().test(partyPokemon.displayName)) {
+            // Check if search matches nickname or translated name
+            if (
+                !BreedingFilters.search.value().test(partyPokemon.displayName)
+                && !BreedingFilters.search.value().test(partyPokemon._translatedName())
+            ) {
                 return false;
             }
 
