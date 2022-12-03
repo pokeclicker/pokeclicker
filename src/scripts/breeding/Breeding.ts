@@ -209,8 +209,13 @@ class Breeding implements Feature {
                 partyPokemon.calculatePokerus(index);
             }
             egg.addSteps(amount, this.multiplier);
-            if (this._queueList().length && egg.canHatch()) {
-                this.hatchPokemonEgg(index);
+            if (this._queueList().length) {
+                if (egg.canHatch()) {
+                    this.hatchPokemonEgg(index);
+                } else if (egg.isNone() && this.hasFreeEggSlot()) {
+                    this.moveEggs();
+                    this.nextEggFromQueue();
+                }
             }
         }
         this.hatcheryHelpers.addSteps(amount, this.multiplier);
@@ -306,19 +311,25 @@ class Breeding implements Feature {
         if (hatched) {
             this._eggList[index](new Egg());
             this.moveEggs();
-            if (this._queueList().length) {
-                const nextEgg = this.createEgg(this._queueList.shift());
-                this.gainEgg(nextEgg);
-                if (!this._queueList().length) {
-                    Notifier.notify({
-                        message: 'Hatchery queue is empty.',
-                        type: NotificationConstants.NotificationOption.success,
-                        timeout: 1e4,
-                        sound: NotificationConstants.NotificationSound.Hatchery.empty_queue,
-                        setting: NotificationConstants.NotificationSetting.Hatchery.empty_queue,
-                    });
-                }
-            }
+            this.nextEggFromQueue();
+        }
+    }
+
+    private nextEggFromQueue(): void {
+        if (!this._queueList().length) {
+            return;
+        }
+
+        const nextEgg = this.createEgg(this._queueList.shift());
+        this.gainEgg(nextEgg);
+        if (!this._queueList().length) {
+            Notifier.notify({
+                message: 'Hatchery queue is empty.',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 1e4,
+                sound: NotificationConstants.NotificationSound.Hatchery.empty_queue,
+                setting: NotificationConstants.NotificationSetting.Hatchery.empty_queue,
+            });
         }
     }
 
