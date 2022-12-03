@@ -207,4 +207,7 @@ export type ItemNameType
     | 'Calcium'
     | 'Carbos'
     | 'Abomasite'
-    | 'Alakazite';
+    | 'Alakazite'
+    | 'Kangaskhanite'
+    | 'Heracronite'
+    | 'Garchompite';
