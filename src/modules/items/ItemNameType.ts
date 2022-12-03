@@ -203,7 +203,8 @@ export type ItemNameType
     | 'Tornadus (Therian)'
     | 'Thundurus (Therian)'
     | 'Landorus (Therian)'
-    | 'RareCandy'
     | 'Protein'
+    | 'Calcium'
+    | 'Carbos'
     | 'Abomasite'
     | 'Alakazite';

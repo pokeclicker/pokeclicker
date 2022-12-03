@@ -389,7 +389,7 @@ class Breeding implements Feature {
         if (eggCycles === undefined) {
             return 500;
         } else {
-            return eggCycles * 40;
+            return eggCycles * GameConstants.EGG_CYCLE_MULTIPLIER;
         }
     }
 
