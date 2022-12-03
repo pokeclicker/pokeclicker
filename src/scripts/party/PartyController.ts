@@ -84,14 +84,14 @@ class PartyController {
         return PartyController.hatcherySortedList;
     }).extend({ rateLimit: 500 });
 
-    private static proteinSortedList = [];
-    static getProteinSortedList = ko.pureComputed(() => {
+    private static vitaminSortedList = [];
+    static getvitaminSortedList = ko.pureComputed(() => {
         // If the protein modal is open, we should sort it.
         if (modalUtils.observableState.pokemonSelectorModal === 'show') {
-            PartyController.proteinSortedList = [...App.game.party.caughtPokemon];
-            return PartyController.proteinSortedList.sort(PartyController.compareBy(Settings.getSetting('proteinSort').observableValue(), Settings.getSetting('proteinSortDirection').observableValue()));
+            PartyController.vitaminSortedList = [...App.game.party.caughtPokemon];
+            return PartyController.vitaminSortedList.sort(PartyController.compareBy(Settings.getSetting('vitaminSort').observableValue(), Settings.getSetting('vitaminSortDirection').observableValue()));
         }
-        return PartyController.proteinSortedList;
+        return PartyController.vitaminSortedList;
     }).extend({ rateLimit: 500 });
 
     private static heldItemSortedList = [];
