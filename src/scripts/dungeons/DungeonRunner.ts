@@ -177,7 +177,7 @@ class DungeonRunner {
             ItemList[input].gain(1);
         } else if (ItemList[input] instanceof EvolutionStone || EggItem || BattleItem || Vitamin || EnergyRestore) {
             if (ItemList[input] instanceof Vitamin) {
-                GameHelper.incrementObservable(App.game.statistics.totalProteinsObtained, amount);
+                GameHelper.incrementObservable(App.game.statistics.totalVitaminsObtained, amount);
             }
             DungeonRunner.lootNotification(input, amount, weight, ItemList[input].image);
             return player.gainItem(ItemList[input].name, amount);
