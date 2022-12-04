@@ -4762,7 +4762,7 @@ TownList['Friend League'] = new Town(
     GameConstants.AlolaSubRegions.MagikarpJump,
     [],
     {
-        requirements: [],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 31)],
     }
 );
 TownList['Quick League'] = new Town(
@@ -4771,7 +4771,7 @@ TownList['Quick League'] = new Town(
     GameConstants.AlolaSubRegions.MagikarpJump,
     [TemporaryBattleList['Magikarp Jump Koylee']],
     {
-        requirements: [],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 32)],
     }
 );
 TownList['Heavy League'] = new Town(
@@ -4780,7 +4780,7 @@ TownList['Heavy League'] = new Town(
     GameConstants.AlolaSubRegions.MagikarpJump,
     [TemporaryBattleList['Magikarp Jump Karpella'], TemporaryBattleList['Magikarp Jump Karpen']],
     {
-        requirements: [],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 33)],
     }
 );
 TownList['Great League'] = new Town(
@@ -4789,7 +4789,7 @@ TownList['Great League'] = new Town(
     GameConstants.AlolaSubRegions.MagikarpJump,
     [TemporaryBattleList['Magikarp Jump Tykarp'], TemporaryBattleList['Magikarp Jump Karpress']],
     {
-        requirements: [],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 34)],
     }
 );
 TownList['Fast League'] = new Town(
@@ -4798,7 +4798,7 @@ TownList['Fast League'] = new Town(
     GameConstants.AlolaSubRegions.MagikarpJump,
     [TemporaryBattleList['Magikarp Jump Karami'], TemporaryBattleList['Magikarp Jump Karson']],
     {
-        requirements: [],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 35)],
     }
 );
 TownList['Luxury League'] = new Town(
@@ -4807,7 +4807,7 @@ TownList['Luxury League'] = new Town(
     GameConstants.AlolaSubRegions.MagikarpJump,
     [TemporaryBattleList['Magikarp Jump Karpress 2'],TemporaryBattleList['Magikarp Jump Karpen 2'],TemporaryBattleList['Magikarp Jump Karbuck']],
     {
-        requirements: [],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 36)],
     }
 );
 TownList['Heal League'] = new Town(
@@ -4816,7 +4816,7 @@ TownList['Heal League'] = new Town(
     GameConstants.AlolaSubRegions.MagikarpJump,
     [TemporaryBattleList['Magikarp Jump Skyhopper'],TemporaryBattleList['Magikarp Jump Karpen 3'],TemporaryBattleList['Magikarp Jump Karpella 2']],
     {
-        requirements: [],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 37)],
     }
 );
 TownList['Ultra League'] = new Town(
@@ -4825,7 +4825,7 @@ TownList['Ultra League'] = new Town(
     GameConstants.AlolaSubRegions.MagikarpJump,
     [TemporaryBattleList['Magikarp Jump Karbuck 2'],TemporaryBattleList['Magikarp Jump Kareign'],TemporaryBattleList['Magikarp Jump Koylee 2']],
     {
-        requirements: [],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 38)],
     }
 );
 TownList['Elite Four League'] = new Town(
@@ -4834,7 +4834,7 @@ TownList['Elite Four League'] = new Town(
     GameConstants.AlolaSubRegions.MagikarpJump,
     [GymList['E4 League'], TemporaryBattleList['Magikarp Jump Karpress 3'],TemporaryBattleList['Magikarp Jump Karpen 4'],TemporaryBattleList['Magikarp Jump Karpella 3']],
     {
-        requirements: [],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 39)],
     }
 );
 TownList['Master League'] = new Town(
@@ -4843,7 +4843,7 @@ TownList['Master League'] = new Town(
     GameConstants.AlolaSubRegions.MagikarpJump,
     [TemporaryBattleList['Magikarp Jump Skyhopper 2'],TemporaryBattleList['Magikarp Jump Tykarp 2']],
     {
-        requirements: [],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 40)],
     }
 );
 
