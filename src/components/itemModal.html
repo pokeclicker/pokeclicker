@@ -101,13 +101,13 @@
                     <div id="itemBag" class="tab-pane p-3">
                         <div>
                             <h4>Vitamins</h4>
-                            <div class="row">
+                            <div class="row justify-content-center">
                                 <!-- ko foreach: GameHelper.enumNumbers(GameConstants.VitaminType) -->
                                     <div class="btn btn-primary col-2 item-bag-item" data-bind="template: { name: 'otherItemTemplate', data: GameConstants.VitaminType[$data]}, click: () => { VitaminController.currentlySelected($data); $('#pokemonVitaminModal').modal('show'); }"></div>
                                 <!-- /ko -->
                             </div>
                             <h4>Held items</h4>
-                            <div class="row">
+                            <div class="row justify-content-center">
                                 <!-- ko foreach: HeldItem.getSortedHeldItems() -->
                                     <div class="btn btn-primary col-2 item-bag-item" data-bind="template: { name: 'otherItemTemplate', data: $data.name}, click: () => { HeldItem.heldItemSelected($data); $('#heldItemModal').modal('show'); }, visible: $data.isUnlocked()"></div>
                                 <!-- /ko -->
