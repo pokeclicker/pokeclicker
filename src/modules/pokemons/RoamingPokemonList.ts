@@ -122,6 +122,11 @@ RoamingPokemonList.add(Region.kalos, 0, new RoamingPokemon('Hoopa', new GymBadge
 RoamingPokemonList.add(Region.alola, 0, new RoamingPokemon('Magearna', new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)));
 RoamingPokemonList.add(Region.alola, 0, new RoamingPokemon('Marshadow', new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)));
 RoamingPokemonList.add(Region.alola, 0, new RoamingPokemon('Zeraora', new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)));
+// Magikarp Jump
+RoamingPokemonList.add(Region.alola, 1, new RoamingPokemon('Magikarp Purple Diamonds', new GymBadgeRequirement(BadgeEnums.Luxury_League)));
+RoamingPokemonList.add(Region.alola, 1, new RoamingPokemon('Magikarp Apricot Stripes', new GymBadgeRequirement(BadgeEnums.Heal_League)));
+RoamingPokemonList.add(Region.alola, 1, new RoamingPokemon('Magikarp Saucy Blue', new GymBadgeRequirement(BadgeEnums.Master_League)));
+RoamingPokemonList.add(Region.alola, 1, new RoamingPokemon('Magikarp Violet Raindrops', new GymBadgeRequirement(BadgeEnums.Master_League)));
 
 // Galar
 RoamingPokemonList.add(Region.galar, 0, new RoamingPokemon('Galarian Zapdos', new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 5)));
