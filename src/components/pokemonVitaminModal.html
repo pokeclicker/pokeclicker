@@ -18,10 +18,9 @@
                         <button class="btn btn-block btn-secondary btn-static" data-bind="text: GameConstants.VitaminType[VitaminController.currentlySelected()] + ': ' + player.itemList[GameConstants.VitaminType[VitaminController.currentlySelected()]]().toLocaleString('en-US')"></button>
                         
                         <button type="button" class="btn btn-sm btn-primary" data-bind="text: VitaminController.add() ? 'Give' : 'Take'" onclick="VitaminController.add(!VitaminController.add())" title="Add/Remove" data-toggle="tooltip" data-html="true" data-content="Left/right click to cycle amount
-              <br/>Click on Pokémon to use" data-placement="right" data-trigger="hover">
+              <br/>Click on Pokémon to use" data-placement="right" data-trigger="hover"></button>
                         <button type="button" class="btn btn-sm btn-primary" data-bind="text: VitaminController.multiplier[VitaminController.multiplierIndex()]" onclick="VitaminController.incrementMultiplier()" oncontextmenu="VitaminController.decrementMultiplier(); return false" title="Multiplier" data-toggle="tooltip" data-html="true" data-content="Left/right click to cycle amount
-              <br/>Click on Pokémon to use" data-placement="right" data-trigger="hover">
-                        </button>
+              <br/>Click on Pokémon to use" data-placement="right" data-trigger="hover"></button>
                     </div>
                     <div class="input-group" data-bind="with: Settings.getSetting('vitaminSort')">
                         <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])" data-bind="foreach: $data.options, attr: {name}, selectedOptions: [$data.observableValue()]">
@@ -32,7 +31,7 @@
                             text: Settings.getSetting('vitaminSortDirection').observableValue() ? '⥄' : '⥂',
                             tooltip: { title: Settings.getSetting('vitaminSortDirection').observableValue() ? 'Descending (highest value first)' : 'Ascending (lowest value first)', trigger: 'hover', placement:'top' }
                             ">⥂</label>
-                            <input id="vitaminSortDirection" style="vertical-align: middle" class="hidden" type='checkbox' data-bind="checked: Settings.getSetting('vitaminSortDirection').observableValue()" onchange="Settings.setSettingByName('vitaminSortDirection', this.checked)" />
+                            <input id="vitaminSortDirection" style="vertical-align: middle" class="hidden" type="checkbox" data-bind="checked: Settings.getSetting('vitaminSortDirection').observableValue()" onchange="Settings.setSettingByName('vitaminSortDirection', this.checked)" />
                         </div>
                     </div>
                     <div class="form-check">

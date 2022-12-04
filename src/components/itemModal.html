@@ -78,7 +78,7 @@
                             <h4>Vitamins</h4>
                             <div class="row">
                                 <!-- ko foreach: GameHelper.enumNumbers(GameConstants.VitaminType) -->
-                                    <div class="btn btn-primary col-2 item-bag-item" data-bind="template: { name: 'otherItemTemplate', data: GameConstants.VitaminType[$data]}, click: () => { VitaminController.currentlySelected($data); $('#pokemonSelectorModal').modal('show'); }"></div>
+                                    <div class="btn btn-primary col-2 item-bag-item" data-bind="template: { name: 'otherItemTemplate', data: GameConstants.VitaminType[$data]}, click: () => { VitaminController.currentlySelected($data); $('#pokemonVitaminModal').modal('show'); }"></div>
                                 <!-- /ko -->
                             </div>
                             <h4>Held items</h4>
