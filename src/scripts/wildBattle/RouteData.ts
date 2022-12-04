@@ -2059,7 +2059,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         water: ['Magikarp'],
     }),
-    [new NullRequirement()],
+    [new QuestLineCompletedRequirement('Magikarp Jump')],
     undefined,
     GameConstants.AlolaSubRegions.MagikarpJump,
     true
