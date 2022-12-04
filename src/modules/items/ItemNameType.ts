@@ -150,6 +150,7 @@ export type ItemNameType
     | 'Spell_Tag'
     | 'Twisted_Spoon'
     | 'Macho_Brace'
+    | 'Power_Herb'
     | 'Pinkan Arbok'
     | 'Pinkan Oddish'
     | 'Pinkan Poliwhirl'
