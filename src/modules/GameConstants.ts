@@ -1544,7 +1544,7 @@ export const TemporaryBattles = [
     'Magikarp Jump Karpella 2',
     'Magikarp Jump Karbuck 2',
     'Magikarp Jump Kareign',
-    'Magikarp Jump Koylee',
+    'Magikarp Jump Koylee 2',
     'Magikarp Jump Karpress 3',
     'Magikarp Jump Karpen 4',
     'Magikarp Jump Karpella 3',

@@ -24,7 +24,7 @@ export default class RoamingPokemonList {
         [[SinnohSubRegions.Sinnoh]],
         [[UnovaSubRegions.Unova]],
         [[KalosSubRegions.Kalos]],
-        [[AlolaSubRegions.MelemeleIsland, AlolaSubRegions.AkalaIsland, AlolaSubRegions.UlaulaIsland, AlolaSubRegions.PoniIsland]],
+        [[AlolaSubRegions.MelemeleIsland, AlolaSubRegions.AkalaIsland, AlolaSubRegions.UlaulaIsland, AlolaSubRegions.PoniIsland], [AlolaSubRegions.MagikarpJump]],
         [[GalarSubRegions.SouthGalar], [GalarSubRegions.NorthGalar], [GalarSubRegions.IsleofArmor], [GalarSubRegions.CrownTundra]],
     ];
 
