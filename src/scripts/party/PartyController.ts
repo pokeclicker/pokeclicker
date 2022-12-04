@@ -87,7 +87,7 @@ class PartyController {
     private static vitaminSortedList = [];
     static getvitaminSortedList = ko.pureComputed(() => {
         // If the protein modal is open, we should sort it.
-        if (modalUtils.observableState.pokemonSelectorModal === 'show') {
+        if (modalUtils.observableState.pokemonVitaminModal === 'show') {
             PartyController.vitaminSortedList = [...App.game.party.caughtPokemon];
             return PartyController.vitaminSortedList.sort(PartyController.compareBy(Settings.getSetting('vitaminSort').observableValue(), Settings.getSetting('vitaminSortDirection').observableValue()));
         }

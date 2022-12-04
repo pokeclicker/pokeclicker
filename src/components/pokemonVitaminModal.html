@@ -1,7 +1,7 @@
-<div class="modal noselect fade" id="pokemonSelectorModal" tabindex="-1" role="dialog" aria-labelledby="pokemonSelectorModal">
+<div class="modal noselect fade" id="pokemonVitaminModal" tabindex="-1" role="dialog" aria-labelledby="pokemonVitaminModal">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
         <div class="modal-content">
-            <!-- ko if: modalUtils.observableState['pokemonSelectorModal'] === 'show' -->
+            <!-- ko if: modalUtils.observableState['pokemonVitaminModal'] === 'show' -->
             <div class="modal-header bg-dark text-light" style='justify-content: space-around;'>
                 <h5 class="modal-title text-light">Select a Pokémon</h5>&nbsp; <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -12,16 +12,16 @@
                 <br />
                 <div class="sticky-top bg-dark text-light">
                     <!-- ko if: App.game.challenges.list.disableVitamins.active() -->
-                    <span class="btn btn-block btn-danger btn-static m-0"> Vitamins are disabled. </span>
+                    <span class="btn btn-block btn-danger btn-static m-0">Vitamins are disabled.</span>
                     <!-- /ko -->
                     <div class="btn-group btn-block m-0" role="group">
+                        <button class="btn btn-sm btn-info" data-bind="click: () => VitaminController.currentlySelected((VitaminController.currentlySelected() + GameHelper.enumLength(GameConstants.VitaminType) - 1) % GameHelper.enumLength(GameConstants.VitaminType))">&lt;</button>
                         <button class="btn btn-block btn-secondary btn-static" data-bind="text: GameConstants.VitaminType[VitaminController.currentlySelected()] + ': ' + player.itemList[GameConstants.VitaminType[VitaminController.currentlySelected()]]().toLocaleString('en-US')"></button>
-                        
+                        <button class="btn btn-sm btn-info" data-bind="click: () => VitaminController.currentlySelected((VitaminController.currentlySelected() + 1) % GameHelper.enumLength(GameConstants.VitaminType))">&gt;</button>
                         <button type="button" class="btn btn-sm btn-primary" data-bind="text: VitaminController.add() ? 'Give' : 'Take'" onclick="VitaminController.add(!VitaminController.add())" title="Add/Remove" data-toggle="tooltip" data-html="true" data-content="Left/right click to cycle amount
-              <br/>Click on Pokémon to use" data-placement="right" data-trigger="hover">
+              <br/>Click on Pokémon to use" data-placement="right" data-trigger="hover"></button>
                         <button type="button" class="btn btn-sm btn-primary" data-bind="text: VitaminController.multiplier[VitaminController.multiplierIndex()]" onclick="VitaminController.incrementMultiplier()" oncontextmenu="VitaminController.decrementMultiplier(); return false" title="Multiplier" data-toggle="tooltip" data-html="true" data-content="Left/right click to cycle amount
-              <br/>Click on Pokémon to use" data-placement="right" data-trigger="hover">
-                        </button>
+              <br/>Click on Pokémon to use" data-placement="right" data-trigger="hover"></button>
                     </div>
                     <div class="input-group" data-bind="with: Settings.getSetting('vitaminSort')">
                         <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])" data-bind="foreach: $data.options, attr: {name}, selectedOptions: [$data.observableValue()]">
@@ -32,7 +32,7 @@
                             text: Settings.getSetting('vitaminSortDirection').observableValue() ? '⥄' : '⥂',
                             tooltip: { title: Settings.getSetting('vitaminSortDirection').observableValue() ? 'Descending (highest value first)' : 'Ascending (lowest value first)', trigger: 'hover', placement:'top' }
                             ">⥂</label>
-                            <input id="vitaminSortDirection" style="vertical-align: middle" class="hidden" type='checkbox' data-bind="checked: Settings.getSetting('vitaminSortDirection').observableValue()" onchange="Settings.setSettingByName('vitaminSortDirection', this.checked)" />
+                            <input id="vitaminSortDirection" style="vertical-align: middle" class="hidden" type="checkbox" data-bind="checked: Settings.getSetting('vitaminSortDirection').observableValue()" onchange="Settings.setSettingByName('vitaminSortDirection', this.checked)" />
                         </div>
                     </div>
                     <div class="form-check">
