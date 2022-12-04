@@ -26,14 +26,17 @@
                             <div class="col-md-6 col-12 collapse dont-collapse-sm justify-content-center" id="evo-item-list">
                                 <h4>Evolution Items</h4>
                                 <div class="scrolling-div" data-bind="foreach: Object.keys(GameConstants.StoneType).filter(stone => isNaN(stone) && stone !== 'None')">
-                                    <div class="col-12 breedingListItem">
+                                    <div class="col-12 evolutionListItem">
                                         <button class="btn btn-secondary smallButton list-group-item-action" style="cursor: pointer; padding-right:15px"
                                                 data-bind="css:{'item-selected': ItemHandler.stoneSelected() === $data},
                                                     click: function(){ ItemHandler.stoneSelected($data); ItemHandler.pokemonSelected('')},
                                                     visible: ItemList[$data].unlockedRegion <= player.highestRegion() || player.amountOfItem($data) > 0">
                                             <img data-bind="attr: {src: ItemList[$data].image }" style="max-width: 32px; margin: -10px; padding: 12px 0px;">
                                             <div class="d-inline-block" data-bind="text: ItemList[$data].displayName" style="margin-left: 20px; margin-top:8px;"></div>
-                                            <span data-bind="text: player._itemList[$data]().toLocaleString('en-US')" style="float:right; margin-top:8px;"></span>
+                                            <!-- ko if: ItemList[$data] instanceof CaughtIndicatingItem -->
+                                            <div class="float-right" style="margin-top:8px;" data-bind="template: { name: 'caughtStatusTemplate', data: {'status': ItemList[$data].getCaughtStatus()}}"></div>
+                                            <!-- /ko -->
+                                            <div class="float-right mr-1" style="margin-top:8px;" data-bind="text: player._itemList[$data]().toLocaleString('en-US')"></div>
                                         </button>
                                     </div>
                                 </div>
@@ -50,15 +53,16 @@
                                 <h4>Pokémon</h4>
                                 <div class="scrolling-div"
                                     data-bind="foreach: PokemonHelper.getPokemonsWithEvolution(GameConstants.StoneType[ItemHandler.stoneSelected()])">
-                                    <div class="col-md-6 col-sm-10 col-lg-12 breedingListItem"> <!--offset-sm-1 offset-md-0 offset-md-0 -->
+                                    <div class="col-md-6 col-sm-10 col-lg-12 evolutionListItem"> <!--offset-sm-1 offset-md-0 offset-md-0 -->
                                         <button class="btn btn-secondary smallButton list-group-item-action" style="padding-right:15px"
                                                 data-bind="click: function() {ItemHandler.pokemonSelected(name)}, css:{ 'pokemon-selected': ItemHandler.pokemonSelected() === name}">
                                             <img class="smallImage" data-bind="attr:{src: 'assets/images/' + (App.game.party.alreadyCaughtPokemon($data.id, true) ? 'shiny' : '') + 'pokemon/' + id +'.png' }"/>
                                             <div class="d-inline-block" data-bind="text: displayName" style="margin-left: 20px; margin-top: 8px;">Name</div>
-                                            <span style="float:right; margin-top:8px"  data-bind="using: { statuses: PartyController.getStoneEvolutionsCaughtData($data.id, GameConstants.StoneType[ItemHandler.stoneSelected()]) }">
-                                                <div class="row stoneEvolutionStatuses" data-bind="foreach: statuses">
-                                                    <div class="col-2" data-bind="template: { name: 'caughtStatusTemplate', data: $data }"></div>
-                                                </div>
+                                            <span class="" style="float: right; margin-top: 8px" data-bind="template: { name: 'pokerusStatusTemplate', data: { 'pokerus': PartyController.getPokerusStatus($data.id) }}"></span>
+                                            <span class="mr-1" style="float: right; margin-top: 8px"  data-bind="using: { statuses: PartyController.getStoneEvolutionsCaughtData($data.id, GameConstants.StoneType[ItemHandler.stoneSelected()]) }">
+                                                <span class="stoneEvolutionStatuses" data-bind="foreach: statuses">
+                                                    <span class="" data-bind="template: { name: 'caughtStatusTemplate', data: $data }"></span>
+                                                </span>
                                             </span>
                                         </button>
                                     </div>
