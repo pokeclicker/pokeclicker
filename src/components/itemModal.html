@@ -81,10 +81,10 @@
                                                 Use evolution items!
                                             </button>
                                             <!-- /ko -->
-                                            <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-bind="text: ItemHandler.amountSelected() + '&nbsp;'" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-bind="text: ItemHandler.amountSelected().toLocaleString('en-US') + '&nbsp;'" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             </button>
                                             <div class="dropdown-menu" data-bind="foreach: [1, 10, 100, 1000, Infinity]">
-                                                <button class="dropdown-item" type="button" data-bind="click: function(){ItemHandler.amountSelected($data)}, text: $data"></button>
+                                                <button class="dropdown-item" type="button" data-bind="click: function(){ItemHandler.amountSelected($data)}, text: $data.toLocaleString('en-US')"></button>
                                             </div>
                                         </div>
                                     </div>
