@@ -1874,6 +1874,22 @@ class Update implements Saveable {
                     saveData.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('The Darkest Day')] = 0;
                 }
             }
+            // Suicune Quest autostart for players too far in Legendary Beasts quest
+            const johtoBeastsQuestLine = saveData.quests.questLines.find((q) => q.name == 'The Legendary Beasts');
+            const johtoSuicuneQuestLine = saveData.quests.questLines.find((q) => q.name == 'Eusine\'s Chase');
+            if (johtoBeastsQuestLine?.state == 4 || (johtoBeastsQuestLine?.state == 1 && johtoBeastsQuestLine?.quest >= 4)) {
+                if (!johtoSuicuneQuestLine) {
+                // add to array
+                    saveData.quests.questLines.push({
+                        state: 1,
+                        name: 'Eusine\'s Chase',
+                        quest: 0,
+                    });
+                } else if (johtoSuicuneQuestLine.state == 0) {
+                // activate quest
+                    johtoSuicuneQuestLine.state = 1;
+                }
+            }
         },
     };
 
