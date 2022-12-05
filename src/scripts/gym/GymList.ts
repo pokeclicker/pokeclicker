@@ -1582,7 +1582,7 @@ GymList['Friend League'] = new Gym(
     [new GymPokemon('Magikarp', 1, 20)],
     BadgeEnums.Friend_League,
     0, //TODO
-    'TODO',
+    'Your Karp is really Magic!',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 31)]
 );
 
@@ -1592,7 +1592,7 @@ GymList['Quick League'] = new Gym(
     [new GymPokemon('Magikarp Skelly', 1, 20)],
     BadgeEnums.Quick_League,
     0, //TODO
-    'TODO',
+    'Looks like I flailed...',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 32)],
     () => {
         if (!App.game.party.alreadyCaughtPokemonByName('Magikarp Skelly')) {
@@ -1612,7 +1612,7 @@ GymList['Heavy League'] = new Gym(
     [new GymPokemon('Magikarp Orange Two Tone', 1, 20)],
     BadgeEnums.Heavy_League,
     0, //TODO
-    'TODO',
+    'Karpe Diem',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 33)],
     () => {
         if (!App.game.party.alreadyCaughtPokemonByName('Magikarp Orange Two Tone')) {
@@ -1632,7 +1632,7 @@ GymList['Great League'] = new Gym(
     [new GymPokemon('Magikarp', 1, 20)],
     BadgeEnums.Great_League,
     0, //TODO
-    'TODO',
+    'Guess ya got me. Hook, line and sinker!',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 34)]
 );
 
@@ -1642,7 +1642,7 @@ GymList['Fast League'] = new Gym(
     [new GymPokemon('Magikarp Pink Dapples', 1, 20)],
     BadgeEnums.Fast_League,
     0, //TODO
-    'TODO',
+    'This life is not for me... I will become a Karpenter now...',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 35)],
     () => {
         if (!App.game.party.alreadyCaughtPokemonByName('Magikarp Pink Dapples')) {
@@ -1662,7 +1662,7 @@ GymList['Luxury League'] = new Gym(
     [new GymPokemon('Magikarp Pink Orca', 1, 20)],
     BadgeEnums.Luxury_League,
     0, //TODO
-    'TODO',
+    'Just wait til my Magikarp evolves and you will all see how great I am! <i>Cries</i>',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 36)],
     () => {
         if (!App.game.party.alreadyCaughtPokemonByName('Magikarp Pink Orca')) {
@@ -1682,7 +1682,7 @@ GymList['Heal League'] = new Gym(
     [new GymPokemon('Magikarp Purple Bubbles', 1, 20)],
     BadgeEnums.Heal_League,
     0, //TODO
-    'TODO',
+    'I\'m getting more old than my rod...',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 37)],
     () => {
         if (!App.game.party.alreadyCaughtPokemonByName('Magikarp Purple Bubbles')) {
@@ -1702,7 +1702,7 @@ GymList['Ultra League'] = new Gym(
     [new GymPokemon('Magikarp Brown Tiger', 1, 20)],
     BadgeEnums.Ultra_League,
     0, //TODO
-    'TODO',
+    'I knew I smelled something fishy...',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 38)],
     () => {
         if (!App.game.party.alreadyCaughtPokemonByName('Magikarp Brown Tiger')) {
@@ -1722,7 +1722,7 @@ GymList['E4 League'] = new Gym(
     [new GymPokemon('Magikarp Orange Forehead', 1, 20)],
     BadgeEnums.E4_League,
     0, //TODO
-    'TODO',
+    'That jump really splashed!',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 39)],
     () => {
         if (!App.game.party.alreadyCaughtPokemonByName('Magikarp Orange Forehead')) {
@@ -1742,7 +1742,7 @@ GymList['Master League'] = new Gym(
     [new GymPokemon('Magikarp', 1, 20)],
     BadgeEnums.Master_League,
     0, //TODO
-    'TODO',
+    'Mayor Karp will be proud of you!',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 40)]
 );
 

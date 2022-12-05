@@ -2640,7 +2640,7 @@ TemporaryBattleList['Team Rainbow Leader Giovanni'] = new TemporaryBattle(
 TemporaryBattleList['Magikarp Jump Koylee'] = new TemporaryBattle(
     'Magikarp Jump Koylee',
     [new GymPokemon('Magikarp Calico (Orange, White)', 1, 20)],
-    'TODO',
+    'Your scales are full of heart!',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 32)],
     undefined,
     {
@@ -2659,7 +2659,7 @@ TemporaryBattleList['Magikarp Jump Koylee'] = new TemporaryBattle(
 TemporaryBattleList['Magikarp Jump Karpella'] = new TemporaryBattle(
     'Magikarp Jump Karpella',
     [new GymPokemon('Magikarp Calico (Orange, White, Black)', 1, 20)],
-    'TODO',
+    'Wow, you\'re the cream of the \'karp, alright!',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 33)],
     undefined,
     {
@@ -2678,7 +2678,7 @@ TemporaryBattleList['Magikarp Jump Karpella'] = new TemporaryBattle(
 TemporaryBattleList['Magikarp Jump Karpen'] = new TemporaryBattle(
     'Magikarp Jump Karpen',
     [new GymPokemon('Magikarp Calico (White, Orange)', 1, 20)],
-    'TODO',
+    'Are you sure you Karp isn\'t flying type?',
     [new TemporaryBattleRequirement('Magikarp Jump Karpella')],
     undefined,
     {
@@ -2697,7 +2697,7 @@ TemporaryBattleList['Magikarp Jump Karpen'] = new TemporaryBattle(
 TemporaryBattleList['Magikarp Jump Tykarp'] = new TemporaryBattle(
     'Magikarp Jump Tykarp',
     [new GymPokemon('Magikarp Calico (Orange, White)', 1, 20)],
-    'TODO',
+    'I lost because of my karpal tunnel...',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 33)],
     undefined,
     {
@@ -2708,7 +2708,7 @@ TemporaryBattleList['Magikarp Jump Tykarp'] = new TemporaryBattle(
 TemporaryBattleList['Magikarp Jump Karpress'] = new TemporaryBattle(
     'Magikarp Jump Karpress',
     [new GymPokemon('Magikarp Calico (Orange, White, Black)', 1, 20)],
-    'TODO',
+    '<i>Basculin</i> the glory while you can, i\'ll get you next time! Wahaa!',
     [new TemporaryBattleRequirement('Magikarp Jump Tykarp')],
     undefined,
     {
@@ -2719,7 +2719,7 @@ TemporaryBattleList['Magikarp Jump Karpress'] = new TemporaryBattle(
 TemporaryBattleList['Magikarp Jump Karami'] = new TemporaryBattle(
     'Magikarp Jump Karami',
     [new GymPokemon('Magikarp Calico (Orange, White)', 1, 20)],
-    'TODO',
+    'Well, it\'s oh-fish-ial! You win!',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 34)],
     undefined,
     {
@@ -2730,7 +2730,7 @@ TemporaryBattleList['Magikarp Jump Karami'] = new TemporaryBattle(
 TemporaryBattleList['Magikarp Jump Karson'] = new TemporaryBattle(
     'Magikarp Jump Karson',
     [new GymPokemon('Magikarp Skelly', 1, 20)],
-    'TODO',
+    'Hey, would you mind letting minnow when you want to rematch?',
     [new TemporaryBattleRequirement('Magikarp Jump Karami')],
     undefined,
     {
@@ -2741,7 +2741,7 @@ TemporaryBattleList['Magikarp Jump Karson'] = new TemporaryBattle(
 TemporaryBattleList['Magikarp Jump Karpress 2'] = new TemporaryBattle(
     'Magikarp Jump Karpress 2',
     [new GymPokemon('Magikarp Calico (Orange, White)', 1, 20)],
-    'TODO',
+    'I\'m fin-ished...',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 35)],
     undefined,
     {
@@ -2752,7 +2752,7 @@ TemporaryBattleList['Magikarp Jump Karpress 2'] = new TemporaryBattle(
 TemporaryBattleList['Magikarp Jump Karpen 2'] = new TemporaryBattle(
     'Magikarp Jump Karpen 2',
     [new GymPokemon('Magikarp Calico (White, Orange)', 1, 20)],
-    'TODO',
+    'Magikarp is so classy, it\'s so-fish-ticated',
     [new TemporaryBattleRequirement('Magikarp Jump Karpress 2')],
     undefined,
     {
@@ -2763,7 +2763,7 @@ TemporaryBattleList['Magikarp Jump Karpen 2'] = new TemporaryBattle(
 TemporaryBattleList['Magikarp Jump Karbuck'] = new TemporaryBattle(
     'Magikarp Jump Karbuck',
     [new GymPokemon('Magikarp Calico (Orange, Gold)', 1, 20)],
-    'TODO',
+    'That battle scared the karp out of me!',
     [new TemporaryBattleRequirement('Magikarp Jump Karpen 2')],
     undefined,
     {
@@ -2782,7 +2782,7 @@ TemporaryBattleList['Magikarp Jump Karbuck'] = new TemporaryBattle(
 TemporaryBattleList['Magikarp Jump Skyhopper'] = new TemporaryBattle(
     'Magikarp Jump Skyhopper',
     [new GymPokemon('Magikarp Calico (Orange, White)', 1, 20)],
-    'TODO',
+    'I will jump away from this battle!',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 35)],
     undefined,
     {
@@ -2793,7 +2793,7 @@ TemporaryBattleList['Magikarp Jump Skyhopper'] = new TemporaryBattle(
 TemporaryBattleList['Magikarp Jump Karpen 3'] = new TemporaryBattle(
     'Magikarp Jump Karpen 3',
     [new GymPokemon('Magikarp Skelly', 1, 20)],
-    'TODO',
+    'Are you trying to fly to the stratosphere?',
     [new TemporaryBattleRequirement('Magikarp Jump Skyhopper')],
     undefined,
     {
@@ -2804,7 +2804,7 @@ TemporaryBattleList['Magikarp Jump Karpen 3'] = new TemporaryBattle(
 TemporaryBattleList['Magikarp Jump Karpella 2'] = new TemporaryBattle(
     'Magikarp Jump Karpella 2',
     [new GymPokemon('Magikarp Calico (Orange, White, Black)', 1, 20)],
-    'TODO',
+    'I hate fish puns...',
     [new TemporaryBattleRequirement('Magikarp Jump Karpen 3')],
     undefined,
     {
@@ -2815,7 +2815,7 @@ TemporaryBattleList['Magikarp Jump Karpella 2'] = new TemporaryBattle(
 TemporaryBattleList['Magikarp Jump Karbuck 2'] = new TemporaryBattle(
     'Magikarp Jump Karbuck 2',
     [new GymPokemon('Magikarp Calico (Orange, White)', 1, 20)],
-    'TODO',
+    'I wish a Pidgeotto would steal me away about now...',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 35)],
     undefined,
     {
@@ -2826,7 +2826,7 @@ TemporaryBattleList['Magikarp Jump Karbuck 2'] = new TemporaryBattle(
 TemporaryBattleList['Magikarp Jump Kareign'] = new TemporaryBattle(
     'Magikarp Jump Kareign',
     [new GymPokemon('Magikarp Calico (White, Orange)', 1, 20)],
-    'TODO',
+    'Wow, you\'ve been drinking your Training Sodas!',
     [new TemporaryBattleRequirement('Magikarp Jump Karbuck 2')],
     undefined,
     {
@@ -2837,7 +2837,7 @@ TemporaryBattleList['Magikarp Jump Kareign'] = new TemporaryBattle(
 TemporaryBattleList['Magikarp Jump Koylee 2'] = new TemporaryBattle(
     'Magikarp Jump Koylee 2',
     [new GymPokemon('Magikarp Calico (Orange, White, Black)', 1, 20)],
-    'TODO',
+    'I need to find more sunken treasures...',
     [new TemporaryBattleRequirement('Magikarp Jump Kareign')],
     undefined,
     {
@@ -2848,7 +2848,7 @@ TemporaryBattleList['Magikarp Jump Koylee 2'] = new TemporaryBattle(
 TemporaryBattleList['Magikarp Jump Karpress 3'] = new TemporaryBattle(
     'Magikarp Jump Karpress 3',
     [new GymPokemon('Magikarp Grey Diamonds', 1, 20)],
-    'TODO',
+    'You cheater! I have seen Rowlet giving you money!!!',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 35)],
     undefined,
     {
@@ -2867,7 +2867,7 @@ TemporaryBattleList['Magikarp Jump Karpress 3'] = new TemporaryBattle(
 TemporaryBattleList['Magikarp Jump Karpen 4'] = new TemporaryBattle(
     'Magikarp Jump Karpen 4',
     [new GymPokemon('Magikarp Brown Tiger', 1, 20)],
-    'TODO',
+    'My Magikarp might not jump high but it\'s fast enough to win the Naskarp Cup',
     [new TemporaryBattleRequirement('Magikarp Jump Karpress 3')],
     undefined,
     {
@@ -2878,7 +2878,7 @@ TemporaryBattleList['Magikarp Jump Karpen 4'] = new TemporaryBattle(
 TemporaryBattleList['Magikarp Jump Karpella 3'] = new TemporaryBattle(
     'Magikarp Jump Karpella 3',
     [new GymPokemon('Magikarp Purple Patches', 1, 20)],
-    'TODO',
+    'I will beat you next time! Any fin is possible is you believe it!',
     [new TemporaryBattleRequirement('Magikarp Jump Karpen 4')],
     undefined,
     {
@@ -2897,7 +2897,7 @@ TemporaryBattleList['Magikarp Jump Karpella 3'] = new TemporaryBattle(
 TemporaryBattleList['Magikarp Jump Skyhopper 2'] = new TemporaryBattle(
     'Magikarp Jump Skyhopper 2',
     [new GymPokemon('Magikarp Calico (Orange, Gold)', 1, 20)],
-    'TODO',
+    'Who wants to place a bait on a rematch?',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 35)],
     undefined,
     {
@@ -2908,7 +2908,7 @@ TemporaryBattleList['Magikarp Jump Skyhopper 2'] = new TemporaryBattle(
 TemporaryBattleList['Magikarp Jump Tykarp 2'] = new TemporaryBattle(
     'Magikarp Jump Tykarp 2',
     [new GymPokemon('Magikarp Black Mask', 1, 20)],
-    'TODO',
+    'The way my magikarp performed is a-trout-cious!',
     [new TemporaryBattleRequirement('Magikarp Jump Skyhopper 2')],
     undefined,
     {
