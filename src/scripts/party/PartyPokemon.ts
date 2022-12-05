@@ -271,7 +271,7 @@ class PartyPokemon implements Saveable {
         const div = 300;
         const extraCycles = (this.vitaminsUsed[GameConstants.VitaminType.Calcium]() + this.vitaminsUsed[GameConstants.VitaminType.Protein]()) / 2;
         const steps = App.game.breeding.getSteps(this.eggCycles + extraCycles);
-        return Math.floor(((steps / div) ** (1 - this.vitaminsUsed[GameConstants.VitaminType.Carbos]() / 70)) * div);
+        return steps <= div ? steps : Math.round(((steps / div) ** (1 - this.vitaminsUsed[GameConstants.VitaminType.Carbos]() / 70)) * div);
     });
 
     getBreedingAttackBonus = ko.pureComputed((): number => {
@@ -284,7 +284,11 @@ class PartyPokemon implements Saveable {
         if (this._breeding()) {
             return true;
         }
-        if (!new RegExp(Settings.getSetting('vitaminSearchFilter').observableValue() , 'i').test(this.name)) {
+        // Check if search matches nickname or translated name
+        if (
+            !new RegExp(Settings.getSetting('vitaminSearchFilter').observableValue() , 'i').test(this._translatedName())
+            && !new RegExp(Settings.getSetting('vitaminSearchFilter').observableValue() , 'i').test(this.displayName)
+        ) {
             return true;
         }
         if (Settings.getSetting('vitaminRegionFilter').observableValue() > -2) {

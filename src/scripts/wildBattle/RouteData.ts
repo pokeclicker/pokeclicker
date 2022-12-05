@@ -2077,7 +2077,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Heavy League Bridge', GameConstants.Region.alola, 33,
     new RoutePokemon({
-        water: ['Magikarp'],
+        water: ['Magikarp', 'Magikarp Orange Orca'],
     }),
     [new NullRequirement()],
     undefined,
@@ -2087,7 +2087,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Great League Bridge', GameConstants.Region.alola, 34,
     new RoutePokemon({
-        water: ['Magikarp'],
+        water: ['Magikarp', 'Magikarp Orange Dapples'],
     }),
     [new NullRequirement()],
     undefined,
@@ -2107,7 +2107,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Luxury League Bridge', GameConstants.Region.alola, 36,
     new RoutePokemon({
-        water: ['Magikarp'],
+        water: ['Magikarp', 'Magikarp Pink Two Tone'],
     }),
     [new NullRequirement()],
     undefined,
@@ -2117,7 +2117,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Heal League Bridge', GameConstants.Region.alola, 37,
     new RoutePokemon({
-        water: ['Magikarp'],
+        water: ['Magikarp', 'Magikarp Grey Bubbles', 'Magikarp Grey Patches'],
     }),
     [new NullRequirement()],
     undefined,
@@ -2127,7 +2127,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Ultra League Bridge', GameConstants.Region.alola, 38,
     new RoutePokemon({
-        water: ['Magikarp'],
+        water: ['Magikarp', 'Magikarp Apricot Tiger', 'Magikarp Apricot Zebra', 'Magikarp Brown Zebra'],
     }),
     [new NullRequirement()],
     undefined,
@@ -2137,7 +2137,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Elite Four League Pier', GameConstants.Region.alola, 39,
     new RoutePokemon({
-        water: ['Magikarp'],
+        water: ['Magikarp', 'Magikarp Black Forehead'],
     }),
     [new NullRequirement()],
     undefined,
@@ -2147,7 +2147,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Master League Pier', GameConstants.Region.alola, 40,
     new RoutePokemon({
-        water: ['Magikarp'],
+        water: ['Magikarp', 'Magikarp Orange Mask'],
     }),
     [new NullRequirement()],
     undefined,
