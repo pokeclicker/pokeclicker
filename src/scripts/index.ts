@@ -20,6 +20,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     // Load list of saves
     SaveSelector.loadSaves();
+
+    // Save resources by not displaying updates if game is not currently visible
+    try {
+        document.addEventListener('visibilitychange', () => {
+            document.hidden ? document.body.classList.add('hidden') : document.body.classList.remove('hidden');
+        });
+    } catch (e) {}
 });
 
 // Nested modals can be opened while they are in the middle of hiding.
