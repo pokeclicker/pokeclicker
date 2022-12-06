@@ -45,6 +45,32 @@ class EvolutionStone extends CaughtIndicatingItem {
         }, CaughtStatus.CaughtShiny);
     });
 
+    getPokerusStatus = ko.pureComputed((): GameConstants.Pokerus => {
+        // Only include Pokémon which have evolutions
+        const unlockedEvolutions = pokemonList.filter((p: PokemonListData) => p.evolutions)
+            // only include base Pokémon we have caught
+            .filter(p => PartyController.getCaughtStatusByName(p.name))
+            // Map to the evolution which uses this stone type
+            .map((p: PokemonListData) => p.evolutions.filter(e => e.trigger === EvoTrigger.STONE && (e as StoneEvoData).stone === this.type))
+            // Flatten the array (in case of multiple evolutions)
+            .flat()
+            // Ensure the we actually found an evolution
+            .filter(evolution => evolution)
+            // Filter out any Pokémon which can't be obtained yet (future region)
+            .filter(evolution => PokemonHelper.calcNativeRegion(evolution.evolvedPokemon) <= player.highestRegion())
+            // Finally get the evolution
+            .map(evolution => evolution.evolvedPokemon);
+
+        if (unlockedEvolutions.length == 0) {
+            return undefined;
+        }
+
+        // Calculate the lowest caught status
+        return unlockedEvolutions.reduce((status: GameConstants.Pokerus, pokemonName: PokemonNameType) => {
+            return Math.min(status, PartyController.getPokerusStatusByName(pokemonName));
+        }, GameConstants.Pokerus.Resistant);
+    });
+
     init() {
         // If a region has already been manually set
         if (this.unlockedRegion > GameConstants.Region.none) {

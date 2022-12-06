@@ -1141,6 +1141,10 @@ class ShardDeal {
                     ],
                     ItemList.Whipped_dream,
                     1),
+                new ShardDeal(
+                    [{shardTypeString: 'Pink Shard', amount: 1000}],
+                    ItemList.Alakazite,
+                    1),
             ]
         );
         ShardDeal.list[GameConstants.ShardTraderLocations['Dendemille Town']] = ko.observableArray(

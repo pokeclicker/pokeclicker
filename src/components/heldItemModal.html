@@ -23,7 +23,7 @@
                       <div class="input-group-append bg-primary text-light">
                           <label for="heldItemSortDirection" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;" data-bind="
                             text: Settings.getSetting('heldItemSortDirection').observableValue() ? '⥄' : '⥂',
-                            tooltip: { title: Settings.getSetting('heldItemSortDirection').observableValue() ? 'Descending (highest value first)' : 'Ascending (lowest value first)', trigger: 'hover', placement: 'bottom', html: true }
+                            tooltip: { title: Settings.getSetting('heldItemSortDirection').observableValue() ? 'Descending (highest value first)' : 'Ascending (lowest value first)', trigger: 'hover', placement: 'bottom' }
                           ">⥂</label>
                           <input id="heldItemSortDirection" style="vertical-align: middle" class="hidden" type='checkbox'
                               data-bind="checked: Settings.getSetting('heldItemSortDirection').observableValue()"

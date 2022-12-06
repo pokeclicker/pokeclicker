@@ -40,6 +40,15 @@ export const SpriteCredits: Credit[] = [
         // Notes: Gives credit on image page if asked.
     },
     {
+        name: 'B1ackZer0',
+        link: 'https://discordapp.com/users/346730382009565196',
+        image: 'assets/images/profile/trainer-111.png',
+        resources: [
+            'Shiny Alcremie',
+        ],
+        // Notes: Made specifically for PokéClicker.
+    },
+    {
         name: 'Beliot419',
         link: 'https://www.deviantart.com/beliot419',
         image: 'https://a.deviantart.net/avatars-big/b/e/beliot419.png',
@@ -194,6 +203,7 @@ export const SpriteCredits: Credit[] = [
             'Ash\'s Butterfree',
             'Black mane hair big icon',
             'Blimp base',
+            'Charitative chansey shuffle',
             'Client Island town image',
             'Cracked pot big icon',
             'Danny',
@@ -247,6 +257,7 @@ export const SpriteCredits: Credit[] = [
             'Pinkan Scyther Shuffle',
             'Pinkan Weedle',
             'Pinkan Weezing',
+            'Roddy Tackle',
             'Rudy',
             'Rusted Shield and Sword icons',
             'Spooky Togepi (shiny)',
@@ -821,7 +832,7 @@ fetch(`https://api.github.com/repos/pokeclicker/pokeclicker/contributors?per_pag
 export const CodeCredits: Credit[] = [
     {
         resources: [
-            1373,
+            1377,
         ],
         name: 'RedSparr0w',
         link: 'https://github.com/RedSparr0w',
@@ -837,7 +848,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            438,
+            439,
         ],
         name: 'Aegyo',
         link: 'https://github.com/Aegyo',
@@ -861,7 +872,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            141,
+            143,
         ],
         name: 'Jaaslet',
         link: 'https://github.com/Jaaslet',
@@ -869,7 +880,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            80,
+            81,
         ],
         name: 'CorgiOnNeptune',
         link: 'https://github.com/CorgiOnNeptune',
@@ -885,7 +896,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            70,
+            71,
         ],
         name: 'jk13pclick',
         link: 'https://github.com/jk13pclick',
@@ -1029,7 +1040,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            13,
+            14,
         ],
         name: 'CypherX',
         link: 'https://github.com/CypherX',
@@ -1047,6 +1058,14 @@ export const CodeCredits: Credit[] = [
         resources: [
             10,
         ],
+        name: 'Symi001',
+        link: 'https://github.com/Symi001',
+        image: 'https://avatars.githubusercontent.com/u/86664830?v=4',
+    },
+    {
+        resources: [
+            10,
+        ],
         name: 'nls0',
         link: 'https://github.com/nls0',
         image: 'https://avatars.githubusercontent.com/u/41541662?v=4',
@@ -1058,14 +1077,6 @@ export const CodeCredits: Credit[] = [
         name: 'KrushGames',
         link: 'https://github.com/KrushGames',
         image: 'https://avatars.githubusercontent.com/u/71728117?v=4',
-    },
-    {
-        resources: [
-            9,
-        ],
-        name: 'Symi001',
-        link: 'https://github.com/Symi001',
-        image: 'https://avatars.githubusercontent.com/u/86664830?v=4',
     },
     {
         resources: [
@@ -1125,6 +1136,22 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
+            6,
+        ],
+        name: 'imgbot[bot]',
+        link: 'https://github.com/apps/imgbot',
+        image: 'https://avatars.githubusercontent.com/in/4706?v=4',
+    },
+    {
+        resources: [
+            6,
+        ],
+        name: 'xslk',
+        link: 'https://github.com/xslk',
+        image: 'https://avatars.githubusercontent.com/u/100386196?v=4',
+    },
+    {
+        resources: [
             5,
         ],
         name: 'DaveYognaught',
@@ -1151,25 +1178,9 @@ export const CodeCredits: Credit[] = [
         resources: [
             5,
         ],
-        name: 'imgbot[bot]',
-        link: 'https://github.com/apps/imgbot',
-        image: 'https://avatars.githubusercontent.com/in/4706?v=4',
-    },
-    {
-        resources: [
-            5,
-        ],
         name: 'osherwott',
         link: 'https://github.com/osherwott',
         image: 'https://avatars.githubusercontent.com/u/114451054?v=4',
-    },
-    {
-        resources: [
-            5,
-        ],
-        name: 'xslk',
-        link: 'https://github.com/xslk',
-        image: 'https://avatars.githubusercontent.com/u/100386196?v=4',
     },
     {
         resources: [

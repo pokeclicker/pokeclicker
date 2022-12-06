@@ -65,6 +65,12 @@ class Game {
                 console.error('Unable to load sava data from JSON for:', key, '\nError:\n', error);
             }
         });
+        saveObject.achievements?.forEach(achName => {
+            const ach = AchievementHandler.findByName(achName);
+            if (ach) {
+                ach.unlocked(true);
+            }
+        });
     }
 
     initialize() {
@@ -221,6 +227,7 @@ class Game {
                 App.game.quests.getQuestLine('The Great Vivillon Hunt!').beginQuest(App.game.quests.getQuestLine('The Great Vivillon Hunt!').curQuest());
             }
         }
+
         // Check if Koga has been defeated, but have no safari ticket yet
         if (App.game.badgeCase.badgeList[BadgeEnums.Soul]() && !App.game.keyItems.itemList[KeyItemType.Safari_ticket].isUnlocked()) {
             App.game.keyItems.gainKeyItem(KeyItemType.Safari_ticket, true);
@@ -230,7 +237,7 @@ class Game {
             App.game.keyItems.gainKeyItem(KeyItemType.Gem_case, true);
         }
         // Check that none of our quest are less than their initial value
-        App.game.quests.questLines().filter(q => q.state() == 1).forEach(questLine => {
+        App.game.quests.questLines().filter(q => q.state() == 1 && q.curQuest() < q.quests().length).forEach(questLine => {
             const quest = questLine.curQuestObject();
             if (quest instanceof MultipleQuestsQuest) {
                 quest.quests.forEach((q) => {
@@ -256,6 +263,11 @@ class Game {
         App.game.breeding.eggList.filter(e => e().pokemon).forEach(e => {
             e().setPartyPokemon();
         });
+
+        // Kick player out of Client Island if they are not on the client
+        if (!App.isUsingClient && player._townName === 'Client Island') {
+            MapHelper.moveToTown('One Island');
+        }
     }
 
     start() {
