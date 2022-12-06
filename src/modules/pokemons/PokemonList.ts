@@ -14116,7 +14116,7 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 375.01,
+        'id': 475.01,
         'name': 'Mega Gallade',
         'type': [PokemonType.Psychic, PokemonType.Fighting],
         'eggCycles': 20,

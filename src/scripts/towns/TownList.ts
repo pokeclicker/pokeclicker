@@ -44,8 +44,10 @@ const pokeLeagueShop = () => new Shop([
     new PokeballItem(GameConstants.Pokeball.Masterball, 3000    , GameConstants.Currency.questPoint  , { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.questPoint]}` }, 'Master Ball'),
     new PokeballItem(GameConstants.Pokeball.Masterball, 3000    , GameConstants.Currency.farmPoint   , { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.farmPoint]}` }, 'Master Ball'),
     new PokeballItem(GameConstants.Pokeball.Masterball, 50      , GameConstants.Currency.diamond     , { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.diamond]}` }, 'Master Ball'),
-    //ItemList['RareCandy'],
     ItemList.Protein,
+    // TODO VITAMINS: Move these to different shops?
+    ItemList.Calcium,
+    ItemList.Carbos,
 ]);
 
 //Kanto Shops
@@ -4555,6 +4557,10 @@ const BattleTreeBlue = new NPC('Blue', [
     'We just planted this sapling here. Maybe it will grow into something great some day.',
 ], {image: 'assets/images/npcs/Blue-masters.png'});
 
+const MagikarpJumpRoamerNPC = new RoamerNPC('Roddy Tackle', [
+    'TODO: something about rare patterns at {ROUTE_NAME}!',
+], GameConstants.Region.alola, RoamingPokemonList.findGroup(GameConstants.Region.alola, GameConstants.AlolaSubRegions.MagikarpJump), 'assets/images/npcs/Roddy Tackle.png');
+
 //Alola Towns
 
 TownList['Iki Town Outskirts'] = new Town(
@@ -4747,7 +4753,7 @@ TownList['Hoppy Town'] = new Town(
     [new DockTownContent()],
     {
         requirements: [],
-        npcs: [],
+        npcs: [MagikarpJumpRoamerNPC],
     }
 );
 TownList['Friend League'] = new Town(
@@ -4763,7 +4769,7 @@ TownList['Quick League'] = new Town(
     'Quick League',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MagikarpJump,
-    [],
+    [TemporaryBattleList['Magikarp Jump Koylee']],
     {
         requirements: [],
     }
@@ -4772,7 +4778,7 @@ TownList['Heavy League'] = new Town(
     'Heavy League',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MagikarpJump,
-    [],
+    [TemporaryBattleList['Magikarp Jump Karpella'], TemporaryBattleList['Magikarp Jump Karpen']],
     {
         requirements: [],
     }
@@ -4781,7 +4787,7 @@ TownList['Great League'] = new Town(
     'Great League',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MagikarpJump,
-    [],
+    [TemporaryBattleList['Magikarp Jump Tykarp'], TemporaryBattleList['Magikarp Jump Karpress']],
     {
         requirements: [],
     }
@@ -4790,7 +4796,7 @@ TownList['Fast League'] = new Town(
     'Fast League',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MagikarpJump,
-    [],
+    [TemporaryBattleList['Magikarp Jump Karami'], TemporaryBattleList['Magikarp Jump Karson']],
     {
         requirements: [],
     }
@@ -4799,7 +4805,7 @@ TownList['Luxury League'] = new Town(
     'Luxury League',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MagikarpJump,
-    [],
+    [TemporaryBattleList['Magikarp Jump Karpress 2'],TemporaryBattleList['Magikarp Jump Karpen 2'],TemporaryBattleList['Magikarp Jump Karbuck']],
     {
         requirements: [],
     }
@@ -4808,7 +4814,7 @@ TownList['Heal League'] = new Town(
     'Heal League',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MagikarpJump,
-    [],
+    [TemporaryBattleList['Magikarp Jump Skyhopper'],TemporaryBattleList['Magikarp Jump Karpen 3'],TemporaryBattleList['Magikarp Jump Karpella 2']],
     {
         requirements: [],
     }
@@ -4817,7 +4823,7 @@ TownList['Ultra League'] = new Town(
     'Ultra League',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MagikarpJump,
-    [],
+    [TemporaryBattleList['Magikarp Jump Karbuck 2'],TemporaryBattleList['Magikarp Jump Kareign'],TemporaryBattleList['Magikarp Jump Koylee 2']],
     {
         requirements: [],
     }
@@ -4826,7 +4832,7 @@ TownList['Elite Four League'] = new Town(
     'Elite Four League',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MagikarpJump,
-    [],
+    [GymList['E4 League'], TemporaryBattleList['Magikarp Jump Karpress 3'],TemporaryBattleList['Magikarp Jump Karpen 4'],TemporaryBattleList['Magikarp Jump Karpella 3']],
     {
         requirements: [],
     }
@@ -4835,7 +4841,7 @@ TownList['Master League'] = new Town(
     'Master League',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MagikarpJump,
-    [],
+    [TemporaryBattleList['Magikarp Jump Skyhopper 2'],TemporaryBattleList['Magikarp Jump Tykarp 2']],
     {
         requirements: [],
     }
