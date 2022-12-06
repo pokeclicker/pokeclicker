@@ -2058,3 +2058,56 @@ GymList['Elite Trainer Peony'] = new Gym(
         ]),
     ]
 );
+
+// Hisui Gyms
+
+GymList['Grandtree Arena'] = new Gym(
+    'Lord of the Woods: Kleavor',
+    'Grandtree Arena',
+    [new GymPokemon('Noble Kleavor', 76658268, 70)],
+    BadgeEnums.NobleKleavor,
+    128000,
+    'You defeated Lord Kleavor once again!',
+    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    undefined, undefined, 'Lord Kleavor'
+);
+GymList['Brava Arena'] = new Gym(
+    'Lady of the Ridge: Lilligant',
+    'Brava Arena',
+    [new GymPokemon('Noble Lilligant', 76658268, 70)],
+    BadgeEnums.NobleLilligant,
+    128000,
+    'You defeated Lady Lilligant once again!',
+    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    undefined, undefined, 'Lady Lilligant'
+);
+GymList['Molten Arena'] = new Gym(
+    'Lord of the Isles: Arcanine',
+    'Molten Arena',
+    [new GymPokemon('Noble Arcanine', 76658268, 70)],
+    BadgeEnums.NobleArcanine,
+    128000,
+    'You defeated Lord Arcanine once again!',
+    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    undefined, undefined, 'Lord Arcanine'
+);
+GymList['Moonview Arena'] = new Gym(
+    'Lord of the Hollow: Electrode',
+    'Moonview Arena',
+    [new GymPokemon('Noble Electrode', 76658268, 70)],
+    BadgeEnums.NobleElectrode,
+    128000,
+    'You defeated Lord Electrode once again!',
+    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    undefined, undefined, 'Lord Electrode'
+);
+GymList['Icepeak Arena'] = new Gym(
+    'Lord of the Tundra: Avalugg',
+    'Icepeak Arena',
+    [new GymPokemon('Noble Avalugg', 76658268, 70)],
+    BadgeEnums.NobleAvalugg,
+    128000,
+    'You defeated Lord Avalugg once again!',
+    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    undefined, undefined, 'Lord Avalugg'
+);

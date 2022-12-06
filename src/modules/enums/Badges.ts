@@ -142,6 +142,12 @@ enum BadgeEnums {
     'Elite_ArmorChampion',
     // Crown
     'Elite_CrownChampion',
+    // Hisui
+    'NobleKleavor',
+    'NobleLilligant',
+    'NobleArcanine',
+    'NobleElectrode',
+    'NobleAvalugg',
 }
 
 export default BadgeEnums;
