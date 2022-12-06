@@ -2639,7 +2639,7 @@ TemporaryBattleList['Team Rainbow Leader Giovanni'] = new TemporaryBattle(
 
 TemporaryBattleList['Magikarp Jump Koylee'] = new TemporaryBattle(
     'Magikarp Jump Koylee',
-    [new GymPokemon('Magikarp Calico (Orange, White)', 1, 20)],
+    [new GymPokemon('Magikarp Calico (Orange, White)', 810000, 20)],
     'TODO',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 32)],
     undefined,
@@ -2658,7 +2658,7 @@ TemporaryBattleList['Magikarp Jump Koylee'] = new TemporaryBattle(
 
 TemporaryBattleList['Magikarp Jump Karpella'] = new TemporaryBattle(
     'Magikarp Jump Karpella',
-    [new GymPokemon('Magikarp Calico (Orange, White, Black)', 1, 20)],
+    [new GymPokemon('Magikarp Calico (Orange, White, Black)', 1620000, 20)],
     'TODO',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 33)],
     undefined,
@@ -2677,7 +2677,7 @@ TemporaryBattleList['Magikarp Jump Karpella'] = new TemporaryBattle(
 
 TemporaryBattleList['Magikarp Jump Karpen'] = new TemporaryBattle(
     'Magikarp Jump Karpen',
-    [new GymPokemon('Magikarp Calico (White, Orange)', 1, 20)],
+    [new GymPokemon('Magikarp Calico (White, Orange)', 1710000, 20)],
     'TODO',
     [new TemporaryBattleRequirement('Magikarp Jump Karpella')],
     undefined,
@@ -2696,7 +2696,7 @@ TemporaryBattleList['Magikarp Jump Karpen'] = new TemporaryBattle(
 
 TemporaryBattleList['Magikarp Jump Tykarp'] = new TemporaryBattle(
     'Magikarp Jump Tykarp',
-    [new GymPokemon('Magikarp Calico (Orange, White)', 1, 20)],
+    [new GymPokemon('Magikarp Calico (Orange, White)', 2835000, 20)],
     'TODO',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 33)],
     undefined,
@@ -2707,7 +2707,7 @@ TemporaryBattleList['Magikarp Jump Tykarp'] = new TemporaryBattle(
 
 TemporaryBattleList['Magikarp Jump Karpress'] = new TemporaryBattle(
     'Magikarp Jump Karpress',
-    [new GymPokemon('Magikarp Calico (Orange, White, Black)', 1, 20)],
+    [new GymPokemon('Magikarp Calico (Orange, White, Black)', 2992500, 20)],
     'TODO',
     [new TemporaryBattleRequirement('Magikarp Jump Tykarp')],
     undefined,
@@ -2718,7 +2718,7 @@ TemporaryBattleList['Magikarp Jump Karpress'] = new TemporaryBattle(
 
 TemporaryBattleList['Magikarp Jump Karami'] = new TemporaryBattle(
     'Magikarp Jump Karami',
-    [new GymPokemon('Magikarp Calico (Orange, White)', 1, 20)],
+    [new GymPokemon('Magikarp Calico (Orange, White)', 4050000, 20)],
     'TODO',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 34)],
     undefined,
@@ -2729,7 +2729,7 @@ TemporaryBattleList['Magikarp Jump Karami'] = new TemporaryBattle(
 
 TemporaryBattleList['Magikarp Jump Karson'] = new TemporaryBattle(
     'Magikarp Jump Karson',
-    [new GymPokemon('Magikarp Skelly', 1, 20)],
+    [new GymPokemon('Magikarp Skelly', 4275000, 20)],
     'TODO',
     [new TemporaryBattleRequirement('Magikarp Jump Karami')],
     undefined,
@@ -2740,7 +2740,7 @@ TemporaryBattleList['Magikarp Jump Karson'] = new TemporaryBattle(
 
 TemporaryBattleList['Magikarp Jump Karpress 2'] = new TemporaryBattle(
     'Magikarp Jump Karpress 2',
-    [new GymPokemon('Magikarp Calico (Orange, White)', 1, 20)],
+    [new GymPokemon('Magikarp Calico (Orange, White)', 6075000, 20)],
     'TODO',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 35)],
     undefined,
@@ -2751,7 +2751,7 @@ TemporaryBattleList['Magikarp Jump Karpress 2'] = new TemporaryBattle(
 
 TemporaryBattleList['Magikarp Jump Karpen 2'] = new TemporaryBattle(
     'Magikarp Jump Karpen 2',
-    [new GymPokemon('Magikarp Calico (White, Orange)', 1, 20)],
+    [new GymPokemon('Magikarp Calico (White, Orange)', 6412500, 20)],
     'TODO',
     [new TemporaryBattleRequirement('Magikarp Jump Karpress 2')],
     undefined,
@@ -2762,7 +2762,7 @@ TemporaryBattleList['Magikarp Jump Karpen 2'] = new TemporaryBattle(
 
 TemporaryBattleList['Magikarp Jump Karbuck'] = new TemporaryBattle(
     'Magikarp Jump Karbuck',
-    [new GymPokemon('Magikarp Calico (Orange, Gold)', 1, 20)],
+    [new GymPokemon('Magikarp Calico (Orange, Gold)', 6547500, 20)],
     'TODO',
     [new TemporaryBattleRequirement('Magikarp Jump Karpen 2')],
     undefined,
@@ -2781,7 +2781,7 @@ TemporaryBattleList['Magikarp Jump Karbuck'] = new TemporaryBattle(
 
 TemporaryBattleList['Magikarp Jump Skyhopper'] = new TemporaryBattle(
     'Magikarp Jump Skyhopper',
-    [new GymPokemon('Magikarp Calico (Orange, White)', 1, 20)],
+    [new GymPokemon('Magikarp Calico (Orange, White)', 8100000, 20)],
     'TODO',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 35)],
     undefined,
@@ -2792,7 +2792,7 @@ TemporaryBattleList['Magikarp Jump Skyhopper'] = new TemporaryBattle(
 
 TemporaryBattleList['Magikarp Jump Karpen 3'] = new TemporaryBattle(
     'Magikarp Jump Karpen 3',
-    [new GymPokemon('Magikarp Skelly', 1, 20)],
+    [new GymPokemon('Magikarp Skelly', 8550000, 20)],
     'TODO',
     [new TemporaryBattleRequirement('Magikarp Jump Skyhopper')],
     undefined,
@@ -2803,7 +2803,7 @@ TemporaryBattleList['Magikarp Jump Karpen 3'] = new TemporaryBattle(
 
 TemporaryBattleList['Magikarp Jump Karpella 2'] = new TemporaryBattle(
     'Magikarp Jump Karpella 2',
-    [new GymPokemon('Magikarp Calico (Orange, White, Black)', 1, 20)],
+    [new GymPokemon('Magikarp Calico (Orange, White, Black)', 8730000, 20)],
     'TODO',
     [new TemporaryBattleRequirement('Magikarp Jump Karpen 3')],
     undefined,
@@ -2814,7 +2814,7 @@ TemporaryBattleList['Magikarp Jump Karpella 2'] = new TemporaryBattle(
 
 TemporaryBattleList['Magikarp Jump Karbuck 2'] = new TemporaryBattle(
     'Magikarp Jump Karbuck 2',
-    [new GymPokemon('Magikarp Calico (Orange, White)', 1, 20)],
+    [new GymPokemon('Magikarp Calico (Orange, White)', 10125000, 20)],
     'TODO',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 35)],
     undefined,
@@ -2825,7 +2825,7 @@ TemporaryBattleList['Magikarp Jump Karbuck 2'] = new TemporaryBattle(
 
 TemporaryBattleList['Magikarp Jump Kareign'] = new TemporaryBattle(
     'Magikarp Jump Kareign',
-    [new GymPokemon('Magikarp Calico (White, Orange)', 1, 20)],
+    [new GymPokemon('Magikarp Calico (White, Orange)', 10687500, 20)],
     'TODO',
     [new TemporaryBattleRequirement('Magikarp Jump Karbuck 2')],
     undefined,
@@ -2836,7 +2836,7 @@ TemporaryBattleList['Magikarp Jump Kareign'] = new TemporaryBattle(
 
 TemporaryBattleList['Magikarp Jump Koylee 2'] = new TemporaryBattle(
     'Magikarp Jump Koylee 2',
-    [new GymPokemon('Magikarp Calico (Orange, White, Black)', 1, 20)],
+    [new GymPokemon('Magikarp Calico (Orange, White, Black)', 10912500, 20)],
     'TODO',
     [new TemporaryBattleRequirement('Magikarp Jump Kareign')],
     undefined,
@@ -2847,7 +2847,7 @@ TemporaryBattleList['Magikarp Jump Koylee 2'] = new TemporaryBattle(
 
 TemporaryBattleList['Magikarp Jump Karpress 3'] = new TemporaryBattle(
     'Magikarp Jump Karpress 3',
-    [new GymPokemon('Magikarp Grey Diamonds', 1, 20)],
+    [new GymPokemon('Magikarp Grey Diamonds', 12150000, 20)],
     'TODO',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 35)],
     undefined,
@@ -2866,7 +2866,7 @@ TemporaryBattleList['Magikarp Jump Karpress 3'] = new TemporaryBattle(
 
 TemporaryBattleList['Magikarp Jump Karpen 4'] = new TemporaryBattle(
     'Magikarp Jump Karpen 4',
-    [new GymPokemon('Magikarp Brown Tiger', 1, 20)],
+    [new GymPokemon('Magikarp Brown Tiger', 12825000, 20)],
     'TODO',
     [new TemporaryBattleRequirement('Magikarp Jump Karpress 3')],
     undefined,
@@ -2877,7 +2877,7 @@ TemporaryBattleList['Magikarp Jump Karpen 4'] = new TemporaryBattle(
 
 TemporaryBattleList['Magikarp Jump Karpella 3'] = new TemporaryBattle(
     'Magikarp Jump Karpella 3',
-    [new GymPokemon('Magikarp Purple Patches', 1, 20)],
+    [new GymPokemon('Magikarp Purple Patches', 13095000, 20)],
     'TODO',
     [new TemporaryBattleRequirement('Magikarp Jump Karpen 4')],
     undefined,
@@ -2896,7 +2896,7 @@ TemporaryBattleList['Magikarp Jump Karpella 3'] = new TemporaryBattle(
 
 TemporaryBattleList['Magikarp Jump Skyhopper 2'] = new TemporaryBattle(
     'Magikarp Jump Skyhopper 2',
-    [new GymPokemon('Magikarp Calico (Orange, Gold)', 1, 20)],
+    [new GymPokemon('Magikarp Calico (Orange, Gold)', 16200000, 20)],
     'TODO',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 35)],
     undefined,
@@ -2907,7 +2907,7 @@ TemporaryBattleList['Magikarp Jump Skyhopper 2'] = new TemporaryBattle(
 
 TemporaryBattleList['Magikarp Jump Tykarp 2'] = new TemporaryBattle(
     'Magikarp Jump Tykarp 2',
-    [new GymPokemon('Magikarp Black Mask', 1, 20)],
+    [new GymPokemon('Magikarp Black Mask', 17100000, 20)],
     'TODO',
     [new TemporaryBattleRequirement('Magikarp Jump Skyhopper 2')],
     undefined,
