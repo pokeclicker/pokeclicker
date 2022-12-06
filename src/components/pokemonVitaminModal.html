@@ -14,9 +14,16 @@
                     <!-- ko if: App.game.challenges.list.disableVitamins.active() -->
                     <span class="btn btn-block btn-danger btn-static m-0">Vitamins are disabled.</span>
                     <!-- /ko -->
-                    <div class="btn-group btn-block m-0" role="group">
+                    <div class="btn-group btn-block m-0" role="group" data-bind="
+                        tooltip: {
+                            title: ItemList[GameConstants.VitaminType[VitaminController.currentlySelected()]] ? `<u>${ItemList[GameConstants.VitaminType[VitaminController.currentlySelected()]].displayName}</u><br/>${ItemList[GameConstants.VitaminType[VitaminController.currentlySelected()]].description || ''}` : '',
+                            trigger: 'hover',
+                            placement:'top',
+                            html: true,
+                            boundary: document.getElementById('pokemonVitaminModal'),
+                        }">
                         <button class="btn btn-sm btn-info" data-bind="click: () => VitaminController.currentlySelected((VitaminController.currentlySelected() + GameHelper.enumLength(GameConstants.VitaminType) - 1) % GameHelper.enumLength(GameConstants.VitaminType))">&lt;</button>
-                        <button class="btn btn-block btn-secondary btn-static" data-bind="text: GameConstants.VitaminType[VitaminController.currentlySelected()] + ': ' + player.itemList[GameConstants.VitaminType[VitaminController.currentlySelected()]]().toLocaleString('en-US')"></button>
+                        <button class="btn btn-block btn-secondary btn-static" data-bind="text: `${GameConstants.VitaminType[VitaminController.currentlySelected()]}: ${player.itemList[GameConstants.VitaminType[VitaminController.currentlySelected()]]().toLocaleString('en-US')}`"></button>
                         <button class="btn btn-sm btn-info" data-bind="click: () => VitaminController.currentlySelected((VitaminController.currentlySelected() + 1) % GameHelper.enumLength(GameConstants.VitaminType))">&gt;</button>
                         <button type="button" class="btn btn-sm btn-primary" data-bind="text: VitaminController.add() ? 'Give' : 'Take'" onclick="VitaminController.add(!VitaminController.add())" title="Add/Remove" data-toggle="tooltip" data-html="true" data-content="Left/right click to cycle amount
               <br/>Click on Pokémon to use" data-placement="right" data-trigger="hover"></button>
