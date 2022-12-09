@@ -1705,6 +1705,9 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 80,
             'speed': 110,
         },
+        'gender': {
+            'femaleRatio': 0,
+        },
     },
     {
         'id': 27,
