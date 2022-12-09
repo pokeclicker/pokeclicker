@@ -331,16 +331,14 @@ class Breeding implements Feature {
             this._eggList[index](new Egg());
             if (nextEgg) {
                 this.moveEggs();
-                this.nextEggFromQueue();
+                if (this._queueList().length) {
+                    this.nextEggFromQueue();
+                }
             }
         }
     }
 
     private nextEggFromQueue(): void {
-        if (!this._queueList().length) {
-            return;
-        }
-
         const nextEgg = this.createEgg(this._queueList.shift());
         this.gainEgg(nextEgg);
         if (!this._queueList().length) {
