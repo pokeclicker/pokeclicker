@@ -12,11 +12,13 @@ import Item from './Item';
 import MulchItem from './MulchItem';
 import PokeballItem from './PokeballItem';
 import {
-    BattleItemType, Currency, EnergyRestoreSize, Pokeball, PokeBlockColor,
+    BattleItemType, Currency, EggItemType, EnergyRestoreSize, Pokeball, PokeBlockColor, VitaminType,
 } from '../GameConstants';
 import { ShovelItem, MulchShovelItem } from './ShovelItem';
 import PokeBlock from './PokeBlock';
 import MegaStoneItem from './MegaStoneItem';
+import Vitamin from './Vitamin';
+import EggItem from './EggItem';
 
 // eslint-disable-next-line import/prefer-default-export
 export const ItemList: { [name: string]: Item } = {};
@@ -79,3 +81,22 @@ ItemList.PokeBlock_White  = new PokeBlock(PokeBlockColor.White, Infinity);
 
 ItemList.Abomasite        = new MegaStoneItem('Abomasnow', 'Abomasite', 10000);
 ItemList.Alakazite        = new MegaStoneItem('Alakazam', 'Alakazite', 10000);
+ItemList.Kangaskhanite    = new MegaStoneItem('Kangaskhan', 'Kangaskhanite', 10000);
+ItemList.Heracronite      = new MegaStoneItem('Heracross', 'Heracronite', 10000);
+ItemList.Garchompite        = new MegaStoneItem('Garchomp', 'Garchompite', 10000);
+
+// Eggs
+ItemList.Fire_egg = new EggItem(EggItemType.Fire_egg, 1000, undefined, 'Fire Egg');
+ItemList.Water_egg = new EggItem(EggItemType.Water_egg, 1000, undefined, 'Water Egg');
+ItemList.Grass_egg = new EggItem(EggItemType.Grass_egg, 1000, undefined, 'Grass Egg');
+ItemList.Fighting_egg = new EggItem(EggItemType.Fighting_egg, 1000, undefined, 'Fighting Egg');
+ItemList.Electric_egg = new EggItem(EggItemType.Electric_egg, 1000, undefined, 'Electric Egg');
+ItemList.Dragon_egg = new EggItem(EggItemType.Dragon_egg, 1000, undefined, 'Dragon Egg');
+ItemList.Pokemon_egg = new EggItem(EggItemType.Pokemon_egg, 1000, undefined, 'Pokémon Egg');
+ItemList.Mystery_egg = new EggItem(EggItemType.Mystery_egg, 700, undefined, 'Mystery Egg');
+
+// Vitamins
+// ItemList.RareCandy = new Vitamin(VitaminType.RareCandy, Infinity, undefined, undefined, 'Rare Candy', 'A rare-to-find candy that currently has no use.');
+ItemList.Protein   = new Vitamin(VitaminType.Protein, 1e4, Currency.money, { multiplier: 1.1, multiplierDecrease: false, saveName: `${VitaminType[VitaminType.Protein]}|${Currency[Currency.money]}` }, undefined, 'Increases Pokémon attack bonus.<br/><i>(attack gained per breeding cycle)</i>');
+ItemList.Calcium   = new Vitamin(VitaminType.Calcium, 1e4, Currency.money, { multiplier: 1.1, multiplierDecrease: false, saveName: `${VitaminType[VitaminType.Calcium]}|${Currency[Currency.money]}` }, undefined, 'Increases Pokémon attack bonus %.<br/><i>(attack gained per breeding cycle)</i>');
+ItemList.Carbos   = new Vitamin(VitaminType.Carbos, 1e4, Currency.money, { multiplier: 1.1, multiplierDecrease: false, saveName: `${VitaminType[VitaminType.Carbos]}|${Currency[Currency.money]}` }, undefined, 'Reduces steps required when hatching');

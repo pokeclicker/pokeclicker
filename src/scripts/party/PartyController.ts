@@ -42,6 +42,22 @@ class PartyController {
         return [];
     }
 
+    static getStoneEvolutionsPokerusData(id: number, evoType?: GameConstants.StoneType): { status: GameConstants.Pokerus, locked: boolean, lockHint: string }[] {
+        const pokemon = App.game.party.caughtPokemon.find(p => p.id == id);
+        if (pokemon) {
+            return pokemon.evolutions
+                .filter((evo) => evo.trigger === EvoTrigger.STONE &&
+                    (evo as StoneEvoData).stone === evoType &&
+                    PokemonHelper.calcNativeRegion(evo.evolvedPokemon) <= player.highestRegion())
+                .map((evo) => ({
+                    status: this.getPokerusStatusByName(evo.evolvedPokemon),
+                    locked: !EvolutionHandler.isSatisfied(evo),
+                    lockHint: evo.restrictions.filter(r => !r.isCompleted()).map(r => r.hint()).join('<br>'),
+                }));
+        }
+        return [];
+    }
+
     static hasMultipleStoneEvolutionsAvailable(pokemonName: PokemonNameType, evoType: GameConstants.StoneType) {
         const pokemon = App.game.party.getPokemonByName(pokemonName);
         // We only want to check against pokemon that have multiple possible evolutions that can happen now
@@ -87,7 +103,7 @@ class PartyController {
     private static vitaminSortedList = [];
     static getvitaminSortedList = ko.pureComputed(() => {
         // If the protein modal is open, we should sort it.
-        if (modalUtils.observableState.pokemonSelectorModal === 'show') {
+        if (modalUtils.observableState.pokemonVitaminModal === 'show') {
             PartyController.vitaminSortedList = [...App.game.party.caughtPokemon];
             return PartyController.vitaminSortedList.sort(PartyController.compareBy(Settings.getSetting('vitaminSort').observableValue(), Settings.getSetting('vitaminSortDirection').observableValue()));
         }
