@@ -269,6 +269,7 @@ const PalletCelebiProfOak2 = new NPC('Prof. Oak', [
 const ViridianCityOldMan1 = new NPC('Old Man', [
     'Leave me alone. I need my coffee.',
 ], {
+    image: 'assets/images/npcs/Old Man.png',
     requirement: new QuestLineStepCompletedRequirement('Tutorial Quests', 4, GameConstants.AchievementOption.less),
 });
 const ViridianCityOldMan2 = new NPC('Old Man', [
@@ -278,6 +279,7 @@ const ViridianCityOldMan2 = new NPC('Old Man', [
     'Here, let me show you how it works.',
     'I\'ll always be here to explain it again if you forget.',
 ], {
+    image: 'assets/images/npcs/Old Man.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Tutorial Quests', 4), new QuestLineStepCompletedRequirement('Tutorial Quests', 5, GameConstants.AchievementOption.less)]),
 });
 const ViridianCityOldMan3 = new NPC('Old Man', [
@@ -285,6 +287,7 @@ const ViridianCityOldMan3 = new NPC('Old Man', [
     'For example, if you click on the empty ball below the word Caught and assign a Poké Ball, you will then start throwing Poké Balls at Pokémon you\'ve already caught before. This can be very useful if you need Dungeon Tokens.',
     'I\'ll always be here to explain it again if you forget.',
 ], {
+    image: 'assets/images/npcs/Old Man.png',
     requirement: new QuestLineStepCompletedRequirement('Tutorial Quests', 5),
 });
 const PewterBattleItemRival = new NPC('Battle Item Master', [
@@ -4419,7 +4422,7 @@ const PaniolaTownActor = new NPC('Actor Meredith', [
 const RoyalAvenueSpectator = new NPC('Spectator', [
     'I think battles in the Battle Royal Dome are more like games of chance. But Battle Royals are nothing compared to trying to evolve an Alolan Raichu with a Thunderstone.',
     'Evolving Pikachu or Exeggcute in Alola can result in a new form! Sometimes.',
-]);
+], {image: 'assets/images/trainers/Preschooler (female).png'});
 const KonikoniKahuna = new NPC('Kahuna Olivia', [
     'What do you mean Grand trials are just like gym battles? It\'s a totally different thing!',
     'Come fight me in our very special and unique brand new Pokémon League and see if you still think our Island Challenge is nothing special!',
