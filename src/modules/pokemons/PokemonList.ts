@@ -1705,6 +1705,9 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 80,
             'speed': 110,
         },
+        'gender': {
+            'femaleRatio': 0,
+        },
     },
     {
         'id': 27,
@@ -5340,26 +5343,6 @@ export const pokemonList = createPokemonArray(
     },
     {
         'id': 129.28,
-        'name': 'Magikarp Saucy Blue',
-        'catchRate': 255,
-        'type': [PokemonType.Water],
-        'levelType': LevelType.slow,
-        'exp': 40,
-        'eggCycles': 5,
-        'base': {
-            'hitpoints': 20,
-            'attack': 10,
-            'specialAttack': 15,
-            'defense': 55,
-            'specialDefense': 20,
-            'speed': 80,
-        },
-        'gender': {
-            'visualDifference': true,
-        },
-    },
-    {
-        'id': 129.29,
         'name': 'Magikarp Blue Raindrops',
         'catchRate': 255,
         'type': [PokemonType.Water],
@@ -5379,8 +5362,28 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 129.29,
+        'name': 'Magikarp Saucy Blue',
+        'catchRate': 255,
+        'type': [PokemonType.Water],
+        'levelType': LevelType.slow,
+        'exp': 40,
+        'eggCycles': 5,
+        'base': {
+            'hitpoints': 20,
+            'attack': 10,
+            'specialAttack': 15,
+            'defense': 55,
+            'specialDefense': 20,
+            'speed': 80,
+        },
+        'gender': {
+            'visualDifference': true,
+        },
+    },
+    {
         'id': 129.30,
-        'name': 'Magikarp Saucy Violet',
+        'name': 'Magikarp Violet Raindrops',
         'catchRate': 255,
         'type': [PokemonType.Water],
         'levelType': LevelType.slow,
@@ -5400,7 +5403,7 @@ export const pokemonList = createPokemonArray(
     },
     {
         'id': 129.31,
-        'name': 'Magikarp Violet Raindrops',
+        'name': 'Magikarp Saucy Violet',
         'catchRate': 255,
         'type': [PokemonType.Water],
         'levelType': LevelType.slow,
@@ -14116,7 +14119,7 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 375.01,
+        'id': 475.01,
         'name': 'Mega Gallade',
         'type': [PokemonType.Psychic, PokemonType.Fighting],
         'eggCycles': 20,

@@ -159,7 +159,7 @@ aria-labelledby="pokedexModalLabel">
                                             title: `<u>Information:</u>
                                                 <br/>Base Attack: <strong>${$data.attack}</strong>
                                                 <br/>Catch Rate: <strong>${PokemonFactory.catchRateHelper($data.catchRate, true)}%</strong>
-                                                <br/>Hatch Steps: <strong>${App.game.breeding.getSteps($data.eggCycles).toLocaleString('en-US')}</strong>` +
+                                                <br/>Hatch Steps: <strong>${App.game.party.getPokemon($data.id)?.getEggSteps().toLocaleString('en-US') || 'Unknown'}</strong>` +
                                                 (App.game.party.getPokemon($data.id)?.pokerus >= GameConstants.Pokerus.Contagious ?
                                                     `<br/>EVs: <strong>${App.game.party.getPokemon($data.id).evs().toLocaleString('en-US')}</strong>
                                                     <br/>EV bonus: <strong>×${App.game.party.getPokemon($data.id).calculateEVAttackBonus().toLocaleString('en-US')}</strong>`

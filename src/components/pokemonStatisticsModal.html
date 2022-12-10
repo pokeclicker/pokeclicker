@@ -33,9 +33,15 @@
                       <td class="text-left tight"><code data-bind="text: (App.game.party.getPokemon($data) ? App.game.party.getPokemon($data).attack : 0).toLocaleString('en-US')">-</code></td>
                     </tr>
                     <tr>
-                      <td class="text-left">Proteins Used</td>
-                      <td class="text-left tight"><code data-bind="text: (App.game.party.getPokemon($data) ? App.game.party.getPokemon($data).proteinsUsed() : 0).toLocaleString('en-US')">-</code></td>
+                      <td class="text-left">Vitamins Used</td>
+                      <td class="text-left tight"><code data-bind="text: (App.game.party.getPokemon($data) ? App.game.party.getPokemon($data).totalVitaminsUsed() : 0).toLocaleString('en-US')">-</code></td>
                     </tr>
+                    <!-- ko foreach: GameHelper.enumNumbers(GameConstants.VitaminType) -->
+                    <tr>
+                      <td class="text-left" data-bind="text: `${GameConstants.VitaminType[$data]} Used`">X Used</td>
+                      <td class="text-left tight"><code data-bind="text: (App.game.party.getPokemon($parent) ? App.game.party.getPokemon($parent).vitaminsUsed[$data]() : 0).toLocaleString('en-US')">-</code></td>
+                    </tr>
+                    <!-- /ko -->
                     <!-- ko if: App.game.party.getPokemon($data)?.pokerus -->
                       <tr>
                         <td class="text-left">EVs</td>
@@ -67,7 +73,7 @@
                     </tr>
                     <tr>
                       <td class="text-left">Hatch Steps</td>
-                      <td class="text-left tight"><code data-bind="text: App.game.breeding.getSteps(pokemonMap[$data].eggCycles).toLocaleString('en-US')">-</code></td>
+                      <td class="text-left tight"><code data-bind="text: App.game.party.getPokemon($data)?.getEggSteps().toLocaleString('en-US') || 'Unknown'">-</code></td>
                     </tr>
                     <tr data-bind="if: BagHandler.displayName(pokemonMap[$data].heldItem)">
                       <td class="text-left">Rare Hold Item</td>
