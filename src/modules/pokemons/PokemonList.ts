@@ -4384,6 +4384,9 @@ export const pokemonList = createPokemonArray(
             'speed': 50,
         },
         'heldItem': { type: ItemType.underground, id: 'Oval Stone' },
+        'gender': {
+            'femaleRatio': 1,
+        },
     },
     {
         'id': 114,
@@ -8694,6 +8697,9 @@ export const pokemonList = createPokemonArray(
             'speed': 55,
         },
         'heldItem': { type: ItemType.underground, id: 'Oval Stone' },
+        'gender': {
+            'femaleRatio': 1,
+        },
     },
     {
         'id': 243,
@@ -13325,6 +13331,9 @@ export const pokemonList = createPokemonArray(
             'speed': 30,
         },
         'heldItem': { type: ItemType.underground, id: 'Oval Stone' },
+        'gender': {
+            'femaleRatio': 1,
+        },
     },
     {
         'id': 441,
