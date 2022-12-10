@@ -192,6 +192,7 @@ namespace GameConstants {
         diamond,
         farmPoint,
         battlePoint,
+        contestToken,
     }
     declare enum TypeEffectiveness {
         Immune,
