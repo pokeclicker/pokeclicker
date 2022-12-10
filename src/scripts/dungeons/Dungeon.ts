@@ -212,7 +212,7 @@ class Dungeon {
             } else { /* We don't include Trainers */ }
         });
 
-        encounterInfo.push(this.includeMimics());
+        encounterInfo.concat(this.includeMimics());
 
         return encounterInfo;
     }
@@ -221,9 +221,8 @@ class Dungeon {
         const encounterInfo = [];
         Object.entries(this.lootTable).forEach(([tier, itemList]) => {
             itemList.forEach((loot, i) => {
-                console.log(loot);
                 const mimic = pokemonMap[loot.loot].name;
-                if (mimic != 'MissingNo.' && App.game.party.getPokemonByName(mimic)) {
+                if (mimic != 'MissingNo.' && new ObtainedPokemonRequirement(mimic)) {
                     encounterInfo.push(mimic);
                 }
             });
