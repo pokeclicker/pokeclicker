@@ -31,7 +31,18 @@
                             <hr>
                             <!-- /ko -->
 
-                            <button class="btn btn-primary btn-block" onClick="Save.download()">Download Save</button>
+                            <form class="form-inline input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">File Name</span>
+                                </div>
+                                <input class="outline-dark form-control" id="save-file-name" type="text" data-bind="textInput : Settings.getSetting('saveFilename').observableValue(),
+									attr : {'placeholder' : Settings.getSetting('saveFilename').defaultValue}"
+									onchange="Settings.setSettingByName('saveFilename', this.value)"/>
+								<div class="input-group-append">
+                                    <button style="width : auto; padding : 4px;" class="btn btn-info" data-bind="tooltip : {title : 'Special tags {name}, {version} and {date} are automatically filled', trigger : 'hover', placement : 'left'}">?</button>
+                                </div>
+                            </form>
+							<button class="btn btn-primary btn-block" onClick="Save.download()">Download Save</button>
                             <i>If this does not work, you can copy the contents of the save and paste it into a '.txt' file</i>
                             <button class="btn btn-primary btn-block" onclick="Save.copySaveToClipboard()">Copy to Clipboard</button>
                             <hr>

@@ -282,6 +282,8 @@ Settings.add(new Setting<string>('achievementsCategory', 'achievementsCategory',
 // Save menu sorting
 Settings.add(new Setting('sort.saveSelector', 'Saves sort order', [], ''));
 
+Settings.add(new Setting('saveFilename', 'Save file name', [], '[v{version}] PokeClicker {date}'));
+
 // Hotkeys
 Settings.add(new HotkeySetting('hotkey.farm', 'Farm', 'F'));
 Settings.add(new HotkeySetting('hotkey.hatchery', 'Hatchery', 'H'));
