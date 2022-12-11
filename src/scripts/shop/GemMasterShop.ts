@@ -2,9 +2,10 @@
 
 class GemMasterShop extends Shop {
     constructor(
-        public name: string = 'Gem Master'
+        public name: string = 'Gem Master',
+        requirements: (Requirement | OneFromManyRequirement)[] = []
     ) {
-        super([], name);
+        super([], name, requirements);
     }
     public onclick(): void {
         ShopHandler.showShop(this);
