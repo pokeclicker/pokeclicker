@@ -1320,8 +1320,7 @@ Routes.add(new RegionRoute(
         land: ['Gothita', 'Minccino', 'Trubbish', 'Liepard', 'Solosis'],
     }),
     [
-        new RouteKillRequirement(10, GameConstants.Region.unova, 4),
-        new GymBadgeRequirement(BadgeEnums.Insect),
+        new TemporaryBattleRequirement('Colress 1'),
         new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 2),
     ]
 ));
@@ -1331,8 +1330,7 @@ Routes.add(new RegionRoute(
         land: ['Gothita', 'Minccino', 'Trubbish', 'Liepard', 'Solosis'],
     }),
     [
-        new RouteKillRequirement(10, GameConstants.Region.unova, 4),
-        new GymBadgeRequirement(BadgeEnums.Insect),
+        new TemporaryBattleRequirement('Colress 1'),
         new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 2),
     ],
     5
@@ -2059,7 +2057,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         water: ['Magikarp'],
     }),
-    [new NullRequirement()],
+    [new QuestLineCompletedRequirement('Magikarp Jump')],
     undefined,
     GameConstants.AlolaSubRegions.MagikarpJump,
     true
@@ -2069,7 +2067,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         water: ['Magikarp'],
     }),
-    [new NullRequirement()],
+    [new GymBadgeRequirement(BadgeEnums.Friend_League)],
     undefined,
     GameConstants.AlolaSubRegions.MagikarpJump,
     true
@@ -2079,7 +2077,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         water: ['Magikarp', 'Magikarp Orange Orca'],
     }),
-    [new NullRequirement()],
+    [new GymBadgeRequirement(BadgeEnums.Quick_League)],
     undefined,
     GameConstants.AlolaSubRegions.MagikarpJump,
     true
@@ -2089,7 +2087,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         water: ['Magikarp', 'Magikarp Orange Dapples'],
     }),
-    [new NullRequirement()],
+    [new GymBadgeRequirement(BadgeEnums.Heavy_League)],
     undefined,
     GameConstants.AlolaSubRegions.MagikarpJump,
     true
@@ -2099,7 +2097,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         water: ['Magikarp'],
     }),
-    [new NullRequirement()],
+    [new GymBadgeRequirement(BadgeEnums.Great_League)],
     undefined,
     GameConstants.AlolaSubRegions.MagikarpJump,
     true
@@ -2109,7 +2107,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         water: ['Magikarp', 'Magikarp Pink Two Tone'],
     }),
-    [new NullRequirement()],
+    [new GymBadgeRequirement(BadgeEnums.Fast_League)],
     undefined,
     GameConstants.AlolaSubRegions.MagikarpJump,
     true
@@ -2119,7 +2117,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         water: ['Magikarp', 'Magikarp Grey Bubbles', 'Magikarp Grey Patches'],
     }),
-    [new NullRequirement()],
+    [new GymBadgeRequirement(BadgeEnums.Luxury_League)],
     undefined,
     GameConstants.AlolaSubRegions.MagikarpJump,
     true
@@ -2129,7 +2127,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         water: ['Magikarp', 'Magikarp Apricot Tiger', 'Magikarp Apricot Zebra', 'Magikarp Brown Zebra'],
     }),
-    [new NullRequirement()],
+    [new GymBadgeRequirement(BadgeEnums.Heal_League)],
     undefined,
     GameConstants.AlolaSubRegions.MagikarpJump,
     true
@@ -2139,7 +2137,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         water: ['Magikarp', 'Magikarp Black Forehead'],
     }),
-    [new NullRequirement()],
+    [new GymBadgeRequirement(BadgeEnums.Ultra_League)],
     undefined,
     GameConstants.AlolaSubRegions.MagikarpJump,
     true
@@ -2149,7 +2147,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         water: ['Magikarp', 'Magikarp Orange Mask'],
     }),
-    [new NullRequirement()],
+    [new GymBadgeRequirement(BadgeEnums.E4_League)],
     undefined,
     GameConstants.AlolaSubRegions.MagikarpJump,
     true

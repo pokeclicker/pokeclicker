@@ -84,6 +84,7 @@ ItemList.Alakazite        = new MegaStoneItem('Alakazam', 'Alakazite', 10000);
 ItemList.Kangaskhanite    = new MegaStoneItem('Kangaskhan', 'Kangaskhanite', 10000);
 ItemList.Heracronite      = new MegaStoneItem('Heracross', 'Heracronite', 10000);
 ItemList.Garchompite        = new MegaStoneItem('Garchomp', 'Garchompite', 10000);
+ItemList.Lopunnite        = new MegaStoneItem('Lopunny', 'Lopunnite', 10000);
 
 // Eggs
 ItemList.Fire_egg = new EggItem(EggItemType.Fire_egg, 1000, undefined, 'Fire Egg');
