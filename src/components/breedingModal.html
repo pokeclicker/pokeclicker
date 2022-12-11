@@ -41,7 +41,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             </button>
                         </div>
                         <div class="float-right d-md-block d-none">
-                            <knockout class="" data-bind="foreach: App.game.breeding.hatcheryHelpers.hired()">
+                            <knockout class="mx-2" data-bind="foreach: App.game.breeding.hatcheryHelpers.hired()">
                                 <img class="pixelated" src="" height="24px" data-bind="attr:{ src: `assets/images/profile/trainer-${$data.trainerSprite}.png` },
                                 tooltip: {
                                     title: $data.tooltip(),

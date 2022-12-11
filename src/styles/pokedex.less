@@ -68,6 +68,7 @@
   }
 }
 
+/* Scrolling divs */
 @media (min-width: 768px) {
   .scrolling-div-pokedex {
       overflow-y: auto;
@@ -86,11 +87,12 @@
   max-width: 1250px !important;
 }
 
-.pokemon-list {
-  position: relative;
-}
-
+/* Pokemon list border left */
 @media (min-width: 768px) {
+  .pokemon-list {
+    position: relative;
+  }
+
   .pokemon-list:before {
     content:"";
     position: absolute;
@@ -100,6 +102,7 @@
   }
 }
 
+/* Pokedex entry top and bottom text, also used in hatchery */
 .pokedex-top-text {
   top: 0; 
   border-top-left-radius: 6px; 
