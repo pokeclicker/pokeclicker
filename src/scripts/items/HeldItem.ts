@@ -94,11 +94,11 @@ class ExpGainedBonusHeldItem extends HeldItem {
 ItemList.Wonder_Chest = new ExpGainedBonusHeldItem('Wonder_Chest', 10000, GameConstants.Currency.money, undefined, 'Wonder Chest', 1.15, GameConstants.Region.johto);
 ItemList.Muscle_Band = new AttackBonusHeldItem('Muscle_Band', 1000, GameConstants.Currency.battlePoint, undefined, 'Muscle Band', 1.05, GameConstants.Region.hoenn);
 // Pokemon specific items
-ItemList.Light_Ball = new AttackBonusHeldItem('Light_Ball', 10000, GameConstants.Currency.money, undefined, 'Light Ball', 1.2, GameConstants.Region.final /* GameConstants.Region.johto */, 'any Pikachu',
+ItemList.Light_Ball = new AttackBonusHeldItem('Light_Ball', 10000, GameConstants.Currency.money, undefined, 'Light Ball', 1.3, GameConstants.Region.johto, 'Pikachu',
     (pokemon) => Math.floor(pokemon.id) == 25 );
-ItemList.Quick_Powder = new AttackBonusHeldItem('Quick_Powder', 10000, GameConstants.Currency.money, undefined, 'Quick Powder', 1.2, GameConstants.Region.final /* GameConstants.Region.johto */, 'Ditto',
+ItemList.Quick_Powder = new AttackBonusHeldItem('Quick_Powder', 10000, GameConstants.Currency.money, undefined, 'Quick Powder', 1.3, GameConstants.Region.final /* GameConstants.Region.johto */, 'Ditto',
     (pokemon) => Math.floor(pokemon.id) == 132);
-ItemList.Thick_Club = new AttackBonusHeldItem('Thick_Club', 10000, GameConstants.Currency.money, undefined, 'Thick Club', 1.2, GameConstants.Region.final /* GameConstants.Region.johto */, 'Cubone or Marowak',
+ItemList.Thick_Club = new AttackBonusHeldItem('Thick_Club', 10000, GameConstants.Currency.money, undefined, 'Thick Club', 1.3, GameConstants.Region.final /* GameConstants.Region.johto */, 'Cubone or Marowak',
     (pokemon) => Math.floor(pokemon.id) == 104 ||  Math.floor(pokemon.id) == 105);
 ItemList.Soul_Dew = new AttackBonusHeldItem('Soul_Dew', 10000, GameConstants.Currency.money, undefined, 'Soul Dew', 1.5, GameConstants.Region.sinnoh, 'Latias or Latios',
     (pokemon) => Math.floor(pokemon.id) == 380 ||  Math.floor(pokemon.id) == 381);
@@ -108,7 +108,7 @@ ItemList.Lustrous_Orb = new AttackBonusHeldItem('Lustrous_Orb', 10000, GameConst
     (pokemon) => Math.floor(pokemon.id) == 484);
 ItemList.Griseous_Orb = new AttackBonusHeldItem('Griseous_Orb', 10000, GameConstants.Currency.money, undefined, 'Griseous Orb', 1.5, GameConstants.Region.sinnoh, 'Giratina',
     (pokemon) => Math.floor(pokemon.id) == 487);
-ItemList.Leek = new AttackBonusHeldItem('Leek', 10000, GameConstants.Currency.money, undefined, 'Leek', 1.2, GameConstants.Region.galar, 'Farfetch\'d or Sirfetch\'d',
+ItemList.Leek = new AttackBonusHeldItem('Leek', 10000, GameConstants.Currency.money, undefined, 'Leek', 1.3, GameConstants.Region.galar, 'Farfetch\'d or Sirfetch\'d',
     (pokemon) => Math.floor(pokemon.id) == 83 ||  Math.floor(pokemon.id) == 865);
 ItemList.Rusted_Sword = new AttackBonusHeldItem('Rusted_Sword', 10000, GameConstants.Currency.money, undefined, 'Rusted Sword', 1.5, GameConstants.Region.galar, 'Zacian',
     (pokemon) => Math.floor(pokemon.id) == 888);
@@ -134,4 +134,5 @@ ItemList.Soft_Sand = new TypeRestrictedAttackBonusHeldItem('Soft_Sand', 10000, G
 ItemList.Spell_Tag = new TypeRestrictedAttackBonusHeldItem('Spell_Tag', 10000, GameConstants.Currency.money, undefined, 'Spell Tag', 1.1, PokemonType.Ghost, GameConstants.Region.johto);
 ItemList.Twisted_Spoon = new TypeRestrictedAttackBonusHeldItem('Twisted_Spoon', 10000, GameConstants.Currency.money, undefined, 'Twisted Spoon', 1.1, PokemonType.Psychic, GameConstants.Region.johto);
 
-ItemList.Macho_Brace = new EVsGainedBonusHeldItem('Macho_Brace', 2000, GameConstants.Currency.questPoint, undefined, 'Macho Brace', 2, GameConstants.Region.sinnoh);
+ItemList.Macho_Brace = new EVsGainedBonusHeldItem('Macho_Brace', 1500, GameConstants.Currency.questPoint, undefined, 'Macho Brace', 1.5, GameConstants.Region.sinnoh);
+ItemList.Power_Bracer = new EVsGainedBonusHeldItem('Power_Bracer', 2000, GameConstants.Currency.questPoint, undefined, 'Power Bracer', 2, GameConstants.Region.alola);

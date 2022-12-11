@@ -1810,7 +1810,8 @@ TownList['Mt. Silver'] = new DungeonTown(
     'Mt. Silver',
     GameConstants.Region.johto,
     GameConstants.JohtoSubRegions.Johto,
-    [new RouteKillRequirement(10, GameConstants.Region.johto, 28)]
+    [new RouteKillRequirement(10, GameConstants.Region.johto, 28)],
+    [TemporaryBattleList.Red]
 );
 
 //Hoenn Shops
@@ -4383,6 +4384,10 @@ const AltaroftheSunneandMooneShop = new Shop([
     ItemList.Sun_stone,
     ItemList.Poipole,
 ]);
+const ATreeMaybeShop = new Shop([
+    ItemList.Power_Bracer,
+    ItemList.Key_stone,
+]);
 
 //Alola NPCs
 
@@ -4556,6 +4561,13 @@ const BattleTreeBlue = new NPC('Blue', [
     'Hello there champ! Fancy seeing you here.',
     'We just planted this sapling here. Maybe it will grow into something great some day.',
 ], {image: 'assets/images/npcs/Blue-masters.png'});
+const MayorKarp = new NPC('Mayor Karp', [
+    'TODO',
+    'Something about welcome',
+    'Something about only magikarps can fight here',
+    'Something about the league system',
+    'Insist attack is jump power',
+], {image: 'assets/images/npcs/MayorKarp.png'});
 
 const MagikarpJumpRoamerNPC = new RoamerNPC('Roddy Tackle', [
     'TODO: something about rare patterns at {ROUTE_NAME}!',
@@ -4739,7 +4751,7 @@ TownList['A Tree Maybe'] = new Town(
     'A Tree Maybe',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.PoniIsland,
-    [],
+    [ATreeMaybeShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 30)],
         npcs: [BattleTreeRed, BattleTreeBlue],
@@ -4752,8 +4764,8 @@ TownList['Hoppy Town'] = new Town(
     GameConstants.AlolaSubRegions.MagikarpJump,
     [new DockTownContent()],
     {
-        requirements: [],
-        npcs: [MagikarpJumpRoamerNPC],
+        requirements: [new QuestLineStartedRequirement('Magikarp Jump')],
+        npcs: [MayorKarp, MagikarpJumpRoamerNPC],
     }
 );
 TownList['Friend League'] = new Town(
