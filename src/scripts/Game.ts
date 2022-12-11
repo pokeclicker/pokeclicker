@@ -65,6 +65,12 @@ class Game {
                 console.error('Unable to load sava data from JSON for:', key, '\nError:\n', error);
             }
         });
+        saveObject.achievements?.forEach(achName => {
+            const ach = AchievementHandler.findByName(achName);
+            if (ach) {
+                ach.unlocked(true);
+            }
+        });
     }
 
     initialize() {
@@ -221,6 +227,7 @@ class Game {
                 App.game.quests.getQuestLine('The Great Vivillon Hunt!').beginQuest(App.game.quests.getQuestLine('The Great Vivillon Hunt!').curQuest());
             }
         }
+
         // Check if Koga has been defeated, but have no safari ticket yet
         if (App.game.badgeCase.badgeList[BadgeEnums.Soul]() && !App.game.keyItems.itemList[KeyItemType.Safari_ticket].isUnlocked()) {
             App.game.keyItems.gainKeyItem(KeyItemType.Safari_ticket, true);
@@ -407,6 +414,17 @@ class Game {
         if (Save.counter > GameConstants.SAVE_TICK) {
             const old = new Date(player._lastSeen);
             const now = new Date();
+
+            // Time traveller flag
+            if (old > now) {
+                Notifier.notify({
+                    title: 'Welcome Time Traveller!',
+                    message: 'Please ensure you keep a backup of your old save as travelling through time can cause some serious problems.\n\nAny Pokémon you may have obtained in the future could cease to exist which could corrupt your save file!',
+                    type: NotificationConstants.NotificationOption.danger,
+                    timeout: GameConstants.HOUR,
+                });
+                player._timeTraveller = true;
+            }
 
             // Check if it's a new day
             if (old.toLocaleDateString() !== now.toLocaleDateString()) {
