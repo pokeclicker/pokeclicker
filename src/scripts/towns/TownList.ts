@@ -4383,6 +4383,11 @@ const AltaroftheSunneandMooneShop = new Shop([
     ItemList.Sun_stone,
     ItemList.Poipole,
 ]);
+const MagikarpJumpGemTrade = new GemMasterShop('Trade', [new GymBadgeRequirement(BadgeEnums.Heal_League)]);
+const MagikarpJumpShadySalesMan = new Shop([
+    ItemList['Magikarp Blue Raindrops'],
+    ItemList['Magikarp Saucy Violet'],
+], 'Shady Sales Man', [new GymBadgeRequirement(BadgeEnums.Master_League)]);
 
 //Alola NPCs
 
@@ -4750,7 +4755,7 @@ TownList['Hoppy Town'] = new Town(
     'Hoppy Town',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MagikarpJump,
-    [new DockTownContent()],
+    [new DockTownContent(), MagikarpJumpGemTrade],
     {
         requirements: [],
         npcs: [MagikarpJumpRoamerNPC],
@@ -4844,6 +4849,15 @@ TownList['Master League'] = new Town(
     [TemporaryBattleList['Magikarp Jump Skyhopper 2'],TemporaryBattleList['Magikarp Jump Tykarp 2']],
     {
         requirements: [],
+    }
+);
+TownList['Magikarp\'s Eye'] = new Town(
+    'Magikarp\'s Eye',
+    GameConstants.Region.alola,
+    GameConstants.AlolaSubRegions.MagikarpJump,
+    [MagikarpJumpShadySalesMan],
+    {
+        requirements: [new DevelopmentRequirement()], //TODO: Should unlock as the subregion unlocks
     }
 );
 
