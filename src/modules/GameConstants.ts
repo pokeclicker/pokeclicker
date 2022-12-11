@@ -1779,4 +1779,5 @@ export enum AlcremieSpins {
 export enum ExtraAchievementCategories {
     global = Region.final,
     sevii,
+    magikarpJump,
 }

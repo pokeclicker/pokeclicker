@@ -1565,6 +1565,15 @@ class QuestLineHelper {
 
     }
 
+    public static createMagikarpJumpQuestLine() {
+        const magikarpJumpQuestLine = new QuestLine('Magikarp Jump', 'Go to Hoppy Town and share their love for Magikarp', new MultiRequirement([new DevelopmentRequirement(), new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)]), GameConstants.BulletinBoards.Alola);
+
+        const talkToMayor = new TalkToNPCQuest(MayorKarp, 'Use the subregion travel to talk to Mayor Karp in Hoppy Town');
+        magikarpJumpQuestLine.addQuest(talkToMayor);
+
+        App.game.quests.questLines().push(magikarpJumpQuestLine);
+    }
+
     // Galar QuestLines
     // Started by defeating both Stow-on-Side gyms.
     public static createDarkestDayQuestLine() {
@@ -2233,6 +2242,7 @@ class QuestLineHelper {
         this.createSkullAetherAlolaQuestLine();
         this.createMinasTrialAlolaQuestLine();
         this.createUltraBeastQuestLine();
+        this.createMagikarpJumpQuestLine();
         this.createDarkestDayQuestLine();
         this.createSwordShieldQuestLine();
         this.createDojoArmorQuestLine();

@@ -4561,6 +4561,13 @@ const BattleTreeBlue = new NPC('Blue', [
     'Hello there champ! Fancy seeing you here.',
     'We just planted this sapling here. Maybe it will grow into something great some day.',
 ], {image: 'assets/images/npcs/Blue-masters.png'});
+const MayorKarp = new NPC('Mayor Karp', [
+    'TODO',
+    'Something about welcome',
+    'Something about only magikarps can fight here',
+    'Something about the league system',
+    'Insist attack is jump power',
+], {image: 'assets/images/npcs/MayorKarp.png'});
 
 const MagikarpJumpRoamerNPC = new RoamerNPC('Roddy Tackle', [
     'TODO: something about rare patterns at {ROUTE_NAME}!',
@@ -4757,8 +4764,8 @@ TownList['Hoppy Town'] = new Town(
     GameConstants.AlolaSubRegions.MagikarpJump,
     [new DockTownContent()],
     {
-        requirements: [],
-        npcs: [MagikarpJumpRoamerNPC],
+        requirements: [new QuestLineStartedRequirement('Magikarp Jump')],
+        npcs: [MayorKarp, MagikarpJumpRoamerNPC],
     }
 );
 TownList['Friend League'] = new Town(
