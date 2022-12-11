@@ -1,5 +1,6 @@
 import {
     Computed as KnockoutComputed,
+    Observable as KnockoutObservable,
 } from 'knockout';
 import NotificationConstants from '../notifications/NotificationConstants';
 import Notifier from '../notifications/Notifier';
@@ -10,10 +11,10 @@ import { createLogContent } from '../logbook/helpers';
 import AchievementCategory from './AchievementCategory';
 
 export default class Achievement {
-    public isCompleted: KnockoutComputed<boolean> = ko.pureComputed(() => this.achievable() && (this.unlocked || this.property.isCompleted()));
+    public isCompleted: KnockoutComputed<boolean> = ko.pureComputed(() => this.achievable() && (this.unlocked() || this.property.isCompleted()));
     public getProgressText: KnockoutComputed<string> = ko.pureComputed(() => `${this.getProgress().toLocaleString('en-US')} / ${this.property.requiredValue.toLocaleString('en-US')}`);
     public bonus = 0;
-    public unlocked = false;
+    public unlocked : KnockoutObservable<boolean> = ko.observable(false);
 
     constructor(
         public name: string,
@@ -22,6 +23,7 @@ export default class Achievement {
         public bonusWeight: number,
         public category: AchievementCategory,
         public achievableFunction: () => boolean | null = null,
+        public stored : boolean = false,
     ) {}
 
     public check() {
@@ -38,7 +40,7 @@ export default class Achievement {
                 LogBookTypes.ACHIEVE,
                 createLogContent.earnedAchievement({ name: this.name }),
             );
-            this.unlocked = true;
+            this.unlocked(true);
             // TODO: refilter within achievement bonus
             // AchievementHandler.filterAchievementList(true);
             // Track when users gains an achievement and their total playtime

@@ -23,7 +23,9 @@ import {
     Region, StoneType, Genders, MaxIDPerRegion,
 } from '../GameConstants';
 import BagItem from '../interfaces/BagItem';
-import { EvoData, LevelEvolution, StoneEvolution } from './evolutions/Base';
+import {
+    EvoData, DummyEvolution, LevelEvolution, StoneEvolution,
+} from './evolutions/Base';
 import LevelType from '../party/LevelType';
 import GenericProxy from '../utilities/GenericProxy';
 import Rand from '../utilities/Rand';
@@ -780,9 +782,9 @@ export const pokemonList = createPokemonArray(
         'eggCycles': 15,
         'evolutions': [
             LevelEvolution('Metapod', 'Butterfree', 10),
-            LevelEvolution('Metapod', 'Valencian Butterfree', 10000),
-            LevelEvolution('Metapod', 'Pink Butterfree', 10000),
-            LevelEvolution('Metapod', 'Ash\'s Butterfree', 10000),
+            DummyEvolution('Metapod', 'Valencian Butterfree'),
+            DummyEvolution('Metapod', 'Pink Butterfree'),
+            DummyEvolution('Metapod', 'Ash\'s Butterfree'),
         ],
         'base': {
             'hitpoints': 50,
@@ -1095,7 +1097,7 @@ export const pokemonList = createPokemonArray(
         'eggCycles': 15,
         'evolutions': [
             LevelEvolution('Rattata', 'Raticate', 20),
-            LevelEvolution('Rattata', 'Valencian Raticate', 20000),
+            DummyEvolution('Rattata', 'Valencian Raticate'),
         ],
         'base': {
             'hitpoints': 30,
@@ -1286,7 +1288,7 @@ export const pokemonList = createPokemonArray(
         'eggCycles': 20,
         'evolutions': [
             LevelEvolution('Ekans', 'Arbok', 22),
-            LevelEvolution('Ekans', 'Pinkan Arbok', 22000),
+            DummyEvolution('Ekans', 'Pinkan Arbok'),
         ],
         'base': {
             'hitpoints': 35,
@@ -1636,7 +1638,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 112,
         'eggCycles': 10,
-        'evolutions': [LevelEvolution('Detective Pikachu', 'Detective Raichu', 1234)],
+        'evolutions': [DummyEvolution('Detective Pikachu', 'Detective Raichu')],
         'base': {
             'hitpoints': 35,
             'attack': 55,
@@ -1702,6 +1704,9 @@ export const pokemonList = createPokemonArray(
             'defense': 55,
             'specialDefense': 80,
             'speed': 110,
+        },
+        'gender': {
+            'femaleRatio': 0,
         },
     },
     {
@@ -1909,7 +1914,7 @@ export const pokemonList = createPokemonArray(
         'eggCycles': 20,
         'evolutions': [
             StoneEvolution('Nidorino', 'Nidoking', StoneType.Moon_stone),
-            LevelEvolution('Nidorino', 'Pinkan Nidoking', 33000),
+            DummyEvolution('Nidorino', 'Pinkan Nidoking'),
         ],
         'base': {
             'hitpoints': 61,
@@ -2218,8 +2223,8 @@ export const pokemonList = createPokemonArray(
         'eggCycles': 20,
         'evolutions': [
             StoneEvolution('Gloom', 'Vileplume', StoneType.Leaf_stone),
-            LevelEvolution('Gloom', 'Valencian Vileplume', 44000),
-            LevelEvolution('Gloom', 'Pinkan Vileplume', 44000),
+            DummyEvolution('Gloom', 'Valencian Vileplume'),
+            DummyEvolution('Gloom', 'Pinkan Vileplume'),
             StoneEvolution('Gloom', 'Bellossom', StoneType.Sun_stone),
         ],
         'base': {
@@ -2766,7 +2771,7 @@ export const pokemonList = createPokemonArray(
         'eggCycles': 20,
         'evolutions': [
             LevelEvolution('Poliwag', 'Poliwhirl', 25),
-            LevelEvolution('Poliwag', 'Pinkan Poliwhirl', 25000),
+            DummyEvolution('Poliwag', 'Pinkan Poliwhirl'),
         ],
         'base': {
             'hitpoints': 40,
@@ -3006,7 +3011,7 @@ export const pokemonList = createPokemonArray(
         'eggCycles': 20,
         'evolutions': [
             LevelEvolution('Bellsprout', 'Weepinbell', 21),
-            LevelEvolution('Bellsprout', 'Valencian Weepinbell', 21000),
+            DummyEvolution('Bellsprout', 'Valencian Weepinbell'),
         ],
         'base': {
             'hitpoints': 50,
@@ -3519,7 +3524,7 @@ export const pokemonList = createPokemonArray(
         'eggCycles': 20,
         'evolutions': [
             LevelEvolution('Doduo', 'Dodrio', 31),
-            LevelEvolution('Doduo', 'Pinkan Dodrio', 31000),
+            DummyEvolution('Doduo', 'Pinkan Dodrio'),
         ],
         'base': {
             'hitpoints': 35,
@@ -3985,7 +3990,7 @@ export const pokemonList = createPokemonArray(
         'evolutions': [
             RegionStoneEvolution(allButAlola, 'Exeggcute', 'Exeggutor', StoneType.Leaf_stone),
             RegionStoneEvolution(alolaOnly, 'Exeggcute', 'Alolan Exeggutor', StoneType.Leaf_stone),
-            LevelEvolution('Exeggcute', 'Pinkan Exeggutor', 31000),
+            DummyEvolution('Exeggcute', 'Pinkan Exeggutor'),
         ],
         'base': {
             'hitpoints': 60,
@@ -4193,7 +4198,7 @@ export const pokemonList = createPokemonArray(
         'evolutions': [
             RegionLevelEvolution(allButGalar, 'Koffing', 'Weezing', 35),
             RegionLevelEvolution(galarOnly, 'Koffing', 'Galarian Weezing', 35),
-            LevelEvolution('Koffing', 'Pinkan Weezing', 35000),
+            DummyEvolution('Koffing', 'Pinkan Weezing'),
         ],
         'base': {
             'hitpoints': 40,
@@ -4379,6 +4384,9 @@ export const pokemonList = createPokemonArray(
             'speed': 50,
         },
         'heldItem': { type: ItemType.underground, id: 'Oval Stone' },
+        'gender': {
+            'femaleRatio': 1,
+        },
     },
     {
         'id': 114,
@@ -5338,26 +5346,6 @@ export const pokemonList = createPokemonArray(
     },
     {
         'id': 129.28,
-        'name': 'Magikarp Saucy Blue',
-        'catchRate': 255,
-        'type': [PokemonType.Water],
-        'levelType': LevelType.slow,
-        'exp': 40,
-        'eggCycles': 5,
-        'base': {
-            'hitpoints': 20,
-            'attack': 10,
-            'specialAttack': 15,
-            'defense': 55,
-            'specialDefense': 20,
-            'speed': 80,
-        },
-        'gender': {
-            'visualDifference': true,
-        },
-    },
-    {
-        'id': 129.29,
         'name': 'Magikarp Blue Raindrops',
         'catchRate': 255,
         'type': [PokemonType.Water],
@@ -5377,8 +5365,28 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 129.29,
+        'name': 'Magikarp Saucy Blue',
+        'catchRate': 255,
+        'type': [PokemonType.Water],
+        'levelType': LevelType.slow,
+        'exp': 40,
+        'eggCycles': 5,
+        'base': {
+            'hitpoints': 20,
+            'attack': 10,
+            'specialAttack': 15,
+            'defense': 55,
+            'specialDefense': 20,
+            'speed': 80,
+        },
+        'gender': {
+            'visualDifference': true,
+        },
+    },
+    {
         'id': 129.30,
-        'name': 'Magikarp Saucy Violet',
+        'name': 'Magikarp Violet Raindrops',
         'catchRate': 255,
         'type': [PokemonType.Water],
         'levelType': LevelType.slow,
@@ -5398,7 +5406,7 @@ export const pokemonList = createPokemonArray(
     },
     {
         'id': 129.31,
-        'name': 'Magikarp Violet Raindrops',
+        'name': 'Magikarp Saucy Violet',
         'catchRate': 255,
         'type': [PokemonType.Water],
         'levelType': LevelType.slow,
@@ -8689,6 +8697,9 @@ export const pokemonList = createPokemonArray(
             'speed': 55,
         },
         'heldItem': { type: ItemType.underground, id: 'Oval Stone' },
+        'gender': {
+            'femaleRatio': 1,
+        },
     },
     {
         'id': 243,
@@ -13320,6 +13331,9 @@ export const pokemonList = createPokemonArray(
             'speed': 30,
         },
         'heldItem': { type: ItemType.underground, id: 'Oval Stone' },
+        'gender': {
+            'femaleRatio': 1,
+        },
     },
     {
         'id': 441,
@@ -14114,7 +14128,7 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 375.01,
+        'id': 475.01,
         'name': 'Mega Gallade',
         'type': [PokemonType.Psychic, PokemonType.Fighting],
         'eggCycles': 20,
@@ -14521,8 +14535,8 @@ export const pokemonList = createPokemonArray(
             'hitpoints': 120,
             'attack': 70,
             'specialAttack': 75,
-            'defense': 120,
-            'specialDefense': 130,
+            'defense': 110,
+            'specialDefense': 120,
             'speed': 85,
         },
         'gender': {
@@ -14536,8 +14550,8 @@ export const pokemonList = createPokemonArray(
         'eggCycles': 40,
         'levelType': LevelType.slow,
         'exp': 216,
-        // 69420 to prevent evolution ingame, evolution needed for baby form to be obtainable
-        'evolutions': [LevelEvolution('Phione', 'Manaphy', 69420)],
+        // evolution needed for baby form to be obtainable
+        'evolutions': [DummyEvolution('Phione', 'Manaphy')],
         'baby': true,
         'catchRate': 30,
         'base': {
@@ -16168,7 +16182,7 @@ export const pokemonList = createPokemonArray(
         'catchRate': 120,
         'evolutions': [
             LevelEvolution('Darumaka', 'Darmanitan', 35),
-            LevelEvolution('Darumaka', 'Darmanitan (Zen)', 1234),
+            DummyEvolution('Darumaka', 'Darmanitan (Zen)'),
         ],
         'base': {
             'hitpoints': 70,
@@ -16190,7 +16204,7 @@ export const pokemonList = createPokemonArray(
         'catchRate': 120,
         'evolutions': [
             StoneEvolution('Galarian Darumaka', 'Galarian Darmanitan', StoneType.Ice_stone),
-            LevelEvolution('Galarian Darumaka', 'Galarian Darmanitan (Zen)', 1234),
+            DummyEvolution('Galarian Darumaka', 'Galarian Darmanitan (Zen)'),
         ],
         'base': {
             'hitpoints': 70,
@@ -19691,7 +19705,7 @@ export const pokemonList = createPokemonArray(
         'catchRate': 90,
         'evolutions': [
             StoneEvolution('Doublade', 'Aegislash (Shield)', StoneType.Dusk_stone),
-            LevelEvolution('Doublade', 'Aegislash (Blade)', 4777),
+            DummyEvolution('Doublade', 'Aegislash (Blade)'),
         ],
         'base': {
             'hitpoints': 59,
@@ -26435,7 +26449,7 @@ export const pokemonList = createPokemonArray(
         'type': [PokemonType.Fairy],
         'base': {
             'hitpoints': 92,
-            'attack': 130,
+            'attack': 120,
             'specialAttack': 80,
             'defense': 115,
             'specialDefense': 115,
@@ -26457,7 +26471,7 @@ export const pokemonList = createPokemonArray(
         'type': [PokemonType.Fairy, PokemonType.Steel],
         'base': {
             'hitpoints': 92,
-            'attack': 170,
+            'attack': 150,
             'specialAttack': 80,
             'defense': 115,
             'specialDefense': 115,
@@ -26478,7 +26492,7 @@ export const pokemonList = createPokemonArray(
         'type': [PokemonType.Fighting],
         'base': {
             'hitpoints': 92,
-            'attack': 130,
+            'attack': 120,
             'specialAttack': 80,
             'defense': 115,
             'specialDefense': 115,
@@ -26500,10 +26514,10 @@ export const pokemonList = createPokemonArray(
         'type': [PokemonType.Fighting, PokemonType.Steel],
         'base': {
             'hitpoints': 92,
-            'attack': 130,
+            'attack': 120,
             'specialAttack': 80,
-            'defense': 145,
-            'specialDefense': 145,
+            'defense': 140,
+            'specialDefense': 140,
             'speed': 128,
         },
         'eggCycles': 120,
