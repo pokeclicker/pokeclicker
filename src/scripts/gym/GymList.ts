@@ -1593,7 +1593,7 @@ GymList['Quick League'] = new Gym(
     BadgeEnums.Quick_League,
     0, //TODO
     'TODO',
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 32)],
+    [new TemporaryBattleRequirement('Magikarp Jump Koylee')],
     () => {
         if (!App.game.party.alreadyCaughtPokemonByName('Magikarp Skelly')) {
             Notifier.notify({
@@ -1613,7 +1613,7 @@ GymList['Heavy League'] = new Gym(
     BadgeEnums.Heavy_League,
     0, //TODO
     'TODO',
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 33)],
+    [new TemporaryBattleRequirement('Magikarp Jump Karpen')],
     () => {
         if (!App.game.party.alreadyCaughtPokemonByName('Magikarp Orange Two Tone')) {
             Notifier.notify({
@@ -1633,7 +1633,7 @@ GymList['Great League'] = new Gym(
     BadgeEnums.Great_League,
     0, //TODO
     'TODO',
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 34)]
+    [new TemporaryBattleRequirement('Magikarp Jump Karpress')]
 );
 
 GymList['Fast League'] = new Gym(
@@ -1643,7 +1643,7 @@ GymList['Fast League'] = new Gym(
     BadgeEnums.Fast_League,
     0, //TODO
     'TODO',
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 35)],
+    [new TemporaryBattleRequirement('Magikarp Jump Karson')],
     () => {
         if (!App.game.party.alreadyCaughtPokemonByName('Magikarp Pink Dapples')) {
             Notifier.notify({
@@ -1663,7 +1663,7 @@ GymList['Luxury League'] = new Gym(
     BadgeEnums.Luxury_League,
     0, //TODO
     'TODO',
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 36)],
+    [new TemporaryBattleRequirement('Magikarp Jump Karbuck')],
     () => {
         if (!App.game.party.alreadyCaughtPokemonByName('Magikarp Pink Orca')) {
             Notifier.notify({
@@ -1683,7 +1683,7 @@ GymList['Heal League'] = new Gym(
     BadgeEnums.Heal_League,
     0, //TODO
     'TODO',
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 37)],
+    [new TemporaryBattleRequirement('Magikarp Jump Karpella 2')],
     () => {
         if (!App.game.party.alreadyCaughtPokemonByName('Magikarp Purple Bubbles')) {
             Notifier.notify({
@@ -1703,7 +1703,7 @@ GymList['Ultra League'] = new Gym(
     BadgeEnums.Ultra_League,
     0, //TODO
     'TODO',
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 38)],
+    [new TemporaryBattleRequirement('Magikarp Jump Koylee 2')],
     () => {
         if (!App.game.party.alreadyCaughtPokemonByName('Magikarp Brown Tiger')) {
             Notifier.notify({
@@ -1723,7 +1723,7 @@ GymList['E4 League'] = new Gym(
     BadgeEnums.E4_League,
     0, //TODO
     'TODO',
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 39)],
+    [new TemporaryBattleRequirement('Magikarp Jump Karpella 3')],
     () => {
         if (!App.game.party.alreadyCaughtPokemonByName('Magikarp Orange Forehead')) {
             Notifier.notify({
@@ -1743,7 +1743,7 @@ GymList['Master League'] = new Gym(
     BadgeEnums.Master_League,
     0, //TODO
     'TODO',
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 40)]
+    [new TemporaryBattleRequirement('Magikarp Jump Tykarp 2')]
 );
 
 //Galar Leaders

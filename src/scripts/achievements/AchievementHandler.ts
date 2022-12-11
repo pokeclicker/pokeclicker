@@ -180,6 +180,7 @@ class AchievementHandler {
         const categories = GameHelper.enumStrings(GameConstants.Region).filter(r => r != 'none' && r != 'final').map(r => new AchievementCategory(r, 100, () => player.highestRegion() >= GameConstants.Region[r]));
         categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.global], 150, () => true));
         categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.sevii], 50, () => true));
+        categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.magikarpJump], 25, () => false));
 
         AchievementHandler._achievementCategories = categories;
         return categories;
@@ -425,9 +426,12 @@ class AchievementHandler {
                 }
 
                 let category = region;
-                // Split Sevii islands into it's own achievement pool
+                // Split bigger subregions into their own achievement pool
                 if (region == GameConstants.Region.kanto && (route.subRegion == GameConstants.KantoSubRegions.Sevii123 || route.subRegion == GameConstants.KantoSubRegions.Sevii4567)) {
                     category = GameConstants.ExtraAchievementCategories.sevii;
+                }
+                if (region == GameConstants.Region.alola && route.subRegion == GameConstants.AlolaSubRegions.MagikarpJump) {
+                    category = GameConstants.ExtraAchievementCategories.magikarpJump;
                 }
                 const routeName = Routes.getName(route.number, region, true);
                 AchievementHandler.addAchievement(`${route.routeName} Traveler`, `Defeat 100 Pokémon on ${routeName}.`, new RouteKillRequirement(GameConstants.ACHIEVEMENT_DEFEAT_ROUTE_VALUES[0], region, route.number), 1, category);
@@ -441,9 +445,12 @@ class AchievementHandler {
             // Dungeons
             GameConstants.RegionDungeons[region]?.forEach(dungeon => {
                 let category = region;
-                // Split Sevii islands into it's own achievement pool
+                // Split bigger subregions into their own achievement pool
                 if (region == GameConstants.Region.kanto && (TownList[dungeon].subRegion == GameConstants.KantoSubRegions.Sevii123 || TownList[dungeon].subRegion == GameConstants.KantoSubRegions.Sevii4567)) {
                     category = GameConstants.ExtraAchievementCategories.sevii;
+                }
+                if (region == GameConstants.Region.alola && TownList[dungeon].subRegion == GameConstants.AlolaSubRegions.MagikarpJump) {
+                    category = GameConstants.ExtraAchievementCategories.magikarpJump;
                 }
                 AchievementHandler.addAchievement(`${dungeon} Explorer`, `Clear ${dungeon} 10 times.`, new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[0], GameConstants.getDungeonIndex(dungeon)), 0.8, category);
                 AchievementHandler.addAchievement(`${dungeon} Expert`, `Clear ${dungeon} 100 times.`, new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[1], GameConstants.getDungeonIndex(dungeon)), 1.2, category);
@@ -472,6 +479,8 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Sevii Master', 'Catch 35 unique Pokémon native to the Sevii Islands.', new SeviiCaughtRequirement(35, false), 6, GameConstants.ExtraAchievementCategories.sevii);
         AchievementHandler.addAchievement('Sevii Shiny Trainer', 'Catch 15 unique Shiny Pokémon native to the Sevii Islands.', new SeviiCaughtRequirement(15, true), 5, GameConstants.ExtraAchievementCategories.sevii);
         AchievementHandler.addAchievement('Sevii Shiny Master', 'Catch 35 unique Shiny Pokémon native to the Sevii Islands.', new SeviiCaughtRequirement(35, true), 9, GameConstants.ExtraAchievementCategories.sevii);
+
+        addGymAchievements(GameConstants.RegionGyms[GameConstants.Region.final + 1], GameConstants.ExtraAchievementCategories.magikarpJump, 'Magikarp Jump');
 
 
         // load filters, filter the list & calculate number of tabs
