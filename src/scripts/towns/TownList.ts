@@ -1810,7 +1810,8 @@ TownList['Mt. Silver'] = new DungeonTown(
     'Mt. Silver',
     GameConstants.Region.johto,
     GameConstants.JohtoSubRegions.Johto,
-    [new RouteKillRequirement(10, GameConstants.Region.johto, 28)]
+    [new RouteKillRequirement(10, GameConstants.Region.johto, 28)],
+    [TemporaryBattleList.Red]
 );
 
 //Hoenn Shops
@@ -4383,6 +4384,10 @@ const AltaroftheSunneandMooneShop = new Shop([
     ItemList.Sun_stone,
     ItemList.Poipole,
 ]);
+const ATreeMaybeShop = new Shop([
+    ItemList.Power_Bracer,
+    ItemList.Key_stone,
+]);
 
 //Alola NPCs
 
@@ -4746,7 +4751,7 @@ TownList['A Tree Maybe'] = new Town(
     'A Tree Maybe',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.PoniIsland,
-    [],
+    [ATreeMaybeShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 30)],
         npcs: [BattleTreeRed, BattleTreeBlue],
@@ -5200,7 +5205,7 @@ const BattleCafeMaster = new NPC('Battle Café Master', [
     'Milcery can evolve when you spin around with it, while treating it to a Sweet.',
     'For example, you can whip up a Vanilla Alcremie, by spinning clockwise for less than 5 seconds, during the day. Piece of cake! There’s a unique form for each Sweet under this circumstance, so bake it till you make it!',
     'There are more tiers to Alcremie than I can count. Mix up the direction, duration, time of day, and the given Sweet to discover all the flavours there are to find.',
-    'I will suggest that you only do 3 spins a day if you don’t want to end up sick! You might be able to try more, when you get more experienced...',
+    'I will suggest that you only do 3 spins a day if you don’t want to end up sick! You might be able to try more, when you get more experienced with a flavour...',
     'Stop by the Battle Café, we sell all the Sweets you’ll need!',
 ], {image: 'assets/images/npcs/BattleCafeMaster.png'});
 
