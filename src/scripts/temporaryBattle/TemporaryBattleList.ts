@@ -553,6 +553,32 @@ TemporaryBattleList['Silver 7'] = new TemporaryBattle(
     }
 );
 
+TemporaryBattleList.Red = new TemporaryBattle(
+    'Red',
+    [
+        new GymPokemon('Pikachu', 643820, 81),
+        new GymPokemon('Espeon', 663626, 73),
+        new GymPokemon('Snorlax', 679472, 75),
+        new GymPokemon('Venusaur', 679472, 77),
+        new GymPokemon('Charizard', 679472, 77),
+        new GymPokemon('Blastoise', 803240, 77),
+    ],
+    '...',
+    [new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion), new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mt. Silver'))],
+    [new NullRequirement],
+    {
+        rewardFunction: () => {
+            BagHandler.gainItem({type: ItemType.item, id: 'Light_Ball'}, 1);
+            Notifier.notify({
+                message: 'You were awarded a Light Ball for defeating Red.',
+                type: NotificationConstants.NotificationOption.success,
+                setting: NotificationConstants.NotificationSetting.Items.dropped_item,
+            });
+        },
+        imageName: '../npcs/Red-masters',
+    }
+);
+
 //Hoenn Temporary Battles
 TemporaryBattleList['May 1'] = new TemporaryBattle(
     'May 1',
