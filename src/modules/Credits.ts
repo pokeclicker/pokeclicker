@@ -40,6 +40,15 @@ export const SpriteCredits: Credit[] = [
         // Notes: Gives credit on image page if asked.
     },
     {
+        name: 'B1ackZer0',
+        link: 'https://discordapp.com/users/346730382009565196',
+        image: 'assets/images/profile/trainer-111.png',
+        resources: [
+            'Shiny Alcremie',
+        ],
+        // Notes: Made specifically for PokéClicker.
+    },
+    {
         name: 'Beliot419',
         link: 'https://www.deviantart.com/beliot419',
         image: 'https://a.deviantart.net/avatars-big/b/e/beliot419.png',
@@ -194,6 +203,7 @@ export const SpriteCredits: Credit[] = [
             'Ash\'s Butterfree',
             'Black mane hair big icon',
             'Blimp base',
+            'Charitative chansey shuffle',
             'Client Island town image',
             'Cracked pot big icon',
             'Danny',
@@ -247,6 +257,7 @@ export const SpriteCredits: Credit[] = [
             'Pinkan Scyther Shuffle',
             'Pinkan Weedle',
             'Pinkan Weezing',
+            'Roddy Tackle',
             'Rudy',
             'Rusted Shield and Sword icons',
             'Spooky Togepi (shiny)',

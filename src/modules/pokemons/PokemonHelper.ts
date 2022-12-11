@@ -1,5 +1,10 @@
 import { Computed } from 'knockout';
-import { MaxIDPerRegion, Region, BattlePokemonGender } from '../GameConstants';
+import {
+    MaxIDPerRegion,
+    Region,
+    BattlePokemonGender,
+    PokemonStatiticsType,
+} from '../GameConstants';
 import { PokemonNameType } from './PokemonNameType';
 import P from './mapProvider';
 import PokemonType from '../enums/PokemonType';
@@ -105,7 +110,7 @@ export function displayName(englishName: string): Computed<string> {
 }
 
 // To have encounter/caught/defeat/hatch statistics in a single place
-export function incrementPokemonStatistics(pokemonId: number, statistic: string, shiny: boolean, gender: number) {
+export function incrementPokemonStatistics(pokemonId: number, statistic: PokemonStatiticsType, shiny: boolean, gender: number) {
     const pokemonStatistics = {
         Captured: App.game.statistics.pokemonCaptured[pokemonId],
         Defeated: App.game.statistics.pokemonDefeated[pokemonId],

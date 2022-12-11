@@ -4923,93 +4923,138 @@
         <!-- ROUTES -->
         <!-- ------ -->
 
-        <!--Friend League Route-->
+        <!--Friend League Bridge-->
         <%- include('templates/mapRoute',
             { route: 31, region: 6
             , width: 13, height: 2
             , x: 33, y: 29
-            , name: "F.L."
+            , name: "F.L.B."
             })
         %>
 
-        <!--Quick League Route-->
+        <!--Quick League Bridge-->
         <%- include('templates/mapRoute',
             { route: 32, region: 6
             , width: 2, height: 9
             , x: 52, y: 14
-            , name: "Q.L."
+            , name: "Q.L.B."
+            })
+        %>
+        <!--Quick League Bridge extension-->
+        <%- include('templates/mapRoute',
+            { route: 32, region: 6
+            , width: 1, height: 1
+            , x: 53, y: 23
+            , name: "Q.L.B."
+            , noText: true
             })
         %>
 
-        <!--Heavy League Route-->
+        <!--Heavy League Bridge-->
         <%- include('templates/mapRoute',
             { route: 33, region: 6
             , width: 7, height: 2
             , x: 62, y: 29
-            , name: "H.L."
+            , name: "H.L.B."
             })
         %>
 
-        <!--Great League Route-->
+        <!--Great League Bridge-->
         <%- include('templates/mapRoute',
             { route: 34, region: 6
-            , width: 2, height: 3
+            , width: 2, height: 10
+            , x: 54, y: 40
+            , name: "G.L.B."
+            })
+        %>
+        <!--Great League Bridge extension-->
+        <%- include('templates/mapRoute',
+            { route: 34, region: 6
+            , width: 2, height: 5
             , x: 52, y: 37
-            , name: "G.L."
+            , name: "G.L.B."
+            , noText: true
             })
         %>
 
-        <!--Fast League Route-->
+        <!--Fast League Bridge-->
         <%- include('templates/mapRoute',
             { route: 35, region: 6
             , width: 2, height: 7
             , x: 39, y: 22
-            , name: "F.L."
+            , name: "F.L.B."
             })
         %>
 
-        <!--Luxury League Route-->
+        <!--Luxury League Bridge-->
         <%- include('templates/mapRoute',
             { route: 36, region: 6
             , width: 2, height: 9
             , x: 60, y: 18
-            , name: "L.L."
+            , name: "L.L.B."
+            })
+        %>
+        <!--Luxury League Bridge extension-->
+        <%- include('templates/mapRoute',
+            { route: 36, region: 6
+            , width: 4, height: 2
+            , x: 62, y: 18
+            , name: "L.L.B."
+            , noText: true
             })
         %>
 
-        <!--Heal League Route-->
+        <!--Heal League Bridge-->
         <%- include('templates/mapRoute',
             { route: 37, region: 6
             , width: 2, height: 6
             , x: 60, y: 34
-            , name: "H.L."
+            , name: "H.L.B."
+            })
+        %>
+        <!--Heal League Bridge extension-->
+        <%- include('templates/mapRoute',
+            { route: 37, region: 6
+            , width: 2, height: 2
+            , x: 62, y: 38
+            , name: "H.L.B."
+            , noText: true
+            })
+        %>
+        <!--Heal League Bridge extension-->
+        <%- include('templates/mapRoute',
+            { route: 37, region: 6
+            , width: 2, height: 1
+            , x: 64, y: 38
+            , name: "H.L.B."
+            , noText: true
             })
         %>
 
-        <!--Ultra League Route-->
+        <!--Ultra League Bridge-->
         <%- include('templates/mapRoute',
             { route: 38, region: 6
             , width: 2, height: 11
             , x: 39, y: 31
-            , name: "U.L."
+            , name: "U.L.B."
             })
         %>
 
-        <!--Elite Four League Route-->
+        <!--Elite Four League Pier-->
         <%- include('templates/mapRoute',
             { route: 39, region: 6
-            , width: 2, height: 2
-            , x: 16, y: 29
-            , name: "E4.L."
+            , width: 4, height: 2
+            , x: 82, y: 30
+            , name: "E4.L.P."
             })
         %>
 
-        <!--Master League Route-->
+        <!--Master League Pier-->
         <%- include('templates/mapRoute',
             { route: 40, region: 6
-            , width: 2, height: 2
-            , x: 84, y: 30
-            , name: "M.L."
+            , width: 4, height: 2
+            , x: 16, y: 29
+            , name: "M.L.P."
             })
         %>
 
@@ -5020,8 +5065,120 @@
         <!--Hoppy Town-->
         <%- include('templates/mapTown',
             { name: "Hoppy Town"
-            , x: 47, y: 26
-            , width: 10, height: 8
+            , x: 48, y: 26
+            , width: 9, height: 8
+            })
+        %>
+        <!--Hoppy Town extension-->
+        <%- include('templates/mapTown',
+            { name: "Hoppy Town"
+            , x: 50, y: 24
+            , width: 5, height: 2
+            , isExtension: true
+            })
+        %>
+        <!--Hoppy Town extension-->
+        <%- include('templates/mapTown',
+            { name: "Hoppy Town"
+            , x: 49, y: 25
+            , width: 1, height: 1
+            , isExtension: true
+            })
+        %>
+        <!--Hoppy Town extension-->
+        <%- include('templates/mapTown',
+            { name: "Hoppy Town"
+            , x: 55, y: 24.5
+            , width: 1, height: 1.5
+            , isExtension: true
+            })
+        %>
+        <!--Hoppy Town extension-->
+        <%- include('templates/mapTown',
+            { name: "Hoppy Town"
+            , x: 57, y: 27
+            , width: 1, height: 6
+            , isExtension: true
+            })
+        %>
+        <!--Hoppy Town extension-->
+        <%- include('templates/mapTown',
+            { name: "Hoppy Town"
+            , x: 58, y: 28
+            , width: 4, height: 4
+            , isExtension: true
+            })
+        %>
+        <!--Hoppy Town extension-->
+        <%- include('templates/mapTown',
+            { name: "Hoppy Town"
+            , x: 60, y: 27
+            , width: 3, height: 1
+            , isExtension: true
+            })
+        %>
+        <!--Hoppy Town extension-->
+        <%- include('templates/mapTown',
+            { name: "Hoppy Town"
+            , x: 59, y: 32
+            , width: 3, height: 1
+            , isExtension: true
+            })
+        %>
+        <!--Hoppy Town extension-->
+        <%- include('templates/mapTown',
+            { name: "Hoppy Town"
+            , x: 60, y: 33
+            , width: 3, height: 1
+            , isExtension: true
+            })
+        %>
+        <!--Hoppy Town extension-->
+        <%- include('templates/mapTown',
+            { name: "Hoppy Town"
+            , x: 49, y: 34
+            , width: 7, height: 1
+            , isExtension: true
+            })
+        %>
+        <!--Hoppy Town extension-->
+        <%- include('templates/mapTown',
+            { name: "Hoppy Town"
+            , x: 50, y: 35
+            , width: 5, height: 1
+            , isExtension: true
+            })
+        %>
+        <!--Hoppy Town extension-->
+        <%- include('templates/mapTown',
+            { name: "Hoppy Town"
+            , x: 52, y: 36
+            , width: 2, height: 1
+            , isExtension: true
+            })
+        %>
+        <!--Hoppy Town extension-->
+        <%- include('templates/mapTown',
+            { name: "Hoppy Town"
+            , x: 47, y: 27
+            , width: 1, height: 6
+            , isExtension: true
+            })
+        %>
+        <!--Hoppy Town extension-->
+        <%- include('templates/mapTown',
+            { name: "Hoppy Town"
+            , x: 46, y: 29
+            , width: 1, height: 3
+            , isExtension: true
+            })
+        %>
+        <!--Hoppy Town extension-->
+        <%- include('templates/mapTown',
+            { name: "Hoppy Town"
+            , x: 51, y: 23
+            , width: 2, height: 1
+            , isExtension: true
             })
         %>
 
@@ -5029,7 +5186,103 @@
         <%- include('templates/mapTown',
             { name: "Friend League"
             , x: 28, y: 26
-            , width: 4, height: 5
+            , width: 5, height: 6
+            })
+        %>
+        <!--Friend League extension-->
+        <%- include('templates/mapTown',
+            { name: "Friend League"
+            , x: 25, y: 25
+            , width: 3, height: 3
+            , isExtension: true
+            })
+        %>
+        <!--Friend League extension-->
+        <%- include('templates/mapTown',
+            { name: "Friend League"
+            , x: 33, y: 25
+            , width: 3, height: 3
+            , isExtension: true
+            })
+        %>
+        <!--Friend League extension-->
+        <%- include('templates/mapTown',
+            { name: "Friend League"
+            , x: 25, y: 32
+            , width: 3, height: 3
+            , isExtension: true
+            })
+        %>
+        <!--Friend League extension-->
+        <%- include('templates/mapTown',
+            { name: "Friend League"
+            , x: 33, y: 32
+            , width: 3, height: 3
+            , isExtension: true
+            })
+        %>
+        <!--Friend League extension-->
+        <%- include('templates/mapTown',
+            { name: "Friend League"
+            , x: 27, y: 24
+            , width: 1, height: 1
+            , isExtension: true
+            })
+        %>
+        <!--Friend League extension-->
+        <%- include('templates/mapTown',
+            { name: "Friend League"
+            , x: 24, y: 27
+            , width: 1, height: 1
+            , isExtension: true
+            })
+        %>
+        <!--Friend League extension-->
+        <%- include('templates/mapTown',
+            { name: "Friend League"
+            , x: 33, y: 24
+            , width: 1, height: 1
+            , isExtension: true
+            })
+        %>
+        <!--Friend League extension-->
+        <%- include('templates/mapTown',
+            { name: "Friend League"
+            , x: 36, y: 27
+            , width: 1, height: 1
+            , isExtension: true
+            })
+        %>
+        <!--Friend League extension-->
+        <%- include('templates/mapTown',
+            { name: "Friend League"
+            , x: 24, y: 32
+            , width: 1, height: 1
+            , isExtension: true
+            })
+        %>
+        <!--Friend League extension-->
+        <%- include('templates/mapTown',
+            { name: "Friend League"
+            , x: 27, y: 35
+            , width: 1, height: 1
+            , isExtension: true
+            })
+        %>
+        <!--Friend League extension-->
+        <%- include('templates/mapTown',
+            { name: "Friend League"
+            , x: 33, y: 35
+            , width: 1, height: 1
+            , isExtension: true
+            })
+        %>
+        <!--Friend League extension-->
+        <%- include('templates/mapTown',
+            { name: "Friend League"
+            , x: 36, y: 32
+            , width: 1, height: 1
+            , isExtension: true
             })
         %>
 
@@ -5037,23 +5290,167 @@
         <%- include('templates/mapTown',
             { name: "Quick League"
             , x: 51, y: 6
-            , width: 4, height: 5
+            , width: 5, height: 6
+            })
+        %>
+        <!--Quick League extension-->
+        <%- include('templates/mapTown',
+            { name: "Quick League"
+            , x: 56, y: 7
+            , width: 1, height: 1
+            , isExtension: true
+            })
+        %>
+        <!--Quick League extension-->
+        <%- include('templates/mapTown',
+            { name: "Quick League"
+            , x: 57, y: 8
+            , width: 1, height: 4
+            , isExtension: true
+            })
+        %>
+        <!--Quick League extension-->
+        <%- include('templates/mapTown',
+            { name: "Quick League"
+            , x: 56, y: 12
+            , width: 1, height: 1
+            , isExtension: true
+            })
+        %>
+        <!--Quick League extension-->
+        <%- include('templates/mapTown',
+            { name: "Quick League"
+            , x: 50, y: 13
+            , width: 6, height: 1
+            , isExtension: true
+            })
+        %>
+        <!--Quick League extension-->
+        <%- include('templates/mapTown',
+            { name: "Quick League"
+            , x: 49, y: 12
+            , width: 2, height: 1
+            , isExtension: true
+            })
+        %>
+        <!--Quick League extension-->
+        <%- include('templates/mapTown',
+            { name: "Quick League"
+            , x: 48, y: 10
+            , width: 2, height: 2
+            , isExtension: true
             })
         %>
 
         <!--Heavy League-->
         <%- include('templates/mapTown',
             { name: "Heavy League"
-            , x: 69, y: 26
-            , width: 4, height: 5
+            , x: 69, y: 27
+            , width: 7, height: 5
+            })
+        %>
+        <!--Heavy League extension-->
+        <%- include('templates/mapTown',
+            { name: "Heavy League"
+            , x: 70, y: 26
+            , width: 5, height: 1
+            , isExtension: true
+            })
+        %>
+        <!--Heavy League extension-->
+        <%- include('templates/mapTown',
+            { name: "Heavy League"
+            , x: 66, y: 26
+            , width: 3, height: 3
+            , isExtension: true
+            })
+        %>
+        <!--Heavy League extension-->
+        <%- include('templates/mapTown',
+            { name: "Heavy League"
+            , x: 76, y: 26
+            , width: 3, height: 3
+            , isExtension: true
+            })
+        %>
+        <!--Heavy League extension-->
+        <%- include('templates/mapTown',
+            { name: "Heavy League"
+            , x: 66, y: 31
+            , width: 3, height: 3
+            , isExtension: true
+            })
+        %>
+        <!--Heavy League extension-->
+        <%- include('templates/mapTown',
+            { name: "Heavy League"
+            , x: 76, y: 31
+            , width: 3, height: 3
+            , isExtension: true
             })
         %>
 
         <!--Great League-->
         <%- include('templates/mapTown',
             { name: "Great League"
-            , x: 50, y: 44
-            , width: 4, height: 5
+            , x: 49, y: 44
+            , width: 5, height: 6
+            })
+        %>
+        <!--Great League extension-->
+        <%- include('templates/mapTown',
+            { name: "Great League"
+            , x: 45, y: 44
+            , width: 4, height: 2
+            , isExtension: true
+            })
+        %>
+        <!--Great League extension-->
+        <%- include('templates/mapTown',
+            { name: "Great League"
+            , x: 47, y: 42
+            , width: 5, height: 2
+            , isExtension: true
+            })
+        %>
+        <!--Great League extension-->
+        <%- include('templates/mapTown',
+            { name: "Great League"
+            , x: 46, y: 43
+            , width: 1, height: 1
+            , isExtension: true
+            })
+        %>
+        <!--Great League extension-->
+        <%- include('templates/mapTown',
+            { name: "Great League"
+            , x: 54, y: 50
+            , width: 5, height: 2
+            , isExtension: true
+            })
+        %>
+        <!--Great League extension-->
+        <%- include('templates/mapTown',
+            { name: "Great League"
+            , x: 52, y: 52
+            , width: 5, height: 2
+            , isExtension: true
+            })
+        %>
+        <!--Great League extension-->
+        <%- include('templates/mapTown',
+            { name: "Great League"
+            , x: 57, y: 52
+            , width: 1, height: 1
+            , isExtension: true
+            })
+        %>
+        <!--Great League extension-->
+        <%- include('templates/mapTown',
+            { name: "Great League"
+            , x: 53, y: 51
+            , width: 1, height: 1
+            , isExtension: true
             })
         %>
 
@@ -5061,7 +5458,71 @@
         <%- include('templates/mapTown',
             { name: "Fast League"
             , x: 34, y: 11
-            , width: 4, height: 5
+            , width: 5, height: 6
+            })
+        %>
+        <!--Fast League extension-->
+        <%- include('templates/mapTown',
+            { name: "Fast League"
+            , x: 32, y: 8
+            , width: 3, height: 3
+            , isExtension: true
+            })
+        %>
+        <!--Fast League extension-->
+        <%- include('templates/mapTown',
+            { name: "Fast League"
+            , x: 30, y: 11
+            , width: 4, height: 2
+            , isExtension: true
+            })
+        %>
+        <!--Fast League extension-->
+        <%- include('templates/mapTown',
+            { name: "Fast League"
+            , x: 31, y: 10
+            , width: 1, height: 1
+            , isExtension: true
+            })
+        %>
+        <!--Fast League extension-->
+        <%- include('templates/mapTown',
+            { name: "Fast League"
+            , x: 33, y: 7
+            , width: 2, height: 1
+            , isExtension: true
+            })
+        %>
+        <!--Fast League extension-->
+        <%- include('templates/mapTown',
+            { name: "Fast League"
+            , x: 39, y: 16
+            , width: 2, height: 6
+            , isExtension: true
+            })
+        %>
+        <!--Fast League extension-->
+        <%- include('templates/mapTown',
+            { name: "Fast League"
+            , x: 41, y: 16
+            , width: 1, height: 5
+            , isExtension: true
+            })
+        %>
+        <!--Fast League extension-->
+        <%- include('templates/mapTown',
+            { name: "Fast League"
+            , x: 42, y: 16
+            , width: 1, height: 3
+            , isExtension: true
+            })
+        %>
+        <!--Fast League extension-->
+        <%- include('templates/mapTown',
+            { name: "Fast League"
+            , x: 43, y: 16
+            , width: 1, height: 2
+            , isExtension: true
             })
         %>
 
@@ -5069,15 +5530,159 @@
         <%- include('templates/mapTown',
             { name: "Luxury League"
             , x: 68, y: 15
-            , width: 4, height: 5
+            , width: 5, height: 6
+            })
+        %>
+        <!--Luxury League extension-->
+        <%- include('templates/mapTown',
+            { name: "Luxury League"
+            , x: 69, y: 13
+            , width: 3, height: 2
+            , isExtension: true
+            })
+        %>
+        <!--Luxury League extension-->
+        <%- include('templates/mapTown',
+            { name: "Luxury League"
+            , x: 70, y: 12
+            , width: 1, height: 1
+            , isExtension: true
+            })
+        %>
+        <!--Luxury League extension-->
+        <%- include('templates/mapTown',
+            { name: "Luxury League"
+            , x: 65, y: 16
+            , width: 3, height: 2
+            , isExtension: true
+            })
+        %>
+        <!--Luxury League extension-->
+        <%- include('templates/mapTown',
+            { name: "Luxury League"
+            , x: 73, y: 16
+            , width: 3, height: 2
+            , isExtension: true
+            })
+        %>
+        <!--Luxury League extension-->
+        <%- include('templates/mapTown',
+            { name: "Luxury League"
+            , x: 66, y: 18
+            , width: 2, height: 1
+            , isExtension: true
+            })
+        %>
+        <!--Luxury League extension-->
+        <%- include('templates/mapTown',
+            { name: "Luxury League"
+            , x: 73, y: 18
+            , width: 2, height: 1
+            , isExtension: true
+            })
+        %>
+        <!--Luxury League extension-->
+        <%- include('templates/mapTown',
+            { name: "Luxury League"
+            , x: 67, y: 20
+            , width: 1, height: 1
+            , isExtension: true
+            })
+        %>
+        <!--Luxury League extension-->
+        <%- include('templates/mapTown',
+            { name: "Luxury League"
+            , x: 73, y: 20
+            , width: 1, height: 1
+            , isExtension: true
+            })
+        %>
+        <!--Luxury League extension-->
+        <%- include('templates/mapTown',
+            { name: "Luxury League"
+            , x: 66, y: 21
+            , width: 4, height: 1
+            , isExtension: true
+            })
+        %>
+        <!--Luxury League extension-->
+        <%- include('templates/mapTown',
+            { name: "Luxury League"
+            , x: 66, y: 22
+            , width: 2, height: 1
+            , isExtension: true
+            })
+        %>
+        <!--Luxury League extension-->
+        <%- include('templates/mapTown',
+            { name: "Luxury League"
+            , x: 71, y: 21
+            , width: 4, height: 1
+            , isExtension: true
+            })
+        %>
+        <!--Luxury League extension-->
+        <%- include('templates/mapTown',
+            { name: "Luxury League"
+            , x: 73, y: 22
+            , width: 2, height: 1
+            , isExtension: true
             })
         %>
 
         <!--Heal League-->
         <%- include('templates/mapTown',
             { name: "Heal League"
-            , x: 66, y: 39
-            , width: 4, height: 5
+            , x: 64, y: 39
+            , width: 9, height: 8
+            })
+        %>
+        <!--Heal League extension-->
+        <%- include('templates/mapTown',
+            { name: "Heal League"
+            , x: 66, y: 38
+            , width: 5, height: 1
+            , isExtension: true
+            })
+        %>
+        <!--Heal League extension-->
+        <%- include('templates/mapTown',
+            { name: "Heal League"
+            , x: 66, y: 47
+            , width: 5, height: 1
+            , isExtension: true
+            })
+        %>
+        <!--Heal League extension-->
+        <%- include('templates/mapTown',
+            { name: "Heal League"
+            , x: 63, y: 40
+            , width: 1, height: 6
+            , isExtension: true
+            })
+        %>
+        <!--Heal League extension-->
+        <%- include('templates/mapTown',
+            { name: "Heal League"
+            , x: 73, y: 40
+            , width: 1, height: 6
+            , isExtension: true
+            })
+        %>
+        <!--Heal League extension-->
+        <%- include('templates/mapTown',
+            { name: "Heal League"
+            , x: 62, y: 42
+            , width: 1, height: 2
+            , isExtension: true
+            })
+        %>
+        <!--Heal League extension-->
+        <%- include('templates/mapTown',
+            { name: "Heal League"
+            , x: 74, y: 42
+            , width: 1, height: 2
+            , isExtension: true
             })
         %>
 
@@ -5085,7 +5690,95 @@
         <%- include('templates/mapTown',
             { name: "Ultra League"
             , x: 32, y: 41
-            , width: 4, height: 5
+            , width: 5, height: 5
+            })
+        %>
+        <!--Ultra League extension-->
+        <%- include('templates/mapTown',
+            { name: "Ultra League"
+            , x: 34, y: 46
+            , width: 1, height: 1
+            , isExtension: true
+            })
+        %>
+        <!--Ultra League extension-->
+        <%- include('templates/mapTown',
+            { name: "Ultra League"
+            , x: 31, y: 42
+            , width: 1, height: 1
+            , isExtension: true
+            })
+        %>
+        <!--Ultra League extension-->
+        <%- include('templates/mapTown',
+            { name: "Ultra League"
+            , x: 37, y: 42
+            , width: 1, height: 1
+            , isExtension: true
+            })
+        %>
+        <!--Ultra League extension-->
+        <%- include('templates/mapTown',
+            { name: "Ultra League"
+            , x: 32, y: 46
+            , width: 1, height: 1
+            , isExtension: true
+            })
+        %>
+        <!--Ultra League extension-->
+        <%- include('templates/mapTown',
+            { name: "Ultra League"
+            , x: 31, y: 45
+            , width: 1, height: 1
+            , isExtension: true
+            })
+        %>
+        <!--Ultra League extension-->
+        <%- include('templates/mapTown',
+            { name: "Ultra League"
+            , x: 36, y: 46
+            , width: 1, height: 1
+            , isExtension: true
+            })
+        %>
+        <!--Ultra League extension-->
+        <%- include('templates/mapTown',
+            { name: "Ultra League"
+            , x: 37, y: 45
+            , width: 1, height: 1
+            , isExtension: true
+            })
+        %>
+        <!--Ultra League extension-->
+        <%- include('templates/mapTown',
+            { name: "Ultra League"
+            , x: 30, y: 40
+            , width: 2, height: 2
+            , isExtension: true
+            })
+        %>
+        <!--Ultra League extension-->
+        <%- include('templates/mapTown',
+            { name: "Ultra League"
+            , x: 37, y: 40
+            , width: 2, height: 2
+            , isExtension: true
+            })
+        %>
+        <!--Ultra League extension-->
+        <%- include('templates/mapTown',
+            { name: "Ultra League"
+            , x: 30, y: 46
+            , width: 2, height: 2
+            , isExtension: true
+            })
+        %>
+        <!--Ultra League extension-->
+        <%- include('templates/mapTown',
+            { name: "Ultra League"
+            , x: 37, y: 46
+            , width: 2, height: 2
+            , isExtension: true
             })
         %>
 
@@ -5093,7 +5786,7 @@
         <%- include('templates/mapTown',
             { name: "Elite Four League"
             , x: 86, y: 28
-            , width: 6, height: 4
+            , width: 7, height: 5
             })
         %>
 
@@ -5101,7 +5794,20 @@
         <%- include('templates/mapTown',
             { name: "Master League"
             , x: 9, y: 27
-            , width: 6, height: 4
+            , width: 7, height: 5
+            })
+        %>
+
+        <!-- ------------------ -->
+        <!-- PLACES OF INTEREST -->
+        <!-- ------------------ -->
+
+        <!--Dock-->
+        <%- include('templates/mapPOI',
+            { name: "Dock"
+            , x: 45, y: 26
+            , width: 2, height: 3
+            , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Hoppy Town') }"
             })
         %>
 

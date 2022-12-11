@@ -15,7 +15,7 @@ class Berry {
         'Tangela', 'Scyther',
         'Pineco', 'Heracross',
         'Volbeat', 'Illumise',
-        'Burmy (Plant)', 'Combee', 'Cherubi',
+        'Burmy (Plant)', 'Cherubi',
         'Sewaddle', 'Karrablast',
         'Scatterbug',
         'Cutiefly', 'Bounsweet',
