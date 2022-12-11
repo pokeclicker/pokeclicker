@@ -1320,8 +1320,7 @@ Routes.add(new RegionRoute(
         land: ['Gothita', 'Minccino', 'Trubbish', 'Liepard', 'Solosis'],
     }),
     [
-        new RouteKillRequirement(10, GameConstants.Region.unova, 4),
-        new GymBadgeRequirement(BadgeEnums.Insect),
+        new TemporaryBattleRequirement('Colress 1'),
         new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 2),
     ]
 ));
@@ -1331,8 +1330,7 @@ Routes.add(new RegionRoute(
         land: ['Gothita', 'Minccino', 'Trubbish', 'Liepard', 'Solosis'],
     }),
     [
-        new RouteKillRequirement(10, GameConstants.Region.unova, 4),
-        new GymBadgeRequirement(BadgeEnums.Insect),
+        new TemporaryBattleRequirement('Colress 1'),
         new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 2),
     ],
     5
@@ -2059,7 +2057,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         water: ['Magikarp'],
     }),
-    [new NullRequirement()],
+    [new QuestLineCompletedRequirement('Magikarp Jump')],
     undefined,
     GameConstants.AlolaSubRegions.MagikarpJump,
     true
