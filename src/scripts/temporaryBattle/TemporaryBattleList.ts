@@ -2708,7 +2708,7 @@ TemporaryBattleList['Magikarp Jump Tykarp'] = new TemporaryBattle(
 TemporaryBattleList['Magikarp Jump Karpress'] = new TemporaryBattle(
     'Magikarp Jump Karpress',
     [new GymPokemon('Magikarp Calico (Orange, White, Black)', 1, 20)],
-    '<i>Basculin</i> the glory while you can, i\'ll get you next time! Wahaa!',
+    '<i>Basculin</i> the glory while you can, I\'ll get you next time! Wahaa!',
     [new TemporaryBattleRequirement('Magikarp Jump Tykarp')],
     undefined,
     {
