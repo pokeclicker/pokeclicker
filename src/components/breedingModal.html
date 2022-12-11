@@ -24,15 +24,23 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                     <div class="col-12 p-0">
                         <ul class="nav nav-tabs nav-fill w-100">
                             <li class="nav-item"><a class="nav-link active" href="#breeding-pokemon" data-toggle="tab" onclick="$('#breeding-fireall').show()">Pokémon</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#breeding-eggs" data-toggle="tab" onclick="$('#breeding-fireall').hide()">Eggs</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#breeding-fossils" data-toggle="tab" onclick="$('#breeding-fireall').hide()">Fossils</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#breeding-eggs" data-toggle="tab" onclick="$('#breeding-fireall').show()">Eggs</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#breeding-fossils" data-toggle="tab" onclick="$('#breeding-fireall').show()">Fossils</a></li>
                             <li class="nav-item" data-bind="visible: App.game.breeding.hatcheryHelpers.isUnlocked()" onclick="$('#breeding-fireall').show()"><a class="nav-link" href="#breeding-helpers" data-toggle="tab">Helpers (BETA)</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#breeding-help" data-toggle="tab" onclick="$('#breeding-fireall').hide()">Help</a></li>
-                            <li><button type="button" class="btn btn-danger" data-dismiss="modal" style="font-size: 18px; font-weight: 700;">×</button></li>
+                            <li class="nav-item"><a class="nav-link" href="#breeding-help" data-toggle="tab" onclick="$('#breeding-fireall').show()">Help</a></li>
+                            <li class="d-md-block d-none"><button type="button" class="btn btn-danger" data-dismiss="modal" style="font-size: 18px; font-weight: 700;">×</button></li>
                         </ul>
                     </div>
-                    <div class="col-12 py-2 px-3" style="min-height: 55px;">
-                        <div class="float-right" id="breeding-fireall">
+                    <div class="col-12 d-md-block d-none py-2 px-3" style="min-height: 55px;">
+                        <div class="float-left">
+                            <button type="button" class="btn btn-warning hatchery-warnings" style="pointer-events: none;" data-bind="visible: !App.game.breeding.hasFreeEggSlot()">
+                                You don't have any free egg slots.
+                            </button>
+                            <button type="button" class="btn btn-danger hatchery-warnings" style="pointer-events: none;" data-bind="visible: !App.game.breeding.hasFreeQueueSlot() && App.game.breeding.queueSlots()">
+                                Your breeding queue is full or disabled.
+                            </button>
+                        </div>
+                        <div class="float-right d-md-block d-none">
                             <knockout class="" data-bind="foreach: App.game.breeding.hatcheryHelpers.hired()">
                                 <img class="pixelated" src="" height="24px" data-bind="attr:{ src: `assets/images/profile/trainer-${$data.trainerSprite}.png` },
                                 tooltip: {
@@ -42,19 +50,11 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                     html: true,
                                 }">
                             </knockout>
-                            <button id="" type="button" class="btn btn-danger" 
+                            <button id="breeding-fireall" type="button" class="btn btn-danger" 
                                 data-bind="attr : {
                                     disabled : !App.game.breeding.hatcheryHelpers.hired().length}, 
                                     click: function(){App.game.breeding.hatcheryHelpers.hired().forEach(function(h){h.fire();})}" >
                                     Fire All
-                            </button>
-                        </div>
-                        <div class="float-left">
-                            <button type="button" class="btn btn-warning hatchery-warnings" data-bind="visible: !App.game.breeding.hasFreeEggSlot()">
-                                You don't have any free egg slots.
-                            </button>
-                            <button type="button" class="btn btn-danger hatchery-warnings" data-bind="visible: !App.game.breeding.hasFreeQueueSlot() && App.game.breeding.queueSlots()">
-                                Your breeding queue is full or disabled.
                             </button>
                         </div>
                     </div>
@@ -64,11 +64,18 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                 <div class="tab-content p-3">
                     <div class="tab-pane fade in active show" id="breeding-pokemon">
                         <div class="row">
-                            <div class="col-3">
+                            <div class="col-12 d-md-none d-block">
+                                <button class="w-100 my-1 btn btn-secondary" type="button" data-toggle="collapse"
+                                        data-target="#breeding-filter-container" aria-expanded="false" aria-controls="pokedex-filter-container">
+                                    Filters and Settings
+                                </button>
+                            </div>
+                            <!-- Filters and Settings -->
+                            <div class="col-md-3 col-12 collapse dont-collapse-sm" id="breeding-filter-container">
                                 <div class="pokedex-border-bottom pt-2">
                                     <h4>Filters and Settings</h4>
                                 </div>
-                                <div class="scrolling-div-breeding-filters" id="breeding-filter">
+                                <div class="scrolling-div-breeding-filters">
                                     <div class="container-fluid py-3">
                                         <div class="form-row text-left">
                                             <div class="form-group col-md-6 col-6">
@@ -213,7 +220,15 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-9 pokemon-list">
+
+                            <div class="col-12 d-md-none d-block">
+                                <button class="w-100 my-1 btn btn-secondary" type="button" data-toggle="collapse"
+                                        data-target="#breeding-pokemon-list-container" aria-expanded="false" aria-controls="pokedex-pokemon-list-container">
+                                    Pokémon List
+                                </button>
+                            </div>
+                            <!-- Pokemon List -->
+                            <div class="col-md-9 col-12 pokemon-list collapse dont-collapse-sm" id="breeding-pokemon-list-container">
                                 <div class="scrolling-div-breeding-list">
                                     <!-- Check if the player has any level 100 Pokémon or if they have any eggs -->
                                     <button type="button" class="btn btn-danger hatchery-warnings w-100" data-bind="visible: !App.game.party.hasMaxLevelPokemon()">
@@ -254,16 +269,14 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             </button>
                             <!-- ko if: Object.keys(GameConstants.EggItemType).filter(e=>isNaN(e)).filter(x=>player._itemList[x]()).length -->
                             <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: Object.keys(GameConstants.EggItemType).filter(e=>isNaN(e)).filter(x=>player._itemList[x]())">
-                                <div class="col-sm-4 col-md-3 col-lg-2">
-                                    <li class="eggSlotModal col-12 pokedexEntry text-nowrap" data-bind="class: App.game.breeding.hasFreeEggSlot() ? '' : 'disabled'">
-                                        <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: GameConstants.camelCaseToString(GameConstants.humanifyString($data))">egg</span>
-                                        <img src="" width="80px" data-bind="attr:{ src: `assets/images/breeding/${$data}.png` }">
-                                        <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: 'Amount: ' + player._itemList[$data]().toLocaleString('en-US')">amount</span>
-                                        <a class="overlay" href="#breed" data-bind="click: function() { ItemList[$data].use(); App.game.breeding.checkCloseModal(); }"></a>
-                                        <knockout style="position: absolute; right: 2px; top: -14px;"
-                                            data-bind="template: { name: 'caughtStatusTemplate', data: { status: ItemList[$data].getCaughtStatus() }, if: (ItemList[$data] instanceof CaughtIndicatingItem) }"/>
-                                    </li>
-                                </div>
+                                <li class="eggSlotModal col-sm-4 col-md-3 col-lg-2 pokedexEntry text-nowrap" data-bind="class: App.game.breeding.hasFreeEggSlot() ? '' : 'disabled'">
+                                    <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: GameConstants.camelCaseToString(GameConstants.humanifyString($data))">egg</span>
+                                    <img src="" width="80px" data-bind="attr:{ src: `assets/images/breeding/${$data}.png` }">
+                                    <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: 'Amount: ' + player._itemList[$data]().toLocaleString('en-US')">amount</span>
+                                    <a class="overlay" href="#breed" data-bind="click: function() { ItemList[$data].use(); App.game.breeding.checkCloseModal(); }"></a>
+                                    <knockout style="position: absolute; right: 2px; top: -14px;"
+                                        data-bind="template: { name: 'caughtStatusTemplate', data: { status: ItemList[$data].getCaughtStatus() }, if: (ItemList[$data] instanceof CaughtIndicatingItem) }"/>
+                                </li>
                             </ul>
                             <!-- /ko -->
                         </div>
@@ -276,16 +289,14 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             </button>
                             <!-- ko if: Object.keys(GameConstants.FossilToPokemon).filter(f => player.mineInventory().find(i => i.name == f && i.amount())).length -->
                             <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: Object.keys(GameConstants.FossilToPokemon).map(f => player.mineInventory().find(i => i.name == f)).filter(f => f ? f.amount() : false)">
-                                <div class="col-sm-4 col-md-3 col-lg-2">
-                                    <li class="eggSlotModal col-12 pokedexEntry text-nowrap" data-bind="class: App.game.breeding.hasFreeEggSlot() ? '' : 'disabled'">
-                                        <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: GameConstants.humanifyString($data.name)">fossil</span>
-                                        <img src="" width="80px" data-bind="attr:{ src: `assets/images/breeding/${$data.name}.png` }">
-                                        <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: 'Amount: ' + $data.amount().toLocaleString('en-US')">amount</span>
-                                        <a class="overlay" href="#breed" data-bind="click: function() { Underground.sellMineItem($data.id); App.game.breeding.checkCloseModal(); }"></a>
-                                        <knockout style="position: absolute; right: 2px; top: -14px;"
-                                            data-bind="template: { name: 'caughtStatusTemplate', data: { status: PartyController.getCaughtStatusByName(GameConstants.FossilToPokemon[$data.name]) } }"/>
-                                    </li>
-                                </div>
+                                <li class="eggSlotModal col-sm-4 col-md-3 col-lg-2 pokedexEntry text-nowrap" data-bind="class: App.game.breeding.hasFreeEggSlot() ? '' : 'disabled'">
+                                    <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: GameConstants.humanifyString($data.name)">fossil</span>
+                                    <img src="" width="80px" data-bind="attr:{ src: `assets/images/breeding/${$data.name}.png` }">
+                                    <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: 'Amount: ' + $data.amount().toLocaleString('en-US')">amount</span>
+                                    <a class="overlay" href="#breed" data-bind="click: function() { Underground.sellMineItem($data.id); App.game.breeding.checkCloseModal(); }"></a>
+                                    <knockout style="position: absolute; right: 2px; top: -14px;"
+                                        data-bind="template: { name: 'caughtStatusTemplate', data: { status: PartyController.getCaughtStatusByName(GameConstants.FossilToPokemon[$data.name]) } }"/>
+                                </li>
                             </ul>
                             <!-- /ko -->
                         </div>
@@ -431,8 +442,29 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
 
                 </div>
             </div>
-            <!--
-            <div class="modal-footer py-1" id="breeding-fireall">
+            <div class="modal-footer d-md-none d-flex">
+                <div class="mr-auto">
+                    <button type="button" class="btn btn-warning hatchery-warnings" 
+                        data-bind="visible: !App.game.breeding.hasFreeEggSlot(),
+                        tooltip: { 
+                            title: 'You don\'t have any free egg slots.',
+                            trigger: 'hover',
+                            placement: 'top',
+                            boundary: 'window'
+                        }">
+                        ⓘ
+                    </button>
+                    <button type="button" class="btn btn-danger hatchery-warnings" 
+                        data-bind="visible: !App.game.breeding.hasFreeQueueSlot() && App.game.breeding.queueSlots(),
+                        tooltip: { 
+                            title: 'Your breeding queue is full or disabled.',
+                            trigger: 'hover',
+                            placement: 'top',
+                            boundary: 'window'
+                        }">
+                        ⓘ
+                    </button>
+                </div>
                 <knockout class="" data-bind="foreach: App.game.breeding.hatcheryHelpers.hired()">
                     <img class="pixelated" src="" height="24px" data-bind="attr:{ src: `assets/images/profile/trainer-${$data.trainerSprite}.png` },
                     tooltip: {
@@ -442,9 +474,9 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                         html: true,
                     }">
                 </knockout>
-                <button id="breeding-fireall" type="button" class="btn btn-danger" data-bind="attr : {disabled : !App.game.breeding.hatcheryHelpers.hired().length}, click: function(){App.game.breeding.hatcheryHelpers.hired().forEach(function(h){h.fire();})}" >Fire All</button>
+                <button id="breeding-fireall-footer" type="button" class="btn btn-danger" data-bind="attr : {disabled : !App.game.breeding.hatcheryHelpers.hired().length}, click: function(){App.game.breeding.hatcheryHelpers.hired().forEach(function(h){h.fire();})}" >Fire All</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
-            -->
         </div>
     </div>
 </div>

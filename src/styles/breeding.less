@@ -309,16 +309,24 @@
   }
 }
 
+.scrolling-div-breeding-list,
+.scrolling-div-breeding-filters {
+    overflow-y: auto;
+}
 @media (min-width: 768px) {
-  .scrolling-div-breeding-list,
-  .scrolling-div-breeding-filters {
-      overflow-y: auto;
-  }
   .scrolling-div-breeding-list {
       height: calc(100vh - 190px);
   }
   .scrolling-div-breeding-filters {
       height: calc(100vh - 234px);
+  }
+}
+@media (max-width: 768px) {
+  .scrolling-div-breeding-list {
+      height: calc(100vh - 300px);
+  }
+  .scrolling-div-breeding-filters {
+      height: calc(100vh - 340px);
   }
 }
 
@@ -340,7 +348,8 @@
 }
 
 .hatchery-warnings {
-  pointer-events: none;
+  cursor: none;
+  text-shadow: 0 0 10px black;
 }
 
 .eggSlotModal {
