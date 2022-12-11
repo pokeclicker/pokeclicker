@@ -103,7 +103,7 @@ class MapHelper {
             cls = areaStatus[areaStatus.uncaughtShinyPokemon];
         } else if (!RouteHelper.isAchievementsComplete(route, region)) {
             cls = areaStatus[areaStatus.missingAchievement];
-        } else if (RouteHelper.minPokerus(RouteHelper.getAvailablePokemonList(route, region, true)) < 3 && Settings.getSetting('showPokerusMapStatus').observableValue()) {
+        } else if (RouteHelper.minPokerus(RouteHelper.getAvailablePokemonList(route, region, true)) < 3) {
             cls = areaStatus[areaStatus.missingResistant];
         } else {
             cls = areaStatus[areaStatus.completed];
@@ -148,7 +148,7 @@ class MapHelper {
                 states.push(areaStatus.uncaughtShinyPokemon);
             } else if (!DungeonRunner.isAchievementsComplete(dungeonList[townName])) {
                 states.push(areaStatus.missingAchievement);
-            } else if (RouteHelper.minPokerus(dungeonList[townName].allAvailablePokemon()) < 3 && Settings.getSetting('showPokerusMapStatus').observableValue()) {
+            } else if (RouteHelper.minPokerus(dungeonList[townName].allAvailablePokemon()) < 3) {
                 states.push(areaStatus.missingResistant);
             }
         }
