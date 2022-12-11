@@ -3,23 +3,6 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-xl breeding-modal" role="document">
         <div class="modal-content">
             <div class="modal-header p-0">
-                <!--
-                <h5 class="modal-title" id="breedingModalLabel">Day Care</h5>
-                <button class="btn btn-secondary" type="button" data-toggle="collapse" style="margin-left: 25px;"
-                        data-target="#breeding-filter" aria-expanded="false" aria-controls="breeding-filter">
-                    Filters
-                </button>
-                <button class="btn btn-secondary" type="button" data-toggle="collapse" style="margin-left: 25px;"
-                        data-target="#breeding-settings" aria-expanded="false" aria-controls="breeding-settings">
-                    Settings
-                </button>
-                
-                <button type="button" class="btn btn-info"
-                style="position: absolute; right: 0px; top: 0px; width: auto; height: 69px; padding: 10px;"
-                data-bind="tooltip: { title: `You can trade your level 100 Pokémon for an egg of the same Pokémon. Hatched Pokémon will gain a ${GameConstants.BREEDING_ATTACK_BONUS}% bonus of their base attack and have a higher chance of becoming shiny!`, trigger: 'hover', placement:'left' }">
-                ?
-                </button>
-                -->
                 <div class="row w-100 m-0">
                     <div class="col-12 p-0">
                         <ul class="nav nav-tabs nav-fill w-100">
@@ -413,9 +396,9 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
 
                     <div id="breeding-help" class="tab-pane fade col-10 offset-1">
                         <h4><u>Hatchery</u></h4>
-                        <p>You can leave Pokémon here in the hatchery to gain an egg.</p>
+                        <p>You can leave your level 100 Pokémon here in the hatchery to gain an egg of the same Pokémon.</p>
 
-                        <p>Once an egg hatches, your Pokémon will gain a bonus of 25% of their base attack.</p>
+                        <p data-bind="text: `Once an egg hatches, your Pokémon will gain a bonus of ${GameConstants.BREEDING_ATTACK_BONUS}% of their base attack and have a higher chance of becoming shiny!` "></p>
 
                         <p class="text-warning"><i>NOTE: Base attack is the value your Pokémon originally has at level 100, before any breeding buffs.</i></p>
 
