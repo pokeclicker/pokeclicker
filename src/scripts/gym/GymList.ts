@@ -11,7 +11,7 @@ GymList['Pewter City'] = new Gym(
     ],
     BadgeEnums.Boulder,
     250,
-    'I took you for granted, and so I lost. As proof of your victory, I confer on you this... the official Pokémon League Boulder Badge.',
+    'I took you for granted, and so I lost. As proof of your victory, I confer on you this... the official Pokémon League BoulderBadge.',
     [new RouteKillRequirement(10, GameConstants.Region.kanto, 2)]
 );
 GymList['Cerulean City'] = new Gym(
@@ -23,7 +23,7 @@ GymList['Cerulean City'] = new Gym(
     ],
     BadgeEnums.Cascade,
     500,
-    'Wow! You\'re too much, all right! You can have the Cascade Badge to show that you beat me.',
+    'Wow! You\'re too much, all right! You can have the CascadeBadge to show that you beat me.',
     [new RouteKillRequirement(10, GameConstants.Region.kanto, 4)],
     () => {
         App.game.quests.getQuestLine('Team Rocket').beginQuest();
