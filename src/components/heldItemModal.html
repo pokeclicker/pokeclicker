@@ -45,7 +45,7 @@
                   </thead>
                   <tbody id="pokemonsWithHeldItems" data-bind="foreach: PartyController.getPokemonsWithHeldItemSortedList()">
                     <tr class="clickable" data-bind="click: () => $data.giveHeldItem(HeldItem.heldItemSelected())">
-                      <td class="text-left"><knockout data-bind="text: $data.name"></knockout><sup data-bind="visible: $data.shiny">✨</sup></td>
+                      <td class="text-left"><knockout data-bind="text: $data.displayName"></knockout><sup data-bind="visible: $data.shiny">✨</sup></td>
                       <td class="text-center tight" data-bind="
                         text: $data.heldItem() == undefined ? '' : $data.heldItem().displayName,
                         tooltip: $data.heldItem() != undefined ? { title: $data.heldItem().description, placement: 'bottom', trigger: 'hover'} : undefined
@@ -62,7 +62,7 @@
                   </thead>
                   <tbody data-bind="foreach: PartyController.getHeldItemSortedList()">
                     <tr class="clickable" data-bind="click: () => $data.giveHeldItem(HeldItem.heldItemSelected()), hidden: $data.hideFromHeldItemList()">
-                      <td class="text-left" colspan="2"><knockout data-bind="text: $data.name"></knockout><sup data-bind="visible: $data.shiny">✨</sup></td>
+                      <td class="text-left" colspan="2"><knockout data-bind="text: $data.displayName"></knockout><sup data-bind="visible: $data.shiny">✨</sup></td>
                     </tr>
                   </tbody>
                 </table>
