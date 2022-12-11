@@ -103,7 +103,7 @@ class MapHelper {
             cls = areaStatus[areaStatus.uncaughtShinyPokemon];
         } else if (!RouteHelper.isAchievementsComplete(route, region)) {
             cls = areaStatus[areaStatus.missingAchievement];
-        } else if (RouteHelper.minPokerus(RouteHelper.getAvailablePokemonList(route, region, true)) < 3) {
+        } else if (RouteHelper.minPokerus(RouteHelper.getAvailablePokemonList(route, region, true)) < GameConstants.Pokerus.Resistant) {
             cls = areaStatus[areaStatus.missingResistant];
         } else {
             cls = areaStatus[areaStatus.completed];
