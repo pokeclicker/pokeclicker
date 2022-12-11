@@ -44,8 +44,10 @@ const pokeLeagueShop = () => new Shop([
     new PokeballItem(GameConstants.Pokeball.Masterball, 3000    , GameConstants.Currency.questPoint  , { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.questPoint]}` }, 'Master Ball'),
     new PokeballItem(GameConstants.Pokeball.Masterball, 3000    , GameConstants.Currency.farmPoint   , { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.farmPoint]}` }, 'Master Ball'),
     new PokeballItem(GameConstants.Pokeball.Masterball, 50      , GameConstants.Currency.diamond     , { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.diamond]}` }, 'Master Ball'),
-    //ItemList['RareCandy'],
     ItemList.Protein,
+    // TODO VITAMINS: Move these to different shops?
+    ItemList.Calcium,
+    ItemList.Carbos,
 ]);
 
 //Kanto Shops
@@ -1808,7 +1810,8 @@ TownList['Mt. Silver'] = new DungeonTown(
     'Mt. Silver',
     GameConstants.Region.johto,
     GameConstants.JohtoSubRegions.Johto,
-    [new RouteKillRequirement(10, GameConstants.Region.johto, 28)]
+    [new RouteKillRequirement(10, GameConstants.Region.johto, 28)],
+    [TemporaryBattleList.Red]
 );
 
 //Hoenn Shops
@@ -4381,6 +4384,15 @@ const AltaroftheSunneandMooneShop = new Shop([
     ItemList.Sun_stone,
     ItemList.Poipole,
 ]);
+const ATreeMaybeShop = new Shop([
+    ItemList.Power_Bracer,
+    ItemList.Key_stone,
+]);
+const MagikarpJumpGemTrade = new GemMasterShop('Trade', [new GymBadgeRequirement(BadgeEnums.Heal_League)]);
+const MagikarpJumpShadySalesMan = new Shop([
+    ItemList['Magikarp Blue Raindrops'],
+    ItemList['Magikarp Saucy Violet'],
+], 'Shady Sales Man', [new GymBadgeRequirement(BadgeEnums.Master_League)]);
 
 //Alola NPCs
 
@@ -4554,6 +4566,17 @@ const BattleTreeBlue = new NPC('Blue', [
     'Hello there champ! Fancy seeing you here.',
     'We just planted this sapling here. Maybe it will grow into something great some day.',
 ], {image: 'assets/images/npcs/Blue-masters.png'});
+const MayorKarp = new NPC('Mayor Karp', [
+    'TODO',
+    'Something about welcome',
+    'Something about only magikarps can fight here',
+    'Something about the league system',
+    'Insist attack is jump power',
+], {image: 'assets/images/npcs/MayorKarp.png'});
+
+const MagikarpJumpRoamerNPC = new RoamerNPC('Roddy Tackle', [
+    'TODO: something about rare patterns at {ROUTE_NAME}!',
+], GameConstants.Region.alola, RoamingPokemonList.findGroup(GameConstants.Region.alola, GameConstants.AlolaSubRegions.MagikarpJump), 'assets/images/npcs/Roddy Tackle.png');
 
 //Alola Towns
 
@@ -4733,7 +4756,7 @@ TownList['A Tree Maybe'] = new Town(
     'A Tree Maybe',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.PoniIsland,
-    [],
+    [ATreeMaybeShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 30)],
         npcs: [BattleTreeRed, BattleTreeBlue],
@@ -4744,10 +4767,10 @@ TownList['Hoppy Town'] = new Town(
     'Hoppy Town',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MagikarpJump,
-    [new DockTownContent()],
+    [new DockTownContent(), MagikarpJumpGemTrade],
     {
-        requirements: [],
-        npcs: [],
+        requirements: [new QuestLineStartedRequirement('Magikarp Jump')],
+        npcs: [MayorKarp, MagikarpJumpRoamerNPC],
     }
 );
 TownList['Friend League'] = new Town(
@@ -4756,88 +4779,97 @@ TownList['Friend League'] = new Town(
     GameConstants.AlolaSubRegions.MagikarpJump,
     [],
     {
-        requirements: [],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 31)],
     }
 );
 TownList['Quick League'] = new Town(
     'Quick League',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MagikarpJump,
-    [],
+    [TemporaryBattleList['Magikarp Jump Koylee']],
     {
-        requirements: [],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 32)],
     }
 );
 TownList['Heavy League'] = new Town(
     'Heavy League',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MagikarpJump,
-    [],
+    [TemporaryBattleList['Magikarp Jump Karpella'], TemporaryBattleList['Magikarp Jump Karpen']],
     {
-        requirements: [],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 33)],
     }
 );
 TownList['Great League'] = new Town(
     'Great League',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MagikarpJump,
-    [],
+    [TemporaryBattleList['Magikarp Jump Tykarp'], TemporaryBattleList['Magikarp Jump Karpress']],
     {
-        requirements: [],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 34)],
     }
 );
 TownList['Fast League'] = new Town(
     'Fast League',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MagikarpJump,
-    [],
+    [TemporaryBattleList['Magikarp Jump Karami'], TemporaryBattleList['Magikarp Jump Karson']],
     {
-        requirements: [],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 35)],
     }
 );
 TownList['Luxury League'] = new Town(
     'Luxury League',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MagikarpJump,
-    [],
+    [TemporaryBattleList['Magikarp Jump Karpress 2'],TemporaryBattleList['Magikarp Jump Karpen 2'],TemporaryBattleList['Magikarp Jump Karbuck']],
     {
-        requirements: [],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 36)],
     }
 );
 TownList['Heal League'] = new Town(
     'Heal League',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MagikarpJump,
-    [],
+    [TemporaryBattleList['Magikarp Jump Skyhopper'],TemporaryBattleList['Magikarp Jump Karpen 3'],TemporaryBattleList['Magikarp Jump Karpella 2']],
     {
-        requirements: [],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 37)],
     }
 );
 TownList['Ultra League'] = new Town(
     'Ultra League',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MagikarpJump,
-    [],
+    [TemporaryBattleList['Magikarp Jump Karbuck 2'],TemporaryBattleList['Magikarp Jump Kareign'],TemporaryBattleList['Magikarp Jump Koylee 2']],
     {
-        requirements: [],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 38)],
     }
 );
 TownList['Elite Four League'] = new Town(
     'Elite Four League',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MagikarpJump,
-    [],
+    [GymList['E4 League'], TemporaryBattleList['Magikarp Jump Karpress 3'],TemporaryBattleList['Magikarp Jump Karpen 4'],TemporaryBattleList['Magikarp Jump Karpella 3']],
     {
-        requirements: [],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 39)],
     }
 );
 TownList['Master League'] = new Town(
     'Master League',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MagikarpJump,
-    [],
+    [TemporaryBattleList['Magikarp Jump Skyhopper 2'],TemporaryBattleList['Magikarp Jump Tykarp 2']],
     {
-        requirements: [],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 40)],
+    }
+);
+TownList['Magikarp\'s Eye'] = new Town(
+    'Magikarp\'s Eye',
+    GameConstants.Region.alola,
+    GameConstants.AlolaSubRegions.MagikarpJump,
+    [MagikarpJumpShadySalesMan],
+    {
+        requirements: [new DevelopmentRequirement()], //TODO: Should unlock as the subregion unlocks
     }
 );
 
@@ -5187,7 +5219,7 @@ const BattleCafeMaster = new NPC('Battle Café Master', [
     'Milcery can evolve when you spin around with it, while treating it to a Sweet.',
     'For example, you can whip up a Vanilla Alcremie, by spinning clockwise for less than 5 seconds, during the day. Piece of cake! There’s a unique form for each Sweet under this circumstance, so bake it till you make it!',
     'There are more tiers to Alcremie than I can count. Mix up the direction, duration, time of day, and the given Sweet to discover all the flavours there are to find.',
-    'I will suggest that you only do 3 spins a day if you don’t want to end up sick! You might be able to try more, when you get more experienced...',
+    'I will suggest that you only do 3 spins a day if you don’t want to end up sick! You might be able to try more, when you get more experienced with a flavour...',
     'Stop by the Battle Café, we sell all the Sweets you’ll need!',
 ], {image: 'assets/images/npcs/BattleCafeMaster.png'});
 

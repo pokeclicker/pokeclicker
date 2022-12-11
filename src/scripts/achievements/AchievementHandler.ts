@@ -180,6 +180,7 @@ class AchievementHandler {
         const categories = GameHelper.enumStrings(GameConstants.Region).filter(r => r != 'none' && r != 'final').map(r => new AchievementCategory(r, 100, () => player.highestRegion() >= GameConstants.Region[r]));
         categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.global], 150, () => true));
         categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.sevii], 50, () => true));
+        categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.magikarpJump], 25, () => false));
 
         AchievementHandler._achievementCategories = categories;
         return categories;
@@ -353,16 +354,16 @@ class AchievementHandler {
         AchievementHandler.addAchievement('DigDug Ain\'t Got Nothin\' on Me', 'Dig deeper into the Underground 100 times.', new UndergroundLayersMinedRequirement(100), 0.1);
         AchievementHandler.addAchievement('Both My Thumbs Are Green! This Can\'t Be Healthy', 'Dig deeper into the Underground 1,000 times.', new UndergroundLayersMinedRequirement(1000), 0.3);
 
-        AchievementHandler.addAchievement('Let\'s Try This Out', 'Obtain your first Protein.', new ProteinObtainRequirement(1), 0.01);
-        AchievementHandler.addAchievement('Pre-Workout Supplements', 'Obtain 5 Proteins.', new ProteinObtainRequirement(5), 0.02);
-        AchievementHandler.addAchievement('Well-Stocked Medicine Cabinet', 'Obtain 10 Proteins.', new ProteinObtainRequirement(10), 0.04);
-        AchievementHandler.addAchievement('I Can\'t Hold All These Proteins!', 'Obtain 50 Proteins.', new ProteinObtainRequirement(50), 0.08);
-        AchievementHandler.addAchievement('Essential Nutrients', 'Obtain 100 Proteins.', new ProteinObtainRequirement(100), 0.10);
-        AchievementHandler.addAchievement('Putting the \'Bulk\' in Bulk-Buy', 'Obtain 500 Proteins.', new ProteinObtainRequirement(500), 0.15);
-        AchievementHandler.addAchievement('Protein Stockpile', 'Obtain 1,000 Proteins.', new ProteinObtainRequirement(1000), 0.20);
-        AchievementHandler.addAchievement('Fish, Eggs, Nuts, and Cheese', 'Obtain 5,000 Proteins.', new ProteinObtainRequirement(5000), 0.35);
-        AchievementHandler.addAchievement('Does This Powder Come With Flavours?', 'Obtain 10,000 Proteins.', new ProteinObtainRequirement(10000), 0.50);
-        AchievementHandler.addAchievement('A Literal Mountain of Muscle', 'Obtain 50,000 Proteins.', new ProteinObtainRequirement(50000), 0.70);
+        AchievementHandler.addAchievement('Let\'s Try This Out', 'Obtain your first Vitamin.', new VitaminObtainRequirement(1), 0.01);
+        AchievementHandler.addAchievement('Pre-Workout Supplements', 'Obtain 5 Vitamins.', new VitaminObtainRequirement(5), 0.02);
+        AchievementHandler.addAchievement('Well-Stocked Medicine Cabinet', 'Obtain 10 Vitamins.', new VitaminObtainRequirement(10), 0.04);
+        AchievementHandler.addAchievement('I Can\'t Hold All These Vitamins!', 'Obtain 50 Vitamins.', new VitaminObtainRequirement(50), 0.08);
+        AchievementHandler.addAchievement('Essential Nutrients', 'Obtain 100 Vitamins.', new VitaminObtainRequirement(100), 0.10);
+        AchievementHandler.addAchievement('Putting the \'Bulk\' in Bulk-Buy', 'Obtain 500 Vitamins.', new VitaminObtainRequirement(500), 0.15);
+        AchievementHandler.addAchievement('Vitamin Stockpile', 'Obtain 1,000 Vitamins.', new VitaminObtainRequirement(1000), 0.20);
+        AchievementHandler.addAchievement('Fish, Eggs, Nuts, and Cheese', 'Obtain 5,000 Vitamins.', new VitaminObtainRequirement(5000), 0.35);
+        AchievementHandler.addAchievement('Does This Powder Come With Flavours?', 'Obtain 10,000 Vitamins.', new VitaminObtainRequirement(10000), 0.50);
+        AchievementHandler.addAchievement('A Literal Mountain of Muscle', 'Obtain 50,000 Vitamins.', new VitaminObtainRequirement(50000), 0.70);
 
         AchievementHandler.addAchievement('Fighting Novice', 'Complete stage 100 in the Battle Frontier.', new BattleFrontierHighestStageRequirement(100), 0.05);
         AchievementHandler.addAchievement('Competent Fighter', 'Complete stage 250 in the Battle Frontier.', new BattleFrontierHighestStageRequirement(250), 0.15);
@@ -425,9 +426,12 @@ class AchievementHandler {
                 }
 
                 let category = region;
-                // Split Sevii islands into it's own achievement pool
+                // Split bigger subregions into their own achievement pool
                 if (region == GameConstants.Region.kanto && (route.subRegion == GameConstants.KantoSubRegions.Sevii123 || route.subRegion == GameConstants.KantoSubRegions.Sevii4567)) {
                     category = GameConstants.ExtraAchievementCategories.sevii;
+                }
+                if (region == GameConstants.Region.alola && route.subRegion == GameConstants.AlolaSubRegions.MagikarpJump) {
+                    category = GameConstants.ExtraAchievementCategories.magikarpJump;
                 }
                 const routeName = Routes.getName(route.number, region, true);
                 AchievementHandler.addAchievement(`${route.routeName} Traveler`, `Defeat 100 Pokémon on ${routeName}.`, new RouteKillRequirement(GameConstants.ACHIEVEMENT_DEFEAT_ROUTE_VALUES[0], region, route.number), 1, category);
@@ -441,9 +445,12 @@ class AchievementHandler {
             // Dungeons
             GameConstants.RegionDungeons[region]?.forEach(dungeon => {
                 let category = region;
-                // Split Sevii islands into it's own achievement pool
+                // Split bigger subregions into their own achievement pool
                 if (region == GameConstants.Region.kanto && (TownList[dungeon].subRegion == GameConstants.KantoSubRegions.Sevii123 || TownList[dungeon].subRegion == GameConstants.KantoSubRegions.Sevii4567)) {
                     category = GameConstants.ExtraAchievementCategories.sevii;
+                }
+                if (region == GameConstants.Region.alola && TownList[dungeon].subRegion == GameConstants.AlolaSubRegions.MagikarpJump) {
+                    category = GameConstants.ExtraAchievementCategories.magikarpJump;
                 }
                 AchievementHandler.addAchievement(`${dungeon} Explorer`, `Clear ${dungeon} 10 times.`, new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[0], GameConstants.getDungeonIndex(dungeon)), 0.8, category);
                 AchievementHandler.addAchievement(`${dungeon} Expert`, `Clear ${dungeon} 100 times.`, new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[1], GameConstants.getDungeonIndex(dungeon)), 1.2, category);
@@ -472,6 +479,8 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Sevii Master', 'Catch 35 unique Pokémon native to the Sevii Islands.', new SeviiCaughtRequirement(35, false), 6, GameConstants.ExtraAchievementCategories.sevii);
         AchievementHandler.addAchievement('Sevii Shiny Trainer', 'Catch 15 unique Shiny Pokémon native to the Sevii Islands.', new SeviiCaughtRequirement(15, true), 5, GameConstants.ExtraAchievementCategories.sevii);
         AchievementHandler.addAchievement('Sevii Shiny Master', 'Catch 35 unique Shiny Pokémon native to the Sevii Islands.', new SeviiCaughtRequirement(35, true), 9, GameConstants.ExtraAchievementCategories.sevii);
+
+        addGymAchievements(GameConstants.RegionGyms[GameConstants.Region.final + 1], GameConstants.ExtraAchievementCategories.magikarpJump, 'Magikarp Jump');
 
 
         // load filters, filter the list & calculate number of tabs

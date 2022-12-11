@@ -135,6 +135,7 @@ export const ITEM_PRICE_DEDUCT = 1.0005;
 export const PLATE_VALUE = 100;
 
 // Breeding
+export const EGG_CYCLE_MULTIPLIER = 40;
 export const BREEDING_ATTACK_BONUS = 25;
 
 // Farming
@@ -207,7 +208,7 @@ export enum AchievementType {
     'Farming',
     'Underground',
     'Battle Frontier',
-    'Protein',
+    'Vitamins',
     'Pokerus',
 }
 
@@ -843,7 +844,8 @@ export enum PokeBlockColor {
 
 export enum VitaminType {
     Protein,
-    RareCandy,
+    Calcium,
+    Carbos,
 }
 
 export enum EggItemType {
@@ -1396,6 +1398,7 @@ export const TemporaryBattles = [
     'Suicune 6',
     'Silver 6',
     'Silver 7',
+    'Red',
     'May 1',
     'May 2',
     'May 3',
@@ -1527,6 +1530,27 @@ export const TemporaryBattles = [
     'Team Flare Leader Lysandre',
     'Team Plasma Leader Ghetsis',
     'Team Rainbow Leader Giovanni',
+    'Magikarp Jump Koylee',
+    'Magikarp Jump Karpella',
+    'Magikarp Jump Karpen',
+    'Magikarp Jump Tykarp',
+    'Magikarp Jump Karpress',
+    'Magikarp Jump Karami',
+    'Magikarp Jump Karson',
+    'Magikarp Jump Karpress 2',
+    'Magikarp Jump Karpen 2',
+    'Magikarp Jump Karbuck',
+    'Magikarp Jump Skyhopper',
+    'Magikarp Jump Karpen 3',
+    'Magikarp Jump Karpella 2',
+    'Magikarp Jump Karbuck 2',
+    'Magikarp Jump Kareign',
+    'Magikarp Jump Koylee 2',
+    'Magikarp Jump Karpress 3',
+    'Magikarp Jump Karpen 4',
+    'Magikarp Jump Karpella 3',
+    'Magikarp Jump Skyhopper 2',
+    'Magikarp Jump Tykarp 2',
     'Hop 1',
     'Mirages',
     'Hop 2',
@@ -1755,4 +1779,5 @@ export enum AlcremieSpins {
 export enum ExtraAchievementCategories {
     global = Region.final,
     sevii,
+    magikarpJump,
 }

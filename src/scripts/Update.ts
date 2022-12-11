@@ -357,7 +357,7 @@ class Update implements Saveable {
                     title: 'Active Challenge Mode?',
                     message: `Do you want to activate No Protein challenge mode?
 
-                    <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableProteins.activate();" data-dismiss="toast">Activate</button>`,
+                    <button class="btn btn-block btn-danger" onclick="App.game.challenges.list.disableVitamins.activate();" data-dismiss="toast">Activate</button>`,
                     timeout: GameConstants.HOUR,
                 });
             }
@@ -1560,7 +1560,33 @@ class Update implements Saveable {
             }
 
         },
-        '0.10.5': ({ playerData, saveData }) => {
+
+        '0.10.5': ({ playerData, saveData, settingsData }) => {
+            // Red temporary battle
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 28);
+            // Magikarp Jump Temp Battles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 160);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 161);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 162);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 163);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 164);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 165);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 166);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 167);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 168);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 169);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 170);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 171);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 172);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 173);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 174);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 175);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 176);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 177);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 178);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 179);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 180);
+
             // Rotate form IDs
             const formIDs = [
                 // Butterfree (Gigantamax before others)
@@ -1794,9 +1820,45 @@ class Update implements Saveable {
                 Update.updatePokemonId(saveData, oldID, newID);
             });
 
+            // Update proteins → vitamins
+            saveData.challenges.list.disableVitamins = saveData.challenges.list.disableProteins || false;
+            saveData.statistics.totalVitaminsObtained = saveData.statistics.totalProteinsObtained || 0;
+            saveData.statistics.totalVitaminsPurchased = saveData.statistics.totalProteinsPurchased || 0;
+            // Delete our old statistics
+            delete saveData.statistics.totalProteinsObtained;
+            delete saveData.statistics.totalProteinsPurchased;
+
+            // Update Vitamins used
+            saveData.party.caughtPokemon.forEach(p => {
+                // Check Proteins used
+                if (p[2]) {
+                    // Update Proteins used
+                    p[2] = {
+                        0: p[2],
+                    };
+                }
+            });
+
+            // Update our settings
+            settingsData.vitaminSort = settingsData.proteinSort;
+            settingsData.vitaminSortDirection = settingsData.proteinSortDirection;
+            settingsData.vitaminHideMaxedPokemon = settingsData.proteinHideMaxedPokemon;
+            settingsData.vitaminHideShinyPokemon = settingsData.proteinHideShinyPokemon;
+            settingsData.vitaminSearchFilter = settingsData.proteinSearchFilter;
+            settingsData.vitaminRegionFilter = settingsData.proteinRegionFilter;
+            settingsData.vitaminTypeFilter = settingsData.proteinTypeFilter;
+            // Delete old settings
+            delete settingsData.proteinSort;
+            delete settingsData.proteinSortDirection;
+            delete settingsData.proteinHideMaxedPokemon;
+            delete settingsData.proteinHideShinyPokemon;
+            delete settingsData.proteinSearchFilter;
+            delete settingsData.proteinRegionFilter;
+            delete settingsData.proteinTypeFilter;
+
             // Fix Galar main story temp battles
             const darkestDayQL = saveData.quests.questLines.find((q) => q.name == 'The Darkest Day');
-            if (darkestDayQL.state < 2) {
+            if (darkestDayQL?.state < 2) {
                 // Fix temp battle indicies based on quest step.
                 if (darkestDayQL.quest <= 1) {
                     saveData.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Bede 3')] = 0;
