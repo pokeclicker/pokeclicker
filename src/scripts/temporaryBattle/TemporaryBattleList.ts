@@ -2704,7 +2704,7 @@ TemporaryBattleList['Magikarp Jump Karpella'] = new TemporaryBattle(
 TemporaryBattleList['Magikarp Jump Karpen'] = new TemporaryBattle(
     'Magikarp Jump Karpen',
     [new GymPokemon('Magikarp Calico (White, Orange)', 1710000, 20)],
-    'Are you sure you Karp isn\'t flying type?',
+    'Are you sure your Karp isn\'t flying type?',
     [new TemporaryBattleRequirement('Magikarp Jump Karpella')],
     undefined,
     {
