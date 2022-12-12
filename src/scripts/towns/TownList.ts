@@ -4392,7 +4392,7 @@ const MagikarpJumpGemTrade = new GemMasterShop('Trade', [new GymBadgeRequirement
 const MagikarpJumpShadySalesMan = new Shop([
     ItemList['Magikarp Blue Raindrops'],
     ItemList['Magikarp Saucy Violet'],
-], 'Shady Sales Man', [new GymBadgeRequirement(BadgeEnums.Master_League)]);
+], 'Shady Salesman', [new GymBadgeRequirement(BadgeEnums.Master_League)]);
 
 //Alola NPCs
 
@@ -4573,10 +4573,14 @@ const MayorKarp = new NPC('Mayor Karp', [
     'Something about the league system',
     'Insist attack is jump power',
 ], {image: 'assets/images/npcs/MayorKarp.png'});
-
 const MagikarpJumpRoamerNPC = new RoamerNPC('Roddy Tackle', [
     'TODO: something about rare patterns at {ROUTE_NAME}!',
 ], GameConstants.Region.alola, RoamingPokemonList.findGroup(GameConstants.Region.alola, GameConstants.AlolaSubRegions.MagikarpJump), 'assets/images/npcs/Roddy Tackle.png');
+const HoppyManOfMystery = new NPC('Man of Mystery', [
+    'We have been looking for a Shady Salesman.',
+    'He is trying to sell overpriced Magikarps to clueless children.',
+    'Please keep an <i>eye</i> open for him.',
+]);
 
 //Alola Towns
 
@@ -4770,7 +4774,7 @@ TownList['Hoppy Town'] = new Town(
     [new DockTownContent(), MagikarpJumpGemTrade],
     {
         requirements: [new QuestLineStartedRequirement('Magikarp Jump')],
-        npcs: [MayorKarp, MagikarpJumpRoamerNPC],
+        npcs: [MayorKarp, MagikarpJumpRoamerNPC, HoppyManOfMystery],
     }
 );
 TownList['Friend League'] = new Town(
