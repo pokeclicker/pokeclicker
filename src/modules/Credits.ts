@@ -257,6 +257,7 @@ export const SpriteCredits: Credit[] = [
             'Pinkan Scyther Shuffle',
             'Pinkan Weedle',
             'Pinkan Weezing',
+            'Professor Juniper',
             'Roddy Tackle',
             'Rudy',
             'Rusted Shield and Sword icons',
