@@ -2671,6 +2671,7 @@ TemporaryBattleList['Magikarp Jump Koylee'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Koylee',
+        imageName: '../gymLeaders/Kareign',
         firstTimeRewardFunction: () => {
             Notifier.notify({
                 message: 'You were awarded a Magikarp Calico (Orange, White)!',
@@ -2690,6 +2691,7 @@ TemporaryBattleList['Magikarp Jump Karpella'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Karpella',
+        imageName: '../gymLeaders/Karson',
         firstTimeRewardFunction: () => {
             Notifier.notify({
                 message: 'You were awarded a Magikarp Calico (Orange, White, Black)!',
@@ -2709,6 +2711,7 @@ TemporaryBattleList['Magikarp Jump Karpen'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Karpen',
+        imageName: '../gymLeaders/Kareign',
         firstTimeRewardFunction: () => {
             Notifier.notify({
                 message: 'You were awarded a Magikarp Calico (White, Orange)!',
@@ -2728,6 +2731,7 @@ TemporaryBattleList['Magikarp Jump Tykarp'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Tykarp',
+        imageName: '../gymLeaders/Koichiro',
     }
 );
 
@@ -2739,6 +2743,7 @@ TemporaryBattleList['Magikarp Jump Karpress'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Karpress',
+        imageName: '../gymLeaders/Karson',
     }
 );
 
@@ -2750,6 +2755,7 @@ TemporaryBattleList['Magikarp Jump Karami'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Karami',
+        imageName: '../gymLeaders/Kareign',
     }
 );
 
@@ -2761,6 +2767,7 @@ TemporaryBattleList['Magikarp Jump Karson'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Karson',
+        imageName: '../gymLeaders/Koichiro',
     }
 );
 
@@ -2772,6 +2779,7 @@ TemporaryBattleList['Magikarp Jump Karpress 2'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Karpress',
+        imageName: '../gymLeaders/Karson',
     }
 );
 
@@ -2783,6 +2791,7 @@ TemporaryBattleList['Magikarp Jump Karpen 2'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Karpen',
+        imageName: '../gymLeaders/Kareign',
     }
 );
 
@@ -2794,6 +2803,7 @@ TemporaryBattleList['Magikarp Jump Karbuck'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Karbuck',
+        imageName: '../gymLeaders/Koichiro',
         firstTimeRewardFunction: () => {
             Notifier.notify({
                 message: 'You were awarded a Magikarp Calico (Orange, Gold)!',
@@ -2813,6 +2823,7 @@ TemporaryBattleList['Magikarp Jump Skyhopper'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Skyhopper',
+        imageName: '../gymLeaders/Karson',
     }
 );
 
@@ -2824,6 +2835,7 @@ TemporaryBattleList['Magikarp Jump Karpen 3'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Karpen',
+        imageName: '../gymLeaders/Koichiro',
     }
 );
 
@@ -2835,6 +2847,7 @@ TemporaryBattleList['Magikarp Jump Karpella 2'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Karpella',
+        imageName: '../gymLeaders/Kareign',
     }
 );
 
@@ -2846,6 +2859,7 @@ TemporaryBattleList['Magikarp Jump Karbuck 2'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Karbuck',
+        imageName: '../gymLeaders/Karson',
     }
 );
 
@@ -2857,6 +2871,7 @@ TemporaryBattleList['Magikarp Jump Kareign'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Kareign',
+        imageName: '../gymLeaders/Koichiro',
     }
 );
 
@@ -2868,6 +2883,7 @@ TemporaryBattleList['Magikarp Jump Koylee 2'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Koylee',
+        imageName: '../gymLeaders/Kareign',
     }
 );
 
@@ -2879,6 +2895,7 @@ TemporaryBattleList['Magikarp Jump Karpress 3'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Karpress',
+        imageName: '../gymLeaders/Koichiro',
         firstTimeRewardFunction: () => {
             Notifier.notify({
                 message: 'You were awarded a Magikarp Grey Diamonds!',
@@ -2898,6 +2915,7 @@ TemporaryBattleList['Magikarp Jump Karpen 4'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Karpen',
+        imageName: '../gymLeaders/Karson',
     }
 );
 
@@ -2909,6 +2927,7 @@ TemporaryBattleList['Magikarp Jump Karpella 3'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Karpella',
+        imageName: '../gymLeaders/Kareign',
         firstTimeRewardFunction: () => {
             Notifier.notify({
                 message: 'You were awarded a Magikarp Purple Patches!',
@@ -2928,6 +2947,7 @@ TemporaryBattleList['Magikarp Jump Skyhopper 2'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Skyhopper',
+        imageName: '../gymLeaders/Koichiro',
     }
 );
 
@@ -2939,6 +2959,7 @@ TemporaryBattleList['Magikarp Jump Tykarp 2'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Tykarp',
+        imageName: '../gymLeaders/Karson',
         firstTimeRewardFunction: () => {
             Notifier.notify({
                 message: 'You were awarded a Magikarp Black Mask!',
