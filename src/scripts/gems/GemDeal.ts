@@ -14,7 +14,7 @@ class GemDeal {
     }
 
     public static generateDeals() {
-        const gemMasterRegions = [GameConstants.Region.hoenn, GameConstants.Region.unova, GameConstants.Region.kalos];
+        const gemMasterRegions = [GameConstants.Region.hoenn, GameConstants.Region.unova, GameConstants.Region.kalos, GameConstants.Region.alola];
 
         for (const region of gemMasterRegions) {
             if (!GemDeal.list[region]) {
@@ -27,6 +27,7 @@ class GemDeal {
         GemDeal.list[GameConstants.Region.hoenn].push(...this.generateHoennFluteDeals());
         GemDeal.list[GameConstants.Region.unova].push(...this.generateUnovaFluteDeals());
         GemDeal.list[GameConstants.Region.kalos].push(...this.generateFurfrouDeal());
+        GemDeal.list[GameConstants.Region.alola].push(...this.generateMagikarpJumpDeal());
     }
 
     private static generateHoennFluteDeals() {
@@ -120,6 +121,17 @@ class GemDeal {
                 {gemType: PokemonType.Fairy, amount: 100000},
             ],
             ItemList['Furfrou (La Reine)'],
+            1
+        ));
+        return list;
+    }
+
+    private static generateMagikarpJumpDeal() {
+        const list = [];
+
+        list.push(new GemDeal(
+            [{gemType: PokemonType.Water, amount: 1500000}],
+            ItemList['Magikarp Brown Stripes'],
             1
         ));
         return list;
