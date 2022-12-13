@@ -58,7 +58,6 @@ class Town {
 
     public townCaughtStatus(): number {
         let caughtStatus = Math.ceil(Object.keys(CaughtStatus).length / 2 + 1);
-        const pokerusStatus = Math.ceil(Object.keys(GameConstants.Pokerus).length / 2 + 1);
         this.content.forEach(c => {
             if (c instanceof Shop && c?.items) {
                 c.items.forEach(i => {
