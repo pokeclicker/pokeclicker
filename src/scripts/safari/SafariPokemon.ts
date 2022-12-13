@@ -109,8 +109,9 @@ class SafariPokemon implements PokemonInterface {
         this._eatingBait(value);
     }
 
-    public static random(region: GameConstants.Region) {
-        const pokemon = Rand.fromWeightedArray(SafariPokemonList.list[region]()[0].safariPokemon, SafariPokemonList.list[region]()[0].safariPokemon.map(p => p.weight));
+    public static random() {
+        ///TODO: If more than 1 zone per region, need to make this work
+        const pokemon = Rand.fromWeightedArray(SafariPokemonList.list[player.region]()[0].safariPokemon, SafariPokemonList.list[player.region]()[0].safariPokemon.map(p => p.weight));
         return new SafariPokemon(pokemon.name);
     }
 

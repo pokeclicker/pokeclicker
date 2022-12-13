@@ -293,7 +293,7 @@ class Safari {
         if (!this.canMove(x, y) || (x == this.playerXY.x && y == this.playerXY.y) || this.pokemonGrid().find(p => p.x === x && p.y === y)) {
             return;
         }
-        const pokemon = SafariPokemon.random(player.region);
+        const pokemon = SafariPokemon.random();
 
         pokemon.x = x;
         pokemon.y = y;
@@ -373,10 +373,14 @@ class Safari {
         return GameConstants.SAFARI_BASE_POKEBALL_COUNT;
     }
 
-    static completed(shiny = false, region) {
-        return SafariPokemonList.list[player.region]()[0].safariPokemon.reduce((all,poke) => {
-            return all && App.game.party.alreadyCaughtPokemonByName(poke.name,shiny);
-        }, true);
+    static completed(shiny = false) {
+        ///TODO: If more than 1 zone per region, need to make this work
+        if (SafariPokemonList.list[player.region]) {
+            return SafariPokemonList.list[player.region]()[0].safariPokemon.reduce((all,poke) => {
+                return all && App.game.party.alreadyCaughtPokemonByName(poke.name,shiny);
+            }, true);
+        }
+        return false;
     }
 }
 
