@@ -55,6 +55,23 @@ class Town {
     public isUnlocked() {
         return this.requirements.every(requirement => requirement.isCompleted());
     }
+
+    public townCaughtStatus(): number {
+        let caughtStatus = Math.ceil(Object.keys(CaughtStatus).length / 2 + 1);
+        const pokerusStatus = Math.ceil(Object.keys(GameConstants.Pokerus).length / 2 + 1);
+        this.content.forEach(c => {
+            if (c instanceof Shop && c?.items) {
+                c.items.forEach(i => {
+                    if (i instanceof CaughtIndicatingItem) {
+                        if (i.getCaughtStatus() < caughtStatus) {
+                            caughtStatus = i.getCaughtStatus();
+                        }
+                    }
+                });
+            }
+        });
+        return caughtStatus;
+    }
 }
 
 class DungeonTown extends Town {
