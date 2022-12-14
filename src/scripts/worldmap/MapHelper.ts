@@ -154,11 +154,6 @@ class MapHelper {
         }
         const town = TownList[townName];
         town.content.forEach(c => {
-            if (MapHelper.townCompleted(townName) == CaughtStatus.NotCaught) {
-                states.push(areaStatus.uncaughtPokemon);
-            } else if (MapHelper.townCompleted(townName) == CaughtStatus.Caught) {
-                states.push(areaStatus.uncaughtShinyPokemon);
-            }
             // If the town itself is not locked, it should never show locked
             if (c.areaStatus() != areaStatus.locked) {
                 states.push(c.areaStatus());
@@ -180,14 +175,6 @@ class MapHelper {
             return false;
         }
         return town.isUnlocked();
-    }
-
-    public static townCompleted(townName: string): number {
-        const town = TownList[townName];
-        if (!town) {
-            return -1;
-        }
-        return town.townCaughtStatus();
     }
 
     public static moveToTown(townName: string) {
