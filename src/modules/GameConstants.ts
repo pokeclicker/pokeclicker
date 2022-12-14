@@ -1399,6 +1399,7 @@ export const TemporaryBattles = [
     'Suicune 6',
     'Silver 6',
     'Silver 7',
+    'Red',
     'May 1',
     'May 2',
     'May 3',
@@ -1779,4 +1780,5 @@ export enum AlcremieSpins {
 export enum ExtraAchievementCategories {
     global = Region.final,
     sevii,
+    magikarpJump,
 }

@@ -1760,7 +1760,7 @@ class ShardDeal {
                 new ShardDeal(
                     [
                         {shardTypeString: 'Red Shard', amount: 20},
-                        {shardTypeString: 'Lime Shard', amount: 20},
+                        {shardTypeString: 'Lime Shard', amount: 30},
                     ],
                     ItemList.Razor_claw,
                     1),
@@ -1794,7 +1794,7 @@ class ShardDeal {
                     ItemList.Electric_egg,
                     1),
                 new ShardDeal(
-                    [{shardTypeString: 'Yellow Shard', amount: 20}],
+                    [{shardTypeString: 'Yellow Shard', amount: 40}],
                     ItemList.Thunder_stone,
                     1),
                 new ShardDeal(

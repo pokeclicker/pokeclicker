@@ -332,12 +332,16 @@ class Game {
             // use a setTimeout to queue the event
             this.worker?.addEventListener('message', () => Settings.getSetting('useWebWorkerForGameTicks').value ? this.gameTick() : null);
 
-            // Let our worker know if the page is visible or not
             document.addEventListener('visibilitychange', () => {
+                // Let our worker know if the page is visible or not
                 if (pageHidden != document.hidden) {
                     pageHidden = document.hidden;
                     this.worker.postMessage({'pageHidden': pageHidden});
                 }
+
+                // Save resources by not displaying updates if game is not currently visible
+                const gameEl = document.getElementById('game');
+                document.hidden ? gameEl.classList.add('hidden') : gameEl.classList.remove('hidden');
             });
             this.worker.postMessage({'pageHidden': pageHidden});
             if (this.worker) {
@@ -414,6 +418,17 @@ class Game {
         if (Save.counter > GameConstants.SAVE_TICK) {
             const old = new Date(player._lastSeen);
             const now = new Date();
+
+            // Time traveller flag
+            if (old > now) {
+                Notifier.notify({
+                    title: 'Welcome Time Traveller!',
+                    message: 'Please ensure you keep a backup of your old save as travelling through time can cause some serious problems.\n\nAny Pokémon you may have obtained in the future could cease to exist which could corrupt your save file!',
+                    type: NotificationConstants.NotificationOption.danger,
+                    timeout: GameConstants.HOUR,
+                });
+                player._timeTraveller = true;
+            }
 
             // Check if it's a new day
             if (old.toLocaleDateString() !== now.toLocaleDateString()) {
