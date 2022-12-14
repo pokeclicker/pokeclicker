@@ -26,7 +26,7 @@ class Shop extends TownContent {
     public areaStatus() {
         const itemStatusArray = [areaStatus.completed];
         this.items.forEach(i => {
-            if (i instanceof CaughtIndicatingItem) {
+            if (i instanceof PokemonItem) {
                 if (i.getCaughtStatus() == CaughtStatus.NotCaught) {
                     itemStatusArray.push(areaStatus.uncaughtPokemon);
                 } else if (i.getCaughtStatus() == CaughtStatus.Caught) {
