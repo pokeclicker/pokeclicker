@@ -126,7 +126,8 @@ namespace GameConstants {
     declare const SAFARI_BASE_POKEBALL_COUNT: number;
     declare const LEGAL_WALK_BLOCKS: number[];
     declare const SAFARI_OUT_OF_BALLS: string;
-    declare const GAIN_MONEY_BASE_REWARD: number;
+    declare const GAIN_MONEY_BASE_MODIFIER: number;
+    declare const GAIN_MONEY_MAX_REWARD: number;
     declare const HATCH_EGGS_BASE_REWARD: number;
     declare const SHINY_BASE_REWARD: number;
     declare const DEFEAT_POKEMONS_BASE_REWARD: number;
