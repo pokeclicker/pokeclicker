@@ -328,7 +328,7 @@ class Dungeon {
         let pokemonName: PokemonNameType;
         let hideEncounter = false;
 
-        const getEncounterInfo = function(pokemonName) {
+        const getEncounterInfo = function(pokemonName, mimic) {
             const encounter = {
                 image: `assets/images/${(App.game.party.alreadyCaughtPokemonByName(pokemonName, true) ? 'shiny' : '')}pokemon/${pokemonMap[pokemonName].id}.png`,
                 shiny:  App.game.party.alreadyCaughtPokemonByName(pokemonName, true),
@@ -336,6 +336,7 @@ class Dungeon {
                 uncaught: !App.game.party.alreadyCaughtPokemonByName(pokemonName),
                 lock: false,
                 lockMessage: '',
+                mimic: mimic,
             };
             return encounter;
         };
@@ -350,7 +351,7 @@ class Dungeon {
                 } else {
                     pokemonName = <PokemonNameType>enemy;
                 }
-                encounterInfo.push(getEncounterInfo(pokemonName));
+                encounterInfo.push(getEncounterInfo(pokemonName, false));
             // Handling Trainers
             } else { /* We don't display minion Trainers */ }
         });
@@ -358,7 +359,7 @@ class Dungeon {
         // Handling Mimics
         this.getCaughtMimics().forEach(enemy => {
             pokemonName = <PokemonNameType>enemy;
-            encounterInfo.push(getEncounterInfo(pokemonName));
+            encounterInfo.push(getEncounterInfo(pokemonName, true));
         });
 
         return encounterInfo;
