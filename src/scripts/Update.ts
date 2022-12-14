@@ -1562,8 +1562,9 @@ class Update implements Saveable {
         },
 
         '0.10.5': ({ playerData, saveData, settingsData }) => {
+            // Red temporary battle
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 28);
             // Magikarp Jump Temp Battles
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 159);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 160);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 161);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 162);
@@ -1584,6 +1585,7 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 177);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 178);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 179);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 180);
 
             // Rotate form IDs
             const formIDs = [
@@ -1872,6 +1874,22 @@ class Update implements Saveable {
                 }
                 if (darkestDayQL.quest <= 18) {
                     saveData.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('The Darkest Day')] = 0;
+                }
+            }
+            // Suicune Quest autostart for players too far in Legendary Beasts quest
+            const johtoBeastsQuestLine = saveData.quests.questLines.find((q) => q.name == 'The Legendary Beasts');
+            const johtoSuicuneQuestLine = saveData.quests.questLines.find((q) => q.name == 'Eusine\'s Chase');
+            if (johtoBeastsQuestLine?.state == 2 || (johtoBeastsQuestLine?.state == 1 && johtoBeastsQuestLine?.quest >= 4)) {
+                if (!johtoSuicuneQuestLine) {
+                // add to array
+                    saveData.quests.questLines.push({
+                        state: 1,
+                        name: 'Eusine\'s Chase',
+                        quest: 0,
+                    });
+                } else if (johtoSuicuneQuestLine.state == 0) {
+                // activate quest
+                    johtoSuicuneQuestLine.state = 1;
                 }
             }
         },
