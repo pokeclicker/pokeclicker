@@ -332,12 +332,16 @@ class Game {
             // use a setTimeout to queue the event
             this.worker?.addEventListener('message', () => Settings.getSetting('useWebWorkerForGameTicks').value ? this.gameTick() : null);
 
-            // Let our worker know if the page is visible or not
             document.addEventListener('visibilitychange', () => {
+                // Let our worker know if the page is visible or not
                 if (pageHidden != document.hidden) {
                     pageHidden = document.hidden;
                     this.worker.postMessage({'pageHidden': pageHidden});
                 }
+
+                // Save resources by not displaying updates if game is not currently visible
+                const gameEl = document.getElementById('game');
+                document.hidden ? gameEl.classList.add('hidden') : gameEl.classList.remove('hidden');
             });
             this.worker.postMessage({'pageHidden': pageHidden});
             if (this.worker) {
