@@ -1,4 +1,11 @@
 <div id="startMenu" class="dropdown clearfix" style="position:absolute; right:0; top:0; z-index: 100;">
+    <button class="btn btn-secondary mr-1"
+        data-bind="visible: Settings.getSetting('showMuteButton').observableValue(),
+            click: () => { Settings.getSetting('sound.muted').toggle() },
+            tooltip: { title: Settings.getSetting('sound.muted').observableValue() ? 'Click to unmute all sounds.' : 'Click to mute all sounds.', trigger: 'hover', placement: 'bottom' }">
+        <img src="assets/images/volume-high.svg" height="20px" width="20px" style="margin-top: -3px;"
+            data-bind="attr: { src: `assets/images/${Settings.getSetting('sound.muted').observableValue() ? 'volume-xmark' : 'volume-high'}.svg` }">
+    </button>
     <button class="btn btn-secondary dropdown-toggle float-right" type="button" data-toggle="dropdown">
         Start Menu
         <span class="caret"></span>
