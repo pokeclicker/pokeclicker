@@ -212,12 +212,12 @@ class Dungeon {
             } else { /* We don't include Trainers */ }
         });
 
-        encounterInfo.concat(this.includeMimics());
+        encounterInfo.concat(this.getMimics());
 
         return encounterInfo;
     }
 
-    public includeMimics(): PokemonNameType[] {
+    public getMimics(): PokemonNameType[] {
         const encounterInfo = [];
         Object.entries(this.lootTable).forEach(([tier, itemList]) => {
             itemList.forEach((loot, i) => {
@@ -315,7 +315,7 @@ class Dungeon {
      * Gets all possible Pokemon in the dungeon
      */
     get allPokemon(): PokemonNameType[] {
-        return this.pokemonList.concat(this.bossPokemonList, this.includeMimics());
+        return this.pokemonList.concat(this.bossPokemonList, this.getMimics());
     }
 
 
@@ -356,7 +356,7 @@ class Dungeon {
         });
 
         // Handling Mimics
-        this.includeMimics().forEach(enemy => {
+        this.getMimics().forEach(enemy => {
             pokemonName = <PokemonNameType>enemy;
             encounterInfo.push(getEncounterInfo(pokemonName));
         });
