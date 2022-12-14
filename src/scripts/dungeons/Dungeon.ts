@@ -212,17 +212,17 @@ class Dungeon {
             } else { /* We don't include Trainers */ }
         });
 
-        encounterInfo.concat(this.getMimics());
+        encounterInfo.concat(this.getCaughtMimics());
 
         return encounterInfo;
     }
 
-    public getMimics(): PokemonNameType[] {
+    public getCaughtMimics(): PokemonNameType[] {
         const encounterInfo = [];
         Object.entries(this.lootTable).forEach(([tier, itemList]) => {
             itemList.forEach((loot, i) => {
                 const mimic = pokemonMap[loot.loot].name;
-                if (mimic != 'MissingNo.' && new ObtainedPokemonRequirement(mimic)) {
+                if (mimic != 'MissingNo.' && App.game.party.alreadyCaughtPokemonByName(mimic)) {
                     encounterInfo.push(mimic);
                 }
             });
@@ -315,7 +315,7 @@ class Dungeon {
      * Gets all possible Pokemon in the dungeon
      */
     get allPokemon(): PokemonNameType[] {
-        return this.pokemonList.concat(this.bossPokemonList, this.getMimics());
+        return this.pokemonList.concat(this.bossPokemonList, this.getCaughtMimics());
     }
 
 
@@ -356,7 +356,7 @@ class Dungeon {
         });
 
         // Handling Mimics
-        this.getMimics().forEach(enemy => {
+        this.getCaughtMimics().forEach(enemy => {
             pokemonName = <PokemonNameType>enemy;
             encounterInfo.push(getEncounterInfo(pokemonName));
         });
