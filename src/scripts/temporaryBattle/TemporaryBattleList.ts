@@ -416,16 +416,15 @@ TemporaryBattleList['Suicune 2'] = new TemporaryBattle(
 );
 TemporaryBattleList['Red Gyarados'] = new TemporaryBattle(
     'Red Gyarados',
-    [new GymPokemon('Gyarados', 1200000, 40, undefined, true)],
+    [new GymPokemon('Gyarados', 1200000, 30, undefined, true)],
     undefined,
     [new QuestLineStartedRequirement('Team Rocket Again')],
-    [new QuestLineStepCompletedRequirement('Team Rocket Again', 0)],
+    undefined,
     {
         displayName: 'Red Gyarados',
         returnTown: 'Mahogany Town',
         isTrainerBattle: false,
         hideTrainer: true,
-        visibleRequirement: new QuestLineStartedRequirement('Team Rocket Again'),
     }
 );
 TemporaryBattleList['Suicune 3'] = new TemporaryBattle(

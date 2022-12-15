@@ -1892,6 +1892,8 @@ class Update implements Saveable {
                     johtoSuicuneQuestLine.state = 1;
                 }
             }
+            //Red Gyarados
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 22);
         },
     };
 
