@@ -727,7 +727,7 @@ class Farming implements Feature {
         let berryReqs = {};
         berryReqs[BerryType.Rindo] = 8;
         this.mutations.push(new GrowNearBerryStrictMutation(.0001, BerryType.Tanga, berryReqs, {
-            hint: 'I\'ve heard that a special Berry can appear after being completly surrounded by Rindo Berries!',
+            hint: 'I\'ve heard that a special Berry can appear after being completely surrounded by Rindo Berries!',
         }));
         // Charti
         this.mutations.push(new OakMutation(.0001, BerryType.Charti, BerryType.Cornn, OakItemType.Cell_Battery));
