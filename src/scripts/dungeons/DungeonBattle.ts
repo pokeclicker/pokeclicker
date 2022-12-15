@@ -171,7 +171,7 @@ class DungeonBattle extends Battle {
         this.catching(false);
         this.counter = 0;
         const enemyPokemon = PokemonFactory.generateDungeonPokemon(pokemon
-            , DungeonRunner.chestsOpened(), DungeonRunner.dungeon.baseHealth * 2, DungeonRunner.dungeonLevel());
+            , DungeonRunner.chestsOpened(), DungeonRunner.dungeon.baseHealth * 2, DungeonRunner.dungeonLevel(), true);
         this.enemyPokemon(enemyPokemon);
         PokemonHelper.incrementPokemonStatistics(enemyPokemon.id, GameConstants.PokemonStatiticsType.Encountered, enemyPokemon.shiny, enemyPokemon.gender);
         // Shiny
