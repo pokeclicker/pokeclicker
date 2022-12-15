@@ -631,7 +631,7 @@ class Farming implements Feature {
         // Belue
         this.mutations.push(new EvolveNearFlavorMutation(.0002, BerryType.Belue, BerryType.Nomel,
             [[0, 80], [0, 80], [0, 80], [0, 80], [130, 160]], {
-                hint: 'I\'ve heard that a Nomel berry will change if its surroundings get extremely sour,bbut without a high amount of other flavors!!',
+                hint: 'I\'ve heard that a Nomel berry will change if its surroundings get extremely sour,but without a high amount of other flavors!!',
             }));
 
         // Pinkan
