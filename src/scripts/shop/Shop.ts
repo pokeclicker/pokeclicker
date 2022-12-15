@@ -23,6 +23,20 @@ class Shop extends TownContent {
         super(requirements);
     }
 
+    public areaStatus() {
+        const itemStatusArray = [areaStatus.completed];
+        this.items.forEach(i => {
+            if (i instanceof PokemonItem) {
+                if (i.getCaughtStatus() == CaughtStatus.NotCaught) {
+                    itemStatusArray.push(areaStatus.uncaughtPokemon);
+                } else if (i.getCaughtStatus() == CaughtStatus.Caught) {
+                    itemStatusArray.push(areaStatus.uncaughtShinyPokemon);
+                }
+            }
+        });
+        return Math.min(...itemStatusArray);
+    }
+
     get displayName() {
         if (this.name) {
             return this.name;
