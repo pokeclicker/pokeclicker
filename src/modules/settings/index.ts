@@ -284,6 +284,8 @@ Settings.add(new Setting<string>('achievementsCategory', 'achievementsCategory',
 // Save menu sorting
 Settings.add(new Setting('sort.saveSelector', 'Saves sort order', [], ''));
 
+Settings.add(new Setting('saveFilename', 'Save file name', [], '[v{version}] PokeClicker {date}'));
+
 // Mute toggle
 Settings.add(new BooleanSetting('sound.muted', 'Mute All Sounds', false));
 

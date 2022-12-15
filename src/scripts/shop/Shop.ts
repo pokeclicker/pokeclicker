@@ -31,6 +31,8 @@ class Shop extends TownContent {
                     itemStatusArray.push(areaStatus.uncaughtPokemon);
                 } else if (i.getCaughtStatus() == CaughtStatus.Caught) {
                     itemStatusArray.push(areaStatus.uncaughtShinyPokemon);
+                } else if (i.getPokerusStatus() < GameConstants.Pokerus.Resistant) {
+                    itemStatusArray.push(areaStatus.missingResistant);
                 }
             }
         });
