@@ -645,7 +645,7 @@ class Farming implements Feature {
                 BerryType.Magost,
                 BerryType.Watmel,
             ], {
-                hint: 'I\'ve heard that there\'s a special Pink Berry that only appears when surrounded by a seven different types of Pink Berries natives of pinkan mountains!',
+                hint: 'I\'ve heard that there\'s a special Pink Berry that only appears when surrounded by a seven different types of Pink Berries natives of Pinkan Mountains!',
                 unlockReq: function(): boolean {
                     return App.game.quests.getQuestLine('Team Rocket\'s Pinkan Theme Park').state() > QuestLineState.inactive;
                 },
