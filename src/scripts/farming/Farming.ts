@@ -484,7 +484,7 @@ class Farming implements Feature {
         // Figy
         this.mutations.push(new GrowNearFlavorMutation(.009, BerryType.Figy,
             [[25, 80], [0, 5], [0, 5], [0, 5], [0, 5]], {
-                hint: 'I\'ve heard that a special Berry can appear if its surroundings get too spicy, without a minimal amount of other flavours!',
+                hint: 'I\'ve heard that a special Berry can appear if its surroundings get too spicy, without a minimal amount of other flavors!',
                 unlockReq: function(): boolean {
                     return App.game.farming.unlockedBerries[BerryType.Cheri]();
                 },
@@ -493,7 +493,7 @@ class Farming implements Feature {
         // Wiki
         this.mutations.push(new GrowNearFlavorMutation(.008, BerryType.Wiki,
             [[0, 5], [25, 80], [0, 5], [0, 5], [0, 5]], {
-                hint: 'I\'ve heard that a special Berry can appear if its surroundings get too dry, without a minimal amount of other flavours!!',
+                hint: 'I\'ve heard that a special Berry can appear if its surroundings get too dry, without a minimal amount of other flavors!!',
                 unlockReq: function(): boolean {
                     return App.game.farming.unlockedBerries[BerryType.Chesto]();
                 },
@@ -502,7 +502,7 @@ class Farming implements Feature {
         // Mago
         this.mutations.push(new GrowNearFlavorMutation(.007, BerryType.Mago,
             [[0, 5], [0, 5], [25, 80], [0, 5], [0, 5]], {
-                hint: 'I\'ve heard that a special Berry can appear if its surroundings get too sweet, without a minimal amount of other flavours! !',
+                hint: 'I\'ve heard that a special Berry can appear if its surroundings get too sweet, without a minimal amount of other flavors! !',
                 unlockReq: function(): boolean {
                     return App.game.farming.unlockedBerries[BerryType.Pecha]();
                 },
@@ -511,7 +511,7 @@ class Farming implements Feature {
         // Aguav
         this.mutations.push(new GrowNearFlavorMutation(.006, BerryType.Aguav,
             [[0, 5], [0, 5], [0, 5], [25, 80], [0, 5]], {
-                hint: 'I\'ve heard that a special Berry can appear if its surroundings get too bitter, without a minimal amount of other flavours! !',
+                hint: 'I\'ve heard that a special Berry can appear if its surroundings get too bitter, without a minimal amount of other flavors! !',
                 unlockReq: function(): boolean {
                     return App.game.farming.unlockedBerries[BerryType.Rawst]();
                 },
@@ -520,7 +520,7 @@ class Farming implements Feature {
         // Iapapa
         this.mutations.push(new GrowNearFlavorMutation(.005, BerryType.Iapapa,
             [[0, 5], [0, 5], [0, 5], [0, 5], [25, 80]], {
-                hint: 'I\'ve heard that a special Berry can appear if its surroundings get too sour, without a minimal amount of other flavours! !',
+                hint: 'I\'ve heard that a special Berry can appear if its surroundings get too sour, without a minimal amount of other flavors! !',
                 unlockReq: function(): boolean {
                     return App.game.farming.unlockedBerries[BerryType.Aspear]();
                 },
@@ -539,7 +539,7 @@ class Farming implements Feature {
                 BerryType.Oran,
                 BerryType.Sitrus,
             ], {
-                hint: 'I\'ve heard that there\'s a legendary Berry that only appears when fully surrounded by the eight more basic ripe Berry plants!',
+                hint: 'I\'ve heard that there\'s a legendary Berry that only appears when fully surrounded by the eight most basic ripe Berry plants!',
             }));
 
         //#endregion
@@ -608,12 +608,12 @@ class Farming implements Feature {
         // Spelon
         this.mutations.push(new EvolveNearFlavorMutation(.0002, BerryType.Spelon, BerryType.Tamato,
             [[130, 160], [0, 80], [0, 80], [0, 80], [0, 80]], {
-                hint: 'I\'ve heard that a Tamato berry will change if its surroundings get extremely spicy, but without a high amount other flavours!',
+                hint: 'I\'ve heard that a Tamato berry will change if its surroundings get extremely spicy, but without a high amount of other flavors!',
             }));
         // Pamtre
         this.mutations.push(new EvolveNearFlavorMutation(.0002, BerryType.Pamtre, BerryType.Cornn,
             [[0, 80], [130, 160], [0, 80], [0, 80], [0, 80]], {
-                hint: 'I\'ve heard that a Cornn berry will change if its surroundings get extremely dry, but without a high amount other flavours!!',
+                hint: 'I\'ve heard that a Cornn berry will change if its surroundings get extremely dry, but without a high amount of other flavors!!',
             }));
         // Pamtre Overgrow
         this.mutations.push(new GrowNearBerryMutation(.0004, BerryType.Pamtre,
@@ -621,17 +621,17 @@ class Farming implements Feature {
         // Watmel
         this.mutations.push(new EvolveNearFlavorMutation(.0002, BerryType.Watmel, BerryType.Magost,
             [[0, 80], [0, 80], [130, 160], [0, 80], [0, 80]], {
-                hint: 'I\'ve heard that a Magost berry will change if its surroundings get extremely sweet, but without a high amount other flavours!!',
+                hint: 'I\'ve heard that a Magost berry will change if its surroundings get extremely sweet, but without a high amount of other flavors!!',
             }));
         // Durin
         this.mutations.push(new EvolveNearFlavorMutation(.0002, BerryType.Durin, BerryType.Rabuta,
             [[0, 80], [0, 80], [0, 80], [130, 160], [0, 80]], {
-                hint: 'I\'ve heard that a Rabuta berry will change if its surroundings get extremely bitter, but without a high amount other flavours!!',
+                hint: 'I\'ve heard that a Rabuta berry will change if its surroundings get extremely bitter, but without a high amount of other flavors!!',
             }));
         // Belue
         this.mutations.push(new EvolveNearFlavorMutation(.0002, BerryType.Belue, BerryType.Nomel,
             [[0, 80], [0, 80], [0, 80], [0, 80], [130, 160]], {
-                hint: 'I\'ve heard that a Nomel berry will change if its surroundings get extremely sour,bbut without a high amount other flavours!!',
+                hint: 'I\'ve heard that a Nomel berry will change if its surroundings get extremely sour,bbut without a high amount of other flavors!!',
             }));
 
         // Pinkan
@@ -645,7 +645,7 @@ class Farming implements Feature {
                 BerryType.Magost,
                 BerryType.Watmel,
             ], {
-                hint: 'I\'ve heard that there\'s a special Pink Berry that only appears when surrounded by a seven different types of Pink Berries natives of Pinkan Mountains!',
+                hint: 'I\'ve heard that there\'s a special Pink Berry that only appears when surrounded by a seven different types of Pink Berries natives to Pinkan Mountains!',
                 unlockReq: function(): boolean {
                     return App.game.quests.getQuestLine('Team Rocket\'s Pinkan Theme Park').state() > QuestLineState.inactive;
                 },
