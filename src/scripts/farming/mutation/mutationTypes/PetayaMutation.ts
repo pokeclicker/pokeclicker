@@ -60,7 +60,7 @@ class PetayaMutation extends GrowMutation {
         if (super.hint) {
             return super.hint;
         }
-        return ' Legends tell of a mysterious Berry that only appears in a field with berries from Occa to Roseli';
+        return 'Legends tell of a mysterious Berry that only appears in a field with berries from Occa to Roseli';
     }
 
 }
