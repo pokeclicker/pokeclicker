@@ -57,7 +57,7 @@ class FieldMutation extends GrowMutation {
         if (super.hint) {
             return super.hint;
         }
-        return `Legends tell of a mysterious Berry that only appears in a field of ${BerryType[this.fieldBerry]} Berries.`;
+        return `Legends tell of a mysterious Berry that only appears in a field of twenty-three ${BerryType[this.fieldBerry]} Berries.`;
     }
 
 }
