@@ -2061,7 +2061,7 @@ Routes.add(new RegionRoute(
     undefined,
     GameConstants.AlolaSubRegions.MagikarpJump,
     true,
-    22500
+    33750
 ));
 Routes.add(new RegionRoute(
     'Quick League Bridge', GameConstants.Region.alola, 32,
@@ -2072,7 +2072,7 @@ Routes.add(new RegionRoute(
     undefined,
     GameConstants.AlolaSubRegions.MagikarpJump,
     true,
-    45000
+    67500
 ));
 Routes.add(new RegionRoute(
     'Heavy League Bridge', GameConstants.Region.alola, 33,
@@ -2083,7 +2083,7 @@ Routes.add(new RegionRoute(
     undefined,
     GameConstants.AlolaSubRegions.MagikarpJump,
     true,
-    90000
+    168750
 ));
 Routes.add(new RegionRoute(
     'Great League Bridge', GameConstants.Region.alola, 34,
@@ -2094,7 +2094,7 @@ Routes.add(new RegionRoute(
     undefined,
     GameConstants.AlolaSubRegions.MagikarpJump,
     true,
-    157500
+    270000
 ));
 Routes.add(new RegionRoute(
     'Fast League Bridge', GameConstants.Region.alola, 35,
@@ -2105,7 +2105,7 @@ Routes.add(new RegionRoute(
     undefined,
     GameConstants.AlolaSubRegions.MagikarpJump,
     true,
-    225000
+    506250
 ));
 Routes.add(new RegionRoute(
     'Luxury League Bridge', GameConstants.Region.alola, 36,
@@ -2116,7 +2116,7 @@ Routes.add(new RegionRoute(
     undefined,
     GameConstants.AlolaSubRegions.MagikarpJump,
     true,
-    337500
+    675000
 ));
 Routes.add(new RegionRoute(
     'Heal League Bridge', GameConstants.Region.alola, 37,
@@ -2127,7 +2127,7 @@ Routes.add(new RegionRoute(
     undefined,
     GameConstants.AlolaSubRegions.MagikarpJump,
     true,
-    450000
+    1012500
 ));
 Routes.add(new RegionRoute(
     'Ultra League Bridge', GameConstants.Region.alola, 38,
@@ -2138,7 +2138,7 @@ Routes.add(new RegionRoute(
     undefined,
     GameConstants.AlolaSubRegions.MagikarpJump,
     true,
-    562500
+    1350000
 ));
 Routes.add(new RegionRoute(
     'Elite Four League Pier', GameConstants.Region.alola, 39,
@@ -2149,7 +2149,7 @@ Routes.add(new RegionRoute(
     undefined,
     GameConstants.AlolaSubRegions.MagikarpJump,
     true,
-    675000
+    2025000
 ));
 Routes.add(new RegionRoute(
     'Master League Pier', GameConstants.Region.alola, 40,
@@ -2160,7 +2160,7 @@ Routes.add(new RegionRoute(
     undefined,
     GameConstants.AlolaSubRegions.MagikarpJump,
     true,
-    900000
+    2700000
 ));
 
 /*
