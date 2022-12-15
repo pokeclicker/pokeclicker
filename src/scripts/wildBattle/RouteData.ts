@@ -2099,7 +2099,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Fast League Bridge', GameConstants.Region.alola, 35,
     new RoutePokemon({
-        water: ['Magikarp', 'Magikarp', 'Magikarp', 'Magikarp Calico (Orange, White, Black)', 'Magikarp Orange Two Tone'],
+        water: ['Magikarp', 'Magikarp', 'Magikarp', 'Magikarp Calico (Orange, White, Black)', 'Magikarp Orange Two Tone', 'Magikarp Calico (Orange, White)'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Great_League)],
     undefined,
@@ -2110,7 +2110,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Luxury League Bridge', GameConstants.Region.alola, 36,
     new RoutePokemon({
-        water: ['Magikarp', 'Magikarp', 'Magikarp', 'Magikarp Pink Two Tone', 'Magikarp Calico (Orange, White, Black)'],
+        water: ['Magikarp', 'Magikarp', 'Magikarp', 'Magikarp Pink Two Tone', 'Magikarp Calico (Orange, White, Black)', 'Magikarp Orange Dapples'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Fast_League)],
     undefined,
@@ -2121,7 +2121,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Heal League Bridge', GameConstants.Region.alola, 37,
     new RoutePokemon({
-        water: ['Magikarp', 'Magikarp', 'Magikarp', 'Magikarp Grey Bubbles', 'Magikarp Grey Patches'],
+        water: ['Magikarp', 'Magikarp', 'Magikarp', 'Magikarp Grey Bubbles', 'Magikarp Grey Patches', 'Magikarp Orange Dapples'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Luxury_League)],
     undefined,
@@ -2143,7 +2143,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Elite Four League Pier', GameConstants.Region.alola, 39,
     new RoutePokemon({
-        water: ['Magikarp', 'Magikarp', 'Magikarp', 'Magikarp Black Forehead', 'Magikarp Pink Orca'],
+        water: ['Magikarp', 'Magikarp', 'Magikarp', 'Magikarp Black Forehead', 'Magikarp Pink Orca', 'Magikarp Grey Patches'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Ultra_League)],
     undefined,
@@ -2154,7 +2154,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Master League Pier', GameConstants.Region.alola, 40,
     new RoutePokemon({
-        water: ['Magikarp', 'Magikarp', 'Magikarp', 'Magikarp Orange Mask', 'Magikarp Calico (Orange, Gold)'],
+        water: ['Magikarp', 'Magikarp', 'Magikarp', 'Magikarp Orange Mask', 'Magikarp Calico (Orange, Gold)', 'Magikarp Grey Bubbles'],
     }),
     [new GymBadgeRequirement(BadgeEnums.E4_League)],
     undefined,
