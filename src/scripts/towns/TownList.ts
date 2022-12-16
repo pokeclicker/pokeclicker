@@ -3355,18 +3355,24 @@ const ProfJuniper = new ProfNPC('Prof. Juniper',
 const ProfBurnet = new NPC('Professor Burnet', [
     'Welcome to my laboratory, trainer! I am working here to understand the mysterious Interdream Zone.',
     'My laboratory equipment can convert the energy of dreams you experience while sleeping, or "Offline" into orbs. We can then open these orbs and see what your mind experienced in the Interdream Zone.',
-    'A trainer like you surely dreams of rare Pokémon. The more rare Pokémon you find from the Interdream Zone, the more we can explore to find others!',
+    'A trainer like you surely dreams of rare Pokémon. The more rare Pokémon you find from the Interdream Zone, the more we can explore to find others!'
+], {
+    image: 'assets/images/npcs/Professor Burnet.png',
 });
 
 const DreamResearcher1 = new NPC('Dream Researcher', [
     'I have been helping Professor Burnet explore the Interdream Zone with the help of my Audino.',
-    'Audino\'s excellent hearing lets it pick up even the quietest hints from Dream Orbs. If you can help the professor advance her research, I may be able to help you in return.'],
-{requirement: new TemporaryBattleRequirement('Dream Researcher', 1, GameConstants.AchievementOption.less),
+    'Audino\'s excellent hearing lets it pick up even the quietest hints from Dream Orbs. If you can help the professor advance her research, I may be able to help you in return.'
+], {
+    image: 'assets/images/npcs/Dream Researcher.png',
+    requirement: new TemporaryBattleRequirement('Dream Researcher', 1, GameConstants.AchievementOption.less),
 });
 
 const DreamResearcher2 = new NPC('Dream Researcher', [
     'What a battle! That Audinite will let you Mega Evolve your Audino, under certain circumstances.',
-], {requirement: new TemporaryBattleRequirement('Dream Researcher'),
+], {
+    image:'assets/images/npcs/Dream Researcher.png',
+    requirement: new TemporaryBattleRequirement('Dream Researcher'),
 });
 
 //Unova Towns
