@@ -3364,12 +3364,14 @@ const DreamResearcher1 = new NPC('Dream Researcher', [
     'I have been helping Professor Burnet explore the Interdream Zone with the help of my Audino.',
     'Audino\'s excellent hearing lets it pick up even the quietest hints from Dream Orbs. If you can help the professor advance her research, I may be able to help you in return.'
 ], {
+    image: 'assets/images/trainers/Scientist (female).png',
     requirement: new TemporaryBattleRequirement('Dream Researcher', 1, GameConstants.AchievementOption.less),
 });
 
 const DreamResearcher2 = new NPC('Dream Researcher', [
     'What a battle! That Audinite will let you Mega Evolve your Audino, under certain circumstances.',
 ], {
+    image: 'assets/images/trainers/Scientist (female).png',
     requirement: new TemporaryBattleRequirement('Dream Researcher'),
 });
 
