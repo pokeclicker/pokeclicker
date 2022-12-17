@@ -4580,7 +4580,7 @@ const HoppyManOfMystery = new NPC('Man of Mystery', [
     'We have been looking for a Shady Salesman.',
     'He is trying to sell overpriced Magikarps to clueless children.',
     'Please keep an <i>eye</i> open for him.',
-]);
+],  {image:'assets/images/npcs/Man of Mystery.png'});
 
 //Alola Towns
 
