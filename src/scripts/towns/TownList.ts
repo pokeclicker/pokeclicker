@@ -3348,10 +3348,8 @@ const ProfJuniper = new ProfNPC('Prof. Juniper',
     GameConstants.Region.unova,
     'Let me see your progress...Ah, fantastic, as usual!',
     'Allow me some time to arrange tickets for your next destination.',
-], {
-    image: 'assets/images/npcs/Professor Juniper.png',
-    );
-}
+    'assets/images/npcs/Professor Juniper.png');
+
 const ProfBurnet = new NPC('Professor Burnet', [
     'Welcome to my laboratory, trainer! I am working here to understand the mysterious Interdream Zone.',
     'My laboratory equipment can convert the energy of dreams you experience while sleeping, or "Offline" into orbs. We can then open these orbs and see what your mind experienced in the Interdream Zone.',
