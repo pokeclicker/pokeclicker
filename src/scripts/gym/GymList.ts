@@ -1600,6 +1600,7 @@ GymList['Quick League'] = new Gym(
                 message: 'You were awarded a Magikarp Skelly!',
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
             });
             App.game.party.gainPokemonById(pokemonMap['Magikarp Skelly'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         }
@@ -1620,6 +1621,7 @@ GymList['Heavy League'] = new Gym(
                 message: 'You were awarded a Magikarp Orange Two-Tone!',
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
             });
             App.game.party.gainPokemonById(pokemonMap['Magikarp Orange Two-Tone'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         }
@@ -1650,10 +1652,12 @@ GymList['Fast League'] = new Gym(
                 message: 'You were awarded a Magikarp Pink Dapples!',
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
             });
             App.game.party.gainPokemonById(pokemonMap['Magikarp Pink Dapples'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         }
-    }
+    },
+    undefined, 'Kareign'
 );
 
 GymList['Luxury League'] = new Gym(
@@ -1662,7 +1666,7 @@ GymList['Luxury League'] = new Gym(
     [new GymPokemon('Magikarp Pink Orca', 3375000, 20)],
     BadgeEnums.Luxury_League,
     0, //TODO
-    'Just wait til my Magikarp evolves and you will all see how great I am! <i>Cries</i>',
+    'Just wait \'til my Magikarp evolves and you will all see how great I am! <i>Cries</i>',
     [new TemporaryBattleRequirement('Magikarp Jump Karbuck')],
     () => {
         if (!App.game.party.alreadyCaughtPokemonByName('Magikarp Pink Orca')) {
@@ -1670,6 +1674,7 @@ GymList['Luxury League'] = new Gym(
                 message: 'You were awarded a Magikarp Pink Orca!',
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
             });
             App.game.party.gainPokemonById(pokemonMap['Magikarp Pink Orca'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         }
@@ -1690,6 +1695,7 @@ GymList['Heal League'] = new Gym(
                 message: 'You were awarded a Magikarp Purple Bubbles!',
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
             });
             App.game.party.gainPokemonById(pokemonMap['Magikarp Purple Bubbles'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         }
@@ -1710,6 +1716,7 @@ GymList['Ultra League'] = new Gym(
                 message: 'You were awarded a Magikarp Brown Tiger!',
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
             });
             App.game.party.gainPokemonById(pokemonMap['Magikarp Brown Tiger'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         }
@@ -1730,6 +1737,7 @@ GymList['E4 League'] = new Gym(
                 message: 'You were awarded a Magikarp Orange Forehead!',
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
             });
             App.game.party.gainPokemonById(pokemonMap['Magikarp Orange Forehead'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         }
