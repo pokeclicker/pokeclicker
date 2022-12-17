@@ -44,8 +44,10 @@ const pokeLeagueShop = () => new Shop([
     new PokeballItem(GameConstants.Pokeball.Masterball, 3000    , GameConstants.Currency.questPoint  , { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.questPoint]}` }, 'Master Ball'),
     new PokeballItem(GameConstants.Pokeball.Masterball, 3000    , GameConstants.Currency.farmPoint   , { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.farmPoint]}` }, 'Master Ball'),
     new PokeballItem(GameConstants.Pokeball.Masterball, 50      , GameConstants.Currency.diamond     , { multiplier: 1.35, multiplierDecrease: false, saveName: `${GameConstants.Pokeball[GameConstants.Pokeball.Masterball]}|${GameConstants.Currency[GameConstants.Currency.diamond]}` }, 'Master Ball'),
-    //ItemList['RareCandy'],
     ItemList.Protein,
+    // TODO VITAMINS: Move these to different shops?
+    ItemList.Calcium,
+    ItemList.Carbos,
 ]);
 
 //Kanto Shops
@@ -1433,7 +1435,8 @@ const EcruteakPokéfan = new NPC('Pokéfan Derek', [
 ], {
     image: 'assets/images/trainers/PokéManiac.png',
     requirement: new QuestLineStepCompletedRequirement('The Legendary Beasts', 2),
-});
+}
+);
 
 const Zuki = new NPC('Kimono Girl Zuki', [
     'Professor Elm tells me you are a master trainer. Please, show me your skills by training your Pokémon.',
@@ -1532,9 +1535,9 @@ const TohjoFallsCelebiTimeDistortion = new NPC('Investigate the Time Distortion'
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Unfinished Business', 8), new QuestLineStepCompletedRequirement('Unfinished Business', 10, GameConstants.AchievementOption.less), new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Tohjo Falls'))]),
 });
 
-const IndigoHiker = new NPC('Hiker', [
-    'This is the best place to take a break in the whole region! I can reach all of Johto from here, and Kanto is just a short hike away, to the east!',
-], { image: 'assets/images/trainers/Hiker.png' });
+const Conductor = new NPC('Conductor', [
+    'We\'re working on construction of a Magent Train line to shuttle people <b>east to Kanto</b>. Once it\'s completed, people will be able to get to Saffron City in record time!',
+], { image: 'assets/images/trainers/Rail Staff.png' });
 
 const ProfElm = new ProfNPC('Prof. Elm',
     GameConstants.Region.johto,
@@ -1623,7 +1626,7 @@ TownList['Goldenrod City'] = new Town(
     [TemporaryBattleList['Silver 4'], GoldenrodDepartmentStoreShop, JohtoBerryMaster, new MoveToDungeon(dungeonList['Radio Tower']), TemporaryBattleList['Aipom Alley'], TemporaryBattleList.Imposter, TemporaryBattleList['Possessed Mewtwo']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 34)],
-        npcs: [searchForClues, HowardClifford1, HowardClifford2, HowardClifford3, Kuni],
+        npcs: [Conductor, searchForClues, HowardClifford1, HowardClifford2, HowardClifford3, Kuni],
     }
 );
 TownList['Ecruteak City'] = new Town(
@@ -1689,7 +1692,6 @@ TownList['Indigo Plateau Johto'] = new Town(
             new RouteKillRequirement(10, GameConstants.Region.johto, 26),
             new TemporaryBattleRequirement('Silver 5'),
         ],
-        npcs: [IndigoHiker],
     }
 );
 
@@ -1808,7 +1810,8 @@ TownList['Mt. Silver'] = new DungeonTown(
     'Mt. Silver',
     GameConstants.Region.johto,
     GameConstants.JohtoSubRegions.Johto,
-    [new RouteKillRequirement(10, GameConstants.Region.johto, 28)]
+    [new RouteKillRequirement(10, GameConstants.Region.johto, 28)],
+    [TemporaryBattleList.Red]
 );
 
 //Hoenn Shops
@@ -2688,7 +2691,7 @@ const SurvivalAreaSinnohRoamerNPC = new RoamerNPC('Hiker Kevin', [
 
 const SendoffSpringLakeTrio = new NPC('Lake Trio', [
     '<i>You are finally here.</i>',
-    '<i>We have been able to create a key to the Distortion World using the materials you collected, but it is unable to work in it\'s current state.</i>',
+    '<i>We have been able to create a key to the Distortion World using the materials you collected, but it is unable to work in its current state.</i>',
     '<i>We bestow it upon you, charge it with the ghostly energy of the Distortion World.</i>',
     '<i>In order to do so, you must collect Ghost gems by defeating Ghost type Pokémon and find a Spooky Plate. There should be some in this dungeon, we can sense their energy.</i>',
 ],{
@@ -3352,7 +3355,7 @@ const ProfBurnet = new NPC('Professor Burnet', [
 
 const DreamResearcher1 = new NPC('Dream Researcher', [
     'I have been helping Professor Burnet explore the Interdream Zone with the help of my Audino.',
-    'Audino\'s excellent hearing lets it pick up even the quietest hints from Dream Orbs. If you can help the professor advance his research, I may be able to help you in return.'],
+    'Audino\'s excellent hearing lets it pick up even the quietest hints from Dream Orbs. If you can help the professor advance her research, I may be able to help you in return.'],
 {requirement: new TemporaryBattleRequirement('Dream Researcher', 1, GameConstants.AchievementOption.less),
 });
 
@@ -3991,7 +3994,7 @@ const KiloudeConfusedHiker = new NPC('Confused Hiker', [
 const ProfSycamore = new ProfNPC('Prof. Sycamore',
     GameConstants.Region.kalos,
     'You\'re encountering Pokémon at a really good clip, aren\'t you? Congratulations! You completed the Pokédex!',
-    'Onward to Alola, shall we?');
+    'Onward to Alola, shall we?', 'assets/images/temporaryBattle/Sycamore.png');
 
 const MysteryFan = new NPC('Mystery Fan', [
     'I\'ve heard a Pokémon detective is sniffing around here for mysteries! He might be interested in an enigmatic berry, too.',
@@ -4381,6 +4384,15 @@ const AltaroftheSunneandMooneShop = new Shop([
     ItemList.Sun_stone,
     ItemList.Poipole,
 ]);
+const ATreeMaybeShop = new Shop([
+    ItemList.Power_Bracer,
+    ItemList.Key_stone,
+]);
+const MagikarpJumpGemTrade = new GemMasterShop('Trade', [new GymBadgeRequirement(BadgeEnums.Heal_League)]);
+const MagikarpJumpShadySalesMan = new Shop([
+    ItemList['Magikarp Blue Raindrops'],
+    ItemList['Magikarp Saucy Violet'],
+], 'Shady Sales Man', [new GymBadgeRequirement(BadgeEnums.Master_League)]);
 
 //Alola NPCs
 
@@ -4554,6 +4566,17 @@ const BattleTreeBlue = new NPC('Blue', [
     'Hello there champ! Fancy seeing you here.',
     'We just planted this sapling here. Maybe it will grow into something great some day.',
 ], {image: 'assets/images/npcs/Blue-masters.png'});
+const MayorKarp = new NPC('Mayor Karp', [
+    'TODO',
+    'Something about welcome',
+    'Something about only magikarps can fight here',
+    'Something about the league system',
+    'Insist attack is jump power',
+], {image: 'assets/images/npcs/MayorKarp.png'});
+
+const MagikarpJumpRoamerNPC = new RoamerNPC('Roddy Tackle', [
+    'TODO: something about rare patterns at {ROUTE_NAME}!',
+], GameConstants.Region.alola, RoamingPokemonList.findGroup(GameConstants.Region.alola, GameConstants.AlolaSubRegions.MagikarpJump), 'assets/images/npcs/Roddy Tackle.png');
 
 //Alola Towns
 
@@ -4733,7 +4756,7 @@ TownList['A Tree Maybe'] = new Town(
     'A Tree Maybe',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.PoniIsland,
-    [],
+    [ATreeMaybeShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 30)],
         npcs: [BattleTreeRed, BattleTreeBlue],
@@ -4744,110 +4767,109 @@ TownList['Hoppy Town'] = new Town(
     'Hoppy Town',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MagikarpJump,
-    [],
+    [new DockTownContent(), MagikarpJumpGemTrade],
     {
-        requirements: [],
-        npcs: [],
+        requirements: [new QuestLineStartedRequirement('Magikarp Jump')],
+        npcs: [MayorKarp, MagikarpJumpRoamerNPC],
     }
 );
-
 TownList['Friend League'] = new Town(
     'Friend League',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MagikarpJump,
     [],
     {
-        requirements: [],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 31)],
     }
 );
-
 TownList['Quick League'] = new Town(
     'Quick League',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MagikarpJump,
-    [],
+    [TemporaryBattleList['Magikarp Jump Koylee']],
     {
-        requirements: [],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 32)],
     }
 );
-
 TownList['Heavy League'] = new Town(
     'Heavy League',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MagikarpJump,
-    [],
+    [TemporaryBattleList['Magikarp Jump Karpella'], TemporaryBattleList['Magikarp Jump Karpen']],
     {
-        requirements: [],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 33)],
     }
 );
-
 TownList['Great League'] = new Town(
     'Great League',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MagikarpJump,
-    [],
+    [TemporaryBattleList['Magikarp Jump Tykarp'], TemporaryBattleList['Magikarp Jump Karpress']],
     {
-        requirements: [],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 34)],
     }
 );
-
 TownList['Fast League'] = new Town(
     'Fast League',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MagikarpJump,
-    [],
+    [TemporaryBattleList['Magikarp Jump Karami'], TemporaryBattleList['Magikarp Jump Karson']],
     {
-        requirements: [],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 35)],
     }
 );
-
 TownList['Luxury League'] = new Town(
     'Luxury League',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MagikarpJump,
-    [],
+    [TemporaryBattleList['Magikarp Jump Karpress 2'],TemporaryBattleList['Magikarp Jump Karpen 2'],TemporaryBattleList['Magikarp Jump Karbuck']],
     {
-        requirements: [],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 36)],
     }
 );
-
 TownList['Heal League'] = new Town(
     'Heal League',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MagikarpJump,
-    [],
+    [TemporaryBattleList['Magikarp Jump Skyhopper'],TemporaryBattleList['Magikarp Jump Karpen 3'],TemporaryBattleList['Magikarp Jump Karpella 2']],
     {
-        requirements: [],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 37)],
     }
 );
-
 TownList['Ultra League'] = new Town(
     'Ultra League',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MagikarpJump,
-    [],
+    [TemporaryBattleList['Magikarp Jump Karbuck 2'],TemporaryBattleList['Magikarp Jump Kareign'],TemporaryBattleList['Magikarp Jump Koylee 2']],
     {
-        requirements: [],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 38)],
     }
 );
-
 TownList['Elite Four League'] = new Town(
     'Elite Four League',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MagikarpJump,
-    [],
+    [GymList['E4 League'], TemporaryBattleList['Magikarp Jump Karpress 3'],TemporaryBattleList['Magikarp Jump Karpen 4'],TemporaryBattleList['Magikarp Jump Karpella 3']],
     {
-        requirements: [],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 39)],
     }
 );
-
 TownList['Master League'] = new Town(
     'Master League',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MagikarpJump,
-    [],
+    [TemporaryBattleList['Magikarp Jump Skyhopper 2'],TemporaryBattleList['Magikarp Jump Tykarp 2']],
     {
-        requirements: [],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 40)],
+    }
+);
+TownList['Magikarp\'s Eye'] = new Town(
+    'Magikarp\'s Eye',
+    GameConstants.Region.alola,
+    GameConstants.AlolaSubRegions.MagikarpJump,
+    [MagikarpJumpShadySalesMan],
+    {
+        requirements: [new DevelopmentRequirement()], //TODO: Should unlock as the subregion unlocks
     }
 );
 
@@ -5197,7 +5219,7 @@ const BattleCafeMaster = new NPC('Battle Café Master', [
     'Milcery can evolve when you spin around with it, while treating it to a Sweet.',
     'For example, you can whip up a Vanilla Alcremie, by spinning clockwise for less than 5 seconds, during the day. Piece of cake! There’s a unique form for each Sweet under this circumstance, so bake it till you make it!',
     'There are more tiers to Alcremie than I can count. Mix up the direction, duration, time of day, and the given Sweet to discover all the flavours there are to find.',
-    'I will suggest that you only do 3 spins a day if you don’t want to end up sick! You might be able to try more, when you get more experienced...',
+    'I will suggest that you only do 3 spins a day if you don’t want to end up sick! You might be able to try more, when you get more experienced with a flavour...',
     'Stop by the Battle Café, we sell all the Sweets you’ll need!',
 ], {image: 'assets/images/npcs/BattleCafeMaster.png'});
 

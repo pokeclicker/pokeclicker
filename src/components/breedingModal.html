@@ -148,7 +148,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                     <div class="input-group-append bg-primary text-light">
                                         <label for="hatcherySortDirection" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;" data-bind="
                                         text: Settings.getSetting('hatcherySortDirection').observableValue() ? '⥄' : '⥂',
-                                        tooltip: { title: Settings.getSetting('hatcherySortDirection').observableValue() ? 'Descending (highest value first)' : 'Ascending (lowest value first)', trigger: 'hover', placement:'top', html: true }
+                                        tooltip: { title: Settings.getSetting('hatcherySortDirection').observableValue() ? 'Descending (highest value first)' : 'Ascending (lowest value first)', trigger: 'hover', placement:'top' }
 
                                         ">⥂</label>
                                         <input id="hatcherySortDirection" style="vertical-align: middle" class="hidden" type='checkbox'
@@ -322,7 +322,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                         <label class="clickable m-0 px-2" style="font-size: 20px;" data-bind="
                                                             attr: {for: 'hatcheryHelperSortDirection' + $index() },
                                                             text: $data.sortDirection() ? '⥄' : '⥂',
-                                                            tooltip: { title: $data.sortDirection() ? 'Descending (highest value first)' : 'Ascending (lowest value first)', trigger: 'hover', placement:'top', html: true }
+                                                            tooltip: { title: $data.sortDirection() ? 'Descending (highest value first)' : 'Ascending (lowest value first)', trigger: 'hover', placement:'top' }
                                                             ">⥂</label>
                                                         <input class="hidden" type="checkbox"
                                                             data-bind="attr: { id: 'hatcheryHelperSortDirection' + $index() }, checked:  $data.sortDirection" />
@@ -356,7 +356,9 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
 
                     <p class="text-warning"><i>NOTE: Base attack is the value your Pokémon originally has at level 100, before any breeding buffs.</i></p>
 
-                    <p>Any Proteins applied to Pokémon will also give them an additional 1 attack per hatch.</p>
+                    <p>Any Proteins applied to Pokémon will give them an additional 1 attack per hatch, but require 20 more steps.</p>
+                    <p>Any Calciums applied to Pokémon will give them an additional 1% of their base attack per hatch, but require 20 more steps.</p>
+                    <p>Any Carbos applied to Pokémon will reduce the steps required per hatch.</p>
 
                     <p>There is no limit to breeding, so this will be your main source of attack gain.</p>
 

@@ -63,7 +63,7 @@ Settings.add(new Setting<string>('breedingDisplay', 'Breeding progress display',
         new SettingOption('Percentage', 'percentage'),
         new SettingOption('Step count', 'stepCount'),
     ],
-    'percentage'));
+    'stepCount'));
 Settings.add(new Setting<string>('shopButtons', 'Shop amount buttons',
     [
         new SettingOption('+10, +100', 'original'),
@@ -117,6 +117,7 @@ Settings.add(new Setting<string>('gameDisplayStyle', 'Game display style',
         new SettingOption('Full width (5 columns)', 'fullWidth5'),
     ],
     'standard3'));
+Settings.add(new BooleanSetting('showMuteButton', 'Show mute/unmute button', true));
 
 // CSS variable settings
 Settings.add(new CssVariableSetting('locked', 'Locked Location', [], '#000000'));
@@ -126,6 +127,7 @@ Settings.add(new CssVariableSetting('uncaughtPokemon', 'Uncaught Pokemon', [], '
 Settings.add(new CssVariableSetting('uncaughtShinyPokemonAndMissingAchievement', 'Uncaught Shiny Pokemon and Missing Achievement', [], '#c939fe'));
 Settings.add(new CssVariableSetting('uncaughtShinyPokemon', 'Uncaught Shiny Pokemon', [], '#ffee00'));
 Settings.add(new CssVariableSetting('missingAchievement', 'Missing Achievement', [], '#57e3ff'));
+Settings.add(new CssVariableSetting('missingResistant', 'Missing Resistant', [], '#ffffff'));
 Settings.add(new CssVariableSetting('completed', 'Completed Location', [], '#ffffff'));
 
 // Other settings
@@ -187,16 +189,16 @@ Settings.add(new Setting<number>('hatcherySort', 'Sort', hatcherySortSettings, S
 Settings.add(new BooleanSetting('hatcherySortDirection', 'reverse', false));
 
 // Protein Sorting
-const proteinSortSettings = Object.keys(SortOptionConfigs).map((opt) => (
+const vitaminSortSettings = Object.keys(SortOptionConfigs).map((opt) => (
     new SettingOption<number>(SortOptionConfigs[opt].text, parseInt(opt, 10))
 ));
-Settings.add(new Setting<number>('proteinSort', 'Sort', proteinSortSettings, SortOptions.id));
-Settings.add(new BooleanSetting('proteinSortDirection', 'reverse', false));
-Settings.add(new BooleanSetting('proteinHideMaxedPokemon', 'Hide Pokémon with max protein', false));
-Settings.add(new BooleanSetting('proteinHideShinyPokemon', 'Hide shiny Pokémon', false));
-Settings.add(new Setting<string>('proteinSearchFilter', 'Search', [], ''));
-Settings.add(new Setting<number>('proteinRegionFilter', 'Region', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(Region)], -2));
-Settings.add(new Setting<number>('proteinTypeFilter', 'Type', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None')], -2));
+Settings.add(new Setting<number>('vitaminSort', 'Sort', vitaminSortSettings, SortOptions.id));
+Settings.add(new BooleanSetting('vitaminSortDirection', 'reverse', false));
+Settings.add(new BooleanSetting('vitaminHideMaxedPokemon', 'Hide Pokémon with max protein', false));
+Settings.add(new BooleanSetting('vitaminHideShinyPokemon', 'Hide shiny Pokémon', false));
+Settings.add(new Setting<string>('vitaminSearchFilter', 'Search', [], ''));
+Settings.add(new Setting<number>('vitaminRegionFilter', 'Region', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(Region)], -2));
+Settings.add(new Setting<number>('vitaminTypeFilter', 'Type', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None')], -2));
 
 // Held Item Sorting
 const heldItemSortSettings = Object.keys(SortOptionConfigs).map((opt) => (
@@ -236,7 +238,7 @@ Settings.add(new Setting<string>('breedingDisplayFilter', 'breedingDisplayFilter
         new SettingOption('Breeding Efficiency', 'breedingEfficiency'),
         new SettingOption('Steps per Attack Bonus', 'stepsPerAttack'),
         new SettingOption('Pokedex ID', 'dexId'),
-        new SettingOption('Proteins used', 'proteins'),
+        new SettingOption('Vitamins used', 'vitamins'),
         new SettingOption('EVs', 'evs'),
     ],
     'attack'));
@@ -282,6 +284,11 @@ Settings.add(new Setting<string>('achievementsCategory', 'achievementsCategory',
 // Save menu sorting
 Settings.add(new Setting('sort.saveSelector', 'Saves sort order', [], ''));
 
+Settings.add(new Setting('saveFilename', 'Save file name', [], '[v{version}] PokeClicker {date}'));
+
+// Mute toggle
+Settings.add(new BooleanSetting('sound.muted', 'Mute All Sounds', false));
+
 // Hotkeys
 Settings.add(new HotkeySetting('hotkey.farm', 'Farm', 'F'));
 Settings.add(new HotkeySetting('hotkey.hatchery', 'Hatchery', 'H'));
@@ -305,11 +312,51 @@ Settings.add(new HotkeySetting('hotkey.dungeon.interact', 'Interact', 'Space'));
 
 Settings.add(new HotkeySetting('hotkey.town.start', 'Starts first content in the town', 'Space'));
 Settings.add(new HotkeySetting('hotkey.forceSave', 'Force save game', 'S', { prefix: 'Shift + ' }));
+Settings.add(new HotkeySetting('hotkey.mute', 'Mute/Unmute Sounds', 'M', { prefix: 'Shift + ' }));
 
 Settings.add(new HotkeySetting('hotkey.shop.buy', 'Buy item', 'B'));
 Settings.add(new HotkeySetting('hotkey.shop.max', 'Select max amount', 'M'));
 Settings.add(new HotkeySetting('hotkey.shop.reset', 'Reset amount', 'R'));
 Settings.add(new HotkeySetting('hotkey.shop.increase', 'Increase amount', 'I'));
+
+// Discord
+Settings.add(new BooleanSetting('discord-rp.enabled', 'Discord RP enabled', true));
+Settings.add(new Setting('discord-rp.line-1', 'Discord line 1 text', [], 'Shinies: {caught_shiny}/{caught} {sparkle}'));
+Settings.add(new Setting('discord-rp.line-2', 'Discord line 2 text', [], 'Total Attack: {attack}'));
+Settings.add(new BooleanSetting('discord-rp.timer', 'Show current session play time (max 24 hours)', false));
+Settings.add(new BooleanSetting('discord-rp.timer-reset', 'Reset timer on area change', false));
+Settings.add(new Setting('discord-rp.large-image', 'Discord main image',
+    [
+        new SettingOption('None', ''),
+        new SettingOption('PokéClicker Logo', 'pokeclickerlogo'),
+        new SettingOption('Current Area Environment', 'current-environment'),
+        new SettingOption('Cave Environment', 'background-cave'),
+        new SettingOption('Cave Gem Environment', 'background-cave-gem'),
+        new SettingOption('Fire Environment', 'background-fire'),
+        new SettingOption('Forest Environment', 'background-forest'),
+        new SettingOption('Grass Environment', 'background-grass'),
+        new SettingOption('Graveyard Environment', 'background-graveyard'),
+        new SettingOption('Ice Environment', 'background-ice'),
+        new SettingOption('Mansion Environment', 'background-mansion'),
+        new SettingOption('Power Plant Environment', 'background-power-plant'),
+        new SettingOption('Water Environment', 'background-water'),
+    ],
+    'pokeclickerlogo'));
+Settings.add(new Setting('discord-rp.small-image', 'Discord small image',
+    [
+        new SettingOption('None', ''),
+        new SettingOption('Money', 'money'),
+        new SettingOption('Dungeon Tokens', 'dungeonToken'),
+        new SettingOption('Quest Points', 'questPoint'),
+        new SettingOption('Farm Points', 'farmPoint'),
+        new SettingOption('Diamonds', 'diamond'),
+        new SettingOption('Battle Points', 'battlePoint'),
+        new SettingOption('Trainer', 'trainer'),
+        new SettingOption('Egg', 'egg'),
+        new SettingOption('Poké Ball', 'pokeball'),
+        new SettingOption('Cycle All', 'cycle'),
+    ],
+    'cycle'));
 
 /*
  * SUBSCRIBERS

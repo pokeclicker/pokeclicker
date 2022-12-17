@@ -51,9 +51,11 @@ namespace GameConstants {
     declare const SHINY_CHANCE_SAFARI: number;
     declare const SHINY_CHANCE_BREEDING: number;
     declare const SHINY_CHANCE_FARM: number;
+    declare const SHINY_CHANCE_REWARD: number;
     declare const ITEM_PRICE_MULTIPLIER: number;
     declare const ITEM_PRICE_DEDUCT: number;
     declare const PLATE_VALUE: number;
+    declare const EGG_CYCLE_MULTIPLIER: number;
     declare const BREEDING_ATTACK_BONUS: number;
     declare const FARM_PLOT_WIDTH: number;
     declare const FARM_PLOT_HEIGHT: number;
@@ -190,6 +192,7 @@ namespace GameConstants {
         diamond,
         farmPoint,
         battlePoint,
+        contestToken,
     }
     declare enum TypeEffectiveness {
         Immune,
@@ -381,7 +384,8 @@ namespace GameConstants {
     }
     declare enum VitaminType {
         Protein,
-        RareCandy
+        Calcium,
+        Carbos
     }
     declare enum EnergyRestoreSize {
         SmallRestore,
@@ -639,10 +643,12 @@ namespace GameConstants {
     }
 
     // Pokemon Statistics
-    declare const STATISTIC_CAPTURED;
-    declare const STATISTIC_DEFEATED;
-    declare const STATISTIC_ENCOUNTERED;
-    declare const STATISTIC_HATCHED;
+    declare enum PokemonStatiticsType {
+        Captured = 'Captured',
+        Defeated = 'Defeated',
+        Encountered = 'Encountered',
+        Hatched = 'Hatched',
+    }
 
     declare enum AlcremieSweet {
         'Strawberry Sweet',
@@ -667,5 +673,6 @@ namespace GameConstants {
     declare enum ExtraAchievementCategories {
         global,
         sevii,
+        magikarpJump
     }
 }

@@ -5,7 +5,7 @@ class MegaStone {
     private attackRequired: number;
 
     constructor(public pokemonId: number, pokemonBaseAttack: number, private pokemonAttack: KnockoutObservable<number>) {
-        this.attackRequired = pokemonBaseAttack * 100;
+        this.attackRequired = pokemonBaseAttack * 500;
     }
 
     public getImage() {
@@ -14,7 +14,7 @@ class MegaStone {
 
     public getTooltipText() {
         if (this.canEvolve()) {
-            return 'Use a keystone to Mega Evolve.';
+            return 'Use a Key Stone to Mega Evolve.';
         } else {
             return `Needs at least ${this.attackRequired.toLocaleString('en-US')} attack to Mega Evolve.`;
         }

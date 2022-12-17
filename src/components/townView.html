@@ -85,6 +85,7 @@
         <ul class="list-inline">
           <!-- ko foreach: player.town().dungeon.normalEncounterList -->
           <li class="list-inline-item" data-bind="hidden: $data.hide">
+            <img class="boss" src="assets/images/dungeons/chest.png" data-bind="hidden: !$data.mimic"/>
             <img class="dungeon-pokemon-preview" src="" data-bind="attr:{ src: $data.image },
             css: { 'dungeon-pokemon-locked': $data.uncaught }" onerror="this.src='assets/images/trainers/Mysterious Trainer.png';"/>
             <sup class="shiny" data-bind="visible: $data.shiny">✨</sup>
@@ -92,7 +93,6 @@
             hidden: !$data.lock,
             tooltip: {
                 title: 'Try progressing in the story, catching new Pokémon, or talking to the locals!',
-                html: true,
                 placement: 'bottom',
                 trigger: 'hover'
             }">
@@ -108,7 +108,6 @@
             <img class="lock" src="assets/images/breeding/lock.svg" data-bind="hidden: !$data.lock,
             tooltip: {
                 title: 'Try progressing in the story, catching new Pokémon, or talking to the locals!',
-                html: true,
                 placement: 'bottom',
                 trigger: 'hover'
             }">

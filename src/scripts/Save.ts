@@ -15,11 +15,19 @@ class Save {
     }
 
     public static getSaveObject() {
-        const saveObject = {};
+        const saveObject = {achievements : []};
 
         Object.keys(App.game).filter(key => App.game[key].saveKey).forEach(key => {
             saveObject[App.game[key].saveKey] = App.game[key].toJSON();
         });
+        AchievementHandler.achievementList.forEach(achievement => {
+            if (achievement.stored && achievement.unlocked()) {
+                saveObject.achievements.push(achievement.name);
+            }
+        });
+        if (!saveObject.achievements.length) {
+            delete saveObject.achievements;
+        }
 
         return saveObject;
     }
@@ -47,8 +55,8 @@ class Save {
             const element = document.createElement('a');
             element.setAttribute('href', `data:text/plain;charset=utf-8,${encodeURIComponent(btoa(JSON.stringify(backupSaveData)))}`);
             const datestr = GameConstants.formatDate(new Date());
-            const filename = `[v${App.game.update.version}] PokeClickerSave_${datestr}.txt`;
-            element.setAttribute('download', filename);
+            const filename = Settings.getSetting('saveFilename').value ? Settings.getSetting('saveFilename').value : Settings.getSetting('saveFilename').defaultValue;
+            element.setAttribute('download', GameHelper.saveFileName(filename, {'{date}' : datestr, '{version}' : App.game.update.version, '{name}' : App.game.profile.name()}));
 
             element.style.display = 'none';
             document.body.appendChild(element);

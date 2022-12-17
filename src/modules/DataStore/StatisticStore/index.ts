@@ -22,8 +22,8 @@ export default class Statistics implements Saveable {
     clickAttacks: KnockoutObservable<number>;
     questsCompleted: KnockoutObservable<number>;
     totalGemsGained: KnockoutObservable<number>;
-    totalProteinsPurchased: KnockoutObservable<number>;
-    totalProteinsObtained: KnockoutObservable<number>;
+    totalVitaminsPurchased: KnockoutObservable<number>;
+    totalVitaminsObtained: KnockoutObservable<number>;
     // Currency
     totalMoney: KnockoutObservable<number>;
     totalDungeonTokens: KnockoutObservable<number>;
@@ -31,6 +31,7 @@ export default class Statistics implements Saveable {
     totalDiamonds: KnockoutObservable<number>;
     totalFarmPoints: KnockoutObservable<number>;
     totalBattlePoints: KnockoutObservable<number>;
+    totalContestTokens: KnockoutObservable<number>;
     // Pokemon
     totalPokemonCaptured: KnockoutObservable<number>;
     totalPokemonDefeated: KnockoutObservable<number>;
@@ -135,8 +136,8 @@ export default class Statistics implements Saveable {
         'clickAttacks',
         'questsCompleted',
         'totalGemsGained',
-        'totalProteinsPurchased',
-        'totalProteinsObtained',
+        'totalVitaminsPurchased',
+        'totalVitaminsObtained',
         'totalMoney',
         'totalDungeonTokens',
         'totalQuestPoints',
@@ -265,7 +266,7 @@ export default class Statistics implements Saveable {
                 // This makes it so the stats observable can't be accidently changed
                 set: (
                     obj: Array<KnockoutObservable<number>>,
-                    prop: number,
+                    prop: any,
                     value: number,
                 ): boolean => {
                     const result = obj[prop](value);
@@ -313,7 +314,7 @@ export default class Statistics implements Saveable {
                 },
 
                 // This makes it so the stats observable can't be accidently changed
-                set: (obj: any, prop: number, value: number): boolean => {
+                set: (obj: any, prop: any, value: number): boolean => {
                     const result = obj[prop](value);
                     return result === failedSetValue;
                 },

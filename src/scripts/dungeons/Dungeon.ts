@@ -212,6 +212,21 @@ class Dungeon {
             } else { /* We don't include Trainers */ }
         });
 
+        encounterInfo.concat(this.getCaughtMimics());
+
+        return encounterInfo;
+    }
+
+    public getCaughtMimics(): PokemonNameType[] {
+        const encounterInfo = [];
+        Object.entries(this.lootTable).forEach(([tier, itemList]) => {
+            itemList.forEach((loot, i) => {
+                const mimic = pokemonMap[loot.loot].name;
+                if (mimic != 'MissingNo.' && App.game.party.alreadyCaughtPokemonByName(mimic)) {
+                    encounterInfo.push(mimic);
+                }
+            });
+        });
         return encounterInfo;
     }
 
@@ -300,7 +315,7 @@ class Dungeon {
      * Gets all possible Pokemon in the dungeon
      */
     get allPokemon(): PokemonNameType[] {
-        return this.pokemonList.concat(this.bossPokemonList);
+        return this.pokemonList.concat(this.bossPokemonList, this.getCaughtMimics());
     }
 
 
@@ -310,30 +325,41 @@ class Dungeon {
      */
     get normalEncounterList(): EncounterInfo[] {
         const encounterInfo = [];
+        let pokemonName: PokemonNameType;
+        let hideEncounter = false;
+
+        const getEncounterInfo = function(pokemonName, mimic) {
+            const encounter = {
+                image: `assets/images/${(App.game.party.alreadyCaughtPokemonByName(pokemonName, true) ? 'shiny' : '')}pokemon/${pokemonMap[pokemonName].id}.png`,
+                shiny:  App.game.party.alreadyCaughtPokemonByName(pokemonName, true),
+                hide: hideEncounter,
+                uncaught: !App.game.party.alreadyCaughtPokemonByName(pokemonName),
+                lock: false,
+                lockMessage: '',
+                mimic: mimic,
+            };
+            return encounter;
+        };
 
         // Handling minions
         this.enemyList.forEach((enemy) => {
             // Handling Pokemon
             if (typeof enemy === 'string' || enemy.hasOwnProperty('pokemon')) {
-                let pokemonName: PokemonNameType;
-                let hideEncounter = false;
                 if (enemy.hasOwnProperty('pokemon')) {
                     pokemonName = (<DetailedPokemon>enemy).pokemon;
                     hideEncounter = (<DetailedPokemon>enemy).options?.hide ? ((<DetailedPokemon>enemy).options?.requirement ? !(<DetailedPokemon>enemy).options?.requirement.isCompleted() : (<DetailedPokemon>enemy).options?.hide) : false;
                 } else {
                     pokemonName = <PokemonNameType>enemy;
                 }
-                const encounter = {
-                    image: `assets/images/${(App.game.party.alreadyCaughtPokemonByName(pokemonName, true) ? 'shiny' : '')}pokemon/${pokemonMap[pokemonName].id}.png`,
-                    shiny:  App.game.party.alreadyCaughtPokemonByName(pokemonName, true),
-                    hide: hideEncounter,
-                    uncaught: !App.game.party.alreadyCaughtPokemonByName(pokemonName),
-                    lock: false,
-                    lockMessage: '',
-                };
-                encounterInfo.push(encounter);
+                encounterInfo.push(getEncounterInfo(pokemonName, false));
             // Handling Trainers
             } else { /* We don't display minion Trainers */ }
+        });
+
+        // Handling Mimics
+        this.getCaughtMimics().forEach(enemy => {
+            pokemonName = <PokemonNameType>enemy;
+            encounterInfo.push(getEncounterInfo(pokemonName, true));
         });
 
         return encounterInfo;
@@ -6323,6 +6349,7 @@ dungeonList['Santalune Forest'] = new Dungeon('Santalune Forest',
         legendary: [
             {loot: 'SmallRestore'},
             {loot: 'Silver_Powder'},
+            {loot: 'Heracronite', ignoreDebuff: true},
         ],
     },
     5803020,
@@ -6404,6 +6431,7 @@ dungeonList['Glittering Cave'] = new Dungeon('Glittering Cave',
         legendary: [
             {loot: 'Hard Stone'},
             {loot: 'Revive'},
+            {loot: 'Kangaskhanite', ignoreDebuff: true},
         ],
     },
     7037500,
@@ -7137,6 +7165,7 @@ dungeonList['Victory Road Kalos'] = new Dungeon('Victory Road Kalos',
             {loot: 'Hard Stone'},
             {loot: 'Damp Rock'},
             {loot: 'LargeRestore'},
+            {loot: 'Garchompite', ignoreDebuff: true},
         ],
         mythic: [
             {loot: 'Max Revive'},

@@ -23,7 +23,7 @@
                       <div class="input-group-append bg-primary text-light">
                           <label for="heldItemSortDirection" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;" data-bind="
                             text: Settings.getSetting('heldItemSortDirection').observableValue() ? '⥄' : '⥂',
-                            tooltip: { title: Settings.getSetting('heldItemSortDirection').observableValue() ? 'Descending (highest value first)' : 'Ascending (lowest value first)', trigger: 'hover', placement: 'bottom', html: true }
+                            tooltip: { title: Settings.getSetting('heldItemSortDirection').observableValue() ? 'Descending (highest value first)' : 'Ascending (lowest value first)', trigger: 'hover', placement: 'bottom' }
                           ">⥂</label>
                           <input id="heldItemSortDirection" style="vertical-align: middle" class="hidden" type='checkbox'
                               data-bind="checked: Settings.getSetting('heldItemSortDirection').observableValue()"
@@ -45,7 +45,7 @@
                   </thead>
                   <tbody id="pokemonsWithHeldItems" data-bind="foreach: PartyController.getPokemonsWithHeldItemSortedList()">
                     <tr class="clickable" data-bind="click: () => $data.giveHeldItem(HeldItem.heldItemSelected())">
-                      <td class="text-left"><knockout data-bind="text: $data.name"></knockout><sup data-bind="visible: $data.shiny">✨</sup></td>
+                      <td class="text-left"><knockout data-bind="text: $data.displayName"></knockout><sup data-bind="visible: $data.shiny">✨</sup></td>
                       <td class="text-center tight" data-bind="
                         text: $data.heldItem() == undefined ? '' : $data.heldItem().displayName,
                         tooltip: $data.heldItem() != undefined ? { title: $data.heldItem().description, placement: 'bottom', trigger: 'hover'} : undefined
@@ -62,7 +62,7 @@
                   </thead>
                   <tbody data-bind="foreach: PartyController.getHeldItemSortedList()">
                     <tr class="clickable" data-bind="click: () => $data.giveHeldItem(HeldItem.heldItemSelected()), hidden: $data.hideFromHeldItemList()">
-                      <td class="text-left" colspan="2"><knockout data-bind="text: $data.name"></knockout><sup data-bind="visible: $data.shiny">✨</sup></td>
+                      <td class="text-left" colspan="2"><knockout data-bind="text: $data.displayName"></knockout><sup data-bind="visible: $data.shiny">✨</sup></td>
                     </tr>
                   </tbody>
                 </table>

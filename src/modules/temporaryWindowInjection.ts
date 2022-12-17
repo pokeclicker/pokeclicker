@@ -88,6 +88,7 @@ import ClearDungeonRequirement from './requirements/ClearDungeonRequirement';
 import ClearGymRequirement from './requirements/ClearGymRequirement';
 import ClickRequirement from './requirements/ClickRequirement';
 import DefeatedRequirement from './requirements/DefeatedRequirement';
+import DevelopmentRequirement from './requirements/DevelopmentRequirement';
 import DiamondRequirement from './requirements/DiamondRequirement';
 import FarmHandRequirement from './requirements/FarmHandRequirement';
 import FarmPlotsUnlockedRequirement from './requirements/FarmPlotsUnlockedRequirement';
@@ -101,7 +102,7 @@ import MaxRegionRequirement from './requirements/MaxRegionRequirement';
 import ObtainedPokemonRequirement from './requirements/ObtainedPokemonRequirement';
 import PokeballRequirement from './requirements/PokeballRequirement';
 import PokerusStatusRequirement from './requirements/PokerusStatusRequirement';
-import ProteinObtainRequirement from './requirements/ProteinObtainRequirement';
+import VitaminObtainRequirement from './requirements/VitaminObtainRequirement';
 import QuestRequirement from './requirements/QuestRequirement';
 import QuestLevelRequirement from './requirements/QuestLevelRequirement';
 import RouteKillRequirement from './requirements/RouteKillRequirement';
@@ -148,10 +149,13 @@ import EnergyRestore from './items/EnergyRestore';
 import EffectEngineRunner from './effectEngine/effectEngineRunner';
 import ItemHandler from './items/ItemHandler';
 import CaughtIndicatingItem from './items/CaughtIndicatingItem';
+import EggItem from './items/EggItem';
+import MegaStoneItem from './items/MegaStoneItem';
 import PokeballItem from './items/PokeballItem';
+import Vitamin from './items/Vitamin';
+import VitaminController from './items/VitaminController';
 import RoamingPokemonList from './pokemons/RoamingPokemonList';
 import DataPokemon from './pokemons/DataPokemon';
-import MegaStoneItem from './items/MegaStoneItem';
 import RoamingPokemon from './pokemons/RoamingPokemon';
 
 Object.assign(<any>window, {
@@ -247,6 +251,7 @@ Object.assign(<any>window, {
     ClearGymRequirement,
     ClickRequirement,
     DefeatedRequirement,
+    DevelopmentRequirement,
     DiamondRequirement,
     FarmHandRequirement,
     FarmPlotsUnlockedRequirement,
@@ -260,7 +265,7 @@ Object.assign(<any>window, {
     ObtainedPokemonRequirement,
     PokeballRequirement,
     PokerusStatusRequirement,
-    ProteinObtainRequirement,
+    VitaminObtainRequirement,
     QuestRequirement,
     QuestLevelRequirement,
     RouteKillRequirement,
@@ -310,9 +315,12 @@ Object.assign(<any>window, {
     EffectEngineRunner,
     ItemHandler,
     CaughtIndicatingItem,
+    EggItem,
+    MegaStoneItem,
     PokeballItem,
+    Vitamin,
+    VitaminController,
     RoamingPokemonList,
     DataPokemon,
-    MegaStoneItem,
     RoamingPokemon,
 });

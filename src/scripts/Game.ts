@@ -65,6 +65,12 @@ class Game {
                 console.error('Unable to load sava data from JSON for:', key, '\nError:\n', error);
             }
         });
+        saveObject.achievements?.forEach(achName => {
+            const ach = AchievementHandler.findByName(achName);
+            if (ach) {
+                ach.unlocked(true);
+            }
+        });
     }
 
     initialize() {
@@ -221,6 +227,7 @@ class Game {
                 App.game.quests.getQuestLine('The Great Vivillon Hunt!').beginQuest(App.game.quests.getQuestLine('The Great Vivillon Hunt!').curQuest());
             }
         }
+
         // Check if Koga has been defeated, but have no safari ticket yet
         if (App.game.badgeCase.badgeList[BadgeEnums.Soul]() && !App.game.keyItems.itemList[KeyItemType.Safari_ticket].isUnlocked()) {
             App.game.keyItems.gainKeyItem(KeyItemType.Safari_ticket, true);
@@ -230,10 +237,19 @@ class Game {
             App.game.keyItems.gainKeyItem(KeyItemType.Gem_case, true);
         }
         // Check that none of our quest are less than their initial value
-        App.game.quests.questLines().filter(q => q.state() == 1).forEach(questLine => {
+        App.game.quests.questLines().filter(q => q.state() == 1 && q.curQuest() < q.quests().length).forEach(questLine => {
             const quest = questLine.curQuestObject();
-            if (quest.initial() > quest.focus()) {
-                quest.initial(quest.focus());
+            if (quest instanceof MultipleQuestsQuest) {
+                quest.quests.forEach((q) => {
+                    if (q.initial() > q.focus()) {
+                        q.initial(q.focus());
+                    }
+                });
+            } else {
+                if (quest.initial() > quest.focus()) {
+                    quest.initial(quest.focus());
+                    questLine.curQuestInitial(quest.initial());
+                }
             }
         });
         // Check for breeding pokemons not in queue
@@ -247,6 +263,11 @@ class Game {
         App.game.breeding.eggList.filter(e => e().pokemon).forEach(e => {
             e().setPartyPokemon();
         });
+
+        // Kick player out of Client Island if they are not on the client
+        if (!App.isUsingClient && player._townName === 'Client Island') {
+            MapHelper.moveToTown('One Island');
+        }
     }
 
     start() {
@@ -311,12 +332,16 @@ class Game {
             // use a setTimeout to queue the event
             this.worker?.addEventListener('message', () => Settings.getSetting('useWebWorkerForGameTicks').value ? this.gameTick() : null);
 
-            // Let our worker know if the page is visible or not
             document.addEventListener('visibilitychange', () => {
+                // Let our worker know if the page is visible or not
                 if (pageHidden != document.hidden) {
                     pageHidden = document.hidden;
                     this.worker.postMessage({'pageHidden': pageHidden});
                 }
+
+                // Save resources by not displaying updates if game is not currently visible
+                const gameEl = document.getElementById('game');
+                document.hidden ? gameEl.classList.add('hidden') : gameEl.classList.remove('hidden');
             });
             this.worker.postMessage({'pageHidden': pageHidden});
             if (this.worker) {
@@ -393,6 +418,17 @@ class Game {
         if (Save.counter > GameConstants.SAVE_TICK) {
             const old = new Date(player._lastSeen);
             const now = new Date();
+
+            // Time traveller flag
+            if (old > now) {
+                Notifier.notify({
+                    title: 'Welcome Time Traveller!',
+                    message: 'Please ensure you keep a backup of your old save as travelling through time can cause some serious problems.\n\nAny Pokémon you may have obtained in the future could cease to exist which could corrupt your save file!',
+                    type: NotificationConstants.NotificationOption.danger,
+                    timeout: GameConstants.HOUR,
+                });
+                player._timeTraveller = true;
+            }
 
             // Check if it's a new day
             if (old.toLocaleDateString() !== now.toLocaleDateString()) {
