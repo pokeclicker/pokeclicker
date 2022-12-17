@@ -1,39 +1,36 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable quote-props */
 import {
-    Genders, MaxIDPerRegion,
-    Region, StoneType,
-} from '../GameConstants';
+    QuestlineLevelEvolution,
+    NightTimedLevelEvolution,
+    RegionStoneEvolution,
+    DungeonRestrictedLevelEvolution,
+    HeldItemLevelEvolution,
+    RegionLevelEvolution,
+    RegionNightTimedLevelEvolution,
+    DayTimedStoneEvolution,
+    NightTimedStoneEvolution,
+    EnvironmentRestrictedLevelEvolution,
+    WeatherRestrictedLevelEvolution,
+    DayTimedLevelEvolution,
+    TimeRestrictedLevelEvolution,
+    MegaEvolution,
+} from './evolutions/Methods';
 import BerryType from '../enums/BerryType';
 import ItemType from '../enums/ItemType';
 import PokemonType from '../enums/PokemonType';
+import {
+    Region, StoneType, Genders, MaxIDPerRegion,
+} from '../GameConstants';
 import BagItem from '../interfaces/BagItem';
+import {
+    EvoData, DummyEvolution, LevelEvolution, StoneEvolution,
+} from './evolutions/Base';
 import LevelType from '../party/LevelType';
 import GenericProxy from '../utilities/GenericProxy';
 import Rand from '../utilities/Rand';
 import WeatherType from '../weather/WeatherType';
 import { PokemonNameType } from './PokemonNameType';
-import {
-    DummyEvolution,
-    EvoData,
-    LevelEvolution, StoneEvolution,
-} from './evolutions/Base';
-import {
-    DayTimedLevelEvolution,
-    DayTimedStoneEvolution,
-    DungeonRestrictedLevelEvolution,
-    EnvironmentRestrictedLevelEvolution,
-    HeldItemLevelEvolution,
-    MegaEvolution,
-    NightTimedLevelEvolution,
-    NightTimedStoneEvolution,
-    QuestlineLevelEvolution,
-    RegionLevelEvolution,
-    RegionNightTimedLevelEvolution,
-    RegionStoneEvolution,
-    TimeRestrictedLevelEvolution,
-    WeatherRestrictedLevelEvolution,
-} from './evolutions/Methods';
 import { setPokemonMap } from './mapProvider';
 
 export const pokemonBabyPrevolutionMap: { [name: string]: PokemonNameType } = {};
