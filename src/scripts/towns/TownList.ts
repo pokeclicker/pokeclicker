@@ -4388,11 +4388,14 @@ const ATreeMaybeShop = new Shop([
     ItemList.Power_Bracer,
     ItemList.Key_stone,
 ]);
+
+// Magikarp Jump Shops
 const MagikarpJumpGemTrade = new GemMasterShop('Trade', [new GymBadgeRequirement(BadgeEnums.Heal_League)]);
 const MagikarpJumpShadySalesMan = new Shop([
     ItemList['Magikarp Blue Raindrops'],
     ItemList['Magikarp Saucy Violet'],
 ], 'Shady Sales Man', [new GymBadgeRequirement(BadgeEnums.Master_League)]);
+
 
 //Alola NPCs
 
@@ -4566,17 +4569,20 @@ const BattleTreeBlue = new NPC('Blue', [
     'Hello there champ! Fancy seeing you here.',
     'We just planted this sapling here. Maybe it will grow into something great some day.',
 ], {image: 'assets/images/npcs/Blue-masters.png'});
+
+// Magikarp Jump NPCs
 const MayorKarp = new NPC('Mayor Karp', [
-    'TODO',
-    'Something about welcome',
-    'Something about only magikarps can fight here',
-    'Something about the league system',
-    'Insist attack is jump power',
+    'Welcome to the region of Magikarp!',
+    'This is a magical place where everybody loves Magikarp!',
+    'You\'re good at raising Pokémon, right? We called you here to compete in the eight leagues around the island and pick up our poor Magikarp\'s spirits!',
+    'Around these parts, folks love to compete to see whose Magikarp can splash harder and jump higher! No other Pokémon are allowed to compete in these events. So, do your best to raise up some fine Magikarp!',
+    'Our island is a special place, home to Magikarp patterns that aren\'t found anywhere else in the world! Collect and raise them all to increase your jump power and take on our league champion!',
 ], {image: 'assets/images/npcs/MayorKarp.png'});
 
 const MagikarpJumpRoamerNPC = new RoamerNPC('Roddy Tackle', [
-    'TODO: something about rare patterns at {ROUTE_NAME}!',
+    'There are some singularly stunning individuals down at {ROUTE_NAME}! Some Magikarp with real personality!',
 ], GameConstants.Region.alola, RoamingPokemonList.findGroup(GameConstants.Region.alola, GameConstants.AlolaSubRegions.MagikarpJump), 'assets/images/npcs/Roddy Tackle.png');
+
 
 //Alola Towns
 
@@ -4763,6 +4769,7 @@ TownList['A Tree Maybe'] = new Town(
     }
 );
 
+// Magikarp Jump Towns
 TownList['Hoppy Town'] = new Town(
     'Hoppy Town',
     GameConstants.Region.alola,
