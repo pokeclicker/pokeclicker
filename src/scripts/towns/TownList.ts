@@ -4574,7 +4574,7 @@ const BattleTreeBlue = new NPC('Blue', [
 const MayorKarp = new NPC('Mayor Karp', [
     'Welcome to the region of Magikarp!',
     'This is a magical place where everybody loves Magikarp!',
-    'You\'re good at raising Pokémon, right? We called you here to compete in the eight leagues around the island and pick up our poor Magikarp\'s spirits!',
+    'You\'re good at raising Pokémon, right? We called you here to compete in the ten leagues around the island and pick up our poor Magikarp\'s spirits!',
     'Around these parts, folks love to compete to see whose Magikarp can splash harder and jump higher! No other Pokémon are allowed to compete in these events. So, do your best to raise up some fine Magikarp!',
     'Our island is a special place, home to Magikarp patterns that aren\'t found anywhere else in the world! Collect and raise them all to increase your jump power and take on our league champion!',
 ], {image: 'assets/images/npcs/MayorKarp.png'});
