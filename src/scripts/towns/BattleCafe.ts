@@ -79,7 +79,7 @@ class BattleCafeController {
         }
         if (curHour == 17 && !clockwise && spinTime > 10) {
             spin = GameConstants.AlcremieSpins.at7Above10;
-        } else if (curHour >= 6 && curHour < 17) { // Is day
+        } else if (curHour >= 6 && curHour < 18) { // Is day
             if (clockwise && spinTime < 5) {
                 spin = GameConstants.AlcremieSpins.dayClockwiseBelow5;
             } else if (clockwise && spinTime >= 5) {
