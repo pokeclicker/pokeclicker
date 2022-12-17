@@ -2,7 +2,7 @@ import * as GameConstants from '../GameConstants';
 import AchievementRequirement from './AchievementRequirement';
 
 export default class SeviiCaughtRequirement extends AchievementRequirement {
-    constructor(value: number, private shiny: boolean) {
+    constructor(value: number, public shiny: boolean) {
         super(value, GameConstants.AchievementOption.more, shiny ? GameConstants.AchievementType['Shiny Pokemon'] : GameConstants.AchievementType['Caught Pokemon']);
     }
 
