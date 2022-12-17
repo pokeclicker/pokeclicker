@@ -1,36 +1,39 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable quote-props */
 import {
-    QuestlineLevelEvolution,
-    NightTimedLevelEvolution,
-    RegionStoneEvolution,
-    DungeonRestrictedLevelEvolution,
-    HeldItemLevelEvolution,
-    RegionLevelEvolution,
-    RegionNightTimedLevelEvolution,
-    DayTimedStoneEvolution,
-    NightTimedStoneEvolution,
-    EnvironmentRestrictedLevelEvolution,
-    WeatherRestrictedLevelEvolution,
-    DayTimedLevelEvolution,
-    TimeRestrictedLevelEvolution,
-    MegaEvolution,
-} from './evolutions/Methods';
+    Genders, MaxIDPerRegion,
+    Region, StoneType,
+} from '../GameConstants';
 import BerryType from '../enums/BerryType';
 import ItemType from '../enums/ItemType';
 import PokemonType from '../enums/PokemonType';
-import {
-    Region, StoneType, Genders, MaxIDPerRegion,
-} from '../GameConstants';
 import BagItem from '../interfaces/BagItem';
-import {
-    EvoData, DummyEvolution, LevelEvolution, StoneEvolution,
-} from './evolutions/Base';
 import LevelType from '../party/LevelType';
 import GenericProxy from '../utilities/GenericProxy';
 import Rand from '../utilities/Rand';
 import WeatherType from '../weather/WeatherType';
 import { PokemonNameType } from './PokemonNameType';
+import {
+    DummyEvolution,
+    EvoData,
+    LevelEvolution, StoneEvolution,
+} from './evolutions/Base';
+import {
+    DayTimedLevelEvolution,
+    DayTimedStoneEvolution,
+    DungeonRestrictedLevelEvolution,
+    EnvironmentRestrictedLevelEvolution,
+    HeldItemLevelEvolution,
+    MegaEvolution,
+    NightTimedLevelEvolution,
+    NightTimedStoneEvolution,
+    QuestlineLevelEvolution,
+    RegionLevelEvolution,
+    RegionNightTimedLevelEvolution,
+    RegionStoneEvolution,
+    TimeRestrictedLevelEvolution,
+    WeatherRestrictedLevelEvolution,
+} from './evolutions/Methods';
 import { setPokemonMap } from './mapProvider';
 
 export const pokemonBabyPrevolutionMap: { [name: string]: PokemonNameType } = {};
@@ -4906,7 +4909,7 @@ export const pokemonList = createPokemonArray(
     },
     {
         'id': 129.06,
-        'name': 'Magikarp Orange Two Tone',
+        'name': 'Magikarp Orange Two-Tone',
         'catchRate': 255,
         'type': [PokemonType.Water],
         'levelType': LevelType.slow,
@@ -4966,7 +4969,7 @@ export const pokemonList = createPokemonArray(
     },
     {
         'id': 129.09,
-        'name': 'Magikarp Pink Two Tone',
+        'name': 'Magikarp Pink Two-Tone',
         'catchRate': 255,
         'type': [PokemonType.Water],
         'levelType': LevelType.slow,
