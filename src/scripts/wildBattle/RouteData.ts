@@ -2088,7 +2088,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Great League Bridge', GameConstants.Region.alola, 34,
     new RoutePokemon({
-        water: ['Magikarp', 'Magikarp', 'Magikarp', 'Magikarp Orange Two Tone', 'Magikarp Orange Dapples'],
+        water: ['Magikarp', 'Magikarp', 'Magikarp', 'Magikarp Orange Two-Tone', 'Magikarp Orange Dapples'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Heavy_League)],
     undefined,
@@ -2099,7 +2099,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Fast League Bridge', GameConstants.Region.alola, 35,
     new RoutePokemon({
-        water: ['Magikarp', 'Magikarp', 'Magikarp', 'Magikarp Calico (Orange, White, Black)', 'Magikarp Orange Two Tone', 'Magikarp Calico (Orange, White)'],
+        water: ['Magikarp', 'Magikarp', 'Magikarp', 'Magikarp Calico (Orange, White, Black)', 'Magikarp Orange Two-Tone', 'Magikarp Calico (Orange, White)'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Great_League)],
     undefined,
@@ -2110,7 +2110,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Luxury League Bridge', GameConstants.Region.alola, 36,
     new RoutePokemon({
-        water: ['Magikarp', 'Magikarp', 'Magikarp', 'Magikarp Pink Two Tone', 'Magikarp Calico (Orange, White, Black)', 'Magikarp Orange Dapples'],
+        water: ['Magikarp', 'Magikarp', 'Magikarp', 'Magikarp Pink Two-Tone', 'Magikarp Calico (Orange, White, Black)', 'Magikarp Orange Dapples'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Fast_League)],
     undefined,
@@ -2132,7 +2132,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Ultra League Bridge', GameConstants.Region.alola, 38,
     new RoutePokemon({
-        water: ['Magikarp', 'Magikarp', 'Magikarp', 'Magikarp Calico (Orange, White, Black)', 'Magikarp Orange Two Tone', 'Magikarp Calico (Orange, White)', 'Magikarp Apricot Tiger', 'Magikarp Apricot Zebra', 'Magikarp Brown Zebra'],
+        water: ['Magikarp', 'Magikarp', 'Magikarp', 'Magikarp Calico (Orange, White, Black)', 'Magikarp Orange Two-Tone', 'Magikarp Calico (Orange, White)', 'Magikarp Apricot Tiger', 'Magikarp Apricot Zebra', 'Magikarp Brown Zebra'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Heal_League)],
     undefined,
