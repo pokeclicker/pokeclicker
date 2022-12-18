@@ -174,6 +174,28 @@ TemporaryBattleList['Blue 5'] = new TemporaryBattle(
         },
     }
 );
+TemporaryBattleList.BugCatcherLouie = new TemporaryBattle(
+    'Bug Catcher Louie',
+    [new GymPokemon('Mega Scizor', 125000000, 32)],
+    'You\'ve got some powerful bugs! You should take this stone!</br><img src="assets/images/megaStone/123.png"/>',
+    [new CustomRequirement(App.game.statistics.safariBaitThrown, 500, 'Throw 500 Bait'), new ObtainedPokemonRequirement('Scizor'), new MaxRegionRequirement(GameConstants.Region.kalos)],
+    undefined,
+    {
+        imageName: '../trainers/Bug Catcher',
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Scizor').giveMegastone(),
+    }
+);
+TemporaryBattleList.BugCatcherRyouta = new TemporaryBattle(
+    'Bug Catcher Ryouta',
+    [new GymPokemon('Mega Pinsir', 125000000, 32)],
+    'You\'ve got some powerful bugs! You should take this stone!</br><img src="assets/images/megaStone/127.png"/>',
+    [new CustomRequirement(App.game.statistics.safariRocksThrown, 500, 'Throw 500 Rocks'), new ObtainedPokemonRequirement('Pinsir'), new MaxRegionRequirement(GameConstants.Region.kalos)],
+    undefined,
+    {
+        imageName: '../trainers/Bug Catcher',
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Pinsir').giveMegastone(),
+    }
+);
 TemporaryBattleList['Biker Goon 1'] = new TemporaryBattle(
     'Biker Goon 1',
     [
