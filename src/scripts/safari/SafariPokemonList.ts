@@ -12,7 +12,7 @@ class SafariPokemonList {
     }
 
     public static generateSafariLists() {
-        const safariRegions = [GameConstants.Region.kanto, GameConstants.Region.sinnoh];
+        const safariRegions = [GameConstants.Region.kanto];
 
         for (const region of safariRegions) {
             if (!SafariPokemonList.list[region]) {
@@ -23,7 +23,6 @@ class SafariPokemonList {
         }
 
         SafariPokemonList.list[GameConstants.Region.kanto].push(...this.generateKantoSafariList());
-        SafariPokemonList.list[GameConstants.Region.sinnoh].push(...this.generateSinnohSafariList());
     }
 
     private static generateKantoSafariList() {
@@ -47,12 +46,6 @@ class SafariPokemonList {
             {name: 'Marowak', weight: 5 },
             {name: 'Tangela', weight: 4 },
         ]));
-        return list;
-    }
-
-    private static generateSinnohSafariList() {
-        const list = [];
-        list.push(new SafariPokemonList([{ name: 'Nidoran(F)', weight: 15 }]));
         return list;
     }
 }

@@ -123,31 +123,33 @@ class Safari {
     public static safariReset() {
         Notifier.confirm({
             title: 'Safari Zone',
-            message: `You have an active Safari in ${GameConstants.Region[this.activeRegion()]}, do you want to quit that Safari and start a new one?`,
+            message: `You have an active Safari in ${GameConstants.Region[this.activeRegion()].charAt(0).toUpperCase() + GameConstants.Region[this.activeRegion()].slice(1)}.\nDo you want to quit that Safari and start a new one?`,
             type: NotificationConstants.NotificationOption.warning,
             confirm: 'Quit',
         }).then(confirmed => {
             if (confirmed) {
                 //Reload zone
-                setTimeout(() => {
-                    Safari.inBattle(false);
-                    Safari.inProgress(false);
-                    SafariBattle.busy(false);
-                    $('#safariBattleModal').modal('hide');
-                }, 2000);
-            } else {
-                this.closeModal();
+                Safari.inBattle(false);
+                Safari.inProgress(false);
+                SafariBattle.busy(false);
+                $('#safariBattleModal').modal('hide');
+                this.openModal();
             }
         });
     }
 
     public static openModal() {
+        App.game.gameState = GameConstants.GameState.safari;
+        $('#safariModal').modal({backdrop: 'static', keyboard: false});
+    }
+
+    public static startSafari() {
         if (this.canAccess()) {
             if (player.region != this.activeRegion()) {
                 this.safariReset();
+            } else {
+                this.startSafari();
             }
-            App.game.gameState = GameConstants.GameState.safari;
-            $('#safariModal').modal({backdrop: 'static', keyboard: false});
         } else {
             Notifier.notify({
                 message: 'You need the Safari Pass to access this location.\n<i>Visit the Gym in Fuschia City</i>',
