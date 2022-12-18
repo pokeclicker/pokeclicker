@@ -404,28 +404,6 @@ const FuchsiaEusine = new NPC('Eusine', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Eusine\'s Chase', 7), new QuestLineStepCompletedRequirement('Eusine\'s Chase', 9, GameConstants.AchievementOption.less )]),
 });
 
-const BugCatcherLouie1 = new NPC('Bug Catcher Louie', [
-    'I just love Scyther!',
-    'I\'ve heard that under the right conditions, Scyther can evolve! Maybe feeding mine lots of bait will help?'],
-{requirement: new TemporaryBattleRequirement('Bug Catcher Louie', 1, GameConstants.AchievementOption.less),
-});
-
-const BugCatcherLouie2 = new NPC('Bug Catcher Louie', [
-    'That neat rock will let you power up your Scizor to new heights!',
-], {requirement: new TemporaryBattleRequirement('Bug Catcher Louie'),
-});
-
-const BugCatcherRyouta1 = new NPC('Bug Catcher Ryouta', [
-    'I just love Pinsir!',
-    'My Pinsir is so strong, it can smash any rock! It can even smash rocks thrown at it!'],
-{requirement: new TemporaryBattleRequirement('Bug Catcher Ryouta', 1, GameConstants.AchievementOption.less),
-});
-
-const BugCatcherRyouta2 = new NPC('Bug Catcher Ryouta', [
-    'That neat rock will let you power up your Scizor to new heights!',
-], {requirement: new TemporaryBattleRequirement('Bug Catcher Ryouta'),
-});
-
 const CinnabarIslandResearcher = new NPC('Researcher', [
     'They were trying to clone an ancient Pokémon in the mansion... I wonder if they succeeded.',
     'Apparently the ancient Pokémon escaped, and can be found roaming around Kanto!',
@@ -807,13 +785,13 @@ TownList['Fuchsia City'] = new Town(
     'Fuchsia City',
     GameConstants.Region.kanto,
     GameConstants.KantoSubRegions.Kanto,
-    [FuchsiaCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Fuchsia City']), TemporaryBattleList['Bug Catcher Louie'], TemporaryBattleList['Bug Catcher Ryouta']],
+    [FuchsiaCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Fuchsia City'])],
     {
         requirements: [new OneFromManyRequirement([
             new RouteKillRequirement(10, GameConstants.Region.kanto, 18),
             new RouteKillRequirement(10, GameConstants.Region.kanto, 15),
         ])],
-        npcs: [FuchsiaKantoRoamerNPC, FuchsiaEusine, BugCatcherLouie1, BugCatcherLouie2, BugCatcherRyouta1, BugCatcherRyouta2],
+        npcs: [FuchsiaKantoRoamerNPC, FuchsiaEusine],
     }
 );
 TownList['Cinnabar Island'] = new Town(
