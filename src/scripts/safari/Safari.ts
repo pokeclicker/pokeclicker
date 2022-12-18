@@ -13,6 +13,7 @@ class Safari {
     static inProgress: KnockoutObservable<boolean> = ko.observable(false);
     static inBattle: KnockoutObservable<boolean> = ko.observable(false);
     static balls: KnockoutObservable<number> = ko.observable();
+    static activeRegion: KnockoutObservable<GameConstants.Region> = ko.observable(GameConstants.Region.kanto);
 
     public static sizeX(): number {
         return Math.floor(document.querySelector('#safariModal .modal-dialog').scrollWidth / 32);
@@ -23,6 +24,7 @@ class Safari {
     }
 
     public static load() {
+        this.activeRegion(player.region);
         Safari.grid = [];
         Safari.pokemonGrid([]);
         Safari.playerXY.x = 0;
@@ -118,8 +120,32 @@ class Safari {
         }
     }
 
+    public static safariReset() {
+        Notifier.confirm({
+            title: 'Safari Zone',
+            message: `You have an active Safari in ${GameConstants.Region[this.activeRegion()]}, do you want to quit that Safari and start a new one?`,
+            type: NotificationConstants.NotificationOption.warning,
+            confirm: 'Quit',
+        }).then(confirmed => {
+            if (confirmed) {
+                //Reload zone
+                setTimeout(() => {
+                    Safari.inBattle(false);
+                    Safari.inProgress(false);
+                    SafariBattle.busy(false);
+                    $('#safariBattleModal').modal('hide');
+                }, 2000);
+            } else {
+                this.closeModal();
+            }
+        });
+    }
+
     public static openModal() {
         if (this.canAccess()) {
+            if (player.region != this.activeRegion()) {
+                this.safariReset();
+            }
             App.game.gameState = GameConstants.GameState.safari;
             $('#safariModal').modal({backdrop: 'static', keyboard: false});
         } else {
