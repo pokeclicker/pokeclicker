@@ -1980,7 +1980,7 @@ TemporaryBattleList['Ash Ketchum Johto'] = new TemporaryBattle(
     [
         new GymPokemon('Pikachu (Partner Cap)', 83333000, 58),
         new GymPokemon('Heracross', 83333000, 56),
-        new GymPokemon('Noctowl', 83333000, 56),
+        new GymPokemon('Noctowl', 83333000, 56, undefined, true),
         new GymPokemon('Bayleef', 83333000, 60),
         new GymPokemon('Cyndaquil', 83333000, 62),
         new GymPokemon('Totodile', 83333000, 62),
