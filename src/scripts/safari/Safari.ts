@@ -13,6 +13,7 @@ class Safari {
     static inProgress: KnockoutObservable<boolean> = ko.observable(false);
     static inBattle: KnockoutObservable<boolean> = ko.observable(false);
     static balls: KnockoutObservable<number> = ko.observable();
+    static activeRegion: KnockoutObservable<GameConstants.Region> = ko.observable(GameConstants.Region.kanto);
 
     public static sizeX(): number {
         return Math.floor(document.querySelector('#safariModal .modal-dialog').scrollWidth / 32);
@@ -23,6 +24,7 @@ class Safari {
     }
 
     public static load() {
+        this.activeRegion(player.region);
         Safari.grid = [];
         Safari.pokemonGrid([]);
         Safari.playerXY.x = 0;
@@ -59,7 +61,6 @@ class Safari {
         Safari.addRandomBody(new GrassBody());
         Safari.addRandomBody(new GrassBody());
         Safari.addRandomBody(new GrassBody());
-
         Safari.show();
     }
 
@@ -119,10 +120,36 @@ class Safari {
         }
     }
 
+    public static safariReset() {
+        Notifier.confirm({
+            title: 'Safari Zone',
+            message: `You have an active Safari in ${GameConstants.Region[this.activeRegion()].charAt(0).toUpperCase() + GameConstants.Region[this.activeRegion()].slice(1)}.\nDo you want to quit that Safari and start a new one?`,
+            type: NotificationConstants.NotificationOption.warning,
+            confirm: 'Quit',
+        }).then(confirmed => {
+            if (confirmed) {
+                //Reload zone
+                Safari.inBattle(false);
+                Safari.inProgress(false);
+                SafariBattle.busy(false);
+                $('#safariBattleModal').modal('hide');
+                this.openModal();
+            }
+        });
+    }
+
     public static openModal() {
+        App.game.gameState = GameConstants.GameState.safari;
+        $('#safariModal').modal({backdrop: 'static', keyboard: false});
+    }
+
+    public static startSafari() {
         if (this.canAccess()) {
-            App.game.gameState = GameConstants.GameState.safari;
-            $('#safariModal').modal({backdrop: 'static', keyboard: false});
+            if (player.region != this.activeRegion()) {
+                this.safariReset();
+            } else {
+                this.openModal();
+            }
         } else {
             Notifier.notify({
                 message: 'You need the Safari Pass to access this location.\n<i>Visit the Gym in Fuschia City</i>',
@@ -375,9 +402,13 @@ class Safari {
     }
 
     static completed(shiny = false) {
-        return SafariPokemon.list.reduce((all,poke) => {
-            return all && App.game.party.alreadyCaughtPokemonByName(poke.name,shiny);
-        }, true);
+        ///TODO: If more than 1 zone per region, need to make this work
+        if (SafariPokemonList.list[player.region]) {
+            return SafariPokemonList.list[player.region]()[0].safariPokemon.reduce((all,poke) => {
+                return all && App.game.party.alreadyCaughtPokemonByName(poke.name,shiny);
+            }, true);
+        }
+        return false;
     }
 }
 
