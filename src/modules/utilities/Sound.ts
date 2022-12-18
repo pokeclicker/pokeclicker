@@ -61,6 +61,9 @@ export default class Sound {
     }
 
     canPlay() {
+        if (Settings.getSetting('sound.muted')?.value) {
+            return false;
+        }
         const setting = Settings.getSetting(`sound.${this.name}`);
         if (!setting) {
             return true;

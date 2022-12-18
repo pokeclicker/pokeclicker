@@ -22,6 +22,34 @@ class AchievementTracker implements Feature {
     update(delta: number): void {
     }
 
+    nextAchievement(): void {
+        if (!this.hasTrackedAchievement()) {
+            return;
+        }
+        const tracked = this.trackedAchievement();
+        let next = tracked;
+        let max = Infinity;
+        AchievementHandler.achievementList.forEach((current) => {
+            if (tracked.property.constructor == current.property.constructor
+            && (tracked.property as CaughtUniquePokemonsByRegionRequirement).region == (current.property as CaughtUniquePokemonsByRegionRequirement).region
+            && (tracked.property as RouteKillRequirement).route == (current.property as RouteKillRequirement).route
+            && (tracked.property as PokeballRequirement).pokeball == (current.property as PokeballRequirement).pokeball
+            && (tracked.property as ClearGymRequirement).gymIndex == (current.property as ClearGymRequirement).gymIndex
+            && (tracked.property as ClearDungeonRequirement).dungeonIndex == (current.property as ClearDungeonRequirement).dungeonIndex
+            && (tracked.property as SeviiCaughtRequirement).shiny == (current.property as SeviiCaughtRequirement).shiny
+            && (tracked.property as HatcheryHelperRequirement).bonusRequired == (current.property as HatcheryHelperRequirement).bonusRequired
+            && (tracked.property as PokerusStatusRequirement).statusRequired == (current.property as PokerusStatusRequirement).statusRequired
+            && tracked.property.requiredValue < current.property.requiredValue
+            && current.property.requiredValue < max) {
+                next = current;
+                max = current.property.requiredValue;
+            }
+        });
+        if (tracked !== next) {
+            this.trackAchievement(next);
+        }
+    }
+
     fromJSON(json: Record<string, any>): void {
         if (json == null) {
             return;
