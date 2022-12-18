@@ -416,7 +416,7 @@ TemporaryBattleList['Suicune 2'] = new TemporaryBattle(
 );
 TemporaryBattleList['Red Gyarados'] = new TemporaryBattle(
     'Red Gyarados',
-    [new GymPokemon('Gyarados', 1200000, 30, undefined, true)],
+    [new GymPokemon('Gyarados', 1100000, 30, undefined, true)],
     undefined,
     [new QuestLineStartedRequirement('Team Rocket Again')],
     undefined,
