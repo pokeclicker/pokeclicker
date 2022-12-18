@@ -41,6 +41,9 @@ export default class Achievement {
                 createLogContent.earnedAchievement({ name: this.name }),
             );
             this.unlocked(true);
+            if (this === App.game.achievementTracker.trackedAchievement()) {
+                App.game.achievementTracker.nextAchievement();
+            }
             // TODO: refilter within achievement bonus
             // AchievementHandler.filterAchievementList(true);
             // Track when users gains an achievement and their total playtime

@@ -2057,100 +2057,110 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         water: ['Magikarp'],
     }),
-    [new NullRequirement()],
+    [new QuestLineCompletedRequirement('Magikarp Jump')],
     undefined,
     GameConstants.AlolaSubRegions.MagikarpJump,
-    true
+    true,
+    22500
 ));
 Routes.add(new RegionRoute(
     'Quick League Bridge', GameConstants.Region.alola, 32,
     new RoutePokemon({
         water: ['Magikarp'],
     }),
-    [new NullRequirement()],
+    [new GymBadgeRequirement(BadgeEnums.Friend_League)],
     undefined,
     GameConstants.AlolaSubRegions.MagikarpJump,
-    true
+    true,
+    45000
 ));
 Routes.add(new RegionRoute(
     'Heavy League Bridge', GameConstants.Region.alola, 33,
     new RoutePokemon({
         water: ['Magikarp', 'Magikarp Orange Orca'],
     }),
-    [new NullRequirement()],
+    [new GymBadgeRequirement(BadgeEnums.Quick_League)],
     undefined,
     GameConstants.AlolaSubRegions.MagikarpJump,
-    true
+    true,
+    90000
 ));
 Routes.add(new RegionRoute(
     'Great League Bridge', GameConstants.Region.alola, 34,
     new RoutePokemon({
         water: ['Magikarp', 'Magikarp Orange Dapples'],
     }),
-    [new NullRequirement()],
+    [new GymBadgeRequirement(BadgeEnums.Heavy_League)],
     undefined,
     GameConstants.AlolaSubRegions.MagikarpJump,
-    true
+    true,
+    157500
 ));
 Routes.add(new RegionRoute(
     'Fast League Bridge', GameConstants.Region.alola, 35,
     new RoutePokemon({
         water: ['Magikarp'],
     }),
-    [new NullRequirement()],
+    [new GymBadgeRequirement(BadgeEnums.Great_League)],
     undefined,
     GameConstants.AlolaSubRegions.MagikarpJump,
-    true
+    true,
+    225000
 ));
 Routes.add(new RegionRoute(
     'Luxury League Bridge', GameConstants.Region.alola, 36,
     new RoutePokemon({
-        water: ['Magikarp', 'Magikarp Pink Two Tone'],
+        water: ['Magikarp', 'Magikarp Pink Two-Tone'],
     }),
-    [new NullRequirement()],
+    [new GymBadgeRequirement(BadgeEnums.Fast_League)],
     undefined,
     GameConstants.AlolaSubRegions.MagikarpJump,
-    true
+    true,
+    337500
 ));
 Routes.add(new RegionRoute(
     'Heal League Bridge', GameConstants.Region.alola, 37,
     new RoutePokemon({
         water: ['Magikarp', 'Magikarp Grey Bubbles', 'Magikarp Grey Patches'],
     }),
-    [new NullRequirement()],
+    [new GymBadgeRequirement(BadgeEnums.Luxury_League)],
     undefined,
     GameConstants.AlolaSubRegions.MagikarpJump,
-    true
+    true,
+    450000
 ));
 Routes.add(new RegionRoute(
     'Ultra League Bridge', GameConstants.Region.alola, 38,
     new RoutePokemon({
         water: ['Magikarp', 'Magikarp Apricot Tiger', 'Magikarp Apricot Zebra', 'Magikarp Brown Zebra'],
     }),
-    [new NullRequirement()],
+    [new GymBadgeRequirement(BadgeEnums.Heal_League)],
     undefined,
     GameConstants.AlolaSubRegions.MagikarpJump,
-    true
+    true,
+    562500
 ));
 Routes.add(new RegionRoute(
     'Elite Four League Pier', GameConstants.Region.alola, 39,
     new RoutePokemon({
         water: ['Magikarp', 'Magikarp Black Forehead'],
     }),
-    [new NullRequirement()],
+    [new GymBadgeRequirement(BadgeEnums.Ultra_League)],
     undefined,
     GameConstants.AlolaSubRegions.MagikarpJump,
-    true
+    true,
+    675000
 ));
 Routes.add(new RegionRoute(
     'Master League Pier', GameConstants.Region.alola, 40,
     new RoutePokemon({
         water: ['Magikarp', 'Magikarp Orange Mask'],
     }),
-    [new NullRequirement()],
+    [new GymBadgeRequirement(BadgeEnums.E4_League)],
     undefined,
     GameConstants.AlolaSubRegions.MagikarpJump,
-    true
+    true,
+    900000
 ));
 
 /*

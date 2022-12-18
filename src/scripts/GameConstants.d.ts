@@ -192,6 +192,7 @@ namespace GameConstants {
         diamond,
         farmPoint,
         battlePoint,
+        contestToken,
     }
     declare enum TypeEffectiveness {
         Immune,
@@ -672,5 +673,6 @@ namespace GameConstants {
     declare enum ExtraAchievementCategories {
         global,
         sevii,
+        magikarpJump
     }
 }

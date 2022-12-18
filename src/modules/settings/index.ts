@@ -117,6 +117,7 @@ Settings.add(new Setting<string>('gameDisplayStyle', 'Game display style',
         new SettingOption('Full width (5 columns)', 'fullWidth5'),
     ],
     'standard3'));
+Settings.add(new BooleanSetting('showMuteButton', 'Show mute/unmute button', true));
 
 // CSS variable settings
 Settings.add(new CssVariableSetting('locked', 'Locked Location', [], '#000000'));
@@ -126,6 +127,7 @@ Settings.add(new CssVariableSetting('uncaughtPokemon', 'Uncaught Pokemon', [], '
 Settings.add(new CssVariableSetting('uncaughtShinyPokemonAndMissingAchievement', 'Uncaught Shiny Pokemon and Missing Achievement', [], '#c939fe'));
 Settings.add(new CssVariableSetting('uncaughtShinyPokemon', 'Uncaught Shiny Pokemon', [], '#ffee00'));
 Settings.add(new CssVariableSetting('missingAchievement', 'Missing Achievement', [], '#57e3ff'));
+Settings.add(new CssVariableSetting('missingResistant', 'Missing Resistant', [], '#ffffff'));
 Settings.add(new CssVariableSetting('completed', 'Completed Location', [], '#ffffff'));
 
 // Other settings
@@ -282,6 +284,11 @@ Settings.add(new Setting<string>('achievementsCategory', 'achievementsCategory',
 // Save menu sorting
 Settings.add(new Setting('sort.saveSelector', 'Saves sort order', [], ''));
 
+Settings.add(new Setting('saveFilename', 'Save file name', [], '[v{version}] PokeClicker {date}'));
+
+// Mute toggle
+Settings.add(new BooleanSetting('sound.muted', 'Mute All Sounds', false));
+
 // Hotkeys
 Settings.add(new HotkeySetting('hotkey.farm', 'Farm', 'F'));
 Settings.add(new HotkeySetting('hotkey.hatchery', 'Hatchery', 'H'));
@@ -305,6 +312,7 @@ Settings.add(new HotkeySetting('hotkey.dungeon.interact', 'Interact', 'Space'));
 
 Settings.add(new HotkeySetting('hotkey.town.start', 'Starts first content in the town', 'Space'));
 Settings.add(new HotkeySetting('hotkey.forceSave', 'Force save game', 'S', { prefix: 'Shift + ' }));
+Settings.add(new HotkeySetting('hotkey.mute', 'Mute/Unmute Sounds', 'M', { prefix: 'Shift + ' }));
 
 Settings.add(new HotkeySetting('hotkey.shop.buy', 'Buy item', 'B'));
 Settings.add(new HotkeySetting('hotkey.shop.max', 'Select max amount', 'M'));

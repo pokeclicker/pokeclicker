@@ -417,6 +417,11 @@ class GameController {
                         return e.preventDefault();
                     }
                     break;
+                case Settings.getSetting('hotkey.mute').value:
+                    if (GameController.keyHeld.Shift) {
+                        (Settings.getSetting('sound.muted') as BooleanSetting).toggle();
+                        return e.preventDefault();
+                    }
                 default:
                     // Check for a number key being pressed
                     if (isNumberKey) {
