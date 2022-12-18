@@ -3953,7 +3953,7 @@ const SnowbelleCityShop = new Shop([
 
 const LumioseEngineer = new NPC('Engineer', [
     'I\'m glad to be back in the city after so long at the Power Plant; it\'s so dusty out there!.',
-    'Rumor has it that if you conquer the Kalos Power Plant enough times that a strong Pokémon will challenge you made of Fire and Water. But I bet you’d have to be the Champion before it finds you worthy… I certainly have never seen it!',
+    'Rumor has it that if you conquer the Kalos Power Plant enough times, a strong Pokémon made out of Fire and Water will challenge you. But I bet you’d have to be the Champion before it finds you worthy… I certainly have never seen it!',
 ]);
 
 const CamphrierFlabébéEnthusiast = new NPC('Flabébé Enthusiast', [
