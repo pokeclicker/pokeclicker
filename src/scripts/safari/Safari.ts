@@ -148,7 +148,7 @@ class Safari {
             if (player.region != this.activeRegion()) {
                 this.safariReset();
             } else {
-                this.startSafari();
+                this.openModal();
             }
         } else {
             Notifier.notify({
