@@ -1610,20 +1610,20 @@ GymList['Quick League'] = new Gym(
 GymList['Heavy League'] = new Gym(
     'Kareign',
     'Heavy League',
-    [new GymPokemon('Magikarp Orange Two Tone', 900000, 20)],
+    [new GymPokemon('Magikarp Orange Two-Tone', 900000, 20)],
     BadgeEnums.Heavy_League,
     0, //TODO
     'Karpe Diem',
     [new TemporaryBattleRequirement('Magikarp Jump Karpen')],
     () => {
-        if (!App.game.party.alreadyCaughtPokemonByName('Magikarp Orange Two Tone')) {
+        if (!App.game.party.alreadyCaughtPokemonByName('Magikarp Orange Two-Tone')) {
             Notifier.notify({
-                message: 'You were awarded a Magikarp Orange Two Tone!',
+                message: 'You were awarded a Magikarp Orange Two-Tone!',
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
                 sound: NotificationConstants.NotificationSound.General.new_catch,
             });
-            App.game.party.gainPokemonById(pokemonMap['Magikarp Orange Two Tone'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
+            App.game.party.gainPokemonById(pokemonMap['Magikarp Orange Two-Tone'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         }
     }
 );

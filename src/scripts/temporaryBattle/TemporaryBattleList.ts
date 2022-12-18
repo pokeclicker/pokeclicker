@@ -436,6 +436,19 @@ TemporaryBattleList['Suicune 2'] = new TemporaryBattle(
         hideTrainer: true,
     }
 );
+TemporaryBattleList['Red Gyarados'] = new TemporaryBattle(
+    'Red Gyarados',
+    [new GymPokemon('Gyarados', 1100000, 30, undefined, true)],
+    undefined,
+    [new QuestLineStartedRequirement('Team Rocket Again')],
+    undefined,
+    {
+        displayName: 'Red Gyarados',
+        returnTown: 'Mahogany Town',
+        isTrainerBattle: false,
+        hideTrainer: true,
+    }
+);
 TemporaryBattleList['Suicune 3'] = new TemporaryBattle(
     'Suicune 3',
     [new GymPokemon('Suicune', 3269100, 40)],
@@ -1989,7 +2002,7 @@ TemporaryBattleList['Ash Ketchum Johto'] = new TemporaryBattle(
     [
         new GymPokemon('Pikachu (Partner Cap)', 83333000, 58),
         new GymPokemon('Heracross', 83333000, 56),
-        new GymPokemon('Noctowl', 83333000, 56),
+        new GymPokemon('Noctowl', 83333000, 56, undefined, true),
         new GymPokemon('Bayleef', 83333000, 60),
         new GymPokemon('Cyndaquil', 83333000, 62),
         new GymPokemon('Totodile', 83333000, 62),

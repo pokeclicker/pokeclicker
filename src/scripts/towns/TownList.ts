@@ -269,6 +269,7 @@ const PalletCelebiProfOak2 = new NPC('Prof. Oak', [
 const ViridianCityOldMan1 = new NPC('Old Man', [
     'Leave me alone. I need my coffee.',
 ], {
+    image: 'assets/images/npcs/Old Man.png',
     requirement: new QuestLineStepCompletedRequirement('Tutorial Quests', 4, GameConstants.AchievementOption.less),
 });
 const ViridianCityOldMan2 = new NPC('Old Man', [
@@ -278,6 +279,7 @@ const ViridianCityOldMan2 = new NPC('Old Man', [
     'Here, let me show you how it works.',
     'I\'ll always be here to explain it again if you forget.',
 ], {
+    image: 'assets/images/npcs/Old Man.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Tutorial Quests', 4), new QuestLineStepCompletedRequirement('Tutorial Quests', 5, GameConstants.AchievementOption.less)]),
 });
 const ViridianCityOldMan3 = new NPC('Old Man', [
@@ -285,6 +287,7 @@ const ViridianCityOldMan3 = new NPC('Old Man', [
     'For example, if you click on the empty ball below the word Caught and assign a Poké Ball, you will then start throwing Poké Balls at Pokémon you\'ve already caught before. This can be very useful if you need Dungeon Tokens.',
     'I\'ll always be here to explain it again if you forget.',
 ], {
+    image: 'assets/images/npcs/Old Man.png',
     requirement: new QuestLineStepCompletedRequirement('Tutorial Quests', 5),
 });
 const PewterBattleItemRival = new NPC('Battle Item Master', [
@@ -3367,23 +3370,30 @@ const UnovaRoamerNPC = new RoamerNPC('Professor Juniper\'s Aide', [
 const ProfJuniper = new ProfNPC('Prof. Juniper',
     GameConstants.Region.unova,
     'Let me see your progress...Ah, fantastic, as usual!',
-    'Allow me some time to arrange tickets for your next destination.');
+    'Allow me some time to arrange tickets for your next destination.',
+    'assets/images/npcs/Professor Juniper.png');
 
 const ProfBurnet = new NPC('Professor Burnet', [
     'Welcome to my laboratory, trainer! I am working here to understand the mysterious Interdream Zone.',
     'My laboratory equipment can convert the energy of dreams you experience while sleeping, or "Offline" into orbs. We can then open these orbs and see what your mind experienced in the Interdream Zone.',
     'A trainer like you surely dreams of rare Pokémon. The more rare Pokémon you find from the Interdream Zone, the more we can explore to find others!',
-]);
+], {
+    image: 'assets/images/npcs/Professor Burnet.png',
+});
 
 const DreamResearcher1 = new NPC('Dream Researcher', [
     'I have been helping Professor Burnet explore the Interdream Zone with the help of my Audino.',
-    'Audino\'s excellent hearing lets it pick up even the quietest hints from Dream Orbs. If you can help the professor advance her research, I may be able to help you in return.'],
-{requirement: new TemporaryBattleRequirement('Dream Researcher', 1, GameConstants.AchievementOption.less),
+    'Audino\'s excellent hearing lets it pick up even the quietest hints from Dream Orbs. If you can help the professor advance her research, I may be able to help you in return.',
+], {
+    image: 'assets/images/trainers/Scientist (female).png',
+    requirement: new TemporaryBattleRequirement('Dream Researcher', 1, GameConstants.AchievementOption.less),
 });
 
 const DreamResearcher2 = new NPC('Dream Researcher', [
     'What a battle! That Audinite will let you Mega Evolve your Audino, under certain circumstances.',
-], {requirement: new TemporaryBattleRequirement('Dream Researcher'),
+], {
+    image: 'assets/images/trainers/Scientist (female).png',
+    requirement: new TemporaryBattleRequirement('Dream Researcher'),
 });
 
 //Unova Towns
@@ -4003,7 +4013,7 @@ const CoumarineBirdwatcher = new NPC('Birdwatcher', [
 const LaverreFurisodeGirlKatherine = new NPC('Furisode Girl Katherine', [
     'Don\'t you find Goomy to be an interesting Pokémon? I certainly think so, even though it isn\'t a problem for my Pokémon~',
     'I\'ve heard its evolutionary line loves damp conditions, and apparently if you train a Sliggoo during rainy or foggy weather something marvelous happens!',
-]);
+], {image: 'assets/images/npcs/Furisode Girl Katherine.png'});
 
 const AnistarKalosRoamerNPC = new RoamerNPC('Hex Maniac Melanie', [
     'The spirits tell me roaming Pokémon have been spotted on {ROUTE_NAME}!',
@@ -4454,7 +4464,7 @@ const PaniolaTownActor = new NPC('Actor Meredith', [
 const RoyalAvenueSpectator = new NPC('Spectator', [
     'I think battles in the Battle Royal Dome are more like games of chance. But Battle Royals are nothing compared to trying to evolve an Alolan Raichu with a Thunderstone.',
     'Evolving Pikachu or Exeggcute in Alola can result in a new form! Sometimes.',
-]);
+], {image: 'assets/images/trainers/Preschooler (female).png'});
 const KonikoniKahuna = new NPC('Kahuna Olivia', [
     'What do you mean Grand trials are just like gym battles? It\'s a totally different thing!',
     'Come fight me in our very special and unique brand new Pokémon League and see if you still think our Island Challenge is nothing special!',
@@ -4519,7 +4529,7 @@ const RoadsideMotelAnabel1 = new NPC('Anabel', [
 });
 const RoadsideMotelLooker2 = new NPC('Looker', [
     'Catching lots of Ultra Beasts? Oh you want to know more about Beast Balls!',
-    'Beast Balls can only be used to catch Ultra Beasts. You can\'t even try use them against normal Pokémon, and any other Poké Ball type won\'t work against Ultra Beasts.',
+    'Beast Balls can only be used to catch Ultra Beasts. You can\'t even try to use them against normal Pokémon, and any other Poké Ball type won\'t work against Ultra Beasts.',
     'If you\'re looking to most effectively hunt the Ultra Beasts down, try putting Beast Balls in your "Already Caught" selector. Beast Balls will never be thrown at Pokémon that aren\'t Ultra Beasts.',
 ], {
     image: 'assets/images/npcs/Looker.png',
