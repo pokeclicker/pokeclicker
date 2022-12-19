@@ -27,7 +27,7 @@ class BattleFrontierRunner {
     public static async start(useCheckpoint: boolean) {
         if (!useCheckpoint && this.hasCheckpoint()) {
             if (!await Notifier.confirm({
-                title: 'Battle Frontier',
+                title: 'Restart Battle Frontier?',
                 message: 'Current progress will be lost and you will restart from the first stage.',
                 type: NotificationConstants.NotificationOption.warning,
                 confirm: 'OK',
