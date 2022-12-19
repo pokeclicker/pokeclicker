@@ -29,10 +29,10 @@ class Berry {
         ['Burmy (Plant)'], // green
         ['Combee', 'Flabébé (Yellow)', 'Oricorio (Pom-Pom)'], // yellow
         ['Volbeat', 'Flabébé (Blue)'], // blue
-        ['Minccino', 'Flabébé (White)', 'Alolan Meowth', 'Galarian Zigzagoon',], // silver placeholder
-        ['Meowth', 'Zigzagoon', 'Gabite', 'Flabébé (Orange)',], // gold placeholder
+        ['Minccino', 'Flabébé (White)', 'Alolan Meowth', 'Galarian Zigzagoon'], // silver placeholder
+        ['Meowth', 'Zigzagoon', 'Gabite', 'Flabébé (Orange)'], // gold placeholder
     ];
- 
+
     constructor(
         public type: BerryType,
         public growthTime: number[],
