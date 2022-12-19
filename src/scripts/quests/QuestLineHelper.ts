@@ -945,7 +945,7 @@ class QuestLineHelper {
             });
         };
 
-        const clearGhetsis2 = new CustomQuest (1, ghetsisReward, 'Defeat Ghetis one final time!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ghetsis 2')]());
+        const clearGhetsis2 = new CustomQuest (1, ghetsisReward, 'Defeat Ghetsis one final time!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ghetsis 2')]());
         plasmaUnovaQuestLine.addQuest(clearGhetsis2);
 
         App.game.quests.questLines().push(plasmaUnovaQuestLine);
