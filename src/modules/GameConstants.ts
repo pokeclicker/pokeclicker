@@ -162,6 +162,8 @@ export const BerryColor = [
     '#7AC74C', // Green
     '#F7D02C', // Yellow
     '#6390F0', // Blue
+    '#B1CBDC', // Silver placeholder
+    '#FFE48E', // Gold placeholder
     '#B7B7CE', // Hinted
     '#1C1C1C', // Locked
 ];
@@ -836,8 +838,17 @@ export enum UltraBeastType {
 export enum PokeBlockColor {
     Black,
     Red,
+    Blue,
+    Pink,
+    Green,
+    Yellow,
     Gold,
     Purple,
+    Indigo,
+    Brown,
+    LiteBlue,
+    Olive,
+    Flaxen,
     Gray,
     White,
 }
