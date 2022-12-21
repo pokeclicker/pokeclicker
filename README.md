@@ -55,9 +55,14 @@ Click the [Web Preview](https://cloud.google.com/shell/docs/using-web-preview) B
 Cloud Shell opens the preview URL on its proxy service in a new browser window.
 
 ## Deploying a new version to Github Pages
-Before deploying, check that the game compiles and starts up without errors. Then run:
+Before deploying, check that the game compiles and starts up without errors.
+Then run the following:
 ```cmd
 npm run website
 ```
-
-After this command completes, push the changed files in the 'docs' directory to Github.
+This will populate the `/docs` folder.
+After this command completes you can now publish this to your GitHub pages branch using:
+```cmd
+npm run publish
+```
+Which by default will push to the `master` branch
