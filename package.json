@@ -45,6 +45,7 @@
     "es6-promise": "^4.2.8",
     "eslint-config-airbnb-typescript": "^11.0.0",
     "eslint-plugin-import": "^2.22.1",
+    "gh-pages": "^4.0.0",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.1",
     "gulp-changed": "^4.0.2",
