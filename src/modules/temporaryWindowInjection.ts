@@ -13,6 +13,7 @@ import BadgeEnums from './enums/Badges';
 import BerryColor from './enums/BerryColor';
 import BerryFirmness from './enums/BerryFirmness';
 import BerryType from './enums/BerryType';
+import SizeUnits from './enums/SizeUnits';
 import PokemonType from './enums/PokemonType';
 import CaughtStatus from './enums/CaughtStatus';
 import EvolutionType from './enums/EvolutionType';
@@ -173,6 +174,7 @@ Object.assign(<any>window, {
     BerryColor,
     BerryFirmness,
     BerryType,
+    SizeUnits,
     PokemonType,
     CaughtStatus,
     EvolutionType,
