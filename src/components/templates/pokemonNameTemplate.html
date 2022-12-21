@@ -1,0 +1,7 @@
+<script type="text/html" id="pokemonNameTemplate">
+    <knockout data-bind="text: $data.pokemon.displayName"></knockout>
+    <knockout data-bind="template: { name: 'pokemonGenderTemplate', data: { 'pokemon': $data.pokemon } }">Pokémon gender</knockout>
+</script>
+
+<!-- Example usage -->
+<!-- <knockout data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': Battle.enemyPokemon() } }">Pokémon name</knockout> -->

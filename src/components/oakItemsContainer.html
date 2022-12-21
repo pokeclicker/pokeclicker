@@ -1,0 +1,84 @@
+<div id="oakItemsContainer" class="card sortable border-secondary mb-3" data-bind="visible: App.game.oakItems.canAccess() && !(Settings.getSetting('hideChallengeRelatedModules').observableValue() && App.game.challenges.list.disableOakItems.active())">
+    <div class="card-header p-0" data-toggle="collapse" href="#oakItemsBody">
+        <span style="text-align:center">Oak Items</span>
+    </div>
+    <button class='btn btn-sm btn-primary' style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;" href="#oakItemsModal" data-toggle="modal">
+        List
+    </button>
+    <div id="oakItemsBody" class="card-body show p-0">
+      <table class="table table-bordered table-striped m-0">
+        <!--
+        <thead>
+          <tr>
+            <td class="clickable table-primary p-0" colspan="2" href="#oakItemsModal" data-toggle="modal">
+              Open menu
+            </td>
+          <tr>
+        </thead>
+        -->
+        <tbody data-bind="foreach: App.game.oakItems.itemList">
+          <tr data-bind="if: $data.isActive, tooltip: { html: true, title: $data.tooltip, trigger: 'hover', placement:'bottom' }">
+            <td class="tight p-1">
+              <img class="clickable" href="#oakItemsModal" data-toggle="modal" src="" data-bind="attr:{ src: 'assets/images/oakitems/' + OakItemType[$data.name] + '.png'}" width="32px">
+            </td>
+            <td class="p-0">
+              <div class="progress" style="height: 40px;">
+                  <div class="progress-bar bg-primary" role="progressbar"
+                      data-bind="attr:{ style: 'width:' + ($data.isMaxLevel() ? 100 : $data.expPercentage) + '%' },
+                         css: {
+                           'bg-success': $data.hasEnoughExp() && !$data.isMaxLevel(),
+                           'bg-primary': !$data.hasEnoughExp() || $data.isMaxLevel(),
+                         }"
+                      aria-valuemin="0" aria-valuemax="100">
+                      <!-- ko if: !$data.hasEnoughExp() && !$data.isMaxLevel() -->
+                      <span data-bind="text: $data.progressString" style="font-size: 15px;"></span>
+                      <!-- /ko -->
+                      <!-- ko if: $data.hasEnoughExp() && !$data.isMaxLevel() -->
+                      <span class="clickable" data-bind="html: 'Upgrade (' + $data.calculateCost().amount.toLocaleString('en-US') + ' <img src=assets/images/currency/' + GameConstants.Currency[$data.calculateCost().currency] + '.svg height=18px/>)',
+                        click: function(){ $data.buy(); }" style="font-size: 15px;">
+                        Upgrade
+                      </span>
+                      <!-- /ko -->
+                      <!-- ko if: $data.isMaxLevel() -->
+                      <span style="font-size: 15px;">MAX LEVEL!</span>
+                      <!-- /ko -->
+                  </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+        <!-- ko if: App.game.oakItems.hasAvailableSlot() && !App.game.challenges.list.disableOakItems.active() -->
+        <tfoot>
+          <tr>
+            <td class="clickable table-warning text-light" colspan="2" href="#oakItemsModal" data-toggle="modal">
+              Equip another Oak Item!
+            </td>
+          </tr>
+        </tfoot>
+        <!-- /ko -->
+        <!-- ko if: App.game.challenges.list.disableOakItems.active() -->
+        <tfoot>
+          <tr>
+            <td class="clickable table-danger text-light" colspan="2" href="#oakItemsModal" data-toggle="modal">
+              Oak Items are disabled.
+            </td>
+          </tr>
+        </tfoot>
+        <!-- /ko -->
+      </table>
+    </div>
+    <!-- ko if: !App.game.challenges.list.disableOakItems.active() -->
+    <div id="oakItemLoadout">
+      <table class="table table-bordered table-striped m-0">
+        <tr data-bind="foreach: App.game.oakItemLoadouts.loadouts">
+          <td class="p-1 tight">
+            <button class='btn btn-block btn-primary' style="height: 100%;"
+              data-bind='click: function(){ App.game.oakItemLoadouts.activateLoadout($index()) }, text: $index() + 1, tooltip: { title: $data.name(), trigger: "hover", placement: "bottom" }'>
+              1
+            </button>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <!-- /ko -->
+</div>

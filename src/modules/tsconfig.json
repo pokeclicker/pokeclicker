@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "lib": ["dom", "es2019"],
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "module": "es6",
+    "target": "es6",
+    "jsx": "react",
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "declaration": true,
+    "declarationDir": "../declarations",
+    "moduleResolution": "node"
+  },
+  "compileOnSave": false
+}

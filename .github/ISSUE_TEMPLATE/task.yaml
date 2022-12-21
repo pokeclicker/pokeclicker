@@ -1,0 +1,41 @@
+name: Task
+description: Used by the game developers to break up a large change into smaller tasks
+title: "[TASK]: "
+labels: ["approved"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        :warning: *This template is only intended for use by the developer team, if you are not part of the team you should use a [different template](
+          https://github.com/pokeclicker/pokeclicker/issues/new/choose
+        )*
+  - type: textarea
+    attributes:
+      label: Task Description
+      description: |
+        Give a detailed description of what we want done in this task.
+        If we haven't worked out the details yet, say something like "Exact details TBD" and link to a discussion or invite it to happen in this issue.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Notes
+      description: List any additional things that need doing in this task, or limits on how much should be done.
+      placeholder: |
+        - Check X still works
+        - Don't worry about balance
+        - etc
+  - type: textarea
+    attributes:
+      label: Issues Required For This Task
+      description: List any issues that must be completed before starting on this task. Say 'None' if it can be worked on immediately.
+      placeholder: |
+        - #1234
+        - #1235
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: |
+        This issue will automatically be given the 'approved' label and be added to the Future Plans.
+        If you don't want this to happen, you should remove the approved label in the sidebar menu now.

@@ -1,0 +1,49 @@
+@import "variables.less";
+
+#showItemsModal {
+  .smallImage {
+    padding-right: 10px;
+  }
+}
+
+.item-selected {
+  background-color: @itemSelectionColor !important;
+  border-radius:5px;
+}
+
+.pokemon-selected {
+  background-color: @itemSelectionColor !important;
+  color:white !important;
+}
+
+.amount-button {
+  height:50px;
+  text-align:center;
+}
+
+.stoneEvolutionStatuses {
+    knockout {
+      position: relative;
+    }
+    .lock {
+        position: absolute;
+        left: 40%;
+        bottom: -36%;
+        width: 15px;
+        height: 15px;
+      }
+}
+
+/* Evolution Items */
+@media (min-width: 768px) {
+  .scrolling-div {
+    overflow-y: auto;
+    max-height: calc(100vh - 290px);
+    min-height: 150px;
+  }
+}
+
+.evolutionListItem {
+  text-align: left;
+  margin-bottom: 3px;
+}

@@ -1,0 +1,80 @@
+
+<div class="row justify-content-center no-gutters" data-bind="if: App.game.gameState === GameConstants.GameState.temporaryBattle">
+    <div class="col no-gutters clickable" data-bind="click: function() {TemporaryBattleBattle.clickAttack()}" style="height: 280px; display: block;">
+        <h2 class="pageItemTitle mobileBattleTitle" style="display: block;">
+
+            <knockout class="left">
+                <knockout data-bind="text: TemporaryBattleBattle.battle.getDisplayName()"></knockout>
+            </knockout>
+
+            <knockout>
+                <knockout data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': TemporaryBattleBattle.enemyPokemon() } }">Pokémon name</knockout>
+            </knockout>
+
+            <knockout class="right">
+                <span data-bind="foreach: new Array(TemporaryBattleBattle.pokemonsDefeatedComputable())">
+                    <img src="assets/images/pokeball/Pokeball.svg" class="pokeball-smallest pokeball-defeated"/>
+                </span>
+                <span data-bind="foreach: new Array(TemporaryBattleBattle.pokemonsUndefeatedComputable())">
+                    <img src="assets/images/pokeball/Pokeball.svg" class="pokeball-smallest"/>
+                </span>
+            </knockout>
+
+            <div class="progress timer">
+                <div class="progress-bar bg-danger" role="progressbar"
+                     data-bind="attr:{ style: 'width:' + TemporaryBattleRunner.timeLeftPercentage() + '%' },
+                     css: { 'bg-danger': TemporaryBattleRunner.timeLeftSeconds() < 10, 'bg-primary': TemporaryBattleRunner.timeLeftSeconds() >= 10 }"
+                     aria-valuemin="0" aria-valuemax="100">
+                     <span data-bind="text: TemporaryBattleRunner.timeLeftSeconds() + 's'" style="font-size: 12px;"></span>
+                </div>
+            </div>
+        </h2>
+
+        <div id="temporaryBattleGoContainer" data-bind="if: Settings.getSetting('showGymGoAnimation').observableValue">
+          <div class="row" style="display: inline-block; vertical-align: middle;">
+            <div class="col-sm-6 offset-sm-3">
+              <img style="width:100%" id="temporaryBattleGo" src="assets/gifs/go.gif">
+            </div>
+          </div>
+        </div>
+
+        <div class="trainer" data-bind="if: !TemporaryBattleRunner.battleObservable().optionalArgs.hideTrainer">
+            <img data-bind="attr:{ src: TemporaryBattleRunner.battleObservable().getImage() }" onerror="this.src='assets/images/trainers/Mysterious Trainer.png';"/>
+        </div>
+
+        <div class="trainer-enemy" data-bind="ifnot: TemporaryBattleBattle.catching">
+            <knockout data-bind="template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': TemporaryBattleBattle.enemyPokemon() } }">Pokémon sprite</knockout>
+        </div>
+
+        <div data-bind="if: TemporaryBattleBattle.catching" class="catchChance">
+            <img class="pokeball-animated"
+                 data-bind="attr:{ src: 'assets/images/pokeball/' + GameConstants.Pokeball[TemporaryBattleBattle.pokeball()] + '.svg' }"
+                 src=""/>
+            <br>
+            Catch Chance:
+            <knockout data-bind="text: Math.floor(TemporaryBattleBattle.catchRateActual()) + '%'">Catch Rate</knockout>
+        </div>
+
+        <div class="progress hitpoints trainerhitpoints">
+            <div class="progress-bar bg-danger" role="progressbar"
+                    data-bind="attr:{ style: 'width:' + TemporaryBattleBattle.enemyPokemon().healthPercentage() + '%' }"
+                    aria-valuemin="0" aria-valuemax="100">
+                <span data-bind="text: TemporaryBattleBattle.enemyPokemon().health().toLocaleString('en-US') + ' / ' + TemporaryBattleBattle.enemyPokemon().maxHealth().toLocaleString('en-US')" style="font-size: 12px;"></span>
+            </div>
+        </div>
+        <h2 class="pageItemFooter" style="display: block; font-size: 1rem;">
+          <table width="100%">
+              <tr>
+                <td width="50%">
+                    <knockout data-bind="template: { name: 'pokemonAttackTemplate', data: { 'pokemon': Battle.enemyPokemon() } }"></knockout>
+                </td>
+                <td width="50%" data-bind="css: { 'text-muted': App.game.challenges.list.disableClickAttack.active() }">
+                    <span style="display: inline;">Click Attack:
+                        <span data-bind="text: App.game.party.calculateClickAttack().toLocaleString('en-US')"></span>
+                    </span>
+                </td>
+              </tr>
+          </table>
+        </h2>
+    </div>
+</div>
