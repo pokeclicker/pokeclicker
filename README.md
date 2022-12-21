@@ -56,11 +56,13 @@ Cloud Shell opens the preview URL on its proxy service in a new browser window.
 
 ## Deploying a new version to Github Pages
 Before deploying, check that the game compiles and starts up without errors.
+
 Then run the following:
 ```cmd
 npm run website
 ```
 This will populate the `/docs` folder.
+
 After this command completes you can now publish this to your GitHub pages branch using:
 ```cmd
 npm run publish
