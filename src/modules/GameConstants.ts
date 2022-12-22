@@ -358,6 +358,7 @@ export enum Currency {
     diamond,
     farmPoint,
     battlePoint,
+    contestToken,
 }
 
 export enum TypeEffectiveness {
@@ -1413,12 +1414,14 @@ export const TemporaryBattles = [
     'Suicune 1',
     'Eusine',
     'Suicune 2',
+    'Red Gyarados',
     'Suicune 3',
     'Suicune 4',
     'Suicune 5',
     'Suicune 6',
     'Silver 6',
     'Silver 7',
+    'Red',
     'May 1',
     'May 2',
     'May 3',
@@ -1844,5 +1847,6 @@ export enum AlcremieSpins {
 export enum ExtraAchievementCategories {
     global = Region.final,
     sevii,
+    magikarpJump,
     hisui,
 }

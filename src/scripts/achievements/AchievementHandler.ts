@@ -180,6 +180,7 @@ class AchievementHandler {
         const categories = GameHelper.enumStrings(GameConstants.Region).filter(r => r != 'none' && r != 'final').map(r => new AchievementCategory(r, 100, () => player.highestRegion() >= GameConstants.Region[r]));
         categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.global], 150, () => true));
         categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.sevii], 50, () => true));
+        categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.magikarpJump], 25, () => false));
         categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.hisui], 50, () => true));
 
         AchievementHandler._achievementCategories = categories;
@@ -253,7 +254,7 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Basic Trainer', 'Have 100 Attack.', new AttackRequirement(100), 0.05, GameConstants.ExtraAchievementCategories.global, null, true);
         AchievementHandler.addAchievement('Improving', 'Have 1,000 Attack.', new AttackRequirement(1000), 0.10, GameConstants.ExtraAchievementCategories.global, null, true);
         AchievementHandler.addAchievement('An Unrelenting Force', 'Have 5,000 Attack.', new AttackRequirement(5000), 0.15, GameConstants.ExtraAchievementCategories.global, null, true);
-        AchievementHandler.addAchievement('FUS DOH RAH', 'Have 10,000 Attack.', new AttackRequirement(10000), 0.20, GameConstants.ExtraAchievementCategories.global, null, true);
+        AchievementHandler.addAchievement('FUS RO DAH', 'Have 10,000 Attack.', new AttackRequirement(10000), 0.20, GameConstants.ExtraAchievementCategories.global, null, true);
         AchievementHandler.addAchievement('OK, I Have Enough Attack Already...', 'Have 25,000 Attack.', new AttackRequirement(25000), 0.25, GameConstants.ExtraAchievementCategories.global, null, true);
         AchievementHandler.addAchievement('Silver Attack Button!', 'Have 100,000 Attack.', new AttackRequirement(100000), 0.30, GameConstants.ExtraAchievementCategories.global, null, true);
         AchievementHandler.addAchievement('Pesky Roamers, I Need to One-Shot Routes for Them...', 'Have 250,000 Attack.', new AttackRequirement(250000), 0.35, GameConstants.ExtraAchievementCategories.global, null, true);
@@ -426,10 +427,12 @@ class AchievementHandler {
                 }
 
                 let category = region;
-                // Split Sevii islands into it's own achievement pool
+                // Split bigger subregions into their own achievement pool
                 if (region == GameConstants.Region.kanto && (route.subRegion == GameConstants.KantoSubRegions.Sevii123 || route.subRegion == GameConstants.KantoSubRegions.Sevii4567)) {
                     category = GameConstants.ExtraAchievementCategories.sevii;
                 }
+                if (region == GameConstants.Region.alola && route.subRegion == GameConstants.AlolaSubRegions.MagikarpJump) {
+                    category = GameConstants.ExtraAchievementCategories.magikarpJump;
                 if (region == GameConstants.Region.sinnoh && (route.subRegion == GameConstants.SinnohSubRegions.Hisui)) {
                     category = GameConstants.ExtraAchievementCategories.hisui;
                 }
@@ -445,9 +448,12 @@ class AchievementHandler {
             // Dungeons
             GameConstants.RegionDungeons[region]?.forEach(dungeon => {
                 let category = region;
-                // Split Sevii islands into it's own achievement pool
+                // Split bigger subregions into their own achievement pool
                 if (region == GameConstants.Region.kanto && (TownList[dungeon].subRegion == GameConstants.KantoSubRegions.Sevii123 || TownList[dungeon].subRegion == GameConstants.KantoSubRegions.Sevii4567)) {
                     category = GameConstants.ExtraAchievementCategories.sevii;
+                }
+                if (region == GameConstants.Region.alola && TownList[dungeon].subRegion == GameConstants.AlolaSubRegions.MagikarpJump) {
+                    category = GameConstants.ExtraAchievementCategories.magikarpJump;
                 }
                 if (region == GameConstants.Region.sinnoh && (TownList[dungeon].subRegion == GameConstants.SinnohSubRegions.Hisui)) {
                     category = GameConstants.ExtraAchievementCategories.hisui;
@@ -483,6 +489,8 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Hisui Master', 'Catch 50 unique Pokémon native to Hisui.', new HisuiCaughtRequirement(50, false), 6, GameConstants.ExtraAchievementCategories.hisui);
         AchievementHandler.addAchievement('Hisui Shiny Trainer', 'Catch 20 unique Shiny Pokémon native to Hisui.', new HisuiCaughtRequirement(20, true), 5, GameConstants.ExtraAchievementCategories.hisui);
         AchievementHandler.addAchievement('Hisui Shiny Master', 'Catch 50 unique Shiny Pokémon native to Hisui.', new HisuiCaughtRequirement(50, true), 9, GameConstants.ExtraAchievementCategories.hisui);
+
+        addGymAchievements(GameConstants.RegionGyms[GameConstants.Region.final + 1], GameConstants.ExtraAchievementCategories.magikarpJump, 'Magikarp Jump');
 
 
         // load filters, filter the list & calculate number of tabs

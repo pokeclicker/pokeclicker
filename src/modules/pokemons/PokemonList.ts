@@ -1705,6 +1705,9 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 80,
             'speed': 110,
         },
+        'gender': {
+            'femaleRatio': 0,
+        },
     },
     {
         'id': 27,
@@ -4491,6 +4494,9 @@ export const pokemonList = createPokemonArray(
             'speed': 50,
         },
         'heldItem': { type: ItemType.underground, id: 'Oval Stone' },
+        'gender': {
+            'femaleRatio': 1,
+        },
     },
     {
         'id': 114,
@@ -5013,7 +5019,7 @@ export const pokemonList = createPokemonArray(
     },
     {
         'id': 129.06,
-        'name': 'Magikarp Orange Two Tone',
+        'name': 'Magikarp Orange Two-Tone',
         'catchRate': 255,
         'type': [PokemonType.Water],
         'levelType': LevelType.slow,
@@ -5073,7 +5079,7 @@ export const pokemonList = createPokemonArray(
     },
     {
         'id': 129.09,
-        'name': 'Magikarp Pink Two Tone',
+        'name': 'Magikarp Pink Two-Tone',
         'catchRate': 255,
         'type': [PokemonType.Water],
         'levelType': LevelType.slow,
@@ -5453,26 +5459,6 @@ export const pokemonList = createPokemonArray(
     },
     {
         'id': 129.28,
-        'name': 'Magikarp Saucy Blue',
-        'catchRate': 255,
-        'type': [PokemonType.Water],
-        'levelType': LevelType.slow,
-        'exp': 40,
-        'eggCycles': 5,
-        'base': {
-            'hitpoints': 20,
-            'attack': 10,
-            'specialAttack': 15,
-            'defense': 55,
-            'specialDefense': 20,
-            'speed': 80,
-        },
-        'gender': {
-            'visualDifference': true,
-        },
-    },
-    {
-        'id': 129.29,
         'name': 'Magikarp Blue Raindrops',
         'catchRate': 255,
         'type': [PokemonType.Water],
@@ -5492,8 +5478,28 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 129.29,
+        'name': 'Magikarp Saucy Blue',
+        'catchRate': 255,
+        'type': [PokemonType.Water],
+        'levelType': LevelType.slow,
+        'exp': 40,
+        'eggCycles': 5,
+        'base': {
+            'hitpoints': 20,
+            'attack': 10,
+            'specialAttack': 15,
+            'defense': 55,
+            'specialDefense': 20,
+            'speed': 80,
+        },
+        'gender': {
+            'visualDifference': true,
+        },
+    },
+    {
         'id': 129.30,
-        'name': 'Magikarp Saucy Violet',
+        'name': 'Magikarp Violet Raindrops',
         'catchRate': 255,
         'type': [PokemonType.Water],
         'levelType': LevelType.slow,
@@ -5513,7 +5519,7 @@ export const pokemonList = createPokemonArray(
     },
     {
         'id': 129.31,
-        'name': 'Magikarp Violet Raindrops',
+        'name': 'Magikarp Saucy Violet',
         'catchRate': 255,
         'type': [PokemonType.Water],
         'levelType': LevelType.slow,
@@ -8865,6 +8871,9 @@ export const pokemonList = createPokemonArray(
             'speed': 55,
         },
         'heldItem': { type: ItemType.underground, id: 'Oval Stone' },
+        'gender': {
+            'femaleRatio': 1,
+        },
     },
     {
         'id': 243,
@@ -13496,6 +13505,9 @@ export const pokemonList = createPokemonArray(
             'speed': 30,
         },
         'heldItem': { type: ItemType.underground, id: 'Oval Stone' },
+        'gender': {
+            'femaleRatio': 1,
+        },
     },
     {
         'id': 441,
@@ -14731,8 +14743,8 @@ export const pokemonList = createPokemonArray(
             'hitpoints': 120,
             'attack': 70,
             'specialAttack': 75,
-            'defense': 120,
-            'specialDefense': 130,
+            'defense': 110,
+            'specialDefense': 120,
             'speed': 85,
         },
         'gender': {
@@ -26885,7 +26897,7 @@ export const pokemonList = createPokemonArray(
         'type': [PokemonType.Fairy],
         'base': {
             'hitpoints': 92,
-            'attack': 130,
+            'attack': 120,
             'specialAttack': 80,
             'defense': 115,
             'specialDefense': 115,
@@ -26907,7 +26919,7 @@ export const pokemonList = createPokemonArray(
         'type': [PokemonType.Fairy, PokemonType.Steel],
         'base': {
             'hitpoints': 92,
-            'attack': 170,
+            'attack': 150,
             'specialAttack': 80,
             'defense': 115,
             'specialDefense': 115,
@@ -26928,7 +26940,7 @@ export const pokemonList = createPokemonArray(
         'type': [PokemonType.Fighting],
         'base': {
             'hitpoints': 92,
-            'attack': 130,
+            'attack': 120,
             'specialAttack': 80,
             'defense': 115,
             'specialDefense': 115,
@@ -26950,10 +26962,10 @@ export const pokemonList = createPokemonArray(
         'type': [PokemonType.Fighting, PokemonType.Steel],
         'base': {
             'hitpoints': 92,
-            'attack': 130,
+            'attack': 120,
             'specialAttack': 80,
-            'defense': 145,
-            'specialDefense': 145,
+            'defense': 140,
+            'specialDefense': 140,
             'speed': 128,
         },
         'eggCycles': 120,
