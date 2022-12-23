@@ -1469,8 +1469,8 @@ class QuestLineHelper {
 
         const talkToDrSplash4 = new TalkToNPCQuest(DrSplash4, 'Return to Dr. Splash in Hoppy Town with the pushable pokèmon.');
         drSplashQuestLine.addQuest(talkToDrSplash4);
-        // TODO Change to defeat mons
-        const tackleMachine = new GainGemsQuest(10000, 0, PokemonType.Water);
+
+        const tackleMachine = new CustomQuest(5000, 0, 'Defeat 5.000 Pokémon', App.game.statistics.totalPokemonDefeated);
         drSplashQuestLine.addQuest(tackleMachine);
 
         const SaucyBlueReward = () => {
