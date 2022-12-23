@@ -1404,16 +1404,16 @@ class QuestLineHelper {
         const talkToDrSplash1 = new TalkToNPCQuest(DrSplash1, 'Talk to Dr. Splash in Hoppy Town.');
         drSplashQuestLine.addQuest(talkToDrSplash1);
 
-        const farmOran = new HarvestBerriesQuest(2, undefined, BerryType.Oran);
-        const farmSitrus = new HarvestBerriesQuest(2, undefined, BerryType.Sitrus);
-        const farmPecha = new HarvestBerriesQuest(2, undefined, BerryType.Pecha);
-        const farmRindo = new HarvestBerriesQuest(2, undefined, BerryType.Rindo);
-        const farmWacan = new HarvestBerriesQuest(2, undefined, BerryType.Wacan);
-        const farmLeppa = new HarvestBerriesQuest(2, undefined, BerryType.Leppa);
-        const farmRawst = new HarvestBerriesQuest(2, undefined, BerryType.Rawst);
-        const farmAspear = new HarvestBerriesQuest(2, undefined, BerryType.Aspear);
-        const farmRazz = new HarvestBerriesQuest(2, undefined, BerryType.Razz);
-        const farmBluk = new HarvestBerriesQuest(2, undefined, BerryType.Bluk);
+        const farmOran = new HarvestBerriesQuest(129, undefined, BerryType.Oran);
+        const farmSitrus = new HarvestBerriesQuest(129, undefined, BerryType.Sitrus);
+        const farmPecha = new HarvestBerriesQuest(129, undefined, BerryType.Pecha);
+        const farmRindo = new HarvestBerriesQuest(129, undefined, BerryType.Rindo);
+        const farmWacan = new HarvestBerriesQuest(129, undefined, BerryType.Wacan);
+        const farmLeppa = new HarvestBerriesQuest(129, undefined, BerryType.Leppa);
+        const farmRawst = new HarvestBerriesQuest(129, undefined, BerryType.Rawst);
+        const farmAspear = new HarvestBerriesQuest(129, undefined, BerryType.Aspear);
+        const farmRazz = new HarvestBerriesQuest(129, undefined, BerryType.Razz);
+        const farmBluk = new HarvestBerriesQuest(129, undefined, BerryType.Bluk);
 
         drSplashQuestLine.addQuest(new MultipleQuestsQuest([
             farmOran,
