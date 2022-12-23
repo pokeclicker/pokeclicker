@@ -412,6 +412,7 @@ namespace GameConstants {
         Sinnoh,
         Kalos,
         Alola,
+        Hoppy,
         Galar,
         Armor,
         Crown
