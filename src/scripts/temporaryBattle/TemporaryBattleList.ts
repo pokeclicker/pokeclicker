@@ -588,7 +588,6 @@ TemporaryBattleList.Red = new TemporaryBattle(
                 setting: NotificationConstants.NotificationSetting.Items.dropped_item,
             });
         },
-        imageName: '../npcs/Red-masters',
     }
 );
 
