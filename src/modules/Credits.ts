@@ -207,6 +207,7 @@ export const SpriteCredits: Credit[] = [
             'Client Island town image',
             'Cracked pot big icon',
             'Danny',
+            'Dr. Splash',
             'Dracovish shop image',
             'Dracozolt shop image',
             'Dream Orbs',
