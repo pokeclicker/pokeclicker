@@ -1440,7 +1440,10 @@ TemporaryBattleList['Colress 3'] = new TemporaryBattle(
         new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 17),
     ],
     undefined,
-    {imageName: '../trainers/Team Plasma (colress)'}
+    {
+        displayName: 'Colress',
+        imageName: '../trainers/Team Plasma (colress)',
+    }
 );
 TemporaryBattleList['Plasma Shadow 2'] = new TemporaryBattle(
     'Plasma Shadow 2',
