@@ -1443,7 +1443,7 @@ TemporaryBattleList['Colress 3'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Colress',
-        imageName: '../trainers/Team Plasma (colress)'
+        imageName: '../trainers/Team Plasma (colress)',
     }
 );
 TemporaryBattleList['Plasma Shadow 2'] = new TemporaryBattle(
