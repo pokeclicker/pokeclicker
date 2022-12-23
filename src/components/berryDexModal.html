@@ -122,10 +122,10 @@
                       <th class="text-left bg-dark">Amount</th>
                     </tr>
                   </thead>
-                   <tr>
-                    <td class="text-left">Current Amount</td>
-                    <td class="text-left tight"><code data-bind="text: App.game.farming.berryList[$data]()"></span></td>-</code></td>
-                   </tr><tr>
+                    <tr>
+                      <td class="text-left">Current Amount</td>
+                      <td class="text-left tight"><code data-bind="text: App.game.farming.berryList[$data]().toLocaleString('en-US')"></span></td></code></td>
+                    </tr><tr>
                       <td class="text-left">Harvested</td>
                       <td class="text-left tight"><code data-bind="text: App.game.statistics.berriesHarvested[$data]().toLocaleString('en-US')">-</code></td>
                     </tr><tr>
