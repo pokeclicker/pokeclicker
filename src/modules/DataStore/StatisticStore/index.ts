@@ -84,9 +84,11 @@ export default class Statistics implements Saveable {
     battleFrontierTotalStagesCompleted: KnockoutObservable<number>;
     battleFrontierHighestStageCompleted: KnockoutObservable<number>;
     // Safari Zone
+    safariTimesEntered: KnockoutObservable<number>;
     safariRocksThrown: KnockoutObservable<number>;
     safariBaitThrown: KnockoutObservable<number>;
     safariBallsThrown: KnockoutObservable<number>;
+    safariStepsTaken: KnockoutObservable<number>;
 
     /*
      * arrayObservables
@@ -193,9 +195,11 @@ export default class Statistics implements Saveable {
         'berryDailyDealTrades',
         'battleFrontierTotalStagesCompleted',
         'battleFrontierHighestStageCompleted',
+        'safariTimesEntered',
         'safariRocksThrown',
         'safariBaitThrown',
         'safariBallsThrown',
+        'safariStepsTaken',
     ];
     arrayObservables = [
         'gymsDefeated',
