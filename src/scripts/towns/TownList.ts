@@ -4831,7 +4831,7 @@ TownList['Hoppy Town'] = new Town(
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MagikarpJump,
     [new BulletinBoard(GameConstants.BulletinBoards.Hoppy ),
-    new DockTownContent(), MagikarpJumpGemTrade],
+        new DockTownContent(), MagikarpJumpGemTrade],
     {
         requirements: [new QuestLineStartedRequirement('Magikarp Jump')],
         npcs: [MayorKarp, MagikarpJumpRoamerNPC, DrSplash1, DrSplash2, DrSplash3, DrSplash4, DrSplash5],
