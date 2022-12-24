@@ -4404,7 +4404,7 @@ const MagikarpJumpGemTrade = new GemMasterShop('Trade', [new GymBadgeRequirement
 const MagikarpJumpShadySalesMan = new Shop([
     ItemList['Magikarp Blue Raindrops'],
     ItemList['Magikarp Saucy Violet'],
-], 'Shady Sales Man', [new GymBadgeRequirement(BadgeEnums.Master_League)]);
+], 'Shady Salesman', [new GymBadgeRequirement(BadgeEnums.Master_League)]);
 
 
 //Alola NPCs
@@ -4588,10 +4588,14 @@ const MayorKarp = new NPC('Mayor Karp', [
     'Around these parts, folks love to compete to see whose Magikarp can splash harder and jump higher! No other Pokémon are allowed to compete in these events. So, do your best to raise up some fine Magikarp!',
     'Our island is a special place, home to Magikarp patterns that aren\'t found anywhere else in the world! Collect and raise them all to increase your jump power and take on our league champion!',
 ], {image: 'assets/images/npcs/MayorKarp.png'});
-
 const MagikarpJumpRoamerNPC = new RoamerNPC('Roddy Tackle', [
     'There are some singularly stunning individuals down at {ROUTE_NAME}! Some Magikarp with real personality!',
 ], GameConstants.Region.alola, RoamingPokemonList.findGroup(GameConstants.Region.alola, GameConstants.AlolaSubRegions.MagikarpJump), 'assets/images/npcs/Roddy Tackle.png');
+const HoppyManOfMystery = new NPC('Man of Mystery', [
+    'We have been looking for a Shady Salesman.',
+    'He is trying to sell overpriced Magikarps to clueless children.',
+    'Please keep an <i>eye</i> open for him.',
+],  {image:'assets/images/npcs/Man of Mystery.png'});
 
 const DrSplash1 = new NPC('Dr. Splash', [
     'Welcome to my laboratory!',
@@ -4830,11 +4834,10 @@ TownList['Hoppy Town'] = new Town(
     'Hoppy Town',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MagikarpJump,
-    [new BulletinBoard(GameConstants.BulletinBoards.Hoppy ),
-        new DockTownContent(), MagikarpJumpGemTrade],
+    [new DockTownContent(), new BulletinBoard(GameConstants.BulletinBoards.Hoppy), MagikarpJumpGemTrade],
     {
         requirements: [new QuestLineStartedRequirement('Magikarp Jump')],
-        npcs: [MayorKarp, MagikarpJumpRoamerNPC, DrSplash1, DrSplash2, DrSplash3, DrSplash4, DrSplash5],
+        npcs: [MayorKarp, MagikarpJumpRoamerNPC, HoppyManOfMystery, DrSplash1, DrSplash2, DrSplash3, DrSplash4, DrSplash5],
     }
 );
 TownList['Friend League'] = new Town(

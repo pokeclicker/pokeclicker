@@ -241,6 +241,7 @@ export const SpriteCredits: Credit[] = [
             'Magikarp Brown Stripes Shop Icon',
             'Magikarp Blue Raindrops Shop Icon',
             'Magikarp Saucy Violet Shop Icon',
+            'Man of Mystery',
             'Merilyn',
             'Milcery (Cheesy)',
             'Pinkan Arbok',
