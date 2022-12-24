@@ -179,6 +179,7 @@ class Safari {
 
             App.game.wallet.loseAmount(Safari.cost());
             Safari.load();
+            GameHelper.incrementObservable(App.game.statistics.safariTimesEntered, 1);
         }
     }
 
@@ -261,6 +262,7 @@ class Safari {
 
         if (Safari.canMove(newPos.x, newPos.y)) {
             const next = $(`#safari-${newPos.x}-${newPos.y}`).offset();
+            GameHelper.incrementObservable(App.game.statistics.safariStepsTaken, 1);
             const offset = {
                 top: `+=${directionOffset.y * 32}`,
                 left: `+=${directionOffset.x * 32}`,
