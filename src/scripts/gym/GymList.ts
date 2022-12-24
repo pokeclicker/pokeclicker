@@ -1581,7 +1581,7 @@ GymList['Friend League'] = new Gym(
     'Friend League',
     [new GymPokemon('Magikarp', 337500, 20)],
     BadgeEnums.Friend_League,
-    0, //TODO
+    10000,
     'Your Karp is really Magic!',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 31)]
 );
@@ -1591,7 +1591,7 @@ GymList['Quick League'] = new Gym(
     'Quick League',
     [new GymPokemon('Magikarp Skelly', 675000, 20)],
     BadgeEnums.Quick_League,
-    0, //TODO
+    10500,
     'Looks like I flailed...',
     [new TemporaryBattleRequirement('Magikarp Jump Koylee')],
     () => {
@@ -1610,20 +1610,20 @@ GymList['Quick League'] = new Gym(
 GymList['Heavy League'] = new Gym(
     'Kareign',
     'Heavy League',
-    [new GymPokemon('Magikarp Orange Two Tone', 1687500, 20)],
+    [new GymPokemon('Magikarp Orange Two-Tone', 1687500, 20)],
     BadgeEnums.Heavy_League,
-    0, //TODO
+    11000,
     'Karpe Diem',
     [new TemporaryBattleRequirement('Magikarp Jump Karpen')],
     () => {
-        if (!App.game.party.alreadyCaughtPokemonByName('Magikarp Orange Two Tone')) {
+        if (!App.game.party.alreadyCaughtPokemonByName('Magikarp Orange Two-Tone')) {
             Notifier.notify({
-                message: 'You were awarded a Magikarp Orange Two Tone!',
+                message: 'You were awarded a Magikarp Orange Two-Tone!',
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
                 sound: NotificationConstants.NotificationSound.General.new_catch,
             });
-            App.game.party.gainPokemonById(pokemonMap['Magikarp Orange Two Tone'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
+            App.game.party.gainPokemonById(pokemonMap['Magikarp Orange Two-Tone'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         }
     }
 );
@@ -1633,7 +1633,7 @@ GymList['Great League'] = new Gym(
     'Great League',
     [new GymPokemon('Magikarp', 2700000, 20)],
     BadgeEnums.Great_League,
-    0, //TODO
+    11500,
     'Guess ya got me. Hook, line and sinker!',
     [new TemporaryBattleRequirement('Magikarp Jump Karpress')]
 );
@@ -1643,7 +1643,7 @@ GymList['Fast League'] = new Gym(
     'Fast League',
     [new GymPokemon('Magikarp Pink Dapples', 5062500, 20)],
     BadgeEnums.Fast_League,
-    0, //TODO
+    12000,
     'This life is not for me... I will become a Karpenter now...',
     [new TemporaryBattleRequirement('Magikarp Jump Karson')],
     () => {
@@ -1665,7 +1665,7 @@ GymList['Luxury League'] = new Gym(
     'Luxury League',
     [new GymPokemon('Magikarp Pink Orca', 6750000, 20)],
     BadgeEnums.Luxury_League,
-    0, //TODO
+    12500,
     'Just wait \'til my Magikarp evolves and you will all see how great I am! <i>Cries</i>',
     [new TemporaryBattleRequirement('Magikarp Jump Karbuck')],
     () => {
@@ -1686,7 +1686,7 @@ GymList['Heal League'] = new Gym(
     'Heal League',
     [new GymPokemon('Magikarp Purple Bubbles', 10125000, 20)],
     BadgeEnums.Heal_League,
-    0, //TODO
+    12500,
     'I\'m getting more old than my rod...',
     [new TemporaryBattleRequirement('Magikarp Jump Karpella 2')],
     () => {
@@ -1707,7 +1707,7 @@ GymList['Ultra League'] = new Gym(
     'Ultra League',
     [new GymPokemon('Magikarp Brown Tiger', 13500000, 20)],
     BadgeEnums.Ultra_League,
-    0, //TODO
+    12500,
     'I knew I smelled something fishy...',
     [new TemporaryBattleRequirement('Magikarp Jump Koylee 2')],
     () => {
@@ -1728,7 +1728,7 @@ GymList['E4 League'] = new Gym(
     'E4 League',
     [new GymPokemon('Magikarp Orange Forehead', 20250000, 20)],
     BadgeEnums.E4_League,
-    0, //TODO
+    12500,
     'That jump really splashed!',
     [new TemporaryBattleRequirement('Magikarp Jump Karpella 3')],
     () => {
@@ -1749,7 +1749,7 @@ GymList['Master League'] = new Gym(
     'Master League',
     [new GymPokemon('Magikarp', 27000000, 20)],
     BadgeEnums.Master_League,
-    0, //TODO
+    13000,
     'Mayor Karp will be proud of you!',
     [new TemporaryBattleRequirement('Magikarp Jump Tykarp 2')]
 );
