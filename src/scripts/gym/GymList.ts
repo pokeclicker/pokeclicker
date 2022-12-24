@@ -1579,7 +1579,7 @@ GymList['Champion Hau'] = new Gym(
 GymList['Friend League'] = new Gym(
     'Karson',
     'Friend League',
-    [new GymPokemon('Magikarp', 225000, 20)],
+    [new GymPokemon('Magikarp', 337500, 20)],
     BadgeEnums.Friend_League,
     10000,
     'Your Karp is really Magic!',
@@ -1589,7 +1589,7 @@ GymList['Friend League'] = new Gym(
 GymList['Quick League'] = new Gym(
     'Koichiro',
     'Quick League',
-    [new GymPokemon('Magikarp Skelly', 450000, 20)],
+    [new GymPokemon('Magikarp Skelly', 675000, 20)],
     BadgeEnums.Quick_League,
     10500,
     'Looks like I flailed...',
@@ -1610,7 +1610,7 @@ GymList['Quick League'] = new Gym(
 GymList['Heavy League'] = new Gym(
     'Kareign',
     'Heavy League',
-    [new GymPokemon('Magikarp Orange Two-Tone', 900000, 20)],
+    [new GymPokemon('Magikarp Orange Two-Tone', 1687500, 20)],
     BadgeEnums.Heavy_League,
     11000,
     'Karpe Diem',
@@ -1631,7 +1631,7 @@ GymList['Heavy League'] = new Gym(
 GymList['Great League'] = new Gym(
     'Karbuck',
     'Great League',
-    [new GymPokemon('Magikarp', 1575000, 20)],
+    [new GymPokemon('Magikarp', 2700000, 20)],
     BadgeEnums.Great_League,
     11500,
     'Guess ya got me. Hook, line and sinker!',
@@ -1641,7 +1641,7 @@ GymList['Great League'] = new Gym(
 GymList['Fast League'] = new Gym(
     'Kareign 2',
     'Fast League',
-    [new GymPokemon('Magikarp Pink Dapples', 2250000, 20)],
+    [new GymPokemon('Magikarp Pink Dapples', 5062500, 20)],
     BadgeEnums.Fast_League,
     12000,
     'This life is not for me... I will become a Karpenter now...',
@@ -1663,7 +1663,7 @@ GymList['Fast League'] = new Gym(
 GymList['Luxury League'] = new Gym(
     'Jump Champ',
     'Luxury League',
-    [new GymPokemon('Magikarp Pink Orca', 3375000, 20)],
+    [new GymPokemon('Magikarp Pink Orca', 6750000, 20)],
     BadgeEnums.Luxury_League,
     12500,
     'Just wait \'til my Magikarp evolves and you will all see how great I am! <i>Cries</i>',
@@ -1684,7 +1684,7 @@ GymList['Luxury League'] = new Gym(
 GymList['Heal League'] = new Gym(
     'Karami',
     'Heal League',
-    [new GymPokemon('Magikarp Purple Bubbles', 4500000, 20)],
+    [new GymPokemon('Magikarp Purple Bubbles', 10125000, 20)],
     BadgeEnums.Heal_League,
     12500,
     'I\'m getting more old than my rod...',
@@ -1705,7 +1705,7 @@ GymList['Heal League'] = new Gym(
 GymList['Ultra League'] = new Gym(
     'Jump Champ 2',
     'Ultra League',
-    [new GymPokemon('Magikarp Brown Tiger', 5625000, 20)],
+    [new GymPokemon('Magikarp Brown Tiger', 13500000, 20)],
     BadgeEnums.Ultra_League,
     12500,
     'I knew I smelled something fishy...',
@@ -1726,7 +1726,7 @@ GymList['Ultra League'] = new Gym(
 GymList['E4 League'] = new Gym(
     'Jump Champ 3',
     'E4 League',
-    [new GymPokemon('Magikarp Orange Forehead', 6750000, 20)],
+    [new GymPokemon('Magikarp Orange Forehead', 20250000, 20)],
     BadgeEnums.E4_League,
     12500,
     'That jump really splashed!',
@@ -1747,7 +1747,7 @@ GymList['E4 League'] = new Gym(
 GymList['Master League'] = new Gym(
     'Magikarp',
     'Master League',
-    [new GymPokemon('Magikarp', 9000000, 20)],
+    [new GymPokemon('Magikarp', 27000000, 20)],
     BadgeEnums.Master_League,
     13000,
     'Mayor Karp will be proud of you!',
