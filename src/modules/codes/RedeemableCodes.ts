@@ -1,11 +1,13 @@
 import { Saveable } from '../DataStore/common/Saveable';
 import BerryType from '../enums/BerryType';
-import { Region } from '../GameConstants';
+import { Pokeball, Region } from '../GameConstants';
 import { ItemList } from '../items/ItemList';
 import NotificationConstants from '../notifications/NotificationConstants';
 import Notifier from '../notifications/Notifier';
 import { pokemonMap } from '../pokemons/PokemonList';
 import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
+import MultiRequirement from '../requirements/MultiRequirement';
+import ObtainedPokemonRequirement from '../requirements/ObtainedPokemonRequirement';
 import RedeemableCode from './RedeemableCode';
 
 export default class RedeemableCodes implements Saveable {
@@ -42,6 +44,17 @@ export default class RedeemableCodes implements Saveable {
                     timeout: 1e4,
                 });
             }),
+            new RedeemableCode('great-balls', -1761161712, false, () => {
+                // Give the player 10 Great Balls
+                App.game.pokeballs.gainPokeballs(Pokeball.Greatball, 100000);
+                // Notify that the code was activated successfully
+                Notifier.notify({
+                    title: 'Code activated!',
+                    message: 'You gained 10 Great Balls!',
+                    type: NotificationConstants.NotificationOption.success,
+                    timeout: 1e4,
+                });
+            }),
             new RedeemableCode('typed-held-item', -2046503095, false, () => {
                 // Give the player 3 random typed held items
                 const items = Object.values(ItemList).filter((i) => i.constructor.name === 'TypeRestrictedAttackBonusHeldItem')
@@ -56,6 +69,17 @@ export default class RedeemableCodes implements Saveable {
                     timeout: 1e4,
                 });
             }, new MaxRegionRequirement(Region.johto)),
+            new RedeemableCode('ampharosite', -460361052, false, () => {
+                // Give the player Mega Ampharos
+                App.game.party.getPokemonByName('Ampharos').giveMegastone(true);
+                // Notify that the code was activated successfully
+                Notifier.notify({
+                    title: 'Code activated!',
+                    message: 'You gained an Ampharosite!',
+                    type: NotificationConstants.NotificationOption.success,
+                    timeout: 1e4,
+                });
+            }, new MultiRequirement([new MaxRegionRequirement(Region.kalos), new ObtainedPokemonRequirement('Ampharos')])),
         ];
     }
 
