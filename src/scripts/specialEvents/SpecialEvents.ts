@@ -156,7 +156,7 @@ SpecialEvents.newEvent('Merry Christmas!', 'Encounter Santa Snorlax roaming the 
         // Add to every roaming group that has at least one roamer
         RoamingPokemonList.roamerGroups.forEach((regionGroups, region) => {
             regionGroups.forEach((_, subRegionGroup) => {
-                if (RoamingPokemonList.getSubRegionalGroupRoamers(region, subRegionGroup).length) {
+                if (RoamingPokemonList.list[region][subRegionGroup]?.length) {
                     RoamingPokemonList.add(region, subRegionGroup, new RoamingPokemon('Santa Snorlax'));
                 }
             });
