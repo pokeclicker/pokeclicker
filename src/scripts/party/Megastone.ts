@@ -5,7 +5,7 @@ class MegaStone {
     private attackRequired: number;
 
     constructor(public pokemonId: number, pokemonBaseAttack: number, private pokemonAttack: KnockoutObservable<number>) {
-        this.attackRequired = pokemonBaseAttack * 100;
+        this.attackRequired = pokemonBaseAttack * 500;
     }
 
     public getImage() {

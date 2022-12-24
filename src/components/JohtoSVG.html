@@ -734,6 +734,16 @@
         })
     %>
 
+    <%- include('templates/mapOverlay',
+    { name: "Red Gyarados"
+        , x: 56, y: 0
+        , width: 4, height: 4
+        , databind: "click: () => TemporaryBattleList['Red Gyarados'].protectedOnclick(), attr: { class: TemporaryBattleList['Red Gyarados'].isUnlocked() ? '' : 'locked' }"
+        , visible:  "TemporaryBattleList['Red Gyarados'] && TemporaryBattleList['Red Gyarados'].isVisible()"
+        , image: "assets/images/map/redgyaradosoverworld.png"
+        })
+    %>
+
      <%- include('templates/mapOverlay',
          { name: "Rival Silver"
          , x: 54, y: 41

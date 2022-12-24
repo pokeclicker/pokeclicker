@@ -357,6 +357,7 @@ export enum Currency {
     diamond,
     farmPoint,
     battlePoint,
+    contestToken,
 }
 
 export enum TypeEffectiveness {
@@ -869,6 +870,7 @@ export enum BulletinBoards {
     Sinnoh,
     Kalos,
     Alola,
+    Hoppy,
     Galar,
     Armor,
     Crown,
@@ -1392,6 +1394,7 @@ export const TemporaryBattles = [
     'Suicune 1',
     'Eusine',
     'Suicune 2',
+    'Red Gyarados',
     'Suicune 3',
     'Suicune 4',
     'Suicune 5',
