@@ -19,33 +19,6 @@ class SafariPokemon implements PokemonInterface {
     private _eatingBait: KnockoutObservable<BaitType>;
     private _displayName: KnockoutObservable<string>;
 
-    // Lower weighted pokemon will appear less frequently, equally weighted are equally likely to appear
-    static readonly list: {
-        name: PokemonNameType,
-        weight: number
-    }[] = [
-        { name: 'Nidoran(F)', weight: 15 },
-        { name: 'Nidorina', weight: 10 },
-        { name: 'Nidoran(M)', weight: 25 },
-        { name: 'Nidorino', weight: 10 },
-        { name: 'Exeggcute', weight: 20 },
-        { name: 'Paras', weight: 5 },
-        { name: 'Parasect', weight: 15 },
-        { name: 'Rhyhorn', weight: 10 },
-        { name: 'Chansey', weight: 4 },
-        { name: 'Scyther', weight: 4 },
-        { name: 'Pinsir', weight: 4 },
-        { name: 'Kangaskhan', weight: 15 },
-        { name: 'Tauros', weight: 10 },
-        { name: 'Cubone', weight: 10 },
-        { name: 'Marowak', weight: 5 },
-        { name: 'Tangela', weight: 4 },
-    ];
-
-    public static calcPokemonWeight(pokemon): number {
-        return pokemon.weight * (App.game.party.alreadyCaughtPokemonByName(pokemon.name) ? 1 : 2);
-    }
-
     constructor(name: PokemonNameType) {
         const data = PokemonHelper.getPokemonByName(name);
 
@@ -75,6 +48,10 @@ class SafariPokemon implements PokemonInterface {
         this._angry = ko.observable(0);
         this._eating = ko.observable(0);
         this._eatingBait = ko.observable(BaitType.Bait);
+    }
+
+    public static calcPokemonWeight(pokemon): number {
+        return pokemon.weight * (App.game.party.alreadyCaughtPokemonByName(pokemon.name) ? 1 : 2);
     }
 
     public get catchFactor(): number {
@@ -133,7 +110,8 @@ class SafariPokemon implements PokemonInterface {
     }
 
     public static random() {
-        const pokemon = Rand.fromWeightedArray(SafariPokemon.list, SafariPokemon.list.map(p => p.weight));
+        ///TODO: If more than 1 zone per region, need to make this work
+        const pokemon = Rand.fromWeightedArray(SafariPokemonList.list[player.region]()[0].safariPokemon, SafariPokemonList.list[player.region]()[0].safariPokemon.map(p => p.weight));
         return new SafariPokemon(pokemon.name);
     }
 
