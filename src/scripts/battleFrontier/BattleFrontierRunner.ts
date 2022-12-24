@@ -24,7 +24,18 @@ class BattleFrontierRunner {
         this.timeLeftPercentage(Math.floor(this.timeLeft() / GameConstants.GYM_TIME * 100));
     }
 
-    public static start(useCheckpoint: boolean) {
+    public static async start(useCheckpoint: boolean) {
+        if (!useCheckpoint && this.hasCheckpoint()) {
+            if (!await Notifier.confirm({
+                title: 'Restart Battle Frontier?',
+                message: 'Current progress will be lost and you will restart from the first stage.',
+                type: NotificationConstants.NotificationOption.warning,
+                confirm: 'OK',
+            })) {
+                return;
+            }
+        }
+
         this.started(true);
         this.stage(useCheckpoint ? this.checkpoint() : 1);
         this.highest(App.game.statistics.battleFrontierHighestStageCompleted());
