@@ -110,6 +110,7 @@ class Game {
         Weather.generateWeather(now);
         GemDeal.generateDeals();
         ShardDeal.generateDeals();
+        SafariPokemonList.generateSafariLists();
         RoamingPokemonList.generateIncreasedChanceRoutes(now);
 
         if (Settings.getSetting('disableOfflineProgress').value === false) {

@@ -192,6 +192,7 @@ namespace GameConstants {
         diamond,
         farmPoint,
         battlePoint,
+        contestToken,
     }
     declare enum TypeEffectiveness {
         Immune,
@@ -411,6 +412,7 @@ namespace GameConstants {
         Sinnoh,
         Kalos,
         Alola,
+        Hoppy,
         Galar,
         Armor,
         Crown

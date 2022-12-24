@@ -125,7 +125,6 @@ RoamingPokemonList.add(Region.alola, 0, new RoamingPokemon('Zeraora', new GymBad
 // Magikarp Jump
 RoamingPokemonList.add(Region.alola, 1, new RoamingPokemon('Magikarp Purple Diamonds', new GymBadgeRequirement(BadgeEnums.Luxury_League)));
 RoamingPokemonList.add(Region.alola, 1, new RoamingPokemon('Magikarp Apricot Stripes', new GymBadgeRequirement(BadgeEnums.Heal_League)));
-RoamingPokemonList.add(Region.alola, 1, new RoamingPokemon('Magikarp Saucy Blue', new GymBadgeRequirement(BadgeEnums.Master_League)));
 RoamingPokemonList.add(Region.alola, 1, new RoamingPokemon('Magikarp Violet Raindrops', new GymBadgeRequirement(BadgeEnums.Master_League)));
 
 // Galar
