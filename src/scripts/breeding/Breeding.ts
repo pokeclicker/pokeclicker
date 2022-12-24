@@ -198,22 +198,46 @@ class Breeding implements Feature {
 
         amount = Math.round(amount);
         let index = this.eggList.length;
+        let emptySlots = 0;
         while (index-- > 0) {
             const helper = this.hatcheryHelpers.hired()[index];
             if (helper) {
                 continue;
             }
             const egg = this.eggList[index]();
+            if (egg.isNone() && index + 1 <= this._eggSlots()) {
+                emptySlots++;
+                continue;
+            }
             const partyPokemon = egg.partyPokemon();
             if (!egg.isNone() && partyPokemon && partyPokemon.canCatchPokerus() && partyPokemon.pokerus == GameConstants.Pokerus.Uninfected) {
                 partyPokemon.calculatePokerus(index);
             }
             egg.addSteps(amount, this.multiplier);
             if (this._queueList().length && egg.canHatch()) {
-                this.hatchPokemonEgg(index);
+                this.hatchPokemonEgg(index, false);
+                emptySlots++;
             }
         }
+
         this.hatcheryHelpers.addSteps(amount, this.multiplier);
+
+        if (emptySlots) {
+            // Check for any empty slots between incubating eggs, move them if a gap is found.
+            // For example, if the first empty slot is index 2 but there are 3 slots with eggs then there is a gap.
+            const firstEmptySlot = this._eggList.findIndex((egg, i) => egg().isNone() && !this.hatcheryHelpers.hired()[i]);
+            if (firstEmptySlot > -1) {
+                const slotsWithEggs = this._eggList.filter((egg, i) => !egg().isNone() && !this.hatcheryHelpers.hired()[i]).length;
+                if (firstEmptySlot < slotsWithEggs) {
+                    this.moveEggs();
+                }
+            }
+
+            // Fill empty egg slots from queue.
+            while (this._queueList().length && emptySlots--) {
+                this.nextEggFromQueue();
+            }
+        }
     }
 
     private getStepMultiplier() {
@@ -300,33 +324,42 @@ class Breeding implements Feature {
         return success;
     }
 
-    public hatchPokemonEgg(index: number): void {
+    public hatchPokemonEgg(index: number, nextEgg = true): void {
         const egg: Egg = this._eggList[index]();
         const hatched = egg.hatch();
         if (hatched) {
             this._eggList[index](new Egg());
-            this.moveEggs();
-            if (this._queueList().length) {
-                const nextEgg = this.createEgg(this._queueList.shift());
-                this.gainEgg(nextEgg);
-                if (!this._queueList().length) {
-                    Notifier.notify({
-                        message: 'Hatchery queue is empty.',
-                        type: NotificationConstants.NotificationOption.success,
-                        timeout: 1e4,
-                        sound: NotificationConstants.NotificationSound.Hatchery.empty_queue,
-                        setting: NotificationConstants.NotificationSetting.Hatchery.empty_queue,
-                    });
+            if (nextEgg) {
+                this.moveEggs();
+                if (this._queueList().length) {
+                    this.nextEggFromQueue();
                 }
             }
         }
     }
 
-    public moveEggs(): void {
-        const tempEggList = App.game.breeding._eggList.filter(egg => egg().type != EggType.None);
+    private nextEggFromQueue(): void {
+        const nextEgg = this.createEgg(this._queueList.shift());
+        this.gainEgg(nextEgg);
+        if (!this._queueList().length) {
+            Notifier.notify({
+                message: 'Hatchery queue is empty.',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 1e4,
+                sound: NotificationConstants.NotificationSound.Hatchery.empty_queue,
+                setting: NotificationConstants.NotificationSetting.Hatchery.empty_queue,
+            });
+        }
+    }
 
+    public moveEggs(): void {
+        const tempEggList = App.game.breeding._eggList.filter((egg, i) => egg().type != EggType.None && !this.hatcheryHelpers.hired()[i]);
+        let tempEggIndex = 0;
         this._eggList.forEach((egg, index) => {
-            egg(tempEggList[index] ? tempEggList[index]() : new Egg());
+            if (this.hatcheryHelpers.hired()[index]) {
+                return;
+            }
+            egg(tempEggList[tempEggIndex] ? tempEggList[tempEggIndex++]() : new Egg());
         });
     }
 
@@ -492,5 +525,13 @@ class Breeding implements Feature {
                 this.removeFromQueue(i - 1);
             }
         }
+    }
+
+    public fireAllButtonTooltip(): string {
+        let str = '';
+        this.hatcheryHelpers.hired().forEach(x => {
+            str += `<img src="assets/images/profile/trainer-${x.trainerSprite}.png" width="20px">&nbsp; ${x.name} <img src="assets/images/currency/${GameConstants.Currency[x.cost.currency]}.svg" width="20px">&nbsp;${(x.cost.amount).toLocaleString('en-US')} <br/>`;
+        });
+        return str;
     }
 }

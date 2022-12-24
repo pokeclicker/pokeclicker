@@ -50,6 +50,7 @@
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('confirmBeformeMulchingAllPlots')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showGymGoAnimation')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('disableRightClickMenu')}"></tr>
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showMuteButton')}"></tr>
                                 <tr><th colspan="2">Map Colors</th></tr>
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--locked')}"></tr>
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--incomplete')}"></tr>
@@ -58,6 +59,7 @@
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--uncaughtShinyPokemonAndMissingAchievement')}"></tr>
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--uncaughtShinyPokemon')}"></tr>
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--missingAchievement')}"></tr>
+                                <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--missingResistant')}"></tr>
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--completed')}"></tr>
                             </tbody>
                         </table>
@@ -244,6 +246,7 @@
                                     </td>
                                 </tr>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.forceSave')}"></tr>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.mute')}"></tr>
                             </tbody>
                         </table>
                     </div>
@@ -270,6 +273,14 @@
                                         ">
                                     </td>
                                 </tr>
+								<tr data-bind="with : Settings.getSetting('saveFilename')">
+									<td class="p-2" data-bind="text : `${$data.displayName}:`">setting name</td>
+									<td class="p-0">
+										<input type="text" class="form-control"
+                                            data-bind="attr : {name : $data.name, id : `setting-${$data.name}`, placeholder : $data.defaultValue}, textInput : $data.observableValue, tooltip : {title: 'Special tags {name}, {version} and {date} are automatically filled', trigger: 'hover'}"
+                                            onchange="Settings.setSettingByName('saveFilename', this.value)"/>
+									</td>
+								</tr>
                             </tbody>
                         </table>
                         <div class="btn-group btn-block">

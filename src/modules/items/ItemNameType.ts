@@ -209,6 +209,7 @@ export type ItemNameType
     | 'Carbos'
     | 'Abomasite'
     | 'Alakazite'
+    | 'Lopunnite'
     | 'Kangaskhanite'
     | 'Heracronite'
     | 'Garchompite';
