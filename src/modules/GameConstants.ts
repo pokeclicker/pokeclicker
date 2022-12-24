@@ -870,6 +870,7 @@ export enum BulletinBoards {
     Sinnoh,
     Kalos,
     Alola,
+    Hoppy,
     Galar,
     Armor,
     Crown,
