@@ -135,6 +135,7 @@ export const ITEM_PRICE_DEDUCT = 1.0005;
 export const PLATE_VALUE = 100;
 
 // Breeding
+export const EGG_CYCLE_MULTIPLIER = 40;
 export const BREEDING_ATTACK_BONUS = 25;
 
 // Farming
@@ -207,7 +208,7 @@ export enum AchievementType {
     'Farming',
     'Underground',
     'Battle Frontier',
-    'Protein',
+    'Vitamins',
     'Pokerus',
 }
 
@@ -356,6 +357,7 @@ export enum Currency {
     diamond,
     farmPoint,
     battlePoint,
+    contestToken,
 }
 
 export enum TypeEffectiveness {
@@ -580,7 +582,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.sinnoh]: new Set([218, 219, 220, 223, 230, 'Pastoria City', 'Lake Verity', 'Lake Valor', 'Sendoff Spring']),
         [Region.unova]: new Set([17, 18, 21, 24, 'Undella Town', 'Humilau City']),
         [Region.kalos]: new Set([8, 23, 'Coumarine City', 'Couriway Town', 'Sea Spirit\'s Den']),
-        [Region.alola]: new Set([15, 19, 20, 'Seafolk Village', 'Brooklet Hill', 'Mina\'s Houseboat', 'Lake of the Sunne and Moone']),
+        [Region.alola]: new Set([15, 19, 20, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 'Hoppy Town', 'Friend League', 'Quick League', 'Heavy League', 'Great League', 'Fast League', 'Luxury League', 'Heal League', 'Ultra League', 'Elite Four League', 'Master League', 'Magikarp\'s Eye', 'Seafolk Village', 'Brooklet Hill', 'Mina\'s Houseboat', 'Lake of the Sunne and Moone']),
         [Region.galar]: new Set(['Hulbury', 'Roaring-Sea Caves', 5, 6, 8, 9, 16, 21, 27, 29, 36, 37, 41, 42, 43, 44, 51, 53]),
     },
 
@@ -843,7 +845,8 @@ export enum PokeBlockColor {
 
 export enum VitaminType {
     Protein,
-    RareCandy,
+    Calcium,
+    Carbos,
 }
 
 export enum EggItemType {
@@ -867,6 +870,7 @@ export enum BulletinBoards {
     Sinnoh,
     Kalos,
     Alola,
+    Hoppy,
     Galar,
     Armor,
     Crown,
@@ -1390,12 +1394,14 @@ export const TemporaryBattles = [
     'Suicune 1',
     'Eusine',
     'Suicune 2',
+    'Red Gyarados',
     'Suicune 3',
     'Suicune 4',
     'Suicune 5',
     'Suicune 6',
     'Silver 6',
     'Silver 7',
+    'Red',
     'May 1',
     'May 2',
     'May 3',
@@ -1527,6 +1533,27 @@ export const TemporaryBattles = [
     'Team Flare Leader Lysandre',
     'Team Plasma Leader Ghetsis',
     'Team Rainbow Leader Giovanni',
+    'Magikarp Jump Koylee',
+    'Magikarp Jump Karpella',
+    'Magikarp Jump Karpen',
+    'Magikarp Jump Tykarp',
+    'Magikarp Jump Karpress',
+    'Magikarp Jump Karami',
+    'Magikarp Jump Karson',
+    'Magikarp Jump Karpress 2',
+    'Magikarp Jump Karpen 2',
+    'Magikarp Jump Karbuck',
+    'Magikarp Jump Skyhopper',
+    'Magikarp Jump Karpen 3',
+    'Magikarp Jump Karpella 2',
+    'Magikarp Jump Karbuck 2',
+    'Magikarp Jump Kareign',
+    'Magikarp Jump Koylee 2',
+    'Magikarp Jump Karpress 3',
+    'Magikarp Jump Karpen 4',
+    'Magikarp Jump Karpella 3',
+    'Magikarp Jump Skyhopper 2',
+    'Magikarp Jump Tykarp 2',
     'Hop 1',
     'Mirages',
     'Hop 2',
@@ -1755,4 +1782,5 @@ export enum AlcremieSpins {
 export enum ExtraAchievementCategories {
     global = Region.final,
     sevii,
+    magikarpJump,
 }
