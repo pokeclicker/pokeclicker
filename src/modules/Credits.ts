@@ -207,6 +207,7 @@ export const SpriteCredits: Credit[] = [
             'Client Island town image',
             'Cracked pot big icon',
             'Danny',
+            'Dr. Splash',
             'Dracovish shop image',
             'Dracozolt shop image',
             'Dream Orbs',
@@ -225,10 +226,10 @@ export const SpriteCredits: Credit[] = [
             'Magikarp Calico (Orange, White, Black)',
             'Magikarp Calico (White, Orange)',
             'Magikarp Calico (Orange, Gold)',
-            'Magikarp Orange Two Tone',
+            'Magikarp Orange Two-Tone',
             'Magikarp Orange Orca',
             'Magikarp Orange Dapples',
-            'Magikarp Pink Two Tone',
+            'Magikarp Pink Two-Tone',
             'Magikarp Pink Orca',
             'Magikarp Pink Dapples',
             'Magikarp Apricot Tiger',
@@ -261,6 +262,7 @@ export const SpriteCredits: Credit[] = [
             'Pinkan Scyther Shuffle',
             'Pinkan Weedle',
             'Pinkan Weezing',
+            'Professor Burnet',
             'Roddy Tackle',
             'Rudy',
             'Rusted Shield and Sword icons',
@@ -568,6 +570,15 @@ export const SpriteCredits: Credit[] = [
         // NOTES: Granted permission on devianart to NiceDice via PN
     },
     {
+        name: 'pixie-rings',
+        link: 'https://www.deviantart.com/pixie-rings/art/Pokemon-Trainer-Sprite-Furisode-Girl-560892832',
+        image: 'https://a.deviantart.net/avatars-big/p/i/pixie-rings.jpg?14',
+        resources: [
+            'Furisode Girl Katherine',
+        ],
+        // Notes: Permission given on image page if credited.
+    },
+    {
         name: 'PKMNTrainerSpriterC, akuma-tsubasa & Metapod23',
         link: 'https://www.deviantart.com/pkmntrainerspriterc/art/Ash-Ketchum-Sprite-Set-435950341',
         resources: [
@@ -704,6 +715,7 @@ export const SpriteCredits: Credit[] = [
             'Pinkan Pidgeotto',
             'Pinkan Rattata',
             'Pinkan Vileplume',
+            'Professor Juniper',
             'Riot',
             'Valencian Butterfree',
             'Valencian Vileplume',

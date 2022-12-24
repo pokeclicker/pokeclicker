@@ -17,7 +17,7 @@ aria-labelledby="dreamOrbsModalLabel">
                 App.game.dreamOrbController.selectedOrb().color.toLowerCase() +
                 (App.game.dreamOrbController.opening() ? '_animated' : '') +
                 '.png')
-            }"/>
+            }" height = "120px'"/>
             <div><button class="btn btn-primary" onclick="App.game.dreamOrbController.open()">Open</button></div>
             <div>Orbs left: <span data-bind="text: App.game.dreamOrbController.selectedOrb().amount().toLocaleString('en-US')"></span></div>
         </div>

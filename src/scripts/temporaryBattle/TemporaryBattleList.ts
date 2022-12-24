@@ -414,6 +414,19 @@ TemporaryBattleList['Suicune 2'] = new TemporaryBattle(
         hideTrainer: true,
     }
 );
+TemporaryBattleList['Red Gyarados'] = new TemporaryBattle(
+    'Red Gyarados',
+    [new GymPokemon('Gyarados', 1100000, 30, undefined, true)],
+    undefined,
+    [new QuestLineStartedRequirement('Team Rocket Again')],
+    undefined,
+    {
+        displayName: 'Red Gyarados',
+        returnTown: 'Mahogany Town',
+        isTrainerBattle: false,
+        hideTrainer: true,
+    }
+);
 TemporaryBattleList['Suicune 3'] = new TemporaryBattle(
     'Suicune 3',
     [new GymPokemon('Suicune', 3269100, 40)],
@@ -575,7 +588,6 @@ TemporaryBattleList.Red = new TemporaryBattle(
                 setting: NotificationConstants.NotificationSetting.Items.dropped_item,
             });
         },
-        imageName: '../npcs/Red-masters',
     }
 );
 
@@ -1428,7 +1440,10 @@ TemporaryBattleList['Colress 3'] = new TemporaryBattle(
         new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 17),
     ],
     undefined,
-    {imageName: '../trainers/Team Plasma (colress)'}
+    {
+        displayName: 'Colress',
+        imageName: '../trainers/Team Plasma (colress)',
+    }
 );
 TemporaryBattleList['Plasma Shadow 2'] = new TemporaryBattle(
     'Plasma Shadow 2',
@@ -1967,7 +1982,7 @@ TemporaryBattleList['Ash Ketchum Johto'] = new TemporaryBattle(
     [
         new GymPokemon('Pikachu (Partner Cap)', 83333000, 58),
         new GymPokemon('Heracross', 83333000, 56),
-        new GymPokemon('Noctowl', 83333000, 56),
+        new GymPokemon('Noctowl', 83333000, 56, undefined, true),
         new GymPokemon('Bayleef', 83333000, 60),
         new GymPokemon('Cyndaquil', 83333000, 62),
         new GymPokemon('Totodile', 83333000, 62),
@@ -2663,9 +2678,11 @@ TemporaryBattleList['Team Rainbow Leader Giovanni'] = new TemporaryBattle(
     [new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 5)]
 );
 
+
+// Magikarp Jump Temp Battles
 TemporaryBattleList['Magikarp Jump Koylee'] = new TemporaryBattle(
     'Magikarp Jump Koylee',
-    [new GymPokemon('Magikarp Calico (Orange, White)', 810000, 20)],
+    [new GymPokemon('Magikarp Calico (Orange, White)', 1215000, 20)],
     'Your scales are full of heart!',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 32)],
     undefined,
@@ -2676,6 +2693,7 @@ TemporaryBattleList['Magikarp Jump Koylee'] = new TemporaryBattle(
                 message: 'You were awarded a Magikarp Calico (Orange, White)!',
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
             });
             App.game.party.gainPokemonById(pokemonMap['Magikarp Calico (Orange, White)'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         },
@@ -2684,7 +2702,7 @@ TemporaryBattleList['Magikarp Jump Koylee'] = new TemporaryBattle(
 
 TemporaryBattleList['Magikarp Jump Karpella'] = new TemporaryBattle(
     'Magikarp Jump Karpella',
-    [new GymPokemon('Magikarp Calico (Orange, White, Black)', 1620000, 20)],
+    [new GymPokemon('Magikarp Calico (Orange, White, Black)', 3037500, 20)],
     'Wow, you\'re the cream of the \'karp, alright!',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 33)],
     undefined,
@@ -2695,6 +2713,7 @@ TemporaryBattleList['Magikarp Jump Karpella'] = new TemporaryBattle(
                 message: 'You were awarded a Magikarp Calico (Orange, White, Black)!',
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
             });
             App.game.party.gainPokemonById(pokemonMap['Magikarp Calico (Orange, White, Black)'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         },
@@ -2703,17 +2722,19 @@ TemporaryBattleList['Magikarp Jump Karpella'] = new TemporaryBattle(
 
 TemporaryBattleList['Magikarp Jump Karpen'] = new TemporaryBattle(
     'Magikarp Jump Karpen',
-    [new GymPokemon('Magikarp Calico (White, Orange)', 1710000, 20)],
-    'Are you sure you Karp isn\'t flying type?',
+    [new GymPokemon('Magikarp Calico (White, Orange)', 3206250, 20)],
+    'Are you sure you Karp isn\'t flying-type?',
     [new TemporaryBattleRequirement('Magikarp Jump Karpella')],
     undefined,
     {
         displayName: 'Karpen',
+        visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.alola, 33),
         firstTimeRewardFunction: () => {
             Notifier.notify({
                 message: 'You were awarded a Magikarp Calico (White, Orange)!',
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
             });
             App.game.party.gainPokemonById(pokemonMap['Magikarp Calico (White, Orange)'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         },
@@ -2722,9 +2743,9 @@ TemporaryBattleList['Magikarp Jump Karpen'] = new TemporaryBattle(
 
 TemporaryBattleList['Magikarp Jump Tykarp'] = new TemporaryBattle(
     'Magikarp Jump Tykarp',
-    [new GymPokemon('Magikarp Calico (Orange, White)', 2835000, 20)],
+    [new GymPokemon('Magikarp Calico (Orange, White)', 4860000, 20)],
     'I lost because of my karpal tunnel...',
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 33)],
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 34)],
     undefined,
     {
         displayName: 'Tykarp',
@@ -2733,20 +2754,21 @@ TemporaryBattleList['Magikarp Jump Tykarp'] = new TemporaryBattle(
 
 TemporaryBattleList['Magikarp Jump Karpress'] = new TemporaryBattle(
     'Magikarp Jump Karpress',
-    [new GymPokemon('Magikarp Calico (Orange, White, Black)', 2992500, 20)],
+    [new GymPokemon('Magikarp Calico (Orange, White, Black)', 5130000, 20)],
     '<i>Basculin</i> the glory while you can, I\'ll get you next time! Wahaa!',
     [new TemporaryBattleRequirement('Magikarp Jump Tykarp')],
     undefined,
     {
         displayName: 'Karpress',
+        visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.alola, 34),
     }
 );
 
 TemporaryBattleList['Magikarp Jump Karami'] = new TemporaryBattle(
     'Magikarp Jump Karami',
-    [new GymPokemon('Magikarp Calico (Orange, White)', 4050000, 20)],
+    [new GymPokemon('Magikarp Calico (Orange, White)', 9112500, 20)],
     'Well, it\'s oh-fish-ial! You win!',
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 34)],
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 35)],
     undefined,
     {
         displayName: 'Karami',
@@ -2755,20 +2777,21 @@ TemporaryBattleList['Magikarp Jump Karami'] = new TemporaryBattle(
 
 TemporaryBattleList['Magikarp Jump Karson'] = new TemporaryBattle(
     'Magikarp Jump Karson',
-    [new GymPokemon('Magikarp Skelly', 4275000, 20)],
+    [new GymPokemon('Magikarp Skelly', 9618750, 20)],
     'Hey, would you mind letting minnow when you want to rematch?',
     [new TemporaryBattleRequirement('Magikarp Jump Karami')],
     undefined,
     {
         displayName: 'Karson',
+        visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.alola, 35),
     }
 );
 
 TemporaryBattleList['Magikarp Jump Karpress 2'] = new TemporaryBattle(
     'Magikarp Jump Karpress 2',
-    [new GymPokemon('Magikarp Calico (Orange, White)', 6075000, 20)],
+    [new GymPokemon('Magikarp Calico (Orange, White)', 12150000, 20)],
     'I\'m fin-ished...',
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 35)],
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 36)],
     undefined,
     {
         displayName: 'Karpress',
@@ -2777,28 +2800,31 @@ TemporaryBattleList['Magikarp Jump Karpress 2'] = new TemporaryBattle(
 
 TemporaryBattleList['Magikarp Jump Karpen 2'] = new TemporaryBattle(
     'Magikarp Jump Karpen 2',
-    [new GymPokemon('Magikarp Calico (White, Orange)', 6412500, 20)],
+    [new GymPokemon('Magikarp Calico (White, Orange)', 12825000, 20)],
     'Magikarp is so classy, it\'s so-fish-ticated',
     [new TemporaryBattleRequirement('Magikarp Jump Karpress 2')],
     undefined,
     {
         displayName: 'Karpen',
+        visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.alola, 36),
     }
 );
 
 TemporaryBattleList['Magikarp Jump Karbuck'] = new TemporaryBattle(
     'Magikarp Jump Karbuck',
-    [new GymPokemon('Magikarp Calico (Orange, Gold)', 6547500, 20)],
+    [new GymPokemon('Magikarp Calico (Orange, Gold)', 13095000, 20)],
     'That battle scared the karp out of me!',
     [new TemporaryBattleRequirement('Magikarp Jump Karpen 2')],
     undefined,
     {
         displayName: 'Karbuck',
+        visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.alola, 36),
         firstTimeRewardFunction: () => {
             Notifier.notify({
                 message: 'You were awarded a Magikarp Calico (Orange, Gold)!',
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
             });
             App.game.party.gainPokemonById(pokemonMap['Magikarp Calico (Orange, Gold)'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         },
@@ -2807,9 +2833,9 @@ TemporaryBattleList['Magikarp Jump Karbuck'] = new TemporaryBattle(
 
 TemporaryBattleList['Magikarp Jump Skyhopper'] = new TemporaryBattle(
     'Magikarp Jump Skyhopper',
-    [new GymPokemon('Magikarp Calico (Orange, White)', 8100000, 20)],
+    [new GymPokemon('Magikarp Calico (Orange, White)', 18225000, 20)],
     'I will jump away from this battle!',
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 35)],
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 37)],
     undefined,
     {
         displayName: 'Skyhopper',
@@ -2818,31 +2844,33 @@ TemporaryBattleList['Magikarp Jump Skyhopper'] = new TemporaryBattle(
 
 TemporaryBattleList['Magikarp Jump Karpen 3'] = new TemporaryBattle(
     'Magikarp Jump Karpen 3',
-    [new GymPokemon('Magikarp Skelly', 8550000, 20)],
+    [new GymPokemon('Magikarp Skelly', 19237500, 20)],
     'Are you trying to fly to the stratosphere?',
     [new TemporaryBattleRequirement('Magikarp Jump Skyhopper')],
     undefined,
     {
         displayName: 'Karpen',
+        visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.alola, 37),
     }
 );
 
 TemporaryBattleList['Magikarp Jump Karpella 2'] = new TemporaryBattle(
     'Magikarp Jump Karpella 2',
-    [new GymPokemon('Magikarp Calico (Orange, White, Black)', 8730000, 20)],
+    [new GymPokemon('Magikarp Calico (Orange, White, Black)', 19642500, 20)],
     'I hate fish puns...',
     [new TemporaryBattleRequirement('Magikarp Jump Karpen 3')],
     undefined,
     {
         displayName: 'Karpella',
+        visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.alola, 37),
     }
 );
 
 TemporaryBattleList['Magikarp Jump Karbuck 2'] = new TemporaryBattle(
     'Magikarp Jump Karbuck 2',
-    [new GymPokemon('Magikarp Calico (Orange, White)', 10125000, 20)],
+    [new GymPokemon('Magikarp Calico (Orange, White)', 24300000, 20)],
     'I wish a Pidgeotto would steal me away about now...',
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 35)],
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 38)],
     undefined,
     {
         displayName: 'Karbuck',
@@ -2851,31 +2879,33 @@ TemporaryBattleList['Magikarp Jump Karbuck 2'] = new TemporaryBattle(
 
 TemporaryBattleList['Magikarp Jump Kareign'] = new TemporaryBattle(
     'Magikarp Jump Kareign',
-    [new GymPokemon('Magikarp Calico (White, Orange)', 10687500, 20)],
+    [new GymPokemon('Magikarp Calico (White, Orange)', 25650000, 20)],
     'Wow, you\'ve been drinking your Training Sodas!',
     [new TemporaryBattleRequirement('Magikarp Jump Karbuck 2')],
     undefined,
     {
         displayName: 'Kareign',
+        visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.alola, 38),
     }
 );
 
 TemporaryBattleList['Magikarp Jump Koylee 2'] = new TemporaryBattle(
     'Magikarp Jump Koylee 2',
-    [new GymPokemon('Magikarp Calico (Orange, White, Black)', 10912500, 20)],
+    [new GymPokemon('Magikarp Calico (Orange, White, Black)', 26190000, 20)],
     'I need to find more sunken treasures...',
     [new TemporaryBattleRequirement('Magikarp Jump Kareign')],
     undefined,
     {
         displayName: 'Koylee',
+        visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.alola, 38),
     }
 );
 
 TemporaryBattleList['Magikarp Jump Karpress 3'] = new TemporaryBattle(
     'Magikarp Jump Karpress 3',
-    [new GymPokemon('Magikarp Grey Diamonds', 12150000, 20)],
+    [new GymPokemon('Magikarp Grey Diamonds', 36450000, 20)],
     'You cheater! I have seen Rowlet giving you money!!!',
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 35)],
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 39)],
     undefined,
     {
         displayName: 'Karpress',
@@ -2884,6 +2914,7 @@ TemporaryBattleList['Magikarp Jump Karpress 3'] = new TemporaryBattle(
                 message: 'You were awarded a Magikarp Grey Diamonds!',
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
             });
             App.game.party.gainPokemonById(pokemonMap['Magikarp Grey Diamonds'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         },
@@ -2892,28 +2923,31 @@ TemporaryBattleList['Magikarp Jump Karpress 3'] = new TemporaryBattle(
 
 TemporaryBattleList['Magikarp Jump Karpen 4'] = new TemporaryBattle(
     'Magikarp Jump Karpen 4',
-    [new GymPokemon('Magikarp Brown Tiger', 12825000, 20)],
-    'My Magikarp might not jump high but it\'s fast enough to win the Naskarp Cup',
+    [new GymPokemon('Magikarp Brown Tiger', 38475000, 20)],
+    'My Magikarp might not jump high but it\'s fast enough to win the Naskarp Cup.',
     [new TemporaryBattleRequirement('Magikarp Jump Karpress 3')],
     undefined,
     {
         displayName: 'Karpen',
+        visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.alola, 39),
     }
 );
 
 TemporaryBattleList['Magikarp Jump Karpella 3'] = new TemporaryBattle(
     'Magikarp Jump Karpella 3',
-    [new GymPokemon('Magikarp Purple Patches', 13095000, 20)],
+    [new GymPokemon('Magikarp Purple Patches', 39285000, 20)],
     'I will beat you next time! Any fin is possible is you believe it!',
     [new TemporaryBattleRequirement('Magikarp Jump Karpen 4')],
     undefined,
     {
         displayName: 'Karpella',
+        visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.alola, 39),
         firstTimeRewardFunction: () => {
             Notifier.notify({
                 message: 'You were awarded a Magikarp Purple Patches!',
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
             });
             App.game.party.gainPokemonById(pokemonMap['Magikarp Purple Patches'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         },
@@ -2922,9 +2956,9 @@ TemporaryBattleList['Magikarp Jump Karpella 3'] = new TemporaryBattle(
 
 TemporaryBattleList['Magikarp Jump Skyhopper 2'] = new TemporaryBattle(
     'Magikarp Jump Skyhopper 2',
-    [new GymPokemon('Magikarp Calico (Orange, Gold)', 16200000, 20)],
+    [new GymPokemon('Magikarp Calico (Orange, Gold)', 48600000, 20)],
     'Who wants to place a bait on a rematch?',
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 35)],
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 40)],
     undefined,
     {
         displayName: 'Skyhopper',
@@ -2933,17 +2967,19 @@ TemporaryBattleList['Magikarp Jump Skyhopper 2'] = new TemporaryBattle(
 
 TemporaryBattleList['Magikarp Jump Tykarp 2'] = new TemporaryBattle(
     'Magikarp Jump Tykarp 2',
-    [new GymPokemon('Magikarp Black Mask', 17100000, 20)],
-    'The way my magikarp performed is a-trout-cious!',
+    [new GymPokemon('Magikarp Black Mask', 51300000, 20)],
+    'The way my Magikarp performed is a-trout-cious!',
     [new TemporaryBattleRequirement('Magikarp Jump Skyhopper 2')],
     undefined,
     {
         displayName: 'Tykarp',
+        visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.alola, 40),
         firstTimeRewardFunction: () => {
             Notifier.notify({
                 message: 'You were awarded a Magikarp Black Mask!',
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
             });
             App.game.party.gainPokemonById(pokemonMap['Magikarp Black Mask'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         },

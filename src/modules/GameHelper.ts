@@ -150,6 +150,10 @@ export default class GameHelper {
         return res;
     }
 
+    public static saveFileName(nameFormat : string, changes : Record<string, string>, isBackup = false) {
+        return `${Object.entries(changes).reduce((filename, [format, value]) => filename.replace(format, value), nameFormat)}${isBackup ? ' Backup' : ''}.txt`;
+    }
+
     private static getTomorrow() {
         const tomorrow = new Date();
         tomorrow.setDate(tomorrow.getDate() + 1);

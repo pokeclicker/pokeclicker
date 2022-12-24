@@ -25,6 +25,7 @@ class HatcheryHelper {
     public trainerSprite = 0;
     public hired: KnockoutObservable<boolean> = ko.observable(false).extend({ boolean: null });
     public tooltip: KnockoutComputed<string>;
+    public fireAllButtonTooltip: KnockoutComputed<string>;
     public sortOption: KnockoutObservable<SortOptions> = ko.observable(SortOptions.id).extend({ numeric: 0 });
     public sortDirection: KnockoutObservable<boolean> = ko.observable(false).extend({ boolean: null });
     public hatched: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 0 });

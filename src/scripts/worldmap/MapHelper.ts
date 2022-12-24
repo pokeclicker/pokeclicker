@@ -138,7 +138,7 @@ class MapHelper {
         if (dungeonList[townName]) {
             if (!App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(townName)]()) {
                 states.push(areaStatus.unlockedUnfinished);
-            } else  if (DungeonRunner.isThereQuestAtLocation(dungeonList[townName])) {
+            } else if (DungeonRunner.isThereQuestAtLocation(dungeonList[townName])) {
                 states.push(areaStatus.questAtLocation);
             } else if (!DungeonRunner.dungeonCompleted(dungeonList[townName], false)) {
                 states.push(areaStatus.uncaughtPokemon);
