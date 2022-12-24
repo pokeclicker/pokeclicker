@@ -1892,6 +1892,8 @@ class Update implements Saveable {
                     johtoSuicuneQuestLine.state = 1;
                 }
             }
+            //Red Gyarados
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 22);
         },
     };
 
@@ -1949,6 +1951,7 @@ class Update implements Saveable {
     getBackupButton(): [HTMLElement, string] {
         const playerData = this.getPlayerData();
         const saveData = this.getSaveData();
+        const settingsData = this.getSettingsData();
 
         // Save the data by stringifying it, so that it isn't mutated during update
         const backupSaveData = JSON.stringify({ player: playerData, save: saveData });
@@ -1958,7 +1961,9 @@ class Update implements Saveable {
             button.href = `data:text/plain;charset=utf-8,${encodeURIComponent(btoa(backupSaveData))}`;
             button.className = 'btn btn-block btn-warning';
             button.innerText = 'Click to Backup Save!';
-            button.setAttribute('download', `[v${this.saveVersion}] Poke Clicker Backup Save.txt`);
+            const filename = settingsData.saveFilename ? decodeURI(settingsData.saveFilename) : Settings.getSetting('saveFilename').defaultValue;
+            const datestr = GameConstants.formatDate(new Date());
+            button.setAttribute('download', GameHelper.saveFileName(filename, {'{date}' : datestr, '{version}' : this.saveVersion, '{name}' : decodeURI(saveData.profile.name)}, true));
         } catch (e) {
             console.error('Failed to create backup button data:', e);
         }
