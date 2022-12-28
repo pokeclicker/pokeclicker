@@ -2023,7 +2023,7 @@ const SootopolisWallace = new NPC('Gym Leader Wallace', [
 
 const MillenniumFest = new NPC('The Millennium Festival', [
     '<i>The Millennium Comet is about to make its long-awaited appearance in the sky again, supposedly granting the wishes of all those who see it in the skies above them.</i>',
-    '<i>A festival celebrating the arrival of this comet is being held with rides, carnival games, and even a Magic Show by the Great Butler!</i>',
+    '<i>A festival celebrating the arrival of this comet is being held with rides, carnival games, and even a magic show by the Great Butler!</i>',
     '<i>The magic show features many exciting tricks performed by humans and Pokémon, but it looks like someone is crashing the party!</i>',
 ], {image: 'assets/images/npcs/other/Millennium Festival.png',
     requirement: new MultiRequirement([new QuestLineStartedRequirement('Wish Maker'), new QuestLineStepCompletedRequirement('Wish Maker', 1, GameConstants.AchievementOption.less)]),
