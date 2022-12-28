@@ -753,7 +753,7 @@ class QuestLineHelper {
         const fightMetaGroudon1 = new CustomQuest(1, 0, 'Butler\'s attempts to resurrect Groudon have gone terribly wrong! Fight the resulting abomination!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Meta Groudon')]());
         jirachiQuestLine.addQuest(fightMetaGroudon1);
 
-        const catchJirachi = new CaptureSpecificPokemonQuest('Jirachi', 'Jirachi has escaped in the chaos. Catch Jirachi.', 1, true);
+        const catchJirachi = new CaptureSpecificPokemonQuest('Jirachi', 'Jirachi has escaped in the chaos and is roaming Hoenn. Catch Jirachi.', 1, true);
         jirachiQuestLine.addQuest(catchJirachi);
 
         App.game.quests.questLines().push(jirachiQuestLine);
