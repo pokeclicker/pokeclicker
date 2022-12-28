@@ -627,6 +627,7 @@ export type PokemonNameType
     | 'Primal Kyogre'
     | 'Groudon'
     | 'Primal Groudon'
+    | 'Meta Groudon'
     | 'Rayquaza'
     | 'Mega Rayquaza'
     | 'Jirachi'

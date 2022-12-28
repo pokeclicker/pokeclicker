@@ -762,6 +762,66 @@ TemporaryBattleList['Wally 2'] = new TemporaryBattle(
             Notifier.notify({message: 'Congratulations on beating Wally at his best! Come back to fight him again at any time.'}),
     }
 );
+TemporaryBattleList['Clown Jessie & James'] = new TemporaryBattle(
+    'Clown Jessie & James',
+    [
+        new GymPokemon('Victreebel', 3006000, 40),
+        new GymPokemon('Weezing', 3006000, 50),
+        new GymPokemon('Seviper', 3006000, 50),
+        new GymPokemon('Dustox', 3006000, 50),
+        new GymPokemon('Meowth', 2000, 5),
+    ],
+    'We\'re blasting off again!!!!',
+    [new QuestLineStepCompletedRequirement('Wish Maker', 0)],
+    undefined,
+    {
+        displayName: 'Jessie & James',
+    }
+);
+TemporaryBattleList['Butler 1'] = new TemporaryBattle(
+    'Butler 1',
+    [
+        new GymPokemon('Kirlia', 3066000, 50),
+        new GymPokemon('Mightyena', 3066000, 50),
+        new GymPokemon('Dusclops', 3066000, 50),
+    ],
+    '<i>Butler managed to load Jirachi into a cage and escaped in his van. He is headed for the Jagged Pass!</i>',
+    [new QuestLineStepCompletedRequirement('Wish Maker', 5)],
+    undefined,
+    {
+        displayName: 'Butler',
+        imageName: '../npcs/Butler',
+    }
+);
+TemporaryBattleList['Butler 2'] = new TemporaryBattle(
+    'Butler 2',
+    [
+        new GymPokemon('Kirlia', 3066000, 50),
+        new GymPokemon('Mightyena', 3066000, 50),
+        new GymPokemon('Dusclops', 3066000, 50),
+        new GymPokemon('Salamence', 4166000, 80),
+    ],
+    '<i>Butler throws the switch on a machine, causing the earth to quake. A huge, ominous shape begins to rise from the ground!</i>',
+    [new QuestLineStepCompletedRequirement('Wish Maker', 6)],
+    undefined,
+    {
+        displayName: 'Butler',
+        imageName: '../npcs/Butler',
+    }
+);
+TemporaryBattleList['Meta Groudon'] = new TemporaryBattle(
+    'Meta Groudon',
+    [new GymPokemon('Meta Groudon', 13800000, 100)],
+    '<i>Meta Groudon lets out a gutteral roar and melts back into the earth!</i>',
+    [new QuestLineStepCompletedRequirement('Wish Maker', 7)],
+    undefined,
+    {
+        displayName: 'Meta Groudon',
+        returnTown: 'Lavaridge Town',
+        imageName: '../pokemon/383.02',
+        hideTrainer: true,
+    }
+);
 TemporaryBattleList['Sevii Rocket Grunt 1'] = new TemporaryBattle(
     'Sevii Rocket Grunt 1',
     [
