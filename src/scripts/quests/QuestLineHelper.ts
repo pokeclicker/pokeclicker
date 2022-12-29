@@ -1426,9 +1426,9 @@ class QuestLineHelper {
             farmAspear,
             farmRazz,
             farmBluk,
-        ],'Gather berries for Dr. Splash'));
+        ],'Gather berries for Dr. Splash.'));
 
-        const talkToDrSplash2 = new TalkToNPCQuest(DrSplash2, 'Report back to Dr. Splash about your berry research');
+        const talkToDrSplash2 = new TalkToNPCQuest(DrSplash2, 'Report back to Dr. Splash about your berry research.');
         drSplashQuestLine.addQuest(talkToDrSplash2);
 
         const sandBag = new GainGemsQuest(5000, 0, PokemonType.Ground);
@@ -1447,7 +1447,7 @@ class QuestLineHelper {
             powerGenerator,
             pokeballSmash,
             frostCruncher,
-        ],'Gather materials for Dr. Splash'));
+        ],'Gather materials for Dr. Splash.'));
 
         const talkToDrSplash3 = new TalkToNPCQuest(DrSplash3, 'Return to Dr. Splash in Hoppy Town with the training materials.');
         drSplashQuestLine.addQuest(talkToDrSplash3);
@@ -1465,12 +1465,12 @@ class QuestLineHelper {
             pushForretress,
             pushGolem,
             pushSteelix,
-        ],'Catch Pokémon for Dr. Splash\'s training grounds'));
+        ],'Catch Pokémon for Dr. Splash\'s training grounds.'));
 
         const talkToDrSplash4 = new TalkToNPCQuest(DrSplash4, 'Return to Dr. Splash in Hoppy Town with the pushable pokèmon.');
         drSplashQuestLine.addQuest(talkToDrSplash4);
 
-        const tackleMachine = new CustomQuest(5000, 0, 'Defeat 5.000 Pokémon', App.game.statistics.totalPokemonDefeated);
+        const tackleMachine = new CustomQuest(5000, 0, 'Defeat 5,000 Pokémon', App.game.statistics.totalPokemonDefeated);
         drSplashQuestLine.addQuest(tackleMachine);
 
         const SaucyBlueReward = () => {
@@ -1480,6 +1480,7 @@ class QuestLineHelper {
                 message: 'Dr. Splash gives you a Saucy Blue Magikarp!',
                 type: NotificationConstants.NotificationOption.success,
                 timeout: 3e4,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
             });
         };
 
