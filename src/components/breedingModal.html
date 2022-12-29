@@ -142,7 +142,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                 <label>Sort</label>
                                 <div class="input-group">
                                     <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])"
-                                        data-bind="foreach: $data.options, attr: {name}, selectedOptions: [$data.observableValue()]">
+                                        data-bind="foreach: $data.options.filter(o => o.value !== SortOptions.level), attr: {name}, selectedOptions: [$data.observableValue()]">
                                         <option data-bind="text: $data.text, value: $data.value"></option>
                                     </select>
                                     <div class="input-group-append bg-primary text-light">
@@ -317,7 +317,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                             <td class="text-left align-middle">Sort:</td>
                                             <td class="text-center align-middle">
                                                 <div class="input-group input-group-sm">
-                                                    <select autocomplete="off" class="custom-select" data-bind="options: GameHelper.enumSelectOption(SortOptions), optionsValue: 'value', optionsText: i => GameConstants.camelCaseToString(i.name), value: $data.sortOption"></select>
+                                                    <select autocomplete="off" class="custom-select" data-bind="options: GameHelper.enumSelectOption(SortOptions).filter(o => o.value !== SortOptions.level), optionsValue: 'value', optionsText: i => SortOptionConfigs[i.value].text, value: $data.sortOption"></select>
                                                     <div class="input-group-append bg-primary text-light">
                                                         <label class="clickable m-0 px-2" style="font-size: 20px;" data-bind="
                                                             attr: {for: 'hatcheryHelperSortDirection' + $index() },
