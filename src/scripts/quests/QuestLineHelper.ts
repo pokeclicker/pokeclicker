@@ -1467,7 +1467,7 @@ class QuestLineHelper {
             pushSteelix,
         ],'Catch Pokémon for Dr. Splash\'s training grounds.'));
 
-        const talkToDrSplash4 = new TalkToNPCQuest(DrSplash4, 'Return to Dr. Splash in Hoppy Town with the pushable pokèmon.');
+        const talkToDrSplash4 = new TalkToNPCQuest(DrSplash4, 'Return to Dr. Splash in Hoppy Town with the pushable Pokémon.');
         drSplashQuestLine.addQuest(talkToDrSplash4);
 
         const tackleMachine = new CustomQuest(5000, 0, 'Defeat 5,000 Pokémon', App.game.statistics.totalPokemonDefeated);
