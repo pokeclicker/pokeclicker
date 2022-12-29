@@ -252,6 +252,11 @@ class MapHelper {
             LogEvent('attack measurement', 'new region',
                 GameConstants.Region[player.highestRegion()],
                 App.game.party.calculatePokemonAttack(undefined, undefined, true, undefined, true, false, WeatherType.Clear));
+            // Update hatchery region filter to include new region if all previous regions selected
+            if (BreedingFilters.region.value() == (2 << player.highestRegion() - 1) - 1) {
+                BreedingFilters.region.value((2 << player.highestRegion()) - 1);
+                Settings.setSettingByName('breedingRegionFilter', BreedingFilters.region.value());
+            }
             $('#pickStarterModal').modal('show');
         }
     }
