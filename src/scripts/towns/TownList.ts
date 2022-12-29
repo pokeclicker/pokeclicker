@@ -4404,7 +4404,7 @@ const MagikarpJumpGemTrade = new GemMasterShop('Trade', [new GymBadgeRequirement
 const MagikarpJumpShadySalesMan = new Shop([
     ItemList['Magikarp Blue Raindrops'],
     ItemList['Magikarp Saucy Violet'],
-], 'Shady Sales Man', [new GymBadgeRequirement(BadgeEnums.Master_League)]);
+], 'Shady Salesman', [new GymBadgeRequirement(BadgeEnums.Master_League)]);
 
 
 //Alola NPCs
@@ -4588,11 +4588,61 @@ const MayorKarp = new NPC('Mayor Karp', [
     'Around these parts, folks love to compete to see whose Magikarp can splash harder and jump higher! No other Pokémon are allowed to compete in these events. So, do your best to raise up some fine Magikarp!',
     'Our island is a special place, home to Magikarp patterns that aren\'t found anywhere else in the world! Collect and raise them all to increase your jump power and take on our league champion!',
 ], {image: 'assets/images/npcs/MayorKarp.png'});
-
 const MagikarpJumpRoamerNPC = new RoamerNPC('Roddy Tackle', [
     'There are some singularly stunning individuals down at {ROUTE_NAME}! Some Magikarp with real personality!',
 ], GameConstants.Region.alola, RoamingPokemonList.findGroup(GameConstants.Region.alola, GameConstants.AlolaSubRegions.MagikarpJump), 'assets/images/npcs/Roddy Tackle.png');
+const HoppyManOfMystery = new NPC('Man of Mystery', [
+    'We have been looking for a Shady Salesman.',
+    'He is trying to sell overpriced Magikarps to clueless children.',
+    'Please keep an <i>eye</i> open for him.',
+],  {image:'assets/images/npcs/Man of Mystery.png'});
 
+const DrSplash1 = new NPC('Dr. Splash', [
+    'Welcome to my laboratory!',
+    'Well... it\'s not much of a laboratory yet. I\'m working on several projects to help Magikarps reach their full potential. Can you help me out?',
+    'The first step in unlocking this potential will be to formulate the perfect diet. Can you gather some berries for me to experiment with?',
+], {
+    image: 'assets/images/npcs/Dr Splash.png',
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('Dr. Splash\'s Research Project'), new QuestLineStepCompletedRequirement('Dr. Splash\'s Research Project', 1, GameConstants.AchievementOption.less)]),
+});
+
+const DrSplash2 = new NPC('Dr. Splash', [
+    'Thank you for the berries! These should be enough for my experiments.',
+    'While you were gone, I was working on optimizing the training regimen for Magikarps. According to my calculations, we are missing a LOT of equipment.',
+    'I\'m going to need some sand for sandbags, springs for a jump counter, wood for a pell post, rocks and ice for smashing, a TON of pokèballs, electricity generation...',
+    'There\'s a lot more, but that should get you started.',
+], {
+    image: 'assets/images/npcs/Dr Splash.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Dr. Splash\'s Research Project', 1), new QuestLineStepCompletedRequirement('Dr. Splash\'s Research Project', 3, GameConstants.AchievementOption.less)]),
+});
+
+const DrSplash3 = new NPC('Dr. Splash', [
+    'Wow, that\'s a lot of stuff! This place is starting to look like a proper lab now!',
+    'I have discovered that a critical part of any Magikarp training program is pushing other pokemon around in a field. This form of exercise rounds out the muscle groups and really boosts performance.',
+    'According to my calculations, the ideal pokemon to push around are Dwebble, Boldore, Forretress, Golem, and Steelix. Can you catch or hatch me some?',
+    'Steer clear of the Alola version of Golem, it\'s electrical fields are too dangerous to use.',
+], {
+    image: 'assets/images/npcs/Dr Splash.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Dr. Splash\'s Research Project', 3), new QuestLineStepCompletedRequirement('Dr. Splash\'s Research Project', 5, GameConstants.AchievementOption.less)]),
+});
+
+const DrSplash4 = new NPC('Dr. Splash', [
+    'These pokèmon are perfect! I\'ll put them out back in the training fields.',
+    'The last piece of equipment needed is a Tackle Machine. I have a prototype here, but it needs to be calibrated.',
+    'Can you take it out for a spin? Defeating a ton of pokèmon should be enough to test it out.',
+], {
+    image: 'assets/images/npcs/Dr Splash.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Dr. Splash\'s Research Project', 5), new QuestLineStepCompletedRequirement('Dr. Splash\'s Research Project', 7, GameConstants.AchievementOption.less)]),
+});
+
+const DrSplash5 = new NPC('Dr. Splash', [
+    'Thank you for all your help!',
+    'Now that the laboratory and training program are up and running, I\'ll be very busy!',
+    'Please take this Magikarp as a thank you! Train them for greatness!',
+], {
+    image: 'assets/images/npcs/Dr Splash.png',
+    requirement: new QuestLineStepCompletedRequirement('Dr. Splash\'s Research Project', 7),
+});
 
 //Alola Towns
 
@@ -4784,10 +4834,10 @@ TownList['Hoppy Town'] = new Town(
     'Hoppy Town',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MagikarpJump,
-    [new DockTownContent(), MagikarpJumpGemTrade],
+    [new DockTownContent(), new BulletinBoard(GameConstants.BulletinBoards.Hoppy), MagikarpJumpGemTrade],
     {
         requirements: [new QuestLineStartedRequirement('Magikarp Jump')],
-        npcs: [MayorKarp, MagikarpJumpRoamerNPC],
+        npcs: [MayorKarp, MagikarpJumpRoamerNPC, HoppyManOfMystery, DrSplash1, DrSplash2, DrSplash3, DrSplash4, DrSplash5],
     }
 );
 TownList['Friend League'] = new Town(

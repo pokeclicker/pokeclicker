@@ -1397,6 +1397,98 @@ class QuestLineHelper {
         App.game.quests.questLines().push(UltraBeastQuestLine);
     }
 
+    // Magikarp Jump
+    public static createDrSplashQuestLine() {
+        const drSplashQuestLine = new QuestLine('Dr. Splash\'s Research Project', 'Help Dr. Splash unlock the full potential of your Magikarps.', new GymBadgeRequirement(BadgeEnums.Great_League), GameConstants.BulletinBoards.Hoppy);
+
+        const talkToDrSplash1 = new TalkToNPCQuest(DrSplash1, 'Talk to Dr. Splash in Hoppy Town.');
+        drSplashQuestLine.addQuest(talkToDrSplash1);
+
+        const farmOran = new HarvestBerriesQuest(129, undefined, BerryType.Oran);
+        const farmSitrus = new HarvestBerriesQuest(129, undefined, BerryType.Sitrus);
+        const farmPecha = new HarvestBerriesQuest(129, undefined, BerryType.Pecha);
+        const farmRindo = new HarvestBerriesQuest(129, undefined, BerryType.Rindo);
+        const farmWacan = new HarvestBerriesQuest(129, undefined, BerryType.Wacan);
+        const farmLeppa = new HarvestBerriesQuest(129, undefined, BerryType.Leppa);
+        const farmRawst = new HarvestBerriesQuest(129, undefined, BerryType.Rawst);
+        const farmAspear = new HarvestBerriesQuest(129, undefined, BerryType.Aspear);
+        const farmRazz = new HarvestBerriesQuest(129, undefined, BerryType.Razz);
+        const farmBluk = new HarvestBerriesQuest(129, undefined, BerryType.Bluk);
+
+        drSplashQuestLine.addQuest(new MultipleQuestsQuest([
+            farmOran,
+            farmSitrus,
+            farmPecha,
+            farmRindo,
+            farmWacan,
+            farmLeppa,
+            farmRawst,
+            farmAspear,
+            farmRazz,
+            farmBluk,
+        ],''));
+
+        const talkToDrSplash2 = new TalkToNPCQuest(DrSplash2, 'Report back to Dr. Spash about your berry research');
+        drSplashQuestLine.addQuest(talkToDrSplash2);
+
+        const sandBag = new GainGemsQuest(5000, 0, PokemonType.Ground);
+        const jumpCounter = new CaptureSpecificPokemonQuest('Spoink', 'Catch 10 Spoink.', 10, true, 0, undefined);
+        const timber = new GainGemsQuest(5000, 0, PokemonType.Grass);
+        const rockCruncher = new GainGemsQuest(5000, 0, PokemonType.Rock);
+        const powerGenerator = new CaptureSpecificPokemonQuest('Voltorb', 'Catch 10 Voltorb.', 10, true, 0, undefined);
+        const pokeballSmash = new BuyPokeballsQuest(100000, 0, GameConstants.Pokeball.Pokeball);
+        const frostCruncher = new GainGemsQuest(5000, 0, PokemonType.Ice);
+
+        drSplashQuestLine.addQuest(new MultipleQuestsQuest([
+            sandBag,
+            jumpCounter,
+            timber,
+            rockCruncher,
+            powerGenerator,
+            pokeballSmash,
+            frostCruncher,
+        ],''));
+
+        const talkToDrSplash3 = new TalkToNPCQuest(DrSplash3, 'Return to Dr. Splash in Hoppy Town with the training materials.');
+        drSplashQuestLine.addQuest(talkToDrSplash3);
+
+
+        const pushDwebble = new CaptureSpecificPokemonQuest('Dwebble', 'Catch 10 Dwebble.', 10, true, 0, undefined);
+        const pushBoldore = new CaptureSpecificPokemonQuest('Boldore', 'Catch 10 Boldore.', 10, true, 0, undefined);
+        const pushForretress = new CaptureSpecificPokemonQuest('Forretress', 'Catch 10 Forretress.', 10, true, 0, undefined);
+        const pushGolem = new CaptureSpecificPokemonQuest('Golem', 'Catch 10 Golem.', 10, true, 0, undefined);
+        const pushSteelix = new CaptureSpecificPokemonQuest('Steelix', 'Catch 10 Steelix.', 10, true, 0, undefined);
+
+        drSplashQuestLine.addQuest(new MultipleQuestsQuest([
+            pushDwebble,
+            pushBoldore,
+            pushForretress,
+            pushGolem,
+            pushSteelix,
+        ],''));
+
+        const talkToDrSplash4 = new TalkToNPCQuest(DrSplash4, 'Return to Dr. Splash in Hoppy Town with the pushable pokèmon.');
+        drSplashQuestLine.addQuest(talkToDrSplash4);
+
+        const tackleMachine = new CustomQuest(5000, 0, 'Defeat 5.000 Pokémon', App.game.statistics.totalPokemonDefeated);
+        drSplashQuestLine.addQuest(tackleMachine);
+
+        const SaucyBlueReward = () => {
+            App.game.party.gainPokemonById(129.29);
+            Notifier.notify({
+                title: drSplashQuestLine.name,
+                message: 'Dr. Splash gives you a Saucy Blue Magikarp!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
+        const talkToDrSplash5 = new TalkToNPCQuest(DrSplash5, 'Wrap up your research project by talking to Dr. Splash in Hoppy Town.', SaucyBlueReward);
+        drSplashQuestLine.addQuest(talkToDrSplash5);
+
+        App.game.quests.questLines().push(drSplashQuestLine);
+
+    }
     public static createMeltanQuestLine() {
         const meltanQuestLine = new QuestLine('Let\'s Go, Meltan!', 'I need your assistance in learning more about the newly discovered Pokémon that has really sent me and other Pokémon researchers into quite a tizzy.', new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion), GameConstants.BulletinBoards.Alola);
 
@@ -2256,6 +2348,7 @@ class QuestLineHelper {
         this.createOriginalColorMagearnaQuestLine();
         this.createFindSurpriseTogepiForEasterQuestLine();
         this.createHoopaDayPikabluQuestLine();
+        this.createDrSplashQuestLine();
         this.createMeltanQuestLine();
         this.createRainbowRocketQuestLine();
     }
