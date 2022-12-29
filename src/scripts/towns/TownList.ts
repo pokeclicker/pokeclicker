@@ -2032,15 +2032,15 @@ const MillenniumFest = new NPC('The Millennium Festival', [
 const Butler1 = new NPC('Butler', [
     'I, the Great Butler, thank you for dealing with Team Rocket!',
     'I have been preparing for the Millennium Festival my whole life, and have big plans for the wish-granting powers it possesses.',
-    'I have found what appears to be a crystalline coccoon that contains Jirachi, the Wish Pokémon! I would be honored if you would take this coccoon as thanks for helping me. Legend has it that Jirachi will appear for a trainer who is pure of heart and grant them a wish!',
-    '<i>Butler gives you a crystalline coccoon containing Jirachi.</i>',
+    'I have found what appears to be a crystalline cocoon that contains Jirachi, the Wish Pokémon! I would be honored if you would take this cocoon as thanks for helping me. Legend has it that Jirachi will appear for a trainer who is pure of heart and grant them a wish!',
+    '<i>Butler gives you a crystalline cocoon containing Jirachi.</i>',
 ], {image: 'assets/images/npcs/Butler.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Wish Maker', 1), new QuestLineStepCompletedRequirement('Wish Maker', 3, GameConstants.AchievementOption.less)]),
 });
 
-const CoccoonHatch = new NPC('Examine the Crystalline Coccoon', [
-    '<i>The coccoon shifts, shimmers, and hatches to reveal Jirachi!</i>',
-], {image: 'assets/images/npcs/other/Coccoon.png',
+const CocoonHatch = new NPC('Examine the Crystalline Cocoon', [
+    '<i>The cocoon shifts, shimmers, and hatches to reveal Jirachi!</i>',
+], {image: 'assets/images/npcs/other/Cocoon.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Wish Maker', 4), new QuestLineStepCompletedRequirement('Wish Maker', 6, GameConstants.AchievementOption.less)]),
 });
 
@@ -2375,7 +2375,7 @@ TownList['Mt. Chimney Crater'] = new DungeonTown(
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Meteor Falls'))],
     [TemporaryBattleList['Butler 1']],
     {
-        npcs: [CoccoonHatch],
+        npcs: [CocoonHatch],
     }
 );
 TownList['Jagged Pass'] = new DungeonTown(

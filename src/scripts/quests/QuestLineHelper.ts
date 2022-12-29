@@ -741,8 +741,8 @@ class QuestLineHelper {
         const catchAbsol = new CaptureSpecificPokemonQuest('Absol', 'You are being stalked by Absol, the Disaster Pokémon. Capture it.', 1, true);
         jirachiQuestLine.addQuest(catchAbsol);
 
-        const coccoonHatch = new TalkToNPCQuest(CoccoonHatch, 'Examine the crystalline coccoon Butler gave you while at the Mt. Chimney Crater.');
-        jirachiQuestLine.addQuest(coccoonHatch);
+        const cocoonHatch = new TalkToNPCQuest(CocoonHatch, 'Examine the crystalline cocoon Butler gave you while at the Mt. Chimney Crater.');
+        jirachiQuestLine.addQuest(cocoonHatch);
 
         const fightButler1 = new CustomQuest(1, 0, 'Butler has followed you to the Mt. Chimney Crater and is trying to kidnap Jirachi!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Butler 1')]());
         jirachiQuestLine.addQuest(fightButler1);

@@ -812,7 +812,7 @@ TemporaryBattleList['Butler 2'] = new TemporaryBattle(
 TemporaryBattleList['Meta Groudon'] = new TemporaryBattle(
     'Meta Groudon',
     [new GymPokemon('Meta Groudon', 13800000, 100)],
-    '<i>Meta Groudon lets out a gutteral roar and melts back into the earth!</i>',
+    '<i>Meta Groudon lets out a guttural roar and melts back into the earth!</i>',
     [new QuestLineStepCompletedRequirement('Wish Maker', 7)],
     undefined,
     {
