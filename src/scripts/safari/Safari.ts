@@ -416,6 +416,8 @@ class Safari {
 
 document.addEventListener('DOMContentLoaded', () => {
     $('#safariModal').on('hide.bs.modal', () => {
+        Safari.inBattle(false);
+        SafariBattle.busy(false);
         MapHelper.moveToTown('Fuchsia City');
     });
 });
