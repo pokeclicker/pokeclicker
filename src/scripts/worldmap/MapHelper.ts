@@ -217,7 +217,7 @@ class MapHelper {
             openModal();
         } else {
             Notifier.notify({
-                message: 'You cannot access this dock yet!\n<i>Progress further to return to previous regions!</i>',
+                message: `You cannot access this dock yet!${player.region > GameConstants.Region.kanto ? '\n<i>Progress further to return to previous regions!</i>' : ''}`,
                 type: NotificationConstants.NotificationOption.warning,
             });
         }
