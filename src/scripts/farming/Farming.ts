@@ -1034,7 +1034,7 @@ class Farming implements Feature {
     addPlotAuras(auraType: AuraType): number {
         return this.plotList
             .filter(p => p.emittingAura.type() === auraType)
-            .reduce((acc, p) => acc + (p.emittingAura.value() ?? 1), 0);
+            .reduce((acc, p) => acc + (p.emittingAura.value() ?? 0), 0);
     }
 
     //#region Plot Unlocking
