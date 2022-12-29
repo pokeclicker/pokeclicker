@@ -178,7 +178,7 @@ class Game {
                     Notifier.notify({
                         type: NotificationConstants.NotificationOption.info,
                         title: 'Dream Orbs',
-                        message: `Gained ${orbsEarned} Dream Orbs while offline:<br /><ul style="margin-bottom: 0;">${messageAppend}</ul>`,
+                        message: `Gained ${orbsEarned} Dream Orbs while offline:<br /><ul class="mb-0">${messageAppend}</ul>`,
                         timeout: 2 * GameConstants.MINUTE,
                         setting: NotificationConstants.NotificationSetting.General.offline_earnings,
                     });
