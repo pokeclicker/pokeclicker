@@ -2747,7 +2747,7 @@ const Arceus1 = new NPC('Arceus', [
     'I shalt take thou to the past of this place. There thou art needed greatly.',
     'Seek out all Pokémon, and thou shalt find my once more.',
 ], {
-    imageName: 'assets/images/pokemon/493',
+    imageName: 'assets/images/pokemon/493.png',
     requirement: new MultiRequirement([new QuestLineStartedRequirement('The Noble Light of Arceus'), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
 });
 const Laventon1 = new NPC('Professor Laventon', [
@@ -2875,7 +2875,7 @@ const AdamanIrida1 = new NPC('Adaman & Irida', [
 ], {
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
 });
-const Akari4 = new NPC('Akari', [
+const Akari5 = new NPC('Akari', [
     '',
 ], {
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
@@ -3504,6 +3504,7 @@ TownList['Turnback Cave'] = new Town(
 TownList['Ancient Hall of Origin'] = new Town(
     'Ancient Hall of Origin',
     GameConstants.Region.sinnoh,
+    GameConstants.SinnohSubRegions.Hisui,
     [TemporaryBattleList.Arceus],
     {
         requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
@@ -3774,7 +3775,7 @@ TownList['Seaside Hollow'] = new DungeonTown(
     GameConstants.SinnohSubRegions.Hisui,
     [
         new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0),
-        new ObtainedPokemonRequirement(pokemonMap.Overqwil),
+        new ObtainedPokemonRequirement('Overqwil'),
     ]
 );
 TownList['Ancient Lake Verity'] = new DungeonTown(

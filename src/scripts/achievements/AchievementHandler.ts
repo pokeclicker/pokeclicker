@@ -433,6 +433,7 @@ class AchievementHandler {
                 }
                 if (region == GameConstants.Region.alola && route.subRegion == GameConstants.AlolaSubRegions.MagikarpJump) {
                     category = GameConstants.ExtraAchievementCategories.magikarpJump;
+                }
                 if (region == GameConstants.Region.sinnoh && (route.subRegion == GameConstants.SinnohSubRegions.Hisui)) {
                     category = GameConstants.ExtraAchievementCategories.hisui;
                 }

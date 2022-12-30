@@ -4298,7 +4298,7 @@ TemporaryBattleList['Dialga (Origin) 2'] = new TemporaryBattle(
     [new GymPokemon('Dialga (Origin)', 2031393560, 65)],
     undefined,
     [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
-    [new ObtainedPokemonRequirement(pokemonMap['Dialga (Origin)'])],
+    [new ObtainedPokemonRequirement('Dialga (Origin)')],
     {
         isTrainerBattle: false,
         displayName: 'Dialga - Origin Form',
@@ -4311,7 +4311,7 @@ TemporaryBattleList['Palkia (Origin) 2'] = new TemporaryBattle(
     [new GymPokemon('Palkia (Origin)', 2031393560, 65)],
     undefined,
     [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
-    [new ObtainedPokemonRequirement(pokemonMap['Palkia (Origin)'])],
+    [new ObtainedPokemonRequirement('Palkia (Origin)')],
     {
         isTrainerBattle: false,
         displayName: 'Palkia (Origin)',
@@ -4356,7 +4356,7 @@ TemporaryBattleList['Giratina (Origin)'] = new TemporaryBattle(
     [new GymPokemon('Giratina (Origin)', 2031393560, 70)],
     undefined,
     [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
-    [new ObtainedPokemonRequirement(pokemonMap['Giratina (Origin)'])],
+    [new ObtainedPokemonRequirement('Giratina (Origin)')],
     {
         isTrainerBattle: false,
         imageName: '../pokemon/487.1',
@@ -4368,7 +4368,7 @@ TemporaryBattleList.Tornadus = new TemporaryBattle(
     [new GymPokemon('Tornadus', 2031393560, 70)],
     undefined,
     [new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 0)],
-    [new ObtainedPokemonRequirement(pokemonMap.Tornadus), new TemporaryBattleRequirement('Tornadus')],
+    [new ObtainedPokemonRequirement('Tornadus'), new TemporaryBattleRequirement('Tornadus')],
     {
         isTrainerBattle: false,
         hideTrainer: true,
@@ -4380,7 +4380,7 @@ TemporaryBattleList.Thundurus = new TemporaryBattle(
     [new GymPokemon('Thundurus', 2031393560, 70)],
     undefined,
     [new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 0)],
-    [new ObtainedPokemonRequirement(pokemonMap.Thundurus), new TemporaryBattleRequirement('Thundurus')],
+    [new ObtainedPokemonRequirement('Thundurus'), new TemporaryBattleRequirement('Thundurus')],
     {
         isTrainerBattle: false,
         hideTrainer: true,
@@ -4392,7 +4392,7 @@ TemporaryBattleList.Landorus = new TemporaryBattle(
     [new GymPokemon('Landorus', 2031393560, 70)],
     undefined,
     [new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 0)],
-    [new ObtainedPokemonRequirement(pokemonMap.Landorus), new TemporaryBattleRequirement('Landorus')],
+    [new ObtainedPokemonRequirement('Landorus'), new TemporaryBattleRequirement('Landorus')],
     {
         isTrainerBattle: false,
         hideTrainer: true,
