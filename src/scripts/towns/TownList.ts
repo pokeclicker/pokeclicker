@@ -726,6 +726,7 @@ TownList['Route 3 Pokémon Center'] = new Town(
             new RouteKillRequirement(10, GameConstants.Region.kanto, 3),
         ],
         npcs: [Route3ShadySalesman],
+        ignoreAreaStatus: true,
     }
 );
 TownList['Cerulean City'] = new Town(
@@ -1301,7 +1302,7 @@ const VioletPrimo = new NPC('Primo', [
     'Your Item Bag has a bunch of nifty features! Take stuff in the Held Items pocket, for instance. You can use a Held Item to empower your Pokémon or acquire unique effects. How do you use it? Well, here’s how it works.',
     'Once you have obtained a Held Item, visit your Item Bag. They are most often found in Dungeons, but some, like the Wonder Chest, are for sale!',
     'From there, go into your Held Items pocket and once an item is selected, you can use it by choosing from the list of available Pokémon to hold it.',
-    'Choose who you select carefully! Only one of a particular item can be held at a time and once you remove a Held Item from your Pokémon, the item will break!',
+    'Choose who you select carefully! Once you remove a Held Item from your Pokémon, the item will break!',
     'All righty, be seeing you!',
 ]);
 
@@ -4936,7 +4937,8 @@ TownList['Magikarp\'s Eye'] = new Town(
     GameConstants.AlolaSubRegions.MagikarpJump,
     [MagikarpJumpShadySalesMan],
     {
-        requirements: [new DevelopmentRequirement()], //TODO: Should unlock as the subregion unlocks
+        requirements: [new GymBadgeRequirement(BadgeEnums.Master_League)],
+        ignoreAreaStatus: true,
     }
 );
 

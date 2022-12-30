@@ -129,6 +129,10 @@ class MapHelper {
     }
 
     public static calculateTownCssClass(townName: string): string {
+        // We don't want to spoil easter eggs with map colors
+        if (TownList[townName]?.ignoreAreaStatus) {
+            return '';
+        }
         // Check if this location is locked
         if (!MapHelper.accessToTown(townName)) {
             return areaStatus[areaStatus.locked];
@@ -217,7 +221,7 @@ class MapHelper {
             openModal();
         } else {
             Notifier.notify({
-                message: 'You cannot access this dock yet!\n<i>Progress further to return to previous regions!</i>',
+                message: `You cannot access this dock yet!${player.region > GameConstants.Region.kanto ? '\n<i>Progress further to return to previous regions!</i>' : ''}`,
                 type: NotificationConstants.NotificationOption.warning,
             });
         }

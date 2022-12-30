@@ -1661,7 +1661,7 @@ class QuestLineHelper {
     }
 
     public static createMagikarpJumpQuestLine() {
-        const magikarpJumpQuestLine = new QuestLine('Magikarp Jump', 'Go to Hoppy Town and share their love for Magikarp.', new MultiRequirement([new DevelopmentRequirement(), new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)]), GameConstants.BulletinBoards.Alola);
+        const magikarpJumpQuestLine = new QuestLine('Magikarp Jump', 'Go to Hoppy Town and share their love for Magikarp.', new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion), GameConstants.BulletinBoards.Alola);
 
         const talkToMayor = new TalkToNPCQuest(MayorKarp, 'Use the subregion travel to talk to Mayor Karp in Hoppy Town.');
         magikarpJumpQuestLine.addQuest(talkToMayor);

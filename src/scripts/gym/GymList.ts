@@ -1625,7 +1625,8 @@ GymList['Heavy League'] = new Gym(
             });
             App.game.party.gainPokemonById(pokemonMap['Magikarp Orange Two-Tone'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         }
-    }
+    },
+    undefined, 'Kareign\'s Heavy League Gym'
 );
 
 GymList['Great League'] = new Gym(
@@ -1657,7 +1658,7 @@ GymList['Fast League'] = new Gym(
             App.game.party.gainPokemonById(pokemonMap['Magikarp Pink Dapples'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         }
     },
-    undefined, 'Kareign'
+    undefined, 'Kareign\'s Fast League Gym'
 );
 
 GymList['Luxury League'] = new Gym(
@@ -1678,7 +1679,8 @@ GymList['Luxury League'] = new Gym(
             });
             App.game.party.gainPokemonById(pokemonMap['Magikarp Pink Orca'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         }
-    }
+    },
+    undefined, 'Jump Champ\'s Luxury League Gym'
 );
 
 GymList['Heal League'] = new Gym(
@@ -1720,7 +1722,8 @@ GymList['Ultra League'] = new Gym(
             });
             App.game.party.gainPokemonById(pokemonMap['Magikarp Brown Tiger'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         }
-    }
+    },
+    undefined, 'Jump Champ\'s Ultra League Gym'
 );
 
 GymList['E4 League'] = new Gym(
@@ -1741,7 +1744,8 @@ GymList['E4 League'] = new Gym(
             });
             App.game.party.gainPokemonById(pokemonMap['Magikarp Orange Forehead'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         }
-    }
+    },
+    undefined, 'Jump Champ\'s Elite League Gym'
 );
 
 GymList['Master League'] = new Gym(
