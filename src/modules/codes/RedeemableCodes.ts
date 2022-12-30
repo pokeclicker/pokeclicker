@@ -46,7 +46,7 @@ export default class RedeemableCodes implements Saveable {
             }),
             new RedeemableCode('great-balls', -1761161712, false, () => {
                 // Give the player 10 Great Balls
-                App.game.pokeballs.gainPokeballs(Pokeball.Greatball, 100000);
+                App.game.pokeballs.gainPokeballs(Pokeball.Greatball, 10);
                 // Notify that the code was activated successfully
                 Notifier.notify({
                     title: 'Code activated!',
