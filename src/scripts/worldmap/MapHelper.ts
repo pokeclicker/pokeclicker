@@ -129,6 +129,10 @@ class MapHelper {
     }
 
     public static calculateTownCssClass(townName: string): string {
+        // We don't want to spoil easter eggs with map colors
+        if (TownList[townName]?.ignoreAreaStatus) {
+            return '';
+        }
         // Check if this location is locked
         if (!MapHelper.accessToTown(townName)) {
             return areaStatus[areaStatus.locked];
@@ -217,7 +221,7 @@ class MapHelper {
             openModal();
         } else {
             Notifier.notify({
-                message: 'You cannot access this dock yet!\n<i>Progress further to return to previous regions!</i>',
+                message: `You cannot access this dock yet!${player.region > GameConstants.Region.kanto ? '\n<i>Progress further to return to previous regions!</i>' : ''}`,
                 type: NotificationConstants.NotificationOption.warning,
             });
         }
@@ -252,6 +256,11 @@ class MapHelper {
             LogEvent('attack measurement', 'new region',
                 GameConstants.Region[player.highestRegion()],
                 App.game.party.calculatePokemonAttack(undefined, undefined, true, undefined, true, false, WeatherType.Clear));
+            // Update hatchery region filter to include new region if all previous regions selected
+            if (BreedingFilters.region.value() == (2 << player.highestRegion() - 1) - 1) {
+                BreedingFilters.region.value((2 << player.highestRegion()) - 1);
+                Settings.setSettingByName('breedingRegionFilter', BreedingFilters.region.value());
+            }
             $('#pickStarterModal').modal('show');
         }
     }

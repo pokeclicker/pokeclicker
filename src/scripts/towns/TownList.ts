@@ -726,6 +726,7 @@ TownList['Route 3 Pokémon Center'] = new Town(
             new RouteKillRequirement(10, GameConstants.Region.kanto, 3),
         ],
         npcs: [Route3ShadySalesman],
+        ignoreAreaStatus: true,
     }
 );
 TownList['Cerulean City'] = new Town(
@@ -4936,7 +4937,8 @@ TownList['Magikarp\'s Eye'] = new Town(
     GameConstants.AlolaSubRegions.MagikarpJump,
     [MagikarpJumpShadySalesMan],
     {
-        requirements: [new DevelopmentRequirement()], //TODO: Should unlock as the subregion unlocks
+        requirements: [new GymBadgeRequirement(BadgeEnums.Master_League)],
+        ignoreAreaStatus: true,
     }
 );
 
