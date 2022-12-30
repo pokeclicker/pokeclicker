@@ -153,17 +153,25 @@ SpecialEvents.newEvent('Let\'s GO!', 'Encounter special Eevee and Pikachu roamin
 SpecialEvents.newEvent('Merry Christmas!', 'Encounter Santa Snorlax roaming the regions and discover the Grinch of Ilex Forest.',
     // Start
     new Date(new Date().getFullYear(), 11, 24, 1), () => {
-        // Add to every region excluding None
-        GameHelper.enumNumbers(GameConstants.Region).filter(i => i != GameConstants.Region.none).forEach(region => {
-            RoamingPokemonList.add(region, 0, new RoamingPokemon('Santa Snorlax'));
+        // Add to every roaming group that has at least one roamer
+        RoamingPokemonList.roamerGroups.forEach((regionGroups, region) => {
+            regionGroups.forEach((_, subRegionGroup) => {
+                if (RoamingPokemonList.list[region][subRegionGroup]?.length) {
+                    RoamingPokemonList.add(region, subRegionGroup, new RoamingPokemon('Santa Snorlax'));
+                }
+            });
         });
         dungeonList['Ilex Forest'].bossList.push(new DungeonBossPokemon('Grinch Celebi', 1600000, 100, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion)}));
     },
     // End
     new Date(new Date().getFullYear(), 11, 30, 23), () => {
-        // Remove from every region excluding None
-        GameHelper.enumNumbers(GameConstants.Region).filter(i => i != GameConstants.Region.none).forEach(region => {
-            RoamingPokemonList.remove(region, 0, 'Santa Snorlax');
+        // Remove from every roaming group
+        RoamingPokemonList.roamerGroups.forEach((regionGroups, region) => {
+            regionGroups.forEach((_, subRegionGroup) => {
+                if (RoamingPokemonList.list[region][subRegionGroup]) {
+                    RoamingPokemonList.remove(region, subRegionGroup, 'Santa Snorlax');
+                }
+            });
         });
         dungeonList['Ilex Forest'].bossList = dungeonList['Ilex Forest'].bossList.filter(boss => boss.name != 'Grinch Celebi');
     }
