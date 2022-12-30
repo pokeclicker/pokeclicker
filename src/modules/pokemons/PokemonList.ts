@@ -6805,7 +6805,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 230,
         'eggCycles': 20,
-        'evolutions': [MegaEvolution('Ampharos', 'Mega Ampharos')],
+        // 'evolutions': [MegaEvolution('Ampharos', 'Mega Ampharos')],
         'base': {
             'hitpoints': 90,
             'attack': 75,
