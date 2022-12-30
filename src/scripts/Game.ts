@@ -110,6 +110,7 @@ class Game {
         Weather.generateWeather(now);
         GemDeal.generateDeals();
         ShardDeal.generateDeals();
+        SafariPokemonList.generateSafariLists();
         RoamingPokemonList.generateIncreasedChanceRoutes(now);
 
         if (Settings.getSetting('disableOfflineProgress').value === false) {
@@ -167,13 +168,17 @@ class Game {
                 const orbsUnlocked = App.game.dreamOrbController.orbs.filter((o) => !o.requirement || o.requirement.isCompleted());
                 const orbsEarned = Math.floor(timeDiffOverride / 3600);
                 if (orbsEarned > 0) {
+                    const orbAmounts = Object.fromEntries(orbsUnlocked.map(o => [o.color, 0]));
                     for (let i = 0; i < orbsEarned; i++) {
-                        GameHelper.incrementObservable(Rand.fromArray(orbsUnlocked).amount);
+                        const orb = Rand.fromArray(orbsUnlocked);
+                        GameHelper.incrementObservable(orb.amount);
+                        orbAmounts[orb.color]++;
                     }
+                    const messageAppend = Object.keys(orbAmounts).map(key => `<li>${orbAmounts[key]} ${key}</li>`).join('');
                     Notifier.notify({
                         type: NotificationConstants.NotificationOption.info,
                         title: 'Dream Orbs',
-                        message: `Gained ${orbsEarned} Dream Orbs while offline.`,
+                        message: `Gained ${orbsEarned} Dream Orbs while offline:<br /><ul class="mb-0">${messageAppend}</ul>`,
                         timeout: 2 * GameConstants.MINUTE,
                         setting: NotificationConstants.NotificationSetting.General.offline_earnings,
                     });
@@ -332,12 +337,16 @@ class Game {
             // use a setTimeout to queue the event
             this.worker?.addEventListener('message', () => Settings.getSetting('useWebWorkerForGameTicks').value ? this.gameTick() : null);
 
-            // Let our worker know if the page is visible or not
             document.addEventListener('visibilitychange', () => {
+                // Let our worker know if the page is visible or not
                 if (pageHidden != document.hidden) {
                     pageHidden = document.hidden;
                     this.worker.postMessage({'pageHidden': pageHidden});
                 }
+
+                // Save resources by not displaying updates if game is not currently visible
+                const gameEl = document.getElementById('game');
+                document.hidden ? gameEl.classList.add('hidden') : gameEl.classList.remove('hidden');
             });
             this.worker.postMessage({'pageHidden': pageHidden});
             if (this.worker) {

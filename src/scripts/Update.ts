@@ -1562,8 +1562,9 @@ class Update implements Saveable {
         },
 
         '0.10.5': ({ playerData, saveData, settingsData }) => {
+            // Red temporary battle
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 28);
             // Magikarp Jump Temp Battles
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 159);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 160);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 161);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 162);
@@ -1584,6 +1585,7 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 177);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 178);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 179);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 180);
 
             // Rotate form IDs
             const formIDs = [
@@ -1874,6 +1876,24 @@ class Update implements Saveable {
                     saveData.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('The Darkest Day')] = 0;
                 }
             }
+            // Suicune Quest autostart for players too far in Legendary Beasts quest
+            const johtoBeastsQuestLine = saveData.quests.questLines.find((q) => q.name == 'The Legendary Beasts');
+            const johtoSuicuneQuestLine = saveData.quests.questLines.find((q) => q.name == 'Eusine\'s Chase');
+            if (johtoBeastsQuestLine?.state == 2 || (johtoBeastsQuestLine?.state == 1 && johtoBeastsQuestLine?.quest >= 4)) {
+                if (!johtoSuicuneQuestLine) {
+                // add to array
+                    saveData.quests.questLines.push({
+                        state: 1,
+                        name: 'Eusine\'s Chase',
+                        quest: 0,
+                    });
+                } else if (johtoSuicuneQuestLine.state == 0) {
+                // activate quest
+                    johtoSuicuneQuestLine.state = 1;
+                }
+            }
+            //Red Gyarados
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 22);
         },
     };
 
@@ -1931,6 +1951,7 @@ class Update implements Saveable {
     getBackupButton(): [HTMLElement, string] {
         const playerData = this.getPlayerData();
         const saveData = this.getSaveData();
+        const settingsData = this.getSettingsData();
 
         // Save the data by stringifying it, so that it isn't mutated during update
         const backupSaveData = JSON.stringify({ player: playerData, save: saveData });
@@ -1940,7 +1961,9 @@ class Update implements Saveable {
             button.href = `data:text/plain;charset=utf-8,${encodeURIComponent(btoa(backupSaveData))}`;
             button.className = 'btn btn-block btn-warning';
             button.innerText = 'Click to Backup Save!';
-            button.setAttribute('download', `[v${this.saveVersion}] Poke Clicker Backup Save.txt`);
+            const filename = settingsData.saveFilename ? decodeURI(settingsData.saveFilename) : Settings.getSetting('saveFilename').defaultValue;
+            const datestr = GameConstants.formatDate(new Date());
+            button.setAttribute('download', GameHelper.saveFileName(filename, {'{date}' : datestr, '{version}' : this.saveVersion, '{name}' : decodeURI(saveData.profile.name)}, true));
         } catch (e) {
             console.error('Failed to create backup button data:', e);
         }

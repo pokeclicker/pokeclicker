@@ -215,6 +215,12 @@
                                     <span id="animateCurrency-battlePoint" data-bind="text: Settings.getSetting('currencyMainDisplayReduced').observableValue() ? GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.battlePoint]()) : App.game.wallet.currencies[GameConstants.Currency.battlePoint]().toLocaleString('en-US')">0</span>
                                 </span>
                             </td>
+                            <!--<td class="col">
+                                <span style="display: inline; position: relative;">
+                                    <img title="Contest Tokens&#013;&#010;Gained by competing in Contests" src="assets/images/currency/contestToken.svg" height="25px">
+                                    <span id="animateCurrency-contestToken" data-bind="text: Settings.getSetting('currencyMainDisplayReduced').observableValue() ? GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.contestToken]()) : App.game.wallet.currencies[GameConstants.Currency.contestToken]().toLocaleString('en-US')">0</span>
+                                </span>
+                            </td> -->
                         </tr>
                     </table>
                 </div>
@@ -408,6 +414,12 @@
                         </div>
                         <div class='col-2'>
                             <span class='float-right px-4 bg-missingAchievement'>&nbsp;</span>
+                        </div>
+                        <div class='col-10 legend-item'>
+                            <span>Missing Resistant:</span>
+                        </div>
+                        <div class='col-2'>
+                            <span class='float-right px-4 bg-missingResistant'>&nbsp;</span>
                         </div>
                         <div class='col-10 legend-item'>
                             <span>Completed:</span>

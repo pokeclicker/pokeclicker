@@ -111,5 +111,6 @@ BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(575, 'Prot
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(600, 'Reaper_cloth', 15, new MaxRegionRequirement(GameConstants.Region.sinnoh)));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(660, 'Sachet', 15, new MaxRegionRequirement(GameConstants.Region.kalos)));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(670, 'Whipped_dream', 15, new MaxRegionRequirement(GameConstants.Region.kalos)));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(690, 'Lopunnite', 1, new MultiRequirement([new MaxRegionRequirement(GameConstants.Region.kalos), new ObtainedPokemonRequirement('Lopunny')])));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(700, 'Ice_stone', 40, new MaxRegionRequirement(GameConstants.Region.alola)));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(1000, 'Masterball', 10));
