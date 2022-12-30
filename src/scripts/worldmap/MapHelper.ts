@@ -129,6 +129,10 @@ class MapHelper {
     }
 
     public static calculateTownCssClass(townName: string): string {
+        // We don't want to spoil easter eggs with map colors
+        if (TownList[townName]?.ignoreAreaStatus) {
+            return '';
+        }
         // Check if this location is locked
         if (!MapHelper.accessToTown(townName)) {
             return areaStatus[areaStatus.locked];
