@@ -2750,6 +2750,291 @@ const Arceus1 = new NPC('Arceus', [
     imageName: 'assets/images/pokemon/493',
     requirement: new MultiRequirement([new QuestLineStartedRequirement('The Noble Light of Arceus'), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
 });
+const Laventon1 = new NPC('Professor Laventon', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const ArcPhone = new NPC('Arc Phone', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const Laventon2 = new NPC('Professor Laventon', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const Laventon3 = new NPC('Professor Laventon', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const Laventon4 = new NPC('Professor Laventon', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const Beni1 = new NPC('Beni', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const Akari1 = new NPC('Akari', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const Cyllene1 = new NPC('Captain Cyllene', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const Laventon5 = new NPC('Professor Laventon', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const Cyllene2 = new NPC('Captain Cyllene', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const Cyllene3 = new NPC('Captain Cyllene', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const Laventon6 = new NPC('Professor Laventon', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const Volo1 = new NPC('Volo', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const Akari2 = new NPC('Akari', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const Laventon7 = new NPC('Professor Laventon', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const Cyllene4 = new NPC('Captain Cyllene', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const Kamado1 = new NPC('Commander Kamado', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const Akari3 = new NPC('Akari', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const Akari4 = new NPC('Akari', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const Mai1 = new NPC('Warden Mai', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const Mai2 = new NPC('Warden Mai', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const Mai3 = new NPC('Warden Mai', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const Mai4 = new NPC('Warden Mai', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const Beni2 = new NPC('Beni', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const AdamanIrida1 = new NPC('Adaman & Irida', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const Akari4 = new NPC('Akari', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const AdamanIridaKamado1 = new NPC('Adaman, Irida & Kamado', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const LaventonCyllene1 = new NPC('Laventon & Cyllene', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const AdamanMai1 = new NPC('Adaman & Mai', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const Lian1 = new NPC('Warden Lian', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const LianIrida1 = new NPC('Lian & Irida', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const Laventon8 = new NPC('Professor Laventon', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const Laventon9 = new NPC('Professor Laventon', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const Mai5 = new NPC('Warden Mai', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const AdamanMai2 = new NPC('Adaman & Mai', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const LianIrida2 = new NPC('Lian & Irida', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const LianIrida3 = new NPC('Lian & Irida', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const LianIrida4 = new NPC('Lian & Irida', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const Volo2 = new NPC('Volo', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const Kamado2 = new NPC('Commander Kamado', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const Arezu1 = new NPC('Warden Arezu', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const KamadoArezu1 = new NPC('Kamado & Arezu', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const Cyllene5 = new NPC('Captain Cyllene', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const Akari6 = new NPC('Akari', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const LaventonAkari1 = new NPC('Laventon & Akari', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const Calaba1 = new NPC('Warden Calaba', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const Volo3 = new NPC('Volo', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const Volo4 = new NPC('Volo', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const CharmCloverCoin1 = new NPC('Charm, Clover & Coin', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const CharmCloverCoin2 = new NPC('Charm, Clover & Coin', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const Volo5 = new NPC('Volo', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const Calaba2 = new NPC('Warden Calaba', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const Calaba3 = new NPC('Warden Calaba', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const Calaba4 = new NPC('Warden Calaba', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const BeniAdamanKamado1 = new NPC('Beni, Adaman & Kamado', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const ArezuCalabaAdaman1 = new NPC('Arezu, Calaba & Adaman', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
+const ArezuCalabaAdaman2 = new NPC('Arezu, Calaba & Adaman', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+});
 
 
 //Sinnoh Towns
