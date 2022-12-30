@@ -174,7 +174,7 @@ class Game {
                         GameHelper.incrementObservable(orb.amount);
                         orbAmounts[orb.color]++;
                     }
-                    const messageAppend = Object.keys(orbAmounts).map(key => `<li>${orbAmounts[key]} ${key}</li>`).join('');
+                    const messageAppend = Object.keys(orbAmounts).filter(key => orbAmounts[key] > 0).map(key => `<li>${orbAmounts[key]} ${key}</li>`).join('');
                     Notifier.notify({
                         type: NotificationConstants.NotificationOption.info,
                         title: 'Dream Orbs',
