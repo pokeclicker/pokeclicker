@@ -1,4 +1,4 @@
-import { Currency, Region, VitaminType } from '../GameConstants';
+import { Currency, VitaminType } from '../GameConstants';
 import GameHelper from '../GameHelper';
 import Item from './Item';
 import { ShopOptions } from './types';
@@ -6,7 +6,7 @@ import { ShopOptions } from './types';
 export default class Vitamin extends Item {
     type: VitaminType;
 
-    constructor(type: VitaminType, basePrice: number, currency: Currency = Currency.money, options?: ShopOptions, displayName?: string, description?: string, private regionRequired = Region.kanto) {
+    constructor(type: VitaminType, basePrice: number, currency: Currency = Currency.money, options?: ShopOptions, displayName?: string, description?: string) {
         super(VitaminType[type], basePrice, currency, options, displayName, description);
         this.type = type;
     }
