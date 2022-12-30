@@ -127,10 +127,10 @@ UndergroundItems.addItem(new UndergroundItem('Yellow Shard', 401, [[1, 0, 1, 0],
 UndergroundItems.addItem(new UndergroundItem('Green Shard', 402, [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 0, 1]], 0, UndergroundItemValueType.Shard));
 UndergroundItems.addItem(new UndergroundItem('Blue Shard', 403, [[1, 1, 1], [1, 1, 1], [1, 1, 0]], 0, UndergroundItemValueType.Shard));
 UndergroundItems.addItem(new UndergroundItem('Grey Shard', 404, [[1, 1, 1], [1, 1, 1], [0, 0, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.johto)));
-UndergroundItems.addItem(new UndergroundItem('Purple Shard', 405, [[1, 1, 1], [1, 1, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.johto)));
-UndergroundItems.addItem(new UndergroundItem('Ochre Shard', 406, [[1, 1, 0], [1, 1, 1], [1, 1, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.hoenn)));
+UndergroundItems.addItem(new UndergroundItem('Purple Shard', 405, [[1, 1, 1, 1], [1, 1, 1, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.johto)));
+UndergroundItems.addItem(new UndergroundItem('Ochre Shard', 406, [[1, 1, 0, 0], [1, 1, 1, 0], [1, 1, 1, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.hoenn)));
 UndergroundItems.addItem(new UndergroundItem('Black Shard', 407, [[1, 1, 1], [0, 1, 1], [0, 1, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.sinnoh)));
-UndergroundItems.addItem(new UndergroundItem('Crimson Shard', 408, [[0, 1, 1, 1], [0, 1, 1, 1], [0, 1, 1, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.sinnoh)));
+UndergroundItems.addItem(new UndergroundItem('Crimson Shard', 408, [[1, 1, 1], [1, 1, 1], [1, 1, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.sinnoh)));
 UndergroundItems.addItem(new UndergroundItem('Lime Shard', 409, [[0, 0, 0, 0], [0, 1, 1, 1], [1, 1, 1, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.sinnoh)));
 UndergroundItems.addItem(new UndergroundItem('White Shard', 410, [[1, 1, 1, 1], [0, 1, 1, 1], [0, 1, 1, 0]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.sinnoh)));
 UndergroundItems.addItem(new UndergroundItem('Pink Shard', 411, [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.kalos)));
