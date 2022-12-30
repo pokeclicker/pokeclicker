@@ -9,10 +9,18 @@ class DreamOrb {
     }
 }
 
+class DreamOrbOpenResult {
+    public amountOpened = ko.observable(0);
+    public items = ko.observableArray();
+    constructor() {}
+}
+
 class DreamOrbController implements Saveable {
     public selectedOrb: KnockoutObservable<DreamOrb>;
     public opening: KnockoutObservable<boolean>;
     public item: KnockoutObservable<DreamOrbLoot>;
+    public amountSelected: KnockoutObservable<number> = ko.observable(1);
+    public readonly openResult = new DreamOrbOpenResult();
 
     constructor() {
         this.selectedOrb = ko.observable(this.orbs[0]);
@@ -76,17 +84,32 @@ class DreamOrbController implements Saveable {
             });
             return;
         }
+        const amountToOpen = Math.min(this.amountSelected(), selectedOrb.amount());
         this.opening(true);
         this.item(undefined);
         Notifier.notify({
             sound: NotificationConstants.NotificationSound.General.dream_orb,
         });
         setTimeout(() => {
-            const item = Rand.fromWeightedArray(selectedOrb.items, selectedOrb.items.map((i) => i.weight));
-            this.item(item);
+            const itemWeights = selectedOrb.items.map((i) => i.weight);
+            const items = {};
+            for (let i = 0; i < amountToOpen; i++) {
+                const orbLoot = Rand.fromWeightedArray(selectedOrb.items, itemWeights);
+                GameHelper.incrementObservable(selectedOrb.amount, -1);
+                BagHandler.gainItem(orbLoot.item);
+                items[orbLoot.item.id] ?
+                    items[orbLoot.item.id].amount++ :
+                    items[orbLoot.item.id] = { item: orbLoot.item, amount: 1 };
+                if (i + 1 >= amountToOpen) {
+                    this.item(orbLoot);
+                }
+            }
             this.opening(false);
-            GameHelper.incrementObservable(selectedOrb.amount, -1);
-            BagHandler.gainItem(item.item);
+            if (amountToOpen > 1) {
+                this.openResult.amountOpened(amountToOpen);
+                this.openResult.items(Object.keys(items).map((key) => ({ name: key, ...items[key] })));
+                $('#dreamOrbsOpenedModal').modal('show');
+            }
         }, 1800);
     }
 
