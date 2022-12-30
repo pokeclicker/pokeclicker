@@ -431,7 +431,7 @@ TemporaryBattleList['Suicune 3'] = new TemporaryBattle(
     'Suicune 3',
     [new GymPokemon('Suicune', 3269100, 40)],
     '<i>Suicune fled.</i>',
-    [new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion)],
+    [new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion), new QuestLineStepCompletedRequirement('Eusine\'s Chase', 4)],
     undefined,
     {
         displayName: 'Suicune',
@@ -2337,7 +2337,7 @@ TemporaryBattleList['Ultra Megalopolis'] = new TemporaryBattle(
     'Ultra Megalopolis',
     [new GymPokemon('Ultra Necrozma', 536098161, 60)],
     '<i>Necrozma fled.</i>',
-    [new GymBadgeRequirement(BadgeEnums.DarkiniumZ)],
+    [new TemporaryBattleRequirement('Necrozma')],
     undefined,
     {
         firstTimeRewardFunction: () => {
