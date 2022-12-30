@@ -236,7 +236,7 @@ class Dungeon {
     }
 
     public getRandomLoot(tier: LootTier, onlyDebuffable = false): Loot {
-        const lootTable = this.lootTable[tier].filter((loot) => ((!loot.requirement || loot.requirement.isCompleted()) && (!ItemList[loot.loot] || ItemList[loot.loot].isAvailable())) && !(onlyDebuffable && loot.ignoreDebuff));
+        const lootTable = this.lootTable[tier].filter((loot) => ((!loot.requirement || loot.requirement.isCompleted()) && (!ItemList[loot.loot] || (ItemList[loot.loot].isAvailable() && !ItemList[loot.loot].isSoldOut()))) && !(onlyDebuffable && loot.ignoreDebuff));
         return Rand.fromWeightedArray(lootTable, lootTable.map((loot) => loot.weight ?? 1));
     }
 
