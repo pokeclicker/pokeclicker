@@ -34,6 +34,7 @@ class SafariBattle {
 
             $('#safariBattleModal .enemy').css('transition-duration', `${0.75 * SafariBattle.Speed.enemyTransition}ms`);
             SafariBattle.text('You throw a ball...');
+            GameHelper.incrementObservable(App.game.statistics.safariBallsThrown, 1);
             const enemyImg = $('#safariBattleModal .enemy').offset();
             enemyImg.left += 36;
             enemyImg.top += 16;
@@ -165,6 +166,7 @@ class SafariBattle {
                 return;
             }
             SafariBattle.text(`You throw ${bait.useName} at ${SafariBattle.enemy.displayName}`);
+            GameHelper.incrementObservable(App.game.statistics.safariBaitThrown, 1);
             bait.use(SafariBattle.enemy);
             const enemy = $('#safariBattleModal .enemy').offset();
             enemy.left += 30;
@@ -178,6 +180,7 @@ class SafariBattle {
         if (!SafariBattle.busy()) {
             SafariBattle.busy(true);
             SafariBattle.text(`You throw a rock at ${SafariBattle.enemy.displayName}`);
+            GameHelper.incrementObservable(App.game.statistics.safariRocksThrown, 1);
             SafariBattle.enemy.angry = Math.max(SafariBattle.enemy.angry, Rand.intBetween(2, 6));
             SafariBattle.enemy.eating = 0;
             const enemy = $('#safariBattleModal .enemy').offset();
