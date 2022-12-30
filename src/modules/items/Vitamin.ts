@@ -23,10 +23,6 @@ export default class Vitamin extends Item {
         return true;
     }
 
-    isAvailable(): boolean {
-        return player.highestRegion() >= this.regionRequired;
-    }
-
     get image() {
         return `assets/images/items/vitamin/${this.displayName}.png`;
     }
