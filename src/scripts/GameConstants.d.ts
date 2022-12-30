@@ -418,7 +418,8 @@ namespace GameConstants {
         Galar,
         Armor,
         Crown,
-        Hisui
+        Hisui,
+        Arceus
     }
     declare const EnergyRestoreEffect: {
         SmallRestore: number;

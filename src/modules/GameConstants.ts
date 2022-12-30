@@ -878,6 +878,7 @@ export enum BulletinBoards {
     Armor,
     Crown,
     Hisui,
+    Arceus,
 }
 
 // Underground
@@ -1664,11 +1665,6 @@ export const TemporaryBattles = [
     'Dialga (Origin) 1',
     'Palkia (Origin) 1',
     'Kamado 2',
-    'Noble Kleavor 2',
-    'Noble Lilligant 2',
-    'Noble Arcanine 2',
-    'Noble Electrode 2',
-    'Noble Avalugg 2',
     'Adaman 2',
     'Irida 3',
     'Dialga (Origin) 2',
