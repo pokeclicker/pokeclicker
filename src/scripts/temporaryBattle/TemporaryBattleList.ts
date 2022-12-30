@@ -2337,7 +2337,7 @@ TemporaryBattleList['Ultra Megalopolis'] = new TemporaryBattle(
     'Ultra Megalopolis',
     [new GymPokemon('Ultra Necrozma', 536098161, 60)],
     '<i>Necrozma fled.</i>',
-    [new GymBadgeRequirement(BadgeEnums.DarkiniumZ)],
+    [new TemporaryBattleRequirement('Necrozma')],
     undefined,
     {
         firstTimeRewardFunction: () => {
