@@ -20548,7 +20548,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 158,
         'catchRate': 45,
-        'evolutions': [WeatherRestrictedLevelEvolution('Hisuian Sliggoo', 'Hisuian Goodra', 50, [WeatherType.Rain, WeatherType.Fog, WeatherType.Thunderstorm])],
+        'evolutions': [WeatherRestrictedLevelEvolution([WeatherType.Rain, WeatherType.Fog, WeatherType.Thunderstorm], 'Hisuian Sliggoo', 'Hisuian Goodra', 50)],
         'base': {
             'hitpoints': 58,
             'attack': 75,
