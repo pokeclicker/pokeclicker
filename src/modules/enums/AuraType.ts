@@ -10,6 +10,7 @@ enum AuraType {
     Boost,
     Roaming,
     Ev,
+    Repel,
 }
 
 export default AuraType;

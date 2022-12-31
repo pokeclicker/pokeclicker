@@ -16,14 +16,14 @@
                     <div id="evoStones" class="tab-pane active p-3">
                         <!--<h3 data-bind="text: ItemList[ItemHandler.stoneSelected()].displayName"></h3>-->
                         <div class="row">
-                            <div class="col-12 d-md-none d-block">
+                            <div class="col-12 d-lg-none d-block">
                                 <button class="w-100 my-1 btn btn-secondary" type="button" data-toggle="collapse"
                                         data-target="#evo-item-list" aria-expanded="false" aria-controls="evo-item-list">
                                     Evolution Item
                                 </button>
                             </div>
                             <!-- Evo items -->
-                            <div class="col-md-6 col-12 collapse dont-collapse-sm justify-content-center" id="evo-item-list">
+                            <div class="col-lg-6 col-12 collapse dont-collapse-lg justify-content-center" id="evo-item-list">
                                 <h4>Evolution Items</h4>
                                 <div class="scrolling-div" data-bind="foreach: Object.keys(GameConstants.StoneType).filter(stone => isNaN(stone) && stone !== 'None')">
                                     <div class="col-12 evolutionListItem">
@@ -43,18 +43,18 @@
                                 </div>
                             </div>
 
-                            <div class="col-12 d-md-none d-block">
+                            <div class="col-12 d-lg-none d-block">
                                 <button class="w-100 my-1 btn btn-secondary" type="button" data-toggle="collapse"
                                         data-target="#evo-pokemon-list" aria-expanded="false" aria-controls="evo-pokemon-list">
                                     Pokémon
                                 </button>
                             </div>
                             <!-- Pokemon list -->
-                            <div class="col-md-6 col-12 collapse dont-collapse-sm justify-content-center" id="evo-pokemon-list">
+                            <div class="col-lg-6 col-12 collapse dont-collapse-lg justify-content-center" id="evo-pokemon-list">
                                 <h4>Pokémon</h4>
                                 <div class="scrolling-div"
                                     data-bind="foreach: PokemonHelper.getPokemonsWithEvolution(GameConstants.StoneType[ItemHandler.stoneSelected()])">
-                                    <div class="col-md-6 col-sm-10 col-lg-12 evolutionListItem"> <!--offset-sm-1 offset-md-0 offset-md-0 -->
+                                    <div class="col-12 evolutionListItem"> <!--offset-sm-1 offset-md-0 offset-md-0 -->
                                         <button class="btn btn-secondary smallButton list-group-item-action" style="padding-right:15px"
                                                 data-bind="click: function() {ItemHandler.pokemonSelected(name)}, css:{ 'pokemon-selected': ItemHandler.pokemonSelected() === name}">
                                             <img class="smallImage" data-bind="attr:{src: 'assets/images/' + (App.game.party.alreadyCaughtPokemon($data.id, true) ? 'shiny' : '') + 'pokemon/' + id +'.png' }"/>

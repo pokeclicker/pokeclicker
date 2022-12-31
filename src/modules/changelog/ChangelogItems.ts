@@ -10,6 +10,30 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.10.5
+    new ChangelogUpdate('v0.10.5', new Date(2022, 11, 31)),
+    new Changelog(changelogType.NEW, 'Added Magikarp Jump Subregion'),
+    new Changelog(changelogType.NEW, 'Added new Vitamins'),
+    new Changelog(changelogType.NEW, 'Added more Mega Evolutions'),
+    new Changelog(changelogType.NEW, 'Added PokéRus indicator to shops and Safari Zone'),
+    new Changelog(changelogType.NEW, 'Added more Held Items'),
+    new Changelog(changelogType.NEW, 'Mapcolor for missing PokéRus Resistant'),
+    new Changelog(changelogType.NEW, 'Added a mute button'),
+    new Changelog(changelogType.NEW, 'Can now change default file name of saves'),
+    new Changelog(changelogType.CHANGE, 'Adjusted Proteins'),
+    new Changelog(changelogType.CHANGE, 'Buffed shiny chance for Safari Zone'),
+    new Changelog(changelogType.CHANGE, 'Changed evoluion items layout'),
+    new Changelog(changelogType.CHANGE, 'More than six Pokémon can now hold held items at a time'),
+    new Changelog(changelogType.CHANGE, 'Adjusted some Mega Evolution requirements'),
+    new Changelog(changelogType.CHANGE, 'Mimics now give more EVs'),
+    new Changelog(changelogType.CHANGE, 'Changed Battle Café times to match the rest of the game'),
+    new Changelog(changelogType.CHANGE, 'Misc text changes'),
+    new Changelog(changelogType.CHANGE, 'Misc UI changes'),
+    new Changelog(changelogType.CHANGE, 'Misc image changes'),
+    new Changelog(changelogType.FIXED, 'Reduce CPU usage when game is minimized'),
+    new Changelog(changelogType.FIXED, 'Misc fixes for Suicune Quest'),
+    new Changelog(changelogType.FIXED, 'Attack Achievements appearing again on reload'),
+
     // v0.10.4
     new ChangelogUpdate('v0.10.4', new Date(2022, 10, 22)),
     new Changelog(changelogType.CHANGE, 'Shop Magikarp no longer awards EVs'),

@@ -168,13 +168,17 @@ class Game {
                 const orbsUnlocked = App.game.dreamOrbController.orbs.filter((o) => !o.requirement || o.requirement.isCompleted());
                 const orbsEarned = Math.floor(timeDiffOverride / 3600);
                 if (orbsEarned > 0) {
+                    const orbAmounts = Object.fromEntries(orbsUnlocked.map(o => [o.color, 0]));
                     for (let i = 0; i < orbsEarned; i++) {
-                        GameHelper.incrementObservable(Rand.fromArray(orbsUnlocked).amount);
+                        const orb = Rand.fromArray(orbsUnlocked);
+                        GameHelper.incrementObservable(orb.amount);
+                        orbAmounts[orb.color]++;
                     }
+                    const messageAppend = Object.keys(orbAmounts).filter(key => orbAmounts[key] > 0).map(key => `<li>${orbAmounts[key]} ${key}</li>`).join('');
                     Notifier.notify({
                         type: NotificationConstants.NotificationOption.info,
                         title: 'Dream Orbs',
-                        message: `Gained ${orbsEarned} Dream Orbs while offline.`,
+                        message: `Gained ${orbsEarned} Dream Orbs while offline:<br /><ul class="mb-0">${messageAppend}</ul>`,
                         timeout: 2 * GameConstants.MINUTE,
                         setting: NotificationConstants.NotificationSetting.General.offline_earnings,
                     });
