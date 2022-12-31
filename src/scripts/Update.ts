@@ -1895,6 +1895,11 @@ class Update implements Saveable {
             //Red Gyarados
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 22);
         },
+
+        '0.10.6': ({ playerData, saveData }) => {
+            // Fix eggs not gaining steps
+            saveData.breeding.eggList?.forEach(egg => egg.notified = false);
+        },
     };
 
     constructor() {
