@@ -1901,9 +1901,9 @@ class Update implements Saveable {
             Update.giveMissingQuestLineProgressRewardPokemon(saveData, 'Unfinished Business', 8, 172.01);
             Update.giveMissingQuestLineProgressRewardPokemon(saveData, 'Princess Diancie', 6, 681.01);
             Update.giveMissingQuestLineProgressRewardPokemon(saveData, 'A Mystery Gift', 1, 801.01);
-            Update.giveMissingTempBattleRewardPokemon(saveData, 'Ash Ketchum Pinkan', 25.14);
-            Update.giveMissingTempBattleRewardPokemon(saveData, 'Ash Ketchum Alola', 25.08);
-            if (saveData.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Tower of Waters')] > 0) {
+            Update.giveMissingTempBattleRewardPokemon(saveData, 123, 25.14); // Ash Ketchum Pinkan
+            Update.giveMissingTempBattleRewardPokemon(saveData, 151, 25.08); // Ash Ketchum Alola
+            if (saveData.statistics.dungeonsCleared[157] > 0) { // Tower of Waters
                 Update.giveMissingPokemon(saveData, 892.01);
             }
         },
@@ -2316,8 +2316,7 @@ class Update implements Saveable {
         }
     }
 
-    static giveMissingTempBattleRewardPokemon(saveData, tempBattleName: string, pokemonId: number) {
-        const tempBattleIndex = GameConstants.getTemporaryBattlesIndex(tempBattleName);
+    static giveMissingTempBattleRewardPokemon(saveData, tempBattleIndex: number, pokemonId: number) {
         if (saveData.statistics.temporaryBattleDefeated[tempBattleIndex] > 0) {
             Update.giveMissingPokemon(saveData, pokemonId);
         }
