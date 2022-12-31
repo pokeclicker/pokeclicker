@@ -40,6 +40,11 @@ class Party implements Feature {
 
     }
 
+    gainPokemonByName(name: PokemonNameType, shiny = false, suppressNotification = false, gender = -1) {
+        const pokemon = pokemonMap[name];
+        this.gainPokemonById(pokemon.id, shiny, suppressNotification, gender);
+    }
+
     gainPokemonById(id: number, shiny = false, suppressNotification = false, gender = -1) {
         // If no gender defined, calculate it
         if (gender === -1) {
