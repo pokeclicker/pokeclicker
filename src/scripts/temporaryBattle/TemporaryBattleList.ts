@@ -1954,7 +1954,7 @@ TemporaryBattleList.AZ = new TemporaryBattle(
     {
         displayName: 'Pokémon Trainer AZ',
         firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonById(670.05);
+            App.game.party.gainPokemonById(pokemonMap['Floette (Eternal)'].id);
         },
     }
 );
@@ -2090,7 +2090,7 @@ TemporaryBattleList['Ash Ketchum Pinkan'] = new TemporaryBattle(
         returnTown: 'Pinkan Mountain',
         imageName: 'Ash Ketchum',
         firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonById(25.13);
+            App.game.party.gainPokemonById(pokemonMap['Pinkan Pikachu'].id);
         },
     }
 );
@@ -2517,7 +2517,7 @@ TemporaryBattleList['Ash Ketchum Alola'] = new TemporaryBattle(
         returnTown: 'A Tree Maybe',
         imageName: 'Ash Ketchum',
         firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonById(25.07);
+            App.game.party.gainPokemonById(pokemonMap['Pikachu (Partner Cap)'].id);
         },
     }
 );
