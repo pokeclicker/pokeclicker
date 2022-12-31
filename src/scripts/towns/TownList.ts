@@ -563,7 +563,7 @@ const AlteringCaveRuinManiac2 = new NPC ('Ruin Maniac', [
 });
 const ValenciaProfIvy = new NPC ('Prof. Ivy', [
     'Hello again! I see you too found a way around the giant cliff.',
-    'On this island, pokémon have changed over the years. I am here to study them.',
+    'On this island, Pokémon have changed over the years. I am here to study them.',
     'Oh, you have already encountered them? And you are busy with the Orange League?',
     'Well, good luck to you, then.',
 ], {image: 'assets/images/npcs/Professor Ivy.png'});
@@ -1983,7 +1983,7 @@ const LavaridgeSootCollector = new NPC('Soot Collector', [
 ]);
 
 const FortreeWeatherman = new NPC('Weatherman', [
-    'Castform is a very finicky pokemon.',
+    'Castform is a very finicky Pokémon.',
     'It changes forms when the weather is drastically different.',
     'If you want to collect them all, wait for the weather to change.',
 ]);
@@ -4610,7 +4610,7 @@ const DrSplash1 = new NPC('Dr. Splash', [
 const DrSplash2 = new NPC('Dr. Splash', [
     'Thank you for the berries! These should be enough for my experiments.',
     'While you were gone, I was working on optimizing the training regimen for Magikarps. According to my calculations, we are missing a LOT of equipment.',
-    'I\'m going to need some sand for sandbags, springs for a jump counter, wood for a pell post, rocks and ice for smashing, a TON of pokèballs, electricity generation...',
+    'I\'m going to need some sand for sandbags, springs for a jump counter, wood for a pell post, rocks and ice for smashing, a TON of Pokéballs, electricity generation...',
     'There\'s a lot more, but that should get you started.',
 ], {
     image: 'assets/images/npcs/Dr Splash.png',
@@ -4619,8 +4619,8 @@ const DrSplash2 = new NPC('Dr. Splash', [
 
 const DrSplash3 = new NPC('Dr. Splash', [
     'Wow, that\'s a lot of stuff! This place is starting to look like a proper lab now!',
-    'I have discovered that a critical part of any Magikarp training program is pushing other pokemon around in a field. This form of exercise rounds out the muscle groups and really boosts performance.',
-    'According to my calculations, the ideal pokemon to push around are Dwebble, Boldore, Forretress, Golem, and Steelix. Can you catch or hatch me some?',
+    'I have discovered that a critical part of any Magikarp training program is pushing other Pokémon around in a field. This form of exercise rounds out the muscle groups and really boosts performance.',
+    'According to my calculations, the ideal Pokémon to push around are Dwebble, Boldore, Forretress, Golem, and Steelix. Can you catch or hatch me some?',
     'Steer clear of the Alola version of Golem, it\'s electrical fields are too dangerous to use.',
 ], {
     image: 'assets/images/npcs/Dr Splash.png',
@@ -4628,9 +4628,9 @@ const DrSplash3 = new NPC('Dr. Splash', [
 });
 
 const DrSplash4 = new NPC('Dr. Splash', [
-    'These pokèmon are perfect! I\'ll put them out back in the training fields.',
+    'These Pokémon are perfect! I\'ll put them out back in the training fields.',
     'The last piece of equipment needed is a Tackle Machine. I have a prototype here, but it needs to be calibrated.',
-    'Can you take it out for a spin? Defeating a ton of pokèmon should be enough to test it out.',
+    'Can you take it out for a spin? Defeating a ton of Pokémon should be enough to test it out.',
 ], {
     image: 'assets/images/npcs/Dr Splash.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Dr. Splash\'s Research Project', 5), new QuestLineStepCompletedRequirement('Dr. Splash\'s Research Project', 7, GameConstants.AchievementOption.less)]),
