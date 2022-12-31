@@ -342,7 +342,7 @@ class PokemonHelper extends TmpPokemonHelper {
         // Safari
         const safariChance = PokemonHelper.getPokemonSafariChance(pokemonName);
         if (Object.keys(safariChance).length) {
-            encounterTypes[PokemonLocationType.Safari] = `${safariChance}%`;
+            encounterTypes[PokemonLocationType.Safari] = safariChance;
         }
         // Evolution
         const evolutions = PokemonHelper.getPokemonPrevolution(pokemonName, maxRegion);
