@@ -79,14 +79,18 @@ class Egg implements Saveable {
     }
 
     addSteps(amount: number, multiplier: Multiplier, helper = false) {
+        // If no egg in slot, or no steps remaining, don't do anything
         if (this.isNone() || this.stepsRemaining() <= 0) {
             return;
         }
+        // Need to add at least 1 step
         if (!+amount) {
             amount = 1;
         }
+        // Increase our steps
         this.updateShinyChance(amount, multiplier);
         this.steps(this.steps() + amount);
+        // Notify that the egg is ready to hatch
         if (this.canHatch() && !helper && !this.notified) {
             if (this.type == EggType.Pokemon) {
                 Notifier.notify({
