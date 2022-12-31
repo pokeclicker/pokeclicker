@@ -1897,8 +1897,6 @@ class Update implements Saveable {
         },
 
         '0.10.6': ({ playerData, saveData }) => {
-            // Fix eggs not gaining steps
-            saveData.breeding.eggList?.forEach(egg => egg.notified = false);
         },
     };
 

@@ -79,7 +79,7 @@ class Egg implements Saveable {
     }
 
     addSteps(amount: number, multiplier: Multiplier, helper = false) {
-        if (this.isNone() || this.notified) {
+        if (this.isNone() || this.stepsRemaining() <= 0) {
             return;
         }
         if (!+amount) {
@@ -87,7 +87,7 @@ class Egg implements Saveable {
         }
         this.updateShinyChance(amount, multiplier);
         this.steps(this.steps() + amount);
-        if (this.canHatch() && !helper) {
+        if (this.canHatch() && !helper && !this.notified) {
             if (this.type == EggType.Pokemon) {
                 Notifier.notify({
                     message: `${PokemonHelper.displayName(PokemonHelper.getPokemonById(this.pokemon).name)()} is ready to hatch!`,
