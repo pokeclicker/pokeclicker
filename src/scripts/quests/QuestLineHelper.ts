@@ -450,7 +450,7 @@ class QuestLineHelper {
         celebiJohtoQuestLine.addQuest(talktoIlexForestShrine1);
 
         const SpikyEaredPichuReward = () => {
-            App.game.party.gainPokemonById(172.1);
+            App.game.party.gainPokemonByName('Spiky-eared Pichu');
             Notifier.notify({
                 title: celebiJohtoQuestLine.name,
                 message: 'You captured the Spiky-eared Pichu!',
@@ -1007,7 +1007,7 @@ class QuestLineHelper {
         detectivePikachuQuestLine.addQuest(searchForClues10);
 
         const DetectiveRaichuReward = () => {
-            App.game.party.gainPokemonById(26.02);
+            App.game.party.gainPokemonByName('Detective Raichu');
             Notifier.notify({
                 title: detectivePikachuQuestLine.name,
                 message: 'Detective Pikachu\'s partner has been nursed back to health!',
@@ -1135,7 +1135,7 @@ class QuestLineHelper {
         ashKetchumQuestLine.addQuest(clearUnovaAsh);
 
         const AshKetchumReward = () => {
-            App.game.party.gainPokemonById(658.01);
+            App.game.party.gainPokemonByName('Ash-Greninja');
             Notifier.notify({
                 title: ashKetchumQuestLine.name,
                 message: 'You obtained Ash-Greninja!',
@@ -1171,7 +1171,7 @@ class QuestLineHelper {
         princessDiancieQuestLine.addQuest(fightSteels);
 
         const BladeAegislashReward = () => {
-            App.game.party.gainPokemonById(681.1);
+            App.game.party.gainPokemonByName('Aegislash (Blade)');
             Notifier.notify({
                 title: princessDiancieQuestLine.name,
                 message: 'Your Doublade has evolved into Blade Forme Aegislash!',
@@ -1474,7 +1474,7 @@ class QuestLineHelper {
         drSplashQuestLine.addQuest(tackleMachine);
 
         const SaucyBlueReward = () => {
-            App.game.party.gainPokemonById(129.29);
+            App.game.party.gainPokemonByName('Magikarp Saucy Blue');
             Notifier.notify({
                 title: drSplashQuestLine.name,
                 message: 'Dr. Splash gives you a Saucy Blue Magikarp!',
@@ -1609,7 +1609,7 @@ class QuestLineHelper {
         const meltanRainbowRocket = new CustomQuest(1, 0, 'Defeat Team Rainbow Leader Giovanni.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Rainbow Leader Giovanni')]());
 
         const meltanGetMelmetal = () => {
-            App.game.party.gainPokemonById(PokemonHelper.getPokemonByName('Melmetal').id);
+            App.game.party.gainPokemonByName('Melmetal');
             Notifier.notify({
                 title: meltanQuestLine.name,
                 message: 'You found Melmetal!',
@@ -2215,7 +2215,7 @@ class QuestLineHelper {
             ]), GameConstants.BulletinBoards.Galar);
 
         const mysteryGift = new TalkToNPCQuest(MagearnaMysteryGift, 'Go home and open your Mystery Gift', () => {
-            App.game.party.gainPokemonById(801.1);
+            App.game.party.gainPokemonByName('Magearna (Original Color)');
             Notifier.notify({
                 title: magearnaQuestLine.name,
                 message: 'You obtained Magearna (Original Color)!',
