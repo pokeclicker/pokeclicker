@@ -1897,6 +1897,15 @@ class Update implements Saveable {
         },
 
         '0.10.6': ({ playerData, saveData }) => {
+            // Give the player any missing questline or temporary battle rewards
+            Update.giveMissingQuestLineProgressRewardPokemon(saveData, 'Unfinished Business', 8, 172.01);
+            Update.giveMissingQuestLineProgressRewardPokemon(saveData, 'Princess Diancie', 6, 681.01);
+            Update.giveMissingQuestLineProgressRewardPokemon(saveData, 'A Mystery Gift', 1, 801.01);
+            Update.giveMissingTempBattleRewardPokemon(saveData, 'Ash Ketchum Pinkan', 25.14);
+            Update.giveMissingTempBattleRewardPokemon(saveData, 'Ash Ketchum Alola', 25.08);
+            if (saveData.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Tower of Waters')] > 0) {
+                Update.giveMissingPokemon(saveData, 892.01);
+            }
         },
     };
 
@@ -2297,6 +2306,27 @@ class Update implements Saveable {
         } else {
             // Push the quest, doesn't exist in save data yet
             saveData.quests.questLines.push({ state: 1, name: questLineName, quest: 0 });
+        }
+    }
+
+    static giveMissingQuestLineProgressRewardPokemon(saveData, questLineName: string, questStep: number, pokemonId: number) {
+        const quest = saveData.quests.questLines.find((q) => q.name == questLineName);
+        if (quest?.state == 2 || (quest?.state == 1 && quest?.quest >= questStep)) {
+            Update.giveMissingPokemon(saveData, pokemonId);
+        }
+    }
+
+    static giveMissingTempBattleRewardPokemon(saveData, tempBattleName: string, pokemonId: number) {
+        const tempBattleIndex = GameConstants.getTemporaryBattlesIndex(tempBattleName);
+        if (saveData.statistics.temporaryBattleDefeated[tempBattleIndex] > 0) {
+            Update.giveMissingPokemon(saveData, pokemonId);
+        }
+    }
+
+    static giveMissingPokemon(saveData, pokemonId: number) {
+        if (!saveData.party.caughtPokemon.find((p) => p.id == pokemonId)) {
+            saveData.party.caughtPokemon.push({ id: pokemonId });
+            saveData.statistics.pokemonCaptured[pokemonId] = saveData.statistics.pokemonCaptured[pokemonId] + 1 || 1;
         }
     }
 
