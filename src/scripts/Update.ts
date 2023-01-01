@@ -1901,7 +1901,7 @@ class Update implements Saveable {
             Update.fixTempBattleState(saveData, 'Team Plasma Grunt 1', 0, 'Quest for the DNA Splicers', 0);
 
             // Set Cyrus as complete if you've completed 'A New World'
-            Update.fixTempBattleState(saveData, 'Galacitc Boss Cyrus', 1, 'A New World', 3);
+            Update.fixTempBattleState(saveData, 'Galactic Boss Cyrus', 1, 'A New World', 3);
 
         },
     };
