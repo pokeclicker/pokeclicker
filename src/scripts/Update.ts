@@ -1897,12 +1897,21 @@ class Update implements Saveable {
         },
 
         '0.10.6': ({ playerData, saveData }) => {
+            // Give the player any missing questline or temporary battle rewards
+            Update.giveMissingQuestLineProgressRewardPokemon(saveData, 'Unfinished Business', 8, 172.01);
+            Update.giveMissingQuestLineProgressRewardPokemon(saveData, 'Princess Diancie', 6, 681.01);
+            Update.giveMissingQuestLineProgressRewardPokemon(saveData, 'A Mystery Gift', 1, 801.01);
+            Update.giveMissingTempBattleRewardPokemon(saveData, 123, 25.14); // Ash Ketchum Pinkan
+            Update.giveMissingTempBattleRewardPokemon(saveData, 151, 25.08); // Ash Ketchum Alola
+            if (saveData.statistics.dungeonsCleared[157] > 0) { // Tower of Waters
+                Update.giveMissingPokemon(saveData, 892.01);
+            }
+
             // Set 'Team Plasma Grunt 1' to 0 if quest step not completed
             Update.fixTempBattleState(saveData, 'Team Plasma Grunt 1', 0, 'Quest for the DNA Splicers', 0);
 
             // Set Cyrus as complete if you've completed 'A New World'
             Update.fixTempBattleState(saveData, 'Galactic Boss Cyrus', 1, 'A New World', 3);
-
         },
     };
 
@@ -2322,6 +2331,26 @@ class Update implements Saveable {
             if (ql?.state < 2 && ql?.quest <= questStep) {
                 saveData.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(battleName)] = 0;
             }
+        }
+    }
+
+    static giveMissingQuestLineProgressRewardPokemon(saveData, questLineName: string, questStep: number, pokemonId: number) {
+        const quest = saveData.quests.questLines.find((q) => q.name == questLineName);
+        if (quest?.state == 2 || (quest?.state == 1 && quest?.quest >= questStep)) {
+            Update.giveMissingPokemon(saveData, pokemonId);
+        }
+    }
+
+    static giveMissingTempBattleRewardPokemon(saveData, tempBattleIndex: number, pokemonId: number) {
+        if (saveData.statistics.temporaryBattleDefeated[tempBattleIndex] > 0) {
+            Update.giveMissingPokemon(saveData, pokemonId);
+        }
+    }
+
+    static giveMissingPokemon(saveData, pokemonId: number) {
+        if (!saveData.party.caughtPokemon.find((p) => p.id == pokemonId)) {
+            saveData.party.caughtPokemon.push({ id: pokemonId });
+            saveData.statistics.pokemonCaptured[pokemonId] = saveData.statistics.pokemonCaptured[pokemonId] + 1 || 1;
         }
     }
 
