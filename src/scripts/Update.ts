@@ -1895,12 +1895,6 @@ class Update implements Saveable {
             //Red Gyarados
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 22);
 
-            //JirachiQuest
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 40);
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 41);
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 42);
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 43);
-
         },
 
         '0.10.6': ({ playerData, saveData }) => {
@@ -1918,6 +1912,14 @@ class Update implements Saveable {
             Update.fixTempBattleState(saveData, 64, 0, 'Quest for the DNA Splicers', 0);
             // Set Cyrus as complete if 'A New World' completed
             Update.fixTempBattleState(saveData, 57, 1, 'A New World', 3);
+        },
+
+        '0.10.7': ({ playerData, saveData }) => {
+            //JirachiQuest
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 40);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 41);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 42);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 43);
         },
     };
 
