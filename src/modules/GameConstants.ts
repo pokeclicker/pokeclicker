@@ -360,6 +360,16 @@ export enum Currency {
     contestToken,
 }
 
+export enum CurrencyRate {
+    money = 1_000_000.0,
+    questPoint = 300.0,
+    dungeonToken = 7_500.0,
+    diamond = 5.0,
+    farmPoint = 300.0,
+    battlePoint = 50.0,
+    contestToken = 1.0, // no conversion rate yet found
+}
+
 export enum TypeEffectiveness {
     Immune,
     NotVery,
