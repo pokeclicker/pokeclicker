@@ -3777,7 +3777,7 @@ export const pokemonList = createPokemonArray(
     {
         'id': 94.01,
         'name': 'Mega Gengar',
-        'type': [PokemonType.Poison, PokemonType.Ghost],
+        'type': [PokemonType.Ghost, PokemonType.Poison],
         'eggCycles': 20,
         'levelType': LevelType.mediumslow,
         'exp': 207,
@@ -6086,7 +6086,7 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 150.01,
+        'id': 150.02,
         'name': 'Mega Mewtwo Y',
         'type': [PokemonType.Psychic],
         'eggCycles': 120,
@@ -6805,7 +6805,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 230,
         'eggCycles': 20,
-        'evolutions': [MegaEvolution('Ampharos', 'Mega Ampharos')],
+        // 'evolutions': [MegaEvolution('Ampharos', 'Mega Ampharos')],
         'base': {
             'hitpoints': 90,
             'attack': 75,

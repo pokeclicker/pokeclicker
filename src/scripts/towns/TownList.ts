@@ -563,7 +563,7 @@ const AlteringCaveRuinManiac2 = new NPC ('Ruin Maniac', [
 });
 const ValenciaProfIvy = new NPC ('Prof. Ivy', [
     'Hello again! I see you too found a way around the giant cliff.',
-    'On this island, pokémon have changed over the years. I am here to study them.',
+    'On this island, Pokémon have changed over the years. I am here to study them.',
     'Oh, you have already encountered them? And you are busy with the Orange League?',
     'Well, good luck to you, then.',
 ], {image: 'assets/images/npcs/Professor Ivy.png'});
@@ -726,6 +726,7 @@ TownList['Route 3 Pokémon Center'] = new Town(
             new RouteKillRequirement(10, GameConstants.Region.kanto, 3),
         ],
         npcs: [Route3ShadySalesman],
+        ignoreAreaStatus: true,
     }
 );
 TownList['Cerulean City'] = new Town(
@@ -1301,7 +1302,7 @@ const VioletPrimo = new NPC('Primo', [
     'Your Item Bag has a bunch of nifty features! Take stuff in the Held Items pocket, for instance. You can use a Held Item to empower your Pokémon or acquire unique effects. How do you use it? Well, here’s how it works.',
     'Once you have obtained a Held Item, visit your Item Bag. They are most often found in Dungeons, but some, like the Wonder Chest, are for sale!',
     'From there, go into your Held Items pocket and once an item is selected, you can use it by choosing from the list of available Pokémon to hold it.',
-    'Choose who you select carefully! Only one of a particular item can be held at a time and once you remove a Held Item from your Pokémon, the item will break!',
+    'Choose who you select carefully! Once you remove a Held Item from your Pokémon, the item will break!',
     'All righty, be seeing you!',
 ]);
 
@@ -1982,7 +1983,7 @@ const LavaridgeSootCollector = new NPC('Soot Collector', [
 ]);
 
 const FortreeWeatherman = new NPC('Weatherman', [
-    'Castform is a very finicky pokemon.',
+    'Castform is a very finicky Pokémon.',
     'It changes forms when the weather is drastically different.',
     'If you want to collect them all, wait for the weather to change.',
 ]);
@@ -4609,7 +4610,7 @@ const DrSplash1 = new NPC('Dr. Splash', [
 const DrSplash2 = new NPC('Dr. Splash', [
     'Thank you for the berries! These should be enough for my experiments.',
     'While you were gone, I was working on optimizing the training regimen for Magikarps. According to my calculations, we are missing a LOT of equipment.',
-    'I\'m going to need some sand for sandbags, springs for a jump counter, wood for a pell post, rocks and ice for smashing, a TON of pokèballs, electricity generation...',
+    'I\'m going to need some sand for sandbags, springs for a jump counter, wood for a pell post, rocks and ice for smashing, a TON of Pokéballs, electricity generation...',
     'There\'s a lot more, but that should get you started.',
 ], {
     image: 'assets/images/npcs/Dr Splash.png',
@@ -4618,8 +4619,8 @@ const DrSplash2 = new NPC('Dr. Splash', [
 
 const DrSplash3 = new NPC('Dr. Splash', [
     'Wow, that\'s a lot of stuff! This place is starting to look like a proper lab now!',
-    'I have discovered that a critical part of any Magikarp training program is pushing other pokemon around in a field. This form of exercise rounds out the muscle groups and really boosts performance.',
-    'According to my calculations, the ideal pokemon to push around are Dwebble, Boldore, Forretress, Golem, and Steelix. Can you catch or hatch me some?',
+    'I have discovered that a critical part of any Magikarp training program is pushing other Pokémon around in a field. This form of exercise rounds out the muscle groups and really boosts performance.',
+    'According to my calculations, the ideal Pokémon to push around are Dwebble, Boldore, Forretress, Golem, and Steelix. Can you catch or hatch me some?',
     'Steer clear of the Alola version of Golem, it\'s electrical fields are too dangerous to use.',
 ], {
     image: 'assets/images/npcs/Dr Splash.png',
@@ -4627,9 +4628,9 @@ const DrSplash3 = new NPC('Dr. Splash', [
 });
 
 const DrSplash4 = new NPC('Dr. Splash', [
-    'These pokèmon are perfect! I\'ll put them out back in the training fields.',
+    'These Pokémon are perfect! I\'ll put them out back in the training fields.',
     'The last piece of equipment needed is a Tackle Machine. I have a prototype here, but it needs to be calibrated.',
-    'Can you take it out for a spin? Defeating a ton of pokèmon should be enough to test it out.',
+    'Can you take it out for a spin? Defeating a ton of Pokémon should be enough to test it out.',
 ], {
     image: 'assets/images/npcs/Dr Splash.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Dr. Splash\'s Research Project', 5), new QuestLineStepCompletedRequirement('Dr. Splash\'s Research Project', 7, GameConstants.AchievementOption.less)]),
@@ -4936,7 +4937,8 @@ TownList['Magikarp\'s Eye'] = new Town(
     GameConstants.AlolaSubRegions.MagikarpJump,
     [MagikarpJumpShadySalesMan],
     {
-        requirements: [new DevelopmentRequirement()], //TODO: Should unlock as the subregion unlocks
+        requirements: [new GymBadgeRequirement(BadgeEnums.Master_League)],
+        ignoreAreaStatus: true,
     }
 );
 
