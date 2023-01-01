@@ -95,8 +95,6 @@ class DreamOrbController implements Saveable {
             const items = {};
             for (let i = 0; i < amountToOpen; i++) {
                 const orbLoot = Rand.fromWeightedArray(selectedOrb.items, itemWeights);
-                GameHelper.incrementObservable(selectedOrb.amount, -1);
-                BagHandler.gainItem(orbLoot.item);
                 items[orbLoot.item.id] ?
                     items[orbLoot.item.id].amount++ :
                     items[orbLoot.item.id] = { item: orbLoot.item, amount: 1 };
@@ -104,6 +102,10 @@ class DreamOrbController implements Saveable {
                     this.item(orbLoot);
                 }
             }
+            GameHelper.incrementObservable(selectedOrb.amount, amountToOpen * -1);
+            Object.keys(items).forEach((key) => {
+                BagHandler.gainItem(items[key].item, items[key].amount);
+            });
             this.opening(false);
             if (amountToOpen > 1) {
                 this.openResult.amountOpened(amountToOpen);
