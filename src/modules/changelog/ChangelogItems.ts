@@ -10,6 +10,17 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.10.6
+    new ChangelogUpdate('v0.10.6', new Date(2023, 0, 1)),
+    new Changelog(changelogType.NEW, 'Added new Aura to the Farm (Repel)'),
+    new Changelog(changelogType.CHANGE, 'Misc text changes'),
+    new Changelog(changelogType.CHANGE, 'Misc UI changes'),
+    new Changelog(changelogType.CHANGE, 'Misc image changes'),
+    new Changelog(changelogType.FIXED, 'Misc fixes for Quests'),
+    new Changelog(changelogType.FIXED, 'Fixed some reward Pokémon'),
+    new Changelog(changelogType.FIXED, 'Misc fixes for Quests'),
+    new Changelog(changelogType.FIXED, 'Misc Hatchery fixes'),
+
     // v0.10.5
     new ChangelogUpdate('v0.10.5', new Date(2022, 11, 31)),
     new Changelog(changelogType.NEW, 'Added Magikarp Jump Subregion'),

@@ -1906,6 +1906,11 @@ class Update implements Saveable {
             if (saveData.statistics.dungeonsCleared[157] > 0) { // Tower of Waters
                 Update.giveMissingPokemon(saveData, 892.01);
             }
+
+            // Set 'Team Plasma Grunt 1' to 0 if quest step not completed
+            Update.fixTempBattleState(saveData, 64, 0, 'Quest for the DNA Splicers', 0);
+            // Set Cyrus as complete if 'A New World' completed
+            Update.fixTempBattleState(saveData, 57, 1, 'A New World', 3);
         },
     };
 
@@ -2306,6 +2311,28 @@ class Update implements Saveable {
         } else {
             // Push the quest, doesn't exist in save data yet
             saveData.quests.questLines.push({ state: 1, name: questLineName, quest: 0 });
+        }
+    }
+
+    // Use setBattleState as 0 or 1 to manipulate battles to what status they should be based on related questline progress.
+    static fixTempBattleState = (saveData, battleIndex: number, setBattleState: number, questLineName: string, questStep: number) => {
+        const ql = saveData.quests.questLines.find((q) => q.name === questLineName);
+        if (!ql) {
+            return;
+        }
+
+        if (setBattleState === 1) {
+            // set to complete if related questline/step is completed
+            if (ql.state === 2 || ql.quest > questStep) {
+                saveData.statistics.temporaryBattleDefeated[battleIndex] = 1;
+            }
+        }
+
+        if (setBattleState === 0) {
+            // set to not complete if related questline/step isn't complete
+            if (ql.state < 2 && ql.quest <= questStep) {
+                saveData.statistics.temporaryBattleDefeated[battleIndex] = 0;
+            }
         }
     }
 
