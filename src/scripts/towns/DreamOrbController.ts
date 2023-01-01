@@ -13,7 +13,7 @@ class DreamOrbController implements Saveable {
     public selectedOrb: KnockoutObservable<DreamOrb>;
     public opening: KnockoutObservable<boolean>;
     public item: KnockoutObservable<DreamOrbLoot>;
-    public amountSelected: KnockoutObservable<number> = ko.observable(1);
+    public amountSelected = ko.observable(1);
     public multiOpenAmount = ko.observable(0);
     public multiOpenItems = ko.observableArray();
 
