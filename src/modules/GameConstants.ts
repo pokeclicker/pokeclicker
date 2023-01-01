@@ -390,16 +390,13 @@ export function pluralizeString(str: string, amt: number): string {
     if (amt <= 1) {
         return str;
     }
-    const regexS = /[s]$/;
-    const regexY = /[y]$/;
-    const regexCH = /[ch]$/;
 
     switch (true) {
-        case regexS.test(str):
+        case /s$/.test(str):
             return str;
-        case regexY.test(str):
-            return str.replace(regexY, 'ies');
-        case regexCH.test(str):
+        case /y$/.test(str):
+            return str.replace(/y$/, 'ies');
+        case /ch$/.test(str):
             return `${str}es`;
         default:
             return `${str}s`;
