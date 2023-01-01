@@ -23,7 +23,7 @@ aria-labelledby="dreamOrbsModalLabel">
                     <button class="btn btn-primary" onclick="App.game.dreamOrbController.open()">Open</button>
                     <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split active" data-bind="text: App.game.dreamOrbController.amountSelected().toLocaleString('en-US') + '&nbsp;'" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     </button>
-                    <div class="dropdown-menu" data-bind="foreach: [1, 10, 100, 1000]">
+                    <div class="dropdown-menu" data-bind="foreach: [1, 10, 100, 1000, Infinity]">
                         <button class="dropdown-item" type="button" data-bind="click: function(){App.game.dreamOrbController.amountSelected($data)}, text: $data.toLocaleString('en-US')"></button>
                     </div>
                 </div>

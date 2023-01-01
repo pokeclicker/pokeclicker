@@ -9,18 +9,13 @@ class DreamOrb {
     }
 }
 
-class DreamOrbOpenResult {
-    public amountOpened = ko.observable(0);
-    public items = ko.observableArray();
-    constructor() {}
-}
-
 class DreamOrbController implements Saveable {
     public selectedOrb: KnockoutObservable<DreamOrb>;
     public opening: KnockoutObservable<boolean>;
     public item: KnockoutObservable<DreamOrbLoot>;
     public amountSelected: KnockoutObservable<number> = ko.observable(1);
-    public readonly openResult = new DreamOrbOpenResult();
+    public multiOpenAmount = ko.observable(0);
+    public multiOpenItems = ko.observableArray();
 
     constructor() {
         this.selectedOrb = ko.observable(this.orbs[0]);
@@ -108,8 +103,8 @@ class DreamOrbController implements Saveable {
             });
             this.opening(false);
             if (amountToOpen > 1) {
-                this.openResult.amountOpened(amountToOpen);
-                this.openResult.items(Object.keys(items).map((key) => ({ name: key, ...items[key] })));
+                this.multiOpenAmount(amountToOpen);
+                this.multiOpenItems(Object.keys(items).map((key) => ({ name: key, ...items[key] })));
                 $('#dreamOrbsOpenedModal').modal('show');
             }
         }, 1800);
