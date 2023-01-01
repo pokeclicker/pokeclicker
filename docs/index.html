@@ -17,10 +17,10 @@
     <script src="libs/Sortable.min.js"></script>
 
     <!-- New module-based code from './modules' -->
-    <script src="scripts/modules.min.js?v=0.10.5"></script>
+    <script src="scripts/modules.min.js?v=0.10.6"></script>
 
     <!--Minified scripts-->
-    <script src="scripts/script.min.js?v=0.10.5"></script>
+    <script src="scripts/script.min.js?v=0.10.6"></script>
 
     <!--Popper.js-->
     <script src="libs/popper.min.js"></script>
@@ -38,7 +38,7 @@
     <link href="libs/introjs-modern.css" rel="stylesheet">
 
     <!--Minified styles-->
-    <link href="styles/styles.min.css?v=0.10.5" rel="stylesheet">
+    <link href="styles/styles.min.css?v=0.10.6" rel="stylesheet">
 
     <!-- Google Analytics-->
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -460,14 +460,14 @@
                     <div id="evoStones" class="tab-pane active p-3">
                         <!--<h3 data-bind="text: ItemList[ItemHandler.stoneSelected()].displayName"></h3>-->
                         <div class="row">
-                            <div class="col-12 d-md-none d-block">
+                            <div class="col-12 d-lg-none d-block">
                                 <button class="w-100 my-1 btn btn-secondary" type="button" data-toggle="collapse"
                                         data-target="#evo-item-list" aria-expanded="false" aria-controls="evo-item-list">
                                     Evolution Item
                                 </button>
                             </div>
                             <!-- Evo items -->
-                            <div class="col-md-6 col-12 collapse dont-collapse-sm justify-content-center" id="evo-item-list">
+                            <div class="col-lg-6 col-12 collapse dont-collapse-lg justify-content-center" id="evo-item-list">
                                 <h4>Evolution Items</h4>
                                 <div class="scrolling-div" data-bind="foreach: Object.keys(GameConstants.StoneType).filter(stone => isNaN(stone) && stone !== 'None')">
                                     <div class="col-12 evolutionListItem">
@@ -487,18 +487,18 @@
                                 </div>
                             </div>
 
-                            <div class="col-12 d-md-none d-block">
+                            <div class="col-12 d-lg-none d-block">
                                 <button class="w-100 my-1 btn btn-secondary" type="button" data-toggle="collapse"
                                         data-target="#evo-pokemon-list" aria-expanded="false" aria-controls="evo-pokemon-list">
                                     Pokémon
                                 </button>
                             </div>
                             <!-- Pokemon list -->
-                            <div class="col-md-6 col-12 collapse dont-collapse-sm justify-content-center" id="evo-pokemon-list">
+                            <div class="col-lg-6 col-12 collapse dont-collapse-lg justify-content-center" id="evo-pokemon-list">
                                 <h4>Pokémon</h4>
                                 <div class="scrolling-div"
                                     data-bind="foreach: PokemonHelper.getPokemonsWithEvolution(GameConstants.StoneType[ItemHandler.stoneSelected()])">
-                                    <div class="col-md-6 col-sm-10 col-lg-12 evolutionListItem"> <!--offset-sm-1 offset-md-0 offset-md-0 -->
+                                    <div class="col-12 evolutionListItem"> <!--offset-sm-1 offset-md-0 offset-md-0 -->
                                         <button class="btn btn-secondary smallButton list-group-item-action" style="padding-right:15px"
                                                 data-bind="click: function() {ItemHandler.pokemonSelected(name)}, css:{ 'pokemon-selected': ItemHandler.pokemonSelected() === name}">
                                             <img class="smallImage" data-bind="attr:{src: 'assets/images/' + (App.game.party.alreadyCaughtPokemon($data.id, true) ? 'shiny' : '') + 'pokemon/' + id +'.png' }"/>
@@ -1994,8 +1994,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.kanto, 'Kanto').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/kanto-kanto.png?v=0.10.5',
-            href:'assets/images/kanto-kanto.png?v=0.10.5'
+            'xlink:href':'assets/images/kanto-kanto.png?v=0.10.6',
+            href:'assets/images/kanto-kanto.png?v=0.10.6'
         }"></image>
 
         <!-- ------ -->
@@ -4216,8 +4216,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.kanto, 'Sevii Islands 123').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/kanto-sevii123.png?v=0.10.5',
-            href:'assets/images/kanto-sevii123.png?v=0.10.5'
+            'xlink:href':'assets/images/kanto-sevii123.png?v=0.10.6',
+            href:'assets/images/kanto-sevii123.png?v=0.10.6'
         }"></image>
 
         <!-- ------ -->
@@ -4725,8 +4725,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.kanto, 'Sevii Islands 4567').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/kanto-sevii4567.png?v=0.10.5',
-            href:'assets/images/kanto-sevii4567.png?v=0.10.5'
+            'xlink:href':'assets/images/kanto-sevii4567.png?v=0.10.6',
+            href:'assets/images/kanto-sevii4567.png?v=0.10.6'
         }"></image>
 
         <!-- ------ -->
@@ -6231,8 +6231,8 @@
 
                             <g data-bind='visible: player.region == GameConstants.Region.johto'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/johto.png?v=0.10.5',
-        href:'assets/images/johto.png?v=0.10.5'
+        'xlink:href':'assets/images/johto.png?v=0.10.6',
+        href:'assets/images/johto.png?v=0.10.6'
     }"></image>
 
     <!-- ------ -->
@@ -8438,8 +8438,8 @@
 
                             <g data-bind='visible: player.region == GameConstants.Region.hoenn'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/hoenn.png?v=0.10.5',
-        href:'assets/images/hoenn.png?v=0.10.5'
+        'xlink:href':'assets/images/hoenn.png?v=0.10.6',
+        href:'assets/images/hoenn.png?v=0.10.6'
     }"></image>
 
     <!-- ------ -->
@@ -11266,8 +11266,8 @@
 
                             <g data-bind='visible: player.region == GameConstants.Region.sinnoh'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/sinnoh.png?v=0.10.5',
-        href:'assets/images/sinnoh.png?v=0.10.5'
+        'xlink:href':'assets/images/sinnoh.png?v=0.10.6',
+        href:'assets/images/sinnoh.png?v=0.10.6'
     }"></image>
 
     <!-- ------ -->
@@ -14089,8 +14089,8 @@
 
                             <g data-bind='visible: player.region == GameConstants.Region.unova'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/unova.png?v=0.10.5',
-        href:'assets/images/unova.png?v=0.10.5'
+        'xlink:href':'assets/images/unova.png?v=0.10.6',
+        href:'assets/images/unova.png?v=0.10.6'
     }"></image>
 
     <!-- ------ -->
@@ -16954,8 +16954,8 @@
 
                             <g data-bind='visible: player.region == GameConstants.Region.kalos'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/kalos.png?v=0.10.5',
-        href:'assets/images/kalos.png?v=0.10.5'
+        'xlink:href':'assets/images/kalos.png?v=0.10.6',
+        href:'assets/images/kalos.png?v=0.10.6'
     }"></image>
 
     <!-- ------ -->
@@ -19153,8 +19153,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Melemele Island').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-melemele.png?v=0.10.5',
-            href:'assets/images/alola-melemele.png?v=0.10.5'
+            'xlink:href':'assets/images/alola-melemele.png?v=0.10.6',
+            href:'assets/images/alola-melemele.png?v=0.10.6'
         }"></image>
 
         <!-- ------ -->
@@ -22449,8 +22449,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Akala Island').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-akala.png?v=0.10.5',
-            href:'assets/images/alola-akala.png?v=0.10.5'
+            'xlink:href':'assets/images/alola-akala.png?v=0.10.6',
+            href:'assets/images/alola-akala.png?v=0.10.6'
         }"></image>
 
         <!-- ------ -->
@@ -24641,8 +24641,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Ula\'ula Island').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-ulaula.png?v=0.10.5',
-            href:'assets/images/alola-ulaula.png?v=0.10.5'
+            'xlink:href':'assets/images/alola-ulaula.png?v=0.10.6',
+            href:'assets/images/alola-ulaula.png?v=0.10.6'
         }"></image>
 
         <!-- ------ -->
@@ -27275,8 +27275,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Poni Island').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-poni.png?v=0.10.5',
-            href:'assets/images/alola-poni.png?v=0.10.5'
+            'xlink:href':'assets/images/alola-poni.png?v=0.10.6',
+            href:'assets/images/alola-poni.png?v=0.10.6'
         }"></image>
 
         <!-- ------ -->
@@ -29315,8 +29315,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Magikarp Jump').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-magikarp-jump.png?v=0.10.5',
-            href:'assets/images/alola-magikarp-jump.png?v=0.10.5'
+            'xlink:href':'assets/images/alola-magikarp-jump.png?v=0.10.6',
+            href:'assets/images/alola-magikarp-jump.png?v=0.10.6'
         }"></image>
 
         <!-- ------ -->
@@ -31346,8 +31346,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'South Galar').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/galar-south.png?v=0.10.5',
-            href:'assets/images/galar-south.png?v=0.10.5'
+            'xlink:href':'assets/images/galar-south.png?v=0.10.6',
+            href:'assets/images/galar-south.png?v=0.10.6'
         }"></image>
 
         <!-- ------ -->
@@ -33411,8 +33411,8 @@
     </g>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'North Galar').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/galar-north.png?v=0.10.5',
-            href:'assets/images/galar-north.png?v=0.10.5'
+            'xlink:href':'assets/images/galar-north.png?v=0.10.6',
+            href:'assets/images/galar-north.png?v=0.10.6'
         }"></image>
 
         <!-- ------ -->
@@ -34430,8 +34430,8 @@
     </g>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'Isle of Armor').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/galar-isle-of-armor.png?v=0.10.5',
-            href:'assets/images/galar-isle-of-armor.png?v=0.10.5'
+            'xlink:href':'assets/images/galar-isle-of-armor.png?v=0.10.6',
+            href:'assets/images/galar-isle-of-armor.png?v=0.10.6'
         }"></image>
 
         <!-- ------ -->
@@ -36995,8 +36995,8 @@
     </g>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'Crown Tundra').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/galar-crown-tundra.png?v=0.10.5',
-            href:'assets/images/galar-crown-tundra.png?v=0.10.5'
+            'xlink:href':'assets/images/galar-crown-tundra.png?v=0.10.6',
+            href:'assets/images/galar-crown-tundra.png?v=0.10.6'
         }"></image>
 
         <!-- ------ -->
@@ -42556,6 +42556,7 @@ aria-labelledby="badgeCaseModalLabel">
 
                     <h4><u>Wandering Pokémon</u></h4>
                     <p>Ripe Berry plants may attract wild Pokémon that will join your party. Some Pokémon can only be found using certain Berry species.</p>
+                    <p>Some Berry Auras will increase or decrease the chance of encountering Wandering Pokémon. If your total Repel Aura value reaches 1 or greater, no Wandering Pokémon will appear.</p>
 
                     <h4><u>Farm Hands (BETA)</u></h4>
                     <p><i>(unlocked after obtaining 8 unique berries)</i></p>
