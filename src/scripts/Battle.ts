@@ -223,7 +223,7 @@ class Battle {
                                 * GameConstants.CurrencyRate.contestToken));
                 break;
             default:
-                console.error("Currency kind out of range, giving dungeon tokens instead")
+                console.error('Currency kind out of range, giving dungeon tokens instead');
                 App.game.wallet.gainDungeonTokens(Math.ceil(currencyUnits
                                 * GameConstants.CurrencyRate.dungeonToken));
         }
