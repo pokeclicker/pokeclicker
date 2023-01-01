@@ -367,7 +367,7 @@ export enum CurrencyRate {
     diamond = 5.0,
     farmPoint = 300.0,
     battlePoint = 50.0,
-    //contestToken = 1.0, // no conversion rate yet found
+//    contestToken = 1.0,
 }
 
 export enum TypeEffectiveness {
