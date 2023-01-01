@@ -387,8 +387,23 @@ export function camelCaseToString(str: string): string {
 }
 
 export function pluralizeString(str: string, amt: number): string {
-    const regex = /[s]$/;
-    return (amt > 1 && !regex.test(str)) ? `${str}s` : str;
+    if (amt <= 1) {
+        return str;
+    }
+    const regexS = /[s]$/;
+    const regexY = /[y]$/;
+    const regexCH = /[ch]$/;
+
+    switch (true) {
+        case regexS.test(str):
+            return str;
+        case regexY.test(str):
+            return str.replace(regexY, 'ies');
+        case regexCH.test(str):
+            return `${str}es`;
+        default:
+            return `${str}s`;
+    }
 }
 
 export function formatDate(date: Date): string {
