@@ -14,8 +14,8 @@ class DreamOrbController implements Saveable {
     public opening: KnockoutObservable<boolean>;
     public item: KnockoutObservable<DreamOrbLoot>;
     public amountSelected = ko.observable(1);
-    public multiOpenAmount = ko.observable(0);
-    public multiOpenItems = ko.observableArray();
+    public amountOpened = ko.observable(0);
+    public itemsReceived = ko.observableArray();
 
     constructor() {
         this.selectedOrb = ko.observable(this.orbs[0]);
@@ -102,9 +102,9 @@ class DreamOrbController implements Saveable {
                 BagHandler.gainItem(items[key].item, items[key].amount);
             });
             this.opening(false);
+            this.amountOpened(amountToOpen);
+            this.itemsReceived(Object.keys(items).map((key) => ({ name: key, ...items[key] })));
             if (amountToOpen > 1) {
-                this.multiOpenAmount(amountToOpen);
-                this.multiOpenItems(Object.keys(items).map((key) => ({ name: key, ...items[key] })));
                 $('#dreamOrbsOpenedModal').modal('show');
             }
         }, 1800);
