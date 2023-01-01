@@ -2014,7 +2014,7 @@ TemporaryBattleList.AZ = new TemporaryBattle(
     {
         displayName: 'Pokémon Trainer AZ',
         firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonById(670.05);
+            App.game.party.gainPokemonByName('Floette (Eternal)');
         },
     }
 );
@@ -2150,7 +2150,7 @@ TemporaryBattleList['Ash Ketchum Pinkan'] = new TemporaryBattle(
         returnTown: 'Pinkan Mountain',
         imageName: 'Ash Ketchum',
         firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonById(25.13);
+            App.game.party.gainPokemonByName('Pinkan Pikachu');
         },
     }
 );
@@ -2577,7 +2577,7 @@ TemporaryBattleList['Ash Ketchum Alola'] = new TemporaryBattle(
         returnTown: 'A Tree Maybe',
         imageName: 'Ash Ketchum',
         firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonById(25.07);
+            App.game.party.gainPokemonByName('Pikachu (Partner Cap)');
         },
     }
 );
@@ -2756,7 +2756,7 @@ TemporaryBattleList['Magikarp Jump Koylee'] = new TemporaryBattle(
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
                 sound: NotificationConstants.NotificationSound.General.new_catch,
             });
-            App.game.party.gainPokemonById(pokemonMap['Magikarp Calico (Orange, White)'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
+            App.game.party.gainPokemonByName('Magikarp Calico (Orange, White)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         },
     }
 );
@@ -2777,7 +2777,7 @@ TemporaryBattleList['Magikarp Jump Karpella'] = new TemporaryBattle(
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
                 sound: NotificationConstants.NotificationSound.General.new_catch,
             });
-            App.game.party.gainPokemonById(pokemonMap['Magikarp Calico (Orange, White, Black)'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
+            App.game.party.gainPokemonByName('Magikarp Calico (Orange, White, Black)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         },
     }
 );
@@ -2799,7 +2799,7 @@ TemporaryBattleList['Magikarp Jump Karpen'] = new TemporaryBattle(
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
                 sound: NotificationConstants.NotificationSound.General.new_catch,
             });
-            App.game.party.gainPokemonById(pokemonMap['Magikarp Calico (White, Orange)'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
+            App.game.party.gainPokemonByName('Magikarp Calico (White, Orange)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         },
     }
 );
@@ -2896,7 +2896,7 @@ TemporaryBattleList['Magikarp Jump Karbuck'] = new TemporaryBattle(
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
                 sound: NotificationConstants.NotificationSound.General.new_catch,
             });
-            App.game.party.gainPokemonById(pokemonMap['Magikarp Calico (Orange, Gold)'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
+            App.game.party.gainPokemonByName('Magikarp Calico (Orange, Gold)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         },
     }
 );
@@ -2993,7 +2993,7 @@ TemporaryBattleList['Magikarp Jump Karpress 3'] = new TemporaryBattle(
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
                 sound: NotificationConstants.NotificationSound.General.new_catch,
             });
-            App.game.party.gainPokemonById(pokemonMap['Magikarp Grey Diamonds'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
+            App.game.party.gainPokemonByName('Magikarp Grey Diamonds', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         },
     }
 );
@@ -3028,7 +3028,7 @@ TemporaryBattleList['Magikarp Jump Karpella 3'] = new TemporaryBattle(
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
                 sound: NotificationConstants.NotificationSound.General.new_catch,
             });
-            App.game.party.gainPokemonById(pokemonMap['Magikarp Purple Patches'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
+            App.game.party.gainPokemonByName('Magikarp Purple Patches', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         },
     }
 );
@@ -3062,7 +3062,7 @@ TemporaryBattleList['Magikarp Jump Tykarp 2'] = new TemporaryBattle(
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
                 sound: NotificationConstants.NotificationSound.General.new_catch,
             });
-            App.game.party.gainPokemonById(pokemonMap['Magikarp Black Mask'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
+            App.game.party.gainPokemonByName('Magikarp Black Mask', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         },
     }
 );

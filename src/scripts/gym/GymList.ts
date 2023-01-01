@@ -1602,7 +1602,7 @@ GymList['Quick League'] = new Gym(
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
                 sound: NotificationConstants.NotificationSound.General.new_catch,
             });
-            App.game.party.gainPokemonById(pokemonMap['Magikarp Skelly'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
+            App.game.party.gainPokemonByName('Magikarp Skelly', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         }
     }
 );
@@ -1623,7 +1623,7 @@ GymList['Heavy League'] = new Gym(
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
                 sound: NotificationConstants.NotificationSound.General.new_catch,
             });
-            App.game.party.gainPokemonById(pokemonMap['Magikarp Orange Two-Tone'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
+            App.game.party.gainPokemonByName('Magikarp Orange Two-Tone', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         }
     },
     undefined, 'Kareign\'s Heavy League Gym'
@@ -1655,7 +1655,7 @@ GymList['Fast League'] = new Gym(
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
                 sound: NotificationConstants.NotificationSound.General.new_catch,
             });
-            App.game.party.gainPokemonById(pokemonMap['Magikarp Pink Dapples'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
+            App.game.party.gainPokemonByName('Magikarp Pink Dapples', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         }
     },
     undefined, 'Kareign\'s Fast League Gym'
@@ -1677,7 +1677,7 @@ GymList['Luxury League'] = new Gym(
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
                 sound: NotificationConstants.NotificationSound.General.new_catch,
             });
-            App.game.party.gainPokemonById(pokemonMap['Magikarp Pink Orca'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
+            App.game.party.gainPokemonByName('Magikarp Pink Orca', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         }
     },
     undefined, 'Jump Champ\'s Luxury League Gym'
@@ -1699,7 +1699,7 @@ GymList['Heal League'] = new Gym(
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
                 sound: NotificationConstants.NotificationSound.General.new_catch,
             });
-            App.game.party.gainPokemonById(pokemonMap['Magikarp Purple Bubbles'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
+            App.game.party.gainPokemonByName('Magikarp Purple Bubbles', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         }
     }
 );
@@ -1720,7 +1720,7 @@ GymList['Ultra League'] = new Gym(
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
                 sound: NotificationConstants.NotificationSound.General.new_catch,
             });
-            App.game.party.gainPokemonById(pokemonMap['Magikarp Brown Tiger'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
+            App.game.party.gainPokemonByName('Magikarp Brown Tiger', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         }
     },
     undefined, 'Jump Champ\'s Ultra League Gym'
@@ -1742,7 +1742,7 @@ GymList['E4 League'] = new Gym(
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
                 sound: NotificationConstants.NotificationSound.General.new_catch,
             });
-            App.game.party.gainPokemonById(pokemonMap['Magikarp Orange Forehead'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
+            App.game.party.gainPokemonByName('Magikarp Orange Forehead', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         }
     },
     undefined, 'Jump Champ\'s Elite League Gym'
