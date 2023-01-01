@@ -218,10 +218,10 @@ class Battle {
                 App.game.wallet.gainBattlePoints(Math.ceil(currencyUnits
                                 * GameConstants.CurrencyRate.battlePoint));
                 break;
-            case 6:
-                App.game.wallet.gainContestTokens(Math.ceil(currencyUnits
-                                * GameConstants.CurrencyRate.contestToken));
-                break;
+            //case 6:
+            //    App.game.wallet.gainContestTokens(Math.ceil(currencyUnits
+            //                    * GameConstants.CurrencyRate.contestToken));
+            //    break;
             default:
                 console.error('Currency kind out of range, giving dungeon tokens instead');
                 App.game.wallet.gainDungeonTokens(Math.ceil(currencyUnits
