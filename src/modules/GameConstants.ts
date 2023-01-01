@@ -386,6 +386,11 @@ export function camelCaseToString(str: string): string {
     return str.replace(/[\s_-]?([A-Z])/g, ' $1').replace(/\b\w/g, (w) => (w.replace(/\w/, (c) => c.toUpperCase()))).trim();
 }
 
+export function pluralizeString(str: string, amt: number): string {
+    const regex = /[s]$/;
+    return (amt > 1 && !regex.test(str)) ? `${str}s` : str;
+}
+
 export function formatDate(date: Date): string {
     return date.toISOString().replace(/T/, ' ').replace(/.\d+Z/, '');
 }
