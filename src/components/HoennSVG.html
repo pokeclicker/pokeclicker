@@ -964,6 +964,16 @@
     %>
 
      <%- include('templates/mapOverlay',
+         { name: "Meta Groudon"
+        , x: 14, y: 12
+         , width: 5, height: 5
+         , databind: "click: () => TemporaryBattleList['Meta Groudon'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Meta Groudon'] && TemporaryBattleList['Meta Groudon'].isVisible()"
+         , image: "assets/images/map/Meta Groudon.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
          { name: "Ash Ketchum"
          , x: 50, y: 10
          , width: 4, height: 4

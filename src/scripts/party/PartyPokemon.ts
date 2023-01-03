@@ -277,7 +277,7 @@ class PartyPokemon implements Saveable {
     getBreedingAttackBonus = ko.pureComputed((): number => {
         const attackBonusPercent = (GameConstants.BREEDING_ATTACK_BONUS + this.vitaminsUsed[GameConstants.VitaminType.Calcium]()) / 100;
         const proteinBoost = this.vitaminsUsed[GameConstants.VitaminType.Protein]();
-        return Math.floor((this.baseAttack * attackBonusPercent) + proteinBoost);
+        return (this.baseAttack * attackBonusPercent) + proteinBoost;
     });
 
     public hideFromProteinList = ko.pureComputed(() => {
@@ -325,21 +325,6 @@ class PartyPokemon implements Saveable {
                 });
                 return;
             }
-            if (App.game.party.caughtPokemon.some(p => p.heldItem() && p.heldItem().name == heldItem.name)) {
-                Notifier.notify({
-                    message: 'Only one of each held items can be used.',
-                    type: NotificationConstants.NotificationOption.warning,
-                });
-                return;
-            }
-
-            if (App.game.party.caughtPokemon.filter(p => p.heldItem()).length >= 6) {
-                Notifier.notify({
-                    message: 'Only 6 Pokémon can hold items at a time.',
-                    type: NotificationConstants.NotificationOption.warning,
-                });
-                return;
-            }
         }
 
         if (this.heldItem()) {
@@ -368,9 +353,6 @@ class PartyPokemon implements Saveable {
     }
 
     public hideFromHeldItemList = ko.pureComputed(() => {
-        if (this.heldItem()) {
-            return true;
-        }
         if (!HeldItem.heldItemSelected().canUse(this)) {
             return true;
         }

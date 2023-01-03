@@ -3777,7 +3777,7 @@ export const pokemonList = createPokemonArray(
     {
         'id': 94.01,
         'name': 'Mega Gengar',
-        'type': [PokemonType.Poison, PokemonType.Ghost],
+        'type': [PokemonType.Ghost, PokemonType.Poison],
         'eggCycles': 20,
         'levelType': LevelType.mediumslow,
         'exp': 207,
@@ -6086,7 +6086,7 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 150.01,
+        'id': 150.02,
         'name': 'Mega Mewtwo Y',
         'type': [PokemonType.Psychic],
         'eggCycles': 120,
@@ -6805,7 +6805,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 230,
         'eggCycles': 20,
-        'evolutions': [MegaEvolution('Ampharos', 'Mega Ampharos')],
+        // 'evolutions': [MegaEvolution('Ampharos', 'Mega Ampharos')],
         'base': {
             'hitpoints': 90,
             'attack': 75,
@@ -11926,6 +11926,26 @@ export const pokemonList = createPokemonArray(
             'attack': 180,
             'specialAttack': 150,
             'defense': 160,
+            'specialDefense': 90,
+            'speed': 90,
+        },
+        'gender': {
+            'type': Genders.Genderless,
+        },
+    },
+    {
+        'id': 383.02,
+        'name': 'Meta Groudon',
+        'type': [PokemonType.Ground],
+        'eggCycles': 120,
+        'levelType': LevelType.slow,
+        'exp': 302,
+        'catchRate': 3,
+        'base': {
+            'hitpoints': 100,
+            'attack': 150,
+            'specialAttack': 100,
+            'defense': 140,
             'specialDefense': 90,
             'speed': 90,
         },

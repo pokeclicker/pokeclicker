@@ -1,3 +1,5 @@
+import Requirement from '../requirements/Requirement';
+
 /**
  * Source event for decreasing shop multipliers
  */
@@ -15,4 +17,5 @@ export interface ShopOptions {
     multiplier?: number,
     multiplierDecrease?: boolean,
     multiplierDecreaser?: MultiplierDecreaser,
+    visible?: Requirement,
 }
