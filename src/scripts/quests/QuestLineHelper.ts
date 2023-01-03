@@ -721,6 +721,83 @@ class QuestLineHelper {
 
         App.game.quests.questLines().push(regiTrioQuestLine);
     }
+
+    //Jirachi Quest
+    public static createJirachiQuestLine() {
+        const jirachiQuestLine = new QuestLine('Wish Maker', 'Harness the power of the Millennium Comet and make a wish!', new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), GameConstants.BulletinBoards.Hoenn);
+
+        const millenniumFest = new TalkToNPCQuest(MillenniumFest, 'Attend the opening ceremony of the Millennium Festival near Lavaridge Town.');
+        jirachiQuestLine.addQuest(millenniumFest);
+
+        const clownRocket = new CustomQuest(1, 0, 'Defeat Team Rocket Jessie & James at the Millennium Festival near Lavaridge Town.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Clown Jessie & James')]());
+        jirachiQuestLine.addQuest(clownRocket);
+
+        const talkToButler1 = new TalkToNPCQuest(Butler1, 'Learn the legend of the Millennium Comet from Butler near Lavaridge Town.');
+        jirachiQuestLine.addQuest(talkToButler1);
+
+        const clearMtChimney2 = new CustomQuest(1, 0, 'Climb to the Mt. Chimney Crater to get a better view of the Millennium Comet as it passes.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Mt. Chimney Crater')]());
+        jirachiQuestLine.addQuest(clearMtChimney2);
+
+        const catchAbsol = new CaptureSpecificPokemonQuest('Absol', 'You are being stalked by Absol, the Disaster Pokémon. Capture it.', 1, true);
+        jirachiQuestLine.addQuest(catchAbsol);
+
+        const cocoonHatch = new TalkToNPCQuest(CocoonHatch, 'Examine the crystalline cocoon Butler gave you while at the Mt. Chimney Crater.');
+        jirachiQuestLine.addQuest(cocoonHatch);
+
+        const fightButler1 = new CustomQuest(1, 0, 'Butler has followed you to the Mt. Chimney Crater and is trying to kidnap Jirachi!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Butler 1')]());
+        jirachiQuestLine.addQuest(fightButler1);
+
+        const fightButler2 = new CustomQuest(1, 0, 'Butler has escaped through the Jagged Pass and hooked Jirachi up to some sort of machine. Fight him to free Jirachi.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Butler 2')]());
+        jirachiQuestLine.addQuest(fightButler2);
+
+        const fightMetaGroudon1 = new CustomQuest(1, 0, 'Butler\'s attempts to resurrect Groudon have gone terribly wrong! Fight the resulting abomination!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Meta Groudon')]());
+        jirachiQuestLine.addQuest(fightMetaGroudon1);
+
+        const catchJirachi = new CaptureSpecificPokemonQuest('Jirachi', 'Jirachi has escaped in the chaos and is roaming Hoenn. Catch Jirachi.', 1, true);
+        jirachiQuestLine.addQuest(catchJirachi);
+
+        App.game.quests.questLines().push(jirachiQuestLine);
+    }
+
+    //Meta Groudon Quest
+    public static createMetaGroudonQuestLine() {
+        const metaGroudonQuestLine = new QuestLine('A Meta Discovery', 'Help Butler\'s wish come true, responsibly.', new MultiRequirement([new ObtainedPokemonRequirement('Groudon'), new QuestLineCompletedRequirement('Wish Maker')]), GameConstants.BulletinBoards.Hoenn);
+
+        const talkToButler2 = new TalkToNPCQuest(Butler2, 'Talk to Butler in the Jagged Pass to learn about his new plan.');
+        metaGroudonQuestLine.addQuest(talkToButler2);
+
+        const butlerMaterials1 = new CaptureSpecificPokemonQuest('Electrode', 'Catch or hatch 100 Electrode', 100, true);
+
+        const butlerMaterials2 = new MineLayersQuest(25, 0);
+
+        const butlerMaterials3 = new CatchShiniesQuest(3, 0);
+
+        metaGroudonQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                butlerMaterials1,
+                butlerMaterials2,
+                butlerMaterials3,
+            ], 'Gather the materials Butler needs to rebuild his resurrection machine.'));
+
+        const calibrateMachine = new CaptureSpecificPokemonQuest('Groudon', 'Calibrate the machine by catching or hatching 5 Groudon', 5, true);
+        metaGroudonQuestLine.addQuest(calibrateMachine);
+
+        const MetaGroudonReward = () => {
+            App.game.party.gainPokemonById(383.02);
+            Notifier.notify({
+                title: metaGroudonQuestLine.name,
+                message: 'Butler turns control of Meta Groudon over to you!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
+        const talkToButler3 = new TalkToNPCQuest(Butler3, 'Deliver the materials to Butler in the Jagged Pass and start the resurrection machine.', MetaGroudonReward);
+        metaGroudonQuestLine.addQuest(talkToButler3);
+
+        App.game.quests.questLines().push(metaGroudonQuestLine);
+    }
+
     // Sinnoh QuestLines
     // Started upon defeating Oreburgh City's gym.
     public static createGalacticSinnohQuestLine() {
@@ -2328,6 +2405,8 @@ class QuestLineHelper {
         this.createRubySapphireSeviiQuestLine();
         this.createPinkanThemeparkQuestLine();
         this.createRegiTrioQuestLine();
+        this.createJirachiQuestLine();
+        this.createMetaGroudonQuestLine();
         this.createGalacticSinnohQuestLine();
         this.createGiratinaQuestLine();
         this.createPlasmaUnovaQuestLine();
