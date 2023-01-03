@@ -386,6 +386,23 @@ export function camelCaseToString(str: string): string {
     return str.replace(/[\s_-]?([A-Z])/g, ' $1').replace(/\b\w/g, (w) => (w.replace(/\w/, (c) => c.toUpperCase()))).trim();
 }
 
+export function pluralizeString(str: string, amt: number): string {
+    if (amt <= 1) {
+        return str;
+    }
+
+    switch (true) {
+        case /s$/.test(str):
+            return str;
+        case /y$/.test(str):
+            return str.replace(/y$/, 'ies');
+        case /ch$/.test(str):
+            return `${str}es`;
+        default:
+            return `${str}s`;
+    }
+}
+
 export function formatDate(date: Date): string {
     return date.toISOString().replace(/T/, ' ').replace(/.\d+Z/, '');
 }
