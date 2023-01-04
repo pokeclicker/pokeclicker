@@ -11934,6 +11934,26 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 383.02,
+        'name': 'Meta Groudon',
+        'type': [PokemonType.Ground],
+        'eggCycles': 120,
+        'levelType': LevelType.slow,
+        'exp': 302,
+        'catchRate': 3,
+        'base': {
+            'hitpoints': 100,
+            'attack': 150,
+            'specialAttack': 100,
+            'defense': 140,
+            'specialDefense': 90,
+            'speed': 90,
+        },
+        'gender': {
+            'type': Genders.Genderless,
+        },
+    },
+    {
         'id': 384,
         'name': 'Rayquaza',
         'type': [PokemonType.Dragon, PokemonType.Flying],

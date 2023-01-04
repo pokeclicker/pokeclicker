@@ -26,6 +26,7 @@ class SafariPokemonList {
     }
 
     private static generateKantoSafariList() {
+        // Push each zone for the region into this list
         const list = [];
         // Lower weighted pokemon will appear less frequently, equally weighted are equally likely to appear
         list.push(new SafariPokemonList([

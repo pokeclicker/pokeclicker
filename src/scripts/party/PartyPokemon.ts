@@ -277,7 +277,7 @@ class PartyPokemon implements Saveable {
     getBreedingAttackBonus = ko.pureComputed((): number => {
         const attackBonusPercent = (GameConstants.BREEDING_ATTACK_BONUS + this.vitaminsUsed[GameConstants.VitaminType.Calcium]()) / 100;
         const proteinBoost = this.vitaminsUsed[GameConstants.VitaminType.Protein]();
-        return Math.floor((this.baseAttack * attackBonusPercent) + proteinBoost);
+        return (this.baseAttack * attackBonusPercent) + proteinBoost;
     });
 
     public hideFromProteinList = ko.pureComputed(() => {
