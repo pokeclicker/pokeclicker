@@ -107,14 +107,14 @@ class Breeding implements Feature {
             ['Dreepy', 'Drakloak', 'Dragapult', 'Duraludon'],
         ];
         this.hatchList[EggType.Mystery] = [
-            ['Gastly', 'Jigglypuff', 'Geodude'],
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
+            ['Gastly', 'Jigglypuff', 'Geodude', 'Duduo'],
+            ['Yanma', 'Stantler'],
+            ['Trapinch', 'Sableye', 'Spoink'],
+            ['Stunky', 'Bronzor'],
+            ['Vanillite', 'Drilbur'],
+            ['Pancham', 'Honedge'],
+            ['Mudbray', 'Rockruff'],
+            ['Rolycoly', 'Milcery'],
         ];
         BreedingController.initialize();
     }
