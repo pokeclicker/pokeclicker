@@ -296,7 +296,7 @@ class PokemonHelper extends TmpPokemonHelper {
         return codes;
     }
 
-    public static getPokemonTempBattle(pokemonName: PokemonNameType): Array<string> {
+    public static getPokemonTempBattleReward(pokemonName: PokemonNameType): Array<string> {
         const tempBattleList = [];
         Object.entries(TemporaryBattleList).forEach(tempBattle => {
             if (tempBattle[1].optionalArgs?.firstTimeRewardFunction?.toString().includes(`'${pokemonName}'`) ||
@@ -405,7 +405,7 @@ class PokemonHelper extends TmpPokemonHelper {
         }
 
         // Temp battle reward
-        const tempBattle = PokemonHelper.getPokemonTempBattle(pokemonName);
+        const tempBattle = PokemonHelper.getPokemonTempBattleReward(pokemonName);
         if (tempBattle.length) {
             encounterTypes[PokemonLocationType.TempBattleReward] = tempBattle;
         }
