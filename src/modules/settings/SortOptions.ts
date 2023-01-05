@@ -61,9 +61,7 @@ export const SortOptionConfigs: Record<SortOptions, SortOptionConfig> = {
 
     [SortOptions.breedingEfficiency]: {
         text: 'Breeding Efficiency',
-        getValue: (p) => (
-            ((p.getBreedingAttackBonus() * (Settings.getSetting('breedingIncludeEVBonus').observableValue() ? p.calculateEVAttackBonus() : 1)) / p.getEggSteps()) * EGG_CYCLE_MULTIPLIER
-        ),
+        getValue: (p) => p.breedingEfficiency(),
     },
 
     [SortOptions.eggCycles]: {

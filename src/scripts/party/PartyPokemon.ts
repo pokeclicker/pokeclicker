@@ -280,6 +280,10 @@ class PartyPokemon implements Saveable {
         return (this.baseAttack * attackBonusPercent) + proteinBoost;
     });
 
+    breedingEfficiency = ko.pureComputed((): number => {
+        return ((this.getBreedingAttackBonus() * this.calculateEVAttackBonus()) / this.getEggSteps()) * GameConstants.EGG_CYCLE_MULTIPLIER;
+    });
+
     public hideFromProteinList = ko.pureComputed(() => {
         if (this._breeding()) {
             return true;
