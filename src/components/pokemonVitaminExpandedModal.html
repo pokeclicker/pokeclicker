@@ -126,7 +126,7 @@
                                     >+</button>
                                 </td>
                                 <!-- /ko -->
-                                <td class="text-center align-middle tight" data-bind="text: ((($data.getBreedingAttackBonus() * (Settings.getSetting('breedingIncludeEVBonus').observableValue() ? $data.calculateEVAttackBonus() : 1)) / $data.getEggSteps()) * GameConstants.EGG_CYCLE_MULTIPLIER).toLocaleString('en-US', { maximumSignificantDigits: 2 })">-</td>
+                                <td class="text-center align-middle tight" data-bind="text: SortOptionConfigs[SortOptions.breedingEfficiency].getValue($data)">-</td>
                                 <td class="text-center align-middle tight" data-bind="text: $data.getBreedingAttackBonus().toLocaleString('en-US')">-</td>
                                 <td class="text-center align-middle tight" data-bind="text: $data.getEggSteps().toLocaleString('en-US')">-</td>
                             </tr>
