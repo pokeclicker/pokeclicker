@@ -107,7 +107,7 @@ class Breeding implements Feature {
             ['Dreepy', 'Drakloak', 'Dragapult', 'Duraludon'],
         ];
         this.hatchList[EggType.Mystery] = [
-            ['Gastly', 'Jigglypuff', 'Geodude', 'Duduo'],
+            ['Gastly', 'Jigglypuff', 'Geodude', 'Doduo'],
             ['Yanma', 'Stantler'],
             ['Trapinch', 'Sableye', 'Spoink'],
             ['Stunky', 'Bronzor'],
