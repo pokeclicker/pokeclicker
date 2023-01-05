@@ -1,6 +1,3 @@
-import { EGG_CYCLE_MULTIPLIER } from '../GameConstants';
-import Settings from './Settings';
-
 export enum SortOptions {
     id = 0,
     name = 1,
