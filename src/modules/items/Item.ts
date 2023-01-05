@@ -2,7 +2,7 @@
 
 import { Observable } from 'knockout';
 import {
-    Currency, ITEM_PRICE_MULTIPLIER, Pokeball, humanifyString, camelCaseToString,
+    Currency, ITEM_PRICE_MULTIPLIER, Pokeball, humanifyString, camelCaseToString, pluralizeString,
 } from '../GameConstants';
 import NotificationConstants from '../notifications/NotificationConstants';
 import Notifier from '../notifications/Notifier';
@@ -84,9 +84,11 @@ export default class Item {
         }
 
         let n = amt;
+        const displayName = pluralizeString(humanifyString(this.displayName), n);
+
         if (n > this.maxAmount) {
             Notifier.notify({
-                message: `You can only buy ${this.maxAmount.toLocaleString('en-US')} &times; ${humanifyString(this.displayName)}!`,
+                message: `You can only buy ${this.maxAmount.toLocaleString('en-US')} &times; ${displayName}!`,
                 type: NotificationConstants.NotificationOption.danger,
             });
             n = this.maxAmount;
@@ -94,19 +96,17 @@ export default class Item {
 
         if (!this.isAvailable()) {
             Notifier.notify({
-                message: `${humanifyString(this.displayName)} is sold out!`,
+                message: `${displayName} is sold out!`,
                 type: NotificationConstants.NotificationOption.danger,
             });
             return;
         }
 
-        const multiple = n > 1 ? 's' : '';
-
         if (App.game.wallet.loseAmount(new Amount(this.totalPrice(n), this.currency))) {
             this.gain(n);
             this.increasePriceMultiplier(n);
             Notifier.notify({
-                message: `You bought ${n.toLocaleString('en-US')} × <img src="${this.image}" height="24px"/> ${humanifyString(this.displayName)}${multiple}.`,
+                message: `You bought ${n.toLocaleString('en-US')} × <img src="${this.image}" height="24px"/> ${displayName}.`,
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.Items.item_bought,
             });
@@ -121,7 +121,7 @@ export default class Item {
                     break;
             }
             Notifier.notify({
-                message: `You don't have enough ${curr} to buy ${n.toLocaleString('en-US')} ${humanifyString(this.displayName) + multiple}!`,
+                message: `You don't have enough ${curr} to buy ${n.toLocaleString('en-US')} ${displayName}!`,
                 type: NotificationConstants.NotificationOption.danger,
             });
         }

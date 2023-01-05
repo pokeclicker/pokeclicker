@@ -49,11 +49,10 @@ class ShardDeal {
             deal.shards.forEach((value) => Underground.gainMineItem(value.shardType.id, -value.amount * maxTrades));
 
             const amount = deal.item.amount * maxTrades;
-            const multiple = amount > 1 ? 's' : '';
             deal.item.itemType.gain(deal.item.amount * maxTrades);
             App.game.wallet.loseAmount(new Amount(deal.questPointCost * maxTrades, GameConstants.Currency.questPoint));
             Notifier.notify({
-                message: `You traded for ${amount.toLocaleString('en-US')} × <img src="${deal.item.itemType.image}" height="24px"/> ${GameConstants.humanifyString(deal.item.itemType.displayName)}${multiple}.`,
+                message: `You traded for ${amount.toLocaleString('en-US')} × <img src="${deal.item.itemType.image}" height="24px"/> ${GameConstants.pluralizeString(GameConstants.humanifyString(deal.item.itemType.displayName), amount)}.`,
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.Items.item_bought,
             });

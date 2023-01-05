@@ -1,0 +1,22 @@
+<div class="modal fade noselect" id="dreamOrbsOpenedModal" tabindex="-1" role="dialog" aria-labelledby="dreamOrbsOpenedModalLabel">
+<div class="modal-dialog modal-dialog-scrollable modal-sm" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Dream Orbs Opened</h5>
+        </div>
+        <div class="modal-body">
+            <p data-bind="text: `You opened ${App.game.dreamOrbController.amountOpened().toLocaleString('en-US')} ${App.game.dreamOrbController.selectedOrb().color} Dream Orbs and received:`"></p>
+            <div data-bind="foreach: App.game.dreamOrbController.itemsReceived">
+                <div>
+                    <span data-bind="text: $data.amount.toLocaleString('en-US')"></span>
+                    <img data-bind="attr: { src: BagHandler.image($data.item) }" height="32px" />
+                    <span data-bind="text: $data.name"></span>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+</div>
+</div>

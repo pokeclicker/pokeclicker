@@ -61,9 +61,14 @@ class Egg implements Saveable {
             this.partyPokemon(this.type !== EggType.None ? App.game.party.getPokemon(PokemonHelper.getPokemonById(this.pokemon).id) : null);
         }
 
-        // Reduce total steps based on amount of Carbos used
-        if (this.partyPokemon() && App.game?.party) {
-            this.stepsRequired = this.partyPokemon().getEggSteps();
+        if (App.game?.party) {
+            if (this.partyPokemon()) {
+                // Reduce total steps based on amount of Carbos used
+                this.stepsRequired = this.partyPokemon().getEggSteps();
+            } else {
+                // The Pokémon is not in our party - this might be a shop egg.
+                this.stepsRequired = this.totalSteps;
+            }
         }
     }
 
