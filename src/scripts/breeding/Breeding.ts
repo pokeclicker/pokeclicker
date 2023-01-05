@@ -106,7 +106,7 @@ class Breeding implements Feature {
             ['Turtonator', 'Drampa', 'Jangmo-o', 'Hakamo-o', 'Kommo-o'],
             ['Dreepy', 'Drakloak', 'Dragapult', 'Duraludon'],
         ];
-        this.hatchList[EggType.Pokemon] = [
+        this.hatchList[EggType.Mystery] = [
             ['Gastly', 'Jigglypuff', 'Geodude'],
             [],
             [],
