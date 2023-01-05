@@ -117,7 +117,7 @@
                                         click: () => { $parent.removeVitamin($data, VitaminController.getMultiplier()) },
                                         class: ($parent.vitaminsUsed[$data]() > 0 ? 'text-success' : 'text-danger')"
                                 >-</button>
-                                <knockout class="align-middle" data-bind="text: $parent.vitaminsUsed[$data]().toLocaleString('en-US')">0</knockout>
+                                <knockout class="align-middle d-inline-block" style="width: .875rem;" data-bind="text: $parent.vitaminsUsed[$data]().toLocaleString('en-US')">0</knockout>
                                 <button type="button" class="btn btn-link btn-sm text-decoration-none align-text-top" style="line-height: 0.6; font-size: 1rem;"
                                     data-bind="
                                         click: () => { $parent.useVitamin($data, VitaminController.getMultiplier()) },
