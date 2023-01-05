@@ -13,11 +13,11 @@
                     <span class="btn btn-block btn-danger btn-static m-0">Vitamins are disabled.</span>
                     <!-- /ko -->
                     <div class="form-row m-0" id="protein-filter">
-                        <div class="form-group col-6 col-md-4 m-0 p-0">
+                        <div class="form-group col-6 col-lg-4 m-0 p-0">
                             <label for="protein-search">Search</label>
                             <input id="protein-search" autocomplete="off" class="form-control" placeholder="Search here" data-bind="textInput: Settings.getSetting('vitaminSearchFilter').observableValue" />
                         </div>
-                        <div class="form-group col-6 col-md-2 m-0 p-0">
+                        <div class="form-group col-6 col-lg-2 m-0 p-0">
                             <label for="protein-region-filter">Region</label>
                             <select id="protein-region-filter" name="vitaminRegionFilter" autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, +this.value)">
                                 <!-- ko foreach: Settings.getSetting('vitaminRegionFilter').options.filter(r => r.value <= player.highestRegion()) -->
@@ -25,7 +25,7 @@
                                 <!-- /ko -->
                             </select>
                         </div>
-                        <div class="form-group col-6 col-md-2 m-0 p-0">
+                        <div class="form-group col-6 col-lg-2 m-0 p-0">
                             <label for="protein-type-filter">Type</label>
                             <select id="protein-type-filter" name="vitaminTypeFilter" autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, +this.value)">
                                 <!-- ko foreach: Settings.getSetting('vitaminTypeFilter').options -->
@@ -33,7 +33,7 @@
                                 <!-- /ko -->
                             </select>
                         </div>
-                        <div class="form-group col-6 col-md-4 m-0 p-0">
+                        <div class="form-group col-6 col-lg-4 m-0 p-0">
                             <label>Order</label>
                             <div class="input-group" data-bind="with: Settings.getSetting('vitaminSort')">
                                 <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])" data-bind="foreach: $data.options, attr: {name}, selectedOptions: [$data.observableValue()]">
@@ -50,20 +50,18 @@
                         </div>
                     </div>
 
-                    <div class="d-flex align-items-center m-0 mt-1">
-                        <div class="ml-1">
-                            <div class="form-check">
+                    <div class="form-row m-0 mt-1 align-items-center">
+                        <div class="col-12 col-lg-8 text-center text-lg-left">
+                            <div class="form-check form-check-inline align-middle">
                                 <input type="checkbox" id="hide-max-protein-pokemons" class="form-check-input" data-bind="checked: Settings.getSetting('vitaminHideMaxedPokemon').observableValue()" onchange="Settings.setSettingByName('vitaminHideMaxedPokemon', this.checked)" />
                                 <label for="hide-max-protein-pokemons" class="form-check-label">Hide Pokémon with max vitamins</label>
                             </div>
-                        </div>
-                        <div class="ml-3">
-                            <div class="form-check">
+                            <div class="form-check form-check-inline align-middle">
                                 <input type="checkbox" id="hide-shiny-pokemons" class="form-check-input" data-bind="checked: Settings.getSetting('vitaminHideShinyPokemon').observableValue()" onchange="Settings.setSettingByName('vitaminHideShinyPokemon', this.checked)" />
                                 <label for="hide-shiny-pokemons" class="form-check-label">Hide shiny Pokémon</label>
                             </div>
                         </div>
-                        <div class="ml-auto">
+                        <div class="col-12 col-lg-4 text-center text-lg-right p-0">
                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                 <!-- ko foreach: VitaminController.multiplier -->
                                 <label class="btn btn-secondary" data-bind="css: { active: VitaminController.multiplierIndex() == $index() }">
