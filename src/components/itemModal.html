@@ -73,7 +73,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <!-- Amount buttons -->
                             <div class="col-12 pt-3">
                                 <div class="row justify-content-center">
@@ -82,8 +82,8 @@
                                             <!-- ko using: PartyController.hasMultipleStoneEvolutionsAvailable(ItemHandler.pokemonSelected(), GameConstants.StoneType[ItemHandler.stoneSelected()]), as: 'multipleEvolution' -->
                                             <button class="btn btn-success btn-block" data-bind="click: function(){ItemHandler.useStones()},
                                             tooltip: {
-                                                title: 'If a shiny is found, the game will stop using evolution items.' + (multipleEvolution ? '<br/>If the requirements for more than one evolution is fulfilled, a random evolution will be selected.' : ''), 
-                                                trigger: 'hover', 
+                                                title: 'If a shiny is found, the game will stop using evolution items.' + (multipleEvolution ? '<br/>If the requirements for more than one evolution is fulfilled, a random evolution will be selected.' : ''),
+                                                trigger: 'hover',
                                                 boundary: 'window',
                                                 html: multipleEvolution,
                                             }">
@@ -98,7 +98,7 @@
                                         </div>
                                     </div>
                                 </div>
-                               
+
                             </div>
                         </div>
                     </div>
@@ -110,6 +110,9 @@
                                 <!-- ko foreach: GameHelper.enumNumbers(GameConstants.VitaminType) -->
                                     <div class="btn btn-primary col-2 item-bag-item" data-bind="template: { name: 'otherItemTemplate', data: GameConstants.VitaminType[$data]}, click: () => { VitaminController.currentlySelected($data); $('#pokemonVitaminModal').modal('show'); }"></div>
                                 <!-- /ko -->
+                            </div>
+                            <div class="row justify-content-center mb-2">
+                                <button type="button" class="btn btn-primary btn-sm" data-bind="click: () => { $('#pokemonVitaminExpandedModal').modal('show') }">All Vitamins</button>
                             </div>
                             <h4>Held items</h4>
                             <div class="row justify-content-center">
