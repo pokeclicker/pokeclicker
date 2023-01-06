@@ -307,8 +307,8 @@ const PewterScientist = new NPC('Gem Scientist', [
 
 const Route3ShadySalesman = new NPC('Shady Salesman', [
     'Have I got a deal just for you!',
-    'I\'ll let you have a super secret Pokémon. For the right price!',
-], {image: 'assets/images/trainers/Burglar.png'});
+    'I\'ll let you have a super secret Pokémon. For the right price! Buying this pokemon Takes No Effort, you should Value it',
+], {image: 'assets/images/npcs/ShadySalesman.png'});
 
 const CeruleanKantoBerryMaster = new KantoBerryMasterNPC('Berry Master', [
     'Bah! You younglings have no appreciation of the art of Berry farming!',
@@ -4693,6 +4693,11 @@ const DrSplash5 = new NPC('Dr. Splash', [
     requirement: new QuestLineStepCompletedRequirement('Dr. Splash\'s Research Project', 7),
 });
 
+const MagikarpEyeShadySalesman = new NPC('Shady Salesman', [
+    'Kid, I have a deal for you! And for you alone. Here\'s your chance. I will sell you the secret Magikarp... For an unbelievable prize.',
+    'Oh, yeah... Returns not accepted, got that?',
+],  {image:'assets/images/npcs/ShadySalesman.png'});
+
 //Alola Towns
 
 TownList['Iki Town Outskirts'] = new Town(
@@ -4986,6 +4991,7 @@ TownList['Magikarp\'s Eye'] = new Town(
     [MagikarpJumpShadySalesMan],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Master_League)],
+        npcs: [MagikarpEyeShadySalesman],
         ignoreAreaStatus: true,
     }
 );
