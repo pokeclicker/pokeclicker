@@ -2025,22 +2025,23 @@ const Wallace1 = new NPC('Gym Leader Wallace', [
 });
 
 const Wallace2 = new NPC('Gym Leader Wallace', [
-    'My eyes didn\'t deceive me. Thanks to your help, Sootopolis... No, all of Hoenn was saved. On behalf of the people, I thank you.',
+    'My eyes didn\'t deceive me. Thanks to your help, Sootopolis...',
+    'No, all of Hoenn was saved. On behalf of the people, I thank you.',
     'Now that their battle is over, the Super-Ancient Pokémon have retreated to rest and recuperate. You will likely find Rayquaza back in the Sky Pillar.',
-    'Kyogre and Groudon are rumored to live deep within this very cave, but they are unlikely to show themleves to any normal trainer. Maybe the champion of Hoenn could earn their respect.',
+    'Kyogre and Groudon are rumored to live deep within this very cave, but they are unlikely to show themselves to any normal trainer. Maybe the champion of Hoenn could earn their respect.',
 ], {image: 'assets/images/gymLeaders/Wallace.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Weather Trio', 4), new QuestLineStepCompletedRequirement('The Weather Trio', 6, GameConstants.AchievementOption.less)]),
 });
 
 const WeatherBattle1 = new NPC('The Super-Ancient Pokémon Clash', [
-    '<i>Groudon and Kyogre  have been awakened by the efforts of Team Magma and Team Aqua! They are engaged in a fierce battle which threatens to destroy Sootopolis City... and more!</i>',
-    '<i>The locals in Sootopolis City shelter from the raging battle. Some say that this sort of this would never happen if Wallace was still  around.</i>',
+    '<i>Groudon and Kyogre have been awakened by the efforts of Team Magma and Team Aqua! They are engaged in a fierce battle which threatens to destroy Sootopolis City... and more!</i>',
+    '<i>The locals in Sootopolis City take shelter from the raging battle. Some say that this sort of this would never happen if Wallace was still around.</i>',
 ], {image: 'assets/images/npcs/other/WeatherBattle1.png',
     requirement: new MultiRequirement([new QuestLineStartedRequirement('The Weather Trio'), new QuestLineStepCompletedRequirement('The Weather Trio', 1, GameConstants.AchievementOption.less)]),
 });
 
 const WeatherBattle2 = new NPC('The Super-Ancient Pokémon Clash', [
-    '<i>Rayquaza appears aboce Kyogre and Groudon and utters a single intimidating roar. The battling Super-Ancient Pokémon stop their attacks, and a tense standoff ensues.</i>',
+    '<i>Rayquaza appears above Kyogre and Groudon and utters a single intimidating roar. The battling Super-Ancient Pokémon stop their attacks, and a tense standoff ensues.</i>',
     '<i>After what seems like an eternity, the three Super-Ancient Pokémon seem to have come to an understanding. They each depart the city, and peace is restored.</i>',
 ], {image: 'assets/images/npcs/other/WeatherBattle2.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Weather Trio', 3), new QuestLineStepCompletedRequirement('The Weather Trio', 5, GameConstants.AchievementOption.less)]),
