@@ -645,7 +645,7 @@ namespace GameConstants {
     }
 
     // Pokemon Statistics
-    declare enum PokemonStatiticsType {
+    declare enum PokemonStatisticsType {
         Captured = 'Captured',
         Defeated = 'Defeated',
         Encountered = 'Encountered',
