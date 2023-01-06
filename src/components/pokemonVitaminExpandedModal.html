@@ -1,0 +1,136 @@
+<div class="modal noselect fade" id="pokemonVitaminExpandedModal" tabindex="-1" role="dialog" aria-labelledby="pokemonVitaminExpandedModal">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <!-- ko if: modalUtils.observableState['pokemonVitaminExpandedModal'] === 'show' -->
+            <div class="modal-header bg-dark text-light" style='justify-content: space-around;'>
+                <h5 class="modal-title text-light">Vitamins</h5>&nbsp; <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body p-0">
+                <div class="sticky-top bg-dark text-light pt-2">
+                    <!-- ko if: App.game.challenges.list.disableVitamins.active() -->
+                    <span class="btn btn-block btn-danger btn-static m-0">Vitamins are disabled.</span>
+                    <!-- /ko -->
+                    <div class="form-row m-0" id="protein-filter">
+                        <div class="form-group col-6 col-lg-4 m-0 p-0">
+                            <label for="protein-search">Search</label>
+                            <input id="protein-search" autocomplete="off" class="form-control" placeholder="Search here" data-bind="textInput: Settings.getSetting('vitaminSearchFilter').observableValue" />
+                        </div>
+                        <div class="form-group col-6 col-lg-2 m-0 p-0">
+                            <label for="protein-region-filter">Region</label>
+                            <select id="protein-region-filter" name="vitaminRegionFilter" autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, +this.value)">
+                                <!-- ko foreach: Settings.getSetting('vitaminRegionFilter').options.filter(r => r.value <= player.highestRegion()) -->
+                                <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('vitaminRegionFilter').value === $data.value }, text: $data.text">Region</option>
+                                <!-- /ko -->
+                            </select>
+                        </div>
+                        <div class="form-group col-6 col-lg-2 m-0 p-0">
+                            <label for="protein-type-filter">Type</label>
+                            <select id="protein-type-filter" name="vitaminTypeFilter" autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, +this.value)">
+                                <!-- ko foreach: Settings.getSetting('vitaminTypeFilter').options -->
+                                <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('vitaminTypeFilter').value === $data.value }, text: $data.text">Type</option>
+                                <!-- /ko -->
+                            </select>
+                        </div>
+                        <div class="form-group col-6 col-lg-4 m-0 p-0">
+                            <label>Order</label>
+                            <div class="input-group" data-bind="with: Settings.getSetting('vitaminSort')">
+                                <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])" data-bind="foreach: $data.options, attr: {name}, selectedOptions: [$data.observableValue()]">
+                                    <option data-bind="text: $data.text, value: $data.value"></option>
+                                </select>
+                                <div class="input-group-append bg-primary text-light">
+                                    <label for="vitaminSortDirection" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;" data-bind="
+                                    text: Settings.getSetting('vitaminSortDirection').observableValue() ? '⥄' : '⥂',
+                                    tooltip: { title: Settings.getSetting('vitaminSortDirection').observableValue() ? 'Descending (highest value first)' : 'Ascending (lowest value first)', trigger: 'hover', placement:'top' }
+                                    ">⥂</label>
+                                    <input id="vitaminSortDirection" style="vertical-align: middle" class="hidden" type="checkbox" data-bind="checked: Settings.getSetting('vitaminSortDirection').observableValue()" onchange="Settings.setSettingByName('vitaminSortDirection', this.checked)" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row m-0 mt-1 align-items-center">
+                        <div class="col-12 col-lg-8 text-center text-lg-left">
+                            <div class="form-check form-check-inline align-middle">
+                                <input type="checkbox" id="hide-max-protein-pokemons" class="form-check-input" data-bind="checked: Settings.getSetting('vitaminHideMaxedPokemon').observableValue()" onchange="Settings.setSettingByName('vitaminHideMaxedPokemon', this.checked)" />
+                                <label for="hide-max-protein-pokemons" class="form-check-label">Hide Pokémon with max vitamins</label>
+                            </div>
+                            <div class="form-check form-check-inline align-middle">
+                                <input type="checkbox" id="hide-shiny-pokemons" class="form-check-input" data-bind="checked: Settings.getSetting('vitaminHideShinyPokemon').observableValue()" onchange="Settings.setSettingByName('vitaminHideShinyPokemon', this.checked)" />
+                                <label for="hide-shiny-pokemons" class="form-check-label">Hide shiny Pokémon</label>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-4 text-center text-lg-right p-0">
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <!-- ko foreach: VitaminController.multiplier -->
+                                <label class="btn btn-secondary" data-bind="css: { active: VitaminController.multiplierIndex() == $index() }">
+                                    <input type="radio" name="vitaminAmount"
+                                        data-bind="value: $index(), checked: VitaminController.multiplierIndex()"
+                                        onchange="VitaminController.multiplierIndex(+this.value)">
+                                    <knockout data-bind="text: $data"></knockout>
+                                </label>
+                                <!-- /ko -->
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"></button>
+                                    <div class="dropdown-menu">
+                                        <!-- ko foreach: GameHelper.enumNumbers(GameConstants.VitaminType) -->
+                                        <a class="dropdown-item" href="#" data-bind="text: `Remove All ${GameConstants.VitaminType[$data]}`, click: () => { PartyController.removeVitaminFromParty($data) }"></a>
+                                        <!-- /ko -->
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#" data-bind="click: () => { PartyController.removeAllVitaminsFromParty() }">Remove ALL Vitamins</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover table-bordered table-sm m-0 mt-1">
+                        <thead>
+                            <tr>
+                                <th class="align-middle">Pokémon</th>
+                                <th class="text-center align-middle">Vitamins Used</th>
+                                <!-- ko foreach: GameHelper.enumStrings(GameConstants.VitaminType) -->
+                                <th class="text-center align-middle">
+                                    <span data-bind="text: $data"></span><br />
+                                    <span class="font-weight-normal small" data-bind="text: `[ ${player._itemList[$data]().toLocaleString('en-US')} ]`"></span>
+                                </th>
+                                <!-- /ko -->
+                                <th class="text-center align-middle">Breeding Efficiency</th>
+                                <th class="text-center align-middle">Attack Bonus</th>
+                                <th class="text-center align-middle">Egg Steps</th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach: PartyController.getvitaminSortedList()">
+                            <tr data-bind="hidden: $data.hideFromProteinList()">
+                                <td class="text-left align-middle">
+                                    <knockout data-bind="text: $data.displayName"></knockout>
+                                    <sup data-bind="visible: $data.shiny">✨</sup>
+                                </td>
+                                <td class="text-center align-middle tight" data-bind="text: $data.totalVitaminsUsed().toLocaleString('en-US')"></td>
+                                <!-- ko foreach: GameHelper.enumNumbers(GameConstants.VitaminType) -->
+                                <td class="text-center align-middle tight">
+                                    <button type="button" class="btn btn-link btn-sm text-decoration-none align-text-top" style="line-height: 0.6; font-size: 1rem;"
+                                        data-bind="
+                                            click: () => { $parent.removeVitamin($data, VitaminController.getMultiplier()) },
+                                            class: ($parent.vitaminsUsed[$data]() > 0 ? 'text-success' : 'text-muted')">-</button>
+                                    <knockout class="align-middle d-inline-block" style="width: .875rem;" data-bind="text: $parent.vitaminsUsed[$data]().toLocaleString('en-US')">0</knockout>
+                                    <button type="button" class="btn btn-link btn-sm text-decoration-none align-text-top" style="line-height: 0.6; font-size: 1rem;"
+                                        data-bind="
+                                            click: () => { $parent.useVitamin($data, VitaminController.getMultiplier()) },
+                                            class: ($parent.vitaminUsesRemaining() && player.itemList[GameConstants.VitaminType[$data]]() ? 'text-success' : 'text-muted')">+</button>
+                                </td>
+                                <!-- /ko -->
+                                <td class="text-center align-middle tight" data-bind="text: SortOptionConfigs[SortOptions.breedingEfficiency].getValue($data).toLocaleString('en-US', { maximumSignificantDigits: 2 })">-</td>
+                                <td class="text-center align-middle tight" data-bind="text: $data.getBreedingAttackBonus().toLocaleString('en-US')">-</td>
+                                <td class="text-center align-middle tight" data-bind="text: $data.getEggSteps().toLocaleString('en-US')">-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- /ko -->
+        </div>
+    </div>
+</div>

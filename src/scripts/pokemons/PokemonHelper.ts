@@ -15,6 +15,10 @@ enum PokemonLocationType {
     BattleFrontier,
     Wandering,
     Discord,
+    QuestLineReward,
+    TempBattleReward,
+    GymReward,
+    DungeonReward
 }
 
 class PokemonHelper extends TmpPokemonHelper {
@@ -292,6 +296,38 @@ class PokemonHelper extends TmpPokemonHelper {
         return codes;
     }
 
+    public static getPokemonTempBattleReward(pokemonName: PokemonNameType): Array<string> {
+        const tempBattleList = [];
+        Object.entries(TemporaryBattleList).forEach(tempBattle => {
+            if (tempBattle[1].optionalArgs?.firstTimeRewardFunction?.toString().includes(`'${pokemonName}'`) ||
+                tempBattle[1].optionalArgs?.rewardFunction?.toString().includes(`'${pokemonName}'`) ||
+                (tempBattle[1].optionalArgs?.isTrainerBattle === false && tempBattle[1].getPokemonList().some((p) => p.name === pokemonName))) {
+                tempBattleList.push(tempBattle[0]);
+            }
+        });
+        return tempBattleList;
+    }
+
+    public static getPokemonGymReward(pokemonName: PokemonNameType): Array<string> {
+        const gymList = [];
+        Object.values(GymList).forEach(gym => {
+            if (gym.rewardFunction?.toString().includes(`'${pokemonName}'`)) {
+                gymList.push(gym.leaderName);
+            }
+        });
+        return gymList;
+    }
+
+    public static getPokemonDungeonReward(pokemonName: PokemonNameType): Array<string> {
+        const dungeons = [];
+        Object.values(dungeonList).forEach(dungeon => {
+            if (dungeon.rewardFunction?.toString().includes(`'${pokemonName}'`)) {
+                dungeons.push(dungeon.name);
+            }
+        });
+        return dungeons;
+    }
+
     public static getPokemonLocations = (pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none) => {
         const encounterTypes = {};
         // Routes
@@ -362,10 +398,28 @@ class PokemonHelper extends TmpPokemonHelper {
             encounterTypes[PokemonLocationType.Wandering] = wandering;
         }
 
-        // Wandering
+        // Discord
         const discord = PokemonHelper.getPokemonDiscord(pokemonName);
         if (discord.length) {
             encounterTypes[PokemonLocationType.Discord] = discord;
+        }
+
+        // Temp battle reward
+        const tempBattle = PokemonHelper.getPokemonTempBattleReward(pokemonName);
+        if (tempBattle.length) {
+            encounterTypes[PokemonLocationType.TempBattleReward] = tempBattle;
+        }
+
+        // Gym reward
+        const gymReward = PokemonHelper.getPokemonGymReward(pokemonName);
+        if (gymReward.length) {
+            encounterTypes[PokemonLocationType.GymReward] = gymReward;
+        }
+
+        // Dungeon reward
+        const dungeonReward = PokemonHelper.getPokemonDungeonReward(pokemonName);
+        if (dungeonReward.length) {
+            encounterTypes[PokemonLocationType.DungeonReward] = dungeonReward;
         }
 
         // Return the list of items

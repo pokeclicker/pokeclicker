@@ -77,6 +77,47 @@ class PartyController {
         return false;
     }
 
+    public static async removeVitaminFromParty(vitamin: GameConstants.VitaminType, amount = Infinity, shouldConfirm = true) {
+        if (shouldConfirm) {
+            if (!await Notifier.confirm({
+                title: `Remove All ${GameConstants.VitaminType[vitamin]}?`,
+                message: `All ${GameConstants.VitaminType[vitamin]} will be removed from <u>every</u> Pokémon in your party.`,
+                type: NotificationConstants.NotificationOption.warning,
+                confirm: 'OK',
+            })) {
+                return;
+            }
+        }
+
+        App.game.party.caughtPokemon.forEach((p) => {
+            if (p.vitaminsUsed[vitamin]() > 0) {
+                p.removeVitamin(vitamin, amount);
+            }
+        });
+    }
+
+    public static async removeAllVitaminsFromParty(shouldConfirm = true) {
+        if (shouldConfirm) {
+            if (!await Notifier.confirm({
+                title: 'Remove All Vitamins?',
+                message: 'All vitamins will be removed from <u>every</u> Pokémon in your party.',
+                type: NotificationConstants.NotificationOption.warning,
+                confirm: 'OK',
+            })) {
+                return;
+            }
+        }
+
+        const vitamins = GameHelper.enumNumbers(GameConstants.VitaminType);
+        App.game.party.caughtPokemon.forEach((p) => {
+            vitamins.forEach((v) => {
+                if (p.vitaminsUsed[v]() > 0) {
+                    p.removeVitamin(v, Infinity);
+                }
+            });
+        });
+    }
+
     public static getMaxLevelPokemonList(): Array<PartyPokemon> {
         return App.game.party.caughtPokemon.filter((partyPokemon: PartyPokemon) => {
             return !partyPokemon.breeding && partyPokemon.level >= 100;
@@ -103,7 +144,7 @@ class PartyController {
     private static vitaminSortedList = [];
     static getvitaminSortedList = ko.pureComputed(() => {
         // If the protein modal is open, we should sort it.
-        if (modalUtils.observableState.pokemonVitaminModal === 'show') {
+        if (modalUtils.observableState.pokemonVitaminModal === 'show' || modalUtils.observableState.pokemonVitaminExpandedModal === 'show') {
             PartyController.vitaminSortedList = [...App.game.party.caughtPokemon];
             return PartyController.vitaminSortedList.sort(PartyController.compareBy(Settings.getSetting('vitaminSort').observableValue(), Settings.getSetting('vitaminSortDirection').observableValue()));
         }
