@@ -1770,7 +1770,7 @@ export enum BattlePokemonGender {
 }
 
 // Pokemon Statistics
-export enum PokemonStatiticsType {
+export enum PokemonStatisticsType {
     Captured = 'Captured',
     Defeated = 'Defeated',
     Encountered = 'Encountered',
