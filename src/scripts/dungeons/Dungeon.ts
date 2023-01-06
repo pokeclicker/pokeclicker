@@ -3530,8 +3530,14 @@ dungeonList['Eterna Forest'] = new Dungeon('Eterna Forest',
     },
     812000,
     [
-        new DungeonBossPokemon('Beautifly', 3950000, 30),
-        new DungeonBossPokemon('Dustox', 3950000, 30),
+        new DungeonBossPokemon('Beautifly', 3950000, 30, {hide: true, requirement: new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 7, GameConstants.AchievementOption.less)}),
+        new DungeonBossPokemon('Dustox', 3950000, 30, {hide: true, requirement: new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 7, GameConstants.AchievementOption.less)}),
+        new DungeonBossPokemon('Beautifly', 3950000, 30, {hide: true, requirement: new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 8)}),
+        new DungeonBossPokemon('Dustox', 3950000, 30, {hide: true, requirement: new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 8)}),
+        new DungeonBossPokemon('Parasect', 4500000, 30, {hide: true, requirement: new MultiRequirement([
+            new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 8, GameConstants.AchievementOption.less),
+            new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 7),
+        ])}),
     ],
     48000, 205);
 

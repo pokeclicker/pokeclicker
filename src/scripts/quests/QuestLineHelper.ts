@@ -850,6 +850,109 @@ class QuestLineHelper {
         App.game.quests.questLines().push(galacticSinnohQuestLine);
     }
 
+    //Manaphy Quest
+    public static createManaphyQuestLine() {
+		const manaphyQuestLine = new QuestLine('Recover the Precious Egg!', 'A rare egg is at the Sandgem Lab! Surely it should be easy to hatch one little egg, right?', new GymBadgeRequirement(BadgeEnums.Forest), GameConstants.BulletinBoards.Sinnoh);
+
+		const talkHastings1 = new TalkToNPCQuest(ManaphyHastings1, 'Speak to Professor Hastings in Sandgem Town.');
+		manaphyQuestLine.addQuest(talkHastings1);//0
+
+		const investigateBoulders = new TalkToNPCQuest(ManaphyBoulders, 'Search for clues in Eterna Forest.');
+		manaphyQuestLine.addQuest(investigateBoulders);//1
+
+		const catchPolitoedSubstitutes = new CustomQuest(50, undefined, 'Capture 50 Water-type Pokémon, and see if those boulders are really just boulders.', () => {
+		return pokemonMap.filter(p => p.type.includes(PokemonType.Water)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
+        });
+		manaphyQuestLine.addQuest(catchPolitoedSubstitutes);//2
+
+		const clearManaphyGoRock1 = new CustomQuest(1, 0, 'Time to give those mysterious boulders the soaking of their life!', () => 
+			App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Manaphy Go-Rock MGrunt 1')]());
+		manaphyQuestLine.addQuest(clearManaphyGoRock1);//3
+
+		const talkGoRockCommander1 = new TalkToNPCQuest(ManaphyGoRockCommander, 'Speak to the Go-Rock Commander.');
+		manaphyQuestLine.addQuest(talkGoRockCommander1);//4
+
+		const clearManaphyGoRock2 = new CustomQuest(1, 0, 'Chase down the fleeing Go-Rock Squad!', () => 
+			App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Manaphy Go-Rock FGrunt 1')]());
+		manaphyQuestLine.addQuest(clearManaphyGoRock2);//5
+
+		const clearManaphyGoRock3 = new CustomQuest(3, 0, 'Keep chasing the Go-Rock Squad, but... didn\'t they already pass that tree?', () =>
+			App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Manaphy Go-Rock MGrunt 2')]() +
+			App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Manaphy Go-Rock MGrunt 3')]() +
+			App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Manaphy Go-Rock FGrunt 2')]()
+        );
+		manaphyQuestLine.addQuest(clearManaphyGoRock3);//6
+
+		const talkGoRockGrunt1 = new TalkToNPCQuest(ManaphyGoRock, 'The Go-Rock Squad are definitely going in circles, but they\'re too dumb to realise it. Interrogate one on their method of navigating the forest!');
+		manaphyQuestLine.addQuest(talkGoRockGrunt1);//7
+
+		const clearEternaParasect = new CustomQuest(1, 0, 'They\'re using Parasect to navigate the forest. But the Parasect must be moving around, and getting them lost. Clear out a Parasect and they should get trapped!', () => 
+			App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Eterna Forest')]());
+		manaphyQuestLine.addQuest(clearEternaParasect);//8
+
+		const clearManaphyGoRock4 = new CustomQuest(1, 0, 'Now you\'ve muddied the path, chase them down for good!', () => 
+			App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Manaphy Go-Rock MGrunt 4')]());
+		manaphyQuestLine.addQuest(clearManaphyGoRock4);//9
+
+		const clearManaphyCommander1 = new CustomQuest(1, 0, 'Beat the Go-Rock Commander, and retrieve the precious egg!', () => 
+			App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Manaphy Go-Rock Commander')]());
+		manaphyQuestLine.addQuest(clearManaphyCommander1);//10
+
+		const talkHastings2 = new TalkToNPCQuest(ManaphyHastings2, 'Return the egg to Professor Hastings in Sandgem Town. ');
+		manaphyQuestLine.addQuest(talkHastings2);//11
+
+		const talkHastings3 = new TalkToNPCQuest(ManaphyHastings3, 'Professor Hastings has headed off to Canalave to do more research on Manaphy. Check in on him when you can!');
+		manaphyQuestLine.addQuest(talkHastings3);//12
+
+		const happinyChase1 = new TalkToNPCQuest(HappinyWitness1, 'A little girl\'s Happiny stole the egg! It headed east out of Canalave!');
+		manaphyQuestLine.addQuest(happinyChase1);//13
+
+		const happinyChase2 = new TalkToNPCQuest(HappinyWitness2, 'The Happiny headed north out of Jubilife!');
+		manaphyQuestLine.addQuest(happinyChase2);//14
+
+		const happinyChase3 = new TalkToNPCQuest(HappinyWitness3, 'The Happiny went north, through the Eterna Forest. If it\'s got a better sense of direction than the Go-Rock Squad, it\'ll probably pop out at Eterna City.');
+		manaphyQuestLine.addQuest(happinyChase3);//15
+
+		const happinyChase4 = new TalkToNPCQuest(HappinyWitness4, 'Did the Happiny really leave Eterna and brave Mt. Coronet with the egg in tow? Maybe it\'s reached the other side by now.');
+		manaphyQuestLine.addQuest(happinyChase4);//16
+
+		const happinyChase5 = new TalkToNPCQuest(HappinyWitness5, 'This happiny sure can run on it\'s stubby little legs! Chase it to Solaceon Town!');
+		manaphyQuestLine.addQuest(happinyChase5);//17
+
+		const happinyChase6 = new TalkToNPCQuest(HappinyWitness6, 'Hopefully you can finally catch up to this Happiny at Hearthome City.');
+		manaphyQuestLine.addQuest(happinyChase6);//18
+
+		const happinyChase7 = new TalkToNPCQuest(HappinyWitness7, 'Ugh, it went through Mt. Coronet again? This time it\'s gotta be in Oreburgh, right?');
+		manaphyQuestLine.addQuest(happinyChase7);//19
+
+		const happinyChase8 = new TalkToNPCQuest(HappinyWitness8, 'This annoying little twerp has been taking you in one big loop, hasn\'t it...');
+		manaphyQuestLine.addQuest(happinyChase8);//20
+
+		const happinyChase9 = new TalkToNPCQuest(HappinyWitness9, 'What can only be described as the world\'s most athletic Happiny went south this time. Hopefully you can corner it soon.');
+		manaphyQuestLine.addQuest(happinyChase9);//21
+
+		const clearManaphyGoRock5 = new CustomQuest(1, 0, 'An ex-Go-Rock has turned to Pokémon Pinching, and wants to steal the egg first. But after all you\'ve been through to get it, he\'s in for a rude awakening', () => 
+			App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Manaphy Go-Rock Pincher')]());
+		manaphyQuestLine.addQuest(clearManaphyGoRock5);//22
+
+		const happinyChase10 = new TalkToNPCQuest(HappinyBoulders, 'Hah! It\'s gone southeast across the waters! There\'s only one place it could be now...');
+			manaphyQuestLine.addQuest(happinyChase10);//23
+
+        const catchBunearySubstitutes = new CustomQuest(50, undefined, 'Oh no, you\'re not gonna let more boulders stop you now. Catch 50 Fighting-types and smash right through them.', () => {
+        return pokemonMap.filter(p => p.type.includes(PokemonType.Fighting)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
+        });
+        manaphyQuestLine.addQuest(catchBunearySubstitutes);//24
+
+		const clearManaphyHappiny = new CustomQuest(1, 0, 'Time to teach this little pink snot not to steal important eggs!', () => 
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Manaphy Egg Protectors')]());
+		manaphyQuestLine.addQuest(clearManaphyHappiny);//25
+
+        const talkHastings4 = new TalkToNPCQuest(ManaphyHastings4, 'The egg hatched after your battle with the egg-nappers! Bring Manaphy back to Hastings, and close off this mission for good.');
+        manaphyQuestLine.addQuest(talkHastings4);//26
+
+        App.game.quests.questLines().push(manaphyQuestLine);
+    }
+
     //Giratina quest
     public static createGiratinaQuestLine() {
         const giratinaQuestLine = new QuestLine('Zero\'s Ambition', 'Help Zero find an entrance to the Distortion World.', new MultiRequirement([new ObtainedPokemonRequirement('Uxie'), new ObtainedPokemonRequirement('Mesprit'), new ObtainedPokemonRequirement('Azelf'), new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)]), GameConstants.BulletinBoards.Sinnoh);
@@ -2408,6 +2511,7 @@ class QuestLineHelper {
         this.createJirachiQuestLine();
         this.createMetaGroudonQuestLine();
         this.createGalacticSinnohQuestLine();
+		this.createManaphyQuestLine();
         this.createGiratinaQuestLine();
         this.createPlasmaUnovaQuestLine();
         this.createDetectivePikachuQuestLine();
