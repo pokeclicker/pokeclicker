@@ -4694,7 +4694,7 @@ const DrSplash5 = new NPC('Dr. Splash', [
 });
 
 const MagikarpEyeShadySalesman = new NPC('Shady Salesman', [
-    'Kid, I have a deal for you! And for you alone. Here's your chance. I will sell you the secret Magikarp... For an unbelievable prize.',
+    'Kid, I have a deal for you! And for you alone. Here\'s your chance. I will sell you the secret Magikarp... For an unbelievable prize.',
     'Oh, yeah... Returns not accepted, got that?',
 ],  {image:'assets/images/npcs/ShadySalesman.png'});
 
