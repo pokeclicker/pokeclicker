@@ -783,7 +783,7 @@ class QuestLineHelper {
         metaGroudonQuestLine.addQuest(calibrateMachine);
 
         const MetaGroudonReward = () => {
-            App.game.party.gainPokemonById(383.02);
+            App.game.party.gainPokemonByName('Meta Groudon');
             Notifier.notify({
                 title: metaGroudonQuestLine.name,
                 message: 'Butler turns control of Meta Groudon over to you!',
@@ -2454,7 +2454,7 @@ class QuestLineHelper {
             dungeonList['Petalburg Woods'].bossList.push(new DungeonTrainer('Egg Hunter', [new GymPokemon('Surprise Togepi', 2700000, 100)], { weight: 1, requirement: new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion) }));
         };
         const afterDefeatingTogepiInHoenn = () => {
-            App.game.party.gainPokemonById(surpriseTogepi.id);
+            App.game.party.gainPokemonByName(surpriseTogepi.name);
             Notifier.notify({
                 title: findSurpriseTogepiForEasterQuestLine.name,
                 message: 'You found the special Togepi!',
