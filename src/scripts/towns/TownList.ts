@@ -2619,9 +2619,9 @@ const TwinleafContestChampion = new NPC('Contest Champion', [
 const SandgemBeachcomber = new NPC('Beachcomber', [
     'Hmmm… Oh! Sorry, I didn’t see you there! Sometimes the strangest things wash up on this beach, so I just got caught up in the search.',
     'Just last week a weird blue stone with a red center showed up. A rather slow-looking guy with a slowpoke found it first, and took it to the Pokémon Lab.',
-	'I think I\'ve seen that stone before - it was on a book of an old legend about the sea.',
-	'I think it went something like... "When the Prince of the Seas is born, all of his kin will come to this region to celebrate."',
-	'Does that mean when this Prince comes, Pokémon like him will start roaming the region?',
+    'I think I\'ve seen that stone before - it was on a book of an old legend about the sea.',
+    'I think it went something like... "When the Prince of the Seas is born, all of his kin will come to this region to celebrate."',
+    'Does that mean when this Prince comes, Pokémon like him will start roaming the region?',
 ]);
 
 const FloaromaFlowerGirl = new NPC('Flower Girl', [
@@ -2786,156 +2786,156 @@ const LucyStevens1 = new NPC('Lucy Stevens', [
 });
 
 const ManaphyHastings1 = new NPC('Professor Hastings', [
-'Ah, are you a strong trainer? I\'d like to leave this to a Pokémon Ranger, but the ones in this region are far away, and the crooks could escape by the time they caught up!',
-'I was robbed of a precious Pokémon Egg by the Go-Rock Squad! The egg was coloured a transparent blue...  Like the colour of the sea!', 
-'The Go-Rock Squad were troublemakers the Pokémon Rangers dealt with in my home region. I don\'t know why they took it, but the Go-Rock Squad is trying to regroup!',
-'I was robbed in the forest to the north. Please, you have to hurry!',
+    'Ah, are you a strong trainer? I\'d like to leave this to a Pokémon Ranger, but the ones in this region are far away, and the crooks could escape by the time they caught up!',
+    'I was robbed of a precious Pokémon Egg by the Go-Rock Squad! The egg was coloured a transparent blue...  Like the colour of the sea!',
+    'The Go-Rock Squad were troublemakers the Pokémon Rangers dealt with in my home region. I don\'t know why they took it, but the Go-Rock Squad is trying to regroup!',
+    'I was robbed in the forest to the north. Please, you have to hurry!',
 ], {
     image: 'assets/images/npcs/Professor Hastings.png',
     requirement: new MultiRequirement([new QuestLineStartedRequirement('Recover the Precious Egg!'), new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 2, GameConstants.AchievementOption.less)]),
-});    
+});
 
 const ManaphyHastings2 = new NPC('Professor Hastings', [
-'Thanks for retrieving the Egg!',
-'The Go-Rock Squad was already beaten once. That was probably their very last gasp of trouble-making.', 
-'While you were gone, I discovered that the egg belongs to Manaphy! No wonder the Go-Rock Squad was after it.',
-'Canalave\'s Library has several books detailing the legends of Manaphy. Perhaps one of them can help us find out how to hatch this egg.',
-'No time to waste - I\'ll see you at the Canalave Library!', 
+    'Thanks for retrieving the Egg!',
+    'The Go-Rock Squad was already beaten once. That was probably their very last gasp of trouble-making.',
+    'While you were gone, I discovered that the egg belongs to Manaphy! No wonder the Go-Rock Squad was after it.',
+    'Canalave\'s Library has several books detailing the legends of Manaphy. Perhaps one of them can help us find out how to hatch this egg.',
+    'No time to waste - I\'ll see you at the Canalave Library!',
 ], {
     image: 'assets/images/npcs/Professor Hastings.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 10), new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 11, GameConstants.AchievementOption.less)]),
 });
 
 const ManaphyHastings3 = new NPC('Professor Hastings', [
-'Trainer, there\'s trouble afoot!',
-'The egg was stolen again - this time by a Happiny who belongs to a little girl here. It went eastward at top speed - it\'s probably left this city far behind it now.', 
-'We must retrieve that egg at all costs! Please, you have to chase down the egg-napper!', 
+    'Trainer, there\'s trouble afoot!',
+    'The egg was stolen again - this time by a Happiny who belongs to a little girl here. It went eastward at top speed - it\'s probably left this city far behind it now.',
+    'We must retrieve that egg at all costs! Please, you have to chase down the egg-napper!',
 ], {
     image: 'assets/images/npcs/Professor Hastings.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 11), new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 25, GameConstants.AchievementOption.less)]),
 });
 
 const ManaphyHastings4 = new NPC('Professor Hastings', [
-'Ah, Manaphy hatched, did it? Looks like all that running around you and Happiny did incubated it enough to hatch it.',
-'There is something I\'ve discovered researching the Manaphy stories here. Apparently, Manaphy can be bred to produce an entirely different species of Pokémon!', 
-'Quite frankly, it\'s probably for the best if Manaphy stays with you. Apparently many things want to take that Pokémon for themselves, and I don\'t have the strength to fend them off.', 
+    'Ah, Manaphy hatched, did it? Looks like all that running around you and Happiny did incubated it enough to hatch it.',
+    'There is something I\'ve discovered researching the Manaphy stories here. Apparently, Manaphy can be bred to produce an entirely different species of Pokémon!',
+    'Quite frankly, it\'s probably for the best if Manaphy stays with you. Apparently many things want to take that Pokémon for themselves, and I don\'t have the strength to fend them off.',
 ], {
     image: 'assets/images/npcs/Professor Hastings.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 25), new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 26, GameConstants.AchievementOption.less)]),
 });
 
 const ManaphyBoulders = new NPC('Strange Boulders', [
-'<i>One of the pathways into the forest is blocked by a trio of large boulders.</i>',
-'<i>However, all three of the boulders look very similar... and they almost seem to have arms, as well.</i>', 
-'<i>Perhaps these aren\'t boulders after all... and if they are what you think they are, a good soaking should settle the matter.</i>', 
+    '<i>One of the pathways into the forest is blocked by a trio of large boulders.</i>',
+    '<i>However, all three of the boulders look very similar... and they almost seem to have arms, as well.</i>',
+    '<i>Perhaps these aren\'t boulders after all... and if they are what you think they are, a good soaking should settle the matter.</i>',
 ], {
     image: 'assets/images/npcs/Strange Boulders.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 0), new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 2, GameConstants.AchievementOption.less)]),
 });
 
 const ManaphyGoRockCommander = new NPC('Go-Rock Commander', [
-'You... are you a Pokémon Ranger? ...No? Well, no matter.',
-'Allow me to explain something to you. This egg is meaningful only if we possess it.', 
-'We\'re going to hatch Manaphy from it\'s egg and get it to guide us to it\'s Sea Temple.',
-'With the power contained within, I will become the King of the Seas, far stronger than the old fool guiding us before!', 
+    'You... are you a Pokémon Ranger? ...No? Well, no matter.',
+    'Allow me to explain something to you. This egg is meaningful only if we possess it.',
+    'We\'re going to hatch Manaphy from it\'s egg and get it to guide us to it\'s Sea Temple.',
+    'With the power contained within, I will become the King of the Seas, far stronger than the old fool guiding us before!',
 ], {
     image: 'assets/images/temporaryBattle/Go-Rock Squad Commander.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 3), new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 4, GameConstants.AchievementOption.less)]),
 });
 
 const ManaphyGoRock = new NPC('Go-Rock Grunt', [
-'Huff... huff... we should have been out of the forest by now!',
-'The plan was so simple. One of our grunts pre-planted a bunch of big red mushrooms with yellow spots to make a path out of the forest and to our hideout.', 
-'But it feels like we\'ve been going in circles! The only reason I know we aren\'t is because every time we reach a similar crossroads, the mushrooms are in different places.',
-'Unless... the mushrooms are moving somehow?', 
+    'Huff... huff... we should have been out of the forest by now!',
+    'The plan was so simple. One of our grunts pre-planted a bunch of big red mushrooms with yellow spots to make a path out of the forest and to our hideout.',
+    'But it feels like we\'ve been going in circles! The only reason I know we aren\'t is because every time we reach a similar crossroads, the mushrooms are in different places.',
+    'Unless... the mushrooms are moving somehow?',
 ], {
     image: 'assets/images/temporaryBattle/Go-Rock Squad Grunt (female).png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 6), new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 8, GameConstants.AchievementOption.less)]),
 });
 
 const HappinyWitness1 = new NPC('Black Belt', [
-'A Happiny with a blue egg?',
-'I did see a Happiny like that. They were heading north, across route 204.', 
+    'A Happiny with a blue egg?',
+    'I did see a Happiny like that. They were heading north, across route 204.',
 ], {
     image: 'assets/images/trainers/Black Belt.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 12), new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 14, GameConstants.AchievementOption.less)]),
 });
 
 const HappinyWitness2 = new NPC('Lady', [
-'A Happiny with a blue egg? Are you it\'s trainer?',
-'I was just minding my own business, when a little pink thing knocked me right over! By the time I got up, it was long gone, racing for the Eterna Forest.',
-'I was worried it\'s trainer had lost it, so I came here to ask around. I hope you catch up to it soon.',
+    'A Happiny with a blue egg? Are you it\'s trainer?',
+    'I was just minding my own business, when a little pink thing knocked me right over! By the time I got up, it was long gone, racing for the Eterna Forest.',
+    'I was worried it\'s trainer had lost it, so I came here to ask around. I hope you catch up to it soon.',
 ], {
     image: 'assets/images/trainers/Lady.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 13), new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 15, GameConstants.AchievementOption.less)]),
 });
 
 const HappinyWitness3 = new NPC('Cyclist', [
-'A Happiny with a blue egg? Ah yeah, I saw it.',
-'It ran right through here and went straight for Mt. Coronet.',
-'If it\'s still going, it\'d be across the mountain by now.',
+    'A Happiny with a blue egg? Ah yeah, I saw it.',
+    'It ran right through here and went straight for Mt. Coronet.',
+    'If it\'s still going, it\'d be across the mountain by now.',
 ], {
     image: 'assets/images/trainers/Cyclist (female).png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 14), new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 16, GameConstants.AchievementOption.less)]),
 });
 
 const HappinyWitness4 = new NPC('Waitress', [
-'I was just finishing up my shift at the Café Cabin when a little pink puffball ran past! It was heading south, for the ruins down there.',
-'...Eh, it was a Happiny? ...That\'s one fast Happiny, then, isn\'t it?',
+    'I was just finishing up my shift at the Café Cabin when a little pink puffball ran past! It was heading south, for the ruins down there.',
+    '...Eh, it was a Happiny? ...That\'s one fast Happiny, then, isn\'t it?',
 ], {
     image: 'assets/images/npcs/Waitress.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 15), new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 17, GameConstants.AchievementOption.less)]),
 });
 
 const HappinyWitness5 = new NPC('Pokémon Ranger', [
-'Ah, you\'re the one chasing after that Happiny? You look a bit puffed, are you okay?',
-'I tried to capture it, but it barrelled right through my Capture Disc\'s trail! It went for Hearthome City. It wasn\'t showing any signs of slowing down yet.',
+    'Ah, you\'re the one chasing after that Happiny? You look a bit puffed, are you okay?',
+    'I tried to capture it, but it barrelled right through my Capture Disc\'s trail! It went for Hearthome City. It wasn\'t showing any signs of slowing down yet.',
 ], {
     image: 'assets/images/npcs/Pokemon Ranger (female).png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 16), new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 18, GameConstants.AchievementOption.less)]),
 });
 
 const HappinyWitness6 = new NPC('Murph', [
-'Me and my buddy Slowpoke are trying to catch a Happiny that just went running into Corona Mountain.',
-'It had a blue egg on it\'s belly - I\'ve definitely seen an egg like that before, back in Fiore.',
-'My Slowpoke\'s gone ahead, I hope I can catch up to them soon.',
+    'Me and my buddy Slowpoke are trying to catch a Happiny that just went running into Corona Mountain.',
+    'It had a blue egg on it\'s belly - I\'ve definitely seen an egg like that before, back in Fiore.',
+    'My Slowpoke\'s gone ahead, I hope I can catch up to them soon.',
 ], {
     image: 'assets/images/npcs/Murph.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 17), new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 19, GameConstants.AchievementOption.less)]),
 });
 
 const HappinyWitness7 = new NPC('Cyclist', [
-'Oh hey! Still chasing that Happiny, huh?',
-'When I saw it still running, I tried to catch up to it, but it got into the Oreburgh Tunnel and I lost track of it.',
-'...Say, are you alright? You look a little... bug-eyed.',
+    'Oh hey! Still chasing that Happiny, huh?',
+    'When I saw it still running, I tried to catch up to it, but it got into the Oreburgh Tunnel and I lost track of it.',
+    '...Say, are you alright? You look a little... bug-eyed.',
 ], {
     image: 'assets/images/trainers/Cyclist (female).png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 18), new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 20, GameConstants.AchievementOption.less)]),
 });
 
 const HappinyWitness8 = new NPC('Bug Catcher', [
-'Some guy in a weird white outfit was chasing a Happiny!',
-'They were heading south, towards Professor Rowan\'s lab!',
-'You\'re chasing after them too, right? Good luck catching up to them!'
+    'Some guy in a weird white outfit was chasing a Happiny!',
+    'They were heading south, towards Professor Rowan\'s lab!',
+    'You\'re chasing after them too, right? Good luck catching up to them!',
 ], {
     image: 'assets/images/trainers/Bug Catcher.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 19), new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 21, GameConstants.AchievementOption.less)]),
 });
 
 const HappinyWitness9 = new NPC('Go-Rock Pincher', [
-'Damn, that Happiny got away. Those little friends got me good.',
-'...Hey, I recognize you! You pinched the egg we pinched in Eterna Forest!',
-'I\'m gonna pinch that Pokémon first, so if you want to try and stop me, you\'ll have to get through my Pokémon!'
+    'Damn, that Happiny got away. Those little friends got me good.',
+    '...Hey, I recognize you! You pinched the egg we pinched in Eterna Forest!',
+    'I\'m gonna pinch that Pokémon first, so if you want to try and stop me, you\'ll have to get through my Pokémon!',
 ], {
     image: 'assets/images/temporaryBattle/Go-Rock Squad Grunt (male).png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 20), new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 22, GameConstants.AchievementOption.less)]),
 });
 
 const HappinyBoulders = new NPC('Strange Boulders', [
-'<i>You\'ve seen boulders like this before.</i>',
-'<i>According to the murmuring crowd around them, a Happiny ran this way and threw the boulders behind it to block any pursuers.</i>', 
-'<i>You spray the boulders with your water types, and they... don\'t move. Huh, guess they really are boulders this time.</i>', 
-'<i>Well, that just means that you can get some fighting-types and crush them with no regrets.</i>', 
+    '<i>You\'ve seen boulders like this before.</i>',
+    '<i>According to the murmuring crowd around them, a Happiny ran this way and threw the boulders behind it to block any pursuers.</i>',
+    '<i>You spray the boulders with your water types, and they... don\'t move. Huh, guess they really are boulders this time.</i>',
+    '<i>Well, that just means that you can get some fighting-types and crush them with no regrets.</i>',
 ], {
     image: 'assets/images/npcs/Strange Boulders.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 22), new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 24, GameConstants.AchievementOption.less)]),
@@ -2969,7 +2969,7 @@ TownList['Jubilife City'] = new Town(
     [JubilifeCityShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 202)],
-		npcs: [HappinyWitness1, HappinyWitness8],
+        npcs: [HappinyWitness1, HappinyWitness8],
     }
 );
 TownList['Oreburgh City'] = new Town(
@@ -3031,7 +3031,7 @@ TownList['Solaceon Town'] = new Town(
     [SolaceonTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Solaceon Town'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 209)],
-		npcs: [HappinyWitness5],
+        npcs: [HappinyWitness5],
     }
 );
 TownList['Veilstone City'] = new Town(
@@ -3170,7 +3170,7 @@ TownList['Eterna Forest'] = new DungeonTown(
         new GymBadgeRequirement(BadgeEnums.Coal),
     ],
     [TemporaryBattleList['Manaphy Go-Rock MGrunt 1'], TemporaryBattleList['Manaphy Go-Rock MGrunt 2'], TemporaryBattleList['Manaphy Go-Rock MGrunt 3'], TemporaryBattleList['Manaphy Go-Rock MGrunt 4'], TemporaryBattleList['Manaphy Go-Rock FGrunt 1'], TemporaryBattleList['Manaphy Go-Rock FGrunt 2'],TemporaryBattleList['Manaphy Go-Rock Commander']],
-	{
+    {
         npcs: [ManaphyGoRock, ManaphyGoRockCommander, ManaphyBoulders],
     }
 );
