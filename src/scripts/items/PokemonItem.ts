@@ -24,7 +24,7 @@ class PokemonItem extends CaughtIndicatingItem {
             // Statistics
             if (i < amt - 1) { // -1 because gainPokemonById will add 1 to statistics
                 const gender = PokemonFactory.generateGenderById(pokemonID);
-                PokemonHelper.incrementPokemonStatistics(pokemonID, GameConstants.PokemonStatiticsType.Captured, shinyBool, gender);
+                PokemonHelper.incrementPokemonStatistics(pokemonID, GameConstants.PokemonStatisticsType.Captured, shinyBool, gender);
             }
         }
 
