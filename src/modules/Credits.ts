@@ -284,6 +284,8 @@ export const SpriteCredits: Credit[] = [
             'Tower of Darkness',
             'Tower of Waters',
             'Underground Aerodactylite',
+            'Underground Mawilite',
+            'Underground Sablenite',
             'Valencian Raticate',
             'Valencian Paras',
             'White mane hair icon',
