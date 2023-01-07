@@ -369,6 +369,16 @@ class GameController {
                             filteredNPCs[numberKey - filteredContent.length].openDialog();
                         }
                         return e.preventDefault();
+                    } else if (player.town() instanceof DungeonTown) {
+                        const cycle = Object.values(TownList).filter(t => t instanceof DungeonTown && t.region == player.region);
+                        const idx = cycle.findIndex(d => d.name == player.town().name);
+                        switch (key) {
+                            case '=' :
+                            case '+' : MapHelper.moveToTown(cycle[(idx + 1) % cycle.length].name);
+                                return e.preventDefault();
+                            case '-' : MapHelper.moveToTown(cycle[(idx + cycle.length - 1) % cycle.length].name);
+                                return e.preventDefault();
+                        }
                     }
                 }
             }

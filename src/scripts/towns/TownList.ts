@@ -1117,7 +1117,7 @@ TownList['Cerulean Cave'] = new DungeonTown(
 TownList['Ruby Path'] = new DungeonTown(
     'Ruby Path',
     GameConstants.Region.kanto,
-    GameConstants.KantoSubRegions.Sevii4567,
+    GameConstants.KantoSubRegions.Sevii123,
     [new QuestLineStepCompletedRequirement('Celio\'s Errand', 2)],
     [],
     {
