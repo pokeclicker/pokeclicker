@@ -450,7 +450,7 @@ class QuestLineHelper {
         celebiJohtoQuestLine.addQuest(talktoIlexForestShrine1);
 
         const SpikyEaredPichuReward = () => {
-            App.game.party.gainPokemonById(172.1);
+            App.game.party.gainPokemonById(172.01);
             Notifier.notify({
                 title: celebiJohtoQuestLine.name,
                 message: 'You captured the Spiky-eared Pichu!',
@@ -1171,7 +1171,7 @@ class QuestLineHelper {
         princessDiancieQuestLine.addQuest(fightSteels);
 
         const BladeAegislashReward = () => {
-            App.game.party.gainPokemonById(681.1);
+            App.game.party.gainPokemonById(681.01);
             Notifier.notify({
                 title: princessDiancieQuestLine.name,
                 message: 'Your Doublade has evolved into Blade Forme Aegislash!',
@@ -1661,7 +1661,7 @@ class QuestLineHelper {
     }
 
     public static createMagikarpJumpQuestLine() {
-        const magikarpJumpQuestLine = new QuestLine('Magikarp Jump', 'Go to Hoppy Town and share their love for Magikarp.', new MultiRequirement([new DevelopmentRequirement(), new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)]), GameConstants.BulletinBoards.Alola);
+        const magikarpJumpQuestLine = new QuestLine('Magikarp Jump', 'Go to Hoppy Town and share their love for Magikarp.', new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion), GameConstants.BulletinBoards.Alola);
 
         const talkToMayor = new TalkToNPCQuest(MayorKarp, 'Use the subregion travel to talk to Mayor Karp in Hoppy Town.');
         magikarpJumpQuestLine.addQuest(talkToMayor);
@@ -2215,7 +2215,7 @@ class QuestLineHelper {
             ]), GameConstants.BulletinBoards.Galar);
 
         const mysteryGift = new TalkToNPCQuest(MagearnaMysteryGift, 'Go home and open your Mystery Gift', () => {
-            App.game.party.gainPokemonById(801.1);
+            App.game.party.gainPokemonById(801.01);
             Notifier.notify({
                 title: magearnaQuestLine.name,
                 message: 'You obtained Magearna (Original Color)!',

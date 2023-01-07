@@ -12,13 +12,14 @@ import Item from './Item';
 import MulchItem from './MulchItem';
 import PokeballItem from './PokeballItem';
 import {
-    BattleItemType, Currency, EggItemType, EnergyRestoreSize, Pokeball, PokeBlockColor, VitaminType,
+    BattleItemType, Currency, EggItemType, EnergyRestoreSize, Pokeball, PokeBlockColor, Region, VitaminType,
 } from '../GameConstants';
 import { ShovelItem, MulchShovelItem } from './ShovelItem';
 import PokeBlock from './PokeBlock';
 import MegaStoneItem from './MegaStoneItem';
 import Vitamin from './Vitamin';
 import EggItem from './EggItem';
+import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
 
 // eslint-disable-next-line import/prefer-default-export
 export const ItemList: { [name: string]: Item } = {};
@@ -98,6 +99,20 @@ ItemList.Mystery_egg = new EggItem(EggItemType.Mystery_egg, 700, undefined, 'Mys
 
 // Vitamins
 // ItemList.RareCandy = new Vitamin(VitaminType.RareCandy, Infinity, undefined, undefined, 'Rare Candy', 'A rare-to-find candy that currently has no use.');
-ItemList.Protein   = new Vitamin(VitaminType.Protein, 1e4, Currency.money, { multiplier: 1.1, multiplierDecrease: false, saveName: `${VitaminType[VitaminType.Protein]}|${Currency[Currency.money]}` }, undefined, 'Increases Pokémon attack bonus.<br/><i>(attack gained per breeding cycle)</i>');
-ItemList.Calcium   = new Vitamin(VitaminType.Calcium, 1e4, Currency.money, { multiplier: 1.1, multiplierDecrease: false, saveName: `${VitaminType[VitaminType.Calcium]}|${Currency[Currency.money]}` }, undefined, 'Increases Pokémon attack bonus %.<br/><i>(attack gained per breeding cycle)</i>');
-ItemList.Carbos   = new Vitamin(VitaminType.Carbos, 1e4, Currency.money, { multiplier: 1.1, multiplierDecrease: false, saveName: `${VitaminType[VitaminType.Carbos]}|${Currency[Currency.money]}` }, undefined, 'Reduces steps required when hatching');
+ItemList.Protein   = new Vitamin(VitaminType.Protein, 1e4, Currency.money, {
+    multiplier: 1.1,
+    multiplierDecrease: false,
+    saveName: `${VitaminType[VitaminType.Protein]}|${Currency[Currency.money]}`,
+}, undefined, 'Increases Pokémon attack bonus.<br/><i>(attack gained per breeding cycle)</i><br/>Increases steps required when hatching by 20');
+ItemList.Calcium   = new Vitamin(VitaminType.Calcium, 5e4, Currency.money, {
+    multiplier: 1.1,
+    multiplierDecrease: false,
+    saveName: `${VitaminType[VitaminType.Calcium]}|${Currency[Currency.money]}`,
+    visible: new MaxRegionRequirement(Region.hoenn),
+}, undefined, 'Increases Pokémon attack bonus %.<br/><i>(attack gained per breeding cycle)</i><br/>Increases steps required when hatching by 20');
+ItemList.Carbos   = new Vitamin(VitaminType.Carbos, 1e5, Currency.money, {
+    multiplier: 1.1,
+    multiplierDecrease: false,
+    saveName: `${VitaminType[VitaminType.Carbos]}|${Currency[Currency.money]}`,
+    visible: new MaxRegionRequirement(Region.unova),
+}, undefined, 'Reduces steps required when hatching');
