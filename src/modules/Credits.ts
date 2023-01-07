@@ -283,6 +283,7 @@ export const SpriteCredits: Credit[] = [
             'Tourist Couple/Bellhop',
             'Tower of Darkness',
             'Tower of Waters',
+            'Underground Aerodactylite',
             'Valencian Raticate',
             'Valencian Paras',
             'White mane hair icon',

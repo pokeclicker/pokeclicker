@@ -2,10 +2,13 @@ import PokemonType from '../enums/PokemonType';
 import UndergroundItemValueType from '../enums/UndergroundItemValueType';
 import { Region, StoneType } from '../GameConstants';
 import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
+import MultiRequirement from '../requirements/MultiRequirement';
+import ObtainedPokemonRequirement from '../requirements/ObtainedPokemonRequirement';
 import Rand from '../utilities/Rand';
 import UndergroundEvolutionItem from './UndergroundEvolutionItem';
 import UndergroundGemItem from './UndergroundGemItem';
 import UndergroundItem from './UndergroundItem';
+import UndergroundMegaStoneItem from './UndergroundMegaStoneItem';
 
 export default class UndergroundItems {
     public static list: Array<UndergroundItem> = [];
@@ -137,3 +140,8 @@ UndergroundItems.addItem(new UndergroundItem('Pink Shard', 411, [[1, 1, 1, 1], [
 UndergroundItems.addItem(new UndergroundItem('Cyan Shard', 412, [[1, 1, 1, 1], [0, 1, 1, 1], [0, 0, 1, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.alola)));
 UndergroundItems.addItem(new UndergroundItem('Rose Shard', 413, [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.galar)));
 UndergroundItems.addItem(new UndergroundItem('Brown Shard', 414, [[1, 1, 0], [1, 1, 0], [1, 1, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.galar)));
+
+// MegaStones
+UndergroundItems.addItem(new UndergroundMegaStoneItem('Aerodactylite', 500, [[1, 1, 1], [1, 1, 1], [1, 1, 1]], 0, 'Aerodactyl',
+    new MultiRequirement([new MaxRegionRequirement(Region.kalos), new ObtainedPokemonRequirement('Aerodactyl')]),
+    () => (App.game.party.getPokemonByName('Aerodactyl')?.megaStone ? 0 : 0.1)));
