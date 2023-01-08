@@ -1797,7 +1797,7 @@ export enum AlcremieSpins {
     nightCounterclockwiseBelow5,
     dayClockwiseAbove5,
     dayCounterclockwiseAbove5,
-    at7Above10,
+    at5Above10,
 }
 
 export enum ExtraAchievementCategories {
