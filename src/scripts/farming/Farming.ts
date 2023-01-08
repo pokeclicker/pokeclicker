@@ -1032,9 +1032,9 @@ class Farming implements Feature {
     }
 
     addPlotAuras(auraType: AuraType): number {
-        return Math.max(0, 1 + this.plotList
+        return Math.max(0, this.plotList
             .filter(p => p.emittingAura.type() === auraType)
-            .reduce((acc, p) => acc + (p.emittingAura.value() ?? 0), 0));
+            .reduce((acc, p) => acc + (p.emittingAura.value() ?? 0), 1));
     }
 
     //#region Plot Unlocking
