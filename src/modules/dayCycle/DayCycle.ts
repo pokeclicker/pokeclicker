@@ -8,9 +8,9 @@ export default class DayCycle {
         const curHour = (new Date()).getHours();
         let dayCyclePart: DayCyclePart;
 
-        if (curHour == 17) {
+        if (curHour === 17) {
             dayCyclePart = DayCyclePart.Dusk;
-        } else if (curHour == 6) {
+        } else if (curHour === 6) {
             dayCyclePart = DayCyclePart.Dawn;
         } else if (curHour > 6 && curHour < 17) {
             dayCyclePart = DayCyclePart.Day;
