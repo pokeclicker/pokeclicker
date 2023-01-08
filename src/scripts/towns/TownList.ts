@@ -1882,7 +1882,7 @@ const LavaridgeTownShop = new Shop([
     ItemList.Fire_stone,
 ]);
 const RoadsideStandShop = new Shop([
-    ItemList['Magikarp (Feebas)'],
+    ItemList['Probably Feebas'],
 ], 'Shady Deal');
 const FortreeCityShop = new Shop([
     ItemList.Pokeball,
