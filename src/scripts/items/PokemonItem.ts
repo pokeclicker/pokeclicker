@@ -107,6 +107,7 @@ ItemList.Poipole              = new PokemonItem('Poipole', 90000);
 ItemList['Magikarp Brown Stripes'] = new PokemonItem('Magikarp Brown Stripes', 100);
 ItemList['Magikarp Blue Raindrops'] = new PokemonItem('Magikarp Blue Raindrops', 10000, Currency.diamond);
 ItemList['Magikarp Saucy Violet'] = new PokemonItem('Magikarp Saucy Violet', 7500000000, Currency.money);
+ItemList['Magikarp (Feebas)'] = new PokemonItem('Feebas', 5999, Currency.battlePoint);
 ItemList.Dracozolt              = new PokemonItem('Dracozolt', 100000);
 ItemList.Arctozolt              = new PokemonItem('Arctozolt', 100000);
 ItemList.Dracovish              = new PokemonItem('Dracovish', 100000);

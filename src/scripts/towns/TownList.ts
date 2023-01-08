@@ -307,7 +307,7 @@ const PewterScientist = new NPC('Gem Scientist', [
 
 const Route3ShadySalesman = new NPC('Shady Salesman', [
     'Have I got a deal just for you!',
-    'I\'ll let you have a super secret Pokémon. For the right price! Buying this pokemon Takes No Effort, you should Value it',
+    'I\'ll let you have a super secret Pokémon. For the right price! Buying this pokemon Takes No Effort, you should Value it.',
 ], {image: 'assets/images/npcs/ShadySalesman.png'});
 
 const CeruleanKantoBerryMaster = new KantoBerryMasterNPC('Berry Master', [
@@ -1881,6 +1881,9 @@ const LavaridgeTownShop = new Shop([
     ItemList.Fire_egg,
     ItemList.Fire_stone,
 ]);
+const RoadsideStandShop = new Shop([
+    ItemList['Magikarp (Feebas)'],
+], 'Shady Deal');
 const FortreeCityShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
@@ -1981,6 +1984,12 @@ const LavaridgeSootCollector = new NPC('Soot Collector', [
     'The Flute Trader in Fallarbor Town has been paying me to go collect soot to make Flutes, but I\'m sick of it.',
     'People say they have truly mystical powers, but that they require Gems of different types to use. Also, using more Flutes at the same time costs more Gems to use.',
 ]);
+
+const RoadsideStandShadySalesman = new NPC('Shady Salesman', [
+    'Have I got a deal just for you!',
+    'I have spent weeks finding the perfect fishing spot for Feebas, and finally got some! For a special low price, I\'ll sell you one!',
+    'All sales are final!'
+], {image: 'assets/images/npcs/ShadySalesman.png'});
 
 const FortreeWeatherman = new NPC('Weatherman', [
     'Castform is a very finicky Pokémon.',
@@ -2253,6 +2262,19 @@ TownList['Lavaridge Town'] = new Town(
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Jagged Pass'))],
         npcs: [MillenniumFest, Butler1],
+    }
+);
+TownList['Roadside Stand'] = new Town(
+    'Roadside Stand',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Hoenn,
+    [RoadsideStandShop],
+    {
+        requirements: [
+            new RouteKillRequirement(10, GameConstants.Region.hoenn, 118),
+        ],
+        npcs: [RoadsideStandShadySalesman],
+        ignoreAreaStatus: true,
     }
 );
 TownList['Fortree City'] = new Town(
@@ -4694,7 +4716,7 @@ const DrSplash5 = new NPC('Dr. Splash', [
 });
 
 const MagikarpEyeShadySalesman = new NPC('Shady Salesman', [
-    'Kid, I have a deal for you! And for you alone. Here\'s your chance. I will sell you the secret Magikarp... For an unbelievable prize.',
+    'Kid, I have a deal for you! And for you alone. Here\'s your chance. I will sell you the secret Magikarp... For an unbelievable price.',
     'Oh, yeah... Returns not accepted, got that?',
 ],  {image:'assets/images/npcs/ShadySalesman.png'});
 
