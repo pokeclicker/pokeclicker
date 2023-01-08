@@ -243,6 +243,7 @@ export const SpriteCredits: Credit[] = [
             'Magikarp Brown Stripes Shop Icon',
             'Magikarp Blue Raindrops Shop Icon',
             'Magikarp Saucy Violet Shop Icon',
+            'Magikarp (Feebas)',
             'Man of Mystery',
             'Merilyn',
             'Meta Groudon Overworld',
