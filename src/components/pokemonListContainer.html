@@ -54,7 +54,7 @@
                     </td>
                 </tr>
             </thead>
-            <tbody data-bind="foreach: PartyController.getSortedList()">
+            <tbody data-bind="foreach: lazyLoad($element, PartyController.getSortedList, { pageSize: 20 })">
                 <tr data-bind="hidden: $data.breeding">
                     <td>
                         <img

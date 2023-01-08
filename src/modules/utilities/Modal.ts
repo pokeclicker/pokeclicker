@@ -27,11 +27,17 @@ function createStateObservable(modalID: string): Observable<ModalState> {
 // eslint-disable-next-line import/prefer-default-export
 export const observableState: Record<string, ModalState> = new Proxy({}, {
     get(target, modalID: string) {
+        let returnObservable = false;
+        if (modalID.endsWith('Observable')) {
+            returnObservable = true;
+            // eslint-disable-next-line no-param-reassign
+            modalID = modalID.replace(/Observable$/, '');
+        }
         if (!target[modalID]) {
             // eslint-disable-next-line no-param-reassign
             target[modalID] = createStateObservable(modalID);
         }
 
-        return target[modalID]();
+        return returnObservable ? target[modalID] : target[modalID]();
     },
 });
