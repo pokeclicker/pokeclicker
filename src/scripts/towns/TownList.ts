@@ -361,6 +361,11 @@ const LavenderChanneler = new NPC('Channeler Karina', [
     'No, I didn\'t learn this from talking to ghosts, don\'t be silly. There\'s a FAQ button in the Start Menu. It\'s very useful.',
 ], {image: 'assets/images/trainers/Channeler.png'});
 
+const LavenderShopper = new NPC('Shopper', [
+    'I always seem to run out of Great Balls. Luckly this shop always have them in stock!',
+    'They even have an offer today! They give you free Great Balls if you give them the code <b>THE-GREATEST-POKEBALL</b>',
+]);
+
 const BigSpender = new NPC('Big Spender', [
     'I love shopping! When I come in, the cashiers know I want tons of items.',
     'You can use the Shop Amount Button settings to make it easy for big purchases, too!',
@@ -756,7 +761,7 @@ TownList['Lavender Town'] = new Town(
     [LavenderTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Lavender Town']), new MoveToDungeon(dungeonList['Pokémon Tower'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 10)],
-        npcs: [LavenderMrFuji, LavenderChanneler],
+        npcs: [LavenderMrFuji, LavenderChanneler, LavenderShopper],
     }
 );
 TownList['Celadon City'] = new Town(
@@ -4059,6 +4064,12 @@ const CoumarineBirdwatcher = new NPC('Birdwatcher', [
     'There are rumors that the energy calls some legendary birds to roam Kalos!',
 ]);
 
+const CoumarineElectricTrainer = new NPC('Electric Trainer', [
+    'My Ampharos has gotten a boost since a friendly soul gave me an Ampharosite!',
+    'Luckily my Ampharos was already strong enough to use it!',
+    'If you find that fella, tell him the code <b>ELECTRIC-GIRAFFE</b> and he might help you too!',
+]);
+
 const LaverreFurisodeGirlKatherine = new NPC('Furisode Girl Katherine', [
     'Don\'t you find Goomy to be an interesting Pokémon? I certainly think so, even though it isn\'t a problem for my Pokémon~',
     'I\'ve heard its evolutionary line loves damp conditions, and apparently if you train a Sliggoo during rainy or foggy weather something marvelous happens!',
@@ -4204,7 +4215,7 @@ TownList['Coumarine City'] = new Town(
     [CoumarineCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Coumarine City'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 12)],
-        npcs: [CoumarineBirdwatcher],
+        npcs: [CoumarineBirdwatcher, CoumarineElectricTrainer],
     }
 );
 TownList['Laverre City'] = new Town(
