@@ -30,8 +30,8 @@ class Berry {
         ['Burmy (Plant)'], // green
         ['Combee', 'Flabébé (Yellow)', 'Oricorio (Pom-Pom)'], // yellow
         ['Volbeat', 'Flabébé (Blue)'], // blue
-        ['Minccino', 'Flabébé (White)', 'Alolan Meowth', 'Galarian Zigzagoon'], // silver placeholder
-        ['Meowth', 'Zigzagoon', 'Gabite', 'Flabébé (Orange)'], // gold placeholder
+        ['Flabébé (White)'], // silver placeholder (Minccino, Alolan Meowth, Galarian Ziggy, Alolan Vulpix and Sandshrew?)
+        ['Flabébé (Orange)'], // gold placeholder (Meowth, Zigzagoon, Gabite)
     ];
 
     constructor(
