@@ -1988,7 +1988,7 @@ const LavaridgeSootCollector = new NPC('Soot Collector', [
 const RoadsideStandShadySalesman = new NPC('Shady Salesman', [
     'Have I got a deal just for you!',
     'I have spent weeks finding the perfect fishing spot for Feebas, and finally got some! For a special low price, I\'ll sell you one!',
-    'All sales are final!'
+    'All sales are final!',
 ], {image: 'assets/images/npcs/ShadySalesman.png'});
 
 const FortreeWeatherman = new NPC('Weatherman', [
