@@ -369,7 +369,7 @@ class Farming implements Feature {
             [
                 'This Berry has a very dry flavor. It has the effect of making other food eaten at the same time taste sweet.',
                 'The scent of this Berry plant repels wild Pokémon.',
-            ], new Aura(AuraType.Repel, [0.1, 0.2, 0.3]));
+            ], new Aura(AuraType.Repel, [-0.1, -0.2, -0.3]));
         this.berryData[BerryType.Custap]    = new Berry(BerryType.Custap,   [3240, 8280, 13320, 27360, 54720],
             1, 0.05, 2700, 20,
             [0, 0, 40, 10, 0], BerryColor.Red,
@@ -1032,9 +1032,9 @@ class Farming implements Feature {
     }
 
     addPlotAuras(auraType: AuraType): number {
-        return this.plotList
+        return Math.max(0, 1 + this.plotList
             .filter(p => p.emittingAura.type() === auraType)
-            .reduce((acc, p) => acc + (p.emittingAura.value() ?? 0), 0);
+            .reduce((acc, p) => acc + (p.emittingAura.value() ?? 0), 0));
     }
 
     //#region Plot Unlocking
