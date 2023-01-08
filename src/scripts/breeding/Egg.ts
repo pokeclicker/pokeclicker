@@ -61,9 +61,14 @@ class Egg implements Saveable {
             this.partyPokemon(this.type !== EggType.None ? App.game.party.getPokemon(PokemonHelper.getPokemonById(this.pokemon).id) : null);
         }
 
-        // Reduce total steps based on amount of Carbos used
-        if (this.partyPokemon() && App.game?.party) {
-            this.stepsRequired = this.partyPokemon().getEggSteps();
+        if (App.game?.party) {
+            if (this.partyPokemon()) {
+                // Reduce total steps based on amount of Carbos used
+                this.stepsRequired = this.partyPokemon().getEggSteps();
+            } else {
+                // The Pokémon is not in our party - this might be a shop egg.
+                this.stepsRequired = this.totalSteps;
+            }
         }
     }
 
@@ -79,15 +84,19 @@ class Egg implements Saveable {
     }
 
     addSteps(amount: number, multiplier: Multiplier, helper = false) {
-        if (this.isNone() || this.notified) {
+        // If no egg in slot, or no steps remaining, don't do anything
+        if (this.isNone() || this.stepsRemaining() <= 0) {
             return;
         }
+        // Need to add at least 1 step
         if (!+amount) {
             amount = 1;
         }
+        // Increase our steps
         this.updateShinyChance(amount, multiplier);
         this.steps(this.steps() + amount);
-        if (this.canHatch() && !helper) {
+        // Notify that the egg is ready to hatch
+        if (this.canHatch() && !helper && !this.notified) {
             if (this.type == EggType.Pokemon) {
                 Notifier.notify({
                     message: `${PokemonHelper.displayName(PokemonHelper.getPokemonById(this.pokemon).name)()} is ready to hatch!`,
@@ -181,7 +190,7 @@ class Egg implements Saveable {
         }
 
         // Update statistics
-        PokemonHelper.incrementPokemonStatistics(pokemonID, GameConstants.PokemonStatiticsType.Hatched, shiny, gender);
+        PokemonHelper.incrementPokemonStatistics(pokemonID, GameConstants.PokemonStatisticsType.Hatched, shiny, gender);
         App.game.oakItems.use(OakItemType.Blaze_Cassette);
         return true;
     }

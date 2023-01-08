@@ -208,6 +208,7 @@ namespace GameConstants {
     }
     declare function humanifyString(str: string): string;
     declare function camelCaseToString(str: string): string;
+    declare function pluralizeString(str: string, amt: number): string;
     declare function formatDate(date: Date): string;
     declare function formatTime(input: number | Date): string;
     declare function formatTimeFullLetters(input: number): string;
@@ -644,7 +645,7 @@ namespace GameConstants {
     }
 
     // Pokemon Statistics
-    declare enum PokemonStatiticsType {
+    declare enum PokemonStatisticsType {
         Captured = 'Captured',
         Defeated = 'Defeated',
         Encountered = 'Encountered',

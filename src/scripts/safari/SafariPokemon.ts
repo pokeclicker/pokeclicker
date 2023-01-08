@@ -29,7 +29,7 @@ class SafariPokemon implements PokemonInterface {
         this.shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SAFARI);
         this._displayName = PokemonHelper.displayName(name);
         this.gender = PokemonFactory.generateGender(data.gender.femaleRatio, data.gender.type);
-        PokemonHelper.incrementPokemonStatistics(this.id, GameConstants.PokemonStatiticsType.Encountered, this.shiny, this.gender);
+        PokemonHelper.incrementPokemonStatistics(this.id, GameConstants.PokemonStatisticsType.Encountered, this.shiny, this.gender);
         // Shiny
         if (this.shiny) {
             Notifier.notify({
@@ -110,8 +110,11 @@ class SafariPokemon implements PokemonInterface {
     }
 
     public static random() {
-        ///TODO: If more than 1 zone per region, need to make this work
-        const pokemon = Rand.fromWeightedArray(SafariPokemonList.list[player.region]()[0].safariPokemon, SafariPokemonList.list[player.region]()[0].safariPokemon.map(p => p.weight));
+        // Get a random pokemon from current region and zone for Safari Zone
+        const pokemon = Rand.fromWeightedArray(
+            SafariPokemonList.list[Safari.activeRegion()]()[Safari.activeZone()].safariPokemon,
+            SafariPokemonList.list[Safari.activeRegion()]()[Safari.activeZone()].safariPokemon.map(p => p.weight)
+        );
         return new SafariPokemon(pokemon.name);
     }
 
