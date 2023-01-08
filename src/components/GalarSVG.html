@@ -4,7 +4,7 @@
         <image width="1600" height="960" data-bind="attr: {
             'xlink:href':'assets/images/galar-south.png?v=$VERSION',
             href:'assets/images/galar-south.png?v=$VERSION'
-        }"></image>
+        }, click : () => MapHelper.highlightDock(!MapHelper.highlightDock())"></image>
 
         <!-- ------ -->
         <!-- ROUTES -->
@@ -713,7 +713,7 @@
             { name: "Dock"
             , x: 65, y: 9
             , width: 3, height: 2
-            , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Hulbury') }"
+            , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Hulbury', true) }"
             })
         %>
 
@@ -827,7 +827,7 @@
         <image width="1600" height="960" data-bind="attr: {
             'xlink:href':'assets/images/galar-north.png?v=$VERSION',
             href:'assets/images/galar-north.png?v=$VERSION'
-        }"></image>
+        }, click : () => MapHelper.highlightDock(!MapHelper.highlightDock())"></image>
 
         <!-- ------ -->
         <!-- ROUTES -->
@@ -1172,7 +1172,7 @@
             { name: "Dock"
             , x: 78, y: 57
             , width: 3, height: 2
-            , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Spikemuth') }"
+            , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Spikemuth', true) }"
             })
         %>
 
@@ -1238,7 +1238,7 @@
         <image width="1600" height="960" data-bind="attr: {
             'xlink:href':'assets/images/galar-isle-of-armor.png?v=$VERSION',
             href:'assets/images/galar-isle-of-armor.png?v=$VERSION'
-        }"></image>
+        }, click : () => MapHelper.highlightDock(!MapHelper.highlightDock())"></image>
 
         <!-- ------ -->
         <!-- ROUTES -->
@@ -2336,7 +2336,7 @@
             { name: "Dock"
             , x: 63, y: 42
             , width: 2, height: 2
-            , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Master Dojo') }"
+            , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Master Dojo', true) }"
             })
         %>
 
@@ -2424,7 +2424,7 @@
         <image width="1600" height="960" data-bind="attr: {
             'xlink:href':'assets/images/galar-crown-tundra.png?v=$VERSION',
             href:'assets/images/galar-crown-tundra.png?v=$VERSION'
-        }"></image>
+        }, click : () => MapHelper.highlightDock(!MapHelper.highlightDock())"></image>
 
         <!-- ------ -->
         <!-- ROUTES -->
@@ -3072,7 +3072,7 @@
             { name: "Dock"
             , x: 26, y: 15
             , width: 3, height: 2
-            , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Crown Tundra Station') }"
+            , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Crown Tundra Station', true) }"
             })
         %>
 

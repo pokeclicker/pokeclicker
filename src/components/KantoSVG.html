@@ -4,7 +4,7 @@
         <image width="1600" height="960" data-bind="attr: {
             'xlink:href':'assets/images/kanto-kanto.png?v=$VERSION',
             href:'assets/images/kanto-kanto.png?v=$VERSION'
-        }"></image>
+        }, click : () => MapHelper.highlightDock(!MapHelper.highlightDock())"></image>
 
         <!-- ------ -->
         <!-- ROUTES -->
@@ -617,7 +617,7 @@
             { name: "Dock"
             , x: 61, y: 35
             , width: 3, height: 2
-            , databind: "click:function(){MapHelper.openShipModal()}, attr:{ class: player.highestRegion() >= 1 ? 'completed' : 'locked'}"
+            , databind: "click:function(){MapHelper.openShipModal()}, attr:{ class: [player.highestRegion() >= 1 ? 'completed' : 'locked', MapHelper.highlightDock() ? 'flash' : ''].join(' ')}"
             })
         %>
 
@@ -625,7 +625,7 @@
             { name: "S. S. Anne"
             , x: 58, y: 35
             , width: 8, height: 3
-            , databind: "click:function(){MapHelper.openShipModal()}, attr:{ class: player.highestRegion() >= 1 ? 'completed' : 'locked'}"
+            , databind: "click:function(){MapHelper.openShipModal()}, attr:{ class: [player.highestRegion() >= 1 ? 'completed' : 'locked', MapHelper.highlightDock() ? 'flash' : ''].join(' ')}"
             , visible:  "player.highestRegion() >= 1"
             , image: "assets/images/ship.png"
             })
@@ -787,7 +787,7 @@
         <image width="1600" height="960" data-bind="attr: {
             'xlink:href':'assets/images/kanto-sevii123.png?v=$VERSION',
             href:'assets/images/kanto-sevii123.png?v=$VERSION'
-        }"></image>
+        }, click : () => MapHelper.highlightDock(!MapHelper.highlightDock())"></image>
 
         <!-- ------ -->
         <!-- ROUTES -->
@@ -985,7 +985,7 @@
             { name: "Dock"
             , x: 4, y: 31
             , width: 3, height: 2
-            , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('One Island') }"
+            , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('One Island', true) }"
             })
         %>
     </g>
@@ -994,7 +994,7 @@
         <image width="1600" height="960" data-bind="attr: {
             'xlink:href':'assets/images/kanto-sevii4567.png?v=$VERSION',
             href:'assets/images/kanto-sevii4567.png?v=$VERSION'
-        }"></image>
+        }, click : () => MapHelper.highlightDock(!MapHelper.highlightDock())"></image>
 
         <!-- ------ -->
         <!-- ROUTES -->
@@ -1556,7 +1556,7 @@
             { name: "Dock"
             , x: 63, y: 22
             , width: 3, height: 2
-            , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Five Island') }"
+            , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Five Island', true) }"
             })
         %>
 

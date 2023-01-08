@@ -15,6 +15,8 @@ enum areaStatus {
 
 class MapHelper {
 
+    public static highlightDock : KnockoutObservable<boolean> = ko.observable(false);
+
     public static moveToRoute = function (route: number, region: GameConstants.Region) {
         if (isNaN(route)) {
             return;
@@ -128,7 +130,7 @@ class MapHelper {
         return !player.route() && player.town().name == townName;
     }
 
-    public static calculateTownCssClass(townName: string): string {
+    public static calculateTownCssClass(townName: string, isDock = false): string {
         // We don't want to spoil easter eggs with map colors
         if (TownList[townName]?.ignoreAreaStatus) {
             return '';
@@ -136,6 +138,10 @@ class MapHelper {
         // Check if this location is locked
         if (!MapHelper.accessToTown(townName)) {
             return areaStatus[areaStatus.locked];
+        }
+        const classes = [];
+        if (isDock && MapHelper.highlightDock()) {
+            classes.push('flash');
         }
         const states = [];
         // Is this location a dungeon
@@ -166,11 +172,11 @@ class MapHelper {
         if (states.length) {
             const importantState = Math.min(...states);
             if (importantState >= areaStatus.uncaughtShinyPokemon && states.includes(areaStatus.uncaughtShinyPokemon) && states.includes(areaStatus.missingAchievement)) {
-                return areaStatus[areaStatus.uncaughtShinyPokemonAndMissingAchievement];
+                return [areaStatus[areaStatus.uncaughtShinyPokemonAndMissingAchievement], ...classes].join(' ');
             }
-            return areaStatus[importantState];
+            return [areaStatus[importantState], ...classes].join(' ');
         }
-        return areaStatus[areaStatus.completed];
+        return [areaStatus[areaStatus.completed], ...classes].join(' ');
     }
 
     public static accessToTown(townName: string): boolean {
@@ -225,6 +231,7 @@ class MapHelper {
                 type: NotificationConstants.NotificationOption.warning,
             });
         }
+        MapHelper.highlightDock(false);
     }
 
     public static ableToTravel() {

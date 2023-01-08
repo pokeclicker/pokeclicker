@@ -2,7 +2,7 @@
     <image width="1600" height="960" data-bind="attr: {
         'xlink:href':'assets/images/unova.png?v=$VERSION',
         href:'assets/images/unova.png?v=$VERSION'
-    }"></image>
+    }, click : () => MapHelper.highlightDock(!MapHelper.highlightDock())"></image>
 
     <!-- ------ -->
     <!-- ROUTES -->
@@ -841,7 +841,7 @@
         { name: "Dock"
         , x: 51, y: 53
         , width: 3, height: 7
-        , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Castelia City') }"
+        , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Castelia City', true) }"
         })
      %>
 
