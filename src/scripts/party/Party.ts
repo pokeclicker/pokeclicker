@@ -54,7 +54,7 @@ class Party implements Feature {
     }
 
     gainPokemon(pokemon: PartyPokemon, suppressNotification = false) {
-        PokemonHelper.incrementPokemonStatistics(pokemon.id, GameConstants.PokemonStatiticsType.Captured, pokemon.shiny, pokemon.gender);
+        PokemonHelper.incrementPokemonStatistics(pokemon.id, GameConstants.PokemonStatisticsType.Captured, pokemon.shiny, pokemon.gender);
         if (pokemon.shiny) {
             // Add all shiny catches to the log book
             App.game.logbook.newLog(

@@ -8935,7 +8935,7 @@ dungeonList['Tower of Darkness'] = new Dungeon('Tower of Darkness',
     ],
     2000000, 40,
     () => {
-        App.game.party.gainPokemonById(892);
+        App.game.party.gainPokemonByName('Urshifu (Single Strike)');
         Notifier.notify({
             message: 'Kubfu evolved into Urshifu (Single Strike)!',
             type: NotificationConstants.NotificationOption.success,

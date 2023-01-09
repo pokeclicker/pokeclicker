@@ -645,7 +645,7 @@ namespace GameConstants {
     }
 
     // Pokemon Statistics
-    declare enum PokemonStatiticsType {
+    declare enum PokemonStatisticsType {
         Captured = 'Captured',
         Defeated = 'Defeated',
         Encountered = 'Encountered',
@@ -670,7 +670,7 @@ namespace GameConstants {
         nightCounterclockwiseBelow5,
         dayClockwiseAbove5,
         dayCounterclockwiseAbove5,
-        at7Above10
+        at5Above10
     }
     declare enum ExtraAchievementCategories {
         global,
