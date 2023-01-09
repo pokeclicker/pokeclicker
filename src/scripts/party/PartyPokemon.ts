@@ -79,8 +79,8 @@ class PartyPokemon implements Saveable {
         this._pokerus = ko.observable(GameConstants.Pokerus.Uninfected).extend({ numeric: 0 });
         this._effortPoints = ko.observable(0).extend({ numeric: 0 });
         this.evs = ko.pureComputed(() => {
-            const power = App.game.challenges.list.slowEVs.active() ? GameConstants.EP_CHALLENGE_MODIFIER : 1;
-            return Math.floor(this.effortPoints / GameConstants.EP_EV_RATIO / power);
+            const power = App.game.challenges.list.slowEVs.active.peek() ? GameConstants.EP_CHALLENGE_MODIFIER : 1;
+            return Math.floor(this._effortPoints() / GameConstants.EP_EV_RATIO / power);
         });
         this.evs.subscribe((newValue) => {
             // Change Pokerus status to Resistant when reaching 50 EVs
@@ -111,13 +111,6 @@ class PartyPokemon implements Saveable {
         const evsMultiplier = this.calculateEVAttackBonus();
         const heldItemMultiplier = this.heldItem && this.heldItem() instanceof AttackBonusHeldItem ? (this.heldItem() as AttackBonusHeldItem).attackBonus : 1;
         return Math.max(1, Math.floor((this.baseAttack * attackBonusMultiplier + this.attackBonusAmount) * levelMultiplier * evsMultiplier * heldItemMultiplier));
-    }
-
-    public calculateEVAttackBonus(): number {
-        if (this.pokerus < GameConstants.Pokerus.Contagious) {
-            return 1;
-        }
-        return (this.evs() < 50) ? (1 + 0.01 * this.evs()) : (Math.pow(this.evs(),Math.log(1.5) / Math.log(50)));
     }
 
     public canCatchPokerus(): boolean {
@@ -258,33 +251,48 @@ class PartyPokemon implements Saveable {
         GameHelper.incrementObservable(player.itemList[vitaminName], amount);
     }
 
-    totalVitaminsUsed = (): number => {
+    totalVitaminsUsed = ko.pureComputed((): number => {
         return Object.values(this.vitaminsUsed).reduce((sum, obs) => sum + obs(), 0);
-    }
+    });
 
-    vitaminUsesRemaining = (): number => {
+    vitaminUsesRemaining = ko.pureComputed((): number => {
         // Allow 5 for every region visited (including Kanto)
         return (player.highestRegion() + 1) * 5 - this.totalVitaminsUsed();
-    };
+    });
+
+    calculateEVAttackBonus = ko.pureComputed((): number => {
+        if (this.pokerus < GameConstants.Pokerus.Contagious) {
+            return 1;
+        }
+        return (this.evs() < 50) ? (1 + 0.01 * this.evs()) : (Math.pow(this.evs(), Math.log(1.5) / Math.log(50)));
+    });
 
     getEggSteps = ko.pureComputed((): number => {
         const div = 300;
         const extraCycles = (this.vitaminsUsed[GameConstants.VitaminType.Calcium]() + this.vitaminsUsed[GameConstants.VitaminType.Protein]()) / 2;
         const steps = App.game.breeding.getSteps(this.eggCycles + extraCycles);
-        return Math.floor(((steps / div) ** (1 - this.vitaminsUsed[GameConstants.VitaminType.Carbos]() / 70)) * div);
+        return steps <= div ? steps : Math.round(((steps / div) ** (1 - this.vitaminsUsed[GameConstants.VitaminType.Carbos]() / 70)) * div);
     });
 
     getBreedingAttackBonus = ko.pureComputed((): number => {
         const attackBonusPercent = (GameConstants.BREEDING_ATTACK_BONUS + this.vitaminsUsed[GameConstants.VitaminType.Calcium]()) / 100;
         const proteinBoost = this.vitaminsUsed[GameConstants.VitaminType.Protein]();
-        return Math.floor((this.baseAttack * attackBonusPercent) + proteinBoost);
+        return (this.baseAttack * attackBonusPercent) + proteinBoost;
+    });
+
+    breedingEfficiency = ko.pureComputed((): number => {
+        return ((this.getBreedingAttackBonus() * this.calculateEVAttackBonus()) / this.getEggSteps()) * GameConstants.EGG_CYCLE_MULTIPLIER;
     });
 
     public hideFromProteinList = ko.pureComputed(() => {
         if (this._breeding()) {
             return true;
         }
-        if (!new RegExp(Settings.getSetting('vitaminSearchFilter').observableValue() , 'i').test(this.name)) {
+        // Check if search matches nickname or translated name
+        if (
+            !new RegExp(Settings.getSetting('vitaminSearchFilter').observableValue() , 'i').test(this._translatedName())
+            && !new RegExp(Settings.getSetting('vitaminSearchFilter').observableValue() , 'i').test(this.displayName)
+        ) {
             return true;
         }
         if (Settings.getSetting('vitaminRegionFilter').observableValue() > -2) {
@@ -321,21 +329,6 @@ class PartyPokemon implements Saveable {
                 });
                 return;
             }
-            if (App.game.party.caughtPokemon.some(p => p.heldItem() && p.heldItem().name == heldItem.name)) {
-                Notifier.notify({
-                    message: 'Only one of each held items can be used.',
-                    type: NotificationConstants.NotificationOption.warning,
-                });
-                return;
-            }
-
-            if (App.game.party.caughtPokemon.filter(p => p.heldItem()).length >= 6) {
-                Notifier.notify({
-                    message: 'Only 6 Pokémon can hold items at a time.',
-                    type: NotificationConstants.NotificationOption.warning,
-                });
-                return;
-            }
         }
 
         if (this.heldItem()) {
@@ -364,13 +357,10 @@ class PartyPokemon implements Saveable {
     }
 
     public hideFromHeldItemList = ko.pureComputed(() => {
-        if (this.heldItem()) {
-            return true;
-        }
         if (!HeldItem.heldItemSelected().canUse(this)) {
             return true;
         }
-        if (!new RegExp(Settings.getSetting('heldItemSearchFilter').observableValue() , 'i').test(this.name)) {
+        if (!new RegExp(Settings.getSetting('heldItemSearchFilter').observableValue() , 'i').test(this.displayName)) {
             return true;
         }
         return false;

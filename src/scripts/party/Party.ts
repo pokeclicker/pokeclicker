@@ -40,6 +40,11 @@ class Party implements Feature {
 
     }
 
+    gainPokemonByName(name: PokemonNameType, shiny = false, suppressNotification = false, gender = -1) {
+        const pokemon = pokemonMap[name];
+        this.gainPokemonById(pokemon.id, shiny, suppressNotification, gender);
+    }
+
     gainPokemonById(id: number, shiny = false, suppressNotification = false, gender = -1) {
         // If no gender defined, calculate it
         if (gender === -1) {
@@ -49,7 +54,7 @@ class Party implements Feature {
     }
 
     gainPokemon(pokemon: PartyPokemon, suppressNotification = false) {
-        PokemonHelper.incrementPokemonStatistics(pokemon.id, GameConstants.PokemonStatiticsType.Captured, pokemon.shiny, pokemon.gender);
+        PokemonHelper.incrementPokemonStatistics(pokemon.id, GameConstants.PokemonStatisticsType.Captured, pokemon.shiny, pokemon.gender);
         if (pokemon.shiny) {
             // Add all shiny catches to the log book
             App.game.logbook.newLog(
@@ -125,6 +130,11 @@ class Party implements Feature {
     public calculatePokemonAttack(type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, ignoreRegionMultiplier = false, region: GameConstants.Region = player.region, includeBreeding = false, useBaseAttack = false, overrideWeather?: WeatherType, ignoreLevel = false, includeFlute = true): number {
         let attack = 0;
         for (const pokemon of this.caughtPokemon) {
+            if (region == GameConstants.Region.alola && player.region == GameConstants.Region.alola && player.subregion == GameConstants.AlolaSubRegions.MagikarpJump &&
+                Math.floor(pokemon.id) != 129) {
+                // Only magikarps can attack in magikarp jump
+                continue;
+            }
             attack += this.calculateOnePokemonAttack(pokemon, type1, type2, region, ignoreRegionMultiplier, includeBreeding, useBaseAttack, overrideWeather, ignoreLevel, includeFlute);
         }
 
@@ -240,9 +250,14 @@ class Party implements Feature {
         // Base power
         // Shiny pokemon help with a 100% boost
         // Resistant pokemon give a 100% boost
-        const caught = this.caughtPokemon.length;
-        const shiny = this.caughtPokemon.filter(p => p.shiny).length;
-        const resistant = this.caughtPokemon.filter(p => p.pokerus >= GameConstants.Pokerus.Resistant).length;
+        let caughtPokemon = this.caughtPokemon;
+        if (player.region == GameConstants.Region.alola && player.subregion == GameConstants.AlolaSubRegions.MagikarpJump) {
+            // Only magikarps can attack in magikarp jump subregion
+            caughtPokemon = caughtPokemon.filter((p) => Math.floor(p.id) == 129);
+        }
+        const caught = caughtPokemon.length;
+        const shiny = caughtPokemon.filter(p => p.shiny).length;
+        const resistant = caughtPokemon.filter(p => p.pokerus >= GameConstants.Pokerus.Resistant).length;
         const clickAttack = Math.pow(caught + shiny + resistant + 1, 1.4) * (1 + AchievementHandler.achievementBonus());
 
         const bonus = this.multiplier.getBonus('clickAttack', useItem);

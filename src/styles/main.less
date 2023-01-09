@@ -593,6 +593,9 @@ td.tight {
 .bg-missingAchievement {
     background-color: var(--missingAchievement);
 }
+.bg-missingResistant {
+    background-color: var(--missingResistant);
+}
 .bg-completed {
   background-color: var(--completed);
 }
@@ -743,4 +746,13 @@ i[class*="gender-icon-"] {
   left: 0px;
   width:100%;
   height: 100%;
+}
+
+/* Show collapsed div in desktop */
+@media (min-width: 992px) {
+  .collapse.dont-collapse-lg {
+    display: block !important;
+    height: auto !important;
+    visibility: visible;
+  }
 }

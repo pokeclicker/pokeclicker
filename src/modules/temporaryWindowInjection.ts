@@ -88,6 +88,7 @@ import ClearDungeonRequirement from './requirements/ClearDungeonRequirement';
 import ClearGymRequirement from './requirements/ClearGymRequirement';
 import ClickRequirement from './requirements/ClickRequirement';
 import DefeatedRequirement from './requirements/DefeatedRequirement';
+import DevelopmentRequirement from './requirements/DevelopmentRequirement';
 import DiamondRequirement from './requirements/DiamondRequirement';
 import FarmHandRequirement from './requirements/FarmHandRequirement';
 import FarmPlotsUnlockedRequirement from './requirements/FarmPlotsUnlockedRequirement';
@@ -156,6 +157,7 @@ import VitaminController from './items/VitaminController';
 import RoamingPokemonList from './pokemons/RoamingPokemonList';
 import DataPokemon from './pokemons/DataPokemon';
 import RoamingPokemon from './pokemons/RoamingPokemon';
+import UndergroundMegaStoneItem from './underground/UndergroundMegaStoneItem';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -250,6 +252,7 @@ Object.assign(<any>window, {
     ClearGymRequirement,
     ClickRequirement,
     DefeatedRequirement,
+    DevelopmentRequirement,
     DiamondRequirement,
     FarmHandRequirement,
     FarmPlotsUnlockedRequirement,
@@ -321,4 +324,5 @@ Object.assign(<any>window, {
     RoamingPokemonList,
     DataPokemon,
     RoamingPokemon,
+    UndergroundMegaStoneItem,
 });

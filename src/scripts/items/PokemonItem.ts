@@ -24,7 +24,7 @@ class PokemonItem extends CaughtIndicatingItem {
             // Statistics
             if (i < amt - 1) { // -1 because gainPokemonById will add 1 to statistics
                 const gender = PokemonFactory.generateGenderById(pokemonID);
-                PokemonHelper.incrementPokemonStatistics(pokemonID, GameConstants.PokemonStatiticsType.Captured, shinyBool, gender);
+                PokemonHelper.incrementPokemonStatistics(pokemonID, GameConstants.PokemonStatisticsType.Captured, shinyBool, gender);
             }
         }
 
@@ -104,6 +104,10 @@ ItemList['Furfrou (Star)']    = new PokemonItem('Furfrou (Star)', 10000);
 ItemList['Furfrou (La Reine)']    = new PokemonItem('Furfrou (La Reine)', undefined);
 ItemList['Type: Null']           = new PokemonItem('Type: Null', 114000);
 ItemList.Poipole              = new PokemonItem('Poipole', 90000);
+ItemList['Magikarp Brown Stripes'] = new PokemonItem('Magikarp Brown Stripes', 100);
+ItemList['Magikarp Blue Raindrops'] = new PokemonItem('Magikarp Blue Raindrops', 10000, Currency.diamond);
+ItemList['Magikarp Saucy Violet'] = new PokemonItem('Magikarp Saucy Violet', 7500000000, Currency.money);
+ItemList['Probably Feebas'] = new PokemonItem('Magikarp (Feebas)', 5999, Currency.battlePoint);
 ItemList.Dracozolt              = new PokemonItem('Dracozolt', 100000);
 ItemList.Arctozolt              = new PokemonItem('Arctozolt', 100000);
 ItemList.Dracovish              = new PokemonItem('Dracovish', 100000);

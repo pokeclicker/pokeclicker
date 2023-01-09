@@ -162,6 +162,7 @@ export type ItemNameType
     | 'Pinkan Electabuzz'
     | 'Jynx'
     | 'Magikarp'
+    | 'Probably Feebas'
     | 'Eevee'
     | 'Porygon'
     | 'Togepi'
@@ -207,4 +208,8 @@ export type ItemNameType
     | 'Calcium'
     | 'Carbos'
     | 'Abomasite'
-    | 'Alakazite';
+    | 'Alakazite'
+    | 'Lopunnite'
+    | 'Kangaskhanite'
+    | 'Heracronite'
+    | 'Garchompite';
