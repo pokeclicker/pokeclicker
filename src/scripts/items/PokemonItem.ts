@@ -1,12 +1,12 @@
 class PokemonItem extends CaughtIndicatingItem {
 
     type: PokemonNameType;
-    private _translatedName: KnockoutObservable<string>;
+    private _translatedOrDisplayName: KnockoutObservable<string>;
 
     constructor(pokemon: PokemonNameType, basePrice: number, currency: GameConstants.Currency = GameConstants.Currency.questPoint, public ignoreEV = false, displayName: string = undefined) {
-        super(pokemon, basePrice, currency, undefined, displayName, `Add ${pokemon} to your party.`, 'pokemonItem');
+        super(pokemon, basePrice, currency, undefined, undefined, `Add ${pokemon} to your party.`, 'pokemonItem');
         this.type = pokemon;
-        this._translatedName = PokemonHelper.displayName(pokemon);
+        this._translatedOrDisplayName = displayName ?? PokemonHelper.displayName(pokemon);
     }
 
     gain(amt: number) {
@@ -66,7 +66,7 @@ class PokemonItem extends CaughtIndicatingItem {
     }
 
     get displayName(): string {
-        return this._displayName ?? this._translatedName();
+        return this._translatedOrDisplayName();
     }
 }
 
