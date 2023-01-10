@@ -179,6 +179,11 @@ class Underground implements Feature {
             return;
         }
 
+        if (item.valueType == UndergroundItemValueType.MegaStone) {
+            App.game.party.getPokemonByName((item as UndergroundMegaStoneItem).pokemon)?.giveMegastone();
+            return;
+        }
+
         if (index == -1) {
             const tempItem = {
                 name: item.name,
