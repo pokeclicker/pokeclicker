@@ -307,7 +307,7 @@ const PewterScientist = new NPC('Gem Scientist', [
 
 const Route3ShadySalesman = new NPC('Shady Salesman', [
     'Have I got a deal just for you!',
-    'I\'ll let you have a super secret Pokémon. For the right price! Buying this pokemon Takes No Effort, you should Value it',
+    'I\'ll let you have a super secret Pokémon. For the right price! Buying this pokemon Takes No Effort, you should Value it.',
 ], {image: 'assets/images/npcs/ShadySalesman.png'});
 
 const CeruleanKantoBerryMaster = new KantoBerryMasterNPC('Berry Master', [
@@ -360,6 +360,11 @@ const LavenderChanneler = new NPC('Channeler Karina', [
     'I know a lot of useful stuff. Like the odds of finding a shiny Pokémon or how to increase Click Attack.',
     'No, I didn\'t learn this from talking to ghosts, don\'t be silly. There\'s a FAQ button in the Start Menu. It\'s very useful.',
 ], {image: 'assets/images/trainers/Channeler.png'});
+
+const LavenderShopper = new NPC('Shopper', [
+    'I always seem to run out of Great Balls. Luckly this shop always have them in stock!',
+    'They even have an offer today! They give you free Great Balls if you give them the code <b>THE-GREATEST-POKEBALL</b>',
+]);
 
 const BigSpender = new NPC('Big Spender', [
     'I love shopping! When I come in, the cashiers know I want tons of items.',
@@ -756,7 +761,7 @@ TownList['Lavender Town'] = new Town(
     [LavenderTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Lavender Town']), new MoveToDungeon(dungeonList['Pokémon Tower'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 10)],
-        npcs: [LavenderMrFuji, LavenderChanneler],
+        npcs: [LavenderMrFuji, LavenderChanneler, LavenderShopper],
     }
 );
 TownList['Celadon City'] = new Town(
@@ -1881,6 +1886,9 @@ const LavaridgeTownShop = new Shop([
     ItemList.Fire_egg,
     ItemList.Fire_stone,
 ]);
+const RoadsideStandShop = new Shop([
+    ItemList['Probably Feebas'],
+], 'Shady Deal');
 const FortreeCityShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
@@ -1981,6 +1989,12 @@ const LavaridgeSootCollector = new NPC('Soot Collector', [
     'The Flute Trader in Fallarbor Town has been paying me to go collect soot to make Flutes, but I\'m sick of it.',
     'People say they have truly mystical powers, but that they require Gems of different types to use. Also, using more Flutes at the same time costs more Gems to use.',
 ]);
+
+const RoadsideStandShadySalesman = new NPC('Shady Salesman', [
+    'Have I got a deal just for you!',
+    'I have spent weeks finding the perfect fishing spot for Feebas, and finally got some! For a special low price, I\'ll sell you one!',
+    'All sales are final!',
+], {image: 'assets/images/npcs/ShadySalesman.png'});
 
 const FortreeWeatherman = new NPC('Weatherman', [
     'Castform is a very finicky Pokémon.',
@@ -2253,6 +2267,19 @@ TownList['Lavaridge Town'] = new Town(
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Jagged Pass'))],
         npcs: [MillenniumFest, Butler1],
+    }
+);
+TownList['Roadside Stand'] = new Town(
+    'Roadside Stand',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Hoenn,
+    [RoadsideStandShop],
+    {
+        requirements: [
+            new RouteKillRequirement(10, GameConstants.Region.hoenn, 118),
+        ],
+        npcs: [RoadsideStandShadySalesman],
+        ignoreAreaStatus: true,
     }
 );
 TownList['Fortree City'] = new Town(
@@ -4037,6 +4064,12 @@ const CoumarineBirdwatcher = new NPC('Birdwatcher', [
     'There are rumors that the energy calls some legendary birds to roam Kalos!',
 ]);
 
+const CoumarineElectricTrainer = new NPC('Electric Trainer', [
+    'My Ampharos has gotten a boost since a friendly soul gave me an Ampharosite!',
+    'Luckily my Ampharos was already strong enough to use it!',
+    'If you find that fella, tell him the code <b>ELECTRIC-GIRAFFE</b> and he might help you too!',
+]);
+
 const LaverreFurisodeGirlKatherine = new NPC('Furisode Girl Katherine', [
     'Don\'t you find Goomy to be an interesting Pokémon? I certainly think so, even though it isn\'t a problem for my Pokémon~',
     'I\'ve heard its evolutionary line loves damp conditions, and apparently if you train a Sliggoo during rainy or foggy weather something marvelous happens!',
@@ -4182,7 +4215,7 @@ TownList['Coumarine City'] = new Town(
     [CoumarineCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Coumarine City'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 12)],
-        npcs: [CoumarineBirdwatcher],
+        npcs: [CoumarineBirdwatcher, CoumarineElectricTrainer],
     }
 );
 TownList['Laverre City'] = new Town(
@@ -4694,7 +4727,7 @@ const DrSplash5 = new NPC('Dr. Splash', [
 });
 
 const MagikarpEyeShadySalesman = new NPC('Shady Salesman', [
-    'Kid, I have a deal for you! And for you alone. Here\'s your chance. I will sell you the secret Magikarp... For an unbelievable prize.',
+    'Kid, I have a deal for you! And for you alone. Here\'s your chance. I will sell you the secret Magikarp... For an unbelievable price.',
     'Oh, yeah... Returns not accepted, got that?',
 ],  {image:'assets/images/npcs/ShadySalesman.png'});
 
