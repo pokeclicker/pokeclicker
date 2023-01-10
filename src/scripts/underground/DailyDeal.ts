@@ -56,6 +56,11 @@ class DailyDeal {
             return false;
         }
 
+        // exclude mega stones from daily deals
+        if (this.item1.valueType == UndergroundItemValueType.MegaStone || this.item2.valueType == UndergroundItemValueType.MegaStone) {
+            return false;
+        }
+
         if (DailyDeal.sameDealExists(item1Name, item2Name, dealList)) {
             return false;
         }
