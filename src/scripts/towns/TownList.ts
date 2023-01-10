@@ -2848,6 +2848,8 @@ const ManaphyGoRock = new NPC('Go-Rock Grunt', [
     'The plan was so simple. One of our grunts pre-planted a bunch of big red mushrooms with yellow spots to make a path out of the forest and to our hideout.',
     'But it feels like we\'ve been going in circles! The only reason I know we aren\'t is because every time we reach a similar crossroads, the mushrooms are in different places.',
     'Unless... the mushrooms are moving somehow?',
+    '<i>What she\'s describing... could it be they\'re using Parasect? It\'s never a good idea to use living landmarks.</i>',
+    'If you can take out a few of the Parasect, that should quickly corner them.</i>',
 ], {
     image: 'assets/images/temporaryBattle/Go-Rock Squad Grunt (female).png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 6), new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 8, GameConstants.AchievementOption.less)]),
@@ -2855,7 +2857,7 @@ const ManaphyGoRock = new NPC('Go-Rock Grunt', [
 
 const HappinyWitness1 = new NPC('Black Belt', [
     'A Happiny with a blue egg?',
-    'I did see a Happiny like that. They were heading north, across route 204.',
+    'I did see a Happiny like that. They were heading north, across Route 204.',
 ], {
     image: 'assets/images/trainers/Black Belt.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 12), new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 14, GameConstants.AchievementOption.less)]),
@@ -2865,6 +2867,7 @@ const HappinyWitness2 = new NPC('Lady', [
     'A Happiny with a blue egg? Are you it\'s trainer?',
     'I was just minding my own business, when a little pink thing knocked me right over! By the time I got up, it was long gone, racing for the Eterna Forest.',
     'I was worried it\'s trainer had lost it, so I came here to ask around. I hope you catch up to it soon.',
+    '<i>If it\'s got a better sense of direction than the Go-Rock Squad, it\'ll probably pop out at Eterna City.</i>',
 ], {
     image: 'assets/images/trainers/Lady.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 13), new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 15, GameConstants.AchievementOption.less)]),
@@ -2873,7 +2876,7 @@ const HappinyWitness2 = new NPC('Lady', [
 const HappinyWitness3 = new NPC('Cyclist', [
     'A Happiny with a blue egg? Ah yeah, I saw it.',
     'It ran right through here and went straight for Mt. Coronet.',
-    'If it\'s still going, it\'d be across the mountain by now.',
+    '<i>Did the Happiny really leave Eterna and brave Mt. Coronet with the egg in tow? Maybe it\'s reached the other side by now.</i>',
 ], {
     image: 'assets/images/trainers/Cyclist (female).png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 14), new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 16, GameConstants.AchievementOption.less)]),
@@ -2908,6 +2911,7 @@ const HappinyWitness7 = new NPC('Cyclist', [
     'Oh hey! Still chasing that Happiny, huh?',
     'When I saw it still running, I tried to catch up to it, but it got into the Oreburgh Tunnel and I lost track of it.',
     '...Say, are you alright? You look a little... bug-eyed.',
+    '<i>...This annoying little twerp has been taking you in one big loop, hasn\'t it...</i>',
 ], {
     image: 'assets/images/trainers/Cyclist (female).png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 18), new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 20, GameConstants.AchievementOption.less)]),
@@ -2932,7 +2936,7 @@ const HappinyWitness9 = new NPC('Go-Rock Pincher', [
 });
 
 const HappinyBoulders = new NPC('Strange Boulders', [
-    '<i>You\'ve seen boulders like this before.</i>',
+    '<i>You\'ve seen \'boulders\' like this before.</i>',
     '<i>According to the murmuring crowd around them, a Happiny ran this way and threw the boulders behind it to block any pursuers.</i>',
     '<i>You spray the boulders with your water types, and they... don\'t move. Huh, guess they really are boulders this time.</i>',
     '<i>Well, that just means that you can get some fighting-types and crush them with no regrets.</i>',
@@ -2956,7 +2960,7 @@ TownList['Sandgem Town'] = new Town(
     'Sandgem Town',
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Sinnoh,
-    [TemporaryBattleList['Manaphy Go-Rock Pincher'], SandgemTownShop],
+    [SandgemTownShop, TemporaryBattleList['Manaphy Go-Rock Pincher']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 201)],
         npcs: [ProfRowan, SandgemBeachcomber, ManaphyHastings1, ManaphyHastings2, HappinyWitness9],
@@ -3067,7 +3071,7 @@ TownList['Pal Park'] = new Town(
     'Pal Park',
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Sinnoh,
-    [TemporaryBattleList['Manaphy Egg Protectors'], PalParkShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Pal Park'])],
+    [PalParkShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Pal Park']), TemporaryBattleList['Manaphy Egg Protectors']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 221)],
         npcs: [PalParkWarden, PalParkBurglar, HappinyBoulders],
@@ -3169,7 +3173,7 @@ TownList['Eterna Forest'] = new DungeonTown(
         new RouteKillRequirement(10, GameConstants.Region.sinnoh, 205),
         new GymBadgeRequirement(BadgeEnums.Coal),
     ],
-    [TemporaryBattleList['Manaphy Go-Rock MGrunt 1'], TemporaryBattleList['Manaphy Go-Rock MGrunt 2'], TemporaryBattleList['Manaphy Go-Rock MGrunt 3'], TemporaryBattleList['Manaphy Go-Rock MGrunt 4'], TemporaryBattleList['Manaphy Go-Rock FGrunt 1'], TemporaryBattleList['Manaphy Go-Rock FGrunt 2'],TemporaryBattleList['Manaphy Go-Rock Commander']],
+    [TemporaryBattleList['Manaphy Go-Rock MGrunt 1'], TemporaryBattleList['Manaphy Go-Rock MGrunt 2'], TemporaryBattleList['Manaphy Go-Rock MGrunt 3'], TemporaryBattleList['Manaphy Go-Rock MGrunt 4'], TemporaryBattleList['Manaphy Go-Rock FGrunt 1'], TemporaryBattleList['Manaphy Go-Rock FGrunt 2']],
     {
         npcs: [ManaphyGoRock, ManaphyGoRockCommander, ManaphyBoulders],
     }
@@ -3181,7 +3185,8 @@ TownList['Old Chateau'] = new DungeonTown(
     [
         new RouteKillRequirement(10, GameConstants.Region.sinnoh, 205),
         new GymBadgeRequirement(BadgeEnums.Forest),
-    ]
+    ],
+    [TemporaryBattleList['Manaphy Go-Rock Commander']]
 );
 TownList['Team Galactic Eterna Building'] = new DungeonTown(
     'Team Galactic Eterna Building',
