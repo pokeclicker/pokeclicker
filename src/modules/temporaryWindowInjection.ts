@@ -157,6 +157,7 @@ import VitaminController from './items/VitaminController';
 import RoamingPokemonList from './pokemons/RoamingPokemonList';
 import DataPokemon from './pokemons/DataPokemon';
 import RoamingPokemon from './pokemons/RoamingPokemon';
+import UndergroundMegaStoneItem from './underground/UndergroundMegaStoneItem';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -323,4 +324,5 @@ Object.assign(<any>window, {
     RoamingPokemonList,
     DataPokemon,
     RoamingPokemon,
+    UndergroundMegaStoneItem,
 });
