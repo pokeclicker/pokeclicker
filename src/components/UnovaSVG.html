@@ -2,7 +2,7 @@
     <image width="1600" height="960" data-bind="attr: {
         'xlink:href':'assets/images/unova.png?v=$VERSION',
         href:'assets/images/unova.png?v=$VERSION'
-    }, click : () => MapHelper.highlightDock(!MapHelper.highlightDock())"></image>
+    }, click : () => MapHelper.highlightDock(!MapHelper.highlightDock() && Settings.getSetting('helpSeeDock').value)"></image>
 
     <!-- ------ -->
     <!-- ROUTES -->
