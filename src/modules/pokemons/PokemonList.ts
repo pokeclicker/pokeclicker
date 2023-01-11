@@ -6730,7 +6730,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 142,
         'eggCycles': 10,
-        'evolutions': [StoneEvolution('Spooky Togetic', 'Spooky Togekiss', StoneType.Shiny_stone)],
+        'evolutions': [StoneEvolution('Spooky Togetic', 'Spooky Togekiss', StoneType.Dusk_stone)],
         'base': {
             'hitpoints': 55,
             'attack': 40,
