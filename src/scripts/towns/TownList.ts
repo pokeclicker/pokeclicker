@@ -2902,7 +2902,7 @@ const HappinyWitness2 = new NPC('Lady', [
 
 const HappinyWitness3 = new NPC('Cyclist', [
     'A Happiny with a blue egg? Ah yeah, I saw it.',
-    'It ran right through here and went straight for Mt. Coronet.',
+    'It ran right through here and went across Route 211, straight for Mt. Coronet.',
     '<i>Did the Happiny really leave Eterna and brave Mt. Coronet with the egg in tow? Maybe it\'s reached the other side by now.</i>',
 ], {
     image: 'assets/images/trainers/Cyclist (female).png',
