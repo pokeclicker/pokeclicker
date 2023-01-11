@@ -213,10 +213,12 @@ class Mine {
                 case UndergroundItemValueType.Gem:
                     res.plates++;
                     break;
+                case UndergroundItemValueType.MegaStone:
+                    res.megaStones++;
                 default:
             }
             return res;
-        }, {fossils: 0, fossilpieces: 0, plates: 0, evoItems: 0, totalValue: 0, shards: 0});
+        }, {fossils: 0, fossilpieces: 0, plates: 0, evoItems: 0, totalValue: 0, shards: 0, megaStones: 0});
     }
 
     private static updatesurveyResult(summary) {
@@ -235,6 +237,9 @@ class Mine {
         }
         if (summary.shards) {
             text.push(`Shards: ${summary.shards}`);
+        }
+        if (summary.megaStones) {
+            text.push(`Mega Stones: ${summary.megaStones}`);
         }
         if (summary.totalValue) {
             text.push(`Diamond Value: ${summary.totalValue}`);
