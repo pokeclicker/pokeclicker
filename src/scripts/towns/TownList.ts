@@ -2035,11 +2035,36 @@ const PacifidlogDiver = new NPC('Diver', [
     'I\'ve heard that if you beat a Dungeon a lot then the stuff you find in chests gets even more awesome.',
 ]);
 
-const SootopolisWallace = new NPC('Gym Leader Wallace', [
-    'The creators of the lands and ocean slumber within the Cave of Origin.',
-    'However, they will only awaken when in the presence of a truly great trainer.',
-    'You will have to overcome the Pokémon League before you have any chance of encountering them.',
-], {image: 'assets/images/gymLeaders/Wallace.png'});
+const Wallace1 = new NPC('Gym Leader Wallace', [
+    'Ah, so you are the new trainer in the region? I\'ve heard tales of your exploits. My name is Wallace. I was once the Gym Leader of Sootopolis, but something came up. So now, I\'ve entrusted my mentor Juan with the Gym\'s operation.',
+    'Groudon and Kyogre, the two Pokémon wreaking havoc in Sootopolis City, are considered to be Super-Ancient Pokémon. But there aren\'t just two Super-Ancient Pokémon. Somewhere, there is a Super-Ancient Pokémon named Rayquaza. It\'s said that it was Rayquaza that becalmed the two combatants in the distant past.',
+    'I have heard that Rayquaza once lived high atop the Sky Pillar, maybe that\'s where it is now?',
+], {image: 'assets/images/gymLeaders/Wallace.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Weather Trio', 1), new QuestLineStepCompletedRequirement('The Weather Trio', 3, GameConstants.AchievementOption.less)]),
+});
+
+const Wallace2 = new NPC('Gym Leader Wallace', [
+    'My eyes didn\'t deceive me. Thanks to your help, Sootopolis...',
+    'No, all of Hoenn was saved. On behalf of the people, I thank you.',
+    'Now that their battle is over, the Super-Ancient Pokémon have retreated to rest and recuperate. You will likely find Rayquaza back in the Sky Pillar.',
+    'Kyogre and Groudon are rumored to live deep within this very cave, but they are unlikely to show themselves to any normal trainer. Maybe the champion of Hoenn could earn their respect.',
+], {image: 'assets/images/gymLeaders/Wallace.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Weather Trio', 4), new QuestLineStepCompletedRequirement('The Weather Trio', 6, GameConstants.AchievementOption.less)]),
+});
+
+const WeatherBattle1 = new NPC('The Super-Ancient Pokémon Clash', [
+    '<i>Groudon and Kyogre have been awakened by the efforts of Team Magma and Team Aqua! They are engaged in a fierce battle which threatens to destroy Sootopolis City... and more!</i>',
+    '<i>The locals in Sootopolis City take shelter from the raging battle. Some say that this sort of this would never happen if Wallace was still around.</i>',
+], {image: 'assets/images/npcs/other/WeatherBattle1.png',
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('The Weather Trio'), new QuestLineStepCompletedRequirement('The Weather Trio', 1, GameConstants.AchievementOption.less)]),
+});
+
+const WeatherBattle2 = new NPC('The Super-Ancient Pokémon Clash', [
+    '<i>Rayquaza appears above Kyogre and Groudon and utters a single intimidating roar. The battling Super-Ancient Pokémon stop their attacks, and a tense standoff ensues.</i>',
+    '<i>After what seems like an eternity, the three Super-Ancient Pokémon seem to have come to an understanding. They each depart the city, and peace is restored.</i>',
+], {image: 'assets/images/npcs/other/WeatherBattle2.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Weather Trio', 3), new QuestLineStepCompletedRequirement('The Weather Trio', 5, GameConstants.AchievementOption.less)]),
+});
 
 const MillenniumFest = new NPC('The Millennium Festival', [
     '<i>The Millennium Comet is about to make its long-awaited appearance in the sky again, supposedly granting the wishes of all those who see it in the skies above them.</i>',
@@ -2334,7 +2359,7 @@ TownList['Sootopolis City'] = new Town(
     [SootopolisCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Sootopolis City'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 126), new GymBadgeRequirement(BadgeEnums.Mind)],
-        npcs: [SootopolisWallace],
+        npcs: [WeatherBattle1, WeatherBattle2],
     }
 );
 TownList['Ever Grande City'] = new Town(
@@ -2465,7 +2490,11 @@ TownList['Cave of Origin'] = new DungeonTown(
     [
         new RouteKillRequirement(10, GameConstants.Region.hoenn, 126),
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Seafloor Cavern')),
-    ]
+    ],
+    [],
+    {
+        npcs: [Wallace1, Wallace2],
+    }
 );
 TownList['Seafloor Cavern'] = new DungeonTown(
     'Seafloor Cavern',

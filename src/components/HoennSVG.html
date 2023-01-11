@@ -914,6 +914,15 @@
          })
      %>
 
+     <%- include('templates/mapOverlay',
+         { name: "A Raging Maelstrom"
+        , x: 59, y: 28
+         , width: 13, height: 13
+        , visible:  "(App.game.quests.getQuestLine('The Weather Trio').curQuest() < 5 && App.game.quests.getQuestLine('The Weather Trio').state() >= 1)"
+         , image: "assets/images/map/Maelstrom.png"
+         })
+     %>
+
     <%- include('templates/mapOverlay',
         { name: "Pokémon Trainer May"
         , x: 14.5, y: 31

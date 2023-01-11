@@ -520,6 +520,45 @@ class QuestLineHelper {
         App.game.quests.questLines().push(aquaMagmaHoennQuestLine);
     }
 
+    // Weather Trio
+    public static createWeatherTrioQuestLine() {
+        const weatherTrioQuestLine = new QuestLine('The Weather Trio', 'Put an ancient battle to rest.', new QuestLineCompletedRequirement('Land vs. Water'), GameConstants.BulletinBoards.Hoenn);
+
+        const weatherBattle1 = new TalkToNPCQuest(WeatherBattle1, 'Investigate the commotion in Sootopolis City.');
+        weatherTrioQuestLine.addQuest(weatherBattle1);
+
+        const clearCaveOfOrigin = new CustomQuest(1, 0, 'Explore the Cave of Origin to find Wallace.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Cave of Origin')]());
+        weatherTrioQuestLine.addQuest(clearCaveOfOrigin);
+
+        const talkToWallace1 = new TalkToNPCQuest(Wallace1, 'Talk to Wallace in the Cave of Origin to learn how to stop Kyogre and Groudon from fighting.');
+        weatherTrioQuestLine.addQuest(talkToWallace1);
+
+        const clearSkyPillar = new CustomQuest(1, 0, 'Climb the Sky Pillar to find the super-ancient Pokémon Rayquaza.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Sky Pillar')]());
+        weatherTrioQuestLine.addQuest(clearSkyPillar);
+
+        const weatherBattle2 = new TalkToNPCQuest(WeatherBattle2, 'Return to Sootopolis City to see what Rayquaza will do.');
+        weatherTrioQuestLine.addQuest(weatherBattle2);
+
+        const talkToWallace2 = new TalkToNPCQuest(Wallace2, 'Talk to Wallace in the Cave of Origin about the aftermath of the battle.');
+        weatherTrioQuestLine.addQuest(talkToWallace2);
+
+        const catchRayquaza = new CaptureSpecificPokemonQuest('Rayquaza', 'Catch Rayquaza');
+
+        const catchKyogre = new CaptureSpecificPokemonQuest('Kyogre', 'Catch Kyogre');
+
+        const catchGroudon = new CaptureSpecificPokemonQuest('Groudon', 'Catch Groudon');
+
+        weatherTrioQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                catchRayquaza,
+                catchKyogre,
+                catchGroudon,
+            ], 'Catch the Weather Trio.'));
+
+
+        App.game.quests.questLines().push(weatherTrioQuestLine);
+    }
+
     // Started upon becoming Hoenn's Chapmion.
     public static createDeoxysQuestLine() {
         const deoxysQuestLine = new QuestLine('Mystery of Deoxys', 'Discover the mystery of Deoxys.');
@@ -2401,6 +2440,7 @@ class QuestLineHelper {
         this.createhoohJohtoQuestLine();
         this.createCelebiJohtoQuestLine();
         this.createAquaMagmaHoennQuestLine();
+        this.createWeatherTrioQuestLine();
         this.createDeoxysQuestLine();
         this.createRubySapphireSeviiQuestLine();
         this.createPinkanThemeparkQuestLine();
