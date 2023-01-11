@@ -108,10 +108,10 @@ RoamingPokemonList.add(Region.sinnoh, 0, new RoamingPokemon('Mesprit', new Clear
 RoamingPokemonList.add(Region.sinnoh, 0, new RoamingPokemon('Cresselia', new ClearDungeonRequirement(1, getDungeonIndex('Fullmoon Island'))));
 
 // Hisui
-RoamingPokemonList.add(Region.sinnoh, 1, new RoamingPokemon('Tornadus', new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 0)));
-RoamingPokemonList.add(Region.sinnoh, 1, new RoamingPokemon('Thundurus', new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 0)));
-RoamingPokemonList.add(Region.sinnoh, 1, new RoamingPokemon('Landorus', new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 0)));
-RoamingPokemonList.add(Region.sinnoh, 1, new RoamingPokemon('Enamorus', new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 0)));
+RoamingPokemonList.add(Region.sinnoh, 1, new RoamingPokemon('Tornadus', new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 1)));
+RoamingPokemonList.add(Region.sinnoh, 1, new RoamingPokemon('Thundurus', new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 1)));
+RoamingPokemonList.add(Region.sinnoh, 1, new RoamingPokemon('Landorus', new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 1)));
+RoamingPokemonList.add(Region.sinnoh, 1, new RoamingPokemon('Enamorus', new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 3)));
 
 // Unova
 RoamingPokemonList.add(Region.unova, 0, new RoamingPokemon('Tornadus', new GymBadgeRequirement(BadgeEnums.Legend)));

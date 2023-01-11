@@ -3118,6 +3118,41 @@ const ArezuCalabaAdaman2 = new NPC('Arezu, Calaba & Adaman', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
 });
 
+const ForcesCogita1 = new NPC('Cogita', [
+    'I\'ve just been told of the foul plan Volo had concocted. Well, think no more on that scoundrel. Just another tale of passion burning too bright and consuming its bearer. This is what happens, if you allow it to.',
+    'But what of you? Are you making any progress with your...what do you call your studies of Pokémon? Surveying, was it?',
+    'Indeed? Well, Hisui still holds more fascinating Pokémon.',
+    'Such as Tornadus... In every direction it flies, stirring up tremendous storms as it goes. When a blizzard batters the Alabaster Icelands, Tornadus may be about.',
+    'Also, Thundurus: as it flies around, it fires bolts of lightning every which way. When a rainstorm lashes the Cobalt Coastlands, Tornadus may be about.',
+    'Lastly, Landorus, the Pokémon hailed as the Guardian of the Fields. It seems it can be glimpsed in the Obsidian Fieldlands. Perhaps you\'d be so good as to catch it for me?',
+    'I know not why these three have chosen to show themselves. Perhaps the cause lies with the space-time rift...or simply within their own whims...'
+], {
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('The Incarnate Forces of Hisui'), new QuestLineStepCompletedRequirement('The Incarnate Forces of Hisui', 1, GameConstants.AchievementOption.less)]),
+});
+const ForcesCogita2 = new NPC('Cogita', [
+    'Ah, you\'ve arrived. You now know much about Landorus, Tornadus and even Thundurus. Well done.',
+    'In more normal times, I would bid you to let these three fly free as is their nature.',
+    'But we are fresh from the tearing of the space-time rift. Until its aftereffects fade entirely, perhaps its best to keep our trio contained.',
+    'And now, it is time to tell you the rest. There is one more of that cohort. Come.'
+    '<img src="assets/images/pokemon/905.png">',
+    'This is Enamorus, a Pokémon hailed as the Herald of Spring. Enamorus is not particularly given to ill behaviour. But I imagine you\'d like to document her for your Pokédex, wouldn\'t you?',
+    'Catch her then, if you like. She always flits about in the Crimson Mirelands.',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Incarnate Forces of Hisui', 1), new QuestLineStepCompletedRequirement('The Incarnate Forces of Hisui', 3, GameConstants.AchievementOption.less)]),
+});
+const ForcesCogita3 = new NPC('Cogita', [
+    'Aha, you\'ve caught Enamorus as well. And you know so much about her.',
+    'Enamorus arrives in Hisui once winter has passed. Hence the epithet Herald of Spring.',
+    'Her company, when I have the pleasure, is of great help, she ferries me hither and yon across Hisui. But I\'ll leave her in your care for now, I suppose.',
+    'Indeed, even you can hardly expect to live for all time, surely, but she will be in your care for now.',
+    'You, Enamorus and her brethren have something in common: you tend to stir the pot of life. Do not mistake me - I mean this positively.',
+    'If everything were straightforward, what meaning would there be in living as long as we do?',
+    '"Once there was a god of field, and once there was a god of spring. Upon Hisui\'s winds it wheeled, brought life to every growing thing..." Was that how that old verse went?',
+    'I have passed on to you all there is to pass. Where history goes from here...I leave to you and your companions to see through.',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Incarnate Forces of Hisui', 4), new QuestLineCompletedRequirement('The Incarnate Forces of Hisui', GameConstants.AchievementOption.less)]),
+});
+
 
 //Sinnoh Towns
 TownList['Twinleaf Town'] = new Town(

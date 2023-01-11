@@ -4423,44 +4423,132 @@ TemporaryBattleList['Giratina (Origin)'] = new TemporaryBattle(
         hideTrainer: true,
     }
 );
-TemporaryBattleList.Tornadus = new TemporaryBattle(
-    'Tornadus',
+TemporaryBattleList['Tornadus 1'] = new TemporaryBattle(
+    'Tornadus 1',
     [new GymPokemon('Tornadus', 2031393560, 70)],
     undefined,
     [new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 0)],
-    [new ObtainedPokemonRequirement('Tornadus'), new TemporaryBattleRequirement('Tornadus')],
+    undefined,
+    {
+        hideTrainer: true,
+        imageName: '../pokemon/641',
+    }
+);
+TemporaryBattleList['Tornadus 2'] = new TemporaryBattle(
+    'Tornadus 2',
+    [new GymPokemon('Tornadus', 2031393560, 70)],
+    undefined,
+    [new TemporaryBattleRequirement('Tornadus 1')],
+    undefined,
+    {
+        hideTrainer: true,
+        imageName: '../pokemon/641',
+    }
+);
+TemporaryBattleList['Tornadus 3'] = new TemporaryBattle(
+    'Tornadus 3',
+    [new GymPokemon('Tornadus', 2031393560, 70)],
+    undefined,
+    [new TemporaryBattleRequirement('Tornadus 2')],
+    [new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 1), new TemporaryBattleRequirement('Tornadus 3')],
     {
         isTrainerBattle: false,
         hideTrainer: true,
         imageName: '../pokemon/641',
     }
 );
-TemporaryBattleList.Thundurus = new TemporaryBattle(
-    'Thundurus',
+TemporaryBattleList['Thundurus 1'] = new TemporaryBattle(
+    'Thundurus 1',
     [new GymPokemon('Thundurus', 2031393560, 70)],
     undefined,
     [new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 0)],
-    [new ObtainedPokemonRequirement('Thundurus'), new TemporaryBattleRequirement('Thundurus')],
+    undefined,
+    {
+        hideTrainer: true,
+        imageName: '../pokemon/642',
+    }
+);
+TemporaryBattleList['Thundurus 2'] = new TemporaryBattle(
+    'Thundurus 2',
+    [new GymPokemon('Thundurus', 2031393560, 70)],
+    undefined,
+    [new TemporaryBattleRequirement('Thundurus 1')],
+    undefined,
+    {
+        hideTrainer: true,
+        imageName: '../pokemon/642',
+    }
+);
+TemporaryBattleList['Thundurus 3'] = new TemporaryBattle(
+    'Thundurus 3',
+    [new GymPokemon('Thundurus', 2031393560, 70)],
+    undefined,
+    [new TemporaryBattleRequirement('Thundurus 2')],
+    [new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 1), new TemporaryBattleRequirement('Thundurus 3')],
     {
         isTrainerBattle: false,
         hideTrainer: true,
         imageName: '../pokemon/642',
     }
 );
-TemporaryBattleList.Landorus = new TemporaryBattle(
-    'Landorus',
+TemporaryBattleList['Landorus 1'] = new TemporaryBattle(
+    'Landorus 1',
     [new GymPokemon('Landorus', 2031393560, 70)],
     undefined,
     [new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 0)],
-    [new ObtainedPokemonRequirement('Landorus'), new TemporaryBattleRequirement('Landorus')],
+    undefined,
+    {
+        hideTrainer: true,
+        imageName: '../pokemon/645',
+    }
+);
+TemporaryBattleList['Landorus 2'] = new TemporaryBattle(
+    'Landorus 2',
+    [new GymPokemon('Landorus', 2031393560, 70)],
+    undefined,
+    [new TemporaryBattleRequirement('Landorus 1')],
+    undefined,
+    {
+        hideTrainer: true,
+        imageName: '../pokemon/645',
+    }
+);
+TemporaryBattleList['Landorus 3'] = new TemporaryBattle(
+    'Landorus 3',
+    [new GymPokemon('Landorus', 2031393560, 70)],
+    undefined,
+    [new TemporaryBattleRequirement('Landorus 2')],
+    [new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 1), new TemporaryBattleRequirement('Landorus 3')],
     {
         isTrainerBattle: false,
         hideTrainer: true,
         imageName: '../pokemon/645',
     }
 );
-TemporaryBattleList.Enamorus = new TemporaryBattle(
-    'Enamorus',
+TemporaryBattleList['Enamorus 1'] = new TemporaryBattle(
+    'Enamorus 1',
+    [new GymPokemon('Enamorus', 2031393560, 65)],
+    undefined,
+    [new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 0)],
+    undefined,
+    {
+        hideTrainer: true,
+        imageName: '../pokemon/905',
+    }
+);
+TemporaryBattleList['Enamorus 2'] = new TemporaryBattle(
+    'Enamorus 2',
+    [new GymPokemon('Enamorus', 2031393560, 65)],
+    undefined,
+    [new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 0)],
+    undefined,
+    {
+        hideTrainer: true,
+        imageName: '../pokemon/905',
+    }
+);
+TemporaryBattleList['Enamorus 3'] = new TemporaryBattle(
+    'Enamorus 3',
     [new GymPokemon('Enamorus', 2031393560, 65)],
     'Before you could attempt to capture it, Enamorus fled to roam the region!',
     [new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 0)],
