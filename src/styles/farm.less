@@ -146,3 +146,21 @@
     filter: brightness(50%) opacity(90%);
   }
 }
+
+.shineHighlight {
+        overflow: hidden;
+position: relative;
+	width: 100%;
+	height:auto;
+	z-index:1;
+	animation: shine 2s infinite;
+  background: linear-gradient(to right, 
+    rgba(255, 228, 142, 0), 
+    rgba(255, 228, 142, 0.8), 
+    rgba(255, 228, 142, 0));
+}
+
+@keyframes shine {
+	0% {transform:translateX(-100%);}
+	100% {transform:translateX(100%);}
+}
