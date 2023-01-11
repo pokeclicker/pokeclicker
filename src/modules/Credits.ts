@@ -203,8 +203,10 @@ export const SpriteCredits: Credit[] = [
             'Ash\'s Butterfree',
             'Black mane hair big icon',
             'Blimp base',
+            'Butler',
             'Charitative chansey shuffle',
             'Client Island town image',
+            'Clown Jessie & James',
             'Cracked pot big icon',
             'Danny',
             'Dr. Splash',
@@ -241,8 +243,10 @@ export const SpriteCredits: Credit[] = [
             'Magikarp Brown Stripes Shop Icon',
             'Magikarp Blue Raindrops Shop Icon',
             'Magikarp Saucy Violet Shop Icon',
+            'Magikarp (Feebas)',
             'Man of Mystery',
             'Merilyn',
+            'Meta Groudon Overworld',
             'Milcery (Cheesy)',
             'Pinkan Arbok',
             'Pinkan Bellsprout',
@@ -266,6 +270,7 @@ export const SpriteCredits: Credit[] = [
             'Roddy Tackle',
             'Rudy',
             'Rusted Shield and Sword icons',
+            'Shady Salesman',
             'Spooky Togepi (shiny)',
             'Spooky Togetic',
             'Spooky Togekiss',
@@ -279,6 +284,9 @@ export const SpriteCredits: Credit[] = [
             'Tourist Couple/Bellhop',
             'Tower of Darkness',
             'Tower of Waters',
+            'Underground Aerodactylite',
+            'Underground Mawilite',
+            'Underground Sablenite',
             'Valencian Raticate',
             'Valencian Paras',
             'White mane hair icon',
@@ -717,6 +725,7 @@ export const SpriteCredits: Credit[] = [
             'Magikarp Blue Raindrops',
             'Magikarp Saucy Violet',
             'Magikarp Violet Raindrops',
+            'Meta Groudon',
             'Millis Steel',
             'Noble Arcanine',
             'Noble Avalugg',
@@ -848,7 +857,7 @@ fetch(`https://api.github.com/repos/pokeclicker/pokeclicker/contributors?per_pag
 export const CodeCredits: Credit[] = [
     {
         resources: [
-            1396,
+            1401,
         ],
         name: 'RedSparr0w',
         link: 'https://github.com/RedSparr0w',
@@ -896,7 +905,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            88,
+            90,
         ],
         name: 'CorgiOnNeptune',
         link: 'https://github.com/CorgiOnNeptune',
@@ -904,7 +913,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            88,
+            89,
         ],
         name: 'Qwertypop04',
         link: 'https://github.com/Qwertypop04',
@@ -954,21 +963,21 @@ export const CodeCredits: Credit[] = [
         resources: [
             28,
         ],
-        name: 'tkatchen',
-        link: 'https://github.com/tkatchen',
-        image: 'https://avatars.githubusercontent.com/u/26515965?v=4',
-    },
-    {
-        resources: [
-            25,
-        ],
         name: 'CypherX',
         link: 'https://github.com/CypherX',
         image: 'https://avatars.githubusercontent.com/u/672420?v=4',
     },
     {
         resources: [
-            25,
+            28,
+        ],
+        name: 'tkatchen',
+        link: 'https://github.com/tkatchen',
+        image: 'https://avatars.githubusercontent.com/u/26515965?v=4',
+    },
+    {
+        resources: [
+            27,
         ],
         name: 'Farboo171',
         link: 'https://github.com/Farboo171',
@@ -1034,17 +1043,17 @@ export const CodeCredits: Credit[] = [
         resources: [
             18,
         ],
-        name: 'NiCeDiCe90',
-        link: 'https://github.com/NiCeDiCe90',
-        image: 'https://avatars.githubusercontent.com/u/82889773?v=4',
-    },
-    {
-        resources: [
-            17,
-        ],
         name: 'Crobat4',
         link: 'https://github.com/Crobat4',
         image: 'https://avatars.githubusercontent.com/u/104547700?v=4',
+    },
+    {
+        resources: [
+            18,
+        ],
+        name: 'NiCeDiCe90',
+        link: 'https://github.com/NiCeDiCe90',
+        image: 'https://avatars.githubusercontent.com/u/82889773?v=4',
     },
     {
         resources: [
@@ -1058,17 +1067,17 @@ export const CodeCredits: Credit[] = [
         resources: [
             15,
         ],
-        name: 'Mephistic',
-        link: 'https://github.com/Mephistic',
-        image: 'https://avatars.githubusercontent.com/u/2694761?v=4',
-    },
-    {
-        resources: [
-            14,
-        ],
         name: 'DraKay',
         link: 'https://github.com/DraKay',
         image: 'https://avatars.githubusercontent.com/u/114853432?v=4',
+    },
+    {
+        resources: [
+            15,
+        ],
+        name: 'Mephistic',
+        link: 'https://github.com/Mephistic',
+        image: 'https://avatars.githubusercontent.com/u/2694761?v=4',
     },
     {
         resources: [

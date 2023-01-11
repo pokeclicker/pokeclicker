@@ -100,7 +100,7 @@ RoamingPokemonList.add(Region.johto, 0, new RoamingPokemon('Entei', new QuestLin
 RoamingPokemonList.add(Region.hoenn, 0, new RoamingPokemon('Latios', new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)));
 RoamingPokemonList.add(Region.hoenn, 0, new RoamingPokemon('Latias', new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)));
 // TODO: these need another way to be obtained
-RoamingPokemonList.add(Region.hoenn, 0, new RoamingPokemon('Jirachi', new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)));
+RoamingPokemonList.add(Region.hoenn, 0, new RoamingPokemon('Jirachi', new QuestLineStepCompletedRequirement('Wish Maker', 8)));
 
 // Sinnoh
 RoamingPokemonList.add(Region.sinnoh, 0, new RoamingPokemon('Manaphy'));

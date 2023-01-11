@@ -170,7 +170,7 @@ TemporaryBattleList['Blue 5'] = new TemporaryBattle(
         displayName: 'Rival Blue',
         imageName: 'Blue2',
         firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonById(131);
+            App.game.party.gainPokemonByName('Lapras');
         },
     }
 );
@@ -760,6 +760,66 @@ TemporaryBattleList['Wally 2'] = new TemporaryBattle(
         imageName: 'Wally',
         rewardFunction: () =>
             Notifier.notify({message: 'Congratulations on beating Wally at his best! Come back to fight him again at any time.'}),
+    }
+);
+TemporaryBattleList['Clown Jessie & James'] = new TemporaryBattle(
+    'Clown Jessie & James',
+    [
+        new GymPokemon('Victreebel', 3006000, 40),
+        new GymPokemon('Weezing', 3006000, 50),
+        new GymPokemon('Seviper', 3006000, 50),
+        new GymPokemon('Dustox', 3006000, 50),
+        new GymPokemon('Meowth', 2000, 5),
+    ],
+    'We\'re blasting off again!!!!',
+    [new QuestLineStepCompletedRequirement('Wish Maker', 0)],
+    undefined,
+    {
+        displayName: 'Jessie & James',
+    }
+);
+TemporaryBattleList['Butler 1'] = new TemporaryBattle(
+    'Butler 1',
+    [
+        new GymPokemon('Kirlia', 3066000, 50),
+        new GymPokemon('Mightyena', 3066000, 50),
+        new GymPokemon('Dusclops', 3066000, 50),
+    ],
+    '<i>Butler managed to load Jirachi into a cage and escaped in his van. He is headed for the Jagged Pass!</i>',
+    [new QuestLineStepCompletedRequirement('Wish Maker', 5)],
+    undefined,
+    {
+        displayName: 'Butler',
+        imageName: '../npcs/Butler',
+    }
+);
+TemporaryBattleList['Butler 2'] = new TemporaryBattle(
+    'Butler 2',
+    [
+        new GymPokemon('Kirlia', 3066000, 50),
+        new GymPokemon('Mightyena', 3066000, 50),
+        new GymPokemon('Dusclops', 3066000, 50),
+        new GymPokemon('Salamence', 4166000, 80),
+    ],
+    '<i>Butler throws the switch on a machine, causing the earth to quake. A huge, ominous shape begins to rise from the ground!</i>',
+    [new QuestLineStepCompletedRequirement('Wish Maker', 6)],
+    undefined,
+    {
+        displayName: 'Butler',
+        imageName: '../npcs/Butler',
+    }
+);
+TemporaryBattleList['Meta Groudon'] = new TemporaryBattle(
+    'Meta Groudon',
+    [new GymPokemon('Meta Groudon', 13800000, 100)],
+    '<i>Meta Groudon lets out a guttural roar and melts back into the earth!</i>',
+    [new QuestLineStepCompletedRequirement('Wish Maker', 7)],
+    undefined,
+    {
+        displayName: 'Meta Groudon',
+        returnTown: 'Lavaridge Town',
+        imageName: '../pokemon/383.02',
+        hideTrainer: true,
     }
 );
 TemporaryBattleList['Sevii Rocket Grunt 1'] = new TemporaryBattle(
@@ -1954,7 +2014,7 @@ TemporaryBattleList.AZ = new TemporaryBattle(
     {
         displayName: 'Pokémon Trainer AZ',
         firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonById(670.05);
+            App.game.party.gainPokemonByName('Floette (Eternal)');
         },
     }
 );
@@ -2090,7 +2150,7 @@ TemporaryBattleList['Ash Ketchum Pinkan'] = new TemporaryBattle(
         returnTown: 'Pinkan Mountain',
         imageName: 'Ash Ketchum',
         firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonById(25.13);
+            App.game.party.gainPokemonByName('Pinkan Pikachu');
         },
     }
 );
@@ -2517,7 +2577,7 @@ TemporaryBattleList['Ash Ketchum Alola'] = new TemporaryBattle(
         returnTown: 'A Tree Maybe',
         imageName: 'Ash Ketchum',
         firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonById(25.07);
+            App.game.party.gainPokemonByName('Pikachu (Partner Cap)');
         },
     }
 );
@@ -2696,7 +2756,7 @@ TemporaryBattleList['Magikarp Jump Koylee'] = new TemporaryBattle(
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
                 sound: NotificationConstants.NotificationSound.General.new_catch,
             });
-            App.game.party.gainPokemonById(pokemonMap['Magikarp Calico (Orange, White)'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
+            App.game.party.gainPokemonByName('Magikarp Calico (Orange, White)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         },
     }
 );
@@ -2717,7 +2777,7 @@ TemporaryBattleList['Magikarp Jump Karpella'] = new TemporaryBattle(
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
                 sound: NotificationConstants.NotificationSound.General.new_catch,
             });
-            App.game.party.gainPokemonById(pokemonMap['Magikarp Calico (Orange, White, Black)'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
+            App.game.party.gainPokemonByName('Magikarp Calico (Orange, White, Black)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         },
     }
 );
@@ -2739,7 +2799,7 @@ TemporaryBattleList['Magikarp Jump Karpen'] = new TemporaryBattle(
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
                 sound: NotificationConstants.NotificationSound.General.new_catch,
             });
-            App.game.party.gainPokemonById(pokemonMap['Magikarp Calico (White, Orange)'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
+            App.game.party.gainPokemonByName('Magikarp Calico (White, Orange)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         },
     }
 );
@@ -2836,7 +2896,7 @@ TemporaryBattleList['Magikarp Jump Karbuck'] = new TemporaryBattle(
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
                 sound: NotificationConstants.NotificationSound.General.new_catch,
             });
-            App.game.party.gainPokemonById(pokemonMap['Magikarp Calico (Orange, Gold)'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
+            App.game.party.gainPokemonByName('Magikarp Calico (Orange, Gold)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         },
     }
 );
@@ -2933,7 +2993,7 @@ TemporaryBattleList['Magikarp Jump Karpress 3'] = new TemporaryBattle(
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
                 sound: NotificationConstants.NotificationSound.General.new_catch,
             });
-            App.game.party.gainPokemonById(pokemonMap['Magikarp Grey Diamonds'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
+            App.game.party.gainPokemonByName('Magikarp Grey Diamonds', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         },
     }
 );
@@ -2968,7 +3028,7 @@ TemporaryBattleList['Magikarp Jump Karpella 3'] = new TemporaryBattle(
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
                 sound: NotificationConstants.NotificationSound.General.new_catch,
             });
-            App.game.party.gainPokemonById(pokemonMap['Magikarp Purple Patches'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
+            App.game.party.gainPokemonByName('Magikarp Purple Patches', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         },
     }
 );
@@ -3002,7 +3062,7 @@ TemporaryBattleList['Magikarp Jump Tykarp 2'] = new TemporaryBattle(
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
                 sound: NotificationConstants.NotificationSound.General.new_catch,
             });
-            App.game.party.gainPokemonById(pokemonMap['Magikarp Black Mask'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
+            App.game.party.gainPokemonByName('Magikarp Black Mask', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         },
     }
 );
@@ -3256,7 +3316,7 @@ TemporaryBattleList['The Darkest Day'] = new TemporaryBattle(
     undefined,
     {
         firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonById(890);
+            App.game.party.gainPokemonByName('Eternatus');
         },
         hideTrainer: true,
         imageName: '../pokemon/890',

@@ -162,6 +162,7 @@ export type ItemNameType
     | 'Pinkan Electabuzz'
     | 'Jynx'
     | 'Magikarp'
+    | 'Probably Feebas'
     | 'Eevee'
     | 'Porygon'
     | 'Togepi'

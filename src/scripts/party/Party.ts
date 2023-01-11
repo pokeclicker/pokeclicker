@@ -40,6 +40,11 @@ class Party implements Feature {
 
     }
 
+    gainPokemonByName(name: PokemonNameType, shiny = false, suppressNotification = false, gender = -1) {
+        const pokemon = pokemonMap[name];
+        this.gainPokemonById(pokemon.id, shiny, suppressNotification, gender);
+    }
+
     gainPokemonById(id: number, shiny = false, suppressNotification = false, gender = -1) {
         // If no gender defined, calculate it
         if (gender === -1) {
@@ -49,7 +54,7 @@ class Party implements Feature {
     }
 
     gainPokemon(pokemon: PartyPokemon, suppressNotification = false) {
-        PokemonHelper.incrementPokemonStatistics(pokemon.id, GameConstants.PokemonStatiticsType.Captured, pokemon.shiny, pokemon.gender);
+        PokemonHelper.incrementPokemonStatistics(pokemon.id, GameConstants.PokemonStatisticsType.Captured, pokemon.shiny, pokemon.gender);
         if (pokemon.shiny) {
             // Add all shiny catches to the log book
             App.game.logbook.newLog(
