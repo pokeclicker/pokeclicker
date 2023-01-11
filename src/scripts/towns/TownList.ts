@@ -1979,6 +1979,11 @@ const SlateportHoennRoamerNPC = new RoamerNPC('Reporter Gabby', [
     'Our sources indicate that roaming Pokémon are gathering on {ROUTE_NAME}!',
 ], GameConstants.Region.hoenn, RoamingPokemonList.findGroup(GameConstants.Region.hoenn, GameConstants.HoennSubRegions.Hoenn), 'assets/images/npcs/Reporter.png');
 
+const SkepticalFisherman = new NPC('Skeptical Fisherman', [
+    'There\'s some salesman offering rare fish out at the intersection of Route 118 and Route 119.',
+    'I\'m a bit skeptical of his wares, especially since his shop isn\'t on any maps.',
+], {image: 'assets/images/trainers/Fisherman.png'});
+
 const FallarborProfessorCozmo = new NPC('Prof. Cozmo', [
     'Oh! Welcome, welcome. Do you by any chance have any Meteorites? No? Ah well, I’m studying the Pokémon Deoxys and I’ve heard that a Meteorite can cause it to change forms!',
     'I’ve also heard that the Battle Frontier may have some secrets relevant to Deoxys and its forms… but I’m not strong enough to find out...',
@@ -2229,6 +2234,7 @@ TownList['Mauville City'] = new Town(
     [MauvilleCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Mauville City']), HoennBerryMaster],
     {
         requirements: [new TemporaryBattleRequirement('May 3')],
+        npcs: [SkepticalFisherman],
     }
 );
 TownList['Verdanturf Town'] = new Town(
