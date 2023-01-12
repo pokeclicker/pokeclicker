@@ -22,7 +22,7 @@ import BreedingFilters from './BreedingFilters';
 import GameHelper from '../GameHelper';
 import PokemonType from '../enums/PokemonType';
 import PokedexFilters from './PokedexFilters';
-import LocationFilters from "./LocationFilters";
+import LocationFilters from './LocationFilters';
 import FilterSetting from './FilterSetting';
 
 export default Settings;

@@ -1,6 +1,5 @@
 import LocationType from '../enums/LocationType';
-import { Region, SubRegions as SubRegionsType } from "../GameConstants";
-import SubRegions from '../subRegion/SubRegions';
+import { Region } from '../GameConstants';
 import SettingOption from './SettingOption';
 import Settings from './Settings';
 import FilterOption from './FilterOption';
@@ -8,22 +7,22 @@ import GameHelper from '../GameHelper';
 
 const LocationFilters: Record<string, FilterOption> = {
     name: new FilterOption<string>(
-        "Search",
-        ko.observable(""),
-        "LocationNameFilter"
+        'Search',
+        ko.observable(''),
+        'LocationNameFilter',
     ),
     region: new FilterOption<Region>(
-        "Region",
+        'Region',
         ko.observable(null),
-        "LocationRegionFilter",
+        'LocationRegionFilter',
         [
-            new SettingOption("All", null),
+            new SettingOption('All', null),
             ...Settings.selectOptionsToSettingOptions(
                 GameHelper.enumSelectOption(Region).filter(
-                    (opt) => !["none", "final"].includes(opt.name)
-                )
+                    (opt) => !['none', 'final'].includes(opt.name),
+                ),
             ),
-        ]
+        ],
     ),
     // subregion: new FilterOption<SubRegionsType>(
     //     'Sub-Region',
@@ -37,15 +36,15 @@ const LocationFilters: Record<string, FilterOption> = {
     //     ],
     // ),
     type: new FilterOption<LocationType>(
-        "Type",
+        'Type',
         ko.observable(null),
-        "LocationTypeFilter",
+        'LocationTypeFilter',
         [
-            new SettingOption("All", null),
+            new SettingOption('All', null),
             ...Settings.selectOptionsToSettingOptions(
-                GameHelper.enumSelectOption(LocationType)
+                GameHelper.enumSelectOption(LocationType),
             ),
-        ]
+        ],
     ),
 };
 

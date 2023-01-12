@@ -6367,15 +6367,15 @@ Object.entries(TownList).forEach(([name, town]) => {
     });
     town.content.forEach((content) => {
         if ( content instanceof MoveToDungeon || content instanceof Shop || content instanceof Gym) {
-            let location = {
+            const location = {
                 name: content.text(),
                 town,
                 type: null,
             };
 
             if (content instanceof MoveToDungeon) {
-                location.type = LocationType.Dungeon
-            } else if ((content instanceof Shop) && !["Poké Mart", "Berry Master", "Gem Master", "Shard Trader"].includes(content.text())) {
+                location.type = LocationType.Dungeon;
+            } else if ((content instanceof Shop) && !['Poké Mart', 'Berry Master', 'Gem Master', 'Shard Trader'].includes(content.text())) {
                 // Only add unique (named) shops
                 location.type = LocationType.Shop;
             } else if (content instanceof Gym) {
