@@ -195,7 +195,7 @@ class Pokeballs implements Feature {
     }
 
     calculateCatchTime(ball: GameConstants.Pokeball): number {
-        return this.pokeballs[ball].catchTime;
+        return Math.ceil(this.pokeballs[ball].catchTime / FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute));
     }
 
     gainPokeballs(ball: GameConstants.Pokeball, amount: number, purchase = true): void {
