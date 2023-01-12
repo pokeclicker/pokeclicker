@@ -110,6 +110,7 @@ class Game {
         Weather.generateWeather(now);
         GemDeal.generateDeals();
         ShardDeal.generateDeals();
+        SafariPokemonList.generateSafariLists();
         RoamingPokemonList.generateIncreasedChanceRoutes(now);
 
         if (Settings.getSetting('disableOfflineProgress').value === false) {
@@ -167,13 +168,17 @@ class Game {
                 const orbsUnlocked = App.game.dreamOrbController.orbs.filter((o) => !o.requirement || o.requirement.isCompleted());
                 const orbsEarned = Math.floor(timeDiffOverride / 3600);
                 if (orbsEarned > 0) {
+                    const orbAmounts = Object.fromEntries(orbsUnlocked.map(o => [o.color, 0]));
                     for (let i = 0; i < orbsEarned; i++) {
-                        GameHelper.incrementObservable(Rand.fromArray(orbsUnlocked).amount);
+                        const orb = Rand.fromArray(orbsUnlocked);
+                        GameHelper.incrementObservable(orb.amount);
+                        orbAmounts[orb.color]++;
                     }
+                    const messageAppend = Object.keys(orbAmounts).filter(key => orbAmounts[key] > 0).map(key => `<li>${orbAmounts[key]} ${key}</li>`).join('');
                     Notifier.notify({
                         type: NotificationConstants.NotificationOption.info,
                         title: 'Dream Orbs',
-                        message: `Gained ${orbsEarned} Dream Orbs while offline.`,
+                        message: `Gained ${orbsEarned} Dream Orbs while offline:<br /><ul class="mb-0">${messageAppend}</ul>`,
                         timeout: 2 * GameConstants.MINUTE,
                         setting: NotificationConstants.NotificationSetting.General.offline_earnings,
                     });
@@ -419,19 +424,22 @@ class Game {
             const old = new Date(player._lastSeen);
             const now = new Date();
 
-            // Time traveller flag
-            if (old > now) {
-                Notifier.notify({
-                    title: 'Welcome Time Traveller!',
-                    message: 'Please ensure you keep a backup of your old save as travelling through time can cause some serious problems.\n\nAny Pokémon you may have obtained in the future could cease to exist which could corrupt your save file!',
-                    type: NotificationConstants.NotificationOption.danger,
-                    timeout: GameConstants.HOUR,
-                });
-                player._timeTraveller = true;
-            }
 
             // Check if it's a new day
             if (old.toLocaleDateString() !== now.toLocaleDateString()) {
+                // Time traveller flag
+                if (old > now) {
+                    Notifier.notify({
+                        title: 'Welcome Time Traveller!',
+                        message: `Please ensure you keep a backup of your old save as travelling through time can cause some serious problems.
+                        
+                        Any Pokémon you may have obtained in the future could cease to exist which could corrupt your save file!`,
+                        type: NotificationConstants.NotificationOption.danger,
+                        timeout: GameConstants.HOUR,
+                    });
+                    player._timeTraveller = true;
+                }
+
                 SeededDateRand.seedWithDate(now);
                 // Give the player a free quest refresh
                 this.quests.freeRefresh(true);

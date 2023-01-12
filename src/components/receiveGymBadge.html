@@ -12,7 +12,7 @@ aria-labelledby="receiveBadgeModalLabel" aria-hidden="true">
            </div>
        </div>
        <div class="modal-body">
-           <p data-bind="text: GymRunner.gymObservable().defeatMessage"></p>
+           <p data-bind="html: GymRunner.gymObservable().defeatMessage"></p>
            <!-- ko if: !BadgeEnums[GymRunner.gymObservable().badgeReward].startsWith('Elite') -->
            <img src="" width="56px" data-bind="attr:{ src: 'assets/images/badges/' + BadgeEnums[GymRunner.gymObservable().badgeReward] + '.png'}" onerror="this.src='assets/images/badges/Unknown.png'">
            <!-- /ko -->

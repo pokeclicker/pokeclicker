@@ -188,16 +188,14 @@ class DungeonRunner {
     }
 
     public static lootNotification(input, amount, weight, image) {
-        const multiple = (amount < 2) ? '' : 's';
-        let message = `Found ${amount} × <img src="${image}" height="24px"/> ${GameConstants.camelCaseToString(GameConstants.humanifyString(input))}${multiple} in a dungeon chest.`;
+        let message = `Found ${amount} × <img src="${image}" height="24px"/> ${GameConstants.pluralizeString(GameConstants.camelCaseToString(GameConstants.humanifyString(input)), amount)} in a dungeon chest.`;
         let type = NotificationConstants.NotificationOption.success;
         let setting = NotificationConstants.NotificationSetting.Dungeons.common_dungeon_item_found;
 
         if (typeof BerryType[input] == 'number') {
-            const berryPlural = (amount === 1) ? 'Berry' : 'Berries';
-            message = `Found ${Math.floor(amount)} × <img src="${image}" height="24px"/> ${GameConstants.humanifyString(input)} ${berryPlural} in a dungeon chest.`;
+            message = `Found ${Math.floor(amount)} × <img src="${image}" height="24px"/> ${GameConstants.humanifyString(input)} ${GameConstants.pluralizeString('Berry', amount)} in a dungeon chest.`;
         } if (ItemList[input] instanceof PokeballItem) {
-            message = `Found ${amount} × <img src="${image}" height ="24px"/> ${ItemList[input].displayName}${multiple} in a dungeon chest.`;
+            message = `Found ${amount} × <img src="${image}" height ="24px"/> ${GameConstants.pluralizeString(ItemList[input].displayName, amount)} in a dungeon chest.`;
         } else if (PokemonHelper.getPokemonByName(input).name != 'MissingNo.') {
             message = `Encountered ${GameHelper.anOrA(input)} <img src="${image}" height="40px"/> ${GameConstants.humanifyString(input)} in a dungeon chest.`;
         }

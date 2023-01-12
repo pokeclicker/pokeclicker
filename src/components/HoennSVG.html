@@ -873,6 +873,17 @@
          , image: "assets/images/map/blimp_pikachu.png"
          })
     %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Roadside Stand"
+            , x: 39, y: 27
+            , width: 1, height: 1
+            , databind: "click:function(){MapHelper.moveToTown('Roadside Stand')}, attr:{ class: MapHelper.calculateTownCssClass('Roadside Stand') }"
+            , visible:  "App.game.statistics.routeKills['hoenn'][118]() >= 10"
+            , image: "assets/images/map/transparent.png"
+            })
+        %>
+
      <%- include('templates/mapOverlay',
          { name: "Kecleon"
         , x: 46, y: 3
@@ -900,6 +911,15 @@
          , databind: "click: () => TemporaryBattleList['Kecleon 3'].protectedOnclick()"
          , visible:  "TemporaryBattleList['Kecleon 3'] && TemporaryBattleList['Kecleon 3'].isVisible()"
          , image: "assets/images/map/kecleoncamooverworld.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "A Raging Maelstrom"
+        , x: 59, y: 28
+         , width: 13, height: 13
+        , visible:  "(App.game.quests.getQuestLine('The Weather Trio').curQuest() < 5 && App.game.quests.getQuestLine('The Weather Trio').state() >= 1)"
+         , image: "assets/images/map/Maelstrom.png"
          })
      %>
 
@@ -962,6 +982,16 @@
         , image: "assets/images/map/may.png"
         })
     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Meta Groudon"
+        , x: 14, y: 12
+         , width: 5, height: 5
+         , databind: "click: () => TemporaryBattleList['Meta Groudon'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Meta Groudon'] && TemporaryBattleList['Meta Groudon'].isVisible()"
+         , image: "assets/images/map/Meta Groudon.png"
+         })
+     %>
 
      <%- include('templates/mapOverlay',
          { name: "Ash Ketchum"

@@ -212,6 +212,21 @@ class Dungeon {
             } else { /* We don't include Trainers */ }
         });
 
+        encounterInfo.concat(this.getCaughtMimics());
+
+        return encounterInfo;
+    }
+
+    public getCaughtMimics(): PokemonNameType[] {
+        const encounterInfo = [];
+        Object.entries(this.lootTable).forEach(([tier, itemList]) => {
+            itemList.forEach((loot, i) => {
+                const mimic = pokemonMap[loot.loot].name;
+                if (mimic != 'MissingNo.' && App.game.party.alreadyCaughtPokemonByName(mimic)) {
+                    encounterInfo.push(mimic);
+                }
+            });
+        });
         return encounterInfo;
     }
 
@@ -221,7 +236,7 @@ class Dungeon {
     }
 
     public getRandomLoot(tier: LootTier, onlyDebuffable = false): Loot {
-        const lootTable = this.lootTable[tier].filter((loot) => ((!loot.requirement || loot.requirement.isCompleted()) && (!ItemList[loot.loot] || ItemList[loot.loot].isAvailable())) && !(onlyDebuffable && loot.ignoreDebuff));
+        const lootTable = this.lootTable[tier].filter((loot) => ((!loot.requirement || loot.requirement.isCompleted()) && (!ItemList[loot.loot] || (ItemList[loot.loot].isAvailable() && !ItemList[loot.loot].isSoldOut()))) && !(onlyDebuffable && loot.ignoreDebuff));
         return Rand.fromWeightedArray(lootTable, lootTable.map((loot) => loot.weight ?? 1));
     }
 
@@ -300,7 +315,7 @@ class Dungeon {
      * Gets all possible Pokemon in the dungeon
      */
     get allPokemon(): PokemonNameType[] {
-        return this.pokemonList.concat(this.bossPokemonList);
+        return this.pokemonList.concat(this.bossPokemonList, this.getCaughtMimics());
     }
 
 
@@ -310,30 +325,41 @@ class Dungeon {
      */
     get normalEncounterList(): EncounterInfo[] {
         const encounterInfo = [];
+        let pokemonName: PokemonNameType;
+        let hideEncounter = false;
+
+        const getEncounterInfo = function(pokemonName, mimic) {
+            const encounter = {
+                image: `assets/images/${(App.game.party.alreadyCaughtPokemonByName(pokemonName, true) ? 'shiny' : '')}pokemon/${pokemonMap[pokemonName].id}.png`,
+                shiny:  App.game.party.alreadyCaughtPokemonByName(pokemonName, true),
+                hide: hideEncounter,
+                uncaught: !App.game.party.alreadyCaughtPokemonByName(pokemonName),
+                lock: false,
+                lockMessage: '',
+                mimic: mimic,
+            };
+            return encounter;
+        };
 
         // Handling minions
         this.enemyList.forEach((enemy) => {
             // Handling Pokemon
             if (typeof enemy === 'string' || enemy.hasOwnProperty('pokemon')) {
-                let pokemonName: PokemonNameType;
-                let hideEncounter = false;
                 if (enemy.hasOwnProperty('pokemon')) {
                     pokemonName = (<DetailedPokemon>enemy).pokemon;
                     hideEncounter = (<DetailedPokemon>enemy).options?.hide ? ((<DetailedPokemon>enemy).options?.requirement ? !(<DetailedPokemon>enemy).options?.requirement.isCompleted() : (<DetailedPokemon>enemy).options?.hide) : false;
                 } else {
                     pokemonName = <PokemonNameType>enemy;
                 }
-                const encounter = {
-                    image: `assets/images/${(App.game.party.alreadyCaughtPokemonByName(pokemonName, true) ? 'shiny' : '')}pokemon/${pokemonMap[pokemonName].id}.png`,
-                    shiny:  App.game.party.alreadyCaughtPokemonByName(pokemonName, true),
-                    hide: hideEncounter,
-                    uncaught: !App.game.party.alreadyCaughtPokemonByName(pokemonName),
-                    lock: false,
-                    lockMessage: '',
-                };
-                encounterInfo.push(encounter);
+                encounterInfo.push(getEncounterInfo(pokemonName, false));
             // Handling Trainers
             } else { /* We don't display minion Trainers */ }
+        });
+
+        // Handling Mimics
+        this.getCaughtMimics().forEach(enemy => {
+            pokemonName = <PokemonNameType>enemy;
+            encounterInfo.push(getEncounterInfo(pokemonName, true));
         });
 
         return encounterInfo;
@@ -3127,8 +3153,8 @@ dungeonList['Cave of Origin'] = new Dungeon('Cave of Origin',
     590000,
     [
         new DungeonBossPokemon('Exploud', 2000000, 50),
-        new DungeonBossPokemon('Kyogre', 4700000, 100, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)}),
-        new DungeonBossPokemon('Groudon', 4700000, 100, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)}),
+        new DungeonBossPokemon('Kyogre', 4700000, 100, {requirement: new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), new QuestLineStepCompletedRequirement('The Weather Trio', 5)])}),
+        new DungeonBossPokemon('Groudon', 4700000, 100, {requirement: new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), new QuestLineStepCompletedRequirement('The Weather Trio', 5)])}),
     ],
     34000, 101);
 
@@ -3210,7 +3236,7 @@ dungeonList['Sky Pillar'] = new Dungeon('Sky Pillar',
     720000,
     [
         new DungeonBossPokemon('Dusclops', 3200000, 20),
-        new DungeonBossPokemon('Rayquaza', 5824002, 100),
+        new DungeonBossPokemon('Rayquaza', 5824002, 100, {requirement: new QuestLineStepCompletedRequirement('The Weather Trio', 5)}),
     ],
     34000, 101);
 
@@ -8909,7 +8935,7 @@ dungeonList['Tower of Darkness'] = new Dungeon('Tower of Darkness',
     ],
     2000000, 40,
     () => {
-        App.game.party.gainPokemonById(892);
+        App.game.party.gainPokemonByName('Urshifu (Single Strike)');
         Notifier.notify({
             message: 'Kubfu evolved into Urshifu (Single Strike)!',
             type: NotificationConstants.NotificationOption.success,
@@ -8950,7 +8976,7 @@ dungeonList['Tower of Waters'] = new Dungeon('Tower of Waters',
     ],
     2000000, 36,
     () => {
-        App.game.party.gainPokemonById(892.1);
+        App.game.party.gainPokemonByName('Urshifu (Rapid Strike)');
         Notifier.notify({
             message: 'Kubfu evolved into Urshifu (Rapid Strike)!',
             type: NotificationConstants.NotificationOption.success,

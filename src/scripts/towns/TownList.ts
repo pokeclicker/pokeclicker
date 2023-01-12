@@ -269,6 +269,7 @@ const PalletCelebiProfOak2 = new NPC('Prof. Oak', [
 const ViridianCityOldMan1 = new NPC('Old Man', [
     'Leave me alone. I need my coffee.',
 ], {
+    image: 'assets/images/npcs/Old Man.png',
     requirement: new QuestLineStepCompletedRequirement('Tutorial Quests', 4, GameConstants.AchievementOption.less),
 });
 const ViridianCityOldMan2 = new NPC('Old Man', [
@@ -278,6 +279,7 @@ const ViridianCityOldMan2 = new NPC('Old Man', [
     'Here, let me show you how it works.',
     'I\'ll always be here to explain it again if you forget.',
 ], {
+    image: 'assets/images/npcs/Old Man.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Tutorial Quests', 4), new QuestLineStepCompletedRequirement('Tutorial Quests', 5, GameConstants.AchievementOption.less)]),
 });
 const ViridianCityOldMan3 = new NPC('Old Man', [
@@ -285,6 +287,7 @@ const ViridianCityOldMan3 = new NPC('Old Man', [
     'For example, if you click on the empty ball below the word Caught and assign a Poké Ball, you will then start throwing Poké Balls at Pokémon you\'ve already caught before. This can be very useful if you need Dungeon Tokens.',
     'I\'ll always be here to explain it again if you forget.',
 ], {
+    image: 'assets/images/npcs/Old Man.png',
     requirement: new QuestLineStepCompletedRequirement('Tutorial Quests', 5),
 });
 const PewterBattleItemRival = new NPC('Battle Item Master', [
@@ -304,8 +307,8 @@ const PewterScientist = new NPC('Gem Scientist', [
 
 const Route3ShadySalesman = new NPC('Shady Salesman', [
     'Have I got a deal just for you!',
-    'I\'ll let you have a super secret Pokémon. For the right price!',
-], {image: 'assets/images/trainers/Burglar.png'});
+    'I\'ll let you have a super secret Pokémon. For the right price! Buying this pokemon Takes No Effort, you should Value it.',
+], {image: 'assets/images/npcs/ShadySalesman.png'});
 
 const CeruleanKantoBerryMaster = new KantoBerryMasterNPC('Berry Master', [
     'Bah! You younglings have no appreciation of the art of Berry farming!',
@@ -357,6 +360,11 @@ const LavenderChanneler = new NPC('Channeler Karina', [
     'I know a lot of useful stuff. Like the odds of finding a shiny Pokémon or how to increase Click Attack.',
     'No, I didn\'t learn this from talking to ghosts, don\'t be silly. There\'s a FAQ button in the Start Menu. It\'s very useful.',
 ], {image: 'assets/images/trainers/Channeler.png'});
+
+const LavenderShopper = new NPC('Shopper', [
+    'I always seem to run out of Great Balls. Luckly this shop always have them in stock!',
+    'They even have an offer today! They give you free Great Balls if you give them the code <b>THE-GREATEST-POKEBALL</b>',
+]);
 
 const BigSpender = new NPC('Big Spender', [
     'I love shopping! When I come in, the cashiers know I want tons of items.',
@@ -560,7 +568,7 @@ const AlteringCaveRuinManiac2 = new NPC ('Ruin Maniac', [
 });
 const ValenciaProfIvy = new NPC ('Prof. Ivy', [
     'Hello again! I see you too found a way around the giant cliff.',
-    'On this island, pokémon have changed over the years. I am here to study them.',
+    'On this island, Pokémon have changed over the years. I am here to study them.',
     'Oh, you have already encountered them? And you are busy with the Orange League?',
     'Well, good luck to you, then.',
 ], {image: 'assets/images/npcs/Professor Ivy.png'});
@@ -723,6 +731,7 @@ TownList['Route 3 Pokémon Center'] = new Town(
             new RouteKillRequirement(10, GameConstants.Region.kanto, 3),
         ],
         npcs: [Route3ShadySalesman],
+        ignoreAreaStatus: true,
     }
 );
 TownList['Cerulean City'] = new Town(
@@ -752,7 +761,7 @@ TownList['Lavender Town'] = new Town(
     [LavenderTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Lavender Town']), new MoveToDungeon(dungeonList['Pokémon Tower'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 10)],
-        npcs: [LavenderMrFuji, LavenderChanneler],
+        npcs: [LavenderMrFuji, LavenderChanneler, LavenderShopper],
     }
 );
 TownList['Celadon City'] = new Town(
@@ -1298,7 +1307,7 @@ const VioletPrimo = new NPC('Primo', [
     'Your Item Bag has a bunch of nifty features! Take stuff in the Held Items pocket, for instance. You can use a Held Item to empower your Pokémon or acquire unique effects. How do you use it? Well, here’s how it works.',
     'Once you have obtained a Held Item, visit your Item Bag. They are most often found in Dungeons, but some, like the Wonder Chest, are for sale!',
     'From there, go into your Held Items pocket and once an item is selected, you can use it by choosing from the list of available Pokémon to hold it.',
-    'Choose who you select carefully! Only one of a particular item can be held at a time and once you remove a Held Item from your Pokémon, the item will break!',
+    'Choose who you select carefully! Once you remove a Held Item from your Pokémon, the item will break!',
     'All righty, be seeing you!',
 ]);
 
@@ -1877,6 +1886,9 @@ const LavaridgeTownShop = new Shop([
     ItemList.Fire_egg,
     ItemList.Fire_stone,
 ]);
+const RoadsideStandShop = new Shop([
+    ItemList['Probably Feebas'],
+], 'Shady Deal');
 const FortreeCityShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
@@ -1967,6 +1979,11 @@ const SlateportHoennRoamerNPC = new RoamerNPC('Reporter Gabby', [
     'Our sources indicate that roaming Pokémon are gathering on {ROUTE_NAME}!',
 ], GameConstants.Region.hoenn, RoamingPokemonList.findGroup(GameConstants.Region.hoenn, GameConstants.HoennSubRegions.Hoenn), 'assets/images/npcs/Reporter.png');
 
+const SkepticalFisherman = new NPC('Skeptical Fisherman', [
+    'There\'s some salesman offering rare fish out at the intersection of Route 118 and Route 119.',
+    'I\'m a bit skeptical of his wares, especially since his shop isn\'t on any maps.',
+], {image: 'assets/images/trainers/Fisherman.png'});
+
 const FallarborProfessorCozmo = new NPC('Prof. Cozmo', [
     'Oh! Welcome, welcome. Do you by any chance have any Meteorites? No? Ah well, I’m studying the Pokémon Deoxys and I’ve heard that a Meteorite can cause it to change forms!',
     'I’ve also heard that the Battle Frontier may have some secrets relevant to Deoxys and its forms… but I’m not strong enough to find out...',
@@ -1978,8 +1995,14 @@ const LavaridgeSootCollector = new NPC('Soot Collector', [
     'People say they have truly mystical powers, but that they require Gems of different types to use. Also, using more Flutes at the same time costs more Gems to use.',
 ]);
 
+const RoadsideStandShadySalesman = new NPC('Shady Salesman', [
+    'Have I got a deal just for you!',
+    'I have spent weeks finding the perfect fishing spot for Feebas, and finally got some! For a special low price, I\'ll sell you one!',
+    'All sales are final!',
+], {image: 'assets/images/npcs/ShadySalesman.png'});
+
 const FortreeWeatherman = new NPC('Weatherman', [
-    'Castform is a very finicky pokemon.',
+    'Castform is a very finicky Pokémon.',
     'It changes forms when the weather is drastically different.',
     'If you want to collect them all, wait for the weather to change.',
 ]);
@@ -2012,11 +2035,75 @@ const PacifidlogDiver = new NPC('Diver', [
     'I\'ve heard that if you beat a Dungeon a lot then the stuff you find in chests gets even more awesome.',
 ]);
 
-const SootopolisWallace = new NPC('Gym Leader Wallace', [
-    'The creators of the lands and ocean slumber within the Cave of Origin.',
-    'However, they will only awaken when in the presence of a truly great trainer.',
-    'You will have to overcome the Pokémon League before you have any chance of encountering them.',
-], {image: 'assets/images/gymLeaders/Wallace.png'});
+const Wallace1 = new NPC('Gym Leader Wallace', [
+    'Ah, so you are the new trainer in the region? I\'ve heard tales of your exploits. My name is Wallace. I was once the Gym Leader of Sootopolis, but something came up. So now, I\'ve entrusted my mentor Juan with the Gym\'s operation.',
+    'Groudon and Kyogre, the two Pokémon wreaking havoc in Sootopolis City, are considered to be Super-Ancient Pokémon. But there aren\'t just two Super-Ancient Pokémon. Somewhere, there is a Super-Ancient Pokémon named Rayquaza. It\'s said that it was Rayquaza that becalmed the two combatants in the distant past.',
+    'I have heard that Rayquaza once lived high atop the Sky Pillar, maybe that\'s where it is now?',
+], {image: 'assets/images/gymLeaders/Wallace.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Weather Trio', 1), new QuestLineStepCompletedRequirement('The Weather Trio', 3, GameConstants.AchievementOption.less)]),
+});
+
+const Wallace2 = new NPC('Gym Leader Wallace', [
+    'My eyes didn\'t deceive me. Thanks to your help, Sootopolis...',
+    'No, all of Hoenn was saved. On behalf of the people, I thank you.',
+    'Now that their battle is over, the Super-Ancient Pokémon have retreated to rest and recuperate. You will likely find Rayquaza back in the Sky Pillar.',
+    'Kyogre and Groudon are rumored to live deep within this very cave, but they are unlikely to show themselves to any normal trainer. Maybe the champion of Hoenn could earn their respect.',
+], {image: 'assets/images/gymLeaders/Wallace.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Weather Trio', 4), new QuestLineStepCompletedRequirement('The Weather Trio', 6, GameConstants.AchievementOption.less)]),
+});
+
+const WeatherBattle1 = new NPC('The Super-Ancient Pokémon Clash', [
+    '<i>Groudon and Kyogre have been awakened by the efforts of Team Magma and Team Aqua! They are engaged in a fierce battle which threatens to destroy Sootopolis City... and more!</i>',
+    '<i>The locals in Sootopolis City take shelter from the raging battle. Some say that this sort of this would never happen if Wallace was still around.</i>',
+], {image: 'assets/images/npcs/other/WeatherBattle1.png',
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('The Weather Trio'), new QuestLineStepCompletedRequirement('The Weather Trio', 1, GameConstants.AchievementOption.less)]),
+});
+
+const WeatherBattle2 = new NPC('The Super-Ancient Pokémon Clash', [
+    '<i>Rayquaza appears above Kyogre and Groudon and utters a single intimidating roar. The battling Super-Ancient Pokémon stop their attacks, and a tense standoff ensues.</i>',
+    '<i>After what seems like an eternity, the three Super-Ancient Pokémon seem to have come to an understanding. They each depart the city, and peace is restored.</i>',
+], {image: 'assets/images/npcs/other/WeatherBattle2.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Weather Trio', 3), new QuestLineStepCompletedRequirement('The Weather Trio', 5, GameConstants.AchievementOption.less)]),
+});
+
+const MillenniumFest = new NPC('The Millennium Festival', [
+    '<i>The Millennium Comet is about to make its long-awaited appearance in the sky again, supposedly granting the wishes of all those who see it in the skies above them.</i>',
+    '<i>A festival celebrating the arrival of this comet is being held with rides, carnival games, and even a magic show by the Great Butler!</i>',
+    '<i>The magic show features many exciting tricks performed by humans and Pokémon, but it looks like someone is crashing the party!</i>',
+], {image: 'assets/images/npcs/other/Millennium Festival.png',
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('Wish Maker'), new QuestLineStepCompletedRequirement('Wish Maker', 1, GameConstants.AchievementOption.less)]),
+});
+
+const Butler1 = new NPC('Butler', [
+    'I, the Great Butler, thank you for dealing with Team Rocket!',
+    'I have been preparing for the Millennium Festival my whole life, and have big plans for the wish-granting powers it possesses.',
+    'I have found what appears to be a crystalline cocoon that contains Jirachi, the Wish Pokémon! I would be honored if you would take this cocoon as thanks for helping me. Legend has it that Jirachi will appear for a trainer who is pure of heart and grant them a wish!',
+    '<i>Butler gives you a crystalline cocoon containing Jirachi.</i>',
+], {image: 'assets/images/npcs/Butler.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Wish Maker', 1), new QuestLineStepCompletedRequirement('Wish Maker', 3, GameConstants.AchievementOption.less)]),
+});
+
+const CocoonHatch = new NPC('Examine the Crystalline Cocoon', [
+    '<i>The cocoon shifts, shimmers, and hatches to reveal Jirachi!</i>',
+], {image: 'assets/images/npcs/other/Cocoon.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Wish Maker', 4), new QuestLineStepCompletedRequirement('Wish Maker', 6, GameConstants.AchievementOption.less)]),
+});
+
+const Butler2 = new NPC('Butler', [
+    'I, the Great Butler, thank you for saving me from the wrath of Meta Groudon.',
+    'My wish was to resurrect Groudon for Team Magma, but it proved too difficult, and you have showed me that it would be irresponsible to put that much power in the hands of evil doers.',
+    'I can try the experiment again using what was learned from the previous failure, but I will need your help. If we are successful, I will give control of the resulting Meta Groudon to you.',
+    'To rebuild my machine, I will need a hundred power-generating Pokémon to run the machine, shiny pokemon to stabilize the energy matrix, and to conduct a new dig for fossilized Groudon materials. After that, I will need to calibrate the machine using DNA from Groudon itself.',
+], {image: 'assets/images/npcs/Butler.png',
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('A Meta Discovery'), new QuestLineStepCompletedRequirement('A Meta Discovery', 1, GameConstants.AchievementOption.less)]),
+});
+
+const Butler3 = new NPC('Butler', [
+    'I, the Great Butler, thank you for all of your help in fulfilling my greatest wish!',
+    'Please treat this Meta Groudon responsibly, and go forth to do great things!',
+], {image: 'assets/images/npcs/Butler.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Meta Discovery', 2), new QuestLineStepCompletedRequirement('A Meta Discovery', 3, GameConstants.AchievementOption.less)]),
+});
 
 const ProfBirch = new ProfNPC('Prof. Birch',
     GameConstants.Region.hoenn,
@@ -2172,6 +2259,7 @@ TownList['Mauville City'] = new Town(
     [MauvilleCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Mauville City']), HoennBerryMaster],
     {
         requirements: [new TemporaryBattleRequirement('May 3')],
+        npcs: [SkepticalFisherman],
     }
 );
 TownList['Verdanturf Town'] = new Town(
@@ -2206,9 +2294,23 @@ TownList['Lavaridge Town'] = new Town(
     'Lavaridge Town',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [LavaridgeTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Lavaridge Town'])],
+    [LavaridgeTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Lavaridge Town']), TemporaryBattleList['Clown Jessie & James']],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Jagged Pass'))],
+        npcs: [MillenniumFest, Butler1],
+    }
+);
+TownList['Roadside Stand'] = new Town(
+    'Roadside Stand',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Hoenn,
+    [RoadsideStandShop],
+    {
+        requirements: [
+            new RouteKillRequirement(10, GameConstants.Region.hoenn, 118),
+        ],
+        npcs: [RoadsideStandShadySalesman],
+        ignoreAreaStatus: true,
     }
 );
 TownList['Fortree City'] = new Town(
@@ -2257,7 +2359,7 @@ TownList['Sootopolis City'] = new Town(
     [SootopolisCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Sootopolis City'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 126), new GymBadgeRequirement(BadgeEnums.Mind)],
-        npcs: [SootopolisWallace],
+        npcs: [WeatherBattle1, WeatherBattle2],
     }
 );
 TownList['Ever Grande City'] = new Town(
@@ -2329,13 +2431,21 @@ TownList['Mt. Chimney Crater'] = new DungeonTown(
     'Mt. Chimney Crater',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Meteor Falls'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Meteor Falls'))],
+    [TemporaryBattleList['Butler 1']],
+    {
+        npcs: [CocoonHatch],
+    }
 );
 TownList['Jagged Pass'] = new DungeonTown(
     'Jagged Pass',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mt. Chimney Crater'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mt. Chimney Crater'))],
+    [TemporaryBattleList['Butler 2']],
+    {
+        npcs: [Butler2, Butler3],
+    }
 );
 TownList['New Mauville'] = new DungeonTown(
     'New Mauville',
@@ -2380,7 +2490,11 @@ TownList['Cave of Origin'] = new DungeonTown(
     [
         new RouteKillRequirement(10, GameConstants.Region.hoenn, 126),
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Seafloor Cavern')),
-    ]
+    ],
+    [],
+    {
+        npcs: [Wallace1, Wallace2],
+    }
 );
 TownList['Seafloor Cavern'] = new DungeonTown(
     'Seafloor Cavern',
@@ -3345,23 +3459,30 @@ const UnovaRoamerNPC = new RoamerNPC('Professor Juniper\'s Aide', [
 const ProfJuniper = new ProfNPC('Prof. Juniper',
     GameConstants.Region.unova,
     'Let me see your progress...Ah, fantastic, as usual!',
-    'Allow me some time to arrange tickets for your next destination.');
+    'Allow me some time to arrange tickets for your next destination.',
+    'assets/images/npcs/Professor Juniper.png');
 
 const ProfBurnet = new NPC('Professor Burnet', [
     'Welcome to my laboratory, trainer! I am working here to understand the mysterious Interdream Zone.',
     'My laboratory equipment can convert the energy of dreams you experience while sleeping, or "Offline" into orbs. We can then open these orbs and see what your mind experienced in the Interdream Zone.',
     'A trainer like you surely dreams of rare Pokémon. The more rare Pokémon you find from the Interdream Zone, the more we can explore to find others!',
-]);
+], {
+    image: 'assets/images/npcs/Professor Burnet.png',
+});
 
 const DreamResearcher1 = new NPC('Dream Researcher', [
     'I have been helping Professor Burnet explore the Interdream Zone with the help of my Audino.',
-    'Audino\'s excellent hearing lets it pick up even the quietest hints from Dream Orbs. If you can help the professor advance her research, I may be able to help you in return.'],
-{requirement: new TemporaryBattleRequirement('Dream Researcher', 1, GameConstants.AchievementOption.less),
+    'Audino\'s excellent hearing lets it pick up even the quietest hints from Dream Orbs. If you can help the professor advance her research, I may be able to help you in return.',
+], {
+    image: 'assets/images/trainers/Scientist (female).png',
+    requirement: new TemporaryBattleRequirement('Dream Researcher', 1, GameConstants.AchievementOption.less),
 });
 
 const DreamResearcher2 = new NPC('Dream Researcher', [
     'What a battle! That Audinite will let you Mega Evolve your Audino, under certain circumstances.',
-], {requirement: new TemporaryBattleRequirement('Dream Researcher'),
+], {
+    image: 'assets/images/trainers/Scientist (female).png',
+    requirement: new TemporaryBattleRequirement('Dream Researcher'),
 });
 
 //Unova Towns
@@ -3953,7 +4074,7 @@ const SnowbelleCityShop = new Shop([
 
 const LumioseEngineer = new NPC('Engineer', [
     'I\'m glad to be back in the city after so long at the Power Plant; it\'s so dusty out there!.',
-    'Rumor has it that if you conquer the Kalos Power Plant enough times that a strong Pokémon will challenge you made of Fire and Water. But I bet you’d have to be the Champion before it finds you worthy… I certainly have never seen it!',
+    'Rumor has it that if you conquer the Kalos Power Plant enough times, a strong Pokémon made out of Fire and Water will challenge you. But I bet you’d have to be the Champion before it finds you worthy… I certainly have never seen it!',
 ]);
 
 const CamphrierFlabébéEnthusiast = new NPC('Flabébé Enthusiast', [
@@ -3978,10 +4099,16 @@ const CoumarineBirdwatcher = new NPC('Birdwatcher', [
     'There are rumors that the energy calls some legendary birds to roam Kalos!',
 ]);
 
+const CoumarineElectricTrainer = new NPC('Electric Trainer', [
+    'My Ampharos has gotten a boost since a friendly soul gave me an Ampharosite!',
+    'Luckily my Ampharos was already strong enough to use it!',
+    'If you find that fella, tell him the code <b>ELECTRIC-GIRAFFE</b> and he might help you too!',
+]);
+
 const LaverreFurisodeGirlKatherine = new NPC('Furisode Girl Katherine', [
     'Don\'t you find Goomy to be an interesting Pokémon? I certainly think so, even though it isn\'t a problem for my Pokémon~',
     'I\'ve heard its evolutionary line loves damp conditions, and apparently if you train a Sliggoo during rainy or foggy weather something marvelous happens!',
-]);
+], {image: 'assets/images/npcs/Furisode Girl Katherine.png'});
 
 const AnistarKalosRoamerNPC = new RoamerNPC('Hex Maniac Melanie', [
     'The spirits tell me roaming Pokémon have been spotted on {ROUTE_NAME}!',
@@ -4123,7 +4250,7 @@ TownList['Coumarine City'] = new Town(
     [CoumarineCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Coumarine City'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 12)],
-        npcs: [CoumarineBirdwatcher],
+        npcs: [CoumarineBirdwatcher, CoumarineElectricTrainer],
     }
 );
 TownList['Laverre City'] = new Town(
@@ -4388,11 +4515,14 @@ const ATreeMaybeShop = new Shop([
     ItemList.Power_Bracer,
     ItemList.Key_stone,
 ]);
+
+// Magikarp Jump Shops
 const MagikarpJumpGemTrade = new GemMasterShop('Trade', [new GymBadgeRequirement(BadgeEnums.Heal_League)]);
 const MagikarpJumpShadySalesMan = new Shop([
     ItemList['Magikarp Blue Raindrops'],
     ItemList['Magikarp Saucy Violet'],
-], 'Shady Sales Man', [new GymBadgeRequirement(BadgeEnums.Master_League)]);
+], 'Shady Salesman', [new GymBadgeRequirement(BadgeEnums.Master_League)]);
+
 
 //Alola NPCs
 
@@ -4429,7 +4559,7 @@ const PaniolaTownActor = new NPC('Actor Meredith', [
 const RoyalAvenueSpectator = new NPC('Spectator', [
     'I think battles in the Battle Royal Dome are more like games of chance. But Battle Royals are nothing compared to trying to evolve an Alolan Raichu with a Thunderstone.',
     'Evolving Pikachu or Exeggcute in Alola can result in a new form! Sometimes.',
-]);
+], {image: 'assets/images/trainers/Preschooler (female).png'});
 const KonikoniKahuna = new NPC('Kahuna Olivia', [
     'What do you mean Grand trials are just like gym battles? It\'s a totally different thing!',
     'Come fight me in our very special and unique brand new Pokémon League and see if you still think our Island Challenge is nothing special!',
@@ -4494,7 +4624,7 @@ const RoadsideMotelAnabel1 = new NPC('Anabel', [
 });
 const RoadsideMotelLooker2 = new NPC('Looker', [
     'Catching lots of Ultra Beasts? Oh you want to know more about Beast Balls!',
-    'Beast Balls can only be used to catch Ultra Beasts. You can\'t even try use them against normal Pokémon, and any other Poké Ball type won\'t work against Ultra Beasts.',
+    'Beast Balls can only be used to catch Ultra Beasts. You can\'t even try to use them against normal Pokémon, and any other Poké Ball type won\'t work against Ultra Beasts.',
     'If you\'re looking to most effectively hunt the Ultra Beasts down, try putting Beast Balls in your "Already Caught" selector. Beast Balls will never be thrown at Pokémon that aren\'t Ultra Beasts.',
 ], {
     image: 'assets/images/npcs/Looker.png',
@@ -4566,17 +4696,75 @@ const BattleTreeBlue = new NPC('Blue', [
     'Hello there champ! Fancy seeing you here.',
     'We just planted this sapling here. Maybe it will grow into something great some day.',
 ], {image: 'assets/images/npcs/Blue-masters.png'});
-const MayorKarp = new NPC('Mayor Karp', [
-    'TODO',
-    'Something about welcome',
-    'Something about only magikarps can fight here',
-    'Something about the league system',
-    'Insist attack is jump power',
-], {image: 'assets/images/npcs/MayorKarp.png'});
 
+// Magikarp Jump NPCs
+const MayorKarp = new NPC('Mayor Karp', [
+    'Welcome to the region of Magikarp!',
+    'This is a magical place where everybody loves Magikarp!',
+    'You\'re good at raising Pokémon, right? We called you here to compete in the ten leagues around the island and pick up our poor Magikarp\'s spirits!',
+    'Around these parts, folks love to compete to see whose Magikarp can splash harder and jump higher! No other Pokémon are allowed to compete in these events. So, do your best to raise up some fine Magikarp!',
+    'Our island is a special place, home to Magikarp patterns that aren\'t found anywhere else in the world! Collect and raise them all to increase your jump power and take on our league champion!',
+], {image: 'assets/images/npcs/MayorKarp.png'});
 const MagikarpJumpRoamerNPC = new RoamerNPC('Roddy Tackle', [
-    'TODO: something about rare patterns at {ROUTE_NAME}!',
+    'There are some singularly stunning individuals down at {ROUTE_NAME}! Some Magikarp with real personality!',
 ], GameConstants.Region.alola, RoamingPokemonList.findGroup(GameConstants.Region.alola, GameConstants.AlolaSubRegions.MagikarpJump), 'assets/images/npcs/Roddy Tackle.png');
+const HoppyManOfMystery = new NPC('Man of Mystery', [
+    'We have been looking for a Shady Salesman.',
+    'He is trying to sell overpriced Magikarps to clueless children.',
+    'Please keep an <i>eye</i> open for him.',
+],  {image:'assets/images/npcs/Man of Mystery.png'});
+
+const DrSplash1 = new NPC('Dr. Splash', [
+    'Welcome to my laboratory!',
+    'Well... it\'s not much of a laboratory yet. I\'m working on several projects to help Magikarps reach their full potential. Can you help me out?',
+    'The first step in unlocking this potential will be to formulate the perfect diet. Can you gather some berries for me to experiment with?',
+], {
+    image: 'assets/images/npcs/Dr Splash.png',
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('Dr. Splash\'s Research Project'), new QuestLineStepCompletedRequirement('Dr. Splash\'s Research Project', 1, GameConstants.AchievementOption.less)]),
+});
+
+const DrSplash2 = new NPC('Dr. Splash', [
+    'Thank you for the berries! These should be enough for my experiments.',
+    'While you were gone, I was working on optimizing the training regimen for Magikarps. According to my calculations, we are missing a LOT of equipment.',
+    'I\'m going to need some sand for sandbags, springs for a jump counter, wood for a pell post, rocks and ice for smashing, a TON of Pokéballs, electricity generation...',
+    'There\'s a lot more, but that should get you started.',
+], {
+    image: 'assets/images/npcs/Dr Splash.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Dr. Splash\'s Research Project', 1), new QuestLineStepCompletedRequirement('Dr. Splash\'s Research Project', 3, GameConstants.AchievementOption.less)]),
+});
+
+const DrSplash3 = new NPC('Dr. Splash', [
+    'Wow, that\'s a lot of stuff! This place is starting to look like a proper lab now!',
+    'I have discovered that a critical part of any Magikarp training program is pushing other Pokémon around in a field. This form of exercise rounds out the muscle groups and really boosts performance.',
+    'According to my calculations, the ideal Pokémon to push around are Dwebble, Boldore, Forretress, Golem, and Steelix. Can you catch or hatch me some?',
+    'Steer clear of the Alola version of Golem, it\'s electrical fields are too dangerous to use.',
+], {
+    image: 'assets/images/npcs/Dr Splash.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Dr. Splash\'s Research Project', 3), new QuestLineStepCompletedRequirement('Dr. Splash\'s Research Project', 5, GameConstants.AchievementOption.less)]),
+});
+
+const DrSplash4 = new NPC('Dr. Splash', [
+    'These Pokémon are perfect! I\'ll put them out back in the training fields.',
+    'The last piece of equipment needed is a Tackle Machine. I have a prototype here, but it needs to be calibrated.',
+    'Can you take it out for a spin? Defeating a ton of Pokémon should be enough to test it out.',
+], {
+    image: 'assets/images/npcs/Dr Splash.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Dr. Splash\'s Research Project', 5), new QuestLineStepCompletedRequirement('Dr. Splash\'s Research Project', 7, GameConstants.AchievementOption.less)]),
+});
+
+const DrSplash5 = new NPC('Dr. Splash', [
+    'Thank you for all your help!',
+    'Now that the laboratory and training program are up and running, I\'ll be very busy!',
+    'Please take this Magikarp as a thank you! Train them for greatness!',
+], {
+    image: 'assets/images/npcs/Dr Splash.png',
+    requirement: new QuestLineStepCompletedRequirement('Dr. Splash\'s Research Project', 7),
+});
+
+const MagikarpEyeShadySalesman = new NPC('Shady Salesman', [
+    'Kid, I have a deal for you! And for you alone. Here\'s your chance. I will sell you the secret Magikarp... For an unbelievable price.',
+    'Oh, yeah... Returns not accepted, got that?',
+],  {image:'assets/images/npcs/ShadySalesman.png'});
 
 //Alola Towns
 
@@ -4763,14 +4951,15 @@ TownList['A Tree Maybe'] = new Town(
     }
 );
 
+// Magikarp Jump Towns
 TownList['Hoppy Town'] = new Town(
     'Hoppy Town',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MagikarpJump,
-    [new DockTownContent(), MagikarpJumpGemTrade],
+    [new DockTownContent(), new BulletinBoard(GameConstants.BulletinBoards.Hoppy), MagikarpJumpGemTrade],
     {
         requirements: [new QuestLineStartedRequirement('Magikarp Jump')],
-        npcs: [MayorKarp, MagikarpJumpRoamerNPC],
+        npcs: [MayorKarp, MagikarpJumpRoamerNPC, HoppyManOfMystery, DrSplash1, DrSplash2, DrSplash3, DrSplash4, DrSplash5],
     }
 );
 TownList['Friend League'] = new Town(
@@ -4869,7 +5058,9 @@ TownList['Magikarp\'s Eye'] = new Town(
     GameConstants.AlolaSubRegions.MagikarpJump,
     [MagikarpJumpShadySalesMan],
     {
-        requirements: [new DevelopmentRequirement()], //TODO: Should unlock as the subregion unlocks
+        requirements: [new GymBadgeRequirement(BadgeEnums.Master_League)],
+        npcs: [MagikarpEyeShadySalesman],
+        ignoreAreaStatus: true,
     }
 );
 

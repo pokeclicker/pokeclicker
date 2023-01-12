@@ -1876,6 +1876,49 @@ class Update implements Saveable {
                     saveData.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('The Darkest Day')] = 0;
                 }
             }
+            // Suicune Quest autostart for players too far in Legendary Beasts quest
+            const johtoBeastsQuestLine = saveData.quests.questLines.find((q) => q.name == 'The Legendary Beasts');
+            const johtoSuicuneQuestLine = saveData.quests.questLines.find((q) => q.name == 'Eusine\'s Chase');
+            if (johtoBeastsQuestLine?.state == 2 || (johtoBeastsQuestLine?.state == 1 && johtoBeastsQuestLine?.quest >= 4)) {
+                if (!johtoSuicuneQuestLine) {
+                // add to array
+                    saveData.quests.questLines.push({
+                        state: 1,
+                        name: 'Eusine\'s Chase',
+                        quest: 0,
+                    });
+                } else if (johtoSuicuneQuestLine.state == 0) {
+                // activate quest
+                    johtoSuicuneQuestLine.state = 1;
+                }
+            }
+            //Red Gyarados
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 22);
+        },
+
+        '0.10.6': ({ playerData, saveData }) => {
+            // Give the player any missing questline or temporary battle rewards
+            Update.giveMissingQuestLineProgressRewardPokemon(saveData, 'Unfinished Business', 8, 172.01);
+            Update.giveMissingQuestLineProgressRewardPokemon(saveData, 'Princess Diancie', 6, 681.01);
+            Update.giveMissingQuestLineProgressRewardPokemon(saveData, 'A Mystery Gift', 1, 801.01);
+            Update.giveMissingTempBattleRewardPokemon(saveData, 123, 25.14); // Ash Ketchum Pinkan
+            Update.giveMissingTempBattleRewardPokemon(saveData, 151, 25.08); // Ash Ketchum Alola
+            if (saveData.statistics.dungeonsCleared[157] > 0) { // Tower of Waters
+                Update.giveMissingPokemon(saveData, 892.01);
+            }
+
+            // Set 'Team Plasma Grunt 1' to 0 if quest step not completed
+            Update.fixTempBattleState(saveData, 64, 0, 'Quest for the DNA Splicers', 0);
+            // Set Cyrus as complete if 'A New World' completed
+            Update.fixTempBattleState(saveData, 57, 1, 'A New World', 3);
+        },
+
+        '0.10.7': ({ playerData, saveData }) => {
+            //JirachiQuest
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 40);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 41);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 42);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 43);
         },
     };
 
@@ -1933,6 +1976,7 @@ class Update implements Saveable {
     getBackupButton(): [HTMLElement, string] {
         const playerData = this.getPlayerData();
         const saveData = this.getSaveData();
+        const settingsData = this.getSettingsData();
 
         // Save the data by stringifying it, so that it isn't mutated during update
         const backupSaveData = JSON.stringify({ player: playerData, save: saveData });
@@ -1942,7 +1986,9 @@ class Update implements Saveable {
             button.href = `data:text/plain;charset=utf-8,${encodeURIComponent(btoa(backupSaveData))}`;
             button.className = 'btn btn-block btn-warning';
             button.innerText = 'Click to Backup Save!';
-            button.setAttribute('download', `[v${this.saveVersion}] Poke Clicker Backup Save.txt`);
+            const filename = settingsData.saveFilename ? decodeURI(settingsData.saveFilename) : Settings.getSetting('saveFilename').defaultValue;
+            const datestr = GameConstants.formatDate(new Date());
+            button.setAttribute('download', GameHelper.saveFileName(filename, {'{date}' : datestr, '{version}' : this.saveVersion, '{name}' : decodeURI(saveData.profile.name)}, true));
         } catch (e) {
             console.error('Failed to create backup button data:', e);
         }
@@ -2273,6 +2319,48 @@ class Update implements Saveable {
         } else {
             // Push the quest, doesn't exist in save data yet
             saveData.quests.questLines.push({ state: 1, name: questLineName, quest: 0 });
+        }
+    }
+
+    // Use setBattleState as 0 or 1 to manipulate battles to what status they should be based on related questline progress.
+    static fixTempBattleState = (saveData, battleIndex: number, setBattleState: number, questLineName: string, questStep: number) => {
+        const ql = saveData.quests.questLines.find((q) => q.name === questLineName);
+        if (!ql) {
+            return;
+        }
+
+        if (setBattleState === 1) {
+            // set to complete if related questline/step is completed
+            if (ql.state === 2 || ql.quest > questStep) {
+                saveData.statistics.temporaryBattleDefeated[battleIndex] = 1;
+            }
+        }
+
+        if (setBattleState === 0) {
+            // set to not complete if related questline/step isn't complete
+            if (ql.state < 2 && ql.quest <= questStep) {
+                saveData.statistics.temporaryBattleDefeated[battleIndex] = 0;
+            }
+        }
+    }
+
+    static giveMissingQuestLineProgressRewardPokemon(saveData, questLineName: string, questStep: number, pokemonId: number) {
+        const quest = saveData.quests.questLines.find((q) => q.name == questLineName);
+        if (quest?.state == 2 || (quest?.state == 1 && quest?.quest >= questStep)) {
+            Update.giveMissingPokemon(saveData, pokemonId);
+        }
+    }
+
+    static giveMissingTempBattleRewardPokemon(saveData, tempBattleIndex: number, pokemonId: number) {
+        if (saveData.statistics.temporaryBattleDefeated[tempBattleIndex] > 0) {
+            Update.giveMissingPokemon(saveData, pokemonId);
+        }
+    }
+
+    static giveMissingPokemon(saveData, pokemonId: number) {
+        if (!saveData.party.caughtPokemon.find((p) => p.id == pokemonId)) {
+            saveData.party.caughtPokemon.push({ id: pokemonId });
+            saveData.statistics.pokemonCaptured[pokemonId] = saveData.statistics.pokemonCaptured[pokemonId] + 1 || 1;
         }
     }
 

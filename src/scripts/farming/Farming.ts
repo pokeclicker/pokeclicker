@@ -51,6 +51,7 @@ class Farming implements Feature {
         this.externalAuras[AuraType.Shiny] = ko.pureComputed<number>(() => this.multiplyPlotAuras(AuraType.Shiny));
         this.externalAuras[AuraType.Roaming] = ko.pureComputed<number>(() => this.multiplyPlotAuras(AuraType.Roaming));
         this.externalAuras[AuraType.Ev] = ko.pureComputed<number>(() => this.multiplyPlotAuras(AuraType.Ev));
+        this.externalAuras[AuraType.Repel] = ko.pureComputed<number>(() => this.addPlotAuras(AuraType.Repel));
 
         this.multiplier.addBonus('shiny', () => this.externalAuras[AuraType.Shiny]());
         this.multiplier.addBonus('eggStep', () => this.externalAuras[AuraType.Egg]());
@@ -997,7 +998,11 @@ class Farming implements Feature {
             BerryColor.Green,
             ['1.6\u2033', '4.1 cm', '4,1 cm'],
             BerryFirmness.Soft,
-            ['This Berry has a very dry flavor. It has the effect of making other food eaten at the same time taste sweet.']
+            [
+                'This Berry has a very dry flavor. It has the effect of making other food eaten at the same time taste sweet.',
+                'The scent of this Berry plant repels wild Pokémon.',
+            ],
+            new Aura(AuraType.Repel, [0.1, 0.2, 0.3])
         );
 
         this.berryData[BerryType.Custap] = new Berry(
@@ -1804,6 +1809,12 @@ class Farming implements Feature {
         return this.plotList
             .filter(p => p.emittingAura.type() === auraType)
             .reduce((acc, p) => acc * (p.emittingAura.value() ?? 1), 1);
+    }
+
+    addPlotAuras(auraType: AuraType): number {
+        return this.plotList
+            .filter(p => p.emittingAura.type() === auraType)
+            .reduce((acc, p) => acc + (p.emittingAura.value() ?? 0), 0);
     }
 
     //#region Plot Unlocking

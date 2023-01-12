@@ -193,6 +193,7 @@ namespace GameConstants {
         diamond,
         farmPoint,
         battlePoint,
+        contestToken,
     }
     declare enum TypeEffectiveness {
         Immune,
@@ -208,6 +209,7 @@ namespace GameConstants {
     }
     declare function humanifyString(str: string): string;
     declare function camelCaseToString(str: string): string;
+    declare function pluralizeString(str: string, amt: number): string;
     declare function formatDate(date: Date): string;
     declare function formatTime(input: number | Date): string;
     declare function formatTimeFullLetters(input: number): string;
@@ -421,6 +423,7 @@ namespace GameConstants {
         Sinnoh,
         Kalos,
         Alola,
+        Hoppy,
         Galar,
         Armor,
         Crown
@@ -652,7 +655,7 @@ namespace GameConstants {
     }
 
     // Pokemon Statistics
-    declare enum PokemonStatiticsType {
+    declare enum PokemonStatisticsType {
         Captured = 'Captured',
         Defeated = 'Defeated',
         Encountered = 'Encountered',
@@ -677,7 +680,7 @@ namespace GameConstants {
         nightCounterclockwiseBelow5,
         dayClockwiseAbove5,
         dayCounterclockwiseAbove5,
-        at7Above10
+        at5Above10
     }
     declare enum ExtraAchievementCategories {
         global,
