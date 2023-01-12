@@ -294,9 +294,6 @@ class GameController {
             if (visibleModals === 0) {
                 // Route Battles
                 if (App.game.gameState === GameConstants.GameState.fighting) {
-                    const initialRoute = MapHelper.normalizeRoute(player.route(),player.region, false);
-                    const firstRoute = Routes.getRoutesByRegion(player.region)[0].number;
-                    const lastRoute = Routes.getRoutesByRegion(player.region)[Routes.getRoutesByRegion(player.region).length - 1].number;
                     const cycle = Routes.getRoutesByRegion(player.region).filter(r => r.isUnlocked()).map(r => r.number);
                     const idx = cycle.findIndex(r => r == player.route());
                     // Allow '=' to fallthrough to '+' since they share a key on many keyboards
