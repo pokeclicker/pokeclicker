@@ -22,6 +22,7 @@ import BreedingFilters from './BreedingFilters';
 import GameHelper from '../GameHelper';
 import PokemonType from '../enums/PokemonType';
 import PokedexFilters from './PokedexFilters';
+import LocationFilters from "./LocationFilters";
 import FilterSetting from './FilterSetting';
 
 export default Settings;
@@ -224,6 +225,16 @@ Object.keys(PokedexFilters).forEach((key) => {
         return;
     }
     const filter = PokedexFilters[key];
+    Settings.add(new FilterSetting(filter));
+});
+
+// Location Filters
+Object.keys(LocationFilters).forEach((key) => {
+    // dont store name filter
+    if (key === 'name') {
+        return;
+    }
+    const filter = LocationFilters[key];
     Settings.add(new FilterSetting(filter));
 });
 

@@ -1,0 +1,119 @@
+<div class="modal noselect fade" id="locationsModal" tabindex="-1" role="dialog"
+aria-labelledby="locationsModalLabel">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 style="margin-bottom: 0">Locations</h4>
+                <button style="float:right;" class="btn btn-secondary" type="button" data-toggle="collapse"
+                        data-target="#location-filter-container" aria-expanded="false" aria-controls="location-filter-container">
+                    Filters
+                </button>
+            </div>
+
+            <div class="modal-body pt-0" style="background-color: inherit;">
+                <div class="position-sticky filters-container pokedex-border-bottom" style="background-color: inherit; top: 0; z-index: 100;">
+                    <!-- ko if: TownHelper.filteredList().length == 0 -->
+                    <div class="pokedex-border-bottom pt-2">
+                        <h4>No location found</h4>
+                        <div class="mb-2">
+                            <span>...</span>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+
+                    <!-- ko if: TownHelper.filteredList().length != 0 -->
+                    <div class="pokedex-border-bottom pt-2">
+                        <h4 data-bind="text: `Showing ${TownHelper.filteredList().length} Locations`"></h4>
+                    </div>
+                    <!-- /ko -->
+
+                    <div class="collapse" id="location-filter-container" style="margin-bottom: 0.5rem;">
+                        <div class="container-fluid py-3">
+                            <div class="form-row text-left">
+                                <!--Name-->
+                                <div class="form-group col-md-6 col-6">
+                                    <label>Name</label>
+                                    <input id="location-filter-name" class="form-control" placeholder="Pallet Town" value=""
+                                        data-bind="textInput: LocationFilters.name.value">
+                                </div>
+
+                                <!--Region-->
+                                <div class="form-group col-md-6 col-6">
+                                    <label>Region</label>
+                                    <select id="location-filter-region" class="custom-select" style="margin-right: 8px"
+                                            data-bind="options: LocationFilters.region.options,
+                                                       optionsValue: 'value',
+                                                       optionsText: 'text',
+                                                       value: LocationFilters.region.value">
+                                    </select>
+                                </div>
+
+                                <!-- <div class="form-group col-md-6 col-6">
+                                    <label>Sub-Region</label>
+                                    <select id="location-filter-subregion" class="custom-select" style="margin-right: 8px"
+                                            data-bind="options: LocationFilters.subregion.options,
+                                                       optionsValue: 'value',
+                                                       optionsText: 'text',
+                                                       value: LocationFilters.subregion.value">
+                                    </select>
+                                </div> -->
+
+                                <!--Types-->
+                                <div class="form-group col-md-6 col-6">
+                                    <label>Type</label>
+                                    <select id="location-filter-type" class="custom-select" style="margin-right: 8px"
+                                            data-bind="options: LocationFilters.type.options,
+                                                       optionsValue: 'value',
+                                                       optionsText: 'text',
+                                                       value: LocationFilters.type.value">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="location-list">
+                    <table class="table table-striped table-hover table-bordered table-sm m-0">
+                        <thead>
+                        <tr>
+                            <th>
+                                <p>Name</p><br/>
+                                <!-- <p class="text-muted">Directions</p> -->
+                            </th>
+                            <th>
+                                <p>Type</p>
+                            </th>
+                            <th>
+                                <p>Region</p><br/>
+                                <p class="text-muted">Sub-Region</p>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!-- ko foreach: TownHelper.filteredList -->
+                        <tr>
+                            <td class="text-left">
+                                <p data-bind="text: $data.name">-</p><br/>
+                                <p class="text-muted" data-bind="text: $data.directions">-</p>
+                            </td>
+                            <td class="text-left">
+                                <p data-bind="text: GameConstants.camelCaseToString(LocationType[$data.type])">-</p>
+                            </td>
+                            <td class="text-left">
+                                <p data-bind="text: $data.region">-</p><br/>
+                                <p class="text-muted" data-bind="text: $data.subregion">-</p>
+                            </td>
+                        </tr>
+                        <!-- /ko -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

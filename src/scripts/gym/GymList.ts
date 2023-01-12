@@ -1815,7 +1815,7 @@ GymList['Stow-on-Side1'] = new Gym(
         if (App.game.badgeCase.hasBadge(BadgeEnums.Galar_Ghost)) {
             App.game.quests.getQuestLine('The Darkest Day').beginQuest();
         }
-    }, undefined, 'Bea\'s Stow-on-Side Gym'
+    }
 );
 GymList['Stow-on-Side2'] = new Gym(
     'Allister',
@@ -1835,7 +1835,7 @@ GymList['Stow-on-Side2'] = new Gym(
         if (App.game.badgeCase.hasBadge(BadgeEnums.Galar_Fighting)) {
             App.game.quests.getQuestLine('The Darkest Day').beginQuest();
         }
-    }, undefined, 'Allister\'s Stow-on-Side Gym'
+    }
 );
 GymList.Ballonlea = new Gym(
     'Opal',
@@ -1863,8 +1863,7 @@ GymList.Circhester1 = new Gym(
     BadgeEnums.Galar_Rock,
     80000,
     'I just want to climb into a hole... Well, I guess it\'d be more like falling from here.',
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 26)],
-    undefined, undefined, 'Gordie\'s Circhester Gym'
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 26)]
 );
 GymList.Circhester2 = new Gym(
     'Melony',
@@ -1879,8 +1878,7 @@ GymList.Circhester2 = new Gym(
     BadgeEnums.Galar_Ice,
     80000,
     'I think you took breaking the ice a little too literally...',
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 26)],
-    undefined, undefined, 'Melony\'s Circhester Gym'
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 26)]
 );
 GymList.Spikemuth = new Gym(
     'Piers',

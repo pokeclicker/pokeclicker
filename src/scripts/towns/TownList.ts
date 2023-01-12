@@ -8,6 +8,14 @@
 
 const TownList: { [name: string]: Town } = {};
 
+type LocationListData = {
+    name: string;
+    town: Town;
+    type: LocationType;
+};
+
+const LocationList: Set<LocationListData> = new Set();
+
 const pokeMartShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
@@ -6315,6 +6323,36 @@ TownList['Crown Shrine'] = new DungeonTown(
         npcs: [Calyrex4, Calyrex5, CrownShrineExplorer],
     }
 );
+
+Object.entries(TownList).forEach(([name, town]) => {
+    LocationList.add({
+        name,
+        town,
+        type: town instanceof DungeonTown ? LocationType.Dungeon : LocationType.Town,
+    });
+    town.content.forEach((content) => {
+        if ( content instanceof MoveToDungeon || content instanceof Shop || content instanceof Gym) {
+            let location = {
+                name: content.text(),
+                town,
+                type: null,
+            };
+
+            if (content instanceof MoveToDungeon) {
+                location.type = LocationType.Dungeon
+            } else if ((content instanceof Shop) && !["Poké Mart", "Berry Master", "Gem Master", "Shard Trader"].includes(content.text())) {
+                // Only add unique (named) shops
+                location.type = LocationType.Shop;
+            } else if (content instanceof Gym) {
+                location.type = LocationType.Gym;
+            }
+
+            if (location.type) {
+                LocationList.add(location);
+            }
+        }
+    });
+});
 
 // Used to check if next region can be reached, for example for professor NPC
 TownList['Final Region Town'] = new Town(

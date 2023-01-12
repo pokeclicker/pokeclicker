@@ -13,6 +13,7 @@ import BadgeEnums from './enums/Badges';
 import BerryColor from './enums/BerryColor';
 import BerryType from './enums/BerryType';
 import PokemonType from './enums/PokemonType';
+import LocationType from './enums/LocationType';
 import CaughtStatus from './enums/CaughtStatus';
 import EvolutionType from './enums/EvolutionType';
 import FarmNotificationType from './enums/FarmNotificationType';
@@ -141,6 +142,7 @@ import * as OtherEvos from './pokemons/evolutions/Methods';
 import { pokemonBabyPrevolutionMap, pokemonList, pokemonMap } from './pokemons/PokemonList';
 import TmpPokemonHelper from './pokemons/TmpPokemonHelper';
 import PokedexFilters from './settings/PokedexFilters';
+import LocationFilters from './settings/LocationFilters';
 import { createLogContent } from './logbook/helpers';
 import { ItemList } from './items/ItemList';
 import Item from './items/Item';
@@ -173,6 +175,7 @@ Object.assign(<any>window, {
     BerryColor,
     BerryType,
     PokemonType,
+    LocationType,
     CaughtStatus,
     EvolutionType,
     FarmNotificationType,
@@ -309,6 +312,7 @@ Object.assign(<any>window, {
     pokemonBabyPrevolutionMap,
     TmpPokemonHelper,
     PokedexFilters,
+    LocationFilters,
     ItemList,
     Item,
     MultiplierDecreaser,
