@@ -217,7 +217,6 @@
 </div>
             <div class = "mt-2">
                 <img data-bind="attr:{ src: FarmController.getBerryImage($data) }" src=""/>
-
 <div class = "card" style = "overflow-x: auto;">
                 <table class="table table-striped table-hover table-bordered table-sm m-0">
                   <thead>
@@ -238,7 +237,7 @@
                       <td class="text-left">Firmness</td>
                       <td class="text-left tight">TBD</code></td>
                     </tr>
-                    <tr class = "shineHighlight" data-bind="if: App.game.farming.berryData[$data].aura">
+                    <tr class = "auraHighlight" style = "overflow-x: hidden;" data-bind="if: App.game.farming.berryData[$data].aura">
                       <td class="text-left">Aura</td>
                       <td class="text-left tight"><code data-bind="text: AuraType[App.game.farming.berryData[$data].aura.auraType]"></code></td>
                     </tr>
@@ -273,11 +272,11 @@
                                 <th class="bg-dark" colspan="5">Flavor</th>
                               </tr>
                               <tr>
-                                  <td style = "background: rgba(240, 128, 48, .5);">Spicy</td>
-                                  <td style = "background: rgba(104, 144, 240, .5);">Dry</td>
-                                  <td style = "background: rgba(248, 88, 136, .5);">Sweet</td>
-                                  <td style = "background: rgba(120, 200, 80, .5);">Bitter</td>
-                                  <td style = "background: rgba(248, 208, 48, .5);">Sour</td>
+                                  <td style = "background: rgba(240, 128, 48, .35);">Spicy</td>
+                                  <td style = "background: rgba(104, 144, 240, .35);">Dry</td>
+                                  <td style = "background: rgba(248, 88, 136, .35);">Sweet</td>
+                                  <td style = "background: rgba(120, 200, 80, .35);">Bitter</td>
+                                  <td style = "background: rgba(248, 208, 48, .35);">Sour</td>
                               </tr>
                               <tr>
                                 <td style = "background: rgba(240, 128, 48, .2);" data-bind="text: App.game.farming.berryData[$data].flavors[0].value">Spicy</td>

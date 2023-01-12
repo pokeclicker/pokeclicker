@@ -147,20 +147,24 @@
   }
 }
 
-.shineHighlight {
-        overflow: hidden;
-position: relative;
-	width: 100%;
-	height:auto;
-	z-index:1;
-	animation: shine 2s infinite;
+.auraHighlight {
   background: linear-gradient(to right, 
-    rgba(255, 228, 142, 0), 
-    rgba(255, 228, 142, 0.8), 
-    rgba(255, 228, 142, 0));
+    rgba(251, 255, 194, 0) 0%,
+    rgba(251, 255, 194, 0.2) 5%, 
+    rgba(194, 255, 161, 0.8) 15%,
+    rgba(255, 205, 231, 0.8) 70%, 
+    rgba(220, 92, 255, 0.3) 80%, 
+    rgba(251, 255, 194, 0) 90%);
+	animation: shine 4s ease-in-out infinite;
+	background-size: 200%;
 }
 
 @keyframes shine {
-	0% {transform:translateX(-100%);}
-	100% {transform:translateX(100%);}
+	0% {
+		background-position: 90%
+	}
+
+	100% {
+		background-position: -110%
+	}
 }
