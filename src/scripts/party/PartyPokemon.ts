@@ -363,6 +363,10 @@ class PartyPokemon implements Saveable {
         if (!new RegExp(Settings.getSetting('heldItemSearchFilter').observableValue() , 'i').test(this.displayName)) {
             return true;
         }
+        if (Settings.getSetting('heldItemHideHoldingPokemon').observableValue() && this.heldItem()) {
+            return true;
+        }
+
         return false;
     });
 
