@@ -1775,6 +1775,7 @@ export enum PokemonStatisticsType {
     Defeated = 'Defeated',
     Encountered = 'Encountered',
     Hatched = 'Hatched',
+    Seen = 'Seen',
 }
 
 // Alcremie
