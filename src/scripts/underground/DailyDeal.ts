@@ -33,7 +33,8 @@ class DailyDeal {
     }
 
     private static randomItem(): UndergroundItem {
-        return SeededRand.fromArray(UndergroundItems.list);
+        // Exclude mega stones from daily deals
+        return SeededRand.fromArray(UndergroundItems.list.filter(item => item.valueType !== UndergroundItemValueType.MegaStone));
     }
 
     private static randomAmount(): number {
