@@ -17,10 +17,10 @@
     <script src="libs/Sortable.min.js"></script>
 
     <!-- New module-based code from './modules' -->
-    <script src="scripts/modules.min.js?v=0.10.6"></script>
+    <script src="scripts/modules.min.js?v=0.10.7"></script>
 
     <!--Minified scripts-->
-    <script src="scripts/script.min.js?v=0.10.6"></script>
+    <script src="scripts/script.min.js?v=0.10.7"></script>
 
     <!--Popper.js-->
     <script src="libs/popper.min.js"></script>
@@ -38,7 +38,7 @@
     <link href="libs/introjs-modern.css" rel="stylesheet">
 
     <!--Minified styles-->
-    <link href="styles/styles.min.css?v=0.10.6" rel="stylesheet">
+    <link href="styles/styles.min.css?v=0.10.7" rel="stylesheet">
 
     <!-- Google Analytics-->
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -517,7 +517,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <!-- Amount buttons -->
                             <div class="col-12 pt-3">
                                 <div class="row justify-content-center">
@@ -526,8 +526,8 @@
                                             <!-- ko using: PartyController.hasMultipleStoneEvolutionsAvailable(ItemHandler.pokemonSelected(), GameConstants.StoneType[ItemHandler.stoneSelected()]), as: 'multipleEvolution' -->
                                             <button class="btn btn-success btn-block" data-bind="click: function(){ItemHandler.useStones()},
                                             tooltip: {
-                                                title: 'If a shiny is found, the game will stop using evolution items.' + (multipleEvolution ? '<br/>If the requirements for more than one evolution is fulfilled, a random evolution will be selected.' : ''), 
-                                                trigger: 'hover', 
+                                                title: 'If a shiny is found, the game will stop using evolution items.' + (multipleEvolution ? '<br/>If the requirements for more than one evolution is fulfilled, a random evolution will be selected.' : ''),
+                                                trigger: 'hover',
                                                 boundary: 'window',
                                                 html: multipleEvolution,
                                             }">
@@ -542,7 +542,7 @@
                                         </div>
                                     </div>
                                 </div>
-                               
+
                             </div>
                         </div>
                     </div>
@@ -554,6 +554,9 @@
                                 <!-- ko foreach: GameHelper.enumNumbers(GameConstants.VitaminType) -->
                                     <div class="btn btn-primary col-2 item-bag-item" data-bind="template: { name: 'otherItemTemplate', data: GameConstants.VitaminType[$data]}, click: () => { VitaminController.currentlySelected($data); $('#pokemonVitaminModal').modal('show'); }"></div>
                                 <!-- /ko -->
+                            </div>
+                            <div class="row justify-content-center mb-2">
+                                <button type="button" class="btn btn-primary btn-sm" data-bind="click: () => { $('#pokemonVitaminExpandedModal').modal('show') }">All Vitamins</button>
                             </div>
                             <h4>Held items</h4>
                             <div class="row justify-content-center">
@@ -623,6 +626,7 @@
         <div data-bind="text: player._itemList[$data]().toLocaleString('en-US')"></div>
     </div>
 </script>
+
 
 <!--Templates -->
 <script type="text/html" id="currencyTemplate">
@@ -1044,7 +1048,7 @@
                     </td>
                 </tr>
             </thead>
-            <tbody data-bind="foreach: PartyController.getSortedList()">
+            <tbody data-bind="foreach: lazyLoad($element, PartyController.getSortedList, { pageSize: 20 })">
                 <tr data-bind="hidden: $data.breeding">
                     <td>
                         <img
@@ -1954,6 +1958,16 @@
                         </div>
                     </div>"
                     data-placement="bottom">ⓘ</button>
+                    <button class='btn btn-sm' style="position: absolute; right: 48px; top: 0px; width: auto; height: 41px;"
+                    data-bind='style: { background: DayCycle.color() },
+                        tooltip: {
+                            title: DayCycle.tooltip(),
+                            html: true,
+                            placement: "bottom",
+                            trigger: "hover"
+                        }'>
+                        <img width=30px src="" data-bind="attr: { src: DayCycle.image() }"/>
+                    </button>
                     <button class='btn btn-sm' style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;"
                     data-bind='style: { background: Weather.color() },
                         tooltip: {
@@ -1994,8 +2008,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.kanto, 'Kanto').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/kanto-kanto.png?v=0.10.6',
-            href:'assets/images/kanto-kanto.png?v=0.10.6'
+            'xlink:href':'assets/images/kanto-kanto.png?v=0.10.7',
+            href:'assets/images/kanto-kanto.png?v=0.10.7'
         }"></image>
 
         <!-- ------ -->
@@ -4216,8 +4230,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.kanto, 'Sevii Islands 123').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/kanto-sevii123.png?v=0.10.6',
-            href:'assets/images/kanto-sevii123.png?v=0.10.6'
+            'xlink:href':'assets/images/kanto-sevii123.png?v=0.10.7',
+            href:'assets/images/kanto-sevii123.png?v=0.10.7'
         }"></image>
 
         <!-- ------ -->
@@ -4706,6 +4720,21 @@
 
 
 
+        <!--Ruby Path-->
+        
+
+
+
+    <image width="48" height="48"
+        x="176"
+        y="40"
+        class="iconLocation"
+        data-bind="visible: MapHelper.isTownCurrentLocation('Ruby Path')
+        , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+    </image>
+
+
+
         <!-- ------------------ -->
         <!-- PLACES OF INTEREST -->
         <!-- ------------------ -->
@@ -4725,8 +4754,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.kanto, 'Sevii Islands 4567').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/kanto-sevii4567.png?v=0.10.6',
-            href:'assets/images/kanto-sevii4567.png?v=0.10.6'
+            'xlink:href':'assets/images/kanto-sevii4567.png?v=0.10.7',
+            href:'assets/images/kanto-sevii4567.png?v=0.10.7'
         }"></image>
 
         <!-- ------ -->
@@ -6231,8 +6260,8 @@
 
                             <g data-bind='visible: player.region == GameConstants.Region.johto'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/johto.png?v=0.10.6',
-        href:'assets/images/johto.png?v=0.10.6'
+        'xlink:href':'assets/images/johto.png?v=0.10.7',
+        href:'assets/images/johto.png?v=0.10.7'
     }"></image>
 
     <!-- ------ -->
@@ -8438,8 +8467,8 @@
 
                             <g data-bind='visible: player.region == GameConstants.Region.hoenn'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/hoenn.png?v=0.10.6',
-        href:'assets/images/hoenn.png?v=0.10.6'
+        'xlink:href':'assets/images/hoenn.png?v=0.10.7',
+        href:'assets/images/hoenn.png?v=0.10.7'
     }"></image>
 
     <!-- ------ -->
@@ -11013,6 +11042,32 @@
     , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
 </image>
 
+
+        
+
+<image href="assets/images/map/transparent.png" xlink:href="assets/images/map/transparent.png"
+    x="592"
+    y="464"
+    height="16"
+    width="16"
+    data-bind="visible: App.game.statistics.routeKills[&#39;hoenn&#39;][118]() &gt;= 10"/>
+<rect class="city"
+    data-town="Fish Shop"
+    x="592"
+    y="464"
+    height="16"
+    width="16"
+    data-bind="visible: App.game.statistics.routeKills[&#39;hoenn&#39;][118]() &gt;= 10, click:function(){MapHelper.moveToTown(&#39;Fish Shop&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;Roadside Stand&#39;) }">
+</rect>
+<image width="48" height="48"
+    x="576"
+    y="448"
+    class="iconLocation"
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && App.game.statistics.routeKills[&#39;hoenn&#39;][118]() &gt;= 10
+    , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+</image>
+
+
      
 
 <image href="assets/images/map/kecleonoverworld.png" xlink:href="assets/images/map/kecleonoverworld.png"
@@ -11084,6 +11139,31 @@
     y="136"
     class="iconLocation"
     data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Kecleon 3&#39;] &amp;&amp; TemporaryBattleList[&#39;Kecleon 3&#39;].isVisible()
+    , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+</image>
+
+
+     
+
+<image href="assets/images/map/Maelstrom.png" xlink:href="assets/images/map/Maelstrom.png"
+    x="944"
+    y="448"
+    height="208"
+    width="208"
+    data-bind="visible: (App.game.quests.getQuestLine(&#39;The Weather Trio&#39;).curQuest() &lt; 5 &amp;&amp; App.game.quests.getQuestLine(&#39;The Weather Trio&#39;).state() &gt;= 1)"/>
+<rect class="city"
+    data-town="A Raging Maelstrom"
+    x="944"
+    y="448"
+    height="208"
+    width="208"
+    data-bind="visible: (App.game.quests.getQuestLine(&#39;The Weather Trio&#39;).curQuest() &lt; 5 &amp;&amp; App.game.quests.getQuestLine(&#39;The Weather Trio&#39;).state() &gt;= 1), ">
+</rect>
+<image width="48" height="48"
+    x="1024"
+    y="528"
+    class="iconLocation"
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && (App.game.quests.getQuestLine(&#39;The Weather Trio&#39;).curQuest() &lt; 5 &amp;&amp; App.game.quests.getQuestLine(&#39;The Weather Trio&#39;).state() &gt;= 1)
     , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
 </image>
 
@@ -11240,6 +11320,31 @@
 
      
 
+<image href="assets/images/map/Meta Groudon.png" xlink:href="assets/images/map/Meta Groudon.png"
+    x="224"
+    y="192"
+    height="80"
+    width="80"
+    data-bind="visible: TemporaryBattleList[&#39;Meta Groudon&#39;] &amp;&amp; TemporaryBattleList[&#39;Meta Groudon&#39;].isVisible()"/>
+<rect class="city"
+    data-town="Meta Groudon"
+    x="224"
+    y="192"
+    height="80"
+    width="80"
+    data-bind="visible: TemporaryBattleList[&#39;Meta Groudon&#39;] &amp;&amp; TemporaryBattleList[&#39;Meta Groudon&#39;].isVisible(), click: () =&gt; TemporaryBattleList[&#39;Meta Groudon&#39;].protectedOnclick()">
+</rect>
+<image width="48" height="48"
+    x="240"
+    y="208"
+    class="iconLocation"
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && TemporaryBattleList[&#39;Meta Groudon&#39;] &amp;&amp; TemporaryBattleList[&#39;Meta Groudon&#39;].isVisible()
+    , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+</image>
+
+
+     
+
 <image href="assets/images/map/ashketchumoverworld.png" xlink:href="assets/images/map/ashketchumoverworld.png"
     x="800"
     y="160"
@@ -11266,8 +11371,8 @@
 
                             <g data-bind='visible: player.region == GameConstants.Region.sinnoh'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/sinnoh.png?v=0.10.6',
-        href:'assets/images/sinnoh.png?v=0.10.6'
+        'xlink:href':'assets/images/sinnoh.png?v=0.10.7',
+        href:'assets/images/sinnoh.png?v=0.10.7'
     }"></image>
 
     <!-- ------ -->
@@ -14089,8 +14194,8 @@
 
                             <g data-bind='visible: player.region == GameConstants.Region.unova'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/unova.png?v=0.10.6',
-        href:'assets/images/unova.png?v=0.10.6'
+        'xlink:href':'assets/images/unova.png?v=0.10.7',
+        href:'assets/images/unova.png?v=0.10.7'
     }"></image>
 
     <!-- ------ -->
@@ -16954,8 +17059,8 @@
 
                             <g data-bind='visible: player.region == GameConstants.Region.kalos'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/kalos.png?v=0.10.6',
-        href:'assets/images/kalos.png?v=0.10.6'
+        'xlink:href':'assets/images/kalos.png?v=0.10.7',
+        href:'assets/images/kalos.png?v=0.10.7'
     }"></image>
 
     <!-- ------ -->
@@ -19153,8 +19258,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Melemele Island').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-melemele.png?v=0.10.6',
-            href:'assets/images/alola-melemele.png?v=0.10.6'
+            'xlink:href':'assets/images/alola-melemele.png?v=0.10.7',
+            href:'assets/images/alola-melemele.png?v=0.10.7'
         }"></image>
 
         <!-- ------ -->
@@ -22449,8 +22554,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Akala Island').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-akala.png?v=0.10.6',
-            href:'assets/images/alola-akala.png?v=0.10.6'
+            'xlink:href':'assets/images/alola-akala.png?v=0.10.7',
+            href:'assets/images/alola-akala.png?v=0.10.7'
         }"></image>
 
         <!-- ------ -->
@@ -24641,8 +24746,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Ula\'ula Island').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-ulaula.png?v=0.10.6',
-            href:'assets/images/alola-ulaula.png?v=0.10.6'
+            'xlink:href':'assets/images/alola-ulaula.png?v=0.10.7',
+            href:'assets/images/alola-ulaula.png?v=0.10.7'
         }"></image>
 
         <!-- ------ -->
@@ -27275,8 +27380,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Poni Island').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-poni.png?v=0.10.6',
-            href:'assets/images/alola-poni.png?v=0.10.6'
+            'xlink:href':'assets/images/alola-poni.png?v=0.10.7',
+            href:'assets/images/alola-poni.png?v=0.10.7'
         }"></image>
 
         <!-- ------ -->
@@ -29315,8 +29420,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Magikarp Jump').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-magikarp-jump.png?v=0.10.6',
-            href:'assets/images/alola-magikarp-jump.png?v=0.10.6'
+            'xlink:href':'assets/images/alola-magikarp-jump.png?v=0.10.7',
+            href:'assets/images/alola-magikarp-jump.png?v=0.10.7'
         }"></image>
 
         <!-- ------ -->
@@ -31346,8 +31451,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'South Galar').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/galar-south.png?v=0.10.6',
-            href:'assets/images/galar-south.png?v=0.10.6'
+            'xlink:href':'assets/images/galar-south.png?v=0.10.7',
+            href:'assets/images/galar-south.png?v=0.10.7'
         }"></image>
 
         <!-- ------ -->
@@ -33411,8 +33516,8 @@
     </g>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'North Galar').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/galar-north.png?v=0.10.6',
-            href:'assets/images/galar-north.png?v=0.10.6'
+            'xlink:href':'assets/images/galar-north.png?v=0.10.7',
+            href:'assets/images/galar-north.png?v=0.10.7'
         }"></image>
 
         <!-- ------ -->
@@ -34430,8 +34535,8 @@
     </g>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'Isle of Armor').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/galar-isle-of-armor.png?v=0.10.6',
-            href:'assets/images/galar-isle-of-armor.png?v=0.10.6'
+            'xlink:href':'assets/images/galar-isle-of-armor.png?v=0.10.7',
+            href:'assets/images/galar-isle-of-armor.png?v=0.10.7'
         }"></image>
 
         <!-- ------ -->
@@ -36995,8 +37100,8 @@
     </g>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'Crown Tundra').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/galar-crown-tundra.png?v=0.10.6',
-            href:'assets/images/galar-crown-tundra.png?v=0.10.6'
+            'xlink:href':'assets/images/galar-crown-tundra.png?v=0.10.7',
+            href:'assets/images/galar-crown-tundra.png?v=0.10.7'
         }"></image>
 
         <!-- ------ -->
@@ -39235,7 +39340,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 data-bind="tooltip: { title: 'As you earn achievements, you gain up to: 150% (global), 100% (per region), and 50% (per special subregion). Earning bonuses to Click Attack, Flute Effects, Pokédollar / Dungeon Token gains, and Experience earned from all sources.', trigger: 'hover', placement:'right' }">Achievements Bonus: <u class="text-primary" data-bind="text: AchievementHandler.achievementBonusPercent()"></u></h5>
+                <h5 data-bind="tooltip: { title: 'As you earn achievements, you gain up to: 150% (global), 100% (per region), and from 25% to 50% (per special subregion). Earning bonuses to Click Attack, Flute Effects, Pokédollar / Dungeon Token gains, and Experience earned from all sources.', trigger: 'hover', placement:'right' }">Achievements Bonus: <u class="text-primary" data-bind="text: AchievementHandler.achievementBonusPercent()"></u></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -40192,6 +40297,8 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
             (to a minimum of 5x5)</span></p>
             <p><strong>How do I unlock Flash in dungeons?</strong><br/>
             <span class="text-muted">You must clear the dungeon 200 times.</span></p>
+            <p><strong>How do the floors in dungeons work?</strong><br/>
+            <span class="text-muted">Dungeons can't get bigger than 10x10, instead they get a second floor of at least 5x5. The boss tile is always in the second floor, the first floor has a stairs tile instead. When you reach the second floor, time stops and you get 10 extra seconds.</span></p>
             <p><strong>Can I progress towards more than 1 quest at a time?</strong><br/>
             <span class="text-muted">Yes, you can unlock up to 4 quest slots.</span><br/>
             <span class="text-muted"><code>Quest Level 5:</code> 2 slots.</span><br/>
@@ -40222,7 +40329,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
             <span class="text-muted">Some can only evolve at certain <strong>times of the day</strong>.</span><br/>
             <span class="text-muted">Some can only evolve in specific <strong>locations</strong>.</span><br/>
             <span class="text-muted">Some can only appear/evolve in specific <strong>weather</strong>.</span></p>
-            <strong>What are the EV damage multipliers?</strong>     
+            <strong>What are the EV damage multipliers?</strong>
             <table class="table table-bordered table-striped">
                 <tr>
                     <td><center><strong>EVs</strong></center></td>
@@ -40252,7 +40359,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
 
             <p><h5 class="text-primary"><strong>EVs and Pokérus (BETA)</strong></h5></p>
             <p><strong>What is Pokérus, and what are EVs?</strong><br/>
-            <span class="text-muted">Pokérus is a virus your Pokémon can catch. EVs increase the attack of your Pokémon.</span></p>
+            <span class="text-muted">Pokérus is a virus your Pokémon can catch. EVs, also called Effort Values, increase the attack of your Pokémon.</span></p>
             <p><strong>When do I unlock EVs?</strong><br/>
             <span class="text-muted">EVs are unlocked after defeating the Distortion World Dungeon in Sinnoh.</span></p>
             <p class="text-danger"><i>NOTE: This is a <strong>beta</strong> feature, so things will likely change in the future; feel free to post any feedback/bugs in the <a href="https://discord.gg/a6DFe4p" target="_blank">Discord</a>.</i></p>
@@ -40263,23 +40370,28 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
             <span class="text-muted">Base Yield: <code>0.1EV</code><br/>
             Evolution Item Yield: <code>1EV</code><br/>
             Wanderer Yield: <code>0.5EV</code><br/>
+            Base Wanderer Yield: <code>0xEV</code><br/>
             Shopmon Yield: <code>1EV</code><br/>
             Safari Yield: <code>1EV</code><br/>
             Shiny Modifier: <code>5×</code><br/>
             Dungeon Modifier: <code>3×</code><br/>
+            Dungeon Mimic Modifier: <code>10×</code><br/>
             Dungeon Boss Modifier: <code>10×</code><br/>
             Roamer Modifier: <code>50×</code><br/>
             Repeat Ball Modifier: <code>5×</code><br/>
-            Macho Brace Modifier: <code>2×</code><br/>
+            Macho Brace Modifier: <code>1.5×</code><br/>
+            Power Brace Modifier: <code>2×</code><br/>
             Blue Flute Modifier: <code>%</code> based off Achievement Bonus</span></p>
+            <p><strong>Why aren't some of my wanderers getting EVs?</strong><br/>
+            <span class="text-muted">The wanderers that are attracted by any berry (base wanderers) don't get EVs</span></p>
             <p><strong>What is the EV Attack Bonus?</strong><br/>
             <span class="text-muted">The EV Damage Multiplier is multiplicative, and scales linearly until 1.5x (50EVs). The bonus thereafter has diminishing returns relative to the number of EVs gained, but has no limit.</span></p>
 
             <p><strong>What do the Pokérus status filters mean?</strong><br/>
             <span class="text-muted"><code>None</code>: Pokémon that have not been infected with Pokérus.<br/>
-            <span class="text-muted"><img src ='../assets/images/breeding/pokerus/Infected.png'/> <code>Infected</code>: Pokémon has Pokérus, but cannot spread Pokérus or gain EVs until hatching.<br/>
-            <span class="text-muted"><img src ='../assets/images/breeding/pokerus/Contagious.png'/> <code>Contagious</code>: Pokémon with less than 50 EVs.<br/>
-            <span class="text-muted"><img src ='../assets/images/breeding/pokerus/Resistant.png'/> <code>Resistant</code>: Pokémon with 50 or more EVs. These Pokémon will still be able to spread Pokérus.<br/>
+            <span class="text-muted"><img src ='assets/images/breeding/pokerus/Infected.png'/> <code>Infected</code>: Pokémon has Pokérus, but cannot spread Pokérus or gain EVs until hatching.<br/>
+            <span class="text-muted"><img src ='assets/images/breeding/pokerus/Contagious.png'/> <code>Contagious</code>: Pokémon with less than 50 EVs.<br/>
+            <span class="text-muted"><img src ='assets/images/breeding/pokerus/Resistant.png'/> <code>Resistant</code>: Pokémon with 50 or more EVs. These Pokémon will still be able to spread Pokérus.<br/>
 
             <p><h5 class="text-primary"><strong>Development:</strong></h5></p>
             <p><strong>When will the development version be fully released?</strong><br/>
@@ -40924,18 +41036,6 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                     </div>
                                 </div>
                             </div>
-                            <!--Breeding Efficiency Toggle-->
-                            <div class="form-group col-md-3 col-6" style="max-width: 100%; flex-grow: 1">
-                                    <label>Include EV bonus</label>
-                                    <label class="form-check-label toggler-wrapper style-1">
-                                        <input class="form-check-input" type="checkbox" id="breeding-include-ev-bonus"
-                                            data-bind="checked: Settings.getSetting('breedingIncludeEVBonus').observableValue()"
-                                            onchange="Settings.setSettingByName('breedingIncludeEVBonus', this.checked)">
-                                        <div class="toggler-slider">
-                                            <div class="toggler-knob"></div>
-                                        </div>
-                                    </label>
-                            </div>
                         </div>
                     </div>
                     <div>
@@ -40944,7 +41044,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             Unfortunately, you don't have any Pokémon of level 100 to breed.
                         </p>
                         <!-- ko if: App.game.party.hasMaxLevelPokemon() -->
-                        <ul class="row justify-content-center p-0" data-bind="foreach: lazyLoad($element, PartyController.getHatcherySortedList)">
+                        <ul class="row justify-content-center p-0" data-bind="foreach: lazyLoad($element, PartyController.getHatcherySortedList, { reset: modalUtils.observableState.breedingModalObservable })">
                             <li class="eggSlot col-sm-4 col-md-3 col-lg-2 pokedexEntry" data-bind="visible: BreedingController.visible($data), style:{background: PokedexHelper.getBackgroundColors($data.name)}, class: App.game.breeding.hasFreeEggSlot() || App.game.breeding.hasFreeQueueSlot() ? '' : 'disabled'">
                                 <span class="breedingListPokemonName" data-bind="text: $data.displayName">name</span>
                                 <div class="breedingListShiny" data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)">✨</div>
@@ -41644,7 +41744,7 @@ aria-labelledby="pokedexModalLabel">
                 </div>
 
                 <div class="pokemon-list">
-                    <ul class="row justify-content-center p-0" data-bind="foreach: lazyLoad($element, PokedexHelper.filteredList)"
+                    <ul class="row justify-content-center p-0" data-bind="foreach: lazyLoad($element, PokedexHelper.filteredList, { reset: modalUtils.observableState.pokedexModalObservable })"
                         style="max-width: 100%; padding:0; margin:0;">
                         <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry"
                                 data-bind="style:{background: PokedexHelper.getBackgroundColors($data.name)}">
@@ -41973,7 +42073,7 @@ aria-labelledby="pokedexModalLabel">
 </div>
 
 
-<!-- Pokemon Selector Modal-->
+<!-- Vitamin Modal-->
 <div class="modal noselect fade" id="pokemonVitaminModal" tabindex="-1" role="dialog" aria-labelledby="pokemonVitaminModal">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -42050,38 +42150,181 @@ aria-labelledby="pokedexModalLabel">
                     </div>
                 </div>
                 <i data-bind="text: VitaminController.add() ? 'Left click to give, Right click to take' : 'Left/Right click to take'">Left click to give, Right click to take</i>
-                <table class="table table-striped table-hover table-bordered table-sm m-0">
-                    <thead>
-                        <tr class="text-light">
-                            <th class="text-left bg-dark align-middle">Pokémon</th>
-                            <th class="text-center bg-dark align-middle">Vitamins Used</th>
-                            <th class="text-center bg-dark align-middle" data-bind="text: `${GameConstants.VitaminType[VitaminController.currentlySelected()]} Used`">X Used</th>
-                            <th class="text-center bg-dark align-middle">Attack Bonus</th>
-                            <th class="text-center bg-dark align-middle">Egg Steps</th>
-                        </tr>
-                    </thead>
-                    <tbody data-bind="foreach: PartyController.getvitaminSortedList()">
-                        <tr class="clickable" data-bind="
-                            click: () => VitaminController.add() ? $data.useVitamin(VitaminController.currentlySelected(), VitaminController.getMultiplier()) : $data.removeVitamin(VitaminController.currentlySelected(), VitaminController.getMultiplier());,
-                            event: { contextmenu: () => { $data.removeVitamin(VitaminController.currentlySelected(), VitaminController.getMultiplier()); return false; } },
-                            hidden: $data.hideFromProteinList()">
-                            <td class="text-left">
-                                <knockout data-bind="text: $data.displayName"></knockout>
-                                <sup data-bind="visible: $data.shiny">✨</sup>
-                            </td>
-                            <td class="text-center tight" data-bind="text: $data.totalVitaminsUsed().toLocaleString('en-US')">-</td>
-                            <td class="text-center tight" data-bind="text: $data.vitaminsUsed[VitaminController.currentlySelected()]().toLocaleString('en-US')">-</td>
-                            <td class="text-center tight" data-bind="text: $data.getBreedingAttackBonus().toLocaleString('en-US')">-</td>
-                            <td class="text-center tight" data-bind="text: $data.getEggSteps().toLocaleString('en-US')">-</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="table-responsive" style="overflow-y: overlay">
+                    <table class="table table-striped table-hover table-bordered table-sm m-0">
+                        <thead>
+                            <tr class="text-light">
+                                <th class="text-left bg-dark align-middle">Pokémon</th>
+                                <th class="text-center bg-dark align-middle">Vitamins Used</th>
+                                <th class="text-center bg-dark align-middle" data-bind="text: `${GameConstants.VitaminType[VitaminController.currentlySelected()]} Used`">X Used</th>
+                                <th class="text-center bg-dark align-middle">Attack Bonus</th>
+                                <th class="text-center bg-dark align-middle">Egg Steps</th>
+                                <th class="text-center bg-dark align-middle">Breeding Efficiency</th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach: lazyLoad($element, PartyController.getvitaminSortedList, { reset: modalUtils.observableState.pokemonVitaminModalObservable })">
+                            <tr class="clickable" data-bind="
+                                click: () => VitaminController.add() ? $data.useVitamin(VitaminController.currentlySelected(), VitaminController.getMultiplier()) : $data.removeVitamin(VitaminController.currentlySelected(), VitaminController.getMultiplier());,
+                                event: { contextmenu: () => { $data.removeVitamin(VitaminController.currentlySelected(), VitaminController.getMultiplier()); return false; } },
+                                hidden: $data.hideFromProteinList()">
+                                <td class="text-left">
+                                    <knockout data-bind="text: $data.displayName"></knockout>
+                                    <sup data-bind="visible: $data.shiny">✨</sup>
+                                </td>
+                                <td class="text-center tight" data-bind="text: $data.totalVitaminsUsed().toLocaleString('en-US')">-</td>
+                                <td class="text-center tight" data-bind="text: $data.vitaminsUsed[VitaminController.currentlySelected()]().toLocaleString('en-US')">-</td>
+                                <td class="text-center tight" data-bind="text: $data.getBreedingAttackBonus().toLocaleString('en-US')">-</td>
+                                <td class="text-center tight" data-bind="text: $data.getEggSteps().toLocaleString('en-US')">-</td>
+                                <td class="text-center tight" data-bind="text: $data.breedingEfficiency().toLocaleString('en-US', { maximumSignificantDigits: 2 })">-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <!-- /ko -->
             <span class="bg-dark text-light text-right align-right p-1" data-bind="text:`Showing ${PartyController.getvitaminSortedList().filter(p => !p.hideFromProteinList()).length.toLocaleString('en-US')} Pokémon`"></span>
         </div>
     </div>
 </div>
+
+<!-- Expanded Vitamin Modal -->
+<div class="modal noselect fade" id="pokemonVitaminExpandedModal" tabindex="-1" role="dialog" aria-labelledby="pokemonVitaminExpandedModal">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <!-- ko if: modalUtils.observableState['pokemonVitaminExpandedModal'] === 'show' -->
+            <div class="modal-header bg-dark text-light" style='justify-content: space-around;'>
+                <h5 class="modal-title text-light">Vitamins</h5>&nbsp; <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body p-0">
+                <div class="sticky-top bg-dark text-light pt-2">
+                    <!-- ko if: App.game.challenges.list.disableVitamins.active() -->
+                    <span class="btn btn-block btn-danger btn-static m-0">Vitamins are disabled.</span>
+                    <!-- /ko -->
+                    <div class="form-row m-0" id="protein-filter">
+                        <div class="form-group col-6 col-lg-4 m-0 p-0">
+                            <label for="protein-search">Search</label>
+                            <input id="protein-search" autocomplete="off" class="form-control" placeholder="Search here" data-bind="textInput: Settings.getSetting('vitaminSearchFilter').observableValue" />
+                        </div>
+                        <div class="form-group col-6 col-lg-2 m-0 p-0">
+                            <label for="protein-region-filter">Region</label>
+                            <select id="protein-region-filter" name="vitaminRegionFilter" autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, +this.value)">
+                                <!-- ko foreach: Settings.getSetting('vitaminRegionFilter').options.filter(r => r.value <= player.highestRegion()) -->
+                                <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('vitaminRegionFilter').value === $data.value }, text: $data.text">Region</option>
+                                <!-- /ko -->
+                            </select>
+                        </div>
+                        <div class="form-group col-6 col-lg-2 m-0 p-0">
+                            <label for="protein-type-filter">Type</label>
+                            <select id="protein-type-filter" name="vitaminTypeFilter" autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, +this.value)">
+                                <!-- ko foreach: Settings.getSetting('vitaminTypeFilter').options -->
+                                <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('vitaminTypeFilter').value === $data.value }, text: $data.text">Type</option>
+                                <!-- /ko -->
+                            </select>
+                        </div>
+                        <div class="form-group col-6 col-lg-4 m-0 p-0">
+                            <label>Order</label>
+                            <div class="input-group" data-bind="with: Settings.getSetting('vitaminSort')">
+                                <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])" data-bind="foreach: $data.options, attr: {name}, selectedOptions: [$data.observableValue()]">
+                                    <option data-bind="text: $data.text, value: $data.value"></option>
+                                </select>
+                                <div class="input-group-append bg-primary text-light">
+                                    <label for="vitaminSortDirection" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;" data-bind="
+                                    text: Settings.getSetting('vitaminSortDirection').observableValue() ? '⥄' : '⥂',
+                                    tooltip: { title: Settings.getSetting('vitaminSortDirection').observableValue() ? 'Descending (highest value first)' : 'Ascending (lowest value first)', trigger: 'hover', placement:'top' }
+                                    ">⥂</label>
+                                    <input id="vitaminSortDirection" style="vertical-align: middle" class="hidden" type="checkbox" data-bind="checked: Settings.getSetting('vitaminSortDirection').observableValue()" onchange="Settings.setSettingByName('vitaminSortDirection', this.checked)" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row m-0 mt-1 align-items-center">
+                        <div class="col-12 col-lg-8 text-center text-lg-left">
+                            <div class="form-check form-check-inline align-middle">
+                                <input type="checkbox" id="hide-max-protein-pokemons" class="form-check-input" data-bind="checked: Settings.getSetting('vitaminHideMaxedPokemon').observableValue()" onchange="Settings.setSettingByName('vitaminHideMaxedPokemon', this.checked)" />
+                                <label for="hide-max-protein-pokemons" class="form-check-label">Hide Pokémon with max vitamins</label>
+                            </div>
+                            <div class="form-check form-check-inline align-middle">
+                                <input type="checkbox" id="hide-shiny-pokemons" class="form-check-input" data-bind="checked: Settings.getSetting('vitaminHideShinyPokemon').observableValue()" onchange="Settings.setSettingByName('vitaminHideShinyPokemon', this.checked)" />
+                                <label for="hide-shiny-pokemons" class="form-check-label">Hide shiny Pokémon</label>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-4 text-center text-lg-right p-0">
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <!-- ko foreach: VitaminController.multiplier -->
+                                <label class="btn btn-secondary" data-bind="css: { active: VitaminController.multiplierIndex() == $index() }">
+                                    <input type="radio" name="vitaminAmount"
+                                        data-bind="value: $index(), checked: VitaminController.multiplierIndex()"
+                                        onchange="VitaminController.multiplierIndex(+this.value)">
+                                    <knockout data-bind="text: $data"></knockout>
+                                </label>
+                                <!-- /ko -->
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"></button>
+                                    <div class="dropdown-menu">
+                                        <!-- ko foreach: GameHelper.enumNumbers(GameConstants.VitaminType) -->
+                                        <a class="dropdown-item" href="#" data-bind="text: `Remove All ${GameConstants.VitaminType[$data]}`, click: () => { PartyController.removeVitaminFromParty($data) }"></a>
+                                        <!-- /ko -->
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#" data-bind="click: () => { PartyController.removeAllVitaminsFromParty() }">Remove ALL Vitamins</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive" style="overflow-y: overlay">
+                    <table class="table table-striped table-hover table-bordered table-sm m-0 mt-1">
+                        <thead>
+                            <tr>
+                                <th class="align-middle">Pokémon</th>
+                                <th class="text-center align-middle">Vitamins Used</th>
+                                <!-- ko foreach: GameHelper.enumStrings(GameConstants.VitaminType) -->
+                                <th class="text-center align-middle">
+                                    <span data-bind="text: $data"></span><br />
+                                    <span class="font-weight-normal small" data-bind="text: `[ ${player._itemList[$data]().toLocaleString('en-US')} ]`"></span>
+                                </th>
+                                <!-- /ko -->
+                                <th class="text-center align-middle">Breeding Efficiency</th>
+                                <th class="text-center align-middle">Attack Bonus</th>
+                                <th class="text-center align-middle">Egg Steps</th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach: lazyLoad($element, PartyController.getvitaminSortedList, { reset: modalUtils.observableState.pokemonVitaminExpandedModalObservable })">
+                            <tr data-bind="hidden: $data.hideFromProteinList()">
+                                <td class="text-left align-middle">
+                                    <knockout data-bind="text: $data.displayName"></knockout>
+                                    <sup data-bind="visible: $data.shiny">✨</sup>
+                                </td>
+                                <td class="text-center align-middle tight" data-bind="text: $data.totalVitaminsUsed().toLocaleString('en-US')"></td>
+                                <!-- ko foreach: GameHelper.enumNumbers(GameConstants.VitaminType) -->
+                                <td class="text-center align-middle tight">
+                                    <button type="button" class="btn btn-link btn-sm text-decoration-none align-text-top" style="line-height: 0.6; font-size: 1rem;"
+                                        data-bind="
+                                            click: () => { $parent.removeVitamin($data, VitaminController.getMultiplier()) },
+                                            class: ($parent.vitaminsUsed[$data]() > 0 ? 'text-success' : 'text-muted')">-</button>
+                                    <knockout class="align-middle d-inline-block" style="width: .875rem;" data-bind="text: $parent.vitaminsUsed[$data]().toLocaleString('en-US')">0</knockout>
+                                    <button type="button" class="btn btn-link btn-sm text-decoration-none align-text-top" style="line-height: 0.6; font-size: 1rem;"
+                                        data-bind="
+                                            click: () => { $parent.useVitamin($data, VitaminController.getMultiplier()) },
+                                            class: ($parent.vitaminUsesRemaining() && player.itemList[GameConstants.VitaminType[$data]]() ? 'text-success' : 'text-muted')">+</button>
+                                </td>
+                                <!-- /ko -->
+                                <td class="text-center align-middle tight" data-bind="text: SortOptionConfigs[SortOptions.breedingEfficiency].getValue($data).toLocaleString('en-US', { maximumSignificantDigits: 2 })">-</td>
+                                <td class="text-center align-middle tight" data-bind="text: $data.getBreedingAttackBonus().toLocaleString('en-US')">-</td>
+                                <td class="text-center align-middle tight" data-bind="text: $data.getEggSteps().toLocaleString('en-US')">-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- /ko -->
+        </div>
+    </div>
+</div>
+
 
 <!-- Badge Case Modal-->
 <div class="modal fade noselect" id="badgeCaseModal" tabindex="-1" role="dialog"
@@ -43728,6 +43971,10 @@ aria-labelledby="bulletinBoardModalLabel" aria-hidden="true">
                               onchange="Settings.setSettingByName('heldItemSortDirection', this.checked)"/>
                       </div>
                   </div>
+                  <div class="form-check form-check-inline align-middle">
+                    <input type="checkbox" id="hide-holding-item-pokemon" class="form-check-input" data-bind="checked: Settings.getSetting('heldItemHideHoldingPokemon').observableValue()" onchange="Settings.setSettingByName('heldItemHideHoldingPokemon', this.checked)" />
+                    <label for="hide-holding-item-pokemon" class="form-check-label">Hide Pokémon holding an item</label>
+                  </div>
                   <div class="form-group mb-1">
                     <input id="heldItemSearch" autocomplete="off" class="form-control" placeholder="Search"
                         data-bind="textInput: Settings.getSetting('heldItemSearchFilter').observableValue"
@@ -43845,8 +44092,42 @@ aria-labelledby="dreamOrbsModalLabel">
                 (App.game.dreamOrbController.opening() ? '_animated' : '') +
                 '.png')
             }" height = "120px'"/>
-            <div><button class="btn btn-primary" onclick="App.game.dreamOrbController.open()">Open</button></div>
+            <div>
+                <div class="btn-group">
+                    <button class="btn btn-primary" onclick="App.game.dreamOrbController.open()">Open</button>
+                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split active" data-bind="text: App.game.dreamOrbController.amountSelected().toLocaleString('en-US') + '&nbsp;'" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    </button>
+                    <div class="dropdown-menu" data-bind="foreach: [1, 10, 100, 1000, Infinity]">
+                        <button class="dropdown-item" type="button" data-bind="click: function(){App.game.dreamOrbController.amountSelected($data)}, text: $data.toLocaleString('en-US')"></button>
+                    </div>
+                </div>
+            </div>
             <div>Orbs left: <span data-bind="text: App.game.dreamOrbController.selectedOrb().amount().toLocaleString('en-US')"></span></div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<!-- Dream Orbs Opened Modal -->
+<div class="modal fade noselect" id="dreamOrbsOpenedModal" tabindex="-1" role="dialog" aria-labelledby="dreamOrbsOpenedModalLabel">
+<div class="modal-dialog modal-dialog-scrollable modal-sm" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Dream Orbs Opened</h5>
+        </div>
+        <div class="modal-body">
+            <p data-bind="text: `You opened ${App.game.dreamOrbController.amountOpened().toLocaleString('en-US')} ${App.game.dreamOrbController.selectedOrb().color} Dream Orbs and received:`"></p>
+            <div data-bind="foreach: App.game.dreamOrbController.itemsReceived">
+                <div>
+                    <span data-bind="text: $data.amount.toLocaleString('en-US')"></span>
+                    <img data-bind="attr: { src: BagHandler.image($data.item) }" height="32px" />
+                    <span data-bind="text: $data.name"></span>
+                </div>
+            </div>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
