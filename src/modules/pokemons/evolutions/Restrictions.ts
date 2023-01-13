@@ -12,6 +12,7 @@ import WeatherRequirement from '../../requirements/WeatherRequirement';
 import WeatherType from '../../weather/WeatherType';
 import MegaEvolveRequirement from '../../requirements/MegaEvolveRequirement';
 import { EvoData, restrict } from './Base';
+import DayCyclePart from '../../dayCycle/DayCyclePart';
 
 export type EvoFn = (...args: unknown[]) => EvoData;
 
@@ -89,21 +90,21 @@ export const weatherRestrict = <T extends EvoFn>(evo: T) => (
 );
 
 export const timeRestrict = <T extends EvoFn>(evo: T) => (
-    startHour: number,
-    endHour: number,
+    dayCyclePart: DayCyclePart,
+    strictDayCycleParts: boolean = true,
     ...rest: Parameters<T>
 ) => restrict(
     evo(...rest),
-    new TimeRequirement(startHour, endHour),
+    new TimeRequirement(dayCyclePart, strictDayCycleParts),
 );
 
 export const dayRestrict = <T extends EvoFn>(evo: T) => (
     ...rest: Parameters<T>
-) => timeRestrict(evo)(6, 18, ...rest);
+) => timeRestrict(evo)(DayCyclePart.Day, false, ...rest);
 
 export const nightRestrict = <T extends EvoFn>(evo: T) => (
     ...rest: Parameters<T>
-) => timeRestrict(evo)(18, 6, ...rest);
+) => timeRestrict(evo)(DayCyclePart.Night, true, ...rest);
 
 export const megaEvolveRestrict = <T extends EvoFn>(evo: T) => (
     ...rest: Parameters<T>

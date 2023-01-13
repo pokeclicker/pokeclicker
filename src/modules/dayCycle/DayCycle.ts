@@ -2,17 +2,18 @@
 import { Computed } from 'knockout';
 import DayCycleMoment from './DayCycleMoment';
 import DayCyclePart from './DayCyclePart';
+import { DayCycleStartHours } from '../GameConstants';
 
 export default class DayCycle {
     public static currentDayCyclePart: Computed<DayCyclePart> = ko.pureComputed(() => {
         const curHour = (new Date()).getHours();
         let dayCyclePart: DayCyclePart;
 
-        if (curHour === 17) {
+        if (curHour === DayCycleStartHours.dusk) {
             dayCyclePart = DayCyclePart.Dusk;
-        } else if (curHour === 6) {
+        } else if (curHour === DayCycleStartHours.dusk) {
             dayCyclePart = DayCyclePart.Dawn;
-        } else if (curHour > 6 && curHour < 17) {
+        } else if (curHour > DayCycleStartHours.dawn && curHour < DayCycleStartHours.dusk) {
             dayCyclePart = DayCyclePart.Day;
         } else {
             dayCyclePart = DayCyclePart.Night;

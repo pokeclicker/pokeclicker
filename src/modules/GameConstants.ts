@@ -1805,3 +1805,7 @@ export enum ExtraAchievementCategories {
     sevii,
     magikarpJump,
 }
+export enum DayCycleStartHours {
+    dawn = 6,
+    dusk = 17,
+}

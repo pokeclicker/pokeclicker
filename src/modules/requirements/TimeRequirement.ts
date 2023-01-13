@@ -1,10 +1,12 @@
 import { AchievementOption } from '../GameConstants';
 import GameHelper from '../GameHelper';
 import Requirement from './Requirement';
+import DayCyclePart from '../dayCycle/DayCyclePart';
+import DayCycle from '../dayCycle/DayCycle';
 
 export default class TimeRequirement extends Requirement {
     private updateTrigger = ko.observable(0);
-    constructor(public startHour: number, public endHour: number, option = AchievementOption.more) {
+    constructor(public dayCyclePart: DayCyclePart, public strictDayCycleParts: boolean = false, option = AchievementOption.more) {
         super(1, option);
         setInterval(
             () => GameHelper.incrementObservable(this.updateTrigger),
@@ -15,19 +17,14 @@ export default class TimeRequirement extends Requirement {
     public getProgress() {
         this.updateTrigger();
 
-        const [startHour, endHour] = [this.startHour, this.endHour];
-        const currentHour = new Date().getHours();
+        if (!this.strictDayCycleParts && this.dayCyclePart === DayCyclePart.Day) {
+            return Number([DayCyclePart.Dawn, DayCyclePart.Day, DayCyclePart.Dusk].includes(DayCycle.currentDayCyclePart()));
+        }
 
-        const satisfied = startHour < endHour
-            // If the start time is before the end time, both need to be true
-            ? currentHour >= startHour && currentHour < endHour
-            // If the start time is after the end time, only 1 needs to be true
-            : currentHour >= startHour || currentHour < endHour;
-
-        return Number(satisfied);
+        return Number(this.dayCyclePart === DayCycle.currentDayCyclePart());
     }
 
     public hint(): string {
-        return `Your local time must be between ${this.startHour}:00 and ${this.endHour}:00`;
+        return `Your local part of the day must be ${DayCycle.dayCycleMoments[this.dayCyclePart].tooltip}`;
     }
 }

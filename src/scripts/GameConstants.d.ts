@@ -677,4 +677,8 @@ namespace GameConstants {
         sevii,
         magikarpJump
     }
+    declare enum DayCycleStartHours {
+        dawn = 6,
+        dusk = 17,
+    }
 }
