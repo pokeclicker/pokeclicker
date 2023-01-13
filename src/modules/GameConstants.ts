@@ -361,13 +361,13 @@ export enum Currency {
 }
 
 export enum CurrencyRate {
-    money = 200000.0,
-    questPoint = 60.0,
-    dungeonToken = 15000.0,
-    diamond = 1.0,
-    farmPoint = 60.0,
-    battlePoint = 10.0,
-//    contestToken = 60.0,
+    money = 200000,
+    questPoint = 60,
+    dungeonToken = 15000,
+    diamond = 1,
+    farmPoint = 60,
+    battlePoint = 10,
+//    contestToken = 60,
 }
 
 export enum TypeEffectiveness {
