@@ -137,7 +137,7 @@ class GameController {
 
             // Set our number key if defined (-1 for 0 indexed)
             const numberKey = (+key) - 1;
-            const isNumberKey = !isNaN(numberKey);
+            const isNumberKey = !isNaN(numberKey) && numberKey >= 0;
 
             const visibleModals = $('.modal:visible').length;
 
