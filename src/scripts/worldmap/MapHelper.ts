@@ -129,6 +129,10 @@ class MapHelper {
     }
 
     public static calculateTownCssClass(townName: string): string {
+        // We don't want to spoil easter eggs with map colors
+        if (TownList[townName]?.ignoreAreaStatus) {
+            return '';
+        }
         // Check if this location is locked
         if (!MapHelper.accessToTown(townName)) {
             return areaStatus[areaStatus.locked];
@@ -185,6 +189,7 @@ class MapHelper {
             Battle.catching(false);
             const town = TownList[townName];
             player.town(town);
+            player._subregion(town.subRegion);
             Battle.enemyPokemon(null);
             //this should happen last, so all the values all set beforehand
             App.game.gameState = GameConstants.GameState.town;

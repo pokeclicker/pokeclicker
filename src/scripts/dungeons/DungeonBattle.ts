@@ -131,7 +131,7 @@ class DungeonBattle extends Battle {
             const enemyPokemon = PokemonFactory.generateDungeonPokemon(pokemon, DungeonRunner.chestsOpened(), DungeonRunner.dungeon.baseHealth, DungeonRunner.dungeonLevel());
             this.enemyPokemon(enemyPokemon);
 
-            PokemonHelper.incrementPokemonStatistics(enemyPokemon.id, GameConstants.PokemonStatiticsType.Encountered, enemyPokemon.shiny, enemyPokemon.gender);
+            PokemonHelper.incrementPokemonStatistics(enemyPokemon.id, GameConstants.PokemonStatisticsType.Encountered, enemyPokemon.shiny, enemyPokemon.gender);
             // Shiny
             if (enemyPokemon.shiny) {
                 App.game.logbook.newLog(
@@ -173,7 +173,7 @@ class DungeonBattle extends Battle {
         const enemyPokemon = PokemonFactory.generateDungeonPokemon(pokemon
             , DungeonRunner.chestsOpened(), DungeonRunner.dungeon.baseHealth * 2, DungeonRunner.dungeonLevel(), true);
         this.enemyPokemon(enemyPokemon);
-        PokemonHelper.incrementPokemonStatistics(enemyPokemon.id, GameConstants.PokemonStatiticsType.Encountered, enemyPokemon.shiny, enemyPokemon.gender);
+        PokemonHelper.incrementPokemonStatistics(enemyPokemon.id, GameConstants.PokemonStatisticsType.Encountered, enemyPokemon.shiny, enemyPokemon.gender);
         // Shiny
         if (enemyPokemon.shiny) {
             App.game.logbook.newLog(
@@ -224,7 +224,7 @@ class DungeonBattle extends Battle {
         // Pokemon
         if (enemy instanceof DungeonBossPokemon) {
             this.enemyPokemon(PokemonFactory.generateDungeonBoss(enemy, DungeonRunner.chestsOpened()));
-            PokemonHelper.incrementPokemonStatistics(this.enemyPokemon().id, GameConstants.PokemonStatiticsType.Encountered, this.enemyPokemon().shiny, this.enemyPokemon().gender);
+            PokemonHelper.incrementPokemonStatistics(this.enemyPokemon().id, GameConstants.PokemonStatisticsType.Encountered, this.enemyPokemon().shiny, this.enemyPokemon().gender);
             // Shiny
             if (this.enemyPokemon().shiny) {
                 App.game.logbook.newLog(
