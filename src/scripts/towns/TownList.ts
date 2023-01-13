@@ -1980,7 +1980,7 @@ const SlateportHoennRoamerNPC = new RoamerNPC('Reporter Gabby', [
 ], GameConstants.Region.hoenn, RoamingPokemonList.findGroup(GameConstants.Region.hoenn, GameConstants.HoennSubRegions.Hoenn), 'assets/images/npcs/Reporter.png');
 
 const SkepticalFisherman = new NPC('Skeptical Fisherman', [
-    'There\'s some salesman offering rare fish out at the intersection of Route 118 and Route 119.',
+    'There\'s some salesman offering rare fish east of New Mauville, out on the water.',
     'I\'m a bit skeptical of his wares, especially since his shop isn\'t on any maps.',
 ], {image: 'assets/images/trainers/Fisherman.png'});
 
@@ -2300,8 +2300,8 @@ TownList['Lavaridge Town'] = new Town(
         npcs: [MillenniumFest, Butler1],
     }
 );
-TownList['Roadside Stand'] = new Town(
-    'Roadside Stand',
+TownList['Fish Shop'] = new Town(
+    'Fish Shop',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
     [RoadsideStandShop],
@@ -4102,7 +4102,7 @@ const CoumarineBirdwatcher = new NPC('Birdwatcher', [
 const CoumarineElectricTrainer = new NPC('Electric Trainer', [
     'My Ampharos has gotten a boost since a friendly soul gave me an Ampharosite!',
     'Luckily my Ampharos was already strong enough to use it!',
-    'If you find that fella, tell him the code <b>ELECTRIC-GIRAFFE</b> and he might help you too!',
+    'If you find that fella, tell him the code <b>DO-MAGEARNA-DREAM-OF-MAREEP?</b> and he might help you too!',
 ]);
 
 const LaverreFurisodeGirlKatherine = new NPC('Furisode Girl Katherine', [
