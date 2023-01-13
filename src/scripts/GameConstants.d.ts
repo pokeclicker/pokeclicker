@@ -194,15 +194,15 @@ namespace GameConstants {
         battlePoint,
         contestToken,
     }
-    declare enum CurrencyRate {
-        money = 200000,
-        questPoint = 60,
-        dungeonToken = 15000,
-        diamond = 1,
-        farmPoint = 60,
-        battlePoint = 10,
-//        contestToken = 60,
-    }
+    declare const LuxuryBallCurrencyRate: Record<Currency, number> = {
+        [Currency.money]: 200000,
+        [Currency.questPoint]: 60,
+        [Currency.dungeonToken]: 15000,
+        [Currency.diamond]: 1,
+        [Currency.farmPoint]: 60,
+        [Currency.battlePoint]: 10,
+        [Currency.contestToken]: 60,
+    };
     declare enum TypeEffectiveness {
         Immune,
         NotVery,

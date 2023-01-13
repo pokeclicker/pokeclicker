@@ -186,47 +186,30 @@ class Battle {
     }
 
     protected static gainTokens(route: number, region: GameConstants.Region) {
-        let currencyKinds = 1;
+        let currencyKinds = [GameConstants.Currency.dungeonToken];
         if (this.pokeball() === GameConstants.Pokeball.Luxuryball) {
-            //currencyKinds = 7; //includes contest tokens
-            currencyKinds = 6;
+            //currencyKinds = [
+            //  GameConstants.Currency.dungeonToken,
+            //  GameConstants.Currency.money,
+            //  GameConstants.Currency.questPoint,
+            //  GameConstants.Currency.diamond,
+            //  GameConstants.Currency.farmPoint,
+            //  GameConstants.Currency.battlePoint,
+            //  GameConstants.Currency.contestToken,
+            //];
+            currencyKinds = [
+                GameConstants.Currency.dungeonToken,
+                GameConstants.Currency.money,
+                GameConstants.Currency.questPoint,
+                GameConstants.Currency.diamond,
+                GameConstants.Currency.farmPoint,
+                GameConstants.Currency.battlePoint,
+            ];
         }
         const currencyUnits = PokemonFactory.routeDungeonTokens(route, region)
-                                / GameConstants.CurrencyRate.dungeonToken;
-        switch (Math.floor(Math.random() * currencyKinds)) {
-            case 0:
-                App.game.wallet.gainDungeonTokens(Math.ceil(currencyUnits
-                                * GameConstants.CurrencyRate.dungeonToken));
-                break;
-            case 1:
-                App.game.wallet.gainMoney(Math.ceil(currencyUnits
-                                * GameConstants.CurrencyRate.money));
-                break;
-            case 2:
-                App.game.wallet.gainQuestPoints(Math.ceil(currencyUnits
-                                * GameConstants.CurrencyRate.questPoint));
-                break;
-            case 3:
-                App.game.wallet.gainDiamonds(Math.ceil(currencyUnits
-                                * GameConstants.CurrencyRate.diamond));
-                break;
-            case 4:
-                App.game.wallet.gainFarmPoints(Math.ceil(currencyUnits
-                                * GameConstants.CurrencyRate.farmPoint));
-                break;
-            case 5:
-                App.game.wallet.gainBattlePoints(Math.ceil(currencyUnits
-                                * GameConstants.CurrencyRate.battlePoint));
-                break;
-            //case 6:
-            //    App.game.wallet.gainContestTokens(Math.ceil(currencyUnits
-            //                    * GameConstants.CurrencyRate.contestToken));
-            //    break;
-            default:
-                console.error('Currency kind out of range, giving dungeon tokens instead');
-                App.game.wallet.gainDungeonTokens(Math.ceil(currencyUnits
-                                * GameConstants.CurrencyRate.dungeonToken));
-        }
+                                / GameConstants.LuxuryBallCurrencyRate[GameConstants.Currency.dungeonToken];
+        const chosenCurrency = currencyKinds[Math.floor(Math.random() * currencyKinds.length)];
+        App.game.wallet.addAmount(new Amount(Math.ceil(currencyUnits * GameConstants.LuxuryBallCurrencyRate[chosenCurrency]), chosenCurrency), false);
     }
 
     static gainItem() {
