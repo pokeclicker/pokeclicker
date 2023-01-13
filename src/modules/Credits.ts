@@ -209,6 +209,7 @@ export const SpriteCredits: Credit[] = [
             'Clown Jessie & James',
             'Cracked pot big icon',
             'Danny',
+            'Day cycle images',
             'Dr. Splash',
             'Dracovish shop image',
             'Dracozolt shop image',
