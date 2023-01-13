@@ -1,12 +1,12 @@
 class PokemonItem extends CaughtIndicatingItem {
 
     type: PokemonNameType;
-    private _translatedName: KnockoutObservable<string>;
+    private _translatedOrDisplayName: KnockoutObservable<string>;
 
-    constructor(pokemon: PokemonNameType, basePrice: number, currency: GameConstants.Currency = GameConstants.Currency.questPoint, public ignoreEV = false) {
+    constructor(pokemon: PokemonNameType, basePrice: number, currency: GameConstants.Currency = GameConstants.Currency.questPoint, public ignoreEV = false, displayName: string = undefined) {
         super(pokemon, basePrice, currency, undefined, undefined, `Add ${pokemon} to your party.`, 'pokemonItem');
         this.type = pokemon;
-        this._translatedName = PokemonHelper.displayName(pokemon);
+        this._translatedOrDisplayName = displayName ?? PokemonHelper.displayName(pokemon);
     }
 
     gain(amt: number) {
@@ -66,7 +66,7 @@ class PokemonItem extends CaughtIndicatingItem {
     }
 
     get displayName(): string {
-        return this._translatedName();
+        return this._translatedOrDisplayName();
     }
 }
 
@@ -107,7 +107,7 @@ ItemList.Poipole              = new PokemonItem('Poipole', 90000);
 ItemList['Magikarp Brown Stripes'] = new PokemonItem('Magikarp Brown Stripes', 100);
 ItemList['Magikarp Blue Raindrops'] = new PokemonItem('Magikarp Blue Raindrops', 10000, Currency.diamond);
 ItemList['Magikarp Saucy Violet'] = new PokemonItem('Magikarp Saucy Violet', 7500000000, Currency.money);
-ItemList['Probably Feebas'] = new PokemonItem('Magikarp (Feebas)', 5999, Currency.battlePoint);
+ItemList['Probably Feebas'] = new PokemonItem('Magikarp (Feebas)', 5999, Currency.battlePoint, false, 'Probably Feebas');
 ItemList.Dracozolt              = new PokemonItem('Dracozolt', 100000);
 ItemList.Arctozolt              = new PokemonItem('Arctozolt', 100000);
 ItemList.Dracovish              = new PokemonItem('Dracovish', 100000);
