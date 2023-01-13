@@ -136,7 +136,7 @@ export const pokemonList = createPokemonArray(
         'id': 1.02,
         'name': 'Spooky Bulbasaur',
         'catchRate': 25,
-        'type': [PokemonType.Grass],
+        'type': [PokemonType.Grass, PokemonType.Dark],
         'levelType': LevelType.mediumslow,
         'exp': 64,
         'eggCycles': 20,
@@ -220,7 +220,7 @@ export const pokemonList = createPokemonArray(
         'id': 2.02,
         'name': 'Spooky Ivysaur',
         'catchRate': 45,
-        'type': [PokemonType.Grass],
+        'type': [PokemonType.Grass, PokemonType.Dark],
         'levelType': LevelType.mediumslow,
         'exp': 142,
         'eggCycles': 20,
@@ -4110,6 +4110,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 80,
             'speed': 45,
         },
+        'heldItem': { type: ItemType.item, id: 'Thick_Club' },
     },
     {
         'id': 105.02,
@@ -5788,7 +5789,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 180,
         'eggCycles': 35,
-        // 'evolutions': [MegaEvolution('Aerodactyl', 'Mega Aerodactyl')],
+        'evolutions': [MegaEvolution('Aerodactyl', 'Mega Aerodactyl')],
         'base': {
             'hitpoints': 80,
             'attack': 105,
@@ -6730,7 +6731,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 142,
         'eggCycles': 10,
-        'evolutions': [StoneEvolution('Spooky Togetic', 'Spooky Togekiss', StoneType.Shiny_stone)],
+        'evolutions': [StoneEvolution('Spooky Togetic', 'Spooky Togekiss', StoneType.Dusk_stone)],
         'base': {
             'hitpoints': 55,
             'attack': 40,
@@ -6825,7 +6826,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 230,
         'eggCycles': 20,
-        // 'evolutions': [MegaEvolution('Ampharos', 'Mega Ampharos')],
+        'evolutions': [MegaEvolution('Ampharos', 'Mega Ampharos')],
         'base': {
             'hitpoints': 90,
             'attack': 75,
@@ -10044,7 +10045,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 133,
         'catchRate': 45,
-        // 'evolutions': [MegaEvolution('Sableye', 'Mega Sableye')],
+        'evolutions': [MegaEvolution('Sableye', 'Mega Sableye')],
         'base': {
             'hitpoints': 50,
             'attack': 75,
@@ -10079,7 +10080,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 133,
         'catchRate': 45,
-        // 'evolutions': [MegaEvolution('Mawile', 'Mega Mawile')],
+        'evolutions': [MegaEvolution('Mawile', 'Mega Mawile')],
         'base': {
             'hitpoints': 50,
             'attack': 85,
