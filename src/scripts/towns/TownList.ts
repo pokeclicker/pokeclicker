@@ -4102,7 +4102,7 @@ const CoumarineBirdwatcher = new NPC('Birdwatcher', [
 const CoumarineElectricTrainer = new NPC('Electric Trainer', [
     'My Ampharos has gotten a boost since a friendly soul gave me an Ampharosite!',
     'Luckily my Ampharos was already strong enough to use it!',
-    'If you find that fella, tell him the code <b>DO-MAGEARNA-DREAM-OF-ELECTRIC-SHEEP?</b> and he might help you too!',
+    'If you find that fella, tell him the code <b>DO-MAGEARNA-DREAM-OF-MAREEP?</b> and he might help you too!',
 ]);
 
 const LaverreFurisodeGirlKatherine = new NPC('Furisode Girl Katherine', [

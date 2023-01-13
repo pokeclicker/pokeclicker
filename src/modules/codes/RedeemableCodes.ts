@@ -69,7 +69,7 @@ export default class RedeemableCodes implements Saveable {
                     timeout: 1e4,
                 });
             }, new MaxRegionRequirement(Region.johto)),
-            new RedeemableCode('ampharosite', -301490595, false, () => {
+            new RedeemableCode('ampharosite', -512934122, false, () => {
                 // Give the player Mega Ampharos
                 App.game.party.getPokemonByName('Ampharos').giveMegastone(true);
                 // Notify that the code was activated successfully
