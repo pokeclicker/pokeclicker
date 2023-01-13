@@ -195,9 +195,9 @@ namespace GameConstants {
         contestToken,
     }
     declare enum CurrencyRate {
-        money = 200_000.0,
+        money = 200000.0,
         questPoint = 60.0,
-        dungeonToken = 15_000.0,
+        dungeonToken = 15000.0,
         diamond = 1.0,
         farmPoint = 60.0,
         battlePoint = 10.0,
