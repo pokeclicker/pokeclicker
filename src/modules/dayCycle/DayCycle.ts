@@ -11,7 +11,7 @@ export default class DayCycle {
 
         if (curHour === DayCycleStartHours.dusk) {
             dayCyclePart = DayCyclePart.Dusk;
-        } else if (curHour === DayCycleStartHours.dusk) {
+        } else if (curHour === DayCycleStartHours.dawn) {
             dayCyclePart = DayCyclePart.Dawn;
         } else if (curHour > DayCycleStartHours.dawn && curHour < DayCycleStartHours.dusk) {
             dayCyclePart = DayCyclePart.Day;
