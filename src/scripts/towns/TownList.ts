@@ -1959,6 +1959,16 @@ const HoennBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations[
     ItemList.HatcheryHelperCameron,
 ]);
 
+//Hoenn Contest Shop
+const HoennContestShop = new Shop([
+    ItemList['Dugtrio (Punk)'],
+    ItemList['Gengar (Punk)'],
+    ItemList['Goldeen (Diva)'],
+    ItemList['Onix (Rocker)'],
+    ItemList['Tangela (Pom-pom)'],
+    ItemList['Weepinbell (Fancy)'],
+], 'Contest Shop');
+
 //Hoenn Flute Master
 const HoennFluteMaster = new GemMasterShop();
 
@@ -2327,7 +2337,7 @@ TownList['Lilycove City'] = new Town(
     'Lilycove City',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [DepartmentStoreShop],
+    [DepartmentStoreShop, HoennContestShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 121)],
     }
