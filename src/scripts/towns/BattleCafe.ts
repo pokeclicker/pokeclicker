@@ -78,17 +78,7 @@ class BattleCafeController {
         }
         if (DayCycle.currentDayCyclePart() === DayCyclePart.Dusk && !clockwise && spinTime > 10) {
             spin = GameConstants.AlcremieSpins.at5Above10;
-        } else if ([DayCyclePart.Dawn, DayCyclePart.Day].includes(DayCycle.currentDayCyclePart())) { // Is day
-            if (clockwise && spinTime < 5) {
-                spin = GameConstants.AlcremieSpins.dayClockwiseBelow5;
-            } else if (clockwise && spinTime >= 5) {
-                spin = GameConstants.AlcremieSpins.dayClockwiseAbove5;
-            } else if (!clockwise && spinTime < 5) {
-                spin = GameConstants.AlcremieSpins.dayCounterclockwiseBelow5;
-            } else if (!clockwise && spinTime >= 5) {
-                spin = GameConstants.AlcremieSpins.dayCounterclockwiseAbove5;
-            }
-        } else { // Is night
+        } else if (DayCycle.currentDayCyclePart() === DayCyclePart.Night) {
             if (clockwise && spinTime < 5) {
                 spin = GameConstants.AlcremieSpins.nightClockwiseBelow5;
             } else if (clockwise && spinTime >= 5) {
@@ -97,6 +87,16 @@ class BattleCafeController {
                 spin = GameConstants.AlcremieSpins.nightCounterclockwiseBelow5;
             } else if (!clockwise && spinTime >= 5) {
                 spin = GameConstants.AlcremieSpins.nightCounterclockwiseAbove5;
+            }
+        } else { // Is day
+            if (clockwise && spinTime < 5) {
+                spin = GameConstants.AlcremieSpins.dayClockwiseBelow5;
+            } else if (clockwise && spinTime >= 5) {
+                spin = GameConstants.AlcremieSpins.dayClockwiseAbove5;
+            } else if (!clockwise && spinTime < 5) {
+                spin = GameConstants.AlcremieSpins.dayCounterclockwiseBelow5;
+            } else if (!clockwise && spinTime >= 5) {
+                spin = GameConstants.AlcremieSpins.dayCounterclockwiseAbove5;
             }
         }
         BattleCafeController.evolutions[sweet][spin].gain(1);
