@@ -1921,7 +1921,10 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 43);
         },
 
-        '0.10.8': ({ playerData, saveData }) => {
+
+
+
+        '0.10.9': ({ playerData, saveData }) => {
             //ManaphyQuest
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 65);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 66);
