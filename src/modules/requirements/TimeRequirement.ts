@@ -6,7 +6,7 @@ import DayCycle from '../dayCycle/DayCycle';
 
 export default class TimeRequirement extends Requirement {
     private updateTrigger = ko.observable(0);
-    constructor(public dayCyclePart: DayCyclePart, public strictDayCycleParts: boolean = false, option = AchievementOption.more) {
+    constructor(public dayCycleParts: DayCyclePart[], option = AchievementOption.more) {
         super(1, option);
         setInterval(
             () => GameHelper.incrementObservable(this.updateTrigger),
@@ -14,17 +14,13 @@ export default class TimeRequirement extends Requirement {
         );
     }
 
-    public getProgress() {
+    public getProgress(): number {
         this.updateTrigger();
 
-        if (!this.strictDayCycleParts && this.dayCyclePart === DayCyclePart.Day) {
-            return Number([DayCyclePart.Dawn, DayCyclePart.Day, DayCyclePart.Dusk].includes(DayCycle.currentDayCyclePart()));
-        }
-
-        return Number(this.dayCyclePart === DayCycle.currentDayCyclePart());
+        return Number(this.dayCycleParts.includes(DayCycle.currentDayCyclePart()));
     }
 
     public hint(): string {
-        return `Your local part of the day must be ${DayCycle.dayCycleMoments[this.dayCyclePart].tooltip}`;
+        return `Your local part of the day must be ${this.dayCycleParts.map((dayCyclePart) => DayCyclePart[dayCyclePart]).join(' or ')}`;
     }
 }

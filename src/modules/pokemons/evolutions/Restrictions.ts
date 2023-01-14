@@ -90,21 +90,20 @@ export const weatherRestrict = <T extends EvoFn>(evo: T) => (
 );
 
 export const timeRestrict = <T extends EvoFn>(evo: T) => (
-    dayCyclePart: DayCyclePart,
-    strictDayCycleParts: boolean = true,
+    dayCycleParts: DayCyclePart[],
     ...rest: Parameters<T>
 ) => restrict(
     evo(...rest),
-    new TimeRequirement(dayCyclePart, strictDayCycleParts),
+    new TimeRequirement(dayCycleParts),
 );
 
 export const dayRestrict = <T extends EvoFn>(evo: T) => (
     ...rest: Parameters<T>
-) => timeRestrict(evo)(DayCyclePart.Day, false, ...rest);
+) => timeRestrict(evo)([DayCyclePart.Day, DayCyclePart.Dawn, DayCyclePart.Dusk], ...rest);
 
 export const nightRestrict = <T extends EvoFn>(evo: T) => (
     ...rest: Parameters<T>
-) => timeRestrict(evo)(DayCyclePart.Night, true, ...rest);
+) => timeRestrict(evo)([DayCyclePart.Night], ...rest);
 
 export const megaEvolveRestrict = <T extends EvoFn>(evo: T) => (
     ...rest: Parameters<T>

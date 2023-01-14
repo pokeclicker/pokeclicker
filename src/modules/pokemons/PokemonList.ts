@@ -21193,10 +21193,10 @@ export const pokemonList = createPokemonArray(
         'exp': 56,
         'catchRate': 190,
         'evolutions': [
-            TimeRestrictedLevelEvolution(DayCyclePart.Day, true, 'Rockruff', 'Lycanroc (Midday)', 25),
-            TimeRestrictedLevelEvolution(DayCyclePart.Night, true, 'Rockruff', 'Lycanroc (Midnight)', 25),
-            TimeRestrictedLevelEvolution(DayCyclePart.Dusk, true, 'Rockruff', 'Lycanroc (Dusk)', 25),
-            TimeRestrictedLevelEvolution(DayCyclePart.Dawn, true, 'Rockruff', 'Lycanroc (Dusk)', 25),
+            TimeRestrictedLevelEvolution([DayCyclePart.Day], 'Rockruff', 'Lycanroc (Midday)', 25),
+            TimeRestrictedLevelEvolution([DayCyclePart.Night], 'Rockruff', 'Lycanroc (Midnight)', 25),
+            TimeRestrictedLevelEvolution([DayCyclePart.Dusk], 'Rockruff', 'Lycanroc (Dusk)', 25),
+            TimeRestrictedLevelEvolution([DayCyclePart.Dawn], 'Rockruff', 'Lycanroc (Dusk)', 25),
         ],
         'base': {
             'hitpoints': 45,
