@@ -1898,6 +1898,9 @@ const FortreeCityShop = new Shop([
     ItemList.LargeRestore,
     ItemList.Leaf_stone,
 ]);
+const WindChimeShop = new Shop([
+    ItemList['Probably Chimeco'],
+], 'Shady Deal');
 const MossdeepCityShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
@@ -2012,6 +2015,12 @@ const FortreeRanger = new NPC('Pokémon Ranger Catherine', [
     'Disposable Dowsing Machines! Who even came up with this?! People leave these everywhere. It\'s absolutely terrible for the environment. Some poor innocent Pokémon could choke on it!',
     'Please recycle your used Dowsing Machines.',
 ], {image: 'assets/images/npcs/Pokemon Ranger (female).png'});
+
+const WindChimeShopShadySalesman = new NPC('Shady Salesman', [
+    'Have I got a deal just for you!',
+    'I have spent weeks searching for the highly elusive Chimeco, and finally got some! For a special low price, I\'ll sell you one!',
+    'All sales are final!',
+], {image: 'assets/images/npcs/ShadySalesman.png'});
 
 const Steven1 = new NPC('Steven', [
     'I have been investigating the behavior of Kecleon, the Color Swap Pokémon.',
@@ -2321,6 +2330,17 @@ TownList['Fortree City'] = new Town(
     {
         requirements: [new TemporaryBattleRequirement('May 4')],
         npcs: [FortreeWeatherman, FortreeRanger, Steven1, Steven2],
+    }
+);
+TownList['Wind Chime Shop'] = new Town(
+    'Wind Chime Shop',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Hoenn,
+    [WindChimeShop],
+    {
+        requirements: [new TemporaryBattleRequirement('May 4')],
+        npcs: [WindChimeShopShadySalesman],
+        ignoreAreaStatus: true,
     }
 );
 TownList['Lilycove City'] = new Town(

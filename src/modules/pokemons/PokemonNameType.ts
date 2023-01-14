@@ -368,6 +368,7 @@ export type PokemonNameType
     | 'Sudowoodo'
     | 'Politoed'
     | 'Hoppip'
+    | 'Hoppip (Chimeco)'
     | 'Skiploom'
     | 'Jumpluff'
     | 'Aipom'

@@ -6965,6 +6965,23 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 187.01,
+        'name': 'Hoppip (Chimeco)',
+        'catchRate': 255,
+        'type': [PokemonType.Grass, PokemonType.Flying],
+        'levelType': LevelType.mediumslow,
+        'exp': 50,
+        'eggCycles': 20,
+        'base': {
+            'hitpoints': 35,
+            'attack': 35,
+            'specialAttack': 35,
+            'defense': 40,
+            'specialDefense': 55,
+            'speed': 50,
+        },
+    },
+    {
         'id': 188,
         'name': 'Skiploom',
         'catchRate': 120,
