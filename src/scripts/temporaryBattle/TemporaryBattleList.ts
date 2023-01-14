@@ -3032,7 +3032,7 @@ TemporaryBattleList['Magikarp Jump Karpen 4'] = new TemporaryBattle(
 TemporaryBattleList['Magikarp Jump Karpella 3'] = new TemporaryBattle(
     'Magikarp Jump Karpella 3',
     [new GymPokemon('Magikarp Purple Patches', 39285000, 20)],
-    'I will beat you next time! Any fin is possible is you believe it!',
+    'I will beat you next time! Any fin is possible if you believe in it!',
     [new TemporaryBattleRequirement('Magikarp Jump Karpen 4')],
     undefined,
     {

@@ -2054,7 +2054,7 @@ const Wallace2 = new NPC('Gym Leader Wallace', [
 
 const WeatherBattle1 = new NPC('The Super-Ancient Pokémon Clash', [
     '<i>Groudon and Kyogre have been awakened by the efforts of Team Magma and Team Aqua! They are engaged in a fierce battle which threatens to destroy Sootopolis City... and more!</i>',
-    '<i>The locals in Sootopolis City take shelter from the raging battle. Some say that this sort of this would never happen if Wallace was still around.</i>',
+    '<i>The locals in Sootopolis City take shelter from the raging battle. Some say that this sort of thing would never happen if Wallace was still around.</i>',
 ], {image: 'assets/images/npcs/other/WeatherBattle1.png',
     requirement: new MultiRequirement([new QuestLineStartedRequirement('The Weather Trio'), new QuestLineStepCompletedRequirement('The Weather Trio', 1, GameConstants.AchievementOption.less)]),
 });
@@ -4737,7 +4737,7 @@ const DrSplash3 = new NPC('Dr. Splash', [
     'Wow, that\'s a lot of stuff! This place is starting to look like a proper lab now!',
     'I have discovered that a critical part of any Magikarp training program is pushing other Pokémon around in a field. This form of exercise rounds out the muscle groups and really boosts performance.',
     'According to my calculations, the ideal Pokémon to push around are Dwebble, Boldore, Forretress, Golem, and Steelix. Can you catch or hatch me some?',
-    'Steer clear of the Alola version of Golem, it\'s electrical fields are too dangerous to use.',
+    'Steer clear of the Alolan version of Golem, its electrical fields are too dangerous to use.',
 ], {
     image: 'assets/images/npcs/Dr Splash.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Dr. Splash\'s Research Project', 3), new QuestLineStepCompletedRequirement('Dr. Splash\'s Research Project', 5, GameConstants.AchievementOption.less)]),
