@@ -1,12 +1,12 @@
 class PokemonItem extends CaughtIndicatingItem {
 
     type: PokemonNameType;
-    private _translatedName: KnockoutObservable<string>;
+    private _translatedOrDisplayName: KnockoutObservable<string>;
 
-    constructor(pokemon: PokemonNameType, basePrice: number, currency: GameConstants.Currency = GameConstants.Currency.questPoint, public ignoreEV = false) {
+    constructor(pokemon: PokemonNameType, basePrice: number, currency: GameConstants.Currency = GameConstants.Currency.questPoint, public ignoreEV = false, displayName: string = undefined) {
         super(pokemon, basePrice, currency, undefined, undefined, `Add ${pokemon} to your party.`, 'pokemonItem');
         this.type = pokemon;
-        this._translatedName = PokemonHelper.displayName(pokemon);
+        this._translatedOrDisplayName = displayName ?? PokemonHelper.displayName(pokemon);
     }
 
     gain(amt: number) {
@@ -66,7 +66,7 @@ class PokemonItem extends CaughtIndicatingItem {
     }
 
     get displayName(): string {
-        return this._translatedName();
+        return this._translatedOrDisplayName();
     }
 }
 
@@ -86,11 +86,11 @@ ItemList.Magikarp             = new PokemonItem('Magikarp', 50000, Currency.mone
 ItemList['Magikarp Brown Stripes'] = new PokemonItem('Magikarp Brown Stripes', 100);
 ItemList['Magikarp Blue Raindrops'] = new PokemonItem('Magikarp Blue Raindrops', 10000, Currency.diamond);
 ItemList['Magikarp Saucy Violet'] = new PokemonItem('Magikarp Saucy Violet', 7500000000, Currency.money);
-ItemList['Probably Feebas']   = new PokemonItem('Magikarp (Feebas)', 5999, Currency.battlePoint);
+ItemList['Probably Feebas']   = new PokemonItem('Magikarp (Feebas)', 5999, Currency.battlePoint, false, 'Probably Feebas');
 ItemList.Eevee                = new PokemonItem('Eevee', 4000);
 ItemList.Porygon              = new PokemonItem('Porygon', 2000);
 ItemList.Togepi               = new PokemonItem('Togepi', 15000);
-ItemList['Probably Chimeco']  = new PokemonItem('Hoppip (Chimeco)', 1187, Currency.diamond);
+ItemList['Probably Chimeco']  = new PokemonItem('Hoppip (Chimeco)', 1187, Currency.diamond, false, 'Probably Chimeco');
 ItemList.Beldum               = new PokemonItem('Beldum', 22500);
 ItemList.Skorupi              = new PokemonItem('Skorupi', 6750);
 ItemList.Combee               = new PokemonItem('Combee', 6750);
