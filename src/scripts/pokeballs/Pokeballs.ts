@@ -61,8 +61,8 @@ class Pokeballs implements Feature {
                 }
                 return 0;
             }, 1000, 'Increased catch rate at night time or in dungeons', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
-            // TODO: this needs some sort of bonus, possibly extra dungeon tokens
-            new Pokeball(GameConstants.Pokeball.Luxuryball, () => 0, 1250, 'Gives random currency while catching', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
+            // Drops random currency (money, DT, qp, BP, fp) 
+            new Pokeball(GameConstants.Pokeball.Luxuryball, () => 0, 1250, 'Drops random currencies while catching', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
 
             new Pokeball(GameConstants.Pokeball.Diveball, () => {
 
