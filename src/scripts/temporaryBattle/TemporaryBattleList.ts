@@ -2198,6 +2198,24 @@ TemporaryBattleList['Grand Duchess Diantha'] = new TemporaryBattle(
     }
 );
 
+TemporaryBattleList['Hex Maniac Aster'] = new TemporaryBattle(
+    'Hex Maniac Aster',
+    [
+        new GymPokemon('Gastly', 40250000, 10),
+        new GymPokemon('Haunter', 50000000, 20),
+        new GymPokemon('Gengar', 60770015, 30),
+        new GymPokemon('Mega Gengar', 70000000, 40),
+    ],
+    'What’s this?! I see... Perhaps a Trainer as accomplished as you can get the most out of this.',
+    [new CustomRequirement()],
+    undefined,
+    {
+        displayName: 'Hex Maniac Aster',
+        imageName: '../trainers/Hex Maniac',
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Gengar').giveMegastone(),
+    }
+);
+
 //Alola Temporary Battles
 TemporaryBattleList['Hau 1'] = new TemporaryBattle(
     'Hau 1',
