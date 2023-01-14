@@ -1920,6 +1920,11 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 42);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 43);
         },
+
+        '0.10.8': ({ playerData, saveData }) => {
+            //Grand Duchess Diantha
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 129);
+        },
     };
 
     constructor() {
