@@ -6,7 +6,7 @@ class PokemonItem extends CaughtIndicatingItem {
     constructor(pokemon: PokemonNameType, basePrice: number, currency: GameConstants.Currency = GameConstants.Currency.questPoint, public ignoreEV = false, displayName: string = undefined) {
         super(pokemon, basePrice, currency, undefined, undefined, `Add ${pokemon} to your party.`, 'pokemonItem');
         this.type = pokemon;
-        this._translatedOrDisplayName = displayName ?? PokemonHelper.displayName(pokemon);
+        this._translatedOrDisplayName = ko.pureComputed(() => displayName ?? PokemonHelper.displayName(pokemon)());
     }
 
     gain(amt: number) {
