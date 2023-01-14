@@ -2018,7 +2018,7 @@ const FortreeRanger = new NPC('Pokémon Ranger Catherine', [
 
 const WindChimeShopShadySalesman = new NPC('Shady Salesman', [
     'Have I got a deal just for you!',
-    'I have spent weeks searching for the highly elusive Chimecho, and finally got some! For a special low price, I\'ll sell you one!',
+    'Step right up! Get your Chimecho while they last! Chimecho, a very rare Pokémom indeed, with a voice that\'s both beautiful and powerful. Let Chimecho give you total peace and happiness, for a good price! Looks like you could use one, kid.',
     'All sales are final!',
 ], {image: 'assets/images/npcs/ShadySalesman.png'});
 
