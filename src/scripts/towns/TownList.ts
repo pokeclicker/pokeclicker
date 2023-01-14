@@ -4557,8 +4557,8 @@ const PaniolaTownActor = new NPC('Actor Meredith', [
     'You want to know which one can only be found on the farm? I\'m sure you can figure that out yourself. Simple process of elimination, really.',
 ], {image: 'assets/images/trainers/Actor.png'});
 const RoyalAvenueSpectator = new NPC('Spectator', [
-    'I think battles in the Battle Royal Dome are more like games of chance. But Battle Royals are nothing compared to trying to evolve a Pikachu with a Thunderstone.',
-    'Pikachu or Exeggcute that evolve in Alola have a different form from usual!',
+    'I like sneaking snacks inside the Battle Royal Dome. One time I snuck in pancakes and there were two trainers from Kanto who both had a Pikachu. I ended up sharing some with one.',
+    'Weird thing is, both trainers evolved their Pikachu after the battle, but one had a different form from usual! Maybe there\'s something about Alola that makes certain Pokémon evolve differently? I would check my Evolution Items if I were you.',
 ], {image: 'assets/images/trainers/Preschooler (female).png'});
 const KonikoniKahuna = new NPC('Kahuna Olivia', [
     'What do you mean Grand trials are just like gym battles? It\'s a totally different thing!',
