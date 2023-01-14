@@ -166,7 +166,7 @@ export type ItemNameType
     | 'Eevee'
     | 'Porygon'
     | 'Togepi'
-    | 'Probably Chimeco'
+    | 'Probably Chimecho'
     | 'Beldum'
     | 'Skorupi'
     | 'Combee'

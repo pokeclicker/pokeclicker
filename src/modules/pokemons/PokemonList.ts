@@ -6966,7 +6966,7 @@ export const pokemonList = createPokemonArray(
     },
     {
         'id': 187.01,
-        'name': 'Hoppip (Chimeco)',
+        'name': 'Hoppip (Chimecho)',
         'catchRate': 255,
         'type': [PokemonType.Grass, PokemonType.Flying],
         'levelType': LevelType.mediumslow,

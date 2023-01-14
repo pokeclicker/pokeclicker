@@ -1899,7 +1899,7 @@ const FortreeCityShop = new Shop([
     ItemList.Leaf_stone,
 ]);
 const WindChimeShop = new Shop([
-    ItemList['Probably Chimeco'],
+    ItemList['Probably Chimecho'],
 ], 'Shady Deal');
 const MossdeepCityShop = new Shop([
     ItemList.Pokeball,
@@ -2018,7 +2018,7 @@ const FortreeRanger = new NPC('Pokémon Ranger Catherine', [
 
 const WindChimeShopShadySalesman = new NPC('Shady Salesman', [
     'Have I got a deal just for you!',
-    'I have spent weeks searching for the highly elusive Chimeco, and finally got some! For a special low price, I\'ll sell you one!',
+    'I have spent weeks searching for the highly elusive Chimecho, and finally got some! For a special low price, I\'ll sell you one!',
     'All sales are final!',
 ], {image: 'assets/images/npcs/ShadySalesman.png'});
 
