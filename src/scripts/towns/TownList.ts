@@ -4181,7 +4181,7 @@ TownList['Lumiose City'] = new Town(
     'Lumiose City',
     GameConstants.Region.kalos,
     GameConstants.KalosSubRegions.Kalos,
-    [TemporaryBattleList['Sycamore 1'], TemporaryBattleList['Tierno 1'], DepartmentStoreShop, FriseurFurfrouShop, TemporaryBattleList.AZ, TemporaryBattleList.Merilyn],
+    [TemporaryBattleList['Sycamore 1'], TemporaryBattleList['Tierno 1'], DepartmentStoreShop, FriseurFurfrouShop, TemporaryBattleList.AZ, TemporaryBattleList.Merilyn, TemporaryBattleList['Grand Duchess Diantha']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 4)],
         npcs: [ProfSycamore, LumioseEngineer],

@@ -9646,7 +9646,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 233,
         'catchRate': 45,
-        // 'evolutions': [MegaEvolution('Gardevoir', 'Mega Gardevoir')],
+        'evolutions': [MegaEvolution('Gardevoir', 'Mega Gardevoir')],
         'base': {
             'hitpoints': 68,
             'attack': 65,
