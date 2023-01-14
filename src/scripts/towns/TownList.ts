@@ -2017,11 +2017,9 @@ const FortreeRanger = new NPC('Pokémon Ranger Catherine', [
 ], {image: 'assets/images/npcs/Pokemon Ranger (female).png'});
 
 const WindChimeShopShadySalesman = new NPC('Shady Salesman', [
-    'Have I got a deal just for you!',
     'Step right up! Get your Chimecho while they last! Chimecho, a very rare Pokémom indeed, with a voice that\'s both beautiful and powerful. Look closer! I see it bringing a smile to your face, just gazing into those loving eyes! They say these are the most gentle, healing eyes in the Pokémon kingdom.',
     'That\'s not all! Just look at the way Chimecho\'s tail swings and sways with the wind, like a weeping willow in a summer breeze. In really hot weather, it will act like a fan to help you cool off. And when it\'s cold outside, your Chimecho can wrap itself around your neck like a scarf, to keep you warm.',
     'And one more thing. It\'s not widely known, but it\'s a true fact; Chimecho are able to choose winning lottery tickets! Soo you see, my friend, just having a Chimecho with you, is a sure-fire ticket to happiness and success. Let Chimecho give you total peace and happiness, for a good price!',
-    'All sales are final!',
 ], {image: 'assets/images/npcs/ShadySalesman.png'});
 
 const Steven1 = new NPC('Steven', [
