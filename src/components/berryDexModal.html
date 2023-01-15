@@ -31,11 +31,11 @@
                     </tr>
                     <tr>
                       <td class="text-left">Size</td>
-                      <td class="text-left tight">TBD</code></td>
+                      <td class="text-left tight"><code data-bind="text: App.game.farming.berryData[$data].size[SizeUnits[Settings.getSetting('sizeUnits').observableValue()]]">-</code></td>
                     </tr>
                     <tr>
                       <td class="text-left">Firmness</td>
-                      <td class="text-left tight">TBD</code></td>
+                      <td class="text-left tight"><code data-bind="html: GameConstants.humanifyString(BerryFirmness[App.game.farming.berryData[$data].firmness])">-</code></td>
                     </tr>
                     <tr class = "auraHighlight" data-bind="if: App.game.farming.berryData[$data].aura">
                       <td class="text-left">Aura</td>
