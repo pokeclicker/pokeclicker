@@ -469,8 +469,7 @@ const OneIslandYoungster = new NPC ('Youngster', [
     'Isn\'t it strange how Mol<b><i>tres</i></b> lives on <b><i>One</i></b> Island?',
 ], {
     image: 'assets/images/trainers/Youngster.png',
-    //requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mt. Ember Summit')),
-    requirement: new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Gengar').id], 66666),
+    requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mt. Ember Summit')),
 });
 const TwoIslandGameCornerOwner1 = new NPC ('Game Corner Owner', [
     'Hello stranger. I\'m afraid the Game Corner is currently closed.',
