@@ -20,6 +20,15 @@ const getStat = <
 // Example: getStat(['secondsPlayed'] as const);
 // Example: getStat(['pokemonEncountered', PokemonHelper.getPokemonByName('Gengar').id] as const)
 */
+/*
+Can be used in two ways:
+
+"Top-level" statistics:
+new StatisticRequirement('secondsPlayed', 86400) // 24 hours of play time
+
+Nested statistics:
+new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Gengar').id], 666) // encounter 666 Gengar
+*/
 
 export default class StatisticRequirement extends Requirement {
     private focus: Observable<number>;
