@@ -28,8 +28,6 @@ class Berry {
         ['Burmy (Plant)'], // green
         ['Combee', 'Flabébé (Yellow)', 'Oricorio (Pom-Pom)'], // yellow
         ['Volbeat', 'Flabébé (Blue)'], // blue
-        ['Flabébé (White)'], // silver placeholder
-        ['Flabébé (Orange)'], // gold placeholder
     ];
 
     constructor(
