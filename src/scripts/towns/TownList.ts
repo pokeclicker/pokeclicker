@@ -372,10 +372,10 @@ const BigSpender = new NPC('Big Spender', [
 ], {image: 'assets/images/trainers/Beauty.png'});
 
 const EggHuntErika = new NPC('Erika', [
-    'And here comes another one. Let me guess, you\'re gonna ask me about the Togepi too?',
-    'Listen here you. Just because I\'m the Grass type gym leader doesn\'t mean I know everything that goes on in the forest! I live in one of the biggest cities in the region! With tall buildings! And gambling! And crime! I like it here! I don\'t care about the forest!',
+    'Hello... Isn\'t the spring weather so relaxing? I adore how lovely the blooming flowers look during this time of year...',
+    'Oh! I\'m sorry, I almost dozed off. I was reminiscing about my stroll in Viridian Forest earlier today. I came across the loveliest patch of flowers over there and...',
     '...',
-    'All right, fine. It just so happens that I have heard about <span style="font-style: italic">something</span> going on in Viridian Forest. But I don\'t know what, and I don\'t care! You can go figure it out! I\'m staying here! Viridian Forest doesn\'t even have any Grass types. It\'s all Bugs over there.',
+    'Zzz... Hm? Oh yes, the forest. It was most peculiar - when I laid down upon the flowerbed I had the strangest dream of a colorful, round Pokémon. At least, I think it was a dream... It did not strike me as one of the usual inhabitants of the area.',
 ], {
     image: 'assets/images/gymLeaders/Erika.png',
     requirement: new MultiRequirement([new QuestLineStartedRequirement('Togepi Egg Hunt'), new QuestLineCompletedRequirement('Togepi Egg Hunt', GameConstants.AchievementOption.less)]),
@@ -4577,8 +4577,8 @@ const PaniolaTownActor = new NPC('Actor Meredith', [
     'You want to know which one can only be found on the farm? I\'m sure you can figure that out yourself. Simple process of elimination, really.',
 ], {image: 'assets/images/trainers/Actor.png'});
 const RoyalAvenueSpectator = new NPC('Spectator', [
-    'I think battles in the Battle Royal Dome are more like games of chance. But Battle Royals are nothing compared to trying to evolve an Alolan Raichu with a Thunderstone.',
-    'Evolving Pikachu or Exeggcute in Alola can result in a new form! Sometimes.',
+    'I like sneaking snacks inside the Battle Royal Dome. One time I snuck in pancakes and there were two trainers from Kanto who both had a Pikachu. I ended up sharing some with one.',
+    'Weird thing is, both trainers evolved their Pikachu after the battle, but one had a different form from usual! Maybe there\'s something about Alola that makes certain Pokémon evolve differently? I would check my Evolution Items if I were you.',
 ], {image: 'assets/images/trainers/Preschooler (female).png'});
 const KonikoniKahuna = new NPC('Kahuna Olivia', [
     'What do you mean Grand trials are just like gym battles? It\'s a totally different thing!',

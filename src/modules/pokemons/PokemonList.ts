@@ -4129,6 +4129,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 80,
             'speed': 65,
         },
+        'heldItem': { type: ItemType.item, id: 'Thick_Club' },
     },
     {
         'id': 106,
