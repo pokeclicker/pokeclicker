@@ -30,6 +30,7 @@ import SettingOption from './settings/SettingOption';
 import BreedingFilters from './settings/BreedingFilters';
 import WeatherType from './weather/WeatherType';
 import Weather from './weather/Weather';
+import DayCycle from './dayCycle/DayCycle';
 import SeededRand from './utilities/SeededRand';
 import SeededDateRand from './utilities/SeededDateRand';
 import Rand from './utilities/Rand';
@@ -158,6 +159,7 @@ import VitaminController from './items/VitaminController';
 import RoamingPokemonList from './pokemons/RoamingPokemonList';
 import DataPokemon from './pokemons/DataPokemon';
 import RoamingPokemon from './pokemons/RoamingPokemon';
+import UndergroundMegaStoneItem from './underground/UndergroundMegaStoneItem';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -188,6 +190,7 @@ Object.assign(<any>window, {
     SettingOption,
     WeatherType,
     Weather,
+    DayCycle,
     SeededRand,
     SeededDateRand,
     Rand,
@@ -325,4 +328,5 @@ Object.assign(<any>window, {
     RoamingPokemonList,
     DataPokemon,
     RoamingPokemon,
+    UndergroundMegaStoneItem,
 });

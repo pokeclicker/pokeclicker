@@ -104,7 +104,6 @@ Settings.add(new Setting<string>('farmDisplay', 'Farm timer display',
         new SettingOption('Ripe/Death', 'ripeDeath'),
     ],
     'ripeDeath'));
-Settings.add(new BooleanSetting('breedingIncludeEVBonus', 'Include EVs in Breeding Efficiency Calculation', false));
 Settings.add(new BooleanSetting('currencyMainDisplayReduced', 'Shorten currency amount shown on main screen', false));
 Settings.add(new BooleanSetting('currencyMainDisplayExtended', 'Show Diamonds, Farm Points and Battle Points on main screen', false));
 Settings.add(new BooleanSetting('confirmLeaveDungeon', 'Confirm before leaving dungeons', false));
@@ -199,6 +198,7 @@ Settings.add(new BooleanSetting('vitaminHideShinyPokemon', 'Hide shiny Pokémon'
 Settings.add(new Setting<string>('vitaminSearchFilter', 'Search', [], ''));
 Settings.add(new Setting<number>('vitaminRegionFilter', 'Region', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(Region)], -2));
 Settings.add(new Setting<number>('vitaminTypeFilter', 'Type', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None')], -2));
+Settings.add(new BooleanSetting('heldItemHideHoldingPokemon', 'Hide Pokémon holding an item', false));
 
 // Held Item Sorting
 const heldItemSortSettings = Object.keys(SortOptionConfigs).map((opt) => (
