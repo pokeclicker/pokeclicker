@@ -105,13 +105,6 @@ Settings.add(new Setting<string>('farmDisplay', 'Farm timer display',
     ],
     'ripeDeath'));
 
-Settings.add(new Setting<string>('sizeUnits', 'Berry size units',
-    [
-        new SettingOption('Imperial', 'imperial'),
-        new SettingOption('SI (point)', 'sipoint'),
-        new SettingOption('SI (comma)', 'sicomma'),
-    ],
-    'sipoint'));
 Settings.add(new BooleanSetting('breedingIncludeEVBonus', 'Include EVs in Breeding Efficiency Calculation', false));
 Settings.add(new BooleanSetting('currencyMainDisplayReduced', 'Shorten currency amount shown on main screen', false));
 Settings.add(new BooleanSetting('currencyMainDisplayExtended', 'Show Diamonds, Farm Points and Battle Points on main screen', false));
