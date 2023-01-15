@@ -8466,6 +8466,7 @@ dungeonList['Poni Meadow'] = new Dungeon('Poni Meadow',
         epic: [
             {loot: 'Splash Plate'},
             {loot: 'Pixie Plate'},
+            {loot: 'Power_Herb'},
         ],
     },
     16659968,

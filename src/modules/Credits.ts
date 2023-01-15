@@ -224,6 +224,7 @@ export const SpriteCredits: Credit[] = [
             'Go-Rock Squad Grunt (male)',
             'Go-Rock Squad Grunt (female)',
             'Honey',
+            'Hoppip (Chimecho)',
             'Key Stone',
             'Linking cord cartoon style',
             'Luana',

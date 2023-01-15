@@ -878,8 +878,18 @@
             { name: "Fish Shop"
             , x: 37, y: 29
             , width: 1, height: 1
-            , databind: "click:function(){MapHelper.moveToTown('Fish Shop')}, attr:{ class: MapHelper.calculateTownCssClass('Roadside Stand') }"
+            , databind: "click:function(){MapHelper.moveToTown('Fish Shop')}, attr:{ class: MapHelper.calculateTownCssClass('Fish Shop') }"
             , visible:  "App.game.statistics.routeKills['hoenn'][118]() >= 10"
+            , image: "assets/images/map/transparent.png"
+            })
+        %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Wind Chime Shop"
+            , x: 42, y: 3
+            , width: 1, height: 1
+            , databind: "click:function(){MapHelper.moveToTown('Wind Chime Shop')}, attr:{ class: MapHelper.calculateTownCssClass('Wind Chime Shop') }"
+            , visible:  "App.game.statistics.routeKills['hoenn'][119]() >= 10"
             , image: "assets/images/map/transparent.png"
             })
         %>
@@ -918,7 +928,7 @@
          { name: "A Raging Maelstrom"
         , x: 59, y: 28
          , width: 13, height: 13
-        , visible:  "(App.game.quests.getQuestLine('The Weather Trio').curQuest() < 5 && App.game.quests.getQuestLine('The Weather Trio').state() >= 1)"
+        , visible:  "(App.game.quests.getQuestLine('The Weather Trio').curQuest() < 5 && App.game.quests.getQuestLine('The Weather Trio').state() == 1)"
          , image: "assets/images/map/Maelstrom.png"
          })
      %>
