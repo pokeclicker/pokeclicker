@@ -14,12 +14,22 @@ class Berry {
     public static baseWander: PokemonNameType[] = [
         'Tangela', 'Scyther',
         'Pineco', 'Heracross',
-        'Volbeat', 'Illumise',
-        'Burmy (Plant)', 'Cherubi',
+        'Cherubi',
         'Sewaddle', 'Karrablast',
         'Scatterbug',
         'Cutiefly', 'Bounsweet',
         'Blipbug', 'Gossifleur',
+    ];
+
+    public static colorWander: PokemonNameType[][] = [
+        ['Ledyba', 'Flabébé (Red)', 'Oricorio (Baile)'], //red
+        ['Illumise', 'Oricorio (Sensu)'], // purple
+        ['Spewpa', 'Oricorio (Pa\'u)'], // pink
+        ['Burmy (Plant)'], // green
+        ['Combee', 'Flabébé (Yellow)', 'Oricorio (Pom-Pom)'], // yellow
+        ['Volbeat', 'Flabébé (Blue)'], // blue
+        ['Flabébé (White)'], // silver placeholder
+        ['Flabébé (Orange)'], // gold placeholder
     ];
 
     constructor(
@@ -39,7 +49,7 @@ class Berry {
         for (let i = 0; i < 5; i++) {
             this.flavors.push({type: i, value: flavors[i]});
         }
-        this.wander = wander ? Berry.baseWander.concat(wander) : Berry.baseWander;
+        this.wander = Berry.baseWander.concat(Berry.colorWander[this.color], wander ?? []);
     }
 
     get descriptionHTML(): string {
