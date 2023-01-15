@@ -1,5 +1,5 @@
 {
-  "earnedAchievement": "Earned {{ name }}.",
+  "earnedAchievement": "Earned \"{{ name }}\".",
   "escapedShiny": "The shiny {{ pokemon, pokemon }} escaped!",
   "escapedShinyDupe": "[[escapedShiny]] (duplicate)",
   "escapedWild": "The wild {{ pokemon, pokemon }} escaped!",
@@ -21,15 +21,15 @@
   "purchasedShinyDupe": "[[purchasedShiny]] (duplicate)",
   "evolvedShiny": "Your {{ basePokemon, pokemon }} evolved into a shiny {{ evolvedPokemon, pokemon }}!",
   "evolvedShinyDupe": "[[evolvedShiny]] (duplicate)",
-  "captured": "You have captured {{ pokemon, pokemon }}",
+  "captured": "You have captured {{ pokemon, pokemon }}.",
   "capturedShiny": "You have captured a shiny {{ pokemon, pokemon }}!",
   "capturedShinyDupe": "[[capturedShiny]] (duplicate)",
-  "enemyDrop": "An enemy {{ pokemon, pokemon }} dropped one {{ item }}",
+  "enemyDrop": "An enemy {{ pokemon, pokemon }} dropped one {{ item }}.",
   "roamer": "[{{ location }}] You encountered a roaming {{ pokemon, pokemon }}!",
   "roamerShiny": "[{{ location }}] You encountered a shiny roaming {{ pokemon, pokemon }}!",
   "roamerShinyDupe": "[[roamerShiny]] (duplicate)",
-  "completedQuest": "Completed {{ quest }}.",
-  "completedQuestWithPoints": "Completed {{ quest }} for {{ points }} Quest Points.",
+  "completedQuest": "Completed \"{{ quest }}\"",
+  "completedQuestWithPoints": "Completed \"{{ quest }}\" for {{ points }} Quest Points.",
   "questLevelUp": "Quest level increased to level {{ level }}!",
   "resistantToPokerus": "{{ pokemon, pokemon }} has become Resistant to Pokérus."
 }

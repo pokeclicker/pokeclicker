@@ -17,10 +17,10 @@
     <script src="libs/Sortable.min.js"></script>
 
     <!-- New module-based code from './modules' -->
-    <script src="scripts/modules.min.js?v=0.10.7"></script>
+    <script src="scripts/modules.min.js?v=0.10.8"></script>
 
     <!--Minified scripts-->
-    <script src="scripts/script.min.js?v=0.10.7"></script>
+    <script src="scripts/script.min.js?v=0.10.8"></script>
 
     <!--Popper.js-->
     <script src="libs/popper.min.js"></script>
@@ -38,7 +38,7 @@
     <link href="libs/introjs-modern.css" rel="stylesheet">
 
     <!--Minified styles-->
-    <link href="styles/styles.min.css?v=0.10.7" rel="stylesheet">
+    <link href="styles/styles.min.css?v=0.10.8" rel="stylesheet">
 
     <!-- Google Analytics-->
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -2008,8 +2008,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.kanto, 'Kanto').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/kanto-kanto.png?v=0.10.7',
-            href:'assets/images/kanto-kanto.png?v=0.10.7'
+            'xlink:href':'assets/images/kanto-kanto.png?v=0.10.8',
+            href:'assets/images/kanto-kanto.png?v=0.10.8'
         }"></image>
 
         <!-- ------ -->
@@ -4230,8 +4230,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.kanto, 'Sevii Islands 123').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/kanto-sevii123.png?v=0.10.7',
-            href:'assets/images/kanto-sevii123.png?v=0.10.7'
+            'xlink:href':'assets/images/kanto-sevii123.png?v=0.10.8',
+            href:'assets/images/kanto-sevii123.png?v=0.10.8'
         }"></image>
 
         <!-- ------ -->
@@ -4754,8 +4754,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.kanto, 'Sevii Islands 4567').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/kanto-sevii4567.png?v=0.10.7',
-            href:'assets/images/kanto-sevii4567.png?v=0.10.7'
+            'xlink:href':'assets/images/kanto-sevii4567.png?v=0.10.8',
+            href:'assets/images/kanto-sevii4567.png?v=0.10.8'
         }"></image>
 
         <!-- ------ -->
@@ -6260,8 +6260,8 @@
 
                             <g data-bind='visible: player.region == GameConstants.Region.johto'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/johto.png?v=0.10.7',
-        href:'assets/images/johto.png?v=0.10.7'
+        'xlink:href':'assets/images/johto.png?v=0.10.8',
+        href:'assets/images/johto.png?v=0.10.8'
     }"></image>
 
     <!-- ------ -->
@@ -8467,8 +8467,8 @@
 
                             <g data-bind='visible: player.region == GameConstants.Region.hoenn'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/hoenn.png?v=0.10.7',
-        href:'assets/images/hoenn.png?v=0.10.7'
+        'xlink:href':'assets/images/hoenn.png?v=0.10.8',
+        href:'assets/images/hoenn.png?v=0.10.8'
     }"></image>
 
     <!-- ------ -->
@@ -11057,13 +11057,38 @@
     y="464"
     height="16"
     width="16"
-    data-bind="visible: App.game.statistics.routeKills[&#39;hoenn&#39;][118]() &gt;= 10, click:function(){MapHelper.moveToTown(&#39;Fish Shop&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;Roadside Stand&#39;) }">
+    data-bind="visible: App.game.statistics.routeKills[&#39;hoenn&#39;][118]() &gt;= 10, click:function(){MapHelper.moveToTown(&#39;Fish Shop&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;Fish Shop&#39;) }">
 </rect>
 <image width="48" height="48"
     x="576"
     y="448"
     class="iconLocation"
     data-bind="visible: MapHelper.isTownCurrentLocation('') && App.game.statistics.routeKills[&#39;hoenn&#39;][118]() &gt;= 10
+    , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+</image>
+
+
+        
+
+<image href="assets/images/map/transparent.png" xlink:href="assets/images/map/transparent.png"
+    x="672"
+    y="48"
+    height="16"
+    width="16"
+    data-bind="visible: App.game.statistics.routeKills[&#39;hoenn&#39;][119]() &gt;= 10"/>
+<rect class="city"
+    data-town="Wind Chime Shop"
+    x="672"
+    y="48"
+    height="16"
+    width="16"
+    data-bind="visible: App.game.statistics.routeKills[&#39;hoenn&#39;][119]() &gt;= 10, click:function(){MapHelper.moveToTown(&#39;Wind Chime Shop&#39;)}, attr:{ class: MapHelper.calculateTownCssClass(&#39;Wind Chime Shop&#39;) }">
+</rect>
+<image width="48" height="48"
+    x="656"
+    y="32"
+    class="iconLocation"
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && App.game.statistics.routeKills[&#39;hoenn&#39;][119]() &gt;= 10
     , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
 </image>
 
@@ -11150,20 +11175,20 @@
     y="448"
     height="208"
     width="208"
-    data-bind="visible: (App.game.quests.getQuestLine(&#39;The Weather Trio&#39;).curQuest() &lt; 5 &amp;&amp; App.game.quests.getQuestLine(&#39;The Weather Trio&#39;).state() &gt;= 1)"/>
+    data-bind="visible: (App.game.quests.getQuestLine(&#39;The Weather Trio&#39;).curQuest() &lt; 5 &amp;&amp; App.game.quests.getQuestLine(&#39;The Weather Trio&#39;).state() == 1)"/>
 <rect class="city"
     data-town="A Raging Maelstrom"
     x="944"
     y="448"
     height="208"
     width="208"
-    data-bind="visible: (App.game.quests.getQuestLine(&#39;The Weather Trio&#39;).curQuest() &lt; 5 &amp;&amp; App.game.quests.getQuestLine(&#39;The Weather Trio&#39;).state() &gt;= 1), ">
+    data-bind="visible: (App.game.quests.getQuestLine(&#39;The Weather Trio&#39;).curQuest() &lt; 5 &amp;&amp; App.game.quests.getQuestLine(&#39;The Weather Trio&#39;).state() == 1), ">
 </rect>
 <image width="48" height="48"
     x="1024"
     y="528"
     class="iconLocation"
-    data-bind="visible: MapHelper.isTownCurrentLocation('') && (App.game.quests.getQuestLine(&#39;The Weather Trio&#39;).curQuest() &lt; 5 &amp;&amp; App.game.quests.getQuestLine(&#39;The Weather Trio&#39;).state() &gt;= 1)
+    data-bind="visible: MapHelper.isTownCurrentLocation('') && (App.game.quests.getQuestLine(&#39;The Weather Trio&#39;).curQuest() &lt; 5 &amp;&amp; App.game.quests.getQuestLine(&#39;The Weather Trio&#39;).state() == 1)
     , attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
 </image>
 
@@ -11371,8 +11396,8 @@
 
                             <g data-bind='visible: player.region == GameConstants.Region.sinnoh'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/sinnoh.png?v=0.10.7',
-        href:'assets/images/sinnoh.png?v=0.10.7'
+        'xlink:href':'assets/images/sinnoh.png?v=0.10.8',
+        href:'assets/images/sinnoh.png?v=0.10.8'
     }"></image>
 
     <!-- ------ -->
@@ -14194,8 +14219,8 @@
 
                             <g data-bind='visible: player.region == GameConstants.Region.unova'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/unova.png?v=0.10.7',
-        href:'assets/images/unova.png?v=0.10.7'
+        'xlink:href':'assets/images/unova.png?v=0.10.8',
+        href:'assets/images/unova.png?v=0.10.8'
     }"></image>
 
     <!-- ------ -->
@@ -17059,8 +17084,8 @@
 
                             <g data-bind='visible: player.region == GameConstants.Region.kalos'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/kalos.png?v=0.10.7',
-        href:'assets/images/kalos.png?v=0.10.7'
+        'xlink:href':'assets/images/kalos.png?v=0.10.8',
+        href:'assets/images/kalos.png?v=0.10.8'
     }"></image>
 
     <!-- ------ -->
@@ -19258,8 +19283,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Melemele Island').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-melemele.png?v=0.10.7',
-            href:'assets/images/alola-melemele.png?v=0.10.7'
+            'xlink:href':'assets/images/alola-melemele.png?v=0.10.8',
+            href:'assets/images/alola-melemele.png?v=0.10.8'
         }"></image>
 
         <!-- ------ -->
@@ -22554,8 +22579,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Akala Island').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-akala.png?v=0.10.7',
-            href:'assets/images/alola-akala.png?v=0.10.7'
+            'xlink:href':'assets/images/alola-akala.png?v=0.10.8',
+            href:'assets/images/alola-akala.png?v=0.10.8'
         }"></image>
 
         <!-- ------ -->
@@ -24746,8 +24771,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Ula\'ula Island').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-ulaula.png?v=0.10.7',
-            href:'assets/images/alola-ulaula.png?v=0.10.7'
+            'xlink:href':'assets/images/alola-ulaula.png?v=0.10.8',
+            href:'assets/images/alola-ulaula.png?v=0.10.8'
         }"></image>
 
         <!-- ------ -->
@@ -27380,8 +27405,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Poni Island').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-poni.png?v=0.10.7',
-            href:'assets/images/alola-poni.png?v=0.10.7'
+            'xlink:href':'assets/images/alola-poni.png?v=0.10.8',
+            href:'assets/images/alola-poni.png?v=0.10.8'
         }"></image>
 
         <!-- ------ -->
@@ -29420,8 +29445,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Magikarp Jump').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-magikarp-jump.png?v=0.10.7',
-            href:'assets/images/alola-magikarp-jump.png?v=0.10.7'
+            'xlink:href':'assets/images/alola-magikarp-jump.png?v=0.10.8',
+            href:'assets/images/alola-magikarp-jump.png?v=0.10.8'
         }"></image>
 
         <!-- ------ -->
@@ -31451,8 +31476,8 @@
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'South Galar').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/galar-south.png?v=0.10.7',
-            href:'assets/images/galar-south.png?v=0.10.7'
+            'xlink:href':'assets/images/galar-south.png?v=0.10.8',
+            href:'assets/images/galar-south.png?v=0.10.8'
         }"></image>
 
         <!-- ------ -->
@@ -33516,8 +33541,8 @@
     </g>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'North Galar').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/galar-north.png?v=0.10.7',
-            href:'assets/images/galar-north.png?v=0.10.7'
+            'xlink:href':'assets/images/galar-north.png?v=0.10.8',
+            href:'assets/images/galar-north.png?v=0.10.8'
         }"></image>
 
         <!-- ------ -->
@@ -34535,8 +34560,8 @@
     </g>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'Isle of Armor').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/galar-isle-of-armor.png?v=0.10.7',
-            href:'assets/images/galar-isle-of-armor.png?v=0.10.7'
+            'xlink:href':'assets/images/galar-isle-of-armor.png?v=0.10.8',
+            href:'assets/images/galar-isle-of-armor.png?v=0.10.8'
         }"></image>
 
         <!-- ------ -->
@@ -37100,8 +37125,8 @@
     </g>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'Crown Tundra').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/galar-crown-tundra.png?v=0.10.7',
-            href:'assets/images/galar-crown-tundra.png?v=0.10.7'
+            'xlink:href':'assets/images/galar-crown-tundra.png?v=0.10.8',
+            href:'assets/images/galar-crown-tundra.png?v=0.10.8'
         }"></image>
 
         <!-- ------ -->
@@ -42150,7 +42175,7 @@ aria-labelledby="pokedexModalLabel">
                     </div>
                 </div>
                 <i data-bind="text: VitaminController.add() ? 'Left click to give, Right click to take' : 'Left/Right click to take'">Left click to give, Right click to take</i>
-                <div class="table-responsive" style="overflow-y: overlay">
+                <div class="table-responsive" style="overflow-y: hidden;">
                     <table class="table table-striped table-hover table-bordered table-sm m-0">
                         <thead>
                             <tr class="text-light">
@@ -42186,6 +42211,7 @@ aria-labelledby="pokedexModalLabel">
         </div>
     </div>
 </div>
+
 
 <!-- Expanded Vitamin Modal -->
 <div class="modal noselect fade" id="pokemonVitaminExpandedModal" tabindex="-1" role="dialog" aria-labelledby="pokemonVitaminExpandedModal">
@@ -42275,7 +42301,7 @@ aria-labelledby="pokedexModalLabel">
                         </div>
                     </div>
                 </div>
-                <div class="table-responsive" style="overflow-y: overlay">
+                <div class="table-responsive" style="overflow-y: hidden;">
                     <table class="table table-striped table-hover table-bordered table-sm m-0 mt-1">
                         <thead>
                             <tr>

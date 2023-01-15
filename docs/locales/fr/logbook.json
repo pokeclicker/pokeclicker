@@ -1,5 +1,5 @@
 {
-  "earnedAchievement": "Succès {{ name }} obtenu.",
+  "earnedAchievement": "Succès « {{ name }} » obtenu.",
   "escapedShiny": "Le {{ pokemon, pokemon }} chromatique s'est échappé !",
   "escapedShinyDupe": "[[escapedShiny]] (doublon)",
   "escapedWild": "Le {{ pokemon, pokemon }} sauvage s'est échappé !",
@@ -21,15 +21,15 @@
   "purchasedShinyDupe": "[[purchasedShiny]] (doublon)",
   "evolvedShiny": "Votre {{ basePokemon, pokemon }} a évolué en un {{ evolvedPokemon, pokemon }} chromatique !",
   "evolvedShinyDupe": "[[evolvedShiny]] (doublon)",
-  "captured": "Vous avez capturé un {{ pokemon, pokemon }}",
+  "captured": "Vous avez capturé un {{ pokemon, pokemon }}.",
   "capturedShiny": "Vous avez capturé un {{ pokemon, pokemon }} chromatique !",
   "capturedShinyDupe": "[[capturedShiny]] (doublon)",
-  "enemyDrop": "Le {{ pokemon, pokemon }} ennemi a lâché un {{ item }}",
+  "enemyDrop": "Le {{ pokemon, pokemon }} ennemi a lâché un {{ item }}.",
   "roamer": "[{{ location }}] Vous rencontrez un {{ pokemon, pokemon }} voyageur !",
   "roamerShiny": "[{{ location }}] Vous rencontrez un {{ pokemon, pokemon }} voyageur chromatique !",
   "roamerShinyDupe": "[{{ location }}] Vous rencontrez un {{ pokemon, pokemon }} voyageur chromatique ! (doublon)",
-  "completedQuest": "Quête {{ quest }} complétée.",
-  "completedQuestWithPoints": "Quête {{ quest }} complétée, {{ points }} Points de Quête obtenus.",
+  "completedQuest": "Quête « {{ quest }} » complétée.",
+  "completedQuestWithPoints": "Quête « {{ quest }} » complétée, {{ points }} Points de Quête obtenus.",
   "questLevelUp": "Le niveau de Quête passe au niveau {{ level }} !",
   "resistantToPokerus": "Votre {{ pokemon, pokemon }} est devenu Résistant au Pokérus."
 }
