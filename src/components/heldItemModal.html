@@ -30,6 +30,10 @@
                               onchange="Settings.setSettingByName('heldItemSortDirection', this.checked)"/>
                       </div>
                   </div>
+                  <div class="form-check form-check-inline align-middle">
+                    <input type="checkbox" id="hide-holding-item-pokemon" class="form-check-input" data-bind="checked: Settings.getSetting('heldItemHideHoldingPokemon').observableValue()" onchange="Settings.setSettingByName('heldItemHideHoldingPokemon', this.checked)" />
+                    <label for="hide-holding-item-pokemon" class="form-check-label">Hide Pokémon holding an item</label>
+                  </div>
                   <div class="form-group mb-1">
                     <input id="heldItemSearch" autocomplete="off" class="form-control" placeholder="Search"
                         data-bind="textInput: Settings.getSetting('heldItemSearchFilter').observableValue"

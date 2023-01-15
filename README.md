@@ -15,9 +15,10 @@ You can reach out on discord to discuss your ideas and how to implement them: ht
 # Developer instructions
 
 ## Rules
-- Make sure the build script is a success. We won't test PRs that fail the building script.
-- We won't accept balance PRs, unless it's from a developer or Code Contributor (discord roles).
-- PRs adding new translatable content should link to a PR in the [translation repo](https://github.com/pokeclicker/pokeclicker-translations) adding your new strings. See the Developer instructions on that repo for more info.
+- Make sure the build script is a success. We won't test Pull Requests that fail the building script.
+- We won't accept balance Pull Requests, unless it's from a developer or Code Contributor (discord roles).
+- Pull Requests adding new translatable content should link to a Pull Request in the [translation repo](https://github.com/pokeclicker/pokeclicker-translations) adding your new strings. See the Developer instructions on that repo for more info.
+- Split Pull Requests into smaller Pull Requests when possible. It will make it easier for us to review, and easier for you if something's needs to be changed or is rejected.
 
 ## Editor/IDE setup
 
