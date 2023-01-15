@@ -310,9 +310,8 @@ class BerryDeal {
             GameHelper.incrementObservable(App.game.statistics.berryDailyDealTrades);
 
             const amount = deal.item.amount * maxTrades;
-            const multiple = amount > 1 ? 's' : '';
             Notifier.notify({
-                message: `You traded for ${amount.toLocaleString('en-US')} × <img src="${deal.item.itemType.image}" height="24px"/> ${GameConstants.humanifyString(deal.item.itemType.displayName)}${multiple}.`,
+                message: `You traded for ${amount.toLocaleString('en-US')} × <img src="${deal.item.itemType.image}" height="24px"/> ${GameConstants.pluralizeString(GameConstants.humanifyString(deal.item.itemType.displayName), amount)}.`,
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.Items.item_bought,
             });

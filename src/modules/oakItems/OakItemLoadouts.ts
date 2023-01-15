@@ -7,7 +7,7 @@ import OakItemType from '../enums/OakItemType';
 import OakItemLoadout from './OakItemLoadout';
 
 export default class OakItemLoadouts implements Saveable {
-    private static MAX_SLOTS = 3;
+    private static MAX_SLOTS = 5;
 
     saveKey = 'oakItemLoadouts';
 

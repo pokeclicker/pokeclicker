@@ -8,6 +8,7 @@
 type TownOptionalArgument = {
     requirements?: Requirement[],
     npcs?: NPC[],
+    ignoreAreaStatus?: boolean
 };
 
 class Town {
@@ -19,6 +20,7 @@ class Town {
     public startingTown: boolean;
     public content: TownContent[];
     public subRegion: GameConstants.SubRegions;
+    public ignoreAreaStatus: boolean;
 
     constructor(
         name: string,
@@ -36,6 +38,7 @@ class Town {
         this.startingTown = GameConstants.StartingTowns.includes(this.name);
         this.content = content;
         this.subRegion = subRegion;
+        this.ignoreAreaStatus = optional.ignoreAreaStatus ?? false;
 
         if (GymList[name]) {
             const gym = GymList[name];

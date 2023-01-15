@@ -386,6 +386,23 @@ export function camelCaseToString(str: string): string {
     return str.replace(/[\s_-]?([A-Z])/g, ' $1').replace(/\b\w/g, (w) => (w.replace(/\w/, (c) => c.toUpperCase()))).trim();
 }
 
+export function pluralizeString(str: string, amt: number): string {
+    if (amt <= 1) {
+        return str;
+    }
+
+    switch (true) {
+        case /s$/.test(str):
+            return str;
+        case /y$/.test(str):
+            return str.replace(/y$/, 'ies');
+        case /ch$/.test(str):
+            return `${str}es`;
+        default:
+            return `${str}s`;
+    }
+}
+
 export function formatDate(date: Date): string {
     return date.toISOString().replace(/T/, ' ').replace(/.\d+Z/, '');
 }
@@ -582,7 +599,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.sinnoh]: new Set([218, 219, 220, 223, 230, 'Pastoria City', 'Lake Verity', 'Lake Valor', 'Sendoff Spring']),
         [Region.unova]: new Set([17, 18, 21, 24, 'Undella Town', 'Humilau City']),
         [Region.kalos]: new Set([8, 23, 'Coumarine City', 'Couriway Town', 'Sea Spirit\'s Den']),
-        [Region.alola]: new Set([15, 19, 20, 'Seafolk Village', 'Brooklet Hill', 'Mina\'s Houseboat', 'Lake of the Sunne and Moone']),
+        [Region.alola]: new Set([15, 19, 20, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 'Hoppy Town', 'Friend League', 'Quick League', 'Heavy League', 'Great League', 'Fast League', 'Luxury League', 'Heal League', 'Ultra League', 'Elite Four League', 'Master League', 'Magikarp\'s Eye', 'Seafolk Village', 'Brooklet Hill', 'Mina\'s Houseboat', 'Lake of the Sunne and Moone']),
         [Region.galar]: new Set(['Hulbury', 'Roaring-Sea Caves', 5, 6, 8, 9, 16, 21, 27, 29, 36, 37, 41, 42, 43, 44, 51, 53]),
     },
 
@@ -870,6 +887,7 @@ export enum BulletinBoards {
     Sinnoh,
     Kalos,
     Alola,
+    Hoppy,
     Galar,
     Armor,
     Crown,
@@ -1411,6 +1429,10 @@ export const TemporaryBattles = [
     'Kecleon 3',
     'May 5',
     'Wally 2',
+    'Clown Jessie & James',
+    'Butler 1',
+    'Butler 2',
+    'Meta Groudon',
     'Sevii Rocket Grunt 1',
     'Sevii Rocket Grunt 2',
     'Sevii Rocket Grunt 3',
@@ -1496,6 +1518,7 @@ export const TemporaryBattles = [
     'Ash Ketchum Kalos',
     'Ash Ketchum Pinkan',
     'Calem 6',
+    'Grand Duchess Diantha',
     'Hau 1',
     'Hau 2',
     'Hau 3',
@@ -1748,7 +1771,7 @@ export enum BattlePokemonGender {
 }
 
 // Pokemon Statistics
-export enum PokemonStatiticsType {
+export enum PokemonStatisticsType {
     Captured = 'Captured',
     Defeated = 'Defeated',
     Encountered = 'Encountered',
@@ -1775,7 +1798,7 @@ export enum AlcremieSpins {
     nightCounterclockwiseBelow5,
     dayClockwiseAbove5,
     dayCounterclockwiseAbove5,
-    at7Above10,
+    at5Above10,
 }
 
 export enum ExtraAchievementCategories {

@@ -367,7 +367,7 @@ class Plot implements Saveable {
             return undefined;
         }
         // Chance to generate wandering Pokemon
-        if (Rand.chance(GameConstants.WANDER_RATE * App.game.farming.externalAuras[AuraType.Attract]())) {
+        if (Rand.chance(GameConstants.WANDER_RATE * App.game.farming.externalAuras[AuraType.Attract]() * Math.max(1 - App.game.farming.externalAuras[AuraType.Repel](), 0))) {
             // Get a random Pokemon from the list of possible encounters
             const availablePokemon: PokemonNameType[] = this.berryData.wander.filter(pokemon => PokemonHelper.calcNativeRegion(pokemon) <= player.highestRegion());
             const wanderPokemon = Rand.fromArray(availablePokemon);
@@ -391,7 +391,7 @@ class Plot implements Saveable {
             }
 
             // Gain Pokemon
-            App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(wanderPokemon).id, shiny, true);
+            App.game.party.gainPokemonByName(wanderPokemon, shiny, true);
             const partyPokemon = App.game.party.getPokemon(PokemonHelper.getPokemonByName(wanderPokemon).id);
             partyPokemon.effortPoints += App.game.party.calculateEffortPoints(partyPokemon, shiny, GameConstants.WANDERER_EP_YIELD, Berry.baseWander.includes(wanderPokemon));
 

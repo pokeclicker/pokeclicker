@@ -12,8 +12,9 @@ class Safari {
     private static origin;
     static inProgress: KnockoutObservable<boolean> = ko.observable(false);
     static inBattle: KnockoutObservable<boolean> = ko.observable(false);
-    static balls: KnockoutObservable<number> = ko.observable();
-    static activeRegion: KnockoutObservable<GameConstants.Region> = ko.observable(GameConstants.Region.kanto);
+    static balls: KnockoutObservable<number> = ko.observable().extend({ numeric: 0 });
+    static activeRegion: KnockoutObservable<GameConstants.Region> = ko.observable(GameConstants.Region.none);
+    static activeZone: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 0 });
 
     public static sizeX(): number {
         return Math.floor(document.querySelector('#safariModal .modal-dialog').scrollWidth / 32);
@@ -145,7 +146,8 @@ class Safari {
 
     public static startSafari() {
         if (this.canAccess()) {
-            if (player.region != this.activeRegion()) {
+            // Check if player has an active Safari Zone session
+            if (this.activeRegion() >= 0 && player.region != this.activeRegion()) {
                 this.safariReset();
             } else {
                 this.openModal();
@@ -179,6 +181,7 @@ class Safari {
 
             App.game.wallet.loseAmount(Safari.cost());
             Safari.load();
+            GameHelper.incrementObservable(App.game.statistics.safariTimesEntered, 1);
         }
     }
 
@@ -261,6 +264,7 @@ class Safari {
 
         if (Safari.canMove(newPos.x, newPos.y)) {
             const next = $(`#safari-${newPos.x}-${newPos.y}`).offset();
+            GameHelper.incrementObservable(App.game.statistics.safariStepsTaken, 1);
             const offset = {
                 top: `+=${directionOffset.y * 32}`,
                 left: `+=${directionOffset.x * 32}`,
@@ -402,11 +406,15 @@ class Safari {
     }
 
     static completed(shiny = false) {
-        ///TODO: If more than 1 zone per region, need to make this work
+        // Check current region
         if (SafariPokemonList.list[player.region]) {
-            return SafariPokemonList.list[player.region]()[0].safariPokemon.reduce((all,poke) => {
-                return all && App.game.party.alreadyCaughtPokemonByName(poke.name,shiny);
-            }, true);
+            // Check each zone
+            return SafariPokemonList.list[player.region]().every((list) => {
+                // Check each pokemon within this zone
+                return list.safariPokemon.every(poke => {
+                    return App.game.party.alreadyCaughtPokemonByName(poke.name, shiny);
+                });
+            });
         }
         return false;
     }
@@ -414,6 +422,8 @@ class Safari {
 
 document.addEventListener('DOMContentLoaded', () => {
     $('#safariModal').on('hide.bs.modal', () => {
+        Safari.inBattle(false);
+        SafariBattle.busy(false);
         MapHelper.moveToTown('Fuchsia City');
     });
 });
