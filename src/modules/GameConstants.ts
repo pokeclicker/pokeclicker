@@ -1518,6 +1518,7 @@ export const TemporaryBattles = [
     'Ash Ketchum Kalos',
     'Ash Ketchum Pinkan',
     'Calem 6',
+    'Grand Duchess Diantha',
     'Hau 1',
     'Hau 2',
     'Hau 3',
@@ -1798,7 +1799,7 @@ export enum AlcremieSpins {
     nightCounterclockwiseBelow5,
     dayClockwiseAbove5,
     dayCounterclockwiseAbove5,
-    at7Above10,
+    at5Above10,
 }
 
 export enum ExtraAchievementCategories {

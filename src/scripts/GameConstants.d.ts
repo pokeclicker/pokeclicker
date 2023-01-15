@@ -671,7 +671,7 @@ namespace GameConstants {
         nightCounterclockwiseBelow5,
         dayClockwiseAbove5,
         dayCounterclockwiseAbove5,
-        at7Above10
+        at5Above10
     }
     declare enum ExtraAchievementCategories {
         global,

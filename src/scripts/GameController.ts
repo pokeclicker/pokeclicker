@@ -137,7 +137,7 @@ class GameController {
 
             // Set our number key if defined (-1 for 0 indexed)
             const numberKey = (+key) - 1;
-            const isNumberKey = !isNaN(numberKey);
+            const isNumberKey = !isNaN(numberKey) && numberKey >= 0;
 
             const visibleModals = $('.modal:visible').length;
 
@@ -294,25 +294,14 @@ class GameController {
             if (visibleModals === 0) {
                 // Route Battles
                 if (App.game.gameState === GameConstants.GameState.fighting) {
-                    const initialRoute = MapHelper.normalizeRoute(player.route(),player.region, false);
-                    const firstRoute = Routes.getRoutesByRegion(player.region)[0].number;
-                    const lastRoute = Routes.getRoutesByRegion(player.region)[Routes.getRoutesByRegion(player.region).length - 1].number;
+                    const cycle = Routes.getRoutesByRegion(player.region).filter(r => r.isUnlocked()).map(r => r.number);
+                    const idx = cycle.findIndex(r => r == player.route());
                     // Allow '=' to fallthrough to '+' since they share a key on many keyboards
                     switch (key) {
                         case '=':
-                        case '+':
-                            if (initialRoute + 1 > MapHelper.normalizeRoute(lastRoute, player.region, false)) {
-                                MapHelper.moveToRoute(firstRoute, player.region);
-                            } else {
-                                MapHelper.moveToRoute(Routes.unnormalizeRoute(initialRoute + 1), player.region);
-                            }
+                        case '+': MapHelper.moveToRoute(cycle[(idx + 1) % cycle.length], player.region);
                             return e.preventDefault();
-                        case '-':
-                            if (initialRoute - 1 < MapHelper.normalizeRoute(firstRoute, player.region, false)) {
-                                MapHelper.moveToRoute(lastRoute, player.region);
-                            } else {
-                                MapHelper.moveToRoute(Routes.unnormalizeRoute(initialRoute - 1), player.region);
-                            }
+                        case '-': MapHelper.moveToRoute(cycle[(idx + cycle.length - 1) % cycle.length], player.region);
                             return e.preventDefault();
                     }
                 }
@@ -369,6 +358,16 @@ class GameController {
                             filteredNPCs[numberKey - filteredContent.length].openDialog();
                         }
                         return e.preventDefault();
+                    } else if (player.town() instanceof DungeonTown) {
+                        const cycle = Object.values(TownList).filter(t => t instanceof DungeonTown && t.region == player.region && t.isUnlocked());
+                        const idx = cycle.findIndex(d => d.name == player.town().name);
+                        switch (key) {
+                            case '=' :
+                            case '+' : MapHelper.moveToTown(cycle[(idx + 1) % cycle.length].name);
+                                return e.preventDefault();
+                            case '-' : MapHelper.moveToTown(cycle[(idx + cycle.length - 1) % cycle.length].name);
+                                return e.preventDefault();
+                        }
                     }
                 }
             }
