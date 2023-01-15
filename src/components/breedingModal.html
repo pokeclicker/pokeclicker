@@ -142,7 +142,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                 <label>Sort</label>
                                 <div class="input-group">
                                     <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])"
-                                        data-bind="foreach: $data.options, attr: {name}, selectedOptions: [$data.observableValue()]">
+                                        data-bind="foreach: $data.options.filter(o => o.value !== SortOptions.level), attr: {name}, selectedOptions: [$data.observableValue()]">
                                         <option data-bind="text: $data.text, value: $data.value"></option>
                                     </select>
                                     <div class="input-group-append bg-primary text-light">
@@ -157,18 +157,6 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                     </div>
                                 </div>
                             </div>
-                            <!--Breeding Efficiency Toggle-->
-                            <div class="form-group col-md-3 col-6" style="max-width: 100%; flex-grow: 1">
-                                    <label>Include EV bonus</label>
-                                    <label class="form-check-label toggler-wrapper style-1">
-                                        <input class="form-check-input" type="checkbox" id="breeding-include-ev-bonus"
-                                            data-bind="checked: Settings.getSetting('breedingIncludeEVBonus').observableValue()"
-                                            onchange="Settings.setSettingByName('breedingIncludeEVBonus', this.checked)">
-                                        <div class="toggler-slider">
-                                            <div class="toggler-knob"></div>
-                                        </div>
-                                    </label>
-                            </div>
                         </div>
                     </div>
                     <div>
@@ -177,7 +165,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             Unfortunately, you don't have any Pokémon of level 100 to breed.
                         </p>
                         <!-- ko if: App.game.party.hasMaxLevelPokemon() -->
-                        <ul class="row justify-content-center p-0" data-bind="foreach: lazyLoad($element, PartyController.getHatcherySortedList)">
+                        <ul class="row justify-content-center p-0" data-bind="foreach: lazyLoad($element, PartyController.getHatcherySortedList, { reset: modalUtils.observableState.breedingModalObservable })">
                             <li class="eggSlot col-sm-4 col-md-3 col-lg-2 pokedexEntry" data-bind="visible: BreedingController.visible($data), style:{background: PokedexHelper.getBackgroundColors($data.name)}, class: App.game.breeding.hasFreeEggSlot() || App.game.breeding.hasFreeQueueSlot() ? '' : 'disabled'">
                                 <span class="breedingListPokemonName" data-bind="text: $data.displayName">name</span>
                                 <div class="breedingListShiny" data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)">✨</div>
@@ -317,7 +305,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                             <td class="text-left align-middle">Sort:</td>
                                             <td class="text-center align-middle">
                                                 <div class="input-group input-group-sm">
-                                                    <select autocomplete="off" class="custom-select" data-bind="options: GameHelper.enumSelectOption(SortOptions), optionsValue: 'value', optionsText: i => GameConstants.camelCaseToString(i.name), value: $data.sortOption"></select>
+                                                    <select autocomplete="off" class="custom-select" data-bind="options: GameHelper.enumSelectOption(SortOptions).filter(o => o.value !== SortOptions.level), optionsValue: 'value', optionsText: i => SortOptionConfigs[i.value].text, value: $data.sortOption"></select>
                                                     <div class="input-group-append bg-primary text-light">
                                                         <label class="clickable m-0 px-2" style="font-size: 20px;" data-bind="
                                                             attr: {for: 'hatcheryHelperSortDirection' + $index() },

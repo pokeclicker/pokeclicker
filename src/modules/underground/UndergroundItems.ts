@@ -6,6 +6,7 @@ import Rand from '../utilities/Rand';
 import UndergroundEvolutionItem from './UndergroundEvolutionItem';
 import UndergroundGemItem from './UndergroundGemItem';
 import UndergroundItem from './UndergroundItem';
+import UndergroundMegaStoneItem from './UndergroundMegaStoneItem';
 
 export default class UndergroundItems {
     public static list: Array<UndergroundItem> = [];
@@ -126,14 +127,19 @@ UndergroundItems.addItem(new UndergroundItem('Red Shard', 400, [[1, 1, 1], [1, 1
 UndergroundItems.addItem(new UndergroundItem('Yellow Shard', 401, [[1, 0, 1, 0], [1, 1, 1, 0], [1, 1, 1, 1]], 0, UndergroundItemValueType.Shard));
 UndergroundItems.addItem(new UndergroundItem('Green Shard', 402, [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 0, 1]], 0, UndergroundItemValueType.Shard));
 UndergroundItems.addItem(new UndergroundItem('Blue Shard', 403, [[1, 1, 1], [1, 1, 1], [1, 1, 0]], 0, UndergroundItemValueType.Shard));
-UndergroundItems.addItem(new UndergroundItem('Grey Shard', 404, [[1, 1, 1], [1, 1, 1], [0, 0, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.johto)));
-UndergroundItems.addItem(new UndergroundItem('Purple Shard', 405, [[1, 1, 1], [1, 1, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.johto)));
-UndergroundItems.addItem(new UndergroundItem('Ochre Shard', 406, [[1, 1, 0], [1, 1, 1], [1, 1, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.hoenn)));
+UndergroundItems.addItem(new UndergroundItem('Grey Shard', 404, [[1, 1, 1], [1, 1, 1], [0, 1, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.johto)));
+UndergroundItems.addItem(new UndergroundItem('Purple Shard', 405, [[1, 1, 1, 1], [1, 1, 1, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.johto)));
+UndergroundItems.addItem(new UndergroundItem('Ochre Shard', 406, [[1, 1, 0, 0], [1, 1, 1, 0], [1, 1, 1, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.hoenn)));
 UndergroundItems.addItem(new UndergroundItem('Black Shard', 407, [[1, 1, 1], [0, 1, 1], [0, 1, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.sinnoh)));
-UndergroundItems.addItem(new UndergroundItem('Crimson Shard', 408, [[0, 1, 1, 1], [0, 1, 1, 1], [0, 1, 1, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.sinnoh)));
+UndergroundItems.addItem(new UndergroundItem('Crimson Shard', 408, [[1, 1, 1], [1, 1, 1], [1, 1, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.sinnoh)));
 UndergroundItems.addItem(new UndergroundItem('Lime Shard', 409, [[0, 0, 0, 0], [0, 1, 1, 1], [1, 1, 1, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.sinnoh)));
 UndergroundItems.addItem(new UndergroundItem('White Shard', 410, [[1, 1, 1, 1], [0, 1, 1, 1], [0, 1, 1, 0]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.sinnoh)));
 UndergroundItems.addItem(new UndergroundItem('Pink Shard', 411, [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.kalos)));
 UndergroundItems.addItem(new UndergroundItem('Cyan Shard', 412, [[1, 1, 1, 1], [0, 1, 1, 1], [0, 0, 1, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.alola)));
 UndergroundItems.addItem(new UndergroundItem('Rose Shard', 413, [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.galar)));
 UndergroundItems.addItem(new UndergroundItem('Brown Shard', 414, [[1, 1, 0], [1, 1, 0], [1, 1, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.galar)));
+
+// MegaStones
+UndergroundItems.addItem(new UndergroundMegaStoneItem('Aerodactylite', 500, [[1, 1, 1], [1, 1, 1], [1, 1, 1]], 0, 'Aerodactyl', 0.1));
+UndergroundItems.addItem(new UndergroundMegaStoneItem('Mawilite', 501, [[1, 1, 1], [1, 1, 1], [1, 1, 1]], 0, 'Mawile', 0.1));
+UndergroundItems.addItem(new UndergroundMegaStoneItem('Sablenite', 502, [[1, 1, 1], [1, 1, 1], [1, 1, 1]], 0, 'Sableye', 0.1));
