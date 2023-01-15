@@ -22,7 +22,7 @@ class RoamerNPC extends NPC {
 
         roamers.forEach((roamer) => {
             if (App.game.statistics.pokemonEncountered[roamer.pokemon.id]() === 0) {
-                PokemonHelper.incrementPokemonStatistics(roamer.pokemon.id, GameConstants.PokemonStatisticsType.Seen, false, roamer.pokemon.gender.type);
+                GameHelper.incrementObservable(App.game.statistics.pokemonSeen[roamer.pokemon.id]);
             }
         });
 

@@ -114,7 +114,6 @@ export function incrementPokemonStatistics(pokemonId: number, statistic: Pokemon
     const pokemonStatistics = {
         Captured: App.game.statistics.pokemonCaptured[pokemonId],
         Defeated: App.game.statistics.pokemonDefeated[pokemonId],
-        Seen: App.game.statistics.pokemonSeen[pokemonId],
         Encountered: App.game.statistics.pokemonEncountered[pokemonId],
         Hatched: App.game.statistics.pokemonHatched[pokemonId],
         MaleCaptured: App.game.statistics.malePokemonCaptured[pokemonId],
