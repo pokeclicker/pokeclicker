@@ -1898,6 +1898,9 @@ const FortreeCityShop = new Shop([
     ItemList.LargeRestore,
     ItemList.Leaf_stone,
 ]);
+const WindChimeShop = new Shop([
+    ItemList['Probably Chimecho'],
+], 'Shady Deal');
 const MossdeepCityShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
@@ -1980,7 +1983,7 @@ const SlateportHoennRoamerNPC = new RoamerNPC('Reporter Gabby', [
 ], GameConstants.Region.hoenn, RoamingPokemonList.findGroup(GameConstants.Region.hoenn, GameConstants.HoennSubRegions.Hoenn), 'assets/images/npcs/Reporter.png');
 
 const SkepticalFisherman = new NPC('Skeptical Fisherman', [
-    'There\'s some salesman offering rare fish out at the intersection of Route 118 and Route 119.',
+    'There\'s some salesman offering rare fish east of New Mauville, out on the water.',
     'I\'m a bit skeptical of his wares, especially since his shop isn\'t on any maps.',
 ], {image: 'assets/images/trainers/Fisherman.png'});
 
@@ -2012,6 +2015,12 @@ const FortreeRanger = new NPC('Pokémon Ranger Catherine', [
     'Disposable Dowsing Machines! Who even came up with this?! People leave these everywhere. It\'s absolutely terrible for the environment. Some poor innocent Pokémon could choke on it!',
     'Please recycle your used Dowsing Machines.',
 ], {image: 'assets/images/npcs/Pokemon Ranger (female).png'});
+
+const WindChimeShopShadySalesman = new NPC('Shady Salesman', [
+    'Step right up! Get your Chimecho while they last! Chimecho, a very rare Pokémon indeed, with a voice that\'s both beautiful and powerful. Look closer! I see it bringing a smile to your face, just gazing into those loving eyes! They say these are the most gentle, healing eyes in the Pokémon kingdom.',
+    'That\'s not all! Just look at the way Chimecho\'s tail swings and sways with the wind, like a weeping willow in a summer breeze. In really hot weather, it will act like a fan to help you cool off. And when it\'s cold outside, your Chimecho can wrap itself around your neck like a scarf, to keep you warm.',
+    'And one more thing. It\'s not widely known, but it\'s a true fact; Chimecho are able to choose winning lottery tickets! Soo you see, my friend, just having a Chimecho with you, is a sure-fire ticket to happiness and success. Let Chimecho give you total peace and happiness, for a good price!',
+], {image: 'assets/images/npcs/ShadySalesman.png'});
 
 const Steven1 = new NPC('Steven', [
     'I have been investigating the behavior of Kecleon, the Color Swap Pokémon.',
@@ -2054,7 +2063,7 @@ const Wallace2 = new NPC('Gym Leader Wallace', [
 
 const WeatherBattle1 = new NPC('The Super-Ancient Pokémon Clash', [
     '<i>Groudon and Kyogre have been awakened by the efforts of Team Magma and Team Aqua! They are engaged in a fierce battle which threatens to destroy Sootopolis City... and more!</i>',
-    '<i>The locals in Sootopolis City take shelter from the raging battle. Some say that this sort of this would never happen if Wallace was still around.</i>',
+    '<i>The locals in Sootopolis City take shelter from the raging battle. Some say that this sort of thing would never happen if Wallace was still around.</i>',
 ], {image: 'assets/images/npcs/other/WeatherBattle1.png',
     requirement: new MultiRequirement([new QuestLineStartedRequirement('The Weather Trio'), new QuestLineStepCompletedRequirement('The Weather Trio', 1, GameConstants.AchievementOption.less)]),
 });
@@ -2300,8 +2309,8 @@ TownList['Lavaridge Town'] = new Town(
         npcs: [MillenniumFest, Butler1],
     }
 );
-TownList['Roadside Stand'] = new Town(
-    'Roadside Stand',
+TownList['Fish Shop'] = new Town(
+    'Fish Shop',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
     [RoadsideStandShop],
@@ -2321,6 +2330,17 @@ TownList['Fortree City'] = new Town(
     {
         requirements: [new TemporaryBattleRequirement('May 4')],
         npcs: [FortreeWeatherman, FortreeRanger, Steven1, Steven2],
+    }
+);
+TownList['Wind Chime Shop'] = new Town(
+    'Wind Chime Shop',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Hoenn,
+    [WindChimeShop],
+    {
+        requirements: [new TemporaryBattleRequirement('May 4')],
+        npcs: [WindChimeShopShadySalesman],
+        ignoreAreaStatus: true,
     }
 );
 TownList['Lilycove City'] = new Town(
@@ -4102,7 +4122,7 @@ const CoumarineBirdwatcher = new NPC('Birdwatcher', [
 const CoumarineElectricTrainer = new NPC('Electric Trainer', [
     'My Ampharos has gotten a boost since a friendly soul gave me an Ampharosite!',
     'Luckily my Ampharos was already strong enough to use it!',
-    'If you find that fella, tell him the code <b>ELECTRIC-GIRAFFE</b> and he might help you too!',
+    'If you find that fella, tell him the code <b>DO-MAGEARNA-DREAM-OF-MAREEP?</b> and he might help you too!',
 ]);
 
 const LaverreFurisodeGirlKatherine = new NPC('Furisode Girl Katherine', [
@@ -4181,7 +4201,7 @@ TownList['Lumiose City'] = new Town(
     'Lumiose City',
     GameConstants.Region.kalos,
     GameConstants.KalosSubRegions.Kalos,
-    [TemporaryBattleList['Sycamore 1'], TemporaryBattleList['Tierno 1'], DepartmentStoreShop, FriseurFurfrouShop, TemporaryBattleList.AZ, TemporaryBattleList.Merilyn],
+    [TemporaryBattleList['Sycamore 1'], TemporaryBattleList['Tierno 1'], DepartmentStoreShop, FriseurFurfrouShop, TemporaryBattleList.AZ, TemporaryBattleList.Merilyn, TemporaryBattleList['Grand Duchess Diantha']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 4)],
         npcs: [ProfSycamore, LumioseEngineer],
@@ -4737,7 +4757,7 @@ const DrSplash3 = new NPC('Dr. Splash', [
     'Wow, that\'s a lot of stuff! This place is starting to look like a proper lab now!',
     'I have discovered that a critical part of any Magikarp training program is pushing other Pokémon around in a field. This form of exercise rounds out the muscle groups and really boosts performance.',
     'According to my calculations, the ideal Pokémon to push around are Dwebble, Boldore, Forretress, Golem, and Steelix. Can you catch or hatch me some?',
-    'Steer clear of the Alola version of Golem, it\'s electrical fields are too dangerous to use.',
+    'Steer clear of the Alolan version of Golem, its electrical fields are too dangerous to use.',
 ], {
     image: 'assets/images/npcs/Dr Splash.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Dr. Splash\'s Research Project', 3), new QuestLineStepCompletedRequirement('Dr. Splash\'s Research Project', 5, GameConstants.AchievementOption.less)]),
