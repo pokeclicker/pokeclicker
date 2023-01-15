@@ -2432,7 +2432,7 @@ TemporaryBattleList['Captain Mina'] = new TemporaryBattle(
         new GymPokemon('Granbull', 189973142, 51),
         new GymPokemon('Ribombee', 198608284, 51),
     ],
-    'Woah! I\'m shocked at your strength!',
+    'Woah! I\'m shocked at your strength! But you\'ve only just begun my real trial. Now you have to go around to all the captains in Alola!',
     [new TemporaryBattleRequirement('Ultra Megalopolis')],
     undefined,
     {imageName: '../gymLeaders/Mina'}
@@ -2444,7 +2444,7 @@ TemporaryBattleList['Captain Ilima'] = new TemporaryBattle(
         new GymPokemon('Smeargle', 189973142, 51),
         new GymPokemon('Komala', 198608284, 51),
     ],
-    'Yes! You have emerged victorious!',
+    'Yes! You have emerged victorious! You and your Pokémon have become quite a delightful team! Off to Lush Jungle? It\'s been awhile since I last visited Akala.',
     [
         new TemporaryBattleRequirement('Captain Mina'),
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Hau\'oli Cemetery')),
@@ -2459,7 +2459,7 @@ TemporaryBattleList['Captain Mallow'] = new TemporaryBattle(
         new GymPokemon('Shiinotic', 189973142, 51),
         new GymPokemon('Tsareena', 198608284, 51),
     ],
-    'Sure enough, when it comes to you and Pokémon, the quality of the ingredients shines forth!',
+    'Sure enough, when it comes to you and Pokémon, the quality of the ingredients shines forth! Once you defeat Lana do you want to go to Wela Volcano Park with two pretty pals like us?',
     [new TemporaryBattleRequirement('Captain Ilima')],
     undefined,
     {imageName: '../gymLeaders/Mallow'}
@@ -2471,7 +2471,7 @@ TemporaryBattleList['Captain Lana'] = new TemporaryBattle(
         new GymPokemon('Cloyster', 189973142, 51),
         new GymPokemon('Araquanid', 198608284, 51),
     ],
-    'Well! Once again, you certainly reeled me in.',
+    'Well! Once again, you certainly reeled me in. Please have a good time with Kiawe.',
     [new TemporaryBattleRequirement('Captain Mallow')],
     undefined,
     {imageName: '../gymLeaders/Lana'}
@@ -2483,7 +2483,7 @@ TemporaryBattleList['Captain Kiawe'] = new TemporaryBattle(
         new GymPokemon('Talonflame', 189973142, 51),
         new GymPokemon('Alolan Marowak', 198608284, 51),
     ],
-    'Not enough dancing!',
+    'Not enough dancing! If you\'re hoping to complete Mina\'s trial, you should make for Hokulani Observatory next. Ula\'Ula is only a stone\'s throw away when Charizard is one of your Ride Pokémon!',
     [new TemporaryBattleRequirement('Captain Lana')],
     undefined,
     {imageName: '../gymLeaders/Kiawe'}
@@ -2495,7 +2495,7 @@ TemporaryBattleList['Captain Sophocles'] = new TemporaryBattle(
         new GymPokemon('Magnezone', 189973142, 51),
         new GymPokemon('Alolan Golem', 198608284, 51),
     ],
-    'I couldn\'t get it done. Don\'t worry about it, my precious Pokémon...',
+    'I couldn\'t get it done. Don\'t worry about it, my precious Pokémon... You\'ve gotta finish Mina\'s trial, right? Are you going to Tapu Village?',
     [new TemporaryBattleRequirement('Captain Kiawe')],
     undefined,
     {imageName: '../gymLeaders/Sophocles'}
@@ -2507,7 +2507,7 @@ TemporaryBattleList['Kahuna Nanu'] = new TemporaryBattle(
         new GymPokemon('Absol', 90200640, 51),
         new GymPokemon('Alolan Persian', 198608284, 51),
     ],
-    '...',
+    'Heh... You got me good, kid. Hope I don\'t get in trouble with the girl for this. You should go tell that young filly Mina that you\'re done with what she asked you to do.',
     [new TemporaryBattleRequirement('Captain Sophocles')],
     undefined,
     {imageName: '../gymLeaders/Nanu'}
