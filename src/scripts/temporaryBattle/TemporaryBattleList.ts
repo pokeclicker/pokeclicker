@@ -2180,6 +2180,24 @@ TemporaryBattleList['Calem 6'] = new TemporaryBattle(
     }
 );
 
+TemporaryBattleList['Grand Duchess Diantha'] = new TemporaryBattle(
+    'Grand Duchess Diantha',
+    [
+        new GymPokemon('Hawlucha', 110668215, 80),
+        new GymPokemon('Gourgeist (Average)', 115668215, 80),
+        new GymPokemon('Goodra', 120770015, 80),
+        new GymPokemon('Mega Gardevoir', 125000000, 80),
+    ],
+    'Witnessing the noble spirits of you and your Pokémon in battle has really touched my heart... Please, take this Gardevoirite.</br><img src="assets/images/megaStone/282.png"/></br>I just... I just don\'t know what to say... I can hardly express this feeling...',
+    [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion), new ObtainedPokemonRequirement('Gardevoir')],
+    undefined,
+    {
+        displayName: 'Grand Duchess Diantha',
+        imageName: '../gymLeaders/Diantha',
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Gardevoir').giveMegastone(),
+    }
+);
+
 //Alola Temporary Battles
 TemporaryBattleList['Hau 1'] = new TemporaryBattle(
     'Hau 1',
@@ -3014,7 +3032,7 @@ TemporaryBattleList['Magikarp Jump Karpen 4'] = new TemporaryBattle(
 TemporaryBattleList['Magikarp Jump Karpella 3'] = new TemporaryBattle(
     'Magikarp Jump Karpella 3',
     [new GymPokemon('Magikarp Purple Patches', 39285000, 20)],
-    'I will beat you next time! Any fin is possible is you believe it!',
+    'I will beat you next time! Any fin is possible if you believe in it!',
     [new TemporaryBattleRequirement('Magikarp Jump Karpen 4')],
     undefined,
     {

@@ -1,8 +1,8 @@
-import WeatherType from './DayCyclePart';
+import DayCyclePart from './DayCyclePart';
 
 export default class DayCycleMoment {
     constructor(
-        public type: WeatherType,
+        public type: DayCyclePart,
         public color: string,
         public description: string,
     ) { }

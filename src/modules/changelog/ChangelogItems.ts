@@ -10,6 +10,18 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.10.7
+    new ChangelogUpdate('v0.10.7', new Date(2023, 0, 14)),
+    new Changelog(changelogType.NEW, 'New Megas'),
+    new Changelog(changelogType.NEW, 'New Quest Lines'),
+    new Changelog(changelogType.NEW, 'New Held Items'),
+    new Changelog(changelogType.CHANGE, 'Improved Vitamin UI'),
+    new Changelog(changelogType.CHANGE, 'Can now open multiple Dream Orbs at a time'),
+    new Changelog(changelogType.CHANGE, 'Oak Items now have 5 loadouts'),
+    new Changelog(changelogType.CHANGE, 'Misc text changes'),
+    new Changelog(changelogType.CHANGE, 'Misc image changes'),
+    new Changelog(changelogType.FIXED, 'Misc Hatchery fixes'),
+
     // v0.10.6
     new ChangelogUpdate('v0.10.6', new Date(2023, 0, 1)),
     new Changelog(changelogType.NEW, 'Added new Aura to the Farm (Repel)'),
