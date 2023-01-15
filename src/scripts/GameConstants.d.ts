@@ -70,7 +70,6 @@ namespace GameConstants {
     declare const FREEZE_MULCH_MULTIPLIER: number;
     declare const WANDER_RATE: number;
     declare const BerryColor: string[];
-    declare const BerryFirmness: string[];
     declare const BASE_DUNGEON_SIZE: number;
     declare const MIN_DUNGEON_SIZE: number;
     declare const MAX_DUNGEON_SIZE: number;
@@ -379,17 +378,8 @@ namespace GameConstants {
     declare enum PokeBlockColor {
         Black,
         Red,
-        Blue,
-        Pink,
-        Green,
-        Yellow,
         Gold,
         Purple,
-        Indigo,
-        Brown,
-        LiteBlue,
-        Olive,
-        Flaxen,
         Gray,
         White
     }
