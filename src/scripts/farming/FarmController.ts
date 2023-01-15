@@ -192,9 +192,9 @@ class FarmController {
         if (App.game.farming.unlockedBerries[index]()) {
             return GameConstants.BerryColor[App.game.farming.berryData[index].color];
         } else if (FarmController.getHint(index, true) !== '') {
-            return GameConstants.BerryColor[8];
+            return GameConstants.BerryColor[6];
         } else {
-            return GameConstants.BerryColor[9];
+            return GameConstants.BerryColor[7];
         }
 
     }
