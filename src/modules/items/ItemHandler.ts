@@ -3,6 +3,7 @@ import { ItemList } from './ItemList';
 import NotificationConstants from '../notifications/NotificationConstants';
 import Notifier from '../notifications/Notifier';
 import { PokemonNameType } from '../pokemons/PokemonNameType';
+import { StoneType } from '../GameConstants';
 
 export default class ItemHandler {
     public static stoneSelected: Observable<string> = ko.observable('Fire_stone');
@@ -49,12 +50,20 @@ export default class ItemHandler {
                 type: NotificationConstants.NotificationOption.danger,
             });
         }
+
         const amountTotal = Math.min(this.amountSelected(), player.itemList[this.stoneSelected()]());
 
         if (!amountTotal) {
             return Notifier.notify({
                 // TODO: PMX - Update plural system to handle all cases
                 message: `You don't have any ${ItemList[this.stoneSelected()].displayName}s left...`,
+                type: NotificationConstants.NotificationOption.danger,
+            });
+        }
+
+        if (!App.game.party.getPokemonByName(this.pokemonSelected()).canUseStone(StoneType[this.stoneSelected()])) {
+            return Notifier.notify({
+                message: `${this.pokemonSelected()} isn't possible to evolve right now...<br>Check the lock icons next to the pokeballs for more details.`,
                 type: NotificationConstants.NotificationOption.danger,
             });
         }
