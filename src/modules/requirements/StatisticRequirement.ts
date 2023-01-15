@@ -17,8 +17,8 @@ const getStat = <
     T extends ReadonlyArray<string | number>,
 >(keys: T): GetNested<Statistics, T> => keys.reduce((s, p) => s[p], App.game.statistics);
 
-Example: getStat(['secondsPlayed'] as const);
-Exmaple: getStat(['pokemonEncountered', PokemonHelper.getPokemonByName('Gengar').id] as const)
+// Example: getStat(['secondsPlayed'] as const);
+// Example: getStat(['pokemonEncountered', PokemonHelper.getPokemonByName('Gengar').id] as const)
 */
 
 export default class StatisticRequirement extends Requirement {
