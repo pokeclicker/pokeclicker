@@ -22,6 +22,8 @@ class Plot implements Saveable {
 
     formattedStageTimeLeft: KnockoutComputed<string>;
     formattedTimeLeft: KnockoutComputed<string>;
+    calcFormattedStageTimeLeft: (includeGrowthMultiplier: boolean) => string;
+    calcFormattedTimeLeft: (includeGrowthMultiplier: boolean) => string;
     formattedBaseStageTimeLeft: KnockoutComputed<string>;
     formattedBaseTimeLeft: KnockoutComputed<string>;
     formattedMulchTimeLeft: KnockoutComputed<string>;
@@ -73,50 +75,48 @@ class Plot implements Saveable {
             }).extend({ rateLimit: 50 }),
         };
 
-        this.formattedStageTimeLeft = ko.pureComputed(() => {
+        this.calcFormattedStageTimeLeft = ((includeGrowthMultiplier: boolean) => {
             if (this.berry === BerryType.None) {
                 return '';
             }
             const growthTime = this.berryData.growthTime.find(t => this.age < t);
             const timeLeft = Math.ceil(growthTime - this.age);
-            const growthMultiplier = App.game.farming.getGrowthMultiplier() * this.getGrowthMultiplier();
+            const growthMultiplier = includeGrowthMultiplier
+                ? App.game.farming.getGrowthMultiplier() * this.getGrowthMultiplier()
+                : 1;
+            return GameConstants.formatTime(timeLeft / growthMultiplier);
+        });
+
+        this.formattedStageTimeLeft = ko.pureComputed(() => {
+            return this.calcFormattedStageTimeLeft(true);
+        });
+
+        this.formattedBaseStageTimeLeft = ko.pureComputed(() => {
+            return this.calcFormattedStageTimeLeft(false);
+        });
+
+        this.calcFormattedTimeLeft = ((includeGrowthMultiplier: boolean) => {
+            if (this.berry === BerryType.None) {
+                return '';
+            }
+            let timeLeft = 0;
+            if (this.age < this.berryData.growthTime[3]) {
+                timeLeft = Math.ceil(this.berryData.growthTime[3] - this.age);
+            } else {
+                timeLeft = Math.ceil(this.berryData.growthTime[4] - this.age);
+            }
+            const growthMultiplier = includeGrowthMultiplier
+                ? App.game.farming.getGrowthMultiplier() * this.getGrowthMultiplier()
+                : 1;
             return GameConstants.formatTime(timeLeft / growthMultiplier);
         });
 
         this.formattedTimeLeft = ko.pureComputed(() => {
-            if (this.berry === BerryType.None) {
-                return '';
-            }
-            let timeLeft = 0;
-            if (this.age < this.berryData.growthTime[3]) {
-                timeLeft = Math.ceil(this.berryData.growthTime[3] - this.age);
-            } else {
-                timeLeft = Math.ceil(this.berryData.growthTime[4] - this.age);
-            }
-            const growthMultiplier = App.game.farming.getGrowthMultiplier() * this.getGrowthMultiplier();
-            return GameConstants.formatTime(timeLeft / growthMultiplier);
-        });
-
-        this.formattedBaseStageTimeLeft = ko.pureComputed(() => {
-            if (this.berry === BerryType.None) {
-                return '';
-            }
-            const growthTime = this.berryData.growthTime.find(t => this.age < t);
-            const timeLeft = Math.ceil(growthTime - this.age);
-            return GameConstants.formatTime(timeLeft / 1);
+            return this.calcFormattedTimeLeft(true);
         });
 
         this.formattedBaseTimeLeft = ko.pureComputed(() => {
-            if (this.berry === BerryType.None) {
-                return '';
-            }
-            let timeLeft = 0;
-            if (this.age < this.berryData.growthTime[3]) {
-                timeLeft = Math.ceil(this.berryData.growthTime[3] - this.age);
-            } else {
-                timeLeft = Math.ceil(this.berryData.growthTime[4] - this.age);
-            }
-            return GameConstants.formatTime(timeLeft / 1);
+            return this.calcFormattedTimeLeft(false);
         });
 
         this.formattedMulchTimeLeft = ko.pureComputed(() => {
