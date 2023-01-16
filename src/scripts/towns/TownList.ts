@@ -307,8 +307,8 @@ const PewterScientist = new NPC('Gem Scientist', [
 
 const Route3ShadySalesman = new NPC('Shady Salesman', [
     'Have I got a deal just for you!',
-    'I\'ll let you have a super secret Pokémon. For the right price!',
-], {image: 'assets/images/trainers/Burglar.png'});
+    'I\'ll let you have a super secret Pokémon. For the right price! Buying this pokemon Takes No Effort, you should Value it.',
+], {image: 'assets/images/npcs/ShadySalesman.png'});
 
 const CeruleanKantoBerryMaster = new KantoBerryMasterNPC('Berry Master', [
     'Bah! You younglings have no appreciation of the art of Berry farming!',
@@ -361,16 +361,21 @@ const LavenderChanneler = new NPC('Channeler Karina', [
     'No, I didn\'t learn this from talking to ghosts, don\'t be silly. There\'s a FAQ button in the Start Menu. It\'s very useful.',
 ], {image: 'assets/images/trainers/Channeler.png'});
 
+const LavenderShopper = new NPC('Shopper', [
+    'I always seem to run out of Great Balls. Luckly this shop always have them in stock!',
+    'They even have an offer today! They give you free Great Balls if you give them the code <b>THE-GREATEST-POKEBALL</b>',
+]);
+
 const BigSpender = new NPC('Big Spender', [
     'I love shopping! When I come in, the cashiers know I want tons of items.',
     'You can use the Shop Amount Button settings to make it easy for big purchases, too!',
 ], {image: 'assets/images/trainers/Beauty.png'});
 
 const EggHuntErika = new NPC('Erika', [
-    'And here comes another one. Let me guess, you\'re gonna ask me about the Togepi too?',
-    'Listen here you. Just because I\'m the Grass type gym leader doesn\'t mean I know everything that goes on in the forest! I live in one of the biggest cities in the region! With tall buildings! And gambling! And crime! I like it here! I don\'t care about the forest!',
+    'Hello... Isn\'t the spring weather so relaxing? I adore how lovely the blooming flowers look during this time of year...',
+    'Oh! I\'m sorry, I almost dozed off. I was reminiscing about my stroll in Viridian Forest earlier today. I came across the loveliest patch of flowers over there and...',
     '...',
-    'All right, fine. It just so happens that I have heard about <span style="font-style: italic">something</span> going on in Viridian Forest. But I don\'t know what, and I don\'t care! You can go figure it out! I\'m staying here! Viridian Forest doesn\'t even have any Grass types. It\'s all Bugs over there.',
+    'Zzz... Hm? Oh yes, the forest. It was most peculiar - when I laid down upon the flowerbed I had the strangest dream of a colorful, round Pokémon. At least, I think it was a dream... It did not strike me as one of the usual inhabitants of the area.',
 ], {
     image: 'assets/images/gymLeaders/Erika.png',
     requirement: new MultiRequirement([new QuestLineStartedRequirement('Togepi Egg Hunt'), new QuestLineCompletedRequirement('Togepi Egg Hunt', GameConstants.AchievementOption.less)]),
@@ -756,7 +761,7 @@ TownList['Lavender Town'] = new Town(
     [LavenderTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Lavender Town']), new MoveToDungeon(dungeonList['Pokémon Tower'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 10)],
-        npcs: [LavenderMrFuji, LavenderChanneler],
+        npcs: [LavenderMrFuji, LavenderChanneler, LavenderShopper],
     }
 );
 TownList['Celadon City'] = new Town(
@@ -1117,7 +1122,7 @@ TownList['Cerulean Cave'] = new DungeonTown(
 TownList['Ruby Path'] = new DungeonTown(
     'Ruby Path',
     GameConstants.Region.kanto,
-    GameConstants.KantoSubRegions.Sevii4567,
+    GameConstants.KantoSubRegions.Sevii123,
     [new QuestLineStepCompletedRequirement('Celio\'s Errand', 2)],
     [],
     {
@@ -1881,6 +1886,9 @@ const LavaridgeTownShop = new Shop([
     ItemList.Fire_egg,
     ItemList.Fire_stone,
 ]);
+const RoadsideStandShop = new Shop([
+    ItemList['Probably Feebas'],
+], 'Shady Deal');
 const FortreeCityShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
@@ -1890,6 +1898,9 @@ const FortreeCityShop = new Shop([
     ItemList.LargeRestore,
     ItemList.Leaf_stone,
 ]);
+const WindChimeShop = new Shop([
+    ItemList['Probably Chimecho'],
+], 'Shady Deal');
 const MossdeepCityShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
@@ -1971,6 +1982,11 @@ const SlateportHoennRoamerNPC = new RoamerNPC('Reporter Gabby', [
     'Our sources indicate that roaming Pokémon are gathering on {ROUTE_NAME}!',
 ], GameConstants.Region.hoenn, RoamingPokemonList.findGroup(GameConstants.Region.hoenn, GameConstants.HoennSubRegions.Hoenn), 'assets/images/npcs/Reporter.png');
 
+const SkepticalFisherman = new NPC('Skeptical Fisherman', [
+    'There\'s some salesman offering rare fish east of New Mauville, out on the water.',
+    'I\'m a bit skeptical of his wares, especially since his shop isn\'t on any maps.',
+], {image: 'assets/images/trainers/Fisherman.png'});
+
 const FallarborProfessorCozmo = new NPC('Prof. Cozmo', [
     'Oh! Welcome, welcome. Do you by any chance have any Meteorites? No? Ah well, I’m studying the Pokémon Deoxys and I’ve heard that a Meteorite can cause it to change forms!',
     'I’ve also heard that the Battle Frontier may have some secrets relevant to Deoxys and its forms… but I’m not strong enough to find out...',
@@ -1981,6 +1997,12 @@ const LavaridgeSootCollector = new NPC('Soot Collector', [
     'The Flute Trader in Fallarbor Town has been paying me to go collect soot to make Flutes, but I\'m sick of it.',
     'People say they have truly mystical powers, but that they require Gems of different types to use. Also, using more Flutes at the same time costs more Gems to use.',
 ]);
+
+const RoadsideStandShadySalesman = new NPC('Shady Salesman', [
+    'Have I got a deal just for you!',
+    'I have spent weeks finding the perfect fishing spot for Feebas, and finally got some! For a special low price, I\'ll sell you one!',
+    'All sales are final!',
+], {image: 'assets/images/npcs/ShadySalesman.png'});
 
 const FortreeWeatherman = new NPC('Weatherman', [
     'Castform is a very finicky Pokémon.',
@@ -1993,6 +2015,12 @@ const FortreeRanger = new NPC('Pokémon Ranger Catherine', [
     'Disposable Dowsing Machines! Who even came up with this?! People leave these everywhere. It\'s absolutely terrible for the environment. Some poor innocent Pokémon could choke on it!',
     'Please recycle your used Dowsing Machines.',
 ], {image: 'assets/images/npcs/Pokemon Ranger (female).png'});
+
+const WindChimeShopShadySalesman = new NPC('Shady Salesman', [
+    'Step right up! Get your Chimecho while they last! Chimecho, a very rare Pokémon indeed, with a voice that\'s both beautiful and powerful. Look closer! I see it bringing a smile to your face, just gazing into those loving eyes! They say these are the most gentle, healing eyes in the Pokémon kingdom.',
+    'That\'s not all! Just look at the way Chimecho\'s tail swings and sways with the wind, like a weeping willow in a summer breeze. In really hot weather, it will act like a fan to help you cool off. And when it\'s cold outside, your Chimecho can wrap itself around your neck like a scarf, to keep you warm.',
+    'And one more thing. It\'s not widely known, but it\'s a true fact; Chimecho are able to choose winning lottery tickets! Soo you see, my friend, just having a Chimecho with you, is a sure-fire ticket to happiness and success. Let Chimecho give you total peace and happiness, for a good price!',
+], {image: 'assets/images/npcs/ShadySalesman.png'});
 
 const Steven1 = new NPC('Steven', [
     'I have been investigating the behavior of Kecleon, the Color Swap Pokémon.',
@@ -2016,11 +2044,75 @@ const PacifidlogDiver = new NPC('Diver', [
     'I\'ve heard that if you beat a Dungeon a lot then the stuff you find in chests gets even more awesome.',
 ]);
 
-const SootopolisWallace = new NPC('Gym Leader Wallace', [
-    'The creators of the lands and ocean slumber within the Cave of Origin.',
-    'However, they will only awaken when in the presence of a truly great trainer.',
-    'You will have to overcome the Pokémon League before you have any chance of encountering them.',
-], {image: 'assets/images/gymLeaders/Wallace.png'});
+const Wallace1 = new NPC('Gym Leader Wallace', [
+    'Ah, so you are the new trainer in the region? I\'ve heard tales of your exploits. My name is Wallace. I was once the Gym Leader of Sootopolis, but something came up. So now, I\'ve entrusted my mentor Juan with the Gym\'s operation.',
+    'Groudon and Kyogre, the two Pokémon wreaking havoc in Sootopolis City, are considered to be Super-Ancient Pokémon. But there aren\'t just two Super-Ancient Pokémon. Somewhere, there is a Super-Ancient Pokémon named Rayquaza. It\'s said that it was Rayquaza that becalmed the two combatants in the distant past.',
+    'I have heard that Rayquaza once lived high atop the Sky Pillar, maybe that\'s where it is now?',
+], {image: 'assets/images/gymLeaders/Wallace.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Weather Trio', 1), new QuestLineStepCompletedRequirement('The Weather Trio', 3, GameConstants.AchievementOption.less)]),
+});
+
+const Wallace2 = new NPC('Gym Leader Wallace', [
+    'My eyes didn\'t deceive me. Thanks to your help, Sootopolis...',
+    'No, all of Hoenn was saved. On behalf of the people, I thank you.',
+    'Now that their battle is over, the Super-Ancient Pokémon have retreated to rest and recuperate. You will likely find Rayquaza back in the Sky Pillar.',
+    'Kyogre and Groudon are rumored to live deep within this very cave, but they are unlikely to show themselves to any normal trainer. Maybe the champion of Hoenn could earn their respect.',
+], {image: 'assets/images/gymLeaders/Wallace.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Weather Trio', 4), new QuestLineStepCompletedRequirement('The Weather Trio', 6, GameConstants.AchievementOption.less)]),
+});
+
+const WeatherBattle1 = new NPC('The Super-Ancient Pokémon Clash', [
+    '<i>Groudon and Kyogre have been awakened by the efforts of Team Magma and Team Aqua! They are engaged in a fierce battle which threatens to destroy Sootopolis City... and more!</i>',
+    '<i>The locals in Sootopolis City take shelter from the raging battle. Some say that this sort of thing would never happen if Wallace was still around.</i>',
+], {image: 'assets/images/npcs/other/WeatherBattle1.png',
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('The Weather Trio'), new QuestLineStepCompletedRequirement('The Weather Trio', 1, GameConstants.AchievementOption.less)]),
+});
+
+const WeatherBattle2 = new NPC('The Super-Ancient Pokémon Clash', [
+    '<i>Rayquaza appears above Kyogre and Groudon and utters a single intimidating roar. The battling Super-Ancient Pokémon stop their attacks, and a tense standoff ensues.</i>',
+    '<i>After what seems like an eternity, the three Super-Ancient Pokémon seem to have come to an understanding. They each depart the city, and peace is restored.</i>',
+], {image: 'assets/images/npcs/other/WeatherBattle2.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Weather Trio', 3), new QuestLineStepCompletedRequirement('The Weather Trio', 5, GameConstants.AchievementOption.less)]),
+});
+
+const MillenniumFest = new NPC('The Millennium Festival', [
+    '<i>The Millennium Comet is about to make its long-awaited appearance in the sky again, supposedly granting the wishes of all those who see it in the skies above them.</i>',
+    '<i>A festival celebrating the arrival of this comet is being held with rides, carnival games, and even a magic show by the Great Butler!</i>',
+    '<i>The magic show features many exciting tricks performed by humans and Pokémon, but it looks like someone is crashing the party!</i>',
+], {image: 'assets/images/npcs/other/Millennium Festival.png',
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('Wish Maker'), new QuestLineStepCompletedRequirement('Wish Maker', 1, GameConstants.AchievementOption.less)]),
+});
+
+const Butler1 = new NPC('Butler', [
+    'I, the Great Butler, thank you for dealing with Team Rocket!',
+    'I have been preparing for the Millennium Festival my whole life, and have big plans for the wish-granting powers it possesses.',
+    'I have found what appears to be a crystalline cocoon that contains Jirachi, the Wish Pokémon! I would be honored if you would take this cocoon as thanks for helping me. Legend has it that Jirachi will appear for a trainer who is pure of heart and grant them a wish!',
+    '<i>Butler gives you a crystalline cocoon containing Jirachi.</i>',
+], {image: 'assets/images/npcs/Butler.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Wish Maker', 1), new QuestLineStepCompletedRequirement('Wish Maker', 3, GameConstants.AchievementOption.less)]),
+});
+
+const CocoonHatch = new NPC('Examine the Crystalline Cocoon', [
+    '<i>The cocoon shifts, shimmers, and hatches to reveal Jirachi!</i>',
+], {image: 'assets/images/npcs/other/Cocoon.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Wish Maker', 4), new QuestLineStepCompletedRequirement('Wish Maker', 6, GameConstants.AchievementOption.less)]),
+});
+
+const Butler2 = new NPC('Butler', [
+    'I, the Great Butler, thank you for saving me from the wrath of Meta Groudon.',
+    'My wish was to resurrect Groudon for Team Magma, but it proved too difficult, and you have showed me that it would be irresponsible to put that much power in the hands of evil doers.',
+    'I can try the experiment again using what was learned from the previous failure, but I will need your help. If we are successful, I will give control of the resulting Meta Groudon to you.',
+    'To rebuild my machine, I will need a hundred power-generating Pokémon to run the machine, shiny pokemon to stabilize the energy matrix, and to conduct a new dig for fossilized Groudon materials. After that, I will need to calibrate the machine using DNA from Groudon itself.',
+], {image: 'assets/images/npcs/Butler.png',
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('A Meta Discovery'), new QuestLineStepCompletedRequirement('A Meta Discovery', 1, GameConstants.AchievementOption.less)]),
+});
+
+const Butler3 = new NPC('Butler', [
+    'I, the Great Butler, thank you for all of your help in fulfilling my greatest wish!',
+    'Please treat this Meta Groudon responsibly, and go forth to do great things!',
+], {image: 'assets/images/npcs/Butler.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Meta Discovery', 2), new QuestLineStepCompletedRequirement('A Meta Discovery', 3, GameConstants.AchievementOption.less)]),
+});
 
 const ProfBirch = new ProfNPC('Prof. Birch',
     GameConstants.Region.hoenn,
@@ -2176,6 +2268,7 @@ TownList['Mauville City'] = new Town(
     [MauvilleCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Mauville City']), HoennBerryMaster],
     {
         requirements: [new TemporaryBattleRequirement('May 3')],
+        npcs: [SkepticalFisherman],
     }
 );
 TownList['Verdanturf Town'] = new Town(
@@ -2210,9 +2303,23 @@ TownList['Lavaridge Town'] = new Town(
     'Lavaridge Town',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [LavaridgeTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Lavaridge Town'])],
+    [LavaridgeTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Lavaridge Town']), TemporaryBattleList['Clown Jessie & James']],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Jagged Pass'))],
+        npcs: [MillenniumFest, Butler1],
+    }
+);
+TownList['Fish Shop'] = new Town(
+    'Fish Shop',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Hoenn,
+    [RoadsideStandShop],
+    {
+        requirements: [
+            new RouteKillRequirement(10, GameConstants.Region.hoenn, 118),
+        ],
+        npcs: [RoadsideStandShadySalesman],
+        ignoreAreaStatus: true,
     }
 );
 TownList['Fortree City'] = new Town(
@@ -2223,6 +2330,17 @@ TownList['Fortree City'] = new Town(
     {
         requirements: [new TemporaryBattleRequirement('May 4')],
         npcs: [FortreeWeatherman, FortreeRanger, Steven1, Steven2],
+    }
+);
+TownList['Wind Chime Shop'] = new Town(
+    'Wind Chime Shop',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Hoenn,
+    [WindChimeShop],
+    {
+        requirements: [new TemporaryBattleRequirement('May 4')],
+        npcs: [WindChimeShopShadySalesman],
+        ignoreAreaStatus: true,
     }
 );
 TownList['Lilycove City'] = new Town(
@@ -2261,7 +2379,7 @@ TownList['Sootopolis City'] = new Town(
     [SootopolisCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Sootopolis City'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 126), new GymBadgeRequirement(BadgeEnums.Mind)],
-        npcs: [SootopolisWallace],
+        npcs: [WeatherBattle1, WeatherBattle2],
     }
 );
 TownList['Ever Grande City'] = new Town(
@@ -2333,13 +2451,21 @@ TownList['Mt. Chimney Crater'] = new DungeonTown(
     'Mt. Chimney Crater',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Meteor Falls'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Meteor Falls'))],
+    [TemporaryBattleList['Butler 1']],
+    {
+        npcs: [CocoonHatch],
+    }
 );
 TownList['Jagged Pass'] = new DungeonTown(
     'Jagged Pass',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mt. Chimney Crater'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mt. Chimney Crater'))],
+    [TemporaryBattleList['Butler 2']],
+    {
+        npcs: [Butler2, Butler3],
+    }
 );
 TownList['New Mauville'] = new DungeonTown(
     'New Mauville',
@@ -2384,7 +2510,11 @@ TownList['Cave of Origin'] = new DungeonTown(
     [
         new RouteKillRequirement(10, GameConstants.Region.hoenn, 126),
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Seafloor Cavern')),
-    ]
+    ],
+    [],
+    {
+        npcs: [Wallace1, Wallace2],
+    }
 );
 TownList['Seafloor Cavern'] = new DungeonTown(
     'Seafloor Cavern',
@@ -3989,6 +4119,12 @@ const CoumarineBirdwatcher = new NPC('Birdwatcher', [
     'There are rumors that the energy calls some legendary birds to roam Kalos!',
 ]);
 
+const CoumarineElectricTrainer = new NPC('Electric Trainer', [
+    'My Ampharos has gotten a boost since a friendly soul gave me an Ampharosite!',
+    'Luckily my Ampharos was already strong enough to use it!',
+    'If you find that fella, tell him the code <b>DO-MAGEARNA-DREAM-OF-MAREEP?</b> and he might help you too!',
+]);
+
 const LaverreFurisodeGirlKatherine = new NPC('Furisode Girl Katherine', [
     'Don\'t you find Goomy to be an interesting Pokémon? I certainly think so, even though it isn\'t a problem for my Pokémon~',
     'I\'ve heard its evolutionary line loves damp conditions, and apparently if you train a Sliggoo during rainy or foggy weather something marvelous happens!',
@@ -4065,7 +4201,7 @@ TownList['Lumiose City'] = new Town(
     'Lumiose City',
     GameConstants.Region.kalos,
     GameConstants.KalosSubRegions.Kalos,
-    [TemporaryBattleList['Sycamore 1'], TemporaryBattleList['Tierno 1'], DepartmentStoreShop, FriseurFurfrouShop, TemporaryBattleList.AZ, TemporaryBattleList.Merilyn],
+    [TemporaryBattleList['Sycamore 1'], TemporaryBattleList['Tierno 1'], DepartmentStoreShop, FriseurFurfrouShop, TemporaryBattleList.AZ, TemporaryBattleList.Merilyn, TemporaryBattleList['Grand Duchess Diantha']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 4)],
         npcs: [ProfSycamore, LumioseEngineer],
@@ -4134,7 +4270,7 @@ TownList['Coumarine City'] = new Town(
     [CoumarineCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Coumarine City'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 12)],
-        npcs: [CoumarineBirdwatcher],
+        npcs: [CoumarineBirdwatcher, CoumarineElectricTrainer],
     }
 );
 TownList['Laverre City'] = new Town(
@@ -4441,8 +4577,8 @@ const PaniolaTownActor = new NPC('Actor Meredith', [
     'You want to know which one can only be found on the farm? I\'m sure you can figure that out yourself. Simple process of elimination, really.',
 ], {image: 'assets/images/trainers/Actor.png'});
 const RoyalAvenueSpectator = new NPC('Spectator', [
-    'I think battles in the Battle Royal Dome are more like games of chance. But Battle Royals are nothing compared to trying to evolve an Alolan Raichu with a Thunderstone.',
-    'Evolving Pikachu or Exeggcute in Alola can result in a new form! Sometimes.',
+    'I like sneaking snacks inside the Battle Royal Dome. One time I snuck in pancakes and there were two trainers from Kanto who both had a Pikachu. I ended up sharing some with one.',
+    'Weird thing is, both trainers evolved their Pikachu after the battle, but one had a different form from usual! Maybe there\'s something about Alola that makes certain Pokémon evolve differently? I would check my Evolution Items if I were you.',
 ], {image: 'assets/images/trainers/Preschooler (female).png'});
 const KonikoniKahuna = new NPC('Kahuna Olivia', [
     'What do you mean Grand trials are just like gym battles? It\'s a totally different thing!',
@@ -4621,7 +4757,7 @@ const DrSplash3 = new NPC('Dr. Splash', [
     'Wow, that\'s a lot of stuff! This place is starting to look like a proper lab now!',
     'I have discovered that a critical part of any Magikarp training program is pushing other Pokémon around in a field. This form of exercise rounds out the muscle groups and really boosts performance.',
     'According to my calculations, the ideal Pokémon to push around are Dwebble, Boldore, Forretress, Golem, and Steelix. Can you catch or hatch me some?',
-    'Steer clear of the Alola version of Golem, it\'s electrical fields are too dangerous to use.',
+    'Steer clear of the Alolan version of Golem, its electrical fields are too dangerous to use.',
 ], {
     image: 'assets/images/npcs/Dr Splash.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Dr. Splash\'s Research Project', 3), new QuestLineStepCompletedRequirement('Dr. Splash\'s Research Project', 5, GameConstants.AchievementOption.less)]),
@@ -4644,6 +4780,11 @@ const DrSplash5 = new NPC('Dr. Splash', [
     image: 'assets/images/npcs/Dr Splash.png',
     requirement: new QuestLineStepCompletedRequirement('Dr. Splash\'s Research Project', 7),
 });
+
+const MagikarpEyeShadySalesman = new NPC('Shady Salesman', [
+    'Kid, I have a deal for you! And for you alone. Here\'s your chance. I will sell you the secret Magikarp... For an unbelievable price.',
+    'Oh, yeah... Returns not accepted, got that?',
+],  {image:'assets/images/npcs/ShadySalesman.png'});
 
 //Alola Towns
 
@@ -4938,6 +5079,7 @@ TownList['Magikarp\'s Eye'] = new Town(
     [MagikarpJumpShadySalesMan],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Master_League)],
+        npcs: [MagikarpEyeShadySalesman],
         ignoreAreaStatus: true,
     }
 );

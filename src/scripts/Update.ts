@@ -1912,6 +1912,19 @@ class Update implements Saveable {
             // Set Cyrus as complete if 'A New World' completed
             Update.fixTempBattleState(saveData, 57, 1, 'A New World', 3);
         },
+
+        '0.10.7': ({ playerData, saveData }) => {
+            //JirachiQuest
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 40);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 41);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 42);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 43);
+        },
+
+        '0.10.8': ({ playerData, saveData }) => {
+            //Grand Duchess Diantha
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 129);
+        },
     };
 
     constructor() {

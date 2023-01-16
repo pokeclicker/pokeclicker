@@ -360,6 +360,16 @@ export enum Currency {
     contestToken,
 }
 
+export const LuxuryBallCurrencyRate: Record<Currency, number> = {
+    [Currency.money]: 300000,
+    [Currency.questPoint]: 900,
+    [Currency.dungeonToken]: 15000,
+    [Currency.diamond]: 15,
+    [Currency.farmPoint]: 900,
+    [Currency.battlePoint]: 150,
+    [Currency.contestToken]: 900,
+};
+
 export enum TypeEffectiveness {
     Immune,
     NotVery,
@@ -384,6 +394,23 @@ export function humanifyString(str: string): string {
 
 export function camelCaseToString(str: string): string {
     return str.replace(/[\s_-]?([A-Z])/g, ' $1').replace(/\b\w/g, (w) => (w.replace(/\w/, (c) => c.toUpperCase()))).trim();
+}
+
+export function pluralizeString(str: string, amt: number): string {
+    if (amt <= 1) {
+        return str;
+    }
+
+    switch (true) {
+        case /s$/.test(str):
+            return str;
+        case /y$/.test(str):
+            return str.replace(/y$/, 'ies');
+        case /ch$/.test(str):
+            return `${str}es`;
+        default:
+            return `${str}s`;
+    }
 }
 
 export function formatDate(date: Date): string {
@@ -1412,6 +1439,10 @@ export const TemporaryBattles = [
     'Kecleon 3',
     'May 5',
     'Wally 2',
+    'Clown Jessie & James',
+    'Butler 1',
+    'Butler 2',
+    'Meta Groudon',
     'Sevii Rocket Grunt 1',
     'Sevii Rocket Grunt 2',
     'Sevii Rocket Grunt 3',
@@ -1497,6 +1528,7 @@ export const TemporaryBattles = [
     'Ash Ketchum Kalos',
     'Ash Ketchum Pinkan',
     'Calem 6',
+    'Grand Duchess Diantha',
     'Hau 1',
     'Hau 2',
     'Hau 3',
@@ -1749,11 +1781,12 @@ export enum BattlePokemonGender {
 }
 
 // Pokemon Statistics
-export enum PokemonStatiticsType {
+export enum PokemonStatisticsType {
     Captured = 'Captured',
     Defeated = 'Defeated',
     Encountered = 'Encountered',
     Hatched = 'Hatched',
+    Seen = 'Seen',
 }
 
 // Alcremie
@@ -1776,7 +1809,7 @@ export enum AlcremieSpins {
     nightCounterclockwiseBelow5,
     dayClockwiseAbove5,
     dayCounterclockwiseAbove5,
-    at7Above10,
+    at5Above10,
 }
 
 export enum ExtraAchievementCategories {

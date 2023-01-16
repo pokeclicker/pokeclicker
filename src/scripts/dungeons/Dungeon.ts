@@ -3153,8 +3153,8 @@ dungeonList['Cave of Origin'] = new Dungeon('Cave of Origin',
     590000,
     [
         new DungeonBossPokemon('Exploud', 2000000, 50),
-        new DungeonBossPokemon('Kyogre', 4700000, 100, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)}),
-        new DungeonBossPokemon('Groudon', 4700000, 100, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)}),
+        new DungeonBossPokemon('Kyogre', 4700000, 100, {requirement: new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), new QuestLineStepCompletedRequirement('The Weather Trio', 5)])}),
+        new DungeonBossPokemon('Groudon', 4700000, 100, {requirement: new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), new QuestLineStepCompletedRequirement('The Weather Trio', 5)])}),
     ],
     34000, 101);
 
@@ -3236,7 +3236,7 @@ dungeonList['Sky Pillar'] = new Dungeon('Sky Pillar',
     720000,
     [
         new DungeonBossPokemon('Dusclops', 3200000, 20),
-        new DungeonBossPokemon('Rayquaza', 5824002, 100),
+        new DungeonBossPokemon('Rayquaza', 5824002, 100, {requirement: new QuestLineStepCompletedRequirement('The Weather Trio', 5)}),
     ],
     34000, 101);
 
@@ -7044,6 +7044,7 @@ dungeonList['Pokémon Village'] = new Dungeon('Pokémon Village',
             {loot: 'LargeRestore'},
             {loot: 'Pink_Bow'},
         ],
+        mythic: [{loot: 'Quick_Powder'}],
     },
     9003000,
     [
@@ -8459,6 +8460,7 @@ dungeonList['Poni Meadow'] = new Dungeon('Poni Meadow',
         epic: [
             {loot: 'Splash Plate'},
             {loot: 'Pixie Plate'},
+            {loot: 'Power_Herb'},
         ],
     },
     16659968,
@@ -8935,7 +8937,7 @@ dungeonList['Tower of Darkness'] = new Dungeon('Tower of Darkness',
     ],
     2000000, 40,
     () => {
-        App.game.party.gainPokemonById(892);
+        App.game.party.gainPokemonByName('Urshifu (Single Strike)');
         Notifier.notify({
             message: 'Kubfu evolved into Urshifu (Single Strike)!',
             type: NotificationConstants.NotificationOption.success,

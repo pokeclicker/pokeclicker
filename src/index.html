@@ -432,6 +432,16 @@
                         </div>
                     </div>"
                     data-placement="bottom">ⓘ</button>
+                    <button class='btn btn-sm' style="position: absolute; right: 48px; top: 0px; width: auto; height: 41px;"
+                    data-bind='style: { background: DayCycle.color() },
+                        tooltip: {
+                            title: DayCycle.tooltip(),
+                            html: true,
+                            placement: "bottom",
+                            trigger: "hover"
+                        }'>
+                        <img width=30px src="" data-bind="attr: { src: DayCycle.image() }"/>
+                    </button>
                     <button class='btn btn-sm' style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;"
                     data-bind='style: { background: Weather.color() },
                         tooltip: {
@@ -589,8 +599,11 @@
 <!-- Statistics Modal-->
 @import "pokemonStatisticsModal.html"
 
-<!-- Pokemon Selector Modal-->
+<!-- Vitamin Modal-->
 @import "pokemonVitaminModal.html"
+
+<!-- Expanded Vitamin Modal -->
+@import "pokemonVitaminExpandedModal.html"
 
 <!-- Badge Case Modal-->
 @import "badgeCase.html"
@@ -650,6 +663,9 @@
 
 <!-- Dream Orbs Modal -->
 @import "dreamOrbsModal.html"
+
+<!-- Dream Orbs Opened Modal -->
+@import "dreamOrbsOpenedModal.html"
 
 </body>
 </html>
