@@ -2880,7 +2880,7 @@ const ManaphyHastings1 = new NPC('Professor Hastings', [
 const ManaphyHastings2 = new NPC('Professor Hastings', [
     'Thanks for retrieving the Egg!',
     'The Go-Rock Squad was already beaten once. That was probably their very last gasp of trouble-making.',
-    'While you were gone, I discovered that the egg belongs to Manaphy! No wonder the Go-Rock Squad was after it.',
+    'While you were gone I discovered that the egg belongs to Manaphy! No wonder the Go-Rock Squad was after it.',
     'Canalave\'s Library has several books detailing the legends of Manaphy. Perhaps one of them can help us find out how to hatch this egg.',
     'No time to waste - I\'ll see you at the Canalave Library!',
 ], {
@@ -2918,11 +2918,12 @@ const ManaphyBoulders = new NPC('Strange Boulders', [
 const ManaphyGoRockCommander = new NPC('Go-Rock Commander', [
     'You... are you a Pokémon Ranger? ...No? Well, no matter.',
     'Allow me to explain something to you. This egg is meaningful only if we possess it.',
-    'We\'re going to hatch Manaphy from it\'s egg and get it to guide us to it\'s Sea Temple.',
-    'With the power contained within, I will become the King of the Seas, far stronger than the old fool guiding us before!',
+    'We\'re going to hatch Manaphy from this egg and get it to guide us to it\'s Sea Temple.',
+    'With the power contained within, I will become the King of the Sea - far stronger than the old fool guiding us before!',
+    '<i>The Commander flees into the forest, with the Go-Rock Grunts covering his escape!</i>',
 ], {
     image: 'assets/images/temporaryBattle/Go-Rock Squad Commander.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 3), new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 4, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 3), new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 5, GameConstants.AchievementOption.less)]),
 });
 
 const ManaphyGoRock = new NPC('Go-Rock Grunt', [
@@ -2981,7 +2982,7 @@ const HappinyWitness5 = new NPC('Pokémon Ranger', [
 });
 
 const HappinyWitness6 = new NPC('Murph', [
-    'Me and my buddy Slowpoke are trying to catch a Happiny that just went running into Corona Mountain.',
+    'Me and my buddy Slowpoke are trying to catch a Happiny that just went running into Mt. Coronet.',
     'It had a blue egg on it\'s belly - I\'ve definitely seen an egg like that before, back in Fiore.',
     'My Slowpoke\'s gone ahead, I hope I can catch up to them soon.',
 ], {
