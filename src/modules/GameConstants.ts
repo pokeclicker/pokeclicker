@@ -361,13 +361,13 @@ export enum Currency {
 }
 
 export const LuxuryBallCurrencyRate: Record<Currency, number> = {
-    [Currency.money]: 200000,
-    [Currency.questPoint]: 60,
+    [Currency.money]: 300000,
+    [Currency.questPoint]: 900,
     [Currency.dungeonToken]: 15000,
-    [Currency.diamond]: 1,
-    [Currency.farmPoint]: 60,
-    [Currency.battlePoint]: 10,
-    [Currency.contestToken]: 60,
+    [Currency.diamond]: 15,
+    [Currency.farmPoint]: 900,
+    [Currency.battlePoint]: 150,
+    [Currency.contestToken]: 900,
 };
 
 export enum TypeEffectiveness {
