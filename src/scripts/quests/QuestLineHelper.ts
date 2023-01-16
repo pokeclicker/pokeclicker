@@ -520,6 +520,45 @@ class QuestLineHelper {
         App.game.quests.questLines().push(aquaMagmaHoennQuestLine);
     }
 
+    // Weather Trio
+    public static createWeatherTrioQuestLine() {
+        const weatherTrioQuestLine = new QuestLine('The Weather Trio', 'Put an ancient battle to rest.', new QuestLineCompletedRequirement('Land vs. Water'), GameConstants.BulletinBoards.Hoenn);
+
+        const weatherBattle1 = new TalkToNPCQuest(WeatherBattle1, 'Investigate the commotion in Sootopolis City.');
+        weatherTrioQuestLine.addQuest(weatherBattle1);
+
+        const clearCaveOfOrigin = new CustomQuest(1, 0, 'Explore the Cave of Origin to find Wallace.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Cave of Origin')]());
+        weatherTrioQuestLine.addQuest(clearCaveOfOrigin);
+
+        const talkToWallace1 = new TalkToNPCQuest(Wallace1, 'Talk to Wallace in the Cave of Origin to learn how to stop Kyogre and Groudon from fighting.');
+        weatherTrioQuestLine.addQuest(talkToWallace1);
+
+        const clearSkyPillar = new CustomQuest(1, 0, 'Climb the Sky Pillar to find the super-ancient Pokémon Rayquaza.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Sky Pillar')]());
+        weatherTrioQuestLine.addQuest(clearSkyPillar);
+
+        const weatherBattle2 = new TalkToNPCQuest(WeatherBattle2, 'Return to Sootopolis City to see what Rayquaza will do.');
+        weatherTrioQuestLine.addQuest(weatherBattle2);
+
+        const talkToWallace2 = new TalkToNPCQuest(Wallace2, 'Talk to Wallace in the Cave of Origin about the aftermath of the battle.');
+        weatherTrioQuestLine.addQuest(talkToWallace2);
+
+        const catchRayquaza = new CaptureSpecificPokemonQuest('Rayquaza', 'Catch Rayquaza');
+
+        const catchKyogre = new CaptureSpecificPokemonQuest('Kyogre', 'Catch Kyogre');
+
+        const catchGroudon = new CaptureSpecificPokemonQuest('Groudon', 'Catch Groudon');
+
+        weatherTrioQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                catchRayquaza,
+                catchKyogre,
+                catchGroudon,
+            ], 'Catch the Weather Trio.'));
+
+
+        App.game.quests.questLines().push(weatherTrioQuestLine);
+    }
+
     // Started upon becoming Hoenn's Chapmion.
     public static createDeoxysQuestLine() {
         const deoxysQuestLine = new QuestLine('Mystery of Deoxys', 'Discover the mystery of Deoxys.');
@@ -783,7 +822,7 @@ class QuestLineHelper {
         metaGroudonQuestLine.addQuest(calibrateMachine);
 
         const MetaGroudonReward = () => {
-            App.game.party.gainPokemonById(383.02);
+            App.game.party.gainPokemonByName('Meta Groudon');
             Notifier.notify({
                 title: metaGroudonQuestLine.name,
                 message: 'Butler turns control of Meta Groudon over to you!',
@@ -809,13 +848,13 @@ class QuestLineHelper {
         const clearTeamGalacticEternaBuilding = new CustomQuest(1, 0, 'Team Galactic is kidnapping Pokémon now. Clear Team Galactic Eterna Building in Eterna City.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Team Galactic Eterna Building')]());
         galacticSinnohQuestLine.addQuest(clearTeamGalacticEternaBuilding);
 
-        const clearPastoriaCityGym = new CustomQuest(1, 0, 'All is quiet. Team Galactic isn\'t doing anything. Guess they learned their lesson. Just keep traveling, I guess. Clear the Pastoria City Gym.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Pastoria City')]());
+        const clearPastoriaCityGym = new CustomQuest(1, 0, 'All is quiet. Team Galactic isn\'t doing anything. Maybe they learned their lesson. Just keep traveling, I guess. Clear the Pastoria City Gym.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Pastoria City')]());
         galacticSinnohQuestLine.addQuest(clearPastoriaCityGym);
 
         const clearCyrus1TemporaryBattle = new CustomQuest(1, 0, 'The boss of Team Galactic has been spotted in Celestic Town!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Galactic Boss Cyrus')]());
         galacticSinnohQuestLine.addQuest(clearCyrus1TemporaryBattle);
 
-        const clearCanalaveCityGym = new CustomQuest(1, 0, 'Cyrus is gone. Nowhere to be found. Nothing to do but proceed. Adventure awaits! Clear the Canalave City Gym.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Canalave City')]());
+        const clearCanalaveCityGym = new CustomQuest(1, 0, 'Cyrus is gone. Nothing to do but proceed. Adventure awaits! Clear the Canalave City Gym.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Canalave City')]());
         galacticSinnohQuestLine.addQuest(clearCanalaveCityGym);
 
         const clearLakeValor = new CustomQuest(1, 0, 'A commotion was heard at Lake Valor. You must protect the lake\'s guardian! Clear Lake Valor.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Lake Valor')]());
@@ -1295,7 +1334,7 @@ class QuestLineHelper {
         const clearPoTown = new CustomQuest(1, 0, 'Team Skull have stolen a child\'s Yungoos. Raid their base. Clear the Po Town dungeon.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Po Town')]());
         skullAetherAlolaQuestLine.addQuest(clearPoTown);
 
-        const clearAetherFoundation = new CustomQuest(1, 0, 'Aether president Lusamine has recruited Team Skull in her own plan to stop the Eater of Light. She\'s an idiot. Stop her. Clear the Aether Foundation dungeon.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Aether Foundation')]());
+        const clearAetherFoundation = new CustomQuest(1, 0, 'Aether president Lusamine has recruited Team Skull in her own plan to stop the Eater of Light. Stop her. Clear the Aether Foundation dungeon.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Aether Foundation')]());
         skullAetherAlolaQuestLine.addQuest(clearAetherFoundation);
 
         const UltraMegalopolisReward = () => {
@@ -2351,7 +2390,7 @@ class QuestLineHelper {
             dungeonList['Petalburg Woods'].bossList.push(new DungeonTrainer('Egg Hunter', [new GymPokemon('Surprise Togepi', 2700000, 100)], { weight: 1, requirement: new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion) }));
         };
         const afterDefeatingTogepiInHoenn = () => {
-            App.game.party.gainPokemonById(surpriseTogepi.id);
+            App.game.party.gainPokemonByName(surpriseTogepi.name);
             Notifier.notify({
                 title: findSurpriseTogepiForEasterQuestLine.name,
                 message: 'You found the special Togepi!',
@@ -2401,6 +2440,7 @@ class QuestLineHelper {
         this.createhoohJohtoQuestLine();
         this.createCelebiJohtoQuestLine();
         this.createAquaMagmaHoennQuestLine();
+        this.createWeatherTrioQuestLine();
         this.createDeoxysQuestLine();
         this.createRubySapphireSeviiQuestLine();
         this.createPinkanThemeparkQuestLine();

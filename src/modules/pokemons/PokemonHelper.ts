@@ -3,7 +3,7 @@ import {
     MaxIDPerRegion,
     Region,
     BattlePokemonGender,
-    PokemonStatiticsType,
+    PokemonStatisticsType,
 } from '../GameConstants';
 import { PokemonNameType } from './PokemonNameType';
 import P from './mapProvider';
@@ -110,7 +110,7 @@ export function displayName(englishName: string): Computed<string> {
 }
 
 // To have encounter/caught/defeat/hatch statistics in a single place
-export function incrementPokemonStatistics(pokemonId: number, statistic: PokemonStatiticsType, shiny: boolean, gender: number) {
+export function incrementPokemonStatistics(pokemonId: number, statistic: PokemonStatisticsType, shiny: boolean, gender: number) {
     const pokemonStatistics = {
         Captured: App.game.statistics.pokemonCaptured[pokemonId],
         Defeated: App.game.statistics.pokemonDefeated[pokemonId],
