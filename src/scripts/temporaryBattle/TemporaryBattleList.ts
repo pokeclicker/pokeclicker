@@ -2180,6 +2180,24 @@ TemporaryBattleList['Calem 6'] = new TemporaryBattle(
     }
 );
 
+TemporaryBattleList['Marquis Grant'] = new TemporaryBattle(
+    'Marquis Grant',
+    [
+        new GymPokemon('Aurorus', 110668215, 80),
+        new GymPokemon('Tyrantrum', 110668215, 80),
+        new GymPokemon('Mega Tyranitar', 125000000, 80),
+        new GymPokemon('Mega Aggron', 125000000, 80),
+    ],
+    'To commemorate such an impressive show of teamwork, please accept these gifts!</br><img src="assets/images/megaStone/248.png"/></br></br><img src="assets/images/megaStone/306.png"/></br>',
+    [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion), new ClearGymRequirement(2000, GameConstants.getGymIndex('Cyllage City')), new ObtainedPokemonRequirement('Tyranitar'), new ObtainedPokemonRequirement('Aggron')],
+    undefined,
+    {
+        displayName: 'Marquis Grant',
+        imageName: '../gymLeaders/Grant',
+        firstTimeRewardFunction: () => [App.game.party.getPokemonByName('Tyranitar').giveMegastone(), App.game.party.getPokemonByName('Aggron').giveMegastone()],
+    }
+);
+
 TemporaryBattleList['Grand Duchess Diantha'] = new TemporaryBattle(
     'Grand Duchess Diantha',
     [
