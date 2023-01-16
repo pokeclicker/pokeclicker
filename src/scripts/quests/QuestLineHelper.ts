@@ -2561,7 +2561,7 @@ class QuestLineHelper {
         const talktoBeniAdamanKamado1 = new TalkToNPCQuest(BeniAdamanKamado1, 'Speak to Beni, Adaman & Kamado at Galaxy Hall.');
         hisuiNobleQuestLine.addQuest(talktoBeniAdamanKamado1);
 
-        const arezuSearch = new DefeatPokemonsQuest(100, 0, 1/*Route to be changed*/, GameConstants.Region.sinnoh, 'Search the Crimson Mirelands for Arezu.');
+        const arezuSearch = new DefeatPokemonsQuest(100, 0, 15, GameConstants.Region.sinnoh, 'Search the Crimson Mirelands for Arezu.');
         hisuiNobleQuestLine.addQuest(arezuSearch);
 
         const talktoArezuCalabaAdaman1 = new TalkToNPCQuest(ArezuCalabaAdaman1, 'Speak to Arezu, Calaba & Adaman at Diamond Settlement.');
