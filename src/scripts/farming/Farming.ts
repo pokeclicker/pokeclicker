@@ -74,18 +74,20 @@ class Farming implements Feature {
 
         //#region First Generation
         this.berryData[BerryType.Cheri] = new Berry(
-            BerryType.Cheri,
-            [5,10,20,30,60],
-            2,
-            0.5,
-            5,
-            1,
-            [10, 0, 0, 0, 0],
-            25,
-            BerryColor.Red,
-            ['0.8\u2033', '2.0 cm', '2,0 cm'],
-            BerryFirmness.Soft,
-            ['This bright red Berry is very spicy and has a provocative flavor. It blooms with delicate, pretty flowers.']
+            BerryType.Cheri, // name type
+            [5,10,20,30,60], // growth times for each stage [sprout, taller, bloom, berry, death]
+            2, // harvest amount
+            0.5, // replant rate, 1 is 100%
+            5, // farm points per harvest (farm currency)
+            1, // experience per harvest (affects how fast prices of Berry Master items (mulches, shovels, etc) go back to their base cost after being bought)
+            [10, 0, 0, 0, 0], // flavors [Spicy, Dry, Sweet, Bitter, Sour] (for pokeblocks and poffins)
+            25, // smoothness (for pokeblocks and poffins)
+            BerryColor.Red, // color
+            ['0.8\u2033', '2.0 cm', '2,0 cm'], // size
+            BerryFirmness.Soft, // firmness
+            ['This bright red Berry is very spicy and has a provocative flavor. It blooms with delicate, pretty flowers.'] // description
+            // aura
+            // mature plant wanderers
         );
 
         this.berryData[BerryType.Chesto] = new Berry(
