@@ -2206,7 +2206,7 @@ TemporaryBattleList['Hex Maniac Aster'] = new TemporaryBattle(
         new GymPokemon('Haunter', 60770015, 30),
         new GymPokemon('Medicham', 60770015, 30),
     ],
-    'What’s this?! I see... Perhaps a Trainer as accomplished as you can get the most out of this.</br><img src="assets/images/megaStone/04.png"/></br>',
+    'What’s this?! I see... Perhaps a Trainer as accomplished as you can get the most out of this.</br><img src="assets/images/megaStone/94.png"/></br>',
     [
         new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Gastly').id], 666),
         new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Haunter').id], 444),
