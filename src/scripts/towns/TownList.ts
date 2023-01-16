@@ -4130,6 +4130,29 @@ const LaverreFurisodeGirlKatherine = new NPC('Furisode Girl Katherine', [
     'I\'ve heard its evolutionary line loves damp conditions, and apparently if you train a Sliggoo during rainy or foggy weather something marvelous happens!',
 ], {image: 'assets/images/npcs/Furisode Girl Katherine.png'});
 
+const LaverreGengariteAster1 = new NPC('Hex Maniac Aster', [
+    'I\'m shocked... You have a Pokédex, but you still don\'t know... you really don\'t know anything about Pokémon connected to Gengar, do you?',
+    'Well then, I guess I\'ll just have to keep this wonderful item I was going to give you...',
+    'If you want to change my mind... you will have to encounter at least 666 wild Gastly, 444 wild Haunter, and 13 wild Gengar.',
+    'And do bring a Gengar of your own, won\'t you?',
+], {
+    image: 'assets/images/trainers/Hex Maniac.png',
+    requirement: new OneFromManyRequirement([
+        new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Gastly').id], 666, undefined, GameConstants.AchievementOption.less),
+        new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Gastly').id], 444, undefined, GameConstants.AchievementOption.less),
+        new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Gastly').id], 13, undefined, GameConstants.AchievementOption.less),
+        new ObtainedPokemonRequirement('Gengar', true)]),
+});
+
+const LaverreGengariteAster2 = new NPC('Hex Maniac Aster', [
+    'Some Pokémon evolve when exposed to a Link Cable, or sent through a trade.',
+    'That\'s right. Haunter is one of those Pokemon.',
+    'I don\'t have enough Quest Points to buy a Link Cable, but a girl named Mindy from Snowpoint City offered to trade me her Haunter for a Medicham',
+    'Hopefully I\'ll have a Gengar soon...',
+], {image: 'assets/images/trainers/Hex Maniac.png',
+    requirement: new TemporaryBattleRequirement('Hex Maniac Aster'),
+});
+
 const AnistarKalosRoamerNPC = new RoamerNPC('Hex Maniac Melanie', [
     'The spirits tell me roaming Pokémon have been spotted on {ROUTE_NAME}!',
 ], GameConstants.Region.kalos, RoamingPokemonList.findGroup(GameConstants.Region.kalos, GameConstants.KalosSubRegions.Kalos), 'assets/images/trainers/Hex Maniac.png');
@@ -4277,10 +4300,10 @@ TownList['Laverre City'] = new Town(
     'Laverre City',
     GameConstants.Region.kalos,
     GameConstants.KalosSubRegions.Kalos,
-    [LaverreCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Laverre City'])],
+    [LaverreCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Laverre City']), TemporaryBattleList['Hex Maniac Aster']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 14)],
-        npcs: [LaverreFurisodeGirlKatherine],
+        npcs: [LaverreFurisodeGirlKatherine, LaverreGengariteAster1, LaverreGengariteAster2],
     }
 );
 TownList['Dendemille Town'] = new Town(
