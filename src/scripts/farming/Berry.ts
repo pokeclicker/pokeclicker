@@ -21,14 +21,14 @@ class Berry {
         'Blipbug', 'Gossifleur',
     ];
 
-    public static colorWander: PokemonNameType[][] = [
-        ['Ledyba', 'Flabébé (Red)', 'Oricorio (Baile)'], //red
-        ['Illumise', 'Oricorio (Sensu)'], // purple
-        ['Spewpa', 'Oricorio (Pa\'u)'], // pink
-        ['Burmy (Plant)'], // green
-        ['Combee', 'Flabébé (Yellow)', 'Oricorio (Pom-Pom)'], // yellow
-        ['Volbeat', 'Flabébé (Blue)'], // blue
-    ];
+    public static colorWander: Record<BerryColor, PokemonNameType[]> = {
+        [BerryColor.Red]: ['Ledyba', 'Flabébé (Red)', 'Oricorio (Baile)'],
+        [BerryColor.Purple]: ['Illumise', 'Oricorio (Sensu)'],
+        [BerryColor.Pink]: ['Spewpa', 'Oricorio (Pa\'u)'],
+        [BerryColor.Green]: ['Burmy (Plant)'],
+        [BerryColor.Yellow]: ['Combee', 'Flabébé (Yellow)', 'Oricorio (Pom-Pom)'],
+        [BerryColor.Blue]: ['Volbeat', 'Flabébé (Blue)'],
+    };
 
     constructor(
         public type: BerryType,
