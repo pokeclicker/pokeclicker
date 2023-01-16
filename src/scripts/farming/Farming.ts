@@ -83,7 +83,7 @@ class Farming implements Feature {
             [10, 0, 0, 0, 0], // flavors [Spicy, Dry, Sweet, Bitter, Sour] (for pokeblocks and poffins)
             25, // smoothness (for pokeblocks and poffins)
             BerryColor.Red, // color
-            ['0.8\u2033', '2.0 cm', '2,0 cm'], // size
+            2, // size
             BerryFirmness.Soft, // firmness
             ['This bright red Berry is very spicy and has a provocative flavor. It blooms with delicate, pretty flowers.'] // description
             // aura
@@ -100,7 +100,7 @@ class Farming implements Feature {
             [0, 10, 0, 0, 0],
             25,
             BerryColor.Purple,
-            ['3.1\u2033', '8.0 cm', '8,0 cm'],
+            8,
             BerryFirmness.Super_Hard,
             ['This Berry\'s thick skin and fruit are very tough and dry-tasting. However, every bit of it can be eaten.']
         );
@@ -115,7 +115,7 @@ class Farming implements Feature {
             [0, 0, 10, 0, 0],
             25,
             BerryColor.Pink,
-            ['1.6\u2033', '4.0 cm', '4,0 cm'],
+            4,
             BerryFirmness.Very_Soft,
             ['Because of its hollow inside pocket, there isn\'t a lot to eat. What can be eaten is very sweet and delicious.']
         );
@@ -130,7 +130,7 @@ class Farming implements Feature {
             [0, 0, 0, 10, 0],
             25,
             BerryColor.Green,
-            ['1.3\u2033', '3.2 cm', '3,2 cm'],
+            3.2,
             BerryFirmness.Hard,
             ['If the leaves grow longer and curlier than average, this Berry will have a somewhat-bitter taste.']
         );
@@ -145,7 +145,7 @@ class Farming implements Feature {
             [0, 0, 0, 0, 10],
             25,
             BerryColor.Yellow,
-            ['2.0\u2033', '5.0 cm', '5,0 cm'],
+            5,
             BerryFirmness.Super_Hard,
             ['This Berry\'s peel is hard, but the flesh inside is very juicy. It is distinguished by its bracing sourness.']
         );
@@ -160,7 +160,7 @@ class Farming implements Feature {
             [10, 0, 10, 10, 10],
             20,
             BerryColor.Red,
-            ['1.1\u2033', '2.8 cm', '2,8 cm'],
+            2.8,
             BerryFirmness.Very_Hard,
             ['It takes longer to grow than Berries such as Cheri. The smaller Berries taste better.']
         );
@@ -175,7 +175,7 @@ class Farming implements Feature {
             [10, 10, 0, 10, 10],
             20,
             BerryColor.Blue,
-            ['1.4\u2033', '3.5 cm', '3,5 cm'],
+            3.5,
             BerryFirmness.Super_Hard,
             ['Nature\'s gifts came together as one in this Berry. It has a wondrous mix of flavors that spread in the mouth.']
         );
@@ -190,7 +190,7 @@ class Farming implements Feature {
             [0, 10, 10, 10, 10],
             20,
             BerryColor.Yellow,
-            ['3.7\u2033', '9.5 cm', '9,5 cm'],
+            9.5,
             BerryFirmness.Very_Hard,
             ['Sitrus came from the same family as Oran. It is larger and smoother-tasting than Oran.']
         );
@@ -207,7 +207,7 @@ class Farming implements Feature {
             [10, 10, 10, 0, 10],
             20,
             BerryColor.Pink,
-            ['1.9\u2033', '4.7 cm', '4,7 cm'],
+            4.7,
             BerryFirmness.Hard,
             ['The more this Berry absorbs energy from sunlight, the more vividly colorful it grows.']
         );
@@ -222,7 +222,7 @@ class Farming implements Feature {
             [10, 10, 0, 0, 0],
             20,
             BerryColor.Red,
-            ['4.7\u2033', '12.0 cm', '12,0 cm'],
+            12,
             BerryFirmness.Very_Hard,
             ['A small hint of spiciness lingers in the red granules surrounding this Berry. Their centers have a dry taste.']
         );
@@ -237,7 +237,7 @@ class Farming implements Feature {
             [0, 10, 10, 0, 0],
             20,
             BerryColor.Purple,
-            ['4.3\u2033', '10.8 cm', '10,8 cm'],
+            10.8,
             BerryFirmness.Soft,
             ['Though this small, delicately-skinned Berry is blue in color, it dyes the mouth black when eaten.']
         );
@@ -252,7 +252,7 @@ class Farming implements Feature {
             [0, 0, 10, 10, 0],
             20,
             BerryColor.Pink,
-            ['3.0\u2033', '7.7 cm', '7,7 cm'],
+            7.7,
             BerryFirmness.Very_Hard,
             ['Bitter, but with a trace of sweetness, the Nanab Berry was the seventh to be discovered in the world.']
         );
@@ -267,7 +267,7 @@ class Farming implements Feature {
             [0, 0, 0, 10, 10],
             20,
             BerryColor.Green,
-            ['2.9\u2033', '7.4 cm', '7,4 cm'],
+            7.4,
             BerryFirmness.Super_Hard,
             ['The potent mix of bitter and sour in this Berry seems to promote digestion. The flower is white and beautiful.']
         );
@@ -282,7 +282,7 @@ class Farming implements Feature {
             [10, 0, 0, 0, 10],
             20,
             BerryColor.Yellow,
-            ['3.1\u2033', '8.0 cm', '8,0 cm'],
+            8,
             BerryFirmness.Hard,
             ['It is said that when the sour skin is peeled, this spicy Berry can be crushed to make medicine.']
         );
@@ -297,7 +297,7 @@ class Farming implements Feature {
             [15, 0, 0, 0, 0],
             25,
             BerryColor.Red,
-            ['3.9\u2033', '10.0 cm', '10,0 cm'],
+            10,
             BerryFirmness.Soft,
             ['This Berry is oddly shaped, appearing as if someone took a bite out of it. It is packed full of spicy substances.']
         );
@@ -312,7 +312,7 @@ class Farming implements Feature {
             [0, 15, 0, 0, 0],
             25,
             BerryColor.Purple,
-            ['4.5\u2033', '11.5 cm', '11,5 cm'],
+            11.5,
             BerryFirmness.Hard,
             ['It is said that this Berry grew lumps to help Pokémon grip it, allowing propagation farther afield.']
         );
@@ -327,7 +327,7 @@ class Farming implements Feature {
             [0, 0, 15, 0, 0],
             25,
             BerryColor.Pink,
-            ['5.0\u2033', '12.6 cm', '12,6 cm'],
+            12.6,
             BerryFirmness.Hard,
             ['This Berry progressively curves as it grows. The curvier the Berry, the sweeter and tastier.']
         );
@@ -342,7 +342,7 @@ class Farming implements Feature {
             [0, 0, 0, 15, 0],
             25,
             BerryColor.Green,
-            ['2.5\u2033', '6.4 cm', '6,4 cm'],
+            6.4,
             BerryFirmness.Super_Hard,
             ['This Berry turns bitter toward the stem. The dainty flower it grows from doesn\'t absorb much sunlight.']
         );
@@ -357,7 +357,7 @@ class Farming implements Feature {
             [0, 0, 0, 0, 15],
             25,
             BerryColor.Yellow,
-            ['8.8\u2033', '22.3 cm', '22,3 cm'],
+            22.3,
             BerryFirmness.Soft,
             ['This Berry is very big and sour. The juiciness of the pulp accentuates the sourness.']
         );
@@ -372,7 +372,7 @@ class Farming implements Feature {
             [10, 10, 10, 10, 0],
             25,
             BerryColor.Green,
-            ['1.3\u2033', '3.4 cm', '3,4 cm'],
+            3.4,
             BerryFirmness.Super_Hard,
             [
                 'This Berry\'s gradual process of storing nutrients beneficial to Pokémon health causes it to mature slowly.',
@@ -393,7 +393,7 @@ class Farming implements Feature {
             [10, 0, 10, 10, 0],
             20,
             BerryColor.Red,
-            ['5.3\u2033', '13.5 cm', '13,5 cm'],
+            13.5,
             BerryFirmness.Very_Hard,
             ['When this sweetly spicy Berry\'s thick skin is peeled, many pieces of the fruit spill out.']
         );
@@ -408,7 +408,7 @@ class Farming implements Feature {
             [0, 10, 0, 10, 10],
             20,
             BerryColor.Blue,
-            ['5.9\u2033', '15.0 cm', '15,0 cm'],
+            15,
             BerryFirmness.Hard,
             ['This Berry can be eaten as is or boiled to obtain an extract that adds a dash of flavor to food.']
         );
@@ -423,7 +423,7 @@ class Farming implements Feature {
             [10, 0, 10, 0, 10],
             20,
             BerryColor.Pink,
-            ['4.3\u2033', '11.0 cm', '11,0 cm'],
+            11,
             BerryFirmness.Hard,
             ['Even in places of constant rain and high humidity, this Berry\'s plant grows healthy and strong.']
         );
@@ -438,7 +438,7 @@ class Farming implements Feature {
             [10, 10, 0, 10, 0],
             20,
             BerryColor.Green,
-            ['6.4\u2033', '16.2 cm', '16,2 cm'],
+            16.2,
             BerryFirmness.Hard,
             ['This somewhat-rare Berry projects an image of luxury, so it is favored as a gift item.']
         );
@@ -453,7 +453,7 @@ class Farming implements Feature {
             [0, 10, 10, 0, 10],
             20,
             BerryColor.Yellow,
-            ['5.9\u2033', '14.9 cm', '14,9 cm'],
+            14.9,
             BerryFirmness.Soft,
             ['One bite of this very tender Berry fills the mouth with its sweet and tangy flavor.']
         );
@@ -468,7 +468,7 @@ class Farming implements Feature {
             [20, 10, 0, 0, 0],
             30,
             BerryColor.Red,
-            ['7.9\u2033', '20.0 cm', '20,0 cm'],
+            20,
             BerryFirmness.Soft,
             ['This Berry is large and spicy. When eaten during the cold season, it warms the body from inside.']
         );
@@ -483,7 +483,7 @@ class Farming implements Feature {
             [0, 20, 10, 0, 0],
             30,
             BerryColor.Purple,
-            ['3.0\u2033', '7.5 cm', '7,5 cm'],
+            7.5,
             BerryFirmness.Hard,
             ['Its dryness is quite strong. As a result, its true deliciousness can\'t be appreciated by just eating one or two.']
         );
@@ -498,7 +498,7 @@ class Farming implements Feature {
             [0, 0, 20, 10, 0],
             30,
             BerryColor.Pink,
-            ['5.5\u2033', '14.0 cm', '14,0 cm'],
+            14,
             BerryFirmness.Hard,
             ['The grown-up flavor and dreamy sweetness of this Berry make it a favorite of Pokémon everywhere.']
         );
@@ -513,7 +513,7 @@ class Farming implements Feature {
             [0, 0, 0, 20, 10],
             30,
             BerryColor.Green,
-            ['8.9\u2033', '22.6 cm', '22,6 cm'],
+            22.6,
             BerryFirmness.Soft,
             ['Even though it is bitter, it should be eaten peel and all. The hair on the peel cleans the stomach from the inside.']
         );
@@ -528,7 +528,7 @@ class Farming implements Feature {
             [10, 0, 0, 0, 20],
             30,
             BerryColor.Yellow,
-            ['11.2\u2033', '28.5 cm', '28,5 cm'],
+            28.5,
             BerryFirmness.Super_Hard,
             ['This Berry is quite sour overall, with the sourness especially concentrated at the pointed end.']
         );
@@ -543,7 +543,7 @@ class Farming implements Feature {
             [30, 10, 0, 0, 0],
             35,
             BerryColor.Red,
-            ['5.2\u2033', '13.3 cm', '13,3 cm'],
+            13.3,
             BerryFirmness.Soft,
             ['So spicy is the Spelon Berry that, Fire type or not, Pokémon will try to breathe fire after eating a single one.']
         );
@@ -558,7 +558,7 @@ class Farming implements Feature {
             [0, 30, 10, 0, 0],
             35,
             BerryColor.Purple,
-            ['9.6\u2033', '24.4 cm', '24,4 cm'],
+            24.4,
             BerryFirmness.Very_Soft,
             [
                 'This Berry drifted from a faraway sea. It is now cultivated in the Sinnoh region.' ,
@@ -576,7 +576,7 @@ class Farming implements Feature {
             [0, 0, 30, 10, 0],
             35,
             BerryColor.Pink,
-            ['9.8\u2033', '25.0 cm', '25,0 cm'],
+            25,
             BerryFirmness.Soft,
             ['A bounty of nature that is exceedingly sweet. The Berry is huge, with some discovered that exceed 20 inches.']
         );
@@ -591,7 +591,7 @@ class Farming implements Feature {
             [0, 0, 0, 30, 10],
             35,
             BerryColor.Green,
-            ['11.0\u2033', '28.0 cm', '28,0 cm'],
+            28,
             BerryFirmness.Hard,
             ['This Berry is tremendously bitter. Just one bite is enough to instantly stop hiccups.']
         );
@@ -606,7 +606,7 @@ class Farming implements Feature {
             [10, 0, 0, 0, 30],
             35,
             BerryColor.Purple,
-            ['11.8\u2033', '30.0 cm', '30,0 cm'],
+            30,
             BerryFirmness.Very_Soft,
             ['This glossy and colorful Berry has a mouthwateringly delicious appearance. However, it is awfully sour.']
         );
@@ -621,7 +621,7 @@ class Farming implements Feature {
             [0, 0, 50, 0, 0],
             30,
             BerryColor.Pink,
-            ['1.4\u2033', '3.5 cm', '3,5 cm'],
+            3.5,
             BerryFirmness.Hard,
             [
                 'This Berry endemic to Pinkan Island has an incredibly sweet taste.',
@@ -641,7 +641,7 @@ class Farming implements Feature {
             [15, 0, 10, 0, 0],
             30,
             BerryColor.Red,
-            ['3.5\u2033', '8.9 cm', '8,9 cm'],
+            8.9,
             BerryFirmness.Super_Hard,
             [
                 'This Berry is said to have grown plentiful in the tropics of the past. It boasts an intensely hot spiciness.',
@@ -661,7 +661,7 @@ class Farming implements Feature {
             [0, 15, 0, 10, 0],
             30,
             BerryColor.Blue,
-            ['1.3\u2033', '3.3 cm', '3,3 cm'],
+            3.3,
             BerryFirmness.Soft,
             [
                 'This Berry\'s flesh is dotted with countless tiny bubbles of air that keep it afloat in water.',
@@ -681,7 +681,7 @@ class Farming implements Feature {
             [0, 0, 15, 0, 10],
             30,
             BerryColor.Yellow,
-            ['9.8\u2033', '25.0 cm', '25,0 cm'],
+            25,
             BerryFirmness.Very_Soft,
             [
                 'Energy from lightning strikes is drawn into the plant, making the Berries grow big and rich.',
@@ -701,7 +701,7 @@ class Farming implements Feature {
             [10, 0, 0, 15, 0],
             30,
             BerryColor.Green,
-            ['6.1\u2033', '15.5 cm', '15,5 cm'],
+            15.5,
             BerryFirmness.Soft,
             [
                 'This Berry has a disagreeable "green" flavor and scent typical of vegetables. It is rich in health-promoting fiber.',
@@ -721,7 +721,7 @@ class Farming implements Feature {
             [0, 10, 0, 0, 15],
             30,
             BerryColor.Blue,
-            ['5.3\u2033', '13.5 cm', '13,5 cm'],
+            13.5,
             BerryFirmness.Very_Hard,
             [
                 'This Berry has a refreshing flavor that strikes a good balance of dryness and sourness. It tastes better chilled.',
@@ -741,7 +741,7 @@ class Farming implements Feature {
             [15, 0, 0, 10, 0],
             30,
             BerryColor.Red,
-            ['3.0\u2033', '7.7 cm', '7,7 cm'],
+            7.7,
             BerryFirmness.Soft,
             [
                 'This Berry contains a substance that generates heat. It can even heat up a chilly heart.',
@@ -761,7 +761,7 @@ class Farming implements Feature {
             [0, 15, 0, 0, 10],
             30,
             BerryColor.Green,
-            ['3.5\u2033', '8.9 cm', '8,9 cm'],
+            8.9,
             BerryFirmness.Hard,
             [
                 'This Berry is a brilliant green on the outside. Inside, it is packed with a dry-flavored, black-colored flesh.',
@@ -782,7 +782,7 @@ class Farming implements Feature {
             [10, 0, 15, 0, 0],
             30,
             BerryColor.Yellow,
-            ['1.7\u2033', '4.2 cm', '4,2 cm'],
+            4.2,
             BerryFirmness.Soft,
             [
                 'The sweetness-laden pulp has just the hint of a hard-edged and fragrant bite to it.',
@@ -802,7 +802,7 @@ class Farming implements Feature {
             [0, 10, 0, 15, 0],
             30,
             BerryColor.Blue,
-            ['10.9\u2033', '27.7 cm', '27,7 cm'],
+            27.7,
             BerryFirmness.Very_Hard,
             ['This Berry is said to be a new kind that is a cross of two Berries brought together by winds from far away.'],
             undefined,
@@ -819,7 +819,7 @@ class Farming implements Feature {
             [0, 0, 10, 0, 15],
             30,
             BerryColor.Purple,
-            ['9.9\u2033', '25.1 cm', '25,1 cm'],
+            25.1,
             BerryFirmness.Soft,
             [
                 'This Berry is said to sense human emotions for the way it swells roundly when a person approaches.',
@@ -839,7 +839,7 @@ class Farming implements Feature {
             [20, 0, 0, 0, 10],
             35,
             BerryColor.Green,
-            ['1.7\u2033', '4.3 cm', '4,3 cm'],
+            4.3,
             BerryFirmness.Very_Soft,
             [
                 'The flower grows at the tip of this Berry. It attracts Bug Pokémon by letting its stringy petals stream out.',
@@ -859,7 +859,7 @@ class Farming implements Feature {
             [10, 20, 0, 0, 0],
             35,
             BerryColor.Yellow,
-            ['1.1\u2033', '2.8 cm', '2,8 cm'],
+            2.8,
             BerryFirmness.Very_Soft,
             [
                 'It is often used for pickles because of its very dry flavor. It can also be eaten raw for its provocative taste.',
@@ -879,7 +879,7 @@ class Farming implements Feature {
             [0, 10, 20, 0, 0],
             35,
             BerryColor.Purple,
-            ['5.7\u2033', '14.4 cm', '14,4 cm'],
+            14.4,
             BerryFirmness.Hard,
             [
                 'Considered to have a special power from the olden days, this Berry is sometimes dried and used as a good-luck charm.',
@@ -899,7 +899,7 @@ class Farming implements Feature {
             [0, 0, 10, 20, 0],
             35,
             BerryColor.Red,
-            ['0.9\u2033', '2.3 cm', '2,3 cm'],
+            2.3,
             BerryFirmness.Soft,
             [
                 'If a large enough volume of this Berry is boiled down, its bitterness fades away. It makes a good jam.',
@@ -919,7 +919,7 @@ class Farming implements Feature {
             [0, 0, 0, 10, 20],
             35,
             BerryColor.Purple,
-            ['1.5\u2033', '3.8 cm', '3,8 cm'],
+            3.8,
             BerryFirmness.Super_Hard,
             [
                 'Tiny hooks grow on the surface of this Berry. It latches on to Pokémon so it can be carried to far-off places.',
@@ -939,7 +939,7 @@ class Farming implements Feature {
             [25, 10, 0, 0, 0],
             35,
             BerryColor.Green,
-            ['10.4\u2033', '26.5 cm', '26,5 cm'],
+            26.5,
             BerryFirmness.Super_Hard,
             [
                 'This Berry is very tough with a strong flavor. It was used to make medicine by people in the past.',
@@ -959,7 +959,7 @@ class Farming implements Feature {
             [0, 25, 10, 0, 0],
             35,
             BerryColor.Yellow,
-            ['1.3\u2033', '3.3 cm', '3,3 cm'],
+            3.3,
             BerryFirmness.Very_Soft,
             ['This Berry can be cored out and dried to make a whistle. Blowing through its hole makes an indescribable sound.'],
             undefined,
@@ -976,7 +976,7 @@ class Farming implements Feature {
             [0, 0, 25, 10, 0],
             35,
             BerryColor.Pink,
-            ['1.3\u2033', '3.3 cm', '3,3 cm'],
+            3.3,
             BerryFirmness.Hard,
             [
                 'This Berry is sweet with a hint of bitterness and has a lingering sweet scent. It is often dried and used to make tea.',
@@ -998,7 +998,7 @@ class Farming implements Feature {
             [0, 40, 10, 0, 0],
             60,
             BerryColor.Green,
-            ['1.6\u2033', '4.1 cm', '4,1 cm'],
+            4.1,
             BerryFirmness.Soft,
             [
                 'This Berry has a very dry flavor. It has the effect of making other food eaten at the same time taste sweet.',
@@ -1017,7 +1017,7 @@ class Farming implements Feature {
             [0, 0, 40, 10, 0],
             60,
             BerryColor.Red,
-            ['10.5\u2033', '26.7 cm', '26,7 cm'],
+            26.7,
             BerryFirmness.Super_Hard,
             ['The flesh underneath the Custap Berry\'s tough skin is sweet and creamy soft.']
         );
@@ -1032,7 +1032,7 @@ class Farming implements Feature {
             [0, 0, 0, 40, 10],
             60,
             BerryColor.Yellow,
-            ['1.3\u2033', '3.3 cm', '3,3 cm'],
+            3.3,
             BerryFirmness.Soft,
             [
                 'The cluster of drupelets that make up this Berry pop rhythmically if the Berry is handled roughly.',
@@ -1051,7 +1051,7 @@ class Farming implements Feature {
             [10, 0, 0, 0, 40],
             60,
             BerryColor.Blue,
-            ['2.0\u2033', '5.2 cm', '5,2 cm'],
+            5.2,
             BerryFirmness.Very_Soft,
             [
                 'In days of old, people worked the top-shaped pieces of this Berry free and used them as toys.',
@@ -1070,7 +1070,7 @@ class Farming implements Feature {
             [30, 30, 10, 10, 10],
             60,
             BerryColor.Yellow,
-            ['2.2\u2033', '5.7 cm', '5,7 cm'],
+            5.7,
             BerryFirmness.Very_Hard,
             ['This Berry remains poisonous until fully ripened. Once ripe it has a spicy and sweet complex flavor.']
         );
@@ -1085,7 +1085,7 @@ class Farming implements Feature {
             [10, 10, 30, 30, 10],
             60,
             BerryColor.Blue,
-            ['7.6\u2033', '19.4 cm', '19,4 cm'],
+            19.4,
             BerryFirmness.Very_Hard,
             ['This Berry resembles the Durin Berry, though its spikes are less pronounced. It is quite delicious when roasted.']
         );
@@ -1100,7 +1100,7 @@ class Farming implements Feature {
             [30, 10, 30, 0, 0],
             40,
             BerryColor.Red,
-            ['4.4\u2033', '11.1 cm', '11,1 cm'],
+            11.1,
             BerryFirmness.Very_Hard,
             ['This Berry is surrounded by mystery. It is rumored to be imbued with the power of the sea.']
         );
@@ -1115,7 +1115,7 @@ class Farming implements Feature {
             [0, 30, 10, 30, 0],
             40,
             BerryColor.Purple,
-            ['1.3\u2033', '3.3 cm', '3,3 cm'],
+            3.3,
             BerryFirmness.Very_Hard,
             ['This Berry is surrounded by mystery. It is rumored to be imbued with the power of the land.']
         );
@@ -1130,7 +1130,7 @@ class Farming implements Feature {
             [0, 0, 30, 10, 30],
             40,
             BerryColor.Green,
-            ['3.7\u2033', '9.5 cm', '9,5 cm'],
+            9.5,
             BerryFirmness.Very_Hard,
             ['This Berry is surrounded by mystery. It is rumored to be imbued with the power of the sky.']
         );
@@ -1145,7 +1145,7 @@ class Farming implements Feature {
             [30, 0, 0, 30, 10],
             40,
             BerryColor.Pink,
-            ['9.3\u2033', '23.7 cm', '23,7 cm'],
+            23.7,
             BerryFirmness.Very_Hard,
             [
                 'This Berry is surrounded by mystery. It is rumored to be imbued with the power of all living things.',
@@ -1165,7 +1165,7 @@ class Farming implements Feature {
             [10, 30, 0, 0, 30],
             40,
             BerryColor.Blue,
-            ['3.0\u2033', '7.5 cm', '7,5 cm'],
+            7.5,
             BerryFirmness.Very_Hard,
             ['This is a very, very mystifying Berry. There is no telling how it can be used, or what may happen if it is used.']
         );
@@ -1180,7 +1180,7 @@ class Farming implements Feature {
             [30, 10, 30, 10, 30],
             50,
             BerryColor.Red,
-            ['3.8\u2033', '9.7 cm', '9,7 cm'],
+            9.7,
             BerryFirmness.Soft,
             ['This is said to be a legendary Berry. Holding it supposedly brings great joy.']
         );
@@ -1195,7 +1195,7 @@ class Farming implements Feature {
             [30, 10, 30, 10, 30],
             50,
             BerryColor.Green,
-            ['6.0\u2033', '15.3 cm', '15,3 cm'],
+            15.3,
             BerryFirmness.Super_Hard,
             ['This Berry is considered a mirage. It was said to be so strong that it had to be abandoned at the world\'s edge.'],
             new Aura(AuraType.Shiny, [1.005, 1.01, 1.015]),
@@ -1212,7 +1212,7 @@ class Farming implements Feature {
             [40, 10, 0, 0, 0],
             60,
             BerryColor.Purple,
-            ['6.1\u2033', '15.5 cm', '15,5 cm'],
+            15.5,
             BerryFirmness.Hard,
             ['A completely enigmatic Berry. It apparently has the power of the stars that fill the night sky.'],
             undefined,
