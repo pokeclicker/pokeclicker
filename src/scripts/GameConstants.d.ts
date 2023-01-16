@@ -650,6 +650,7 @@ namespace GameConstants {
         Defeated = 'Defeated',
         Encountered = 'Encountered',
         Hatched = 'Hatched',
+        Seen = 'Seen',
     }
 
     declare enum AlcremieSweet {

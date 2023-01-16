@@ -30,6 +30,7 @@ import SettingOption from './settings/SettingOption';
 import BreedingFilters from './settings/BreedingFilters';
 import WeatherType from './weather/WeatherType';
 import Weather from './weather/Weather';
+import DayCycle from './dayCycle/DayCycle';
 import SeededRand from './utilities/SeededRand';
 import SeededDateRand from './utilities/SeededDateRand';
 import Rand from './utilities/Rand';
@@ -109,6 +110,7 @@ import RouteKillRequirement from './requirements/RouteKillRequirement';
 import SeededDateRequirement from './requirements/SeededDateRequirement';
 import SeviiCaughtRequirement from './requirements/SeviiCaughtRequirement';
 import ShinyPokemonRequirement from './requirements/ShinyPokemonRequirement';
+import StatisticRequirement from './requirements/StatisticRequirement';
 import SubregionRequirement from './requirements/SubregionRequirement';
 import StarterRequirement from './requirements/StarterRequirement';
 import TokenRequirement from './requirements/TokenRequirement';
@@ -188,6 +190,7 @@ Object.assign(<any>window, {
     SettingOption,
     WeatherType,
     Weather,
+    DayCycle,
     SeededRand,
     SeededDateRand,
     Rand,
@@ -273,6 +276,7 @@ Object.assign(<any>window, {
     SeededDateRequirement,
     SeviiCaughtRequirement,
     ShinyPokemonRequirement,
+    StatisticRequirement,
     SubregionRequirement,
     StarterRequirement,
     TokenRequirement,

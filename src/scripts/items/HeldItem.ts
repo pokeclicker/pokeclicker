@@ -36,11 +36,17 @@ class AttackBonusHeldItem extends HeldItem {
         currency: GameConstants.Currency,
         shopOptions : ShopOptions,
         displayName: string,
-        public attackBonus: number,
+        private _attackBonus: number,
         regionUnlocked: GameConstants.Region,
         pokemonDescription = 'the Pokémon',
-        canUse = (pokemon: PartyPokemon) => true) {
-        super(name, basePrice, currency, shopOptions, displayName, `A held item that raises the attack of ${pokemonDescription} by ${((attackBonus - 1) * 100).toFixed(0)}%.`, regionUnlocked, canUse);
+        canUse = (pokemon: PartyPokemon) => true,
+        private applyBonus = () => true,
+        additionDescription = '') {
+        super(name, basePrice, currency, shopOptions, displayName, `A held item that raises the attack of ${pokemonDescription} by ${((_attackBonus - 1) * 100).toFixed(0)}%${additionDescription}.`, regionUnlocked, canUse);
+    }
+
+    get attackBonus(): number {
+        return this.applyBonus() ? this._attackBonus : 1;
     }
 }
 
@@ -51,10 +57,10 @@ class TypeRestrictedAttackBonusHeldItem extends AttackBonusHeldItem {
         currency: GameConstants.Currency,
         shopOptions : ShopOptions,
         displayName: string,
-        public attackBonus: number,
+        _attackBonus: number,
         type: PokemonType,
         regionUnlocked: GameConstants.Region) {
-        super(name, basePrice, currency, shopOptions, displayName, attackBonus, regionUnlocked, `${GameHelper.anOrA(PokemonType[type])} ${PokemonType[type]}-type Pokémon`, (pokemon: PartyPokemon) => {
+        super(name, basePrice, currency, shopOptions, displayName, _attackBonus, regionUnlocked, `${GameHelper.anOrA(PokemonType[type])} ${PokemonType[type]}-type Pokémon`, (pokemon: PartyPokemon) => {
             const dataPokemon = PokemonHelper.getPokemonById(pokemon.id);
             return dataPokemon.type1 == type || dataPokemon.type2 == type;
         }
@@ -96,9 +102,9 @@ ItemList.Muscle_Band = new AttackBonusHeldItem('Muscle_Band', 1000, GameConstant
 // Pokemon specific items
 ItemList.Light_Ball = new AttackBonusHeldItem('Light_Ball', 10000, GameConstants.Currency.money, undefined, 'Light Ball', 1.3, GameConstants.Region.johto, 'Pikachu',
     (pokemon) => Math.floor(pokemon.id) == 25 );
-ItemList.Quick_Powder = new AttackBonusHeldItem('Quick_Powder', 10000, GameConstants.Currency.money, undefined, 'Quick Powder', 1.3, GameConstants.Region.final /* GameConstants.Region.johto */, 'Ditto',
+ItemList.Quick_Powder = new AttackBonusHeldItem('Quick_Powder', 10000, GameConstants.Currency.money, undefined, 'Quick Powder', 1.3, GameConstants.Region.alola, 'Ditto',
     (pokemon) => Math.floor(pokemon.id) == 132);
-ItemList.Thick_Club = new AttackBonusHeldItem('Thick_Club', 10000, GameConstants.Currency.money, undefined, 'Thick Club', 1.3, GameConstants.Region.final /* GameConstants.Region.johto */, 'Cubone or Marowak',
+ItemList.Thick_Club = new AttackBonusHeldItem('Thick_Club', 10000, GameConstants.Currency.money, undefined, 'Thick Club', 1.3, GameConstants.Region.alola, 'Cubone or Marowak',
     (pokemon) => Math.floor(pokemon.id) == 104 ||  Math.floor(pokemon.id) == 105);
 ItemList.Soul_Dew = new AttackBonusHeldItem('Soul_Dew', 10000, GameConstants.Currency.money, undefined, 'Soul Dew', 1.5, GameConstants.Region.sinnoh, 'Latias or Latios',
     (pokemon) => Math.floor(pokemon.id) == 380 ||  Math.floor(pokemon.id) == 381);
@@ -133,6 +139,9 @@ ItemList.Silver_Powder = new TypeRestrictedAttackBonusHeldItem('Silver_Powder', 
 ItemList.Soft_Sand = new TypeRestrictedAttackBonusHeldItem('Soft_Sand', 10000, GameConstants.Currency.money, undefined, 'Soft Sand', 1.2, PokemonType.Ground, GameConstants.Region.johto);
 ItemList.Spell_Tag = new TypeRestrictedAttackBonusHeldItem('Spell_Tag', 10000, GameConstants.Currency.money, undefined, 'Spell Tag', 1.2, PokemonType.Ghost, GameConstants.Region.johto);
 ItemList.Twisted_Spoon = new TypeRestrictedAttackBonusHeldItem('Twisted_Spoon', 10000, GameConstants.Currency.money, undefined, 'Twisted Spoon', 1.2, PokemonType.Psychic, GameConstants.Region.johto);
+
+ItemList.Power_Herb = new AttackBonusHeldItem('Power_Herb', undefined, GameConstants.Currency.money, undefined, 'Power Herb', 1.5, GameConstants.Region.alola, undefined, (pokemon) => true,
+    () => App.game.gameState == GameConstants.GameState.dungeon && DungeonRunner.fightingBoss(), ' against Dungeon Bosses');
 
 ItemList.Macho_Brace = new EVsGainedBonusHeldItem('Macho_Brace', 1500, GameConstants.Currency.questPoint, undefined, 'Macho Brace', 1.5, GameConstants.Region.sinnoh);
 ItemList.Power_Bracer = new EVsGainedBonusHeldItem('Power_Bracer', 2000, GameConstants.Currency.questPoint, undefined, 'Power Bracer', 2, GameConstants.Region.alola);
