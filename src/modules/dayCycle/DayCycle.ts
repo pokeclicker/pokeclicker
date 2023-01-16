@@ -36,12 +36,12 @@ export default class DayCycle {
     });
 
     public static dayCycleMoments: { [dayCycle in DayCyclePart]?: DayCycleMoment } = {
+        [DayCyclePart.Dawn]:
+            new DayCycleMoment(DayCyclePart.Dawn, '#25b6a0', 'Dawn'),
         [DayCyclePart.Day]:
             new DayCycleMoment(DayCyclePart.Day, '#f4a470', 'Day'),
         [DayCyclePart.Dusk]:
             new DayCycleMoment(DayCyclePart.Dusk, '#93558a', 'Dusk'),
-        [DayCyclePart.Dawn]:
-            new DayCycleMoment(DayCyclePart.Dawn, '#25b6a0', 'Dawn'),
         [DayCyclePart.Night]:
             new DayCycleMoment(DayCyclePart.Night, '#4a6252', 'Night'),
     };
