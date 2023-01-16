@@ -1463,11 +1463,133 @@ Routes.add(new RegionRoute(
     true,
     1250000
 ));
+// Basculegion
 Routes.add(new RegionRoute(
     'Ramanas Island', GameConstants.Region.sinnoh, 13,
     new RoutePokemon({
         land: ['Shellos (West)', 'Gastrodon (West)', 'Aipom', 'Drifloon', 'Drifblim', 'Chimchar', 'Monferno', 'Infernape', 'Starly', 'Staravia'],
         headbutt: ['Combee', 'Graveler'],
+    }),
+    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    undefined,
+    GameConstants.SinnohSubRegions.Hisui,
+    true,
+    1250000
+));
+Routes.add(new RegionRoute(
+    'Golden Lowlands', GameConstants.Region.sinnoh, 14,
+    new RoutePokemon({
+        land: ['Psyduck', 'Gastly', 'Budew', 'Kricketot', 'Kricketune', 'Paras', 'Parasect', 'Carnivine'],
+        headbutt: ['Burmy (Sand)', 'Geodude', 'Graveler'],
+    }),
+    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    undefined,
+    GameConstants.SinnohSubRegions.Hisui,
+    true,
+    1250000
+));
+Routes.add(new RegionRoute(
+    'Scarlet Bog', GameConstants.Region.sinnoh, 15,
+    new RoutePokemon({
+        land: ['Hippopotas', 'Hippowdon', 'Gastly', 'Haunter', 'Stunky', 'Skuntank', 'Croagunk', 'Geodude', 'Graveler'],
+    }),
+    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    undefined,
+    GameConstants.SinnohSubRegions.Hisui,
+    true,
+    1250000
+));
+Routes.add(new RegionRoute(
+    'Cloudpool Ridge', GameConstants.Region.sinnoh, 16,
+    new RoutePokemon({
+        land: ['Combee', 'Zubat', 'Golbat', 'Roselia', 'Kricketot', 'Kricketune', 'Paras', 'Parasect', 'Murkrow', 'Honchkrow', 'Roserade', 'Carnivine'],
+        headbutt: ['Burmy (Sand)', 'Geodude', 'Graveler'],
+    }),
+    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    undefined,
+    GameConstants.SinnohSubRegions.Hisui,
+    true,
+    1250000
+));
+Routes.add(new RegionRoute(
+    'Diamond Heath', GameConstants.Region.sinnoh, 17,
+    new RoutePokemon({
+        land: ['Paras', 'Parasect', 'Zubat', 'Golbat', 'Rhyhorn'],
+        headbutt: ['Geodude', 'Graveler', 'Bonsly'],
+    }),
+    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    undefined,
+    GameConstants.SinnohSubRegions.Hisui,
+    true,
+    1250000
+));
+Routes.add(new RegionRoute(
+    'Cottonsedge Prairie', GameConstants.Region.sinnoh, 18,
+    new RoutePokemon({
+        land: ['Pachirisu', 'Togepi', 'Gastly', 'Haunter', 'Petilil'],
+        headbutt: ['Combee', 'Vespiquen', 'Geodude', 'Graveler'],
+    }),
+    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    undefined,
+    GameConstants.SinnohSubRegions.Hisui,
+    true,
+    1250000
+));
+Routes.add(new RegionRoute(
+    'Droning Meadow', GameConstants.Region.sinnoh, 19,
+    new RoutePokemon({
+        land: ['Paras', 'Parasect', 'Gastly', 'Haunter', 'Bidoof', 'Bibarel', 'Yanma'],
+        headbutt: ['Combee', 'Vespiquen', 'Pachirisu', 'Geodude', 'Graveler'],
+    }),
+    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    undefined,
+    GameConstants.SinnohSubRegions.Hisui,
+    true,
+    1250000
+));
+Routes.add(new RegionRoute(
+    'Bolderoll Slope', GameConstants.Region.sinnoh, 20,
+    new RoutePokemon({
+        land: ['Rhyhorn', 'Zubat', 'Zubat', 'Golbat', 'Geodude', 'Graveler'],
+        headbutt: ['Burmy (Sand)'],
+    }),
+    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    undefined,
+    GameConstants.SinnohSubRegions.Hisui,
+    true,
+    1250000
+));
+Routes.add(new RegionRoute(
+    'Gapejaw Bog', GameConstants.Region.sinnoh, 21,
+    new RoutePokemon({
+        land: ['Bidoof', 'Bibarel', 'Gastly', 'Haunter', 'Croagunk', 'Tangela', 'Budew', 'Roselia', 'Geodude', 'Graveler', 'Ralts', 'Psyduck', 'Hippopotas', 'Tangrowth', 'Hippowdon', 'Carnivine', 'Yanma'],
+        water: ['Barboach', 'Whiscash'],
+        headbutt: ['Burmy (Sand)', 'Pachirisu'],
+    }),
+    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    undefined,
+    GameConstants.SinnohSubRegions.Hisui,
+    true,
+    1250000
+));
+Routes.add(new RegionRoute(
+    'Ursa\'s Ring', GameConstants.Region.sinnoh, 22,
+    new RoutePokemon({
+        land: ['Geodude', 'Graveler', 'Gastly', 'Haunter', 'Teddiursa', 'Ursaring', 'Yanma'],
+        headbutt: ['Burmy (Sand)', 'Pachirisu'],
+    }),
+    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    undefined,
+    GameConstants.SinnohSubRegions.Hisui,
+    true,
+    1250000
+));
+//Basculegion
+Routes.add(new RegionRoute(
+    'Holm of Trials', GameConstants.Region.sinnoh, 23,
+    new RoutePokemon({
+        land: ['Psyduck', 'Golduck', 'Gastly', 'Haunter', 'Croagunk', 'Toxicroak', 'Petilil', 'Goomy', 'Hisuian Sliggoo', 'Torterra', 'Carnivine'],
+        headbutt: ['Burmy (Sand)', 'Pachirisu', 'Geodude', 'Graveler'],
     }),
     [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
     undefined,
