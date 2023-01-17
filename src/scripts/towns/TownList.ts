@@ -2947,10 +2947,10 @@ const HappinyWitness1 = new NPC('Black Belt', [
 });
 
 const HappinyWitness2 = new NPC('Lady', [
-    'A Happiny with a blue egg? Are you it\'s trainer?',
+    'A Happiny with a blue egg? Are you its trainer?',
     'I was just minding my own business, when a little pink thing knocked me right over! By the time I got up, it was long gone, racing for the Eterna Forest.',
-    'I was worried it\'s trainer had lost it, so I came here to ask around. I hope you catch up to it soon.',
-    '<i>If it\'s got a better sense of direction than the Go-Rock Squad, it\'ll probably pop out at Eterna City.</i>',
+    'I was worried its trainer had lost it, so I came here to ask around. I hope you catch up to it soon.',
+    '<i>If it has a better sense of direction than the Go-Rock Squad, it\'ll probably pop out at Eterna City.</i>',
 ], {
     image: 'assets/images/trainers/Lady.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 13), new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 15, GameConstants.AchievementOption.less)]),

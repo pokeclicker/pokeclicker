@@ -964,7 +964,7 @@ class QuestLineHelper {
         const happinyChase7 = new TalkToNPCQuest(HappinyWitness7, 'The Happiny went through Mt. Coronet again? This time it went west through the Southern path. Ask around for witnesses on the other side.');
         manaphyQuestLine.addQuest(happinyChase7);
 
-        const happinyChase8 = new TalkToNPCQuest(HappinyWitness8, 'The Happiny left Oreburgh through the Oreburgh tunnel. Search for another witness on the far side.');
+        const happinyChase8 = new TalkToNPCQuest(HappinyWitness8, 'The Happiny left Oreburgh and headed west, through the Oreburgh Gate. Search for another witness on the far side.');
         manaphyQuestLine.addQuest(happinyChase8);
 
         const happinyChase9 = new TalkToNPCQuest(HappinyWitness9, 'Search for evidence of the Happiny\'s path after turning south from Jubilife City.');
