@@ -32,7 +32,7 @@ class Berry {
         [BerryColor.Blue]: ['Volbeat', 'Flabébé (Blue)'],
         [BerryColor.Silver]: ['Flabébé (White)'],
         [BerryColor.Gold]: ['Flabébé (Orange)'],
-    ];
+    };
 
     constructor(
         public type: BerryType,
@@ -44,7 +44,7 @@ class Berry {
         flavors: number[],
         public smoothness: number,
         public color: BerryColor,
-        public size: string[],
+        public size: number,
         public firmness: BerryFirmness,
         public description: string[],
         public aura?: Aura,
