@@ -4139,8 +4139,8 @@ const LaverreGengariteAster1 = new NPC('Hex Maniac Aster', [
     image: 'assets/images/trainers/Hex Maniac.png',
     requirement: new OneFromManyRequirement([
         new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Gastly').id], 666, undefined, GameConstants.AchievementOption.less),
-        new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Gastly').id], 444, undefined, GameConstants.AchievementOption.less),
-        new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Gastly').id], 13, undefined, GameConstants.AchievementOption.less),
+        new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Haunter').id], 444, undefined, GameConstants.AchievementOption.less),
+        new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Gengar').id], 13, undefined, GameConstants.AchievementOption.less),
         new ObtainedPokemonRequirement('Gengar', true)]),
 });
 
