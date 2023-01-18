@@ -233,10 +233,7 @@ TemporaryBattleList['Bill\'s Grandpa'] = new TemporaryBattle(
     'Hahaha, that was one of the best battles I\'ve ever had.',
     [new QuestLineStepCompletedRequirement('Bill\'s Grandpa Treasure Hunt', 10)],
     undefined,
-    {
-        displayName: 'Bill\'s Grandpa',
-        imageName: 'Bill\'s Grandpa',
-    }
+    {}
 );
 TemporaryBattleList['Blue 6'] = new TemporaryBattle(
     'Blue 6',

@@ -230,12 +230,14 @@ class QuestLineHelper {
         const fightBillsGrandpa = new CustomQuest(1, 0, 'Bill\'s Grandpa would like to have a battle with you!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Bill\'s Grandpa')]());
         BillsGrandpaQuestLine.addQuest(fightBillsGrandpa);
 
+        // Talk to Bill's Grandpa after battling him
         const EeveeReward = () => {
             App.game.party.gainPokemonByName('Eevee');
             Notifier.notify({
                 title: BillsGrandpaQuestLine.name,
                 message: 'Bill\'s Grandpa has given you an Eevee, treat it well!',
                 type: NotificationConstants.NotificationOption.success,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
                 timeout: 3e4,
             });
         };
