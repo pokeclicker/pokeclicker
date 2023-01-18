@@ -1926,6 +1926,10 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 129);
         },
 
+        '0.10.9': ({ playerData, saveData }) => {
+            //Hex Maniac Aster
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 112);
+        },
     };
 
     constructor() {
