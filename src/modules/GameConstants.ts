@@ -360,6 +360,16 @@ export enum Currency {
     contestToken,
 }
 
+export const LuxuryBallCurrencyRate: Record<Currency, number> = {
+    [Currency.money]: 300000,
+    [Currency.questPoint]: 900,
+    [Currency.dungeonToken]: 15000,
+    [Currency.diamond]: 15,
+    [Currency.farmPoint]: 900,
+    [Currency.battlePoint]: 150,
+    [Currency.contestToken]: 900,
+};
+
 export enum TypeEffectiveness {
     Immune,
     NotVery,
@@ -1501,6 +1511,7 @@ export const TemporaryBattles = [
     'Calem 2',
     'Calem 3',
     'Calem 4',
+    'Hex Maniac Aster',
     'Sycamore 2',
     'Shauna 2',
     'Tierno 2',
@@ -1776,6 +1787,7 @@ export enum PokemonStatisticsType {
     Defeated = 'Defeated',
     Encountered = 'Encountered',
     Hatched = 'Hatched',
+    Seen = 'Seen',
 }
 
 // Alcremie

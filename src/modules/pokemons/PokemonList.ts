@@ -3764,7 +3764,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 225,
         'eggCycles': 20,
-        // 'evolutions': [MegaEvolution('Gengar', 'Mega Gengar')],
+        'evolutions': [MegaEvolution('Gengar', 'Mega Gengar')],
         'base': {
             'hitpoints': 60,
             'attack': 65,
@@ -4129,6 +4129,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 80,
             'speed': 65,
         },
+        'heldItem': { type: ItemType.item, id: 'Thick_Club' },
     },
     {
         'id': 106,
@@ -6955,6 +6956,23 @@ export const pokemonList = createPokemonArray(
         'exp': 50,
         'eggCycles': 20,
         'evolutions': [LevelEvolution('Hoppip', 'Skiploom', 18)],
+        'base': {
+            'hitpoints': 35,
+            'attack': 35,
+            'specialAttack': 35,
+            'defense': 40,
+            'specialDefense': 55,
+            'speed': 50,
+        },
+    },
+    {
+        'id': 187.01,
+        'name': 'Hoppip (Chimecho)',
+        'catchRate': 255,
+        'type': [PokemonType.Grass, PokemonType.Flying],
+        'levelType': LevelType.mediumslow,
+        'exp': 50,
+        'eggCycles': 20,
         'base': {
             'hitpoints': 35,
             'attack': 35,
