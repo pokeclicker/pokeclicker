@@ -135,6 +135,117 @@ class QuestLineHelper {
         App.game.quests.questLines().push(tutorial);
     }
 
+    // Started upon talking with Bill's Grandpa.
+    public static createBillsGrandpaQuestLine() {
+        const BillsGrandpaQuestLine = new QuestLine('Bill\'s Grandpa Treasure Hunt', 'Check the hints and bring Bill\'s Grandpa the Pokémon he wants to see.', new RouteKillRequirement(10, GameConstants.Region.kanto, 25), GameConstants.BulletinBoards.Kanto);
+
+        const talkToBillsGrandpa1 = new TalkToNPCQuest(BillsGrandpa1, 'Talk to Bill\'s Grandpa in Bill\'s House.');
+        BillsGrandpaQuestLine.addQuest(talkToBillsGrandpa1);
+
+        const pinkBalloon = new CaptureSpecificPokemonQuest('Jigglypuff', 'Bill\'s Grandpa want you to catch a Pokémon that is pink and like a balloon.', 1);
+        BillsGrandpaQuestLine.addQuest(pinkBalloon);
+
+        // Talk to Bill's Grandpa after catching a Jigglypuff
+        const MoonStoneReward = () => {
+            player.gainItem('Moon_stone', 1);
+            Notifier.notify({
+                title: BillsGrandpaQuestLine.name,
+                message: 'Bill\'s Grandpa has given you a Moon Stone',
+                type: NotificationConstants.NotificationOption.success,
+                sound: NotificationConstants.NotificationSound.Quests.quest_ready_to_complete,
+            });
+        };
+
+        const talkToBillsGrandpa2 = new TalkToNPCQuest(BillsGrandpa2, 'Show your Jigglypuff back to Bill\'s Grandpa.', MoonStoneReward);
+        BillsGrandpaQuestLine.addQuest(talkToBillsGrandpa2);
+
+        const blueRound = new CaptureSpecificPokemonQuest('Oddish', 'Bill\'s Grandpa want you to catch a Pokémon that is round, blue and has has leaves growing on its head', 1);
+        BillsGrandpaQuestLine.addQuest(blueRound);
+
+        // Talk to Bill's Grandpa after catching an Oddish
+        const LeafStoneReward = () => {
+            player.gainItem('Leaf_stone', 1);
+            Notifier.notify({
+                title: BillsGrandpaQuestLine.name,
+                message: 'Bill\'s Grandpa has given you a Leaf Stone',
+                type: NotificationConstants.NotificationOption.success,
+                sound: NotificationConstants.NotificationSound.Quests.quest_ready_to_complete,
+            });
+        };
+
+        const talkToBillsGrandpa3 = new TalkToNPCQuest(BillsGrandpa3, 'Show your Oddish back to Bill\'s Grandpa.', LeafStoneReward);
+        BillsGrandpaQuestLine.addQuest(talkToBillsGrandpa3);
+
+        const redSphere = new CaptureSpecificPokemonQuest('Staryu', 'Bill\'s Grandpa want you to catch a Pokémon that is has a red sphere in its body and is shaped like a star', 1);
+        BillsGrandpaQuestLine.addQuest(redSphere);
+
+        // Talk to Bill's Grandpa after catching a Staryu
+        const WaterStoneReward = () => {
+            player.gainItem('Water_stone', 1);
+            Notifier.notify({
+                title: BillsGrandpaQuestLine.name,
+                message: 'Bill\'s Grandpa has given you a Water Stone',
+                type: NotificationConstants.NotificationOption.success,
+                sound: NotificationConstants.NotificationSound.Quests.quest_ready_to_complete,
+            });
+        };
+
+        const talkToBillsGrandpa4 = new TalkToNPCQuest(BillsGrandpa4, 'Show your Staryu back to Bill\'s Grandpa.', WaterStoneReward);
+        BillsGrandpaQuestLine.addQuest(talkToBillsGrandpa4);
+
+        const loyalRoar = new CaptureSpecificPokemonQuest('Growlithe', 'Bill\'s Grandpa want you to catch a Pokémon that is very loyal and supposedly roars pretty well', 1);
+        BillsGrandpaQuestLine.addQuest(loyalRoar);
+
+        // Talk to Bill's Grandpa after catching a Growlithe
+        const FireStoneReward = () => {
+            player.gainItem('Fire_stone', 1);
+            Notifier.notify({
+                title: BillsGrandpaQuestLine.name,
+                message: 'Bill\'s Grandpa has given you a Fire Stone',
+                type: NotificationConstants.NotificationOption.success,
+                sound: NotificationConstants.NotificationSound.Quests.quest_ready_to_complete,
+            });
+        };
+
+        const talkToBillsGrandpa5 = new TalkToNPCQuest(BillsGrandpa5, 'Show your Growlithe back to Bill\'s Grandpa.', WaterStoneReward);
+        BillsGrandpaQuestLine.addQuest(talkToBillsGrandpa5);
+
+        const yellowAndRed = new CaptureSpecificPokemonQuest('Pikachu', 'Bill\'s Grandpa want you to catch a Pokémon that has a yellow body and red cheeks', 1);
+        BillsGrandpaQuestLine.addQuest(yellowAndRed);
+
+        // Talk to Bill's Grandpa after catching a Pikachu
+        const ThunderStoneReward = () => {
+            player.gainItem('Thunder_stone', 1);
+            Notifier.notify({
+                title: BillsGrandpaQuestLine.name,
+                message: 'Bill\'s Grandpa has given you a Thunder Stone',
+                type: NotificationConstants.NotificationOption.success,
+                sound: NotificationConstants.NotificationSound.Quests.quest_ready_to_complete,
+            });
+        };
+
+        const talkToBillsGrandpa6 = new TalkToNPCQuest(BillsGrandpa6, 'Show your Pikachu back to Bill\'s Grandpa.', ThunderStoneReward);
+        BillsGrandpaQuestLine.addQuest(talkToBillsGrandpa6);
+
+        const fightBillsGrandpa = new CustomQuest(1, 0, 'Bill\'s Grandpa would like to have a battle with you!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Bill\'s Grandpa')]());
+        BillsGrandpaQuestLine.addQuest(fightBillsGrandpa);
+
+        const EeveeReward = () => {
+            App.game.party.gainPokemonByName('Eevee');
+            Notifier.notify({
+                title: BillsGrandpaQuestLine.name,
+                message: 'Bill\'s Grandpa has given you an Eevee, treat it well!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
+        const talkToBillsGrandpa7 = new TalkToNPCQuest(BillsGrandpa7, 'Talk to Bill\'s Grandpa one last time.', EeveeReward);
+        BillsGrandpaQuestLine.addQuest(talkToBillsGrandpa7);
+
+        App.game.quests.questLines().push(BillsGrandpaQuestLine);
+    }
+
     // Started upon defeating Cerulean City's gym.
     public static createRocketKantoQuestLine() {
         const rocketKantoQuestLine = new QuestLine('Team Rocket', 'Some nasty villains are up to no good.');
@@ -2430,6 +2541,7 @@ class QuestLineHelper {
     public static loadQuestLines() {
         this.createTutorial();
         this.createRocketKantoQuestLine();
+        this.createBillsGrandpaQuestLine();
         this.createUndergroundQuestLine();
         this.createBillSeviiQuestLine();
         this.createPersonsofInterestQuestLine();

@@ -1411,6 +1411,7 @@ export const TemporaryBattles = [
     'Biker Goon 2',
     'Biker Goon 3',
     'Cue Ball Paxton',
+    'Bill\'s Grandpa',
     'Blue 6',
     'Silver 1',
     'Silver 2',
