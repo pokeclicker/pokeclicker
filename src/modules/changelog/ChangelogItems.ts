@@ -10,6 +10,16 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.10.8
+    new ChangelogUpdate('v0.10.8', new Date(2023, 0, 15)),
+    new Changelog(changelogType.NEW, 'New Mega'),
+    new Changelog(changelogType.NEW, 'New Held Item'),
+    new Changelog(changelogType.CHANGE, 'Misc text changes'),
+    new Changelog(changelogType.CHANGE, 'Misc image changes'),
+    new Changelog(changelogType.FIXED, 'Fixed scrollbar for vitamin modal'),
+    new Changelog(changelogType.FIXED, 'Fixed shops'),
+    new Changelog(changelogType.FIXED, 'Fixed Maelstrom showing up at the wrong time'),
+
     // v0.10.7
     new ChangelogUpdate('v0.10.7', new Date(2023, 0, 14)),
     new Changelog(changelogType.NEW, 'New Megas'),
