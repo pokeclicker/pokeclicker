@@ -2198,6 +2198,24 @@ TemporaryBattleList['Grand Duchess Diantha'] = new TemporaryBattle(
     }
 );
 
+TemporaryBattleList['Wild Houndour Horde'] = new TemporaryBattle(
+	'Wild Houndour Horde',
+	[
+		new GymPokemon('Houndour', 60000000, 40),
+		new GymPokemon('Houndour', 60000000, 40),
+		new GymPokemon('Houndour', 60000000, 40),
+		new GymPokemon('Houndour', 60000000, 40),
+		new GymPokemon('Houndour', 60000000, 40),
+		new GymPokemon('Houndoom', 120000000, 60),
+	],
+	'<i>With the leader of the pack defeated, the Houndour horde scatter, their firey fury reduced to ashes. In the gleaming sunlight, you catch sight of a small gem left behind by their leader...</i></br><img src="assets/images/megaStone/229.png"/></br><i>You obtained the Houndoomite!</i>',
+	[new ObtainedPokemonRequirement('Houndoom'), new WeatherRequirement([WeatherType.Sunny])],
+	undefined,
+	{
+			displayName: 'Wild Houndour Horde',
+			firstTimeRewardFunction: () => App.game.party.getPokemonByName('Houndoom').giveMegastone(),
+	}
+
 //Alola Temporary Battles
 TemporaryBattleList['Hau 1'] = new TemporaryBattle(
     'Hau 1',
