@@ -39,11 +39,27 @@ class DamageCalculator {
                 continue;
             }
 
-            const attack = App.game.party.calculateOnePokemonAttack(pokemon, this.type1(), this.type2(), this.region(), ignoreRegionMultiplier, this.includeBreeding(), this.baseAttackOnly(), this.weather(), this.ignoreLevel());
+            const attack = App.game.party.calculateOnePokemonAttack(pokemon, PokemonType.None, PokemonType.None, this.region(), ignoreRegionMultiplier, this.includeBreeding(), this.baseAttackOnly(), this.weather(), this.ignoreLevel());
 
-            typedamage[dataPokemon.type1] += attack / 2;
-            const otherType = dataPokemon.type2 !== PokemonType.None ? dataPokemon.type2 : dataPokemon.type1;
-            typedamage[otherType] += attack / 2;
+            if (this.type1() === PokemonType.None) {
+                // When no defender type is selected, then we evenly split the pokemon's attack between its types
+                typedamage[dataPokemon.type1] += attack / 2;
+                const otherType = dataPokemon.type2 !== PokemonType.None ? dataPokemon.type2 : dataPokemon.type1;
+                typedamage[otherType] += attack / 2;
+            } else {
+                // We calculate the base attack of the pokemon, and will affect the correct multiplier for each of its types, then we will only use the best multiplier
+                const type1Multiplier = TypeHelper.getAttackModifier(dataPokemon.type1, PokemonType.None, this.type1(), this.type2());
+                const type2Multiplier = dataPokemon.type2 !== PokemonType.None ? TypeHelper.getAttackModifier(dataPokemon.type2, PokemonType.None, this.type1(), this.type2()) : -1;
+
+                if (type1Multiplier > type2Multiplier) {
+                    typedamage[dataPokemon.type1] += attack * type1Multiplier;
+                } else if (type1Multiplier < type2Multiplier) {
+                    typedamage[dataPokemon.type2] += attack * type2Multiplier;
+                } else {
+                    typedamage[dataPokemon.type1] += (attack / 2) * type1Multiplier;
+                    typedamage[dataPokemon.type2] += (attack / 2) * type2Multiplier;
+                }
+            }
         }
 
         return typedamage;
