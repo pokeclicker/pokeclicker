@@ -1,7 +1,7 @@
 import { Observable } from 'knockout';
 import BadgeEnums from '../enums/Badges';
 import {
-    KantoSubRegions, JohtoSubRegions, HoennSubRegions, SinnohSubRegions, UnovaSubRegions, KalosSubRegions, AlolaSubRegions, GalarSubRegions, Region, getDungeonIndex,
+    KantoSubRegions, JohtoSubRegions, HoennSubRegions, SinnohSubRegions, UnovaSubRegions, KalosSubRegions, AlolaSubRegions, GalarSubRegions, PaldeaSubRegions, Region, getDungeonIndex,
 } from '../GameConstants';
 import GameHelper from '../GameHelper';
 import ClearDungeonRequirement from '../requirements/ClearDungeonRequirement';
@@ -26,6 +26,7 @@ export default class RoamingPokemonList {
         [[KalosSubRegions.Kalos]],
         [[AlolaSubRegions.MelemeleIsland, AlolaSubRegions.AkalaIsland, AlolaSubRegions.UlaulaIsland, AlolaSubRegions.PoniIsland], [AlolaSubRegions.MagikarpJump]],
         [[GalarSubRegions.SouthGalar], [GalarSubRegions.NorthGalar], [GalarSubRegions.IsleofArmor], [GalarSubRegions.CrownTundra]],
+        [[PaldeaSubRegions.Paldea]],
     ];
 
     public static list: Partial<Record<Region, Array<Array<RoamingPokemon>>>> = {};
@@ -138,3 +139,6 @@ RoamingPokemonList.add(Region.galar, 2, new RoamingPokemon('Galarian Moltres', n
 RoamingPokemonList.add(Region.galar, 3, new RoamingPokemon('Spectrier', new QuestLineStepCompletedRequirement('The Crown of Galar', 6)));
 RoamingPokemonList.add(Region.galar, 3, new RoamingPokemon('Glastrier', new QuestLineStepCompletedRequirement('The Crown of Galar', 6)));
 RoamingPokemonList.add(Region.galar, 3, new RoamingPokemon('Galarian Articuno', new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 5)));
+
+// Paldea - Note: Gimmighoul is not here for certain
+RoamingPokemonList.add(Region.paldea, 0, new RoamingPokemon('Gimmighoul (Roaming)'));

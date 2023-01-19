@@ -234,6 +234,7 @@ namespace GameConstants {
         kalos,
         alola,
         galar,
+        paldea,
         final,
     }
     declare function clipNumber(num: number, min: number, max: number): number;
@@ -307,6 +308,9 @@ namespace GameConstants {
         'Galarica_wreath',
         'Black_mane_hair',
         'White_mane_hair',
+        'Auspicious_armor',
+        'Malicious_armor',
+        'Leaders_crest',
     }
     declare enum FossilPieceType {
         'None',
@@ -465,6 +469,7 @@ namespace GameConstants {
     declare const UnovaGyms: string[];
     declare const KalosGyms: string[];
     declare const GalarGyms: string[];
+    declare const PaldeaGyms: string[];
     declare const OrangeGyms: string[];
     declare const RegionGyms: string[][];
     declare function getGymIndex(gym: string): number;
@@ -476,6 +481,7 @@ namespace GameConstants {
     declare const UnovaDungeons: string[];
     declare const KalosDungeons: string[];
     declare const GalarDungeons: string[];
+    declare const PaldeaDungeons: string[];
     declare const RegionDungeons: string[][];
     declare function getDungeonIndex(dungeon: string): number;
     declare function getDungeonRegion(dungeon: string): Region;
@@ -625,6 +631,9 @@ namespace GameConstants {
         IsleofArmor,
         CrownTundra,
     }
+    declare enum PaldeaSubRegions {
+        Paldea,
+    }
     declare enum FinalSubRegions {
         Final,
     }
@@ -638,6 +647,7 @@ namespace GameConstants {
         | KalosSubRegions
         | AlolaSubRegions
         | GalarSubRegions
+        | PaldeaSubRegions
         | FinalSubRegions
 
     // Gender Types

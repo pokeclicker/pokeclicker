@@ -3298,3 +3298,22 @@ Routes.add(new RegionRoute(
     undefined,
     GameConstants.GalarSubRegions.CrownTundra
 ));
+
+// Paldea
+// I am currently unsure if fixed encounter only pokemon should be included. They have been for now, and are clearly separated.
+Routes.add(new RegionRoute(
+    'Poco Path', GameConstants.Region.galar, 1,
+    new RoutePokemon({
+        land: ['Lechonk', 'Pawmi', 'Tarountula', 'Hoppip', 'Fletchling', 'Scatterbug', 'Wingull', 'Buizel'],
+        water: ['Magikarp', 'Arrokuda'],
+    }),
+    [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)]
+));
+Routes.add(new RegionRoute(
+    'South Province (Area One)', GameConstants.Region.galar, 2,
+    new RoutePokemon({
+        land: ['Hoppip', 'Paldean Wooper', 'Wingull', 'Ralts', 'Combee', 'Sunkern', 'Buizel', 'Pawmi', 'Gastly', 'Fletchling', 'Scatterbug', 'Spewpa', 'Oricorio (Pom-Pom)', 'Lechonk', 'Tarountula', 'Fidough', 'Happiny', 'Pichu', 'Bonsly', 'Skwovet', 'Shroodle', 'Bounsweet', 'Igglybuff', 'Drowzee', /*Fixed encounter only:*/'Wiglett', 'Pachirisu', 'Flamigo', 'Gimmighoul (Chest)'],
+        water: ['Magikarp', 'Arrokuda', 'Azurill', 'Chewtle', 'Psyduck', 'Surskit'],
+    }),
+    [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)]
+));

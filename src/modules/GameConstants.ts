@@ -37,11 +37,12 @@ export enum Region {
     kalos = 5,
     alola = 6,
     galar = 7,
+    paldea = 8,
     // Throws an error if no region after the final region
-    final = 8,
+    final = 9,
 }
 
-export const MAX_AVAILABLE_REGION = Region.galar;
+export const MAX_AVAILABLE_REGION = Region.paldea;
 
 export const MaxIDPerRegion = [
     151, // 151 - Kanto
@@ -52,6 +53,7 @@ export const MaxIDPerRegion = [
     721, // 72 - Kalos
     809, // 88 - Alola
     898, // 89 - Galar
+    1008, // 103 - Paldea
 ];
 
 // Subregions
@@ -96,6 +98,10 @@ export enum GalarSubRegions {
     CrownTundra,
 }
 
+export enum PaldeaSubRegions {
+    Paldea = 0,
+}
+
 export enum FinalSubRegions {
     Final = 0,
 }
@@ -109,6 +115,7 @@ export type SubRegions =
     | KalosSubRegions
     | AlolaSubRegions
     | GalarSubRegions
+    | PaldeaSubRegions
     | FinalSubRegions;
 
 // Battle Items
@@ -735,6 +742,7 @@ export const RegionalStarters = [
     [650, 653, 656], // Kalos
     [722, 725, 728], // Alola
     [810, 813, 816], // Galar
+    [906, 909, 912], // Paldea
 ];
 
 export enum StoneType {
@@ -780,6 +788,9 @@ export enum StoneType {
     'Galarica_wreath',
     'Black_mane_hair',
     'White_mane_hair',
+    'Auspicious_armor',
+    'Malicious_armor',
+    'Leaders_crest',
 }
 
 export enum FossilPieceType {
@@ -1085,6 +1096,38 @@ export const GalarGyms = [
     'Elite Trainer Peony',
 ];
 
+export const PaldeaGyms = [
+    'Cortondo',
+    'Artazon',
+    'Levincia',
+    'Cascarrafa',
+    'Medali',
+    'Montenevera',
+    'Alfornada',
+    'Glaseado Mountain',
+    'Elite Rika',
+    'Elite Poppy',
+    'Elite Larry',
+    'Elite Hassel',
+    'Top Champion Geeta',
+    'Champion Nemona',
+    'Segin Squad\'s Base',
+    'Schedar Squad\'s Base',
+    'Navi Squad\'s Base',
+    'Ruchbah Squad\'s Base',
+    'Caph Squad\'s Base',
+    'Director Clavell',
+    'Penny of Team Star',
+    'Stony Cliff Titan',
+    'Open Sky Titan',
+    'Lurking Steel Titan',
+    'Quaking Earth Titan',
+    'False Dragon Titan',
+    'Pokémon Trainer Arven',
+    'AI Sada',
+    'AI Turo',
+]
+
 export const OrangeGyms = [
     'Mikan Island',
     'Navel Island',
@@ -1114,6 +1157,7 @@ export const RegionGyms = [
     KalosGyms,
     AlolaGyms,
     GalarGyms,
+    PaldeaGyms,
     // Keep it at the bottom, as we want optional badges at the bottom
     OrangeGyms,
     MagikarpJumpGyms,
@@ -1345,6 +1389,10 @@ export const GalarDungeons = [
     'Crown Shrine', // 166
 ];
 
+export const PaldeaDungeons = [
+    'Inlet Grotto', // 167
+];
+
 export const RegionDungeons = [
     KantoDungeons,
     JohtoDungeons,
@@ -1354,6 +1402,7 @@ export const RegionDungeons = [
     KalosDungeons,
     AlolaDungeons,
     GalarDungeons,
+    PaldeaDungeons,
 ];
 
 export function getDungeonIndex(dungeon: string): number {
@@ -1373,6 +1422,7 @@ export const StartingTowns = [
     'Vaniville Town', // Kalos
     'Iki Town Outskirts', // Alola
     'Postwick', // Galar
+    'Cabo Poco', // Paldea
     'Final Region Town', // Final
 ];
 
@@ -1385,6 +1435,7 @@ export const StartingRoutes = [
     1, // Kalos
     1, // Alola
     1, // Galar
+    1, // Paldea
 ];
 
 export const DockTowns = [
@@ -1396,6 +1447,7 @@ export const DockTowns = [
     'Coumarine City', // Kalos
     'Hau\'oli City', // Alola
     'Hulbury', // Galar
+    'Porto Marinada', // Paldea
 ];
 
 export const TemporaryBattles = [

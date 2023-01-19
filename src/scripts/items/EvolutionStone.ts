@@ -132,3 +132,6 @@ ItemList.Galarica_cuff     = new EvolutionStone(GameConstants.StoneType.Galarica
 ItemList.Galarica_wreath   = new EvolutionStone(GameConstants.StoneType.Galarica_wreath, 5000, undefined , 'Galarica Wreath');
 ItemList.Black_mane_hair   = new EvolutionStone(GameConstants.StoneType.Black_mane_hair, 2500, undefined, 'Black Mane Hair');
 ItemList.White_mane_hair   = new EvolutionStone(GameConstants.StoneType.White_mane_hair, 2500, undefined, 'White Mane Hair');
+ItemList.Auspicious_armor   = new EvolutionStone(GameConstants.StoneType.Auspicious_armor, 5000, undefined , 'Auspicious Armor');
+ItemList.Malicious_armor   = new EvolutionStone(GameConstants.StoneType.Malicious_armor, 5000, undefined , 'Malicious Armor');
+ItemList.Leaders_crest   = new EvolutionStone(GameConstants.StoneType.Leaders_crest, 5000, undefined , 'Leader\'s Crest');

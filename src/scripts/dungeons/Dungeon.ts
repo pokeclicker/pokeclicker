@@ -9246,3 +9246,16 @@ dungeonList['Crown Shrine'] = new Dungeon('Crown Shrine',
         new DungeonBossPokemon('Calyrex', 169578810, 80, { hide: true, requirement: new QuestLineStepCompletedRequirement('The Crown of Galar', 8) }),
     ],
     2200000, 55);
+
+// Paldea Dungeons
+dungeonList['Inlet Grotto'] = new Dungeon('Inlet Grotto',
+    ['Diglett', 'Houndour', 'Yungoos'],
+    {
+        common: [
+            {loot: 'Lucky_egg'},
+            {loot: 'Lucky_incense'},
+        ],
+    },
+    33915762,
+    [new DungeonBossPokemon('Houndoom', 161099869, 30)],
+    2200000, 1);
