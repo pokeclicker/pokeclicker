@@ -325,7 +325,7 @@ const BillsGrandpa1 = new NPC('Bill\'s Grandpa', [
     'Hm? You know Bill? He\'s my grandson. He\'s not here right now. He does something with PCs, so I\'m house-sitting.',
     'I like Pokémon but I\'m not as knowledgeable as my grandson. My grandson Bill told me about a Pokémon that is pink and like a balloon.',
     'Would you catch that Pokémon and show it to me, please?',
-], {image: 'assets/images/trainers/Super Nerd.png',
+], {image: 'assets/images/npcs/Bill\'s Grandpa with Eevee.png',
     requirement: new MultiRequirement([new QuestLineStartedRequirement('Bill\'s Grandpa Treasure Hunt'), new QuestLineStepCompletedRequirement('Bill\'s Grandpa Treasure Hunt', 1, GameConstants.AchievementOption.less)])
 });
 
@@ -333,7 +333,7 @@ const BillsGrandpa2 = new NPC('Bill\'s Grandpa', [
     'Ah, so that is Jigglypuff? Isn\'t it cute! That\'s so kind of you. Thanks! This Moon Stone is a token of my appreciation.',
     'Ah, my grandson mentioned a round, green Pokémon, wait not green, it\'s blue, a blue Pokémon that has leaves growing on its head',
     'Would you catch that Pokémon and show it to me, please?',
-], {image: 'assets/images/trainers/Super Nerd.png',
+], {image: 'assets/images/npcs/Bill\'s Grandpa with Eevee.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Bill\'s Grandpa Treasure Hunt', 1), new QuestLineStepCompletedRequirement('Bill\'s Grandpa Treasure Hunt', 3, GameConstants.AchievementOption.less)])
 });
 
@@ -341,7 +341,7 @@ const BillsGrandpa3 = new NPC('Bill\'s Grandpa', [
     'Ah, so that is Oddish? Isn\'t it cute! That\'s so kind of you. Thanks! This Leaf Stone is a token of my appreciation.',
     'By the way, do you know of a sea Pokémon that has a red sphere on its body? You know, the one that\'s shaped like a star?',
     'Would you catch that Pokémon and show it to me, please?',
-], {image: 'assets/images/trainers/Super Nerd.png',
+], {image: 'assets/images/npcs/Bill\'s Grandpa with Eevee.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Bill\'s Grandpa Treasure Hunt', 3), new QuestLineStepCompletedRequirement('Bill\'s Grandpa Treasure Hunt', 5, GameConstants.AchievementOption.less)])
 });
 
@@ -349,7 +349,7 @@ const BillsGrandpa4 = new NPC('Bill\'s Grandpa', [
     'Ah, so that is Staryu? Isn\'t it cute! That\'s so kind of you. Thanks! This Water Stone is a token of my appreciation.',
     'I was thinking, Bill told me about a Pokémon that is very loyal to its trainer. It\'s supposed to roar well',
     'Would you catch that Pokémon and show it to me, please?',
-], {image: 'assets/images/trainers/Super Nerd.png',
+], {image: 'assets/images/npcs/Bill\'s Grandpa with Eevee.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Bill\'s Grandpa Treasure Hunt', 5), new QuestLineStepCompletedRequirement('Bill\'s Grandpa Treasure Hunt', 7, GameConstants.AchievementOption.less)])
 });
 
@@ -357,16 +357,16 @@ const BillsGrandpa5 = new NPC('Bill\'s Grandpa', [
     'Ah, so that is Growlithe? Isn\'t it cute! That\'s so kind of you. Thanks! This Fire Stone is a token of my appreciation.',
     'Do you know that hugely popular Pokémon? The Pokémon that has a yellow body and red cheeks. I would love to see what it looks like.',
     'Would you catch that Pokémon and show it to me, please?',
-], {image: 'assets/images/trainers/Super Nerd.png',
+], {image: 'assets/images/npcs/Bill\'s Grandpa with Eevee.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Bill\'s Grandpa Treasure Hunt', 7), new QuestLineStepCompletedRequirement('Bill\'s Grandpa Treasure Hunt', 9, GameConstants.AchievementOption.less)])
 });
 
 const BillsGrandpa6 = new NPC('Bill\'s Grandpa', [
     'Ah, so that is Pikachu? Isn\'t it cute! That\'s so kind of you. Thanks! This Thunder Stone is a token of my appreciation.',
     'You\'ve shown me everything I wanted to see and more. You have been a very nice trainer! My grandson could learn one thing or two from you, ho, ho!',
-    'There is one more thing I would like to ask you, would you battle this old man? I promise I\'ll make it worth your while.',
+    'There is one more thing I would like to ask you, would you battle this old man? I promise I\'ll make it worth your while. Let\'s go outside.',
     'Let me tell you though, in my youth I was strong enough to beat Viridian City\'s Gym, so don\'t expect me to be a pushover',
-], {image: 'assets/images/trainers/Super Nerd.png',
+], {image: 'assets/images/npcs/Bill\'s Grandpa with Eevee.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Bill\'s Grandpa Treasure Hunt', 9), new QuestLineStepCompletedRequirement('Bill\'s Grandpa Treasure Hunt', 11, GameConstants.AchievementOption.less)])
 });
 
@@ -374,14 +374,14 @@ const BillsGrandpa7 = new NPC('Bill\'s Grandpa', [
     'As I said, that was one of the best battles I\'ve ever had.',
     'There is someone I would like to go with you, my partner Eevee.',
     'I think Eevee is gonna be better with you than with me. I\'m sure that with you Eevee is gonna grow up healthy and strong!',
-], {image: 'assets/images/trainers/Super Nerd.png',
+], {image: 'assets/images/npcs/Bill\'s Grandpa without Eevee.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Bill\'s Grandpa Treasure Hunt', 11), new QuestLineStepCompletedRequirement('Bill\'s Grandpa Treasure Hunt', 13, GameConstants.AchievementOption.less)])
 });
 
 const BillsGrandpa8 = new NPC('Bill\'s Grandpa', [
     'Hello again, I see you are treating Eevee very well.',
     'I\'m still housesitting for my son, I\'m sure he\'s doing well.',
-], {image: 'assets/images/trainers/Super Nerd.png',
+], {image: 'assets/images/npcs/Bill\'s Grandpa without Eevee.png',
     requirement: new QuestLineStepCompletedRequirement('Bill\'s Grandpa Treasure Hunt', 13)
 });
 
