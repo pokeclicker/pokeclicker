@@ -2198,6 +2198,29 @@ TemporaryBattleList['Grand Duchess Diantha'] = new TemporaryBattle(
     }
 );
 
+TemporaryBattleList['Hex Maniac Aster'] = new TemporaryBattle(
+    'Hex Maniac Aster',
+    [
+        new GymPokemon('Gastly', 40250000, 25),
+        new GymPokemon('Haunter', 60770015, 30),
+        new GymPokemon('Haunter', 60770015, 30),
+        new GymPokemon('Medicham', 60770015, 30),
+    ],
+    'What’s this?! I see... Perhaps a Trainer as accomplished as you can get the most out of this.</br><img src="assets/images/megaStone/94.png"/></br>',
+    [
+        new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Gastly').id], 666),
+        new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Haunter').id], 444),
+        new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Gengar').id], 13),
+        new ObtainedPokemonRequirement('Gengar'),
+    ],
+    undefined,
+    {
+        displayName: 'Hex Maniac Aster',
+        imageName: '../trainers/Hex Maniac',
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Gengar').giveMegastone(),
+    }
+);
+
 TemporaryBattleList['Wild Houndour Horde'] = new TemporaryBattle(
 	'Wild Houndour Horde',
 	[
@@ -2208,13 +2231,47 @@ TemporaryBattleList['Wild Houndour Horde'] = new TemporaryBattle(
 		new GymPokemon('Houndour', 60000000, 40),
 		new GymPokemon('Houndoom', 120000000, 60),
 	],
-	'<i>With the leader of the pack defeated, the Houndour horde scatter, their firey fury reduced to ashes. In the gleaming sunlight, you catch sight of a small gem left behind by their leader...</i></br><img src="assets/images/megaStone/229.png"/></br><i>You obtained the Houndoomite!</i>',
-	[new ObtainedPokemonRequirement('Houndoom'), new WeatherRequirement([WeatherType.Sunny])],
+	'<i>With the leader of the pack defeated, the Houndour horde scatter, their fiery fury reduced to ashes. In the gleaming sunlight, you catch sight of a small gem left behind by their leader...</i></br><img src="assets/images/megaStone/229.png"/></br><i>You obtained the Houndoomite!</i>',
+	[
+	    new ObtainedPokemonRequirement('Houndoom'), 
+		new WeatherRequirement([WeatherType.Sunny]), 
+		new statisticRequirement('pokemonCaught', PokemonHelper.getPokemonByName('Houndour').id], 500),
+		new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion),
+	],
 	undefined,
 	{
-			displayName: 'Wild Houndour Horde',
-			firstTimeRewardFunction: () => App.game.party.getPokemonByName('Houndoom').giveMegastone(),
+		displayName: 'Wild Houndour Horde',
+		firstTimeRewardFunction: () => App.game.party.getPokemonByName('Houndoom').giveMegastone(),
+        hideTrainer: true,
+		returnTown: 'Dendemille Town',
 	}
+);
+
+TemporaryBattleList['Wild Electrike Horde'] = new TemporaryBattle(
+	'Wild Electrike Horde',
+	[
+		new GymPokemon('Electrike', 60000000, 40),
+		new GymPokemon('Electrike', 60000000, 40),
+		new GymPokemon('Electrike', 60000000, 40),
+		new GymPokemon('Electrike', 60000000, 40),
+		new GymPokemon('Electrike', 60000000, 40),
+		new GymPokemon('Manectric', 120000000, 60),
+	],
+	'<i>With the leader of the pack defeated, the Electrike horde scatter, their thunderous rage utterly depleted. In a thunderbolt\'s flash, you catch sight of a small gem left behind by their leader...</i></br><img src="assets/images/megaStone/310.png"/></br><i>You obtained the Manectite!</i>',
+	[
+	    new ObtainedPokemonRequirement('Manectric'), 
+		new WeatherRequirement([WeatherType.Thunderstorm]), 
+		new statisticRequirement('pokemonCaught', PokemonHelper.getPokemonByName('Electrike').id], 500),
+		new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion),
+	],
+	undefined,
+	{
+		displayName: 'Wild Electrike Horde',
+		firstTimeRewardFunction: () => App.game.party.getPokemonByName('Manectric').giveMegastone(),
+        hideTrainer: true,
+		returnTown: 'Dendemille Town', 
+	}
+);
 
 //Alola Temporary Battles
 TemporaryBattleList['Hau 1'] = new TemporaryBattle(
@@ -2450,7 +2507,7 @@ TemporaryBattleList['Captain Mina'] = new TemporaryBattle(
         new GymPokemon('Granbull', 189973142, 51),
         new GymPokemon('Ribombee', 198608284, 51),
     ],
-    'Woah! I\'m shocked at your strength!',
+    'Woah! I\'m shocked at your strength! But you\'ve only just begun my real trial. Now you have to go around to all the captains in Alola!',
     [new TemporaryBattleRequirement('Ultra Megalopolis')],
     undefined,
     {imageName: '../gymLeaders/Mina'}
@@ -2462,7 +2519,7 @@ TemporaryBattleList['Captain Ilima'] = new TemporaryBattle(
         new GymPokemon('Smeargle', 189973142, 51),
         new GymPokemon('Komala', 198608284, 51),
     ],
-    'Yes! You have emerged victorious!',
+    'Yes! You have emerged victorious! You and your Pokémon have become quite a delightful team! Off to Lush Jungle? It\'s been awhile since I last visited Akala.',
     [
         new TemporaryBattleRequirement('Captain Mina'),
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Hau\'oli Cemetery')),
@@ -2477,7 +2534,7 @@ TemporaryBattleList['Captain Mallow'] = new TemporaryBattle(
         new GymPokemon('Shiinotic', 189973142, 51),
         new GymPokemon('Tsareena', 198608284, 51),
     ],
-    'Sure enough, when it comes to you and Pokémon, the quality of the ingredients shines forth!',
+    'Sure enough, when it comes to you and Pokémon, the quality of the ingredients shines forth! Once you defeat Lana do you want to go to Wela Volcano Park with two pretty pals like us?',
     [new TemporaryBattleRequirement('Captain Ilima')],
     undefined,
     {imageName: '../gymLeaders/Mallow'}
@@ -2489,7 +2546,7 @@ TemporaryBattleList['Captain Lana'] = new TemporaryBattle(
         new GymPokemon('Cloyster', 189973142, 51),
         new GymPokemon('Araquanid', 198608284, 51),
     ],
-    'Well! Once again, you certainly reeled me in.',
+    'Well! Once again, you certainly reeled me in. Please have a good time with Kiawe.',
     [new TemporaryBattleRequirement('Captain Mallow')],
     undefined,
     {imageName: '../gymLeaders/Lana'}
@@ -2501,7 +2558,7 @@ TemporaryBattleList['Captain Kiawe'] = new TemporaryBattle(
         new GymPokemon('Talonflame', 189973142, 51),
         new GymPokemon('Alolan Marowak', 198608284, 51),
     ],
-    'Not enough dancing!',
+    'Not enough dancing! If you\'re hoping to complete Mina\'s trial, you should make for Hokulani Observatory next. Ula\'Ula is only a stone\'s throw away when Charizard is one of your Ride Pokémon!',
     [new TemporaryBattleRequirement('Captain Lana')],
     undefined,
     {imageName: '../gymLeaders/Kiawe'}
@@ -2513,7 +2570,7 @@ TemporaryBattleList['Captain Sophocles'] = new TemporaryBattle(
         new GymPokemon('Magnezone', 189973142, 51),
         new GymPokemon('Alolan Golem', 198608284, 51),
     ],
-    'I couldn\'t get it done. Don\'t worry about it, my precious Pokémon...',
+    'I couldn\'t get it done. Don\'t worry about it, my precious Pokémon... You\'ve gotta finish Mina\'s trial, right? Are you going to Tapu Village?',
     [new TemporaryBattleRequirement('Captain Kiawe')],
     undefined,
     {imageName: '../gymLeaders/Sophocles'}
@@ -2525,7 +2582,7 @@ TemporaryBattleList['Kahuna Nanu'] = new TemporaryBattle(
         new GymPokemon('Absol', 90200640, 51),
         new GymPokemon('Alolan Persian', 198608284, 51),
     ],
-    '...',
+    'Heh... You got me good, kid. Hope I don\'t get in trouble with the girl for this. You should go tell that young filly Mina that you\'re done with what she asked you to do.',
     [new TemporaryBattleRequirement('Captain Sophocles')],
     undefined,
     {imageName: '../gymLeaders/Nanu'}

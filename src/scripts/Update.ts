@@ -1929,6 +1929,9 @@ class Update implements Saveable {
         '0.10.9': ({ playerData, saveData }) => {
             //Hex Maniac Aster
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 112);
+			
+			//Mega Manectric/Houndoom
+			
         },
     };
 

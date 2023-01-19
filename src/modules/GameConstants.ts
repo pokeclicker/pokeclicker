@@ -1530,6 +1530,8 @@ export const TemporaryBattles = [
     'Ash Ketchum Pinkan',
     'Calem 6',
     'Grand Duchess Diantha',
+    'Wild Houndour Horde', 
+    'Wild Electrike Horde', 
     'Hau 1',
     'Hau 2',
     'Hau 3',
