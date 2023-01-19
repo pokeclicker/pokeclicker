@@ -2224,7 +2224,7 @@ const TicketClaim = new NPC('Contest Attendant', [
 });
 
 const SurferDave = new NPC('Surfer Dave', [
-    'What\'s up? I got here using my Eon Ticket, what about you?'],
+    'What\'s up? I got here using my Eon Ticket, what about you?']
 );
 
 const SouthernIsland1 = new NPC('Explore the Southern Island', [

@@ -833,7 +833,7 @@ TemporaryBattleList.Latias = new TemporaryBattle(
         firstTimeRewardFunction: () => {
             App.game.party.gainPokemonByName('Latias');
         },
-		returnTown: 'Southern Island',
+        returnTown: 'Southern Island',
         imageName: '../pokemon/380',
         hideTrainer: true,
     }
