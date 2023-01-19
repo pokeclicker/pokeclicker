@@ -42,14 +42,36 @@ class SpecialEvents implements Feature {
 // Create our events here for now (yearly)
 
 // Lunar New Year
-SpecialEvents.newEvent('Lunar New Year', 'Encounter Fancy Pattern Vivillon for a limited time roaming Kalos.',
+SpecialEvents.newEvent('Lunar New Year', 'Vivillon are everywhere! Two kinds are roaming Kalos, and other ones you\'ve previously caught have returned!',
     // Start
     new Date(new Date().getFullYear(), 0, 24, 1), () => {
         RoamingPokemonList.add(GameConstants.Region.kalos, 0, new RoamingPokemon('Vivillon (Fancy)'));
+		RoamingPokemonList.add(GameConstants.Region.kalos, 0, new RoamingPokemon('Vivillon (Meadow)'));
+		dungeonList['Lake Verity'].bossList.push(new DungeonBossPokemon('Vivillon (Marine)', 96662023, 80, {requirement: new ObtainedPokemonRequirement('Vivillon (Marine)')}));
+		dungeonList['Lake Acuity'].bossList.push(new DungeonBossPokemon('Vivillon (Marine)', 96662023, 80, {requirement: new ObtainedPokemonRequirement('Vivillon (Marine)')}));
+		dungeonList['Lake Valor'].bossList.push(new DungeonBossPokemon('Vivillon (Marine)', 96662023, 80, {requirement: new ObtainedPokemonRequirement('Vivillon (Marine)')}));
+		dungeonList['Cerulean Cave'].bossList.push(new DungeonBossPokemon('Vivillon (Modern)', 96662023, 80, {requirement: new ObtainedPokemonRequirement('Vivillon (Modern)')}));
+		dungeonList['Moor of Icirrus'].bossList.push(new DungeonBossPokemon('Vivillon (Jungle)', 96662023, 80, {requirement: new ObtainedPokemonRequirement('Vivillon (Jungle)')}));
+		dungeonList['Dark Cave'].bossList.push(new DungeonBossPokemon('Vivillon (Monsoon)', 96662023, 80, {requirement: new ObtainedPokemonRequirement('Vivillon (Monsoon)')}));
+		dungeonList['Poké Ball Factory'].bossList.push(new DungeonBossPokemon('Vivillon (Tundra)', 96662023, 80, {requirement: new ObtainedPokemonRequirement('Vivillon (Tundra)')}));
+		dungeonList['Mt. Chimney Crater'].bossList.push(new DungeonBossPokemon('Vivillon (Sun)', 96662023, 80, {requirement: new ObtainedPokemonRequirement('Vivillon (Sun)')}));
+		dungeonList['Sprout Tower'].bossList.push(new DungeonBossPokemon('Vivillon (Archipelago)', 96662023, 80, {requirement: new ObtainedPokemonRequirement('Vivillon (Archipelago)')}));
+		dungeonList['Lost Hotel'].bossList.push(new DungeonBossPokemon('Vivillon (Elegant)', 96662023, 80, {requirement: new ObtainedPokemonRequirement('Vivillon (Elegant)')}));
+		dungeonList['Dreamyard'].bossList.push(new DungeonBossPokemon('Vivillon (Ocean)', 96662023, 80, {requirement: new ObtainedPokemonRequirement('Vivillon (Ocean)')}));
+		dungeonList['New Mauville'].bossList.push(new DungeonBossPokemon('Vivillon (Continental)', 96662023, 80, {requirement: new ObtainedPokemonRequirement('Vivillon (Continental)')}));
+		dungeonList['Eterna Forest'].bossList.push(new DungeonBossPokemon('Vivillon (River)', 96662023, 80, {requirement: new ObtainedPokemonRequirement('Vivillon (River)')}));
+		dungeonList['Sky Pillar'].bossList.push(new DungeonBossPokemon('Vivillon (Polar)', 96662023, 80, {requirement: new ObtainedPokemonRequirement('Vivillon (Polar)')}));
+		dungeonList['Relic Castle'].bossList.push(new DungeonBossPokemon('Vivillon (Sandstorm)', 96662023, 80, {requirement: new ObtainedPokemonRequirement('Vivillon (Sandstorm)')}));
+		dungeonList['Flower Paradise'].bossList.push(new DungeonBossPokemon('Vivillon (Garden)', 96662023, 80, {requirement: new ObtainedPokemonRequirement('Vivillon (Garden)')}));
+		dungeonList['Mt. Moon'].bossList.push(new DungeonBossPokemon('Vivillon (High Plains)', 96662023, 80, {requirement: new ObtainedPokemonRequirement('Vivillon (High Plains)')}));
+		dungeonList['Dragonspiral Tower'].bossList.push(new DungeonBossPokemon('Vivillon (Savanna)', 96662023, 80, {requirement: new ObtainedPokemonRequirement('Vivillon (Savanna)')}));
+		dungeonList['Frost Cavern'].bossList.push(new DungeonBossPokemon('Vivillon (Icy Snow)', 96662023, 80, {requirement: new ObtainedPokemonRequirement('Vivillon (Icy Snow)')}));
+		dungeonList['Thrifty Megamart'].bossList.push(new DungeonBossPokemon('Vivillon (Pokéball)', 96662023, 80, {requirement: new ObtainedPokemonRequirement('Vivillon (Pokéball)')}));
     },
     // End
     new Date(new Date().getFullYear(), 1, 7, 23), () => {
         RoamingPokemonList.remove(GameConstants.Region.kalos, 0, 'Vivillon (Fancy)');
+        RoamingPokemonList.remove(GameConstants.Region.kalos, 0, 'Vivillon (Meadow)');
     }
 );
 //Hoopa Day
