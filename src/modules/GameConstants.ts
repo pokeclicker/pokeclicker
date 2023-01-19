@@ -1443,6 +1443,8 @@ export const TemporaryBattles = [
     'Butler 1',
     'Butler 2',
     'Meta Groudon',
+    'Latios',
+    'Latias',
     'Sevii Rocket Grunt 1',
     'Sevii Rocket Grunt 2',
     'Sevii Rocket Grunt 3',

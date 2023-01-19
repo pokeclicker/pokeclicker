@@ -287,9 +287,9 @@ class QuestLineHelper {
         const talktoPokéfanDerek = new TalkToNPCQuest(EcruteakPokéfan, 'Talk to Pokéfan Derek in Ecruteak City.', () => App.game.quests.getQuestLine('Eusine\'s Chase').beginQuest());
         johtoBeastsQuestLine.addQuest(talktoPokéfanDerek);
 
-        const catchRaikou = new CaptureSpecificPokemonQuest('Raikou', 'Catch Raikou', 1, true);
+        const catchRaikou = new CaptureSpecificPokemonQuest('Raikou', 'Catch or hatch Raikou', 1, true);
 
-        const catchEntei = new CaptureSpecificPokemonQuest('Entei', 'Catch Entei', 1, true);
+        const catchEntei = new CaptureSpecificPokemonQuest('Entei', 'Catch or hatch Entei', 1, true);
 
         const catchSuicune = new CaptureSpecificPokemonQuest('Suicune', 'Catch Suicune.');
 
@@ -613,6 +613,34 @@ class QuestLineHelper {
 
         App.game.quests.questLines().push(deoxysQuestLine);
     }
+    // Eon Duo
+    public static createEonDuoQuestLine() {
+        const eonDuoQuestLine = new QuestLine('The Eon Duo', 'Track down the elusive Eon Duo.', new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), GameConstants.BulletinBoards.Hoenn);
+
+        const television1 = new TalkToNPCQuest(Television1, 'Watch a news report in Littleroot Town about a mysterious Pokémon.');
+        eonDuoQuestLine.addQuest(television1);
+
+        const television2 = new TalkToNPCQuest(Television2, 'Change channels to watch a different TV station in Littleroot town.');
+        eonDuoQuestLine.addQuest(television2);
+
+        const ticketClaim = new TalkToNPCQuest(TicketClaim, 'Go to Hoenn Pokémon League to claim your Eon ticket.');
+        eonDuoQuestLine.addQuest(ticketClaim);
+
+        const southernIslandClearing = new TalkToNPCQuest(SouthernIsland1, 'Claim your Eon Ticket in the Start Menu and investigate the Southern Island.');
+        eonDuoQuestLine.addQuest(southernIslandClearing);
+
+        const catchLatias = new CaptureSpecificPokemonQuest('Latias', 'Catch or Hatch Latias', 1, true);
+
+        const catchLatios = new CaptureSpecificPokemonQuest('Latios', 'Catch or Hatch Latios', 1, true);
+
+        eonDuoQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                catchLatias,
+                catchLatios,
+            ], 'Catch or hatch the Eon Duo.'));
+
+        App.game.quests.questLines().push(eonDuoQuestLine);
+    }
 
     public static createRubySapphireSeviiQuestLine() {
         const rubySapphireSeviiQuestLine = new QuestLine('Celio\'s Errand', 'Celio has asked you to help him set up a digital connection between the Sevii Islands and Hoenn.', new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), GameConstants.BulletinBoards.Hoenn);
@@ -792,7 +820,7 @@ class QuestLineHelper {
         const fightMetaGroudon1 = new CustomQuest(1, 0, 'Butler\'s attempts to resurrect Groudon have gone terribly wrong! Fight the resulting abomination!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Meta Groudon')]());
         jirachiQuestLine.addQuest(fightMetaGroudon1);
 
-        const catchJirachi = new CaptureSpecificPokemonQuest('Jirachi', 'Jirachi has escaped in the chaos and is roaming Hoenn. Catch Jirachi.', 1, true);
+        const catchJirachi = new CaptureSpecificPokemonQuest('Jirachi', 'Jirachi has escaped in the chaos and is roaming Hoenn. Catch or hatch Jirachi.', 1, true);
         jirachiQuestLine.addQuest(catchJirachi);
 
         App.game.quests.questLines().push(jirachiQuestLine);
@@ -2442,6 +2470,7 @@ class QuestLineHelper {
         this.createAquaMagmaHoennQuestLine();
         this.createWeatherTrioQuestLine();
         this.createDeoxysQuestLine();
+        this.createEonDuoQuestLine();
         this.createRubySapphireSeviiQuestLine();
         this.createPinkanThemeparkQuestLine();
         this.createRegiTrioQuestLine();

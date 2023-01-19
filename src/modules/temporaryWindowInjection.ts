@@ -88,6 +88,7 @@ import CaughtPokemonRequirement from './requirements/CaughtPokemonRequirement';
 import ClearDungeonRequirement from './requirements/ClearDungeonRequirement';
 import ClearGymRequirement from './requirements/ClearGymRequirement';
 import ClickRequirement from './requirements/ClickRequirement';
+import CustomRequirement from './requirements/CustomRequirement';
 import DefeatedRequirement from './requirements/DefeatedRequirement';
 import DevelopmentRequirement from './requirements/DevelopmentRequirement';
 import DiamondRequirement from './requirements/DiamondRequirement';
@@ -254,6 +255,7 @@ Object.assign(<any>window, {
     ClearDungeonRequirement,
     ClearGymRequirement,
     ClickRequirement,
+    CustomRequirement,
     DefeatedRequirement,
     DevelopmentRequirement,
     DiamondRequirement,
