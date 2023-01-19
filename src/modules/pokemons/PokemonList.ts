@@ -3819,7 +3819,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 225,
         'eggCycles': 20,
-        // 'evolutions': [MegaEvolution('Gengar', 'Mega Gengar')],
+        'evolutions': [MegaEvolution('Gengar', 'Mega Gengar')],
         'base': {
             'hitpoints': 60,
             'attack': 65,
@@ -4220,6 +4220,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 80,
             'speed': 45,
         },
+        'heldItem': { type: ItemType.item, id: 'Thick_Club' },
     },
     {
         'id': 105.02,
@@ -4238,6 +4239,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 80,
             'speed': 65,
         },
+        'heldItem': { type: ItemType.item, id: 'Thick_Club' },
     },
     {
         'id': 106,
@@ -7098,6 +7100,23 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 187.01,
+        'name': 'Hoppip (Chimecho)',
+        'catchRate': 255,
+        'type': [PokemonType.Grass, PokemonType.Flying],
+        'levelType': LevelType.mediumslow,
+        'exp': 50,
+        'eggCycles': 20,
+        'base': {
+            'hitpoints': 35,
+            'attack': 35,
+            'specialAttack': 35,
+            'defense': 40,
+            'specialDefense': 55,
+            'speed': 50,
+        },
+    },
+    {
         'id': 188,
         'name': 'Skiploom',
         'catchRate': 120,
@@ -9819,7 +9838,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 233,
         'catchRate': 45,
-        // 'evolutions': [MegaEvolution('Gardevoir', 'Mega Gardevoir')],
+        'evolutions': [MegaEvolution('Gardevoir', 'Mega Gardevoir')],
         'base': {
             'hitpoints': 68,
             'attack': 65,

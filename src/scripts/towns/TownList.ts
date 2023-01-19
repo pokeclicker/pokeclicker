@@ -372,10 +372,10 @@ const BigSpender = new NPC('Big Spender', [
 ], {image: 'assets/images/trainers/Beauty.png'});
 
 const EggHuntErika = new NPC('Erika', [
-    'And here comes another one. Let me guess, you\'re gonna ask me about the Togepi too?',
-    'Listen here you. Just because I\'m the Grass type gym leader doesn\'t mean I know everything that goes on in the forest! I live in one of the biggest cities in the region! With tall buildings! And gambling! And crime! I like it here! I don\'t care about the forest!',
+    'Hello... Isn\'t the spring weather so relaxing? I adore how lovely the blooming flowers look during this time of year...',
+    'Oh! I\'m sorry, I almost dozed off. I was reminiscing about my stroll in Viridian Forest earlier today. I came across the loveliest patch of flowers over there and...',
     '...',
-    'All right, fine. It just so happens that I have heard about <span style="font-style: italic">something</span> going on in Viridian Forest. But I don\'t know what, and I don\'t care! You can go figure it out! I\'m staying here! Viridian Forest doesn\'t even have any Grass types. It\'s all Bugs over there.',
+    'Zzz... Hm? Oh yes, the forest. It was most peculiar - when I laid down upon the flowerbed I had the strangest dream of a colorful, round Pokémon. At least, I think it was a dream... It did not strike me as one of the usual inhabitants of the area.',
 ], {
     image: 'assets/images/gymLeaders/Erika.png',
     requirement: new MultiRequirement([new QuestLineStartedRequirement('Togepi Egg Hunt'), new QuestLineCompletedRequirement('Togepi Egg Hunt', GameConstants.AchievementOption.less)]),
@@ -1122,7 +1122,7 @@ TownList['Cerulean Cave'] = new DungeonTown(
 TownList['Ruby Path'] = new DungeonTown(
     'Ruby Path',
     GameConstants.Region.kanto,
-    GameConstants.KantoSubRegions.Sevii4567,
+    GameConstants.KantoSubRegions.Sevii123,
     [new QuestLineStepCompletedRequirement('Celio\'s Errand', 2)],
     [],
     {
@@ -1898,6 +1898,9 @@ const FortreeCityShop = new Shop([
     ItemList.LargeRestore,
     ItemList.Leaf_stone,
 ]);
+const WindChimeShop = new Shop([
+    ItemList['Probably Chimecho'],
+], 'Shady Deal');
 const MossdeepCityShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
@@ -1980,7 +1983,7 @@ const SlateportHoennRoamerNPC = new RoamerNPC('Reporter Gabby', [
 ], GameConstants.Region.hoenn, RoamingPokemonList.findGroup(GameConstants.Region.hoenn, GameConstants.HoennSubRegions.Hoenn), 'assets/images/npcs/Reporter.png');
 
 const SkepticalFisherman = new NPC('Skeptical Fisherman', [
-    'There\'s some salesman offering rare fish out at the intersection of Route 118 and Route 119.',
+    'There\'s some salesman offering rare fish east of New Mauville, out on the water.',
     'I\'m a bit skeptical of his wares, especially since his shop isn\'t on any maps.',
 ], {image: 'assets/images/trainers/Fisherman.png'});
 
@@ -2013,6 +2016,12 @@ const FortreeRanger = new NPC('Pokémon Ranger Catherine', [
     'Please recycle your used Dowsing Machines.',
 ], {image: 'assets/images/npcs/Pokemon Ranger (female).png'});
 
+const WindChimeShopShadySalesman = new NPC('Shady Salesman', [
+    'Step right up! Get your Chimecho while they last! Chimecho, a very rare Pokémon indeed, with a voice that\'s both beautiful and powerful. Look closer! I see it bringing a smile to your face, just gazing into those loving eyes! They say these are the most gentle, healing eyes in the Pokémon kingdom.',
+    'That\'s not all! Just look at the way Chimecho\'s tail swings and sways with the wind, like a weeping willow in a summer breeze. In really hot weather, it will act like a fan to help you cool off. And when it\'s cold outside, your Chimecho can wrap itself around your neck like a scarf, to keep you warm.',
+    'And one more thing. It\'s not widely known, but it\'s a true fact; Chimecho are able to choose winning lottery tickets! Soo you see, my friend, just having a Chimecho with you, is a sure-fire ticket to happiness and success. Let Chimecho give you total peace and happiness, for a good price!',
+], {image: 'assets/images/npcs/ShadySalesman.png'});
+
 const Steven1 = new NPC('Steven', [
     'I have been investigating the behavior of Kecleon, the Color Swap Pokémon.',
     'There are a few hidden near the city. If you can find them all, I will give you a wonderful prize!'],
@@ -2035,11 +2044,36 @@ const PacifidlogDiver = new NPC('Diver', [
     'I\'ve heard that if you beat a Dungeon a lot then the stuff you find in chests gets even more awesome.',
 ]);
 
-const SootopolisWallace = new NPC('Gym Leader Wallace', [
-    'The creators of the lands and ocean slumber within the Cave of Origin.',
-    'However, they will only awaken when in the presence of a truly great trainer.',
-    'You will have to overcome the Pokémon League before you have any chance of encountering them.',
-], {image: 'assets/images/gymLeaders/Wallace.png'});
+const Wallace1 = new NPC('Gym Leader Wallace', [
+    'Ah, so you are the new trainer in the region? I\'ve heard tales of your exploits. My name is Wallace. I was once the Gym Leader of Sootopolis, but something came up. So now, I\'ve entrusted my mentor Juan with the Gym\'s operation.',
+    'Groudon and Kyogre, the two Pokémon wreaking havoc in Sootopolis City, are considered to be Super-Ancient Pokémon. But there aren\'t just two Super-Ancient Pokémon. Somewhere, there is a Super-Ancient Pokémon named Rayquaza. It\'s said that it was Rayquaza that becalmed the two combatants in the distant past.',
+    'I have heard that Rayquaza once lived high atop the Sky Pillar, maybe that\'s where it is now?',
+], {image: 'assets/images/gymLeaders/Wallace.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Weather Trio', 1), new QuestLineStepCompletedRequirement('The Weather Trio', 3, GameConstants.AchievementOption.less)]),
+});
+
+const Wallace2 = new NPC('Gym Leader Wallace', [
+    'My eyes didn\'t deceive me. Thanks to your help, Sootopolis...',
+    'No, all of Hoenn was saved. On behalf of the people, I thank you.',
+    'Now that their battle is over, the Super-Ancient Pokémon have retreated to rest and recuperate. You will likely find Rayquaza back in the Sky Pillar.',
+    'Kyogre and Groudon are rumored to live deep within this very cave, but they are unlikely to show themselves to any normal trainer. Maybe the champion of Hoenn could earn their respect.',
+], {image: 'assets/images/gymLeaders/Wallace.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Weather Trio', 4), new QuestLineStepCompletedRequirement('The Weather Trio', 6, GameConstants.AchievementOption.less)]),
+});
+
+const WeatherBattle1 = new NPC('The Super-Ancient Pokémon Clash', [
+    '<i>Groudon and Kyogre have been awakened by the efforts of Team Magma and Team Aqua! They are engaged in a fierce battle which threatens to destroy Sootopolis City... and more!</i>',
+    '<i>The locals in Sootopolis City take shelter from the raging battle. Some say that this sort of thing would never happen if Wallace was still around.</i>',
+], {image: 'assets/images/npcs/other/WeatherBattle1.png',
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('The Weather Trio'), new QuestLineStepCompletedRequirement('The Weather Trio', 1, GameConstants.AchievementOption.less)]),
+});
+
+const WeatherBattle2 = new NPC('The Super-Ancient Pokémon Clash', [
+    '<i>Rayquaza appears above Kyogre and Groudon and utters a single intimidating roar. The battling Super-Ancient Pokémon stop their attacks, and a tense standoff ensues.</i>',
+    '<i>After what seems like an eternity, the three Super-Ancient Pokémon seem to have come to an understanding. They each depart the city, and peace is restored.</i>',
+], {image: 'assets/images/npcs/other/WeatherBattle2.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Weather Trio', 3), new QuestLineStepCompletedRequirement('The Weather Trio', 5, GameConstants.AchievementOption.less)]),
+});
 
 const MillenniumFest = new NPC('The Millennium Festival', [
     '<i>The Millennium Comet is about to make its long-awaited appearance in the sky again, supposedly granting the wishes of all those who see it in the skies above them.</i>',
@@ -2275,8 +2309,8 @@ TownList['Lavaridge Town'] = new Town(
         npcs: [MillenniumFest, Butler1],
     }
 );
-TownList['Roadside Stand'] = new Town(
-    'Roadside Stand',
+TownList['Fish Shop'] = new Town(
+    'Fish Shop',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
     [RoadsideStandShop],
@@ -2296,6 +2330,17 @@ TownList['Fortree City'] = new Town(
     {
         requirements: [new TemporaryBattleRequirement('May 4')],
         npcs: [FortreeWeatherman, FortreeRanger, Steven1, Steven2],
+    }
+);
+TownList['Wind Chime Shop'] = new Town(
+    'Wind Chime Shop',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Hoenn,
+    [WindChimeShop],
+    {
+        requirements: [new TemporaryBattleRequirement('May 4')],
+        npcs: [WindChimeShopShadySalesman],
+        ignoreAreaStatus: true,
     }
 );
 TownList['Lilycove City'] = new Town(
@@ -2334,7 +2379,7 @@ TownList['Sootopolis City'] = new Town(
     [SootopolisCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Sootopolis City'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 126), new GymBadgeRequirement(BadgeEnums.Mind)],
-        npcs: [SootopolisWallace],
+        npcs: [WeatherBattle1, WeatherBattle2],
     }
 );
 TownList['Ever Grande City'] = new Town(
@@ -2465,7 +2510,11 @@ TownList['Cave of Origin'] = new DungeonTown(
     [
         new RouteKillRequirement(10, GameConstants.Region.hoenn, 126),
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Seafloor Cavern')),
-    ]
+    ],
+    [],
+    {
+        npcs: [Wallace1, Wallace2],
+    }
 );
 TownList['Seafloor Cavern'] = new DungeonTown(
     'Seafloor Cavern',
@@ -4793,13 +4842,36 @@ const CoumarineBirdwatcher = new NPC('Birdwatcher', [
 const CoumarineElectricTrainer = new NPC('Electric Trainer', [
     'My Ampharos has gotten a boost since a friendly soul gave me an Ampharosite!',
     'Luckily my Ampharos was already strong enough to use it!',
-    'If you find that fella, tell him the code <b>ELECTRIC-GIRAFFE</b> and he might help you too!',
+    'If you find that fella, tell him the code <b>DO-MAGEARNA-DREAM-OF-MAREEP?</b> and he might help you too!',
 ]);
 
 const LaverreFurisodeGirlKatherine = new NPC('Furisode Girl Katherine', [
     'Don\'t you find Goomy to be an interesting Pokémon? I certainly think so, even though it isn\'t a problem for my Pokémon~',
     'I\'ve heard its evolutionary line loves damp conditions, and apparently if you train a Sliggoo during rainy or foggy weather something marvelous happens!',
 ], {image: 'assets/images/npcs/Furisode Girl Katherine.png'});
+
+const LaverreGengariteAster1 = new NPC('Hex Maniac Aster', [
+    'I\'m shocked... You have a Pokédex, but you still don\'t know... you really don\'t know anything about Pokémon connected to Gengar, do you?',
+    'Well then, I guess I\'ll just have to keep this wonderful item I was going to give you...',
+    'If you want to change my mind... you will have to encounter at least 666 wild Gastly, 444 wild Haunter, and 13 wild Gengar.',
+    'And do bring a Gengar of your own, won\'t you?',
+], {
+    image: 'assets/images/trainers/Hex Maniac.png',
+    requirement: new OneFromManyRequirement([
+        new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Gastly').id], 666, undefined, GameConstants.AchievementOption.less),
+        new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Haunter').id], 444, undefined, GameConstants.AchievementOption.less),
+        new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Gengar').id], 13, undefined, GameConstants.AchievementOption.less),
+        new ObtainedPokemonRequirement('Gengar', true)]),
+});
+
+const LaverreGengariteAster2 = new NPC('Hex Maniac Aster', [
+    'Some Pokémon evolve when exposed to a Link Cable, or sent through a trade.',
+    'That\'s right. Haunter is one of those Pokemon.',
+    'I don\'t have enough Quest Points to buy a Link Cable, but a girl named Mindy from Snowpoint City offered to trade me her Haunter for a Medicham.',
+    'Hopefully I\'ll have a Gengar soon...',
+], {image: 'assets/images/trainers/Hex Maniac.png',
+    requirement: new TemporaryBattleRequirement('Hex Maniac Aster'),
+});
 
 const AnistarKalosRoamerNPC = new RoamerNPC('Hex Maniac Melanie', [
     'The spirits tell me roaming Pokémon have been spotted on {ROUTE_NAME}!',
@@ -4872,7 +4944,7 @@ TownList['Lumiose City'] = new Town(
     'Lumiose City',
     GameConstants.Region.kalos,
     GameConstants.KalosSubRegions.Kalos,
-    [TemporaryBattleList['Sycamore 1'], TemporaryBattleList['Tierno 1'], DepartmentStoreShop, FriseurFurfrouShop, TemporaryBattleList.AZ, TemporaryBattleList.Merilyn],
+    [TemporaryBattleList['Sycamore 1'], TemporaryBattleList['Tierno 1'], DepartmentStoreShop, FriseurFurfrouShop, TemporaryBattleList.AZ, TemporaryBattleList.Merilyn, TemporaryBattleList['Grand Duchess Diantha']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 4)],
         npcs: [ProfSycamore, LumioseEngineer],
@@ -4948,10 +5020,10 @@ TownList['Laverre City'] = new Town(
     'Laverre City',
     GameConstants.Region.kalos,
     GameConstants.KalosSubRegions.Kalos,
-    [LaverreCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Laverre City'])],
+    [LaverreCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Laverre City']), TemporaryBattleList['Hex Maniac Aster']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 14)],
-        npcs: [LaverreFurisodeGirlKatherine],
+        npcs: [LaverreFurisodeGirlKatherine, LaverreGengariteAster1, LaverreGengariteAster2],
     }
 );
 TownList['Dendemille Town'] = new Town(
@@ -5248,8 +5320,8 @@ const PaniolaTownActor = new NPC('Actor Meredith', [
     'You want to know which one can only be found on the farm? I\'m sure you can figure that out yourself. Simple process of elimination, really.',
 ], {image: 'assets/images/trainers/Actor.png'});
 const RoyalAvenueSpectator = new NPC('Spectator', [
-    'I think battles in the Battle Royal Dome are more like games of chance. But Battle Royals are nothing compared to trying to evolve an Alolan Raichu with a Thunderstone.',
-    'Evolving Pikachu or Exeggcute in Alola can result in a new form! Sometimes.',
+    'I like sneaking snacks inside the Battle Royal Dome. One time I snuck in pancakes and there were two trainers from Kanto who both had a Pikachu. I ended up sharing some with one.',
+    'Weird thing is, both trainers evolved their Pikachu after the battle, but one had a different form from usual! Maybe there\'s something about Alola that makes certain Pokémon evolve differently? I would check my Evolution Items if I were you.',
 ], {image: 'assets/images/trainers/Preschooler (female).png'});
 const KonikoniKahuna = new NPC('Kahuna Olivia', [
     'What do you mean Grand trials are just like gym battles? It\'s a totally different thing!',
@@ -5428,7 +5500,7 @@ const DrSplash3 = new NPC('Dr. Splash', [
     'Wow, that\'s a lot of stuff! This place is starting to look like a proper lab now!',
     'I have discovered that a critical part of any Magikarp training program is pushing other Pokémon around in a field. This form of exercise rounds out the muscle groups and really boosts performance.',
     'According to my calculations, the ideal Pokémon to push around are Dwebble, Boldore, Forretress, Golem, and Steelix. Can you catch or hatch me some?',
-    'Steer clear of the Alola version of Golem, it\'s electrical fields are too dangerous to use.',
+    'Steer clear of the Alolan version of Golem, its electrical fields are too dangerous to use.',
 ], {
     image: 'assets/images/npcs/Dr Splash.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Dr. Splash\'s Research Project', 3), new QuestLineStepCompletedRequirement('Dr. Splash\'s Research Project', 5, GameConstants.AchievementOption.less)]),
