@@ -21,6 +21,6 @@ export default class InRegionRequirement extends Requirement {
     }
 
     public isCurrentlyPossible() {
-        return this.regions.find((region) => region <= player.highestRegion());
+        return this.regions.find((region) => region <= player.highestRegion()) !== undefined;
     }
 }
