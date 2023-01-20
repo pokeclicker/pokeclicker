@@ -2346,7 +2346,7 @@ class QuestLineHelper {
     }
 
     public static createHisuiNobleQuestLine() {
-        const hisuiNobleQuestLine = new QuestLine('The Noble Light of Arceus', 'Uncover the Arceus in Hisui, the ancient past of the Sinnoh region.', new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion), GameConstants.BulletinBoards.Galar);
+        const hisuiNobleQuestLine = new QuestLine('The Frenzied Nobles of Hisui', 'Calm the frenzied Noble Pokémon of Hisui, the ancient past of the Sinnoh region.', new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion), GameConstants.BulletinBoards.Galar);
 
         const talktoArceus1 = new TalkToNPCQuest(Arceus1, 'Speak to Arceus at the Hall of Origin in Sinnoh.');
         hisuiNobleQuestLine.addQuest(talktoArceus1);
@@ -2622,24 +2622,23 @@ class QuestLineHelper {
         const clearNobleLilligant = new CustomQuest(1, SacredMeadowPlateReward, 'Defeat the Lady of the Ridge, Lilligant, at Brava Arena.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Noble Lilligant 1')]());
         hisuiNobleQuestLine.addQuest(clearNobleLilligant);
 
-        /*
-        Seek out all Pokémon Quest. No idea how to do this. The closest I could get it to work is this, but that counted every catch of the relevant Pokémon.
-        Would also take up like a thousand lines like this. Probably best to find another way.
-
-        const seekOutAllPokemon = new CustomQuest (905+regionalvariants, 0, 'Seek out all Pokémon.', () =>
-            App.game.statistics.pokemonCaptured[pokemonMap.Bulbasaur.id](), 0 +
-            App.game.statistics.pokemonCaptured[pokemonMap.Ivysaur.id](), 0 +
-            App.game.statistics.pokemonCaptured[pokemonMap.Venusaur.id](), 0
-            etc
-        );
-        hisuiNobleQuestLine.addQuest(seekOutAllPokemon);
-        */
-
         App.game.quests.questLines().push(hisuiNobleQuestLine);
     }
 
+    public static createHisuiSinnohQuestLine() {
+        const hisuiSinnohQuestLine = new QuestLine('The power of Sinnoh', 'Put a stop to the frenzy of Sinnoh, the deity the Diamond and Pearl Clans revere.', new QuestLineCompletedRequirement('The Frenzied Nobles of Hisui'), GameConstants.BulletinBoards.Hisui);
+
+        App.game.quests.questLines().push(createHisuiSinnohQuestLine);
+    }
+
+    public static createHisuiVoloQuestLine() {
+        const hisuiVoloQuestLine = new QuestLine('Volo\'s Dream', 'Help Volo find the remaining Sacred Plates.', new QuestLineCompletedRequirement('The power of Sinnoh'), GameConstants.BulletinBoards.Hisui);
+
+        App.game.quests.questLines().push(createHisuiVoloQuestLine);
+    }
+
     public static createHisuiForcesQuestLine() {
-        const hisuiForcesQuestLine = new QuestLine('Incarnate Forces of Hisui', 'Cogita would like you to catch the Forces of Nature', new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 100), GameConstants.BulletinBoards.Hisui);
+        const hisuiForcesQuestLine = new QuestLine('Incarnate Forces of Hisui', 'Cogita would like you to catch the Forces of Nature.', new QuestLineCompletedRequirement('Volo\'s Dream'), GameConstants.BulletinBoards.Hisui);
 
         const talktoForcesCogita1 = new TalkToNPCQuest(ForcesCogita1, 'Speak to Cogita in Galaxy Hall.');
         hisuiForcesQuestLine.addQuest(talktoForcesCogita1);
@@ -2689,6 +2688,25 @@ class QuestLineHelper {
         hisuiForcesQuestLine.addQuest(talktoForcesCogita3);
 
         App.game.quests.questLines().push(hisuiForcesQuestLine);
+    }
+
+    public static createHisuiArceusQuestLine() {
+        const hisuiArceusQuestLine = new QuestLine('Arceus: The Deified Pokémon', 'Discover the truth of the Pokémon deity, Arceus.', new QuestLineCompletedRequirement('Volo\'s Dream'), GameConstants.BulletinBoards.Hisui);
+
+        /*
+        Seek out all Pokémon Quest. No idea how to do this. The closest I could get it to work is this, but that counted every catch of the relevant Pokémon.
+        Would also take up like a thousand lines like this. Probably best to find another way.
+
+        const seekOutAllPokemon = new CustomQuest (905+regionalvariants, 0, 'Seek out all Pokémon.', () =>
+            App.game.statistics.pokemonCaptured[pokemonMap.Bulbasaur.id](), 0 +
+            App.game.statistics.pokemonCaptured[pokemonMap.Ivysaur.id](), 0 +
+            App.game.statistics.pokemonCaptured[pokemonMap.Venusaur.id](), 0
+            etc
+        );
+        hisuiArceusQuestLine.addQuest(seekOutAllPokemon);
+        */
+
+        App.game.quests.questLines().push(createHisuiArceusQuestLine);
     }
 
     // Event QuestLines
@@ -2813,7 +2831,10 @@ class QuestLineHelper {
         this.createAncientGolemsQuestLine();
         this.createOriginalColorMagearnaQuestLine();
         this.createHisuiNobleQuestLine();
+        this.createHisuiSinnohQuestLine();
+        this.createHisuiVoloQuestLine();
         this.createHisuiForcesQuestLine();
+        this.createHisuiArceusQuestLine();
         this.createFindSurpriseTogepiForEasterQuestLine();
         this.createHoopaDayPikabluQuestLine();
         this.createDrSplashQuestLine();

@@ -4054,7 +4054,7 @@ TemporaryBattleList['Volo 1'] = new TemporaryBattle(
     'Volo 1',
     [new GymPokemon('Togepi', 348526193, 5)],
     'Moves, items... Use them well, and the world will open up to you!',
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     undefined,
     {
         displayName: 'Ginkgo Guild Member Volo',
@@ -4065,7 +4065,7 @@ TemporaryBattleList['Akari 1'] = new TemporaryBattle(
     'Akari 1',
     [new GymPokemon('Pikachu', 348526193, 9)],
     'You and your Pokémon seem completely in step with one another.',
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     undefined,
     {
         displayName: 'The Survey Corps\' Akari',
@@ -4076,13 +4076,13 @@ TemporaryBattleList['Warden Mai'] = new TemporaryBattle(
     'Warden Mai',
     [new GymPokemon('Munchlax', 348526193, 10)],
     'You really aren\'t one of the usual Galaxy buffoons if you could defeat my partner... Well fought, Munchlax.',
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)]
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)]
 );
 TemporaryBattleList['Alpha Kricketune'] = new TemporaryBattle(
     'Alpha Kricketune',
     [new GymPokemon('Kricketune', 2031393560, 12)],
     'You defeated Kricketune!',
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     undefined,
     {
         isTrainerBattle: false,
@@ -4094,13 +4094,13 @@ TemporaryBattleList['Warden Lian'] = new TemporaryBattle(
     'Warden Lian',
     [new GymPokemon('Goomy', 348526193, 15)],
     'H-how can this be...',
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)]
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)]
 );
 TemporaryBattleList['Irida 1'] = new TemporaryBattle(
     'Irida 1',
     [new GymPokemon('Glaceon', 348526193, 17)],
     'I see now... Poké Balls are simply your tool of choice, not products of disregard for Pokémon. You still understand the Pokémon and trust them as partners. I feel better putting my trust in you now, I think.',
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     undefined,
     {
         displayName: 'Clan Leader Irida',
@@ -4111,7 +4111,7 @@ TemporaryBattleList['Lord of the Woods: Kleavor'] = new TemporaryBattle(
     'Lord of the Woods: Kleavor',
     [new GymPokemon('Noble Kleavor', 2031393560, 18)],
     'The golden light was dispelled from Kleavor, calming it.',
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     undefined,
     {
         hideTrainer: true,
@@ -4122,7 +4122,7 @@ TemporaryBattleList['Akari 2'] = new TemporaryBattle(
     'Akari 2',
     [new GymPokemon('Pikachu', 348526193, 9)],
     'Oops! I keep finding myself caught up in observing the way the Pokémon use their moves...',
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     undefined,
     {
         displayName: 'The Survey Corps\' Akari',
@@ -4136,7 +4136,7 @@ TemporaryBattleList['Volo 2'] = new TemporaryBattle(
         new GymPokemon('Gible', 348526193, 22),
     ],
     'Oh, my! You\'re quite adept at instructing your Pokémon in battle! My goodness, that was fun!',
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     undefined,
     {
         displayName: 'Ginkgo Guild Member Volo',
@@ -4147,7 +4147,7 @@ TemporaryBattleList.Ursaluna = new TemporaryBattle(
     'Ursaluna',
     [new GymPokemon('Ursaluna', 2031393560, 26)],
     'You defeated Braviary!',
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     undefined,
     {
         hideTrainer: true,
@@ -4158,7 +4158,7 @@ TemporaryBattleList['Lady of the Ridge: Lilligant'] = new TemporaryBattle(
     'Lady of the Ridge: Lilligant',
     [new GymPokemon('Noble Lilligant', 2031393560, 30)],
     'The golden light was dispelled from Lilligant, calming it.',
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     undefined,
     {
         hideTrainer: true,
@@ -4172,7 +4172,7 @@ TemporaryBattleList['Irida 2'] = new TemporaryBattle(
         new GymPokemon('Glaceon', 348526193, 30),
     ],
     'Ah, now I feel better! The world is vast...and I am small within it.',
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     undefined,
     {
         displayName: 'Clan Leader Irida',
@@ -4183,7 +4183,7 @@ TemporaryBattleList['Lord of the Isles: Arcanine'] = new TemporaryBattle(
     'Lord of the Isles: Arcanine',
     [new GymPokemon('Noble Arcanine', 2031393560, 36)],
     'The golden light was dispelled from Arcanine, calming it.',
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     undefined,
     {
         hideTrainer: true,
@@ -4197,7 +4197,7 @@ TemporaryBattleList['Adaman 1'] = new TemporaryBattle(
         new GymPokemon('Leafeon', 348526193, 36),
     ],
     'You see how good they are now, yes? No more sneering at them!',
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     undefined,
     {
         displayName: 'Clan Leader Adaman',
@@ -4208,7 +4208,7 @@ TemporaryBattleList['Melli 1'] = new TemporaryBattle(
     'Melli 1',
     [new GymPokemon('Skuntank', 348526193, 40)],
     'Listen here! Neither I nor Skuntank admit defeat to you just yet-our challenge to you still stands!',
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     undefined,
     {
         displayName: 'Warden Melli',
@@ -4223,7 +4223,7 @@ TemporaryBattleList['Warden Ingo'] = new TemporaryBattle(
         new GymPokemon('Gliscor', 348526193, 42),
     ],
     'Bravo! Excellent! Your talent has brought you to the destination called Victory! Now, allow me to call Sneasler...',
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)]
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)]
 );
 TemporaryBattleList['Melli 2'] = new TemporaryBattle(
     'Melli 2',
@@ -4233,7 +4233,7 @@ TemporaryBattleList['Melli 2'] = new TemporaryBattle(
         new GymPokemon('Skuntank', 348526193, 44),
     ],
     'Let\'s make one thing clear: I didn\'t lose! You may have won...but there\'s a difference!',
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     undefined,
     {
         displayName: 'Warden Melli',
@@ -4244,7 +4244,7 @@ TemporaryBattleList['Lord of the Hollow: Electrode'] = new TemporaryBattle(
     'Lord of the Hollow: Electrode',
     [new GymPokemon('Noble Electrode', 2031393560, 46)],
     'The golden light was dispelled from Electrode, calming it.',
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     undefined,
     {
         hideTrainer: true,
@@ -4258,7 +4258,7 @@ TemporaryBattleList['Warden Gaeric'] = new TemporaryBattle(
         new GymPokemon('Glalie', 348526193, 48),
     ],
     'Outstanding! I\'m tough as an iceberg, but you smashed me through and through!',
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)]
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)]
 );
 TemporaryBattleList['Warden Sabi'] = new TemporaryBattle(
     'Warden Sabi',
@@ -4268,13 +4268,13 @@ TemporaryBattleList['Warden Sabi'] = new TemporaryBattle(
         new GymPokemon('Rhyperior', 348526193, 50),
     ],
     'Wow, you caught us AND you beat us. You\'ve won all our games so far! But Braviary still wants to get to know you even better. Up to the roof we go! All right, Braviary! Why not test out their strength for yourself?',
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)]
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)]
 );
 TemporaryBattleList['Hisuian Braviary'] = new TemporaryBattle(
     'Hisuian Braviary',
     [new GymPokemon('Hisuian Braviary', 2031393560, 54)],
     'You defeated Braviary!',
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     undefined,
     {
         hideTrainer: true,
@@ -4285,7 +4285,7 @@ TemporaryBattleList['Lord of the Tundra: Avalugg'] = new TemporaryBattle(
     'Lord of the Tundra: Avalugg',
     [new GymPokemon('Noble Avalugg', 2031393560, 56)],
     'The golden light was dispelled from Avalugg, calming it.',
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     undefined,
     {
         hideTrainer: true,
@@ -4301,7 +4301,7 @@ TemporaryBattleList['Beni'] = new TemporaryBattle(
         new GymPokemon('Gallade', 348526193, 60),
     ],
     'It seems my ninja techniques will soon be consigned to history...',
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     undefined,
     {
         displayName: 'The Galaxy Team\'s Beni',
@@ -4316,7 +4316,7 @@ TemporaryBattleList['Kamado 1'] = new TemporaryBattle(
         new GymPokemon('Snorlax', 348526193, 62),
     ],
     'Any Pokémon that threatens our life here...must be eliminated!',
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     undefined,
     {
         displayName: 'The Galaxy Team\'s Kamado',
@@ -4327,7 +4327,7 @@ TemporaryBattleList['Dialga (Origin) 1'] = new TemporaryBattle(
     'Dialga (Origin) 1',
     [new GymPokemon('Dialga (Origin)', 2031393560, 65)],
     'Dialga was captured in the Origin Ball and returned to its base form!',
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     undefined,
     {
         displayName: 'Dialga - Origin Form',
@@ -4339,7 +4339,7 @@ TemporaryBattleList['Palkia (Origin) 1'] = new TemporaryBattle(
     'Palkia (Origin) 1',
     [new GymPokemon('Palkia (Origin)', 2031393560, 65)],
     'Palkia was captured in the Origin Ball and returned to its base form!',
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     undefined,
     {
         displayName: 'Palkia - Origin Form',
@@ -4357,7 +4357,7 @@ TemporaryBattleList['Kamado 2'] = new TemporaryBattle(
         new GymPokemon('Snorlax', 348526193, 66),
     ],
     'Even frightful creatures like Pokémon can become powerful allies...',
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     undefined,
     {
         displayName: 'The Galaxy Team\'s Kamado',
@@ -4372,7 +4372,7 @@ TemporaryBattleList['Adaman 2'] = new TemporaryBattle(
         new GymPokemon('Leafeon', 348526193, 64),
     ],
     'You\'re really something...and I\'m a man of my word. So, here\'s that treasure.',
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     undefined,
     {
         displayName: 'Clan Leader Adaman',
@@ -4387,7 +4387,7 @@ TemporaryBattleList['Irida 3'] = new TemporaryBattle(
         new GymPokemon('Glaceon', 348526193, 64),
     ],
     'I wonder... Are there people even stronger than you out in the world, with Pokémon stronger than yours? I\'ll just have to find out for myself I suppose! Here! The treasure I promised you.',
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     undefined,
     {
         displayName: 'Clan Leader Irida',
@@ -4398,7 +4398,7 @@ TemporaryBattleList['Dialga (Origin) 2'] = new TemporaryBattle(
     'Dialga (Origin) 2',
     [new GymPokemon('Dialga (Origin)', 2031393560, 65)],
     undefined,
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     [new ObtainedPokemonRequirement('Dialga (Origin)')],
     {
         isTrainerBattle: false,
@@ -4411,7 +4411,7 @@ TemporaryBattleList['Palkia (Origin) 2'] = new TemporaryBattle(
     'Palkia (Origin) 2',
     [new GymPokemon('Palkia (Origin)', 2031393560, 65)],
     undefined,
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     [new ObtainedPokemonRequirement('Palkia (Origin)')],
     {
         isTrainerBattle: false,
@@ -4431,7 +4431,7 @@ TemporaryBattleList['Volo 3'] = new TemporaryBattle(
         new GymPokemon('Garchomp', 348526193, 68),
     ],
     'Why? Why you?! Why do you have the blessing of Arceus?!',
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     undefined,
     {
         displayName: 'Pokémon Wielder Volo',
@@ -4445,7 +4445,7 @@ TemporaryBattleList['Volo 4'] = new TemporaryBattle(
         new GymPokemon('Giratina (Origin)', 348526193, 70),
     ],
     'Turning tail and running? From this puny HUMAN? Pathetic! I was the one to feed you the power you needed so that you could take on Arceus! I was the one who gave you the chance to claw open that space-time rift, driving the deity of space and time mad so that you could drag the creator out from hiding!',
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     undefined,
     {
         displayName: 'Pokémon Wielder Volo',
@@ -4456,7 +4456,7 @@ TemporaryBattleList['Giratina (Origin)'] = new TemporaryBattle(
     'Giratina (Origin)',
     [new GymPokemon('Giratina (Origin)', 2031393560, 70)],
     undefined,
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     [new ObtainedPokemonRequirement('Giratina (Origin)')],
     {
         isTrainerBattle: false,
@@ -4603,7 +4603,7 @@ TemporaryBattleList.Arceus = new TemporaryBattle(
     'Arceus',
     [new GymPokemon('Arceus (Normal)', 2031393560, 75)],
     'Arceus granted you a part of its self, and the Legend Plate!',
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     undefined,
     {
         hideTrainer: true,

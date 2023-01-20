@@ -2879,292 +2879,292 @@ const Arceus1 = new NPC('Arceus', [
     'Seek out all Pokémon, and thou shalt find my once more.',
 ], {
     image: 'assets/images/pokemon/493.png',
-    requirement: new MultiRequirement([new QuestLineStartedRequirement('The Noble Light of Arceus'), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('The Frenzied Nobles of Hisui'), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const Laventon1 = new NPC('Professor Laventon', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const ArcPhone = new NPC('Arc Phone', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const Laventon2 = new NPC('Professor Laventon', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const Laventon3 = new NPC('Professor Laventon', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const Laventon4 = new NPC('Professor Laventon', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const Beni1 = new NPC('Beni', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const Akari1 = new NPC('Akari', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const Cyllene1 = new NPC('Captain Cyllene', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const Laventon5 = new NPC('Professor Laventon', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const Cyllene2 = new NPC('Captain Cyllene', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const Cyllene3 = new NPC('Captain Cyllene', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const Laventon6 = new NPC('Professor Laventon', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const Volo1 = new NPC('Volo', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const Akari2 = new NPC('Akari', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const Laventon7 = new NPC('Professor Laventon', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const Cyllene4 = new NPC('Captain Cyllene', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const Kamado1 = new NPC('Commander Kamado', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const Akari3 = new NPC('Akari', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const Akari4 = new NPC('Akari', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const Mai1 = new NPC('Warden Mai', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const Mai2 = new NPC('Warden Mai', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const Mai3 = new NPC('Warden Mai', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const Mai4 = new NPC('Warden Mai', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const Beni2 = new NPC('Beni', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const AdamanIrida1 = new NPC('Adaman & Irida', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const Akari5 = new NPC('Akari', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const AdamanIridaKamado1 = new NPC('Adaman, Irida & Kamado', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const LaventonCyllene1 = new NPC('Laventon & Cyllene', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const AdamanMai1 = new NPC('Adaman & Mai', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const Lian1 = new NPC('Warden Lian', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const LianIrida1 = new NPC('Lian & Irida', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const Laventon8 = new NPC('Professor Laventon', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const Laventon9 = new NPC('Professor Laventon', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const Mai5 = new NPC('Warden Mai', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const AdamanMai2 = new NPC('Adaman & Mai', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const LianIrida2 = new NPC('Lian & Irida', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const LianIrida3 = new NPC('Lian & Irida', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const LianIrida4 = new NPC('Lian & Irida', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const Volo2 = new NPC('Volo', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const Kamado2 = new NPC('Commander Kamado', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const Arezu1 = new NPC('Warden Arezu', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const KamadoArezu1 = new NPC('Kamado & Arezu', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const Cyllene5 = new NPC('Captain Cyllene', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const Akari6 = new NPC('Akari', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const LaventonAkari1 = new NPC('Laventon & Akari', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const Calaba1 = new NPC('Warden Calaba', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const Volo3 = new NPC('Volo', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const Volo4 = new NPC('Volo', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const CharmCloverCoin1 = new NPC('Charm, Clover & Coin', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const CharmCloverCoin2 = new NPC('Charm, Clover & Coin', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const Volo5 = new NPC('Volo', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const Calaba2 = new NPC('Warden Calaba', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const Calaba3 = new NPC('Warden Calaba', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const Calaba4 = new NPC('Warden Calaba', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const BeniAdamanKamado1 = new NPC('Beni, Adaman & Kamado', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const ArezuCalabaAdaman1 = new NPC('Arezu, Calaba & Adaman', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const ArezuCalabaAdaman2 = new NPC('Arezu, Calaba & Adaman', [
     '',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0), new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 
 const ForcesCogita1 = new NPC('Cogita', [
@@ -3412,7 +3412,7 @@ TownList['Prelude Beach'] = new Town(
     GameConstants.SinnohSubRegions.Hisui,
     [TemporaryBattleList['Kamado 2'], new DockTownContent()],
     {
-        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+        requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     }
 );
 TownList['Jubilife Village'] = new Town(
@@ -3421,7 +3421,7 @@ TownList['Jubilife Village'] = new Town(
     GameConstants.SinnohSubRegions.Hisui,
     [JubilifeVillageShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Jubilife Village']), TemporaryBattleList['Volo 1'], TemporaryBattleList['Akari 1'], TemporaryBattleList['Akari 2'], TemporaryBattleList['Adaman 1']],
     {
-        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+        requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     }
 );
 TownList['Galaxy Hall'] = new Town(
@@ -3430,7 +3430,7 @@ TownList['Galaxy Hall'] = new Town(
     GameConstants.SinnohSubRegions.Hisui,
     [new BulletinBoard(GameConstants.BulletinBoards.Hisui)],
     {
-        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+        requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     }
 );
 TownList['Fieldlands Camp'] = new Town(
@@ -3439,7 +3439,7 @@ TownList['Fieldlands Camp'] = new Town(
     GameConstants.SinnohSubRegions.Hisui,
     [TemporaryBattleList['Warden Mai']],
     {
-        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+        requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     }
 );
 TownList['Heights Camp'] = new Town(
@@ -3448,7 +3448,7 @@ TownList['Heights Camp'] = new Town(
     GameConstants.SinnohSubRegions.Hisui,
     [TemporaryBattleList['Alpha Kricketune']],
     {
-        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+        requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     }
 );
 TownList['Grandtree Arena'] = new Town(
@@ -3457,7 +3457,7 @@ TownList['Grandtree Arena'] = new Town(
     GameConstants.SinnohSubRegions.Hisui,
     [TemporaryBattleList['Warden Lian'], TemporaryBattleList['Irida 1'], TemporaryBattleList['Noble Kleavor 1'], TemporaryBattleList['Noble Kleavor 2']],
     {
-        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+        requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     }
 );
 TownList['Mirelands Camp'] = new Town(
@@ -3466,7 +3466,7 @@ TownList['Mirelands Camp'] = new Town(
     GameConstants.SinnohSubRegions.Hisui,
     [],
     {
-        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+        requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     }
 );
 TownList['Bogbound Camp'] = new Town(
@@ -3475,7 +3475,7 @@ TownList['Bogbound Camp'] = new Town(
     GameConstants.SinnohSubRegions.Hisui,
     [],
     {
-        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+        requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     }
 );
 TownList['Ancient Solaceon Ruins'] = new Town(
@@ -3484,7 +3484,7 @@ TownList['Ancient Solaceon Ruins'] = new Town(
     GameConstants.SinnohSubRegions.Hisui,
     [TemporaryBattleList['Volo 2']],
     {
-        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+        requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     }
 );
 TownList['Sludge Mound'] = new Town(
@@ -3493,7 +3493,7 @@ TownList['Sludge Mound'] = new Town(
     GameConstants.SinnohSubRegions.Hisui,
     [TemporaryBattleList['Ursaluna']],
     {
-        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+        requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     }
 );
 TownList['Diamond Settlement'] = new Town(
@@ -3502,7 +3502,7 @@ TownList['Diamond Settlement'] = new Town(
     GameConstants.SinnohSubRegions.Hisui,
     [],
     {
-        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+        requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     }
 );
 TownList['Brava Arena'] = new Town(
@@ -3511,7 +3511,7 @@ TownList['Brava Arena'] = new Town(
     GameConstants.SinnohSubRegions.Hisui,
     [TemporaryBattleList['Noble Lilligant 1'], TemporaryBattleList['Noble Lilligant 2']],
     {
-        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+        requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     }
 );
 TownList['Beachside Camp'] = new Town(
@@ -3520,7 +3520,7 @@ TownList['Beachside Camp'] = new Town(
     GameConstants.SinnohSubRegions.Hisui,
     [TemporaryBattleList['Irida 2']],
     {
-        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+        requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     }
 );
 TownList['Coastlands Camp'] = new Town(
@@ -3529,7 +3529,7 @@ TownList['Coastlands Camp'] = new Town(
     GameConstants.SinnohSubRegions.Hisui,
     [],
     {
-        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+        requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     }
 );
 TownList['Molten Arena'] = new Town(
@@ -3538,7 +3538,7 @@ TownList['Molten Arena'] = new Town(
     GameConstants.SinnohSubRegions.Hisui,
     [TemporaryBattleList['Noble Arcanine 1'], TemporaryBattleList['Noble Arcanine 2']],
     {
-        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+        requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     }
 );
 TownList['Highlands Camp'] = new Town(
@@ -3547,7 +3547,7 @@ TownList['Highlands Camp'] = new Town(
     GameConstants.SinnohSubRegions.Hisui,
     [],
     {
-        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+        requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     }
 );
 TownList['Mountain Camp'] = new Town(
@@ -3556,7 +3556,7 @@ TownList['Mountain Camp'] = new Town(
     GameConstants.SinnohSubRegions.Hisui,
     [],
     {
-        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+        requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     }
 );
 TownList['Summit Camp'] = new Town(
@@ -3565,7 +3565,7 @@ TownList['Summit Camp'] = new Town(
     GameConstants.SinnohSubRegions.Hisui,
     [],
     {
-        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+        requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     }
 );
 TownList['Moonview Arena'] = new Town(
@@ -3574,7 +3574,7 @@ TownList['Moonview Arena'] = new Town(
     GameConstants.SinnohSubRegions.Hisui,
     [TemporaryBattleList['Melli 2'], TemporaryBattleList['Noble Electrode 1'], TemporaryBattleList['Noble Electrode 2']],
     {
-        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+        requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     }
 );
 TownList['Snowfields Camp'] = new Town(
@@ -3583,7 +3583,7 @@ TownList['Snowfields Camp'] = new Town(
     GameConstants.SinnohSubRegions.Hisui,
     [],
     {
-        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+        requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     }
 );
 TownList['Icepeak Camp'] = new Town(
@@ -3592,7 +3592,7 @@ TownList['Icepeak Camp'] = new Town(
     GameConstants.SinnohSubRegions.Hisui,
     [],
     {
-        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+        requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     }
 );
 TownList['Legacy Icecap'] = new Town(
@@ -3601,7 +3601,7 @@ TownList['Legacy Icecap'] = new Town(
     GameConstants.SinnohSubRegions.Hisui,
     [TemporaryBattleList['Warden Gaeric']],
     {
-        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+        requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     }
 );
 TownList['Pearl Settlement'] = new Town(
@@ -3610,7 +3610,7 @@ TownList['Pearl Settlement'] = new Town(
     GameConstants.SinnohSubRegions.Hisui,
     [TemporaryBattleList['Irida 3']],
     {
-        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+        requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     }
 );
 TownList['Icepeak Arena'] = new Town(
@@ -3619,7 +3619,7 @@ TownList['Icepeak Arena'] = new Town(
     GameConstants.SinnohSubRegions.Hisui,
     [TemporaryBattleList['Noble Avalugg 1'], TemporaryBattleList['Noble Avalugg 2']],
     {
-        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+        requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     }
 );
 TownList['Ancient Retreat'] = new Town(
@@ -3628,7 +3628,7 @@ TownList['Ancient Retreat'] = new Town(
     GameConstants.SinnohSubRegions.Hisui,
     [],
     {
-        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+        requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     }
 );
 TownList['Stone Portal'] = new Town(
@@ -3637,7 +3637,7 @@ TownList['Stone Portal'] = new Town(
     GameConstants.SinnohSubRegions.Hisui,
     [TemporaryBattleList['Beni']],
     {
-        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+        requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     }
 );
 TownList['Primeval Grotto'] = new Town(
@@ -3646,7 +3646,7 @@ TownList['Primeval Grotto'] = new Town(
     GameConstants.SinnohSubRegions.Hisui,
     [],
     {
-        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+        requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     }
 );
 TownList['Temple of Sinnoh'] = new Town(
@@ -3655,7 +3655,7 @@ TownList['Temple of Sinnoh'] = new Town(
     GameConstants.SinnohSubRegions.Hisui,
     [TemporaryBattleList['Kamado 1'], TemporaryBattleList['Dialga (Origin) 1'], TemporaryBattleList['Palkia (Origin) 1'], TemporaryBattleList['Dialga (Origin) 2'], TemporaryBattleList['Palkia (Origin) 2'], TemporaryBattleList['Volo 3'], TemporaryBattleList['Volo 4']],
     {
-        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+        requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     }
 );
 TownList['Turnback Cave'] = new Town(
@@ -3664,7 +3664,7 @@ TownList['Turnback Cave'] = new Town(
     GameConstants.SinnohSubRegions.Hisui,
     [TemporaryBattleList['Giratina (Origin)']],
     {
-        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+        requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     }
 );
 TownList['Ancient Hall of Origin'] = new Town(
@@ -3673,7 +3673,7 @@ TownList['Ancient Hall of Origin'] = new Town(
     GameConstants.SinnohSubRegions.Hisui,
     [TemporaryBattleList.Arceus],
     {
-        requirements: [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+        requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     }
 );
 
@@ -3864,75 +3864,75 @@ TownList['Oreburrow Tunnel'] = new DungeonTown(
     'Oreburrow Tunnel',
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Hisui,
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)]
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)]
 );
 TownList.Heartwood = new DungeonTown(
     'Heartwood',
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Hisui,
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)]
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)]
 );
 TownList['Shrouded Ruins'] = new DungeonTown(
     'Shrouded Ruins',
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Hisui,
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)]
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)]
 );
 TownList['Firespit Island'] = new DungeonTown(
     'Firespit Island',
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Hisui,
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)]
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)]
 );
 TownList['Ancient Wayward Cave'] = new DungeonTown(
     'Ancient Wayward Cave',
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Hisui,
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     [TemporaryBattleList['Melli 1']]
 );
 TownList['Ancient Quarry'] = new DungeonTown(
     'Ancient Quarry',
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Hisui,
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)]
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)]
 );
 TownList['Celestica Ruins'] = new DungeonTown(
     'Celestica Ruins',
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Hisui,
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     [TemporaryBattleList['Warden Ingo']]// Should be in Clamberclaw Cliffs but that is a route for now. Might get an overworld sprite if possible
 );
 TownList['Sacred Plaza'] = new DungeonTown(
     'Sacred Plaza',
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Hisui,
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)]
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)]
 );
 TownList['Crevasse Passage'] = new DungeonTown(
     'Crevasse Passage',
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Hisui,
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)]
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)]
 );
 TownList['Ice Column Chamber'] = new DungeonTown(
     'Ice Column Chamber',
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Hisui,
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)]
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)]
 );
 TownList['Icepeak Cavern'] = new DungeonTown(
     'Icepeak Cavern',
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Hisui,
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)]
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)]
 );
 TownList['Ancient Snowpoint Temple'] = new DungeonTown(
     'Ancient Snowpoint Temple',
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Hisui,
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     [TemporaryBattleList['Warden Sabi'], TemporaryBattleList['Hisuian Braviary']]
 );
 TownList['Seaside Hollow'] = new DungeonTown(
@@ -3940,7 +3940,7 @@ TownList['Seaside Hollow'] = new DungeonTown(
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Hisui,
     [
-        new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0),
+        new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0),
         new ObtainedPokemonRequirement('Overqwil'),
     ]
 );
@@ -3948,20 +3948,20 @@ TownList['Ancient Lake Verity'] = new DungeonTown(
     'Ancient Lake Verity',
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Hisui,
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)]
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)]
 );
 TownList['Ancient Lake Valor'] = new DungeonTown(
     'Ancient Lake Valor',
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Hisui,
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     [TemporaryBattleList['Adaman 2']]
 );
 TownList['Ancient Lake Acuity'] = new DungeonTown(
     'Ancient Lake Acuity',
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Hisui,
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)]
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)]
 );
 
 //Unova Shops

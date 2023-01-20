@@ -2080,7 +2080,7 @@ GymList['Grandtree Arena'] = new Gym(
     BadgeEnums.NobleKleavor,
     128000,
     'You defeated Lord Kleavor once again!',
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     undefined, undefined, 'Lord Kleavor'
 );
 GymList['Brava Arena'] = new Gym(
@@ -2090,7 +2090,7 @@ GymList['Brava Arena'] = new Gym(
     BadgeEnums.NobleLilligant,
     128000,
     'You defeated Lady Lilligant once again!',
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     undefined, undefined, 'Lady Lilligant'
 );
 GymList['Molten Arena'] = new Gym(
@@ -2100,7 +2100,7 @@ GymList['Molten Arena'] = new Gym(
     BadgeEnums.NobleArcanine,
     128000,
     'You defeated Lord Arcanine once again!',
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     undefined, undefined, 'Lord Arcanine'
 );
 GymList['Moonview Arena'] = new Gym(
@@ -2110,7 +2110,7 @@ GymList['Moonview Arena'] = new Gym(
     BadgeEnums.NobleElectrode,
     128000,
     'You defeated Lord Electrode once again!',
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     undefined, undefined, 'Lord Electrode'
 );
 GymList['Icepeak Arena'] = new Gym(
@@ -2120,6 +2120,6 @@ GymList['Icepeak Arena'] = new Gym(
     BadgeEnums.NobleAvalugg,
     128000,
     'You defeated Lord Avalugg once again!',
-    [new QuestLineStepCompletedRequirement('The Noble Light of Arceus', 0)],
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     undefined, undefined, 'Lord Avalugg'
 );
