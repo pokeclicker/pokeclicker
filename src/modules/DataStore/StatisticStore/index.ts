@@ -137,7 +137,6 @@ export default class Statistics implements Saveable {
     shinyFemalePokemonEncountered: any;
     shinyMalePokemonHatched: any;
     shinyFemalePokemonHatched: any;
-    npcInteractedWith: any;
 
     observables = [
         'secondsPlayed',
