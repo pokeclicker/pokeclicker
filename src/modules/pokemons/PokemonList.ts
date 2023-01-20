@@ -3765,7 +3765,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 225,
         'eggCycles': 20,
-        // 'evolutions': [MegaEvolution('Gengar', 'Mega Gengar')],
+        'evolutions': [MegaEvolution('Gengar', 'Mega Gengar')],
         'base': {
             'hitpoints': 60,
             'attack': 65,

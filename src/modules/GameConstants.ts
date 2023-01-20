@@ -1513,6 +1513,7 @@ export const TemporaryBattles = [
     'Calem 2',
     'Calem 3',
     'Calem 4',
+    'Hex Maniac Aster',
     'Sycamore 2',
     'Shauna 2',
     'Tierno 2',

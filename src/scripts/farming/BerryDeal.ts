@@ -31,7 +31,7 @@ class BerryDeal {
     }
 
     private static randomUndergroundItem(): UndergroundItem {
-        return SeededRand.fromArray(UndergroundItems.list);
+        return SeededRand.fromArray(UndergroundItems.list.filter(item => item.valueType !== UndergroundItemValueType.MegaStone));
     }
 
     private static randomPokeballDeal(): BerryDeal {
