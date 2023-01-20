@@ -142,7 +142,7 @@ class QuestLineHelper {
         const talkToBillsGrandpa1 = new TalkToNPCQuest(BillsGrandpa1, 'Talk to Bill\'s Grandpa in Bill\'s House.');
         BillsGrandpaQuestLine.addQuest(talkToBillsGrandpa1);
 
-        const pinkBalloon = new CaptureSpecificPokemonQuest('Jigglypuff', 'Catch the desired Pokémon', 1);
+        const pinkBalloon = new CaptureSpecificPokemonQuest('Jigglypuff', 'Catch the desired Pokémon.', 1);
         const punchNormal = new CustomQuest(100, 0, 'Defeat 100 Normal-type Pokémon.', () => {
             return pokemonMap.filter(p => p.type.includes(PokemonType.Normal)).map(p => App.game.statistics.pokemonDefeated[p.id]()).reduce((a,b) => a + b, 0);
         });
@@ -150,14 +150,14 @@ class QuestLineHelper {
         BillsGrandpaQuestLine.addQuest(new MultipleQuestsQuest([
             pinkBalloon,
             punchNormal,
-        ],'Bill\'s Grandpa want you to catch a Pokémon that is pink and like a balloon.'));
+        ],'Bill\'s Grandpa wants you to catch a Pokémon that is pink and like a balloon.'));
 
         // Talk to Bill's Grandpa after catching a Jigglypuff
         const MoonStoneReward = () => {
             player.gainItem('Moon_stone', 1);
             Notifier.notify({
                 title: BillsGrandpaQuestLine.name,
-                message: 'Bill\'s Grandpa has given you a Moon Stone',
+                message: 'Bill\'s Grandpa has given you a Moon Stone.',
                 type: NotificationConstants.NotificationOption.success,
                 sound: NotificationConstants.NotificationSound.Quests.quest_ready_to_complete,
             });
@@ -166,7 +166,7 @@ class QuestLineHelper {
         const talkToBillsGrandpa2 = new TalkToNPCQuest(BillsGrandpa2, 'Show your Jigglypuff back to Bill\'s Grandpa.', MoonStoneReward);
         BillsGrandpaQuestLine.addQuest(talkToBillsGrandpa2);
 
-        const blueRound = new CaptureSpecificPokemonQuest('Oddish', 'Catch the desired Pokémon', 1);
+        const blueRound = new CaptureSpecificPokemonQuest('Oddish', 'Catch the desired Pokémon.', 1);
         const punchGrass = new CustomQuest(100, 0, 'Defeat 100 Grass-type Pokémon.', () => {
             return pokemonMap.filter(p => p.type.includes(PokemonType.Grass)).map(p => App.game.statistics.pokemonDefeated[p.id]()).reduce((a,b) => a + b, 0);
         });
@@ -174,14 +174,14 @@ class QuestLineHelper {
         BillsGrandpaQuestLine.addQuest(new MultipleQuestsQuest([
             blueRound,
             punchGrass,
-        ],'Bill\'s Grandpa want you to catch a Pokémon that is round, blue and has has leaves growing on its head'));
+        ],'Bill\'s Grandpa wants you to catch a Pokémon that is round, blue, and has leaves growing on its head.'));
 
         // Talk to Bill's Grandpa after catching an Oddish
         const LeafStoneReward = () => {
             player.gainItem('Leaf_stone', 1);
             Notifier.notify({
                 title: BillsGrandpaQuestLine.name,
-                message: 'Bill\'s Grandpa has given you a Leaf Stone',
+                message: 'Bill\'s Grandpa has given you a Leaf Stone.',
                 type: NotificationConstants.NotificationOption.success,
                 sound: NotificationConstants.NotificationSound.Quests.quest_ready_to_complete,
             });
@@ -190,7 +190,7 @@ class QuestLineHelper {
         const talkToBillsGrandpa3 = new TalkToNPCQuest(BillsGrandpa3, 'Show your Oddish back to Bill\'s Grandpa.', LeafStoneReward);
         BillsGrandpaQuestLine.addQuest(talkToBillsGrandpa3);
 
-        const redSphere = new CaptureSpecificPokemonQuest('Staryu', 'Catch the desired Pokémon', 1);
+        const redSphere = new CaptureSpecificPokemonQuest('Staryu', 'Catch the desired Pokémon.', 1);
         const punchWater = new CustomQuest(100, 0, 'Defeat 100 Water-type Pokémon.', () => {
             return pokemonMap.filter(p => p.type.includes(PokemonType.Water)).map(p => App.game.statistics.pokemonDefeated[p.id]()).reduce((a,b) => a + b, 0);
         });
@@ -198,14 +198,14 @@ class QuestLineHelper {
         BillsGrandpaQuestLine.addQuest(new MultipleQuestsQuest([
             redSphere,
             punchWater,
-        ],'Bill\'s Grandpa want you to catch a Pokémon that is has a red sphere in its body and is shaped like a star'));
+        ],'Bill\'s Grandpa wants you to catch a Pokémon that it has a red sphere in its body and is shaped like a star.'));
 
         // Talk to Bill's Grandpa after catching a Staryu
         const WaterStoneReward = () => {
             player.gainItem('Water_stone', 1);
             Notifier.notify({
                 title: BillsGrandpaQuestLine.name,
-                message: 'Bill\'s Grandpa has given you a Water Stone',
+                message: 'Bill\'s Grandpa has given you a Water Stone.',
                 type: NotificationConstants.NotificationOption.success,
                 sound: NotificationConstants.NotificationSound.Quests.quest_ready_to_complete,
             });
@@ -214,7 +214,7 @@ class QuestLineHelper {
         const talkToBillsGrandpa4 = new TalkToNPCQuest(BillsGrandpa4, 'Show your Staryu back to Bill\'s Grandpa.', WaterStoneReward);
         BillsGrandpaQuestLine.addQuest(talkToBillsGrandpa4);
 
-        const loyalRoar = new CaptureSpecificPokemonQuest('Growlithe', 'Catch the desired Pokémon', 1);
+        const loyalRoar = new CaptureSpecificPokemonQuest('Growlithe', 'Catch the desired Pokémon.', 1);
         const punchFire = new CustomQuest(100, 0, 'Defeat 100 Fire-type Pokémon.', () => {
             return pokemonMap.filter(p => p.type.includes(PokemonType.Fire)).map(p => App.game.statistics.pokemonDefeated[p.id]()).reduce((a,b) => a + b, 0);
         });
@@ -222,14 +222,14 @@ class QuestLineHelper {
         BillsGrandpaQuestLine.addQuest(new MultipleQuestsQuest([
             loyalRoar,
             punchFire,
-        ],'Bill\'s Grandpa want you to catch a Pokémon that is very loyal and supposedly roars pretty well'));
+        ],'Bill\'s Grandpa wants you to catch a Pokémon that is very loyal and supposedly roars pretty well.'));
 
         // Talk to Bill's Grandpa after catching a Growlithe
         const FireStoneReward = () => {
             player.gainItem('Fire_stone', 1);
             Notifier.notify({
                 title: BillsGrandpaQuestLine.name,
-                message: 'Bill\'s Grandpa has given you a Fire Stone',
+                message: 'Bill\'s Grandpa has given you a Fire Stone.',
                 type: NotificationConstants.NotificationOption.success,
                 sound: NotificationConstants.NotificationSound.Quests.quest_ready_to_complete,
             });
@@ -238,7 +238,7 @@ class QuestLineHelper {
         const talkToBillsGrandpa5 = new TalkToNPCQuest(BillsGrandpa5, 'Show your Growlithe back to Bill\'s Grandpa.', WaterStoneReward);
         BillsGrandpaQuestLine.addQuest(talkToBillsGrandpa5);
 
-        const yellowAndRed = new CaptureSpecificPokemonQuest('Pikachu', 'Catch the desired Pokémon', 1);
+        const yellowAndRed = new CaptureSpecificPokemonQuest('Pikachu', 'Catch the desired Pokémon.', 1);
         const punchElectric = new CustomQuest(100, 0, 'Defeat 100 Electric-type Pokémon.', () => {
             return pokemonMap.filter(p => p.type.includes(PokemonType.Electric)).map(p => App.game.statistics.pokemonDefeated[p.id]()).reduce((a,b) => a + b, 0);
         });
@@ -246,14 +246,14 @@ class QuestLineHelper {
         BillsGrandpaQuestLine.addQuest(new MultipleQuestsQuest([
             yellowAndRed,
             punchElectric,
-        ],'Bill\'s Grandpa want you to catch a Pokémon that has a yellow body and red cheeks'));
+        ],'Bill\'s Grandpa wants you to catch a Pokémon that has a yellow body and red cheeks.'));
 
         // Talk to Bill's Grandpa after catching a Pikachu
         const ThunderStoneReward = () => {
             player.gainItem('Thunder_stone', 1);
             Notifier.notify({
                 title: BillsGrandpaQuestLine.name,
-                message: 'Bill\'s Grandpa has given you a Thunder Stone',
+                message: 'Bill\'s Grandpa has given you a Thunder Stone.',
                 type: NotificationConstants.NotificationOption.success,
                 sound: NotificationConstants.NotificationSound.Quests.quest_ready_to_complete,
             });
