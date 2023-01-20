@@ -154,6 +154,10 @@ export default class GameHelper {
         return `${Object.entries(changes).reduce((filename, [format, value]) => filename.replace(format, value), nameFormat)}${isBackup ? ' Backup' : ''}.txt`;
     }
 
+    public static escapeStringRegex(s: string): string {
+        return s.replace(/[/\-\\^$*+?.()|[\]{}]/g, '\\$&');
+    }
+
     private static getTomorrow() {
         const tomorrow = new Date();
         tomorrow.setDate(tomorrow.getDate() + 1);
