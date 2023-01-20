@@ -4154,23 +4154,22 @@ const LaverreGengariteAster2 = new NPC('Hex Maniac Aster', [
 });
 
 const DendemilleDogLover = new NPC('Dubious Dog-loving Gentleman', [
-	'Dog Pokémon are the best of all! I\'m particularly fond of Houndour - I\'ve caught about five hundred of them.',
-	'But recently, now that I\'ve got so many Houndour, they have been acting rather curiously.',
-	'When the weather turns sunny, they\'ll all run barking out onto Route 16. Honestly, it\'s quite a racket, and has gotten me into no small amount of trouble.',
-	'They come wandering back when the weather changes, though. I wonder if a strong Pokémon is calling them?',
-	'You could build your own Houndour pack and find out, but if it\'s strong enough to call five hundred Pokémon, it probably wouldn\'t give anyone weaker than Diantha the time of day.',
+    'Dog Pokémon are the best of all! I\'m particularly fond of Houndour - I\'ve caught about five hundred of them.',
+    'But recently, now that I\'ve got so many Houndour, they have been acting rather curiously.',
+    'When the weather turns sunny, they\'ll all run barking out onto Route 16. Honestly, it\'s quite a racket, and has gotten me into no small amount of trouble.',
+    'They come wandering back when the weather changes, though. I wonder if a strong Pokémon is calling them?',
+    'You could build your own Houndour pack and find out, but if it\'s strong enough to call five hundred Pokémon, it probably wouldn\'t give anyone weaker than Diantha the time of day.',
 ], {image: 'assets/images/trainers/Gentleman.png',
 });
 
-const DendemilleCatLover = new NPC('Concerning Cat-loving Lady', [
-	'I adore cat Pokémon! The most precious of all have to be the brave little Electrike - I\'ve gathered five hundred of the darlings in my home.',
-	'But now that I have done so, their behaviour has taken a... regrettable turn.',
-	'When storms come along the horizon, they\'ll run en masse out to Route 16.',
-	'They fortunately do return home when the weather changes, at least. I wonder what sort of creature is calling them? A strong Pokémon, perhaps?',
-	'I\'ve been debating asking someone else to collect five hundred of their own Electrike and investigate, but if it can herd cats with it\'s presence alone, I don\'t imagine anyone less than Diantha herself could handle it.',
+const DendemilleWolfLover = new NPC('Worrisome Wolf-loving Woman', [
+    'I adore wolf Pokémon! The most precious of all have to be the brave little Electrike - I\'ve gathered five hundred of the darlings in my home.',
+    'But now that I have done so, their behaviour has taken a... regrettable turn.',
+    'When storms come along the horizon, they\'ll run en masse out to Route 16.',
+    'They fortunately do return home when the weather changes, at least. I wonder what sort of creature is calling them? A strong Pokémon, perhaps?',
+    'I\'ve been debating asking someone else to collect five hundred of their own Electrike and investigate, but if it can call such a fearsome pack with it\'s presence alone, I don\'t imagine anyone less than Diantha herself could handle it.',
 ], {image: 'assets/images/trainers/Madame.png',
 });
-
 
 const AnistarKalosRoamerNPC = new RoamerNPC('Hex Maniac Melanie', [
     'The spirits tell me roaming Pokémon have been spotted on {ROUTE_NAME}!',
@@ -4332,7 +4331,7 @@ TownList['Dendemille Town'] = new Town(
     [DendemilleTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Dendemille Town'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 15)],
-		npcs: [DendemilleCatLover, DendemilleDogLover],
+        npcs: [DendemilleWolfLover, DendemilleDogLover],
     }
 );
 TownList['Anistar City'] = new Town(

@@ -2222,55 +2222,57 @@ TemporaryBattleList['Hex Maniac Aster'] = new TemporaryBattle(
 );
 
 TemporaryBattleList['Wild Houndour Horde'] = new TemporaryBattle(
-	'Wild Houndour Horde',
-	[
-		new GymPokemon('Houndour', 60000000, 40),
-		new GymPokemon('Houndour', 60000000, 40),
-		new GymPokemon('Houndour', 60000000, 40),
-		new GymPokemon('Houndour', 60000000, 40),
-		new GymPokemon('Houndour', 60000000, 40),
-		new GymPokemon('Houndoom', 120000000, 60),
-	],
-	'<i>With the leader of the pack defeated, the Houndour horde scatter, their fiery fury reduced to ashes. In the gleaming sunlight, you catch sight of a small gem left behind by their leader...</i></br><img src="assets/images/megaStone/229.png"/></br><i>You obtained the Houndoomite!</i>',
-	[
-	    new ObtainedPokemonRequirement('Houndoom'), 
-		new WeatherRequirement([WeatherType.Sunny]), 
-		new statisticRequirement('pokemonCaught', PokemonHelper.getPokemonByName('Houndour').id], 500),
-		new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion),
-	],
-	undefined,
-	{
-		displayName: 'Wild Houndour Horde',
-		firstTimeRewardFunction: () => App.game.party.getPokemonByName('Houndoom').giveMegastone(),
+    'Wild Houndour Horde',
+    [
+        new GymPokemon('Houndour', 60000000, 40),
+        new GymPokemon('Houndour', 60000000, 40),
+        new GymPokemon('Houndour', 60000000, 40),
+        new GymPokemon('Houndour', 60000000, 40),
+        new GymPokemon('Houndour', 60000000, 40),
+        new GymPokemon('Mega Houndoom', 120000000, 60),
+    ],
+    '<i>With the leader of the pack defeated, the Houndour horde scatter, their fiery fury reduced to ashes. In the gleaming sunlight, you catch sight of a small gem left behind by their leader...</i></br><img src="assets/images/megaStone/229.png"/></br><i>You obtained the Houndoomite!</i>',
+    [
+        new ObtainedPokemonRequirement('Houndoom'),
+        new WeatherRequirement([WeatherType.Sunny]),
+        new StatisticRequirement(['pokemonCaptured', PokemonHelper.getPokemonByName('Houndour').id], 500),
+        new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion),
+    ],
+    undefined,
+    {
+        displayName: 'Wild Houndour Horde',
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Houndoom').giveMegastone(),
+        imageName: '../pokemon/229.01',
         hideTrainer: true,
-		returnTown: 'Dendemille Town',
-	}
+        returnTown: 'Dendemille Town',
+    }
 );
 
 TemporaryBattleList['Wild Electrike Horde'] = new TemporaryBattle(
-	'Wild Electrike Horde',
-	[
-		new GymPokemon('Electrike', 60000000, 40),
-		new GymPokemon('Electrike', 60000000, 40),
-		new GymPokemon('Electrike', 60000000, 40),
-		new GymPokemon('Electrike', 60000000, 40),
-		new GymPokemon('Electrike', 60000000, 40),
-		new GymPokemon('Manectric', 120000000, 60),
-	],
-	'<i>With the leader of the pack defeated, the Electrike horde scatter, their thunderous rage utterly depleted. In a thunderbolt\'s flash, you catch sight of a small gem left behind by their leader...</i></br><img src="assets/images/megaStone/310.png"/></br><i>You obtained the Manectite!</i>',
-	[
-	    new ObtainedPokemonRequirement('Manectric'), 
-		new WeatherRequirement([WeatherType.Thunderstorm]), 
-		new statisticRequirement('pokemonCaught', PokemonHelper.getPokemonByName('Electrike').id], 500),
-		new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion),
-	],
-	undefined,
-	{
-		displayName: 'Wild Electrike Horde',
-		firstTimeRewardFunction: () => App.game.party.getPokemonByName('Manectric').giveMegastone(),
+    'Wild Electrike Horde',
+    [
+        new GymPokemon('Electrike', 60000000, 40),
+        new GymPokemon('Electrike', 60000000, 40),
+        new GymPokemon('Electrike', 60000000, 40),
+        new GymPokemon('Electrike', 60000000, 40),
+        new GymPokemon('Electrike', 60000000, 40),
+        new GymPokemon('Mega Manectric', 120000000, 60),
+    ],
+    '<i>With the leader of the pack defeated, the Electrike horde scatter, their thunderous rage utterly depleted. In a thunderbolt\'s flash, you catch sight of a small gem left behind by their leader...</i></br><img src="assets/images/megaStone/310.png"/></br><i>You obtained the Manectite!</i>',
+    [
+        new ObtainedPokemonRequirement('Manectric'),
+        new WeatherRequirement([WeatherType.Thunderstorm]),
+        new StatisticRequirement(['pokemonCaptured', PokemonHelper.getPokemonByName('Electrike').id], 500),
+        new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion),
+    ],
+    undefined,
+    {
+        displayName: 'Wild Electrike Horde',
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Manectric').giveMegastone(),
+        imageName: '../pokemon/310.01',
         hideTrainer: true,
-		returnTown: 'Dendemille Town', 
-	}
+        returnTown: 'Dendemille Town',
+    }
 );
 
 //Alola Temporary Battles
