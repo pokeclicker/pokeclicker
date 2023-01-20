@@ -2229,6 +2229,7 @@ const SurferDave = new NPC('Surfer Dave', [
 
 const SouthernIsland1 = new NPC('Explore the Southern Island', [
     '<i>The Southern Island is a small but lush forest. The clearing near the center of the island is the perfect place for a tired Pokémon to rest.</i>',
+    '<i>Latios and Latias are resting in the clearing. You can approach one of them, but the other will probably flee.</i>',
 ],  {requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Eon Duo', 2), new QuestLineStepCompletedRequirement('The Eon Duo', 3, GameConstants.AchievementOption.less)]),
 });
 
