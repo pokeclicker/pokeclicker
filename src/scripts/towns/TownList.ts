@@ -332,37 +332,37 @@ const BillsGrandpa1 = new NPC('Bill\'s Grandpa', [
 const BillsGrandpa2 = new NPC('Bill\'s Grandpa', [
     'Ah, so that is Jigglypuff? Isn\'t it cute! That\'s so kind of you. Thanks! This Moon Stone is a token of my appreciation.',
     'Ah, my grandson mentioned a round, green Pokémon, wait not green, it\'s blue, a blue Pokémon that has leaves growing on its head',
-    'Would you catch that Pokémon and show it to me, please?',
+    'If you encounter that Pokémon and catch it, would you bring it here, please?',
 ], {image: 'assets/images/npcs/Bill\'s Grandpa with Eevee.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Bill\'s Grandpa Treasure Hunt', 1), new QuestLineStepCompletedRequirement('Bill\'s Grandpa Treasure Hunt', 3, GameConstants.AchievementOption.less)])
 });
 
 const BillsGrandpa3 = new NPC('Bill\'s Grandpa', [
-    'Ah, so that is Oddish? Isn\'t it cute! That\'s so kind of you. Thanks! This Leaf Stone is a token of my appreciation.',
+    'Oh, the Pokémon was called Oddish? It is adorable! Thank you so much for bringing it to me! Please, accept this Leaf Stone.',
     'By the way, do you know of a sea Pokémon that has a red sphere on its body? You know, the one that\'s shaped like a star?',
-    'Would you catch that Pokémon and show it to me, please?',
+    'When you happen to get one, would you like to come back here so I can see it, please?',
 ], {image: 'assets/images/npcs/Bill\'s Grandpa with Eevee.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Bill\'s Grandpa Treasure Hunt', 3), new QuestLineStepCompletedRequirement('Bill\'s Grandpa Treasure Hunt', 5, GameConstants.AchievementOption.less)])
 });
 
 const BillsGrandpa4 = new NPC('Bill\'s Grandpa', [
-    'Ah, so that is Staryu? Isn\'t it cute! That\'s so kind of you. Thanks! This Water Stone is a token of my appreciation.',
+    'Ah, you brought it to me. Staryu is the name, you said? It\'s certainly shaped like a star. You are so kind for coming back with it.! This Water Stone should be really useful to you.',
     'I was thinking, Bill told me about a Pokémon that is very loyal to its trainer. It\'s supposed to roar well',
-    'Would you catch that Pokémon and show it to me, please?',
+    'I would really want to meet it, can you stop by when you meet one, please?',
 ], {image: 'assets/images/npcs/Bill\'s Grandpa with Eevee.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Bill\'s Grandpa Treasure Hunt', 5), new QuestLineStepCompletedRequirement('Bill\'s Grandpa Treasure Hunt', 7, GameConstants.AchievementOption.less)])
 });
 
 const BillsGrandpa5 = new NPC('Bill\'s Grandpa', [
-    'Ah, so that is Growlithe? Isn\'t it cute! That\'s so kind of you. Thanks! This Fire Stone is a token of my appreciation.',
-    'Do you know that hugely popular Pokémon? The Pokémon that has a yellow body and red cheeks. I would love to see what it looks like.',
-    'Would you catch that Pokémon and show it to me, please?',
+    'Ah, so this little puppy is Growlithe? I cannot beging to imagine its roaring! I\'m so happy that you are doing all this for me. Thank you so much! I was saving this Fire Stone for a rainy day, but I want you to have it instead.',
+    'Did you think I was done by the way? I wanted to ask if you knew that hugely popular Pokémon? The Pokémon that has a yellow body and red cheeks. I would love to see what it looks like.',
+    'This the one I\'m most excited to meet, so please, once you catch it come back, I will have tea prepared for you',
 ], {image: 'assets/images/npcs/Bill\'s Grandpa with Eevee.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Bill\'s Grandpa Treasure Hunt', 7), new QuestLineStepCompletedRequirement('Bill\'s Grandpa Treasure Hunt', 9, GameConstants.AchievementOption.less)])
 });
 
 const BillsGrandpa6 = new NPC('Bill\'s Grandpa', [
-    'Ah, so that is Pikachu? Isn\'t it cute! That\'s so kind of you. Thanks! This Thunder Stone is a token of my appreciation.',
+    'Yes! That\'s the one! It\'s Pikachu, right? Ohhh, I\'ve wanted to meet it for so long. Such a cutie. You deserve this Thunder Stone!',
     'You\'ve shown me everything I wanted to see and more. You have been a very nice trainer! My grandson could learn one thing or two from you, ho, ho!',
     'There is one more thing I would like to ask you, would you battle this old man? I promise I\'ll make it worth your while. Let\'s go outside.',
     'Let me tell you though, in my youth I was strong enough to beat Viridian City\'s Gym, so don\'t expect me to be a pushover',
