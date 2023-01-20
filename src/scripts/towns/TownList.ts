@@ -380,7 +380,7 @@ const BillsGrandpa7 = new NPC('Bill\'s Grandpa', [
 
 const BillsGrandpa8 = new NPC('Bill\'s Grandpa', [
     'Hello again, I see you are treating Eevee very well.',
-    'I\'m still housesitting for my son, I\'m sure he\'s doing well.',
+    'I\'m still house-sitting for my grandson, I\'m sure he\'s doing well.',
 ], {image: 'assets/images/npcs/Bill\'s Grandpa without Eevee.png',
     requirement: new QuestLineStepCompletedRequirement('Bill\'s Grandpa Treasure Hunt', 13),
 });
