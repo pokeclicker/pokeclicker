@@ -32,6 +32,10 @@ class PartyController {
                 (evo) => evo.trigger === EvoTrigger.STONE
                     && (evo as StoneEvoData).stone == evoType
                     && PokemonHelper.calcNativeRegion(evo.evolvedPokemon) <= player.highestRegion()
+                    && !evo.restrictions.find(
+                        req => (req instanceof InRegionRequirement && !req.isCurrentlyPossible())
+                            || (req instanceof MaxRegionRequirement && !req.isCompleted())
+                    )
             ).length > 0;
         }).sort((a, b) => a.id - b.id);
     }
