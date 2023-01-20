@@ -7,20 +7,9 @@ import GameHelper from '../GameHelper';
 
 export default class DayCycle {
     public static currentDayCyclePart: Computed<DayCyclePart> = ko.pureComputed(() => {
-        const curHour = GameHelper.currentTime().getHours();
-        let dayCyclePart: DayCyclePart;
+        const currentHour = GameHelper.currentTime().getHours();
 
-        if (curHour === DayCycleStartHours.dusk) {
-            dayCyclePart = DayCyclePart.Dusk;
-        } else if (curHour === DayCycleStartHours.dawn) {
-            dayCyclePart = DayCyclePart.Dawn;
-        } else if (curHour > DayCycleStartHours.dawn && curHour < DayCycleStartHours.dusk) {
-            dayCyclePart = DayCyclePart.Day;
-        } else {
-            dayCyclePart = DayCyclePart.Night;
-        }
-
-        return dayCyclePart;
+        return Number(Object.entries(DayCycleStartHours).reverse().find(([, startHour]) => startHour <= currentHour)?.[0] ?? DayCyclePart.Night);
     });
 
     public static image: Computed<string> = ko.pureComputed(() => {
@@ -35,7 +24,7 @@ export default class DayCycle {
         return DayCycle.dayCycleMoments[DayCycle.currentDayCyclePart()].tooltip;
     });
 
-    public static dayCycleMoments: { [dayCycle in DayCyclePart]?: DayCycleMoment } = {
+    public static dayCycleMoments: Record<DayCyclePart, DayCycleMoment> = {
         [DayCyclePart.Dawn]:
             new DayCycleMoment(DayCyclePart.Dawn, '#25b6a0', 'Dawn'),
         [DayCyclePart.Day]:

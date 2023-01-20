@@ -90,11 +90,11 @@ export const weatherRestrict = <T extends EvoFn>(evo: T) => (
 );
 
 export const timeRestrict = <T extends EvoFn>(evo: T) => (
-    dayCycleParts: DayCyclePart[],
+    dayCyclePartRestrict: DayCyclePart[],
     ...rest: Parameters<T>
 ) => restrict(
     evo(...rest),
-    new TimeRequirement(dayCycleParts),
+    new TimeRequirement(dayCyclePartRestrict),
 );
 
 export const dayRestrict = <T extends EvoFn>(evo: T) => (

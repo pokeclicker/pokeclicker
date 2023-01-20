@@ -1,26 +1,25 @@
 import DayCyclePart from './DayCyclePart';
+import { DayCycleStartHours } from '../GameConstants';
+import GameHelper from '../GameHelper';
 
 export default class DayCycleMoment {
     constructor(
-        public type: DayCyclePart,
+        public part: DayCyclePart,
         public color: string,
         public description: string,
     ) { }
 
     get tooltip(): string {
         const tooltip = [];
-        const dayCycleSchedule: Array<string> = [
-            'Dawn : 06:00 - 07:00',
-            'Day: 07:00 - 17:00',
-            'Dusk: 17:00 - 18:00',
-            'Night: 18:00 - 06:00',
-        ];
 
-        dayCycleSchedule.forEach((schedule, dayCyclePart) => {
-            if (dayCyclePart === this.type) {
-                tooltip[dayCyclePart] = (`<b>${schedule}</b>`);
+        const dayCycleStartHours = Object.entries(DayCycleStartHours);
+        dayCycleStartHours.forEach(([dayCyclePart, startHour], index) => {
+            const [, endHour] = dayCycleStartHours[index + 1] || dayCycleStartHours[0];
+
+            if (DayCyclePart[dayCyclePart] === DayCyclePart[this.part]) {
+                tooltip.push(`<span class="text-success"><b>${DayCyclePart[dayCyclePart]}: ${GameHelper.twoDigitNumber(startHour)}:00 - ${GameHelper.twoDigitNumber(endHour)}:00</b></span>`);
             } else {
-                tooltip[dayCyclePart] = schedule;
+                tooltip.push(`${DayCyclePart[dayCyclePart]}: ${GameHelper.twoDigitNumber(startHour)}:00 - ${GameHelper.twoDigitNumber(endHour)}:00`);
             }
         });
 

@@ -114,36 +114,27 @@
 
             <strong>What is the schedule of the day cycle?</strong>
             <table class="table table-bordered table-striped">
-                <tr>
-                    <td><center><strong>Part of the day</strong></center></td>
-                    <td><center><strong>Icon</strong></center></td>
-                    <td><center><strong>Start</strong></center></td>
-                    <td><center><strong>End</strong></center></td>
-                </tr>
-                <tr>
-                    <td><center><span class="text-muted text-center">Dawn</span></center></td>
-                    <td><center><span class="text-muted text-center"><img style="background: #25b6a0; width:30px;" src="assets/images/dayCycle/Dawn.png"/></span></center></td>
-                    <td><center><span class="text-muted text-center">06:00</span></center></td>
-                    <td><center><span class="text-muted text-center">07:00</span></center></td>
-                </tr>
-                <tr>
-                    <td><center><span class="text-muted text-center">Day</span></center></td>
-                    <td><center><span class="text-muted text-center"><img style="background: #f4a470; width:30px;" src="assets/images/dayCycle/Day.png"/></span></center></td>
-                    <td><center><span class="text-muted text-center">07:00</span></center></td>
-                    <td><center><span class="text-muted text-center">17:00</span></center></td>
-                </tr>
-                <tr>
-                    <td><center><span class="text-muted text-center">Dusk</span></center></td>
-                    <td><center><span class="text-muted text-center"><img style="background: #93558a; width:30px;" src="assets/images/dayCycle/Dusk.png"/></span></center></td>
-                    <td><center><span class="text-muted text-center">17:00</span></center></td>
-                    <td><center><span class="text-muted text-center">18:00</span></center></td>
-                </tr>
-                <tr>
-                    <td><center><span class="text-muted text-center">Night</span></center></td>
-                    <td><center><span class="text-muted text-center"><img style="background: #4a6252; width:30px;" src="assets/images/dayCycle/Night.png"/></span></center></td>
-                    <td><center><span class="text-muted text-center">18:00</span></center></td>
-                    <td><center><span class="text-muted text-center">06:00</span></center></td>
-                </tr>
+                <thead>
+                    <tr>
+                        <td class="text-center"><strong>Part of the day</strong></td>
+                        <td class="text-center"><strong>Icon</strong></td>
+                        <td class="text-center"><strong>Start</strong></td>
+                        <td class="text-center"><strong>End</strong></td>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach: Object.values(GameConstants.DayCycleStartHours)">
+                    <tr>
+                        <td class="text-center" data-bind='text: DayCycle.dayCycleMoments[$index()].description'></td>
+                        <td class="text-center">
+                            <img src="" style="" data-bind="attr: {
+                                src: `assets/images/dayCycle/${DayCycle.dayCycleMoments[$index()].description}.png`,
+                                style: `background: ${DayCycle.dayCycleMoments[$index()].color}; width: 30px;`,
+                            }"/>
+                        </td>
+                        <td class="text-center" data-bind='text: GameHelper.twoDigitNumber($data) + `:00`'></td>
+                        <td class="text-center" data-bind='text: (GameHelper.twoDigitNumber(GameConstants.DayCycleStartHours[$index() + 1] || GameConstants.DayCycleStartHours[0])) + `:00`'></td>
+                    </tr>
+                </tbody>
             </table>
 
             <strong>What are the EV damage multipliers?</strong>
