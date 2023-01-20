@@ -194,6 +194,15 @@ namespace GameConstants {
         battlePoint,
         contestToken,
     }
+    declare const LuxuryBallCurrencyRate: Record<Currency, number> = {
+        [Currency.money]: 300000,
+        [Currency.questPoint]: 900,
+        [Currency.dungeonToken]: 15000,
+        [Currency.diamond]: 15,
+        [Currency.farmPoint]: 900,
+        [Currency.battlePoint]: 150,
+        [Currency.contestToken]: 900,
+    };
     declare enum TypeEffectiveness {
         Immune,
         NotVery,
@@ -650,6 +659,7 @@ namespace GameConstants {
         Defeated = 'Defeated',
         Encountered = 'Encountered',
         Hatched = 'Hatched',
+        Seen = 'Seen',
     }
 
     declare enum AlcremieSweet {

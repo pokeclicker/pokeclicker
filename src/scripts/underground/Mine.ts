@@ -86,14 +86,14 @@ class Mine {
     }
 
     private static getRandomCoord(max: number, size: number): number {
-        return Rand.floor(max - size);
+        return Rand.floor(max - size + 1);
     }
 
     private static canAddReward(x: number, y: number, reward: UndergroundItem): boolean {
         if (Mine.alreadyHasRewardId(reward.id)) {
             return false;
         }
-        if (y + reward.space.length >= App.game.underground.getSizeY() || x + reward.space[0].length >= Underground.sizeX) {
+        if (y + reward.space.length > App.game.underground.getSizeY() || x + reward.space[0].length > Underground.sizeX) {
             return false;
         }
         for (let i = 0; i < reward.space.length; i++) {
