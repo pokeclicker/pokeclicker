@@ -2183,8 +2183,14 @@ class Farming implements Feature {
     public static getFirmness(firmness: BerryFirmness): BerryType[] {
         return App.game.farming.berryData.filter(berry => berry.firmness === firmness).map(berry => berry.type);
     }
-    public static sizeUnitConverter: Record<SizeUnits, number> = {
-      [SizeUnits.sipoint]: (number) => number, // default is cm
-      [SizeUnits.imperial]: (number) => number / 2.54 // inches
-    };
+//    public static sizeUnitConverter: Record<SizeUnits, number> = {
+//      [SizeUnits.sipoint]: (number) => number, // default is cm
+//      [SizeUnits.imperial]: (number) => number / 2.54 // inches
+//    };
+
+    unitSizeConverter: Record<string,  ((num: number) => number)> {
+      sidecimal: (num) => `${num} cm`,
+      imperial: (num) => `${num / 2.54}\u2033`
+    }
+
 }

@@ -108,7 +108,6 @@ Settings.add(new Setting<string>('sizeUnits', 'Berry size units',
     [
         new SettingOption('Imperial', 'imperial'),
         new SettingOption('SI (point)', 'sipoint'),
-        new SettingOption('SI (comma)', 'sicomma'),
     ],
     'sipoint'));
 Settings.add(new BooleanSetting('currencyMainDisplayReduced', 'Shorten currency amount shown on main screen', false));
