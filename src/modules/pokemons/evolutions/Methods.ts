@@ -2,7 +2,7 @@ import { StoneType } from '../../GameConstants';
 import { PokemonNameType } from '../PokemonNameType';
 import { LevelEvolution, StoneEvolution } from './Base';
 import {
-    timeRestrict,
+    dayCyclePartRestrict,
     dayRestrict,
     nightRestrict,
     dungeonRestrict,
@@ -16,10 +16,10 @@ import {
     megaEvolveRestrict,
 } from './Restrictions';
 
-// TimeRestrictedLevelEvolution(start: number, end: number, basePokemon: string, evolvedPokemon: string, level: number)
-export const TimeRestrictedLevelEvolution = timeRestrict(LevelEvolution);
-// TimeRestrictedStoneEvolution(start: number, end: number, basePokemon: string, evolvedPokemon: string, stone: GameConstants.StoneType
-export const TimeRestrictedStoneEvolution = timeRestrict(StoneEvolution);
+// DayCyclePartRestrictedLevelEvolution(start: number, end: number, basePokemon: string, evolvedPokemon: string, level: number)
+export const DayCyclePartRestrictedLevelEvolution = dayCyclePartRestrict(LevelEvolution);
+// DayCyclePartRestrictedStoneEvolution(start: number, end: number, basePokemon: string, evolvedPokemon: string, stone: GameConstants.StoneType
+export const DayCyclePartRestrictedStoneEvolution = dayCyclePartRestrict(StoneEvolution);
 
 // DayTimedLevelEvolution(basePokemon: string, evolvedPokemon: string, level: number)
 export const DayTimedLevelEvolution = dayRestrict(LevelEvolution);

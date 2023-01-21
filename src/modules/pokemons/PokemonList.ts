@@ -13,7 +13,7 @@ import {
     EnvironmentRestrictedLevelEvolution,
     WeatherRestrictedLevelEvolution,
     DayTimedLevelEvolution,
-    TimeRestrictedLevelEvolution,
+    DayCyclePartRestrictedLevelEvolution,
     MegaEvolution,
 } from './evolutions/Methods';
 import BerryType from '../enums/BerryType';
@@ -32,6 +32,7 @@ import Rand from '../utilities/Rand';
 import WeatherType from '../weather/WeatherType';
 import { PokemonNameType } from './PokemonNameType';
 import { setPokemonMap } from './mapProvider';
+import DayCyclePart from '../dayCycle/DayCyclePart';
 
 export const pokemonBabyPrevolutionMap: { [name: string]: PokemonNameType } = {};
 
@@ -21211,10 +21212,10 @@ export const pokemonList = createPokemonArray(
         'exp': 56,
         'catchRate': 190,
         'evolutions': [
-            TimeRestrictedLevelEvolution(6, 17, 'Rockruff', 'Lycanroc (Midday)', 25),
-            TimeRestrictedLevelEvolution(17, 18, 'Rockruff', 'Lycanroc (Dusk)', 25),
-            TimeRestrictedLevelEvolution(18, 5, 'Rockruff', 'Lycanroc (Midnight)', 25),
-            TimeRestrictedLevelEvolution(5, 6, 'Rockruff', 'Lycanroc (Dusk)', 25),
+            DayCyclePartRestrictedLevelEvolution([DayCyclePart.Day], 'Rockruff', 'Lycanroc (Midday)', 25),
+            DayCyclePartRestrictedLevelEvolution([DayCyclePart.Night], 'Rockruff', 'Lycanroc (Midnight)', 25),
+            DayCyclePartRestrictedLevelEvolution([DayCyclePart.Dusk], 'Rockruff', 'Lycanroc (Dusk)', 25),
+            DayCyclePartRestrictedLevelEvolution([DayCyclePart.Dawn], 'Rockruff', 'Lycanroc (Dusk)', 25),
         ],
         'base': {
             'hitpoints': 45,
