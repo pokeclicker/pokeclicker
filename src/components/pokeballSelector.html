@@ -11,6 +11,26 @@
         <table class="table table-sm m-0">
             <thead>
                 <tr>
+                    <th>Name</th>
+                    <th>Ball</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody id="pokeballFilters" data-bind="foreach: App.game.pokeballFilters.list().reverse()">
+                <tr>
+                    <td><span data-bind="
+                        text: $data.name
+                    "></td>
+                    <td data-bind="template: {
+                        name: 'selectedPokeballDisplayTemplate',
+                        data: $data,
+                    }"></td>
+                    <td data-bind="template: {
+                        name: 'selectedPokeballCountTemplate',
+                        data: $data
+                    }"></td>
+                </tr>
+                <!-- <tr>
                     <th width="20%" data-toggle="tooltip" title="Previously captured Pokémon will use this ball selection">Caught</th>
                     <th width="20%" data-toggle="tooltip" title="Pokémon contagious with Pokérus will use this ball selection" data-bind="visible: App.game.keyItems.hasKeyItem(KeyItemType.Pokerus_virus)"><img width="40px" src="assets/images/breeding/pokerus/Contagious.png"/></th>
                     <th width="20%" data-toggle="tooltip" title="Previously captured Shiny Pokémon will use this ball selection" style="filter: grayscale(80%);">✨</th>
@@ -30,30 +50,28 @@
                     <td data-bind="template: {name: 'selectedPokeballCountTemplate', data: 'Caught Shiny' }"></td>
                     <td data-bind="template: {name: 'selectedPokeballCountTemplate', data: 'New' }"></td>
                     <td data-bind="template: {name: 'selectedPokeballCountTemplate', data: 'New Shiny' }"></td>
-                </tr>
-            </thead>
+                </tr> -->
+            </tbody>
         </table>
     </div>
 
     <script type="text/html" id="selectedPokeballDisplayTemplate">
-        <knockout data-bind="with: App.game.pokeballFilters.getFilterByName($data.filter)">
-            <img class="pokeball-small clickable pokeball-selected"
-                data-bind="
-                    attr: {src: 'assets/images/pokeball/' + GameConstants.Pokeball[ball()] + '.svg'},
-                    tooltip: {
-                        title: ball() === GameConstants.Pokeball.None ? 'None' : ItemList[GameConstants.Pokeball[ball()]].displayName,
-                        trigger: 'hover', animation: false,
-                        placement: 'right'
-                    },
-                    click: function() {App.game.pokeballs.selectedSelection(ball); App.game.pokeballs.selectedTitle(name); $('#pokeballSelectorModal').modal('show')}
-                "
-            />
-        </knockout>
+        <img class="pokeball-small clickable pokeball-selected"
+            data-bind="
+                attr: {src: 'assets/images/pokeball/' + GameConstants.Pokeball[ball()] + '.svg'},
+                tooltip: {
+                    title: ball() === GameConstants.Pokeball.None ? 'None' : ItemList[GameConstants.Pokeball[ball()]].displayName,
+                    trigger: 'hover', animation: false,
+                    placement: 'right'
+                },
+                click: function() {App.game.pokeballs.selectedSelection(ball); App.game.pokeballs.selectedTitle(name); $('#pokeballSelectorModal').modal('show')}
+            "
+        />
     </script>
 
     <script type="text/html" id="selectedPokeballCountTemplate">
         <knockout data-bind="with: {
-            count: App.game.pokeballs.getBallQuantity(App.game.pokeballFilters.getFilterByName($data)?.ball())
+            count: App.game.pokeballs.getBallQuantity($data?.ball())
         }">
             <span data-bind="
                 text: count ? GameConstants.formatNumber(count) : '-',
