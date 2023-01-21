@@ -2,7 +2,7 @@
 import { ObservableArray } from 'knockout';
 import { Feature } from '../DataStore/common/Feature';
 import { Pokeball, Pokerus } from '../GameConstants';
-import PokeballFilter, { PokeballFilterParams } from './PokeballFilter';
+import PokeballFilter, { PokeballFilterOptions, PokeballFilterParams } from './PokeballFilter';
 
 export default class PokeballFilters implements Feature {
     name = 'Pokeball Filters';
@@ -10,9 +10,9 @@ export default class PokeballFilters implements Feature {
     defaults = {};
 
     public presets: PokeballFilterParams[] = [
-        { name: 'New Shiny', options: { shiny: true, caught: false }, ball: Pokeball.Pokeball },
+        { name: 'New Shiny', options: { shiny: true, caughtShiny: false }, ball: Pokeball.Pokeball },
         { name: 'New', options: { caught: false }, ball: Pokeball.Pokeball },
-        { name: 'Caught Shiny', options: { shiny: true, caught: true }, ball: Pokeball.Pokeball },
+        { name: 'Caught Shiny', options: { shiny: true, caughtShiny: true }, ball: Pokeball.Pokeball },
         { name: 'Caught Contagious', options: { caught: true, pokerus: Pokerus.Contagious } },
         { name: 'Caught', options: { caught: true } },
     ];
@@ -24,6 +24,14 @@ export default class PokeballFilters implements Feature {
     canAccess() { return true; }
 
     update() {}
+
+    getFilterByName(name: string) {
+        return this.list().find((filter) => filter.name === name);
+    }
+
+    findMatch(data: PokeballFilterOptions): PokeballFilter | undefined {
+        return this.list().find((filter) => filter.test(data));
+    }
 
     toJSON() {
         return {
@@ -40,10 +48,11 @@ export default class PokeballFilters implements Feature {
             ? json.list
             : this.presets;
 
-        list.forEach((filterConfig) => {
+        list.forEach(({ name, options, ball }) => {
             this.list.push(new PokeballFilter(
-                filterConfig.name,
-                filterConfig.options,
+                name,
+                options,
+                ball,
             ));
         });
     }

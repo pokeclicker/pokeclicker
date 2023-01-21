@@ -4,6 +4,7 @@ import { Pokeball, Pokerus } from '../GameConstants';
 export type PokeballFilterOptions = {
     shiny?: boolean;
     caught?: boolean;
+    caughtShiny?: boolean;
     pokerus?: Pokerus;
 };
 
@@ -24,9 +25,9 @@ export default class PokeballFilter {
         this.ball = ko.observable(ball);
     }
 
-    test(pokemon: PokeballFilterOptions) {
-        Object.entries(this.options).every(
-            ([key, value]) => pokemon[key] === value,
+    test(data: PokeballFilterOptions) {
+        return Object.entries(this.options).every(
+            ([key, value]) => data[key] === value,
         );
     }
 
@@ -34,6 +35,7 @@ export default class PokeballFilter {
         return {
             name: this.name,
             options: this.options,
+            ball: this.ball(),
         };
     }
 }
