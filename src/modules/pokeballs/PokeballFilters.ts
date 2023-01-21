@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this */
 import { ObservableArray } from 'knockout';
 import { Feature } from '../DataStore/common/Feature';
-import { Pokerus } from '../GameConstants';
+import { Pokeball, Pokerus } from '../GameConstants';
 import PokeballFilter, { PokeballFilterParams } from './PokeballFilter';
 
 export default class PokeballFilters implements Feature {
@@ -10,9 +10,9 @@ export default class PokeballFilters implements Feature {
     defaults = {};
 
     public presets: PokeballFilterParams[] = [
-        { name: 'New Shiny', options: { shiny: true, caught: false } },
-        { name: 'New', options: { caught: false } },
-        { name: 'Caught Shiny', options: { shiny: true, caught: true } },
+        { name: 'New Shiny', options: { shiny: true, caught: false }, ball: Pokeball.Pokeball },
+        { name: 'New', options: { caught: false }, ball: Pokeball.Pokeball },
+        { name: 'Caught Shiny', options: { shiny: true, caught: true }, ball: Pokeball.Pokeball },
         { name: 'Caught Contagious', options: { caught: true, pokerus: Pokerus.Contagious } },
         { name: 'Caught', options: { caught: true } },
     ];
