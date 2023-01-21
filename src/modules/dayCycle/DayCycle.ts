@@ -9,7 +9,7 @@ export default class DayCycle {
     public static currentDayCyclePart: Computed<DayCyclePart> = ko.pureComputed(() => {
         const currentHour = GameHelper.currentTime().getHours();
 
-        return Number(Object.entries(DayCycleStartHours).reverse().find(([, startHour]) => startHour <= currentHour)?.[0] ?? DayCyclePart.Night);
+        return Number(Object.entries(DayCycleStartHours).reverse().find(([, startHour]) => startHour <= currentHour)?.[0] ?? Object.keys(DayCycleStartHours).slice(-1));
     });
 
     public static image: Computed<string> = ko.pureComputed(() => {

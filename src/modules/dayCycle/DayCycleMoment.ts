@@ -10,19 +10,14 @@ export default class DayCycleMoment {
     ) { }
 
     get tooltip(): string {
-        const tooltip = [];
-
         const dayCycleStartHours = Object.entries(DayCycleStartHours);
-        dayCycleStartHours.forEach(([dayCyclePart, startHour], index) => {
+        return dayCycleStartHours.map(([dayCyclePart, startHour], index) => {
             const [, endHour] = dayCycleStartHours[index + 1] || dayCycleStartHours[0];
+            const content = `${DayCyclePart[dayCyclePart]}: ${GameHelper.twoDigitNumber(startHour)}:00 - ${GameHelper.twoDigitNumber(endHour)}:00`;
 
-            if (DayCyclePart[dayCyclePart] === DayCyclePart[this.part]) {
-                tooltip.push(`<span class="text-success"><b>${DayCyclePart[dayCyclePart]}: ${GameHelper.twoDigitNumber(startHour)}:00 - ${GameHelper.twoDigitNumber(endHour)}:00</b></span>`);
-            } else {
-                tooltip.push(`${DayCyclePart[dayCyclePart]}: ${GameHelper.twoDigitNumber(startHour)}:00 - ${GameHelper.twoDigitNumber(endHour)}:00`);
-            }
-        });
-
-        return tooltip.join('<br>');
+            return DayCyclePart[dayCyclePart] === DayCyclePart[this.part]
+                ? `<span class="text-success"><b>${content}</b></span>`
+                : content;
+        }).join('<br>');
     }
 }
