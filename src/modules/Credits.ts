@@ -811,7 +811,7 @@ export const SpriteCredits: Credit[] = [
         resources: [
             'Dexio (Gen 6)',
         ],
-		// Notes: Permission given if credited.
+        // Notes: Permission given if credited.
     },
     {
         name: 'Zender1752',

@@ -4176,7 +4176,7 @@ const DendemilleWolfLover = new NPC('Worrisome Wolf-loving Woman', [
     'But now that I have done so, their behaviour has taken a... regrettable turn.',
     'When storms come along the horizon, they\'ll run en masse out to Route 16.',
     'They fortunately do return home when the weather changes, at least. I wonder what sort of creature is calling them? A strong Pokémon, perhaps?',
-    'I\'ve been debating asking someone else to collect five hundred of their own Electrike and investigate, but if it can call such a fearsome pack with it\'s presence alone, I don\'t imagine anyone less than Diantha herself could handle it.',
+    'I\'ve been debating asking someone else to collect five hundred of their own Electrike and investigate, but if it can call such a fearsome pack with its presence alone, I don\'t imagine anyone less than Diantha herself could handle it.',
 ], {image: 'assets/images/trainers/Madame.png',
 });
 
