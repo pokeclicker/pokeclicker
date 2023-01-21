@@ -154,6 +154,10 @@ export default class GameHelper {
         return `${Object.entries(changes).reduce((filename, [format, value]) => filename.replace(format, value), nameFormat)}${isBackup ? ' Backup' : ''}.txt`;
     }
 
+    public static escapeStringRegex(s: string): string {
+        return s.replace(/[/\-\\^$*+?.()|[\]{}]/g, '\\$&');
+    }
+
     public static twoDigitNumber(n: number): string {
         // For use in clocks / showing time
         // Turns 4 into 04, does nothing to 23, turns 173 into 73
