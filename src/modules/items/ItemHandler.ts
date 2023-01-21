@@ -51,6 +51,15 @@ export default class ItemHandler {
             });
         }
 
+        const partyPokemon = App.game.party.getPokemonByName(this.pokemonSelected());
+        if (partyPokemon.breeding && App.game.challenges.list.realEvolutions.active()) {
+            // If the real evolution challenge is active, we prevent using stones on Pokémon in the hatchery to prevent exploits
+            return Notifier.notify({
+                message: 'You can\'t use an evolution item on a Pokémon if it\'s in the hatchery...',
+                type: NotificationConstants.NotificationOption.danger,
+            });
+        }
+
         const amountTotal = Math.min(this.amountSelected(), player.itemList[this.stoneSelected()]());
 
         if (!amountTotal) {
