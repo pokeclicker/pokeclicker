@@ -4093,9 +4093,18 @@ const SnowbelleCityShop = new Shop([
 //Kalos NPCs
 
 const LumioseEngineer = new NPC('Engineer', [
-    'I\'m glad to be back in the city after so long at the Power Plant; it\'s so dusty out there!.',
+    'I\'m glad to be back in the city after so long at the Power Plant; it\'s so dusty out there!',
     'Rumor has it that if you conquer the Kalos Power Plant enough times, a strong Pokémon made out of Fire and Water will challenge you. But I bet you’d have to be the Champion before it finds you worthy… I certainly have never seen it!',
 ]);
+
+const LumioseDexio = new NPC('Dexio', [
+    'Hey there! I\'m one of Professor Sycamore\'s assistants. If you\'ve made it to Kalos, you probably have a pretty impressive Pokédex by now, right?',
+    'When you\'ve got your Pokédex open, you can click on a Pokémon\'s image to see more detailed stats about the Pokémon.',
+    'Even if you don\'t remember details like how many times you\'ve encountered a particular species in the wild, or how many times you\'ve captured a Pokémon, your Pokédex does!',
+    'And if some of the rumours about Mega Stones are true... it\'ll be worth keeping track of those sorts of things.',
+], {
+    image: 'assets/images/npcs/Dexio (Gen 6).png',
+});
 
 const CamphrierFlabébéEnthusiast = new NPC('Flabébé Enthusiast', [
     'Ah, isn\'t Flabébé such an eye-catching Pokémon? All these different lovely colors…',
@@ -4153,7 +4162,7 @@ const LaverreGengariteAster2 = new NPC('Hex Maniac Aster', [
     requirement: new TemporaryBattleRequirement('Hex Maniac Aster'),
 });
 
-const DendemilleDogLover = new NPC('Dubious Dog-loving Gentleman', [
+const DendemilleDogLover = new NPC('Dubious Dog-loving Duke', [
     'Dog Pokémon are the best of all! I\'m particularly fond of Houndour - I\'ve caught about five hundred of them.',
     'But recently, now that I\'ve got so many Houndour, they have been acting rather curiously.',
     'When the weather turns sunny, they\'ll all run barking out onto Route 16. Honestly, it\'s quite a racket, and has gotten me into no small amount of trouble.',
@@ -4245,7 +4254,7 @@ TownList['Lumiose City'] = new Town(
     [TemporaryBattleList['Sycamore 1'], TemporaryBattleList['Tierno 1'], DepartmentStoreShop, FriseurFurfrouShop, TemporaryBattleList.AZ, TemporaryBattleList.Merilyn, TemporaryBattleList['Grand Duchess Diantha']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 4)],
-        npcs: [ProfSycamore, LumioseEngineer],
+        npcs: [ProfSycamore, LumioseDexio, LumioseEngineer],
     }
 );
 TownList['Camphrier Town'] = new Town(
