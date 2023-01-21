@@ -24,6 +24,7 @@ class Game {
         public profile: Profile,
         public breeding: Breeding,
         public pokeballs: Pokeballs,
+        public pokeballFilters: PokeballFilters,
         public wallet: Wallet,
         public keyItems: KeyItems,
         public badgeCase: BadgeCase,
@@ -432,7 +433,7 @@ class Game {
                     Notifier.notify({
                         title: 'Welcome Time Traveller!',
                         message: `Please ensure you keep a backup of your old save as travelling through time can cause some serious problems.
-                        
+
                         Any Pokémon you may have obtained in the future could cease to exist which could corrupt your save file!`,
                         type: NotificationConstants.NotificationOption.danger,
                         timeout: GameConstants.HOUR,

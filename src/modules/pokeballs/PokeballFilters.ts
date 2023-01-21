@@ -1,14 +1,21 @@
 /* eslint-disable class-methods-use-this */
 import { ObservableArray } from 'knockout';
 import { Feature } from '../DataStore/common/Feature';
-import PokeballFilter from './PokeballFilter';
+import { Pokerus } from '../GameConstants';
+import PokeballFilter, { PokeballFilterParams } from './PokeballFilter';
 
 export default class PokeballFilters implements Feature {
     name = 'Pokeball Filters';
     saveKey = 'pokeballFilters';
-    defaults = {
-        list: [],
-    };
+    defaults = {};
+
+    public presets: PokeballFilterParams[] = [
+        { name: 'New Shiny', options: { shiny: true, caught: false } },
+        { name: 'New', options: { caught: false } },
+        { name: 'Caught Shiny', options: { shiny: true, caught: true } },
+        { name: 'Caught Contagious', options: { caught: true, pokerus: Pokerus.Contagious } },
+        { name: 'Caught', options: { caught: true } },
+    ];
 
     public list: ObservableArray<PokeballFilter> = ko.observableArray([]);
 
@@ -29,7 +36,11 @@ export default class PokeballFilters implements Feature {
             return;
         }
 
-        json.list?.forEach((filterConfig) => {
+        const list: PokeballFilterParams[] = json.list.length > 0
+            ? json.list
+            : this.presets;
+
+        list.forEach((filterConfig) => {
             this.list.push(new PokeballFilter(
                 filterConfig.name,
                 filterConfig.options,

@@ -1,10 +1,15 @@
 import { Pokerus } from '../GameConstants';
 
-interface PokeballFilterOptions {
+export type PokeballFilterOptions = {
     shiny?: boolean;
     caught?: boolean;
-    pokerus?: Pokerus
-}
+    pokerus?: Pokerus;
+};
+
+export type PokeballFilterParams = {
+    name: PokeballFilter['name'];
+    options: PokeballFilter['options'];
+};
 
 export default class PokeballFilter {
     constructor(
