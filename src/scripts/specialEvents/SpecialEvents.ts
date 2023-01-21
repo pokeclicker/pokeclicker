@@ -42,11 +42,13 @@ class SpecialEvents implements Feature {
 // Create our events here for now (yearly)
 
 // Lunar New Year
-SpecialEvents.newEvent('Lunar New Year', 'Vivillon are everywhere! Two kinds are roaming Kalos, and other ones you\'ve previously caught have returned!',
+SpecialEvents.newEvent('Lunar New Year', 'Vivillon are everywhere! Two kinds are roaming Kalos and later regions, ones you\'ve previously caught have returned, and Poké Ball Vivillon roams an abandoned Megamart...',
     // Start
     new Date(new Date().getFullYear(), 0, 24, 1), () => {
         RoamingPokemonList.add(GameConstants.Region.kalos, 0, new RoamingPokemon('Vivillon (Fancy)'));
         RoamingPokemonList.add(GameConstants.Region.kalos, 0, new RoamingPokemon('Vivillon (Meadow)'));
+        RoamingPokemonList.add(GameConstants.Region.galar, 0, new RoamingPokemon('Vivillon (Fancy)'));
+        RoamingPokemonList.add(GameConstants.Region.alola, 0, new RoamingPokemon('Vivillon (Meadow)'));
         dungeonList['Lake Verity'].bossList.push(new DungeonBossPokemon('Vivillon (Marine)', 96662023, 60, {requirement: new ObtainedPokemonRequirement('Vivillon (Marine)')}));
         dungeonList['Lake Acuity'].bossList.push(new DungeonBossPokemon('Vivillon (Marine)', 96662023, 60, {requirement: new ObtainedPokemonRequirement('Vivillon (Marine)')}));
         dungeonList['Lake Valor'].bossList.push(new DungeonBossPokemon('Vivillon (Marine)', 96662023, 60, {requirement: new ObtainedPokemonRequirement('Vivillon (Marine)')}));
@@ -66,12 +68,14 @@ SpecialEvents.newEvent('Lunar New Year', 'Vivillon are everywhere! Two kinds are
         dungeonList['Mt. Moon'].bossList.push(new DungeonBossPokemon('Vivillon (High Plains)', 96662023, 60, {requirement: new ObtainedPokemonRequirement('Vivillon (High Plains)')}));
         dungeonList['Dragonspiral Tower'].bossList.push(new DungeonBossPokemon('Vivillon (Savanna)', 96662023, 60, {requirement: new ObtainedPokemonRequirement('Vivillon (Savanna)')}));
         dungeonList['Frost Cavern'].bossList.push(new DungeonBossPokemon('Vivillon (Icy Snow)', 96662023, 60, {requirement: new ObtainedPokemonRequirement('Vivillon (Icy Snow)')}));
-        dungeonList['Thrifty Megamart'].bossList.push(new DungeonBossPokemon('Vivillon (Pokéball)', 96662023, 60, {requirement: new ObtainedPokemonRequirement('Vivillon (Pokéball)')}));
+        dungeonList['Thrifty Megamart'].bossList.push(new DungeonBossPokemon('Vivillon (Poké Ball)', 96662023, 60, {requirement: new ObtainedPokemonRequirement('Vivillon (Poké Ball)')}));
     },
     // End
     new Date(new Date().getFullYear(), 1, 7, 23), () => {
         RoamingPokemonList.remove(GameConstants.Region.kalos, 0, 'Vivillon (Fancy)');
         RoamingPokemonList.remove(GameConstants.Region.kalos, 0, 'Vivillon (Meadow)');
+        RoamingPokemonList.remove(GameConstants.Region.galar, 0, 'Vivillon (Fancy)');
+        RoamingPokemonList.remove(GameConstants.Region.alola, 0, 'Vivillon (Meadow)');
         dungeonList['Lake Verity'].bossList = dungeonList['Lake Verity'].bossList.filter(boss => boss.name != 'Vivillon (Marine)' || (boss.name == 'Vivillon (Marine)' && !boss.options?.requirement));
         dungeonList['Lake Acuity'].bossList = dungeonList['Lake Acuity'].bossList.filter(boss => boss.name != 'Vivillon (Marine)' || (boss.name == 'Vivillon (Marine)' && !boss.options?.requirement));
         dungeonList['Lake Valor'].bossList = dungeonList['Lake Valor'].bossList.filter(boss => boss.name != 'Vivillon (Marine)' || (boss.name == 'Vivillon (Marine)' && !boss.options?.requirement));
@@ -91,7 +95,7 @@ SpecialEvents.newEvent('Lunar New Year', 'Vivillon are everywhere! Two kinds are
         dungeonList['Mt. Moon'].bossList = dungeonList['Mt. Moon'].bossList.filter(boss => boss.name != 'Vivillon (High Plains)' || (boss.name == 'Vivillon (High Plains)' && !boss.options?.requirement));
         dungeonList['Dragonspiral Tower'].bossList = dungeonList['Dragonspiral Tower'].bossList.filter(boss => boss.name != 'Vivillon (Savanna)' || (boss.name == 'Vivillon (Savanna)' && !boss.options?.requirement));
         dungeonList['Frost Cavern'].bossList = dungeonList['Frost Cavern'].bossList.filter(boss => boss.name != 'Vivillon (Icy Snow)' || (boss.name == 'Vivillon (Icy Snow)' && !boss.options?.requirement));
-        dungeonList['Thrifty Megamart'].bossList = dungeonList['Thrifty Megamart.'].bossList.filter(boss => boss.name != 'Vivillon (Pokéball)' || (boss.name == 'Vivillon (Pokéball)' && !boss.options?.requirement));
+        dungeonList['Thrifty Megamart'].bossList = dungeonList['Thrifty Megamart'].bossList.filter(boss => boss.name != 'Vivillon (Poké Ball)');
     }
 );
 //Hoopa Day
