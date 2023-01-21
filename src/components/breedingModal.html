@@ -43,7 +43,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                         <div class="form-row collapse" id="breeding-filter">
                             <div class="form-group col-md-6 col-6">
                                 <label>Search</label>
-                                <input autocomplete="off" class="form-control" oninput="BreedingFilters.search.value(new RegExp(`(${this.value})`, 'i'))" placeholder="search here"/>
+                                <input autocomplete="off" class="form-control" oninput="BreedingFilters.search.value(new RegExp(`(${/^\/.+\/$/.test(this.value) ? this.value.slice(1, -1) : GameHelper.escapeStringRegex(this.value)})`, 'i'))" placeholder="search here"/>
                             </div>
                             <div class="form-group col-md-3 col-6">
                                 <label>Category</label>
