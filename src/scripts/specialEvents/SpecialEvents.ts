@@ -46,32 +46,52 @@ SpecialEvents.newEvent('Lunar New Year', 'Vivillon are everywhere! Two kinds are
     // Start
     new Date(new Date().getFullYear(), 0, 24, 1), () => {
         RoamingPokemonList.add(GameConstants.Region.kalos, 0, new RoamingPokemon('Vivillon (Fancy)'));
-		RoamingPokemonList.add(GameConstants.Region.kalos, 0, new RoamingPokemon('Vivillon (Meadow)'));
-		dungeonList['Lake Verity'].bossList.push(new DungeonBossPokemon('Vivillon (Marine)', 96662023, 80, {requirement: new ObtainedPokemonRequirement('Vivillon (Marine)')}));
-		dungeonList['Lake Acuity'].bossList.push(new DungeonBossPokemon('Vivillon (Marine)', 96662023, 80, {requirement: new ObtainedPokemonRequirement('Vivillon (Marine)')}));
-		dungeonList['Lake Valor'].bossList.push(new DungeonBossPokemon('Vivillon (Marine)', 96662023, 80, {requirement: new ObtainedPokemonRequirement('Vivillon (Marine)')}));
-		dungeonList['Cerulean Cave'].bossList.push(new DungeonBossPokemon('Vivillon (Modern)', 96662023, 80, {requirement: new ObtainedPokemonRequirement('Vivillon (Modern)')}));
-		dungeonList['Moor of Icirrus'].bossList.push(new DungeonBossPokemon('Vivillon (Jungle)', 96662023, 80, {requirement: new ObtainedPokemonRequirement('Vivillon (Jungle)')}));
-		dungeonList['Dark Cave'].bossList.push(new DungeonBossPokemon('Vivillon (Monsoon)', 96662023, 80, {requirement: new ObtainedPokemonRequirement('Vivillon (Monsoon)')}));
-		dungeonList['Poké Ball Factory'].bossList.push(new DungeonBossPokemon('Vivillon (Tundra)', 96662023, 80, {requirement: new ObtainedPokemonRequirement('Vivillon (Tundra)')}));
-		dungeonList['Mt. Chimney Crater'].bossList.push(new DungeonBossPokemon('Vivillon (Sun)', 96662023, 80, {requirement: new ObtainedPokemonRequirement('Vivillon (Sun)')}));
-		dungeonList['Sprout Tower'].bossList.push(new DungeonBossPokemon('Vivillon (Archipelago)', 96662023, 80, {requirement: new ObtainedPokemonRequirement('Vivillon (Archipelago)')}));
-		dungeonList['Lost Hotel'].bossList.push(new DungeonBossPokemon('Vivillon (Elegant)', 96662023, 80, {requirement: new ObtainedPokemonRequirement('Vivillon (Elegant)')}));
-		dungeonList['Dreamyard'].bossList.push(new DungeonBossPokemon('Vivillon (Ocean)', 96662023, 80, {requirement: new ObtainedPokemonRequirement('Vivillon (Ocean)')}));
-		dungeonList['New Mauville'].bossList.push(new DungeonBossPokemon('Vivillon (Continental)', 96662023, 80, {requirement: new ObtainedPokemonRequirement('Vivillon (Continental)')}));
-		dungeonList['Eterna Forest'].bossList.push(new DungeonBossPokemon('Vivillon (River)', 96662023, 80, {requirement: new ObtainedPokemonRequirement('Vivillon (River)')}));
-		dungeonList['Sky Pillar'].bossList.push(new DungeonBossPokemon('Vivillon (Polar)', 96662023, 80, {requirement: new ObtainedPokemonRequirement('Vivillon (Polar)')}));
-		dungeonList['Relic Castle'].bossList.push(new DungeonBossPokemon('Vivillon (Sandstorm)', 96662023, 80, {requirement: new ObtainedPokemonRequirement('Vivillon (Sandstorm)')}));
-		dungeonList['Flower Paradise'].bossList.push(new DungeonBossPokemon('Vivillon (Garden)', 96662023, 80, {requirement: new ObtainedPokemonRequirement('Vivillon (Garden)')}));
-		dungeonList['Mt. Moon'].bossList.push(new DungeonBossPokemon('Vivillon (High Plains)', 96662023, 80, {requirement: new ObtainedPokemonRequirement('Vivillon (High Plains)')}));
-		dungeonList['Dragonspiral Tower'].bossList.push(new DungeonBossPokemon('Vivillon (Savanna)', 96662023, 80, {requirement: new ObtainedPokemonRequirement('Vivillon (Savanna)')}));
-		dungeonList['Frost Cavern'].bossList.push(new DungeonBossPokemon('Vivillon (Icy Snow)', 96662023, 80, {requirement: new ObtainedPokemonRequirement('Vivillon (Icy Snow)')}));
-		dungeonList['Thrifty Megamart'].bossList.push(new DungeonBossPokemon('Vivillon (Pokéball)', 96662023, 80, {requirement: new ObtainedPokemonRequirement('Vivillon (Pokéball)')}));
+        RoamingPokemonList.add(GameConstants.Region.kalos, 0, new RoamingPokemon('Vivillon (Meadow)'));
+        dungeonList['Lake Verity'].bossList.push(new DungeonBossPokemon('Vivillon (Marine)', 96662023, 60, {requirement: new ObtainedPokemonRequirement('Vivillon (Marine)')}));
+        dungeonList['Lake Acuity'].bossList.push(new DungeonBossPokemon('Vivillon (Marine)', 96662023, 60, {requirement: new ObtainedPokemonRequirement('Vivillon (Marine)')}));
+        dungeonList['Lake Valor'].bossList.push(new DungeonBossPokemon('Vivillon (Marine)', 96662023, 60, {requirement: new ObtainedPokemonRequirement('Vivillon (Marine)')}));
+        dungeonList['Cerulean Cave'].bossList.push(new DungeonBossPokemon('Vivillon (Modern)', 96662023, 60, {requirement: new ObtainedPokemonRequirement('Vivillon (Modern)')}));
+        dungeonList['Moor of Icirrus'].bossList.push(new DungeonBossPokemon('Vivillon (Jungle)', 96662023, 60, {requirement: new ObtainedPokemonRequirement('Vivillon (Jungle)')}));
+        dungeonList['Dark Cave'].bossList.push(new DungeonBossPokemon('Vivillon (Monsoon)', 96662023, 60, {requirement: new ObtainedPokemonRequirement('Vivillon (Monsoon)')}));
+        dungeonList['Poké Ball Factory'].bossList.push(new DungeonBossPokemon('Vivillon (Tundra)', 96662023, 60, {requirement: new ObtainedPokemonRequirement('Vivillon (Tundra)')}));
+        dungeonList['Mt. Chimney Crater'].bossList.push(new DungeonBossPokemon('Vivillon (Sun)', 96662023, 60, {requirement: new ObtainedPokemonRequirement('Vivillon (Sun)')}));
+        dungeonList['Sprout Tower'].bossList.push(new DungeonBossPokemon('Vivillon (Archipelago)', 96662023, 60, {requirement: new ObtainedPokemonRequirement('Vivillon (Archipelago)')}));
+        dungeonList['Lost Hotel'].bossList.push(new DungeonBossPokemon('Vivillon (Elegant)', 96662023, 60, {requirement: new ObtainedPokemonRequirement('Vivillon (Elegant)')}));
+        dungeonList.Dreamyard.bossList.push(new DungeonBossPokemon('Vivillon (Ocean)', 96662023, 60, {requirement: new ObtainedPokemonRequirement('Vivillon (Ocean)')}));
+        dungeonList['New Mauville'].bossList.push(new DungeonBossPokemon('Vivillon (Continental)', 96662023, 60, {requirement: new ObtainedPokemonRequirement('Vivillon (Continental)')}));
+        dungeonList['Eterna Forest'].bossList.push(new DungeonBossPokemon('Vivillon (River)', 96662023, 60, {requirement: new ObtainedPokemonRequirement('Vivillon (River)')}));
+        dungeonList['Sky Pillar'].bossList.push(new DungeonBossPokemon('Vivillon (Polar)', 96662023, 60, {requirement: new ObtainedPokemonRequirement('Vivillon (Polar)')}));
+        dungeonList['Relic Castle'].bossList.push(new DungeonBossPokemon('Vivillon (Sandstorm)', 96662023, 60, {requirement: new ObtainedPokemonRequirement('Vivillon (Sandstorm)')}));
+        dungeonList['Flower Paradise'].bossList.push(new DungeonBossPokemon('Vivillon (Garden)', 96662023, 60, {requirement: new ObtainedPokemonRequirement('Vivillon (Garden)')}));
+        dungeonList['Mt. Moon'].bossList.push(new DungeonBossPokemon('Vivillon (High Plains)', 96662023, 60, {requirement: new ObtainedPokemonRequirement('Vivillon (High Plains)')}));
+        dungeonList['Dragonspiral Tower'].bossList.push(new DungeonBossPokemon('Vivillon (Savanna)', 96662023, 60, {requirement: new ObtainedPokemonRequirement('Vivillon (Savanna)')}));
+        dungeonList['Frost Cavern'].bossList.push(new DungeonBossPokemon('Vivillon (Icy Snow)', 96662023, 60, {requirement: new ObtainedPokemonRequirement('Vivillon (Icy Snow)')}));
+        dungeonList['Thrifty Megamart'].bossList.push(new DungeonBossPokemon('Vivillon (Pokéball)', 96662023, 60, {requirement: new ObtainedPokemonRequirement('Vivillon (Pokéball)')}));
     },
     // End
     new Date(new Date().getFullYear(), 1, 7, 23), () => {
         RoamingPokemonList.remove(GameConstants.Region.kalos, 0, 'Vivillon (Fancy)');
         RoamingPokemonList.remove(GameConstants.Region.kalos, 0, 'Vivillon (Meadow)');
+        dungeonList['Lake Verity'].bossList = dungeonList['Lake Verity'].bossList.filter(boss => boss.name != 'Vivillon (Marine)' || (boss.name == 'Vivillon (Marine)' && !boss.options?.requirement));
+        dungeonList['Lake Acuity'].bossList = dungeonList['Lake Acuity'].bossList.filter(boss => boss.name != 'Vivillon (Marine)' || (boss.name == 'Vivillon (Marine)' && !boss.options?.requirement));
+        dungeonList['Lake Valor'].bossList = dungeonList['Lake Valor'].bossList.filter(boss => boss.name != 'Vivillon (Marine)' || (boss.name == 'Vivillon (Marine)' && !boss.options?.requirement));
+        dungeonList['Cerulean Cave'].bossList = dungeonList['Cerulean Cave'].bossList.filter(boss => boss.name != 'Vivillon (Modern)' || (boss.name == 'Vivillon (Modern)' && !boss.options?.requirement));
+        dungeonList['Moor of Icirrus'].bossList = dungeonList['Moor of Icirrus'].bossList.filter(boss => boss.name != 'Vivillon (Jungle)' || (boss.name == 'Vivillon (Jungle)' && !boss.options?.requirement));
+        dungeonList['Dark Cave'].bossList = dungeonList['Dark Cave'].bossList.filter(boss => boss.name != 'Vivillon (Monsoon)' || (boss.name == 'Vivillon (Monsoon)' && !boss.options?.requirement));
+        dungeonList['Poké Ball Factory'].bossList = dungeonList['Poké Ball Factory'].bossList.filter(boss => boss.name != 'Vivillon (Tundra)' || (boss.name == 'Vivillon (Tundra)' && !boss.options?.requirement));
+        dungeonList['Mt. Chimney Crater'].bossList = dungeonList['Mt. Chimney Crater'].bossList.filter(boss => boss.name != 'Vivillon (Sun)' || (boss.name == 'Vivillon (Sun)' && !boss.options?.requirement));
+        dungeonList['Sprout Tower'].bossList = dungeonList['Sprout Tower'].bossList.filter(boss => boss.name != 'Vivillon (Archipelago)' || (boss.name == 'Vivillon (Archipelago)' && !boss.options?.requirement));
+        dungeonList['Lost Hotel'].bossList = dungeonList['Lost Hotel'].bossList.filter(boss => boss.name != 'Vivillon (Elegant)' || (boss.name == 'Vivillon (Elegant)' && !boss.options?.requirement));
+        dungeonList.Dreamyard.bossList = dungeonList.Dreamyard.bossList.filter(boss => boss.name != 'Vivillon (Ocean)' || (boss.name == 'Vivillon (Ocean)' && !boss.options?.requirement));
+        dungeonList['New Mauville'].bossList = dungeonList['New Mauville'].bossList.filter(boss => boss.name != 'Vivillon (Continental)' || (boss.name == 'Vivillon (Continental)' && !boss.options?.requirement));
+        dungeonList['Eterna Forest'].bossList = dungeonList['Eterna Forest'].bossList.filter(boss => boss.name != 'Vivillon (River)' || (boss.name == 'Vivillon (River)' && !boss.options?.requirement));
+        dungeonList['Sky Pillar'].bossList = dungeonList['Sky Pillar'].bossList.filter(boss => boss.name != 'Vivillon (Polar)' || (boss.name == 'Vivillon (Polar)' && !boss.options?.requirement));
+        dungeonList['Relic Castle'].bossList = dungeonList['Relic Castle'].bossList.filter(boss => boss.name != 'Vivillon (Sandstorm)' || (boss.name == 'Vivillon (Sandstorm)' && !boss.options?.requirement));
+        dungeonList['Flower Paradise'].bossList = dungeonList['Flower Paradise'].bossList.filter(boss => boss.name != 'Vivillon (Garden)' || (boss.name == 'Vivillon (Garden)' && !boss.options?.requirement));
+        dungeonList['Mt. Moon'].bossList = dungeonList['Mt. Moon'].bossList.filter(boss => boss.name != 'Vivillon (High Plains)' || (boss.name == 'Vivillon (High Plains)' && !boss.options?.requirement));
+        dungeonList['Dragonspiral Tower'].bossList = dungeonList['Dragonspiral Tower'].bossList.filter(boss => boss.name != 'Vivillon (Savanna)' || (boss.name == 'Vivillon (Savanna)' && !boss.options?.requirement));
+        dungeonList['Frost Cavern'].bossList = dungeonList['Frost Cavern'].bossList.filter(boss => boss.name != 'Vivillon (Icy Snow)' || (boss.name == 'Vivillon (Icy Snow)' && !boss.options?.requirement));
+        dungeonList['Thrifty Megamart'].bossList = dungeonList['Thrifty Megamart.'].bossList.filter(boss => boss.name != 'Vivillon (Pokéball)' || (boss.name == 'Vivillon (Pokéball)' && !boss.options?.requirement));
     }
 );
 //Hoopa Day
