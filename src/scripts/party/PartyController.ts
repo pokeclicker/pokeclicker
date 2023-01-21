@@ -26,7 +26,21 @@ class PartyController {
         return App.game.party.getPokemon(id)?.pokerus ?? GameConstants.Pokerus.Uninfected;
     }
 
-    static getStoneEvolutionsCaughtData(id: number, evoType?: GameConstants.StoneType): { status: CaughtStatus, locked: boolean, lockHint: string }[] {
+    public static getPokemonsWithEvolution(evoType: GameConstants.StoneType): PartyPokemon[] {
+        return App.game.party.caughtPokemon.filter((partyPokemon: PartyPokemon) => {
+            return partyPokemon.evolutions?.filter(
+                (evo) => evo.trigger === EvoTrigger.STONE
+                    && (evo as StoneEvoData).stone == evoType
+                    && PokemonHelper.calcNativeRegion(evo.evolvedPokemon) <= player.highestRegion()
+                    && !evo.restrictions.find(
+                        req => (req instanceof InRegionRequirement && !req.isCurrentlyPossible())
+                            || (req instanceof MaxRegionRequirement && !req.isCompleted())
+                    )
+            ).length > 0;
+        }).sort((a, b) => a.id - b.id);
+    }
+
+    static getStoneEvolutions<T>(id: number, getStatus: (evo: EvoData) => T, evoType?: GameConstants.StoneType): { status: T, locked: boolean, lockHint: string }[] {
         const pokemon = App.game.party.caughtPokemon.find(p => p.id == id);
         if (pokemon) {
             return pokemon.evolutions
@@ -34,7 +48,7 @@ class PartyController {
                     (evo as StoneEvoData).stone === evoType &&
                     PokemonHelper.calcNativeRegion(evo.evolvedPokemon) <= player.highestRegion())
                 .map((evo) => ({
-                    status: this.getCaughtStatusByName(evo.evolvedPokemon),
+                    status: getStatus(evo),
                     locked: !EvolutionHandler.isSatisfied(evo),
                     lockHint: evo.restrictions.filter(r => !r.isCompleted()).map(r => r.hint()).join('<br>'),
                 }));
@@ -42,20 +56,14 @@ class PartyController {
         return [];
     }
 
+    static getStoneEvolutionsCaughtData(id: number, evoType?: GameConstants.StoneType): { status: CaughtStatus, locked: boolean, lockHint: string }[] {
+        const getStatus = (evo: EvoData) => this.getCaughtStatusByName(evo.evolvedPokemon);
+        return this.getStoneEvolutions(id, getStatus, evoType);
+    }
+
     static getStoneEvolutionsPokerusData(id: number, evoType?: GameConstants.StoneType): { status: GameConstants.Pokerus, locked: boolean, lockHint: string }[] {
-        const pokemon = App.game.party.caughtPokemon.find(p => p.id == id);
-        if (pokemon) {
-            return pokemon.evolutions
-                .filter((evo) => evo.trigger === EvoTrigger.STONE &&
-                    (evo as StoneEvoData).stone === evoType &&
-                    PokemonHelper.calcNativeRegion(evo.evolvedPokemon) <= player.highestRegion())
-                .map((evo) => ({
-                    status: this.getPokerusStatusByName(evo.evolvedPokemon),
-                    locked: !EvolutionHandler.isSatisfied(evo),
-                    lockHint: evo.restrictions.filter(r => !r.isCompleted()).map(r => r.hint()).join('<br>'),
-                }));
-        }
-        return [];
+        const getStatus = (evo: EvoData) => this.getPokerusStatusByName(evo.evolvedPokemon);
+        return this.getStoneEvolutions(id, getStatus, evoType);
     }
 
     static hasMultipleStoneEvolutionsAvailable(pokemonName: PokemonNameType, evoType: GameConstants.StoneType) {

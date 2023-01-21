@@ -2,24 +2,14 @@
 import { Computed } from 'knockout';
 import DayCycleMoment from './DayCycleMoment';
 import DayCyclePart from './DayCyclePart';
+import { DayCycleStartHours } from '../GameConstants';
 import GameHelper from '../GameHelper';
 
 export default class DayCycle {
     public static currentDayCyclePart: Computed<DayCyclePart> = ko.pureComputed(() => {
-        const curHour = GameHelper.currentTime().getHours();
-        let dayCyclePart: DayCyclePart;
+        const currentHour = GameHelper.currentTime().getHours();
 
-        if (curHour === 17) {
-            dayCyclePart = DayCyclePart.Dusk;
-        } else if (curHour === 6) {
-            dayCyclePart = DayCyclePart.Dawn;
-        } else if (curHour > 6 && curHour < 17) {
-            dayCyclePart = DayCyclePart.Day;
-        } else {
-            dayCyclePart = DayCyclePart.Night;
-        }
-
-        return dayCyclePart;
+        return Number(Object.entries(DayCycleStartHours).reverse().find(([, startHour]) => startHour <= currentHour)?.[0] ?? Object.keys(DayCycleStartHours).slice(-1));
     });
 
     public static image: Computed<string> = ko.pureComputed(() => {
@@ -34,13 +24,13 @@ export default class DayCycle {
         return DayCycle.dayCycleMoments[DayCycle.currentDayCyclePart()].tooltip;
     });
 
-    public static dayCycleMoments: { [dayCycle in DayCyclePart]?: DayCycleMoment } = {
+    public static dayCycleMoments: Record<DayCyclePart, DayCycleMoment> = {
+        [DayCyclePart.Dawn]:
+            new DayCycleMoment(DayCyclePart.Dawn, '#25b6a0', 'Dawn'),
         [DayCyclePart.Day]:
             new DayCycleMoment(DayCyclePart.Day, '#f4a470', 'Day'),
         [DayCyclePart.Dusk]:
             new DayCycleMoment(DayCyclePart.Dusk, '#93558a', 'Dusk'),
-        [DayCyclePart.Dawn]:
-            new DayCycleMoment(DayCyclePart.Dawn, '#25b6a0', 'Dawn'),
         [DayCyclePart.Night]:
             new DayCycleMoment(DayCyclePart.Night, '#4a6252', 'Night'),
     };

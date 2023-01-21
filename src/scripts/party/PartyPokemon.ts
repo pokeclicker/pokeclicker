@@ -191,6 +191,14 @@ class PartyPokemon implements Saveable {
         }
     }
 
+    public canUseStone(stoneType: GameConstants.StoneType): boolean {
+        return this.evolutions?.filter(
+            (evo) => evo.trigger === EvoTrigger.STONE
+                && (evo as StoneEvoData).stone == stoneType
+                && EvolutionHandler.isSatisfied(evo)
+        ).length > 0;
+    }
+
     public useStone(stoneType: GameConstants.StoneType): boolean {
         const possibleEvolutions: EvoData[] = [];
         for (const evo of this.evolutions) {

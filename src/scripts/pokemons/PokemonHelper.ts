@@ -22,23 +22,6 @@ enum PokemonLocationType {
 }
 
 class PokemonHelper extends TmpPokemonHelper {
-
-    // Can't move to modules yet because it wants to know what a PartyPokemon looks like
-    // TODO: Maybe this one should be on Party too...
-    public static getPokemonsWithEvolution(evoType: GameConstants.StoneType): PartyPokemon[] {
-        return App.game.party.caughtPokemon.filter((partyPokemon: PartyPokemon) => {
-            if (!partyPokemon.evolutions) {
-                return false;
-            }
-            for (const evolution of partyPokemon.evolutions) {
-                if (evolution.trigger === EvoTrigger.STONE && (evolution as StoneEvoData).stone == evoType && EvolutionHandler.isSatisfied(evolution) && PokemonHelper.calcNativeRegion(evolution.evolvedPokemon) <= player.highestRegion()) {
-                    return true;
-                }
-            }
-            return false;
-        }).sort((a, b) => a.id - b.id);
-    }
-
     /*
     PRETTY MUCH ONLY USED BY THE BOT BELOW
     */
