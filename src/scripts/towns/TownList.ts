@@ -340,7 +340,7 @@ const BillsGrandpa2 = new NPC('Bill\'s Grandpa', [
 const BillsGrandpa3 = new NPC('Bill\'s Grandpa', [
     'Oh, the Pokémon was called Oddish? It is adorable! Thank you so much for bringing it to me! Please, accept this Leaf Stone.',
     'By the way, do you know of a sea Pokémon that has a red sphere on its body? You know, the one that\'s shaped like a star?',
-    'When you happen to get one, would you like to come back here so I can see it, please?',
+    'When you get one, could you come back here so I can see it, please?',
 ], {image: 'assets/images/npcs/Bill\'s Grandpa with Eevee.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Bill\'s Grandpa Treasure Hunt', 3), new QuestLineStepCompletedRequirement('Bill\'s Grandpa Treasure Hunt', 5, GameConstants.AchievementOption.less)]),
 });
@@ -348,7 +348,7 @@ const BillsGrandpa3 = new NPC('Bill\'s Grandpa', [
 const BillsGrandpa4 = new NPC('Bill\'s Grandpa', [
     'Ah, you brought it to me. Staryu is the name, you said? It\'s certainly shaped like a star. You are so kind for coming back with it! This Water Stone should be really useful to you.',
     'I was thinking, Bill told me about a Pokémon that is very loyal to its trainer. It\'s supposed to roar well.',
-    'I would really like to meet it, can you stop by when you meet one, please?',
+    'I would really like to meet one, can you stop if you capture one, please?',
 ], {image: 'assets/images/npcs/Bill\'s Grandpa with Eevee.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Bill\'s Grandpa Treasure Hunt', 5), new QuestLineStepCompletedRequirement('Bill\'s Grandpa Treasure Hunt', 7, GameConstants.AchievementOption.less)]),
 });
@@ -356,7 +356,7 @@ const BillsGrandpa4 = new NPC('Bill\'s Grandpa', [
 const BillsGrandpa5 = new NPC('Bill\'s Grandpa', [
     'Ah, so this little puppy is Growlithe? I cannot begin to imagine its roaring! I\'m so happy that you are doing all this for me. Thank you so much! I was saving this Fire Stone for a rainy day, but I want you to have it instead.',
     'Did you think I was done by the way? I wanted to ask if you knew that hugely popular Pokémon? The Pokémon that has a yellow body and red cheeks. I would love to see what it looks like.',
-    'This the one I\'m most excited to meet, so please, come back once you catch it, I will have tea prepared for you.',
+    'This is the one I\'m most excited to meet. Please come back once you catch it, I will have tea prepared for you.',
 ], {image: 'assets/images/npcs/Bill\'s Grandpa with Eevee.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Bill\'s Grandpa Treasure Hunt', 7), new QuestLineStepCompletedRequirement('Bill\'s Grandpa Treasure Hunt', 9, GameConstants.AchievementOption.less)]),
 });
@@ -372,7 +372,7 @@ const BillsGrandpa6 = new NPC('Bill\'s Grandpa', [
 
 const BillsGrandpa7 = new NPC('Bill\'s Grandpa', [
     'As I said, that was one of the best battles I\'ve ever had.',
-    'There is someone I would like to go with you, my partner Eevee.',
+    'There is someone I would like to go with you: my partner Eevee.',
     'I think Eevee is gonna be better with you than with me. I\'m sure that with you Eevee is gonna grow up healthy and strong!',
 ], {image: 'assets/images/npcs/Bill\'s Grandpa without Eevee.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Bill\'s Grandpa Treasure Hunt', 11), new QuestLineStepCompletedRequirement('Bill\'s Grandpa Treasure Hunt', 13, GameConstants.AchievementOption.less)]),

@@ -163,7 +163,7 @@ class QuestLineHelper {
             });
         };
 
-        const talkToBillsGrandpa2 = new TalkToNPCQuest(BillsGrandpa2, 'Show your Jigglypuff back to Bill\'s Grandpa.', MoonStoneReward);
+        const talkToBillsGrandpa2 = new TalkToNPCQuest(BillsGrandpa2, 'Show your Jigglypuff to Bill\'s Grandpa.', MoonStoneReward);
         BillsGrandpaQuestLine.addQuest(talkToBillsGrandpa2);
 
         const blueRound = new CaptureSpecificPokemonQuest('Oddish', 'Catch the desired Pokémon.', 1);
@@ -187,7 +187,7 @@ class QuestLineHelper {
             });
         };
 
-        const talkToBillsGrandpa3 = new TalkToNPCQuest(BillsGrandpa3, 'Show your Oddish back to Bill\'s Grandpa.', LeafStoneReward);
+        const talkToBillsGrandpa3 = new TalkToNPCQuest(BillsGrandpa3, 'Show your Oddish to Bill\'s Grandpa.', LeafStoneReward);
         BillsGrandpaQuestLine.addQuest(talkToBillsGrandpa3);
 
         const redSphere = new CaptureSpecificPokemonQuest('Staryu', 'Catch the desired Pokémon.', 1);
@@ -211,7 +211,7 @@ class QuestLineHelper {
             });
         };
 
-        const talkToBillsGrandpa4 = new TalkToNPCQuest(BillsGrandpa4, 'Show your Staryu back to Bill\'s Grandpa.', WaterStoneReward);
+        const talkToBillsGrandpa4 = new TalkToNPCQuest(BillsGrandpa4, 'Show your Staryu to Bill\'s Grandpa.', WaterStoneReward);
         BillsGrandpaQuestLine.addQuest(talkToBillsGrandpa4);
 
         const loyalRoar = new CaptureSpecificPokemonQuest('Growlithe', 'Catch the desired Pokémon.', 1);
@@ -235,7 +235,7 @@ class QuestLineHelper {
             });
         };
 
-        const talkToBillsGrandpa5 = new TalkToNPCQuest(BillsGrandpa5, 'Show your Growlithe back to Bill\'s Grandpa.', WaterStoneReward);
+        const talkToBillsGrandpa5 = new TalkToNPCQuest(BillsGrandpa5, 'Show your Growlithe to Bill\'s Grandpa.', WaterStoneReward);
         BillsGrandpaQuestLine.addQuest(talkToBillsGrandpa5);
 
         const yellowAndRed = new CaptureSpecificPokemonQuest('Pikachu', 'Catch the desired Pokémon.', 1);
@@ -259,7 +259,7 @@ class QuestLineHelper {
             });
         };
 
-        const talkToBillsGrandpa6 = new TalkToNPCQuest(BillsGrandpa6, 'Show your Pikachu back to Bill\'s Grandpa.', ThunderStoneReward);
+        const talkToBillsGrandpa6 = new TalkToNPCQuest(BillsGrandpa6, 'Show your Pikachu to Bill\'s Grandpa.', ThunderStoneReward);
         BillsGrandpaQuestLine.addQuest(talkToBillsGrandpa6);
 
         const fightBillsGrandpa = new CustomQuest(1, 0, 'Bill\'s Grandpa would like to have a battle with you!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Bill\'s Grandpa')]());
