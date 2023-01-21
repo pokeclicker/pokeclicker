@@ -4,14 +4,11 @@ import DayCyclePart from '../dayCycle/DayCyclePart';
 import DayCycle from '../dayCycle/DayCycle';
 
 export default class DayCyclePartRequirement extends Requirement {
-    private updateTrigger = ko.observable(0);
     constructor(public dayCycleParts: DayCyclePart[], option = AchievementOption.more) {
         super(1, option);
     }
 
     public getProgress(): number {
-        this.updateTrigger();
-
         return Number(this.dayCycleParts.includes(DayCycle.currentDayCyclePart()));
     }
 
