@@ -48,6 +48,8 @@ SpecialEvents.newEvent('Lunar New Year', 'Vivillon are everywhere! Two kinds are
         RoamingPokemonList.add(GameConstants.Region.kalos, 0, new RoamingPokemon('Vivillon (Fancy)'));
         RoamingPokemonList.add(GameConstants.Region.kalos, 0, new RoamingPokemon('Vivillon (Meadow)'));
         RoamingPokemonList.add(GameConstants.Region.galar, 0, new RoamingPokemon('Vivillon (Fancy)'));
+        RoamingPokemonList.add(GameConstants.Region.galar, 2, new RoamingPokemon('Vivillon (Fancy)'));
+        RoamingPokemonList.add(GameConstants.Region.galar, 3, new RoamingPokemon('Vivillon (Fancy)'));
         RoamingPokemonList.add(GameConstants.Region.alola, 0, new RoamingPokemon('Vivillon (Meadow)'));
         dungeonList['Lake Verity'].bossList.push(new DungeonBossPokemon('Vivillon (Marine)', 96662023, 60, {hide:true, requirement: new ObtainedPokemonRequirement('Vivillon (Marine)')}));
         dungeonList['Lake Acuity'].bossList.push(new DungeonBossPokemon('Vivillon (Marine)', 96662023, 60, {hide:true, requirement: new ObtainedPokemonRequirement('Vivillon (Marine)')}));
@@ -75,6 +77,8 @@ SpecialEvents.newEvent('Lunar New Year', 'Vivillon are everywhere! Two kinds are
         RoamingPokemonList.remove(GameConstants.Region.kalos, 0, 'Vivillon (Fancy)');
         RoamingPokemonList.remove(GameConstants.Region.kalos, 0, 'Vivillon (Meadow)');
         RoamingPokemonList.remove(GameConstants.Region.galar, 0, 'Vivillon (Fancy)');
+        RoamingPokemonList.remove(GameConstants.Region.galar, 2, 'Vivillon (Fancy)');
+        RoamingPokemonList.remove(GameConstants.Region.galar, 3, 'Vivillon (Fancy)');
         RoamingPokemonList.remove(GameConstants.Region.alola, 0, 'Vivillon (Meadow)');
         dungeonList['Lake Verity'].bossList = dungeonList['Lake Verity'].bossList.filter(boss => boss.name != 'Vivillon (Marine)' || (boss.name == 'Vivillon (Marine)' && !boss.options?.requirement));
         dungeonList['Lake Acuity'].bossList = dungeonList['Lake Acuity'].bossList.filter(boss => boss.name != 'Vivillon (Marine)' || (boss.name == 'Vivillon (Marine)' && !boss.options?.requirement));
