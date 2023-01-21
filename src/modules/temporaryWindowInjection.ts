@@ -31,6 +31,7 @@ import BreedingFilters from './settings/BreedingFilters';
 import WeatherType from './weather/WeatherType';
 import Weather from './weather/Weather';
 import DayCycle from './dayCycle/DayCycle';
+import DayCyclePart from './dayCycle/DayCyclePart';
 import SeededRand from './utilities/SeededRand';
 import SeededDateRand from './utilities/SeededDateRand';
 import Rand from './utilities/Rand';
@@ -192,6 +193,7 @@ Object.assign(<any>window, {
     WeatherType,
     Weather,
     DayCycle,
+    DayCyclePart,
     SeededRand,
     SeededDateRand,
     Rand,

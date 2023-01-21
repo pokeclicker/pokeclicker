@@ -158,6 +158,12 @@ export default class GameHelper {
         return s.replace(/[/\-\\^$*+?.()|[\]{}]/g, '\\$&');
     }
 
+    public static twoDigitNumber(n: number): string {
+        // For use in clocks / showing time
+        // Turns 4 into 04, does nothing to 23, turns 173 into 73
+        return (`0${n}`).slice(-2);
+    }
+
     private static getTomorrow() {
         const tomorrow = new Date();
         tomorrow.setDate(tomorrow.getDate() + 1);
@@ -166,11 +172,5 @@ export default class GameHelper {
         tomorrow.setSeconds(0);
         tomorrow.setMilliseconds(0);
         return tomorrow;
-    }
-
-    private static twoDigitNumber(n: number): string {
-        // For use in clocks / showing time
-        // Turns 4 into 04, does nothing to 23, turns 173 into 73
-        return (`0${n}`).slice(-2);
     }
 }
