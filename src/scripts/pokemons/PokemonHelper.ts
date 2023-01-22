@@ -311,6 +311,16 @@ class PokemonHelper extends TmpPokemonHelper {
         return dungeons;
     }
 
+    public static getPokemonQuestLineReward(pokemonName: PokemonNameType): Array<string> {
+        const questLines = [];
+        App.game.quests.questLines().forEach(questLine => questLine.quests().forEach(quest => {
+            if ((quest as any).customReward?.toString().includes(`'${pokemonName}'`)) {
+                questLines.push(questLine.name);
+            }
+        }));
+        return questLines;
+    }
+
     public static getPokemonLocations = (pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none) => {
         const encounterTypes = {};
         // Routes
@@ -403,6 +413,12 @@ class PokemonHelper extends TmpPokemonHelper {
         const dungeonReward = PokemonHelper.getPokemonDungeonReward(pokemonName);
         if (dungeonReward.length) {
             encounterTypes[PokemonLocationType.DungeonReward] = dungeonReward;
+        }
+
+        // Quest Line reward
+        const questLineReward = PokemonHelper.getPokemonQuestLineReward(pokemonName);
+        if (questLineReward.length) {
+            encounterTypes[PokemonLocationType.QuestLineReward] = questLineReward;
         }
 
         // Return the list of items
