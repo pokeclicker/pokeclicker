@@ -31,7 +31,7 @@
                     </tr>
                     <tr>
                       <td class="text-left">Size</td>
-                      <td class="text-left tight"><code data-bind="text: sizeUnitConverter[Settings.getSetting('sizeUnits')](App.game.farming.berryData[$data].size)">-</code></td>
+                      <td class="text-left tight"><code data-bind="text: Farming.sizeUnitConverter[SizeUnits[Settings.getSetting('sizeUnits').observableValue()]](App.game.farming.berryData[$data].size)">-</code></td>
                     </tr>
                     <tr>
                       <td class="text-left">Firmness</td>
