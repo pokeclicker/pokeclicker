@@ -1161,7 +1161,7 @@ class QuestLineHelper {
             };
             const vivillonRemove = () => {
                 dungeons.forEach(dungeon => {
-                    dungeonList[dungeon].bossList = dungeonList[dungeon].bossList.filter(boss => boss.name != vivillon);
+                    dungeonList[dungeon].bossList = dungeonList[dungeon].bossList.filter(boss => boss.name != vivillon || (boss.name == vivillon && boss.options?.requirement));
                 });
                 Notifier.notify({
                     title: vivillonQuestLine.name,
