@@ -1264,7 +1264,7 @@ class QuestLineHelper {
             };
             const vivillonRemove = () => {
                 dungeons.forEach(dungeon => {
-                    dungeonList[dungeon].bossList = dungeonList[dungeon].bossList.filter(boss => boss.name != vivillon);
+                    dungeonList[dungeon].bossList = dungeonList[dungeon].bossList.filter(boss => boss.name != vivillon || (boss.name == vivillon && boss.options?.requirement));
                 });
                 Notifier.notify({
                     title: vivillonQuestLine.name,
@@ -2493,7 +2493,7 @@ class QuestLineHelper {
             dungeonList['Petalburg Woods'].bossList.push(new DungeonTrainer('Egg Hunter', [new GymPokemon('Surprise Togepi', 2700000, 100)], { weight: 1, requirement: new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion) }));
         };
         const afterDefeatingTogepiInHoenn = () => {
-            App.game.party.gainPokemonByName(surpriseTogepi.name);
+            App.game.party.gainPokemonByName('Surprise Togepi');
             Notifier.notify({
                 title: findSurpriseTogepiForEasterQuestLine.name,
                 message: 'You found the special Togepi!',
