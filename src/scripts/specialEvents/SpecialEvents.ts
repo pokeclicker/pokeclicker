@@ -44,7 +44,7 @@ class SpecialEvents implements Feature {
 // Lunar New Year
 SpecialEvents.newEvent('Lunar New Year', 'Two kinds of Vivillon are roaming Kalos and later regions, and ones you\'ve previously caught have returned. Check the Photobook in Santalune City for hints!',
     // Start
-    new Date(new Date().getFullYear(), 0, 22, 1), () => {
+    new Date(new Date().getFullYear(), 0, 24, 1), () => {
         RoamingPokemonList.add(GameConstants.Region.kalos, 0, new RoamingPokemon('Vivillon (Fancy)'));
         RoamingPokemonList.add(GameConstants.Region.kalos, 0, new RoamingPokemon('Vivillon (Meadow)'));
         RoamingPokemonList.add(GameConstants.Region.galar, 0, new RoamingPokemon('Vivillon (Fancy)'));
