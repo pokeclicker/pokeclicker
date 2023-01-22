@@ -1,8 +1,8 @@
 enum DayCyclePart {
-    Day = 0,
+    Dawn = 0,
+    Day,
     Dusk,
     Night,
-    Dawn,
 }
 
 export default DayCyclePart;
