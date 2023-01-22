@@ -26,66 +26,36 @@
                             animation: false
                         }
                     "></td>
-                    <td data-bind="template: {
-                        name: 'selectedPokeballDisplayTemplate',
-                        data: $data,
-                    }"></td>
-                    <td data-bind="template: {
-                        name: 'selectedPokeballCountTemplate',
-                        data: $data
-                    }"></td>
+                    <td>
+                        <img class="pokeball-small clickable pokeball-selected"
+                            data-bind="
+                                attr: {src: 'assets/images/pokeball/' + GameConstants.Pokeball[$data.ball()] + '.svg'},
+                                tooltip: {
+                                    title: $data.ball() === GameConstants.Pokeball.None ? 'None' : ItemList[GameConstants.Pokeball[$data.ball()]].displayName,
+                                    trigger: 'hover', animation: false,
+                                    placement: 'right'
+                                },
+                                click: function() {App.game.pokeballs.selectedSelection($data.ball); App.game.pokeballs.selectedTitle($data.name); $('#pokeballSelectorModal').modal('show')}
+                            "
+                        />
+                    </td>
+                    <td data-bind="with: {
+                        count: App.game.pokeballs.getBallQuantity($data?.ball())
+                    }">
+                        <span data-bind="
+                            text: count ? GameConstants.formatNumber(count) : '-',
+                            tooltip: count && {
+                                title: count.toLocaleString('en-US'),
+                                trigger: 'hover',
+                                animation: false
+                            }
+                        "></span>
+                    </td>
                 </tr>
-                <!-- <tr>
-                    <th width="20%" data-toggle="tooltip" title="Previously captured Pokémon will use this ball selection">Caught</th>
-                    <th width="20%" data-toggle="tooltip" title="Pokémon contagious with Pokérus will use this ball selection" data-bind="visible: App.game.keyItems.hasKeyItem(KeyItemType.Pokerus_virus)"><img width="40px" src="assets/images/breeding/pokerus/Contagious.png"/></th>
-                    <th width="20%" data-toggle="tooltip" title="Previously captured Shiny Pokémon will use this ball selection" style="filter: grayscale(80%);">✨</th>
-                    <th width="20%" data-toggle="tooltip" title="Uncaptured Pokémon will use this ball selection">New</th>
-                    <th width="20%" data-toggle="tooltip" title="Uncaptured Shiny Pokémon will use this ball selection">✨</th>
-                </tr>
-                <tr>
-                    <td data-bind="template: {name: 'selectedPokeballDisplayTemplate', data: { 'filter': 'Caught', 'title': 'Already Caught Pokémon' }}"></td>
-                    <td data-bind="template: {name: 'selectedPokeballDisplayTemplate', data: { 'filter': 'Caught Contagious', 'title': 'Already Caught Contagious Pokémon' }}, visible: App.game.keyItems.hasKeyItem(KeyItemType.Pokerus_virus)"></td>
-                    <td data-bind="template: {name: 'selectedPokeballDisplayTemplate', data: { 'filter': 'Caught Shiny', 'title': 'Already Caught Shiny Pokémon' }}"></td>
-                    <td data-bind="template: {name: 'selectedPokeballDisplayTemplate', data: { 'filter': 'New', 'title': 'New Pokémon' }}"></td>
-                    <td data-bind="template: {name: 'selectedPokeballDisplayTemplate', data: { 'filter': 'New Shiny', 'title': 'New Shiny Pokémon' }}"></td>
-                </tr>
-                <tr>
-                    <td data-bind="template: {name: 'selectedPokeballCountTemplate', data: 'Caught' }"></td>
-                    <td data-bind="template: {name: 'selectedPokeballCountTemplate', data: 'Caught Contagious' }, visible: App.game.keyItems.hasKeyItem(KeyItemType.Pokerus_virus)"></td>
-                    <td data-bind="template: {name: 'selectedPokeballCountTemplate', data: 'Caught Shiny' }"></td>
-                    <td data-bind="template: {name: 'selectedPokeballCountTemplate', data: 'New' }"></td>
-                    <td data-bind="template: {name: 'selectedPokeballCountTemplate', data: 'New Shiny' }"></td>
-                </tr> -->
             </tbody>
         </table>
     </div>
-
-    <script type="text/html" id="selectedPokeballDisplayTemplate">
-        <img class="pokeball-small clickable pokeball-selected"
-            data-bind="
-                attr: {src: 'assets/images/pokeball/' + GameConstants.Pokeball[ball()] + '.svg'},
-                tooltip: {
-                    title: ball() === GameConstants.Pokeball.None ? 'None' : ItemList[GameConstants.Pokeball[ball()]].displayName,
-                    trigger: 'hover', animation: false,
-                    placement: 'right'
-                },
-                click: function() {App.game.pokeballs.selectedSelection(ball); App.game.pokeballs.selectedTitle(name); $('#pokeballSelectorModal').modal('show')}
-            "
-        />
-    </script>
-
     <script type="text/html" id="selectedPokeballCountTemplate">
-        <knockout data-bind="with: {
-            count: App.game.pokeballs.getBallQuantity($data?.ball())
-        }">
-            <span data-bind="
-                text: count ? GameConstants.formatNumber(count) : '-',
-                tooltip: count && {
-                    title: count.toLocaleString('en-US'),
-                    trigger: 'hover',
-                    animation: false
-                }
-            "></span>
-        </knockout>
+
     </script>
 </div>
