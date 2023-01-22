@@ -2184,8 +2184,8 @@ class Farming implements Feature {
         return App.game.farming.berryData.filter(berry => berry.firmness === firmness).map(berry => berry.type);
     }
     public static sizeUnitConverter: Record<SizeUnits, ((num: number) => string)> = {
-      [SizeUnits.cm]: (num) => `${num} cm`, // default is cm
-      [SizeUnits.inch]: (num) => `${num / 2.54}\u2033` // inches
+        [SizeUnits.cm]: (num) => `${num} cm`, // default is cm
+        [SizeUnits.inch]: (num) => `${num / 2.54}\u2033`, // inches
     };
 
 
