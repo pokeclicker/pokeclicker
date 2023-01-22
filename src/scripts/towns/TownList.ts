@@ -2983,7 +2983,7 @@ const HappinyWitness5 = new NPC('Pokémon Ranger', [
 
 const HappinyWitness6 = new NPC('Murph', [
     'Me and my buddy Slowpoke are trying to catch a Happiny that just went running into Mt. Coronet.',
-    'It had a blue egg on it\'s belly - I\'ve definitely seen an egg like that before, back in Fiore.',
+    'It had a blue egg on its belly - I\'ve definitely seen an egg like that before, back in Fiore.',
     'My Slowpoke\'s gone ahead, I hope I can catch up to them soon.',
 ], {
     image: 'assets/images/npcs/Murph.png',
