@@ -177,12 +177,39 @@ class Battle {
     }
 
     public static catchPokemon(enemyPokemon: BattlePokemon, route: number, region: GameConstants.Region) {
-        App.game.wallet.gainDungeonTokens(PokemonFactory.routeDungeonTokens(route, region));
+        this.gainTokens(route, region);
         App.game.oakItems.use(OakItemType.Magic_Ball);
         App.game.party.gainPokemonById(enemyPokemon.id, enemyPokemon.shiny, undefined, enemyPokemon.gender);
         const partyPokemon = App.game.party.getPokemon(enemyPokemon.id);
         const epBonus = App.game.pokeballs.getEPBonus(this.pokeball());
         partyPokemon.effortPoints += App.game.party.calculateEffortPoints(partyPokemon, enemyPokemon.shiny, enemyPokemon.ep * epBonus);
+    }
+
+    protected static gainTokens(route: number, region: GameConstants.Region) {
+        let currencyKinds = [GameConstants.Currency.dungeonToken];
+        if (this.pokeball() === GameConstants.Pokeball.Luxuryball) {
+            //currencyKinds = [
+            //  GameConstants.Currency.dungeonToken,
+            //  GameConstants.Currency.money,
+            //  GameConstants.Currency.questPoint,
+            //  GameConstants.Currency.diamond,
+            //  GameConstants.Currency.farmPoint,
+            //  GameConstants.Currency.battlePoint,
+            //  GameConstants.Currency.contestToken,
+            //];
+            currencyKinds = [
+                GameConstants.Currency.dungeonToken,
+                GameConstants.Currency.money,
+                GameConstants.Currency.questPoint,
+                GameConstants.Currency.diamond,
+                GameConstants.Currency.farmPoint,
+                GameConstants.Currency.battlePoint,
+            ];
+        }
+        const currencyUnits = PokemonFactory.routeDungeonTokens(route, region)
+                                / GameConstants.LuxuryBallCurrencyRate[GameConstants.Currency.dungeonToken];
+        const chosenCurrency = currencyKinds[Math.floor(Math.random() * currencyKinds.length)];
+        App.game.wallet.addAmount(new Amount(Math.ceil(currencyUnits * GameConstants.LuxuryBallCurrencyRate[chosenCurrency]), chosenCurrency), false);
     }
 
     static gainItem() {

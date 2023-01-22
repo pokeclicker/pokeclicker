@@ -32,6 +32,8 @@ import SettingOption from './settings/SettingOption';
 import BreedingFilters from './settings/BreedingFilters';
 import WeatherType from './weather/WeatherType';
 import Weather from './weather/Weather';
+import DayCycle from './dayCycle/DayCycle';
+import DayCyclePart from './dayCycle/DayCyclePart';
 import SeededRand from './utilities/SeededRand';
 import SeededDateRand from './utilities/SeededDateRand';
 import Rand from './utilities/Rand';
@@ -98,6 +100,7 @@ import FarmPointsRequirement from './requirements/FarmPointsRequirement';
 import GymBadgeRequirement from './requirements/GymBadgeRequirement';
 import HatchRequirement from './requirements/HatchRequirement';
 import HatcheryHelperRequirement from './requirements/HatcheryHelperRequirement';
+import InRegionRequirement from './requirements/InRegionRequirement';
 import MoneyRequirement from './requirements/MoneyRequirement';
 import MaxLevelOakItemRequirement from './requirements/MaxLevelOakItemRequirement';
 import MaxRegionRequirement from './requirements/MaxRegionRequirement';
@@ -111,6 +114,7 @@ import RouteKillRequirement from './requirements/RouteKillRequirement';
 import SeededDateRequirement from './requirements/SeededDateRequirement';
 import SeviiCaughtRequirement from './requirements/SeviiCaughtRequirement';
 import ShinyPokemonRequirement from './requirements/ShinyPokemonRequirement';
+import StatisticRequirement from './requirements/StatisticRequirement';
 import SubregionRequirement from './requirements/SubregionRequirement';
 import StarterRequirement from './requirements/StarterRequirement';
 import TokenRequirement from './requirements/TokenRequirement';
@@ -192,6 +196,8 @@ Object.assign(<any>window, {
     SettingOption,
     WeatherType,
     Weather,
+    DayCycle,
+    DayCyclePart,
     SeededRand,
     SeededDateRand,
     Rand,
@@ -264,6 +270,7 @@ Object.assign(<any>window, {
     GymBadgeRequirement,
     HatchRequirement,
     HatcheryHelperRequirement,
+    InRegionRequirement,
     MoneyRequirement,
     MaxLevelOakItemRequirement,
     MaxRegionRequirement,
@@ -277,6 +284,7 @@ Object.assign(<any>window, {
     SeededDateRequirement,
     SeviiCaughtRequirement,
     ShinyPokemonRequirement,
+    StatisticRequirement,
     SubregionRequirement,
     StarterRequirement,
     TokenRequirement,
