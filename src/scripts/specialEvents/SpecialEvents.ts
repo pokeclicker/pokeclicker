@@ -42,9 +42,9 @@ class SpecialEvents implements Feature {
 // Create our events here for now (yearly)
 
 // Lunar New Year
-SpecialEvents.newEvent('Lunar New Year', 'Vivillon are everywhere! Two kinds are roaming Kalos and later regions, ones you\'ve previously caught have returned, and Poké Ball Vivillon roams an abandoned Megamart...',
+SpecialEvents.newEvent('Lunar New Year', 'Two kinds of Vivillon are roaming Kalos and later regions, and ones you\'ve previously caught have returned. Check the Photobook in Santalune City for hints!',
     // Start
-    new Date(new Date().getFullYear(), 0, 24, 1), () => {
+    new Date(new Date().getFullYear(), 0, 22, 1), () => {
         RoamingPokemonList.add(GameConstants.Region.kalos, 0, new RoamingPokemon('Vivillon (Fancy)'));
         RoamingPokemonList.add(GameConstants.Region.kalos, 0, new RoamingPokemon('Vivillon (Meadow)'));
         RoamingPokemonList.add(GameConstants.Region.galar, 0, new RoamingPokemon('Vivillon (Fancy)'));
@@ -80,6 +80,7 @@ SpecialEvents.newEvent('Lunar New Year', 'Vivillon are everywhere! Two kinds are
                 })
             );
         });
+        TownList['Santalune City'].npcs.push(VivillonPhotobook);
     },
     // End
     new Date(new Date().getFullYear(), 1, 7, 23), () => {
@@ -114,6 +115,7 @@ SpecialEvents.newEvent('Lunar New Year', 'Vivillon are everywhere! Two kinds are
             dungeonList[location].bossList = dungeonList[location].bossList
                 .filter(boss => boss.name != vivillon || (boss.name == vivillon && !boss.options?.requirement));
         });
+        TownList['Santalune City'].npcs = TownList['Santalune City'].npcs.filter(NPC => NPC.name != 'Vivillon Photobook');
     }
 );
 //Hoopa Day
