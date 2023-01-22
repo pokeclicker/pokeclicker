@@ -2932,7 +2932,7 @@ const ManaphyGoRock = new NPC('Go-Rock Grunt', [
     'But it feels like we\'ve been going in circles! The only reason I know we aren\'t is because every time we reach a similar crossroads, the mushrooms are in different places.',
     'Unless... the mushrooms are moving somehow?',
     '<i>What she\'s describing... could it be they\'re using Parasect? It\'s never a good idea to use living landmarks.</i>',
-    'If you can take out a few of the Parasect, that should quickly corner them.</i>',
+    '<i>If you can take out a few of the Parasect, that should quickly corner them.</i>',
 ], {
     image: 'assets/images/temporaryBattle/Go-Rock Squad Grunt (female).png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 6), new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 8, GameConstants.AchievementOption.less)]),
@@ -3010,7 +3010,7 @@ const HappinyWitness8 = new NPC('Bug Catcher', [
 });
 
 const HappinyWitness9 = new NPC('Go-Rock Pincher', [
-    'Damn, that Happiny got away. Those little friends got me good.',
+    'Damn, that Happiny got away. Just when I had it cornered, a Pichu and a Glameow came out and attacked me.',
     '...Hey, I recognize you! You pinched the egg we pinched in Eterna Forest!',
     'I\'m gonna pinch that Pokémon first, so if you want to try and stop me, you\'ll have to get through my Pokémon!',
 ], {
