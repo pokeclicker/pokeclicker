@@ -55,7 +55,7 @@ export default class PokeballFilters implements Feature {
             return;
         }
 
-        const list: PokeballFilterParams[] = json.list.length > 0
+        const list: PokeballFilterParams[] = json.list?.length > 0
             ? json.list
             : this.presets;
 
