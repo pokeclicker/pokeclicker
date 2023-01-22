@@ -2918,7 +2918,7 @@ const ManaphyBoulders = new NPC('Strange Boulders', [
 const ManaphyGoRockCommander = new NPC('Go-Rock Commander', [
     'You... are you a Pokémon Ranger? ...No? Well, no matter.',
     'Allow me to explain something to you. This egg is meaningful only if we possess it.',
-    'We\'re going to hatch Manaphy from this egg and get it to guide us to it\'s Sea Temple.',
+    'We\'re going to hatch Manaphy from this egg and get it to guide us to its Sea Temple.',
     'With the power contained within, I will become the King of the Sea - far stronger than the old fool guiding us before!',
     '<i>The Commander flees into the forest, with the Go-Rock Grunts covering his escape!</i>',
 ], {
