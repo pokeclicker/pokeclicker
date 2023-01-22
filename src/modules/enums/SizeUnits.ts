@@ -1,7 +1,6 @@
 enum SizeUnits {
-    imperial,
-    sipoint,
-    sicomma,
+    inch,
+    cm,
 }
 
 export default SizeUnits;

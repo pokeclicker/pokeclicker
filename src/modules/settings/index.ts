@@ -106,8 +106,8 @@ Settings.add(new Setting<string>('farmDisplay', 'Farm timer display',
     'ripeDeath'));
 Settings.add(new Setting<string>('sizeUnits', 'Berry size units',
     [
-        new SettingOption('Imperial', 'imperial'),
-        new SettingOption('SI (point)', 'sipoint'),
+        new SettingOption('Inches', 'inch'),
+        new SettingOption('Centimeters', 'cm'),
     ],
     'sipoint'));
 Settings.add(new BooleanSetting('currencyMainDisplayReduced', 'Shorten currency amount shown on main screen', false));
