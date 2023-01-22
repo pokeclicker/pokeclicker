@@ -1174,6 +1174,152 @@ TemporaryBattleList['Barry 7'] = new TemporaryBattle(
             Notifier.notify({message: 'Congratulations on beating Barry at his best! Come back to fight him again at any time.'}),
     }
 );
+
+TemporaryBattleList['Manaphy Go-Rock MGrunt 1'] = new TemporaryBattle(
+    'Manaphy Go-Rock MGrunt 1',
+    [
+        new GymPokemon('Graveler', 2920000, 22),
+        new GymPokemon('Graveler', 2920000, 22),
+        new GymPokemon('Graveler', 2920000, 22),
+    ],
+    'Your teamwork is too good!',
+    [new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 2)],
+    undefined,
+    {
+        displayName: 'Go-Rock Squad Grunt',
+        imageName: 'Go-Rock Squad Grunt (male)',
+    }
+);
+
+TemporaryBattleList['Manaphy Go-Rock FGrunt 1'] = new TemporaryBattle(
+    'Manaphy Go-Rock FGrunt 1',
+    [
+        new GymPokemon('Rattata', 2200000, 22),
+        new GymPokemon('Rattata', 2200000, 22),
+        new GymPokemon('Rattata', 2200000, 22),
+        new GymPokemon('Rattata', 2200000, 22),
+    ],
+    'Your battling skills are solid...',
+    [new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 4)],
+    undefined,
+    {
+        displayName: 'Go-Rock Squad Grunt',
+        imageName: 'Go-Rock Squad Grunt (female)',
+    }
+);
+
+TemporaryBattleList['Manaphy Go-Rock MGrunt 2'] = new TemporaryBattle(
+    'Manaphy Go-Rock MGrunt 2',
+    [
+        new GymPokemon('Zubat', 2200000, 22),
+        new GymPokemon('Zubat', 2200000, 22),
+        new GymPokemon('Zubat', 2200000, 22),
+        new GymPokemon('Zubat', 2200000, 22),
+    ],
+    'Darn it! You better remember this!',
+    [new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 5)],
+    undefined,
+    {
+        displayName: 'Go-Rock Squad Grunt',
+        imageName: 'Go-Rock Squad Grunt (male)',
+    }
+);
+
+TemporaryBattleList['Manaphy Go-Rock MGrunt 3'] = new TemporaryBattle(
+    'Manaphy Go-Rock MGrunt 3',
+    [
+        new GymPokemon('Rattata', 2200000, 22),
+        new GymPokemon('Rattata', 2200000, 22),
+        new GymPokemon('Meowth', 4400000, 22),
+    ],
+    'The Go-Rock Squad\'s future looks bleak...',
+    [new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 5)],
+    undefined,
+    {
+        displayName: 'Go-Rock Squad Grunt',
+        imageName: 'Go-Rock Squad Grunt (male)',
+    }
+);
+
+TemporaryBattleList['Manaphy Go-Rock FGrunt 2'] = new TemporaryBattle(
+    'Manaphy Go-Rock FGrunt 2',
+    [new GymPokemon('Scyther', 8800000, 22)],
+    'Bleh to you!',
+    [new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 5)],
+    undefined,
+    {
+        displayName: 'Go-Rock Squad Grunt',
+        imageName: 'Go-Rock Squad Grunt (female)',
+    }
+);
+
+TemporaryBattleList['Manaphy Go-Rock MGrunt 4'] = new TemporaryBattle(
+    'Manaphy Go-Rock MGrunt 4',
+    [
+        new GymPokemon('Zubat', 2200000, 22),
+        new GymPokemon('Zubat', 2200000, 22),
+        new GymPokemon('Zubat', 2200000, 22),
+        new GymPokemon('Politoed', 2800000, 22),
+    ],
+    'Darn it! You better remember this! ...Wait, didn\'t I already say that...?',
+    [new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 8)],
+    undefined,
+    {
+        displayName: 'Go-Rock Squad Grunt',
+        imageName: 'Go-Rock Squad Grunt (male)',
+    }
+);
+
+TemporaryBattleList['Manaphy Go-Rock Commander'] = new TemporaryBattle(
+    'Manaphy Go-Rock Commander',
+    [
+        new GymPokemon('Scyther', 3200000, 25),
+        new GymPokemon('Scyther', 3200000, 25),
+        new GymPokemon('Venusaur', 3500000, 30),
+    ],
+    'Owowow! Okay, okay, I got it! You can have your stupid egg!',
+    [new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 9)],
+    undefined,
+    {
+        displayName: 'Go-Rock Squad Commander',
+        imageName: 'Go-Rock Squad Commander',
+    }
+);
+
+TemporaryBattleList['Manaphy Go-Rock Pincher'] = new TemporaryBattle(
+    'Manaphy Go-Rock Pincher',
+    [
+        new GymPokemon('Poochyena', 5500000, 40),
+        new GymPokemon('Carvanha', 5500000, 40),
+    ],
+    'Argh! With that Manaphy Egg, I thought even an ex-Go-Rock like me could live out the rest of my life in ease! That Happiny took the egg to the south-east, across the water. I wanted to pursue it, but Carvanha are not... comfortable to ride on.',
+    [new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 21)],
+    undefined,
+    {
+        displayName: 'Go-Rock Pokémon Pincher',
+        imageName: 'Go-Rock Squad Grunt (male)',
+    }
+);
+
+TemporaryBattleList['Manaphy Egg Protectors'] = new TemporaryBattle(
+    'Manaphy Egg Protectors',
+    [
+        new GymPokemon('Glameow', 3500000, 40),
+        new GymPokemon('Pichu', 3600000, 40),
+        new GymPokemon('Happiny', 5000000, 45),
+    ],
+    '<i>As you step over the defeated Pokémon, the Manaphy egg glows... and hatches!</i>',
+    [new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 24)],
+    undefined,
+    {
+        displayName: 'Manaphy Egg Protectors',
+        imageName: 'Manaphy Egg',
+        firstTimeRewardFunction: () => {
+            App.game.party.gainPokemonByName('Manaphy');
+        },
+    }
+);
+
 TemporaryBattleList.Zero = new TemporaryBattle(
     'Zero',
     [

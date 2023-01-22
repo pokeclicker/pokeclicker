@@ -7,6 +7,7 @@ class Pokeballs implements Feature {
 
     defaults = {
         alreadyCaughtSelection: GameConstants.Pokeball.None,
+        alreadyCaughtContagiousSelection: GameConstants.Pokeball.None,
         alreadyCaughtShinySelection: GameConstants.Pokeball.Pokeball,
         notCaughtSelection: GameConstants.Pokeball.Pokeball,
         notCaughtShinySelection: GameConstants.Pokeball.Pokeball,
@@ -14,6 +15,7 @@ class Pokeballs implements Feature {
 
     public pokeballs: Pokeball[];
     private _alreadyCaughtSelection: KnockoutObservable<GameConstants.Pokeball>;
+    private _alreadyCaughtContagiousSelection: KnockoutObservable<GameConstants.Pokeball>;
     private _alreadyCaughtShinySelection: KnockoutObservable<GameConstants.Pokeball>;
     private _notCaughtSelection: KnockoutObservable<GameConstants.Pokeball>;
     private _notCaughtShinySelection: KnockoutObservable<GameConstants.Pokeball>;
@@ -107,6 +109,7 @@ class Pokeballs implements Feature {
         ];
         this._alreadyCaughtSelection = ko.observable(this.defaults.alreadyCaughtSelection);
         this._alreadyCaughtShinySelection = ko.observable(this.defaults.alreadyCaughtShinySelection);
+        this._alreadyCaughtContagiousSelection = ko.observable(this.defaults.alreadyCaughtContagiousSelection);
         this._notCaughtSelection = ko.observable(this.defaults.notCaughtSelection);
         this._notCaughtShinySelection = ko.observable(this.defaults.notCaughtShinySelection);
         this.selectedTitle = ko.observable('');
@@ -117,6 +120,7 @@ class Pokeballs implements Feature {
         ([
             this._alreadyCaughtSelection,
             this._alreadyCaughtShinySelection,
+            this._alreadyCaughtContagiousSelection,
             this._notCaughtSelection,
             this._notCaughtShinySelection,
         ]).forEach(selection => {
@@ -146,6 +150,7 @@ class Pokeballs implements Feature {
     public calculatePokeballToUse(id: number, isShiny: boolean): GameConstants.Pokeball {
         const alreadyCaught = App.game.party.alreadyCaughtPokemon(id);
         const alreadyCaughtShiny = App.game.party.alreadyCaughtPokemon(id, true);
+        const contagious = (App.game.party.getPokemon(id)?.pokerus == GameConstants.Pokerus.Contagious);
         const pokemon = PokemonHelper.getPokemonById(id);
         let pref: GameConstants.Pokeball;
 
@@ -161,7 +166,11 @@ class Pokeballs implements Feature {
             if (!alreadyCaught) {
                 pref = this.notCaughtSelection;
             } else {
-                pref = this.alreadyCaughtSelection;
+                if (contagious) {
+                    pref = this.alreadyCaughtContagiousSelection;
+                } else {
+                    pref = this.alreadyCaughtSelection;
+                }
             }
         }
 
@@ -240,6 +249,7 @@ class Pokeballs implements Feature {
         this.notCaughtSelection = json.notCaughtSelection ?? this.defaults.notCaughtSelection;
         this.notCaughtShinySelection = json.notCaughtShinySelection ?? this.defaults.notCaughtShinySelection;
         this.alreadyCaughtSelection = json.alreadyCaughtSelection ?? this.defaults.alreadyCaughtSelection;
+        this.alreadyCaughtContagiousSelection = json.alreadyCaughtContagiousSelection ?? this.defaults.alreadyCaughtContagiousSelection;
         this.alreadyCaughtShinySelection = json.alreadyCaughtShinySelection ?? this.defaults.alreadyCaughtShinySelection;
     }
 
@@ -249,6 +259,7 @@ class Pokeballs implements Feature {
             'notCaughtSelection': this.notCaughtSelection,
             'notCaughtShinySelection': this.notCaughtShinySelection,
             'alreadyCaughtSelection': this.alreadyCaughtSelection,
+            'alreadyCaughtContagiousSelection': this.alreadyCaughtContagiousSelection,
             'alreadyCaughtShinySelection': this.alreadyCaughtShinySelection,
         };
     }
@@ -280,6 +291,14 @@ class Pokeballs implements Feature {
 
     set alreadyCaughtSelection(ball: GameConstants.Pokeball) {
         this._alreadyCaughtSelection(ball);
+    }
+
+    get alreadyCaughtContagiousSelection() {
+        return this._alreadyCaughtContagiousSelection();
+    }
+
+    set alreadyCaughtContagiousSelection(ball: GameConstants.Pokeball) {
+        this._alreadyCaughtContagiousSelection(ball);
     }
 
     get alreadyCaughtShinySelection() {
