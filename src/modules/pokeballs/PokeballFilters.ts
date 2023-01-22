@@ -3,7 +3,8 @@ import { ObservableArray } from 'knockout';
 import { Feature } from '../DataStore/common/Feature';
 import KeyItemType from '../enums/KeyItemType';
 import { Pokeball, Pokerus } from '../GameConstants';
-import PokeballFilter, { PokeballFilterOptions, PokeballFilterParams } from './PokeballFilter';
+import PokeballFilter, { PokeballFilterParams } from './PokeballFilter';
+import { PokeballFilterOptions } from './PokeballFilterOptions';
 
 export default class PokeballFilters implements Feature {
     name = 'Pokeball Filters';

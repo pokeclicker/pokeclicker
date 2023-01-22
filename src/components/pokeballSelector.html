@@ -19,7 +19,12 @@
             <tbody id="pokeballFilters" data-bind="foreach: App.game.pokeballFilters.displayList">
                 <tr>
                     <td><span data-bind="
-                        text: $data.name
+                        text: $data.name,
+                        tooltip: {
+                            title: $data.description,
+                            trigger: 'hover',
+                            animation: false
+                        }
                     "></td>
                     <td data-bind="template: {
                         name: 'selectedPokeballDisplayTemplate',

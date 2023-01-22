@@ -1,12 +1,6 @@
 import { Observable } from 'knockout';
-import { Pokeball, Pokerus } from '../GameConstants';
-
-export type PokeballFilterOptions = {
-    shiny?: boolean;
-    caught?: boolean;
-    caughtShiny?: boolean;
-    pokerus?: Pokerus;
-};
+import { Pokeball } from '../GameConstants';
+import { descriptions, PokeballFilterOptions } from './PokeballFilterOptions';
 
 export type PokeballFilterParams = {
     name: PokeballFilter['name'];
@@ -29,6 +23,14 @@ export default class PokeballFilter {
         return Object.entries(this.options).every(
             ([key, value]) => data[key] === value,
         );
+    }
+
+    get description(): string {
+        return `This filter matches pokemon that: ${
+            Object.entries(this.options)
+                .map(([opt, value]) => descriptions[opt](value))
+                .join('; ')
+        }.`;
     }
 
     toJSON() {
