@@ -80,26 +80,31 @@ SpecialEvents.newEvent('Lunar New Year', 'Vivillon are everywhere! Two kinds are
         RoamingPokemonList.remove(GameConstants.Region.galar, 2, 'Vivillon (Fancy)');
         RoamingPokemonList.remove(GameConstants.Region.galar, 3, 'Vivillon (Fancy)');
         RoamingPokemonList.remove(GameConstants.Region.alola, 0, 'Vivillon (Meadow)');
-        dungeonList['Lake Verity'].bossList = dungeonList['Lake Verity'].bossList.filter(boss => boss.name != 'Vivillon (Marine)' || (boss.name == 'Vivillon (Marine)' && !boss.options?.requirement));
-        dungeonList['Lake Acuity'].bossList = dungeonList['Lake Acuity'].bossList.filter(boss => boss.name != 'Vivillon (Marine)' || (boss.name == 'Vivillon (Marine)' && !boss.options?.requirement));
-        dungeonList['Lake Valor'].bossList = dungeonList['Lake Valor'].bossList.filter(boss => boss.name != 'Vivillon (Marine)' || (boss.name == 'Vivillon (Marine)' && !boss.options?.requirement));
-        dungeonList['Cerulean Cave'].bossList = dungeonList['Cerulean Cave'].bossList.filter(boss => boss.name != 'Vivillon (Modern)' || (boss.name == 'Vivillon (Modern)' && !boss.options?.requirement));
-        dungeonList['Moor of Icirrus'].bossList = dungeonList['Moor of Icirrus'].bossList.filter(boss => boss.name != 'Vivillon (Jungle)' || (boss.name == 'Vivillon (Jungle)' && !boss.options?.requirement));
-        dungeonList['Dark Cave'].bossList = dungeonList['Dark Cave'].bossList.filter(boss => boss.name != 'Vivillon (Monsoon)' || (boss.name == 'Vivillon (Monsoon)' && !boss.options?.requirement));
-        dungeonList['Poké Ball Factory'].bossList = dungeonList['Poké Ball Factory'].bossList.filter(boss => boss.name != 'Vivillon (Tundra)' || (boss.name == 'Vivillon (Tundra)' && !boss.options?.requirement));
-        dungeonList['Mt. Chimney Crater'].bossList = dungeonList['Mt. Chimney Crater'].bossList.filter(boss => boss.name != 'Vivillon (Sun)' || (boss.name == 'Vivillon (Sun)' && !boss.options?.requirement));
-        dungeonList['Sprout Tower'].bossList = dungeonList['Sprout Tower'].bossList.filter(boss => boss.name != 'Vivillon (Archipelago)' || (boss.name == 'Vivillon (Archipelago)' && !boss.options?.requirement));
-        dungeonList['Lost Hotel'].bossList = dungeonList['Lost Hotel'].bossList.filter(boss => boss.name != 'Vivillon (Elegant)' || (boss.name == 'Vivillon (Elegant)' && !boss.options?.requirement));
-        dungeonList.Dreamyard.bossList = dungeonList.Dreamyard.bossList.filter(boss => boss.name != 'Vivillon (Ocean)' || (boss.name == 'Vivillon (Ocean)' && !boss.options?.requirement));
-        dungeonList['New Mauville'].bossList = dungeonList['New Mauville'].bossList.filter(boss => boss.name != 'Vivillon (Continental)' || (boss.name == 'Vivillon (Continental)' && !boss.options?.requirement));
-        dungeonList['Eterna Forest'].bossList = dungeonList['Eterna Forest'].bossList.filter(boss => boss.name != 'Vivillon (River)' || (boss.name == 'Vivillon (River)' && !boss.options?.requirement));
-        dungeonList['Sky Pillar'].bossList = dungeonList['Sky Pillar'].bossList.filter(boss => boss.name != 'Vivillon (Polar)' || (boss.name == 'Vivillon (Polar)' && !boss.options?.requirement));
-        dungeonList['Relic Castle'].bossList = dungeonList['Relic Castle'].bossList.filter(boss => boss.name != 'Vivillon (Sandstorm)' || (boss.name == 'Vivillon (Sandstorm)' && !boss.options?.requirement));
-        dungeonList['Flower Paradise'].bossList = dungeonList['Flower Paradise'].bossList.filter(boss => boss.name != 'Vivillon (Garden)' || (boss.name == 'Vivillon (Garden)' && !boss.options?.requirement));
-        dungeonList['Mt. Moon'].bossList = dungeonList['Mt. Moon'].bossList.filter(boss => boss.name != 'Vivillon (High Plains)' || (boss.name == 'Vivillon (High Plains)' && !boss.options?.requirement));
-        dungeonList['Dragonspiral Tower'].bossList = dungeonList['Dragonspiral Tower'].bossList.filter(boss => boss.name != 'Vivillon (Savanna)' || (boss.name == 'Vivillon (Savanna)' && !boss.options?.requirement));
-        dungeonList['Frost Cavern'].bossList = dungeonList['Frost Cavern'].bossList.filter(boss => boss.name != 'Vivillon (Icy Snow)' || (boss.name == 'Vivillon (Icy Snow)' && !boss.options?.requirement));
-        dungeonList['Thrifty Megamart'].bossList = dungeonList['Thrifty Megamart'].bossList.filter(boss => boss.name != 'Vivillon (Poké Ball)');
+        [
+            ['Lake Verity', 'Vivillon (Marine)'],
+            ['Lake Acuity', 'Vivillon (Marine)'],
+            ['Lake Valor', 'Vivillon (Marine)'],
+            ['Cerulean Cave', 'Vivillon (Modern)'],
+            ['Moor of Icirrus', 'Vivillon (Jungle)'],
+            ['Dark Cave', 'Vivillon (Monsoon)'],
+            ['Poké Ball Factory', 'Vivillon (Tundra)'],
+            ['Mt. Chimney Crater', 'Vivillon (Sun)'],
+            ['Sprout Tower', 'Vivillon (Archipelago)'],
+            ['Lost Hotel', 'Vivillon (Elegant)'],
+            ['Dreamyard', 'Vivillon (Ocean)'],
+            ['New Mauville', 'Vivillon (Continental)'],
+            ['Eterna Forest', 'Vivillon (River)'],
+            ['Sky Pillar', 'Vivillon (Polar)'],
+            ['Relic Castle', 'Vivillon (Sandstorm)'],
+            ['Flower Paradise', 'Vivillon (Garden)'],
+            ['Mt. Moon', 'Vivillon (High Plains)'],
+            ['Dragonspiral Tower', 'Vivillon (Savanna)'],
+            ['Frost Cavern', 'Vivillon (Icy Snow)'],
+            ['Thrifty Megamart', 'Vivillon (Poké Ball)'],
+        ].forEach(([location, vivillon]) => {
+            dungeonList[location].bossList = dungeonList[location].bossList
+                .filter(boss => boss.name != vivillon || (boss.name == vivillon && !boss.options?.requirement));
+        });
     }
 );
 //Hoopa Day
