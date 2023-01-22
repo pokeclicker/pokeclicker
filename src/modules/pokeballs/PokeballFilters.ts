@@ -1,6 +1,7 @@
 /* eslint-disable class-methods-use-this */
 import { ObservableArray } from 'knockout';
 import { Feature } from '../DataStore/common/Feature';
+import KeyItemType from '../enums/KeyItemType';
 import { Pokeball, Pokerus } from '../GameConstants';
 import PokeballFilter, { PokeballFilterOptions, PokeballFilterParams } from './PokeballFilter';
 
@@ -13,11 +14,20 @@ export default class PokeballFilters implements Feature {
         { name: 'New Shiny', options: { shiny: true, caughtShiny: false }, ball: Pokeball.Pokeball },
         { name: 'New', options: { caught: false }, ball: Pokeball.Pokeball },
         { name: 'Caught Shiny', options: { shiny: true, caughtShiny: true }, ball: Pokeball.Pokeball },
-        { name: 'Caught Contagious', options: { caught: true, pokerus: Pokerus.Contagious } },
+        { name: 'Contagious', options: { pokerus: Pokerus.Contagious } },
         { name: 'Caught', options: { caught: true } },
     ];
 
     public list: ObservableArray<PokeballFilter> = ko.observableArray([]);
+    public displayList = ko.pureComputed(
+        () => this.list()
+            .filter((f) => !PokeballFilters.hideFilter(f))
+            .reverse(),
+    );
+
+    public static hideFilter(filter: PokeballFilter) {
+        return filter.options.pokerus !== undefined && !App.game.keyItems.hasKeyItem(KeyItemType.Pokerus_virus);
+    }
 
     initialize() {}
 

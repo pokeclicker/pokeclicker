@@ -50,9 +50,24 @@
 }
 
 #pokeballSelector .card-body {
-    max-height: 200px;
+    max-height: 204px;
 
     span {
         line-height: 32px;
+    }
+
+    table {
+        table-layout: fixed;
+
+        td:nth-child(1), th:nth-child(1) {
+            width: 50%;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        td, th {
+            padding: 0.3rem;
+        }
     }
 }

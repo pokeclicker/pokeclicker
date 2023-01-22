@@ -13,10 +13,10 @@
                 <tr>
                     <th>Name</th>
                     <th>Ball</th>
-                    <th>Amount</th>
+                    <th>Qty</th>
                 </tr>
             </thead>
-            <tbody id="pokeballFilters" data-bind="foreach: App.game.pokeballFilters.list().reverse()">
+            <tbody id="pokeballFilters" data-bind="foreach: App.game.pokeballFilters.displayList">
                 <tr>
                     <td><span data-bind="
                         text: $data.name
