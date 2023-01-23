@@ -431,13 +431,11 @@ class Plot implements Saveable {
 
         if (this.stage() !== PlotStage.Berry) {
             multiplier *= this.auraGrowth();
-        // Handle Death Aura
         } else {
+            multiplier *= this.auraDecay();
+            // Handle Death Aura
             if (this.berry !== BerryType.Kasib) {
                 multiplier *= this.auraDeath();
-                multiplier *= this.auraDecay();
-            } else {
-                multiplier *= this.auraDecay();
             }
         }
 
