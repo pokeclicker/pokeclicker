@@ -63,6 +63,15 @@ export default class KeyItems implements Feature {
                         RegionalStarters[Region.kanto][player.regionStarters[Region.kanto]()],
                     ).pokerus = Pokerus.Contagious;
                     App.game.pokeballs.alreadyCaughtContagiousSelection = App.game.pokeballs.alreadyCaughtSelection;
+                    Information.show({
+                        steps: [
+                            {
+                                element: document.getElementById('pokeballSelector'),
+                                intro: 'You can now choose a different ball for Pokémon which are Contagious with Pokérus. This will be helpful for gaining EVs on those Pokémon.</br></br>Note: If you set the Contagious selector to "Do not catch", you will not catch Contagious pokemon - even if your Caught selector is set to catch Pokémon.',
+                            },
+                        ],
+                        exitOnEsc: false,
+                    });
                 }, 'Pokérus Virus'),
         ];
     }
