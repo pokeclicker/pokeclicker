@@ -6,9 +6,9 @@ import FilterOption from './FilterOption';
 import GameHelper from '../GameHelper';
 
 const PokedexFilters: Record<string, FilterOption> = {
-    name: new FilterOption<string>(
+    name: new FilterOption<RegExp>(
         'Search',
-        ko.observable(''),
+        ko.observable(new RegExp('', 'i')),
     ),
     region: new FilterOption<Region>(
         'Region',

@@ -12,18 +12,21 @@
             <thead>
                 <tr>
                     <th width="20%" data-toggle="tooltip" title="Previously captured Pokémon will use this ball selection">Caught</th>
+                    <th width="20%" data-toggle="tooltip" title="Pokémon contagious with Pokérus will use this ball selection" data-bind="visible: App.game.keyItems.hasKeyItem(KeyItemType.Pokerus_virus)"><img width="40px" src="assets/images/breeding/pokerus/Contagious.png"/></th>
                     <th width="20%" data-toggle="tooltip" title="Previously captured Shiny Pokémon will use this ball selection" style="filter: grayscale(80%);">✨</th>
                     <th width="20%" data-toggle="tooltip" title="Uncaptured Pokémon will use this ball selection">New</th>
                     <th width="20%" data-toggle="tooltip" title="Uncaptured Shiny Pokémon will use this ball selection">✨</th>
                 </tr>
                 <tr>
                     <td data-bind="template: {name: 'selectedPokeballDisplayTemplate', data: { 'value': App.game.pokeballs.alreadyCaughtSelection, 'field': App.game.pokeballs._alreadyCaughtSelection, 'title': 'Already Caught Pokémon' }}"></td>
+                    <td data-bind="template: {name: 'selectedPokeballDisplayTemplate', data: { 'value': App.game.pokeballs.alreadyCaughtContagiousSelection, 'field': App.game.pokeballs._alreadyCaughtContagiousSelection, 'title': 'Already Caught Contagious Pokémon' }}, visible: App.game.keyItems.hasKeyItem(KeyItemType.Pokerus_virus)"></td>
                     <td data-bind="template: {name: 'selectedPokeballDisplayTemplate', data: { 'value': App.game.pokeballs.alreadyCaughtShinySelection, 'field': App.game.pokeballs._alreadyCaughtShinySelection, 'title': 'Already Caught Shiny Pokémon' }}"></td>
                     <td data-bind="template: {name: 'selectedPokeballDisplayTemplate', data: { 'value': App.game.pokeballs.notCaughtSelection, 'field': App.game.pokeballs._notCaughtSelection, 'title': 'New Pokémon' }}"></td>
                     <td data-bind="template: {name: 'selectedPokeballDisplayTemplate', data: { 'value': App.game.pokeballs.notCaughtShinySelection, 'field': App.game.pokeballs._notCaughtShinySelection, 'title': 'New Shiny Pokémon' }}"></td>
                 </tr>
                 <tr>
                     <td data-bind="template: {name: 'selectedPokeballCountTemplate', data: App.game.pokeballs.getBallQuantity(App.game.pokeballs.alreadyCaughtSelection)}"></td>
+                    <td data-bind="template: {name: 'selectedPokeballCountTemplate', data: App.game.pokeballs.getBallQuantity(App.game.pokeballs.alreadyCaughtContagiousSelection)}, visible: App.game.keyItems.hasKeyItem(KeyItemType.Pokerus_virus)"></td>
                     <td data-bind="template: {name: 'selectedPokeballCountTemplate', data: App.game.pokeballs.getBallQuantity(App.game.pokeballs.alreadyCaughtShinySelection)}"></td>
                     <td data-bind="template: {name: 'selectedPokeballCountTemplate', data: App.game.pokeballs.getBallQuantity(App.game.pokeballs.notCaughtSelection)}"></td>
                     <td data-bind="template: {name: 'selectedPokeballCountTemplate', data: App.game.pokeballs.getBallQuantity(App.game.pokeballs.notCaughtShinySelection)}"></td>
