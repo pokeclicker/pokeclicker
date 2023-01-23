@@ -421,10 +421,10 @@ class Plot implements Saveable {
             [MulchType.Freeze_Mulch]: GameConstants.FREEZE_MULCH_MULTIPLIER,
         }[this.mulch] ?? 1;
 
-        multiplier *= this.auraGrowth();
-
+        if (this.stage() !== PlotStage.Berry) {
+            multiplier *= this.auraGrowth();
         // Handle Death Aura
-        if (this.stage() == PlotStage.Berry && this.berry != BerryType.Kasib) {
+        } else if (this.berry !== BerryType.Kasib) {
             multiplier *= this.auraDeath();
         }
 

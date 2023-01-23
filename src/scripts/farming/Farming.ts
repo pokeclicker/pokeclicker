@@ -604,7 +604,7 @@ class Farming implements Feature {
                 'This Berry has a refreshing flavor that strikes a good balance of dryness and sourness. It tastes better chilled.',
                 'This Berry slows the growth of nearby Berries.',
             ],
-            new Aura(AuraType.Growth, [0.9, 0.8, 0.7]),
+            new Aura(AuraType.Death, [0.9, 0.8, 0.7]),
             ['Jynx', 'Swinub', 'Spheal', 'Snover', 'Snom']
         );
 
@@ -755,7 +755,7 @@ class Farming implements Feature {
                 'If a large enough volume of this Berry is boiled down, its bitterness fades away. It makes a good jam.',
                 'This Berry requires a lot of energy to grow, stealing away nutrients from nearby plots.',
             ],
-            new Aura(AuraType.Growth, [0.8, 0.6, 0.5]),
+            new Aura(AuraType.Death, [0.8, 0.6, 0.5]),
             ['Dratini', 'Bagon', 'Gible', 'Druddigon', 'Drampa', 'Applin']
         );
 
