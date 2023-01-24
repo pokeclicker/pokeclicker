@@ -1831,8 +1831,8 @@ export enum ExtraAchievementCategories {
     magikarpJump,
 }
 export const DayCycleStartHours: Record<DayCyclePart, number> = {
-    [DayCyclePart.Dawn]: 6,
-    [DayCyclePart.Day]: 7,
+    [DayCyclePart.Dawn]: 5,
+    [DayCyclePart.Day]: 6,
     [DayCyclePart.Dusk]: 17,
     [DayCyclePart.Night]: 18,
 };
