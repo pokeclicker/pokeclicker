@@ -66,3 +66,6 @@ When exporting, use the following settings:
 ## NOTES:
 All maps must be 100 x 60 tiles, 16px per tile.
 Export image size must be 1600 x 960px.
+
+## TIPS:
+You can see the coordinates in the bottom left when hovering your cursor over the map.
