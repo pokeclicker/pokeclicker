@@ -3679,6 +3679,7 @@ const VitaminRefundCode = new NPC('Pokémon Breeder', [
     'I used to have my Pokémon maxed out on Protein, but then I found out about the new Vitamins!',
     'I swapped out some of my Proteins for the new Vitamins, but then I was left with a bunch of extra Protein I couldn\'t use.',
     'Luckily I was able to use the code REFUND-VITAMINS to get my money back! Too bad it only has one use though...',
+    'It will also only refund Vitamins you bought after hitting the price cap.',
 ]);
 
 //Unova Towns

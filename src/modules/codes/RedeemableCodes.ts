@@ -13,6 +13,7 @@ import ObtainedPokemonRequirement from '../requirements/ObtainedPokemonRequireme
 import RedeemableCode from './RedeemableCode';
 import GameHelper from '../GameHelper';
 import Amount from '../wallet/Amount';
+import Item from '../items/Item';
 
 export default class RedeemableCodes implements Saveable {
     defaults: Record<string, any>;
@@ -96,38 +97,56 @@ export default class RedeemableCodes implements Saveable {
             }, new MultiRequirement([new MaxRegionRequirement(Region.kalos), new ObtainedPokemonRequirement('Ampharos')])),
             new RedeemableCode('refund-vitamins', 1316108150, false, async () => {
                 const vitamins = GameHelper.enumStrings(VitaminType).map((name) => ItemList[name]);
-                const toRefund = vitamins.reduce((totals, item) => {
+                const toRefund = vitamins.map((item) => {
+                    const totalUsed = App.game.party.caughtPokemon.reduce(
+                        (total, pokemon) => total + pokemon.vitaminsUsed[item.type](), 0,
+                    );
+                    const totalNotUsed = player.itemList[item.name]();
+                    const capPriceAt = Math.ceil(Math.log(100) / Math.log(item.multiplier));
+
+                    let n = 0;
+                    if (totalUsed + totalNotUsed > capPriceAt) {
+                        n = totalUsed > capPriceAt
+                            ? totalNotUsed
+                            : totalNotUsed + totalUsed - capPriceAt;
+                    }
+
+                    return [item, n];
+                }) as [Item, number][];
+
+                const refundAmounts = toRefund.reduce((totals, [item, n]) => {
                     if (totals[item.currency] === undefined) {
                         // eslint-disable-next-line no-param-reassign
                         totals[item.currency] = 0;
                     }
+                    const price = Math.round(item.basePrice * (player.itemMultipliers[item.saveName] || 1));
                     // eslint-disable-next-line no-param-reassign
-                    totals[item.currency] += (player.itemList[item.name]() * item.basePrice);
+                    totals[item.currency] += n * price;
+
                     return totals;
                 }, {} as Record<Currency, number>);
 
                 const refund = await Notifier.confirm({
                     title: 'Refund Unused Vitamins',
                     message: `<p class='text-center'>This will refund ${
-                        vitamins.map((item) => `${
-                            player.itemList[item.name]().toLocaleString('en-US')
+                        toRefund.map(([item, n]) => `${
+                            n.toLocaleString('en-US')
                         } ${item.name}`).join(', ')
                     } for a total of ${
-                        Object.entries(toRefund)
+                        Object.entries(refundAmounts)
                             .map(([curr, amt]) => `${amt.toLocaleString('en-US')} ${Currency[curr]}`)
                             .join(', ')
                     }.</br></br>You can only do this once.</br>Are you sure?</p>`,
                 });
 
                 if (refund) {
-                    vitamins.forEach((item) => {
-                        const amt = player.itemList[item.name]();
+                    toRefund.forEach(([item, n]) => {
+                        player.loseItem(item.name, n);
+                    });
 
-                        if (amt > 0) {
-                            player.loseItem(item.name, amt);
-                            const refundAmt = new Amount(amt * item.basePrice, item.currency);
-                            App.game.wallet.addAmount(refundAmt, true);
-                        }
+                    Object.entries(refundAmounts).forEach(([curr, amt]) => {
+                        const refundAmt = new Amount(amt, Number(curr));
+                        App.game.wallet.addAmount(refundAmt, true);
                     });
 
                     Notifier.notify({
