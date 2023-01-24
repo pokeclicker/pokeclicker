@@ -14,13 +14,21 @@ class Berry {
     public static baseWander: PokemonNameType[] = [
         'Tangela', 'Scyther',
         'Pineco', 'Heracross',
-        'Volbeat', 'Illumise',
-        'Burmy (Plant)', 'Cherubi',
+        'Cherubi',
         'Sewaddle', 'Karrablast',
         'Scatterbug',
         'Cutiefly', 'Bounsweet',
         'Blipbug', 'Gossifleur',
     ];
+
+    public static colorWander: Record<BerryColor, PokemonNameType[]> = {
+        [BerryColor.Red]: ['Ledyba', 'Flabébé (Red)', 'Oricorio (Baile)'],
+        [BerryColor.Purple]: ['Illumise', 'Oricorio (Sensu)'],
+        [BerryColor.Pink]: ['Spewpa', 'Oricorio (Pa\'u)'],
+        [BerryColor.Green]: ['Burmy (Plant)'],
+        [BerryColor.Yellow]: ['Combee', 'Flabébé (Yellow)', 'Oricorio (Pom-Pom)'],
+        [BerryColor.Blue]: ['Volbeat', 'Flabébé (Blue)'],
+    };
 
     constructor(
         public type: BerryType,
@@ -39,7 +47,7 @@ class Berry {
         for (let i = 0; i < 5; i++) {
             this.flavors.push({type: i, value: flavors[i]});
         }
-        this.wander = wander ? Berry.baseWander.concat(wander) : Berry.baseWander;
+        this.wander = Berry.baseWander.concat(Berry.colorWander[this.color], wander ?? []);
     }
 
     get descriptionHTML(): string {

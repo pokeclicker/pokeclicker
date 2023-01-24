@@ -1,3 +1,5 @@
+import DayCyclePart from './dayCycle/DayCyclePart';
+
 export const SECOND = 1000;
 export const MINUTE = SECOND * 60;
 export const HOUR = MINUTE * 60;
@@ -359,6 +361,16 @@ export enum Currency {
     battlePoint,
     contestToken,
 }
+
+export const LuxuryBallCurrencyRate: Record<Currency, number> = {
+    [Currency.money]: 300000,
+    [Currency.questPoint]: 900,
+    [Currency.dungeonToken]: 15000,
+    [Currency.diamond]: 15,
+    [Currency.farmPoint]: 900,
+    [Currency.battlePoint]: 150,
+    [Currency.contestToken]: 900,
+};
 
 export enum TypeEffectiveness {
     Immune,
@@ -1454,6 +1466,15 @@ export const TemporaryBattles = [
     'Barry 5',
     'Barry 6',
     'Barry 7',
+    'Manaphy Go-Rock MGrunt 1',
+    'Manaphy Go-Rock MGrunt 2',
+    'Manaphy Go-Rock MGrunt 3',
+    'Manaphy Go-Rock MGrunt 4',
+    'Manaphy Go-Rock FGrunt 1',
+    'Manaphy Go-Rock FGrunt 2',
+    'Manaphy Go-Rock Commander',
+    'Manaphy Go-Rock Pincher',
+    'Manaphy Egg Protectors',
     'Zero',
     'Hugh 1',
     'Hugh 2',
@@ -1501,6 +1522,7 @@ export const TemporaryBattles = [
     'Calem 2',
     'Calem 3',
     'Calem 4',
+    'Hex Maniac Aster',
     'Sycamore 2',
     'Shauna 2',
     'Tierno 2',
@@ -1808,3 +1830,9 @@ export enum ExtraAchievementCategories {
     sevii,
     magikarpJump,
 }
+export const DayCycleStartHours: Record<DayCyclePart, number> = {
+    [DayCyclePart.Dawn]: 6,
+    [DayCyclePart.Day]: 7,
+    [DayCyclePart.Dusk]: 17,
+    [DayCyclePart.Night]: 18,
+};
