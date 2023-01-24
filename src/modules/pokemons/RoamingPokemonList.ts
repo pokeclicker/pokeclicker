@@ -21,7 +21,7 @@ export default class RoamingPokemonList {
         [[KantoSubRegions.Kanto], [KantoSubRegions.Sevii123, KantoSubRegions.Sevii4567]],
         [[JohtoSubRegions.Johto]],
         [[HoennSubRegions.Hoenn]],
-        [[SinnohSubRegions.Sinnoh]],
+        [[SinnohSubRegions.Sinnoh], [SinnohSubRegions.Hisui]],
         [[UnovaSubRegions.Unova]],
         [[KalosSubRegions.Kalos]],
         [[AlolaSubRegions.MelemeleIsland, AlolaSubRegions.AkalaIsland, AlolaSubRegions.UlaulaIsland, AlolaSubRegions.PoniIsland], [AlolaSubRegions.MagikarpJump]],
