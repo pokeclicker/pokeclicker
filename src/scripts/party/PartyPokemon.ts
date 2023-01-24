@@ -365,7 +365,7 @@ class PartyPokemon implements Saveable {
     }
 
     public hideFromHeldItemList = ko.pureComputed(() => {
-        if (!HeldItem.heldItemSelected().canUse(this)) {
+        if (!HeldItem.heldItemSelected()?.canUse(this)) {
             return true;
         }
         if (!new RegExp(Settings.getSetting('heldItemSearchFilter').observableValue() , 'i').test(this.displayName)) {
