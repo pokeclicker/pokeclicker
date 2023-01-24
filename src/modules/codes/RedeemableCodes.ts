@@ -84,7 +84,7 @@ export default class RedeemableCodes implements Saveable {
                 return true;
             }, new MaxRegionRequirement(Region.johto)),
 
-            new RedeemableCode('eon-ticket', 528036885, false, () => {
+            new RedeemableCode('eon-ticket', 528036885, false, async () => {
                 // Give the player the Eon Ticket
                 App.game.keyItems.gainKeyItem(KeyItemType.Eon_Ticket, true);
                 // Notify that the code was activated successfully
@@ -94,6 +94,8 @@ export default class RedeemableCodes implements Saveable {
                     type: NotificationConstants.NotificationOption.success,
                     timeout: 1e4,
                 });
+
+                return true;
             }, new MaxRegionRequirement(Region.hoenn)),
 
             new RedeemableCode('ampharosite', -512934122, false, async () => {
