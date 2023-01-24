@@ -3675,6 +3675,13 @@ const DreamResearcher2 = new NPC('Dream Researcher', [
     requirement: new TemporaryBattleRequirement('Dream Researcher'),
 });
 
+const VitaminRefundCode = new NPC('Pokémon Breeder', [
+    'I used to have my Pokémon maxed out on Protein, but then I found out about the new Vitamins!',
+    'I swapped out some of my Proteins for the new Vitamins, but then I was left with a bunch of extra Protein I couldn\'t use.',
+    'Luckily I was able to use the code REFUND-VITAMINS to get my money back! Too bad it only has one use though...',
+    'It will also only refund Vitamins you bought after hitting the price cap.',
+]);
+
 //Unova Towns
 TownList['Aspertia City'] = new Town(
     'Aspertia City',
@@ -3892,6 +3899,7 @@ TownList['Nacrene City'] = new Town(
     [NacreneCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Nacrene City'])],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pinwheel Forest'))],
+        npcs: [VitaminRefundCode],
     }
 );
 TownList['Striaton City'] = new Town(
