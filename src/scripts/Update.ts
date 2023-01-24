@@ -1927,8 +1927,10 @@ class Update implements Saveable {
         },
 
         '0.10.9': ({ playerData, saveData }) => {
+
+
             //Marquis Grant
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 129);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 139);
         },
     };
 
