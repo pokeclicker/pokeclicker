@@ -191,6 +191,14 @@ class PartyPokemon implements Saveable {
         }
     }
 
+    public canUseStone(stoneType: GameConstants.StoneType): boolean {
+        return this.evolutions?.filter(
+            (evo) => evo.trigger === EvoTrigger.STONE
+                && (evo as StoneEvoData).stone == stoneType
+                && EvolutionHandler.isSatisfied(evo)
+        ).length > 0;
+    }
+
     public useStone(stoneType: GameConstants.StoneType): boolean {
         const possibleEvolutions: EvoData[] = [];
         for (const evo of this.evolutions) {
@@ -357,12 +365,16 @@ class PartyPokemon implements Saveable {
     }
 
     public hideFromHeldItemList = ko.pureComputed(() => {
-        if (!HeldItem.heldItemSelected().canUse(this)) {
+        if (!HeldItem.heldItemSelected()?.canUse(this)) {
             return true;
         }
         if (!new RegExp(Settings.getSetting('heldItemSearchFilter').observableValue() , 'i').test(this.displayName)) {
             return true;
         }
+        if (Settings.getSetting('heldItemHideHoldingPokemon').observableValue() && this.heldItem()) {
+            return true;
+        }
+
         return false;
     });
 

@@ -13,7 +13,7 @@ import {
     EnvironmentRestrictedLevelEvolution,
     WeatherRestrictedLevelEvolution,
     DayTimedLevelEvolution,
-    TimeRestrictedLevelEvolution,
+    DayCyclePartRestrictedLevelEvolution,
     MegaEvolution,
 } from './evolutions/Methods';
 import BerryType from '../enums/BerryType';
@@ -32,6 +32,7 @@ import Rand from '../utilities/Rand';
 import WeatherType from '../weather/WeatherType';
 import { PokemonNameType } from './PokemonNameType';
 import { setPokemonMap } from './mapProvider';
+import DayCyclePart from '../dayCycle/DayCyclePart';
 
 export const pokemonBabyPrevolutionMap: { [name: string]: PokemonNameType } = {};
 
@@ -136,7 +137,7 @@ export const pokemonList = createPokemonArray(
         'id': 1.02,
         'name': 'Spooky Bulbasaur',
         'catchRate': 25,
-        'type': [PokemonType.Grass],
+        'type': [PokemonType.Grass, PokemonType.Dark],
         'levelType': LevelType.mediumslow,
         'exp': 64,
         'eggCycles': 20,
@@ -220,7 +221,7 @@ export const pokemonList = createPokemonArray(
         'id': 2.02,
         'name': 'Spooky Ivysaur',
         'catchRate': 45,
-        'type': [PokemonType.Grass],
+        'type': [PokemonType.Grass, PokemonType.Dark],
         'levelType': LevelType.mediumslow,
         'exp': 142,
         'eggCycles': 20,
@@ -3764,7 +3765,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 225,
         'eggCycles': 20,
-        // 'evolutions': [MegaEvolution('Gengar', 'Mega Gengar')],
+        'evolutions': [MegaEvolution('Gengar', 'Mega Gengar')],
         'base': {
             'hitpoints': 60,
             'attack': 65,
@@ -4110,6 +4111,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 80,
             'speed': 45,
         },
+        'heldItem': { type: ItemType.item, id: 'Thick_Club' },
     },
     {
         'id': 105.02,
@@ -4128,6 +4130,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 80,
             'speed': 65,
         },
+        'heldItem': { type: ItemType.item, id: 'Thick_Club' },
     },
     {
         'id': 106,
@@ -5788,7 +5791,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 180,
         'eggCycles': 35,
-        // 'evolutions': [MegaEvolution('Aerodactyl', 'Mega Aerodactyl')],
+        'evolutions': [MegaEvolution('Aerodactyl', 'Mega Aerodactyl')],
         'base': {
             'hitpoints': 80,
             'attack': 105,
@@ -6730,7 +6733,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 142,
         'eggCycles': 10,
-        'evolutions': [StoneEvolution('Spooky Togetic', 'Spooky Togekiss', StoneType.Shiny_stone)],
+        'evolutions': [StoneEvolution('Spooky Togetic', 'Spooky Togekiss', StoneType.Dusk_stone)],
         'base': {
             'hitpoints': 55,
             'attack': 40,
@@ -6825,7 +6828,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 230,
         'eggCycles': 20,
-        // 'evolutions': [MegaEvolution('Ampharos', 'Mega Ampharos')],
+        'evolutions': [MegaEvolution('Ampharos', 'Mega Ampharos')],
         'base': {
             'hitpoints': 90,
             'attack': 75,
@@ -6954,6 +6957,23 @@ export const pokemonList = createPokemonArray(
         'exp': 50,
         'eggCycles': 20,
         'evolutions': [LevelEvolution('Hoppip', 'Skiploom', 18)],
+        'base': {
+            'hitpoints': 35,
+            'attack': 35,
+            'specialAttack': 35,
+            'defense': 40,
+            'specialDefense': 55,
+            'speed': 50,
+        },
+    },
+    {
+        'id': 187.01,
+        'name': 'Hoppip (Chimecho)',
+        'catchRate': 255,
+        'type': [PokemonType.Grass, PokemonType.Flying],
+        'levelType': LevelType.mediumslow,
+        'exp': 50,
+        'eggCycles': 20,
         'base': {
             'hitpoints': 35,
             'attack': 35,
@@ -9645,7 +9665,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 233,
         'catchRate': 45,
-        // 'evolutions': [MegaEvolution('Gardevoir', 'Mega Gardevoir')],
+        'evolutions': [MegaEvolution('Gardevoir', 'Mega Gardevoir')],
         'base': {
             'hitpoints': 68,
             'attack': 65,
@@ -10044,7 +10064,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 133,
         'catchRate': 45,
-        // 'evolutions': [MegaEvolution('Sableye', 'Mega Sableye')],
+        'evolutions': [MegaEvolution('Sableye', 'Mega Sableye')],
         'base': {
             'hitpoints': 50,
             'attack': 75,
@@ -10079,7 +10099,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 133,
         'catchRate': 45,
-        // 'evolutions': [MegaEvolution('Mawile', 'Mega Mawile')],
+        'evolutions': [MegaEvolution('Mawile', 'Mega Mawile')],
         'base': {
             'hitpoints': 50,
             'attack': 85,
@@ -21192,10 +21212,10 @@ export const pokemonList = createPokemonArray(
         'exp': 56,
         'catchRate': 190,
         'evolutions': [
-            TimeRestrictedLevelEvolution(6, 17, 'Rockruff', 'Lycanroc (Midday)', 25),
-            TimeRestrictedLevelEvolution(17, 18, 'Rockruff', 'Lycanroc (Dusk)', 25),
-            TimeRestrictedLevelEvolution(18, 5, 'Rockruff', 'Lycanroc (Midnight)', 25),
-            TimeRestrictedLevelEvolution(5, 6, 'Rockruff', 'Lycanroc (Dusk)', 25),
+            DayCyclePartRestrictedLevelEvolution([DayCyclePart.Day], 'Rockruff', 'Lycanroc (Midday)', 25),
+            DayCyclePartRestrictedLevelEvolution([DayCyclePart.Night], 'Rockruff', 'Lycanroc (Midnight)', 25),
+            DayCyclePartRestrictedLevelEvolution([DayCyclePart.Dusk], 'Rockruff', 'Lycanroc (Dusk)', 25),
+            DayCyclePartRestrictedLevelEvolution([DayCyclePart.Dawn], 'Rockruff', 'Lycanroc (Dusk)', 25),
         ],
         'base': {
             'hitpoints': 45,

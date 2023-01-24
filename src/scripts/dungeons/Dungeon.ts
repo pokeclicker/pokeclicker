@@ -3153,8 +3153,8 @@ dungeonList['Cave of Origin'] = new Dungeon('Cave of Origin',
     590000,
     [
         new DungeonBossPokemon('Exploud', 2000000, 50),
-        new DungeonBossPokemon('Kyogre', 4700000, 100, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)}),
-        new DungeonBossPokemon('Groudon', 4700000, 100, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)}),
+        new DungeonBossPokemon('Kyogre', 4700000, 100, {requirement: new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), new QuestLineStepCompletedRequirement('The Weather Trio', 5)])}),
+        new DungeonBossPokemon('Groudon', 4700000, 100, {requirement: new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), new QuestLineStepCompletedRequirement('The Weather Trio', 5)])}),
     ],
     34000, 101);
 
@@ -3236,7 +3236,7 @@ dungeonList['Sky Pillar'] = new Dungeon('Sky Pillar',
     720000,
     [
         new DungeonBossPokemon('Dusclops', 3200000, 20),
-        new DungeonBossPokemon('Rayquaza', 5824002, 100),
+        new DungeonBossPokemon('Rayquaza', 5824002, 100, {requirement: new QuestLineStepCompletedRequirement('The Weather Trio', 5)}),
     ],
     34000, 101);
 
@@ -3530,8 +3530,18 @@ dungeonList['Eterna Forest'] = new Dungeon('Eterna Forest',
     },
     812000,
     [
-        new DungeonBossPokemon('Beautifly', 3950000, 30),
-        new DungeonBossPokemon('Dustox', 3950000, 30),
+        new DungeonBossPokemon('Beautifly', 3950000, 30, {hide: true, requirement: new OneFromManyRequirement([
+            new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 7, GameConstants.AchievementOption.less),
+            new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 8),
+        ])}),
+        new DungeonBossPokemon('Dustox', 3950000, 30, {hide: true, requirement: new OneFromManyRequirement([
+            new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 7, GameConstants.AchievementOption.less),
+            new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 8),
+        ])}),
+        new DungeonBossPokemon('Parasect', 4500000, 30, {hide: true, requirement: new MultiRequirement([
+            new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 8, GameConstants.AchievementOption.less),
+            new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 7),
+        ])}),
     ],
     48000, 205);
 
@@ -7044,6 +7054,7 @@ dungeonList['Pokémon Village'] = new Dungeon('Pokémon Village',
             {loot: 'LargeRestore'},
             {loot: 'Pink_Bow'},
         ],
+        mythic: [{loot: 'Quick_Powder'}],
     },
     9003000,
     [
@@ -8459,6 +8470,7 @@ dungeonList['Poni Meadow'] = new Dungeon('Poni Meadow',
         epic: [
             {loot: 'Splash Plate'},
             {loot: 'Pixie Plate'},
+            {loot: 'Power_Herb'},
         ],
     },
     16659968,

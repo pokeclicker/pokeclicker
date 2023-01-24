@@ -520,6 +520,45 @@ class QuestLineHelper {
         App.game.quests.questLines().push(aquaMagmaHoennQuestLine);
     }
 
+    // Weather Trio
+    public static createWeatherTrioQuestLine() {
+        const weatherTrioQuestLine = new QuestLine('The Weather Trio', 'Put an ancient battle to rest.', new QuestLineCompletedRequirement('Land vs. Water'), GameConstants.BulletinBoards.Hoenn);
+
+        const weatherBattle1 = new TalkToNPCQuest(WeatherBattle1, 'Investigate the commotion in Sootopolis City.');
+        weatherTrioQuestLine.addQuest(weatherBattle1);
+
+        const clearCaveOfOrigin = new CustomQuest(1, 0, 'Explore the Cave of Origin to find Wallace.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Cave of Origin')]());
+        weatherTrioQuestLine.addQuest(clearCaveOfOrigin);
+
+        const talkToWallace1 = new TalkToNPCQuest(Wallace1, 'Talk to Wallace in the Cave of Origin to learn how to stop Kyogre and Groudon from fighting.');
+        weatherTrioQuestLine.addQuest(talkToWallace1);
+
+        const clearSkyPillar = new CustomQuest(1, 0, 'Climb the Sky Pillar to find the super-ancient Pokémon Rayquaza.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Sky Pillar')]());
+        weatherTrioQuestLine.addQuest(clearSkyPillar);
+
+        const weatherBattle2 = new TalkToNPCQuest(WeatherBattle2, 'Return to Sootopolis City to see what Rayquaza will do.');
+        weatherTrioQuestLine.addQuest(weatherBattle2);
+
+        const talkToWallace2 = new TalkToNPCQuest(Wallace2, 'Talk to Wallace in the Cave of Origin about the aftermath of the battle.');
+        weatherTrioQuestLine.addQuest(talkToWallace2);
+
+        const catchRayquaza = new CaptureSpecificPokemonQuest('Rayquaza', 'Catch Rayquaza');
+
+        const catchKyogre = new CaptureSpecificPokemonQuest('Kyogre', 'Catch Kyogre');
+
+        const catchGroudon = new CaptureSpecificPokemonQuest('Groudon', 'Catch Groudon');
+
+        weatherTrioQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                catchRayquaza,
+                catchKyogre,
+                catchGroudon,
+            ], 'Catch the Weather Trio.'));
+
+
+        App.game.quests.questLines().push(weatherTrioQuestLine);
+    }
+
     // Started upon becoming Hoenn's Chapmion.
     public static createDeoxysQuestLine() {
         const deoxysQuestLine = new QuestLine('Mystery of Deoxys', 'Discover the mystery of Deoxys.');
@@ -809,13 +848,13 @@ class QuestLineHelper {
         const clearTeamGalacticEternaBuilding = new CustomQuest(1, 0, 'Team Galactic is kidnapping Pokémon now. Clear Team Galactic Eterna Building in Eterna City.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Team Galactic Eterna Building')]());
         galacticSinnohQuestLine.addQuest(clearTeamGalacticEternaBuilding);
 
-        const clearPastoriaCityGym = new CustomQuest(1, 0, 'All is quiet. Team Galactic isn\'t doing anything. Guess they learned their lesson. Just keep traveling, I guess. Clear the Pastoria City Gym.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Pastoria City')]());
+        const clearPastoriaCityGym = new CustomQuest(1, 0, 'All is quiet. Team Galactic isn\'t doing anything. Maybe they learned their lesson. Just keep traveling, I guess. Clear the Pastoria City Gym.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Pastoria City')]());
         galacticSinnohQuestLine.addQuest(clearPastoriaCityGym);
 
         const clearCyrus1TemporaryBattle = new CustomQuest(1, 0, 'The boss of Team Galactic has been spotted in Celestic Town!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Galactic Boss Cyrus')]());
         galacticSinnohQuestLine.addQuest(clearCyrus1TemporaryBattle);
 
-        const clearCanalaveCityGym = new CustomQuest(1, 0, 'Cyrus is gone. Nowhere to be found. Nothing to do but proceed. Adventure awaits! Clear the Canalave City Gym.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Canalave City')]());
+        const clearCanalaveCityGym = new CustomQuest(1, 0, 'Cyrus is gone. Nothing to do but proceed. Adventure awaits! Clear the Canalave City Gym.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Canalave City')]());
         galacticSinnohQuestLine.addQuest(clearCanalaveCityGym);
 
         const clearLakeValor = new CustomQuest(1, 0, 'A commotion was heard at Lake Valor. You must protect the lake\'s guardian! Clear Lake Valor.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Lake Valor')]());
@@ -848,6 +887,109 @@ class QuestLineHelper {
         galacticSinnohQuestLine.addQuest(clearDistortionWorld);
 
         App.game.quests.questLines().push(galacticSinnohQuestLine);
+    }
+
+    //Manaphy Quest
+    public static createManaphyQuestLine() {
+        const manaphyQuestLine = new QuestLine('Recover the Precious Egg!', 'A rare egg is at the Sandgem Lab! Surely it should be easy to hatch one little egg, right?', new GymBadgeRequirement(BadgeEnums.Forest), GameConstants.BulletinBoards.Sinnoh);
+
+        const talkHastings1 = new TalkToNPCQuest(ManaphyHastings1, 'Speak to Professor Hastings in Sandgem Town.');
+        manaphyQuestLine.addQuest(talkHastings1);
+
+        const investigateBoulders = new TalkToNPCQuest(ManaphyBoulders, 'Search for clues in Eterna Forest.');
+        manaphyQuestLine.addQuest(investigateBoulders);
+
+        const catchPolitoedSubstitutes = new CustomQuest(50, undefined, 'Capture 50 Water-type Pokémon, and see if those boulders are really just boulders.', () => {
+            return pokemonMap.filter(p => p.type.includes(PokemonType.Water)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
+        });
+        manaphyQuestLine.addQuest(catchPolitoedSubstitutes);
+
+        const clearManaphyGoRock1 = new CustomQuest(1, 0, 'Time to give those mysterious boulders the soaking of their life! Return to the Eterna Forest, and prepare for a battle.', () =>
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Manaphy Go-Rock MGrunt 1')]());
+        manaphyQuestLine.addQuest(clearManaphyGoRock1);
+
+        const talkGoRockCommander1 = new TalkToNPCQuest(ManaphyGoRockCommander, 'Speak to the Go-Rock Commander in the Eterna Forest.');
+        manaphyQuestLine.addQuest(talkGoRockCommander1);
+
+        const clearManaphyGoRock2 = new CustomQuest(1, 0, 'Chase the fleeing Go-Rock Squad through the Eterna Forest!', () =>
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Manaphy Go-Rock FGrunt 1')]());
+        manaphyQuestLine.addQuest(clearManaphyGoRock2);
+
+        const clearManaphyGoRock3 = new CustomQuest(3, 0, 'Keep chasing the Go-Rock Squad through the Eterna Forest, but... didn\'t they already pass that tree?', () =>
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Manaphy Go-Rock MGrunt 2')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Manaphy Go-Rock MGrunt 3')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Manaphy Go-Rock FGrunt 2')]()
+        );
+        manaphyQuestLine.addQuest(clearManaphyGoRock3);
+
+        const talkGoRockGrunt1 = new TalkToNPCQuest(ManaphyGoRock, 'The Go-Rock Squad are definitely going in circles, but they\'re too dumb to realise it. Interrogate one on their method of navigating the Eterna Forest!');
+        manaphyQuestLine.addQuest(talkGoRockGrunt1);
+
+        const clearEternaParasect = new CustomQuest(1, 0, 'They\'re using Parasect to navigate the Eterna Forest. Clear out a Parasect and they should get trapped!', () =>
+            App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Eterna Forest')]());
+        manaphyQuestLine.addQuest(clearEternaParasect);
+
+        const clearManaphyGoRock4 = new CustomQuest(1, 0, 'Now you\'ve muddied the path, continue the Eterna Forest chase!', () =>
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Manaphy Go-Rock MGrunt 4')]());
+        manaphyQuestLine.addQuest(clearManaphyGoRock4);
+
+        const clearManaphyCommander1 = new CustomQuest(1, 0, 'You\'ve cornered the Go-Rock Commander outside the Old Chateau! Time to finish this.', () =>
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Manaphy Go-Rock Commander')]());
+        manaphyQuestLine.addQuest(clearManaphyCommander1);
+
+        const talkHastings2 = new TalkToNPCQuest(ManaphyHastings2, 'Return the egg to Professor Hastings in Sandgem Town. ');
+        manaphyQuestLine.addQuest(talkHastings2);
+
+        const talkHastings3 = new TalkToNPCQuest(ManaphyHastings3, 'Professor Hastings has headed off to Canalave to do more research on Manaphy. Check in on him when you can!');
+        manaphyQuestLine.addQuest(talkHastings3);
+
+        const happinyChase1 = new TalkToNPCQuest(HappinyWitness1, 'A little girl\'s Happiny stole the egg! Search for witnesses east of Canalave!');
+        manaphyQuestLine.addQuest(happinyChase1);
+
+        const happinyChase2 = new TalkToNPCQuest(HappinyWitness2, 'The Happiny headed north out of Jubilife! Ask for witnesses in the next town.');
+        manaphyQuestLine.addQuest(happinyChase2);
+
+        const happinyChase3 = new TalkToNPCQuest(HappinyWitness3, 'The Happiny went north, through the Eterna Forest. Ask if anyone\'s seen it in Eterna City.');
+        manaphyQuestLine.addQuest(happinyChase3);
+
+        const happinyChase4 = new TalkToNPCQuest(HappinyWitness4, 'Search for someone who\'s seen the Happiny Egg-napper! It was last seen heading east across Route 211.');
+        manaphyQuestLine.addQuest(happinyChase4);
+
+        const happinyChase5 = new TalkToNPCQuest(HappinyWitness5, 'Keep asking around and following the Happiny Egg-thief! It was heading south, towards Solaceon Town.');
+        manaphyQuestLine.addQuest(happinyChase5);
+
+        const happinyChase6 = new TalkToNPCQuest(HappinyWitness6, 'Hopefully you can finally catch up to this Happiny at Hearthome City. Ask around for any witnesses.');
+        manaphyQuestLine.addQuest(happinyChase6);
+
+        const happinyChase7 = new TalkToNPCQuest(HappinyWitness7, 'The Happiny went through Mt. Coronet again? This time it went west through the Southern path. Ask around for witnesses on the other side.');
+        manaphyQuestLine.addQuest(happinyChase7);
+
+        const happinyChase8 = new TalkToNPCQuest(HappinyWitness8, 'The Happiny left Oreburgh and headed west, through the Oreburgh Gate. Search for another witness on the far side.');
+        manaphyQuestLine.addQuest(happinyChase8);
+
+        const happinyChase9 = new TalkToNPCQuest(HappinyWitness9, 'Search for evidence of the Happiny\'s path after turning south from Jubilife City.');
+        manaphyQuestLine.addQuest(happinyChase9);
+
+        const clearManaphyGoRock5 = new CustomQuest(1, 0, 'An ex-Go-Rock in Sandgem Town has turned to Pokémon Pinching, and wants to steal the egg first. But after all you\'ve been through to get it, he\'s in for a rude awakening', () =>
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Manaphy Go-Rock Pincher')]());
+        manaphyQuestLine.addQuest(clearManaphyGoRock5);
+
+        const happinyChase10 = new TalkToNPCQuest(HappinyBoulders, 'After leaving Sandgem, the Happiny went south-east, across the water. There\'s only one place it could be now...');
+        manaphyQuestLine.addQuest(happinyChase10);
+
+        const catchBunearySubstitutes = new CustomQuest(50, undefined, 'Oh no, you\'re not gonna let more boulders stop you now. Catch 50 Fighting-types and smash right through them.', () => {
+            return pokemonMap.filter(p => p.type.includes(PokemonType.Fighting)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
+        });
+        manaphyQuestLine.addQuest(catchBunearySubstitutes);
+
+        const clearManaphyHappiny = new CustomQuest(1, 0, 'Time to head back to Pal Park and teach this little pink snot not to steal important eggs!', () =>
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Manaphy Egg Protectors')]());
+        manaphyQuestLine.addQuest(clearManaphyHappiny);
+
+        const talkHastings4 = new TalkToNPCQuest(ManaphyHastings4, 'The egg hatched after your battle with the egg-nappers! Bring Manaphy back to Hastings in Canalave Town, and close off this mission for good.');
+        manaphyQuestLine.addQuest(talkHastings4);
+
+        App.game.quests.questLines().push(manaphyQuestLine);
     }
 
     //Giratina quest
@@ -1122,7 +1264,7 @@ class QuestLineHelper {
             };
             const vivillonRemove = () => {
                 dungeons.forEach(dungeon => {
-                    dungeonList[dungeon].bossList = dungeonList[dungeon].bossList.filter(boss => boss.name != vivillon);
+                    dungeonList[dungeon].bossList = dungeonList[dungeon].bossList.filter(boss => boss.name != vivillon || (boss.name == vivillon && boss.options?.requirement));
                 });
                 Notifier.notify({
                     title: vivillonQuestLine.name,
@@ -1295,7 +1437,7 @@ class QuestLineHelper {
         const clearPoTown = new CustomQuest(1, 0, 'Team Skull have stolen a child\'s Yungoos. Raid their base. Clear the Po Town dungeon.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Po Town')]());
         skullAetherAlolaQuestLine.addQuest(clearPoTown);
 
-        const clearAetherFoundation = new CustomQuest(1, 0, 'Aether president Lusamine has recruited Team Skull in her own plan to stop the Eater of Light. She\'s an idiot. Stop her. Clear the Aether Foundation dungeon.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Aether Foundation')]());
+        const clearAetherFoundation = new CustomQuest(1, 0, 'Aether president Lusamine has recruited Team Skull in her own plan to stop the Eater of Light. Stop her. Clear the Aether Foundation dungeon.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Aether Foundation')]());
         skullAetherAlolaQuestLine.addQuest(clearAetherFoundation);
 
         const UltraMegalopolisReward = () => {
@@ -2351,7 +2493,7 @@ class QuestLineHelper {
             dungeonList['Petalburg Woods'].bossList.push(new DungeonTrainer('Egg Hunter', [new GymPokemon('Surprise Togepi', 2700000, 100)], { weight: 1, requirement: new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion) }));
         };
         const afterDefeatingTogepiInHoenn = () => {
-            App.game.party.gainPokemonByName(surpriseTogepi.name);
+            App.game.party.gainPokemonByName('Surprise Togepi');
             Notifier.notify({
                 title: findSurpriseTogepiForEasterQuestLine.name,
                 message: 'You found the special Togepi!',
@@ -2401,6 +2543,7 @@ class QuestLineHelper {
         this.createhoohJohtoQuestLine();
         this.createCelebiJohtoQuestLine();
         this.createAquaMagmaHoennQuestLine();
+        this.createWeatherTrioQuestLine();
         this.createDeoxysQuestLine();
         this.createRubySapphireSeviiQuestLine();
         this.createPinkanThemeparkQuestLine();
@@ -2408,6 +2551,7 @@ class QuestLineHelper {
         this.createJirachiQuestLine();
         this.createMetaGroudonQuestLine();
         this.createGalacticSinnohQuestLine();
+        this.createManaphyQuestLine();
         this.createGiratinaQuestLine();
         this.createPlasmaUnovaQuestLine();
         this.createDetectivePikachuQuestLine();

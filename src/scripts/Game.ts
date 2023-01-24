@@ -424,19 +424,22 @@ class Game {
             const old = new Date(player._lastSeen);
             const now = new Date();
 
-            // Time traveller flag
-            if (old > now) {
-                Notifier.notify({
-                    title: 'Welcome Time Traveller!',
-                    message: 'Please ensure you keep a backup of your old save as travelling through time can cause some serious problems.\n\nAny Pokémon you may have obtained in the future could cease to exist which could corrupt your save file!',
-                    type: NotificationConstants.NotificationOption.danger,
-                    timeout: GameConstants.HOUR,
-                });
-                player._timeTraveller = true;
-            }
 
             // Check if it's a new day
             if (old.toLocaleDateString() !== now.toLocaleDateString()) {
+                // Time traveller flag
+                if (old > now) {
+                    Notifier.notify({
+                        title: 'Welcome Time Traveller!',
+                        message: `Please ensure you keep a backup of your old save as travelling through time can cause some serious problems.
+                        
+                        Any Pokémon you may have obtained in the future could cease to exist which could corrupt your save file!`,
+                        type: NotificationConstants.NotificationOption.danger,
+                        timeout: GameConstants.HOUR,
+                    });
+                    player._timeTraveller = true;
+                }
+
                 SeededDateRand.seedWithDate(now);
                 // Give the player a free quest refresh
                 this.quests.freeRefresh(true);

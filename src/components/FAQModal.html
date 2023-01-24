@@ -111,37 +111,63 @@
             <span class="text-muted">Some can only evolve at certain <strong>times of the day</strong>.</span><br/>
             <span class="text-muted">Some can only evolve in specific <strong>locations</strong>.</span><br/>
             <span class="text-muted">Some can only appear/evolve in specific <strong>weather</strong>.</span></p>
-            <strong>What are the EV damage multipliers?</strong>     
+
+            <strong>What is the schedule of the day cycle?</strong>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <td class="text-center"><strong>Part of the day</strong></td>
+                        <td class="text-center"><strong>Icon</strong></td>
+                        <td class="text-center"><strong>Start</strong></td>
+                        <td class="text-center"><strong>End</strong></td>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach: Object.values(GameConstants.DayCycleStartHours)">
+                    <tr>
+                        <td class="text-center" data-bind='text: DayCycle.dayCycleMoments[$index()].description'></td>
+                        <td class="text-center">
+                            <img src="" style="" data-bind="attr: {
+                                src: `assets/images/dayCycle/${DayCycle.dayCycleMoments[$index()].description}.png`,
+                                style: `background: ${DayCycle.dayCycleMoments[$index()].color}; width: 30px;`,
+                            }"/>
+                        </td>
+                        <td class="text-center" data-bind='text: GameHelper.twoDigitNumber($data) + `:00`'></td>
+                        <td class="text-center" data-bind='text: (GameHelper.twoDigitNumber(GameConstants.DayCycleStartHours[$index() + 1] || GameConstants.DayCycleStartHours[0])) + `:00`'></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <strong>What are the EV damage multipliers?</strong>
             <table class="table table-bordered table-striped">
                 <tr>
-                    <td><center><strong>EVs</strong></center></td>
-                    <td><center><strong>Damage Multiplier</strong></center></td>
+                    <td class="text-center"><strong>EVs</strong></td>
+                    <td class="text-center"><strong>Damage Multiplier</strong></td>
                 </tr>
                 <tr>
-                    <td><center><span class="text-muted">50 EVs</span></center></td>
-                    <td><center><span class="text-muted">1.5x Damage</span></center></td>
+                    <td class="text-center text-muted">50 EVs</td>
+                    <td class="text-center text-muted">1.5x Damage</td>
                 </tr>
                 <tr>
-                    <td><center><span class="text-muted">802 EVs</span></center></td>
-                    <td><center><span class="text-muted">2x Damage</span></center></td>
+                    <td class="text-center text-muted">802 EVs</td>
+                    <td class="text-center text-muted">2x Damage</td>
                 </tr>
                 <tr>
-                    <td><center><span class="text-muted">40,121 EVs</span></center></td>
-                    <td><center><span class="text-muted">3x Damage</span></center></td>
+                    <td class="text-center text-muted">40,121 EVs</td>
+                    <td class="text-center text-muted">3x Damage</td>
                 </tr>
                 <tr>
-                    <td><center><span class="text-muted">643,300 EVs</span></center></td>
-                    <td><center><span class="text-muted">4x Damage</span></center></td>
+                    <td class="text-center text-muted">643,300 EVs</td>
+                    <td class="text-center text-muted">4x Damage</td>
                 </tr>
                 <tr>
-                    <td><center><span class="text-muted">5,540,000 EVs</span></center></td>
-                    <td><center><span class="text-muted">5x Damage</span></center></td>
+                    <td class="text-center text-muted">5,540,000 EVs</td>
+                    <td class="text-center text-muted">5x Damage</td>
                 </tr>
             </table>
 
             <p><h5 class="text-primary"><strong>EVs and Pokérus (BETA)</strong></h5></p>
             <p><strong>What is Pokérus, and what are EVs?</strong><br/>
-            <span class="text-muted">Pokérus is a virus your Pokémon can catch. EVs increase the attack of your Pokémon.</span></p>
+            <span class="text-muted">Pokérus is a virus your Pokémon can catch. EVs, also called Effort Values, increase the attack of your Pokémon.</span></p>
             <p><strong>When do I unlock EVs?</strong><br/>
             <span class="text-muted">EVs are unlocked after defeating the Distortion World Dungeon in Sinnoh.</span></p>
             <p class="text-danger"><i>NOTE: This is a <strong>beta</strong> feature, so things will likely change in the future; feel free to post any feedback/bugs in the <a href="https://discord.gg/a6DFe4p" target="_blank">Discord</a>.</i></p>
@@ -149,6 +175,7 @@
             <span class="text-muted">Pokérus is spread by Pokémon that are infected, to other Pokémon in the hatchery (not in the queue) that share a type with the infected Pokémon. Neither Pokémon can be ready to hatch, nor can a Hatchery Helper be used on either Pokémon, in order to spread the virus.</span></p>
             <p><strong>How do I gain EVs?</strong><br/>
             <span class="text-muted">EVs can be gained in a variety of ways, but are primarily gained by capturing (not breeding) Pokémon.</span></p>
+            <p class="text-muted">You can use the Contagious Poké Ball selector (unlocked after getting Pokérus) to focus catching Pokémon with less than 50 EVs. Note that setting this selector to "Do not catch" will prevent you from catching any Contagious Pokémon, even if your Caught selector has a Poké Ball set.</p>
             <span class="text-muted">Base Yield: <code>0.1EV</code><br/>
             Evolution Item Yield: <code>1EV</code><br/>
             Wanderer Yield: <code>0.5EV</code><br/>
@@ -171,9 +198,9 @@
 
             <p><strong>What do the Pokérus status filters mean?</strong><br/>
             <span class="text-muted"><code>None</code>: Pokémon that have not been infected with Pokérus.<br/>
-            <span class="text-muted"><img src ='../assets/images/breeding/pokerus/Infected.png'/> <code>Infected</code>: Pokémon has Pokérus, but cannot spread Pokérus or gain EVs until hatching.<br/>
-            <span class="text-muted"><img src ='../assets/images/breeding/pokerus/Contagious.png'/> <code>Contagious</code>: Pokémon with less than 50 EVs.<br/>
-            <span class="text-muted"><img src ='../assets/images/breeding/pokerus/Resistant.png'/> <code>Resistant</code>: Pokémon with 50 or more EVs. These Pokémon will still be able to spread Pokérus.<br/>
+            <span class="text-muted"><img src ='assets/images/breeding/pokerus/Infected.png'/> <code>Infected</code>: Pokémon has Pokérus, but cannot spread Pokérus or gain EVs until hatching.<br/>
+            <span class="text-muted"><img src ='assets/images/breeding/pokerus/Contagious.png'/> <code>Contagious</code>: Pokémon with less than 50 EVs.<br/>
+            <span class="text-muted"><img src ='assets/images/breeding/pokerus/Resistant.png'/> <code>Resistant</code>: Pokémon with 50 or more EVs. These Pokémon will still be able to spread Pokérus.<br/>
 
             <p><h5 class="text-primary"><strong>Development:</strong></h5></p>
             <p><strong>When will the development version be fully released?</strong><br/>

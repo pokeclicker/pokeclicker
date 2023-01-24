@@ -1287,7 +1287,7 @@ GymList['Iki Town'] = new Gym(
     ],
     BadgeEnums.FightiniumZ,
     128000,
-    'The results come as no surprise to me. What a fine Trainer...and what fine Pokémon, too!',
+    'The results come as no surprise to me. What a fine Trainer...and what fine Pokémon, too! Accept this Z-Crystal! It allows Trainers to share their power with their partner Pokémon!',
     [new TemporaryBattleRequirement('Hau 3')],
     undefined, undefined, 'Hala\'s Grand Trial'
 );
@@ -1301,7 +1301,7 @@ GymList['Konikoni City'] = new Gym(
     ],
     BadgeEnums.RockiumZ,
     128000,
-    'How lovely.',
+    'How lovely. Diamonds only sparkle after coal is pushed to its absolute limit. Here. The Rock-type Z-Crystal... The Rockium Z is all yours!',
     [new TemporaryBattleRequirement('Plumeria 1')],
     () => {
         App.game.quests.getQuestLine('Eater of Light').beginQuest();
@@ -1318,7 +1318,7 @@ GymList['Malie City'] = new Gym(
     ],
     BadgeEnums.DarkiniumZ,
     128000,
-    'Hmph...',
+    'Hmph... heh. Let me fix your team up for you. Here. This is yours.',
     [new TemporaryBattleRequirement('Gladion 2')], undefined, undefined, 'Nanu\'s Grand Trial'
 );
 GymList['Exeggutor Island'] = new Gym(
@@ -1332,7 +1332,7 @@ GymList['Exeggutor Island'] = new Gym(
     ],
     BadgeEnums.GroundiumZ,
     128000,
-    'You have succeeded in your final grand trial!',
+    'You have succeeded in your final grand trial! That was enjoyable. Looks like I cannot beat you even when I am not holding back... Take your Ground-type Z-Crystal then... This Groundium Z is yours!',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mina\'s Houseboat'))],
     undefined, undefined, 'Hapu\'s Grand Trial'
 );
@@ -1347,7 +1347,7 @@ GymList['Ilima\'s Trial'] = new Gym(
     ],
     BadgeEnums.NormaliumZ,
     128000,
-    'You have received the Normalium-Z!',
+    'What an incredible Trainer you are! The Z-Crystal from the pedestal is yours now! It is known as Normalium Z!',
     undefined,
     undefined,
     {
@@ -1365,7 +1365,7 @@ GymList['Lana\'s Trial'] = new Gym(
     ],
     BadgeEnums.WateriumZ,
     128000,
-    'You have received the Waterium-Z!',
+    'Very well done! You do know what this is, don\'t you? Please take this Waterium Z.',
     undefined,
     undefined,
     {
@@ -1383,7 +1383,7 @@ GymList['Kiawe\'s Trial'] = new Gym(
     ],
     BadgeEnums.FiriumZ,
     128000,
-    'You have received the Firium-Z!',
+    'Whoa! S-spectacular! That Pokémon was protecting this Firium Z. Now it is yours.',
     undefined,
     undefined,
     {
@@ -1401,7 +1401,7 @@ GymList['Mallow\'s Trial'] = new Gym(
     ],
     BadgeEnums.GrassiumZ,
     128000,
-    'You have received the Grassium-Z!',
+    'Wow, you\'re even stronger than I thought! Looks like you\'ve cleared all three of Akala\'s trials! Here! A gift for such an inspiring young Trainer!',
     undefined,
     undefined,
     {
@@ -1419,7 +1419,7 @@ GymList['Sophocles\' Trial'] = new Gym(
     ],
     BadgeEnums.ElectriumZ,
     128000,
-    'You have received the Electrium-Z!',
+    'That Pokémon was really something else! Here, I\'ll give you this Electrium Z to reward you for beating it.',
     undefined,
     undefined,
     {
@@ -1437,7 +1437,7 @@ GymList['Acerola\'s Trial'] = new Gym(
     ],
     BadgeEnums.GhostiumZ,
     128000,
-    'You have received the Ghostium-Z!',
+    'Welcome back Now let\'s see how you did... Yup! You passed my trial! Here you go!',
     undefined,
     undefined,
     {
@@ -1455,7 +1455,7 @@ GymList['Vast Poni Canyon Trial'] = new Gym(
     ],
     BadgeEnums.DragoniumZ,
     128000,
-    'You have received the Dragonium-Z!',
+    'You obtained a Dragon-Type Z-Crystal. The Dragonium Z is yours!',
     undefined,
     undefined,
     {
@@ -1473,7 +1473,7 @@ GymList['Mina\'s Trial'] = new Gym(
     ],
     BadgeEnums.FairiumZ,
     128000,
-    'You have received the Fairium-Z!',
+    'That\'s a pretty great picture. You and your Pokémon! You\'re a great Pokémon Trainer! So here you go! A piece of Fairium Z for you!',
     undefined,
     undefined,
     {
