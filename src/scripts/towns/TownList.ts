@@ -3755,7 +3755,7 @@ TownList['Grandtree Arena'] = new Town(
     'Grandtree Arena',
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Hisui,
-    [TemporaryBattleList['Warden Lian'], TemporaryBattleList['Irida 1'], TemporaryBattleList['Noble Kleavor 1'], TemporaryBattleList['Noble Kleavor 2']],
+    [TemporaryBattleList['Warden Lian'], TemporaryBattleList['Irida 1'], TemporaryBattleList['Lord of the Woods: Kleavor']],
     {
         requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
         npcs: [Lian1, LianIrida1, LianIrida2, LianIrida3, LianIrida4],
@@ -3814,7 +3814,7 @@ TownList['Brava Arena'] = new Town(
     'Brava Arena',
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Hisui,
-    [TemporaryBattleList['Noble Lilligant 1'], TemporaryBattleList['Noble Lilligant 2']],
+    [TemporaryBattleList['Lady of the Ridge: Lilligant']],
     {
         requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
         npcs: [ArezuCalabaAdaman2, ArezuCalabaAdaman3],
@@ -3854,7 +3854,7 @@ TownList['Molten Arena'] = new Town(
     'Molten Arena',
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Hisui,
-    [TemporaryBattleList['Clover'], TemporaryBattleList['Coin 2'], TemporaryBattleList['Charm 1'], TemporaryBattleList['Noble Arcanine 1'], TemporaryBattleList['Noble Arcanine 2']],
+    [TemporaryBattleList['Clover'], TemporaryBattleList['Coin 2'], TemporaryBattleList['Charm 1'], TemporaryBattleList['Lord of the Isles: Arcanine']],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Firespit Island'))],
         npcs: [CharmCloverCoin4, CharmCloverCoin5, IscanPalina3, IridaPalinaIscan1, IscanPalina4, Irida3],
@@ -3891,7 +3891,7 @@ TownList['Moonview Arena'] = new Town(
     'Moonview Arena',
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Hisui,
-    [TemporaryBattleList['Melli 2'], TemporaryBattleList['Noble Electrode 1'], TemporaryBattleList['Noble Electrode 2']],
+    [TemporaryBattleList['Melli 2'], TemporaryBattleList['Lord of the Hollow: Electrode']],
     {
         requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     }
@@ -3936,7 +3936,7 @@ TownList['Icepeak Arena'] = new Town(
     'Icepeak Arena',
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Hisui,
-    [TemporaryBattleList['Noble Avalugg 1'], TemporaryBattleList['Noble Avalugg 2']],
+    [TemporaryBattleList['Lord of the Tundra: Avalugg']],
     {
         requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     }
