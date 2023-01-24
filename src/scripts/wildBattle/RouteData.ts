@@ -1597,6 +1597,192 @@ Routes.add(new RegionRoute(
     true,
     1250000
 ));
+Routes.add(new RegionRoute(
+    'Crossing Slope', GameConstants.Region.sinnoh, 24,
+    new RoutePokemon({
+        land: ['Glameow', 'Purugly', 'Murkrow', 'Starly', 'Staravia', 'Drifloon', 'Drifblim'],
+        headbutt: ['Burmy (Trash)', 'Wormadam (Trash)', 'Geodude', 'Graveler'],
+    }),
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
+    undefined,
+    GameConstants.SinnohSubRegions.Hisui,
+    true,
+    1250000
+));
+Routes.add(new RegionRoute(
+    'Ginkgo Landing', GameConstants.Region.sinnoh, 25,
+    new RoutePokemon({
+        land: ['Skorupi', 'Murkrow', 'Spheal', 'Drifloon', 'Buizel', 'Floatzel', 'Walrein', 'Machoke'],
+        headbutt: ['Burmy (Trash)', 'Wormadam (Trash)', 'Geodude', 'Graveler'],
+    }),
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
+    undefined,
+    GameConstants.SinnohSubRegions.Hisui,
+    true,
+    1250000
+));
+Routes.add(new RegionRoute(
+    'Aipom Hill', GameConstants.Region.sinnoh, 26,
+    new RoutePokemon({
+        land: ['Aipom', 'Ambipom', 'Murkrow', 'Buizel', 'Floatzel', 'Combee', 'Mothim'],
+        headbutt: ['Burmy (Trash)', 'Wormadam (Trash)', 'Geodude', 'Graveler'],
+    }),
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
+    undefined,
+    GameConstants.SinnohSubRegions.Hisui,
+    true,
+    1250000
+));
+Routes.add(new RegionRoute(
+    'Bather\'s Lagoon', GameConstants.Region.sinnoh, 27,
+    new RoutePokemon({
+        land: ['Starly', 'Staravia', 'Togepi', 'Drifloon', 'Drifblim', 'Buizel', 'Floatzel', 'Psyduck', 'Golduck', 'Murkrow', 'Beautifly', 'Dustox'],
+        headbutt: ['Burmy (Trash)', 'Wormadam (Trash)', 'Geodude', 'Graveler'],
+    }),
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
+    undefined,
+    GameConstants.SinnohSubRegions.Hisui,
+    true,
+    1250000
+));
+Routes.add(new RegionRoute(
+    'Hideaway Bay', GameConstants.Region.sinnoh, 28,
+    new RoutePokemon({
+        land: ['Spheal', 'Sealeo', 'Murkrow', 'Happiny', 'Chansey', 'Aipom'],
+        water: ['Remoraid'],
+        headbutt: ['Burmy (Trash)', 'Wormadam (Trash)', 'Graveler'],
+    }),
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
+    undefined,
+    GameConstants.SinnohSubRegions.Hisui,
+    true,
+    1250000
+));
+Routes.add(new RegionRoute(
+    'Deadwood Haunt', GameConstants.Region.sinnoh, 29,
+    new RoutePokemon({
+        land: ['Duskull', 'Dusclops', 'Dusknoir', 'Chatot', 'Starly', 'Staravia', 'Staraptor', 'Drifloon', 'Drifblim'],
+        headbutt: ['Geodude', 'Graveler'],
+    }),
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
+    undefined,
+    GameConstants.SinnohSubRegions.Hisui,
+    true,
+    1250000
+));
+Routes.add(new RegionRoute(
+    'Sand\'s Reach', GameConstants.Region.sinnoh, 30,
+    new RoutePokemon({
+        land: ['Starly', 'Staravia', 'Drifloon', 'Drifblim'],
+        water: ['Remoraid'],
+        headbutt: ['Burmy (Trash)', 'Wormadam (Trash)', 'Geodude', 'Graveler'],
+    }),
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
+    undefined,
+    GameConstants.SinnohSubRegions.Hisui,
+    true,
+    1250000
+));
+Routes.add(new RegionRoute(
+    'Castaway Shore', GameConstants.Region.sinnoh, 31,
+    new RoutePokemon({
+        land: ['Machop', 'Machoke', 'Murkrow', 'Skorupi', 'Drapion', 'Octillery'],
+        headbutt: ['Burmy (Trash)', 'Wormadam (Trash)', 'Geodude', 'Graveler'],
+    }),
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
+    undefined,
+    GameConstants.SinnohSubRegions.Hisui,
+    true,
+    1250000
+));
+//might remove or merge into Veilstone Cape, makes Hisuian Growlithe easy and offers little else
+Routes.add(new RegionRoute(
+    'Windbreak Stand', GameConstants.Region.sinnoh, 32,
+    new RoutePokemon({
+        land: ['Parasect', 'Stantler', 'Hisuian Growlithe'],
+        headbutt: ['Wormadam (Trash)', 'Graveler'],
+    }),
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
+    undefined,
+    GameConstants.SinnohSubRegions.Hisui,
+    true,
+    1250000
+));
+Routes.add(new RegionRoute(
+    'Spring Path', GameConstants.Region.sinnoh, 33,
+    new RoutePokemon({
+        land: ['Bibarel', 'Toxicroak', 'Mothim'],
+        headbutt: ['Burmy (Trash)', 'Wormadam (Trash)', 'Graveler'],
+    }),
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
+    undefined,
+    GameConstants.SinnohSubRegions.Hisui,
+    true,
+    1250000
+));
+//May consider merging this and Spring Path
+Routes.add(new RegionRoute(
+    'Islespy Shore', GameConstants.Region.sinnoh, 34,
+    new RoutePokemon({
+        land: ['Sealeo', 'Walrein', 'Murkrow', 'Empoleon'],
+    }),
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
+    undefined,
+    GameConstants.SinnohSubRegions.Hisui,
+    true,
+    1250000
+));
+Routes.add(new RegionRoute(
+    'Tranquility Cove', GameConstants.Region.sinnoh, 35,
+    new RoutePokemon({
+        land: ['Shellos (East)', 'Staravia', 'Staraptor', 'Togepi', 'Togetic', 'Drifloon', 'Drifblim'],
+        water: ['Mantyke', 'Mantine', 'Basculin (White-Striped)', 'Remoraid', 'Hisuian Qwilfish'],
+        headbutt: ['Burmy (Trash)', 'Wormadam (Trash)', 'Geodude', 'Graveler'],
+    }),
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
+    undefined,
+    GameConstants.SinnohSubRegions.Hisui,
+    true,
+    1250000
+));
+Routes.add(new RegionRoute(
+    'Lunker\'s Lair', GameConstants.Region.sinnoh, 36,
+    new RoutePokemon({
+        water: ['Tentacool', 'Tentacruel', 'Drifloon', 'Drifblim', 'Hisuian Qwilfish'],
+        headbutt: ['Burmy (Trash)', 'Wormadam (Trash)'],
+    }),
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
+    undefined,
+    GameConstants.SinnohSubRegions.Hisui,
+    true,
+    1250000
+));
+Routes.add(new RegionRoute(
+    'Seagrass Haven', GameConstants.Region.sinnoh, 37,
+    new RoutePokemon({
+        land: ['Shellos (East)', 'Gastrodon (East)'],
+        water: ['Finneon', 'Lumineon', 'Drifloon', 'Drifblim', 'Tentacool', 'Tentacruel'],
+        headbutt: ['Burmy (Trash)', 'Wormadam (Trash)'],
+    }),
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
+    undefined,
+    GameConstants.SinnohSubRegions.Hisui,
+    true,
+    1250000
+));
+//May merge into something else
+Routes.add(new RegionRoute(
+    'Tombolo Walk', GameConstants.Region.sinnoh, 38,
+    new RoutePokemon({
+        land: ['Happiny', 'Chansey'],
+        headbutt: ['Burmy (Trash)', 'Wormadam (Trash)', 'Graveler'],
+    }),
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
+    undefined,
+    GameConstants.SinnohSubRegions.Hisui,
+    true,
+    1250000
+));
 
 /*
 UNOVA

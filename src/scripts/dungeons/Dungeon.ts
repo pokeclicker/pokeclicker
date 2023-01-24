@@ -4676,6 +4676,25 @@ dungeonList['Shrouded Ruins'] = new Dungeon('Shrouded Ruins',
     () => {},
     {dungeonRegionalDifficulty: GameConstants.Region.galar});
 
+dungeonList['Veilstone Cape'] = new Dungeon('Veilstone Cape',
+    ['Glameow', 'Murkrow', 'Vulpix', 'Mothim', 'Burmy (Trash)', 'Wormadam (Trash)', 'Geodude', 'Graveler'],
+    {
+        common: [
+            {loot: 'Token_collector', weight: 2},
+            {loot: 'Aspear'},
+        ],
+    },
+    2603000,
+    [
+        new DungeonBossPokemon('Purugly', 10000000, 45),
+        new DungeonBossPokemon('Beautifly', 10000000, 47),
+        new DungeonBossPokemon('Dustox', 10000000, 47),
+        new DungeonBossPokemon('Hisuian Growlithe', 10000000, 47),
+    ],
+    96500, 230,
+    () => {},
+    {dungeonRegionalDifficulty: GameConstants.Region.galar});
+
 dungeonList['Firespit Island'] = new Dungeon('Firespit Island',
     ['Graveler', 'Magby', 'Magmar'],
     {

@@ -2624,7 +2624,7 @@ class QuestLineHelper {
             });
         };
 
-        const clearNobleKleavor = new CustomQuest(1, SacredInsectPlateReward, 'Defeat the Lord of the Woods, Kleavor, at Grandtree Arena.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Noble Kleavor 1')]());
+        const clearNobleKleavor = new CustomQuest(1, SacredInsectPlateReward, 'Defeat the Lord of the Woods, Kleavor, at Grandtree Arena.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Lord of the Woods: Kleavor')]());
         hisuiNobleQuestLine.addQuest(clearNobleKleavor);
 
         const talktoLianIrida4 = new TalkToNPCQuest(LianIrida4, 'Talk to Lian & Irida at Grandtree Arena.');
@@ -2722,8 +2722,133 @@ class QuestLineHelper {
             });
         };
 
-        const clearNobleLilligant = new CustomQuest(1, SacredMeadowPlateReward, 'Defeat the Lady of the Ridge, Lilligant, at Brava Arena.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Noble Lilligant 1')]());
+        const clearNobleLilligant = new CustomQuest(1, SacredMeadowPlateReward, 'Defeat the Lady of the Ridge, Lilligant, at Brava Arena.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Lady of the Ridge: Lilligant')]());
         hisuiNobleQuestLine.addQuest(clearNobleLilligant);
+
+        const talktoArezuCalabaAdaman3 = new TalkToNPCQuest(ArezuCalabaAdaman3, 'Speak to Arezu, Calaba & Adaman at Brava Arena.');
+        hisuiNobleQuestLine.addQuest(talktoArezuCalabaAdaman3);
+
+        const talktoVolo6 = new TalkToNPCQuest(Volo6, 'Talk to Volo in Mirelands Camp.');
+        hisuiNobleQuestLine.addQuest(talktoVolo6);
+
+        const talktoBeni3 = new TalkToNPCQuest(Beni3, 'Talk to Beni in Jubilife Village');
+        hisuiNobleQuestLine.addQuest(talktoBeni3);
+
+        const talktoKamado3 = new TalkToNPCQuest(Kamado3, 'Speak to Kamado at Galaxy Hall');
+        hisuiNobleQuestLine.addQuest(talktoKamado3);
+
+        const talktoKamado4 = new TalkToNPCQuest(Kamado4, 'Speak to Kamado at Prelude Beach');
+        hisuiNobleQuestLine.addQuest(talktoKamado4);
+
+        const talktoIridaKamado1 = new TalkToNPCQuest(IridaKamado1, 'Speak to Irida & Kamado at Galaxy Hall');
+        hisuiNobleQuestLine.addQuest(talktoIridaKamado1);
+
+        const talktoLian2 = new TalkToNPCQuest(Lian2, 'Talk to Lian in Jubilife Village');
+        hisuiNobleQuestLine.addQuest(talkLian2);
+
+        const talktoLaventon10 = new TalkToNPCQuest(Laventon10, 'Talk to Laventon at Beachside Camp');
+        hisuiNobleQuestLine.addQuest(talktoLaventon10);
+
+        const talktoIrida1 = new TalkToNPCQuest(Irida1, 'Talk to Irida at Beachside Camp');
+        hisuiNobleQuestLine.addQuest(talktoIrida1);
+
+        const clearIrida2 = new CustomQuest(1, 0, 'Defeat Clan Leader Irida at Beachside Camp.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Irida 2')]());
+        hisuiNobleQuestLine.addQuest(clearIrida2);
+
+        const talktoIrida2 = new TalkToNPCQuest(Irida2, 'Talk to Irida at Beachside Camp');
+        hisuiNobleQuestLine.addQuest(talktoIrida2);
+
+        const clearVeilstoneCape = new CustomQuest(1, 0, 'Search for Palina on Veilstone Cape.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Veilstone Cape')]());
+        hisuiNobleQuestLine.addQuest(clearVeilstoneCape);
+
+        const talktoPalina1 = new TalkToNPCQuest(Palina1, 'Talk to Palina at Veilstone Cape');
+        hisuiNobleQuestLine.addQuest(talktoPalina1);
+
+        const talktoVolo7 = new TalkToNPCQuest(Volo7, 'Talk to Volo at Iscan\'s Cabin.');
+        hisuiNobleQuestLine.addQuest(talktoVolo7);
+
+        const talktoIscan1 = new TalkToNPCQuest(Iscan1, 'Talk to Iscan at Iscan\'s Cabin.');
+        hisuiNobleQuestLine.addQuest(talktoIscan1);
+
+        const catchDusknoir = new CaptureSpecificPokemonQuest('Dusknoir', 'Capture a Dusknoir to help Iscan make Basculegion Food.', 1, true);
+        jirachiQuestLine.addQuest(catchDusknoir);
+
+        const talktoIscan2 = new TalkToNPCQuest(Iscan2, 'Talk to Iscan at Iscan\'s Cabin.');
+        hisuiNobleQuestLine.addQuest(talktoIscan2);
+
+        const SacredSplashPlateReward = () => {
+            BagHandler.gainItem({type: ItemType.item, id: 'Sacred Splash Plate'}, 1);
+            Notifier.notify({
+                title: hisuiNobleQuestLine.name,
+                message: 'You recieved the Sacred Splash Plate from Basculegion!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
+        const talktoIscanPalina1 = new TalkToNPCQuest(IscanPalina1, 'Talk to Iscan & Palina at Coastlands Camp.', SacredSplashPlateReward);
+        hisuiNobleQuestLine.addQuest(talktoIscanPalina1);
+
+        const talktoCharmCloverCoin3 = new TalkToNPCQuest(CharmCloverCoin3, 'Talk to Charm, Clover & Coin at Coastlands Camp.');
+        hisuiNobleQuestLine.addQuest(talktoCharmCloverCoin3);
+
+        const talktoIscanPalina2 = new TalkToNPCQuest(IscanPalina2, 'Talk to Iscan & Palina at Coastlands Camp.', SacredSplashPlateReward);
+        hisuiNobleQuestLine.addQuest(talktoIscanPalina2);
+
+        const clearFirespitIsland = new CustomQuest(1, 0, 'Make your way through Firespit Island.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Veilstone Cape')]());
+        hisuiNobleQuestLine.addQuest(clearFirespitIsland);
+
+        const talktoCharmCloverCoin4 = new TalkToNPCQuest(CharmCloverCoin4, 'Talk to Charm, Clover & Coin at Molten Arena.');
+        hisuiNobleQuestLine.addQuest(talktoCharmCloverCoin4);
+
+        const clearClover1 = new CustomQuest(1, 0, 'Defeat Clover at Molten Arena.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Clover 1')]());
+        hisuiNobleQuestLine.addQuest(clearClover1);
+
+        const clearCoin2 = new CustomQuest(1, 0, 'Defeat Coin at Molten Arena.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Coin 2')]());
+        hisuiNobleQuestLine.addQuest(clearCoin2);
+
+        const clearCharm1 = new CustomQuest(1, 0, 'Defeat Charm at Molten Arena.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Charm 1')]());
+        hisuiNobleQuestLine.addQuest(clearCharm1);
+
+        const talktoCharmCloverCoin5 = new TalkToNPCQuest(CharmCloverCoin5, 'Talk to Charm, Clover & Coin at Molten Arena.');
+        hisuiNobleQuestLine.addQuest(talktoCharmCloverCoin5);
+
+        const talktoIscanPalina3 = new TalkToNPCQuest(IscanPalina3, 'Talk to Iscan & Palina at Molten Arena.');
+        hisuiNobleQuestLine.addQuest(talktoIscanPalina3);
+
+        const talktoIridaPalinaIscan1 = new TalkToNPCQuest(IridaPalinaIscan1, 'Talk to Irida, Palina & Iscan at Molten Arena.');
+        hisuiNobleQuestLine.addQuest(talktoIridaPalinaIscan1);
+
+        const SacredFlamePlateReward = () => {
+            BagHandler.gainItem({type: ItemType.item, id: 'Sacred Flame Plate'}, 1);
+            Notifier.notify({
+                title: hisuiNobleQuestLine.name,
+                message: 'You recieved the Sacred Flame Plate from Arcanine!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
+        const clearNobleArcanine = new CustomQuest(1, SacredFlamePlateReward, 'Defeat the Lord of the Isles, Arcanine, at Molten Arena.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Lord of the Isles: Arcanine')]());
+        hisuiNobleQuestLine.addQuest(clearNobleArcanine);
+
+        const talktoIscanPalina4 = new TalkToNPCQuest(IscanPalina4, 'Talk to Iscan & Palina at Molten Arena.');
+        hisuiNobleQuestLine.addQuest(talktoIscanPalina4);
+
+        const talktoIrida3 = new TalkToNPCQuest(Irida3, 'Talk to Irida at Molten Arena');
+        hisuiNobleQuestLine.addQuest(talktoIrida3);
+
+        const talktoKamado5 = new TalkToNPCQuest(Kamado5, 'Talk to Kamado at Galaxy Hall');
+        hisuiNobleQuestLine.addQuest(talktoKamado5);
+
+        const talktoLaventonAkari2 = new TalkToNPCQuest(LaventonAkari2, 'Talk to Laventon & Akari in Jubilife Village');
+        hisuiNobleQuestLine.addQuest(talktoLaventonAkari2);
+
+        const talktoKamadoAdamanMelli1 = new TalkToNPCQuest(KamadoAdamanMelli1, 'Talk to Kamado, Adaman & Melli in Galaxy Hall');
+        hisuiNobleQuestLine.addQuest(talktoKamadoAdamanMelli1);
+
+        const clearAdaman1 = new CustomQuest(1, 0, 'Defeat Adaman in Jubilife Village.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Adaman 1')]());
+        hisuiNobleQuestLine.addQuest(clearAdaman1);
 
         App.game.quests.questLines().push(hisuiNobleQuestLine);
     }

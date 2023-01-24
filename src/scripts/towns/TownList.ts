@@ -3159,12 +3159,137 @@ const BeniAdamanKamado1 = new NPC('Beni, Adaman & Kamado', [
 ], {
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
-const ArezuCalabaAdaman1 = new NPC('Arezu, Calaba & Adaman', [
+const ArezuCalabaAdaman2 = new NPC('Arezu, Calaba & Adaman', [
     '',
 ], {
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
-const ArezuCalabaAdaman2 = new NPC('Arezu, Calaba & Adaman', [
+const ArezuCalabaAdaman3 = new NPC('Arezu, Calaba & Adaman', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
+});
+const Volo6 = new NPC('Volo', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
+});
+const Beni3 = new NPC('Beni', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
+});
+const Kamado3 = new NPC('Commander Kamado', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
+});
+const Kamado4 = new NPC('Commander Kamado', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
+});
+const IridaKamado1 = new NPC('Irida and Kamado', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
+});
+const Lian2 = new NPC('Warden Lian', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
+});
+const Laventon10 = new NPC('Professor Laventon', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
+});
+const Irida1 = new NPC('Clan Leader Irida', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
+});
+const Irida2 = new NPC('Clan Leader Irida', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
+});
+const Palina1 = new NPC('Warden Palina', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
+});
+const Volo7 = new NPC('Volo', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
+});
+const Iscan1 = new NPC('Warden Iscan', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
+});
+const Iscan2 = new NPC('Warden Iscan', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
+});
+const IscanPalina1 = new NPC('Iscan and Palina', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
+});
+const CharmCloverCoin3 = new NPC('Charm, Clover and Coin', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
+});
+const IscanPalina2 = new NPC('Iscan and Palina', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
+});
+const CharmCloverCoin4 = new NPC('Charm, Clover and Coin', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
+});
+const CharmCloverCoin5 = new NPC('Charm, Clover and Coin', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
+});
+const IscanPalina3 = new NPC('Iscan and Palina', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
+});
+const IridaPalinaIscan1 = new NPC('Irida, Palina and Iscan', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
+});
+const IscanPalina4 = new NPC('Iscan and Palina', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
+});
+const Irida3 = new NPC('Clan Leader Irida', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
+});
+const Kamado5 = new NPC('Commander Kamado', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
+});
+const LaventonAkari2 = new NPC('Laventon and Akari', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
+});
+const KamadoAdamanMelli1 = new NPC('Kamado, Adaman and Melli', [
     '',
 ], {
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
@@ -3578,6 +3703,7 @@ TownList['Prelude Beach'] = new Town(
     [TemporaryBattleList['Kamado 2'], new DockTownContent()],
     {
         requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
+        npcs: [Laventon1, ArcPhone, Laventon2, Laventon3, Kamado4],
     }
 );
 TownList['Jubilife Village'] = new Town(
@@ -3587,6 +3713,7 @@ TownList['Jubilife Village'] = new Town(
     [JubilifeVillageShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Jubilife Village']), TemporaryBattleList['Volo 1'], TemporaryBattleList['Akari 1'], TemporaryBattleList['Akari 2'], TemporaryBattleList['Adaman 1']],
     {
         requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
+        npcs: [Laventon4, Beni1, Akari1, Cyllene1, Laventon5, Cyllene2, Volo1, Akari3, Akari4, Beni2, AdamanIrida1, Akari5, Mai5, Volo2, Arezu1, Akari6, Beni3, Lian2, LaventonAkari2],
     }
 );
 TownList['Galaxy Hall'] = new Town(
@@ -3596,6 +3723,7 @@ TownList['Galaxy Hall'] = new Town(
     [new BulletinBoard(GameConstants.BulletinBoards.Hisui)],
     {
         requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
+        npcs: [Cyllene3, Laventon6, Cyllene4, Kamado1, AdamanIridaKamado1, LaventonCyllene1, AdamanMai1, Laventon9, Kamado2, KamadoArezu1, Cyllene5, BeniAdamanKamado1, Kamado3, IridaKamado1, Kamado5, KamadoAdamanMelli1],
     }
 );
 TownList['Fieldlands Camp'] = new Town(
@@ -3605,6 +3733,7 @@ TownList['Fieldlands Camp'] = new Town(
     [TemporaryBattleList['Warden Mai']],
     {
         requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
+        npcs: [Akari2, Laventon7, Mai1, Mai2, Laventon8],
     }
 );
 TownList['Heights Camp'] = new Town(
@@ -3614,6 +3743,7 @@ TownList['Heights Camp'] = new Town(
     [TemporaryBattleList['Alpha Kricketune']],
     {
         requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
+        npcs: [Mai3, Mai4, AdamanMai2],
     }
 );
 TownList['Grandtree Arena'] = new Town(
@@ -3623,15 +3753,17 @@ TownList['Grandtree Arena'] = new Town(
     [TemporaryBattleList['Warden Lian'], TemporaryBattleList['Irida 1'], TemporaryBattleList['Noble Kleavor 1'], TemporaryBattleList['Noble Kleavor 2']],
     {
         requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
+        npcs: [Lian1, LianIrida1, LianIrida2, LianIrida3, LianIrida4],
     }
 );
 TownList['Mirelands Camp'] = new Town(
     'Mirelands Camp',
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Hisui,
-    [],
+    [TemporaryBattleList['Coin 1']],
     {
         requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
+        npcs: [LaventonAkari1, CharmCloverCoin1, CharmCloverCoin2, Volo6],
     }
 );
 TownList['Bogbound Camp'] = new Town(
@@ -3650,6 +3782,7 @@ TownList['Ancient Solaceon Ruins'] = new Town(
     [TemporaryBattleList['Volo 2']],
     {
         requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
+        npcs: [Calaba1, Volo3, Volo4, Volo5, Calaba2],
     }
 );
 TownList['Sludge Mound'] = new Town(
@@ -3659,6 +3792,7 @@ TownList['Sludge Mound'] = new Town(
     [TemporaryBattleList['Ursaluna']],
     {
         requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
+        npcs: [Calaba3, Calaba4],
     }
 );
 TownList['Diamond Settlement'] = new Town(
@@ -3668,6 +3802,7 @@ TownList['Diamond Settlement'] = new Town(
     [],
     {
         requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
+        npcs: [ArezuCalabaAdaman1],
     }
 );
 TownList['Brava Arena'] = new Town(
@@ -3677,6 +3812,7 @@ TownList['Brava Arena'] = new Town(
     [TemporaryBattleList['Noble Lilligant 1'], TemporaryBattleList['Noble Lilligant 2']],
     {
         requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
+        npcs: [ArezuCalabaAdaman2, ArezuCalabaAdaman3],
     }
 );
 TownList['Beachside Camp'] = new Town(
@@ -3686,6 +3822,7 @@ TownList['Beachside Camp'] = new Town(
     [TemporaryBattleList['Irida 2']],
     {
         requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
+        npcs: [Laventon10, Irida1, Irida2],
     }
 );
 TownList['Coastlands Camp'] = new Town(
@@ -3695,15 +3832,27 @@ TownList['Coastlands Camp'] = new Town(
     [],
     {
         requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
+        npcs: [IscanPalina1, CharmCloverCoin3, IscanPalina2],
+    }
+);
+TownList['Iscan\'s Cabin'] = new Town(
+    'Iscan\'s Cabin',
+    GameConstants.Region.sinnoh,
+    GameConstants.SinnohSubRegions.Hisui,
+    [],
+    {
+        requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
+        npcs: [Volo7, Iscan1, Iscan2],
     }
 );
 TownList['Molten Arena'] = new Town(
     'Molten Arena',
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Hisui,
-    [TemporaryBattleList['Noble Arcanine 1'], TemporaryBattleList['Noble Arcanine 2']],
+    [TemporaryBattleList['Clover'], TemporaryBattleList['Coin 2'], TemporaryBattleList['Charm 1'], TemporaryBattleList['Noble Arcanine 1'], TemporaryBattleList['Noble Arcanine 2']],
     {
-        requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
+        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Firespit Island'))],
+        npcs: [CharmCloverCoin4, CharmCloverCoin5, IscanPalina3, IridaPalinaIscan1, IscanPalina4, Irida3],
     }
 );
 TownList['Highlands Camp'] = new Town(
@@ -3809,7 +3958,7 @@ TownList['Primeval Grotto'] = new Town(
     'Primeval Grotto',
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Hisui,
-    [],
+    [TemporaryBattleList['Charm 2']],
     {
         requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     }
@@ -4047,6 +4196,16 @@ TownList['Shrouded Ruins'] = new DungeonTown(
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Hisui,
     [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)]
+);
+TownList['Veilstone Cape'] = new DungeonTown(
+    'Veilstone Cape',
+    GameConstants.Region.sinnoh,
+    GameConstants.SinnohSubRegions.Hisui,
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
+    [],
+    {
+        npcs: [Palina1],
+    }
 );
 TownList['Firespit Island'] = new DungeonTown(
     'Firespit Island',

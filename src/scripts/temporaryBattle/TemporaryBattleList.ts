@@ -4289,6 +4289,17 @@ TemporaryBattleList['Volo 2'] = new TemporaryBattle(
         imageName: 'Volo1',
     }
 );
+TemporaryBattleList['Coin 1'] = new TemporaryBattle(
+    'Coin 1',
+    [new GymPokemon('Toxicroak', 348526193, 23)],
+    'I\'m not fond of this outcome, but at least it\'s still better than plowing fields for the Galaxy Team!',
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
+    undefined,
+    {
+        displayName: 'The Bandit Coin',
+        imageName: 'Coin',
+    }
+);
 TemporaryBattleList.Ursaluna = new TemporaryBattle(
     'Ursaluna',
     [new GymPokemon('Ursaluna', 2031393560, 26)],
@@ -4323,6 +4334,41 @@ TemporaryBattleList['Irida 2'] = new TemporaryBattle(
     {
         displayName: 'Clan Leader Irida',
         imageName: 'Irida',
+    }
+);
+TemporaryBattleList['Clover'] = new TemporaryBattle(
+    'Clover',
+    [new GymPokemon('Abomasnow', 348526193, 35)],
+    'I don\'t get it! How\'d I lose?!',
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
+    undefined,
+    {
+        displayName: 'The Bandit Clover',
+    }
+);
+TemporaryBattleList['Coin 2'] = new TemporaryBattle(
+    'Coin 2',
+    [new GymPokemon('Toxicroak', 348526193, 34)],
+    'What a blithering mooncalf I am. How could I let myself lose...',
+    [new TemporaryBattleRequirement('Clover 1')],
+    undefined,
+    {
+        displayName: 'The Bandit Coin',
+        imageName: 'Coin',
+    }
+);
+TemporaryBattleList['Charm 1'] = new TemporaryBattle(
+    'Charm 1',
+    [
+        new GymPokemon('Rhydon', 348526193, 34),
+        new GymPokemon('Gengar', 348526193, 35),
+    ],
+    'What a disgrace...',
+    [new TemporaryBattleRequirement('Coin 2')],
+    undefined,
+    {
+        displayName: 'The Bandit Charm',
+        imageName: 'Charm',
     }
 );
 TemporaryBattleList['Lord of the Isles: Arcanine'] = new TemporaryBattle(
@@ -4467,6 +4513,20 @@ TemporaryBattleList['Kamado 1'] = new TemporaryBattle(
     {
         displayName: 'The Galaxy Team\'s Kamado',
         imageName: 'Kamado',
+    }
+);
+TemporaryBattleList['Charm 2'] = new TemporaryBattle(
+    'Charm 2',
+    [
+        new GymPokemon('Rhydon', 348526193, 61),
+        new GymPokemon('Gengar', 348526193, 62),
+    ],
+    'Well, you are rather formidable...',
+    [new TemporaryBattleRequirement('Coin 2')],
+    undefined,
+    {
+        displayName: 'The Bandit Charm',
+        imageName: 'Charm',
     }
 );
 TemporaryBattleList['Dialga (Origin) 1'] = new TemporaryBattle(
