@@ -1540,6 +1540,7 @@ export const TemporaryBattles = [
     'Ash Ketchum Kalos',
     'Ash Ketchum Pinkan',
     'Calem 6',
+    'Marquis Grant',
     'Grand Duchess Diantha',
     'Hau 1',
     'Hau 2',
