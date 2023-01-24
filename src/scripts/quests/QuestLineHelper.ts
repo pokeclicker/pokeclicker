@@ -2744,7 +2744,7 @@ class QuestLineHelper {
         hisuiNobleQuestLine.addQuest(talktoIridaKamado1);
 
         const talktoLian2 = new TalkToNPCQuest(Lian2, 'Talk to Lian in Jubilife Village');
-        hisuiNobleQuestLine.addQuest(talkLian2);
+        hisuiNobleQuestLine.addQuest(talktoLian2);
 
         const talktoLaventon10 = new TalkToNPCQuest(Laventon10, 'Talk to Laventon at Beachside Camp');
         hisuiNobleQuestLine.addQuest(talktoLaventon10);
@@ -2771,7 +2771,7 @@ class QuestLineHelper {
         hisuiNobleQuestLine.addQuest(talktoIscan1);
 
         const catchDusknoir = new CaptureSpecificPokemonQuest('Dusknoir', 'Capture a Dusknoir to help Iscan make Basculegion Food.', 1, true);
-        jirachiQuestLine.addQuest(catchDusknoir);
+        hisuiNobleQuestLine.addQuest(catchDusknoir);
 
         const talktoIscan2 = new TalkToNPCQuest(Iscan2, 'Talk to Iscan at Iscan\'s Cabin.');
         hisuiNobleQuestLine.addQuest(talktoIscan2);
@@ -2856,13 +2856,13 @@ class QuestLineHelper {
     public static createHisuiSinnohQuestLine() {
         const hisuiSinnohQuestLine = new QuestLine('The power of Sinnoh', 'Put a stop to the frenzy of Sinnoh, the deity the Diamond and Pearl Clans revere.', new QuestLineCompletedRequirement('The Frenzied Nobles of Hisui'), GameConstants.BulletinBoards.Hisui);
 
-        App.game.quests.questLines().push(createHisuiSinnohQuestLine);
+        App.game.quests.questLines().push(hisuiSinnohQuestLine);
     }
 
     public static createHisuiVoloQuestLine() {
         const hisuiVoloQuestLine = new QuestLine('Volo\'s Dream', 'Help Volo find the remaining Sacred Plates.', new QuestLineCompletedRequirement('The power of Sinnoh'), GameConstants.BulletinBoards.Hisui);
 
-        App.game.quests.questLines().push(createHisuiVoloQuestLine);
+        App.game.quests.questLines().push(hisuiVoloQuestLine);
     }
 
     public static createHisuiForcesQuestLine() {
@@ -2934,7 +2934,7 @@ class QuestLineHelper {
         hisuiArceusQuestLine.addQuest(seekOutAllPokemon);
         */
 
-        App.game.quests.questLines().push(createHisuiArceusQuestLine);
+        App.game.quests.questLines().push(hisuiArceusQuestLine);
     }
 
     // Event QuestLines

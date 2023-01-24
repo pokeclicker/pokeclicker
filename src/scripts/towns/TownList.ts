@@ -3159,6 +3159,11 @@ const BeniAdamanKamado1 = new NPC('Beni, Adaman & Kamado', [
 ], {
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
+const ArezuCalabaAdaman1 = new NPC('Arezu, Calaba & Adaman', [
+    '',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 1, GameConstants.AchievementOption.less)]),
+});
 const ArezuCalabaAdaman2 = new NPC('Arezu, Calaba & Adaman', [
     '',
 ], {
@@ -3302,7 +3307,7 @@ const ForcesCogita1 = new NPC('Cogita', [
     'Such as Tornadus... In every direction it flies, stirring up tremendous storms as it goes. When a blizzard batters the Alabaster Icelands, Tornadus may be about.',
     'Also, Thundurus: as it flies around, it fires bolts of lightning every which way. When a rainstorm lashes the Cobalt Coastlands, Tornadus may be about.',
     'Lastly, Landorus, the Pokémon hailed as the Guardian of the Fields. It seems it can be glimpsed in the Obsidian Fieldlands. Perhaps you\'d be so good as to catch it for me?',
-    'I know not why these three have chosen to show themselves. Perhaps the cause lies with the space-time rift...or simply within their own whims...'
+    'I know not why these three have chosen to show themselves. Perhaps the cause lies with the space-time rift...or simply within their own whims...',
 ], {
     requirement: new MultiRequirement([new QuestLineStartedRequirement('The Incarnate Forces of Hisui'), new QuestLineStepCompletedRequirement('The Incarnate Forces of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
@@ -3310,7 +3315,7 @@ const ForcesCogita2 = new NPC('Cogita', [
     'Ah, you\'ve arrived. You now know much about Landorus, Tornadus and even Thundurus. Well done.',
     'In more normal times, I would bid you to let these three fly free as is their nature.',
     'But we are fresh from the tearing of the space-time rift. Until its aftereffects fade entirely, perhaps its best to keep our trio contained.',
-    'And now, it is time to tell you the rest. There is one more of that cohort. Come.'
+    'And now, it is time to tell you the rest. There is one more of that cohort. Come.',
     '<img src="assets/images/pokemon/905.png">',
     'This is Enamorus, a Pokémon hailed as the Herald of Spring. Enamorus is not particularly given to ill behaviour. But I imagine you\'d like to document her for your Pokédex, wouldn\'t you?',
     'Catch her then, if you like. She always flits about in the Crimson Mirelands.',

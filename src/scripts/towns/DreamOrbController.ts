@@ -55,7 +55,7 @@ class DreamOrbController implements Saveable {
             new DreamOrbLoot({type: ItemType.item, id: 'Calcium'}, 0.092),
             new DreamOrbLoot({type: ItemType.item, id: 'Carbos'}, 0.092),
         ]),
-        new DreamOrb('Blue', new MultiRequirement([new ObtainedPokemonRequirement('Landorus (Therian)'), new ObtainedPokemonRequirement('Enamorus')]) [
+        new DreamOrb('Blue', new MultiRequirement([new ObtainedPokemonRequirement('Landorus (Therian)'), new ObtainedPokemonRequirement('Enamorus')]), [
             new DreamOrbLoot({type: ItemType.item, id: 'Igglybuff'}, 0.2),
             new DreamOrbLoot({type: ItemType.item, id: 'Smoochum'}, 0.2),
             new DreamOrbLoot({type: ItemType.item, id: 'Enamorus (Therian)'}, 0.05),
