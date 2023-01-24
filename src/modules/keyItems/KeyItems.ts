@@ -54,9 +54,25 @@ export default class KeyItems implements Feature {
             new KeyItem(KeyItemType.Gem_case, 'A case specifically designed for holding gems.', undefined, undefined, undefined, 'Gem Case'),
             new KeyItem(KeyItemType.DNA_splicers, 'A splicer that fuses certain Pokémon.', undefined, undefined, undefined, 'DNA Splicers'),
             new KeyItem(KeyItemType.Reins_of_unity, 'Reins that people presented to the king. They enhance Calyrex’s power over bountiful harvests and unite Calyrex with its beloved steeds.', undefined, undefined, undefined, 'Reins of Unity'),
-            new KeyItem(KeyItemType.Pokerus_virus, 'A virus sample collected from the Hatchery.',
+            new KeyItem(KeyItemType.Pokerus_virus,
+                'A virus sample collected from your starter Pokémon. Infect more Pokémon in the hatchery, and use the new Pokérus Poké Ball option to focus catching Contagious pokemon for a damage boost.',
                 () => App.game.statistics.dungeonsCleared[getDungeonIndex('Distortion World')]() > 0,
-                undefined, () => { App.game.party.getPokemon(RegionalStarters[Region.kanto][player.regionStarters[Region.kanto]()]).pokerus = Pokerus.Contagious; }, 'Pokérus Virus'),
+                undefined,
+                () => {
+                    App.game.party.getPokemon(
+                        RegionalStarters[Region.kanto][player.regionStarters[Region.kanto]()],
+                    ).pokerus = Pokerus.Contagious;
+                    App.game.pokeballs.alreadyCaughtContagiousSelection = App.game.pokeballs.alreadyCaughtSelection;
+                    Information.show({
+                        steps: [
+                            {
+                                element: document.getElementById('pokeballSelector'),
+                                intro: 'You can now choose a different ball for Pokémon which are Contagious with Pokérus. This will be helpful for gaining EVs on those Pokémon.</br></br>Note: If you set the Contagious selector to "Do not catch", you will not catch Contagious pokemon - even if your Caught selector is set to catch Pokémon.',
+                            },
+                        ],
+                        exitOnEsc: false,
+                    });
+                }, 'Pokérus Virus'),
         ];
     }
 

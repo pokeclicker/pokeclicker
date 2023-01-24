@@ -1927,6 +1927,8 @@ class Update implements Saveable {
         },
 
         '0.10.9': ({ playerData, saveData }) => {
+            saveData.pokeballs.alreadyCaughtContagiousSelection = saveData.pokeballs.alreadyCaughtSelection;
+
             //Hex Maniac Aster
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 112);
 
