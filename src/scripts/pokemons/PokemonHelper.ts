@@ -22,23 +22,6 @@ enum PokemonLocationType {
 }
 
 class PokemonHelper extends TmpPokemonHelper {
-
-    // Can't move to modules yet because it wants to know what a PartyPokemon looks like
-    // TODO: Maybe this one should be on Party too...
-    public static getPokemonsWithEvolution(evoType: GameConstants.StoneType): PartyPokemon[] {
-        return App.game.party.caughtPokemon.filter((partyPokemon: PartyPokemon) => {
-            if (!partyPokemon.evolutions) {
-                return false;
-            }
-            for (const evolution of partyPokemon.evolutions) {
-                if (evolution.trigger === EvoTrigger.STONE && (evolution as StoneEvoData).stone == evoType && EvolutionHandler.isSatisfied(evolution) && PokemonHelper.calcNativeRegion(evolution.evolvedPokemon) <= player.highestRegion()) {
-                    return true;
-                }
-            }
-            return false;
-        }).sort((a, b) => a.id - b.id);
-    }
-
     /*
     PRETTY MUCH ONLY USED BY THE BOT BELOW
     */
@@ -328,6 +311,16 @@ class PokemonHelper extends TmpPokemonHelper {
         return dungeons;
     }
 
+    public static getPokemonQuestLineReward(pokemonName: PokemonNameType): Array<string> {
+        const questLines = [];
+        App.game.quests.questLines().forEach(questLine => questLine.quests().forEach(quest => {
+            if ((quest as any).customReward?.toString().includes(`'${pokemonName}'`)) {
+                questLines.push(questLine.name);
+            }
+        }));
+        return questLines;
+    }
+
     public static getPokemonLocations = (pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none) => {
         const encounterTypes = {};
         // Routes
@@ -420,6 +413,12 @@ class PokemonHelper extends TmpPokemonHelper {
         const dungeonReward = PokemonHelper.getPokemonDungeonReward(pokemonName);
         if (dungeonReward.length) {
             encounterTypes[PokemonLocationType.DungeonReward] = dungeonReward;
+        }
+
+        // Quest Line reward
+        const questLineReward = PokemonHelper.getPokemonQuestLineReward(pokemonName);
+        if (questLineReward.length) {
+            encounterTypes[PokemonLocationType.QuestLineReward] = questLineReward;
         }
 
         // Return the list of items

@@ -194,6 +194,15 @@ namespace GameConstants {
         battlePoint,
         contestToken,
     }
+    declare const LuxuryBallCurrencyRate: Record<Currency, number> = {
+        [Currency.money]: 300000,
+        [Currency.questPoint]: 900,
+        [Currency.dungeonToken]: 15000,
+        [Currency.diamond]: 15,
+        [Currency.farmPoint]: 900,
+        [Currency.battlePoint]: 150,
+        [Currency.contestToken]: 900,
+    };
     declare enum TypeEffectiveness {
         Immune,
         NotVery,
@@ -678,4 +687,10 @@ namespace GameConstants {
         sevii,
         magikarpJump
     }
+    declare const DayCycleStartHours: Record<DayCyclePart, number> = {
+        [DayCyclePart.Dawn]: 6,
+        [DayCyclePart.Day]: 7,
+        [DayCyclePart.Dusk]: 17,
+        [DayCyclePart.Night]: 18,
+    };
 }

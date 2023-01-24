@@ -30,7 +30,7 @@
                                 <!-- ko foreach: gems -->
                                 <tr>
                                     <td data-bind="text: App.game.gems.gemWallet[$data.gemType]().toLocaleString('en-US')"></td>
-                                    <td><img height="24px" data-bind="attr: {src: Gems.image($data.gemType) }"></img></td>
+                                    <td><img height="24px" data-bind="attr: {src: Gems.image($data.gemType) }"/></td>
                                     <td data-bind="text: amount.toLocaleString('en-US') + ' x ' + PokemonType[$data.gemType]"></td>
                                     <!-- ko if: $index() === 0 -->
                                     <td class='vertical-middle' data-bind="attr: { rowspan: $parent.gems.length }">→</td>
@@ -43,7 +43,7 @@
                                             trigger: 'hover',
                                             placement:'bottom',
                                             html: true
-                                          }">
+                                          }"/>
                                     </td>
                                     <td class='vertical-middle' data-bind='attr: { rowspan: $parent.gems.length }, text: $parent.item.amount + " × " + $parent.item.itemType.displayName'></td>
                                     <td class='vertical-middle' data-bind="attr: { rowspan: $parent.gems.length }">
