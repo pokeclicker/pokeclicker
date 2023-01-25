@@ -1091,6 +1091,14 @@ export const GalarGyms = [
     'Elite Dojo Master Mustard',
     'Elite Trainer Peony',
 ];
+export const HisuiGyms = [
+    'Grandtree Arena',
+    'Brava Arena',
+    'Molten Arena',
+    'Moonview Arena',
+    'Icepeak Arena',
+    'Temple of Sinnoh',
+];
 
 export const OrangeGyms = [
     'Mikan Island',
@@ -1121,6 +1129,7 @@ export const RegionGyms = [
     KalosGyms,
     AlolaGyms,
     GalarGyms,
+    HisuiGyms,
     // Keep it at the bottom, as we want optional badges at the bottom
     OrangeGyms,
     MagikarpJumpGyms,
@@ -1723,7 +1732,6 @@ export const TemporaryBattles = [
     'Dialga (Origin) 2',
     'Palkia (Origin) 2',
     'Volo 3',
-    'Volo 4',
     'Giratina (Origin)',
     'Tornadus 1',
     'Tornadus 2',

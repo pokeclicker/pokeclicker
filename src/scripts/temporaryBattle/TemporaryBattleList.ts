@@ -4694,8 +4694,8 @@ TemporaryBattleList['Volo 3'] = new TemporaryBattle(
         imageName: 'Volo2',
     }
 );
-TemporaryBattleList['Volo 4'] = new TemporaryBattle(
-    'Volo 4',
+TemporaryBattleList['Volo 3'] = new TemporaryBattle(
+    'Volo 3',
     [
         new GymPokemon('Giratina (Altered)', 348526193, 70),
         new GymPokemon('Giratina (Origin)', 348526193, 70),
@@ -4858,7 +4858,7 @@ TemporaryBattleList['Enamorus 3'] = new TemporaryBattle(
 TemporaryBattleList.Arceus = new TemporaryBattle(
     'Arceus',
     [new GymPokemon('Arceus (Normal)', 2031393560, 75)],
-    'Arceus granted you a part of its self, and the Legend Plate!',
+    'Arceus granted you a part of its self, and the Legend Plate!'//That text needs changed, not sure what to, though,
     [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
     undefined,
     {
