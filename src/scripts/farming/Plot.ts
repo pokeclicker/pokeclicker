@@ -67,7 +67,7 @@ class Plot implements Saveable {
 
                 const boost = this.auraBoost();
                 const value = this.berryData.aura.getAuraValue(this.stage());
-                return value > 1 ? value * boost : value / boost;
+                return value > 1 || this.berry === BerryType.Micle ? value * boost : value / boost;
             }).extend({ rateLimit: 50 }),
         };
 
@@ -124,27 +124,27 @@ class Plot implements Saveable {
         this.formattedAuras = ko.pureComputed(() => {
             const auraStr = [];
             if (this.auraGrowth() !== 1) {
-                auraStr.push(`Growth: ${this.auraGrowth().toFixed(2)}x`);
+                auraStr.push(`Growth: ×${this.auraGrowth().toFixed(2)}`);
             }
 
             if (this.auraHarvest() !== 1) {
-                auraStr.push(`Harvest: ${this.auraHarvest().toFixed(2)}x`);
+                auraStr.push(`Harvest: ×${this.auraHarvest().toFixed(2)}`);
             }
 
             if (this.auraMutation() !== 1) {
-                auraStr.push(`Mutation: ${this.auraMutation().toFixed(2)}x`);
+                auraStr.push(`Mutation: ×${this.auraMutation().toFixed(2)}`);
             }
 
             if (this.auraReplant() !== 1) {
-                auraStr.push(`Replant: ${this.auraReplant().toFixed(2)}x`);
+                auraStr.push(`Replant: ×${this.auraReplant().toFixed(2)}`);
             }
 
             if (this.auraDeath() !== 1) {
-                auraStr.push(`Death: ${this.auraDeath().toFixed(2)}x`);
+                auraStr.push(`Death: ×${this.auraDeath().toFixed(2)}`);
             }
 
             if (this.auraBoost() !== 1) {
-                auraStr.push(`Boost: ${this.auraBoost().toFixed(2)}x`);
+                auraStr.push(`Boost: ×${this.auraBoost().toFixed(2)}`);
             }
             return auraStr.join('<br/>');
         });
@@ -214,7 +214,7 @@ class Plot implements Saveable {
 
             if (this.emittingAura.type() !== null) {
                 tooltip.push('<u>Aura Emitted:</u>');
-                tooltip.push(`${AuraType[this.emittingAura.type()]}: ${this.emittingAura.value().toFixed(2)}x`);
+                tooltip.push(`${AuraType[this.emittingAura.type()]}: ${this.berry === BerryType.Micle ? `+${(this.emittingAura.value() * 100).toFixed(2)}%` : `×${this.emittingAura.value().toFixed(2)}`}`);
             }
             const auraStr = this.formattedAuras();
             if (auraStr) {
@@ -367,7 +367,7 @@ class Plot implements Saveable {
             return undefined;
         }
         // Chance to generate wandering Pokemon
-        if (Rand.chance(GameConstants.WANDER_RATE * App.game.farming.externalAuras[AuraType.Attract]() * Math.max(1 - App.game.farming.externalAuras[AuraType.Repel](), 0))) {
+        if (Rand.chance(GameConstants.WANDER_RATE * App.game.farming.externalAuras[AuraType.Attract]() * (1 - App.game.farming.externalAuras[AuraType.Repel]()))) {
             // Get a random Pokemon from the list of possible encounters
             const availablePokemon: PokemonNameType[] = this.berryData.wander.filter(pokemon => PokemonHelper.calcNativeRegion(pokemon) <= player.highestRegion());
             const wanderPokemon = Rand.fromArray(availablePokemon);
