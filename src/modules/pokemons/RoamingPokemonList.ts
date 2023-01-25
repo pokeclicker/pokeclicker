@@ -97,8 +97,8 @@ RoamingPokemonList.add(Region.johto, 0, new RoamingPokemon('Raikou', new QuestLi
 RoamingPokemonList.add(Region.johto, 0, new RoamingPokemon('Entei', new QuestLineStepCompletedRequirement('The Legendary Beasts', 3)));
 
 // Hoenn
-RoamingPokemonList.add(Region.hoenn, 0, new RoamingPokemon('Latios', new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)));
-RoamingPokemonList.add(Region.hoenn, 0, new RoamingPokemon('Latias', new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)));
+RoamingPokemonList.add(Region.hoenn, 0, new RoamingPokemon('Latios', new QuestLineStepCompletedRequirement('The Eon Duo', 3)));
+RoamingPokemonList.add(Region.hoenn, 0, new RoamingPokemon('Latias', new QuestLineStepCompletedRequirement('The Eon Duo', 3)));
 // TODO: these need another way to be obtained
 RoamingPokemonList.add(Region.hoenn, 0, new RoamingPokemon('Jirachi', new QuestLineStepCompletedRequirement('Wish Maker', 8)));
 
