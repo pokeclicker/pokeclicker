@@ -2166,7 +2166,7 @@ GymList['Alfornada'] = new Gym(
     '',
     [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)]
 );
-GymList['Glaseado Mountain'] = new Gym(
+/*GymList['Glaseado Mountain'] = new Gym(
     'Grusha',
     'Glaseado Mountain',
     [
@@ -2179,7 +2179,7 @@ GymList['Glaseado Mountain'] = new Gym(
     250000,
     '',
     [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)]
-);
+);*/
 GymList['Elite Rika'] = new Gym(
     'Rika',
     'Elite Rika',
@@ -2258,7 +2258,7 @@ GymList['Top Champion Geeta'] = new Gym(
     () => {},
     { champion: true }
 );
-GymList['Champion Nemona'] = new Gym(
+/*GymList['Champion Nemona'] = new Gym(
     'Nemona',
     'Champion Nemona',
     [
@@ -2275,7 +2275,7 @@ GymList['Champion Nemona'] = new Gym(
     250000,
     '',
     [new GymBadgeRequirement(BadgeEnums.Elite_PaldeaChampion)]
-);
+);*/
 GymList['Segin Squad\'s Base'] = new Gym(
     'Giacomo',
     'Segin Squad\'s Base',
@@ -2343,7 +2343,7 @@ GymList['Caph Squad\'s Base'] = new Gym(
     '',
     [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)]
 );
-GymList['Director Clavell'] = new Gym(
+/*GymList['Director Clavell'] = new Gym(
     'Clavell',
     'Director Clavell',
     [
@@ -2479,4 +2479,4 @@ GymList['AI Turo'] = new Gym(
     250000,
     '',
     [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)]
-);
+);*/
