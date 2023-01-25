@@ -822,6 +822,38 @@ TemporaryBattleList['Meta Groudon'] = new TemporaryBattle(
         hideTrainer: true,
     }
 );
+TemporaryBattleList.Latias = new TemporaryBattle(
+    'Latias',
+    [new GymPokemon('Latias', 13800000, 100)],
+    '<i>Latias joins your party, and Latios flies away back to the mainland.</i>',
+    [new MultiRequirement([new QuestLineStepCompletedRequirement('The Eon Duo', 3), new CustomRequirement(ko.pureComputed(() => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Latios')]()), 1, undefined, GameConstants.AchievementOption.less)])],
+    undefined,
+    {
+        displayName: 'Latias',
+        firstTimeRewardFunction: () => {
+            App.game.party.gainPokemonByName('Latias');
+        },
+        returnTown: 'Southern Island',
+        imageName: '../pokemon/380',
+        hideTrainer: true,
+    }
+);
+TemporaryBattleList.Latios = new TemporaryBattle(
+    'Latios',
+    [new GymPokemon('Latios', 13800000, 100)],
+    '<i>Latios joins your party, and Latias flies away back to the mainland.</i>',
+    [new MultiRequirement([new QuestLineStepCompletedRequirement('The Eon Duo', 3), new CustomRequirement(ko.pureComputed(() => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Latias')]()), 1, undefined, GameConstants.AchievementOption.less)])],
+    undefined,
+    {
+        displayName: 'Latios',
+        firstTimeRewardFunction: () => {
+            App.game.party.gainPokemonByName('Latios');
+        },
+        returnTown: 'Southern Island',
+        imageName: '../pokemon/381',
+        hideTrainer: true,
+    }
+);
 TemporaryBattleList['Sevii Rocket Grunt 1'] = new TemporaryBattle(
     'Sevii Rocket Grunt 1',
     [
