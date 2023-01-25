@@ -9019,7 +9019,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 270,
         'eggCycles': 40,
-        // 'evolutions': [MegaEvolution('Tyranitar', 'Mega Tyranitar')],
+        'evolutions': [MegaEvolution('Tyranitar', 'Mega Tyranitar')],
         'base': {
             'hitpoints': 100,
             'attack': 134,
@@ -10347,7 +10347,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 239,
         'catchRate': 45,
-        // 'evolutions': [MegaEvolution('Aggron', 'Mega Aggron')],
+        'evolutions': [MegaEvolution('Aggron', 'Mega Aggron')],
         'base': {
             'hitpoints': 70,
             'attack': 110,
