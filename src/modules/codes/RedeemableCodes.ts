@@ -86,7 +86,7 @@ export default class RedeemableCodes implements Saveable {
 
             new RedeemableCode('eon-ticket', 528036885, false, async () => {
                 // Give the player the Eon Ticket
-                App.game.keyItems.gainKeyItem(KeyItemType.Eon_Ticket, true);
+                App.game.keyItems.gainKeyItem(KeyItemType.Eon_ticket, true);
                 // Notify that the code was activated successfully
                 Notifier.notify({
                     title: 'Code activated!',
