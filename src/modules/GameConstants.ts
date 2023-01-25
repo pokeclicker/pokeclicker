@@ -793,6 +793,7 @@ export enum StoneType {
     'Auspicious_armor',
     'Malicious_armor',
     'Leaders_crest',
+    'Gimmighoul_coin',
 }
 
 export enum FossilPieceType {
@@ -1106,7 +1107,7 @@ export const PaldeaGyms = [
     'Medali',
     'Montenevera',
     'Alfornada',
-    /*'Glaseado Mountain',*/
+    'Glaseado Mountain',
     'Elite Rika',
     'Elite Poppy',
     'Elite Larry',
@@ -1393,6 +1394,7 @@ export const GalarDungeons = [
 
 export const PaldeaDungeons = [
     'Inlet Grotto', // 167
+    'Glaseado Mountain',
 ];
 
 export const RegionDungeons = [

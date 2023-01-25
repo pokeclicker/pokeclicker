@@ -6700,13 +6700,22 @@ TownList['Zapapico'] = new Town(
         requirements: [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
     }
 );
+TownList['Montenevera'] = new Town(
+    'Montenevera',
+    GameConstants.Region.paldea,
+    GameConstants.PaldeaSubRegions.Paldea,
+    [],
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
+    }
+);
 TownList['Pokémon League Paldea'] = new Town(
     'Pokémon League Paldea',
     GameConstants.Region.paldea,
     GameConstants.PaldeaSubRegions.Paldea,
     [GymList['Elite Rika'], GymList['Elite Poppy'], GymList['Elite Larry'], GymList['Elite Hassel'], GymList['Top Champion Geeta'], pokeLeagueShop()],
     {
-        requirements: [new GymBadgeRequirement(BadgeEnums.Bug_Gym), new GymBadgeRequirement(BadgeEnums.Grass_Gym), new GymBadgeRequirement(BadgeEnums.Electric_Gym), new GymBadgeRequirement(BadgeEnums.Water_Gym), new GymBadgeRequirement(BadgeEnums.Normal_Gym), new GymBadgeRequirement(BadgeEnums.Ghost_Gym), new GymBadgeRequirement(BadgeEnums.Psychic_Gym)/*, new GymBadgeRequirement(BadgeEnums.Ice_Gym)*/],
+        requirements: [new GymBadgeRequirement(BadgeEnums.Bug_Gym), new GymBadgeRequirement(BadgeEnums.Grass_Gym), new GymBadgeRequirement(BadgeEnums.Electric_Gym), new GymBadgeRequirement(BadgeEnums.Water_Gym), new GymBadgeRequirement(BadgeEnums.Normal_Gym), new GymBadgeRequirement(BadgeEnums.Ghost_Gym), new GymBadgeRequirement(BadgeEnums.Psychic_Gym), new GymBadgeRequirement(BadgeEnums.Ice_Gym)],
     }
 );
 TownList['Segin Squad\'s Base'] = new Town(
@@ -6776,6 +6785,12 @@ TownList['Zero Lab'] = new Town(
 // Paldea Dungeons
 TownList['Inlet Grotto'] = new DungeonTown(
     'Inlet Grotto',
+    GameConstants.Region.paldea,
+    GameConstants.PaldeaSubRegions.Paldea,
+    [new RouteKillRequirement(10, GameConstants.Region.paldea, 1)]
+);
+TownList['Glaseado Mountain'] = new DungeonTown(
+    'Glaseado Mountain',
     GameConstants.Region.paldea,
     GameConstants.PaldeaSubRegions.Paldea,
     [new RouteKillRequirement(10, GameConstants.Region.paldea, 1)]

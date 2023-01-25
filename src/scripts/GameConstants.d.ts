@@ -311,6 +311,7 @@ namespace GameConstants {
         'Auspicious_armor',
         'Malicious_armor',
         'Leaders_crest',
+        'Gimmighoul_coin',
     }
     declare enum FossilPieceType {
         'None',

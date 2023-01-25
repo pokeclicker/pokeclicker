@@ -2166,7 +2166,7 @@ GymList['Alfornada'] = new Gym(
     '',
     [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)]
 );
-/*GymList['Glaseado Mountain'] = new Gym(
+GymList['Glaseado Mountain'] = new Gym(
     'Grusha',
     'Glaseado Mountain',
     [
@@ -2179,7 +2179,7 @@ GymList['Alfornada'] = new Gym(
     250000,
     '',
     [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)]
-);*/
+);
 GymList['Elite Rika'] = new Gym(
     'Rika',
     'Elite Rika',

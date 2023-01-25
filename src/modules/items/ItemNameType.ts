@@ -108,6 +108,7 @@ export type ItemNameType
     | 'Auspicious_armor'
     | 'Malicious_armor'
     | 'Leaders_crest'
+    | 'Gimmighoul_coin'
     | 'FarmHandBailey'
     | 'FarmHandKerry'
     | 'FarmHandRiley'

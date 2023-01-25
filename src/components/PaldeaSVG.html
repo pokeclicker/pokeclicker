@@ -24,6 +24,22 @@
         })
     %>
 
+    <!--South Province (Area Two)-->
+    <%- include('templates/mapRoute',
+        { route: 3, region: 8
+        , width: 3, height: 3
+        , x: 6, y: 0, name: "SP2"
+        })
+    %>
+
+    <!--South Province (Area Three)-->
+    <%- include('templates/mapRoute',
+        { route: 4, region: 8
+        , width: 3, height: 3
+        , x: 9, y: 0, name: "SP3"
+        })
+    %>
+
     <!-- ----- -->
     <!-- TOWNS -->
     <!-- ----- -->
@@ -133,10 +149,18 @@
         })
     %>
 
+    <!--Montenevera-->
+    <%- include('templates/mapTown',
+        { name: "Montenevera"
+        , x: 36, y: 20
+        , width: 3, height: 3
+        })
+    %>
+
     <!--Pokémon League Paldea-->
     <%- include('templates/mapTown',
         { name: "Pokémon League Paldea"
-        , x: 36, y: 20
+        , x: 39, y: 20
         , width: 3, height: 3
         })
     %>
@@ -144,7 +168,7 @@
     <!--Segin Squad's Base-->
     <%- include('templates/mapTown',
         { name: "Segin Squad's Base"
-        , x: 39, y: 20
+        , x: 42, y: 20
         , width: 3, height: 3
         })
     %>
@@ -152,7 +176,7 @@
     <!--Schedar Squad's Base-->
     <%- include('templates/mapTown',
         { name: "Schedar Squad's Base"
-        , x: 42, y: 20
+        , x: 45, y: 20
         , width: 3, height: 3
         })
     %>
@@ -160,7 +184,7 @@
     <!--Navi Squad's Base-->
     <%- include('templates/mapTown',
         { name: "Navi Squad's Base"
-        , x: 45, y: 20
+        , x: 48, y: 20
         , width: 3, height: 3
         })
     %>
@@ -168,7 +192,7 @@
     <!--Ruchbah Squad's Base-->
     <%- include('templates/mapTown',
         { name: "Ruchbah Squad's Base"
-        , x: 48, y: 20
+        , x: 51, y: 20
         , width: 3, height: 3
         })
     %>
@@ -176,7 +200,7 @@
     <!--Caph Squad's Base-->
     <%- include('templates/mapTown',
         { name: "Caph Squad's Base"
-        , x: 51, y: 20
+        , x: 54, y: 20
         , width: 3, height: 3
         })
     %>
@@ -184,7 +208,7 @@
     <!--Zero Gate-->
     <%- include('templates/mapTown',
         { name: "Zero Gate"
-        , x: 54, y: 20
+        , x: 57, y: 20
         , width: 3, height: 3
         })
     %>
@@ -192,7 +216,7 @@
     <!--Zero Lab-->
     <%- include('templates/mapTown',
         { name: "Zero Lab"
-        , x: 57, y: 20
+        , x: 60, y: 20
         , width: 3, height: 3
         })
     %>
@@ -205,6 +229,14 @@
     <%- include('templates/mapDungeon',
         { name: "Inlet Grotto"
         , x: 0, y: 40
+        , width: 3, height: 3
+        })
+    %>
+
+    <!--Glaseado Mountain-->
+    <%- include('templates/mapDungeon',
+        { name: "Glaseado Mountain"
+        , x: 3, y: 40
         , width: 3, height: 3
         })
     %>

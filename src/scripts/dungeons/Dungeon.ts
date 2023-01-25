@@ -9269,3 +9269,20 @@ dungeonList['Inlet Grotto'] = new Dungeon('Inlet Grotto',
     33915762,
     [new DungeonBossPokemon('Houndoom', 161099869, 30)],
     2200000, 1);
+
+//This is ridiculous
+dungeonList['Glaseado Mountain'] = new Dungeon('Glaseado Mountain',
+    ['Magneton', 'Haunter', 'Sneasel', 'Ursaring', 'Delibird', 'Kirlia', 'Gardevoir', 'Vigoroth', 'Grumpig', 'Banette', 'Snorunt', 'Snover', 'Abomasnow', 'Gothita', 'Deerling (Winter)', 'Sawsbuck (Winter)', 'Axew', 'Fraxure', 'Cubchoo', 'Cryogonal', 'Pyroar', 'Bergmite', 'Avalugg', 'Crabominable', 'Fomantis', 'Lurantis', 'Mimikyu', 'Snom', 'Greavard', 'Revavroom', 'Cetoddle', /*Frigibax may end up Dragon Egg exclusive.*/'Frigibax', 'Tinkatuff', 'Murkrow', 'Drifblim', 'Klefki', 'Chansey', 'Flareon', 'Misdreavus', 'Gallade', 'Honchkrow', 'Rufflet', 'Gogoat', 'Lycanroc (Midday)', 'Lycanroc (Midnight)', 'Mudbray', 'Mudsdale', 'Greedent', 'Lokix', 'Flittle', 'Espathra', 'Scovillian', 'Pawmo', 'Bronzong', 'Glaceon', 'Froslass', 'Beartic', 'Crabrawler', 'Psyduck', 'Golduck', 'Magikarp', 'Vaporeon', 'Dunsparce', 'Altaria', 'Whiscash', 'Mismagius', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Goomy', 'Drednaw', 'Hattrem', 'Dreepy', 'Flamigo', 'Clodsire', 'Floatzel', 'Barraskewda', 'Tadbulb', 'Bellibolt', 'Shellder', 'Cloyster', 'Gyarados', 'Qwilfish', 'Skrelp', 'Clauncher', 'Clawitzer', 'Finizen', 'Kilowattrel', 'Hariyama', 'Gumshoos', 'Copperajah', 'Naclstack', 'Chansey', 'Jumpluff', 'Sunflora', 'Vespiquen', 'Vivillon (Fancy)', 'Floette (Red)', 'Floette (Yellow)', 'Floette (Orange)', 'Floette (Blue)', 'Floette (White)', 'Dolliv', 'Hypno', 'Bronzong', 'Tinkatuff', 'Gastly', 'Mareep', 'Hoppip', 'Teddiursa', 'Phanpy', 'Ralts', 'Makuhita', 'Spoink', 'Swablu', 'Barboach', 'Combee', 'Buizel', 'Drifloon', 'Gible', 'Litleo', 'Bergmite', 'Yungoos', 'Salandit', 'Skwovet', 'Chewtle', 'Arrokuda', 'Hatenna', 'Cufant', 'Pawmi', 'Smoliv', 'Nacli', 'Varoom', 'Paldean Wooper', /*Fixed encounter only:*/'Weavile', 'Frosmoth', 'Gimmighoul (Chest)'],
+    {
+        common: [
+            {loot: 'Lucky_egg'},
+            {loot: 'Lucky_incense'},
+        ],
+    },
+    33915762,
+    [
+        new DungeonBossPokemon('Spiritomb', 161099869, 30),
+        new DungeonBossPokemon('Cetitan', 161099869, 30),
+        new DungeonBossPokemon('Arctibax', 161099869, 30),
+    ],
+    2200000, 1);

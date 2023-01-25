@@ -105,3 +105,4 @@ ItemList.White_mane_hair   = new EvolutionStone(GameConstants.StoneType.White_ma
 ItemList.Auspicious_armor   = new EvolutionStone(GameConstants.StoneType.Auspicious_armor, 5000, undefined , 'Auspicious Armor');
 ItemList.Malicious_armor   = new EvolutionStone(GameConstants.StoneType.Malicious_armor, 5000, undefined , 'Malicious Armor');
 ItemList.Leaders_crest   = new EvolutionStone(GameConstants.StoneType.Leaders_crest, 5000, undefined , 'Leader\'s Crest');
+ItemList.Gimmighoul_coin   = new EvolutionStone(GameConstants.StoneType.Gimmighoul_coin, 5000, undefined , 'Gimmighoul Coin');

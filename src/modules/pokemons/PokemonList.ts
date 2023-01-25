@@ -17877,6 +17877,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 70,
             'speed': 70,
         },
+        'heldItem': { type: ItemType.item, id: 'Leaders_crest' },//Need this to not drop until Paldea
     },
     {
         'id': 626,
@@ -29078,7 +29079,8 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 60,
         'catchRate': 45,
-        'evolutions': [DummyEvolution('Gimmighoul (Chest)', 'Gholdengo')],
+        'evolutions': [StoneEvolution('Gimmighoul (Chest)', 'Gholdengo', StoneType.Gimmighoul_coin)],
+        'heldItem': { type: ItemType.item, id: 'Gimmighoul_coin' },
         'gender': {
             'type': Genders.Genderless,
         },
@@ -29100,6 +29102,7 @@ export const pokemonList = createPokemonArray(
         'exp': 60,
         'catchRate': 45,
         'evolutions': [DummyEvolution('Gimmighoul (Roaming)', 'Gholdengo')],
+        'heldItem': { type: ItemType.item, id: 'Gimmighoul_coin' },
         'gender': {
             'type': Genders.Genderless,
         },
