@@ -19,7 +19,7 @@ Lips around near ocean
 
 200,200,200 tint on darker water
 
-no tint on lighter water
+No tint on lighter water
 
 ![](https://i.imgur.com/cHVbyMY.png)
 
@@ -34,13 +34,13 @@ no tint on lighter water
 <br/>![](https://i.imgur.com/KYLWlLm.png)
 
 **Large Town:**
-<br/>use the larger PokeCenter and then add something else smaller
+<br/>Use the larger PokeCenter and then add something else smaller
 <br/>Icon Examples:
 <br/>![](https://i.imgur.com/iyCxpCr.png)
 <br/>![](https://i.imgur.com/Qkj4tQR.png)
 
 **Town With Gym:**
-<br/>place icon beside the town
+<br/>Place icon beside the town
 <br/>Icon:
 <br/>![](https://i.imgur.com/oDGtdmY.png)
 
@@ -66,3 +66,8 @@ When exporting, use the following settings:
 ## NOTES:
 All maps must be 100 x 60 tiles, 16px per tile.
 Export image size must be 1600 x 960px.
+
+## TIPS:
+You can see the coordinates in the bottom left when hovering your cursor over the map.
+
+You can use Terrain Sets in the bottom right to easily add mountains and paths.

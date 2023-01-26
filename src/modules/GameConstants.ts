@@ -1446,6 +1446,8 @@ export const TemporaryBattles = [
     'Butler 1',
     'Butler 2',
     'Meta Groudon',
+    'Latios',
+    'Latias',
     'Sevii Rocket Grunt 1',
     'Sevii Rocket Grunt 2',
     'Sevii Rocket Grunt 3',
@@ -1541,6 +1543,7 @@ export const TemporaryBattles = [
     'Ash Ketchum Kalos',
     'Ash Ketchum Pinkan',
     'Calem 6',
+    'Marquis Grant',
     'Grand Duchess Diantha',
     'Hau 1',
     'Hau 2',
@@ -1831,8 +1834,8 @@ export enum ExtraAchievementCategories {
     magikarpJump,
 }
 export const DayCycleStartHours: Record<DayCyclePart, number> = {
-    [DayCyclePart.Dawn]: 6,
-    [DayCyclePart.Day]: 7,
+    [DayCyclePart.Dawn]: 5,
+    [DayCyclePart.Day]: 6,
     [DayCyclePart.Dusk]: 17,
     [DayCyclePart.Night]: 18,
 };
