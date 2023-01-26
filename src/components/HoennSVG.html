@@ -277,15 +277,8 @@
     <!--Route 125-->
     <%- include('templates/mapRoute',
         { route: 125, region: 2
-        , width: 10, height: 3
+        , width: 10, height: 2
         , x: 83, y: 10
-        })
-    %>
-    <!--Route 125 extension-->
-    <%- include('templates/mapRoute',
-        { route: 125, region: 2
-        , width: 4, height: 3
-        , x: 83, y: 13
         , noText: true
         })
     %>
@@ -293,23 +286,39 @@
     <%- include('templates/mapRoute',
         { route: 125, region: 2
         , width: 2, height: 3
-        , x: 91, y: 13
+        , x: 83, y: 12
         , noText: true
         })
     %>
     <!--Route 125 extension-->
     <%- include('templates/mapRoute',
         { route: 125, region: 2
-        , width: 5, height: 2.5
-        , x: 83, y: 16
+        , width: 4, height: 2
+        , x: 89, y: 12
         , noText: true
         })
     %>
     <!--Route 125 extension-->
     <%- include('templates/mapRoute',
         { route: 125, region: 2
-        , width: 5, height: 3
-        , x: 88, y: 16
+        , width: 5, height: 3.5
+        , x: 83, y: 15
+        })
+    %>
+    <!--Route 125 extension-->
+    <%- include('templates/mapRoute',
+        { route: 125, region: 2
+        , width: 2, height: 4
+        , x: 88, y: 15
+        , noText: true
+        })
+    %>
+
+    <!--Route 125 extension-->
+    <%- include('templates/mapRoute',
+        { route: 125, region: 2
+        , width: 1, height: 1
+        , x: 89, y: 14
         , noText: true
         })
     %>
@@ -626,6 +635,31 @@
         })
     %>
 
+    <!--Southern Island-->
+    <%- include('templates/mapTown',
+        { name: "Southern Island"
+        , x: 46, y: 52
+        , width: 2, height: 3
+        })
+    %>
+
+    <!--Southern Island extension 1-->
+    <%- include('templates/mapTown',
+        { name: "Southern Island"
+        , x: 47, y: 51
+        , width: 2, height: 1
+        , isExtension: true
+        })
+    %>
+
+    <!--Southern Island extension 2-->
+    <%- include('templates/mapTown',
+        { name: "Southern Island"
+        , x: 48, y: 52
+        , width: 1, height: 2
+        , isExtension: true
+        })
+    %>
     <!--Battle Frontier-->
     <%- include('templates/mapTown',
         { name: "Battle Frontier"
@@ -765,7 +799,7 @@
     <!--Shoal Cave-->
     <%- include('templates/mapDungeon',
         { name: "Shoal Cave"
-        , x: 87, y: 13
+        , x: 85, y: 12
         })
     %>
 

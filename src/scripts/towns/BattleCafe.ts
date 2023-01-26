@@ -78,7 +78,7 @@ class BattleCafeController {
         }
         if (DayCycle.currentDayCyclePart() === DayCyclePart.Dusk && !clockwise && spinTime > 10) {
             spin = GameConstants.AlcremieSpins.at5Above10;
-        } else if (DayCycle.currentDayCyclePart() === DayCyclePart.Night) {
+        } else if ([DayCyclePart.Night, DayCyclePart.Dawn].includes(DayCycle.currentDayCyclePart())) {
             if (clockwise && spinTime < 5) {
                 spin = GameConstants.AlcremieSpins.nightClockwiseBelow5;
             } else if (clockwise && spinTime >= 5) {
