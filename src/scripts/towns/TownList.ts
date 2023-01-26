@@ -4365,6 +4365,8 @@ const VivillonPhotobook = new NPC('Vivillon Photobook', [
     '<i>You see both a Meadow and a Fancy Vivillon flying together in the skies above Kalos. Strangely, the Meadow Vivillon is wearing a necklace of exotic flowers, and the Fancy has a tiny tea cup in its grip.</i>',
     '<img src="assets/images/npcs/textbody/VivillonPhotobookMarine.png" style="max-width:100%; height:auto"/>',
     '<i>You see a Marine Vivillon flying above the surface of a lake. It\'s got one foot trailing through the water.</i>',
+    '<img src="assets/images/npcs/textbody/VivillonPhotobookModern.png" style="max-width:100%; height:auto"/>',
+    '<i>You see what was seemingly meant to be a photo of a Pokémon with a bulbous purple tail. However, a Modern Vivillon has jumped in front, and you can\'t get a good look at the other Pokémon.</i>',
     '<img src="assets/images/npcs/textbody/VivillonPhotobookJungle.png" style="max-width:100%; height:auto"/>',
     '<i>You see a Jungle Vivillon resting on a blue frog-like Pokémon. The two of them seem to be in the center of a deep bog, but neither looks very concerned.</i>',
     '<img src="assets/images/npcs/textbody/VivillonPhotobookMonsoon.png" style="max-width:100%; height:auto"/>',
