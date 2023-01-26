@@ -1950,6 +1950,15 @@ class Update implements Saveable {
             //Latios Latias Quest
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 44);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 45);
+
+            //Silvally Typings Quest
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.Statistics.temporaryBattleDefeated, 128);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.Statistics.temporaryBattleDefeated, 129);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.Statistics.temporaryBattleDefeated, 130);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.Statistics.temporaryBattleDefeated, 131);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.Statistics.temporaryBattleDefeated, 132);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.Statistics.temporaryBattleDefeated, 133);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.Statistics.temporaryBattleDefeated, 134);
         },
 
     };
