@@ -2449,7 +2449,7 @@ TownList['Southern Island'] = new Town(
     GameConstants.HoennSubRegions.Hoenn,
     [TemporaryBattleList.Latios, TemporaryBattleList.Latias],
     {
-        requirements: [new CustomRequirement(ko.pureComputed(() => +App.game.keyItems.hasKeyItem(KeyItemType.Eon_Ticket)), 1, 'Obtain an Eon Ticket')],
+        requirements: [new CustomRequirement(ko.pureComputed(() => +App.game.keyItems.hasKeyItem(KeyItemType.Eon_ticket)), 1, 'Obtain an Eon Ticket')],
         npcs: [SurferDave, SouthernIsland1],
     }
 );
