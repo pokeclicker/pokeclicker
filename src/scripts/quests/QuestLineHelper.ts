@@ -1487,6 +1487,259 @@ class QuestLineHelper {
         App.game.quests.questLines().push(minasTrialAlolaQuestLine);
     }
 
+    //Silvally Typings Questline
+    public static createSilvallyTypesQuestLine() {
+        const SilvallyTypesQuestLine = new QuestLine('Typing some Memories', 'Help Gladion restore his Silvally memories.', new MultiRequirement([new ObtainedPokemonRequirement('Silvally (Normal)'), new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)]) , GameConstants.BulletinBoards.Alola);
+
+        const talkToGladion1 = new TalkToNPCQuest(SilvallyGladion1, 'Talk to Gladion in the Pokémon League Alola.');
+        SilvallyTypesQuestLine.addQuest(talkToGladion1);
+
+        const createMultiTypeCaptureQuest = (types: Array<PokemonType>, description: string) => {
+            const quest = new MultipleQuestsQuest(types.map(type => {
+                return new CapturePokemonTypesQuest(1, undefined, type);
+            }), description);
+            SilvallyTypesQuestLine.addQuest(quest);
+        };
+
+        createMultiTypeCaptureQuest([PokemonType.Fighting, PokemonType.Rock, PokemonType.Dark, PokemonType.Fairy], 'Get some trainig before looking for Silvally\'s memories. Capture 100 Fighting, Rock, Dark and Fairy Types');
+
+        const talkToMelemeleLocals = new TalkToNPCQuest(SilvallyHala, 'Talk to the Melemele Island locals to find out more about Silvally\'s memories.');
+        SilvallyTypesQuestLine.addQuest(talkToMelemeleLocals);
+
+        const talkToAkalaLocals = new TalkToNPCQuest(SilvallyOlivia, 'Talk to the Akala Island locals to find out more about Silvally\'s memories.');
+        SilvallyTypesQuestLine.addQuest(talkToAkalaLocals);
+
+        const talkToUlaulaLocals = new TalkToNPCQuest(SilvallyNanu, 'Talk to the Ula\'ula Island locals to find out more about Silvally\'s memories.');
+        SilvallyTypesQuestLine.addQuest(talkToUlaulaLocals);
+
+        const talkToPoniLocals = new TalkToNPCQuest(SilvallyMina, 'Talk to the Poni Island locals to find out more about Silvally\'s memories.');
+        SilvallyTypesQuestLine.addQuest(talkToPoniLocals);
+
+        const SilvallyGladionReward1 = () => {
+            App.game.party.gainPokemonByName('Silvally (Fighting)');
+            App.game.party.gainPokemonByName('Silvally (Rock)');
+            App.game.party.gainPokemonByName('Silvally (Dark)');
+            App.game.party.gainPokemonByName('Silvally (Fairy)');
+            Notifier.notify({
+                title: SilvallyTypesQuestLine.name,
+                message: 'Gladion awarded you 4 Silvally\'s!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
+        const talkToGladion2 = new TalkToNPCQuest(SilvallyGladion2, 'Talk to Gladion in the Pokémon League Alola and tell him what you found out about Silvally\'s memories.', SilvallyGladionReward1);
+        SilvallyTypesQuestLine.addQuest(talkToGladion2);
+
+        createMultiTypeCaptureQuest([PokemonType.Water, PokemonType.Grass, PokemonType.Fire, PokemonType.Electric, PokemonType.Ground, PokemonType.Ice], 'You probably need to train a bit before going looking for more Silvallys memories. Capture 100 Water, Grass, Fire, Electric, Ground and Ice types.');
+
+        const talkToLanaSilvally = new TalkToNPCQuest(LanaSilvally1, 'Talk to Captain Lana in Brooklet Hill to find out if she knows something about Silvally\'s memories.');
+        SilvallyTypesQuestLine.addQuest(talkToLanaSilvally);
+
+        const catchSilvallyWater = new CaptureSpecificPokemonQuest('Silvally (Water)', 'Trade Captain Lana some Dungeon Tokens for a Silvally.', 1, false, 0, undefined);
+        SilvallyTypesQuestLine.addQuest(catchSilvallyWater);
+
+        const talkToMallowSilvally = new TalkToNPCQuest(MallowSilvally1, 'Talk to Captain Mallow in Lush Jungle to find out if she knows about Silvally\'s memories');
+        SilvallyTypesQuestLine.addQuest(talkToMallowSilvally);
+
+        const catchSilvallyGrass = new CaptureSpecificPokemonQuest('Silvally (Grass)', 'Trade Captain Mallow some Quest Points for a Silvally.', 1, false, 0, undefined);
+        SilvallyTypesQuestLine.addQuest(catchSilvallyGrass);
+
+        const talkToKiaweSilvally = new TalkToNPCQuest(KiaweSilvally1, 'Talk to Captain Kiawe in Wela Volcano Park to find out if he knows about Silvally\'s memories.');
+        SilvallyTypesQuestLine.addQuest(talkToKiaweSilvally);
+
+        const catchSilvallyFire = new CaptureSpecificPokemonQuest('Silvally (Fire)', 'Trade Captain Kiawe some Battle Points for a Silvally.', 1, false, 0, undefined);
+        SilvallyTypesQuestLine.addQuest(catchSilvallyFire);
+
+        const talkToSophoclesSilvally = new TalkToNPCQuest(SophoclesSilvally1, 'Talk to Captain Sophocles in Hokulani Observatory to find out if he knows about Silvally\'s memories.');
+        SilvallyTypesQuestLine.addQuest(talkToSophoclesSilvally);
+
+        const catchSilvallyElectric = new CaptureSpecificPokemonQuest('Silvally (Electric)', 'Trade Captain Sophocles some Pokédollars for a Silvally.', 1, false, 0, undefined);
+        SilvallyTypesQuestLine.addQuest(catchSilvallyElectric);
+
+        const talkToVeteranSilvally = new TalkToNPCQuest(VeteranSilvally1, 'Talk to Veteran Aristo in Mount Lanakila to find out if he knows about Silvally\'s memories.');
+        SilvallyTypesQuestLine.addQuest(talkToVeteranSilvally);
+
+        const catchSilvallyIce = new CaptureSpecificPokemonQuest('Silvally (Ice)', 'Trade Veteran Aristo some Diamonds for a Silvally.', 1, false, 0, undefined);
+        SilvallyTypesQuestLine.addQuest(catchSilvallyIce);
+
+        const talkToHapuSilvally = new TalkToNPCQuest(HapuSilvally1, 'Talk to Kahuna Hapu in Exeggutor Island to find out if she knows about Silvally\'s memories.');
+        SilvallyTypesQuestLine.addQuest(talkToHapuSilvally);
+
+        const catchSilvallyGround = new CaptureSpecificPokemonQuest('Silvally (Ground)', 'Trade Kahuna Hapu some Farm Points for a Silvally.', 1, false, 0, undefined);
+        SilvallyTypesQuestLine.addQuest(catchSilvallyGround);
+
+        const talkToGladion3 = new TalkToNPCQuest(SilvallyGladion3, 'Go show Gladion those Silvallys in the Pokémon League Alola');
+        SilvallyTypesQuestLine.addQuest(talkToGladion3);
+
+        createMultiTypeCaptureQuest([PokemonType.Bug, PokemonType.Flying, PokemonType.Poison, PokemonType.Ghost, PokemonType.Psychic, PokemonType.Steel, PokemonType.Dragon], 'Get some training before looking for more Silvally\'s memories. Capture 100 Bug, Flying, Poison, Ghost, Psychic, Steel and Dragon types.');
+
+        const talkToBugSilvally = new TalkToNPCQuest(GuzmaSilvally, 'Go ask Team Skull Boss Guzma in Po Town to find out if he has seen any Silvallys near Po Town');
+        SilvallyTypesQuestLine.addQuest(talkToBugSilvally);
+
+        const BugSilvallyReward = () => {
+            App.game.party.gainPokemonByName('Silvally (Bug)');
+            Notifier.notify({
+                title: SilvallyTypesQuestLine.name,
+                message: 'Guzma gives you a Silvally (Bug)!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
+            });
+        };
+
+        const BugSilvallyBattle = new CustomQuest(
+            1,
+            BugSilvallyReward,
+            'Defeat Guzma to recover the Silvally!',
+            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Guzma Bug Silvally')](),
+            0
+        );
+        SilvallyTypesQuestLine.addQuest(BugSilvallyBattle);
+
+        const talkToFlyingSilvally = new TalkToNPCQuest(KahiliSilvally, 'Some Melemele island habitants have seen Kahili walking with a weird Pokémon near Ten Carat Hill. Go find her in Ten Carat Hill.');
+        SilvallyTypesQuestLine.addQuest(talkToFlyingSilvally);
+
+        const FlyingSilvallyReward = () => {
+            App.game.party.gainPokemonByName('Silvally (Flying)');
+            Notifier.notify({
+                title: SilvallyTypesQuestLine.name,
+                message: 'Kahili gives you a Silvally (Flying)!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
+            });
+        };
+
+        const FlyingSilvallyBattle = new CustomQuest(
+            1,
+            FlyingSilvallyReward,
+            'Defeat Kahili for a reward!',
+            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Kahili Flying Silvally')](),
+            0
+        );
+        SilvallyTypesQuestLine.addQuest(FlyingSilvallyBattle);
+
+        const talkToPoisonSilvally = new TalkToNPCQuest(PlumeriaSilvally, 'Some Poni island habitants have spotted alot of movimentation of Team Skull Grunts in Vast Poni Canyon. Go check it out.');
+        SilvallyTypesQuestLine.addQuest(talkToPoisonSilvally);
+
+        const PoisonSilvallyReward = () => {
+            App.game.party.gainPokemonByName('Silvally (Poison)');
+            Notifier.notify({
+                title: SilvallyTypesQuestLine.name,
+                message: 'Plumeria gives you a Silvally (Poison)!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
+            });
+        };
+
+        const PoisonSilvallyBattle = new CustomQuest(
+            1,
+            PoisonSilvallyReward,
+            'Defeat Plumeria to recover the Silvally!',
+            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Plumeria Poison Silvally')](),
+            0
+        );
+        SilvallyTypesQuestLine.addQuest(PoisonSilvallyBattle);
+
+        const talkToGhostSilvally = new TalkToNPCQuest(AcerolaSilvally, 'Captain Acerola has been seen with a Silvally inside the Thrifty Megamart. Go find her.');
+        SilvallyTypesQuestLine.addQuest(talkToGhostSilvally);
+
+        const GhostSilvallyReward = () => {
+            App.game.party.gainPokemonByName('Silvally (Ghost)');
+            Notifier.notify({
+                title: SilvallyTypesQuestLine.name,
+                message: 'Acerola gives you a Silvally (Ghost)!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
+            });
+        };
+
+        const GhostSilvallyBattle = new CustomQuest(
+            1,
+            GhostSilvallyReward,
+            'Defeat Acerola to get the Silvally back.',
+            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Acerola Ghost Silvally')](),
+            0
+        );
+        SilvallyTypesQuestLine.addQuest(GhostSilvallyBattle);
+
+        const talkToPsychicSilvally = new TalkToNPCQuest(FabaSilvally, 'Some habitants from Akala island have seen some Aether employees travelling to the Southwest of Akala island. Go check it .');
+        SilvallyTypesQuestLine.addQuest(talkToPsychicSilvally);
+
+        const PsychicSilvallyReward = () => {
+            App.game.party.gainPokemonByName('Silvally (Psychic)');
+            Notifier.notify({
+                title: SilvallyTypesQuestLine.name,
+                message: 'Faba gives you a Silvally (Psychic)!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
+            });
+        };
+
+        const PsychicSilvallyBattle = new CustomQuest(
+            1,
+            PsychicSilvallyReward,
+            'Defeat Aether Branch Chief Faba to get the Silvally back.',
+            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Faba Psychic Silvally')](),
+            0
+        );
+        SilvallyTypesQuestLine.addQuest(PsychicSilvallyBattle);
+
+        const talkToSteelSilvally = new TalkToNPCQuest(MolayneSilvally, 'Molayne needs help training in Hokulani Observatory. He has also been seen with a Silvally so go check it out.');
+        SilvallyTypesQuestLine.addQuest(talkToSteelSilvally);
+
+        const SteelSilvallyReward = () => {
+            App.game.party.gainPokemonByName('Silvally (Steel)');
+            Notifier.notify({
+                title: SilvallyTypesQuestLine.name,
+                message: 'Molayne gives you a Silvally (Steel)!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
+            });
+        };
+
+        const SteelSilvallyBattle = new CustomQuest(
+            1,
+            SteelSilvallyReward,
+            'Defeat Molayne for a reward!.',
+            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Molayne Steel Silvally')](),
+            0
+        );
+        SilvallyTypesQuestLine.addQuest(SteelSilvallyBattle);
+
+        const talkToDragonSilvally = new TalkToNPCQuest(RyukiSilvally, 'Molayne needs help training in Hokulani Observatory. He has also been seen with a Silvally so go check it out.');
+        SilvallyTypesQuestLine.addQuest(talkToDragonSilvally);
+
+        const DragonSilvallyReward = () => {
+            App.game.party.gainPokemonByName('Silvally (Dragon)');
+            Notifier.notify({
+                title: SilvallyTypesQuestLine.name,
+                message: 'Ryuki gives you a Silvally (Dragon)!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
+            });
+        };
+
+        const DragonSilvallyBattle = new CustomQuest(
+            1,
+            DragonSilvallyReward,
+            'Defeat Ryuki for the Silvally!.',
+            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ryuki Dragon Silvally')](),
+            0
+        );
+        SilvallyTypesQuestLine.addQuest(DragonSilvallyBattle);
+
+        App.game.quests.questLines().push(SilvallyTypesQuestLine);
+
+    }
+
+    //Ultra Beasts Questline
     public static createUltraBeastQuestLine() {
         const UltraBeastQuestLine = new QuestLine('Ultra Beast Hunt', 'Track down the mysterious Ultra Beasts', new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion), GameConstants.BulletinBoards.Alola);
 
@@ -2560,6 +2813,7 @@ class QuestLineHelper {
         this.createAshKetchumQuestLine();
         this.createSkullAetherAlolaQuestLine();
         this.createMinasTrialAlolaQuestLine();
+        this.createSilvallyTypesQuestLine();
         this.createUltraBeastQuestLine();
         this.createMagikarpJumpQuestLine();
         this.createDarkestDayQuestLine();
