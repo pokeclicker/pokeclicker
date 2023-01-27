@@ -1952,13 +1952,13 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 45);
 
             //Silvally Typings Quest
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.Statistics.temporaryBattleDefeated, 128);
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.Statistics.temporaryBattleDefeated, 129);
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.Statistics.temporaryBattleDefeated, 130);
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.Statistics.temporaryBattleDefeated, 131);
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.Statistics.temporaryBattleDefeated, 132);
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.Statistics.temporaryBattleDefeated, 133);
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.Statistics.temporaryBattleDefeated, 134);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 164);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 165);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 166);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 167);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 168);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 169);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 170);
         },
 
     };

@@ -4911,7 +4911,7 @@ const SilvallyGladion1 = new NPC('Gladion', [
     'Keep an eye out if you come across any of them.',
 ], {
     image: 'assets/images/temporaryBattle/Gladion.png',
-    requirement: new MultiRequirement ([new QuestLineStepCompletedRequirement('Typing some Memories', 1, GameConstants.AchievementOption.less), new QuestLineStepCompletedRequirement('Typing some Memories', 0, GameConstants.AchievementOption.more)]),
+    requirement: new MultiRequirement ([new QuestLineStepCompletedRequirement('Typing some Memories', 5, GameConstants.AchievementOption.less), new QuestLineStartedRequirement('Typing some Memories', GameConstants.AchievementOption.more)]),
 });
 const SilvallyHala = new NPC('Kahuna Hala', [
     'Greetings, Trainer. May I help you with something? Oh, you\'re looking for things called Silvally memories? Something like this one?',
@@ -4952,12 +4952,12 @@ const SilvallyGladion2 = new NPC('Gladion', [
     'Oh and also, I\'ve heard some inhabitants have seen some people walking around with a weird coloured Silvally. I think they might be Silvally with the memories we\'re looking for. I got descriptions of them: you should look for a blue-haired girl near Brooklet Hill, a green-haired girl in the Lush Jungle, a black and red-haired guy at the Wela Volcano Park, a child with yellow hair in the Hokulani Observatory, a dark blue-haired guy looks like a Veteran near Mount Lanakila and a girl with a Mudsdale in the Exeggutor Island Hill.',
 ], {
     image: 'assets/images/temporaryBattle/Gladion.png',
-    requirement: new  MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 5, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 7, GameConstants.AchievementOption.less)]),
+    requirement: new  MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 5, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 19, GameConstants.AchievementOption.less)]),
 });
 const LanaSilvally1 = new NPC('Captain Lana', [
     'Hi, trainer. How are you doing? I\'m not doing so well right now.',
     'Why, you ask? That\'s because I need a lot of Dungeon Tokens to pay for an amazing rod so I can fish for every single water pokémon! Sadly, it costs too much and I can\'t afford it because I have to take care of my sisters. Oh, you can help me? Thank you, but I have nothing to offer in return.',
-    'If I have a Silvally? Yes, I do. It has a strange coloration which makes it resist fire and ground attacks! If you want it, I could sell it to you. The price is 10 million Dungeon Tokens. I\'ll be here for a long time, so you can get the Dungeon Tokens and come back later if you need to.',
+    'If I have a Silvally? Yes, I do. It has a strange coloration which makes it resist fire and ground attacks! If you want it, I could sell it to you. The price is 500 million Dungeon Tokens. I\'ll be here for a long time, so you can get the Dungeon Tokens and come back later if you need to.',
 ], {
     image: 'assets/images/gymLeaders/Lana.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 7, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 9, GameConstants.AchievementOption.less)]),
@@ -4999,16 +4999,17 @@ const HapuSilvally1 = new NPC('Kahuna Hapu', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 17, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 19, GameConstants.AchievementOption.less)]),
 });
 const SilvallyGladion3 = new NPC('Gladion', [
-    'Waiting for feedback...',
-    'Writing...',
+    'I see you\'ve recovered more of the Silvally memories on your own. Thanks for helping me recover them, Silvally appreciates it. I see that for some of the memories, you got the whole Silvally, not just their memories. I wonder what people are doing with the other memories. How did it go, getting them back? You had to pay for them? How did you get that much money? Are you rich? I\'m confused.',
+    'Anyway, for the next set of memoriesI\'ve been keeping an ear out and have heard some rumors. People from Ula\'ula have seen Team Skull Boss Guzma walking around with a lot of Team Skull Grunts, so I suspect he might\'ve found some memory disc or even a Silvally. Go ask him in the Po Town. Melemele island inhabitants have seen Kahili walking around with a suspicious Pokémon in Ten Carat Hill that does not fit with her usual team. I believe it is a Silvally.',
+    'Ula\'ula Island people have seen Captain Acerola inside the Thrifty Megamart with a weird Pokémon, which I think is a Silvally. Some people from Poni Island have seen a lot of Team Skull movement around the Vast Poni Canyon. That is really suspicious, so they probably found something rare or presumably a Silvally. Some people from Akala island have seen some people in a white suit with a Silvally travelling to the southwest of of the island.',
+    'I\'ve heard Molayne wanted to brush up on his training a bit. He\'s at the Hokulani Observatory, and has also been seen with a Silvally. Also, while I was walking through the Vast Poni Canyon, I saw a guy dressed almost like an old Pokémon that doesn\'t exist anymore with a Silvally. They are all tough trainers, so you might need to train more to defeat them.',
 ], {
     image: 'assets/images/temporaryBattle/Gladion.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 19, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 21, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 19, GameConstants.AchievementOption.more), new QuestLineCompletedRequirement('Typing some Memories', GameConstants.AchievementOption.less)]),
 });
 const GuzmaSilvally = new NPC('Team Skull Boss Guzma', [
-    'TODO welcoming the player',
-    'TODO Refusing to give silvally',
-    'TODO Challenging player',
+    'Huh? What the hell are you doing in here? A what? Silvally? I think I have what you\'re looking for. Yeah, I have it, if you want to see it. Anyway, how the hell did you get in here? Tsk. Those grunts can\'t do anything right. Anyway, you saw what you wanted so get out of here!',
+    'What? you aren\'t leaving because you need this stupid thing? well, I\'m not giving it to you without a battle, at least. Here we go, \'m not gonna lose this time.',
 ], {
     image: 'assets/images/trainers/Team Skull Boss(guzma).png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 21, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 23, GameConstants.AchievementOption.less)]),
