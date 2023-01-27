@@ -163,6 +163,7 @@ import RoamingPokemonList from './pokemons/RoamingPokemonList';
 import DataPokemon from './pokemons/DataPokemon';
 import RoamingPokemon from './pokemons/RoamingPokemon';
 import UndergroundMegaStoneItem from './underground/UndergroundMegaStoneItem';
+import TextMerger from './utilities/TextMerger';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -335,4 +336,5 @@ Object.assign(<any>window, {
     DataPokemon,
     RoamingPokemon,
     UndergroundMegaStoneItem,
+    TextMerger,
 });
