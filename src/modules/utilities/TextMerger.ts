@@ -5,7 +5,7 @@ export default class TextMerger {
 
     public static mergeText(text: string) : string {
         if (this.mergeValues == null) {
-            this.BuildMergeValues();
+            this.buildMergeValues();
         }
         const mergeSubstrings = text.match(/\$[a-zA-Z]*\$/g);
         if (mergeSubstrings == null) {
@@ -23,7 +23,7 @@ export default class TextMerger {
         return textResult;
     }
 
-    private static BuildMergeValues() {
+    private static buildMergeValues() {
         this.mergeValues = {
             playername: App.game.profile.name,
         };
