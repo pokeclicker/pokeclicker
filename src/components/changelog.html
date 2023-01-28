@@ -21,7 +21,7 @@
               <!-- ko if: type.label == 'UPDATE' -->
                 <td class="text-left" >
                   <span data-bind="html: description"></span>
-                  <a href="https://github.com/pokeclicker/pokeclicker/compare/v0.10.6...v0.10.7" target="_BLANK" class="float-right" data-bind="attr: { href: `https://github.com/pokeclicker/pokeclicker/compare/${ChangelogItems.find((c, i) => c.__proto__.constructor.name == 'ChangelogUpdate' && i > $index())?.description.match(/v\d+\.\d+\.\d+/)?.[0]}...${$data.description.match(/v\d+\.\d+\.\d+/)[0]}` }">Full Changelog</a>
+                  <a target="_BLANK" class="float-right" data-bind="attr: { href: `https://github.com/pokeclicker/pokeclicker/compare/${ChangelogItems.find((c, i) => c.__proto__.constructor.name == 'ChangelogUpdate' && i > $index())?.version}...${$data.version}` }">Full Changelog</a>
                 </td>
               <!-- /ko -->
               <!-- ko ifnot: type.label == 'UPDATE' -->
