@@ -893,23 +893,8 @@ class QuestLineHelper {
     public static createManaphyQuestLine() {
         const manaphyQuestLine = new QuestLine('Recover the Precious Egg!', 'A rare egg is at the Sandgem Lab! Surely it should be easy to hatch one little egg, right?', new GymBadgeRequirement(BadgeEnums.Forest), GameConstants.BulletinBoards.Sinnoh);
 
-        //const talkHastings1 = new TalkToNPCQuest(ManaphyHastings1, 'Speak to Professor Hastings in Sandgem Town.');
-        //manaphyQuestLine.addQuest(talkHastings1);
-
         const talkHastings1 = new TalkToNPCQuest(ManaphyHastings1, 'Speak to Professor Hastings in Sandgem Town.');
-        const talkHastingsA = new TalkToNPCQuest(SandgemBeachcomber, 'Speak to Professor Hastings in Sandgem Town.');
-        //const talkHastings1Reward = () => {
-        //    talkHastings1.quit(); 
-		//	talkHastingsA.quit()
-        //};
-		talkHastings1.autoComplete = true;
-		talkHastingsA.autoComplete = true;
-		const talkHastingsCustom = new CustomQuest(1, 0, 'Talk to Professor Hastings in Sandgem Town.', () =>
-			talkHastingsA.isCompleted() || talkHastings1.isCompleted(), undefined, () => {talkHastings1.begin(); talkHastingsA.begin();}
-		);
-		manaphyQuestLine.addQuest(talkHastingsCustom);
-
-
+        manaphyQuestLine.addQuest(talkHastings1);
 
         const investigateBoulders = new TalkToNPCQuest(ManaphyBoulders, 'Search for clues in Eterna Forest.');
         manaphyQuestLine.addQuest(investigateBoulders);
