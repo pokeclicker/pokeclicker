@@ -287,9 +287,9 @@ class QuestLineHelper {
         const talktoPokéfanDerek = new TalkToNPCQuest(EcruteakPokéfan, 'Talk to Pokéfan Derek in Ecruteak City.', () => App.game.quests.getQuestLine('Eusine\'s Chase').beginQuest());
         johtoBeastsQuestLine.addQuest(talktoPokéfanDerek);
 
-        const catchRaikou = new CaptureSpecificPokemonQuest('Raikou', 'Catch Raikou', 1, true);
+        const catchRaikou = new CaptureSpecificPokemonQuest('Raikou', 'Catch or hatch Raikou', 1, true);
 
-        const catchEntei = new CaptureSpecificPokemonQuest('Entei', 'Catch Entei', 1, true);
+        const catchEntei = new CaptureSpecificPokemonQuest('Entei', 'Catch or hatch Entei', 1, true);
 
         const catchSuicune = new CaptureSpecificPokemonQuest('Suicune', 'Catch Suicune.');
 
@@ -594,7 +594,7 @@ class QuestLineHelper {
                 type: NotificationConstants.NotificationOption.success,
             });
         };
-        const catchPsychic = new CustomQuest(200, mindPlateReward, 'Capture 200 Psychic-type Pokémon.', () => {
+        const catchPsychic = new CustomQuest(200, mindPlateReward, 'Capture or hatch 200 Psychic-type Pokémon.', () => {
             return pokemonMap.filter(p => p.type.includes(PokemonType.Psychic)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
         });
         deoxysQuestLine.addQuest(catchPsychic);
@@ -777,7 +777,7 @@ class QuestLineHelper {
         const clearMtChimney2 = new CustomQuest(1, 0, 'Climb to the Mt. Chimney Crater to get a better view of the Millennium Comet as it passes.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Mt. Chimney Crater')]());
         jirachiQuestLine.addQuest(clearMtChimney2);
 
-        const catchAbsol = new CaptureSpecificPokemonQuest('Absol', 'You are being stalked by Absol, the Disaster Pokémon. Capture it.', 1, true);
+        const catchAbsol = new CaptureSpecificPokemonQuest('Absol', 'You are being stalked by Absol, the Disaster Pokémon. Capture it or hatch your own to befriend it.', 1, true);
         jirachiQuestLine.addQuest(catchAbsol);
 
         const cocoonHatch = new TalkToNPCQuest(CocoonHatch, 'Examine the crystalline cocoon Butler gave you while at the Mt. Chimney Crater.');
@@ -792,7 +792,7 @@ class QuestLineHelper {
         const fightMetaGroudon1 = new CustomQuest(1, 0, 'Butler\'s attempts to resurrect Groudon have gone terribly wrong! Fight the resulting abomination!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Meta Groudon')]());
         jirachiQuestLine.addQuest(fightMetaGroudon1);
 
-        const catchJirachi = new CaptureSpecificPokemonQuest('Jirachi', 'Jirachi has escaped in the chaos and is roaming Hoenn. Catch Jirachi.', 1, true);
+        const catchJirachi = new CaptureSpecificPokemonQuest('Jirachi', 'Jirachi has escaped in the chaos and is roaming Hoenn. Catch Jirachi or hatch your own to calm it down.', 1, true);//CATCHHATCH: REMOVE LATER
         jirachiQuestLine.addQuest(catchJirachi);
 
         App.game.quests.questLines().push(jirachiQuestLine);
@@ -899,7 +899,7 @@ class QuestLineHelper {
         const investigateBoulders = new TalkToNPCQuest(ManaphyBoulders, 'Search for clues in Eterna Forest.');
         manaphyQuestLine.addQuest(investigateBoulders);
 
-        const catchPolitoedSubstitutes = new CustomQuest(50, undefined, 'Capture 50 Water-type Pokémon, and see if those boulders are really just boulders.', () => {
+        const catchPolitoedSubstitutes = new CustomQuest(50, undefined, 'Catch or hatch 50 Water-type Pokémon, and see if those boulders are really just boulders.', () => {
             return pokemonMap.filter(p => p.type.includes(PokemonType.Water)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
         });
         manaphyQuestLine.addQuest(catchPolitoedSubstitutes);
@@ -964,7 +964,7 @@ class QuestLineHelper {
         const happinyChase7 = new TalkToNPCQuest(HappinyWitness7, 'The Happiny went through Mt. Coronet again? This time it went west through the Southern path. Ask around for witnesses on the other side.');
         manaphyQuestLine.addQuest(happinyChase7);
 
-        const happinyChase8 = new TalkToNPCQuest(HappinyWitness8, 'The Happiny left Oreburgh and headed west, through the Oreburgh Gate. Search for another witness on the far side.');
+        const happinyChase8 = new TalkToNPCQuest(HappinyWitness8, 'The Happiny fled from Oreburgh and headed west, through the Oreburgh Gate. Search for another witness on the far side.');
         manaphyQuestLine.addQuest(happinyChase8);
 
         const happinyChase9 = new TalkToNPCQuest(HappinyWitness9, 'Search for evidence of the Happiny\'s path after turning south from Jubilife City.');
@@ -977,7 +977,7 @@ class QuestLineHelper {
         const happinyChase10 = new TalkToNPCQuest(HappinyBoulders, 'After leaving Sandgem, the Happiny went south-east, across the water. There\'s only one place it could be now...');
         manaphyQuestLine.addQuest(happinyChase10);
 
-        const catchBunearySubstitutes = new CustomQuest(50, undefined, 'Oh no, you\'re not gonna let more boulders stop you now. Catch 50 Fighting-types and smash right through them.', () => {
+        const catchBunearySubstitutes = new CustomQuest(50, undefined, 'Oh no, you\'re not gonna let more boulders stop you now. Catch or hatch 50 Fighting-types and smash right through them.', () => {
             return pokemonMap.filter(p => p.type.includes(PokemonType.Fighting)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
         });
         manaphyQuestLine.addQuest(catchBunearySubstitutes);
@@ -986,7 +986,7 @@ class QuestLineHelper {
             App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Manaphy Egg Protectors')]());
         manaphyQuestLine.addQuest(clearManaphyHappiny);
 
-        const talkHastings4 = new TalkToNPCQuest(ManaphyHastings4, 'The egg hatched after your battle with the egg-nappers! Bring Manaphy back to Hastings in Canalave Town, and close off this mission for good.');
+        const talkHastings4 = new TalkToNPCQuest(ManaphyHastings4, 'The egg hatched after your battle with the egg-nappers! Bring Manaphy back to Hastings in Canalave City, and close off this mission for good.');
         manaphyQuestLine.addQuest(talkHastings4);
 
         App.game.quests.questLines().push(manaphyQuestLine);
@@ -1246,7 +1246,7 @@ class QuestLineHelper {
 
         const createVivillonQuest = (type: PokemonType, vivillon: PokemonNameType, dungeons: Array<string>, hint: string) => {
             // Capture 100 Water type Pokemon
-            const catchType = new CustomQuest(100, undefined, `Capture 100 ${PokemonType[type]}-type Pokémon.`, () => {
+            const catchType = new CustomQuest(100, undefined, `Capture or hatch 100 ${PokemonType[type]}-type Pokémon.`, () => {
                 return pokemonMap.filter(p => p.type.includes(type)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
             });
             vivillonQuestLine.addQuest(catchType);
@@ -1301,7 +1301,7 @@ class QuestLineHelper {
         createVivillonQuest(PokemonType.Ice, 'Vivillon (Icy Snow)', ['Frost Cavern'], 'It can be found at a very cold place.');
 
         // Capture 200 Normal type Pokemon
-        const catchNormal = new CustomQuest(200, undefined, 'Capture 200 Normal-type Pokémon.', () => {
+        const catchNormal = new CustomQuest(200, undefined, 'Capture or hatch 200 Normal-type Pokémon.', () => {
             return pokemonMap.filter(p => p.type.includes(PokemonType.Normal)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
         });
         vivillonQuestLine.addQuest(catchNormal);
@@ -1372,7 +1372,7 @@ class QuestLineHelper {
     public static createPrincessDiancieQuestLine() {
         const princessDiancieQuestLine = new QuestLine('Princess Diancie', 'Princess Diancie has been spotted in Kalos! She\'s searching for something.', new MultiRequirement([new ObtainedPokemonRequirement('Doublade'), new GymBadgeRequirement(BadgeEnums.Elite_Malva), new GymBadgeRequirement(BadgeEnums.Elite_Siebold), new GymBadgeRequirement(BadgeEnums.Elite_Wikstrom), new GymBadgeRequirement(BadgeEnums.Elite_Drasna)]) , GameConstants.BulletinBoards.Kalos);
 
-        const catchFairy = new CustomQuest(100, undefined, 'Capture 100 Fairy-type Pokémon to follow Diancie\'s Fairy Aura.', () => {
+        const catchFairy = new CustomQuest(100, undefined, 'Capture or hatch 100 Fairy-type Pokémon to follow Diancie\'s Fairy Aura.', () => {
             return pokemonMap.filter(p => p.type.includes(PokemonType.Fairy)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
         });
         princessDiancieQuestLine.addQuest(catchFairy);
@@ -1651,10 +1651,10 @@ class QuestLineHelper {
         drSplashQuestLine.addQuest(talkToDrSplash2);
 
         const sandBag = new GainGemsQuest(5000, 0, PokemonType.Ground);
-        const jumpCounter = new CaptureSpecificPokemonQuest('Spoink', 'Catch 10 Spoink.', 10, true, 0, undefined);
+        const jumpCounter = new CaptureSpecificPokemonQuest('Spoink', 'Catch or hatch 10 Spoink.', 10, true, 0, undefined);
         const timber = new GainGemsQuest(5000, 0, PokemonType.Grass);
         const rockCruncher = new GainGemsQuest(5000, 0, PokemonType.Rock);
-        const powerGenerator = new CaptureSpecificPokemonQuest('Voltorb', 'Catch 10 Voltorb.', 10, true, 0, undefined);
+        const powerGenerator = new CaptureSpecificPokemonQuest('Voltorb', 'Catch or hatch 10 Voltorb.', 10, true, 0, undefined);
         const pokeballSmash = new BuyPokeballsQuest(100000, 0, GameConstants.Pokeball.Pokeball);
         const frostCruncher = new GainGemsQuest(5000, 0, PokemonType.Ice);
 
@@ -1672,11 +1672,11 @@ class QuestLineHelper {
         drSplashQuestLine.addQuest(talkToDrSplash3);
 
 
-        const pushDwebble = new CaptureSpecificPokemonQuest('Dwebble', 'Catch 10 Dwebble.', 10, true, 0, undefined);
-        const pushBoldore = new CaptureSpecificPokemonQuest('Boldore', 'Catch 10 Boldore.', 10, true, 0, undefined);
-        const pushForretress = new CaptureSpecificPokemonQuest('Forretress', 'Catch 10 Forretress.', 10, true, 0, undefined);
-        const pushGolem = new CaptureSpecificPokemonQuest('Golem', 'Catch 10 Golem.', 10, true, 0, undefined);
-        const pushSteelix = new CaptureSpecificPokemonQuest('Steelix', 'Catch 10 Steelix.', 10, true, 0, undefined);
+        const pushDwebble = new CaptureSpecificPokemonQuest('Dwebble', 'Catch or hatch 10 Dwebble.', 10, true, 0, undefined);
+        const pushBoldore = new CaptureSpecificPokemonQuest('Boldore', 'Catch or hatch 10 Boldore.', 10, true, 0, undefined);
+        const pushForretress = new CaptureSpecificPokemonQuest('Forretress', 'Catch or hatch 10 Forretress.', 10, true, 0, undefined);
+        const pushGolem = new CaptureSpecificPokemonQuest('Golem', 'Catch or hatch 10 Golem.', 10, true, 0, undefined);
+        const pushSteelix = new CaptureSpecificPokemonQuest('Steelix', 'Catch or hatch 10 Steelix.', 10, true, 0, undefined);
 
         drSplashQuestLine.addQuest(new MultipleQuestsQuest([
             pushDwebble,
@@ -1734,7 +1734,7 @@ class QuestLineHelper {
 
         // Multi-step #2:
 
-        const meltanCatch5Ditto = new CaptureSpecificPokemonQuest('Ditto', 'Catch 5 Ditto.', 5, true, 0, undefined);
+        const meltanCatch5Ditto = new CaptureSpecificPokemonQuest('Ditto', 'Catch or hatch 5 Ditto.', 5, true, 0, undefined);
         const meltanDefeatMolayne10 = new DefeatGymQuest(10, 0, 'Elite Molayne');
 
         meltanQuestLine.addQuest(new MultipleQuestsQuest([
@@ -1756,9 +1756,9 @@ class QuestLineHelper {
 
         // Multi-step #4:
 
-        const meltanCatch5Grimer = new CaptureSpecificPokemonQuest('Alolan Grimer', 'Catch 5 Alolan Grimer.', 5, true, 0, undefined);
-        const meltanCatch5Slugma = new CaptureSpecificPokemonQuest('Slugma', 'Catch 5 Slugma.', 5, true, 0, undefined);
-        const meltanCatch10Gulpin = new CaptureSpecificPokemonQuest('Gulpin', 'Catch 10 Gulpin.', 10, true, 0, undefined);
+        const meltanCatch5Grimer = new CaptureSpecificPokemonQuest('Alolan Grimer', 'Catch or hatch 5 Alolan Grimer.', 5, true, 0, undefined);
+        const meltanCatch5Slugma = new CaptureSpecificPokemonQuest('Slugma', 'Catch or hatch 5 Slugma.', 5, true, 0, undefined);
+        const meltanCatch10Gulpin = new CaptureSpecificPokemonQuest('Gulpin', 'Catch or hatch 10 Gulpin.', 10, true, 0, undefined);
 
         meltanQuestLine.addQuest(new MultipleQuestsQuest([
             meltanCatch5Grimer,
@@ -1773,8 +1773,8 @@ class QuestLineHelper {
 
         // Multi-step #6:
 
-        const meltanCatch10Magnemite = new CaptureSpecificPokemonQuest('Magnemite', 'Catch 10 Magnemite.', 10, true, 0, undefined);
-        const meltanCatch10Exeggcute = new CaptureSpecificPokemonQuest('Exeggcute', 'Catch 10 Exeggcute.', 10, true, 0, undefined);
+        const meltanCatch10Magnemite = new CaptureSpecificPokemonQuest('Magnemite', 'Catch or hatch 10 Magnemite.', 10, true, 0, undefined);
+        const meltanCatch10Exeggcute = new CaptureSpecificPokemonQuest('Exeggcute', 'Catch or hatch 10 Exeggcute.', 10, true, 0, undefined);
         const meltanDefeatAcerola10 = new DefeatGymQuest(10, 0, 'Elite Acerola');
 
         meltanQuestLine.addQuest(new MultipleQuestsQuest([
@@ -1785,9 +1785,9 @@ class QuestLineHelper {
 
         // Multi-step #7:
 
-        const meltanCatch15Drowzee = new CaptureSpecificPokemonQuest('Drowzee', 'Catch 15 Drowzee.', 15, true, 0, undefined);
-        const meltanCatch15Cubone = new CaptureSpecificPokemonQuest('Cubone', 'Catch 15 Cubone.', 15, true, 0, undefined);
-        const meltanCatch15Scyther = new CaptureSpecificPokemonQuest('Scyther', 'Catch 15 Scyther.', 15, true, 0, undefined);
+        const meltanCatch15Drowzee = new CaptureSpecificPokemonQuest('Drowzee', 'Catch or hatch 15 Drowzee.', 15, true, 0, undefined);
+        const meltanCatch15Cubone = new CaptureSpecificPokemonQuest('Cubone', 'Catch or hatch 15 Cubone.', 15, true, 0, undefined);
+        const meltanCatch15Scyther = new CaptureSpecificPokemonQuest('Scyther', 'Catch or hatch 15 Scyther.', 15, true, 0, undefined);
         const meltanDefeatKahili10 = new DefeatGymQuest(10, 0, 'Elite Kahili');
 
         meltanQuestLine.addQuest(new MultipleQuestsQuest([
@@ -1799,8 +1799,8 @@ class QuestLineHelper {
 
         // Multi-step #8:
 
-        const meltanCatch20Kabuto = new CaptureSpecificPokemonQuest('Kabuto', 'Catch 20 Kabuto.', 20, true, 0, undefined);
-        const meltanCatch20Omanyte = new CaptureSpecificPokemonQuest('Omanyte', 'Catch 20 Omanyte.', 20, true, 0, undefined); // Praise Lord Helix
+        const meltanCatch20Kabuto = new CaptureSpecificPokemonQuest('Kabuto', 'Catch or hatch 20 Kabuto.', 20, true, 0, undefined);
+        const meltanCatch20Omanyte = new CaptureSpecificPokemonQuest('Omanyte', 'Catch or hatch 20 Omanyte.', 20, true, 0, undefined); // Praise Lord Helix
         const meltanDig30 = new MineLayersQuest(30, 0);
 
         meltanQuestLine.addQuest(new MultipleQuestsQuest([
@@ -1811,9 +1811,9 @@ class QuestLineHelper {
 
         // Multi-step #9:
 
-        const meltanCatch20Anorith = new CaptureSpecificPokemonQuest('Anorith', 'Catch 20 Anorith.', 20, true, 0, undefined);
-        const meltanCatch20Lileep = new CaptureSpecificPokemonQuest('Lileep', 'Catch 20 Lileep.', 20, true, 0, undefined);
-        const meltanCatch20Aerodactyl = new CaptureSpecificPokemonQuest('Aerodactyl', 'Catch 20 Aerodactyl.', 20, true, 0, undefined);
+        const meltanCatch20Anorith = new CaptureSpecificPokemonQuest('Anorith', 'Catch or hatch 20 Anorith.', 20, true, 0, undefined);
+        const meltanCatch20Lileep = new CaptureSpecificPokemonQuest('Lileep', 'Catch or hatch 20 Lileep.', 20, true, 0, undefined);
+        const meltanCatch20Aerodactyl = new CaptureSpecificPokemonQuest('Aerodactyl', 'Catch or hatch 20 Aerodactyl.', 20, true, 0, undefined);
         const meltanDefeatHau15 = new DefeatGymQuest(15, 0, 'Champion Hau');
 
         meltanQuestLine.addQuest(new MultipleQuestsQuest([
@@ -2067,8 +2067,8 @@ class QuestLineHelper {
         const talktoPiers = new TalkToNPCQuest(Piers, 'Talk to Piers in the Energy Plant.');
         swordShieldQuestLine.addQuest(talktoPiers);
 
-        const catchZacian = new CustomQuest(1, 0, 'Catch Zacian.', () => App.game.statistics.pokemonCaptured[pokemonMap['Zacian (Battle Hero)'].id](), 0);
-        const catchZamazenta = new CustomQuest(1, 0, 'Catch Zamazenta.', () => App.game.statistics.pokemonCaptured[pokemonMap['Zamazenta (Battle Hero)'].id](), 0);
+        const catchZacian = new CustomQuest(1, 0, 'Catch or hatch Zacian.', () => App.game.statistics.pokemonCaptured[pokemonMap['Zacian (Battle Hero)'].id](), 0);
+        const catchZamazenta = new CustomQuest(1, 0, 'Catch or hatch Zamazenta.', () => App.game.statistics.pokemonCaptured[pokemonMap['Zamazenta (Battle Hero)'].id](), 0);
         swordShieldQuestLine.addQuest(new MultipleQuestsQuest(
             [
                 catchZacian,
@@ -2158,17 +2158,17 @@ class QuestLineHelper {
         const talktoMustard8 = new TalkToNPCQuest(Mustard8, 'Talk to Mustard at the Master Dojo.');
         dojoArmorQuestLine.addQuest(talktoMustard8);
 
-        const catchDark = new CustomQuest(250, 0, 'Capture 250 Dark-type Pokémon.', () => {
+        const catchDark = new CustomQuest(250, 0, 'Capture or hatch 250 Dark-type Pokémon.', () => {
             return pokemonMap.filter(p => p.type.includes(PokemonType.Dark)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
         });
-        const catchWater = new CustomQuest(250, 0, 'Capture 250 Water-type Pokémon.', () => {
+        const catchWater = new CustomQuest(250, 0, 'Capture or hatch 250 Water-type Pokémon.', () => {
             return pokemonMap.filter(p => p.type.includes(PokemonType.Water)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
         });
         dojoArmorQuestLine.addQuest(new MultipleQuestsQuest(
             [
                 catchDark,
                 catchWater,
-            ], 'Train Kubfu more by catching Dark and Water-type Pokémon.'));
+            ], 'Train Kubfu more by catching and hatching Dark and Water-type Pokémon.'));
 
         const talktoMustard9 = new TalkToNPCQuest(Mustard9, 'Talk to Mustard at the Master Dojo.');
         dojoArmorQuestLine.addQuest(talktoMustard9);
