@@ -4438,9 +4438,9 @@ const LaverreGengariteAster1 = new NPC('Hex Maniac Aster', [
 });
 
 const LaverreGengariteAster2 = new NPC('Hex Maniac Aster', [
-    'Some Pokémon evolve when exposed to a Link Cable, or sent through a trade.',
+    'Some Pokémon evolve when exposed to a Linking Cord, or sent through a trade.',
     'That\'s right. Haunter is one of those Pokemon.',
-    'I don\'t have enough Quest Points to buy a Link Cable, but a girl named Mindy from Snowpoint City offered to trade me her Haunter for a Medicham.',
+    'I don\'t have enough Quest Points to buy a Linking Cord, but a girl named Mindy from Snowpoint City offered to trade me her Haunter for a Medicham.',
     'Hopefully I\'ll have a Gengar soon...',
 ], {image: 'assets/images/trainers/Hex Maniac.png',
     requirement: new TemporaryBattleRequirement('Hex Maniac Aster'),
