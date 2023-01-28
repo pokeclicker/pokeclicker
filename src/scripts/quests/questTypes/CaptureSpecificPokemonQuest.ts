@@ -4,7 +4,7 @@ class CaptureSpecificPokemonQuest extends Quest implements QuestInterface {
     pokemon: PokemonListData;
     customDescription: string;
     customReward: () => void;
-	canHatch: boolean;
+    canHatch: boolean;
 
     constructor(pokemonName: PokemonNameType, description: string = undefined, capturesNeeded = 1, includeBreeding = false, reward: (() => void) | number = undefined, onload: () => void = undefined) {
         const qpReward = typeof reward == 'number' ? reward : 0;
