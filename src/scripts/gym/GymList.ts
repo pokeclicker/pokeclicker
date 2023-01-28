@@ -2178,7 +2178,7 @@ GymList['Glaseado Mountain'] = new Gym(
     BadgeEnums.Ice_Gym,
     250000,
     '',
-    [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Glaseado Mountain'))]
 );
 GymList['Elite Rika'] = new Gym(
     'Rika',
@@ -2193,7 +2193,7 @@ GymList['Elite Rika'] = new Gym(
     BadgeEnums.Elite_Rika,
     250000,
     '',
-    [new GymBadgeRequirement(BadgeEnums.Elite_Hassel)]
+    [new GymBadgeRequirement(BadgeEnums.Bug_Gym), new GymBadgeRequirement(BadgeEnums.Grass_Gym), new GymBadgeRequirement(BadgeEnums.Electric_Gym), new GymBadgeRequirement(BadgeEnums.Water_Gym), new GymBadgeRequirement(BadgeEnums.Normal_Gym), new GymBadgeRequirement(BadgeEnums.Ghost_Gym), new GymBadgeRequirement(BadgeEnums.Psychic_Gym), new GymBadgeRequirement(BadgeEnums.Ice_Gym)]
 );
 GymList['Elite Poppy'] = new Gym(
     'Poppy',
@@ -2258,7 +2258,7 @@ GymList['Top Champion Geeta'] = new Gym(
     () => {},
     { champion: true }
 );
-/*GymList['Champion Nemona'] = new Gym(
+GymList['Champion Nemona'] = new Gym(
     'Nemona',
     'Champion Nemona',
     [
@@ -2275,7 +2275,7 @@ GymList['Top Champion Geeta'] = new Gym(
     250000,
     '',
     [new GymBadgeRequirement(BadgeEnums.Elite_PaldeaChampion)]
-);*/
+);
 GymList['Segin Squad\'s Base'] = new Gym(
     'Giacomo',
     'Segin Squad\'s Base',
@@ -2343,7 +2343,7 @@ GymList['Caph Squad\'s Base'] = new Gym(
     '',
     [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)]
 );
-/*GymList['Director Clavell'] = new Gym(
+GymList['Director Clavell'] = new Gym(
     'Clavell',
     'Director Clavell',
     [
@@ -2479,4 +2479,4 @@ GymList['AI Turo'] = new Gym(
     250000,
     '',
     [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)]
-);*/
+);

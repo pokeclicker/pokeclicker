@@ -6636,7 +6636,7 @@ TownList['Poco Path Lighthouse'] = new Town(
     'Poco Path Lighthouse',
     GameConstants.Region.paldea,
     GameConstants.PaldeaSubRegions.Paldea,
-    [/*GymList['Pokémon Trainer Arven']*/],
+    [GymList['Pokémon Trainer Arven']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
     }
@@ -6654,7 +6654,7 @@ TownList['Mesagoza'] = new Town(
     'Mesagoza',
     GameConstants.Region.paldea,
     GameConstants.PaldeaSubRegions.Paldea,
-    [/*GymList['Champion Nemona']*/],
+    [GymList['Champion Nemona']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
     }
@@ -6664,7 +6664,7 @@ TownList['Naranjuva Academy'] = new Town(
     'Naranjuva Academy',
     GameConstants.Region.paldea,
     GameConstants.PaldeaSubRegions.Paldea,
-    [/*GymList['Director Clavell'], GymList['Penny of Team Star']*/],
+    [GymList['Director Clavell'], GymList['Penny of Team Star']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
     }
@@ -6756,7 +6756,7 @@ TownList['Pokémon League Paldea'] = new Town(
     GameConstants.PaldeaSubRegions.Paldea,
     [GymList['Elite Rika'], GymList['Elite Poppy'], GymList['Elite Larry'], GymList['Elite Hassel'], GymList['Top Champion Geeta'], pokeLeagueShop()],
     {
-        requirements: [new GymBadgeRequirement(BadgeEnums.Bug_Gym), new GymBadgeRequirement(BadgeEnums.Grass_Gym), new GymBadgeRequirement(BadgeEnums.Electric_Gym), new GymBadgeRequirement(BadgeEnums.Water_Gym), new GymBadgeRequirement(BadgeEnums.Normal_Gym), new GymBadgeRequirement(BadgeEnums.Ghost_Gym), new GymBadgeRequirement(BadgeEnums.Psychic_Gym), new GymBadgeRequirement(BadgeEnums.Ice_Gym)],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
     }
 );
 TownList['Segin Squad\'s Base'] = new Town(
@@ -6817,7 +6817,7 @@ TownList['Zero Lab'] = new Town(
     'Zero Lab',
     GameConstants.Region.paldea,
     GameConstants.PaldeaSubRegions.Paldea,
-    [/*GymList['AI Sada'], GymList['AI Turo']*/],
+    [GymList['AI Sada'], GymList['AI Turo']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
     }

@@ -1113,22 +1113,22 @@ export const PaldeaGyms = [
     'Elite Larry',
     'Elite Hassel',
     'Top Champion Geeta',
-    /*'Champion Nemona',*/
+    'Champion Nemona',
     'Segin Squad\'s Base',
     'Schedar Squad\'s Base',
     'Navi Squad\'s Base',
     'Ruchbah Squad\'s Base',
     'Caph Squad\'s Base',
-    /*'Director Clavell',
+    'Director Clavell',
     'Penny of Team Star',
     'Stony Cliff Titan',
     'Open Sky Titan',
     'Lurking Steel Titan',
-    'Quaking Earth Titan',
-    'False Dragon Titan',
+    'Asado Desert',
+    'Casseroya Lake',
     'Pokémon Trainer Arven',
     'AI Sada',
-    'AI Turo',*/
+    'AI Turo',
 ]
 
 export const OrangeGyms = [
