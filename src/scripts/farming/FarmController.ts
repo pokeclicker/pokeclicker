@@ -225,10 +225,12 @@ class FarmController {
             if (typeof aura === 'undefined') {
                 return;
             }
-            if (aura() === 1) {
-                return;
+            if (aura() !== 1 && idx !== AuraType.Repel) {
+                tooltip.push(`${AuraType[idx]}: ×${aura().toFixed(2)}`);
+            } else if (aura() !== 0 && idx === AuraType.Repel) {
+                tooltip.push(`${AuraType[idx]}: ${(aura() * 100).toFixed(2)}%`);
             }
-            tooltip.push(`${AuraType[idx]}: ${aura().toFixed(2)}x`);
+
         });
 
         // Adding header if necessary

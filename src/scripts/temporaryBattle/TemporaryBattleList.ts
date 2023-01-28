@@ -822,6 +822,38 @@ TemporaryBattleList['Meta Groudon'] = new TemporaryBattle(
         hideTrainer: true,
     }
 );
+TemporaryBattleList.Latias = new TemporaryBattle(
+    'Latias',
+    [new GymPokemon('Latias', 13800000, 100)],
+    '<i>Latias joins your party, and Latios flies away back to the mainland.</i>',
+    [new MultiRequirement([new QuestLineStepCompletedRequirement('The Eon Duo', 3), new CustomRequirement(ko.pureComputed(() => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Latios')]()), 1, undefined, GameConstants.AchievementOption.less)])],
+    undefined,
+    {
+        displayName: 'Latias',
+        firstTimeRewardFunction: () => {
+            App.game.party.gainPokemonByName('Latias');
+        },
+        returnTown: 'Southern Island',
+        imageName: '../pokemon/380',
+        hideTrainer: true,
+    }
+);
+TemporaryBattleList.Latios = new TemporaryBattle(
+    'Latios',
+    [new GymPokemon('Latios', 13800000, 100)],
+    '<i>Latios joins your party, and Latias flies away back to the mainland.</i>',
+    [new MultiRequirement([new QuestLineStepCompletedRequirement('The Eon Duo', 3), new CustomRequirement(ko.pureComputed(() => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Latias')]()), 1, undefined, GameConstants.AchievementOption.less)])],
+    undefined,
+    {
+        displayName: 'Latios',
+        firstTimeRewardFunction: () => {
+            App.game.party.gainPokemonByName('Latios');
+        },
+        returnTown: 'Southern Island',
+        imageName: '../pokemon/381',
+        hideTrainer: true,
+    }
+);
 TemporaryBattleList['Sevii Rocket Grunt 1'] = new TemporaryBattle(
     'Sevii Rocket Grunt 1',
     [
@@ -2323,6 +2355,24 @@ TemporaryBattleList['Calem 6'] = new TemporaryBattle(
         firstTimeRewardFunction: () => App.game.party.getPokemonByName('Absol').giveMegastone(),
         rewardFunction: () =>
             Notifier.notify({message: 'Congratulations on beating Calem at his best! Come back to fight him again at any time.'}),
+    }
+);
+
+TemporaryBattleList['Marquis Grant'] = new TemporaryBattle(
+    'Marquis Grant',
+    [
+        new GymPokemon('Aurorus', 110668215, 80),
+        new GymPokemon('Tyrantrum', 110668215, 80),
+        new GymPokemon('Mega Tyranitar', 125000000, 80),
+        new GymPokemon('Mega Aggron', 125000000, 80),
+    ],
+    'To commemorate such an impressive show of teamwork, please accept these gifts!</br><img src="assets/images/megaStone/248.png"/></br></br><img src="assets/images/megaStone/306.png"/></br>',
+    [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion), new ClearGymRequirement(2000, GameConstants.getGymIndex('Cyllage City')), new ObtainedPokemonRequirement('Tyranitar'), new ObtainedPokemonRequirement('Aggron')],
+    undefined,
+    {
+        displayName: 'Marquis Grant',
+        imageName: '../gymLeaders/Grant',
+        firstTimeRewardFunction: () => [App.game.party.getPokemonByName('Tyranitar').giveMegastone(), App.game.party.getPokemonByName('Aggron').giveMegastone()],
     }
 );
 

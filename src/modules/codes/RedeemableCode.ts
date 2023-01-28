@@ -3,10 +3,10 @@ import NotificationConstants from '../notifications/NotificationConstants';
 import Requirement from '../requirements/Requirement';
 
 export default class RedeemableCode {
-    constructor(public name: string, public hash: number, public isRedeemed: boolean, private rewardFunction: () => void, private requirement: Requirement = undefined) {
+    constructor(public name: string, public hash: number, public isRedeemed: boolean, private rewardFunction: () => Promise<boolean | undefined>, private requirement: Requirement = undefined) {
     }
 
-    redeem() {
+    async redeem() {
         if (this.isRedeemed) {
             Notifier.notify({
                 message: 'You have already redeemed this code.',
@@ -24,7 +24,7 @@ export default class RedeemableCode {
         }
 
         // If nothing returned, assume it was redeemed fine
-        if (this.rewardFunction() === undefined) {
+        if (await this.rewardFunction() ?? true) {
             this.isRedeemed = true;
         }
     }
