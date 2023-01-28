@@ -1632,7 +1632,7 @@ TownList['Goldenrod City'] = new Town(
     'Goldenrod City',
     GameConstants.Region.johto,
     GameConstants.JohtoSubRegions.Johto,
-    [TemporaryBattleList['Silver 4'], GoldenrodDepartmentStoreShop, JohtoBerryMaster, new MoveToDungeon(dungeonList['Radio Tower']), TemporaryBattleList['Aipom Alley'], TemporaryBattleList.Imposter, TemporaryBattleList['Possessed Mewtwo']],
+    [GoldenrodDepartmentStoreShop, JohtoBerryMaster, new MoveToDungeon(dungeonList['Radio Tower']), TemporaryBattleList['Silver 4'], TemporaryBattleList['Aipom Alley'], TemporaryBattleList.Imposter, TemporaryBattleList['Possessed Mewtwo']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 34)],
         npcs: [Conductor, searchForClues, HowardClifford1, HowardClifford2, HowardClifford3, Kuni],
