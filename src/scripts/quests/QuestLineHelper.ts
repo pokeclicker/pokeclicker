@@ -2100,8 +2100,8 @@ class QuestLineHelper {
         const talktoPiers = new TalkToNPCQuest(Piers, 'Talk to Piers in the Energy Plant.');
         swordShieldQuestLine.addQuest(talktoPiers);
 
-        const catchZacian = new CustomQuest(1, 0, 'Catch or hatch Zacian.', () => App.game.statistics.pokemonCaptured[pokemonMap['Zacian (Battle Hero)'].id](), 0);
-        const catchZamazenta = new CustomQuest(1, 0, 'Catch or hatch Zamazenta.', () => App.game.statistics.pokemonCaptured[pokemonMap['Zamazenta (Battle Hero)'].id](), 0);
+        const catchZacian = new CustomQuest(1, 0, 'Catch Zacian.', () => App.game.statistics.pokemonCaptured[pokemonMap['Zacian (Battle Hero)'].id](), 0);
+        const catchZamazenta = new CustomQuest(1, 0, 'Catch Zamazenta.', () => App.game.statistics.pokemonCaptured[pokemonMap['Zamazenta (Battle Hero)'].id](), 0);
         swordShieldQuestLine.addQuest(new MultipleQuestsQuest(
             [
                 catchZacian,

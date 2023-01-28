@@ -22,9 +22,9 @@ class CaptureSpecificPokemonQuest extends Quest implements QuestInterface {
             return this.customDescription;
         }
         if (this.amount === 1) {
-            return `Capture or hatch ${this.pokemon.name}.`;
+            return `Capture ${this.includeBreeding ? 'or hatch ' : ''}${this.pokemon.name}.`;
         }
-        return `Capture or hatch ${this.pokemon.name} ${this.amount} times.`;
+        return `Capture ${this.includeBreeding ? 'or hatch ' : ''}${this.pokemon.name} ${this.amount} times.`;
     }
 
     claim(): boolean {
