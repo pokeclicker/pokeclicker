@@ -10,6 +10,30 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.10.9
+    new ChangelogUpdate('v0.10.9', new Date(2023, 0, 28)),
+    new Changelog(changelogType.NEW, 'New Megas'),
+    new Changelog(changelogType.NEW, 'New Quest Lines'),
+    new Changelog(changelogType.NEW, 'New catch option for contagious Pokémon'),
+    new Changelog(changelogType.NEW, 'Redeemable code to refund all Vitamins: REFUND-VITAMINS (one time use)'),
+    new Changelog(changelogType.CHANGE, 'Adjusted Luxury Ball, now awards random currencies'),
+    new Changelog(changelogType.CHANGE, 'Adjusted wandering Pokémon on the Farm'),
+    new Changelog(changelogType.CHANGE, 'Adjusted some fossil sizes in Underground'),
+    new Changelog(changelogType.CHANGE, 'Hatchery search no longer uses Regex by default'),
+    new Changelog(changelogType.CHANGE, 'Adjusted how locked evolutions are shown in evolution item menu'),
+    new Changelog(changelogType.CHANGE, 'Multiple tiers of flash in Dungeons'),
+    new Changelog(changelogType.CHANGE, 'Dawn is now during 5am-6am'),
+    new Changelog(changelogType.CHANGE, 'Roamer NPCs now reveal the Pokémon in the Pokédex'),
+    new Changelog(changelogType.CHANGE, 'Totem Marowak can now drop Thick Club'),
+    new Changelog(changelogType.CHANGE, 'Misc text changes'),
+    new Changelog(changelogType.CHANGE, 'Misc image changes'),
+    new Changelog(changelogType.CHANGE, 'Misc UI changes'),
+    new Changelog(changelogType.FIXED, 'No more Mega Stones in berry trades'),
+    new Changelog(changelogType.FIXED, 'Farm aura displays'),
+    new Changelog(changelogType.FIXED, 'Underground buried item locations'),
+    new Changelog(changelogType.FIXED, 'Fixed subregion for Altar of the Sunne and Moone'),
+    new Changelog(changelogType.FIXED, 'Real evolution challenge, using stones on Pokémon in the Hatchery'),
+    new Changelog(changelogType.FIXED, 'Evolution item caught indication including future regions'),
     // v0.10.8
     new ChangelogUpdate('v0.10.8', new Date(2023, 0, 15)),
     new Changelog(changelogType.NEW, 'New Mega'),
