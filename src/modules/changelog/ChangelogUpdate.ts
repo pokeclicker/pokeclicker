@@ -2,11 +2,10 @@ import Changelog, { changelogType } from './Changelog';
 
 export default class ChangelogUpdate extends Changelog {
     constructor(
-        version: string,
+        public version: string,
         date: Date,
+        desc: string = '',
     ) {
-        const dateFormat: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
-        const description = `<code>${version}  -  ${date.toLocaleDateString(undefined, dateFormat)}</code>`;
-        super(changelogType.UPDATE, description);
+        super(changelogType.UPDATE, `<code>${version}${desc ? ` - ${desc}` : ''} -  ${date.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</code>`);
     }
 }

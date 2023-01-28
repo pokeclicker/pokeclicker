@@ -613,6 +613,34 @@ class QuestLineHelper {
 
         App.game.quests.questLines().push(deoxysQuestLine);
     }
+    // Eon Duo
+    public static createEonDuoQuestLine() {
+        const eonDuoQuestLine = new QuestLine('The Eon Duo', 'Track down the elusive Eon Duo.', new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), GameConstants.BulletinBoards.Hoenn);
+
+        const television1 = new TalkToNPCQuest(Television1, 'Watch a news report in Littleroot Town about a mysterious Pokémon.');
+        eonDuoQuestLine.addQuest(television1);
+
+        const television2 = new TalkToNPCQuest(Television2, 'Change channels to watch a different TV station in Littleroot town.');
+        eonDuoQuestLine.addQuest(television2);
+
+        const ticketClaim = new TalkToNPCQuest(TicketClaim, 'Go to Hoenn Pokémon League to claim your Eon ticket.');
+        eonDuoQuestLine.addQuest(ticketClaim);
+
+        const southernIslandClearing = new TalkToNPCQuest(SouthernIsland1, 'Claim your Eon Ticket in the Start Menu and investigate the Southern Island.');
+        eonDuoQuestLine.addQuest(southernIslandClearing);
+
+        const catchLatias = new CaptureSpecificPokemonQuest('Latias', 'Catch or Hatch Latias', 1, true);
+
+        const catchLatios = new CaptureSpecificPokemonQuest('Latios', 'Catch or Hatch Latios', 1, true);
+
+        eonDuoQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                catchLatias,
+                catchLatios,
+            ], 'Catch or hatch the Eon Duo.'));
+
+        App.game.quests.questLines().push(eonDuoQuestLine);
+    }
 
     public static createRubySapphireSeviiQuestLine() {
         const rubySapphireSeviiQuestLine = new QuestLine('Celio\'s Errand', 'Celio has asked you to help him set up a digital connection between the Sevii Islands and Hoenn.', new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), GameConstants.BulletinBoards.Hoenn);
@@ -792,7 +820,8 @@ class QuestLineHelper {
         const fightMetaGroudon1 = new CustomQuest(1, 0, 'Butler\'s attempts to resurrect Groudon have gone terribly wrong! Fight the resulting abomination!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Meta Groudon')]());
         jirachiQuestLine.addQuest(fightMetaGroudon1);
 
-        const catchJirachi = new CaptureSpecificPokemonQuest('Jirachi', 'Jirachi has escaped in the chaos and is roaming Hoenn. Catch Jirachi or hatch your own to calm it down.', 1, true);//CATCHHATCH: REMOVE LATER
+        const catchJirachi = new CaptureSpecificPokemonQuest('Jirachi', 'Jirachi has escaped in the chaos and is roaming Hoenn. Catch or hatch Jirachi.', 1, true);
+
         jirachiQuestLine.addQuest(catchJirachi);
 
         App.game.quests.questLines().push(jirachiQuestLine);
@@ -900,6 +929,7 @@ class QuestLineHelper {
         manaphyQuestLine.addQuest(investigateBoulders);
 
         const catchPolitoedSubstitutes = new CustomQuest(50, undefined, 'Catch or hatch 50 Water-type Pokémon, and see if those boulders are really just boulders.', () => {
+
             return pokemonMap.filter(p => p.type.includes(PokemonType.Water)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
         });
         manaphyQuestLine.addQuest(catchPolitoedSubstitutes);
@@ -965,6 +995,7 @@ class QuestLineHelper {
         manaphyQuestLine.addQuest(happinyChase7);
 
         const happinyChase8 = new TalkToNPCQuest(HappinyWitness8, 'The Happiny fled from Oreburgh and headed west, through the Oreburgh Gate. Search for another witness on the far side.');
+
         manaphyQuestLine.addQuest(happinyChase8);
 
         const happinyChase9 = new TalkToNPCQuest(HappinyWitness9, 'Search for evidence of the Happiny\'s path after turning south from Jubilife City.');
@@ -978,6 +1009,7 @@ class QuestLineHelper {
         manaphyQuestLine.addQuest(happinyChase10);
 
         const catchBunearySubstitutes = new CustomQuest(50, undefined, 'Oh no, you\'re not gonna let more boulders stop you now. Catch or hatch 50 Fighting-types and smash right through them.', () => {
+
             return pokemonMap.filter(p => p.type.includes(PokemonType.Fighting)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
         });
         manaphyQuestLine.addQuest(catchBunearySubstitutes);
@@ -987,6 +1019,7 @@ class QuestLineHelper {
         manaphyQuestLine.addQuest(clearManaphyHappiny);
 
         const talkHastings4 = new TalkToNPCQuest(ManaphyHastings4, 'The egg hatched after your battle with the egg-nappers! Bring Manaphy back to Hastings in Canalave City, and close off this mission for good.');
+
         manaphyQuestLine.addQuest(talkHastings4);
 
         App.game.quests.questLines().push(manaphyQuestLine);
@@ -2545,6 +2578,7 @@ class QuestLineHelper {
         this.createAquaMagmaHoennQuestLine();
         this.createWeatherTrioQuestLine();
         this.createDeoxysQuestLine();
+        this.createEonDuoQuestLine();
         this.createRubySapphireSeviiQuestLine();
         this.createPinkanThemeparkQuestLine();
         this.createRegiTrioQuestLine();

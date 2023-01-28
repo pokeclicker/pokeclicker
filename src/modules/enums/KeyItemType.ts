@@ -10,6 +10,7 @@ enum KeyItemType {
     'Safari_ticket',
     'Wailmer_pail',
     'Explorer_kit',
+    'Eon_ticket',
     'Event_calendar',
     'Gem_case',
     'DNA_splicers',

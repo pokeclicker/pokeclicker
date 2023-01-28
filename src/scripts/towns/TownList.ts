@@ -2203,6 +2203,36 @@ const BrailleEnthusiast3 = new NPC('Braille Enthusiast', [
     requirement: new QuestLineStepCompletedRequirement('The Three Golems', 6),
 });
 
+const Television1 = new NPC('Watch Television', [
+    'Reports are coming in from across Hoenn that two fast-moving Pokémon have appeared!',
+    'These elusive Pokémon are Blue and Red and White all over, and our reporters will give you the latest updates as we try to discern their identity and location!',
+],  {requirement: new MultiRequirement([new QuestLineStartedRequirement('The Eon Duo'), new QuestLineStepCompletedRequirement('The Eon Duo', 1, GameConstants.AchievementOption.less)]),
+});
+
+const Television2 = new NPC('Watch More Television', [
+    'A hot new vacation spot is waiting for you!',
+    'Come to the Hoenn Pokémon League to claim your free Eon Ticket today!',
+    'Supplies are limited, reserve your spot on a cruise to the Southern Island!',
+],  {requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Eon Duo', 0), new QuestLineStepCompletedRequirement('The Eon Duo', 2, GameConstants.AchievementOption.less)]),
+});
+
+const TicketClaim = new NPC('Contest Attendant', [
+    'Thank you for reserving your Eon Ticket!',
+    'To claim the ticket, all you have to do is go to your Start Menu, select "Save", and enter the following code in the "Enter Code..." box:',
+    'EON-TICKET',
+],  {requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Eon Duo', 1), new QuestLineStepCompletedRequirement('The Eon Duo', 3, GameConstants.AchievementOption.less)]),
+});
+
+const SurferDave = new NPC('Surfer Dave', [
+    'What\'s up? I got here using my Eon Ticket, what about you?']
+);
+
+const SouthernIsland1 = new NPC('Explore the Southern Island', [
+    '<i>The Southern Island is a small but lush forest. The clearing near the center of the island is the perfect place for a tired Pokémon to rest.</i>',
+    '<i>Latios and Latias are resting in the clearing. You can approach one of them, but the other will probably flee.</i>',
+],  {requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Eon Duo', 2), new QuestLineStepCompletedRequirement('The Eon Duo', 3, GameConstants.AchievementOption.less)]),
+});
+
 //Hoenn Towns
 TownList['Littleroot Town'] = new Town(
     'Littleroot Town',
@@ -2211,7 +2241,7 @@ TownList['Littleroot Town'] = new Town(
     [new BulletinBoard(GameConstants.BulletinBoards.Hoenn)],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion)],
-        npcs: [ProfBirch, LittlerootAide],
+        npcs: [ProfBirch, LittlerootAide, Television1, Television2],
     }
 );
 TownList['Oldale Town'] = new Town(
@@ -2410,6 +2440,17 @@ TownList['Pokémon League Hoenn'] = new Town(
             new RouteKillRequirement(10, GameConstants.Region.hoenn, 128),
             new TemporaryBattleRequirement('Wally 2'),
         ],
+        npcs: [TicketClaim],
+    }
+);
+TownList['Southern Island'] = new Town(
+    'Southern Island',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Hoenn,
+    [TemporaryBattleList.Latios, TemporaryBattleList.Latias],
+    {
+        requirements: [new CustomRequirement(ko.pureComputed(() => +App.game.keyItems.hasKeyItem(KeyItemType.Eon_ticket)), 1, 'Obtain an Eon Ticket')],
+        npcs: [SurferDave, SouthernIsland1],
     }
 );
 
@@ -3675,6 +3716,13 @@ const DreamResearcher2 = new NPC('Dream Researcher', [
     requirement: new TemporaryBattleRequirement('Dream Researcher'),
 });
 
+const VitaminRefundCode = new NPC('Pokémon Breeder', [
+    'I used to have my Pokémon maxed out on Protein, but then I found out about the new Vitamins!',
+    'I swapped out some of my Proteins for the new Vitamins, but then I was left with a bunch of extra Protein I couldn\'t use.',
+    'Luckily I was able to use the code REFUND-VITAMINS to get my money back! Too bad it only has one use though...',
+    'It will also only refund Vitamins you bought after hitting the price cap.',
+]);
+
 //Unova Towns
 TownList['Aspertia City'] = new Town(
     'Aspertia City',
@@ -3892,6 +3940,7 @@ TownList['Nacrene City'] = new Town(
     [NacreneCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Nacrene City'])],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pinwheel Forest'))],
+        npcs: [VitaminRefundCode],
     }
 );
 TownList['Striaton City'] = new Town(
@@ -4432,7 +4481,7 @@ TownList['Cyllage City'] = new Town(
     'Cyllage City',
     GameConstants.Region.kalos,
     GameConstants.KalosSubRegions.Kalos,
-    [CyllageCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Cyllage City'])],
+    [CyllageCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Cyllage City']), TemporaryBattleList['Marquis Grant']],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Glittering Cave'))],
     }
