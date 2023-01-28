@@ -205,7 +205,7 @@ class Plot implements Saveable {
                     let timetip: string;
                     let formattedBaseTime: string;
 
-                    if (timeType === 'nextStage' && !timeBoostType) {
+                    if (timeType === 'nextStage') {
                         const formattedTime = this.formattedStageTimeLeft();
                         formattedBaseTime = this.formattedBaseStageTimeLeft();
                         switch (this.stage()) {
@@ -241,7 +241,7 @@ class Plot implements Saveable {
                         }
                     }
 
-                    tooltip.push(`${timetip}${altered ? ` (altered from ${formattedBaseTime})` : ''}`);
+                    tooltip.push(`${timetip}${altered && timeBoostType ? ` (altered from ${formattedBaseTime})` : ''}`);
                 }
             }
 
