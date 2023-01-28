@@ -1956,7 +1956,7 @@ class Update implements Saveable {
             //Mega Manectric/Houndoom
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 143);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 144);
-		},
+        },
     };
 
     constructor() {
