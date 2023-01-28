@@ -1166,7 +1166,7 @@ class Farming implements Feature {
             40,
             BerryColor.Blue,
             7.5,
-            BerryFirmness.Very_Hard,
+            BerryFirmness.Hard,
             ['This is a very, very mystifying Berry. There is no telling how it can be used, or what may happen if it is used.']
         );
 
