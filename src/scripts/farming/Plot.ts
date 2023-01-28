@@ -200,78 +200,48 @@ class Plot implements Saveable {
                     const timeType = Settings.getSetting('farmDisplay').observableValue();
                     const timeBoostType = Settings.getSetting('farmBoostDisplay').observableValue();
                     const growthMultiplierNumber = App.game.farming.getGrowthMultiplier() * this.getGrowthMultiplier();
-                    if (timeType === 'nextStage' && timeBoostType && !(growthMultiplierNumber === 1)) {
+                    const altered = growthMultiplierNumber !== 1;
+
+                    let timetip: string;
+                    let formattedBaseTime: string;
+
+                    if (timeType === 'nextStage' && !timeBoostType) {
                         const formattedTime = this.formattedStageTimeLeft();
-                        const formattedBaseTime = this.formattedBaseStageTimeLeft();
+                        formattedBaseTime = this.formattedBaseStageTimeLeft();
                         switch (this.stage()) {
                             case PlotStage.Seed:
-                                tooltip.push(`${formattedTime} until sprout (altered from ${formattedBaseTime})`);
+                                timetip = `${formattedTime} until sprout`;
                                 break;
                             case PlotStage.Sprout:
-                                tooltip.push(`${formattedTime} until grown (altered from ${formattedBaseTime})`);
+                                timetip = `${formattedTime} until grown`;
                                 break;
                             case PlotStage.Taller:
-                                tooltip.push(`${formattedTime} until bloom (altered from ${formattedBaseTime})`);
+                                timetip = `${formattedTime} until bloom`;
                                 break;
                             case PlotStage.Bloom:
-                                tooltip.push(`${formattedTime} until ripe (altered from ${formattedBaseTime})`);
+                                timetip = `${formattedTime} until ripe`;
                                 break;
                             case PlotStage.Berry:
-                                tooltip.push(`${formattedTime} until death (altered from ${formattedBaseTime})`);
+                                timetip = `${formattedTime} until death`;
                                 break;
                         }
                     } else {
-                        if (timeType === 'nextStage' && !timeBoostType) {
-                            const formattedTime = this.formattedStageTimeLeft();
-                            const formattedBaseTime = this.formattedBaseStageTimeLeft();
-                            switch (this.stage()) {
-                                case PlotStage.Seed:
-                                    tooltip.push(`${formattedTime} until sprout`);
-                                    break;
-                                case PlotStage.Sprout:
-                                    tooltip.push(`${formattedTime} until grown`);
-                                    break;
-                                case PlotStage.Taller:
-                                    tooltip.push(`${formattedTime} until bloom`);
-                                    break;
-                                case PlotStage.Bloom:
-                                    tooltip.push(`${formattedTime} until ripe`);
-                                    break;
-                                case PlotStage.Berry:
-                                    tooltip.push(`${formattedTime} until death`);
-                                    break;
-                            }
-                        } else {
-                            if (timeType === 'ripeDeath' && timeBoostType && !(growthMultiplierNumber === 1)) {
-                                const formattedTime = this.formattedTimeLeft();
-                                const formattedBaseTime = this.formattedBaseTimeLeft();
-                                switch (this.stage()) {
-                                    case PlotStage.Seed:
-                                    case PlotStage.Sprout:
-                                    case PlotStage.Taller:
-                                    case PlotStage.Bloom:
-                                        tooltip.push(`${formattedTime} until ripe (altered from ${formattedBaseTime})`);
-                                        break;
-                                    case PlotStage.Berry:
-                                        tooltip.push(`${formattedTime} until death (altered from ${formattedBaseTime})`);
-                                        break;
-                                }
-                            } else {
-                                const formattedTime = this.formattedTimeLeft();
-                                switch (this.stage()) {
-                                    case PlotStage.Seed:
-                                    case PlotStage.Sprout:
-                                    case PlotStage.Taller:
-                                    case PlotStage.Bloom:
-                                        tooltip.push(`${formattedTime} until ripe`);
-                                        break;
-                                    case PlotStage.Berry:
-                                        tooltip.push(`${formattedTime} until death`);
-                                        break;
-                                }
-                            }
+                        const formattedTime = this.formattedTimeLeft();
+                        formattedBaseTime = this.formattedBaseTimeLeft();
+                        switch (this.stage()) {
+                            case PlotStage.Seed:
+                            case PlotStage.Sprout:
+                            case PlotStage.Taller:
+                            case PlotStage.Bloom:
+                                timetip = `${formattedTime} until ripe`;
+                                break;
+                            case PlotStage.Berry:
+                                timetip = `${formattedTime} until death`;
+                                break;
                         }
                     }
+
+                    tooltip.push(`${timetip}${altered ? ` (altered from ${formattedBaseTime})` : ''}`);
                 }
             }
 
