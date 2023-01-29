@@ -26,9 +26,14 @@
                 />
             </div>
             <div class="collapse" data-bind="attr: { id: `pokeball-filter-options-${$index()}`}">
-                <div class="pokeballFilterOptions" data-bind="foreach: Object.entries($data.options)">
-                    <p><span data-bind="text: $data[0]"></span> <span data-bind="text: $data[1]"></span></p>
-                </div>
+                <table>
+                    <tbody class="pokeballFilterOptions" data-bind="foreach: Object.values($data.options)">
+                        <tr data-bind="template: {
+                            name: $data instanceof BooleanSetting ? 'BooleanSettingSliderTemplate' : 'MultipleChoiceSettingTemplate',
+                            data: $data,
+                        }"></tr>
+                    </tbody>
+                </table>
             </div>
         </div>
       </div>

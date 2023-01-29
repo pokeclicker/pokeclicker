@@ -46,7 +46,7 @@ export default class PokeballFilters implements Feature {
 
     toJSON() {
         return {
-            list: ko.toJS(this.list),
+            list: this.list().map((pf) => pf.toJSON()),
         };
     }
 
