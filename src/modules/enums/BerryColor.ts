@@ -5,6 +5,8 @@ enum BerryColor {
     Green,
     Yellow,
     Blue,
+    Silver,
+    Gold,
 }
 
 export default BerryColor;
