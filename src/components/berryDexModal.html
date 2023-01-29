@@ -21,6 +21,25 @@
                   </tbody>
                   <thead>
                     <tr class="text-light">
+                      <th class="bg-dark" colspan="2">Form</th>
+                    </tr>
+                  </thead>
+                    <tbody>
+                    <tr>
+                      <td class="text-left">Berry Color</td>
+                      <td class="text-left tight"><code data-bind="text: BerryColor[App.game.farming.berryData[$data].color]">-</code></td>
+                    </tr>
+                    <tr>
+                      <td class="text-left">Size</td>
+                      <td class="text-left tight"><code data-bind="text: Farming.sizeUnitConverter[SizeUnits[Settings.getSetting('sizeUnits').observableValue()]](App.game.farming.berryData[$data].size)">-</code></td>
+                    </tr>
+                    <tr>
+                      <td class="text-left">Firmness</td>
+                      <td class="text-left tight"><code data-bind="html: GameConstants.humanifyString(BerryFirmness[App.game.farming.berryData[$data].firmness])">-</code></td>
+                    </tr>
+                    </tbody>
+                  <thead>
+                    <tr class="text-light">
                       <th class="text-left bg-dark">Type</th>
                       <th class="text-left bg-dark">Amount</th>
                     </tr>
@@ -114,6 +133,10 @@
                     </tr>
                   </thead>
                   <tbody>
+                    <tr>
+                      <td class="text-left">Current Amount</td>
+                      <td class="text-left tight"><code data-bind="text: App.game.farming.berryList[$data]().toLocaleString('en-US')"></span></td></code></td>
+                    </tr>
                     <tr>
                       <td class="text-left">Harvested</td>
                       <td class="text-left tight"><code data-bind="text: App.game.statistics.berriesHarvested[$data]().toLocaleString('en-US')">-</code></td>
