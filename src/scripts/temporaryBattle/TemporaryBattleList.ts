@@ -223,6 +223,18 @@ TemporaryBattleList['Cue Ball Paxton'] = new TemporaryBattle(
         new TemporaryBattleRequirement('Biker Goon 3'),
     ]
 );
+TemporaryBattleList['Bill\'s Grandpa'] = new TemporaryBattle(
+    'Bill\'s Grandpa',
+    [
+        new GymPokemon('Vaporeon', 170000, 48),
+        new GymPokemon('Jolteon', 175000, 49),
+        new GymPokemon('Flareon', 180000, 50),
+    ],
+    'Hahaha, that was one of the best battles I\'ve ever had.',
+    [new QuestLineStepCompletedRequirement('Bill\'s Grandpa Treasure Hunt', 10)],
+    undefined,
+    {}
+);
 TemporaryBattleList['Blue 6'] = new TemporaryBattle(
     'Blue 6',
     [
@@ -2717,7 +2729,7 @@ TemporaryBattleList['Captain Ilima'] = new TemporaryBattle(
         new GymPokemon('Smeargle', 189973142, 51),
         new GymPokemon('Komala', 198608284, 51),
     ],
-    'Yes! You have emerged victorious! You and your Pokémon have become quite a delightful team! Off to Lush Jungle? It\'s been awhile since I last visited Akala.',
+    'Yes! You have emerged victorious! You and your Pokémon have become quite a delightful team! Off to Lush Jungle? It\'s been a while since I last visited Akala.',
     [
         new TemporaryBattleRequirement('Captain Mina'),
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Hau\'oli Cemetery')),

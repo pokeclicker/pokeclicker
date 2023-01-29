@@ -201,6 +201,8 @@ export const SpriteCredits: Credit[] = [
             'Arctozolt shop image',
             'Argus Steel',
             'Ash\'s Butterfree',
+            'Bill\'s Grandpa with Eevee',
+            'Bill\'s Grandpa without Eevee',
             'Black mane hair big icon',
             'Blimp base',
             'Butler',
