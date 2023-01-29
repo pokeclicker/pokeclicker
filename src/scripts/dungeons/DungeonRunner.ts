@@ -318,13 +318,18 @@ class DungeonRunner {
         const clears = App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(dungeonName)]();
 
         const config = [
+            { flash: undefined, clearsNeeded: 0 },
             { flash: DungeonFlash.tiers[0], clearsNeeded: 100 },
             { flash: DungeonFlash.tiers[1], clearsNeeded: 250 },
             { flash: DungeonFlash.tiers[2], clearsNeeded: 400 },
         ].reverse();
 
-        // findIndex, so we can get next tier when light ball is implemented
+        const holdingLightBall = +(App.game.party.caughtPokemon.find(
+            p => p.heldItem() === ItemList.Light_Ball
+        ) !== undefined);
+
         const index = config.findIndex((tier) => tier.clearsNeeded <= clears);
-        return config[index]?.flash;
+
+        return config[Math.max(0, index - holdingLightBall)]?.flash;
     }
 }
