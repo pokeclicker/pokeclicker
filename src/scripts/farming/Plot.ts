@@ -148,7 +148,7 @@ class Plot implements Saveable {
             }
 
             if (this.auraDecay() !== 1) {
-                auraStr.push(`Decay: ${this.auraDecay().toFixed(2)}x`);
+                auraStr.push(`Decay: ×${this.auraDecay().toFixed(2)}`);
             }
 
             if (this.auraBoost() !== 1) {
