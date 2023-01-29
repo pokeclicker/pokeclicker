@@ -13,7 +13,7 @@ class NPC {
     ) {}
 
     get dialogHTML(): string {
-        return this.dialog.map(line => `<p>${line}</p>`).join('\n');
+        return this.dialog.map(line => `<p>${TextMerger.mergeText(line)}</p>`).join('\n');
     }
 
     public isVisible() {
