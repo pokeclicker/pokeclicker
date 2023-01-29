@@ -30,6 +30,7 @@ class Plot implements Saveable {
     auraMutation: KnockoutComputed<number>;
     auraReplant: KnockoutComputed<number>;
     auraDeath: KnockoutComputed<number>;
+    auraDecay: KnockoutComputed<number>;
     auraBoost: KnockoutComputed<number>;
 
     isEmpty: KnockoutComputed<boolean>;
@@ -117,6 +118,9 @@ class Plot implements Saveable {
         this.auraDeath = ko.pureComputed(() => {
             return this.berry === BerryType.Kasib ? 1 : this.maxNeighbourAura(AuraType.Death);
         });
+        this.auraDecay = ko.pureComputed(() => {
+            return this.multiplyNeighbourAura(AuraType.Decay);
+        });
         this.auraBoost = ko.pureComputed(() => {
             return this.berry === BerryType.Lum ? 1 : this.maxNeighbourAura(AuraType.Boost);
         });
@@ -141,6 +145,10 @@ class Plot implements Saveable {
 
             if (this.auraDeath() !== 1) {
                 auraStr.push(`Death: ×${this.auraDeath().toFixed(2)}`);
+            }
+
+            if (this.auraDecay() !== 1) {
+                auraStr.push(`Decay: ×${this.auraDecay().toFixed(2)}`);
             }
 
             if (this.auraBoost() !== 1) {
@@ -421,11 +429,14 @@ class Plot implements Saveable {
             [MulchType.Freeze_Mulch]: GameConstants.FREEZE_MULCH_MULTIPLIER,
         }[this.mulch] ?? 1;
 
-        multiplier *= this.auraGrowth();
-
-        // Handle Death Aura
-        if (this.stage() == PlotStage.Berry && this.berry != BerryType.Kasib) {
-            multiplier *= this.auraDeath();
+        if (this.stage() !== PlotStage.Berry) {
+            multiplier *= this.auraGrowth();
+        } else {
+            multiplier *= this.auraDecay();
+            // Handle Death Aura
+            if (this.berry !== BerryType.Kasib) {
+                multiplier *= this.auraDeath();
+            }
         }
 
         return multiplier;
