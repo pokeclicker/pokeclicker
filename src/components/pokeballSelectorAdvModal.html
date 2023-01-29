@@ -1,0 +1,40 @@
+<div class="modal fade" id="pokeballSelectorAdvModal" tabindex="-1" role="dialog"
+  aria-labelledby="PokeballSelectorAdvModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="pokeballSelectorAdvModalLabel">Poké Ball Selector Configuration</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body p-0">
+        <div id="pokeballFilterConfigs" data-bind="foreach: [...App.game.pokeballFilters.list()].reverse()">
+            <div data-toggle="collapse" data-bind="attr: { href: `#pokeball-filter-options-${$index()}` }">
+                <span data-bind="text: $data.name"></span>
+                <img class="pokeball-small"
+                    data-bind="
+                        attr: {
+                            src: 'assets/images/pokeball/' + GameConstants.Pokeball[$data.ball()] + '.svg'},
+                            tooltip: {
+                                title: $data.ball() === -1 ? 'None' : ItemList[GameConstants.Pokeball[$data.ball()]].displayName,
+                                trigger: 'hover',
+                                animation: false,
+                                placement: 'bottom'
+                            },
+                        }"
+                />
+            </div>
+            <div class="collapse" data-bind="attr: { id: `pokeball-filter-options-${$index()}`}">
+                <div class="pokeballFilterOptions" data-bind="foreach: Object.entries($data.options)">
+                    <p><span data-bind="text: $data[0]"></span> <span data-bind="text: $data[1]"></span></p>
+                </div>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
