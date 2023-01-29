@@ -1437,7 +1437,7 @@ GymList['Acerola\'s Trial'] = new Gym(
     ],
     BadgeEnums.GhostiumZ,
     128000,
-    'Welcome back Now let\'s see how you did... Yup! You passed my trial! Here you go!',
+    'Welcome back! Now let\'s see how you did... Yup! You passed my trial! Here you go!',
     undefined,
     undefined,
     {
