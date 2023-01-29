@@ -13,7 +13,7 @@ import {
     EnvironmentRestrictedLevelEvolution,
     WeatherRestrictedLevelEvolution,
     DayTimedLevelEvolution,
-    TimeRestrictedLevelEvolution,
+    DayCyclePartRestrictedLevelEvolution,
     MegaEvolution,
 } from './evolutions/Methods';
 import BerryType from '../enums/BerryType';
@@ -32,6 +32,7 @@ import Rand from '../utilities/Rand';
 import WeatherType from '../weather/WeatherType';
 import { PokemonNameType } from './PokemonNameType';
 import { setPokemonMap } from './mapProvider';
+import DayCyclePart from '../dayCycle/DayCyclePart';
 
 export const pokemonBabyPrevolutionMap: { [name: string]: PokemonNameType } = {};
 
@@ -3764,7 +3765,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 225,
         'eggCycles': 20,
-        // 'evolutions': [MegaEvolution('Gengar', 'Mega Gengar')],
+        'evolutions': [MegaEvolution('Gengar', 'Mega Gengar')],
         'base': {
             'hitpoints': 60,
             'attack': 65,
@@ -8844,7 +8845,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 270,
         'eggCycles': 40,
-        // 'evolutions': [MegaEvolution('Tyranitar', 'Mega Tyranitar')],
+        'evolutions': [MegaEvolution('Tyranitar', 'Mega Tyranitar')],
         'base': {
             'hitpoints': 100,
             'attack': 134,
@@ -10172,7 +10173,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 239,
         'catchRate': 45,
-        // 'evolutions': [MegaEvolution('Aggron', 'Mega Aggron')],
+        'evolutions': [MegaEvolution('Aggron', 'Mega Aggron')],
         'base': {
             'hitpoints': 70,
             'attack': 110,
@@ -21211,10 +21212,10 @@ export const pokemonList = createPokemonArray(
         'exp': 56,
         'catchRate': 190,
         'evolutions': [
-            TimeRestrictedLevelEvolution(6, 17, 'Rockruff', 'Lycanroc (Midday)', 25),
-            TimeRestrictedLevelEvolution(17, 18, 'Rockruff', 'Lycanroc (Dusk)', 25),
-            TimeRestrictedLevelEvolution(18, 5, 'Rockruff', 'Lycanroc (Midnight)', 25),
-            TimeRestrictedLevelEvolution(5, 6, 'Rockruff', 'Lycanroc (Dusk)', 25),
+            DayCyclePartRestrictedLevelEvolution([DayCyclePart.Day], 'Rockruff', 'Lycanroc (Midday)', 25),
+            DayCyclePartRestrictedLevelEvolution([DayCyclePart.Night], 'Rockruff', 'Lycanroc (Midnight)', 25),
+            DayCyclePartRestrictedLevelEvolution([DayCyclePart.Dusk], 'Rockruff', 'Lycanroc (Dusk)', 25),
+            DayCyclePartRestrictedLevelEvolution([DayCyclePart.Dawn], 'Rockruff', 'Lycanroc (Dusk)', 25),
         ],
         'base': {
             'hitpoints': 45,

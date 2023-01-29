@@ -79,8 +79,8 @@ class PokedexHelper {
             }
 
             // Check if the name contains the string
-            const name = PokedexFilters.name.value().trim();
-            if (name && !PokemonHelper.displayName(pokemon.name)().toLowerCase().includes(name.toLowerCase())) {
+            const name = PokemonHelper.displayName(pokemon.name)();
+            if (!PokedexFilters.name.value().test(name)) {
                 return false;
             }
 

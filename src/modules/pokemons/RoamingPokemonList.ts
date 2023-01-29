@@ -97,13 +97,13 @@ RoamingPokemonList.add(Region.johto, 0, new RoamingPokemon('Raikou', new QuestLi
 RoamingPokemonList.add(Region.johto, 0, new RoamingPokemon('Entei', new QuestLineStepCompletedRequirement('The Legendary Beasts', 3)));
 
 // Hoenn
-RoamingPokemonList.add(Region.hoenn, 0, new RoamingPokemon('Latios', new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)));
-RoamingPokemonList.add(Region.hoenn, 0, new RoamingPokemon('Latias', new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)));
+RoamingPokemonList.add(Region.hoenn, 0, new RoamingPokemon('Latios', new QuestLineStepCompletedRequirement('The Eon Duo', 3)));
+RoamingPokemonList.add(Region.hoenn, 0, new RoamingPokemon('Latias', new QuestLineStepCompletedRequirement('The Eon Duo', 3)));
 // TODO: these need another way to be obtained
 RoamingPokemonList.add(Region.hoenn, 0, new RoamingPokemon('Jirachi', new QuestLineStepCompletedRequirement('Wish Maker', 8)));
 
 // Sinnoh
-RoamingPokemonList.add(Region.sinnoh, 0, new RoamingPokemon('Manaphy'));
+RoamingPokemonList.add(Region.sinnoh, 0, new RoamingPokemon('Manaphy', new QuestLineCompletedRequirement('Recover the Precious Egg!')));
 RoamingPokemonList.add(Region.sinnoh, 0, new RoamingPokemon('Mesprit', new ClearDungeonRequirement(1, getDungeonIndex('Distortion World'))));
 RoamingPokemonList.add(Region.sinnoh, 0, new RoamingPokemon('Cresselia', new ClearDungeonRequirement(1, getDungeonIndex('Fullmoon Island'))));
 

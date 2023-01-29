@@ -72,24 +72,13 @@ class BattleCafeController {
 
     private static unlockAlcremie(clockwise: boolean, spinTime: number, sweet: GameConstants.AlcremieSweet) {
         let spin: GameConstants.AlcremieSpins;
-        const curHour = (new Date()).getHours();
         if (spinTime == 3600) {
             (new PokemonItem('Milcery (Cheesy)', 0)).gain(1);
             return;
         }
-        if (curHour == 17 && !clockwise && spinTime > 10) {
+        if (DayCycle.currentDayCyclePart() === DayCyclePart.Dusk && !clockwise && spinTime > 10) {
             spin = GameConstants.AlcremieSpins.at5Above10;
-        } else if (curHour >= 6 && curHour < 18) { // Is day
-            if (clockwise && spinTime < 5) {
-                spin = GameConstants.AlcremieSpins.dayClockwiseBelow5;
-            } else if (clockwise && spinTime >= 5) {
-                spin = GameConstants.AlcremieSpins.dayClockwiseAbove5;
-            } else if (!clockwise && spinTime < 5) {
-                spin = GameConstants.AlcremieSpins.dayCounterclockwiseBelow5;
-            } else if (!clockwise && spinTime >= 5) {
-                spin = GameConstants.AlcremieSpins.dayCounterclockwiseAbove5;
-            }
-        } else { // Is night
+        } else if ([DayCyclePart.Night, DayCyclePart.Dawn].includes(DayCycle.currentDayCyclePart())) {
             if (clockwise && spinTime < 5) {
                 spin = GameConstants.AlcremieSpins.nightClockwiseBelow5;
             } else if (clockwise && spinTime >= 5) {
@@ -98,6 +87,16 @@ class BattleCafeController {
                 spin = GameConstants.AlcremieSpins.nightCounterclockwiseBelow5;
             } else if (!clockwise && spinTime >= 5) {
                 spin = GameConstants.AlcremieSpins.nightCounterclockwiseAbove5;
+            }
+        } else { // Is day
+            if (clockwise && spinTime < 5) {
+                spin = GameConstants.AlcremieSpins.dayClockwiseBelow5;
+            } else if (clockwise && spinTime >= 5) {
+                spin = GameConstants.AlcremieSpins.dayClockwiseAbove5;
+            } else if (!clockwise && spinTime < 5) {
+                spin = GameConstants.AlcremieSpins.dayCounterclockwiseBelow5;
+            } else if (!clockwise && spinTime >= 5) {
+                spin = GameConstants.AlcremieSpins.dayCounterclockwiseAbove5;
             }
         }
         BattleCafeController.evolutions[sweet][spin].gain(1);

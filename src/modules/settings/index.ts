@@ -105,6 +105,12 @@ Settings.add(new Setting<string>('farmDisplay', 'Farm timer display',
     ],
     'ripeDeath'));
 Settings.add(new BooleanSetting('farmBoostDisplay', 'Include base farm timer during altered berry growth times', false));
+Settings.add(new Setting<string>('sizeUnits', 'Berry size units',
+    [
+        new SettingOption('Inches', 'inch'),
+        new SettingOption('Centimeters', 'cm'),
+    ],
+    'cm'));
 Settings.add(new BooleanSetting('currencyMainDisplayReduced', 'Shorten currency amount shown on main screen', false));
 Settings.add(new BooleanSetting('currencyMainDisplayExtended', 'Show Diamonds, Farm Points and Battle Points on main screen', false));
 Settings.add(new BooleanSetting('confirmLeaveDungeon', 'Confirm before leaving dungeons', false));
