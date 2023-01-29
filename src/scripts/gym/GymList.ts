@@ -1455,7 +1455,7 @@ GymList['Vast Poni Canyon Trial'] = new Gym(
     ],
     BadgeEnums.DragoniumZ,
     128000,
-    'You obtained a Dragon-Type Z-Crystal. The Dragonium Z is yours!',
+    '<i>You obtained a Dragon-Type Z-Crystal. The Dragonium Z is yours!<i>',
     undefined,
     undefined,
     {
