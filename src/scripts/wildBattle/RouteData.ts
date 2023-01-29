@@ -727,7 +727,7 @@ Routes.add(new RegionRoute(
         land: ['Surskit', 'Poochyena', 'Wurmple', 'Lotad', 'Zigzagoon', 'Ralts', 'Seedot'],
         water: ['Marill', 'Goldeen', 'Magikarp', 'Corphish'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 101)]
+    [new TemporaryBattleRequirement('May 1')]
 ));
 Routes.add(new RegionRoute(
     'Hoenn Route 103', GameConstants.Region.hoenn, 103,
