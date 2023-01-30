@@ -2,8 +2,12 @@ import { Observable as KnockoutObservable } from 'knockout';
 import getRouteKillsProxy from './getRouteKillsProxy';
 import { Saveable } from '../common/Saveable';
 import '../../koExtenders';
+import type { PokemonList } from '../../pokemons/PokemonList';
 
 const failedSetValue = () => 0;
+
+type PokemonID = PokemonList[number]['id'];
+type PokemonStats = Record<PokemonID, KnockoutObservable<number>> & { highestID: PokemonID };
 
 export default class Statistics implements Saveable {
     saveKey = 'statistics';
@@ -112,30 +116,31 @@ export default class Statistics implements Saveable {
     /*
      * objectObservables
      */
-    pokemonCaptured: any;
-    pokemonDefeated: any;
-    pokemonEncountered: any;
-    pokemonHatched: any;
-    shinyPokemonCaptured: any;
-    shinyPokemonDefeated: any;
-    shinyPokemonEncountered: any;
-    shinyPokemonHatched: any;
-    malePokemonCaptured: any;
-    malePokemonDefeated: any;
-    malePokemonEncountered: any;
-    malePokemonHatched: any;
-    femalePokemonCaptured: any;
-    femalePokemonDefeated: any;
-    femalePokemonEncountered: any;
-    femalePokemonHatched: any;
-    shinyMalePokemonCaptured: any;
-    shinyFemalePokemonCaptured: any;
-    shinyMalePokemonDefeated: any;
-    shinyFemalePokemonDefeated: any;
-    shinyMalePokemonEncountered: any;
-    shinyFemalePokemonEncountered: any;
-    shinyMalePokemonHatched: any;
-    shinyFemalePokemonHatched: any;
+    pokemonCaptured: PokemonStats;
+    pokemonDefeated: PokemonStats;
+    pokemonSeen: PokemonStats;
+    pokemonEncountered: PokemonStats;
+    pokemonHatched: PokemonStats;
+    shinyPokemonCaptured: PokemonStats;
+    shinyPokemonDefeated: PokemonStats;
+    shinyPokemonEncountered: PokemonStats;
+    shinyPokemonHatched: PokemonStats;
+    malePokemonCaptured: PokemonStats;
+    malePokemonDefeated: PokemonStats;
+    malePokemonEncountered: PokemonStats;
+    malePokemonHatched: PokemonStats;
+    femalePokemonCaptured: PokemonStats;
+    femalePokemonDefeated: PokemonStats;
+    femalePokemonEncountered: PokemonStats;
+    femalePokemonHatched: PokemonStats;
+    shinyMalePokemonCaptured: PokemonStats;
+    shinyFemalePokemonCaptured: PokemonStats;
+    shinyMalePokemonDefeated: PokemonStats;
+    shinyFemalePokemonDefeated: PokemonStats;
+    shinyMalePokemonEncountered: PokemonStats;
+    shinyFemalePokemonEncountered: PokemonStats;
+    shinyMalePokemonHatched: PokemonStats;
+    shinyFemalePokemonHatched: PokemonStats;
 
     observables = [
         'secondsPlayed',
@@ -218,6 +223,7 @@ export default class Statistics implements Saveable {
     objectObservables = [
         'pokemonCaptured',
         'pokemonDefeated',
+        'pokemonSeen',
         'pokemonEncountered',
         'pokemonHatched',
         'shinyPokemonCaptured',
