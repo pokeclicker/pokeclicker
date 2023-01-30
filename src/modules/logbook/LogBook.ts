@@ -4,6 +4,7 @@ import { Feature } from '../DataStore/common/Feature';
 import { LogContent } from './helpers';
 import LogBookLog from './LogBookLog';
 import { LogBookType, LogBookTypes } from './LogBookTypes';
+import Settings from '../settings';
 
 type SavedLog = { type: LogBookType; content: LogContent; date: number };
 
@@ -17,9 +18,11 @@ export default class LogBook implements Feature {
     public filteredLogs: PureComputed<LogBookLog[]> = ko.pureComputed(() => this.logs().filter((log) => this.filters[log.type.label]?.()));
 
     newLog(type: LogBookType, content: LogContent) {
-        const length = this.logs.unshift(new LogBookLog(type, content));
-        if (length > 1000) {
-            this.logs.pop();
+        if (this.canLog(`logBook.${type.label}`)) {
+            const length = this.logs.unshift(new LogBookLog(type, content));
+            if (length > 1000) {
+                this.logs.pop();
+            }
         }
     }
 
@@ -51,4 +54,8 @@ export default class LogBook implements Feature {
     }
 
     update(): void {} // This method intentionally left blank
+
+    private canLog(logBookType: string): boolean {
+        return Settings.getSetting(logBookType).value;
+    }
 }

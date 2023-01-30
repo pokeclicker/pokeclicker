@@ -23,6 +23,7 @@ import GameHelper from '../GameHelper';
 import PokemonType from '../enums/PokemonType';
 import PokedexFilters from './PokedexFilters';
 import FilterSetting from './FilterSetting';
+import { LogBookTypes } from '../logbook/LogBookTypes';
 
 export default Settings;
 
@@ -374,3 +375,8 @@ Settings.getSetting('backgroundImage').observableValue.subscribe((newValue) => {
 
 // Translation
 Settings.add(new Setting<Language>('translation.language', 'Language (beta)', Settings.enumToSettingOptionArray(Language, () => true, LanguageNames) as unknown as SettingOption<Language>[], Language.en));
+
+// Logs Settings
+Object.keys(LogBookTypes).forEach((logBookType) => {
+    Settings.add(new BooleanSetting(`logBook.${logBookType}`, logBookType, true));
+});
