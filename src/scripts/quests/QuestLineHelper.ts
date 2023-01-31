@@ -135,6 +135,154 @@ class QuestLineHelper {
         App.game.quests.questLines().push(tutorial);
     }
 
+    // Started upon talking with Bill's Grandpa.
+    public static createBillsGrandpaQuestLine() {
+        const BillsGrandpaQuestLine = new QuestLine('Bill\'s Grandpa Treasure Hunt', 'Check the hints and bring Bill\'s Grandpa the Pokémon he wants to see.', new RouteKillRequirement(10, GameConstants.Region.kanto, 25), GameConstants.BulletinBoards.Kanto);
+
+        const talkToBillsGrandpa1 = new TalkToNPCQuest(BillsGrandpa1, 'Talk to Bill\'s Grandpa in Bill\'s House.');
+        BillsGrandpaQuestLine.addQuest(talkToBillsGrandpa1);
+
+        const pinkBalloon = new CaptureSpecificPokemonQuest('Jigglypuff', 'Catch the desired Pokémon.', 1);
+        const punchNormal = new CustomQuest(100, 0, 'Defeat 100 Normal-type Pokémon.', () => {
+            return pokemonMap.filter(p => p.type.includes(PokemonType.Normal)).map(p => App.game.statistics.pokemonDefeated[p.id]()).reduce((a,b) => a + b, 0);
+        });
+
+        BillsGrandpaQuestLine.addQuest(new MultipleQuestsQuest([
+            pinkBalloon,
+            punchNormal,
+        ],'Bill\'s Grandpa wants you to catch a Pokémon that is pink and like a balloon.'));
+
+        // Talk to Bill's Grandpa after catching a Jigglypuff
+        const MoonStoneReward = () => {
+            player.gainItem('Moon_stone', 1);
+            Notifier.notify({
+                title: BillsGrandpaQuestLine.name,
+                message: 'Bill\'s Grandpa has given you a Moon Stone.',
+                type: NotificationConstants.NotificationOption.success,
+                sound: NotificationConstants.NotificationSound.Quests.quest_ready_to_complete,
+            });
+        };
+
+        const talkToBillsGrandpa2 = new TalkToNPCQuest(BillsGrandpa2, 'Show your Jigglypuff to Bill\'s Grandpa.', MoonStoneReward);
+        BillsGrandpaQuestLine.addQuest(talkToBillsGrandpa2);
+
+        const blueRound = new CaptureSpecificPokemonQuest('Oddish', 'Catch the desired Pokémon.', 1);
+        const punchGrass = new CustomQuest(100, 0, 'Defeat 100 Grass-type Pokémon.', () => {
+            return pokemonMap.filter(p => p.type.includes(PokemonType.Grass)).map(p => App.game.statistics.pokemonDefeated[p.id]()).reduce((a,b) => a + b, 0);
+        });
+
+        BillsGrandpaQuestLine.addQuest(new MultipleQuestsQuest([
+            blueRound,
+            punchGrass,
+        ],'Bill\'s Grandpa wants you to catch a Pokémon that is round, blue, and has leaves growing on its head.'));
+
+        // Talk to Bill's Grandpa after catching an Oddish
+        const LeafStoneReward = () => {
+            player.gainItem('Leaf_stone', 1);
+            Notifier.notify({
+                title: BillsGrandpaQuestLine.name,
+                message: 'Bill\'s Grandpa has given you a Leaf Stone.',
+                type: NotificationConstants.NotificationOption.success,
+                sound: NotificationConstants.NotificationSound.Quests.quest_ready_to_complete,
+            });
+        };
+
+        const talkToBillsGrandpa3 = new TalkToNPCQuest(BillsGrandpa3, 'Show your Oddish to Bill\'s Grandpa.', LeafStoneReward);
+        BillsGrandpaQuestLine.addQuest(talkToBillsGrandpa3);
+
+        const redSphere = new CaptureSpecificPokemonQuest('Staryu', 'Catch the desired Pokémon.', 1);
+        const punchWater = new CustomQuest(100, 0, 'Defeat 100 Water-type Pokémon.', () => {
+            return pokemonMap.filter(p => p.type.includes(PokemonType.Water)).map(p => App.game.statistics.pokemonDefeated[p.id]()).reduce((a,b) => a + b, 0);
+        });
+
+        BillsGrandpaQuestLine.addQuest(new MultipleQuestsQuest([
+            redSphere,
+            punchWater,
+        ],'Bill\'s Grandpa wants you to catch a Pokémon that it has a red sphere in its body and is shaped like a star.'));
+
+        // Talk to Bill's Grandpa after catching a Staryu
+        const WaterStoneReward = () => {
+            player.gainItem('Water_stone', 1);
+            Notifier.notify({
+                title: BillsGrandpaQuestLine.name,
+                message: 'Bill\'s Grandpa has given you a Water Stone.',
+                type: NotificationConstants.NotificationOption.success,
+                sound: NotificationConstants.NotificationSound.Quests.quest_ready_to_complete,
+            });
+        };
+
+        const talkToBillsGrandpa4 = new TalkToNPCQuest(BillsGrandpa4, 'Show your Staryu to Bill\'s Grandpa.', WaterStoneReward);
+        BillsGrandpaQuestLine.addQuest(talkToBillsGrandpa4);
+
+        const loyalRoar = new CaptureSpecificPokemonQuest('Growlithe', 'Catch the desired Pokémon.', 1);
+        const punchFire = new CustomQuest(100, 0, 'Defeat 100 Fire-type Pokémon.', () => {
+            return pokemonMap.filter(p => p.type.includes(PokemonType.Fire)).map(p => App.game.statistics.pokemonDefeated[p.id]()).reduce((a,b) => a + b, 0);
+        });
+
+        BillsGrandpaQuestLine.addQuest(new MultipleQuestsQuest([
+            loyalRoar,
+            punchFire,
+        ],'Bill\'s Grandpa wants you to catch a Pokémon that is very loyal and supposedly roars pretty well.'));
+
+        // Talk to Bill's Grandpa after catching a Growlithe
+        const FireStoneReward = () => {
+            player.gainItem('Fire_stone', 1);
+            Notifier.notify({
+                title: BillsGrandpaQuestLine.name,
+                message: 'Bill\'s Grandpa has given you a Fire Stone.',
+                type: NotificationConstants.NotificationOption.success,
+                sound: NotificationConstants.NotificationSound.Quests.quest_ready_to_complete,
+            });
+        };
+
+        const talkToBillsGrandpa5 = new TalkToNPCQuest(BillsGrandpa5, 'Show your Growlithe to Bill\'s Grandpa.', WaterStoneReward);
+        BillsGrandpaQuestLine.addQuest(talkToBillsGrandpa5);
+
+        const yellowAndRed = new CaptureSpecificPokemonQuest('Pikachu', 'Catch the desired Pokémon.', 1);
+        const punchElectric = new CustomQuest(100, 0, 'Defeat 100 Electric-type Pokémon.', () => {
+            return pokemonMap.filter(p => p.type.includes(PokemonType.Electric)).map(p => App.game.statistics.pokemonDefeated[p.id]()).reduce((a,b) => a + b, 0);
+        });
+
+        BillsGrandpaQuestLine.addQuest(new MultipleQuestsQuest([
+            yellowAndRed,
+            punchElectric,
+        ],'Bill\'s Grandpa wants you to catch a Pokémon that has a yellow body and red cheeks.'));
+
+        // Talk to Bill's Grandpa after catching a Pikachu
+        const ThunderStoneReward = () => {
+            player.gainItem('Thunder_stone', 1);
+            Notifier.notify({
+                title: BillsGrandpaQuestLine.name,
+                message: 'Bill\'s Grandpa has given you a Thunder Stone.',
+                type: NotificationConstants.NotificationOption.success,
+                sound: NotificationConstants.NotificationSound.Quests.quest_ready_to_complete,
+            });
+        };
+
+        const talkToBillsGrandpa6 = new TalkToNPCQuest(BillsGrandpa6, 'Show your Pikachu to Bill\'s Grandpa.', ThunderStoneReward);
+        BillsGrandpaQuestLine.addQuest(talkToBillsGrandpa6);
+
+        const fightBillsGrandpa = new CustomQuest(1, 0, 'Bill\'s Grandpa would like to have a battle with you!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Bill\'s Grandpa')]());
+        BillsGrandpaQuestLine.addQuest(fightBillsGrandpa);
+
+        // Talk to Bill's Grandpa after battling him
+        const EeveeReward = () => {
+            App.game.party.gainPokemonByName('Eevee');
+            Notifier.notify({
+                title: BillsGrandpaQuestLine.name,
+                message: 'Bill\'s Grandpa has given you an Eevee, treat it well!',
+                type: NotificationConstants.NotificationOption.success,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
+                timeout: 3e4,
+            });
+        };
+
+        const talkToBillsGrandpa7 = new TalkToNPCQuest(BillsGrandpa7, 'Talk to Bill\'s Grandpa one last time.', EeveeReward);
+        BillsGrandpaQuestLine.addQuest(talkToBillsGrandpa7);
+
+        App.game.quests.questLines().push(BillsGrandpaQuestLine);
+    }
+
     // Started upon defeating Cerulean City's gym.
     public static createRocketKantoQuestLine() {
         const rocketKantoQuestLine = new QuestLine('Team Rocket', 'Some nasty villains are up to no good.');
@@ -287,9 +435,9 @@ class QuestLineHelper {
         const talktoPokéfanDerek = new TalkToNPCQuest(EcruteakPokéfan, 'Talk to Pokéfan Derek in Ecruteak City.', () => App.game.quests.getQuestLine('Eusine\'s Chase').beginQuest());
         johtoBeastsQuestLine.addQuest(talktoPokéfanDerek);
 
-        const catchRaikou = new CaptureSpecificPokemonQuest('Raikou', 'Catch Raikou', 1, true);
+        const catchRaikou = new CaptureSpecificPokemonQuest('Raikou', 'Catch or hatch Raikou', 1, true);
 
-        const catchEntei = new CaptureSpecificPokemonQuest('Entei', 'Catch Entei', 1, true);
+        const catchEntei = new CaptureSpecificPokemonQuest('Entei', 'Catch or hatch Entei', 1, true);
 
         const catchSuicune = new CaptureSpecificPokemonQuest('Suicune', 'Catch Suicune.');
 
@@ -613,6 +761,34 @@ class QuestLineHelper {
 
         App.game.quests.questLines().push(deoxysQuestLine);
     }
+    // Eon Duo
+    public static createEonDuoQuestLine() {
+        const eonDuoQuestLine = new QuestLine('The Eon Duo', 'Track down the elusive Eon Duo.', new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), GameConstants.BulletinBoards.Hoenn);
+
+        const television1 = new TalkToNPCQuest(Television1, 'Watch a news report in Littleroot Town about a mysterious Pokémon.');
+        eonDuoQuestLine.addQuest(television1);
+
+        const television2 = new TalkToNPCQuest(Television2, 'Change channels to watch a different TV station in Littleroot town.');
+        eonDuoQuestLine.addQuest(television2);
+
+        const ticketClaim = new TalkToNPCQuest(TicketClaim, 'Go to Hoenn Pokémon League to claim your Eon ticket.');
+        eonDuoQuestLine.addQuest(ticketClaim);
+
+        const southernIslandClearing = new TalkToNPCQuest(SouthernIsland1, 'Claim your Eon Ticket in the Start Menu and investigate the Southern Island.');
+        eonDuoQuestLine.addQuest(southernIslandClearing);
+
+        const catchLatias = new CaptureSpecificPokemonQuest('Latias', 'Catch or Hatch Latias', 1, true);
+
+        const catchLatios = new CaptureSpecificPokemonQuest('Latios', 'Catch or Hatch Latios', 1, true);
+
+        eonDuoQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                catchLatias,
+                catchLatios,
+            ], 'Catch or hatch the Eon Duo.'));
+
+        App.game.quests.questLines().push(eonDuoQuestLine);
+    }
 
     public static createRubySapphireSeviiQuestLine() {
         const rubySapphireSeviiQuestLine = new QuestLine('Celio\'s Errand', 'Celio has asked you to help him set up a digital connection between the Sevii Islands and Hoenn.', new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), GameConstants.BulletinBoards.Hoenn);
@@ -792,7 +968,7 @@ class QuestLineHelper {
         const fightMetaGroudon1 = new CustomQuest(1, 0, 'Butler\'s attempts to resurrect Groudon have gone terribly wrong! Fight the resulting abomination!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Meta Groudon')]());
         jirachiQuestLine.addQuest(fightMetaGroudon1);
 
-        const catchJirachi = new CaptureSpecificPokemonQuest('Jirachi', 'Jirachi has escaped in the chaos and is roaming Hoenn. Catch Jirachi.', 1, true);
+        const catchJirachi = new CaptureSpecificPokemonQuest('Jirachi', 'Jirachi has escaped in the chaos and is roaming Hoenn. Catch or hatch Jirachi.', 1, true);
         jirachiQuestLine.addQuest(catchJirachi);
 
         App.game.quests.questLines().push(jirachiQuestLine);
@@ -2533,6 +2709,7 @@ class QuestLineHelper {
     public static loadQuestLines() {
         this.createTutorial();
         this.createRocketKantoQuestLine();
+        this.createBillsGrandpaQuestLine();
         this.createUndergroundQuestLine();
         this.createBillSeviiQuestLine();
         this.createPersonsofInterestQuestLine();
@@ -2545,6 +2722,7 @@ class QuestLineHelper {
         this.createAquaMagmaHoennQuestLine();
         this.createWeatherTrioQuestLine();
         this.createDeoxysQuestLine();
+        this.createEonDuoQuestLine();
         this.createRubySapphireSeviiQuestLine();
         this.createPinkanThemeparkQuestLine();
         this.createRegiTrioQuestLine();

@@ -11,7 +11,9 @@ import LogEvent from './LogEvent';
 import AuraType from './enums/AuraType';
 import BadgeEnums from './enums/Badges';
 import BerryColor from './enums/BerryColor';
+import BerryFirmness from './enums/BerryFirmness';
 import BerryType from './enums/BerryType';
+import SizeUnits from './enums/SizeUnits';
 import PokemonType from './enums/PokemonType';
 import CaughtStatus from './enums/CaughtStatus';
 import EvolutionType from './enums/EvolutionType';
@@ -89,6 +91,7 @@ import CaughtPokemonRequirement from './requirements/CaughtPokemonRequirement';
 import ClearDungeonRequirement from './requirements/ClearDungeonRequirement';
 import ClearGymRequirement from './requirements/ClearGymRequirement';
 import ClickRequirement from './requirements/ClickRequirement';
+import CustomRequirement from './requirements/CustomRequirement';
 import DefeatedRequirement from './requirements/DefeatedRequirement';
 import DevelopmentRequirement from './requirements/DevelopmentRequirement';
 import DiamondRequirement from './requirements/DiamondRequirement';
@@ -162,6 +165,7 @@ import RoamingPokemonList from './pokemons/RoamingPokemonList';
 import DataPokemon from './pokemons/DataPokemon';
 import RoamingPokemon from './pokemons/RoamingPokemon';
 import UndergroundMegaStoneItem from './underground/UndergroundMegaStoneItem';
+import TextMerger from './utilities/TextMerger';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -175,7 +179,9 @@ Object.assign(<any>window, {
     AuraType,
     BadgeEnums,
     BerryColor,
+    BerryFirmness,
     BerryType,
+    SizeUnits,
     PokemonType,
     CaughtStatus,
     EvolutionType,
@@ -257,6 +263,7 @@ Object.assign(<any>window, {
     ClearDungeonRequirement,
     ClearGymRequirement,
     ClickRequirement,
+    CustomRequirement,
     DefeatedRequirement,
     DevelopmentRequirement,
     DiamondRequirement,
@@ -333,4 +340,5 @@ Object.assign(<any>window, {
     DataPokemon,
     RoamingPokemon,
     UndergroundMegaStoneItem,
+    TextMerger,
 });

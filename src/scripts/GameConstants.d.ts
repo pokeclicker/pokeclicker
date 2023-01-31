@@ -387,8 +387,17 @@ namespace GameConstants {
     declare enum PokeBlockColor {
         Black,
         Red,
+        Blue,
+        Pink,
+        Green,
+        Yellow,
         Gold,
         Purple,
+        Indigo,
+        Brown,
+        LiteBlue,
+        Olive,
+        Flaxen,
         Gray,
         White
     }
@@ -688,8 +697,8 @@ namespace GameConstants {
         magikarpJump
     }
     declare const DayCycleStartHours: Record<DayCyclePart, number> = {
-        [DayCyclePart.Dawn]: 6,
-        [DayCyclePart.Day]: 7,
+        [DayCyclePart.Dawn]: 5,
+        [DayCyclePart.Day]: 6,
         [DayCyclePart.Dusk]: 17,
         [DayCyclePart.Night]: 18,
     };
