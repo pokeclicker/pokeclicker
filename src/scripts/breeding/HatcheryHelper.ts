@@ -211,7 +211,7 @@ class HatcheryHelpers {
 
                 // Check if there's a pokemon we can chuck into an egg
                 const pokemon = [...App.game.party.caughtPokemon]
-                    .sort(PartyController.compareBy(helper.sortOption(), helper.sortDirection(), currentRegion))
+                    .sort(PartyController.compareBy(helper.sortOption(), helper.sortDirection(), currentRegion, BreedingFilters.defenderType1.value(), BreedingFilters.defenderType2.value()))
                     .find(p => BreedingController.visible(p)());
                 if (pokemon) {
                     this.hatchery.gainPokemonEgg(pokemon, true);

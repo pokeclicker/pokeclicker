@@ -215,7 +215,7 @@ class BreedingController {
             case 'baseAttack': return `Base Attack: ${pokemon.baseAttack.toLocaleString('en-US')}`;
             case 'eggSteps': return `Egg Steps: ${pokemon.getEggSteps().toLocaleString('en-US')}`;
             case 'timesHatched': return `Hatches: ${App.game.statistics.pokemonHatched[pokemonData.id]().toLocaleString('en-US')}`;
-            case 'breedingEfficiency': return `Efficiency: ${(pokemon.breedingEfficiency() * BreedingController.calculateRegionalMultiplier(pokemon)).toLocaleString('en-US', { maximumSignificantDigits: 2 })}`;
+            case 'breedingEfficiency': return `Efficiency: ${(pokemon.breedingEfficiency() * BreedingController.calculateRegionalMultiplier(pokemon) * BreedingController.calculateTypeMultiplier(pokemon)).toLocaleString('en-US', { maximumSignificantDigits: 2 })}`;
             case 'stepsPerAttack': return `Steps/Att: ${(pokemon.getEggSteps() / (pokemon.getBreedingAttackBonus() * BreedingController.calculateRegionalMultiplier(pokemon))).toLocaleString('en-US', { maximumSignificantDigits: 2 })}`;
             case 'dexId': return `#${pokemon.id <= 0 ? '???' : Math.floor(pokemon.id).toString().padStart(3,'0')}`;
             case 'vitamins': return `Vitamins: ${pokemon.totalVitaminsUsed()}`;
@@ -227,12 +227,21 @@ class BreedingController {
     public static regionalAttackDebuff = ko.observable(-1);
 
     public static calculateRegionalMultiplier(pokemon: PartyPokemon): number {
-        // Check if reginal debnuff is active
+        // Check if regional debuff is active
         if (App.game.challenges.list.regionalAttackDebuff.active()) {
             // Check if regional debuff being applied for sorting
             if (BreedingController.regionalAttackDebuff() > -1 && PokemonHelper.calcNativeRegion(pokemon.name) !== BreedingController.regionalAttackDebuff()) {
                 return App.game.party.getRegionAttackMultiplier();
             }
+        }
+        return 1.0;
+    }
+
+    static calculateTypeMultiplier(pokemon) {
+        // Check if defender type is set for sorting
+        if (BreedingFilters.defenderType1.value() !== PokemonType.None) {
+            const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
+            return TypeHelper.getAttackModifier(dataPokemon.type1, dataPokemon.type2, BreedingFilters.defenderType1.value(), BreedingFilters.defenderType2.value());
         }
         return 1.0;
     }
