@@ -27984,7 +27984,7 @@ export const pokemonList = createPokemonArray(
         'name': 'Titan Klawf',
         'type': [PokemonType.Rock],
         'base': {
-            'hitpoints': 70,
+            'hitpoints': 140,
             'attack': 100,
             'specialAttack': 35,
             'defense': 115,
@@ -28220,7 +28220,7 @@ export const pokemonList = createPokemonArray(
         'name': 'Titan Bombirdier',
         'type': [PokemonType.Flying, PokemonType.Dark],
         'base': {
-            'hitpoints': 70,
+            'hitpoints': 84,
             'attack': 103,
             'specialAttack': 60,
             'defense': 85,
@@ -28361,7 +28361,7 @@ export const pokemonList = createPokemonArray(
         'name': 'Titan Orthworm',
         'type': [PokemonType.Steel],
         'base': {
-            'hitpoints': 70,
+            'hitpoints': 105,
             'attack': 85,
             'specialAttack': 60,
             'defense': 145,
@@ -28534,7 +28534,7 @@ export const pokemonList = createPokemonArray(
         'name': 'Titan Dondozo',
         'type': [PokemonType.Water],
         'base': {
-            'hitpoints': 150,
+            'hitpoints': 300,
             'attack': 100,
             'specialAttack': 65,
             'defense': 115,
@@ -28602,7 +28602,7 @@ export const pokemonList = createPokemonArray(
         'name': 'Titan Tatsugiri',
         'type': [PokemonType.Dragon, PokemonType.Water],
         'base': {
-            'hitpoints': 68,
+            'hitpoints': 204,
             'attack': 50,
             'specialAttack': 120,
             'defense': 60,
@@ -28742,7 +28742,7 @@ export const pokemonList = createPokemonArray(
         'name': 'Titan Great Tusk',
         'type': [PokemonType.Ground, PokemonType.Fighting],
         'base': {
-            'hitpoints': 115,
+            'hitpoints': 230,
             'attack': 131,
             'specialAttack': 53,
             'defense': 131,
@@ -28889,7 +28889,7 @@ export const pokemonList = createPokemonArray(
         'name': 'Titan Iron Treads',
         'type': [PokemonType.Ground, PokemonType.Steel],
         'base': {
-            'hitpoints': 90,
+            'hitpoints': 190,
             'attack': 112,
             'specialAttack': 72,
             'defense': 120,
