@@ -44,22 +44,6 @@ const BreedingFilters: Record<string, FilterOption> = {
             new SettingOption('None', '-1'),
         ],
     ),
-    defenderType1: new FilterOption<number>(
-        'Defender Type 1',
-        ko.observable(-1).extend({ numeric: 0 }),
-        'breedingDefenderTypeFilter1',
-        [
-            ...Settings.enumToSettingOptionArray(PokemonType),
-        ],
-    ),
-    defenderType2: new FilterOption<number>(
-        'Defender Type 2',
-        ko.observable(-1).extend({ numeric: 0 }),
-        'breedingDefenderTypeFilter2',
-        [
-            ...Settings.enumToSettingOptionArray(PokemonType),
-        ],
-    ),
     region: new FilterOption<number>(
         'Region',
         ko.observable(1).extend({ numeric: 0 }),

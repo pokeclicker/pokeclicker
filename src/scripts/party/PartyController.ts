@@ -129,7 +129,7 @@ class PartyController {
             // Don't adjust attack based on region if debuff is disabled
             const region = App.game.challenges.list.regionalAttackDebuff.active() ? BreedingController.regionalAttackDebuff() : -1;
             PartyController.hatcherySortedList = [...App.game.party.caughtPokemon];
-            return PartyController.hatcherySortedList.sort(PartyController.compareBy(Settings.getSetting('hatcherySort').observableValue(), Settings.getSetting('hatcherySortDirection').observableValue(), region, BreedingFilters.defenderType1.value(), BreedingFilters.defenderType2.value()));
+            return PartyController.hatcherySortedList.sort(PartyController.compareBy(Settings.getSetting('hatcherySort').observableValue(), Settings.getSetting('hatcherySortDirection').observableValue(), region, BreedingController.defendingType1(), BreedingController.defendingType2()));
         }
         return PartyController.hatcherySortedList;
     }).extend({ rateLimit: 500 });
@@ -172,7 +172,7 @@ class PartyController {
         return 1.0;
     }
 
-    public static compareBy(option: SortOptions, direction: boolean, region = -1, defenderType1 = PokemonType.None, defenderType2 = PokemonType.None): (a: PartyPokemon, b: PartyPokemon) => number {
+    public static compareBy(option: SortOptions, direction: boolean, region = -1, defendingType1 = PokemonType.None, defendingType2 = PokemonType.None): (a: PartyPokemon, b: PartyPokemon) => number {
         return function (a, b) {
             let res, dir = (direction) ? -1 : 1;
             const config = SortOptionConfigs[option];
@@ -186,13 +186,13 @@ class PartyController {
                 bValue *= PartyController.calculateRegionalMultiplier(b, region);
             }
 
-            // Apply attack multiplier against defender type if needed
-            if (defenderType1 != PokemonType.None && [SortOptions.attack, SortOptions.breedingEfficiency].includes(option)) {
+            // Apply attack multiplier against defending type if needed
+            if (defendingType1 != PokemonType.None && [SortOptions.attack, SortOptions.breedingEfficiency].includes(option)) {
                 const dataPokemonA = PokemonHelper.getPokemonByName(a.name);
                 const dataPokemonB = PokemonHelper.getPokemonByName(b.name);
 
-                aValue *= TypeHelper.getAttackModifier(dataPokemonA.type1, dataPokemonA.type2, defenderType1, defenderType2);
-                bValue *= TypeHelper.getAttackModifier(dataPokemonB.type1, dataPokemonB.type2, defenderType1, defenderType2);
+                aValue *= TypeHelper.getAttackModifier(dataPokemonA.type1, dataPokemonA.type2, defendingType1, defendingType2);
+                bValue *= TypeHelper.getAttackModifier(dataPokemonB.type1, dataPokemonB.type2, defendingType1, defendingType2);
             }
 
             if (config.invert) {

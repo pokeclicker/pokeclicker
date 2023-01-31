@@ -38,12 +38,12 @@ class Breeding implements Feature {
         BreedingFilters.region.value(Settings.getSetting('breedingRegionFilter').value);
         BreedingFilters.type1.value(Settings.getSetting('breedingTypeFilter1').value);
         BreedingFilters.type2.value(Settings.getSetting('breedingTypeFilter2').value);
-        BreedingFilters.defenderType1.value(Settings.getSetting('breedingDefenderTypeFilter1').value);
-        BreedingFilters.defenderType2.value(Settings.getSetting('breedingDefenderTypeFilter2').value);
         BreedingFilters.shinyStatus.value(Settings.getSetting('breedingShinyFilter').value);
         BreedingFilters.pokerus.value(Settings.getSetting('breedingPokerusFilter').value);
         BreedingController.displayValue(Settings.getSetting('breedingDisplayFilter').value);
         BreedingController.regionalAttackDebuff(+Settings.getSetting('breedingRegionalAttackDebuffSetting').value);
+        BreedingController.defendingType1(+Settings.getSetting('breedingDefendingType1Setting').value);
+        BreedingController.defendingType2(+Settings.getSetting('breedingDefendingType2Setting').value);
         BreedingController.queueSizeLimit(+Settings.getSetting('breedingQueueSizeSetting').value);
     }
 

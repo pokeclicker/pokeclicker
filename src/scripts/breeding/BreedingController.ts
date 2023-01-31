@@ -237,11 +237,15 @@ class BreedingController {
         return 1.0;
     }
 
+    // Selected defending types
+    public static defendingType1 = ko.observable(PokemonType.None);
+    public static defendingType2 = ko.observable(PokemonType.None);
+
     static calculateTypeMultiplier(pokemon) {
-        // Check if defender type is set for sorting
-        if (BreedingFilters.defenderType1.value() !== PokemonType.None) {
+        // Check if defending type is set for sorting
+        if (BreedingController.defendingType1() !== PokemonType.None) {
             const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
-            return TypeHelper.getAttackModifier(dataPokemon.type1, dataPokemon.type2, BreedingFilters.defenderType1.value(), BreedingFilters.defenderType2.value());
+            return TypeHelper.getAttackModifier(dataPokemon.type1, dataPokemon.type2, BreedingController.defendingType1(), BreedingController.defendingType2());
         }
         return 1.0;
     }

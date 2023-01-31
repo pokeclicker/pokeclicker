@@ -255,6 +255,18 @@ Settings.add(new Setting<string>('breedingRegionalAttackDebuffSetting', 'breedin
     ],
     '-1'));
 
+Settings.add(new Setting<string>('breedingDefendingType1Setting', 'breedingDefendingType1Setting',
+    [
+        ...Settings.enumToSettingOptionArray(PokemonType),
+    ],
+    '-1'));
+
+Settings.add(new Setting<string>('breedingDefendingType2Setting', 'breedingDefendingType2Setting',
+    [
+        ...Settings.enumToSettingOptionArray(PokemonType),
+    ],
+    '-1'));
+
 // Achievement sorting
 const achievementSortSettings = Object.keys(AchievementSortOptionConfigs).map((opt) => (
     new SettingOption<number>(AchievementSortOptionConfigs[opt].text, parseInt(opt, 10))
