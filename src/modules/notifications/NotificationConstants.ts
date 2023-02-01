@@ -29,9 +29,9 @@ const NotificationConstants = {
         },
         Farming: {
             berry_discovered: new Sound('berry_discovered', 'New Berry discovered'),
+            berry_mutated: new Sound('berry_discovered', 'Berry has mutated'),
             ready_to_harvest: new Sound('ready_to_harvest', 'Berry ready to harvest'),
             berry_wither: new Sound('ready_to_harvest', 'Berry about to wither/has withered'),
-            berry_mutated: new Sound('ready_to_harvest', 'Berry has mutated'),
             berry_replanted: new Sound('ready_to_harvest', 'Berry has been replanted'),
             berry_dropped: new Sound('ready_to_harvest', 'Berry has been dropped'),
             mulch_ran_out: new Sound('ready_to_harvest', 'Mulch has run out'),
