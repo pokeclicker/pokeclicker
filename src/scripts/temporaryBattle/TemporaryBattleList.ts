@@ -306,16 +306,13 @@ TemporaryBattleList.Sudowoodo = new TemporaryBattle(
     'Sudowoodo',
     [new GymPokemon('Sudowoodo', 540000, 20)],
     undefined,
-    [
-        new GymBadgeRequirement(BadgeEnums.Plain),
-        new RouteKillRequirement(10, GameConstants.Region.johto, 36),
-    ],
+    [new GymBadgeRequirement(BadgeEnums.Plain)],
     [new TemporaryBattleRequirement('Sudowoodo'), new ObtainedPokemonRequirement('Sudowoodo')],
     {
         isTrainerBattle: false,
         returnTown: 'Goldenrod City',
         hideTrainer: true,
-        visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.johto, 36),
+        visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.johto, 31),
     }
 );
 TemporaryBattleList['Silver 3'] = new TemporaryBattle(
