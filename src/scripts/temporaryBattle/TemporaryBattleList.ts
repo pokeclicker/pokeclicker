@@ -306,16 +306,13 @@ TemporaryBattleList.Sudowoodo = new TemporaryBattle(
     'Sudowoodo',
     [new GymPokemon('Sudowoodo', 540000, 20)],
     undefined,
-    [
-        new GymBadgeRequirement(BadgeEnums.Plain),
-        new RouteKillRequirement(10, GameConstants.Region.johto, 36),
-    ],
+    [new GymBadgeRequirement(BadgeEnums.Plain)],
     [new TemporaryBattleRequirement('Sudowoodo'), new ObtainedPokemonRequirement('Sudowoodo')],
     {
         isTrainerBattle: false,
         returnTown: 'Goldenrod City',
         hideTrainer: true,
-        visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.johto, 36),
+        visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.johto, 31),
     }
 );
 TemporaryBattleList['Silver 3'] = new TemporaryBattle(
@@ -430,13 +427,17 @@ TemporaryBattleList['Red Gyarados'] = new TemporaryBattle(
     'Red Gyarados',
     [new GymPokemon('Gyarados', 1100000, 30, undefined, true)],
     undefined,
-    [new QuestLineStartedRequirement('Team Rocket Again')],
+    [
+        new QuestLineStartedRequirement('Team Rocket Again'),
+        new RouteKillRequirement(10, GameConstants.Region.johto, 43),
+    ],
     undefined,
     {
         displayName: 'Red Gyarados',
         returnTown: 'Mahogany Town',
         isTrainerBattle: false,
         hideTrainer: true,
+        visibleRequirement: new QuestLineStartedRequirement('Team Rocket Again'),
     }
 );
 TemporaryBattleList['Suicune 3'] = new TemporaryBattle(
