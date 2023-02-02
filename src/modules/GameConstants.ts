@@ -1556,6 +1556,8 @@ export const TemporaryBattles = [
     'Calem 6',
     'Marquis Grant',
     'Grand Duchess Diantha',
+    'Wild Houndour Horde',
+    'Wild Electrike Horde',
     'Hau 1',
     'Hau 2',
     'Hau 3',
