@@ -2,6 +2,8 @@ import {
     Observable as KnockoutObservable,
     Computed as KnockoutComputed,
 } from 'knockout';
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+import * as ko from 'knockout';
 
 // For helper functions that may be needed across all files
 // TODO: Convert this to not be a class after everything is TS modules

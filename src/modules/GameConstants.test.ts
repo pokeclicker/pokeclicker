@@ -1,3 +1,8 @@
+// Override system date
+jest.useFakeTimers().setSystemTime(new Date(1675298702433));
+// Override Math.random() to always return the same value
+jest.spyOn(global.Math, 'random').mockReturnValue(0.123456789);
+
 import {
     camelCaseToString,
     cleanHTMLString,
@@ -19,13 +24,6 @@ import {
     Region,
 } from './GameConstants';
 
-// Override Math.random() to always return the same value
-beforeEach(() => {
-    jest.spyOn(global.Math, 'random').mockReturnValue(0.123456789);
-});
-afterEach(() => {
-    jest.spyOn(global.Math, 'random').mockRestore();
-});
 
 describe('Test GameConstants', () => {
     it('clean html strings', () => {
