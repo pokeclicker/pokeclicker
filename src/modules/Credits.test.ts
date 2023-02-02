@@ -1,6 +1,3 @@
-import {
-    describe, expect, it,
-} from '@jest/globals';
 import { SpriteCredits, CodeCredits } from './Credits';
 
 describe('Test Credits', () => {

@@ -1,7 +1,4 @@
 import {
-    describe, expect, it,
-} from '@jest/globals';
-import {
     camelCaseToString,
     cleanHTMLString,
     clipNumber,
@@ -21,6 +18,14 @@ import {
     pluralizeString,
     Region,
 } from './GameConstants';
+
+// Override Math.random() to always return the same value
+beforeEach(() => {
+    jest.spyOn(global.Math, 'random').mockReturnValue(0.123456789);
+});
+afterEach(() => {
+    jest.spyOn(global.Math, 'random').mockRestore();
+});
 
 describe('Test GameConstants', () => {
     it('clean html strings', () => {
@@ -72,7 +77,8 @@ describe('Test GameConstants', () => {
         expect(clipNumber(123, 0, 100)).toEqual(100);
     });
     it('return a random element form an array, while exponentially increasing the chance', () => {
-        expect(expRandomElement([1, 2, 3, 4], 2)).toBeTruthy();
+        // Will always return the same value due to us overriding Math.random()
+        expect(expRandomElement([1, 2, 3, 4], 2)).toEqual(1);
     });
     it('return the gyms total index', () => {
         expect(getGymIndex('Aspertia City')).toEqual(52);
