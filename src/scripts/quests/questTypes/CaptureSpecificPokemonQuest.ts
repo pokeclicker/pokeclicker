@@ -4,8 +4,9 @@ class CaptureSpecificPokemonQuest extends Quest implements QuestInterface {
     pokemon: PokemonListData;
     customDescription: string;
     customReward: () => void;
+    includeBreeding: boolean;
 
-    constructor(pokemonName: PokemonNameType, description: string = undefined, capturesNeeded = 1, private includeBreeding = false, reward: (() => void) | number = undefined, onload: () => void = undefined) {
+    constructor(pokemonName: PokemonNameType, description: string = undefined, capturesNeeded = 1, includeBreeding = false, reward: (() => void) | number = undefined, onload: () => void = undefined) {
         const qpReward = typeof reward == 'number' ? reward : 0;
         super(capturesNeeded, qpReward);
         if (typeof reward != 'number') {
@@ -15,6 +16,7 @@ class CaptureSpecificPokemonQuest extends Quest implements QuestInterface {
         this.customDescription = description;
         this.focus = ko.pureComputed(() => App.game.statistics.pokemonCaptured[this.pokemon.id]() - (includeBreeding ? 0 : App.game.statistics.pokemonHatched[this.pokemon.id]()));
         this._onLoad = onload;
+        this.includeBreeding = includeBreeding;
     }
 
     get description(): string {
