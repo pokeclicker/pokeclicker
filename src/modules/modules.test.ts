@@ -76,7 +76,7 @@ describe('Test GameConstants', () => {
     it('format time names from seconds', () => {
         expect(formatSecondsToTime(1000000)).toEqual('1 week</br>4 days</br>13 hours</br>46 mins</br>40 secs');
     });
-    it('format number amount string', () => {
+    it('format number amount to string', () => {
         expect(formatNumber(9876543210000)).toEqual('9.8T');
         expect(formatNumber(9876543210)).toEqual('9.8B');
         expect(formatNumber(6543210)).toEqual('6.5M');
@@ -139,5 +139,42 @@ describe('Test GameHelper', () => {
 
     it('enum number values', () => {
         expect(GameHelper.enumNumbers(AchievementOption)).toEqual([0, 1, 2]);
+    });
+
+    it('tick', () => {
+        GameHelper.counter = 1;
+        GameHelper.tick();
+        expect(GameHelper.counter).toEqual(0);
+    });
+
+    it('update time, tomorrow', () => {
+        GameHelper.tomorrow = GameHelper.currentTime();
+        GameHelper.updateTime();
+        expect(GameHelper.tomorrow).not.toEqual(GameHelper.currentTime());
+    });
+
+    it('format number amount string', () => {
+        expect(GameHelper.formatAmount(9876543210000)).toEqual('9876b');
+        expect(GameHelper.formatAmount(9876543210)).toEqual('9b');
+        expect(GameHelper.formatAmount(6543210)).toEqual('6m');
+        expect(GameHelper.formatAmount(3210)).toEqual('3k');
+        expect(GameHelper.formatAmount(210)).toEqual('210');
+    });
+
+    it('create an array', () => {
+        expect(GameHelper.createArray(1, 3, 1)).toEqual([1, 2, 3]);
+    });
+
+    it('remove falsy values from end of an array', () => {
+        expect(GameHelper.filterArrayEnd([0, 1, 0, 1, 1, 0, 0, 0])).toEqual([0, 1, 0, 1, 1]);
+    });
+
+    it('return an or a depending on the word supplied', () => {
+        expect(GameHelper.anOrA('Pikachu')).toEqual('a');
+        expect(GameHelper.anOrA('Eevee')).toEqual('an');
+    });
+
+    it('escape regex values from a string', () => {
+        expect(GameHelper.escapeStringRegex('/[Just a test](.*?)/')).toEqual('\\/\\[Just a test\\]\\(\\.\\*\\?\\)\\/');
     });
 });
