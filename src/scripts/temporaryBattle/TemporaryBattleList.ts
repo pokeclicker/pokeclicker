@@ -437,7 +437,7 @@ TemporaryBattleList['Red Gyarados'] = new TemporaryBattle(
         returnTown: 'Mahogany Town',
         isTrainerBattle: false,
         hideTrainer: true,
-        visibleRequirement: new GymBadgeRequirement(BadgeEnums.Fog),
+        visibleRequirement: new QuestLineStartedRequirement('Team Rocket Again'),
     }
 );
 TemporaryBattleList['Suicune 3'] = new TemporaryBattle(
