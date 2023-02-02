@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "cross-env NODE_ENV=development gulp",
-    "test": "jest",
+    "test": "npm run ts-test && npm run eslint && npm run jest",
     "ts-test": "gulp scripts",
+    "jest": "jest",
     "eslint": "eslint --ext ts ./src/scripts ./src/modules",
     "eslint-fix": "eslint --ext ts --fix ./src/scripts ./src/modules",
     "website": "npm run tl:update && npm test && cross-env NODE_ENV=production gulp website",
