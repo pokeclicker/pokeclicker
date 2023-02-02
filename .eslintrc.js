@@ -18,6 +18,7 @@ module.exports = {
     },
     'extends': ['plugin:@typescript-eslint/recommended'],
     'rules': {
+        '@typescript-eslint/member-ordering': ['off'],
         '@typescript-eslint/no-namespace': 'off',
         '@typescript-eslint/no-unused-vars': 'off',
         '@typescript-eslint/no-empty-function': 'off',

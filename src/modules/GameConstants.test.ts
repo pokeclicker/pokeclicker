@@ -2,7 +2,24 @@ import {
     describe, expect, it,
 } from '@jest/globals';
 import {
-    camelCaseToString, cleanHTMLString, clipNumber, expRandomElement, formatDate, formatNumber, formatSecondsToTime, formatTime, formatTimeFullLetters, formatTimeShortWords, getDungeonIndex, getDungeonRegion, getGymIndex, getGymRegion, getTemporaryBattlesIndex, humanifyString, pluralizeString, Region,
+    camelCaseToString,
+    cleanHTMLString,
+    clipNumber,
+    expRandomElement,
+    formatDate,
+    formatNumber,
+    formatSecondsToTime,
+    formatTime,
+    formatTimeFullLetters,
+    formatTimeShortWords,
+    getDungeonIndex,
+    getDungeonRegion,
+    getGymIndex,
+    getGymRegion,
+    getTemporaryBattlesIndex,
+    humanifyString,
+    pluralizeString,
+    Region,
 } from './GameConstants';
 
 describe('Test GameConstants', () => {
