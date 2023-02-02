@@ -3,6 +3,19 @@ jest.useFakeTimers().setSystemTime(new Date(1675298702433));
 // Override Math.random() to always return the same value
 jest.spyOn(global.Math, 'random').mockReturnValue(0.123456789);
 
+import { SpriteCredits, CodeCredits } from './Credits';
+
+describe('Test Credits', () => {
+    it('should have the correct properties', () => {
+        [...SpriteCredits, ...CodeCredits].forEach((credit) => {
+            expect(credit).toHaveProperty('name');
+            expect(credit).toHaveProperty('link');
+            expect(credit).toHaveProperty('image');
+            expect(credit).toHaveProperty('resources');
+        });
+    });
+});
+
 import {
     camelCaseToString,
     cleanHTMLString,
@@ -23,7 +36,6 @@ import {
     pluralizeString,
     Region,
 } from './GameConstants';
-
 
 describe('Test GameConstants', () => {
     it('clean html strings', () => {
@@ -97,5 +109,35 @@ describe('Test GameConstants', () => {
     it('return the temp battles total index', () => {
         expect(getTemporaryBattlesIndex('Underground Fighting Ring')).toEqual(117);
         expect(getTemporaryBattlesIndex('Not a real temp battle')).toEqual(-1);
+    });
+});
+
+import GameHelper from './GameHelper';
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+import * as ko from 'knockout';
+import { AchievementOption } from './GameConstants';
+
+describe('Test GameHelper', () => {
+    it('time until tomorrow', () => {
+        expect(GameHelper.formattedTimeUntilTomorrow()).toBe('10:14');
+        expect(GameHelper.formattedLetterTimeUntilTomorrow()).toBe('10h14m');
+    });
+
+    it('increment observables', () => {
+        const testObservable = ko.observable(1);
+        GameHelper.incrementObservable(testObservable, 2);
+        expect(testObservable()).toBe(3);
+    });
+
+    it('enum lengths', () => {
+        expect(GameHelper.enumLength(AchievementOption)).toBe(3);
+    });
+
+    it('enum string values', () => {
+        expect(GameHelper.enumStrings(AchievementOption)).toEqual(['less', 'equal', 'more']);
+    });
+
+    it('enum number values', () => {
+        expect(GameHelper.enumNumbers(AchievementOption)).toEqual([0, 1, 2]);
     });
 });
