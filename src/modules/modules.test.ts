@@ -119,8 +119,8 @@ import { AchievementOption } from './GameConstants';
 
 describe('Test GameHelper', () => {
     it('time until tomorrow', () => {
-        expect(GameHelper.formattedTimeUntilTomorrow()).toBe('10:14');
-        expect(GameHelper.formattedLetterTimeUntilTomorrow()).toBe('10h14m');
+        expect(GameHelper.formattedTimeUntilTomorrow()).toBe('23:14');
+        expect(GameHelper.formattedLetterTimeUntilTomorrow()).toBe('23h14m');
     });
 
     it('increment observables', () => {
