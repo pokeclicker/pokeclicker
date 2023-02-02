@@ -64,7 +64,6 @@ SpecialEvents.newEvent('Lunar New Year', 'Two kinds of Vivillon are roaming Kalo
             ['Lost Hotel', 'Vivillon (Elegant)'],
             ['Dreamyard', 'Vivillon (Ocean)'],
             ['New Mauville', 'Vivillon (Continental)'],
-            ['Eterna Forest', 'Vivillon (River)'],
             ['Sky Pillar', 'Vivillon (Polar)'],
             ['Relic Castle', 'Vivillon (Sandstorm)'],
             ['Flower Paradise', 'Vivillon (Garden)'],
@@ -80,6 +79,13 @@ SpecialEvents.newEvent('Lunar New Year', 'Two kinds of Vivillon are roaming Kalo
                 })
             );
         });
+        dungeonList['Eterna Forest'].bossList.push(new DungeonBossPokemon('Vivillon (River)', 96662023, 60, {hide: true, requirement: new MultiRequirement([
+            new ObtainedPokemonRequirement('Vivillon (River)'),
+            new OneFromManyRequirement([
+                new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 7, GameConstants.AchievementOption.less),
+                new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 8),
+            ]),
+        ])}));
         TownList['Santalune City'].npcs.push(VivillonPhotobook);
     },
     // End
