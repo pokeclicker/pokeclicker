@@ -2349,7 +2349,7 @@ class QuestLineHelper {
             [
                 catchDark,
                 catchWater,
-            ], 'Train Kubfu more by catching and hatching Dark and Water-type Pokémon.'));
+            ], 'Train Kubfu more by catching or hatching Dark and Water-type Pokémon.'));
 
         const talktoMustard9 = new TalkToNPCQuest(Mustard9, 'Talk to Mustard at the Master Dojo.');
         dojoArmorQuestLine.addQuest(talktoMustard9);
