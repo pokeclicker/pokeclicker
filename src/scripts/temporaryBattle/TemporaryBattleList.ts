@@ -306,16 +306,13 @@ TemporaryBattleList.Sudowoodo = new TemporaryBattle(
     'Sudowoodo',
     [new GymPokemon('Sudowoodo', 540000, 20)],
     undefined,
-    [
-        new GymBadgeRequirement(BadgeEnums.Plain),
-        new RouteKillRequirement(10, GameConstants.Region.johto, 36),
-    ],
+    [new GymBadgeRequirement(BadgeEnums.Plain)],
     [new TemporaryBattleRequirement('Sudowoodo'), new ObtainedPokemonRequirement('Sudowoodo')],
     {
         isTrainerBattle: false,
         returnTown: 'Goldenrod City',
         hideTrainer: true,
-        visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.johto, 36),
+        visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.johto, 31),
     }
 );
 TemporaryBattleList['Silver 3'] = new TemporaryBattle(
@@ -430,13 +427,17 @@ TemporaryBattleList['Red Gyarados'] = new TemporaryBattle(
     'Red Gyarados',
     [new GymPokemon('Gyarados', 1100000, 30, undefined, true)],
     undefined,
-    [new QuestLineStartedRequirement('Team Rocket Again')],
+    [
+        new QuestLineStartedRequirement('Team Rocket Again'),
+        new RouteKillRequirement(10, GameConstants.Region.johto, 43),
+    ],
     undefined,
     {
         displayName: 'Red Gyarados',
         returnTown: 'Mahogany Town',
         isTrainerBattle: false,
         hideTrainer: true,
+        visibleRequirement: new QuestLineStartedRequirement('Team Rocket Again'),
     }
 );
 TemporaryBattleList['Suicune 3'] = new TemporaryBattle(
@@ -2426,6 +2427,60 @@ TemporaryBattleList['Hex Maniac Aster'] = new TemporaryBattle(
         displayName: 'Hex Maniac Aster',
         imageName: '../trainers/Hex Maniac',
         firstTimeRewardFunction: () => App.game.party.getPokemonByName('Gengar').giveMegastone(),
+    }
+);
+
+TemporaryBattleList['Wild Houndour Horde'] = new TemporaryBattle(
+    'Wild Houndour Horde',
+    [
+        new GymPokemon('Houndour', 60000000, 40),
+        new GymPokemon('Houndour', 60000000, 40),
+        new GymPokemon('Houndour', 60000000, 40),
+        new GymPokemon('Houndour', 60000000, 40),
+        new GymPokemon('Houndour', 60000000, 40),
+        new GymPokemon('Mega Houndoom', 120000000, 60),
+    ],
+    '<i>With the leader of the pack defeated, the Houndour horde scatters, their fiery fury reduced to ashes. In the gleaming sunlight, you catch sight of a small gem left behind by their leader...</i></br><img src="assets/images/megaStone/229.png"/></br><i>You obtained the Houndoomite!</i>',
+    [
+        new ObtainedPokemonRequirement('Houndoom'),
+        new WeatherRequirement([WeatherType.Sunny]),
+        new StatisticRequirement(['pokemonCaptured', PokemonHelper.getPokemonByName('Houndour').id], 500),
+        new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion),
+    ],
+    undefined,
+    {
+        displayName: 'Wild Houndour Horde',
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Houndoom').giveMegastone(),
+        imageName: '../pokemon/229.01',
+        hideTrainer: true,
+        returnTown: 'Dendemille Town',
+    }
+);
+
+TemporaryBattleList['Wild Electrike Horde'] = new TemporaryBattle(
+    'Wild Electrike Horde',
+    [
+        new GymPokemon('Electrike', 60000000, 40),
+        new GymPokemon('Electrike', 60000000, 40),
+        new GymPokemon('Electrike', 60000000, 40),
+        new GymPokemon('Electrike', 60000000, 40),
+        new GymPokemon('Electrike', 60000000, 40),
+        new GymPokemon('Mega Manectric', 120000000, 60),
+    ],
+    '<i>With the leader of the pack defeated, the Electrike horde scatters, their thunderous rage utterly depleted. In a thunderbolt\'s flash, you catch sight of a small gem left behind by their leader...</i></br><img src="assets/images/megaStone/310.png"/></br><i>You obtained the Manectite!</i>',
+    [
+        new ObtainedPokemonRequirement('Manectric'),
+        new WeatherRequirement([WeatherType.Thunderstorm]),
+        new StatisticRequirement(['pokemonCaptured', PokemonHelper.getPokemonByName('Electrike').id], 500),
+        new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion),
+    ],
+    undefined,
+    {
+        displayName: 'Wild Electrike Horde',
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Manectric').giveMegastone(),
+        imageName: '../pokemon/310.01',
+        hideTrainer: true,
+        returnTown: 'Dendemille Town',
     }
 );
 
