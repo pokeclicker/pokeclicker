@@ -410,6 +410,41 @@ class GameController {
                         return e.preventDefault();
                     }
                     break;
+                case Settings.getSetting('hotkey.oakItems.loadout.1').value:
+                    // Activate to Oak Item Loadout 1
+                    if (oakItems.canAccess() && !$oakItemsModal.data('disable-toggle')) {
+                        App.game.oakItemLoadouts.activateLoadout(0);
+                        return e.preventDefault();
+                    }
+                    break;
+                case Settings.getSetting('hotkey.oakItems.loadout.2').value:
+                    // Activate to Oak Item Loadout 2
+                    if (oakItems.canAccess() && !$oakItemsModal.data('disable-toggle')) {
+                        App.game.oakItemLoadouts.activateLoadout(1);
+                        return e.preventDefault();
+                    }
+                    break;
+                case Settings.getSetting('hotkey.oakItems.loadout.3').value:
+                    // Activate to Oak Item Loadout 3
+                    if (oakItems.canAccess() && !$oakItemsModal.data('disable-toggle')) {
+                        App.game.oakItemLoadouts.activateLoadout(2);
+                        return e.preventDefault();
+                    }
+                    break;
+                case Settings.getSetting('hotkey.oakItems.loadout.4').value:
+                    // Activate to Oak Item Loadout 4
+                    if (oakItems.canAccess() && !$oakItemsModal.data('disable-toggle')) {
+                        App.game.oakItemLoadouts.activateLoadout(3);
+                        return e.preventDefault();
+                    }
+                    break;
+                case Settings.getSetting('hotkey.oakItems.loadout.5').value:
+                    // Activate to Oak Item Loadout 5
+                    if (oakItems.canAccess() && !$oakItemsModal.data('disable-toggle')) {
+                        App.game.oakItemLoadouts.activateLoadout(4);
+                        return e.preventDefault();
+                    }
+                    break;
                 case Settings.getSetting('hotkey.forceSave').value:
                     if (GameController.keyHeld.Shift) {
                         Save.store(player);

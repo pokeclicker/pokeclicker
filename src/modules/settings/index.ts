@@ -303,6 +303,12 @@ Settings.add(new HotkeySetting('hotkey.oakItems', 'Oak Items', 'O'));
 Settings.add(new HotkeySetting('hotkey.underground', 'Underground', 'U'));
 Settings.add(new HotkeySetting('hotkey.pokeballSelection', 'Poké Ball Selection', 'P', { suffix: ' + Number' }));
 
+Settings.add(new HotkeySetting('hotkey.oakItems.loadout.1', 'Activate Oak Items Loadout 1', '!'));
+Settings.add(new HotkeySetting('hotkey.oakItems.loadout.2', 'Activate Oak Items Loadout 2', '@'));
+Settings.add(new HotkeySetting('hotkey.oakItems.loadout.3', 'Activate Oak Items Loadout 3', '#'));
+Settings.add(new HotkeySetting('hotkey.oakItems.loadout.4', 'Activate Oak Items Loadout 4', '$'));
+Settings.add(new HotkeySetting('hotkey.oakItems.loadout.5', 'Activate Oak Items Loadout 5', '&'));
+
 Settings.add(new HotkeySetting('hotkey.farm.toggleShovel', 'Toggle Shovel', 'S'));
 Settings.add(new HotkeySetting('hotkey.farm.togglePlotSafeLock', 'Toggle Plot Lock', 'L', { suffix: ' or Shift + Click' }));
 
