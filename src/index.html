@@ -78,7 +78,6 @@
             position: relative;
         }
     </style>
-
 </head>
 <body class="no-select" data-bind="class: 'no-select ' + Settings.getSetting('theme').observableValue() + ' ' + Settings.getSetting('backgroundImage').observableValue(), attr : {'oncontextmenu' : 'return !' + Settings.getSetting('disableRightClickMenu').observableValue().toString() + ';'}">
 @import "dynamicBackground.html"
@@ -667,5 +666,16 @@
 <!-- Dream Orbs Opened Modal -->
 @import "dreamOrbsOpenedModal.html"
 
+
+<script type="text/javascript">
+// Check if we are running in an iframe
+if (self !== top) {
+    App = {};
+    Game = {};
+    document.body.innerHTML = `<div class="text-center">
+        <h2>Please visit the official website to play this game <a target="_top" href="https://pokeclicker.com">https://pokeclicker.com</a></h2>
+    </div>`;
+}
+</script>
 </body>
 </html>

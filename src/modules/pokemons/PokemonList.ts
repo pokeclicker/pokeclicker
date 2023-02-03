@@ -8423,7 +8423,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 175,
         'eggCycles': 20,
-        // 'evolutions': [MegaEvolution('Houndoom', 'Mega Houndoom')],
+        'evolutions': [MegaEvolution('Houndoom', 'Mega Houndoom')],
         'base': {
             'hitpoints': 75,
             'attack': 90,
@@ -10286,7 +10286,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 166,
         'catchRate': 45,
-        // 'evolutions': [MegaEvolution('Manectric', 'Mega Manectric')],
+        'evolutions': [MegaEvolution('Manectric', 'Mega Manectric')],
         'base': {
             'hitpoints': 70,
             'attack': 75,

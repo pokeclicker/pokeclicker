@@ -750,4 +750,24 @@
          , image: "assets/images/map/ashketchumoverworld.png"
          })
      %>
+	 
+	 <%- include('templates/mapOverlay',
+         { name: "Wild Electrike Horde"
+         , x: 58, y: 14
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Wild Electrike Horde'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Wild Electrike Horde'] && TemporaryBattleList['Wild Electrike Horde'].isVisible()"
+         , image: "assets/images/map/megamanectricoverworld.png"
+         })
+     %>
+	 
+	 <%- include('templates/mapOverlay',
+         { name: "Wild Houndour Horde"
+         , x: 58, y: 14
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Wild Houndour Horde'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Wild Houndour Horde'] && TemporaryBattleList['Wild Houndour Horde'].isVisible()"
+         , image: "assets/images/map/megahoundoomoverworld.png"
+         })
+     %>
 </g>
