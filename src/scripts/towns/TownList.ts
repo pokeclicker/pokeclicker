@@ -6344,9 +6344,9 @@ const ProfMagnolia = new ProfNPC('Prof. Magnolia',
     'assets/images/npcs/Professor Magnolia.png');
 
 const MagearnaMysteryGift = new NPC('Mystery Gift', [
-    'You have recieved a Mystery Gift for completing the National Shiny Dex!',
+    'You have received a Mystery Gift for completing the National Shiny Dex!',
 ], {
-    image: 'assets/images/pokemon/801.1.png',
+    image: 'assets/images/pokemon/801.01.png',
     requirement: new MultiRequirement([new QuestLineStartedRequirement('A Mystery Gift'), new QuestLineCompletedRequirement('A Mystery Gift', GameConstants.AchievementOption.less)]),
 }
 );
