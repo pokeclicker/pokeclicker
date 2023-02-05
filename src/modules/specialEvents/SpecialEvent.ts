@@ -2,6 +2,7 @@ import SpecialEventNotifiedStatus from './SpecialEventsNotifiedStatus';
 import Notifier from '../notifications/Notifier';
 import NotificationConstants from '../notifications/NotificationConstants';
 import { DAY, HOUR, formatTimeShortWords } from '../GameConstants';
+import Settings from '../settings';
 
 type EmptyCallback = () => void;
 
@@ -22,6 +23,17 @@ export default class SpecialEvent {
 
     // TODO: only notify once initially until event about to start/end
     notified: SpecialEventNotifiedStatus;
+
+    disabledSpecialEvents = Settings.getSetting('disableSpecialEvents').observableValue.subscribe((newValue) => {
+        this.disabledSpecialEvents = newValue;
+
+        if (this.disabledSpecialEvents && this.hasStarted()) {
+            // End the event right away.
+            this.end();
+        } else {
+            this.checkStart();
+        }
+    });
 
     constructor(title: string, description: string, startTime: Date, startFunction: EmptyCallback, endTime: Date, endFunction: EmptyCallback) {
         this.title = title;
@@ -120,6 +132,9 @@ export default class SpecialEvent {
     }
 
     start() {
+        if (this.disabledSpecialEvents) {
+            return;
+        }
         // Update event status
         this.status = SpecialEventStatus.started;
 
@@ -163,7 +178,11 @@ export default class SpecialEvent {
 
     end() {
         // Update event status
-        this.notify('just ended!', 1 * HOUR, NotificationConstants.NotificationOption.danger);
+        if (!this.disabledSpecialEvents) {
+            // Only show notification if events are enabled.
+            this.notify('just ended!', 1 * HOUR, NotificationConstants.NotificationOption.danger);
+        }
+        // Still clean up any pokemon added to routes.
         this.endFunction();
         this.status = SpecialEventStatus.none;
         this.updateDate();
