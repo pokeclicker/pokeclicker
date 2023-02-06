@@ -2188,18 +2188,15 @@ class Farming implements Feature {
         [SizeUnits.inch]: (num) => `${(num / 2.54).toFixed(1)}\u2033`, // inches
     };
 
-//    public auraDisplay(berry: BerryType, stage: number) {
-//if (this.berryData[$data].aura) {
-//        const additiveAura = AuraType.Repel;
-//        if (stage === 0) {
-  //          return '-';
-  //      } else {
-    //        if (this.berryData.aura.AuraType() == additiveAura) {
-      //      return `+{this.berryData[berry].aura.auraMultipliers[stage] * 100)}%`;
-       // } else {
-        //    return `×{this.berryData[berry].aura.auraMultipliers[stage]}`;
-       // }
-       // }
-   // }
+    public auraDisplay(berry: BerryType, stage: number) {
+
+        if (App.game.farming.berryData[berry].aura) {
+            if (App.game.farming.berryData[berry].aura.auraType == AuraType.Repel) {
+                return '+{App.game.farming.berryData[berry].aura.auraMultipliers[stage] * 100)}%';
+            } else {
+                return '×{App.game.farming.berryData[berry].aura.auraMultipliers[stage]}';
+            }
+        }
+    }
 
 }

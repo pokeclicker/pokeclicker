@@ -93,13 +93,13 @@
                             <td><code data-bind="html: GameConstants.formatSecondsToTime(App.game.farming.berryData[$data].growthTime[3])">-</code></td>
                           </tr>
                           <tr class = "auraHighlight" data-bind="if: App.game.farming.berryData[$data].aura">
-                            <th colspan="4">Aura Multiplier at Stage</th>
+                            <th colspan="4">Aura Effect at Stage</th>
                           </tr>
                           <tr style = "box-shadow: inset 0 0 5px #c2ffa1, inset 0 0 7px #fbffc2 ,inset 0 0 7px #dc5cff;" data-bind="if: App.game.farming.berryData[$data].aura">
                             <td><code data-bind="html: GameConstants.formatSecondsToTime(1 - 1)">-</code></td>
-                            <td><code data-bind="html: GameConstants.formatNumber(App.game.farming.berryData[$data].aura.auraMultipliers[0])">-</code></td>
-                            <td><code data-bind="html: GameConstants.formatNumber(App.game.farming.berryData[$data].aura.auraMultipliers[1])">-</code></td>
-                            <td><code data-bind="html: GameConstants.formatNumber(App.game.farming.berryData[$data].aura.auraMultipliers[2])">-</code></td>
+                            <td><code data-bind="html: GameConstants.formatNumber(auraDisplay($data,0))">-</code></td>
+                            <td><code data-bind="html: GameConstants.formatNumber(auraDisplay($data,1))">-</code></td>
+                            <td><code data-bind="html: GameConstants.formatNumber(auraDisplay($data,2))">-</code></td>
                           </tr>
                         </table>
                       </td>
