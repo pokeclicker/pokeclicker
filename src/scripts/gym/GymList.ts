@@ -1437,7 +1437,7 @@ GymList['Acerola\'s Trial'] = new Gym(
     ],
     BadgeEnums.GhostiumZ,
     128000,
-    'Welcome back Now let\'s see how you did... Yup! You passed my trial! Here you go!',
+    'Welcome back! Now let\'s see how you did... Yup! You passed my trial! Here you go!',
     undefined,
     undefined,
     {
@@ -1455,7 +1455,7 @@ GymList['Vast Poni Canyon Trial'] = new Gym(
     ],
     BadgeEnums.DragoniumZ,
     128000,
-    'You obtained a Dragon-Type Z-Crystal. The Dragonium Z is yours!',
+    '<i>You obtained a Dragon-Type Z-Crystal. The Dragonium Z is yours!<i>',
     undefined,
     undefined,
     {
