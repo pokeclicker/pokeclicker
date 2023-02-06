@@ -699,6 +699,7 @@ export const SpriteCredits: Credit[] = [
             'Alola Sprites',
             'Galar Sprites',
             'Kalos Sprites',
+            'Paldea Sprites',
         ],
         // NOTES: free for non-profit use.
     },
