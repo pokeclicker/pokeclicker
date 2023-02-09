@@ -750,7 +750,7 @@ const RedSpearow = new NPC('Red Spearow', [
     '<b><i>SQUAWK! SQUAWK!</i></b>',
     '...',
     '<i>The Red Spearow seems to appreciate your visit.</i>',
-], {image: 'assets/images/pokemon/21.1.png'});
+], {image: 'assets/images/pokemon/21.01.png'});
 
 //Kanto Towns
 TownList['Pallet Town'] = new Town(
