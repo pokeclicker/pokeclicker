@@ -99,6 +99,7 @@ export const SpriteCredits: Credit[] = [
             'Kabu',
             'Klara',
             'Leon',
+            'Lisia',
             'Marnie',
             'Master Dojo Student',
             'Melony',
@@ -411,6 +412,7 @@ export const SpriteCredits: Credit[] = [
             'Viola',
             'Wikstrom',
             'Wulfric',
+            'Zinnia',
         ],
         // NOTES: Feel free to use it if you like, but don\'t forget to give me credit~!
     },
