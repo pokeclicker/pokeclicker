@@ -1379,7 +1379,7 @@ class QuestLineHelper {
             [
                 fightCourtney1,
                 fightMatt1,
-            ], 'Follow Zinnia to Petalberg City.'));
+            ], 'Follow Zinnia to Petalburg City.'));
 
         const talkToDeltaSteven1 = new TalkToNPCQuest(DeltaSteven1, 'Answer your ringing Holo Caster.');
 
@@ -1389,7 +1389,7 @@ class QuestLineHelper {
             [
                 talkToDeltaSteven1,
                 talkToDeltaWally1,
-            ], 'Talk to Wally and answer your ringing Holo Caster in Petalberg City.'));
+            ], 'Talk to Wally and answer your ringing Holo Caster in Petalburg City.'));
 
         const clearGranite = new CustomQuest(10, 0, 'Clear Granite Cave 10 times.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Granite Cave')]());
 

@@ -2350,9 +2350,9 @@ const DeltaMay1 = new NPC('May', [
 
 const NewsBirch = new NPC('Discuss the news with Dr. Birch', [
     'Hello again, $playername$! It\'s been a while since you last visited!',
-    'There\'s been a lot of hubbub and excitement in the region since Mossdeep Space Center announced that a meteor was headed our way. This has lead to a lot of new faces in Hoenn.',
-    'Some of them have been carrying small but powerful items known as Key Stones. These have the power to let Pokémon Mega Evolve! You may have experiences something like that in Kalos, but it\'s new to us here.',
-    'Keep an eye our for new faces in familiar places!',
+    'There\'s been a lot of hubbub and excitement in the region since the Mossdeep Space Center announced that a meteor was headed our way. This has lead to a lot of new faces in Hoenn.',
+    'Some of them have been carrying small but powerful items known as Key Stones. These have the power to let Pokémon Mega Evolve! You may have experienced something like that in Kalos, but it\'s new to us here.',
+    'Keep an eye out for new faces in familiar places!',
 ], {image: 'assets/images/npcs/Professor Birch.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 2), new QuestLineStepCompletedRequirement('The Delta Episode', 4, GameConstants.AchievementOption.less)]),
 });
@@ -2360,7 +2360,7 @@ const NewsBirch = new NPC('Discuss the news with Dr. Birch', [
 const DeltaMay2 = new NPC('May', [
     'What\s the big idea, $playername$?!?',
     'Your new friend waited until my back was turned, stole my Key Stone, and skipped town!',
-    'She was headed towards Petalberg City. You better help me get my Key Stone back!',
+    'She was headed towards Petalburg City. You better help me get my Key Stone back!',
 ], {image: 'assets/images/temporaryBattle/May.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 3), new QuestLineStepCompletedRequirement('The Delta Episode', 5, GameConstants.AchievementOption.less)]),
 });
@@ -2368,7 +2368,7 @@ const DeltaMay2 = new NPC('May', [
 const DeltaSteven1 = new NPC('Ringing Holo Caster', [
     'Hello? Is that you, $playername$? It\'s me. Steven. Have you been doing well?',
     'I imagine you must be quite shocked. This is a communication mode that Devon is still currently developing. It comes installed on every Holo Caster. I thought I would only use it if I needed to contact you urgently.',
-    'But it looks as thought that time has already come. I\'m sorry to ask this of you, but I need your help getting some materials for Devon Corporation\'s new rocket project. We think we can help Dr. Cozmo stop the incoming meteor.',
+    'But it looks as though that time has already come. I\'m sorry to ask this of you, but I need your help getting some materials for Devon Corporation\'s new rocket project. We think we can help Dr. Cozmo stop the incoming meteor.',
     'Our company\'s records indicate that a meteor landed in Granite Cave thousands of years ago. Can you search the area for fragments of that meteor?',
     'Oh, and my father was asking about you. Look out for him in Rustboro City.',
 ], {image: 'assets/images/gymLeaders/Steven.png',
@@ -2386,7 +2386,7 @@ const Zinnia2 = new NPC('Zinnia', [
     'Hm, hm, hm. Well, seems like it\'s true. It really is just like the wall painting there. This one shows Primal Reversion... While that one shows Mega Evolution... I guess that proves it once and for all.',
     'Our great ancestors once lived here, too. The ancestors who passed down through me the knowledge of how to protect the world... How to avert the threat that will appear from space, as long was foretold... From a place higher even than the heavens...',
     'What is it, Aster? Oh?',
-    'We do seem to meet an awful lot, $playername$. Are you also interested in this old painting? Or are you here for the other? For one of the Meteorite Shards that can serve as a source of power for the Legendary Pokémon that lives in the heavens above.',
+    'We do seem to meet an awful lot, $playername$. Are you also interested in this old painting? Or are you here for something else? For one of the Meteorite Shards that can serve as a source of power for the Legendary Pokémon that lives in the heavens above.',
     'Either way... You know I adore you. That\'s it! I can\'t help it! I have to battle you! I\'ll play nice, though, and ask first... You\'re ready to battle me, right?',
 ], {image: 'assets/images/npcs/Zinnia.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 7), new QuestLineStepCompletedRequirement('The Delta Episode', 9, GameConstants.AchievementOption.less)]),
@@ -2403,7 +2403,7 @@ const Cozmo2 = new NPC('Dr. Cozmo', [
     'WHAT? Recheck the data! Update the course calculations and confirm the new trajectory! But changing trajectories midflight... It\'s almost like it\'s alive.',
     'Oh, $playername$, I didn\'t see you there. And you brought the Meteorite Shard with you. Well done!',
     'Thank you for bringing it, this will really help our plan to stop the meteor. Our current plan involves using the Infinity Energy within our rocket, combined with the life energy of humans found in Key Stones.',
-    'We will start off by artificially replicating the massive energy that is triggered at the time of Mega Evolution! We will fire the energy produced from our rocket into space... And create a "warp hole."',
+    'We will start off by artificially replicating the massive energy that is triggered at the time of Mega Evolution! We will fire the energy produced from our rocket into space... And create a "warp hole".',
     'By creating a warp hole in the path of the incoming meteoroid, we hope to be able to transport it somewhere far away from here....',
     '<i>Zinnia bursts into the room and interrupts Dr. Cozmo!<i>',
 ], {image: 'assets/images/npcs/Dr Cozmo.png',
@@ -2424,7 +2424,7 @@ const Zinnia4 = new NPC('Zinnia', [
 const Cozmo3 = new NPC('Dr. Cozmo', [
     'That was.... quite the interruption.',
     'But there\'s no need to worry. Based on our theory, we can at least guarantee that we will be sending the meteor away from our planet if the plan is successful. Not sure where it will go.',
-    'However, we\'ve realized that we will need more energy than originally anticipated to control the process properly... I\'m sorry to ask this of you, but we will need one more Meteorite Shard. This one should be able to be found at Meteor Falls.',
+    'However, we\'ve realized that we will need more energy than originally anticipated to control the process properly... I\'m sorry to ask this of you, but we will need one more Meteorite Shard. There should be one at Meteor Falls.',
 ], {image: 'assets/images/npcs/Dr Cozmo.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 12), new QuestLineStepCompletedRequirement('The Delta Episode', 14, GameConstants.AchievementOption.less)]),
 });
@@ -2470,7 +2470,7 @@ const Zinnia5 = new NPC('Zinnia', [
 const Archie = new NPC('Archie', [
     'Baah, what\'s the use in fighting you?',
     'That Dragon twerp stole my Key Stone, there\'s no way I can win without it. Looks like you\'re after her too, huh?',
-    'Last I saw, she was headed towards Mt. Pyre. Hopefully she messes up Maxie\'s day too! At least she didn\t take the.... uuh...',
+    'Last I saw, she was headed towards Mt. Pyre. Hopefully she messes up Maxie\'s day too! At least she didn\'t take the.... uuh...',
     'Never you mind that, get outta here!',
 ], {image: 'assets/images/trainers/Aqua Leader.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 21), new QuestLineStepCompletedRequirement('The Delta Episode', 23, GameConstants.AchievementOption.less)]),
@@ -2498,7 +2498,7 @@ const Zinnia6 = new NPC('Zinnia', [
     'Huh?! H-how can this be? I did everything I was supposed to, and you\'re not changing! <b>Come on! Do it! Mega Evolve! Why?!</b>',
     'Is it... you\'re not here for me? You\'re here for $playername$? That\'s no fair! I\'m the chosen one!',
     '<i>You notice the Meteorite Shards you have been carrying have fused together and are emitting a powerful glow.</i></br><img src="assets/images/megaStone/384.png"/>',
-], {image: 'assets/images/npcs//other/RayquazaEncounter.png',
+], {image: 'assets/images/npcs/other/RayquazaEncounter.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 28), new QuestLineStepCompletedRequirement('The Delta Episode', 30, GameConstants.AchievementOption.less)]),
 });
 

@@ -2284,7 +2284,7 @@ TemporaryBattleList['Courtney 3'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Magma Admin Courtney',
-        imageName: '../trainers/Magma Admin (Courtney)',
+        imageName: '../trainers/Magma Admin (courtney)',
         firstTimeRewardFunction: () => App.game.party.getPokemonByName('Latios').giveMegastone(),
     }
 );
