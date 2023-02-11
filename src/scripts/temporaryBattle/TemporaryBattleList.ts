@@ -2221,6 +2221,7 @@ TemporaryBattleList['Mega Draconid Elder'] = new TemporaryBattle(
     {
         displayName: 'Draconid Elder',
         imageName: '../trainers/Draconid Elder',
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Salamence').giveMegastone(),
     }
 );
 TemporaryBattleList['Delta Steven'] = new TemporaryBattle(
