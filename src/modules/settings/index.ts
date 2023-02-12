@@ -104,6 +104,7 @@ Settings.add(new Setting<string>('farmDisplay', 'Farm timer display',
         new SettingOption('Ripe/Death', 'ripeDeath'),
     ],
     'ripeDeath'));
+Settings.add(new BooleanSetting('farmBoostDisplay', 'Include base farm timer during altered berry growth times', false));
 Settings.add(new Setting<string>('sizeUnits', 'Berry size units',
     [
         new SettingOption('Inches', 'inch'),

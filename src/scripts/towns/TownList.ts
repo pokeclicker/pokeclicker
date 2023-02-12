@@ -1849,7 +1849,7 @@ TownList['Team Rocket\'s Hideout'] = new DungeonTown(
     'Team Rocket\'s Hideout',
     GameConstants.Region.johto,
     GameConstants.JohtoSubRegions.Johto,
-    [new RouteKillRequirement(10, GameConstants.Region.johto, 43)]
+    [new TemporaryBattleRequirement('Red Gyarados')]
 );
 TownList['Radio Tower'] = new DungeonTown(
     'Radio Tower',
@@ -4386,9 +4386,18 @@ const SnowbelleCityShop = new Shop([
 //Kalos NPCs
 
 const LumioseEngineer = new NPC('Engineer', [
-    'I\'m glad to be back in the city after so long at the Power Plant; it\'s so dusty out there!.',
+    'I\'m glad to be back in the city after so long at the Power Plant; it\'s so dusty out there!',
     'Rumor has it that if you conquer the Kalos Power Plant enough times, a strong Pokémon made out of Fire and Water will challenge you. But I bet you’d have to be the Champion before it finds you worthy… I certainly have never seen it!',
 ]);
+
+const LumioseDexio = new NPC('Dexio', [
+    'Hey there! I\'m one of Professor Sycamore\'s assistants. If you\'ve made it to Kalos, you probably have a pretty impressive Pokédex by now, right?',
+    'When you\'ve got your Pokédex open, you can click on a Pokémon\'s image to see more detailed stats about the Pokémon.',
+    'Even if you don\'t remember details like how many times you\'ve encountered a particular species in the wild, or how many times you\'ve captured a Pokémon, your Pokédex does!',
+    'And if some of the rumours about Mega Stones are true... it\'ll be worth keeping track of those sorts of things.',
+], {
+    image: 'assets/images/npcs/Dexio (Gen 6).png',
+});
 
 const CamphrierFlabébéEnthusiast = new NPC('Flabébé Enthusiast', [
     'Ah, isn\'t Flabébé such an eye-catching Pokémon? All these different lovely colors…',
@@ -4444,6 +4453,26 @@ const LaverreGengariteAster2 = new NPC('Hex Maniac Aster', [
     'Hopefully I\'ll have a Gengar soon...',
 ], {image: 'assets/images/trainers/Hex Maniac.png',
     requirement: new TemporaryBattleRequirement('Hex Maniac Aster'),
+});
+
+const DendemilleDogLover = new NPC('Dubious Dog-loving Duke', [
+    'Dog Pokémon are the best of all! I\'m particularly fond of Houndour - I\'ve caught about five hundred of them.',
+    'There\'s no such thing as a cold night in my house, no sir! The most fierce chill of winter is completely defeated by their warm, cozy presence.',
+    'But recently, now that I\'ve got so many Houndour, they have been acting rather curiously.',
+    'When the weather turns sunny, they\'ll all run barking out onto Route 16. Honestly, it\'s quite a racket, and has gotten me into no small amount of trouble.',
+    'They come wandering back when the weather changes, though. I wonder if a strong Pokémon is calling them?',
+    'You could build your own Houndour pack and find out, but if it\'s strong enough to call five hundred Pokémon, it probably wouldn\'t give anyone weaker than Diantha the time of day.',
+], {image: 'assets/images/trainers/Gentleman.png',
+});
+
+const DendemilleWolfLover = new NPC('Worrisome Wolf-loving Woman', [
+    'I adore wolf Pokémon! The most precious of all have to be the brave little Electrike - I\'ve gathered five hundred of the darlings in my home.',
+    'They\'re so loyal, and so fast! I give them letters to take to a friend in Galar in the morning, and I have a response back by supper!',
+    'But now that I have so many of them, their behaviour has taken a... regrettable turn.',
+    'When storms come along the horizon, they\'ll run en masse out to Route 16.',
+    'They fortunately do return home when the weather changes, at least. I wonder what sort of creature is calling them? A strong Pokémon, perhaps?',
+    'I\'ve been debating asking someone else to collect five hundred of their own Electrike and investigate, but if it can call such a fearsome pack with its presence alone, I don\'t imagine anyone less than Diantha herself could handle it.',
+], {image: 'assets/images/trainers/Madame.png',
 });
 
 const AnistarKalosRoamerNPC = new RoamerNPC('Hex Maniac Melanie', [
@@ -4520,7 +4549,7 @@ TownList['Lumiose City'] = new Town(
     [TemporaryBattleList['Sycamore 1'], TemporaryBattleList['Tierno 1'], DepartmentStoreShop, FriseurFurfrouShop, TemporaryBattleList.AZ, TemporaryBattleList.Merilyn, TemporaryBattleList['Grand Duchess Diantha']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 4)],
-        npcs: [ProfSycamore, LumioseEngineer],
+        npcs: [ProfSycamore, LumioseDexio, LumioseEngineer],
     }
 );
 TownList['Camphrier Town'] = new Town(
@@ -4606,6 +4635,7 @@ TownList['Dendemille Town'] = new Town(
     [DendemilleTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Dendemille Town'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 15)],
+        npcs: [DendemilleWolfLover, DendemilleDogLover],
     }
 );
 TownList['Anistar City'] = new Town(

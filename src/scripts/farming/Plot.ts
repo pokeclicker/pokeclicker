@@ -22,6 +22,10 @@ class Plot implements Saveable {
 
     formattedStageTimeLeft: KnockoutComputed<string>;
     formattedTimeLeft: KnockoutComputed<string>;
+    calcFormattedStageTimeLeft: (includeGrowthMultiplier: boolean) => string;
+    calcFormattedTimeLeft: (includeGrowthMultiplier: boolean) => string;
+    formattedBaseStageTimeLeft: KnockoutComputed<string>;
+    formattedBaseTimeLeft: KnockoutComputed<string>;
     formattedMulchTimeLeft: KnockoutComputed<string>;
     formattedAuras: KnockoutComputed<string>;
 
@@ -72,17 +76,27 @@ class Plot implements Saveable {
             }).extend({ rateLimit: 50 }),
         };
 
-        this.formattedStageTimeLeft = ko.pureComputed(() => {
+        this.calcFormattedStageTimeLeft = ((includeGrowthMultiplier: boolean) => {
             if (this.berry === BerryType.None) {
                 return '';
             }
             const growthTime = this.berryData.growthTime.find(t => this.age < t);
             const timeLeft = Math.ceil(growthTime - this.age);
-            const growthMultiplier = App.game.farming.getGrowthMultiplier() * this.getGrowthMultiplier();
+            const growthMultiplier = includeGrowthMultiplier
+                ? App.game.farming.getGrowthMultiplier() * this.getGrowthMultiplier()
+                : 1;
             return GameConstants.formatTime(timeLeft / growthMultiplier);
         });
 
-        this.formattedTimeLeft = ko.pureComputed(() => {
+        this.formattedStageTimeLeft = ko.pureComputed(() => {
+            return this.calcFormattedStageTimeLeft(true);
+        });
+
+        this.formattedBaseStageTimeLeft = ko.pureComputed(() => {
+            return this.calcFormattedStageTimeLeft(false);
+        });
+
+        this.calcFormattedTimeLeft = ((includeGrowthMultiplier: boolean) => {
             if (this.berry === BerryType.None) {
                 return '';
             }
@@ -92,8 +106,18 @@ class Plot implements Saveable {
             } else {
                 timeLeft = Math.ceil(this.berryData.growthTime[4] - this.age);
             }
-            const growthMultiplier = App.game.farming.getGrowthMultiplier() * this.getGrowthMultiplier();
+            const growthMultiplier = includeGrowthMultiplier
+                ? App.game.farming.getGrowthMultiplier() * this.getGrowthMultiplier()
+                : 1;
             return GameConstants.formatTime(timeLeft / growthMultiplier);
+        });
+
+        this.formattedTimeLeft = ko.pureComputed(() => {
+            return this.calcFormattedTimeLeft(true);
+        });
+
+        this.formattedBaseTimeLeft = ko.pureComputed(() => {
+            return this.calcFormattedTimeLeft(false);
         });
 
         this.formattedMulchTimeLeft = ko.pureComputed(() => {
@@ -182,39 +206,50 @@ class Plot implements Saveable {
                 // Normal Time
                 } else {
                     const timeType = Settings.getSetting('farmDisplay').observableValue();
+                    const timeBoostType = Settings.getSetting('farmBoostDisplay').observableValue();
+                    const growthMultiplierNumber = App.game.farming.getGrowthMultiplier() * this.getGrowthMultiplier();
+                    const altered = growthMultiplierNumber !== 1;
+
+                    let timetip: string;
+                    let formattedBaseTime: string;
+
                     if (timeType === 'nextStage') {
                         const formattedTime = this.formattedStageTimeLeft();
+                        formattedBaseTime = this.formattedBaseStageTimeLeft();
                         switch (this.stage()) {
                             case PlotStage.Seed:
-                                tooltip.push(`${formattedTime} until sprout`);
+                                timetip = `${formattedTime} until sprout`;
                                 break;
                             case PlotStage.Sprout:
-                                tooltip.push(`${formattedTime} until grown`);
+                                timetip = `${formattedTime} until grown`;
                                 break;
                             case PlotStage.Taller:
-                                tooltip.push(`${formattedTime} until bloom`);
+                                timetip = `${formattedTime} until bloom`;
                                 break;
                             case PlotStage.Bloom:
-                                tooltip.push(`${formattedTime} until ripe`);
+                                timetip = `${formattedTime} until ripe`;
                                 break;
                             case PlotStage.Berry:
-                                tooltip.push(`${formattedTime} until death`);
+                                timetip = `${formattedTime} until death`;
                                 break;
                         }
                     } else {
                         const formattedTime = this.formattedTimeLeft();
+                        formattedBaseTime = this.formattedBaseTimeLeft();
                         switch (this.stage()) {
                             case PlotStage.Seed:
                             case PlotStage.Sprout:
                             case PlotStage.Taller:
                             case PlotStage.Bloom:
-                                tooltip.push(`${formattedTime} until ripe`);
+                                timetip = `${formattedTime} until ripe`;
                                 break;
                             case PlotStage.Berry:
-                                tooltip.push(`${formattedTime} until death`);
+                                timetip = `${formattedTime} until death`;
                                 break;
                         }
                     }
+
+                    tooltip.push(`${timetip}${altered && timeBoostType ? ` (altered from ${formattedBaseTime})` : ''}`);
                 }
             }
 
