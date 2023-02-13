@@ -2331,7 +2331,7 @@ const Cozmo1 = new NPC('Dr. Cozmo', [
 });
 
 const Zinnia1 = new NPC('Mysterious Figure', [
-    'You must be $playername$, trainer Wa... People are talking about.',
+    'You must be $playername$, the trainer Wa... People are talking about.',
     'If you\'re here, it means you\'ve heard the same news that I have: a meteor is headed towards this island.',
     'Who am I? My name is Zinnia, nice to meet you. I have a certain.... connection to the Pokémon of this region, but we can get into that later.',
     'For now, I think we can help each other out. I need you to introduce me to your rival, May. If you do that, I\'ll tell you my plan to stop the meteor.',
