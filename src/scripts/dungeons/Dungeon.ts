@@ -148,12 +148,16 @@ class Dungeon {
     }
 
     /**
-     * Retreives the weights for all the possible bosses giving a slight bump to bosses which have not been caught.
+     * Retreives the weights for all the possible bosses.
      */
     get bossWeightList(): number[] {
         return this.availableBosses().map((boss) => {
-            const isCaught = App.game.party.alreadyCaughtPokemonByName(pokemonMap[boss.name].name) ? 0 : 1;
-            return (boss.options?.weight ?? 1) + (isCaught / this.availableBosses().length);
+            if (App.game.challenges.list.requireCompletePokedex.active()) {
+                const isCaught = App.game.party.alreadyCaughtPokemonByName(pokemonMap[boss.name].name) ? 0 : 1;
+                return (boss.options?.weight ?? 1) + (isCaught / this.availableBosses().length);
+            }
+
+            return boss.options?.weight ?? 1;
         });
     }
 
