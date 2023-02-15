@@ -60,9 +60,10 @@ export default class KeyItems implements Feature {
                 () => App.game.statistics.dungeonsCleared[getDungeonIndex('Distortion World')]() > 0,
                 undefined,
                 () => {
-                    App.game.party.getPokemon(
+                    const patientZero = App.game.party.getPokemon(
                         RegionalStarters[Region.kanto][player.regionStarters[Region.kanto]()],
-                    ).pokerus = Pokerus.Contagious;
+                    ) || App.game.party.caughtPokemon[0];
+                    patientZero.pokerus = Pokerus.Contagious;
                     App.game.pokeballs.alreadyCaughtContagiousSelection = App.game.pokeballs.alreadyCaughtSelection;
                     Information.show({
                         steps: [
