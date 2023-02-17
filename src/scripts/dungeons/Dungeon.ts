@@ -3637,6 +3637,11 @@ dungeonList['Team Galactic Eterna Building'] = new Dungeon('Team Galactic Eterna
             new ObtainedPokemonRequirement('Rotom'),
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Galactic Eterna Building')),
         ])}),
+        new DungeonBossPokemon('Rotom (Discord)', 4300000, 100, {hide: true, requirement: new MultiRequirement([
+            new ObtainedPokemonRequirement('Rotom'),
+            new ObtainedPokemonRequirement('Rotom (Discord)'),
+            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Galactic Eterna Building')),
+        ])}),
     ],
     54250, 205);
 
@@ -7449,6 +7454,7 @@ dungeonList['Pikachu Valley'] = new Dungeon('Pikachu Valley',
         new DungeonBossPokemon('Pikachu (Kalos Cap)', 59764020, 15),
         new DungeonBossPokemon('Pikachu (Alola Cap)', 59764020, 15, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
         new DungeonBossPokemon('Pikachu (World Cap)', 59764020, 15, {hide: true, requirement: new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)}),
+        new DungeonBossPokemon('Surfing Pikachu', 59764020, 15, {hide: true, requirement: new ObtainedPokemonRequirement('Surfing Pikachu')}),
     ],
     850000, 4);
 
