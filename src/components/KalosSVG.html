@@ -648,6 +648,14 @@
     %>
 
     <%- include('templates/mapPOI',
+        { name: "Friendly Safari Zone"
+        , x: 0, y: 0
+        , width: 10, height: 10
+        , databind: "click:function(){Safari.startSafari()}, attr: { class: Safari.canAccess() ? 'completed' : 'locked' }"
+        })
+    %>
+
+    <%- include('templates/mapPOI',
         { name: "Underground Entrance"
         , x: 9, y: 21
         , width: 3, height: 4
@@ -750,7 +758,7 @@
          , image: "assets/images/map/ashketchumoverworld.png"
          })
      %>
-	 
+
 	 <%- include('templates/mapOverlay',
          { name: "Wild Electrike Horde"
          , x: 58, y: 14
@@ -760,7 +768,7 @@
          , image: "assets/images/map/megamanectricoverworld.png"
          })
      %>
-	 
+
 	 <%- include('templates/mapOverlay',
          { name: "Wild Houndour Horde"
          , x: 58, y: 14
