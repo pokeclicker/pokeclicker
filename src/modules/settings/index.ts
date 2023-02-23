@@ -104,7 +104,13 @@ Settings.add(new Setting<string>('farmDisplay', 'Farm timer display',
         new SettingOption('Ripe/Death', 'ripeDeath'),
     ],
     'ripeDeath'));
-Settings.add(new BooleanSetting('breedingIncludeEVBonus', 'Include EVs in Breeding Efficiency Calculation', false));
+Settings.add(new BooleanSetting('farmBoostDisplay', 'Include base farm timer during altered berry growth times', false));
+Settings.add(new Setting<string>('sizeUnits', 'Berry size units',
+    [
+        new SettingOption('Inches', 'inch'),
+        new SettingOption('Centimeters', 'cm'),
+    ],
+    'cm'));
 Settings.add(new BooleanSetting('currencyMainDisplayReduced', 'Shorten currency amount shown on main screen', false));
 Settings.add(new BooleanSetting('currencyMainDisplayExtended', 'Show Diamonds, Farm Points and Battle Points on main screen', false));
 Settings.add(new BooleanSetting('confirmLeaveDungeon', 'Confirm before leaving dungeons', false));
@@ -117,6 +123,7 @@ Settings.add(new Setting<string>('gameDisplayStyle', 'Game display style',
         new SettingOption('Full width (5 columns)', 'fullWidth5'),
     ],
     'standard3'));
+Settings.add(new BooleanSetting('showMuteButton', 'Show mute/unmute button', true));
 
 // CSS variable settings
 Settings.add(new CssVariableSetting('locked', 'Locked Location', [], '#000000'));
@@ -198,6 +205,7 @@ Settings.add(new BooleanSetting('vitaminHideShinyPokemon', 'Hide shiny Pokémon'
 Settings.add(new Setting<string>('vitaminSearchFilter', 'Search', [], ''));
 Settings.add(new Setting<number>('vitaminRegionFilter', 'Region', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(Region)], -2));
 Settings.add(new Setting<number>('vitaminTypeFilter', 'Type', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None')], -2));
+Settings.add(new BooleanSetting('heldItemHideHoldingPokemon', 'Hide Pokémon holding an item', false));
 
 // Held Item Sorting
 const heldItemSortSettings = Object.keys(SortOptionConfigs).map((opt) => (
@@ -283,6 +291,11 @@ Settings.add(new Setting<string>('achievementsCategory', 'achievementsCategory',
 // Save menu sorting
 Settings.add(new Setting('sort.saveSelector', 'Saves sort order', [], ''));
 
+Settings.add(new Setting('saveFilename', 'Save file name', [], '[v{version}] PokeClicker {date}'));
+
+// Mute toggle
+Settings.add(new BooleanSetting('sound.muted', 'Mute All Sounds', false));
+
 // Hotkeys
 Settings.add(new HotkeySetting('hotkey.farm', 'Farm', 'F'));
 Settings.add(new HotkeySetting('hotkey.hatchery', 'Hatchery', 'H'));
@@ -306,6 +319,7 @@ Settings.add(new HotkeySetting('hotkey.dungeon.interact', 'Interact', 'Space'));
 
 Settings.add(new HotkeySetting('hotkey.town.start', 'Starts first content in the town', 'Space'));
 Settings.add(new HotkeySetting('hotkey.forceSave', 'Force save game', 'S', { prefix: 'Shift + ' }));
+Settings.add(new HotkeySetting('hotkey.mute', 'Mute/Unmute Sounds', 'M', { prefix: 'Shift + ' }));
 
 Settings.add(new HotkeySetting('hotkey.shop.buy', 'Buy item', 'B'));
 Settings.add(new HotkeySetting('hotkey.shop.max', 'Select max amount', 'M'));

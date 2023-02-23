@@ -33,7 +33,7 @@ aria-labelledby="pokedexModalLabel">
                                 <div class="form-group col-md-6 col-6">
                                     <label>Name</label>
                                     <input id="nameFilter" class="form-control" placeholder="Bulbasaur" value=""
-                                        data-bind="textInput: PokedexFilters.name.value">
+                                        oninput="PokedexFilters.name.value(new RegExp(`(${/^\/.+\/$/.test(this.value) ? this.value.slice(1, -1) : GameHelper.escapeStringRegex(this.value)})`, 'i'))">
                                 </div>
 
                                 <!--Region-->
@@ -134,7 +134,7 @@ aria-labelledby="pokedexModalLabel">
                 </div>
 
                 <div class="pokemon-list">
-                    <ul class="row justify-content-center p-0" data-bind="foreach: lazyLoad($element, PokedexHelper.filteredList)"
+                    <ul class="row justify-content-center p-0" data-bind="foreach: lazyLoad($element, PokedexHelper.filteredList, { reset: modalUtils.observableState.pokedexModalObservable })"
                         style="max-width: 100%; padding:0; margin:0;">
                         <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry"
                                 data-bind="style:{background: PokedexHelper.getBackgroundColors($data.name)}">

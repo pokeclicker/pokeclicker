@@ -1,3 +1,5 @@
+import DayCyclePart from './dayCycle/DayCyclePart';
+
 export const SECOND = 1000;
 export const MINUTE = SECOND * 60;
 export const HOUR = MINUTE * 60;
@@ -162,6 +164,8 @@ export const BerryColor = [
     '#7AC74C', // Green
     '#F7D02C', // Yellow
     '#6390F0', // Blue
+    '#B1CBDC', // Silver placeholder
+    '#FFE48E', // Gold placeholder
     '#B7B7CE', // Hinted
     '#1C1C1C', // Locked
 ];
@@ -358,7 +362,18 @@ export enum Currency {
     diamond,
     farmPoint,
     battlePoint,
+    contestToken,
 }
+
+export const LuxuryBallCurrencyRate: Record<Currency, number> = {
+    [Currency.money]: 300000,
+    [Currency.questPoint]: 900,
+    [Currency.dungeonToken]: 15000,
+    [Currency.diamond]: 15,
+    [Currency.farmPoint]: 900,
+    [Currency.battlePoint]: 150,
+    [Currency.contestToken]: 900,
+};
 
 export enum TypeEffectiveness {
     Immune,
@@ -384,6 +399,23 @@ export function humanifyString(str: string): string {
 
 export function camelCaseToString(str: string): string {
     return str.replace(/[\s_-]?([A-Z])/g, ' $1').replace(/\b\w/g, (w) => (w.replace(/\w/, (c) => c.toUpperCase()))).trim();
+}
+
+export function pluralizeString(str: string, amt: number): string {
+    if (amt <= 1) {
+        return str;
+    }
+
+    switch (true) {
+        case /s$/.test(str):
+            return str;
+        case /y$/.test(str):
+            return str.replace(/y$/, 'ies');
+        case /ch$/.test(str):
+            return `${str}es`;
+        default:
+            return `${str}s`;
+    }
 }
 
 export function formatDate(date: Date): string {
@@ -582,7 +614,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.sinnoh]: new Set([218, 219, 220, 223, 230, 'Pastoria City', 'Lake Verity', 'Lake Valor', 'Sendoff Spring']),
         [Region.unova]: new Set([17, 18, 21, 24, 'Undella Town', 'Humilau City']),
         [Region.kalos]: new Set([8, 23, 'Coumarine City', 'Couriway Town', 'Sea Spirit\'s Den']),
-        [Region.alola]: new Set([15, 19, 20, 'Seafolk Village', 'Brooklet Hill', 'Mina\'s Houseboat', 'Lake of the Sunne and Moone']),
+        [Region.alola]: new Set([15, 19, 20, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 'Hoppy Town', 'Friend League', 'Quick League', 'Heavy League', 'Great League', 'Fast League', 'Luxury League', 'Heal League', 'Ultra League', 'Elite Four League', 'Master League', 'Magikarp\'s Eye', 'Seafolk Village', 'Brooklet Hill', 'Mina\'s Houseboat', 'Lake of the Sunne and Moone']),
         [Region.galar]: new Set(['Hulbury', 'Roaring-Sea Caves', 5, 6, 8, 9, 16, 21, 27, 29, 36, 37, 41, 42, 43, 44, 51, 53]),
     },
 
@@ -837,8 +869,17 @@ export enum UltraBeastType {
 export enum PokeBlockColor {
     Black,
     Red,
+    Blue,
+    Pink,
+    Green,
+    Yellow,
     Gold,
     Purple,
+    Indigo,
+    Brown,
+    LiteBlue,
+    Olive,
+    Flaxen,
     Gray,
     White,
 }
@@ -870,6 +911,7 @@ export enum BulletinBoards {
     Sinnoh,
     Kalos,
     Alola,
+    Hoppy,
     Galar,
     Armor,
     Crown,
@@ -1383,6 +1425,7 @@ export const TemporaryBattles = [
     'Biker Goon 2',
     'Biker Goon 3',
     'Cue Ball Paxton',
+    'Bill\'s Grandpa',
     'Blue 6',
     'Silver 1',
     'Silver 2',
@@ -1393,6 +1436,7 @@ export const TemporaryBattles = [
     'Suicune 1',
     'Eusine',
     'Suicune 2',
+    'Red Gyarados',
     'Suicune 3',
     'Suicune 4',
     'Suicune 5',
@@ -1410,6 +1454,12 @@ export const TemporaryBattles = [
     'Kecleon 3',
     'May 5',
     'Wally 2',
+    'Clown Jessie & James',
+    'Butler 1',
+    'Butler 2',
+    'Meta Groudon',
+    'Latios',
+    'Latias',
     'Sevii Rocket Grunt 1',
     'Sevii Rocket Grunt 2',
     'Sevii Rocket Grunt 3',
@@ -1431,6 +1481,15 @@ export const TemporaryBattles = [
     'Barry 5',
     'Barry 6',
     'Barry 7',
+    'Manaphy Go-Rock MGrunt 1',
+    'Manaphy Go-Rock MGrunt 2',
+    'Manaphy Go-Rock MGrunt 3',
+    'Manaphy Go-Rock MGrunt 4',
+    'Manaphy Go-Rock FGrunt 1',
+    'Manaphy Go-Rock FGrunt 2',
+    'Manaphy Go-Rock Commander',
+    'Manaphy Go-Rock Pincher',
+    'Manaphy Egg Protectors',
     'Zero',
     'Hugh 1',
     'Hugh 2',
@@ -1478,6 +1537,7 @@ export const TemporaryBattles = [
     'Calem 2',
     'Calem 3',
     'Calem 4',
+    'Hex Maniac Aster',
     'Sycamore 2',
     'Shauna 2',
     'Tierno 2',
@@ -1495,6 +1555,10 @@ export const TemporaryBattles = [
     'Ash Ketchum Kalos',
     'Ash Ketchum Pinkan',
     'Calem 6',
+    'Marquis Grant',
+    'Grand Duchess Diantha',
+    'Wild Houndour Horde',
+    'Wild Electrike Horde',
     'Hau 1',
     'Hau 2',
     'Hau 3',
@@ -1747,11 +1811,12 @@ export enum BattlePokemonGender {
 }
 
 // Pokemon Statistics
-export enum PokemonStatiticsType {
+export enum PokemonStatisticsType {
     Captured = 'Captured',
     Defeated = 'Defeated',
     Encountered = 'Encountered',
     Hatched = 'Hatched',
+    Seen = 'Seen',
 }
 
 // Alcremie
@@ -1774,7 +1839,7 @@ export enum AlcremieSpins {
     nightCounterclockwiseBelow5,
     dayClockwiseAbove5,
     dayCounterclockwiseAbove5,
-    at7Above10,
+    at5Above10,
 }
 
 export enum ExtraAchievementCategories {
@@ -1782,3 +1847,9 @@ export enum ExtraAchievementCategories {
     sevii,
     magikarpJump,
 }
+export const DayCycleStartHours: Record<DayCyclePart, number> = {
+    [DayCyclePart.Dawn]: 5,
+    [DayCyclePart.Day]: 6,
+    [DayCyclePart.Dusk]: 17,
+    [DayCyclePart.Night]: 18,
+};

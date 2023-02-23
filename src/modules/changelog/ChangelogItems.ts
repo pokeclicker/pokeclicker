@@ -10,6 +10,87 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.10.9
+    new ChangelogUpdate('v0.10.9', new Date(2023, 0, 28)),
+    new Changelog(changelogType.NEW, 'New Megas'),
+    new Changelog(changelogType.NEW, 'New Quest Lines'),
+    new Changelog(changelogType.NEW, 'New catch option for contagious Pokémon'),
+    new Changelog(changelogType.NEW, 'Redeemable code to refund all Vitamins: REFUND-VITAMINS (one time use)'),
+    new Changelog(changelogType.CHANGE, 'Adjusted Luxury Ball, now awards random currencies'),
+    new Changelog(changelogType.CHANGE, 'Adjusted wandering Pokémon on the Farm'),
+    new Changelog(changelogType.CHANGE, 'Adjusted some fossil sizes in Underground'),
+    new Changelog(changelogType.CHANGE, 'Hatchery search no longer uses Regex by default'),
+    new Changelog(changelogType.CHANGE, 'Adjusted how locked evolutions are shown in evolution item menu'),
+    new Changelog(changelogType.CHANGE, 'Multiple tiers of flash in Dungeons'),
+    new Changelog(changelogType.CHANGE, 'Dawn is now during 5am-6am'),
+    new Changelog(changelogType.CHANGE, 'Roamer NPCs now reveal the Pokémon in the Pokédex'),
+    new Changelog(changelogType.CHANGE, 'Totem Marowak can now drop Thick Club'),
+    new Changelog(changelogType.CHANGE, 'Misc text changes'),
+    new Changelog(changelogType.CHANGE, 'Misc image changes'),
+    new Changelog(changelogType.CHANGE, 'Misc UI changes'),
+    new Changelog(changelogType.FIXED, 'No more Mega Stones in berry trades'),
+    new Changelog(changelogType.FIXED, 'Farm aura displays'),
+    new Changelog(changelogType.FIXED, 'Underground buried item locations'),
+    new Changelog(changelogType.FIXED, 'Fixed subregion for Altar of the Sunne and Moone'),
+    new Changelog(changelogType.FIXED, 'Real evolution challenge, using stones on Pokémon in the Hatchery'),
+    new Changelog(changelogType.FIXED, 'Evolution item caught indication including future regions'),
+    // v0.10.8
+    new ChangelogUpdate('v0.10.8', new Date(2023, 0, 15)),
+    new Changelog(changelogType.NEW, 'New Mega'),
+    new Changelog(changelogType.NEW, 'New Held Item'),
+    new Changelog(changelogType.CHANGE, 'Misc text changes'),
+    new Changelog(changelogType.CHANGE, 'Misc image changes'),
+    new Changelog(changelogType.FIXED, 'Fixed scrollbar for vitamin modal'),
+    new Changelog(changelogType.FIXED, 'Fixed shops'),
+    new Changelog(changelogType.FIXED, 'Fixed Maelstrom showing up at the wrong time'),
+
+    // v0.10.7
+    new ChangelogUpdate('v0.10.7', new Date(2023, 0, 14)),
+    new Changelog(changelogType.NEW, 'New Megas'),
+    new Changelog(changelogType.NEW, 'New Quest Lines'),
+    new Changelog(changelogType.NEW, 'New Held Items'),
+    new Changelog(changelogType.CHANGE, 'Improved Vitamin UI'),
+    new Changelog(changelogType.CHANGE, 'Can now open multiple Dream Orbs at a time'),
+    new Changelog(changelogType.CHANGE, 'Oak Items now have 5 loadouts'),
+    new Changelog(changelogType.CHANGE, 'Misc text changes'),
+    new Changelog(changelogType.CHANGE, 'Misc image changes'),
+    new Changelog(changelogType.FIXED, 'Misc Hatchery fixes'),
+
+    // v0.10.6
+    new ChangelogUpdate('v0.10.6', new Date(2023, 0, 1)),
+    new Changelog(changelogType.NEW, 'Added new Aura to the Farm (Repel)'),
+    new Changelog(changelogType.CHANGE, 'Misc text changes'),
+    new Changelog(changelogType.CHANGE, 'Misc UI changes'),
+    new Changelog(changelogType.CHANGE, 'Misc image changes'),
+    new Changelog(changelogType.FIXED, 'Misc fixes for Quests'),
+    new Changelog(changelogType.FIXED, 'Fixed some reward Pokémon'),
+    new Changelog(changelogType.FIXED, 'Misc fixes for Quests'),
+    new Changelog(changelogType.FIXED, 'Misc Hatchery fixes'),
+
+    // v0.10.5
+    new ChangelogUpdate('v0.10.5', new Date(2022, 11, 31)),
+    new Changelog(changelogType.NEW, 'Added Magikarp Jump Subregion'),
+    new Changelog(changelogType.NEW, 'Added new Vitamins'),
+    new Changelog(changelogType.NEW, 'Added more Mega Evolutions'),
+    new Changelog(changelogType.NEW, 'Added PokéRus indicator to shops and Safari Zone'),
+    new Changelog(changelogType.NEW, 'Added more Held Items'),
+    new Changelog(changelogType.NEW, 'Mapcolor for missing PokéRus Resistant'),
+    new Changelog(changelogType.NEW, 'Added a mute button'),
+    new Changelog(changelogType.NEW, 'Can now change default file name of saves'),
+    new Changelog(changelogType.CHANGE, 'Adjusted Proteins'),
+    new Changelog(changelogType.CHANGE, 'Buffed shiny chance for Safari Zone'),
+    new Changelog(changelogType.CHANGE, 'Changed evoluion items layout'),
+    new Changelog(changelogType.CHANGE, 'More than six Pokémon can now hold held items at a time'),
+    new Changelog(changelogType.CHANGE, 'Adjusted some Mega Evolution requirements'),
+    new Changelog(changelogType.CHANGE, 'Mimics now give more EVs'),
+    new Changelog(changelogType.CHANGE, 'Changed Battle Café times to match the rest of the game'),
+    new Changelog(changelogType.CHANGE, 'Misc text changes'),
+    new Changelog(changelogType.CHANGE, 'Misc UI changes'),
+    new Changelog(changelogType.CHANGE, 'Misc image changes'),
+    new Changelog(changelogType.FIXED, 'Reduce CPU usage when game is minimized'),
+    new Changelog(changelogType.FIXED, 'Misc fixes for Suicune Quest'),
+    new Changelog(changelogType.FIXED, 'Attack Achievements appearing again on reload'),
+
     // v0.10.4
     new ChangelogUpdate('v0.10.4', new Date(2022, 10, 22)),
     new Changelog(changelogType.CHANGE, 'Shop Magikarp no longer awards EVs'),
@@ -64,7 +145,7 @@ const ChangelogItems = [
     new Changelog(changelogType.FIXED, 'Some people not being able to create a new save'),
 
     // v0.10.0
-    new ChangelogUpdate('v0.10.0 - Galar', new Date(2022, 9, 22)),
+    new ChangelogUpdate('v0.10.0', new Date(2022, 9, 22), 'Galar'),
     new Changelog(changelogType.NEW, 'The Galar region is now available'),
     new Changelog(changelogType.NEW, 'Farm Point hatchery helper added'),
     new Changelog(changelogType.NEW, 'More questlines'),
@@ -347,7 +428,7 @@ const ChangelogItems = [
     new Changelog(changelogType.FIXED, 'Dungeon showing as incomplete if locked Pokémon not obtained yet'),
 
     // v0.9.0
-    new ChangelogUpdate('v0.9.0 - Alola', new Date(2022, 3, 13)),
+    new ChangelogUpdate('v0.9.0', new Date(2022, 3, 13), 'Alola'),
     new Changelog(changelogType.NEW, 'The Alola region is now available'),
     new Changelog(changelogType.NEW, 'More hotkeys'),
     new Changelog(changelogType.NEW, 'Customizable hotkeys'),
@@ -608,13 +689,13 @@ const ChangelogItems = [
     new Changelog(changelogType.FIXED, 'Added some missing/unobtainable Kalos Pokémon'),
 
     // v0.8.0
-    new ChangelogUpdate('v0.8.0 - Kalos', new Date(2021, 3, 4)),
+    new ChangelogUpdate('v0.8.0', new Date(2021, 3, 4), 'Kalos'),
     new Changelog(changelogType.NEW, 'The Kalos region is now available!\n<i>Some trainer sprites will be missing</i>'),
     new Changelog(changelogType.FIXED, 'Fixed missing Battle Frontier images'),
     new Changelog(changelogType.FIXED, 'Attempt to fix svg image on map for older Safari versions'),
 
     // v0.7.9
-    new ChangelogUpdate('v0.7.9 - Patches', new Date(2021, 2, 3)),
+    new ChangelogUpdate('v0.7.9', new Date(2021, 2, 3)),
     new Changelog(changelogType.FIXED, 'Attempting to fix some lag, please report on Discord/Github if you are still having major lag compared with v0.7.7, there may be a few patches pushed out for testing'),
 
     // v0.7.8
@@ -650,13 +731,13 @@ const ChangelogItems = [
     new Changelog(changelogType.FIXED, 'Saved game not importing if settings are not set'),
 
     // v0.7.5
-    new ChangelogUpdate('v0.7.5 - Challenges, Trainers and Saves', new Date(2021, 0, 29)),
+    new ChangelogUpdate('v0.7.5', new Date(2021, 0, 29)),
     new Changelog(changelogType.FIXED, 'Fix proteins not increasing on usage'),
     new Changelog(changelogType.FIXED, 'Some trainer images not loading'),
     new Changelog(changelogType.FIXED, 'Dynamic Pokémon disappearing  before leaving screen'),
 
     // v0.7.4
-    new ChangelogUpdate('v0.7.4 - Challenges, Trainers and Saves', new Date(2021, 0, 29)),
+    new ChangelogUpdate('v0.7.4', new Date(2021, 0, 29), 'Challenges, Trainers and Saves'),
     new Changelog(changelogType.NEW, 'Multiple save file support'),
     new Changelog(changelogType.NEW, 'Challenge modes'),
     new Changelog(changelogType.NEW, 'Trainers added to Kanto Dungeons'),
@@ -674,7 +755,7 @@ const ChangelogItems = [
     new Changelog(changelogType.FIXED, 'Fixed quick catch glitch'),
 
     // v0.7.3
-    new ChangelogUpdate('v0.7.3 - Underground', new Date(2021, 0, 18)),
+    new ChangelogUpdate('v0.7.3', new Date(2021, 0, 18), 'Underground'),
     new Changelog(changelogType.NEW, 'Underground revamped'),
     new Changelog(changelogType.CHANGE, 'More Pokémon held items added'),
     new Changelog(changelogType.CHANGE, 'Add tooltips to battle item values'),
@@ -702,7 +783,7 @@ const ChangelogItems = [
     new Changelog(changelogType.FIXED, 'Quest changing when traveling to a new region'),
 
     // v0.7.0
-    new ChangelogUpdate('v0.7.0 - Unova', new Date(2020, 11, 23)),
+    new ChangelogUpdate('v0.7.0', new Date(2020, 11, 23), 'Unova'),
     new Changelog(changelogType.NEW, 'The Unova region is now available!'),
     new Changelog(changelogType.NEW, 'Added notification for when Berry about to wither'),
     new Changelog(changelogType.CHANGE, 'Minor text fixes'),
@@ -806,7 +887,7 @@ const ChangelogItems = [
     new Changelog(changelogType.FIXED, 'Evolution Stones not working'),
 
     // v0.6.0
-    new ChangelogUpdate('v0.6.0 - Farming', new Date(2020, 10, 13)),
+    new ChangelogUpdate('v0.6.0', new Date(2020, 10, 13), 'Farming'),
     new Changelog(changelogType.NEW, 'Complete Farm overhaul'),
     new Changelog(changelogType.NEW, 'Hotkeys added for oak items modal (O to open, number keys to toggle items)'),
     new Changelog(changelogType.NEW, 'Hotkeys added for Pokéball selector modal (P + number to open, number keys to toggle items)'),
@@ -980,7 +1061,7 @@ const ChangelogItems = [
     new Changelog(changelogType.FIXED, 'Shaymin (sky) form types corrected'),
 
     // v0.5.0 - Sinnoh
-    new ChangelogUpdate('v0.5.0 - Sinnoh', new Date(2020, 7, 28)),
+    new ChangelogUpdate('v0.5.0', new Date(2020, 7, 28), 'Sinnoh'),
     new Changelog(changelogType.NEW, 'The Sinnoh region is now available'),
     new Changelog(changelogType.NEW, 'New evolution stones'),
     new Changelog(changelogType.NEW, 'Dungeon based evolutions'),
@@ -996,7 +1077,7 @@ const ChangelogItems = [
     new Changelog(changelogType.REMOVED, 'Removed hold evolution items from the Underground'),
 
     // v0.4.20
-    new ChangelogUpdate('v0.4.20 - Battle Frontier', new Date(2020, 7, 18)),
+    new ChangelogUpdate('v0.4.20', new Date(2020, 7, 18), 'Battle Frontier'),
     new Changelog(changelogType.NEW, 'Added the Battle Frontier in the Hoenn region'),
     new Changelog(changelogType.CHANGE, 'Buffed Dungeon Token gain in higher regions'),
     new Changelog(changelogType.CHANGE, 'Updated the order Routes, Dungeons and Gyms need to be completed in the Johto region'),
@@ -1011,7 +1092,7 @@ const ChangelogItems = [
     new Changelog(changelogType.CHANGE, 'Sounds will now play if enabled even if the notification is disabled'),
 
     // v0.4.18
-    new ChangelogUpdate('v0.4.18 - Underground', new Date(2020, 7, 10)),
+    new ChangelogUpdate('v0.4.18', new Date(2020, 7, 10), 'Underground'),
     new Changelog(changelogType.NEW, 'Added Prospect ability to the Underground to see which types of items are in the current layer'),
     new Changelog(changelogType.NEW, 'Added Bomb ability to the Underground which will mine random tiles for you'),
     new Changelog(changelogType.NEW, 'Added ability to Skip layers in the Underground'),
@@ -1106,7 +1187,7 @@ const ChangelogItems = [
     new Changelog(changelogType.FIXED, 'Stone evolutions will now only show the Pokéball if all possible evolutions have been caught'),
 
     // v0.4.10
-    new ChangelogUpdate('v0.4.10 - Minor update', new Date(2020, 6, 15)),
+    new ChangelogUpdate('v0.4.10', new Date(2020, 6, 15)),
     new Changelog(changelogType.NEW, 'Added preload progress indicator'),
     new Changelog(changelogType.NEW, 'Game will still load if not all the images preload correctly'),
 
@@ -1134,7 +1215,7 @@ const ChangelogItems = [
     new Changelog(changelogType.FIXED, 'Reduce lag when hatching Pokémon'),
 
     // v0.4.7
-    new ChangelogUpdate('v0.4.7 - Layout', new Date(2020, 6, 9)),
+    new ChangelogUpdate('v0.4.7', new Date(2020, 6, 9), 'Layout'),
     new Changelog(changelogType.NEW, 'Added option to sort Pokémon list by base attack'),
     new Changelog(changelogType.CHANGE, 'Added information and confirmation check before traveling to next available region'),
     new Changelog(changelogType.CHANGE, 'Updated the Oak Items layout'),
@@ -1145,7 +1226,7 @@ const ChangelogItems = [
     new Changelog(changelogType.FIXED, 'Mt. Chimney dungeon is now more powerful'),
 
     // v0.4.6
-    new ChangelogUpdate('v0.4.6 - Bug fixes', new Date(2020, 6, 7)),
+    new ChangelogUpdate('v0.4.6', new Date(2020, 6, 7)),
     new Changelog(changelogType.NEW, 'Old save can be backed up when the game updates incase anything goes wrong<br/><i>You can disable auto download in the settings</i>'),
     new Changelog(changelogType.NEW, 'Add events modal'),
     new Changelog(changelogType.CHANGE, 'Safari now uses a Safari Ball'),
@@ -1155,7 +1236,7 @@ const ChangelogItems = [
     new Changelog(changelogType.FIXED, 'Fix Eeveelutions'),
 
     // v0.4.5
-    new ChangelogUpdate('v0.4.5 - Special events', new Date(2020, 6, 5)),
+    new ChangelogUpdate('v0.4.5', new Date(2020, 6, 5), 'Special events'),
     new Changelog(changelogType.EVENT, 'Flying Pikachu Event'),
     new Changelog(changelogType.NEW, 'Special events can now appear in game'),
     new Changelog(changelogType.CHANGE, 'Modified the look of the dock'),
@@ -1165,7 +1246,7 @@ const ChangelogItems = [
     new Changelog(changelogType.FIXED, 'Hopefully fixed some values becoming NaN'),
 
     // v0.4.4
-    new ChangelogUpdate('v0.4.4 - Statistics 2.0', new Date(2020, 6, 4)),
+    new ChangelogUpdate('v0.4.4', new Date(2020, 6, 4)),
     new Changelog(changelogType.NEW, 'Add some new game codes'),
     new Changelog(changelogType.NEW, 'Statistics can now be viewed from the Start Menu'),
     new Changelog(changelogType.NEW, 'Pokémon statistics can be viewed by clicking a Pokémon in the Pokédex'),
@@ -1190,14 +1271,14 @@ const ChangelogItems = [
     new Changelog(changelogType.FIXED, 'Fixed some Key items not being given when supposed to'),
 
     // v0.4.1
-    new ChangelogUpdate('v0.4.1 - More fixes', new Date(2020, 6, 3)),
+    new ChangelogUpdate('v0.4.1', new Date(2020, 6, 3)),
     new Changelog(changelogType.NEW, 'More items added to underground'),
     new Changelog(changelogType.CHANGE, 'All Hoenn Pokémon should be obtainable now'),
     new Changelog(changelogType.FIXED, 'Pokédex filtering should be working again'),
     new Changelog(changelogType.FIXED, 'Some items showing _ in their name in notifications'),
 
     // v0.4.0
-    new ChangelogUpdate('v0.4.0 - Statistics update', new Date(2020, 6, 2)),
+    new ChangelogUpdate('v0.4.0', new Date(2020, 6, 2), 'Statistics update'),
     new Changelog(changelogType.NEW, 'Current save data should be compatible with future versions!'),
     new Changelog(changelogType.NEW, 'More statistics have been added'),
     new Changelog(changelogType.CHANGE, 'Updated the way statistics are stored'),
@@ -1206,7 +1287,7 @@ const ChangelogItems = [
     new Changelog(changelogType.FIXED, 'Fix some missing images'),
 
     // v0.3.1
-    new ChangelogUpdate('v0.3.1 - Bug catcher', new Date(2020, 6, 1)),
+    new ChangelogUpdate('v0.3.1', new Date(2020, 6, 1), 'Bug catcher'),
     new Changelog(changelogType.CHANGE, 'Eevee will now evolve into Espeon or Umbreon depending on the time of day (when using Time stone)'),
     new Changelog(changelogType.FIXED, 'Can no longer evolve Magmar and Electabuzz before you are allowed'),
     new Changelog(changelogType.FIXED, 'Fix breeding steps gained for newer regions'),
@@ -1214,7 +1295,7 @@ const ChangelogItems = [
     new Changelog(changelogType.FIXED, 'Fix route rewards for newer regions'),
 
     // v0.3.0
-    new ChangelogUpdate('v0.3.0 - Hoenn Update', new Date(2020, 5, 30)),
+    new ChangelogUpdate('v0.3.0', new Date(2020, 5, 30), 'Hoenn'),
     new Changelog(changelogType.NEW, 'Add initial Hoenn region'),
     new Changelog(changelogType.CHANGE, 'Shiny Pokémon now increase click damage at a 50% rate compared to normal Pokémon'),
     new Changelog(changelogType.CHANGE, 'Allow better control of which type of ball to use when capturing a Pokémon'),
@@ -1225,12 +1306,12 @@ const ChangelogItems = [
     new Changelog(changelogType.FIXED, 'Other berries will now be tasked in Quests'),
 
     // v0.2.0
-    new ChangelogUpdate('v0.2.0 - Redeemable codes', new Date(2020, 0, 12)),
+    new ChangelogUpdate('v0.2.0', new Date(2020, 0, 12), 'Redeemable codes'),
     new Changelog(changelogType.NEW, 'Add redeemable codes to get a quick boost. You can enter them under the Save tab'),
     new Changelog(changelogType.FIXED, 'Gyms no longer reset 1 second in'),
 
     // v0.1.0
-    new ChangelogUpdate('v0.1.0 - Farming refactor', new Date(2020, 0, 12)),
+    new ChangelogUpdate('v0.1.0', new Date(2020, 0, 12), 'Farming refactor'),
     new Changelog(changelogType.CHANGE, 'Farming plots are a bit more expensive'),
     new Changelog(changelogType.CHANGE, 'Wailmer pail unlocks at 3 Cheri berries instead of 5'),
     new Changelog(changelogType.FIXED, 'Tooltips no longer overstay their welcome on the Farm'),

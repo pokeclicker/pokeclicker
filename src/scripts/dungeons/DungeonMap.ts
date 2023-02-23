@@ -8,7 +8,7 @@ class DungeonMap {
 
     constructor(
         size: number,
-        public flash = false
+        private flash?: DungeonFlash
     ) {
         if (size <= GameConstants.MAX_DUNGEON_SIZE) {
             this.floorSizes = [size];
@@ -36,10 +36,10 @@ class DungeonMap {
             entranceTile.isVisible = true;
             entranceTile.isVisited = true;
         });
+
         this.currentTile().hasPlayer = true;
-        if (this.flash) {
-            this.nearbyTiles(this.playerPosition()).forEach(t => t.isVisible = true);
-        }
+        this.flash?.apply(this.board(), this.playerPosition());
+
         this.totalFights = ko.observable(this.board().flat().flat().filter((t) => t.type() == GameConstants.DungeonTile.enemy).length);
         this.totalChests = ko.observable(this.board().flat().flat().filter((t) => t.type() == GameConstants.DungeonTile.chest).length);
     }
@@ -70,9 +70,8 @@ class DungeonMap {
         if (this.hasAccessToTile(point)) {
             this.currentTile().hasPlayer = false;
             this.playerPosition(point);
-            if (this.flash) {
-                this.nearbyTiles(point).forEach(t => t.isVisible = true);
-            }
+            this.flash?.apply(this.board(), this.playerPosition());
+
             this.currentTile().hasPlayer = true;
             this.currentTile().isVisible = true;
             this.currentTile().isVisited = true;

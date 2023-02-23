@@ -7,11 +7,12 @@ import InEnvironmentRequirement from '../../requirements/InEnvironmentRequiremen
 import InGymRequirement from '../../requirements/InGymRequirement';
 import InRegionRequirement from '../../requirements/InRegionRequirement';
 import QuestLineRequirement from '../../requirements/QuestLineRequirement';
-import TimeRequirement from '../../requirements/TimeRequirement';
+import DayCyclePartRequirement from '../../requirements/DayCyclePartRequirement';
 import WeatherRequirement from '../../requirements/WeatherRequirement';
 import WeatherType from '../../weather/WeatherType';
 import MegaEvolveRequirement from '../../requirements/MegaEvolveRequirement';
 import { EvoData, restrict } from './Base';
+import DayCyclePart from '../../dayCycle/DayCyclePart';
 
 export type EvoFn = (...args: unknown[]) => EvoData;
 
@@ -88,22 +89,21 @@ export const weatherRestrict = <T extends EvoFn>(evo: T) => (
     new WeatherRequirement(weather),
 );
 
-export const timeRestrict = <T extends EvoFn>(evo: T) => (
-    startHour: number,
-    endHour: number,
+export const dayCyclePartRestrict = <T extends EvoFn>(evo: T) => (
+    dayCycleParts: DayCyclePart[],
     ...rest: Parameters<T>
 ) => restrict(
     evo(...rest),
-    new TimeRequirement(startHour, endHour),
+    new DayCyclePartRequirement(dayCycleParts),
 );
 
 export const dayRestrict = <T extends EvoFn>(evo: T) => (
     ...rest: Parameters<T>
-) => timeRestrict(evo)(6, 18, ...rest);
+) => dayCyclePartRestrict(evo)([DayCyclePart.Day, DayCyclePart.Dusk], ...rest);
 
 export const nightRestrict = <T extends EvoFn>(evo: T) => (
     ...rest: Parameters<T>
-) => timeRestrict(evo)(18, 6, ...rest);
+) => dayCyclePartRestrict(evo)([DayCyclePart.Night, DayCyclePart.Dawn], ...rest);
 
 export const megaEvolveRestrict = <T extends EvoFn>(evo: T) => (
     ...rest: Parameters<T>

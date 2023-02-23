@@ -44,7 +44,7 @@ class DungeonRunner {
         let dungeonSize = GameConstants.BASE_DUNGEON_SIZE + (dungeon.optionalParameters.dungeonRegionalDifficulty ?? player.region);
         // Decrease dungeon size by 1 for every 10, 100, 1000 etc completes
         dungeonSize -= Math.max(0, App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]().toString().length - 1);
-        const flash = App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]() >= 200;
+        const flash = DungeonRunner.getFlash(DungeonRunner.dungeon.name);
         // Dungeon size minimum of MIN_DUNGEON_SIZE
         DungeonRunner.map = new DungeonMap(Math.max(GameConstants.MIN_DUNGEON_SIZE, dungeonSize), flash);
 
@@ -188,16 +188,14 @@ class DungeonRunner {
     }
 
     public static lootNotification(input, amount, weight, image) {
-        const multiple = (amount < 2) ? '' : 's';
-        let message = `Found ${amount} × <img src="${image}" height="24px"/> ${GameConstants.camelCaseToString(GameConstants.humanifyString(input))}${multiple} in a dungeon chest.`;
+        let message = `Found ${amount} × <img src="${image}" height="24px"/> ${GameConstants.pluralizeString(GameConstants.camelCaseToString(GameConstants.humanifyString(input)), amount)} in a dungeon chest.`;
         let type = NotificationConstants.NotificationOption.success;
         let setting = NotificationConstants.NotificationSetting.Dungeons.common_dungeon_item_found;
 
         if (typeof BerryType[input] == 'number') {
-            const berryPlural = (amount === 1) ? 'Berry' : 'Berries';
-            message = `Found ${Math.floor(amount)} × <img src="${image}" height="24px"/> ${GameConstants.humanifyString(input)} ${berryPlural} in a dungeon chest.`;
+            message = `Found ${Math.floor(amount)} × <img src="${image}" height="24px"/> ${GameConstants.humanifyString(input)} ${GameConstants.pluralizeString('Berry', amount)} in a dungeon chest.`;
         } if (ItemList[input] instanceof PokeballItem) {
-            message = `Found ${amount} × <img src="${image}" height ="24px"/> ${ItemList[input].displayName}${multiple} in a dungeon chest.`;
+            message = `Found ${amount} × <img src="${image}" height ="24px"/> ${GameConstants.pluralizeString(ItemList[input].displayName, amount)} in a dungeon chest.`;
         } else if (PokemonHelper.getPokemonByName(input).name != 'MissingNo.') {
             message = `Encountered ${GameHelper.anOrA(input)} <img src="${image}" height="40px"/> ${GameConstants.humanifyString(input)} in a dungeon chest.`;
         }
@@ -314,5 +312,19 @@ class DungeonRunner {
 
     public static dungeonLevel(): number {
         return PokemonFactory.routeLevel(this.dungeon.difficultyRoute, player.region);
+    }
+
+    public static getFlash(dungeonName): DungeonFlash | undefined {
+        const clears = App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(dungeonName)]();
+
+        const config = [
+            { flash: DungeonFlash.tiers[0], clearsNeeded: 100 },
+            { flash: DungeonFlash.tiers[1], clearsNeeded: 250 },
+            { flash: DungeonFlash.tiers[2], clearsNeeded: 400 },
+        ].reverse();
+
+        // findIndex, so we can get next tier when light ball is implemented
+        const index = config.findIndex((tier) => tier.clearsNeeded <= clears);
+        return config[index]?.flash;
     }
 }

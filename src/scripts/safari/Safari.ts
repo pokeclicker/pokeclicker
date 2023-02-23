@@ -12,7 +12,9 @@ class Safari {
     private static origin;
     static inProgress: KnockoutObservable<boolean> = ko.observable(false);
     static inBattle: KnockoutObservable<boolean> = ko.observable(false);
-    static balls: KnockoutObservable<number> = ko.observable();
+    static balls: KnockoutObservable<number> = ko.observable().extend({ numeric: 0 });
+    static activeRegion: KnockoutObservable<GameConstants.Region> = ko.observable(GameConstants.Region.none);
+    static activeZone: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 0 });
 
     public static sizeX(): number {
         return Math.floor(document.querySelector('#safariModal .modal-dialog').scrollWidth / 32);
@@ -23,6 +25,7 @@ class Safari {
     }
 
     public static load() {
+        this.activeRegion(player.region);
         Safari.grid = [];
         Safari.pokemonGrid([]);
         Safari.playerXY.x = 0;
@@ -59,7 +62,6 @@ class Safari {
         Safari.addRandomBody(new GrassBody());
         Safari.addRandomBody(new GrassBody());
         Safari.addRandomBody(new GrassBody());
-
         Safari.show();
     }
 
@@ -119,10 +121,37 @@ class Safari {
         }
     }
 
+    public static safariReset() {
+        Notifier.confirm({
+            title: 'Safari Zone',
+            message: `You have an active Safari in ${GameConstants.Region[this.activeRegion()].charAt(0).toUpperCase() + GameConstants.Region[this.activeRegion()].slice(1)}.\nDo you want to quit that Safari and start a new one?`,
+            type: NotificationConstants.NotificationOption.warning,
+            confirm: 'Quit',
+        }).then(confirmed => {
+            if (confirmed) {
+                //Reload zone
+                Safari.inBattle(false);
+                Safari.inProgress(false);
+                SafariBattle.busy(false);
+                $('#safariBattleModal').modal('hide');
+                this.openModal();
+            }
+        });
+    }
+
     public static openModal() {
+        App.game.gameState = GameConstants.GameState.safari;
+        $('#safariModal').modal({backdrop: 'static', keyboard: false});
+    }
+
+    public static startSafari() {
         if (this.canAccess()) {
-            App.game.gameState = GameConstants.GameState.safari;
-            $('#safariModal').modal({backdrop: 'static', keyboard: false});
+            // Check if player has an active Safari Zone session
+            if (this.activeRegion() >= 0 && player.region != this.activeRegion()) {
+                this.safariReset();
+            } else {
+                this.openModal();
+            }
         } else {
             Notifier.notify({
                 message: 'You need the Safari Pass to access this location.\n<i>Visit the Gym in Fuschia City</i>',
@@ -152,6 +181,7 @@ class Safari {
 
             App.game.wallet.loseAmount(Safari.cost());
             Safari.load();
+            GameHelper.incrementObservable(App.game.statistics.safariTimesEntered, 1);
         }
     }
 
@@ -234,6 +264,7 @@ class Safari {
 
         if (Safari.canMove(newPos.x, newPos.y)) {
             const next = $(`#safari-${newPos.x}-${newPos.y}`).offset();
+            GameHelper.incrementObservable(App.game.statistics.safariStepsTaken, 1);
             const offset = {
                 top: `+=${directionOffset.y * 32}`,
                 left: `+=${directionOffset.x * 32}`,
@@ -375,14 +406,24 @@ class Safari {
     }
 
     static completed(shiny = false) {
-        return SafariPokemon.list.reduce((all,poke) => {
-            return all && App.game.party.alreadyCaughtPokemonByName(poke.name,shiny);
-        }, true);
+        // Check current region
+        if (SafariPokemonList.list[player.region]) {
+            // Check each zone
+            return SafariPokemonList.list[player.region]().every((list) => {
+                // Check each pokemon within this zone
+                return list.safariPokemon.every(poke => {
+                    return App.game.party.alreadyCaughtPokemonByName(poke.name, shiny);
+                });
+            });
+        }
+        return false;
     }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     $('#safariModal').on('hide.bs.modal', () => {
+        Safari.inBattle(false);
+        SafariBattle.busy(false);
         MapHelper.moveToTown('Fuchsia City');
     });
 });

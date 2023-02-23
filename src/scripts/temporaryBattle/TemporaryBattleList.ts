@@ -45,13 +45,13 @@ TemporaryBattleList['Blue 2'] = new TemporaryBattle(
 TemporaryBattleList['Blue 3'] = new TemporaryBattle(
     'Blue 3',
     [
-        new GymPokemon('Pidgeotto', 19998, 19),
-        new GymPokemon('Raticate', 19197, 16),
-        new GymPokemon('Kadabra', 19197, 18),
-        new GymPokemon('Charmeleon', 20797, 20, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Grass)),
-        new GymPokemon('Wartortle', 20797, 20, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Fire)),
-        new GymPokemon('Ivysaur', 20797, 20, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Water)),
-        new GymPokemon('Ivysaur', 20797, 20, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Special)),
+        new GymPokemon('Pidgeotto', 12998, 19),
+        new GymPokemon('Raticate', 11902, 16),
+        new GymPokemon('Kadabra', 12094, 18),
+        new GymPokemon('Charmeleon', 13437, 20, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Grass)),
+        new GymPokemon('Wartortle', 13437, 20, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Fire)),
+        new GymPokemon('Ivysaur', 13437, 20, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Water)),
+        new GymPokemon('Ivysaur', 13437, 20, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Special)),
     ],
     'Humph! At least you\'re raising your Pokémon!',
     [new RouteKillRequirement(10, GameConstants.Region.kanto, 6)],
@@ -170,7 +170,7 @@ TemporaryBattleList['Blue 5'] = new TemporaryBattle(
         displayName: 'Rival Blue',
         imageName: 'Blue2',
         firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonById(131);
+            App.game.party.gainPokemonByName('Lapras');
         },
     }
 );
@@ -222,6 +222,18 @@ TemporaryBattleList['Cue Ball Paxton'] = new TemporaryBattle(
         new TemporaryBattleRequirement('Biker Goon 2'),
         new TemporaryBattleRequirement('Biker Goon 3'),
     ]
+);
+TemporaryBattleList['Bill\'s Grandpa'] = new TemporaryBattle(
+    'Bill\'s Grandpa',
+    [
+        new GymPokemon('Vaporeon', 170000, 48),
+        new GymPokemon('Jolteon', 175000, 49),
+        new GymPokemon('Flareon', 180000, 50),
+    ],
+    'Hahaha, that was one of the best battles I\'ve ever had.',
+    [new QuestLineStepCompletedRequirement('Bill\'s Grandpa Treasure Hunt', 10)],
+    undefined,
+    {}
 );
 TemporaryBattleList['Blue 6'] = new TemporaryBattle(
     'Blue 6',
@@ -294,16 +306,13 @@ TemporaryBattleList.Sudowoodo = new TemporaryBattle(
     'Sudowoodo',
     [new GymPokemon('Sudowoodo', 540000, 20)],
     undefined,
-    [
-        new GymBadgeRequirement(BadgeEnums.Plain),
-        new RouteKillRequirement(10, GameConstants.Region.johto, 36),
-    ],
+    [new GymBadgeRequirement(BadgeEnums.Plain)],
     [new TemporaryBattleRequirement('Sudowoodo'), new ObtainedPokemonRequirement('Sudowoodo')],
     {
         isTrainerBattle: false,
         returnTown: 'Goldenrod City',
         hideTrainer: true,
-        visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.johto, 36),
+        visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.johto, 31),
     }
 );
 TemporaryBattleList['Silver 3'] = new TemporaryBattle(
@@ -414,11 +423,28 @@ TemporaryBattleList['Suicune 2'] = new TemporaryBattle(
         hideTrainer: true,
     }
 );
+TemporaryBattleList['Red Gyarados'] = new TemporaryBattle(
+    'Red Gyarados',
+    [new GymPokemon('Gyarados', 1100000, 30, undefined, true)],
+    undefined,
+    [
+        new QuestLineStartedRequirement('Team Rocket Again'),
+        new RouteKillRequirement(10, GameConstants.Region.johto, 43),
+    ],
+    undefined,
+    {
+        displayName: 'Red Gyarados',
+        returnTown: 'Mahogany Town',
+        isTrainerBattle: false,
+        hideTrainer: true,
+        visibleRequirement: new QuestLineStartedRequirement('Team Rocket Again'),
+    }
+);
 TemporaryBattleList['Suicune 3'] = new TemporaryBattle(
     'Suicune 3',
     [new GymPokemon('Suicune', 3269100, 40)],
     '<i>Suicune fled.</i>',
-    [new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion)],
+    [new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion), new QuestLineStepCompletedRequirement('Eusine\'s Chase', 4)],
     undefined,
     {
         displayName: 'Suicune',
@@ -575,7 +601,6 @@ TemporaryBattleList.Red = new TemporaryBattle(
                 setting: NotificationConstants.NotificationSetting.Items.dropped_item,
             });
         },
-        imageName: '../npcs/Red-masters',
     }
 );
 
@@ -748,6 +773,98 @@ TemporaryBattleList['Wally 2'] = new TemporaryBattle(
         imageName: 'Wally',
         rewardFunction: () =>
             Notifier.notify({message: 'Congratulations on beating Wally at his best! Come back to fight him again at any time.'}),
+    }
+);
+TemporaryBattleList['Clown Jessie & James'] = new TemporaryBattle(
+    'Clown Jessie & James',
+    [
+        new GymPokemon('Victreebel', 3006000, 40),
+        new GymPokemon('Weezing', 3006000, 50),
+        new GymPokemon('Seviper', 3006000, 50),
+        new GymPokemon('Dustox', 3006000, 50),
+        new GymPokemon('Meowth', 2000, 5),
+    ],
+    'We\'re blasting off again!!!!',
+    [new QuestLineStepCompletedRequirement('Wish Maker', 0)],
+    undefined,
+    {
+        displayName: 'Jessie & James',
+    }
+);
+TemporaryBattleList['Butler 1'] = new TemporaryBattle(
+    'Butler 1',
+    [
+        new GymPokemon('Kirlia', 3066000, 50),
+        new GymPokemon('Mightyena', 3066000, 50),
+        new GymPokemon('Dusclops', 3066000, 50),
+    ],
+    '<i>Butler managed to load Jirachi into a cage and escaped in his van. He is headed for the Jagged Pass!</i>',
+    [new QuestLineStepCompletedRequirement('Wish Maker', 5)],
+    undefined,
+    {
+        displayName: 'Butler',
+        imageName: '../npcs/Butler',
+    }
+);
+TemporaryBattleList['Butler 2'] = new TemporaryBattle(
+    'Butler 2',
+    [
+        new GymPokemon('Kirlia', 3066000, 50),
+        new GymPokemon('Mightyena', 3066000, 50),
+        new GymPokemon('Dusclops', 3066000, 50),
+        new GymPokemon('Salamence', 4166000, 80),
+    ],
+    '<i>Butler throws the switch on a machine, causing the earth to quake. A huge, ominous shape begins to rise from the ground!</i>',
+    [new QuestLineStepCompletedRequirement('Wish Maker', 6)],
+    undefined,
+    {
+        displayName: 'Butler',
+        imageName: '../npcs/Butler',
+    }
+);
+TemporaryBattleList['Meta Groudon'] = new TemporaryBattle(
+    'Meta Groudon',
+    [new GymPokemon('Meta Groudon', 13800000, 100)],
+    '<i>Meta Groudon lets out a guttural roar and melts back into the earth!</i>',
+    [new QuestLineStepCompletedRequirement('Wish Maker', 7)],
+    undefined,
+    {
+        displayName: 'Meta Groudon',
+        returnTown: 'Lavaridge Town',
+        imageName: '../pokemon/383.02',
+        hideTrainer: true,
+    }
+);
+TemporaryBattleList.Latias = new TemporaryBattle(
+    'Latias',
+    [new GymPokemon('Latias', 13800000, 100)],
+    '<i>Latias joins your party, and Latios flies away back to the mainland.</i>',
+    [new MultiRequirement([new QuestLineStepCompletedRequirement('The Eon Duo', 3), new CustomRequirement(ko.pureComputed(() => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Latios')]()), 1, undefined, GameConstants.AchievementOption.less)])],
+    undefined,
+    {
+        displayName: 'Latias',
+        firstTimeRewardFunction: () => {
+            App.game.party.gainPokemonByName('Latias');
+        },
+        returnTown: 'Southern Island',
+        imageName: '../pokemon/380',
+        hideTrainer: true,
+    }
+);
+TemporaryBattleList.Latios = new TemporaryBattle(
+    'Latios',
+    [new GymPokemon('Latios', 13800000, 100)],
+    '<i>Latios joins your party, and Latias flies away back to the mainland.</i>',
+    [new MultiRequirement([new QuestLineStepCompletedRequirement('The Eon Duo', 3), new CustomRequirement(ko.pureComputed(() => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Latias')]()), 1, undefined, GameConstants.AchievementOption.less)])],
+    undefined,
+    {
+        displayName: 'Latios',
+        firstTimeRewardFunction: () => {
+            App.game.party.gainPokemonByName('Latios');
+        },
+        returnTown: 'Southern Island',
+        imageName: '../pokemon/381',
+        hideTrainer: true,
     }
 );
 TemporaryBattleList['Sevii Rocket Grunt 1'] = new TemporaryBattle(
@@ -1070,6 +1187,152 @@ TemporaryBattleList['Barry 7'] = new TemporaryBattle(
             Notifier.notify({message: 'Congratulations on beating Barry at his best! Come back to fight him again at any time.'}),
     }
 );
+
+TemporaryBattleList['Manaphy Go-Rock MGrunt 1'] = new TemporaryBattle(
+    'Manaphy Go-Rock MGrunt 1',
+    [
+        new GymPokemon('Graveler', 2920000, 22),
+        new GymPokemon('Graveler', 2920000, 22),
+        new GymPokemon('Graveler', 2920000, 22),
+    ],
+    'Your teamwork is too good!',
+    [new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 2)],
+    undefined,
+    {
+        displayName: 'Go-Rock Squad Grunt',
+        imageName: 'Go-Rock Squad Grunt (male)',
+    }
+);
+
+TemporaryBattleList['Manaphy Go-Rock FGrunt 1'] = new TemporaryBattle(
+    'Manaphy Go-Rock FGrunt 1',
+    [
+        new GymPokemon('Rattata', 2200000, 22),
+        new GymPokemon('Rattata', 2200000, 22),
+        new GymPokemon('Rattata', 2200000, 22),
+        new GymPokemon('Rattata', 2200000, 22),
+    ],
+    'Your battling skills are solid...',
+    [new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 4)],
+    undefined,
+    {
+        displayName: 'Go-Rock Squad Grunt',
+        imageName: 'Go-Rock Squad Grunt (female)',
+    }
+);
+
+TemporaryBattleList['Manaphy Go-Rock MGrunt 2'] = new TemporaryBattle(
+    'Manaphy Go-Rock MGrunt 2',
+    [
+        new GymPokemon('Zubat', 2200000, 22),
+        new GymPokemon('Zubat', 2200000, 22),
+        new GymPokemon('Zubat', 2200000, 22),
+        new GymPokemon('Zubat', 2200000, 22),
+    ],
+    'Darn it! You better remember this!',
+    [new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 5)],
+    undefined,
+    {
+        displayName: 'Go-Rock Squad Grunt',
+        imageName: 'Go-Rock Squad Grunt (male)',
+    }
+);
+
+TemporaryBattleList['Manaphy Go-Rock MGrunt 3'] = new TemporaryBattle(
+    'Manaphy Go-Rock MGrunt 3',
+    [
+        new GymPokemon('Rattata', 2200000, 22),
+        new GymPokemon('Rattata', 2200000, 22),
+        new GymPokemon('Meowth', 4400000, 22),
+    ],
+    'The Go-Rock Squad\'s future looks bleak...',
+    [new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 5)],
+    undefined,
+    {
+        displayName: 'Go-Rock Squad Grunt',
+        imageName: 'Go-Rock Squad Grunt (male)',
+    }
+);
+
+TemporaryBattleList['Manaphy Go-Rock FGrunt 2'] = new TemporaryBattle(
+    'Manaphy Go-Rock FGrunt 2',
+    [new GymPokemon('Scyther', 8800000, 22)],
+    'Bleh to you!',
+    [new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 5)],
+    undefined,
+    {
+        displayName: 'Go-Rock Squad Grunt',
+        imageName: 'Go-Rock Squad Grunt (female)',
+    }
+);
+
+TemporaryBattleList['Manaphy Go-Rock MGrunt 4'] = new TemporaryBattle(
+    'Manaphy Go-Rock MGrunt 4',
+    [
+        new GymPokemon('Zubat', 2200000, 22),
+        new GymPokemon('Zubat', 2200000, 22),
+        new GymPokemon('Zubat', 2200000, 22),
+        new GymPokemon('Politoed', 2800000, 22),
+    ],
+    'Darn it! You better remember this! ...Wait, didn\'t I already say that...?',
+    [new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 8)],
+    undefined,
+    {
+        displayName: 'Go-Rock Squad Grunt',
+        imageName: 'Go-Rock Squad Grunt (male)',
+    }
+);
+
+TemporaryBattleList['Manaphy Go-Rock Commander'] = new TemporaryBattle(
+    'Manaphy Go-Rock Commander',
+    [
+        new GymPokemon('Scyther', 3200000, 25),
+        new GymPokemon('Scyther', 3200000, 25),
+        new GymPokemon('Venusaur', 3500000, 30),
+    ],
+    'Owowow! Okay, okay, I got it! You can have your stupid egg!',
+    [new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 9)],
+    undefined,
+    {
+        displayName: 'Go-Rock Squad Commander',
+        imageName: 'Go-Rock Squad Commander',
+    }
+);
+
+TemporaryBattleList['Manaphy Go-Rock Pincher'] = new TemporaryBattle(
+    'Manaphy Go-Rock Pincher',
+    [
+        new GymPokemon('Poochyena', 5500000, 40),
+        new GymPokemon('Carvanha', 5500000, 40),
+    ],
+    'Argh! With that Manaphy Egg, I thought even an ex-Go-Rock like me could live out the rest of my life in ease! That Happiny took the egg to the south-east, across the water. I wanted to pursue it, but Carvanha are not... comfortable to ride on.',
+    [new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 21)],
+    undefined,
+    {
+        displayName: 'Go-Rock Pokémon Pincher',
+        imageName: 'Go-Rock Squad Grunt (male)',
+    }
+);
+
+TemporaryBattleList['Manaphy Egg Protectors'] = new TemporaryBattle(
+    'Manaphy Egg Protectors',
+    [
+        new GymPokemon('Glameow', 3500000, 40),
+        new GymPokemon('Pichu', 3600000, 40),
+        new GymPokemon('Happiny', 5000000, 45),
+    ],
+    '<i>As you step over the defeated Pokémon, the Manaphy egg glows... and hatches!</i>',
+    [new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 24)],
+    undefined,
+    {
+        displayName: 'Manaphy Egg Protectors',
+        imageName: 'Manaphy Egg',
+        firstTimeRewardFunction: () => {
+            App.game.party.gainPokemonByName('Manaphy');
+        },
+    }
+);
+
 TemporaryBattleList.Zero = new TemporaryBattle(
     'Zero',
     [
@@ -1428,7 +1691,10 @@ TemporaryBattleList['Colress 3'] = new TemporaryBattle(
         new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 17),
     ],
     undefined,
-    {imageName: '../trainers/Team Plasma (colress)'}
+    {
+        displayName: 'Colress',
+        imageName: '../trainers/Team Plasma (colress)',
+    }
 );
 TemporaryBattleList['Plasma Shadow 2'] = new TemporaryBattle(
     'Plasma Shadow 2',
@@ -1939,7 +2205,7 @@ TemporaryBattleList.AZ = new TemporaryBattle(
     {
         displayName: 'Pokémon Trainer AZ',
         firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonById(670.05);
+            App.game.party.gainPokemonByName('Floette (Eternal)');
         },
     }
 );
@@ -1967,7 +2233,7 @@ TemporaryBattleList['Ash Ketchum Johto'] = new TemporaryBattle(
     [
         new GymPokemon('Pikachu (Partner Cap)', 83333000, 58),
         new GymPokemon('Heracross', 83333000, 56),
-        new GymPokemon('Noctowl', 83333000, 56),
+        new GymPokemon('Noctowl', 83333000, 56, undefined, true),
         new GymPokemon('Bayleef', 83333000, 60),
         new GymPokemon('Cyndaquil', 83333000, 62),
         new GymPokemon('Totodile', 83333000, 62),
@@ -2075,7 +2341,7 @@ TemporaryBattleList['Ash Ketchum Pinkan'] = new TemporaryBattle(
         returnTown: 'Pinkan Mountain',
         imageName: 'Ash Ketchum',
         firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonById(25.13);
+            App.game.party.gainPokemonByName('Pinkan Pikachu');
         },
     }
 );
@@ -2102,6 +2368,119 @@ TemporaryBattleList['Calem 6'] = new TemporaryBattle(
         firstTimeRewardFunction: () => App.game.party.getPokemonByName('Absol').giveMegastone(),
         rewardFunction: () =>
             Notifier.notify({message: 'Congratulations on beating Calem at his best! Come back to fight him again at any time.'}),
+    }
+);
+
+TemporaryBattleList['Marquis Grant'] = new TemporaryBattle(
+    'Marquis Grant',
+    [
+        new GymPokemon('Aurorus', 110668215, 80),
+        new GymPokemon('Tyrantrum', 110668215, 80),
+        new GymPokemon('Mega Tyranitar', 125000000, 80),
+        new GymPokemon('Mega Aggron', 125000000, 80),
+    ],
+    'To commemorate such an impressive show of teamwork, please accept these gifts!</br><img src="assets/images/megaStone/248.png"/></br></br><img src="assets/images/megaStone/306.png"/></br>',
+    [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion), new ClearGymRequirement(2000, GameConstants.getGymIndex('Cyllage City')), new ObtainedPokemonRequirement('Tyranitar'), new ObtainedPokemonRequirement('Aggron')],
+    undefined,
+    {
+        displayName: 'Marquis Grant',
+        imageName: '../gymLeaders/Grant',
+        firstTimeRewardFunction: () => [App.game.party.getPokemonByName('Tyranitar').giveMegastone(), App.game.party.getPokemonByName('Aggron').giveMegastone()],
+    }
+);
+
+TemporaryBattleList['Grand Duchess Diantha'] = new TemporaryBattle(
+    'Grand Duchess Diantha',
+    [
+        new GymPokemon('Hawlucha', 110668215, 80),
+        new GymPokemon('Gourgeist (Average)', 115668215, 80),
+        new GymPokemon('Goodra', 120770015, 80),
+        new GymPokemon('Mega Gardevoir', 125000000, 80),
+    ],
+    'Witnessing the noble spirits of you and your Pokémon in battle has really touched my heart... Please, take this Gardevoirite.</br><img src="assets/images/megaStone/282.png"/></br>I just... I just don\'t know what to say... I can hardly express this feeling...',
+    [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion), new ObtainedPokemonRequirement('Gardevoir')],
+    undefined,
+    {
+        displayName: 'Grand Duchess Diantha',
+        imageName: '../gymLeaders/Diantha',
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Gardevoir').giveMegastone(),
+    }
+);
+
+TemporaryBattleList['Hex Maniac Aster'] = new TemporaryBattle(
+    'Hex Maniac Aster',
+    [
+        new GymPokemon('Gastly', 40250000, 25),
+        new GymPokemon('Haunter', 60770015, 30),
+        new GymPokemon('Haunter', 60770015, 30),
+        new GymPokemon('Medicham', 60770015, 30),
+    ],
+    'What’s this?! I see... Perhaps a Trainer as accomplished as you can get the most out of this.</br><img src="assets/images/megaStone/94.png"/></br>',
+    [
+        new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Gastly').id], 666),
+        new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Haunter').id], 444),
+        new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Gengar').id], 13),
+        new ObtainedPokemonRequirement('Gengar'),
+    ],
+    undefined,
+    {
+        displayName: 'Hex Maniac Aster',
+        imageName: '../trainers/Hex Maniac',
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Gengar').giveMegastone(),
+    }
+);
+
+TemporaryBattleList['Wild Houndour Horde'] = new TemporaryBattle(
+    'Wild Houndour Horde',
+    [
+        new GymPokemon('Houndour', 60000000, 40),
+        new GymPokemon('Houndour', 60000000, 40),
+        new GymPokemon('Houndour', 60000000, 40),
+        new GymPokemon('Houndour', 60000000, 40),
+        new GymPokemon('Houndour', 60000000, 40),
+        new GymPokemon('Mega Houndoom', 120000000, 60),
+    ],
+    '<i>With the leader of the pack defeated, the Houndour horde scatters, their fiery fury reduced to ashes. In the gleaming sunlight, you catch sight of a small gem left behind by their leader...</i></br><img src="assets/images/megaStone/229.png"/></br><i>You obtained the Houndoomite!</i>',
+    [
+        new ObtainedPokemonRequirement('Houndoom'),
+        new WeatherRequirement([WeatherType.Sunny]),
+        new StatisticRequirement(['pokemonCaptured', PokemonHelper.getPokemonByName('Houndour').id], 500),
+        new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion),
+    ],
+    undefined,
+    {
+        displayName: 'Wild Houndour Horde',
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Houndoom').giveMegastone(),
+        imageName: '../pokemon/229.01',
+        hideTrainer: true,
+        returnTown: 'Dendemille Town',
+    }
+);
+
+TemporaryBattleList['Wild Electrike Horde'] = new TemporaryBattle(
+    'Wild Electrike Horde',
+    [
+        new GymPokemon('Electrike', 60000000, 40),
+        new GymPokemon('Electrike', 60000000, 40),
+        new GymPokemon('Electrike', 60000000, 40),
+        new GymPokemon('Electrike', 60000000, 40),
+        new GymPokemon('Electrike', 60000000, 40),
+        new GymPokemon('Mega Manectric', 120000000, 60),
+    ],
+    '<i>With the leader of the pack defeated, the Electrike horde scatters, their thunderous rage utterly depleted. In a thunderbolt\'s flash, you catch sight of a small gem left behind by their leader...</i></br><img src="assets/images/megaStone/310.png"/></br><i>You obtained the Manectite!</i>',
+    [
+        new ObtainedPokemonRequirement('Manectric'),
+        new WeatherRequirement([WeatherType.Thunderstorm]),
+        new StatisticRequirement(['pokemonCaptured', PokemonHelper.getPokemonByName('Electrike').id], 500),
+        new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion),
+    ],
+    undefined,
+    {
+        displayName: 'Wild Electrike Horde',
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Manectric').giveMegastone(),
+        imageName: '../pokemon/310.01',
+        hideTrainer: true,
+        returnTown: 'Dendemille Town',
     }
 );
 
@@ -2322,7 +2701,7 @@ TemporaryBattleList['Ultra Megalopolis'] = new TemporaryBattle(
     'Ultra Megalopolis',
     [new GymPokemon('Ultra Necrozma', 536098161, 60)],
     '<i>Necrozma fled.</i>',
-    [new GymBadgeRequirement(BadgeEnums.DarkiniumZ)],
+    [new TemporaryBattleRequirement('Necrozma')],
     undefined,
     {
         firstTimeRewardFunction: () => {
@@ -2339,7 +2718,7 @@ TemporaryBattleList['Captain Mina'] = new TemporaryBattle(
         new GymPokemon('Granbull', 189973142, 51),
         new GymPokemon('Ribombee', 198608284, 51),
     ],
-    'Woah! I\'m shocked at your strength!',
+    'Woah! I\'m shocked at your strength! But you\'ve only just begun my real trial. Now you have to go around to all the captains in Alola!',
     [new TemporaryBattleRequirement('Ultra Megalopolis')],
     undefined,
     {imageName: '../gymLeaders/Mina'}
@@ -2351,7 +2730,7 @@ TemporaryBattleList['Captain Ilima'] = new TemporaryBattle(
         new GymPokemon('Smeargle', 189973142, 51),
         new GymPokemon('Komala', 198608284, 51),
     ],
-    'Yes! You have emerged victorious!',
+    'Yes! You have emerged victorious! You and your Pokémon have become quite a delightful team! Off to Lush Jungle? It\'s been a while since I last visited Akala.',
     [
         new TemporaryBattleRequirement('Captain Mina'),
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Hau\'oli Cemetery')),
@@ -2366,7 +2745,7 @@ TemporaryBattleList['Captain Mallow'] = new TemporaryBattle(
         new GymPokemon('Shiinotic', 189973142, 51),
         new GymPokemon('Tsareena', 198608284, 51),
     ],
-    'Sure enough, when it comes to you and Pokémon, the quality of the ingredients shines forth!',
+    'Sure enough, when it comes to you and Pokémon, the quality of the ingredients shines forth! Once you defeat Lana do you want to go to Wela Volcano Park with two pretty pals like us?',
     [new TemporaryBattleRequirement('Captain Ilima')],
     undefined,
     {imageName: '../gymLeaders/Mallow'}
@@ -2378,7 +2757,7 @@ TemporaryBattleList['Captain Lana'] = new TemporaryBattle(
         new GymPokemon('Cloyster', 189973142, 51),
         new GymPokemon('Araquanid', 198608284, 51),
     ],
-    'Well! Once again, you certainly reeled me in.',
+    'Well! Once again, you certainly reeled me in. Please have a good time with Kiawe.',
     [new TemporaryBattleRequirement('Captain Mallow')],
     undefined,
     {imageName: '../gymLeaders/Lana'}
@@ -2390,7 +2769,7 @@ TemporaryBattleList['Captain Kiawe'] = new TemporaryBattle(
         new GymPokemon('Talonflame', 189973142, 51),
         new GymPokemon('Alolan Marowak', 198608284, 51),
     ],
-    'Not enough dancing!',
+    'Not enough dancing! If you\'re hoping to complete Mina\'s trial, you should make for Hokulani Observatory next. Ula\'Ula is only a stone\'s throw away when Charizard is one of your Ride Pokémon!',
     [new TemporaryBattleRequirement('Captain Lana')],
     undefined,
     {imageName: '../gymLeaders/Kiawe'}
@@ -2402,7 +2781,7 @@ TemporaryBattleList['Captain Sophocles'] = new TemporaryBattle(
         new GymPokemon('Magnezone', 189973142, 51),
         new GymPokemon('Alolan Golem', 198608284, 51),
     ],
-    'I couldn\'t get it done. Don\'t worry about it, my precious Pokémon...',
+    'I couldn\'t get it done. Don\'t worry about it, my precious Pokémon... You\'ve gotta finish Mina\'s trial, right? Are you going to Tapu Village?',
     [new TemporaryBattleRequirement('Captain Kiawe')],
     undefined,
     {imageName: '../gymLeaders/Sophocles'}
@@ -2414,7 +2793,7 @@ TemporaryBattleList['Kahuna Nanu'] = new TemporaryBattle(
         new GymPokemon('Absol', 90200640, 51),
         new GymPokemon('Alolan Persian', 198608284, 51),
     ],
-    '...',
+    'Heh... You got me good, kid. Hope I don\'t get in trouble with the girl for this. You should go tell that young filly Mina that you\'re done with what she asked you to do.',
     [new TemporaryBattleRequirement('Captain Sophocles')],
     undefined,
     {imageName: '../gymLeaders/Nanu'}
@@ -2502,7 +2881,7 @@ TemporaryBattleList['Ash Ketchum Alola'] = new TemporaryBattle(
         returnTown: 'A Tree Maybe',
         imageName: 'Ash Ketchum',
         firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonById(25.07);
+            App.game.party.gainPokemonByName('Pikachu (Partner Cap)');
         },
     }
 );
@@ -2663,289 +3042,331 @@ TemporaryBattleList['Team Rainbow Leader Giovanni'] = new TemporaryBattle(
     [new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 5)]
 );
 
+
+// Magikarp Jump Temp Battles
 TemporaryBattleList['Magikarp Jump Koylee'] = new TemporaryBattle(
     'Magikarp Jump Koylee',
-    [new GymPokemon('Magikarp Calico (Orange, White)', 810000, 20)],
+    [new GymPokemon('Magikarp Calico (Orange, White)', 1215000, 20)],
     'Your scales are full of heart!',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 32)],
     undefined,
     {
         displayName: 'Koylee',
+        imageName: '../gymLeaders/Kareign',
         firstTimeRewardFunction: () => {
             Notifier.notify({
                 message: 'You were awarded a Magikarp Calico (Orange, White)!',
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
             });
-            App.game.party.gainPokemonById(pokemonMap['Magikarp Calico (Orange, White)'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
+            App.game.party.gainPokemonByName('Magikarp Calico (Orange, White)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         },
     }
 );
 
 TemporaryBattleList['Magikarp Jump Karpella'] = new TemporaryBattle(
     'Magikarp Jump Karpella',
-    [new GymPokemon('Magikarp Calico (Orange, White, Black)', 1620000, 20)],
+    [new GymPokemon('Magikarp Calico (Orange, White, Black)', 3037500, 20)],
     'Wow, you\'re the cream of the \'karp, alright!',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 33)],
     undefined,
     {
         displayName: 'Karpella',
+        imageName: '../gymLeaders/Karson',
         firstTimeRewardFunction: () => {
             Notifier.notify({
                 message: 'You were awarded a Magikarp Calico (Orange, White, Black)!',
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
             });
-            App.game.party.gainPokemonById(pokemonMap['Magikarp Calico (Orange, White, Black)'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
+            App.game.party.gainPokemonByName('Magikarp Calico (Orange, White, Black)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         },
     }
 );
 
 TemporaryBattleList['Magikarp Jump Karpen'] = new TemporaryBattle(
     'Magikarp Jump Karpen',
-    [new GymPokemon('Magikarp Calico (White, Orange)', 1710000, 20)],
-    'Are you sure you Karp isn\'t flying type?',
+    [new GymPokemon('Magikarp Calico (White, Orange)', 3206250, 20)],
+    'Are you sure your Karp isn\'t flying-type?',
     [new TemporaryBattleRequirement('Magikarp Jump Karpella')],
     undefined,
     {
         displayName: 'Karpen',
+        imageName: '../gymLeaders/Kareign',
+        visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.alola, 33),
         firstTimeRewardFunction: () => {
             Notifier.notify({
                 message: 'You were awarded a Magikarp Calico (White, Orange)!',
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
             });
-            App.game.party.gainPokemonById(pokemonMap['Magikarp Calico (White, Orange)'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
+            App.game.party.gainPokemonByName('Magikarp Calico (White, Orange)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         },
     }
 );
 
 TemporaryBattleList['Magikarp Jump Tykarp'] = new TemporaryBattle(
     'Magikarp Jump Tykarp',
-    [new GymPokemon('Magikarp Calico (Orange, White)', 2835000, 20)],
+    [new GymPokemon('Magikarp Calico (Orange, White)', 4860000, 20)],
     'I lost because of my karpal tunnel...',
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 33)],
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 34)],
     undefined,
     {
         displayName: 'Tykarp',
+        imageName: '../gymLeaders/Koichiro',
     }
 );
 
 TemporaryBattleList['Magikarp Jump Karpress'] = new TemporaryBattle(
     'Magikarp Jump Karpress',
-    [new GymPokemon('Magikarp Calico (Orange, White, Black)', 2992500, 20)],
+    [new GymPokemon('Magikarp Calico (Orange, White, Black)', 5130000, 20)],
     '<i>Basculin</i> the glory while you can, I\'ll get you next time! Wahaa!',
     [new TemporaryBattleRequirement('Magikarp Jump Tykarp')],
     undefined,
     {
         displayName: 'Karpress',
+        imageName: '../gymLeaders/Karson',
+        visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.alola, 34),
     }
 );
 
 TemporaryBattleList['Magikarp Jump Karami'] = new TemporaryBattle(
     'Magikarp Jump Karami',
-    [new GymPokemon('Magikarp Calico (Orange, White)', 4050000, 20)],
+    [new GymPokemon('Magikarp Calico (Orange, White)', 9112500, 20)],
     'Well, it\'s oh-fish-ial! You win!',
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 34)],
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 35)],
     undefined,
     {
         displayName: 'Karami',
+        imageName: '../gymLeaders/Kareign',
     }
 );
 
 TemporaryBattleList['Magikarp Jump Karson'] = new TemporaryBattle(
     'Magikarp Jump Karson',
-    [new GymPokemon('Magikarp Skelly', 4275000, 20)],
+    [new GymPokemon('Magikarp Skelly', 9618750, 20)],
     'Hey, would you mind letting minnow when you want to rematch?',
     [new TemporaryBattleRequirement('Magikarp Jump Karami')],
     undefined,
     {
         displayName: 'Karson',
+        imageName: '../gymLeaders/Koichiro',
+        visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.alola, 35),
     }
 );
 
 TemporaryBattleList['Magikarp Jump Karpress 2'] = new TemporaryBattle(
     'Magikarp Jump Karpress 2',
-    [new GymPokemon('Magikarp Calico (Orange, White)', 6075000, 20)],
+    [new GymPokemon('Magikarp Calico (Orange, White)', 12150000, 20)],
     'I\'m fin-ished...',
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 35)],
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 36)],
     undefined,
     {
         displayName: 'Karpress',
+        imageName: '../gymLeaders/Karson',
     }
 );
 
 TemporaryBattleList['Magikarp Jump Karpen 2'] = new TemporaryBattle(
     'Magikarp Jump Karpen 2',
-    [new GymPokemon('Magikarp Calico (White, Orange)', 6412500, 20)],
+    [new GymPokemon('Magikarp Calico (White, Orange)', 12825000, 20)],
     'Magikarp is so classy, it\'s so-fish-ticated',
     [new TemporaryBattleRequirement('Magikarp Jump Karpress 2')],
     undefined,
     {
         displayName: 'Karpen',
+        imageName: '../gymLeaders/Kareign',
+        visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.alola, 36),
     }
 );
 
 TemporaryBattleList['Magikarp Jump Karbuck'] = new TemporaryBattle(
     'Magikarp Jump Karbuck',
-    [new GymPokemon('Magikarp Calico (Orange, Gold)', 6547500, 20)],
+    [new GymPokemon('Magikarp Calico (Orange, Gold)', 13095000, 20)],
     'That battle scared the karp out of me!',
     [new TemporaryBattleRequirement('Magikarp Jump Karpen 2')],
     undefined,
     {
         displayName: 'Karbuck',
+        imageName: '../gymLeaders/Koichiro',
+        visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.alola, 36),
         firstTimeRewardFunction: () => {
             Notifier.notify({
                 message: 'You were awarded a Magikarp Calico (Orange, Gold)!',
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
             });
-            App.game.party.gainPokemonById(pokemonMap['Magikarp Calico (Orange, Gold)'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
+            App.game.party.gainPokemonByName('Magikarp Calico (Orange, Gold)', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         },
     }
 );
 
 TemporaryBattleList['Magikarp Jump Skyhopper'] = new TemporaryBattle(
     'Magikarp Jump Skyhopper',
-    [new GymPokemon('Magikarp Calico (Orange, White)', 8100000, 20)],
+    [new GymPokemon('Magikarp Calico (Orange, White)', 18225000, 20)],
     'I will jump away from this battle!',
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 35)],
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 37)],
     undefined,
     {
         displayName: 'Skyhopper',
+        imageName: '../gymLeaders/Karson',
     }
 );
 
 TemporaryBattleList['Magikarp Jump Karpen 3'] = new TemporaryBattle(
     'Magikarp Jump Karpen 3',
-    [new GymPokemon('Magikarp Skelly', 8550000, 20)],
+    [new GymPokemon('Magikarp Skelly', 19237500, 20)],
     'Are you trying to fly to the stratosphere?',
     [new TemporaryBattleRequirement('Magikarp Jump Skyhopper')],
     undefined,
     {
         displayName: 'Karpen',
+        imageName: '../gymLeaders/Koichiro',
+        visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.alola, 37),
     }
 );
 
 TemporaryBattleList['Magikarp Jump Karpella 2'] = new TemporaryBattle(
     'Magikarp Jump Karpella 2',
-    [new GymPokemon('Magikarp Calico (Orange, White, Black)', 8730000, 20)],
+    [new GymPokemon('Magikarp Calico (Orange, White, Black)', 19642500, 20)],
     'I hate fish puns...',
     [new TemporaryBattleRequirement('Magikarp Jump Karpen 3')],
     undefined,
     {
         displayName: 'Karpella',
+        imageName: '../gymLeaders/Kareign',
+        visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.alola, 37),
     }
 );
 
 TemporaryBattleList['Magikarp Jump Karbuck 2'] = new TemporaryBattle(
     'Magikarp Jump Karbuck 2',
-    [new GymPokemon('Magikarp Calico (Orange, White)', 10125000, 20)],
+    [new GymPokemon('Magikarp Calico (Orange, White)', 24300000, 20)],
     'I wish a Pidgeotto would steal me away about now...',
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 35)],
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 38)],
     undefined,
     {
         displayName: 'Karbuck',
+        imageName: '../gymLeaders/Karson',
     }
 );
 
 TemporaryBattleList['Magikarp Jump Kareign'] = new TemporaryBattle(
     'Magikarp Jump Kareign',
-    [new GymPokemon('Magikarp Calico (White, Orange)', 10687500, 20)],
+    [new GymPokemon('Magikarp Calico (White, Orange)', 25650000, 20)],
     'Wow, you\'ve been drinking your Training Sodas!',
     [new TemporaryBattleRequirement('Magikarp Jump Karbuck 2')],
     undefined,
     {
         displayName: 'Kareign',
+        imageName: '../gymLeaders/Koichiro',
+        visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.alola, 38),
     }
 );
 
 TemporaryBattleList['Magikarp Jump Koylee 2'] = new TemporaryBattle(
     'Magikarp Jump Koylee 2',
-    [new GymPokemon('Magikarp Calico (Orange, White, Black)', 10912500, 20)],
+    [new GymPokemon('Magikarp Calico (Orange, White, Black)', 26190000, 20)],
     'I need to find more sunken treasures...',
     [new TemporaryBattleRequirement('Magikarp Jump Kareign')],
     undefined,
     {
         displayName: 'Koylee',
+        imageName: '../gymLeaders/Kareign',
+        visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.alola, 38),
     }
 );
 
 TemporaryBattleList['Magikarp Jump Karpress 3'] = new TemporaryBattle(
     'Magikarp Jump Karpress 3',
-    [new GymPokemon('Magikarp Grey Diamonds', 12150000, 20)],
+    [new GymPokemon('Magikarp Grey Diamonds', 36450000, 20)],
     'You cheater! I have seen Rowlet giving you money!!!',
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 35)],
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 39)],
     undefined,
     {
         displayName: 'Karpress',
+        imageName: '../gymLeaders/Koichiro',
         firstTimeRewardFunction: () => {
             Notifier.notify({
                 message: 'You were awarded a Magikarp Grey Diamonds!',
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
             });
-            App.game.party.gainPokemonById(pokemonMap['Magikarp Grey Diamonds'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
+            App.game.party.gainPokemonByName('Magikarp Grey Diamonds', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         },
     }
 );
 
 TemporaryBattleList['Magikarp Jump Karpen 4'] = new TemporaryBattle(
     'Magikarp Jump Karpen 4',
-    [new GymPokemon('Magikarp Brown Tiger', 12825000, 20)],
-    'My Magikarp might not jump high but it\'s fast enough to win the Naskarp Cup',
+    [new GymPokemon('Magikarp Brown Tiger', 38475000, 20)],
+    'My Magikarp might not jump high but it\'s fast enough to win the Naskarp Cup.',
     [new TemporaryBattleRequirement('Magikarp Jump Karpress 3')],
     undefined,
     {
         displayName: 'Karpen',
+        imageName: '../gymLeaders/Karson',
+        visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.alola, 39),
     }
 );
 
 TemporaryBattleList['Magikarp Jump Karpella 3'] = new TemporaryBattle(
     'Magikarp Jump Karpella 3',
-    [new GymPokemon('Magikarp Purple Patches', 13095000, 20)],
-    'I will beat you next time! Any fin is possible is you believe it!',
+    [new GymPokemon('Magikarp Purple Patches', 39285000, 20)],
+    'I will beat you next time! Any fin is possible if you believe in it!',
     [new TemporaryBattleRequirement('Magikarp Jump Karpen 4')],
     undefined,
     {
         displayName: 'Karpella',
+        imageName: '../gymLeaders/Kareign',
+        visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.alola, 39),
         firstTimeRewardFunction: () => {
             Notifier.notify({
                 message: 'You were awarded a Magikarp Purple Patches!',
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
             });
-            App.game.party.gainPokemonById(pokemonMap['Magikarp Purple Patches'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
+            App.game.party.gainPokemonByName('Magikarp Purple Patches', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         },
     }
 );
 
 TemporaryBattleList['Magikarp Jump Skyhopper 2'] = new TemporaryBattle(
     'Magikarp Jump Skyhopper 2',
-    [new GymPokemon('Magikarp Calico (Orange, Gold)', 16200000, 20)],
+    [new GymPokemon('Magikarp Calico (Orange, Gold)', 48600000, 20)],
     'Who wants to place a bait on a rematch?',
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 35)],
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 40)],
     undefined,
     {
         displayName: 'Skyhopper',
+        imageName: '../gymLeaders/Koichiro',
     }
 );
 
 TemporaryBattleList['Magikarp Jump Tykarp 2'] = new TemporaryBattle(
     'Magikarp Jump Tykarp 2',
-    [new GymPokemon('Magikarp Black Mask', 17100000, 20)],
-    'The way my magikarp performed is a-trout-cious!',
+    [new GymPokemon('Magikarp Black Mask', 51300000, 20)],
+    'The way my Magikarp performed is a-trout-cious!',
     [new TemporaryBattleRequirement('Magikarp Jump Skyhopper 2')],
     undefined,
     {
         displayName: 'Tykarp',
+        imageName: '../gymLeaders/Karson',
+        visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.alola, 40),
         firstTimeRewardFunction: () => {
             Notifier.notify({
                 message: 'You were awarded a Magikarp Black Mask!',
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
             });
-            App.game.party.gainPokemonById(pokemonMap['Magikarp Black Mask'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
+            App.game.party.gainPokemonByName('Magikarp Black Mask', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         },
     }
 );
@@ -3199,7 +3620,7 @@ TemporaryBattleList['The Darkest Day'] = new TemporaryBattle(
     undefined,
     {
         firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonById(890);
+            App.game.party.gainPokemonByName('Eternatus');
         },
         hideTrainer: true,
         imageName: '../pokemon/890',

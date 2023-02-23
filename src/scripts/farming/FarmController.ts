@@ -192,9 +192,9 @@ class FarmController {
         if (App.game.farming.unlockedBerries[index]()) {
             return GameConstants.BerryColor[App.game.farming.berryData[index].color];
         } else if (FarmController.getHint(index, true) !== '') {
-            return GameConstants.BerryColor[6];
+            return GameConstants.BerryColor[8];
         } else {
-            return GameConstants.BerryColor[7];
+            return GameConstants.BerryColor[9];
         }
 
     }
@@ -225,10 +225,12 @@ class FarmController {
             if (typeof aura === 'undefined') {
                 return;
             }
-            if (aura() === 1) {
-                return;
+            if (aura() !== 1 && idx !== AuraType.Repel) {
+                tooltip.push(`${AuraType[idx]}: ×${aura().toFixed(2)}`);
+            } else if (aura() !== 0 && idx === AuraType.Repel) {
+                tooltip.push(`${AuraType[idx]}: ${(aura() * 100).toFixed(2)}%`);
             }
-            tooltip.push(`${AuraType[idx]}: ${aura().toFixed(2)}x`);
+
         });
 
         // Adding header if necessary
