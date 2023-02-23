@@ -9,7 +9,7 @@ class GainTokensQuest extends Quest implements QuestInterface {
 
     public static generateData(): any[] {
         const regionDungeons = GameConstants.RegionDungeons[player.highestRegion()].filter(dungeon => TownList[dungeon].isUnlocked());
-        const maxDungeon = dungeonList[regionDungeons[regionDungeons.length - 1]];
+        const maxDungeon = dungeonList[regionDungeons[Math.max(1,regionDungeons.length) - 1]];
         const amount = SeededRand.intBetween(1, player.highestRegion() + 2) * maxDungeon.tokenCost;
         const maxAmount = (player.highestRegion() + 2) * maxDungeon.tokenCost;
         const reward = this.calcReward(amount, maxAmount);

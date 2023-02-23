@@ -9,7 +9,7 @@ class GainMoneyQuest extends Quest implements QuestInterface {
 
     public static generateData(): any[] {
         const availableGyms = GameConstants.RegionGyms[player.highestRegion()].filter(x => App.game.badgeCase.hasBadge(GymList[x].badgeReward));
-        const maxGym = GymList[availableGyms[availableGyms.length - 1]];
+        const maxGym = GymList[availableGyms[Math.max(1,availableGyms.length) - 1]];
         const amount = SeededRand.intBetween(1, player.highestRegion() + 2) * maxGym.moneyReward * GameConstants.GAIN_MONEY_BASE_MODIFIER;
         const maxAmount = (player.highestRegion() + 2) * maxGym.moneyReward * GameConstants.GAIN_MONEY_BASE_MODIFIER;
         const reward = this.calcReward(amount, maxAmount);
