@@ -3,6 +3,7 @@ import Setting from './Setting';
 import SettingOption from './SettingOption';
 import BooleanSetting from './BooleanSetting';
 import CssVariableSetting from './CssVariableSetting';
+import CssVariableListSetting from './CssVariableListSetting';
 import RangeSetting from './RangeSetting';
 import NotificationConstants from '../notifications/NotificationConstants';
 import DynamicBackground from '../background/DynamicBackground';
@@ -110,6 +111,15 @@ Settings.add(new Setting<string>('sizeUnits', 'Berry size units',
         new SettingOption('Centimeters', 'cm'),
     ],
     'cm'));
+Settings.add(new CssVariableListSetting('flavor-alpha-base', 'Flavor Color Opacity',
+    [
+        new SettingOption('None', 0),
+        new SettingOption('Lightest', 0.18),
+        new SettingOption('Light', 0.36),
+        new SettingOption('Bold', 0.54),
+        new SettingOption('Boldest', 0.72),
+    ],
+    0.36));
 Settings.add(new BooleanSetting('currencyMainDisplayReduced', 'Shorten currency amount shown on main screen', false));
 Settings.add(new BooleanSetting('currencyMainDisplayExtended', 'Show Diamonds, Farm Points and Battle Points on main screen', false));
 Settings.add(new BooleanSetting('confirmLeaveDungeon', 'Confirm before leaving dungeons', false));
