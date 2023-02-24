@@ -4506,6 +4506,7 @@ const ExamineAegislash = new NPC('Examine Your Doublade', [
 
 const ThanksDiancie = new NPC('Princess Diancie', [
     'Thank you for your help saving the Diamond Domain. I will be waiting for you in Reflection Cave.',
+    'There are many threats in this world, and I think we will both be safer if we work together!',
 ], {
     image: 'assets/images/pokemon/719.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Princess Diancie', 6), new QuestLineStepCompletedRequirement('Princess Diancie', 8, GameConstants.AchievementOption.less)]),
