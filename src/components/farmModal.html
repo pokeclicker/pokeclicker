@@ -237,7 +237,7 @@
                       <td class="text-left">Firmness</td>
                       <td class="text-left tight"><code data-bind="html: GameConstants.humanifyString(BerryFirmness[App.game.farming.berryData[$data].firmness])">-</code></td>
                     </tr>
-                    <tr class = "auraHighlight" style = "overflow-x: hidden;" data-bind="if: App.game.farming.berryData[$data].aura">
+                    <tr data-bind="if: App.game.farming.berryData[$data].aura, css: { 'auraHighlight': Settings.getSetting('--aura-alpha-base').observableValue() > 0 }">
                       <td class="text-left">Aura</td>
                       <td class="text-left tight"><code data-bind="text: AuraType[App.game.farming.berryData[$data].aura.auraType]"></code></td>
                     </tr>

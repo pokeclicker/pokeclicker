@@ -111,7 +111,7 @@ Settings.add(new Setting<string>('sizeUnits', 'Berry size units',
         new SettingOption('Centimeters', 'cm'),
     ],
     'cm'));
-Settings.add(new CssVariableListSetting('flavor-alpha-base', 'Berry Flavor Color Opacity',
+Settings.add(new CssVariableListSetting('flavor-alpha-base', 'Berrydex Flavor Color Opacity',
     [
         new SettingOption('None', '0'),
         new SettingOption('Light', '0.36'),
@@ -119,6 +119,14 @@ Settings.add(new CssVariableListSetting('flavor-alpha-base', 'Berry Flavor Color
         new SettingOption('Bold', '0.72'),
     ],
     '0.36'));
+Settings.add(new CssVariableListSetting('aura-alpha-base', 'Berrydex Aura Color Opacity',
+    [
+        new SettingOption('None', '0'),
+        new SettingOption('Light', '0.4'),
+        new SettingOption('Medium', '0.8'),
+        new SettingOption('Bold', '1'),
+    ],
+    '0.8'));
 Settings.add(new BooleanSetting('currencyMainDisplayReduced', 'Shorten currency amount shown on main screen', false));
 Settings.add(new BooleanSetting('currencyMainDisplayExtended', 'Show Diamonds, Farm Points and Battle Points on main screen', false));
 Settings.add(new BooleanSetting('confirmLeaveDungeon', 'Confirm before leaving dungeons', false));
