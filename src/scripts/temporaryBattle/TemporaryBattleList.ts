@@ -2049,6 +2049,20 @@ TemporaryBattleList['Millis and Argus Steel'] = new TemporaryBattle(
     'Our plans are ruined! Retreat!',
     [new QuestLineStepCompletedRequirement('Princess Diancie', 3)]
 );
+TemporaryBattleList['Rampaging Yveltal'] = new TemporaryBattle(
+    'Rampaging Yveltal',
+    [new GymPokemon('Yveltal', 446974112, 80)],
+    '<i>Diancie fights along side you, Mega Evolving to land the final blow! She hands you her Mega Stone after the fight.</i></br><img src="assets/images/megaStone/719.png"/></br>',
+    [new QuestLineStepCompletedRequirement('Princess Diancie', 8)],
+    undefined,
+    {
+        displayName: 'Rampaging Yveltal',
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Diancie').giveMegastone(),
+        imageName: '../pokemon/717',
+        hideTrainer: true,
+        returnTown: 'Shalour City',
+    }
+);
 TemporaryBattleList['Calem 2'] = new TemporaryBattle(
     'Calem 2',
     [
@@ -2440,7 +2454,7 @@ TemporaryBattleList['Wild Houndour Horde'] = new TemporaryBattle(
         new GymPokemon('Houndour', 60000000, 40),
         new GymPokemon('Mega Houndoom', 120000000, 60),
     ],
-    '<i>With the leader of the pack defeated, the Houndour horde scatters, their fiery fury reduced to ashes. In the gleaming sunlight, you catch sight of a small gem left behind by their leader...</i></br><img src="assets/images/megaStone/229.png"/></br><i>You obtained the Houndoomite!</i>',
+    '<i>With the leader of the pack defeated, the Houndour horde scatters, their fiery fury reduced to ashes. In the gleaming sunlight, you catch sight of a small gem left behind by their leader...</i></br><img src="assets/images/megaStone/229.png"/></br><i>You obtained the Houndoominite!</i>',
     [
         new ObtainedPokemonRequirement('Houndoom'),
         new WeatherRequirement([WeatherType.Sunny]),
