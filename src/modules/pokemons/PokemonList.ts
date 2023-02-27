@@ -20596,7 +20596,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 270,
         'catchRate': 3,
-        // 'evolutions': [MegaEvolution('Diancie', 'Mega Diancie')],
+        'evolutions': [MegaEvolution('Diancie', 'Mega Diancie')],
         'base': {
             'hitpoints': 50,
             'attack': 100,
