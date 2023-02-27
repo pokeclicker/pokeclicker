@@ -1988,6 +1988,10 @@ class Update implements Saveable {
             // Add Near Space dungeon
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 56);
 
+            //Mega Diancie
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 156);
+
+
         },
     };
 

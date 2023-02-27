@@ -1569,6 +1569,7 @@ export const TemporaryBattles = [
     'Riot',
     'Merilyn',
     'Millis and Argus Steel',
+    'Rampaging Yveltal',
     'AZ',
     'Ash Ketchum Kanto',
     'Ash Ketchum Johto',

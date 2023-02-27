@@ -1755,6 +1755,9 @@ class QuestLineHelper {
 
         princessDiancieQuestLine.addQuest(DiancieCatch);
 
+        const fightYveltal = new CustomQuest(1, 0, 'A rampaging Yveltal is threatening the Diamond Domain! Help Diancie defeat it!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Rampaging Yveltal')]());
+        princessDiancieQuestLine.addQuest(fightYveltal);
+
         App.game.quests.questLines().push(princessDiancieQuestLine);
     }
 
