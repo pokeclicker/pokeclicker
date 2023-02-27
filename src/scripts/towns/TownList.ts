@@ -6506,7 +6506,7 @@ TownList['Master Dojo'] = new Town(
     'Master Dojo',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.IsleofArmor,
-    [new BulletinBoard(GameConstants.BulletinBoards.Armor), TemporaryBattleList.Mustard, TemporaryBattleList.Kubfu, MasterDojoShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Master Dojo'])],
+    [new BulletinBoard(GameConstants.BulletinBoards.Armor), TemporaryBattleList.Mustard, TemporaryBattleList.Kubfu, MasterDojoShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Master Dojo']), new DockTownContent()],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 33)],
         npcs: [Mustard1, Mustard2, Mustard3, Mustard4, Mustard5, Klara2, Avery2, Mustard6, Mustard7, Mustard8, Mustard9, JungleAsh1, JungleAsh2, IsleofArmorRoamerNPC],
@@ -6527,7 +6527,7 @@ TownList['Crown Tundra Station'] = new Town(
     'Crown Tundra Station',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.CrownTundra,
-    [TemporaryBattleList.Peony],
+    [new DockTownContent(), TemporaryBattleList.Peony],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
     }
