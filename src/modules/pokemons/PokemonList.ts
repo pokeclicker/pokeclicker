@@ -2,6 +2,7 @@
 /* eslint-disable quote-props */
 import {
     QuestlineLevelEvolution,
+    QuestlineStoneEvolution,
     NightTimedLevelEvolution,
     RegionStoneEvolution,
     DungeonRestrictedLevelEvolution,
@@ -1639,7 +1640,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 112,
         'eggCycles': 10,
-        'evolutions': [DummyEvolution('Detective Pikachu', 'Detective Raichu')],
+        'evolutions': [QuestlineStoneEvolution('Detective Pikachu', 'Detective Pikachu', 'Detective Raichu', StoneType.Thunder_stone)],
         'base': {
             'hitpoints': 35,
             'attack': 55,
@@ -20595,7 +20596,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 270,
         'catchRate': 3,
-        // 'evolutions': [MegaEvolution('Diancie', 'Mega Diancie')],
+        'evolutions': [MegaEvolution('Diancie', 'Mega Diancie')],
         'base': {
             'hitpoints': 50,
             'attack': 100,

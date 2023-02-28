@@ -750,7 +750,7 @@ const RedSpearow = new NPC('Red Spearow', [
     '<b><i>SQUAWK! SQUAWK!</i></b>',
     '...',
     '<i>The Red Spearow seems to appreciate your visit.</i>',
-], {image: 'assets/images/pokemon/21.1.png'});
+], {image: 'assets/images/pokemon/21.01.png'});
 
 //Kanto Towns
 TownList['Pallet Town'] = new Town(
@@ -4500,12 +4500,13 @@ const Spelunker = new NPC('Spelunker', [
 const ExamineAegislash = new NPC('Examine Your Doublade', [
     '<i>Your Doublade evolves and shifts into an aggressive stance, revealing its Blade Forme.</i>',
 ], {
-    image: 'assets/images/pokemon/681.1.png',
+    image: 'assets/images/pokemon/681.01.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Princess Diancie', 4), new QuestLineStepCompletedRequirement('Princess Diancie', 5, GameConstants.AchievementOption.less)]),
 });
 
 const ThanksDiancie = new NPC('Princess Diancie', [
     'Thank you for your help saving the Diamond Domain. I will be waiting for you in Reflection Cave.',
+    'There are many threats in this world, and I think we will both be safer if we work together!',
 ], {
     image: 'assets/images/pokemon/719.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Princess Diancie', 6), new QuestLineStepCompletedRequirement('Princess Diancie', 8, GameConstants.AchievementOption.less)]),
@@ -6344,9 +6345,9 @@ const ProfMagnolia = new ProfNPC('Prof. Magnolia',
     'assets/images/npcs/Professor Magnolia.png');
 
 const MagearnaMysteryGift = new NPC('Mystery Gift', [
-    'You have recieved a Mystery Gift for completing the National Shiny Dex!',
+    'You have received a Mystery Gift for completing the National Shiny Dex!',
 ], {
-    image: 'assets/images/pokemon/801.1.png',
+    image: 'assets/images/pokemon/801.01.png',
     requirement: new MultiRequirement([new QuestLineStartedRequirement('A Mystery Gift'), new QuestLineCompletedRequirement('A Mystery Gift', GameConstants.AchievementOption.less)]),
 }
 );
