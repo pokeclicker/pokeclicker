@@ -11,6 +11,6 @@ export default class MegaEvolveRequirement extends Requirement {
         return App.game.party.getPokemonByName(this.name)?.megaStone?.canEvolve() ? 1 : 0;
     }
     hint(): string {
-        return `Can't mega evolve ${this.name} yet.`;
+        return App.game.party.getPokemonByName(this.name)?.megaStone?.getTooltipText() || `${this.name} holds no Mega Stone.`;
     }
 }
