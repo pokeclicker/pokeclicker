@@ -1354,7 +1354,7 @@ class QuestLineHelper {
     // Kalos QuestLines
 
     public static createDeltaEpisodeQuestLine() {
-        const deltaEpisodeQuestLine = new QuestLine('The Delta Episode', 'A catastrophe is on the horizon! Work with the people of Hoenn to stop it.', new  GymBadgeRequirement(BadgeEnums.Rumble), GameConstants.BulletinBoards.Hoenn);
+        const deltaEpisodeQuestLine = new QuestLine('The Delta Episode', 'A catastrophe is on the horizon! Work with the people of Hoenn to stop it.', new GymBadgeRequirement(BadgeEnums.Rumble), GameConstants.BulletinBoards.Kalos);
 
         const talkToCozmo1 = new TalkToNPCQuest(Cozmo1, 'Talk to Dr. Cozmo in Fallarbor Town.');
         deltaEpisodeQuestLine.addQuest(talkToCozmo1);
