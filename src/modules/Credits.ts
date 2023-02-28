@@ -712,6 +712,7 @@ export const SpriteCredits: Credit[] = [
             'Detective Pikachu',
             'Detective Raichu',
             'Dyna Tree',
+            'Friend Safari',
             'Macro Cosmos (male) and (female)',
             'Magikarp Grey Bubbles',
             'Magikarp Grey Diamonds',
