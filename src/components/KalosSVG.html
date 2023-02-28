@@ -649,9 +649,18 @@
 
     <%- include('templates/mapPOI',
         { name: "Friendly Safari Zone"
-        , x: 0, y: 0
-        , width: 10, height: 10
+        , x: 76, y: 47
+        , width: 6, height: 4
         , databind: "click:function(){Safari.startSafari()}, attr: { class: Safari.canAccess() ? 'completed' : 'locked' }"
+        })
+    %>
+
+    <%- include('templates/mapPOI',
+        { name: "Friendly Safari Zone"
+        , x: 77, y: 51
+        , width: 5, height: 2
+        , databind: "click:function(){Safari.startSafari()}, attr: { class: Safari.canAccess() ? 'completed' : 'locked' }"
+        , isExtension: true
         })
     %>
 
