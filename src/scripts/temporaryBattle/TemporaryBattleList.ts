@@ -1946,6 +1946,349 @@ TemporaryBattleList.Korrina = new TemporaryBattle(
         firstTimeRewardFunction: () => App.game.party.getPokemonByName('Lucario').giveMegastone(),
     }
 );
+TemporaryBattleList['Courtney 1'] = new TemporaryBattle(
+    'Courtney 1',
+    [new GymPokemon('Camerupt', 135000000, 53)],
+    'Tedious...bothersome...child...You should...just be quiet...and give me...the Key Stone! Bah! I need a vacation somewhere warm.',
+    [new QuestLineStepCompletedRequirement('The Delta Episode', 4)],
+    undefined,
+    {
+        displayName: 'Magma Admin Courtney',
+        imageName: '../trainers/Magma Admin (courtney)',
+    }
+);
+TemporaryBattleList['Matt 1'] = new TemporaryBattle(
+    'Matt 1',
+    [new GymPokemon('Sharpedo', 135000000, 53)],
+    'Hooaahhh! You clown! Always gettin\' all up in my business! If it\'s gonna be like that, I\'m outta here! The Southern Island\'s gotta be more fun than this.',
+    [new QuestLineStepCompletedRequirement('The Delta Episode', 4)],
+    undefined,
+    {
+        displayName: 'Aqua Admin Matt',
+        imageName: '../trainers/Aqua Admin (matt)',
+    }
+);
+TemporaryBattleList['Zinnia 1'] = new TemporaryBattle(
+    'Zinnia 1',
+    [
+        new GymPokemon('Tyrantrum', 35437500, 53),
+        new GymPokemon('Altaria', 35437500, 53),
+        new GymPokemon('Salamence', 35437500, 53),
+        new GymPokemon('Whismur', 35437500, 53),
+    ],
+    'Niiice! Real nice! Ohhh, I really felt that one! Full points to you! That settles it! You get this Meteorite Shard as a reward!',
+    [new QuestLineStepCompletedRequirement('The Delta Episode', 8)],
+    undefined,
+    {
+        displayName: 'Zinnia',
+        imageName: '../npcs/Zinnia',
+    }
+);
+TemporaryBattleList['Draconid Elder'] = new TemporaryBattle(
+    'Draconid Elder',
+    [
+        new GymPokemon('Dragonite', 37209375, 53),
+        new GymPokemon('Flygon', 37209375, 53),
+        new GymPokemon('Haxorus', 37209375, 53),
+        new GymPokemon('Garchomp', 37209375, 53),
+    ],
+    'You are indeed powerful. I think you can help Zinnia.',
+    [new QuestLineStepCompletedRequirement('The Delta Episode', 15)],
+    undefined,
+    {
+        displayName: 'Draconid Elder',
+        imageName: '../trainers/Draconid Elder',
+    }
+);
+TemporaryBattleList['Aqua Grunt'] = new TemporaryBattle(
+    'Aqua Grunt',
+    [
+        new GymPokemon('Zubat', 35437500, 33),
+        new GymPokemon('Grimer', 35437500, 33),
+        new GymPokemon('Corphish', 35437500, 33),
+        new GymPokemon('Carvanha', 35437500, 33),
+    ],
+    'Baaah! I gotta get out of here!',
+    [new QuestLineStepCompletedRequirement('The Delta Episode', 17)],
+    undefined,
+    {
+        displayName: 'Aqua Grunt',
+        imageName: '../trainers/Team Aqua Grunt (female)',
+    }
+);
+TemporaryBattleList['Magma Grunt'] = new TemporaryBattle(
+    'Magma Grunt',
+    [
+        new GymPokemon('Zubat', 35437500, 33),
+        new GymPokemon('Koffing', 35437500, 33),
+        new GymPokemon('Poochyena', 35437500, 33),
+        new GymPokemon('Numel', 35437500, 33),
+    ],
+    'The boss is gonna be so mad!',
+    [new QuestLineStepCompletedRequirement('The Delta Episode', 17)],
+    undefined,
+    {
+        displayName: 'Magma Grunt',
+        imageName: '../trainers/Team Magma Grunt (male)',
+    }
+);
+TemporaryBattleList['Courtney 2'] = new TemporaryBattle(
+    'Courtney 2',
+    [new GymPokemon('Mega Camerupt', 198102712, 55)],
+    'Why? Why must...you always...Always, always, always, always...Get in my way!',
+    [new QuestLineStepCompletedRequirement('The Delta Episode', 18)],
+    undefined,
+    {
+        displayName: 'Magma Admin Courtney',
+        imageName: '../trainers/Magma Admin (courtney)',
+    }
+);
+TemporaryBattleList['Matt 2'] = new TemporaryBattle(
+    'Matt 2',
+    [new GymPokemon('Mega Sharpedo', 198102712, 55)],
+    'Dang it! Am I not good enough, bro?!',
+    [new QuestLineStepCompletedRequirement('The Delta Episode', 18)],
+    undefined,
+    {
+        displayName: 'Aqua Admin Matt',
+        imageName: '../trainers/Aqua Admin (matt)',
+    }
+);
+TemporaryBattleList['Delta Wallace'] = new TemporaryBattle(
+    'Delta Wallace',
+    [
+        new GymPokemon('Wailord', 36318830, 56),
+        new GymPokemon('Tentacruel', 36318830, 56),
+        new GymPokemon('Ludicolo', 36318830, 56),
+        new GymPokemon('Whiscash', 36318830, 56),
+        new GymPokemon('Gyarados', 36318830, 56),
+        new GymPokemon('Milotic', 36318830, 56),
+    ],
+    'Zinnia has gone to the top of the Sky Pillar to try to summon Rayquaza. Please, try to help her. This Key Stone may help you.',
+    [new QuestLineStepCompletedRequirement('The Delta Episode', 25)],
+    undefined,
+    {
+        displayName: 'Wallace',
+        imageName: '../gymLeaders/Wallace',
+        firstTimeRewardFunction: () => {
+            BagHandler.gainItem({type: ItemType.item, id: 'Key_stone'}, 1);
+            Notifier.notify({
+                message: 'You were awarded a Key Stone from Wallace!',
+                type: NotificationConstants.NotificationOption.success,
+                setting: NotificationConstants.NotificationSetting.Dungeons.rare_dungeon_item_found,
+            });
+        },
+    }
+);
+TemporaryBattleList['Zinnia 2'] = new TemporaryBattle(
+    'Zinnia 2',
+    [
+        new GymPokemon('Goodra', 47940856, 60),
+        new GymPokemon('Tyrantrum', 47940856, 60),
+        new GymPokemon('Altaria', 47940856, 53),
+        new GymPokemon('Noivern', 47940856, 53),
+        new GymPokemon('Mega Salamence', 47940856, 53),
+    ],
+    'I thought... But I\'m supposed to be the one who saves the world...',
+    [new QuestLineStepCompletedRequirement('The Delta Episode', 26)],
+    undefined,
+    {
+        displayName: 'Zinnia',
+        imageName: '../npcs/Zinnia',
+    }
+);
+TemporaryBattleList.Deoxys = new TemporaryBattle(
+    'Deoxys',
+    [new GymPokemon('Deoxys', 293674710, 100)],
+    '<i>The Meteor disintegrates into thousands of pieces.</i>',
+    [new QuestLineStepCompletedRequirement('The Delta Episode', 31)],
+    undefined,
+    {
+        hideTrainer: true,
+        imageName: '../pokemon/386',
+    }
+);
+TemporaryBattleList['Delta Giovanni'] = new TemporaryBattle(
+    'Delta Giovanni',
+    [
+        new GymPokemon('Golem', 39620542, 60),
+        new GymPokemon('Nidoqueen', 39620542, 60),
+        new GymPokemon('Nidoking', 39620542, 63),
+        new GymPokemon('Cloyster', 39620542, 63),
+        new GymPokemon('Mega Beedrill', 42620542, 63),
+    ],
+    'Even here? Is there no getting rid of you? Take this and leave me alone. </br><img src="assets/images/megaStone/15.png"/>',
+    [new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 17), new ObtainedPokemonRequirement('Beedrill')])],
+    undefined,
+    {
+        displayName: 'Giovanni',
+        imageName: '../gymLeaders/Giovanni',
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Beedrill').giveMegastone(),
+    }
+);
+TemporaryBattleList['Mr. Stone'] = new TemporaryBattle(
+    'Mr. Stone',
+    [
+        new GymPokemon('Castform', 67500000, 60),
+        new GymPokemon('Mega Pidgeot', 67500000, 63),
+    ],
+    'You\'re really strong! You should take this, it might come in handy with all this meteor business.</br><img src="assets/images/megaStone/18.png"/>',
+    [new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 6), new ObtainedPokemonRequirement('Pidgeot')])],
+    undefined,
+    {
+        displayName: 'Mr. Stone',
+        imageName: '../npcs/Mr Stone',
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Pidgeot').giveMegastone(),
+    }
+);
+TemporaryBattleList['Shoal Fisherman'] = new TemporaryBattle(
+    'Shoal Fisherman',
+    [new GymPokemon('Mega Slowbro', 148837500, 63)],
+    'I found this neat rock while hunting for shells! You want it?</br><img src="assets/images/megaStone/80.png"/>',
+    [new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 6), new ObtainedPokemonRequirement('Slowbro')])],
+    undefined,
+    {
+        displayName: 'Shoal Fisherman',
+        imageName: '../trainers/Fisherman',
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Slowbro').giveMegastone(),
+    }
+);
+TemporaryBattleList['Delta Brock'] = new TemporaryBattle(
+    'Delta Brock',
+    [
+        new GymPokemon('Sudowoodo', 47250000, 63),
+        new GymPokemon('Crobat', 47250000, 63),
+        new GymPokemon('Mega Steelix', 47250000, 63),
+    ],
+    'Seems like you\'ve gotten really strong since Kanto! I found this neat rock in the cave, you should keep it.</br><img src="assets/images/megaStone/208.png"/>',
+    [new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 9), new ObtainedPokemonRequirement('Steelix')])],
+    undefined,
+    {
+        displayName: 'Brock',
+        imageName: '../gymLeaders/Brock',
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Steelix').giveMegastone(),
+    }
+);
+TemporaryBattleList['Delta Tabitha'] = new TemporaryBattle(
+    'Delta Tabitha',
+    [new GymPokemon('Mega Camerupt', 217912983, 63)],
+    'I guess you\'ve earned this Cameruptite. Make sure your Camerupt holds on to it tightly.</br><img src="assets/images/megaStone/323.png"/>',
+    [new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 26), new ObtainedPokemonRequirement('Camerupt')])],
+    undefined,
+    {
+        displayName: 'Magma Admin Tabitha',
+        imageName: '../trainers/Magma Admin',
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Camerupt').giveMegastone(),
+    }
+);
+TemporaryBattleList['Delta Shelly'] = new TemporaryBattle(
+    'Delta Shelly',
+    [new GymPokemon('Mega Sharpedo', 217912983, 63)],
+    'Fine you win. Take this Sharpedonite. Make sure your Sharpedo holds on to it tightly.</br><img src="assets/images/megaStone/319.png"/>',
+    [new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 26), new ObtainedPokemonRequirement('Sharpedo')])],
+    undefined,
+    {
+        displayName: 'Aqua Admin Shelly',
+        imageName: '../trainers/Aqua Admin (shelly)',
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Sharpedo').giveMegastone(),
+    }
+);
+TemporaryBattleList['Icy Boulder'] = new TemporaryBattle(
+    'Icy Boulder',
+    [new GymPokemon('Mega Glalie', 141750000, 66)],
+    '<i>The Glalie flees, dropping a stone.</i></br><img src="assets/images/megaStone/362.png"/>',
+    [new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 4), new ObtainedPokemonRequirement('Glalie')])],
+    undefined,
+    {
+        displayName: 'Icy Boulder',
+        imageName: '../pokemon/362.01',
+        hideTrainer: true,
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Glalie').giveMegastone(),
+    }
+);
+TemporaryBattleList['Mega Draconid Elder'] = new TemporaryBattle(
+    'Mega Draconid Elder',
+    [
+        new GymPokemon('Dragonite', 37209375, 53),
+        new GymPokemon('Flygon', 37209375, 53),
+        new GymPokemon('Haxorus', 37209375, 53),
+        new GymPokemon('Garchomp', 37209375, 53),
+        new GymPokemon('Mega Salamence', 114837210, 70),
+    ],
+    'You truly are a master of dragons. Please, take this stone.</br><img src="assets/images/megaStone/373.png"/>',
+    [new MultiRequirement([new QuestLineCompletedRequirement('The Delta Episode'), new ObtainedPokemonRequirement('Salamence')])],
+    undefined,
+    {
+        displayName: 'Draconid Elder',
+        imageName: '../trainers/Draconid Elder',
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Salamence').giveMegastone(),
+    }
+);
+TemporaryBattleList['Delta Steven'] = new TemporaryBattle(
+    'Delta Steven',
+    [
+        new GymPokemon('Skarmory', 33017118, 57),
+        new GymPokemon('Aggron', 33017118, 57),
+        new GymPokemon('Claydol', 33017118, 57),
+        new GymPokemon('Cradily', 33017118, 57),
+        new GymPokemon('Armaldo', 33017118, 57),
+        new GymPokemon('Mega Metagross', 36017118, 63),
+    ],
+    'I have to admit, you keep surprising me! You deserve to have this.</br><img src="assets/images/megaStone/376.png"/>',
+    [new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 23), new ObtainedPokemonRequirement('Metagross')])],
+    undefined,
+    {
+        displayName: 'Steven',
+        imageName: '../gymLeaders/Steven',
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Metagross').giveMegastone(),
+    }
+);
+TemporaryBattleList['Dr Cozmo'] = new TemporaryBattle(
+    'Dr Cozmo',
+    [
+        new GymPokemon('Lunatone', 79901427, 57),
+        new GymPokemon('Solrock', 79901427, 57),
+        new GymPokemon('Mega Gallade', 79901427, 63),
+    ],
+    'That was invigorating! Please take this!</br><img src="assets/images/megaStone/475.png"/>',
+    [new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 27), new ObtainedPokemonRequirement('Gallade')])],
+    undefined,
+    {
+        displayName: 'Dr. Cozmo',
+        imageName: '../npcs/Dr Cozmo',
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Gallade').giveMegastone(),
+    }
+);
+TemporaryBattleList['Matt 3'] = new TemporaryBattle(
+    'Matt 3',
+    [
+        new GymPokemon('Grimer', 70875000, 57),
+        new GymPokemon('Sharpedo', 70875000, 63),
+    ],
+    '<i>The Latias that Matt was harassing flies away, leaving a stone behind.</i></br><img src="assets/images/megaStone/380.png"/>',
+    [new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 5), new ObtainedPokemonRequirement('Latias')])],
+    undefined,
+    {
+        displayName: 'Aqua Admin Matt',
+        imageName: '../trainers/Aqua Admin (matt)',
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Latias').giveMegastone(),
+    }
+);
+TemporaryBattleList['Courtney 3'] = new TemporaryBattle(
+    'Courtney 3',
+    [
+        new GymPokemon('Koffing', 70875000, 57),
+        new GymPokemon('Camerupt', 70875000, 63),
+    ],
+    '<i>The Latios that Courtney was harassing flies away, leaving a stone behind.</i></br><img src="assets/images/megaStone/381.png"/>',
+    [new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 5), new ObtainedPokemonRequirement('Latios')])],
+    undefined,
+    {
+        displayName: 'Magma Admin Courtney',
+        imageName: '../trainers/Magma Admin (courtney)',
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Latios').giveMegastone(),
+    }
+);
 TemporaryBattleList['Aipom Alley'] = new TemporaryBattle(
     'Aipom Alley',
     [
