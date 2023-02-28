@@ -718,6 +718,7 @@ export const SpriteCredits: Credit[] = [
             'Dr Cozmo',
             'Draconid Elder',
             'Dyna Tree',
+            'Friend Safari',
             'Macro Cosmos (male) and (female)',
             'Magikarp Grey Bubbles',
             'Magikarp Grey Diamonds',
