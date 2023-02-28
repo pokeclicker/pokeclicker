@@ -52,11 +52,12 @@ class SafariPokemonList {
     }
 
     private static generateKalosSafariList() {
-        const pokemon : SafariType[] = App.game.party.caughtPokemon.map((p) => p.name)
+        SeededRand.seed(43958435);
+        const pokemon : SafariType[] = SeededRand.shuffleArray(App.game.party.caughtPokemon.map((p) => p.name)
             .filter((p) => !PokemonHelper.hasEvableLocations(p) && Object.keys(PokemonHelper.getPokemonLocations(p)).length)
             .map((p) => {
                 return {name: p, weight: 1};
-            });
+            })).slice(0, 5);
         return [new SafariPokemonList(pokemon)];
     }
 }
