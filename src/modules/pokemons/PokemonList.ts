@@ -27441,8 +27441,8 @@ export const pokemonList = createPokemonArray(
         'exp': 61,
         'catchRate': 150,
         'evolutions': [
-            LevelEvolution('Tandemaus', 'Maushold (Family of Three)', 25),
             LevelEvolution('Tandemaus', 'Maushold (Family of Four)', 25),
+            LevelEvolution('Tandemaus', 'Maushold (Family of Three)', 25),
         ],
         'gender': {
             'type': Genders.Genderless,
@@ -27450,7 +27450,7 @@ export const pokemonList = createPokemonArray(
     },
     {
         'id': 925,
-        'name': 'Maushold (Family of Three)',
+        'name': 'Maushold (Family of Four)',
         'type': [PokemonType.Normal],
         'base': {
             'hitpoints': 74,
@@ -27470,7 +27470,7 @@ export const pokemonList = createPokemonArray(
     },
     {
         'id': 925.01,
-        'name': 'Maushold (Family of Four)',
+        'name': 'Maushold (Family of Three)',
         'type': [PokemonType.Normal],
         'base': {
             'hitpoints': 74,
@@ -29285,6 +29285,46 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 335,
         'catchRate': 3,
+        'gender': {
+            'type': Genders.Genderless,
+        },
+    },
+    {
+        'id': 1009,
+        'name': 'Walking Wake',
+        'type': [PokemonType.Water, PokemonType.Dragon],
+        'base': {
+            'hitpoints': 99,
+            'attack': 83,
+            'specialAttack': 125,
+            'defense': 91,
+            'specialDefense': 83,
+            'speed': 109,
+        },
+        'eggCycles': 50,
+        'levelType': LevelType.slow,
+        'exp': 295,
+        'catchRate': 5,
+        'gender': {
+            'type': Genders.Genderless,
+        },
+    },
+    {
+        'id': 1010,
+        'name': 'Iron Leaves',
+        'type': [PokemonType.Grass, PokemonType.Psychic],
+        'base': {
+            'hitpoints': 90,
+            'attack': 130,
+            'specialAttack': 70,
+            'defense': 88,
+            'specialDefense': 108,
+            'speed': 104,
+        },
+        'eggCycles': 50,
+        'levelType': LevelType.slow,
+        'exp': 295,
+        'catchRate': 5,
         'gender': {
             'type': Genders.Genderless,
         },
