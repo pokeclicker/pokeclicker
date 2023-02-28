@@ -52,7 +52,7 @@ class SafariPokemonList {
     }
 
     private static generateKalosSafariList() {
-        SeededRand.seed(43958435);
+        SeededRand.seedWithDate(new Date());
         const pokemon : SafariType[] = SeededRand.shuffleArray(App.game.party.caughtPokemon.map((p) => p.name)
             .filter((p) => !PokemonHelper.hasEvableLocations(p) && Object.keys(PokemonHelper.getPokemonLocations(p)).length)
             .map((p) => {
