@@ -313,6 +313,9 @@ TemporaryBattleList.Sudowoodo = new TemporaryBattle(
         returnTown: 'Goldenrod City',
         hideTrainer: true,
         visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.johto, 31),
+        firstTimeRewardFunction: () => {
+            App.game.quests.getQuestLine('The Legendary Beasts').beginQuest();
+        },
     }
 );
 TemporaryBattleList['Silver 3'] = new TemporaryBattle(
