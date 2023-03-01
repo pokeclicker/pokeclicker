@@ -277,7 +277,7 @@ GymList['Ecruteak City'] = new Gym(
     BadgeEnums.Fog,
     1500,
     'I\'m not good enough yet... All right. This Badge is yours.',
-    [new GymBadgeRequirement(BadgeEnums.Plain)],
+    [new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Plain), new QuestLineStepCompletedRequirement('The Legendary Beasts', 2)])],
     () => {
         App.game.quests.getQuestLine('Team Rocket Again').beginQuest();
     }
