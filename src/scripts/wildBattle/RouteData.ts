@@ -875,7 +875,7 @@ Routes.add(new RegionRoute(
         special:
         [new SpecialRoutePokemon(['Roselia'], new ObtainedPokemonRequirement('Roselia'))],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 110)],
+    [new TemporaryBattleRequirement('May 3')],
     110.1
 ));
 Routes.add(new RegionRoute(

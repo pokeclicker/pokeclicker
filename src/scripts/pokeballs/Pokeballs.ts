@@ -166,7 +166,8 @@ class Pokeballs implements Feature {
             if (!alreadyCaught) {
                 pref = this.notCaughtSelection;
             } else {
-                if (contagious) {
+                // If a pokeball is not selected for contagious pokemon, but there is one selected for caught pokemon, then use that on contagious pokemon as well.
+                if (contagious && this.alreadyCaughtContagiousSelection != GameConstants.Pokeball.None) {
                     pref = this.alreadyCaughtContagiousSelection;
                 } else {
                     pref = this.alreadyCaughtSelection;
