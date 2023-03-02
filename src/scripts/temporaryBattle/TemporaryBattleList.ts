@@ -1886,6 +1886,9 @@ TemporaryBattleList['Sycamore 1'] = new TemporaryBattle(
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 4)],
     undefined,
     {
+        firstTimeRewardFunction: () => {
+            App.game.quests.getQuestLine('A Beautiful World').beginQuest();
+        },
         displayName: 'Pokémon Professor Sycamore',
         imageName: 'Sycamore',
     }
@@ -1915,6 +1918,36 @@ TemporaryBattleList['Trevor & Tierno'] = new TemporaryBattle(
     {
         displayName: 'Pokémon Trainer Trevor & Pokémon Trainer Tierno',
         returnTown: 'Camphrier Town',
+    }
+);
+TemporaryBattleList['Team Flare Grunt 1'] = new TemporaryBattle(
+    'Team Flare Grunt 1',
+    [
+        new GymPokemon('Houndour', 35486579, 18),
+        new GymPokemon('Zubat', 36513421, 18),
+    ],
+    'You may have beaten me, but when I lose, I go out in style!',
+    [new QuestLineStepCompletedRequirement('A Beautiful World', 4)],
+    undefined,
+    {
+        displayName: 'Team Flare Grunt',
+        returnTown: 'Glittering Cave',
+        imageName: 'Team Flare Grunt (male)',
+    }
+);
+TemporaryBattleList['Team Flare Grunt 2'] = new TemporaryBattle(
+    'Team Flare Grunt 2',
+    [
+        new GymPokemon('Houndour', 37260908, 21),
+        new GymPokemon('Golbat', 39069360, 23),
+    ],
+    'You may have beaten me... again, but when I lose, I go out in style!',
+    [new QuestLineStepCompletedRequirement('A Beautiful World', 8)],
+    undefined,
+    {
+        displayName: 'Team Flare Grunt',
+        returnTown: 'Glittering Cave',
+        imageName: 'Team Flare Grunt (male)',
     }
 );
 TemporaryBattleList['Calem 1'] = new TemporaryBattle(
@@ -2077,7 +2110,7 @@ TemporaryBattleList['Calem 3'] = new TemporaryBattle(
         new GymPokemon('Chesnaught', 67476604, 37, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Water)),
     ],
     'Battling with you is fun, but losing all the time doesn\'t really make me look all that good.',
-    [new GymBadgeRequirement(BadgeEnums.Voltage)],
+    [new GymBadgeRequirement(BadgeEnums.Voltage), new QuestLineStepCompletedRequirement('A Beautiful World', 16)],
     undefined,
     {
         displayName: 'Pokémon Trainer Calem',
@@ -2104,6 +2137,81 @@ TemporaryBattleList['Calem 4'] = new TemporaryBattle(
         displayName: 'Pokémon Trainer Calem',
         returnTown: 'Anistar City',
         imageName: 'Calem',
+    }
+);
+TemporaryBattleList['Team Flare Lysandre 1'] = new TemporaryBattle(
+    'Team Flare Lysandre 1',
+    [
+        new GymPokemon('Mienfoo', 66360070, 45),
+        new GymPokemon('Murkrow', 66360070, 45),
+        new GymPokemon('Pyroar', 67714357, 47),
+        new GymPokemon('Gyarados', 69068644, 49),
+    ],
+    'Excellent! I can feel the fire of your convictions burning deep within your heart!',
+    [new QuestLineStepCompletedRequirement('A Beautiful World', 25)],
+    undefined,
+    {
+        displayName: 'Team Flare Lysandre',
+        returnTown: 'Lumiose City',
+        imageName: 'Team Flare Lysandre',
+    }
+);
+TemporaryBattleList['Team Flare Xerosic'] = new TemporaryBattle(
+    'Team Flare Xerosic',
+    [
+        new GymPokemon('Crobat', 128657279, 46),
+        new GymPokemon('Malamar', 131365853, 48),
+    ],
+    'Oh ho ho! You\'re wonderful! Your Pokémon are amazing',
+    [new QuestLineStepCompletedRequirement('A Beautiful World', 28)],
+    undefined,
+    {
+        displayName: 'Team Flare Xerosic',
+        returnTown: 'Lumiose City',
+        imageName: 'Team Flare Xerosic',
+    }
+);
+TemporaryBattleList.Xerneas = new TemporaryBattle(
+    'Xerneas',
+    [new GymPokemon('Xerneas', 281500000, 50)],
+    'You calmed down Xerneas and it ran away to the back of the lab.',
+    [new QuestLineStepCompletedRequirement('A Beautiful World', 40)],
+    undefined,
+    {
+        displayName: 'Xerneas',
+        returnTown: 'Team Flare Secret HQ',
+        imageName: '../pokemon/716',
+        hideTrainer: true,
+    }
+);
+TemporaryBattleList.Yveltal = new TemporaryBattle(
+    'Yveltal',
+    [new GymPokemon('Yveltal', 281500000, 50)],
+    'You calmed down Yveltal and it ran away to the back of the lab.',
+    [new QuestLineStepCompletedRequirement('A Beautiful World', 40)],
+    undefined,
+    {
+        displayName: 'Yveltal',
+        returnTown: 'Team Flare Secret HQ',
+        imageName: '../pokemon/717',
+        hideTrainer: true,
+    }
+);
+TemporaryBattleList['Team Flare Boss Lysandre 1'] = new TemporaryBattle(
+    'Team Flare Boss Lysandre 1',
+    [
+        new GymPokemon('Mienfoo', 68927443, 49),
+        new GymPokemon('Murkrow', 68927443, 49),
+        new GymPokemon('Pyroar', 70334126, 51),
+        new GymPokemon('Mega Gyarados', 71740808, 53),
+    ],
+    'It\'s over... Fools with no vision will continue to befoul this beautiful world. They will go on until the only thing left to do is squabble over the remaining scraps of hope...',
+    [new QuestLineStepCompletedRequirement('A Beautiful World', 42)],
+    undefined,
+    {
+        displayName: 'Team Flare Boss Lysandre',
+        returnTown: 'Team Flare Secret HQ',
+        imageName: 'Team Flare Boss Lysandre',
     }
 );
 TemporaryBattleList['Sycamore 2'] = new TemporaryBattle(

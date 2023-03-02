@@ -4399,11 +4399,76 @@ const LumioseDexio = new NPC('Dexio', [
     image: 'assets/images/npcs/Dexio (Gen 6).png',
 });
 
+const Lysandre1 = new NPC('Lysandre', [
+    'Oh! You\'ve met already professor Sycamore... How wonderful! That is a wonderful thing, indeed. You are one of the chosen ones.',
+    'I am Lysandre. I\'ve tried to learn as much about Pokémon as I can to help build a brighter future. Professor Sycamore has taught me so much.',
+    'Now listen! It is vital that this world become a better place. And the people and Pokémon chosen to make the world better must work tirelessly to achieve this goal.',
+    'Well, I\'ll be off. Please give Professor Sycamore my best. My desire... it is for a more beautiful world!',
+], {image: 'assets/images/trainers/Team Flare Lysandre.png',
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('A Beautiful World'), new QuestLineStepCompletedRequirement('A Beautiful World', 0, GameConstants.AchievementOption.less)]),
+});
+
+const Calem1 = new NPC('Calem', [
+    'Hi $playername$, I just saw Diantha, a really cool and pretty actress, talking with a funny looking guy with orange spiky hair.',
+    'He was such a weirdo. He kept telling her how everything should be beautiful forever and how he would end the world in an instant so that beauty never fades.',
+    'Anyway, I\'m gonna continue forward, I\'ll wait for you in Ambrette Town.',
+], {
+    image: 'assets/images/temporaryBattle/Calem.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Beautiful World', 0), new QuestLineStepCompletedRequirement('A Beautiful World', 2, GameConstants.AchievementOption.less)]),
+});
+
 const CamphrierFlabébéEnthusiast = new NPC('Flabébé Enthusiast', [
     'Ah, isn\'t Flabébé such an eye-catching Pokémon? All these different lovely colors…',
     'If you\'re searching for the yellow and blue kinds, look no further than the Farm!',
     'They simply can\'t resist berries that match their colors - just plant a few and they\'ll soon come wandering in.',
 ]);
+
+const Calem2 = new NPC('Calem', [
+    'Oh $playername$, you made it here. I wanted to learn about fossils so I went to the fossil lab, butt the head scientist is not here.',
+    'I heard he\'s in Glittering Cave but I also saw some weird guys in orange going there. Will you come with me and check it out?',
+], {
+    image: 'assets/images/temporaryBattle/Calem.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Beautiful World', 1), new QuestLineStepCompletedRequirement('A Beautiful World', 3, GameConstants.AchievementOption.less)]),
+});
+
+const TeamFlareGrunt1 = new NPC('Team Flare Grunt', [
+    'What\'s this? Well, well. What do we have here? A nosy little trainer has come poking around.',
+    'Listen up! We\'re the fashionable team whose very name makes people tremble in fear: Team Flare!',
+    'Team Flare\'s goal is to make it so we\'re the only ones who are happy! We don\'t care one bit about what happens to other trainers or Pokémon.',
+    'Get out of here, kid. Don\'t you know not to play with fire? We\'ll obliterate you!',
+], {
+    image: 'assets/images/trainers/Team Flare Grunt (male).png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Beautiful World', 3), new QuestLineStepCompletedRequirement('A Beautiful World', 5, GameConstants.AchievementOption.less)]),
+});
+
+const FossilScientist = new NPC('Fossil Scientist', [
+    'Why, hello! Here to look for fossils as well?',
+    'What did you say? Teemphlair was here? What\'s that? A Pokémon?',
+    'You are very lucky! I just now found a fossil! But it\'s one I already have, so I\'ll give it to you!',
+    'Well, I\'m going back to the lab, goodbye!',
+], {
+    image: 'assets/images/trainers/Scientist (male).png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Beautiful World', 5), new QuestLineStepCompletedRequirement('A Beautiful World', 7, GameConstants.AchievementOption.less)]),
+});
+
+const TeamFlareGrunt2 = new NPC('Team Flare Grunt', [
+    'Stop right there! I remember you! You\'re the one who foiled out fossil-finding plans!',
+    'And now you\'re here, standing around these stones. Do you have any idea what they even are?',
+    'Of course you don\'t! You know nothing about the legend of 3000 years ago that says...',
+    'Oh, whatever! Who cares about all of that? It\'s time for me to get some sweet revenge... with style!',
+], {
+    image: 'assets/images/trainers/Team Flare Grunt (male).png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Beautiful World', 7), new QuestLineStepCompletedRequirement('A Beautiful World', 9, GameConstants.AchievementOption.less)]),
+});
+
+const TeamFlareGrunt3 = new NPC('Team Flare Grunt', [
+    'Heart this, pip-squeak! Team Flare is gonna use the stones on Route 10 and a fantastic treasure to make everyone on our team happy!',
+    'In this world the ones who have power are the ones who win with flair!',
+
+], {
+    image: 'assets/images/trainers/Team Flare Grunt (male).png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Beautiful World', 9), new QuestLineStepCompletedRequirement('A Beautiful World', 10, GameConstants.AchievementOption.less)]),
+});
 
 const SharlourKorrina = new NPC('Korrina', [
     'What an explosive battle! I could tell that you didn\'t hold anything back!',
@@ -4426,6 +4491,44 @@ const CoumarineElectricTrainer = new NPC('Electric Trainer', [
     'Luckily my Ampharos was already strong enough to use it!',
     'If you find that fella, tell him the code <b>DO-MAGEARNA-DREAM-OF-MAREEP?</b> and he might help you too!',
 ]);
+
+const Diantha1 = new NPC('Diantha', [
+    'Bonds... They really are important to us all, aren\'t they? When I\'m acting, I think I\'m always trying to forge a bond between myself and the character I\'m playing',
+    'If all I think about is how I\'m nothing like a character, then I\'ll just hate playing it.',
+    'But if I focus on what I have in common with the character and put myself in her shoes, I might be able to understand her. It\'s the same for people, or Pokémon.',
+    'Oh, never mind me! I\'m just babbling about my own things. Let\'s have a battle the next we meet, shall we? I\'m still looking forward to it!',
+
+], {
+    image: 'assets/images/gymLeaders/Diantha.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Beautiful World', 10), new QuestLineStepCompletedRequirement('A Beautiful World', 12, GameConstants.AchievementOption.less)]),
+});
+
+const Lysandre2 = new NPC('Lysandre', [
+    'Professor Sycamore told me how stronger you\'ve got.',
+    'That is truly wonderful. With that power, you can steer your future in a better direction!',
+    'We can\'t just cover up the old filth with new filth!',
+    'I implore you to consider what we need to do to change the world into a new, beautiful world!',
+], {image: 'assets/images/trainers/Team Flare Lysandre.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Beautiful World', 11), new QuestLineStepCompletedRequirement('A Beautiful World', 13, GameConstants.AchievementOption.less)]),
+});
+
+const TeamFlareAliana1 = new NPC('Team Flare Aliana', [
+    'You\'re quite strong. Oh yes... very strong, indeed. I certainly didn\'t expect you to be so interesting.',
+    'But it matters not, we already have enough energy to power the device. I do hope we can meet again!',
+], {image: 'assets/images/trainers/Team Flare Aliana.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Beautiful World', 13), new QuestLineStepCompletedRequirement('A Beautiful World', 15, GameConstants.AchievementOption.less)]),
+});
+
+const Lysandre3 = new NPC('Lysandre', [
+    'I\'m a descendant of the king\'s younger brother. That being said, that story is 3,000 years old, so it might not be entirely reliable.',
+    'People can be divided into two groups. Those who give... And those who take... It\'s just as how the Kalos region\'s two Legendary Pokémon gave life and took life.',
+    'I want to be the kind of person who gives... But in this world, some foolish humans exist who would show their strength by taking what isn\'t theirs. They\'re filth!',
+    'Long, long ago, the king of Kalos sought to take everything for his own, and he created a terrible weapon. Then the fire of destruction was unleashed... That is the legend that has been passed down.',
+    'Kalos is beautiful right now! There will be no foolish actions if the number of people and Pokémon do not increase. That being said, the future isn\'t decided. You can\'t be sure each day will be like the one before.',
+    'What the king of Kalos did was reprehensible, but... The ultimate weapon did manage to wash the world clean of that era\'s filth. Thank you for listening.',
+], {image: 'assets/images/trainers/Team Flare Lysandre.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Beautiful World', 15), new QuestLineStepCompletedRequirement('A Beautiful World', 17, GameConstants.AchievementOption.less)]),
+});
 
 const LaverreFurisodeGirlKatherine = new NPC('Furisode Girl Katherine', [
     'Don\'t you find Goomy to be an interesting Pokémon? I certainly think so, even though it isn\'t a problem for my Pokémon~',
@@ -4455,6 +4558,22 @@ const LaverreGengariteAster2 = new NPC('Hex Maniac Aster', [
     requirement: new TemporaryBattleRequirement('Hex Maniac Aster'),
 });
 
+const TeamFlareBryony1 = new NPC('Team Flare Bryony', [
+    'No way you beat us! Wow, we are lame. Probability is just probability after all... Absolutes do not exist.',
+    'But enough already! We\'ve already stolen the Poké Balls, Great Balls, and Ultra Balls. Let\'s call it good and leave.',
+], {image: 'assets/images/trainers/Team Flare Bryony.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Beautiful World', 17), new QuestLineStepCompletedRequirement('A Beautiful World', 19, GameConstants.AchievementOption.less)]),
+});
+
+const PokéBallFactoryDirector = new NPC('Poké Ball Factory Director', [
+    'You saved us! Thank you so much! You\'re an astounding Pokémon Trainer.',
+    'Very well, then. I want to show my appreciation. I\'ll give you a Master Ball.',
+    'I have a feeling you will put it to great use. You\'re different from those Team Flare people.',
+    'What were they planning to accomplish by taking all the Poké Balls for themselves...',
+], {image: 'assets/images/npcs/Gentleman (Gen 4).png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Beautiful World', 18), new QuestLineStepCompletedRequirement('A Beautiful World', 20, GameConstants.AchievementOption.less)]),
+});
+
 const DendemilleDogLover = new NPC('Dubious Dog-loving Duke', [
     'Dog Pokémon are the best of all! I\'m particularly fond of Houndour - I\'ve caught about five hundred of them.',
     'There\'s no such thing as a cold night in my house, no sir! The most fierce chill of winter is completely defeated by their warm, cozy presence.',
@@ -4475,9 +4594,127 @@ const DendemilleWolfLover = new NPC('Worrisome Wolf-loving Woman', [
 ], {image: 'assets/images/trainers/Madame.png',
 });
 
+const ProfessorSycamore1 = new NPC('Prof. Sycamore', [
+    'Hello $playername$!. Do you remember the Pokemon Lysandre mentioned in that café? Kalos\'s Legendary Pokémon are called... Xerneas and Yveltal!”',
+    'Apparently, these Pokémon can control energy or absorb energy, respectively. Xerneas gives life energy to plants and Pokémon, whereas Yveltal steals all of the spirits around it.',
+    'When they lose all of their vitality, they go to sleep in a secret place. It would be absolutely astounding if you found it!',
+    'By the way, I heard Frost Cavern has a lot of cool Pokémon, why don\'t you go check it out?',
+], {image: 'assets/images/temporaryBattle/Sycamore.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Beautiful World', 19), new QuestLineStepCompletedRequirement('A Beautiful World', 21, GameConstants.AchievementOption.less)]),
+});
+
+const TeamFlareMable1 = new NPC('Team Flare Mable', [
+    'Not just strong... TOO strong! Not ordinary, indeed.',
+    'Whatever, it doesn\'t matter, we already tested what we wanted to know. The Abomasnow from this cavern is a fine specimen.',
+    'The more we agitate it, the stronger its Snow Warning ability becomes, making the snow fall even more furiously.',
+    'Whoever has the most energy will come out on top! And it\'s Team Flare, and only Team Flare who will survive!',
+], {image: 'assets/images/trainers/Team Flare Mable.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Beautiful World', 21), new QuestLineStepCompletedRequirement('A Beautiful World', 23, GameConstants.AchievementOption.less)]),
+});
+
 const AnistarKalosRoamerNPC = new RoamerNPC('Hex Maniac Melanie', [
     'The spirits tell me roaming Pokémon have been spotted on {ROUTE_NAME}!',
 ], GameConstants.Region.kalos, RoamingPokemonList.findGroup(GameConstants.Region.kalos, GameConstants.KalosSubRegions.Kalos), 'assets/images/trainers/Hex Maniac.png');
+
+const KalosTVNews = new NPC('Kalos TV News', [
+    'Pokémon Trainers. I come to you to make an important announcement. Listen well.',
+    'Team Flare will revive the ultimate weapon, eliminate everyone who isn\'t in our group, and return the world to a beautiful, natural state.',
+    'Unproductive fools are consuming our future... If nothing changes, the world will become ugly and conflicts will raze the land from end to end.',
+    'I repeat. We will use the ultimate weapon and wipe the slate clean. I\'m sorry, those of you who are not members of Team Flare, but this is adieu to you all.',
+], {image: 'assets/images/trainers/Team Flare Lysandre.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Beautiful World', 23), new QuestLineStepCompletedRequirement('A Beautiful World', 25, GameConstants.AchievementOption.less)]),
+});
+
+const Lysandre4 = new NPC('Lysandre', [
+    'Welcome. I guess you found my secret labs, inside my own café. The world was just too vast...and too full of fools that I couldn\'t save through my hard work alone...',
+    'That\'s why I decided the only way to save the world was to take it all for myself. I don\'t expect that I will ever make you understand how I think and feel...',
+    'Try to stop the ultimate weapon if you must. Saving everything... The world is suffering because of this absurd dream...',
+], {image: 'assets/images/trainers/Team Flare Lysandre.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Beautiful World', 24), new QuestLineStepCompletedRequirement('A Beautiful World', 26, GameConstants.AchievementOption.less)]),
+});
+
+const Lysandre5 = new NPC('Lysandre', [
+    'I tried to save people--and the world--with the profit from this lab. But my efforts had no effect...',
+    'This world will eventually reach the point of no return... Saving the lives of all is impossible. Only the chosen ones will obtain a ticket to tomorrow.',
+    'Do you want to have a ticket? Or, do you want to stop me? Show me in battle!',
+], {image: 'assets/images/trainers/Team Flare Lysandre.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Beautiful World', 26), new QuestLineStepCompletedRequirement('A Beautiful World', 28, GameConstants.AchievementOption.less)]),
+});
+
+const AZ1 = new NPC('AZ', [
+    'Listen, trainer who will face Lysandre. A terribly long time ago... There was a man and a Pokémon. A war began. The man\'s beloved Pokémon took part in the war.',
+    'The Pokémon died. The man wanted to bring the Pokémon back. No matter what it took. The man built a machine to give it life and succeeded.',
+    'The lives of many Pokémon were taken to restore its life. The resurrected Pokémon left the man.',
+    'The man had suffered too much. His rage had not subsided. He turned the machine into the ultimate weapon. The man became a bringer of destruction that ended the war.',
+], {image: 'assets/images/temporaryBattle/AZ.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Beautiful World', 27), new QuestLineStepCompletedRequirement('A Beautiful World', 29, GameConstants.AchievementOption.less)]),
+});
+
+const BlueButton = new NPC('Blue Button', [
+    'You pressed it! Oh ho ho! You pressed the blue switch! Winner, winner! Congratulations!',
+    'But I\'m still going to activate the ultimate weapon! I\'ll just use my remote, here! Click-click! And the power is ONª',
+    'The ultimate weapon is reborn! The poisonous flower has bloomed! All shall perish! Except for Team Flare! Look at Geosenge! It has bloomed in Geosenge Town!',
+    'The boss\'s dream of creating a beautiful world will come true! Add it all up, and it equals... a victory for our SCIENCE!',
+], {image: 'assets/images/trainers/Team Flare Xerosic.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Beautiful World', 29), new QuestLineStepCompletedRequirement('A Beautiful World', 30, GameConstants.AchievementOption.less)]),
+});
+
+const RedButton = new NPC('Red Button', [
+    'You pushed it! Oh ho ho! You pushed the little red button! Too bad...for you!',
+    'Pushing that button has enabled us to use the ultimate weapon! Don\'t feel too down, though. I would have activated it even if you had guessed correctly.',
+    'The ultimate weapon is reborn! The poisonous flower has bloomed! All shall perish! Except for Team Flare! Look at Geosenge! It has bloomed in Geosenge Town!',
+    'The boss\'s dream of creating a beautiful world will come true! Add it all up, and it equals... a victory for our SCIENCE!',
+], {image: 'assets/images/trainers/Team Flare Xerosic.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Beautiful World', 29), new QuestLineStepCompletedRequirement('A Beautiful World', 30, GameConstants.AchievementOption.less)]),
+});
+
+const TeamFlareAliana2 = new NPC('Team Flare Aliana', [
+    'I had fun at the Kalos Power Plant. Of course, we could have generated electricity with Team Flare\'s technology, too, you know.',
+    'We just didn\'t think it justified the cost. To create a world for us and us alone, we have to play it smart, you see.',
+], {image: 'assets/images/trainers/Team Flare Aliana.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Beautiful World', 31), new QuestLineStepCompletedRequirement('A Beautiful World', 33, GameConstants.AchievementOption.less)]),
+});
+
+const TeamFlareCelosia1 = new NPC('Team Flare Celosia', [
+    'In reality, those stones that line Route 10 are the graves of Pokémon.',
+    'When the ultimate weapon was used to end that horrible war over 3,000 years ago, it stole the lives of all those Pokémon.',
+    'Their lives were the price of peace then. And if we want to make our own wishes come true today, we in Team Flare also have to sacrifice something precious.',
+], {image: 'assets/images/trainers/Team Flare Celosia.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Beautiful World', 33), new QuestLineStepCompletedRequirement('A Beautiful World', 35, GameConstants.AchievementOption.less)]),
+});
+
+const TeamFlareBryony2 = new NPC('Team Flare Bryony', [
+    'We\'ve been using the electricity we stole from the Power Plant to get everything prepared for activating the ultimate weapon.',
+    'But it\'s not like that\'s all we\'ll need to use it. Are you following me? We\'ll need energy absorbed from Pokémon to power the device!',
+    'Yes! It\'s the stones on Route 10 that will steal that energy for us and power the ultimate weapon.',
+], {image: 'assets/images/trainers/Team Flare Bryony.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Beautiful World', 35), new QuestLineStepCompletedRequirement('A Beautiful World', 37, GameConstants.AchievementOption.less)]),
+});
+
+const TeamFlareMable2 = new NPC('Team Flare Mable', [
+    'The power of the Legendary Pokémon... The power to grant life to all around it... The power to steal life from all around it...',
+    'It\'s a mysterious ability that even scientists like us haven\'t been able to really decode. What d\'you think will happen to the world if we fuel the ultimate weapon with something like that?',
+], {image: 'assets/images/trainers/Team Flare Mable.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Beautiful World', 37), new QuestLineStepCompletedRequirement('A Beautiful World', 39, GameConstants.AchievementOption.less)]),
+});
+
+const TeamFlareLysandre1 = new NPC('Team Flare Lysandre', [
+    'The ultimate weapon\'s flower has finally bloomed above the soil. Don\'t you find its beauty captivating? As we speak, it draws its energy from the Legendary Pokémon.',
+    'Even though resources, space, and energy on this planet are limited, the number of people and Pokémon has increased to an unsustainable level. Whether it\'s money or energy, the ones who steal are the ones who win in this world.',
+    'Pokémon... Shall no longer exist. Pokémon are wonderful beings. Humans have worked with Pokémon, and we have helped each other flourish. But precisely because of that, they will inevitably become tools for war and theft!',
+    'You\'re as strong as ever. But... It\'s too late! There\'s no hope for you now! Go down to the lowest floor, and see for yourself!',
+], {image: 'assets/images/trainers/Team Flare Lysandre.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Beautiful World', 39), new QuestLineStepCompletedRequirement('A Beautiful World', 41, GameConstants.AchievementOption.less)]),
+});
+
+const TeamFlareBossLysandre1 = new NPC('Team Flare Boss Lysandre', [
+    'What a startling development! I never would\'ve thought you were really a chosen one!',
+    'So THESE were the mighty Xerneas and Yveltal?! I expected more from Pokémon called legend! You desire help from people? YOU need help from a human?',
+    'For me, victory is using the ultimate weapon. In order to do that, I need to reclaim the Legendary Pokémon\'s power and send it to that weapon once again.',
+    'I\'ll be taking the Legendary Pokémon back now! This time, I won\'t lose.',
+], {image: 'assets/images/temporaryBattle/Team Flare Boss Lysandre.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Beautiful World', 41), new QuestLineStepCompletedRequirement('A Beautiful World', 43, GameConstants.AchievementOption.less)]),
+});
 
 const KiloudeConfusedHiker = new NPC('Confused Hiker', [
     'Whoa! What the- Where am I? How did I get here? Last thing I can remember I was in Reflection Cave when this little Pokémon with hoops threw something at me… Oh you’ve beaten the Pokémon League? Maybe you can find it roaming around the region so you can tame that little prankster. Now how am I gonna get home…',
@@ -4546,10 +4783,10 @@ TownList['Lumiose City'] = new Town(
     'Lumiose City',
     GameConstants.Region.kalos,
     GameConstants.KalosSubRegions.Kalos,
-    [TemporaryBattleList['Sycamore 1'], TemporaryBattleList['Tierno 1'], DepartmentStoreShop, FriseurFurfrouShop, TemporaryBattleList.AZ, TemporaryBattleList.Merilyn, TemporaryBattleList['Grand Duchess Diantha']],
+    [TemporaryBattleList['Sycamore 1'], TemporaryBattleList['Tierno 1'], DepartmentStoreShop, FriseurFurfrouShop, TemporaryBattleList['Team Flare Lysandre 1'], TemporaryBattleList['Team Flare Xerosic'], TemporaryBattleList.AZ, TemporaryBattleList.Merilyn, TemporaryBattleList['Grand Duchess Diantha']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 4)],
-        npcs: [ProfSycamore, LumioseDexio, LumioseEngineer],
+        npcs: [ProfSycamore, LumioseDexio, LumioseEngineer, Lysandre1, Calem1, Lysandre3, Lysandre4, Lysandre5, AZ1, BlueButton, RedButton],
     }
 );
 TownList['Camphrier Town'] = new Town(
@@ -4578,6 +4815,7 @@ TownList['Ambrette Town'] = new Town(
     [AmbretteTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Ambrette Town'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 8)],
+        npcs: [Calem2],
     }
 );
 TownList['Cyllage City'] = new Town(
@@ -4586,16 +4824,17 @@ TownList['Cyllage City'] = new Town(
     GameConstants.KalosSubRegions.Kalos,
     [CyllageCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Cyllage City']), TemporaryBattleList['Marquis Grant']],
     {
-        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Glittering Cave'))],
+        requirements: [new QuestLineStepCompletedRequirement('A Beautiful World', 6)],
     }
 );
 TownList['Geosenge Town'] = new Town(
     'Geosenge Town',
     GameConstants.Region.kalos,
     GameConstants.KalosSubRegions.Kalos,
-    [GeosengeTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Geosenge Town']), new MoveToDungeon(dungeonList['Team Flare Secret HQ'])],
+    [GeosengeTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Geosenge Town']), new MoveToDungeon(dungeonList['Team Flare Secret HQ']), TemporaryBattleList['Team Flare Grunt 2']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 10)],
+        npcs: [TeamFlareGrunt2, TeamFlareGrunt3],
     }
 );
 TownList['Shalour City'] = new Town(
@@ -4615,7 +4854,7 @@ TownList['Coumarine City'] = new Town(
     [CoumarineCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Coumarine City'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 12)],
-        npcs: [CoumarineBirdwatcher, CoumarineElectricTrainer],
+        npcs: [CoumarineBirdwatcher, CoumarineElectricTrainer, Diantha1, Lysandre2],
     }
 );
 TownList['Laverre City'] = new Town(
@@ -4635,7 +4874,7 @@ TownList['Dendemille Town'] = new Town(
     [DendemilleTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Dendemille Town'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 15)],
-        npcs: [DendemilleWolfLover, DendemilleDogLover],
+        npcs: [DendemilleWolfLover, DendemilleDogLover, ProfessorSycamore1],
     }
 );
 TownList['Anistar City'] = new Town(
@@ -4645,7 +4884,7 @@ TownList['Anistar City'] = new Town(
     [AnistarCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Anistar City'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 17)],
-        npcs: [AnistarKalosRoamerNPC],
+        npcs: [AnistarKalosRoamerNPC, KalosTVNews],
     }
 );
 TownList['Couriway Town'] = new Town(
@@ -4706,8 +4945,13 @@ TownList['Glittering Cave'] = new DungeonTown(
     'Glittering Cave',
     GameConstants.Region.kalos,
     GameConstants.KalosSubRegions.Kalos,
-    [new RouteKillRequirement(10, GameConstants.Region.kalos, 9)]
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 9), new QuestLineStepCompletedRequirement('A Beautiful World', 2)],
+    [TemporaryBattleList['Team Flare Grunt 1']],
+    {
+        npcs: [TeamFlareGrunt1, FossilScientist],
+    }
 );
+
 TownList['Reflection Cave'] = new DungeonTown(
     'Reflection Cave',
     GameConstants.Region.kalos,
@@ -4729,13 +4973,21 @@ TownList['Poké Ball Factory'] = new DungeonTown(
     'Poké Ball Factory',
     GameConstants.Region.kalos,
     GameConstants.KalosSubRegions.Kalos,
-    [new GymBadgeRequirement(BadgeEnums.Fairy)]
+    [new GymBadgeRequirement(BadgeEnums.Fairy)],
+    [],
+    {
+        npcs: [TeamFlareBryony1, PokéBallFactoryDirector],
+    }
 );
 TownList['Kalos Power Plant'] = new DungeonTown(
     'Kalos Power Plant',
     GameConstants.Region.kalos,
     GameConstants.KalosSubRegions.Kalos,
-    [new RouteKillRequirement(10, GameConstants.Region.kalos, 13), new GymBadgeRequirement(BadgeEnums.Plant)]
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 13), new GymBadgeRequirement(BadgeEnums.Plant), new QuestLineStepCompletedRequirement('A Beautiful World', 12)],
+    [],
+    {
+        npcs: [TeamFlareAliana1],
+    }
 );
 TownList['Lost Hotel'] = new DungeonTown(
     'Lost Hotel',
@@ -4747,13 +4999,21 @@ TownList['Frost Cavern'] = new DungeonTown(
     'Frost Cavern',
     GameConstants.Region.kalos,
     GameConstants.KalosSubRegions.Kalos,
-    [new RouteKillRequirement(10, GameConstants.Region.kalos, 15)]
+    [new QuestLineStepCompletedRequirement('A Beautiful World', 20)],
+    [],
+    {
+        npcs: [TeamFlareMable1],
+    }
 );
 TownList['Team Flare Secret HQ'] = new DungeonTown(
     'Team Flare Secret HQ',
     GameConstants.Region.kalos,
     GameConstants.KalosSubRegions.Kalos,
-    [new GymBadgeRequirement(BadgeEnums.Psychic)]
+    [new QuestLineStepCompletedRequirement('A Beautiful World', 30)],
+    [TemporaryBattleList.Xerneas, TemporaryBattleList.Yveltal, TemporaryBattleList['Team Flare Boss Lysandre 1']],
+    {
+        npcs: [TeamFlareAliana2, TeamFlareCelosia1, TeamFlareBryony2, TeamFlareMable2, TeamFlareLysandre1, TeamFlareBossLysandre1],
+    }
 );
 TownList['Terminus Cave'] = new DungeonTown(
     'Terminus Cave',

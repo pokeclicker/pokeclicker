@@ -1352,6 +1352,184 @@ class QuestLineHelper {
     }
 
     // Kalos QuestLines
+    // Started upon defeating Professor Sycamore in Lumiose City.
+    public static createFlareKalosQuestLine() {
+        const flareKalosQuestLine = new QuestLine('A Beautiful World', 'End Team Flare\'s plan to destroy the world and create a new one in its place.');
+
+        const talkToLysandre1 = new TalkToNPCQuest(Lysandre1, 'Talk to Lysandre inside Professor Sycamore\'s lab in Lumiose City.');
+        flareKalosQuestLine.addQuest(talkToLysandre1);
+
+        const talkToKalem1 = new TalkToNPCQuest(Calem1, 'Well, that was definitely a weird guy... Seems like Calem wants to meet you in Café Soleil. Go there in Lumiose City and talk with him.');
+        flareKalosQuestLine.addQuest(talkToKalem1);
+
+        const talkToKalem2 = new TalkToNPCQuest(Calem2, 'Meet Calem in Ambrette Town.');
+        flareKalosQuestLine.addQuest(talkToKalem2);
+
+        const clearGlitteringCave = new CustomQuest(1, 0, 'Clear Glittering Cave and find the scientist.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Glittering Cave')]());
+        flareKalosQuestLine.addQuest(clearGlitteringCave);
+
+        const talkToTeamFlareGrunt1 = new TalkToNPCQuest(TeamFlareGrunt1, 'Talk to Team Flare Grunt.');
+        flareKalosQuestLine.addQuest(talkToTeamFlareGrunt1);
+
+        const battleTeamFlareGrunt1 = new CustomQuest (1, 0,  'It seems that Team Flare is holding the scientist captive, liberate him!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Flare Grunt 1')]());
+        flareKalosQuestLine.addQuest(battleTeamFlareGrunt1);
+
+        // Talk to Fossil Scientist after beating Team Flare Grunt
+        const KalosFossilReward = () => {
+            const item = Rand.boolean() ? 'Sail Fossil' : 'Jaw Fossil';
+
+            Underground.gainMineItem(UndergroundItems.getByName(item).id, 1);
+            Notifier.notify({
+                title: flareKalosQuestLine.name,
+                message: `Fossil Scientist has given you a ${GameConstants.humanifyString(item)}!`,
+                type: NotificationConstants.NotificationOption.success,
+                sound: NotificationConstants.NotificationSound.Quests.quest_ready_to_complete,
+                setting: NotificationConstants.NotificationSetting.Dungeons.rare_dungeon_item_found,
+            });
+        };
+
+        const talkToFossilScientist = new TalkToNPCQuest(FossilScientist, 'From what you gathered, Team Flare wanted to sell fossils for money. Talk with the fossil scientist you just rescued in Glittering Cave.', KalosFossilReward);
+        flareKalosQuestLine.addQuest(talkToFossilScientist);
+
+        const clearCyllageCityGym = new CustomQuest(1, 0, 'Challenge the Cyllage City Gym and become stronger.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Cyllage City')]());
+        flareKalosQuestLine.addQuest(clearCyllageCityGym);
+
+        const talkToTeamFlareGrunt2 = new TalkToNPCQuest(TeamFlareGrunt2, 'You can see in Geosenge Town the Team Flare Grunt you battled earlier. Approach him once more.');
+        flareKalosQuestLine.addQuest(talkToTeamFlareGrunt2);
+
+        const battleTeamFlareGrunt2 = new CustomQuest (1, 0,  'Beat the Team Flare Grunt once more!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Flare Grunt 2')]());
+        flareKalosQuestLine.addQuest(battleTeamFlareGrunt2);
+
+        const talkToTeamFlareGrunt3 = new TalkToNPCQuest(TeamFlareGrunt3, 'This Team Flare Guy doesn\'t seem like he wants to stop talking. What is he saying now?');
+        flareKalosQuestLine.addQuest(talkToTeamFlareGrunt3);
+
+        const talkToDiantha1 = new TalkToNPCQuest(Diantha1, 'You heard rumors of Diantha being in Coumarine City. Go there to check if you can see her.');
+        flareKalosQuestLine.addQuest(talkToDiantha1);
+
+        const talkToLysandre2 = new TalkToNPCQuest(Lysandre2, 'Lysandre is calling you while you are standing in Coumarine City, pick up the phone.');
+        flareKalosQuestLine.addQuest(talkToLysandre2);
+
+        const clearKalosPowerPlant = new CustomQuest(1, 0, 'Well, that was extremely awkward... But ignoring that, Lumiose City still hasn\'t fixed the power outage, go clear the Kalos Power Plant.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Kalos Power Plant')]());
+        flareKalosQuestLine.addQuest(clearKalosPowerPlant);
+
+        const talkToTeamFlareAliana1 = new TalkToNPCQuest(TeamFlareAliana1, 'Team Flare Aliana has something to say to you even after you beat her in Kalos Power Plant.');
+        flareKalosQuestLine.addQuest(talkToTeamFlareAliana1);
+
+        const clearLumioseCityGym = new CustomQuest(1, 0, 'You\'ve helped with the power outage problem, now the gym in Lumiose City is back up and you can challenge it!', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Lumiose City')]());
+        flareKalosQuestLine.addQuest(clearLumioseCityGym);
+
+        const talkToLysandre3 = new TalkToNPCQuest(Lysandre3, 'Professor Sycamore wants to meet you in Lysandre Café in Lumiose City. He\'s with Lysandre, go say hi.');
+        flareKalosQuestLine.addQuest(talkToLysandre3);
+
+        const clearPokéBallFactory = new CustomQuest(1, 0, 'For someone so obsessed with beauty he seems to really care about filth... Anyway, the Poké Ball Factory sounds like a fun place, let\'s go check it out.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Poké Ball Factory')]());
+        flareKalosQuestLine.addQuest(clearPokéBallFactory);
+
+        const talkToTeamFlareBryony1 = new TalkToNPCQuest(TeamFlareBryony1, 'Talk To Team Flare Bryony to see if you can get back the Balls they stealed from the Poké Ball Factory.');
+        flareKalosQuestLine.addQuest(talkToTeamFlareBryony1);
+
+        // Talk to Poké Ball Factory Director after talking with Team Flare Bryony
+        const KalosMasterBallReward = () => {
+            App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1, false);
+            Notifier.notify({
+                title: flareKalosQuestLine.name,
+                message: 'Poké Ball Factory Director has given you a Master Ball!',
+                type: NotificationConstants.NotificationOption.success,
+                sound: NotificationConstants.NotificationSound.Quests.quest_ready_to_complete,
+                setting: NotificationConstants.NotificationSetting.Dungeons.rare_dungeon_item_found,
+            });
+        };
+
+        const talkToPokéBallFactoryDirector = new TalkToNPCQuest(PokéBallFactoryDirector, 'Now that Team Flare is not in the Poké Ball Factory anymore, talk with the Director that you just saved.', KalosMasterBallReward);
+        flareKalosQuestLine.addQuest(talkToPokéBallFactoryDirector);
+
+        const talkToProfessorSycamore1 = new TalkToNPCQuest(ProfessorSycamore1, 'Professor Sycamore is waiting for you in Dendemille Town, he has some important things to say about Mega Evolution');
+        flareKalosQuestLine.addQuest(talkToProfessorSycamore1);
+
+        const clearFrostCavern = new CustomQuest(1, 0, 'You are going to Frost Cavern for Pokémon but what you found there is Team Flare instead! Clear it!', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Frost Cavern')]());
+        flareKalosQuestLine.addQuest(clearFrostCavern);
+
+        const talkToTeamFlareMable1 = new TalkToNPCQuest(TeamFlareMable1, 'Talk with Team Flare Mable in Frost Cavern to stop her before she can catch Abomasnow!');
+        flareKalosQuestLine.addQuest(talkToTeamFlareMable1);
+
+        const clearAnistarCityGym = new CustomQuest(1, 0, 'So it\'s everything over now, right? Right? Go beat Anistar City Gym!', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Anistar City')]());
+        flareKalosQuestLine.addQuest(clearAnistarCityGym);
+
+        const talkToKalosTVNews = new TalkToNPCQuest(KalosTVNews, 'Lysandre is giving an important speech through the TV News. Watch it in Anistar City.');
+        flareKalosQuestLine.addQuest(talkToKalosTVNews);
+
+        const talkToLysandre4 = new TalkToNPCQuest(Lysandre4, 'Wow! Absolutely no one could have seen this coming! You think you might find Lysandre in Lumiose City where you first met him. Look for him!');
+        flareKalosQuestLine.addQuest(talkToLysandre4);
+
+        const battleTeamFlareLysandre1 = new CustomQuest (1, 0,  'Show Team Flare Lysandre in a battle in Lumiose City the strength of your convictions!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Flare Lysandre 1')]());
+        flareKalosQuestLine.addQuest(battleTeamFlareLysandre1);
+
+        const talkToLysandre5 = new TalkToNPCQuest(Lysandre5, 'Get Lysandre before he gets away. Talk with him in Lumiose City.');
+        flareKalosQuestLine.addQuest(talkToLysandre5);
+
+        const talkToAZ1 = new TalkToNPCQuest(AZ1, 'While running after Lysandre and through the Labs you find a jailed mysterous man in Lumiose City. It seems like he has a story to tell...');
+        flareKalosQuestLine.addQuest(talkToAZ1);
+
+        const battleTeamFlareXerosic = new CustomQuest (1, 0,  'Now that you learnt what the ultimate weapon is able to do you need to stop it. Team Flare Xerosic is in the way in Lumiose City, defeat him!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Flare Xerosic')]());
+        flareKalosQuestLine.addQuest(battleTeamFlareXerosic);
+
+        const talkToBlueButton = new TalkToNPCQuest(BlueButton, 'Press the blue button!');
+        const talkToRedButton = new TalkToNPCQuest(RedButton, 'Press the red button!');
+
+        flareKalosQuestLine.addQuest(new MultipleQuestsQuest([
+            talkToBlueButton,
+            talkToRedButton,
+        ],'Xerosic offers you the possibility to stop the ultimate weapon in Lumiose City. Blue or Red Button, press one!', 0, 1)); //Step 30
+
+        const clearTeamFlareSecretHQ1 = new CustomQuest(1, 0, 'The ultimate weapon was activated in Geosenge Town! Go to the Team Flare Secret HQ to put a stop to it! First step: Beating Team Flare Aliana.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Team Flare Secret HQ')]());
+        flareKalosQuestLine.addQuest(clearTeamFlareSecretHQ1);
+
+        const talkToTeamFlareAliana2 = new TalkToNPCQuest(TeamFlareAliana2, 'Hear what Team Flare Aliana has to say in Team Flare Secret HQ.');
+        flareKalosQuestLine.addQuest(talkToTeamFlareAliana2);
+
+        const clearTeamFlareSecretHQ2 = new CustomQuest(1, 0, 'Continue traversing through the Team Flare Secret HQ! Second step: Beating Team Flare Celosia.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Team Flare Secret HQ')]());
+        flareKalosQuestLine.addQuest(clearTeamFlareSecretHQ2);
+
+        const talkToTeamFlareCelosia1 = new TalkToNPCQuest(TeamFlareCelosia1, 'Hear what Team Flare Celosia has to say in Team Flare Secret HQ.');
+        flareKalosQuestLine.addQuest(talkToTeamFlareCelosia1);
+
+        const clearTeamFlareSecretHQ3 = new CustomQuest(1, 0, 'You should be halfway through. Go further the Team Flare Secret HQ! Third step: Beating Team Flare Bryony.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Team Flare Secret HQ')]());
+        flareKalosQuestLine.addQuest(clearTeamFlareSecretHQ3);
+
+        const talkToTeamFlareBryony2 = new TalkToNPCQuest(TeamFlareBryony2, 'Hear what Team Flare Bryony has to say in Team Flare Secret HQ.');
+        flareKalosQuestLine.addQuest(talkToTeamFlareBryony2);
+
+        const clearTeamFlareSecretHQ4 = new CustomQuest(1, 0, 'You are getting close. Resume delving into the Team Flare Secret HQ! Fourth step: Beating Team Flare Mable.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Team Flare Secret HQ')]());
+        flareKalosQuestLine.addQuest(clearTeamFlareSecretHQ4);
+
+        const talkToTeamFlareMable2 = new TalkToNPCQuest(TeamFlareMable2, 'Hear what Team Flare Mable has to say in Team Flare Secret HQ.');
+        flareKalosQuestLine.addQuest(talkToTeamFlareMable2);
+
+        const clearTeamFlareSecretHQ5 = new CustomQuest(1, 0, 'You are almost there! One more time traversing through the Team Flare Secret HQ and you\'ll get to the end! Fifth step: Beating Team Flare Lysandre.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Team Flare Secret HQ')]());
+        flareKalosQuestLine.addQuest(clearTeamFlareSecretHQ5);
+
+        const talkToTeamFlareLysandre1 = new TalkToNPCQuest(TeamFlareLysandre1, 'This is it, you\'ve beaten Lysandre at the top of his game in Team Flare Secret HQ, right? He might have something else to say...');
+        flareKalosQuestLine.addQuest(talkToTeamFlareLysandre1);
+
+        const battleXerneas = new CustomQuest (1, 0,  'Calm Xerneas!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Xerneas')]());
+        const battleYveltal = new CustomQuest (1, 0,  'Calm Yveltal!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Yveltal')]());
+
+        flareKalosQuestLine.addQuest(new MultipleQuestsQuest([
+            battleXerneas,
+            battleYveltal,
+        ],'You go to the lowest level of the Team Flare Secret HQ as Lysandre told you to. There you find Xerneas and Yveltal fighting each other! Fight them yourself and calm them down!'));
+
+        const talkToTeamFlareBossLysandre1 = new TalkToNPCQuest(TeamFlareBossLysandre1, 'Lysandre appears menacingly in front of you in Team Flare Secret HQ. He doesn\'t seem fazed about you subsiding both legendary Pokémon.');
+        flareKalosQuestLine.addQuest(talkToTeamFlareBossLysandre1);
+
+        const battleTeamFlareBossLysandre1 = new CustomQuest (1, 0,  'Stop once and for all Team Flare Boss Lysandre in Team Flare Secret HQ!!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Flare Boss Lysandre 1')]());
+        flareKalosQuestLine.addQuest(battleTeamFlareBossLysandre1);
+
+        const clearKalosLeague = new CustomQuest(1, 0, 'You did it! You saved Kalos! There is nothing else to do except to continue your journey to beat the Kalos Pokémon League!', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Champion Diantha')]());
+        flareKalosQuestLine.addQuest(clearKalosLeague);
+
+        App.game.quests.questLines().push(flareKalosQuestLine);
+    }
+
     public static createDetectivePikachuQuestLine() {
         const detectivePikachuQuestLine = new QuestLine('Detective Pikachu', 'Detective Pikachu\'s partner has gone missing, and he needs your help!', new MultiRequirement([new ObtainedPokemonRequirement('Detective Pikachu'), new GymBadgeRequirement(BadgeEnums.Bug)]) , GameConstants.BulletinBoards.Kalos);
 
@@ -2739,6 +2917,7 @@ class QuestLineHelper {
         this.createPlasmaUnovaQuestLine();
         this.createDetectivePikachuQuestLine();
         this.createVivillonQuestLine();
+        this.createFlareKalosQuestLine();
         this.createPrincessDiancieQuestLine();
         this.createAshKetchumQuestLine();
         this.createSkullAetherAlolaQuestLine();
