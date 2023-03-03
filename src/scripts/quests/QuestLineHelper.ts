@@ -2787,6 +2787,36 @@ class QuestLineHelper {
         App.game.quests.questLines().push(magearnaQuestLine);
     }
 
+    // Paldea Questlines
+
+    public static createPaldeaLegendsQuestLine() {
+        const paldeaLegendsQuestLine = new QuestLine('Path of Legends', 'Help Arven search for the Herba Mystica.', new RouteKillRequirement(10, GameConstants.Region.paldea, 1));
+
+        App.game.quests.questLines().push(paldeaLegendsQuestLine);
+    }
+
+    public static createPaldeaVictoryQuestLine() {
+        const paldeaVictoryQuestLine = new QuestLine('Victory Road', 'Challenge Paldea\'s Gyms to challenge your new rival, Nemona.', new RouteKillRequirement(10, GameConstants.Region.paldea, 1));
+
+        App.game.quests.questLines().push(paldeaVictoryQuestLine);
+    }
+
+    public static createPaldeaStarfallQuestLine() {
+        const paldeaStarfallQuestLine = new QuestLine('Starfall Street', 'Help Casseiopia disband Team Star.', new RouteKillRequirement(10, GameConstants.Region.paldea, 1));
+
+        App.game.quests.questLines().push(paldeaStarfallQuestLine);
+    }
+
+    public static createPaldeaWayHomeQuestLine() {
+        const paldeaWayHomeQuestLine = new QuestLine('The Way Home', 'Help Koraidon and Miraidon find their homes in the mysterious Area Zero.', new MultiRequirement([
+            new QuestLineCompletedRequirement('Path of Legends'),
+            new QuestLineCompletedRequirement('Victory Road'),
+            new QuestLineCompletedRequirement('Starfall Street'),
+        ]));
+
+        App.game.quests.questLines().push(paldeaWayHomeQuestLine);
+    }
+
     // Event QuestLines
     // Open the game between April 8-29.
     public static createFindSurpriseTogepiForEasterQuestLine() {
@@ -2912,6 +2942,10 @@ class QuestLineHelper {
         this.createDynaTreeBirdsQuestLine();
         this.createAncientGolemsQuestLine();
         this.createOriginalColorMagearnaQuestLine();
+        this.createPaldeaLegendsQuestLine();
+        this.createPaldeaVictoryQuestLine();
+        this.createPaldeaStarfallQuestLine();
+        this.createPaldeaWayHomeQuestLine();
         this.createFindSurpriseTogepiForEasterQuestLine();
         this.createHoopaDayPikabluQuestLine();
         this.createDrSplashQuestLine();

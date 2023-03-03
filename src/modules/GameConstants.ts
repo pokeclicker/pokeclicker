@@ -1756,6 +1756,7 @@ export const TemporaryBattles = [
     'Galarian Moltres 2',
     'Galarian Moltres 3',
     'Regigigas',
+    'Paradise Protection Protocol',
 ];
 
 export enum ShardTraderLocations {

@@ -140,5 +140,7 @@ RoamingPokemonList.add(Region.galar, 3, new RoamingPokemon('Spectrier', new Ques
 RoamingPokemonList.add(Region.galar, 3, new RoamingPokemon('Glastrier', new QuestLineStepCompletedRequirement('The Crown of Galar', 6)));
 RoamingPokemonList.add(Region.galar, 3, new RoamingPokemon('Galarian Articuno', new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 5)));
 
-// Paldea - Note: Gimmighoul is not here for certain
+// Paldea - Note: Gimmighoul, Walking Wake and Iron Leaves will be put somewhere else if future content gives somewhere more interesting.
 RoamingPokemonList.add(Region.paldea, 0, new RoamingPokemon('Gimmighoul (Roaming)'));
+RoamingPokemonList.add(Region.paldea, 0, new RoamingPokemon('Walking Wake'));
+RoamingPokemonList.add(Region.paldea, 0, new RoamingPokemon('Iron Leaves'));

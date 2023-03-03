@@ -9356,3 +9356,21 @@ dungeonList['Glaseado Mountain'] = new Dungeon('Glaseado Mountain',
         new DungeonBossPokemon('Arctibax', 161099869, 30),
     ],
     2200000, 1);
+
+dungeonList['Area Zero'] = new Dungeon('Area Zero',
+    ['Scream Tail', 'Iron Bundle'],
+    {
+        common: [
+            {loot: 'Lucky_egg'},
+            {loot: 'Lucky_incense'},
+        ],
+    },
+    33915762,
+    [
+        new DungeonBossPokemon('Glimmora', 161099869, 30),
+        new DungeonBossPokemon('Roaring Moon', 161099869, 30, {hide: true, requirement: new TemporaryBattleRequirement('Paradise Protection Protocol')}),
+        new DungeonBossPokemon('Iron Valiant', 161099869, 30, {hide: true, requirement: new TemporaryBattleRequirement('Paradise Protection Protocol')}),
+        new DungeonBossPokemon('Koraidon', 161099869, 30, {hide: true, requirement: new TemporaryBattleRequirement('Paradise Protection Protocol')}),
+        new DungeonBossPokemon('Miraidon', 161099869, 30, {hide: true, requirement: new TemporaryBattleRequirement('Paradise Protection Protocol')}),
+    ],
+    2200000, 1);
