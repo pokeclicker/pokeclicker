@@ -9340,7 +9340,7 @@ dungeonList['Inlet Grotto'] = new Dungeon('Inlet Grotto',
     [new DungeonBossPokemon('Houndoom', 161099869, 30)],
     2200000, 1);
 
-//This is ridiculous
+//This is ridiculous. Should certainly be split up if a way to do so is found, and possibly some encounters removed outright.
 dungeonList['Glaseado Mountain'] = new Dungeon('Glaseado Mountain',
     ['Magneton', 'Haunter', 'Sneasel', 'Ursaring', 'Delibird', 'Kirlia', 'Gardevoir', 'Vigoroth', 'Grumpig', 'Banette', 'Snorunt', 'Snover', 'Abomasnow', 'Gothita', 'Deerling (Winter)', 'Sawsbuck (Winter)', 'Axew', 'Fraxure', 'Cubchoo', 'Cryogonal', 'Pyroar', 'Bergmite', 'Avalugg', 'Crabominable', 'Fomantis', 'Lurantis', 'Mimikyu', 'Snom', 'Greavard', 'Revavroom', 'Cetoddle', /*Frigibax may end up Dragon Egg exclusive.*/'Frigibax', 'Tinkatuff', 'Murkrow', 'Drifblim', 'Klefki', 'Chansey', 'Flareon', 'Misdreavus', 'Gallade', 'Honchkrow', 'Rufflet', 'Gogoat', 'Lycanroc (Midday)', 'Lycanroc (Midnight)', 'Mudbray', 'Mudsdale', 'Greedent', 'Lokix', 'Flittle', 'Espathra', 'Scovillian', 'Pawmo', 'Bronzong', 'Glaceon', 'Froslass', 'Beartic', 'Crabrawler', 'Psyduck', 'Golduck', 'Magikarp', 'Vaporeon', 'Dunsparce', 'Altaria', 'Whiscash', 'Mismagius', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Goomy', 'Drednaw', 'Hattrem', 'Dreepy', 'Flamigo', 'Clodsire', 'Floatzel', 'Barraskewda', 'Tadbulb', 'Bellibolt', 'Shellder', 'Cloyster', 'Gyarados', 'Qwilfish', 'Skrelp', 'Clauncher', 'Clawitzer', 'Finizen', 'Kilowattrel', 'Hariyama', 'Gumshoos', 'Copperajah', 'Naclstack', 'Chansey', 'Jumpluff', 'Sunflora', 'Vespiquen', 'Vivillon (Fancy)', 'Floette (Red)', 'Floette (Yellow)', 'Floette (Orange)', 'Floette (Blue)', 'Floette (White)', 'Dolliv', 'Hypno', 'Bronzong', 'Tinkatuff', 'Gastly', 'Mareep', 'Hoppip', 'Teddiursa', 'Phanpy', 'Ralts', 'Makuhita', 'Spoink', 'Swablu', 'Barboach', 'Combee', 'Buizel', 'Drifloon', 'Gible', 'Litleo', 'Bergmite', 'Yungoos', 'Salandit', 'Skwovet', 'Chewtle', 'Arrokuda', 'Hatenna', 'Cufant', 'Pawmi', 'Smoliv', 'Nacli', 'Varoom', 'Paldean Wooper', /*Fixed encounter only:*/'Weavile', 'Frosmoth', 'Gimmighoul (Chest)'],
     {
@@ -9357,8 +9357,58 @@ dungeonList['Glaseado Mountain'] = new Dungeon('Glaseado Mountain',
     ],
     2200000, 1);
 
+dungeonList['Grasswither Shrine'] = new Dungeon('Grasswither Shrine',
+    ['Shiftry', 'Cacturne'],
+    {
+        common: [
+            {loot: 'Lucky_egg'},
+            {loot: 'Lucky_incense'},
+        ],
+    },
+    33915762,
+    [new DungeonBossPokemon('Wo-Chien', 161099869, 60)],
+    2200000, 1);
+
+dungeonList['Icerend Shrine'] = new Dungeon('Icerend Shrine',
+    ['Weavile'],
+    {
+        common: [
+            {loot: 'Lucky_egg'},
+            {loot: 'Lucky_incense'},
+        ],
+    },
+    33915762,
+    [new DungeonBossPokemon('Chien-Pao', 161099869, 60)],
+    2200000, 1);
+
+dungeonList['Groundblight Shrine'] = new Dungeon('Groundblight Shrine',
+    ['Krookodile'],
+    {
+        common: [
+            {loot: 'Lucky_egg'},
+            {loot: 'Lucky_incense'},
+        ],
+    },
+    33915762,
+    [new DungeonBossPokemon('Ting-Lu', 161099869, 60)],
+    2200000, 1);
+
+dungeonList['Firescourge Shrine'] = new Dungeon('Firescourge Shrine',
+    ['Houndoom'],
+    {
+        common: [
+            {loot: 'Lucky_egg'},
+            {loot: 'Lucky_incense'},
+        ],
+    },
+    33915762,
+    [new DungeonBossPokemon('Chi-Yu', 161099869, 60)],
+    2200000, 1);
+
+// May be split up into two areas (Area Zero & Area Zero Depths). All other encounters will be added when this is decided.
+// Will likely have Dudunsparce (Three-Segment) be obtained here unless a fun evo method is thought up (Don't want it to be as simple as just a level evo)
 dungeonList['Area Zero'] = new Dungeon('Area Zero',
-    ['Scream Tail', 'Iron Bundle'],
+    ['Glimmet', 'Great Tusk', 'Scream Tail', 'Brute Bonnet', 'Flutter Mane', 'Slither Wing', 'Sandy Shocks', 'Iron Treads', 'Iron Bundle', 'Iron Hands', 'Iron Jugulis', 'Iron Moth', 'Iron Thorns'],
     {
         common: [
             {loot: 'Lucky_egg'},

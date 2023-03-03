@@ -1405,8 +1405,13 @@ export const GalarDungeons = [
 ];
 
 export const PaldeaDungeons = [
-    'Inlet Grotto', // 167
+    'Inlet Grotto', // 168
     'Glaseado Mountain',
+    'Grasswither Shrine',
+    'Icerend Shrine',
+    'Groundblight Shrine',
+    'Firescourge Shrine',
+    'Area Zero',
 ];
 
 export const RegionDungeons = [
