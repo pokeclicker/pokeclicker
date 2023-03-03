@@ -55,7 +55,7 @@ export const MaxIDPerRegion = [
     721, // 72 - Kalos
     809, // 88 - Alola
     898, // 89 - Galar
-    1008, // 103 - Paldea
+    1010, // 105 - Paldea
 ];
 
 // Subregions

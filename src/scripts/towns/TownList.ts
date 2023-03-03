@@ -7036,6 +7036,11 @@ const ZapapicoShop = new Shop([
     ItemList.Malicious_armor,
 ]);
 
+// Paldea NPCs
+const PaldeaRoamerNPC = new RoamerNPC('Student Emily', [
+    'Hey, hey, did you hear? A group of students saw some super rare Pokémon on {ROUTE_NAME}!',
+], GameConstants.Region.paldea, RoamingPokemonList.findGroup(GameConstants.Region.paldea, GameConstants.PaldeaSubRegions.Paldea));
+
 //Paldea Towns
 TownList['Cabo Poco'] = new Town(
     'Cabo Poco',
@@ -7081,6 +7086,7 @@ TownList['Naranjuva Academy'] = new Town(
     [GymList['Director Clavell'], GymList['Penny of Team Star']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
+        npcs: [PaldeaRoamerNPC],
     }
 );
 TownList['Cortondo'] = new Town(
@@ -7231,9 +7237,9 @@ TownList['Zero Lab'] = new Town(
     'Zero Lab',
     GameConstants.Region.paldea,
     GameConstants.PaldeaSubRegions.Paldea,
-    [GymList['AI Sada'], GymList['AI Turo']],
+    [GymList['AI Sada'], GymList['AI Turo'], TemporaryBattleList['Paradise Protection Protocol']],
     {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.paldea, 2)],
+        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Area Zero'))],
     }
 );
 
@@ -7249,6 +7255,40 @@ TownList['Glaseado Mountain'] = new DungeonTown(
     GameConstants.Region.paldea,
     GameConstants.PaldeaSubRegions.Paldea,
     [new RouteKillRequirement(10, GameConstants.Region.paldea, 1)]
+);
+TownList['Grasswither Shrine'] = new DungeonTown(
+    'Grasswither Shrine',
+    GameConstants.Region.paldea,
+    GameConstants.PaldeaSubRegions.Paldea,
+    [new RouteKillRequirement(10, GameConstants.Region.paldea, 1)]
+);
+TownList['Icerend Shrine'] = new DungeonTown(
+    'Icerend Shrine',
+    GameConstants.Region.paldea,
+    GameConstants.PaldeaSubRegions.Paldea,
+    [new RouteKillRequirement(10, GameConstants.Region.paldea, 1)]
+);
+TownList['Groundblight Shrine'] = new DungeonTown(
+    'Groundblight Shrine',
+    GameConstants.Region.paldea,
+    GameConstants.PaldeaSubRegions.Paldea,
+    [new RouteKillRequirement(10, GameConstants.Region.paldea, 1)]
+);
+TownList['Firescourge Shrine'] = new DungeonTown(
+    'Firescourge Shrine',
+    GameConstants.Region.paldea,
+    GameConstants.PaldeaSubRegions.Paldea,
+    [new RouteKillRequirement(10, GameConstants.Region.paldea, 1)]
+);
+TownList['Area Zero'] = new DungeonTown(
+    'Area Zero',
+    GameConstants.Region.paldea,
+    GameConstants.PaldeaSubRegions.Paldea,
+    [new MultiRequirement([
+        new QuestLineCompletedRequirement('Path of Legends'),
+        new QuestLineCompletedRequirement('Victory Road'),
+        new QuestLineCompletedRequirement('Starfall Street'),
+    ])]
 );
 
 // Used to check if next region can be reached, for example for professor NPC
