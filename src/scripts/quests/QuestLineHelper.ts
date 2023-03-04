@@ -1391,7 +1391,7 @@ class QuestLineHelper {
         const talkToFossilScientist = new TalkToNPCQuest(FossilScientist, 'From what you gathered, Team Flare wanted to sell fossils for money. Talk with the fossil scientist you just rescued in Glittering Cave.', KalosFossilReward);
         flareKalosQuestLine.addQuest(talkToFossilScientist);
 
-        const clearCyllageCityGym = new CustomQuest(1, 0, 'With insteresting thoughts about Team Flare in your head, you decide to challenge the Cyllage City Gym and become stronger.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Cyllage City')]());
+        const clearCyllageCityGym = new CustomQuest(1, 0, 'With interesting thoughts about Team Flare in your head, you decide to challenge the Cyllage City Gym to become stronger.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Cyllage City')]());
         flareKalosQuestLine.addQuest(clearCyllageCityGym);
 
         const talkToTeamFlareGrunt2 = new TalkToNPCQuest(TeamFlareGrunt2, 'You can see in Geosenge Town the Team Flare Grunt you battled earlier. Approach him once more.');

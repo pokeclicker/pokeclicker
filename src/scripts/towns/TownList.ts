@@ -4961,7 +4961,7 @@ const AZ1 = new NPC('AZ', [
 
 const BlueButton = new NPC('Blue Button', [
     'You pressed it! Oh ho ho! You pressed the blue switch! Winner, winner! Congratulations!',
-    'But I\'m still going to activate the ultimate weapon! I\'ll just use my remote, here! Click-click! And the power is ONª',
+    'But I\'m still going to activate the ultimate weapon! I\'ll just use my remote, here! Click-click! And the power is ON!',
     'The ultimate weapon is reborn! The poisonous flower has bloomed! All shall perish! Except for Team Flare! Look at Geosenge! It has bloomed in Geosenge Town!',
     'The boss\'s dream of creating a beautiful world will come true! Add it all up, and it equals... a victory for our SCIENCE!',
 ], {image: 'assets/images/trainers/Team Flare Xerosic.png',
