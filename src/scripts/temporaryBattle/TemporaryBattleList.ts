@@ -1931,7 +1931,6 @@ TemporaryBattleList['Team Flare Grunt 1'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Team Flare Grunt',
-        returnTown: 'Glittering Cave',
         imageName: 'Team Flare Grunt (male)',
     }
 );
@@ -1946,7 +1945,6 @@ TemporaryBattleList['Team Flare Grunt 2'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Team Flare Grunt',
-        returnTown: 'Glittering Cave',
         imageName: 'Team Flare Grunt (male)',
     }
 );
@@ -2509,7 +2507,6 @@ TemporaryBattleList['Team Flare Lysandre 1'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Team Flare Lysandre',
-        returnTown: 'Lumiose City',
         imageName: 'Team Flare Lysandre',
     }
 );
@@ -2524,7 +2521,6 @@ TemporaryBattleList['Team Flare Xerosic'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Team Flare Xerosic',
-        returnTown: 'Lumiose City',
         imageName: 'Team Flare Xerosic',
     }
 );
@@ -2536,7 +2532,6 @@ TemporaryBattleList.Xerneas = new TemporaryBattle(
     undefined,
     {
         displayName: 'Xerneas',
-        returnTown: 'Team Flare Secret HQ',
         imageName: '../pokemon/716',
         hideTrainer: true,
     }
@@ -2549,7 +2544,6 @@ TemporaryBattleList.Yveltal = new TemporaryBattle(
     undefined,
     {
         displayName: 'Yveltal',
-        returnTown: 'Team Flare Secret HQ',
         imageName: '../pokemon/717',
         hideTrainer: true,
     }
@@ -2567,7 +2561,6 @@ TemporaryBattleList['Team Flare Boss Lysandre 1'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Team Flare Boss Lysandre',
-        returnTown: 'Team Flare Secret HQ',
         imageName: 'Team Flare Boss Lysandre',
     }
 );
@@ -2885,7 +2878,7 @@ TemporaryBattleList['Grand Duchess Diantha'] = new TemporaryBattle(
         new GymPokemon('Goodra', 120770015, 80),
         new GymPokemon('Mega Gardevoir', 125000000, 80),
     ],
-    'Witnessing the noble spirits of you and your Pokémon in battle has really touched my heart... Please, take this Gardevoirite.</br><img src="assets/images/megaStone/130.png"/></br>I just... I just don\'t know what to say... I can hardly express this feeling...',
+    'Witnessing the noble spirits of you and your Pokémon in battle has really touched my heart... Please, take this Gardevoirite.</br><img src="assets/images/megaStone/282.png"/></br>I just... I just don\'t know what to say... I can hardly express this feeling...',
     [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion), new ObtainedPokemonRequirement('Gardevoir')],
     undefined,
     {
@@ -2908,7 +2901,6 @@ TemporaryBattleList['Team Flare Boss Lysandre 2'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Team Flare Boss Lysandre',
-        returnTown: 'Couriway Town',
         imageName: 'Team Flare Boss Lysandre',
         firstTimeRewardFunction: () => App.game.party.getPokemonByName('Gyarados').giveMegastone(),
     }
