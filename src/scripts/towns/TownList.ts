@@ -4405,7 +4405,7 @@ const Lysandre1 = new NPC('Lysandre', [
     'Now listen! It is vital that this world become a better place. And the people and Pokémon chosen to make the world better must work tirelessly to achieve this goal.',
     'Well, I\'ll be off. Please give Professor Sycamore my best. My desire... it is for a more beautiful world!',
 ], {image: 'assets/images/trainers/Team Flare Lysandre.png',
-    requirement: new MultiRequirement([new QuestLineStartedRequirement('A Beautiful World'), new QuestLineStepCompletedRequirement('A Beautiful World', 0, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('A Beautiful World'), new QuestLineStepCompletedRequirement('A Beautiful World', 1, GameConstants.AchievementOption.less)]),
 });
 
 const Calem1 = new NPC('Calem', [
@@ -4424,7 +4424,7 @@ const CamphrierFlabébéEnthusiast = new NPC('Flabébé Enthusiast', [
 ]);
 
 const Calem2 = new NPC('Calem', [
-    'Oh $playername$, you made it here. I wanted to learn about fossils so I went to the fossil lab, butt the head scientist is not here.',
+    'Oh $playername$, you made it here. I wanted to learn about fossils so I went to the fossil lab, but the head scientist is not here.',
     'I heard he\'s in Glittering Cave but I also saw some weird guys in orange going there. Will you come with me and check it out?',
 ], {
     image: 'assets/images/temporaryBattle/Calem.png',
@@ -4452,7 +4452,7 @@ const FossilScientist = new NPC('Fossil Scientist', [
 });
 
 const TeamFlareGrunt2 = new NPC('Team Flare Grunt', [
-    'Stop right there! I remember you! You\'re the one who foiled out fossil-finding plans!',
+    'Stop right there! I remember you! You\'re the one who foiled our fossil-finding plans!',
     'And now you\'re here, standing around these stones. Do you have any idea what they even are?',
     'Of course you don\'t! You know nothing about the legend of 3000 years ago that says...',
     'Oh, whatever! Who cares about all of that? It\'s time for me to get some sweet revenge... with style!',
@@ -4462,7 +4462,7 @@ const TeamFlareGrunt2 = new NPC('Team Flare Grunt', [
 });
 
 const TeamFlareGrunt3 = new NPC('Team Flare Grunt', [
-    'Heart this, pip-squeak! Team Flare is gonna use the stones on Route 10 and a fantastic treasure to make everyone on our team happy!',
+    'Hear this, pip-squeak! Team Flare is gonna use the stones on Route 10 and a fantastic treasure to make everyone on our team happy!',
     'In this world the ones who have power are the ones who win with flair!',
 
 ], {
@@ -4493,10 +4493,10 @@ const CoumarineElectricTrainer = new NPC('Electric Trainer', [
 ]);
 
 const Diantha1 = new NPC('Diantha', [
-    'Bonds... They really are important to us all, aren\'t they? When I\'m acting, I think I\'m always trying to forge a bond between myself and the character I\'m playing',
+    'Bonds... They really are important to us all, aren\'t they? When I\'m acting, I think I\'m always trying to forge a bond between myself and the character I\'m playing.',
     'If all I think about is how I\'m nothing like a character, then I\'ll just hate playing it.',
     'But if I focus on what I have in common with the character and put myself in her shoes, I might be able to understand her. It\'s the same for people, or Pokémon.',
-    'Oh, never mind me! I\'m just babbling about my own things. Let\'s have a battle the next we meet, shall we? I\'m still looking forward to it!',
+    'Oh, never mind me! I\'m just babbling about my own things. Let\'s have a battle the next we meet, shall we? I\'m looking forward to it!',
 
 ], {
     image: 'assets/images/gymLeaders/Diantha.png',

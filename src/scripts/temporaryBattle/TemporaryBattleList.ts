@@ -2162,7 +2162,7 @@ TemporaryBattleList['Team Flare Xerosic'] = new TemporaryBattle(
         new GymPokemon('Crobat', 128657279, 46),
         new GymPokemon('Malamar', 131365853, 48),
     ],
-    'Oh ho ho! You\'re wonderful! Your Pokémon are amazing',
+    'Oh ho ho! You\'re wonderful! Your Pokémon are amazing.',
     [new QuestLineStepCompletedRequirement('A Beautiful World', 28)],
     undefined,
     {

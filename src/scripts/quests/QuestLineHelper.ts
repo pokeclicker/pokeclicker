@@ -1391,7 +1391,7 @@ class QuestLineHelper {
         const talkToFossilScientist = new TalkToNPCQuest(FossilScientist, 'From what you gathered, Team Flare wanted to sell fossils for money. Talk with the fossil scientist you just rescued in Glittering Cave.', KalosFossilReward);
         flareKalosQuestLine.addQuest(talkToFossilScientist);
 
-        const clearCyllageCityGym = new CustomQuest(1, 0, 'Challenge the Cyllage City Gym and become stronger.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Cyllage City')]());
+        const clearCyllageCityGym = new CustomQuest(1, 0, 'With insteresting thoughts about Team Flare in your head, you decide to challenge the Cyllage City Gym and become stronger.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Cyllage City')]());
         flareKalosQuestLine.addQuest(clearCyllageCityGym);
 
         const talkToTeamFlareGrunt2 = new TalkToNPCQuest(TeamFlareGrunt2, 'You can see in Geosenge Town the Team Flare Grunt you battled earlier. Approach him once more.');
@@ -1442,7 +1442,7 @@ class QuestLineHelper {
         const talkToPokéBallFactoryDirector = new TalkToNPCQuest(PokéBallFactoryDirector, 'Now that Team Flare is not in the Poké Ball Factory anymore, talk with the Director that you just saved.', KalosMasterBallReward);
         flareKalosQuestLine.addQuest(talkToPokéBallFactoryDirector);
 
-        const talkToProfessorSycamore1 = new TalkToNPCQuest(ProfessorSycamore1, 'Professor Sycamore is waiting for you in Dendemille Town, he has some important things to say about Mega Evolution');
+        const talkToProfessorSycamore1 = new TalkToNPCQuest(ProfessorSycamore1, 'Professor Sycamore is waiting for you in Dendemille Town, he has some important things to say about the legendary Pokémon of Kalos.');
         flareKalosQuestLine.addQuest(talkToProfessorSycamore1);
 
         const clearFrostCavern = new CustomQuest(1, 0, 'You are going to Frost Cavern for Pokémon but what you found there is Team Flare instead! Clear it!', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Frost Cavern')]());
