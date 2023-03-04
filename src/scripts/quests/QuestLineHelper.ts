@@ -1371,7 +1371,7 @@ class QuestLineHelper {
         const talkToTeamFlareGrunt1 = new TalkToNPCQuest(TeamFlareGrunt1, 'Talk to Team Flare Grunt.');
         flareKalosQuestLine.addQuest(talkToTeamFlareGrunt1);
 
-        const battleTeamFlareGrunt1 = new CustomQuest (1, 0,  'It seems that Team Flare is holding the scientist captive, liberate him!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Flare Grunt 1')]());
+        const battleTeamFlareGrunt1 = new CustomQuest (1, 0,  'It seems that Team Flare Grunt is holding the scientist captive, free him!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Flare Grunt 1')]());
         flareKalosQuestLine.addQuest(battleTeamFlareGrunt1);
 
         // Talk to Fossil Scientist after beating Team Flare Grunt
