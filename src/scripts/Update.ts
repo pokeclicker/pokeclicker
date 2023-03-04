@@ -1978,6 +1978,21 @@ class Update implements Saveable {
             //Yveltal
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 130);
 
+            //Team Flare Boss Lysandre 1
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 131);
+
+            //Storyline AZ
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 140);
+
+            //Team Flare Boss Lysandre 2
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 152);
+
+            // Start Team Flare questline if player has beaten Sycamore 1 already
+            console.log('something', saveData.statistics.temporaryBattleDefeated[110]);
+            if (saveData.statistics.temporaryBattleDefeated[110]) {
+                Update.startQuestLine(saveData, 'A Beautiful World');
+            }
+
         },
     };
 

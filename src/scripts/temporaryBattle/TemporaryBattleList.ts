@@ -2300,15 +2300,38 @@ TemporaryBattleList['Calem 5'] = new TemporaryBattle(
         imageName: 'Calem',
     }
 );
-TemporaryBattleList.AZ = new TemporaryBattle(
-    'AZ',
+TemporaryBattleList['Storyline AZ'] = new TemporaryBattle(
+    'Storyline AZ',
     [
         new GymPokemon('Torkoal', 153757520, 60),
         new GymPokemon('Golurk', 153757520, 60),
         new GymPokemon('Sigilyph', 153757520, 60),
     ],
     'Thank you very much for battling with me. Now I finally feel free…',
-    [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
+    [new QuestLineStepCompletedRequirement('A Beautiful World', 44)],
+    undefined,
+    {
+        displayName: 'Pokémon Trainer AZ',
+        imageName: 'AZ',
+        firstTimeRewardFunction: () => {
+            player.gainItem('Key_stone', 1);
+            Notifier.notify({
+                message: 'You got a Key Stone for completing the quest!',
+                type: NotificationConstants.NotificationOption.success,
+                sound: NotificationConstants.NotificationSound.Quests.quest_ready_to_complete,
+            });
+        },
+    }
+);
+TemporaryBattleList.AZ = new TemporaryBattle(
+    'AZ',
+    [
+        new GymPokemon('Torkoal', 161445396, 80),
+        new GymPokemon('Golurk', 161445396, 80),
+        new GymPokemon('Sigilyph', 161445396, 80),
+    ],
+    'Floette... It\'s been 3,000 years...',
+    [new QuestLineStepCompletedRequirement('A Beautiful World', 45)],
     undefined,
     {
         displayName: 'Pokémon Trainer AZ',
@@ -2505,13 +2528,32 @@ TemporaryBattleList['Grand Duchess Diantha'] = new TemporaryBattle(
         new GymPokemon('Goodra', 120770015, 80),
         new GymPokemon('Mega Gardevoir', 125000000, 80),
     ],
-    'Witnessing the noble spirits of you and your Pokémon in battle has really touched my heart... Please, take this Gardevoirite.</br><img src="assets/images/megaStone/282.png"/></br>I just... I just don\'t know what to say... I can hardly express this feeling...',
+    'Witnessing the noble spirits of you and your Pokémon in battle has really touched my heart... Please, take this Gardevoirite.</br><img src="assets/images/megaStone/130.png"/></br>I just... I just don\'t know what to say... I can hardly express this feeling...',
     [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion), new ObtainedPokemonRequirement('Gardevoir')],
     undefined,
     {
         displayName: 'Grand Duchess Diantha',
         imageName: '../gymLeaders/Diantha',
         firstTimeRewardFunction: () => App.game.party.getPokemonByName('Gardevoir').giveMegastone(),
+    }
+);
+
+TemporaryBattleList['Team Flare Boss Lysandre 2'] = new TemporaryBattle(
+    'Team Flare Boss Lysandre 2',
+    [
+        new GymPokemon('Mienfoo', 127138249, 79),
+        new GymPokemon('Murkrow', 127138249, 79),
+        new GymPokemon('Pyroar', 124595484, 81),
+        new GymPokemon('Mega Gyarados', 129681014, 83),
+    ],
+    'I see the strength to protect within you... Hopefully you can do a better job than me and protect a tomorrow that will be better than today. Take this Gyaradosite.</br><img src="assets/images/megaStone/130.png"/></br>',
+    [new QuestLineStepCompletedRequirement('A Beautiful World', 45), new ObtainedPokemonRequirement('Gyarados'), new DayCyclePartRequirement([DayCyclePart.Dusk])],//new DayCyclePartRequirement([DayCyclePart.Dusk])
+    undefined,
+    {
+        displayName: 'Team Flare Boss Lysandre',
+        returnTown: 'Couriway Town',
+        imageName: 'Team Flare Boss Lysandre',
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Gyarados').giveMegastone(),
     }
 );
 
