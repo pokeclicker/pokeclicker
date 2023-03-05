@@ -770,4 +770,14 @@
          , image: "assets/images/map/megahoundoomoverworld.png"
          })
      %>
+     <%- include('templates/mapOverlay',
+         { name: "Rampaging Yveltal"
+         , x: 12, y: 15
+         , width: 5, height: 5
+         , databind: "click: () => TemporaryBattleList['Rampaging Yveltal'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Rampaging Yveltal'] && TemporaryBattleList['Rampaging Yveltal'].isVisible()"
+         , image: "assets/images/map/rampagingyveltal.png"
+         })
+     %>
+
 </g>
