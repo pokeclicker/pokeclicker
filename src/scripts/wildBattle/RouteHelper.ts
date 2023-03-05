@@ -39,28 +39,28 @@ class RouteHelper {
     }
 
     public static routePokerusEVs(route:number, region:GameConstants.Region): string {
-        let possiblePokemon: PokemonNameType[] = RouteHelper.getAvailablePokemonList(route, region);
+        const possiblePokemon: PokemonNameType[] = RouteHelper.getAvailablePokemonList(route, region);
         if (this.minPokerus(possiblePokemon) == 3) {
-            return "All Pokémon on this route are resistant!"
+            return 'All Pokémon on this route are resistant!';
         }
-        let currentEVs = this.getEvs(possiblePokemon);
-        return "EVs until all Pokémon are resistant on this route: " + currentEVs + "/" + (50*possiblePokemon.length) + ".";
+        const currentEVs = this.getEvs(possiblePokemon);
+        return 'EVs until all Pokémon are resistant on this route: ${currentEVs} / ${50 * possiblePokemon.length}.';
     }
 
     public static dungeonPokerusEVs(dungeon: Dungeon): string {
         const possiblePokemon: PokemonNameType[] = dungeon.allAvailablePokemon();
         if (this.minPokerus(possiblePokemon) == 3) {
-            return "All Pokémon in this dungeon are resistant!"
+            return 'All Pokémon in this dungeon are resistant!';
         }
-        let currentEVs = this.getEvs(possiblePokemon);
-        return "EVs until all Pokémon are resistant in this dungeon: " + currentEVs + "/" + (50*possiblePokemon.length) + ".";
+        const currentEVs = this.getEvs(possiblePokemon);
+        return 'EVs until all Pokémon are resistant in this dungeon: ${currentEVs} / ${50 * possiblePokemon.length}.';
 
     }
 
     private static getEvs(possiblePokemon: PokemonNameType[]): number {
-        let currentEVs: number = 0;
+        let currentEVs = 0;
         possiblePokemon.forEach(pkmn => {
-            let partyPokemon: PartyPokemon = App.game.party.getPokemonByName(pkmn);
+            const partyPokemon: PartyPokemon = App.game.party.getPokemonByName(pkmn);
             if (partyPokemon.pokerus == GameConstants.Pokerus.Resistant) {
                 currentEVs += 50;
             } else if (partyPokemon.pokerus == GameConstants.Pokerus.Contagious) {
