@@ -1368,8 +1368,8 @@ class QuestLineHelper {
         const clearGlitteringCave = new CustomQuest(1, 0, 'Clear Glittering Cave and find the scientist.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Glittering Cave')](), undefined, undefined,
             {
                 clearedMessage: 'What\'s this? Well, well. What do we have here? A nosy little trainer has come poking around. Listen up! We\'re the fashionable team whose very name makes people tremble in fear: Team Flare! Team Flare\'s goal is to make it so we\'re the only ones who are happy! We don\'t care one bit about what happens to other trainers or Pokémon. Get out of here, kid. Don\'t you know not to play with fire? We\'ll obliterate you!',
-                displayName: 'Team Flare Grunt',
-                imageName: 'Team Flare Grunt (male)',
+                npcDisplayName: 'Team Flare Grunt',
+                npcImageName: 'Team Flare Grunt (male)',
             });
         flareKalosQuestLine.addQuest(clearGlitteringCave);
 
@@ -1411,8 +1411,8 @@ class QuestLineHelper {
         const clearKalosPowerPlant = new CustomQuest(1, 0, 'Well, that was extremely awkward... But ignoring that, Lumiose City still hasn\'t fixed the power outage, go clear the Kalos Power Plant.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Kalos Power Plant')](), undefined, undefined,
             {
                 clearedMessage: 'You\'re quite strong. Oh yes... very strong, indeed. I certainly didn\'t expect you to be so interesting. But it matters not, we already have enough energy to power the device. I do hope we can meet again!',
-                displayName: 'Team Flare Aliana',
-                imageName: 'Team Flare Aliana',
+                npcDisplayName: 'Team Flare Aliana',
+                npcImageName: 'Team Flare Aliana',
             });
         flareKalosQuestLine.addQuest(clearKalosPowerPlant);
 
@@ -1425,8 +1425,8 @@ class QuestLineHelper {
         const clearPokéBallFactory = new CustomQuest(1, 0, 'For someone so obsessed with beauty he seems to really care about filth... Anyway, the Poké Ball Factory sounds like a fun place, let\'s go check it out.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Poké Ball Factory')](), undefined, undefined,
             {
                 clearedMessage: 'No way you beat us! Wow, we are lame. Probability is just probability after all... Absolutes do not exist. But enough already! We\'ve already stolen the Poké Balls, Great Balls, and Ultra Balls. Let\'s call it good and leave.',
-                displayName: 'Team Flare Bryony',
-                imageName: 'Team Flare Bryony',
+                npcDisplayName: 'Team Flare Bryony',
+                npcImageName: 'Team Flare Bryony',
             });
         flareKalosQuestLine.addQuest(clearPokéBallFactory);
 
@@ -1451,8 +1451,8 @@ class QuestLineHelper {
         const clearFrostCavern = new CustomQuest(1, 0, 'You were going to Frost Cavern for Pokémon, but what you found there is Team Flare instead! Clear it!', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Frost Cavern')](), undefined, undefined,
             {
                 clearedMessage: 'Not just strong... TOO strong! Not ordinary, indeed. Whatever, it doesn\'t matter, we already tested what we wanted to know. The Abomasnow from this cavern is a fine specimen. The more we agitate it, the stronger its Snow Warning ability becomes, making the snow fall even more furiously. Whoever has the most energy will come out on top! And it\'s Team Flare, and only Team Flare who will survive!',
-                displayName: 'Team Flare Mable',
-                imageName: 'Team Flare Mable',
+                npcDisplayName: 'Team Flare Mable',
+                npcImageName: 'Team Flare Mable',
             });
         flareKalosQuestLine.addQuest(clearFrostCavern);
 
@@ -1485,32 +1485,32 @@ class QuestLineHelper {
         const clearTeamFlareSecretHQ1 = new CustomQuest(1, 0, 'The ultimate weapon was activated in Geosenge Town! Go to the Team Flare Secret HQ to put a stop to it! First step: Beating Team Flare Aliana.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Team Flare Secret HQ')](), undefined, undefined,
             {
                 clearedMessage: 'I had fun at the Kalos Power Plant. Of course, we could have generated electricity with Team Flare\'s technology, too, you know. We just didn\'t think it justified the cost. To create a world for us and us alone, we have to play it smart, you see.',
-                displayName: 'Team Flare Aliana',
-                imageName: 'Team Flare Aliana',
+                npcDisplayName: 'Team Flare Aliana',
+                npcImageName: 'Team Flare Aliana',
             });
         flareKalosQuestLine.addQuest(clearTeamFlareSecretHQ1);
 
         const clearTeamFlareSecretHQ2 = new CustomQuest(1, 0, 'Continue traversing through the Team Flare Secret HQ! Second step: Beating Team Flare Celosia.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Team Flare Secret HQ')](), undefined, undefined,
             {
                 clearedMessage: 'In reality, those stones that line Route 10 are the graves of Pokémon. When the ultimate weapon was used to end that horrible war over 3,000 years ago, it stole the lives of all those Pokémon. Their lives were the price of peace then. And if we want to make our own wishes come true today, we in Team Flare also have to sacrifice something precious.',
-                displayName: 'Team Flare Celosia',
-                imageName: 'Team Flare Celosia',
+                npcDisplayName: 'Team Flare Celosia',
+                npcImageName: 'Team Flare Celosia',
             });
         flareKalosQuestLine.addQuest(clearTeamFlareSecretHQ2);
 
         const clearTeamFlareSecretHQ3 = new CustomQuest(1, 0, 'You should be halfway through. Go further the Team Flare Secret HQ! Third step: Beating Team Flare Bryony.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Team Flare Secret HQ')](), undefined, undefined,
             {
                 clearedMessage: 'We\'ve been using the electricity we stole from the Power Plant to get everything prepared for activating the ultimate weapon. But it\'s not like that\'s all we\'ll need to use it. Are you following me? We\'ll need energy absorbed from Pokémon to power the device! Yes! It\'s the stones on Route 10 that will steal that energy for us and power the ultimate weapon.',
-                displayName: 'Team Flare Bryony',
-                imageName: 'Team Flare Bryony',
+                npcDisplayName: 'Team Flare Bryony',
+                npcImageName: 'Team Flare Bryony',
             });
         flareKalosQuestLine.addQuest(clearTeamFlareSecretHQ3);
 
         const clearTeamFlareSecretHQ4 = new CustomQuest(1, 0, 'You are getting close. Resume delving into the Team Flare Secret HQ! Fourth step: Beating Team Flare Mable.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Team Flare Secret HQ')](), undefined, undefined,
             {
                 clearedMessage: 'The power of the Legendary Pokémon... The power to grant life to all around it... The power to steal life from all around it... It\'s a mysterious ability that even scientists like us haven\'t been able to really decode. What d\'you think will happen to the world if we fuel the ultimate weapon with something like that?',
-                displayName: 'Team Flare Mable',
-                imageName: 'Team Flare Mable',
+                npcDisplayName: 'Team Flare Mable',
+                npcImageName: 'Team Flare Mable',
             });
         flareKalosQuestLine.addQuest(clearTeamFlareSecretHQ4);
 
