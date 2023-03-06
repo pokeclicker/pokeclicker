@@ -38,7 +38,7 @@ export default class OakItems implements Feature {
             new OakItem(OakItemType.Amulet_Coin, 'Amulet Coin', 'Gain more Pokédollars from battling',
                 true, [1.25, 1.30, 1.35, 1.40, 1.45, 1.50], 1, 30, 1),
             new OakItem(OakItemType.Rocky_Helmet, 'Rocky Helmet', 'Clicks do more damage',
-                true, [1.25, 1.30, 1.35, 1.40, 1.45, 100000000], 1, 40, 3),
+                true, [1.25, 1.30, 1.35, 1.40, 1.45, 1.50], 1, 40, 3),
             new OakItem(OakItemType.Exp_Share, 'EXP Share', 'Gain more exp from battling',
                 true, [1.15, 1.18, 1.21, 1.24, 1.27, 1.30], 1, 50, 1),
             new OakItem(OakItemType.Sprayduck, 'Sprayduck', 'Makes your berries grow faster',
