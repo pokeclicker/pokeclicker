@@ -4871,7 +4871,7 @@ const DendemilleWolfLover = new NPC('Worrisome Wolf-loving Woman', [
 });
 
 const ProfessorSycamore1 = new NPC('Prof. Sycamore', [
-    'Hello $playername$! Do you remember the Pokemon Lysandre mentioned in that café? Kalos\'s Legendary Pokémon are called... Xerneas and Yveltal!',
+    'Hello $playername$! Do you remember the Pokémon Lysandre mentioned in that café? Kalos\'s Legendary Pokémon are called... Xerneas and Yveltal!',
     'Apparently, these Pokémon can control energy or absorb energy, respectively. Xerneas gives life energy to plants and Pokémon, whereas Yveltal steals all of the spirits around it.',
     'When they lose all of their vitality, they go to sleep in a secret place. It would be absolutely astounding if you found it!',
     'By the way, I heard Frost Cavern has a lot of cool Pokémon, why don\'t you go check it out?',
