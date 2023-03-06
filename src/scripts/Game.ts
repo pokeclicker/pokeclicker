@@ -226,10 +226,6 @@ class Game {
             if (App.game.party.alreadyCaughtPokemon(666.01)) {
                 // Has obtained Vivillon (Pokéball)
                 App.game.quests.getQuestLine('The Great Vivillon Hunt!').state(QuestLineState.ended);
-            } else if (App.game.badgeCase.badgeList[BadgeEnums.Iceberg]()) {
-                // Has the Iceberg badge, Quest is started
-                App.game.quests.getQuestLine('The Great Vivillon Hunt!').state(QuestLineState.started);
-                App.game.quests.getQuestLine('The Great Vivillon Hunt!').beginQuest(App.game.quests.getQuestLine('The Great Vivillon Hunt!').curQuest());
             }
         }
 
