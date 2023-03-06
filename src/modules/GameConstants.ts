@@ -1702,6 +1702,7 @@ export const TemporaryBattles = [
     'Galarian Moltres 2',
     'Galarian Moltres 3',
     'Regigigas',
+    'Youngster Joey',
 ];
 
 export enum ShardTraderLocations {
