@@ -17,11 +17,11 @@
             <div class="modal-header">
                 <h4 style='text-align:center' class="modal-title">
                     Safari Zone
-                    <span data-bind="if: Safari.completed()">
+                    <span data-bind="if: Safari.completed(false, player.region)">
                         <img class="pokeball-smallest"
                             data-bind='attr:{
-                                title:"You have captured all of the Safari Pokémon" + (Safari.completed(true) ? " shiny" : "") + "!",
-                                src:"assets/images/pokeball/Pokeball" + (Safari.completed(true) ? "-shiny" : "") + ".svg"
+                                title:"You have captured all of the Safari Pokémon" + (Safari.completed(true, player.region) ? " shiny" : "") + "!",
+                                src:"assets/images/pokeball/Pokeball" + (Safari.completed(true, player.region) ? "-shiny" : "") + ".svg"
                             }'
                         />
                     </span>

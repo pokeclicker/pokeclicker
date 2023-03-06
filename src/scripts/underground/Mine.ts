@@ -86,14 +86,14 @@ class Mine {
     }
 
     private static getRandomCoord(max: number, size: number): number {
-        return Rand.floor(max - size);
+        return Rand.floor(max - size + 1);
     }
 
     private static canAddReward(x: number, y: number, reward: UndergroundItem): boolean {
         if (Mine.alreadyHasRewardId(reward.id)) {
             return false;
         }
-        if (y + reward.space.length >= App.game.underground.getSizeY() || x + reward.space[0].length >= Underground.sizeX) {
+        if (y + reward.space.length > App.game.underground.getSizeY() || x + reward.space[0].length > Underground.sizeX) {
             return false;
         }
         for (let i = 0; i < reward.space.length; i++) {
@@ -213,10 +213,12 @@ class Mine {
                 case UndergroundItemValueType.Gem:
                     res.plates++;
                     break;
+                case UndergroundItemValueType.MegaStone:
+                    res.megaStones++;
                 default:
             }
             return res;
-        }, {fossils: 0, fossilpieces: 0, plates: 0, evoItems: 0, totalValue: 0, shards: 0});
+        }, {fossils: 0, fossilpieces: 0, plates: 0, evoItems: 0, totalValue: 0, shards: 0, megaStones: 0});
     }
 
     private static updatesurveyResult(summary) {
@@ -235,6 +237,9 @@ class Mine {
         }
         if (summary.shards) {
             text.push(`Shards: ${summary.shards}`);
+        }
+        if (summary.megaStones) {
+            text.push(`Mega Stones: ${summary.megaStones}`);
         }
         if (summary.totalValue) {
             text.push(`Diamond Value: ${summary.totalValue}`);

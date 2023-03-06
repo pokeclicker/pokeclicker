@@ -45,6 +45,10 @@ export default class Wallet implements Feature {
         return this.addAmount(new Amount(base, Currency.battlePoint), ignoreBonus);
     }
 
+    public gainContestTokens(base: number, ignoreBonus = false): Amount {
+        return this.addAmount(new Amount(base, Currency.contestToken), ignoreBonus);
+    }
+
     public calcBonus(amount: Amount) {
         switch (amount.currency) {
             case Currency.money:
@@ -55,6 +59,7 @@ export default class Wallet implements Feature {
             case Currency.diamond:
             case Currency.farmPoint:
             case Currency.battlePoint:
+            case Currency.contestToken:
             default:
                 return 1;
         }
@@ -92,6 +97,9 @@ export default class Wallet implements Feature {
                 break;
             case Currency.battlePoint:
                 GameHelper.incrementObservable(App.game.statistics.totalBattlePoints, amount.amount);
+                break;
+            case Currency.contestToken:
+                GameHelper.incrementObservable(App.game.statistics.totalContestTokens, amount.amount);
                 break;
             default:
                 break;

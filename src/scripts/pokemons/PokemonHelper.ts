@@ -15,26 +15,13 @@ enum PokemonLocationType {
     BattleFrontier,
     Wandering,
     Discord,
+    QuestLineReward,
+    TempBattleReward,
+    GymReward,
+    DungeonReward
 }
 
 class PokemonHelper extends TmpPokemonHelper {
-
-    // Can't move to modules yet because it wants to know what a PartyPokemon looks like
-    // TODO: Maybe this one should be on Party too...
-    public static getPokemonsWithEvolution(evoType: GameConstants.StoneType): PartyPokemon[] {
-        return App.game.party.caughtPokemon.filter((partyPokemon: PartyPokemon) => {
-            if (!partyPokemon.evolutions) {
-                return false;
-            }
-            for (const evolution of partyPokemon.evolutions) {
-                if (evolution.trigger === EvoTrigger.STONE && (evolution as StoneEvoData).stone == evoType && EvolutionHandler.isSatisfied(evolution) && PokemonHelper.calcNativeRegion(evolution.evolvedPokemon) <= player.highestRegion()) {
-                    return true;
-                }
-            }
-            return false;
-        }).sort((a, b) => a.id - b.id);
-    }
-
     /*
     PRETTY MUCH ONLY USED BY THE BOT BELOW
     */
@@ -210,10 +197,19 @@ class PokemonHelper extends TmpPokemonHelper {
         return fossils;
     }
 
-    public static getPokemonSafariChance(pokemonName: PokemonNameType): number {
-        const safariWeight = SafariPokemon.list.reduce((sum, p) => sum += p.weight, 0);
-        const safariPokemon = SafariPokemon.list.find(p => p.name == pokemonName);
-        return safariPokemon ? +((SafariPokemon.calcPokemonWeight(safariPokemon) / safariWeight) * 100).toFixed(2) : 0;
+    public static getPokemonSafariChance(pokemonName: PokemonNameType): Record<GameConstants.Region, Record<number, number>> {
+        const list = {};
+        Object.entries(SafariPokemonList.list).forEach(([region, zones]) => {
+            zones().forEach((p, zone) => {
+                const safariWeight = p.safariPokemon.reduce((sum, p) => sum += p.weight, 0);
+                const safariPokemon = p.safariPokemon.find(p => p.name == pokemonName);
+                if (safariPokemon) {
+                    list[+region] = list[+region] || {};
+                    list[+region][zone] = +((SafariPokemon.calcPokemonWeight(safariPokemon) / safariWeight) * 100).toFixed(2);
+                }
+            });
+        });
+        return list;
     }
 
     public static getPokemonPrevolution(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): Array<EvoData> {
@@ -283,6 +279,48 @@ class PokemonHelper extends TmpPokemonHelper {
         return codes;
     }
 
+    public static getPokemonTempBattleReward(pokemonName: PokemonNameType): Array<string> {
+        const tempBattleList = [];
+        Object.entries(TemporaryBattleList).forEach(tempBattle => {
+            if (tempBattle[1].optionalArgs?.firstTimeRewardFunction?.toString().includes(`'${pokemonName}'`) ||
+                tempBattle[1].optionalArgs?.rewardFunction?.toString().includes(`'${pokemonName}'`) ||
+                (tempBattle[1].optionalArgs?.isTrainerBattle === false && tempBattle[1].getPokemonList().some((p) => p.name === pokemonName))) {
+                tempBattleList.push(tempBattle[0]);
+            }
+        });
+        return tempBattleList;
+    }
+
+    public static getPokemonGymReward(pokemonName: PokemonNameType): Array<string> {
+        const gymList = [];
+        Object.values(GymList).forEach(gym => {
+            if (gym.rewardFunction?.toString().includes(`'${pokemonName}'`)) {
+                gymList.push(gym.leaderName);
+            }
+        });
+        return gymList;
+    }
+
+    public static getPokemonDungeonReward(pokemonName: PokemonNameType): Array<string> {
+        const dungeons = [];
+        Object.values(dungeonList).forEach(dungeon => {
+            if (dungeon.rewardFunction?.toString().includes(`'${pokemonName}'`)) {
+                dungeons.push(dungeon.name);
+            }
+        });
+        return dungeons;
+    }
+
+    public static getPokemonQuestLineReward(pokemonName: PokemonNameType): Array<string> {
+        const questLines = [];
+        App.game.quests.questLines().forEach(questLine => questLine.quests().forEach(quest => {
+            if ((quest as any).customReward?.toString().includes(`'${pokemonName}'`)) {
+                questLines.push(questLine.name);
+            }
+        }));
+        return questLines;
+    }
+
     public static getPokemonLocations = (pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none) => {
         const encounterTypes = {};
         // Routes
@@ -332,8 +370,8 @@ class PokemonHelper extends TmpPokemonHelper {
         }
         // Safari
         const safariChance = PokemonHelper.getPokemonSafariChance(pokemonName);
-        if (safariChance) {
-            encounterTypes[PokemonLocationType.Safari] = `${safariChance}%`;
+        if (Object.keys(safariChance).length) {
+            encounterTypes[PokemonLocationType.Safari] = safariChance;
         }
         // Evolution
         const evolutions = PokemonHelper.getPokemonPrevolution(pokemonName, maxRegion);
@@ -353,10 +391,34 @@ class PokemonHelper extends TmpPokemonHelper {
             encounterTypes[PokemonLocationType.Wandering] = wandering;
         }
 
-        // Wandering
+        // Discord
         const discord = PokemonHelper.getPokemonDiscord(pokemonName);
         if (discord.length) {
             encounterTypes[PokemonLocationType.Discord] = discord;
+        }
+
+        // Temp battle reward
+        const tempBattle = PokemonHelper.getPokemonTempBattleReward(pokemonName);
+        if (tempBattle.length) {
+            encounterTypes[PokemonLocationType.TempBattleReward] = tempBattle;
+        }
+
+        // Gym reward
+        const gymReward = PokemonHelper.getPokemonGymReward(pokemonName);
+        if (gymReward.length) {
+            encounterTypes[PokemonLocationType.GymReward] = gymReward;
+        }
+
+        // Dungeon reward
+        const dungeonReward = PokemonHelper.getPokemonDungeonReward(pokemonName);
+        if (dungeonReward.length) {
+            encounterTypes[PokemonLocationType.DungeonReward] = dungeonReward;
+        }
+
+        // Quest Line reward
+        const questLineReward = PokemonHelper.getPokemonQuestLineReward(pokemonName);
+        if (questLineReward.length) {
+            encounterTypes[PokemonLocationType.QuestLineReward] = questLineReward;
         }
 
         // Return the list of items

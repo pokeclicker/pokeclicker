@@ -137,12 +137,12 @@ class PokemonFactory {
         const basePokemon = PokemonHelper.getPokemonByName(pokemon.name);
 
         const exp: number = basePokemon.exp;
-        const shiny = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
+        const shiny = pokemon.shiny ? pokemon.shiny : this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
         const gender = this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
         return new BattlePokemon(pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, 0, exp, new Amount(0, GameConstants.Currency.money), shiny, GameConstants.GYM_GEMS, gender);
     }
 
-    public static generateDungeonPokemon(name: PokemonNameType, chestsOpened: number, baseHealth: number, level: number): BattlePokemon {
+    public static generateDungeonPokemon(name: PokemonNameType, chestsOpened: number, baseHealth: number, level: number, mimic = false): BattlePokemon {
         const basePokemon = PokemonHelper.getPokemonByName(name);
         const id = basePokemon.id;
         const maxHealth: number = Math.floor(baseHealth * (1 + (chestsOpened / 5)));
@@ -164,7 +164,7 @@ class PokemonFactory {
                 Math.floor(App.game.statistics.totalPokemonEncountered() / App.game.statistics.totalShinyPokemonEncountered()));
         }
 
-        const ep = GameConstants.BASE_EP_YIELD * GameConstants.DUNGEON_EP_MODIFIER;
+        const ep = GameConstants.BASE_EP_YIELD * (mimic ? GameConstants.DUNGEON_BOSS_EP_MODIFIER : GameConstants.DUNGEON_EP_MODIFIER);
         const gender = this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
         return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, level, catchRate, exp, new Amount(money, GameConstants.Currency.money), shiny, GameConstants.DUNGEON_GEMS, gender, heldItem, ep);
     }
@@ -215,7 +215,7 @@ class PokemonFactory {
         const catchRate: number = this.catchRateHelper(basePokemon.catchRate);
 
         const exp: number = basePokemon.exp;
-        const shiny = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
+        const shiny = pokemon.shiny ? pokemon.shiny : this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
         const gender = this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
         return new BattlePokemon(pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, catchRate, exp, new Amount(0, GameConstants.Currency.money), shiny, GameConstants.GYM_GEMS, gender);
     }

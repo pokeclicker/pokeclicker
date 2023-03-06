@@ -11,7 +11,7 @@ GymList['Pewter City'] = new Gym(
     ],
     BadgeEnums.Boulder,
     250,
-    'I took you for granted, and so I lost. As proof of your victory, I confer on you this... the official Pokémon League Boulder Badge.',
+    'I took you for granted, and so I lost. As proof of your victory, I confer on you this... the official Pokémon League BoulderBadge.',
     [new RouteKillRequirement(10, GameConstants.Region.kanto, 2)]
 );
 GymList['Cerulean City'] = new Gym(
@@ -23,7 +23,7 @@ GymList['Cerulean City'] = new Gym(
     ],
     BadgeEnums.Cascade,
     500,
-    'Wow! You\'re too much, all right! You can have the Cascade Badge to show that you beat me.',
+    'Wow! You\'re too much, all right! You can have the CascadeBadge to show that you beat me.',
     [new RouteKillRequirement(10, GameConstants.Region.kanto, 4)],
     () => {
         App.game.quests.getQuestLine('Team Rocket').beginQuest();
@@ -1287,7 +1287,7 @@ GymList['Iki Town'] = new Gym(
     ],
     BadgeEnums.FightiniumZ,
     128000,
-    'The results come as no surprise to me. What a fine Trainer...and what fine Pokémon, too!',
+    'The results come as no surprise to me. What a fine Trainer...and what fine Pokémon, too! Accept this Z-Crystal! It allows Trainers to share their power with their partner Pokémon!',
     [new TemporaryBattleRequirement('Hau 3')],
     undefined, undefined, 'Hala\'s Grand Trial'
 );
@@ -1301,7 +1301,7 @@ GymList['Konikoni City'] = new Gym(
     ],
     BadgeEnums.RockiumZ,
     128000,
-    'How lovely.',
+    'How lovely. Diamonds only sparkle after coal is pushed to its absolute limit. Here. The Rock-type Z-Crystal... The Rockium Z is all yours!',
     [new TemporaryBattleRequirement('Plumeria 1')],
     () => {
         App.game.quests.getQuestLine('Eater of Light').beginQuest();
@@ -1318,7 +1318,7 @@ GymList['Malie City'] = new Gym(
     ],
     BadgeEnums.DarkiniumZ,
     128000,
-    'Hmph...',
+    'Hmph... heh. Let me fix your team up for you. Here. This is yours.',
     [new TemporaryBattleRequirement('Gladion 2')], undefined, undefined, 'Nanu\'s Grand Trial'
 );
 GymList['Exeggutor Island'] = new Gym(
@@ -1332,7 +1332,7 @@ GymList['Exeggutor Island'] = new Gym(
     ],
     BadgeEnums.GroundiumZ,
     128000,
-    'You have succeeded in your final grand trial!',
+    'You have succeeded in your final grand trial! That was enjoyable. Looks like I cannot beat you even when I am not holding back... Take your Ground-type Z-Crystal then... This Groundium Z is yours!',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mina\'s Houseboat'))],
     undefined, undefined, 'Hapu\'s Grand Trial'
 );
@@ -1347,7 +1347,7 @@ GymList['Ilima\'s Trial'] = new Gym(
     ],
     BadgeEnums.NormaliumZ,
     128000,
-    'You have received the Normalium-Z!',
+    'What an incredible Trainer you are! The Z-Crystal from the pedestal is yours now! It is known as Normalium Z!',
     undefined,
     undefined,
     {
@@ -1365,7 +1365,7 @@ GymList['Lana\'s Trial'] = new Gym(
     ],
     BadgeEnums.WateriumZ,
     128000,
-    'You have received the Waterium-Z!',
+    'Very well done! You do know what this is, don\'t you? Please take this Waterium Z.',
     undefined,
     undefined,
     {
@@ -1383,7 +1383,7 @@ GymList['Kiawe\'s Trial'] = new Gym(
     ],
     BadgeEnums.FiriumZ,
     128000,
-    'You have received the Firium-Z!',
+    'Whoa! S-spectacular! That Pokémon was protecting this Firium Z. Now it is yours.',
     undefined,
     undefined,
     {
@@ -1401,7 +1401,7 @@ GymList['Mallow\'s Trial'] = new Gym(
     ],
     BadgeEnums.GrassiumZ,
     128000,
-    'You have received the Grassium-Z!',
+    'Wow, you\'re even stronger than I thought! Looks like you\'ve cleared all three of Akala\'s trials! Here! A gift for such an inspiring young Trainer!',
     undefined,
     undefined,
     {
@@ -1419,7 +1419,7 @@ GymList['Sophocles\' Trial'] = new Gym(
     ],
     BadgeEnums.ElectriumZ,
     128000,
-    'You have received the Electrium-Z!',
+    'That Pokémon was really something else! Here, I\'ll give you this Electrium Z to reward you for beating it.',
     undefined,
     undefined,
     {
@@ -1437,7 +1437,7 @@ GymList['Acerola\'s Trial'] = new Gym(
     ],
     BadgeEnums.GhostiumZ,
     128000,
-    'You have received the Ghostium-Z!',
+    'Welcome back! Now let\'s see how you did... Yup! You passed my trial! Here you go!',
     undefined,
     undefined,
     {
@@ -1455,7 +1455,7 @@ GymList['Vast Poni Canyon Trial'] = new Gym(
     ],
     BadgeEnums.DragoniumZ,
     128000,
-    'You have received the Dragonium-Z!',
+    '<i>You obtained a Dragon-Type Z-Crystal. The Dragonium Z is yours!<i>',
     undefined,
     undefined,
     {
@@ -1473,7 +1473,7 @@ GymList['Mina\'s Trial'] = new Gym(
     ],
     BadgeEnums.FairiumZ,
     128000,
-    'You have received the Fairium-Z!',
+    'That\'s a pretty great picture. You and your Pokémon! You\'re a great Pokémon Trainer! So here you go! A piece of Fairium Z for you!',
     undefined,
     undefined,
     {
@@ -1579,29 +1579,30 @@ GymList['Champion Hau'] = new Gym(
 GymList['Friend League'] = new Gym(
     'Karson',
     'Friend League',
-    [new GymPokemon('Magikarp', 1, 20)],
+    [new GymPokemon('Magikarp', 337500, 20)],
     BadgeEnums.Friend_League,
-    0, //TODO
-    'TODO',
+    10000,
+    'Your Karp is really Magic!',
     [new RouteKillRequirement(10, GameConstants.Region.alola, 31)]
 );
 
 GymList['Quick League'] = new Gym(
     'Koichiro',
     'Quick League',
-    [new GymPokemon('Magikarp Skelly', 1, 20)],
+    [new GymPokemon('Magikarp Skelly', 675000, 20)],
     BadgeEnums.Quick_League,
-    0, //TODO
-    'TODO',
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 32)],
+    10500,
+    'Looks like I flailed...',
+    [new TemporaryBattleRequirement('Magikarp Jump Koylee')],
     () => {
         if (!App.game.party.alreadyCaughtPokemonByName('Magikarp Skelly')) {
             Notifier.notify({
                 message: 'You were awarded a Magikarp Skelly!',
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
             });
-            App.game.party.gainPokemonById(pokemonMap['Magikarp Skelly'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
+            App.game.party.gainPokemonByName('Magikarp Skelly', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         }
     }
 );
@@ -1609,89 +1610,96 @@ GymList['Quick League'] = new Gym(
 GymList['Heavy League'] = new Gym(
     'Kareign',
     'Heavy League',
-    [new GymPokemon('Magikarp Orange Two Tone', 1, 20)],
+    [new GymPokemon('Magikarp Orange Two-Tone', 1687500, 20)],
     BadgeEnums.Heavy_League,
-    0, //TODO
-    'TODO',
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 33)],
+    11000,
+    'Karpe Diem',
+    [new TemporaryBattleRequirement('Magikarp Jump Karpen')],
     () => {
-        if (!App.game.party.alreadyCaughtPokemonByName('Magikarp Orange Two Tone')) {
+        if (!App.game.party.alreadyCaughtPokemonByName('Magikarp Orange Two-Tone')) {
             Notifier.notify({
-                message: 'You were awarded a Magikarp Orange Two Tone!',
+                message: 'You were awarded a Magikarp Orange Two-Tone!',
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
             });
-            App.game.party.gainPokemonById(pokemonMap['Magikarp Orange Two Tone'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
+            App.game.party.gainPokemonByName('Magikarp Orange Two-Tone', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         }
-    }
+    },
+    undefined, 'Kareign\'s Heavy League Gym'
 );
 
 GymList['Great League'] = new Gym(
     'Karbuck',
     'Great League',
-    [new GymPokemon('Magikarp', 1, 20)],
+    [new GymPokemon('Magikarp', 2700000, 20)],
     BadgeEnums.Great_League,
-    0, //TODO
-    'TODO',
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 34)]
+    11500,
+    'Guess ya got me. Hook, line and sinker!',
+    [new TemporaryBattleRequirement('Magikarp Jump Karpress')]
 );
 
 GymList['Fast League'] = new Gym(
     'Kareign 2',
     'Fast League',
-    [new GymPokemon('Magikarp Pink Dapples', 1, 20)],
+    [new GymPokemon('Magikarp Pink Dapples', 5062500, 20)],
     BadgeEnums.Fast_League,
-    0, //TODO
-    'TODO',
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 35)],
+    12000,
+    'This life is not for me... I will become a Karpenter now...',
+    [new TemporaryBattleRequirement('Magikarp Jump Karson')],
     () => {
         if (!App.game.party.alreadyCaughtPokemonByName('Magikarp Pink Dapples')) {
             Notifier.notify({
                 message: 'You were awarded a Magikarp Pink Dapples!',
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
             });
-            App.game.party.gainPokemonById(pokemonMap['Magikarp Pink Dapples'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
+            App.game.party.gainPokemonByName('Magikarp Pink Dapples', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         }
-    }
+    },
+    undefined, 'Kareign\'s Fast League Gym'
 );
 
 GymList['Luxury League'] = new Gym(
     'Jump Champ',
     'Luxury League',
-    [new GymPokemon('Magikarp Pink Orca', 1, 20)],
+    [new GymPokemon('Magikarp Pink Orca', 6750000, 20)],
     BadgeEnums.Luxury_League,
-    0, //TODO
-    'TODO',
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 36)],
+    12500,
+    'Just wait \'til my Magikarp evolves and you will all see how great I am! <i>Cries</i>',
+    [new TemporaryBattleRequirement('Magikarp Jump Karbuck')],
     () => {
         if (!App.game.party.alreadyCaughtPokemonByName('Magikarp Pink Orca')) {
             Notifier.notify({
                 message: 'You were awarded a Magikarp Pink Orca!',
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
             });
-            App.game.party.gainPokemonById(pokemonMap['Magikarp Pink Orca'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
+            App.game.party.gainPokemonByName('Magikarp Pink Orca', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         }
-    }
+    },
+    undefined, 'Jump Champ\'s Luxury League Gym'
 );
 
 GymList['Heal League'] = new Gym(
     'Karami',
     'Heal League',
-    [new GymPokemon('Magikarp Purple Bubbles', 1, 20)],
+    [new GymPokemon('Magikarp Purple Bubbles', 10125000, 20)],
     BadgeEnums.Heal_League,
-    0, //TODO
-    'TODO',
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 37)],
+    12500,
+    'I\'m getting more old than my rod...',
+    [new TemporaryBattleRequirement('Magikarp Jump Karpella 2')],
     () => {
         if (!App.game.party.alreadyCaughtPokemonByName('Magikarp Purple Bubbles')) {
             Notifier.notify({
                 message: 'You were awarded a Magikarp Purple Bubbles!',
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
             });
-            App.game.party.gainPokemonById(pokemonMap['Magikarp Purple Bubbles'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
+            App.game.party.gainPokemonByName('Magikarp Purple Bubbles', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         }
     }
 );
@@ -1699,51 +1707,55 @@ GymList['Heal League'] = new Gym(
 GymList['Ultra League'] = new Gym(
     'Jump Champ 2',
     'Ultra League',
-    [new GymPokemon('Magikarp Brown Tiger', 1, 20)],
+    [new GymPokemon('Magikarp Brown Tiger', 13500000, 20)],
     BadgeEnums.Ultra_League,
-    0, //TODO
-    'TODO',
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 38)],
+    12500,
+    'I knew I smelled something fishy...',
+    [new TemporaryBattleRequirement('Magikarp Jump Koylee 2')],
     () => {
         if (!App.game.party.alreadyCaughtPokemonByName('Magikarp Brown Tiger')) {
             Notifier.notify({
                 message: 'You were awarded a Magikarp Brown Tiger!',
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
             });
-            App.game.party.gainPokemonById(pokemonMap['Magikarp Brown Tiger'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
+            App.game.party.gainPokemonByName('Magikarp Brown Tiger', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         }
-    }
+    },
+    undefined, 'Jump Champ\'s Ultra League Gym'
 );
 
 GymList['E4 League'] = new Gym(
     'Jump Champ 3',
     'E4 League',
-    [new GymPokemon('Magikarp Orange Forehead', 1, 20)],
+    [new GymPokemon('Magikarp Orange Forehead', 20250000, 20)],
     BadgeEnums.E4_League,
-    0, //TODO
-    'TODO',
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 39)],
+    12500,
+    'That jump really splashed!',
+    [new TemporaryBattleRequirement('Magikarp Jump Karpella 3')],
     () => {
         if (!App.game.party.alreadyCaughtPokemonByName('Magikarp Orange Forehead')) {
             Notifier.notify({
                 message: 'You were awarded a Magikarp Orange Forehead!',
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
             });
-            App.game.party.gainPokemonById(pokemonMap['Magikarp Orange Forehead'].id, PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
+            App.game.party.gainPokemonByName('Magikarp Orange Forehead', PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_REWARD), true);
         }
-    }
+    },
+    undefined, 'Jump Champ\'s Elite League Gym'
 );
 
 GymList['Master League'] = new Gym(
     'Magikarp',
     'Master League',
-    [new GymPokemon('Magikarp', 1, 20)],
+    [new GymPokemon('Magikarp', 27000000, 20)],
     BadgeEnums.Master_League,
-    0, //TODO
-    'TODO',
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 40)]
+    13000,
+    'Mayor Karp will be proud of you!',
+    [new TemporaryBattleRequirement('Magikarp Jump Tykarp 2')]
 );
 
 //Galar Leaders
@@ -1936,9 +1948,9 @@ GymList['Elite Trainer Hop'] = new Gym(
         new GymPokemon('Pincurchin', 124130462, 58),
         new GymPokemon('Snorlax', 124130462, 58),
         new GymPokemon('Corviknight', 131993475, 60),
-        new GymPokemon('Gigantamax Inteleon', 139216928, 59, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Grass)),
-        new GymPokemon('Gigantamax Rillaboom', 139216928, 59, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Fire)),
-        new GymPokemon('Gigantamax Cinderace', 139216928, 59, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Water)),
+        new GymPokemon('Gigantamax Inteleon', 139216928, 59, new StarterRequirement(GameConstants.Region.galar, GameConstants.Starter.Grass)),
+        new GymPokemon('Gigantamax Rillaboom', 139216928, 59, new StarterRequirement(GameConstants.Region.galar, GameConstants.Starter.Fire)),
+        new GymPokemon('Gigantamax Cinderace', 139216928, 59, new StarterRequirement(GameConstants.Region.galar, GameConstants.Starter.Water)),
     ],
     BadgeEnums.Elite_Hop,
     200000,
@@ -1953,12 +1965,12 @@ GymList['Champion Leon'] = new Gym(
         new GymPokemon('Aegislash (Shield)', 130579274, 62),
         new GymPokemon('Dragapult', 130579274, 62),
         new GymPokemon('Haxorus', 130579274, 63),
-        new GymPokemon('Seismitoad', 133481036, 64, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Grass)),
-        new GymPokemon('Cinderace', 137833678, 64, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Grass)),
-        new GymPokemon('Mr. Rime', 133481036, 64, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Fire)),
-        new GymPokemon('Inteleon', 137833678, 64, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Fire)),
-        new GymPokemon('Rhyperior', 133481036, 64, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Water)),
-        new GymPokemon('Rillaboom', 137833678, 64, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Water)),
+        new GymPokemon('Seismitoad', 133481036, 64, new StarterRequirement(GameConstants.Region.galar, GameConstants.Starter.Grass)),
+        new GymPokemon('Cinderace', 137833678, 64, new StarterRequirement(GameConstants.Region.galar, GameConstants.Starter.Grass)),
+        new GymPokemon('Mr. Rime', 133481036, 64, new StarterRequirement(GameConstants.Region.galar, GameConstants.Starter.Fire)),
+        new GymPokemon('Inteleon', 137833678, 64, new StarterRequirement(GameConstants.Region.galar, GameConstants.Starter.Fire)),
+        new GymPokemon('Rhyperior', 133481036, 64, new StarterRequirement(GameConstants.Region.galar, GameConstants.Starter.Water)),
+        new GymPokemon('Rillaboom', 137833678, 64, new StarterRequirement(GameConstants.Region.galar, GameConstants.Starter.Water)),
         new GymPokemon('Gigantamax Charizard', 145088006, 65),
     ],
     BadgeEnums.Elite_GalarChampion,

@@ -42,14 +42,78 @@ class SpecialEvents implements Feature {
 // Create our events here for now (yearly)
 
 // Lunar New Year
-SpecialEvents.newEvent('Lunar New Year', 'Encounter Fancy Pattern Vivillon for a limited time roaming Kalos.',
+SpecialEvents.newEvent('Lunar New Year', 'Vivillon are everywhere! Two kinds are roaming Kalos and later regions, ones you\'ve previously caught have returned, and Poké Ball Vivillon roams an abandoned Megamart...',
     // Start
     new Date(new Date().getFullYear(), 0, 24, 1), () => {
         RoamingPokemonList.add(GameConstants.Region.kalos, 0, new RoamingPokemon('Vivillon (Fancy)'));
+        RoamingPokemonList.add(GameConstants.Region.kalos, 0, new RoamingPokemon('Vivillon (Meadow)'));
+        RoamingPokemonList.add(GameConstants.Region.galar, 0, new RoamingPokemon('Vivillon (Fancy)'));
+        RoamingPokemonList.add(GameConstants.Region.galar, 2, new RoamingPokemon('Vivillon (Fancy)'));
+        RoamingPokemonList.add(GameConstants.Region.galar, 3, new RoamingPokemon('Vivillon (Fancy)'));
+        RoamingPokemonList.add(GameConstants.Region.alola, 0, new RoamingPokemon('Vivillon (Meadow)'));
+        ([
+            ['Lake Verity', 'Vivillon (Marine)'],
+            ['Lake Acuity', 'Vivillon (Marine)'],
+            ['Lake Valor', 'Vivillon (Marine)'],
+            ['Cerulean Cave', 'Vivillon (Modern)'],
+            ['Moor of Icirrus', 'Vivillon (Jungle)'],
+            ['Dark Cave', 'Vivillon (Monsoon)'],
+            ['Poké Ball Factory', 'Vivillon (Tundra)'],
+            ['Mt. Chimney Crater', 'Vivillon (Sun)'],
+            ['Sprout Tower', 'Vivillon (Archipelago)'],
+            ['Lost Hotel', 'Vivillon (Elegant)'],
+            ['Dreamyard', 'Vivillon (Ocean)'],
+            ['New Mauville', 'Vivillon (Continental)'],
+            ['Eterna Forest', 'Vivillon (River)'],
+            ['Sky Pillar', 'Vivillon (Polar)'],
+            ['Relic Castle', 'Vivillon (Sandstorm)'],
+            ['Flower Paradise', 'Vivillon (Garden)'],
+            ['Mt. Moon', 'Vivillon (High Plains)'],
+            ['Dragonspiral Tower', 'Vivillon (Savanna)'],
+            ['Frost Cavern', 'Vivillon (Icy Snow)'],
+            ['Thrifty Megamart', 'Vivillon (Poké Ball)'],
+        ] as [string, PokemonNameType][]).forEach(([location, vivillon]) => {
+            dungeonList[location].bossList.push(
+                new DungeonBossPokemon(vivillon, 96662023, 60, {
+                    hide: true,
+                    requirement: new ObtainedPokemonRequirement(vivillon),
+                })
+            );
+        });
     },
     // End
     new Date(new Date().getFullYear(), 1, 7, 23), () => {
         RoamingPokemonList.remove(GameConstants.Region.kalos, 0, 'Vivillon (Fancy)');
+        RoamingPokemonList.remove(GameConstants.Region.kalos, 0, 'Vivillon (Meadow)');
+        RoamingPokemonList.remove(GameConstants.Region.galar, 0, 'Vivillon (Fancy)');
+        RoamingPokemonList.remove(GameConstants.Region.galar, 2, 'Vivillon (Fancy)');
+        RoamingPokemonList.remove(GameConstants.Region.galar, 3, 'Vivillon (Fancy)');
+        RoamingPokemonList.remove(GameConstants.Region.alola, 0, 'Vivillon (Meadow)');
+        [
+            ['Lake Verity', 'Vivillon (Marine)'],
+            ['Lake Acuity', 'Vivillon (Marine)'],
+            ['Lake Valor', 'Vivillon (Marine)'],
+            ['Cerulean Cave', 'Vivillon (Modern)'],
+            ['Moor of Icirrus', 'Vivillon (Jungle)'],
+            ['Dark Cave', 'Vivillon (Monsoon)'],
+            ['Poké Ball Factory', 'Vivillon (Tundra)'],
+            ['Mt. Chimney Crater', 'Vivillon (Sun)'],
+            ['Sprout Tower', 'Vivillon (Archipelago)'],
+            ['Lost Hotel', 'Vivillon (Elegant)'],
+            ['Dreamyard', 'Vivillon (Ocean)'],
+            ['New Mauville', 'Vivillon (Continental)'],
+            ['Eterna Forest', 'Vivillon (River)'],
+            ['Sky Pillar', 'Vivillon (Polar)'],
+            ['Relic Castle', 'Vivillon (Sandstorm)'],
+            ['Flower Paradise', 'Vivillon (Garden)'],
+            ['Mt. Moon', 'Vivillon (High Plains)'],
+            ['Dragonspiral Tower', 'Vivillon (Savanna)'],
+            ['Frost Cavern', 'Vivillon (Icy Snow)'],
+            ['Thrifty Megamart', 'Vivillon (Poké Ball)'],
+        ].forEach(([location, vivillon]) => {
+            dungeonList[location].bossList = dungeonList[location].bossList
+                .filter(boss => boss.name != vivillon || (boss.name == vivillon && !boss.options?.requirement));
+        });
     }
 );
 //Hoopa Day
@@ -153,17 +217,25 @@ SpecialEvents.newEvent('Let\'s GO!', 'Encounter special Eevee and Pikachu roamin
 SpecialEvents.newEvent('Merry Christmas!', 'Encounter Santa Snorlax roaming the regions and discover the Grinch of Ilex Forest.',
     // Start
     new Date(new Date().getFullYear(), 11, 24, 1), () => {
-        // Add to every region excluding None
-        GameHelper.enumNumbers(GameConstants.Region).filter(i => i != GameConstants.Region.none).forEach(region => {
-            RoamingPokemonList.add(region, 0, new RoamingPokemon('Santa Snorlax'));
+        // Add to every roaming group that has at least one roamer
+        RoamingPokemonList.roamerGroups.forEach((regionGroups, region) => {
+            regionGroups.forEach((_, subRegionGroup) => {
+                if (RoamingPokemonList.list[region][subRegionGroup]?.length) {
+                    RoamingPokemonList.add(region, subRegionGroup, new RoamingPokemon('Santa Snorlax'));
+                }
+            });
         });
         dungeonList['Ilex Forest'].bossList.push(new DungeonBossPokemon('Grinch Celebi', 1600000, 100, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion)}));
     },
     // End
     new Date(new Date().getFullYear(), 11, 30, 23), () => {
-        // Remove from every region excluding None
-        GameHelper.enumNumbers(GameConstants.Region).filter(i => i != GameConstants.Region.none).forEach(region => {
-            RoamingPokemonList.remove(region, 0, 'Santa Snorlax');
+        // Remove from every roaming group
+        RoamingPokemonList.roamerGroups.forEach((regionGroups, region) => {
+            regionGroups.forEach((_, subRegionGroup) => {
+                if (RoamingPokemonList.list[region][subRegionGroup]) {
+                    RoamingPokemonList.remove(region, subRegionGroup, 'Santa Snorlax');
+                }
+            });
         });
         dungeonList['Ilex Forest'].bossList = dungeonList['Ilex Forest'].bossList.filter(boss => boss.name != 'Grinch Celebi');
     }
