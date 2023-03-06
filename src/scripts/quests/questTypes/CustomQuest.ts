@@ -1,7 +1,7 @@
 type CustomQuestOptionalArgument = {
     clearedMessage?: string;
-    displayName?: string,
-    imageName?: string,
+    npcDisplayName?: string,
+    npcImageName?: string,
 };
 
 class CustomQuest extends Quest implements QuestInterface {
@@ -13,17 +13,17 @@ class CustomQuest extends Quest implements QuestInterface {
         return this.optionalArgs.clearedMessage;
     }
 
-    public getDisplayName() {
-        return this.optionalArgs.displayName;
+    public getNpcDisplayName() {
+        return this.optionalArgs.npcDisplayName;
     }
 
-    public getImageName() {
-        return this.optionalArgs.imageName;
+    public getNpcImageName() {
+        return this.optionalArgs.npcImageName;
     }
 
-    public getImage() {
-        const imageName = this.optionalArgs?.imageName;
-        return `assets/images/npcs/${imageName}.png`;
+    public getNpcImage() {
+        const npcImageName = this.optionalArgs?.npcImageName;
+        return `assets/images/npcs/${npcImageName}.png`;
     }
 
     constructor(amount: number, reward: (() => void) | number, description: string, focus: any, initialValue?: number, onLoad?: (() => void), public optionalArgs: CustomQuestOptionalArgument = {}) {
