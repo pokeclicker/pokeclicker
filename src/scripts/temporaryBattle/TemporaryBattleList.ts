@@ -1927,7 +1927,7 @@ TemporaryBattleList['Team Flare Grunt 1'] = new TemporaryBattle(
         new GymPokemon('Zubat', 36513421, 18),
     ],
     'You may have beaten me, but when I lose, I go out in style!',
-    [new QuestLineStepCompletedRequirement('A Beautiful World', 4)],
+    [new QuestLineStepCompletedRequirement('A Beautiful World', 3)],
     undefined,
     {
         displayName: 'Team Flare Grunt',
@@ -1940,8 +1940,8 @@ TemporaryBattleList['Team Flare Grunt 2'] = new TemporaryBattle(
         new GymPokemon('Houndour', 37260908, 21),
         new GymPokemon('Golbat', 39069360, 23),
     ],
-    'You may have beaten me... again, but when I lose, I go out in style!',
-    [new QuestLineStepCompletedRequirement('A Beautiful World', 8)],
+    'You may have beaten me... again, but when I lose, I go out in style! But first hear this, pip-squeak! Team Flare is gonna use the stones on Route 10 and a fantastic treasure to make everyone on our team happy! In this world the ones who have power are the ones who win with flair!',
+    [new QuestLineStepCompletedRequirement('A Beautiful World', 7)],
     undefined,
     {
         displayName: 'Team Flare Grunt',
@@ -2465,7 +2465,7 @@ TemporaryBattleList['Calem 3'] = new TemporaryBattle(
         new GymPokemon('Chesnaught', 67476604, 37, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Water)),
     ],
     'Battling with you is fun, but losing all the time doesn\'t really make me look all that good.',
-    [new GymBadgeRequirement(BadgeEnums.Voltage), new QuestLineStepCompletedRequirement('A Beautiful World', 16)],
+    [new QuestLineStepCompletedRequirement('A Beautiful World', 13)],
     undefined,
     {
         displayName: 'Pokémon Trainer Calem',
@@ -2502,8 +2502,8 @@ TemporaryBattleList['Team Flare Lysandre 1'] = new TemporaryBattle(
         new GymPokemon('Pyroar', 67714357, 47),
         new GymPokemon('Gyarados', 69068644, 49),
     ],
-    'Excellent! I can feel the fire of your convictions burning deep within your heart!',
-    [new QuestLineStepCompletedRequirement('A Beautiful World', 25)],
+    'Excellent! I can feel the fire of your convictions burning deep within your heart! I tried to save people--and the world--with the profit from this lab. But my efforts had no effect... This world will eventually reach the point of no return... Saving the lives of all is impossible. Only the chosen ones will obtain a ticket to tomorrow. Do you want to have a ticket? Or, do you want to stop me? Show me in battle!',
+    [new QuestLineStepCompletedRequirement('A Beautiful World', 20)],
     undefined,
     {
         displayName: 'Team Flare Lysandre',
@@ -2517,7 +2517,7 @@ TemporaryBattleList['Team Flare Xerosic'] = new TemporaryBattle(
         new GymPokemon('Malamar', 131365853, 48),
     ],
     'Oh ho ho! You\'re wonderful! Your Pokémon are amazing.',
-    [new QuestLineStepCompletedRequirement('A Beautiful World', 28)],
+    [new QuestLineStepCompletedRequirement('A Beautiful World', 22)],
     undefined,
     {
         displayName: 'Team Flare Xerosic',
@@ -2528,7 +2528,7 @@ TemporaryBattleList.Xerneas = new TemporaryBattle(
     'Xerneas',
     [new GymPokemon('Xerneas', 281500000, 50)],
     'You calmed down Xerneas and it ran away to the back of the lab.',
-    [new QuestLineStepCompletedRequirement('A Beautiful World', 40)],
+    [new QuestLineStepCompletedRequirement('A Beautiful World', 30)],
     undefined,
     {
         displayName: 'Xerneas',
@@ -2540,7 +2540,7 @@ TemporaryBattleList.Yveltal = new TemporaryBattle(
     'Yveltal',
     [new GymPokemon('Yveltal', 281500000, 50)],
     'You calmed down Yveltal and it ran away to the back of the lab.',
-    [new QuestLineStepCompletedRequirement('A Beautiful World', 40)],
+    [new QuestLineStepCompletedRequirement('A Beautiful World', 30)],
     undefined,
     {
         displayName: 'Yveltal',
@@ -2557,7 +2557,7 @@ TemporaryBattleList['Team Flare Boss Lysandre 1'] = new TemporaryBattle(
         new GymPokemon('Mega Gyarados', 71740808, 53),
     ],
     'It\'s over... Fools with no vision will continue to befoul this beautiful world. They will go on until the only thing left to do is squabble over the remaining scraps of hope...',
-    [new QuestLineStepCompletedRequirement('A Beautiful World', 42)],
+    [new QuestLineStepCompletedRequirement('A Beautiful World', 32)],
     undefined,
     {
         displayName: 'Team Flare Boss Lysandre',
@@ -2658,7 +2658,7 @@ TemporaryBattleList['Storyline AZ'] = new TemporaryBattle(
         new GymPokemon('Sigilyph', 153757520, 60),
     ],
     'Thank you very much for battling with me. Now I finally feel free…',
-    [new QuestLineStepCompletedRequirement('A Beautiful World', 44)],
+    [new QuestLineStepCompletedRequirement('A Beautiful World', 34)],
     undefined,
     {
         displayName: 'Pokémon Trainer AZ',
@@ -2681,7 +2681,7 @@ TemporaryBattleList.AZ = new TemporaryBattle(
         new GymPokemon('Sigilyph', 161445396, 80),
     ],
     'Floette... It\'s been 3,000 years...',
-    [new QuestLineStepCompletedRequirement('A Beautiful World', 45)],
+    [new QuestLineStepCompletedRequirement('A Beautiful World', 35)],
     undefined,
     {
         displayName: 'Pokémon Trainer AZ',
@@ -2897,7 +2897,7 @@ TemporaryBattleList['Team Flare Boss Lysandre 2'] = new TemporaryBattle(
         new GymPokemon('Mega Gyarados', 129681014, 83),
     ],
     'I see the strength to protect within you... Hopefully you can do a better job than me and protect a tomorrow that will be better than today. Take this Gyaradosite.</br><img src="assets/images/megaStone/130.png"/></br>',
-    [new QuestLineStepCompletedRequirement('A Beautiful World', 45), new ObtainedPokemonRequirement('Gyarados'), new DayCyclePartRequirement([DayCyclePart.Dusk])],//new DayCyclePartRequirement([DayCyclePart.Dusk])
+    [new QuestLineStepCompletedRequirement('A Beautiful World', 35), new ObtainedPokemonRequirement('Gyarados'), new DayCyclePartRequirement([DayCyclePart.Dusk])],//new DayCyclePartRequirement([DayCyclePart.Dusk])
     undefined,
     {
         displayName: 'Team Flare Boss Lysandre',

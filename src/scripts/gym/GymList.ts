@@ -1150,7 +1150,7 @@ GymList['Lumiose City'] = new Gym(
     BadgeEnums.Voltage,
     9000,
     'Oh, Bonnie... When will you learn there\'s no shame in losing? I\'m glad whenever I get to learn something new thanks to strong challengers like you here.',
-    [new QuestLineStepCompletedRequirement('A Beautiful World', 14)]
+    [new QuestLineStepCompletedRequirement('A Beautiful World', 11)]
 );
 GymList['Laverre City'] = new Gym(
     'Valerie',
