@@ -13,15 +13,14 @@ class BattleFrontier implements Feature {
     update(delta: number): void {}
 
     canAccess(): boolean {
-        const deoxysQuest = App.game.quests.getQuestLine('Mystery of Deoxys');
-        return deoxysQuest.state() == QuestLineState.ended || deoxysQuest.curQuest() >= 3;
+        return true;
     }
 
     public enter(): void {
         if (!App.game.battleFrontier.canAccess()) {
             return Notifier.notify({
                 title: 'Battle Frontier',
-                message: 'You must progress further in the "Mystery of Deoxys" quest before you can participate.',
+                message: 'You can not participate in the Battle Frontier yet.',
                 type: NotificationConstants.NotificationOption.warning,
             });
         }
