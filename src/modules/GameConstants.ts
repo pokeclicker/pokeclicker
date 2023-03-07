@@ -1444,6 +1444,7 @@ export const TemporaryBattles = [
     'Silver 6',
     'Silver 7',
     'Red',
+    'Youngster Joey',
     'May 1',
     'May 2',
     'May 3',
@@ -1702,7 +1703,6 @@ export const TemporaryBattles = [
     'Galarian Moltres 2',
     'Galarian Moltres 3',
     'Regigigas',
-    'Youngster Joey',
 ];
 
 export enum ShardTraderLocations {
