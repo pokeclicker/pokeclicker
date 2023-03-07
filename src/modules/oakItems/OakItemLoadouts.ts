@@ -21,6 +21,10 @@ export default class OakItemLoadouts implements Saveable {
             return;
         }
 
+        if (index >= OakItemLoadouts.MAX_SLOTS) {
+            return;
+        }
+
         App.game.oakItems.deactivateAll();
         this.loadouts[index].loadout().forEach((item: OakItemType) => {
             App.game.oakItems.activate(item);

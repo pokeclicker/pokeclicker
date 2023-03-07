@@ -208,13 +208,7 @@ class GameController {
             if ($oakItemsModal.data('bs.modal')?._isShown) {
                 // Toggle oak items
                 if (isNumberKey) {
-                    if (oakItems.isUnlocked(numberKey)) {
-                        if (oakItems.isActive(numberKey)) {
-                            oakItems.deactivate(numberKey);
-                        } else {
-                            oakItems.activate(numberKey);
-                        }
-                    }
+                    App.game.oakItemLoadouts.activateLoadout(numberKey);
                     return e.preventDefault();
                 }
             }
