@@ -41,6 +41,17 @@ aria-labelledby="starterCaughtModalLabel" aria-hidden="true">
                    <br>
                    <p>Poké Ball Bag</p>
                </div>
+                <!-- Add Town Map to the list if Monotype Challenge is enabled -->
+                <!-- ko if: App.game.challenges.listSpecial.monotype.active() -->
+                <div class="col-sm-3">
+                    <img
+                        title="A very convenient map that can be viewed anytime. It even shows you your present location in the region."
+                        class="key-item"
+                        src="assets/images/keyitems/Town_map.png"/>
+                    <br>
+                    <p>Town Map</p>
+                </div>
+                <!-- /ko -->
 
            </div>
 

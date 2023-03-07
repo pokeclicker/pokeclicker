@@ -90,8 +90,10 @@ class QuestLineHelper {
         const talkToOldMan = new TalkToNPCQuest(ViridianCityOldMan2, 'Talk to the Old Man in Viridian City to learn about catching.', OldManReward);
         tutorial.addQuest(talkToOldMan);
 
-        const catch5Pidgey = new CustomQuest(5, 30, 'Use what you\'ve learned to catch 5 Pidgey. Talk to the Old Man again if you need a reminder.', () => App.game.statistics.pokemonCaptured[PokemonHelper.getPokemonByName('Pidgey').id]());
-        tutorial.addQuest(catch5Pidgey);
+        // If the Monotype Challenge is enabled, catch the starter, if not, Pidgey
+        const pokemon = PokemonHelper.getPokemonById(App.game.challenges.listSpecial.monotype.active() ? GameConstants.RegionalStartersMonotype[GameConstants.Region.kanto][App.game.challenges.listSpecial.monotype.pokemonType()] : 16);
+        const catch5StartersOrPidgey = new CustomQuest(5, 30, `Use what you\'ve learned to catch 5 ${pokemon.name}. Talk to the Old Man again if you need a reminder.`, () => App.game.statistics.pokemonCaptured[pokemon.id]());
+        tutorial.addQuest(catch5StartersOrPidgey);
 
         //Buy Dungeon ticket
         const buyDungeonTicket = new CustomQuest(1, 50,
@@ -102,7 +104,20 @@ class QuestLineHelper {
         tutorial.addQuest(buyDungeonTicket);
 
         //Clear Viridian Forest
-        const clearViridianForest = new CustomQuest(1, 50,
+        const viridianForestReward = () => {
+            App.game.wallet.gainQuestPoints(50);
+            if (App.game.challenges.listSpecial.monotype.active()) {
+                Information.show({
+                    steps: [
+                        {
+                            element: document.getElementById('questDisplayContainer'),
+                            intro: 'Click "List" to see the current quests that can be completed for <img title="Quest points" src="assets/images/currency/questPoint.svg" height="24px"> Quest Points.',
+                        },
+                    ],
+                });
+            }
+        };
+        const clearViridianForest = new CustomQuest(1, viridianForestReward,
             'Gather 50 Dungeon Tokens by (re)capturing Pokémon, then clear the Viridian Forest dungeon.',
             () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Viridian Forest')](),
             0
@@ -112,18 +127,20 @@ class QuestLineHelper {
         //Defeat Pewter Gym
         const pewterReward = () => {
             Notifier.notify({ message: 'Tutorial completed!', type: NotificationConstants.NotificationOption.success });
-            Information.show({
-                steps: [
-                    {
-                        element: document.getElementById('questDisplayContainer'),
-                        intro: 'Click "List" to see the current quests that can be completed for <img title="Quest points" src="assets/images/currency/questPoint.svg" height="24px"> Quest Points.',
-                    },
-                    {
-                        element: document.getElementById('startMenu'),
-                        intro: 'See the badges you\'ve earned in the Badge Case. Badges influence the max level of your Pokémon.',
-                    },
-                ],
-            });
+            if (!App.game.challenges.listSpecial.monotype.active()) {
+                Information.show({
+                    steps: [
+                        {
+                            element: document.getElementById('questDisplayContainer'),
+                            intro: 'Click "List" to see the current quests that can be completed for <img title="Quest points" src="assets/images/currency/questPoint.svg" height="24px"> Quest Points.',
+                        },
+                        {
+                            element: document.getElementById('startMenu'),
+                            intro: 'See the badges you\'ve earned in the Badge Case. Badges influence the max level of your Pokémon.',
+                        },
+                    ],
+                });
+            }
         };
         const pewter = new CustomQuest(1, pewterReward,
             'Defeat Pewter City Gym. Click the town on the map to move there, then click the Gym button to start the battle.',

@@ -12,7 +12,19 @@ GymList['Pewter City'] = new Gym(
     BadgeEnums.Boulder,
     250,
     'I took you for granted, and so I lost. As proof of your victory, I confer on you this... the official Pokémon League BoulderBadge.',
-    [new RouteKillRequirement(10, GameConstants.Region.kanto, 2)]
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 2)],
+    () => {
+        if (App.game.challenges.listSpecial.monotype.active()) {
+            Information.show({
+                steps: [
+                    {
+                        element: document.getElementById('startMenu'),
+                        intro: 'See the badges you\'ve earned in the Badge Case. Badges influence the max level of your Pokémon.',
+                    },
+                ],
+            });
+        }
+    }
 );
 GymList['Cerulean City'] = new Gym(
     'Misty',

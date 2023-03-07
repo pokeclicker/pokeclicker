@@ -1,36 +1,114 @@
 <div class="modal noselect fade" id="challengeModeModal" tabindex="-1" role="dialog" aria-labelledby="challengeModeModal">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
-        <div class="modal-content">
+        <div class="modal-content h-100">
             <div class="modal-header">
                 <h5 class="modal-title">Challenge Modes</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <p>
-                    <strong>Activate in-game challenge modes!</strong><br/>
-                    Challenges can be disabled later, but cannot be re-enabled.
-                </p>
-                <br/>
-                <table class="table" width="100%">
-                    <tbody data-bind="foreach: Object.values(App.game.challenges.list)">
-                        <tr data-bind="tooltip: {
-                            title: $data.description,
-                            placement: 'bottom',
-                            trigger: 'hover'
-                        }">
-                            <td class="text-left font-weight-bold" data-bind="text: $data.type"></td>
-                            <td class="p-1">
-                                <!-- ko if: !$data.active() && player.regionStarters[GameConstants.Region.kanto]() == GameConstants.Starter.None --><button class="btn btn-warning btn-block" data-bind="click: ()=>{$data.activate();}">ACTIVATE</button><!-- /ko -->
-                                <!-- ko if: !$data.active() && player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.None --><button class="btn btn-secondary btn-block disabled">DISABLED</button><!-- /ko -->
-                                <!-- ko if: $data.active() --><button class="btn btn-success btn-block" data-bind="click: ()=>{$data.disable();}">ACTIVE</button><!-- /ko -->
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <br/>
-               <button class="btn btn-primary btn-block" data-dismiss="modal">Done!</button>
+            <ul class="nav nav-tabs nav-fill w-100">
+                <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#standardChallenges">Standard Challenges</a></li>
+                <li class="nav-item"><a data-toggle='tab' class='nav-link' href="#specialChallenges">Special Challenges</a></li>
+            </ul>
+            <div class="modal-body py-0">
+                <div class="tab-content">
+                    <!-- Standard Challenges -->
+                    <div id="standardChallenges" class="tab-pane fade in active show">
+                        <div class="py-3">
+                            <h5>Standard Challenges</h5>
+                            <strong>Activate in-game challenge modes!</strong><br/>
+                            Challenges can be disabled later, but cannot be re-enabled.
+                        </div>
+                        <table class="table m-0" width="100%">
+                            <tbody data-bind="foreach: Object.values(App.game.challenges.list)">
+                                <tr>
+                                    <td class="text-left font-weight-bold" data-bind="text: $data.type,
+                                        tooltip: {
+                                            title: $data.description,
+                                            placement: 'bottom',
+                                            trigger: 'hover'
+                                        }">
+                                    </td>
+                                    <td class="p-1">
+                                        <!-- ko if: !$data.active() && player.regionStarters[GameConstants.Region.kanto]() == GameConstants.Starter.None -->
+                                        <button class="btn btn-warning btn-block" data-bind="click: ()=>{$data.activate();}">ACTIVATE</button>
+                                        <!-- /ko -->
+
+                                        <!-- ko if: !$data.active() && player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.None -->
+                                        <button class="btn btn-secondary btn-block disabled">DISABLED</button>
+                                        <!-- /ko -->
+
+                                        <!-- ko if: $data.active() -->
+                                        <button class="btn btn-success btn-block" data-bind="click: ()=>{$data.disable();}, css: { disabled: player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.None && ($data.requirement && !$data.requirement.isCompleted()) } ">ACTIVE</button>
+                                        <!-- /ko -->
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Special Challenges -->
+                    <div id="specialChallenges" class="tab-pane fade in">
+                        <div class="py-3">
+                            <h5>Special Challenges</h5>
+                            <strong>Special challenges that change how the game is played!</strong><br/>
+                            Not recommended for a first time playthrough.<br/>
+                            Balance and fairness are not guaranteed.
+                        </div>
+                        <table class="table m-0" width="100%">
+                            <tbody data-bind="foreach: Object.values(App.game.challenges.listSpecial)">
+                                <tr>
+                                    <td class="text-left font-weight-bold" data-bind="text: $data.type, attr: { colspan: $data.type !== 'Monotype' ? 2 : 1 },
+                                        tooltip: {
+                                            title: $data.description,
+                                            placement: 'bottom',
+                                            trigger: 'hover'
+                                        }">
+                                    </td>
+                                    <!-- Add a column for Type if Monotype -->
+                                    <!-- ko if: $data.type === 'Monotype' -->
+                                    <td class="p-1">
+                                        <!-- ko if: $data.active() -->
+                                        <div class="dropdown show">
+                                            <!-- ko using: App.game.challenges.listSpecial.monotype.pokemonType(), as: 'type' -->
+                                            <button type="button" class="btn btn-block text-white text-uppercase" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" 
+                                                data-bind="text: PokemonType[type], 
+                                                style: { background: GameConstants.TypeColor[type] },
+                                                attr: { disabled: player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.None }">
+                                            </button>
+                                            <!-- /ko -->
+                                            <div class="border-secondary dropdown-menu col-12 p-0" style="overflow-y: auto; max-height: 30vh;">
+                                                <!-- ko foreach : GameHelper.enumSelectOption(PokemonType).filter((t) => t.name != 'None') -->
+                                                <div class="dropdown-item py-1 border border-white text-white text-uppercase" data-bind="text : $data.name, style: { background: GameConstants.TypeColor[$data.value] },
+                                                    click : function(){ App.game.challenges.listSpecial.monotype.pokemonType(Number($data.value)) }">
+                                                </div>
+                                                <!-- /ko-->
+                                            </div>
+                                        </div>
+                                        <!-- /ko -->
+                                    </td>
+                                    <!-- /ko -->
+                                    <td class="p-1">
+                                        <!-- ko if: !$data.active() && player.regionStarters[GameConstants.Region.kanto]() == GameConstants.Starter.None -->
+                                        <button class="btn btn-warning btn-block" data-bind="click: ()=>{$data.activate();}">ACTIVATE</button>
+                                        <!-- /ko -->
+
+                                        <!-- ko if: !$data.active() && player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.None -->
+                                        <button class="btn btn-secondary btn-block disabled">DISABLED</button>
+                                        <!-- /ko -->
+
+                                        <!-- ko if: $data.active() -->
+                                        <button class="btn btn-success btn-block" data-bind="click: ()=>{$data.disable();}, css: { disabled: player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.None && ($data.requirement && !$data.requirement.isCompleted()) } ">ACTIVE</button>
+                                        <!-- /ko -->
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary btn-block" data-dismiss="modal">Done!</button>
             </div>
        </div>
     </div>

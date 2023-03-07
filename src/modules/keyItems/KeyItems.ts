@@ -4,7 +4,7 @@ import Information from '../utilities/Information';
 import KeyItemController from './KeyItemController';
 import { Feature } from '../DataStore/common/Feature';
 import {
-    getDungeonIndex, Region, RegionalStarters, ROUTE_KILLS_NEEDED, Pokerus,
+    getDungeonIndex, Region, RegionalStarters, ROUTE_KILLS_NEEDED, Pokerus, RegionalStartersMonotype,
 } from '../GameConstants';
 
 export default class KeyItems implements Feature {
@@ -43,7 +43,13 @@ export default class KeyItems implements Feature {
             new KeyItem(KeyItemType.Holo_caster, 'A device that allows users to see and track Achievements. Completing Achievements gives useful bonuses.',
                 () => App.game.party.caughtPokemon.length >= 110, undefined, undefined, 'Holo Caster'),
             new KeyItem(KeyItemType.Mystery_egg, 'A mysterious Egg obtained from Mr. Pokémon. This allows you to use the Pokémon Day Care to help improve your Pokémon Attack. Some baby Pokémon can only be found through breeding, too!',
-                () => App.game.statistics.routeKills[Region.kanto][3]() >= ROUTE_KILLS_NEEDED, undefined, undefined, 'Mystery Egg'),
+                () => {
+                    if (App.game.challenges.listSpecial.monotype.active()) {
+                        return App.game.quests.getQuestLine('Tutorial Quests').quests()[6].isCompleted(); // Catch 5 starters
+                    } else {
+                        return App.game.statistics.routeKills[Region.kanto][3]() >= ROUTE_KILLS_NEEDED
+                    } 
+                }, undefined, undefined, 'Mystery Egg'),
             new KeyItem(KeyItemType.Safari_ticket, 'This ticket grants access to the Safari Zone right outside Fuchsia City.', undefined, undefined, undefined, 'Safari Ticket'),
             new KeyItem(KeyItemType.Wailmer_pail, 'This is a tool for watering Berries to allow you to operate the farm.',
                 () => MapHelper.accessToRoute(14, Region.kanto), undefined, undefined, 'Wailmer Pail'),
@@ -60,9 +66,18 @@ export default class KeyItems implements Feature {
                 () => App.game.statistics.dungeonsCleared[getDungeonIndex('Distortion World')]() > 0,
                 undefined,
                 () => {
-                    App.game.party.getPokemon(
-                        RegionalStarters[Region.kanto][player.regionStarters[Region.kanto]()],
-                    ).pokerus = Pokerus.Contagious;
+                    if (App.game.challenges.listSpecial.monotype.active()) {
+                        const starterID = RegionalStartersMonotype[Region.kanto][App.game.challenges.listSpecial.monotype.pokemonType()];
+                        // If for some reason the starter is not in the party, give it to the player and give it Pokerus
+                        if (!App.game.party.alreadyCaughtPokemon(starterID)) {
+                            App.game.party.gainPokemonById(starterID);
+                        }
+                        App.game.party.getPokemon(starterID).pokerus = Pokerus.Contagious;
+                    } else {
+                        App.game.party.getPokemon(
+                            RegionalStarters[Region.kanto][player.regionStarters[Region.kanto]()],
+                        ).pokerus = Pokerus.Contagious;
+                    }
                     App.game.pokeballs.alreadyCaughtContagiousSelection = App.game.pokeballs.alreadyCaughtSelection;
                     Information.show({
                         steps: [

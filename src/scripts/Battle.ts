@@ -177,7 +177,14 @@ class Battle {
     }
 
     public static catchPokemon(enemyPokemon: BattlePokemon, route: number, region: GameConstants.Region) {
-        this.gainTokens(route, region);
+        if (App.game.challenges.listSpecial.monotype.active()) { // Gain tokens only if the caught Pokemon have the selected type
+            const monotypeSelectedType = App.game.challenges.listSpecial.monotype.pokemonType();
+            if (enemyPokemon.type1 === monotypeSelectedType || enemyPokemon.type2 === monotypeSelectedType) {
+                this.gainTokens(route, region);
+            }
+        } else { // Otherwise, just gain tokens
+            this.gainTokens(route, region);
+        }
         App.game.oakItems.use(OakItemType.Magic_Ball);
         App.game.party.gainPokemonById(enemyPokemon.id, enemyPokemon.shiny, undefined, enemyPokemon.gender);
         const partyPokemon = App.game.party.getPokemon(enemyPokemon.id);

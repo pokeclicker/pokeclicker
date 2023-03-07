@@ -64,6 +64,13 @@ class QuestLine {
         this.quests.push(quest);
     }
 
+    replaceQuestAfterLoaded(quest: Quest, index: number) {
+        quest.index = index + 1;
+        quest.inQuestLine = true;
+        quest.createAutoCompleter();
+        this.quests.splice(index, 1, quest);
+    }
+
     beginQuest(index = 0, initial?: number) {
         const quest = this.quests()[index];
         if (initial != undefined) {
