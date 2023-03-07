@@ -17,13 +17,6 @@ class BattleFrontier implements Feature {
     }
 
     public enter(): void {
-        if (!App.game.battleFrontier.canAccess()) {
-            return Notifier.notify({
-                title: 'Battle Frontier',
-                message: 'You can not participate in the Battle Frontier yet.',
-                type: NotificationConstants.NotificationOption.warning,
-            });
-        }
         BattleFrontierBattle.enemyPokemon(null);
         App.game.gameState = GameConstants.GameState.battleFrontier;
     }
