@@ -4,6 +4,16 @@
 /// <reference path="../../declarations/weather/WeatherType.d.ts"/>
 /// <reference path="../../declarations/requirements/WeatherRequirement.d.ts"/>
 /// <reference path="../../declarations/subRegion/SubRegions.d.ts"/>
+
+// Special array for Monotype Challenge
+const monotypeSpecialArray = [];
+for (const pokemonType of GameHelper.enumNumbers(PokemonType)) {
+    if (pokemonType !== -1) {
+        const starter = PokemonHelper.getPokemonById(GameConstants.RegionalStartersMonotype[GameConstants.Region.kanto][pokemonType]).name;
+        monotypeSpecialArray.push(new SpecialRoutePokemon([starter], new MonotypeChallengeRequirement(pokemonType)));
+    }
+}
+
 /*
 KANTO
 */
@@ -20,6 +30,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Rattata', 'Spearow', 'Mankey'],
         water: ['Psyduck', 'Poliwag', 'Slowpoke', 'Goldeen', 'Magikarp'],
+        special: monotypeSpecialArray,
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kanto, 1)],
     1.1,
@@ -667,6 +678,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Spearow', 'Rattata', 'Geodude'],
         headbutt: ['Aipom', 'Heracross'],
+        special: monotypeSpecialArray,
     }),
     [new RouteKillRequirement(10, GameConstants.Region.johto, 29)],
     29.1
@@ -742,6 +754,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Poochyena', 'Wingull', 'Zigzagoon'],
         water: ['Tentacool', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo'],
+        special: monotypeSpecialArray,
     }),
     [new RouteKillRequirement(10, GameConstants.Region.hoenn, 101)],
     101.1
@@ -1046,6 +1059,7 @@ Routes.add(new RegionRoute(
     'Sinnoh Route 202', GameConstants.Region.sinnoh, 202,
     new RoutePokemon({
         land: ['Starly', 'Bidoof', 'Kricketot', 'Shinx'],
+        special: monotypeSpecialArray,
     }),
     [
         new RouteKillRequirement(10, GameConstants.Region.sinnoh, 201),
@@ -1291,6 +1305,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Sunkern', 'Pidove', 'Venipede', 'Patrat', 'Purrloin', 'Sewaddle'],
         water: ['Azurill', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
+        special: monotypeSpecialArray,
     }),
     [
         new RouteKillRequirement(10, GameConstants.Region.unova, 19),
@@ -1541,6 +1556,7 @@ Routes.add(new RegionRoute(
     'Kalos Route 1', GameConstants.Region.kalos, 1,
     new RoutePokemon({
         land: ['Bunnelby', 'Fletchling'],
+        special: monotypeSpecialArray,
     }),
     [new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)]
 ));
@@ -1726,7 +1742,7 @@ Routes.add(new RegionRoute(
     'Alola Route 1', GameConstants.Region.alola, 1,
     new RoutePokemon({
         land: ['Caterpie', 'Alolan Rattata', 'Ledyba', 'Spinarak', 'Pichu', 'Buneary', 'Pikipek', 'Yungoos', 'Grubbin'],
-        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
+        special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))].concat(monotypeSpecialArray),
     }),
     [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
     undefined,
@@ -2178,6 +2194,7 @@ Routes.add(new RegionRoute(
     'Galar Route 1', GameConstants.Region.galar, 1,
     new RoutePokemon({
         land: ['Skwovet', 'Rookidee', 'Blipbug', 'Wooloo', 'Nickit', 'Caterpie', 'Hoothoot', 'Grubbin'],
+        special: monotypeSpecialArray,
     }),
     [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
     undefined,
