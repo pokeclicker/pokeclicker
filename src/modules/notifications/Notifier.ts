@@ -233,4 +233,101 @@ export default class Notifier {
             });
         });
     }
+
+    // Notifier confirm with dropdown at the end of the body
+    public static confirmWithDropdown({
+        title,
+        message,
+        confirm = 'Ok',
+        cancel = 'Cancel',
+        type = NotificationOption.primary,
+        timeout = 0,
+        sound = null,
+        dropdownOptions = [],
+    }: {
+        title: string;
+        message: string;
+        confirm?: string;
+        cancel?: string;
+        type?: NotificationOption;
+        timeout?: number;
+        sound?: Sound,
+        dropdownOptions?: {name: string, value: number}[],
+    }): Promise<any> {
+        // If we have sounds enabled for this, play it now
+        if (sound) {
+            sound.play();
+        }
+
+        return new Promise((resolve) => {
+            // Get the notification ready to display
+            const resolveValue = { confirm: false, selectValue: '0' };
+            const modalID = Rand.string(7);
+            let options = '';
+            for (let i = 0; i < dropdownOptions.length; i++) {
+                options += `<option value="${dropdownOptions[i].value}">${dropdownOptions[i].name}</option>`;
+            }
+
+            const html = `
+<div class="modal fade noselect" id="modal${modalID}" tabindex="-1" role="dialog" aria-badgeledby="prompt">
+    <div class="modal-dialog modal-dialog-scrollable modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header modal-header pb-0 pt-2 px-2 bg-${NotificationOption[type]}">
+                <h5>${title}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body py-2 px-2 text-left">
+                ${message.replace(/\n/g, '<br/>')}
+                <div>
+                    <select id="dropdown-${modalID}" class="custom-select" autocomplete="off">
+                        ${options}
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer p-2">
+                <button class="btn col outline-dark btn-${NotificationOption[type]}" data-dismiss="modal" id="modalConfirm${modalID}">${confirm}</button>
+                <button class="btn col outline-dark btn-secondary" data-dismiss="modal" id="modalCancel${modalID}">${cancel}</button>
+            </div>
+        </div>
+    </div>
+</div>`;
+            $('#toaster').before(html);
+
+            (document.getElementById(`dropdown-${modalID}`) as HTMLInputElement).addEventListener('change', (event) => {
+                // console.log((event.target as HTMLInputElement).value);
+                resolveValue.selectValue = (event.target as HTMLInputElement).value;
+            });
+            (document.getElementById(`modalConfirm${modalID}`) as HTMLInputElement).addEventListener('click', () => {
+                resolveValue.confirm = true;
+                resolve(resolveValue);
+            });
+            (document.getElementById(`modalCancel${modalID}`) as HTMLInputElement).addEventListener('click', () => {
+                resolveValue.confirm = false;
+                resolve(resolveValue);
+            });
+
+            $(`#modal${modalID}`).modal({
+                backdrop: 'static',
+                show: true,
+            });
+
+            // Once the modal is shown, hide it after specified timeout
+            $(`#modal${modalID}`).on('shown.bs.modal', () => {
+                if (timeout > 0) {
+                    setTimeout(() => {
+                        $(`#modal${modalID}`).modal('hide');
+                    }, timeout);
+                }
+            });
+
+            // Once hidden remove the element
+            $(`#modal${modalID}`).on('hidden.bs.modal', () => {
+                document.getElementById(`modal${modalID}`).remove();
+                // resolveValue.confirm = false
+                // resolve(resolveValue)
+            });
+        });
+    }
 }
