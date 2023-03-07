@@ -75,7 +75,7 @@ BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(120, 'Leaf
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(130, 'Thunder_stone', 10));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(140, 'Fire_stone', 10));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(150, 'MediumRestore', 200));
-BattleFrontierMilestones.addMilestone(new BattleFrontierMilestonePokemon(151, 'Deoxys (Attack)', new QuestLineStepCompletedRequirement('Mystery of Deoxys', 2)));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestonePokemon(151, 'Deoxys (Attack)', new ObtainedPokemonRequirement('Deoxys')));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(160, 'Lucky_egg', 100));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(170, 'Lucky_incense', 100));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(180, 'Dowsing_machine', 100));
@@ -86,14 +86,14 @@ BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(220, 'Leaf
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(230, 'Thunder_stone', 40));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(240, 'Moon_stone', 40));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(250, 'Ultraball', 6400));
-BattleFrontierMilestones.addMilestone(new BattleFrontierMilestonePokemon(251, 'Deoxys (Defense)', new QuestLineStepCompletedRequirement('Mystery of Deoxys', 2)));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestonePokemon(251, 'Deoxys (Defense)', new ObtainedPokemonRequirement('Deoxys')));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(300, 'Linking_cord', 100));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(310, 'Dragon_scale', 20));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(320, 'Sun_stone', 40));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(330, 'Kings_rock', 20));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(340, 'Metal_coat', 20));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(350, 'Upgrade', 10));
-BattleFrontierMilestones.addMilestone(new BattleFrontierMilestonePokemon(386, 'Deoxys (Speed)', new QuestLineStepCompletedRequirement('Mystery of Deoxys', 2)));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestonePokemon(386, 'Deoxys (Speed)', new ObtainedPokemonRequirement('Deoxys')));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(400, 'Soothe_bell', 40));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(410, 'Deepsea_tooth', 10));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(420, 'Shiny_stone', 40));
