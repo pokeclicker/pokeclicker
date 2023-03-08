@@ -166,6 +166,31 @@ class GameController {
                 return e.preventDefault();
             }
 
+            // Town Walk
+            if (App.game.gameState === GameConstants.GameState.townWalk) {
+                switch (key) {
+                    case 'ArrowUp':
+                    case Settings.getSetting('hotkey.dungeon.up').value:
+                        TownWalk.move('up');
+                        break;
+                    case 'ArrowLeft':
+                    case Settings.getSetting('hotkey.dungeon.left').value:
+                        TownWalk.move('left');
+                        break;
+                    case 'ArrowDown':
+                    case Settings.getSetting('hotkey.dungeon.down').value:
+                        TownWalk.move('down');
+                        break;
+                    case 'ArrowRight':
+                    case Settings.getSetting('hotkey.dungeon.right').value:
+                        TownWalk.move('right');
+                        break;
+                }
+
+                // We don't want to process any other keys while in the Safari zone
+                return e.preventDefault();
+            }
+
             // Within modals
             if ($farmsModal.data('bs.modal')?._isShown) {
                 switch (key) {
@@ -467,6 +492,28 @@ class GameController {
                     case 'ArrowRight':
                     case Settings.getSetting('hotkey.dungeon.right').value:
                         Safari.stop('right');
+                        return e.preventDefault();
+                }
+            }
+
+            // Town Walk
+            if (App.game.gameState === GameConstants.GameState.townWalk) {
+                switch (key) {
+                    case 'ArrowUp':
+                    case Settings.getSetting('hotkey.dungeon.up').value:
+                        TownWalk.stop('up');
+                        return e.preventDefault();
+                    case 'ArrowLeft':
+                    case Settings.getSetting('hotkey.dungeon.left').value:
+                        TownWalk.stop('left');
+                        return e.preventDefault();
+                    case 'ArrowDown':
+                    case Settings.getSetting('hotkey.dungeon.down').value:
+                        TownWalk.stop('down');
+                        return e.preventDefault();
+                    case 'ArrowRight':
+                    case Settings.getSetting('hotkey.dungeon.right').value:
+                        TownWalk.stop('right');
                         return e.preventDefault();
                 }
             }

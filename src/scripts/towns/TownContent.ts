@@ -133,3 +133,21 @@ class MoveToDungeon extends TownContent {
         return App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(this.dungeon.name)]();
     }
 }
+
+class WalkAround extends TownContent {
+    public cssClass() {
+        return 'btn btn-secondary';
+    }
+
+    public isVisible() {
+        return App.game.challenges.listSpecial.monotype.active();
+    }
+
+    public onclick(): void {
+        TownWalk.openModal();
+    }
+
+    public text() {
+        return `Walk around ${GameConstants.StartingTowns[player.region]}`;
+    }
+}

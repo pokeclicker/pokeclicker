@@ -757,7 +757,7 @@ TownList['Pallet Town'] = new Town(
     'Pallet Town',
     GameConstants.Region.kanto,
     GameConstants.KantoSubRegions.Kanto,
-    [new BulletinBoard(GameConstants.BulletinBoards.Kanto)],
+    [new BulletinBoard(GameConstants.BulletinBoards.Kanto), new WalkAround()],
     {
         npcs: [PalletProfOak, PalletCelebiProfOak1, PalletCelebiProfOak2, PalletMom1, PalletMom2],
     }
@@ -1666,7 +1666,7 @@ TownList['New Bark Town'] = new Town(
     'New Bark Town',
     GameConstants.Region.johto,
     GameConstants.JohtoSubRegions.Johto,
-    [new BulletinBoard(GameConstants.BulletinBoards.Johto)],
+    [new BulletinBoard(GameConstants.BulletinBoards.Johto), new WalkAround()],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion)],
         npcs: [ProfElm],
@@ -2312,7 +2312,7 @@ TownList['Littleroot Town'] = new Town(
     'Littleroot Town',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [new BulletinBoard(GameConstants.BulletinBoards.Hoenn)],
+    [new BulletinBoard(GameConstants.BulletinBoards.Hoenn), new WalkAround()],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion)],
         npcs: [ProfBirch, LittlerootAide, Television1, Television2],
@@ -3148,7 +3148,7 @@ TownList['Twinleaf Town'] = new Town(
     'Twinleaf Town',
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Sinnoh,
-    [new BulletinBoard(GameConstants.BulletinBoards.Sinnoh)],
+    [new BulletinBoard(GameConstants.BulletinBoards.Sinnoh), new WalkAround()],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
         npcs: [TwinleafContestChampion],
@@ -3802,7 +3802,7 @@ TownList['Aspertia City'] = new Town(
     'Aspertia City',
     GameConstants.Region.unova,
     GameConstants.UnovaSubRegions.Unova,
-    [],
+    [new WalkAround()],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)],
         npcs: [],
@@ -4517,7 +4517,7 @@ TownList['Vaniville Town'] = new Town(
     'Vaniville Town',
     GameConstants.Region.kalos,
     GameConstants.KalosSubRegions.Kalos,
-    [new BulletinBoard(GameConstants.BulletinBoards.Kalos)],
+    [new BulletinBoard(GameConstants.BulletinBoards.Kalos), new WalkAround()],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)],
         npcs: [],
@@ -5138,7 +5138,7 @@ TownList['Iki Town Outskirts'] = new Town(
     'Iki Town Outskirts',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MelemeleIsland,
-    [],
+    [new WalkAround()],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
         npcs: [IkiOutskirtsMom],
@@ -6356,7 +6356,7 @@ TownList.Postwick = new Town(
     'Postwick',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.SouthGalar,
-    [new BulletinBoard(GameConstants.BulletinBoards.Galar), PostwickShop],
+    [new BulletinBoard(GameConstants.BulletinBoards.Galar), PostwickShop, new WalkAround()],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)],
         npcs: [PostwickMum, MagearnaMysteryGift],

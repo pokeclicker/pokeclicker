@@ -334,6 +334,7 @@ export enum GameState {
     shop = 7,
     battleFrontier = 8,
     temporaryBattle = 9,
+    townWalk = 10,
 }
 
 export enum Pokeball {
