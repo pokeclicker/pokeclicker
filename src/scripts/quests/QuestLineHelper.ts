@@ -1359,7 +1359,7 @@ class QuestLineHelper {
         const talkToLysandre1 = new TalkToNPCQuest(Lysandre1, 'Talk to Lysandre inside Professor Sycamore\'s lab in Lumiose City.');
         flareKalosQuestLine.addQuest(talkToLysandre1);
 
-        const talkToKalem1 = new TalkToNPCQuest(Calem1, 'Well, that was definitely a weird guy... Seems like Calem wants to meet you in Café Soleil. Go there in Lumiose City and talk with him.');
+        const talkToKalem1 = new TalkToNPCQuest(Calem1, 'Well, that was definitely a weird guy... Seems like Calem wants to meet you somewhere in Lumiose City, go talk with him.');
         flareKalosQuestLine.addQuest(talkToKalem1);
 
         const talkToKalem2 = new TalkToNPCQuest(Calem2, 'Meet Calem in Ambrette Town.');
@@ -1419,7 +1419,7 @@ class QuestLineHelper {
         const clearLumioseCityGym = new CustomQuest(1, 0, 'You\'ve helped with the power outage problem, now the gym in Lumiose City is back up and you can challenge it!', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Lumiose City')]());
         flareKalosQuestLine.addQuest(clearLumioseCityGym);
 
-        const talkToLysandre3 = new TalkToNPCQuest(Lysandre3, 'Professor Sycamore wants to meet you in Lysandre Café in Lumiose City. He\'s with Lysandre, go say hi.');
+        const talkToLysandre3 = new TalkToNPCQuest(Lysandre3, 'Professor Sycamore wants to meet you in Lumiose City. He\'s with Lysandre, go say hi.');
         flareKalosQuestLine.addQuest(talkToLysandre3);
 
         const clearPokéBallFactory = new CustomQuest(1, 0, 'For someone so obsessed with beauty he seems to really care about filth... Anyway, the Poké Ball Factory sounds like a fun place, let\'s go check it out.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Poké Ball Factory')](), undefined, undefined,
@@ -1456,7 +1456,7 @@ class QuestLineHelper {
             });
         flareKalosQuestLine.addQuest(clearFrostCavern);
 
-        const clearAnistarCityGym = new CustomQuest(1, 0, 'So it\'s everything over now, right? Right? Go beat Anistar City Gym!', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Anistar City')]());
+        const clearAnistarCityGym = new CustomQuest(1, 0, 'So everything is over now, right? Right? Go beat Anistar City Gym!', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Anistar City')]());
         flareKalosQuestLine.addQuest(clearAnistarCityGym);
 
         const talkToKalosTVNews = new TalkToNPCQuest(KalosTVNews, 'Lysandre is giving an important speech through the TV News. Watch it in Anistar City.');

@@ -4709,7 +4709,7 @@ const LumioseDexio = new NPC('Dexio', [
 });
 
 const Lysandre1 = new NPC('Lysandre', [
-    'Oh! You\'ve met already professor Sycamore... How wonderful! That is a wonderful thing, indeed. You are one of the chosen ones.',
+    'Oh! You\'ve already met professor Sycamore... How wonderful! That is a wonderful thing, indeed. You are one of the chosen ones.',
     'I am Lysandre. I\'ve tried to learn as much about Pokémon as I can to help build a brighter future. Professor Sycamore has taught me so much.',
     'Now listen! It is vital that this world become a better place. And the people and Pokémon chosen to make the world better must work tirelessly to achieve this goal.',
     'Well, I\'ll be off. Please give Professor Sycamore my best. My desire... it is for a more beautiful world!',
@@ -4794,7 +4794,7 @@ const Diantha1 = new NPC('Diantha', [
 });
 
 const Lysandre2 = new NPC('Lysandre', [
-    'Professor Sycamore told me how stronger you\'ve become.',
+    'Professor Sycamore told me how much stronger you\'ve become.',
     'That is truly wonderful. With that power, you can steer your future in a better direction!',
     'We can\'t just cover up the old filth with new filth!',
     'I implore you to consider what we need to do to change the world into a new, beautiful world!',
