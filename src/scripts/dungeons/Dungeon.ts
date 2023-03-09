@@ -2634,13 +2634,23 @@ dungeonList['Granite Cave'] = new Dungeon('Granite Cave',
         ],
         legendary: [
             {loot: 'MediumRestore'},
-            {loot: 'Star Piece'},
+            {loot: 'Star Piece', ignoreDebuff : true},
             {loot: 'Hard Stone'},
         ],
         mythic: [{loot: 'Heart Scale'}],
     },
     410000,
-    [new DungeonBossPokemon('Mawile', 960000, 20), new DungeonBossPokemon('Nosepass', 660000, 20)],
+    [
+        new DungeonBossPokemon('Mawile', 960000, 20),
+        new DungeonBossPokemon('Nosepass', 660000, 20),
+        new DungeonTrainer('Lorekeeper',
+            [
+                new GymPokemon('Tyrantrum', 4073950, 57),
+                new GymPokemon('Altaria', 4073950, 57),
+                new GymPokemon('Salamence', 4073950, 57),
+                new GymPokemon('Whismur', 4073950, 57),
+            ], { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('The Delta Episode', 9)}, 'Zinnia'),
+    ],
     16000, 101);
 
 dungeonList['Fiery Path'] = new Dungeon('Fiery Path',
@@ -2700,6 +2710,13 @@ dungeonList['Meteor Falls'] = new Dungeon('Meteor Falls',
                 new GymPokemon('Altaria', 640000, 37),
                 new GymPokemon('Altaria', 640000, 37),
             ], { weight: 1 }, 'Nicolas'),
+        new DungeonTrainer('Draconid Elder',
+            [
+                new GymPokemon('Dragonite', 4073950, 57),
+                new GymPokemon('Flygon', 4073950, 57),
+                new GymPokemon('Haxorus', 4073950, 57),
+                new GymPokemon('Garchomp', 4073950, 57),
+            ], { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('The Delta Episode', 16)}, 'Draconid Elder'),
     ],
     18000, 101);
 
@@ -2738,7 +2755,13 @@ dungeonList['Mt. Chimney Crater'] = new Dungeon('Mt. Chimney Crater',
                 new GymPokemon('Mightyena', 450000, 24),
                 new GymPokemon('Zubat', 450000, 24),
                 new GymPokemon('Camerupt', 470000, 25),
-            ], { weight: 1 }, 'Maxie'),
+            ], { weight: 1, hide: true, requirement: new QuestLineCompletedRequirement('The Delta Episode', GameConstants.AchievementOption.less)}, 'Maxie'),
+        new DungeonTrainer('Magma Leader',
+            [
+                new GymPokemon('Mightyena', 4500000, 54),
+                new GymPokemon('Zubat', 4500000, 54),
+                new GymPokemon('Mega Camerupt', 4700000, 55),
+            ], { weight: 1, hide: true, requirement: new QuestLineCompletedRequirement('The Delta Episode')}, 'Maxie'),
     ],
     20000, 101);
 
@@ -3046,7 +3069,14 @@ dungeonList['Magma Hideout'] = new Dungeon('Magma Hideout',
                 new GymPokemon('Crobat', 640000, 38),
                 new GymPokemon('Camerupt', 650000, 39),
             ],
-            { weight: 1 }, 'Maxie'),
+            { weight: 1, hide: true, requirement: new QuestLineCompletedRequirement('The Delta Episode', GameConstants.AchievementOption.less)}, 'Maxie'),
+        new DungeonTrainer('Magma Leader',
+            [
+                new GymPokemon('Mightyena', 6300000, 37),
+                new GymPokemon('Crobat', 6400000, 38),
+                new GymPokemon('Mega Camerupt', 6500000, 39),
+            ],
+            { weight: 1, hide: true, requirement: new QuestLineCompletedRequirement('The Delta Episode')}, 'Maxie'),
     ],
     29000, 101);
 
@@ -3133,7 +3163,10 @@ dungeonList['Shoal Cave'] = new Dungeon('Shoal Cave',
         ],
     },
     490000,
-    [new DungeonBossPokemon('Snorunt', 1900000, 20)],
+    [
+        new DungeonBossPokemon('Snorunt', 1900000, 20),
+        new DungeonBossPokemon('Glalie', 61614300, 60, {hide: true, requirement: new TemporaryBattleRequirement('Icy Boulder')}),
+    ],
     30000, 101);
 
 dungeonList['Cave of Origin'] = new Dungeon('Cave of Origin',
@@ -3210,7 +3243,14 @@ dungeonList['Seafloor Cavern'] = new Dungeon('Seafloor Cavern',
                 new GymPokemon('Crobat', 700000, 41),
                 new GymPokemon('Sharpedo', 900000, 43),
             ],
-            { weight: 1 }, 'Archie'),
+            { weight: 1, hide: true, requirement: new QuestLineCompletedRequirement('The Delta Episode', GameConstants.AchievementOption.less)}, 'Archie'),
+        new DungeonTrainer('Aqua Leader',
+            [
+                new GymPokemon('Mightyena', 7000000, 61),
+                new GymPokemon('Crobat', 7000000, 61),
+                new GymPokemon('Mega Sharpedo', 9000000, 63),
+            ],
+            { weight: 1, hide: true, requirement: new QuestLineCompletedRequirement('The Delta Episode')}, 'Archie'),
     ],
     32000, 101);
 
@@ -3389,6 +3429,36 @@ dungeonList['Victory Road Hoenn'] = new Dungeon('Victory Road Hoenn',
     ],
     37000, 101);
 
+dungeonList['Near Space'] = new Dungeon('Near Space',
+    ['Solrock','Lunatone', 'Elgyem', 'Beheeyem'],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Token_collector'},
+        ],
+        rare: [
+            {loot: 'Pink Shard'},
+            {loot: 'Ochre Shard'},
+        ],
+        epic: [
+            {loot: 'Duskball'},
+            {loot: 'Star Piece'},
+        ],
+        legendary: [
+            {loot: 'Stone Plate', weight: 2},
+            {loot: 'Mind Plate', weight: 2},
+            {loot: 'Iron Plate', weight: 2},
+            {loot: 'Moon Stone'},
+        ],
+    },
+    9000000,
+    [
+        new DungeonBossPokemon('Deoxys', 95743340, 80),
+        new DungeonBossPokemon('Deoxys (Attack)', 95743340, 80),
+        new DungeonBossPokemon('Deoxys (Defense)', 95743340, 80),
+        new DungeonBossPokemon('Deoxys (Speed)', 95743340, 80),
+    ],
+    700000, 131);
 // Sinnoh
 
 dungeonList['Oreburgh Gate'] = new Dungeon('Oreburgh Gate',

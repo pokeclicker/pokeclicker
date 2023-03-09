@@ -50,7 +50,9 @@ class EvolutionHandler {
             evolvedPartyPokemon.attackBonusAmount = basePartyPokemon.attackBonusAmount;
             evolvedPartyPokemon.attackBonusPercent = basePartyPokemon.attackBonusPercent;
             evolvedPartyPokemon.vitaminsUsed = basePartyPokemon.vitaminsUsed;
-            evolvedPartyPokemon.heldItem = basePartyPokemon.heldItem;
+            if (basePartyPokemon.heldItem()?.canUse(evolvedPartyPokemon)) {
+                evolvedPartyPokemon.heldItem = basePartyPokemon.heldItem;
+            }
             App.game.party.removePokemonByName(data.basePokemon);
         }
 
