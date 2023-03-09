@@ -1,6 +1,7 @@
 class Safari {
     static grid: Array<Array<number>>;
     static pokemonGrid: KnockoutObservableArray<SafariPokemon> = ko.observableArray([]);
+    static itemGrid: KnockoutObservableArray<SafariItem> = ko.observableArray([]);
     static player: Point = new Point(12, 20);
     static lastDirection = 'up';
     static nextDirection: string;
@@ -28,6 +29,7 @@ class Safari {
         this.activeRegion(player.region);
         Safari.grid = [];
         Safari.pokemonGrid([]);
+        Safari.itemGrid([new SafariItem('xAttack', 5, 5)]);
         Safari.playerXY.x = 0;
         Safari.playerXY.y = 0;
         Safari.lastDirection = 'up';
@@ -275,6 +277,7 @@ class Safari {
             Safari.playerXY.y = newPos.y;
             $('#sprite').animate(offset, 250, 'linear', () => {
                 Safari.checkBattle();
+                Safari.checkItem();
                 Safari.isMoving = false;
                 if (Safari.walking) {
                     if (!Safari.checkBattle() && Safari.queue[0]) {
@@ -399,6 +402,14 @@ class Safari {
             }
         }
         return false;
+    }
+
+    private static checkItem() {
+        const itemOnPlayer = this.itemGrid().findIndex(p => p.x === Safari.playerXY.x && p.y === Safari.playerXY.y);
+        if (itemOnPlayer >= 0) {
+            this.itemGrid()[itemOnPlayer].item.gain(1);
+            Safari.itemGrid.splice(itemOnPlayer, 1);
+        }
     }
 
     private static calculateStartPokeballs() {
