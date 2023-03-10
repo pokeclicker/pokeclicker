@@ -875,7 +875,7 @@ Routes.add(new RegionRoute(
         special:
         [new SpecialRoutePokemon(['Roselia'], new ObtainedPokemonRequirement('Roselia'))],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 110)],
+    [new TemporaryBattleRequirement('May 3')],
     110.1
 ));
 Routes.add(new RegionRoute(
@@ -1587,7 +1587,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Oddish', 'Sentret', 'Nincada', 'Kecleon', 'Espurr', 'Honedge'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.kalos, 5)]
+    [new TemporaryBattleRequirement('Tierno 1')]
 ));
 Routes.add(new RegionRoute(
     'Kalos Route 7', GameConstants.Region.kalos, 7,
