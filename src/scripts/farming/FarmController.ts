@@ -249,14 +249,6 @@ class FarmController {
 
         App.game.statistics.selectedBerryID(berryId);
     }
-        $(document).ready(function() {
-            $("#berryDexClick").click(function() {
-                $("#berryDexClick").attr({
-                    "href" : "#berryDexModal",
-                });
-            });
-        });
-    };
 
 }
 
