@@ -2897,7 +2897,7 @@ TemporaryBattleList['Team Flare Boss Lysandre 2'] = new TemporaryBattle(
         new GymPokemon('Mega Gyarados', 129681014, 83),
     ],
     'I see the strength to protect within you... Hopefully you can do a better job than me and protect a tomorrow that will be better than today. Take this Gyaradosite.</br><img src="assets/images/megaStone/130.png"/></br>',
-    [new QuestLineStepCompletedRequirement('A Beautiful World', 35), new ObtainedPokemonRequirement('Gyarados'), new DayCyclePartRequirement([DayCyclePart.Dusk])],//new DayCyclePartRequirement([DayCyclePart.Dusk])
+    [new QuestLineStepCompletedRequirement('A Beautiful World', 35), new ObtainedPokemonRequirement('Gyarados'), new DayCyclePartRequirement([DayCyclePart.Dusk])],
     undefined,
     {
         displayName: 'Team Flare Boss Lysandre',

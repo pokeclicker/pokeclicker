@@ -4945,6 +4945,15 @@ const TeamFlareBossLysandre1 = new NPC('Team Flare Boss Lysandre', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Beautiful World', 31), new QuestLineStepCompletedRequirement('A Beautiful World', 33, GameConstants.AchievementOption.less)]),
 });
 
+const CouriwayOldGentlemanHarold = new NPC('Old Gentleman Harold', [
+    'I love going on walks at <b>dusk</b>. It\'s my favourite part of the day, everything\'s so calm...',
+    'Thought lately, I\'ve been hearing roars near the waterfalls, but I\'m too scared to see for myself what kind of monster is making those sounds.',
+    'I would ask you to go, but I\'m sure you\'re really busy either dealing with Team Flare or the Pokémon League challenge.',
+    'Once you are done, you could come back at dusk. Maybe you can do something about it.',
+], {image: 'assets/images/npcs/Gentleman (Gen 4).png',
+    requirement: new TemporaryBattleRequirement('Team Flare Boss Lysandre 2', 1, GameConstants.AchievementOption.less),
+});
+
 const KiloudeConfusedHiker = new NPC('Confused Hiker', [
     'Whoa! What the- Where am I? How did I get here? Last thing I can remember I was in Reflection Cave when this little Pokémon with hoops threw something at me… Oh you’ve beaten the Pokémon League? Maybe you can find it roaming around the region so you can tame that little prankster. Now how am I gonna get home…',
 ], {image: 'assets/images/trainers/Hiker.png'});
@@ -5124,6 +5133,7 @@ TownList['Couriway Town'] = new Town(
     [TemporaryBattleList['Sycamore 2'], TemporaryBattleList['Shauna 2'], TemporaryBattleList['Tierno 2'], TemporaryBattleList.Trevor, CouriwayTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Couriway Town']), TemporaryBattleList['Team Flare Boss Lysandre 2']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 18)],
+        npcs: [CouriwayOldGentlemanHarold],
     }
 );
 TownList['Snowbelle City'] = new Town(
