@@ -241,7 +241,6 @@ class FarmController {
         return tooltip.join('<br>');
     });
 
-    
     public static handleBerryDexClick(berryId: number) {
         if ($('#berry-panel').val() === berryId) {
             $('#berryDexModal').modal('show');
