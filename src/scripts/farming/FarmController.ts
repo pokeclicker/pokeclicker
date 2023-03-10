@@ -241,7 +241,14 @@ class FarmController {
         return tooltip.join('<br>');
     });
 
-    public static berryClick() {
+    
+    public static handleBerryDexClick(berryId: number) {
+        if ($('#berry-panel').val() === berryId) {
+            $('#berryDexModal').modal('show');
+        }
+
+        App.game.statistics.selectedBerryID(berryId);
+    }
         $(document).ready(function() {
             $("#berryDexClick").click(function() {
                 $("#berryDexClick").attr({
