@@ -241,5 +241,15 @@ class FarmController {
         return tooltip.join('<br>');
     });
 
+    public static berryClick() {
+        $(document).ready(function() {
+            $("#berryDexClick").click(function() {
+                $("#berryDexClick").attr({
+                    "href" : "#berryDexModal",
+                });
+            });
+        });
+    };
+
 }
 
