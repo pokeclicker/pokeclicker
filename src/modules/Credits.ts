@@ -99,6 +99,7 @@ export const SpriteCredits: Credit[] = [
             'Kabu',
             'Klara',
             'Leon',
+            'Lisia',
             'Marnie',
             'Master Dojo Student',
             'Melony',
@@ -251,10 +252,12 @@ export const SpriteCredits: Credit[] = [
             'Magikarp Blue Raindrops Shop Icon',
             'Magikarp Saucy Violet Shop Icon',
             'Magikarp (Feebas)',
+            'Magma Admin Courtney',
             'Man of Mystery',
             'Merilyn',
             'Meta Groudon Overworld',
             'Milcery (Cheesy)',
+            'Mr Stone',
             'Pinkan Arbok',
             'Pinkan Bellsprout',
             'Pink Bow',
@@ -411,6 +414,7 @@ export const SpriteCredits: Credit[] = [
             'Viola',
             'Wikstrom',
             'Wulfric',
+            'Zinnia',
         ],
         // NOTES: Feel free to use it if you like, but don\'t forget to give me credit~!
     },
@@ -520,6 +524,8 @@ export const SpriteCredits: Credit[] = [
         resources: [
             'Dynamic BG Meltan',
             'Dynamic BG Melmetal',
+            'Mega Houndoom (Overworld)',
+            'Mega Manectric (Overworld)',
         ],
         // Notes: Permission given on image page if credited.
     },
@@ -709,7 +715,10 @@ export const SpriteCredits: Credit[] = [
             'Cissy',
             'Detective Pikachu',
             'Detective Raichu',
+            'Dr Cozmo',
+            'Draconid Elder',
             'Dyna Tree',
+            'Friend Safari',
             'Macro Cosmos (male) and (female)',
             'Magikarp Grey Bubbles',
             'Magikarp Grey Diamonds',
@@ -810,6 +819,15 @@ export const SpriteCredits: Credit[] = [
             'Officer Jenny',
         ],
         // Notes: Permission given on image page.
+    },
+    {
+        name: 'ZacWeavile',
+        link: 'https://www.smogon.com/forums/threads/zacweavile-galery.3712625/',
+        image: 'https://www.smogon.com/forums/media/data/avatars/o/522/522483.jpg?1650909371',
+        resources: [
+            'Dexio (Gen 6)',
+        ],
+        // Notes: Permission given if credited.
     },
     {
         name: 'Zender1752',
