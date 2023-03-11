@@ -660,6 +660,32 @@
         , isExtension: true
         })
     %>
+
+    <!--Sea Mauville-->
+    <%- include('templates/mapTown',
+        { name: "Sea Mauville"
+        , x: 23, y: 51
+        , width: 6, height: 4
+        })
+    %>
+
+    <!--Mossdeep Space Center-->
+    <%- include('templates/mapTown',
+        { name: "Mossdeep Space Center"
+        , x: 90, y: 14
+        , width: 9, height: 5
+        })
+    %>
+
+    <!--Mossdeep Space Center extension-->
+    <%- include('templates/mapTown',
+        { name: "Mossdeep Space Center"
+        , x: 92, y: 19
+        , width: 7, height: 3
+        , isExtension: true
+        })
+    %>
+	
     <!--Battle Frontier-->
     <%- include('templates/mapTown',
         { name: "Battle Frontier"
@@ -849,7 +875,13 @@
         })
     %>
 
-
+    <!--Near Space-->
+    <%- include('templates/mapDungeon',
+        { name: "Near Space"
+        , x: 93, y: 8
+        , width: 2, height: 6
+        })
+    %>
 
 
     <!-- ------------------ -->
@@ -931,40 +963,40 @@
      <%- include('templates/mapOverlay',
          { name: "Kecleon"
         , x: 46, y: 3
-         , width: 4, height: 4
-         , databind: "click: () => TemporaryBattleList['Kecleon 1'].protectedOnclick()"
-         , visible:  "TemporaryBattleList['Kecleon 1'] && TemporaryBattleList['Kecleon 1'].isVisible()"
-         , image: "assets/images/map/kecleonoverworld.png"
-         })
+        , width: 4, height: 4
+        , databind: "click: () => TemporaryBattleList['Kecleon 1'].protectedOnclick()"
+        , visible:  "TemporaryBattleList['Kecleon 1'] && TemporaryBattleList['Kecleon 1'].isVisible()"
+        , image: "assets/images/map/kecleonoverworld.png"
+        })
      %>
 
      <%- include('templates/mapOverlay',
          { name: "Kecleon"
         , x: 41, y: 10
-         , width: 4, height: 4
-         , databind: "click: () => TemporaryBattleList['Kecleon 2'].protectedOnclick()"
-         , visible:  "TemporaryBattleList['Kecleon 2'] && TemporaryBattleList['Kecleon 2'].isVisible()"
-         , image: "assets/images/map/kecleoncamooverworld.png"
-         })
+        , width: 4, height: 4
+        , databind: "click: () => TemporaryBattleList['Kecleon 2'].protectedOnclick()"
+        , visible:  "TemporaryBattleList['Kecleon 2'] && TemporaryBattleList['Kecleon 2'].isVisible()"
+        , image: "assets/images/map/kecleoncamooverworld.png"
+        })
      %>
 
      <%- include('templates/mapOverlay',
          { name: "Kecleon"
         , x: 48, y: 8
-         , width: 4, height: 4
-         , databind: "click: () => TemporaryBattleList['Kecleon 3'].protectedOnclick()"
-         , visible:  "TemporaryBattleList['Kecleon 3'] && TemporaryBattleList['Kecleon 3'].isVisible()"
-         , image: "assets/images/map/kecleoncamooverworld.png"
-         })
+        , width: 4, height: 4
+        , databind: "click: () => TemporaryBattleList['Kecleon 3'].protectedOnclick()"
+        , visible:  "TemporaryBattleList['Kecleon 3'] && TemporaryBattleList['Kecleon 3'].isVisible()"
+        , image: "assets/images/map/kecleoncamooverworld.png"
+        })
      %>
 
      <%- include('templates/mapOverlay',
-         { name: "A Raging Maelstrom"
+        { name: "A Raging Maelstrom"
         , x: 59, y: 28
-         , width: 13, height: 13
+        , width: 13, height: 13
         , visible:  "(App.game.quests.getQuestLine('The Weather Trio').curQuest() < 5 && App.game.quests.getQuestLine('The Weather Trio').state() == 1)"
-         , image: "assets/images/map/Maelstrom.png"
-         })
+        , image: "assets/images/map/Maelstrom.png"
+        })
      %>
 
     <%- include('templates/mapOverlay',
