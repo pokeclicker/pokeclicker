@@ -212,7 +212,7 @@ class Dungeon {
             } else { /* We don't include Trainers */ }
         });
 
-        encounterInfo.concat(this.getCaughtMimics());
+        this.getCaughtMimics().forEach((mimic) => encounterInfo.push(mimic));
 
         return encounterInfo;
     }
