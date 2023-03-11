@@ -64,7 +64,7 @@ class RouteHelper {
             if (partyPokemon.pokerus == GameConstants.Pokerus.Resistant) {
                 currentEVs += 50;
             } else if (partyPokemon.pokerus == GameConstants.Pokerus.Contagious) {
-                currentEVs += partyPokemon.effortPoints / 1000;
+                currentEVs += partyPokemon.evs();
             }
         });
         return Math.round(currentEVs);
