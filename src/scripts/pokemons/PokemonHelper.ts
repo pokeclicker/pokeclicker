@@ -162,14 +162,17 @@ class PokemonHelper extends TmpPokemonHelper {
             if (maxRegion != GameConstants.Region.none && (+region) > maxRegion) {
                 return false;
             }
-            const pokemon = regionArr.flat().find(r => r.pokemon.name == pokemonName);
-            if (pokemon) {
-                const data = {
-                    region: +region,
-                    requirements: pokemon.unlockRequirement?.hint(),
-                };
-                regions.push(data);
-            }
+            RoamingPokemonList.roamerGroups[region].forEach((group, i) => {
+                const pokemon = regionArr[i]?.find(r => r.pokemon.name == pokemonName);
+                if (pokemon) {
+                    const data = {
+                        region: +region,
+                        requirements: pokemon.unlockRequirement?.hint(),
+                        roamingGroup: group,
+                    };
+                    regions.push(data);
+                }
+            });
         });
         return regions;
     }
