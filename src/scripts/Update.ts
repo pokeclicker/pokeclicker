@@ -2006,6 +2006,11 @@ class Update implements Saveable {
             //Mega Diancie
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 156);
 
+            // If Distortion World has been cleared and no Pokémon in our party has Pokérus, infect the first Pokémon in our party
+            if (saveData.statistics.dungeonsCleared[72] && !saveData.party.caughtPokemon.some(pokemon => pokemon[8] > 0)) {
+                saveData.party.caughtPokemon[0][8] = 2;
+            }
+
             //Joey
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 31);
         },
