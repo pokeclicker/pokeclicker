@@ -214,4 +214,7 @@ export type ItemNameType
     | 'Lopunnite'
     | 'Kangaskhanite'
     | 'Heracronite'
-    | 'Garchompite';
+    | 'Garchompite'
+    | 'Sceptilite'
+    | 'Blazikenite'
+    | 'Swampertite';
