@@ -31,6 +31,8 @@
                   <knockout data-bind="if: RouteHelper.minPokerusCheck(player.town().dungeon.allAvailablePokemon())">
                       <img data-bind="attr:{ src: 'assets/images/breeding/pokerus/' + GameConstants.Pokerus[RouteHelper.minPokerus(player.town().dungeon.allAvailablePokemon())] + '.png'}"
                     src=""/>
+                      <span data-bind="text: player.town().dungeon.allAvailablePokemon().reduce((prev, next) => (prev[1]++, prev[0] += (App.game.party.getPokemonByName(next).pokerus == GameConstants.Pokerus.Resistant) * 1, prev), [0, 0]).join('/')"
+                            style="font-size: 16px; vertical-align: middle;"></span>
                   </knockout>
               </knockout>
             </h2>
@@ -86,6 +88,7 @@
           <!-- ko foreach: player.town().dungeon.normalEncounterList -->
           <li class="list-inline-item" data-bind="hidden: $data.hide">
             <img class="boss" src="assets/images/dungeons/chest.png" data-bind="hidden: !$data.mimic"/>
+            <img class="dungeon-pokemon-pkrs" src="" data-bind="attr:{ src: $data.pkrsImage }" />
             <img class="dungeon-pokemon-preview" src="" data-bind="attr:{ src: $data.image },
             css: { 'dungeon-pokemon-locked': $data.uncaught }" onerror="this.src='assets/images/trainers/Mysterious Trainer.png';"/>
             <sup class="shiny" data-bind="visible: $data.shiny">✨</sup>
@@ -102,6 +105,7 @@
           <!-- ko foreach: player.town().dungeon.bossEncounterList -->
           <li class="list-inline-item" data-bind="hidden: $data.hide">
             <img class="boss" src="assets/images/dungeons/boss.svg"/>
+            <img class="dungeon-pokemon-pkrs" src="" data-bind="attr:{ src: $data.pkrsImage }" />
             <img class="dungeon-pokemon-preview" src="" data-bind="attr:{ src: $data.image },
             css: { 'dungeon-pokemon-locked': $data.uncaught }" onerror="this.src='assets/images/trainers/Mysterious Trainer.png';"/>
             <sup class="shiny" data-bind="visible: $data.shiny">✨</sup>

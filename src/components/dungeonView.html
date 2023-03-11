@@ -122,6 +122,7 @@
                       <img data-bind="attr:{ src: 'assets/images/breeding/pokerus/' + GameConstants.Pokerus[RouteHelper.minPokerus(DungeonRunner.dungeon.allAvailablePokemon())] + '.png',
                             title: RouteHelper.dungeonPokerusEVs(DungeonRunner.dungeon)}"
                     src=""/>
+                      <span data-bind="text: DungeonRunner.dungeon.allAvailablePokemon().reduce((prev, next) => (prev[1]++, prev[0] += (App.game.party.getPokemonByName(next).pokerus == GameConstants.Pokerus.Resistant) * 1, prev), [0, 0]).join('/')"></span>
                   </knockout>
                 </td>
                 <td width="50%">
