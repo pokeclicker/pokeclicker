@@ -1878,3 +1878,9 @@ export const DayCycleStartHours: Record<DayCyclePart, number> = {
     [DayCyclePart.Dusk]: 17,
     [DayCyclePart.Night]: 18,
 };
+
+export enum ShadowStatus {
+    None,
+    Shadow,
+    Purified,
+}
