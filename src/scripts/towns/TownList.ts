@@ -4947,9 +4947,9 @@ const TeamFlareBossLysandre1 = new NPC('Team Flare Boss Lysandre', [
 
 const CouriwayOldGentlemanHarold = new NPC('Old Gentleman Harold', [
     'I love going on walks at <b>dusk</b>. It\'s my favourite part of the day, everything\'s so calm...',
-    'Thought lately, I\'ve been hearing roars near the waterfalls, but I\'m too scared to see for myself what kind of monster is making those sounds.',
+    'Though lately, I\'ve been hearing roars near the waterfalls, but I\'m too scared to see for myself what kind of monster is making those sounds.',
     'I would ask you to go, but I\'m sure you\'re really busy either dealing with Team Flare or the Pokémon League challenge.',
-    'Once you are done, you could come back at dusk. Maybe you can do something about it.',
+    'Once you are done, you could come back at dusk. Maybe you can do something about it...',
 ], {image: 'assets/images/npcs/Gentleman (Gen 4).png',
     requirement: new TemporaryBattleRequirement('Team Flare Boss Lysandre 2', 1, GameConstants.AchievementOption.less),
 });
