@@ -1587,7 +1587,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Oddish', 'Sentret', 'Nincada', 'Kecleon', 'Espurr', 'Honedge'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.kalos, 5)]
+    [new TemporaryBattleRequirement('Tierno 1')]
 ));
 Routes.add(new RegionRoute(
     'Kalos Route 7', GameConstants.Region.kalos, 7,
