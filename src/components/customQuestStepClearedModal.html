@@ -13,7 +13,7 @@ aria-labelledby="customQuestStepClearedModalLabel" aria-hidden="true">
            </div>
         </div>
         <div class="modal-body">
-            <p data-bind="html: CustomQuest.questObservable()?.getClearedMessage()"></p>
+            <p data-bind="html: TextMerger.mergeText(CustomQuest.questObservable()?.getClearedMessage())"></p>
 
         </div>
         <div class="modal-footer">
