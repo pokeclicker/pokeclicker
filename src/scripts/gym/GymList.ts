@@ -70,7 +70,7 @@ GymList['Saffron City'] = new Gym(
     BadgeEnums.Marsh,
     2500,
     'This loss shocks me! But a loss is a loss. I admit I didn\'t work hard enough to win. You earned the MarshBadge.',
-    [new TemporaryBattleRequirement('Blue 5')]
+    [new QuestLineStepCompletedRequirement('Team Rocket', 3)]
 );
 GymList['Fuchsia City'] = new Gym(
     'Koga',
