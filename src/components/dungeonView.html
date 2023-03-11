@@ -119,7 +119,8 @@
 
                   <!--Pokérus image-->
                   <knockout data-bind="if: RouteHelper.minPokerusCheck(DungeonRunner.dungeon.allAvailablePokemon())">
-                      <img data-bind="attr:{ src: 'assets/images/breeding/pokerus/' + GameConstants.Pokerus[RouteHelper.minPokerus(DungeonRunner.dungeon.allAvailablePokemon())] + '.png'}"
+                      <img data-bind="attr:{ src: 'assets/images/breeding/pokerus/' + GameConstants.Pokerus[RouteHelper.minPokerus(DungeonRunner.dungeon.allAvailablePokemon())] + '.png',
+                            title: RouteHelper.dungeonPokerusEVs(DungeonRunner.dungeon)}"
                     src=""/>
                   </knockout>
                 </td>

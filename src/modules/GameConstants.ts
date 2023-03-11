@@ -1444,6 +1444,7 @@ export const TemporaryBattles = [
     'Silver 6',
     'Silver 7',
     'Red',
+    'Youngster Joey',
     'May 1',
     'May 2',
     'May 3',
