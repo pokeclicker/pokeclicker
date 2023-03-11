@@ -2005,6 +2005,9 @@ class Update implements Saveable {
 
             //Mega Diancie
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 156);
+
+            //Joey
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 31);
         },
     };
 
