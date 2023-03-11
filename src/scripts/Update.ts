@@ -1995,6 +1995,9 @@ class Update implements Saveable {
             if (saveData.statistics.dungeonsCleared[72] && !saveData.party.caughtPokemon.some(pokemon => pokemon[8] > 0)) {
                 saveData.party.caughtPokemon[0][8] = 2;
             }
+
+            //Joey
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 31);
         },
     };
 
