@@ -199,7 +199,7 @@
                                     <img src="" width=80px style="padding: 20px 0px;" data-bind="css: { 'pokemon-not-seen': !App.game.farming.unlockedBerries[$data]() }, attr:{ src: FarmController.getBerryImage($data)}">
                                     <!-- ko if: App.game.farming.unlockedBerries[$data]() -->
                                     <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: BerryType[$data]">name</span>
-                                    <a class="overlay" href='#' data-bind="click: () => {FarmController.handleBerryDexClick($data)}"></a>
+                                    <a class="overlay" href='#' data-bind="click: () => {FarmController.handleBerryDexClick($data)}, attr:{'aria-label': BerryType[$data] + '. Click twice for dex entry.'}"></a>
                                     <!-- /ko -->
                                 </li>
                             </ul>
