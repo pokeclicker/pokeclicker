@@ -108,7 +108,7 @@ export default class Profile implements Saveable {
                 badgeContainer.appendChild(img);
             });
         const trainerId: HTMLElement = node.querySelector('.trainer-id');
-        trainerId.innerText = id;
+        trainerId.innerText = id.length ? `#${id}` : '';
         return container;
     }
 
