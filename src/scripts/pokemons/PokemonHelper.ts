@@ -201,6 +201,10 @@ class PokemonHelper extends TmpPokemonHelper {
         const list = {};
         Object.entries(SafariPokemonList.list).forEach(([region, zones]) => {
             zones().forEach((p, zone) => {
+                if (zone == GameConstants.Region.kalos) {
+                    // Friendly safari might cause infinit recursion
+                    return;
+                }
                 const safariWeight = p.safariPokemon.reduce((sum, p) => sum += p.weight, 0);
                 const safariPokemon = p.safariPokemon.find(p => p.name == pokemonName);
                 if (safariPokemon) {
@@ -424,4 +428,18 @@ class PokemonHelper extends TmpPokemonHelper {
         // Return the list of items
         return encounterTypes;
     }
+
+    public static hasEvableLocations = (pokemonName: PokemonNameType) => {
+        const locations = PokemonHelper.getPokemonLocations(pokemonName);
+        return locations[PokemonLocationType.Dungeon] ||
+            locations[PokemonLocationType.DungeonBoss] ||
+            locations[PokemonLocationType.DungeonChest] ||
+            locations[PokemonLocationType.Evolution] ||
+            locations[PokemonLocationType.Roaming] ||
+            locations[PokemonLocationType.Route] ||
+            locations[PokemonLocationType.Safari] ||
+            locations[PokemonLocationType.Shop] ||
+            locations[PokemonLocationType.Wandering];
+
+    };
 }
