@@ -383,7 +383,7 @@ class Dungeon {
                 const pokerus = App.game.party.getPokemonByName(pokemonName)?.pokerus;
                 const encounter = {
                     image: `assets/images/${(App.game.party.alreadyCaughtPokemonByName(pokemonName, true) ? 'shiny' : '')}pokemon/${pokemonMap[pokemonName].id}.png`,
-                    pkrsImage: pokerus > 0 ? `assets/images/breeding/pokerus/${GameConstants.Pokerus[App.game.party.getPokemonByName(pokemonName).pokerus]}.png` : '', 
+                    pkrsImage: pokerus > 0 ? `assets/images/breeding/pokerus/${GameConstants.Pokerus[App.game.party.getPokemonByName(pokemonName).pokerus]}.png` : '',
                     shiny:  App.game.party.alreadyCaughtPokemonByName(pokemonName, true),
                     hide: boss.options?.hide ? (boss.options?.requirement ? !boss.options?.requirement.isCompleted() : boss.options?.hide) : false,
                     uncaught: !App.game.party.alreadyCaughtPokemonByName(pokemonName),
