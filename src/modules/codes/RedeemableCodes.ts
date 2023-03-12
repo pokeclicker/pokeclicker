@@ -4,6 +4,7 @@ import {
     Currency, Pokeball, Region, VitaminType,
 } from '../GameConstants';
 import { ItemList } from '../items/ItemList';
+import KeyItemType from '../enums/KeyItemType';
 import NotificationConstants from '../notifications/NotificationConstants';
 import Notifier from '../notifications/Notifier';
 import { pokemonMap } from '../pokemons/PokemonList';
@@ -82,6 +83,21 @@ export default class RedeemableCodes implements Saveable {
 
                 return true;
             }, new MaxRegionRequirement(Region.johto)),
+
+            new RedeemableCode('eon-ticket', 528036885, false, async () => {
+                // Give the player the Eon Ticket
+                App.game.keyItems.gainKeyItem(KeyItemType.Eon_ticket, true);
+                // Notify that the code was activated successfully
+                Notifier.notify({
+                    title: 'Code activated!',
+                    message: 'You got an Eon Ticket!',
+                    type: NotificationConstants.NotificationOption.success,
+                    timeout: 1e4,
+                });
+
+                return true;
+            }, new MaxRegionRequirement(Region.hoenn)),
+
             new RedeemableCode('ampharosite', -512934122, false, async () => {
                 // Give the player Mega Ampharos
                 App.game.party.getPokemonByName('Ampharos').giveMegastone(true);

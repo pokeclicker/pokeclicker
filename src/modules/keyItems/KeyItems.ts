@@ -49,6 +49,7 @@ export default class KeyItems implements Feature {
                 () => MapHelper.accessToRoute(14, Region.kanto), undefined, undefined, 'Wailmer Pail'),
 
             new KeyItem(KeyItemType.Explorer_kit, 'A bag filled with convenient tools for exploring. It provides access to the Underground.', undefined, undefined, undefined, 'Explorer Kit'),
+            new KeyItem(KeyItemType.Eon_ticket, 'A limited edition ticket for a cruise to the Southern Island.', undefined, undefined, undefined, 'Eon Ticket'),
             // TODO buy for 500 quest points
             new KeyItem(KeyItemType.Event_calendar, 'This calendar will keep you up to date on the latest events.', undefined, undefined, undefined, 'Event Calendar'),
             new KeyItem(KeyItemType.Gem_case, 'A case specifically designed for holding gems.', undefined, undefined, undefined, 'Gem Case'),
@@ -59,9 +60,6 @@ export default class KeyItems implements Feature {
                 () => App.game.statistics.dungeonsCleared[getDungeonIndex('Distortion World')]() > 0,
                 undefined,
                 () => {
-                    App.game.party.getPokemon(
-                        RegionalStarters[Region.kanto][player.regionStarters[Region.kanto]()],
-                    ).pokerus = Pokerus.Contagious;
                     App.game.pokeballs.alreadyCaughtContagiousSelection = App.game.pokeballs.alreadyCaughtSelection;
                     Information.show({
                         steps: [
@@ -72,7 +70,14 @@ export default class KeyItems implements Feature {
                         ],
                         exitOnEsc: false,
                     });
-                }, 'Pokérus Virus'),
+                },
+                'Pokérus Virus',
+                () => {
+                    const patientZero = App.game.party.getPokemon(
+                        RegionalStarters[Region.kanto][player.regionStarters[Region.kanto]()],
+                    ) || App.game.party.caughtPokemon[0];
+                    patientZero.pokerus = Pokerus.Contagious;
+                }),
         ];
     }
 

@@ -44,10 +44,20 @@ class BattleCafeController {
     static clockwise = ko.observable<boolean>(false);
 
     static spinsPerDay() : number {
-        // Give additional spins for each sweet type completed
-        return this.baseDailySpins + GameHelper.enumStrings(GameConstants.AlcremieSweet)
-            .filter((s) => BattleCafeController.getCaughtStatus(GameConstants.AlcremieSweet[s])() >= CaughtStatus.Caught)
-            .length;
+        // Give additional spins for each sweet type completed, shiny, and resistant
+        let spins = this.baseDailySpins;
+        const sweetStatus = GameHelper.enumStrings(GameConstants.AlcremieSweet)
+            .map((s) => ({
+                caught: BattleCafeController.getCaughtStatus(GameConstants.AlcremieSweet[s])(),
+                pokerus: BattleCafeController.getPokerusStatus(GameConstants.AlcremieSweet[s])(),
+            }));
+        // Caught
+        spins += sweetStatus.filter((s) => s.caught >= CaughtStatus.Caught).length;
+        // Caught Shiny
+        spins += sweetStatus.filter((s) => s.caught == CaughtStatus.CaughtShiny).length;
+        // Resistant
+        spins += sweetStatus.filter((s) => s.pokerus == GameConstants.Pokerus.Resistant).length;
+        return spins;
     }
 
     public static spin(clockwise: boolean) {
@@ -78,7 +88,7 @@ class BattleCafeController {
         }
         if (DayCycle.currentDayCyclePart() === DayCyclePart.Dusk && !clockwise && spinTime > 10) {
             spin = GameConstants.AlcremieSpins.at5Above10;
-        } else if (DayCycle.currentDayCyclePart() === DayCyclePart.Night) {
+        } else if ([DayCyclePart.Night, DayCyclePart.Dawn].includes(DayCycle.currentDayCyclePart())) {
             if (clockwise && spinTime < 5) {
                 spin = GameConstants.AlcremieSpins.nightClockwiseBelow5;
             } else if (clockwise && spinTime >= 5) {
@@ -162,6 +172,12 @@ class BattleCafeController {
     public static getCaughtStatus(sweet: GameConstants.AlcremieSweet) : KnockoutComputed<CaughtStatus> {
         return ko.pureComputed(() => {
             return Math.min(...Object.values(BattleCafeController.evolutions[sweet]).map((pokemon: PokemonItem) => pokemon.getCaughtStatus()));
+        });
+    }
+
+    public static getPokerusStatus(sweet: GameConstants.AlcremieSweet) : KnockoutComputed<GameConstants.Pokerus> {
+        return ko.pureComputed(() => {
+            return Math.min(...Object.values(BattleCafeController.evolutions[sweet]).map((pokemon: PokemonItem) => pokemon.getPokerusStatus()));
         });
     }
 
