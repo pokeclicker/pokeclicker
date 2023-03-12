@@ -788,6 +788,16 @@
             , image: "assets/images/map/snorlaxoverworld.png"
             })
         %>
+
+        <%- include('templates/mapOverlay',
+            { name: "???"
+            , x: 26, y: 53
+            , width: 4, height: 4
+            , databind: "click: () => TemporaryBattleList['MissingNo.'].protectedOnclick(), attr: { class: TemporaryBattleList['MissingNo.'].isUnlocked() ? '' : 'locked' }"
+            , visible:  "App.game.challenges.listSpecial.monotype.active() && App.game.profile.name() === 'OLD MAN'"
+            , image: "assets/images/map/missingno.png"
+            })
+        %>
     %>
     </g>
 

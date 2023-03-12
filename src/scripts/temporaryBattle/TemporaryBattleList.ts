@@ -1,6 +1,39 @@
 const TemporaryBattleList: { [battleName: string]: TemporaryBattle } = {};
 
 //Kanto Temporary Battles
+const tutorialSkipBattle: PokemonNameType[] = ['MissingNo.', 'Golduck', 'Golbat', 'Mewtwo', 'Snorlax', 'Magikarp', 'Muk', 'Kingler', 'Cloyster', 'Electrode', 'Clefable', 'Weezing', 'Persian', 'Marowak', 'Haunter', 'Abra', 'Alakazam', 'Pidgeotto', 'Pidgeot', 'Starmie', 'Bulbasaur', 'Venusaur', 'Tentacruel', 'Goldeen', 'Seaking', 'Ponyta', 'Rapidash', 'Rattata', 'Raticate', 'Nidorino', 'Nidorina', 'Geodude', 'Porygon', 'Aerodactyl', 'Magnemite', 'Charmander', 'Squirtle', 'Charmeleon', 'Wartortle', 'Charizard', 'Oddish'];
+TemporaryBattleList['MissingNo.'] = new TemporaryBattle(
+    '???',
+    [new GymPokemon(tutorialSkipBattle, 200, 10)],
+    undefined,
+    undefined,
+    [new NullRequirement],
+    {
+        firstTimeRewardFunction: () => {
+            App.game.quests.questLines().filter(q => q.name == 'Tutorial Quests').map(p => {
+                if (p.state() !== QuestLineState.ended) {
+                    for (const quest of p.quests()) {
+                        quest.complete();
+                    }
+                    setTimeout(() => {
+                        Notifier.notify({
+                            title: 'Tutorial completed',
+                            message: 'The tutorial quests were glitched and they are now completed!',
+                            type: NotificationConstants.NotificationOption.success,
+                            setting: NotificationConstants.NotificationSetting.Dungeons.rare_dungeon_item_found,
+                            timeout: 1e4,
+                        });
+                    }, 1000);
+                }
+            });
+        },
+        displayName: '???',
+        returnTown: 'Pallet Town',
+        isTrainerBattle: true,
+        hideTrainer: true,
+    }
+);
+
 TemporaryBattleList['Blue 1'] = new TemporaryBattle(
     'Blue 1',
     [

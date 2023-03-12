@@ -134,12 +134,13 @@ class PokemonFactory {
      */
     public static generateGymPokemon(gym: Gym, index: number): BattlePokemon {
         const pokemon = gym.getPokemonList()[index];
-        const basePokemon = PokemonHelper.getPokemonByName(pokemon.name);
+        const pokemonName = pokemon.name instanceof Array ? Rand.fromArray(pokemon.name) : pokemon.name
+        const basePokemon = PokemonHelper.getPokemonByName(pokemonName);
 
         const exp: number = basePokemon.exp;
         const shiny = pokemon.shiny ? pokemon.shiny : this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
         const gender = this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
-        return new BattlePokemon(pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, 0, exp, new Amount(0, GameConstants.Currency.money), shiny, GameConstants.GYM_GEMS, gender);
+        return new BattlePokemon(pokemonName, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, 0, exp, new Amount(0, GameConstants.Currency.money), shiny, GameConstants.GYM_GEMS, gender);
     }
 
     public static generateDungeonPokemon(name: PokemonNameType, chestsOpened: number, baseHealth: number, level: number, mimic = false): BattlePokemon {
@@ -171,7 +172,7 @@ class PokemonFactory {
 
     public static generateDungeonTrainerPokemon(pokemon: GymPokemon, chestsOpened: number, baseHealth: number, level: number): BattlePokemon {
         // TODO: HLXII - Will Dungeon Trainer pokemon health be handled differently?
-        const name = pokemon.name;
+        const name = pokemon.name instanceof Array ? Rand.fromArray(pokemon.name) : pokemon.name;
         const basePokemon = PokemonHelper.getPokemonByName(name);
         const maxHealth: number = Math.floor(baseHealth * (1 + (chestsOpened / 5)));
         const exp: number = basePokemon.exp;
@@ -211,13 +212,14 @@ class PokemonFactory {
 
     public static generateTemporaryBattlePokemon(battle: TemporaryBattle, index: number): BattlePokemon {
         const pokemon = battle.getPokemonList()[index];
-        const basePokemon = PokemonHelper.getPokemonByName(pokemon.name);
+        const pokemonName = pokemon.name instanceof Array ? Rand.fromArray(pokemon.name) : pokemon.name
+        const basePokemon = PokemonHelper.getPokemonByName(pokemonName);
         const catchRate: number = this.catchRateHelper(basePokemon.catchRate);
 
         const exp: number = basePokemon.exp;
         const shiny = pokemon.shiny ? pokemon.shiny : this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
         const gender = this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
-        return new BattlePokemon(pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, catchRate, exp, new Amount(0, GameConstants.Currency.money), shiny, GameConstants.GYM_GEMS, gender);
+        return new BattlePokemon(pokemonName, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, catchRate, exp, new Amount(0, GameConstants.Currency.money), shiny, GameConstants.GYM_GEMS, gender);
     }
 
     private static generateRoamingEncounter(region: GameConstants.Region, subRegion: SubRegion): PokemonNameType {

@@ -42,12 +42,6 @@ class TemporaryBattleBattle extends Battle {
     }
 
     private static endFight() {
-        if (TemporaryBattleBattle.index() >= TemporaryBattleBattle.battle.getPokemonList().length) {
-            TemporaryBattleRunner.battleWon(TemporaryBattleBattle.battle);
-        } else {
-            TemporaryBattleBattle.generateNewEnemy();
-        }
-
         TemporaryBattleBattle.enemyPokemon().defeat(this.battle.optionalArgs.isTrainerBattle ?? true);
 
         TemporaryBattleBattle.index(TemporaryBattleBattle.index() + 1);

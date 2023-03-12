@@ -1,11 +1,11 @@
 class GymPokemon {
-    name: PokemonNameType;
+    name: PokemonNameType | PokemonNameType[];
     maxHealth: number;
     level: number;
     shiny: boolean;
     requirements: Requirement[];
 
-    constructor(name: PokemonNameType, maxHealth: number, level: number, requirements: Requirement | Requirement[] = [], shiny?: boolean) {
+    constructor(name: PokemonNameType | PokemonNameType[], maxHealth: number, level: number, requirements: Requirement | Requirement[] = [], shiny?: boolean) {
         this.name = name;
         this.maxHealth = maxHealth;
         this.level = level;

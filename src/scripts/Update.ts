@@ -1996,6 +1996,8 @@ class Update implements Saveable {
                 }, GameConstants.SECOND);
             });
 
+            // Tutorial skip
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 0);
         },
     };
 

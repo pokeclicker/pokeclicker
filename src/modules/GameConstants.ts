@@ -1417,6 +1417,7 @@ export const DockTowns = [
 ];
 
 export const TemporaryBattles = [
+    'MissingNo.',
     'Blue 1',
     'Blue 2',
     'Blue 3',
