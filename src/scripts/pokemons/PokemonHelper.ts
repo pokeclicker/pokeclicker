@@ -162,14 +162,17 @@ class PokemonHelper extends TmpPokemonHelper {
             if (maxRegion != GameConstants.Region.none && (+region) > maxRegion) {
                 return false;
             }
-            const pokemon = regionArr.flat().find(r => r.pokemon.name == pokemonName);
-            if (pokemon) {
-                const data = {
-                    region: +region,
-                    requirements: pokemon.unlockRequirement?.hint(),
-                };
-                regions.push(data);
-            }
+            RoamingPokemonList.roamerGroups[region].forEach((group, i) => {
+                const pokemon = regionArr[i]?.find(r => r.pokemon.name == pokemonName);
+                if (pokemon) {
+                    const data = {
+                        region: +region,
+                        requirements: pokemon.unlockRequirement?.hint(),
+                        roamingGroup: group,
+                    };
+                    regions.push(data);
+                }
+            });
         });
         return regions;
     }
@@ -201,6 +204,10 @@ class PokemonHelper extends TmpPokemonHelper {
         const list = {};
         Object.entries(SafariPokemonList.list).forEach(([region, zones]) => {
             zones().forEach((p, zone) => {
+                if (zone == GameConstants.Region.kalos) {
+                    // Friendly safari might cause infinit recursion
+                    return;
+                }
                 const safariWeight = p.safariPokemon.reduce((sum, p) => sum += p.weight, 0);
                 const safariPokemon = p.safariPokemon.find(p => p.name == pokemonName);
                 if (safariPokemon) {
@@ -424,4 +431,18 @@ class PokemonHelper extends TmpPokemonHelper {
         // Return the list of items
         return encounterTypes;
     }
+
+    public static hasEvableLocations = (pokemonName: PokemonNameType) => {
+        const locations = PokemonHelper.getPokemonLocations(pokemonName);
+        return locations[PokemonLocationType.Dungeon] ||
+            locations[PokemonLocationType.DungeonBoss] ||
+            locations[PokemonLocationType.DungeonChest] ||
+            locations[PokemonLocationType.Evolution] ||
+            locations[PokemonLocationType.Roaming] ||
+            locations[PokemonLocationType.Route] ||
+            locations[PokemonLocationType.Safari] ||
+            locations[PokemonLocationType.Shop] ||
+            locations[PokemonLocationType.Wandering];
+
+    };
 }

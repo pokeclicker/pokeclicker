@@ -124,10 +124,12 @@ SpecialEvents.newEvent('Hoopa Day', 'The Mischief Pokémon unleashes his tricks 
         if (pikabluQuestLine.state() == QuestLineState.inactive) {
             App.game.quests.getQuestLine('How blu mouse?').beginQuest();
         }
+        TownList['Cherrygrove City'].content.push(TemporaryBattleList['Youngster Joey']);
     },
     // End
     new Date(new Date().getFullYear(), 3, 2, 1), () => {
         // do not end questline, so ppl can finish it
+        TownList['Cherrygrove City'].content = TownList['Cherrygrove City'].content.filter(t => t != TemporaryBattleList['Youngster Joey']);
     }
 );
 // Easter
