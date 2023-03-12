@@ -6,6 +6,7 @@ class BattleFrontierRunner {
     static stage: KnockoutObservable<number> = ko.observable(1); // Start at stage 1
     public static checkpoint: KnockoutObservable<number> = ko.observable(1); // Start at stage 1
     public static highest: KnockoutObservable<number> = ko.observable(1);
+    public static autoRestart: KnockoutObservable<boolean> = ko.observable(false);
 
     public static counter = 0;
 
@@ -79,11 +80,12 @@ class BattleFrontierRunner {
         // Award battle points and dollars and retrieve their computed values
         battlePointsEarned = App.game.wallet.gainBattlePoints(battlePointsEarned).amount;
         moneyEarned = App.game.wallet.gainMoney(moneyEarned, true).amount;
+        const restartCost = Math.floor(0.1 * battlePointsEarned);
 
         Notifier.notify({
             title: 'Battle Frontier',
-            message: `You managed to beat stage ${stageBeaten.toLocaleString('en-US')}.\nYou received <img src="./assets/images/currency/battlePoint.svg" height="24px"/> ${battlePointsEarned.toLocaleString('en-US')}.\nYou received <img src="./assets/images/currency/money.svg" height="24px"/> ${moneyEarned.toLocaleString('en-US')}.`,
-            strippedMessage: `You managed to beat stage ${stageBeaten.toLocaleString('en-US')}.\nYou received ${battlePointsEarned.toLocaleString('en-US')} Battle Points.\nYou received ${moneyEarned.toLocaleString('en-US')} Pokédollars.`,
+            message: `You managed to beat stage ${stageBeaten.toLocaleString('en-US')}.\nYou received <img src="./assets/images/currency/battlePoint.svg" height="24px"/> ${battlePointsEarned.toLocaleString('en-US')}.\nYou received <img src="./assets/images/currency/money.svg" height="24px"/> ${moneyEarned.toLocaleString('en-US')}.${BattleFrontierRunner.autoRestart() ? `\nYou paid <img src="./assets/images/currency/battlePoint.svg" height="24px"/> ${restartCost.toLocaleString('en-US')} and headed back in.` : ''}`,
+            strippedMessage: `You managed to beat stage ${stageBeaten.toLocaleString('en-US')}.\nYou received ${battlePointsEarned.toLocaleString('en-US')} Battle Points.\nYou received ${moneyEarned.toLocaleString('en-US')} Pokédollars.${BattleFrontierRunner.autoRestart() ? `\nYou paid ${restartCost.toLocaleString('en-US')} Battle Points and headed back in.` : ''}`,
             type: NotificationConstants.NotificationOption.success,
             setting: NotificationConstants.NotificationSetting.General.battle_frontier,
             sound: NotificationConstants.NotificationSound.General.battle_frontier,
@@ -100,6 +102,11 @@ class BattleFrontierRunner {
         this.checkpoint(1);
 
         this.end();
+        if (BattleFrontierRunner.autoRestart()) {
+            // No check, the user is supposed to have gotten more points right before.
+            App.game.wallet.loseAmount(new Amount(restartCost, GameConstants.Currency.battlePoint));
+            this.start(false);
+        }
     }
     public static battleQuit() {
         Notifier.confirm({
