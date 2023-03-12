@@ -166,7 +166,7 @@ class PartyController {
     }).extend({ rateLimit: 500 });
 
 
-    public static compareBy(option: SortOptions, direction: boolean, region: number = -1, subregion: number = -1): (a: PartyPokemon, b: PartyPokemon) => number {
+    public static compareBy(option: SortOptions, direction: boolean, region = -1, subregion = -1): (a: PartyPokemon, b: PartyPokemon) => number {
         return function (a, b) {
             let res, dir = (direction) ? -1 : 1;
             const config = SortOptionConfigs[option];
