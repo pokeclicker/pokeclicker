@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="100" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="152" nextobjectid="2">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="100" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="156" nextobjectid="2">
  <editorsettings>
   <export target="Unova.tmx" format="tmx"/>
  </editorsettings>
@@ -452,6 +452,11 @@
    KLUv/WDAXC0EAPKHFiKAS9IYQO47lEMYYQZGYFMHYAZmNiAhIzKCAQkwfAbuHCUFoQt0fTRX5sJcLstVWZRrckmi13iMt3iKxEO8wzO8wghv8AQv8ACeU+fEOW1OmilygpweJ8cpGgwggANzB3WLB4TqIax6CCfVI1h9DfmqK5+67EEN+SZVUG9UC0PgkRA=
   </data>
   </layer>
+  <layer id="152" name="Clouds" width="100" height="60" opacity="0.75" tintcolor="#3f3f3f">
+   <data encoding="base64" compression="zstd">
+   KLUv/WDAXDUDAGQCAJI9AACTPQAAlD0Anz0AAKA9AAChaz0AAGw9eD0AAHmFPQAAhj0XoGAnjrUYMAPKVQ9RC4x5CyveovOerMqlpUdBfUnaQXT/oMqbUqoeRge5dY9UD0p9keDjTaok2GriEHg2Ag==
+  </data>
+  </layer>
  </group>
  <layer id="49" name="Bridges" width="100" height="60" tintcolor="#884134">
   <data encoding="base64" compression="zstd">
@@ -563,17 +568,22 @@
  </layer>
  <layer id="144" name="Super decor 2" width="100" height="60" tintcolor="#d2d2d2">
   <data encoding="base64" compression="zstd">
-   KLUv/WDAXP0CAEAAaioAMAVqKh+g0LUBAAOKK/LJlTy6TnQfFbpRtWCUq4+Yjs1C8fL5UodOWY0Bq4lNtBOx7Ct/5CxUE4Ea8pZWGk9S/Wb8iKqRaiGrKm5UEYFTEx+pi1YsaDXBpsok
+   KLUv/WDAXK0RACJIFhtwZdIYjB/Om2m/GeA9Mg/vzT+s9+W8/f9nuSnpu0Gy03cuZGi7z7ZBL+gE+4yu6BR9otsP3aE39IMSOkI/VCqmGQUEpwAd4ItuGdVXTLNEj+iQYugLXfEZgMSoYIlJKs0BgIIRCWSsajoSQBFADI6AQXiChCRIIAKGgCNIEAKEgBAiAiJABBlEmK2tAYeimQQINiIL6DoY1r1T/n4oTFZiLHZNUj7Ic//dfEd9cAk7hP6XDaHt8MSMveNoUgn3lZTd+tiG61vs0eBRHl5or7dK/EnZaRrfean76qsSmQ7V9YhOUo9CGh/2kjas3wR10fUNqK36yTXFwN7I0sMn1DuUUH1R0vhRT9mj27uVQ+8OkGqnw6LXO5TkefdyF7k8FbS3O005TOgubjeqTXr+y9wLlRDk+mOEF4tv5EO+GHiNB7Hky3jNx9Q7kIq9S78YpcaD5GX3ycA1Hyuw6YpvJ8WAd76BNQtaIlx6DH4Yb1KGuCrNKi1xPlzJZoLy5ssr5k05iq1HjGLzNOmO/bFPByfLfqtnpXuRFn34/DdM7tVcnx19mwX7PUH3JDbvzMoR1v4nXPfk9krQrORfkuRv4vDE/Nu9VDth5DwcWu9wfEj7yuv1Una+db9BDrqBie0FVLkySE9aNZ5UxzpAqY9CkaV8b3xH17dIXOeRO03aMK9F8uMieHflwsazRCaNMLBf+wmwsaG+aeRT4NGVv4g+siXgQ+jeIoN+deCqjrm7X1AgDDo=
+  </data>
+ </layer>
+ <layer id="155" name="Super decor 2.1" width="100" height="60" tintcolor="#d2d2d2">
+  <data encoding="base64" compression="zstd">
+   KLUv/WDAXI0EAFQDAGE9AABiPQAAYz0Abj0AAG89AABwez0AAHw9AAB9ZD0AAGU9AABmcT1+PXI9AABzfz0AAIAioIC1tHQMQIPJ0VoDHWoukDqkSKKqIcWFSNdZaiN10ooFVVU6LvC4Vmf+8KjKn0RgOeHJygj7xctRn3DVpdrRwC9UIfuoQ/p2qXqViPiqLuFklQiempCLnsU=
   </data>
  </layer>
  <layer id="142" name="Super decor 3" width="100" height="60" tintcolor="#e6e6e6">
   <data encoding="base64" compression="zstd">
-   KLUv/WDAXM0FANAAaioA+CkIGGoAADAFCGoqavsRGxIaEvwRGkKgkOkBMAOJo+pdhb5kJtThjUp/8Tn1IOHvuodqpKrrfsRUFTeuNHG1m/9kJM8Gqi5tqK5QqzQ4Bb5IzYzzZj1CVebnaaCLqGoKYNrNA1k6pQkNacJFqA4HF04vqRn3RT0w/2NTAmsJ1Xhk7TVxSIp14km6enEnKrEVFBsE4seoj8TAar024WRVMJ5i9YsbpY74cZ018VENhl0NCMr/
+   KLUv/WDAXIUHAGQCAGoqAPgpCBhqAAAwBQhqKmr7EUc9Vj1UPVc9GxJUGhL8ERpXPVZWoIDpARADCSSQwNgB0aKPoGakTTFD1YTLVe8R6S1tmKopqcjff0cJDob/aKmV0SMFpoEtxWSVEDwPTK4QORLWDFTeUP70oGXlj8hVxY2qT1R18x8ZGWcDtUs3UCuoqjQ4B75YzYD1ynpk1czP00AXVdcpoMhgD2TplEq0SSdchHr4uXB6SZtxX9QB5X8kKrCWUBuPrLlKHJJqlXiSXt/ej5LYCuoMBvEj6mNCYLVZRzhZajCeQhWLG02N+FHVSnykPsOsBgQFfw==
   </data>
  </layer>
  <layer id="145" name="Super decor 4" width="100" height="60">
   <data encoding="base64" compression="zstd">
-   KLUv/WDAXJ0GAGQDAGoqADAFAAEsAAACLAAAAywRLAAAEiwAABMhLAAAIiwAACMxLAAAMiwAADMbEgD8ERoaEicWOKCQtXUb0AKKRIIjN61Cn/NDtQylxgbnwoqH/hnq/4wzUu1564PE6hH4gVGXXLJV5ium0t9L6ou8qmw87BGmCqHqEk6mLqYgcwWqennUyE2q1lClRU6q2viCrRqJfIM/vHFJ1JT1qqcHxi09zVuXqIiOHBl14uT6aHMtXKzWTN2TQ2PWhvorrjMPT3LCNVY98P9VCT70kcCgKAo=
+   KLUv/WDAXC0HAPQDAGoqADAFAAEsAAACLAAAAywRLAAAEiwAABMhLAAAIiwAACMxLAAAMiwAADMbEgD8EUc9AFY9AABUVhoaEicWO6Bwt4VyA9ACikSCIzetQp/zQ1UZSsUG54UVD8Uz1I+MM5Ia5kRqtskqGa4G/CAJ9Aj8wKhLLtkq8xVT/+8lFUVetWw81glThVB1CSdTF1OQvgJVvTxK5CZVa6ikRU6q2viCrRqJfIM/vHFJ1CnrVacHjlt6yluXqBEdOTLqxMn10eZauFhdM7Unh45ZG+pX3M48PMkJ11j1wP9XZfj0x4ZB0Rg=
   </data>
  </layer>
 </map>
