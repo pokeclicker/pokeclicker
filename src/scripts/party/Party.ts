@@ -186,7 +186,7 @@ class Party implements Feature {
         return attack;
     }
 
-    public static calculateRegionalMultiplier(pokemon: PartyPokemon, region: number, subRegion: number = 0): number {
+    public static calculateRegionalMultiplier(pokemon: PartyPokemon, region: number, subRegion: number): number {
         if (region == GameConstants.Region.alola && subRegion == GameConstants.AlolaSubRegions.MagikarpJump && Math.floor(pokemon.id) != 129) {
             // Only magikarps can attack in magikarp jump
             return 0;
