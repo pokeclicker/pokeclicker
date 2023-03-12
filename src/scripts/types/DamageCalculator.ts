@@ -22,6 +22,7 @@ class DamageCalculator {
             DamageCalculator.type2(),
             ignoreRegionMultiplier,
             DamageCalculator.region(),
+            -1,
             DamageCalculator.includeBreeding(),
             DamageCalculator.baseAttackOnly(),
             DamageCalculator.weather(),
@@ -39,7 +40,7 @@ class DamageCalculator {
                 continue;
             }
 
-            const attack = App.game.party.calculateOnePokemonAttack(pokemon, this.type1(), this.type2(), this.region(), ignoreRegionMultiplier, this.includeBreeding(), this.baseAttackOnly(), this.weather(), this.ignoreLevel());
+            const attack = Party.calculateOnePokemonAttack(pokemon, this.type1(), this.type2(), this.region(), -1, ignoreRegionMultiplier, this.includeBreeding(), this.baseAttackOnly(), this.weather(), this.ignoreLevel());
 
             typedamage[dataPokemon.type1] += attack / 2;
             const otherType = dataPokemon.type2 !== PokemonType.None ? dataPokemon.type2 : dataPokemon.type1;
@@ -67,11 +68,12 @@ class DamageCalculator {
             name: dataPokemon.name,
             type1: dataPokemon.type1,
             type2: dataPokemon.type2,
-            damage: App.game.party.calculateOnePokemonAttack(
+            damage: Party.calculateOnePokemonAttack(
                 pokemon,
                 DamageCalculator.type1(),
                 DamageCalculator.type2(),
                 DamageCalculator.region(),
+                -1,
                 ignoreRegionMultiplier,
                 DamageCalculator.includeBreeding(),
                 DamageCalculator.baseAttackOnly(),

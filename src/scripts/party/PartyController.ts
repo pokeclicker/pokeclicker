@@ -119,7 +119,7 @@ class PartyController {
 
     static getSortedList = ko.pureComputed(() => {
         const list = [...App.game.party.caughtPokemon];
-        return list.sort(PartyController.compareBy(Settings.getSetting('partySort').observableValue(), Settings.getSetting('partySortDirection').observableValue()));
+        return list.sort(PartyController.compareBy(Settings.getSetting('partySort').observableValue(), Settings.getSetting('partySortDirection').observableValue(), player.region, player.subregion));
     }).extend({ rateLimit: 500 });
 
     private static hatcherySortedList = [];
@@ -128,8 +128,9 @@ class PartyController {
         if (modalUtils.observableState.breedingModal === 'show') {
             // Don't adjust attack based on region if debuff is disabled
             const region = App.game.challenges.list.regionalAttackDebuff.active() ? BreedingController.regionalAttackDebuff() : -1;
+            const subregion = -1;
             PartyController.hatcherySortedList = [...App.game.party.caughtPokemon];
-            return PartyController.hatcherySortedList.sort(PartyController.compareBy(Settings.getSetting('hatcherySort').observableValue(), Settings.getSetting('hatcherySortDirection').observableValue(), region));
+            return PartyController.hatcherySortedList.sort(PartyController.compareBy(Settings.getSetting('hatcherySort').observableValue(), Settings.getSetting('hatcherySortDirection').observableValue(), region, subregion));
         }
         return PartyController.hatcherySortedList;
     }).extend({ rateLimit: 500 });
@@ -165,14 +166,7 @@ class PartyController {
     }).extend({ rateLimit: 500 });
 
 
-    public static calculateRegionalMultiplier(pokemon: PartyPokemon, region: number): number {
-        if (region > -1 && PokemonHelper.calcNativeRegion(pokemon.name) !== region) {
-            return App.game.party.getRegionAttackMultiplier();
-        }
-        return 1.0;
-    }
-
-    public static compareBy(option: SortOptions, direction: boolean, region = -1): (a: PartyPokemon, b: PartyPokemon) => number {
+    public static compareBy(option: SortOptions, direction: boolean, region: number = -1, subregion: number = -1): (a: PartyPokemon, b: PartyPokemon) => number {
         return function (a, b) {
             let res, dir = (direction) ? -1 : 1;
             const config = SortOptionConfigs[option];
@@ -182,8 +176,8 @@ class PartyController {
 
             // Apply regional debuff if needed
             if (region > -1 && [SortOptions.attack, SortOptions.breedingEfficiency].includes(option)) {
-                aValue *= PartyController.calculateRegionalMultiplier(a, region);
-                bValue *= PartyController.calculateRegionalMultiplier(b, region);
+                aValue *= Party.calculateRegionalMultiplier(a, region, subregion);
+                bValue *= Party.calculateRegionalMultiplier(b, region, subregion);
             }
 
             if (config.invert) {

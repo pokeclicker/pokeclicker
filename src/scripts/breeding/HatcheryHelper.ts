@@ -208,10 +208,11 @@ class HatcheryHelpers {
             if (egg.isNone()) {
                 // Get the currently selected region
                 const currentRegion = +Settings.getSetting('breedingRegionalAttackDebuffSetting').value;
+                const subregion = -1;
 
                 // Check if there's a pokemon we can chuck into an egg
                 const pokemon = [...App.game.party.caughtPokemon]
-                    .sort(PartyController.compareBy(helper.sortOption(), helper.sortDirection(), currentRegion))
+                    .sort(PartyController.compareBy(helper.sortOption(), helper.sortDirection(), currentRegion, subregion))
                     .find(p => BreedingController.visible(p)());
                 if (pokemon) {
                     this.hatchery.gainPokemonEgg(pokemon, true);

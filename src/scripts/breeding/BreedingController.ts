@@ -210,13 +210,13 @@ class BreedingController {
     public static getDisplayValue(pokemon: PartyPokemon): string {
         const pokemonData = pokemonMap[pokemon.name];
         switch (this.displayValue()) {
-            case 'attack': return `Attack: ${Math.floor(pokemon.attack * BreedingController.calculateRegionalMultiplier(pokemon)).toLocaleString('en-US')}`;
-            case 'attackBonus': return `Attack Bonus: ${Math.floor(pokemon.getBreedingAttackBonus() * BreedingController.calculateRegionalMultiplier(pokemon)).toLocaleString('en-US')}`;
+            case 'attack': return `Attack: ${Math.floor(pokemon.attack * Party.calculateRegionalMultiplier(pokemon, BreedingController.regionalAttackDebuff())).toLocaleString('en-US')}`;
+            case 'attackBonus': return `Attack Bonus: ${Math.floor(pokemon.getBreedingAttackBonus() * Party.calculateRegionalMultiplier(pokemon, BreedingController.regionalAttackDebuff())).toLocaleString('en-US')}`;
             case 'baseAttack': return `Base Attack: ${pokemon.baseAttack.toLocaleString('en-US')}`;
             case 'eggSteps': return `Egg Steps: ${pokemon.getEggSteps().toLocaleString('en-US')}`;
             case 'timesHatched': return `Hatches: ${App.game.statistics.pokemonHatched[pokemonData.id]().toLocaleString('en-US')}`;
-            case 'breedingEfficiency': return `Efficiency: ${(pokemon.breedingEfficiency() * BreedingController.calculateRegionalMultiplier(pokemon)).toLocaleString('en-US', { maximumSignificantDigits: 2 })}`;
-            case 'stepsPerAttack': return `Steps/Att: ${(pokemon.getEggSteps() / (pokemon.getBreedingAttackBonus() * BreedingController.calculateRegionalMultiplier(pokemon))).toLocaleString('en-US', { maximumSignificantDigits: 2 })}`;
+            case 'breedingEfficiency': return `Efficiency: ${(pokemon.breedingEfficiency() * Party.calculateRegionalMultiplier(pokemon, BreedingController.regionalAttackDebuff())).toLocaleString('en-US', { maximumSignificantDigits: 2 })}`;
+            case 'stepsPerAttack': return `Steps/Att: ${(pokemon.getEggSteps() / (pokemon.getBreedingAttackBonus() * Party.calculateRegionalMultiplier(pokemon, BreedingController.regionalAttackDebuff()))).toLocaleString('en-US', { maximumSignificantDigits: 2 })}`;
             case 'dexId': return `#${pokemon.id <= 0 ? '???' : Math.floor(pokemon.id).toString().padStart(3,'0')}`;
             case 'vitamins': return `Vitamins: ${pokemon.totalVitaminsUsed()}`;
             case 'evs': return `EVs: ${pokemon.evs()}`;
@@ -225,17 +225,6 @@ class BreedingController {
 
     // Applied regional debuff
     public static regionalAttackDebuff = ko.observable(-1);
-
-    public static calculateRegionalMultiplier(pokemon: PartyPokemon): number {
-        // Check if reginal debnuff is active
-        if (App.game.challenges.list.regionalAttackDebuff.active()) {
-            // Check if regional debuff being applied for sorting
-            if (BreedingController.regionalAttackDebuff() > -1 && PokemonHelper.calcNativeRegion(pokemon.name) !== BreedingController.regionalAttackDebuff()) {
-                return App.game.party.getRegionAttackMultiplier();
-            }
-        }
-        return 1.0;
-    }
 
     // Queue size limit setting
     public static queueSizeLimit = ko.observable(-1);
