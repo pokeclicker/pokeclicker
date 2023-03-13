@@ -2806,6 +2806,16 @@ TownList['Southern Island'] = new Town(
     }
 );
 
+TownList['Outskirt Stand'] = new Town(
+    'Outskirt Stand',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [],
+    {
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), new DevelopmentRequirement()],
+    }
+);
+
 //Hoenn Dungeons
 TownList['Petalburg Woods'] = new DungeonTown(
     'Petalburg Woods',
@@ -2975,6 +2985,14 @@ TownList['Near Space'] = new DungeonTown(
     GameConstants.HoennSubRegions.Hoenn,
     [
         new QuestLineCompletedRequirement('The Delta Episode'),
+    ]
+);
+TownList['Pyrite Bldg'] = new DungeonTown(
+    'Pyrite Bldg',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [
+        new DevelopmentRequirement(),
     ]
 );
 
