@@ -80,7 +80,7 @@ class BattleFrontierRunner {
         // Award battle points and dollars and retrieve their computed values
         battlePointsEarned = App.game.wallet.gainBattlePoints(battlePointsEarned).amount;
         moneyEarned = App.game.wallet.gainMoney(moneyEarned, true).amount;
-        const restartCost = Math.floor(0.1 * battlePointsEarned);
+        const restartCost = Math.floor(0.05 * battlePointsEarned);
 
         Notifier.notify({
             title: 'Battle Frontier',

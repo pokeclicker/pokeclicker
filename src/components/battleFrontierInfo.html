@@ -23,7 +23,7 @@
     <!-- /ko -->
     <!-- ko if: BattleFrontierRunner.started -->
     <div id="battleFrontierRewards" class="card-body text-center p-0 show">
-		<div class=" mt-1" data-bind="if : BattleFrontierRunner.highest() >= 1000">
+		<div class=" mt-1" data-bind="if : BattleFrontierRunner.highest() >= 500">
 			<input class="mr-2" type="checkbox" name="BF-autoRestart" id="BF-autoRestart" data-bind="checked : BattleFrontierRunner.autoRestart" onchange="BattleFrontierRunner.autoRestart(this.checked)">
 			<label for="BF-autoRestart">Auto restart your run at the cost of Battle Points.</label>
 		</div>
