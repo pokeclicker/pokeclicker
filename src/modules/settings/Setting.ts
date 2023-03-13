@@ -33,16 +33,12 @@ export default class Setting<T> {
     }
 
     validValue(value: T): boolean {
-        if (!this.isUnlocked(value)) {
-            return false;
-        }
-
         if (this.options.length === 0) {
             return true;
         }
         for (let i = 0; i < this.options.length; i += 1) {
             if (this.options[i].value === value) {
-                return true;
+                return this.options[i].isUnlocked();
             }
         }
 
@@ -56,6 +52,10 @@ export default class Setting<T> {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars, class-methods-use-this
     isUnlocked(value: T): boolean {
         return true;
+    }
+
+    getValidOptions() {
+        return this.options.filter((opt) => opt.isUnlocked());
     }
 
     get displayName(): string {
