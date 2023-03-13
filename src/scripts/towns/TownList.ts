@@ -2812,7 +2812,7 @@ TownList['Outskirt Stand'] = new Town(
     GameConstants.HoennSubRegions.Orre,
     [],
     {
-        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), new DevelopmentRequirement()],
     }
 );
 
@@ -2992,7 +2992,7 @@ TownList['Pyrite Bldg'] = new DungeonTown(
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new DevelopmentRequirement,
+        new DevelopmentRequirement(),
     ]
 );
 
