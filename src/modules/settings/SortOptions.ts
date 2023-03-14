@@ -5,12 +5,13 @@ export enum SortOptions {
     level = 3,
     shiny = 4,
     baseAttack = 5,
-    breedingEfficiency = 6,
-    eggCycles = 7,
-    timesHatched = 8,
-    category = 9,
-    vitaminsUsed = 10,
-    evs = 11,
+    attackBonus = 6,
+    breedingEfficiency = 7,
+    eggCycles = 8,
+    timesHatched = 9,
+    category = 10,
+    vitaminsUsed = 11,
+    evs = 12,
 }
 
 export type SortOptionConfig = {
@@ -54,6 +55,11 @@ export const SortOptionConfigs: Record<SortOptions, SortOptionConfig> = {
     [SortOptions.baseAttack]: {
         text: 'Base Attack',
         getValue: (p) => p.baseAttack,
+    },
+
+    [SortOptions.attackBonus]: {
+        text: 'Attack Bonus',
+        getValue: (p) => p.getBreedingAttackBonus(),
     },
 
     [SortOptions.breedingEfficiency]: {
