@@ -58,26 +58,25 @@ class Party implements Feature {
 
         if (pokemon.shadow) {
             // Already caught (shadow)
-            if (this.alreadyCaughtPokemon(pokemon.id, false, true)) {
-                return;
-            }
-            App.game.logbook.newLog(LogBookTypes.CAUGHT, createLogContent.capturedShadow({ pokemon: pokemon.name }));
+            if (!this.alreadyCaughtPokemon(pokemon.id, false, true)) {
+                App.game.logbook.newLog(LogBookTypes.CAUGHT, createLogContent.capturedShadow({ pokemon: pokemon.name }));
 
-            // Notify if not already caught
-            Notifier.notify({
-                message: `You have captured a shadow ${pokemon.displayName}!`,
-                type: NotificationConstants.NotificationOption.warning,
-                sound: NotificationConstants.NotificationSound.General.new_catch,
-                setting: NotificationConstants.NotificationSetting.General.new_catch,
-            });
+                // Notify if not already caught
+                Notifier.notify({
+                    message: `You have captured a shadow ${pokemon.displayName}!`,
+                    type: NotificationConstants.NotificationOption.warning,
+                    sound: NotificationConstants.NotificationSound.General.new_catch,
+                    setting: NotificationConstants.NotificationSetting.General.new_catch,
+                });
 
-            // Already caught (non shadow) we need to update the party pokemon directly
-            if (this.alreadyCaughtPokemon(pokemon.id, false, false)) {
-                this.getPokemon(pokemon.id).shadow = GameConstants.ShadowStatus.Shadow;
-                if (!pokemon.shiny && pokemon.shiny) { // Will almost never happen, so don't want to have a log message, that we need to keep track of
-                    this.getPokemon(pokemon.id).shiny = true;
+                // Already caught (non shadow) we need to update the party pokemon directly
+                if (this.alreadyCaughtPokemon(pokemon.id, false, false)) {
+                    this.getPokemon(pokemon.id).shadow = GameConstants.ShadowStatus.Shadow;
+                    if (!pokemon.shiny && pokemon.shiny) { // Will almost never happen, so don't want to have a log message, that we need to keep track of
+                        this.getPokemon(pokemon.id).shiny = true;
+                    }
+                    return;
                 }
-                return;
             }
         }
 
