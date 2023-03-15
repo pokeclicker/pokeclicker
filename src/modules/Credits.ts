@@ -302,6 +302,7 @@ export const SpriteCredits: Credit[] = [
             'Underground Sablenite',
             'Valencian Raticate',
             'Valencian Paras',
+            'Vivillon Photobook',
             'White mane hair icon',
             'Zarude (Dada) shop image',
             'Zero',
