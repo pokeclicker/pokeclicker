@@ -69,6 +69,7 @@ export enum JohtoSubRegions {
 
 export enum HoennSubRegions {
     Hoenn = 0,
+    Orre,
 }
 
 export enum SinnohSubRegions {
