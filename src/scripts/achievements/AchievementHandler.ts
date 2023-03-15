@@ -111,6 +111,7 @@ class AchievementHandler {
     }
 
     public static preCheckAchievements() {
+        AchievementHandler.filterAchievementList();
         // Check if our achievements are completed, we don't want to re-notify if already done
         for (let i = 0; i < AchievementHandler.achievementList.length; i++) {
             AchievementHandler.achievementList[i].unlocked(AchievementHandler.achievementList[i].isCompleted());
@@ -485,8 +486,6 @@ class AchievementHandler {
 
         // load filters, filter the list & calculate number of tabs
         this.load();
-        this.filterAchievementList(true);
-        this.calculateNumberOfTabs();
 
         // subscribe to filters so that when the player changes a filter it automatically refilters the list
         Object.keys(this.filter).forEach(e => (<KnockoutObservable<any>> this.filter[e]).subscribe(() => this.filterAchievementList()));
@@ -498,7 +497,6 @@ class AchievementHandler {
 
     static load() {
         AchievementHandler.calculateMaxBonus();
-        this.achievementListFiltered(this.achievementList.filter(a => a.category.isUnlocked() && a.achievable()));
         AchievementHandler.navigateIndex(Settings.getSetting('achievementsPage').value);
         AchievementHandler.filter.status(Settings.getSetting('achievementsStatus').value);
         AchievementHandler.filter.type(Settings.getSetting('achievementsType').value);
@@ -507,7 +505,6 @@ class AchievementHandler {
         AchievementHandler.navigateRight();
         setTimeout(() => {
             AchievementHandler.navigateLeft();
-            AchievementHandler.filterAchievementList();
         }, 1);
     }
 }
