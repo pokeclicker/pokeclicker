@@ -3193,13 +3193,13 @@ class QuestLineHelper {
     }
 
     public static createHisuiSinnohQuestLine() {
-        const hisuiSinnohQuestLine = new QuestLine('The power of Sinnoh', 'Put a stop to the frenzy of Sinnoh, the deity the Diamond and Pearl Clans revere.', new QuestLineCompletedRequirement('The Frenzied Nobles of Hisui'), GameConstants.BulletinBoards.Hisui);
+        const hisuiSinnohQuestLine = new QuestLine('The Origin of Sinnoh', 'Put a stop to the frenzy of Sinnoh, the deity the Diamond and Pearl Clans revere.', new QuestLineCompletedRequirement('The Frenzied Nobles of Hisui'), GameConstants.BulletinBoards.Hisui);
 
         App.game.quests.questLines().push(hisuiSinnohQuestLine);
     }
 
     public static createHisuiVoloQuestLine() {
-        const hisuiVoloQuestLine = new QuestLine('Volo\'s Dream', 'Help Volo find the remaining Sacred Plates.', new QuestLineCompletedRequirement('The power of Sinnoh'), GameConstants.BulletinBoards.Hisui);
+        const hisuiVoloQuestLine = new QuestLine('Volo\'s Dream', 'Help Volo find the remaining Sacred Plates.', new QuestLineCompletedRequirement('The Origin of Sinnoh'), GameConstants.BulletinBoards.Hisui);
 
         App.game.quests.questLines().push(hisuiVoloQuestLine);
     }
