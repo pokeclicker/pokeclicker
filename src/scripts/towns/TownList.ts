@@ -3798,7 +3798,15 @@ TownList['Distortion World'] = new DungeonTown(
     'Distortion World',
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Sinnoh,
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Spear Pillar'))]
+    [
+        new OneFromManyRequirement([
+            new MultiRequirement([
+                new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Spear Pillar')),
+                new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Distortion World'), GameConstants.AchievementOption.less),
+            ]),
+            new TemporaryBattleRequirement('Zero'),
+        ]),
+    ]
 );
 TownList['Victory Road Sinnoh'] = new DungeonTown(
     'Victory Road Sinnoh',
