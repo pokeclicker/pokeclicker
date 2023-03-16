@@ -484,7 +484,7 @@ class AchievementHandler {
         addGymAchievements(GameConstants.RegionGyms[GameConstants.Region.final + 1], GameConstants.ExtraAchievementCategories.magikarpJump, 'Magikarp Jump');
 
 
-        // load filters, filter the list & calculate number of tabs
+        // load filters
         this.load();
 
         // subscribe to filters so that when the player changes a filter it automatically refilters the list
