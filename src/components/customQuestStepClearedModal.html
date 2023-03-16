@@ -6,14 +6,14 @@ aria-labelledby="customQuestStepClearedModalLabel" aria-hidden="true">
        <div class="modal-header">
            <div style="width: 100%;">
             <img src="" onerror="this.src='assets/images/trainers/Mysterious Trainer.png'"
-                data-bind="attr:{ src: CustomQuest.questObservable().getNpcImageName()}">
+                data-bind="attr:{ src: CustomQuest.questObservable().getNpcImage()}">
             <h5 class="modal-title" id="customQuestStepClearedModalLabel"
                 data-bind="text: CustomQuest.questObservable().getNpcDisplayName()">Modal title</h5>
 
            </div>
         </div>
         <div class="modal-body">
-            <p data-bind="html: CustomQuest.questObservable()?.getClearedMessage()"></p>
+            <p data-bind="html: TextMerger.mergeText(CustomQuest.questObservable()?.getClearedMessage())"></p>
 
         </div>
         <div class="modal-footer">
