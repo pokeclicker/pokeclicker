@@ -20,6 +20,9 @@ import MegaStoneItem from './MegaStoneItem';
 import Vitamin from './Vitamin';
 import EggItem from './EggItem';
 import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
+import MultiRequirement from '../requirements/MultiRequirement';
+import TemporaryBattleRequirement from '../requirements/TemporaryBattleRequirement';
+import ObtainedPokemonRequirement from '../requirements/ObtainedPokemonRequirement';
 
 // eslint-disable-next-line import/prefer-default-export
 export const ItemList: { [name: string]: Item } = {};
@@ -87,9 +90,9 @@ ItemList.Kangaskhanite    = new MegaStoneItem('Kangaskhan', 'Kangaskhanite', 100
 ItemList.Heracronite      = new MegaStoneItem('Heracross', 'Heracronite', 10000);
 ItemList.Garchompite      = new MegaStoneItem('Garchomp', 'Garchompite', 10000);
 ItemList.Lopunnite        = new MegaStoneItem('Lopunny', 'Lopunnite', 10000);
-ItemList.Sceptilite       = new MegaStoneItem('Sceptile', 'Sceptilite', 10000);
-ItemList.Blazikenite      = new MegaStoneItem('Blaziken', 'Blazikenite', 10000);
-ItemList.Swampertite      = new MegaStoneItem('Swampert', 'Swampertite', 10000);
+ItemList.Sceptilite       = new MegaStoneItem('Sceptile', 'Sceptilite', 10000, Currency.questPoint, { visible: new MultiRequirement([new TemporaryBattleRequirement('Hoenn Stone Salesman'), new ObtainedPokemonRequirement('Sceptile')]) }, 'Sceptilite', 'A Mega Stone for Sceptile.');
+ItemList.Blazikenite      = new MegaStoneItem('Blaziken', 'Blazikenite', 10000, Currency.questPoint, { visible: new MultiRequirement([new TemporaryBattleRequirement('Hoenn Stone Salesman'), new ObtainedPokemonRequirement('Blaziken')]) }, 'Blazikenite', 'A Mega Stone for Blaziken.');
+ItemList.Swampertite      = new MegaStoneItem('Swampert', 'Swampertite', 10000, Currency.questPoint, { visible: new MultiRequirement([new TemporaryBattleRequirement('Hoenn Stone Salesman'), new ObtainedPokemonRequirement('Swampert')]) }, 'Swampertite', 'A Mega Stone for Swampert.');
 
 // Eggs
 ItemList.Fire_egg = new EggItem(EggItemType.Fire_egg, 1000, undefined, 'Fire Egg');

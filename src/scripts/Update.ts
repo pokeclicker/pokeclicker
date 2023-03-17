@@ -2013,6 +2013,9 @@ class Update implements Saveable {
 
             //Joey
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 31);
+
+            //Delta PArt 2
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 138);
         },
     };
 

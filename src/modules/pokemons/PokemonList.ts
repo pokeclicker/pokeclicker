@@ -9026,7 +9026,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 239,
         'catchRate': 45,
-        // 'evolutions': [MegaEvolution('Sceptile', 'Mega Sceptile')],
+        'evolutions': [MegaEvolution('Sceptile', 'Mega Sceptile')],
         'base': {
             'hitpoints': 70,
             'attack': 85,
@@ -9110,7 +9110,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 239,
         'catchRate': 45,
-        // 'evolutions': [MegaEvolution('Blaziken', 'Mega Blaziken')],
+        'evolutions': [MegaEvolution('Blaziken', 'Mega Blaziken')],
         'base': {
             'hitpoints': 80,
             'attack': 120,
@@ -9194,7 +9194,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 241,
         'catchRate': 45,
-        // 'evolutions': [MegaEvolution('Swampert', 'Mega Swampert')],
+        'evolutions': [MegaEvolution('Swampert', 'Mega Swampert')],
         'base': {
             'hitpoints': 100,
             'attack': 110,
