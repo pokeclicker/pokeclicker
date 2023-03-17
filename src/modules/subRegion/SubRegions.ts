@@ -42,6 +42,10 @@ export default class SubRegions {
         return this.list[region].find((s) => s.id === subregionID);
     }
 
+    public static isSubRegionUnlocked(region: Region, subRegion: number): boolean {
+        return this.getSubRegionById(region, subRegion).unlocked();
+    }
+
     public static openModal() {
         $('#SubregionModal').modal('show');
     }
