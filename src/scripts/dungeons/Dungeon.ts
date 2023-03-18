@@ -9407,7 +9407,7 @@ dungeonList['Firescourge Shrine'] = new Dungeon('Firescourge Shrine',
 
 // May be split up into two areas (Area Zero: Heights & Area Zero: Lower (Needs better name)).
 // Will likely have Dudunsparce (Three-Segment) be obtained here unless a fun evo method is thought up (I don't think it should be as simple as just a level evo)
-//To have some of the regular Paradox mons be exclusive to one area, I am likely going to have Slither Wing/Iron Moth and Sandy Shocks/Iron Thorns be exclusive to Area Zero (pretty sure they actually are, anyway), and Flutter Mane/Iron Jugulis be exclusive to Area Zero: Depths (since they are only in a small area (the Hidden Cave))
+//To have some of the regular Paradox mons be exclusive to one area, I am likely going to have Slither Wing/Iron Moth and Sandy Shocks/Iron Thorns be exclusive to Area Zero (pretty sure they actually are, anyway), and Great Tusk/Iron Treads and Flutter Mane/Iron Jugulis be exclusive to Area Zero: Depths
 dungeonList['Area Zero'] = new Dungeon('Area Zero',
     ['Venomoth', 'Meditite', 'Medicham', 'Braviary', 'Corviknight', 'Floette (White)', 'Raichu', 'Jumpluff', 'Girafarig', 'Volcarona', 'Frosmoth', 'Farigiraf', 'Swablu', 'Altaria', 'Flamigo', 'Phanpy', 'Donphan', 'Talonflame', 'Lycanroc (Midday)', 'Lycanroc (Midnight)', 'Garganacl', 'Masquerain', 'Tadbulb', 'Bellibolt', 'Pawniard', 'Bisharp', 'Numel', 'Camerupt', 'Sneasel', 'Weavile', 'Scream Tail', 'Iron Bundle', 'Brute Bonnet', 'Iron Hands', 'Flutter Mane', 'Iron Jugulis', 'Slither Wing', 'Iron Moth', 'Sandy Shocks', 'Iron Thorns'],
     {
