@@ -2015,20 +2015,20 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 31);
 
             //Updates Sorting
-            if (settingsData.hatcherySort > 4) {
+            if (settingsData.hatcherySort > 5) {
                 settingsData.hatcherySort++;
             }
-            if (settingsData.partySort > 4) {
+            if (settingsData.partySort > 5) {
                 settingsData.partySort++;
             }
-            if (settingsData.vitaminSort > 4) {
+            if (settingsData.vitaminSort > 5) {
                 settingsData.vitaminSort++;
             }
-            if (settingsData.heldItemSort > 4) {
+            if (settingsData.heldItemSort > 5) {
                 settingsData.heldItemSort++;
             }
             saveData.breeding.hatcheryHelpers?.forEach(helper => {
-                if (helper.sortOption > 4) {
+                if (helper.sortOption > 5) {
                     helper.sortOption++;
                 }
             });
