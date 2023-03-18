@@ -7239,7 +7239,7 @@ TownList['Zero Lab'] = new Town(
     GameConstants.PaldeaSubRegions.Paldea,
     [GymList['AI Sada'], GymList['AI Turo'], TemporaryBattleList['Paradise Protection Protocol']],
     {
-        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Area Zero'))],
+        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Area Zero: Depths'))],
     }
 );
 
@@ -7284,11 +7284,18 @@ TownList['Area Zero'] = new DungeonTown(
     'Area Zero',
     GameConstants.Region.paldea,
     GameConstants.PaldeaSubRegions.Paldea,
-    [new MultiRequirement([
+    /*[new MultiRequirement([
         new QuestLineCompletedRequirement('Path of Legends'),
         new QuestLineCompletedRequirement('Victory Road'),
         new QuestLineCompletedRequirement('Starfall Street'),
-    ])]
+    ])]*/
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Inlet Grotto'))]
+);
+TownList['Area Zero: Depths'] = new DungeonTown(
+    'Area Zero: Depths',
+    GameConstants.Region.paldea,
+    GameConstants.PaldeaSubRegions.Paldea,
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Area Zero'))]
 );
 
 // Used to check if next region can be reached, for example for professor NPC
