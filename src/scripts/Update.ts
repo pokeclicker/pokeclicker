@@ -1952,7 +1952,7 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 45);
         },
 
-        '0.10.10': ({ playerData, saveData }) => {
+        '0.10.10': ({ playerData, saveData, settingsData }) => {
             //Bill's Grandpa
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 12);
 
@@ -2013,6 +2013,26 @@ class Update implements Saveable {
 
             //Joey
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 31);
+
+            //Updates Sorting
+            if (settingsData.hatcherySort > 4) {
+                settingsData.hatcherySort++;
+            }
+            if (settingsData.partySort > 4) {
+                settingsData.partySort++;
+            }
+            if (settingsData.vitaminSort > 4) {
+                settingsData.vitaminSort++;
+            }
+            if (settingsData.heldItemSort > 4) {
+                settingsData.heldItemSort++;
+            }
+            saveData.breeding.hatcheryHelpers?.forEach(helper => {
+                if (helper.sortOption > 4) {
+                    helper.sortOption++;
+                }
+            });
+
         },
     };
 
