@@ -9405,10 +9405,11 @@ dungeonList['Firescourge Shrine'] = new Dungeon('Firescourge Shrine',
     [new DungeonBossPokemon('Chi-Yu', 161099869, 60)],
     2200000, 1);
 
-// May be split up into two areas (Area Zero & Area Zero Depths). All other encounters will be added when this is decided.
-// Will likely have Dudunsparce (Three-Segment) be obtained here unless a fun evo method is thought up (Don't want it to be as simple as just a level evo)
+// May be split up into two areas (Area Zero: Heights & Area Zero: Lower (Needs better name)).
+// Will likely have Dudunsparce (Three-Segment) be obtained here unless a fun evo method is thought up (I don't think it should be as simple as just a level evo)
+//To have some of the regular Paradox mons be exclusive to one area, I am likely going to have Slither Wing/Iron Moth and Sandy Shocks/Iron Thorns be exclusive to Area Zero (pretty sure they actually are, anyway), and Flutter Mane/Iron Jugulis be exclusive to Area Zero: Depths (since they are only in a small area (the Hidden Cave))
 dungeonList['Area Zero'] = new Dungeon('Area Zero',
-    ['Glimmet', 'Great Tusk', 'Scream Tail', 'Brute Bonnet', 'Flutter Mane', 'Slither Wing', 'Sandy Shocks', 'Iron Treads', 'Iron Bundle', 'Iron Hands', 'Iron Jugulis', 'Iron Moth', 'Iron Thorns'],
+    ['Venomoth', 'Meditite', 'Medicham', 'Braviary', 'Corviknight', 'Floette (White)', 'Raichu', 'Jumpluff', 'Girafarig', 'Volcarona', 'Frosmoth', 'Farigiraf', 'Swablu', 'Altaria', 'Flamigo', 'Phanpy', 'Donphan', 'Talonflame', 'Lycanroc (Midday)', 'Lycanroc (Midnight)', 'Garganacl', 'Masquerain', 'Tadbulb', 'Bellibolt', 'Pawniard', 'Bisharp', 'Numel', 'Camerupt', 'Sneasel', 'Weavile', 'Scream Tail', 'Iron Bundle', 'Brute Bonnet', 'Iron Hands', 'Flutter Mane', 'Iron Jugulis', 'Slither Wing', 'Iron Moth', 'Sandy Shocks', 'Iron Thorns'],
     {
         common: [
             {loot: 'Lucky_egg'},
@@ -9417,9 +9418,23 @@ dungeonList['Area Zero'] = new Dungeon('Area Zero',
     },
     33915762,
     [
-        new DungeonBossPokemon('Glimmora', 161099869, 30, { weight: 3 }),
+        new DungeonBossPokemon('Glimmora', 161099869, 30, { weight: 4 }),
         new DungeonBossPokemon('Roaring Moon', 161099869, 30, {hide: true, weight: 2, requirement: new TemporaryBattleRequirement('Paradise Protection Protocol')}),
         new DungeonBossPokemon('Iron Valiant', 161099869, 30, {hide: true, weight: 2, requirement: new TemporaryBattleRequirement('Paradise Protection Protocol')}),
+    ],
+    2200000, 1);
+
+dungeonList['Area Zero: Depths'] = new Dungeon('Area Zero: Depths',
+    ['Glimmet', 'Dunsparce', 'Gible', 'Gabite', 'Sableye', 'Garganacl', 'Greavard', 'Houndstone', 'Dugtrio', 'Zweilous', 'Dreepy', 'Drakloak', 'Espathra', 'Dudunsparce (Two-Segment)', 'Great Tusk', 'Iron Treads', 'Scream Tail', 'Iron Bundle', 'Flutter Mane', 'Iron Jugulis', 'Brute Bonnet', 'Iron Hands', /*Slither Wing and Iron Moth are only found in Grass. I have never seen Grass, nor these Pokémon, in the depths, so they may not actually spawn here*/'Slither Wing', 'Iron Moth', /*Sandy Shocks have the same situation as Slither Wing and Iron Moth, except in Rocky environment*/'Sandy Shocks', 'Iron Thorns'],
+    {
+        common: [
+            {loot: 'Lucky_egg'},
+            {loot: 'Lucky_incense'},
+        ],
+    },
+    33915762,
+    [
+        new DungeonBossPokemon('Glimmora', 161099869, 30, { weight: 5 }),
         new DungeonBossPokemon('Koraidon', 161099869, 30, {hide: true, requirement: new TemporaryBattleRequirement('Paradise Protection Protocol')}),
         new DungeonBossPokemon('Miraidon', 161099869, 30, {hide: true, requirement: new TemporaryBattleRequirement('Paradise Protection Protocol')}),
     ],

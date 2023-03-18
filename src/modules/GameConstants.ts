@@ -1412,6 +1412,7 @@ export const PaldeaDungeons = [
     'Groundblight Shrine',
     'Firescourge Shrine',
     'Area Zero',
+    'Area Zero: Depths',
 ];
 
 export const RegionDungeons = [
