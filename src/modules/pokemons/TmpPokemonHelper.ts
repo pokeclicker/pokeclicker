@@ -10,7 +10,8 @@ import {
     incrementPokemonStatistics,
     typeIdToString,
     typeStringToId,
-    canPokemonDealDamage
+    canPokemonDealDamage,
+    pokemonHasType,
 } from './PokemonHelper';
 
 // Tmp class for scripts/pokemons/PokemonHelper to extend
@@ -28,4 +29,5 @@ export default class TmpPokemonHelper {
     static incrementPokemonStatistics = incrementPokemonStatistics;
     static displayName = displayName;
     static canPokemonDealDamage = canPokemonDealDamage;
+    static pokemonHasType = pokemonHasType;
 }

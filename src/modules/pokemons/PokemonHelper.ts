@@ -200,17 +200,32 @@ export function incrementPokemonStatistics(pokemonId: number, statistic: Pokemon
     }
 }
 
-// Check if Pokemon contains the monotype challenge selected type
+/**
+ * Check if Pokemon has a type
+ * @param pokemonID 
+ * @param type 
+ * @returns {boolean} true if Pokemon has the type
+ */
+export function pokemonHasType(pokemonID, type) {
+    const pokemon = this.getPokemonById(pokemonID);
+    if (pokemon.type1 !== type && pokemon.type2 !== type) {
+        return false;
+    }
+    return true;
+}
+
+/**
+ * Check if Pokemon can deal damage
+ * @param pokemonID 
+ * @returns {boolean} true if Pokemon can deal damage
+ */
 export function canPokemonDealDamage(pokemonID) {
     if (player.region === Region.alola && player.subregion === AlolaSubRegions.MagikarpJump) {
         return Math.floor(pokemonID) === 129;
     }
     if (App.game.challenges.listSpecial.monotype.active()) {
         const monotypeSelectedType = App.game.challenges.listSpecial.monotype.pokemonType();
-        const pokemon = this.getPokemonById(pokemonID);
-        if (pokemon.type1 !== monotypeSelectedType && pokemon.type2 !== monotypeSelectedType) {
-            return false;
-        }
+        return this.pokemonHasType(pokemonID, monotypeSelectedType);
     }
 
     return true;
