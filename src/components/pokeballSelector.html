@@ -33,6 +33,22 @@
                 </tr>
             </thead>
         </table>
+        <!-- ko if: App.game.challenges.listSpecial.monotype.active() -->
+        <div class="row w-100 m-0 align-items-center border-top">
+            <div class="col-md-9 col-6">
+                <small data-bind="text: `Catch only ${PokemonType[App.game.challenges.listSpecial.monotype.pokemonType()]}-type Pokémon`">Catch only X-type Pokemon</small>
+            </div>
+            <div class="col-md-3 col-6">
+                <label class="form-check-label toggler-wrapper style-1 float-right">
+                    <input class="form-check-input" type="checkbox" id="pokeball-catch-monotype"
+                            value="false" data-bind="checked: App.game.pokeballs.catchMonotype">
+                    <div class="toggler-slider">
+                        <div class="toggler-knob"></div>
+                    </div>
+                </label>
+            </div>
+        </div>
+        <!-- /ko -->
     </div>
 
     <script type="text/html" id="selectedPokeballDisplayTemplate">

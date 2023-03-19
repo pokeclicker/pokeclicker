@@ -23,6 +23,8 @@ class Pokeballs implements Feature {
     public selectedSelection: KnockoutObservable<KnockoutObservable<GameConstants.Pokeball>>;
     public selectedTitle: KnockoutObservable<string>;
 
+    public catchMonotype: KnockoutObservable<boolean>;
+
     constructor() {
         this.pokeballs = [
             new Pokeball(GameConstants.Pokeball.Pokeball, () => 0, 1250, 'A standard Poké Ball', undefined, 25),
@@ -114,6 +116,8 @@ class Pokeballs implements Feature {
         this._notCaughtShinySelection = ko.observable(this.defaults.notCaughtShinySelection);
         this.selectedTitle = ko.observable('');
         this.selectedSelection = ko.observable(this._alreadyCaughtSelection);
+
+        this.catchMonotype = ko.observable(false);
     }
 
     initialize(): void {
@@ -148,10 +152,16 @@ class Pokeballs implements Feature {
      * @returns {GameConstants.Pokeball} pokéball to use.
      */
     public calculatePokeballToUse(id: number, isShiny: boolean): GameConstants.Pokeball {
+        const pokemon = PokemonHelper.getPokemonById(id);
+        if (App.game.challenges.listSpecial.monotype.active() && this.catchMonotype()) {
+            if (!PokemonHelper.pokemonHasType(pokemon.id, App.game.challenges.listSpecial.monotype.pokemonType())) {
+                return GameConstants.Pokeball.None;
+            }
+        }
         const alreadyCaught = App.game.party.alreadyCaughtPokemon(id);
         const alreadyCaughtShiny = App.game.party.alreadyCaughtPokemon(id, true);
         const contagious = (App.game.party.getPokemon(id)?.pokerus == GameConstants.Pokerus.Contagious);
-        const pokemon = PokemonHelper.getPokemonById(id);
+        
         let pref: GameConstants.Pokeball;
 
         // just check against alreadyCaughtShiny as this returns false when you don't have the pokemon yet.
@@ -251,6 +261,8 @@ class Pokeballs implements Feature {
         this.alreadyCaughtSelection = json.alreadyCaughtSelection ?? this.defaults.alreadyCaughtSelection;
         this.alreadyCaughtContagiousSelection = json.alreadyCaughtContagiousSelection ?? this.defaults.alreadyCaughtContagiousSelection;
         this.alreadyCaughtShinySelection = json.alreadyCaughtShinySelection ?? this.defaults.alreadyCaughtShinySelection;
+
+        this.catchMonotype(json.catchMonotype ?? false);
     }
 
     toJSON(): Record<string, any> {
@@ -261,6 +273,7 @@ class Pokeballs implements Feature {
             'alreadyCaughtSelection': this.alreadyCaughtSelection,
             'alreadyCaughtContagiousSelection': this.alreadyCaughtContagiousSelection,
             'alreadyCaughtShinySelection': this.alreadyCaughtShinySelection,
+            'catchMonotype': this.catchMonotype(),
         };
     }
 
