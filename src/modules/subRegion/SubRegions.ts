@@ -18,6 +18,7 @@ import QuestLineStepCompletedRequirement from '../requirements/QuestLineStepComp
 import * as GameConstants from '../GameConstants';
 import SubRegion from './SubRegion';
 import QuestLineStartedRequirement from '../requirements/QuestLineStartedRequirement';
+import DevelopmentRequirement from '../requirements/DevelopmentRequirement';
 
 export default class SubRegions {
     public static list: Record<number, SubRegion[]> = {};
@@ -41,6 +42,10 @@ export default class SubRegions {
         return this.list[region].find((s) => s.id === subregionID);
     }
 
+    public static isSubRegionUnlocked(region: Region, subRegion: number): boolean {
+        return this.getSubRegionById(region, subRegion).unlocked();
+    }
+
     public static openModal() {
         $('#SubregionModal').modal('show');
     }
@@ -53,6 +58,7 @@ SubRegions.addSubRegion(Region.kanto, new SubRegion('Sevii Islands 4567', KantoS
 SubRegions.addSubRegion(Region.johto, new SubRegion('Johto', JohtoSubRegions.Johto));
 
 SubRegions.addSubRegion(Region.hoenn, new SubRegion('Hoenn', HoennSubRegions.Hoenn));
+SubRegions.addSubRegion(Region.hoenn, new SubRegion('Orre', HoennSubRegions.Orre, new DevelopmentRequirement(), 'Outskirt Stand', undefined));/* new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), 'Outskirt Stand')); */
 
 SubRegions.addSubRegion(Region.sinnoh, new SubRegion('Sinnoh', SinnohSubRegions.Sinnoh));
 
