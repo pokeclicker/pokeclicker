@@ -15,6 +15,9 @@ import RedeemableCode from './RedeemableCode';
 import GameHelper from '../GameHelper';
 import Amount from '../wallet/Amount';
 import Item from '../items/Item';
+import PokemonType from '../enums/PokemonType';
+import ChallengeRequirement from '../requirements/ChallengeRequirement';
+import TmpPokemonHelper from '../pokemons/TmpPokemonHelper';
 
 export default class RedeemableCodes implements Saveable {
     defaults: Record<string, any>;
@@ -175,6 +178,42 @@ export default class RedeemableCodes implements Saveable {
 
                 return refund;
             }),
+            new RedeemableCode('monotype-release-pokemon', -400093820, false, async () => {
+                const pokemonType = App.game.challenges.listSpecial.monotype.pokemonType();
+                const releasePokemon = await Notifier.confirm({
+                    title: 'Release Pokémon',
+                    message: `<div class='text-center'><img height="70px" src="assets/images/Pikachu (Dejected).png" title="Your Pokémon will miss you :(">
+                        <small><i>Your non-${PokemonType[pokemonType]}-type Pokémon will have a happy life in a faraway island. You will never see your Pokémon again.</i></small>
+                        
+                        The released Pokémon will lose <b>EVERYTHING</b> (stats, vitamins, held items, etc.)
+
+                        Keep in mind some Pokémon are only obtainable once, so you won't be able to obtain certain Pokémon again.
+
+                        This won't release any Pokémon in the Hatchery.
+
+                        <b>Use the code under your own risk.</b>
+
+                        Are you sure?
+                    </div>`,
+                });
+
+                if (releasePokemon) {
+                    const nonTypeArray = App.game.party.caughtPokemon.filter((p) => !TmpPokemonHelper.pokemonHasType(p.id, pokemonType));
+                    nonTypeArray.forEach((p) => {
+                        App.game.party.removePokemonByName(p.name);
+                    });
+
+                    // Notify that the code was activated successfully
+                    Notifier.notify({
+                        title: 'Code activated!',
+                        message: `All non-${PokemonType[pokemonType]}-type Pokémon were released!`,
+                        type: NotificationConstants.NotificationOption.success,
+                        timeout: 1e4,
+                    });
+                }
+
+                return releasePokemon;
+            }, new MultiRequirement([new ChallengeRequirement('requireCompletePokedex', false), new ChallengeRequirement('monotype')]), true),
         ];
     }
 
