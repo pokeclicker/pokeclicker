@@ -604,6 +604,30 @@ TemporaryBattleList.Red = new TemporaryBattle(
     }
 );
 
+TemporaryBattleList['Youngster Joey'] = new TemporaryBattle(
+    'Youngster Joey',
+    [new GymPokemon('Rattata', 548919101828, 100)],
+    'How?!? My Rattata is in the top percentage of all Rattata!',
+    [new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion)],
+    undefined,
+    {
+        displayName: 'Youngster Joey',
+        returnTown: 'Cherrygrove City',
+        imageName: '../trainers/Youngster',
+        rewardFunction: () => {
+            const reward = 64;
+            App.game.wallet.gainMoney(reward, true);
+            Notifier.notify({
+                message: TextMerger.mergeText(`Youngster Joey was defeated!
+$playername$ got <img src="./assets/images/currency/money.svg" height="24px"/> ${reward.toLocaleString('en-US')} for winning!`),
+                type: NotificationConstants.NotificationOption.danger,
+                timeout: 3.6e7,
+                title: 'You defeated Youngster Joey!',
+            });
+        },
+    }
+);
+
 //Hoenn Temporary Battles
 TemporaryBattleList['May 1'] = new TemporaryBattle(
     'May 1',
