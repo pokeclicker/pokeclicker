@@ -29,15 +29,15 @@ aria-labelledby="pokedexModalLabel">
                     <div class="collapse" id="pokedex-filter-container" style="margin-bottom: 0.5rem;">
                         <div class="container-fluid py-3">
                             <div class="form-row text-left">
-                                <!--Name-->
-                                <div class="form-group col-md-6 col-6">
-                                    <label>Name</label>
-                                    <input id="nameFilter" class="form-control" placeholder="Bulbasaur" value=""
-                                        oninput="PokedexFilters.name.value(new RegExp(`(${/^\/.+\/$/.test(this.value) ? this.value.slice(1, -1) : GameHelper.escapeStringRegex(this.value)})`, 'i'))">
+                                <!--Name or ID-->
+                                <div class="form-group col-md-3 col-3">
+                                    <label>Name or ID</label>
+                                    <input id="nameFilter" class="form-control" placeholder="Bulbasaur or 1" value=""
+                                        oninput="PokedexHelper.formatSearch(this.value)">
                                 </div>
 
                                 <!--Region-->
-                                <div class="form-group col-md-6 col-6">
+                                <div class="form-group col-md-3 col-3">
                                     <label>Region</label>
                                     <select id="pokedex-filter-region" class="custom-select" style="margin-right: 8px"
                                             data-bind="options: PokedexFilters.region.options,
@@ -48,7 +48,7 @@ aria-labelledby="pokedexModalLabel">
                                 </div>
 
                                 <!--Types-->
-                                <div class="form-group col-md-6 col-6">
+                                <div class="form-group col-md-3 col-3">
                                     <label>Type</label>
                                     <select id="pokedex-filter-type1" class="custom-select" style="margin-right: 8px"
                                             data-bind="options: PokedexFilters.type1.options,
@@ -57,7 +57,7 @@ aria-labelledby="pokedexModalLabel">
                                                        value: PokedexFilters.type1.value">
                                     </select>
                                 </div>
-                                <div class="form-group col-md-6 col-6">
+                                <div class="form-group col-md-3 col-3">
                                     <label>Type</label>
                                     <select id="pokedex-filter-type2" class="custom-select"
                                             data-bind="options: PokedexFilters.type2.options,
@@ -67,7 +67,7 @@ aria-labelledby="pokedexModalLabel">
                                     </select>
                                 </div>
 
-                                <div class="form-group col-md-6 col-6">
+                                <div class="form-group col-md-3 col-3">
                                     <label for="pokedex-filter-shiny-caught">Caught Status</label>
                                     <select id="pokedex-filter-shiny-caught" autocomplete="off" class="custom-select"
                                         data-bind="options: PokedexFilters.caughtShiny.options,
@@ -77,7 +77,7 @@ aria-labelledby="pokedexModalLabel">
                                     </select>
                                 </div>
 
-                                <div class="form-group col-md-6 col-6">
+                                <div class="form-group col-md-3 col-3">
                                     <label for="pokedex-filter-pokerus-status">Pokerus Status</label>
                                     <select id="pokedex-filter-pokerus-status" autocomplete="off" class="custom-select"
                                         data-bind="options: PokedexFilters.statusPokerus.options,
@@ -87,8 +87,21 @@ aria-labelledby="pokedexModalLabel">
                                     </select>
                                 </div>
 
+                                <div class="form-group col-md-3 col-3">
+                                    <label for="pokedex-filter-obtain-method">Obtain Method</label>
+                                    <select id="pokedex-filter-obtain-method" autocomplete="off" class="custom-select"
+                                        data-bind="options: PokedexFilters.obtainMethod.options,
+                                                   optionsValue: 'value',
+                                                   optionsText: 'text',
+                                                   value: PokedexFilters.obtainMethod.value">
+                                    </select>
+                                </div>
+
+                                <!--Empty-->
+                                <div class="form-group col-md-3 col-3"></div>
+
                                 <!--Rare Hold Item-->
-                                <div class="col-md-4 col-12">
+                                <div class="col-md-3 col-12">
                                     <div class="form-group my-2">
                                         <span>Rare Hold Item</span>
                                         <label class="form-check-label toggler-wrapper style-1 float-right">
@@ -102,7 +115,7 @@ aria-labelledby="pokedexModalLabel">
                                 </div>
 
                                 <!--Hide shiny images-->
-                                <div class="col-md-4 col-12 checkbox-border-x">
+                                <div class="col-md-3 col-12 checkbox-border-left">
                                     <div class="form-group my-2">
                                         <span>Hide shiny image</span>
                                         <label class="form-check-label toggler-wrapper style-1 float-right">
@@ -116,12 +129,26 @@ aria-labelledby="pokedexModalLabel">
                                 </div>
 
                                 <!--Hide alternate forms-->
-                                <div class="col-md-4 col-12">
+                                <div class="col-md-3 col-12 checkbox-border-left">
                                     <div class="form-group my-2">
-                                        <span>Hide alternate forms</span>
+                                        <span style="font-size: 13px;">Hide alternate forms</span>
                                         <label class="form-check-label toggler-wrapper style-1 float-right">
                                             <input class="form-check-input" type="checkbox" id="pokedex-filter-hide-alternate"
                                                 data-bind="checked: PokedexFilters.hideAlternate.value">
+                                            <div class="toggler-slider">
+                                                <div class="toggler-knob"></div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!--Filter Mega Stone-->
+                                <div class="col-md-3 col-12 checkbox-border-left">
+                                    <div class="form-group my-2">
+                                        <span>Filter MegaStone</span>
+                                        <label class="form-check-label toggler-wrapper style-1 float-right">
+                                            <input class="form-check-input" type="checkbox" id="pokedex-filter-mega-stone"
+                                                data-bind="checked: PokedexFilters.megaStone.value">
                                             <div class="toggler-slider">
                                                 <div class="toggler-knob"></div>
                                             </div>

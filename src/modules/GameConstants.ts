@@ -1879,3 +1879,25 @@ export const DayCycleStartHours: Record<DayCyclePart, number> = {
     [DayCyclePart.Dusk]: 17,
     [DayCyclePart.Night]: 18,
 };
+
+// Pokemon Location
+export enum PokemonLocationType {
+    Route,
+    Roaming,
+    Dungeon,
+    DungeonBoss,
+    DungeonChest,
+    Evolution,
+    Egg,
+    Baby,
+    Shop,
+    Fossil,
+    Safari,
+    BattleFrontier,
+    Wandering,
+    Discord,
+    QuestLineReward,
+    TempBattleReward,
+    GymReward,
+    DungeonReward,
+}

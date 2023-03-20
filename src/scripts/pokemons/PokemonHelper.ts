@@ -1,26 +1,5 @@
 ///<reference path="../GameConstants.d.ts"/>
 
-enum PokemonLocationType {
-    Route,
-    Roaming,
-    Dungeon,
-    DungeonBoss,
-    DungeonChest,
-    Evolution,
-    Egg,
-    Baby,
-    Shop,
-    Fossil,
-    Safari,
-    BattleFrontier,
-    Wandering,
-    Discord,
-    QuestLineReward,
-    TempBattleReward,
-    GymReward,
-    DungeonReward
-}
-
 class PokemonHelper extends TmpPokemonHelper {
     /*
     PRETTY MUCH ONLY USED BY THE BOT BELOW
@@ -125,7 +104,7 @@ class PokemonHelper extends TmpPokemonHelper {
         Object.entries(App.game.breeding.hatchList).forEach(([eggType, eggArr]) => {
             eggArr.forEach((pokemonArr, region) => {
                 // If we only want to check up to a maximum region
-                if (maxRegion != GameConstants.Region.none && region > maxRegion)  {
+                if (maxRegion != GameConstants.Region.none && region > maxRegion) {
                     return false;
                 }
                 if (pokemonArr.includes(pokemonName)) {
@@ -328,121 +307,72 @@ class PokemonHelper extends TmpPokemonHelper {
         return questLines;
     }
 
-    public static getPokemonLocations = (pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none) => {
+    public static getPokemonLocations = (pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none, locationTypes: Array<number> = []) => {
         const encounterTypes = {};
+        const encounterFunction = {};
         // Routes
-        const regionRoutes = PokemonHelper.getPokemonRegionRoutes(pokemonName, maxRegion);
-        if (Object.keys(regionRoutes).length) {
-            encounterTypes[PokemonLocationType.Route] = regionRoutes;
-        }
+        encounterFunction[GameConstants.PokemonLocationType.Route] = () => PokemonHelper.getPokemonRegionRoutes(pokemonName, maxRegion);
         // Dungeons
-        const dungeons = PokemonHelper.getPokemonDungeons(pokemonName, maxRegion);
-        if (dungeons.length) {
-            encounterTypes[PokemonLocationType.Dungeon] = dungeons;
-        }
+        encounterFunction[GameConstants.PokemonLocationType.Dungeon] = () => PokemonHelper.getPokemonDungeons(pokemonName, maxRegion);
         // Dungeon Boss
-        const bossDungeons = PokemonHelper.getPokemonBossDungeons(pokemonName, maxRegion);
-        if (bossDungeons.length) {
-            encounterTypes[PokemonLocationType.DungeonBoss] = bossDungeons;
-        }
+        encounterFunction[GameConstants.PokemonLocationType.DungeonBoss] = () => PokemonHelper.getPokemonBossDungeons(pokemonName, maxRegion);
         // Dungeon Chest
-        const chestDungeons = PokemonHelper.getPokemonChestDungeons(pokemonName, maxRegion);
-        if (chestDungeons.length) {
-            encounterTypes[PokemonLocationType.DungeonChest] = chestDungeons;
-        }
+        encounterFunction[GameConstants.PokemonLocationType.DungeonChest] = () => PokemonHelper.getPokemonChestDungeons(pokemonName, maxRegion);
         // Eggs
-        const eggs = PokemonHelper.getPokemonEggs(pokemonName, maxRegion);
-        if (eggs.length) {
-            encounterTypes[PokemonLocationType.Egg] = eggs;
-        }
+        encounterFunction[GameConstants.PokemonLocationType.Egg] = () => PokemonHelper.getPokemonEggs(pokemonName, maxRegion);
         // Shops
-        const shops = PokemonHelper.getPokemonShops(pokemonName, maxRegion);
-        if (shops.length) {
-            encounterTypes[PokemonLocationType.Shop] = shops;
-        }
+        encounterFunction[GameConstants.PokemonLocationType.Shop] = () => PokemonHelper.getPokemonShops(pokemonName, maxRegion);
         // Roaming
-        const roaming = PokemonHelper.getPokemonRoamingRegions(pokemonName, maxRegion);
-        if (roaming.length) {
-            encounterTypes[PokemonLocationType.Roaming] = roaming;
-        }
+        encounterFunction[GameConstants.PokemonLocationType.Roaming] = () => PokemonHelper.getPokemonRoamingRegions(pokemonName, maxRegion);
         // Baby
-        const parents = PokemonHelper.getPokemonParents(pokemonName, maxRegion);
-        if (parents.length) {
-            encounterTypes[PokemonLocationType.Baby] = parents;
-        }
+        encounterFunction[GameConstants.PokemonLocationType.Baby] = () => PokemonHelper.getPokemonParents(pokemonName, maxRegion);
         // Fossil
-        const fossils = PokemonHelper.getPokemonFossils(pokemonName);
-        if (fossils.length) {
-            encounterTypes[PokemonLocationType.Fossil] = fossils;
-        }
+        encounterFunction[GameConstants.PokemonLocationType.Fossil] = () => PokemonHelper.getPokemonFossils(pokemonName);
         // Safari
-        const safariChance = PokemonHelper.getPokemonSafariChance(pokemonName);
-        if (Object.keys(safariChance).length) {
-            encounterTypes[PokemonLocationType.Safari] = safariChance;
-        }
+        encounterFunction[GameConstants.PokemonLocationType.Safari] = () => PokemonHelper.getPokemonSafariChance(pokemonName);
         // Evolution
-        const evolutions = PokemonHelper.getPokemonPrevolution(pokemonName, maxRegion);
-        if (evolutions.length) {
-            encounterTypes[PokemonLocationType.Evolution] = evolutions;
-        }
-
+        encounterFunction[GameConstants.PokemonLocationType.Evolution] = () => PokemonHelper.getPokemonPrevolution(pokemonName, maxRegion);
         // Battle Frontier
-        const battleFrontier = PokemonHelper.getPokemonBattleFrontier(pokemonName);
-        if (battleFrontier.length) {
-            encounterTypes[PokemonLocationType.BattleFrontier] = battleFrontier;
-        }
-
+        encounterFunction[GameConstants.PokemonLocationType.BattleFrontier] = () => PokemonHelper.getPokemonBattleFrontier(pokemonName);
         // Wandering
-        const wandering = PokemonHelper.getPokemonWandering(pokemonName);
-        if (wandering.length) {
-            encounterTypes[PokemonLocationType.Wandering] = wandering;
-        }
-
+        encounterFunction[GameConstants.PokemonLocationType.Wandering] = () => PokemonHelper.getPokemonWandering(pokemonName);
         // Discord
-        const discord = PokemonHelper.getPokemonDiscord(pokemonName);
-        if (discord.length) {
-            encounterTypes[PokemonLocationType.Discord] = discord;
-        }
-
+        encounterFunction[GameConstants.PokemonLocationType.Discord] = () => PokemonHelper.getPokemonDiscord(pokemonName);
         // Temp battle reward
-        const tempBattle = PokemonHelper.getPokemonTempBattleReward(pokemonName);
-        if (tempBattle.length) {
-            encounterTypes[PokemonLocationType.TempBattleReward] = tempBattle;
-        }
-
+        encounterFunction[GameConstants.PokemonLocationType.TempBattleReward] = () => PokemonHelper.getPokemonTempBattleReward(pokemonName);
         // Gym reward
-        const gymReward = PokemonHelper.getPokemonGymReward(pokemonName);
-        if (gymReward.length) {
-            encounterTypes[PokemonLocationType.GymReward] = gymReward;
-        }
-
+        encounterFunction[GameConstants.PokemonLocationType.GymReward] = () => PokemonHelper.getPokemonGymReward(pokemonName);
         // Dungeon reward
-        const dungeonReward = PokemonHelper.getPokemonDungeonReward(pokemonName);
-        if (dungeonReward.length) {
-            encounterTypes[PokemonLocationType.DungeonReward] = dungeonReward;
-        }
-
+        encounterFunction[GameConstants.PokemonLocationType.DungeonReward] = () => PokemonHelper.getPokemonDungeonReward(pokemonName);
         // Quest Line reward
-        const questLineReward = PokemonHelper.getPokemonQuestLineReward(pokemonName);
-        if (questLineReward.length) {
-            encounterTypes[PokemonLocationType.QuestLineReward] = questLineReward;
-        }
-
-        // Return the list of items
+        encounterFunction[GameConstants.PokemonLocationType.QuestLineReward] = () => PokemonHelper.getPokemonQuestLineReward(pokemonName);
+        // Filter and return the list of items
+        Object.keys(encounterFunction).forEach((type) => {
+            if (locationTypes.length == 0 || locationTypes.includes(+type)) {
+                const result = encounterFunction[type]();
+                if (Object.keys(result).length > 0) {
+                    encounterTypes[type] = result;
+                }
+            }
+        });
         return encounterTypes;
     }
 
     public static hasEvableLocations = (pokemonName: PokemonNameType) => {
-        const locations = PokemonHelper.getPokemonLocations(pokemonName);
-        return locations[PokemonLocationType.Dungeon] ||
-            locations[PokemonLocationType.DungeonBoss] ||
-            locations[PokemonLocationType.DungeonChest] ||
-            locations[PokemonLocationType.Evolution] ||
-            locations[PokemonLocationType.Roaming] ||
-            locations[PokemonLocationType.Route] ||
-            locations[PokemonLocationType.Safari] ||
-            locations[PokemonLocationType.Shop] ||
-            locations[PokemonLocationType.Wandering];
-
+        return Object.keys(PokemonHelper.getPokemonLocations(
+            pokemonName,
+            GameConstants.Region.none,
+            [
+                GameConstants.PokemonLocationType.Dungeon,
+                GameConstants.PokemonLocationType.DungeonBoss,
+                GameConstants.PokemonLocationType.DungeonChest,
+                GameConstants.PokemonLocationType.Evolution,
+                GameConstants.PokemonLocationType.Roaming,
+                GameConstants.PokemonLocationType.Route,
+                GameConstants.PokemonLocationType.Safari,
+                GameConstants.PokemonLocationType.Shop,
+                GameConstants.PokemonLocationType.Wandering,
+            ]
+        )).length > 0;
     };
 }

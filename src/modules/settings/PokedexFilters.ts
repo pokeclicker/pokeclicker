@@ -1,5 +1,5 @@
 import PokemonType from '../enums/PokemonType';
-import { Pokerus, Region } from '../GameConstants';
+import { Pokerus, Region, PokemonLocationType } from '../GameConstants';
 import SettingOption from './SettingOption';
 import Settings from './Settings';
 import FilterOption from './FilterOption';
@@ -9,6 +9,10 @@ const PokedexFilters: Record<string, FilterOption> = {
     name: new FilterOption<RegExp>(
         'Search',
         ko.observable(new RegExp('', 'i')),
+    ),
+    id: new FilterOption<number>(
+        'SearchID',
+        ko.observable(-1),
     ),
     region: new FilterOption<Region>(
         'Region',
@@ -66,6 +70,17 @@ const PokedexFilters: Record<string, FilterOption> = {
             ...Settings.enumToNumberSettingOptionArray(Pokerus, (t) => t !== 'Infected'),
         ],
     ),
+    obtainMethod: new FilterOption<PokemonLocationType>(
+        'Obtain Method',
+        ko.observable(null),
+        'pokedexObtainMethodFilter',
+        [
+            new SettingOption('All', null),
+            ...Settings.selectOptionsToSettingOptions(
+                GameHelper.enumSelectOption(PokemonLocationType),
+            ),
+        ],
+    ),
     heldItem: new FilterOption<boolean>(
         'Rare Held Item',
         ko.observable(false),
@@ -75,6 +90,11 @@ const PokedexFilters: Record<string, FilterOption> = {
         'Hide alternate forms',
         ko.observable(false),
         'pokedexHideAltFilter',
+    ),
+    megaStone: new FilterOption<boolean>(
+        'Filter MegaStone',
+        ko.observable(false),
+        'pokedexFilterMegaStone',
     ),
 };
 

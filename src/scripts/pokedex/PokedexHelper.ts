@@ -41,6 +41,16 @@ class PokedexHelper {
         return PokedexHelper.cachedFilteredList;
     })
 
+    public static formatSearch(value: string) {
+        if (/[^\d]/.test(value)) {
+            PokedexFilters.name.value(new RegExp(`(${/^\/.+\/$/.test(value) ? value.slice(1, -1) : GameHelper.escapeStringRegex(value)})`, 'i'));
+            PokedexFilters.id.value(-1);
+        } else {
+            PokedexFilters.id.value(value != '' ? +value : -1);
+            PokedexFilters.name.value(new RegExp('', 'i'));
+        }
+    }
+
     public static getList(): typeof pokemonList {
         // Peek a computed to avoid subscribing to 1000s of statistics
         const highestDex = ko.pureComputed(() => {
@@ -78,9 +88,16 @@ class PokedexHelper {
                 return false;
             }
 
-            // Check if the name contains the string
-            const name = PokemonHelper.displayName(pokemon.name)();
-            if (!PokedexFilters.name.value().test(name)) {
+            // Check if the englishName or displayName contains the string
+            const displayName = PokemonHelper.displayName(pokemon.name)();
+            const filterName = PokedexFilters.name.value();
+            if (!filterName.test(displayName) && !filterName.test(pokemon.name)) {
+                return false;
+            }
+
+            // Check ID
+            const filterID = PokedexFilters.id.value();
+            if (filterID > -1 && filterID != Math.floor(pokemon.id)) {
                 return false;
             }
 
@@ -144,6 +161,21 @@ class PokedexHelper {
                 return false;
             }
 
+            // Only pokemon obtained by cetrian method
+            const obtainMethod = PokedexFilters.obtainMethod.value();
+            if (obtainMethod != null) {
+                const hightestRegion = player.highestRegion();
+                const locationRegion = (region == null) ? hightestRegion : Math.min(region, hightestRegion);
+                if (Object.keys(PokemonHelper.getPokemonLocations(pokemon.name, locationRegion, [obtainMethod])).length == 0) {
+                    return false;
+                }
+            }
+
+            //Only pokemon with mega stone
+            if (PokedexFilters.megaStone.value() && !App.game.party.getPokemon(pokemon.id)?.megaStone) {
+                return false;
+            }
+
             return true;
         }) as typeof pokemonList;
     }
@@ -152,7 +184,7 @@ class PokedexHelper {
     public static getGenderRatioData(pokemon) {
         const genderType = pokemon.gender.type;
         const genderRatio = pokemon.gender.femaleRatio;
-        const genderObject = {'male': 0, 'female': 0};
+        const genderObject = { 'male': 0, 'female': 0 };
         // console.log(pokemon);
         genderObject.male = 100 - (100 * genderRatio);
         genderObject.female = 100 * genderRatio;
