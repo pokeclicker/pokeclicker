@@ -57,6 +57,7 @@ export type LazyLoadOptions = {
     triggerMargin: string; // must be px or %
     threshold: number;
     pageSize: number;
+    reset?: Observable; // Whenever this changes, the page will reset to the first page
 };
 
 const defaultOptions: LazyLoadOptions = {
@@ -85,6 +86,8 @@ export default function lazyLoad(element: HTMLElement, list: ObservableArray<unk
         rootMargin: opts.triggerMargin,
         threshold: opts.threshold,
     });
+
+    opts.reset?.subscribe(() => page(1));
 
     const lazyList = ko.pureComputed(() => {
         const lastElem = page() * opts.pageSize;

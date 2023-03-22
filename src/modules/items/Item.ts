@@ -2,10 +2,11 @@
 
 import { Observable } from 'knockout';
 import {
-    Currency, ITEM_PRICE_MULTIPLIER, Pokeball, humanifyString, camelCaseToString,
+    Currency, ITEM_PRICE_MULTIPLIER, Pokeball, humanifyString, camelCaseToString, pluralizeString,
 } from '../GameConstants';
 import NotificationConstants from '../notifications/NotificationConstants';
 import Notifier from '../notifications/Notifier';
+import Requirement from '../requirements/Requirement';
 import Amount from '../wallet/Amount';
 import { MultiplierDecreaser, ShopOptions } from './types';
 
@@ -23,6 +24,7 @@ export default class Item {
     _description?: string;
     _displayName: string;
     imageDirectory?: string;
+    visible?: Requirement;
 
     constructor(
         public name: string,
@@ -34,6 +36,7 @@ export default class Item {
             multiplier = ITEM_PRICE_MULTIPLIER,
             multiplierDecrease = true,
             multiplierDecreaser = MultiplierDecreaser.Battle,
+            visible = undefined,
         } : ShopOptions = {},
         displayName?: string,
         description?: string,
@@ -47,6 +50,7 @@ export default class Item {
         this.multiplier = Math.max(1, multiplier || ITEM_PRICE_MULTIPLIER);
         this.multiplierDecrease = multiplierDecrease;
         this.multiplierDecreaser = multiplierDecreaser || MultiplierDecreaser.Battle;
+        this.visible = visible;
 
         this._displayName = displayName ?? name;
         this._description = description;
@@ -80,9 +84,11 @@ export default class Item {
         }
 
         let n = amt;
+        const displayName = pluralizeString(humanifyString(this.displayName), n);
+
         if (n > this.maxAmount) {
             Notifier.notify({
-                message: `You can only buy ${this.maxAmount.toLocaleString('en-US')} &times; ${humanifyString(this.displayName)}!`,
+                message: `You can only buy ${this.maxAmount.toLocaleString('en-US')} &times; ${displayName}!`,
                 type: NotificationConstants.NotificationOption.danger,
             });
             n = this.maxAmount;
@@ -90,19 +96,17 @@ export default class Item {
 
         if (!this.isAvailable()) {
             Notifier.notify({
-                message: `${humanifyString(this.displayName)} is sold out!`,
+                message: `${displayName} is sold out!`,
                 type: NotificationConstants.NotificationOption.danger,
             });
             return;
         }
 
-        const multiple = n > 1 ? 's' : '';
-
         if (App.game.wallet.loseAmount(new Amount(this.totalPrice(n), this.currency))) {
             this.gain(n);
             this.increasePriceMultiplier(n);
             Notifier.notify({
-                message: `You bought ${n.toLocaleString('en-US')} × <img src="${this.image}" height="24px"/> ${humanifyString(this.displayName)}${multiple}.`,
+                message: `You bought ${n.toLocaleString('en-US')} × <img src="${this.image}" height="24px"/> ${displayName}.`,
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.Items.item_bought,
             });
@@ -117,7 +121,7 @@ export default class Item {
                     break;
             }
             Notifier.notify({
-                message: `You don't have enough ${curr} to buy ${n.toLocaleString('en-US')} ${humanifyString(this.displayName) + multiple}!`,
+                message: `You don't have enough ${curr} to buy ${n.toLocaleString('en-US')} ${displayName}!`,
                 type: NotificationConstants.NotificationOption.danger,
             });
         }
@@ -143,9 +147,14 @@ export default class Item {
         return true;
     }
 
-    // eslint-disable-next-line class-methods-use-this
+    // By default the item should be visible
+    isVisible(): boolean {
+        return this.visible?.isCompleted() ?? true;
+    }
+
+    // By default it is available if the item is currently visible
     isAvailable(): boolean {
-        return true;
+        return this.isVisible();
     }
 
     // eslint-disable-next-line class-methods-use-this

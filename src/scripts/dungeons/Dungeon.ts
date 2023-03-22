@@ -212,6 +212,21 @@ class Dungeon {
             } else { /* We don't include Trainers */ }
         });
 
+        this.getCaughtMimics().forEach((mimic) => encounterInfo.push(mimic));
+
+        return encounterInfo;
+    }
+
+    public getCaughtMimics(): PokemonNameType[] {
+        const encounterInfo = [];
+        Object.entries(this.lootTable).forEach(([tier, itemList]) => {
+            itemList.forEach((loot, i) => {
+                const mimic = pokemonMap[loot.loot].name;
+                if (mimic != 'MissingNo.' && App.game.party.alreadyCaughtPokemonByName(mimic)) {
+                    encounterInfo.push(mimic);
+                }
+            });
+        });
         return encounterInfo;
     }
 
@@ -221,7 +236,7 @@ class Dungeon {
     }
 
     public getRandomLoot(tier: LootTier, onlyDebuffable = false): Loot {
-        const lootTable = this.lootTable[tier].filter((loot) => ((!loot.requirement || loot.requirement.isCompleted()) && (!ItemList[loot.loot] || ItemList[loot.loot].isAvailable())) && !(onlyDebuffable && loot.ignoreDebuff));
+        const lootTable = this.lootTable[tier].filter((loot) => ((!loot.requirement || loot.requirement.isCompleted()) && (!ItemList[loot.loot] || (ItemList[loot.loot].isAvailable() && !ItemList[loot.loot].isSoldOut()))) && !(onlyDebuffable && loot.ignoreDebuff));
         return Rand.fromWeightedArray(lootTable, lootTable.map((loot) => loot.weight ?? 1));
     }
 
@@ -300,7 +315,7 @@ class Dungeon {
      * Gets all possible Pokemon in the dungeon
      */
     get allPokemon(): PokemonNameType[] {
-        return this.pokemonList.concat(this.bossPokemonList);
+        return this.pokemonList.concat(this.bossPokemonList, this.getCaughtMimics());
     }
 
 
@@ -310,30 +325,41 @@ class Dungeon {
      */
     get normalEncounterList(): EncounterInfo[] {
         const encounterInfo = [];
+        let pokemonName: PokemonNameType;
+        let hideEncounter = false;
+
+        const getEncounterInfo = function(pokemonName, mimic) {
+            const encounter = {
+                image: `assets/images/${(App.game.party.alreadyCaughtPokemonByName(pokemonName, true) ? 'shiny' : '')}pokemon/${pokemonMap[pokemonName].id}.png`,
+                shiny:  App.game.party.alreadyCaughtPokemonByName(pokemonName, true),
+                hide: hideEncounter,
+                uncaught: !App.game.party.alreadyCaughtPokemonByName(pokemonName),
+                lock: false,
+                lockMessage: '',
+                mimic: mimic,
+            };
+            return encounter;
+        };
 
         // Handling minions
         this.enemyList.forEach((enemy) => {
             // Handling Pokemon
             if (typeof enemy === 'string' || enemy.hasOwnProperty('pokemon')) {
-                let pokemonName: PokemonNameType;
-                let hideEncounter = false;
                 if (enemy.hasOwnProperty('pokemon')) {
                     pokemonName = (<DetailedPokemon>enemy).pokemon;
                     hideEncounter = (<DetailedPokemon>enemy).options?.hide ? ((<DetailedPokemon>enemy).options?.requirement ? !(<DetailedPokemon>enemy).options?.requirement.isCompleted() : (<DetailedPokemon>enemy).options?.hide) : false;
                 } else {
                     pokemonName = <PokemonNameType>enemy;
                 }
-                const encounter = {
-                    image: `assets/images/${(App.game.party.alreadyCaughtPokemonByName(pokemonName, true) ? 'shiny' : '')}pokemon/${pokemonMap[pokemonName].id}.png`,
-                    shiny:  App.game.party.alreadyCaughtPokemonByName(pokemonName, true),
-                    hide: hideEncounter,
-                    uncaught: !App.game.party.alreadyCaughtPokemonByName(pokemonName),
-                    lock: false,
-                    lockMessage: '',
-                };
-                encounterInfo.push(encounter);
+                encounterInfo.push(getEncounterInfo(pokemonName, false));
             // Handling Trainers
             } else { /* We don't display minion Trainers */ }
+        });
+
+        // Handling Mimics
+        this.getCaughtMimics().forEach(enemy => {
+            pokemonName = <PokemonNameType>enemy;
+            encounterInfo.push(getEncounterInfo(pokemonName, true));
         });
 
         return encounterInfo;
@@ -920,7 +946,7 @@ dungeonList['Silph Co.'] = new Dungeon('Silph Co.',
                 new GymPokemon('Magnemite', 2629, 26),
                 new GymPokemon('Koffing', 2629, 26),
                 new GymPokemon('Weezing', 2629, 26),
-            ], { weight: 1 }, 'Beau', '(male)'),
+            ], { weight: 1, requirement: new QuestLineStepCompletedRequirement('Team Rocket', 2)}, 'Beau', '(male)'),
         new DungeonTrainer('Team Rocket Grunt',
             [new GymPokemon('Arbok', 10515, 33)],
             { weight: 1 }, undefined, '(male)'),
@@ -1040,13 +1066,20 @@ dungeonList['Silph Co.'] = new Dungeon('Silph Co.',
     },
     10515,
     [
+        new DungeonTrainer('Scientist',
+            [
+                new GymPokemon('Magneton', 10322, 26),
+                new GymPokemon('Magnemite', 10322, 26),
+                new GymPokemon('Koffing', 10322, 26),
+                new GymPokemon('Weezing', 12915, 26),
+            ], { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('Team Rocket', 2, GameConstants.AchievementOption.less)}, 'Beau', '(male)'),
         new DungeonTrainer('Team Rocket Boss',
             [
                 new GymPokemon('Nidorino', 12144, 37),
                 new GymPokemon('Rhyhorn', 12144, 37),
                 new GymPokemon('Kangaskhan', 12144, 35),
                 new GymPokemon('Nidoqueen', 16144, 41),
-            ], { weight: 1 }, 'Giovanni', '(giovanni)'),
+            ], { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('Team Rocket', 2)}, 'Giovanni', '(giovanni)'),
     ],
     875, 7);
 
@@ -2608,13 +2641,23 @@ dungeonList['Granite Cave'] = new Dungeon('Granite Cave',
         ],
         legendary: [
             {loot: 'MediumRestore'},
-            {loot: 'Star Piece'},
+            {loot: 'Star Piece', ignoreDebuff : true},
             {loot: 'Hard Stone'},
         ],
         mythic: [{loot: 'Heart Scale'}],
     },
     410000,
-    [new DungeonBossPokemon('Mawile', 960000, 20), new DungeonBossPokemon('Nosepass', 660000, 20)],
+    [
+        new DungeonBossPokemon('Mawile', 960000, 20),
+        new DungeonBossPokemon('Nosepass', 660000, 20),
+        new DungeonTrainer('Lorekeeper',
+            [
+                new GymPokemon('Tyrantrum', 4073950, 57),
+                new GymPokemon('Altaria', 4073950, 57),
+                new GymPokemon('Salamence', 4073950, 57),
+                new GymPokemon('Whismur', 4073950, 57),
+            ], { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('The Delta Episode', 9)}, 'Zinnia'),
+    ],
     16000, 101);
 
 dungeonList['Fiery Path'] = new Dungeon('Fiery Path',
@@ -2674,6 +2717,13 @@ dungeonList['Meteor Falls'] = new Dungeon('Meteor Falls',
                 new GymPokemon('Altaria', 640000, 37),
                 new GymPokemon('Altaria', 640000, 37),
             ], { weight: 1 }, 'Nicolas'),
+        new DungeonTrainer('Draconid Elder',
+            [
+                new GymPokemon('Dragonite', 4073950, 57),
+                new GymPokemon('Flygon', 4073950, 57),
+                new GymPokemon('Haxorus', 4073950, 57),
+                new GymPokemon('Garchomp', 4073950, 57),
+            ], { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('The Delta Episode', 16)}, 'Draconid Elder'),
     ],
     18000, 101);
 
@@ -2712,7 +2762,13 @@ dungeonList['Mt. Chimney Crater'] = new Dungeon('Mt. Chimney Crater',
                 new GymPokemon('Mightyena', 450000, 24),
                 new GymPokemon('Zubat', 450000, 24),
                 new GymPokemon('Camerupt', 470000, 25),
-            ], { weight: 1 }, 'Maxie'),
+            ], { weight: 1, hide: true, requirement: new QuestLineCompletedRequirement('The Delta Episode', GameConstants.AchievementOption.less)}, 'Maxie'),
+        new DungeonTrainer('Magma Leader',
+            [
+                new GymPokemon('Mightyena', 4500000, 54),
+                new GymPokemon('Zubat', 4500000, 54),
+                new GymPokemon('Mega Camerupt', 4700000, 55),
+            ], { weight: 1, hide: true, requirement: new QuestLineCompletedRequirement('The Delta Episode')}, 'Maxie'),
     ],
     20000, 101);
 
@@ -3020,7 +3076,14 @@ dungeonList['Magma Hideout'] = new Dungeon('Magma Hideout',
                 new GymPokemon('Crobat', 640000, 38),
                 new GymPokemon('Camerupt', 650000, 39),
             ],
-            { weight: 1 }, 'Maxie'),
+            { weight: 1, hide: true, requirement: new QuestLineCompletedRequirement('The Delta Episode', GameConstants.AchievementOption.less)}, 'Maxie'),
+        new DungeonTrainer('Magma Leader',
+            [
+                new GymPokemon('Mightyena', 6300000, 37),
+                new GymPokemon('Crobat', 6400000, 38),
+                new GymPokemon('Mega Camerupt', 6500000, 39),
+            ],
+            { weight: 1, hide: true, requirement: new QuestLineCompletedRequirement('The Delta Episode')}, 'Maxie'),
     ],
     29000, 101);
 
@@ -3099,15 +3162,18 @@ dungeonList['Shoal Cave'] = new Dungeon('Shoal Cave',
             {loot: 'Icicle Plate', weight: 2},
             {loot: 'Star Piece'},
             {loot: 'Revive'},
+            {loot: 'Never_Melt_Ice'},
         ],
         mythic: [
             {loot: 'Max Revive'},
             {loot: 'Heart Scale'},
-            {loot: 'Never_Melt_Ice'},
         ],
     },
     490000,
-    [new DungeonBossPokemon('Snorunt', 1900000, 20)],
+    [
+        new DungeonBossPokemon('Snorunt', 1900000, 20),
+        new DungeonBossPokemon('Glalie', 61614300, 60, {hide: true, requirement: new TemporaryBattleRequirement('Icy Boulder')}),
+    ],
     30000, 101);
 
 dungeonList['Cave of Origin'] = new Dungeon('Cave of Origin',
@@ -3127,8 +3193,8 @@ dungeonList['Cave of Origin'] = new Dungeon('Cave of Origin',
     590000,
     [
         new DungeonBossPokemon('Exploud', 2000000, 50),
-        new DungeonBossPokemon('Kyogre', 4700000, 100, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)}),
-        new DungeonBossPokemon('Groudon', 4700000, 100, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)}),
+        new DungeonBossPokemon('Kyogre', 4700000, 100, {requirement: new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), new QuestLineStepCompletedRequirement('The Weather Trio', 5)])}),
+        new DungeonBossPokemon('Groudon', 4700000, 100, {requirement: new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), new QuestLineStepCompletedRequirement('The Weather Trio', 5)])}),
     ],
     34000, 101);
 
@@ -3184,7 +3250,14 @@ dungeonList['Seafloor Cavern'] = new Dungeon('Seafloor Cavern',
                 new GymPokemon('Crobat', 700000, 41),
                 new GymPokemon('Sharpedo', 900000, 43),
             ],
-            { weight: 1 }, 'Archie'),
+            { weight: 1, hide: true, requirement: new QuestLineCompletedRequirement('The Delta Episode', GameConstants.AchievementOption.less)}, 'Archie'),
+        new DungeonTrainer('Aqua Leader',
+            [
+                new GymPokemon('Mightyena', 7000000, 61),
+                new GymPokemon('Crobat', 7000000, 61),
+                new GymPokemon('Mega Sharpedo', 9000000, 63),
+            ],
+            { weight: 1, hide: true, requirement: new QuestLineCompletedRequirement('The Delta Episode')}, 'Archie'),
     ],
     32000, 101);
 
@@ -3210,7 +3283,7 @@ dungeonList['Sky Pillar'] = new Dungeon('Sky Pillar',
     720000,
     [
         new DungeonBossPokemon('Dusclops', 3200000, 20),
-        new DungeonBossPokemon('Rayquaza', 5824002, 100),
+        new DungeonBossPokemon('Rayquaza', 5824002, 100, {requirement: new QuestLineStepCompletedRequirement('The Weather Trio', 5)}),
     ],
     34000, 101);
 
@@ -3363,6 +3436,36 @@ dungeonList['Victory Road Hoenn'] = new Dungeon('Victory Road Hoenn',
     ],
     37000, 101);
 
+dungeonList['Near Space'] = new Dungeon('Near Space',
+    ['Solrock','Lunatone', 'Elgyem', 'Beheeyem'],
+    {
+        common: [
+            {loot: 'xClick'},
+            {loot: 'Token_collector'},
+        ],
+        rare: [
+            {loot: 'Pink Shard'},
+            {loot: 'Ochre Shard'},
+        ],
+        epic: [
+            {loot: 'Duskball'},
+            {loot: 'Star Piece'},
+        ],
+        legendary: [
+            {loot: 'Stone Plate', weight: 2},
+            {loot: 'Mind Plate', weight: 2},
+            {loot: 'Iron Plate', weight: 2},
+            {loot: 'Moon Stone'},
+        ],
+    },
+    9000000,
+    [
+        new DungeonBossPokemon('Deoxys', 95743340, 80),
+        new DungeonBossPokemon('Deoxys (Attack)', 95743340, 80),
+        new DungeonBossPokemon('Deoxys (Defense)', 95743340, 80),
+        new DungeonBossPokemon('Deoxys (Speed)', 95743340, 80),
+    ],
+    700000, 131);
 // Sinnoh
 
 dungeonList['Oreburgh Gate'] = new Dungeon('Oreburgh Gate',
@@ -3504,8 +3607,18 @@ dungeonList['Eterna Forest'] = new Dungeon('Eterna Forest',
     },
     812000,
     [
-        new DungeonBossPokemon('Beautifly', 3950000, 30),
-        new DungeonBossPokemon('Dustox', 3950000, 30),
+        new DungeonBossPokemon('Beautifly', 3950000, 30, {hide: true, requirement: new OneFromManyRequirement([
+            new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 7, GameConstants.AchievementOption.less),
+            new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 8),
+        ])}),
+        new DungeonBossPokemon('Dustox', 3950000, 30, {hide: true, requirement: new OneFromManyRequirement([
+            new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 7, GameConstants.AchievementOption.less),
+            new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 8),
+        ])}),
+        new DungeonBossPokemon('Parasect', 4500000, 30, {hide: true, requirement: new MultiRequirement([
+            new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 8, GameConstants.AchievementOption.less),
+            new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 7),
+        ])}),
     ],
     48000, 205);
 
@@ -7018,6 +7131,7 @@ dungeonList['Pokémon Village'] = new Dungeon('Pokémon Village',
             {loot: 'LargeRestore'},
             {loot: 'Pink_Bow'},
         ],
+        mythic: [{loot: 'Quick_Powder'}],
     },
     9003000,
     [
@@ -8433,6 +8547,7 @@ dungeonList['Poni Meadow'] = new Dungeon('Poni Meadow',
         epic: [
             {loot: 'Splash Plate'},
             {loot: 'Pixie Plate'},
+            {loot: 'Power_Herb'},
         ],
     },
     16659968,
@@ -8909,7 +9024,7 @@ dungeonList['Tower of Darkness'] = new Dungeon('Tower of Darkness',
     ],
     2000000, 40,
     () => {
-        App.game.party.gainPokemonById(892);
+        App.game.party.gainPokemonByName('Urshifu (Single Strike)');
         Notifier.notify({
             message: 'Kubfu evolved into Urshifu (Single Strike)!',
             type: NotificationConstants.NotificationOption.success,
@@ -8950,7 +9065,7 @@ dungeonList['Tower of Waters'] = new Dungeon('Tower of Waters',
     ],
     2000000, 36,
     () => {
-        App.game.party.gainPokemonById(892.1);
+        App.game.party.gainPokemonByName('Urshifu (Rapid Strike)');
         Notifier.notify({
             message: 'Kubfu evolved into Urshifu (Rapid Strike)!',
             type: NotificationConstants.NotificationOption.success,

@@ -277,15 +277,8 @@
     <!--Route 125-->
     <%- include('templates/mapRoute',
         { route: 125, region: 2
-        , width: 10, height: 3
+        , width: 10, height: 2
         , x: 83, y: 10
-        })
-    %>
-    <!--Route 125 extension-->
-    <%- include('templates/mapRoute',
-        { route: 125, region: 2
-        , width: 4, height: 3
-        , x: 83, y: 13
         , noText: true
         })
     %>
@@ -293,23 +286,39 @@
     <%- include('templates/mapRoute',
         { route: 125, region: 2
         , width: 2, height: 3
-        , x: 91, y: 13
+        , x: 83, y: 12
         , noText: true
         })
     %>
     <!--Route 125 extension-->
     <%- include('templates/mapRoute',
         { route: 125, region: 2
-        , width: 5, height: 2.5
-        , x: 83, y: 16
+        , width: 4, height: 2
+        , x: 89, y: 12
         , noText: true
         })
     %>
     <!--Route 125 extension-->
     <%- include('templates/mapRoute',
         { route: 125, region: 2
-        , width: 5, height: 3
-        , x: 88, y: 16
+        , width: 5, height: 3.5
+        , x: 83, y: 15
+        })
+    %>
+    <!--Route 125 extension-->
+    <%- include('templates/mapRoute',
+        { route: 125, region: 2
+        , width: 2, height: 4
+        , x: 88, y: 15
+        , noText: true
+        })
+    %>
+
+    <!--Route 125 extension-->
+    <%- include('templates/mapRoute',
+        { route: 125, region: 2
+        , width: 1, height: 1
+        , x: 89, y: 14
         , noText: true
         })
     %>
@@ -626,6 +635,57 @@
         })
     %>
 
+    <!--Southern Island-->
+    <%- include('templates/mapTown',
+        { name: "Southern Island"
+        , x: 46, y: 52
+        , width: 2, height: 3
+        })
+    %>
+
+    <!--Southern Island extension 1-->
+    <%- include('templates/mapTown',
+        { name: "Southern Island"
+        , x: 47, y: 51
+        , width: 2, height: 1
+        , isExtension: true
+        })
+    %>
+
+    <!--Southern Island extension 2-->
+    <%- include('templates/mapTown',
+        { name: "Southern Island"
+        , x: 48, y: 52
+        , width: 1, height: 2
+        , isExtension: true
+        })
+    %>
+
+    <!--Sea Mauville-->
+    <%- include('templates/mapTown',
+        { name: "Sea Mauville"
+        , x: 23, y: 51
+        , width: 6, height: 4
+        })
+    %>
+
+    <!--Mossdeep Space Center-->
+    <%- include('templates/mapTown',
+        { name: "Mossdeep Space Center"
+        , x: 90, y: 14
+        , width: 9, height: 5
+        })
+    %>
+
+    <!--Mossdeep Space Center extension-->
+    <%- include('templates/mapTown',
+        { name: "Mossdeep Space Center"
+        , x: 92, y: 19
+        , width: 7, height: 3
+        , isExtension: true
+        })
+    %>
+
     <!--Battle Frontier-->
     <%- include('templates/mapTown',
         { name: "Battle Frontier"
@@ -765,7 +825,7 @@
     <!--Shoal Cave-->
     <%- include('templates/mapDungeon',
         { name: "Shoal Cave"
-        , x: 87, y: 13
+        , x: 85, y: 12
         })
     %>
 
@@ -815,7 +875,13 @@
         })
     %>
 
-
+    <!--Near Space-->
+    <%- include('templates/mapDungeon',
+        { name: "Near Space"
+        , x: 93, y: 8
+        , width: 2, height: 6
+        })
+    %>
 
 
     <!-- ------------------ -->
@@ -873,34 +939,64 @@
          , image: "assets/images/map/blimp_pikachu.png"
          })
     %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Fish Shop"
+            , x: 37, y: 29
+            , width: 1, height: 1
+            , databind: "click:function(){MapHelper.moveToTown('Fish Shop')}, attr:{ class: MapHelper.calculateTownCssClass('Fish Shop') }"
+            , visible:  "App.game.statistics.routeKills['hoenn'][118]() >= 10"
+            , image: "assets/images/map/transparent.png"
+            })
+        %>
+
+        <%- include('templates/mapOverlay',
+            { name: "Wind Chime Shop"
+            , x: 42, y: 3
+            , width: 1, height: 1
+            , databind: "click:function(){MapHelper.moveToTown('Wind Chime Shop')}, attr:{ class: MapHelper.calculateTownCssClass('Wind Chime Shop') }"
+            , visible:  "App.game.statistics.routeKills['hoenn'][119]() >= 10"
+            , image: "assets/images/map/transparent.png"
+            })
+        %>
+
      <%- include('templates/mapOverlay',
          { name: "Kecleon"
         , x: 46, y: 3
-         , width: 4, height: 4
-         , databind: "click: () => TemporaryBattleList['Kecleon 1'].protectedOnclick()"
-         , visible:  "TemporaryBattleList['Kecleon 1'] && TemporaryBattleList['Kecleon 1'].isVisible()"
-         , image: "assets/images/map/kecleonoverworld.png"
-         })
+        , width: 4, height: 4
+        , databind: "click: () => TemporaryBattleList['Kecleon 1'].protectedOnclick()"
+        , visible:  "TemporaryBattleList['Kecleon 1'] && TemporaryBattleList['Kecleon 1'].isVisible()"
+        , image: "assets/images/map/kecleonoverworld.png"
+        })
      %>
 
      <%- include('templates/mapOverlay',
          { name: "Kecleon"
         , x: 41, y: 10
-         , width: 4, height: 4
-         , databind: "click: () => TemporaryBattleList['Kecleon 2'].protectedOnclick()"
-         , visible:  "TemporaryBattleList['Kecleon 2'] && TemporaryBattleList['Kecleon 2'].isVisible()"
-         , image: "assets/images/map/kecleoncamooverworld.png"
-         })
+        , width: 4, height: 4
+        , databind: "click: () => TemporaryBattleList['Kecleon 2'].protectedOnclick()"
+        , visible:  "TemporaryBattleList['Kecleon 2'] && TemporaryBattleList['Kecleon 2'].isVisible()"
+        , image: "assets/images/map/kecleoncamooverworld.png"
+        })
      %>
 
      <%- include('templates/mapOverlay',
          { name: "Kecleon"
         , x: 48, y: 8
-         , width: 4, height: 4
-         , databind: "click: () => TemporaryBattleList['Kecleon 3'].protectedOnclick()"
-         , visible:  "TemporaryBattleList['Kecleon 3'] && TemporaryBattleList['Kecleon 3'].isVisible()"
-         , image: "assets/images/map/kecleoncamooverworld.png"
-         })
+        , width: 4, height: 4
+        , databind: "click: () => TemporaryBattleList['Kecleon 3'].protectedOnclick()"
+        , visible:  "TemporaryBattleList['Kecleon 3'] && TemporaryBattleList['Kecleon 3'].isVisible()"
+        , image: "assets/images/map/kecleoncamooverworld.png"
+        })
+     %>
+
+     <%- include('templates/mapOverlay',
+        { name: "A Raging Maelstrom"
+        , x: 59, y: 28
+        , width: 13, height: 13
+        , visible:  "(App.game.quests.getQuestLine('The Weather Trio').curQuest() < 5 && App.game.quests.getQuestLine('The Weather Trio').state() == 1)"
+        , image: "assets/images/map/Maelstrom.png"
+        })
      %>
 
     <%- include('templates/mapOverlay',
@@ -964,6 +1060,16 @@
     %>
 
      <%- include('templates/mapOverlay',
+         { name: "Meta Groudon"
+        , x: 14, y: 12
+         , width: 5, height: 5
+         , databind: "click: () => TemporaryBattleList['Meta Groudon'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Meta Groudon'] && TemporaryBattleList['Meta Groudon'].isVisible()"
+         , image: "assets/images/map/Meta Groudon.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
          { name: "Ash Ketchum"
          , x: 50, y: 10
          , width: 4, height: 4
@@ -972,4 +1078,101 @@
          , image: "assets/images/map/ashketchumoverworld.png"
          })
      %>
+     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.hoenn, 'Orre').id">
+        <image width="1600" height="960" data-bind="attr: {
+            'xlink:href':'assets/images/orre.png?v=$VERSION',
+            href:'assets/images/orre.png?v=$VERSION'
+        }"></image>
+
+        <!-- ----- -->
+        <!-- TOWNS -->
+        <!-- ----- -->
+
+        <!--Outskirt Stand-->
+        <%- include('templates/mapTown',
+            { name: "Outskirt Stand"
+            , x: 89, y: 41
+            , width: 5, height: 3
+            })
+        %>
+
+        <!--Phenac City-->
+        <%- include('templates/mapTown',
+            { name: "Phenac City"
+            , x: 72, y: 39
+            , width: 7, height: 7
+            })
+        %>
+
+        <!--Phenac Stadium-->
+        <%- include('templates/mapTown',
+            { name: "Phenac Stadium"
+            , x: 73, y: 36
+            , width: 5, height: 3
+            })
+        %>
+
+        <!--Pyrite Town-->
+        <%- include('templates/mapTown',
+            { name: "Pyrite Town"
+            , x: 30, y: 45
+            , width: 8, height: 4
+            })
+        %>
+
+        <!--Pyrite Town extension-->
+        <%- include('templates/mapTown',
+            { name: "Pyrite Town"
+            , x: 34, y: 49
+            , width: 4, height: 2
+            , isExtension: true
+            })
+        %>
+
+        <!--Pyrite Town extension-->
+        <%- include('templates/mapTown',
+            { name: "Pyrite Town"
+            , x: 33, y: 51
+            , width: 7, height: 4
+            , isExtension: true
+            })
+        %>
+
+        <!--Pyrite Town extension-->
+        <%- include('templates/mapTown',
+            { name: "Pyrite Town"
+            , x: 34, y: 44
+            , width: 4, height: 1
+            , isExtension: true
+            })
+        %>
+
+        <!--Pyrite Colosseum-->
+        <%- include('templates/mapTown',
+            { name: "Pyrite Colosseum"
+            , x: 34, y: 40
+            , width: 4, height: 4
+            })
+        %>
+
+        <!-- -------- -->
+        <!-- DUNGEONS -->
+        <!-- -------- -->
+
+        <!--Pyrite Bldg-->
+        <%- include('templates/mapDungeon',
+            { name: "Pyrite Bldg"
+            , x: 38, y: 43
+            , width: 5, height: 8
+            })
+        %>
+
+        <!--Pyrite Cave-->
+        <%- include('templates/mapDungeon',
+            { name: "Pyrite Cave"
+            , x: 43, y: 43
+            , width: 4, height: 3
+            })
+        %>
+    </g>
 </g>

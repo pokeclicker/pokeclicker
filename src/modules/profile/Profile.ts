@@ -7,7 +7,7 @@ import Notifier from '../notifications/Notifier';
 import Rand from '../utilities/Rand';
 
 export default class Profile implements Saveable {
-    public static MAX_TRAINER = 120;
+    public static MAX_TRAINER = 122;
     public static MAX_BACKGROUND = 40;
 
     saveKey = 'profile';
@@ -52,6 +52,7 @@ export default class Profile implements Saveable {
         seconds = 0,
         version = '0.0.0',
         challenges = {},
+        id = '',
         key?: string,
     ): Element {
         const template: HTMLTemplateElement = document.querySelector('#trainerCardTemplate');
@@ -106,6 +107,8 @@ export default class Profile implements Saveable {
                 img.dataset.placement = 'top';
                 badgeContainer.appendChild(img);
             });
+        const trainerId: HTMLElement = node.querySelector('.trainer-id');
+        trainerId.innerText = id.length ? `#${id}` : '';
         return container;
     }
 
@@ -125,6 +128,7 @@ export default class Profile implements Saveable {
             throttledTimePlayed(),
             App.game.update.version,
             App.game.challenges.toJSON().list,
+            player.trainerId,
         ));
 
         preview.subscribe((previewElement) => {

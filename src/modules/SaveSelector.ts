@@ -3,6 +3,8 @@ import NotificationConstants from './notifications/NotificationConstants';
 import Notifier from './notifications/Notifier';
 import Profile from './profile/Profile';
 import { SortSaves } from './Sortable';
+import Settings from './settings/index';
+import GameHelper from './GameHelper';
 
 export default class SaveSelector {
     static MAX_SAVES = 9;
@@ -55,6 +57,7 @@ export default class SaveSelector {
         try {
             const rawData = localStorage.getItem(`save${key}`);
             const saveData = JSON.parse(rawData);
+            const playerData = JSON.parse(localStorage.getItem(`player${key}`));
             let username = saveData.profile?.name ?? 'Trainer';
             try {
                 username = decodeURI(saveData.profile?.name ?? 'Trainer');
@@ -74,6 +77,7 @@ export default class SaveSelector {
                 saveData.statistics?.secondsPlayed ?? 0,
                 saveData.update?.version ?? 'Unknown',
                 saveData.challenges?.list ?? {},
+                playerData.trainerId,
                 key,
             );
         } catch (e) {
@@ -104,8 +108,9 @@ export default class SaveSelector {
             // Create a download element
             const element = document.createElement('a');
             element.setAttribute('href', `data:text/plain;charset=utf-8,${encodeURIComponent(btoa(JSON.stringify(data)))}`);
-            const filename = `[v${saveData.update.version}] PokeClickerSave_${key}.txt`;
-            element.setAttribute('download', filename);
+            const filename = settingsData.saveFilename ? decodeURI(settingsData.saveFilename) : Settings.getSetting('saveFilename').defaultValue;
+            const datestr = formatDate(new Date());
+            element.setAttribute('download', GameHelper.saveFileName(filename, { '{date}': datestr, '{version}': saveData.update.version, '{name}': decodeURI(saveData.profile.name) }));
 
             element.style.display = 'none';
             document.body.appendChild(element);

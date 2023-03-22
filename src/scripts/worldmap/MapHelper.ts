@@ -9,6 +9,7 @@ enum areaStatus {
     uncaughtShinyPokemonAndMissingAchievement,
     uncaughtShinyPokemon,
     missingAchievement,
+    missingResistant,
     completed,
 }
 
@@ -102,6 +103,8 @@ class MapHelper {
             cls = areaStatus[areaStatus.uncaughtShinyPokemon];
         } else if (!RouteHelper.isAchievementsComplete(route, region)) {
             cls = areaStatus[areaStatus.missingAchievement];
+        } else if (RouteHelper.minPokerus(RouteHelper.getAvailablePokemonList(route, region, true)) < GameConstants.Pokerus.Resistant) {
+            cls = areaStatus[areaStatus.missingResistant];
         } else {
             cls = areaStatus[areaStatus.completed];
         }
@@ -126,6 +129,10 @@ class MapHelper {
     }
 
     public static calculateTownCssClass(townName: string): string {
+        // We don't want to spoil easter eggs with map colors
+        if (TownList[townName]?.ignoreAreaStatus) {
+            return '';
+        }
         // Check if this location is locked
         if (!MapHelper.accessToTown(townName)) {
             return areaStatus[areaStatus.locked];
@@ -135,7 +142,7 @@ class MapHelper {
         if (dungeonList[townName]) {
             if (!App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(townName)]()) {
                 states.push(areaStatus.unlockedUnfinished);
-            } else  if (DungeonRunner.isThereQuestAtLocation(dungeonList[townName])) {
+            } else if (DungeonRunner.isThereQuestAtLocation(dungeonList[townName])) {
                 states.push(areaStatus.questAtLocation);
             } else if (!DungeonRunner.dungeonCompleted(dungeonList[townName], false)) {
                 states.push(areaStatus.uncaughtPokemon);
@@ -145,6 +152,8 @@ class MapHelper {
                 states.push(areaStatus.uncaughtShinyPokemon);
             } else if (!DungeonRunner.isAchievementsComplete(dungeonList[townName])) {
                 states.push(areaStatus.missingAchievement);
+            } else if (RouteHelper.minPokerus(dungeonList[townName].allAvailablePokemon()) < 3) {
+                states.push(areaStatus.missingResistant);
             }
         }
         const town = TownList[townName];
@@ -180,6 +189,7 @@ class MapHelper {
             Battle.catching(false);
             const town = TownList[townName];
             player.town(town);
+            player._subregion(town.subRegion);
             Battle.enemyPokemon(null);
             //this should happen last, so all the values all set beforehand
             App.game.gameState = GameConstants.GameState.town;
@@ -212,7 +222,7 @@ class MapHelper {
             openModal();
         } else {
             Notifier.notify({
-                message: 'You cannot access this dock yet!\n<i>Progress further to return to previous regions!</i>',
+                message: `You cannot access this dock yet!${player.region > GameConstants.Region.kanto ? '\n<i>Progress further to return to previous regions!</i>' : ''}`,
                 type: NotificationConstants.NotificationOption.warning,
             });
         }
@@ -247,6 +257,11 @@ class MapHelper {
             LogEvent('attack measurement', 'new region',
                 GameConstants.Region[player.highestRegion()],
                 App.game.party.calculatePokemonAttack(undefined, undefined, true, undefined, true, false, WeatherType.Clear));
+            // Update hatchery region filter to include new region if all previous regions selected
+            if (BreedingFilters.region.value() == (2 << player.highestRegion() - 1) - 1) {
+                BreedingFilters.region.value((2 << player.highestRegion()) - 1);
+                Settings.setSettingByName('breedingRegionFilter', BreedingFilters.region.value());
+            }
             $('#pickStarterModal').modal('show');
         }
     }

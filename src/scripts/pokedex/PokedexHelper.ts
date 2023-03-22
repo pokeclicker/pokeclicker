@@ -24,7 +24,7 @@ class PokedexHelper {
     public static pokemonSeen(id: number): KnockoutComputed<boolean> {
         return ko.pureComputed(() => {
             try {
-                return App.game.statistics.pokemonEncountered[id]() > 0 || App.game.statistics.pokemonDefeated[id]() > 0 || App.game.statistics.pokemonCaptured[id]() > 0 || App.game.party.alreadyCaughtPokemon(id);
+                return App.game.statistics.pokemonEncountered[id]() > 0 || App.game.statistics.pokemonDefeated[id]() > 0 || App.game.statistics.pokemonCaptured[id]() > 0 || App.game.party.alreadyCaughtPokemon(id) || App.game.statistics.pokemonSeen[id]() > 0;
             } catch (error) {
                 return false;
             }
@@ -44,10 +44,11 @@ class PokedexHelper {
     public static getList(): typeof pokemonList {
         // Peek a computed to avoid subscribing to 1000s of statistics
         const highestDex = ko.pureComputed(() => {
+            const highestSeen = App.game.statistics.pokemonSeen.highestID;
             const highestEncountered = App.game.statistics.pokemonEncountered.highestID;
             const highestDefeated = App.game.statistics.pokemonDefeated.highestID;
             const highestCaught = App.game.statistics.pokemonCaptured.highestID;
-            return Math.max(highestEncountered, highestDefeated, highestCaught);
+            return Math.max(highestSeen, highestEncountered, highestDefeated, highestCaught);
         }).peek();
 
         return pokemonList.filter((pokemon) => {
@@ -78,8 +79,8 @@ class PokedexHelper {
             }
 
             // Check if the name contains the string
-            const name = PokedexFilters.name.value().trim();
-            if (name && !PokemonHelper.displayName(pokemon.name)().toLowerCase().includes(name.toLowerCase())) {
+            const name = PokemonHelper.displayName(pokemon.name)();
+            if (!PokedexFilters.name.value().test(name)) {
                 return false;
             }
 

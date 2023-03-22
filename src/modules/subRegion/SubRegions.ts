@@ -17,7 +17,8 @@ import ClearDungeonRequirement from '../requirements/ClearDungeonRequirement';
 import QuestLineStepCompletedRequirement from '../requirements/QuestLineStepCompletedRequirement';
 import * as GameConstants from '../GameConstants';
 import SubRegion from './SubRegion';
-import NullRequirement from '../requirements/NullRequirement';
+import QuestLineStartedRequirement from '../requirements/QuestLineStartedRequirement';
+import DevelopmentRequirement from '../requirements/DevelopmentRequirement';
 
 export default class SubRegions {
     public static list: Record<number, SubRegion[]> = {};
@@ -41,6 +42,10 @@ export default class SubRegions {
         return this.list[region].find((s) => s.id === subregionID);
     }
 
+    public static isSubRegionUnlocked(region: Region, subRegion: number): boolean {
+        return this.getSubRegionById(region, subRegion).unlocked();
+    }
+
     public static openModal() {
         $('#SubregionModal').modal('show');
     }
@@ -53,6 +58,7 @@ SubRegions.addSubRegion(Region.kanto, new SubRegion('Sevii Islands 4567', KantoS
 SubRegions.addSubRegion(Region.johto, new SubRegion('Johto', JohtoSubRegions.Johto));
 
 SubRegions.addSubRegion(Region.hoenn, new SubRegion('Hoenn', HoennSubRegions.Hoenn));
+SubRegions.addSubRegion(Region.hoenn, new SubRegion('Orre', HoennSubRegions.Orre, new DevelopmentRequirement(), 'Outskirt Stand', undefined));/* new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), 'Outskirt Stand')); */
 
 SubRegions.addSubRegion(Region.sinnoh, new SubRegion('Sinnoh', SinnohSubRegions.Sinnoh));
 
@@ -64,7 +70,7 @@ SubRegions.addSubRegion(Region.alola, new SubRegion('Melemele Island', AlolaSubR
 SubRegions.addSubRegion(Region.alola, new SubRegion('Akala Island', AlolaSubRegions.AkalaIsland, new GymBadgeRequirement(BadgeEnums.FightiniumZ), 'Heahea City'));
 SubRegions.addSubRegion(Region.alola, new SubRegion('Ula\'ula Island', AlolaSubRegions.UlaulaIsland, new TemporaryBattleRequirement('Ultra Wormhole'), 'Malie City'));
 SubRegions.addSubRegion(Region.alola, new SubRegion('Poni Island', AlolaSubRegions.PoniIsland, new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Aether Foundation')), 'Seafolk Village'));
-SubRegions.addSubRegion(Region.alola, new SubRegion('Magikarp Jump', AlolaSubRegions.MagikarpJump, new NullRequirement(), 'Hoppy Town'));
+SubRegions.addSubRegion(Region.alola, new SubRegion('Magikarp Jump', AlolaSubRegions.MagikarpJump, new QuestLineStartedRequirement('Magikarp Jump'), 'Hoppy Town'));
 
 SubRegions.addSubRegion(Region.galar, new SubRegion('South Galar', GalarSubRegions.SouthGalar, undefined, 'Hulbury'));
 SubRegions.addSubRegion(Region.galar, new SubRegion('North Galar', GalarSubRegions.NorthGalar, new RouteKillRequirement(10, GameConstants.Region.galar, 22), 'Hammerlocke'));

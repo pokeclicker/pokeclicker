@@ -33,11 +33,15 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                     html: true,
                                 }">
                             </knockout>
-                            <button id="breeding-fireall" type="button" class="btn btn-danger" 
-                                data-bind="attr : {
-                                    disabled : !App.game.breeding.hatcheryHelpers.hired().length}, 
-                                    click: function(){App.game.breeding.hatcheryHelpers.hired().forEach(function(h){h.fire();})}" >
-                                    Fire All
+                            <button id="breeding-fireall" type="button" class="btn btn-danger" data-bind="attr : {
+                                disabled : !App.game.breeding.hatcheryHelpers.hired().length},
+                                click: function(){App.game.breeding.hatcheryHelpers.hired().forEach(function(h){h.fire();})},
+                                tooltip: {
+                                    title: App.game.breeding.fireAllButtonTooltip(),
+                                    trigger: 'hover',
+                                    placement:'top',
+                                    html: true,
+                                }">Fire All
                             </button>
                         </div>
                     </div>
@@ -63,7 +67,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                         <div class="form-row text-left">
                                             <div class="form-group col-md-6 col-6">
                                                 <label>Search</label>
-                                                <input autocomplete="off" class="form-control" oninput="BreedingFilters.search.value(new RegExp(`(${this.value})`, 'i'))" placeholder="Search here"/>
+                                                <input autocomplete="off" class="form-control" oninput="BreedingFilters.search.value(new RegExp(`(${/^\/.+\/$/.test(this.value) ? this.value.slice(1, -1) : GameHelper.escapeStringRegex(this.value)})`, 'i'))" placeholder="Search here"/>
                                             </div>
                                             <div class="form-group col-md-6 col-6">
                                                 <label>Regions</label><br/>
@@ -170,7 +174,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                 <label>Sort</label>
                                                 <div class="input-group">
                                                     <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])"
-                                                        data-bind="foreach: $data.options, attr: {name}, selectedOptions: [$data.observableValue()]">
+                                                        data-bind="foreach: $data.options.filter(o => o.value !== SortOptions.level), attr: {name}, selectedOptions: [$data.observableValue()]">
                                                         <option data-bind="text: $data.text, value: $data.value"></option>
                                                     </select>
                                                     <div class="input-group-append bg-primary text-light">
@@ -183,20 +187,6 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                             data-bind="checked: Settings.getSetting('hatcherySortDirection').observableValue()"
                                                             onchange="Settings.setSettingByName('hatcherySortDirection', this.checked)"/>
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <!--Breeding Efficiency Toggle-->
-                                            <div class="col-12">
-                                                <div class="form-group my-2">
-                                                    <span>Include EV bonus</span>
-                                                    <label class="form-check-label toggler-wrapper style-1 float-right">
-                                                        <input class="form-check-input" type="checkbox" id="breeding-include-ev-bonus"
-                                                            data-bind="checked: Settings.getSetting('breedingIncludeEVBonus').observableValue()"
-                                                            onchange="Settings.setSettingByName('breedingIncludeEVBonus', this.checked)">
-                                                        <div class="toggler-slider">
-                                                            <div class="toggler-knob"></div>
-                                                        </div>
-                                                    </label>
                                                 </div>
                                             </div>
                                         </div>
@@ -218,7 +208,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                         Unfortunately, you don't have any Pokémon of level 100 to breed.
                                     </button>
                                     <!-- ko if: App.game.party.hasMaxLevelPokemon() -->
-                                    <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: lazyLoad($element, PartyController.getHatcherySortedList)">
+                                    <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: lazyLoad($element, PartyController.getHatcherySortedList, { reset: modalUtils.observableState.breedingModalObservable })">
                                         <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry" data-bind="visible: BreedingController.visible($data), style:{background: PokedexHelper.getBackgroundColors($data.name)}, class: App.game.breeding.hasFreeEggSlot() || App.game.breeding.hasFreeQueueSlot() ? '' : 'disabled'">
                                             <span class="pokedex-top-text" data-bind="text: $data.displayName">name</span>
                                             <div class="breedingListShiny" data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)">✨</div>
@@ -363,7 +353,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                 <td class="text-left align-middle">Sort:</td>
                                                 <td class="text-center align-middle">
                                                     <div class="input-group input-group-sm">
-                                                        <select autocomplete="off" class="custom-select" data-bind="options: GameHelper.enumSelectOption(SortOptions), optionsValue: 'value', optionsText: i => GameConstants.camelCaseToString(i.name), value: $data.sortOption"></select>
+                                                        <select autocomplete="off" class="custom-select" data-bind="options: GameHelper.enumSelectOption(SortOptions).filter(o => o.value !== SortOptions.level), optionsValue: 'value', optionsText: i => SortOptionConfigs[i.value].text, value: $data.sortOption"></select>
                                                         <div class="input-group-append bg-primary text-light">
                                                             <label class="clickable m-0 px-2" style="font-size: 20px;" data-bind="
                                                                 attr: {for: 'hatcheryHelperSortDirection' + $index() },
