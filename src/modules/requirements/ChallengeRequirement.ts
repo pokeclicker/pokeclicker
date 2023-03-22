@@ -13,7 +13,7 @@ export default class ChallengeRequirement extends Requirement {
 
     public getProgress(): number {
         // Check both challenge lists
-        return +(App.game.challenges.list[this.challenge]?.active() == this.enabled || App.game.challenges.listSpecial[this.challenge]?.active()  == this.enabled);
+        return +(App.game.challenges.list[this.challenge]?.active() === this.enabled || App.game.challenges.listSpecial[this.challenge]?.active() === this.enabled);
     }
 
     public hint(): string {

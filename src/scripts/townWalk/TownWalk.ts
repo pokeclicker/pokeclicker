@@ -60,13 +60,13 @@ class TownWalk {
             top: 32 * j + topLeft.top,
             left: 32 * i + topLeft.left,
         };
-        
+
         $('#townWalkBody').append('<div id="sprite"></div>');
         $('#townWalkBody').append('<div id="pokemonSprite"></div>');
         document.getElementById('sprite').classList.value = `walk${TownWalk.lastDirection}`;
 
         const pokemonID = Math.floor(App.game.profile.pokemon());
-        const shiny = App.game.profile.pokemonShiny()
+        const shiny = App.game.profile.pokemonShiny();
         document.getElementById('pokemonSprite').style.backgroundImage = `${shiny ? 'url(\'assets/images/dynamic-background/pokemon/sparkle.png\'), ' : ''}url('assets/images/dynamic-background/pokemon/${pokemonID.toString().padStart(3, '0')}${shiny ? 's' : ''}.png')`;
 
         document.getElementById('pokemonSprite').classList.value = `walk${TownWalk.lastDirection}`;
@@ -103,7 +103,7 @@ class TownWalk {
     }
 
     private static step(direction: string) {
-        const oldDirection = TownWalk.lastDirection
+        const oldDirection = TownWalk.lastDirection;
         TownWalk.lastDirection = direction;
         const directionOffset = TownWalk.directionToXY(direction);
 
@@ -143,7 +143,7 @@ class TownWalk {
                     document.getElementById('pokemonSprite').classList.value = `walk${oldDirection}`;
                 }
             });
-            $('#pokemonSprite').animate(pokemonOffset, 250, 'linear')
+            $('#pokemonSprite').animate(pokemonOffset, 250, 'linear');
             App.game.breeding.progressEggs(2);
         } else {
             document.getElementById('sprite').classList.value = `walk${direction}`;

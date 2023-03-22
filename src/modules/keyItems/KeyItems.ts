@@ -46,9 +46,8 @@ export default class KeyItems implements Feature {
                 () => {
                     if (App.game.challenges.listSpecial.monotype.active()) {
                         return App.game.quests.getQuestLine('Tutorial Quests').quests()[6].isCompleted(); // Catch 5 starters
-                    } else {
-                        return App.game.statistics.routeKills[Region.kanto][3]() >= ROUTE_KILLS_NEEDED
-                    } 
+                    }
+                    return App.game.statistics.routeKills[Region.kanto][3]() >= ROUTE_KILLS_NEEDED;
                 }, undefined, undefined, 'Mystery Egg'),
             new KeyItem(KeyItemType.Safari_ticket, 'This ticket grants access to the Safari Zone right outside Fuchsia City.', undefined, undefined, undefined, 'Safari Ticket'),
             new KeyItem(KeyItemType.Wailmer_pail, 'This is a tool for watering Berries to allow you to operate the farm.',

@@ -161,7 +161,7 @@ class Pokeballs implements Feature {
         const alreadyCaught = App.game.party.alreadyCaughtPokemon(id);
         const alreadyCaughtShiny = App.game.party.alreadyCaughtPokemon(id, true);
         const contagious = (App.game.party.getPokemon(id)?.pokerus == GameConstants.Pokerus.Contagious);
-        
+
         let pref: GameConstants.Pokeball;
 
         // just check against alreadyCaughtShiny as this returns false when you don't have the pokemon yet.

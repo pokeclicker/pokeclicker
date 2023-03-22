@@ -202,8 +202,8 @@ export function incrementPokemonStatistics(pokemonId: number, statistic: Pokemon
 
 /**
  * Check if Pokemon has a type
- * @param pokemonID 
- * @param type 
+ * @param pokemonID
+ * @param type
  * @returns {boolean} true if Pokemon has the type
  */
 export function pokemonHasType(pokemonID, type) {
@@ -216,7 +216,7 @@ export function pokemonHasType(pokemonID, type) {
 
 /**
  * Check if Pokemon can deal damage
- * @param pokemonID 
+ * @param pokemonID
  * @returns {boolean} true if Pokemon can deal damage
  */
 export function canPokemonDealDamage(pokemonID) {

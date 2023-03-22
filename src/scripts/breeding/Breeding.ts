@@ -127,7 +127,7 @@ class Breeding implements Feature {
             ['Audino', 'Bouffalant'],
             ['Furfrou'],
             ['Komala'],
-            ['Indeedee (Female)', 'Indeedee (Male)']
+            ['Indeedee (Female)', 'Indeedee (Male)'],
         ];
 
         this.hatchListMonotype[PokemonType.Fire] = this.hatchList[EggType.Fire];
@@ -151,7 +151,7 @@ class Breeding implements Feature {
             ['Cryogonal'],
             ['Bergmite'],
             ['Crabominable', 'Alolan Vulpix'],
-            ['Galarian Darumaka']
+            ['Galarian Darumaka'],
         ];
 
         this.hatchListMonotype[PokemonType.Fighting] = this.hatchList[EggType.Fighting];
@@ -169,7 +169,7 @@ class Breeding implements Feature {
             ['Venipede'],
             ['Skrelp'],
             ['Alolan Grimer'],
-            ['Galarian Slowbro', 'Galarian Slowking', 'Toxel']
+            ['Galarian Slowbro', 'Galarian Slowking', 'Toxel'],
         ];
 
         this.hatchListMonotype[PokemonType.Ground] = [
@@ -180,7 +180,7 @@ class Breeding implements Feature {
             ['Golett'],
             [],
             ['Sandygast'],
-            ['Galarian Yamask']
+            ['Galarian Yamask'],
         ];
 
         this.hatchListMonotype[PokemonType.Flying] = [
@@ -191,7 +191,7 @@ class Breeding implements Feature {
             ['Sigilyph'],
             ['Vivillon (Meadow)', 'Noibat'],
             ['Minior (Meteor)'],
-            ['Rookidee']
+            ['Rookidee'],
         ];
 
         this.hatchListMonotype[PokemonType.Psychic] = [
@@ -202,7 +202,7 @@ class Breeding implements Feature {
             ['Gothita', 'Solosis'],
             ['Delphox', 'Inkay'],
             ['Alolan Raichu', 'Bruxish'],
-            ['Indeedee (Female)', 'Indeedee (Male)']
+            ['Indeedee (Female)', 'Indeedee (Male)'],
         ];
 
         this.hatchListMonotype[PokemonType.Bug] = [
@@ -213,7 +213,7 @@ class Breeding implements Feature {
             ['Karrablast', 'Shelmet'],
             ['Scatterbug'],
             ['Cutiefly', 'Dewpider'],
-            ['Snom']
+            ['Snom'],
         ];
 
         this.hatchListMonotype[PokemonType.Rock] = [
@@ -224,7 +224,7 @@ class Breeding implements Feature {
             ['Roggenrola'],
             ['Carbink'],
             ['Alolan Geodude'],
-            ['Stonjourner']
+            ['Stonjourner'],
         ];
 
         this.hatchListMonotype[PokemonType.Ghost] = [
@@ -235,7 +235,7 @@ class Breeding implements Feature {
             ['Yamask', 'Litwick'],
             ['Honedge'],
             ['Decidueye', 'Mimikyu'],
-            ['Galarian Corsola']
+            ['Galarian Corsola'],
         ];
 
         this.hatchListMonotype[PokemonType.Dragon] = this.hatchList[EggType.Dragon];
@@ -252,7 +252,7 @@ class Breeding implements Feature {
             ['Sandile'],
             ['Greninja', 'Pangoro', 'Inkay'],
             ['Incineroar', 'Alolan Meowth'],
-            ['Galarian Zigzagoon']
+            ['Galarian Zigzagoon'],
         ];
 
         this.hatchListMonotype[PokemonType.Steel] = [
@@ -263,9 +263,9 @@ class Breeding implements Feature {
             ['Escavalier', 'Ferroseed'],
             ['Honedge'],
             ['Alolan Sandshrew'],
-            ['Galarian Meowth']
+            ['Galarian Meowth'],
         ];
-        
+
         this.hatchListMonotype[PokemonType.Fairy] = [
             ['Jigglypuff', 'Wigglytuff'],
             ['Snubbull', 'Granbull'],
@@ -274,7 +274,7 @@ class Breeding implements Feature {
             ['Cottonee'],
             ['Sylveon', 'Spritzee', 'Swirlix'],
             ['Alolan Ninetales', 'Primarina', 'Comfey'],
-            ['Impidimp']
+            ['Impidimp'],
         ];
 
         BreedingController.initialize();

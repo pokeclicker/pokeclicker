@@ -3,7 +3,14 @@ import NotificationConstants from '../notifications/NotificationConstants';
 import Requirement from '../requirements/Requirement';
 
 export default class RedeemableCode {
-    constructor(public name: string, public hash: number, public isRedeemed: boolean, private rewardFunction: () => Promise<boolean | undefined>, private requirement: Requirement = undefined, private repeatable: boolean = false) {
+    constructor(
+        public name: string,
+        public hash: number,
+        public isRedeemed: boolean,
+        private rewardFunction: () => Promise<boolean | undefined>,
+        private requirement: Requirement = undefined,
+        private repeatable: boolean = false,
+    ) {
     }
 
     async redeem() {
@@ -25,7 +32,7 @@ export default class RedeemableCode {
 
         // If nothing returned, assume it was redeemed fine
         if (await this.rewardFunction() ?? true) {
-            this.isRedeemed = this.repeatable ? false : true;
+            this.isRedeemed = !this.repeatable;
         }
     }
 }

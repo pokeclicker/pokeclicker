@@ -134,7 +134,7 @@ class PokemonFactory {
      */
     public static generateGymPokemon(gym: Gym, index: number): BattlePokemon {
         const pokemon = gym.getPokemonList()[index];
-        const pokemonName = pokemon.name instanceof Array ? Rand.fromArray(pokemon.name) : pokemon.name
+        const pokemonName = pokemon.name instanceof Array ? Rand.fromArray(pokemon.name) : pokemon.name;
         const basePokemon = PokemonHelper.getPokemonByName(pokemonName);
 
         const exp: number = basePokemon.exp;
@@ -212,7 +212,7 @@ class PokemonFactory {
 
     public static generateTemporaryBattlePokemon(battle: TemporaryBattle, index: number): BattlePokemon {
         const pokemon = battle.getPokemonList()[index];
-        const pokemonName = pokemon.name instanceof Array ? Rand.fromArray(pokemon.name) : pokemon.name
+        const pokemonName = pokemon.name instanceof Array ? Rand.fromArray(pokemon.name) : pokemon.name;
         const basePokemon = PokemonHelper.getPokemonByName(pokemonName);
         const catchRate: number = this.catchRateHelper(basePokemon.catchRate);
 
