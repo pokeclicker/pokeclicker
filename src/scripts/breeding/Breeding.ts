@@ -24,6 +24,7 @@ class Breeding implements Feature {
     public queueSlots: KnockoutObservable<number>;
 
     public hatchList: { [name: number]: PokemonNameType[][] } = {};
+    public hatchListMonotype: { [name: number]: PokemonNameType[][] } = {};
 
     constructor(private multiplier: Multiplier) {
         this._eggList = this.defaults.eggList;
@@ -116,6 +117,166 @@ class Breeding implements Feature {
             ['Mudbray', 'Rockruff'],
             ['Rolycoly', 'Milcery'],
         ];
+
+        // Monotype hatchlist
+        this.hatchListMonotype[PokemonType.Normal] = [
+            ['Chansey', 'Ditto'],
+            ['Smeargle', 'Miltank'],
+            ['Azurill', 'Spinda', 'Zangoose'],
+            ['Glameow'],
+            ['Audino', 'Bouffalant'],
+            ['Furfrou'],
+            ['Komala'],
+            ['Indeedee (Female)', 'Indeedee (Male)']
+        ];
+
+        this.hatchListMonotype[PokemonType.Fire] = this.hatchList[EggType.Fire];
+        this.hatchListMonotype[PokemonType.Fire][GameConstants.Region.kanto].push('Flareon');
+        this.hatchListMonotype[PokemonType.Fire][GameConstants.Region.kalos].push('Fletchinder');
+
+        this.hatchListMonotype[PokemonType.Water] = this.hatchList[EggType.Water];
+        this.hatchListMonotype[PokemonType.Water][GameConstants.Region.kanto].push('Vaporeon');
+
+        this.hatchListMonotype[PokemonType.Electric] = this.hatchList[EggType.Electric];
+        this.hatchListMonotype[PokemonType.Electric][GameConstants.Region.kanto].push('Jolteon');
+
+        this.hatchListMonotype[PokemonType.Grass] = this.hatchList[EggType.Grass];
+        this.hatchListMonotype[PokemonType.Grass][GameConstants.Region.sinnoh].push('Wormadam (Plant)', 'Leafeon');
+
+        this.hatchListMonotype[PokemonType.Ice] = [
+            ['Lapras', 'Dewgong', 'Cloyster'],
+            ['Delibird', 'Swinub'],
+            ['Snorunt'],
+            ['Glaceon', 'Snover'],
+            ['Cryogonal'],
+            ['Bergmite'],
+            ['Crabominable', 'Alolan Vulpix'],
+            ['Galarian Darumaka']
+        ];
+
+        this.hatchListMonotype[PokemonType.Fighting] = this.hatchList[EggType.Fighting];
+        this.hatchListMonotype[PokemonType.Fighting][GameConstants.Region.kanto].push('Poliwrath');
+        this.hatchListMonotype[PokemonType.Fighting][GameConstants.Region.hoenn].push('Combusken', 'Breloom');
+        this.hatchListMonotype[PokemonType.Fighting][GameConstants.Region.sinnoh].push('Monferno', 'Gallade');
+        this.hatchListMonotype[PokemonType.Fighting][GameConstants.Region.unova].push('Pignite');
+        this.hatchListMonotype[PokemonType.Fighting][GameConstants.Region.kalos].push('Chesnaught');
+
+        this.hatchListMonotype[PokemonType.Poison] = [
+            ['Tentacool', 'Grimer'],
+            ['Spinarak'],
+            ['Dustox', 'Seviper'],
+            ['Croagunk'],
+            ['Venipede'],
+            ['Skrelp'],
+            ['Alolan Grimer'],
+            ['Galarian Slowbro', 'Galarian Slowking', 'Toxel']
+        ];
+
+        this.hatchListMonotype[PokemonType.Ground] = [
+            ['Sandshrew', 'Nidoqueen', 'Nidoking'],
+            ['Gligar'],
+            ['Marshtomp', 'Barboach', 'Baltoy'],
+            ['Torterra', 'Wormadam (Sand)', 'Hippopotas'],
+            ['Golett'],
+            [],
+            ['Sandygast'],
+            ['Galarian Yamask']
+        ];
+
+        this.hatchListMonotype[PokemonType.Flying] = [
+            ['Charizard', 'Butterfree', 'Gyarados', 'Scyther'],
+            ['Togetic', 'Murkrow'],
+            ['Beautifly', 'Masquerain', 'Ninjask'],
+            ['Mothim', 'Drifloon'],
+            ['Sigilyph'],
+            ['Vivillon (Meadow)', 'Noibat'],
+            ['Minior (Meteor)'],
+            ['Rookidee']
+        ];
+
+        this.hatchListMonotype[PokemonType.Psychic] = [
+            ['Drowzee', 'Exeggcute', 'Starmie'],
+            ['Espeon', 'Girafarig'],
+            ['Lunatone', 'Solrock'],
+            ['Chingling'],
+            ['Gothita', 'Solosis'],
+            ['Delphox', 'Inkay'],
+            ['Alolan Raichu', 'Bruxish'],
+            ['Indeedee (Female)', 'Indeedee (Male)']
+        ];
+
+        this.hatchListMonotype[PokemonType.Bug] = [
+            ['Paras', 'Pinsir'],
+            ['Ledyba', 'Shuckle'],
+            ['Volbeat', 'Illumise'],
+            ['Kricketot'],
+            ['Karrablast', 'Shelmet'],
+            ['Scatterbug'],
+            ['Cutiefly', 'Dewpider'],
+            ['Snom']
+        ];
+
+        this.hatchListMonotype[PokemonType.Rock] = [
+            ['Rhyhorn', 'Onix'],
+            ['Magcargo', 'Corsola'],
+            ['Relicanth'],
+            ['Bonsly'],
+            ['Roggenrola'],
+            ['Carbink'],
+            ['Alolan Geodude'],
+            ['Stonjourner']
+        ];
+
+        this.hatchListMonotype[PokemonType.Ghost] = [
+            ['Gastly', 'Haunter', 'Gengar'],
+            ['Misdreavus'],
+            ['Shedinja', 'Shuppet', 'Duskull'],
+            ['Froslass', 'Rotom'],
+            ['Yamask', 'Litwick'],
+            ['Honedge'],
+            ['Decidueye', 'Mimikyu'],
+            ['Galarian Corsola']
+        ];
+
+        this.hatchListMonotype[PokemonType.Dragon] = this.hatchList[EggType.Dragon];
+        this.hatchListMonotype[PokemonType.Dragon][GameConstants.Region.johto].push('Kingdra');
+        this.hatchListMonotype[PokemonType.Dragon][GameConstants.Region.hoenn].push('Vibrava');
+        this.hatchListMonotype[PokemonType.Dragon][GameConstants.Region.kalos].push('Dragalge');
+        this.hatchListMonotype[PokemonType.Dragon][GameConstants.Region.alola].push('Alolan Exeggutor');
+
+        this.hatchListMonotype[PokemonType.Dark] = [
+            ['Spooky Bulbasaur', 'Spooky Ivysaur', 'Spooky Venusaur'],
+            ['Umbreon', 'Sneasel', 'Tyranitar'],
+            ['Cacturne', 'Crawdaunt', 'Carvanha'],
+            ['Drapion', 'Stunky'],
+            ['Sandile'],
+            ['Greninja', 'Pangoro', 'Inkay'],
+            ['Incineroar', 'Alolan Meowth'],
+            ['Galarian Zigzagoon']
+        ];
+
+        this.hatchListMonotype[PokemonType.Steel] = [
+            ['Magnemite', 'Magneton'],
+            ['Forretress', 'Steelix', 'Scizor', 'Skarmory'],
+            ['Mawile'],
+            ['Empoleon', 'Wormadam (Trash)', 'Lucario', 'Probopass', 'Bronzor'],
+            ['Escavalier', 'Ferroseed'],
+            ['Honedge'],
+            ['Alolan Sandshrew'],
+            ['Galarian Meowth']
+        ];
+        
+        this.hatchListMonotype[PokemonType.Fairy] = [
+            ['Jigglypuff', 'Wigglytuff'],
+            ['Snubbull', 'Granbull'],
+            ['Ralts', 'Mawile'],
+            ['Mime Jr.'],
+            ['Cottonee'],
+            ['Sylveon', 'Spritzee', 'Swirlix'],
+            ['Alolan Ninetales', 'Primarina', 'Comfey'],
+            ['Impidimp']
+        ];
+
         BreedingController.initialize();
     }
 
@@ -196,6 +357,10 @@ class Breeding implements Feature {
 
     public gainRandomEgg() {
         return this.gainEgg(this.createRandomEgg());
+    }
+
+    public gainMonotypeEgg() {
+        return this.gainEgg(this.createMonotypeEgg());
     }
 
     public progressEggsBattle(route: number, region: GameConstants.Region) {
@@ -379,7 +544,7 @@ class Breeding implements Feature {
     }
 
     public createTypedEgg(type: EggType): Egg {
-        const hatchList = this.hatchList[type];
+        const hatchList = type === EggType.Monotype ? this.hatchListMonotype[App.game.challenges.listSpecial.monotype.pokemonType()] : this.hatchList[type];
         const hatchable = hatchList.slice(0, player.highestRegion() + 1).filter(list => list.length);
 
         // highest region has 1/ratio chance, next highest has 1/(ratio ^ 2), etc.
@@ -396,6 +561,12 @@ class Breeding implements Feature {
         const type = +Rand.fromArray(Object.keys(this.hatchList));
         const egg = this.createTypedEgg(type);
         egg.type = EggType.Mystery;
+        return egg;
+    }
+
+    public createMonotypeEgg(): Egg {
+        const type = EggType.Monotype;
+        const egg = this.createTypedEgg(type);
         return egg;
     }
 
@@ -500,7 +671,7 @@ class Breeding implements Feature {
     }
 
     getTypeCaughtStatus(type: EggType): CaughtStatus {
-        const hatchList = this.hatchList[type];
+        const hatchList = type === EggType.Monotype ? this.hatchListMonotype[App.game.challenges.listSpecial.monotype.pokemonType()] : this.hatchList[type];
         if (!hatchList) {
             return CaughtStatus.NotCaught;
         }

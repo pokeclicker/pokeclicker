@@ -910,6 +910,7 @@ export enum EggItemType {
     'Dragon_egg',
     'Pokemon_egg',
     'Mystery_egg',
+    'Monotype_egg',
 }
 
 export enum BulletinBoards {

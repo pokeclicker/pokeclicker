@@ -64,6 +64,7 @@ export type ItemNameType
     | 'Dragon_egg'
     | 'Pokemon_egg'
     | 'Mystery_egg'
+    | 'Monotype_egg'
     | 'Leaf_stone'
     | 'Fire_stone'
     | 'Water_stone'

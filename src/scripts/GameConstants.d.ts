@@ -420,7 +420,8 @@ namespace GameConstants {
         'Electric_egg',
         'Dragon_egg',
         'Pokemon_egg',
-        'Mystery_egg'
+        'Mystery_egg',
+        'Monotype_egg'
     }
     export enum BulletinBoards {
         None = -2,

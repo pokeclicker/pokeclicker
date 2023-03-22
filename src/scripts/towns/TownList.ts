@@ -62,6 +62,7 @@ const PewterCityShop = new Shop([
     ItemList.Token_collector,
     ItemList.Lucky_egg,
     ItemList.Mystery_egg,
+    ItemList.Monotype_egg,
 ]);
 const Route3Shop = new Shop([
     ItemList.Magikarp,
@@ -1278,6 +1279,7 @@ const VioletCityShop = new Shop([
     ItemList.Lucky_egg,
     ItemList.MediumRestore,
     ItemList.Mystery_egg,
+    ItemList.Monotype_egg,
     ItemList.Wonder_Chest,
     ItemList.Togepi,
 ]);
@@ -1914,6 +1916,7 @@ const RustboroCityShop = new Shop([
     ItemList.Pokeball,
     ItemList.xAttack,
     ItemList.Mystery_egg,
+    ItemList.Monotype_egg,
 ]);
 const DewfordTownShop = new Shop([
     ItemList.Pokeball,
@@ -2681,6 +2684,7 @@ const JubilifeCityShop = new Shop([
     ItemList.Token_collector,
     ItemList.Lucky_egg,
     ItemList.Mystery_egg,
+    ItemList.Monotype_egg,
 ]);
 const OreburghCityShop = new Shop([
     ItemList.Pokeball,
@@ -3536,6 +3540,7 @@ const FloccesyTownShop = new Shop([
     ItemList.xClick,
     ItemList.SmallRestore,
     ItemList.Mystery_egg,
+    ItemList.Monotype_egg,
 ]);
 const VirbankCityShop = new Shop([
     ItemList.Pokeball,
@@ -4277,6 +4282,7 @@ const SantaluneCityShop = new Shop([
     ItemList.Token_collector,
     ItemList.Lucky_egg,
     ItemList.Mystery_egg,
+    ItemList.Monotype_egg,
 ]);
 const FriseurFurfrouShop = new Shop([
     ItemList['Furfrou (Debutante)'],
@@ -4794,6 +4800,7 @@ const HauoliCityShop = new Shop([
     ItemList.Token_collector,
     ItemList.Lucky_egg,
     ItemList.Mystery_egg,
+    ItemList.Monotype_egg,
     ItemList.Shiny_stone,
     ItemList.Dusk_stone,
     ItemList.Dawn_stone,
@@ -5650,6 +5657,7 @@ const PostwickShop = new Shop([
 const WedgehurstShop = new Shop([
     ItemList.Pokeball,
     ItemList.Mystery_egg,
+    ItemList.Monotype_egg,
 ]);
 const TurffieldShop = new Shop([
     ItemList.Pokeball,

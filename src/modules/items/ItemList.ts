@@ -96,6 +96,7 @@ ItemList.Electric_egg = new EggItem(EggItemType.Electric_egg, 1000, undefined, '
 ItemList.Dragon_egg = new EggItem(EggItemType.Dragon_egg, 1000, undefined, 'Dragon Egg');
 ItemList.Pokemon_egg = new EggItem(EggItemType.Pokemon_egg, 1000, undefined, 'Pokémon Egg');
 ItemList.Mystery_egg = new EggItem(EggItemType.Mystery_egg, 700, undefined, 'Mystery Egg');
+ItemList.Monotype_egg = new EggItem(EggItemType.Monotype_egg, 1000, undefined, 'Monotype Egg');
 
 // Vitamins
 // ItemList.RareCandy = new Vitamin(VitaminType.RareCandy, Infinity, undefined, undefined, 'Rare Candy', 'A rare-to-find candy that currently has no use.');
