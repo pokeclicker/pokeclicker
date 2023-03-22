@@ -129,7 +129,7 @@ class PokedexHelper {
             /* Only base form if alternate exist (Zarbi, Basculin, ...)
              * Mainline regional forms are shown as they are part of dex completion
              */
-            if (PokedexFilters.hideAlternate.value() && !Number.isInteger(pokemon.id) && !pokemon.name.includes('Alolan') && !pokemon.name.includes('Galarian')) {// || pokemon.name === 'Galarian Darmanitan (Zen)'
+            if (PokedexFilters.hideAlternate.value() && ((!Number.isInteger(pokemon.id) && !pokemon.name.includes('Alolan') && !pokemon.name.includes('Galarian')) || pokemon.name === 'Galarian Darmanitan (Zen)')) {
                 return false;
             }
 
