@@ -88,7 +88,14 @@ export default class KeyItems implements Feature {
                         ],
                         exitOnEsc: false,
                     });
-                }, 'Pokérus Virus'),
+                },
+                'Pokérus Virus',
+                () => {
+                    const patientZero = App.game.party.getPokemon(
+                        RegionalStarters[Region.kanto][player.regionStarters[Region.kanto]()],
+                    ) || App.game.party.caughtPokemon[0];
+                    patientZero.pokerus = Pokerus.Contagious;
+                }),
         ];
     }
 

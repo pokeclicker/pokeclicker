@@ -888,7 +888,7 @@ Routes.add(new RegionRoute(
         special:
         [new SpecialRoutePokemon(['Roselia'], new ObtainedPokemonRequirement('Roselia'))],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 110)],
+    [new TemporaryBattleRequirement('May 3')],
     110.1
 ));
 Routes.add(new RegionRoute(
@@ -1603,7 +1603,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Oddish', 'Sentret', 'Nincada', 'Kecleon', 'Espurr', 'Honedge'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.kalos, 5)]
+    [new TemporaryBattleRequirement('Tierno 1')]
 ));
 Routes.add(new RegionRoute(
     'Kalos Route 7', GameConstants.Region.kalos, 7,
@@ -1712,7 +1712,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Jigglypuff', 'Noctowl', 'Zoroark', 'Gothorita', 'Amoonguss', 'Trevenant'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.kalos, 19)]
+    [new TemporaryBattleRequirement('Trevor')]
 ));
 Routes.add(new RegionRoute(
     'Kalos Route 21', GameConstants.Region.kalos, 21,
@@ -1720,7 +1720,7 @@ Routes.add(new RegionRoute(
         land: ['Scyther', 'Ursaring', 'Spinda', 'Altaria', 'Floatzel'],
         water: ['Poliwag', 'Poliwhirl', 'Lombre', 'Basculin (Red-Striped)', 'Dratini', 'Dragonair'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.kalos, 19)]
+    [new TemporaryBattleRequirement('Trevor')]
 ));
 Routes.add(new RegionRoute(
     'Azure Bay', GameConstants.Region.kalos, 23,
