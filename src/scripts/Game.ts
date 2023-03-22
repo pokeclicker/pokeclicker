@@ -46,7 +46,8 @@ class Game {
         public multiplier: Multiplier,
         public saveReminder: SaveReminder,
         public battleCafe: BattleCafeSaveObject,
-        public dreamOrbController: DreamOrbController
+        public dreamOrbController: DreamOrbController,
+        public pokemonContest: PokemonContest
     ) {
         this._gameState = ko.observable(GameConstants.GameState.paused);
     }
@@ -112,6 +113,7 @@ class Game {
         ShardDeal.generateDeals();
         SafariPokemonList.generateSafariLists();
         RoamingPokemonList.generateIncreasedChanceRoutes(now);
+        PokemonContestController.generateDailyContest(now);
 
         if (Settings.getSetting('disableOfflineProgress').value === false) {
             this.computeOfflineEarnings();
