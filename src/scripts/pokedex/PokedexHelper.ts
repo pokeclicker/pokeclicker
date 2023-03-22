@@ -97,7 +97,7 @@ class PokedexHelper {
             }
 
             // Alternate forms that we haven't caught yet
-            if (!alreadyCaught && pokemon.id != Math.floor(pokemon.id)) {
+            if (!alreadyCaught && pokemon.id != Math.floor(pokemon.id) && (nativeRegion > player.highestRegion() || pokemon.name === 'Galarian Darmanitan (Zen)')) {
                 return false;
             }
             // Hide uncaught base forms if alternative form is caught
@@ -127,10 +127,9 @@ class PokedexHelper {
             }
 
             /* Only base form if alternate exist (Zarbi, Basculin, ...)
-             * if Mega are not alternative pokemon, this work
-             * else change condition by `filter['hide-alternate'] && (!Number.isInteger(pokemon.id) || Math.sign(pokemon.id) === -1)`
+             * Mainline regional forms are shown as they are part of dex completion
              */
-            if (PokedexFilters.hideAlternate.value() && !Number.isInteger(pokemon.id)) {
+            if (PokedexFilters.hideAlternate.value() && !Number.isInteger(pokemon.id) && !pokemon.name.includes('Alolan') && !pokemon.name.includes('Galarian')) {// || pokemon.name === 'Galarian Darmanitan (Zen)'
                 return false;
             }
 
