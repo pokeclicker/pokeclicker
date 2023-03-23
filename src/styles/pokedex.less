@@ -7,6 +7,10 @@
   list-style-type: none;
   margin: 12px;
   max-width: calc(50% - 24px);
+  &.disabled {
+    opacity: .5;
+    pointer-events: none;
+  }
 
   img {
     padding: 16px 0;
@@ -56,9 +60,56 @@
 .pokedex-border-bottom {
   border-bottom: 1px solid grey;
 }
+
 @media (min-width: 768px) {
   .checkbox-border-x {
     border-left: 1px solid grey;
     border-right: 1px solid grey;
   }
+}
+
+/* Scrolling divs */
+@media (min-width: 768px) {
+  .scrolling-div-pokedex {
+      overflow-y: auto;
+      height: calc(100vh - 140px);
+  }
+}
+
+@media (max-width: 768px) {
+  .scrolling-div-pokedex {
+      overflow-y: auto;
+      height: calc(100vh - 240px);
+  }
+}
+
+.pokedex-modal {
+  max-width: 1250px !important;
+}
+
+/* Pokemon list border left */
+@media (min-width: 768px) {
+  .pokemon-list {
+    position: relative;
+  }
+
+  .pokemon-list:before {
+    content:"";
+    position: absolute;
+    left: -1px;
+    height: 100%;
+    border-left: 1px solid grey;
+  }
+}
+
+/* Pokedex entry top and bottom text, also used in hatchery */
+.pokedex-top-text {
+  top: 0; 
+  border-top-left-radius: 6px; 
+  border-top-right-radius: 6px;
+}
+.pokedex-bottom-text {
+  bottom: 0; 
+  border-bottom-left-radius: 6px; 
+  border-bottom-right-radius: 6px
 }
