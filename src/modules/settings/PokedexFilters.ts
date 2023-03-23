@@ -66,6 +66,23 @@ const PokedexFilters: Record<string, FilterOption> = {
             ...Settings.enumToNumberSettingOptionArray(Pokerus, (t) => t !== 'Infected'),
         ],
     ),
+    category: new FilterOption<number>(
+        'Category',
+        ko.observable(-1).extend({ numeric: 0 }),
+        'pokedexCategoryFilter',
+    ),
+    uniqueTransformation: new FilterOption<string>(
+        'Unique Transformations',
+        ko.observable('all'),
+        'pokedexUniqueTransformationFilter',
+        [
+            new SettingOption('Show All Pokémon', 'all'),
+            new SettingOption('Mega Evolution Available', 'mega-available'),
+            new SettingOption('Obtained Mega Evolution', 'mega-pokemon'),
+            // new SettingOption('Gigantamax Available', 'gigantamax-available'),
+            // new SettingOption('Gigantamax Pokémon', 'gigantamax-pokemon'),
+        ],
+    ),
     heldItem: new FilterOption<boolean>(
         'Rare Held Item',
         ko.observable(false),

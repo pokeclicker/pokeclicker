@@ -147,6 +147,16 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                     <!-- /ko -->
                                                 </select>
                                             </div>
+                                            <!-- Mega Evolution -->
+                                            <div class="form-group col-md-12 col-12">
+                                                <label for="breedingUniqueTransformationFilter">Unique Forms</label>
+                                                <select id="breedingUniqueTransformationFilter" autocomplete="off" class="custom-select" 
+                                                    data-bind="options: BreedingFilters.uniqueTransformation.options,
+                                                        optionsValue: 'value',
+                                                        optionsText: 'text',
+                                                        value: BreedingFilters.uniqueTransformation.value">
+                                                </select>
+                                            </div>
 
                                             <div class="col-12">
                                                 <hr style="border-color:grey;">
@@ -208,7 +218,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                         Unfortunately, you don't have any Pokémon of level 100 to breed.
                                     </button>
                                     <!-- ko if: App.game.party.hasMaxLevelPokemon() -->
-                                    <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: lazyLoad($element, PartyController.getHatcherySortedList, { reset: modalUtils.observableState.breedingModalObservable })">
+                                    <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: lazyLoad($element, PartyController.getHatcherySortedList, { pageSize: 60, reset: modalUtils.observableState.breedingModalObservable })">
                                         <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry" data-bind="visible: BreedingController.visible($data), style:{background: PokedexHelper.getBackgroundColors($data.name)}, class: App.game.breeding.hasFreeEggSlot() || App.game.breeding.hasFreeQueueSlot() ? '' : 'disabled'">
                                             <span class="pokedex-top-text" data-bind="text: $data.displayName">name</span>
                                             <div class="breedingListShiny" data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)">✨</div>

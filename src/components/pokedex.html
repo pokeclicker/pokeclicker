@@ -102,6 +102,46 @@ aria-labelledby="pokedexModalLabel">
                                         </select>
                                     </div>
 
+                                    <!-- Category -->
+                                    <div class="form-group col-md-6 col-6">
+                                        <label for="pokedex-filter-category">Category</label>
+                                        <div class="dropdown show">
+                                            <button type="button" class="text-left custom-select col-12 btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                                data-bind="text: PokedexFilters.category.value() == -1 ? 'All' : PokemonCategories.categories()[PokedexFilters.category.value()].name()">
+                                                Categories
+                                            </button>
+                                            <div class="border-secondary dropdown-menu col-12">
+                                                <div class="dropdown-item dropdown-text" data-bind="click : function(){ Settings.setSettingByName('pokedexCategoryFilter', -1) }">
+                                                    All
+                                                </div>
+                                                <div class="dropdown-divider"></div>
+                                                <!-- ko foreach : PokemonCategories.categories -->
+                                                <div class="dropdown-item" data-bind="text : $data.name(), style: { background: $data.color() },
+                                                    click : function(){ Settings.setSettingByName('pokedexCategoryFilter', $index()) }">
+                                                </div>
+                                                <!-- /ko-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6 col-6">
+                                        <label> </label><br/>
+                                        <button class="btn btn-primary w-100" type="button" href="#categoryModal" data-toggle="modal">
+                                            Edit
+                                        </button>
+                                    </div>
+
+                                    <!-- Mega Evolution -->
+                                    <div class="form-group col-md-12 col-12">
+                                        <label for="pokedex-filter-unique-transformation">Unique Forms</label>
+                                        <select id="pokedex-filter-unique-transformation" autocomplete="off" class="custom-select" 
+                                            data-bind="options: PokedexFilters.uniqueTransformation.options,
+                                                optionsValue: 'value',
+                                                optionsText: 'text',
+                                                value: PokedexFilters.uniqueTransformation.value">
+                                        </select>
+                                    </div>
+
+
                                     <!--Rare Hold Item-->
                                     <div class="col-12">
                                         <div class="form-group my-2">
@@ -183,7 +223,7 @@ aria-labelledby="pokedexModalLabel">
                                 <span>Missing a Pokémon but don't see it here? Be sure to completely explore the region!</span>
                             </div>
                             <!-- /ko -->
-                            <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: lazyLoad($element, PokedexHelper.filteredList, { reset: modalUtils.observableState.pokedexModalObservable })">
+                            <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: lazyLoad($element, PokedexHelper.filteredList, { pageSize: 60, reset: modalUtils.observableState.pokedexModalObservable })">
                                 <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry"
                                         data-bind="style:{background: PokedexHelper.getBackgroundColors($data.name)}">
                                         <span class="id pokedex-top-text" data-bind="text: ($data.id > 0 ? Math.floor($data.id) + '' : '???').padStart(3, 0)">number</span>
@@ -218,6 +258,19 @@ aria-labelledby="pokedexModalLabel">
                                                     trigger: 'hover',
                                                     placement:'bottom'
                                                 }"></a>
+                                                
+                                                <!-- Category Button -->
+                                                <!-- ko if: App.game.party.alreadyCaughtPokemonByName($data.name) -->
+                                                <div class="pokemonCategory dropdown">
+                                                    <button data-toggle="dropdown" data-bind="class: `category-${App.game.party.getPokemon($data.id).category + 1}`"></button>
+                                                    <div class="dropdown-menu p-0">
+                                                        <!-- ko foreach: { data: PokemonCategories.categories, as: 'pokemonCategory' } -->
+                                                        <a class="dropdown-item category" href="#" data-bind="text: pokemonCategory.name, style: { background: pokemonCategory.color, 'text-shadow': '0 0 6px black' }, click: () => { App.game.party.getPokemon($parent.id).category = $index() }">Category</a>
+                                                        <!-- /ko -->
+                                                        <a class="dropdown-item bg-dark py-1" href="#categoryModal" data-toggle="modal"><i>Edit</i></a>
+                                                    </div>
+                                                </div>
+                                                <!-- /ko -->
                                             <!-- /ko -->
                                 </li>
                             </ul>
