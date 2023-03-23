@@ -728,9 +728,9 @@ class QuestLineHelper {
         App.game.quests.questLines().push(weatherTrioQuestLine);
     }
 
-    // Started upon becoming Hoenn's Chapmion.
+    // Deoxys
     public static createDeoxysQuestLine() {
-        const deoxysQuestLine = new QuestLine('Mystery of Deoxys', 'Discover the mystery of Deoxys.');
+        const deoxysQuestLine = new QuestLine('Mystery of Deoxys', 'Discover the mystery of Deoxys.', new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), GameConstants.BulletinBoards.Hoenn);
 
         // Defeat 50 Pokemon on route 129
         const route129 = new DefeatPokemonsQuest(50, 0, 129, GameConstants.Region.hoenn);
