@@ -184,11 +184,11 @@ class BreedingController {
             const uniqueTransformation = BreedingFilters.uniqueTransformation.value();
             const pokemon = PokemonHelper.getPokemonById(partyPokemon.id);
             // Only Base Pokémon with Mega available
-            if (uniqueTransformation == 'mega-available' && !(pokemon as DataPokemon).evolutions?.some((p) => p.evolvedPokemon.includes('Mega '))) {
+            if (uniqueTransformation == 'mega-available' && !(pokemon as DataPokemon).evolutions?.some((p) => p.evolvedPokemon.startsWith('Mega '))) {
                 return false;
             }
             // Only Mega Pokémon
-            if (uniqueTransformation == 'mega-pokemon' && !(pokemon as DataPokemon).name.includes('Mega ')) {
+            if (uniqueTransformation == 'mega-pokemon' && !(pokemon as DataPokemon).name.startsWith('Mega ')) {
                 return false;
             }
 
