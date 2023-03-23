@@ -160,17 +160,6 @@ class PokedexHelper {
                 return false;
             }
 
-            /*
-            // Only Base Pokémon with Gigantamax available
-            if (uniqueTransformation == 'gigantamax-available' && !((pokemon as PokemonListData).evolutions?.some((p) => p.evolvedPokemon.includes('Gigantamax ')))) {
-                return false;
-            }
-            // Only Gigantamax Pokémon
-            if (uniqueTransformation == 'gigantamax-pokemon' && !(pokemon as PokemonListData).name.includes('Gigantamax ')) {
-                return false;
-            }
-            */
-
             return true;
         }) as typeof pokemonList;
     }

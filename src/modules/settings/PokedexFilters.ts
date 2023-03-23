@@ -79,8 +79,6 @@ const PokedexFilters: Record<string, FilterOption> = {
             new SettingOption('Show All Pokémon', 'all'),
             new SettingOption('Mega Evolution Available', 'mega-available'),
             new SettingOption('Obtained Mega Evolution', 'mega-pokemon'),
-            // new SettingOption('Gigantamax Available', 'gigantamax-available'),
-            // new SettingOption('Gigantamax Pokémon', 'gigantamax-pokemon'),
         ],
     ),
     heldItem: new FilterOption<boolean>(

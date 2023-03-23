@@ -192,17 +192,6 @@ class BreedingController {
                 return false;
             }
 
-            /*
-            // Only Base Pokémon with Gigantamax available
-            if (uniqueTransformation == 'gigantamax-available' && !((pokemon as DataPokemon).evolutions?.some((p) => p.evolvedPokemon.includes('Gigantamax ')))) {
-                return false;
-            }
-            // Only Gigantamax Pokémon
-            if (uniqueTransformation == 'gigantamax-pokemon' && !(pokemon as DataPokemon).name.includes('Gigantamax ')) {
-                return false;
-            }
-            */
-
             // Check if either of the types match
             const type1: (PokemonType | null) = BreedingFilters.type1.value() > -2 ? BreedingFilters.type1.value() : null;
             const type2: (PokemonType | null) = BreedingFilters.type2.value() > -2 ? BreedingFilters.type2.value() : null;
