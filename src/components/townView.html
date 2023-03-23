@@ -88,7 +88,13 @@
           <!-- ko foreach: player.town().dungeon.normalEncounterList.filter(i => !i.hide) -->
           <li class="list-inline-item">
             <img class="boss" src="assets/images/dungeons/chest.png" data-bind="hidden: !$data.mimic"/>
-            <img class="dungeon-pokemon-pkrs" src="" data-bind="attr:{ src: $data.pkrsImage }" />
+            <img class="dungeon-pokemon-pkrs" src="" data-bind="
+            attr:{ src: $data.pkrsImage },
+            tooltip: {
+                title: $data.EVs,
+                placement: 'bottom',
+                trigger: 'hover'
+            }" />
             <img class="dungeon-pokemon-preview" src="" data-bind="attr:{ src: $data.image },
             css: { 'dungeon-pokemon-locked': $data.uncaught }" onerror="this.src='assets/images/trainers/Mysterious Trainer.png';"/>
             <sup class="shiny" data-bind="visible: $data.shiny">✨</sup>
@@ -105,7 +111,13 @@
           <!-- ko foreach: player.town().dungeon.bossEncounterList.filter(i => !i.hide) -->
           <li class="list-inline-item">
             <img class="boss" src="assets/images/dungeons/boss.svg"/>
-            <img class="dungeon-pokemon-pkrs" src="" data-bind="attr:{ src: $data.pkrsImage }" />
+            <img class="dungeon-pokemon-pkrs" src="" data-bind="
+            attr:{ src: $data.pkrsImage },
+            tooltip: {
+                title: $data.EVs,
+                placement: 'bottom',
+                trigger: 'hover'
+            }" />
             <img class="dungeon-pokemon-preview" src="" data-bind="attr:{ src: $data.image },
             css: { 'dungeon-pokemon-locked': $data.uncaught }" onerror="this.src='assets/images/trainers/Mysterious Trainer.png';"/>
             <sup class="shiny" data-bind="visible: $data.shiny">✨</sup>
