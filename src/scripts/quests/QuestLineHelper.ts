@@ -287,11 +287,32 @@ class QuestLineHelper {
     public static createRocketKantoQuestLine() {
         const rocketKantoQuestLine = new QuestLine('Team Rocket', 'Some nasty villains are up to no good.');
 
-        const clearRocketGameCorner = new CustomQuest(1, 0, 'Illegal activity is afoot. Clear the Rocket Game Corner in Celadon City.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Rocket Game Corner')]());
+        const clearRocketGameCorner = new CustomQuest(1, 0, 'Illegal activity is afoot. Clear the Rocket Game Corner in Celadon City.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Rocket Game Corner')](), undefined, undefined,
+            {
+                clearedMessage: 'I see that you raise Pokémon with utmost care. A child like you would never understand what I hope to achieve. I shall step aside this time! I hope we meet again...',
+                npcDisplayName: 'Team Rocket Boss Giovanni',
+                npcImageName: 'Team Rocket Boss Giovanni',
+            });
         rocketKantoQuestLine.addQuest(clearRocketGameCorner);
 
-        const clearSilphCo = new CustomQuest(1, 0, 'Team Rocket has occupied Silph Co. Clear Silph Co. in Saffron City.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Silph Co.')]());
-        rocketKantoQuestLine.addQuest(clearSilphCo);
+        const clearSilphCo1 = new CustomQuest(1, 0, 'Team Rocket has occupied Silph Co. Clear Silph Co. in Saffron City to find the Card Key.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Silph Co.')](), undefined, undefined,
+            {
+                clearedMessage: 'What kept you $playername$? Hahaha! I thought you\'d turn up if I waited here! I guess Team Rocket slowed you down! Not that I care! I saw you in Saffron, so I decided to see if you got better!',
+                npcDisplayName: 'Rival Blue',
+                npcImageName: 'Rival Blue',
+            });
+        rocketKantoQuestLine.addQuest(clearSilphCo1);
+
+        const clearBlue = new CustomQuest(1, 0, 'Blue is getting in your way. Defeat him in Silph Co.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Blue 5')]());
+        rocketKantoQuestLine.addQuest(clearBlue);
+
+        const clearSilphCo2 = new CustomQuest(1, 0, 'Team Rocket has occupied Silph Co. Clear Silph Co. in Saffron City once more to foil their plans.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Silph Co.')](), undefined, undefined,
+            {
+                clearedMessage: 'Arrgh!! I lost again!? Blast it all! You ruined our plans for Silph! But Team Rocket will never fall! $playername$, never forget that all Pokémon exist for Team Rocket! I must go, but I shall return!',
+                npcDisplayName: 'Team Rocket Boss Giovanni',
+                npcImageName: 'Team Rocket Boss Giovanni',
+            });
+        rocketKantoQuestLine.addQuest(clearSilphCo2);
 
         const ViridianGymReward = () => {
             App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1, false);
@@ -421,7 +442,7 @@ class QuestLineHelper {
     }
 
     public static createJohtoBeastsQuestLine() {
-        const johtoBeastsQuestLine = new QuestLine('The Legendary Beasts', 'Investigate the legends surrounding the strange Burned Tower in Ecruteak City.', new GymBadgeRequirement(BadgeEnums.Fog), GameConstants.BulletinBoards.Johto);
+        const johtoBeastsQuestLine = new QuestLine('The Legendary Beasts', 'Investigate the legends surrounding the strange Burned Tower in Ecruteak City.', new RouteKillRequirement(10, GameConstants.Region.johto, 37), GameConstants.BulletinBoards.Johto);
 
         const talktoEusine1 = new TalkToNPCQuest(EcruteakEusine, 'Talk to Eusine in Ecruteak City.');
         johtoBeastsQuestLine.addQuest(talktoEusine1);
@@ -707,9 +728,9 @@ class QuestLineHelper {
         App.game.quests.questLines().push(weatherTrioQuestLine);
     }
 
-    // Started upon becoming Hoenn's Chapmion.
+    // Deoxys
     public static createDeoxysQuestLine() {
-        const deoxysQuestLine = new QuestLine('Mystery of Deoxys', 'Discover the mystery of Deoxys.');
+        const deoxysQuestLine = new QuestLine('Mystery of Deoxys', 'Discover the mystery of Deoxys.', new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), GameConstants.BulletinBoards.Hoenn);
 
         // Defeat 50 Pokemon on route 129
         const route129 = new DefeatPokemonsQuest(50, 0, 129, GameConstants.Region.hoenn);
@@ -1352,6 +1373,161 @@ class QuestLineHelper {
     }
 
     // Kalos QuestLines
+
+    public static createDeltaEpisodeQuestLine() {
+        const deltaEpisodeQuestLine = new QuestLine('The Delta Episode', 'A catastrophe is on the horizon! Work with the people of Hoenn to stop it.', new GymBadgeRequirement(BadgeEnums.Rumble), GameConstants.BulletinBoards.Kalos);
+
+        const talkToCozmo1 = new TalkToNPCQuest(Cozmo1, 'Talk to Dr. Cozmo in Fallarbor Town.');
+        deltaEpisodeQuestLine.addQuest(talkToCozmo1);
+
+        const talkToZinnia1 = new TalkToNPCQuest(Zinnia1, 'Talk to the mysterious figure at the Sky Pillar.');
+        deltaEpisodeQuestLine.addQuest(talkToZinnia1);
+
+        const talkToDeltaMay1 = new TalkToNPCQuest(DeltaMay1, 'Travel with Zinnia to Littleroot Town and talk to May.');
+        deltaEpisodeQuestLine.addQuest(talkToDeltaMay1);
+
+        const talkToNewsBirch = new TalkToNPCQuest(NewsBirch, 'Discuss the news with Professor Birch in Littleroot Town.');
+        deltaEpisodeQuestLine.addQuest(talkToNewsBirch);
+
+        const talkToDeltaMay2 = new TalkToNPCQuest(DeltaMay2, 'Find out why May is so mad in Littleroot Town.');
+        deltaEpisodeQuestLine.addQuest(talkToDeltaMay2);
+
+        const fightCourtney1 = new CustomQuest (1, 0, 'Defeat Courtney', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Courtney 1')]());
+
+        const fightMatt1 = new CustomQuest (1, 0, 'Defeat Matt', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Matt 1')]());
+
+        deltaEpisodeQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                fightCourtney1,
+                fightMatt1,
+            ], 'Follow Zinnia to Petalburg City.'));
+
+        const talkToDeltaSteven1 = new TalkToNPCQuest(DeltaSteven1, 'Answer your ringing Holo Caster.');
+
+        const talkToDeltaWally1 = new TalkToNPCQuest(DeltaWally1, 'Talk to Wally.');
+
+        deltaEpisodeQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                talkToDeltaSteven1,
+                talkToDeltaWally1,
+            ], 'Talk to Wally and answer your ringing Holo Caster in Petalburg City.'));
+
+        const clearGranite = new CustomQuest(10, 0, 'Clear Granite Cave 10 times.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Granite Cave')]());
+
+        const findStars = new CustomQuest(1, undefined, 'Find a Star Piece.', () => player.mineInventory().find(item => item.name == 'Star Piece')?.amount() ?? 0);
+
+        deltaEpisodeQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                clearGranite,
+                findStars,
+            ], 'Search Granite Cave and look for Star Pieces.'));
+
+        const talkToZinnia2 = new TalkToNPCQuest(Zinnia2, 'Talk to Zinnia in Granite Cave.');
+        deltaEpisodeQuestLine.addQuest(talkToZinnia2);
+
+        const fightZinnia1 = new CustomQuest (1, 0, 'Defeat Zinnia in Granite Cave', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Zinnia 1')]());
+        deltaEpisodeQuestLine.addQuest(fightZinnia1);
+
+        const talkToZinnia3 = new TalkToNPCQuest(Zinnia3, 'Talk to Zinnia in Granite Cave.');
+        deltaEpisodeQuestLine.addQuest(talkToZinnia3);
+
+        const talkToCozmo2 = new TalkToNPCQuest(Cozmo2, 'Talk to Dr. Cozmo at the Mossdeep Space Center.');
+        deltaEpisodeQuestLine.addQuest(talkToCozmo2);
+
+        const talkToZinnia4 = new TalkToNPCQuest(Zinnia4, 'Talk to Zinnia at the Mossdeep Space Center.');
+        deltaEpisodeQuestLine.addQuest(talkToZinnia4);
+
+        const talkToCozmo3 = new TalkToNPCQuest(Cozmo3, 'Talk to Dr. Cozmo at the Mossdeep Space Center.');
+        deltaEpisodeQuestLine.addQuest(talkToCozmo3);
+
+        const clearMeteor = new CustomQuest(10, 0, 'Clear Meteor Falls 10 times to search for the Meteor Shard.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Meteor Falls')]());
+        deltaEpisodeQuestLine.addQuest(clearMeteor);
+
+        const talkToDracElder1 = new TalkToNPCQuest(DraconidElder1, 'Talk to the Draconid Elder in Meteor Falls.');
+        deltaEpisodeQuestLine.addQuest(talkToDracElder1);
+
+        const fightDracElder = new CustomQuest (1, 0, 'Defeat the Draconid Elder in Meteor Falls.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Draconid Elder')]());
+        deltaEpisodeQuestLine.addQuest(fightDracElder);
+
+        const talkToDracElder2 = new TalkToNPCQuest(DraconidElder2, 'Talk to the Draconid Elder in Meteor Falls.');
+        deltaEpisodeQuestLine.addQuest(talkToDracElder2);
+
+        const fightAquaGrunts = new CustomQuest (1, 0, 'Defeat the Aqua Grunt.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Aqua Grunt')]());
+
+        const fightMagmaGrunts = new CustomQuest (1, 0, 'Defeat the Magma Grunt.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Magma Grunt')]());
+
+        deltaEpisodeQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                fightAquaGrunts,
+                fightMagmaGrunts,
+            ], 'Defeat the Team Aqua and Magma Grunts attacking the Mossdeep Space Center.'));
+
+        const fightCourtney2 = new CustomQuest (1, 0, 'Defeat Courtney', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Courtney 2')]());
+
+        const fightMatt2 = new CustomQuest (1, 0, 'Defeat Matt', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Matt 2')]());
+
+        deltaEpisodeQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                fightCourtney2,
+                fightMatt2,
+            ], 'Defeat the admins trying to take over the Mossdeep Space Center.'));
+
+        const talkToZinnia5 = new TalkToNPCQuest(Zinnia5, 'Talk to Zinnia at the Mossdeep Space Center.');
+        deltaEpisodeQuestLine.addQuest(talkToZinnia5);
+
+        const clearAquaHideoutDelta = new CustomQuest(1, 0, 'Follow Zinnia to the Aqua hideout and search for her.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Aqua Hideout')]());
+        deltaEpisodeQuestLine.addQuest(clearAquaHideoutDelta);
+
+        const talkToArchie = new TalkToNPCQuest(Archie, 'Talk to Archie in the Team Aqua Hideout.');
+        deltaEpisodeQuestLine.addQuest(talkToArchie);
+
+        const clearMagmaHideoutDelta = new CustomQuest(1, 0, 'Follow Zinnia to the Magma Hideout and search for her.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Magma Hideout')]());
+        deltaEpisodeQuestLine.addQuest(clearMagmaHideoutDelta);
+
+        const talkToMaxie = new TalkToNPCQuest(Maxie, 'Talk to Maxie in the Team Magma Hideout.');
+        deltaEpisodeQuestLine.addQuest(talkToMaxie);
+
+        const talkToWallace3 = new TalkToNPCQuest(Wallace3, 'Talk to Wallace in the Sootopolis City.');
+        deltaEpisodeQuestLine.addQuest(talkToWallace3);
+
+        const fightDeltaWallace = new CustomQuest (1, 0, 'Defeat Wallace in Sootopolis City.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Delta Wallace')]());
+        deltaEpisodeQuestLine.addQuest(fightDeltaWallace);
+
+        const fightZinnia2 = new CustomQuest (1, 0, 'Defeat Zinnia at the Sky Pillar.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Zinnia 2')]());
+        deltaEpisodeQuestLine.addQuest(fightZinnia2);
+
+        const catchDeltaRayquaza = new CaptureSpecificPokemonQuest('Rayquaza', 'Catch or hatch Rayquaza', 1, true, 0, undefined);
+        deltaEpisodeQuestLine.addQuest(catchDeltaRayquaza);
+
+        const MeteoriteReward = () => {
+            App.game.party.getPokemonByName('Rayquaza').giveMegastone();
+            Notifier.notify({
+                title: deltaEpisodeQuestLine.name,
+                message: 'Your Meteorite Shards combine into a Meteorite!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
+        const talkToZinnia6 = new TalkToNPCQuest(Zinnia6, 'Talk to Zinnia at the Sky Pillar.', MeteoriteReward);
+        deltaEpisodeQuestLine.addQuest(talkToZinnia6);
+
+        const catchMegaRayquaza = new CaptureSpecificPokemonQuest('Mega Rayquaza', 'Mega Evolve Rayquaza', 1, false, 0, undefined);
+        deltaEpisodeQuestLine.addQuest(catchMegaRayquaza);
+
+        const talkToZinnia7 = new TalkToNPCQuest(Zinnia7, 'Talk to Zinnia at the Sky Pillar.');
+        deltaEpisodeQuestLine.addQuest(talkToZinnia7);
+
+        const fightDeoxys = new CustomQuest (1, 0, 'Fly Mega Rayquaza into space to destroy the Meteor.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Deoxys')]());
+        deltaEpisodeQuestLine.addQuest(fightDeoxys);
+
+        const talkToCozmo4 = new TalkToNPCQuest(Cozmo4, 'Talk to Dr. Cozmo at the Mossdeep Space Center.');
+        deltaEpisodeQuestLine.addQuest(talkToCozmo4);
+
+        App.game.quests.questLines().push(deltaEpisodeQuestLine);
+    }
+
+
     public static createDetectivePikachuQuestLine() {
         const detectivePikachuQuestLine = new QuestLine('Detective Pikachu', 'Detective Pikachu\'s partner has gone missing, and he needs your help!', new MultiRequirement([new ObtainedPokemonRequirement('Detective Pikachu'), new GymBadgeRequirement(BadgeEnums.Bug)]) , GameConstants.BulletinBoards.Kalos);
 
@@ -1599,6 +1775,9 @@ class QuestLineHelper {
         );
 
         princessDiancieQuestLine.addQuest(DiancieCatch);
+
+        const fightYveltal = new CustomQuest(1, 0, 'A rampaging Yveltal is threatening the Diamond Domain! Help Diancie defeat it!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Rampaging Yveltal')]());
+        princessDiancieQuestLine.addQuest(fightYveltal);
 
         App.game.quests.questLines().push(princessDiancieQuestLine);
     }
@@ -2737,6 +2916,7 @@ class QuestLineHelper {
         this.createManaphyQuestLine();
         this.createGiratinaQuestLine();
         this.createPlasmaUnovaQuestLine();
+        this.createDeltaEpisodeQuestLine();
         this.createDetectivePikachuQuestLine();
         this.createVivillonQuestLine();
         this.createPrincessDiancieQuestLine();
