@@ -35,10 +35,10 @@ export default abstract class BaseSetting<T> {
     validValue(value: T): boolean {
         return false;
     }
-/* 
+    
     isSelected(value: T): KnockoutComputed<boolean> {
         return ko.pureComputed(() => (this.observableValue() === value), this);
-    } */
+    }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars, class-methods-use-this
     isUnlocked(value: T): boolean {
