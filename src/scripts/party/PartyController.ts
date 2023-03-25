@@ -224,9 +224,8 @@ class PartyController {
             if (filterTypes2.includes(type2)) {
                 return true;
             }
-        }
         // Check if all types are selected or if the first type is included in the second filter.
-        else if (filterTypes2.length === numTypes || filterTypes2.includes(type1)) {
+        } else if (filterTypes2.length === numTypes || filterTypes2.includes(type1)) {
             // Check if we're searching for pure types
             if (type2 === undefined || type2 === PokemonType.None) {
                 return filterTypes1.length === 0;

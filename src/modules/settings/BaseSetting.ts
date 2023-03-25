@@ -4,7 +4,7 @@ import {
 } from 'knockout';
 import SettingOption from './SettingOption';
 
-export default abstract class BaseSetting<T> {
+export default abstract class BaseSetting<T, S> {
     value: T;
     observableValue: KnockoutObservable<T>;
 
@@ -15,7 +15,7 @@ export default abstract class BaseSetting<T> {
     constructor(
         public name: string,
         private defaultDisplayName: string,
-        public options: SettingOption<any>[],
+        public options: SettingOption<S>[],
         public defaultValue: T,
     ) {
         this.observableValue = ko.observable(this.defaultValue);
@@ -32,10 +32,11 @@ export default abstract class BaseSetting<T> {
         }
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars, class-methods-use-this
     validValue(value: T): boolean {
         return false;
     }
-    
+
     isSelected(value: T): KnockoutComputed<boolean> {
         return ko.pureComputed(() => (this.observableValue() === value), this);
     }

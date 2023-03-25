@@ -1,22 +1,7 @@
 import BaseSetting from './BaseSetting';
-import SettingOption from './SettingOption';
 
-export default class MultiSetting<T> extends BaseSetting<T[]> {
+export default class MultiSetting<T> extends BaseSetting<T[], T> {
     private optionValues;
-
-    constructor(
-        name: string,
-        displayName: string,
-        options: SettingOption<T>[],
-        defaultValue: T[],
-    ) {
-        super(
-            name,
-            displayName,
-            options,
-            defaultValue,
-        );
-    }
 
     validValue(value: T[]): boolean {
         if (!this.isUnlocked(value)) {
@@ -31,7 +16,7 @@ export default class MultiSetting<T> extends BaseSetting<T[]> {
         }
 
         if (this.optionValues === undefined) {
-            this.optionValues = this.options.map(o => o.value);
+            this.optionValues = this.options.map((o) => o.value);
         }
 
         for (let i = 0; i < value.length; i += 1) {
