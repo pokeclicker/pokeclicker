@@ -206,5 +206,36 @@ class PartyController {
         };
     }
 
+    public static filterByTypes(partyPokemon: PartyPokemon, filterTypes1: PokemonType[], filterTypes2: PokemonType[]) {
+        const numTypes = GameHelper.enumLength(PokemonType) - 1;
+        const { type: [type1, type2] } = pokemonMap[partyPokemon.name];
 
+        // Check if all types are selected or if the first type is included in the first filter.
+        if (filterTypes1.length === numTypes || filterTypes1.includes(type1)) {
+            // Check if all types are selected in the second filter
+            if (filterTypes2.length === numTypes) {
+                return true;
+            }
+            // Check if we match a pure type
+            if (type2 === undefined || type2 === PokemonType.None) {
+                return filterTypes2.length === 0 || filterTypes2.includes(type1);
+            }
+            // Check if the second type is included in the second filter.
+            if (filterTypes2.includes(type2)) {
+                return true;
+            }
+        }
+        // Check if all types are selected or if the first type is included in the second filter.
+        else if (filterTypes2.length === numTypes || filterTypes2.includes(type1)) {
+            // Check if we're searching for pure types
+            if (type2 === undefined || type2 === PokemonType.None) {
+                return filterTypes1.length === 0;
+            }
+            // Check if the second type is included in the first filter.
+            if (filterTypes1.includes(type2)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

@@ -24,25 +24,17 @@ const BreedingFilters: Record<string, FilterOption> = {
             new SettingOption('Shiny', '1'),
         ],
     ),
-    type1: new FilterOption<number>(
+    type1: new FilterOption<number[]>(
         'Type 1',
-        ko.observable(-2).extend({ numeric: 0 }),
+        ko.observable([]),
         'breedingTypeFilter1',
-        [
-            new SettingOption('All', '-2'),
-            ...Settings.enumToSettingOptionArray(PokemonType, (t) => t !== 'None'),
-            new SettingOption('None', '-1'),
-        ],
+        Settings.enumToSettingOptionArray(PokemonType, (t) => t !== 'None'),
     ),
-    type2: new FilterOption<number>(
+    type2: new FilterOption<number[]>(
         'Type 2',
-        ko.observable(-2).extend({ numeric: 0 }),
+        ko.observable([]),
         'breedingTypeFilter2',
-        [
-            new SettingOption('All', '-2'),
-            ...Settings.enumToSettingOptionArray(PokemonType, (t) => t !== 'None'),
-            new SettingOption('None', '-1'),
-        ],
+        Settings.enumToSettingOptionArray(PokemonType, (t) => t !== 'None'),
     ),
     region: new FilterOption<number>(
         'Region',

@@ -23,6 +23,7 @@ import GameHelper from '../GameHelper';
 import PokemonType from '../enums/PokemonType';
 import PokedexFilters from './PokedexFilters';
 import FilterSetting from './FilterSetting';
+import MultiSetting from './MultiSetting';
 
 export default Settings;
 
@@ -222,7 +223,11 @@ Object.keys(BreedingFilters).forEach((key) => {
         return;
     }
     const filter = BreedingFilters[key];
-    Settings.add(new Setting<string>(filter.optionName, filter.displayName, filter.options || [], filter.value().toString()));
+    if (key === 'type1' || key === 'type2') {
+        Settings.add(new MultiSetting<string>(filter.optionName, filter.displayName, filter.options || [], filter.value().toString()));
+    } else {
+        Settings.add(new Setting<string>(filter.optionName, filter.displayName, filter.options || [], filter.value().toString()));
+    }
 });
 
 // Pokedex Filters

@@ -193,26 +193,11 @@ class BreedingController {
             }
 
             // Check if either of the types match
-            const type1: (PokemonType | null) = BreedingFilters.type1.value() > -2 ? BreedingFilters.type1.value() : null;
-            const type2: (PokemonType | null) = BreedingFilters.type2.value() > -2 ? BreedingFilters.type2.value() : null;
-            if (type1 !== null || type2 !== null) {
-                const { type: types } = pokemonMap[partyPokemon.name];
-                if ([type1, type2].includes(PokemonType.None)) {
-                    const type = (type1 == PokemonType.None) ? type2 : type1;
-                    if (!BreedingController.isPureType(partyPokemon, type)) {
-                        return false;
-                    }
-                } else if ((type1 !== null && !types.includes(type1)) || (type2 !== null && !types.includes(type2))) {
-                    return false;
-                }
+            if (!PartyController.filterByTypes(partyPokemon, BreedingFilters.type1.value(), BreedingFilters.type2.value())) {
+                return false;
             }
             return true;
         });
-    }
-
-    private static isPureType(pokemon: PartyPokemon, type: (PokemonType | null)): boolean {
-        const pokemonData = pokemonMap[pokemon.name];
-        return ((type == null || pokemonData.type[0] === type) && (pokemonData.type[1] == undefined || pokemonData.type[1] == PokemonType.None));
     }
 
     // Value displayed at bottom of image
