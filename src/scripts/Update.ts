@@ -1960,6 +1960,21 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 144);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 145);
 
+            // Derive Trainer Id from linked Discord Id to preserve Enigma hints
+            if (saveData?.discord?.ID) {
+                const getDerivedTrainerId = (discordId: number) => {
+                    const MULTIPLIER = 9301;
+                    const OFFSET = 49297;
+                    const MOD = 233280;
+                    let val = (discordId * MULTIPLIER + OFFSET) % MOD;
+                    val = (val - OFFSET + MOD) % MOD;
+                    val = (val * 123901) % MOD;
+                    return val;
+                };
+                const trainerId = getDerivedTrainerId(saveData.discord.ID);
+                playerData.trainerId = trainerId.toString().padStart(6, '0');
+            }
+
             //Delta Episode
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 115);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 116);
@@ -1990,6 +2005,11 @@ class Update implements Saveable {
 
             //Mega Diancie
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 156);
+
+            // If Distortion World has been cleared and no Pokémon in our party has Pokérus, infect the first Pokémon in our party
+            if (saveData.statistics.dungeonsCleared[72] && !saveData.party.caughtPokemon.some(pokemon => pokemon[8] > 0)) {
+                saveData.party.caughtPokemon[0][8] = 2;
+            }
 
             //Joey
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 31);
