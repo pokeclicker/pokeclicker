@@ -65,10 +65,28 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                 <div class="scrolling-div-breeding-filters">
                                     <div class="container-fluid py-3">
                                         <div class="form-row text-left">
-                                            <div class="form-group col-md-6 col-6">
+                                            <div class="form-group col-md-12 col-12">
                                                 <label>Search</label>
                                                 <input autocomplete="off" class="form-control" oninput="BreedingFilters.search.value(new RegExp(`(${/^\/.+\/$/.test(this.value) ? this.value.slice(1, -1) : GameHelper.escapeStringRegex(this.value)})`, 'i'))" placeholder="Search here"/>
                                             </div>
+
+                                            <div class="form-group col-md-6 col-6">
+                                                <label>Types</label>
+                                                <select name="breedingTypeFilter1" autocomplete="off" class="custom-select" onchange="BreedingFilters.type1.value(+this.value), Settings.setSettingByName(this.name, this.value)">
+                                                    <!-- ko foreach: Settings.getSetting('breedingTypeFilter1').options -->
+                                                    <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('breedingTypeFilter1').value === $data.value }, text: $data.text">Type</option>
+                                                    <!-- /ko -->
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-6 col-6">
+                                                <label> </label>
+                                                <select name="breedingTypeFilter2" autocomplete="off" class="custom-select" onchange="BreedingFilters.type2.value(+this.value), Settings.setSettingByName(this.name, this.value)">
+                                                    <!-- ko foreach: Settings.getSetting('breedingTypeFilter2').options -->
+                                                    <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('breedingTypeFilter2').value === $data.value }, text: $data.text">Type</option>
+                                                    <!-- /ko -->
+                                                </select>
+                                            </div>
+
                                             <div class="form-group col-md-6 col-6">
                                                 <label>Regions</label><br/>
                                                 <div class="dropdown show">
@@ -100,37 +118,33 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                     </div>
                                                 </div>
                                             </div>
+
+                                            <!-- Category -->
                                             <div class="form-group col-md-6 col-6">
                                                 <label>Category</label>
-                                                <select name="breedingCategoryFilter" autocomplete="off" class="custom-select" onchange="BreedingFilters.category.value(+this.value), Settings.setSettingByName(this.name, this.value)">
-                                                    <option value="-1">All</option>
-                                                    <!-- ko foreach: PokemonCategories.categories -->
-                                                    <option style="color: whitesmoke" data-bind="attr: { value: $index, selected: Settings.getSetting('breedingCategoryFilter').value == $index() }, text: $data.name, style: { background: $data.color }">Category</option>
-                                                    <!-- /ko -->
-                                                </select>
+                                                <div class="dropdown show">
+                                                    <button type="button" class="text-left custom-select col-12 btn btn-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                                        data-bind="text: BreedingFilters.category.value() == -1 ? 'All' : PokemonCategories.categories()[BreedingFilters.category.value()].name()">
+                                                        Categories
+                                                    </button>
+                                                    <div class="border-secondary dropdown-menu col-12">
+                                                        <div class="dropdown-item dropdown-text" data-bind="click : function(){ BreedingFilters.category.value(-1); Settings.setSettingByName('breedingCategoryFilter', -1) }">
+                                                            All
+                                                        </div>
+                                                        <div class="dropdown-divider"></div>
+                                                        <!-- ko foreach : PokemonCategories.categories -->
+                                                        <div class="dropdown-item" data-bind="text : $data.name(), style: { background: $data.color() },
+                                                            click : function(){ BreedingFilters.category.value($index()); Settings.setSettingByName('breedingCategoryFilter', $index()) }">
+                                                        </div>
+                                                        <!-- /ko-->
+                                                        <div class="dropdown-divider"></div>
+                                                        <a class="dropdown-item dropdown-text" href="#categoryModal" data-toggle="modal">
+                                                            <i>Edit categories</i>
+                                                        </a>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="form-group col-md-6 col-6">
-                                                <label> </label><br/>
-                                                <button class="btn btn-primary w-100" type="button" href="#categoryModal" data-toggle="modal">
-                                                    Edit
-                                                </button>
-                                            </div>
-                                            <div class="form-group col-md-6 col-6">
-                                                <label>Types</label>
-                                                <select name="breedingTypeFilter1" autocomplete="off" class="custom-select" onchange="BreedingFilters.type1.value(+this.value), Settings.setSettingByName(this.name, this.value)">
-                                                    <!-- ko foreach: Settings.getSetting('breedingTypeFilter1').options -->
-                                                    <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('breedingTypeFilter1').value === $data.value }, text: $data.text">Type</option>
-                                                    <!-- /ko -->
-                                                </select>
-                                            </div>
-                                            <div class="form-group col-md-6 col-6">
-                                                <label> </label>
-                                                <select name="breedingTypeFilter2" autocomplete="off" class="custom-select" onchange="BreedingFilters.type2.value(+this.value), Settings.setSettingByName(this.name, this.value)">
-                                                    <!-- ko foreach: Settings.getSetting('breedingTypeFilter2').options -->
-                                                    <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('breedingTypeFilter2').value === $data.value }, text: $data.text">Type</option>
-                                                    <!-- /ko -->
-                                                </select>
-                                            </div>
+
                                             <div class="form-group col-md-6 col-6">
                                                 <label>Shiny Status</label>
                                                 <select name="breedingShinyFilter" autocomplete="off" class="custom-select" onchange="BreedingFilters.shinyStatus.value(+this.value), Settings.setSettingByName(this.name, this.value)">
@@ -222,13 +236,18 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                             <img src="" width="80px" data-bind="attr:{ src: PokemonHelper.getImage($data.id) }">
                                             <span class="pokedex-bottom-text" data-bind="text: BreedingController.getDisplayValue($data)">value</span>
                                             <a class="overlay" href="#breed" data-bind="click: function() { App.game.breeding.addPokemonToHatchery($data); App.game.breeding.checkCloseModal();}"></a>
+
+                                            <!-- Category Button -->
                                             <div class="pokemonCategory dropdown">
-                                                <button data-toggle="dropdown" data-bind="class: `category-${$data.category + 1}`"></button>
-                                                <div class="dropdown-menu p-0">
-                                                    <!-- ko foreach: PokemonCategories.categories -->
-                                                    <a class="dropdown-item category" href="#" data-bind="text: $data.name, style: { background: $data.color }, click: () => { $parent.category = $index() }">Category</a>
+                                                <button data-toggle="dropdown" data-bind="class: `category-${App.game.party.getPokemon($data.id).category + 1}`"></button>
+                                                <div class="border-secondary dropdown-menu">
+                                                    <!-- ko foreach: { data: PokemonCategories.categories, as: 'pokemonCategory' } -->
+                                                    <a class="dropdown-item category" href="#" data-bind="text: pokemonCategory.name, style: { background: pokemonCategory.color, 'text-shadow': '0 0 6px black' }, click: () => { App.game.party.getPokemon($parent.id).category = $index() }">Category</a>
                                                     <!-- /ko -->
-                                                    <a class="dropdown-item bg-dark py-1" href="#categoryModal" data-toggle="modal"><i>Edit</i></a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item dropdown-text" href="#categoryModal" data-toggle="modal">
+                                                        <i>Edit categories</i>
+                                                    </a>
                                                 </div>
                                             </div>
                                         </li>

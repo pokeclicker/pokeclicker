@@ -45,21 +45,10 @@ aria-labelledby="pokedexModalLabel">
                             <div class="container-fluid py-3">
                                 <div class="form-row text-left">
                                     <!--Name-->
-                                    <div class="form-group col-md-6 col-6">
+                                    <div class="form-group col-md-12 col-12">
                                         <label>Name</label>
                                         <input id="nameFilter" class="form-control" placeholder="Bulbasaur" value=""
                                         oninput="PokedexFilters.name.value(new RegExp(`(${/^\/.+\/$/.test(this.value) ? this.value.slice(1, -1) : GameHelper.escapeStringRegex(this.value)})`, 'i'))">
-                                    </div>
-
-                                    <!--Region-->
-                                    <div class="form-group col-md-6 col-6">
-                                        <label>Region</label>
-                                        <select id="pokedex-filter-region" class="custom-select" style="margin-right: 8px"
-                                                data-bind="options: PokedexFilters.region.options,
-                                                        optionsValue: 'value',
-                                                        optionsText: 'text',
-                                                        value: PokedexFilters.region.value">
-                                        </select>
                                     </div>
 
                                     <!--Types-->
@@ -82,23 +71,14 @@ aria-labelledby="pokedexModalLabel">
                                         </select>
                                     </div>
 
+                                    <!--Region-->
                                     <div class="form-group col-md-6 col-6">
-                                        <label for="pokedex-filter-shiny-caught">Caught Status</label>
-                                        <select id="pokedex-filter-shiny-caught" autocomplete="off" class="custom-select"
-                                            data-bind="options: PokedexFilters.caughtShiny.options,
-                                                    optionsValue: 'value',
-                                                    optionsText: 'text',
-                                                    value: PokedexFilters.caughtShiny.value">
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group col-md-6 col-6">
-                                        <label for="pokedex-filter-pokerus-status">Pokerus Status</label>
-                                        <select id="pokedex-filter-pokerus-status" autocomplete="off" class="custom-select"
-                                            data-bind="options: PokedexFilters.statusPokerus.options,
-                                                    optionsValue: 'value',
-                                                    optionsText: 'text',
-                                                    value: PokedexFilters.statusPokerus.value">
+                                        <label>Region</label>
+                                        <select id="pokedex-filter-region" class="custom-select" style="margin-right: 8px"
+                                                data-bind="options: PokedexFilters.region.options,
+                                                        optionsValue: 'value',
+                                                        optionsText: 'text',
+                                                        value: PokedexFilters.region.value">
                                         </select>
                                     </div>
 
@@ -120,14 +100,32 @@ aria-labelledby="pokedexModalLabel">
                                                     click : function(){ Settings.setSettingByName('pokedexCategoryFilter', $index()) }">
                                                 </div>
                                                 <!-- /ko-->
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item dropdown-text" href="#categoryModal" data-toggle="modal">
+                                                    <i>Edit categories</i>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="form-group col-md-6 col-6">
-                                        <label> </label><br/>
-                                        <button class="btn btn-primary w-100" type="button" href="#categoryModal" data-toggle="modal">
-                                            Edit
-                                        </button>
+                                        <label for="pokedex-filter-shiny-caught">Caught Status</label>
+                                        <select id="pokedex-filter-shiny-caught" autocomplete="off" class="custom-select"
+                                            data-bind="options: PokedexFilters.caughtShiny.options,
+                                                    optionsValue: 'value',
+                                                    optionsText: 'text',
+                                                    value: PokedexFilters.caughtShiny.value">
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-md-6 col-6">
+                                        <label for="pokedex-filter-pokerus-status">Pokerus Status</label>
+                                        <select id="pokedex-filter-pokerus-status" autocomplete="off" class="custom-select"
+                                            data-bind="options: PokedexFilters.statusPokerus.options,
+                                                    optionsValue: 'value',
+                                                    optionsText: 'text',
+                                                    value: PokedexFilters.statusPokerus.value">
+                                        </select>
                                     </div>
 
                                     <!-- Mega Evolution -->
@@ -257,11 +255,14 @@ aria-labelledby="pokedexModalLabel">
                                                 <!-- ko if: App.game.party.alreadyCaughtPokemonByName($data.name) -->
                                                 <div class="pokemonCategory dropdown">
                                                     <button data-toggle="dropdown" data-bind="class: `category-${App.game.party.getPokemon($data.id).category + 1}`"></button>
-                                                    <div class="dropdown-menu p-0">
+                                                    <div class="border-secondary dropdown-menu">
                                                         <!-- ko foreach: { data: PokemonCategories.categories, as: 'pokemonCategory' } -->
                                                         <a class="dropdown-item category" href="#" data-bind="text: pokemonCategory.name, style: { background: pokemonCategory.color, 'text-shadow': '0 0 6px black' }, click: () => { App.game.party.getPokemon($parent.id).category = $index() }">Category</a>
                                                         <!-- /ko -->
-                                                        <a class="dropdown-item bg-dark py-1" href="#categoryModal" data-toggle="modal"><i>Edit</i></a>
+                                                        <div class="dropdown-divider"></div>
+                                                        <a class="dropdown-item dropdown-text" href="#categoryModal" data-toggle="modal">
+                                                            <i>Edit categories</i>
+                                                        </a>
                                                     </div>
                                                 </div>
                                                 <!-- /ko -->
