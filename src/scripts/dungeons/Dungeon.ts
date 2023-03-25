@@ -4958,12 +4958,13 @@ dungeonList['Relic Castle'] = new Dungeon('Relic Castle',
 
 dungeonList['Lostlorn Forest'] = new Dungeon('Lostlorn Forest',
     [
-        {pokemon: 'Roselia', options: { weight: 2.67 }},
-        {pokemon: 'Combee', options: { weight: 2.67 }},
-        {pokemon: 'Sewaddle', options: { weight: 2.67 }},
-        {pokemon: 'Venipede', options: { weight: 2.67 }},
-        {pokemon: 'Cottonee', options: { weight: 2.67 }},
-        {pokemon: 'Petilil', options: { weight: 2.67 }},
+        {pokemon: 'Roselia', options: { weight: 2.29 }},
+        {pokemon: 'Combee', options: { weight: 2.29 }},
+        {pokemon: 'Sewaddle', options: { weight: 2.29 }},
+        {pokemon: 'Venipede', options: { weight: 2.29 }},
+        {pokemon: 'Cottonee', options: { weight: 2.29 }},
+        {pokemon: 'Petilil', options: { weight: 2.29 }},
+        {pokemon: 'Vespiquen', options: { weight: 2.29, hide: true, requirement: new ObtainedPokemonRequirement('Vespiquen')}},
         new DungeonTrainer('Pokémon Breeder',
             [
                 new GymPokemon('Tranquill', 166500, 24),
@@ -5691,21 +5692,23 @@ dungeonList['Abundant Shrine'] = new Dungeon('Abundant Shrine',
 
 dungeonList['Victory Road Unova'] = new Dungeon('Victory Road Unova',
     [
-        {pokemon: 'Poliwag', options: { weight: 6.67 }},
-        {pokemon: 'Onix', options: { weight: 6.67 }},
-        {pokemon: 'Marill', options: { weight: 6.67 }},
-        {pokemon: 'Roselia', options: { weight: 6.67 }},
-        {pokemon: 'Altaria', options: { weight: 6.67 }},
-        {pokemon: 'Banette', options: { weight: 6.67 }},
-        {pokemon: 'Buizel', options: { weight: 6.67 }},
-        {pokemon: 'Basculin (Red-Striped)', options: { weight: 6.67 }},
-        {pokemon: 'Basculin (Blue-Striped)', options: { weight: 6.67 }},
-        {pokemon: 'Boldore', options: { weight: 6.67 }},
-        {pokemon: 'Cottonee', options: { weight: 6.67 }},
-        {pokemon: 'Petilil', options: { weight: 6.67 }},
-        {pokemon: 'Tranquill', options: { weight: 6.67 }},
-        {pokemon: 'Unfezant', options: { weight: 6.67 }},
-        {pokemon: 'Gurdurr', options: { weight: 6.67 }},
+        {pokemon: 'Poliwag', options: { weight: 5.89 }},
+        {pokemon: 'Onix', options: { weight: 5.89 }},
+        {pokemon: 'Marill', options: { weight: 5.89 }},
+        {pokemon: 'Roselia', options: { weight: 5.89 }},
+        {pokemon: 'Altaria', options: { weight: 5.89 }},
+        {pokemon: 'Banette', options: { weight: 5.89 }},
+        {pokemon: 'Buizel', options: { weight: 5.89 }},
+        {pokemon: 'Basculin (Red-Striped)', options: { weight: 5.89 }},
+        {pokemon: 'Basculin (Blue-Striped)', options: { weight: 5.89 }},
+        {pokemon: 'Boldore', options: { weight: 5.89 }},
+        {pokemon: 'Cottonee', options: { weight: 5.89 }},
+        {pokemon: 'Petilil', options: { weight: 5.89 }},
+        {pokemon: 'Tranquill', options: { weight: 5.89 }},
+        {pokemon: 'Unfezant', options: { weight: 5.89 }},
+        {pokemon: 'Gurdurr', options: { weight: 5.89 }},
+        {pokemon: 'Sawk', options: { weight: 5.89, hide: true, requirement: new ObtainedPokemonRequirement('Sawk')}},
+        {pokemon: 'Throh', options: { weight: 5.89, hide: true, requirement: new ObtainedPokemonRequirement('Throh')}},
         new DungeonTrainer('Ace Trainer',
             [
                 new GymPokemon('Golurk', 326500, 55),
@@ -5973,7 +5976,7 @@ dungeonList['Twist Mountain'] = new Dungeon('Twist Mountain',
     356500, 7);
 
 dungeonList['Dragonspiral Tower'] = new Dungeon('Dragonspiral Tower',
-    ['Dratini', 'Tranquill', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Vanillish', 'Sawsbuck (Autumn)', 'Sawsbuck (Winter)', 'Beartic', 'Mienfoo', 'Mienshao', 'Druddigon', 'Golett', 'Golurk'],
+    ['Dratini', 'Dragonair', 'Tranquill', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Vanillish', 'Sawsbuck (Spring)', 'Sawsbuck (Summer)', 'Sawsbuck (Autumn)', 'Sawsbuck (Winter)', 'Beartic', 'Mienfoo', 'Mienshao', 'Druddigon', 'Golett', 'Golurk'],
     {
         common: [
             {loot: 'xAttack', weight: 2},
@@ -6099,20 +6102,23 @@ dungeonList['Pledge Grove'] = new Dungeon('Pledge Grove',
 
 dungeonList['Pinwheel Forest'] = new Dungeon('Pinwheel Forest',
     [
-        {pokemon: 'Goldeen', options: { weight: 6.57 }},
-        {pokemon: 'Marill', options: { weight: 6.57 }},
-        {pokemon: 'Yanma', options: { weight: 6.57 }},
-        {pokemon: 'Vigoroth', options: { weight: 6.57 }},
-        {pokemon: 'Toxicroak', options: { weight: 6.57 }},
-        {pokemon: 'Gurdurr', options: { weight: 6.57 }},
-        {pokemon: 'Tympole', options: { weight: 6.57 }},
-        {pokemon: 'Palpitoad', options: { weight: 6.57 }},
-        {pokemon: 'Swadloon', options: { weight: 6.57 }},
-        {pokemon: 'Whirlipede', options: { weight: 6.57 }},
-        {pokemon: 'Cottonee', options: { weight: 6.57 }},
-        {pokemon: 'Petilil', options: { weight: 6.57 }},
-        {pokemon: 'Basculin (Red-Striped)', options: { weight: 6.57 }},
-        {pokemon: 'Basculin (Blue-Striped)', options: { weight: 6.57 }},
+        {pokemon: 'Goldeen', options: { weight: 5.42 }},
+        {pokemon: 'Marill', options: { weight: 5.42 }},
+        {pokemon: 'Yanma', options: { weight: 5.42 }},
+        {pokemon: 'Vigoroth', options: { weight: 5.42 }},
+        {pokemon: 'Toxicroak', options: { weight: 5.42 }},
+        {pokemon: 'Gurdurr', options: { weight: 5.42 }},
+        {pokemon: 'Tympole', options: { weight: 5.42 }},
+        {pokemon: 'Palpitoad', options: { weight: 5.42 }},
+        {pokemon: 'Swadloon', options: { weight: 5.42 }},
+        {pokemon: 'Whirlipede', options: { weight: 5.42 }},
+        {pokemon: 'Cottonee', options: { weight: 5.42 }},
+        {pokemon: 'Petilil', options: { weight: 5.42 }},
+        {pokemon: 'Basculin (Red-Striped)', options: { weight: 5.42 }},
+        {pokemon: 'Basculin (Blue-Striped)', options: { weight: 5.42 }},
+        {pokemon: 'Sawk', options: { weight: 5.42, hide: true, requirement: new ObtainedPokemonRequirement('Sawk')}},
+        {pokemon: 'Throh', options: { weight: 5.42, hide: true, requirement: new ObtainedPokemonRequirement('Throh')}},
+        {pokemon: 'Yanmega', options: { weight: 5.42, hide: true, requirement: new ObtainedPokemonRequirement('Yanmega')}},
         new DungeonTrainer('Preschooler',
             [
                 new GymPokemon('Wooper', 356500, 60),
@@ -8426,7 +8432,7 @@ dungeonList['Lake of the Sunne and Moone'] = new Dungeon('Lake of the Sunne and 
     1200000, 27);
 
 dungeonList['Ruins of Conflict'] = new Dungeon('Ruins of Conflict',
-    ['Floette (Red)', 'Comfey', 'Dedenne', 'Ampharos', 'Electabuzz'],
+    ['Floette (Yellow)', 'Comfey', 'Dedenne', 'Ampharos', 'Electabuzz'],
     {
         common: [
             {loot: 'Dowsing_machine'},
@@ -8450,7 +8456,7 @@ dungeonList['Ruins of Conflict'] = new Dungeon('Ruins of Conflict',
     1200000, 27);
 
 dungeonList['Ruins of Life'] = new Dungeon('Ruins of Life',
-    ['Floette (Red)', 'Comfey', 'Gardevoir', 'Chimecho', 'Munna'],
+    ['Floette (White)', 'Comfey', 'Gardevoir', 'Chimecho', 'Munna'],
     {
         common: [
             {loot: 'Dowsing_machine'},
@@ -8476,7 +8482,7 @@ dungeonList['Ruins of Life'] = new Dungeon('Ruins of Life',
     1200000, 27);
 
 dungeonList['Ruins of Abundance'] = new Dungeon('Ruins of Abundance',
-    ['Floette (Red)', 'Comfey', 'Cottonee', 'Gloom', 'Petilil'],
+    ['Floette (Orange)', 'Comfey', 'Cottonee', 'Gloom', 'Petilil'],
     {
         common: [
             {loot: 'xAttack'},
@@ -8500,7 +8506,7 @@ dungeonList['Ruins of Abundance'] = new Dungeon('Ruins of Abundance',
     1200000, 27);
 
 dungeonList['Ruins of Hope'] = new Dungeon('Ruins of Hope',
-    ['Floette (Red)', 'Comfey', 'Azumarill', 'Poliwhirl', 'Clamperl'],
+    ['Floette (Blue)', 'Comfey', 'Azumarill', 'Poliwhirl', 'Clamperl'],
     {
         common: [
             {loot: 'Lucky_egg'},
@@ -8525,13 +8531,14 @@ dungeonList['Ruins of Hope'] = new Dungeon('Ruins of Hope',
 
 dungeonList['Poni Meadow'] = new Dungeon('Poni Meadow',
     [
-        {pokemon: 'Magikarp', options: { weight: 0.57 }},
-        {pokemon: 'Dratini', options: { weight: 0.57 }},
-        {pokemon: 'Cottonee', options: { weight: 0.57 }},
-        {pokemon: 'Petilil', options: { weight: 0.57 }},
-        {pokemon: 'Ribombee', options: { weight: 0.57 }},
-        {pokemon: 'Misdreavus', options: { weight: 0.57 }},
-        {pokemon: 'Barboach', options: { weight: 0.57 }},
+        {pokemon: 'Magikarp', options: { weight: 0.5 }},
+        {pokemon: 'Dratini', options: { weight: 0.5 }},
+        {pokemon: 'Dragonair', options: { weight: 0.5, hide: true, requirement: new ObtainedPokemonRequirement('Dragonair')}},
+        {pokemon: 'Cottonee', options: { weight: 0.5 }},
+        {pokemon: 'Petilil', options: { weight: 0.5 }},
+        {pokemon: 'Ribombee', options: { weight: 0.5 }},
+        {pokemon: 'Misdreavus', options: { weight: 0.5 }},
+        {pokemon: 'Barboach', options: { weight: 0.5 }},
         new DungeonTrainer('Actor',
             [new GymPokemon('Oricorio (Sensu)', 16659968, 57)], { weight: 1 }, 'Meredith'),
     ],
@@ -8924,7 +8931,10 @@ dungeonList['Warm-Up Tunnel'] = new Dungeon('Warm-Up Tunnel',
     1730000, 38);
 
 dungeonList['Courageous Cavern'] = new Dungeon('Courageous Cavern',
-    ['Pincurchin', 'Dwebble', 'Crustle', 'Swoobat', 'Magikarp', 'Shellder', 'Cloyster', 'Tentacool', 'Chewtle', 'Tentacruel', 'Whiscash'],
+    [
+        'Pincurchin', 'Dwebble', 'Crustle', 'Swoobat', 'Magikarp', 'Shellder', 'Cloyster', 'Tentacool', 'Chewtle', 'Tentacruel', 'Whiscash',
+        {pokemon: 'Clobbopus', options: { hide: true, requirement: new ObtainedPokemonRequirement('Clobbopus')}},
+    ],
     {
         common: [
             {loot: 'Pokeball'},
