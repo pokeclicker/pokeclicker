@@ -25,6 +25,11 @@ export default class Settings {
         return this.list.find((setting) => setting.name === name) || null;
     }
 
+    static isContainedInMultiSetting(name: string, value: any) {
+        const setting = Settings.getSetting(name);
+        return setting !== undefined && Array.isArray(setting.value) && setting.value.includes(value);
+    }
+
     static toJSON() {
         const json = {};
         this.list.forEach((setting) => {

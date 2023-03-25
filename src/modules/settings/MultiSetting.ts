@@ -16,7 +16,6 @@ export default class MultiSetting<T> extends BaseSetting<T[]> {
             options,
             defaultValue,
         );
-        this.optionValues = options.map(o => o.value);
     }
 
     validValue(value: T[]): boolean {
@@ -31,7 +30,11 @@ export default class MultiSetting<T> extends BaseSetting<T[]> {
             return false;
         }
 
-        for (let i = 0; i < this.value.length; i += 1) {
+        if (this.optionValues === undefined) {
+            this.optionValues = this.options.map(o => o.value);
+        }
+
+        for (let i = 0; i < value.length; i += 1) {
             if (!this.optionValues.includes(value[i])) {
                 return false;
             }

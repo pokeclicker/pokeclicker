@@ -26,15 +26,15 @@ const BreedingFilters: Record<string, FilterOption> = {
     ),
     type1: new FilterOption<number[]>(
         'Type 1',
-        ko.observable([]),
+        ko.observable([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]),
         'breedingTypeFilter1',
-        Settings.enumToSettingOptionArray(PokemonType, (t) => t !== 'None'),
+        Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None'),
     ),
     type2: new FilterOption<number[]>(
         'Type 2',
-        ko.observable([]),
+        ko.observable([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]),
         'breedingTypeFilter2',
-        Settings.enumToSettingOptionArray(PokemonType, (t) => t !== 'None'),
+        Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None'),
     ),
     region: new FilterOption<number>(
         'Region',
