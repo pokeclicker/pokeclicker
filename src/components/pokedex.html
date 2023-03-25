@@ -198,14 +198,8 @@ aria-labelledby="pokedexModalLabel">
                         </div>
                     </div>
 
-                    <div class="col-12 d-md-none d-block">
-                        <button class="w-100 my-1 btn btn-secondary" type="button" data-toggle="collapse"
-                                data-target="#pokedex-pokemon-list-container" aria-expanded="false" aria-controls="pokedex-pokemon-list-container">
-                            Pokémon List
-                        </button>
-                    </div>
                     <!-- Pokemon List -->
-                    <div class="col-md-9 col-12 pokemon-list collapse dont-collapse-lg" id="pokedex-pokemon-list-container">
+                    <div class="col-md-9 col-12 pokemon-list" id="pokedex-pokemon-list-container">
                         <!-- ko if: PokedexHelper.filteredList().length == 0 -->
                         <div class="pokedex-border-bottom pt-2 d-md-none d-block">
                             <h4>No Pokémon found</h4>
