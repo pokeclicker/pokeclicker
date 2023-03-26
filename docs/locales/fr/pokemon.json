@@ -138,9 +138,9 @@
   "Pinkan Rattata": "[[Rattata]] [[alt.pinkan]]",
   "Alolan Rattata": "[[Rattata]] [[alt.alolan]]",
   "Raticate": "Rattatac",
-  "Valencian Raticate": "[[Rattata]] [[alt.valencian]]",
-  "Alolan Raticate": "[[Rattata]] [[alt.alolan]]",
-  "Totem Raticate": "[[Rattata]] [[alt.totem]]",
+  "Valencian Raticate": "[[Raticate]] [[alt.valencian]]",
+  "Alolan Raticate": "[[Raticate]] [[alt.alolan]]",
+  "Totem Raticate": "[[Raticate]] [[alt.totem]]",
   "Spearow": "Piafabec",
   "Red Spearow": "Red Piafabec",
   "Fearow": "Rapasdepic",
@@ -1481,5 +1481,5 @@
   "Spectrier": "Spectreval",
   "Calyrex": "Sylveroy",
   "Ice Rider Calyrex": "[[Calyrex]] Cavalier du Froid",
-  "Shadow Rider Calyrex": "[[Calyrex]] Cavalier de l'Effroi"
+  "Shadow Rider Calyrex": "[[Calyrex]] Cavalier d'Effroi"
 }
