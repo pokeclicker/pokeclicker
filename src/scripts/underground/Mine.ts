@@ -433,7 +433,7 @@ class Mine {
             GameHelper.incrementObservable(App.game.statistics.undergroundLayersMined);
 
             if (this.skipsRemaining() < this.maxSkips) {
-                GameHelper.incrementObservable(this.skipsRemaining);
+                GameHelper.incrementObservable(this.skipsRemaining());
             }
         }
     }
