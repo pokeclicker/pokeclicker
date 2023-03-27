@@ -160,7 +160,11 @@ class Pokeballs implements Feature {
             if (!alreadyCaughtShiny) {
                 pref = this.notCaughtShinySelection;
             } else {
-                pref = this.alreadyCaughtShinySelection;
+                if (this.alreadyCaughtShinySelection != GameConstants.Pokeball.None) {
+                    pref = this.alreadyCaughtShinySelection;
+                } else {
+                    pref = this.alreadyCaughtSelection;
+                }
             }
         } else {
             if (!alreadyCaught) {
