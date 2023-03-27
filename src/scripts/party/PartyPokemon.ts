@@ -13,7 +13,8 @@ enum PartyPokemonSaveKeys {
     defaultFemaleSprite,
     hideShinyImage,
     nickname,
-    megaStone
+    megaStone,
+    shadow,
 }
 
 class PartyPokemon implements Saveable {
@@ -37,6 +38,7 @@ class PartyPokemon implements Saveable {
         hideShinyImage: false,
         nickname: '',
         megaStone: undefined,
+        shadow: GameConstants.ShadowStatus.None,
     };
 
     // Saveable observables
@@ -57,6 +59,7 @@ class PartyPokemon implements Saveable {
     defaultFemaleSprite: KnockoutObservable<boolean>;
     hideShinyImage: KnockoutObservable<boolean>;
     _megaStone: KnockoutObservable<MegaStone>;
+    _shadow: KnockoutObservable<GameConstants.ShadowStatus>;
 
     constructor(
         public id: number,
@@ -65,7 +68,8 @@ class PartyPokemon implements Saveable {
         public baseAttack: number,
         public eggCycles: number,
         shiny = false,
-        public gender
+        public gender,
+        shadow: GameConstants.ShadowStatus
     ) {
         this.vitaminsUsed = {};
         GameHelper.enumNumbers(GameConstants.VitaminType).forEach(i => this.vitaminsUsed[i] = ko.observable(0).extend({ numeric: 0 }));
@@ -103,6 +107,7 @@ class PartyPokemon implements Saveable {
         this._nickname = ko.observable();
         this._displayName = ko.pureComputed(() => this._nickname() ? this._nickname() : this._translatedName());
         this._megaStone = ko.observable(undefined);
+        this._shadow = ko.observable(shadow);
     }
 
     public calculateAttack(ignoreLevel = false): number {
@@ -110,7 +115,8 @@ class PartyPokemon implements Saveable {
         const levelMultiplier = ignoreLevel ? 1 : this.level / 100;
         const evsMultiplier = this.calculateEVAttackBonus();
         const heldItemMultiplier = this.heldItem && this.heldItem() instanceof AttackBonusHeldItem ? (this.heldItem() as AttackBonusHeldItem).attackBonus : 1;
-        return Math.max(1, Math.floor((this.baseAttack * attackBonusMultiplier + this.attackBonusAmount) * levelMultiplier * evsMultiplier * heldItemMultiplier));
+        const shadowMultiplier = this.shadow == GameConstants.ShadowStatus.Shadow ? 0.8 : (this.shadow == GameConstants.ShadowStatus.Purified ? 1.2 : 1);
+        return Math.max(1, Math.floor((this.baseAttack * attackBonusMultiplier + this.attackBonusAmount) * levelMultiplier * evsMultiplier * heldItemMultiplier * shadowMultiplier));
     }
 
     public canCatchPokerus(): boolean {
@@ -420,6 +426,7 @@ class PartyPokemon implements Saveable {
         if (json[PartyPokemonSaveKeys.megaStone]) {
             this.giveMegastone(false);
         }
+        this.shadow = json[PartyPokemonSaveKeys.shadow] ?? this.defaults.shadow;
     }
 
     public toJSON() {
@@ -439,6 +446,7 @@ class PartyPokemon implements Saveable {
             [PartyPokemonSaveKeys.hideShinyImage]: this.hideShinyImage(),
             [PartyPokemonSaveKeys.nickname]: this.nickname ? encodeURI(this.nickname) : undefined,
             [PartyPokemonSaveKeys.megaStone]: this.megaStone ? true : false,
+            [PartyPokemonSaveKeys.shadow]: this.shadow,
         };
 
         // Don't save anything that is the default option
@@ -534,5 +542,13 @@ class PartyPokemon implements Saveable {
 
     get megaStone(): MegaStone {
         return this._megaStone();
+    }
+
+    get shadow(): GameConstants.ShadowStatus {
+        return this._shadow();
+    }
+
+    set shadow(value: GameConstants.ShadowStatus) {
+        this._shadow(value);
     }
 }

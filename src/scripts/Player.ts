@@ -25,6 +25,7 @@ class Player {
     private _origins: Array<any>;
     public regionStarters: Array<KnockoutObservable<GameConstants.Starter>>;
     public subregionObject: KnockoutObservable<SubRegion>;
+    public trainerId: string;
 
     constructor(savedPlayer?) {
         const saved: boolean = (savedPlayer != null);
@@ -106,6 +107,8 @@ class Player {
 
         // Save game origins, useful for tracking down any errors that may not be related to the main game
         this._origins = [...new Set((savedPlayer._origins || [])).add(window.location?.origin)];
+
+        this.trainerId = savedPlayer.trainerId || Rand.intBetween(0, 999999).toString().padStart(6, '0');
     }
 
     private _itemList: { [name: string]: KnockoutObservable<number> };
@@ -246,6 +249,7 @@ class Player {
             'highestRegion',
             'highestSubRegion',
             'regionStarters',
+            'trainerId',
         ];
         const plainJS = ko.toJS(this);
         Object.entries(plainJS._itemMultipliers).forEach(([key, value]) => {

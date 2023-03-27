@@ -611,6 +611,7 @@ namespace GameConstants {
     }
     declare enum HoennSubRegions {
         Hoenn,
+        Orre,
     }
     declare enum SinnohSubRegions {
         Sinnoh,
@@ -702,4 +703,9 @@ namespace GameConstants {
         [DayCyclePart.Dusk]: 17,
         [DayCyclePart.Night]: 18,
     };
+    declare enum ShadowStatus {
+        None,
+        Shadow,
+        Purified,
+    }
 }

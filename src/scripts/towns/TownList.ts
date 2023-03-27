@@ -2806,6 +2806,16 @@ TownList['Southern Island'] = new Town(
     }
 );
 
+TownList['Outskirt Stand'] = new Town(
+    'Outskirt Stand',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [],
+    {
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), new DevelopmentRequirement()],
+    }
+);
+
 //Hoenn Dungeons
 TownList['Petalburg Woods'] = new DungeonTown(
     'Petalburg Woods',
@@ -2975,6 +2985,14 @@ TownList['Near Space'] = new DungeonTown(
     GameConstants.HoennSubRegions.Hoenn,
     [
         new QuestLineCompletedRequirement('The Delta Episode'),
+    ]
+);
+TownList['Pyrite Bldg'] = new DungeonTown(
+    'Pyrite Bldg',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [
+        new DevelopmentRequirement(),
     ]
 );
 
@@ -3226,6 +3244,7 @@ const FightAreaAceTrainer = new NPC('Ace Trainer Quinn', [
     'Something amazing happened on top of Mt. Coronet. We could see it all the way from here. I\'m sure everyone in the entire region saw it.',
     'What? You were there? What happened? What was that purple thing?',
     'The Distortion World? Hold on, I think I\'ve heard that name before, there was a guy around here named Zero looking for a way to enter that place.',
+    'I doubt he\'d be interested in talking to you unless you could help him find a way to get there... Can\'t the lake guardians help you with that?',
 ], {image: 'assets/images/trainers/Ace Trainer (male).png'});
 
 const FightAreaZero1 = new NPC('Zero', [
@@ -3780,7 +3799,15 @@ TownList['Distortion World'] = new DungeonTown(
     'Distortion World',
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Sinnoh,
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Spear Pillar'))]
+    [
+        new OneFromManyRequirement([
+            new MultiRequirement([
+                new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Spear Pillar')),
+                new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Distortion World'), GameConstants.AchievementOption.less),
+            ]),
+            new TemporaryBattleRequirement('Zero'),
+        ]),
+    ]
 );
 TownList['Victory Road Sinnoh'] = new DungeonTown(
     'Victory Road Sinnoh',
@@ -4144,7 +4171,7 @@ TownList['Castelia City'] = new Town(
     GameConstants.UnovaSubRegions.Unova,
     [CasteliaCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Castelia City']), new MoveToDungeon(dungeonList['Castelia Sewers'])],
     {
-        requirements: [new GymBadgeRequirement(BadgeEnums.Toxic)],
+        requirements: [new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 0)],
         npcs: [CasteliaMusician],
     }
 );
@@ -4410,7 +4437,6 @@ TownList['Castelia Sewers'] = new DungeonTown(
     GameConstants.Region.unova,
     GameConstants.UnovaSubRegions.Unova,
     [
-        new TemporaryBattleRequirement('Team Plasma Grunt 1'),
         new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 0),
     ]
 );
@@ -4820,6 +4846,48 @@ const ThanksDiancie = new NPC('Princess Diancie', [
     image: 'assets/images/pokemon/719.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Princess Diancie', 6), new QuestLineStepCompletedRequirement('Princess Diancie', 8, GameConstants.AchievementOption.less)]),
 });
+
+const VivillonPhotobook = new NPC('Vivillon Photobook', [
+    '<i>Viola has sent some of her Vivillon photographs in to the local Pokémon Center as a photobook, to celebrate the Lunar New Year. You flip through the pages...</i>',
+    '<img src="assets/images/npcs/textbody/VivillonPhotobookFancyMeadow.png" style="max-width:100%; height:auto"/>',
+    '<i>You see both a Meadow and a Fancy Vivillon flying together in the skies above Kalos. Strangely, the Meadow Vivillon is wearing a necklace of exotic flowers, and the Fancy has a tiny tea cup in its grip.</i>',
+    '<img src="assets/images/npcs/textbody/VivillonPhotobookMarine.png" style="max-width:100%; height:auto"/>',
+    '<i>You see a Marine Vivillon flying above the surface of a lake. It\'s got one foot trailing through the water.</i>',
+    '<img src="assets/images/npcs/textbody/VivillonPhotobookModern.png" style="max-width:100%; height:auto"/>',
+    '<i>You see what was seemingly meant to be a photo of a Pokémon with a bulbous purple tail. However, a Modern Vivillon has jumped in front, and you can\'t get a good look at the other Pokémon.</i>',
+    '<img src="assets/images/npcs/textbody/VivillonPhotobookJungle.png" style="max-width:100%; height:auto"/>',
+    '<i>You see a Jungle Vivillon resting on a blue frog-like Pokémon. The two of them seem to be in the center of a deep bog, but neither looks very concerned.</i>',
+    '<img src="assets/images/npcs/textbody/VivillonPhotobookMonsoon.png" style="max-width:100%; height:auto"/>',
+    '<i>You see a Monsoon Vivillon. It\'s been startled by a light shone in its face. As far as you can see, the area around the spotlight is darker than pitch.</i>',
+    '<img src="assets/images/npcs/textbody/VivillonPhotobookTundra.png" style="max-width:100%; height:auto"/>',
+    '<i>You see a Tundra Vivillon, watching a conveyor belt full of Poké Balls. A worker in the background looks mildly perplexed, as if he was expecting a different Pokémon there.</i>',
+    '<img src="assets/images/npcs/textbody/VivillonPhotobookSun.png" style="max-width:100%; height:auto"/>',
+    '<i>You see a Sun Vivillon bursting through a cloud of smoke. It\'s sweating, but seems to be enjoying itself.</i>',
+    '<img src="assets/images/npcs/textbody/VivillonPhotobookArchipelago.png" style="max-width:100%; height:auto"/>',
+    '<i>You see an Archipelago Vivillon staring in shock at a swaying pillar. A Hoothoot sits next to it, completely unfazed.</i>',
+    '<img src="assets/images/npcs/textbody/VivillonPhotobookElegant.png" style="max-width:100%; height:auto"/>',
+    '<i>You see an Elegant Vivillon frantically pulling at a doorknob. A Klefki seems to be giggling in the background.</i>',
+    '<img src="assets/images/npcs/textbody/VivillonPhotobookOcean.png" style="max-width:100%; height:auto"/>',
+    '<i>You see an Ocean Vivillon snoozing peacefully. An Audino is carefully laying a blanket atop it.</i>',
+    '<img src="assets/images/npcs/textbody/VivillonPhotobookContinental.png" style="max-width:100%; height:auto"/>',
+    '<i>You see a shocked Continental Vivillon staring into a chest. A Voltorb stares back, already primed to explode.</i>',
+    '<img src="assets/images/npcs/textbody/VivillonPhotobookRiver.png" style="max-width:100%; height:auto"/>',
+    '<i>You see a River Vivillon flying through a forest. A spooky old mansion is in the background.</i>',
+    '<img src="assets/images/npcs/textbody/VivillonPhotobookPolar.png" style="max-width:100%; height:auto"/>',
+    '<i>You see a Polar Vivillon peering over the edge of a tower. Clouds travel distantly below.</i>',
+    '<img src="assets/images/npcs/textbody/VivillonPhotobookSandstorm.png" style="max-width:100%; height:auto"/>',
+    '<i>You see a Sandstorm Vivillon atop some desert ruins. It\'s trying to communicate with a large, orange moth-like Pokémon.</i>',
+    '<img src="assets/images/npcs/textbody/VivillonPhotobookGarden.png" style="max-width:100%; height:auto"/>',
+    '<i>You see a Garden Vivillon playing in a field of flowers. The flowers extend far, far into the distance...</i>',
+    '<img src="assets/images/npcs/textbody/VivillonPhotobookHighPlains.png" style="max-width:100%; height:auto"/>',
+    '<i>You see a High Plains Vivillon dancing with a group of Clefairy. Their dance is illuminated only by the full moon.</i>',
+    '<img src="assets/images/npcs/textbody/VivillonPhotobookSavanna.png" style="max-width:100%; height:auto"/>',
+    '<i>You see a Savanna Vivillon running for its life through a ruined tower. Several dragon-type Pokémon are chasing it relentlessly.</i>',
+    '<img src="assets/images/npcs/textbody/VivillonPhotobookIcySnow.png" style="max-width:100%; height:auto"/>',
+    '<i>You see an Icy Snow Vivillon bundled up with its trainer. It\'s enjoying a much-needed warm cup of cocoa to counteract the icy cave around it.</i>',
+    '<img src="assets/images/npcs/textbody/VivillonPhotobookPokéBall.png" style="max-width:100%; height:auto"/>',
+    '<i>Lastly, you see a Poké Ball Vivillon in a darkened mall. It\'s trying to scare the camerawoman, completely unaware of the sinister eyes peering from the darkness behind it.</i>',
+]);
 
 //Kalos Towns
 

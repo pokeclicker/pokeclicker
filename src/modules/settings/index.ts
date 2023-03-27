@@ -244,7 +244,7 @@ Settings.add(new Setting<string>('breedingDisplayFilter', 'breedingDisplayFilter
         new SettingOption('Times Hatched', 'timesHatched'),
         new SettingOption('Breeding Efficiency', 'breedingEfficiency'),
         new SettingOption('Steps per Attack Bonus', 'stepsPerAttack'),
-        new SettingOption('Pokedex ID', 'dexId'),
+        new SettingOption('Pokémon ID #', 'dexId'),
         new SettingOption('Vitamins used', 'vitamins'),
         new SettingOption('EVs', 'evs'),
     ],

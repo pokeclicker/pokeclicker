@@ -40,21 +40,46 @@ class Party implements Feature {
 
     }
 
-    gainPokemonByName(name: PokemonNameType, shiny = false, suppressNotification = false, gender = -1) {
+    gainPokemonByName(name: PokemonNameType, shiny = false, suppressNotification = false, gender = -1, shadow = GameConstants.ShadowStatus.None) {
         const pokemon = pokemonMap[name];
-        this.gainPokemonById(pokemon.id, shiny, suppressNotification, gender);
+        this.gainPokemonById(pokemon.id, shiny, suppressNotification, gender, shadow);
     }
 
-    gainPokemonById(id: number, shiny = false, suppressNotification = false, gender = -1) {
+    gainPokemonById(id: number, shiny = false, suppressNotification = false, gender = -1, shadow = GameConstants.ShadowStatus.None) {
         // If no gender defined, calculate it
         if (gender === -1) {
             gender = PokemonFactory.generateGenderById(id);
         }
-        this.gainPokemon(PokemonFactory.generatePartyPokemon(id, shiny, gender), suppressNotification);
+        this.gainPokemon(PokemonFactory.generatePartyPokemon(id, shiny, gender, shadow), suppressNotification);
     }
 
     gainPokemon(pokemon: PartyPokemon, suppressNotification = false) {
         PokemonHelper.incrementPokemonStatistics(pokemon.id, GameConstants.PokemonStatisticsType.Captured, pokemon.shiny, pokemon.gender);
+
+        if (pokemon.shadow) {
+            // Already caught (shadow)
+            if (!this.alreadyCaughtPokemon(pokemon.id, false, true)) {
+                App.game.logbook.newLog(LogBookTypes.CAUGHT, createLogContent.capturedShadow({ pokemon: pokemon.name }));
+
+                // Notify if not already caught
+                Notifier.notify({
+                    message: `You have captured a shadow ${pokemon.displayName}!`,
+                    type: NotificationConstants.NotificationOption.warning,
+                    sound: NotificationConstants.NotificationSound.General.new_catch,
+                    setting: NotificationConstants.NotificationSetting.General.new_catch,
+                });
+
+                // Already caught (non shadow) we need to update the party pokemon directly
+                if (this.alreadyCaughtPokemon(pokemon.id, false, false)) {
+                    this.getPokemon(pokemon.id).shadow = GameConstants.ShadowStatus.Shadow;
+                    if (!pokemon.shiny && pokemon.shiny) { // Will almost never happen, so don't want to have a log message, that we need to keep track of
+                        this.getPokemon(pokemon.id).shiny = true;
+                    }
+                    return;
+                }
+            }
+        }
+
         if (pokemon.shiny) {
             // Add all shiny catches to the log book
             App.game.logbook.newLog(
@@ -238,10 +263,13 @@ class Party implements Feature {
         return this.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(name).id, shiny);
     }
 
-    alreadyCaughtPokemon(id: number, shiny = false) {
+    alreadyCaughtPokemon(id: number, shiny = false, shadow = false) {
         const pokemon = this.getPokemon(id);
+
         if (pokemon) {
-            return (!shiny || pokemon.shiny);
+            const shinyOkay = (!shiny || pokemon.shiny);
+            const shadowOkay = (!shadow || (pokemon.shadow > GameConstants.ShadowStatus.None));
+            return shinyOkay && shadowOkay;
         }
         return false;
     }

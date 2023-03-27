@@ -73,28 +73,6 @@
     opacity: .5;
     pointer-events: none;
   }
-  .breedingListPokemonName {
-    top: 0px;
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
-  }
-  .breedingListShiny {
-    position: absolute;
-    right: 2px;
-    bottom: 35px;
-    text-shadow: 1px 1px 0 black, -1px 1px 0 black, 1px -1px 0 black, -1px -1px 0 black;
-  }
-  .breedingListPokerus {
-    position: absolute;
-    display: flex;
-    right: 2px;
-    bottom: 7px;
-  }
-  .breedingListDisplayValue {
-    bottom: 0px;
-    border-bottom-left-radius: 6px;
-    border-bottom-right-radius: 6px;
-  }
   .content {
     position: absolute;
     width: 100%;
@@ -307,4 +285,56 @@
   .dropdown-item, .dropdown-item:hover {
     color: whitesmoke;
   }
+}
+
+.breeding-modal {
+  max-width: 1250px !important;
+}
+
+/* Scrolling divs */
+.scrolling-div-breeding-list,
+.scrolling-div-breeding-filters {
+    overflow-y: auto;
+}
+@media (min-width: 768px) {
+  .scrolling-div-breeding-list {
+      height: calc(100vh - 190px);
+  }
+  .scrolling-div-breeding-filters {
+      height: calc(100vh - 234px);
+  }
+}
+@media (max-width: 768px) {
+  .scrolling-div-breeding-list {
+      height: calc(100vh - 300px);
+  }
+  .scrolling-div-breeding-filters {
+      height: calc(100vh - 340px);
+  }
+}
+
+.breedingListShiny {
+  position: absolute;
+  right: 2px;
+  bottom: 35px;
+  text-shadow: 1px 1px 0 black, -1px 1px 0 black, 1px -1px 0 black, -1px -1px 0 black;
+}
+.breedingListPokerus {
+  position: absolute;
+  display: flex;
+  right: 2px;
+  bottom: 7px;
+}
+
+.hatchery-warnings {
+  cursor: none;
+  text-shadow: 0 0 10px black;
+}
+
+.eggSlotModal {
+  box-sizing: border-box;
+  background-image: url('../assets/images/breeding/breedingSlot.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
 }

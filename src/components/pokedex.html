@@ -1,184 +1,288 @@
-<div class="modal noselect" id="pokedexModal" tabindex="-1" role="dialog"
+<div class="modal fade noselect" id="pokedexModal" tabindex="-1" role="dialog"
 aria-labelledby="pokedexModalLabel">
-    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-dialog modal-dialog-scrollable modal-xl pokedex-modal" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h4 style="margin-bottom: 0">Pokédex</h4>
-                <button style="float:right;" class="btn btn-secondary" type="button" data-toggle="collapse"
-                        data-target="#pokedex-filter-container" aria-expanded="false" aria-controls="pokedex-filter-container">
-                    Filters
-                </button>
-            </div>
-            <div class="modal-body pt-0" style="background-color: inherit;">
-                <div class="position-sticky filters-container pokedex-border-bottom" style="background-color: inherit; top: 0; z-index: 100;">
-                    <!-- ko if: PokedexHelper.filteredList().length == 0 -->
-                    <div class="pokedex-border-bottom pt-2">
-                        <h4>No Pokémon found</h4>
-                        <div class="mb-2">
-                            <span>Missing a Pokémon but don't see it here? Be sure to completely explore the region!</span>
+            
+            <div class="modal-header p-md-0 border-md-0 position-relative">
+                <h4 class="d-md-none d-block" style="margin-bottom: 0">Pokédex</h4>
+                <div class="row w-100 m-0 py-1 d-md-flex d-none">
+                    <div class="col-3">
+                        <div class="pokedex-border-bottom pt-2">
+                            <h4>Filters and Settings</h4>
                         </div>
                     </div>
-                    <!-- /ko -->
+                    <div class="col-9">
+                        <!-- ko if: PokedexHelper.filteredList().length == 0 -->
+                        <div class="pokedex-border-bottom pt-2">
+                            <h4>No Pokémon found</h4>
+                        </div>
+                        <!-- /ko -->
 
-                    <!-- ko if: PokedexHelper.filteredList().length != 0 -->
-                    <div class="pokedex-border-bottom pt-2">
-                        <h4 data-bind="text: `Showing ${PokedexHelper.filteredList().length} Pokémon`"></h4>
+                        <!-- ko if: PokedexHelper.filteredList().length != 0 -->
+                        <div class="pokedex-border-bottom pt-2">
+                            <h4 data-bind="text: `Showing ${PokedexHelper.filteredList().length} Pokémon`"></h4>
+                        </div>
+                        <!-- /ko -->
                     </div>
-                    <!-- /ko -->
-
-                    <div class="collapse" id="pokedex-filter-container" style="margin-bottom: 0.5rem;">
-                        <div class="container-fluid py-3">
-                            <div class="form-row text-left">
-                                <!--Name-->
-                                <div class="form-group col-md-6 col-6">
-                                    <label>Name</label>
-                                    <input id="nameFilter" class="form-control" placeholder="Bulbasaur" value=""
+                </div>
+                <button type="button" class="btn btn-danger position-absolute" data-dismiss="modal" style="right:0; top:0; font-size: 18px; font-weight: 700;">×</button>
+            </div>
+            
+            <div class="modal-body pt-0" style="background-color: inherit;">
+                <div class="row">
+                    <div class="col-12 d-md-none d-block">
+                        <button class="w-100 my-1 btn btn-secondary" type="button" data-toggle="collapse"
+                                data-target="#pokedex-filter-container" aria-expanded="false" aria-controls="pokedex-filter-container">
+                            Filters and Settings
+                        </button>
+                    </div>
+                    <!-- Filters and Settings -->
+                    <div class="col-md-3 col-12 collapse dont-collapse-lg" id="pokedex-filter-container" style="background-color: inherit; top: 0; z-index: 100;">
+                        <div class="pokedex-border-bottom pt-2 d-md-none d-block">
+                            <h4>Filters and Settings</h4>
+                        </div>
+                        <div class="scrolling-div-pokedex" style="margin-bottom: 0.5rem;">
+                            <div class="container-fluid py-3">
+                                <div class="form-row text-left">
+                                    <!--Name-->
+                                    <div class="form-group col-md-6 col-6">
+                                        <label>Name</label>
+                                        <input id="nameFilter" class="form-control" placeholder="Bulbasaur" value=""
                                         oninput="PokedexFilters.name.value(new RegExp(`(${/^\/.+\/$/.test(this.value) ? this.value.slice(1, -1) : GameHelper.escapeStringRegex(this.value)})`, 'i'))">
-                                </div>
-
-                                <!--Region-->
-                                <div class="form-group col-md-6 col-6">
-                                    <label>Region</label>
-                                    <select id="pokedex-filter-region" class="custom-select" style="margin-right: 8px"
-                                            data-bind="options: PokedexFilters.region.options,
-                                                       optionsValue: 'value',
-                                                       optionsText: 'text',
-                                                       value: PokedexFilters.region.value">
-                                    </select>
-                                </div>
-
-                                <!--Types-->
-                                <div class="form-group col-md-6 col-6">
-                                    <label>Type</label>
-                                    <select id="pokedex-filter-type1" class="custom-select" style="margin-right: 8px"
-                                            data-bind="options: PokedexFilters.type1.options,
-                                                       optionsValue: 'value',
-                                                       optionsText: 'text',
-                                                       value: PokedexFilters.type1.value">
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-6 col-6">
-                                    <label>Type</label>
-                                    <select id="pokedex-filter-type2" class="custom-select"
-                                            data-bind="options: PokedexFilters.type2.options,
-                                                       optionsValue: 'value',
-                                                       optionsText: 'text',
-                                                       value: PokedexFilters.type2.value">
-                                    </select>
-                                </div>
-
-                                <div class="form-group col-md-6 col-6">
-                                    <label for="pokedex-filter-shiny-caught">Caught Status</label>
-                                    <select id="pokedex-filter-shiny-caught" autocomplete="off" class="custom-select"
-                                        data-bind="options: PokedexFilters.caughtShiny.options,
-                                                   optionsValue: 'value',
-                                                   optionsText: 'text',
-                                                   value: PokedexFilters.caughtShiny.value">
-                                    </select>
-                                </div>
-
-                                <div class="form-group col-md-6 col-6">
-                                    <label for="pokedex-filter-pokerus-status">Pokerus Status</label>
-                                    <select id="pokedex-filter-pokerus-status" autocomplete="off" class="custom-select"
-                                        data-bind="options: PokedexFilters.statusPokerus.options,
-                                                   optionsValue: 'value',
-                                                   optionsText: 'text',
-                                                   value: PokedexFilters.statusPokerus.value">
-                                    </select>
-                                </div>
-
-                                <!--Rare Hold Item-->
-                                <div class="col-md-4 col-12">
-                                    <div class="form-group my-2">
-                                        <span>Rare Hold Item</span>
-                                        <label class="form-check-label toggler-wrapper style-1 float-right">
-                                            <input class="form-check-input" type="checkbox" id="pokedex-filter-held-item"
-                                                data-bind="checked: PokedexFilters.heldItem.value">
-                                            <div class="toggler-slider">
-                                                <div class="toggler-knob"></div>
-                                            </div>
-                                        </label>
                                     </div>
-                                </div>
 
-                                <!--Hide shiny images-->
-                                <div class="col-md-4 col-12 checkbox-border-x">
-                                    <div class="form-group my-2">
-                                        <span>Hide shiny image</span>
-                                        <label class="form-check-label toggler-wrapper style-1 float-right">
-                                            <input class="form-check-input" type="checkbox" id="pokedex-filter-hide-shiny"
-                                                value="false" data-bind="checked: PokedexHelper.hideShinyImages">
-                                            <div class="toggler-slider">
-                                                <div class="toggler-knob"></div>
-                                            </div>
-                                        </label>
+                                    <!--Region-->
+                                    <div class="form-group col-md-6 col-6">
+                                        <label>Region</label>
+                                        <select id="pokedex-filter-region" class="custom-select" style="margin-right: 8px"
+                                                data-bind="options: PokedexFilters.region.options,
+                                                        optionsValue: 'value',
+                                                        optionsText: 'text',
+                                                        value: PokedexFilters.region.value">
+                                        </select>
                                     </div>
-                                </div>
 
-                                <!--Hide alternate forms-->
-                                <div class="col-md-4 col-12">
-                                    <div class="form-group my-2">
-                                        <span>Hide alternate forms</span>
-                                        <label class="form-check-label toggler-wrapper style-1 float-right">
-                                            <input class="form-check-input" type="checkbox" id="pokedex-filter-hide-alternate"
-                                                data-bind="checked: PokedexFilters.hideAlternate.value">
-                                            <div class="toggler-slider">
-                                                <div class="toggler-knob"></div>
+                                    <!--Types-->
+                                    <div class="form-group col-md-6 col-6">
+                                        <label>Types</label>
+                                        <select id="pokedex-filter-type1" class="custom-select" style="margin-right: 8px"
+                                                data-bind="options: PokedexFilters.type1.options,
+                                                        optionsValue: 'value',
+                                                        optionsText: 'text',
+                                                        value: PokedexFilters.type1.value">
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-6 col-6">
+                                        <label> </label>
+                                        <select id="pokedex-filter-type2" class="custom-select"
+                                                data-bind="options: PokedexFilters.type2.options,
+                                                        optionsValue: 'value',
+                                                        optionsText: 'text',
+                                                        value: PokedexFilters.type2.value">
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-md-6 col-6">
+                                        <label for="pokedex-filter-shiny-caught">Caught Status</label>
+                                        <select id="pokedex-filter-shiny-caught" autocomplete="off" class="custom-select"
+                                            data-bind="options: PokedexFilters.caughtShiny.options,
+                                                    optionsValue: 'value',
+                                                    optionsText: 'text',
+                                                    value: PokedexFilters.caughtShiny.value">
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-md-6 col-6">
+                                        <label for="pokedex-filter-pokerus-status">Pokerus Status</label>
+                                        <select id="pokedex-filter-pokerus-status" autocomplete="off" class="custom-select"
+                                            data-bind="options: PokedexFilters.statusPokerus.options,
+                                                    optionsValue: 'value',
+                                                    optionsText: 'text',
+                                                    value: PokedexFilters.statusPokerus.value">
+                                        </select>
+                                    </div>
+
+                                    <!-- Category -->
+                                    <div class="form-group col-md-6 col-6">
+                                        <label for="pokedex-filter-category">Category</label>
+                                        <div class="dropdown show">
+                                            <button type="button" class="text-left custom-select col-12 btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                                data-bind="text: PokedexFilters.category.value() == -1 ? 'All' : PokemonCategories.categories()[PokedexFilters.category.value()].name()">
+                                                Categories
+                                            </button>
+                                            <div class="border-secondary dropdown-menu col-12">
+                                                <div class="dropdown-item dropdown-text" data-bind="click : function(){ Settings.setSettingByName('pokedexCategoryFilter', -1) }">
+                                                    All
+                                                </div>
+                                                <div class="dropdown-divider"></div>
+                                                <!-- ko foreach : PokemonCategories.categories -->
+                                                <div class="dropdown-item" data-bind="text : $data.name(), style: { background: $data.color() },
+                                                    click : function(){ Settings.setSettingByName('pokedexCategoryFilter', $index()) }">
+                                                </div>
+                                                <!-- /ko-->
                                             </div>
-                                        </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6 col-6">
+                                        <label> </label><br/>
+                                        <button class="btn btn-primary w-100" type="button" href="#categoryModal" data-toggle="modal">
+                                            Edit
+                                        </button>
+                                    </div>
+
+                                    <!-- Mega Evolution -->
+                                    <div class="form-group col-md-12 col-12">
+                                        <label for="pokedex-filter-unique-transformation">Unique Forms</label>
+                                        <select id="pokedex-filter-unique-transformation" autocomplete="off" class="custom-select" 
+                                            data-bind="options: PokedexFilters.uniqueTransformation.options,
+                                                optionsValue: 'value',
+                                                optionsText: 'text',
+                                                value: PokedexFilters.uniqueTransformation.value">
+                                        </select>
+                                    </div>
+
+
+                                    <!--Rare Hold Item-->
+                                    <div class="col-12">
+                                        <div class="form-group my-2">
+                                            <span>Rare Hold Item</span>
+                                            <span class="mx-1" 
+                                                data-bind="tooltip: { 
+                                                    title: 'Filters Pokémon with a chance to drop an item', 
+                                                    trigger: 'hover',
+                                                    boundary: 'window'
+                                                }" data-original-title="" title="">ⓘ</span>
+                                            <label class="form-check-label toggler-wrapper style-1 float-right">
+                                                <input class="form-check-input" type="checkbox" id="pokedex-filter-held-item"
+                                                    data-bind="checked: PokedexFilters.heldItem.value">
+                                                <div class="toggler-slider">
+                                                    <div class="toggler-knob"></div>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <!--Hide alternate forms-->
+                                    <div class="col-12">
+                                        <div class="form-group my-2">
+                                            <span>Hide alternate forms</span>
+                                            <label class="form-check-label toggler-wrapper style-1 float-right">
+                                                <input class="form-check-input" type="checkbox" id="pokedex-filter-hide-alternate"
+                                                    data-bind="checked: PokedexFilters.hideAlternate.value">
+                                                <div class="toggler-slider">
+                                                    <div class="toggler-knob"></div>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <hr style="border-color:grey;">
+                                    </div>
+
+                                    <!--Hide shiny images-->
+                                    <div class="col-12">
+                                        <div class="form-group my-2">
+                                            <span>Hide shiny images</span>
+                                            <label class="form-check-label toggler-wrapper style-1 float-right">
+                                                <input class="form-check-input" type="checkbox" id="pokedex-filter-hide-shiny"
+                                                    value="false" data-bind="checked: PokedexHelper.hideShinyImages">
+                                                <div class="toggler-slider">
+                                                    <div class="toggler-knob"></div>
+                                                </div>
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="pokemon-list">
-                    <ul class="row justify-content-center p-0" data-bind="foreach: lazyLoad($element, PokedexHelper.filteredList, { reset: modalUtils.observableState.pokedexModalObservable })"
-                        style="max-width: 100%; padding:0; margin:0;">
-                        <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry"
-                                data-bind="style:{background: PokedexHelper.getBackgroundColors($data.name)}">
-                                <span class="id" style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: ($data.id > 0 ? Math.floor($data.id) + '' : '???').padStart(3, 0)">number</span>
-                                    <div data-bind="visible: App.game.party.alreadyCaughtPokemonByName(name)" style="position: absolute;right: 2px;top: -15px;">
-                                        <img width="18px" src="" data-bind="attr: { src: `assets/images/pokeball/Pokeball${App.game.party.alreadyCaughtPokemon($data.id, true) ? '-shiny' : ''}.svg`}"/>
-                                    </div>
-                                    <!-- ko if: App.game.party.alreadyCaughtPokemonByName(name) -->
-                                    <div data-bind="if: App.game.party.getPokemon($data.id)?.pokerus" style="position: absolute;left: 2px;top: -11px;">
-                                        <img width="32px" src="" data-bind="attr: { src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[App.game.party.getPokemon($data.id)?.pokerus]}.png`}"/>
-                                    </div>
-                                    <div data-bind="if: App.game.party.getPokemon($data.id)?.megaStone" style="position: absolute;right: 1px;top: 4px;">
-                                        <img width="20px" data-bind="attr: { src: App.game.party.getPokemon($data.id).megaStone.getImage()}"/>
-                                    </div>
-                                    <!-- /ko -->
-                                    <img src="" width="80px" data-bind="css: { 'pokemon-not-seen': !PokedexHelper.pokemonSeen($data.id)(), 'pokemon-seen-but-not-caught': !App.game.party.alreadyCaughtPokemonByName(name) && PokedexHelper.pokemonSeen($data.id)() }, attr:{ src: PokemonHelper.getImage($data.id, App.game.party.alreadyCaughtPokemon($data.id, true) && !PokedexHelper.hideShinyImages())}">
-                                    <!-- ko if: PokedexHelper.pokemonSeen($data.id) -->
-                                    <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: PokemonHelper.displayName($data.name)">name</span>
-                                    <a class="overlay" href="#pokemonStatisticsModal" data-toggle="modal" data-bind="click: () => {App.game.statistics.selectedPokemonID($data.id)},
-                                        tooltip: {
-                                            html: true,
-                                            title: `<u>Information:</u>
-                                                <br/>Base Attack: <strong>${$data.attack}</strong>
-                                                <br/>Catch Rate: <strong>${PokemonFactory.catchRateHelper($data.catchRate, true)}%</strong>
-                                                <br/>Hatch Steps: <strong>${App.game.party.getPokemon($data.id)?.getEggSteps().toLocaleString('en-US') || 'Unknown'}</strong>` +
-                                                (App.game.party.getPokemon($data.id)?.pokerus >= GameConstants.Pokerus.Contagious ?
-                                                    `<br/>EVs: <strong>${App.game.party.getPokemon($data.id).evs().toLocaleString('en-US')}</strong>
-                                                    <br/>EV bonus: <strong>×${App.game.party.getPokemon($data.id).calculateEVAttackBonus().toLocaleString('en-US')}</strong>`
-                                                    : '') +
-                                                (App.game.party.getPokemon($data.id)?.megaStone ?
-                                                    `<br/>${App.game.party.getPokemon($data.id).megaStone.getTooltipText()}`
-                                                    : ''),
-                                            trigger: 'hover',
-                                            placement:'bottom'
-                                        }"></a>
-                                    <!-- /ko -->
-                        </li>
-                    </ul>
+                    <div class="col-12 d-md-none d-block">
+                        <button class="w-100 my-1 btn btn-secondary" type="button" data-toggle="collapse"
+                                data-target="#pokedex-pokemon-list-container" aria-expanded="false" aria-controls="pokedex-pokemon-list-container">
+                            Pokémon List
+                        </button>
+                    </div>
+                    <!-- Pokemon List -->
+                    <div class="col-md-9 col-12 pokemon-list collapse dont-collapse-lg" id="pokedex-pokemon-list-container">
+                        <!-- ko if: PokedexHelper.filteredList().length == 0 -->
+                        <div class="pokedex-border-bottom pt-2 d-md-none d-block">
+                            <h4>No Pokémon found</h4>
+                        </div>
+                        <!-- /ko -->
+
+                        <!-- ko if: PokedexHelper.filteredList().length != 0 -->
+                        <div class="pokedex-border-bottom pt-2 d-md-none d-block">
+                            <h4 data-bind="text: `Showing ${PokedexHelper.filteredList().length} Pokémon`"></h4>
+                        </div>
+                        <!-- /ko -->
+                        <div class="scrolling-div-pokedex">
+                            <!-- ko if: PokedexHelper.filteredList().length == 0 -->
+                            <div class="mt-1">
+                                <span>Missing a Pokémon but don't see it here? Be sure to completely explore the region!</span>
+                            </div>
+                            <!-- /ko -->
+                            <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: lazyLoad($element, PokedexHelper.filteredList, { pageSize: 60, reset: modalUtils.observableState.pokedexModalObservable })">
+                                <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry"
+                                        data-bind="style:{background: PokedexHelper.getBackgroundColors($data.name)}">
+                                        <span class="id pokedex-top-text" data-bind="text: ($data.id > 0 ? Math.floor($data.id) + '' : '???').padStart(3, 0)">number</span>
+                                            <div data-bind="visible: App.game.party.alreadyCaughtPokemonByName(name)" style="position: absolute;right: 2px;top: -15px;">
+                                                <img width="18px" src="" data-bind="attr: { src: `assets/images/pokeball/Pokeball${App.game.party.alreadyCaughtPokemon($data.id, true) ? '-shiny' : ''}.svg`}"/>
+                                            </div>
+                                            <!-- ko if: App.game.party.alreadyCaughtPokemonByName(name) -->
+                                            <div data-bind="if: App.game.party.getPokemon($data.id)?.pokerus" style="position: absolute;left: 2px;top: -11px;">
+                                                <img width="32px" src="" data-bind="attr: { src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[App.game.party.getPokemon($data.id)?.pokerus]}.png`}"/>
+                                            </div>
+                                            <div data-bind="if: App.game.party.getPokemon($data.id)?.megaStone" style="position: absolute;right: 1px;top: 4px;">
+                                                <img width="20px" data-bind="attr: { src: App.game.party.getPokemon($data.id).megaStone.getImage()}"/>
+                                            </div>
+                                            <!-- /ko -->
+                                            <img src="" width="80px" data-bind="css: { 'pokemon-not-seen': !PokedexHelper.pokemonSeen($data.id)(), 'pokemon-seen-but-not-caught': !App.game.party.alreadyCaughtPokemonByName(name) && PokedexHelper.pokemonSeen($data.id)() }, attr:{ src: PokemonHelper.getImage($data.id, App.game.party.alreadyCaughtPokemon($data.id, true) && !PokedexHelper.hideShinyImages())}">
+                                            <!-- ko if: PokedexHelper.pokemonSeen($data.id) -->
+                                            <span class="pokedex-bottom-text" data-bind="text: PokemonHelper.displayName($data.name)">name</span>
+                                            <a class="overlay" href="#pokemonStatisticsModal" data-toggle="modal" data-bind="click: () => {App.game.statistics.selectedPokemonID($data.id)},
+                                                tooltip: {
+                                                    html: true,
+                                                    title: `<u>Information:</u>
+                                                        <br/>Base Attack: <strong>${$data.attack}</strong>
+                                                        <br/>Catch Rate: <strong>${PokemonFactory.catchRateHelper($data.catchRate, true)}%</strong>
+                                                        <br/>Hatch Steps: <strong>${App.game.party.getPokemon($data.id)?.getEggSteps().toLocaleString('en-US') || 'Unknown'}</strong>` +
+                                                        (App.game.party.getPokemon($data.id)?.pokerus >= GameConstants.Pokerus.Contagious ?
+                                                            `<br/>EVs: <strong>${App.game.party.getPokemon($data.id).evs().toLocaleString('en-US')}</strong>
+                                                            <br/>EV bonus: <strong>×${App.game.party.getPokemon($data.id).calculateEVAttackBonus().toLocaleString('en-US')}</strong>`
+                                                            : '') +
+                                                        (App.game.party.getPokemon($data.id)?.megaStone ?
+                                                            `<br/>${App.game.party.getPokemon($data.id).megaStone.getTooltipText()}`
+                                                            : ''),
+                                                    trigger: 'hover',
+                                                    placement:'bottom'
+                                                }"></a>
+                                                
+                                                <!-- Category Button -->
+                                                <!-- ko if: App.game.party.alreadyCaughtPokemonByName($data.name) -->
+                                                <div class="pokemonCategory dropdown">
+                                                    <button data-toggle="dropdown" data-bind="class: `category-${App.game.party.getPokemon($data.id).category + 1}`"></button>
+                                                    <div class="dropdown-menu p-0">
+                                                        <!-- ko foreach: { data: PokemonCategories.categories, as: 'pokemonCategory' } -->
+                                                        <a class="dropdown-item category" href="#" data-bind="text: pokemonCategory.name, style: { background: pokemonCategory.color, 'text-shadow': '0 0 6px black' }, click: () => { App.game.party.getPokemon($parent.id).category = $index() }">Category</a>
+                                                        <!-- /ko -->
+                                                        <a class="dropdown-item bg-dark py-1" href="#categoryModal" data-toggle="modal"><i>Edit</i></a>
+                                                    </div>
+                                                </div>
+                                                <!-- /ko -->
+                                            <!-- /ko -->
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
-
+            <!--
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
+            -->
         </div>
     </div>
 </div>
