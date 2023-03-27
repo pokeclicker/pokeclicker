@@ -1685,6 +1685,7 @@ class Farming implements Feature {
     getReplantMultiplier(): number {
         let multiplier = 1;
         multiplier *= App.game.oakItems.calculateBonus(OakItemType.Sprinklotad);
+        multiplier = Math.min(1, multiplier); 
         return multiplier;
     }
 
