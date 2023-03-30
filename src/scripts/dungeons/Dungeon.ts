@@ -3457,15 +3457,19 @@ dungeonList['Near Space'] = new Dungeon('Near Space',
             {loot: 'Iron Plate', weight: 2},
             {loot: 'Moon Stone'},
         ],
+        mythic: [{loot: 'Carbos', requirement: new ClearDungeonRequirement(250, GameConstants.getDungeonIndex('Near Space'))}],
     },
     9000000,
     [
         new DungeonBossPokemon('Deoxys', 95743340, 80),
-        new DungeonBossPokemon('Deoxys (Attack)', 95743340, 80),
-        new DungeonBossPokemon('Deoxys (Defense)', 95743340, 80),
-        new DungeonBossPokemon('Deoxys (Speed)', 95743340, 80),
+        new DungeonBossPokemon('Deoxys (Attack)', 95743340, 80, {requirement: new ObtainedPokemonRequirement('Deoxys (Attack)')}),
+        new DungeonBossPokemon('Deoxys (Defense)', 95743340, 80, {requirement: new ObtainedPokemonRequirement('Deoxys (Defense)')}),
+        new DungeonBossPokemon('Deoxys (Speed)', 95743340, 80, {requirement: new ObtainedPokemonRequirement('Deoxys (Speed)')}),
     ],
-    700000, 131);
+    700000, 131,
+    () => {},
+    {dungeonRegionalDifficulty: GameConstants.Region.kalos});
+
 // Sinnoh
 
 dungeonList['Oreburgh Gate'] = new Dungeon('Oreburgh Gate',
