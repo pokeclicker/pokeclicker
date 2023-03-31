@@ -2014,8 +2014,11 @@ class Update implements Saveable {
             //Joey
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 31);
 
-            //Delta PArt 2
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 138);
+        },
+        '0.10.11': ({ playerData, saveData }) => {
+
+            //Hoenn Stone Shop fight
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 139);
         },
     };
 
