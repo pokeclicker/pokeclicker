@@ -372,7 +372,7 @@ const BillsGrandpa6 = new NPC('Bill\'s Grandpa', [
 
 const BillsGrandpa7 = new NPC('Bill\'s Grandpa', [
     'As I said, that was one of the best battles I\'ve ever had.',
-    'There is someone I would like to go with you: my partner Eevee.',
+    'There is someone I would like to go with you, it\'s my partner, Eevee.',
     'I think Eevee is gonna be better with you than with me. I\'m sure that, with you, Eevee is gonna grow up healthy and strong!',
 ], {image: 'assets/images/npcs/Bill\'s Grandpa without Eevee.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Bill\'s Grandpa Treasure Hunt', 11), new QuestLineStepCompletedRequirement('Bill\'s Grandpa Treasure Hunt', 13, GameConstants.AchievementOption.less)]),
@@ -2470,7 +2470,7 @@ const Zinnia5 = new NPC('Zinnia', [
 const Archie = new NPC('Archie', [
     'Baah, what\'s the use in fighting you?',
     'That Dragon twerp stole my Key Stone, there\'s no way I can win without it. Looks like you\'re after her too, huh?',
-    'Last I saw, she was headed towards Mt. Pyre. Hopefully she messes up Maxie\'s day too! At least she didn\'t take the.... uuh...',
+    'Last I saw, she was headed towards Mt. Chimney. Hopefully she messes up Maxie\'s day too! At least she didn\'t take the.... uuh...',
     'Never you mind that, get outta here!',
 ], {image: 'assets/images/trainers/Aqua Leader.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 21), new QuestLineStepCompletedRequirement('The Delta Episode', 23, GameConstants.AchievementOption.less)]),
@@ -2479,14 +2479,14 @@ const Archie = new NPC('Archie', [
 const Maxie = new NPC('Maxie', [
     'There\'s no way I can beat you!',
     'Zinnia.... I thought I could trust her after she found the Red Orb for me, but I guess not. She stole my Key Stone!',
-    'Oh uh... forget I said that. Zinnia\'s already gone. I have no idea where she went, but another Draconid might know. Maybe try talking to Wallace?',
+    'Oh uh... forget I said that. Zinnia\'s already gone. I have no idea where she went, but another Draconid or even an ancient Sootopolitan might know. Maybe try talking to Wallace?',
 ], {image: 'assets/images/trainers/Magma Leader.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 23), new QuestLineStepCompletedRequirement('The Delta Episode', 25, GameConstants.AchievementOption.less)]),
 });
 
 const Wallace3 = new NPC('Gym Leader Wallace', [
     'Hello again, $playername$. I can see by the look on your face that this is not just a social call.',
-    '....Yes I do know about Zinnia, she is a Draconid like me and this generation\'s Lorekeeper. She may be acting in ways you disagree with, but everything she\'s doing is for a reason.',
+    '....Yes I do know about Zinnia, she is a Draconid and this generation\'s Lorekeeper. She may be acting in ways you disagree with, but everything she\'s doing is for a reason.',
     'I do know where she is, but I can\'t just tell you. If you can defeat me, you may be worthy of knowing.',
 ], {image: 'assets/images/gymLeaders/Wallace.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 24), new QuestLineStepCompletedRequirement('The Delta Episode', 26, GameConstants.AchievementOption.less)]),
@@ -3244,6 +3244,7 @@ const FightAreaAceTrainer = new NPC('Ace Trainer Quinn', [
     'Something amazing happened on top of Mt. Coronet. We could see it all the way from here. I\'m sure everyone in the entire region saw it.',
     'What? You were there? What happened? What was that purple thing?',
     'The Distortion World? Hold on, I think I\'ve heard that name before, there was a guy around here named Zero looking for a way to enter that place.',
+    'I doubt he\'d be interested in talking to you unless you could help him find a way to get there... Can\'t the lake guardians help you with that?',
 ], {image: 'assets/images/trainers/Ace Trainer (male).png'});
 
 const FightAreaZero1 = new NPC('Zero', [
@@ -4170,7 +4171,7 @@ TownList['Castelia City'] = new Town(
     GameConstants.UnovaSubRegions.Unova,
     [CasteliaCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Castelia City']), new MoveToDungeon(dungeonList['Castelia Sewers'])],
     {
-        requirements: [new GymBadgeRequirement(BadgeEnums.Toxic)],
+        requirements: [new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 0)],
         npcs: [CasteliaMusician],
     }
 );
@@ -4436,7 +4437,6 @@ TownList['Castelia Sewers'] = new DungeonTown(
     GameConstants.Region.unova,
     GameConstants.UnovaSubRegions.Unova,
     [
-        new TemporaryBattleRequirement('Team Plasma Grunt 1'),
         new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 0),
     ]
 );

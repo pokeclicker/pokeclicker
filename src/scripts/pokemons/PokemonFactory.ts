@@ -121,9 +121,9 @@ class PokemonFactory {
         return false;
     }
 
-    public static generatePartyPokemon(id: number, shiny = false, gender = GameConstants.BattlePokemonGender.NoGender): PartyPokemon {
+    public static generatePartyPokemon(id: number, shiny = false, gender = GameConstants.BattlePokemonGender.NoGender, shadow = GameConstants.ShadowStatus.None): PartyPokemon {
         const dataPokemon = PokemonHelper.getPokemonById(id);
-        return new PartyPokemon(dataPokemon.id, dataPokemon.name, dataPokemon.evolutions, dataPokemon.attack, dataPokemon.eggCycles, shiny, gender);
+        return new PartyPokemon(dataPokemon.id, dataPokemon.name, dataPokemon.evolutions, dataPokemon.attack, dataPokemon.eggCycles, shiny, gender, shadow);
     }
 
     /**

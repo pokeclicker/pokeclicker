@@ -616,9 +616,7 @@ GymList['Champion Wallace'] = new Gym(
     16000,
     'I, the Champion, fall in defeat… That was wonderful work. You were elegant, infuriatingly so. And yet it was utterly glorious! Kudos to you! You are a truly noble Pokémon Trainer!',
     [new GymBadgeRequirement(BadgeEnums.Elite_Drake)],
-    () => {
-        App.game.quests.getQuestLine('Mystery of Deoxys').beginQuest();
-    },
+    () => {},
     { champion: true }
 );
 
