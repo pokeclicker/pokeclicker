@@ -3476,10 +3476,10 @@ dungeonList['Pyrite Bldg'] = new Dungeon('Pyrite Bldg',
     [
         new DungeonTrainer('Cooltrainer',
             [
+                new GymPokemon('Yanma', 37000, 33, undefined, undefined, GameConstants.ShadowStatus.Shadow),
                 new GymPokemon('Pineco', 37000, 32),
                 new GymPokemon('Nincada', 37000, 31),
                 new GymPokemon('Surskit', 37000, 32),
-                new GymPokemon('Yanma', 37000, 33),
             ], { weight: 1 }, 'Nore', '(male)'),
         new DungeonTrainer('Cooltrainer',
             [
@@ -3531,16 +3531,16 @@ dungeonList['Pyrite Bldg'] = new Dungeon('Pyrite Bldg',
             ], { weight: 0.5 }, 'Elidi', '(female)'),
         new DungeonTrainer('Cooltrainer',
             [
+                new GymPokemon('Remoraid', 37000, 33, undefined, undefined, GameConstants.ShadowStatus.Shadow),
                 new GymPokemon('Spinarak', 37000, 33),
                 new GymPokemon('Luvdisc', 37000, 32),
-                new GymPokemon('Remoraid', 37000, 33),
             ], { weight: 1 }, 'Reath', '(female)'),
         new DungeonTrainer('Cooltrainer',
             [
+                new GymPokemon('Mantine', 37000, 28, undefined, undefined, GameConstants.ShadowStatus.Shadow),
                 new GymPokemon('Aipom', 37000, 28),
                 new GymPokemon('Furret', 37000, 28),
                 new GymPokemon('Yanma', 37000, 28),
-                new GymPokemon('Mantine', 37000, 28),
             ], { weight: 1 }, 'Ferma', '(female)'),
     ],
     {
@@ -3566,9 +3566,9 @@ dungeonList['Pyrite Bldg'] = new Dungeon('Pyrite Bldg',
     [
         new DungeonTrainer('Cooltrainer',
             [
+                new GymPokemon('Qwilfish', 910000, 33, undefined, undefined, GameConstants.ShadowStatus.Shadow),
                 new GymPokemon('Goldeen', 910000, 33),
                 new GymPokemon('Linoone', 910000, 33),
-                new GymPokemon('Qwilfish', 910000, 33),
             ], { weight: 1 }, 'Dokken', '(female)'),
     ],
     40000, 131);
