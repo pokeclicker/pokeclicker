@@ -4231,7 +4231,7 @@ TemporaryBattleList['Rampaging Zacian'] = new TemporaryBattle(
     undefined,
     {
         hideTrainer: true,
-        imageName: '../pokemon/888.1',
+        imageName: '../pokemon/888.01',
     }
 );
 TemporaryBattleList['Rampaging Zamazenta'] = new TemporaryBattle(
@@ -4242,7 +4242,7 @@ TemporaryBattleList['Rampaging Zamazenta'] = new TemporaryBattle(
     undefined,
     {
         hideTrainer: true,
-        imageName: '../pokemon/889.1',
+        imageName: '../pokemon/889.01',
     }
 );
 TemporaryBattleList['Klara 1'] = new TemporaryBattle(
