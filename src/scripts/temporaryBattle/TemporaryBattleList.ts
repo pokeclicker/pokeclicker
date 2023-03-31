@@ -2419,7 +2419,7 @@ TemporaryBattleList['Millis and Argus Steel'] = new TemporaryBattle(
 TemporaryBattleList['Rampaging Yveltal'] = new TemporaryBattle(
     'Rampaging Yveltal',
     [new GymPokemon('Yveltal', 446974112, 80)],
-    '<i>Diancie fights along side you, Mega Evolving to land the final blow! She hands you her Mega Stone after the fight.</i></br><img src="assets/images/megaStone/719.png"/></br>',
+    '<i>Diancie fights alongside you, Mega Evolving to land the final blow! She hands you her Mega Stone after the fight.</i></br><img src="assets/images/megaStone/719.png"/></br>',
     [new QuestLineStepCompletedRequirement('Princess Diancie', 8)],
     undefined,
     {
