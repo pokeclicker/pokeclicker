@@ -8440,7 +8440,7 @@ export const pokemonList = createPokemonArray(
     {
         'id': 229.01,
         'name': 'Mega Houndoom',
-        'type': [PokemonType.Fire, PokemonType.Dark],
+        'type': [PokemonType.Dark, PokemonType.Fire],
         'eggCycles': 20,
         'levelType': LevelType.slow,
         'exp': 351,
