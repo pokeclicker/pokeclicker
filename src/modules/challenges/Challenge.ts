@@ -3,6 +3,7 @@ import {
 } from 'knockout';
 import * as GameConstants from '../GameConstants';
 import Notifier from '../notifications/Notifier';
+import Requirement from '../requirements/Requirement';
 
 export default class Challenge {
     public active: KnockoutObservable<boolean>;
@@ -11,6 +12,7 @@ export default class Challenge {
         public type: string,
         public description: string,
         active = false,
+        public requirement?: Requirement,
     ) {
         this.active = ko.observable(active);
     }
@@ -33,6 +35,10 @@ export default class Challenge {
         })) {
             this.active(false);
         }
+    }
+
+    public isUnlocked(): boolean {
+        return this.requirement ? this.requirement.isCompleted() : true;
     }
 
     toJSON(): boolean {

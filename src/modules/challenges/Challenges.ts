@@ -1,5 +1,7 @@
 import { Saveable } from '../DataStore/common/Saveable';
+import DevelopmentRequirement from '../requirements/DevelopmentRequirement';
 import Challenge from './Challenge';
+import MonotypeChallenge from './MonotypeChallenge';
 
 export default class Challenges implements Saveable {
     saveKey = 'challenges';
@@ -19,23 +21,51 @@ export default class Challenges implements Saveable {
         realEvolutions: new Challenge('Real evolutions', 'Your Pokémon go away, when they evolve'),
     };
 
+    listSpecial: Record<string, any> = {
+        monotype: new MonotypeChallenge('Monotype', 'Only Pokémon that contains the selected type will deal damage and yield Dungeon Tokens', new DevelopmentRequirement()),
+    };
+
     fromJSON(json): void {
-        if (!json || !json.list) {
+        if (!json || (!json.list && !json.listSpecial)) {
             return;
         }
 
+        // Standard Challenges
         Object.entries(json.list).forEach(([challenge, value]) => {
             this.list[challenge]?.active(!!value);
+        });
+
+        // Special Challenges
+        Object.entries(json.listSpecial).forEach(([challenge, value]: [string, any]) => {
+            this.listSpecial[challenge]?.active(!!value.active);
+            // Monotype
+            if (challenge === 'monotype') {
+                this.listSpecial[challenge]?.pokemonType(value.options.pokemonType);
+            }
         });
     }
 
     toJSON(): Record<string, any> {
         const list = {};
+        const listSpecial = {};
+        const objectSpecial = { active: false, options: {} };
+
+        // Standard Challenges
         Object.entries(this.list).forEach(([c, v]) => {
             list[c] = v.active();
         });
+        
+        // Special Challenges
+        Object.entries(this.listSpecial).forEach(([c, v]) => {
+            objectSpecial.active = v.active();
+            // Monotype
+            if (c === 'monotype') {
+                objectSpecial.options = { pokemonType: v.pokemonType() };
+            }
+            listSpecial[c] = objectSpecial;
+        });
         return {
-            list,
+            list, listSpecial,
         };
     }
 }
