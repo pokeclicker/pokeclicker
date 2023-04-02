@@ -1749,7 +1749,7 @@ Routes.add(new RegionRoute(
         land: ['Alolan Rattata', 'Spearow', 'Ekans', 'Alolan Meowth', 'Growlithe', 'Abra', 'Drowzee', 'Smeargle', 'Makuhita', 'Furfrou', 'Yungoos', 'Cutiefly'],
         special: [new SpecialRoutePokemon(['Meltan'], new QuestLineStepCompletedRequirement('Let\'s Go, Meltan!', 9))],
     }),
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Trainers\' School'))],
+    [new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 5)],
     undefined,
     GameConstants.AlolaSubRegions.MelemeleIsland
 ));

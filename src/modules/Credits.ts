@@ -449,6 +449,14 @@ export const SpriteCredits: Credit[] = [
         // NOTES: Permission given via PRs
     },
     {
+        name: 'Jostov',
+        link: 'https://discordapp.com/users/823666951565344828/',
+        resources: [
+            'Rotom-Dex',
+            'Lillie (default)',
+        ],
+        // Notes: Made specifically for PokéClicker.
+    },    {
         name: 'Kensuyjin33',
         link: 'https://www.deviantart.com/kensuyjin33',
         image: 'https://a.deviantart.net/avatars-big/k/e/kensuyjin33.png',
@@ -499,6 +507,7 @@ export const SpriteCredits: Credit[] = [
             'Hiker (Gen 8)',
             'Kurt',
             'Looker',
+            'Lillie (Z-powered form)',
             'Mr. Fuji',
             'Owner',
             'Prof. Birch',
@@ -676,6 +685,15 @@ export const SpriteCredits: Credit[] = [
         ],
     },
     {
+        name: 'RekiemLock',
+        link: 'https://www.deviantart.com/rekiemlock',
+        image: 'https://a.deviantart.net/avatars-big/r/e/rekiemlock.jpg',
+        resources: [
+            'Team Skull overworld sprite',
+        ],
+        // Notes: Permission given if credited
+    },
+    {
         name: 'SageDeoxys, Wolfang62, LarryTurbo, tammyclaydon',
         link: 'https://www.pokecommunity.com/showthread.php?t=474312',
         resources: [
@@ -832,6 +850,7 @@ export const SpriteCredits: Credit[] = [
         image: 'https://www.smogon.com/forums/media/data/avatars/o/522/522483.jpg?1650909371',
         resources: [
             'Dexio (Gen 6)',
+            'Ultra Recon Squad (Dulse, Phyco, Soliera, Zossie)',
         ],
         // Notes: Permission given if credited.
     },

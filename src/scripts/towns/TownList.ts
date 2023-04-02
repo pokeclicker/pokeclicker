@@ -5276,6 +5276,24 @@ const IkiOutskirtsMom = new NPC('Scratch Cat Girl', [
     'What\'s that? AM or PM?',
     'Yes.',
 ], {image: 'assets/images/npcs/Scratch Cat Girl.png'});
+const Lillie1 = new NPC('Mysterious Girl', [
+    'H-help... Save Nebby!',
+], {
+    image: 'assets/images/npcs/Lillie.png',
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('Welcome to paradise, cousin!'), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 1, GameConstants.AchievementOption.less)]),
+});
+const Lillie2 = new NPC('Mysterious Girl', [
+    'My name is Lillie. Are you a friend of the professor\'s? Let\'s go back to Iki Town.',
+], {
+    image: 'assets/images/npcs/Lillie.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 1), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 2, GameConstants.AchievementOption.less)]),
+});
+const LillieMahaloTrail = new NPC('Lillie', [
+    'Please... Don\'t tell anyone about this... About seeing Nebby... It\'s...it\'s a secret, OK? Um...',
+], {
+    image: 'assets/images/npcs/Lillie.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 2), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 3, GameConstants.AchievementOption.less)]),
+});
 const TrainerSchoolTeacher = new NPC('Teacher Emily', [
     'Just as Alola has multiple islands, its dungeons have multiple floors! Hurry to the ladder to find your way to the next floor.',
     'Watch the clock, if you make it to the next floor you\'ll get a time boost to help you find the boss.',
@@ -5287,6 +5305,92 @@ const IkiKahuna = new NPC('Kahuna Hala', [
     'After completing all of an island\'s trials, you will battle that island\'s Kahuna in a Grand trial.',
     'This island only has one trial: Captain Ilima\'s trial in Verdant Cavern, below the Melemele Woods. Come back here after clearing that challenge for your Grand trial battle.',
 ], {image: 'assets/images/gymLeaders/Hala.png'});
+const ReconSquad1 = new NPC('Strange Tourists', [
+    '<i>??? (left):</i> So this is what they call a festival! What does it feel like battling on that stage? It\'s too bad our teammates are too busy to enjoy the show. You might be able to meet with them after your battle.',
+    '',
+    '<i>??? (right):</i> You are partaking in the festival? As though this is any time to celebrate... It is only thanks to the Blinding One that Alola is overflowing with such brilliance.',
+], {
+    image: 'assets/images/npcs/Recon Squad (Ultra Sun).png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 2), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 3, GameConstants.AchievementOption.less)]),
+});
+const ReconSquad2 = new NPC('More Strange Tourists', [
+    '<i>??? (right):</i> Captain... I was able to detect high levels of energy at this full-powered festival.',
+    '',
+    '<i>Captain (left):</i> It seems that these Z-Crystals and Melemele Island\'s guardian are bathed in a great deal of light. Alola overflows with the light that was released by the Blinding One... I find myself rather envious.',
+    '',
+    'You... You are not native to Alola either, are you? We are the Ultra Recon Squad. Perhaps we will meet again.',
+], {
+    image: 'assets/images/npcs/Recon Squad (Ultra Moon).png',
+    requirement: new MultiRequirement([new TemporaryBattleRequirement('Hau 2'), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 3, GameConstants.AchievementOption.less)]),
+});
+const RotomDex1 = new NPC('Kukui\'s Gift', [
+    '<i>Kukui:</i> Hey, trainer! Figured you\'ll be a bit lost on these islands, yeah! So I went ahead and made you a Pokédex that can help you navigate all these subregions. Of course, you have to beat each island\'s kahuna before you can visit the next one.',
+    '',
+    '<i>Rotom-Dex:</i> Zzzt! Pleazzzure to meet you! I\'ll be your guide on you tour of Alola- izzz what I would say if you didn\'t already have a Pokédex of your own! What\'zzz the deal with that old model anyway? I\'m much cooler and shinier than that thing!',
+    'If you\'re ever feelin\' lost, remember to come see me at the professor\'s house! I know everything there izzz to do on thezzze islands!',
+], {
+    image: 'assets/images/npcs/Rotom-Dex and Kukui.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 3), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 4, GameConstants.AchievementOption.less)]),
+});
+const RotomDexMelemele = new NPC('Rotom Dex', [
+    'Zzzzt!!! There are 2 thingzzz to do in Melemele! Whaddya mean I\'m a bad guide? I\'m still in beta! Zz-zzt!',
+    '',
+    '<b><i>Islandzzz vizzzited: 1/4</i></b>',
+    '<b><i>Current Destination: Melemele</i></b>',
+], {
+    image: 'assets/images/npcs/Rotom-Dex.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 4), new QuestLineCompletedRequirement('Welcome to paradise, cousin!', GameConstants.AchievementOption.less)]),
+});
+const RotomDexAkala = new NPC('Rotom Dex', [
+    'Zzzzt!!! There are 4 thingzzz to do in Akala! Whaddya mean I\'m a bad guide? I\'m still in beta! Zz-zzt!',
+    '',
+    '<b><i>Islandzzz vizzzited: 2/4</i></b>',
+    '<b><i>Current Destination: Akala</i></b>',
+], {
+    image: 'assets/images/npcs/Rotom-Dex.png',
+    requirement: new QuestLineCompletedRequirement('Welcome to paradise, cousin!'),
+});
+const LillieCity = new NPC('Lillie', [
+    'Tell me, $playername$, do you pick out all your own clothes? I\'ve always just worn the clothes that my mother wanted me to wear. I don\'t really know what kind of thing would suit me...',
+], {
+    image: 'assets/images/npcs/Lillie.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 5), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 8, GameConstants.AchievementOption.less)]),
+});
+const ReconSquad3 = new NPC('Recon Squad', [
+    '<i>Dulse (right):</i> Verdant Cavern... It is one of the places in this land filled with the Blinding One\'s power. I suppose it may be admirable to overcome these trials using your own strength and skill... rather than relying on technology, as we do.',
+    '',
+    '<i>Zossie (left):</i> Wow! A Z-Crystal! We\'re investigating all about Z-Crystals and all kinds of stuff. So I guess we\'ll probably see you around!',
+], {
+    image: 'assets/images/npcs/Recon Squad (Ultra Sun).png',
+    requirement: new MultiRequirement([new GymBadgeRequirement(BadgeEnums.NormaliumZ), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 7), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 11, GameConstants.AchievementOption.less)]),
+});
+const LillieMelemeleMeadow1 = new NPC('Lillie', [
+    'Nebby! Nebby, come back!',
+    'Ah... $playername$...',
+    'Nebby ran off into the meadow here... What if a wild Pokémon attacks it? It doesn\'t have any moves it can use to battle!',
+], {
+    image: 'assets/images/npcs/Lillie.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 8), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 11, GameConstants.AchievementOption.less)]),
+});
+const Lillie3 = new NPC('Lillie', [
+    'Nebby! Oh thank goodness you\'re safe. Here $playername$. I mean to give these back in Hau\'oli but you were too busy reading other dialog boxes. It seems Hau is also here. Are you two having another battle?',
+], {
+    image: 'assets/images/npcs/Lillie.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 11), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 12, GameConstants.AchievementOption.less)]),
+});
+const LillieMelemeleMeadow2 = new NPC('Lillie again', [
+    'You know, I read something interesting in a book once... Some Pokémon can change forms depending on external factors. Isn\'t that interesting? How a pokemon can look and behave so differently, yet still be the same being... I thought it was, anyway.',
+    '...',
+], {
+    image: 'assets/images/npcs/Lillie.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 12), new QuestLineCompletedRequirement('Welcome to paradise, cousin!', GameConstants.AchievementOption.less)]),
+});
+const Lillie4 = new NPC('Lillie', [
+    'Nebby is... Its real home is far away from here. And I want to help it get home. Thank you for nonverbally agreeing to help me. The two of us will be heading to the next island as well!',
+], {
+    image: 'assets/images/npcs/Lillie.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 12), new GymBadgeRequirement(BadgeEnums.FightiniumZ), new QuestLineCompletedRequirement('Welcome to paradise, cousin!', GameConstants.AchievementOption.less)]),
+});
 const HeaheaCafeOwner = new NPC('Café Owner', [
     'Akala Island has three trials.',
     'Captain Lana\'s trial in Brooklet Hill, Captain Kiawe\'s trial in Wela Volcano Park and Captain Mallow\'s trial in Lush Jungle.',
@@ -5529,7 +5633,7 @@ TownList['Iki Town'] = new Town(
     [IkiTownShop],
     {
         requirements: [new TemporaryBattleRequirement('Hau 1')],
-        npcs: [IkiKahuna],
+        npcs: [IkiKahuna, ReconSquad1, ReconSquad2, Lillie4],
     }
 );
 TownList['Professor Kukui\'s Lab'] = new Town(
@@ -5539,25 +5643,27 @@ TownList['Professor Kukui\'s Lab'] = new Town(
     [new BulletinBoard(GameConstants.BulletinBoards.Alola)],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 18)],
-        npcs: [ProfKukui],
+        npcs: [ProfKukui, RotomDex1, RotomDexMelemele, RotomDexAkala],
     }
 );
 TownList['Hau\'oli City'] = new Town(
     'Hau\'oli City',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MelemeleIsland,
-    [HauoliCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Hau\'oli City'])],
+    [HauoliCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Hau\'oli City']), TemporaryBattleList['Hauoli Ilima']],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Trainers\' School'))],
+        npcs: [LillieCity]
     }
 );
 TownList['Melemele Woods'] = new Town(
     'Melemele Woods',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MelemeleIsland,
-    [new MoveToDungeon(dungeonList['Verdant Cavern']), new MoveToDungeon(dungeonList['Melemele Meadow']), new MoveToDungeon(dungeonList['Ruins of Conflict'])],
+    [new MoveToDungeon(dungeonList['Verdant Cavern']), new MoveToDungeon(dungeonList['Melemele Meadow']), new MoveToDungeon(dungeonList['Ruins of Conflict']), TemporaryBattleList['Melemele Spearow']],
     {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 2)],
+        requirements: [new TemporaryBattleRequirement('Hau 1')],
+        npcs: [Lillie1, Lillie2, LillieMahaloTrail],
     }
 );
 TownList['Roadside Motel'] = new Town(
@@ -5814,7 +5920,7 @@ TownList['Trainers\' School'] = new DungeonTown(
     'Trainers\' School',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MelemeleIsland,
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 18)],
+    [new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 4)],
     undefined,
     { npcs: [TrainerSchoolTeacher] }
 );
@@ -5829,19 +5935,27 @@ TownList['Verdant Cavern'] = new DungeonTown(
     'Verdant Cavern',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MelemeleIsland,
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 2)]
+    [new MultiRequirement([
+        new RouteKillRequirement(10, GameConstants.Region.alola, 2),
+        new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 7),
+    ])]
+    undefined,
+    { npcs: [ReconSquad3] }
 );
 TownList['Melemele Meadow'] = new DungeonTown(
     'Melemele Meadow',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MelemeleIsland,
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 3)]
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 3)],
+    undefined,
+    { npcs: [LillieMelemeleMeadow1, LillieMelemeleMeadow2, Lillie3] }
 );
 TownList['Seaward Cave'] = new DungeonTown(
     'Seaward Cave',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MelemeleIsland,
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Melemele Meadow'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Melemele Meadow'))],
+    [TemporaryBattleList['Seaward Cave Recon Squad']]
 );
 TownList['Ten Carat Hill'] = new DungeonTown(
     'Ten Carat Hill',
