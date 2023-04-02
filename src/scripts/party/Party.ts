@@ -160,6 +160,14 @@ class Party implements Feature {
                 // Only magikarps can attack in magikarp jump
                 continue;
             }
+            if (App.game.challenges.listSpecial.monotype.active() && !(region == GameConstants.Region.alola && player.region == GameConstants.Region.alola && player.subregion == GameConstants.AlolaSubRegions.MagikarpJump)) {
+                const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
+                const monotypeSelectedType = App.game.challenges.listSpecial.monotype.pokemonType();
+                if (dataPokemon.type1 != monotypeSelectedType && dataPokemon.type2 != monotypeSelectedType) {
+                    // Only pokemon with selected type can attack in Monotype Challenge
+                    continue;
+                }
+            }
             attack += this.calculateOnePokemonAttack(pokemon, type1, type2, region, ignoreRegionMultiplier, includeBreeding, useBaseAttack, overrideWeather, ignoreLevel, includeFlute);
         }
 
@@ -282,6 +290,13 @@ class Party implements Feature {
         if (player.region == GameConstants.Region.alola && player.subregion == GameConstants.AlolaSubRegions.MagikarpJump) {
             // Only magikarps can attack in magikarp jump subregion
             caughtPokemon = caughtPokemon.filter((p) => Math.floor(p.id) == 129);
+        } else if (App.game.challenges.listSpecial.monotype.active()) {
+            // If Monotype challenge is enabled, only Pokemon whose types match with the selected type are accounted for click damage
+            const selectedType = App.game.challenges.listSpecial.monotype.pokemonType();
+            caughtPokemon = caughtPokemon.filter((p) => {
+                const pokemon = PokemonHelper.getPokemonById(p.id);
+                return selectedType != PokemonType.None && (pokemon.type1 == selectedType || pokemon.type2 == selectedType);
+            });
         }
         const caught = caughtPokemon.length;
         const shiny = caughtPokemon.filter(p => p.shiny).length;

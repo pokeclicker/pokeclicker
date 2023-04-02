@@ -55,7 +55,16 @@
                 </tr>
             </thead>
             <tbody data-bind="foreach: lazyLoad($element, PartyController.getSortedList, { pageSize: 20 })">
-                <tr data-bind="hidden: $data.breeding">
+                <tr data-bind="hidden: $data.breeding,
+                    style: { 
+                        'opacity': PokemonHelper.canPokemonDealDamage($data.id) ? 1 : 0.4
+                    },
+                    tooltip: {
+                        title: !PokemonHelper.canPokemonDealDamage($data.id) ? (player.region == GameConstants.Region.alola && player.subregion == GameConstants.AlolaSubRegions.MagikarpJump ? 'Only Magikarp is allowed to attack' : 'This Pokémon can\'t attack due Monotype Challenge') : '',
+                        trigger: 'hover',
+                        boundary: 'window',
+                    }"
+                >
                     <td>
                         <img
                             class="smallImage"

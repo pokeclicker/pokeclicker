@@ -119,7 +119,12 @@ class PartyController {
 
     static getSortedList = ko.pureComputed(() => {
         const list = [...App.game.party.caughtPokemon];
-        return list.sort(PartyController.compareBy(Settings.getSetting('partySort').observableValue(), Settings.getSetting('partySortDirection').observableValue()));
+        const sortedList =  list.sort(PartyController.compareBy(Settings.getSetting('partySort').observableValue(), Settings.getSetting('partySortDirection').observableValue()));
+        // For Monotype and Magikarp Jump: Pokemon with selected type/Magikarp will appear on the top of the list
+        return [
+            ...sortedList.filter((pokemon) => PokemonHelper.canPokemonDealDamage(pokemon.id)),
+            ...sortedList.filter((pokemon) => !PokemonHelper.canPokemonDealDamage(pokemon.id)),
+        ];
     }).extend({ rateLimit: 500 });
 
     private static hatcherySortedList = [];
