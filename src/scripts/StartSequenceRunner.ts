@@ -12,10 +12,14 @@ class StartSequenceRunner {
     public static pickStarter(s: GameConstants.Starter) {
         // Reload the achievements in case the user has any challenge modes activated
         AchievementHandler.load();
+
+        const dataPokemon: DataPokemon = App.game.challenges.listSpecial.monotype.active() ?
+            PokemonHelper.getPokemonById(GameConstants.RegionalStartersMonotype[GameConstants.Region.kanto][App.game.challenges.listSpecial.monotype.pokemonType()]) :
+            PokemonHelper.getPokemonById(GameConstants.RegionalStarters[GameConstants.Region.kanto][this.starterPicked]);
+
         App.game.quests.getQuestLine('Tutorial Quests').beginQuest(0);
         this.starterPicked = s;
         $('#pickStarterTutorialModal').modal('hide');
-        const dataPokemon = PokemonHelper.getPokemonById(GameConstants.RegionalStarters[GameConstants.Region.kanto][this.starterPicked]);
         const shiny: boolean = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
         const gender = PokemonFactory.generateGender(dataPokemon.gender.femaleRatio, dataPokemon.gender.type);
 
@@ -54,6 +58,28 @@ class StartSequenceRunner {
         };
     }
 
+    /**
+     * For Monotype Challenge. Checks if the starter is Grass/Fire/Water for the GameConstants.Starter, if not, it's Special
+     * @param selectedType 
+     * @returns GameConstants.Starter
+     */
+    public static checkMonotypeStarter(selectedType) {
+        let starter = GameConstants.Starter.Special;
+        switch (selectedType) {
+            case PokemonType['Grass']:
+                starter = GameConstants.Starter.Grass;
+                break;
+            case PokemonType['Fire']:
+                starter = GameConstants.Starter.Fire;
+                break;
+            case PokemonType['Water']:
+                starter = GameConstants.Starter.Water;
+                break;
+            default:;
+        }
+        return starter;
+    }
+
     public static showCaughtMessage() {
         App.game.gameState = GameConstants.GameState.paused;
         $('#starterCaughtModal').modal('show');
@@ -71,18 +97,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     $('#pickStarterTutorialModal').on('hidden.bs.modal', () => {
         if (StartSequenceRunner.starterPicked == GameConstants.Starter.None) {
-            StartSequenceRunner.noStarterCount++;
-            const startersCount = StartSequenceRunner.noStarterCount >= 5 ? 'four' : 'three';
-            $('#pickStarterTutorialModalText').text(`I can't hold off all ${startersCount}! Please pick the Pokémon you want to fight!`);
-            $('#pickStarterTutorialModal').modal('show');
-            if (StartSequenceRunner.noStarterCount == 5) {
-                // Add Pikachu to the selections
-                $('#starterSelection').append(`<div class="col">
-                        <input class="image-starter" type="image"
-                           src="assets/images/pokemon/25.png"
-                           onclick="StartSequenceRunner.pickStarter(GameConstants.Starter.Special)">
-                    </div>`);
+            if (!App.game.challenges.listSpecial.monotype.active()) { // Don't add Pikachu if monotype challenge is enabled
+                StartSequenceRunner.noStarterCount++;
+                const startersCount = StartSequenceRunner.noStarterCount >= 5 ? 'four' : 'three';
+                $('#pickStarterTutorialModalText').text(`I can't hold off all ${startersCount}! Please pick the Pokémon you want to fight!`);
+                if (StartSequenceRunner.noStarterCount == 5) {
+                    // Add Pikachu to the selections
+                    $('#starterSelection').append(`<div class="col">
+                            <input class="image-starter" type="image"
+                            src="assets/images/pokemon/25.png"
+                            onclick="StartSequenceRunner.pickStarter(GameConstants.Starter.Special)">
+                        </div>`);
+                }
             }
+            $('#pickStarterTutorialModal').modal('show');
         }
     });
 
