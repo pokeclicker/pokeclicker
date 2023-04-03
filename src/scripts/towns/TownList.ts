@@ -5938,9 +5938,8 @@ TownList['Verdant Cavern'] = new DungeonTown(
     [new MultiRequirement([
         new RouteKillRequirement(10, GameConstants.Region.alola, 2),
         new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 7),
-    ]),
-    ],
-    [],
+    ])],
+    undefined,
     { npcs: [ReconSquad3] }
 );
 TownList['Melemele Meadow'] = new DungeonTown(
