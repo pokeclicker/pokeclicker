@@ -235,7 +235,7 @@ class QuestLineHelper {
             });
         };
 
-        const talkToBillsGrandpa5 = new TalkToNPCQuest(BillsGrandpa5, 'Show your Growlithe to Bill\'s Grandpa.', WaterStoneReward);
+        const talkToBillsGrandpa5 = new TalkToNPCQuest(BillsGrandpa5, 'Show your Growlithe to Bill\'s Grandpa.', FireStoneReward);
         BillsGrandpaQuestLine.addQuest(talkToBillsGrandpa5);
 
         const yellowAndRed = new CaptureSpecificPokemonQuest('Pikachu', 'Catch the desired Pokémon.', 1);
@@ -1487,7 +1487,7 @@ class QuestLineHelper {
         const talkToMaxie = new TalkToNPCQuest(Maxie, 'Talk to Maxie in the Team Magma Hideout.');
         deltaEpisodeQuestLine.addQuest(talkToMaxie);
 
-        const talkToWallace3 = new TalkToNPCQuest(Wallace3, 'Talk to Wallace in the Sootopolis City.');
+        const talkToWallace3 = new TalkToNPCQuest(Wallace3, 'Talk to Wallace in Sootopolis City.');
         deltaEpisodeQuestLine.addQuest(talkToWallace3);
 
         const fightDeltaWallace = new CustomQuest (1, 0, 'Defeat Wallace in Sootopolis City.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Delta Wallace')]());
@@ -1496,7 +1496,7 @@ class QuestLineHelper {
         const fightZinnia2 = new CustomQuest (1, 0, 'Defeat Zinnia at the Sky Pillar.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Zinnia 2')]());
         deltaEpisodeQuestLine.addQuest(fightZinnia2);
 
-        const catchDeltaRayquaza = new CaptureSpecificPokemonQuest('Rayquaza', 'Catch or hatch Rayquaza', 1, true, 0, undefined);
+        const catchDeltaRayquaza = new CaptureSpecificPokemonQuest('Rayquaza', 'Catch or hatch Rayquaza.', 1, true, 0, undefined);
         deltaEpisodeQuestLine.addQuest(catchDeltaRayquaza);
 
         const MeteoriteReward = () => {
@@ -1512,7 +1512,7 @@ class QuestLineHelper {
         const talkToZinnia6 = new TalkToNPCQuest(Zinnia6, 'Talk to Zinnia at the Sky Pillar.', MeteoriteReward);
         deltaEpisodeQuestLine.addQuest(talkToZinnia6);
 
-        const catchMegaRayquaza = new CaptureSpecificPokemonQuest('Mega Rayquaza', 'Mega Evolve Rayquaza', 1, false, 0, undefined);
+        const catchMegaRayquaza = new CaptureSpecificPokemonQuest('Mega Rayquaza', 'Mega Evolve Rayquaza.', 1, false, 0, undefined);
         deltaEpisodeQuestLine.addQuest(catchMegaRayquaza);
 
         const talkToZinnia7 = new TalkToNPCQuest(Zinnia7, 'Talk to Zinnia at the Sky Pillar.');
