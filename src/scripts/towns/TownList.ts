@@ -5653,7 +5653,7 @@ TownList['Hau\'oli City'] = new Town(
     [HauoliCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Hau\'oli City']), TemporaryBattleList['Hauoli Ilima']],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Trainers\' School'))],
-        npcs: [LillieCity]
+        npcs: [LillieCity],
     }
 );
 TownList['Melemele Woods'] = new Town(
@@ -5938,7 +5938,7 @@ TownList['Verdant Cavern'] = new DungeonTown(
     [new MultiRequirement([
         new RouteKillRequirement(10, GameConstants.Region.alola, 2),
         new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 7),
-    ])]
+    ])],
     undefined,
     { npcs: [ReconSquad3] }
 );

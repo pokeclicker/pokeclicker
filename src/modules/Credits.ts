@@ -456,7 +456,8 @@ export const SpriteCredits: Credit[] = [
             'Lillie (default)',
         ],
         // Notes: Made specifically for PokéClicker.
-    },    {
+    },
+    {
         name: 'Kensuyjin33',
         link: 'https://www.deviantart.com/kensuyjin33',
         image: 'https://a.deviantart.net/avatars-big/k/e/kensuyjin33.png',

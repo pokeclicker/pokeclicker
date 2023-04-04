@@ -2957,9 +2957,7 @@ TemporaryBattleList['Alola 2 Skull'] = new TemporaryBattle(
 );
 TemporaryBattleList['Seaward Cave Recon Squad'] = new TemporaryBattle(
     'Seaward Cave Recon Squad',
-    [
-        new GymPokemon('Furfrou', 108160909, 13),
-    ],
+    [new GymPokemon('Furfrou', 108160909, 13),],
     '<i>Soliera (right):</i> Fighting together with your Pokémon... It is not something we had considered ourselves.<br><br><i>Phyco (left):</i> That one you have come to collect... You must know that it is able to warp away when threatened, but the holes that are created when it does so leave a path open to dangerous beings. Be careful of who you trust it to.',
     [new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 10)],
     undefined,
