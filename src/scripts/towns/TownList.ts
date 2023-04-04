@@ -5,6 +5,7 @@
 ///<reference path="../quests/BulletinBoard.ts"/>
 ///<reference path="BattleCafe.ts"/>
 ///<reference path="../../declarations/requirements/MultiRequirement.d.ts"/>
+///<reference path="../Safari/SafariTownContent.ts"/>
 
 const TownList: { [name: string]: Town } = {};
 
@@ -5064,6 +5065,15 @@ TownList['Pokémon League Kalos'] = new Town(
             new TemporaryBattleRequirement('Calem 5'),
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Kalos')),
         ],
+    }
+);
+TownList['Friend Safari'] = new Town(
+    'Friend Safari',
+    GameConstants.Region.kalos,
+    GameConstants.KalosSubRegions.Kalos,
+    [new SafariTownContent()],
+    {
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion), new DevelopmentRequirement()],
     }
 );
 
