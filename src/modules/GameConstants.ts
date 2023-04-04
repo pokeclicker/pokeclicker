@@ -69,6 +69,7 @@ export enum JohtoSubRegions {
 
 export enum HoennSubRegions {
     Hoenn = 0,
+    Orre,
 }
 
 export enum SinnohSubRegions {
@@ -1444,6 +1445,7 @@ export const TemporaryBattles = [
     'Silver 6',
     'Silver 7',
     'Red',
+    'Youngster Joey',
     'May 1',
     'May 2',
     'May 3',
@@ -1877,3 +1879,9 @@ export const DayCycleStartHours: Record<DayCyclePart, number> = {
     [DayCyclePart.Dusk]: 17,
     [DayCyclePart.Night]: 18,
 };
+
+export enum ShadowStatus {
+    None,
+    Shadow,
+    Purified,
+}

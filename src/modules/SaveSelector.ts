@@ -57,6 +57,7 @@ export default class SaveSelector {
         try {
             const rawData = localStorage.getItem(`save${key}`);
             const saveData = JSON.parse(rawData);
+            const playerData = JSON.parse(localStorage.getItem(`player${key}`));
             let username = saveData.profile?.name ?? 'Trainer';
             try {
                 username = decodeURI(saveData.profile?.name ?? 'Trainer');
@@ -76,6 +77,7 @@ export default class SaveSelector {
                 saveData.statistics?.secondsPlayed ?? 0,
                 saveData.update?.version ?? 'Unknown',
                 saveData.challenges?.list ?? {},
+                playerData.trainerId,
                 key,
             );
         } catch (e) {

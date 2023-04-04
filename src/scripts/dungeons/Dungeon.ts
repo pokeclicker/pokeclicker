@@ -212,7 +212,7 @@ class Dungeon {
             } else { /* We don't include Trainers */ }
         });
 
-        encounterInfo.concat(this.getCaughtMimics());
+        this.getCaughtMimics().forEach((mimic) => encounterInfo.push(mimic));
 
         return encounterInfo;
     }
@@ -946,7 +946,7 @@ dungeonList['Silph Co.'] = new Dungeon('Silph Co.',
                 new GymPokemon('Magnemite', 2629, 26),
                 new GymPokemon('Koffing', 2629, 26),
                 new GymPokemon('Weezing', 2629, 26),
-            ], { weight: 1 }, 'Beau', '(male)'),
+            ], { weight: 1, requirement: new QuestLineStepCompletedRequirement('Team Rocket', 2)}, 'Beau', '(male)'),
         new DungeonTrainer('Team Rocket Grunt',
             [new GymPokemon('Arbok', 10515, 33)],
             { weight: 1 }, undefined, '(male)'),
@@ -1066,13 +1066,20 @@ dungeonList['Silph Co.'] = new Dungeon('Silph Co.',
     },
     10515,
     [
+        new DungeonTrainer('Scientist',
+            [
+                new GymPokemon('Magneton', 10322, 26),
+                new GymPokemon('Magnemite', 10322, 26),
+                new GymPokemon('Koffing', 10322, 26),
+                new GymPokemon('Weezing', 12915, 26),
+            ], { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('Team Rocket', 2, GameConstants.AchievementOption.less)}, 'Beau', '(male)'),
         new DungeonTrainer('Team Rocket Boss',
             [
                 new GymPokemon('Nidorino', 12144, 37),
                 new GymPokemon('Rhyhorn', 12144, 37),
                 new GymPokemon('Kangaskhan', 12144, 35),
                 new GymPokemon('Nidoqueen', 16144, 41),
-            ], { weight: 1 }, 'Giovanni', '(giovanni)'),
+            ], { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('Team Rocket', 2)}, 'Giovanni', '(giovanni)'),
     ],
     875, 7);
 
@@ -3450,15 +3457,19 @@ dungeonList['Near Space'] = new Dungeon('Near Space',
             {loot: 'Iron Plate', weight: 2},
             {loot: 'Moon Stone'},
         ],
+        mythic: [{loot: 'Carbos', requirement: new ClearDungeonRequirement(250, GameConstants.getDungeonIndex('Near Space'))}],
     },
     9000000,
     [
         new DungeonBossPokemon('Deoxys', 95743340, 80),
-        new DungeonBossPokemon('Deoxys (Attack)', 95743340, 80),
-        new DungeonBossPokemon('Deoxys (Defense)', 95743340, 80),
-        new DungeonBossPokemon('Deoxys (Speed)', 95743340, 80),
+        new DungeonBossPokemon('Deoxys (Attack)', 95743340, 80, {requirement: new ObtainedPokemonRequirement('Deoxys (Attack)')}),
+        new DungeonBossPokemon('Deoxys (Defense)', 95743340, 80, {requirement: new ObtainedPokemonRequirement('Deoxys (Defense)')}),
+        new DungeonBossPokemon('Deoxys (Speed)', 95743340, 80, {requirement: new ObtainedPokemonRequirement('Deoxys (Speed)')}),
     ],
-    700000, 131);
+    700000, 131,
+    () => {},
+    {dungeonRegionalDifficulty: GameConstants.Region.kalos});
+
 // Sinnoh
 
 dungeonList['Oreburgh Gate'] = new Dungeon('Oreburgh Gate',

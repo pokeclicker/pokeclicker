@@ -181,6 +181,17 @@ class BreedingController {
                 }
             }
 
+            const uniqueTransformation = BreedingFilters.uniqueTransformation.value();
+            const pokemon = PokemonHelper.getPokemonById(partyPokemon.id);
+            // Only Base Pokémon with Mega available
+            if (uniqueTransformation == 'mega-available' && !(pokemon as DataPokemon).evolutions?.some((p) => p.evolvedPokemon.startsWith('Mega '))) {
+                return false;
+            }
+            // Only Mega Pokémon
+            if (uniqueTransformation == 'mega-pokemon' && !(pokemon as DataPokemon).name.startsWith('Mega ')) {
+                return false;
+            }
+
             // Check if either of the types match
             const type1: (PokemonType | null) = BreedingFilters.type1.value() > -2 ? BreedingFilters.type1.value() : null;
             const type2: (PokemonType | null) = BreedingFilters.type2.value() > -2 ? BreedingFilters.type2.value() : null;
