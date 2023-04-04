@@ -76,7 +76,7 @@
         <!-- ko if: DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.chest -->
         <div>
             <div class="dungeon-chest" style="height: 95px">
-                <img src="assets/images/dungeons/chest.png"/>
+                <img data-bind='attr: { src: `assets/images/dungeons/chest-${DungeonRunner.map.currentTile().metadata.tier}.png` }'/>
             </div>
             <button class="btn btn-warning chest-button">
                 <p>Open</p>
