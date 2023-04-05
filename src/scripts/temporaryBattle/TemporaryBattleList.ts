@@ -478,7 +478,7 @@ TemporaryBattleList['Suicune 5'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Suicune',
-        returnTown: 'Cerulean City',
+        returnTown: 'Bill\'s House',
         imageName: '../pokemon/245',
         hideTrainer: true,
     }
@@ -491,7 +491,7 @@ TemporaryBattleList['Suicune 6'] = new TemporaryBattle(
     [new QuestLineStepCompletedRequirement('Eusine\'s Chase', 11)],
     {
         displayName: 'Suicune',
-        returnTown: 'Cerulean City',
+        returnTown: 'Bill\'s House',
         imageName: '../pokemon/245',
         hideTrainer: true,
         isTrainerBattle: false,
