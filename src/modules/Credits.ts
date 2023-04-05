@@ -219,6 +219,7 @@ export const SpriteCredits: Credit[] = [
             'Dracozolt shop image',
             'Dream Orbs',
             'Dungeon Ladder',
+            'Dungeon Chest Tiers',
             'Galar fossils items',
             'Galarian Articuno overworld image',
             'Galarian Moltres overworld image',

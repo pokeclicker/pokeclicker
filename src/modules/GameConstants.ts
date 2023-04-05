@@ -179,12 +179,12 @@ export const DUNGEON_CHEST_SHOW = 2;
 export const DUNGEON_MAP_SHOW = 4;
 
 export enum DungeonTile {
-    empty,
-    entrance,
-    enemy,
-    chest,
-    boss,
-    ladder,
+    empty = 0,
+    entrance = 1,
+    enemy = 2,
+    chest = 3,
+    boss = 4,
+    ladder = 5,
 }
 
 // Achievements
@@ -1553,6 +1553,7 @@ export const TemporaryBattles = [
     'Dr Cozmo',
     'Matt 3',
     'Courtney 3',
+    'Hoenn Stone Salesman',
     'Aipom Alley',
     'Mime Interview',
     'Underground Fighting Ring',
