@@ -111,6 +111,7 @@ class AchievementHandler {
     }
 
     public static preCheckAchievements() {
+        AchievementHandler.filterAchievementList();
         // Check if our achievements are completed, we don't want to re-notify if already done
         for (let i = 0; i < AchievementHandler.achievementList.length; i++) {
             AchievementHandler.achievementList[i].unlocked(AchievementHandler.achievementList[i].isCompleted());
@@ -179,8 +180,8 @@ class AchievementHandler {
         }
         const categories = GameHelper.enumStrings(GameConstants.Region).filter(r => r != 'none' && r != 'final').map(r => new AchievementCategory(r, 100, () => player.highestRegion() >= GameConstants.Region[r]));
         categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.global], 150, () => true));
-        categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.sevii], 50, () => true));
-        categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.magikarpJump], 25, () => true));
+        categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.sevii], 50, () => SubRegions.isSubRegionUnlocked(GameConstants.Region.kanto, GameConstants.KantoSubRegions.Sevii123)));
+        categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.magikarpJump], 25, () => SubRegions.isSubRegionUnlocked(GameConstants.Region.alola, GameConstants.AlolaSubRegions.MagikarpJump)));
 
         AchievementHandler._achievementCategories = categories;
         return categories;
@@ -483,10 +484,8 @@ class AchievementHandler {
         addGymAchievements(GameConstants.RegionGyms[GameConstants.Region.final + 1], GameConstants.ExtraAchievementCategories.magikarpJump, 'Magikarp Jump');
 
 
-        // load filters, filter the list & calculate number of tabs
+        // load filters
         this.load();
-        this.filterAchievementList(true);
-        this.calculateNumberOfTabs();
 
         // subscribe to filters so that when the player changes a filter it automatically refilters the list
         Object.keys(this.filter).forEach(e => (<KnockoutObservable<any>> this.filter[e]).subscribe(() => this.filterAchievementList()));
@@ -498,7 +497,6 @@ class AchievementHandler {
 
     static load() {
         AchievementHandler.calculateMaxBonus();
-        this.achievementListFiltered(this.achievementList.filter(a => a.category.isUnlocked() && a.achievable()));
         AchievementHandler.navigateIndex(Settings.getSetting('achievementsPage').value);
         AchievementHandler.filter.status(Settings.getSetting('achievementsStatus').value);
         AchievementHandler.filter.type(Settings.getSetting('achievementsType').value);
@@ -507,7 +505,6 @@ class AchievementHandler {
         AchievementHandler.navigateRight();
         setTimeout(() => {
             AchievementHandler.navigateLeft();
-            AchievementHandler.filterAchievementList();
         }, 1);
     }
 }

@@ -1102,7 +1102,9 @@ class Farming implements Feature {
             BerryColor.Red,
             11.1,
             BerryFirmness.Very_Hard,
-            ['This Berry is surrounded by mystery. It is rumored to be imbued with the power of the sea.']
+            ['This Berry is surrounded by mystery. It is rumored to be imbued with the power of the sea.'],
+            undefined,
+            ['Manaphy']
         );
 
         this.berryData[BerryType.Ganlon] = new Berry(

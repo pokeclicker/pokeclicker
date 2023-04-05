@@ -90,7 +90,8 @@
                             <tr class="clickable" data-bind="
                                 click: () => VitaminController.add() ? $data.useVitamin(VitaminController.currentlySelected(), VitaminController.getMultiplier()) : $data.removeVitamin(VitaminController.currentlySelected(), VitaminController.getMultiplier());,
                                 event: { contextmenu: () => { $data.removeVitamin(VitaminController.currentlySelected(), VitaminController.getMultiplier()); return false; } },
-                                hidden: $data.hideFromProteinList()">
+                                hidden: $data.hideFromProteinList(),
+                                css: { 'text-muted': $data.breeding }">
                                 <td class="text-left">
                                     <knockout data-bind="text: $data.displayName"></knockout>
                                     <sup data-bind="visible: $data.shiny">✨</sup>
