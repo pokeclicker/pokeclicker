@@ -1553,6 +1553,7 @@ export const TemporaryBattles = [
     'Dr Cozmo',
     'Matt 3',
     'Courtney 3',
+    'Hoenn Stone Salesman',
     'Aipom Alley',
     'Mime Interview',
     'Underground Fighting Ring',
