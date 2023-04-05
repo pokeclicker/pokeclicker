@@ -2565,6 +2565,17 @@ const DeltaSteven3 = new NPC('Steven', [
     requirement: new TemporaryBattleRequirement('Delta Steven'),
 });
 
+const HoennStoneSalesman1 = new NPC('Stone Salesman', [
+    'I\'m hunting for rare stones! If I find any extras, I\'ll sell you some!',
+], {
+    requirement: new TemporaryBattleRequirement('Hoenn Stone Salesman', 1, GameConstants.AchievementOption.less),
+});
+
+const HoennStoneSalesman2 = new NPC('Stone Salesman', [
+    'The Gem Master in town is letting me sell stones at their shop. Let me know if anything there strikes your fancy!',
+], {
+    requirement: new TemporaryBattleRequirement('Hoenn Stone Salesman'),
+});
 //Hoenn Towns
 TownList['Littleroot Town'] = new Town(
     'Littleroot Town',
@@ -2666,10 +2677,10 @@ TownList['Fallarbor Town'] = new Town(
     'Fallarbor Town',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [FallarborTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Fallarbor Town']), HoennFluteMaster],
+    [FallarborTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Fallarbor Town']), HoennFluteMaster, TemporaryBattleList['Hoenn Stone Salesman']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 113)],
-        npcs: [FallarborProfessorCozmo, Cozmo1],
+        npcs: [FallarborProfessorCozmo, Cozmo1, HoennStoneSalesman1, HoennStoneSalesman2],
     }
 );
 TownList['Lavaridge Town'] = new Town(

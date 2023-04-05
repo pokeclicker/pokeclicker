@@ -1952,8 +1952,8 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 45);
         },
 
-        '0.10.10': ({ playerData, saveData }) => {
-            //Bill's Grandpa
+        '0.10.10': ({ playerData, saveData, settingsData }) => {
+            // Bill's Grandpa
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 12);
 
             //Mega Manectric/Houndoom
@@ -1975,7 +1975,7 @@ class Update implements Saveable {
                 playerData.trainerId = trainerId.toString().padStart(6, '0');
             }
 
-            //Delta Episode
+            // Delta Episode
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 115);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 116);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 117);
@@ -2003,7 +2003,7 @@ class Update implements Saveable {
             // Add Near Space dungeon
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 56);
 
-            //Mega Diancie
+            // Mega Diancie
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 156);
 
             // If Distortion World has been cleared and no Pokémon in our party has Pokérus, infect the first Pokémon in our party
@@ -2015,7 +2015,28 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 31);
         },
 
-        '0.10.11': ({ playerData, saveData }) => {
+        '0.10.11': ({ playerData, saveData, settingsData }) => {
+            // Hoenn Stone Shop fight
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 139);
+
+            // Updates Sorting
+            if (settingsData.hatcherySort > 5) {
+                settingsData.hatcherySort++;
+            }
+            if (settingsData.partySort > 5) {
+                settingsData.partySort++;
+            }
+            if (settingsData.vitaminSort > 5) {
+                settingsData.vitaminSort++;
+            }
+            if (settingsData.heldItemSort > 5) {
+                settingsData.heldItemSort++;
+            }
+            saveData.breeding.hatcheryHelpers?.forEach(helper => {
+                if (helper.sortOption > 5) {
+                    helper.sortOption++;
+                }
+            });
 
             // Add Pyrite Blgd dungeon
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 57);

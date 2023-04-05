@@ -45,8 +45,21 @@ class DungeonRunner {
         // Decrease dungeon size by 1 for every 10, 100, 1000 etc completes
         dungeonSize -= Math.max(0, App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]().toString().length - 1);
         const flash = DungeonRunner.getFlash(DungeonRunner.dungeon.name);
+        const generateChestLoot = () => {
+            const clears = App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(dungeon.name)]();
+            const debuffed = (dungeon.optionalParameters?.dungeonRegionalDifficulty ?? GameConstants.getDungeonRegion(dungeon.name)) < player.highestRegion() - 2;
+            // Ignores debuff on first attempt to get loot that ignores debuff.
+            let tier = dungeon.getRandomLootTier(clears);
+            let loot = dungeon.getRandomLoot(tier);
+            if (!loot.ignoreDebuff && debuffed) {
+                tier = dungeon.getRandomLootTier(clears, debuffed);
+                loot = dungeon.getRandomLoot(tier, true);
+            }
+
+            return { tier, loot };
+        };
         // Dungeon size minimum of MIN_DUNGEON_SIZE
-        DungeonRunner.map = new DungeonMap(Math.max(GameConstants.MIN_DUNGEON_SIZE, dungeonSize), flash);
+        DungeonRunner.map = new DungeonMap(Math.max(GameConstants.MIN_DUNGEON_SIZE, dungeonSize), generateChestLoot, flash);
 
         DungeonRunner.chestsOpened(0);
         DungeonRunner.encountersWon(0);
@@ -109,22 +122,15 @@ class DungeonRunner {
     }
 
     public static openChest() {
-        if (DungeonRunner.map.currentTile().type() !== GameConstants.DungeonTile.chest) {
+        const tile = DungeonRunner.map.currentTile();
+        if (tile.type() !== GameConstants.DungeonTile.chest) {
             return;
         }
 
         GameHelper.incrementObservable(DungeonRunner.chestsOpened);
         DungeonRunner.chestsOpenedPerFloor[DungeonRunner.map.playerPosition().floor]++;
 
-        const clears = App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]();
-        const debuffed = (DungeonRunner.dungeon.optionalParameters?.dungeonRegionalDifficulty ?? GameConstants.getDungeonRegion(DungeonRunner.dungeon.name)) < player.highestRegion() - 2;
-        // Ignores debuff on first attempt to get loot that ignores debuff.
-        let tier = DungeonRunner.dungeon.getRandomLootTier(clears);
-        let loot = DungeonRunner.dungeon.getRandomLoot(tier);
-        if (!loot.ignoreDebuff && debuffed) {
-            tier = DungeonRunner.dungeon.getRandomLootTier(clears, debuffed);
-            loot = DungeonRunner.dungeon.getRandomLoot(tier, true);
-        }
+        const { tier, loot } = (tile as DungeonTile<GameConstants.DungeonTile.chest>).metadata;
 
         let amount = loot.amount || 1;
 
