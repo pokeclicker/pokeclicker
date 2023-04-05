@@ -5,6 +5,7 @@
 ///<reference path="../quests/BulletinBoard.ts"/>
 ///<reference path="BattleCafe.ts"/>
 ///<reference path="../../declarations/requirements/MultiRequirement.d.ts"/>
+///<reference path="../Safari/SafariTownContent.ts"/>
 
 const TownList: { [name: string]: Town } = {};
 
@@ -372,7 +373,7 @@ const BillsGrandpa6 = new NPC('Bill\'s Grandpa', [
 
 const BillsGrandpa7 = new NPC('Bill\'s Grandpa', [
     'As I said, that was one of the best battles I\'ve ever had.',
-    'There is someone I would like to go with you: my partner Eevee.',
+    'There is someone I would like to go with you, it\'s my partner, Eevee.',
     'I think Eevee is gonna be better with you than with me. I\'m sure that, with you, Eevee is gonna grow up healthy and strong!',
 ], {image: 'assets/images/npcs/Bill\'s Grandpa without Eevee.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Bill\'s Grandpa Treasure Hunt', 11), new QuestLineStepCompletedRequirement('Bill\'s Grandpa Treasure Hunt', 13, GameConstants.AchievementOption.less)]),
@@ -2470,7 +2471,7 @@ const Zinnia5 = new NPC('Zinnia', [
 const Archie = new NPC('Archie', [
     'Baah, what\'s the use in fighting you?',
     'That Dragon twerp stole my Key Stone, there\'s no way I can win without it. Looks like you\'re after her too, huh?',
-    'Last I saw, she was headed towards Mt. Pyre. Hopefully she messes up Maxie\'s day too! At least she didn\'t take the.... uuh...',
+    'Last I saw, she was headed towards Mt. Chimney. Hopefully she messes up Maxie\'s day too! At least she didn\'t take the.... uuh...',
     'Never you mind that, get outta here!',
 ], {image: 'assets/images/trainers/Aqua Leader.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 21), new QuestLineStepCompletedRequirement('The Delta Episode', 23, GameConstants.AchievementOption.less)]),
@@ -2479,14 +2480,14 @@ const Archie = new NPC('Archie', [
 const Maxie = new NPC('Maxie', [
     'There\'s no way I can beat you!',
     'Zinnia.... I thought I could trust her after she found the Red Orb for me, but I guess not. She stole my Key Stone!',
-    'Oh uh... forget I said that. Zinnia\'s already gone. I have no idea where she went, but another Draconid might know. Maybe try talking to Wallace?',
+    'Oh uh... forget I said that. Zinnia\'s already gone. I have no idea where she went, but another Draconid or even an ancient Sootopolitan might know. Maybe try talking to Wallace?',
 ], {image: 'assets/images/trainers/Magma Leader.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 23), new QuestLineStepCompletedRequirement('The Delta Episode', 25, GameConstants.AchievementOption.less)]),
 });
 
 const Wallace3 = new NPC('Gym Leader Wallace', [
     'Hello again, $playername$. I can see by the look on your face that this is not just a social call.',
-    '....Yes I do know about Zinnia, she is a Draconid like me and this generation\'s Lorekeeper. She may be acting in ways you disagree with, but everything she\'s doing is for a reason.',
+    '....Yes I do know about Zinnia, she is a Draconid and this generation\'s Lorekeeper. She may be acting in ways you disagree with, but everything she\'s doing is for a reason.',
     'I do know where she is, but I can\'t just tell you. If you can defeat me, you may be worthy of knowing.',
 ], {image: 'assets/images/gymLeaders/Wallace.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 24), new QuestLineStepCompletedRequirement('The Delta Episode', 26, GameConstants.AchievementOption.less)]),
@@ -5064,6 +5065,15 @@ TownList['Pokémon League Kalos'] = new Town(
             new TemporaryBattleRequirement('Calem 5'),
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Kalos')),
         ],
+    }
+);
+TownList['Friend Safari'] = new Town(
+    'Friend Safari',
+    GameConstants.Region.kalos,
+    GameConstants.KalosSubRegions.Kalos,
+    [new SafariTownContent()],
+    {
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion), new DevelopmentRequirement()],
     }
 );
 
