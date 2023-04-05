@@ -2014,6 +2014,7 @@ class Update implements Saveable {
             //Joey
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 31);
         },
+
         '0.10.11': ({ playerData, saveData, settingsData }) => {
             // Hoenn Stone Shop fight
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 139);
@@ -2040,6 +2041,9 @@ class Update implements Saveable {
             // Reset Pokedex and Hatchery category filters
             settingsData.pokedexCategoryFilter = -1;
             settingsData.breedingCategoryFilter = -1;
+
+            // Add Pyrite Blgd dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 57);
         },
     };
 
