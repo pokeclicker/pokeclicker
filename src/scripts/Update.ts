@@ -1953,7 +1953,7 @@ class Update implements Saveable {
         },
 
         '0.10.10': ({ playerData, saveData, settingsData }) => {
-            //Bill's Grandpa
+            // Bill's Grandpa
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 12);
 
             //Mega Manectric/Houndoom
@@ -1975,7 +1975,7 @@ class Update implements Saveable {
                 playerData.trainerId = trainerId.toString().padStart(6, '0');
             }
 
-            //Delta Episode
+            // Delta Episode
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 115);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 116);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 117);
@@ -2003,7 +2003,7 @@ class Update implements Saveable {
             // Add Near Space dungeon
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 56);
 
-            //Mega Diancie
+            // Mega Diancie
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 156);
 
             // If Distortion World has been cleared and no Pokémon in our party has Pokérus, infect the first Pokémon in our party
@@ -2013,8 +2013,12 @@ class Update implements Saveable {
 
             //Joey
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 31);
+        },
+        '0.10.11': ({ playerData, saveData }) => {
+            // Hoenn Stone Shop fight
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 139);
 
-            //Updates Sorting
+            // Updates Sorting
             if (settingsData.hatcherySort > 5) {
                 settingsData.hatcherySort++;
             }
@@ -2032,7 +2036,6 @@ class Update implements Saveable {
                     helper.sortOption++;
                 }
             });
-
         },
     };
 

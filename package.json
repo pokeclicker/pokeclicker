@@ -1,6 +1,6 @@
 {
   "name": "pokeclicker",
-  "version": "0.10.10",
+  "version": "0.10.11",
   "description": "PokéClicker repository",
   "main": "index.js",
   "scripts": {
@@ -72,7 +72,7 @@
     "natives": "^1.1.6",
     "ts-loader": "^8.0.4",
     "typescript": "^3.7.4",
-    "webpack": "^5.75.0",
+    "webpack": "^5.76.0",
     "webpack-cli": "^3.3.12",
     "webpack-stream": "^6.1.0"
   },
