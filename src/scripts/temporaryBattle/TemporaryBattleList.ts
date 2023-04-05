@@ -2313,6 +2313,52 @@ TemporaryBattleList['Courtney 3'] = new TemporaryBattle(
         firstTimeRewardFunction: () => App.game.party.getPokemonByName('Latios').giveMegastone(),
     }
 );
+TemporaryBattleList['Hoenn Stone Salesman'] = new TemporaryBattle(
+    'Hoenn Stone Salesman',
+    [
+        new GymPokemon('Mega Sceptile', 72637661, 63),
+        new GymPokemon('Mega Blaziken', 72637661, 63),
+        new GymPokemon('Mega Swampert', 72637661, 63),
+    ],
+    'Wow! I\'ll let you buy some of my super fancy stones, now that I know you\'re a serious trainer!',
+    [new QuestLineStepCompletedRequirement('The Delta Episode', 5)],
+    undefined,
+    {
+        displayName: 'Hoenn Stone Salesman',
+        imageName: '../npcs/Ruin Maniac',
+        firstTimeRewardFunction: () => {
+            if ((App.game.party.alreadyCaughtPokemonByName('Sceptile') == true) && (player.regionStarters[GameConstants.Region.hoenn]() == GameConstants.Starter.Grass)) {
+                App.game.party.getPokemonByName('Sceptile').giveMegastone();
+                Notifier.notify({
+                    message: 'You were awarded Sceptilite!',
+                    type: NotificationConstants.NotificationOption.success,
+                    setting: NotificationConstants.NotificationSetting.Dungeons.rare_dungeon_item_found,
+                });
+            } else if ((App.game.party.alreadyCaughtPokemonByName('Blaziken') == true) && (player.regionStarters[GameConstants.Region.hoenn]() == GameConstants.Starter.Fire)) {
+                App.game.party.getPokemonByName('Blaziken').giveMegastone();
+                Notifier.notify({
+                    message: 'You were awarded Blazikenite!',
+                    type: NotificationConstants.NotificationOption.success,
+                    setting: NotificationConstants.NotificationSetting.Dungeons.rare_dungeon_item_found,
+                });
+            } else if ((App.game.party.alreadyCaughtPokemonByName('Swampert') == true) && (player.regionStarters[GameConstants.Region.hoenn]() == GameConstants.Starter.Water)) {
+                App.game.party.getPokemonByName('Swampert').giveMegastone();
+                Notifier.notify({
+                    message: 'You were awarded Swampertite!',
+                    type: NotificationConstants.NotificationOption.success,
+                    setting: NotificationConstants.NotificationSetting.Dungeons.rare_dungeon_item_found,
+                });
+            } else {
+                BagHandler.gainItem({type: ItemType.item, id: 'Key_stone'}, 1);
+                Notifier.notify({
+                    message: 'You were awarded a Key Stone!',
+                    type: NotificationConstants.NotificationOption.success,
+                    setting: NotificationConstants.NotificationSetting.Dungeons.rare_dungeon_item_found,
+                });
+            }
+        },
+    }
+);
 TemporaryBattleList['Aipom Alley'] = new TemporaryBattle(
     'Aipom Alley',
     [
