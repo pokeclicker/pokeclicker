@@ -113,3 +113,18 @@
   border-bottom-left-radius: 6px; 
   border-bottom-right-radius: 6px
 }
+
+/* Pokedex Category dropdown */
+.dropdown button,
+.dropdown .dropdown-item {
+  word-wrap: break-word;
+  white-space: normal !important;
+  overflow: hidden;
+}
+.dropdown-item:hover {
+  background-color: var(--secondary) !important;
+}
+/* For white dropdown buttons, they have white text in dark themes. Shouldn't affect light themes */
+.btn-dropdown:hover {
+  color:#444 !important;
+}
