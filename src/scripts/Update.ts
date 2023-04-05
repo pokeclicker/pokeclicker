@@ -2031,6 +2031,10 @@ class Update implements Saveable {
                 }
             });
 
+            // Reset Pokedex and Hatchery category filters
+            settingsData.pokedexCategoryFilter = -1;
+            settingsData.breedingCategoryFilter = -1;
+
             // Add Pyrite Blgd dungeon
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 57);
         },
