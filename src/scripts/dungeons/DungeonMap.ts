@@ -8,6 +8,7 @@ class DungeonMap {
 
     constructor(
         size: number,
+        private generateChestLoot: () => { loot: Loot, tier: LootTier },
         private flash?: DungeonFlash
     ) {
         if (size <= GameConstants.MAX_DUNGEON_SIZE) {
@@ -142,24 +143,24 @@ class DungeonMap {
 
             // Boss or ladder
             if (index == this.floorSizes.length - 1) {
-                mapList.push(new DungeonTile(GameConstants.DungeonTile.boss));
+                mapList.push(new DungeonTile(GameConstants.DungeonTile.boss, null));
             } else {
-                mapList.push(new DungeonTile(GameConstants.DungeonTile.ladder));
+                mapList.push(new DungeonTile(GameConstants.DungeonTile.ladder, null));
             }
 
             // Chests (leave 1 space for enemy and 1 space for empty tile)
             for (let i = 0; i < size && mapList.length < size * size - 2; i++) {
-                mapList.push(new DungeonTile(GameConstants.DungeonTile.chest));
+                mapList.push(new DungeonTile(GameConstants.DungeonTile.chest, this.generateChestLoot()));
             }
 
             // Enemy Pokemon (leave 1 space for empty tile)
             for (let i = 0; i < size * 2 + 3 && mapList.length < size * size - 1; i++) {
-                mapList.push(new DungeonTile(GameConstants.DungeonTile.enemy));
+                mapList.push(new DungeonTile(GameConstants.DungeonTile.enemy, null));
             }
 
             // Fill with empty tiles
             for (let i: number = mapList.length; i < size * size; i++) {
-                mapList.push(new DungeonTile(GameConstants.DungeonTile.empty));
+                mapList.push(new DungeonTile(GameConstants.DungeonTile.empty, null));
             }
 
             // Shuffle the tiles randomly

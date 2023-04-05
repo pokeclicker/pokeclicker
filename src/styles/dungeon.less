@@ -1,3 +1,5 @@
+@import "for";
+
 .tile {
   position: relative;
   height: 45px;
@@ -48,9 +50,16 @@
     display: block;
     height: 70%;
     width: 70%;
-    background: center / contain no-repeat url('../assets/images/dungeons/chest.png');
+    background: center / contain no-repeat var(--chest-image);
+  }
+  @loot-tiers: common, rare, epic, legendary, mythic;
+  .for(@loot-tiers); .-each(@tier) {
+      &.tile-chest-@{tier}::after {
+          --chest-image: url('../assets/images/dungeons/chest-@{tier}.png');
+      }
   }
 }
+
 
 .tile-boss {
   background-color: #9b59b6;
