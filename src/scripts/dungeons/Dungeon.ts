@@ -3470,6 +3470,109 @@ dungeonList['Near Space'] = new Dungeon('Near Space',
     () => {},
     {dungeonRegionalDifficulty: GameConstants.Region.kalos});
 
+// Orre
+
+dungeonList['Pyrite Bldg'] = new Dungeon('Pyrite Bldg',
+    [
+        new DungeonTrainer('Cooltrainer',
+            [
+                new GymPokemon('Yanma', 37000, 33, undefined, undefined, GameConstants.ShadowStatus.Shadow),
+                new GymPokemon('Pineco', 37000, 32),
+                new GymPokemon('Nincada', 37000, 31),
+                new GymPokemon('Surskit', 37000, 32),
+            ], { weight: 1 }, 'Nore', '(male)'),
+        new DungeonTrainer('Cooltrainer',
+            [
+                new GymPokemon('Phanpy', 37000, 31),
+                new GymPokemon('Trapinch', 37000, 32),
+            ], { weight: 0.5 }, 'Kai', '(female)'),
+        new DungeonTrainer('Cooltrainer',
+            [
+                new GymPokemon('Taillow', 37000, 33),
+                new GymPokemon('Hoothoot', 37000, 34),
+            ], { weight: 0.5 }, 'Pike', '(male)'),
+        new DungeonTrainer('Cooltrainer',
+            [
+                new GymPokemon('Larvitar', 37000, 31),
+                new GymPokemon('Barboach', 37000, 32),
+                new GymPokemon('Carvanha', 37000, 32),
+            ], { weight: 0.5 }, 'Geats', '(male)'),
+        new DungeonTrainer('Cooltrainer',
+            [
+                new GymPokemon('Wingull', 37000, 32),
+                new GymPokemon('Wooper', 37000, 33),
+            ], { weight: 0.5 }, 'Loba', '(male)'),
+        new DungeonTrainer('Cooltrainer',
+            [
+                new GymPokemon('Electrike', 37000, 31),
+                new GymPokemon('Voltorb', 37000, 31),
+            ], { weight: 0.5 }, 'Akmen', '(male)'),
+        new DungeonTrainer('Cooltrainer',
+            [
+                new GymPokemon('Doduo', 37000, 32),
+                new GymPokemon('Ledyba', 37000, 32),
+                new GymPokemon('Swablu', 37000, 31),
+            ], { weight: 0.5 }, 'Raleen', '(female)'),
+        new DungeonTrainer('Cooltrainer',
+            [
+                new GymPokemon('Spheal', 37000, 31),
+                new GymPokemon('Snorunt', 37000, 32),
+            ], { weight: 0.5 }, 'Tura', '(female)'),
+        new DungeonTrainer('Cooltrainer',
+            [
+                new GymPokemon('Horsea', 37000, 31),
+                new GymPokemon('Oddish', 37000, 32),
+                new GymPokemon('Sandshrew', 37000, 32),
+            ], { weight: 0.5 }, 'Toti', '(female)'),
+        new DungeonTrainer('Cooltrainer',
+            [
+                new GymPokemon('Cacnea', 37000, 32),
+                new GymPokemon('Tentacool', 37000, 33),
+            ], { weight: 0.5 }, 'Elidi', '(female)'),
+        new DungeonTrainer('Cooltrainer',
+            [
+                new GymPokemon('Remoraid', 37000, 33, undefined, undefined, GameConstants.ShadowStatus.Shadow),
+                new GymPokemon('Spinarak', 37000, 33),
+                new GymPokemon('Luvdisc', 37000, 32),
+            ], { weight: 1 }, 'Reath', '(female)'),
+        new DungeonTrainer('Cooltrainer',
+            [
+                new GymPokemon('Mantine', 37000, 28, undefined, undefined, GameConstants.ShadowStatus.Shadow),
+                new GymPokemon('Aipom', 37000, 28),
+                new GymPokemon('Furret', 37000, 28),
+                new GymPokemon('Yanma', 37000, 28),
+            ], { weight: 1 }, 'Ferma', '(female)'),
+    ],
+    {
+        common: [
+            {loot: 'xAttack'},
+            {loot: 'Lucky_egg'},
+        ],
+        rare: [
+            {loot: 'Red Shard'},
+            {loot: 'Blue Shard'},
+            {loot: 'Green Shard'},
+            {loot: 'Yellow Shard'},
+            {loot: 'Ochre Shard'},
+        ],
+        epic: [{loot: 'Ultraball'}],
+        legendary: [
+            {loot: 'LargeRestore'},
+            {loot: 'Revive'},
+        ],
+        mythic: [{loot: 'Protein', requirement: new ClearDungeonRequirement(400, GameConstants.getDungeonIndex('Pyrite Blgd'))}],
+    },
+    560000,
+    [
+        new DungeonTrainer('Cooltrainer',
+            [
+                new GymPokemon('Qwilfish', 910000, 33, undefined, undefined, GameConstants.ShadowStatus.Shadow),
+                new GymPokemon('Goldeen', 910000, 33),
+                new GymPokemon('Linoone', 910000, 33),
+            ], { weight: 1 }, 'Dokken', '(female)'),
+    ],
+    40000, 131);
+
 // Sinnoh
 
 dungeonList['Oreburgh Gate'] = new Dungeon('Oreburgh Gate',
