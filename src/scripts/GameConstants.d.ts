@@ -104,12 +104,12 @@ namespace GameConstants {
         'Pokerus',
     }
     declare enum DungeonTile {
-        empty,
-        entrance,
-        enemy,
-        chest,
-        boss,
-        ladder,
+        empty = 0,
+        entrance = 1,
+        enemy = 2,
+        chest = 3,
+        boss = 4,
+        ladder = 5,
     }
     declare const ROUTE_HELD_ITEM_MODIFIER: number;
     declare const DUNGEON_HELD_ITEM_MODIFIER: number;
@@ -194,6 +194,15 @@ namespace GameConstants {
         battlePoint,
         contestToken,
     }
+    declare const LuxuryBallCurrencyRate: Record<Currency, number> = {
+        [Currency.money]: 300000,
+        [Currency.questPoint]: 900,
+        [Currency.dungeonToken]: 15000,
+        [Currency.diamond]: 15,
+        [Currency.farmPoint]: 900,
+        [Currency.battlePoint]: 150,
+        [Currency.contestToken]: 900,
+    };
     declare enum TypeEffectiveness {
         Immune,
         NotVery,
@@ -378,8 +387,17 @@ namespace GameConstants {
     declare enum PokeBlockColor {
         Black,
         Red,
+        Blue,
+        Pink,
+        Green,
+        Yellow,
         Gold,
         Purple,
+        Indigo,
+        Brown,
+        LiteBlue,
+        Olive,
+        Flaxen,
         Gray,
         White
     }
@@ -593,6 +611,7 @@ namespace GameConstants {
     }
     declare enum HoennSubRegions {
         Hoenn,
+        Orre,
     }
     declare enum SinnohSubRegions {
         Sinnoh,
@@ -650,6 +669,7 @@ namespace GameConstants {
         Defeated = 'Defeated',
         Encountered = 'Encountered',
         Hatched = 'Hatched',
+        Seen = 'Seen',
     }
 
     declare enum AlcremieSweet {
@@ -676,5 +696,16 @@ namespace GameConstants {
         global,
         sevii,
         magikarpJump
+    }
+    declare const DayCycleStartHours: Record<DayCyclePart, number> = {
+        [DayCyclePart.Dawn]: 5,
+        [DayCyclePart.Day]: 6,
+        [DayCyclePart.Dusk]: 17,
+        [DayCyclePart.Night]: 18,
+    };
+    declare enum ShadowStatus {
+        None,
+        Shadow,
+        Purified,
     }
 }

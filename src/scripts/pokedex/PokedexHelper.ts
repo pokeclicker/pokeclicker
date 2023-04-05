@@ -24,7 +24,7 @@ class PokedexHelper {
     public static pokemonSeen(id: number): KnockoutComputed<boolean> {
         return ko.pureComputed(() => {
             try {
-                return App.game.statistics.pokemonEncountered[id]() > 0 || App.game.statistics.pokemonDefeated[id]() > 0 || App.game.statistics.pokemonCaptured[id]() > 0 || App.game.party.alreadyCaughtPokemon(id);
+                return App.game.statistics.pokemonEncountered[id]() > 0 || App.game.statistics.pokemonDefeated[id]() > 0 || App.game.statistics.pokemonCaptured[id]() > 0 || App.game.party.alreadyCaughtPokemon(id) || App.game.statistics.pokemonSeen[id]() > 0;
             } catch (error) {
                 return false;
             }
@@ -44,10 +44,11 @@ class PokedexHelper {
     public static getList(): typeof pokemonList {
         // Peek a computed to avoid subscribing to 1000s of statistics
         const highestDex = ko.pureComputed(() => {
+            const highestSeen = App.game.statistics.pokemonSeen.highestID;
             const highestEncountered = App.game.statistics.pokemonEncountered.highestID;
             const highestDefeated = App.game.statistics.pokemonDefeated.highestID;
             const highestCaught = App.game.statistics.pokemonCaptured.highestID;
-            return Math.max(highestEncountered, highestDefeated, highestCaught);
+            return Math.max(highestSeen, highestEncountered, highestDefeated, highestCaught);
         }).peek();
 
         return pokemonList.filter((pokemon) => {
@@ -78,8 +79,8 @@ class PokedexHelper {
             }
 
             // Check if the name contains the string
-            const name = PokedexFilters.name.value().trim();
-            if (name && !PokemonHelper.displayName(pokemon.name)().toLowerCase().includes(name.toLowerCase())) {
+            const name = PokemonHelper.displayName(pokemon.name)();
+            if (!PokedexFilters.name.value().test(name)) {
                 return false;
             }
 
@@ -140,6 +141,22 @@ class PokedexHelper {
 
             // Only pokemon uninfected by pokerus || None
             if (PokedexFilters.statusPokerus.value() != -1 && PokedexFilters.statusPokerus.value() != App.game.party.getPokemon(pokemon.id)?.pokerus) {
+                return false;
+            }
+
+            // Only pokemon with selected category
+            if (PokedexFilters.category.value() != -1 && PokedexFilters.category.value() != App.game.party.getPokemon(pokemon.id)?.category) {
+                return false;
+            }
+
+            const uniqueTransformation = PokedexFilters.uniqueTransformation.value();
+            // Only Base Pokémon with Mega available
+            if (uniqueTransformation == 'mega-available' && !(pokemon as PokemonListData).evolutions?.some((p) => p.evolvedPokemon.startsWith('Mega '))) {
+                // Another option: !(pokemon as PokemonListData).evolutions?.some((p) => p.restrictions.some(p => p instanceof MegaEvolveRequirement))
+                return false;
+            }
+            // Only Mega Pokémon
+            if (uniqueTransformation == 'mega-pokemon' && !(pokemon as PokemonListData).name.startsWith('Mega ')) {
                 return false;
             }
 

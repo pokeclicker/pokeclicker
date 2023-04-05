@@ -70,7 +70,7 @@ GymList['Saffron City'] = new Gym(
     BadgeEnums.Marsh,
     2500,
     'This loss shocks me! But a loss is a loss. I admit I didn\'t work hard enough to win. You earned the MarshBadge.',
-    [new TemporaryBattleRequirement('Blue 5')]
+    [new QuestLineStepCompletedRequirement('Team Rocket', 3)]
 );
 GymList['Fuchsia City'] = new Gym(
     'Koga',
@@ -616,9 +616,7 @@ GymList['Champion Wallace'] = new Gym(
     16000,
     'I, the Champion, fall in defeat… That was wonderful work. You were elegant, infuriatingly so. And yet it was utterly glorious! Kudos to you! You are a truly noble Pokémon Trainer!',
     [new GymBadgeRequirement(BadgeEnums.Elite_Drake)],
-    () => {
-        App.game.quests.getQuestLine('Mystery of Deoxys').beginQuest();
-    },
+    () => {},
     { champion: true }
 );
 
@@ -1437,7 +1435,7 @@ GymList['Acerola\'s Trial'] = new Gym(
     ],
     BadgeEnums.GhostiumZ,
     128000,
-    'Welcome back Now let\'s see how you did... Yup! You passed my trial! Here you go!',
+    'Welcome back! Now let\'s see how you did... Yup! You passed my trial! Here you go!',
     undefined,
     undefined,
     {
@@ -1455,7 +1453,7 @@ GymList['Vast Poni Canyon Trial'] = new Gym(
     ],
     BadgeEnums.DragoniumZ,
     128000,
-    'You obtained a Dragon-Type Z-Crystal. The Dragonium Z is yours!',
+    '<i>You obtained a Dragon-Type Z-Crystal. The Dragonium Z is yours!<i>',
     undefined,
     undefined,
     {

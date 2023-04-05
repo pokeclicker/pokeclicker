@@ -1,3 +1,5 @@
+import DayCyclePart from './dayCycle/DayCyclePart';
+
 export const SECOND = 1000;
 export const MINUTE = SECOND * 60;
 export const HOUR = MINUTE * 60;
@@ -67,6 +69,7 @@ export enum JohtoSubRegions {
 
 export enum HoennSubRegions {
     Hoenn = 0,
+    Orre,
 }
 
 export enum SinnohSubRegions {
@@ -162,6 +165,8 @@ export const BerryColor = [
     '#7AC74C', // Green
     '#F7D02C', // Yellow
     '#6390F0', // Blue
+    '#B1CBDC', // Silver placeholder
+    '#FFE48E', // Gold placeholder
     '#B7B7CE', // Hinted
     '#1C1C1C', // Locked
 ];
@@ -174,12 +179,12 @@ export const DUNGEON_CHEST_SHOW = 2;
 export const DUNGEON_MAP_SHOW = 4;
 
 export enum DungeonTile {
-    empty,
-    entrance,
-    enemy,
-    chest,
-    boss,
-    ladder,
+    empty = 0,
+    entrance = 1,
+    enemy = 2,
+    chest = 3,
+    boss = 4,
+    ladder = 5,
 }
 
 // Achievements
@@ -359,6 +364,16 @@ export enum Currency {
     battlePoint,
     contestToken,
 }
+
+export const LuxuryBallCurrencyRate: Record<Currency, number> = {
+    [Currency.money]: 300000,
+    [Currency.questPoint]: 900,
+    [Currency.dungeonToken]: 15000,
+    [Currency.diamond]: 15,
+    [Currency.farmPoint]: 900,
+    [Currency.battlePoint]: 150,
+    [Currency.contestToken]: 900,
+};
 
 export enum TypeEffectiveness {
     Immune,
@@ -661,7 +676,7 @@ export const Environments: Record<string, EnvironmentData> = {
     PowerPlant: {
         [Region.kanto]: new Set(['Vermilion City', 'Rocket Game Corner', 'Power Plant']),
         [Region.johto]: new Set(['Tin Tower', 'Team Rocket\'s Hideout', 'Radio Tower']),
-        [Region.hoenn]: new Set(['Mauville City', 'New Mauville', 'Weather Institute', 'Aqua Hideout']),
+        [Region.hoenn]: new Set(['Mauville City', 'New Mauville', 'Weather Institute', 'Aqua Hideout', 'Near Space']),
         [Region.sinnoh]: new Set(['Sunyshore City', 'Valley Windworks', 'Team Galactic Eterna Building', 'Team Galactic HQ']),
         [Region.unova]: new Set(['Castelia Sewers', 'Virbank City', 'Nimbasa City', 'A Totally Unsuspicious Frigate', 'Plasma Frigate']),
         [Region.kalos]: new Set(['Lumiose City', 'Kalos Power Plant', 'Poké Ball Factory', 'Team Flare Secret HQ']),
@@ -672,7 +687,7 @@ export const Environments: Record<string, EnvironmentData> = {
     Mansion: {
         [Region.kanto]: new Set(['Silph Co.', 'Pokémon Mansion']),
         [Region.johto]: new Set(['Olivine City', 'Sprout Tower', 'Burned Tower']),
-        [Region.hoenn]: new Set(['Petalburg City']),
+        [Region.hoenn]: new Set(['Petalburg City', 'Pyrite Bldg']),
         [Region.sinnoh]: new Set(['Veilstone City', 'Canalave City', 'Snowpoint Temple']),
         [Region.unova]: new Set(['Castelia City', 'Mistralton City', 'Opelucid City', 'Liberty Garden', 'Dragonspiral Tower', 'Dreamyard']),
         [Region.kalos]: new Set(['Parfum Palace', 'Lost Hotel']),
@@ -854,8 +869,17 @@ export enum UltraBeastType {
 export enum PokeBlockColor {
     Black,
     Red,
+    Blue,
+    Pink,
+    Green,
+    Yellow,
     Gold,
     Purple,
+    Indigo,
+    Brown,
+    LiteBlue,
+    Olive,
+    Flaxen,
     Gray,
     White,
 }
@@ -1179,7 +1203,9 @@ export const HoennDungeons = [
     'Sealed Chamber',
     'Cave of Origin',
     'Sky Pillar',
-    'Victory Road Hoenn', // 55
+    'Victory Road Hoenn',
+    'Near Space',
+    'Pyrite Bldg', // 57
     // These aren't implemented anywhere yet
     /*
     "Island Cave",
@@ -1208,7 +1234,7 @@ export const HoennDungeons = [
 ];
 
 export const SinnohDungeons = [
-    'Oreburgh Gate', // 56
+    'Oreburgh Gate', // 58
     'Valley Windworks',
     'Eterna Forest',
     'Old Chateau',
@@ -1231,11 +1257,11 @@ export const SinnohDungeons = [
     'Flower Paradise',
     'Snowpoint Temple',
     'Stark Mountain',
-    'Hall of Origin', // 79
+    'Hall of Origin', // 81
 ];
 
 export const UnovaDungeons = [
-    'Floccesy Ranch', // 80
+    'Floccesy Ranch', // 82
     'Liberty Garden',
     'Castelia Sewers',
     'Relic Passage',
@@ -1257,11 +1283,11 @@ export const UnovaDungeons = [
     'Pledge Grove',
     'Pinwheel Forest',
     'Dreamyard',
-    'P2 Laboratory', // 102
+    'P2 Laboratory', // 104
 ];
 
 export const KalosDungeons = [
-    'Santalune Forest', // 103
+    'Santalune Forest', // 105
     'Connecting Cave',
     'Glittering Cave',
     'Reflection Cave',
@@ -1274,12 +1300,12 @@ export const KalosDungeons = [
     'Team Flare Secret HQ',
     'Terminus Cave',
     'Pokémon Village',
-    'Victory Road Kalos', // 115
+    'Victory Road Kalos', // 117
     // 'Unknown Dungeon',
 ];
 
 export const AlolaDungeons = [
-    'Trainers\' School', // 116
+    'Trainers\' School', // 118
     'Hau\'oli Cemetery',
     'Verdant Cavern',
     'Melemele Meadow',
@@ -1308,11 +1334,11 @@ export const AlolaDungeons = [
     'Ruins of Abundance',
     'Ruins of Hope',
     'Poni Meadow',
-    'Resolution Cave', // 145
+    'Resolution Cave', // 147
 ];
 
 export const GalarDungeons = [
-    'Slumbering Weald Shrine', // 146
+    'Slumbering Weald Shrine', // 148
     'Galar Mine',
     'Galar Mine No. 2',
     'Glimwood Tangle',
@@ -1332,7 +1358,7 @@ export const GalarDungeons = [
     'Lakeside Cave',
     'Dyna Tree Hill',
     'Tunnel to the Top',
-    'Crown Shrine', // 166
+    'Crown Shrine', // 168
 ];
 
 export const RegionDungeons = [
@@ -1401,6 +1427,7 @@ export const TemporaryBattles = [
     'Biker Goon 2',
     'Biker Goon 3',
     'Cue Ball Paxton',
+    'Bill\'s Grandpa',
     'Blue 6',
     'Silver 1',
     'Silver 2',
@@ -1419,6 +1446,7 @@ export const TemporaryBattles = [
     'Silver 6',
     'Silver 7',
     'Red',
+    'Youngster Joey',
     'May 1',
     'May 2',
     'May 3',
@@ -1433,6 +1461,8 @@ export const TemporaryBattles = [
     'Butler 1',
     'Butler 2',
     'Meta Groudon',
+    'Latios',
+    'Latias',
     'Sevii Rocket Grunt 1',
     'Sevii Rocket Grunt 2',
     'Sevii Rocket Grunt 3',
@@ -1454,6 +1484,15 @@ export const TemporaryBattles = [
     'Barry 5',
     'Barry 6',
     'Barry 7',
+    'Manaphy Go-Rock MGrunt 1',
+    'Manaphy Go-Rock MGrunt 2',
+    'Manaphy Go-Rock MGrunt 3',
+    'Manaphy Go-Rock MGrunt 4',
+    'Manaphy Go-Rock FGrunt 1',
+    'Manaphy Go-Rock FGrunt 2',
+    'Manaphy Go-Rock Commander',
+    'Manaphy Go-Rock Pincher',
+    'Manaphy Egg Protectors',
     'Zero',
     'Hugh 1',
     'Hugh 2',
@@ -1492,6 +1531,30 @@ export const TemporaryBattles = [
     'Trevor & Tierno',
     'Calem 1',
     'Korrina',
+    'Courtney 1',
+    'Matt 1',
+    'Zinnia 1',
+    'Draconid Elder',
+    'Aqua Grunt',
+    'Magma Grunt',
+    'Courtney 2',
+    'Matt 2',
+    'Delta Wallace',
+    'Zinnia 2',
+    'Deoxys',
+    'Delta Giovanni',
+    'Mr. Stone',
+    'Shoal Fisherman',
+    'Delta Brock',
+    'Delta Tabitha',
+    'Delta Shelly',
+    'Icy Boulder',
+    'Mega Draconid Elder',
+    'Delta Steven',
+    'Dr Cozmo',
+    'Matt 3',
+    'Courtney 3',
+    'Hoenn Stone Salesman',
     'Aipom Alley',
     'Mime Interview',
     'Underground Fighting Ring',
@@ -1501,6 +1564,7 @@ export const TemporaryBattles = [
     'Calem 2',
     'Calem 3',
     'Calem 4',
+    'Hex Maniac Aster',
     'Sycamore 2',
     'Shauna 2',
     'Tierno 2',
@@ -1509,6 +1573,7 @@ export const TemporaryBattles = [
     'Riot',
     'Merilyn',
     'Millis and Argus Steel',
+    'Rampaging Yveltal',
     'AZ',
     'Ash Ketchum Kanto',
     'Ash Ketchum Johto',
@@ -1518,7 +1583,10 @@ export const TemporaryBattles = [
     'Ash Ketchum Kalos',
     'Ash Ketchum Pinkan',
     'Calem 6',
+    'Marquis Grant',
     'Grand Duchess Diantha',
+    'Wild Houndour Horde',
+    'Wild Electrike Horde',
     'Hau 1',
     'Hau 2',
     'Hau 3',
@@ -1776,6 +1844,7 @@ export enum PokemonStatisticsType {
     Defeated = 'Defeated',
     Encountered = 'Encountered',
     Hatched = 'Hatched',
+    Seen = 'Seen',
 }
 
 // Alcremie
@@ -1805,4 +1874,16 @@ export enum ExtraAchievementCategories {
     global = Region.final,
     sevii,
     magikarpJump,
+}
+export const DayCycleStartHours: Record<DayCyclePart, number> = {
+    [DayCyclePart.Dawn]: 5,
+    [DayCyclePart.Day]: 6,
+    [DayCyclePart.Dusk]: 17,
+    [DayCyclePart.Night]: 18,
+};
+
+export enum ShadowStatus {
+    None,
+    Shadow,
+    Purified,
 }

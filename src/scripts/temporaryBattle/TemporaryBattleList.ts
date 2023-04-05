@@ -45,13 +45,13 @@ TemporaryBattleList['Blue 2'] = new TemporaryBattle(
 TemporaryBattleList['Blue 3'] = new TemporaryBattle(
     'Blue 3',
     [
-        new GymPokemon('Pidgeotto', 19998, 19),
-        new GymPokemon('Raticate', 19197, 16),
-        new GymPokemon('Kadabra', 19197, 18),
-        new GymPokemon('Charmeleon', 20797, 20, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Grass)),
-        new GymPokemon('Wartortle', 20797, 20, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Fire)),
-        new GymPokemon('Ivysaur', 20797, 20, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Water)),
-        new GymPokemon('Ivysaur', 20797, 20, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Special)),
+        new GymPokemon('Pidgeotto', 12998, 19),
+        new GymPokemon('Raticate', 11902, 16),
+        new GymPokemon('Kadabra', 12094, 18),
+        new GymPokemon('Charmeleon', 13437, 20, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Grass)),
+        new GymPokemon('Wartortle', 13437, 20, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Fire)),
+        new GymPokemon('Ivysaur', 13437, 20, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Water)),
+        new GymPokemon('Ivysaur', 13437, 20, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Special)),
     ],
     'Humph! At least you\'re raising your Pokémon!',
     [new RouteKillRequirement(10, GameConstants.Region.kanto, 6)],
@@ -223,6 +223,18 @@ TemporaryBattleList['Cue Ball Paxton'] = new TemporaryBattle(
         new TemporaryBattleRequirement('Biker Goon 3'),
     ]
 );
+TemporaryBattleList['Bill\'s Grandpa'] = new TemporaryBattle(
+    'Bill\'s Grandpa',
+    [
+        new GymPokemon('Vaporeon', 170000, 48),
+        new GymPokemon('Jolteon', 175000, 49),
+        new GymPokemon('Flareon', 180000, 50),
+    ],
+    'Hahaha, that was one of the best battles I\'ve ever had.',
+    [new QuestLineStepCompletedRequirement('Bill\'s Grandpa Treasure Hunt', 10)],
+    undefined,
+    {}
+);
 TemporaryBattleList['Blue 6'] = new TemporaryBattle(
     'Blue 6',
     [
@@ -294,16 +306,13 @@ TemporaryBattleList.Sudowoodo = new TemporaryBattle(
     'Sudowoodo',
     [new GymPokemon('Sudowoodo', 540000, 20)],
     undefined,
-    [
-        new GymBadgeRequirement(BadgeEnums.Plain),
-        new RouteKillRequirement(10, GameConstants.Region.johto, 36),
-    ],
+    [new GymBadgeRequirement(BadgeEnums.Plain)],
     [new TemporaryBattleRequirement('Sudowoodo'), new ObtainedPokemonRequirement('Sudowoodo')],
     {
         isTrainerBattle: false,
         returnTown: 'Goldenrod City',
         hideTrainer: true,
-        visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.johto, 36),
+        visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.johto, 31),
     }
 );
 TemporaryBattleList['Silver 3'] = new TemporaryBattle(
@@ -418,13 +427,17 @@ TemporaryBattleList['Red Gyarados'] = new TemporaryBattle(
     'Red Gyarados',
     [new GymPokemon('Gyarados', 1100000, 30, undefined, true)],
     undefined,
-    [new QuestLineStartedRequirement('Team Rocket Again')],
+    [
+        new QuestLineStartedRequirement('Team Rocket Again'),
+        new RouteKillRequirement(10, GameConstants.Region.johto, 43),
+    ],
     undefined,
     {
         displayName: 'Red Gyarados',
         returnTown: 'Mahogany Town',
         isTrainerBattle: false,
         hideTrainer: true,
+        visibleRequirement: new QuestLineStartedRequirement('Team Rocket Again'),
     }
 );
 TemporaryBattleList['Suicune 3'] = new TemporaryBattle(
@@ -465,7 +478,7 @@ TemporaryBattleList['Suicune 5'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Suicune',
-        returnTown: 'Cerulean City',
+        returnTown: 'Bill\'s House',
         imageName: '../pokemon/245',
         hideTrainer: true,
     }
@@ -478,7 +491,7 @@ TemporaryBattleList['Suicune 6'] = new TemporaryBattle(
     [new QuestLineStepCompletedRequirement('Eusine\'s Chase', 11)],
     {
         displayName: 'Suicune',
-        returnTown: 'Cerulean City',
+        returnTown: 'Bill\'s House',
         imageName: '../pokemon/245',
         hideTrainer: true,
         isTrainerBattle: false,
@@ -586,6 +599,30 @@ TemporaryBattleList.Red = new TemporaryBattle(
                 message: 'You were awarded a Light Ball for defeating Red.',
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.Items.dropped_item,
+            });
+        },
+    }
+);
+
+TemporaryBattleList['Youngster Joey'] = new TemporaryBattle(
+    'Youngster Joey',
+    [new GymPokemon('Rattata', 548919101828, 100)],
+    'How?!? My Rattata is in the top percentage of all Rattata!',
+    [new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion)],
+    undefined,
+    {
+        displayName: 'Youngster Joey',
+        returnTown: 'Cherrygrove City',
+        imageName: '../trainers/Youngster',
+        rewardFunction: () => {
+            const reward = 64;
+            App.game.wallet.gainMoney(reward, true);
+            Notifier.notify({
+                message: TextMerger.mergeText(`Youngster Joey was defeated!
+$playername$ got <img src="./assets/images/currency/money.svg" height="24px"/> ${reward.toLocaleString('en-US')} for winning!`),
+                type: NotificationConstants.NotificationOption.danger,
+                timeout: 3.6e7,
+                title: 'You defeated Youngster Joey!',
             });
         },
     }
@@ -819,6 +856,38 @@ TemporaryBattleList['Meta Groudon'] = new TemporaryBattle(
         displayName: 'Meta Groudon',
         returnTown: 'Lavaridge Town',
         imageName: '../pokemon/383.02',
+        hideTrainer: true,
+    }
+);
+TemporaryBattleList.Latias = new TemporaryBattle(
+    'Latias',
+    [new GymPokemon('Latias', 13800000, 100)],
+    '<i>Latias joins your party, and Latios flies away back to the mainland.</i>',
+    [new MultiRequirement([new QuestLineStepCompletedRequirement('The Eon Duo', 3), new CustomRequirement(ko.pureComputed(() => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Latios')]()), 1, undefined, GameConstants.AchievementOption.less)])],
+    undefined,
+    {
+        displayName: 'Latias',
+        firstTimeRewardFunction: () => {
+            App.game.party.gainPokemonByName('Latias');
+        },
+        returnTown: 'Southern Island',
+        imageName: '../pokemon/380',
+        hideTrainer: true,
+    }
+);
+TemporaryBattleList.Latios = new TemporaryBattle(
+    'Latios',
+    [new GymPokemon('Latios', 13800000, 100)],
+    '<i>Latios joins your party, and Latias flies away back to the mainland.</i>',
+    [new MultiRequirement([new QuestLineStepCompletedRequirement('The Eon Duo', 3), new CustomRequirement(ko.pureComputed(() => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Latias')]()), 1, undefined, GameConstants.AchievementOption.less)])],
+    undefined,
+    {
+        displayName: 'Latios',
+        firstTimeRewardFunction: () => {
+            App.game.party.gainPokemonByName('Latios');
+        },
+        returnTown: 'Southern Island',
+        imageName: '../pokemon/381',
         hideTrainer: true,
     }
 );
@@ -1142,6 +1211,152 @@ TemporaryBattleList['Barry 7'] = new TemporaryBattle(
             Notifier.notify({message: 'Congratulations on beating Barry at his best! Come back to fight him again at any time.'}),
     }
 );
+
+TemporaryBattleList['Manaphy Go-Rock MGrunt 1'] = new TemporaryBattle(
+    'Manaphy Go-Rock MGrunt 1',
+    [
+        new GymPokemon('Graveler', 2920000, 22),
+        new GymPokemon('Graveler', 2920000, 22),
+        new GymPokemon('Graveler', 2920000, 22),
+    ],
+    'Your teamwork is too good!',
+    [new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 2)],
+    undefined,
+    {
+        displayName: 'Go-Rock Squad Grunt',
+        imageName: 'Go-Rock Squad Grunt (male)',
+    }
+);
+
+TemporaryBattleList['Manaphy Go-Rock FGrunt 1'] = new TemporaryBattle(
+    'Manaphy Go-Rock FGrunt 1',
+    [
+        new GymPokemon('Rattata', 2200000, 22),
+        new GymPokemon('Rattata', 2200000, 22),
+        new GymPokemon('Rattata', 2200000, 22),
+        new GymPokemon('Rattata', 2200000, 22),
+    ],
+    'Your battling skills are solid...',
+    [new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 4)],
+    undefined,
+    {
+        displayName: 'Go-Rock Squad Grunt',
+        imageName: 'Go-Rock Squad Grunt (female)',
+    }
+);
+
+TemporaryBattleList['Manaphy Go-Rock MGrunt 2'] = new TemporaryBattle(
+    'Manaphy Go-Rock MGrunt 2',
+    [
+        new GymPokemon('Zubat', 2200000, 22),
+        new GymPokemon('Zubat', 2200000, 22),
+        new GymPokemon('Zubat', 2200000, 22),
+        new GymPokemon('Zubat', 2200000, 22),
+    ],
+    'Darn it! You better remember this!',
+    [new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 5)],
+    undefined,
+    {
+        displayName: 'Go-Rock Squad Grunt',
+        imageName: 'Go-Rock Squad Grunt (male)',
+    }
+);
+
+TemporaryBattleList['Manaphy Go-Rock MGrunt 3'] = new TemporaryBattle(
+    'Manaphy Go-Rock MGrunt 3',
+    [
+        new GymPokemon('Rattata', 2200000, 22),
+        new GymPokemon('Rattata', 2200000, 22),
+        new GymPokemon('Meowth', 4400000, 22),
+    ],
+    'The Go-Rock Squad\'s future looks bleak...',
+    [new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 5)],
+    undefined,
+    {
+        displayName: 'Go-Rock Squad Grunt',
+        imageName: 'Go-Rock Squad Grunt (male)',
+    }
+);
+
+TemporaryBattleList['Manaphy Go-Rock FGrunt 2'] = new TemporaryBattle(
+    'Manaphy Go-Rock FGrunt 2',
+    [new GymPokemon('Scyther', 8800000, 22)],
+    'Bleh to you!',
+    [new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 5)],
+    undefined,
+    {
+        displayName: 'Go-Rock Squad Grunt',
+        imageName: 'Go-Rock Squad Grunt (female)',
+    }
+);
+
+TemporaryBattleList['Manaphy Go-Rock MGrunt 4'] = new TemporaryBattle(
+    'Manaphy Go-Rock MGrunt 4',
+    [
+        new GymPokemon('Zubat', 2200000, 22),
+        new GymPokemon('Zubat', 2200000, 22),
+        new GymPokemon('Zubat', 2200000, 22),
+        new GymPokemon('Politoed', 2800000, 22),
+    ],
+    'Darn it! You better remember this! ...Wait, didn\'t I already say that...?',
+    [new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 8)],
+    undefined,
+    {
+        displayName: 'Go-Rock Squad Grunt',
+        imageName: 'Go-Rock Squad Grunt (male)',
+    }
+);
+
+TemporaryBattleList['Manaphy Go-Rock Commander'] = new TemporaryBattle(
+    'Manaphy Go-Rock Commander',
+    [
+        new GymPokemon('Scyther', 3200000, 25),
+        new GymPokemon('Scyther', 3200000, 25),
+        new GymPokemon('Venusaur', 3500000, 30),
+    ],
+    'Owowow! Okay, okay, I got it! You can have your stupid egg!',
+    [new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 9)],
+    undefined,
+    {
+        displayName: 'Go-Rock Squad Commander',
+        imageName: 'Go-Rock Squad Commander',
+    }
+);
+
+TemporaryBattleList['Manaphy Go-Rock Pincher'] = new TemporaryBattle(
+    'Manaphy Go-Rock Pincher',
+    [
+        new GymPokemon('Poochyena', 5500000, 40),
+        new GymPokemon('Carvanha', 5500000, 40),
+    ],
+    'Argh! With that Manaphy Egg, I thought even an ex-Go-Rock like me could live out the rest of my life in ease! That Happiny took the egg to the south-east, across the water. I wanted to pursue it, but Carvanha are not... comfortable to ride on.',
+    [new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 21)],
+    undefined,
+    {
+        displayName: 'Go-Rock Pokémon Pincher',
+        imageName: 'Go-Rock Squad Grunt (male)',
+    }
+);
+
+TemporaryBattleList['Manaphy Egg Protectors'] = new TemporaryBattle(
+    'Manaphy Egg Protectors',
+    [
+        new GymPokemon('Glameow', 3500000, 40),
+        new GymPokemon('Pichu', 3600000, 40),
+        new GymPokemon('Happiny', 5000000, 45),
+    ],
+    '<i>As you step over the defeated Pokémon, the Manaphy egg glows... and hatches!</i>',
+    [new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 24)],
+    undefined,
+    {
+        displayName: 'Manaphy Egg Protectors',
+        imageName: 'Manaphy Egg',
+        firstTimeRewardFunction: () => {
+            App.game.party.gainPokemonByName('Manaphy');
+        },
+    }
+);
+
 TemporaryBattleList.Zero = new TemporaryBattle(
     'Zero',
     [
@@ -1755,6 +1970,395 @@ TemporaryBattleList.Korrina = new TemporaryBattle(
         firstTimeRewardFunction: () => App.game.party.getPokemonByName('Lucario').giveMegastone(),
     }
 );
+TemporaryBattleList['Courtney 1'] = new TemporaryBattle(
+    'Courtney 1',
+    [new GymPokemon('Camerupt', 135000000, 53)],
+    'Tedious...bothersome...child...You should...just be quiet...and give me...the Key Stone! Bah! I need a vacation somewhere warm.',
+    [new QuestLineStepCompletedRequirement('The Delta Episode', 4)],
+    undefined,
+    {
+        displayName: 'Magma Admin Courtney',
+        imageName: '../trainers/Magma Admin (courtney)',
+    }
+);
+TemporaryBattleList['Matt 1'] = new TemporaryBattle(
+    'Matt 1',
+    [new GymPokemon('Sharpedo', 135000000, 53)],
+    'Hooaahhh! You clown! Always gettin\' all up in my business! If it\'s gonna be like that, I\'m outta here! The Southern Island\'s gotta be more fun than this.',
+    [new QuestLineStepCompletedRequirement('The Delta Episode', 4)],
+    undefined,
+    {
+        displayName: 'Aqua Admin Matt',
+        imageName: '../trainers/Aqua Admin (matt)',
+    }
+);
+TemporaryBattleList['Zinnia 1'] = new TemporaryBattle(
+    'Zinnia 1',
+    [
+        new GymPokemon('Tyrantrum', 35437500, 53),
+        new GymPokemon('Altaria', 35437500, 53),
+        new GymPokemon('Salamence', 35437500, 53),
+        new GymPokemon('Whismur', 35437500, 53),
+    ],
+    'Niiice! Real nice! Ohhh, I really felt that one! Full points to you! That settles it! You get this Meteorite Shard as a reward!',
+    [new QuestLineStepCompletedRequirement('The Delta Episode', 8)],
+    undefined,
+    {
+        displayName: 'Zinnia',
+        imageName: '../npcs/Zinnia',
+    }
+);
+TemporaryBattleList['Draconid Elder'] = new TemporaryBattle(
+    'Draconid Elder',
+    [
+        new GymPokemon('Dragonite', 37209375, 53),
+        new GymPokemon('Flygon', 37209375, 53),
+        new GymPokemon('Haxorus', 37209375, 53),
+        new GymPokemon('Garchomp', 37209375, 53),
+    ],
+    'You are indeed powerful. I think you can help Zinnia.',
+    [new QuestLineStepCompletedRequirement('The Delta Episode', 15)],
+    undefined,
+    {
+        displayName: 'Draconid Elder',
+        imageName: '../trainers/Draconid Elder',
+    }
+);
+TemporaryBattleList['Aqua Grunt'] = new TemporaryBattle(
+    'Aqua Grunt',
+    [
+        new GymPokemon('Zubat', 35437500, 33),
+        new GymPokemon('Grimer', 35437500, 33),
+        new GymPokemon('Corphish', 35437500, 33),
+        new GymPokemon('Carvanha', 35437500, 33),
+    ],
+    'Baaah! I gotta get out of here!',
+    [new QuestLineStepCompletedRequirement('The Delta Episode', 17)],
+    undefined,
+    {
+        displayName: 'Aqua Grunt',
+        imageName: '../trainers/Team Aqua Grunt (female)',
+    }
+);
+TemporaryBattleList['Magma Grunt'] = new TemporaryBattle(
+    'Magma Grunt',
+    [
+        new GymPokemon('Zubat', 35437500, 33),
+        new GymPokemon('Koffing', 35437500, 33),
+        new GymPokemon('Poochyena', 35437500, 33),
+        new GymPokemon('Numel', 35437500, 33),
+    ],
+    'The boss is gonna be so mad!',
+    [new QuestLineStepCompletedRequirement('The Delta Episode', 17)],
+    undefined,
+    {
+        displayName: 'Magma Grunt',
+        imageName: '../trainers/Team Magma Grunt (male)',
+    }
+);
+TemporaryBattleList['Courtney 2'] = new TemporaryBattle(
+    'Courtney 2',
+    [new GymPokemon('Mega Camerupt', 198102712, 55)],
+    'Why? Why must...you always...Always, always, always, always...Get in my way!',
+    [new QuestLineStepCompletedRequirement('The Delta Episode', 18)],
+    undefined,
+    {
+        displayName: 'Magma Admin Courtney',
+        imageName: '../trainers/Magma Admin (courtney)',
+    }
+);
+TemporaryBattleList['Matt 2'] = new TemporaryBattle(
+    'Matt 2',
+    [new GymPokemon('Mega Sharpedo', 198102712, 55)],
+    'Dang it! Am I not good enough, bro?!',
+    [new QuestLineStepCompletedRequirement('The Delta Episode', 18)],
+    undefined,
+    {
+        displayName: 'Aqua Admin Matt',
+        imageName: '../trainers/Aqua Admin (matt)',
+    }
+);
+TemporaryBattleList['Delta Wallace'] = new TemporaryBattle(
+    'Delta Wallace',
+    [
+        new GymPokemon('Wailord', 36318830, 56),
+        new GymPokemon('Tentacruel', 36318830, 56),
+        new GymPokemon('Ludicolo', 36318830, 56),
+        new GymPokemon('Whiscash', 36318830, 56),
+        new GymPokemon('Gyarados', 36318830, 56),
+        new GymPokemon('Milotic', 36318830, 56),
+    ],
+    'Zinnia has gone to the top of the Sky Pillar to try to summon Rayquaza. Please, try to help her. This Key Stone may help you.',
+    [new QuestLineStepCompletedRequirement('The Delta Episode', 25)],
+    undefined,
+    {
+        displayName: 'Wallace',
+        imageName: '../gymLeaders/Wallace',
+        firstTimeRewardFunction: () => {
+            BagHandler.gainItem({type: ItemType.item, id: 'Key_stone'}, 1);
+            Notifier.notify({
+                message: 'You were awarded a Key Stone from Wallace!',
+                type: NotificationConstants.NotificationOption.success,
+                setting: NotificationConstants.NotificationSetting.Dungeons.rare_dungeon_item_found,
+            });
+        },
+    }
+);
+TemporaryBattleList['Zinnia 2'] = new TemporaryBattle(
+    'Zinnia 2',
+    [
+        new GymPokemon('Goodra', 47940856, 60),
+        new GymPokemon('Tyrantrum', 47940856, 60),
+        new GymPokemon('Altaria', 47940856, 53),
+        new GymPokemon('Noivern', 47940856, 53),
+        new GymPokemon('Mega Salamence', 47940856, 53),
+    ],
+    'I thought... But I\'m supposed to be the one who saves the world...',
+    [new QuestLineStepCompletedRequirement('The Delta Episode', 26)],
+    undefined,
+    {
+        displayName: 'Zinnia',
+        imageName: '../npcs/Zinnia',
+    }
+);
+TemporaryBattleList.Deoxys = new TemporaryBattle(
+    'Deoxys',
+    [new GymPokemon('Deoxys', 293674710, 100)],
+    '<i>The Meteor disintegrates into thousands of pieces.</i>',
+    [new QuestLineStepCompletedRequirement('The Delta Episode', 31)],
+    undefined,
+    {
+        hideTrainer: true,
+        imageName: '../pokemon/386',
+    }
+);
+TemporaryBattleList['Delta Giovanni'] = new TemporaryBattle(
+    'Delta Giovanni',
+    [
+        new GymPokemon('Golem', 39620542, 60),
+        new GymPokemon('Nidoqueen', 39620542, 60),
+        new GymPokemon('Nidoking', 39620542, 63),
+        new GymPokemon('Cloyster', 39620542, 63),
+        new GymPokemon('Mega Beedrill', 42620542, 63),
+    ],
+    'Even here? Is there no getting rid of you? Take this and leave me alone. </br><img src="assets/images/megaStone/15.png"/>',
+    [new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 17), new ObtainedPokemonRequirement('Beedrill')])],
+    undefined,
+    {
+        displayName: 'Giovanni',
+        imageName: '../gymLeaders/Giovanni',
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Beedrill').giveMegastone(),
+    }
+);
+TemporaryBattleList['Mr. Stone'] = new TemporaryBattle(
+    'Mr. Stone',
+    [
+        new GymPokemon('Castform', 67500000, 60),
+        new GymPokemon('Mega Pidgeot', 67500000, 63),
+    ],
+    'You\'re really strong! You should take this, it might come in handy with all this meteor business.</br><img src="assets/images/megaStone/18.png"/>',
+    [new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 6), new ObtainedPokemonRequirement('Pidgeot')])],
+    undefined,
+    {
+        displayName: 'Mr. Stone',
+        imageName: '../npcs/Mr Stone',
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Pidgeot').giveMegastone(),
+    }
+);
+TemporaryBattleList['Shoal Fisherman'] = new TemporaryBattle(
+    'Shoal Fisherman',
+    [new GymPokemon('Mega Slowbro', 148837500, 63)],
+    'I found this neat rock while hunting for shells! You want it?</br><img src="assets/images/megaStone/80.png"/>',
+    [new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 6), new ObtainedPokemonRequirement('Slowbro')])],
+    undefined,
+    {
+        displayName: 'Shoal Fisherman',
+        imageName: '../trainers/Fisherman',
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Slowbro').giveMegastone(),
+    }
+);
+TemporaryBattleList['Delta Brock'] = new TemporaryBattle(
+    'Delta Brock',
+    [
+        new GymPokemon('Sudowoodo', 47250000, 63),
+        new GymPokemon('Crobat', 47250000, 63),
+        new GymPokemon('Mega Steelix', 47250000, 63),
+    ],
+    'Seems like you\'ve gotten really strong since Kanto! I found this neat rock in the cave, you should keep it.</br><img src="assets/images/megaStone/208.png"/>',
+    [new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 9), new ObtainedPokemonRequirement('Steelix')])],
+    undefined,
+    {
+        displayName: 'Brock',
+        imageName: '../gymLeaders/Brock',
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Steelix').giveMegastone(),
+    }
+);
+TemporaryBattleList['Delta Tabitha'] = new TemporaryBattle(
+    'Delta Tabitha',
+    [new GymPokemon('Mega Camerupt', 217912983, 63)],
+    'I guess you\'ve earned this Cameruptite. Make sure your Camerupt holds on to it tightly.</br><img src="assets/images/megaStone/323.png"/>',
+    [new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 26), new ObtainedPokemonRequirement('Camerupt')])],
+    undefined,
+    {
+        displayName: 'Magma Admin Tabitha',
+        imageName: '../trainers/Magma Admin',
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Camerupt').giveMegastone(),
+    }
+);
+TemporaryBattleList['Delta Shelly'] = new TemporaryBattle(
+    'Delta Shelly',
+    [new GymPokemon('Mega Sharpedo', 217912983, 63)],
+    'Fine you win. Take this Sharpedonite. Make sure your Sharpedo holds on to it tightly.</br><img src="assets/images/megaStone/319.png"/>',
+    [new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 26), new ObtainedPokemonRequirement('Sharpedo')])],
+    undefined,
+    {
+        displayName: 'Aqua Admin Shelly',
+        imageName: '../trainers/Aqua Admin (shelly)',
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Sharpedo').giveMegastone(),
+    }
+);
+TemporaryBattleList['Icy Boulder'] = new TemporaryBattle(
+    'Icy Boulder',
+    [new GymPokemon('Mega Glalie', 141750000, 66)],
+    '<i>The Glalie flees, dropping a stone.</i></br><img src="assets/images/megaStone/362.png"/>',
+    [new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 4), new ObtainedPokemonRequirement('Glalie')])],
+    undefined,
+    {
+        displayName: 'Icy Boulder',
+        imageName: '../pokemon/362.01',
+        hideTrainer: true,
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Glalie').giveMegastone(),
+    }
+);
+TemporaryBattleList['Mega Draconid Elder'] = new TemporaryBattle(
+    'Mega Draconid Elder',
+    [
+        new GymPokemon('Dragonite', 37209375, 53),
+        new GymPokemon('Flygon', 37209375, 53),
+        new GymPokemon('Haxorus', 37209375, 53),
+        new GymPokemon('Garchomp', 37209375, 53),
+        new GymPokemon('Mega Salamence', 114837210, 70),
+    ],
+    'You truly are a master of dragons. Please, take this stone.</br><img src="assets/images/megaStone/373.png"/>',
+    [new MultiRequirement([new QuestLineCompletedRequirement('The Delta Episode'), new ObtainedPokemonRequirement('Salamence')])],
+    undefined,
+    {
+        displayName: 'Draconid Elder',
+        imageName: '../trainers/Draconid Elder',
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Salamence').giveMegastone(),
+    }
+);
+TemporaryBattleList['Delta Steven'] = new TemporaryBattle(
+    'Delta Steven',
+    [
+        new GymPokemon('Skarmory', 33017118, 57),
+        new GymPokemon('Aggron', 33017118, 57),
+        new GymPokemon('Claydol', 33017118, 57),
+        new GymPokemon('Cradily', 33017118, 57),
+        new GymPokemon('Armaldo', 33017118, 57),
+        new GymPokemon('Mega Metagross', 36017118, 63),
+    ],
+    'I have to admit, you keep surprising me! You deserve to have this.</br><img src="assets/images/megaStone/376.png"/>',
+    [new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 23), new ObtainedPokemonRequirement('Metagross')])],
+    undefined,
+    {
+        displayName: 'Steven',
+        imageName: '../gymLeaders/Steven',
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Metagross').giveMegastone(),
+    }
+);
+TemporaryBattleList['Dr Cozmo'] = new TemporaryBattle(
+    'Dr Cozmo',
+    [
+        new GymPokemon('Lunatone', 79901427, 57),
+        new GymPokemon('Solrock', 79901427, 57),
+        new GymPokemon('Mega Gallade', 79901427, 63),
+    ],
+    'That was invigorating! Please take this!</br><img src="assets/images/megaStone/475.png"/>',
+    [new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 27), new ObtainedPokemonRequirement('Gallade')])],
+    undefined,
+    {
+        displayName: 'Dr. Cozmo',
+        imageName: '../npcs/Dr Cozmo',
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Gallade').giveMegastone(),
+    }
+);
+TemporaryBattleList['Matt 3'] = new TemporaryBattle(
+    'Matt 3',
+    [
+        new GymPokemon('Grimer', 70875000, 57),
+        new GymPokemon('Sharpedo', 70875000, 63),
+    ],
+    '<i>The Latias that Matt was harassing flies away, leaving a stone behind.</i></br><img src="assets/images/megaStone/380.png"/>',
+    [new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 5), new ObtainedPokemonRequirement('Latias')])],
+    undefined,
+    {
+        displayName: 'Aqua Admin Matt',
+        imageName: '../trainers/Aqua Admin (matt)',
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Latias').giveMegastone(),
+    }
+);
+TemporaryBattleList['Courtney 3'] = new TemporaryBattle(
+    'Courtney 3',
+    [
+        new GymPokemon('Koffing', 70875000, 57),
+        new GymPokemon('Camerupt', 70875000, 63),
+    ],
+    '<i>The Latios that Courtney was harassing flies away, leaving a stone behind.</i></br><img src="assets/images/megaStone/381.png"/>',
+    [new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 5), new ObtainedPokemonRequirement('Latios')])],
+    undefined,
+    {
+        displayName: 'Magma Admin Courtney',
+        imageName: '../trainers/Magma Admin (courtney)',
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Latios').giveMegastone(),
+    }
+);
+TemporaryBattleList['Hoenn Stone Salesman'] = new TemporaryBattle(
+    'Hoenn Stone Salesman',
+    [
+        new GymPokemon('Mega Sceptile', 72637661, 63),
+        new GymPokemon('Mega Blaziken', 72637661, 63),
+        new GymPokemon('Mega Swampert', 72637661, 63),
+    ],
+    'Wow! I\'ll let you buy some of my super fancy stones, now that I know you\'re a serious trainer!',
+    [new QuestLineStepCompletedRequirement('The Delta Episode', 5)],
+    undefined,
+    {
+        displayName: 'Hoenn Stone Salesman',
+        imageName: '../npcs/Ruin Maniac',
+        firstTimeRewardFunction: () => {
+            if ((App.game.party.alreadyCaughtPokemonByName('Sceptile') == true) && (player.regionStarters[GameConstants.Region.hoenn]() == GameConstants.Starter.Grass)) {
+                App.game.party.getPokemonByName('Sceptile').giveMegastone();
+                Notifier.notify({
+                    message: 'You were awarded Sceptilite!',
+                    type: NotificationConstants.NotificationOption.success,
+                    setting: NotificationConstants.NotificationSetting.Dungeons.rare_dungeon_item_found,
+                });
+            } else if ((App.game.party.alreadyCaughtPokemonByName('Blaziken') == true) && (player.regionStarters[GameConstants.Region.hoenn]() == GameConstants.Starter.Fire)) {
+                App.game.party.getPokemonByName('Blaziken').giveMegastone();
+                Notifier.notify({
+                    message: 'You were awarded Blazikenite!',
+                    type: NotificationConstants.NotificationOption.success,
+                    setting: NotificationConstants.NotificationSetting.Dungeons.rare_dungeon_item_found,
+                });
+            } else if ((App.game.party.alreadyCaughtPokemonByName('Swampert') == true) && (player.regionStarters[GameConstants.Region.hoenn]() == GameConstants.Starter.Water)) {
+                App.game.party.getPokemonByName('Swampert').giveMegastone();
+                Notifier.notify({
+                    message: 'You were awarded Swampertite!',
+                    type: NotificationConstants.NotificationOption.success,
+                    setting: NotificationConstants.NotificationSetting.Dungeons.rare_dungeon_item_found,
+                });
+            } else {
+                BagHandler.gainItem({type: ItemType.item, id: 'Key_stone'}, 1);
+                Notifier.notify({
+                    message: 'You were awarded a Key Stone!',
+                    type: NotificationConstants.NotificationOption.success,
+                    setting: NotificationConstants.NotificationSetting.Dungeons.rare_dungeon_item_found,
+                });
+            }
+        },
+    }
+);
 TemporaryBattleList['Aipom Alley'] = new TemporaryBattle(
     'Aipom Alley',
     [
@@ -1857,6 +2461,20 @@ TemporaryBattleList['Millis and Argus Steel'] = new TemporaryBattle(
     ],
     'Our plans are ruined! Retreat!',
     [new QuestLineStepCompletedRequirement('Princess Diancie', 3)]
+);
+TemporaryBattleList['Rampaging Yveltal'] = new TemporaryBattle(
+    'Rampaging Yveltal',
+    [new GymPokemon('Yveltal', 446974112, 80)],
+    '<i>Diancie fights alongside you, Mega Evolving to land the final blow! She hands you her Mega Stone after the fight.</i></br><img src="assets/images/megaStone/719.png"/></br>',
+    [new QuestLineStepCompletedRequirement('Princess Diancie', 8)],
+    undefined,
+    {
+        displayName: 'Rampaging Yveltal',
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Diancie').giveMegastone(),
+        imageName: '../pokemon/717',
+        hideTrainer: true,
+        returnTown: 'Shalour City',
+    }
 );
 TemporaryBattleList['Calem 2'] = new TemporaryBattle(
     'Calem 2',
@@ -2180,6 +2798,24 @@ TemporaryBattleList['Calem 6'] = new TemporaryBattle(
     }
 );
 
+TemporaryBattleList['Marquis Grant'] = new TemporaryBattle(
+    'Marquis Grant',
+    [
+        new GymPokemon('Aurorus', 110668215, 80),
+        new GymPokemon('Tyrantrum', 110668215, 80),
+        new GymPokemon('Mega Tyranitar', 125000000, 80),
+        new GymPokemon('Mega Aggron', 125000000, 80),
+    ],
+    'To commemorate such an impressive show of teamwork, please accept these gifts!</br><img src="assets/images/megaStone/248.png"/></br></br><img src="assets/images/megaStone/306.png"/></br>',
+    [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion), new ClearGymRequirement(2000, GameConstants.getGymIndex('Cyllage City')), new ObtainedPokemonRequirement('Tyranitar'), new ObtainedPokemonRequirement('Aggron')],
+    undefined,
+    {
+        displayName: 'Marquis Grant',
+        imageName: '../gymLeaders/Grant',
+        firstTimeRewardFunction: () => [App.game.party.getPokemonByName('Tyranitar').giveMegastone(), App.game.party.getPokemonByName('Aggron').giveMegastone()],
+    }
+);
+
 TemporaryBattleList['Grand Duchess Diantha'] = new TemporaryBattle(
     'Grand Duchess Diantha',
     [
@@ -2195,6 +2831,83 @@ TemporaryBattleList['Grand Duchess Diantha'] = new TemporaryBattle(
         displayName: 'Grand Duchess Diantha',
         imageName: '../gymLeaders/Diantha',
         firstTimeRewardFunction: () => App.game.party.getPokemonByName('Gardevoir').giveMegastone(),
+    }
+);
+
+TemporaryBattleList['Hex Maniac Aster'] = new TemporaryBattle(
+    'Hex Maniac Aster',
+    [
+        new GymPokemon('Gastly', 40250000, 25),
+        new GymPokemon('Haunter', 60770015, 30),
+        new GymPokemon('Haunter', 60770015, 30),
+        new GymPokemon('Medicham', 60770015, 30),
+    ],
+    'What’s this?! I see... Perhaps a Trainer as accomplished as you can get the most out of this.</br><img src="assets/images/megaStone/94.png"/></br>',
+    [
+        new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Gastly').id], 666),
+        new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Haunter').id], 444),
+        new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Gengar').id], 13),
+        new ObtainedPokemonRequirement('Gengar'),
+    ],
+    undefined,
+    {
+        displayName: 'Hex Maniac Aster',
+        imageName: '../trainers/Hex Maniac',
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Gengar').giveMegastone(),
+    }
+);
+
+TemporaryBattleList['Wild Houndour Horde'] = new TemporaryBattle(
+    'Wild Houndour Horde',
+    [
+        new GymPokemon('Houndour', 60000000, 40),
+        new GymPokemon('Houndour', 60000000, 40),
+        new GymPokemon('Houndour', 60000000, 40),
+        new GymPokemon('Houndour', 60000000, 40),
+        new GymPokemon('Houndour', 60000000, 40),
+        new GymPokemon('Mega Houndoom', 120000000, 60),
+    ],
+    '<i>With the leader of the pack defeated, the Houndour horde scatters, their fiery fury reduced to ashes. In the gleaming sunlight, you catch sight of a small gem left behind by their leader...</i></br><img src="assets/images/megaStone/229.png"/></br><i>You obtained the Houndoominite!</i>',
+    [
+        new ObtainedPokemonRequirement('Houndoom'),
+        new WeatherRequirement([WeatherType.Sunny]),
+        new StatisticRequirement(['pokemonCaptured', PokemonHelper.getPokemonByName('Houndour').id], 500),
+        new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion),
+    ],
+    undefined,
+    {
+        displayName: 'Wild Houndour Horde',
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Houndoom').giveMegastone(),
+        imageName: '../pokemon/229.01',
+        hideTrainer: true,
+        returnTown: 'Dendemille Town',
+    }
+);
+
+TemporaryBattleList['Wild Electrike Horde'] = new TemporaryBattle(
+    'Wild Electrike Horde',
+    [
+        new GymPokemon('Electrike', 60000000, 40),
+        new GymPokemon('Electrike', 60000000, 40),
+        new GymPokemon('Electrike', 60000000, 40),
+        new GymPokemon('Electrike', 60000000, 40),
+        new GymPokemon('Electrike', 60000000, 40),
+        new GymPokemon('Mega Manectric', 120000000, 60),
+    ],
+    '<i>With the leader of the pack defeated, the Electrike horde scatters, their thunderous rage utterly depleted. In a thunderbolt\'s flash, you catch sight of a small gem left behind by their leader...</i></br><img src="assets/images/megaStone/310.png"/></br><i>You obtained the Manectite!</i>',
+    [
+        new ObtainedPokemonRequirement('Manectric'),
+        new WeatherRequirement([WeatherType.Thunderstorm]),
+        new StatisticRequirement(['pokemonCaptured', PokemonHelper.getPokemonByName('Electrike').id], 500),
+        new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion),
+    ],
+    undefined,
+    {
+        displayName: 'Wild Electrike Horde',
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Manectric').giveMegastone(),
+        imageName: '../pokemon/310.01',
+        hideTrainer: true,
+        returnTown: 'Dendemille Town',
     }
 );
 
@@ -2444,7 +3157,7 @@ TemporaryBattleList['Captain Ilima'] = new TemporaryBattle(
         new GymPokemon('Smeargle', 189973142, 51),
         new GymPokemon('Komala', 198608284, 51),
     ],
-    'Yes! You have emerged victorious! You and your Pokémon have become quite a delightful team! Off to Lush Jungle? It\'s been awhile since I last visited Akala.',
+    'Yes! You have emerged victorious! You and your Pokémon have become quite a delightful team! Off to Lush Jungle? It\'s been a while since I last visited Akala.',
     [
         new TemporaryBattleRequirement('Captain Mina'),
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Hau\'oli Cemetery')),
@@ -3564,7 +4277,7 @@ TemporaryBattleList['Rampaging Zacian'] = new TemporaryBattle(
     undefined,
     {
         hideTrainer: true,
-        imageName: '../pokemon/888.1',
+        imageName: '../pokemon/888.01',
     }
 );
 TemporaryBattleList['Rampaging Zamazenta'] = new TemporaryBattle(
@@ -3575,7 +4288,7 @@ TemporaryBattleList['Rampaging Zamazenta'] = new TemporaryBattle(
     undefined,
     {
         hideTrainer: true,
-        imageName: '../pokemon/889.1',
+        imageName: '../pokemon/889.01',
     }
 );
 TemporaryBattleList['Klara 1'] = new TemporaryBattle(

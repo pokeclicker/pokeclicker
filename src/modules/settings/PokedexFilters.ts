@@ -6,9 +6,9 @@ import FilterOption from './FilterOption';
 import GameHelper from '../GameHelper';
 
 const PokedexFilters: Record<string, FilterOption> = {
-    name: new FilterOption<string>(
+    name: new FilterOption<RegExp>(
         'Search',
-        ko.observable(''),
+        ko.observable(new RegExp('', 'i')),
     ),
     region: new FilterOption<Region>(
         'Region',
@@ -64,6 +64,21 @@ const PokedexFilters: Record<string, FilterOption> = {
         [
             new SettingOption('All', '-1'),
             ...Settings.enumToNumberSettingOptionArray(Pokerus, (t) => t !== 'Infected'),
+        ],
+    ),
+    category: new FilterOption<number>(
+        'Category',
+        ko.observable(-1).extend({ numeric: 0 }),
+        'pokedexCategoryFilter',
+    ),
+    uniqueTransformation: new FilterOption<string>(
+        'Unique Transformations',
+        ko.observable('all'),
+        'pokedexUniqueTransformationFilter',
+        [
+            new SettingOption('Show All Pokémon', 'all'),
+            new SettingOption('Mega Evolution Available', 'mega-available'),
+            new SettingOption('Obtained Mega Evolution', 'mega-pokemon'),
         ],
     ),
     heldItem: new FilterOption<boolean>(

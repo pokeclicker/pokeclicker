@@ -42,14 +42,86 @@ class SpecialEvents implements Feature {
 // Create our events here for now (yearly)
 
 // Lunar New Year
-SpecialEvents.newEvent('Lunar New Year', 'Encounter Fancy Pattern Vivillon for a limited time roaming Kalos.',
+SpecialEvents.newEvent('Lunar New Year', 'Two kinds of Vivillon are roaming Kalos and later regions, and ones you\'ve previously caught have returned. Check the Photobook in Santalune City for hints!',
     // Start
     new Date(new Date().getFullYear(), 0, 24, 1), () => {
         RoamingPokemonList.add(GameConstants.Region.kalos, 0, new RoamingPokemon('Vivillon (Fancy)'));
+        RoamingPokemonList.add(GameConstants.Region.kalos, 0, new RoamingPokemon('Vivillon (Meadow)'));
+        RoamingPokemonList.add(GameConstants.Region.galar, 0, new RoamingPokemon('Vivillon (Fancy)'));
+        RoamingPokemonList.add(GameConstants.Region.galar, 2, new RoamingPokemon('Vivillon (Fancy)'));
+        RoamingPokemonList.add(GameConstants.Region.galar, 3, new RoamingPokemon('Vivillon (Fancy)'));
+        RoamingPokemonList.add(GameConstants.Region.alola, 0, new RoamingPokemon('Vivillon (Meadow)'));
+        ([
+            ['Lake Verity', 'Vivillon (Marine)'],
+            ['Lake Acuity', 'Vivillon (Marine)'],
+            ['Lake Valor', 'Vivillon (Marine)'],
+            ['Cerulean Cave', 'Vivillon (Modern)'],
+            ['Moor of Icirrus', 'Vivillon (Jungle)'],
+            ['Dark Cave', 'Vivillon (Monsoon)'],
+            ['Poké Ball Factory', 'Vivillon (Tundra)'],
+            ['Mt. Chimney Crater', 'Vivillon (Sun)'],
+            ['Sprout Tower', 'Vivillon (Archipelago)'],
+            ['Lost Hotel', 'Vivillon (Elegant)'],
+            ['Dreamyard', 'Vivillon (Ocean)'],
+            ['New Mauville', 'Vivillon (Continental)'],
+            ['Sky Pillar', 'Vivillon (Polar)'],
+            ['Relic Castle', 'Vivillon (Sandstorm)'],
+            ['Flower Paradise', 'Vivillon (Garden)'],
+            ['Mt. Moon', 'Vivillon (High Plains)'],
+            ['Dragonspiral Tower', 'Vivillon (Savanna)'],
+            ['Frost Cavern', 'Vivillon (Icy Snow)'],
+            ['Thrifty Megamart', 'Vivillon (Poké Ball)'],
+        ] as [string, PokemonNameType][]).forEach(([location, vivillon]) => {
+            dungeonList[location].bossList.push(
+                new DungeonBossPokemon(vivillon, 96662023, 60, {
+                    hide: true,
+                    requirement: new ObtainedPokemonRequirement(vivillon),
+                })
+            );
+        });
+        dungeonList['Eterna Forest'].bossList.push(new DungeonBossPokemon('Vivillon (River)', 96662023, 60, {hide: true, requirement: new MultiRequirement([
+            new ObtainedPokemonRequirement('Vivillon (River)'),
+            new OneFromManyRequirement([
+                new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 7, GameConstants.AchievementOption.less),
+                new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 8),
+            ]),
+        ])}));
+        TownList['Santalune City'].npcs.push(VivillonPhotobook);
     },
     // End
     new Date(new Date().getFullYear(), 1, 7, 23), () => {
         RoamingPokemonList.remove(GameConstants.Region.kalos, 0, 'Vivillon (Fancy)');
+        RoamingPokemonList.remove(GameConstants.Region.kalos, 0, 'Vivillon (Meadow)');
+        RoamingPokemonList.remove(GameConstants.Region.galar, 0, 'Vivillon (Fancy)');
+        RoamingPokemonList.remove(GameConstants.Region.galar, 2, 'Vivillon (Fancy)');
+        RoamingPokemonList.remove(GameConstants.Region.galar, 3, 'Vivillon (Fancy)');
+        RoamingPokemonList.remove(GameConstants.Region.alola, 0, 'Vivillon (Meadow)');
+        [
+            ['Lake Verity', 'Vivillon (Marine)'],
+            ['Lake Acuity', 'Vivillon (Marine)'],
+            ['Lake Valor', 'Vivillon (Marine)'],
+            ['Cerulean Cave', 'Vivillon (Modern)'],
+            ['Moor of Icirrus', 'Vivillon (Jungle)'],
+            ['Dark Cave', 'Vivillon (Monsoon)'],
+            ['Poké Ball Factory', 'Vivillon (Tundra)'],
+            ['Mt. Chimney Crater', 'Vivillon (Sun)'],
+            ['Sprout Tower', 'Vivillon (Archipelago)'],
+            ['Lost Hotel', 'Vivillon (Elegant)'],
+            ['Dreamyard', 'Vivillon (Ocean)'],
+            ['New Mauville', 'Vivillon (Continental)'],
+            ['Eterna Forest', 'Vivillon (River)'],
+            ['Sky Pillar', 'Vivillon (Polar)'],
+            ['Relic Castle', 'Vivillon (Sandstorm)'],
+            ['Flower Paradise', 'Vivillon (Garden)'],
+            ['Mt. Moon', 'Vivillon (High Plains)'],
+            ['Dragonspiral Tower', 'Vivillon (Savanna)'],
+            ['Frost Cavern', 'Vivillon (Icy Snow)'],
+            ['Thrifty Megamart', 'Vivillon (Poké Ball)'],
+        ].forEach(([location, vivillon]) => {
+            dungeonList[location].bossList = dungeonList[location].bossList
+                .filter(boss => boss.name != vivillon || (boss.name == vivillon && !boss.options?.requirement));
+        });
+        TownList['Santalune City'].npcs = TownList['Santalune City'].npcs.filter(NPC => NPC.name != 'Vivillon Photobook');
     }
 );
 //Hoopa Day
@@ -60,10 +132,12 @@ SpecialEvents.newEvent('Hoopa Day', 'The Mischief Pokémon unleashes his tricks 
         if (pikabluQuestLine.state() == QuestLineState.inactive) {
             App.game.quests.getQuestLine('How blu mouse?').beginQuest();
         }
+        TownList['Cherrygrove City'].content.push(TemporaryBattleList['Youngster Joey']);
     },
     // End
     new Date(new Date().getFullYear(), 3, 2, 1), () => {
         // do not end questline, so ppl can finish it
+        TownList['Cherrygrove City'].content = TownList['Cherrygrove City'].content.filter(t => t != TemporaryBattleList['Youngster Joey']);
     }
 );
 // Easter
