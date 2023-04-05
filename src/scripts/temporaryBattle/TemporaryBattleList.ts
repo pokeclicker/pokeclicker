@@ -478,7 +478,7 @@ TemporaryBattleList['Suicune 5'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Suicune',
-        returnTown: 'Cerulean City',
+        returnTown: 'Bill\'s House',
         imageName: '../pokemon/245',
         hideTrainer: true,
     }
@@ -491,7 +491,7 @@ TemporaryBattleList['Suicune 6'] = new TemporaryBattle(
     [new QuestLineStepCompletedRequirement('Eusine\'s Chase', 11)],
     {
         displayName: 'Suicune',
-        returnTown: 'Cerulean City',
+        returnTown: 'Bill\'s House',
         imageName: '../pokemon/245',
         hideTrainer: true,
         isTrainerBattle: false,
@@ -4231,7 +4231,7 @@ TemporaryBattleList['Rampaging Zacian'] = new TemporaryBattle(
     undefined,
     {
         hideTrainer: true,
-        imageName: '../pokemon/888.1',
+        imageName: '../pokemon/888.01',
     }
 );
 TemporaryBattleList['Rampaging Zamazenta'] = new TemporaryBattle(
@@ -4242,7 +4242,7 @@ TemporaryBattleList['Rampaging Zamazenta'] = new TemporaryBattle(
     undefined,
     {
         hideTrainer: true,
-        imageName: '../pokemon/889.1',
+        imageName: '../pokemon/889.01',
     }
 );
 TemporaryBattleList['Klara 1'] = new TemporaryBattle(
