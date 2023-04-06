@@ -1,8 +1,8 @@
-@import "variables.less";
+@import url("variables.less");
 
 @font-face {
   font-family: pokemonFont;
-  src: url(../assets/fonts/firered.ttf);
+  src: url("../assets/fonts/firered.ttf");
 }
 
 @media (min-width: 1200px) {
@@ -13,18 +13,21 @@
 
 #toaster {
   position: fixed;
-  left: 0px;
-  top: 0px;
+  left: 0;
+  top: 0;
   padding: 10px;
   width: 370px;
   z-index: 10020;
   pointer-events: none;
+
   .toast {
     pointer-events: all;
   }
+
   .toast-body .close {
     color: whitesmoke;
   }
+
   img.icon {
     height: 28px;
     margin-right: 5px;
@@ -36,14 +39,16 @@
   #left-column, #middle-sort-column, #right-column {
     &:empty {
       height: 30px;
-      border-color: rgba(129, 129, 129, 0.3);
+      border-color: rgba(129, 129, 129, 30%);
       border-style: dashed;
       border-width: 1px;
+
       &::after {
-        color: rgba(129, 129, 129, 0.3);
+        color: rgba(129, 129, 129, 30%);
         font-size: 10px;
         content: 'DRAG AND DROP MODULES HERE';
       }
+
       margin-bottom: 15px;
     }
   }
@@ -54,15 +59,19 @@
   #gameTitle {
     margin-right: 160px;
   }
+
   .mobileBattleTitle {
     height: 29%;
+
     .left, .right {
       margin-top: 52px;
     }
   }
+
   .hitpoints {
     bottom: 85px;
   }
+
   .pageItemFooter {
     font-size: 14px !important;
   }
@@ -76,31 +85,17 @@
   animation: animatedOcean 60s linear infinite;
 }
 
-@-webkit-keyframes animatedOcean {
-	0% { background-position: 0 0; }
-	50% { background-position: 100% -50%; }
-	100% { background-position: 200% -100%;  }
-}
-
 @keyframes animatedOcean {
 	0% { background-position: 0 0; }
 	50% { background-position: 100% -50%; }
 	100% { background-position: 200% -100%;  }
 }
 
-@-webkit-keyframes bounceBackground {
-  from {
-    background-position: top left;
-  }
-  to {
-    background-position: bottom right;
-  }
-}
-
 @keyframes bounceBackground {
   from {
     background-position: top left;
   }
+
   to {
     background-position: bottom right;
   }
@@ -108,24 +103,16 @@
 
 .flash{
   color:#f2f;
-	-webkit-animation: flash linear 0.5s infinite;
 	animation: flash linear 0.5s infinite;
 }
 
 .slow-flash{
     color:#f2f;
-      -webkit-animation: flash linear 1s infinite;
       animation: flash linear 1s infinite;
   }
 
 img.pixelated {
   image-rendering: pixelated;
-}
-
-@-webkit-keyframes flash {
-	0% { opacity: 1; }
-	50% { opacity: 0.1; }
-	100% { opacity: 1; }
 }
 
 @keyframes flash {
@@ -170,6 +157,7 @@ div.progress {
   background-color: #555;
   color: whitesmoke;
 }
+
 .progress .progress-bar span {
   text-align: center;
   position: absolute;
@@ -178,6 +166,7 @@ div.progress {
   line-height: 1rem;
   color: whitesmoke;
 }
+
 .progress .progress-bar {
   color: whitesmoke;
 }
@@ -239,6 +228,7 @@ body:hover {
 
 #pokemonListContainer {
   max-height: 300px;
+
   #pokemonListBody {
     max-height: 250px;
     overflow: auto;
@@ -248,6 +238,7 @@ body:hover {
 @media (min-width: 992px) {
   #pokemonListContainer {
     max-height: 400px;
+
     #pokemonListBody {
       max-height: 350px;
     }
@@ -284,6 +275,7 @@ td {
 
   // Name should grow faster than attack and level
   .pokemonName { flex-grow: 10; }
+
   .pokemonAttack, .pokemonLevel {
     flex-grow: 1;
     min-width: 45px;
@@ -307,19 +299,14 @@ td {
 
 /* http://stackoverflow.com/questions/826782/how-to-disable-text-selection-highlighting-using-css */
 .no-select *:not(input) {
-  -webkit-touch-callout: none; /* iOS Safari */
-  -webkit-user-select: none; /* Chrome/Safari/Opera */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* Internet Explorer/Edge */
-  user-select: none; /* Non-prefixed version, currently not supported by any browser */
+  -webkit-touch-callout: none;
+  user-select: none;
 }
 
 img {
   user-select: none;
-  -moz-user-select: none;
   -webkit-user-drag: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
+  -webkit-touch-callout: none;
 }
 
 .clickable {
@@ -332,16 +319,6 @@ img {
 
 .btn-static {
   pointer-events: none;
-}
-
-img {
-  -webkit-touch-callout: none; /* iOS Safari */
-  -webkit-user-select: none; /* Chrome/Safari/Opera */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* Internet Explorer/Edge */
-  user-select: none;
-  /* Non-prefixed version, currently
-                        not supported by any browser */
 }
 
 .featureList {
@@ -370,7 +347,6 @@ img {
 }
 
 .badge-not-acquired {
-  -webkit-filter: grayscale(70%) contrast(3%); /* Safari 6.0 - 9.0 */
   filter: grayscale(70%) contrast(3%);
 }
 
@@ -391,6 +367,7 @@ img {
 .enemy {
   min-height: 96px;
   margin-top: 40px;
+
   @media (max-width: 768px) {
     margin-top: 20px;
   }
@@ -398,53 +375,52 @@ img {
 
 .battle-view {
   min-height: 280px !important;
-
-  background-image: url(../assets/images/battleBackground/default.png);
+  background-image: url("../assets/images/battleBackground/default.png");
   background-size: cover;
   background-position: bottom;
 
   &.forest {
-      background-image: url(../assets/images/battleBackground/forest.png);
+      background-image: url("../assets/images/battleBackground/forest.png");
       background-position: top;
   }
 
   &.water {
-      background-image: url(../assets/images/battleBackground/water.png);
+      background-image: url("../assets/images/battleBackground/water.png");
       background-position: top;
   }
 
   &.ice {
-      background-image: url(../assets/images/battleBackground/ice.png);
+      background-image: url("../assets/images/battleBackground/ice.png");
       background-position: top;
   }
 
   &.fire {
-      background-image: url(../assets/images/battleBackground/fire.png);
-      background-position: 0px -20px;
+      background-image: url("../assets/images/battleBackground/fire.png");
+      background-position: 0 -20px;
   }
 
   &.cave {
-      background-image: url(../assets/images/battleBackground/cave.png);
+      background-image: url("../assets/images/battleBackground/cave.png");
       background-position: top;
   }
 
   &.gem, &.cave-gem {
-      background-image: url(../assets/images/battleBackground/cave-gem.png);
+      background-image: url("../assets/images/battleBackground/cave-gem.png");
       background-position: center;
   }
 
   &.power-plant {
-      background-image: url(../assets/images/battleBackground/power-plant.png);
+      background-image: url("../assets/images/battleBackground/power-plant.png");
       background-position: center;
   }
 
   &.mansion {
-      background-image: url(../assets/images/battleBackground/mansion.png);
+      background-image: url("../assets/images/battleBackground/mansion.png");
       background-position: center;
   }
 
   &.graveyard {
-      background-image: url(../assets/images/battleBackground/graveyard.png);
+      background-image: url("../assets/images/battleBackground/graveyard.png");
       background-position: center;
   }
 
@@ -465,6 +441,7 @@ img {
 
   .pokeball-animated {
     margin-top: 25px;
+
     @media (max-width: 768px) {
       margin-top: 10px;
     }
@@ -480,6 +457,7 @@ img {
     bottom: 70px;
     width: 90%;
     left: 5%;
+
     @media (max-width: 768px) {
       bottom: 90px;
     }
@@ -489,8 +467,8 @@ img {
 .pageItemTitle {
   width: 100%;
   color: whitesmoke;
-  background-color: rgba(0,0,0,0.7);
-  margin: 0px;
+  background-color: rgba(0,0,0,70%);
+  margin: 0;
 
   .right {
     position: absolute;
@@ -510,10 +488,10 @@ img {
 .pageItemFooter {
   width: 100%;
   color: whitesmoke;
-  background-color: rgba(0,0,0,0.7);
-  margin: 0px;
+  background-color: rgba(0,0,0,70%);
+  margin: 0;
   position: absolute;
-  bottom: 0px;
+  bottom: 0;
 
   .right {
     position: absolute;
@@ -532,9 +510,8 @@ img {
 
 *::-webkit-scrollbar-track
 {
-	box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	border-radius: 0px;
+	box-shadow: inset 0 0 6px rgba(0,0,0,30%);
+	border-radius: 0;
 	background-color: #F5F5F5;
 }
 
@@ -548,8 +525,7 @@ img {
 *::-webkit-scrollbar-thumb
 {
 	border-radius: 8px;
-	box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	box-shadow: inset 0 0 6px rgba(0,0,0,30%);
 	background-color: #555;
 }
 
@@ -575,27 +551,35 @@ td.tight {
 .bg-locked {
   background-color: var(--locked);
 }
+
 .bg-incomplete {
   background-color: var(--incomplete);
 }
+
 .bg-questAtLocation {
     background-color: var(--questAtLocation);
   }
+
 .bg-uncaughtPokemon {
   background-color: var(--uncaughtPokemon);
 }
+
 .bg-uncaughtShinyPokemon {
   background-color: var(--uncaughtShinyPokemon);
 }
+
 .bg-uncaughtShinyPokemonAndMissingAchievement {
     background-color: var(--uncaughtShinyPokemonAndMissingAchievement);
   }
+
 .bg-missingAchievement {
     background-color: var(--missingAchievement);
 }
+
 .bg-missingResistant {
     background-color: var(--missingResistant);
 }
+
 .bg-completed {
   background-color: var(--completed);
 }
@@ -603,15 +587,19 @@ td.tight {
 .text-locked {
   color: var(--locked);
 }
+
 .text-incomplete {
   color: var(--incomplete);
 }
+
 .text-uncaughtPokemon {
   color: var(--uncaughtPokemon);
 }
+
 .text-uncaughtShinyPokemon {
   color: var(--uncaughtShinyPokemon);
 }
+
 .text-completed {
   color: var(--completed);
 }
@@ -633,11 +621,13 @@ td.tight {
   padding-top: 2px;
   padding-bottom: 2px;
 }
-.legend-item > span:before {
+
+.legend-item > span::before {
   content: "- ";
 }
 
 /* Checkbox slider */
+
 /*
   Example usage:
   <label class="form-check-label toggler-wrapper style-1 float-right">
@@ -672,13 +662,11 @@ td.tight {
   left: 0;
   width: 100%;
   height: 100%;
-  -webkit-transition: all 300ms ease;
   transition: all 300ms ease;
 }
 
 .toggler-wrapper .toggler-knob {
   position: absolute;
-  -webkit-transition: all 300ms ease;
   transition: all 300ms ease;
 }
 
@@ -695,25 +683,26 @@ td.tight {
   background-color: #fff;
 }
 
-/* Checkbox Toggles - Gender*/
-.gender-toggle.toggler-wrapper .toggler-knob:after {
+/* Checkbox Toggles - Gender */
+.gender-toggle.toggler-wrapper .toggler-knob::after {
   content: 'M';
   position: absolute;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   font-size: 65%;
   text-transform: uppercase;
   color: black;
 }
+
 .gender-toggle.toggler-wrapper .toggler-slider{
   background-color: #499FFF;
 }
 
-.gender-toggle.toggler-wrapper.style-1 input[type="checkbox"]:checked+.toggler-slider .toggler-knob:after {
+.gender-toggle.toggler-wrapper.style-1 input[type="checkbox"]:checked+.toggler-slider .toggler-knob::after {
   content: 'F';
 }
+
 .gender-toggle.toggler-wrapper input[type="checkbox"]:checked+.toggler-slider {
   background-color: #F6807A;
 }
@@ -722,9 +711,11 @@ td.tight {
 .gender-icon-female{
   color:#F6807A;
 }
+
 .gender-icon-male{
   color:#499FFF;
 }
+
 i[class*="gender-icon-"] {
   font-size: 24px;
 }
@@ -742,8 +733,8 @@ i[class*="gender-icon-"] {
 
 .overlay {
   position: absolute;
-  top: 0px;
-  left: 0px;
+  top: 0;
+  left: 0;
   width:100%;
   height: 100%;
 }
