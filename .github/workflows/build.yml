@@ -20,4 +20,5 @@ jobs:
     - run: npm ci
     - run: gulp scripts
     - run: npm run eslint
+    - run: npm run stylelint
     - run: npm run jest
