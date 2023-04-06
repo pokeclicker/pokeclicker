@@ -2733,14 +2733,6 @@ TemporaryBattleList['Storyline AZ'] = new TemporaryBattle(
     {
         displayName: 'Pokémon Trainer AZ',
         imageName: 'AZ',
-        firstTimeRewardFunction: () => {
-            player.gainItem('Key_stone', 1);
-            Notifier.notify({
-                message: 'You got a Key Stone for completing the quest!',
-                type: NotificationConstants.NotificationOption.success,
-                sound: NotificationConstants.NotificationSound.Quests.quest_ready_to_complete,
-            });
-        },
     }
 );
 TemporaryBattleList.AZ = new TemporaryBattle(
@@ -2751,7 +2743,7 @@ TemporaryBattleList.AZ = new TemporaryBattle(
         new GymPokemon('Sigilyph', 161445396, 80),
     ],
     'Floette... It\'s been 3,000 years...',
-    [new QuestLineStepCompletedRequirement('A Beautiful World', 35)],
+    [new QuestLineCompletedRequirement('A Beautiful World')],
     undefined,
     {
         displayName: 'Pokémon Trainer AZ',
