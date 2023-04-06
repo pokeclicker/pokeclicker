@@ -2893,7 +2893,7 @@ TemporaryBattleList['Melemele Spearow'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Agitated Spearow',
-        imageName: 'Cosmog',
+        imageName: '../pokemon/789',
     }
 );
 TemporaryBattleList['Hau 2'] = new TemporaryBattle(
@@ -2937,7 +2937,7 @@ TemporaryBattleList['Hauoli Ilima'] = new TemporaryBattle(
     {
         displayName: 'Captain Ilima',
         returnTown: 'Hau\'oli City',
-        imageName: 'Ilima',
+        imageName: '../gymLeaders/Ilima',
     }
 );
 TemporaryBattleList['Alola 2 Skull'] = new TemporaryBattle(
@@ -2964,7 +2964,7 @@ TemporaryBattleList['Seaward Cave Recon Squad'] = new TemporaryBattle(
     {
         displayName: 'Recon Squad',
         returnTown: 'Seaward Cave',
-        imageName: 'Recon Squad (Ultra Moon)',
+        imageName: '../npcs/Recon Squad (Ultra Moon)',
     }
 );
 TemporaryBattleList['Hau 3'] = new TemporaryBattle(

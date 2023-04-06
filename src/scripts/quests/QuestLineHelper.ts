@@ -1796,7 +1796,7 @@ class QuestLineHelper {
             {
                 clearedMessage: '<i>The bridge collapses beneath you and the floating Pokémon, and you both fall to the turbulent cascades below... But a swift creature zaps to your rescue! It seems fixated on the safety of the little one.</i>',
                 npcDisplayName: 'Melemele Guardian',
-                npcImageName: 'Tapu Koko',
+                npcImageName: '../pokemon/785',
             });
         melemeleAlolaQuestLine.addQuest(battleMelemeleSpearow);
 
@@ -1830,7 +1830,7 @@ class QuestLineHelper {
             {
                 clearedMessage: 'My thanks to you and your Pokémon. These grunts are always bothering me and my trial site. You... you\'re the trainer who cleared the Trainers\' School so effortlessly! Allow me to see if you\'re ready for my trial!',
                 npcDisplayName: 'Ilima',
-                npcImageName: 'Ilima',
+                npcImageName: '../gymLeaders/Ilima',
             });
         melemeleAlolaQuestLine.addQuest(battleSkullGrunts1);
 
@@ -1855,7 +1855,7 @@ class QuestLineHelper {
             {
                 clearedMessage: 'Pew!<br><br><i>Leaves</i>',
                 npcDisplayName: 'Nebby',
-                npcImageName: 'Cosmog',
+                npcImageName: '../pokemon/789',
             });
         melemeleAlolaQuestLine.addQuest(clearMelemeleMeadow);
 
@@ -1864,7 +1864,7 @@ class QuestLineHelper {
             {
                 clearedMessage: 'Pew~<br><br><i>Stays</i>',
                 npcDisplayName: 'Nebby',
-                npcImageName: 'Cosmog',
+                npcImageName: '../pokemon/789',
             });
         melemeleAlolaQuestLine.addQuest(clearSeawardCave);
 
