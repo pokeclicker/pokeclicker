@@ -1541,8 +1541,8 @@ class QuestLineHelper {
         const talkToTeamFlareLysandre1 = new TalkToNPCQuest(TeamFlareLysandre1, 'This is it, you\'ve beaten Lysandre at the top of his game in Team Flare Secret HQ, right? He might have something else to say...');
         flareKalosQuestLine.addQuest(talkToTeamFlareLysandre1);
 
-        const battleXerneas = new CustomQuest (1, 0,  'Calm Xerneas!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Xerneas')]());
-        const battleYveltal = new CustomQuest (1, 0,  'Calm Yveltal!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Yveltal')]());
+        const battleXerneas = new CustomQuest (1, 0,  'Calm Xerneas down!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Xerneas')]());
+        const battleYveltal = new CustomQuest (1, 0,  'Calm Yveltal down!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Yveltal')]());
 
         flareKalosQuestLine.addQuest(new MultipleQuestsQuest([
             battleXerneas,
