@@ -6798,6 +6798,7 @@ dungeonList['Kalos Power Plant'] = new Dungeon('Kalos Power Plant',
                 requirement: new MultiRequirement([
                     new ClearDungeonRequirement(5, GameConstants.getDungeonIndex('Kalos Power Plant')),
                     new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion),
+                    new QuestLineStepCompletedRequirement('A Beautiful World', 11),
                 ])}),
     ],
     575000, 13);
@@ -7065,7 +7066,7 @@ dungeonList['Frost Cavern'] = new Dungeon('Frost Cavern',
         new DungeonTrainer('Team Flare Mable',
             [new GymPokemon('Houndoom', 87365830, 48)],
             { weight: 1 }),
-        new DungeonBossPokemon('Abomasnow', 85376500, 50),
+        new DungeonBossPokemon('Abomasnow', 85376500, 50, {requirement: new QuestLineStepCompletedRequirement('A Beautiful World', 17)}),
     ],
     665500, 15);
 
@@ -7125,16 +7126,63 @@ dungeonList['Team Flare Secret HQ'] = new Dungeon('Team Flare Secret HQ',
     },
     8739480,
     [
+        new DungeonTrainer('Team Flare Aliana',
+            [
+                new GymPokemon('Houndoom', 47416644, 48),
+                new GymPokemon('Druddigon', 48374556, 49),
+            ],
+            { weight: 2, hide: true, requirement: new MultiRequirement([
+                new QuestLineStepCompletedRequirement('A Beautiful World', 24),
+                new QuestLineStepCompletedRequirement('A Beautiful World', 25, GameConstants.AchievementOption.less),
+            ])}),
+        new DungeonTrainer('Team Flare Celosia',
+            [
+                new GymPokemon('Manectric', 47416644, 48),
+                new GymPokemon('Drapion', 48374556, 49),
+            ],
+            { weight: 2, hide: true, requirement: new MultiRequirement([
+                new QuestLineStepCompletedRequirement('A Beautiful World', 25),
+                new QuestLineStepCompletedRequirement('A Beautiful World', 26, GameConstants.AchievementOption.less),
+            ])}),
+        new DungeonTrainer('Team Flare Bryony',
+            [
+                new GymPokemon('Liepard', 47416644, 48),
+                new GymPokemon('Bisharp', 48374556, 49),
+            ],
+            { weight: 2, hide: true, requirement: new MultiRequirement([
+                new QuestLineStepCompletedRequirement('A Beautiful World', 26),
+                new QuestLineStepCompletedRequirement('A Beautiful World', 27, GameConstants.AchievementOption.less),
+            ])}),
+        new DungeonTrainer('Team Flare Mable',
+            [
+                new GymPokemon('Houndoom', 47416644, 48),
+                new GymPokemon('Weavile', 48374556, 49),
+            ],
+            { weight: 2, hide: true, requirement: new MultiRequirement([
+                new QuestLineStepCompletedRequirement('A Beautiful World', 27),
+                new QuestLineStepCompletedRequirement('A Beautiful World', 28, GameConstants.AchievementOption.less),
+            ])}),
         new DungeonTrainer('Team Flare Lysandre',
             [
-                new GymPokemon('Mienshao', 22464940, 49),
-                new GymPokemon('Honchkrow', 22564950, 49),
-                new GymPokemon('Pyroar', 23375580, 51),
-                new GymPokemon('Mega Gyarados', 27385730, 53),
+                new GymPokemon('Mienshao', 22464940, 47),
+                new GymPokemon('Honchkrow', 22564950, 47),
+                new GymPokemon('Pyroar', 23375580, 49),
+                new GymPokemon('Gyarados', 27385730, 51),
             ],
-            { weight: 2 }),
-        new DungeonBossPokemon('Xerneas', 93659460, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Flare Secret HQ'))}),
-        new DungeonBossPokemon('Yveltal', 93659450, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Flare Secret HQ'))}),
+            { weight: 2, hide: true, requirement: new MultiRequirement([
+                new QuestLineStepCompletedRequirement('A Beautiful World', 28),
+                new QuestLineStepCompletedRequirement('A Beautiful World', 33, GameConstants.AchievementOption.less),
+            ])}),
+        new DungeonTrainer('Team Flare Boss Lysandre',
+            [
+                new GymPokemon('Mienshao', 22464940, 47),
+                new GymPokemon('Honchkrow', 22564950, 47),
+                new GymPokemon('Pyroar', 23375580, 49),
+                new GymPokemon('Mega Gyarados', 27385730, 51),
+            ],
+            { weight: 2, hide: true, requirement: new QuestLineStepCompletedRequirement('A Beautiful World', 33)}),
+        new DungeonBossPokemon('Xerneas', 93659460, 100, {requirement: new QuestLineStepCompletedRequirement('A Beautiful World', 31)}),
+        new DungeonBossPokemon('Yveltal', 93659450, 100, {requirement: new QuestLineStepCompletedRequirement('A Beautiful World', 31)}),
     ],
     675000, 16);
 

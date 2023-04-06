@@ -756,6 +756,7 @@ export const SpriteCredits: Credit[] = [
             'Valencian Butterfree',
             'Valencian Vileplume',
             'Valencian Weepinbell',
+            'Team Flare Boss Lysandre',
         ],
         // NOTES: Made specifically for Pokeclicker.
     },
