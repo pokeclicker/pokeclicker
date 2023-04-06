@@ -96,12 +96,12 @@ class PokedexHelper {
                 return false;
             }
 
-            // Alternate forms that we haven't caught yet
-            if (!alreadyCaught && pokemon.id != Math.floor(pokemon.id) && (nativeRegion > player.highestRegion() || pokemon.name === 'Galarian Darmanitan (Zen)')) {
+            // Alternate non-regional forms that we haven't caught yet
+            if (!alreadyCaught && pokemon.id != Math.floor(pokemon.id) && (!nativeRegion || nativeRegion === GameConstants.Region.none || (nativeRegion > player.highestRegion() || pokemon.name === 'Galarian Darmanitan (Zen)') || pokemon.name.includes('Totem '))) {
                 return false;
             }
-            // Hide uncaught base forms if alternative form is caught
-            if (!alreadyCaught && pokemon.id == Math.floor(pokemon.id) && App.game.party._caughtPokemon().some((p) => Math.floor(p.id) == pokemon.id)) {
+            // Hide uncaught base forms if alternate non-regional form is caught
+            if (!alreadyCaught && pokemon.id == Math.floor(pokemon.id) && App.game.party._caughtPokemon().some((p) => Math.floor(p.id) == pokemon.id && !p.name.includes('Alolan ') && !p.name.includes('Galarian ') && !p.name.includes('Totem '))) {
                 return false;
             }
 
