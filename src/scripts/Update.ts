@@ -2036,6 +2036,42 @@ class Update implements Saveable {
                     helper.sortOption++;
                 }
             });
+
+            // Start Monotype
+            // Remove None
+            const typeArray = GameHelper.enumSelectOption(PokemonType).filter((t) => t.name != 'None');
+            const notifier = Notifier.confirmWithDropdown({
+                title: 'Monotype',
+                message: `New <b>Special Challenge</b> mode added: Monotype.\n
+                    Only Pokémon that contains the selected type will deal damage and yield Dungeon Tokens.\n
+                    This is a <b>Special Challenge</b> and is <b>NOT</b> the recommended way to play.\n
+                    Please choose if you would like this challenge mode to be disabled or enabled.\n
+                    Can be disabled later. Can NOT be enabled later!\n
+                    Enabling this challenge will give you a Pokémon of the selected type to join you in your journey.\n\n`,
+                confirm: 'Disable', cancel: 'Enable', dropdownOptions: typeArray,
+            });
+            notifier.then((challenge) => {
+                setTimeout(async () => {
+                    // Check if player wants to activate the new challenge modes
+                    if (!await challenge.confirm) {
+                        App.game.challenges.listSpecial.monotype.activate();
+                        App.game.challenges.listSpecial.monotype.pokemonType(Number(challenge.selectValue));
+                        const pokemonID = GameConstants.RegionalStartersMonotype[GameConstants.Region.kanto][App.game.challenges.listSpecial.monotype.pokemonType()];
+                        const pokemon = PokemonHelper.getPokemonById(pokemonID);
+                        App.game.party.gainPokemonByName(pokemon.name);
+                        // Give Pokerus to the starter if the player has the key item
+                        if (App.game.keyItems.hasKeyItem(KeyItemType.Pokerus_virus) && App.game.party.getPokemon(pokemon.id).pokerus < GameConstants.Pokerus.Contagious) {
+                            App.game.party.getPokemon(pokemon.id).pokerus = GameConstants.Pokerus.Contagious;
+                        }
+                        Notifier.notify({
+                            title: 'Monotype Challenge',
+                            message: `Professor Oak handed you ${GameHelper.anOrA(pokemon.name)} ${pokemon.name}!`,
+                            type: NotificationConstants.NotificationOption.success,
+                            timeout: 3e4,
+                        });
+                    }
+                }, GameConstants.SECOND);
+            });
         },
     };
 
