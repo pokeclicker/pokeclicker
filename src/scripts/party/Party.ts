@@ -21,8 +21,9 @@ class Party implements Feature {
         this._caughtPokemon = ko.observableArray([]);
 
         this.hasMaxLevelPokemon = ko.pureComputed(() => {
+            const pokemonMaxLevel = App.game.challenges.listSpecial.monotype.active() ? Math.min(100, (App.game.badgeCase.badgeCount() + 2) * 10) : 100;
             for (let i = 0; i < this.caughtPokemon.length; i++) {
-                if (this.caughtPokemon[i].level === 100) {
+                if (this.caughtPokemon[i].level === pokemonMaxLevel) {
                     return true;
                 }
             }

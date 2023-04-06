@@ -138,7 +138,8 @@ class BreedingController {
     public static visible(partyPokemon: PartyPokemon) {
         return ko.pureComputed(() => {
             // Only breedable Pokemon
-            if (partyPokemon.breeding || partyPokemon.level < 100) {
+            const pokemonMaxLevel = App.game.challenges.listSpecial.monotype.active() ? Math.min(100, (App.game.badgeCase.badgeCount() + 2) * 10) : 100;
+            if (partyPokemon.breeding || partyPokemon.level < pokemonMaxLevel) {
                 return false;
             }
 
