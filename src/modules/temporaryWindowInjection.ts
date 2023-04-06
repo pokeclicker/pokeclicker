@@ -72,10 +72,9 @@ import BoughtOakItem from './oakItems/BoughtOakItem';
 import OakItemController from './oakItems/OakItemController';
 import OakItemLoadout from './oakItems/OakItemLoadout';
 import OakItemLoadouts from './oakItems/OakItemLoadouts';
-import SpecialRoutePokemon from './routes/SpecialRoutePokemon';
-import RoutePokemon from './routes/RoutePokemon';
-import RegionRoute from './routes/RegionRoute';
-import Routes from './routes/Routes';
+import {
+    SpecialRoutePokemon, RoutePokemon, RegionRoute, Routes,
+} from './routes';
 import SubRegion from './subRegion/SubRegion';
 import SubRegions from './subRegion/SubRegions';
 import Requirement from './requirements/Requirement';
