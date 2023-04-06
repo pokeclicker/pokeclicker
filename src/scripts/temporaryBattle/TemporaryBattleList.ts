@@ -1955,7 +1955,7 @@ TemporaryBattleList['Team Flare Grunt 1'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Team Flare Grunt',
-        imageName: 'Team Flare Grunt (male)',
+        imageName: '../trainers/Team Flare Grunt (male)',
     }
 );
 TemporaryBattleList['Team Flare Grunt 2'] = new TemporaryBattle(
@@ -1969,7 +1969,7 @@ TemporaryBattleList['Team Flare Grunt 2'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Team Flare Grunt',
-        imageName: 'Team Flare Grunt (male)',
+        imageName: '../trainers/Team Flare Grunt (male)',
     }
 );
 TemporaryBattleList['Calem 1'] = new TemporaryBattle(
@@ -2577,7 +2577,7 @@ TemporaryBattleList['Team Flare Lysandre 1'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Team Flare Lysandre',
-        imageName: 'Team Flare Lysandre',
+        imageName: '../trainers/Team Flare Lysandre',
     }
 );
 TemporaryBattleList['Team Flare Xerosic'] = new TemporaryBattle(
@@ -2591,7 +2591,7 @@ TemporaryBattleList['Team Flare Xerosic'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Team Flare Xerosic',
-        imageName: 'Team Flare Xerosic',
+        imageName: '../trainers/Team Flare Xerosic',
     }
 );
 TemporaryBattleList.Xerneas = new TemporaryBattle(
@@ -2631,7 +2631,7 @@ TemporaryBattleList['Team Flare Boss Lysandre 1'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Team Flare Boss Lysandre',
-        imageName: 'Team Flare Boss Lysandre',
+        imageName: '../trainers/Team Flare Boss Lysandre',
     }
 );
 TemporaryBattleList['Sycamore 2'] = new TemporaryBattle(
@@ -2971,7 +2971,7 @@ TemporaryBattleList['Team Flare Boss Lysandre 2'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Team Flare Boss Lysandre',
-        imageName: 'Team Flare Boss Lysandre',
+        imageName: '../trainers/Team Flare Boss Lysandre',
         firstTimeRewardFunction: () => App.game.party.getPokemonByName('Gyarados').giveMegastone(),
     }
 );
