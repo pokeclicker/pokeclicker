@@ -103,7 +103,7 @@
                             </tr>
                         </thead>
                         <tbody data-bind="foreach: lazyLoad($element, PartyController.getvitaminSortedList, { reset: modalUtils.observableState.pokemonVitaminExpandedModalObservable })">
-                            <tr data-bind="hidden: $data.hideFromProteinList()">
+                            <tr data-bind="hidden: $data.hideFromProteinList(), css: { 'text-muted': $data.breeding }">
                                 <td class="text-left align-middle">
                                     <knockout data-bind="text: $data.displayName"></knockout>
                                     <sup data-bind="visible: $data.shiny">✨</sup>
@@ -114,12 +114,12 @@
                                     <button type="button" class="btn btn-link btn-sm text-decoration-none align-text-top" style="line-height: 0.6; font-size: 1rem;"
                                         data-bind="
                                             click: () => { $parent.removeVitamin($data, VitaminController.getMultiplier()) },
-                                            class: ($parent.vitaminsUsed[$data]() > 0 ? 'text-success' : 'text-muted')">-</button>
+                                            class: ($parent.vitaminsUsed[$data]() > 0 && !$parent.breeding ? 'text-success' : 'text-muted')">-</button>
                                     <knockout class="align-middle d-inline-block" style="width: .875rem;" data-bind="text: $parent.vitaminsUsed[$data]().toLocaleString('en-US')">0</knockout>
                                     <button type="button" class="btn btn-link btn-sm text-decoration-none align-text-top" style="line-height: 0.6; font-size: 1rem;"
                                         data-bind="
                                             click: () => { $parent.useVitamin($data, VitaminController.getMultiplier()) },
-                                            class: ($parent.vitaminUsesRemaining() && player.itemList[GameConstants.VitaminType[$data]]() ? 'text-success' : 'text-muted')">+</button>
+                                            class: ($parent.vitaminUsesRemaining() && player.itemList[GameConstants.VitaminType[$data]]() && !$parent.breeding ? 'text-success' : 'text-muted')">+</button>
                                 </td>
                                 <!-- /ko -->
                                 <td class="text-center align-middle tight" data-bind="text: SortOptionConfigs[SortOptions.breedingEfficiency].getValue($data).toLocaleString('en-US', { maximumSignificantDigits: 2 })">-</td>
