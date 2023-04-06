@@ -228,6 +228,14 @@ class PartyPokemon implements Saveable {
             return;
         }
 
+        if (this.breeding) {
+            Notifier.notify({
+                message: 'Vitamins cannot be modified for Pokémon in the hatchery or queue.',
+                type: NotificationConstants.NotificationOption.warning,
+            });
+            return;
+        }
+
         const usesRemaining = this.vitaminUsesRemaining();
 
         // If no more vitamins can be used on this Pokemon
@@ -249,7 +257,14 @@ class PartyPokemon implements Saveable {
     }
 
     public removeVitamin(vitamin: GameConstants.VitaminType, amount: number): void {
-        console.log(vitamin, amount);
+        if (this.breeding) {
+            Notifier.notify({
+                message: 'Vitamins cannot be modified for Pokémon in the hatchery or queue.',
+                type: NotificationConstants.NotificationOption.warning,
+            });
+            return;
+        }
+
         const vitaminName = GameConstants.VitaminType[vitamin];
         amount = Math.min(amount, this.vitaminsUsed[vitamin]());
 
@@ -299,9 +314,6 @@ class PartyPokemon implements Saveable {
     });
 
     public hideFromProteinList = ko.pureComputed(() => {
-        if (this._breeding()) {
-            return true;
-        }
         // Check if search matches nickname or translated name
         if (
             !new RegExp(Settings.getSetting('vitaminSearchFilter').observableValue() , 'i').test(this._translatedName())

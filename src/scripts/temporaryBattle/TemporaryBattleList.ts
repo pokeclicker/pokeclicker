@@ -478,7 +478,7 @@ TemporaryBattleList['Suicune 5'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Suicune',
-        returnTown: 'Cerulean City',
+        returnTown: 'Bill\'s House',
         imageName: '../pokemon/245',
         hideTrainer: true,
     }
@@ -491,7 +491,7 @@ TemporaryBattleList['Suicune 6'] = new TemporaryBattle(
     [new QuestLineStepCompletedRequirement('Eusine\'s Chase', 11)],
     {
         displayName: 'Suicune',
-        returnTown: 'Cerulean City',
+        returnTown: 'Bill\'s House',
         imageName: '../pokemon/245',
         hideTrainer: true,
         isTrainerBattle: false,
@@ -2313,6 +2313,52 @@ TemporaryBattleList['Courtney 3'] = new TemporaryBattle(
         firstTimeRewardFunction: () => App.game.party.getPokemonByName('Latios').giveMegastone(),
     }
 );
+TemporaryBattleList['Hoenn Stone Salesman'] = new TemporaryBattle(
+    'Hoenn Stone Salesman',
+    [
+        new GymPokemon('Mega Sceptile', 72637661, 63),
+        new GymPokemon('Mega Blaziken', 72637661, 63),
+        new GymPokemon('Mega Swampert', 72637661, 63),
+    ],
+    'Wow! I\'ll let you buy some of my super fancy stones, now that I know you\'re a serious trainer!',
+    [new QuestLineStepCompletedRequirement('The Delta Episode', 5)],
+    undefined,
+    {
+        displayName: 'Hoenn Stone Salesman',
+        imageName: '../npcs/Ruin Maniac',
+        firstTimeRewardFunction: () => {
+            if ((App.game.party.alreadyCaughtPokemonByName('Sceptile') == true) && (player.regionStarters[GameConstants.Region.hoenn]() == GameConstants.Starter.Grass)) {
+                App.game.party.getPokemonByName('Sceptile').giveMegastone();
+                Notifier.notify({
+                    message: 'You were awarded Sceptilite!',
+                    type: NotificationConstants.NotificationOption.success,
+                    setting: NotificationConstants.NotificationSetting.Dungeons.rare_dungeon_item_found,
+                });
+            } else if ((App.game.party.alreadyCaughtPokemonByName('Blaziken') == true) && (player.regionStarters[GameConstants.Region.hoenn]() == GameConstants.Starter.Fire)) {
+                App.game.party.getPokemonByName('Blaziken').giveMegastone();
+                Notifier.notify({
+                    message: 'You were awarded Blazikenite!',
+                    type: NotificationConstants.NotificationOption.success,
+                    setting: NotificationConstants.NotificationSetting.Dungeons.rare_dungeon_item_found,
+                });
+            } else if ((App.game.party.alreadyCaughtPokemonByName('Swampert') == true) && (player.regionStarters[GameConstants.Region.hoenn]() == GameConstants.Starter.Water)) {
+                App.game.party.getPokemonByName('Swampert').giveMegastone();
+                Notifier.notify({
+                    message: 'You were awarded Swampertite!',
+                    type: NotificationConstants.NotificationOption.success,
+                    setting: NotificationConstants.NotificationSetting.Dungeons.rare_dungeon_item_found,
+                });
+            } else {
+                BagHandler.gainItem({type: ItemType.item, id: 'Key_stone'}, 1);
+                Notifier.notify({
+                    message: 'You were awarded a Key Stone!',
+                    type: NotificationConstants.NotificationOption.success,
+                    setting: NotificationConstants.NotificationSetting.Dungeons.rare_dungeon_item_found,
+                });
+            }
+        },
+    }
+);
 TemporaryBattleList['Aipom Alley'] = new TemporaryBattle(
     'Aipom Alley',
     [
@@ -2419,7 +2465,7 @@ TemporaryBattleList['Millis and Argus Steel'] = new TemporaryBattle(
 TemporaryBattleList['Rampaging Yveltal'] = new TemporaryBattle(
     'Rampaging Yveltal',
     [new GymPokemon('Yveltal', 446974112, 80)],
-    '<i>Diancie fights along side you, Mega Evolving to land the final blow! She hands you her Mega Stone after the fight.</i></br><img src="assets/images/megaStone/719.png"/></br>',
+    '<i>Diancie fights alongside you, Mega Evolving to land the final blow! She hands you her Mega Stone after the fight.</i></br><img src="assets/images/megaStone/719.png"/></br>',
     [new QuestLineStepCompletedRequirement('Princess Diancie', 8)],
     undefined,
     {
@@ -4231,7 +4277,7 @@ TemporaryBattleList['Rampaging Zacian'] = new TemporaryBattle(
     undefined,
     {
         hideTrainer: true,
-        imageName: '../pokemon/888.1',
+        imageName: '../pokemon/888.01',
     }
 );
 TemporaryBattleList['Rampaging Zamazenta'] = new TemporaryBattle(
@@ -4242,7 +4288,7 @@ TemporaryBattleList['Rampaging Zamazenta'] = new TemporaryBattle(
     undefined,
     {
         hideTrainer: true,
-        imageName: '../pokemon/889.1',
+        imageName: '../pokemon/889.01',
     }
 );
 TemporaryBattleList['Klara 1'] = new TemporaryBattle(
