@@ -27,7 +27,7 @@
   }
 }
 /* Themes with light start menu text */
-.cosmo, .cyborg, .darkly, .flatly, .journal, .litera, .minty, .sandstone, .sketchy, .slate, .solar, .spacelab, .superhero, .united, {
+.cosmo, .cyborg, .darkly, .flatly, .journal, .litera, .minty, .sandstone, .sketchy, .slate, .solar, .spacelab, .superhero, .united {
   // make mute/unmute images white to match "Start Menu" text color
   img[src="assets/images/volume-high.svg"],
   img[src="assets/images/volume-xmark.svg"] {
@@ -36,9 +36,28 @@
 }
 
 /* Individual themes */
+.cerulean {
+  /* Evolution items */
+  #evo-item-list, #evo-pokemon-list {
+    .item-selected, .pokemon-selected {
+      color: whitesmoke;
+      background-image: linear-gradient(#4e5458, #565b60 40%, #5b6165);
+    }
+  }
+}
+
 .cosmo {
   .progress .progress-bar {
     font-size: 12px;
+  }
+  /* Evolution items */
+  #evo-item-list, #evo-pokemon-list {
+    .list-group-item-action {
+      color: whitesmoke;
+    }
+    .list-group-item-action:hover {
+      color: black;
+    }
   }
 }
 
@@ -46,11 +65,26 @@
   .text-light {
     color: whitesmoke !important;
   }
+  /* Evolution items */
+  #evo-item-list, #evo-pokemon-list {
+    .list-group-item-action {
+      color: whitesmoke;
+    }
+  }
 }
 
 .darkly {
   .text-primary, .text-light {
     color: whitesmoke !important;
+  }
+}
+
+.flatly {
+  /* Evolution items */
+  #evo-item-list, #evo-pokemon-list {
+    .list-group-item-action:hover {
+      color: black;
+    }
   }
 }
 
@@ -69,6 +103,12 @@
   .stop-auto {
     position: absolute;
   }
+  /* Evolution items */
+  #evo-item-list, #evo-pokemon-list {
+    .item-selected, .pokemon-selected {
+      background: #2196f3 linear-gradient(180deg,#42a6f5,#2196f3) repeat-x;
+    }
+  }
 }
 
 .minty {
@@ -76,6 +116,21 @@
     .btn:not([class*="btn-"]) {
         color: #495057;
     }
+    /* Evolution items */
+    #evo-item-list, #evo-pokemon-list {
+      .list-group-item-action:hover {
+        color: black;
+      }
+    }
+}
+
+.simplex {
+  /* Evolution items */
+  #evo-item-list, #evo-pokemon-list {
+    .item-selected, .pokemon-selected {
+      background: #d9230f !important;
+    }
+  }
 }
 
 .sketchy {
@@ -115,6 +170,15 @@
     color: rgba(0, 0, 0);
     font-weight: 700;
   }
+  /* Evolution items */
+  #evo-item-list, #evo-pokemon-list {
+    .list-group-item-action {
+      color: whitesmoke;
+    }
+    .list-group-item-action:hover {
+      color: black;
+    }
+  }
 }
 
 .slate {
@@ -153,19 +217,29 @@
   }
 
   // Evolution items modal
-  #showItemsModal {
-    .item-selected {
+  #evo-item-list, #evo-pokemon-list {
+    .item-selected, .pokemon-selected {
       color: whitesmoke;
+      background: #b58900 linear-gradient(180deg,#c09b26,#b58900) repeat-x;
     }
 
     .list-group-item-action {
-      color: #5c5f60;
+      color: whitesmoke;
     }
   }
 
   // Main page
   .card.border-secondary, #pokemonList {
     color: #a0b6b8;
+  }
+}
+
+.spacelab {
+  /* Evolution items */
+  #evo-item-list, #evo-pokemon-list {
+    .item-selected, .pokemon-selected {
+      background: linear-gradient(#6d94bf,#446e9b 50%,#3e648d)
+    }
   }
 }
 
