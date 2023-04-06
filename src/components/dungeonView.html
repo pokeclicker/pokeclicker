@@ -74,12 +74,12 @@
         </div>
         <!-- /ko -->
         <!-- ko if: DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.chest -->
-        <div>
+        <div data-bind="with: DungeonRunner.map.currentTile()">
             <div class="dungeon-chest" style="height: 95px">
-                <img src="assets/images/dungeons/chest.png"/>
+                <img data-bind='attr: { src: `assets/images/dungeons/chest-${$data.metadata.tier}.png` }'/>
             </div>
             <button class="btn btn-warning chest-button">
-                <p>Open</p>
+                <p>Open <span data-bind="text: $data.metadata.tier"></span> chest</p>
                 <p>(+20% Enemy HP)</p>
             </button>
         </div>
