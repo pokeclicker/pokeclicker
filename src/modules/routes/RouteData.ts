@@ -1601,7 +1601,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Abra', 'Doduo', 'Plusle', 'Minun', 'Gulpin', 'Bunnelby', 'Skiddo', 'Pancham', 'Furfrou'],
     }),
-    [new TemporaryBattleRequirement('Sycamore 1')],
+    [new QuestLineStepCompletedRequirement('A Beautiful World', 1)],
 ));
 Routes.add(new RegionRoute(
     'Kalos Route 6', Region.kalos, 6,
@@ -1647,6 +1647,7 @@ Routes.add(new RegionRoute(
     [
         new GymBadgeRequirement(BadgeEnums.Cliff),
         new RouteKillRequirement(10, Region.kalos, 10),
+        new QuestLineStepCompletedRequirement('A Beautiful World', 8),
     ],
 ));
 Routes.add(new RegionRoute(
@@ -1679,8 +1680,7 @@ Routes.add(new RegionRoute(
         land: ['Mightyena', 'Skorupi', 'Watchog', 'Liepard', 'Foongus', 'Pawniard', 'Klefki'],
         water: ['Poliwag', 'Poliwhirl', 'Lombre', 'Floatzel', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
     }),
-    [new ClearDungeonRequirement(1, getDungeonIndex('Poké Ball Factory'))],
-    // Replace req with Poké Ball Factory dungeon if implemented.
+    [new QuestLineStepCompletedRequirement('A Beautiful World', 15)],
 ));
 Routes.add(new RegionRoute(
     'Kalos Route 16', Region.kalos, 16,
@@ -1695,14 +1695,14 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Sneasel', 'Delibird', 'Snover', 'Abomasnow'],
     }),
-    [new ClearDungeonRequirement(1, getDungeonIndex('Frost Cavern'))],
+    [new QuestLineStepCompletedRequirement('A Beautiful World', 17)],
 ));
 Routes.add(new RegionRoute(
     'Kalos Route 18', Region.kalos, 18,
     new RoutePokemon({
         land: ['Sandslash', 'Graveler', 'Pupitar', 'Lairon', 'Torkoal', 'Gurdurr', 'Heatmor', 'Durant'],
     }),
-    [new ClearDungeonRequirement(1, getDungeonIndex('Team Flare Secret HQ'))],
+    [new QuestLineStepCompletedRequirement('A Beautiful World', 32)],
 ));
 Routes.add(new RegionRoute(
     'Kalos Route 19', Region.kalos, 19,
