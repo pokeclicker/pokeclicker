@@ -12,13 +12,13 @@ class StartSequenceRunner {
     public static pickStarter(s: GameConstants.Starter) {
         // Reload the achievements in case the user has any challenge modes activated
         AchievementHandler.load();
+        this.starterPicked = s;
 
         const dataPokemon: DataPokemon = App.game.challenges.listSpecial.monotype.active() ?
             PokemonHelper.getPokemonById(GameConstants.RegionalStartersMonotype[GameConstants.Region.kanto][App.game.challenges.listSpecial.monotype.pokemonType()]) :
             PokemonHelper.getPokemonById(GameConstants.RegionalStarters[GameConstants.Region.kanto][this.starterPicked]);
 
         App.game.quests.getQuestLine('Tutorial Quests').beginQuest(0);
-        this.starterPicked = s;
         $('#pickStarterTutorialModal').modal('hide');
         const shiny: boolean = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
         const gender = PokemonFactory.generateGender(dataPokemon.gender.femaleRatio, dataPokemon.gender.type);
