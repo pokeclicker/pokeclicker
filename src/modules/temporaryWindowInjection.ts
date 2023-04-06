@@ -34,6 +34,7 @@ import WeatherType from './weather/WeatherType';
 import Weather from './weather/Weather';
 import DayCycle from './dayCycle/DayCycle';
 import DayCyclePart from './dayCycle/DayCyclePart';
+import DayCyclePartRequirement from './requirements/DayCyclePartRequirement';
 import SeededRand from './utilities/SeededRand';
 import SeededDateRand from './utilities/SeededDateRand';
 import Rand from './utilities/Rand';
@@ -71,10 +72,9 @@ import BoughtOakItem from './oakItems/BoughtOakItem';
 import OakItemController from './oakItems/OakItemController';
 import OakItemLoadout from './oakItems/OakItemLoadout';
 import OakItemLoadouts from './oakItems/OakItemLoadouts';
-import SpecialRoutePokemon from './routes/SpecialRoutePokemon';
-import RoutePokemon from './routes/RoutePokemon';
-import RegionRoute from './routes/RegionRoute';
-import Routes from './routes/Routes';
+import {
+    SpecialRoutePokemon, RoutePokemon, RegionRoute, Routes,
+} from './routes';
 import SubRegion from './subRegion/SubRegion';
 import SubRegions from './subRegion/SubRegions';
 import Requirement from './requirements/Requirement';
@@ -200,6 +200,7 @@ Object.assign(<any>window, {
     Weather,
     DayCycle,
     DayCyclePart,
+    DayCyclePartRequirement,
     SeededRand,
     SeededDateRand,
     Rand,

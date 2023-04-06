@@ -80,13 +80,6 @@ class Update implements Saveable {
                     saveData.quests.questList[index].initial = 0;
                 }
             });
-
-            // If player has defeated the Hoenn Champion, start the deoxys quest line
-            saveData.badgeCase = saveData.badgeCase || [];
-            // Not using game constants incase the value isn't 39 in the future
-            if (saveData.badgeCase[39]) {
-                Update.startQuestLine(saveData, 'Mystery of Deoxys');
-            }
         },
 
         '0.5.0': ({ playerData }) => {
@@ -1952,12 +1945,131 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 45);
         },
 
-        '0.10.10': ({ playerData, saveData }) => {
-
-            //Bill's Grandpa
+        '0.10.10': ({ playerData, saveData, settingsData }) => {
+            // Bill's Grandpa
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 12);
+
+            //Mega Manectric/Houndoom
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 144);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 145);
+
+            // Derive Trainer Id from linked Discord Id to preserve Enigma hints
+            if (saveData?.discord?.ID) {
+                const getDerivedTrainerId = (discordId: number) => {
+                    const MULTIPLIER = 9301;
+                    const OFFSET = 49297;
+                    const MOD = 233280;
+                    let val = (discordId * MULTIPLIER + OFFSET) % MOD;
+                    val = (val - OFFSET + MOD) % MOD;
+                    val = (val * 123901) % MOD;
+                    return val;
+                };
+                const trainerId = getDerivedTrainerId(saveData.discord.ID);
+                playerData.trainerId = trainerId.toString().padStart(6, '0');
+            }
+
+            // Delta Episode
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 115);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 116);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 117);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 118);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 119);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 120);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 121);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 122);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 123);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 124);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 125);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 126);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 127);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 128);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 129);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 130);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 131);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 132);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 133);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 134);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 135);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 136);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 137);
+
+            // Add Near Space dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 56);
+
+            // Mega Diancie
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 156);
+
+            // If Distortion World has been cleared and no Pokémon in our party has Pokérus, infect the first Pokémon in our party
+            if (saveData.statistics.dungeonsCleared[72] && !saveData.party.caughtPokemon.some(pokemon => pokemon[8] > 0)) {
+                saveData.party.caughtPokemon[0][8] = 2;
+            }
+
+            //Joey
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 31);
         },
 
+        '0.10.11': ({ playerData, saveData, settingsData }) => {
+            // Hoenn Stone Shop fight
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 139);
+
+            // Updates Sorting
+            if (settingsData.hatcherySort > 5) {
+                settingsData.hatcherySort++;
+            }
+            if (settingsData.partySort > 5) {
+                settingsData.partySort++;
+            }
+            if (settingsData.vitaminSort > 5) {
+                settingsData.vitaminSort++;
+            }
+            if (settingsData.heldItemSort > 5) {
+                settingsData.heldItemSort++;
+            }
+            saveData.breeding.hatcheryHelpers?.forEach(helper => {
+                if (helper.sortOption > 5) {
+                    helper.sortOption++;
+                }
+            });
+
+            // Reset Pokedex and Hatchery category filters
+            settingsData.pokedexCategoryFilter = -1;
+            settingsData.breedingCategoryFilter = -1;
+
+            // Add Pyrite Blgd dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 57);
+
+            //Team Flare Grunt 1
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 114);
+
+            //Team Flare Grunt 2
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 115);
+
+            //Team Flare Lysandre
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 152);
+
+            //Team Flare Xerosic
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 153);
+
+            //Xerneas
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 154);
+
+            //Yveltal
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 155);
+
+            //Team Flare Boss Lysandre 1
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 156);
+
+            //Storyline AZ
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 166);
+
+            //Team Flare Boss Lysandre 2
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 178);
+
+            // Start Team Flare questline if player has beaten Sycamore 1 already
+            if (saveData.statistics.temporaryBattleDefeated[111]) {
+                Update.startQuestLine(saveData, 'A Beautiful World');
+            }
+        },
     };
 
     constructor() {

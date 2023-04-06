@@ -104,6 +104,7 @@ Settings.add(new Setting<string>('farmDisplay', 'Farm timer display',
         new SettingOption('Ripe/Death', 'ripeDeath'),
     ],
     'ripeDeath'));
+Settings.add(new BooleanSetting('farmBoostDisplay', 'Include base farm timer during altered berry growth times', false));
 Settings.add(new Setting<string>('sizeUnits', 'Berry size units',
     [
         new SettingOption('Inches', 'inch'),
@@ -243,7 +244,7 @@ Settings.add(new Setting<string>('breedingDisplayFilter', 'breedingDisplayFilter
         new SettingOption('Times Hatched', 'timesHatched'),
         new SettingOption('Breeding Efficiency', 'breedingEfficiency'),
         new SettingOption('Steps per Attack Bonus', 'stepsPerAttack'),
-        new SettingOption('Pokedex ID', 'dexId'),
+        new SettingOption('Pokémon ID #', 'dexId'),
         new SettingOption('Vitamins used', 'vitamins'),
         new SettingOption('EVs', 'evs'),
     ],
