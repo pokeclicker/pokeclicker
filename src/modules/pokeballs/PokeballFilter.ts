@@ -21,7 +21,6 @@ export default class PokeballFilter {
         ball: Pokeball = Pokeball.None,
     ) {
         this.ball = ko.observable(ball);
-        console.log(options);
         this.options = Object.fromEntries(
             Object.entries(options).map(([k, v]) => [k, settingsMap[k](v)]),
         );

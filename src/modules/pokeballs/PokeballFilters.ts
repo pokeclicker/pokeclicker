@@ -5,6 +5,8 @@ import KeyItemType from '../enums/KeyItemType';
 import { Pokeball, Pokerus } from '../GameConstants';
 import PokeballFilter, { PokeballFilterParams } from './PokeballFilter';
 import { PokeballFilterOptions } from './PokeballFilterOptions';
+import Notifier from '../notifications/Notifier';
+import NotificationOption from '../notifications/NotificationOption';
 
 export default class PokeballFilters implements Feature {
     name = 'Pokeball Filters';
@@ -42,6 +44,16 @@ export default class PokeballFilters implements Feature {
 
     findMatch(data: PokeballFilterOptions): PokeballFilter | undefined {
         return this.list().find((filter) => filter.test(data));
+    }
+
+    async deleteFilter(filter: PokeballFilter) {
+        if (await Notifier.confirm({
+            title: 'Delete pokeball filter',
+            message: `Are you sure you want to delete "${filter.name}"?`,
+            type: NotificationOption.danger,
+        })) {
+            this.list.remove(filter);
+        }
     }
 
     toJSON() {
