@@ -283,6 +283,7 @@ export const SpriteCredits: Credit[] = [
             'Rudy',
             'Rusted Shield and Sword icons',
             'Sea Mauville',
+            'Shadow Makuhita',
             'Shady Salesman',
             'Spooky Togepi (shiny)',
             'Spooky Togetic',
