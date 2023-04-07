@@ -922,7 +922,7 @@ Routes.add(new RegionRoute(
           ])),
           new SpecialRoutePokemon(['Castform (Snowy)'], new MultiRequirement([
               new ObtainedPokemonRequirement('Castform'),
-              new WeatherRequirement([WeatherType.Snow, WeatherType.Blizzard, WeatherType.Hail, WeatherType.Fog]),
+              new WeatherRequirement([WeatherType.Snow, WeatherType.Blizzard, WeatherType.Hail]),
           ])),
       ],
     }),
