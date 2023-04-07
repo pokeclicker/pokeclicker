@@ -66,7 +66,7 @@ const BreedingFilters: Record<string, FilterOption> = {
         [
             new SettingOption('Show All Pokémon', 'all'),
             new SettingOption('Mega Evolution Available', 'mega-available'),
-            new SettingOption('Unobtained Mega Stone', 'mega-unobtained'),
+            new SettingOption('Unobtained Mega Evolution', 'mega-unobtained'),
             new SettingOption('Obtained Mega Evolution', 'mega-evolution'),
         ],
     ),
