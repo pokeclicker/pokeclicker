@@ -285,6 +285,7 @@ export const SpriteCredits: Credit[] = [
             'Sea Mauville',
             'Shadow Crocanaw',
             'Shadow Makuhita',
+            'Shadow Murkrow',
             'Shadow Remoraid',
             'Shadow Sneasel',
             'Shadow Sudowoodo',
