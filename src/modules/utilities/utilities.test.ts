@@ -1,7 +1,7 @@
 // Override system date
-jest.useFakeTimers().setSystemTime(new Date(1675298702433));
+vi.useFakeTimers().setSystemTime(new Date(1675298702433));
 // Override Math.random() to always return the same value
-jest.spyOn(global.Math, 'random').mockReturnValue(0.123456789);
+vi.spyOn(global.Math, 'random').mockReturnValue(0.123456789);
 
 import SeededRand from './SeededRand';
 import { AchievementType } from '../GameConstants';

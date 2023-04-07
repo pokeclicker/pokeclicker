@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "types": ["vitest/globals"],
     "lib": ["dom", "es2019"],
     "skipLibCheck": true,
     "sourceMap": true,
