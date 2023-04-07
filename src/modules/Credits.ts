@@ -287,6 +287,7 @@ export const SpriteCredits: Credit[] = [
             'Shadow Makuhita',
             'Shadow Remoraid',
             'Shadow Sneasel',
+            'Shadow Sudowoodo',
             'Shadow Suicune',
             'Shady Salesman',
             'Spooky Togepi (shiny)',
