@@ -73,42 +73,65 @@
 }
 
 #pokeballFilterConfigs {
-    .pokeballFilter {
+    .pokeballFilterWrapper {
+        display: flex;
+        flex-direction: row;
         margin-bottom: 1rem;
-        border: 1px 0 solid gray;
 
-        .pokeballFilterHeader {
-            background-color: rgba(1, 1, 1, 10%);
-            padding: 0.3rem 1rem;
+        .pokeballFilterDragHandle {
+            width: 1.5rem;
+            cursor: grab;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            flex-direction: column;
+            justify-content: center;
 
-            .pokeballFilterName {
-                margin: 0 1rem;
+            &::after {
+                content: "⣶";
+                display: block;
+                padding: 50% 0;
+            }
+
+            &:active {
+                cursor: grabbing;
             }
         }
 
-        .pokeballFilterBody {
-            border-top: 1px solid lightgray;
+        .pokeballFilter {
+            border: 1px 0 solid gray;
 
-            .pokeballFilterSettings {
+            .pokeballFilterHeader {
+                background-color: rgba(1, 1, 1, 10%);
+                padding: 0.3rem 1rem;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                padding: 0.3rem;
-                border-bottom: 1px solid lightgray;
 
-                > * {
-                    flex-grow: 1;
+                .pokeballFilterName {
+                    margin: 0 1rem;
                 }
             }
 
-            .pokeballFilterOptions {
-                width: 100%;
+            .pokeballFilterBody {
+                border-top: 1px solid lightgray;
 
-                .bg-faded {
-                    background-color: rgba(1, 1, 1, 50%)
+                .pokeballFilterSettings {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 0.3rem;
+                    border-bottom: 1px solid lightgray;
+
+                    > * {
+                        flex-grow: 1;
+                    }
+                }
+
+                .pokeballFilterOptions {
+                    width: 100%;
+
+                    .bg-faded {
+                        background-color: rgba(1, 1, 1, 50%)
+                    }
                 }
             }
         }

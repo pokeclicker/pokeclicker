@@ -20,6 +20,8 @@ export default class PokeballFilter {
     public enabled: Observable<boolean>;
     public inverted: Observable<boolean>;
 
+    public uuid: string;
+
     constructor(
         name: string,
         options: PokeballFilterOptions,
@@ -34,6 +36,7 @@ export default class PokeballFilter {
         ));
         this.enabled = ko.observable(enabled);
         this.inverted = ko.observable(inverted);
+        this.uuid = crypto.randomUUID();
     }
 
     test(data: PokeballFilterOptions): boolean {

@@ -88,6 +88,7 @@ class Game {
         this.underground.initialize();
         this.farming.initialize();
         this.specialEvents.initialize();
+        this.pokeballFilters.initialize();
         this.load();
 
         // Update if the achievements are already completed
