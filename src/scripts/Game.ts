@@ -96,7 +96,7 @@ class Game {
         if (player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.None) {
             Battle.generateNewEnemy();
         } else {
-            const battlePokemon = new BattlePokemon('MissingNo.', 0, PokemonType.None, PokemonType.None, 0, 0, 0, 0, new Amount(0, GameConstants.Currency.money), false, 0, GameConstants.BattlePokemonGender.NoGender);
+            const battlePokemon = new BattlePokemon('MissingNo.', 0, PokemonType.None, PokemonType.None, 0, 0, 0, 0, new Amount(0, GameConstants.Currency.money), false, 0, GameConstants.BattlePokemonGender.NoGender, GameConstants.ShadowStatus.None);
             Battle.enemyPokemon(battlePokemon);
         }
         //Safari.load();
@@ -197,17 +197,6 @@ class Game {
                 // Has chosen a starter, Tutorial is started
                 App.game.quests.getQuestLine('Tutorial Quests').state(QuestLineState.started);
                 App.game.quests.getQuestLine('Tutorial Quests').beginQuest(App.game.quests.getQuestLine('Tutorial Quests').curQuest());
-            }
-        }
-        // Battle Frontier not accessable (chances are people broke this themselves, but whatever...)
-        if (App.game.quests.getQuestLine('Mystery of Deoxys').state() == QuestLineState.inactive) {
-            if (App.game.statistics.battleFrontierHighestStageCompleted() >= 100) {
-                // Defeated stage 100, has obtained deoxys
-                App.game.quests.getQuestLine('Mystery of Deoxys').state(QuestLineState.ended);
-            } else if (App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Champion Wallace')]() >= 1) {
-                // Has defeated the Hoenn champion, Quest is started
-                App.game.quests.getQuestLine('Mystery of Deoxys').state(QuestLineState.started);
-                App.game.quests.getQuestLine('Mystery of Deoxys').beginQuest(App.game.quests.getQuestLine('Mystery of Deoxys').curQuest());
             }
         }
         // Mining expedition questline
@@ -421,7 +410,7 @@ class Game {
                     Notifier.notify({
                         title: 'Welcome Time Traveller!',
                         message: `Please ensure you keep a backup of your old save as travelling through time can cause some serious problems.
-                        
+
                         Any Pokémon you may have obtained in the future could cease to exist which could corrupt your save file!`,
                         type: NotificationConstants.NotificationOption.danger,
                         timeout: GameConstants.HOUR,

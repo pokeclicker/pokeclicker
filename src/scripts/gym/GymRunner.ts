@@ -16,13 +16,13 @@ class GymRunner {
         autoRestart = false,
         initialRun = true
     ) {
-        this.initialRun = initialRun;
-        this.autoRestart(autoRestart);
-        this.running(false);
-        this.gymObservable(gym);
+        GymRunner.initialRun = initialRun;
+        GymRunner.autoRestart(autoRestart);
+        GymRunner.running(false);
+        GymRunner.gymObservable(gym);
         App.game.gameState = GameConstants.GameState.idle;
         DungeonRunner.timeBonus(FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute));
-        GymRunner.timeLeft(GameConstants.GYM_TIME * this.timeBonus());
+        GymRunner.timeLeft(GameConstants.GYM_TIME * GymRunner.timeBonus());
         GymRunner.timeLeftPercentage(100);
 
         GymBattle.gym = gym;
@@ -30,11 +30,11 @@ class GymRunner {
         GymBattle.index(0);
         GymBattle.generateNewEnemy();
         App.game.gameState = GameConstants.GameState.gym;
-        this.running(true);
-        this.resetGif();
+        GymRunner.running(true);
+        GymRunner.resetGif();
 
         setTimeout(() => {
-            this.hideGif();
+            GymRunner.hideGif();
         }, GameConstants.GYM_COUNTDOWN);
     }
 
@@ -48,7 +48,7 @@ class GymRunner {
             return;
         }
 
-        if (!this.autoRestart() || this.initialRun) {
+        if (!GymRunner.autoRestart() || GymRunner.initialRun) {
             $('#gymGoContainer').show();
             setTimeout(() => {
                 $('#gymGo').attr('src', 'assets/gifs/go.gif');
@@ -57,37 +57,37 @@ class GymRunner {
     }
 
     public static tick() {
-        if (!this.running()) {
+        if (!GymRunner.running()) {
             return;
         }
-        if (this.timeLeft() < 0) {
+        if (GymRunner.timeLeft() < 0) {
             GymRunner.gymLost();
         }
 
-        this.timeLeft(this.timeLeft() - GameConstants.GYM_TICK);
-        this.timeLeftPercentage(Math.floor(this.timeLeft() / (GameConstants.GYM_TIME * FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute)) * 100));
+        GymRunner.timeLeft(GymRunner.timeLeft() - GameConstants.GYM_TICK);
+        GymRunner.timeLeftPercentage(Math.floor(GymRunner.timeLeft() / (GameConstants.GYM_TIME * FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute)) * 100));
 
         const currentFluteBonus = FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute);
-        if (currentFluteBonus != this.timeBonus()) {
-            if (currentFluteBonus > this.timeBonus()) {
-                if (this.timeBonus() === 1) {
-                    this.timeBonus(currentFluteBonus);
-                    this.timeLeft(this.timeLeft() * this.timeBonus());
+        if (currentFluteBonus != GymRunner.timeBonus()) {
+            if (currentFluteBonus > GymRunner.timeBonus()) {
+                if (GymRunner.timeBonus() === 1) {
+                    GymRunner.timeBonus(currentFluteBonus);
+                    GymRunner.timeLeft(GymRunner.timeLeft() * GymRunner.timeBonus());
                 } else {
-                    this.timeLeft(this.timeLeft() / this.timeBonus());
-                    this.timeBonus(currentFluteBonus);
-                    this.timeLeft(this.timeLeft() * this.timeBonus());
+                    GymRunner.timeLeft(GymRunner.timeLeft() / GymRunner.timeBonus());
+                    GymRunner.timeBonus(currentFluteBonus);
+                    GymRunner.timeLeft(GymRunner.timeLeft() * GymRunner.timeBonus());
                 }
             } else {
-                this.timeLeft(this.timeLeft() / this.timeBonus());
-                this.timeBonus(currentFluteBonus);
+                GymRunner.timeLeft(GymRunner.timeLeft() / GymRunner.timeBonus());
+                GymRunner.timeBonus(currentFluteBonus);
             }
         }
     }
 
     public static gymLost() {
-        if (this.running()) {
-            this.running(false);
+        if (GymRunner.running()) {
+            GymRunner.running(false);
             Notifier.notify({
                 message: `It appears you are not strong enough to defeat ${GymBattle.gym.leaderName.replace(/\d/g, '')}.`,
                 type: NotificationConstants.NotificationOption.danger,
@@ -97,8 +97,8 @@ class GymRunner {
     }
 
     public static gymWon(gym: Gym) {
-        if (this.running()) {
-            this.running(false);
+        if (GymRunner.running()) {
+            GymRunner.running(false);
             Notifier.notify({
                 message: `Congratulations, you defeated ${GymBattle.gym.leaderName.replace(/\d/g, '')}!`,
                 type: NotificationConstants.NotificationOption.success,
@@ -111,12 +111,12 @@ class GymRunner {
             GameHelper.incrementObservable(App.game.statistics.gymsDefeated[GameConstants.getGymIndex(gym.town)]);
 
             // Auto restart gym battle
-            if (this.autoRestart()) {
-                const cost = (this.gymObservable().moneyReward || 10) * 2;
+            if (GymRunner.autoRestart()) {
+                const cost = (GymRunner.gymObservable().moneyReward || 10) * 2;
                 const amt = new Amount(cost, GameConstants.Currency.money);
                 // If the player can afford it, restart the gym
                 if (App.game.wallet.loseAmount(amt)) {
-                    this.startGym(this.gymObservable(), this.autoRestart(), false);
+                    GymRunner.startGym(GymRunner.gymObservable(), GymRunner.autoRestart(), false);
                     return;
                 }
             }

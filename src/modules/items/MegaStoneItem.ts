@@ -5,8 +5,16 @@ import Item from './Item';
 import { ShopOptions } from './types';
 
 export default class MegaStoneItem extends Item {
-    constructor(private pokemon: PokemonNameType, megaStoneName: string, basePrice: number, currency: Currency = Currency.questPoint, options?: ShopOptions, displayName?: string) {
-        super(megaStoneName, basePrice, currency, { maxAmount: 1, ...options }, displayName);
+    constructor(
+        private pokemon: PokemonNameType,
+        megaStoneName: string,
+        basePrice: number,
+        currency: Currency = Currency.questPoint,
+        options?: ShopOptions,
+        displayName?: string,
+        description?: string,
+    ) {
+        super(megaStoneName, basePrice, currency, { maxAmount: 1, ...options }, displayName, description);
     }
 
     totalPrice(amount: number) {
