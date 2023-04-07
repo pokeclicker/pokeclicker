@@ -64,23 +64,23 @@ UndergroundItems.addItem(new UndergroundItem('Icy Rock', 14, [[0, 1, 1, 0], [1, 
 UndergroundItems.addItem(new UndergroundItem('Damp Rock', 15, [[1, 1, 1], [1, 1, 1], [1, 0, 1]], 2));
 
 // Gem Plates
-UndergroundItems.addItem(new UndergroundGemItem('Draco Plate', 100, [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], 100, PokemonType.Dragon));
-UndergroundItems.addItem(new UndergroundGemItem('Dread Plate', 101, [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], 100, PokemonType.Dark));
-UndergroundItems.addItem(new UndergroundGemItem('Earth Plate', 102, [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], 100, PokemonType.Ground));
-UndergroundItems.addItem(new UndergroundGemItem('Fist Plate', 103, [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], 100, PokemonType.Fighting));
-UndergroundItems.addItem(new UndergroundGemItem('Flame Plate', 104, [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], 100, PokemonType.Fire));
-UndergroundItems.addItem(new UndergroundGemItem('Icicle Plate', 105, [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], 100, PokemonType.Ice));
-UndergroundItems.addItem(new UndergroundGemItem('Insect Plate', 106, [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], 100, PokemonType.Bug));
-UndergroundItems.addItem(new UndergroundGemItem('Iron Plate', 107, [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], 100, PokemonType.Steel));
-UndergroundItems.addItem(new UndergroundGemItem('Meadow Plate', 108, [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], 100, PokemonType.Grass));
-UndergroundItems.addItem(new UndergroundGemItem('Mind Plate', 109, [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], 100, PokemonType.Psychic));
-UndergroundItems.addItem(new UndergroundGemItem('Sky Plate', 110, [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], 100, PokemonType.Flying));
-UndergroundItems.addItem(new UndergroundGemItem('Splash Plate', 111, [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], 100, PokemonType.Water));
-UndergroundItems.addItem(new UndergroundGemItem('Spooky Plate', 112, [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], 100, PokemonType.Ghost));
-UndergroundItems.addItem(new UndergroundGemItem('Stone Plate', 113, [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], 100, PokemonType.Rock));
-UndergroundItems.addItem(new UndergroundGemItem('Toxic Plate', 114, [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], 100, PokemonType.Poison));
-UndergroundItems.addItem(new UndergroundGemItem('Zap Plate', 115, [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], 100, PokemonType.Electric));
-UndergroundItems.addItem(new UndergroundGemItem('Pixie Plate', 116, [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], 100, PokemonType.Fairy));
+UndergroundItems.addItem(new UndergroundGemItem('Draco Plate', 100, [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], PokemonType.Dragon));
+UndergroundItems.addItem(new UndergroundGemItem('Dread Plate', 101, [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], PokemonType.Dark));
+UndergroundItems.addItem(new UndergroundGemItem('Earth Plate', 102, [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], PokemonType.Ground));
+UndergroundItems.addItem(new UndergroundGemItem('Fist Plate', 103, [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], PokemonType.Fighting));
+UndergroundItems.addItem(new UndergroundGemItem('Flame Plate', 104, [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], PokemonType.Fire));
+UndergroundItems.addItem(new UndergroundGemItem('Icicle Plate', 105, [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], PokemonType.Ice));
+UndergroundItems.addItem(new UndergroundGemItem('Insect Plate', 106, [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], PokemonType.Bug));
+UndergroundItems.addItem(new UndergroundGemItem('Iron Plate', 107, [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], PokemonType.Steel));
+UndergroundItems.addItem(new UndergroundGemItem('Meadow Plate', 108, [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], PokemonType.Grass));
+UndergroundItems.addItem(new UndergroundGemItem('Mind Plate', 109, [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], PokemonType.Psychic));
+UndergroundItems.addItem(new UndergroundGemItem('Sky Plate', 110, [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], PokemonType.Flying));
+UndergroundItems.addItem(new UndergroundGemItem('Splash Plate', 111, [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], PokemonType.Water));
+UndergroundItems.addItem(new UndergroundGemItem('Spooky Plate', 112, [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], PokemonType.Ghost));
+UndergroundItems.addItem(new UndergroundGemItem('Stone Plate', 113, [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], PokemonType.Rock));
+UndergroundItems.addItem(new UndergroundGemItem('Toxic Plate', 114, [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], PokemonType.Poison));
+UndergroundItems.addItem(new UndergroundGemItem('Zap Plate', 115, [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], PokemonType.Electric));
+UndergroundItems.addItem(new UndergroundGemItem('Pixie Plate', 116, [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], PokemonType.Fairy));
 
 // Fossils/Fossil Pieces
 UndergroundItems.addItem(new UndergroundItem('Helix Fossil', 200, [[0, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 0]], 0, UndergroundItemValueType.Fossil, null,
@@ -105,22 +105,22 @@ UndergroundItems.addItem(new UndergroundItem('Fossilized Drake', 213, [[1, 1, 1]
 UndergroundItems.addItem(new UndergroundItem('Fossilized Dino', 214, [[1, 1, 1, 0], [1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]], 0, UndergroundItemValueType.FossilPiece, new MaxRegionRequirement(Region.galar)));
 
 // Evolution Stones
-UndergroundItems.addItem(new UndergroundEvolutionItem('Fire Stone', 300, [[1, 1, 1], [1, 1, 1], [1, 1, 1]], 1, StoneType.Fire_stone));
-UndergroundItems.addItem(new UndergroundEvolutionItem('Water Stone', 301, [[1, 1, 1], [1, 1, 1], [1, 1, 0]], 1, StoneType.Water_stone));
-UndergroundItems.addItem(new UndergroundEvolutionItem('Thunder Stone', 302, [[0, 1, 1], [1, 1, 1], [1, 1, 0]], 1, StoneType.Thunder_stone));
-UndergroundItems.addItem(new UndergroundEvolutionItem('Leaf Stone', 303, [[0, 1, 0], [1, 1, 1], [1, 1, 1], [0, 1, 0]], 1, StoneType.Leaf_stone));
-UndergroundItems.addItem(new UndergroundEvolutionItem('Moon Stone', 304, [[0, 1, 1, 1], [1, 1, 1, 0]], 1, StoneType.Moon_stone));
+UndergroundItems.addItem(new UndergroundEvolutionItem('Fire Stone', 300, [[1, 1, 1], [1, 1, 1], [1, 1, 1]], StoneType.Fire_stone));
+UndergroundItems.addItem(new UndergroundEvolutionItem('Water Stone', 301, [[1, 1, 1], [1, 1, 1], [1, 1, 0]], StoneType.Water_stone));
+UndergroundItems.addItem(new UndergroundEvolutionItem('Thunder Stone', 302, [[0, 1, 1], [1, 1, 1], [1, 1, 0]], StoneType.Thunder_stone));
+UndergroundItems.addItem(new UndergroundEvolutionItem('Leaf Stone', 303, [[0, 1, 0], [1, 1, 1], [1, 1, 1], [0, 1, 0]], StoneType.Leaf_stone));
+UndergroundItems.addItem(new UndergroundEvolutionItem('Moon Stone', 304, [[0, 1, 1, 1], [1, 1, 1, 0]], StoneType.Moon_stone));
 // TODO: Replace these requirements with StoneUnlockedRequirement once moved to modules
-UndergroundItems.addItem(new UndergroundEvolutionItem('Sun Stone', 305, [[0, 1, 0], [1, 1, 1], [1, 1, 1]], 1, StoneType.Sun_stone, new MaxRegionRequirement(Region.johto)));
-UndergroundItems.addItem(new UndergroundEvolutionItem('Shiny Stone', 306, [[0, 1, 1], [1, 1, 1], [1, 1, 1]], 1, StoneType.Shiny_stone, new MaxRegionRequirement(Region.sinnoh)));
-UndergroundItems.addItem(new UndergroundEvolutionItem('Dusk Stone', 307, [[1, 1, 1], [1, 1, 1], [1, 1, 0]], 1, StoneType.Dusk_stone, new MaxRegionRequirement(Region.sinnoh)));
-UndergroundItems.addItem(new UndergroundEvolutionItem('Dawn Stone', 308, [[1, 1, 1], [1, 1, 1], [1, 1, 1]], 1, StoneType.Dawn_stone, new MaxRegionRequirement(Region.sinnoh)));
-UndergroundItems.addItem(new UndergroundEvolutionItem('Ice Stone', 309, [[1, 1, 1], [1, 1, 1]], 1, StoneType.Ice_stone, new MaxRegionRequirement(Region.alola)));
-// UndergroundItems.addItem(new UndergroundEvolutionItem('Sun Stone', 305, [[0, 1, 0], [1, 1, 1], [1, 1, 1]], 1, StoneType.Sun_stone, new StoneUnlockedRequirement(StoneType.Sun_stone)));
-// UndergroundItems.addItem(new UndergroundEvolutionItem('Shiny Stone', 306, [[0, 1, 1], [1, 1, 1], [1, 1, 1]], 1, StoneType.Shiny_stone, new StoneUnlockedRequirement(StoneType.Shiny_stone)));
-// UndergroundItems.addItem(new UndergroundEvolutionItem('Dusk Stone', 307, [[1, 1, 1], [1, 1, 1], [1, 1, 0]], 1, StoneType.Dusk_stone, new StoneUnlockedRequirement(StoneType.Dusk_stone)));
-// UndergroundItems.addItem(new UndergroundEvolutionItem('Dawn Stone', 308, [[1, 1, 1], [1, 1, 1], [1, 1, 1]], 1, StoneType.Dawn_stone, new StoneUnlockedRequirement(StoneType.Dawn_stone)));
-// UndergroundItems.addItem(new UndergroundEvolutionItem('Ice Stone', 309, [[1, 1, 1], [1, 1, 1]], 1, StoneType.Ice_stone, new StoneUnlockedRequirement(StoneType.Ice_stone)));
+UndergroundItems.addItem(new UndergroundEvolutionItem('Sun Stone', 305, [[0, 1, 0], [1, 1, 1], [1, 1, 1]], StoneType.Sun_stone, 1, new MaxRegionRequirement(Region.johto)));
+UndergroundItems.addItem(new UndergroundEvolutionItem('Shiny Stone', 306, [[0, 1, 1], [1, 1, 1], [1, 1, 1]], StoneType.Shiny_stone, 1, new MaxRegionRequirement(Region.sinnoh)));
+UndergroundItems.addItem(new UndergroundEvolutionItem('Dusk Stone', 307, [[1, 1, 1], [1, 1, 1], [1, 1, 0]], StoneType.Dusk_stone, 1, new MaxRegionRequirement(Region.sinnoh)));
+UndergroundItems.addItem(new UndergroundEvolutionItem('Dawn Stone', 308, [[1, 1, 1], [1, 1, 1], [1, 1, 1]], StoneType.Dawn_stone, 1, new MaxRegionRequirement(Region.sinnoh)));
+UndergroundItems.addItem(new UndergroundEvolutionItem('Ice Stone', 309, [[1, 1, 1], [1, 1, 1]], StoneType.Ice_stone, 1, new MaxRegionRequirement(Region.alola)));
+// UndergroundItems.addItem(new UndergroundEvolutionItem('Sun Stone', 305, [[0, 1, 0], [1, 1, 1], [1, 1, 1]], StoneType.Sun_stone, 1, new StoneUnlockedRequirement(StoneType.Sun_stone)));
+// UndergroundItems.addItem(new UndergroundEvolutionItem('Shiny Stone', 306, [[0, 1, 1], [1, 1, 1], [1, 1, 1]], StoneType.Shiny_stone, 1, new StoneUnlockedRequirement(StoneType.Shiny_stone)));
+// UndergroundItems.addItem(new UndergroundEvolutionItem('Dusk Stone', 307, [[1, 1, 1], [1, 1, 1], [1, 1, 0]], StoneType.Dusk_stone, 1, new StoneUnlockedRequirement(StoneType.Dusk_stone)));
+// UndergroundItems.addItem(new UndergroundEvolutionItem('Dawn Stone', 308, [[1, 1, 1], [1, 1, 1], [1, 1, 1]], StoneType.Dawn_stone, 1, new StoneUnlockedRequirement(StoneType.Dawn_stone)));
+// UndergroundItems.addItem(new UndergroundEvolutionItem('Ice Stone', 309, [[1, 1, 1], [1, 1, 1]], StoneType.Ice_stone, 1, new StoneUnlockedRequirement(StoneType.Ice_stone)));
 
 // Shards
 UndergroundItems.addItem(new UndergroundItem('Red Shard', 400, [[1, 1, 1], [1, 1, 0], [1, 1, 1]], 0, UndergroundItemValueType.Shard));
@@ -140,6 +140,6 @@ UndergroundItems.addItem(new UndergroundItem('Rose Shard', 413, [[1, 1, 1, 1], [
 UndergroundItems.addItem(new UndergroundItem('Brown Shard', 414, [[1, 1, 0], [1, 1, 0], [1, 1, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.galar)));
 
 // MegaStones
-UndergroundItems.addItem(new UndergroundMegaStoneItem('Aerodactylite', 500, [[1, 1, 1], [1, 1, 1], [1, 1, 1]], 0, 'Aerodactyl', 0.1));
-UndergroundItems.addItem(new UndergroundMegaStoneItem('Mawilite', 501, [[1, 1, 1], [1, 1, 1], [1, 1, 1]], 0, 'Mawile', 0.1));
-UndergroundItems.addItem(new UndergroundMegaStoneItem('Sablenite', 502, [[1, 1, 1], [1, 1, 1], [1, 1, 1]], 0, 'Sableye', 0.1));
+UndergroundItems.addItem(new UndergroundMegaStoneItem('Aerodactylite', 500, [[1, 1, 1], [1, 1, 1], [1, 1, 1]], 'Aerodactyl', 0.1));
+UndergroundItems.addItem(new UndergroundMegaStoneItem('Mawilite', 501, [[1, 1, 1], [1, 1, 1], [1, 1, 1]], 'Mawile', 0.1));
+UndergroundItems.addItem(new UndergroundMegaStoneItem('Sablenite', 502, [[1, 1, 1], [1, 1, 1], [1, 1, 1]], 'Sableye', 0.1));
