@@ -21,6 +21,7 @@ class BattlePokemon implements EnemyPokemonInterface {
      * @param shiny is a shiny variant
      * @param gender Pokémon gender
      * @param [heldItem] item to possibly gain for defeating this Pokémon
+     * @param shadow is shadow or purified
      */
 
     constructor(
@@ -36,6 +37,7 @@ class BattlePokemon implements EnemyPokemonInterface {
         public shiny: boolean,
         public gemReward = 1,
         public gender: number,
+        public shadow: GameConstants.ShadowStatus,
         public heldItem?: BagItem,
         public ep?: number
     ) {
