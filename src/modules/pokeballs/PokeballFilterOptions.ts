@@ -32,27 +32,36 @@ export const descriptions: {
 };
 
 export const settingsMap: {
-    [K in keyof PokeballFilterOptions]-?: (value: PokeballFilterOptions[K]) => Setting<PokeballFilterOptions[K]>
+    [K in keyof PokeballFilterOptions]-?: (value?: PokeballFilterOptions[K]) => Setting<PokeballFilterOptions[K]>
 } = {
-    shiny: (bool) => new BooleanSetting(
+    shiny: (bool = false) => new BooleanSetting(
         'pokeballFilterShiny',
         'Shiny',
         bool,
     ),
-    caught: (bool) => new BooleanSetting(
+    caught: (bool = false) => new BooleanSetting(
         'pokeballFilterCaught',
         'Caught',
         bool,
     ),
-    caughtShiny: (bool) => new BooleanSetting(
+    caughtShiny: (bool = false) => new BooleanSetting(
         'pokeballFilterCaughtShiny',
         'Caught Shiny',
         bool,
     ),
-    pokerus: (pokerus) => new Setting(
+    pokerus: (pokerus = Pokerus.Uninfected) => new Setting(
         'pokeballFilterPokerus',
         'Pokerus State',
         GameHelper.enumStrings(Pokerus).map((k) => new SettingOption(k, Pokerus[k])),
         pokerus,
     ),
+};
+
+export const defaultOptions: {
+    [K in keyof PokeballFilterOptions]-?: Setting<PokeballFilterOptions[K]>
+} = {
+    shiny: settingsMap.shiny(),
+    caught: settingsMap.caught(),
+    caughtShiny: settingsMap.caughtShiny(),
+    pokerus: settingsMap.pokerus(),
 };

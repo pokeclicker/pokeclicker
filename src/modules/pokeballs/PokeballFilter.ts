@@ -1,4 +1,4 @@
-import { Observable } from 'knockout';
+import { Observable, Unwrapped } from 'knockout';
 import { Pokeball } from '../GameConstants';
 import Setting from '../settings/Setting';
 import { descriptions, PokeballFilterOptions, settingsMap } from './PokeballFilterOptions';
@@ -11,9 +11,9 @@ export type PokeballFilterParams = {
 
 export default class PokeballFilter {
     public ball: Observable<Pokeball>;
-    public options: {
+    public _options: Observable<{
         [K in keyof PokeballFilterOptions]:Setting<PokeballFilterOptions[K]>
-    };
+    }>;
     public _name: Observable<string>;
 
     constructor(
@@ -23,9 +23,9 @@ export default class PokeballFilter {
     ) {
         this._name = ko.observable(name);
         this.ball = ko.observable(ball);
-        this.options = Object.fromEntries(
+        this._options = ko.observable(Object.fromEntries(
             Object.entries(options).map(([k, v]) => [k, settingsMap[k](v)]),
-        );
+        ));
     }
 
     test(data: PokeballFilterOptions) {
@@ -50,11 +50,19 @@ export default class PokeballFilter {
         this._name(value);
     }
 
+    get options(): Unwrapped<typeof this._options> {
+        return this._options();
+    }
+
+    set options(value: Unwrapped<typeof this._options>) {
+        this._options(value);
+    }
+
     toJSON() {
         return {
             name: this.name,
             options: Object.fromEntries(
-                Object.entries(this.options).map(([k, s]) => [k, s.value]),
+                Object.entries(this.options).map(([k, s]) => [k, s.observableValue()]),
             ),
             ball: this.ball(),
         };

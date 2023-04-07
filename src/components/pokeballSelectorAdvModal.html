@@ -38,11 +38,23 @@
                 </div>
                 <div class="collapse pokeballFilterBody" data-bind="attr: { id: `pokeball-filter-options-${$index()}`}">
                     <table>
-                        <tbody class="pokeballFilterOptions" data-bind="foreach: Object.values($data.options)">
-                            <tr data-bind="template: {
-                                name: $data instanceof BooleanSetting ? 'BooleanSettingSliderTemplate' : 'MultipleChoiceSettingTemplate',
-                                data: $data,
-                            }"></tr>
+                        <tbody class="pokeballFilterOptions">
+                            <!-- ko foreach: Object.values($data.options) -->
+                                <tr data-bind="template: {
+                                    name: $data instanceof BooleanSetting ? 'pokeballFilterSlider' : 'pokeballFilterMultipleChoice',
+                                    data: { setting: $data, key: $index() },
+                                }"></tr>
+                            <!-- /ko -->
+                            <!-- ko foreach: Object.keys(PokeballFilterOptions.settingsMap).filter(k => !(k in $data.options)) -->
+                                <tr>
+                                    <td data-bind="text: $data"></td>
+                                    <td>
+                                        <button class="btn btn-success" data-bind="click: () => App.game.pokeballFilters.addFilterOption($parent, $data)">
+                                            Add
+                                        </button>
+                                    </td>
+                                </tr>
+                            <!-- /ko -->
                         </tbody>
                     </table>
                 </div>
@@ -55,3 +67,32 @@
     </div>
   </div>
 </div>
+
+<script type="text/html" id="pokeballFilterSlider">
+    <td class="p-2">
+        <label class="m-0" data-bind="attr: { for: `checkbox-${setting.name}-${key}` }, text: `${setting.displayName}:`">
+            setting name
+        </label>
+    </td>
+    <td class="p-2">
+        <label class="form-check-label toggler-wrapper style-1 m-auto">
+            <input class="clickable" type="checkbox"
+                data-bind="checked: setting.observableValue, attr: { id: `checkbox-${setting.name}-${key}` }">
+            <div class="toggler-slider">
+                <div class="toggler-knob"></div>
+            </div>
+        </label>
+    </td>
+</script>
+
+<script type="text/html" id="pokeballFilterMultipleChoice">
+    <td class="p-2" data-bind="text: `${setting.displayName}:`">setting name</td>
+    <td class="p-0">
+        <select class="form-control" data-bind="
+            options: setting.options,
+            optionsValue: 'value',
+            optionsText: 'text',
+            value: setting.observableValue
+        "></select>
+    </td>
+</script>

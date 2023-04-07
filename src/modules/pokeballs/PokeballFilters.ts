@@ -4,7 +4,7 @@ import { Feature } from '../DataStore/common/Feature';
 import KeyItemType from '../enums/KeyItemType';
 import { Pokeball, Pokerus } from '../GameConstants';
 import PokeballFilter, { PokeballFilterParams } from './PokeballFilter';
-import { PokeballFilterOptions } from './PokeballFilterOptions';
+import { PokeballFilterOptions, settingsMap } from './PokeballFilterOptions';
 import Notifier from '../notifications/Notifier';
 import NotificationOption from '../notifications/NotificationOption';
 
@@ -58,6 +58,18 @@ export default class PokeballFilters implements Feature {
 
     createFilter() {
         this.list.push(new PokeballFilter('New Filter', {}));
+    }
+
+    addFilterOption(filter: PokeballFilter, option: keyof PokeballFilterOptions) {
+        if (filter.options[option]) {
+            // Don't replace the option if it exists already
+            return;
+        }
+        const newOptions = {
+            ...filter.options,
+            [option]: settingsMap[option](),
+        };
+        filter.options = newOptions;
     }
 
     toJSON() {

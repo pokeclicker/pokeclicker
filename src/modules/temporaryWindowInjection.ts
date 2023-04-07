@@ -168,6 +168,7 @@ import UndergroundMegaStoneItem from './underground/UndergroundMegaStoneItem';
 import PokeballFilter from './pokeballs/PokeballFilter';
 import PokeballFilters from './pokeballs/PokeballFilters';
 import TextMerger from './utilities/TextMerger';
+import * as PokeballFilterOptions from './pokeballs/PokeballFilterOptions';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -346,4 +347,5 @@ Object.assign(<any>window, {
     PokeballFilter,
     PokeballFilters,
     TextMerger,
+    PokeballFilterOptions,
 });
