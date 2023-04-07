@@ -91,7 +91,7 @@
                                             <!-- /ko -->
                                             <div class="border-secondary dropdown-menu col-12 p-0" style="overflow-y: auto; max-height: 30vh;">
                                                 <!-- ko foreach : GameHelper.enumSelectOption(PokemonType).filter((t) => t.name != 'None') -->
-                                                <div class="dropdown-item py-1 border border-white text-white text-uppercase" data-bind="text : $data.name, style: { background: GameConstants.TypeColor[$data.value] },
+                                                <div class="monotype-type-list dropdown-item py-1 border border-white text-white text-uppercase" data-bind="text : $data.name, style: { background: GameConstants.TypeColor[$data.value] },
                                                     click : function(){ App.game.challenges.listSpecial.monotype.pokemonType(Number($data.value)) }">
                                                 </div>
                                                 <!-- /ko-->

@@ -4,7 +4,7 @@ import {
     Region, KantoSubRegions, getDungeonIndex, AlolaSubRegions, GalarSubRegions, RegionalStartersMonotype,
 } from '../GameConstants';
 import GameHelper from '../GameHelper';
-import { getPokemonById } from '../pokemons/PokemonHelper';
+import TmpPokemonHelper from '../pokemons/TmpPokemonHelper';
 import ClearDungeonRequirement from '../requirements/ClearDungeonRequirement';
 import GymBadgeRequirement from '../requirements/GymBadgeRequirement';
 import MonotypeChallengeRequirement from '../requirements/MonotypeChallengeRequirement';
@@ -24,12 +24,10 @@ import SpecialRoutePokemon from './SpecialRoutePokemon';
 
 // Special array for Monotype Challenge
 const monotypeSpecialArray = [];
-for (const pokemonType of GameHelper.enumNumbers(PokemonType)) {
-    if (pokemonType !== -1) {
-        const starter = getPokemonById(RegionalStartersMonotype[Region.kanto][pokemonType]).name;
-        monotypeSpecialArray.push(new SpecialRoutePokemon([starter], new MonotypeChallengeRequirement(pokemonType)));
-    }
-}
+GameHelper.enumNumbers(PokemonType).filter((t) => t !== -1).forEach((pokemonType) => {
+    const starter = TmpPokemonHelper.getPokemonById(RegionalStartersMonotype[Region.kanto][pokemonType]).name;
+    monotypeSpecialArray.push(new SpecialRoutePokemon([starter], new MonotypeChallengeRequirement(pokemonType)));
+});
 
 /*
 KANTO

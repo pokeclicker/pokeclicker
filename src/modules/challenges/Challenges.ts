@@ -54,7 +54,7 @@ export default class Challenges implements Saveable {
         Object.entries(this.list).forEach(([c, v]) => {
             list[c] = v.active();
         });
-        
+
         // Special Challenges
         Object.entries(this.listSpecial).forEach(([c, v]) => {
             objectSpecial.active = v.active();

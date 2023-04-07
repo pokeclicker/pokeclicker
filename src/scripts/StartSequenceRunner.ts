@@ -60,22 +60,22 @@ class StartSequenceRunner {
 
     /**
      * For Monotype Challenge. Checks if the starter is Grass/Fire/Water for the GameConstants.Starter, if not, it's Special
-     * @param selectedType 
+     * @param selectedType
      * @returns GameConstants.Starter
      */
     public static checkMonotypeStarter(selectedType) {
         let starter = GameConstants.Starter.Special;
         switch (selectedType) {
-            case PokemonType['Grass']:
+            case PokemonType.Grass:
                 starter = GameConstants.Starter.Grass;
                 break;
-            case PokemonType['Fire']:
+            case PokemonType.Fire:
                 starter = GameConstants.Starter.Fire;
                 break;
-            case PokemonType['Water']:
+            case PokemonType.Water:
                 starter = GameConstants.Starter.Water;
                 break;
-            default:;
+            default:
         }
         return starter;
     }

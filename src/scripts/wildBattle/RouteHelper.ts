@@ -36,7 +36,7 @@ class RouteHelper {
         pokemonList = pokemonList.concat(...possiblePokemons.special.filter(p => p.isAvailable()).map(p => p.pokemon));
 
         // Remove duplicates
-        pokemonList = [...new Set(pokemonList)]
+        pokemonList = [...new Set(pokemonList)];
 
         return pokemonList;
     }
