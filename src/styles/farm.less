@@ -1,4 +1,4 @@
-@import "variables.less";
+@import url("variables.less");
 
 @padding: 3px;
 
@@ -32,7 +32,6 @@
 }
 
 .berryLocked {
-  -webkit-filter: brightness(0%); /* Safari 6.0 - 9.0 */
   filter: brightness(0%);
   opacity: 0.2;
 }
@@ -79,11 +78,12 @@
 
 #plotList {
   padding: 10px;
+
   .plot {
     padding: 2px;
+
     &:hover {
       filter: brightness(95%);
-      -webkit-filter: brightness(95%);
       cursor: pointer;
 
       .plotLockHover {
@@ -112,11 +112,6 @@
           right: 5px;
           height: 16px;
           width: 16px;
-          -webkit-filter:
-                drop-shadow(0.2px 0.2px 0 black)
-                drop-shadow(-0.2px 0.2px 0 black)
-                drop-shadow(0.2px -0.2px 0 black)
-                drop-shadow(-0.2px -0.2px 0 black);
           filter:
                 drop-shadow(0.2px 0.2px 0 black)
                 drop-shadow(-0.2px 0.2px 0 black)

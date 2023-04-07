@@ -374,7 +374,7 @@ class Plot implements Saveable {
             }
 
             // Check if berry replants itself
-            const replantChance = this.berryData.replantRate * App.game.farming.getReplantMultiplier() * this.getReplantMultiplier();
+            const replantChance = Math.min(1, this.berryData.replantRate * App.game.farming.getReplantMultiplier() * this.getReplantMultiplier());
             if (Rand.chance(replantChance)) {
                 this.age = 0;
                 this.notifications.push(FarmNotificationType.Replanted);

@@ -70,7 +70,7 @@ GymList['Saffron City'] = new Gym(
     BadgeEnums.Marsh,
     2500,
     'This loss shocks me! But a loss is a loss. I admit I didn\'t work hard enough to win. You earned the MarshBadge.',
-    [new TemporaryBattleRequirement('Blue 5')]
+    [new QuestLineStepCompletedRequirement('Team Rocket', 3)]
 );
 GymList['Fuchsia City'] = new Gym(
     'Koga',
@@ -616,9 +616,7 @@ GymList['Champion Wallace'] = new Gym(
     16000,
     'I, the Champion, fall in defeat… That was wonderful work. You were elegant, infuriatingly so. And yet it was utterly glorious! Kudos to you! You are a truly noble Pokémon Trainer!',
     [new GymBadgeRequirement(BadgeEnums.Elite_Drake)],
-    () => {
-        App.game.quests.getQuestLine('Mystery of Deoxys').beginQuest();
-    },
+    () => {},
     { champion: true }
 );
 
@@ -1150,7 +1148,7 @@ GymList['Lumiose City'] = new Gym(
     BadgeEnums.Voltage,
     9000,
     'Oh, Bonnie... When will you learn there\'s no shame in losing? I\'m glad whenever I get to learn something new thanks to strong challengers like you here.',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Kalos Power Plant'))]
+    [new QuestLineStepCompletedRequirement('A Beautiful World', 11)]
 );
 GymList['Laverre City'] = new Gym(
     'Valerie',
