@@ -785,7 +785,7 @@ dungeonList['Rocket Game Corner'] = new Dungeon('Rocket Game Corner',
                 new GymPokemon('Onix', 9501, 25),
                 new GymPokemon('Rhyhorn', 9501, 24),
                 new GymPokemon('Kangaskhan', 10101, 29),
-            ], { weight: 1 }, 'Giovanni', '(giovanni)'),
+            ], { weight: 1 }, 'Giovanni', 'Giovanni'),
     ],
     625, 7);
 
@@ -1079,7 +1079,7 @@ dungeonList['Silph Co.'] = new Dungeon('Silph Co.',
                 new GymPokemon('Rhyhorn', 12144, 37),
                 new GymPokemon('Kangaskhan', 12144, 35),
                 new GymPokemon('Nidoqueen', 16144, 41),
-            ], { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('Team Rocket', 2)}, 'Giovanni', '(giovanni)'),
+            ], { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('Team Rocket', 2)}, 'Giovanni', 'Giovanni'),
     ],
     875, 7);
 
