@@ -1,6 +1,12 @@
 {
   "compilerOptions": {
-    "types": ["vitest/globals"],
+    "types": [
+      "vitest/globals",
+      "jquery",
+      "knockout",
+      "bootstrap",
+      "gtag.js"
+    ],
     "lib": ["dom", "es2019"],
     "skipLibCheck": true,
     "sourceMap": true,
