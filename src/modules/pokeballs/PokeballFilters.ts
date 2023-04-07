@@ -94,11 +94,13 @@ export default class PokeballFilters implements Feature {
             ? json.list
             : this.presets;
 
-        list.forEach(({ name, options, ball }) => {
+        list.forEach(({ name, options, ball, inverted, enabled }) => {
             this.list.push(new PokeballFilter(
                 name,
                 options,
                 ball,
+                inverted,
+                enabled,
             ));
         });
     }

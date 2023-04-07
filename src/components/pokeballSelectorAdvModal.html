@@ -37,9 +37,29 @@
                     />
                 </div>
                 <div class="collapse pokeballFilterBody" data-bind="attr: { id: `pokeball-filter-options-${$index()}`}">
+                    <div class="pokeballFilterSettings">
+                        <div>
+                            <label data-bind="attr: { for: `checkbox-inverted-${$index()}` }">Inverted</label>
+                            <label class="form-check-label toggler-wrapper style-1 m-auto">
+                                <input class="clickable" type="checkbox"
+                                    data-bind="checked: $data.inverted, attr: { id: `checkbox-inverted-${$index()}` }">
+                                <div class="toggler-slider">
+                                    <div class="toggler-knob"></div>
+                                </div>
+                            </label>
+                        </div>
+                        <div>
+                            <label data-bind="attr: { for: `checkbox-enabled-${$index()}` }">Enabled</label>
+                            <label class="form-check-label toggler-wrapper style-1 m-auto">
+                                <input class="clickable" type="checkbox"
+                                    data-bind="checked: $data.enabled, attr: { id: `checkbox-enabled-${$index()}` }">
+                                <div class="toggler-slider">
+                                    <div class="toggler-knob"></div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
                     <table class="pokeballFilterOptions">
-
-
                         <tbody>
                             <!-- ko foreach: Object.entries($data.options).map(([k, v]) => ({ optionName: k, setting: v })) -->
                                 <tr>
