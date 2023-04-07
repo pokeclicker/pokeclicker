@@ -20,8 +20,8 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div data-toggle="collapse" data-bind="attr: { href: `#pokeball-filter-options-${$index()}` }">
-                        <span data-bind="text: $data.name"></span>
+                    <div class="pokeballFilterName" data-toggle="collapse" data-bind="attr: { href: `#pokeball-filter-options-${$index()}` }">
+                        <input class="form-control" data-bind="textInput: $data._name"></span>
                     </div>
                     <img class="pokeball-small"
                         data-bind="

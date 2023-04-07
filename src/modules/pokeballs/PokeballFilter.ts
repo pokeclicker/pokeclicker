@@ -4,7 +4,7 @@ import Setting from '../settings/Setting';
 import { descriptions, PokeballFilterOptions, settingsMap } from './PokeballFilterOptions';
 
 export type PokeballFilterParams = {
-    name: PokeballFilter['name'];
+    name: string;
     options: PokeballFilterOptions;
     ball?: Pokeball;
 };
@@ -14,12 +14,14 @@ export default class PokeballFilter {
     public options: {
         [K in keyof PokeballFilterOptions]:Setting<PokeballFilterOptions[K]>
     };
+    public _name: Observable<string>;
 
     constructor(
-        public name: string,
+        name: string,
         options: PokeballFilterOptions,
         ball: Pokeball = Pokeball.None,
     ) {
+        this._name = ko.observable(name);
         this.ball = ko.observable(ball);
         this.options = Object.fromEntries(
             Object.entries(options).map(([k, v]) => [k, settingsMap[k](v)]),
@@ -38,6 +40,14 @@ export default class PokeballFilter {
                 .map(([opt, setting]) => descriptions[opt](setting.value))
                 .join('; ')
         }.`;
+    }
+
+    get name(): string {
+        return this._name();
+    }
+
+    set name(value: string) {
+        this._name(value);
     }
 
     toJSON() {
