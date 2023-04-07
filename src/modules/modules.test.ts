@@ -113,6 +113,8 @@ describe('Test GameConstants', () => {
 });
 
 import GameHelper from './GameHelper';
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+import * as ko from 'knockout';
 import { AchievementOption } from './GameConstants';
 
 describe('Test GameHelper', () => {
