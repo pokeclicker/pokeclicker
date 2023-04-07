@@ -621,14 +621,14 @@ const AlteringCaveRuinManiac1 = new NPC ('Ruin Maniac', [
     'Want to help me? No? Ah, you\'re busy dealing with a group of Team Rocket? Well, I wish you luck with that',
     'Once I finish it you\'ll have a way to get to get to that island too, so make sure to come back later!',
 ], {
-    image: 'assets/images/npcs/Ruin Maniac.png',
+    image: 'assets/images/npcs/Ruin Maniac gen3.png',
     requirement: new QuestLineCompletedRequirement('Celio\'s Errand', GameConstants.AchievementOption.less),
 });
 const AlteringCaveRuinManiac2 = new NPC ('Ruin Maniac', [
     'Wow, that was some back breaking work... But I have done it!',
     'I\'ve dug a tunnel to Pinkan Island! Though, I think I\'ll need to rest for a while first... You go on ahead.',
 ], {
-    image: 'assets/images/npcs/Ruin Maniac.png',
+    image: 'assets/images/npcs/Ruin Maniac gen3.png',
     requirement: new QuestLineCompletedRequirement('Celio\'s Errand'),
 });
 const ValenciaProfIvy = new NPC ('Prof. Ivy', [
@@ -2258,7 +2258,7 @@ const SCHints = new NPC('Hidden Message', [
 
 const BrailleEnthusiast1 = new NPC('Braille Enthusiast', [
     'The markings at the entrance to the Sealed Chamber seem to say that some sort of secret is inside. Try to find more braille messages, and I can decode them for you!',
-], {image: 'assets/images/npcs/Ruin Maniac.png',
+], {image: 'assets/images/npcs/Ruin Maniac gen3.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Three Golems', 0), new QuestLineStepCompletedRequirement('The Three Golems', 1, GameConstants.AchievementOption.less)]),
 });
 
@@ -2267,7 +2267,7 @@ const BrailleEnthusiast2 = new NPC('Braille Enthusiast', [
     'The carving with nine dots on the top row says "STRAIGHT".',
     'The carving with six dots on the top row says "RIGHT".',
     'If you get totally lost, just wander around. You will find the right path eventually.',
-], {image: 'assets/images/npcs/Ruin Maniac.png',
+], {image: 'assets/images/npcs/Ruin Maniac gen3.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Three Golems', 1), new QuestLineStepCompletedRequirement('The Three Golems', 6, GameConstants.AchievementOption.less)]),
 });
 
@@ -2275,7 +2275,7 @@ const BrailleEnthusiast3 = new NPC('Braille Enthusiast', [
     'The first carving says DESERT. There is a desert near Route 111, right?',
     'The second carving says ISLAND. There are a lot of islands on Route 105.',
     'The third carving says ANCIENT. I remember seeing some ancient ruins on Route 120.',
-], {image: 'assets/images/npcs/Ruin Maniac.png',
+], {image: 'assets/images/npcs/Ruin Maniac gen3.png',
     requirement: new QuestLineStepCompletedRequirement('The Three Golems', 6),
 });
 
