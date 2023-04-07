@@ -1957,7 +1957,11 @@ GymList['Elite Gym Leader Bede'] = new Gym(
     BadgeEnums.Elite_Bede,
     150000,
     'I couldn\'t win, but at least I was able to show everyone how great Fairy types are.',
-    [new GymBadgeRequirement(BadgeEnums.Elite_Marnie)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_Marnie)],
+    undefined,
+    undefined,
+    undefined,
+    'Gym Leader Bede',
 );
 GymList['Elite Trainer Hop'] = new Gym(
     'Hop',
@@ -2066,7 +2070,11 @@ GymList['Elite Dojo Master Mustard'] = new Gym(
     BadgeEnums.Elite_ArmorChampion,
     250000,
     'That strength of yours doesn\'t bend easily!',
-    [new GymBadgeRequirement(BadgeEnums.Elite_ArmorMatron)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_ArmorMatron)],
+    undefined,
+    undefined,
+    undefined,
+    'Mustard Elite'
 );
 GymList['Elite Trainer Peony'] = new Gym(
     'Peony',
@@ -2087,5 +2095,9 @@ GymList['Elite Trainer Peony'] = new Gym(
             new QuestLineCompletedRequirement('The Birds of the Dyna Tree'),
             new QuestLineCompletedRequirement('The Ancient Golems'),
         ]),
-    ]
+    ],
+    undefined,
+    undefined,
+    undefined,
+    'Peony Elite'
 );
