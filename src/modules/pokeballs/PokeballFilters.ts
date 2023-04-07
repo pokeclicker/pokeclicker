@@ -72,6 +72,14 @@ export default class PokeballFilters implements Feature {
         filter.options = newOptions;
     }
 
+    removeFilterOption(filter: PokeballFilter, option: keyof PokeballFilterOptions) {
+        // Make a copy to put in observable, to make sure UI is updated properly
+        const newOptions = { ...filter.options };
+        delete newOptions[option];
+        console.log(filter, filter.options, option, newOptions);
+        filter.options = newOptions;
+    }
+
     toJSON() {
         return {
             list: this.list().map((pf) => pf.toJSON()),

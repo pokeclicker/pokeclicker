@@ -39,20 +39,28 @@
                 <div class="collapse pokeballFilterBody" data-bind="attr: { id: `pokeball-filter-options-${$index()}`}">
                     <table>
                         <tbody class="pokeballFilterOptions">
-                            <!-- ko foreach: Object.values($data.options) -->
-                                <tr data-bind="template: {
-                                    name: $data instanceof BooleanSetting ? 'pokeballFilterSlider' : 'pokeballFilterMultipleChoice',
-                                    data: { setting: $data, key: $index() },
-                                }"></tr>
+                            <!-- ko foreach: Object.entries($data.options).map(([k, v]) => ({ optionName: k, setting: v })) -->
+                                <tr>
+                                    <td>
+                                        <button class="btn btn-danger" data-bind="click: () => App.game.pokeballFilters.removeFilterOption($parent, optionName)">
+                                            -
+                                        </button>
+                                    </td>
+                                    <!-- ko template: {
+                                        name: setting instanceof BooleanSetting ? 'pokeballFilterSlider' : 'pokeballFilterMultipleChoice',
+                                        data: { setting, key: $index() },
+                                    } --><!-- /ko -->
+                                </tr>
                             <!-- /ko -->
                             <!-- ko foreach: Object.keys(PokeballFilterOptions.settingsMap).filter(k => !(k in $data.options)) -->
                                 <tr>
-                                    <td data-bind="text: $data"></td>
                                     <td>
                                         <button class="btn btn-success" data-bind="click: () => App.game.pokeballFilters.addFilterOption($parent, $data)">
-                                            Add
+                                            +
                                         </button>
                                     </td>
+                                    <td data-bind="text: PokeballFilterOptions.defaultOptions[$data].displayName"></td>
+                                    <td></td>
                                 </tr>
                             <!-- /ko -->
                         </tbody>
