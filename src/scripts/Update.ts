@@ -80,13 +80,6 @@ class Update implements Saveable {
                     saveData.quests.questList[index].initial = 0;
                 }
             });
-
-            // If player has defeated the Hoenn Champion, start the deoxys quest line
-            saveData.badgeCase = saveData.badgeCase || [];
-            // Not using game constants incase the value isn't 39 in the future
-            if (saveData.badgeCase[39]) {
-                Update.startQuestLine(saveData, 'Mystery of Deoxys');
-            }
         },
 
         '0.5.0': ({ playerData }) => {
@@ -2014,6 +2007,7 @@ class Update implements Saveable {
             //Joey
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 31);
         },
+
         '0.10.11': ({ playerData, saveData, settingsData }) => {
             // Hoenn Stone Shop fight
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 139);
@@ -2036,6 +2030,45 @@ class Update implements Saveable {
                     helper.sortOption++;
                 }
             });
+
+            // Reset Pokedex and Hatchery category filters
+            settingsData.pokedexCategoryFilter = -1;
+            settingsData.breedingCategoryFilter = -1;
+
+            // Add Pyrite Blgd dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 57);
+
+            //Team Flare Grunt 1
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 114);
+
+            //Team Flare Grunt 2
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 115);
+
+            //Team Flare Lysandre
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 152);
+
+            //Team Flare Xerosic
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 153);
+
+            //Xerneas
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 154);
+
+            //Yveltal
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 155);
+
+            //Team Flare Boss Lysandre 1
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 156);
+
+            //Storyline AZ
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 166);
+
+            //Team Flare Boss Lysandre 2
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 178);
+
+            // Start Team Flare questline if player has beaten Sycamore 1 already
+            if (saveData.statistics.temporaryBattleDefeated[111]) {
+                Update.startQuestLine(saveData, 'A Beautiful World');
+            }
 
             // Start Monotype
             // Remove None
