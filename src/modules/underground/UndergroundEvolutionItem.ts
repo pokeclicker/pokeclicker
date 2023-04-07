@@ -8,8 +8,8 @@ export default class UndergroundEvolutionItem extends UndergroundItem {
         name: string,
         id: number,
         space: Array<Array<number>>,
-        value = 1,
         public type: StoneType,
+        value = 1,
         requirement?: Requirement,
         weight?: (() => number) | number,
     ) {

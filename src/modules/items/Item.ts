@@ -171,7 +171,7 @@ export default class Item {
         this.price(Math.round(this.basePrice * player.itemMultipliers[this.saveName]));
     }
 
-    decreasePriceMultiplier(amount = 1, multiplierDecreaser: MultiplierDecreaser) {
+    decreasePriceMultiplier(amount = 1, multiplierDecreaser?: MultiplierDecreaser) {
         if (!this.multiplierDecrease) {
             return;
         }
