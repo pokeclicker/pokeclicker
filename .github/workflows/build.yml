@@ -21,4 +21,4 @@ jobs:
     - run: gulp scripts
     - run: npm run eslint
     - run: npm run stylelint
-    - run: npm run jest
+    - run: npm run vitest
