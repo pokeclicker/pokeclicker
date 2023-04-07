@@ -56,6 +56,10 @@ export default class PokeballFilters implements Feature {
         }
     }
 
+    createFilter() {
+        this.list.push(new PokeballFilter('New Filter', {}));
+    }
+
     toJSON() {
         return {
             list: this.list().map((pf) => pf.toJSON()),
