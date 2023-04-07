@@ -4011,7 +4011,7 @@ TemporaryBattleList['Bede 1'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Pokémon Trainer Bede',
-        imageName: 'Bede',
+        imageName: 'Bede TempBattle',
     }
 );
 TemporaryBattleList['Hop 4'] = new TemporaryBattle(
@@ -4045,7 +4045,7 @@ TemporaryBattleList['Bede 2'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Pokémon Trainer Bede',
-        imageName: 'Bede',
+        imageName: 'Bede TempBattle',
     }
 );
 TemporaryBattleList['Marnie 1'] = new TemporaryBattle(
@@ -4096,7 +4096,7 @@ TemporaryBattleList['Bede 3'] = new TemporaryBattle(
     {
         displayName: 'Pokémon Trainer Bede',
         returnTown: 'Stow-on-Side',
-        imageName: 'Bede',
+        imageName: 'Bede TempBattle',
     }
 );
 TemporaryBattleList['Hop 6'] = new TemporaryBattle(
@@ -4659,6 +4659,7 @@ TemporaryBattleList.Peony = new TemporaryBattle(
     undefined,
     {
         displayName: 'Pokémon Trainer Peony',
+        imageName: 'Peony TempBattle',
     }
 );
 TemporaryBattleList.Calyrex = new TemporaryBattle(
