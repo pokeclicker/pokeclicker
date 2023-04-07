@@ -541,6 +541,22 @@
         })
     %>
 
+    <!--Friend Safari-->
+    <%- include('templates/mapTown',
+        { name: "Friend Safari"
+        , x: 76, y: 47
+        , width: 6, height: 4
+        })
+    %>
+
+    <%- include('templates/mapTown',
+        { name: "Friend Safari"
+        , x: 77, y: 51
+        , width: 5, height: 2
+        , isExtension: true
+        })
+    %>
+
     <!-- ----- -->
     <!--DUNGEONS-->
     <!-- ----- -->
@@ -646,25 +662,6 @@
         , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Coumarine City') }"
         })
     %>
-
-    <!-- //TODO: improve the Safari Zone
-    <%- include('templates/mapPOI',
-        { name: "Friendly Safari Zone"
-        , x: 76, y: 47
-        , width: 6, height: 4
-        , databind: "click:function(){Safari.startSafari()}, attr: { class: Safari.canAccess() ? 'completed' : 'locked' }"
-        })
-    %>
-
-    <%- include('templates/mapPOI',
-        { name: "Friendly Safari Zone"
-        , x: 77, y: 51
-        , width: 5, height: 2
-        , databind: "click:function(){Safari.startSafari()}, attr: { class: Safari.canAccess() ? 'completed' : 'locked' }"
-        , isExtension: true
-        })
-    %>
-    -->
 
     <%- include('templates/mapPOI',
         { name: "Underground Entrance"
