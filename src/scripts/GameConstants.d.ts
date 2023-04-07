@@ -104,12 +104,12 @@ namespace GameConstants {
         'Pokerus',
     }
     declare enum DungeonTile {
-        empty,
-        entrance,
-        enemy,
-        chest,
-        boss,
-        ladder,
+        empty = 0,
+        entrance = 1,
+        enemy = 2,
+        chest = 3,
+        boss = 4,
+        ladder = 5,
     }
     declare const ROUTE_HELD_ITEM_MODIFIER: number;
     declare const DUNGEON_HELD_ITEM_MODIFIER: number;
@@ -618,6 +618,7 @@ namespace GameConstants {
     }
     declare enum HoennSubRegions {
         Hoenn,
+        Orre,
     }
     declare enum SinnohSubRegions {
         Sinnoh,
@@ -713,4 +714,9 @@ namespace GameConstants {
         [DayCyclePart.Dusk]: 17,
         [DayCyclePart.Night]: 18,
     };
+    declare enum ShadowStatus {
+        None,
+        Shadow,
+        Purified,
+    }
 }

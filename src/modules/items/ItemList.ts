@@ -20,6 +20,9 @@ import MegaStoneItem from './MegaStoneItem';
 import Vitamin from './Vitamin';
 import EggItem from './EggItem';
 import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
+import MultiRequirement from '../requirements/MultiRequirement';
+import TemporaryBattleRequirement from '../requirements/TemporaryBattleRequirement';
+import ObtainedPokemonRequirement from '../requirements/ObtainedPokemonRequirement';
 
 // eslint-disable-next-line import/prefer-default-export
 export const ItemList: { [name: string]: Item } = {};
@@ -49,10 +52,10 @@ ItemList.Explosive_Charge = new BuyOakItem(OakItemType.Explosive_Charge, 5000, C
 ItemList.Treasure_Scanner = new BuyOakItem(OakItemType.Treasure_Scanner, 10000, Currency.questPoint);
 
 ItemList.Boost_Mulch   = new MulchItem(MulchType.Boost_Mulch, 50, 'Boost Mulch', 'Increases Berry growth rate.');
-ItemList.Rich_Mulch  = new MulchItem(MulchType.Rich_Mulch, 100, 'Rich Mulch', 'Increases Berry harvest rate.');
+ItemList.Rich_Mulch  = new MulchItem(MulchType.Rich_Mulch, 100, 'Rich Mulch', 'Increases Berry harvest rate and replant chances.');
 ItemList.Surprise_Mulch  = new MulchItem(MulchType.Surprise_Mulch, 150, 'Surprise Mulch', 'Increases Berry mutation rate.');
 ItemList.Amaze_Mulch = new MulchItem(MulchType.Amaze_Mulch, 200, 'Amaze Mulch', 'A weaker combination of Boost, Rich and Surprise mulch.');
-ItemList.Freeze_Mulch = new MulchItem(MulchType.Freeze_Mulch, 350, 'Freeze Mulch', 'Stops Berry growth and aura.');
+ItemList.Freeze_Mulch = new MulchItem(MulchType.Freeze_Mulch, 350, 'Freeze Mulch', 'Stops Berry growth and auras. Mutations will still occur while berries are frozen.');
 
 ItemList.Pokeball   = new PokeballItem(Pokeball.Pokeball, 100, undefined, undefined, 'Poké Ball');
 ItemList.Greatball  = new PokeballItem(Pokeball.Greatball, 500, undefined, undefined, 'Great Ball');
@@ -87,9 +90,9 @@ ItemList.Kangaskhanite    = new MegaStoneItem('Kangaskhan', 'Kangaskhanite', 100
 ItemList.Heracronite      = new MegaStoneItem('Heracross', 'Heracronite', 10000);
 ItemList.Garchompite      = new MegaStoneItem('Garchomp', 'Garchompite', 10000);
 ItemList.Lopunnite        = new MegaStoneItem('Lopunny', 'Lopunnite', 10000);
-ItemList.Sceptilite       = new MegaStoneItem('Sceptile', 'Sceptilite', 10000);
-ItemList.Blazikenite      = new MegaStoneItem('Blaziken', 'Blazikenite', 10000);
-ItemList.Swampertite      = new MegaStoneItem('Swampert', 'Swampertite', 10000);
+ItemList.Sceptilite       = new MegaStoneItem('Sceptile', 'Sceptilite', 10000, Currency.questPoint, { visible: new MultiRequirement([new TemporaryBattleRequirement('Hoenn Stone Salesman'), new ObtainedPokemonRequirement('Sceptile')]) }, 'Sceptilite', 'A Mega Stone for Sceptile.');
+ItemList.Blazikenite      = new MegaStoneItem('Blaziken', 'Blazikenite', 10000, Currency.questPoint, { visible: new MultiRequirement([new TemporaryBattleRequirement('Hoenn Stone Salesman'), new ObtainedPokemonRequirement('Blaziken')]) }, 'Blazikenite', 'A Mega Stone for Blaziken.');
+ItemList.Swampertite      = new MegaStoneItem('Swampert', 'Swampertite', 10000, Currency.questPoint, { visible: new MultiRequirement([new TemporaryBattleRequirement('Hoenn Stone Salesman'), new ObtainedPokemonRequirement('Swampert')]) }, 'Swampertite', 'A Mega Stone for Swampert.');
 
 // Eggs
 ItemList.Fire_egg = new EggItem(EggItemType.Fire_egg, 1000, undefined, 'Fire Egg');

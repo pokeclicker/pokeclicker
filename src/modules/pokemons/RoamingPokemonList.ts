@@ -15,18 +15,19 @@ import Routes from '../routes/Routes';
 import SeededRand from '../utilities/SeededRand';
 import { PokemonNameType } from './PokemonNameType';
 import RoamingPokemon from './RoamingPokemon';
+import RoamingGroup from './RoamingGroup';
 
 export default class RoamingPokemonList {
-    public static roamerGroups = [
-        [[KantoSubRegions.Kanto], [KantoSubRegions.Sevii123, KantoSubRegions.Sevii4567]],
-        [[JohtoSubRegions.Johto]],
-        [[HoennSubRegions.Hoenn]],
-        [[SinnohSubRegions.Sinnoh]],
-        [[UnovaSubRegions.Unova]],
-        [[KalosSubRegions.Kalos]],
-        [[AlolaSubRegions.MelemeleIsland, AlolaSubRegions.AkalaIsland, AlolaSubRegions.UlaulaIsland, AlolaSubRegions.PoniIsland], [AlolaSubRegions.MagikarpJump]],
-        [[GalarSubRegions.SouthGalar], [GalarSubRegions.NorthGalar], [GalarSubRegions.IsleofArmor], [GalarSubRegions.CrownTundra]],
-        [[PaldeaSubRegions.Paldea]],
+    public static roamerGroups: RoamingGroup[][] = [
+        [new RoamingGroup('Kanto', [KantoSubRegions.Kanto]), new RoamingGroup('Kanto - Sevii Islands', [KantoSubRegions.Sevii123, KantoSubRegions.Sevii4567])],
+        [new RoamingGroup('Johto', [JohtoSubRegions.Johto])],
+        [new RoamingGroup('Hoenn', [HoennSubRegions.Hoenn])],
+        [new RoamingGroup('Sinnoh', [SinnohSubRegions.Sinnoh])],
+        [new RoamingGroup('Unova', [UnovaSubRegions.Unova])],
+        [new RoamingGroup('Kalos', [KalosSubRegions.Kalos])],
+        [new RoamingGroup('Alola', [AlolaSubRegions.MelemeleIsland, AlolaSubRegions.AkalaIsland, AlolaSubRegions.UlaulaIsland, AlolaSubRegions.PoniIsland]), new RoamingGroup('Alola - Magikarp Jump', [AlolaSubRegions.MagikarpJump])],
+        [new RoamingGroup('Galar - South', [GalarSubRegions.SouthGalar]), new RoamingGroup('Galar - North', [GalarSubRegions.NorthGalar]), new RoamingGroup('Galar - Isle of Armor', [GalarSubRegions.IsleofArmor]), new RoamingGroup('Galar - Crown Tundra', [GalarSubRegions.CrownTundra])],
+        [new RoamingGroup('Paldea', [PaldeaSubRegions.Paldea])],
     ];
 
     public static list: Partial<Record<Region, Array<Array<RoamingPokemon>>>> = {};
@@ -79,7 +80,7 @@ export default class RoamingPokemonList {
     }
 
     public static findGroup(region: Region, subRegion: number) {
-        return this.roamerGroups[region].findIndex((g) => g.includes(subRegion));
+        return this.roamerGroups[region].findIndex((g) => g.subRegions.includes(subRegion));
     }
 }
 

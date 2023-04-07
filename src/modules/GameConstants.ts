@@ -71,6 +71,7 @@ export enum JohtoSubRegions {
 
 export enum HoennSubRegions {
     Hoenn = 0,
+    Orre,
 }
 
 export enum SinnohSubRegions {
@@ -185,12 +186,12 @@ export const DUNGEON_CHEST_SHOW = 2;
 export const DUNGEON_MAP_SHOW = 4;
 
 export enum DungeonTile {
-    empty,
-    entrance,
-    enemy,
-    chest,
-    boss,
-    ladder,
+    empty = 0,
+    entrance = 1,
+    enemy = 2,
+    chest = 3,
+    boss = 4,
+    ladder = 5,
 }
 
 // Achievements
@@ -693,7 +694,7 @@ export const Environments: Record<string, EnvironmentData> = {
     Mansion: {
         [Region.kanto]: new Set(['Silph Co.', 'Pokémon Mansion']),
         [Region.johto]: new Set(['Olivine City', 'Sprout Tower', 'Burned Tower']),
-        [Region.hoenn]: new Set(['Petalburg City']),
+        [Region.hoenn]: new Set(['Petalburg City', 'Pyrite Bldg']),
         [Region.sinnoh]: new Set(['Veilstone City', 'Canalave City', 'Snowpoint Temple']),
         [Region.unova]: new Set(['Castelia City', 'Mistralton City', 'Opelucid City', 'Liberty Garden', 'Dragonspiral Tower', 'Dreamyard']),
         [Region.kalos]: new Set(['Parfum Palace', 'Lost Hotel']),
@@ -1248,7 +1249,8 @@ export const HoennDungeons = [
     'Cave of Origin',
     'Sky Pillar',
     'Victory Road Hoenn',
-    'Near Space', // 56
+    'Near Space',
+    'Pyrite Bldg', // 57
     // These aren't implemented anywhere yet
     /*
     "Island Cave",
@@ -1277,7 +1279,7 @@ export const HoennDungeons = [
 ];
 
 export const SinnohDungeons = [
-    'Oreburgh Gate', // 57
+    'Oreburgh Gate', // 58
     'Valley Windworks',
     'Eterna Forest',
     'Old Chateau',
@@ -1300,11 +1302,11 @@ export const SinnohDungeons = [
     'Flower Paradise',
     'Snowpoint Temple',
     'Stark Mountain',
-    'Hall of Origin', // 80
+    'Hall of Origin', // 81
 ];
 
 export const UnovaDungeons = [
-    'Floccesy Ranch', // 81
+    'Floccesy Ranch', // 82
     'Liberty Garden',
     'Castelia Sewers',
     'Relic Passage',
@@ -1326,11 +1328,11 @@ export const UnovaDungeons = [
     'Pledge Grove',
     'Pinwheel Forest',
     'Dreamyard',
-    'P2 Laboratory', // 103
+    'P2 Laboratory', // 104
 ];
 
 export const KalosDungeons = [
-    'Santalune Forest', // 104
+    'Santalune Forest', // 105
     'Connecting Cave',
     'Glittering Cave',
     'Reflection Cave',
@@ -1343,12 +1345,12 @@ export const KalosDungeons = [
     'Team Flare Secret HQ',
     'Terminus Cave',
     'Pokémon Village',
-    'Victory Road Kalos', // 116
+    'Victory Road Kalos', // 117
     // 'Unknown Dungeon',
 ];
 
 export const AlolaDungeons = [
-    'Trainers\' School', // 117
+    'Trainers\' School', // 118
     'Hau\'oli Cemetery',
     'Verdant Cavern',
     'Melemele Meadow',
@@ -1377,11 +1379,11 @@ export const AlolaDungeons = [
     'Ruins of Abundance',
     'Ruins of Hope',
     'Poni Meadow',
-    'Resolution Cave', // 146
+    'Resolution Cave', // 147
 ];
 
 export const GalarDungeons = [
-    'Slumbering Weald Shrine', // 147
+    'Slumbering Weald Shrine', // 148
     'Galar Mine',
     'Galar Mine No. 2',
     'Glimwood Tangle',
@@ -1401,7 +1403,7 @@ export const GalarDungeons = [
     'Lakeside Cave',
     'Dyna Tree Hill',
     'Tunnel to the Top',
-    'Crown Shrine', // 167
+    'Crown Shrine', // 168
 ];
 
 export const PaldeaDungeons = [
@@ -1504,6 +1506,7 @@ export const TemporaryBattles = [
     'Silver 6',
     'Silver 7',
     'Red',
+    'Youngster Joey',
     'May 1',
     'May 2',
     'May 3',
@@ -1586,6 +1589,8 @@ export const TemporaryBattles = [
     'Sycamore 1',
     'Tierno 1',
     'Trevor & Tierno',
+    'Team Flare Grunt 1',
+    'Team Flare Grunt 2',
     'Calem 1',
     'Korrina',
     'Courtney 1',
@@ -1611,6 +1616,7 @@ export const TemporaryBattles = [
     'Dr Cozmo',
     'Matt 3',
     'Courtney 3',
+    'Hoenn Stone Salesman',
     'Aipom Alley',
     'Mime Interview',
     'Underground Fighting Ring',
@@ -1621,6 +1627,11 @@ export const TemporaryBattles = [
     'Calem 3',
     'Calem 4',
     'Hex Maniac Aster',
+    'Team Flare Lysandre 1',
+    'Team Flare Xerosic',
+    'Xerneas',
+    'Yveltal',
+    'Team Flare Boss Lysandre 1',
     'Sycamore 2',
     'Shauna 2',
     'Tierno 2',
@@ -1630,6 +1641,7 @@ export const TemporaryBattles = [
     'Merilyn',
     'Millis and Argus Steel',
     'Rampaging Yveltal',
+    'Storyline AZ',
     'AZ',
     'Ash Ketchum Kanto',
     'Ash Ketchum Johto',
@@ -1641,6 +1653,7 @@ export const TemporaryBattles = [
     'Calem 6',
     'Marquis Grant',
     'Grand Duchess Diantha',
+    'Team Flare Boss Lysandre 2',
     'Wild Houndour Horde',
     'Wild Electrike Horde',
     'Hau 1',
@@ -1938,3 +1951,9 @@ export const DayCycleStartHours: Record<DayCyclePart, number> = {
     [DayCyclePart.Dusk]: 17,
     [DayCyclePart.Night]: 18,
 };
+
+export enum ShadowStatus {
+    None,
+    Shadow,
+    Purified,
+}
