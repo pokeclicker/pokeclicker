@@ -1,3 +1,4 @@
+globalThis.ko = require('knockout');
 // Override system date
 jest.useFakeTimers().setSystemTime(new Date(1675298702433));
 // Override Math.random() to always return the same value
