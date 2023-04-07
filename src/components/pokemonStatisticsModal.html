@@ -123,6 +123,21 @@
                       </td>
                     </tr>
                     <!-- /ko -->
+                    <!-- ko if: App.game.party.getPokemon($data)?.shadow == GameConstants.ShadowStatus.Purified -->
+                    <tr>
+                      <td class="text-left align-middle">Show Party Pokémon shadow</td>
+                      <td class="text-left tight">
+                          <label class="form-check-label toggler-wrapper style-1 float-left">
+                              <input class="form-check-input" type="checkbox" id=""
+                                  value="false"
+                                  data-bind="checked: App.game.party.getPokemon($data).showShadowImage">
+                              <div class="toggler-slider">
+                                  <div class="toggler-knob"></div>
+                              </div>
+                          </label>
+                      </td>
+                    </tr>
+                    <!-- /ko -->
                     <tr>
                         <td colspan="2" class="text-middle align-middle">Party Nickname</td>
                     </tr>

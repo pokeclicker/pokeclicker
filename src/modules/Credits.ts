@@ -219,6 +219,7 @@ export const SpriteCredits: Credit[] = [
             'Dracozolt shop image',
             'Dream Orbs',
             'Dungeon Ladder',
+            'Dungeon Chest Tiers',
             'Galar fossils items',
             'Galarian Articuno overworld image',
             'Galarian Moltres overworld image',
@@ -282,6 +283,8 @@ export const SpriteCredits: Credit[] = [
             'Rudy',
             'Rusted Shield and Sword icons',
             'Sea Mauville',
+            'Shadow Makuhita',
+            'Shadow Remoraid',
             'Shady Salesman',
             'Spooky Togepi (shiny)',
             'Spooky Togetic',
@@ -656,6 +659,7 @@ export const SpriteCredits: Credit[] = [
         link: 'https://discordapp.com/users/345944451472031744/',
         resources: [
             'Pinkan Rhydon',
+            'Shadow Mantine',
         ],
         // Notes: Made specifically for PokéClicker.
     },
@@ -752,9 +756,12 @@ export const SpriteCredits: Credit[] = [
             'Professor Juniper',
             'Realgam Tower',
             'Riot',
+            'Shadow Qwilfish',
+            'Shadow Yanma',
             'Valencian Butterfree',
             'Valencian Vileplume',
             'Valencian Weepinbell',
+            'Team Flare Boss Lysandre',
         ],
         // NOTES: Made specifically for Pokeclicker.
     },
