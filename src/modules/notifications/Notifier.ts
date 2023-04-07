@@ -252,7 +252,7 @@ export default class Notifier {
         type?: NotificationOption;
         timeout?: number;
         sound?: Sound,
-        dropdownOptions?: {name: string, value: number}[],
+        dropdownOptions?: { name: string, value: number }[],
     }): Promise<any> {
         // If we have sounds enabled for this, play it now
         if (sound) {
