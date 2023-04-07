@@ -76,7 +76,6 @@ export default class PokeballFilters implements Feature {
         // Make a copy to put in observable, to make sure UI is updated properly
         const newOptions = { ...filter.options };
         delete newOptions[option];
-        console.log(filter, filter.options, option, newOptions);
         filter.options = newOptions;
     }
 

@@ -9,14 +9,14 @@
         </button>
       </div>
       <div class="modal-body p-0">
-        <button class="btn btn-primary" onclick="App.game.pokeballFilters.createFilter()">
+        <button class="btn btn-primary my-2" onclick="App.game.pokeballFilters.createFilter()">
             Create New Filter
         </button>
         <div id="pokeballFilterConfigs" data-bind="foreach: [...App.game.pokeballFilters.list()].reverse()">
             <div class="pokeballFilter">
                 <div class="pokeballFilterHeader" >
                     <div class="pokeballFilterActionButtons">
-                        <button class="close bg-danger text-white deleteButton" data-bind="click: () => App.game.pokeballFilters.deleteFilter($data)">
+                        <button class="btn-circle bg-danger text-white deleteButton" data-bind="click: () => App.game.pokeballFilters.deleteFilter($data)">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -37,13 +37,15 @@
                     />
                 </div>
                 <div class="collapse pokeballFilterBody" data-bind="attr: { id: `pokeball-filter-options-${$index()}`}">
-                    <table>
-                        <tbody class="pokeballFilterOptions">
+                    <table class="pokeballFilterOptions">
+
+
+                        <tbody>
                             <!-- ko foreach: Object.entries($data.options).map(([k, v]) => ({ optionName: k, setting: v })) -->
                                 <tr>
                                     <td>
-                                        <button class="btn btn-danger" data-bind="click: () => App.game.pokeballFilters.removeFilterOption($parent, optionName)">
-                                            -
+                                        <button class="btn-circle btn-danger" data-bind="click: () => App.game.pokeballFilters.removeFilterOption($parent, optionName)">
+                                            <span>&minus;</span>
                                         </button>
                                     </td>
                                     <!-- ko template: {
@@ -53,13 +55,13 @@
                                 </tr>
                             <!-- /ko -->
                             <!-- ko foreach: Object.keys(PokeballFilterOptions.settingsMap).filter(k => !(k in $data.options)) -->
-                                <tr>
+                                <tr class="bg-faded text-white">
                                     <td>
-                                        <button class="btn btn-success" data-bind="click: () => App.game.pokeballFilters.addFilterOption($parent, $data)">
-                                            +
+                                        <button class="btn-circle btn-success" data-bind="click: () => App.game.pokeballFilters.addFilterOption($parent, $data)">
+                                            <span>&plus;</span>
                                         </button>
                                     </td>
-                                    <td data-bind="text: PokeballFilterOptions.defaultOptions[$data].displayName"></td>
+                                    <td class="p-2" data-bind="text: PokeballFilterOptions.defaultOptions[$data].displayName"></td>
                                     <td></td>
                                 </tr>
                             <!-- /ko -->

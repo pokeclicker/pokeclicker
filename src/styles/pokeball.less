@@ -84,14 +84,6 @@
             justify-content: space-between;
             align-items: center;
 
-            .deleteButton {
-                width: 1em;
-                height: 1em;
-                border-radius: 50%;
-                text-shadow: none;
-                opacity: 1;
-            }
-
             .pokeballFilterName {
                 margin: 0 1rem;
             }
@@ -99,6 +91,14 @@
 
         .pokeballFilterBody {
             border-top: 1px solid lightgray;
+
+            .pokeballFilterOptions {
+                width: 100%;
+
+                .bg-faded {
+                    background-color: rgba(1, 1, 1, 50%)
+                }
+            }
         }
     }
 }
