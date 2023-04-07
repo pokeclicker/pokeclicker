@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg889"
+   inkscape:version="1.0.2-2 (e86c870879, 2021-01-15)"
+   sodipodi:docname="purified.svg">
+  <defs
+     id="defs883" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.67307692"
+     inkscape:cx="140"
+     inkscape:cy="560"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer3"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     inkscape:window-width="1366"
+     inkscape:window-height="745"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata886">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Capa 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     style="display:inline" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="Capa 2"
+     style="display:inline">
+    <path
+       id="rect911"
+       style="fill:#00ffff;stroke:#000000;stroke-width:0;stroke-linecap:round"
+       d="M 392.18164 177.47656 C 383.67516 177.47656 376.82812 184.32555 376.82812 192.83203 L 376.82812 421.31445 A 81.407192 81.407192 0 0 1 391.24023 419.61719 A 81.407192 81.407192 0 0 1 407.53711 420.80273 L 407.53711 192.83203 C 407.53711 184.32555 400.68812 177.47656 392.18164 177.47656 z M 236.19336 333.04102 C 233.38392 333.04102 230.57448 334.11692 228.42188 336.26953 C 224.11666 340.57475 224.11666 347.50533 228.42188 351.81055 L 328.54688 451.93555 A 81.407192 81.407192 0 0 1 344.03906 436.34375 L 243.96484 336.26953 C 241.81224 334.11692 239.0028 333.04102 236.19336 333.04102 z M 549.47461 334.39453 C 546.66517 334.39453 543.85573 335.47044 541.70312 337.62305 L 442.98242 436.34375 A 81.407192 81.407192 0 0 1 458.47656 451.93555 L 557.24609 353.16602 C 561.55131 348.8608 561.55131 341.92826 557.24609 337.62305 C 555.09349 335.47044 552.28405 334.39453 549.47461 334.39453 z M 85.349609 486.00391 C 76.843127 486.00391 69.996094 492.85094 69.996094 501.35742 C 69.996094 509.8639 76.843127 516.71289 85.349609 516.71289 L 313.63672 516.71289 A 81.407192 81.407192 0 0 1 312.11719 502.50781 A 81.407192 81.407192 0 0 1 313.49414 486.00391 L 85.349609 486.00391 z M 473.52539 486.00391 A 81.407192 81.407192 0 0 1 474.86133 497.96484 L 474.91797 500.99219 A 81.407192 81.407192 0 0 1 473.38477 516.71289 L 701.67188 516.71289 C 710.17835 516.71289 717.02539 509.8639 717.02539 501.35742 C 717.02539 492.85094 710.17835 486.00391 701.67188 486.00391 L 473.52539 486.00391 z M 328.86328 550.46484 L 229.77734 649.55078 C 225.47213 653.856 225.47213 660.78658 229.77734 665.0918 C 234.08256 669.39701 241.01314 669.39701 245.31836 665.0918 L 344.45312 565.95703 A 81.407192 81.407192 0 0 1 328.86328 550.46484 z M 458.16016 550.46484 A 81.407192 81.407192 0 0 1 442.56641 565.95703 L 540.34766 663.73828 C 544.65287 668.0435 551.58542 668.0435 555.89062 663.73828 C 560.19584 659.43306 560.19584 652.50053 555.89062 648.19531 L 458.16016 550.46484 z M 376.82812 580.66992 L 376.82812 809.15234 C 376.82812 817.65883 383.67516 824.50781 392.18164 824.50781 C 400.68812 824.50781 407.53711 817.65883 407.53711 809.15234 L 407.53711 581.18164 A 81.407192 81.407192 0 0 1 394.26758 582.39648 A 81.407192 81.407192 0 0 1 376.82812 580.66992 z "
+       transform="scale(0.26458333)" />
+  </g>
+</svg>
