@@ -283,6 +283,7 @@ export const SpriteCredits: Credit[] = [
             'Rudy',
             'Rusted Shield and Sword icons',
             'Sea Mauville',
+            'Shadow Crocanaw',
             'Shadow Makuhita',
             'Shadow Remoraid',
             'Shady Salesman',
@@ -660,6 +661,9 @@ export const SpriteCredits: Credit[] = [
         resources: [
             'Pinkan Rhydon',
             'Shadow Mantine',
+            'Shadow Quagsire',
+            'Shadow Slugma',
+            'Shadow Swablu',
         ],
         // Notes: Made specifically for PokéClicker.
     },
@@ -756,6 +760,7 @@ export const SpriteCredits: Credit[] = [
             'Professor Juniper',
             'Realgam Tower',
             'Riot',
+            'Shadow Bayleef',
             'Shadow Qwilfish',
             'Shadow Yanma',
             'Valencian Butterfree',
