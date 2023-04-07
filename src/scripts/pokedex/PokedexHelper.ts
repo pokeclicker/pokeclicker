@@ -156,8 +156,7 @@ class PokedexHelper {
                 return false;
             }
             // Only Base Pokémon without Mega Stone
-            const noMegaStone = !App.game.party.getPokemon(pokemon.id)?.megaStone;
-            if (uniqueTransformation == 'mega-unobtained' && (!(pokemon as PokemonListData).evolutions?.some((p) => p.evolvedPokemon.startsWith('Mega ') && noMegaStone))) {
+            if (uniqueTransformation == 'mega-unobtained' && (!(pokemon as PokemonListData).evolutions?.some((p) => p.evolvedPokemon.startsWith('Mega ') && !App.game.party.alreadyCaughtPokemonByName(p.evolvedPokemon)))) {
                 return false;
             }
             // Only Mega Pokémon
