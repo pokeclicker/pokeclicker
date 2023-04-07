@@ -12,15 +12,11 @@ class UsePokeballQuest extends Quest implements QuestInterface {
 
     public static generateData(): any[] {
         const possiblePokeballs = [GameConstants.Pokeball.Pokeball];
-        if (player.highestRegion() > GameConstants.Region.kanto) {
-            possiblePokeballs.push(GameConstants.Pokeball.Greatball, GameConstants.Pokeball.Ultraball);
-        } else {
-            if (TownList['Lavender Town'].isUnlocked()) {
-                possiblePokeballs.push(GameConstants.Pokeball.Greatball);
-            }
-            if (TownList['Fuchsia City'].isUnlocked()) {
-                possiblePokeballs.push(GameConstants.Pokeball.Ultraball);
-            }
+        if (TownList['Lavender Town'].isUnlocked()) {
+            possiblePokeballs.push(GameConstants.Pokeball.Greatball);
+        }
+        if (TownList['Fuchsia City'].isUnlocked()) {
+            possiblePokeballs.push(GameConstants.Pokeball.Ultraball);
         }
         const pokeball = SeededRand.fromArray(possiblePokeballs);
         const amount = SeededRand.intBetween(100, 500);
