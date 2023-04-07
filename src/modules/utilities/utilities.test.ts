@@ -9,7 +9,7 @@ import Rand from './Rand';
 
 describe('Test SeededRand & Rand', () => {
     it('Test rand', () => {
-        expect(Rand.next()).toBe(0.123456789);
+        expect(Rand.intBetween(0, 100)).toBe(12);
     });
 
     it('Test seeding', () => {
