@@ -294,6 +294,7 @@ export const SpriteCredits: Credit[] = [
             'Shadow Ralts',
             'Shadow Remoraid',
             'Shadow Shuckle',
+            'Shadow Smeargle',
             'Shadow Sneasel',
             'Shadow Starmie',
             'Shadow Sudowoodo',
