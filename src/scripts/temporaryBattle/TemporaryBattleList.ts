@@ -164,7 +164,7 @@ TemporaryBattleList['Blue 5'] = new TemporaryBattle(
         new GymPokemon('Venusaur', 44113, 40, new StarterRequirement(GameConstants.Region.kanto, GameConstants.Starter.Special)),
     ],
     'I\'m moving on up and ahead! I\'m going to the Pokémon League to boot out the Elite Four! I\'ll become the world\'s most powerful Trainer! Well, good luck to you! Don\'t sweat it! Smell ya!',
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Silph Co.'))],
+    [new QuestLineStepCompletedRequirement('Team Rocket', 1)],
     undefined,
     {
         displayName: 'Rival Blue',

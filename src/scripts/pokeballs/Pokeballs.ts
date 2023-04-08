@@ -147,17 +147,18 @@ class Pokeballs implements Feature {
      * @param isShiny if the Pokémon is shiny.
      * @returns {GameConstants.Pokeball} pokéball to use.
      */
-    public calculatePokeballToUse(id: number, isShiny: boolean): GameConstants.Pokeball {
+    public calculatePokeballToUse(id: number, isShiny: boolean, isShadow: boolean): GameConstants.Pokeball {
         const alreadyCaught = App.game.party.alreadyCaughtPokemon(id);
         const alreadyCaughtShiny = App.game.party.alreadyCaughtPokemon(id, true);
+        const alreadyCaughtShadow = App.game.party.alreadyCaughtPokemon(id, false, true);
         const contagious = (App.game.party.getPokemon(id)?.pokerus == GameConstants.Pokerus.Contagious);
         const pokemon = PokemonHelper.getPokemonById(id);
         let pref: GameConstants.Pokeball;
 
         // just check against alreadyCaughtShiny as this returns false when you don't have the pokemon yet.
 
-        if (isShiny) {
-            if (!alreadyCaughtShiny) {
+        if (isShiny || isShadow) {
+            if ((!alreadyCaughtShiny && isShiny) || (!alreadyCaughtShadow && isShadow)) {
                 pref = this.notCaughtShinySelection;
             } else {
                 pref = this.alreadyCaughtShinySelection;
