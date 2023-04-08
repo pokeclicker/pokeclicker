@@ -29,6 +29,13 @@ export default class PokeballFilters implements Feature {
             .reverse(),
     );
 
+    public testSettings = Object.fromEntries(
+        Object.entries(settingsMap).map(([k, fn]) => [k, fn()]),
+    );
+    public testSettingsData = ko.pureComputed(() =>
+        Object.fromEntries(Object.entries(this.testSettings).map(([k, v]) => [k, v.observableValue()])),
+    );
+
     public static hideFilter(filter: PokeballFilter) {
         return filter.options.pokerus !== undefined && !App.game.keyItems.hasKeyItem(KeyItemType.Pokerus_virus);
     }
@@ -112,8 +119,8 @@ export default class PokeballFilters implements Feature {
                 name,
                 options,
                 ball,
-                inverted,
                 enabled,
+                inverted,
             ));
         });
     }
