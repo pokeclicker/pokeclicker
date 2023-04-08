@@ -432,7 +432,7 @@ class AchievementHandler {
                 if (region == GameConstants.Region.kanto && (route.subRegion == GameConstants.KantoSubRegions.Sevii123 || route.subRegion == GameConstants.KantoSubRegions.Sevii4567)) {
                     category = GameConstants.ExtraAchievementCategories.sevii;
                 }
-                if (region == GameConstants.Region.hoenn && (route.subRegion == GameConstants.HoennSubRegions.Orre || route.subRegion == GameConstants.HoennSubRegions.Orre)) {
+                if (region == GameConstants.Region.hoenn && route.subRegion == GameConstants.HoennSubRegions.Orre) {
                     category = GameConstants.ExtraAchievementCategories.orre;
                 }
                 if (region == GameConstants.Region.alola && route.subRegion == GameConstants.AlolaSubRegions.MagikarpJump) {
@@ -454,7 +454,7 @@ class AchievementHandler {
                 if (region == GameConstants.Region.kanto && (TownList[dungeon].subRegion == GameConstants.KantoSubRegions.Sevii123 || TownList[dungeon].subRegion == GameConstants.KantoSubRegions.Sevii4567)) {
                     category = GameConstants.ExtraAchievementCategories.sevii;
                 }
-                if (region == GameConstants.Region.hoenn && (TownList[dungeon].subRegion == GameConstants.HoennSubRegions.Orre || TownList[dungeon].subRegion == GameConstants.HoennSubRegions.Orre)) {
+                if (region == GameConstants.Region.hoenn && TownList[dungeon].subRegion == GameConstants.HoennSubRegions.Orre) {
                     category = GameConstants.ExtraAchievementCategories.orre;
                 }
                 if (region == GameConstants.Region.alola && TownList[dungeon].subRegion == GameConstants.AlolaSubRegions.MagikarpJump) {
