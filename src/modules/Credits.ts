@@ -284,6 +284,7 @@ export const SpriteCredits: Credit[] = [
             'Rusted Shield and Sword icons',
             'Sea Mauville',
             'Shadow Absol',
+            'Shadow Baltoy',
             'Shadow Carvanha',
             'Shadow Crocanaw',
             'Shadow Makuhita',
