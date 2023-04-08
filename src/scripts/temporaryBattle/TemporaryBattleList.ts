@@ -2414,7 +2414,7 @@ TemporaryBattleList['Mime Interview'] = new TemporaryBattle(
     undefined,
     {
         hideTrainer: true,
-        imageName: 'specialNPCs/Mime Interview'
+        imageName: 'specialNPCs/Mime Interview',
     }
 );
 TemporaryBattleList['Underground Fighting Ring'] = new TemporaryBattle(
@@ -2441,7 +2441,7 @@ TemporaryBattleList['Lab Ambush'] = new TemporaryBattle(
     undefined,
     {
         hideTrainer: true,
-        imageName: 'specialNPCs/Lab Ambush'
+        imageName: 'specialNPCs/Lab Ambush',
     }
 );
 TemporaryBattleList.Imposter = new TemporaryBattle(
@@ -2463,7 +2463,7 @@ TemporaryBattleList['Possessed Mewtwo'] = new TemporaryBattle(
     undefined,
     {
         hideTrainer: true,
-        imageName: 'specialNPCs/Possessed Mewtwo'
+        imageName: 'specialNPCs/Possessed Mewtwo',
     }
 );
 TemporaryBattleList.Riot = new TemporaryBattle(
@@ -3968,7 +3968,7 @@ TemporaryBattleList.Mirages = new TemporaryBattle(
     undefined,
     {
         hideTrainer: true,
-        imageName: 'specialNPCs/Mirages'
+        imageName: 'specialNPCs/Mirages',
     }
 );
 TemporaryBattleList['Hop 2'] = new TemporaryBattle(
@@ -4716,7 +4716,7 @@ TemporaryBattleList['Dyna Tree Birds'] = new TemporaryBattle(
     {
         hideTrainer: true,
         returnTown: 'Dyna Tree Hill',
-        imageName: 'specialNPCs/Dyna Tree Birds'
+        imageName: 'specialNPCs/Dyna Tree Birds',
     }
 );
 TemporaryBattleList['Galarian Articuno 1'] = new TemporaryBattle(

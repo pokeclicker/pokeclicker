@@ -1964,7 +1964,7 @@ GymList['Elite Gym Leader Bede'] = new Gym(
     undefined,
     undefined,
     undefined,
-    'Gym Leader Bede',
+    'Gym Leader Bede'
 );
 GymList['Elite Trainer Hop'] = new Gym(
     'Hop',
