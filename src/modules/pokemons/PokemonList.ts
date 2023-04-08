@@ -26220,7 +26220,7 @@ export const pokemonList = createPokemonArray(
     },
     {
         'id': 875.01,
-        'name': 'Eiscue (No Ice Face)',
+        'name': 'Eiscue (Noice Face)',
         'type': [PokemonType.Ice],
         'base': {
             'hitpoints': 75,
