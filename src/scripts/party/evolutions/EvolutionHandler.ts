@@ -16,6 +16,7 @@ class EvolutionHandler {
             return false;
         }
         const shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_STONE);
+        let baseRemoved = false;
 
         const newPokemon = !App.game.party.alreadyCaughtPokemonByName(evolvedPokemon);
         if (newPokemon || shiny || notification) {
@@ -55,10 +56,11 @@ class EvolutionHandler {
                 evolvedPartyPokemon.heldItem = basePartyPokemon.heldItem;
             }
             App.game.party.removePokemonByName(data.basePokemon);
+            baseRemoved = true;
         }
 
         // EVs
         evolvedPartyPokemon.effortPoints += App.game.party.calculateEffortPoints(evolvedPartyPokemon, shiny, GameConstants.STONE_EP_YIELD);
-        return shiny;
+        return shiny || baseRemoved;
     }
 }
