@@ -768,6 +768,7 @@ export const SpriteCredits: Credit[] = [
             'Realgam Tower',
             'Riot',
             'Shadow Bayleef',
+            'Shadow Quilava',
             'Shadow Qwilfish',
             'Shadow Yanma',
             'Valencian Butterfree',
