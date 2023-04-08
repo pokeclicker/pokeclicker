@@ -53,7 +53,8 @@ class DungeonBattle extends Battle {
 
         // Attempting to catch Pokemon
         const isShiny: boolean = enemyPokemon.shiny;
-        const pokeBall: GameConstants.Pokeball = App.game.pokeballs.calculatePokeballToUse(enemyPokemon.id, isShiny);
+        const isShadow: boolean = enemyPokemon.shadow == GameConstants.ShadowStatus.Shadow;
+        const pokeBall: GameConstants.Pokeball = App.game.pokeballs.calculatePokeballToUse(enemyPokemon.id, isShiny, isShadow);
         const route = player.town()?.dungeon?.difficultyRoute || 1;
         const region = player.region;
         if (pokeBall !== GameConstants.Pokeball.None) {
@@ -76,12 +77,37 @@ class DungeonBattle extends Battle {
      * Handles defeating a trainer Pokemon
      */
     private static defeatTrainerPokemon() {
-        this.enemyPokemon().defeat(true);
+        const enemyPokemon: BattlePokemon = this.enemyPokemon();
+        enemyPokemon.defeat(true);
 
         GameHelper.incrementObservable(this.trainerPokemonIndex);
         App.game.breeding.progressEggsBattle(DungeonRunner.dungeon.difficultyRoute, player.region);
         player.lowerItemMultipliers(MultiplierDecreaser.Battle);
 
+        if (this.enemyPokemon().shadow == GameConstants.ShadowStatus.Shadow) {
+            // Attempting to catch Pokemon
+            const isShiny: boolean = enemyPokemon.shiny;
+            const isShadow: boolean = enemyPokemon.shadow == GameConstants.ShadowStatus.Shadow;
+            const pokeBall: GameConstants.Pokeball = App.game.pokeballs.calculatePokeballToUse(enemyPokemon.id, isShiny, isShadow);
+            const route = player.town()?.dungeon?.difficultyRoute || 1;
+            const region = player.region;
+            if (pokeBall !== GameConstants.Pokeball.None) {
+                this.prepareCatch(enemyPokemon, pokeBall);
+                setTimeout(
+                    () => {
+                        this.attemptCatch(enemyPokemon, route, region);
+                        DungeonBattle.nextTrainerPokemon();
+                    },
+                    App.game.pokeballs.calculateCatchTime(pokeBall)
+                );
+            }
+        } else {
+            DungeonBattle.nextTrainerPokemon();
+        }
+    }
+
+
+    private static nextTrainerPokemon() {
         // No Pokemon left, trainer defeated
         if (this.trainerPokemonIndex() >= this.trainer().getTeam().length) {
             // rewards for defeating trainer
