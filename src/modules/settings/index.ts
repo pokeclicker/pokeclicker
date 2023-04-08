@@ -302,6 +302,7 @@ Settings.add(new HotkeySetting('hotkey.farm', 'Farm', 'F'));
 Settings.add(new HotkeySetting('hotkey.hatchery', 'Hatchery', 'H'));
 Settings.add(new HotkeySetting('hotkey.oakItems', 'Oak Items', 'O'));
 Settings.add(new HotkeySetting('hotkey.underground', 'Underground', 'U'));
+Settings.add(new HotkeySetting('hotkey.dailyQuests', 'Daily Quests', 'Q'));
 Settings.add(new HotkeySetting('hotkey.pokeballSelection', 'Poké Ball Selection', 'P', { suffix: ' + Number' }));
 
 Settings.add(new HotkeySetting('hotkey.farm.toggleShovel', 'Toggle Shovel', 'S'));

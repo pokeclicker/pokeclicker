@@ -8894,6 +8894,26 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 249.01,
+        'name': 'XD001',
+        'catchRate': 3,
+        'type': [PokemonType.Psychic, PokemonType.Flying],
+        'levelType': LevelType.slow,
+        'exp': 306,
+        'eggCycles': 120,
+        'base': {
+            'hitpoints': 106,
+            'attack': 90,
+            'specialAttack': 90,
+            'defense': 130,
+            'specialDefense': 154,
+            'speed': 110,
+        },
+        'gender': {
+            'type': Genders.Genderless,
+        },
+    },
+    {
         'id': 250,
         'name': 'Ho-Oh',
         'catchRate': 3,

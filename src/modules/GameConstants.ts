@@ -1882,6 +1882,7 @@ export enum AlcremieSpins {
 export enum ExtraAchievementCategories {
     global = Region.final,
     sevii,
+    orre,
     magikarpJump,
 }
 export const DayCycleStartHours: Record<DayCyclePart, number> = {
