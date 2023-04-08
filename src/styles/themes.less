@@ -17,7 +17,6 @@
 
   // make the pokemon silhouettes lighter
   .dungeon-pokemon-locked {
-    -webkit-filter: brightness(0%) invert(100%); /* Safari 6.0 - 9.0 */
     filter: brightness(0%) invert(100%);
     opacity: 0.3;
   }
@@ -26,6 +25,7 @@
       color: #f291bf;
   }
 }
+
 /* Themes with light start menu text */
 .cosmo, .cyborg, .darkly, .flatly, .journal, .litera, .minty, .sandstone, .sketchy, .slate, .solar, .spacelab, .superhero, .united {
   // make mute/unmute images white to match "Start Menu" text color
@@ -50,11 +50,13 @@
   .progress .progress-bar {
     font-size: 12px;
   }
+
   /* Evolution items */
   #evo-item-list, #evo-pokemon-list {
     .list-group-item-action {
       color: whitesmoke;
     }
+
     .list-group-item-action:hover {
       color: black;
     }
@@ -65,6 +67,7 @@
   .text-light {
     color: whitesmoke !important;
   }
+
   /* Evolution items */
   #evo-item-list, #evo-pokemon-list {
     .list-group-item-action {
@@ -93,6 +96,7 @@
   .pageItemFooter {
     font-size: 12px !important;
   }
+
   .pageItemTitle {
     font-size: 30px !important;
   }
@@ -103,6 +107,7 @@
   .stop-auto {
     position: absolute;
   }
+
   /* Evolution items */
   #evo-item-list, #evo-pokemon-list {
     .item-selected, .pokemon-selected {
@@ -116,6 +121,7 @@
     .btn:not([class*="btn-"]) {
         color: #495057;
     }
+
     /* Evolution items */
     #evo-item-list, #evo-pokemon-list {
       .list-group-item-action:hover {
@@ -140,10 +146,10 @@
       color: transparent;
     }
 
-    .close:before,
-    .close:hover:before,
-    .close:focus:before,
-    .close:active:before {
+    .close::before,
+    .close:hover::before,
+    .close:focus::before,
+    .close:active::before {
       color: whitesmoke;
     }
   }
@@ -153,16 +159,16 @@
       color: transparent;
     }
 
-    .close:before,
-    .close:hover:before,
-    .close:focus:before,
-    .close:active:before {
+    .close::before,
+    .close:hover::before,
+    .close:focus::before,
+    .close:active::before {
       color: #333;
     }
   }
 
   .modal-header {
-    border-radius: 0px;
+    border-radius: 0;
   }
 
   .pageItemFooter {
@@ -170,11 +176,13 @@
     color: rgba(0, 0, 0);
     font-weight: 700;
   }
+
   /* Evolution items */
   #evo-item-list, #evo-pokemon-list {
     .list-group-item-action {
       color: whitesmoke;
     }
+
     .list-group-item-action:hover {
       color: black;
     }
@@ -213,7 +221,7 @@
 .solar {
   // Farming
   .seed-list-item.active {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 20%);
   }
 
   // Evolution items modal

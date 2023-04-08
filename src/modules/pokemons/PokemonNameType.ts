@@ -1366,7 +1366,7 @@ export type PokemonNameType
     | 'Frosmoth'
     | 'Stonjourner'
     | 'Eiscue (Ice Face)'
-    | 'Eiscue (No Ice Face)'
+    | 'Eiscue (Noice Face)'
     | 'Indeedee (Male)'
     | 'Indeedee (Female)'
     | 'Morpeko'

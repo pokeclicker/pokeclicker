@@ -11,3 +11,5 @@ Web.config
 report.*.json
 .DS_Store
 docs/
+coverage/
+.stylelintcache

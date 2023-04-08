@@ -922,7 +922,7 @@ Routes.add(new RegionRoute(
           ])),
           new SpecialRoutePokemon(['Castform (Snowy)'], new MultiRequirement([
               new ObtainedPokemonRequirement('Castform'),
-              new WeatherRequirement([WeatherType.Snow, WeatherType.Blizzard, WeatherType.Hail, WeatherType.Fog]),
+              new WeatherRequirement([WeatherType.Snow, WeatherType.Blizzard, WeatherType.Hail]),
           ])),
       ],
     }),
@@ -2784,7 +2784,7 @@ Routes.add(new RegionRoute(
         special:
       [
           new SpecialRoutePokemon(['Eiscue (Ice Face)'], new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Rain, WeatherType.Thunderstorm, WeatherType.Snow, WeatherType.Hail, WeatherType.Blizzard, WeatherType.Sandstorm, WeatherType.Fog, WeatherType.Windy])),
-          new SpecialRoutePokemon(['Eiscue (No Ice Face)'], new WeatherRequirement([WeatherType.Sunny])),
+          new SpecialRoutePokemon(['Eiscue (Noice Face)'], new WeatherRequirement([WeatherType.Sunny])),
       ],
     }),
     [new RouteKillRequirement(10, Region.galar, 31)],
@@ -3243,7 +3243,7 @@ Routes.add(new RegionRoute(
           new SpecialRoutePokemon(['Araquanid', 'Electabuzz', 'Pincurchin', 'Dewpider', 'Elekid', 'Electivire', 'Sealeo', 'Eiscue (Ice Face)'], new WeatherRequirement([WeatherType.Thunderstorm])),
           new SpecialRoutePokemon(['Vanillish', 'Beartic', 'Vanillite', 'Sealeo', 'Walrein', 'Cryogonal', 'Lapras', 'Eiscue (Ice Face)'], new WeatherRequirement([WeatherType.Snow])),
           new SpecialRoutePokemon(['Eiscue (Ice Face)'], new WeatherRequirement([WeatherType.Hail, WeatherType.Sandstorm, WeatherType.Windy])),
-          new SpecialRoutePokemon(['Eiscue (No Ice Face)'], new WeatherRequirement([WeatherType.Sunny])),
+          new SpecialRoutePokemon(['Eiscue (Noice Face)'], new WeatherRequirement([WeatherType.Sunny])),
           new SpecialRoutePokemon(['Vanillish', 'Beartic', 'Vanillite', 'Sealeo', 'Walrein', 'Cryogonal', 'Lapras', 'Absol', 'Eiscue (Ice Face)'], new WeatherRequirement([WeatherType.Blizzard])),
           new SpecialRoutePokemon(['Hattrem', 'Mimikyu', 'Hatenna', 'Hatterene', 'Sealeo', 'Walrein', 'Eiscue (Ice Face)'], new WeatherRequirement([WeatherType.Fog])),
           new SpecialRoutePokemon(['Tirtouga'], new ObtainedPokemonRequirement('Tirtouga')),

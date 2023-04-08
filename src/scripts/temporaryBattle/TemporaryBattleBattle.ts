@@ -19,11 +19,12 @@ class TemporaryBattleBattle extends Battle {
 
 
     public static defeatPokemon() {
-        if (!TemporaryBattleBattle.battle.optionalArgs.isTrainerBattle) {
+        const enemyPokemon = super.enemyPokemon();
+        if (!TemporaryBattleBattle.battle.optionalArgs.isTrainerBattle || enemyPokemon.shadow == GameConstants.ShadowStatus.Shadow) {
             // Attempting to catch Pokemon
-            const enemyPokemon = super.enemyPokemon();
             const isShiny: boolean = enemyPokemon.shiny;
-            const pokeBall: GameConstants.Pokeball = App.game.pokeballs.calculatePokeballToUse(enemyPokemon.id, isShiny);
+            const isShadow: boolean = enemyPokemon.shadow == GameConstants.ShadowStatus.Shadow;
+            const pokeBall: GameConstants.Pokeball = App.game.pokeballs.calculatePokeballToUse(enemyPokemon.id, isShiny, isShadow);
             if (pokeBall !== GameConstants.Pokeball.None) {
                 this.prepareCatch(enemyPokemon, pokeBall);
                 setTimeout(

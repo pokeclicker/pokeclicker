@@ -15,6 +15,7 @@ enum PartyPokemonSaveKeys {
     nickname,
     megaStone,
     shadow,
+    showShadowImage,
 }
 
 class PartyPokemon implements Saveable {
@@ -39,6 +40,7 @@ class PartyPokemon implements Saveable {
         nickname: '',
         megaStone: undefined,
         shadow: GameConstants.ShadowStatus.None,
+        showShadowImage: false,
     };
 
     // Saveable observables
@@ -60,6 +62,7 @@ class PartyPokemon implements Saveable {
     hideShinyImage: KnockoutObservable<boolean>;
     _megaStone: KnockoutObservable<MegaStone>;
     _shadow: KnockoutObservable<GameConstants.ShadowStatus>;
+    _showShadowImage: KnockoutObservable<boolean>;
 
     constructor(
         public id: number,
@@ -108,6 +111,7 @@ class PartyPokemon implements Saveable {
         this._displayName = ko.pureComputed(() => this._nickname() ? this._nickname() : this._translatedName());
         this._megaStone = ko.observable(undefined);
         this._shadow = ko.observable(shadow);
+        this._showShadowImage = ko.observable(false);
     }
 
     public calculateAttack(ignoreLevel = false): number {
@@ -439,6 +443,7 @@ class PartyPokemon implements Saveable {
             this.giveMegastone(false);
         }
         this.shadow = json[PartyPokemonSaveKeys.shadow] ?? this.defaults.shadow;
+        this._showShadowImage(json[PartyPokemonSaveKeys.showShadowImage] ?? this.defaults.showShadowImage);
     }
 
     public toJSON() {
@@ -459,6 +464,7 @@ class PartyPokemon implements Saveable {
             [PartyPokemonSaveKeys.nickname]: this.nickname ? encodeURI(this.nickname) : undefined,
             [PartyPokemonSaveKeys.megaStone]: this.megaStone ? true : false,
             [PartyPokemonSaveKeys.shadow]: this.shadow,
+            [PartyPokemonSaveKeys.showShadowImage]: this._showShadowImage(),
         };
 
         // Don't save anything that is the default option
@@ -562,5 +568,13 @@ class PartyPokemon implements Saveable {
 
     set shadow(value: GameConstants.ShadowStatus) {
         this._shadow(value);
+    }
+
+    get showShadowImage(): boolean {
+        return this._showShadowImage();
+    }
+
+    set showShadowImage(value: boolean) {
+        this._showShadowImage(value);
     }
 }
