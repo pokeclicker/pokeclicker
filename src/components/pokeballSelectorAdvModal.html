@@ -1,6 +1,6 @@
 <div class="modal fade" id="pokeballSelectorAdvModal" tabindex="-1" role="dialog"
   aria-labelledby="PokeballSelectorAdvModal" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-sm" role="document">
+  <div class="modal-dialog modal-dialog-scrollable modal-md " role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="pokeballSelectorAdvModalLabel">Poké Ball Selector Configuration</h5>
@@ -14,7 +14,7 @@
         </button>
         <div id="pokeballFilterConfigs" data-bind="foreach: [...App.game.pokeballFilters.list()].reverse()">
             <div class="pokeballFilterWrapper" data-bind="attr: { 'data-key': $data.uuid }">
-                <div class="pokeballFilterDragHandle bg-secondary text-white"></div>
+                <div class="pokeballFilterDragHandle bg-dark text-white"></div>
                 <div class="pokeballFilter">
                     <div class="pokeballFilterHeader" >
                         <div class="pokeballFilterActionButtons">

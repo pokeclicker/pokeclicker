@@ -76,7 +76,8 @@
     .pokeballFilterWrapper {
         display: flex;
         flex-direction: row;
-        margin-bottom: 1rem;
+        margin: 0 auto 1rem;
+        width: fit-content;
 
         .pokeballFilterDragHandle {
             width: 1.5rem;
@@ -84,6 +85,8 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            border: 1px solid rgba(200, 200, 200, 30%);
+            border-radius: 0.25rem 0 0 0.25rem;
 
             &::after {
                 content: "⣶";
@@ -97,10 +100,12 @@
         }
 
         .pokeballFilter {
-            border: 1px 0 solid gray;
+            border: 1px solid rgba(200, 200, 200, 30%);
+            border-left-width: 0;
+            border-radius: 0 0.25rem 0.25rem 0;
 
             .pokeballFilterHeader {
-                background-color: rgba(1, 1, 1, 10%);
+                background-color: rgba(0, 0, 0, 10%);
                 padding: 0.3rem 1rem;
                 display: flex;
                 justify-content: space-between;
@@ -112,14 +117,13 @@
             }
 
             .pokeballFilterBody {
-                border-top: 1px solid lightgray;
-
                 .pokeballFilterSettings {
+                    border-top: 1px solid rgba(120, 120, 120, 30%);
+                    border-bottom: 1px solid rgba(120, 120, 120, 30%);
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
                     padding: 0.3rem;
-                    border-bottom: 1px solid lightgray;
 
                     > * {
                         flex-grow: 1;
@@ -130,7 +134,11 @@
                     width: 100%;
 
                     .bg-faded {
-                        background-color: rgba(1, 1, 1, 50%)
+                        background-color: rgba(1, 1, 1, 50%);
+
+                        td, thead {
+                            background-color: transparent;
+                        }
                     }
                 }
             }
