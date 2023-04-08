@@ -74,7 +74,8 @@ class Gym extends TownContent {
             achievement = true,
             champion = false,
         }: gymFlags = {},
-        public displayName?: string
+        public displayName?: string,
+        public imageName?: string
     ) {
         super(requirements);
         this.flags.quest = quest;
@@ -122,7 +123,7 @@ class Gym extends TownContent {
     }
 
     get imagePath(): string {
-        return `assets/images/gymLeaders/${GymBattle.gym.leaderName}.png`;
+        return `assets/images/npcs/${this.imageName ?? this.leaderName}.png`;
     }
 
     public getPokemonList() {
