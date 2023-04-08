@@ -291,7 +291,7 @@ class QuestLineHelper {
             {
                 clearedMessage: 'I see that you raise Pokémon with utmost care. A child like you would never understand what I hope to achieve. I shall step aside this time! I hope we meet again...',
                 npcDisplayName: 'Team Rocket Boss Giovanni',
-                npcImageName: 'Giovanni',
+                npcImageName: 'Team Rocket Boss Giovanni',
             });
         rocketKantoQuestLine.addQuest(clearRocketGameCorner);
 
@@ -310,7 +310,7 @@ class QuestLineHelper {
             {
                 clearedMessage: 'Arrgh!! I lost again!? Blast it all! You ruined our plans for Silph! But Team Rocket will never fall! $playername$, never forget that all Pokémon exist for Team Rocket! I must go, but I shall return!',
                 npcDisplayName: 'Team Rocket Boss Giovanni',
-                npcImageName: 'Giovanni',
+                npcImageName: 'Team Rocket Boss Giovanni',
             });
         rocketKantoQuestLine.addQuest(clearSilphCo2);
 

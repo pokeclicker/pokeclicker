@@ -2177,7 +2177,7 @@ TemporaryBattleList['Delta Giovanni'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Giovanni',
-        imageName: 'Giovanni',
+        imageName: 'Team Rocket Boss Giovanni',
         firstTimeRewardFunction: () => App.game.party.getPokemonByName('Beedrill').giveMegastone(),
     }
 );
