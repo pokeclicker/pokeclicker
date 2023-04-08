@@ -81,7 +81,7 @@ export default class ItemHandler {
         for (let i = 0; i < amountTotal; i++) {
             player.itemList[ItemHandler.stoneSelected()](player.itemList[ItemHandler.stoneSelected()]() - 1);
             amountUsed++;
-            if ((ItemList[ItemHandler.stoneSelected()]).use(1, ItemHandler.pokemonSelected())) {
+            if ((ItemList[ItemHandler.stoneSelected()]).use(1, ItemHandler.pokemonSelected()) || !App.game.party.getPokemonByName(this.pokemonSelected())) {
                 // Stop when a shiny is encountered or the base is removed from the party in Real Evo.
                 break;
             }
