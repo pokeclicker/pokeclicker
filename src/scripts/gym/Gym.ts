@@ -123,7 +123,7 @@ class Gym extends TownContent {
     }
 
     get imagePath(): string {
-        return `assets/images/npcs/${this.imageName ?? this.leaderName}.png`
+        return `assets/images/npcs/${this.imageName ?? this.leaderName}.png`;
     }
 
     public getPokemonList() {
