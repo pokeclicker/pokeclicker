@@ -665,6 +665,7 @@ export const SpriteCredits: Credit[] = [
         resources: [
             'Pinkan Rhydon',
             'Shadow Entei',
+            'Shadow Flaaffy',
             'Shadow Mantine',
             'Shadow Quagsire',
             'Shadow Raikou',
