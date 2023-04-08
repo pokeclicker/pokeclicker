@@ -87,7 +87,7 @@ export type PokemonListData = {
     }
 };
 
-function createPokemonArray<T extends readonly PokemonListData[] & Array<{name: V}>, V extends string>(...args: T) {
+function createPokemonArray<T extends readonly PokemonListData[] & Array<{ name: V }>, V extends string>(...args: T) {
     return args;
 }
 
@@ -26220,7 +26220,7 @@ export const pokemonList = createPokemonArray(
     },
     {
         'id': 875.01,
-        'name': 'Eiscue (No Ice Face)',
+        'name': 'Eiscue (Noice Face)',
         'type': [PokemonType.Ice],
         'base': {
             'hitpoints': 75,
