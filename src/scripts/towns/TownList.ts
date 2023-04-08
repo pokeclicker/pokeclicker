@@ -707,13 +707,13 @@ const ThemeparkTeamRocket4 = new NPC('Jessie and James', [
 const Informant1 = new NPC('Informant', [
     '<i>In a shady warehouse, you find the informant. He is a Mr. Mime, and he doesn\'t seem willing to divulge the information you need.</i>',
 ], {
-    image: 'assets/images/npcs/Mime Interview.png',
+    image: 'assets/images/npcs/specialNPCs/Mime Interview.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 2), new QuestLineStepCompletedRequirement('Detective Pikachu', 4, GameConstants.AchievementOption.less)]),
 });
 const Informant2 = new NPC('Informant', [
     '<i>The Mr. Mime signals to you that this is an illicit drug called R. It is frequently used in the underground fighting rings near the Battle Frontier.</i>',
 ], {
-    image: 'assets/images/npcs/Mime Interview.png',
+    image: 'assets/images/npcs/specialNPCs/Mime Interview.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 4), new QuestLineStepCompletedRequirement('Detective Pikachu', 6, GameConstants.AchievementOption.less)]),
 });
 
@@ -721,7 +721,7 @@ const Mewtwo1 = new NPC('Mewtwo', [
     'You were wise to seek me out. Howard Clifford has been deceiving you. He is the one making the R drug, and....',
     '<i>A sphere of energy envelops Mewtwo, and he is dragged away by some sort of helicopter. The helicopter has a logo on it: Clifford Industries!</i>',
 ], {
-    image: 'assets/images/npcs/Possessed Mewtwo.png',
+    image: 'assets/images/npcs/specialNPCs/Possessed Mewtwo.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 10), new QuestLineStepCompletedRequirement('Detective Pikachu', 12, GameConstants.AchievementOption.less)]),
 });
 
@@ -729,7 +729,7 @@ const Mewtwo2 = new NPC('Mewtwo', [
     'Thank you for your help. I have little to offer you in return, but perhaps this will help.',
     'I found Detective Pikachu\'s partner some days ago injured on the side of the road, and have nursed him back to health. I hope this reunion will suffice.',
 ], {
-    image: 'assets/images/npcs/Possessed Mewtwo.png',
+    image: 'assets/images/npcs/specialNPCs/Possessed Mewtwo.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Detective Pikachu', 15), new QuestLineStepCompletedRequirement('Detective Pikachu', 17, GameConstants.AchievementOption.less)]),
 });
 
@@ -1632,7 +1632,7 @@ const ProfElm = new ProfNPC('Prof. Elm',
 const searchForClues = new NPC('Search For Clues', [
     '<i>You look around the city in search of clues, and are set upon by a gang of angry Aipoms!</i>',
 ], {
-    image: 'assets/images/npcs/Aipom Alley.png',
+    image: 'assets/images/npcs/specialNPCs/Aipom Alley.png',
     requirement: new MultiRequirement([new QuestLineStartedRequirement('Detective Pikachu'), new QuestLineStepCompletedRequirement('Detective Pikachu', 1, GameConstants.AchievementOption.less)]),
 });
 
@@ -3287,7 +3287,7 @@ const SendoffSpringLakeTrio = new NPC('Lake Trio', [
     '<i>We bestow it upon you, charge it with the ghostly energy of the Distortion World.</i>',
     '<i>In order to do so, you must collect Ghost gems by defeating Ghost type Pokémon and find a Spooky Plate. There should be some in this dungeon, we can sense their energy.</i>',
 ],{
-    image: 'assets/images/npcs/Lake Trio.png',
+    image: 'assets/images/npcs/specialNPCs/Lake Trio.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Zero\'s Ambition', 9), new QuestLineStepCompletedRequirement('Zero\'s Ambition', 11, GameConstants.AchievementOption.less)])});
 
 const SendoffSpringZero1 = new NPC('Zero', [
@@ -3366,7 +3366,7 @@ const ManaphyBoulders = new NPC('Strange Boulders', [
     '<i>However, all three of the boulders look very similar... and they almost seem to have arms, as well.</i>',
     '<i>Perhaps these aren\'t boulders after all... and if they are what you think they are, a good soaking should settle the matter.</i>',
 ], {
-    image: 'assets/images/npcs/Strange Boulders.png',
+    image: 'assets/images/npcs/specialNPCs/Strange Boulders.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 0), new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 2, GameConstants.AchievementOption.less)]),
 });
 
@@ -3479,7 +3479,7 @@ const HappinyBoulders = new NPC('Strange Boulders', [
     '<i>You spray the boulders with your water types, and they... don\'t move. Huh, guess they really are boulders this time.</i>',
     '<i>Well, that just means that you can get some fighting-types and crush them with no regrets.</i>',
 ], {
-    image: 'assets/images/npcs/Strange Boulders.png',
+    image: 'assets/images/npcs/specialNPCs/Strange Boulders.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 22), new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 24, GameConstants.AchievementOption.less)]),
 });
 
@@ -4084,7 +4084,7 @@ const GiantChasmShadowTriad = new NPC('Shadow Triad', [
     'Listen well! We swore to be loyal to Lord Ghetsis since he saved us! The only thing we want is the world Lord Ghetsis desires! Even if we lose, Lord Ghetsis simply has to win...',
     'The only thing you can do is watch Lord Ghetsis use Kyurem to freeze Unova solid. That\'s all...',
 ], {
-    image: 'assets/images/npcs/Shadow Triad.png',
+    image: 'assets/images/npcs/specialNPCs/Shadow Triad.png',
     requirement: new MultiRequirement([new TemporaryBattleRequirement('Colress 3'), new TemporaryBattleRequirement('Ghetsis 1', 1, GameConstants.AchievementOption.less)]),
 });
 
@@ -6790,7 +6790,7 @@ const Calyrex1 = new NPC ('Calyrex', [
     'I once reigned over these lands as king, but now I have lost all but a fraction of my former strength. Even my loyal steeds have abandoned me.',
     'Would you do me the favour of protecting me from wild Pokémon at the Old Cemetery and Snowslide Slope? I wish to grow a Shaderoot Carrot and an Iceroot Carrot which I believe could draw out my loyal steeds.',
 ], {
-    image: 'assets/images/npcs/Possessed Peony.png',
+    image: 'assets/images/npcs/specialNPCs/Possessed Peony.png',
     requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Crown of Galar', 1), new QuestLineStepCompletedRequirement('The Crown of Galar', 3, GameConstants.AchievementOption.less )]),
 });
 
@@ -6799,7 +6799,7 @@ const Calyrex2 = new NPC ('Calyrex', [
     'What?! They are here already! But they appear to be unable to tell exactly where the scent of the carrots is coming from!',
     'The people of this place are in danger, you must fight them off!',
 ], {
-    image: 'assets/images/npcs/Possessed Peony.png',
+    image: 'assets/images/npcs/specialNPCs/Possessed Peony.png',
     requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Crown of Galar', 3), new QuestLineStepCompletedRequirement('The Crown of Galar', 5, GameConstants.AchievementOption.less )]),
 });
 
@@ -6808,7 +6808,7 @@ const Calyrex3 = new NPC ('Calyrex', [
     'Hmm... Perhaps now we know they are in this area, it would be better to search for them?',
     'I think that would be for the best. Once you capture them, I would appreciate it if you could bring them to the Crown Shrine at the mountain\'s peak.',
 ], {
-    image: 'assets/images/npcs/Possessed Peony.png',
+    image: 'assets/images/npcs/specialNPCs/Possessed Peony.png',
     requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Crown of Galar', 5), new QuestLineStepCompletedRequirement('The Crown of Galar', 7, GameConstants.AchievementOption.less )]),
 });
 
@@ -6818,7 +6818,7 @@ const Calyrex4 = new NPC ('Calyrex', [
     'They can be used to combine myself and my steeds. However, it is incomplete. They must have have hair from the manes of my steeds intertwined to work. I expect they will occasionally leave such hair behind upon being defeated.',
     'And to that point... I have a suggestion. If you are able to capture me, it will prove your worth beyond any doubt, and I will lend you my strength on your journey. Once you have readied yourself, come face me!',
 ], {
-    image: 'assets/images/npcs/Possessed Peony.png',
+    image: 'assets/images/npcs/speciaNPCs/Possessed Peony.png',
     requirement:  new MultiRequirement([new QuestLineStepCompletedRequirement('The Crown of Galar', 7), new QuestLineStepCompletedRequirement('The Crown of Galar', 9, GameConstants.AchievementOption.less )]),
 });
 const Calyrex5 = new NPC ('Calyrex', [

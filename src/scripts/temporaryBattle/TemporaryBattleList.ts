@@ -1350,7 +1350,7 @@ TemporaryBattleList['Manaphy Egg Protectors'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Manaphy Egg Protectors',
-        imageName: 'Manaphy Egg',
+        imageName: 'specialNPCs/Manaphy Egg',
         firstTimeRewardFunction: () => {
             App.game.party.gainPokemonByName('Manaphy');
         },
@@ -2414,6 +2414,7 @@ TemporaryBattleList['Mime Interview'] = new TemporaryBattle(
     undefined,
     {
         hideTrainer: true,
+        imageName: 'specialNPCs/Mime Interview'
     }
 );
 TemporaryBattleList['Underground Fighting Ring'] = new TemporaryBattle(
@@ -2440,6 +2441,7 @@ TemporaryBattleList['Lab Ambush'] = new TemporaryBattle(
     undefined,
     {
         hideTrainer: true,
+        imageName: 'specialNPCs/Lab Ambush'
     }
 );
 TemporaryBattleList.Imposter = new TemporaryBattle(
@@ -2461,6 +2463,7 @@ TemporaryBattleList['Possessed Mewtwo'] = new TemporaryBattle(
     undefined,
     {
         hideTrainer: true,
+        imageName: 'specialNPCs/Possessed Mewtwo'
     }
 );
 TemporaryBattleList.Riot = new TemporaryBattle(
@@ -3168,7 +3171,9 @@ TemporaryBattleList['Battle Royal'] = new TemporaryBattle(
         new GymPokemon('Torracat', 132593929, 20, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Water)),
     ],
     'The battle is over!',
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 6)]
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 6)],
+    undefined,
+    {imageName: 'specialNPCs/Battle Royal'}
 );
 TemporaryBattleList['Plumeria 1'] = new TemporaryBattle(
     'Plumeria 1',
@@ -3193,7 +3198,7 @@ TemporaryBattleList['Ultra Wormhole'] = new TemporaryBattle(
     undefined,
     {
         hideTrainer: true,
-        imageName: 'Wormhole',
+        imageName: 'specialNPCs/Wormhole',
     }
 );
 TemporaryBattleList['Hau 5'] = new TemporaryBattle(
@@ -3258,7 +3263,7 @@ TemporaryBattleList.Necrozma = new TemporaryBattle(
     'Necrozma retreated into the Ultra Wormhole',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Vast Poni Canyon'))],
     undefined,
-    {imageName: 'Wormhole'}
+    {imageName: 'specialNPCs/Wormhole'}
 );
 TemporaryBattleList['Ultra Megalopolis'] = new TemporaryBattle(
     'Ultra Megalopolis',
@@ -3271,7 +3276,7 @@ TemporaryBattleList['Ultra Megalopolis'] = new TemporaryBattle(
             App.game.quests.getQuestLine('Mina\'s Trial').beginQuest();
         },
         hideTrainer: true,
-        imageName: 'Wormhole',
+        imageName: 'specialNPCs/Wormhole',
     }
 );
 TemporaryBattleList['Captain Mina'] = new TemporaryBattle(
@@ -3963,6 +3968,7 @@ TemporaryBattleList.Mirages = new TemporaryBattle(
     undefined,
     {
         hideTrainer: true,
+        imageName: 'specialNPCs/Mirages'
     }
 );
 TemporaryBattleList['Hop 2'] = new TemporaryBattle(
@@ -4566,7 +4572,7 @@ TemporaryBattleList['Zarude Tribe 1'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Zarude Tribe',
-        imageName: 'Zarude Tribe',
+        imageName: 'specialNPCs/Zarude Tribe',
         hideTrainer: true,
     }
 );
@@ -4585,7 +4591,7 @@ TemporaryBattleList['Zarude Tribe 2'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Zarude Tribe',
-        imageName: 'Zarude Tribe',
+        imageName: 'specialNPCs/Zarude Tribe',
         hideTrainer: true,
     }
 );
@@ -4604,7 +4610,7 @@ TemporaryBattleList['Zarude Tribe 3'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Zarude Tribe',
-        imageName: 'Zarude Tribe',
+        imageName: 'specialNPCs/Zarude Tribe',
         hideTrainer: true,
     }
 );
@@ -4710,6 +4716,7 @@ TemporaryBattleList['Dyna Tree Birds'] = new TemporaryBattle(
     {
         hideTrainer: true,
         returnTown: 'Dyna Tree Hill',
+        imageName: 'specialNPCs/Dyna Tree Birds'
     }
 );
 TemporaryBattleList['Galarian Articuno 1'] = new TemporaryBattle(
