@@ -6,6 +6,7 @@
 ///<reference path="BattleCafe.ts"/>
 ///<reference path="../../declarations/requirements/MultiRequirement.d.ts"/>
 ///<reference path="../Safari/SafariTownContent.ts"/>
+///<reference path="PurifyChamber.ts"/>
 
 const TownList: { [name: string]: Town } = {};
 
@@ -2882,7 +2883,7 @@ TownList['Relic Stone'] = new Town(
     'Relic Stone',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new MoveToDungeon(dungeonList['Relic Cave'])],
+    [new MoveToDungeon(dungeonList['Relic Cave']), new PurifyChamberTownContent()],
     {
         requirements: [new DevelopmentRequirement()],
     }
