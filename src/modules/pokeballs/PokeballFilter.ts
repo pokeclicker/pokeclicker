@@ -56,7 +56,9 @@ export default class PokeballFilter {
     }
 
     get description(): string {
-        return `${this.inverted()
+        return `${
+            this.enabled() ? '' : 'This filter is disabled</br></br>'
+        }${this.inverted()
             ? 'This filter matches any pokemon except those that:'
             : 'This filter matches pokemon that:'
         } ${
