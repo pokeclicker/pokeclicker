@@ -13,7 +13,7 @@ aria-labelledby="purifyChamberModalLabel">
             >
             </select>
             <img data-bind="if: App.game.purifyChamber.selectedPokemon(), attr: { src: PokemonHelper.getImage(App.game.purifyChamber.selectedPokemon().id) }"/>
-            <button class="btn btn-primary" onclick="App.game.purifyChamber.purify()">Purify</button>
+            <button data-bind="if: App.game.purifyChamber.canPurify()" class="btn btn-primary" onclick="App.game.purifyChamber.purify()">Purify</button>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
