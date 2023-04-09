@@ -7,12 +7,12 @@ aria-labelledby="purifyChamberModalLabel">
             </div>
             <div class="modal-body">
                 <select id="purify-chamber-selector" class="custom-select" onchange="App.game.purifyChamber.selectedPokemon(value)" style="margin-right: 8px"
-                        data-bind="options: App.game.party.caughtPokemon().filter((p) => p.shadow == GameConstants.ShadowStatus.Shadow),
+                        data-bind="options: App.game.party.caughtPokemon.filter((p) => p.shadow == GameConstants.ShadowStatus.Shadow),
                                optionsText: 'pokemon',
                                value: App.game.purifyChamber.selectedPokemon"
                 >
                 </select>
-                <img data-bind="if: App.game.purifyChamber.selectedPokemon(), attr: { src: PokemonHelper.getImage(App.game.purifyChamber.selectedPokemon().id) }"/>
+                <img data-bind="if: App.game.purifyChamber.selectedPokemon(), attr: { src: App.game.purifyChamber.selectedPokemon() ? PokemonHelper.getImage(App.game.purifyChamber.selectedPokemon().id) : '' }"/>
                 <button data-bind="if: App.game.purifyChamber.canPurify()" class="btn btn-primary" onclick="App.game.purifyChamber.purify()">Purify</button>
             </div>
             <div class="modal-footer">

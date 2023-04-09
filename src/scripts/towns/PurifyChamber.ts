@@ -52,10 +52,14 @@ class PurifyChamber implements Saveable {
     }
 
     fromJSON(json: Record<string, any>): void {
-        let selectedPokemon = App.game.party.getPokemon(json.selectedPokemon);
-        if (selectedPokemon.shadow != GameConstants.ShadowStatus.Shadow) {
-            selectedPokemon = undefined;
+        if (json) {
+            if (json.selectedPokemon) {
+                let selectedPokemon = App.game.party.getPokemon(json.selectedPokemon);
+                if (selectedPokemon.shadow != GameConstants.ShadowStatus.Shadow) {
+                    selectedPokemon = undefined;
+                }
+                this.selectedPokemon(selectedPokemon);
+            }
         }
-        this.selectedPokemon(selectedPokemon);
     }
 }
