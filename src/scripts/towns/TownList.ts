@@ -5532,7 +5532,7 @@ const RotomDex1 = new NPC('Kukui\'s Gift', [
     '<i>Rotom-Dex:</i> Zzzt! Pleazzzure to meet you! I\'ll be your guide on you tour of Alola- izzz what I would say if you didn\'t already have a Pokédex of your own! What\'zzz the deal with that old model anyway? I\'m much cooler and shinier than that thing!',
     'If you\'re ever feelin\' lost, remember to come see me at the professor\'s house! I know everything there izzz to do on thezzze islands!',
 ], {
-    image: 'assets/images/npcs/Rotom-Dex and Kukui.png',
+    image: 'assets/images/npcs/specialNPCs/Rotom-Dex and Kukui.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 3), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 4, GameConstants.AchievementOption.less)]),
 });
 const RotomDexMelemele = new NPC('Rotom Dex', [
@@ -5541,7 +5541,7 @@ const RotomDexMelemele = new NPC('Rotom Dex', [
     '<b><i>Islandzzz vizzzited: 1/4</i></b>',
     '<b><i>Current Destination: Melemele</i></b>',
 ], {
-    image: 'assets/images/npcs/Rotom-Dex.png',
+    image: 'assets/images/npcs/specialNPCs/Rotom-Dex.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 4), new QuestLineCompletedRequirement('Welcome to paradise, cousin!', GameConstants.AchievementOption.less)]),
 });
 const RotomDexAkala = new NPC('Rotom Dex', [
@@ -5550,7 +5550,7 @@ const RotomDexAkala = new NPC('Rotom Dex', [
     '<b><i>Islandzzz vizzzited: 2/4</i></b>',
     '<b><i>Current Destination: Akala</i></b>',
 ], {
-    image: 'assets/images/npcs/Rotom-Dex.png',
+    image: 'assets/images/npcs/specialNPCs/Rotom-Dex.png',
     requirement: new QuestLineCompletedRequirement('Welcome to paradise, cousin!'),
 });
 const LillieCity = new NPC('Lillie', [
