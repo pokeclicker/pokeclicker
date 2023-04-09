@@ -294,7 +294,7 @@ export const SpriteCredits: Credit[] = [
             'Shadow Metagross',
             'Shadow Miltank',
             'Shadow Murkrow',
-            'Shadow Numel'
+            'Shadow Numel',
             'Shadow Paras',
             'Shadow Ralts',
             'Shadow Remoraid',
@@ -306,7 +306,7 @@ export const SpriteCredits: Credit[] = [
             'Shadow Suicune',
             'Shadow Teddiursa',
             'Shadow Tropius',
-            'Shadow Ursaring'
+            'Shadow Ursaring',
             'Shadow Voltorb',
             'Shady Salesman',
             'Spooky Togepi (shiny)',
@@ -688,7 +688,7 @@ export const SpriteCredits: Credit[] = [
             'Shadow Forretress',
             'Shadow Gligar',
             'Shadow Granbull',
-            'Shadow Heracross'
+            'Shadow Heracross',
             'Shadow Ledian',
             'Shadow Mantine',
             'Shadow Mareep',
