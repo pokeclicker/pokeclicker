@@ -2926,37 +2926,37 @@ TownList['Realgam Tower'] = new Town(
     {
         requirements: [new DevelopmentRequirement()],
     }
-    );
+);
 
 TownList['Realgam Colosseum'] = new Town(
-        'Realgam Colosseum',
-        GameConstants.Region.hoenn,
-        GameConstants.HoennSubRegions.Orre,
-        [new MoveToDungeon(dungeonList['Realgam Colosseum Battles'])],
-        {
-            requirements: [new DevelopmentRequirement()],
-        }
-    );
+    'Realgam Colosseum',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [new MoveToDungeon(dungeonList['Realgam Colosseum Battles'])],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
 
 TownList['Eclo Canyon'] = new Town(
-        'Eclo Canyon',
-        GameConstants.Region.hoenn,
-        GameConstants.HoennSubRegions.Orre,
-        [new MoveToDungeon(dungeonList['Snagem Hideout'])],
-        {
-            requirements: [new DevelopmentRequirement()],
-        }
-    );
+    'Eclo Canyon',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [new MoveToDungeon(dungeonList['Snagem Hideout'])],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
 
 TownList['Deep Colosseum'] = new Town(
-        'Deep Colosseum',
-        GameConstants.Region.hoenn,
-        GameConstants.HoennSubRegions.Orre,
-        [new MoveToDungeon(dungeonList['Deep Colosseum Battles'])],
-        {
-            requirements: [new DevelopmentRequirement()],
-        }
-    );
+    'Deep Colosseum',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [new MoveToDungeon(dungeonList['Deep Colosseum Battles'])],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
 
 TownList['Orre Colosseum'] = new Town(
     'Orre Colosseum',
