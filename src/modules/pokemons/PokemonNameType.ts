@@ -467,6 +467,7 @@ export type PokemonNameType
     | 'Tyranitar'
     | 'Mega Tyranitar'
     | 'Lugia'
+    | 'XD001'
     | 'Ho-Oh'
     | 'Celebi'
     | 'Grinch Celebi'
