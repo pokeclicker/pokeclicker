@@ -39,7 +39,27 @@ export default class PokeballFilters implements Feature {
         return filter.options.pokerus !== undefined && !App.game.keyItems.hasKeyItem(KeyItemType.Pokerus_virus);
     }
 
-    initialize() {}
+    initialize() {
+        this.testSettings.caught.observableValue.subscribe((isCaught) => {
+            if (!isCaught) {
+                // If not caught, we can't have shiny or shadow either
+                this.testSettings.caughtShiny.observableValue(false);
+                this.testSettings.caughtShadow.observableValue(false);
+            }
+        }, undefined, undefined);
+
+        this.testSettings.caughtShiny.observableValue.subscribe((isCaughtShiny) => {
+            if (isCaughtShiny) {
+                this.testSettings.caught.observableValue(true);
+            }
+        }, undefined, undefined);
+
+        this.testSettings.caughtShadow.observableValue.subscribe((isCaughtShadow) => {
+            if (isCaughtShadow) {
+                this.testSettings.caught.observableValue(true);
+            }
+        }, undefined, undefined);
+    }
 
     canAccess() { return true; }
 
