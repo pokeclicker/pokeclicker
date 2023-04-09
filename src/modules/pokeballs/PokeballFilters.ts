@@ -7,7 +7,6 @@ import PokeballFilter, { PokeballFilterParams } from './PokeballFilter';
 import { PokeballFilterOptions, settingsMap } from './PokeballFilterOptions';
 import Notifier from '../notifications/Notifier';
 import NotificationOption from '../notifications/NotificationOption';
-import Sortable from 'sortablejs';
 
 export default class PokeballFilters implements Feature {
     name = 'Pokeball Filters';
@@ -40,19 +39,7 @@ export default class PokeballFilters implements Feature {
         return filter.options.pokerus !== undefined && !App.game.keyItems.hasKeyItem(KeyItemType.Pokerus_virus);
     }
 
-    initialize() {
-        Sortable.create(document.getElementById('pokeballFilterConfigs'), {
-            animation: 100,
-            group: 'pokeballFilters',
-            draggable: '.pokeballFilterWrapper',
-            handle: '.pokeballFilterDragHandle',
-            dataIdAttr: 'data-key',
-            sort: true,
-            delay: 500,
-            delayOnTouchOnly: true,
-            touchStartThreshold: 20,
-        });
-    }
+    initialize() {}
 
     canAccess() { return true; }
 
@@ -77,7 +64,8 @@ export default class PokeballFilters implements Feature {
     }
 
     createFilter() {
-        this.list.push(new PokeballFilter('New Filter', {}));
+        // Starts disabled so it doesn't interfere with existing filters
+        this.list.unshift(new PokeballFilter('New Filter', {}, undefined, false));
     }
 
     addFilterOption(filter: PokeballFilter, option: keyof PokeballFilterOptions) {

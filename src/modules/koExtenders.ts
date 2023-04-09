@@ -1,6 +1,8 @@
 /* eslint-disable no-param-reassign */
 /// <reference path="./koExtenders.d.ts" />
 
+import Sortable from 'sortablejs';
+
 // Only numeric values allowed - usage: ko.observable(0).extend({ numeric: 0 });
 ko.extenders.numeric = (target: ko.Subscribable, precision: number) => {
     // create a writable computed observable to intercept writes to our observable
@@ -61,5 +63,50 @@ ko.bindingHandlers.contentEditable = {
         element.textContent = value();
         element.contentEditable = 'true';
         element.addEventListener('blur', onBlur);
+    },
+};
+
+ko.bindingHandlers.sortable = {
+    init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+        bindingContext.extend({ sortableController: null });
+        // Needed to remove elements when the knockout array removes something
+        ko.utils.domNodeDisposal.addDisposeCallback(element, () => bindingContext.sortableController?.destroy());
+        return ko.bindingHandlers.template.init(element, valueAccessor);
+    },
+    update: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+        bindingContext.sortableController?.destroy();
+
+        const value = ko.unwrap(valueAccessor());
+        const options = {
+            // defaults
+            animation: 100,
+            sort: true,
+            delay: 500,
+            delayOnTouchOnly: true,
+            touchStartThreshold: 20,
+
+            // override with options passed through knockout binding
+            ...(value.options ?? {}),
+
+            // handle updating underlying knockout array when moving items
+            onEnd: (evt, originalEvt) => {
+                value.options?.onEnd?.(evt, originalEvt);
+
+                const { oldIndex, newIndex } = evt;
+                const list = [...value.foreach()];
+                const movedItem = list.splice(oldIndex, 1)[0];
+
+                const newList = [
+                    ...list.slice(0, newIndex),
+                    movedItem,
+                    ...list.slice(newIndex),
+                ];
+                value.foreach(newList);
+            },
+        };
+
+        bindingContext.sortableController = Sortable.create(element, options);
+
+        return ko.bindingHandlers.template.update(element, valueAccessor, allBindings, viewModel, bindingContext);
     },
 };
