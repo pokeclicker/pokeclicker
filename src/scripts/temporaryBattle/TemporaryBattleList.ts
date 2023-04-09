@@ -2937,7 +2937,7 @@ TemporaryBattleList['Hauoli Ilima'] = new TemporaryBattle(
     {
         displayName: 'Captain Ilima',
         returnTown: 'Hau\'oli City',
-        imageName: '../gymLeaders/Ilima',
+        imageName: 'Ilima',
     }
 );
 TemporaryBattleList['Alola 2 Skull'] = new TemporaryBattle(
@@ -2964,7 +2964,7 @@ TemporaryBattleList['Seaward Cave Recon Squad'] = new TemporaryBattle(
     {
         displayName: 'Recon Squad',
         returnTown: 'Seaward Cave',
-        imageName: '../npcs/Recon Squad (Ultra Moon)',
+        imageName: 'Recon Squad (Ultra Moon)',
     }
 );
 TemporaryBattleList['Hau 3'] = new TemporaryBattle(

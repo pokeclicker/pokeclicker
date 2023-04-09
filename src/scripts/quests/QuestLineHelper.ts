@@ -1830,7 +1830,7 @@ class QuestLineHelper {
             {
                 clearedMessage: 'My thanks to you and your Pokémon. These grunts are always bothering me and my trial site. You... you\'re the trainer who cleared the Trainers\' School so effortlessly! Allow me to see if you\'re ready for my trial!',
                 npcDisplayName: 'Ilima',
-                npcImageName: '../gymLeaders/Ilima',
+                npcImageName: 'Ilima',
             });
         melemeleAlolaQuestLine.addQuest(battleSkullGrunts1);
 
