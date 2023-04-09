@@ -41,12 +41,6 @@
                                 <div class="pokeballFilterDragHandle bg-dark text-white"></div>
                                 <div class="pokeballFilter">
                                     <div class="pokeballFilterHeader">
-                                        <div class="pokeballFilterActionButtons">
-                                            <button class="btn-circle bg-danger text-white deleteButton"
-                                                data-bind="click: () => App.game.pokeballFilters.deleteFilter($data)">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
                                         <div class="pokeballFilterName">
                                             <input class="form-control" data-bind="textInput: $data._name"></span>
                                         </div>
@@ -129,6 +123,12 @@
                                             data-toggle="collapse"
                                             data-bind="attr: { href: `#pokeball-filter-options-${$index()}` }"
                                     >Toggle Settings</button>
+                                </div>
+                                <div class="pokeballFilterDelete">
+                                    <button class="btn bg-danger text-white deleteButton"
+                                        data-bind="click: () => App.game.pokeballFilters.deleteFilter($data)">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
                                 </div>
                             </div>
                         </div>
