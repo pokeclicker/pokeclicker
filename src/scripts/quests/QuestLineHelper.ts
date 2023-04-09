@@ -1989,11 +1989,11 @@ class QuestLineHelper {
     public static createMelemeleAlolaQuestLine() {
         const melemeleAlolaQuestLine = new QuestLine('Welcome to paradise, cousin!', 'See the sights this small tropical island has to offer!');
         // 0
-        const talkToLillie1 = new TalkToNPCQuest(Lillie1, 'Take a stroll to Iki Town! They say the sacred ruins in the forest behind it is home to their legendary guardian. Perhaps a fateful encounter awaits...?');
+        const talkToLillie1 = new TalkToNPCQuest(Lillie1, 'Talk to the locals of Iki Town! They say the sacred ruins in the forest behind it is home to their legendary guardian. Perhaps a fateful encounter awaits?');
         melemeleAlolaQuestLine.addQuest(talkToLillie1);
 
         // 1
-        const battleMelemeleSpearow = new CustomQuest (1, 0,  'Protect the mysterious girl\'s Pokémon!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Melemele Spearow')](), undefined, undefined,
+        const battleMelemeleSpearow = new CustomQuest (1, 0,  'Protect the mysterious girl\'s Pokémon! Battle the Spearow in Melemele Woods.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Melemele Spearow')](), undefined, undefined,
             {
                 clearedMessage: '<i>The bridge collapses beneath you and the floating Pokémon, and you both fall to the turbulent cascades below... But a swift creature zaps to your rescue! It seems fixated on the safety of the little one.</i>',
                 npcDisplayName: 'Melemele Guardian',
@@ -2011,7 +2011,7 @@ class QuestLineHelper {
         melemeleAlolaQuestLine.addQuest(new MultipleQuestsQuest([
             talkToReconSquad1,
             talkToReconSquad2,
-        ],'Now that you\'re all acquainted, time to enjoy Iki Town\'s festival! Maybe you\'ll even find a fellow tourist to talk to.'));
+        ],'Now that you\'re all acquainted, time to enjoy Iki Town\'s festival! Mingle with some fellow tourists after battling Hau.'));
 
         // 4
         const talkToRotomDex1 = new TalkToNPCQuest(RotomDex1, 'Lillie says the professor has a gift for you! You didn\'t think she would take that refund joke seriously. Go clear things up at professor Kukui\'s house past Hau\'oli Outskirts.');
@@ -2027,7 +2027,7 @@ class QuestLineHelper {
         melemeleAlolaQuestLine.addQuest(clearTrainersSchool);
 
         // 6
-        const battleSkullGrunts1 = new CustomQuest (1, 0,  'Explore the city. Maybe beat up a grunt or two while you\'re at it.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Hauoli Skull')](), undefined, undefined,
+        const battleSkullGrunts1 = new CustomQuest (1, 0,  'Explore Hau\'oli City. Maybe beat up a grunt or two while you\'re at it.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Hauoli Skull')](), undefined, undefined,
             {
                 clearedMessage: 'My thanks to you and your Pokémon. These grunts are always bothering me and my trial site. You... you\'re the trainer who cleared the Trainers\' School so effortlessly! Allow me to see if you\'re ready for my trial!',
                 npcDisplayName: 'Ilima',
@@ -2036,41 +2036,41 @@ class QuestLineHelper {
         melemeleAlolaQuestLine.addQuest(battleSkullGrunts1);
 
         // 7
-        const battleIlimaHauoli = new CustomQuest (1, 0,  'Prove to Ilima you are worthy of his trial.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Hauoli Ilima')]());
-        const battleSkullGrunts2 = new CustomQuest (1, 0,  'Get rid of the nuisance on Route 2.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Alola 2 Skull')]());
+        const battleIlimaHauoli = new CustomQuest (1, 0,  'Battle Ilima in Hau\'oli City and prove you are worthy of his trial.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Hauoli Ilima')]());
+        const battleSkullGrunts2 = new CustomQuest (1, 0,  'Get rid of the Skull grunts on Route 2.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Alola 2 Skull')]());
         melemeleAlolaQuestLine.addQuest(new MultipleQuestsQuest([
             battleIlimaHauoli,
             battleSkullGrunts2,
         ],'Ilima\'s trial sounds like fun! Battle your way to Verdant Cavern on Route 2.'));
 
         // 8
-        const clearVerdantCavern = new CustomQuest(1, 0, 'Clear Ilima\'s Trial at Verdant Cavern.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Verdant Cavern')]());
-        const talkToReconSquad3 = new TalkToNPCQuest(ReconSquad3, 'Meet the Recon Squad outside Verdant Cavern.');
+        const clearVerdantCavern = new CustomQuest(1, 0, 'Clear Verdant Cavern to complete Ilima\'s Trial.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Verdant Cavern')]());
+        const talkToReconSquad3 = new TalkToNPCQuest(ReconSquad3, 'Meet the Recon Squad after clearing Verdant Cavern.');
         melemeleAlolaQuestLine.addQuest(new MultipleQuestsQuest([
             clearVerdantCavern,
             talkToReconSquad3,
-        ],'Take on your first Alolan Trial!'));
+        ],'Take care of business at Verdant Cavern.'));
 
         // 9
-        const clearMelemeleMeadow = new CustomQuest(1, 0, 'Continue past Route 3 and head to Melemele Meadow.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Melemele Meadow')](), undefined, undefined,
+        const clearMelemeleMeadow = new CustomQuest(1, 0, 'You hear yelling from the other side of the island. Continue past Route 3 and clear Melemele Meadow.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Melemele Meadow')](), undefined, undefined,
             {
-                clearedMessage: 'Pew!<br><br><i>Leaves</i>',
+                clearedMessage: 'Pew!<br><br><i>Nebby flees.</i>',
                 npcDisplayName: 'Nebby',
                 npcImageName: '../pokemon/789',
             });
         melemeleAlolaQuestLine.addQuest(clearMelemeleMeadow);
 
         // 10
-        const clearSeawardCave = new CustomQuest(1, 0, 'What the- Nebby escaped into a cave that connects to the ocean! Explore further.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Seaward Cave')](), undefined, undefined,
+        const clearSeawardCave = new CustomQuest(1, 0, 'What the- Nebby escaped into a hole in the ground! Clear Seaward Cave.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Seaward Cave')](), undefined, undefined,
             {
-                clearedMessage: 'Pew~<br><br><i>Stays</i>',
+                clearedMessage: 'Pew~<br><br><i>Nebby stays. It seems like it\'s following you now!</i>',
                 npcDisplayName: 'Nebby',
                 npcImageName: '../pokemon/789',
             });
         melemeleAlolaQuestLine.addQuest(clearSeawardCave);
 
         // 11
-        const battleReconSquad1 = new CustomQuest (1, 0,  'The Recon Squad is challenging you to a battle. Show them the thrill of the fight!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Seaward Cave Recon Squad')]());
+        const battleReconSquad1 = new CustomQuest (1, 0,  'The Recon Squad is awaiting a battle in Seaward Cave. Show them the thrill of the fight!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Seaward Cave Recon Squad')]());
         melemeleAlolaQuestLine.addQuest(battleReconSquad1);
 
         // 12
@@ -2091,7 +2091,7 @@ class QuestLineHelper {
         melemeleAlolaQuestLine.addQuest(talkToLillie3);
 
         // end
-        const talkToLillie4 = new TalkToNPCQuest(Lillie4, 'It seems Lillie still has something on her mind, but battles are more important! Talk to her in Iki Town after you have defeated Melemele Island\'s kahuna.');
+        const talkToLillie4 = new TalkToNPCQuest(Lillie4, 'It seems Lillie still has something on her mind, but battles are more important! Talk to her in Iki Town after you have defeated Hau and Melemele Island\'s kahuna- Hala!');
         melemeleAlolaQuestLine.addQuest(talkToLillie4);
 
         App.game.quests.questLines().push(melemeleAlolaQuestLine);

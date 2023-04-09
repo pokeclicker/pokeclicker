@@ -5491,7 +5491,7 @@ const Lillie2 = new NPC('Mysterious Girl', [
     image: 'assets/images/npcs/Lillie.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 1), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 2, GameConstants.AchievementOption.less)]),
 });
-const LillieMahaloTrail = new NPC('Lillie', [
+const LillieMahaloTrail = new NPC('Lillie with Nebby', [
     'Please... Don\'t tell anyone about this... About seeing Nebby... It\'s...it\'s a secret, OK? Um...',
 ], {
     image: 'assets/images/npcs/Lillie.png',
@@ -5576,20 +5576,21 @@ const LillieMelemeleMeadow1 = new NPC('Lillie', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 8), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 11, GameConstants.AchievementOption.less)]),
 });
 const Lillie3 = new NPC('Lillie', [
-    'Nebby! Oh thank goodness you\'re safe. Here $playername$. I mean to give these back in Hau\'oli but you were too busy reading other dialog boxes. It seems Hau is also here. Are you two having another battle?',
+    'Nebby! Oh thank goodness you\'re safe. Here $playername$. I mean to give these back in Hau\'oli but forgot. It\'s the least I can do after all the running around I\'ve made you do.',
+    'Oh. It seems Hau is also here. Are you two having another battle?',
 ], {
     image: 'assets/images/npcs/Lillie.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 11), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 12, GameConstants.AchievementOption.less)]),
 });
-const LillieMelemeleMeadow2 = new NPC('Lillie again', [
-    'You know, I read something interesting in a book once... Some Pokémon can change forms depending on external factors. Isn\'t that interesting? How a pokemon can look and behave so differently, yet still be the same being... I thought it was, anyway.',
+const LillieMelemeleMeadow2 = new NPC('Lillie with Nebby', [
+    'You know, I read something interesting in a book once... Some Pokémon can change forms depending on external factors. Isn\'t that interesting? How a Pokémon can look and behave so differently, yet still be the same being... I thought it was, anyway.',
     '...',
 ], {
     image: 'assets/images/npcs/Lillie.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 12), new QuestLineCompletedRequirement('Welcome to paradise, cousin!', GameConstants.AchievementOption.less)]),
 });
 const Lillie4 = new NPC('Lillie', [
-    'Nebby is... Its real home is far away from here. And I want to help it get home. Thank you for nonverbally agreeing to help me. The two of us will be heading to the next island as well!',
+    'Nebby is... Its real home is far away from here. And I want to help it get home. Thank you for helping me. The two of us will be heading to the next island as well!',
 ], {
     image: 'assets/images/npcs/Lillie.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 12), new GymBadgeRequirement(BadgeEnums.FightiniumZ), new QuestLineCompletedRequirement('Welcome to paradise, cousin!', GameConstants.AchievementOption.less)]),
