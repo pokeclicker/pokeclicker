@@ -2823,7 +2823,7 @@ TownList['Outskirt Stand'] = new Town(
     'Outskirt Stand',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new PurifyChamberTownContent()],
+    [],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), new DevelopmentRequirement()],
     }
@@ -2883,7 +2883,7 @@ TownList['Relic Stone'] = new Town(
     'Relic Stone',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new MoveToDungeon(dungeonList['Relic Cave'])],
+    [new MoveToDungeon(dungeonList['Relic Cave']), new PurifyChamberTownContent()],
     {
         requirements: [new DevelopmentRequirement()],
     }
