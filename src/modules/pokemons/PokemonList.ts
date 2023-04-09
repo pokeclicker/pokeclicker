@@ -87,7 +87,7 @@ export type PokemonListData = {
     }
 };
 
-function createPokemonArray<T extends readonly PokemonListData[] & Array<{name: V}>, V extends string>(...args: T) {
+function createPokemonArray<T extends readonly PokemonListData[] & Array<{ name: V }>, V extends string>(...args: T) {
     return args;
 }
 
@@ -5456,7 +5456,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 189,
         'eggCycles': 5,
-        // 'evolutions': [MegaEvolution('Gyarados', 'Mega Gyarados')],
+        'evolutions': [MegaEvolution('Gyarados', 'Mega Gyarados')],
         'base': {
             'hitpoints': 95,
             'attack': 125,
@@ -8894,6 +8894,26 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 249.01,
+        'name': 'XD001',
+        'catchRate': 3,
+        'type': [PokemonType.Psychic, PokemonType.Flying],
+        'levelType': LevelType.slow,
+        'exp': 306,
+        'eggCycles': 120,
+        'base': {
+            'hitpoints': 106,
+            'attack': 90,
+            'specialAttack': 90,
+            'defense': 130,
+            'specialDefense': 154,
+            'speed': 110,
+        },
+        'gender': {
+            'type': Genders.Genderless,
+        },
+    },
+    {
         'id': 250,
         'name': 'Ho-Oh',
         'catchRate': 3,
@@ -9026,7 +9046,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 239,
         'catchRate': 45,
-        // 'evolutions': [MegaEvolution('Sceptile', 'Mega Sceptile')],
+        'evolutions': [MegaEvolution('Sceptile', 'Mega Sceptile')],
         'base': {
             'hitpoints': 70,
             'attack': 85,
@@ -9110,7 +9130,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 239,
         'catchRate': 45,
-        // 'evolutions': [MegaEvolution('Blaziken', 'Mega Blaziken')],
+        'evolutions': [MegaEvolution('Blaziken', 'Mega Blaziken')],
         'base': {
             'hitpoints': 80,
             'attack': 120,
@@ -9194,7 +9214,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 241,
         'catchRate': 45,
-        // 'evolutions': [MegaEvolution('Swampert', 'Mega Swampert')],
+        'evolutions': [MegaEvolution('Swampert', 'Mega Swampert')],
         'base': {
             'hitpoints': 100,
             'attack': 110,
@@ -26220,7 +26240,7 @@ export const pokemonList = createPokemonArray(
     },
     {
         'id': 875.01,
-        'name': 'Eiscue (No Ice Face)',
+        'name': 'Eiscue (Noice Face)',
         'type': [PokemonType.Ice],
         'base': {
             'hitpoints': 75,

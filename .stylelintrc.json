@@ -1,0 +1,14 @@
+{
+  "extends": ["stylelint-config-standard-less"],
+  "customSyntax": "postcss-less",
+  "rules": {
+    "number-max-precision": 5,
+    "selector-id-pattern": null,
+    "selector-class-pattern": null,
+    "custom-property-pattern": null,
+    "keyframes-name-pattern": null,
+    "color-function-notation": "legacy",
+    "no-descending-specificity": null,
+    "selector-type-no-unknown": [true, { "ignoreTypes": ["knockout"] }]
+  }
+}
