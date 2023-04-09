@@ -87,6 +87,21 @@ export default class PokeballFilters implements Feature {
         filter.options = newOptions;
     }
 
+    async reset() {
+        if (!(await Notifier.confirm({
+            title: 'Reset filters to defaults',
+            message: 'Are you sure you want to reset your filters to the default ones?',
+        }))) {
+            return;
+        }
+
+        const defaultFilters = this.presets.map(({ name, options, ball, enabled, inverted }) => (
+            new PokeballFilter(name, options, ball, enabled, inverted)
+        ));
+
+        this.list(defaultFilters);
+    }
+
     toJSON() {
         return {
             list: this.list().map((pf) => pf.toJSON()),

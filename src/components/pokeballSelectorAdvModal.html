@@ -19,9 +19,14 @@
             <div class="modal-body p-0">
                 <div class="tab-content">
                     <div id="pokeballFilterConfigTab" class="tab-pane active p-3">
-                        <button class="btn btn-primary my-2" onclick="App.game.pokeballFilters.createFilter()">
-                            Create New Filter
-                        </button>
+                        <div>
+                            <button class="btn btn-primary my-2 mr-2" onclick="App.game.pokeballFilters.createFilter()">
+                                Create New Filter
+                            </button>
+                            <button class="btn btn-primary my-2" onclick="App.game.pokeballFilters.reset()">
+                                Reset Filters
+                            </button>
+                        </div>
                         <div id="pokeballFilterConfigs"
                             data-bind="sortable: {
                                 foreach: App.game.pokeballFilters.list,
