@@ -2082,19 +2082,9 @@ class Update implements Saveable {
             saveData.pokeballFilters = {
                 list: [
                     {
-                        name: 'New Shiny',
-                        options: { shiny: true, caughtShiny: false },
-                        ball: saveData.pokeballs?.notCaughtShinySelection ?? GameConstants.Pokeball.Pokeball,
-                    },
-                    {
-                        name: 'New',
-                        options: { caught: false },
-                        ball: saveData.pokeballs?.notCaughtSelection ?? GameConstants.Pokeball.Pokeball,
-                    },
-                    {
-                        name: 'Caught Shiny',
-                        options: { shiny: true, caughtShiny: true },
-                        ball: saveData.pokeballs?.alreadyCaughtShinySelection ?? GameConstants.Pokeball.Pokeball,
+                        name: 'Caught',
+                        options: { caught: true },
+                        ball: saveData.pokeballs?.alreadyCaughtSelection ?? GameConstants.Pokeball.None,
                     },
                     {
                         name: 'Contagious',
@@ -2102,9 +2092,19 @@ class Update implements Saveable {
                         ball: saveData.pokeballs?.alreadyCaughtContagiousSelection ?? GameConstants.Pokeball.None,
                     },
                     {
-                        name: 'Caught',
-                        options: { caught: true },
-                        ball: saveData.pokeballs?.alreadyCaughtSelection ?? GameConstants.Pokeball.None,
+                        name: 'Caught Shiny',
+                        options: { shiny: true, caughtShiny: true },
+                        ball: saveData.pokeballs?.alreadyCaughtShinySelection ?? GameConstants.Pokeball.Pokeball,
+                    },
+                    {
+                        name: 'New',
+                        options: { caught: false },
+                        ball: saveData.pokeballs?.notCaughtSelection ?? GameConstants.Pokeball.Pokeball,
+                    },
+                    {
+                        name: 'New Shiny',
+                        options: { shiny: true, caughtShiny: false },
+                        ball: saveData.pokeballs?.notCaughtShinySelection ?? GameConstants.Pokeball.Pokeball,
                     },
                 ],
             };

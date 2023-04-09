@@ -7,6 +7,7 @@ import PokeballFilter, { PokeballFilterParams } from './PokeballFilter';
 import { PokeballFilterOptions, settingsMap } from './PokeballFilterOptions';
 import Notifier from '../notifications/Notifier';
 import NotificationOption from '../notifications/NotificationOption';
+import { findRight } from '../utilities/arrayUtils';
 
 export default class PokeballFilters implements Feature {
     name = 'Pokeball Filters';
@@ -14,18 +15,16 @@ export default class PokeballFilters implements Feature {
     defaults = {};
 
     public presets: PokeballFilterParams[] = [
-        { name: 'New Shiny', options: { shiny: true, caughtShiny: false }, ball: Pokeball.Pokeball },
-        { name: 'New', options: { caught: false }, ball: Pokeball.Pokeball },
-        { name: 'Caught Shiny', options: { shiny: true, caughtShiny: true }, ball: Pokeball.Pokeball },
-        { name: 'Contagious', options: { pokerus: Pokerus.Contagious } },
         { name: 'Caught', options: { caught: true } },
+        { name: 'Contagious', options: { pokerus: Pokerus.Contagious } },
+        { name: 'Caught Shiny', options: { shiny: true, caughtShiny: true }, ball: Pokeball.Pokeball },
+        { name: 'New', options: { caught: false }, ball: Pokeball.Pokeball },
+        { name: 'New Shiny', options: { shiny: true, caughtShiny: false }, ball: Pokeball.Pokeball },
     ];
 
     public list: ObservableArray<PokeballFilter> = ko.observableArray([]);
     public displayList = ko.pureComputed(
-        () => this.list()
-            .filter((f) => !PokeballFilters.hideFilter(f))
-            .reverse(),
+        () => this.list().filter((f) => !PokeballFilters.hideFilter(f)),
     );
 
     public testSettings = Object.fromEntries(
@@ -70,7 +69,7 @@ export default class PokeballFilters implements Feature {
     }
 
     findMatch(data: PokeballFilterOptions): PokeballFilter | undefined {
-        return this.list().find((filter) => filter.test(data));
+        return findRight(this.list(), (filter) => filter.test(data));
     }
 
     async deleteFilter(filter: PokeballFilter) {
