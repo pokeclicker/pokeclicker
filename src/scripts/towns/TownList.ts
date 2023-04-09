@@ -5530,7 +5530,8 @@ const RotomDex1 = new NPC('Kukui\'s Gift', [
     '<i>Kukui:</i> Hey, trainer! Figured you\'ll be a bit lost on these islands, yeah! So I went ahead and made you a Pokédex that can help you navigate all these subregions. Of course, you have to beat each island\'s kahuna before you can visit the next one.',
     '',
     '<i>Rotom-Dex:</i> Zzzt! Pleazzzure to meet you! I\'ll be your guide on you tour of Alola- izzz what I would say if you didn\'t already have a Pokédex of your own! What\'zzz the deal with that old model anyway? I\'m much cooler and shinier than that thing!',
-    'If you\'re ever feelin\' lost, remember to come see me at the professor\'s house! I know everything there izzz to do on thezzze islands!',
+    'If you\'re ever feelin\' lost, remember to come see me at the professor\'s house! I know everything there izzz to do on thezzze islands, especially with that <i>Bulletin Board</i> over there!',
+    'Oh... it\'zzz got no Quests on it yet...',
 ], {
     image: 'assets/images/npcs/specialNPCs/Rotom-Dex and Kukui.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 3), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 4, GameConstants.AchievementOption.less)]),
@@ -5551,7 +5552,31 @@ const RotomDexAkala = new NPC('Rotom Dex', [
     '<b><i>Current Destination: Akala</i></b>',
 ], {
     image: 'assets/images/npcs/specialNPCs/Rotom-Dex.png',
-    requirement: new QuestLineCompletedRequirement('Welcome to paradise, cousin!'),
+    requirement: new MultiRequirement([new QuestLineCompletedRequirement('Welcome to paradise, cousin!'), new QuestLineStepCompletedRequirement('Eater of Light', 3, GameConstants.AchievementOption.less)]),
+});
+const RotomDexUlaUla = new NPC('Rotom Dex', [
+    'Zzzzt!!! There are 2 thingzzz to do in Ula\'Ula! Whaddya mean I\'m a bad guide? I\'m still in beta! Zz-zzt!',
+    '',
+    '<b><i>Islandzzz vizzzited: 3/4</i></b>',
+    '<b><i>Current Destination: Ula\'Ula</i></b>',
+], {
+    image: 'assets/images/npcs/specialNPCs/Rotom-Dex.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Eater of Light', 3), new QuestLineStepCompletedRequirement('Eater of Light', 4, GameConstants.AchievementOption.less)]),
+});
+const RotomDexPoni = new NPC('Rotom Dex', [
+    'Zzzzt!!! There is... <i>something</i> to do in Poni! Oh gimme a break! It\'zzz a small island, you\'ll find out on your own! Zz-zzt!',
+    '',
+    '<b><i>Islandzzz vizzzited: 4/4</i></b>',
+    '<b><i>Current Destination: Poni</i></b>',
+], {
+    image: 'assets/images/npcs/specialNPCs/Rotom-Dex.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Eater of Light', 4), new QuestLineCompletedRequirement('Eater of Light', GameConstants.AchievementOption.less)]),
+});
+const RotomDex2 = new NPC('Rotom Dex', [
+    'Zzzzt!!! Well? What\'re you lookin\' at me for? You know what to do now, kiddo! I\'ll be here rootin\' for ya!',
+], {
+    image: 'assets/images/npcs/specialNPCs/Rotom-Dex.png',
+    requirement: new QuestLineCompletedRequirement('Eater of Light'),
 });
 const LillieCity = new NPC('Lillie', [
     'Tell me, $playername$, do you pick out all your own clothes? I\'ve always just worn the clothes that my mother wanted me to wear. I don\'t really know what kind of thing would suit me...',
@@ -5846,7 +5871,7 @@ TownList['Professor Kukui\'s Lab'] = new Town(
     [new BulletinBoard(GameConstants.BulletinBoards.Alola)],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 18)],
-        npcs: [ProfKukui, RotomDex1, RotomDexMelemele, RotomDexAkala],
+        npcs: [ProfKukui, RotomDex1, RotomDexMelemele, RotomDexAkala, RotomDexUlaUla, RotomDexPoni, RotomDex2],
     }
 );
 TownList['Hau\'oli City'] = new Town(
