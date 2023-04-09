@@ -6,6 +6,7 @@
 ///<reference path="BattleCafe.ts"/>
 ///<reference path="../../declarations/requirements/MultiRequirement.d.ts"/>
 ///<reference path="../Safari/SafariTownContent.ts"/>
+///<reference path="PurifyChamber.ts"/>
 
 const TownList: { [name: string]: Town } = {};
 
@@ -2822,7 +2823,7 @@ TownList['Outskirt Stand'] = new Town(
     'Outskirt Stand',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [],
+    [new PurifyChamberTownContent()],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), new DevelopmentRequirement()],
     }
