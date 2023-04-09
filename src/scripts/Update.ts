@@ -2035,6 +2035,14 @@ class Update implements Saveable {
             settingsData.pokedexCategoryFilter = -1;
             settingsData.breedingCategoryFilter = -1;
 
+            // Reset Blue 5 to undefeated if he has been defeated before reaching the quest step to battle him
+            const teamRocketQuestLine = saveData.quests.questLines.find((q) => q.name == 'Team Rocket');
+            if (saveData.statistics.temporaryBattleDefeated[7]
+                && (teamRocketQuestLine?.state == 0 || (teamRocketQuestLine?.state == 1 && teamRocketQuestLine?.quest <= 2))
+            ) {
+                saveData.statistics.temporaryBattleDefeated[7] = 0;
+            }
+
             // Add Pyrite Blgd dungeon
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 57);
 

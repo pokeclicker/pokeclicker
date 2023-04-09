@@ -6,8 +6,10 @@ import SettingOption from '../settings/SettingOption';
 
 export type PokeballFilterOptions = {
     shiny?: boolean;
+    shadow?: boolean;
     caught?: boolean;
     caughtShiny?: boolean;
+    caughtShadow?: boolean;
     pokerus?: Pokerus;
 };
 
@@ -18,13 +20,21 @@ export const descriptions: {
         isShiny ? '' : 'not'
     } shiny`,
 
+    shadow: (isShadow) => `are ${
+        isShadow ? '' : 'not'
+    } shadow form`,
+
     caught: (isCaught) => `you have ${
         isCaught ? '' : 'not yet'
     } caught`,
 
     caughtShiny: (isCaughtShiny) => `you ${
         isCaughtShiny ? '' : 'don\'t'
-    }  have shiny`,
+    } have shiny`,
+
+    caughtShadow: (isCaughtShadow) => `you ${
+        isCaughtShadow ? '' : 'don\'t'
+    } have the shadow form`,
 
     pokerus: (pokerusState) => `you have in the ${
         Pokerus[pokerusState]
@@ -39,6 +49,11 @@ export const settingsMap: {
         'Shiny',
         bool,
     ),
+    shadow: (bool = false) => new BooleanSetting(
+        'pokeballFilterShadow',
+        'Shadow',
+        bool,
+    ),
     caught: (bool = false) => new BooleanSetting(
         'pokeballFilterCaught',
         'Caught',
@@ -47,6 +62,11 @@ export const settingsMap: {
     caughtShiny: (bool = false) => new BooleanSetting(
         'pokeballFilterCaughtShiny',
         'Caught Shiny',
+        bool,
+    ),
+    caughtShadow: (bool = false) => new BooleanSetting(
+        'pokeballFilterCaughtShadow',
+        'Caught Shadow',
         bool,
     ),
     pokerus: (pokerus = Pokerus.Uninfected) => new Setting(
@@ -61,7 +81,9 @@ export const defaultOptions: {
     [K in keyof PokeballFilterOptions]-?: Setting<PokeballFilterOptions[K]>
 } = {
     shiny: settingsMap.shiny(),
+    shadow: settingsMap.shadow(),
     caught: settingsMap.caught(),
     caughtShiny: settingsMap.caughtShiny(),
+    caughtShadow: settingsMap.caughtShadow(),
     pokerus: settingsMap.pokerus(),
 };
