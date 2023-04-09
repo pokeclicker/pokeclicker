@@ -50,7 +50,7 @@
                                         <div class="pokeballFilterName">
                                             <input class="form-control" data-bind="textInput: $data._name"></span>
                                         </div>
-                                        <img class="pokeball-small" data-bind="
+                                        <img class="clickable pokeball-selected pokeball-small" data-bind="
                                         attr: {
                                             src: 'assets/images/pokeball/' + GameConstants.Pokeball[$data.ball()] + '.svg'},
                                             tooltip: {
@@ -58,6 +58,11 @@
                                                 trigger: 'hover',
                                                 animation: false,
                                                 placement: 'bottom'
+                                            },
+                                            click: function() {
+                                                App.game.pokeballs.selectedSelection($data.ball);
+                                                App.game.pokeballs.selectedTitle($data.name);
+                                                $('#pokeballSelectorModal').modal('show')
                                             },
                                         }" />
                                     </div>
