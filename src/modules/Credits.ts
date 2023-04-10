@@ -705,6 +705,7 @@ export const SpriteCredits: Credit[] = [
             'Shadow Raikou',
             'Shadow Sableye',
             'Shadow Scizor',
+            'Shadow Shellder',
             'Shadow Skarmory',
             'Shadow Skiploom',
             'Shadow Slugma',
