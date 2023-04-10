@@ -83,9 +83,16 @@
       <div id="dungeonPokemonList" class="card">
         <!--Display all available Pokémon in this dungeon-->
         <ul class="list-inline">
-          <!-- ko foreach: player.town().dungeon.normalEncounterList -->
-          <li class="list-inline-item" data-bind="hidden: $data.hide">
+          <!-- ko foreach: player.town().dungeon.normalEncounterList.filter(i => !i.hide) -->
+          <li class="list-inline-item">
             <img class="boss" src="assets/images/dungeons/chest.png" data-bind="hidden: !$data.mimic"/>
+            <img class="dungeon-pokemon-pkrs" src="" data-bind="
+            attr:{ src: $data.pkrsImage },
+            tooltip: {
+                title: $data.EVs,
+                placement: 'bottom',
+                trigger: 'hover'
+            }" />
             <img class="dungeon-pokemon-preview" src="" data-bind="attr:{ src: $data.image },
             css: { 'dungeon-pokemon-locked': $data.uncaught }" onerror="this.src='assets/images/npcs/specialNPCs/Mysterious Trainer.png';"/>
             <sup class="shiny" data-bind="visible: $data.shiny">✨</sup>
@@ -99,9 +106,16 @@
           </li>
           <!-- /ko -->
           <!--Display all available bosses in this dungeon-->
-          <!-- ko foreach: player.town().dungeon.bossEncounterList -->
-          <li class="list-inline-item" data-bind="hidden: $data.hide">
+          <!-- ko foreach: player.town().dungeon.bossEncounterList.filter(i => !i.hide) -->
+          <li class="list-inline-item">
             <img class="boss" src="assets/images/dungeons/boss.svg"/>
+            <img class="dungeon-pokemon-pkrs" src="" data-bind="
+            attr:{ src: $data.pkrsImage },
+            tooltip: {
+                title: $data.EVs,
+                placement: 'bottom',
+                trigger: 'hover'
+            }" />
             <img class="dungeon-pokemon-preview" src="" data-bind="attr:{ src: $data.image },
             css: { 'dungeon-pokemon-locked': $data.uncaught }" onerror="this.src='assets/images/npcs/specialNPCs/Mysterious Trainer.png';"/>
             <sup class="shiny" data-bind="visible: $data.shiny">✨</sup>
