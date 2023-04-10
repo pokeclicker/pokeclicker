@@ -289,7 +289,6 @@
                                             <img data-bind="attr:{ src: 'assets/images/breeding/pokerus/' + GameConstants.Pokerus[RouteHelper.minPokerus(RouteHelper.getAvailablePokemonList(player.route(), player.region, true))] + '.png',
                                                 title: RouteHelper.routePokerusEVs(player.route(), player.region)}"
                                           src=""/>
-                                            <span data-bind="text: RouteHelper.getAvailablePokemonList(player.route(), player.region, true).reduce((prev, next) => (prev[1]++, prev[0] += (App.game.party.getPokemonByName(next).pokerus == GameConstants.Pokerus.Resistant) * 1, prev), [0, 0]).join('/')"></span>
                                         </knockout>
                                       </span>
                                     </td>
