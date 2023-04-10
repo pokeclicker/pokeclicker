@@ -183,7 +183,7 @@ class AchievementHandler {
         categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.sevii], 50, () => SubRegions.isSubRegionUnlocked(GameConstants.Region.kanto, GameConstants.KantoSubRegions.Sevii123)));
         categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.orre], 50, () => SubRegions.isSubRegionUnlocked(GameConstants.Region.hoenn, GameConstants.HoennSubRegions.Orre)));
         categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.magikarpJump], 25, () => SubRegions.isSubRegionUnlocked(GameConstants.Region.alola, GameConstants.AlolaSubRegions.MagikarpJump)));
-        categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.hisui], 75, () => SubRegions.isSubRegionUnlocked(GameConstants.Region.sinnoh, GameConstants.AlolaSubRegions.Hisui)));
+        categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.hisui], 75, () => SubRegions.isSubRegionUnlocked(GameConstants.Region.sinnoh, GameConstants.SinnohSubRegions.Hisui)));
 
         AchievementHandler._achievementCategories = categories;
         return categories;

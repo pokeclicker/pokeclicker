@@ -672,7 +672,7 @@ export const SpriteCredits: Credit[] = [
     },
     {
         name: 'Qwertypop04',
-        link: 'https://www.deviantart.com/qdylm',
+        link: 'https://discordapp.com/users/345944451472031744/',
         resources: [
             'Pinkan Rhydon',
             'Shadow Ariados',
