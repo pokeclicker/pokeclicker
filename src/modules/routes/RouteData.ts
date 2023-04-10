@@ -1861,7 +1861,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Celestica Trail', Region.sinnoh, 43,
     new RoutePokemon({
-        land: ['Rhyhorn', 'Rhydon', 'Onix', 'Steelix', 'Hippopotas', 'Hippowdon', 'Chimeco',],
+        land: ['Rhyhorn', 'Rhydon', 'Onix', 'Steelix', 'Hippopotas', 'Hippowdon', 'Chimecho',],
         headbutt: ['Graveler'],
     }),
     [new DevelopmentRequirement()],
