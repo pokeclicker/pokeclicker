@@ -4452,11 +4452,7 @@ TownList['Hall of Origin'] = new DungeonTown(
     'Hall of Origin',
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Sinnoh,
-    [new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)],
-    [],
-    {
-        npcs: [Arceus1],
-    }
+    [new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)]
 
 );
 TownList['Fullmoon Island'] = new DungeonTown(

@@ -5049,7 +5049,7 @@ dungeonList['Primeval Grotto'] = new Dungeon('Primeval Grotto',
     {dungeonRegionalDifficulty: GameConstants.Region.galar});
 
 dungeonList['Clamberclaw Cliffs'] = new Dungeon('Clamberclaw Cliffs',
-    ['Gligar', 'Geodude', 'Graveler', 'Gastly, Haunter', 'Gible', 'Burmy (Sand)', 'Wormadam (Sand)', 'Bronzor'],
+    ['Gligar', 'Geodude', 'Graveler', 'Gastly', 'Haunter', 'Gible', 'Burmy (Sand)', 'Wormadam (Sand)', 'Bronzor'],
     {
         common: [
             {loot: 'Token_collector', weight: 2},

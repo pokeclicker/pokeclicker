@@ -5496,7 +5496,7 @@ TemporaryBattleList['Enamorus 3'] = new TemporaryBattle(
 TemporaryBattleList.Arceus = new TemporaryBattle(
     'Arceus',
     [new GymPokemon('Arceus (Normal)', 2031393560, 75)],
-    'Arceus granted you a part of its self, and the Legend Plate!'//That text needs changed, not sure what to, though,
+    'Arceus granted you a part of its self, and the Legend Plate!',//That text needs changed, not sure what to, though,
     [new DevelopmentRequirement()],
     undefined,
     {
