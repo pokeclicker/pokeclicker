@@ -87,13 +87,13 @@ export default class PokemonCategories implements Saveable {
         // Update Pokedex/Breeding filters
         if (PokedexFilters.category.value() === cat.id()) {
             PokedexFilters.category.value(-1);
+            Settings.setSettingByName('pokedexCategoryFilter', PokedexFilters.category.value());
         }
-        Settings.setSettingByName('pokedexCategoryFilter', PokedexFilters.category.value());
         
         if (BreedingFilters.category.value() === cat.id()) {
             BreedingFilters.category.value(-1);
+            Settings.setSettingByName('breedingCategoryFilter', BreedingFilters.category.value());
         }
-        Settings.setSettingByName('breedingCategoryFilter', BreedingFilters.category.value());
     }
 
     toJSON(): Record<string, any> {
