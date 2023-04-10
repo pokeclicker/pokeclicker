@@ -2114,7 +2114,7 @@ GymList['Grandtree Arena'] = new Gym(
     BadgeEnums.Elite_NobleKleavor,
     128000,
     'You defeated Lord Kleavor once again!',
-    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
+    [new DevelopmentRequirement()],
     undefined, undefined, 'Lord Kleavor'
 );
 GymList['Brava Arena'] = new Gym(
@@ -2124,7 +2124,7 @@ GymList['Brava Arena'] = new Gym(
     BadgeEnums.Elite_NobleLilligant,
     128000,
     'You defeated Lady Lilligant once again!',
-    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
+    [new DevelopmentRequirement()],
     undefined, undefined, 'Lady Lilligant'
 );
 GymList['Molten Arena'] = new Gym(
@@ -2134,7 +2134,7 @@ GymList['Molten Arena'] = new Gym(
     BadgeEnums.Elite_NobleArcanine,
     128000,
     'You defeated Lord Arcanine once again!',
-    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
+    [new DevelopmentRequirement()],
     undefined, undefined, 'Lord Arcanine'
 );
 GymList['Moonview Arena'] = new Gym(
@@ -2144,7 +2144,7 @@ GymList['Moonview Arena'] = new Gym(
     BadgeEnums.Elite_NobleElectrode,
     128000,
     'You defeated Lord Electrode once again!',
-    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
+    [new DevelopmentRequirement()],
     undefined, undefined, 'Lord Electrode'
 );
 GymList['Icepeak Arena'] = new Gym(
@@ -2154,7 +2154,7 @@ GymList['Icepeak Arena'] = new Gym(
     BadgeEnums.Elite_NobleAvalugg,
     128000,
     'You defeated Lord Avalugg once again!',
-    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
+    [new DevelopmentRequirement()],
     undefined, undefined, 'Lord Avalugg'
 );
 GymList['Temple of Sinnoh'] = new Gym(
@@ -2173,6 +2173,6 @@ GymList['Temple of Sinnoh'] = new Gym(
     BadgeEnums.Elite_Volo,
     128000,
     'Why? Why you?! Why do you have the blessing of Arceus?!',
-    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0)],
+    [new DevelopmentRequirement()],
     undefined, undefined, 'Pokémon Wielder Volo'
 );

@@ -61,7 +61,7 @@ SubRegions.addSubRegion(Region.hoenn, new SubRegion('Hoenn', HoennSubRegions.Hoe
 SubRegions.addSubRegion(Region.hoenn, new SubRegion('Orre', HoennSubRegions.Orre, new DevelopmentRequirement(), 'Outskirt Stand', undefined));/* new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), 'Outskirt Stand')); */
 
 SubRegions.addSubRegion(Region.sinnoh, new SubRegion('Sinnoh', SinnohSubRegions.Sinnoh, undefined, 'Canalave City'));
-SubRegions.addSubRegion(Region.sinnoh, new SubRegion('Hisui', SinnohSubRegions.Hisui, new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 0), 'Prelude Beach'));
+SubRegions.addSubRegion(Region.sinnoh, new SubRegion('Hisui', SinnohSubRegions.Hisui, new DevelopmentRequirement(), 'Prelude Beach'));
 
 SubRegions.addSubRegion(Region.unova, new SubRegion('Unova', UnovaSubRegions.Unova));
 
