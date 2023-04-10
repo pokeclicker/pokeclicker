@@ -1,7 +1,7 @@
 import { Observable, Unwrapped } from 'knockout';
 import { Pokeball } from '../GameConstants';
 import Setting from '../settings/Setting';
-import { descriptions, PokeballFilterOptions, settingsMap } from './PokeballFilterOptions';
+import { PokeballFilterOptions, pokeballFilterOptions } from './PokeballFilterOptions';
 
 export type PokeballFilterParams = {
     name: string;
@@ -32,7 +32,8 @@ export default class PokeballFilter {
         this._name = ko.observable(name);
         this.ball = ko.observable(ball);
         this._options = ko.observable(Object.fromEntries(
-            Object.entries(options).map(([k, v]) => [k, settingsMap[k](v)]),
+            Object.entries(options).map(
+                ([k, v]) => [k, pokeballFilterOptions[k].createSetting(v)]),
         ));
         this.enabled = ko.observable(enabled);
         this.inverted = ko.observable(inverted);
@@ -73,7 +74,9 @@ export default class PokeballFilter {
             : 'This filter matches pokemon that:'
         } ${
             optionList
-                .map(([opt, setting]) => descriptions[opt](setting.observableValue()))
+                .map(([opt, setting]) => pokeballFilterOptions[opt].describe(
+                    setting.observableValue(),
+                ))
                 .join('; ')
         }.`;
     }

@@ -4,7 +4,7 @@ import { Feature } from '../DataStore/common/Feature';
 import KeyItemType from '../enums/KeyItemType';
 import { Pokeball, Pokerus } from '../GameConstants';
 import PokeballFilter, { PokeballFilterParams } from './PokeballFilter';
-import { PokeballFilterOptions, settingsMap } from './PokeballFilterOptions';
+import { PokeballFilterOptions, pokeballFilterOptions } from './PokeballFilterOptions';
 import Notifier from '../notifications/Notifier';
 import NotificationOption from '../notifications/NotificationOption';
 import { findRight } from '../utilities/arrayUtils';
@@ -28,7 +28,7 @@ export default class PokeballFilters implements Feature {
     );
 
     public testSettings = Object.fromEntries(
-        Object.entries(settingsMap).map(([k, fn]) => [k, fn()]),
+        Object.entries(pokeballFilterOptions).map(([k, pfo]) => [k, pfo.createSetting()]),
     );
     public testSettingsData = ko.pureComputed(() =>
         Object.fromEntries(Object.entries(this.testSettings).map(([k, v]) => [k, v.observableValue()])),
@@ -94,7 +94,7 @@ export default class PokeballFilters implements Feature {
         }
         const newOptions = {
             ...filter.options,
-            [option]: settingsMap[option](),
+            [option]: pokeballFilterOptions[option].createSetting(),
         };
         filter.options = newOptions;
     }

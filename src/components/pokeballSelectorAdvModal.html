@@ -111,7 +111,7 @@
                                                 } --><!-- /ko -->
                                                 </tr>
                                                 <!-- /ko -->
-                                                <!-- ko foreach: Object.keys(PokeballFilterOptions.settingsMap).filter(k => !(k in $data.options)) -->
+                                                <!-- ko foreach: Object.keys(pokeballFilterOptions).filter(k => !(k in $data.options)) -->
                                                 <tr class="bg-faded text-white">
                                                     <td>
                                                         <button class="btn-circle btn-success"
@@ -120,7 +120,7 @@
                                                         </button>
                                                     </td>
                                                     <td class="p-2"
-                                                        data-bind="text: PokeballFilterOptions.defaultOptions[$data].displayName">
+                                                        data-bind="text: pokeballFilterOptions[$data].defaultSetting.displayName">
                                                     </td>
                                                     <td></td>
                                                 </tr>
