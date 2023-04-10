@@ -8,9 +8,9 @@ import { Saveable } from '../DataStore/common/Saveable';
 import BreedingFilters from '../settings/BreedingFilters';
 import PokedexFilters from '../settings/PokedexFilters';
 import Settings from '../settings/Settings';
-import GameHelper from '../GameHelper';
 
 export type PokemonCategory = {
+    id: KnockoutObservable<number>,
     name: KnockoutObservable<string>,
     color: KnockoutObservable<string>,
     subscriber?: KnockoutSubscription,
@@ -33,73 +33,74 @@ export default class PokemonCategories implements Saveable {
                 p.category = 0;
             }
         });
-        let categoryIndex = PokemonCategories.categories().length;
-        while (categoryIndex-- > 0) {
-            PokemonCategories.removeCategory(categoryIndex, true);
+        let max = 0;
+        PokemonCategories.categories().forEach(c => {
+            max = Math.max(max, c.id());
+        });
+        while (max >= 0) {
+            PokemonCategories.removeCategory(max, true);
+            max--;
         }
         PokemonCategories.initialize();
     }
 
-    public static addCategory(name: string, color: string): void {
-        PokemonCategories.categories.push({ name: ko.observable(name), color: ko.observable(color) });
+    public static addCategory(name: string, color: string, id: number = -1): void {
+        if (id === -1) {
+            PokemonCategories.categories().forEach(c => {
+                id = Math.max(id, c.id());
+            });
+            id++;
+        }
+        const cat: PokemonCategory = { name: ko.observable(name), color: ko.observable(color), id : ko.observable(id) };
+        PokemonCategories.categories.push(cat);
 
         // Subscribe to color change event
         const root = document.documentElement;
-        const index = PokemonCategories.categories().length - 1;
-        PokemonCategories.categories()[index].subscriber = PokemonCategories.categories()[index].color.subscribe((value) => {
-            root.style.setProperty(`--pokemon-category-${index + 1}`, value);
+        cat.subscriber = cat.color.subscribe((value) => {
+            root.style.setProperty(`--pokemon-category-${id + 1}`, value);
         });
         // Update the color now
-        PokemonCategories.categories()[index].color.valueHasMutated();
+        cat.color.valueHasMutated();
     }
 
-    public static removeCategory(index: number, force = false): void {
-        // Cannot remove None category
-        if ((!force && !index) || !PokemonCategories.categories()[index]) {
+    public static removeCategory(id: number, force = false): void {
+        // Cannot remove None or Favorite categories
+        if ((!force && id < 2)) {
             return;
         }
+        const index = PokemonCategories.categories().findIndex(c => c.id() == id);
+        // Is this case expected to happen ?
+        if (index === -1) {
+            return;
+        }
+        const cat = PokemonCategories.categories()[index];
 
         App.game.party.caughtPokemon.forEach((p) => {
-            if (+p.category === index) {
+            if (+p.category === cat.id()) {
                 p.category = 0;
-            }
-            if (p.category > index) {
-                p.category--;
             }
         });
         // Remove subscriber
-        PokemonCategories.categories()[index].subscriber?.dispose();
+        cat.subscriber?.dispose();
         // Remove category
         PokemonCategories.categories.splice(index, 1);
         // Update Pokedex/Breeding filters
-        if (PokedexFilters.category.value() === index) {
+        if (PokedexFilters.category.value() === cat.id()) {
             PokedexFilters.category.value(-1);
-        }
-        if (PokedexFilters.category.value() > index) {
-            GameHelper.incrementObservable(PokedexFilters.category.value, -1);
         }
         Settings.setSettingByName('pokedexCategoryFilter', PokedexFilters.category.value());
         
-        if (BreedingFilters.category.value() === index) {
+        if (BreedingFilters.category.value() === cat.id()) {
             BreedingFilters.category.value(-1);
         }
-        if (BreedingFilters.category.value() > index) {
-            GameHelper.incrementObservable(BreedingFilters.category.value, -1);
-        }
         Settings.setSettingByName('breedingCategoryFilter', BreedingFilters.category.value());
-
-        // Update CSS
-        PokemonCategories.categories().forEach((cat, id) => {
-            if (id >= index) {
-                document.documentElement.style.setProperty(`--pokemon-category-${id + 1}`, cat.color());
-            }
-        });
     }
 
     toJSON(): Record<string, any> {
         const categories = [];
         PokemonCategories.categories().forEach((c) => {
             categories.push({
+                id: c.id(),
                 name: encodeURI(c.name()),
                 color: c.color(),
             });
@@ -114,13 +115,13 @@ export default class PokemonCategories implements Saveable {
             return;
         }
 
-        json.categories?.forEach((category, index) => {
-            const cat = PokemonCategories.categories()[index];
+        json.categories?.forEach((category) => {
+            const cat = PokemonCategories.categories().find(c => c.id() == category.id);
             if (cat) {
                 cat.name(decodeURI(category.name));
                 cat.color(category.color);
             } else {
-                PokemonCategories.addCategory(decodeURI(category.name), category.color);
+                PokemonCategories.addCategory(decodeURI(category.name), category.color, category.id);
             }
         });
     }
