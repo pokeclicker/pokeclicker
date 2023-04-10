@@ -5524,7 +5524,7 @@ const ReconSquad2 = new NPC('More Strange Tourists', [
     'You... You are not native to Alola either, are you? We are the Ultra Recon Squad. Perhaps we will meet again.',
 ], {
     image: 'assets/images/npcs/Recon Squad (Ultra Moon).png',
-    requirement: new MultiRequirement([new TemporaryBattleRequirement('Hau 2'), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 3, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new TemporaryBattleRequirement('Hau 2'), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 2), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 3, GameConstants.AchievementOption.less)]),
 });
 const RotomDex1 = new NPC('Kukui\'s Gift', [
     '<i>Kukui:</i> Hey, trainer! Figured you\'ll be a bit lost on these islands, yeah! So I went ahead and made you a Pokédex that can help you navigate all these subregions. Of course, you have to beat each island\'s kahuna before you can visit the next one.',
