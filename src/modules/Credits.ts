@@ -285,6 +285,7 @@ export const SpriteCredits: Credit[] = [
             'Sea Mauville',
             'Shadow Absol',
             'Shadow Baltoy',
+            'Shadow Banette',
             'Shadow Beedrill',
             'Shadow Carvanha',
             'Shadow Crocanaw',
@@ -307,6 +308,7 @@ export const SpriteCredits: Credit[] = [
             'Shadow Shuckle',
             'Shadow Smeargle',
             'Shadow Sneasel',
+            'Shadow Solrock',
             'Shadow Starmie',
             'Shadow Sudowoodo',
             'Shadow Suicune',
@@ -690,6 +692,7 @@ export const SpriteCredits: Credit[] = [
         resources: [
             'Pinkan Rhydon',
             'Shadow Ariados',
+            'Shadow Dugtrio',
             'Shadow Entei',
             'Shadow Flaaffy',
             'Shadow Forretress',
