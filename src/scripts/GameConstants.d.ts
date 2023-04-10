@@ -695,6 +695,7 @@ namespace GameConstants {
     declare enum ExtraAchievementCategories {
         global,
         sevii,
+        orre,
         magikarpJump
     }
     declare const DayCycleStartHours: Record<DayCyclePart, number> = {
