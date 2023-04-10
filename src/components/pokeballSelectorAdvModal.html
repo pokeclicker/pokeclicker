@@ -37,7 +37,10 @@
                                     dataIdAttr: 'data-key',
                                 }
                             }">
-                            <div class="pokeballFilterWrapper" data-bind="attr: { 'data-key': $data.uuid }">
+                            <div class="pokeballFilterWrapper" data-bind="
+                                attr: { 'data-key': $data.uuid },
+                                visible: !PokeballFilters.hideFilter($data)
+                            ">
                                 <div class="pokeballFilterDragHandle bg-dark text-white"></div>
                                 <div class="pokeballFilter">
                                     <div class="pokeballFilterHeader">
@@ -111,7 +114,7 @@
                                                 } --><!-- /ko -->
                                                 </tr>
                                                 <!-- /ko -->
-                                                <!-- ko foreach: Object.keys(pokeballFilterOptions).filter(k => !(k in $data.options)) -->
+                                                <!-- ko foreach: Object.keys(pokeballFilterOptions).filter(k => !(k in $data.options) && pokeballFilterOptions[k].canUse()) -->
                                                 <tr class="bg-faded text-white">
                                                     <td>
                                                         <button class="btn-circle btn-success"
@@ -146,7 +149,9 @@
                         <div id="pokeballFilterTestInput">
                             <p>Configure these options to match the scenario you want to test</p>
                             <table>
-                                <tbody data-bind="foreach: Object.values(App.game.pokeballFilters.testSettings)">
+                                <tbody data-bind="foreach: Object.entries(App.game.pokeballFilters.testSettings)
+                                                                .filter(([k]) => pokeballFilterOptions[k].canUse())
+                                                                .map(([k, s]) => s)">
                                     <tr data-bind="template: {
                                                             name: $data instanceof BooleanSetting ? 'pokeballFilterSlider' : 'pokeballFilterMultipleChoice',
                                                             data: { setting: $data, key: `test-${$index()}` },
@@ -161,7 +166,7 @@
                                 <span data-bind='visible: $data, text: `This will use your "${$data?.name}" filter`'><span>
                                         <span data-bind='visible: !$data'>None of your filters match this scenario</span>
                             </p>
-                            <div data-bind="foreach: App.game.pokeballFilters.list()">
+                            <div data-bind="foreach: App.game.pokeballFilters.displayList()">
                                 <p data-bind="class: $data.test(App.game.pokeballFilters.testSettingsData()) ? 'bg-success text-white' : ''">
                                     <span data-bind="if: $parent === $data">*** </span>
                                     <span data-bind="text: $data.name"></span>

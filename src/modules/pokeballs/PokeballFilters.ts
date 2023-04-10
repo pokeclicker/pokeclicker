@@ -1,7 +1,6 @@
 /* eslint-disable class-methods-use-this */
 import { ObservableArray } from 'knockout';
 import { Feature } from '../DataStore/common/Feature';
-import KeyItemType from '../enums/KeyItemType';
 import { Pokeball, Pokerus } from '../GameConstants';
 import PokeballFilter, { PokeballFilterParams } from './PokeballFilter';
 import { PokeballFilterOptions, pokeballFilterOptions } from './PokeballFilterOptions';
@@ -35,7 +34,9 @@ export default class PokeballFilters implements Feature {
     );
 
     public static hideFilter(filter: PokeballFilter) {
-        return filter.options.pokerus !== undefined && !App.game.keyItems.hasKeyItem(KeyItemType.Pokerus_virus);
+        return Object.keys(filter.options).some(
+            (k) => !pokeballFilterOptions[k].canUse(),
+        );
     }
 
     initialize() {
@@ -69,7 +70,7 @@ export default class PokeballFilters implements Feature {
     }
 
     findMatch(data: PokeballFilterOptions): PokeballFilter | undefined {
-        return findRight(this.list(), (filter) => filter.test(data));
+        return findRight(this.displayList(), (filter) => filter.test(data));
     }
 
     async deleteFilter(filter: PokeballFilter) {

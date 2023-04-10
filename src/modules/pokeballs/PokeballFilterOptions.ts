@@ -3,6 +3,10 @@ import BooleanSetting from '../settings/BooleanSetting';
 import Setting from '../settings/Setting';
 import GameHelper from '../GameHelper';
 import SettingOption from '../settings/SettingOption';
+import KeyItemType from '../enums/KeyItemType';
+import DevelopmentRequirement from '../requirements/DevelopmentRequirement';
+import Requirement from '../requirements/Requirement';
+import CustomRequirement from '../requirements/CustomRequirement';
 
 export type PokeballFilterOptions = {
     shiny?: boolean;
@@ -22,10 +26,17 @@ class PokeballFilterOption<
     constructor(
         public createSetting: (defaultVal?: T) => Setting<T>,
         public describe: (value: T) => string,
+        public requirement?: Requirement,
     ) {
         this.defaultSetting = createSetting();
     }
+
+    public canUse() {
+        return this.requirement?.isCompleted() ?? true;
+    }
 }
+
+const tempShadowRequirement = new DevelopmentRequirement();
 
 export const pokeballFilterOptions: {
     [K in keyof PokeballFilterOptions]-?: PokeballFilterOption<K>
@@ -50,6 +61,7 @@ export const pokeballFilterOptions: {
         (isShadow) => `are ${
             isShadow ? '' : 'not'
         } shadow form`,
+        tempShadowRequirement,
     ),
 
     caught: new PokeballFilterOption(
@@ -83,6 +95,7 @@ export const pokeballFilterOptions: {
         (isCaughtShadow) => `you ${
             isCaughtShadow ? '' : 'don\'t'
         } have the shadow form`,
+        tempShadowRequirement,
     ),
 
     pokerus: new PokeballFilterOption(
@@ -95,6 +108,10 @@ export const pokeballFilterOptions: {
         (pokerusState) => `you have in the ${
             Pokerus[pokerusState]
         } pokerus state`,
+        new CustomRequirement(
+            ko.pureComputed(() => App.game.keyItems.hasKeyItem(KeyItemType.Pokerus_virus)),
+            true, 'Pokerus virus is required',
+        ),
     ),
 
 };
