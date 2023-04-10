@@ -53,7 +53,7 @@ export const MaxIDPerRegion = [
     649, // 156 - Unova
     721, // 72 - Kalos
     809, // 88 - Alola
-    905, // 96 - 89 Galar + 7 Hisui
+    898, // 89 Galar
 ];
 
 // Subregions
