@@ -1,6 +1,6 @@
 import BadgeEnums from '../enums/Badges';
 import {
-    Region, KantoSubRegions, getDungeonIndex, AlolaSubRegions, GalarSubRegions,
+    Region, KantoSubRegions, getDungeonIndex, SinnohSubRegions, AlolaSubRegions, GalarSubRegions,
 } from '../GameConstants';
 import ClearDungeonRequirement from '../requirements/ClearDungeonRequirement';
 import GymBadgeRequirement from '../requirements/GymBadgeRequirement';
@@ -12,6 +12,7 @@ import QuestLineStepCompletedRequirement from '../requirements/QuestLineStepComp
 import RouteKillRequirement from '../requirements/RouteKillRequirement';
 import TemporaryBattleRequirement from '../requirements/TemporaryBattleRequirement';
 import WeatherRequirement from '../requirements/WeatherRequirement';
+import DevelopmentRequirement from '../requirements/DevelopmentRequirement';
 import WeatherType from '../weather/WeatherType';
 import RegionRoute from './RegionRoute';
 import RoutePokemon from './RoutePokemon';

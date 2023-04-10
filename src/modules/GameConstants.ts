@@ -1296,7 +1296,7 @@ export const SinnohDungeons = [
     'Ancient Wayward Cave',
     'Ancient Quarry',
     'Primeval Grotto',
-    'Clamberclaw Cliffs'
+    'Clamberclaw Cliffs',
     'Celestica Ruins',
     'Sacred Plaza',
     'Crevasse Passage',
