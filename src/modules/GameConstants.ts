@@ -1219,7 +1219,22 @@ export const HoennDungeons = [
     'Sky Pillar',
     'Victory Road Hoenn',
     'Near Space',
-    'Pyrite Bldg', // 57
+    'Phenac City Battles',
+    'Pyrite Town Battles',
+    'Pyrite Colosseum Battles',
+    'Pyrite Bldg',
+    'Pyrite Cave',
+    'Relic Cave',
+    'Mt. Battle Battles',
+    'The Under Subway',
+    'Cipher Lab Battles',
+    'Realgam Tower Battles',
+    'Realgam Colosseum Battles',
+    'Snagem Hideout',
+    'Deep Colosseum Battles',
+    'Phenac Stadium Battles',
+    'Under Colosseum Battles',
+    'Orre Colosseum Battles', // 72
     // These aren't implemented anywhere yet
     /*
     "Island Cave",
@@ -1248,7 +1263,7 @@ export const HoennDungeons = [
 ];
 
 export const SinnohDungeons = [
-    'Oreburgh Gate', // 58
+    'Oreburgh Gate', // 73
     'Valley Windworks',
     'Eterna Forest',
     'Old Chateau',
@@ -1271,7 +1286,7 @@ export const SinnohDungeons = [
     'Flower Paradise',
     'Snowpoint Temple',
     'Stark Mountain',
-    'Hall of Origin', // 81
+    'Hall of Origin', // 96
     // Hisui
     'Oreburrow Tunnel',
     'Heartwood',
@@ -1289,11 +1304,11 @@ export const SinnohDungeons = [
     'Seaside Hollow',
     'Ancient Lake Verity',
     'Ancient Lake Valor',
-    'Ancient Lake Acuity', // 98
+    'Ancient Lake Acuity', // 113
 ];
 
 export const UnovaDungeons = [
-    'Floccesy Ranch', // 99
+    'Floccesy Ranch', // 114
     'Liberty Garden',
     'Castelia Sewers',
     'Relic Passage',
@@ -1315,11 +1330,11 @@ export const UnovaDungeons = [
     'Pledge Grove',
     'Pinwheel Forest',
     'Dreamyard',
-    'P2 Laboratory', // 121
+    'P2 Laboratory', // 136
 ];
 
 export const KalosDungeons = [
-    'Santalune Forest', // 122
+    'Santalune Forest', // 137
     'Connecting Cave',
     'Glittering Cave',
     'Reflection Cave',
@@ -1332,12 +1347,12 @@ export const KalosDungeons = [
     'Team Flare Secret HQ',
     'Terminus Cave',
     'Pokémon Village',
-    'Victory Road Kalos', // 134
+    'Victory Road Kalos', // 149
     // 'Unknown Dungeon',
 ];
 
 export const AlolaDungeons = [
-    'Trainers\' School', // 135
+    'Trainers\' School', // 150
     'Hau\'oli Cemetery',
     'Verdant Cavern',
     'Melemele Meadow',
@@ -1366,11 +1381,11 @@ export const AlolaDungeons = [
     'Ruins of Abundance',
     'Ruins of Hope',
     'Poni Meadow',
-    'Resolution Cave', // 164
+    'Resolution Cave', // 179
 ];
 
 export const GalarDungeons = [
-    'Slumbering Weald Shrine', // 165
+    'Slumbering Weald Shrine', // 180
     'Galar Mine',
     'Galar Mine No. 2',
     'Glimwood Tangle',
@@ -1390,7 +1405,7 @@ export const GalarDungeons = [
     'Lakeside Cave',
     'Dyna Tree Hill',
     'Tunnel to the Top',
-    'Crown Shrine', // 185
+    'Crown Shrine', // 200
 ];
 
 export const RegionDungeons = [
@@ -1966,6 +1981,7 @@ export enum AlcremieSpins {
 export enum ExtraAchievementCategories {
     global = Region.final,
     sevii,
+    orre,
     magikarpJump,
     hisui,
 }

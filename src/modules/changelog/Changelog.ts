@@ -26,6 +26,6 @@ export const changelogType: Record<keyof typeof ChangeLogType, ChangelogConfig> 
 export default class Changelog {
     constructor(
         public type: ChangelogConfig = changelogType.DEFAULT,
-        public description: string,
+        public description: string = '',
     ) {}
 }
