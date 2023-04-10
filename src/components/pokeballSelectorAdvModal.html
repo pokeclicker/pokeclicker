@@ -14,6 +14,11 @@
                             Test Filters
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a data-toggle="tab" class="nav-link" href="#pokeballFilterHelpTab">
+                            Help
+                        </a>
+                    </li>
                 </ul>
             </div>
             <div class="modal-body p-0">
@@ -174,6 +179,37 @@
                                 </p>
                             </div>
                         </div>
+                    </div>
+                    <div id="pokeballFilterHelpTab" class="tab-pane p-3">
+                        <h2>Configure Filters</h2>
+                        <p>
+                            Use this tab to add, edit, re-order, and remove pokeball filters.
+                        </p>
+                        <p>
+                            Click the "Toggle Settings" button for a filter to configure how it works.
+                            Options listed first are all the values that are checked when catching - you can click their <button class="btn-circle btn-danger float-none">&minus;</button> to remove these.
+                            The darker options below that are not checked.
+                            You can click their <button class="btn-circle btn-success float-none">&plus;</button> button to include it in the filter, and choose a value it must match.
+                        </p>
+                        <p>
+                            Filters can be re-ordered by dragging them from the bar on the left side of each filter.
+                            You can click the x on the right of each filter to remove them - this will open a confirmation box to prevent accidentally deleting one.
+                        </p>
+                        <p>
+                            Some filter options and default filters are hidden at the start of the game, and will unlock as they become relevant.
+                        </p>
+                        <p>
+                            You can hover (or tap) the <button class="btn-circle btn-info float-none">&#8505;</button> icon for a description of what the filter will catch.
+                        </p>
+
+                        <h2>Test Filters</h2>
+                        <p>
+                            Use this tab to test and verify how your filters will behave in any situation.
+                        </p>
+                        <p>
+                            The top of the tab has toggles to set up a scenario you want to test, and the bottom shows which filters match.
+                            Highlighted filters all matched the scenario, the bottom-most matching filter is always used to catch pokemon.
+                        </p>
                     </div>
                 </div>
             </div>
