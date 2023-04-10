@@ -689,6 +689,8 @@ export const SpriteCredits: Credit[] = [
             'Shadow Gligar',
             'Shadow Granbull',
             'Shadow Heracross',
+            'Shadow Hitmonchan',
+            'Shadow Hitmonlee',
             'Shadow Ledian',
             'Shadow Mantine',
             'Shadow Mareep',
