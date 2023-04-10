@@ -743,7 +743,7 @@ export const RegionalStarters = [
 ];
 
 export const RegionalStartersMonotype = [
-    [52, 4, 7, 25, 1, 131, 66, 109, 104, 83, 63, 48, 74, 92, 147, 1.02, 81, 35], // Kanto
+    [52, 4, 7, 25, 1, 131, 66, 109, 74, 83, 63, 48, 74, 92, 147, 1.02, 81, 35], // Kanto
 ];
 
 export enum StoneType {
