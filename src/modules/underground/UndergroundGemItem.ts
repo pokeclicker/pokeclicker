@@ -8,8 +8,8 @@ export default class UndergroundGemItem extends UndergroundItem {
         public name: string,
         public id: number,
         space: Array<Array<number>>,
-        public value = 1,
         public type: PokemonType,
+        public value = 100,
         public requirement?: Requirement,
         weight?: (() => number) | number,
     ) {

@@ -48,7 +48,7 @@ class TemporaryBattle extends TownContent {
     }
     public getImage() {
         const imageName = this.optionalArgs?.imageName ?? this.name;
-        return `assets/images/temporaryBattle/${imageName}.png`;
+        return `assets/images/npcs/${imageName}.png`;
     }
 
     constructor(
