@@ -58,7 +58,7 @@ class PokedexHelper {
 
             // If the Pokemon shouldn't be unlocked yet
             const nativeRegion = PokemonHelper.calcNativeRegion(pokemon.name);
-            if (nativeRegion > GameConstants.MAX_AVAILABLE_REGION || nativeRegion == GameConstants.Region.none && !alreadyCaught) {
+            if (nativeRegion > player.highestRegion() || nativeRegion == GameConstants.Region.none && !alreadyCaught) {
                 return false;
             }
 
@@ -96,9 +96,12 @@ class PokedexHelper {
                 return false;
             }
 
-            // Alternate non-regional forms that we haven't caught yet
-            if (!alreadyCaught && pokemon.id != Math.floor(pokemon.id) && (!nativeRegion || nativeRegion === GameConstants.Region.none || (nativeRegion > player.highestRegion() || pokemon.name === 'Galarian Darmanitan (Zen)') || pokemon.name.includes('Totem '))) {
-                return false;
+            // Alternate forms that we haven't caught yet
+            if (!alreadyCaught && pokemon.id != Math.floor(pokemon.id)) {
+                const hasBaseFormInSameRegion = pokemonList.some((p) => Math.floor(p.id) == Math.floor(pokemon.id) && p.id < pokemon.id && PokemonHelper.calcNativeRegion(p.name) == nativeRegion);
+                if (hasBaseFormInSameRegion) {
+                    return false;
+                }
             }
             // Hide uncaught base forms if alternate non-regional form is caught
             if (!alreadyCaught && pokemon.id == Math.floor(pokemon.id) && App.game.party._caughtPokemon().some((p) => Math.floor(p.id) == pokemon.id && !p.name.includes('Alolan ') && !p.name.includes('Galarian ') && !p.name.includes('Totem '))) {
