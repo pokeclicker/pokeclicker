@@ -56,13 +56,23 @@ export default class PokeballFilter {
     }
 
     get description(): string {
-        return `${
-            this.enabled() ? '' : 'This filter is disabled</br></br>'
-        }${this.inverted()
+        const disabledText = this.enabled()
+            ? ''
+            : 'This filter is disabled.</br></br>';
+
+        const optionList = Object.entries(this.options);
+        if (optionList.length === 0) {
+            return `${disabledText}${[
+                'This filter has no restrictions set, so will match every pokemon.',
+                'Click the "Toggle Settings" button for this filter in the Configure Filters window to add some.',
+            ].join('</br>')}`;
+        }
+
+        return `${disabledText}${this.inverted()
             ? 'This filter matches any pokemon except those that:'
             : 'This filter matches pokemon that:'
         } ${
-            Object.entries(this.options)
+            optionList
                 .map(([opt, setting]) => descriptions[opt](setting.observableValue()))
                 .join('; ')
         }.`;
