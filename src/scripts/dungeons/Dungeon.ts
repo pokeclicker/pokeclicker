@@ -4938,7 +4938,7 @@ dungeonList['Oreburrow Tunnel'] = new Dungeon('Oreburrow Tunnel',
     () => {},
     {dungeonRegionalDifficulty: GameConstants.Region.galar});
 
-dungeonList['Heartwood'] = new Dungeon('Heartwood',
+dungeonList.Heartwood = new Dungeon('Heartwood',
     ['Geodude', 'Zubat', 'Golbat', 'Psyduck', 'Wurmple', 'Silcoon', 'Cascoon', 'Combee', 'Buneary'],
     {
         common: [
@@ -5140,8 +5140,7 @@ dungeonList['Ice Column Chamber'] = new Dungeon('Ice Column Chamber',
         ],
     },
     2603000,
-    [
-        new DungeonBossPokemon('Froslass', 10000000, 72)],
+    [new DungeonBossPokemon('Froslass', 10000000, 72)],
     96500, 230,
     () => {},
     {dungeonRegionalDifficulty: GameConstants.Region.galar});

@@ -1371,7 +1371,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Floaro Gardens', Region.sinnoh, 3,
     new RoutePokemon({
-        land: ['Wurmple', 'Silcoon', 'Cascoon', 'Beautifly', 'Dustox', 'Pichu', 'Drifloon', 'Shinx', 'Luxio', /*'Shaymin' Maybe add temporarily during quest?*/],
+        land: ['Wurmple', 'Silcoon', 'Cascoon', 'Beautifly', 'Dustox', 'Pichu', 'Drifloon', 'Shinx', 'Luxio'/*, 'Shaymin' Maybe add temporarily during quest?*/],
     }),
     [new DevelopmentRequirement()],
     undefined,
@@ -1861,7 +1861,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Celestica Trail', Region.sinnoh, 43,
     new RoutePokemon({
-        land: ['Rhyhorn', 'Rhydon', 'Onix', 'Steelix', 'Hippopotas', 'Hippowdon', 'Chimecho',],
+        land: ['Rhyhorn', 'Rhydon', 'Onix', 'Steelix', 'Hippopotas', 'Hippowdon', 'Chimecho'],
         headbutt: ['Graveler'],
     }),
     [new DevelopmentRequirement()],
@@ -1970,7 +1970,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Icebound Falls', Region.sinnoh, 52,
     new RoutePokemon({
-        land: ['Machop','Machoke', 'Riolu', 'Lucario', 'Elekid', 'Electabuzz', 'Crobat'],
+        land: ['Machop', 'Machoke', 'Riolu', 'Lucario', 'Elekid', 'Electabuzz', 'Crobat'],
         headbutt: ['Burmy (Trash)', 'Wormadam (Trash)', 'Snorunt', 'Glalie'],
     }),
     [new DevelopmentRequirement()],

@@ -5024,7 +5024,7 @@ TemporaryBattleList['Irida 2'] = new TemporaryBattle(
         imageName: 'Irida',
     }
 );
-TemporaryBattleList['Clover'] = new TemporaryBattle(
+TemporaryBattleList.Clover = new TemporaryBattle(
     'Clover',
     [new GymPokemon('Abomasnow', 348526193, 35)],
     'I don\'t get it! How\'d I lose?!',
@@ -5172,7 +5172,7 @@ TemporaryBattleList['Lord of the Tundra: Avalugg'] = new TemporaryBattle(
         imageName: '../pokemon/713.2',
     }
 );
-TemporaryBattleList['Beni'] = new TemporaryBattle(
+TemporaryBattleList.Beni = new TemporaryBattle(
     'Beni',
     [
         new GymPokemon('Mismagius', 348526193, 59),

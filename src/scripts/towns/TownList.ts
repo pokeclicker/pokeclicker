@@ -4121,7 +4121,7 @@ TownList['Sludge Mound'] = new Town(
     'Sludge Mound',
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Hisui,
-    [TemporaryBattleList['Ursaluna']],
+    [TemporaryBattleList.Ursaluna],
     {
         requirements: [new DevelopmentRequirement()],
     }
@@ -4175,7 +4175,7 @@ TownList['Molten Arena'] = new Town(
     'Molten Arena',
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Hisui,
-    [TemporaryBattleList['Clover'], TemporaryBattleList['Coin 2'], TemporaryBattleList['Charm 1'], TemporaryBattleList['Lord of the Isles: Arcanine']],
+    [TemporaryBattleList.Clover, TemporaryBattleList['Coin 2'], TemporaryBattleList['Charm 1'], TemporaryBattleList['Lord of the Isles: Arcanine']],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Firespit Island'))],
     }
@@ -4265,7 +4265,7 @@ TownList['Stone Portal'] = new Town(
     'Stone Portal',
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Hisui,
-    [TemporaryBattleList['Beni']],
+    [TemporaryBattleList.Beni],
     {
         requirements: [new DevelopmentRequirement()],
     }
