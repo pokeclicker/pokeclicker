@@ -1347,7 +1347,7 @@ Routes.add(new RegionRoute(
 Hisui
 */
 Routes.add(new RegionRoute(
-    'Aspiration Hill', GameConstants.Region.sinnoh, 1,
+    'Aspiration Hill', Region.sinnoh, 1,
     new RoutePokemon({
         land: ['Bidoof', 'Starly', 'Shinx', 'Drifloon'],
     }),
@@ -1358,7 +1358,7 @@ Routes.add(new RegionRoute(
     1250000,
 ));
 Routes.add(new RegionRoute(
-    'Horseshoe Plains', GameConstants.Region.sinnoh, 2,
+    'Horseshoe Plains', Region.sinnoh, 2,
     new RoutePokemon({
         land: ['Bidoof', 'Starly', 'Eevee', 'Drifloon', 'Buizel', 'Wurmple', 'Silcoon', 'Cascoon', 'Mime Jr.', 'Ponyta', 'Rapidash'],
     }),
@@ -1369,7 +1369,7 @@ Routes.add(new RegionRoute(
     1250000,
 ));
 Routes.add(new RegionRoute(
-    'Floaro Gardens', GameConstants.Region.sinnoh, 3,
+    'Floaro Gardens', Region.sinnoh, 3,
     new RoutePokemon({
         land: ['Wurmple', 'Silcoon', 'Cascoon', 'Beautifly', 'Dustox', 'Pichu', 'Drifloon', 'Shinx', 'Luxio', /*'Shaymin' Maybe add temporarily during quest?*/],
     }),
@@ -1380,7 +1380,7 @@ Routes.add(new RegionRoute(
     1250000,
 ));
 Routes.add(new RegionRoute(
-    'Sandgem Flats', GameConstants.Region.sinnoh, 4,
+    'Sandgem Flats', Region.sinnoh, 4,
     new RoutePokemon({
         land: ['Mime Jr.', 'Mr. Mime', 'Drifblim', 'Abra', 'Kadabra', 'Luxio', 'Luxray', 'Shellos (West)', 'Gastrodon (West)', 'Alakazam', 'Staravia'],
         headbutt: ['Wormadam (Plant)', 'Graveler'],
@@ -1392,7 +1392,7 @@ Routes.add(new RegionRoute(
     1250000,
 ));
 Routes.add(new RegionRoute(
-    'Deertrack Path', GameConstants.Region.sinnoh, 5,
+    'Deertrack Path', Region.sinnoh, 5,
     new RoutePokemon({
         land: ['Kricketot', 'Zubat', 'Munchlax', 'Starly', 'Drifloon'],
         headbutt: ['Burmy (Plant)', 'Geodude'],
@@ -1404,7 +1404,7 @@ Routes.add(new RegionRoute(
     1250000,
 ));
 Routes.add(new RegionRoute(
-    'Deertrack Heights', GameConstants.Region.sinnoh, 6,
+    'Deertrack Heights', Region.sinnoh, 6,
     new RoutePokemon({
         land: ['Geodude', 'Zubat', 'Golbat', 'Shinx', 'Stantler', 'Starly', 'Staravia', 'Chimchar', 'Monferno'],
         headbutt: ['Burmy (Plant)', 'Geodude'],
@@ -1416,7 +1416,7 @@ Routes.add(new RegionRoute(
     1250000,
 ));
 Routes.add(new RegionRoute(
-    'Windswept Run', GameConstants.Region.sinnoh, 7,
+    'Windswept Run', Region.sinnoh, 7,
     new RoutePokemon({
         land: ['Abra', 'Drifloon', 'Kricketot', 'Kricketune', 'Zubat', 'Buizel', 'Starly', 'Staravia'],
         headbutt: ['Burmy (Plant)', 'Geodude'],
@@ -1428,7 +1428,7 @@ Routes.add(new RegionRoute(
     1250000,
 ));
 Routes.add(new RegionRoute(
-    'Nature\'s Pantry', GameConstants.Region.sinnoh, 8,
+    'Nature\'s Pantry', Region.sinnoh, 8,
     new RoutePokemon({
         land: ['Kricketot', 'Kricketune', 'Pichu', 'Pikachu', 'Zubat', 'Paras', 'Parasect', 'Starly', 'Staravia'],
         headbutt: ['Burmy (Plant)', 'Geodude'],
@@ -1440,7 +1440,7 @@ Routes.add(new RegionRoute(
     1250000,
 ));
 Routes.add(new RegionRoute(
-    'Worn Bridge', GameConstants.Region.sinnoh, 9,
+    'Worn Bridge', Region.sinnoh, 9,
     new RoutePokemon({
         land: ['Geodude', 'Zubat'],
         headbutt: ['Burmy (Plant)'],
@@ -1452,7 +1452,7 @@ Routes.add(new RegionRoute(
     1250000,
 ));
 Routes.add(new RegionRoute(
-    'Gruelling Grove', GameConstants.Region.sinnoh, 10,
+    'Gruelling Grove', Region.sinnoh, 10,
     new RoutePokemon({
         land: ['Combee', 'Heracross', 'Beautifly', 'Dustox', 'Mothim'],
         headbutt: ['Burmy (Plant)', 'Wormadam (Plant)'],
@@ -1464,7 +1464,7 @@ Routes.add(new RegionRoute(
     1250000,
 ));
 Routes.add(new RegionRoute(
-    'Tidewater Dam', GameConstants.Region.sinnoh, 11,
+    'Tidewater Dam', Region.sinnoh, 11,
     new RoutePokemon({
         land: ['Bidoof', 'Bibarel', 'Zubat', 'Golbat', 'Kricketot', 'Kricketune', 'Starly', 'Staravia'],
         headbutt: ['Burmy (Plant)', 'Geodude'],
@@ -1476,7 +1476,7 @@ Routes.add(new RegionRoute(
     1250000,
 ));
 Routes.add(new RegionRoute(
-    'Obsidian Falls', GameConstants.Region.sinnoh, 12,
+    'Obsidian Falls', Region.sinnoh, 12,
     new RoutePokemon({
         land: ['Gyarados'],
         water: ['Magikarp'],
@@ -1490,7 +1490,7 @@ Routes.add(new RegionRoute(
 ));
 // Basculegion
 Routes.add(new RegionRoute(
-    'Ramanas Island', GameConstants.Region.sinnoh, 13,
+    'Ramanas Island', Region.sinnoh, 13,
     new RoutePokemon({
         land: ['Shellos (West)', 'Gastrodon (West)', 'Aipom', 'Drifloon', 'Drifblim', 'Chimchar', 'Monferno', 'Infernape', 'Starly', 'Staravia'],
         headbutt: ['Combee', 'Graveler'],
@@ -1502,7 +1502,7 @@ Routes.add(new RegionRoute(
     1250000,
 ));
 Routes.add(new RegionRoute(
-    'Golden Lowlands', GameConstants.Region.sinnoh, 14,
+    'Golden Lowlands', Region.sinnoh, 14,
     new RoutePokemon({
         land: ['Psyduck', 'Gastly', 'Budew', 'Kricketot', 'Kricketune', 'Paras', 'Parasect', 'Carnivine'],
         headbutt: ['Burmy (Sand)', 'Geodude', 'Graveler'],
@@ -1514,7 +1514,7 @@ Routes.add(new RegionRoute(
     1250000,
 ));
 Routes.add(new RegionRoute(
-    'Scarlet Bog', GameConstants.Region.sinnoh, 15,
+    'Scarlet Bog', Region.sinnoh, 15,
     new RoutePokemon({
         land: ['Hippopotas', 'Hippowdon', 'Gastly', 'Haunter', 'Stunky', 'Skuntank', 'Croagunk', 'Geodude', 'Graveler'],
     }),
@@ -1525,7 +1525,7 @@ Routes.add(new RegionRoute(
     1250000,
 ));
 Routes.add(new RegionRoute(
-    'Cloudpool Ridge', GameConstants.Region.sinnoh, 16,
+    'Cloudpool Ridge', Region.sinnoh, 16,
     new RoutePokemon({
         land: ['Combee', 'Zubat', 'Golbat', 'Roselia', 'Kricketot', 'Kricketune', 'Paras', 'Parasect', 'Murkrow', 'Honchkrow', 'Roserade', 'Carnivine'],
         headbutt: ['Burmy (Sand)', 'Geodude', 'Graveler'],
@@ -1537,7 +1537,7 @@ Routes.add(new RegionRoute(
     1250000,
 ));
 Routes.add(new RegionRoute(
-    'Diamond Heath', GameConstants.Region.sinnoh, 17,
+    'Diamond Heath', Region.sinnoh, 17,
     new RoutePokemon({
         land: ['Paras', 'Parasect', 'Zubat', 'Golbat', 'Rhyhorn'],
         headbutt: ['Geodude', 'Graveler', 'Bonsly'],
@@ -1549,7 +1549,7 @@ Routes.add(new RegionRoute(
     1250000,
 ));
 Routes.add(new RegionRoute(
-    'Cottonsedge Prairie', GameConstants.Region.sinnoh, 18,
+    'Cottonsedge Prairie', Region.sinnoh, 18,
     new RoutePokemon({
         land: ['Pachirisu', 'Togepi', 'Gastly', 'Haunter', 'Petilil'],
         headbutt: ['Combee', 'Vespiquen', 'Geodude', 'Graveler'],
@@ -1561,7 +1561,7 @@ Routes.add(new RegionRoute(
     1250000,
 ));
 Routes.add(new RegionRoute(
-    'Droning Meadow', GameConstants.Region.sinnoh, 19,
+    'Droning Meadow', Region.sinnoh, 19,
     new RoutePokemon({
         land: ['Paras', 'Parasect', 'Gastly', 'Haunter', 'Bidoof', 'Bibarel', 'Yanma'],
         headbutt: ['Combee', 'Vespiquen', 'Pachirisu', 'Geodude', 'Graveler'],
@@ -1573,7 +1573,7 @@ Routes.add(new RegionRoute(
     1250000,
 ));
 Routes.add(new RegionRoute(
-    'Bolderoll Slope', GameConstants.Region.sinnoh, 20,
+    'Bolderoll Slope', Region.sinnoh, 20,
     new RoutePokemon({
         land: ['Rhyhorn', 'Zubat', 'Zubat', 'Golbat', 'Geodude', 'Graveler'],
         headbutt: ['Burmy (Sand)'],
@@ -1585,7 +1585,7 @@ Routes.add(new RegionRoute(
     1250000,
 ));
 Routes.add(new RegionRoute(
-    'Gapejaw Bog', GameConstants.Region.sinnoh, 21,
+    'Gapejaw Bog', Region.sinnoh, 21,
     new RoutePokemon({
         land: ['Bidoof', 'Bibarel', 'Gastly', 'Haunter', 'Croagunk', 'Tangela', 'Budew', 'Roselia', 'Geodude', 'Graveler', 'Ralts', 'Psyduck', 'Hippopotas', 'Tangrowth', 'Hippowdon', 'Carnivine', 'Yanma'],
         water: ['Barboach', 'Whiscash'],
@@ -1598,7 +1598,7 @@ Routes.add(new RegionRoute(
     1250000,
 ));
 Routes.add(new RegionRoute(
-    'Ursa\'s Ring', GameConstants.Region.sinnoh, 22,
+    'Ursa\'s Ring', Region.sinnoh, 22,
     new RoutePokemon({
         land: ['Geodude', 'Graveler', 'Gastly', 'Haunter', 'Teddiursa', 'Ursaring', 'Yanma'],
         headbutt: ['Burmy (Sand)', 'Pachirisu'],
@@ -1611,7 +1611,7 @@ Routes.add(new RegionRoute(
 ));
 //Basculegion
 Routes.add(new RegionRoute(
-    'Holm of Trials', GameConstants.Region.sinnoh, 23,
+    'Holm of Trials', Region.sinnoh, 23,
     new RoutePokemon({
         land: ['Psyduck', 'Golduck', 'Gastly', 'Haunter', 'Croagunk', 'Toxicroak', 'Petilil', 'Goomy', 'Hisuian Sliggoo', 'Torterra', 'Carnivine'],
         headbutt: ['Burmy (Sand)', 'Pachirisu', 'Geodude', 'Graveler'],
@@ -1623,7 +1623,7 @@ Routes.add(new RegionRoute(
     1250000,
 ));
 Routes.add(new RegionRoute(
-    'Crossing Slope', GameConstants.Region.sinnoh, 24,
+    'Crossing Slope', Region.sinnoh, 24,
     new RoutePokemon({
         land: ['Glameow', 'Purugly', 'Murkrow', 'Starly', 'Staravia', 'Drifloon', 'Drifblim'],
         headbutt: ['Burmy (Trash)', 'Wormadam (Trash)', 'Geodude', 'Graveler'],
@@ -1635,7 +1635,7 @@ Routes.add(new RegionRoute(
     1250000,
 ));
 Routes.add(new RegionRoute(
-    'Ginkgo Landing', GameConstants.Region.sinnoh, 25,
+    'Ginkgo Landing', Region.sinnoh, 25,
     new RoutePokemon({
         land: ['Skorupi', 'Murkrow', 'Spheal', 'Drifloon', 'Buizel', 'Floatzel', 'Walrein', 'Machoke'],
         headbutt: ['Burmy (Trash)', 'Wormadam (Trash)', 'Geodude', 'Graveler'],
@@ -1647,7 +1647,7 @@ Routes.add(new RegionRoute(
     1250000,
 ));
 Routes.add(new RegionRoute(
-    'Aipom Hill', GameConstants.Region.sinnoh, 26,
+    'Aipom Hill', Region.sinnoh, 26,
     new RoutePokemon({
         land: ['Aipom', 'Ambipom', 'Murkrow', 'Buizel', 'Floatzel', 'Combee', 'Mothim'],
         headbutt: ['Burmy (Trash)', 'Wormadam (Trash)', 'Geodude', 'Graveler'],
@@ -1659,7 +1659,7 @@ Routes.add(new RegionRoute(
     1250000,
 ));
 Routes.add(new RegionRoute(
-    'Bather\'s Lagoon', GameConstants.Region.sinnoh, 27,
+    'Bather\'s Lagoon', Region.sinnoh, 27,
     new RoutePokemon({
         land: ['Starly', 'Staravia', 'Togepi', 'Drifloon', 'Drifblim', 'Buizel', 'Floatzel', 'Psyduck', 'Golduck', 'Murkrow', 'Beautifly', 'Dustox'],
         headbutt: ['Burmy (Trash)', 'Wormadam (Trash)', 'Geodude', 'Graveler'],
@@ -1671,7 +1671,7 @@ Routes.add(new RegionRoute(
     1250000,
 ));
 Routes.add(new RegionRoute(
-    'Hideaway Bay', GameConstants.Region.sinnoh, 28,
+    'Hideaway Bay', Region.sinnoh, 28,
     new RoutePokemon({
         land: ['Spheal', 'Sealeo', 'Murkrow', 'Happiny', 'Chansey', 'Aipom'],
         water: ['Remoraid'],
@@ -1684,7 +1684,7 @@ Routes.add(new RegionRoute(
     1250000,
 ));
 Routes.add(new RegionRoute(
-    'Deadwood Haunt', GameConstants.Region.sinnoh, 29,
+    'Deadwood Haunt', Region.sinnoh, 29,
     new RoutePokemon({
         land: ['Duskull', 'Dusclops', 'Dusknoir', 'Chatot', 'Starly', 'Staravia', 'Staraptor', 'Drifloon', 'Drifblim'],
         headbutt: ['Geodude', 'Graveler'],
@@ -1696,7 +1696,7 @@ Routes.add(new RegionRoute(
     1250000,
 ));
 Routes.add(new RegionRoute(
-    'Sand\'s Reach', GameConstants.Region.sinnoh, 30,
+    'Sand\'s Reach', Region.sinnoh, 30,
     new RoutePokemon({
         land: ['Starly', 'Staravia', 'Drifloon', 'Drifblim'],
         water: ['Remoraid'],
@@ -1709,7 +1709,7 @@ Routes.add(new RegionRoute(
     1250000,
 ));
 Routes.add(new RegionRoute(
-    'Castaway Shore', GameConstants.Region.sinnoh, 31,
+    'Castaway Shore', Region.sinnoh, 31,
     new RoutePokemon({
         land: ['Machop', 'Machoke', 'Murkrow', 'Skorupi', 'Drapion', 'Octillery'],
         headbutt: ['Burmy (Trash)', 'Wormadam (Trash)', 'Geodude', 'Graveler'],
@@ -1722,7 +1722,7 @@ Routes.add(new RegionRoute(
 ));
 //might remove or merge into Veilstone Cape, makes Hisuian Growlithe easy, removing that dungeons main use, and offers little else
 Routes.add(new RegionRoute(
-    'Windbreak Stand', GameConstants.Region.sinnoh, 32,
+    'Windbreak Stand', Region.sinnoh, 32,
     new RoutePokemon({
         land: ['Parasect', 'Stantler', 'Hisuian Growlithe'],
         headbutt: ['Wormadam (Trash)', 'Graveler'],
@@ -1734,7 +1734,7 @@ Routes.add(new RegionRoute(
     1250000,
 ));
 Routes.add(new RegionRoute(
-    'Spring Path', GameConstants.Region.sinnoh, 33,
+    'Spring Path', Region.sinnoh, 33,
     new RoutePokemon({
         land: ['Bibarel', 'Toxicroak', 'Mothim'],
         headbutt: ['Burmy (Trash)', 'Wormadam (Trash)', 'Graveler'],
@@ -1747,7 +1747,7 @@ Routes.add(new RegionRoute(
 ));
 //May consider merging this and Spring Path
 Routes.add(new RegionRoute(
-    'Islespy Shore', GameConstants.Region.sinnoh, 34,
+    'Islespy Shore', Region.sinnoh, 34,
     new RoutePokemon({
         land: ['Sealeo', 'Walrein', 'Murkrow', 'Empoleon'],
     }),
@@ -1758,7 +1758,7 @@ Routes.add(new RegionRoute(
     1250000,
 ));
 Routes.add(new RegionRoute(
-    'Tranquility Cove', GameConstants.Region.sinnoh, 35,
+    'Tranquility Cove', Region.sinnoh, 35,
     new RoutePokemon({
         land: ['Shellos (East)', 'Staravia', 'Staraptor', 'Togepi', 'Togetic', 'Drifloon', 'Drifblim'],
         water: ['Mantyke', 'Mantine', 'Basculin (White-Striped)', 'Remoraid', 'Hisuian Qwilfish'],
@@ -1771,7 +1771,7 @@ Routes.add(new RegionRoute(
     1250000,
 ));
 Routes.add(new RegionRoute(
-    'Lunker\'s Lair', GameConstants.Region.sinnoh, 36,
+    'Lunker\'s Lair', Region.sinnoh, 36,
     new RoutePokemon({
         water: ['Tentacool', 'Tentacruel', 'Drifloon', 'Drifblim', 'Hisuian Qwilfish'],
         headbutt: ['Burmy (Trash)', 'Wormadam (Trash)'],
@@ -1783,7 +1783,7 @@ Routes.add(new RegionRoute(
     1250000,
 ));
 Routes.add(new RegionRoute(
-    'Seagrass Haven', GameConstants.Region.sinnoh, 37,
+    'Seagrass Haven', Region.sinnoh, 37,
     new RoutePokemon({
         land: ['Shellos (East)', 'Gastrodon (East)'],
         water: ['Finneon', 'Lumineon', 'Drifloon', 'Drifblim', 'Tentacool', 'Tentacruel'],
@@ -1797,7 +1797,7 @@ Routes.add(new RegionRoute(
 ));
 //May merge into something else
 Routes.add(new RegionRoute(
-    'Tombolo Walk', GameConstants.Region.sinnoh, 38,
+    'Tombolo Walk', Region.sinnoh, 38,
     new RoutePokemon({
         land: ['Happiny', 'Chansey'],
         headbutt: ['Burmy (Trash)', 'Wormadam (Trash)', 'Graveler'],
@@ -1809,7 +1809,7 @@ Routes.add(new RegionRoute(
     1250000,
 ));
 Routes.add(new RegionRoute(
-    'Heavenward Lookout', GameConstants.Region.sinnoh, 39,
+    'Heavenward Lookout', Region.sinnoh, 39,
     new RoutePokemon({
         land: ['Luxio', 'Luxray', 'Paras', 'Parasect', 'Zubat', 'Golbat', 'Yanma', 'Yanmega'],
         headbutt: ['Burmy (Sand)', 'Wormadam (Sand)', 'Graveler'],
@@ -1821,7 +1821,7 @@ Routes.add(new RegionRoute(
     1250000,
 ));
 Routes.add(new RegionRoute(
-    'Wayward Wood', GameConstants.Region.sinnoh, 40,
+    'Wayward Wood', Region.sinnoh, 40,
     new RoutePokemon({
         land: ['Stantler', 'Zubat', 'Golbat', 'Heracross', 'Paras', 'Parasect', 'Mothim'],
         water: ['Psyduck', 'Golduck'],
@@ -1834,7 +1834,7 @@ Routes.add(new RegionRoute(
     1250000,
 ));
 Routes.add(new RegionRoute(
-    'Lonely Spring', GameConstants.Region.sinnoh, 41,
+    'Lonely Spring', Region.sinnoh, 41,
     new RoutePokemon({
         land: ['Carnivine'],
         water: ['Psyduck', 'Golduck'],
@@ -1847,7 +1847,7 @@ Routes.add(new RegionRoute(
     1250000,
 ));
 Routes.add(new RegionRoute(
-    'Sonorous Path', GameConstants.Region.sinnoh, 42,
+    'Sonorous Path', Region.sinnoh, 42,
     new RoutePokemon({
         land: ['Shinx', 'Luxio', 'Luxray', 'Teddiursa', 'Ursaring'],
         headbutt: ['Heracross', 'Bronzor'],
@@ -1859,7 +1859,7 @@ Routes.add(new RegionRoute(
     1250000,
 ));
 Routes.add(new RegionRoute(
-    'Celestica Trail', GameConstants.Region.sinnoh, 43,
+    'Celestica Trail', Region.sinnoh, 43,
     new RoutePokemon({
         land: ['Rhyhorn', 'Rhydon', 'Onix', 'Steelix', 'Hippopotas', 'Hippowdon', 'Chimeco',],
         headbutt: ['Graveler'],
@@ -1871,7 +1871,7 @@ Routes.add(new RegionRoute(
     1250000,
 ));
 Routes.add(new RegionRoute(
-    'Fabled Spring', GameConstants.Region.sinnoh, 44,
+    'Fabled Spring', Region.sinnoh, 44,
     new RoutePokemon({
         land: ['Cleffa', 'Clefairy', 'Clefable', 'Budew', 'Roselia'],
         water: ['Basculin (White-Striped)'],
@@ -1884,7 +1884,7 @@ Routes.add(new RegionRoute(
     1250000,
 ));
 Routes.add(new RegionRoute(
-    'Bolderoll Ravine', GameConstants.Region.sinnoh, 45,
+    'Bolderoll Ravine', Region.sinnoh, 45,
     new RoutePokemon({
         land: ['Geodude', 'Graveler', 'Golem', 'Gastly', 'Haunter', 'Machop', 'Machoke'],
         headbutt: ['Cherubi', 'Cherrim (Overcast)', 'Graveler'],
@@ -1896,7 +1896,7 @@ Routes.add(new RegionRoute(
     1250000,
 ));
 Routes.add(new RegionRoute(
-    'Stonetooth Rows', GameConstants.Region.sinnoh, 46,
+    'Stonetooth Rows', Region.sinnoh, 46,
     new RoutePokemon({
         land: ['Bronzor', 'Bronzong', 'Rotom', 'Misdreavus', 'Mismagius'],
         headbutt: ['Burmy (Sand)', 'Wormadam (Sand)', 'Graveler'],
@@ -1908,7 +1908,7 @@ Routes.add(new RegionRoute(
     1250000,
 ));
 Routes.add(new RegionRoute(
-    'Cloudcap Pass', GameConstants.Region.sinnoh, 47,
+    'Cloudcap Pass', Region.sinnoh, 47,
     new RoutePokemon({
         land: ['Elekid', 'Electabuzz', 'Electivire', 'Luxio', 'Luxray'],
         headbutt: ['Burmy (Sand)', 'Wormadam (Sand)', 'Nosepass'],
@@ -1920,7 +1920,7 @@ Routes.add(new RegionRoute(
     1250000,
 ));
 Routes.add(new RegionRoute(
-    'Whiteout Valley', GameConstants.Region.sinnoh, 48,
+    'Whiteout Valley', Region.sinnoh, 48,
     new RoutePokemon({
         land: ['Aipom', 'Snorunt'],
         headbutt: ['Burmy (Trash)', 'Wormadam (Trash)'],
@@ -1932,7 +1932,7 @@ Routes.add(new RegionRoute(
     1250000,
 ));
 Routes.add(new RegionRoute(
-    'Bonechill Wastes', GameConstants.Region.sinnoh, 49,
+    'Bonechill Wastes', Region.sinnoh, 49,
     new RoutePokemon({
         land: ['Swinub', 'Buneary', 'Lopunny', 'Gastly', 'Haunter', 'Glalie', 'Froslass', 'Bergmite', 'Snover', 'Abomasnow', 'Drifloon', 'Drifblim', 'Snorunt', 'Aipom', 'Piloswine'],
         headbutt: ['Burmy (Trash)', 'Wormadam (Trash)'],
@@ -1944,7 +1944,7 @@ Routes.add(new RegionRoute(
     1250000,
 ));
 Routes.add(new RegionRoute(
-    'Arena\'s Approach', GameConstants.Region.sinnoh, 50,
+    'Arena\'s Approach', Region.sinnoh, 50,
     new RoutePokemon({
         land: ['Machop', 'Machoke', 'Bergmite', 'Gligar', 'Duskull', 'Dusclops', 'Elekid', 'Electabuzz', 'Lickitung', 'Snorlax', 'Lucario', 'Lopunny', 'Aipom', 'Buneary', 'Munchlax', 'Riolu', 'Machamp', 'Piloswine'],
         headbutt: ['Burmy (Trash)', 'Wormadam (Trash)', 'Bergmite', 'Snorunt', 'Glalie'],
@@ -1956,7 +1956,7 @@ Routes.add(new RegionRoute(
     1250000,
 ));
 Routes.add(new RegionRoute(
-    'Avalanche Slopes', GameConstants.Region.sinnoh, 51,
+    'Avalanche Slopes', Region.sinnoh, 51,
     new RoutePokemon({
         land: ['Aipom', 'Ambipom', 'Happiny', 'Chansey', 'Swinub', 'Piloswine', 'Gible', 'Gabite', 'Duskull', 'Dusclops', 'Snorunt', 'Glalie', 'Froslass', 'Lickitung', 'Lickilicky', 'Blissey', 'Garchomp'],
         headbutt: ['Burmy (Trash)', 'Wormadam (Trash)'],
@@ -1968,7 +1968,7 @@ Routes.add(new RegionRoute(
     1250000,
 ));
 Routes.add(new RegionRoute(
-    'Icebound Falls', GameConstants.Region.sinnoh, 52,
+    'Icebound Falls', Region.sinnoh, 52,
     new RoutePokemon({
         land: ['Machop','Machoke', 'Riolu', 'Lucario', 'Elekid', 'Electabuzz', 'Crobat'],
         headbutt: ['Burmy (Trash)', 'Wormadam (Trash)', 'Snorunt', 'Glalie'],
@@ -1980,7 +1980,7 @@ Routes.add(new RegionRoute(
     1250000,
 ));
 Routes.add(new RegionRoute(
-    'Heart\'s Crag', GameConstants.Region.sinnoh, 53,
+    'Heart\'s Crag', Region.sinnoh, 53,
     new RoutePokemon({
         land: ['Ralts', 'Kirlia', 'Drifloon', 'Drifblim', 'Aipom', 'Ambipom', 'Gardevoir', 'Rufflet'],
         water: ['Basculin (White-Striped)'],
@@ -1993,7 +1993,7 @@ Routes.add(new RegionRoute(
     1250000,
 ));
 Routes.add(new RegionRoute(
-    'Snowfall Hot Spring', GameConstants.Region.sinnoh, 54,
+    'Snowfall Hot Spring', Region.sinnoh, 54,
     new RoutePokemon({
         land: ['Machoke', 'Lickitung', 'Snorlax', 'Lucario', 'Lopunny', 'Machop', 'Aipom', 'Buneary', 'Munchlax', 'Riolu'],
     }),
@@ -2004,7 +2004,7 @@ Routes.add(new RegionRoute(
     1250000,
 ));
 Routes.add(new RegionRoute(
-    'Glacier Terrace', GameConstants.Region.sinnoh, 55,
+    'Glacier Terrace', Region.sinnoh, 55,
     new RoutePokemon({
         land: ['Gligar', 'Drifloon', 'Drifblim', 'Aipom', 'Snover', 'Hisuian Sneasel', 'Abomasnow'],
         headbutt: ['Burmy (Trash)', 'Wormadam (Trash)', 'Snorunt', 'Glalie'],
