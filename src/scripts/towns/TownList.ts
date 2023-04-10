@@ -4043,7 +4043,6 @@ TownList['Prelude Beach'] = new Town(
     [TemporaryBattleList['Kamado 2'], new DockTownContent()],
     {
         requirements: [new DevelopmentRequirement()],
-        npcs: [Laventon1, ArcPhone, Laventon2, Laventon3, Kamado4],
     }
 );
 TownList['Jubilife Village'] = new Town(
@@ -4053,7 +4052,6 @@ TownList['Jubilife Village'] = new Town(
     [JubilifeVillageShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Jubilife Village']), TemporaryBattleList['Volo 1'], TemporaryBattleList['Akari 1'], TemporaryBattleList['Akari 2'], TemporaryBattleList['Adaman 1']],
     {
         requirements: [new DevelopmentRequirement()],
-        npcs: [Laventon4, Beni1, Akari1, Cyllene1, Laventon5, Cyllene2, Volo1, Akari3, Akari4, Beni2, AdamanIrida1, Akari5, Mai5, Volo2, Arezu1, Akari6, Beni3, Lian2, LaventonAkari2],
     }
 );
 TownList['Galaxy Hall'] = new Town(
@@ -4063,7 +4061,6 @@ TownList['Galaxy Hall'] = new Town(
     [new BulletinBoard(GameConstants.BulletinBoards.Hisui)],
     {
         requirements: [new DevelopmentRequirement()],
-        npcs: [Cyllene3, Laventon6, Cyllene4, Kamado1, AdamanIridaKamado1, LaventonCyllene1, AdamanMai1, Laventon9, Kamado2, KamadoArezu1, Cyllene5, BeniAdamanKamado1, Kamado3, IridaKamado1, Kamado5, KamadoAdamanMelli1],
     }
 );
 TownList['Fieldlands Camp'] = new Town(
@@ -4073,7 +4070,6 @@ TownList['Fieldlands Camp'] = new Town(
     [TemporaryBattleList['Warden Mai']],
     {
         requirements: [new DevelopmentRequirement()],
-        npcs: [Akari2, Laventon7, Mai1, Mai2, Laventon8],
     }
 );
 TownList['Heights Camp'] = new Town(
@@ -4083,7 +4079,6 @@ TownList['Heights Camp'] = new Town(
     [TemporaryBattleList['Alpha Kricketune']],
     {
         requirements: [new DevelopmentRequirement()],
-        npcs: [Mai3, Mai4, AdamanMai2],
     }
 );
 TownList['Grandtree Arena'] = new Town(
@@ -4093,7 +4088,6 @@ TownList['Grandtree Arena'] = new Town(
     [TemporaryBattleList['Warden Lian'], TemporaryBattleList['Irida 1'], TemporaryBattleList['Lord of the Woods: Kleavor']],
     {
         requirements: [new DevelopmentRequirement()],
-        npcs: [Lian1, LianIrida1, LianIrida2, LianIrida3, LianIrida4],
     }
 );
 TownList['Mirelands Camp'] = new Town(
@@ -4103,7 +4097,6 @@ TownList['Mirelands Camp'] = new Town(
     [TemporaryBattleList['Coin 1']],
     {
         requirements: [new DevelopmentRequirement()],
-        npcs: [LaventonAkari1, CharmCloverCoin1, CharmCloverCoin2, Volo6],
     }
 );
 TownList['Bogbound Camp'] = new Town(
@@ -4122,7 +4115,6 @@ TownList['Ancient Solaceon Ruins'] = new Town(
     [TemporaryBattleList['Volo 2']],
     {
         requirements: [new DevelopmentRequirement()],
-        npcs: [Calaba1, Volo3, Volo4, Volo5, Calaba2],
     }
 );
 TownList['Sludge Mound'] = new Town(
@@ -4132,7 +4124,6 @@ TownList['Sludge Mound'] = new Town(
     [TemporaryBattleList['Ursaluna']],
     {
         requirements: [new DevelopmentRequirement()],
-        npcs: [Calaba3, Calaba4],
     }
 );
 TownList['Diamond Settlement'] = new Town(
@@ -4142,7 +4133,6 @@ TownList['Diamond Settlement'] = new Town(
     [],
     {
         requirements: [new DevelopmentRequirement()],
-        npcs: [ArezuCalabaAdaman1],
     }
 );
 TownList['Brava Arena'] = new Town(
@@ -4152,7 +4142,6 @@ TownList['Brava Arena'] = new Town(
     [TemporaryBattleList['Lady of the Ridge: Lilligant']],
     {
         requirements: [new DevelopmentRequirement()],
-        npcs: [ArezuCalabaAdaman2, ArezuCalabaAdaman3],
     }
 );
 TownList['Beachside Camp'] = new Town(
@@ -4162,7 +4151,6 @@ TownList['Beachside Camp'] = new Town(
     [TemporaryBattleList['Irida 2']],
     {
         requirements: [new DevelopmentRequirement()],
-        npcs: [Laventon10, Irida1, Irida2],
     }
 );
 TownList['Coastlands Camp'] = new Town(
@@ -4172,7 +4160,6 @@ TownList['Coastlands Camp'] = new Town(
     [],
     {
         requirements: [new DevelopmentRequirement()],
-        npcs: [IscanPalina1, CharmCloverCoin3, IscanPalina2],
     }
 );
 TownList['Iscan\'s Cabin'] = new Town(
@@ -4182,7 +4169,6 @@ TownList['Iscan\'s Cabin'] = new Town(
     [],
     {
         requirements: [new DevelopmentRequirement()],
-        npcs: [Volo7, Iscan1, Iscan2],
     }
 );
 TownList['Molten Arena'] = new Town(
@@ -4192,7 +4178,6 @@ TownList['Molten Arena'] = new Town(
     [TemporaryBattleList['Clover'], TemporaryBattleList['Coin 2'], TemporaryBattleList['Charm 1'], TemporaryBattleList['Lord of the Isles: Arcanine']],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Firespit Island'))],
-        npcs: [CharmCloverCoin4, CharmCloverCoin5, IscanPalina3, IridaPalinaIscan1, IscanPalina4, Irida3],
     }
 );
 TownList['Highlands Camp'] = new Town(
@@ -4531,11 +4516,7 @@ TownList['Veilstone Cape'] = new DungeonTown(
     'Veilstone Cape',
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Hisui,
-    [new DevelopmentRequirement()],
-    [],
-    {
-        npcs: [Palina1],
-    }
+    [new DevelopmentRequirement()]
 );
 TownList['Firespit Island'] = new DungeonTown(
     'Firespit Island',
