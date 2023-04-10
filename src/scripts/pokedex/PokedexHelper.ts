@@ -146,6 +146,26 @@ class PokedexHelper {
                 return false;
             }
 
+            // Only pokemon with selected category
+            if (PokedexFilters.category.value() != -1 && PokedexFilters.category.value() != App.game.party.getPokemon(pokemon.id)?.category) {
+                return false;
+            }
+
+            const uniqueTransformation = PokedexFilters.uniqueTransformation.value();
+            // Only Base Pokémon with Mega available
+            if (uniqueTransformation == 'mega-available' && !(pokemon as PokemonListData).evolutions?.some((p) => p.evolvedPokemon.startsWith('Mega '))) {
+                // Another option: !(pokemon as PokemonListData).evolutions?.some((p) => p.restrictions.some(p => p instanceof MegaEvolveRequirement))
+                return false;
+            }
+            // Only Base Pokémon without Mega Evolution
+            if (uniqueTransformation == 'mega-unobtained' && (!(pokemon as PokemonListData).evolutions?.some((p) => p.evolvedPokemon.startsWith('Mega ') && !App.game.party.alreadyCaughtPokemonByName(p.evolvedPokemon)))) {
+                return false;
+            }
+            // Only Mega Pokémon
+            if (uniqueTransformation == 'mega-evolution' && !(pokemon as PokemonListData).name.startsWith('Mega ')) {
+                return false;
+            }
+
             return true;
         }) as typeof pokemonList;
     }

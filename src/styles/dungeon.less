@@ -1,9 +1,12 @@
+@import url("for");
+
 .tile {
   position: relative;
   height: 45px;
   border: 1px solid black;
   margin: 1px;
   cursor: pointer;
+
   &:hover {
     opacity: 0.8;
   }
@@ -40,6 +43,7 @@
 
 .tile-chest {
   background-color: #f1c40f;
+
   &::after {
     position: absolute;
     top: 15%;
@@ -48,12 +52,20 @@
     display: block;
     height: 70%;
     width: 70%;
-    background: center / contain no-repeat url('../assets/images/dungeons/chest.png');
+    background: center / contain no-repeat var(--chest-image);
+  }
+  @loot-tiers: common, rare, epic, legendary, mythic;
+  .for(@loot-tiers); .-each(@tier) {
+      &.tile-chest-@{tier}::after {
+          --chest-image: url('../assets/images/dungeons/chest-@{tier}.png');
+      }
   }
 }
 
+
 .tile-boss {
   background-color: #9b59b6;
+
   &::after {
     position: absolute;
     top: 15%;
@@ -68,6 +80,7 @@
 
 .tile-ladder {
     background-color: #747252;
+
     &::after {
       position: absolute;
       top: 15%;
@@ -89,6 +102,7 @@
   .dungeon-enemy {
     margin-top: -15px;
   }
+
   .progress.hitpoints.dungeonhitpoints {
     bottom: 65px;
   }
@@ -102,6 +116,7 @@
 
 .dungeon-chest {
   margin-top: 25px;
+
   @media (max-width: 768px) {
     margin-top: 20px;
     position: absolute;
@@ -115,6 +130,7 @@
     margin-top: 30px;
     right: 10%;
   }
+
   p {
     font-size: small;
     margin-bottom: 0;
@@ -123,13 +139,13 @@
 
 .dungeon-button {
   margin-top: 80px;
+
   @media (max-width: 768px) {
     margin-top: 50px;
   }
 }
 
 .dungeon-pokemon-locked {
-  -webkit-filter: brightness(0%); /* Safari 6.0 - 9.0 */
   filter: brightness(0%);
   opacity: 0.2;
 }
@@ -147,5 +163,13 @@
     bottom: -10px;
     left: -10px;
     width: 35%;
+  }
+
+  .dungeon-pokemon-pkrs {
+    position: absolute;
+    bottom: -12px;
+    left: 8px;
+    width: 70%;
+    z-index: 1;
   }
 }
