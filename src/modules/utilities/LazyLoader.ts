@@ -1,7 +1,7 @@
 import { Observable, ObservableArray, PureComputed } from 'knockout';
 import GameHelper from '../GameHelper';
 
-function createObserver(loader: HTMLElement, options: IntersectionObserverInit): { page: Observable<number>, observer: IntersectionObserver} {
+function createObserver(loader: HTMLElement, options: IntersectionObserverInit): { page: Observable<number>, observer: IntersectionObserver } {
     const page = ko.observable(1);
 
     let visible = false;

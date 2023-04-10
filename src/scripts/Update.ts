@@ -2035,8 +2035,93 @@ class Update implements Saveable {
             settingsData.pokedexCategoryFilter = -1;
             settingsData.breedingCategoryFilter = -1;
 
-            // Add Pyrite Blgd dungeon
+            // Reset Blue 5 to undefeated if he has been defeated before reaching the quest step to battle him
+            const teamRocketQuestLine = saveData.quests.questLines.find((q) => q.name == 'Team Rocket');
+            if (saveData.statistics.temporaryBattleDefeated[7]
+                && (teamRocketQuestLine?.state == 0 || (teamRocketQuestLine?.state == 1 && teamRocketQuestLine?.quest <= 2))
+            ) {
+                saveData.statistics.temporaryBattleDefeated[7] = 0;
+            }
+
+            // Add Phenac City Battles dungeon
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 57);
+
+            // Add Pyrite Town Battles dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 58);
+
+            // Add Pyrite Colosseum Battles dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 59);
+
+            // Add Pyrite Blgd dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 60);
+
+            // Add Pyrite Cave dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 61);
+
+            // Add Relic Cave dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 62);
+
+            // Add Mt. Battle Battles dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 63);
+
+            // Add The Under Subway dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 64);
+
+            // Add Cipher Lab Battles dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 65);
+
+            // Add Realgam Tower Battles dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 66);
+
+            // Add Realgam Colosseum Battles dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 67);
+
+            // Add Snagem Hideout dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 68);
+
+            // Add Deep Colosseum dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 69);
+
+            // Add Phenac Stadium dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 70);
+
+            // Add Under Colosseum dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 71);
+
+            // Add Orre Colosseum dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 72);
+
+            //Team Flare Grunt 1
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 114);
+
+            //Team Flare Grunt 2
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 115);
+
+            //Team Flare Lysandre
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 152);
+
+            //Team Flare Xerosic
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 153);
+
+            //Xerneas
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 154);
+
+            //Yveltal
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 155);
+
+            //Team Flare Boss Lysandre 1
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 156);
+
+            //Storyline AZ
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 166);
+
+            //Team Flare Boss Lysandre 2
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 178);
+
+            // Start Team Flare questline if player has beaten Sycamore 1 already
+            if (saveData.statistics.temporaryBattleDefeated[111]) {
+                Update.startQuestLine(saveData, 'A Beautiful World');
+            }
         },
     };
 

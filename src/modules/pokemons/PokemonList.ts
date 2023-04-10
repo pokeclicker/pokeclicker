@@ -87,7 +87,7 @@ export type PokemonListData = {
     }
 };
 
-function createPokemonArray<T extends readonly PokemonListData[] & Array<{name: V}>, V extends string>(...args: T) {
+function createPokemonArray<T extends readonly PokemonListData[] & Array<{ name: V }>, V extends string>(...args: T) {
     return args;
 }
 
@@ -5456,7 +5456,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 189,
         'eggCycles': 5,
-        // 'evolutions': [MegaEvolution('Gyarados', 'Mega Gyarados')],
+        'evolutions': [MegaEvolution('Gyarados', 'Mega Gyarados')],
         'base': {
             'hitpoints': 95,
             'attack': 125,
@@ -8876,6 +8876,26 @@ export const pokemonList = createPokemonArray(
     {
         'id': 249,
         'name': 'Lugia',
+        'catchRate': 3,
+        'type': [PokemonType.Psychic, PokemonType.Flying],
+        'levelType': LevelType.slow,
+        'exp': 306,
+        'eggCycles': 120,
+        'base': {
+            'hitpoints': 106,
+            'attack': 90,
+            'specialAttack': 90,
+            'defense': 130,
+            'specialDefense': 154,
+            'speed': 110,
+        },
+        'gender': {
+            'type': Genders.Genderless,
+        },
+    },
+    {
+        'id': 249.01,
+        'name': 'XD001',
         'catchRate': 3,
         'type': [PokemonType.Psychic, PokemonType.Flying],
         'levelType': LevelType.slow,
@@ -26220,7 +26240,7 @@ export const pokemonList = createPokemonArray(
     },
     {
         'id': 875.01,
-        'name': 'Eiscue (No Ice Face)',
+        'name': 'Eiscue (Noice Face)',
         'type': [PokemonType.Ice],
         'base': {
             'hitpoints': 75,

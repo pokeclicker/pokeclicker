@@ -792,7 +792,7 @@ dungeonList['Rocket Game Corner'] = new Dungeon('Rocket Game Corner',
                 new GymPokemon('Onix', 9501, 25),
                 new GymPokemon('Rhyhorn', 9501, 24),
                 new GymPokemon('Kangaskhan', 10101, 29),
-            ], { weight: 1 }, 'Giovanni', '(giovanni)'),
+            ], { weight: 1 }, 'Giovanni', 'Giovanni'),
     ],
     625, 7);
 
@@ -1086,7 +1086,7 @@ dungeonList['Silph Co.'] = new Dungeon('Silph Co.',
                 new GymPokemon('Rhyhorn', 12144, 37),
                 new GymPokemon('Kangaskhan', 12144, 35),
                 new GymPokemon('Nidoqueen', 16144, 41),
-            ], { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('Team Rocket', 2)}, 'Giovanni', '(giovanni)'),
+            ], { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('Team Rocket', 2)}, 'Giovanni', 'Giovanni'),
     ],
     875, 7);
 
@@ -3479,6 +3479,27 @@ dungeonList['Near Space'] = new Dungeon('Near Space',
 
 // Orre
 
+dungeonList['Phenac City Battles'] = new Dungeon('Phenac City Battles',
+    [],
+    {},
+    560000,
+    [],
+    40000, 131);
+
+dungeonList['Pyrite Town Battles'] = new Dungeon('Pyrite Town Battles',
+    [],
+    {},
+    560000,
+    [],
+    40000, 131);
+
+dungeonList['Pyrite Colosseum Battles'] = new Dungeon('Pyrite Colosseum Battles',
+    [],
+    {},
+    560000,
+    [],
+    40000, 131);
+
 dungeonList['Pyrite Bldg'] = new Dungeon('Pyrite Bldg',
     [
         new DungeonTrainer('Cooltrainer',
@@ -3578,6 +3599,90 @@ dungeonList['Pyrite Bldg'] = new Dungeon('Pyrite Bldg',
                 new GymPokemon('Linoone', 910000, 33),
             ], { weight: 1 }, 'Dokken', '(female)'),
     ],
+    40000, 131);
+
+dungeonList['Pyrite Cave'] = new Dungeon('Pyrite Cave',
+    [],
+    {},
+    560000,
+    [],
+    40000, 131);
+
+dungeonList['Relic Cave'] = new Dungeon('Relic Cave',
+    [],
+    {},
+    560000,
+    [],
+    40000, 131);
+
+dungeonList['Mt. Battle Battles'] = new Dungeon('Mt. Battle Battles',
+    [],
+    {},
+    560000,
+    [],
+    40000, 131);
+
+dungeonList['The Under Subway'] = new Dungeon('The Under Subway',
+    [],
+    {},
+    560000,
+    [],
+    40000, 131);
+
+dungeonList['Cipher Lab Battles'] = new Dungeon('Cipher Lab Battles',
+    [],
+    {},
+    560000,
+    [],
+    40000, 131);
+
+dungeonList['Realgam Tower Battles'] = new Dungeon('Phenac City Battles',
+    [],
+    {},
+    560000,
+    [],
+    40000, 131);
+
+dungeonList['Realgam Colosseum Battles'] = new Dungeon('Phenac City Battles',
+    [],
+    {},
+    560000,
+    [],
+    40000, 131);
+
+dungeonList['Snagem Hideout'] = new Dungeon('Snagem Hideout',
+    [],
+    {},
+    560000,
+    [],
+    40000, 131);
+
+dungeonList['Deep Colosseum Battles'] = new Dungeon('Deep Colosseum Battles',
+    [],
+    {},
+    560000,
+    [],
+    40000, 131);
+
+dungeonList['Phenac Stadium Battles'] = new Dungeon('Phenac Stadium Battles',
+    [],
+    {},
+    560000,
+    [],
+    40000, 131);
+
+dungeonList['Under Colosseum Battles'] = new Dungeon('Under Colosseum Battles',
+    [],
+    {},
+    560000,
+    [],
+    40000, 131);
+
+dungeonList['Orre Colosseum Battles'] = new Dungeon('Orre Colosseum Battles',
+    [],
+    {},
+    560000,
+    [],
     40000, 131);
 
 // Sinnoh
@@ -6805,6 +6910,7 @@ dungeonList['Kalos Power Plant'] = new Dungeon('Kalos Power Plant',
                 requirement: new MultiRequirement([
                     new ClearDungeonRequirement(5, GameConstants.getDungeonIndex('Kalos Power Plant')),
                     new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion),
+                    new QuestLineStepCompletedRequirement('A Beautiful World', 11),
                 ])}),
     ],
     575000, 13);
@@ -7072,7 +7178,7 @@ dungeonList['Frost Cavern'] = new Dungeon('Frost Cavern',
         new DungeonTrainer('Team Flare Mable',
             [new GymPokemon('Houndoom', 87365830, 48)],
             { weight: 1 }),
-        new DungeonBossPokemon('Abomasnow', 85376500, 50),
+        new DungeonBossPokemon('Abomasnow', 85376500, 50, {requirement: new QuestLineStepCompletedRequirement('A Beautiful World', 17)}),
     ],
     665500, 15);
 
@@ -7132,16 +7238,63 @@ dungeonList['Team Flare Secret HQ'] = new Dungeon('Team Flare Secret HQ',
     },
     8739480,
     [
+        new DungeonTrainer('Team Flare Aliana',
+            [
+                new GymPokemon('Houndoom', 47416644, 48),
+                new GymPokemon('Druddigon', 48374556, 49),
+            ],
+            { weight: 2, hide: true, requirement: new MultiRequirement([
+                new QuestLineStepCompletedRequirement('A Beautiful World', 24),
+                new QuestLineStepCompletedRequirement('A Beautiful World', 25, GameConstants.AchievementOption.less),
+            ])}),
+        new DungeonTrainer('Team Flare Celosia',
+            [
+                new GymPokemon('Manectric', 47416644, 48),
+                new GymPokemon('Drapion', 48374556, 49),
+            ],
+            { weight: 2, hide: true, requirement: new MultiRequirement([
+                new QuestLineStepCompletedRequirement('A Beautiful World', 25),
+                new QuestLineStepCompletedRequirement('A Beautiful World', 26, GameConstants.AchievementOption.less),
+            ])}),
+        new DungeonTrainer('Team Flare Bryony',
+            [
+                new GymPokemon('Liepard', 47416644, 48),
+                new GymPokemon('Bisharp', 48374556, 49),
+            ],
+            { weight: 2, hide: true, requirement: new MultiRequirement([
+                new QuestLineStepCompletedRequirement('A Beautiful World', 26),
+                new QuestLineStepCompletedRequirement('A Beautiful World', 27, GameConstants.AchievementOption.less),
+            ])}),
+        new DungeonTrainer('Team Flare Mable',
+            [
+                new GymPokemon('Houndoom', 47416644, 48),
+                new GymPokemon('Weavile', 48374556, 49),
+            ],
+            { weight: 2, hide: true, requirement: new MultiRequirement([
+                new QuestLineStepCompletedRequirement('A Beautiful World', 27),
+                new QuestLineStepCompletedRequirement('A Beautiful World', 28, GameConstants.AchievementOption.less),
+            ])}),
         new DungeonTrainer('Team Flare Lysandre',
             [
-                new GymPokemon('Mienshao', 22464940, 49),
-                new GymPokemon('Honchkrow', 22564950, 49),
-                new GymPokemon('Pyroar', 23375580, 51),
-                new GymPokemon('Mega Gyarados', 27385730, 53),
+                new GymPokemon('Mienshao', 22464940, 47),
+                new GymPokemon('Honchkrow', 22564950, 47),
+                new GymPokemon('Pyroar', 23375580, 49),
+                new GymPokemon('Gyarados', 27385730, 51),
             ],
-            { weight: 2 }),
-        new DungeonBossPokemon('Xerneas', 93659460, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Flare Secret HQ'))}),
-        new DungeonBossPokemon('Yveltal', 93659450, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Team Flare Secret HQ'))}),
+            { weight: 2, hide: true, requirement: new MultiRequirement([
+                new QuestLineStepCompletedRequirement('A Beautiful World', 28),
+                new QuestLineStepCompletedRequirement('A Beautiful World', 33, GameConstants.AchievementOption.less),
+            ])}),
+        new DungeonTrainer('Team Flare Boss Lysandre',
+            [
+                new GymPokemon('Mienshao', 22464940, 47),
+                new GymPokemon('Honchkrow', 22564950, 47),
+                new GymPokemon('Pyroar', 23375580, 49),
+                new GymPokemon('Mega Gyarados', 27385730, 51),
+            ],
+            { weight: 2, hide: true, requirement: new QuestLineStepCompletedRequirement('A Beautiful World', 33)}),
+        new DungeonBossPokemon('Xerneas', 93659460, 100, {requirement: new QuestLineStepCompletedRequirement('A Beautiful World', 31)}),
+        new DungeonBossPokemon('Yveltal', 93659450, 100, {requirement: new QuestLineStepCompletedRequirement('A Beautiful World', 31)}),
     ],
     675000, 16);
 

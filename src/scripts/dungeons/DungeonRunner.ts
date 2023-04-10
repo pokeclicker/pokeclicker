@@ -37,7 +37,7 @@ class DungeonRunner {
         DungeonBattle.trainerPokemonIndex(0);
         DungeonBattle.enemyPokemon(null);
         DungeonRunner.timeBonus(FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute));
-        DungeonRunner.timeLeft(GameConstants.DUNGEON_TIME * this.timeBonus());
+        DungeonRunner.timeLeft(GameConstants.DUNGEON_TIME * DungeonRunner.timeBonus());
 
         DungeonRunner.timeLeftPercentage(100);
         // Dungeon size increases with each region
@@ -75,31 +75,31 @@ class DungeonRunner {
     }
 
     public static tick() {
-        if (this.timeLeft() <= 0) {
-            if (this.defeatedBoss()) {
-                this.dungeonWon();
+        if (DungeonRunner.timeLeft() <= 0) {
+            if (DungeonRunner.defeatedBoss()) {
+                DungeonRunner.dungeonWon();
             } else {
-                this.dungeonLost();
+                DungeonRunner.dungeonLost();
             }
         }
-        if (this.map.playerMoved()) {
-            this.timeLeft(this.timeLeft() - GameConstants.DUNGEON_TICK);
-            this.timeLeftPercentage(Math.floor(this.timeLeft() / (GameConstants.DUNGEON_TIME * FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute)) * 100));
+        if (DungeonRunner.map.playerMoved()) {
+            DungeonRunner.timeLeft(DungeonRunner.timeLeft() - GameConstants.DUNGEON_TICK);
+            DungeonRunner.timeLeftPercentage(Math.floor(DungeonRunner.timeLeft() / (GameConstants.DUNGEON_TIME * FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute)) * 100));
         }
         const currentFluteBonus = FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute);
-        if (currentFluteBonus != this.timeBonus()) {
-            if (currentFluteBonus > this.timeBonus()) {
-                if (this.timeBonus() === 1) {
-                    this.timeBonus(currentFluteBonus);
-                    this.timeLeft(this.timeLeft() * this.timeBonus());
+        if (currentFluteBonus != DungeonRunner.timeBonus()) {
+            if (currentFluteBonus > DungeonRunner.timeBonus()) {
+                if (DungeonRunner.timeBonus() === 1) {
+                    DungeonRunner.timeBonus(currentFluteBonus);
+                    DungeonRunner.timeLeft(DungeonRunner.timeLeft() * DungeonRunner.timeBonus());
                 } else {
-                    this.timeLeft(this.timeLeft() / this.timeBonus());
-                    this.timeBonus(currentFluteBonus);
-                    this.timeLeft(this.timeLeft() * this.timeBonus());
+                    DungeonRunner.timeLeft(DungeonRunner.timeLeft() / DungeonRunner.timeBonus());
+                    DungeonRunner.timeBonus(currentFluteBonus);
+                    DungeonRunner.timeLeft(DungeonRunner.timeLeft() * DungeonRunner.timeBonus());
                 }
             } else {
-                this.timeLeft(this.timeLeft() / this.timeBonus());
-                this.timeBonus(currentFluteBonus);
+                DungeonRunner.timeLeft(DungeonRunner.timeLeft() / DungeonRunner.timeBonus());
+                DungeonRunner.timeBonus(currentFluteBonus);
             }
         }
     }
@@ -317,7 +317,7 @@ class DungeonRunner {
     }
 
     public static dungeonLevel(): number {
-        return PokemonFactory.routeLevel(this.dungeon.difficultyRoute, player.region);
+        return PokemonFactory.routeLevel(DungeonRunner.dungeon.difficultyRoute, player.region);
     }
 
     public static getFlash(dungeonName): DungeonFlash | undefined {
