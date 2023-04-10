@@ -1807,6 +1807,213 @@ Routes.add(new RegionRoute(
     true,
     1250000,
 ));
+Routes.add(new RegionRoute(
+    'Heavenward Lookout', GameConstants.Region.sinnoh, 39,
+    new RoutePokemon({
+        land: ['Luxio', 'Luxray', 'Paras', 'Parasect', 'Zubat', 'Golbat', 'Yanma', 'Yanmega'],
+        headbutt: ['Burmy (Sand)', 'Wormadam (Sand)', 'Graveler'],
+    }),
+    [new DevelopmentRequirement()],
+    undefined,
+    SinnohSubRegions.Hisui,
+    true,
+    1250000,
+));
+Routes.add(new RegionRoute(
+    'Wayward Wood', GameConstants.Region.sinnoh, 40,
+    new RoutePokemon({
+        land: ['Stantler', 'Zubat', 'Golbat', 'Heracross', 'Paras', 'Parasect', 'Mothim'],
+        water: ['Psyduck', 'Golduck'],
+        headbutt: ['Bronzor'],
+    }),
+    [new DevelopmentRequirement()],
+    undefined,
+    SinnohSubRegions.Hisui,
+    true,
+    1250000,
+));
+Routes.add(new RegionRoute(
+    'Lonely Spring', GameConstants.Region.sinnoh, 41,
+    new RoutePokemon({
+        land: ['Carnivine'],
+        water: ['Psyduck', 'Golduck'],
+        headbutt: ['Cherubi', 'Cherrim (Overcast)', 'Bronzor'],
+    }),
+    [new DevelopmentRequirement()],
+    undefined,
+    SinnohSubRegions.Hisui,
+    true,
+    1250000,
+));
+Routes.add(new RegionRoute(
+    'Sonorous Path', GameConstants.Region.sinnoh, 42,
+    new RoutePokemon({
+        land: ['Shinx', 'Luxio', 'Luxray', 'Teddiursa', 'Ursaring'],
+        headbutt: ['Heracross', 'Bronzor'],
+    }),
+    [new DevelopmentRequirement()],
+    undefined,
+    SinnohSubRegions.Hisui,
+    true,
+    1250000,
+));
+Routes.add(new RegionRoute(
+    'Celestica Trail', GameConstants.Region.sinnoh, 43,
+    new RoutePokemon({
+        land: ['Rhyhorn', 'Rhydon', 'Onix', 'Steelix', 'Hippopotas', 'Hippowdon', 'Chimeco',],
+        headbutt: ['Graveler'],
+    }),
+    [new DevelopmentRequirement()],
+    undefined,
+    SinnohSubRegions.Hisui,
+    true,
+    1250000,
+));
+Routes.add(new RegionRoute(
+    'Fabled Spring', GameConstants.Region.sinnoh, 44,
+    new RoutePokemon({
+        land: ['Cleffa', 'Clefairy', 'Clefable', 'Budew', 'Roselia'],
+        water: ['Basculin (White-Striped)'],
+        headbutt: ['Burmy (Sand)', 'Wormadam (Sand)', 'Graveler'],
+    }),
+    [new DevelopmentRequirement()],
+    undefined,
+    SinnohSubRegions.Hisui,
+    true,
+    1250000,
+));
+Routes.add(new RegionRoute(
+    'Bolderoll Ravine', GameConstants.Region.sinnoh, 45,
+    new RoutePokemon({
+        land: ['Geodude', 'Graveler', 'Golem', 'Gastly', 'Haunter', 'Machop', 'Machoke'],
+        headbutt: ['Cherubi', 'Cherrim (Overcast)', 'Graveler'],
+    }),
+    [new DevelopmentRequirement()],
+    undefined,
+    SinnohSubRegions.Hisui,
+    true,
+    1250000,
+));
+Routes.add(new RegionRoute(
+    'Stonetooth Rows', GameConstants.Region.sinnoh, 46,
+    new RoutePokemon({
+        land: ['Bronzor', 'Bronzong', 'Rotom', 'Misdreavus', 'Mismagius'],
+        headbutt: ['Burmy (Sand)', 'Wormadam (Sand)', 'Graveler'],
+    }),
+    [new DevelopmentRequirement()],
+    undefined,
+    SinnohSubRegions.Hisui,
+    true,
+    1250000,
+));
+Routes.add(new RegionRoute(
+    'Cloudcap Pass', GameConstants.Region.sinnoh, 47,
+    new RoutePokemon({
+        land: ['Elekid', 'Electabuzz', 'Electivire', 'Luxio', 'Luxray'],
+        headbutt: ['Burmy (Sand)', 'Wormadam (Sand)', 'Nosepass'],
+    }),
+    [new DevelopmentRequirement()],
+    undefined,
+    SinnohSubRegions.Hisui,
+    true,
+    1250000,
+));
+Routes.add(new RegionRoute(
+    'Whiteout Valley', GameConstants.Region.sinnoh, 48,
+    new RoutePokemon({
+        land: ['Aipom', 'Snorunt'],
+        headbutt: ['Burmy (Trash)', 'Wormadam (Trash)'],
+    }),
+    [new DevelopmentRequirement()],
+    undefined,
+    SinnohSubRegions.Hisui,
+    true,
+    1250000,
+));
+Routes.add(new RegionRoute(
+    'Bonechill Wastes', GameConstants.Region.sinnoh, 49,
+    new RoutePokemon({
+        land: ['Swinub', 'Buneary', 'Lopunny', 'Gastly', 'Haunter', 'Glalie', 'Froslass', 'Bergmite', 'Snover', 'Abomasnow', 'Drifloon', 'Drifblim', 'Snorunt', 'Aipom', 'Piloswine'],
+        headbutt: ['Burmy (Trash)', 'Wormadam (Trash)'],
+    }),
+    [new DevelopmentRequirement()],
+    undefined,
+    SinnohSubRegions.Hisui,
+    true,
+    1250000,
+));
+Routes.add(new RegionRoute(
+    'Arena\'s Approach', GameConstants.Region.sinnoh, 50,
+    new RoutePokemon({
+        land: ['Machop', 'Machoke', 'Bergmite', 'Gligar', 'Duskull', 'Dusclops', 'Elekid', 'Electabuzz', 'Lickitung', 'Snorlax', 'Lucario', 'Lopunny', 'Aipom', 'Buneary', 'Munchlax', 'Riolu', 'Machamp', 'Piloswine'],
+        headbutt: ['Burmy (Trash)', 'Wormadam (Trash)', 'Bergmite', 'Snorunt', 'Glalie'],
+    }),
+    [new DevelopmentRequirement()],
+    undefined,
+    SinnohSubRegions.Hisui,
+    true,
+    1250000,
+));
+Routes.add(new RegionRoute(
+    'Avalanche Slopes', GameConstants.Region.sinnoh, 51,
+    new RoutePokemon({
+        land: ['Aipom', 'Ambipom', 'Happiny', 'Chansey', 'Swinub', 'Piloswine', 'Gible', 'Gabite', 'Duskull', 'Dusclops', 'Snorunt', 'Glalie', 'Froslass', 'Lickitung', 'Lickilicky', 'Blissey', 'Garchomp'],
+        headbutt: ['Burmy (Trash)', 'Wormadam (Trash)'],
+    }),
+    [new DevelopmentRequirement()],
+    undefined,
+    SinnohSubRegions.Hisui,
+    true,
+    1250000,
+));
+Routes.add(new RegionRoute(
+    'Icebound Falls', GameConstants.Region.sinnoh, 52,
+    new RoutePokemon({
+        land: ['Machop','Machoke', 'Riolu', 'Lucario', 'Elekid', 'Electabuzz', 'Crobat'],
+        headbutt: ['Burmy (Trash)', 'Wormadam (Trash)', 'Snorunt', 'Glalie'],
+    }),
+    [new DevelopmentRequirement()],
+    undefined,
+    SinnohSubRegions.Hisui,
+    true,
+    1250000,
+));
+Routes.add(new RegionRoute(
+    'Heart\'s Crag', GameConstants.Region.sinnoh, 53,
+    new RoutePokemon({
+        land: ['Ralts', 'Kirlia', 'Drifloon', 'Drifblim', 'Aipom', 'Ambipom', 'Gardevoir', 'Rufflet'],
+        water: ['Basculin (White-Striped)'],
+        headbutt: ['Burmy (Trash)', 'Wormadam (Trash)', 'Snorunt', 'Glalie'],
+    }),
+    [new DevelopmentRequirement()],
+    undefined,
+    SinnohSubRegions.Hisui,
+    true,
+    1250000,
+));
+Routes.add(new RegionRoute(
+    'Snowfall Hot Spring', GameConstants.Region.sinnoh, 54,
+    new RoutePokemon({
+        land: ['Machoke', 'Lickitung', 'Snorlax', 'Lucario', 'Lopunny', 'Machop', 'Aipom', 'Buneary', 'Munchlax', 'Riolu'],
+    }),
+    [new DevelopmentRequirement()],
+    undefined,
+    SinnohSubRegions.Hisui,
+    true,
+    1250000,
+));
+Routes.add(new RegionRoute(
+    'Glacier Terrace', GameConstants.Region.sinnoh, 55,
+    new RoutePokemon({
+        land: ['Gligar', 'Drifloon', 'Drifblim', 'Aipom', 'Snover', 'Hisuian Sneasel', 'Abomasnow'],
+        headbutt: ['Burmy (Trash)', 'Wormadam (Trash)', 'Snorunt', 'Glalie'],
+    }),
+    [new DevelopmentRequirement()],
+    undefined,
+    SinnohSubRegions.Hisui,
+    true,
+    1250000,
+));
 
 /*
 UNOVA

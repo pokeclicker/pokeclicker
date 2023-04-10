@@ -1295,20 +1295,23 @@ export const SinnohDungeons = [
     'Firespit Island',
     'Ancient Wayward Cave',
     'Ancient Quarry',
+    'Primeval Grotto',
+    'Clamberclaw Cliffs'
     'Celestica Ruins',
     'Sacred Plaza',
     'Crevasse Passage',
+    'Avalugg\'s Legacy',
     'Ice Column Chamber',
     'Icepeak Cavern',
     'Ancient Snowpoint Temple',
     'Seaside Hollow',
     'Ancient Lake Verity',
     'Ancient Lake Valor',
-    'Ancient Lake Acuity', // 113
+    'Ancient Lake Acuity', // 116
 ];
 
 export const UnovaDungeons = [
-    'Floccesy Ranch', // 114
+    'Floccesy Ranch', // 117
     'Liberty Garden',
     'Castelia Sewers',
     'Relic Passage',
@@ -1330,11 +1333,11 @@ export const UnovaDungeons = [
     'Pledge Grove',
     'Pinwheel Forest',
     'Dreamyard',
-    'P2 Laboratory', // 136
+    'P2 Laboratory', // 139
 ];
 
 export const KalosDungeons = [
-    'Santalune Forest', // 137
+    'Santalune Forest', // 140
     'Connecting Cave',
     'Glittering Cave',
     'Reflection Cave',
@@ -1347,12 +1350,12 @@ export const KalosDungeons = [
     'Team Flare Secret HQ',
     'Terminus Cave',
     'Pokémon Village',
-    'Victory Road Kalos', // 149
+    'Victory Road Kalos', // 152
     // 'Unknown Dungeon',
 ];
 
 export const AlolaDungeons = [
-    'Trainers\' School', // 150
+    'Trainers\' School', // 153
     'Hau\'oli Cemetery',
     'Verdant Cavern',
     'Melemele Meadow',
@@ -1381,11 +1384,11 @@ export const AlolaDungeons = [
     'Ruins of Abundance',
     'Ruins of Hope',
     'Poni Meadow',
-    'Resolution Cave', // 179
+    'Resolution Cave', // 182
 ];
 
 export const GalarDungeons = [
-    'Slumbering Weald Shrine', // 180
+    'Slumbering Weald Shrine', // 183
     'Galar Mine',
     'Galar Mine No. 2',
     'Glimwood Tangle',
@@ -1405,7 +1408,7 @@ export const GalarDungeons = [
     'Lakeside Cave',
     'Dyna Tree Hill',
     'Tunnel to the Top',
-    'Crown Shrine', // 200
+    'Crown Shrine', // 203
 ];
 
 export const RegionDungeons = [

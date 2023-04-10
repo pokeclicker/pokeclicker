@@ -4249,15 +4249,6 @@ TownList['Icepeak Camp'] = new Town(
         requirements: [new DevelopmentRequirement()],
     }
 );
-TownList['Legacy Icecap'] = new Town(
-    'Legacy Icecap',
-    GameConstants.Region.sinnoh,
-    GameConstants.SinnohSubRegions.Hisui,
-    [TemporaryBattleList['Warden Gaeric']],
-    {
-        requirements: [new DevelopmentRequirement()],
-    }
-);
 TownList['Pearl Settlement'] = new Town(
     'Pearl Settlement',
     GameConstants.Region.sinnoh,
@@ -4290,15 +4281,6 @@ TownList['Stone Portal'] = new Town(
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Hisui,
     [TemporaryBattleList['Beni']],
-    {
-        requirements: [new DevelopmentRequirement()],
-    }
-);
-TownList['Primeval Grotto'] = new Town(
-    'Primeval Grotto',
-    GameConstants.Region.sinnoh,
-    GameConstants.SinnohSubRegions.Hisui,
-    [TemporaryBattleList['Charm 2']],
     {
         requirements: [new DevelopmentRequirement()],
     }
@@ -4574,12 +4556,25 @@ TownList['Ancient Quarry'] = new DungeonTown(
     GameConstants.SinnohSubRegions.Hisui,
     [new DevelopmentRequirement()]
 );
+TownList['Primeval Grotto'] = new DungeonTown(
+    'Primeval Grotto',
+    GameConstants.Region.sinnoh,
+    GameConstants.SinnohSubRegions.Hisui,
+    [new DevelopmentRequirement()],
+    [TemporaryBattleList['Charm 2']]
+);
+TownList['Clamberclaw Cliffs'] = new DungeonTown(
+    'Clamberclaw Cliffs',
+    GameConstants.Region.sinnoh,
+    GameConstants.SinnohSubRegions.Hisui,
+    [new DevelopmentRequirement()],
+    [TemporaryBattleList['Warden Ingo']]
+);
 TownList['Celestica Ruins'] = new DungeonTown(
     'Celestica Ruins',
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Hisui,
-    [new DevelopmentRequirement()],
-    [TemporaryBattleList['Warden Ingo']]// Should be in Clamberclaw Cliffs but that is a route for now. Might get an overworld sprite if possible
+    [new DevelopmentRequirement()]
 );
 TownList['Sacred Plaza'] = new DungeonTown(
     'Sacred Plaza',
@@ -4592,6 +4587,13 @@ TownList['Crevasse Passage'] = new DungeonTown(
     GameConstants.Region.sinnoh,
     GameConstants.SinnohSubRegions.Hisui,
     [new DevelopmentRequirement()]
+);
+TownList['Avalugg\'s Legacy'] = new DungeonTown(
+    'Avalugg\'s Legacy',
+    GameConstants.Region.sinnoh,
+    GameConstants.SinnohSubRegions.Hisui,
+    [new DevelopmentRequirement()],
+    [TemporaryBattleList['Warden Gaeric']]
 );
 TownList['Ice Column Chamber'] = new DungeonTown(
     'Ice Column Chamber',

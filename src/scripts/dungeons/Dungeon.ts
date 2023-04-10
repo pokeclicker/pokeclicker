@@ -5027,6 +5027,38 @@ dungeonList['Ancient Quarry'] = new Dungeon('Ancient Quarry',
     () => {},
     {dungeonRegionalDifficulty: GameConstants.Region.galar});
 
+dungeonList['Primeval Grotto'] = new Dungeon('Primeval Grotto',
+    ['Bronzor'],
+    {
+        common: [
+            {loot: 'Token_collector', weight: 2},
+            {loot: 'Aspear'},
+        ],
+    },
+    2603000,
+    [new DungeonBossPokemon('Nosepass', 10000000, 71)],
+    96500, 230,
+    () => {},
+    {dungeonRegionalDifficulty: GameConstants.Region.galar});
+
+dungeonList['Clamberclaw Cliffs'] = new Dungeon('Clamberclaw Cliffs',
+    ['Gligar', 'Geodude', 'Graveler', 'Gastly, Haunter', 'Gible', 'Burmy (Sand)', 'Wormadam (Sand)', 'Bronzor'],
+    {
+        common: [
+            {loot: 'Token_collector', weight: 2},
+            {loot: 'Aspear'},
+        ],
+    },
+    2603000,
+    [
+        new DungeonBossPokemon('Bronzong', 10000000, 44),
+        new DungeonBossPokemon('Gabite', 10000000, 47),
+        new DungeonBossPokemon('Darkrai', 10000000, 70),
+    ],
+    96500, 230,
+    () => {},
+    {dungeonRegionalDifficulty: GameConstants.Region.galar});
+
 dungeonList['Celestica Ruins'] = new Dungeon('Celestica Ruins',
     ['Geodude', 'Graveler', 'Nosepass', 'Gligar', 'Burmy (Sand)', 'Gastly', 'Haunter', 'Bonsly', 'Misdreavus'],
     {
@@ -5071,6 +5103,23 @@ dungeonList['Crevasse Passage'] = new Dungeon('Crevasse Passage',
     },
     2603000,
     [new DungeonBossPokemon('Bergmite', 10000000, 51)],
+    96500, 230,
+    () => {},
+    {dungeonRegionalDifficulty: GameConstants.Region.galar});
+
+dungeonList['Avalugg\'s Legacy'] = new Dungeon('Avalugg\'s Legacy',
+    ['Bergmite', 'Swinub', 'Piloswine', 'Drifloon', 'Drifblim', 'Bibarel', 'Glalie', 'Froslass'],
+    {
+        common: [
+            {loot: 'Token_collector', weight: 2},
+            {loot: 'Aspear'},
+        ],
+    },
+    2603000,
+    [
+        new DungeonBossPokemon('Mamoswine', 10000000, 68),
+        new DungeonBossPokemon('Hisuian Avalugg', 10000000, 51),
+    ],
     96500, 230,
     () => {},
     {dungeonRegionalDifficulty: GameConstants.Region.galar});
