@@ -162,6 +162,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                 </select>
                                             </div>
                                             <!-- Mega Evolution -->
+                                            <!-- ko if: player.highestRegion() >= GameConstants.Region.kalos -->
                                             <div class="form-group col-lg-12 col-12">
                                                 <label for="breedingUniqueTransformationFilter">Unique Forms</label>
                                                 <select id="breedingUniqueTransformationFilter" autocomplete="off" class="custom-select" 
@@ -171,6 +172,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                         value: BreedingFilters.uniqueTransformation.value">
                                                 </select>
                                             </div>
+                                            <!-- /ko -->
 
                                             <div class="col-12">
                                                 <hr style="border-color:grey;">

@@ -129,6 +129,7 @@ aria-labelledby="pokedexModalLabel">
                                     </div>
 
                                     <!-- Mega Evolution -->
+                                    <!-- ko if: player.highestRegion() >= GameConstants.Region.kalos -->
                                     <div class="form-group col-lg-12 col-12">
                                         <label for="pokedex-filter-unique-transformation">Unique Forms</label>
                                         <select id="pokedex-filter-unique-transformation" autocomplete="off" class="custom-select"
@@ -138,7 +139,7 @@ aria-labelledby="pokedexModalLabel">
                                                 value: PokedexFilters.uniqueTransformation.value">
                                         </select>
                                     </div>
-
+                                    <!-- /ko -->
 
                                     <!--Rare Hold Item-->
                                     <div class="col-12">
