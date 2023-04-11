@@ -1390,7 +1390,7 @@ class QuestLineHelper {
             {
                 clearedMessage: 'What\'s this? Well, well. What do we have here? A nosy little trainer has come poking around. Listen up! We\'re the fashionable team whose very name makes people tremble in fear: Team Flare! Team Flare\'s goal is to make it so we\'re the only ones who are happy! We don\'t care one bit about what happens to other trainers or Pokémon. Get out of here, kid. Don\'t you know not to play with fire? We\'ll obliterate you!',
                 npcDisplayName: 'Team Flare Grunt',
-                npcImageName: '../trainers/Team Flare Grunt (male)',
+                npcImageName: 'Team Flare Grunt (male)',
             });
         flareKalosQuestLine.addQuest(clearGlitteringCave);
 
@@ -1433,7 +1433,7 @@ class QuestLineHelper {
             {
                 clearedMessage: 'You\'re quite strong. Oh yes... very strong, indeed. I certainly didn\'t expect you to be so interesting. But it matters not, we already have enough energy to power the device. I do hope we can meet again!',
                 npcDisplayName: 'Team Flare Aliana',
-                npcImageName: '../trainers/Team Flare Aliana',
+                npcImageName: 'Team Flare Aliana',
             });
         flareKalosQuestLine.addQuest(clearKalosPowerPlant);
 
@@ -1447,7 +1447,7 @@ class QuestLineHelper {
             {
                 clearedMessage: 'No way you beat us! Wow, we are lame. Probability is just probability after all... Absolutes do not exist. But enough already! We\'ve already stolen the Poké Balls, Great Balls, and Ultra Balls. Let\'s call it good and leave.',
                 npcDisplayName: 'Team Flare Bryony',
-                npcImageName: '../trainers/Team Flare Bryony',
+                npcImageName: 'Team Flare Bryony',
             });
         flareKalosQuestLine.addQuest(clearPokéBallFactory);
 
@@ -1473,7 +1473,7 @@ class QuestLineHelper {
             {
                 clearedMessage: 'Not just strong... TOO strong! Not ordinary, indeed. Whatever, it doesn\'t matter, we already tested what we wanted to know. The Abomasnow from this cavern is a fine specimen. The more we agitate it, the stronger its Snow Warning ability becomes, making the snow fall even more furiously. Whoever has the most energy will come out on top! And it\'s Team Flare, and only Team Flare who will survive!',
                 npcDisplayName: 'Team Flare Mable',
-                npcImageName: '../trainers/Team Flare Mable',
+                npcImageName: 'Team Flare Mable',
             });
         flareKalosQuestLine.addQuest(clearFrostCavern);
 
@@ -1507,7 +1507,7 @@ class QuestLineHelper {
             {
                 clearedMessage: 'I had fun at the Kalos Power Plant. Of course, we could have generated electricity with Team Flare\'s technology, too, you know. We just didn\'t think it justified the cost. To create a world for us and us alone, we have to play it smart, you see.',
                 npcDisplayName: 'Team Flare Aliana',
-                npcImageName: '../trainers/Team Flare Aliana',
+                npcImageName: 'Team Flare Aliana',
             });
         flareKalosQuestLine.addQuest(clearTeamFlareSecretHQ1);
 
@@ -1515,7 +1515,7 @@ class QuestLineHelper {
             {
                 clearedMessage: 'In reality, those stones that line Route 10 are the graves of Pokémon. When the ultimate weapon was used to end that horrible war over 3,000 years ago, it stole the lives of all those Pokémon. Their lives were the price of peace then. And if we want to make our own wishes come true today, we in Team Flare also have to sacrifice something precious.',
                 npcDisplayName: 'Team Flare Celosia',
-                npcImageName: '../trainers/Team Flare Celosia',
+                npcImageName: 'Team Flare Celosia',
             });
         flareKalosQuestLine.addQuest(clearTeamFlareSecretHQ2);
 
@@ -1523,7 +1523,7 @@ class QuestLineHelper {
             {
                 clearedMessage: 'We\'ve been using the electricity we stole from the Power Plant to get everything prepared for activating the ultimate weapon. But it\'s not like that\'s all we\'ll need to use it. Are you following me? We\'ll need energy absorbed from Pokémon to power the device! Yes! It\'s the stones on Route 10 that will steal that energy for us and power the ultimate weapon.',
                 npcDisplayName: 'Team Flare Bryony',
-                npcImageName: '../trainers/Team Flare Bryony',
+                npcImageName: 'Team Flare Bryony',
             });
         flareKalosQuestLine.addQuest(clearTeamFlareSecretHQ3);
 
@@ -1531,7 +1531,7 @@ class QuestLineHelper {
             {
                 clearedMessage: 'The power of the Legendary Pokémon... The power to grant life to all around it... The power to steal life from all around it... It\'s a mysterious ability that even scientists like us haven\'t been able to really decode. What d\'you think will happen to the world if we fuel the ultimate weapon with something like that?',
                 npcDisplayName: 'Team Flare Mable',
-                npcImageName: '../trainers/Team Flare Mable',
+                npcImageName: 'Team Flare Mable',
             });
         flareKalosQuestLine.addQuest(clearTeamFlareSecretHQ4);
 
@@ -3047,7 +3047,7 @@ class QuestLineHelper {
             });
             dungeonList['Ilex Forest'].bossList = dungeonList['Ilex Forest'].bossList.filter(boss => boss.name != 'Egg Hunter');
         };
-        const encounterSurpriseTogepiInJohto = new CustomQuest(1, afterDefeatingTogepiInJohto, 'Another report just came in, stating that they saw a strange egg boarding the ferry to Johto!', App.game.statistics.pokemonDefeated[surpriseTogepi.id], 1, togepiInJohtoSetup);
+        const encounterSurpriseTogepiInJohto = new CustomQuest(1, afterDefeatingTogepiInJohto, 'Another report just came in, there have been sightings of a strange egg in a forest in Johto!', App.game.statistics.pokemonDefeated[surpriseTogepi.id], 1, togepiInJohtoSetup);
         findSurpriseTogepiForEasterQuestLine.addQuest(encounterSurpriseTogepiInJohto);
 
         const togepiInHoennSetup = () => {
@@ -3063,7 +3063,7 @@ class QuestLineHelper {
             });
             dungeonList['Petalburg Woods'].bossList = dungeonList['Petalburg Woods'].bossList.filter(boss => boss.name != 'Egg Hunter');
         };
-        const encounterTogepiInHoenn = new CustomQuest(1, afterDefeatingTogepiInHoenn, 'There is a big Egg Hunt going on in Petalburg Woods right now; maybe you should take a look?', App.game.statistics.pokemonDefeated[surpriseTogepi.id], 2, togepiInHoennSetup);
+        const encounterTogepiInHoenn = new CustomQuest(1, afterDefeatingTogepiInHoenn, 'There is a big Egg Hunt going on in the woods south of Rustboro in Hoenn; maybe you should take a look?', App.game.statistics.pokemonDefeated[surpriseTogepi.id], 2, togepiInHoennSetup);
         findSurpriseTogepiForEasterQuestLine.addQuest(encounterTogepiInHoenn);
 
         App.game.quests.questLines().push(findSurpriseTogepiForEasterQuestLine);
