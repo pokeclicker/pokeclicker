@@ -124,7 +124,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                 <label>Category</label>
                                                 <div class="dropdown show">
                                                     <button type="button" class="text-left custom-select col-12 btn btn-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                                        data-bind="text: BreedingFilters.category.value() == -1 ? 'All' : PokemonCategories.categories()[BreedingFilters.category.value()].name()">
+                                                        data-bind="text: BreedingFilters.category.value() == -1 ? 'All' : PokemonCategories.categories().find(c => c.id == BreedingFilters.category.value()).name()">
                                                         Categories
                                                     </button>
                                                     <div class="border-secondary dropdown-menu col-12">
@@ -134,7 +134,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                         <div class="dropdown-divider"></div>
                                                         <!-- ko foreach : PokemonCategories.categories -->
                                                         <div class="dropdown-item" data-bind="text : $data.name(), style: { background: $data.color() },
-                                                            click : function(){ BreedingFilters.category.value($index()); Settings.setSettingByName('breedingCategoryFilter', $index()) }">
+                                                            click : function(){ BreedingFilters.category.value($data.id); Settings.setSettingByName('breedingCategoryFilter', $data.id) }">
                                                         </div>
                                                         <!-- /ko-->
                                                         <div class="dropdown-divider"></div>
@@ -244,7 +244,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                 <button data-toggle="dropdown" data-bind="class: `category-${App.game.party.getPokemon($data.id).category + 1}`"></button>
                                                 <div class="border-secondary dropdown-menu">
                                                     <!-- ko foreach: { data: PokemonCategories.categories, as: 'pokemonCategory' } -->
-                                                    <a class="dropdown-item category" href="#" data-bind="text: pokemonCategory.name, style: { background: pokemonCategory.color, 'text-shadow': '0 0 6px black' }, click: () => { App.game.party.getPokemon($parent.id).category = $index() }">Category</a>
+                                                    <a class="dropdown-item category" href="#" data-bind="text: pokemonCategory.name, style: { background: pokemonCategory.color, 'text-shadow': '0 0 6px black' }, click: () => { App.game.party.getPokemon($parent.id).category = pokemonCategory.id }">Category</a>
                                                     <!-- /ko -->
                                                     <div class="dropdown-divider"></div>
                                                     <a class="dropdown-item dropdown-text" href="#categoryModal" data-toggle="modal">
