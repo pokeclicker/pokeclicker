@@ -116,6 +116,7 @@ import SeededDateRequirement from './requirements/SeededDateRequirement';
 import SeviiCaughtRequirement from './requirements/SeviiCaughtRequirement';
 import HisuiCaughtRequirement from './requirements/HisuiCaughtRequirement';
 import ShinyPokemonRequirement from './requirements/ShinyPokemonRequirement';
+import ShadowPokemonRequirement from './requirements/ShadowPokemonRequirement';
 import StatisticRequirement from './requirements/StatisticRequirement';
 import SubregionRequirement from './requirements/SubregionRequirement';
 import StarterRequirement from './requirements/StarterRequirement';
@@ -290,6 +291,7 @@ Object.assign(<any>window, {
     SeviiCaughtRequirement,
     HisuiCaughtRequirement,
     ShinyPokemonRequirement,
+    ShadowPokemonRequirement,
     StatisticRequirement,
     SubregionRequirement,
     StarterRequirement,
