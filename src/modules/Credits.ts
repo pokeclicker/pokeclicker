@@ -478,11 +478,11 @@ export const SpriteCredits: Credit[] = [
         // NOTES: Permission given via PRs
     },
     {
-        name: 'Jostov',
+        name: 'Jastov',
         link: 'https://discordapp.com/users/823666951565344828/',
         resources: [
-            'Rotom-Dex',
             'Lillie (default)',
+            'Rotom-Dex',
         ],
         // Notes: Made specifically for PokéClicker.
     },
