@@ -39,8 +39,9 @@ export enum Region {
     kalos = 5,
     alola = 6,
     galar = 7,
+    hisui = 8,
     // Throws an error if no region after the final region
-    final = 8,
+    final = 9,
 }
 
 export const MAX_AVAILABLE_REGION = Region.galar;
@@ -54,6 +55,7 @@ export const MaxIDPerRegion = [
     721, // 72 - Kalos
     809, // 88 - Alola
     898, // 89 - Galar
+    905, // 7 - Hisui
 ];
 
 // Subregions
@@ -74,7 +76,6 @@ export enum HoennSubRegions {
 
 export enum SinnohSubRegions {
     Sinnoh = 0,
-    Hisui,
 }
 
 export enum UnovaSubRegions {
@@ -100,6 +101,10 @@ export enum GalarSubRegions {
     CrownTundra,
 }
 
+export enum HisuiSubRegions {
+    Hisui = 0,
+}
+
 export enum FinalSubRegions {
     Final = 0,
 }
@@ -113,6 +118,7 @@ export type SubRegions =
     | KalosSubRegions
     | AlolaSubRegions
     | GalarSubRegions
+    | HisuiSubRegions
     | FinalSubRegions;
 
 // Battle Items
@@ -742,6 +748,7 @@ export const RegionalStarters = [
     [650, 653, 656], // Kalos
     [722, 725, 728], // Alola
     [810, 813, 816], // Galar
+    [722, 155, 501], // Hisui
 ];
 
 export enum StoneType {
@@ -1288,31 +1295,10 @@ export const SinnohDungeons = [
     'Snowpoint Temple',
     'Stark Mountain',
     'Hall of Origin', // 96
-    // Hisui
-    'Oreburrow Tunnel',
-    'Heartwood',
-    'Shrouded Ruins',
-    'Veilstone Cape',
-    'Firespit Island',
-    'Ancient Wayward Cave',
-    'Ancient Quarry',
-    'Primeval Grotto',
-    'Clamberclaw Cliffs',
-    'Celestica Ruins',
-    'Sacred Plaza',
-    'Crevasse Passage',
-    'Avalugg\'s Legacy',
-    'Ice Column Chamber',
-    'Icepeak Cavern',
-    'Ancient Snowpoint Temple',
-    'Seaside Hollow',
-    'Ancient Lake Verity',
-    'Ancient Lake Valor',
-    'Ancient Lake Acuity', // 116
 ];
 
 export const UnovaDungeons = [
-    'Floccesy Ranch', // 117
+    'Floccesy Ranch', // 97
     'Liberty Garden',
     'Castelia Sewers',
     'Relic Passage',
@@ -1334,11 +1320,11 @@ export const UnovaDungeons = [
     'Pledge Grove',
     'Pinwheel Forest',
     'Dreamyard',
-    'P2 Laboratory', // 139
+    'P2 Laboratory', // 119
 ];
 
 export const KalosDungeons = [
-    'Santalune Forest', // 140
+    'Santalune Forest', // 120
     'Connecting Cave',
     'Glittering Cave',
     'Reflection Cave',
@@ -1351,12 +1337,12 @@ export const KalosDungeons = [
     'Team Flare Secret HQ',
     'Terminus Cave',
     'Pokémon Village',
-    'Victory Road Kalos', // 152
+    'Victory Road Kalos', // 132
     // 'Unknown Dungeon',
 ];
 
 export const AlolaDungeons = [
-    'Trainers\' School', // 153
+    'Trainers\' School', // 133
     'Hau\'oli Cemetery',
     'Verdant Cavern',
     'Melemele Meadow',
@@ -1385,11 +1371,11 @@ export const AlolaDungeons = [
     'Ruins of Abundance',
     'Ruins of Hope',
     'Poni Meadow',
-    'Resolution Cave', // 182
+    'Resolution Cave', // 162
 ];
 
 export const GalarDungeons = [
-    'Slumbering Weald Shrine', // 183
+    'Slumbering Weald Shrine', // 163
     'Galar Mine',
     'Galar Mine No. 2',
     'Glimwood Tangle',
@@ -1409,7 +1395,30 @@ export const GalarDungeons = [
     'Lakeside Cave',
     'Dyna Tree Hill',
     'Tunnel to the Top',
-    'Crown Shrine', // 203
+    'Crown Shrine', // 183
+];
+
+export const HisuiDungeons = [
+    'Oreburrow Tunnel', // 184
+    'Heartwood',
+    'Shrouded Ruins',
+    'Veilstone Cape',
+    'Firespit Island',
+    'Ancient Wayward Cave',
+    'Ancient Quarry',
+    'Primeval Grotto',
+    'Clamberclaw Cliffs',
+    'Celestica Ruins',
+    'Sacred Plaza',
+    'Crevasse Passage',
+    'Avalugg\'s Legacy',
+    'Ice Column Chamber',
+    'Icepeak Cavern',
+    'Ancient Snowpoint Temple',
+    'Seaside Hollow',
+    'Ancient Lake Verity',
+    'Ancient Lake Valor',
+    'Ancient Lake Acuity', // 203
 ];
 
 export const RegionDungeons = [
@@ -1421,6 +1430,7 @@ export const RegionDungeons = [
     KalosDungeons,
     AlolaDungeons,
     GalarDungeons,
+    HisuiDungeons
 ];
 
 export function getDungeonIndex(dungeon: string): number {

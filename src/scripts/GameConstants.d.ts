@@ -234,6 +234,7 @@ namespace GameConstants {
         kalos,
         alola,
         galar,
+        hisui,
         final,
     }
     declare function clipNumber(num: number, min: number, max: number): number;
@@ -490,6 +491,7 @@ namespace GameConstants {
     declare const UnovaDungeons: string[];
     declare const KalosDungeons: string[];
     declare const GalarDungeons: string[];
+    declare const HisuiDungeons: string[];
     declare const RegionDungeons: string[][];
     declare function getDungeonIndex(dungeon: string): number;
     declare function getDungeonRegion(dungeon: string): Region;
@@ -621,7 +623,6 @@ namespace GameConstants {
     }
     declare enum SinnohSubRegions {
         Sinnoh,
-        Hisui,
     }
     declare enum UnovaSubRegions {
         Unova,
@@ -642,6 +643,9 @@ namespace GameConstants {
         IsleofArmor,
         CrownTundra,
     }
+    declare enum HisuiSubRegions {
+        Hisui,
+    }
     declare enum FinalSubRegions {
         Final,
     }
@@ -655,6 +659,7 @@ namespace GameConstants {
         | KalosSubRegions
         | AlolaSubRegions
         | GalarSubRegions
+        | HisuiSubRegions
         | FinalSubRegions
 
     // Gender Types
@@ -703,8 +708,7 @@ namespace GameConstants {
         global,
         sevii,
         orre,
-        magikarpJump,
-        hisui
+        magikarpJump
     }
     declare const DayCycleStartHours: Record<DayCyclePart, number> = {
         [DayCyclePart.Dawn]: 5,

@@ -9,6 +9,7 @@ import {
     KalosSubRegions,
     AlolaSubRegions,
     GalarSubRegions,
+    HisuiSubRegions,
 } from '../GameConstants';
 import GymBadgeRequirement from '../requirements/GymBadgeRequirement';
 import TemporaryBattleRequirement from '../requirements/TemporaryBattleRequirement';
@@ -60,8 +61,7 @@ SubRegions.addSubRegion(Region.johto, new SubRegion('Johto', JohtoSubRegions.Joh
 SubRegions.addSubRegion(Region.hoenn, new SubRegion('Hoenn', HoennSubRegions.Hoenn));
 SubRegions.addSubRegion(Region.hoenn, new SubRegion('Orre', HoennSubRegions.Orre, new DevelopmentRequirement(), 'Outskirt Stand', undefined));/* new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), 'Outskirt Stand')); */
 
-SubRegions.addSubRegion(Region.sinnoh, new SubRegion('Sinnoh', SinnohSubRegions.Sinnoh, undefined, 'Canalave City'));
-SubRegions.addSubRegion(Region.sinnoh, new SubRegion('Hisui', SinnohSubRegions.Hisui, new DevelopmentRequirement(), 'Prelude Beach'));
+SubRegions.addSubRegion(Region.sinnoh, new SubRegion('Sinnoh', SinnohSubRegions.Sinnoh));
 
 SubRegions.addSubRegion(Region.unova, new SubRegion('Unova', UnovaSubRegions.Unova));
 
@@ -77,3 +77,5 @@ SubRegions.addSubRegion(Region.galar, new SubRegion('South Galar', GalarSubRegio
 SubRegions.addSubRegion(Region.galar, new SubRegion('North Galar', GalarSubRegions.NorthGalar, new RouteKillRequirement(10, GameConstants.Region.galar, 22), 'Hammerlocke'));
 SubRegions.addSubRegion(Region.galar, new SubRegion('Isle of Armor', GalarSubRegions.IsleofArmor, new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion), 'Armor Station'));
 SubRegions.addSubRegion(Region.galar, new SubRegion('Crown Tundra', GalarSubRegions.CrownTundra, new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion), 'Crown Tundra Station'));
+
+SubRegions.addSubRegion(Region.hisui, new SubRegion('Hisui', HisuiSubRegions.Hisui, undefined, 'Prelude Beach'));

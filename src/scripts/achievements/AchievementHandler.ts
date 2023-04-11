@@ -183,7 +183,6 @@ class AchievementHandler {
         categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.sevii], 50, () => SubRegions.isSubRegionUnlocked(GameConstants.Region.kanto, GameConstants.KantoSubRegions.Sevii123)));
         categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.orre], 50, () => SubRegions.isSubRegionUnlocked(GameConstants.Region.hoenn, GameConstants.HoennSubRegions.Orre)));
         categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.magikarpJump], 25, () => SubRegions.isSubRegionUnlocked(GameConstants.Region.alola, GameConstants.AlolaSubRegions.MagikarpJump)));
-        categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.hisui], 75, () => SubRegions.isSubRegionUnlocked(GameConstants.Region.sinnoh, GameConstants.SinnohSubRegions.Hisui)));
 
         AchievementHandler._achievementCategories = categories;
         return categories;
@@ -449,9 +448,6 @@ class AchievementHandler {
                 if (region == GameConstants.Region.alola && route.subRegion == GameConstants.AlolaSubRegions.MagikarpJump) {
                     category = GameConstants.ExtraAchievementCategories.magikarpJump;
                 }
-                if (region == GameConstants.Region.sinnoh && (route.subRegion == GameConstants.SinnohSubRegions.Hisui)) {
-                    category = GameConstants.ExtraAchievementCategories.hisui;
-                }
                 const routeName = Routes.getName(route.number, region, true);
                 AchievementHandler.addAchievement(`${route.routeName} Traveler`, `Defeat 100 Pokémon on ${routeName}.`, new RouteKillRequirement(GameConstants.ACHIEVEMENT_DEFEAT_ROUTE_VALUES[0], region, route.number), 1, category);
                 AchievementHandler.addAchievement(`${route.routeName} Explorer`, `Defeat 1,000 Pokémon on ${routeName}.`, new RouteKillRequirement(GameConstants.ACHIEVEMENT_DEFEAT_ROUTE_VALUES[1], region, route.number), 2, category);
@@ -473,9 +469,6 @@ class AchievementHandler {
                 }
                 if (region == GameConstants.Region.alola && TownList[dungeon].subRegion == GameConstants.AlolaSubRegions.MagikarpJump) {
                     category = GameConstants.ExtraAchievementCategories.magikarpJump;
-                }
-                if (region == GameConstants.Region.sinnoh && (TownList[dungeon].subRegion == GameConstants.SinnohSubRegions.Hisui)) {
-                    category = GameConstants.ExtraAchievementCategories.hisui;
                 }
                 AchievementHandler.addAchievement(`${dungeon} Explorer`, `Clear ${dungeon} 10 times.`, new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[0], GameConstants.getDungeonIndex(dungeon)), 0.8, category);
                 AchievementHandler.addAchievement(`${dungeon} Expert`, `Clear ${dungeon} 100 times.`, new ClearDungeonRequirement(GameConstants.ACHIEVEMENT_DEFEAT_DUNGEON_VALUES[1], GameConstants.getDungeonIndex(dungeon)), 1.2, category);
@@ -504,10 +497,6 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Sevii Master', 'Catch 35 unique Pokémon native to the Sevii Islands.', new SeviiCaughtRequirement(35, false), 6, GameConstants.ExtraAchievementCategories.sevii);
         AchievementHandler.addAchievement('Sevii Shiny Trainer', 'Catch 15 unique Shiny Pokémon native to the Sevii Islands.', new SeviiCaughtRequirement(15, true), 5, GameConstants.ExtraAchievementCategories.sevii);
         AchievementHandler.addAchievement('Sevii Shiny Master', 'Catch 35 unique Shiny Pokémon native to the Sevii Islands.', new SeviiCaughtRequirement(35, true), 9, GameConstants.ExtraAchievementCategories.sevii);
-        AchievementHandler.addAchievement('Hisui Trainer', 'Catch 20 unique Pokémon native to Hisui.', new HisuiCaughtRequirement(20, false), 3, GameConstants.ExtraAchievementCategories.hisui);
-        AchievementHandler.addAchievement('Hisui Master', 'Catch 50 unique Pokémon native to Hisui.', new HisuiCaughtRequirement(50, false), 6, GameConstants.ExtraAchievementCategories.hisui);
-        AchievementHandler.addAchievement('Hisui Shiny Trainer', 'Catch 20 unique Shiny Pokémon native to Hisui.', new HisuiCaughtRequirement(20, true), 5, GameConstants.ExtraAchievementCategories.hisui);
-        AchievementHandler.addAchievement('Hisui Shiny Master', 'Catch 50 unique Shiny Pokémon native to Hisui.', new HisuiCaughtRequirement(50, true), 9, GameConstants.ExtraAchievementCategories.hisui);
 
         addGymAchievements(GameConstants.RegionGyms[GameConstants.Region.final + 1], GameConstants.ExtraAchievementCategories.magikarpJump, 'Magikarp Jump');
 
