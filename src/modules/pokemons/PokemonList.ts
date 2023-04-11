@@ -8324,6 +8324,9 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 75,
             'speed': 115,
         },
+        'gender': {
+            'visualDifference': true,
+        },
     },
     {
         'id': 216,
