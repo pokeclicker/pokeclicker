@@ -1,12 +1,18 @@
-/// <reference path="../../declarations/GameHelper.d.ts" />
+import { ObservableArray } from 'knockout';
+import SeededRand from '../utilities/SeededRand';
+import GameHelper from '../GameHelper';
+import UndergroundItemValueType from '../enums/UndergroundItemValueType';
+import { Underground } from './Underground';
+import UndergroundItem from './UndergroundItem';
+import UndergroundItems from './UndergroundItems';
 
-class DailyDeal {
+export class DailyDeal {
     public item1: UndergroundItem;
     public item2: UndergroundItem;
     public amount1: number;
     public amount2: number;
 
-    public static list: KnockoutObservableArray<DailyDeal> = ko.observableArray();
+    public static list: ObservableArray<DailyDeal> = ko.observableArray();
 
     constructor() {
         this.item1 = DailyDeal.randomItem();
