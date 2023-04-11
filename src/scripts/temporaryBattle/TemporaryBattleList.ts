@@ -3070,7 +3070,7 @@ TemporaryBattleList['Hau 1'] = new TemporaryBattle(
 );
 TemporaryBattleList['Melemele Spearow'] = new TemporaryBattle(
     'Melemele Spearow',
-    [new GymPokemon('Spearow', 75473838, 4)],
+    [new GymPokemon('Spearow', 93889860, 4)],
     undefined,
     [new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 0)],
     undefined,
@@ -3098,7 +3098,7 @@ TemporaryBattleList['Hau 2'] = new TemporaryBattle(
 );
 TemporaryBattleList['Hauoli Skull'] = new TemporaryBattle(
     'Hauoli Skull',
-    [new GymPokemon('Zubat', 75473838, 9)],
+    [new GymPokemon('Zubat', 167906100, 9)],
     undefined,
     [new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 5)],
     undefined,
@@ -3111,8 +3111,8 @@ TemporaryBattleList['Hauoli Skull'] = new TemporaryBattle(
 TemporaryBattleList['Hauoli Ilima'] = new TemporaryBattle(
     'Hauoli Ilima',
     [
-        new GymPokemon('Yungoos', 70978365, 10),
-        new GymPokemon('Smeargle', 82543791, 11),
+        new GymPokemon('Yungoos', 73686000, 10),
+        new GymPokemon('Smeargle', 147372000, 11),
     ],
     'You- or should I say you and your Pokémon- make quite the interesting team! I do hope you\'ll come to Verdant Cavern and attempt my trial! You can get there from Route 2.',
     [new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 6)],
@@ -3126,8 +3126,8 @@ TemporaryBattleList['Hauoli Ilima'] = new TemporaryBattle(
 TemporaryBattleList['Alola 2 Skull'] = new TemporaryBattle(
     'Alola 2 Skull',
     [
-        new GymPokemon('Drowzee', 75473838, 9),
-        new GymPokemon('Drowzee', 81763320, 10),
+        new GymPokemon('Drowzee', 108738000, 9),
+        new GymPokemon('Drowzee', 110835600, 10),
     ],
     'Seriously, home slice?! You\'re too strong for a kid, yo! I\'ve gotta go make someone else miserable to feel better! We\'re gonna go mess with Verdant Cavern!',
     [new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 6)],
@@ -3140,7 +3140,7 @@ TemporaryBattleList['Alola 2 Skull'] = new TemporaryBattle(
 );
 TemporaryBattleList['Seaward Cave Recon Squad'] = new TemporaryBattle(
     'Seaward Cave Recon Squad',
-    [new GymPokemon('Furfrou', 108160909, 13)],
+    [new GymPokemon('Furfrou', 252879000, 13)],
     '<i>Soliera (right):</i> Fighting together with your Pokémon... It is not something we had considered ourselves.<br><br><i>Phyco (left):</i> That one you have come to collect... You must know that it is able to warp away when threatened, but the holes that are created when it does so leave a path open to dangerous beings. Be careful of who you trust it to.',
     [new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 10)],
     undefined,
@@ -3153,11 +3153,11 @@ TemporaryBattleList['Seaward Cave Recon Squad'] = new TemporaryBattle(
 TemporaryBattleList['Hau 3'] = new TemporaryBattle(
     'Hau 3',
     [
-        new GymPokemon('Popplio', 98160909, 13, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Grass)),
-        new GymPokemon('Rowlet', 98160909, 13, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Fire)),
-        new GymPokemon('Litten', 98160909, 13, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Water)),
-        new GymPokemon('Noibat', 92470422, 11),
-        new GymPokemon('Pikachu', 93893044, 12),
+        new GymPokemon('Popplio', 104010968, 13, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Grass)),
+        new GymPokemon('Rowlet', 104010968, 13, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Fire)),
+        new GymPokemon('Litten', 104010968, 13, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Water)),
+        new GymPokemon('Noibat', 97981348, 11),
+        new GymPokemon('Pikachu', 99488753, 12),
     ],
     'Aww, man! I wanted to show off my Pokémon\'s best side more!<br>I\'m off to battle gramps now. After all, once you clear one island\'s trials, you gotta battle that island\'s kahuna!',
     [new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 12)],
