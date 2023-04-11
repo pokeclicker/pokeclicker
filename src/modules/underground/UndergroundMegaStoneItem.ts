@@ -11,8 +11,8 @@ export default class UndergroundMegaStoneItem extends UndergroundItem {
         name: string,
         id: number,
         space: Array<Array<number>>,
-        value = 1,
         public pokemon: PokemonNameType,
+        value = 0,
         weight?: number,
     ) {
         super(name, id, space, value,
