@@ -2043,8 +2043,53 @@ class Update implements Saveable {
                 saveData.statistics.temporaryBattleDefeated[7] = 0;
             }
 
-            // Add Pyrite Blgd dungeon
+            // Add Phenac City Battles dungeon
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 57);
+
+            // Add Pyrite Town Battles dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 58);
+
+            // Add Pyrite Colosseum Battles dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 59);
+
+            // Add Pyrite Blgd dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 60);
+
+            // Add Pyrite Cave dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 61);
+
+            // Add Relic Cave dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 62);
+
+            // Add Mt. Battle Battles dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 63);
+
+            // Add The Under Subway dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 64);
+
+            // Add Cipher Lab Battles dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 65);
+
+            // Add Realgam Tower Battles dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 66);
+
+            // Add Realgam Colosseum Battles dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 67);
+
+            // Add Snagem Hideout dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 68);
+
+            // Add Deep Colosseum dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 69);
+
+            // Add Phenac Stadium dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 70);
+
+            // Add Under Colosseum dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 71);
+
+            // Add Orre Colosseum dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 72);
 
             //Team Flare Grunt 1
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 114);
