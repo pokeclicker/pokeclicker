@@ -22,7 +22,7 @@
                 </tr>
             </thead>
             <tbody id="pokeballFilters" data-bind="foreach: App.game.pokeballFilters.displayList">
-                <tr>
+                <tr data-bind="css: { 'pokeballFilterDisabled': !$data.enabled() }">
                     <td><span data-bind="
                         text: $data.name,
                         tooltip: {
@@ -34,9 +34,10 @@
                         }
                     "></td>
                     <td>
-                        <img class="pokeball-small clickable pokeball-selected"
+                        <img class="pokeball-small clickable"
                             data-bind="
                                 attr: {src: 'assets/images/pokeball/' + GameConstants.Pokeball[$data.ball()] + '.svg'},
+                                css: { 'pokeball-selected': $data.enabled() },
                                 tooltip: {
                                     title: $data.ball() === GameConstants.Pokeball.None ? 'None' : ItemList[GameConstants.Pokeball[$data.ball()]].displayName,
                                     trigger: 'hover', animation: false,

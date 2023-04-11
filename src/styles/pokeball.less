@@ -59,6 +59,11 @@
     table {
         table-layout: fixed;
 
+        tr.pokeballFilterDisabled {
+            background-color: gray;
+            color: lightgray;
+        }
+
         td:nth-child(1), th:nth-child(1) {
             width: 50%;
             text-overflow: ellipsis;
@@ -179,6 +184,11 @@
         > p:first-child {
             border-bottom: 1px solid gray;
             padding-bottom: 1rem;
+        }
+
+        .pokeballFilterDisabled {
+            background-color: gray;
+            color: lightgray;
         }
     }
 }

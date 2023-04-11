@@ -164,15 +164,18 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div id="pokeballFilterTestResults" data-bind="with: App.game.pokeballFilters.findMatch(
+                        <div id="pokeballFilterTestResults" data-bind="using: App.game.pokeballFilters.findMatch(
                                                                     App.game.pokeballFilters.testSettingsData()
                                                                 )">
                             <p>
-                                <span data-bind='visible: $data, text: `This will use your "${$data?.name}" filter`'><span>
-                                        <span data-bind='visible: !$data'>None of your filters match this scenario</span>
+                                <span data-bind='visible: $data, text: `This will use your "${$data?.name}" filter`'></span>
+                                <span data-bind='visible: !$data'>None of your enabled filters match this scenario</span>
                             </p>
                             <div data-bind="foreach: App.game.pokeballFilters.displayList()">
-                                <p data-bind="class: $data.test(App.game.pokeballFilters.testSettingsData()) ? 'bg-success text-white' : ''">
+                                <p data-bind="
+                                    class: $data.test(App.game.pokeballFilters.testSettingsData()) ? 'bg-success text-white' : '',
+                                    css: { 'pokeballFilterDisabled': !$data.enabled() }
+                                ">
                                     <span data-bind="if: $parent === $data">*** </span>
                                     <span data-bind="text: $data.name"></span>
                                     <span data-bind="if: $parent === $data"> ***</span>
@@ -197,6 +200,11 @@
                         </p>
                         <p>
                             Some filter options and default filters are hidden at the start of the game, and will unlock as they become relevant.
+                        </p>
+                        <p>
+                            The "Enabled" toggle allows you to turn a filter off.
+                            Disabled filters will be grayed out in the filter list on the main game screen, and also in the Test Filters tab.
+                            The "Inverted" toggle, when turned on, will make that filter <i>ignore</i> any pokemon that match its conditions, and catch all the rest.
                         </p>
                         <p>
                             You can hover (or tap) the <button class="btn-circle btn-info float-none">&#8505;</button> icon for a description of what the filter will catch.
