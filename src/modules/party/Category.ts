@@ -23,8 +23,8 @@ export default class PokemonCategories implements Saveable {
     defaults: Record<string, any> = {};
 
     public static initialize() {
-        PokemonCategories.addCategory('None', '#333333'); // dark grey
-        PokemonCategories.addCategory('Favorite', '#e74c3c'); // red
+        PokemonCategories.addCategory('None', '#333333', 0); // dark grey
+        PokemonCategories.addCategory('Favorite', '#e74c3c', 1); // red
     }
 
     public static reset() {
@@ -33,13 +33,9 @@ export default class PokemonCategories implements Saveable {
                 p.category = 0;
             }
         });
-        let max = 0;
-        PokemonCategories.categories().forEach(c => {
-            max = Math.max(max, c.id);
-        });
-        while (max >= 0) {
-            PokemonCategories.removeCategory(max, true);
-            max--;
+        let catCount = PokemonCategories.categories().length;
+        while (catCount--) {
+            PokemonCategories.removeCategory(PokemonCategories.categories()[0].id, true);
         }
         PokemonCategories.initialize();
     }
@@ -64,16 +60,16 @@ export default class PokemonCategories implements Saveable {
     }
 
     public static removeCategory(id: number, force = false): void {
-        // Cannot remove None or Favorite categories
-        if ((!force && id < 2)) {
-            return;
-        }
         const index = PokemonCategories.categories().findIndex(c => c.id == id);
         // Is this case expected to happen ?
         if (index === -1) {
             return;
         }
         const cat = PokemonCategories.categories()[index];
+        // Cannot remove None or Favorite categories
+        if (!force && cat.id < 2) {
+            return;
+        }
 
         App.game.party.caughtPokemon.forEach((p) => {
             if (+p.category === cat.id) {
