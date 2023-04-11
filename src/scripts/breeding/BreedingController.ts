@@ -187,8 +187,12 @@ class BreedingController {
             if (uniqueTransformation == 'mega-available' && !(pokemon as DataPokemon).evolutions?.some((p) => p.evolvedPokemon.startsWith('Mega '))) {
                 return false;
             }
+            // Only Base Pokémon without Mega Evolution
+            if (uniqueTransformation == 'mega-unobtained' && (!(pokemon as DataPokemon).evolutions?.some((p) => p.evolvedPokemon.startsWith('Mega ') && !App.game.party.alreadyCaughtPokemonByName(p.evolvedPokemon)))) {
+                return false;
+            }
             // Only Mega Pokémon
-            if (uniqueTransformation == 'mega-pokemon' && !(pokemon as DataPokemon).name.startsWith('Mega ')) {
+            if (uniqueTransformation == 'mega-evolution' && !(pokemon as DataPokemon).name.startsWith('Mega ')) {
                 return false;
             }
 
