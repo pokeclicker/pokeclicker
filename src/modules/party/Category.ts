@@ -33,10 +33,9 @@ export default class PokemonCategories implements Saveable {
                 p.category = 0;
             }
         });
-        let catCount = PokemonCategories.categories().length;
-        while (catCount--) {
-            PokemonCategories.removeCategory(PokemonCategories.categories()[0].id, true);
-        }
+        [...PokemonCategories.categories()].forEach(c => {
+            PokemonCategories.removeCategory(c.id, true);
+        });
         PokemonCategories.initialize();
     }
 
