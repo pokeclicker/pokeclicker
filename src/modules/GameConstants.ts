@@ -1430,7 +1430,7 @@ export const RegionDungeons = [
     KalosDungeons,
     AlolaDungeons,
     GalarDungeons,
-    HisuiDungeons
+    HisuiDungeons,
 ];
 
 export function getDungeonIndex(dungeon: string): number {

@@ -1846,19 +1846,19 @@ export class ShardDeal {
             [
                 new ShardDeal(
                     [
-                        {shardTypeString: 'Red Shard', amount: 20},
-                        {shardTypeString: 'Beige Shard', amount: 30},
+                        { shardTypeString: 'Red Shard', amount: 20 },
+                        { shardTypeString: 'Beige Shard', amount: 30 },
                     ],
                     ItemList.Black_augurite,
                     1),
                 new ShardDeal(
                     [
-                        {shardTypeString: 'Yellow Shard', amount: 50},
-                        {shardTypeString: 'Beige Shard', amount: 75},
+                        { shardTypeString: 'Yellow Shard', amount: 50 },
+                        { shardTypeString: 'Beige Shard', amount: 75 },
                     ],
                     ItemList.Peat_block,
                     1),
-            ]
+            ],
         );
     }
 }
