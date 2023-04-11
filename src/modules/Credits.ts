@@ -478,7 +478,7 @@ export const SpriteCredits: Credit[] = [
         // NOTES: Permission given via PRs
     },
     {
-        name: 'Jastov',
+        name: 'Jostav',
         link: 'https://discordapp.com/users/823666951565344828/',
         resources: [
             'Lillie (default)',
