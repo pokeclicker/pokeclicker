@@ -1997,7 +1997,6 @@ export enum ExtraAchievementCategories {
     sevii,
     orre,
     magikarpJump,
-    hisui,
 }
 export const DayCycleStartHours: Record<DayCyclePart, number> = {
     [DayCyclePart.Dawn]: 5,
