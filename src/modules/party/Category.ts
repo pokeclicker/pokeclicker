@@ -10,7 +10,7 @@ import PokedexFilters from '../settings/PokedexFilters';
 import Settings from '../settings/Settings';
 
 export type PokemonCategory = {
-    id: KnockoutObservable<number>,
+    id: number,
     name: KnockoutObservable<string>,
     color: KnockoutObservable<string>,
     subscriber?: KnockoutSubscription,
@@ -35,7 +35,7 @@ export default class PokemonCategories implements Saveable {
         });
         let max = 0;
         PokemonCategories.categories().forEach(c => {
-            max = Math.max(max, c.id());
+            max = Math.max(max, c.id);
         });
         while (max >= 0) {
             PokemonCategories.removeCategory(max, true);
@@ -47,11 +47,11 @@ export default class PokemonCategories implements Saveable {
     public static addCategory(name: string, color: string, id: number = -1): void {
         if (id === -1) {
             PokemonCategories.categories().forEach(c => {
-                id = Math.max(id, c.id());
+                id = Math.max(id, c.id);
             });
             id++;
         }
-        const cat: PokemonCategory = { name: ko.observable(name), color: ko.observable(color), id : ko.observable(id) };
+        const cat: PokemonCategory = { name: ko.observable(name), color: ko.observable(color), id : id };
         PokemonCategories.categories.push(cat);
 
         // Subscribe to color change event
@@ -68,7 +68,7 @@ export default class PokemonCategories implements Saveable {
         if ((!force && id < 2)) {
             return;
         }
-        const index = PokemonCategories.categories().findIndex(c => c.id() == id);
+        const index = PokemonCategories.categories().findIndex(c => c.id == id);
         // Is this case expected to happen ?
         if (index === -1) {
             return;
@@ -76,7 +76,7 @@ export default class PokemonCategories implements Saveable {
         const cat = PokemonCategories.categories()[index];
 
         App.game.party.caughtPokemon.forEach((p) => {
-            if (+p.category === cat.id()) {
+            if (+p.category === cat.id) {
                 p.category = 0;
             }
         });
@@ -85,12 +85,12 @@ export default class PokemonCategories implements Saveable {
         // Remove category
         PokemonCategories.categories.splice(index, 1);
         // Update Pokedex/Breeding filters
-        if (PokedexFilters.category.value() === cat.id()) {
+        if (PokedexFilters.category.value() === cat.id) {
             PokedexFilters.category.value(-1);
             Settings.setSettingByName('pokedexCategoryFilter', PokedexFilters.category.value());
         }
         
-        if (BreedingFilters.category.value() === cat.id()) {
+        if (BreedingFilters.category.value() === cat.id) {
             BreedingFilters.category.value(-1);
             Settings.setSettingByName('breedingCategoryFilter', BreedingFilters.category.value());
         }
@@ -100,7 +100,7 @@ export default class PokemonCategories implements Saveable {
         const categories = [];
         PokemonCategories.categories().forEach((c) => {
             categories.push({
-                id: c.id(),
+                id: c.id,
                 name: encodeURI(c.name()),
                 color: c.color(),
             });
@@ -116,7 +116,7 @@ export default class PokemonCategories implements Saveable {
         }
 
         json.categories?.forEach((category) => {
-            const cat = PokemonCategories.categories().find(c => c.id() == category.id);
+            const cat = PokemonCategories.categories().find(c => c.id == category.id);
             if (cat) {
                 cat.name(decodeURI(category.name));
                 cat.color(category.color);
