@@ -27,7 +27,7 @@ export default class RoamingPokemonList {
         [new RoamingGroup('Kalos', [KalosSubRegions.Kalos])],
         [new RoamingGroup('Alola', [AlolaSubRegions.MelemeleIsland, AlolaSubRegions.AkalaIsland, AlolaSubRegions.UlaulaIsland, AlolaSubRegions.PoniIsland]), new RoamingGroup('Alola - Magikarp Jump', [AlolaSubRegions.MagikarpJump])],
         [new RoamingGroup('Galar - South', [GalarSubRegions.SouthGalar]), new RoamingGroup('Galar - North', [GalarSubRegions.NorthGalar]), new RoamingGroup('Galar - Isle of Armor', [GalarSubRegions.IsleofArmor]), new RoamingGroup('Galar - Crown Tundra', [GalarSubRegions.CrownTundra])],
-        [new RoamingGroup('Hisui', [KalosSubRegions.Hisui])],
+        [new RoamingGroup('Hisui', [HisuiSubRegions.Hisui])],
     ];
 
     public static list: Partial<Record<Region, Array<Array<RoamingPokemon>>>> = {};

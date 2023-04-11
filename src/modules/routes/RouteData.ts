@@ -3509,6 +3509,7 @@ Routes.add(new RegionRoute(
         headbutt: ['Burmy (Sand)', 'Pachirisu'],
     }),
     [new DevelopmentRequirement()],
+));
 //Basculegion
 Routes.add(new RegionRoute(
     'Holm of Trials', Region.hisui, 23,
