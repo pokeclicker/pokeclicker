@@ -2130,8 +2130,6 @@ class Update implements Saveable {
             if (saveData.statistics.temporaryBattleDefeated[111]) {
                 Update.startQuestLine(saveData, 'A Beautiful World');
             }
-
-
         },
     };
 
