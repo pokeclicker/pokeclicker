@@ -2744,7 +2744,7 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 58.1,
+        'id': 58.01,
         'name': 'Hisuian Growlithe',
         'nativeRegion': Region.final,
         'catchRate': 190,
@@ -2783,7 +2783,7 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 59.1,
+        'id': 59.01,
         'name': 'Hisuian Arcanine',
         'nativeRegion': Region.final,
         'catchRate': 75,
@@ -2801,7 +2801,7 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 59.2,
+        'id': 59.02,
         'name': 'Noble Arcanine',
         'nativeRegion': Region.final,
         'catchRate': 75,
@@ -4017,7 +4017,7 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 100.1,
+        'id': 100.01,
         'name': 'Hisuian Voltorb',
         'nativeRegion': Region.final,
         'catchRate': 190,
@@ -4056,7 +4056,7 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 101.1,
+        'id': 101.01,
         'name': 'Hisuian Electrode',
         'nativeRegion': Region.final,
         'catchRate': 60,
@@ -4074,7 +4074,7 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 101.2,
+        'id': 101.02,
         'name': 'Noble Electrode',
         'nativeRegion': Region.final,
         'catchRate': 60,
@@ -6412,7 +6412,7 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 157.1,
+        'id': 157.01,
         'name': 'Hisuian Typhlosion',
         'nativeRegion': Region.final,
         'catchRate': 45,
@@ -8174,7 +8174,7 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 211.1,
+        'id': 211.01,
         'name': 'Hisuian Qwilfish',
         'nativeRegion': Region.final,
         'catchRate': 45,
@@ -8307,7 +8307,7 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 215.1,
+        'id': 215.01,
         'name': 'Hisuian Sneasel',
         'nativeRegion': Region.final,
         'catchRate': 60,
@@ -14679,7 +14679,7 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 483.1,
+        'id': 483.01,
         'name': 'Dialga (Origin)',
         'type': [PokemonType.Steel, PokemonType.Dragon],
         'eggCycles': 120,
@@ -14717,7 +14717,7 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 484.1,
+        'id': 484.01,
         'name': 'Palkia (Origin)',
         'type': [PokemonType.Water, PokemonType.Dragon],
         'eggCycles': 120,
@@ -15506,7 +15506,7 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 503.1,
+        'id': 503.01,
         'name': 'Hisuian Samurott',
         'nativeRegion': Region.final,
         'type': [PokemonType.Water, PokemonType.Dark],
@@ -16397,7 +16397,7 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 549.1,
+        'id': 549.01,
         'name': 'Hisuian Lilligant',
         'nativeRegion': Region.final,
         'type': [PokemonType.Grass, PokemonType.Fighting],
@@ -16415,7 +16415,7 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 549.2,
+        'id': 549.02,
         'name': 'Noble Lilligant',
         'nativeRegion': Region.final,
         'type': [PokemonType.Grass, PokemonType.Fighting],
@@ -16973,7 +16973,7 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 570.1,
+        'id': 570.01,
         'name': 'Hisuian Zorua',
         'nativeRegion': Region.final,
         'type': [PokemonType.Normal, PokemonType.Ghost],
@@ -17012,7 +17012,7 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 571.1,
+        'id': 571.01,
         'name': 'Hisuian Zoroark',
         'nativeRegion': Region.final,
         'type': [PokemonType.Normal, PokemonType.Ghost],
@@ -18199,7 +18199,7 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 628.1,
+        'id': 628.01,
         'name': 'Hisuian Braviary',
         'nativeRegion': Region.final,
         'type': [PokemonType.Psychic, PokemonType.Flying],
@@ -20621,7 +20621,7 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 705.1,
+        'id': 705.01,
         'name': 'Hisuian Sliggoo',
         'nativeRegion': Region.final,
         'type': [PokemonType.Steel, PokemonType.Dragon],
@@ -20657,7 +20657,7 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 706.1,
+        'id': 706.01,
         'name': 'Hisuian Goodra',
         'nativeRegion': Region.final,
         'type': [PokemonType.Steel, PokemonType.Dragon],
@@ -20905,7 +20905,7 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 713.1,
+        'id': 713.01,
         'name': 'Hisuian Avalugg',
         'nativeRegion': Region.final,
         'type': [PokemonType.Ice, PokemonType.Rock],
@@ -20923,7 +20923,7 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 713.2,
+        'id': 713.02,
         'name': 'Noble Avalugg',
         'nativeRegion': Region.final,
         'type': [PokemonType.Ice, PokemonType.Rock],
@@ -21182,7 +21182,7 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 724.1,
+        'id': 724.01,
         'name': 'Hisuian Decidueye',
         'nativeRegion': Region.final,
         'type': [PokemonType.Grass, PokemonType.Fighting],
@@ -27513,7 +27513,7 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 900.1,
+        'id': 900.01,
         'name': 'Noble Kleavor',
         'catchRate': 25,
         'type': [PokemonType.Bug, PokemonType.Rock],
@@ -27566,7 +27566,7 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 902.1,
+        'id': 902.01,
         'name': 'Basculegion (Female)',
         'nativeRegion': Region.final,
         'type': [PokemonType.Water, PokemonType.Ghost],
@@ -27638,7 +27638,7 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
-        'id': 905.1,
+        'id': 905.01,
         'name': 'Enamorus (Therian)',
         'nativeRegion': Region.final,
         'type': [PokemonType.Fairy, PokemonType.Flying],
