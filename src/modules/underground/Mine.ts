@@ -1,17 +1,32 @@
-/// <reference path="../../declarations/GameHelper.d.ts" />
+import type { Observable } from 'knockout';
+import { humanifyString } from '../GameConstants';
+import GameHelper from '../GameHelper';
+import OakItemType from '../enums/OakItemType';
+import UndergroundItemValueType from '../enums/UndergroundItemValueType';
+import NotificationConstants from '../notifications/NotificationConstants';
+import Notifier from '../notifications/Notifier';
+import Rand from '../utilities/Rand';
+import { Underground } from './Underground';
+import UndergroundItem from './UndergroundItem';
+import UndergroundItems from './UndergroundItems';
 
-class Mine {
+export enum Tool {
+    'Chisel' = 0,
+    'Hammer' = 1,
+}
+export class Mine {
+    public static Tool = Tool;
     public static maxSkips = 5;
-    public static grid: Array<Array<KnockoutObservable<number>>>;
+    public static grid: Array<Array<Observable<number>>>;
     public static rewardGrid: Array<Array<any>>;
-    public static itemsFound: KnockoutObservable<number> = ko.observable(0);
-    public static itemsBuried: KnockoutObservable<number> = ko.observable(0);
+    public static itemsFound: Observable<number> = ko.observable(0);
+    public static itemsBuried: Observable<number> = ko.observable(0);
     public static rewardNumbers: Array<number>;
     public static surveyResult = ko.observable(null);
     public static skipsRemaining = ko.observable(Mine.maxSkips);
 
     // 0 represents the Mine.Tool.Chisel but it's not loaded here yet.
-    public static toolSelected: KnockoutObservable<Mine.Tool> = ko.observable(0);
+    public static toolSelected: Observable<Tool> = ko.observable(0);
     private static loadingNewLayer = true;
     // Number of times to try and place an item in a new layer before giving up, just a failsafe
     private static maxPlacementAttempts = 1000;
@@ -218,7 +233,7 @@ class Mine {
                 default:
             }
             return res;
-        }, {fossils: 0, fossilpieces: 0, plates: 0, evoItems: 0, totalValue: 0, shards: 0, megaStones: 0});
+        }, { fossils: 0, fossilpieces: 0, plates: 0, evoItems: 0, totalValue: 0, shards: 0, megaStones: 0 });
     }
 
     private static updatesurveyResult(summary) {
@@ -354,7 +369,7 @@ class Mine {
                 let amount = 1;
                 const itemName = UndergroundItems.getById(Mine.rewardNumbers[i]).name;
                 Notifier.notify({
-                    message: `You found ${GameHelper.anOrA(itemName)} ${GameConstants.humanifyString(itemName)}.`,
+                    message: `You found ${GameHelper.anOrA(itemName)} ${humanifyString(itemName)}.`,
                     type: NotificationConstants.NotificationOption.success,
                     setting: NotificationConstants.NotificationSetting.Underground.underground_item_found,
                 });
@@ -364,7 +379,7 @@ class Mine {
                     if (Rand.chance(giveDouble)) {
                         amount++;
                         Notifier.notify({
-                            message: `You found an extra ${GameConstants.humanifyString(itemName)} in the Mine!`,
+                            message: `You found an extra ${humanifyString(itemName)} in the Mine!`,
                             type: NotificationConstants.NotificationOption.success,
                             title: 'Treasure Scanner',
                             timeout: 4000,
@@ -374,7 +389,7 @@ class Mine {
                         if (Rand.chance(giveDouble)) {
                             amount++;
                             Notifier.notify({
-                                message: `Lucky! You found another ${GameConstants.humanifyString(itemName)}!`,
+                                message: `Lucky! You found another ${humanifyString(itemName)}!`,
                                 type: NotificationConstants.NotificationOption.success,
                                 title: 'Treasure Scanner',
                                 timeout: 6000,
@@ -384,7 +399,7 @@ class Mine {
                             if (Rand.chance(giveDouble)) {
                                 amount++;
                                 Notifier.notify({
-                                    message: `Jackpot! You found another ${GameConstants.humanifyString(itemName)}!`,
+                                    message: `Jackpot! You found another ${humanifyString(itemName)}!`,
                                     type: NotificationConstants.NotificationOption.success,
                                     title: 'Treasure Scanner',
                                     timeout: 8000,
@@ -451,7 +466,7 @@ class Mine {
     }
 
     public static loadSavedMine(mine) {
-        this.grid = mine.grid.map(row => row.map(val => ko.observable(val))),
+        this.grid = mine.grid.map(row => row.map(val => ko.observable(val)));
         this.rewardGrid = mine.rewardGrid;
         this.itemsFound(mine.itemsFound);
         this.itemsBuried(mine.itemsBuried);
@@ -484,8 +499,4 @@ class Mine {
 }
 
 namespace Mine {
-    export enum Tool {
-        'Chisel' = 0,
-        'Hammer' = 1,
-    }
 }

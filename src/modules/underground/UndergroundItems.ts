@@ -140,6 +140,6 @@ UndergroundItems.addItem(new UndergroundItem('Rose Shard', 413, [[1, 1, 1, 1], [
 UndergroundItems.addItem(new UndergroundItem('Brown Shard', 414, [[1, 1, 0], [1, 1, 0], [1, 1, 1]], 0, UndergroundItemValueType.Shard, new MaxRegionRequirement(Region.galar)));
 
 // MegaStones
-UndergroundItems.addItem(new UndergroundMegaStoneItem('Aerodactylite', 500, [[1, 1, 1], [1, 1, 1], [1, 1, 1]], 'Aerodactyl', 0.1));
-UndergroundItems.addItem(new UndergroundMegaStoneItem('Mawilite', 501, [[1, 1, 1], [1, 1, 1], [1, 1, 1]], 'Mawile', 0.1));
-UndergroundItems.addItem(new UndergroundMegaStoneItem('Sablenite', 502, [[1, 1, 1], [1, 1, 1], [1, 1, 1]], 'Sableye', 0.1));
+UndergroundItems.addItem(new UndergroundMegaStoneItem('Aerodactylite', 500, [[1, 1, 1], [1, 1, 1], [1, 1, 1]], 'Aerodactyl', 0, 0.1));
+UndergroundItems.addItem(new UndergroundMegaStoneItem('Mawilite', 501, [[1, 1, 1], [1, 1, 1], [1, 1, 1]], 'Mawile', 0, 0.1));
+UndergroundItems.addItem(new UndergroundMegaStoneItem('Sablenite', 502, [[1, 1, 1], [1, 1, 1], [1, 1, 1]], 'Sableye', 0, 0.1));

@@ -44,11 +44,11 @@ aria-labelledby="pokedexModalLabel">
                         <div class="scrolling-div-pokedex" style="margin-bottom: 0.5rem;">
                             <div class="container-fluid py-3">
                                 <div class="form-row text-left">
-                                    <!--Name-->
+                                    <!--Name or ID-->
                                     <div class="form-group col-lg-12 col-12">
-                                        <label>Name</label>
-                                        <input id="nameFilter" class="form-control" placeholder="Bulbasaur" value=""
-                                        oninput="PokedexFilters.name.value(new RegExp(`(${/^\/.+\/$/.test(this.value) ? this.value.slice(1, -1) : GameHelper.escapeStringRegex(this.value)})`, 'i'))">
+                                        <label>Name or ID</label>
+                                        <input id="nameIDFilter" class="form-control" placeholder="Bulbasaur or 1" value=""
+                                        oninput="PokedexHelper.formatSearch(this.value)">
                                     </div>
 
                                     <!--Types-->
@@ -87,7 +87,7 @@ aria-labelledby="pokedexModalLabel">
                                         <label for="pokedex-filter-category">Category</label>
                                         <div class="dropdown show">
                                             <button type="button" class="text-left custom-select col-12 btn btn-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                                data-bind="text: PokedexFilters.category.value() == -1 ? 'All' : PokemonCategories.categories()[PokedexFilters.category.value()].name()">
+                                                data-bind="text: PokedexFilters.category.value() == -1 ? 'All' : PokemonCategories.categories().find(c => c.id == PokedexFilters.category.value()).name()">
                                                 Categories
                                             </button>
                                             <div class="border-secondary dropdown-menu col-12">
@@ -97,7 +97,7 @@ aria-labelledby="pokedexModalLabel">
                                                 <div class="dropdown-divider"></div>
                                                 <!-- ko foreach : PokemonCategories.categories -->
                                                 <div class="dropdown-item" data-bind="text : $data.name(), style: { background: $data.color() },
-                                                    click : function(){ Settings.setSettingByName('pokedexCategoryFilter', $index()) }">
+                                                    click : function(){ Settings.setSettingByName('pokedexCategoryFilter', $data.id) }">
                                                 </div>
                                                 <!-- /ko-->
                                                 <div class="dropdown-divider"></div>
@@ -258,7 +258,7 @@ aria-labelledby="pokedexModalLabel">
                                                     <button data-toggle="dropdown" data-bind="class: `category-${App.game.party.getPokemon($data.id).category + 1}`"></button>
                                                     <div class="border-secondary dropdown-menu">
                                                         <!-- ko foreach: { data: PokemonCategories.categories, as: 'pokemonCategory' } -->
-                                                        <a class="dropdown-item category" href="#" data-bind="text: pokemonCategory.name, style: { background: pokemonCategory.color, 'text-shadow': '0 0 6px black' }, click: () => { App.game.party.getPokemon($parent.id).category = $index() }">Category</a>
+                                                        <a class="dropdown-item category" href="#" data-bind="text: pokemonCategory.name, style: { background: pokemonCategory.color, 'text-shadow': '0 0 6px black' }, click: () => { App.game.party.getPokemon($parent.id).category = pokemonCategory.id }">Category</a>
                                                         <!-- /ko -->
                                                         <div class="dropdown-divider"></div>
                                                         <a class="dropdown-item dropdown-text" href="#categoryModal" data-toggle="modal">

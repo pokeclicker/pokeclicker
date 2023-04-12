@@ -167,6 +167,11 @@ import DataPokemon from './pokemons/DataPokemon';
 import RoamingPokemon from './pokemons/RoamingPokemon';
 import UndergroundMegaStoneItem from './underground/UndergroundMegaStoneItem';
 import TextMerger from './utilities/TextMerger';
+import { DailyDeal } from './underground/DailyDeal';
+import { Mine } from './underground/Mine';
+import { ShardDeal } from './underground/ShardDeal';
+import { Underground } from './underground/Underground';
+import UndergroundUpgrade from './underground/UndergroundUpgrade';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -344,4 +349,9 @@ Object.assign(<any>window, {
     RoamingPokemon,
     UndergroundMegaStoneItem,
     TextMerger,
+    Mine,
+    Underground,
+    UndergroundUpgrade,
+    ShardDeal,
+    DailyDeal,
 });
