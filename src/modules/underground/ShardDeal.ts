@@ -1853,8 +1853,8 @@ export class ShardDeal {
                     1),
                 new ShardDeal(
                     [
-                        { shardTypeString: 'Yellow Shard', amount: 50 },
-                        { shardTypeString: 'Beige Shard', amount: 75 },
+                        { shardTypeString: 'Yellow Shard', amount: 20 },
+                        { shardTypeString: 'Beige Shard', amount: 30 },
                     ],
                     ItemList.Peat_block,
                     1),

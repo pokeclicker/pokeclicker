@@ -27482,7 +27482,6 @@ export const pokemonList = createPokemonArray(
     {
         'id': 899,
         'name': 'Wyrdeer',
-        'nativeRegion': Region.hisui,
         'catchRate': 45,
         'type': [PokemonType.Normal, PokemonType.Psychic],
         'levelType': LevelType.slow,
