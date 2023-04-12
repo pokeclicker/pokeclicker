@@ -2031,9 +2031,17 @@ class Update implements Saveable {
                 }
             });
 
-            // Reset Pokedex and Hatchery category filters
-            settingsData.pokedexCategoryFilter = -1;
-            settingsData.breedingCategoryFilter = -1;
+            // Update categories and fix category filters
+            const max = saveData.categories.categories.length - 1;
+            saveData.categories.categories.forEach((c, id) => {
+                c.id = id;
+            });
+            if (settingsData.pokedexCategoryFilter > max) {
+                settingsData.pokedexCategoryFilter = -1;
+            }
+            if (settingsData.breedingCategoryFilter > max) {
+                settingsData.breedingCategoryFilter = -1;
+            }
 
             // Reset Blue 5 to undefeated if he has been defeated before reaching the quest step to battle him
             const teamRocketQuestLine = saveData.quests.questLines.find((q) => q.name == 'Team Rocket');

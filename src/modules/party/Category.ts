@@ -1,5 +1,4 @@
 /* eslint-disable no-param-reassign */
-/* eslint-disable class-methods-use-this */
 import {
     Observable as KnockoutObservable,
     Subscription as KnockoutSubscription,
@@ -11,6 +10,7 @@ import PokedexFilters from '../settings/PokedexFilters';
 import Settings from '../settings/Settings';
 
 export type PokemonCategory = {
+    id: number,
     name: KnockoutObservable<string>,
     color: KnockoutObservable<string>,
     subscriber?: KnockoutSubscription,
@@ -23,8 +23,8 @@ export default class PokemonCategories implements Saveable {
     defaults: Record<string, any> = {};
 
     public static initialize() {
-        this.addCategory('None', '#333333'); // dark grey
-        this.addCategory('Favorite', '#e74c3c'); // red
+        PokemonCategories.addCategory('None', '#333333', 0); // dark grey
+        PokemonCategories.addCategory('Favorite', '#e74c3c', 1); // red
     }
 
     public static reset() {
@@ -33,55 +33,69 @@ export default class PokemonCategories implements Saveable {
                 p.category = 0;
             }
         });
-        let categoryIndex = this.categories().length;
-        while (categoryIndex-- > 0) {
-            this.removeCategory(categoryIndex, true);
-        }
-        this.initialize();
+        [...PokemonCategories.categories()].forEach(c => {
+            PokemonCategories.removeCategory(c.id, true);
+        });
+        PokemonCategories.initialize();
     }
 
-    public static addCategory(name: string, color: string): void {
-        this.categories.push({ name: ko.observable(name), color: ko.observable(color) });
+    public static addCategory(name: string, color: string, id: number = -1): void {
+        if (id === -1) {
+            PokemonCategories.categories().forEach(c => {
+                id = Math.max(id, c.id);
+            });
+            id++;
+        }
+        const cat: PokemonCategory = { name: ko.observable(name), color: ko.observable(color), id : id };
+        PokemonCategories.categories.push(cat);
 
         // Subscribe to color change event
         const root = document.documentElement;
-        const index = this.categories().length - 1;
-        this.categories()[index].subscriber = this.categories()[index].color.subscribe((value) => {
-            root.style.setProperty(`--pokemon-category-${index + 1}`, value);
+        cat.subscriber = cat.color.subscribe((value) => {
+            root.style.setProperty(`--pokemon-category-${id + 1}`, value);
         });
         // Update the color now
-        this.categories()[index].color.valueHasMutated();
+        cat.color.valueHasMutated();
     }
 
-    public static removeCategory(index: number, force = false): void {
-        // Cannot remove None category
-        if ((!force && !index) || !this.categories()[index]) {
+    public static removeCategory(id: number, force = false): void {
+        const index = PokemonCategories.categories().findIndex(c => c.id == id);
+        // Is this case expected to happen ?
+        if (index === -1) {
+            return;
+        }
+        const cat = PokemonCategories.categories()[index];
+        // Cannot remove None or Favorite categories
+        if (!force && cat.id < 2) {
             return;
         }
 
         App.game.party.caughtPokemon.forEach((p) => {
-            if (+p.category === index) {
+            if (+p.category === cat.id) {
                 p.category = 0;
-            }
-            if (p.category > index) {
-                p.category--;
             }
         });
         // Remove subscriber
-        this.categories()[index].subscriber?.dispose();
+        cat.subscriber?.dispose();
         // Remove category
         PokemonCategories.categories.splice(index, 1);
-        // Reset Pokedex/Breeding filters
-        PokedexFilters.category.value(-1);
-        Settings.setSettingByName('pokedexCategoryFilter', -1);
-        BreedingFilters.category.value(-1);
-        Settings.setSettingByName('breedingCategoryFilter', -1);
+        // Update Pokedex/Breeding filters
+        if (PokedexFilters.category.value() === cat.id) {
+            PokedexFilters.category.value(-1);
+            Settings.setSettingByName('pokedexCategoryFilter', PokedexFilters.category.value());
+        }
+        
+        if (BreedingFilters.category.value() === cat.id) {
+            BreedingFilters.category.value(-1);
+            Settings.setSettingByName('breedingCategoryFilter', BreedingFilters.category.value());
+        }
     }
 
     toJSON(): Record<string, any> {
         const categories = [];
         PokemonCategories.categories().forEach((c) => {
             categories.push({
+                id: c.id,
                 name: encodeURI(c.name()),
                 color: c.color(),
             });
@@ -96,13 +110,13 @@ export default class PokemonCategories implements Saveable {
             return;
         }
 
-        json.categories?.forEach((category, index) => {
-            const cat = PokemonCategories.categories()[index];
+        json.categories?.forEach((category) => {
+            const cat = PokemonCategories.categories().find(c => c.id == category.id);
             if (cat) {
                 cat.name(decodeURI(category.name));
                 cat.color(category.color);
             } else {
-                PokemonCategories.addCategory(decodeURI(category.name), category.color);
+                PokemonCategories.addCategory(decodeURI(category.name), category.color, category.id);
             }
         });
     }
