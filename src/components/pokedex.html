@@ -44,11 +44,11 @@ aria-labelledby="pokedexModalLabel">
                         <div class="scrolling-div-pokedex" style="margin-bottom: 0.5rem;">
                             <div class="container-fluid py-3">
                                 <div class="form-row text-left">
-                                    <!--Name-->
+                                    <!--Name or ID-->
                                     <div class="form-group col-lg-12 col-12">
-                                        <label>Name</label>
-                                        <input id="nameFilter" class="form-control" placeholder="Bulbasaur" value=""
-                                        oninput="PokedexFilters.name.value(new RegExp(`(${/^\/.+\/$/.test(this.value) ? this.value.slice(1, -1) : GameHelper.escapeStringRegex(this.value)})`, 'i'))">
+                                        <label>Name or ID</label>
+                                        <input id="nameIDFilter" class="form-control" placeholder="Bulbasaur or 1" value=""
+                                        oninput="PokedexHelper.formatSearch(this.value)">
                                     </div>
 
                                     <!--Types-->
