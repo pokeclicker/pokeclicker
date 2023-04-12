@@ -329,8 +329,11 @@ class Dungeon {
         let hideEncounter = false;
 
         const getEncounterInfo = function(pokemonName, mimic) {
+            const pokerus = App.game.party.getPokemonByName(pokemonName)?.pokerus;
             const encounter = {
                 image: `assets/images/${(App.game.party.alreadyCaughtPokemonByName(pokemonName, true) ? 'shiny' : '')}pokemon/${pokemonMap[pokemonName].id}.png`,
+                pkrsImage: pokerus > GameConstants.Pokerus.Uninfected ? `assets/images/breeding/pokerus/${GameConstants.Pokerus[App.game.party.getPokemonByName(pokemonName).pokerus]}.png` : '',
+                EVs: pokerus >= GameConstants.Pokerus.Contagious ? `EVs: ${App.game.party.getPokemonByName(pokemonName).evs().toLocaleString('en-US')}` : '',
                 shiny:  App.game.party.alreadyCaughtPokemonByName(pokemonName, true),
                 hide: hideEncounter,
                 uncaught: !App.game.party.alreadyCaughtPokemonByName(pokemonName),
@@ -378,8 +381,11 @@ class Dungeon {
             // Handling Pokemon
             if (boss instanceof DungeonBossPokemon) {
                 const pokemonName = boss.name;
+                const pokerus = App.game.party.getPokemonByName(pokemonName)?.pokerus;
                 const encounter = {
                     image: `assets/images/${(App.game.party.alreadyCaughtPokemonByName(pokemonName, true) ? 'shiny' : '')}pokemon/${pokemonMap[pokemonName].id}.png`,
+                    pkrsImage: pokerus > GameConstants.Pokerus.Uninfected ? `assets/images/breeding/pokerus/${GameConstants.Pokerus[App.game.party.getPokemonByName(pokemonName).pokerus]}.png` : '',
+                    EVs: pokerus >= GameConstants.Pokerus.Contagious ? `EVs: ${App.game.party.getPokemonByName(pokemonName).evs().toLocaleString('en-US')}` : '',
                     shiny:  App.game.party.alreadyCaughtPokemonByName(pokemonName, true),
                     hide: boss.options?.hide ? (boss.options?.requirement ? !boss.options?.requirement.isCompleted() : boss.options?.hide) : false,
                     uncaught: !App.game.party.alreadyCaughtPokemonByName(pokemonName),
@@ -391,6 +397,7 @@ class Dungeon {
             } else {
                 const encounter = {
                     image: boss.image,
+                    EVs: '',
                     shiny:  false,
                     hide: boss.options?.hide ? (boss.options?.requirement ? !boss.options?.requirement.isCompleted() : boss.options?.hide) : false,
                     uncaught: false,
@@ -3472,6 +3479,27 @@ dungeonList['Near Space'] = new Dungeon('Near Space',
 
 // Orre
 
+dungeonList['Phenac City Battles'] = new Dungeon('Phenac City Battles',
+    [],
+    {},
+    560000,
+    [],
+    40000, 131);
+
+dungeonList['Pyrite Town Battles'] = new Dungeon('Pyrite Town Battles',
+    [],
+    {},
+    560000,
+    [],
+    40000, 131);
+
+dungeonList['Pyrite Colosseum Battles'] = new Dungeon('Pyrite Colosseum Battles',
+    [],
+    {},
+    560000,
+    [],
+    40000, 131);
+
 dungeonList['Pyrite Bldg'] = new Dungeon('Pyrite Bldg',
     [
         new DungeonTrainer('Cooltrainer',
@@ -3571,6 +3599,90 @@ dungeonList['Pyrite Bldg'] = new Dungeon('Pyrite Bldg',
                 new GymPokemon('Linoone', 910000, 33),
             ], { weight: 1 }, 'Dokken', '(female)'),
     ],
+    40000, 131);
+
+dungeonList['Pyrite Cave'] = new Dungeon('Pyrite Cave',
+    [],
+    {},
+    560000,
+    [],
+    40000, 131);
+
+dungeonList['Relic Cave'] = new Dungeon('Relic Cave',
+    [],
+    {},
+    560000,
+    [],
+    40000, 131);
+
+dungeonList['Mt. Battle Battles'] = new Dungeon('Mt. Battle Battles',
+    [],
+    {},
+    560000,
+    [],
+    40000, 131);
+
+dungeonList['The Under Subway'] = new Dungeon('The Under Subway',
+    [],
+    {},
+    560000,
+    [],
+    40000, 131);
+
+dungeonList['Cipher Lab Battles'] = new Dungeon('Cipher Lab Battles',
+    [],
+    {},
+    560000,
+    [],
+    40000, 131);
+
+dungeonList['Realgam Tower Battles'] = new Dungeon('Phenac City Battles',
+    [],
+    {},
+    560000,
+    [],
+    40000, 131);
+
+dungeonList['Realgam Colosseum Battles'] = new Dungeon('Phenac City Battles',
+    [],
+    {},
+    560000,
+    [],
+    40000, 131);
+
+dungeonList['Snagem Hideout'] = new Dungeon('Snagem Hideout',
+    [],
+    {},
+    560000,
+    [],
+    40000, 131);
+
+dungeonList['Deep Colosseum Battles'] = new Dungeon('Deep Colosseum Battles',
+    [],
+    {},
+    560000,
+    [],
+    40000, 131);
+
+dungeonList['Phenac Stadium Battles'] = new Dungeon('Phenac Stadium Battles',
+    [],
+    {},
+    560000,
+    [],
+    40000, 131);
+
+dungeonList['Under Colosseum Battles'] = new Dungeon('Under Colosseum Battles',
+    [],
+    {},
+    560000,
+    [],
+    40000, 131);
+
+dungeonList['Orre Colosseum Battles'] = new Dungeon('Orre Colosseum Battles',
+    [],
+    {},
+    560000,
+    [],
     40000, 131);
 
 // Sinnoh

@@ -115,6 +115,7 @@ import RouteKillRequirement from './requirements/RouteKillRequirement';
 import SeededDateRequirement from './requirements/SeededDateRequirement';
 import SeviiCaughtRequirement from './requirements/SeviiCaughtRequirement';
 import ShinyPokemonRequirement from './requirements/ShinyPokemonRequirement';
+import ShadowPokemonRequirement from './requirements/ShadowPokemonRequirement';
 import StatisticRequirement from './requirements/StatisticRequirement';
 import SubregionRequirement from './requirements/SubregionRequirement';
 import StarterRequirement from './requirements/StarterRequirement';
@@ -169,6 +170,11 @@ import PokeballFilter from './pokeballs/PokeballFilter';
 import PokeballFilters from './pokeballs/PokeballFilters';
 import TextMerger from './utilities/TextMerger';
 import { pokeballFilterOptions } from './pokeballs/PokeballFilterOptions';
+import { DailyDeal } from './underground/DailyDeal';
+import { Mine } from './underground/Mine';
+import { ShardDeal } from './underground/ShardDeal';
+import { Underground } from './underground/Underground';
+import UndergroundUpgrade from './underground/UndergroundUpgrade';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -291,6 +297,7 @@ Object.assign(<any>window, {
     SeededDateRequirement,
     SeviiCaughtRequirement,
     ShinyPokemonRequirement,
+    ShadowPokemonRequirement,
     StatisticRequirement,
     SubregionRequirement,
     StarterRequirement,
@@ -348,4 +355,9 @@ Object.assign(<any>window, {
     PokeballFilters,
     TextMerger,
     pokeballFilterOptions,
+    Mine,
+    Underground,
+    UndergroundUpgrade,
+    ShardDeal,
+    DailyDeal,
 });

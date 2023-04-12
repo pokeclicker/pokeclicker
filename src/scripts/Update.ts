@@ -2031,9 +2031,17 @@ class Update implements Saveable {
                 }
             });
 
-            // Reset Pokedex and Hatchery category filters
-            settingsData.pokedexCategoryFilter = -1;
-            settingsData.breedingCategoryFilter = -1;
+            // Update categories and fix category filters
+            const max = saveData.categories.categories.length - 1;
+            saveData.categories.categories.forEach((c, id) => {
+                c.id = id;
+            });
+            if (settingsData.pokedexCategoryFilter > max) {
+                settingsData.pokedexCategoryFilter = -1;
+            }
+            if (settingsData.breedingCategoryFilter > max) {
+                settingsData.breedingCategoryFilter = -1;
+            }
 
             // Reset Blue 5 to undefeated if he has been defeated before reaching the quest step to battle him
             const teamRocketQuestLine = saveData.quests.questLines.find((q) => q.name == 'Team Rocket');
@@ -2043,8 +2051,53 @@ class Update implements Saveable {
                 saveData.statistics.temporaryBattleDefeated[7] = 0;
             }
 
-            // Add Pyrite Blgd dungeon
+            // Add Phenac City Battles dungeon
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 57);
+
+            // Add Pyrite Town Battles dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 58);
+
+            // Add Pyrite Colosseum Battles dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 59);
+
+            // Add Pyrite Blgd dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 60);
+
+            // Add Pyrite Cave dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 61);
+
+            // Add Relic Cave dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 62);
+
+            // Add Mt. Battle Battles dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 63);
+
+            // Add The Under Subway dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 64);
+
+            // Add Cipher Lab Battles dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 65);
+
+            // Add Realgam Tower Battles dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 66);
+
+            // Add Realgam Colosseum Battles dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 67);
+
+            // Add Snagem Hideout dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 68);
+
+            // Add Deep Colosseum dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 69);
+
+            // Add Phenac Stadium dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 70);
+
+            // Add Under Colosseum dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 71);
+
+            // Add Orre Colosseum dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 72);
 
             //Team Flare Grunt 1
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 114);

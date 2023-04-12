@@ -6,6 +6,7 @@
 ///<reference path="BattleCafe.ts"/>
 ///<reference path="../../declarations/requirements/MultiRequirement.d.ts"/>
 ///<reference path="../Safari/SafariTownContent.ts"/>
+///<reference path="PurifyChamber.ts"/>
 
 const TownList: { [name: string]: Town } = {};
 
@@ -2828,6 +2829,156 @@ TownList['Outskirt Stand'] = new Town(
     }
 );
 
+TownList['Phenac City'] = new Town(
+    'Phenac City',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [new MoveToDungeon(dungeonList['Phenac City Battles'])],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+
+TownList['Phenac Stadium'] = new Town(
+    'Phenac Stadium',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [new MoveToDungeon(dungeonList['Phenac Stadium Battles'])],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+
+TownList['Pyrite Town'] = new Town(
+    'Pyrite Town',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [new MoveToDungeon(dungeonList['Pyrite Town Battles'])],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+
+TownList['Pyrite Colosseum'] = new Town(
+    'Pyrite Colosseum',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [new MoveToDungeon(dungeonList['Pyrite Colosseum Battles'])],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+
+TownList['Agate Village'] = new Town(
+    'Agate Village',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [new MoveToDungeon(dungeonList['Relic Cave'])],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+
+TownList['Relic Stone'] = new Town(
+    'Relic Stone',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [new MoveToDungeon(dungeonList['Relic Cave']), new PurifyChamberTownContent()],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+
+TownList['Mt. Battle'] = new Town(
+    'Mt. Battle',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [new MoveToDungeon(dungeonList['Mt. Battle Battles'])],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+
+TownList['The Under'] = new Town(
+    'The Under',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [new MoveToDungeon(dungeonList['The Under Subway'])],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+
+TownList['Cipher Lab'] = new Town(
+    'Cipher Lab',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [new MoveToDungeon(dungeonList['Cipher Lab Battles'])],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+
+TownList['Realgam Tower'] = new Town(
+    'Realgam Tower',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [new MoveToDungeon(dungeonList['Realgam Tower Battles'])],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+
+TownList['Realgam Colosseum'] = new Town(
+    'Realgam Colosseum',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [new MoveToDungeon(dungeonList['Realgam Colosseum Battles'])],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+
+TownList['Eclo Canyon'] = new Town(
+    'Eclo Canyon',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [new MoveToDungeon(dungeonList['Snagem Hideout'])],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+
+TownList['Deep Colosseum'] = new Town(
+    'Deep Colosseum',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [new MoveToDungeon(dungeonList['Deep Colosseum Battles'])],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+
+TownList['Orre Colosseum'] = new Town(
+    'Orre Colosseum',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [new MoveToDungeon(dungeonList['Orre Colosseum Battles'])],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+
+TownList['Under Colosseum'] = new Town(
+    'Under Colosseum',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [new MoveToDungeon(dungeonList['Under Colosseum Battles'])],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+
 //Hoenn Dungeons
 TownList['Petalburg Woods'] = new DungeonTown(
     'Petalburg Woods',
@@ -2999,6 +3150,30 @@ TownList['Near Space'] = new DungeonTown(
         new QuestLineCompletedRequirement('The Delta Episode'),
     ]
 );
+TownList['Phenac City Battles'] = new DungeonTown(
+    'Phenac City Battles',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [
+        new DevelopmentRequirement(),
+    ]
+);
+TownList['Pyrite Town Battles'] = new DungeonTown(
+    'Pyrite Town Battles',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [
+        new DevelopmentRequirement(),
+    ]
+);
+TownList['Pyrite Colosseum Battles'] = new DungeonTown(
+    'Pyrite Colosseum Battles',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [
+        new DevelopmentRequirement(),
+    ]
+);
 TownList['Pyrite Bldg'] = new DungeonTown(
     'Pyrite Bldg',
     GameConstants.Region.hoenn,
@@ -3007,6 +3182,135 @@ TownList['Pyrite Bldg'] = new DungeonTown(
         new DevelopmentRequirement(),
     ]
 );
+TownList['Pyrite Cave'] = new DungeonTown(
+    'Pyrite Cave',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [
+        new DevelopmentRequirement(),
+    ]
+);
+TownList['Relic Cave'] = new DungeonTown(
+    'Relic Cave',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [
+        new DevelopmentRequirement(),
+    ]
+);
+TownList['Mt. Battle Battles'] = new DungeonTown(
+    'Mt. Battle Battles',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [
+        new DevelopmentRequirement(),
+    ]
+);
+TownList['The Under Subway'] = new DungeonTown(
+    'The Under Subway',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [
+        new DevelopmentRequirement(),
+    ]
+);
+TownList['Cipher Lab Battles'] = new DungeonTown(
+    'Cipher Lab Battles',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [
+        new DevelopmentRequirement(),
+    ]
+);
+TownList['Realgam Tower Battles'] = new DungeonTown(
+    'Realgam Tower Battles',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [
+        new DevelopmentRequirement(),
+    ]
+);
+TownList['Realgam Colosseum Battles'] = new DungeonTown(
+    'Realgam Colosseum Battles',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [
+        new DevelopmentRequirement(),
+    ]
+);
+TownList['Snagem Hideout'] = new DungeonTown(
+    'Snagem Hideout',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [
+        new DevelopmentRequirement(),
+    ]
+);
+TownList['Deep Colosseum Battles'] = new DungeonTown(
+    'Deep Colosseum Battles',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [
+        new DevelopmentRequirement(),
+    ]
+);
+TownList['Phenac Stadium Battles'] = new DungeonTown(
+    'Phenac Stadium Battles',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [
+        new DevelopmentRequirement(),
+    ]
+);
+TownList['Under Colosseum Battles'] = new DungeonTown(
+    'Under Colosseum Battles',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [
+        new DevelopmentRequirement(),
+    ]
+);
+TownList['Realgam Tower Battles'] = new DungeonTown(
+    'Realgam Tower Battles',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [
+        new DevelopmentRequirement(),
+    ]
+);
+TownList['Realgam Colosseum Battles'] = new DungeonTown(
+    'Realgam Colosseum Battles',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [
+        new DevelopmentRequirement(),
+    ]
+);
+TownList['Deep Colosseum Battles'] = new DungeonTown(
+    'Deep Colosseum Battles',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [
+        new DevelopmentRequirement(),
+    ]
+);
+TownList['Under Colosseum Battles'] = new DungeonTown(
+    'Under Colosseum Battles',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [
+        new DevelopmentRequirement(),
+    ]
+);
+TownList['Orre Colosseum Battles'] = new DungeonTown(
+    'Under Colosseum Battles',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [
+        new DevelopmentRequirement(),
+    ]
+);
+
 
 //Sinnoh Shops
 const SandgemTownShop = new Shop([
