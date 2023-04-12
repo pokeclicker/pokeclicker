@@ -5,9 +5,13 @@ import Settings from './Settings';
 import FilterOption from './FilterOption';
 
 const BreedingFilters: Record<string, FilterOption> = {
-    search: new FilterOption<RegExp>(
+    name: new FilterOption<RegExp>(
         'Search',
         ko.observable(new RegExp('', 'i')),
+    ),
+    id: new FilterOption<number>(
+        'SearchID',
+        ko.observable(-1),
     ),
     category: new FilterOption<number>(
         'Category',
