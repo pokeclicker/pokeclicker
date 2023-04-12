@@ -2161,7 +2161,7 @@ GymList['Temple of Sinnoh'] = new Gym(
     'Volo',
     'Temple of Sinnoh',
     [
-        new GymPokemon('Spiritom b', 348526193, 68),
+        new GymPokemon('Spiritomb', 348526193, 68),
         new GymPokemon('Roserade', 348526193, 68),
         new GymPokemon('Togekiss', 348526193, 68),
         new GymPokemon('Hisuian Arcanine', 348526193, 68),
