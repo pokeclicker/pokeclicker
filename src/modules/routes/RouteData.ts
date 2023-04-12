@@ -1135,6 +1135,7 @@ Routes.add(new RegionRoute(
         land: ['Abra', 'Kadabra', 'Lickitung', 'Scyther', 'Marill', 'Staravia'],
     }),
     [new RouteKillRequirement(10, Region.sinnoh, 210)],
+    210.1,
 ));
 Routes.add(new RegionRoute(
     'Sinnoh Route 214', Region.sinnoh, 214,
@@ -1143,6 +1144,7 @@ Routes.add(new RegionRoute(
         water: ['Psyduck', 'Golduck', 'Goldeen', 'Seaking', 'Magikarp', 'Gyarados'],
     }),
     [new RouteKillRequirement(10, Region.sinnoh, 215)],
+    210.2,
 ));
 Routes.add(new RegionRoute(
     'Sinnoh Route 213', Region.sinnoh, 213,
@@ -1151,6 +1153,7 @@ Routes.add(new RegionRoute(
         water: ['Tentacool', 'Tentacruel', 'Magikarp', 'Gyarados', 'Remoraid', 'Octillery', 'Gastrodon (East)'],
     }),
     [new RouteKillRequirement(10, Region.sinnoh, 214)],
+    210.3,
 ));
 Routes.add(new RegionRoute(
     'Sinnoh Route 212', Region.sinnoh, 212,
@@ -1159,6 +1162,7 @@ Routes.add(new RegionRoute(
         water: ['Psyduck', 'Golduck', 'Goldeen', 'Seaking', 'Magikarp', 'Gyarados', 'Remoraid', 'Octillery', 'Gastrodon (East)'],
     }),
     [new RouteKillRequirement(10, Region.sinnoh, 213)],
+    210.4,
 ));
 Routes.add(new RegionRoute(
     'Sinnoh Route 211', Region.sinnoh, 211,
@@ -1166,6 +1170,7 @@ Routes.add(new RegionRoute(
         land: ['Zubat', 'Machop', 'Machoke', 'Graveler', 'Hoothoot', 'Noctowl', 'Meditite', 'Bidoof', 'Chingling', 'Bronzor'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Fen)],
+    210.5,
 ));
 Routes.add(new RegionRoute(
     'Sinnoh Route 218', Region.sinnoh, 218,
@@ -1174,6 +1179,7 @@ Routes.add(new RegionRoute(
         water: ['Tentacool', 'Tentacruel', 'Magikarp', 'Gyarados', 'Shellos (West)', 'Finneon', 'Lumineon'],
     }),
     [new TemporaryBattleRequirement('Galactic Boss Cyrus')],
+    210.6,
 ));
 Routes.add(new RegionRoute(
     'Sinnoh Route 216', Region.sinnoh, 216,
