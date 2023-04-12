@@ -13,6 +13,6 @@ export default class InDungeonRequirement extends Requirement {
     public hint(): string {
         return `You must be in the ${
             this.dungeon
-        } dugeon`;
+        } dungeon`;
     }
 }
