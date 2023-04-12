@@ -5317,24 +5317,6 @@ TemporaryBattleList['Palkia (Origin) 2'] = new TemporaryBattle(
 TemporaryBattleList['Volo 3'] = new TemporaryBattle(
     'Volo 3',
     [
-        new GymPokemon('Spiritomb', 348526193, 68),
-        new GymPokemon('Roserade', 348526193, 68),
-        new GymPokemon('Togekiss', 348526193, 68),
-        new GymPokemon('Hisuian Arcanine', 348526193, 68),
-        new GymPokemon('Lucario', 348526193, 68),
-        new GymPokemon('Garchomp', 348526193, 68),
-    ],
-    'Why? Why you?! Why do you have the blessing of Arceus?!',
-    [new DevelopmentRequirement()],
-    undefined,
-    {
-        displayName: 'Pokémon Wielder Volo',
-        imageName: 'Volo2',
-    }
-);
-TemporaryBattleList['Volo 3'] = new TemporaryBattle(
-    'Volo 3',
-    [
         new GymPokemon('Giratina (Altered)', 348526193, 70),
         new GymPokemon('Giratina (Origin)', 348526193, 70),
     ],
