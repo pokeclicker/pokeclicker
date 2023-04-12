@@ -40,6 +40,7 @@ export const pokemonBabyPrevolutionMap: { [name: string]: PokemonNameType } = {}
 // For regional evolutions, so it evolves in the respective region and not with a random chance
 const alolaOnly: Array<Region> = [Region.alola];
 const galarOnly: Array<Region> = [Region.galar];
+const hisuiOnly: Array<Region> = [Region.hisui];
 const allButAlola: Array<Region> = [
     Region.kanto,
     Region.johto,
@@ -48,6 +49,7 @@ const allButAlola: Array<Region> = [
     Region.unova,
     Region.kalos,
     Region.galar,
+    Region.hisui,
 ];
 const allButGalar: Array<Region> = [
     Region.kanto,
@@ -57,6 +59,17 @@ const allButGalar: Array<Region> = [
     Region.unova,
     Region.kalos,
     Region.alola,
+    Region.hisui,
+];
+const allButHisui: Array<Region> = [
+    Region.kanto,
+    Region.johto,
+    Region.hoenn,
+    Region.sinnoh,
+    Region.unova,
+    Region.kalos,
+    Region.alola,
+    Region.galar,
 ];
 
 export type PokemonListData = {
@@ -14684,6 +14697,7 @@ export const pokemonList = createPokemonArray(
     {
         'id': 483.01,
         'name': 'Dialga (Origin)',
+        'nativeRegion': Region.hisui,
         'type': [PokemonType.Steel, PokemonType.Dragon],
         'eggCycles': 120,
         'levelType': LevelType.slow,
@@ -14722,6 +14736,7 @@ export const pokemonList = createPokemonArray(
     {
         'id': 484.01,
         'name': 'Palkia (Origin)',
+        'nativeRegion': Region.hisui,
         'type': [PokemonType.Water, PokemonType.Dragon],
         'eggCycles': 120,
         'levelType': LevelType.slow,
@@ -16364,8 +16379,8 @@ export const pokemonList = createPokemonArray(
         'exp': 56,
         'catchRate': 190,
         'evolutions': [
-            StoneEvolution('Petilil', 'Lilligant', StoneType.Sun_stone),
-            StoneEvolution('Petilil', 'Hisuian Lilligant', StoneType.Sun_stone),
+            RegionStoneEvolution(allButHisui, 'Petilil', 'Lilligant', StoneType.Sun_stone),
+            RegionStoneEvolution(hisuiOnly, 'Petilil', 'Hisuian Lilligant', StoneType.Sun_stone),
         ],
         'base': {
             'hitpoints': 45,

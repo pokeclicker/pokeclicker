@@ -4949,7 +4949,7 @@ TemporaryBattleList['Lord of the Woods: Kleavor'] = new TemporaryBattle(
     undefined,
     {
         hideTrainer: true,
-        imageName: '../pokemon/900.1',
+        imageName: '../pokemon/900.01',
     }
 );
 TemporaryBattleList['Akari 2'] = new TemporaryBattle(
@@ -4991,7 +4991,7 @@ TemporaryBattleList['Coin 1'] = new TemporaryBattle(
 TemporaryBattleList.Ursaluna = new TemporaryBattle(
     'Ursaluna',
     [new GymPokemon('Ursaluna', 2031393560, 26)],
-    'You defeated Braviary!',
+    'You defeated Ursaluna!',
     [new DevelopmentRequirement()],
     undefined,
     {
@@ -5007,7 +5007,7 @@ TemporaryBattleList['Lady of the Ridge: Lilligant'] = new TemporaryBattle(
     undefined,
     {
         hideTrainer: true,
-        imageName: '../pokemon/549.2',
+        imageName: '../pokemon/549.02',
     }
 );
 TemporaryBattleList['Irida 2'] = new TemporaryBattle(
@@ -5038,7 +5038,7 @@ TemporaryBattleList['Coin 2'] = new TemporaryBattle(
     'Coin 2',
     [new GymPokemon('Toxicroak', 348526193, 34)],
     'What a blithering mooncalf I am. How could I let myself lose...',
-    [new TemporaryBattleRequirement('Clover 1')],
+    [new TemporaryBattleRequirement('Clover')],
     undefined,
     {
         displayName: 'The Bandit Coin',
@@ -5067,7 +5067,7 @@ TemporaryBattleList['Lord of the Isles: Arcanine'] = new TemporaryBattle(
     undefined,
     {
         hideTrainer: true,
-        imageName: '../pokemon/59.2',
+        imageName: '../pokemon/59.02',
     }
 );
 TemporaryBattleList['Adaman 1'] = new TemporaryBattle(
@@ -5128,7 +5128,7 @@ TemporaryBattleList['Lord of the Hollow: Electrode'] = new TemporaryBattle(
     undefined,
     {
         hideTrainer: true,
-        imageName: '../pokemon/101.2',
+        imageName: '../pokemon/101.02',
     }
 );
 TemporaryBattleList['Warden Gaeric'] = new TemporaryBattle(
@@ -5169,7 +5169,7 @@ TemporaryBattleList['Lord of the Tundra: Avalugg'] = new TemporaryBattle(
     undefined,
     {
         hideTrainer: true,
-        imageName: '../pokemon/713.2',
+        imageName: '../pokemon/713.02',
     }
 );
 TemporaryBattleList.Beni = new TemporaryBattle(
@@ -5226,7 +5226,7 @@ TemporaryBattleList['Dialga (Origin) 1'] = new TemporaryBattle(
     {
         displayName: 'Dialga - Origin Form',
         hideTrainer: true,
-        imageName: '../pokemon/483.1',
+        imageName: '../pokemon/483.01',
     }
 );
 TemporaryBattleList['Palkia (Origin) 1'] = new TemporaryBattle(
@@ -5238,7 +5238,7 @@ TemporaryBattleList['Palkia (Origin) 1'] = new TemporaryBattle(
     {
         displayName: 'Palkia - Origin Form',
         hideTrainer: true,
-        imageName: '../pokemon/484.1',
+        imageName: '../pokemon/484.01',
     }
 );
 TemporaryBattleList['Kamado 2'] = new TemporaryBattle(
@@ -5298,7 +5298,7 @@ TemporaryBattleList['Dialga (Origin) 2'] = new TemporaryBattle(
         isTrainerBattle: false,
         displayName: 'Dialga - Origin Form',
         hideTrainer: true,
-        imageName: '../pokemon/483.1',
+        imageName: '../pokemon/483.01',
     }
 );
 TemporaryBattleList['Palkia (Origin) 2'] = new TemporaryBattle(
@@ -5311,7 +5311,7 @@ TemporaryBattleList['Palkia (Origin) 2'] = new TemporaryBattle(
         isTrainerBattle: false,
         displayName: 'Palkia (Origin)',
         hideTrainer: true,
-        imageName: '../pokemon/484.1',
+        imageName: '../pokemon/484.01',
     }
 );
 TemporaryBattleList['Volo 3'] = new TemporaryBattle(
@@ -5333,10 +5333,10 @@ TemporaryBattleList['Giratina (Origin)'] = new TemporaryBattle(
     [new GymPokemon('Giratina (Origin)', 2031393560, 70)],
     undefined,
     [new DevelopmentRequirement()],
-    [new ObtainedPokemonRequirement('Giratina (Origin)')],
+    [new ObtainedPokemonRequirement('Giratina (Origin)'), new TemporaryBattleRequirement('Giratina (Origin)')],
     {
         isTrainerBattle: false,
-        imageName: '../pokemon/487.1',
+        imageName: '../pokemon/487.01',
         hideTrainer: true,
     }
 );
@@ -5349,6 +5349,7 @@ TemporaryBattleList['Tornadus 1'] = new TemporaryBattle(
     {
         hideTrainer: true,
         imageName: '../pokemon/641',
+        returnTown: 'Ancient Retreat',
     }
 );
 TemporaryBattleList['Tornadus 2'] = new TemporaryBattle(
@@ -5360,6 +5361,7 @@ TemporaryBattleList['Tornadus 2'] = new TemporaryBattle(
     {
         hideTrainer: true,
         imageName: '../pokemon/641',
+        returnTown: 'Ancient Retreat',
     }
 );
 TemporaryBattleList['Tornadus 3'] = new TemporaryBattle(
@@ -5372,6 +5374,7 @@ TemporaryBattleList['Tornadus 3'] = new TemporaryBattle(
         isTrainerBattle: false,
         hideTrainer: true,
         imageName: '../pokemon/641',
+        returnTown: 'Ancient Retreat',
     }
 );
 TemporaryBattleList['Thundurus 1'] = new TemporaryBattle(
@@ -5383,6 +5386,7 @@ TemporaryBattleList['Thundurus 1'] = new TemporaryBattle(
     {
         hideTrainer: true,
         imageName: '../pokemon/642',
+        returnTown: 'Ancient Retreat',
     }
 );
 TemporaryBattleList['Thundurus 2'] = new TemporaryBattle(
@@ -5394,6 +5398,7 @@ TemporaryBattleList['Thundurus 2'] = new TemporaryBattle(
     {
         hideTrainer: true,
         imageName: '../pokemon/642',
+        returnTown: 'Ancient Retreat',
     }
 );
 TemporaryBattleList['Thundurus 3'] = new TemporaryBattle(
@@ -5406,6 +5411,7 @@ TemporaryBattleList['Thundurus 3'] = new TemporaryBattle(
         isTrainerBattle: false,
         hideTrainer: true,
         imageName: '../pokemon/642',
+        returnTown: 'Ancient Retreat',
     }
 );
 TemporaryBattleList['Landorus 1'] = new TemporaryBattle(
@@ -5417,6 +5423,7 @@ TemporaryBattleList['Landorus 1'] = new TemporaryBattle(
     {
         hideTrainer: true,
         imageName: '../pokemon/645',
+        returnTown: 'Ancient Retreat',
     }
 );
 TemporaryBattleList['Landorus 2'] = new TemporaryBattle(
@@ -5428,6 +5435,7 @@ TemporaryBattleList['Landorus 2'] = new TemporaryBattle(
     {
         hideTrainer: true,
         imageName: '../pokemon/645',
+        returnTown: 'Ancient Retreat',
     }
 );
 TemporaryBattleList['Landorus 3'] = new TemporaryBattle(
@@ -5440,39 +5448,43 @@ TemporaryBattleList['Landorus 3'] = new TemporaryBattle(
         isTrainerBattle: false,
         hideTrainer: true,
         imageName: '../pokemon/645',
+        returnTown: 'Ancient Retreat',
     }
 );
 TemporaryBattleList['Enamorus 1'] = new TemporaryBattle(
     'Enamorus 1',
     [new GymPokemon('Enamorus', 2031393560, 65)],
     undefined,
-    [new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 0)],
+    [new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 2)],
     undefined,
     {
         hideTrainer: true,
         imageName: '../pokemon/905',
+        returnTown: 'Ancient Retreat',
     }
 );
 TemporaryBattleList['Enamorus 2'] = new TemporaryBattle(
     'Enamorus 2',
     [new GymPokemon('Enamorus', 2031393560, 65)],
     undefined,
-    [new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 0)],
+    [new TemporaryBattleRequirement('Enamorus 1')],
     undefined,
     {
         hideTrainer: true,
         imageName: '../pokemon/905',
+        returnTown: 'Ancient Retreat',
     }
 );
 TemporaryBattleList['Enamorus 3'] = new TemporaryBattle(
     'Enamorus 3',
     [new GymPokemon('Enamorus', 2031393560, 65)],
     'Before you could attempt to capture it, Enamorus fled to roam the region!',
-    [new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 0)],
+    [new TemporaryBattleRequirement('Enamorus 2')],
     undefined,
     {
         hideTrainer: true,
         imageName: '../pokemon/905',
+        returnTown: 'Ancient Retreat',
     }
 );
 TemporaryBattleList.Arceus = new TemporaryBattle(

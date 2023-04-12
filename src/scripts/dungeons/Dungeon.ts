@@ -9876,7 +9876,7 @@ dungeonList['Ancient Lake Valor'] = new Dungeon('Ancient Lake Valor',
     ],
     96500, 1);
 
-dungeonList['Ancient Lake Verity'] = new Dungeon('Ancient Lake Verity',
+dungeonList['Ancient Lake Acuity'] = new Dungeon('Ancient Lake Acuity',
     ['Abra', 'Kadabra', 'Chingling', 'Chimecho', 'Burmy (Trash)', 'Wormadam (Trash)', 'Rufflet', 'Basculin (White-Striped)'],
     {
         common: [

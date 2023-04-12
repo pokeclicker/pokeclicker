@@ -788,7 +788,7 @@
 
     <!--Avalugg's Legacy-->
     <%- include('templates/mapDungeon',
-        { name: "Avalugg/'s Legacy"
+        { name: "Avalugg's Legacy"
         , x: 36, y: 42
         , height: 3, width: 3
         })
@@ -856,7 +856,7 @@
 
     <%- include('templates/mapPOI',
         { name: "Dock"
-        , x: 32, y: 12
+        , x: 0, y: 56
         , width: 3, height: 4
         , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Prelude Beach') }"
         })
@@ -864,7 +864,7 @@
 
     <%- include('templates/mapPOI',
         { name: "Underground Entrance"
-        , x: 9, y: 21
+        , x: 3, y: 56
         , width: 3, height: 4
         , databind: "click:function(){App.game.underground.openUndergroundModal()}, attr: { class: App.game.underground.canAccess() ? 'completed' : 'locked' }"
         })
@@ -872,7 +872,7 @@
 
      <%- include('templates/mapPOI',
         { name: "Farm"
-        , x: 34, y: 37
+        , x: 6, y: 57
         , width: 3, height: 3
         , databind: "click:function(){FarmController.openFarmModal()}, attr: { class: App.game.farming.canAccess() ? 'completed' : 'locked' }"
         })
@@ -880,7 +880,7 @@
 
      <%- include('templates/mapPOI',
         { name: "Pokémon Day Care"
-        , x: 29, y: 36
+        , x: 9, y: 56
         , width: 4, height: 4
         , databind: "click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? 'completed' : 'locked' }"
         })
@@ -908,7 +908,7 @@
 
      <%- include('templates/mapOverlay',
          { name: "Tornadus"
-         , x: 0, y: 96
+         , x: 13, y: 56
          , width: 4, height: 4
          , databind: "click: () => TemporaryBattleList['Tornadus 1'].protectedOnclick()"
          , visible:  "TemporaryBattleList['Tornadus 1'] && TemporaryBattleList['Tornadus 1'].isVisible()"
@@ -918,7 +918,7 @@
 
      <%- include('templates/mapOverlay',
          { name: "Tornadus"
-         , x: 4, y: 96
+         , x: 17, y: 56
          , width: 4, height: 4
          , databind: "click: () => TemporaryBattleList['Tornadus 2'].protectedOnclick()"
          , visible:  "TemporaryBattleList['Tornadus 2'] && TemporaryBattleList['Tornadus 2'].isVisible()"
@@ -928,7 +928,7 @@
 
      <%- include('templates/mapOverlay',
          { name: "Tornadus"
-         , x: 8, y: 96
+         , x: 21, y: 56
          , width: 4, height: 4
          , databind: "click: () => TemporaryBattleList['Tornadus 3'].protectedOnclick()"
          , visible:  "TemporaryBattleList['Tornadus 3'] && TemporaryBattleList['Tornadus 3'].isVisible()"
@@ -938,7 +938,7 @@
 
      <%- include('templates/mapOverlay',
          { name: "Thundurus"
-         , x: 12, y: 96
+         , x: 25, y: 56
          , width: 4, height: 4
          , databind: "click: () => TemporaryBattleList['Thundurus 1'].protectedOnclick()"
          , visible:  "TemporaryBattleList['Thundurus 1'] && TemporaryBattleList['Thundurus 1'].isVisible()"
@@ -948,7 +948,7 @@
 
      <%- include('templates/mapOverlay',
          { name: "Thundurus"
-         , x: 16, y: 96
+         , x: 29, y: 56
          , width: 4, height: 4
          , databind: "click: () => TemporaryBattleList['Thundurus 2'].protectedOnclick()"
          , visible:  "TemporaryBattleList['Thundurus 2'] && TemporaryBattleList['Thundurus 2'].isVisible()"
@@ -958,7 +958,7 @@
 
      <%- include('templates/mapOverlay',
          { name: "Thundurus"
-         , x: 20, y: 96
+         , x: 33, y: 56
          , width: 4, height: 4
          , databind: "click: () => TemporaryBattleList['Thundurus 3'].protectedOnclick()"
          , visible:  "TemporaryBattleList['Thundurus 3'] && TemporaryBattleList['Thundurus 3'].isVisible()"
@@ -968,7 +968,7 @@
 
      <%- include('templates/mapOverlay',
          { name: "Landorus"
-         , x: 24, y: 96
+         , x: 37, y: 56
          , width: 4, height: 4
          , databind: "click: () => TemporaryBattleList['Landorus 1'].protectedOnclick()"
          , visible:  "TemporaryBattleList['Landorus 1'] && TemporaryBattleList['Landorus 1'].isVisible()"
@@ -978,7 +978,7 @@
 
      <%- include('templates/mapOverlay',
          { name: "Landorus"
-         , x: 28, y: 96
+         , x: 41, y: 56
          , width: 4, height: 4
          , databind: "click: () => TemporaryBattleList['Landorus 2'].protectedOnclick()"
          , visible:  "TemporaryBattleList['Landorus 2'] && TemporaryBattleList['Landorus 2'].isVisible()"
@@ -988,7 +988,7 @@
 
      <%- include('templates/mapOverlay',
          { name: "Landorus"
-         , x: 32, y: 96
+         , x: 45, y: 56
          , width: 4, height: 4
          , databind: "click: () => TemporaryBattleList['Landorus 3'].protectedOnclick()"
          , visible:  "TemporaryBattleList['Landorus 3'] && TemporaryBattleList['Landorus 3'].isVisible()"
@@ -998,7 +998,7 @@
 
      <%- include('templates/mapOverlay',
          { name: "Enamorus"
-         , x: 36, y: 96
+         , x: 49, y: 56
          , width: 4, height: 4
          , databind: "click: () => TemporaryBattleList['Enamorus 1'].protectedOnclick()"
          , visible:  "TemporaryBattleList['Enamorus 1'] && TemporaryBattleList['Enamorus 1'].isVisible()"
@@ -1008,7 +1008,7 @@
 
      <%- include('templates/mapOverlay',
          { name: "Enamorus"
-         , x: 40, y: 96
+         , x: 53, y: 56
          , width: 4, height: 4
          , databind: "click: () => TemporaryBattleList['Enamorus 2'].protectedOnclick()"
          , visible:  "TemporaryBattleList['Enamorus 2'] && TemporaryBattleList['Enamorus 2'].isVisible()"
@@ -1018,7 +1018,7 @@
 
      <%- include('templates/mapOverlay',
          { name: "Enamorus"
-         , x: 44, y: 96
+         , x: 57, y: 56
          , width: 4, height: 4
          , databind: "click: () => TemporaryBattleList['Enamorus 3'].protectedOnclick()"
          , visible:  "TemporaryBattleList['Enamorus 3'] && TemporaryBattleList['Enamorus 3'].isVisible()"

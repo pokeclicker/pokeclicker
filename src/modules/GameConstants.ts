@@ -1473,6 +1473,7 @@ export const DockTowns = [
     'Coumarine City', // Kalos
     'Hau\'oli City', // Alola
     'Hulbury', // Galar
+    'Prelude Beach', // Hisui
 ];
 
 export const TemporaryBattles = [

@@ -7621,7 +7621,7 @@ const ForcesCogita1 = new NPC('Cogita', [
     'Lastly, Landorus, the Pokémon hailed as the Guardian of the Fields. It seems it can be glimpsed in the Obsidian Fieldlands. Perhaps you\'d be so good as to catch it for me?',
     'I know not why these three have chosen to show themselves. Perhaps the cause lies with the space-time rift...or simply within their own whims...',
 ], {
-    requirement: new MultiRequirement([new QuestLineStartedRequirement('The Incarnate Forces of Hisui'), new QuestLineStepCompletedRequirement('The Incarnate Forces of Hisui', 1, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('Incarnate Forces of Hisui'), new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 1, GameConstants.AchievementOption.less)]),
 });
 const ForcesCogita2 = new NPC('Cogita', [
     'Ah, you\'ve arrived. You now know much about Landorus, Tornadus and even Thundurus. Well done.',
@@ -7632,7 +7632,7 @@ const ForcesCogita2 = new NPC('Cogita', [
     'This is Enamorus, a Pokémon hailed as the Herald of Spring. Enamorus is not particularly given to ill behaviour. But I imagine you\'d like to document her for your Pokédex, wouldn\'t you?',
     'Catch her then, if you like. She always flits about in the Crimson Mirelands.',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Incarnate Forces of Hisui', 1), new QuestLineStepCompletedRequirement('The Incarnate Forces of Hisui', 3, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 1), new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 3, GameConstants.AchievementOption.less)]),
 });
 const ForcesCogita3 = new NPC('Cogita', [
     'Aha, you\'ve caught Enamorus as well. And you know so much about her.',
@@ -7644,7 +7644,7 @@ const ForcesCogita3 = new NPC('Cogita', [
     '"Once there was a god of field, and once there was a god of spring. Upon Hisui\'s winds it wheeled, brought life to every growing thing..." Was that how that old verse went?',
     'I have passed on to you all there is to pass. Where history goes from here...I leave to you and your companions to see through.',
 ], {
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Incarnate Forces of Hisui', 4), new QuestLineCompletedRequirement('The Incarnate Forces of Hisui', GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 4), new QuestLineCompletedRequirement('Incarnate Forces of Hisui', GameConstants.AchievementOption.less)]),
 });
 
 //Hisui Towns
@@ -7652,7 +7652,7 @@ TownList['Prelude Beach'] = new Town(
     'Prelude Beach',
     GameConstants.Region.hisui,
     GameConstants.HisuiSubRegions.Hisui,
-    [TemporaryBattleList['Kamado 2'], new DockTownContent()],
+    [TemporaryBattleList['Kamado 2']],
     {
         requirements: [new DevelopmentRequirement()],
     }
@@ -7673,6 +7673,7 @@ TownList['Galaxy Hall'] = new Town(
     [new BulletinBoard(GameConstants.BulletinBoards.Hisui)],
     {
         requirements: [new DevelopmentRequirement()],
+        npcs: [ForcesCogita1],
     }
 );
 TownList['Fieldlands Camp'] = new Town(
@@ -7871,6 +7872,7 @@ TownList['Ancient Retreat'] = new Town(
     [],
     {
         requirements: [new DevelopmentRequirement()],
+        npcs: [ForcesCogita2, ForcesCogita3],
     }
 );
 TownList['Stone Portal'] = new Town(
