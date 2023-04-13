@@ -105,6 +105,14 @@
 
                     <div id="itemBag" class="tab-pane p-3">
                         <div>
+                            <!-- ko if: Object.values(ItemList).some((i) => i instanceof QuestItem && i.isActive() && player.itemList[i.name]()) -->
+                            <h4>Quest items</h4>
+                            <div class="row justify-content-center">
+                                <!-- ko foreach: Object.values(ItemList).filter((i) => i instanceof QuestItem && i.isActive() && player.itemList[i.name]()) -->
+                                    <div class="btn btn-primary col-2 item-bag-item" data-bind="template: { name: 'otherItemTemplate', data: $data.name }"></div>
+                                <!-- /ko -->
+                            </div>
+                            <!-- /ko -->
                             <h4>Vitamins</h4>
                             <div class="row justify-content-center">
                                 <!-- ko foreach: GameHelper.enumNumbers(GameConstants.VitaminType) -->
