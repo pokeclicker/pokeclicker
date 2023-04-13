@@ -3016,9 +3016,66 @@ class QuestLineHelper {
 
         const surpriseTogepi = pokemonMap['Surprise Togepi'];
 
+        let foundTogepiKanto = false;
+        let foundTogepiJohto = false;
+        let foundTogepiHoenn = false;
+
+        const togepiCheckKanto : () => number = () => {
+            const enemyPokemon = Battle.enemyPokemon();
+            const defeatedBoss = DungeonRunner.defeatedBoss();
+            if (enemyPokemon) {
+                if (enemyPokemon.name === surpriseTogepi.name) {
+                    foundTogepiKanto = true;
+                    return 0;
+                }
+                foundTogepiKanto = false;
+                return 0;
+            }
+            if (defeatedBoss && foundTogepiKanto) {
+                foundTogepiKanto = false;
+                return 1;
+            }
+            return 0;
+        };
+
+        const togepiCheckJohto : () => number = () => {
+            const enemyPokemon = Battle.enemyPokemon();
+            const defeatedBoss = DungeonRunner.defeatedBoss();
+            if (enemyPokemon) {
+                if (enemyPokemon.name === surpriseTogepi.name) {
+                    foundTogepiJohto = true;
+                    return 0;
+                }
+                foundTogepiJohto = false;
+                return 0;
+            }
+            if (defeatedBoss && foundTogepiJohto) {
+                foundTogepiJohto = false;
+                return 1;
+            }
+            return 0;
+        };
+
+        const togepiCheckHoenn : () => number = () => {
+            const enemyPokemon = Battle.enemyPokemon();
+            const defeatedBoss = DungeonRunner.defeatedBoss();
+            if (enemyPokemon) {
+                if (enemyPokemon.name === surpriseTogepi.name) {
+                    foundTogepiHoenn = true;
+                    return 0;
+                }
+                foundTogepiHoenn = false;
+                return 0;
+            }
+            if (defeatedBoss && foundTogepiHoenn) {
+                foundTogepiHoenn = false;
+                return 1;
+            }
+            return 0;
+        };
+
         const togepiInKantoSetup = () => {
             dungeonList['Viridian Forest'].bossList.push(new DungeonTrainer('Egg Hunter', [new GymPokemon('Surprise Togepi', 300000, 100)], { weight: 1, requirement: new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion) }));
-            App.game.statistics.pokemonDefeated[surpriseTogepi.id](0);
         };
         const afterDefeatingTogepiInKanto = () => {
             Notifier.notify({
@@ -3031,7 +3088,7 @@ class QuestLineHelper {
 
             dungeonList['Viridian Forest'].bossList = dungeonList['Viridian Forest'].bossList.filter(boss => boss.name != 'Egg Hunter');
         };
-        const defeatTogepiInKanto = new CustomQuest(1, afterDefeatingTogepiInKanto, 'A strange Togepi has been seen around Kanto. Go look for it! Maybe Erika knows more.', App.game.statistics.pokemonDefeated[surpriseTogepi.id], 0, togepiInKantoSetup);
+        const defeatTogepiInKanto = new CustomQuest(1, afterDefeatingTogepiInKanto, 'A strange Togepi has been seen around Kanto. Go look for it! Maybe Erika knows more.', togepiCheckKanto, 0, togepiInKantoSetup);
         findSurpriseTogepiForEasterQuestLine.addQuest(defeatTogepiInKanto);
 
         const togepiInJohtoSetup = () => {
@@ -3047,7 +3104,7 @@ class QuestLineHelper {
             });
             dungeonList['Ilex Forest'].bossList = dungeonList['Ilex Forest'].bossList.filter(boss => boss.name != 'Egg Hunter');
         };
-        const encounterSurpriseTogepiInJohto = new CustomQuest(1, afterDefeatingTogepiInJohto, 'Another report just came in, stating that they saw a strange egg boarding the ferry to Johto!', App.game.statistics.pokemonDefeated[surpriseTogepi.id], 1, togepiInJohtoSetup);
+        const encounterSurpriseTogepiInJohto = new CustomQuest(1, afterDefeatingTogepiInJohto, 'Another report just came in, stating that they saw a strange egg boarding the ferry to Johto!', togepiCheckJohto, 0, togepiInJohtoSetup);
         findSurpriseTogepiForEasterQuestLine.addQuest(encounterSurpriseTogepiInJohto);
 
         const togepiInHoennSetup = () => {
@@ -3063,7 +3120,7 @@ class QuestLineHelper {
             });
             dungeonList['Petalburg Woods'].bossList = dungeonList['Petalburg Woods'].bossList.filter(boss => boss.name != 'Egg Hunter');
         };
-        const encounterTogepiInHoenn = new CustomQuest(1, afterDefeatingTogepiInHoenn, 'There is a big Egg Hunt going on in Petalburg Woods right now; maybe you should take a look?', App.game.statistics.pokemonDefeated[surpriseTogepi.id], 2, togepiInHoennSetup);
+        const encounterTogepiInHoenn = new CustomQuest(1, afterDefeatingTogepiInHoenn, 'There is a big Egg Hunt going on in Petalburg Woods right now; maybe you should take a look?', togepiCheckHoenn, 0, togepiInHoennSetup);
         findSurpriseTogepiForEasterQuestLine.addQuest(encounterTogepiInHoenn);
 
         App.game.quests.questLines().push(findSurpriseTogepiForEasterQuestLine);
