@@ -7601,6 +7601,448 @@ TownList['Crown Shrine'] = new DungeonTown(
     }
 );
 
+//Hisui shops
+const JubilifeVillageShop = new Shop([
+    ItemList.Pokeball,
+    ItemList.Greatball,
+    ItemList.Ultraball,
+    ItemList.Black_augurite,
+    ItemList.Peat_block,
+]);
+
+// Hisui NPCs
+
+const ForcesCogita1 = new NPC('Cogita', [
+    'I\'ve just been told of the foul plan Volo had concocted. Well, think no more on that scoundrel. Just another tale of passion burning too bright and consuming its bearer. This is what happens, if you allow it to.',
+    'But what of you? Are you making any progress with your...what do you call your studies of Pokémon? Surveying, was it?',
+    'Indeed? Well, Hisui still holds more fascinating Pokémon.',
+    'Such as Tornadus... In every direction it flies, stirring up tremendous storms as it goes. When a blizzard batters the Alabaster Icelands, Tornadus may be about.',
+    'Also, Thundurus: as it flies around, it fires bolts of lightning every which way. When a rainstorm lashes the Cobalt Coastlands, Tornadus may be about.',
+    'Lastly, Landorus, the Pokémon hailed as the Guardian of the Fields. It seems it can be glimpsed in the Obsidian Fieldlands. Perhaps you\'d be so good as to catch it for me?',
+    'I know not why these three have chosen to show themselves. Perhaps the cause lies with the space-time rift...or simply within their own whims...',
+], {
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('Incarnate Forces of Hisui'), new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 1, GameConstants.AchievementOption.less)]),
+});
+const ForcesCogita2 = new NPC('Cogita', [
+    'Ah, you\'ve arrived. You now know much about Landorus, Tornadus and even Thundurus. Well done.',
+    'In more normal times, I would bid you to let these three fly free as is their nature.',
+    'But we are fresh from the tearing of the space-time rift. Until its aftereffects fade entirely, perhaps its best to keep our trio contained.',
+    'And now, it is time to tell you the rest. There is one more of that cohort. Come.',
+    '<img src="assets/images/pokemon/905.png">',
+    'This is Enamorus, a Pokémon hailed as the Herald of Spring. Enamorus is not particularly given to ill behaviour. But I imagine you\'d like to document her for your Pokédex, wouldn\'t you?',
+    'Catch her then, if you like. She always flits about in the Crimson Mirelands.',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 1), new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 3, GameConstants.AchievementOption.less)]),
+});
+const ForcesCogita3 = new NPC('Cogita', [
+    'Aha, you\'ve caught Enamorus as well. And you know so much about her.',
+    'Enamorus arrives in Hisui once winter has passed. Hence the epithet Herald of Spring.',
+    'Her company, when I have the pleasure, is of great help, she ferries me hither and yon across Hisui. But I\'ll leave her in your care for now, I suppose.',
+    'Indeed, even you can hardly expect to live for all time, surely, but she will be in your care for now.',
+    'You, Enamorus and her brethren have something in common: you tend to stir the pot of life. Do not mistake me - I mean this positively.',
+    'If everything were straightforward, what meaning would there be in living as long as we do?',
+    '"Once there was a god of field, and once there was a god of spring. Upon Hisui\'s winds it wheeled, brought life to every growing thing..." Was that how that old verse went?',
+    'I have passed on to you all there is to pass. Where history goes from here...I leave to you and your companions to see through.',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 4), new QuestLineCompletedRequirement('Incarnate Forces of Hisui', GameConstants.AchievementOption.less)]),
+});
+
+//Hisui Towns
+TownList['Prelude Beach'] = new Town(
+    'Prelude Beach',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [TemporaryBattleList['Kamado 2']],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+TownList['Jubilife Village'] = new Town(
+    'Jubilife Village',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [JubilifeVillageShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Jubilife Village']), TemporaryBattleList['Volo 1'], TemporaryBattleList['Akari 1'], TemporaryBattleList['Akari 2'], TemporaryBattleList['Adaman 1']],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+TownList['Galaxy Hall'] = new Town(
+    'Galaxy Hall',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [new BulletinBoard(GameConstants.BulletinBoards.Hisui)],
+    {
+        requirements: [new DevelopmentRequirement()],
+        npcs: [ForcesCogita1],
+    }
+);
+TownList['Fieldlands Camp'] = new Town(
+    'Fieldlands Camp',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [TemporaryBattleList['Warden Mai']],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+TownList['Heights Camp'] = new Town(
+    'Heights Camp',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [TemporaryBattleList['Alpha Kricketune']],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+TownList['Grandtree Arena'] = new Town(
+    'Grandtree Arena',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [TemporaryBattleList['Warden Lian'], TemporaryBattleList['Irida 1'], TemporaryBattleList['Lord of the Woods: Kleavor']],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+TownList['Mirelands Camp'] = new Town(
+    'Mirelands Camp',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [TemporaryBattleList['Coin 1']],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+TownList['Bogbound Camp'] = new Town(
+    'Bogbound Camp',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+TownList['Ancient Solaceon Ruins'] = new Town(
+    'Ancient Solaceon Ruins',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [TemporaryBattleList['Volo 2']],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+TownList['Sludge Mound'] = new Town(
+    'Sludge Mound',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [TemporaryBattleList.Ursaluna],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+TownList['Diamond Settlement'] = new Town(
+    'Diamond Settlement',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+TownList['Brava Arena'] = new Town(
+    'Brava Arena',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [TemporaryBattleList['Lady of the Ridge: Lilligant']],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+TownList['Beachside Camp'] = new Town(
+    'Beachside Camp',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [TemporaryBattleList['Irida 2']],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+TownList['Coastlands Camp'] = new Town(
+    'Coastlands Camp',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+TownList['Iscan\'s Cabin'] = new Town(
+    'Iscan\'s Cabin',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+TownList['Molten Arena'] = new Town(
+    'Molten Arena',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [TemporaryBattleList.Clover, TemporaryBattleList['Coin 2'], TemporaryBattleList['Charm 1'], TemporaryBattleList['Lord of the Isles: Arcanine']],
+    {
+        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Firespit Island'))],
+    }
+);
+TownList['Highlands Camp'] = new Town(
+    'Highlands Camp',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+TownList['Mountain Camp'] = new Town(
+    'Mountain Camp',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+TownList['Summit Camp'] = new Town(
+    'Summit Camp',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+TownList['Moonview Arena'] = new Town(
+    'Moonview Arena',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [TemporaryBattleList['Melli 2'], TemporaryBattleList['Lord of the Hollow: Electrode']],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+TownList['Snowfields Camp'] = new Town(
+    'Snowfields Camp',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+TownList['Icepeak Camp'] = new Town(
+    'Icepeak Camp',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+TownList['Pearl Settlement'] = new Town(
+    'Pearl Settlement',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [TemporaryBattleList['Irida 3']],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+TownList['Icepeak Arena'] = new Town(
+    'Icepeak Arena',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [TemporaryBattleList['Lord of the Tundra: Avalugg']],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+TownList['Ancient Retreat'] = new Town(
+    'Ancient Retreat',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [],
+    {
+        requirements: [new DevelopmentRequirement()],
+        npcs: [ForcesCogita2, ForcesCogita3],
+    }
+);
+TownList['Stone Portal'] = new Town(
+    'Stone Portal',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [TemporaryBattleList.Beni],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+TownList['Temple of Sinnoh'] = new Town(
+    'Temple of Sinnoh',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [TemporaryBattleList['Kamado 1'], TemporaryBattleList['Dialga (Origin) 1'], TemporaryBattleList['Palkia (Origin) 1'], TemporaryBattleList['Dialga (Origin) 2'], TemporaryBattleList['Palkia (Origin) 2'], TemporaryBattleList['Volo 3']],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+TownList['Turnback Cave'] = new Town(
+    'Turnback Cave',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [TemporaryBattleList['Giratina (Origin)']],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+TownList['Ancient Hall of Origin'] = new Town(
+    'Ancient Hall of Origin',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [TemporaryBattleList.Arceus],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+
+//Hisui Dungeons
+TownList['Oreburrow Tunnel'] = new DungeonTown(
+    'Oreburrow Tunnel',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [new DevelopmentRequirement()]
+);
+TownList.Heartwood = new DungeonTown(
+    'Heartwood',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [new DevelopmentRequirement()]
+);
+TownList['Shrouded Ruins'] = new DungeonTown(
+    'Shrouded Ruins',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [new DevelopmentRequirement()]
+);
+TownList['Veilstone Cape'] = new DungeonTown(
+    'Veilstone Cape',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [new DevelopmentRequirement()]
+);
+TownList['Firespit Island'] = new DungeonTown(
+    'Firespit Island',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [new DevelopmentRequirement()]
+);
+TownList['Ancient Wayward Cave'] = new DungeonTown(
+    'Ancient Wayward Cave',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [new DevelopmentRequirement()],
+    [TemporaryBattleList['Melli 1']]
+);
+TownList['Ancient Quarry'] = new DungeonTown(
+    'Ancient Quarry',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [new DevelopmentRequirement()]
+);
+TownList['Primeval Grotto'] = new DungeonTown(
+    'Primeval Grotto',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [new DevelopmentRequirement()],
+    [TemporaryBattleList['Charm 2']]
+);
+TownList['Clamberclaw Cliffs'] = new DungeonTown(
+    'Clamberclaw Cliffs',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [new DevelopmentRequirement()],
+    [TemporaryBattleList['Warden Ingo']]
+);
+TownList['Celestica Ruins'] = new DungeonTown(
+    'Celestica Ruins',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [new DevelopmentRequirement()]
+);
+TownList['Sacred Plaza'] = new DungeonTown(
+    'Sacred Plaza',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [new DevelopmentRequirement()]
+);
+TownList['Crevasse Passage'] = new DungeonTown(
+    'Crevasse Passage',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [new DevelopmentRequirement()]
+);
+TownList['Avalugg\'s Legacy'] = new DungeonTown(
+    'Avalugg\'s Legacy',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [new DevelopmentRequirement()],
+    [TemporaryBattleList['Warden Gaeric']]
+);
+TownList['Ice Column Chamber'] = new DungeonTown(
+    'Ice Column Chamber',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [new DevelopmentRequirement()]
+);
+TownList['Icepeak Cavern'] = new DungeonTown(
+    'Icepeak Cavern',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [new DevelopmentRequirement()]
+);
+TownList['Ancient Snowpoint Temple'] = new DungeonTown(
+    'Ancient Snowpoint Temple',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [new DevelopmentRequirement()],
+    [TemporaryBattleList['Warden Sabi'], TemporaryBattleList['Hisuian Braviary']]
+);
+TownList['Seaside Hollow'] = new DungeonTown(
+    'Seaside Hollow',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [
+        new DevelopmentRequirement(),
+        new ObtainedPokemonRequirement('Overqwil'),
+    ]
+);
+TownList['Ancient Lake Verity'] = new DungeonTown(
+    'Ancient Lake Verity',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [new DevelopmentRequirement()]
+);
+TownList['Ancient Lake Valor'] = new DungeonTown(
+    'Ancient Lake Valor',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [new DevelopmentRequirement()],
+    [TemporaryBattleList['Adaman 2']]
+);
+TownList['Ancient Lake Acuity'] = new DungeonTown(
+    'Ancient Lake Acuity',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [new DevelopmentRequirement()]
+);
+
 // Used to check if next region can be reached, for example for professor NPC
 TownList['Final Region Town'] = new Town(
     'Final Region Town',
