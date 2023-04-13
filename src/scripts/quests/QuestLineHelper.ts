@@ -3009,6 +3009,59 @@ class QuestLineHelper {
         App.game.quests.questLines().push(magearnaQuestLine);
     }
 
+    public static createHisuiForcesQuestLine() {
+        const hisuiForcesQuestLine = new QuestLine('Incarnate Forces of Hisui', 'Cogita would like you to catch the Forces of Nature.', new DevelopmentRequirement(), GameConstants.BulletinBoards.Hisui);
+
+        const talktoForcesCogita1 = new TalkToNPCQuest(ForcesCogita1, 'Speak to Cogita in Galaxy Hall.');
+        hisuiForcesQuestLine.addQuest(talktoForcesCogita1);
+
+        const chaseTornadus = new CustomQuest (3, 0, 'Pursue Tornadus in the Alabaster Icelands.', () =>
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Tornadus 1')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Tornadus 2')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Tornadus 3')]()
+        );
+        const captureTornadus = new CaptureSpecificPokemonQuest('Tornadus', 'Catch Tornadus in the Alabaster Icelands', 1, true, 0, undefined);
+        const chaseThundurus = new CustomQuest (3, 0, 'Pursue Thundurus in the Cobalt Coastlands.', () =>
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Thundurus 1')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Thundurus 2')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Thundurus 3')]()
+        );
+        const captureThundurus = new CaptureSpecificPokemonQuest('Thundurus', 'Catch Thundurus in the Cobalt Coastlands', 1, true, 0, undefined);
+        const chaseLandorus = new CustomQuest (3, 0, 'Pursue Landorus in the Obsidian Fieldlands.', () =>
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Landorus 1')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Landorus 2')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Landorus 3')]()
+        );
+        const captureLandorus = new CaptureSpecificPokemonQuest('Landorus', 'Catch Landorus in the Obsidian Fieldlands', 1, true, 0, undefined);
+        hisuiForcesQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                chaseTornadus,
+                captureTornadus,
+                chaseThundurus,
+                captureThundurus,
+                chaseLandorus,
+                captureLandorus,
+            ], 'Tornadus, Thundurus and Landorus have been sighted in the Alabaster Icelands, Cobalt Coastlands and Obsidian Fieldland respectively. Pursue and capture them.'));
+
+        const talktoForcesCogita2 = new TalkToNPCQuest(ForcesCogita2, 'Speak to Cogita at Ancient Retreat.');
+        hisuiForcesQuestLine.addQuest(talktoForcesCogita2);
+
+        const chaseEnamorus = new CustomQuest (3, 0, 'Pursue Enamorus in the Crimson Mirelands.', () =>
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Enamorus 1')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Enamorus 2')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Enamorus 3')]()
+        );
+        hisuiForcesQuestLine.addQuest(chaseEnamorus);
+
+        const captureEnamorus = new CaptureSpecificPokemonQuest('Enamorus', 'Catch Enamorus roaming around Hisui.', 1, true, 0, undefined);
+        hisuiForcesQuestLine.addQuest(captureEnamorus);
+
+        const talktoForcesCogita3 = new TalkToNPCQuest(ForcesCogita3, 'Speak to Cogita at Ancient Retreat.');
+        hisuiForcesQuestLine.addQuest(talktoForcesCogita3);
+
+        App.game.quests.questLines().push(hisuiForcesQuestLine);
+    }
+
     // Event QuestLines
     // Open the game between April 8-29.
     public static createFindSurpriseTogepiForEasterQuestLine() {
@@ -3135,6 +3188,7 @@ class QuestLineHelper {
         this.createDynaTreeBirdsQuestLine();
         this.createAncientGolemsQuestLine();
         this.createOriginalColorMagearnaQuestLine();
+        this.createHisuiForcesQuestLine();
         this.createFindSurpriseTogepiForEasterQuestLine();
         this.createHoopaDayPikabluQuestLine();
         this.createDrSplashQuestLine();

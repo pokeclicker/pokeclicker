@@ -46,7 +46,6 @@ class DreamOrbController implements Saveable {
             new DreamOrbLoot({type: ItemType.underground, id: 'Green Shard'}, 0.125),
         ]),
         new DreamOrb('Orange', new ObtainedPokemonRequirement('Thundurus (Therian)'), [
-
             new DreamOrbLoot({type: ItemType.item, id: 'Staryu'}, 0.133),
             new DreamOrbLoot({type: ItemType.item, id: 'Ralts'}, 0.133),
             new DreamOrbLoot({type: ItemType.item, id: 'Rotom'}, 0.134),
@@ -56,15 +55,16 @@ class DreamOrbController implements Saveable {
             new DreamOrbLoot({type: ItemType.item, id: 'Calcium'}, 0.092),
             new DreamOrbLoot({type: ItemType.item, id: 'Carbos'}, 0.092),
         ]),
-        //new DreamOrb('Blue', new ObtainedPokemonRequirement('Landorus (Therian)'), [
-        //new DreamOrbLoot({type: ItemType.item, id: 'Igglybuff'}, 0.2),
-        //new DreamOrbLoot({type: ItemType.item, id: 'Smoochum'}, 0.2),
-        //new DreamOrbLoot({type: ItemType.item, id: 'Enamorus (Therian)'}, 0.075),
-        //new DreamOrbLoot({type: ItemType.underground, id: 'Moon Stone'}, 0.1),
-        //new DreamOrbLoot({type: ItemType.underground, id: 'Leaf Stone'}, 0.1),
-        //new DreamOrbLoot({type: ItemType.underground, id: 'Thunder Stone'}, 0.1),
-        //new DreamOrbLoot({type: ItemType.underground, id: 'Heart Scale'}, 0.125),
-        //new DreamOrbLoot({type: ItemType.underground, id: 'Max Revive'}, 0.1),
+        new DreamOrb('Blue', new MultiRequirement([new ObtainedPokemonRequirement('Landorus (Therian)'), new ObtainedPokemonRequirement('Enamorus')]), [
+            new DreamOrbLoot({type: ItemType.item, id: 'Igglybuff'}, 0.2),
+            new DreamOrbLoot({type: ItemType.item, id: 'Smoochum'}, 0.2),
+            new DreamOrbLoot({type: ItemType.item, id: 'Enamorus (Therian)'}, 0.05),
+            new DreamOrbLoot({type: ItemType.underground, id: 'Moon Stone'}, 0.1),
+            new DreamOrbLoot({type: ItemType.underground, id: 'Leaf Stone'}, 0.1),
+            new DreamOrbLoot({type: ItemType.underground, id: 'Thunder Stone'}, 0.1),
+            new DreamOrbLoot({type: ItemType.underground, id: 'Heart Scale'}, 0.125),
+            new DreamOrbLoot({type: ItemType.underground, id: 'Max Revive'}, 0.1),
+        ]),
     ]
 
     public open() {
