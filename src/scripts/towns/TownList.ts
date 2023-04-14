@@ -2580,7 +2580,7 @@ const HoennStoneSalesman2 = new NPC('Stone Salesman', [
 
 const MrStone1 = new NPC('Mr. Stone', [
     'Hello, $playername$! It\'s good to see you again, but I have some dire news.',
-    'Despite Zinnia having stolen their leaders\ Key Stones, Team Aqua and Team Magma seem to be at itagain, cooking up a scheme involving something called "Primal Reversion".',
+    'Despite Zinnia having stolen their leaders\ Key Stones, Team Aqua and Team Magma seem to be at it again, cooking up a scheme involving something called "Primal Reversion".',
     'My researchers tell me that there is a mural carved into the wall of Granite Cave that has some information about "Primal Reversion". Can you find it, and report back?',
 ], {image: 'assets/images/npcs/Mr Stone.png',
     requirement: new MultiRequirement([new QuestLineStartedRequirement('Primal Reversion'), new QuestLineStepCompletedRequirement('Primal Reversion', 1, GameConstants.AchievementOption.less)]),
