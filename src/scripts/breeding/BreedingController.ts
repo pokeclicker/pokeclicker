@@ -135,6 +135,16 @@ class BreedingController {
         return SeededRand.fromArray(this.spotTypes);
     }
 
+    public static formatSearch(value: string) {
+        if (/[^\d]/.test(value)) {
+            BreedingFilters.name.value(new RegExp(`(${/^\/.+\/$/.test(value) ? value.slice(1, -1) : GameHelper.escapeStringRegex(value)})`, 'i'));
+            BreedingFilters.id.value(-1);
+        } else {
+            BreedingFilters.id.value(value != '' ? +value : -1);
+            BreedingFilters.name.value(new RegExp('', 'i'));
+        }
+    }
+
     public static visible(partyPokemon: PartyPokemon) {
         return ko.pureComputed(() => {
             // Only breedable Pokemon
@@ -142,11 +152,16 @@ class BreedingController {
                 return false;
             }
 
-            // Check if search matches nickname or translated name
-            if (
-                !BreedingFilters.search.value().test(partyPokemon.displayName)
-                && !BreedingFilters.search.value().test(partyPokemon._translatedName())
-            ) {
+            // Check if search matches englishName or displayName
+            const displayName = PokemonHelper.displayName(partyPokemon.name)();
+            const filterName = BreedingFilters.name.value();
+            if (!filterName.test(displayName) && !filterName.test(partyPokemon.name)) {
+                return false;
+            }
+
+            // Check ID
+            const filterID = BreedingFilters.id.value();
+            if (filterID > -1 && filterID != Math.floor(partyPokemon.id)) {
                 return false;
             }
 
@@ -179,6 +194,21 @@ class BreedingController {
                 if (partyPokemon.pokerus !== BreedingFilters.pokerus.value()) {
                     return false;
                 }
+            }
+
+            const uniqueTransformation = BreedingFilters.uniqueTransformation.value();
+            const pokemon = PokemonHelper.getPokemonById(partyPokemon.id);
+            // Only Base Pokémon with Mega available
+            if (uniqueTransformation == 'mega-available' && !(pokemon as DataPokemon).evolutions?.some((p) => p.evolvedPokemon.startsWith('Mega '))) {
+                return false;
+            }
+            // Only Base Pokémon without Mega Evolution
+            if (uniqueTransformation == 'mega-unobtained' && (!(pokemon as DataPokemon).evolutions?.some((p) => p.evolvedPokemon.startsWith('Mega ') && !App.game.party.alreadyCaughtPokemonByName(p.evolvedPokemon)))) {
+                return false;
+            }
+            // Only Mega Pokémon
+            if (uniqueTransformation == 'mega-evolution' && !(pokemon as DataPokemon).name.startsWith('Mega ')) {
+                return false;
             }
 
             // Check if either of the types match

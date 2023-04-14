@@ -5,9 +5,13 @@ import Settings from './Settings';
 import FilterOption from './FilterOption';
 
 const BreedingFilters: Record<string, FilterOption> = {
-    search: new FilterOption<RegExp>(
+    name: new FilterOption<RegExp>(
         'Search',
         ko.observable(new RegExp('', 'i')),
+    ),
+    id: new FilterOption<number>(
+        'SearchID',
+        ko.observable(-1),
     ),
     category: new FilterOption<number>(
         'Category',
@@ -57,6 +61,17 @@ const BreedingFilters: Record<string, FilterOption> = {
         [
             new SettingOption('All', '-1'),
             ...Settings.enumToSettingOptionArray(Pokerus, (t) => t !== 'Infected'),
+        ],
+    ),
+    uniqueTransformation: new FilterOption<string>(
+        'Unique Transformations',
+        ko.observable('all'),
+        'breedingUniqueTransformationFilter',
+        [
+            new SettingOption('Show All Pokémon', 'all'),
+            new SettingOption('Mega Evolution Available', 'mega-available'),
+            new SettingOption('Unobtained Mega Evolution', 'mega-unobtained'),
+            new SettingOption('Obtained Mega Evolution', 'mega-evolution'),
         ],
     ),
 };
