@@ -2605,7 +2605,7 @@ const PrimalSteven = new NPC('Steven', [
     '"If you don\'t mind me asking… Do you feel anything in particular when you look up at this wall? A primal world, lost thousands of years in the past… A Legendary Pokémon of tremendous power became humanity\'s greatest threat…',
     'The terror aroused by that power is clear to see in this ancient artwork. you know who might know more about this? Captain Stern, a sailor who works for my father.',
     'He\'s usually out to sea, but you can find him in Sea Mauville if the weather is too stormy to sail.',
-], {image: 'assets/images/gymLeaders/Steven.png',
+], {image: 'assets/images/gymLeaders/steven.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Primal Reversion', 2), new QuestLineStepCompletedRequirement('Primal Reversion', 4, GameConstants.AchievementOption.less)]),
 });
 
