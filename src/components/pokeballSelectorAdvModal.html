@@ -151,8 +151,11 @@
                         </div>
                     </div>
                     <div id="pokeballFilterTestTab" class="tab-pane p-3">
+                        <div>
+                            <p>This tab is useful for checking exactly which of your pokeball filters will be used in any situation.</p>
+                        </div>
                         <div id="pokeballFilterTestInput">
-                            <p>Configure these options to match the scenario you want to test</p>
+                            <p>Configure these options to match the scenario you want to test:</p>
                             <table>
                                 <tbody data-bind="foreach: Object.entries(App.game.pokeballFilters.testSettings)
                                                                 .filter(([k]) => pokeballFilterOptions[k].canUse())
