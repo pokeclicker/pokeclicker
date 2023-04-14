@@ -1486,7 +1486,7 @@ class QuestLineHelper {
         const talkToLysandre4 = new TalkToNPCQuest(Lysandre4, 'Wow! Absolutely no one could have seen this coming! You think you might find Lysandre in Lumiose City where you first met him. Look for him!');
         flareKalosQuestLine.addQuest(talkToLysandre4);
 
-        const battleTeamFlareLysandre1 = new CustomQuest (1, 0,  'Show Team Flare Lysandre the strength of your convictions in Lumiose City', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Flare Lysandre 1')]());
+        const battleTeamFlareLysandre1 = new CustomQuest (1, 0,  'Show Team Flare Lysandre the strength of your convictions in Lumiose City!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Flare Lysandre 1')]());
         flareKalosQuestLine.addQuest(battleTeamFlareLysandre1);
 
         const talkToAZ1 = new TalkToNPCQuest(AZ1, 'You run after Lysandre and while going through the Labs you find a jailed mysterious man in Lumiose City. It seems like he has a story to tell...');
