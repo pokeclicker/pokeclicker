@@ -320,7 +320,7 @@ export const SpriteCredits: Credit[] = [
             'Shadow Paras',
             'Shadow Pineco',
             'Shadow Poliwrath',
-            'Shadow Primeape'
+            'Shadow Primeape',
             'Shadow Ralts',
             'Shadow Rapidash',
             'Shadow Raticate',
@@ -346,7 +346,7 @@ export const SpriteCredits: Credit[] = [
             'Shadow Venomoth',
             'Shadow Voltorb',
             'Shadow Vulpix',
-            'Shadow Weepinbell'
+            'Shadow Weepinbell',
             'Shadow Zapdos',
             'Shady Salesman',
             'Spooky Togepi (shiny)',
