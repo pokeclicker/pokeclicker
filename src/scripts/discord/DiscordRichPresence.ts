@@ -231,7 +231,7 @@ class DiscordRichPresence {
     }
 
     static getRichPresenceData() {
-        const nextArea = player.route() ? Routes.getName(player.route(), player.region) : player.town() ? player.town().name : 'Unknown Area';
+        const nextArea = player?.route() ? Routes.getName(player.route(), player.region) : (player?.town() ? player.town().name : 'Unknown Area');
 
         const discordRPCValues: Record<string, any> = {
             enabled: Settings.getSetting('discord-rp.enabled').observableValue(),
