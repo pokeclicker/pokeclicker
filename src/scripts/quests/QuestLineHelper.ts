@@ -1805,7 +1805,7 @@ class QuestLineHelper {
             [
                 talkToPrimalArchie,
                 talkToPrimalMaxie,
-            ], 'Fink out what the Team Leaders are up to at Mt. Pyre.'));
+            ], 'Find out what the Team Leaders are up to at Mt. Pyre.'));
 
         const fightPrimalGroudon = new CustomQuest (1, 0, 'Defeat Primal Groudon in Sunny Weather.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Primal Groudon')]());
 
