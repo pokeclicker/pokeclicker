@@ -1731,7 +1731,7 @@ class QuestLineHelper {
     public static createPrimalReversionQuestLine() {
         const primalReversionQuestLine = new QuestLine('Primal Reversion', 'Teams Aqua and Magma have been trying to unlock the Primal power of Groudon and Kyogre.', new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 30), new ObtainedPokemonRequirement('Groudon'), new ObtainedPokemonRequirement('Kyogre')]), GameConstants.BulletinBoards.Hoenn);
 
-        const talkToMrStone1 = new TalkToNPCQuest(MrStone1, 'Talk to Mr. Stone in at the Slateport City.');
+        const talkToMrStone1 = new TalkToNPCQuest(MrStone1, 'Talk to Mr. Stone in Slateport City.');
         primalReversionQuestLine.addQuest(talkToMrStone1);
 
         const clearGranite2 = new CustomQuest(10, 0, 'Clear Granite Cave 10 times to search for the Primal Reversion Mural.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Granite Cave')]());
@@ -1817,7 +1817,7 @@ class QuestLineHelper {
                 fightPrimalKyogre,
             ], 'Defeat the Primal Reversions. They will pause their rampage under the right weather conditions.'));
 
-        const talkToMrStone2 = new TalkToNPCQuest(MrStone2, 'Talk to Mr. Stone in at the Slateport City.');
+        const talkToMrStone2 = new TalkToNPCQuest(MrStone2, 'Talk to Mr. Stone in Slateport City.');
         primalReversionQuestLine.addQuest(talkToMrStone2);
 
         App.game.quests.questLines().push(primalReversionQuestLine);
