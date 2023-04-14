@@ -5571,7 +5571,7 @@ TownList['Friend Safari'] = new Town(
     [new SafariTownContent()],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion), new DevelopmentRequirement()],
-        npcs: [FriendlyAttendant]
+        npcs: [FriendlyAttendant],
     }
 );
 
