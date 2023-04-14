@@ -5377,6 +5377,13 @@ const VivillonPhotobook = new NPC('Vivillon Photobook', [
     '<i>Lastly, you see a Poké Ball Vivillon in a darkened mall. It\'s trying to scare the camerawoman, completely unaware of the sinister eyes peering from the darkness behind it.</i>',
 ]);
 
+const FriendlyAttendant = new NPC('Friendly Attendant', [
+    'Welcome to the Friend Safari!',
+    'This place is a lot like the Kanto Safari Zone, except we get a much wider variety of Pokémon coming through here.',
+    'Our park staff stocks the Safari with different hard-to-find Pokémon every day. Many of these Pokémon can\'t be caught anywhere else in the world!',
+    'As new and rare types of Pokémon are discovered, park staff will add them to our rotation of potential stock!',
+]);
+
 //Kalos Towns
 
 TownList['Vaniville Town'] = new Town(
@@ -5564,6 +5571,7 @@ TownList['Friend Safari'] = new Town(
     [new SafariTownContent()],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion), new DevelopmentRequirement()],
+        npcs: [FriendlyAttendant],
     }
 );
 
