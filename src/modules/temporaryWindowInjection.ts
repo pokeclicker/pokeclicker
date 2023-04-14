@@ -115,6 +115,7 @@ import RouteKillRequirement from './requirements/RouteKillRequirement';
 import SeededDateRequirement from './requirements/SeededDateRequirement';
 import SeviiCaughtRequirement from './requirements/SeviiCaughtRequirement';
 import ShinyPokemonRequirement from './requirements/ShinyPokemonRequirement';
+import ShadowPokemonRequirement from './requirements/ShadowPokemonRequirement';
 import StatisticRequirement from './requirements/StatisticRequirement';
 import SubregionRequirement from './requirements/SubregionRequirement';
 import StarterRequirement from './requirements/StarterRequirement';
@@ -159,6 +160,7 @@ import CaughtIndicatingItem from './items/CaughtIndicatingItem';
 import EggItem from './items/EggItem';
 import MegaStoneItem from './items/MegaStoneItem';
 import PokeballItem from './items/PokeballItem';
+import QuestItem from './items/QuestItem';
 import Vitamin from './items/Vitamin';
 import VitaminController from './items/VitaminController';
 import RoamingPokemonList from './pokemons/RoamingPokemonList';
@@ -166,6 +168,11 @@ import DataPokemon from './pokemons/DataPokemon';
 import RoamingPokemon from './pokemons/RoamingPokemon';
 import UndergroundMegaStoneItem from './underground/UndergroundMegaStoneItem';
 import TextMerger from './utilities/TextMerger';
+import { DailyDeal } from './underground/DailyDeal';
+import { Mine } from './underground/Mine';
+import { ShardDeal } from './underground/ShardDeal';
+import { Underground } from './underground/Underground';
+import UndergroundUpgrade from './underground/UndergroundUpgrade';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -288,6 +295,7 @@ Object.assign(<any>window, {
     SeededDateRequirement,
     SeviiCaughtRequirement,
     ShinyPokemonRequirement,
+    ShadowPokemonRequirement,
     StatisticRequirement,
     SubregionRequirement,
     StarterRequirement,
@@ -335,6 +343,7 @@ Object.assign(<any>window, {
     EggItem,
     MegaStoneItem,
     PokeballItem,
+    QuestItem,
     Vitamin,
     VitaminController,
     RoamingPokemonList,
@@ -342,4 +351,9 @@ Object.assign(<any>window, {
     RoamingPokemon,
     UndergroundMegaStoneItem,
     TextMerger,
+    Mine,
+    Underground,
+    UndergroundUpgrade,
+    ShardDeal,
+    DailyDeal,
 });
