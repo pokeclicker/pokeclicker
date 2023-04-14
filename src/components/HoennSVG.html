@@ -660,6 +660,32 @@
         , isExtension: true
         })
     %>
+
+    <!--Sea Mauville-->
+    <%- include('templates/mapTown',
+        { name: "Sea Mauville"
+        , x: 23, y: 51
+        , width: 6, height: 4
+        })
+    %>
+
+    <!--Mossdeep Space Center-->
+    <%- include('templates/mapTown',
+        { name: "Mossdeep Space Center"
+        , x: 90, y: 14
+        , width: 9, height: 5
+        })
+    %>
+
+    <!--Mossdeep Space Center extension-->
+    <%- include('templates/mapTown',
+        { name: "Mossdeep Space Center"
+        , x: 92, y: 19
+        , width: 7, height: 3
+        , isExtension: true
+        })
+    %>
+
     <!--Battle Frontier-->
     <%- include('templates/mapTown',
         { name: "Battle Frontier"
@@ -849,7 +875,13 @@
         })
     %>
 
-
+    <!--Near Space-->
+    <%- include('templates/mapDungeon',
+        { name: "Near Space"
+        , x: 93, y: 8
+        , width: 2, height: 6
+        })
+    %>
 
 
     <!-- ------------------ -->
@@ -931,40 +963,40 @@
      <%- include('templates/mapOverlay',
          { name: "Kecleon"
         , x: 46, y: 3
-         , width: 4, height: 4
-         , databind: "click: () => TemporaryBattleList['Kecleon 1'].protectedOnclick()"
-         , visible:  "TemporaryBattleList['Kecleon 1'] && TemporaryBattleList['Kecleon 1'].isVisible()"
-         , image: "assets/images/map/kecleonoverworld.png"
-         })
+        , width: 4, height: 4
+        , databind: "click: () => TemporaryBattleList['Kecleon 1'].protectedOnclick()"
+        , visible:  "TemporaryBattleList['Kecleon 1'] && TemporaryBattleList['Kecleon 1'].isVisible()"
+        , image: "assets/images/map/kecleonoverworld.png"
+        })
      %>
 
      <%- include('templates/mapOverlay',
          { name: "Kecleon"
         , x: 41, y: 10
-         , width: 4, height: 4
-         , databind: "click: () => TemporaryBattleList['Kecleon 2'].protectedOnclick()"
-         , visible:  "TemporaryBattleList['Kecleon 2'] && TemporaryBattleList['Kecleon 2'].isVisible()"
-         , image: "assets/images/map/kecleoncamooverworld.png"
-         })
+        , width: 4, height: 4
+        , databind: "click: () => TemporaryBattleList['Kecleon 2'].protectedOnclick()"
+        , visible:  "TemporaryBattleList['Kecleon 2'] && TemporaryBattleList['Kecleon 2'].isVisible()"
+        , image: "assets/images/map/kecleoncamooverworld.png"
+        })
      %>
 
      <%- include('templates/mapOverlay',
          { name: "Kecleon"
         , x: 48, y: 8
-         , width: 4, height: 4
-         , databind: "click: () => TemporaryBattleList['Kecleon 3'].protectedOnclick()"
-         , visible:  "TemporaryBattleList['Kecleon 3'] && TemporaryBattleList['Kecleon 3'].isVisible()"
-         , image: "assets/images/map/kecleoncamooverworld.png"
-         })
+        , width: 4, height: 4
+        , databind: "click: () => TemporaryBattleList['Kecleon 3'].protectedOnclick()"
+        , visible:  "TemporaryBattleList['Kecleon 3'] && TemporaryBattleList['Kecleon 3'].isVisible()"
+        , image: "assets/images/map/kecleoncamooverworld.png"
+        })
      %>
 
      <%- include('templates/mapOverlay',
-         { name: "A Raging Maelstrom"
+        { name: "A Raging Maelstrom"
         , x: 59, y: 28
-         , width: 13, height: 13
+        , width: 13, height: 13
         , visible:  "(App.game.quests.getQuestLine('The Weather Trio').curQuest() < 5 && App.game.quests.getQuestLine('The Weather Trio').state() == 1)"
-         , image: "assets/images/map/Maelstrom.png"
-         })
+        , image: "assets/images/map/Maelstrom.png"
+        })
      %>
 
     <%- include('templates/mapOverlay',
@@ -1046,4 +1078,211 @@
          , image: "assets/images/map/ashketchumoverworld.png"
          })
      %>
+     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.hoenn, 'Orre').id">
+        <image width="1600" height="960" data-bind="attr: {
+            'xlink:href':'assets/images/orre.png?v=$VERSION',
+            href:'assets/images/orre.png?v=$VERSION'
+        }"></image>
+
+        <!-- ----- -->
+        <!-- TOWNS -->
+        <!-- ----- -->
+
+        <!--Outskirt Stand-->
+        <%- include('templates/mapTown',
+            { name: "Outskirt Stand"
+            , x: 89, y: 41
+            , width: 5, height: 3
+            })
+        %>
+
+        <!--Phenac City-->
+        <%- include('templates/mapTown',
+            { name: "Phenac City"
+            , x: 72, y: 39
+            , width: 7, height: 7
+            })
+        %>
+
+        <!--Phenac Stadium-->
+        <%- include('templates/mapTown',
+            { name: "Phenac Stadium"
+            , x: 73, y: 36
+            , width: 5, height: 3
+            })
+        %>
+
+        <!--Pyrite Town-->
+        <%- include('templates/mapTown',
+            { name: "Pyrite Town"
+            , x: 30, y: 45
+            , width: 8, height: 4
+            })
+        %>
+
+        <!--Pyrite Town extension-->
+        <%- include('templates/mapTown',
+            { name: "Pyrite Town"
+            , x: 34, y: 49
+            , width: 4, height: 2
+            , isExtension: true
+            })
+        %>
+
+        <!--Pyrite Town extension-->
+        <%- include('templates/mapTown',
+            { name: "Pyrite Town"
+            , x: 33, y: 51
+            , width: 7, height: 4
+            , isExtension: true
+            })
+        %>
+
+        <!--Pyrite Town extension-->
+        <%- include('templates/mapTown',
+            { name: "Pyrite Town"
+            , x: 34, y: 44
+            , width: 4, height: 1
+            , isExtension: true
+            })
+        %>
+
+        <!--Pyrite Colosseum-->
+        <%- include('templates/mapTown',
+            { name: "Pyrite Colosseum"
+            , x: 34, y: 40
+            , width: 4, height: 4
+            })
+        %>
+
+        <!--Agate Village-->
+        <%- include('templates/mapTown',
+            { name: "Agate Village"
+            , x: 24, y: 17
+            , width: 4, height: 6
+            })
+        %>
+
+        <!--Agate Village extension-->
+        <%- include('templates/mapTown',
+            { name: "Agate Village"
+            , x: 28, y: 19
+            , width: 3, height: 4
+            , isExtension: true
+            })
+        %>
+
+        <!--Relic Stone-->
+        <%- include('templates/mapTown',
+            { name: "Relic Stone"
+            , x: 24, y: 13
+            , width: 3, height: 4
+            })
+        %>
+
+        <!--Mt. Battle-->
+        <%- include('templates/mapTown',
+            { name: "Mt. Battle"
+            , x: 50, y: 5
+            , width: 6, height: 4
+            })
+        %>
+
+        <!--Cipher Lab-->
+        <%- include('templates/mapTown',
+            { name: "Cipher Lab"
+            , x: 53, y: 23
+            , width: 7, height: 5
+            })
+        %>
+
+        <!--Eclo Canyon-->
+        <%- include('templates/mapTown',
+            { name: "Eclo Canyon"
+            , x: 79, y: 24
+            , width: 7, height: 4
+            })
+        %>
+
+        <!--Eclo Canyon extension-->
+        <%- include('templates/mapTown',
+            { name: "Eclo Canyon"
+            , x: 83, y: 28
+            , width: 3, height: 2
+            , isExtension: true
+            })
+        %>
+
+        <!--Realgam Tower-->
+        <%- include('templates/mapTown',
+            { name: "Realgam Tower"
+            , x: 59, y: 34
+            , width: 6, height: 4
+            })
+        %>
+
+        <!--Realgam Tower extension-->
+        <%- include('templates/mapTown',
+            { name: "Realgam Tower"
+            , x: 61, y: 31
+            , width: 2, height: 3
+            , isExtension: true
+            })
+        %>
+
+        <!--Realgam Tower extension-->
+        <%- include('templates/mapTown',
+            { name: "Realgam Tower"
+            , x: 60, y: 38
+            , width: 4, height: 2
+            , isExtension: true
+            })
+        %>
+
+        <!--Orre Colosseum-->
+        <%- include('templates/mapTown',
+            { name: "Orre Colosseum"
+            , x: 20, y: 36
+            , width: 7, height: 5
+            })
+        %>
+
+        <!--Orre Colosseum extension-->
+        <%- include('templates/mapTown',
+            { name: "Orre Colosseum"
+            , x: 21, y: 41
+            , width: 5, height: 2
+            , isExtension: true
+            })
+        %>
+
+        <!--Orre Colosseum extension-->
+        <%- include('templates/mapTown',
+            { name: "Orre Colosseum"
+            , x: 22, y: 34
+            , width: 5, height: 2
+            , isExtension: true
+            })
+        %>
+
+        <!-- -------- -->
+        <!-- DUNGEONS -->
+        <!-- -------- -->
+
+        <!--Pyrite Bldg-->
+        <%- include('templates/mapDungeon',
+            { name: "Pyrite Bldg"
+            , x: 38, y: 43
+            , width: 5, height: 8
+            })
+        %>
+
+        <!--Pyrite Cave-->
+        <%- include('templates/mapDungeon',
+            { name: "Pyrite Cave"
+            , x: 43, y: 43
+            , width: 4, height: 3
+            })
+        %>
+    </g>
 </g>

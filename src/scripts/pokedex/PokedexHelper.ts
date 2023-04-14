@@ -41,6 +41,16 @@ class PokedexHelper {
         return PokedexHelper.cachedFilteredList;
     })
 
+    public static formatSearch(value: string) {
+        if (/[^\d]/.test(value)) {
+            PokedexFilters.name.value(new RegExp(`(${/^\/.+\/$/.test(value) ? value.slice(1, -1) : GameHelper.escapeStringRegex(value)})`, 'i'));
+            PokedexFilters.id.value(-1);
+        } else {
+            PokedexFilters.id.value(value != '' ? +value : -1);
+            PokedexFilters.name.value(new RegExp('', 'i'));
+        }
+    }
+
     public static getList(): typeof pokemonList {
         // Peek a computed to avoid subscribing to 1000s of statistics
         const highestDex = ko.pureComputed(() => {
@@ -78,9 +88,16 @@ class PokedexHelper {
                 return false;
             }
 
-            // Check if the name contains the string
-            const name = PokemonHelper.displayName(pokemon.name)();
-            if (!PokedexFilters.name.value().test(name)) {
+            // Check if the englishName or displayName contains the string
+            const displayName = PokemonHelper.displayName(pokemon.name)();
+            const filterName = PokedexFilters.name.value();
+            if (!filterName.test(displayName) && !filterName.test(pokemon.name)) {
+                return false;
+            }
+
+            // Check ID
+            const filterID = PokedexFilters.id.value();
+            if (filterID > -1 && filterID != Math.floor(pokemon.id)) {
                 return false;
             }
 
@@ -141,6 +158,26 @@ class PokedexHelper {
 
             // Only pokemon uninfected by pokerus || None
             if (PokedexFilters.statusPokerus.value() != -1 && PokedexFilters.statusPokerus.value() != App.game.party.getPokemon(pokemon.id)?.pokerus) {
+                return false;
+            }
+
+            // Only pokemon with selected category
+            if (PokedexFilters.category.value() != -1 && PokedexFilters.category.value() != App.game.party.getPokemon(pokemon.id)?.category) {
+                return false;
+            }
+
+            const uniqueTransformation = PokedexFilters.uniqueTransformation.value();
+            // Only Base Pokémon with Mega available
+            if (uniqueTransformation == 'mega-available' && !(pokemon as PokemonListData).evolutions?.some((p) => p.evolvedPokemon.startsWith('Mega '))) {
+                // Another option: !(pokemon as PokemonListData).evolutions?.some((p) => p.restrictions.some(p => p instanceof MegaEvolveRequirement))
+                return false;
+            }
+            // Only Base Pokémon without Mega Evolution
+            if (uniqueTransformation == 'mega-unobtained' && (!(pokemon as PokemonListData).evolutions?.some((p) => p.evolvedPokemon.startsWith('Mega ') && !App.game.party.alreadyCaughtPokemonByName(p.evolvedPokemon)))) {
+                return false;
+            }
+            // Only Mega Pokémon
+            if (uniqueTransformation == 'mega-evolution' && !(pokemon as PokemonListData).name.startsWith('Mega ')) {
                 return false;
             }
 

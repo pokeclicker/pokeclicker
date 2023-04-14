@@ -7,6 +7,9 @@ class GemDeal {
     public gems: GemCost[];
     public item: { itemType: Item, amount: number};
     public static list: Record<GameConstants.Region, KnockoutObservableArray<GemDeal>> = {};
+    public isVisible(): boolean {
+        return this.item.itemType.isVisible();
+    }
 
     constructor(gemCosts: GemCost[], item: Item, itemAmount: number) {
         this.gems = gemCosts;
@@ -58,6 +61,27 @@ class GemDeal {
                 {gemType: PokemonType.Fighting, amount: 5000},
             ],
             ItemList.Black_Flute,
+            1
+        ));
+        list.push(new GemDeal(
+            [{gemType: PokemonType.Grass, amount: 250000}],
+            ItemList.Sceptilite,
+            1
+        ));
+        list.push(new GemDeal(
+            [
+                {gemType: PokemonType.Fire, amount: 125000},
+                {gemType: PokemonType.Fighting, amount: 125000},
+            ],
+            ItemList.Blazikenite,
+            1
+        ));
+        list.push(new GemDeal(
+            [
+                {gemType: PokemonType.Water, amount: 125000},
+                {gemType: PokemonType.Ground, amount: 125000},
+            ],
+            ItemList.Swampertite,
             1
         ));
         return list;

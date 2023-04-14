@@ -104,12 +104,12 @@ namespace GameConstants {
         'Pokerus',
     }
     declare enum DungeonTile {
-        empty,
-        entrance,
-        enemy,
-        chest,
-        boss,
-        ladder,
+        empty = 0,
+        entrance = 1,
+        enemy = 2,
+        chest = 3,
+        boss = 4,
+        ladder = 5,
     }
     declare const ROUTE_HELD_ITEM_MODIFIER: number;
     declare const DUNGEON_HELD_ITEM_MODIFIER: number;
@@ -234,6 +234,7 @@ namespace GameConstants {
         kalos,
         alola,
         galar,
+        hisui,
         final,
     }
     declare function clipNumber(num: number, min: number, max: number): number;
@@ -307,6 +308,8 @@ namespace GameConstants {
         'Galarica_wreath',
         'Black_mane_hair',
         'White_mane_hair',
+        'Black_augurite',
+        'Peat_block',
     }
     declare enum FossilPieceType {
         'None',
@@ -434,7 +437,9 @@ namespace GameConstants {
         Hoppy,
         Galar,
         Armor,
-        Crown
+        Crown,
+        Hisui,
+        Arceus
     }
     declare const EnergyRestoreEffect: {
         SmallRestore: number;
@@ -474,6 +479,7 @@ namespace GameConstants {
     declare const UnovaGyms: string[];
     declare const KalosGyms: string[];
     declare const GalarGyms: string[];
+    declare const HisuiGyms: string[];
     declare const OrangeGyms: string[];
     declare const RegionGyms: string[][];
     declare function getGymIndex(gym: string): number;
@@ -485,6 +491,7 @@ namespace GameConstants {
     declare const UnovaDungeons: string[];
     declare const KalosDungeons: string[];
     declare const GalarDungeons: string[];
+    declare const HisuiDungeons: string[];
     declare const RegionDungeons: string[][];
     declare function getDungeonIndex(dungeon: string): number;
     declare function getDungeonRegion(dungeon: string): Region;
@@ -553,6 +560,7 @@ namespace GameConstants {
         'Sunyshore City',
         'Survival Area',
         'Resort Area',
+        'Jubilife Village',
         'Castelia City',
         'Nimbasa City',
         'Driftveil City',
@@ -611,6 +619,7 @@ namespace GameConstants {
     }
     declare enum HoennSubRegions {
         Hoenn,
+        Orre,
     }
     declare enum SinnohSubRegions {
         Sinnoh,
@@ -634,6 +643,9 @@ namespace GameConstants {
         IsleofArmor,
         CrownTundra,
     }
+    declare enum HisuiSubRegions {
+        Hisui,
+    }
     declare enum FinalSubRegions {
         Final,
     }
@@ -647,6 +659,7 @@ namespace GameConstants {
         | KalosSubRegions
         | AlolaSubRegions
         | GalarSubRegions
+        | HisuiSubRegions
         | FinalSubRegions
 
     // Gender Types
@@ -694,6 +707,7 @@ namespace GameConstants {
     declare enum ExtraAchievementCategories {
         global,
         sevii,
+        orre,
         magikarpJump
     }
     declare const DayCycleStartHours: Record<DayCyclePart, number> = {
@@ -702,4 +716,9 @@ namespace GameConstants {
         [DayCyclePart.Dusk]: 17,
         [DayCyclePart.Night]: 18,
     };
+    declare enum ShadowStatus {
+        None,
+        Shadow,
+        Purified,
+    }
 }
