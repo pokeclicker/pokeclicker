@@ -2600,7 +2600,7 @@ const PrimalMural2 = new NPC('Kyogre Mural', [
 });
 
 const PrimalSteven = new NPC('Steven', [
-    'Hello again, $playername$! I see you\re interested in these murals as well? They seem to be about Groudon and Kyogre.',
+    'Hello again, $playername$! I see you\'re interested in these murals as well? They seem to be about Groudon and Kyogre.',
     'So in the ancient world, their primal forms once held this much power…? The super-ancient Pokémon… What terrible strength… But this appearance here… It seems somehow different from Mega Evolution, but somehow related.',
     '"If you don\'t mind me asking… Do you feel anything in particular when you look up at this wall? A primal world, lost thousands of years in the past… A Legendary Pokémon of tremendous power became humanity\'s greatest threat…',
     'The terror aroused by that power is clear to see in this ancient artwork. you know who might know more about this? Captain Stern, a sailor who works for my father.',
