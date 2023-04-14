@@ -5059,7 +5059,7 @@ const LumioseDexio = new NPC('Dexio', [
 const Lysandre1 = new NPC('Lysandre', [
     'Oh! You\'ve already met professor Sycamore... How wonderful! That is a wonderful thing, indeed. You are one of the chosen ones.',
     'I am Lysandre. I\'ve tried to learn as much about Pokémon as I can to help build a brighter future. Professor Sycamore has taught me so much.',
-    'Now listen! It is vital that this world become a better place. And the people and Pokémon chosen to make the world better must work tirelessly to achieve this goal.',
+    'Now listen! It is vital that this world becomes a better place. And the people and Pokémon chosen to make the world better must work tirelessly to achieve this goal.',
     'Well, I\'ll be off. Please give Professor Sycamore my best. My desire... it is for a more beautiful world!',
 ], {image: 'assets/images/npcs/Team Flare Lysandre.png',
     requirement: new MultiRequirement([new QuestLineStartedRequirement('A Beautiful World'), new QuestLineStepCompletedRequirement('A Beautiful World', 1, GameConstants.AchievementOption.less)]),
