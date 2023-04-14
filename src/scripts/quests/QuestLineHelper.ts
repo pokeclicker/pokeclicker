@@ -829,7 +829,7 @@ class QuestLineHelper {
         const clearRubyPath = new CustomQuest(1, 0, 'Locate the Ruby. Clear Ruby Path in Mt. Ember.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Ruby Path')]());
         rubySapphireSeviiQuestLine.addQuest(clearRubyPath);
 
-        const talktoRuby = new TalkToNPCQuest(SeviiRuby, 'Take the Ruby in Ruby Path');
+        const talktoRuby = new TalkToNPCQuest(SeviiRuby, 'Take the Ruby in Ruby Path', () => ItemList.Celios_Errand_Ruby.gain(1));
         rubySapphireSeviiQuestLine.addQuest(talktoRuby);
 
         const talktoCelio4 = new TalkToNPCQuest(OneIslandCelio5, 'Return the Ruby to Celio on One Island');

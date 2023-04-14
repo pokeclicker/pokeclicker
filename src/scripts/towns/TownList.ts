@@ -590,7 +590,7 @@ const SeviiRocketGrunts = new NPC ('Team Rocket Grunts', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Celio\'s Errand', 0), new QuestLineStepCompletedRequirement('Celio\'s Errand', 2, GameConstants.AchievementOption.less)]),
 });
 const SeviiRuby = new NPC ('Ruby', [
-    '<img src="assets/images/npcs/textbody/ruby.png">',
+    '<img src="assets/images/items/quest/Celios_Errand_Ruby.png">',
     '<i>You found a Ruby!</i>',
 ],
 { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Celio\'s Errand', 3), new QuestLineStepCompletedRequirement('Celio\'s Errand', 4, GameConstants.AchievementOption.less )]) });
@@ -4820,9 +4820,15 @@ TownList['Plasma Frigate'] = new DungeonTown(
     GameConstants.Region.unova,
     GameConstants.UnovaSubRegions.Unova,
     [
-        new RouteKillRequirement(10, GameConstants.Region.unova, 22),
-        new GymBadgeRequirement(BadgeEnums.Wave),
-        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 14),
+        new OneFromManyRequirement([
+            new MultiRequirement([
+                new RouteKillRequirement(10, GameConstants.Region.unova, 22),
+                new GymBadgeRequirement(BadgeEnums.Wave),
+                new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 14),
+                new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Plasma Frigate'), GameConstants.AchievementOption.less),
+            ]),
+            new QuestLineCompletedRequirement('Quest for the DNA Splicers'),
+        ]),
     ]
 );
 TownList['Giant Chasm'] = new DungeonTown(
