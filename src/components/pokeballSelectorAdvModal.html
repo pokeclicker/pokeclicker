@@ -156,7 +156,7 @@
                     </div>
                     <div id="pokeballFilterTestTab" class="tab-pane p-3">
                         <div>
-                            <p>This tab is useful for checking exactly which of your pokeball filters will be used in any situation.</p>
+                            <p>This tab is useful for making sure what your filters match, and which ones take precedence. See the Help tab for more details.</p>
                         </div>
                         <div id="pokeballFilterTestInput">
                             <p>Configure these options to match the scenario you want to test:</p>
@@ -219,11 +219,25 @@
 
                         <h2>Test Filters</h2>
                         <p>
-                            Use this tab to test and verify how your filters will behave in any situation.
+                            In some scenario, multiple of your filters may meet all of their conditions,
+                            but only one can be used to choose a ball for catching.
                         </p>
                         <p>
-                            The top of the tab has toggles to set up a scenario you want to test, and the bottom shows which filters match.
-                            Highlighted filters all matched the scenario, the bottom-most matching filter is always used to catch pokemon.
+                            This tab will allow you to see exactly which will be chosen,
+                            for some scenario you configure with the settings in the tab.
+                        </p>
+                        <p>
+                            For instance, if you wanted to know what is used for a shiny Rattata,
+                            when you already have a normal Rattata,
+                            you would turn on the "Shiny" and "Caught" toggles,
+                            but leave the others off.
+                        </p>
+                        <p>
+                            With the default catch filters,
+                            you will see that both "Caught" and "New Shiny" meet their conditions,
+                            but the "New Shiny" filter is the one used for catching.
+                            The filter furthest down in your list that matches all conditions is the one used.
+                            The highlighted filters are ones that matched the scenario.
                         </p>
                     </div>
                 </div>
