@@ -111,6 +111,10 @@ class GameController {
         const $undergroundModal = $('#mineModal');
         $undergroundModal.on('hidden.bs.modal shown.bs.modal', _ => $undergroundModal.data('disable-toggle', false));
         const underground = App.game.underground;
+        // Quests
+        const $questModal = $('#QuestModal');
+        $questModal.on('hidden.bs.modal shown.bs.modal', _ => $questModal.data('disable-toggle', false));
+        const quests = App.game.quests;
         // Farm
         const $farmsModal = $('#farmModal');
         $farmsModal.on('hidden.bs.modal shown.bs.modal', _ => $farmsModal.data('disable-toggle', false));
@@ -421,6 +425,15 @@ class GameController {
                         (Settings.getSetting('sound.muted') as BooleanSetting).toggle();
                         return e.preventDefault();
                     }
+                case Settings.getSetting('hotkey.dailyQuests').value:
+                    // Open the Quests
+                    if (quests.isDailyQuestsUnlocked() && !$questModal.data('disable-toggle')) {
+                        $('.modal').modal('hide');
+                        $questModal.data('disable-toggle', true);
+                        $questModal.modal('toggle');
+                        return e.preventDefault();
+                    }
+                    break;
                 default:
                     // Check for a number key being pressed
                     if (isNumberKey) {

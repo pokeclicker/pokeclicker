@@ -1,0 +1,196 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`DailyDeal > generates the same deals as last build > 2023-01-01 1`] = `
+[
+  {
+    "amount1": 2,
+    "amount2": 3,
+    "item1": "Heat Rock",
+    "item2": "Insect Plate",
+  },
+  {
+    "amount1": 2,
+    "amount2": 1,
+    "item1": "Hard Stone",
+    "item2": "Fist Plate",
+  },
+  {
+    "amount1": 2,
+    "amount2": 1,
+    "item1": "Flame Plate",
+    "item2": "Dome Fossil",
+  },
+  {
+    "amount1": 1,
+    "amount2": 2,
+    "item1": "Mind Plate",
+    "item2": "Water Stone",
+  },
+  {
+    "amount1": 1,
+    "amount2": 3,
+    "item1": "Sky Plate",
+    "item2": "Shiny Stone",
+  },
+  {
+    "amount1": 2,
+    "amount2": 3,
+    "item1": "Odd Keystone",
+    "item2": "Grey Shard",
+  },
+  {
+    "amount1": 1,
+    "amount2": 1,
+    "item1": "Dread Plate",
+    "item2": "Meadow Plate",
+  },
+  {
+    "amount1": 1,
+    "amount2": 2,
+    "item1": "Revive",
+    "item2": "Fist Plate",
+  },
+  {
+    "amount1": 1,
+    "amount2": 1,
+    "item1": "Icicle Plate",
+    "item2": "White Shard",
+  },
+  {
+    "amount1": 1,
+    "amount2": 3,
+    "item1": "Fossilized Drake",
+    "item2": "Fossilized Fish",
+  },
+]
+`;
+
+exports[`DailyDeal > generates the same deals as last build > 2023-05-01 1`] = `
+[
+  {
+    "amount1": 1,
+    "amount2": 3,
+    "item1": "Fossilized Dino",
+    "item2": "Toxic Plate",
+  },
+  {
+    "amount1": 2,
+    "amount2": 3,
+    "item1": "Hard Stone",
+    "item2": "Skull Fossil",
+  },
+  {
+    "amount1": 2,
+    "amount2": 3,
+    "item1": "Earth Plate",
+    "item2": "Blue Shard",
+  },
+  {
+    "amount1": 2,
+    "amount2": 3,
+    "item1": "Fossilized Fish",
+    "item2": "Heart Scale",
+  },
+  {
+    "amount1": 1,
+    "amount2": 1,
+    "item1": "Rare Bone",
+    "item2": "Fist Plate",
+  },
+  {
+    "amount1": 2,
+    "amount2": 1,
+    "item1": "Dread Plate",
+    "item2": "Lime Shard",
+  },
+  {
+    "amount1": 2,
+    "amount2": 2,
+    "item1": "Iron Plate",
+    "item2": "Armor Fossil",
+  },
+  {
+    "amount1": 2,
+    "amount2": 3,
+    "item1": "Fossilized Fish",
+    "item2": "Insect Plate",
+  },
+  {
+    "amount1": 1,
+    "amount2": 1,
+    "item1": "Star Piece",
+    "item2": "Spooky Plate",
+  },
+  {
+    "amount1": 2,
+    "amount2": 1,
+    "item1": "Hard Stone",
+    "item2": "Star Piece",
+  },
+]
+`;
+
+exports[`DailyDeal > generates the same deals as last build > 2023-09-01 1`] = `
+[
+  {
+    "amount1": 3,
+    "amount2": 3,
+    "item1": "Oval Stone",
+    "item2": "Armor Fossil",
+  },
+  {
+    "amount1": 2,
+    "amount2": 2,
+    "item1": "Hard Stone",
+    "item2": "Red Shard",
+  },
+  {
+    "amount1": 2,
+    "amount2": 3,
+    "item1": "Dread Plate",
+    "item2": "Draco Plate",
+  },
+  {
+    "amount1": 3,
+    "amount2": 3,
+    "item1": "Fossilized Bird",
+    "item2": "Shiny Stone",
+  },
+  {
+    "amount1": 2,
+    "amount2": 3,
+    "item1": "Mind Plate",
+    "item2": "Fossilized Bird",
+  },
+  {
+    "amount1": 3,
+    "amount2": 1,
+    "item1": "Icicle Plate",
+    "item2": "Fossilized Fish",
+  },
+  {
+    "amount1": 3,
+    "amount2": 1,
+    "item1": "Jaw Fossil",
+    "item2": "Mind Plate",
+  },
+  {
+    "amount1": 2,
+    "amount2": 1,
+    "item1": "Meadow Plate",
+    "item2": "Odd Keystone",
+  },
+  {
+    "amount1": 3,
+    "amount2": 3,
+    "item1": "Armor Fossil",
+    "item2": "Shiny Stone",
+  },
+  {
+    "amount1": 1,
+    "amount2": 1,
+    "item1": "Stone Plate",
+    "item2": "Oval Stone",
+  },
+]
+`;
