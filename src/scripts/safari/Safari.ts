@@ -424,6 +424,16 @@ document.addEventListener('DOMContentLoaded', () => {
     $('#safariModal').on('hide.bs.modal', () => {
         Safari.inBattle(false);
         SafariBattle.busy(false);
-        MapHelper.moveToTown('Fuchsia City');
+        switch (player.region) {
+            case GameConstants.Region.kanto:
+                MapHelper.moveToTown('Fuchsia City');
+                break;
+            case GameConstants.Region.kalos:
+                MapHelper.moveToTown('Friend Safari');
+                break;
+            default:
+                MapHelper.moveToTown(GameConstants.DockTowns[player.region]);
+                break;
+        }
     });
 });
