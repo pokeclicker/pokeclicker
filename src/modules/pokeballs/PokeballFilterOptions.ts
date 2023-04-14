@@ -47,7 +47,7 @@ export const pokeballFilterOptions: {
             'Shiny',
             bool,
         ),
-        (isShiny) => `are ${
+        (isShiny) => `Are ${
             isShiny ? '' : 'not'
         } shiny`,
     ),
@@ -58,7 +58,7 @@ export const pokeballFilterOptions: {
             'Shadow',
             bool,
         ),
-        (isShadow) => `are ${
+        (isShadow) => `Are ${
             isShadow ? '' : 'not'
         } shadow form`,
         tempShadowRequirement,
@@ -70,7 +70,7 @@ export const pokeballFilterOptions: {
             'Caught',
             bool,
         ),
-        (isCaught) => `you have ${
+        (isCaught) => `You have ${
             isCaught ? '' : 'not yet'
         } caught`,
     ),
@@ -81,7 +81,7 @@ export const pokeballFilterOptions: {
             'Caught Shiny',
             bool,
         ),
-        (isCaughtShiny) => `you ${
+        (isCaughtShiny) => `You ${
             isCaughtShiny ? '' : 'don\'t'
         } have shiny`,
     ),
@@ -92,7 +92,7 @@ export const pokeballFilterOptions: {
             'Caught Shadow',
             bool,
         ),
-        (isCaughtShadow) => `you ${
+        (isCaughtShadow) => `You ${
             isCaughtShadow ? '' : 'don\'t'
         } have the shadow form`,
         tempShadowRequirement,
@@ -105,7 +105,7 @@ export const pokeballFilterOptions: {
             GameHelper.enumStrings(Pokerus).map((k) => new SettingOption(k, Pokerus[k])),
             pokerus,
         ),
-        (pokerusState) => `you have in the ${
+        (pokerusState) => `You have in the ${
             Pokerus[pokerusState]
         } pokerus state`,
         new CustomRequirement(

@@ -72,13 +72,15 @@ export default class PokeballFilter {
         return `${disabledText}${this.inverted()
             ? 'This filter matches any pokemon except those that:'
             : 'This filter matches pokemon that:'
-        } ${
+        } <ul class="pokeballFilterOptionDescriptions">${
             optionList
-                .map(([opt, setting]) => pokeballFilterOptions[opt].describe(
-                    setting.observableValue(),
-                ))
-                .join('; ')
-        }.`;
+                .map(([opt, setting]) => `<li>${
+                    pokeballFilterOptions[opt].describe(
+                        setting.observableValue(),
+                    )
+                }</li>`)
+                .join('')
+        }</ul>`;
     }
 
     get name(): string {
