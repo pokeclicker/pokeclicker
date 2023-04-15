@@ -175,7 +175,7 @@ class PartyController {
             let bValue = config.getValue(b);
 
             // Apply regional debuff if needed
-            if (region > -1 && [SortOptions.attack, SortOptions.breedingEfficiency].includes(option)) {
+            if (region > -1 && [SortOptions.attack, SortOptions.breedingEfficiency, SortOptions.attackBonus].includes(option)) {
                 aValue *= Party.calculateRegionalMultiplier(a, region, subregion);
                 bValue *= Party.calculateRegionalMultiplier(b, region, subregion);
             }

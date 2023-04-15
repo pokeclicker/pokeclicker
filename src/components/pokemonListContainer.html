@@ -69,6 +69,8 @@
                             <div class="pokemonName">
                                 <span data-bind="text: displayName">Name</span>
                                 <sup data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)">✨</sup>
+                                <img class="shadow-icon" src="assets/images/status/shadow.svg" data-bind="visible: $data.shadow == GameConstants.ShadowStatus.Shadow"/>
+                                <img class="shadow-icon" src="assets/images/status/purified.svg" data-bind="visible: $data.shadow == GameConstants.ShadowStatus.Purified"/>
                                 <img width="20px" data-bind="visible: $data.megaStone,
                                     attr: {src: $data.megaStone?.getImage()},
                                     tooltip:  { title: $data.megaStone?.getTooltipText() ?? '', trigger: 'hover', placement:'bottom' }
