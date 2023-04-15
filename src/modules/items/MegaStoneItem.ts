@@ -25,6 +25,11 @@ export default class MegaStoneItem extends Item {
         return this.basePrice * amt;
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    gain(amt: number) {
+        player.gainMegaStone(this.megaStone);
+    }
+
     isAvailable(): boolean {
         return super.isAvailable() && App.game.party.alreadyCaughtPokemonByName(this.basePokemon);
     }
