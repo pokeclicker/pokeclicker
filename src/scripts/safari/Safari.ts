@@ -171,7 +171,14 @@ class Safari {
     }
 
     private static cost() {
-        return new Amount(100, GameConstants.Currency.questPoint);
+        switch (player.region) {
+            case GameConstants.Region.kanto:
+                return new Amount(100, GameConstants.Currency.questPoint);
+            case GameConstants.Region.kalos:
+                return new Amount(1000, GameConstants.Currency.questPoint);
+            default:
+                return new Amount(100, GameConstants.Currency.questPoint);
+        }
     }
 
     private static payEntranceFee() {
