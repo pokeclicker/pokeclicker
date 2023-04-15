@@ -192,7 +192,11 @@
                             <div data-bind="foreach: App.game.pokeballFilters.displayList()">
                                 <p data-bind="
                                     class: $data.test(App.game.pokeballFilters.testSettingsData()) ? 'bg-success text-white' : '',
-                                    css: { 'pokeballFilterDisabled': !$data.enabled() }
+                                    css: {
+                                        'pokeballFilterDisabled': !$data.enabled(),
+                                        'font-weight-bold': $parent === $data,
+                                        'darker-25': $parent !== $data,
+                                    }
                                 ">
                                     <span data-bind="if: $parent === $data">*** </span>
                                     <span data-bind="text: $data.name"></span>
