@@ -9,6 +9,6 @@ export default class QuestItem extends Item {
 
     public isActive() : boolean {
         return App.game.quests.getQuestLine(this.questlineName).state() > QuestLineState.inactive &&
-            App.game.quests.getQuestLine(this.questlineName).state() < QuestLineState.ended;
+            App.game.quests.getQuestLine(this.endQuestlineName).state() < QuestLineState.ended;
     }
 }
