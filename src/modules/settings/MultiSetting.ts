@@ -21,7 +21,7 @@ export default class MultiSetting<T> extends BaseSetting<T[], T> {
         return true;
     }
 
-    protected calcIsSelected(value: T): boolean {
+    protected isSelected(value: T): boolean {
         return this.observableValue().includes(value);
     }
 }

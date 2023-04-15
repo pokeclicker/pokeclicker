@@ -18,7 +18,7 @@ export default class Setting<T> extends BaseSetting<T, T> {
         return false;
     }
 
-    protected calcIsSelected(value: T): boolean {
+    protected isSelected(value: T): boolean {
         return this.observableValue() === value;
     }
 }
