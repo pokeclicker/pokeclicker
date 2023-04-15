@@ -2046,6 +2046,7 @@ export enum MegaStoneType {
     Mawilite,
     Medichamite,
     Metagrossite,
+    Meteorite,
     MewtwoniteX,
     MewtwoniteY,
     Pidgeotite,
@@ -2060,5 +2061,4 @@ export enum MegaStoneType {
     Swampertite,
     Tyranitarite,
     Venusaurite,
-    Meteorite,
 }

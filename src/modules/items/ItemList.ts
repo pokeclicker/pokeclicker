@@ -119,6 +119,7 @@ ItemList.Manectite			= new MegaStoneItem(MegaStoneType.Manectite, 'Manectric', 1
 ItemList.Mawilite			= new MegaStoneItem(MegaStoneType.Mawilite, 'Mawile', 10000);
 //ItemList.Medichamite		= new MegaStoneItem(MegaStoneType.Medichamite, 'Medicham', 10000);
 ItemList.Metagrossite		= new MegaStoneItem(MegaStoneType.Metagrossite, 'Metagross', 10000);
+ItemList.Meteorite          = new MegaStoneItem(MegaStoneType.Meteorite, 'Rayquaza', 10000);
 //ItemList.MewtwoniteX		= new MegaStoneItem(MegaStoneType.MewtwoniteX, 'Mewtwo', 10000);
 //ItemList.MewtwoniteY		= new MegaStoneItem(MegaStoneType.MewtwoniteY, 'Mewtwo', 10000);
 ItemList.Pidgeotite			= new MegaStoneItem(MegaStoneType.Pidgeotite, 'Pidgeot', 10000);
@@ -135,9 +136,6 @@ ItemList.Swampertite		= new MegaStoneItem(MegaStoneType.Swampertite, 'Swampert',
     { visible: new MultiRequirement([new TemporaryBattleRequirement('Hoenn Stone Salesman'), new ObtainedPokemonRequirement('Swampert')]) }, 'Swampertite', 'A Mega Stone for Swampert.');
 ItemList.Tyranitarite		= new MegaStoneItem(MegaStoneType.Tyranitarite, 'Tyranitar', 10000);
 //ItemList.Venusaurite		= new MegaStoneItem(MegaStoneType.Venusaurite, 'Venusaur', 10000);
-
-// Pseudo Mega Stones
-ItemList.Meteorite          = new MegaStoneItem(MegaStoneType.Meteorite, 'Rayquaza', 10000);
 
 // Eggs
 ItemList.Fire_egg = new EggItem(EggItemType.Fire_egg, 1000, undefined, 'Fire Egg');

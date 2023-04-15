@@ -755,6 +755,7 @@ namespace GameConstants {
         Mawilite,
         Medichamite,
         Metagrossite,
+        Meteorite,
         MewtwoniteX,
         MewtwoniteY,
         Pidgeotite,
@@ -769,6 +770,5 @@ namespace GameConstants {
         Swampertite,
         Tyranitarite,
         Venusaurite,
-        Meteorite,
     }
 }
