@@ -2833,7 +2833,7 @@ TownList['Phenac City'] = new Town(
     'Phenac City',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new MoveToDungeon(dungeonList['Phenac City Battles'])],
+    [new MoveToTown('Phenac Stadium'), new MoveToDungeon(dungeonList['Phenac City Battles'])],
     {
         requirements: [new DevelopmentRequirement()],
     }
@@ -2843,7 +2843,7 @@ TownList['Phenac Stadium'] = new Town(
     'Phenac Stadium',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new MoveToDungeon(dungeonList['Phenac Stadium Battles'])],
+    [new MoveToTown('Phenac City', undefined, false), new MoveToDungeon(dungeonList['Phenac Stadium Battles'])],
     {
         requirements: [new DevelopmentRequirement()],
     }
@@ -2853,7 +2853,7 @@ TownList['Pyrite Town'] = new Town(
     'Pyrite Town',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new MoveToDungeon(dungeonList['Pyrite Town Battles'])],
+    [new MoveToTown('Pyrite Colosseum'), new MoveToTown('The Under'), new MoveToDungeon(dungeonList['Pyrite Town Battles'])],
     {
         requirements: [new DevelopmentRequirement()],
     }
@@ -2863,7 +2863,7 @@ TownList['Pyrite Colosseum'] = new Town(
     'Pyrite Colosseum',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new MoveToDungeon(dungeonList['Pyrite Colosseum Battles'])],
+    [new MoveToTown('Pyrite Town', undefined, false), new MoveToDungeon(dungeonList['Pyrite Colosseum Battles'])],
     {
         requirements: [new DevelopmentRequirement()],
     }
@@ -2873,7 +2873,7 @@ TownList['Agate Village'] = new Town(
     'Agate Village',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new MoveToDungeon(dungeonList['Relic Cave'])],
+    [new MoveToTown('Relic Stone'), new MoveToDungeon(dungeonList['Relic Cave'])],
     {
         requirements: [new DevelopmentRequirement()],
     }
@@ -2883,7 +2883,7 @@ TownList['Relic Stone'] = new Town(
     'Relic Stone',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new MoveToDungeon(dungeonList['Relic Cave']), new PurifyChamberTownContent()],
+    [new MoveToTown('Agate Village', undefined, false), new MoveToDungeon(dungeonList['Relic Cave']), new PurifyChamberTownContent()],
     {
         requirements: [new DevelopmentRequirement()],
     }
@@ -2903,7 +2903,7 @@ TownList['The Under'] = new Town(
     'The Under',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new MoveToDungeon(dungeonList['The Under Subway'])],
+    [new MoveToTown('Pyrite Town', undefined, false), new MoveToTown('Under Colosseum'), new MoveToTown('Deep Colosseum'), new MoveToDungeon(dungeonList['The Under Subway'])],
     {
         requirements: [new DevelopmentRequirement()],
     }
@@ -2923,7 +2923,7 @@ TownList['Realgam Tower'] = new Town(
     'Realgam Tower',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new MoveToDungeon(dungeonList['Realgam Tower Battles'])],
+    [new MoveToTown('Realgam Colosseum'), new MoveToDungeon(dungeonList['Realgam Tower Battles'])],
     {
         requirements: [new DevelopmentRequirement()],
     }
@@ -2933,7 +2933,7 @@ TownList['Realgam Colosseum'] = new Town(
     'Realgam Colosseum',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new MoveToDungeon(dungeonList['Realgam Colosseum Battles'])],
+    [new MoveToTown('Realgam Tower', undefined, false), new MoveToDungeon(dungeonList['Realgam Colosseum Battles'])],
     {
         requirements: [new DevelopmentRequirement()],
     }
@@ -2953,7 +2953,7 @@ TownList['Deep Colosseum'] = new Town(
     'Deep Colosseum',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new MoveToDungeon(dungeonList['Deep Colosseum Battles'])],
+    [new MoveToTown('The Under', undefined, false), new MoveToDungeon(dungeonList['Deep Colosseum Battles'])],
     {
         requirements: [new DevelopmentRequirement()],
     }
@@ -2973,7 +2973,7 @@ TownList['Under Colosseum'] = new Town(
     'Under Colosseum',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new MoveToDungeon(dungeonList['Under Colosseum Battles'])],
+    [new MoveToTown('The Under', undefined, false), new MoveToDungeon(dungeonList['Under Colosseum Battles'])],
     {
         requirements: [new DevelopmentRequirement()],
     }
