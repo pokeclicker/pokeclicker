@@ -135,7 +135,7 @@ class MoveToDungeon extends TownContent {
 }
 
 class MoveToTown extends TownContent {
-    constructor(private townName: string, private visibleRequirement: Requirement = undefined) {
+    constructor(private townName: string, private visibleRequirement: Requirement = undefined, private includeAreaStatus: boolean = true) {
         super([]);
     }
 
@@ -154,7 +154,12 @@ class MoveToTown extends TownContent {
     public isUnlocked(): boolean {
         return TownList[this.townName].isUnlocked();
     }
+
     public areaStatus(): areaStatus {
-        return areaStatus[MapHelper.calculateTownCssClass(this.townName)];
+        if (this.includeAreaStatus) {
+            return areaStatus[MapHelper.calculateTownCssClass(this.townName)];
+        } else {
+            return areaStatus.completed;
+        }
     }
 }
