@@ -1878,7 +1878,7 @@ TemporaryBattleList.DreamResearcher = new TemporaryBattle(
     undefined,
     {
         imageName: 'Scientist (female)',
-        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Audino').giveMegastone(),
+        firstTimeRewardFunction: () => player.gainMegaStone(GameConstants.MegaStoneType.Audinite),
     }
 );
 
@@ -1998,7 +1998,7 @@ TemporaryBattleList.Korrina = new TemporaryBattle(
     undefined,
     {
         imageName: 'Korrina',
-        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Lucario').giveMegastone(),
+        firstTimeRewardFunction: () => player.gainMegaStone(GameConstants.MegaStoneType.Lucarionite),
     }
 );
 TemporaryBattleList['Courtney 1'] = new TemporaryBattle(
@@ -2178,7 +2178,7 @@ TemporaryBattleList['Delta Giovanni'] = new TemporaryBattle(
     {
         displayName: 'Giovanni',
         imageName: 'Team Rocket Boss Giovanni',
-        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Beedrill').giveMegastone(),
+        firstTimeRewardFunction: () => player.gainMegaStone(GameConstants.MegaStoneType.Beedrillite),
     }
 );
 TemporaryBattleList['Mr. Stone'] = new TemporaryBattle(
@@ -2193,7 +2193,7 @@ TemporaryBattleList['Mr. Stone'] = new TemporaryBattle(
     {
         displayName: 'Mr. Stone',
         imageName: 'Mr Stone',
-        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Pidgeot').giveMegastone(),
+        firstTimeRewardFunction: () => player.gainMegaStone(GameConstants.MegaStoneType.Pidgeotite),
     }
 );
 TemporaryBattleList['Shoal Fisherman'] = new TemporaryBattle(
@@ -2205,7 +2205,7 @@ TemporaryBattleList['Shoal Fisherman'] = new TemporaryBattle(
     {
         displayName: 'Shoal Fisherman',
         imageName: 'Fisherman',
-        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Slowbro').giveMegastone(),
+        firstTimeRewardFunction: () => player.gainMegaStone(GameConstants.MegaStoneType.Slowbronite),
     }
 );
 TemporaryBattleList['Delta Brock'] = new TemporaryBattle(
@@ -2221,7 +2221,7 @@ TemporaryBattleList['Delta Brock'] = new TemporaryBattle(
     {
         displayName: 'Brock',
         imageName: 'Brock',
-        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Steelix').giveMegastone(),
+        firstTimeRewardFunction: () => player.gainMegaStone(GameConstants.MegaStoneType.Steelixite),
     }
 );
 TemporaryBattleList['Delta Tabitha'] = new TemporaryBattle(
@@ -2233,7 +2233,7 @@ TemporaryBattleList['Delta Tabitha'] = new TemporaryBattle(
     {
         displayName: 'Magma Admin Tabitha',
         imageName: 'Magma Admin',
-        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Camerupt').giveMegastone(),
+        firstTimeRewardFunction: () => player.gainMegaStone(GameConstants.MegaStoneType.Cameruptite),
     }
 );
 TemporaryBattleList['Delta Shelly'] = new TemporaryBattle(
@@ -2245,7 +2245,7 @@ TemporaryBattleList['Delta Shelly'] = new TemporaryBattle(
     {
         displayName: 'Aqua Admin Shelly',
         imageName: 'Aqua Admin (shelly)',
-        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Sharpedo').giveMegastone(),
+        firstTimeRewardFunction: () => player.gainMegaStone(GameConstants.MegaStoneType.Sharpedonite),
     }
 );
 TemporaryBattleList['Icy Boulder'] = new TemporaryBattle(
@@ -2258,7 +2258,7 @@ TemporaryBattleList['Icy Boulder'] = new TemporaryBattle(
         displayName: 'Icy Boulder',
         imageName: '../pokemon/362.01',
         hideTrainer: true,
-        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Glalie').giveMegastone(),
+        firstTimeRewardFunction: () => player.gainMegaStone(GameConstants.MegaStoneType.Glalitite),
     }
 );
 TemporaryBattleList['Mega Draconid Elder'] = new TemporaryBattle(
@@ -2276,7 +2276,7 @@ TemporaryBattleList['Mega Draconid Elder'] = new TemporaryBattle(
     {
         displayName: 'Draconid Elder',
         imageName: 'Draconid Elder',
-        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Salamence').giveMegastone(),
+        firstTimeRewardFunction: () => player.gainMegaStone(GameConstants.MegaStoneType.Salamencite),
     }
 );
 TemporaryBattleList['Delta Steven'] = new TemporaryBattle(
@@ -2295,7 +2295,7 @@ TemporaryBattleList['Delta Steven'] = new TemporaryBattle(
     {
         displayName: 'Steven',
         imageName: 'Steven',
-        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Metagross').giveMegastone(),
+        firstTimeRewardFunction: () => player.gainMegaStone(GameConstants.MegaStoneType.Metagrossite),
     }
 );
 TemporaryBattleList['Dr Cozmo'] = new TemporaryBattle(
@@ -2311,7 +2311,7 @@ TemporaryBattleList['Dr Cozmo'] = new TemporaryBattle(
     {
         displayName: 'Dr. Cozmo',
         imageName: 'Dr Cozmo',
-        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Gallade').giveMegastone(),
+        firstTimeRewardFunction: () => player.gainMegaStone(GameConstants.MegaStoneType.Galladite),
     }
 );
 TemporaryBattleList['Matt 3'] = new TemporaryBattle(
@@ -2326,7 +2326,7 @@ TemporaryBattleList['Matt 3'] = new TemporaryBattle(
     {
         displayName: 'Aqua Admin Matt',
         imageName: 'Aqua Admin (matt)',
-        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Latias').giveMegastone(),
+        firstTimeRewardFunction: () => player.gainMegaStone(GameConstants.MegaStoneType.Latiasite),
     }
 );
 TemporaryBattleList['Courtney 3'] = new TemporaryBattle(
@@ -2341,7 +2341,7 @@ TemporaryBattleList['Courtney 3'] = new TemporaryBattle(
     {
         displayName: 'Magma Admin Courtney',
         imageName: 'Magma Admin (courtney)',
-        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Latios').giveMegastone(),
+        firstTimeRewardFunction: () => player.gainMegaStone(GameConstants.MegaStoneType.Latiosite),
     }
 );
 TemporaryBattleList['Hoenn Stone Salesman'] = new TemporaryBattle(
@@ -2359,21 +2359,21 @@ TemporaryBattleList['Hoenn Stone Salesman'] = new TemporaryBattle(
         imageName: 'Ruin Maniac gen3',
         firstTimeRewardFunction: () => {
             if ((App.game.party.alreadyCaughtPokemonByName('Sceptile') == true) && (player.regionStarters[GameConstants.Region.hoenn]() == GameConstants.Starter.Grass)) {
-                App.game.party.getPokemonByName('Sceptile').giveMegastone();
+                player.gainMegaStone(GameConstants.MegaStoneType.Sceptilite);
                 Notifier.notify({
                     message: 'You were awarded Sceptilite!',
                     type: NotificationConstants.NotificationOption.success,
                     setting: NotificationConstants.NotificationSetting.Dungeons.rare_dungeon_item_found,
                 });
             } else if ((App.game.party.alreadyCaughtPokemonByName('Blaziken') == true) && (player.regionStarters[GameConstants.Region.hoenn]() == GameConstants.Starter.Fire)) {
-                App.game.party.getPokemonByName('Blaziken').giveMegastone();
+                player.gainMegaStone(GameConstants.MegaStoneType.Blazikenite);
                 Notifier.notify({
                     message: 'You were awarded Blazikenite!',
                     type: NotificationConstants.NotificationOption.success,
                     setting: NotificationConstants.NotificationSetting.Dungeons.rare_dungeon_item_found,
                 });
             } else if ((App.game.party.alreadyCaughtPokemonByName('Swampert') == true) && (player.regionStarters[GameConstants.Region.hoenn]() == GameConstants.Starter.Water)) {
-                App.game.party.getPokemonByName('Swampert').giveMegastone();
+                player.gainMegaStone(GameConstants.MegaStoneType.Swampertite);
                 Notifier.notify({
                     message: 'You were awarded Swampertite!',
                     type: NotificationConstants.NotificationOption.success,
@@ -2504,7 +2504,7 @@ TemporaryBattleList['Rampaging Yveltal'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Rampaging Yveltal',
-        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Diancie').giveMegastone(),
+        firstTimeRewardFunction: () => player.gainMegaStone(GameConstants.MegaStoneType.Diancite),
         imageName: '../pokemon/717',
         hideTrainer: true,
         returnTown: 'Shalour City',
@@ -2911,7 +2911,7 @@ TemporaryBattleList['Calem 6'] = new TemporaryBattle(
     {
         displayName: 'Pokémon Trainer Calem',
         imageName: 'Calem',
-        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Absol').giveMegastone(),
+        firstTimeRewardFunction: () => player.gainMegaStone(GameConstants.MegaStoneType.Absolite),
         rewardFunction: () =>
             Notifier.notify({message: 'Congratulations on beating Calem at his best! Come back to fight him again at any time.'}),
     }
@@ -2931,7 +2931,7 @@ TemporaryBattleList['Marquis Grant'] = new TemporaryBattle(
     {
         displayName: 'Marquis Grant',
         imageName: 'Grant',
-        firstTimeRewardFunction: () => [App.game.party.getPokemonByName('Tyranitar').giveMegastone(), App.game.party.getPokemonByName('Aggron').giveMegastone()],
+        firstTimeRewardFunction: () => [player.gainMegaStone(GameConstants.MegaStoneType.Tyranitarite), player.gainMegaStone(GameConstants.MegaStoneType.Aggronite)],
     }
 );
 
@@ -2949,7 +2949,7 @@ TemporaryBattleList['Grand Duchess Diantha'] = new TemporaryBattle(
     {
         displayName: 'Grand Duchess Diantha',
         imageName: 'Diantha',
-        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Gardevoir').giveMegastone(),
+        firstTimeRewardFunction: () => player.gainMegaStone(GameConstants.MegaStoneType.Gardevoirite),
     }
 );
 
@@ -2967,7 +2967,7 @@ TemporaryBattleList['Team Flare Boss Lysandre 2'] = new TemporaryBattle(
     {
         displayName: 'Team Flare Boss Lysandre',
         imageName: 'Team Flare Boss Lysandre',
-        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Gyarados').giveMegastone(),
+        firstTimeRewardFunction: () => player.gainMegaStone(GameConstants.MegaStoneType.Gyaradosite),
     }
 );
 
@@ -2990,7 +2990,7 @@ TemporaryBattleList['Hex Maniac Aster'] = new TemporaryBattle(
     {
         displayName: 'Hex Maniac Aster',
         imageName: 'Hex Maniac',
-        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Gengar').giveMegastone(),
+        firstTimeRewardFunction: () => player.gainMegaStone(GameConstants.MegaStoneType.Gengarite),
     }
 );
 
@@ -3014,7 +3014,7 @@ TemporaryBattleList['Wild Houndour Horde'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Wild Houndour Horde',
-        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Houndoom').giveMegastone(),
+        firstTimeRewardFunction: () => player.gainMegaStone(GameConstants.MegaStoneType.Houndoominite),
         imageName: '../pokemon/229.01',
         hideTrainer: true,
         returnTown: 'Dendemille Town',
@@ -3041,7 +3041,7 @@ TemporaryBattleList['Wild Electrike Horde'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Wild Electrike Horde',
-        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Manectric').giveMegastone(),
+        firstTimeRewardFunction: () => player.gainMegaStone(GameConstants.MegaStoneType.Manectite),
         imageName: '../pokemon/310.01',
         hideTrainer: true,
         returnTown: 'Dendemille Town',
