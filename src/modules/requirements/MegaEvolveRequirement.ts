@@ -12,7 +12,7 @@ export default class MegaEvolveRequirement extends Requirement {
 
     getProgress(): number {
         const partyPokemon = App.game.party.getPokemonByName(this.name);
-        return player.itemList[MegaStoneType[this.megaStone]]() > 0
+        return player.hasMegaStone(this.megaStone)
             && partyPokemon?.attack >= pokemonMap[this.name].attack * this.baseAttackMultiplier ? 1 : 0;
     }
 

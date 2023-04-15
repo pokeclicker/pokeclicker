@@ -38,6 +38,6 @@ export default class MegaStoneItem extends Item {
         return `assets/images/megaStone/${MegaStoneType[this.megaStone]}.png`;
     }
     isSoldOut(): boolean {
-        return player.itemList[this.name]();
+        return player.hasMegaStone(this.megaStone);
     }
 }

@@ -2144,7 +2144,7 @@ class Update implements Saveable {
             const updateMegaStone = (megaStone: string, basePokemonId: number, megaPokemonId: number) => {
                 const basePokemon = saveData.party.caughtPokemon.find(p => p.id === basePokemonId);
                 const megaPokemon = saveData.party.caughtPokemon.find(p => p.id === megaPokemonId);
-                if (megaPokemon || (basePokemon && basePokemon[14])) {
+                if (megaPokemon || (basePokemon?.[14])) {
                     playerData._itemList[megaStone] = 1;
                 }
             };
