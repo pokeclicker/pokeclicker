@@ -187,11 +187,18 @@
     #pokeballFilterTestResults {
         margin-top: 1rem;
         border-top: 1px solid gray;
-        padding-top: 1rem;
 
-        > p:first-child {
+        #pokeballFilterTestMatch {
             border-bottom: 1px solid gray;
-            padding-bottom: 1rem;
+            padding: 1rem 2rem;
+            margin-bottom: 1rem;
+            position: relative;
+
+            > img {
+                position: absolute;
+                right: 0;
+                top: calc(50% - 16px);
+            }
         }
 
         .pokeballFilterDisabled {

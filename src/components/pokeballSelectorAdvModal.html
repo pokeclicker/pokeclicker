@@ -174,9 +174,20 @@
                         <div id="pokeballFilterTestResults" data-bind="using: App.game.pokeballFilters.findMatch(
                                                                     App.game.pokeballFilters.testSettingsData()
                                                                 )">
-                            <p>
+                            <p id="pokeballFilterTestMatch">
                                 <span data-bind='visible: $data, text: `This will use your "${$data?.name}" filter`'></span>
                                 <span data-bind='visible: !$data'>None of your enabled filters match this scenario</span>
+                                <img class="clickable pokeball-selected pokeball-small" data-bind="
+                                    visible: $data,
+                                    attr: {
+                                        src: 'assets/images/pokeball/' + GameConstants.Pokeball[$data?.ball()] + '.svg'},
+                                        tooltip: {
+                                            title: $data?.ball() === -1 ? 'None' : ItemList[GameConstants.Pokeball[$data?.ball()]].displayName,
+                                            trigger: 'hover',
+                                            animation: false,
+                                            placement: 'bottom'
+                                        },
+                                }" />
                             </p>
                             <div data-bind="foreach: App.game.pokeballFilters.displayList()">
                                 <p data-bind="
