@@ -2157,7 +2157,7 @@ class Update implements Saveable {
             updateMegaStone('Ampharosite', 181, 181.01); // Ampharos
             updateMegaStone('Audinite', 531, 531.01); // Audino
             updateMegaStone('Beedrillite', 15, 15.01); // Beedrill
-            updateMegaStone('Blazikenite', 257, 257.01); // Blaziken
+            //updateMegaStone('Blazikenite', 257, 257.01); // Blaziken
             updateMegaStone('Cameruptite', 323, 323.01); // Camerupt
             updateMegaStone('Diancite', 719, 719.01); // Diancie
             updateMegaStone('Galladite', 475, 475.01); // Gallade
@@ -2165,6 +2165,7 @@ class Update implements Saveable {
             updateMegaStone('Gardevoirite', 282, 282.01); // Gardevoir
             updateMegaStone('Gengarite', 94, 94.01); // Gengar
             updateMegaStone('Glalitite', 362, 362.01); // Glalie
+            //updateMegaStone('Gyaradosite', 130, 130.01); // Gyarados
             updateMegaStone('Heracronite', 214, 214.01); // Heracross
             updateMegaStone('Houndoominite', 229, 229.01); // Houndoom
             updateMegaStone('Kangaskhanite', 115, 115.01); // Kangaskhan
@@ -2179,11 +2180,11 @@ class Update implements Saveable {
             updateMegaStone('Pidgeotite', 18, 18.01); // Pidgeot
             updateMegaStone('Sablenite', 302, 302.01); // Sableye
             updateMegaStone('Salamencite', 373, 373.01); // Salamence
-            updateMegaStone('Sceptilite', 254, 254.01); // Sceptile
+            //updateMegaStone('Sceptilite', 254, 254.01); // Sceptile
             updateMegaStone('Sharpedonite', 319, 319.01); // Sharpedo
             updateMegaStone('Slowbronite', 80, 80.01); // Slowbro
             updateMegaStone('Steelixite', 208, 208.01); // Steelix
-            updateMegaStone('Swampertite', 260, 260.01); // Swampert
+            //updateMegaStone('Swampertite', 260, 260.01); // Swampert
             updateMegaStone('Tyranitarite', 248, 248.01); // Tyranitar
 
             saveData.party.caughtPokemon.forEach(p => {

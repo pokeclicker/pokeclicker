@@ -5582,7 +5582,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 189,
         'eggCycles': 5,
-        //'evolutions': [MegaEvolution('Gyarados', 'Mega Gyarados')],
+        'evolutions': [MegaEvolution(MegaStoneType.Gyaradosite, 'Gyarados', 'Mega Gyarados')],
         'base': {
             'hitpoints': 95,
             'attack': 125,
