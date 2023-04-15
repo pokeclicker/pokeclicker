@@ -67,7 +67,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                         <div class="form-row text-left">
                                             <div class="form-group col-lg-12 col-12">
                                                 <label>Search</label>
-                                                <input autocomplete="off" class="form-control" oninput="BreedingFilters.search.value(new RegExp(`(${/^\/.+\/$/.test(this.value) ? this.value.slice(1, -1) : GameHelper.escapeStringRegex(this.value)})`, 'i'))" placeholder="Search here"/>
+                                                <input autocomplete="off" class="form-control" oninput="BreedingController.formatSearch(this.value)" placeholder="Search here"/>
                                             </div>
 
                                             <div class="form-group col-lg-6 col-6">
@@ -124,7 +124,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                 <label>Category</label>
                                                 <div class="dropdown show">
                                                     <button type="button" class="text-left custom-select col-12 btn btn-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                                        data-bind="text: BreedingFilters.category.value() == -1 ? 'All' : PokemonCategories.categories()[BreedingFilters.category.value()].name()">
+                                                        data-bind="text: BreedingFilters.category.value() == -1 ? 'All' : PokemonCategories.categories().find(c => c.id == BreedingFilters.category.value()).name()">
                                                         Categories
                                                     </button>
                                                     <div class="border-secondary dropdown-menu col-12">
@@ -134,7 +134,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                         <div class="dropdown-divider"></div>
                                                         <!-- ko foreach : PokemonCategories.categories -->
                                                         <div class="dropdown-item" data-bind="text : $data.name(), style: { background: $data.color() },
-                                                            click : function(){ BreedingFilters.category.value($index()); Settings.setSettingByName('breedingCategoryFilter', $index()) }">
+                                                            click : function(){ BreedingFilters.category.value($data.id); Settings.setSettingByName('breedingCategoryFilter', $data.id) }">
                                                         </div>
                                                         <!-- /ko-->
                                                         <div class="dropdown-divider"></div>
@@ -165,7 +165,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                             <!-- ko if: player.highestRegion() >= GameConstants.Region.kalos -->
                                             <div class="form-group col-lg-12 col-12">
                                                 <label for="breedingUniqueTransformationFilter">Unique Forms</label>
-                                                <select id="breedingUniqueTransformationFilter" autocomplete="off" class="custom-select" 
+                                                <select id="breedingUniqueTransformationFilter" autocomplete="off" class="custom-select"
                                                     data-bind="options: BreedingFilters.uniqueTransformation.options,
                                                         optionsValue: 'value',
                                                         optionsText: 'text',
@@ -232,6 +232,8 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                         <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry" data-bind="visible: BreedingController.visible($data), style:{background: PokedexHelper.getBackgroundColors($data.name)}, class: App.game.breeding.hasFreeEggSlot() || App.game.breeding.hasFreeQueueSlot() ? '' : 'disabled'">
                                             <span class="pokedex-top-text" data-bind="text: $data.displayName">name</span>
                                             <div class="breedingListShiny" data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)">✨</div>
+                                            <img class="breeding-shadow-icon shadow-icon" src="assets/images/status/shadow.svg" data-bind="visible: $data.shadow == GameConstants.ShadowStatus.Shadow"/>
+                                            <img class="breeding-shadow-icon shadow-icon" src="assets/images/status/purified.svg" data-bind="visible: $data.shadow == GameConstants.ShadowStatus.Purified"/>
                                             <div class="breedingListPokerus" data-bind="if: App.game.party.getPokemon($data.id)?.pokerus">
                                                 <img width="32px" src="" data-bind="attr: { src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[App.game.party.getPokemon($data.id).pokerus]}.png`}"/>
                                             </div>
@@ -244,7 +246,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                 <button data-toggle="dropdown" data-bind="class: `category-${App.game.party.getPokemon($data.id).category + 1}`"></button>
                                                 <div class="border-secondary dropdown-menu">
                                                     <!-- ko foreach: { data: PokemonCategories.categories, as: 'pokemonCategory' } -->
-                                                    <a class="dropdown-item category" href="#" data-bind="text: pokemonCategory.name, style: { background: pokemonCategory.color, 'text-shadow': '0 0 6px black' }, click: () => { App.game.party.getPokemon($parent.id).category = $index() }">Category</a>
+                                                    <a class="dropdown-item category" href="#" data-bind="text: pokemonCategory.name, style: { background: pokemonCategory.color, 'text-shadow': '0 0 6px black' }, click: () => { App.game.party.getPokemon($parent.id).category = pokemonCategory.id }">Category</a>
                                                     <!-- /ko -->
                                                     <div class="dropdown-divider"></div>
                                                     <a class="dropdown-item dropdown-text" href="#categoryModal" data-toggle="modal">
@@ -442,9 +444,9 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
             </div>
             <div class="modal-footer d-lg-none d-flex">
                 <div class="mr-auto">
-                    <button type="button" class="btn btn-warning hatchery-warnings" 
+                    <button type="button" class="btn btn-warning hatchery-warnings"
                         data-bind="visible: !App.game.breeding.hasFreeEggSlot(),
-                        tooltip: { 
+                        tooltip: {
                             title: 'You don\'t have any free egg slots.',
                             trigger: 'hover',
                             placement: 'top',
@@ -452,9 +454,9 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                         }">
                         ⓘ
                     </button>
-                    <button type="button" class="btn btn-danger hatchery-warnings" 
+                    <button type="button" class="btn btn-danger hatchery-warnings"
                         data-bind="visible: !App.game.breeding.hasFreeQueueSlot() && App.game.breeding.queueSlots(),
-                        tooltip: { 
+                        tooltip: {
                             title: 'Your breeding queue is full or disabled.',
                             trigger: 'hover',
                             placement: 'top',
