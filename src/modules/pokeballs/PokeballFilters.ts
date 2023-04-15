@@ -7,6 +7,7 @@ import { PokeballFilterOptions, pokeballFilterOptions } from './PokeballFilterOp
 import Notifier from '../notifications/Notifier';
 import NotificationOption from '../notifications/NotificationOption';
 import { findRight } from '../utilities/arrayUtils';
+import Settings from '../settings';
 
 export default class PokeballFilters implements Feature {
     name = 'Pokeball Filters';
@@ -84,8 +85,8 @@ export default class PokeballFilters implements Feature {
     }
 
     createFilter() {
-        // Starts disabled so it doesn't interfere with existing filters
-        this.list.unshift(new PokeballFilter('New Filter', {}, undefined, false));
+        const enabled = Settings.getSetting('catchFilters.initialEnabled').value;
+        this.list.unshift(new PokeballFilter('New Filter', {}, Pokeball.Pokeball, enabled));
     }
 
     addFilterOption(filter: PokeballFilter, option: keyof PokeballFilterOptions) {
