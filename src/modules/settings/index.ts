@@ -24,6 +24,7 @@ import PokemonType from '../enums/PokemonType';
 import PokedexFilters from './PokedexFilters';
 import FilterSetting from './FilterSetting';
 import MultiSetting from './MultiSetting';
+import { LogBookTypes } from '../logbook/LogBookTypes';
 
 export default Settings;
 
@@ -306,6 +307,7 @@ Settings.add(new HotkeySetting('hotkey.farm', 'Farm', 'F'));
 Settings.add(new HotkeySetting('hotkey.hatchery', 'Hatchery', 'H'));
 Settings.add(new HotkeySetting('hotkey.oakItems', 'Oak Items', 'O'));
 Settings.add(new HotkeySetting('hotkey.underground', 'Underground', 'U'));
+Settings.add(new HotkeySetting('hotkey.dailyQuests', 'Daily Quests', 'Q'));
 Settings.add(new HotkeySetting('hotkey.pokeballSelection', 'Poké Ball Selection', 'P', { suffix: ' + Number' }));
 
 Settings.add(new HotkeySetting('hotkey.farm.toggleShovel', 'Toggle Shovel', 'S'));
@@ -380,3 +382,8 @@ Settings.getSetting('backgroundImage').observableValue.subscribe((newValue) => {
 
 // Translation
 Settings.add(new Setting<Language>('translation.language', 'Language (beta)', Settings.enumToSettingOptionArray(Language, () => true, LanguageNames) as unknown as SettingOption<Language>[], Language.en));
+
+// Logs Settings
+Object.keys(LogBookTypes).forEach((logBookType) => {
+    Settings.add(new BooleanSetting(`logBook.${logBookType}`, logBookType, true));
+});
