@@ -92,6 +92,10 @@
                                             },
                                         }" />
                                     </div>
+                                    <button class="pokeballFilterExpandBtn btn btn-secondary btn-block"
+                                            data-toggle="collapse"
+                                            data-bind="attr: { href: `#pokeball-filter-options-${$index()}` }"
+                                    >Toggle Settings</button>
                                     <div class="collapse pokeballFilterBody"
                                         data-bind="attr: { id: `pokeball-filter-options-${$index()}`}">
                                         <table class="pokeballFilterOptions">
@@ -140,10 +144,6 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <button class="pokeballFilterExpandBtn btn btn-secondary btn-block"
-                                            data-toggle="collapse"
-                                            data-bind="attr: { href: `#pokeball-filter-options-${$index()}` }"
-                                    >Toggle Settings</button>
                                 </div>
                                 <div class="pokeballFilterDelete">
                                     <button class="btn bg-danger text-white deleteButton"
