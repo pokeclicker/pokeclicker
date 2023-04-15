@@ -206,12 +206,12 @@ class Player {
     }
 
     public hasMegaStone(megaStone: GameConstants.MegaStoneType): boolean {
-        return player.itemList[GameConstants.MegaStoneType[megaStone]]() > 0;
+        return this._itemList[GameConstants.MegaStoneType[megaStone]]() > 0;
     }
 
     public gainMegaStone(megaStone: GameConstants.MegaStoneType, notify = true) {
         const name = GameConstants.MegaStoneType[megaStone];
-        if (!player.itemList[name]()) {
+        if (!this._itemList[name]()) {
             player.gainItem(name, 1);
         }
 
