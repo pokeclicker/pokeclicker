@@ -829,7 +829,7 @@ class QuestLineHelper {
         const clearRubyPath = new CustomQuest(1, 0, 'Locate the Ruby. Clear Ruby Path in Mt. Ember.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Ruby Path')]());
         rubySapphireSeviiQuestLine.addQuest(clearRubyPath);
 
-        const talktoRuby = new TalkToNPCQuest(SeviiRuby, 'Take the Ruby in Ruby Path');
+        const talktoRuby = new TalkToNPCQuest(SeviiRuby, 'Take the Ruby in Ruby Path', () => ItemList.Celios_Errand_Ruby.gain(1));
         rubySapphireSeviiQuestLine.addQuest(talktoRuby);
 
         const talktoCelio4 = new TalkToNPCQuest(OneIslandCelio5, 'Return the Ruby to Celio on One Island');
@@ -1390,7 +1390,7 @@ class QuestLineHelper {
             {
                 clearedMessage: 'What\'s this? Well, well. What do we have here? A nosy little trainer has come poking around. Listen up! We\'re the fashionable team whose very name makes people tremble in fear: Team Flare! Team Flare\'s goal is to make it so we\'re the only ones who are happy! We don\'t care one bit about what happens to other trainers or Pokémon. Get out of here, kid. Don\'t you know not to play with fire? We\'ll obliterate you!',
                 npcDisplayName: 'Team Flare Grunt',
-                npcImageName: '../trainers/Team Flare Grunt (male)',
+                npcImageName: 'Team Flare Grunt (male)',
             });
         flareKalosQuestLine.addQuest(clearGlitteringCave);
 
@@ -1433,7 +1433,7 @@ class QuestLineHelper {
             {
                 clearedMessage: 'You\'re quite strong. Oh yes... very strong, indeed. I certainly didn\'t expect you to be so interesting. But it matters not, we already have enough energy to power the device. I do hope we can meet again!',
                 npcDisplayName: 'Team Flare Aliana',
-                npcImageName: '../trainers/Team Flare Aliana',
+                npcImageName: 'Team Flare Aliana',
             });
         flareKalosQuestLine.addQuest(clearKalosPowerPlant);
 
@@ -1447,7 +1447,7 @@ class QuestLineHelper {
             {
                 clearedMessage: 'No way you beat us! Wow, we are lame. Probability is just probability after all... Absolutes do not exist. But enough already! We\'ve already stolen the Poké Balls, Great Balls, and Ultra Balls. Let\'s call it good and leave.',
                 npcDisplayName: 'Team Flare Bryony',
-                npcImageName: '../trainers/Team Flare Bryony',
+                npcImageName: 'Team Flare Bryony',
             });
         flareKalosQuestLine.addQuest(clearPokéBallFactory);
 
@@ -1473,7 +1473,7 @@ class QuestLineHelper {
             {
                 clearedMessage: 'Not just strong... TOO strong! Not ordinary, indeed. Whatever, it doesn\'t matter, we already tested what we wanted to know. The Abomasnow from this cavern is a fine specimen. The more we agitate it, the stronger its Snow Warning ability becomes, making the snow fall even more furiously. Whoever has the most energy will come out on top! And it\'s Team Flare, and only Team Flare who will survive!',
                 npcDisplayName: 'Team Flare Mable',
-                npcImageName: '../trainers/Team Flare Mable',
+                npcImageName: 'Team Flare Mable',
             });
         flareKalosQuestLine.addQuest(clearFrostCavern);
 
@@ -1507,7 +1507,7 @@ class QuestLineHelper {
             {
                 clearedMessage: 'I had fun at the Kalos Power Plant. Of course, we could have generated electricity with Team Flare\'s technology, too, you know. We just didn\'t think it justified the cost. To create a world for us and us alone, we have to play it smart, you see.',
                 npcDisplayName: 'Team Flare Aliana',
-                npcImageName: '../trainers/Team Flare Aliana',
+                npcImageName: 'Team Flare Aliana',
             });
         flareKalosQuestLine.addQuest(clearTeamFlareSecretHQ1);
 
@@ -1515,7 +1515,7 @@ class QuestLineHelper {
             {
                 clearedMessage: 'In reality, those stones that line Route 10 are the graves of Pokémon. When the ultimate weapon was used to end that horrible war over 3,000 years ago, it stole the lives of all those Pokémon. Their lives were the price of peace then. And if we want to make our own wishes come true today, we in Team Flare also have to sacrifice something precious.',
                 npcDisplayName: 'Team Flare Celosia',
-                npcImageName: '../trainers/Team Flare Celosia',
+                npcImageName: 'Team Flare Celosia',
             });
         flareKalosQuestLine.addQuest(clearTeamFlareSecretHQ2);
 
@@ -1523,7 +1523,7 @@ class QuestLineHelper {
             {
                 clearedMessage: 'We\'ve been using the electricity we stole from the Power Plant to get everything prepared for activating the ultimate weapon. But it\'s not like that\'s all we\'ll need to use it. Are you following me? We\'ll need energy absorbed from Pokémon to power the device! Yes! It\'s the stones on Route 10 that will steal that energy for us and power the ultimate weapon.',
                 npcDisplayName: 'Team Flare Bryony',
-                npcImageName: '../trainers/Team Flare Bryony',
+                npcImageName: 'Team Flare Bryony',
             });
         flareKalosQuestLine.addQuest(clearTeamFlareSecretHQ3);
 
@@ -1531,7 +1531,7 @@ class QuestLineHelper {
             {
                 clearedMessage: 'The power of the Legendary Pokémon... The power to grant life to all around it... The power to steal life from all around it... It\'s a mysterious ability that even scientists like us haven\'t been able to really decode. What d\'you think will happen to the world if we fuel the ultimate weapon with something like that?',
                 npcDisplayName: 'Team Flare Mable',
-                npcImageName: '../trainers/Team Flare Mable',
+                npcImageName: 'Team Flare Mable',
             });
         flareKalosQuestLine.addQuest(clearTeamFlareSecretHQ4);
 
@@ -3009,6 +3009,59 @@ class QuestLineHelper {
         App.game.quests.questLines().push(magearnaQuestLine);
     }
 
+    public static createHisuiForcesQuestLine() {
+        const hisuiForcesQuestLine = new QuestLine('Incarnate Forces of Hisui', 'Cogita would like you to catch the Forces of Nature.', new DevelopmentRequirement(), GameConstants.BulletinBoards.Hisui);
+
+        const talktoForcesCogita1 = new TalkToNPCQuest(ForcesCogita1, 'Speak to Cogita in Galaxy Hall.');
+        hisuiForcesQuestLine.addQuest(talktoForcesCogita1);
+
+        const chaseTornadus = new CustomQuest (3, 0, 'Pursue Tornadus in the Alabaster Icelands.', () =>
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Tornadus 1')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Tornadus 2')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Tornadus 3')]()
+        );
+        const captureTornadus = new CaptureSpecificPokemonQuest('Tornadus', 'Catch Tornadus in the Alabaster Icelands', 1, true, 0, undefined);
+        const chaseThundurus = new CustomQuest (3, 0, 'Pursue Thundurus in the Cobalt Coastlands.', () =>
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Thundurus 1')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Thundurus 2')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Thundurus 3')]()
+        );
+        const captureThundurus = new CaptureSpecificPokemonQuest('Thundurus', 'Catch Thundurus in the Cobalt Coastlands', 1, true, 0, undefined);
+        const chaseLandorus = new CustomQuest (3, 0, 'Pursue Landorus in the Obsidian Fieldlands.', () =>
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Landorus 1')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Landorus 2')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Landorus 3')]()
+        );
+        const captureLandorus = new CaptureSpecificPokemonQuest('Landorus', 'Catch Landorus in the Obsidian Fieldlands', 1, true, 0, undefined);
+        hisuiForcesQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                chaseTornadus,
+                captureTornadus,
+                chaseThundurus,
+                captureThundurus,
+                chaseLandorus,
+                captureLandorus,
+            ], 'Tornadus, Thundurus and Landorus have been sighted in the Alabaster Icelands, Cobalt Coastlands and Obsidian Fieldland respectively. Pursue and capture them.'));
+
+        const talktoForcesCogita2 = new TalkToNPCQuest(ForcesCogita2, 'Speak to Cogita at Ancient Retreat.');
+        hisuiForcesQuestLine.addQuest(talktoForcesCogita2);
+
+        const chaseEnamorus = new CustomQuest (3, 0, 'Pursue Enamorus in the Crimson Mirelands.', () =>
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Enamorus 1')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Enamorus 2')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Enamorus 3')]()
+        );
+        hisuiForcesQuestLine.addQuest(chaseEnamorus);
+
+        const captureEnamorus = new CaptureSpecificPokemonQuest('Enamorus', 'Catch Enamorus roaming around Hisui.', 1, true, 0, undefined);
+        hisuiForcesQuestLine.addQuest(captureEnamorus);
+
+        const talktoForcesCogita3 = new TalkToNPCQuest(ForcesCogita3, 'Speak to Cogita at Ancient Retreat.');
+        hisuiForcesQuestLine.addQuest(talktoForcesCogita3);
+
+        App.game.quests.questLines().push(hisuiForcesQuestLine);
+    }
+
     // Event QuestLines
     // Open the game between April 8-29.
     public static createFindSurpriseTogepiForEasterQuestLine() {
@@ -3047,7 +3100,7 @@ class QuestLineHelper {
             });
             dungeonList['Ilex Forest'].bossList = dungeonList['Ilex Forest'].bossList.filter(boss => boss.name != 'Egg Hunter');
         };
-        const encounterSurpriseTogepiInJohto = new CustomQuest(1, afterDefeatingTogepiInJohto, 'Another report just came in, stating that they saw a strange egg boarding the ferry to Johto!', App.game.statistics.pokemonDefeated[surpriseTogepi.id], 1, togepiInJohtoSetup);
+        const encounterSurpriseTogepiInJohto = new CustomQuest(1, afterDefeatingTogepiInJohto, 'Another report just came in, there have been sightings of a strange egg in a forest in Johto!', App.game.statistics.pokemonDefeated[surpriseTogepi.id], 1, togepiInJohtoSetup);
         findSurpriseTogepiForEasterQuestLine.addQuest(encounterSurpriseTogepiInJohto);
 
         const togepiInHoennSetup = () => {
@@ -3063,7 +3116,7 @@ class QuestLineHelper {
             });
             dungeonList['Petalburg Woods'].bossList = dungeonList['Petalburg Woods'].bossList.filter(boss => boss.name != 'Egg Hunter');
         };
-        const encounterTogepiInHoenn = new CustomQuest(1, afterDefeatingTogepiInHoenn, 'There is a big Egg Hunt going on in Petalburg Woods right now; maybe you should take a look?', App.game.statistics.pokemonDefeated[surpriseTogepi.id], 2, togepiInHoennSetup);
+        const encounterTogepiInHoenn = new CustomQuest(1, afterDefeatingTogepiInHoenn, 'There is a big Egg Hunt going on in the woods south of Rustboro in Hoenn; maybe you should take a look?', App.game.statistics.pokemonDefeated[surpriseTogepi.id], 2, togepiInHoennSetup);
         findSurpriseTogepiForEasterQuestLine.addQuest(encounterTogepiInHoenn);
 
         App.game.quests.questLines().push(findSurpriseTogepiForEasterQuestLine);
@@ -3135,6 +3188,7 @@ class QuestLineHelper {
         this.createDynaTreeBirdsQuestLine();
         this.createAncientGolemsQuestLine();
         this.createOriginalColorMagearnaQuestLine();
+        this.createHisuiForcesQuestLine();
         this.createFindSurpriseTogepiForEasterQuestLine();
         this.createHoopaDayPikabluQuestLine();
         this.createDrSplashQuestLine();
