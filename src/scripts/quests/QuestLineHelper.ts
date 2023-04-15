@@ -1486,7 +1486,7 @@ class QuestLineHelper {
         const talkToLysandre4 = new TalkToNPCQuest(Lysandre4, 'Wow! Absolutely no one could have seen this coming! You think you might find Lysandre in Lumiose City where you first met him. Look for him!');
         flareKalosQuestLine.addQuest(talkToLysandre4);
 
-        const battleTeamFlareLysandre1 = new CustomQuest (1, 0,  'Show Team Flare Lysandre in a battle in Lumiose City the strength of your convictions!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Flare Lysandre 1')]());
+        const battleTeamFlareLysandre1 = new CustomQuest (1, 0,  'Show Team Flare Lysandre the strength of your convictions in Lumiose City!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Flare Lysandre 1')]());
         flareKalosQuestLine.addQuest(battleTeamFlareLysandre1);
 
         const talkToAZ1 = new TalkToNPCQuest(AZ1, 'You run after Lysandre and while going through the Labs you find a jailed mysterious man in Lumiose City. It seems like he has a story to tell...');
@@ -1552,7 +1552,7 @@ class QuestLineHelper {
         const talkToTeamFlareBossLysandre1 = new TalkToNPCQuest(TeamFlareBossLysandre1, 'Lysandre appears menacingly in front of you in Team Flare Secret HQ. He doesn\'t seem fazed about you subsiding both legendary Pokémon.');
         flareKalosQuestLine.addQuest(talkToTeamFlareBossLysandre1);
 
-        const battleTeamFlareBossLysandre1 = new CustomQuest (1, 0,  'Stop once and for all Team Flare Boss Lysandre in Team Flare Secret HQ!!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Flare Boss Lysandre 1')]());
+        const battleTeamFlareBossLysandre1 = new CustomQuest (1, 0,  'Stop Team Flare Boss Lysandre in Team Flare Secret HQ once and for all!!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Flare Boss Lysandre 1')]());
         flareKalosQuestLine.addQuest(battleTeamFlareBossLysandre1);
 
         const clearKalosLeague = new CustomQuest(1, 0, 'You did it! You saved Kalos! There is nothing else to do except to continue your journey to beat the Kalos Pokémon League!', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Champion Diantha')]());
