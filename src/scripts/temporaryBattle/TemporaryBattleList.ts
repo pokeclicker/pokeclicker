@@ -1873,7 +1873,7 @@ TemporaryBattleList['Hugh 7'] = new TemporaryBattle(
 TemporaryBattleList.DreamResearcher = new TemporaryBattle(
     'Dream Researcher',
     [new GymPokemon('Mega Audino', 125000000, 32)],
-    'Wow! You have proven that you have total power over the realm of dreams! The location of this Audinite was revealed to me in a dream, you deserve to have it!</br><img src="assets/images/megaStone/531.png"/>',
+    'Wow! You have proven that you have total power over the realm of dreams! The location of this Audinite was revealed to me in a dream, you deserve to have it!</br><img src="assets/images/megaStone/Audinite.png"/>',
     [new ObtainedPokemonRequirement('Landorus (Therian)'), new ObtainedPokemonRequirement('Audino')],
     undefined,
     {
@@ -1993,7 +1993,7 @@ TemporaryBattleList['Calem 1'] = new TemporaryBattle(
 TemporaryBattleList.Korrina = new TemporaryBattle(
     'Korrina',
     [new GymPokemon('Mega Lucario', 135000000, 32)],
-    'What an incredible bond you have! What amazing power! You and Lucario are worthy of this Lucarionite!</br><img src="assets/images/megaStone/448.png"/>',
+    'What an incredible bond you have! What amazing power! You and Lucario are worthy of this Lucarionite!</br><img src="assets/images/megaStone/Lucarionite.png"/>',
     [new GymBadgeRequirement(BadgeEnums.Rumble), new ObtainedPokemonRequirement('Lucario')],
     undefined,
     {
@@ -2172,7 +2172,7 @@ TemporaryBattleList['Delta Giovanni'] = new TemporaryBattle(
         new GymPokemon('Cloyster', 39620542, 63),
         new GymPokemon('Mega Beedrill', 42620542, 63),
     ],
-    'Even here? Is there no getting rid of you? Take this and leave me alone. </br><img src="assets/images/megaStone/15.png"/>',
+    'Even here? Is there no getting rid of you? Take this and leave me alone. </br><img src="assets/images/megaStone/Beedrillite.png"/>',
     [new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 17), new ObtainedPokemonRequirement('Beedrill')])],
     undefined,
     {
@@ -2187,7 +2187,7 @@ TemporaryBattleList['Mr. Stone'] = new TemporaryBattle(
         new GymPokemon('Castform', 67500000, 60),
         new GymPokemon('Mega Pidgeot', 67500000, 63),
     ],
-    'You\'re really strong! You should take this, it might come in handy with all this meteor business.</br><img src="assets/images/megaStone/18.png"/>',
+    'You\'re really strong! You should take this, it might come in handy with all this meteor business.</br><img src="assets/images/megaStone/Pidgeotite.png"/>',
     [new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 6), new ObtainedPokemonRequirement('Pidgeot')])],
     undefined,
     {
@@ -2199,7 +2199,7 @@ TemporaryBattleList['Mr. Stone'] = new TemporaryBattle(
 TemporaryBattleList['Shoal Fisherman'] = new TemporaryBattle(
     'Shoal Fisherman',
     [new GymPokemon('Mega Slowbro', 148837500, 63)],
-    'I found this neat rock while hunting for shells! You want it?</br><img src="assets/images/megaStone/80.png"/>',
+    'I found this neat rock while hunting for shells! You want it?</br><img src="assets/images/megaStone/Slowbronite.png"/>',
     [new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 6), new ObtainedPokemonRequirement('Slowbro')])],
     undefined,
     {
@@ -2215,7 +2215,7 @@ TemporaryBattleList['Delta Brock'] = new TemporaryBattle(
         new GymPokemon('Crobat', 47250000, 63),
         new GymPokemon('Mega Steelix', 47250000, 63),
     ],
-    'Seems like you\'ve gotten really strong since Kanto! I found this neat rock in the cave, you should keep it.</br><img src="assets/images/megaStone/208.png"/>',
+    'Seems like you\'ve gotten really strong since Kanto! I found this neat rock in the cave, you should keep it.</br><img src="assets/images/megaStone/Steelixite.png"/>',
     [new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 9), new ObtainedPokemonRequirement('Steelix')])],
     undefined,
     {
@@ -2227,7 +2227,7 @@ TemporaryBattleList['Delta Brock'] = new TemporaryBattle(
 TemporaryBattleList['Delta Tabitha'] = new TemporaryBattle(
     'Delta Tabitha',
     [new GymPokemon('Mega Camerupt', 217912983, 63)],
-    'I guess you\'ve earned this Cameruptite. Make sure your Camerupt holds on to it tightly.</br><img src="assets/images/megaStone/323.png"/>',
+    'I guess you\'ve earned this Cameruptite. Make sure your Camerupt holds on to it tightly.</br><img src="assets/images/megaStone/Cameruptite.png"/>',
     [new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 26), new ObtainedPokemonRequirement('Camerupt')])],
     undefined,
     {
@@ -2239,7 +2239,7 @@ TemporaryBattleList['Delta Tabitha'] = new TemporaryBattle(
 TemporaryBattleList['Delta Shelly'] = new TemporaryBattle(
     'Delta Shelly',
     [new GymPokemon('Mega Sharpedo', 217912983, 63)],
-    'Fine you win. Take this Sharpedonite. Make sure your Sharpedo holds on to it tightly.</br><img src="assets/images/megaStone/319.png"/>',
+    'Fine you win. Take this Sharpedonite. Make sure your Sharpedo holds on to it tightly.</br><img src="assets/images/megaStone/Sharpedonite.png"/>',
     [new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 26), new ObtainedPokemonRequirement('Sharpedo')])],
     undefined,
     {
@@ -2251,7 +2251,7 @@ TemporaryBattleList['Delta Shelly'] = new TemporaryBattle(
 TemporaryBattleList['Icy Boulder'] = new TemporaryBattle(
     'Icy Boulder',
     [new GymPokemon('Mega Glalie', 141750000, 66)],
-    '<i>The Glalie flees, dropping a stone.</i></br><img src="assets/images/megaStone/362.png"/>',
+    '<i>The Glalie flees, dropping a stone.</i></br><img src="assets/images/megaStone/Glalitite.png"/>',
     [new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 4), new ObtainedPokemonRequirement('Glalie')])],
     undefined,
     {
@@ -2270,7 +2270,7 @@ TemporaryBattleList['Mega Draconid Elder'] = new TemporaryBattle(
         new GymPokemon('Garchomp', 37209375, 53),
         new GymPokemon('Mega Salamence', 114837210, 70),
     ],
-    'You truly are a master of dragons. Please, take this stone.</br><img src="assets/images/megaStone/373.png"/>',
+    'You truly are a master of dragons. Please, take this stone.</br><img src="assets/images/megaStone/Salamencite.png"/>',
     [new MultiRequirement([new QuestLineCompletedRequirement('The Delta Episode'), new ObtainedPokemonRequirement('Salamence')])],
     undefined,
     {
@@ -2289,7 +2289,7 @@ TemporaryBattleList['Delta Steven'] = new TemporaryBattle(
         new GymPokemon('Armaldo', 33017118, 57),
         new GymPokemon('Mega Metagross', 36017118, 63),
     ],
-    'I have to admit, you keep surprising me! You deserve to have this.</br><img src="assets/images/megaStone/376.png"/>',
+    'I have to admit, you keep surprising me! You deserve to have this.</br><img src="assets/images/megaStone/Metagrossite.png"/>',
     [new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 23), new ObtainedPokemonRequirement('Metagross')])],
     undefined,
     {
@@ -2305,7 +2305,7 @@ TemporaryBattleList['Dr Cozmo'] = new TemporaryBattle(
         new GymPokemon('Solrock', 79901427, 57),
         new GymPokemon('Mega Gallade', 79901427, 63),
     ],
-    'That was invigorating! Please take this!</br><img src="assets/images/megaStone/475.png"/>',
+    'That was invigorating! Please take this!</br><img src="assets/images/megaStone/Galladite.png"/>',
     [new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 27), new ObtainedPokemonRequirement('Gallade')])],
     undefined,
     {
@@ -2320,7 +2320,7 @@ TemporaryBattleList['Matt 3'] = new TemporaryBattle(
         new GymPokemon('Grimer', 70875000, 57),
         new GymPokemon('Sharpedo', 70875000, 63),
     ],
-    '<i>The Latias that Matt was harassing flies away, leaving a stone behind.</i></br><img src="assets/images/megaStone/380.png"/>',
+    '<i>The Latias that Matt was harassing flies away, leaving a stone behind.</i></br><img src="assets/images/megaStone/Latiasite.png"/>',
     [new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 5), new ObtainedPokemonRequirement('Latias')])],
     undefined,
     {
@@ -2335,7 +2335,7 @@ TemporaryBattleList['Courtney 3'] = new TemporaryBattle(
         new GymPokemon('Koffing', 70875000, 57),
         new GymPokemon('Camerupt', 70875000, 63),
     ],
-    '<i>The Latios that Courtney was harassing flies away, leaving a stone behind.</i></br><img src="assets/images/megaStone/381.png"/>',
+    '<i>The Latios that Courtney was harassing flies away, leaving a stone behind.</i></br><img src="assets/images/megaStone/Latiosite.png"/>',
     [new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 5), new ObtainedPokemonRequirement('Latios')])],
     undefined,
     {
@@ -2499,7 +2499,7 @@ TemporaryBattleList['Millis and Argus Steel'] = new TemporaryBattle(
 TemporaryBattleList['Rampaging Yveltal'] = new TemporaryBattle(
     'Rampaging Yveltal',
     [new GymPokemon('Yveltal', 446974112, 80)],
-    '<i>Diancie fights alongside you, Mega Evolving to land the final blow! She hands you her Mega Stone after the fight.</i></br><img src="assets/images/megaStone/719.png"/></br>',
+    '<i>Diancie fights alongside you, Mega Evolving to land the final blow! She hands you her Mega Stone after the fight.</i></br><img src="assets/images/megaStone/Diancite.png"/></br>',
     [new QuestLineStepCompletedRequirement('Princess Diancie', 8)],
     undefined,
     {
@@ -2905,7 +2905,7 @@ TemporaryBattleList['Calem 6'] = new TemporaryBattle(
         new GymPokemon('Chesnaught', 105685546, 70, new StarterRequirement(GameConstants.Region.kalos, GameConstants.Starter.Water)),
         new GymPokemon('Mega Absol', 118054939, 68),
     ],
-    'Here, this is for you!</br><img src="assets/images/megaStone/359.png"/></br>That\'s right. It\'s Absolite. I found two of them. After everything we said to Lysandre, it just wouldn\'t be right if I didn\'t share one with you.',
+    'Here, this is for you!</br><img src="assets/images/megaStone/Absolite.png"/></br>That\'s right. It\'s Absolite. I found two of them. After everything we said to Lysandre, it just wouldn\'t be right if I didn\'t share one with you.',
     [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion), new ObtainedPokemonRequirement('Absol')],
     [new NullRequirement],
     {
@@ -2925,7 +2925,7 @@ TemporaryBattleList['Marquis Grant'] = new TemporaryBattle(
         new GymPokemon('Mega Tyranitar', 125000000, 80),
         new GymPokemon('Mega Aggron', 125000000, 80),
     ],
-    'To commemorate such an impressive show of teamwork, please accept these gifts!</br><img src="assets/images/megaStone/248.png"/></br></br><img src="assets/images/megaStone/306.png"/></br>',
+    'To commemorate such an impressive show of teamwork, please accept these gifts!</br><img src="assets/images/megaStone/Tyranitarite.png"/></br></br><img src="assets/images/megaStone/Aggronite.png"/></br>',
     [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion), new ClearGymRequirement(2000, GameConstants.getGymIndex('Cyllage City')), new ObtainedPokemonRequirement('Tyranitar'), new ObtainedPokemonRequirement('Aggron')],
     undefined,
     {
@@ -2943,7 +2943,7 @@ TemporaryBattleList['Grand Duchess Diantha'] = new TemporaryBattle(
         new GymPokemon('Goodra', 120770015, 80),
         new GymPokemon('Mega Gardevoir', 125000000, 80),
     ],
-    'Witnessing the noble spirits of you and your Pokémon in battle has really touched my heart... Please, take this Gardevoirite.</br><img src="assets/images/megaStone/282.png"/></br>I just... I just don\'t know what to say... I can hardly express this feeling...',
+    'Witnessing the noble spirits of you and your Pokémon in battle has really touched my heart... Please, take this Gardevoirite.</br><img src="assets/images/megaStone/Gardevoirite.png"/></br>I just... I just don\'t know what to say... I can hardly express this feeling...',
     [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion), new ObtainedPokemonRequirement('Gardevoir')],
     undefined,
     {
@@ -2961,7 +2961,7 @@ TemporaryBattleList['Team Flare Boss Lysandre 2'] = new TemporaryBattle(
         new GymPokemon('Pyroar', 124595484, 81),
         new GymPokemon('Mega Gyarados', 129681014, 83),
     ],
-    'I see the strength to protect within you... Hopefully you can do a better job than me and protect a tomorrow that will be better than today. Take this Gyaradosite.</br><img src="assets/images/megaStone/130.png"/></br>',
+    'I see the strength to protect within you... Hopefully you can do a better job than me and protect a tomorrow that will be better than today. Take this Gyaradosite.</br><img src="assets/images/megaStone/Gyaradosite.png"/></br>',
     [new QuestLineStepCompletedRequirement('A Beautiful World', 35), new ObtainedPokemonRequirement('Gyarados'), new DayCyclePartRequirement([DayCyclePart.Dusk])],
     undefined,
     {
@@ -2979,7 +2979,7 @@ TemporaryBattleList['Hex Maniac Aster'] = new TemporaryBattle(
         new GymPokemon('Haunter', 60770015, 30),
         new GymPokemon('Medicham', 60770015, 30),
     ],
-    'What’s this?! I see... Perhaps a Trainer as accomplished as you can get the most out of this.</br><img src="assets/images/megaStone/94.png"/></br>',
+    'What’s this?! I see... Perhaps a Trainer as accomplished as you can get the most out of this.</br><img src="assets/images/megaStone/Gengarite.png"/></br>',
     [
         new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Gastly').id], 666),
         new StatisticRequirement(['pokemonEncountered', PokemonHelper.getPokemonByName('Haunter').id], 444),
@@ -3004,7 +3004,7 @@ TemporaryBattleList['Wild Houndour Horde'] = new TemporaryBattle(
         new GymPokemon('Houndour', 60000000, 40),
         new GymPokemon('Mega Houndoom', 120000000, 60),
     ],
-    '<i>With the leader of the pack defeated, the Houndour horde scatters, their fiery fury reduced to ashes. In the gleaming sunlight, you catch sight of a small gem left behind by their leader...</i></br><img src="assets/images/megaStone/229.png"/></br><i>You obtained the Houndoominite!</i>',
+    '<i>With the leader of the pack defeated, the Houndour horde scatters, their fiery fury reduced to ashes. In the gleaming sunlight, you catch sight of a small gem left behind by their leader...</i></br><img src="assets/images/megaStone/Houndoominite.png"/></br><i>You obtained the Houndoominite!</i>',
     [
         new ObtainedPokemonRequirement('Houndoom'),
         new WeatherRequirement([WeatherType.Sunny]),
@@ -3031,7 +3031,7 @@ TemporaryBattleList['Wild Electrike Horde'] = new TemporaryBattle(
         new GymPokemon('Electrike', 60000000, 40),
         new GymPokemon('Mega Manectric', 120000000, 60),
     ],
-    '<i>With the leader of the pack defeated, the Electrike horde scatters, their thunderous rage utterly depleted. In a thunderbolt\'s flash, you catch sight of a small gem left behind by their leader...</i></br><img src="assets/images/megaStone/310.png"/></br><i>You obtained the Manectite!</i>',
+    '<i>With the leader of the pack defeated, the Electrike horde scatters, their thunderous rage utterly depleted. In a thunderbolt\'s flash, you catch sight of a small gem left behind by their leader...</i></br><img src="assets/images/megaStone/Manectite.png"/></br><i>You obtained the Manectite!</i>',
     [
         new ObtainedPokemonRequirement('Manectric'),
         new WeatherRequirement([WeatherType.Thunderstorm]),
