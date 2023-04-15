@@ -1989,7 +1989,7 @@ class QuestLineHelper {
     public static createMelemeleAlolaQuestLine() {
         const melemeleAlolaQuestLine = new QuestLine('Welcome to paradise, cousin!', 'See the sights this small tropical island has to offer!');
         // 0
-        const talkToLillie1 = new TalkToNPCQuest(Lillie1, 'Talk to the locals of Iki Town! They say the sacred ruins in Melemele Woods behind it is home to their legendary guardian. Perhaps a fateful encounter awaits?');
+        const talkToLillie1 = new TalkToNPCQuest(Lillie1, 'Time to kick off your Alolan vacation! They say the sacred ruins in Melemele Woods behind Iki Town is home to Melemele\'s legendary guardian. Perhaps a fateful encounter awaits?');
         melemeleAlolaQuestLine.addQuest(talkToLillie1);
 
         // 1
