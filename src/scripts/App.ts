@@ -6,7 +6,7 @@ class App {
     static readonly debug = false;
     static game: Game;
     static readonly isUsingClient = typeof navigator === 'object' && typeof navigator.userAgent === 'string' && navigator.userAgent.indexOf('Electron') >= 0;
-    static translation = new Translate(Settings.getSetting('translation.language'));
+    static translation = new Translate(Settings.getSetting('translation.language') as Setting<Language>);
 
     static start() {
         // Hide tooltips that stay on game load
