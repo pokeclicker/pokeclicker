@@ -48,8 +48,8 @@ export const pokeballFilterOptions: {
             bool,
         ),
         (isShiny) => `Are ${
-            isShiny ? '' : 'not'
-        } shiny`,
+            isShiny ? '' : 'not '
+        }Shiny`,
     ),
 
     shadow: new PokeballFilterOption(
@@ -59,8 +59,8 @@ export const pokeballFilterOptions: {
             bool,
         ),
         (isShadow) => `Are ${
-            isShadow ? '' : 'not'
-        } shadow form`,
+            isShadow ? '' : 'not '
+        }Shadow`,
         tempShadowRequirement,
     ),
 
@@ -70,8 +70,8 @@ export const pokeballFilterOptions: {
             'Caught',
             bool,
         ),
-        (isCaught) => `You have ${
-            isCaught ? '' : 'not yet'
+        (isCaught) => `${
+            isCaught ? 'Already' : 'Not yet'
         } caught`,
     ),
 
@@ -81,9 +81,9 @@ export const pokeballFilterOptions: {
             'Caught Shiny',
             bool,
         ),
-        (isCaughtShiny) => `You ${
-            isCaughtShiny ? '' : 'don\'t'
-        } have shiny`,
+        (isCaughtShiny) => `Shiny form ${
+            isCaughtShiny ? 'already ' : 'not yet '
+        }caught`,
     ),
 
     caughtShadow: new PokeballFilterOption(
@@ -92,25 +92,25 @@ export const pokeballFilterOptions: {
             'Caught Shadow',
             bool,
         ),
-        (isCaughtShadow) => `You ${
-            isCaughtShadow ? '' : 'don\'t'
-        } have the shadow form`,
+        (isCaughtShadow) => `Shadow form ${
+            isCaughtShadow ? 'already ' : 'not yet '
+        }caught`,
         tempShadowRequirement,
     ),
 
     pokerus: new PokeballFilterOption(
         (pokerus = Pokerus.Uninfected) => new Setting(
             'pokeballFilterPokerus',
-            'Pokerus State',
+            'Pokérus State',
             GameHelper.enumStrings(Pokerus).map((k) => new SettingOption(k, Pokerus[k])),
             pokerus,
         ),
-        (pokerusState) => `You have in the ${
+        (pokerusState) => `Are in the ${
             Pokerus[pokerusState]
-        } pokerus state`,
+        } Pokérus state`,
         new CustomRequirement(
             ko.pureComputed(() => App.game.keyItems.hasKeyItem(KeyItemType.Pokerus_virus)),
-            true, 'Pokerus virus is required',
+            true, 'Pokérus virus is required',
         ),
     ),
 

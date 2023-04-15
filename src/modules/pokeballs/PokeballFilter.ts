@@ -64,15 +64,11 @@ export default class PokeballFilter {
         const optionList = Object.entries(this.options);
         if (optionList.length === 0) {
             return `${disabledText}${[
-                'This filter has no restrictions set, so will match every pokemon.',
-                'Click the "Toggle Settings" button for this filter in the Configure Filters window to add some.',
+                'This filter will catch all Pokémon.',
             ].join('</br>')}`;
         }
 
-        return `${disabledText}${this.inverted()
-            ? 'This filter matches any pokemon except those that:'
-            : 'This filter matches pokemon that:'
-        } <ul class="pokeballFilterOptionDescriptions">${
+        const bulletPoints = `<ul class="pokeballFilterOptionDescriptions">${
             optionList
                 .map(([opt, setting]) => `<li>${
                     pokeballFilterOptions[opt].describe(
@@ -81,6 +77,12 @@ export default class PokeballFilter {
                 }</li>`)
                 .join('')
         }</ul>`;
+
+        return `${disabledText}This filter affects wild Pokémon ${
+            this.inverted()
+                ? 'without'
+                : 'with'
+        } the combined traits of: ${bulletPoints}`;
     }
 
     get name(): string {
