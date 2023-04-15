@@ -3,6 +3,7 @@ import { Pokerus } from '../GameConstants';
 import SettingOption from './SettingOption';
 import Settings from './Settings';
 import FilterOption from './FilterOption';
+import GameHelper from '../GameHelper';
 
 const BreedingFilters: Record<string, FilterOption> = {
     search: new FilterOption<RegExp>(
@@ -26,13 +27,13 @@ const BreedingFilters: Record<string, FilterOption> = {
     ),
     type1: new FilterOption<number[]>(
         'Type 1',
-        ko.observable([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]),
+        ko.observable(GameHelper.enumNumbers(PokemonType).filter(v => v !== PokemonType.None)),
         'breedingTypeFilter1',
         Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None'),
     ),
     type2: new FilterOption<number[]>(
         'Type 2',
-        ko.observable([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]),
+        ko.observable(GameHelper.enumNumbers(PokemonType).filter(v => v !== PokemonType.None)),
         'breedingTypeFilter2',
         Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None'),
     ),

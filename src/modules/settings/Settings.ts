@@ -1,12 +1,12 @@
-import Setting from './Setting';
+import BaseSetting from './BaseSetting';
 import SettingOption from './SettingOption';
 import { camelCaseToString } from '../GameConstants';
 import GameHelper from '../GameHelper';
 
 export default class Settings {
-    static list: Setting<any>[] = [];
+    static list: BaseSetting<any, any>[] = [];
 
-    static add(setting: Setting<any>) {
+    static add(setting: BaseSetting<any, any>) {
         if (!this.getSetting(setting.name)) {
             this.list.push(setting);
         }
@@ -21,13 +21,8 @@ export default class Settings {
         }
     }
 
-    static getSetting(name: string): Setting<any> {
+    static getSetting(name: string): BaseSetting<any, any> {
         return this.list.find((setting) => setting.name === name) || null;
-    }
-
-    static isContainedInMultiSetting(name: string, value: any) {
-        const setting = Settings.getSetting(name);
-        return setting !== undefined && Array.isArray(setting.value) && setting.value.includes(value);
     }
 
     static toJSON() {

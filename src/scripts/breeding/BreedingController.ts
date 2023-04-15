@@ -193,7 +193,7 @@ class BreedingController {
             }
 
             // Check if either of the types match
-            if (!PartyController.filterByTypes(partyPokemon, BreedingFilters.type1.value(), BreedingFilters.type2.value())) {
+            if (!PartyController.filterByTypes(partyPokemon.name, BreedingFilters.type1.value(), BreedingFilters.type2.value())) {
                 return false;
             }
             return true;

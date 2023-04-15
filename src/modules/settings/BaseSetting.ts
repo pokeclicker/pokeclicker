@@ -37,8 +37,12 @@ export default abstract class BaseSetting<T, S> {
         return false;
     }
 
-    isSelected(value: T): KnockoutComputed<boolean> {
-        return ko.pureComputed(() => (this.observableValue() === value), this);
+    protected calcIsSelected(value: S): boolean {
+        return false;
+    }
+
+    isSelected(value: S): KnockoutComputed<boolean> {
+        return ko.pureComputed(() => (this.calcIsSelected(value)), this);
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars, class-methods-use-this

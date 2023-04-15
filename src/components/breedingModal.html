@@ -119,7 +119,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                 <label>Types</label>
                                                 <select name="breedingTypeFilter1" autocomplete="off" class="custom-select" onchange="BreedingFilters.type1.value(Array.from(this.selectedOptions).map(o => Number(o.value))), Settings.setSettingByName(this.name, Array.from(this.selectedOptions).map(o => Number(o.value)))" multiple="true">
                                                     <!-- ko foreach: Settings.getSetting('breedingTypeFilter1').options -->
-                                                    <option data-bind="attr: { value: Number($data.value), selected: Settings.isContainedInMultiSetting('breedingTypeFilter1', $data.value) }, text: $data.text">Type</option>
+                                                    <option data-bind="attr: { value: Number($data.value), selected: Settings.getSetting('breedingTypeFilter1').isSelected($data.value) }, text: $data.text">Type</option>
                                                     <!-- /ko -->
                                                 </select>
                                             </div>
@@ -127,7 +127,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                 <label> </label>
                                                 <select name="breedingTypeFilter2" autocomplete="off" class="custom-select" onchange="BreedingFilters.type2.value(Array.from(this.selectedOptions).map(o => Number(o.value))), Settings.setSettingByName(this.name, Array.from(this.selectedOptions).map(o => Number(o.value)))" multiple="true">
                                                     <!-- ko foreach: Settings.getSetting('breedingTypeFilter2').options -->
-                                                    <option data-bind="attr: { value: Number($data.value), selected: Settings.isContainedInMultiSetting('breedingTypeFilter2', $data.value) }, text: $data.text">Type</option>
+                                                    <option data-bind="attr: { value: Number($data.value), selected: Settings.getSetting('breedingTypeFilter2').isSelected($data.value) }, text: $data.text">Type</option>
                                                     <!-- /ko -->
                                                 </select>
                                             </div>

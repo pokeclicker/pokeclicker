@@ -206,9 +206,9 @@ class PartyController {
         };
     }
 
-    public static filterByTypes(partyPokemon: PartyPokemon, filterTypes1: PokemonType[], filterTypes2: PokemonType[]) {
+    public static filterByTypes(pokemon: string, filterTypes1: PokemonType[], filterTypes2: PokemonType[]) {
         const numTypes = GameHelper.enumLength(PokemonType) - 1;
-        const { type: [type1, type2] } = pokemonMap[partyPokemon.name];
+        const { type: [type1, type2] } = pokemonMap[pokemon];
 
         // Check if all types are selected or if the first type is included in the first filter.
         if (filterTypes1.length === numTypes || filterTypes1.includes(type1)) {
