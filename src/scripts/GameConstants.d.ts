@@ -234,6 +234,7 @@ namespace GameConstants {
         kalos,
         alola,
         galar,
+        hisui,
         paldea,
         final,
     }
@@ -308,6 +309,8 @@ namespace GameConstants {
         'Galarica_wreath',
         'Black_mane_hair',
         'White_mane_hair',
+        'Black_augurite',
+        'Peat_block',
         'Auspicious_armor',
         'Malicious_armor',
         'Leaders_crest',
@@ -439,7 +442,9 @@ namespace GameConstants {
         Hoppy,
         Galar,
         Armor,
-        Crown
+        Crown,
+        Hisui,
+        Arceus
     }
     declare const EnergyRestoreEffect: {
         SmallRestore: number;
@@ -479,6 +484,7 @@ namespace GameConstants {
     declare const UnovaGyms: string[];
     declare const KalosGyms: string[];
     declare const GalarGyms: string[];
+    declare const HisuiGyms: string[];
     declare const PaldeaGyms: string[];
     declare const OrangeGyms: string[];
     declare const RegionGyms: string[][];
@@ -491,6 +497,7 @@ namespace GameConstants {
     declare const UnovaDungeons: string[];
     declare const KalosDungeons: string[];
     declare const GalarDungeons: string[];
+    declare const HisuiDungeons: string[];
     declare const PaldeaDungeons: string[];
     declare const RegionDungeons: string[][];
     declare function getDungeonIndex(dungeon: string): number;
@@ -560,6 +567,7 @@ namespace GameConstants {
         'Sunyshore City',
         'Survival Area',
         'Resort Area',
+        'Jubilife Village',
         'Castelia City',
         'Nimbasa City',
         'Driftveil City',
@@ -642,6 +650,9 @@ namespace GameConstants {
         IsleofArmor,
         CrownTundra,
     }
+    declare enum HisuiSubRegions {
+        Hisui,
+    }
     declare enum PaldeaSubRegions {
         Paldea,
     }
@@ -658,6 +669,7 @@ namespace GameConstants {
         | KalosSubRegions
         | AlolaSubRegions
         | GalarSubRegions
+        | HisuiSubRegions
         | PaldeaSubRegions
         | FinalSubRegions
 
@@ -706,6 +718,7 @@ namespace GameConstants {
     declare enum ExtraAchievementCategories {
         global,
         sevii,
+        orre,
         magikarpJump
     }
     declare const DayCycleStartHours: Record<DayCyclePart, number> = {

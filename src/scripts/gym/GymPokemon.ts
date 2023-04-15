@@ -3,10 +3,10 @@ class GymPokemon {
     maxHealth: number;
     level: number;
     shiny: boolean;
-    shadow: GameConstants.ShadowStatus; // Currently don't do anything. Will be added later
+    shadow: GameConstants.ShadowStatus;
     requirements: Requirement[];
 
-    constructor(name: PokemonNameType, maxHealth: number, level: number, requirements: Requirement | Requirement[] = [], shiny?: boolean, shadow?: GameConstants.ShadowStatus) {
+    constructor(name: PokemonNameType, maxHealth: number, level: number, requirements: Requirement | Requirement[] = [], shiny?: boolean, shadow = GameConstants.ShadowStatus.None) {
         this.name = name;
         this.maxHealth = maxHealth;
         this.level = level;
