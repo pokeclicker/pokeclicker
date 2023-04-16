@@ -2166,6 +2166,7 @@ class Update implements Saveable {
             updateMegaStone('Audinite', 531, 531.01); // Audino
             updateMegaStone('Beedrillite', 15, 15.01); // Beedrill
             //updateMegaStone('Blazikenite', 257, 257.01); // Blaziken
+            //updateMegaStone('Blue_Orb', 382, 382.01); // Kyogre
             updateMegaStone('Cameruptite', 323, 323.01); // Camerupt
             updateMegaStone('Diancite', 719, 719.01); // Diancie
             updateMegaStone('Galladite', 475, 475.01); // Gallade
@@ -2186,6 +2187,7 @@ class Update implements Saveable {
             updateMegaStone('Metagrossite', 376, 376.01); // Metagross
             updateMegaStone('Meteorite', 384, 384.01); // Rayquaza
             updateMegaStone('Pidgeotite', 18, 18.01); // Pidgeot
+            //updateMegaStone('Red_Orb', 383, 383.01); // Groudon
             updateMegaStone('Sablenite', 302, 302.01); // Sableye
             updateMegaStone('Salamencite', 373, 373.01); // Salamence
             //updateMegaStone('Sceptilite', 254, 254.01); // Sceptile

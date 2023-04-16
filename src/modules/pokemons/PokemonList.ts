@@ -490,8 +490,8 @@ export const pokemonList = createPokemonArray(
         'exp': 240,
         'eggCycles': 20,
         // 'evolutions': [
-        //     MegaEvolution(MegaStoneType.CharizarditeX, 'Charizard', 'Mega Charizard X'),
-        //     MegaEvolution(MegaStoneType.CharizarditeY, 'Charizard', 'Mega Charizard Y'),
+        //     MegaEvolution(MegaStoneType.Charizardite_X, 'Charizard', 'Mega Charizard X'),
+        //     MegaEvolution(MegaStoneType.Charizardite_Y, 'Charizard', 'Mega Charizard Y'),
         // ],
         'base': {
             'hitpoints': 78,
@@ -12112,7 +12112,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 302,
         'catchRate': 3,
-        'evolutions': [MegaEvolution('Kyogre', 'Primal Kyogre')],
+        'evolutions': [MegaEvolution(MegaStoneType.Blue_Orb, 'Kyogre', 'Primal Kyogre')],
         'base': {
             'hitpoints': 100,
             'attack': 100,
@@ -12153,7 +12153,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 302,
         'catchRate': 3,
-        'evolutions': [MegaEvolution('Groudon', 'Primal Groudon')],
+        'evolutions': [MegaEvolution(MegaStoneType.Red_Orb, 'Groudon', 'Primal Groudon')],
         'base': {
             'hitpoints': 100,
             'attack': 150,

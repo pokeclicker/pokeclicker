@@ -2444,7 +2444,7 @@ TemporaryBattleList['Primal Groudon'] = new TemporaryBattle(
         hideTrainer: true,
         returnTown: 'Mt. Pyre',
         imageName: '../pokemon/383.01',
-        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Groudon').giveMegastone(),
+        firstTimeRewardFunction: () => player.gainMegaStone(GameConstants.MegaStoneType.Red_Orb),
     }
 );
 TemporaryBattleList['Primal Kyogre'] = new TemporaryBattle(
@@ -2457,7 +2457,7 @@ TemporaryBattleList['Primal Kyogre'] = new TemporaryBattle(
         hideTrainer: true,
         returnTown: 'Mt. Pyre',
         imageName: '../pokemon/382.01',
-        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Kyogre').giveMegastone(),
+        firstTimeRewardFunction: () => player.gainMegaStone(GameConstants.MegaStoneType.Blue_Orb),
     }
 );
 TemporaryBattleList['Aipom Alley'] = new TemporaryBattle(
