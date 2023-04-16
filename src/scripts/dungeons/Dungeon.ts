@@ -8715,7 +8715,7 @@ dungeonList['Lake of the Sunne and Moone'] = new Dungeon('Lake of the Sunne and 
     1200000, 27);
 
 dungeonList['Ruins of Conflict'] = new Dungeon('Ruins of Conflict',
-    ['Floette (Yellow)', 'Comfey', 'Dedenne', 'Ampharos', 'Electabuzz'],
+    ['Floette (Yellow)', 'Comfey', 'Ampharos', 'Electabuzz'],
     {
         common: [
             {loot: 'Dowsing_machine'},
@@ -8734,12 +8734,13 @@ dungeonList['Ruins of Conflict'] = new Dungeon('Ruins of Conflict',
     [
         new DungeonBossPokemon('Luxray', 82177450, 55),
         new DungeonBossPokemon('Granbull', 82177450, 55),
+        new DungeonBossPokemon('Dedenne', 82177450, 55),
         new DungeonBossPokemon('Tapu Koko', 82543791, 60),
     ],
     1200000, 27);
 
 dungeonList['Ruins of Life'] = new Dungeon('Ruins of Life',
-    ['Floette (White)', 'Comfey', 'Gardevoir', 'Chimecho', 'Munna'],
+    ['Floette (White)', 'Comfey', 'Chimecho', 'Munna'],
     {
         common: [
             {loot: 'Dowsing_machine'},
@@ -8760,12 +8761,13 @@ dungeonList['Ruins of Life'] = new Dungeon('Ruins of Life',
     [
         new DungeonBossPokemon('Wobbuffet', 82177450, 55),
         new DungeonBossPokemon('Granbull', 82177450, 55),
+        new DungeonBossPokemon('Gardevoir', 82177450, 55),
         new DungeonBossPokemon('Tapu Lele', 82543791, 60),
     ],
     1200000, 27);
 
 dungeonList['Ruins of Abundance'] = new Dungeon('Ruins of Abundance',
-    ['Floette (Orange)', 'Comfey', 'Cottonee', 'Gloom', 'Petilil'],
+    ['Floette (Orange)', 'Comfey', 'Cottonee', 'Petilil'],
     {
         common: [
             {loot: 'xAttack'},
@@ -8784,12 +8786,13 @@ dungeonList['Ruins of Abundance'] = new Dungeon('Ruins of Abundance',
     [
         new DungeonBossPokemon('Maractus', 82177450, 55),
         new DungeonBossPokemon('Granbull', 82177450, 55),
+        new DungeonBossPokemon('Shiinotic', 82177450, 55),
         new DungeonBossPokemon('Tapu Bulu', 82543791, 60),
     ],
     1200000, 27);
 
 dungeonList['Ruins of Hope'] = new Dungeon('Ruins of Hope',
-    ['Floette (Blue)', 'Comfey', 'Azumarill', 'Poliwhirl', 'Clamperl'],
+    ['Floette (Blue)', 'Comfey', 'Poliwhirl', 'Clamperl'],
     {
         common: [
             {loot: 'Lucky_egg'},
@@ -8808,6 +8811,7 @@ dungeonList['Ruins of Hope'] = new Dungeon('Ruins of Hope',
     [
         new DungeonBossPokemon('Lumineon', 82177450, 55),
         new DungeonBossPokemon('Granbull', 82177450, 55),
+        new DungeonBossPokemon('Azumarill', 82177450, 55),
         new DungeonBossPokemon('Tapu Fini', 82543791, 60),
     ],
     1200000, 27);
