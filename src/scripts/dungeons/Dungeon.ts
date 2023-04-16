@@ -8894,6 +8894,7 @@ dungeonList['Resolution Cave'] = new Dungeon('Resolution Cave',
     [
         new DungeonBossPokemon('Golbat', 85572310, 59),
         new DungeonBossPokemon('Noivern', 85572310, 59),
+        new DungeonBossPokemon('Zygarde', 88406970, 60),
         new DungeonBossPokemon('Guzzlord', 90673816, 70),
     ],
     1250000, 30);
