@@ -6301,14 +6301,14 @@ dungeonList['Moor of Icirrus'] = new Dungeon('Moor of Icirrus',
     },
     5203000,
     [
-        new DungeonBossPokemon('Keldeo', 50000000, 100),
         new DungeonBossPokemon('Seismitoad', 48000000, 100),
         new DungeonBossPokemon('Whiscash', 48000000, 100),
+        new DungeonBossPokemon('Keldeo', 50000000, 100),
     ],
     356500, 8);
 
 dungeonList['Pledge Grove'] = new Dungeon('Pledge Grove',
-    ['Fearow', 'Furret', 'Ledian', 'Sudowoodo', 'Stantler', 'Breloom', 'Unfezant', 'Sawsbuck (Autumn)', 'Sawsbuck (Winter)'],
+    ['Fearow', 'Furret', 'Ledian', 'Sudowoodo', 'Stantler', 'Breloom', 'Sawsbuck (Spring)', 'Sawsbuck (Summer)', 'Sawsbuck (Autumn)', 'Sawsbuck (Winter)'],
     {
         common: [
             {loot: 'Lucky_egg'},
@@ -6328,7 +6328,11 @@ dungeonList['Pledge Grove'] = new Dungeon('Pledge Grove',
         ],
     },
     5203000,
-    [new DungeonBossPokemon('Keldeo (Resolute)', 52000000, 100)],
+    [
+        new DungeonBossPokemon('Unfezant', 50000000, 100),
+        new DungeonBossPokemon('Politoed', 50000000, 100),
+        new DungeonBossPokemon('Keldeo (Resolute)', 52000000, 100),
+    ],
     356500, 8);
 
 dungeonList['Pinwheel Forest'] = new Dungeon('Pinwheel Forest',
