@@ -2,9 +2,8 @@ import QuestLineState from '../quests/QuestLineState';
 import Item from './Item';
 
 export default class QuestItem extends Item {
-    constructor(name: string, displayName : string, description : string, private questlineName : string, private endQuestlineName : string = undefined) {
+    constructor(name: string, displayName : string, description : string, private questlineName : string, private endQuestlineName = questlineName) {
         super(name, undefined, undefined, undefined, displayName, description, 'quest');
-        endQuestlineName = endQuestlineName ?? questlineName;
     }
 
     public isActive() : boolean {
