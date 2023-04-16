@@ -6842,13 +6842,13 @@ dungeonList['Reflection Cave'] = new Dungeon('Reflection Cave',
             [
                 new GymPokemon('Absol', 33468400, 26),
                 new GymPokemon('Pinsir', 37474200, 25),
-            ], { weight: 1 }, 'Emil', '(male)'),
+            ], { weight: 1.5 }, 'Emil', '(male)'),
         new DungeonTrainer('Ace Trainer',
             [
                 new GymPokemon('Doduo', 20365400, 24),
                 new GymPokemon('Granbull', 23366400, 24),
                 new GymPokemon('Helioptile', 25476400, 25),
-            ], { weight: 1 }, 'Monique', '(female)'),
+            ], { weight: 1.5 }, 'Monique', '(female)'),
         new DungeonBossPokemon('Diancie', 69694200, 100, {requirement: new QuestLineStepCompletedRequirement('Princess Diancie', 7)}),
     ],
     555000, 11);
@@ -6917,7 +6917,7 @@ dungeonList['Kalos Power Plant'] = new Dungeon('Kalos Power Plant',
     7903570,
     [
         new DungeonTrainer('Team Flare Aliana',
-            [new GymPokemon('Mightyena', 75384400, 38)], { weight: 1 }),
+            [new GymPokemon('Mightyena', 75384400, 38)], { weight: 3 }),
         new DungeonBossPokemon('Volcanion', 83945700, 100,
             {
                 requirement: new MultiRequirement([
