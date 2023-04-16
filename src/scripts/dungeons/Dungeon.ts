@@ -8705,8 +8705,9 @@ dungeonList['Lake of the Sunne and Moone'] = new Dungeon('Lake of the Sunne and 
     },
     16435490,
     [
-        new DungeonBossPokemon('Solrock', 82177450, 60, {hide: true, requirement: new ObtainedPokemonRequirement('Cosmog', true)}),
-        new DungeonBossPokemon('Lunatone', 82177450, 60, {hide: true, requirement: new ObtainedPokemonRequirement('Cosmog', true)}),
+        new DungeonBossPokemon('Minior (Meteor)', 82177450, 60, {hide: true, requirement: new ObtainedPokemonRequirement('Cosmog', true)}),
+        new DungeonBossPokemon('Minior (Yellow Core)', 82177450, 60, {hide: true, requirement: new ObtainedPokemonRequirement('Cosmog', true)}),
+        new DungeonBossPokemon('Minior (Violet Core)', 82177450, 60, {hide: true, requirement: new ObtainedPokemonRequirement('Cosmog', true)}),
         new DungeonBossPokemon('Cosmog', 82177450, 70),
         new DungeonBossPokemon('Cosmoem', 82177450, 70, {hide: true, requirement: new ObtainedPokemonRequirement('Cosmoem')}),
         new DungeonBossPokemon('Solgaleo', 90673816, 100, {hide: true, requirement: new MultiRequirement([new ObtainedPokemonRequirement('Solgaleo'), new ObtainedPokemonRequirement('Necrozma')])}),
