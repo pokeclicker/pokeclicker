@@ -3636,14 +3636,14 @@ dungeonList['Cipher Lab Battles'] = new Dungeon('Cipher Lab Battles',
     [],
     40000, 131);
 
-dungeonList['Realgam Tower Battles'] = new Dungeon('Phenac City Battles',
+dungeonList['Realgam Tower Battles'] = new Dungeon('Realgam Tower Battles',
     [],
     {},
     560000,
     [],
     40000, 131);
 
-dungeonList['Realgam Colosseum Battles'] = new Dungeon('Phenac City Battles',
+dungeonList['Realgam Colosseum Battles'] = new Dungeon('Realgam Colosseum Battles',
     [],
     {},
     560000,
