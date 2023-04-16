@@ -3303,7 +3303,7 @@ TownList['Under Colosseum Battles'] = new DungeonTown(
     ]
 );
 TownList['Orre Colosseum Battles'] = new DungeonTown(
-    'Under Colosseum Battles',
+    'Orre Colosseum Battles',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [

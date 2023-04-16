@@ -2137,6 +2137,7 @@ class Update implements Saveable {
             saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 116);
             saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 117);
             saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 118);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 119);
 
             // Mega Stones are items now!
             // Give the player the Mega Stone if they own the Mega form or have the mega stone on the base form.
