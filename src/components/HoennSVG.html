@@ -1070,6 +1070,26 @@
      %>
 
      <%- include('templates/mapOverlay',
+         { name: "Primal Groudon"
+        , x: 64, y: 18
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Primal Groudon'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Primal Groudon'] && TemporaryBattleList['Primal Groudon'].isVisible()"
+         , image: "assets/images/map/primalgroudon.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Primal Kyogre"
+        , x: 68, y: 22
+         , width: 5, height: 5
+         , databind: "click: () => TemporaryBattleList['Primal Kyogre'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Primal Kyogre'] && TemporaryBattleList['Primal Kyogre'].isVisible()"
+         , image: "assets/images/map/primalkyogre.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
          { name: "Ash Ketchum"
          , x: 50, y: 10
          , width: 4, height: 4
