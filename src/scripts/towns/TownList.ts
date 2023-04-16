@@ -2833,7 +2833,7 @@ TownList['Phenac City'] = new Town(
     'Phenac City',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new MoveToDungeon(dungeonList['Phenac City Battles'])],
+    [new MoveToTown('Phenac Stadium'), new MoveToDungeon(dungeonList['Phenac City Battles'])],
     {
         requirements: [new DevelopmentRequirement()],
     }
@@ -2843,7 +2843,7 @@ TownList['Phenac Stadium'] = new Town(
     'Phenac Stadium',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new MoveToDungeon(dungeonList['Phenac Stadium Battles'])],
+    [new MoveToTown('Phenac City', undefined, false), new MoveToDungeon(dungeonList['Phenac Stadium Battles'])],
     {
         requirements: [new DevelopmentRequirement()],
     }
@@ -2853,7 +2853,7 @@ TownList['Pyrite Town'] = new Town(
     'Pyrite Town',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new MoveToDungeon(dungeonList['Pyrite Town Battles'])],
+    [new MoveToTown('Pyrite Colosseum'), new MoveToTown('The Under'), new MoveToDungeon(dungeonList['Pyrite Town Battles'])],
     {
         requirements: [new DevelopmentRequirement()],
     }
@@ -2863,7 +2863,7 @@ TownList['Pyrite Colosseum'] = new Town(
     'Pyrite Colosseum',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new MoveToDungeon(dungeonList['Pyrite Colosseum Battles'])],
+    [new MoveToTown('Pyrite Town', undefined, false), new MoveToDungeon(dungeonList['Pyrite Colosseum Battles'])],
     {
         requirements: [new DevelopmentRequirement()],
     }
@@ -2873,7 +2873,7 @@ TownList['Agate Village'] = new Town(
     'Agate Village',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new MoveToDungeon(dungeonList['Relic Cave'])],
+    [new MoveToTown('Relic Stone'), new MoveToDungeon(dungeonList['Relic Cave'])],
     {
         requirements: [new DevelopmentRequirement()],
     }
@@ -2883,7 +2883,7 @@ TownList['Relic Stone'] = new Town(
     'Relic Stone',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new MoveToDungeon(dungeonList['Relic Cave']), new PurifyChamberTownContent()],
+    [new MoveToTown('Agate Village', undefined, false), new MoveToDungeon(dungeonList['Relic Cave']), new PurifyChamberTownContent()],
     {
         requirements: [new DevelopmentRequirement()],
     }
@@ -2903,7 +2903,7 @@ TownList['The Under'] = new Town(
     'The Under',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new MoveToDungeon(dungeonList['The Under Subway'])],
+    [new MoveToTown('Pyrite Town', undefined, false), new MoveToTown('Under Colosseum'), new MoveToTown('Deep Colosseum'), new MoveToDungeon(dungeonList['The Under Subway'])],
     {
         requirements: [new DevelopmentRequirement()],
     }
@@ -2923,7 +2923,7 @@ TownList['Realgam Tower'] = new Town(
     'Realgam Tower',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new MoveToDungeon(dungeonList['Realgam Tower Battles'])],
+    [new MoveToTown('Realgam Colosseum'), new MoveToDungeon(dungeonList['Realgam Tower Battles'])],
     {
         requirements: [new DevelopmentRequirement()],
     }
@@ -2933,7 +2933,7 @@ TownList['Realgam Colosseum'] = new Town(
     'Realgam Colosseum',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new MoveToDungeon(dungeonList['Realgam Colosseum Battles'])],
+    [new MoveToTown('Realgam Tower', undefined, false), new MoveToDungeon(dungeonList['Realgam Colosseum Battles'])],
     {
         requirements: [new DevelopmentRequirement()],
     }
@@ -2953,7 +2953,7 @@ TownList['Deep Colosseum'] = new Town(
     'Deep Colosseum',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new MoveToDungeon(dungeonList['Deep Colosseum Battles'])],
+    [new MoveToTown('The Under', undefined, false), new MoveToDungeon(dungeonList['Deep Colosseum Battles'])],
     {
         requirements: [new DevelopmentRequirement()],
     }
@@ -2973,7 +2973,7 @@ TownList['Under Colosseum'] = new Town(
     'Under Colosseum',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new MoveToDungeon(dungeonList['Under Colosseum Battles'])],
+    [new MoveToTown('The Under', undefined, false), new MoveToDungeon(dungeonList['Under Colosseum Battles'])],
     {
         requirements: [new DevelopmentRequirement()],
     }
@@ -3303,7 +3303,7 @@ TownList['Under Colosseum Battles'] = new DungeonTown(
     ]
 );
 TownList['Orre Colosseum Battles'] = new DungeonTown(
-    'Under Colosseum Battles',
+    'Orre Colosseum Battles',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
@@ -5059,7 +5059,7 @@ const LumioseDexio = new NPC('Dexio', [
 const Lysandre1 = new NPC('Lysandre', [
     'Oh! You\'ve already met professor Sycamore... How wonderful! That is a wonderful thing, indeed. You are one of the chosen ones.',
     'I am Lysandre. I\'ve tried to learn as much about Pokémon as I can to help build a brighter future. Professor Sycamore has taught me so much.',
-    'Now listen! It is vital that this world become a better place. And the people and Pokémon chosen to make the world better must work tirelessly to achieve this goal.',
+    'Now listen! It is vital that this world becomes a better place. And the people and Pokémon chosen to make the world better must work tirelessly to achieve this goal.',
     'Well, I\'ll be off. Please give Professor Sycamore my best. My desire... it is for a more beautiful world!',
 ], {image: 'assets/images/npcs/Team Flare Lysandre.png',
     requirement: new MultiRequirement([new QuestLineStartedRequirement('A Beautiful World'), new QuestLineStepCompletedRequirement('A Beautiful World', 1, GameConstants.AchievementOption.less)]),
@@ -5377,6 +5377,13 @@ const VivillonPhotobook = new NPC('Vivillon Photobook', [
     '<i>Lastly, you see a Poké Ball Vivillon in a darkened mall. It\'s trying to scare the camerawoman, completely unaware of the sinister eyes peering from the darkness behind it.</i>',
 ]);
 
+const FriendlyAttendant = new NPC('Friendly Attendant', [
+    'Welcome to the Friend Safari!',
+    'This place is a lot like the Kanto Safari Zone, except we get a much wider variety of Pokémon coming through here.',
+    'Our park staff stocks the Safari with different hard-to-find Pokémon every day. Many of these Pokémon can\'t be caught anywhere else in the world!',
+    'As new and rare types of Pokémon are discovered, park staff will add them to our rotation of potential stock!',
+]);
+
 //Kalos Towns
 
 TownList['Vaniville Town'] = new Town(
@@ -5564,6 +5571,7 @@ TownList['Friend Safari'] = new Town(
     [new SafariTownContent()],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion), new DevelopmentRequirement()],
+        npcs: [FriendlyAttendant],
     }
 );
 
