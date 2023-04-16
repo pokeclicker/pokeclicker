@@ -4805,6 +4805,7 @@ dungeonList['Snowpoint Temple'] = new Dungeon('Snowpoint Temple',
     },
     2603000,
     [
+        new DungeonBossPokemon('Steelix', 10000000, 100),
         new DungeonBossPokemon('Jynx', 10000000, 100),
         new DungeonBossPokemon('Regigigas', 11000000, 100),
     ],
