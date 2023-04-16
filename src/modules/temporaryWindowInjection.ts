@@ -160,6 +160,7 @@ import CaughtIndicatingItem from './items/CaughtIndicatingItem';
 import EggItem from './items/EggItem';
 import MegaStoneItem from './items/MegaStoneItem';
 import PokeballItem from './items/PokeballItem';
+import QuestItem from './items/QuestItem';
 import Vitamin from './items/Vitamin';
 import VitaminController from './items/VitaminController';
 import RoamingPokemonList from './pokemons/RoamingPokemonList';
@@ -344,6 +345,7 @@ Object.assign(<any>window, {
     EggItem,
     MegaStoneItem,
     PokeballItem,
+    QuestItem,
     Vitamin,
     VitaminController,
     RoamingPokemonList,
