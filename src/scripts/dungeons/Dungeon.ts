@@ -4715,11 +4715,11 @@ dungeonList['Hall of Origin'] = new Dungeon('Hall of Origin',
     },
     2653000,
     [
-        new DungeonBossPokemon('Arceus (Normal)', 13000000, 100),
         new DungeonBossPokemon('Slaking', 10000000, 100),
         new DungeonBossPokemon('Snorlax', 10000000, 100),
         new DungeonBossPokemon('Shuckle', 10000000, 100),
         new DungeonBossPokemon('Blissey', 10000000, 100),
+        new DungeonBossPokemon('Arceus (Normal)', 13000000, 100),
     ],
     106500, 230);
 
@@ -4734,11 +4734,14 @@ dungeonList['Fullmoon Island'] = new Dungeon('Fullmoon Island',
         epic: [{loot: 'Mind Plate'}],
     },
     2603000,
-    [new DungeonBossPokemon('Clefable', 11000000, 100)],
+    [
+        new DungeonBossPokemon('Lunatone', 11000000, 100),
+        new DungeonBossPokemon('Clefable', 11000000, 100),
+    ],
     96500, 230);
 
 dungeonList['Newmoon Island'] = new Dungeon('Newmoon Island',
-    ['Volbeat', 'Plusle', 'Absol', 'Luvdisc'],
+    ['Volbeat', 'Plusle', 'Sneasel', 'Luvdisc'],
     {
         common: [
             {loot: 'Lucky_egg', weight: 2},
@@ -4749,7 +4752,11 @@ dungeonList['Newmoon Island'] = new Dungeon('Newmoon Island',
         legendary: [{loot: 'Black_Glasses'}],
     },
     2603000,
-    [new DungeonBossPokemon('Darkrai', 11000000, 100)],
+    [
+        new DungeonBossPokemon('Lunatone', 9900000, 100),
+        new DungeonBossPokemon('Absol', 9900000, 100),
+        new DungeonBossPokemon('Darkrai', 11000000, 100),
+    ],
     96500, 230);
 
 dungeonList['Flower Paradise'] = new Dungeon('Flower Paradise',
@@ -4772,7 +4779,7 @@ dungeonList['Flower Paradise'] = new Dungeon('Flower Paradise',
     2603000,
     [
         new DungeonBossPokemon('Parasect', 9900000, 50),
-        new DungeonBossPokemon('Breloom', 11000000, 50),
+        new DungeonBossPokemon('Breloom', 9900000, 50),
         new DungeonBossPokemon('Shaymin (Land)', 11000000, 50),
         new DungeonBossPokemon('Shaymin (Sky)', 11000000, 50, {requirement: new ObtainedPokemonRequirement('Shaymin (Land)')}),
     ],
