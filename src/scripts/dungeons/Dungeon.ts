@@ -3269,7 +3269,7 @@ dungeonList['Seafloor Cavern'] = new Dungeon('Seafloor Cavern',
     32000, 101);
 
 dungeonList['Sky Pillar'] = new Dungeon('Sky Pillar',
-    ['Golbat', 'Sableye', 'Claydol', 'Banette', 'Mawile', 'Altaria'],
+    ['Golbat', 'Sableye', 'Ariados', 'Banette', 'Mawile', 'Swablu'],
     {
         common: [
             {loot: 'xAttack', weight: 4},
@@ -3289,6 +3289,8 @@ dungeonList['Sky Pillar'] = new Dungeon('Sky Pillar',
     },
     720000,
     [
+        new DungeonBossPokemon('Claydol', 3200000, 20),
+        new DungeonBossPokemon('Altaria', 3200000, 20),
         new DungeonBossPokemon('Dusclops', 3200000, 20),
         new DungeonBossPokemon('Rayquaza', 5824002, 100, {requirement: new QuestLineStepCompletedRequirement('The Weather Trio', 5)}),
     ],
