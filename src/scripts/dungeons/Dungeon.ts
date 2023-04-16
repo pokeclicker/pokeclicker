@@ -6206,7 +6206,7 @@ dungeonList['Twist Mountain'] = new Dungeon('Twist Mountain',
     356500, 7);
 
 dungeonList['Dragonspiral Tower'] = new Dungeon('Dragonspiral Tower',
-    ['Dratini', 'Dragonair', 'Tranquill', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Vanillish', 'Sawsbuck (Spring)', 'Sawsbuck (Summer)', 'Sawsbuck (Autumn)', 'Sawsbuck (Winter)', 'Beartic', 'Mienfoo', 'Mienshao', 'Druddigon', 'Golett', 'Golurk'],
+    ['Dratini', 'Dragonair', 'Tranquill', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Vanillish', 'Sawsbuck (Spring)', 'Sawsbuck (Summer)', 'Sawsbuck (Autumn)', 'Sawsbuck (Winter)', 'Beartic', 'Mienfoo', 'Mienshao', 'Golett', 'Golurk'],
     {
         common: [
             {loot: 'xAttack', weight: 2},
@@ -6238,6 +6238,7 @@ dungeonList['Dragonspiral Tower'] = new Dungeon('Dragonspiral Tower',
     },
     5203000,
     [
+        new DungeonBossPokemon('Druddigon', 48000000, 100),
         new DungeonBossPokemon('Dragonite', 48000000, 100),
         new DungeonBossPokemon('Reshiram', 50000000, 100),
         new DungeonBossPokemon('Zekrom', 50000000, 100),
