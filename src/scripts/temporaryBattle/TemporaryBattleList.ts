@@ -2437,7 +2437,7 @@ TemporaryBattleList['Maxie Primal'] = new TemporaryBattle(
 TemporaryBattleList['Primal Groudon'] = new TemporaryBattle(
     'Primal Groudon',
     [new GymPokemon('Primal Groudon', 293674710, 100)],
-    '<i>Primal Groudon lets out a terrifying roar, then drops the Red Orb and returns to its normal form.</i></br><img src="assets/images/megaStone/383.png"/>',
+    '<i>Primal Groudon lets out a terrifying roar, then drops the Red Orb and returns to its normal form.</i></br><img src="assets/images/megaStone/Red_Orb.png"/>',
     [new MultiRequirement([new QuestLineStepCompletedRequirement('Primal Reversion', 14), new WeatherRequirement([WeatherType.Sunny])])],
     undefined,
     {
@@ -2450,7 +2450,7 @@ TemporaryBattleList['Primal Groudon'] = new TemporaryBattle(
 TemporaryBattleList['Primal Kyogre'] = new TemporaryBattle(
     'Primal Kyogre',
     [new GymPokemon('Primal Kyogre', 293674710, 100)],
-    '<i>Primal Kyogre lets out a terrifying roar, then drops the Blue Orb and returns to its normal form.</i></br><img src="assets/images/megaStone/382.png"/>',
+    '<i>Primal Kyogre lets out a terrifying roar, then drops the Blue Orb and returns to its normal form.</i></br><img src="assets/images/megaStone/Blue_Orb.png"/>',
     [new MultiRequirement([new QuestLineStepCompletedRequirement('Primal Reversion', 14), new WeatherRequirement([WeatherType.Rain])])],
     undefined,
     {
