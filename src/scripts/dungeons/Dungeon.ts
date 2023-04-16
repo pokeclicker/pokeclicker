@@ -3687,6 +3687,7 @@ dungeonList['Orre Colosseum Battles'] = new Dungeon('Orre Colosseum Battles',
 
 // Sinnoh
 
+// Sinnoh Dungeons
 dungeonList['Oreburgh Gate'] = new Dungeon('Oreburgh Gate',
     [
         {pokemon: 'Zubat', options: { weight: 1.1 }},
@@ -4921,7 +4922,7 @@ dungeonList['Stark Mountain'] = new Dungeon('Stark Mountain',
     ],
     96500, 230);
 
-// Unova
+// Unova Dungeons
 
 dungeonList['Floccesy Ranch'] = new Dungeon('Floccesy Ranch',
     [
@@ -6626,7 +6627,7 @@ dungeonList['P2 Laboratory'] = new Dungeon('P2 Laboratory',
     ],
     396500, 18);
 
-// Kalos
+// Kalos Dungeons
 
 dungeonList['Santalune Forest'] = new Dungeon('Santalune Forest',
     [
@@ -7563,7 +7564,7 @@ dungeonList['Victory Road Kalos'] = new Dungeon('Victory Road Kalos',
 
 //Unknown Dungeon? Contains Mewtwo.
 
-// Alola
+// Alola Dungeons
 
 dungeonList['Trainers\' School'] = new Dungeon('Trainers\' School',
     [
@@ -9610,3 +9611,282 @@ dungeonList['Crown Shrine'] = new Dungeon('Crown Shrine',
         new DungeonBossPokemon('Calyrex', 169578810, 80, { hide: true, requirement: new QuestLineStepCompletedRequirement('The Crown of Galar', 8) }),
     ],
     2200000, 55);
+
+//Hisui Dungeons
+
+dungeonList['Oreburrow Tunnel'] = new Dungeon('Oreburrow Tunnel',
+    ['Geodude', 'Machop', 'Zubat', 'Happiny'],
+    {
+        common: [
+            {loot: 'Token_collector', weight: 2},
+            {loot: 'Aspear'},
+        ],
+    },
+    2603000,
+    [new DungeonBossPokemon('Graveler', 10000000, 28)],
+    96500, 1);
+
+dungeonList.Heartwood = new Dungeon('Heartwood',
+    ['Geodude', 'Zubat', 'Golbat', 'Psyduck', 'Wurmple', 'Silcoon', 'Cascoon', 'Combee', 'Buneary'],
+    {
+        common: [
+            {loot: 'Token_collector', weight: 2},
+            {loot: 'Aspear'},
+        ],
+    },
+    2603000,
+    [
+        new DungeonBossPokemon('Scyther', 10000000, 31),
+        new DungeonBossPokemon('Beautifly', 10000000, 31),
+        new DungeonBossPokemon('Dustox', 10000000, 31),
+    ],
+    96500, 1);
+
+dungeonList['Shrouded Ruins'] = new Dungeon('Shrouded Ruins',
+    ['Geodude', 'Graveler', 'Rhyhorn', 'Gastly', 'Haunter', 'Lickitung', 'Ralts', 'Kirlia', 'Carnivine', 'Burmy (Sand)'],
+    {
+        common: [
+            {loot: 'Token_collector', weight: 2},
+            {loot: 'Aspear'},
+        ],
+    },
+    2603000,
+    [
+        new DungeonBossPokemon('Lickilicky', 10000000, 52),
+        new DungeonBossPokemon('Spiritomb', 10000000, 80),
+    ],
+    96500, 1);
+
+dungeonList['Veilstone Cape'] = new Dungeon('Veilstone Cape',
+    ['Glameow', 'Murkrow', 'Vulpix', 'Mothim', 'Burmy (Trash)', 'Wormadam (Trash)', 'Geodude', 'Graveler'],
+    {
+        common: [
+            {loot: 'Token_collector', weight: 2},
+            {loot: 'Aspear'},
+        ],
+    },
+    2603000,
+    [
+        new DungeonBossPokemon('Purugly', 10000000, 45),
+        new DungeonBossPokemon('Beautifly', 10000000, 47),
+        new DungeonBossPokemon('Dustox', 10000000, 47),
+        new DungeonBossPokemon('Hisuian Growlithe', 10000000, 47),
+    ],
+    96500, 1);
+
+dungeonList['Firespit Island'] = new Dungeon('Firespit Island',
+    ['Graveler', 'Magby', 'Magmar'],
+    {
+        common: [
+            {loot: 'Token_collector', weight: 2},
+            {loot: 'Aspear'},
+        ],
+    },
+    2603000,
+    [new DungeonBossPokemon('Ninetales', 10000000, 61)],
+    96500, 1);
+
+dungeonList['Ancient Wayward Cave'] = new Dungeon('Ancient Wayward Cave',
+    ['Zubat', 'Golbat', 'Barboach', 'Whiscash', 'Gible'],
+    {
+        common: [
+            {loot: 'Token_collector', weight: 2},
+            {loot: 'Aspear'},
+        ],
+    },
+    2603000,
+    [new DungeonBossPokemon('Crobat', 10000000, 60)],
+    96500, 1);
+
+dungeonList['Ancient Quarry'] = new Dungeon('Ancient Quarry',
+    ['Bronzor'],
+    {
+        common: [
+            {loot: 'Token_collector', weight: 2},
+            {loot: 'Aspear'},
+        ],
+    },
+    2603000,
+    [new DungeonBossPokemon('Bronzong', 10000000, 55)],
+    96500, 1);
+
+dungeonList['Primeval Grotto'] = new Dungeon('Primeval Grotto',
+    ['Bronzor'],
+    {
+        common: [
+            {loot: 'Token_collector', weight: 2},
+            {loot: 'Aspear'},
+        ],
+    },
+    2603000,
+    [new DungeonBossPokemon('Nosepass', 10000000, 71)],
+    96500, 1);
+
+dungeonList['Clamberclaw Cliffs'] = new Dungeon('Clamberclaw Cliffs',
+    ['Gligar', 'Geodude', 'Graveler', 'Gastly', 'Haunter', 'Gible', 'Burmy (Sand)', 'Wormadam (Sand)', 'Bronzor'],
+    {
+        common: [
+            {loot: 'Token_collector', weight: 2},
+            {loot: 'Aspear'},
+        ],
+    },
+    2603000,
+    [
+        new DungeonBossPokemon('Bronzong', 10000000, 44),
+        new DungeonBossPokemon('Gabite', 10000000, 47),
+        new DungeonBossPokemon('Darkrai', 10000000, 70),
+    ],
+    96500, 1);
+
+dungeonList['Celestica Ruins'] = new Dungeon('Celestica Ruins',
+    ['Geodude', 'Graveler', 'Nosepass', 'Gligar', 'Burmy (Sand)', 'Gastly', 'Haunter', 'Bonsly', 'Misdreavus'],
+    {
+        common: [
+            {loot: 'Token_collector', weight: 2},
+            {loot: 'Aspear'},
+        ],
+    },
+    2603000,
+    [
+        new DungeonBossPokemon('Sudowoodo', 10000000, 57),
+        new DungeonBossPokemon('Wormadam (Sand)', 10000000, 57),
+    ],
+    96500, 1);
+
+dungeonList['Sacred Plaza'] = new Dungeon('Sacred Plaza',
+    ['Geodude', 'Graveler', 'Rhyhorn', 'Gastly', 'Haunter', 'Burmy (Sand)', 'Wormadam (Sand)', 'Nosepass', 'Luxio', 'Chingling', 'Chimecho', 'Misdreavus', 'Rotom', 'Hisuian Voltorb'],
+    {
+        common: [
+            {loot: 'Token_collector', weight: 2},
+            {loot: 'Aspear'},
+        ],
+    },
+    2603000,
+    [
+        new DungeonBossPokemon('Rhydon', 10000000, 71),
+        new DungeonBossPokemon('Luxray', 10000000, 55),
+    ],
+    96500, 1);
+
+dungeonList['Crevasse Passage'] = new Dungeon('Crevasse Passage',
+    ['Bergmite'],
+    {
+        common: [
+            {loot: 'Token_collector', weight: 2},
+            {loot: 'Aspear'},
+        ],
+    },
+    2603000,
+    [new DungeonBossPokemon('Bergmite', 10000000, 51)],
+    96500, 1);
+
+dungeonList['Avalugg\'s Legacy'] = new Dungeon('Avalugg\'s Legacy',
+    ['Bergmite', 'Swinub', 'Piloswine', 'Drifloon', 'Drifblim', 'Bibarel', 'Glalie', 'Froslass'],
+    {
+        common: [
+            {loot: 'Token_collector', weight: 2},
+            {loot: 'Aspear'},
+        ],
+    },
+    2603000,
+    [
+        new DungeonBossPokemon('Mamoswine', 10000000, 68),
+        new DungeonBossPokemon('Hisuian Avalugg', 10000000, 51),
+    ],
+    96500, 1);
+
+dungeonList['Ice Column Chamber'] = new Dungeon('Ice Column Chamber',
+    ['Bergmite', 'Misdreavus'],
+    {
+        common: [
+            {loot: 'Token_collector', weight: 2},
+            {loot: 'Aspear'},
+        ],
+    },
+    2603000,
+    [new DungeonBossPokemon('Froslass', 10000000, 72)],
+    96500, 1);
+
+dungeonList['Icepeak Cavern'] = new Dungeon('Icepeak Cavern',
+    ['Bergmite', 'Misdreavus', 'Hisuian Zorua'],
+    {
+        common: [
+            {loot: 'Token_collector', weight: 2},
+            {loot: 'Aspear'},
+        ],
+    },
+    2603000,
+    [new DungeonBossPokemon('Hisuian Zoroark', 10000000, 67)],
+    96500, 1);
+
+dungeonList['Ancient Snowpoint Temple'] = new Dungeon('Ancient Snowpoint Temple',
+    ['Zubat', 'Golbat', 'Graveler', 'Ralts', 'Kirlia', 'Glalie', 'Froslass', 'Bronzor', 'Bronzong'],
+    {
+        common: [
+            {loot: 'Token_collector', weight: 2},
+            {loot: 'Aspear'},
+        ],
+    },
+    2603000,
+    [
+        new DungeonBossPokemon('Gallade', 10000000, 70),
+        new DungeonBossPokemon('Regigigas', 10000000, 70),
+    ],
+    96500, 1);
+
+dungeonList['Seaside Hollow'] = new Dungeon('Seaside Hollow',
+    ['Octillery', 'Phione'],
+    {
+        common: [
+            {loot: 'Token_collector', weight: 2},
+            {loot: 'Aspear'},
+        ],
+    },
+    2603000,
+    [new DungeonBossPokemon('Manaphy', 10000000, 50)],
+    96500, 1);
+
+dungeonList['Ancient Lake Verity'] = new Dungeon('Ancient Lake Verity',
+    ['Magikarp', 'Gyarados', 'Luxio', 'Luxray', 'Wormadam (Plant)', 'Drifblim', 'Togekiss'],
+    {
+        common: [
+            {loot: 'Token_collector', weight: 2},
+            {loot: 'Aspear'},
+        ],
+    },
+    2603000,
+    [
+        new DungeonBossPokemon('Hisuian Goodra', 10000000, 58),
+        new DungeonBossPokemon('Mesprit', 10000000, 70),
+    ],
+    96500, 1);
+
+dungeonList['Ancient Lake Valor'] = new Dungeon('Ancient Lake Valor',
+    ['Graveler', 'Barboach', 'Whiscash'],
+    {
+        common: [
+            {loot: 'Token_collector', weight: 2},
+            {loot: 'Aspear'},
+        ],
+    },
+    2603000,
+    [
+        new DungeonBossPokemon('Overqwil', 10000000, 58),
+        new DungeonBossPokemon('Azelf', 10000000, 70),
+    ],
+    96500, 1);
+
+dungeonList['Ancient Lake Acuity'] = new Dungeon('Ancient Lake Acuity',
+    ['Abra', 'Kadabra', 'Chingling', 'Chimecho', 'Burmy (Trash)', 'Wormadam (Trash)', 'Rufflet', 'Basculin (White-Striped)'],
+    {
+        common: [
+            {loot: 'Token_collector', weight: 2},
+            {loot: 'Aspear'},
+        ],
+    },
+    2603000,
+    [
+        new DungeonBossPokemon('Hisuian Zoroark', 10000000, 58),
+        new DungeonBossPokemon('Uxie', 10000000, 70),
+    ],
+    96500, 1);

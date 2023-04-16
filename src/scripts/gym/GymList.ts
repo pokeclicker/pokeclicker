@@ -2104,3 +2104,75 @@ GymList['Elite Trainer Peony'] = new Gym(
     undefined,
     'Peony Elite'
 );
+
+// Hisui Gyms
+
+GymList['Grandtree Arena'] = new Gym(
+    'Lord of the Woods: Kleavor',
+    'Grandtree Arena',
+    [new GymPokemon('Noble Kleavor', 76658268, 70)],
+    BadgeEnums.Elite_NobleKleavor,
+    128000,
+    'You defeated Lord Kleavor once again!',
+    [new DevelopmentRequirement()],
+    undefined, undefined, 'Lord Kleavor'
+);
+GymList['Brava Arena'] = new Gym(
+    'Lady of the Ridge: Lilligant',
+    'Brava Arena',
+    [new GymPokemon('Noble Lilligant', 76658268, 70)],
+    BadgeEnums.Elite_NobleLilligant,
+    128000,
+    'You defeated Lady Lilligant once again!',
+    [new DevelopmentRequirement()],
+    undefined, undefined, 'Lady Lilligant'
+);
+GymList['Molten Arena'] = new Gym(
+    'Lord of the Isles: Arcanine',
+    'Molten Arena',
+    [new GymPokemon('Noble Arcanine', 76658268, 70)],
+    BadgeEnums.Elite_NobleArcanine,
+    128000,
+    'You defeated Lord Arcanine once again!',
+    [new DevelopmentRequirement()],
+    undefined, undefined, 'Lord Arcanine'
+);
+GymList['Moonview Arena'] = new Gym(
+    'Lord of the Hollow: Electrode',
+    'Moonview Arena',
+    [new GymPokemon('Noble Electrode', 76658268, 70)],
+    BadgeEnums.Elite_NobleElectrode,
+    128000,
+    'You defeated Lord Electrode once again!',
+    [new DevelopmentRequirement()],
+    undefined, undefined, 'Lord Electrode'
+);
+GymList['Icepeak Arena'] = new Gym(
+    'Lord of the Tundra: Avalugg',
+    'Icepeak Arena',
+    [new GymPokemon('Noble Avalugg', 76658268, 70)],
+    BadgeEnums.Elite_NobleAvalugg,
+    128000,
+    'You defeated Lord Avalugg once again!',
+    [new DevelopmentRequirement()],
+    undefined, undefined, 'Lord Avalugg'
+);
+GymList['Temple of Sinnoh'] = new Gym(
+    'Volo',
+    'Temple of Sinnoh',
+    [
+        new GymPokemon('Spiritomb', 348526193, 68),
+        new GymPokemon('Roserade', 348526193, 68),
+        new GymPokemon('Togekiss', 348526193, 68),
+        new GymPokemon('Hisuian Arcanine', 348526193, 68),
+        new GymPokemon('Lucario', 348526193, 68),
+        new GymPokemon('Garchomp', 348526193, 68),
+        new GymPokemon('Giratina (Altered)', 348526193, 70, new TemporaryBattleRequirement('Volo 3')),
+        new GymPokemon('Giratina (Origin)', 348526193, 70, new TemporaryBattleRequirement('Volo 3')),
+    ],
+    BadgeEnums.Elite_Volo,
+    128000,
+    'Why? Why you?! Why do you have the blessing of Arceus?!',
+    [new DevelopmentRequirement()],
+    undefined, undefined, 'Pokémon Wielder Volo'
+);
