@@ -177,7 +177,7 @@
                             <p id="pokeballFilterTestMatch">
                                 <span data-bind='visible: $data, text: `This will use your "${$data?.name}" filter`'></span>
                                 <span data-bind='visible: !$data'>None of your enabled filters match this scenario</span>
-                                <img class="clickable pokeball-selected pokeball-small" data-bind="
+                                <img class="pokeball-selected pokeball-small" data-bind="
                                     visible: $data,
                                     attr: {
                                         src: 'assets/images/pokeball/' + GameConstants.Pokeball[$data?.ball()] + '.svg'},
