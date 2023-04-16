@@ -6606,7 +6606,6 @@ dungeonList['P2 Laboratory'] = new Dungeon('P2 Laboratory',
             {loot: 'xClick'},
             {loot: 'xAttack', weight: 2},
             {loot: 'Token_collector', weight: 2},
-            {loot: 'Forretress'},
         ],
         rare: [
             {loot: 'Red Shard'},
@@ -8679,6 +8678,7 @@ dungeonList['Mount Lanakila'] = new Dungeon('Mount Lanakila',
     },
     16312850,
     [
+        new DungeonBossPokemon('Golbat', 81064250, 50),
         new DungeonBossPokemon('Absol', 81064250, 50),
         new DungeonBossPokemon('Glalie', 81064250, 50),
         new DungeonBossPokemon('Vanilluxe', 81064250, 50),
@@ -8705,9 +8705,12 @@ dungeonList['Lake of the Sunne and Moone'] = new Dungeon('Lake of the Sunne and 
     },
     16435490,
     [
+        new DungeonBossPokemon('Solrock', 82177450, 60, {hide: true, requirement: new ObtainedPokemonRequirement('Cosmog', true)}),
+        new DungeonBossPokemon('Lunatone', 82177450, 60, {hide: true, requirement: new ObtainedPokemonRequirement('Cosmog', true)}),
         new DungeonBossPokemon('Cosmog', 82177450, 70),
-        new DungeonBossPokemon('Lunala', 90673816, 100, {requirement: new MultiRequirement([new ObtainedPokemonRequirement('Lunala'), new ObtainedPokemonRequirement('Necrozma')])}),
-        new DungeonBossPokemon('Solgaleo', 90673816, 100, {requirement: new MultiRequirement([new ObtainedPokemonRequirement('Solgaleo'), new ObtainedPokemonRequirement('Necrozma')])}),
+        new DungeonBossPokemon('Cosmoem', 82177450, 70, {hide: true, requirement: new ObtainedPokemonRequirement('Cosmoem')}),
+        new DungeonBossPokemon('Solgaleo', 90673816, 100, {hide: true, requirement: new MultiRequirement([new ObtainedPokemonRequirement('Solgaleo'), new ObtainedPokemonRequirement('Necrozma')])}),
+        new DungeonBossPokemon('Lunala', 90673816, 100, {hide: true, requirement: new MultiRequirement([new ObtainedPokemonRequirement('Lunala'), new ObtainedPokemonRequirement('Necrozma')])}),
     ],
     1200000, 27);
 
