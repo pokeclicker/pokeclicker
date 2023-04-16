@@ -1728,6 +1728,100 @@ class QuestLineHelper {
         App.game.quests.questLines().push(deltaEpisodeQuestLine);
     }
 
+    public static createPrimalReversionQuestLine() {
+        const primalReversionQuestLine = new QuestLine('Primal Reversion', 'Teams Aqua and Magma have been trying to unlock the Primal power of Groudon and Kyogre.', new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 30), new ObtainedPokemonRequirement('Groudon'), new ObtainedPokemonRequirement('Kyogre')]), GameConstants.BulletinBoards.Hoenn);
+
+        const talkToMrStone1 = new TalkToNPCQuest(MrStone1, 'Talk to Mr. Stone in Slateport City.');
+        primalReversionQuestLine.addQuest(talkToMrStone1);
+
+        const clearGranite2 = new CustomQuest(10, 0, 'Clear Granite Cave 10 times to search for the Primal Reversion Mural.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Granite Cave')]());
+        primalReversionQuestLine.addQuest(clearGranite2);
+
+        const viewPrimalMural1 = new TalkToNPCQuest(PrimalMural1, 'Examine the first Primal Mural in Granite Cave.');
+
+        const viewPrimalMural2 = new TalkToNPCQuest(PrimalMural2, 'Examine the second Primal Mural in Granite Cave.');
+
+        primalReversionQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                viewPrimalMural1,
+                viewPrimalMural2,
+            ], 'Examine the Primal Murals.'));
+
+        const talkToSteven = new TalkToNPCQuest(PrimalSteven, 'Talk to Steven in the Granite Cave to learn more avout the Primal Murals.');
+        primalReversionQuestLine.addQuest(talkToSteven);
+
+        const talkToStern1 = new TalkToNPCQuest(Stern1, 'Find Captain Stern at Sea Mauville during a thunderstorm.');
+        primalReversionQuestLine.addQuest(talkToStern1);
+
+        const fightStern = new CustomQuest (1, 0, 'Fight Captain Stern at Sea Mauville.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Captain Stern')]());
+        primalReversionQuestLine.addQuest(fightStern);
+
+        const talkToStern2 = new TalkToNPCQuest(Stern2, 'Talk to Captain Stern at Sea Mauville about the mysteries of the sea.');
+        primalReversionQuestLine.addQuest(talkToStern2);
+
+        const findMetalCoats = new CustomQuest(10, undefined, 'Find 10 Metal Coats.', () => player.itemList.Metal_coat());
+
+        const findMysticWater = new CustomQuest(1, undefined, 'Find one Mystic Water.', () => player.itemList.Mystic_Water());
+
+        const findHeatRocks = new CustomQuest(3, undefined, 'Find 3 Heat Rocks.', () => player.mineInventory().find(item => item.name == 'Heat Rock')?.amount() ?? 0);
+
+        primalReversionQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                findMetalCoats,
+                findMysticWater,
+                findHeatRocks,
+            ], 'Obtain the items Captain Stern needs to upgrade the Submarine.'));
+
+        const talkToStern3 = new TalkToNPCQuest(Stern3, 'Talk to Captain Stern at Sea Mauville and upgrade the submarine.');
+        primalReversionQuestLine.addQuest(talkToStern3);
+
+        const clearSeafloorCavern2 = new CustomQuest(10, 0, 'Clear the Seafloor Cavern 10 times to learn more about the mysterious occurrences.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Seafloor Cavern')]());
+        primalReversionQuestLine.addQuest(clearSeafloorCavern2);
+
+        const fightArchiePrimal = new CustomQuest (1, 0, 'Defeat Archie', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Archie Primal')]());
+
+        const fightMaxiePrimal = new CustomQuest (1, 0, 'Defeat Maxie', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Maxie Primal')]());
+
+        primalReversionQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                fightArchiePrimal,
+                fightMaxiePrimal,
+            ], 'Defeat the Team Aqua and Team Magma leaders in the Seafloor Cavern.'));
+
+        const clearWeatherInstitute2 = new CustomQuest(10, 0, 'Clear the Weather Institute 10 times to search for clues about Archie and Maxie\'s plans.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Weather Institute')]());
+        primalReversionQuestLine.addQuest(clearWeatherInstitute2);
+
+        const weatherScan = new TalkToNPCQuest(WeatherScan, 'Scan the area for unusual weather at the Weather Institute.');
+        primalReversionQuestLine.addQuest(weatherScan);
+
+        const clearMtPyre = new CustomQuest(1, 0, 'Investigate Mt. Pyre for the source of the disturbances.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Mt. Pyre')]());
+        primalReversionQuestLine.addQuest(clearMtPyre);
+
+        const talkToPrimalArchie = new TalkToNPCQuest(PrimalArchie, 'Talk to Archie.');
+
+        const talkToPrimalMaxie = new TalkToNPCQuest(PrimalMaxie, 'Talk to Maxie.');
+
+        primalReversionQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                talkToPrimalArchie,
+                talkToPrimalMaxie,
+            ], 'Find out what the Team Leaders are up to at Mt. Pyre.'));
+
+        const fightPrimalGroudon = new CustomQuest (1, 0, 'Defeat Primal Groudon in Sunny Weather.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Primal Groudon')]());
+
+        const fightPrimalKyogre = new CustomQuest (1, 0, 'Defeat Primal Kyogre in Raining Weather.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Primal Kyogre')]());
+
+        primalReversionQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                fightPrimalGroudon,
+                fightPrimalKyogre,
+            ], 'Defeat the Primal Reversions. They will pause their rampage under the right weather conditions.'));
+
+        const talkToMrStone2 = new TalkToNPCQuest(MrStone2, 'Talk to Mr. Stone in Slateport City.');
+        primalReversionQuestLine.addQuest(talkToMrStone2);
+
+        App.game.quests.questLines().push(primalReversionQuestLine);
+    }
 
     public static createDetectivePikachuQuestLine() {
         const detectivePikachuQuestLine = new QuestLine('Detective Pikachu', 'Detective Pikachu\'s partner has gone missing, and he needs your help!', new MultiRequirement([new ObtainedPokemonRequirement('Detective Pikachu'), new GymBadgeRequirement(BadgeEnums.Bug)]) , GameConstants.BulletinBoards.Kalos);
@@ -3171,6 +3265,7 @@ class QuestLineHelper {
         this.createGiratinaQuestLine();
         this.createPlasmaUnovaQuestLine();
         this.createDeltaEpisodeQuestLine();
+        this.createPrimalReversionQuestLine();
         this.createDetectivePikachuQuestLine();
         this.createVivillonQuestLine();
         this.createFlareKalosQuestLine();

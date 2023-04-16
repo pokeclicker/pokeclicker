@@ -16,6 +16,7 @@ import SeededRand from '../utilities/SeededRand';
 import { PokemonNameType } from './PokemonNameType';
 import RoamingPokemon from './RoamingPokemon';
 import RoamingGroup from './RoamingGroup';
+import SpecialEventRequirement from '../requirements/SpecialEventRequirement';
 
 export default class RoamingPokemonList {
     public static roamerGroups: RoamingGroup[][] = [
@@ -146,3 +147,7 @@ RoamingPokemonList.add(Region.hisui, 0, new RoamingPokemon('Tornadus', new Quest
 RoamingPokemonList.add(Region.hisui, 0, new RoamingPokemon('Thundurus', new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 1)));
 RoamingPokemonList.add(Region.hisui, 0, new RoamingPokemon('Landorus', new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 1)));
 RoamingPokemonList.add(Region.hisui, 0, new RoamingPokemon('Enamorus', new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 3)));
+
+// Events
+RoamingPokemonList.add(Region.kanto, 0, new RoamingPokemon('Flying Pikachu', new SpecialEventRequirement('Flying Pikachu')));
+RoamingPokemonList.add(Region.kanto, 0, new RoamingPokemon('Red Spearow', new SpecialEventRequirement('Flying Pikachu')));

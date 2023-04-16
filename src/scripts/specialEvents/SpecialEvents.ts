@@ -36,6 +36,10 @@ class SpecialEvents implements Feature {
     }
 
     update(delta: number): void {}  // This method intentionally left blank
+
+    getEvent(eventName: string) {
+        return SpecialEvents.events.find((e) => e.title == eventName);
+    }
 }
 
 // TODO: Fetch events from a server each 1/2/3/6/12/24 hours?
@@ -158,13 +162,9 @@ SpecialEvents.newEvent('Easter', 'Encounter Surprise Togepi for a limited time w
 SpecialEvents.newEvent('Flying Pikachu', 'Encounter Flying Pikachu and Red Spearow for a limited time roaming Kanto.',
     // Start
     new Date(new Date().getFullYear(), 6, 6, 1), () => {
-        RoamingPokemonList.add(GameConstants.Region.kanto, 0, new RoamingPokemon('Flying Pikachu'));
-        RoamingPokemonList.add(GameConstants.Region.kanto, 0, new RoamingPokemon('Red Spearow'));
     },
     // End
     new Date(new Date().getFullYear(), 6, 12, 23), () => {
-        RoamingPokemonList.remove(GameConstants.Region.kanto, 0, 'Flying Pikachu');
-        RoamingPokemonList.remove(GameConstants.Region.kanto, 0, 'Red Spearow');
     }
 );
 // Pokemon the first movie release date
