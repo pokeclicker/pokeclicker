@@ -87,7 +87,7 @@ export const SpriteCredits: Credit[] = [
     {
         name: 'Brumirage, Altthiel, Pujolly, Irpachuza',
         link: 'https://www.smogon.com/forums/threads/revamped-add-sword-and-shield-trainer-avatars-for-everyone.3672829/',
-        image: 'https://www.smogon.com/media/zracknel-beta.svg.m.1',
+        image: 'https://www.smogon.com/forums/media/zracknel-beta.svg.m.1',
         resources: [
             'Allister',
             'Avery',
