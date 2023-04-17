@@ -12112,6 +12112,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 302,
         'catchRate': 3,
+        'evolutions': [MegaEvolution('Kyogre', 'Primal Kyogre')],
         'base': {
             'hitpoints': 100,
             'attack': 100,
@@ -12152,6 +12153,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 302,
         'catchRate': 3,
+        'evolutions': [MegaEvolution('Groudon', 'Primal Groudon')],
         'base': {
             'hitpoints': 100,
             'attack': 150,
