@@ -154,15 +154,7 @@
                             <input type="text" class="form-control" data-bind="value: App.game.party.getPokemon($data).nickname"/>
                         </td>
                     </tr>
-                    <tr>
-                        <td colspan="2" class="text-middle align-middle">
-                            <button class="btn btn-block btn-primary"
-                            data-bind="click : () => { var pk = App.game.party.getPokemon($data); App.game.profile.pokemon(pk.id); App.game.profile.pokemonFemale(pokemonMap[$data].gender.visualDifference && pk.defaultFemaleSprite()); App.game.profile.pokemonShiny(pk.shiny && !pk.hideShinyImage()); }">
-                                Display <kockout data-bind="text : App.game.party.getPokemon($data).name"></kockout> on profile
-                            </button>
-                        </td>
-                    </tr>
-                    <!-- /ko -->
+                   <!-- /ko -->
                   </tbody>
                   <thead>
                     <tr class="text-light">
