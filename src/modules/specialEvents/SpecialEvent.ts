@@ -14,7 +14,7 @@ export enum SpecialEventStatus {
 export default class SpecialEvent {
     title: string;
     description: string;
-    status: SpecialEventStatus = SpecialEventStatus.none;
+    status: KnockoutObservable<SpecialEventStatus>;
     startTime: Date;
     startFunction: EmptyCallback;
     endTime: Date;
@@ -30,6 +30,7 @@ export default class SpecialEvent {
         this.startFunction = startFunction;
         this.endTime = endTime;
         this.endFunction = endFunction;
+        this.status = ko.observable(SpecialEventStatus.none);
     }
 
     initialize(): void {
@@ -51,11 +52,11 @@ export default class SpecialEvent {
     }
 
     hasStarted(): boolean {
-        return this.status === SpecialEventStatus.started;
+        return this.status() === SpecialEventStatus.started;
     }
 
     hasEnded(): boolean {
-        return this.status === SpecialEventStatus.ended;
+        return this.status() === SpecialEventStatus.ended;
     }
 
     notify(time: string, timeout: number, type = NotificationConstants.NotificationOption.info) {
@@ -121,7 +122,7 @@ export default class SpecialEvent {
 
     start() {
         // Update event status
-        this.status = SpecialEventStatus.started;
+        this.status(SpecialEventStatus.started);
 
         // We only wan't the notification displayed for 1 hour, or until the event is over
         const timeTillEventEnd = this.timeTillEnd();
@@ -165,7 +166,7 @@ export default class SpecialEvent {
         // Update event status
         this.notify('just ended!', 1 * HOUR, NotificationConstants.NotificationOption.danger);
         this.endFunction();
-        this.status = SpecialEventStatus.none;
+        this.status(SpecialEventStatus.none);
         this.updateDate();
     }
 
