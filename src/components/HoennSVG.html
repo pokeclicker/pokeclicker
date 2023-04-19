@@ -709,7 +709,8 @@
     <!--Petalburg Woods-->
     <%- include('templates/mapDungeon',
         { name: "Petalburg Woods"
-        , x: 1, y: 29
+        , x: 0, y: 29
+        , width: 5, height: 3
         })
      %>
 
@@ -892,6 +893,14 @@
         { name: "Dock"
         , x: 33, y: 45
         , width: 3, height: 2
+        , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Slateport City') }"
+        })
+    %>
+
+    <%- include('templates/mapPOI',
+        { name: "S. S. Anne"
+        , x: 33, y: 47
+        , width: 8, height: 3
         , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Slateport City') }"
         })
     %>
