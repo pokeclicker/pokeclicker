@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="100" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="22" nextobjectid="1">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="100" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="22" nextobjectid="1">
  <tileset firstgid="1" source="tiles_FRLG.tsx"/>
  <tileset firstgid="1317" source="tiles_Advanced.tsx"/>
  <tileset firstgid="9301" source="no-bg.tsx"/>
- <tileset firstgid="9829" source="tiles_FRLG_buildings.tsx"/>
+ <tileset firstgid="9957" source="tiles_FRLG_buildings.tsx"/>
+ <tileset firstgid="13926" source="tiles_custom_2.tsx"/>
  <layer id="2" name="Water Darkest" width="100" height="60" tintcolor="#969696">
   <data encoding="base64" compression="zstd">
    KLUv/WDAXGUAACBcAQAAAQC53bsjAg==
@@ -51,7 +52,7 @@
  </layer>
  <layer id="12" name="Other" width="100" height="60">
   <data encoding="base64" compression="zstd">
-   KLUv/WDAXD0BAIAAtQYAgAC9BgCAAMUGAADGByBggg8RioNdBUSxvQmIYr/JB+EjGw==
+   KLUv/WDAXI0DAPIFEBmgG5YDnP1hYwM/iXnrbCT8BwCAoaqavZMCm9NcxnKVyUku8jjHNTCfyzFucYqDh3KJQ9zh4IGc4QpHmOACBxgOIKACnFs4WQI8IEQ9wit4JVdNOGn1EA6ZenUVOHfpqK6/S0d1/V2CVAd38J0N
   </data>
  </layer>
  <layer id="11" name="Dungeons Tier 1" width="100" height="60">
@@ -71,7 +72,7 @@
  </layer>
  <layer id="9" name="Towns" width="100" height="60">
   <data encoding="base64" compression="zstd">
-   KLUv/WDAXK0EAMKHFSBwTdIYAIABAACA/VRVVTwZSEwzuM6fDABC8MpTowCGFJ3HeZunWeZh3uVZFj3HazzGBk/wAg+QQifQ6XPyLC7FlbgQlYtyTS7J4TJchYuwIhfkelzRFKDwJv6wB4DDcozFmdILUOtIg/fm3whfIEVNA6QiTab4U/2j/k9V2WMpgdSOUFUDQh1wknp+pSZag0ci
+   KLUv/WDAXLUEAMLHFSCAS9IYSBmREQyYGZjZgO1iaxMDxJB2AObct+Kjc+BJAY+T49Q4MdLgJDgFToDqXJxrc2kqc2Guy2Wp6IKu54IsnuIlHqLyKG/yJIdneIVHuMiLHvSeARSg8Cb+sAeAw3KMxZnSC1DrSIP35t8IXyBFTQOkIk2m+FP9o/5PVdljKYHUjlBVA0IdcJJ6fqUmWoNHIg==
   </data>
  </layer>
 </map>
