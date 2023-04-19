@@ -32,6 +32,12 @@
                       <td class="text-left">Current Attack</td>
                       <td class="text-left tight"><code data-bind="text: (App.game.party.getPokemon($data) ? App.game.party.getPokemon($data).attack : 0).toLocaleString('en-US')">-</code></td>
                     </tr>
+                    <!-- ko if : App.game.party.getPokemon($data) && App.game.party.getPokemon($data).level != 100 -->
+                    <tr>
+                      <td class="text-left">Attack at level 100</td>
+                      <td class="text-left tight"><code data-bind="text: App.game.party.getPokemon($data).calculateAttack(true).toLocaleString('en-US')">-</code></td>
+                    </tr>
+                    <!-- /ko -->
                     <tr>
                       <td class="text-left">Vitamins Used</td>
                       <td class="text-left tight"><code data-bind="text: (App.game.party.getPokemon($data) ? App.game.party.getPokemon($data).totalVitaminsUsed() : 0).toLocaleString('en-US')">-</code></td>
@@ -75,10 +81,12 @@
                       <td class="text-left">Hatch Steps</td>
                       <td class="text-left tight"><code data-bind="text: App.game.party.getPokemon($data)?.getEggSteps().toLocaleString('en-US') || 'Unknown'">-</code></td>
                     </tr>
-                    <tr data-bind="if: BagHandler.displayName(pokemonMap[$data].heldItem)">
+                    <!-- ko if: BagHandler.displayName(pokemonMap[$data].heldItem) -->
+                    <tr>
                       <td class="text-left">Rare Hold Item</td>
                       <td class="text-left tight"><code data-bind="text: BagHandler.displayName(pokemonMap[$data].heldItem)"></code></td>
                     </tr>
+                    <!-- /ko -->
                     <tr>
                       <td class="text-left align-middle">Gender Ratio</td>
                       <td class="text-justify tight">
@@ -145,8 +153,8 @@
                         <td colspan="2" class="text-left tight">
                             <input type="text" class="form-control" data-bind="value: App.game.party.getPokemon($data).nickname"/>
                         </td>
-                      </tr>
-                    <!-- /ko -->
+                    </tr>
+                   <!-- /ko -->
                   </tbody>
                   <thead>
                     <tr class="text-light">
