@@ -349,6 +349,7 @@ export const SpriteCredits: Credit[] = [
             'Shadow Weepinbell',
             'Shadow Zapdos',
             'Shady Salesman',
+            'Ship Front View',
             'Spooky Togepi (shiny)',
             'Spooky Togetic',
             'Spooky Togekiss',
