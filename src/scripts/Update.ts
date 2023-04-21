@@ -2031,9 +2031,17 @@ class Update implements Saveable {
                 }
             });
 
-            // Reset Pokedex and Hatchery category filters
-            settingsData.pokedexCategoryFilter = -1;
-            settingsData.breedingCategoryFilter = -1;
+            // Update categories and fix category filters
+            const max = saveData.categories.categories.length - 1;
+            saveData.categories.categories.forEach((c, id) => {
+                c.id = id;
+            });
+            if (settingsData.pokedexCategoryFilter > max) {
+                settingsData.pokedexCategoryFilter = -1;
+            }
+            if (settingsData.breedingCategoryFilter > max) {
+                settingsData.breedingCategoryFilter = -1;
+            }
 
             // Reset Blue 5 to undefeated if he has been defeated before reaching the quest step to battle him
             const teamRocketQuestLine = saveData.quests.questLines.find((q) => q.name == 'Team Rocket');
@@ -2122,6 +2130,21 @@ class Update implements Saveable {
             if (saveData.statistics.temporaryBattleDefeated[111]) {
                 Update.startQuestLine(saveData, 'A Beautiful World');
             }
+
+            // Add Hisui Gyms
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 114);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 115);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 116);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 117);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 118);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 119);
+
+            //Primal Reversion battles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 142);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 143);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 144);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 145);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 146);
         },
     };
 

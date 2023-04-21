@@ -590,7 +590,7 @@ const SeviiRocketGrunts = new NPC ('Team Rocket Grunts', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Celio\'s Errand', 0), new QuestLineStepCompletedRequirement('Celio\'s Errand', 2, GameConstants.AchievementOption.less)]),
 });
 const SeviiRuby = new NPC ('Ruby', [
-    '<img src="assets/images/npcs/textbody/ruby.png">',
+    '<img src="assets/images/items/quest/Celios_Errand_Ruby.png">',
     '<i>You found a Ruby!</i>',
 ],
 { requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Celio\'s Errand', 3), new QuestLineStepCompletedRequirement('Celio\'s Errand', 4, GameConstants.AchievementOption.less )]) });
@@ -2577,6 +2577,101 @@ const HoennStoneSalesman2 = new NPC('Stone Salesman', [
 ], {
     requirement: new TemporaryBattleRequirement('Hoenn Stone Salesman'),
 });
+
+const MrStone1 = new NPC('Mr. Stone', [
+    'Hello, $playername$! It\'s good to see you again, but I have some dire news.',
+    'Despite Zinnia having stolen their leaders\ Key Stones, Team Aqua and Team Magma seem to be at it again, cooking up a scheme involving something called "Primal Reversion".',
+    'My researchers tell me that there is a mural carved into the wall of Granite Cave that has some information about "Primal Reversion". Can you find it, and report back?',
+], {image: 'assets/images/npcs/Mr Stone.png',
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('Primal Reversion'), new QuestLineStepCompletedRequirement('Primal Reversion', 1, GameConstants.AchievementOption.less)]),
+});
+
+const PrimalMural1 = new NPC('Groudon Mural', [
+    '<i>A large mural depicting  some sort of fire-spewing lizard Pokémon. It seems to be engaged in a battle.</i>',
+], {image: 'assets/images/npcs/other/GroudonMural.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Primal Reversion', 1), new QuestLineStepCompletedRequirement('Primal Reversion', 3, GameConstants.AchievementOption.less)]),
+});
+
+const PrimalMural2 = new NPC('Kyogre Mural', [
+    '<i>A large mural depicting  some sort of oceanic whale-like Pokémon. It seems to be engaged in a battle.</i>',
+    '<i>You see someone else looking at the mural: Steven Stone!</i>',
+], {image: 'assets/images/npcs/other/KyogreMural.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Primal Reversion', 1), new QuestLineStepCompletedRequirement('Primal Reversion', 3, GameConstants.AchievementOption.less)]),
+});
+
+const PrimalSteven = new NPC('Steven', [
+    'Hello again, $playername$! I see you\'re interested in these murals as well? They seem to be about Groudon and Kyogre.',
+    'So in the ancient world, their primal forms once held this much power…? The super-ancient Pokémon… What terrible strength… But this appearance here… It seems somehow different from Mega Evolution, but somehow related.',
+    '"If you don\'t mind me asking… Do you feel anything in particular when you look up at this wall? A primal world, lost thousands of years in the past… A Legendary Pokémon of tremendous power became humanity\'s greatest threat…',
+    'The terror aroused by that power is clear to see in this ancient artwork. you know who might know more about this? Captain Stern, a sailor who works for my father.',
+    'He\'s usually out to sea, but you can find him in Sea Mauville if the weather is too stormy to sail.',
+], {image: 'assets/images/gymLeaders/steven.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Primal Reversion', 2), new QuestLineStepCompletedRequirement('Primal Reversion', 4, GameConstants.AchievementOption.less)]),
+});
+
+const Stern1 = new NPC('Captain Stern', [
+    'Ahoy! What brings you to this port?',
+    'On the search for mysteries of the sea, eh? Well then I have one whale of a tale for you! But are yeh worthy?',
+], {image: 'assets/images/npcs/Sailor.png',
+    requirement: new MultiRequirement([new WeatherRequirement([WeatherType.Thunderstorm]), new QuestLineStepCompletedRequirement('Primal Reversion', 3), new QuestLineStepCompletedRequirement('Primal Reversion', 5, GameConstants.AchievementOption.less)]),
+});
+
+const Stern2 = new NPC('Captain Stern', [
+    'I see you can be trusted with the mysteries of the sea!',
+    'I have been seeing a lot of strange activity around the Seafloor Cavern recently. Whirlpools, thunderstorms, and all nature of strange beasts.',
+    'There\'s an old submarine around here that I\'ve been working on upgrading to go explore the lowest parts of that cavern, but need some help getting the parts.',
+    'The hull needs some new Metal Coating, the ballast tanks need filled with Mystic Water, and some Heat Rocks are needed for a dive that deep.',
+], {image: 'assets/images/npcs/Sailor.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Primal Reversion', 5), new QuestLineStepCompletedRequirement('Primal Reversion', 7, GameConstants.AchievementOption.less)]),
+});
+
+const Stern3 = new NPC('Captain Stern', [
+    'Thanks for getting all the supplies together, $playername$!',
+    'We\'re ready to set sail to the Seafloor Cavern!',
+], {image: 'assets/images/npcs/Sailor.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Primal Reversion', 7), new QuestLineStepCompletedRequirement('Primal Reversion', 9, GameConstants.AchievementOption.less)]),
+});
+
+const WeatherScan = new NPC('Scan for unusual weather', [
+    '<i>Pressure readings are indicating that a huge storm is brewing in Hoenn. All instruments point to Mt. Pyre as the center of the disturbance.</i>',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Primal Reversion', 11), new QuestLineStepCompletedRequirement('Primal Reversion', 13, GameConstants.AchievementOption.less)]),
+});
+
+const PrimalArchie = new NPC('Archie', [
+    'Bwahahahaha! At last… AT LAST! I\'ve finally done it!!! It hasn\'t even finished reversion, and it still has this much power!!! With this I can return everything to its natural beginning! It\'s time at last!',
+    'Is that crew outside?',
+    'What is it…? Oh? So the great deluge has begun… Bwahahahaha! But of course it has! That is exactly what I have―',
+    'What…? What do you mean far more than we thought?! It can\'t be… Then if it completes its Primal Reversion… N-never mind that! Just keep an eye on it!',
+    'All that matters is… That I have used the Blue Orb to awaken Kyogre… And now… I will return this world to its natural state… The state that is best for Pokémon!',
+], {image: 'assets/images/npcs/Aqua Leader.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Primal Reversion', 13), new QuestLineStepCompletedRequirement('Primal Reversion', 15, GameConstants.AchievementOption.less)]),
+});
+
+const PrimalMaxie = new NPC('Maxie', [
+    '... Hm? A message from our members outside? What is it? So the sun has turned mercilessly fierce in its heat. I should expect so. That is what I have long—',
+    'No, what WE have long wished for. What?! The heat is greater than simulations predicted? It will be a risk to our own safety if it continues?! That cannot be...',
+    'It has only just awoken... Where is it getting so much power from? And how much more will it gain when it does undergo Primal Reversion... C-continue your readings! Then report back!',
+    'All that matters is... That I have used the red orb to awaken Groudon. And now... I will transform this planet to a land ideal for humanity.',
+], {image: 'assets/images/npcs/Magma Leader.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Primal Reversion', 13), new QuestLineStepCompletedRequirement('Primal Reversion', 15, GameConstants.AchievementOption.less)]),
+});
+const MrStone2 = new NPC('Mr. Stone', [
+    'Thank you, $playername$! Your heroics have saved Hoenn once again!',
+    'My researchers tell me that since their defeat, Groudon and Kyogre have been reverting to their primal forms in the Cave of Origin during Sunny and Rainy weather.',
+    'They are certainly very dangerous, but it doesn\'t seem like they are a threat to the region anymore.',
+], {image: 'assets/images/npcs/Mr Stone.png',
+    requirement: new QuestLineStepCompletedRequirement('Primal Reversion', 15),
+});
+
+const ZinniaOrigin = new NPC('Zinnia', [
+    'Wow, $playername$! You\'ve been busy!',
+    'Now that things are calmer in Hoenn, I\'ve decided to keep an eye on Kyogre and Groudon and make sure they don\'t cause any more trouble.',
+    'Groudon reverts to its Primal form in when it\'s sunny, and Kyogre reverts to its Primal form in the rain.',
+    'Archie and Maxie are still lurking somewhere in Hoenn,but without the Orbs I think they\'re mostly harmless. If you need some help smacking em down again, come get me!',
+], {image: 'assets/images/npcs/Zinnia.png',
+    requirement: new MultiRequirement([new QuestLineCompletedRequirement('The Delta Episode'), new QuestLineCompletedRequirement('Primal Reversion')]),
+});
 //Hoenn Towns
 TownList['Littleroot Town'] = new Town(
     'Littleroot Town',
@@ -2633,7 +2728,7 @@ TownList['Slateport City'] = new Town(
     [SlateportCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Slateport City'])],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Granite Cave'))],
-        npcs: [SlateportHoennRoamerNPC],
+        npcs: [SlateportHoennRoamerNPC, MrStone1, MrStone2],
     }
 );
 TownList['Mauville City'] = new Town(
@@ -2650,10 +2745,10 @@ TownList['Sea Mauville'] = new Town(
     'Sea Mauville',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [TemporaryBattleList['Delta Giovanni']],
+    [TemporaryBattleList['Delta Giovanni'], TemporaryBattleList['Captain Stern']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 109)],
-        npcs: [SeaMauvilleRocket1, SeaMauvilleRocket2],
+        npcs: [SeaMauvilleRocket1, SeaMauvilleRocket2, Stern1, Stern2, Stern3],
     }
 );
 TownList['Verdanturf Town'] = new Town(
@@ -2833,7 +2928,7 @@ TownList['Phenac City'] = new Town(
     'Phenac City',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new MoveToDungeon(dungeonList['Phenac City Battles'])],
+    [new MoveToTown('Phenac Stadium'), new MoveToDungeon(dungeonList['Phenac City Battles'])],
     {
         requirements: [new DevelopmentRequirement()],
     }
@@ -2843,7 +2938,7 @@ TownList['Phenac Stadium'] = new Town(
     'Phenac Stadium',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new MoveToDungeon(dungeonList['Phenac Stadium Battles'])],
+    [new MoveToTown('Phenac City', undefined, false), new MoveToDungeon(dungeonList['Phenac Stadium Battles'])],
     {
         requirements: [new DevelopmentRequirement()],
     }
@@ -2853,7 +2948,7 @@ TownList['Pyrite Town'] = new Town(
     'Pyrite Town',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new MoveToDungeon(dungeonList['Pyrite Town Battles'])],
+    [new MoveToTown('Pyrite Colosseum'), new MoveToTown('The Under'), new MoveToDungeon(dungeonList['Pyrite Town Battles'])],
     {
         requirements: [new DevelopmentRequirement()],
     }
@@ -2863,7 +2958,7 @@ TownList['Pyrite Colosseum'] = new Town(
     'Pyrite Colosseum',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new MoveToDungeon(dungeonList['Pyrite Colosseum Battles'])],
+    [new MoveToTown('Pyrite Town', undefined, false), new MoveToDungeon(dungeonList['Pyrite Colosseum Battles'])],
     {
         requirements: [new DevelopmentRequirement()],
     }
@@ -2873,7 +2968,7 @@ TownList['Agate Village'] = new Town(
     'Agate Village',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new MoveToDungeon(dungeonList['Relic Cave'])],
+    [new MoveToTown('Relic Stone'), new MoveToDungeon(dungeonList['Relic Cave'])],
     {
         requirements: [new DevelopmentRequirement()],
     }
@@ -2883,7 +2978,7 @@ TownList['Relic Stone'] = new Town(
     'Relic Stone',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new MoveToDungeon(dungeonList['Relic Cave']), new PurifyChamberTownContent()],
+    [new MoveToTown('Agate Village', undefined, false), new MoveToDungeon(dungeonList['Relic Cave']), new PurifyChamberTownContent()],
     {
         requirements: [new DevelopmentRequirement()],
     }
@@ -2903,7 +2998,7 @@ TownList['The Under'] = new Town(
     'The Under',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new MoveToDungeon(dungeonList['The Under Subway'])],
+    [new MoveToTown('Pyrite Town', undefined, false), new MoveToTown('Under Colosseum'), new MoveToTown('Deep Colosseum'), new MoveToDungeon(dungeonList['The Under Subway'])],
     {
         requirements: [new DevelopmentRequirement()],
     }
@@ -2923,7 +3018,7 @@ TownList['Realgam Tower'] = new Town(
     'Realgam Tower',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new MoveToDungeon(dungeonList['Realgam Tower Battles'])],
+    [new MoveToTown('Realgam Colosseum'), new MoveToDungeon(dungeonList['Realgam Tower Battles'])],
     {
         requirements: [new DevelopmentRequirement()],
     }
@@ -2933,7 +3028,7 @@ TownList['Realgam Colosseum'] = new Town(
     'Realgam Colosseum',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new MoveToDungeon(dungeonList['Realgam Colosseum Battles'])],
+    [new MoveToTown('Realgam Tower', undefined, false), new MoveToDungeon(dungeonList['Realgam Colosseum Battles'])],
     {
         requirements: [new DevelopmentRequirement()],
     }
@@ -2953,7 +3048,7 @@ TownList['Deep Colosseum'] = new Town(
     'Deep Colosseum',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new MoveToDungeon(dungeonList['Deep Colosseum Battles'])],
+    [new MoveToTown('The Under', undefined, false), new MoveToDungeon(dungeonList['Deep Colosseum Battles'])],
     {
         requirements: [new DevelopmentRequirement()],
     }
@@ -2973,7 +3068,7 @@ TownList['Under Colosseum'] = new Town(
     'Under Colosseum',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new MoveToDungeon(dungeonList['Under Colosseum Battles'])],
+    [new MoveToTown('The Under', undefined, false), new MoveToDungeon(dungeonList['Under Colosseum Battles'])],
     {
         requirements: [new DevelopmentRequirement()],
     }
@@ -3002,7 +3097,7 @@ TownList['Granite Cave'] = new DungeonTown(
     [new TemporaryBattleRequirement('May 2')],
     [TemporaryBattleList['Zinnia 1'], TemporaryBattleList['Delta Brock']],
     {
-        npcs: [Zinnia2, Zinnia3, GraniteCamper1, GraniteCamper2],
+        npcs: [Zinnia2, Zinnia3, GraniteCamper1, GraniteCamper2, PrimalMural1, PrimalMural2, PrimalSteven],
     }
 );
 TownList['Fiery Path'] = new DungeonTown(
@@ -3051,13 +3146,21 @@ TownList['Weather Institute'] = new DungeonTown(
     'Weather Institute',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 119)]
+    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 119)],
+    [],
+    {
+        npcs: [WeatherScan],
+    }
 );
 TownList['Mt. Pyre'] = new DungeonTown(
     'Mt. Pyre',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 122)]
+    [new RouteKillRequirement(10, GameConstants.Region.hoenn, 122)],
+    [],
+    {
+        npcs: [PrimalArchie, PrimalMaxie],
+    }
 );
 TownList['Magma Hideout'] = new DungeonTown(
     'Magma Hideout',
@@ -3099,7 +3202,7 @@ TownList['Cave of Origin'] = new DungeonTown(
     ],
     [],
     {
-        npcs: [Wallace1, Wallace2],
+        npcs: [Wallace1, Wallace2, ZinniaOrigin],
     }
 );
 TownList['Seafloor Cavern'] = new DungeonTown(
@@ -3109,7 +3212,11 @@ TownList['Seafloor Cavern'] = new DungeonTown(
     [
         new RouteKillRequirement(10, GameConstants.Region.hoenn, 128),
         new GymBadgeRequirement(BadgeEnums.Mind),
-    ]
+    ],
+    [TemporaryBattleList['Archie Primal'], TemporaryBattleList['Maxie Primal']],
+    {
+        npcs: [],
+    }
 );
 TownList['Sky Pillar'] = new DungeonTown(
     'Sky Pillar',
@@ -3303,7 +3410,7 @@ TownList['Under Colosseum Battles'] = new DungeonTown(
     ]
 );
 TownList['Orre Colosseum Battles'] = new DungeonTown(
-    'Under Colosseum Battles',
+    'Orre Colosseum Battles',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
@@ -4820,9 +4927,15 @@ TownList['Plasma Frigate'] = new DungeonTown(
     GameConstants.Region.unova,
     GameConstants.UnovaSubRegions.Unova,
     [
-        new RouteKillRequirement(10, GameConstants.Region.unova, 22),
-        new GymBadgeRequirement(BadgeEnums.Wave),
-        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 14),
+        new OneFromManyRequirement([
+            new MultiRequirement([
+                new RouteKillRequirement(10, GameConstants.Region.unova, 22),
+                new GymBadgeRequirement(BadgeEnums.Wave),
+                new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 14),
+                new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Plasma Frigate'), GameConstants.AchievementOption.less),
+            ]),
+            new QuestLineCompletedRequirement('Quest for the DNA Splicers'),
+        ]),
     ]
 );
 TownList['Giant Chasm'] = new DungeonTown(
@@ -5053,7 +5166,7 @@ const LumioseDexio = new NPC('Dexio', [
 const Lysandre1 = new NPC('Lysandre', [
     'Oh! You\'ve already met professor Sycamore... How wonderful! That is a wonderful thing, indeed. You are one of the chosen ones.',
     'I am Lysandre. I\'ve tried to learn as much about Pokémon as I can to help build a brighter future. Professor Sycamore has taught me so much.',
-    'Now listen! It is vital that this world become a better place. And the people and Pokémon chosen to make the world better must work tirelessly to achieve this goal.',
+    'Now listen! It is vital that this world becomes a better place. And the people and Pokémon chosen to make the world better must work tirelessly to achieve this goal.',
     'Well, I\'ll be off. Please give Professor Sycamore my best. My desire... it is for a more beautiful world!',
 ], {image: 'assets/images/npcs/Team Flare Lysandre.png',
     requirement: new MultiRequirement([new QuestLineStartedRequirement('A Beautiful World'), new QuestLineStepCompletedRequirement('A Beautiful World', 1, GameConstants.AchievementOption.less)]),
@@ -5371,6 +5484,13 @@ const VivillonPhotobook = new NPC('Vivillon Photobook', [
     '<i>Lastly, you see a Poké Ball Vivillon in a darkened mall. It\'s trying to scare the camerawoman, completely unaware of the sinister eyes peering from the darkness behind it.</i>',
 ]);
 
+const FriendlyAttendant = new NPC('Friendly Attendant', [
+    'Welcome to the Friend Safari!',
+    'This place is a lot like the Kanto Safari Zone, except we get a much wider variety of Pokémon coming through here.',
+    'Our park staff stocks the Safari with different hard-to-find Pokémon every day. Many of these Pokémon can\'t be caught anywhere else in the world!',
+    'As new and rare types of Pokémon are discovered, park staff will add them to our rotation of potential stock!',
+]);
+
 //Kalos Towns
 
 TownList['Vaniville Town'] = new Town(
@@ -5558,6 +5678,7 @@ TownList['Friend Safari'] = new Town(
     [new SafariTownContent()],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion), new DevelopmentRequirement()],
+        npcs: [FriendlyAttendant],
     }
 );
 
@@ -7599,6 +7720,448 @@ TownList['Crown Shrine'] = new DungeonTown(
     {
         npcs: [Calyrex4, Calyrex5, CrownShrineExplorer],
     }
+);
+
+//Hisui shops
+const JubilifeVillageShop = new Shop([
+    ItemList.Pokeball,
+    ItemList.Greatball,
+    ItemList.Ultraball,
+    ItemList.Black_augurite,
+    ItemList.Peat_block,
+]);
+
+// Hisui NPCs
+
+const ForcesCogita1 = new NPC('Cogita', [
+    'I\'ve just been told of the foul plan Volo had concocted. Well, think no more on that scoundrel. Just another tale of passion burning too bright and consuming its bearer. This is what happens, if you allow it to.',
+    'But what of you? Are you making any progress with your...what do you call your studies of Pokémon? Surveying, was it?',
+    'Indeed? Well, Hisui still holds more fascinating Pokémon.',
+    'Such as Tornadus... In every direction it flies, stirring up tremendous storms as it goes. When a blizzard batters the Alabaster Icelands, Tornadus may be about.',
+    'Also, Thundurus: as it flies around, it fires bolts of lightning every which way. When a rainstorm lashes the Cobalt Coastlands, Tornadus may be about.',
+    'Lastly, Landorus, the Pokémon hailed as the Guardian of the Fields. It seems it can be glimpsed in the Obsidian Fieldlands. Perhaps you\'d be so good as to catch it for me?',
+    'I know not why these three have chosen to show themselves. Perhaps the cause lies with the space-time rift...or simply within their own whims...',
+], {
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('Incarnate Forces of Hisui'), new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 1, GameConstants.AchievementOption.less)]),
+});
+const ForcesCogita2 = new NPC('Cogita', [
+    'Ah, you\'ve arrived. You now know much about Landorus, Tornadus and even Thundurus. Well done.',
+    'In more normal times, I would bid you to let these three fly free as is their nature.',
+    'But we are fresh from the tearing of the space-time rift. Until its aftereffects fade entirely, perhaps its best to keep our trio contained.',
+    'And now, it is time to tell you the rest. There is one more of that cohort. Come.',
+    '<img src="assets/images/pokemon/905.png">',
+    'This is Enamorus, a Pokémon hailed as the Herald of Spring. Enamorus is not particularly given to ill behaviour. But I imagine you\'d like to document her for your Pokédex, wouldn\'t you?',
+    'Catch her then, if you like. She always flits about in the Crimson Mirelands.',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 1), new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 3, GameConstants.AchievementOption.less)]),
+});
+const ForcesCogita3 = new NPC('Cogita', [
+    'Aha, you\'ve caught Enamorus as well. And you know so much about her.',
+    'Enamorus arrives in Hisui once winter has passed. Hence the epithet Herald of Spring.',
+    'Her company, when I have the pleasure, is of great help, she ferries me hither and yon across Hisui. But I\'ll leave her in your care for now, I suppose.',
+    'Indeed, even you can hardly expect to live for all time, surely, but she will be in your care for now.',
+    'You, Enamorus and her brethren have something in common: you tend to stir the pot of life. Do not mistake me - I mean this positively.',
+    'If everything were straightforward, what meaning would there be in living as long as we do?',
+    '"Once there was a god of field, and once there was a god of spring. Upon Hisui\'s winds it wheeled, brought life to every growing thing..." Was that how that old verse went?',
+    'I have passed on to you all there is to pass. Where history goes from here...I leave to you and your companions to see through.',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 4), new QuestLineCompletedRequirement('Incarnate Forces of Hisui', GameConstants.AchievementOption.less)]),
+});
+
+//Hisui Towns
+TownList['Prelude Beach'] = new Town(
+    'Prelude Beach',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [TemporaryBattleList['Kamado 2']],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+TownList['Jubilife Village'] = new Town(
+    'Jubilife Village',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [JubilifeVillageShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Jubilife Village']), TemporaryBattleList['Volo 1'], TemporaryBattleList['Akari 1'], TemporaryBattleList['Akari 2'], TemporaryBattleList['Adaman 1']],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+TownList['Galaxy Hall'] = new Town(
+    'Galaxy Hall',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [new BulletinBoard(GameConstants.BulletinBoards.Hisui)],
+    {
+        requirements: [new DevelopmentRequirement()],
+        npcs: [ForcesCogita1],
+    }
+);
+TownList['Fieldlands Camp'] = new Town(
+    'Fieldlands Camp',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [TemporaryBattleList['Warden Mai']],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+TownList['Heights Camp'] = new Town(
+    'Heights Camp',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [TemporaryBattleList['Alpha Kricketune']],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+TownList['Grandtree Arena'] = new Town(
+    'Grandtree Arena',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [TemporaryBattleList['Warden Lian'], TemporaryBattleList['Irida 1'], TemporaryBattleList['Lord of the Woods: Kleavor']],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+TownList['Mirelands Camp'] = new Town(
+    'Mirelands Camp',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [TemporaryBattleList['Coin 1']],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+TownList['Bogbound Camp'] = new Town(
+    'Bogbound Camp',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+TownList['Ancient Solaceon Ruins'] = new Town(
+    'Ancient Solaceon Ruins',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [TemporaryBattleList['Volo 2']],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+TownList['Sludge Mound'] = new Town(
+    'Sludge Mound',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [TemporaryBattleList.Ursaluna],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+TownList['Diamond Settlement'] = new Town(
+    'Diamond Settlement',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+TownList['Brava Arena'] = new Town(
+    'Brava Arena',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [TemporaryBattleList['Lady of the Ridge: Lilligant']],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+TownList['Beachside Camp'] = new Town(
+    'Beachside Camp',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [TemporaryBattleList['Irida 2']],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+TownList['Coastlands Camp'] = new Town(
+    'Coastlands Camp',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+TownList['Iscan\'s Cabin'] = new Town(
+    'Iscan\'s Cabin',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+TownList['Molten Arena'] = new Town(
+    'Molten Arena',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [TemporaryBattleList.Clover, TemporaryBattleList['Coin 2'], TemporaryBattleList['Charm 1'], TemporaryBattleList['Lord of the Isles: Arcanine']],
+    {
+        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Firespit Island'))],
+    }
+);
+TownList['Highlands Camp'] = new Town(
+    'Highlands Camp',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+TownList['Mountain Camp'] = new Town(
+    'Mountain Camp',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+TownList['Summit Camp'] = new Town(
+    'Summit Camp',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+TownList['Moonview Arena'] = new Town(
+    'Moonview Arena',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [TemporaryBattleList['Melli 2'], TemporaryBattleList['Lord of the Hollow: Electrode']],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+TownList['Snowfields Camp'] = new Town(
+    'Snowfields Camp',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+TownList['Icepeak Camp'] = new Town(
+    'Icepeak Camp',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+TownList['Pearl Settlement'] = new Town(
+    'Pearl Settlement',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [TemporaryBattleList['Irida 3']],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+TownList['Icepeak Arena'] = new Town(
+    'Icepeak Arena',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [TemporaryBattleList['Lord of the Tundra: Avalugg']],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+TownList['Ancient Retreat'] = new Town(
+    'Ancient Retreat',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [],
+    {
+        requirements: [new DevelopmentRequirement()],
+        npcs: [ForcesCogita2, ForcesCogita3],
+    }
+);
+TownList['Stone Portal'] = new Town(
+    'Stone Portal',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [TemporaryBattleList.Beni],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+TownList['Temple of Sinnoh'] = new Town(
+    'Temple of Sinnoh',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [TemporaryBattleList['Kamado 1'], TemporaryBattleList['Dialga (Origin) 1'], TemporaryBattleList['Palkia (Origin) 1'], TemporaryBattleList['Dialga (Origin) 2'], TemporaryBattleList['Palkia (Origin) 2'], TemporaryBattleList['Volo 3']],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+TownList['Turnback Cave'] = new Town(
+    'Turnback Cave',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [TemporaryBattleList['Giratina (Origin)']],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+TownList['Ancient Hall of Origin'] = new Town(
+    'Ancient Hall of Origin',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [TemporaryBattleList.Arceus],
+    {
+        requirements: [new DevelopmentRequirement()],
+    }
+);
+
+//Hisui Dungeons
+TownList['Oreburrow Tunnel'] = new DungeonTown(
+    'Oreburrow Tunnel',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [new DevelopmentRequirement()]
+);
+TownList.Heartwood = new DungeonTown(
+    'Heartwood',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [new DevelopmentRequirement()]
+);
+TownList['Shrouded Ruins'] = new DungeonTown(
+    'Shrouded Ruins',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [new DevelopmentRequirement()]
+);
+TownList['Veilstone Cape'] = new DungeonTown(
+    'Veilstone Cape',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [new DevelopmentRequirement()]
+);
+TownList['Firespit Island'] = new DungeonTown(
+    'Firespit Island',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [new DevelopmentRequirement()]
+);
+TownList['Ancient Wayward Cave'] = new DungeonTown(
+    'Ancient Wayward Cave',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [new DevelopmentRequirement()],
+    [TemporaryBattleList['Melli 1']]
+);
+TownList['Ancient Quarry'] = new DungeonTown(
+    'Ancient Quarry',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [new DevelopmentRequirement()]
+);
+TownList['Primeval Grotto'] = new DungeonTown(
+    'Primeval Grotto',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [new DevelopmentRequirement()],
+    [TemporaryBattleList['Charm 2']]
+);
+TownList['Clamberclaw Cliffs'] = new DungeonTown(
+    'Clamberclaw Cliffs',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [new DevelopmentRequirement()],
+    [TemporaryBattleList['Warden Ingo']]
+);
+TownList['Celestica Ruins'] = new DungeonTown(
+    'Celestica Ruins',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [new DevelopmentRequirement()]
+);
+TownList['Sacred Plaza'] = new DungeonTown(
+    'Sacred Plaza',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [new DevelopmentRequirement()]
+);
+TownList['Crevasse Passage'] = new DungeonTown(
+    'Crevasse Passage',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [new DevelopmentRequirement()]
+);
+TownList['Avalugg\'s Legacy'] = new DungeonTown(
+    'Avalugg\'s Legacy',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [new DevelopmentRequirement()],
+    [TemporaryBattleList['Warden Gaeric']]
+);
+TownList['Ice Column Chamber'] = new DungeonTown(
+    'Ice Column Chamber',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [new DevelopmentRequirement()]
+);
+TownList['Icepeak Cavern'] = new DungeonTown(
+    'Icepeak Cavern',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [new DevelopmentRequirement()]
+);
+TownList['Ancient Snowpoint Temple'] = new DungeonTown(
+    'Ancient Snowpoint Temple',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [new DevelopmentRequirement()],
+    [TemporaryBattleList['Warden Sabi'], TemporaryBattleList['Hisuian Braviary']]
+);
+TownList['Seaside Hollow'] = new DungeonTown(
+    'Seaside Hollow',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [
+        new DevelopmentRequirement(),
+        new ObtainedPokemonRequirement('Overqwil'),
+    ]
+);
+TownList['Ancient Lake Verity'] = new DungeonTown(
+    'Ancient Lake Verity',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [new DevelopmentRequirement()]
+);
+TownList['Ancient Lake Valor'] = new DungeonTown(
+    'Ancient Lake Valor',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [new DevelopmentRequirement()],
+    [TemporaryBattleList['Adaman 2']]
+);
+TownList['Ancient Lake Acuity'] = new DungeonTown(
+    'Ancient Lake Acuity',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [new DevelopmentRequirement()]
 );
 
 // Used to check if next region can be reached, for example for professor NPC
