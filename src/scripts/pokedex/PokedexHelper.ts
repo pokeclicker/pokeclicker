@@ -112,17 +112,18 @@ class PokedexHelper {
             } else if ((type1 != null && !(pokemon as PokemonListData).type.includes(type1)) || (type2 != null && !(pokemon as PokemonListData).type.includes(type2))) {
                 return false;
             }
-
+        const hasBaseFormInSameRegion = pokemonList.some((p) => Math.floor(p.id) == Math.floor(pokemon.id) && p.id < pokemon.id && PokemonHelper.calcNativeRegion(p.name) == nativeRegion);
             // Alternate forms that we haven't caught yet
             if (!alreadyCaught && pokemon.id != Math.floor(pokemon.id)) {
-                const hasBaseFormInSameRegion = pokemonList.some((p) => Math.floor(p.id) == Math.floor(pokemon.id) && p.id < pokemon.id && PokemonHelper.calcNativeRegion(p.name) == nativeRegion);
                 if (hasBaseFormInSameRegion) {
                     return false;
                 }
             }
             // Hide uncaught base forms if alternate non-regional form is caught
-            if (!alreadyCaught && pokemon.id == Math.floor(pokemon.id) && App.game.party._caughtPokemon().some((p) => Math.floor(p.id) == pokemon.id && !p.name.includes('Alolan ') && !p.name.includes('Galarian ') && !p.name.includes('Totem '))) {
-                return false;
+            if (!alreadyCaught && pokemon.id == Math.floor(pokemon.id) && App.game.party._caughtPokemon().some((p) => Math.floor(p.id) == pokemon.id)) {
+                if (hasBaseFormInSameRegion) {
+                    return false;
+                }
             }
 
             const caughtShiny = PokedexFilters.caughtShiny.value();
@@ -149,8 +150,10 @@ class PokedexHelper {
             /* Only base form if alternate exist (Zarbi, Basculin, ...)
              * Mainline regional forms are shown as they are part of dex completion
              */
-            if (PokedexFilters.hideAlternate.value() && ((!Number.isInteger(pokemon.id) && !pokemon.name.includes('Alolan') && !pokemon.name.includes('Galarian')) || pokemon.name === 'Galarian Darmanitan (Zen)')) {
-                return false;
+            if (PokedexFilters.hideAlternate.value() && !Number.isInteger(pokemon.id)) {
+                if (hasBaseFormInSameRegion) {
+                    return false;
+                }
             }
 
             // Only pokemon with a hold item
