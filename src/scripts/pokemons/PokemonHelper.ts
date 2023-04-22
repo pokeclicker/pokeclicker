@@ -437,7 +437,7 @@ class PokemonHelper extends TmpPokemonHelper {
         return locations[PokemonLocationType.Dungeon] ||
             locations[PokemonLocationType.DungeonBoss] ||
             locations[PokemonLocationType.DungeonChest] ||
-            locations[PokemonLocationType.Evolution] ||
+            (locations[PokemonLocationType.Evolution] as EvoData[])?.some((evo) => evo.trigger === EvoTrigger.STONE) || // Only stone evolutions gives EVs
             locations[PokemonLocationType.Roaming] ||
             locations[PokemonLocationType.Route] ||
             locations[PokemonLocationType.Safari] ||
