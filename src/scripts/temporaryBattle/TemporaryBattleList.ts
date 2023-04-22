@@ -3061,7 +3061,7 @@ TemporaryBattleList['Hau 1'] = new TemporaryBattle(
     undefined,
     {
         //TODO: firstTimeRewardFunction: () => {
-            // App.game.quests.getQuestLine('Welcome to paradise, cousin!').beginQuest();
+        // App.game.quests.getQuestLine('Welcome to paradise, cousin!').beginQuest();
         //},
         displayName: 'Pokémon Trainer Hau',
         returnTown: 'Iki Town Outskirts',
