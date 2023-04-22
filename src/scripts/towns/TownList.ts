@@ -5879,7 +5879,7 @@ const RotomDexUlaUla = new NPC('Rotom Dex', [
     '<b><i>Current Destination: Ula\'Ula</i></b>',
 ], {
     image: 'assets/images/npcs/specialNPCs/Rotom-Dex.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Eater of Light', 3), new QuestLineStepCompletedRequirement('Eater of Light', 4, GameConstants.AchievementOption.less)]),
+    requirement: new DevelopmentRequirement(), // TODO: new MultiRequirement([new QuestLineStepCompletedRequirement('Eater of Light', 3), new QuestLineStepCompletedRequirement('Eater of Light', 4, GameConstants.AchievementOption.less)]),
 });
 const RotomDexPoni = new NPC('Rotom Dex', [
     'Zzzzt!!! There is... <i>something</i> to do in Poni! Oh gimme a break! It\'zzz a small island, you\'ll find out on your own! Zz-zzt!',
@@ -5888,13 +5888,25 @@ const RotomDexPoni = new NPC('Rotom Dex', [
     '<b><i>Current Destination: Poni</i></b>',
 ], {
     image: 'assets/images/npcs/specialNPCs/Rotom-Dex.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Eater of Light', 4), new QuestLineCompletedRequirement('Eater of Light', GameConstants.AchievementOption.less)]),
+    requirement: new DevelopmentRequirement(), // new MultiRequirement([new QuestLineStepCompletedRequirement('Eater of Light', 4), new QuestLineCompletedRequirement('Eater of Light', GameConstants.AchievementOption.less)]),
 });
-const RotomDex2 = new NPC('Rotom Dex', [
-    'Zzzzt!!! Well? What\'re you lookin\' at me for? You know what to do now, kiddo! I\'ll be here rootin\' for ya!',
+const RotomDexPlaceholder = new NPC('Rotom Dex', [
+    'Zzzzt!!! How\'zzz it going, kiddo? Havin\' fun in the Alolan sun?',
 ], {
     image: 'assets/images/npcs/specialNPCs/Rotom-Dex.png',
-    requirement: new QuestLineCompletedRequirement('Eater of Light'),
+    requirement: new QuestLineCompletedRequirement('Eater of Light', GameConstants.AchievementOption.less),
+});
+const RotomDex2 = new NPC('Rotom Dex', [
+    'Zzzzt!!! You\'ve almost made it, kiddo! Championship is on the horizon! I\'ll be here rootin\' for ya!',
+], {
+    image: 'assets/images/npcs/specialNPCs/Rotom-Dex.png',
+    requirement: new MultiRequirement([new QuestLineCompletedRequirement('Eater of Light'), new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion, GameConstants.AchievementOption.less)]),
+});
+const RotomDex3 = new NPC('Rotom Dex', [
+    'Congratulationzzz, bucko! You\'re the new reigning Alola Champion! You really are something, kiddo!',
+], {
+    image: 'assets/images/npcs/specialNPCs/Rotom-Dex.png',
+    requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion),
 });
 const LillieCity = new NPC('Lillie', [
     'Tell me, $playername$, do you pick out all your own clothes? I\'ve always just worn the clothes that my mother wanted me to wear. I don\'t really know what kind of thing would suit me...',
@@ -6189,7 +6201,7 @@ TownList['Professor Kukui\'s Lab'] = new Town(
     [new BulletinBoard(GameConstants.BulletinBoards.Alola)],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 18)],
-        npcs: [ProfKukui, RotomDex1, RotomDexMelemele, RotomDexAkala, RotomDexUlaUla, RotomDexPoni, RotomDex2],
+        npcs: [ProfKukui, RotomDex1, RotomDexMelemele, RotomDexAkala, RotomDexUlaUla, RotomDexPoni, RotomDex2, RotomDex3, RotomDexPlaceholder],
     }
 );
 TownList['Hau\'oli City'] = new Town(
@@ -6466,7 +6478,7 @@ TownList['Trainers\' School'] = new DungeonTown(
     'Trainers\' School',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MelemeleIsland,
-    [new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 4)],
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 18)], // TODO: [new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 4)],
     undefined,
     { npcs: [TrainerSchoolTeacher] }
 );
@@ -6481,10 +6493,11 @@ TownList['Verdant Cavern'] = new DungeonTown(
     'Verdant Cavern',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MelemeleIsland,
-    [new MultiRequirement([
-        new RouteKillRequirement(10, GameConstants.Region.alola, 2),
-        new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 7),
-    ])],
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 2)],
+    // TODO: [new MultiRequirement([
+    //     new RouteKillRequirement(10, GameConstants.Region.alola, 2),
+    //     new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 7),
+    // ])],
     undefined,
     { npcs: [ReconSquad3] }
 );

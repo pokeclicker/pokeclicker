@@ -3060,9 +3060,9 @@ TemporaryBattleList['Hau 1'] = new TemporaryBattle(
     [new RouteKillRequirement(10, GameConstants.Region.alola, 1)],
     undefined,
     {
-        firstTimeRewardFunction: () => {
-            App.game.quests.getQuestLine('Welcome to paradise, cousin!').beginQuest();
-        },
+        //TODO: firstTimeRewardFunction: () => {
+            // App.game.quests.getQuestLine('Welcome to paradise, cousin!').beginQuest();
+        //},
         displayName: 'Pokémon Trainer Hau',
         returnTown: 'Iki Town Outskirts',
         imageName: 'Hau',
@@ -3088,7 +3088,7 @@ TemporaryBattleList['Hau 2'] = new TemporaryBattle(
         new GymPokemon('Litten', 81763320, 7, new StarterRequirement(GameConstants.Region.alola, GameConstants.Starter.Water)),
     ],
     'Phew... That was awesome! That was a really great battle! I had a blast fighting you!',
-    [new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 2)],
+    [new TemporaryBattleRequirement('Hau 1')], // TODO: [new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 2)],
     undefined,
     {
         displayName: 'Pokémon Trainer Hau',
@@ -3160,7 +3160,7 @@ TemporaryBattleList['Hau 3'] = new TemporaryBattle(
         new GymPokemon('Pikachu', 99488753, 12),
     ],
     'Aww, man! I wanted to show off my Pokémon\'s best side more!<br>I\'m off to battle gramps now. After all, once you clear one island\'s trials, you gotta battle that island\'s kahuna!',
-    [new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 12)],
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Melemele Meadow'))], // TODO: [new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 12)],
     undefined,
     {
         displayName: 'Pokémon Trainer Hau',

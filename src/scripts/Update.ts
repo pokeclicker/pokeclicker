@@ -2142,10 +2142,10 @@ class Update implements Saveable {
             // Recon Squad Seaward Cave
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 187);
 
-            // Start Melemele quest if player has beaten Hau 1 already
-            if (saveData.statistics.temporaryBattleDefeated[181]) {
-                Update.startQuestLine(saveData, 'Welcome to paradise, cousin!');
-            }
+            // TODO: Start Melemele quest if player has beaten Hau 1 already
+            // if (saveData.statistics.temporaryBattleDefeated[181]) {
+                // Update.startQuestLine(saveData, 'Welcome to paradise, cousin!');
+            // }
 
             // Add Hisui Gyms
             saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 114);
