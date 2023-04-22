@@ -112,7 +112,7 @@ class PokedexHelper {
             } else if ((type1 != null && !(pokemon as PokemonListData).type.includes(type1)) || (type2 != null && !(pokemon as PokemonListData).type.includes(type2))) {
                 return false;
             }
-        const hasBaseFormInSameRegion = pokemonList.some((p) => Math.floor(p.id) == Math.floor(pokemon.id) && p.id < pokemon.id && PokemonHelper.calcNativeRegion(p.name) == nativeRegion);
+            const hasBaseFormInSameRegion = pokemonList.some((p) => Math.floor(p.id) == Math.floor(pokemon.id) && p.id < pokemon.id && PokemonHelper.calcNativeRegion(p.name) == nativeRegion);
             // Alternate forms that we haven't caught yet
             if (!alreadyCaught && pokemon.id != Math.floor(pokemon.id)) {
                 if (hasBaseFormInSameRegion) {
