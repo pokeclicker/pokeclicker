@@ -3060,9 +3060,11 @@ TemporaryBattleList['Hau 1'] = new TemporaryBattle(
     [new RouteKillRequirement(10, GameConstants.Region.alola, 1)],
     undefined,
     {
-        //TODO: firstTimeRewardFunction: () => {
-        // App.game.quests.getQuestLine('Welcome to paradise, cousin!').beginQuest();
-        //},
+        firstTimeRewardFunction: () => {
+            if (new DevelopmentRequirement().isCompleted()) {
+                App.game.quests.getQuestLine('Welcome to paradise, cousin!').beginQuest();
+            }
+        },
         displayName: 'Pokémon Trainer Hau',
         returnTown: 'Iki Town Outskirts',
         imageName: 'Hau',
