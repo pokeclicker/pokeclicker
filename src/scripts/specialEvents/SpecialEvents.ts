@@ -55,41 +55,6 @@ SpecialEvents.newEvent('Lunar New Year', 'Two kinds of Vivillon are roaming Kalo
         RoamingPokemonList.add(GameConstants.Region.galar, 2, new RoamingPokemon('Vivillon (Fancy)'));
         RoamingPokemonList.add(GameConstants.Region.galar, 3, new RoamingPokemon('Vivillon (Fancy)'));
         RoamingPokemonList.add(GameConstants.Region.alola, 0, new RoamingPokemon('Vivillon (Meadow)'));
-        ([
-            ['Lake Verity', 'Vivillon (Marine)'],
-            ['Lake Acuity', 'Vivillon (Marine)'],
-            ['Lake Valor', 'Vivillon (Marine)'],
-            ['Cerulean Cave', 'Vivillon (Modern)'],
-            ['Moor of Icirrus', 'Vivillon (Jungle)'],
-            ['Dark Cave', 'Vivillon (Monsoon)'],
-            ['Poké Ball Factory', 'Vivillon (Tundra)'],
-            ['Mt. Chimney Crater', 'Vivillon (Sun)'],
-            ['Sprout Tower', 'Vivillon (Archipelago)'],
-            ['Lost Hotel', 'Vivillon (Elegant)'],
-            ['Dreamyard', 'Vivillon (Ocean)'],
-            ['New Mauville', 'Vivillon (Continental)'],
-            ['Sky Pillar', 'Vivillon (Polar)'],
-            ['Relic Castle', 'Vivillon (Sandstorm)'],
-            ['Flower Paradise', 'Vivillon (Garden)'],
-            ['Mt. Moon', 'Vivillon (High Plains)'],
-            ['Dragonspiral Tower', 'Vivillon (Savanna)'],
-            ['Frost Cavern', 'Vivillon (Icy Snow)'],
-            ['Thrifty Megamart', 'Vivillon (Poké Ball)'],
-        ] as [string, PokemonNameType][]).forEach(([location, vivillon]) => {
-            dungeonList[location].bossList.push(
-                new DungeonBossPokemon(vivillon, 96662023, 60, {
-                    hide: true,
-                    requirement: new ObtainedPokemonRequirement(vivillon),
-                })
-            );
-        });
-        dungeonList['Eterna Forest'].bossList.push(new DungeonBossPokemon('Vivillon (River)', 96662023, 60, {hide: true, requirement: new MultiRequirement([
-            new ObtainedPokemonRequirement('Vivillon (River)'),
-            new OneFromManyRequirement([
-                new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 7, GameConstants.AchievementOption.less),
-                new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 8),
-            ]),
-        ])}));
         TownList['Santalune City'].npcs.push(VivillonPhotobook);
     },
     // End
@@ -100,31 +65,6 @@ SpecialEvents.newEvent('Lunar New Year', 'Two kinds of Vivillon are roaming Kalo
         RoamingPokemonList.remove(GameConstants.Region.galar, 2, 'Vivillon (Fancy)');
         RoamingPokemonList.remove(GameConstants.Region.galar, 3, 'Vivillon (Fancy)');
         RoamingPokemonList.remove(GameConstants.Region.alola, 0, 'Vivillon (Meadow)');
-        [
-            ['Lake Verity', 'Vivillon (Marine)'],
-            ['Lake Acuity', 'Vivillon (Marine)'],
-            ['Lake Valor', 'Vivillon (Marine)'],
-            ['Cerulean Cave', 'Vivillon (Modern)'],
-            ['Moor of Icirrus', 'Vivillon (Jungle)'],
-            ['Dark Cave', 'Vivillon (Monsoon)'],
-            ['Poké Ball Factory', 'Vivillon (Tundra)'],
-            ['Mt. Chimney Crater', 'Vivillon (Sun)'],
-            ['Sprout Tower', 'Vivillon (Archipelago)'],
-            ['Lost Hotel', 'Vivillon (Elegant)'],
-            ['Dreamyard', 'Vivillon (Ocean)'],
-            ['New Mauville', 'Vivillon (Continental)'],
-            ['Eterna Forest', 'Vivillon (River)'],
-            ['Sky Pillar', 'Vivillon (Polar)'],
-            ['Relic Castle', 'Vivillon (Sandstorm)'],
-            ['Flower Paradise', 'Vivillon (Garden)'],
-            ['Mt. Moon', 'Vivillon (High Plains)'],
-            ['Dragonspiral Tower', 'Vivillon (Savanna)'],
-            ['Frost Cavern', 'Vivillon (Icy Snow)'],
-            ['Thrifty Megamart', 'Vivillon (Poké Ball)'],
-        ].forEach(([location, vivillon]) => {
-            dungeonList[location].bossList = dungeonList[location].bossList
-                .filter(boss => boss.name != vivillon || (boss.name == vivillon && !boss.options?.requirement));
-        });
         TownList['Santalune City'].npcs = TownList['Santalune City'].npcs.filter(NPC => NPC.name != 'Vivillon Photobook');
     }
 );
@@ -171,14 +111,12 @@ SpecialEvents.newEvent('Flying Pikachu', 'Encounter Flying Pikachu and Red Spear
 SpecialEvents.newEvent('Mewtwo strikes back!', 'Encounter Armored Mewtwo for a limited time in Cerulean Cave.<br/>Encounter clone Pokémon roaming in Kanto.',
     // Start
     new Date(new Date().getFullYear(), 6, 18, 1), () => {
-        dungeonList['Cerulean Cave'].bossList.push(new DungeonBossPokemon('Armored Mewtwo', 1000000, 80));
         RoamingPokemonList.add(GameConstants.Region.kanto, 0, new RoamingPokemon('Bulbasaur (Clone)'));
         RoamingPokemonList.add(GameConstants.Region.kanto, 0, new RoamingPokemon('Charmander (Clone)'));
         RoamingPokemonList.add(GameConstants.Region.kanto, 0, new RoamingPokemon('Squirtle (Clone)'));
     },
     // End
     new Date(new Date().getFullYear(), 6, 24, 23), () => {
-        dungeonList['Cerulean Cave'].bossList = dungeonList['Cerulean Cave'].bossList.filter(boss => boss.name != 'Armored Mewtwo');
         RoamingPokemonList.remove(GameConstants.Region.kanto, 0, 'Bulbasaur (Clone)');
         RoamingPokemonList.remove(GameConstants.Region.kanto, 0, 'Charmander (Clone)');
         RoamingPokemonList.remove(GameConstants.Region.kanto, 0, 'Squirtle (Clone)');
@@ -235,7 +173,6 @@ SpecialEvents.newEvent('Merry Christmas!', 'Encounter Santa Snorlax roaming the 
                 }
             });
         });
-        dungeonList['Ilex Forest'].bossList.push(new DungeonBossPokemon('Grinch Celebi', 1600000, 100, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion)}));
     },
     // End
     new Date(new Date().getFullYear(), 11, 30, 23), () => {
@@ -247,17 +184,14 @@ SpecialEvents.newEvent('Merry Christmas!', 'Encounter Santa Snorlax roaming the 
                 }
             });
         });
-        dungeonList['Ilex Forest'].bossList = dungeonList['Ilex Forest'].bossList.filter(boss => boss.name != 'Grinch Celebi');
     }
 );
 // Golden Week
 SpecialEvents.newEvent('Golden Week', 'Enjoy your time off in the "Golden Week"! Travel tip: Visit the Flower Paradise in Sinnoh on your well earned vacation and enjoy the bloom of roses.',
     // Start
     new Date(new Date().getFullYear(), 3, 29, 1), () => {
-        dungeonList['Flower Paradise'].bossList.push(new DungeonBossPokemon('Bulbasaur (Rose)', 1600000, 100, {requirement: new ClearDungeonRequirement(10, GameConstants.getDungeonIndex('Flower Paradise'))}));
     },
     // End
     new Date(new Date().getFullYear(), 4, 6, 23), () => {
-        dungeonList['Flower Paradise'].bossList = dungeonList['Flower Paradise'].bossList.filter(boss => boss.name != 'Bulbasaur (Rose)');
     }
 );
