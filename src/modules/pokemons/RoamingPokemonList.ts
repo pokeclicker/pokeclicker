@@ -151,7 +151,7 @@ RoamingPokemonList.add(Region.hisui, 0, new RoamingPokemon('Enamorus', new Quest
 // Events
 // Lunar New Year (Jan 24 - Feb 7)
 RoamingPokemonList.add(Region.kalos, 0, new RoamingPokemon('Vivillon (Fancy)', new SpecialEventRequirement('Lunar New Year')));
-RoamingPokemonList.add(Region.galar, 0, new RoamingPokemon('Vivillon (Fancy)', new SpecialEventRequirement('Lunar New Year')));
+RoamingPokemonList.add(Region.galar, 1, new RoamingPokemon('Vivillon (Fancy)', new SpecialEventRequirement('Lunar New Year')));
 RoamingPokemonList.add(Region.galar, 2, new RoamingPokemon('Vivillon (Fancy)', new SpecialEventRequirement('Lunar New Year')));
 RoamingPokemonList.add(Region.galar, 3, new RoamingPokemon('Vivillon (Fancy)', new SpecialEventRequirement('Lunar New Year')));
 RoamingPokemonList.add(Region.kalos, 0, new RoamingPokemon('Vivillon (Meadow)', new SpecialEventRequirement('Lunar New Year')));
