@@ -73,8 +73,14 @@ class MapHelper {
         const area = player.route() ||
             (App.game.gameState == GameConstants.GameState.temporaryBattle
                 ? TemporaryBattleRunner.getEnvironmentArea() : undefined) ||
+            (App.game.gameState == GameConstants.GameState.gym
+                ? GymRunner.getEnvironmentArea() : undefined) ||
             player.town()?.name ||
             undefined;
+
+        if (area in GameConstants.Environments) {
+            return area;
+        }
 
         const [env] = Object.entries(GameConstants.Environments).find(
             ([, regions]) => regions[player.region]?.has(area)
