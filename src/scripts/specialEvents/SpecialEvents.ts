@@ -45,7 +45,30 @@ class SpecialEvents implements Feature {
 // TODO: Fetch events from a server each 1/2/3/6/12/24 hours?
 // Create our events here for now (yearly)
 
-// Lunar New Year
+/* Lunar New Year
+    RoamingPokemonList.ts:
+        Vivillon (Meadow)
+        Vivillon (Fancy)
+    Dungeon.ts:
+        Vivillon (High Plains) in Mt. Moon
+        Vivillon (Modern) in Cerulean Cave
+        Vivillon (Archipelago) in Sprout Tower
+        Vivillon (Monsoon) in Dark Cave
+        Vivillon (Sun) in Mt. Chimney Crater
+        Vivillon (Continental) in New Mauville
+        Vivillon (Polar) in Sky Pillar
+        Vivillon (River) in Eterna Forest
+        Vivillon (Marine) in Lake Valor, Verity, and Acuity
+        Vivillon (Garden) in Flower Paradise
+        Vivillon (Sandstorm) in Relic Castle
+        Vivillon (Savanna) in Dragonspiral Tower
+        Vivillon (Jungle) in Moor of Icirrus
+        Vivillon (Ocean) in Dreamyard
+        Vivillon (Tundra) in Poké Ball Factory
+        Vivillon (Elegant) in Lost Hotel
+        Vivillon (Icy Snow) in Frost Cavern
+        Vivillon (Poké Ball) in Thrifty Megamart
+    */
 SpecialEvents.newEvent('Lunar New Year', 'Two kinds of Vivillon are roaming Kalos and later regions, and ones you\'ve previously caught have returned. Check the Photobook in Santalune City for hints!',
     // Start
     new Date(new Date().getFullYear(), 0, 24, 1), () => {
@@ -86,7 +109,11 @@ SpecialEvents.newEvent('Easter', 'Encounter Surprise Togepi for a limited time w
         // do not end questline, so ppl can finish it
     }
 );
-// First Event
+/* First Event
+    RoamingPokemonList.ts:
+        Flying Pikachu
+        Red Spearow
+    */
 SpecialEvents.newEvent('Flying Pikachu', 'Encounter Flying Pikachu and Red Spearow for a limited time roaming Kanto.',
     // Start
     new Date(new Date().getFullYear(), 6, 6, 1), () => {
@@ -95,7 +122,14 @@ SpecialEvents.newEvent('Flying Pikachu', 'Encounter Flying Pikachu and Red Spear
     new Date(new Date().getFullYear(), 6, 12, 23), () => {
     }
 );
-// Pokemon the first movie release date
+/* Pokemon the first movie release date
+    RoamingPokemonList.ts:
+        Bulbausaur (Clone)
+        Charmander (Clone)
+        Squirtle (Clone)
+    Dungeon.ts:
+        Armored Mewtwo in Cerulean Cave
+    */
 SpecialEvents.newEvent('Mewtwo strikes back!', 'Encounter Armored Mewtwo for a limited time in Cerulean Cave.<br/>Encounter clone Pokémon roaming in Kanto.',
     // Start
     new Date(new Date().getFullYear(), 6, 18, 1), () => {
@@ -130,7 +164,11 @@ SpecialEvents.newEvent('Halloween!', 'Encounter Spooky Pokémon for a limited ti
         Routes.getRoutesByRegion(GameConstants.Region.hoenn).forEach(route => route.pokemon.land = route.pokemon.land.filter(p => !['Pikachu (Gengar)', 'Shuppet', 'Duskull'].includes(p)));
     }
 );
-// Let's Go P/E release date
+/* Let's Go P/E release date
+    RoamingPokemonList.ts:
+        Let's Go Pikachu
+        Let's Go Eevee
+    */
 SpecialEvents.newEvent('Let\'s GO!', 'Encounter special Eevee and Pikachu roaming in the Kanto region.',
     // Start
     new Date(new Date().getFullYear(), 10, 16, 1), () => {
@@ -139,7 +177,12 @@ SpecialEvents.newEvent('Let\'s GO!', 'Encounter special Eevee and Pikachu roamin
     new Date(new Date().getFullYear(), 10, 23, 23), () => {
     }
 );
-// Christmas
+/* Christmas
+    RoamingPokemonList.ts:
+        Santa Snorlax
+    Dungeon.ts:
+        Grinch Celebi in Ilex Forest
+    */
 SpecialEvents.newEvent('Merry Christmas!', 'Encounter Santa Snorlax roaming the regions and discover the Grinch of Ilex Forest.',
     // Start
     new Date(new Date().getFullYear(), 11, 24, 1), () => {
@@ -148,7 +191,10 @@ SpecialEvents.newEvent('Merry Christmas!', 'Encounter Santa Snorlax roaming the 
     new Date(new Date().getFullYear(), 11, 30, 23), () => {
     }
 );
-// Golden Week
+/* Golden Week
+    Dungeon.ts:
+        Bulbasaur (Rose) in Flower Paradise
+    */
 SpecialEvents.newEvent('Golden Week', 'Enjoy your time off in the "Golden Week"! Travel tip: Visit the Flower Paradise in Sinnoh on your well earned vacation and enjoy the bloom of roses.',
     // Start
     new Date(new Date().getFullYear(), 3, 29, 1), () => {
