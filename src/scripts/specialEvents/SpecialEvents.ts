@@ -46,6 +46,7 @@ class SpecialEvents implements Feature {
 // Create our events here for now (yearly)
 
 // Lunar New Year
+    // TownList.ts: Vivillon Photobook in Santalune
 SpecialEvents.newEvent('Lunar New Year', 'Two kinds of Vivillon are roaming Kalos and later regions, and ones you\'ve previously caught have returned. Check the Photobook in Santalune City for hints!',
     // Start
     new Date(new Date().getFullYear(), 0, 24, 1), () => {
@@ -84,7 +85,6 @@ SpecialEvents.newEvent('Lunar New Year', 'Two kinds of Vivillon are roaming Kalo
                 new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 8),
             ]),
         ])}));
-        TownList['Santalune City'].npcs.push(VivillonPhotobook);
     },
     // End
     new Date(new Date().getFullYear(), 1, 7, 23), () => {
@@ -113,10 +113,10 @@ SpecialEvents.newEvent('Lunar New Year', 'Two kinds of Vivillon are roaming Kalo
             dungeonList[location].bossList = dungeonList[location].bossList
                 .filter(boss => boss.name != vivillon || (boss.name == vivillon && !boss.options?.requirement));
         });
-        TownList['Santalune City'].npcs = TownList['Santalune City'].npcs.filter(NPC => NPC.name != 'Vivillon Photobook');
     }
 );
 //Hoopa Day
+    // TowList and TemporaryBattleList: Youngster Joey in Cherrygrove
 SpecialEvents.newEvent('Hoopa Day', 'The Mischief Pokémon unleashes his tricks upon the world.',
     // Start
     new Date(new Date().getFullYear(), 3, 1, 1), () => {
@@ -124,12 +124,10 @@ SpecialEvents.newEvent('Hoopa Day', 'The Mischief Pokémon unleashes his tricks 
         if (pikabluQuestLine.state() == QuestLineState.inactive) {
             App.game.quests.getQuestLine('How blu mouse?').beginQuest();
         }
-        TownList['Cherrygrove City'].content.push(TemporaryBattleList['Youngster Joey']);
     },
     // End
     new Date(new Date().getFullYear(), 3, 2, 1), () => {
         // do not end questline, so ppl can finish it
-        TownList['Cherrygrove City'].content = TownList['Cherrygrove City'].content.filter(t => t != TemporaryBattleList['Youngster Joey']);
     }
 );
 // Easter
