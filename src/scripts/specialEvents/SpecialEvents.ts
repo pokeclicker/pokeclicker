@@ -46,7 +46,7 @@ class SpecialEvents implements Feature {
 // Create our events here for now (yearly)
 
 // Lunar New Year
-    // TownList.ts: Vivillon Photobook in Santalune
+// TownList.ts: Vivillon Photobook in Santalune
 SpecialEvents.newEvent('Lunar New Year', 'Two kinds of Vivillon are roaming Kalos and later regions, and ones you\'ve previously caught have returned. Check the Photobook in Santalune City for hints!',
     // Start
     new Date(new Date().getFullYear(), 0, 24, 1), () => {
@@ -116,7 +116,7 @@ SpecialEvents.newEvent('Lunar New Year', 'Two kinds of Vivillon are roaming Kalo
     }
 );
 //Hoopa Day
-    // TowList and TemporaryBattleList: Youngster Joey in Cherrygrove
+// TowList and TemporaryBattleList: Youngster Joey in Cherrygrove
 SpecialEvents.newEvent('Hoopa Day', 'The Mischief Pokémon unleashes his tricks upon the world.',
     // Start
     new Date(new Date().getFullYear(), 3, 1, 1), () => {

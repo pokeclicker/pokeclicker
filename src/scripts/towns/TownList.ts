@@ -5486,8 +5486,8 @@ const VivillonPhotobook = new NPC('Vivillon Photobook', [
 ], {
     requirement: new MultiRequirement([
         new QuestLineCompletedRequirement('The Great Vivillon Hunt!'),
-        new SpecialEventRequirement('Lunar New Year')
-    ])
+        new SpecialEventRequirement('Lunar New Year'),
+    ]),
 });
 
 const FriendlyAttendant = new NPC('Friendly Attendant', [
