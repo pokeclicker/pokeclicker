@@ -47,7 +47,8 @@ class Game {
         public saveReminder: SaveReminder,
         public battleCafe: BattleCafeSaveObject,
         public dreamOrbController: DreamOrbController,
-        public purifyChamber: PurifyChamber
+        public purifyChamber: PurifyChamber,
+        public weatherApp: WeatherApp
     ) {
         this._gameState = ko.observable(GameConstants.GameState.paused);
     }
@@ -113,6 +114,7 @@ class Game {
         ShardDeal.generateDeals();
         SafariPokemonList.generateSafariLists();
         RoamingPokemonList.generateIncreasedChanceRoutes(now);
+        WeatherApp.initialize();
 
         if (Settings.getSetting('disableOfflineProgress').value === false) {
             this.computeOfflineEarnings();
@@ -439,6 +441,8 @@ class Game {
                 }
                 // Give the players more Battle Cafe spins
                 BattleCafeController.spinsLeft(BattleCafeController.spinsPerDay());
+                // Generate the weather forecast
+                WeatherApp.initialize();
 
                 DayOfWeekRequirement.date(now.getDay());
             }
@@ -447,6 +451,10 @@ class Game {
             if (old.getHours() !== now.getHours()) {
                 Weather.generateWeather(now);
                 RoamingPokemonList.generateIncreasedChanceRoutes(now);
+                // Check if it's weather change time
+                if (now.getHours() % Weather.period === 0) {
+                    WeatherApp.checkDateHasPassed();
+                }
             }
 
             this.save();

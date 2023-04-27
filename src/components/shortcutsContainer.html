@@ -26,6 +26,13 @@
               </button>
             </td>
           </tr>
+          <tr data-bind="visible: WeatherApp.isUnlocked()">
+            <td class="p-0">
+              <button class="btn btn-block btn-primary m-0" onclick="WeatherApp.openWeatherAppModal();" href="#weatherAppModal" data-toggle="modal">
+                  Castform App
+              </button>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>

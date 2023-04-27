@@ -2081,6 +2081,16 @@ const RoadsideStandShadySalesman = new NPC('Shady Salesman', [
     'All sales are final!',
 ], {image: 'assets/images/npcs/ShadySalesman.png'});
 
+const WeatherAppNPC = new NPC('Meteorologist', [
+    'We developed an app called Castform App!.',
+    'This app will show the forecasts of every region.',
+    'The app is very limited however, it will only show the forecasts for the next 7 days.',
+    'If you need to see more, you can use our PC in the institute, it will show the forecasts for the next 30 days.',
+],
+{
+    requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Weather Institute')),
+});
+
 const FortreeWeatherman = new NPC('Weatherman', [
     'Castform is a very finicky Pokémon.',
     'It changes forms when the weather is drastically different.',
@@ -3147,9 +3157,9 @@ TownList['Weather Institute'] = new DungeonTown(
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
     [new RouteKillRequirement(10, GameConstants.Region.hoenn, 119)],
-    [],
+    [new WeatherAppTownContent()],
     {
-        npcs: [WeatherScan],
+        npcs: [WeatherAppNPC, WeatherScan],
     }
 );
 TownList['Mt. Pyre'] = new DungeonTown(
