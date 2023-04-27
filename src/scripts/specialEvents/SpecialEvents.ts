@@ -117,33 +117,25 @@ SpecialEvents.newEvent('Lunar New Year', 'Two kinds of Vivillon are roaming Kalo
     }
 );
 //Hoopa Day
+// QuestLineHelper.ts: Pikablu (literally Marill) quest; 'How blu mouse?'
 SpecialEvents.newEvent('Hoopa Day', 'The Mischief Pokémon unleashes his tricks upon the world.',
     // Start
     new Date(new Date().getFullYear(), 3, 1, 1), () => {
-        const pikabluQuestLine = App.game.quests.getQuestLine('How blu mouse?');
-        if (pikabluQuestLine.state() == QuestLineState.inactive) {
-            App.game.quests.getQuestLine('How blu mouse?').beginQuest();
-        }
         TownList['Cherrygrove City'].content.push(TemporaryBattleList['Youngster Joey']);
     },
     // End
     new Date(new Date().getFullYear(), 3, 2, 1), () => {
-        // do not end questline, so ppl can finish it
         TownList['Cherrygrove City'].content = TownList['Cherrygrove City'].content.filter(t => t != TemporaryBattleList['Youngster Joey']);
     }
 );
 // Easter
+// QuestLineHelper.ts: Surprise Togepi quest; 'Togepi Egg Hunt'
 SpecialEvents.newEvent('Easter', 'Encounter Surprise Togepi for a limited time with a dedicated Quest Line.',
     // Start
     new Date(new Date().getFullYear(), 3, 8, 1), () => {
-        const togepiEggHuntQuestLine = App.game.quests.getQuestLine('Togepi Egg Hunt');
-        if (togepiEggHuntQuestLine.state() == QuestLineState.inactive) {
-            App.game.quests.getQuestLine('Togepi Egg Hunt').beginQuest();
-        }
     },
     // End
     new Date(new Date().getFullYear(), 3, 29, 23), () => {
-        // do not end questline, so ppl can finish it
     }
 );
 // First Event
