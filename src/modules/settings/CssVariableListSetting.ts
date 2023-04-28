@@ -1,7 +1,7 @@
 import Setting from './Setting';
 
 export default class CssVariableListSetting extends Setting<string> {
-    constructor(name: string, displayName: string, options = [], defaultValue) {
+    constructor(name: string, displayName: string, options = [], defaultValue = '') {
         // Get the default value from our css
         const defValue = defaultValue || getComputedStyle(document.documentElement).getPropertyValue(`--${name}`) || '';
         super(
