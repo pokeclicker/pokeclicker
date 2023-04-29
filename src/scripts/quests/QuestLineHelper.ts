@@ -3157,9 +3157,9 @@ class QuestLineHelper {
     }
 
     // Event QuestLines
-    // Open the game between April 8-29.
+    // Open the game between April 8-29 (Easter).
     public static createFindSurpriseTogepiForEasterQuestLine() {
-        const findSurpriseTogepiForEasterQuestLine = new QuestLine('Togepi Egg Hunt', 'A strange Togepi has been spotted, but cannot be found!');
+        const findSurpriseTogepiForEasterQuestLine = new QuestLine('Togepi Egg Hunt', 'A strange Togepi has been spotted, but cannot be found!', new SpecialEventRequirement('Easter'), GameConstants.BulletinBoards.All);
 
         const surpriseTogepi = pokemonMap['Surprise Togepi'];
 
@@ -3216,9 +3216,9 @@ class QuestLineHelper {
         App.game.quests.questLines().push(findSurpriseTogepiForEasterQuestLine);
     }
 
-    // Open the game on April 1.
+    // Open the game on April 1 (Hoopa Day).
     public static createHoopaDayPikabluQuestLine() {
-        const hoopaDayPikabluQuestLine = new QuestLine('How blu mouse?', 'Apparently a strange blue mouse-like Pokémon might be out there somewhere?');
+        const hoopaDayPikabluQuestLine = new QuestLine('How blu mouse?', 'Apparently a strange blue mouse-like Pokémon might be out there somewhere?', new SpecialEventRequirement('Hoopa Day'), GameConstants.BulletinBoards.All);
 
         const PikabluCatch = new CaptureSpecificPokemonQuest(
             'Marill',
