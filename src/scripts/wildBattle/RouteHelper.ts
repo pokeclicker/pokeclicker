@@ -48,7 +48,7 @@ class RouteHelper {
     }
 
     public static dungeonPokerusEVs(dungeon: Dungeon): string {
-        const possiblePokemon: PokemonNameType[] = dungeon.allAvailablePokemon();
+        const possiblePokemon: PokemonNameType[] = [...new Set(dungeon.allAvailablePokemon())];
         if (this.minPokerus(possiblePokemon) == GameConstants.Pokerus.Resistant) {
             return 'All Pokémon in this dungeon are resistant!';
         }
