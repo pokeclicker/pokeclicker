@@ -608,7 +608,7 @@ TemporaryBattleList['Youngster Joey'] = new TemporaryBattle(
     'Youngster Joey',
     [new GymPokemon('Rattata', 548919101828, 100)],
     'How?!? My Rattata is in the top percentage of all Rattata!',
-    [new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion)],
+    [new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion), new SpecialEventRequirement('Hoopa Day')])],
     undefined,
     {
         displayName: 'Youngster Joey',
