@@ -10,6 +10,10 @@ const PokedexFilters: Record<string, FilterOption> = {
         'Search',
         ko.observable(new RegExp('', 'i')),
     ),
+    id: new FilterOption<number>(
+        'SearchID',
+        ko.observable(-1),
+    ),
     region: new FilterOption<Region>(
         'Region',
         ko.observable(null),

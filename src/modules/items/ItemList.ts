@@ -23,6 +23,7 @@ import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
 import MultiRequirement from '../requirements/MultiRequirement';
 import TemporaryBattleRequirement from '../requirements/TemporaryBattleRequirement';
 import ObtainedPokemonRequirement from '../requirements/ObtainedPokemonRequirement';
+import QuestItem from './QuestItem';
 
 // eslint-disable-next-line import/prefer-default-export
 export const ItemList: { [name: string]: Item } = {};
@@ -103,6 +104,9 @@ ItemList.Electric_egg = new EggItem(EggItemType.Electric_egg, 1000, undefined, '
 ItemList.Dragon_egg = new EggItem(EggItemType.Dragon_egg, 1000, undefined, 'Dragon Egg');
 ItemList.Pokemon_egg = new EggItem(EggItemType.Pokemon_egg, 1000, undefined, 'Pokémon Egg');
 ItemList.Mystery_egg = new EggItem(EggItemType.Mystery_egg, 700, undefined, 'Mystery Egg');
+
+// Quest Items
+ItemList.Celios_Errand_Ruby = new QuestItem('Celios_Errand_Ruby', 'Ruby', 'A Ruby found in Ruby Path', 'Celio\'s Errand');
 
 // Vitamins
 // ItemList.RareCandy = new Vitamin(VitaminType.RareCandy, Infinity, undefined, undefined, 'Rare Candy', 'A rare-to-find candy that currently has no use.');

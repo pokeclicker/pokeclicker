@@ -664,6 +664,14 @@
     %>
 
     <%- include('templates/mapPOI',
+       { name: "S. S. Anne"
+       , x: 28, y: 9
+       , width: 8, height: 3
+       , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Coumarine City') }"
+      })
+    %>
+
+    <%- include('templates/mapPOI',
         { name: "Underground Entrance"
         , x: 9, y: 21
         , width: 3, height: 4
