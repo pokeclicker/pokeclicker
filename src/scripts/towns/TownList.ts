@@ -1362,7 +1362,7 @@ const JohtoBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations[
     ItemList.KebiaBerry,
     ItemList.ShucaBerry,
     ItemList.ChartiBerry,
-]);
+], 'Johto Berry Master');
 
 
 // Johto NPCs
@@ -2036,7 +2036,7 @@ const HoennBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations[
     ItemList.Sprinklotad,
     ItemList.FarmHandKerry,
     ItemList.HatcheryHelperCameron,
-]);
+], 'Hoenn Berry Master');
 
 //Hoenn Flute Master
 const HoennFluteMaster = new GemMasterShop();
@@ -3555,7 +3555,7 @@ const SinnohBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations
     ItemList.Berry_Shovel,
     ItemList.Mulch_Shovel,
     ItemList.FarmHandRiley,
-]);
+], 'Sinnoh Berry Master');
 
 //Sinnoh NPCs
 
