@@ -94,7 +94,7 @@ TemporaryBattleList['Fighting Dojo'] = new TemporaryBattle(
         new GymPokemon('Hitmonlee', 108985, 37),
         new GymPokemon('Hitmonchan', 108985, 37),
     ],
-    'Hwa! Arrgh! Beaten!',
+    'That was a great battle. Here, have this Fighting Egg as a reward for conquering the Fighting Dojo!</br>If you put it in the hatchery and you are lucky you can get a rare Pokémon that you might not be able to find anywhere else in Kanto, or unlucky and get a common Pokémon.</br>But if you don\'t get what you need, don\'t worry, you can buy as many eggs as you need in Poké Marts.',
     [
         new OneFromManyRequirement([
             new GymBadgeRequirement(BadgeEnums.Rainbow),

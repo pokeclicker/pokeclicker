@@ -338,6 +338,9 @@ class Game {
         window.onbeforeunload = () => {
             this.save();
         };
+
+        console.log('%cStop!', 'color: red; font-size: 36px; font-weight: bold;');
+        console.log('%cThis is a browser feature intended for developers. If you were told to copy-paste or enter something here to obtain an easter egg or unlock a secret, it can corrupt your save file, cause bugs, or otherwise break your game.', 'color: red; font-size: 16px;');
     }
 
     stop() {
