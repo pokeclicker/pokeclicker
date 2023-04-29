@@ -3281,8 +3281,8 @@ TownList['Pyrite Colosseum Battles'] = new DungeonTown(
         new DevelopmentRequirement(),
     ]
 );
-TownList['Pyrite Bldg'] = new DungeonTown(
-    'Pyrite Bldg',
+TownList['Pyrite Building'] = new DungeonTown(
+    'Pyrite Building',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
