@@ -94,7 +94,7 @@ TemporaryBattleList['Fighting Dojo'] = new TemporaryBattle(
         new GymPokemon('Hitmonlee', 108985, 37),
         new GymPokemon('Hitmonchan', 108985, 37),
     ],
-    'Hwa! Arrgh! Beaten!',
+    'That was a great battle. Here, have this Fighting Egg as a reward for conquering the Fighting Dojo!</br>If you put it in the hatchery and you are lucky you can get a rare Pokémon that you might not be able to find anywhere else in Kanto, or unlucky and get a common Pokémon.</br>But if you don\'t get what you need, don\'t worry, you can buy as many eggs as you need in Poké Marts.',
     [
         new OneFromManyRequirement([
             new GymBadgeRequirement(BadgeEnums.Rainbow),
@@ -2388,6 +2388,76 @@ TemporaryBattleList['Hoenn Stone Salesman'] = new TemporaryBattle(
                 });
             }
         },
+    }
+);
+TemporaryBattleList['Captain Stern'] = new TemporaryBattle(
+    'Captain Stern',
+    [new GymPokemon('Sealeo', 217912983, 59)],
+    'Well I\'ll be! You\'re quite the trainer!',
+    [new QuestLineStepCompletedRequirement('Primal Reversion', 4)],
+    undefined,
+    {
+        displayName: 'Captain Stern',
+        imageName: '../npcs/Sailor',
+    }
+);
+TemporaryBattleList['Archie Primal'] = new TemporaryBattle(
+    'Archie Primal',
+    [
+        new GymPokemon('Mightyena', 59926070, 60),
+        new GymPokemon('Crobat', 59926070, 60),
+        new GymPokemon('Muk', 59926070, 60),
+        new GymPokemon('Sharpedo', 59926070, 60),
+    ],
+    'You\'re too late, $playername$! I have uncovered the secrets of the Blue Orb, despite Maxie\'s meddling!',
+    [new QuestLineStepCompletedRequirement('Primal Reversion', 9)],
+    undefined,
+    {
+        displayName: 'Archie',
+        imageName: '../npcs/Aqua Leader',
+    }
+);
+
+TemporaryBattleList['Maxie Primal'] = new TemporaryBattle(
+    'Maxie Primal',
+    [
+        new GymPokemon('Mightyena', 59926070, 60),
+        new GymPokemon('Crobat', 59926070, 60),
+        new GymPokemon('Weezing', 59926070, 60),
+        new GymPokemon('Camerupt', 59926070, 60),
+    ],
+    'You\'re too late, $playername$! I have uncovered the secrets of the Red Orb, despite Archie\'s meddling!',
+    [new QuestLineStepCompletedRequirement('Primal Reversion', 9)],
+    undefined,
+    {
+        displayName: 'Maxie',
+        imageName: '../npcs/Magma Leader',
+    }
+);
+TemporaryBattleList['Primal Groudon'] = new TemporaryBattle(
+    'Primal Groudon',
+    [new GymPokemon('Primal Groudon', 293674710, 100)],
+    '<i>Primal Groudon lets out a terrifying roar, then drops the Red Orb and returns to its normal form.</i></br><img src="assets/images/megaStone/383.png"/>',
+    [new MultiRequirement([new QuestLineStepCompletedRequirement('Primal Reversion', 14), new WeatherRequirement([WeatherType.Sunny])])],
+    undefined,
+    {
+        hideTrainer: true,
+        returnTown: 'Mt. Pyre',
+        imageName: '../pokemon/383.01',
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Groudon').giveMegastone(),
+    }
+);
+TemporaryBattleList['Primal Kyogre'] = new TemporaryBattle(
+    'Primal Kyogre',
+    [new GymPokemon('Primal Kyogre', 293674710, 100)],
+    '<i>Primal Kyogre lets out a terrifying roar, then drops the Blue Orb and returns to its normal form.</i></br><img src="assets/images/megaStone/382.png"/>',
+    [new MultiRequirement([new QuestLineStepCompletedRequirement('Primal Reversion', 14), new WeatherRequirement([WeatherType.Rain])])],
+    undefined,
+    {
+        hideTrainer: true,
+        returnTown: 'Mt. Pyre',
+        imageName: '../pokemon/382.01',
+        firstTimeRewardFunction: () => App.game.party.getPokemonByName('Kyogre').giveMegastone(),
     }
 );
 TemporaryBattleList['Aipom Alley'] = new TemporaryBattle(
