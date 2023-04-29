@@ -713,6 +713,9 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.alola]: new Set(['Hau\'oli Cemetery', 'Memorial Hill']),
         [Region.galar]: new Set(['Dusty Bowl', 49]),
     },
+
+    // No need to set anything here, only exists for battle overrides
+    Default: {},
 };
 
 export type Environment = keyof typeof Environments;
@@ -727,6 +730,7 @@ export const EnvironmentCssClass: Record<Environment, string> = {
     PowerPlant: 'power-plant',
     Mansion: 'mansion',
     Graveyard: 'graveyard',
+    Default: '',
 };
 
 // Starter Pokémon
