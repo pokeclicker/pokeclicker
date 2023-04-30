@@ -1,4 +1,4 @@
-import { AchievementOption, MegaStoneType } from '../GameConstants';
+import { AchievementOption, MegaStoneType, humanifyString } from '../GameConstants';
 import { pokemonMap } from '../pokemons/PokemonList';
 import { PokemonNameType } from '../pokemons/PokemonNameType';
 import Requirement from './Requirement';
@@ -23,7 +23,7 @@ export default class MegaEvolveRequirement extends Requirement {
         } else {
             const hints = [];
             if (!player.hasMegaStone(this.megaStone)) {
-                hints.push(`${this.name} needs the ${MegaStoneType[this.megaStone]} Mega Stone.`);
+                hints.push(`${this.name} needs the ${humanifyString(MegaStoneType[this.megaStone])} Mega Stone.`);
             }
             if (App.game.party.getPokemonByName(this.name).attack < attackRequired) {
                 hints.push(`Needs at least ${attackRequired.toLocaleString('en-US')} attack to Mega Evolve.`);
