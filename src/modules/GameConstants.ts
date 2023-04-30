@@ -695,7 +695,7 @@ export const Environments: Record<string, EnvironmentData> = {
     Mansion: {
         [Region.kanto]: new Set(['Silph Co.', 'Pokémon Mansion']),
         [Region.johto]: new Set(['Olivine City', 'Sprout Tower', 'Burned Tower']),
-        [Region.hoenn]: new Set(['Petalburg City', 'Pyrite Bldg']),
+        [Region.hoenn]: new Set(['Petalburg City', 'Pyrite Building']),
         [Region.sinnoh]: new Set(['Veilstone City', 'Canalave City', 'Snowpoint Temple']),
         [Region.unova]: new Set(['Castelia City', 'Mistralton City', 'Opelucid City', 'Liberty Garden', 'Dragonspiral Tower', 'Dreamyard']),
         [Region.kalos]: new Set(['Parfum Palace', 'Lost Hotel']),
@@ -1234,7 +1234,7 @@ export const HoennDungeons = [
     'Phenac City Battles',
     'Pyrite Town Battles',
     'Pyrite Colosseum Battles',
-    'Pyrite Bldg',
+    'Pyrite Building',
     'Pyrite Cave',
     'Relic Cave',
     'Mt. Battle Battles',
