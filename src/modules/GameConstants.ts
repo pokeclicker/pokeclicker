@@ -695,7 +695,7 @@ export const Environments: Record<string, EnvironmentData> = {
     Mansion: {
         [Region.kanto]: new Set(['Silph Co.', 'Pokémon Mansion']),
         [Region.johto]: new Set(['Olivine City', 'Sprout Tower', 'Burned Tower']),
-        [Region.hoenn]: new Set(['Petalburg City', 'Pyrite Bldg']),
+        [Region.hoenn]: new Set(['Petalburg City', 'Pyrite Building']),
         [Region.sinnoh]: new Set(['Veilstone City', 'Canalave City', 'Snowpoint Temple']),
         [Region.unova]: new Set(['Castelia City', 'Mistralton City', 'Opelucid City', 'Liberty Garden', 'Dragonspiral Tower', 'Dreamyard']),
         [Region.kalos]: new Set(['Parfum Palace', 'Lost Hotel']),
@@ -713,6 +713,9 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.alola]: new Set(['Hau\'oli Cemetery', 'Memorial Hill']),
         [Region.galar]: new Set(['Dusty Bowl', 49]),
     },
+
+    // No need to set anything here, only exists for battle overrides
+    Default: {},
 };
 
 export type Environment = keyof typeof Environments;
@@ -727,6 +730,7 @@ export const EnvironmentCssClass: Record<Environment, string> = {
     PowerPlant: 'power-plant',
     Mansion: 'mansion',
     Graveyard: 'graveyard',
+    Default: '',
 };
 
 // Starter Pokémon
@@ -1230,7 +1234,7 @@ export const HoennDungeons = [
     'Phenac City Battles',
     'Pyrite Town Battles',
     'Pyrite Colosseum Battles',
-    'Pyrite Bldg',
+    'Pyrite Building',
     'Pyrite Cave',
     'Relic Cave',
     'Mt. Battle Battles',
@@ -2020,4 +2024,57 @@ export enum ShadowStatus {
     None,
     Shadow,
     Purified,
+}
+
+export enum MegaStoneType {
+    Abomasite,
+    Absolite,
+    Aerodactylite,
+    Aggronite,
+    Alakazite,
+    Altarianite,
+    Ampharosite,
+    Audinite,
+    Banettite,
+    Beedrillite,
+    Blastoisinite,
+    Blazikenite,
+    Blue_Orb,
+    Cameruptite,
+    Charizardite_X,
+    Charizardite_Y,
+    Diancite,
+    Galladite,
+    Garchompite,
+    Gardevoirite,
+    Gengarite,
+    Glalitite,
+    Gyaradosite,
+    Heracronite,
+    Houndoominite,
+    Kangaskhanite,
+    Latiasite,
+    Latiosite,
+    Lopunnite,
+    Lucarionite,
+    Manectite,
+    Mawilite,
+    Medichamite,
+    Metagrossite,
+    Meteorite,
+    Mewtwonite_X,
+    Mewtwonite_Y,
+    Pidgeotite,
+    Pinsirite,
+    Red_Orb,
+    Sablenite,
+    Salamencite,
+    Sceptilite,
+    Scizorite,
+    Sharpedonite,
+    Slowbronite,
+    Steelixite,
+    Swampertite,
+    Tyranitarite,
+    Venusaurite,
 }

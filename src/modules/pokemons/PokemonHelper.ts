@@ -5,12 +5,16 @@ import {
     BattlePokemonGender,
     PokemonStatisticsType,
     ShadowStatus,
+    MegaStoneType,
 } from '../GameConstants';
 import { PokemonNameType } from './PokemonNameType';
 import P from './mapProvider';
 import PokemonType from '../enums/PokemonType';
 import DataPokemon from './DataPokemon';
 import GameHelper from '../GameHelper';
+import MegaEvolveRequirement from '../requirements/MegaEvolveRequirement';
+import MegaStoneItem from '../items/MegaStoneItem';
+import { ItemList } from '../items/ItemList';
 
 // eslint-disable-next-line import/prefer-default-export
 export function calcNativeRegion(pokemonName: PokemonNameType) {
@@ -123,6 +127,16 @@ export function getPokeballImage(pokemonName: PokemonNameType): string {
 
 export function displayName(englishName: string): Computed<string> {
     return App.translation.get(englishName, 'pokemon');
+}
+
+export function hasMegaEvolution(pokemonName: PokemonNameType): boolean {
+    return !!P.pokemonMap[pokemonName].evolutions?.some((e) => e.restrictions.some((r) => r instanceof MegaEvolveRequirement));
+}
+
+export function getMegaStones(pokemonName: PokemonNameType): MegaStoneItem[] {
+    return GameHelper.enumStrings(MegaStoneType)
+        .filter(s => (ItemList[s] as MegaStoneItem)?.basePokemon == pokemonName)
+        .map(s => ItemList[s] as MegaStoneItem);
 }
 
 // To have encounter/caught/defeat/hatch statistics in a single place
