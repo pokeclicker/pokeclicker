@@ -31,8 +31,7 @@ class PurifyChamber implements Saveable {
             const purifiedPokemon = App.game.party.caughtPokemon.filter((p) => p.shadow == GameConstants.ShadowStatus.Purified).length;
             const flow = 160 * purifiedPokemon * purifiedPokemon +
                 3000 * purifiedPokemon +
-                1000 * Math.exp(0.06 * purifiedPokemon) +
-                35000000 / (1 + Math.exp(-5 * (purifiedPokemon - 125)));
+                1000 * Math.exp(0.08 * purifiedPokemon);
             return Math.round(flow);
         });
     }
