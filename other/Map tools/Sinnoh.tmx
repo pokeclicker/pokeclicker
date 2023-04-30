@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="100" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="20" nextobjectid="2">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="100" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="25" nextobjectid="2">
  <tileset firstgid="1" source="tiles_FRLG.tsx"/>
  <tileset firstgid="1317" source="tiles_Advanced.tsx"/>
  <tileset firstgid="9301" source="no-bg.tsx"/>
- <tileset firstgid="9829" source="tiles_custom.tsx"/>
+ <tileset firstgid="9957" source="tiles_custom.tsx"/>
  <layer id="1" name="Water Base" width="100" height="60">
   <data encoding="base64" compression="zstd">
    KLUv/WDAXNUAAEBcAQAAXAFcAQUAR+4eARu2tXMEbChk3h0R
@@ -49,19 +49,9 @@
    KLUv/WDAXN0SAMLGFh7AJR338v//u/7/DvBqSxl5uRlgPwdtDUAYr+1kVwp5xI4nMxTK233SnwTYLqiLJG/ZTICoEHYVNW8P7VALzbDAusWlJhH7ydpXiB8wYQ8MdjmHyf4ZHx37xgGA0KhQdYY1YAITiAjdtg0SoBAgKCCCBCRIGAIGwQgcgoQiSCiCCoEQlCJBxai3G8HgwJoHDkKhL39HFo0N51HoyN+T8DsxxvSw3RCa7nEh2rdQJn99JN+3Fof8lI/6XZqa622NeBKMj1LfGInrEQTVyQhyWG9BeiTrjyNaQurkfTvWeT0EdVAzQ51cj4uBxPckQ/2o8i90HCBxbRzzDN7FugJw0D+anJz7fzGOvsUitzKpGXqA9NrJbT1rL2vFqR058+f2gFO/Ik2SHT3TRXcbGM8pbdXb+TDCzrJMQcmcqFEqTDJsBPgegAYqypxuoZMFukq4HW1+4OQwNdN2klud50O3h1C6HPmTQ3nF1oGDpDgJUe4Uq+UchHfvjv3iiaHqlx0uxvSvfuSTw/jBQ2B/SFlKlwQXNYebIWDCd9e/r9yDXMSe/aGkzRC1lXp+XVA9dX50ucaEUwq4HC0k1ynAyXnOZ4DE5NcJsMlfT16lykx+yGeLsYzKLE4au2mRXfjQNMU+4osQR3wLNyBOXn6KftQlg7TqI033hpu1fBXvvJXlAJwcLTt1qMmFR17pGtLkyBi99BYxeUhPIXNnyGzfg+VI6OpTyMBgk3T8+/Iio4WSIScvRizM5Ks8wQtPNOL/ABuX+uRUuaYcZnmRxo7xXtWs2cJEBPcrBABN6Q==
   </data>
  </layer>
- <layer id="9" name="Dungeons" width="100" height="60">
-  <data encoding="base64" compression="zstd">
-   KLUv/WDAXE0RAOJPLi5gV5oDkyQZfADIH/wbG3EI8UDCHjRySZIkSZIkmK4ktAKRD8lfRbvrCJKIjpACObPTzIQzu5nZXNwsbhWsZkYzm6G4TdwkMplZzAzm5efya/mxtHeDuD28lZ/Kr/QjvZIfyW/kJ+J5o5/oF/p5NFaBPpWHalVFUaUdaZeCsjvZmRQQvAZCdiC7D9AHFOHw+ox2ol1IIOAF4BQ6dhy7jZ2c0x3TgcGLutwr4dXA8Fp4IbyqTmOXscMYgJSgQC0oKE6GA7ACkkBEbqIDeeCHvRpJyUOJSOVTI1MiRcmfgIqgJocSfBZKGfwlp4Xqao/USE1O7RTlBo80Tio1U5ZvqiT4nOlqlxz+k9XsN0OD07GTKYs4vhDNbz8VO3mqwb1NNGmkRcUuHeLp8Jm3oaJkKiC3Dp0y92IHJieHMx46XG2o+Kgpw9vkReORdijDJ9KWpiYHdflHjA/auMA7J0jUWZODcsVlL506Ka2hdk+QVIYu+6UVEROZIJmUPn8dWGk63OSoXqWMTQRJmVSVPSXERqhit04tNUgJ+SVRi5p045l4qqK6Lq2YHOr6wKcSVAUOwCWvTjm5WoeqTK0HauVqp2ReP0Hak+kAShzA3iamDnlBKTIAM5uYIuQFpcIAbDJ/MvVkgal2UuuYuw1F8NSsSU95xBhT5/SL2U0eTp7UG6hs3SMmi2aTtqx4XPpeP5oWOvm0wUdmC0zEkIdt9wtFe510nI4CZWI=
-  </data>
- </layer>
- <layer id="10" name="Dungeon Overlay" width="100" height="60">
-  <data encoding="base64" compression="zstd">
-   KLUv/WDAXI0DADQCABAGAAASBgAVBgAAFw4GAAARGRcHBgAAKgYAAB8QHRAWHh0YoABbbBgD4IKKq2A89YkmNo6Xt1/HC14NcZWx9VhsryCuxNSt0NeLcEepKk5aRVA4/ZUfu5CPaoqTrl3KEuEuUpfjpBUxrCqU04sR
-  </data>
- </layer>
  <layer id="19" name="Other" width="100" height="60">
   <data encoding="base64" compression="zstd">
-   KLUv/WDAXPUAAGAAzQYAAM4GAADPBgAEAAUMPfQ4uX4gCFQnz/CODQ==
+   KLUv/WDAXA0DAFJGEBqQK8sBz8zMzCdc15x1XXPWdS3u7jrdHZsmBU/mg/lcLFc5yk1OcpGD3MNxjWPc4hSXOMQdZrjCEW5wggsc4JoBCAAFDHroEfxAEKgOkBAcqC64yaW63YDqJBXeXQE=
   </data>
  </layer>
  <layer id="8" name="Town" width="100" height="60">
@@ -71,7 +61,32 @@
  </layer>
  <layer id="13" name="Decoration" width="100" height="60">
   <data encoding="base64" compression="zstd">
-   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
+   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
+  </data>
+ </layer>
+ <layer id="24" name="Dungeon Forest -2" width="100" height="60">
+  <data encoding="base64" compression="zstd">
+   KLUv/WDAXOUBAAQCAL0DANgDAADZAwAA2vQDAAD1AwAA9hAEAAARBAAAEgQHAJEOxwBYMAgqIpxc9RBeLvUYAnXQEby7Ag==
+  </data>
+ </layer>
+ <layer id="23" name="Dungeon Forest -1" width="100" height="60">
+  <data encoding="base64" compression="zstd">
+   KLUv/WDAXOUBAAQCAL0DANgDAADZAwAA2vQDAAD1AwAA9hAEAAARBAAAEgQHAI0OxwBYMAgqIpxc9RBeLvUYAnXYEby7Ag==
+  </data>
+ </layer>
+ <layer id="22" name="Dungeon Forest" width="100" height="60">
+  <data encoding="base64" compression="zstd">
+   KLUv/WDAXP0BABQCAL0D2AMAANkDAADaA/QDAAD1AwAA9gMQBAAAEQQAABIECSDQgvqBDg9exjoqODLWUcHLGEcFh4J0Cp6yAQ==
+  </data>
+ </layer>
+ <layer id="9" name="Dungeons" width="100" height="60">
+  <data encoding="base64" compression="zstd">
+   KLUv/WDAXAURANIPLi1gV5oDkyQZfAAAEA6++MLBFx8AAAAAIH/w04ut5n+lByJQQVkpdFeNLonoCCk9s9PMxDPbmelk3DBuFyxnhjO7Kd1IN4rMZlYzown5gfw+fh5N4hZxg3gdP47fxk/jWfwqfqUfCfQefg6/0U/UqhCrQFSrKoqa2cnsYmB2LzuXAoLXQMuOZbcyCo0mRK+Qyi5lhyIQ8AJwCic7k13JT8/pj+nA4EVd7pXwamB4LbwQXlVHshvZiQyAj6BALSgoToYDwAKSQERsmwN54Ie1GkHJS4mg8lIjKBGn5E+gIlCTRgk+C6WM/8lprrrakxpRk6ido9zgIo2TSIEpy5c6KT59utqTgf9kNfvNoeF07KSUJY6vovnNp2InSTW6txJNjvSo2KFOPA2f8DZUlKYOuXXolFEvdgA56ZzxkZ5yratKb5MejQ/aoRTfSHOamhzq8oYYH7RxgXdOkKizJhnlJpc1P3VQWkztniBRsiaZmmPb3BmTMckk61tdh2nKVIdlWDplMlWuFIiN1Jl0s1TILwm9OGQ3msWpitW1VMWkVusDn06gPk7AJa9KOVmlnlqZqgdq5WqnZJ4vV+ql+QCaOABfTYgC8oKmygBoakJUkBc0JQaAGfxJKZEORrWTVcfdbSiCSs2aHJQHjDHFTq+YzeThJEu9eWXTPWKSNPe0YaXj0uf60bTQyUobPyJbaiIGOOy5Xzra76TjdBSoFQM=
+  </data>
+ </layer>
+ <layer id="10" name="Dungeon Overlay" width="100" height="60">
+  <data encoding="base64" compression="zstd">
+   KLUv/WDAXI0DADQCABAGAAASBgAVBgAAFw4GAAARGRcHBgAAKgYAAB8QHRAWHh0YoABbbBgD4IKKq2A89YkmNo6Xt1/HC14NcZWx9VhsryCuxNSt0NeLcEepKk5aRVA4/ZUfu5CPaoqTrl3KEuEuUpfjpBUxrCqU04sR
   </data>
  </layer>
 </map>

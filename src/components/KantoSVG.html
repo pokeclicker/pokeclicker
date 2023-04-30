@@ -1005,6 +1005,15 @@
             , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('One Island') }"
             })
         %>
+
+        <!--S. S. Anne-->
+        <%- include('templates/mapPOI',
+           { name: "S. S. Anne"
+           , x: 1, y: 30
+           , width: 3, height: 8
+           , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('One Island') }"
+          })
+        %>
     </g>
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.kanto, 'Sevii Islands 4567').id">
@@ -1575,6 +1584,15 @@
             , width: 3, height: 2
             , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Five Island') }"
             })
+        %>
+
+        <!--S. S. Anne-->
+        <%- include('templates/mapPOI',
+           { name: "S. S. Anne"
+           , x: 58, y: 24
+           , width: 8, height: 3
+           , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Five Island') }"
+          })
         %>
 
         <%- include('templates/mapOverlay',
