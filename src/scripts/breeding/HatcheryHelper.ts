@@ -105,6 +105,7 @@ class HatcheryHelper {
             message: 'Thanks for hiring me,\nI won\'t let you down!',
             type: NotificationConstants.NotificationOption.success,
             timeout: 30 * GameConstants.SECOND,
+            setting: NotificationConstants.NotificationSetting.Hatchery.hatchery_helper,
         });
     }
 
@@ -114,6 +115,7 @@ class HatcheryHelper {
             message: 'Thanks for the work.\nLet me know when you\'re hiring again!',
             type: NotificationConstants.NotificationOption.info,
             timeout: 30 * GameConstants.SECOND,
+            setting: NotificationConstants.NotificationSetting.Hatchery.hatchery_helper,
         });
         this.hired(false);
         return;
