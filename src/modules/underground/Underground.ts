@@ -228,7 +228,7 @@ export class Underground implements Feature {
         }
 
         if (item.valueType == UndergroundItemValueType.MegaStone) {
-            App.game.party.getPokemonByName((item as UndergroundMegaStoneItem).pokemon)?.giveMegastone();
+            player.gainMegaStone((item as UndergroundMegaStoneItem).megaStone);
             return;
         }
 

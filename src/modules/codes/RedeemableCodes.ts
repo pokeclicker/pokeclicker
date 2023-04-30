@@ -1,7 +1,7 @@
 import { Saveable } from '../DataStore/common/Saveable';
 import BerryType from '../enums/BerryType';
 import {
-    Currency, Pokeball, Region, VitaminType,
+    Currency, MegaStoneType, Pokeball, Region, VitaminType,
 } from '../GameConstants';
 import { ItemList } from '../items/ItemList';
 import KeyItemType from '../enums/KeyItemType';
@@ -100,7 +100,7 @@ export default class RedeemableCodes implements Saveable {
 
             new RedeemableCode('ampharosite', -512934122, false, async () => {
                 // Give the player Mega Ampharos
-                App.game.party.getPokemonByName('Ampharos').giveMegastone(true);
+                player.gainMegaStone(MegaStoneType.Ampharosite);
                 // Notify that the code was activated successfully
                 Notifier.notify({
                     title: 'Code activated!',
