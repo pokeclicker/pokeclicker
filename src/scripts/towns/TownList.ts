@@ -2047,7 +2047,7 @@ const HoennContestShop = new Shop([
     ItemList['Onix (Rocker)'],
     ItemList['Tangela (Pom-pom)'],
     ItemList['Weepinbell (Fancy)'],
-], 'Contest Shop');
+], 'Contest Shop', [new DevelopmentRequirement()]);
 
 //Hoenn Flute Master
 const HoennFluteMaster = new GemMasterShop();
