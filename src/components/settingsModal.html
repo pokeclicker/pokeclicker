@@ -107,6 +107,7 @@
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.farm')}"></tr>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.hatchery')}"></tr>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.underground')}"></tr>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.shop')}"></tr>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.oakItems')}"></tr>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.pokeballSelection')}"></tr>
                                 <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.dailyQuests')}"></tr>
@@ -345,7 +346,7 @@
                         </tbody></table>
                         <span>Options:<br/>
                             <code data-bind="foreach: DiscordRichPresence.outputOptions">
-                                <a href="#" data-bind="click: Settings.setSettingByName(DiscordRichPresence.focusedElement.name, DiscordRichPresence.focusedElement.value += ` {${$data.key}}`), text: `{${$data.key}}`"></a>
+                                <a href="#" data-bind="click: () => { if (DiscordRichPresence.focusedElement.name) { Settings.setSettingByName(DiscordRichPresence.focusedElement.name, DiscordRichPresence.focusedElement.value += ` {${$data.key}}`) }}, text: `{${$data.key}}`"></a>
                             </code>
                         </span>
                     </div>

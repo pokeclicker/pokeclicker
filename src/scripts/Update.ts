@@ -2145,6 +2145,55 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 144);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 145);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 146);
+
+            // Mega Stones are items now!
+            // Give the player the Mega Stone if they own the Mega form or have the mega stone on the base form.
+            // Then delete the megaStone property on all caught pokemon.
+            const updateMegaStone = (megaStone: string, basePokemonId: number, megaPokemonId: number) => {
+                const basePokemon = saveData.party.caughtPokemon.find(p => p.id === basePokemonId);
+                const megaPokemon = saveData.party.caughtPokemon.find(p => p.id === megaPokemonId);
+                if (megaPokemon || (basePokemon?.[14])) {
+                    playerData._itemList[megaStone] = 1;
+                }
+            };
+
+            updateMegaStone('Abomasite', 460, 460.01); // Abomasnow
+            updateMegaStone('Absolite', 359, 359.01); // Absol
+            updateMegaStone('Aerodactylite', 142, 142.01); // Aerodactyl
+            updateMegaStone('Aggronite', 306, 306.01); // Aggron
+            updateMegaStone('Alakazite', 65, 65.01); // Alakazam
+            updateMegaStone('Ampharosite', 181, 181.01); // Ampharos
+            updateMegaStone('Audinite', 531, 531.01); // Audino
+            updateMegaStone('Beedrillite', 15, 15.01); // Beedrill
+            updateMegaStone('Cameruptite', 323, 323.01); // Camerupt
+            updateMegaStone('Diancite', 719, 719.01); // Diancie
+            updateMegaStone('Galladite', 475, 475.01); // Gallade
+            updateMegaStone('Garchompite', 445, 445.01); // Garchomp
+            updateMegaStone('Gardevoirite', 282, 282.01); // Gardevoir
+            updateMegaStone('Gengarite', 94, 94.01); // Gengar
+            updateMegaStone('Glalitite', 362, 362.01); // Glalie
+            updateMegaStone('Heracronite', 214, 214.01); // Heracross
+            updateMegaStone('Houndoominite', 229, 229.01); // Houndoom
+            updateMegaStone('Kangaskhanite', 115, 115.01); // Kangaskhan
+            updateMegaStone('Latiasite', 380, 380.01); // Latias
+            updateMegaStone('Latiosite', 381, 381.01); // Latios
+            updateMegaStone('Lopunnite', 428, 428.01); // Lopunny
+            updateMegaStone('Lucarionite', 448, 448.01); // Lucario
+            updateMegaStone('Manectite', 310, 310.01); // Manectric
+            updateMegaStone('Mawilite', 303, 303.01); // Mawile
+            updateMegaStone('Metagrossite', 376, 376.01); // Metagross
+            updateMegaStone('Meteorite', 384, 384.01); // Rayquaza
+            updateMegaStone('Pidgeotite', 18, 18.01); // Pidgeot
+            updateMegaStone('Sablenite', 302, 302.01); // Sableye
+            updateMegaStone('Salamencite', 373, 373.01); // Salamence
+            updateMegaStone('Sharpedonite', 319, 319.01); // Sharpedo
+            updateMegaStone('Slowbronite', 80, 80.01); // Slowbro
+            updateMegaStone('Steelixite', 208, 208.01); // Steelix
+            updateMegaStone('Tyranitarite', 248, 248.01); // Tyranitar
+
+            saveData.party.caughtPokemon.forEach(p => {
+                delete p[14]; // megaStone
+            });
         },
     };
 
