@@ -12,7 +12,7 @@ class SafariPokemonList {
     }
 
     public static generateSafariLists() {
-        const safariRegions = [GameConstants.Region.kanto];
+        const safariRegions = [GameConstants.Region.kanto, GameConstants.Region.kalos];
 
         for (const region of safariRegions) {
             if (!SafariPokemonList.list[region]) {
@@ -23,6 +23,7 @@ class SafariPokemonList {
         }
 
         SafariPokemonList.list[GameConstants.Region.kanto].push(...this.generateKantoSafariList());
+        SafariPokemonList.list[GameConstants.Region.kalos].push(...this.generateKalosSafariList());
     }
 
     private static generateKantoSafariList() {
@@ -48,5 +49,25 @@ class SafariPokemonList {
             {name: 'Tangela', weight: 4 },
         ]));
         return list;
+    }
+
+    private static generateKalosSafariList() {
+        SeededRand.seedWithDate(new Date());
+        const pokemon : SafariType[] = SeededRand.shuffleArray(App.game.party.caughtPokemon.map((p) => p.name)
+            .filter((p) => !PokemonHelper.hasEvableLocations(p) && Object.keys(PokemonHelper.getPokemonLocations(p)).length)
+            .map((p) => {
+                return {name: p, weight: 3};
+            })).slice(0, 5);
+        pokemon.push({ name: 'Shuckle', weight: 2 });
+        pokemon.push({ name: 'Stunfisk', weight: 2 });
+        pokemon.push({ name: 'Magmar', weight: 2 });
+        pokemon.push({ name: 'Maractus', weight: 2 });
+        pokemon.push({ name: 'Klefki', weight: 2 });
+        pokemon.push({ name: 'Breloom', weight: 2 });
+        pokemon.push({ name: 'Woobat', weight: 2 });
+        pokemon.push({ name: 'Golurk', weight: 2 });
+        pokemon.push({ name: 'Marowak', weight: 2 });
+        pokemon.push({ name: 'Lapras', weight: 2 });
+        return [new SafariPokemonList(pokemon)];
     }
 }

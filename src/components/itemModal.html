@@ -53,7 +53,7 @@
                             <div class="col-lg-6 col-12 collapse dont-collapse-lg justify-content-center" id="evo-pokemon-list">
                                 <h4>Pokémon</h4>
                                 <div class="scrolling-div"
-                                    data-bind="foreach: PokemonHelper.getPokemonsWithEvolution(GameConstants.StoneType[ItemHandler.stoneSelected()])">
+                                    data-bind="foreach: PartyController.getPokemonsWithEvolution(GameConstants.StoneType[ItemHandler.stoneSelected()])">
                                     <div class="col-12 evolutionListItem"> <!--offset-sm-1 offset-md-0 offset-md-0 -->
                                         <button class="btn btn-secondary smallButton list-group-item-action" style="padding-right:15px"
                                                 data-bind="click: function() {ItemHandler.pokemonSelected(name)}, css:{ 'pokemon-selected': ItemHandler.pokemonSelected() === name}">
@@ -105,6 +105,14 @@
 
                     <div id="itemBag" class="tab-pane p-3">
                         <div>
+                            <!-- ko if: Object.values(ItemList).some((i) => i instanceof QuestItem && i.isActive() && player.itemList[i.name]()) -->
+                            <h4>Quest items</h4>
+                            <div class="row justify-content-center">
+                                <!-- ko foreach: Object.values(ItemList).filter((i) => i instanceof QuestItem && i.isActive() && player.itemList[i.name]()) -->
+                                    <div class="btn btn-primary col-2 item-bag-item" data-bind="template: { name: 'otherItemTemplate', data: $data.name }"></div>
+                                <!-- /ko -->
+                            </div>
+                            <!-- /ko -->
                             <h4>Vitamins</h4>
                             <div class="row justify-content-center">
                                 <!-- ko foreach: GameHelper.enumNumbers(GameConstants.VitaminType) -->

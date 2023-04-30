@@ -78,7 +78,6 @@
             position: relative;
         }
     </style>
-
 </head>
 <body class="no-select" data-bind="class: 'no-select ' + Settings.getSetting('theme').observableValue() + ' ' + Settings.getSetting('backgroundImage').observableValue(), attr : {'oncontextmenu' : 'return !' + Settings.getSetting('disableRightClickMenu').observableValue().toString() + ';'}">
 @import "dynamicBackground.html"
@@ -287,7 +286,8 @@
 
                                         <!--Pokérus image-->
                                         <knockout data-bind="if: RouteHelper.minPokerusCheck(RouteHelper.getAvailablePokemonList(player.route(), player.region, true))">
-                                            <img data-bind="attr:{ src: 'assets/images/breeding/pokerus/' + GameConstants.Pokerus[RouteHelper.minPokerus(RouteHelper.getAvailablePokemonList(player.route(), player.region, true))] + '.png'}"
+                                            <img data-bind="attr:{ src: 'assets/images/breeding/pokerus/' + GameConstants.Pokerus[RouteHelper.minPokerus(RouteHelper.getAvailablePokemonList(player.route(), player.region, true))] + '.png',
+                                                title: RouteHelper.routePokerusEVs(player.route(), player.region)}"
                                           src=""/>
                                         </knockout>
                                       </span>
@@ -486,6 +486,7 @@
                             @import "KalosSVG.html"
                             @import "AlolaSVG.html"
                             @import "GalarSVG.html"
+                            @import "HisuiSVG.html"
 
                         </svg>
                     </div>
@@ -539,6 +540,9 @@
 <!-- One time battle won Modal -->
 @import "temporaryBattleWonModal.html"
 
+<!-- Quest Step Cleared -->
+@import "customQuestStepClearedModal.html"
+
 <!-- Achievements Modal -->
 @import "achievementsModal.html"
 
@@ -562,6 +566,9 @@
 
 <!-- Credits Modal -->
 @import "creditsModal.html"
+
+<!-- External Links Modal -->
+@import "externalLinksModal.html"
 
 <!-- Events Modal -->
 @import "eventsModal.html"
@@ -667,5 +674,18 @@
 <!-- Dream Orbs Opened Modal -->
 @import "dreamOrbsOpenedModal.html"
 
+<!-- Purify Chamber Modal -->
+@import "purifyChamberModal.html"
+
+<script type="text/javascript">
+// Check if we are running in an iframe
+if (self !== top) {
+    App = {};
+    Game = {};
+    document.body.innerHTML = `<div class="text-center">
+        <h2>Please visit the official website to play this game <a target="_top" href="https://pokeclicker.com">https://pokeclicker.com</a></h2>
+    </div>`;
+}
+</script>
 </body>
 </html>

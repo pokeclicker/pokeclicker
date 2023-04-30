@@ -1,6 +1,8 @@
 /// <reference path="../../declarations/enums/BerryType.d.ts"/>
 /// <reference path="../../declarations/enums/FlavorType.d.ts"/>
 /// <reference path="../../declarations/enums/BerryColor.d.ts"/>
+/// <reference path="../../declarations/enums/BerryFirmness.d.ts"/>
+/// <reference path="../../declarations/enums/SizeUnits.d.ts"/>
 
 interface BerryFlavor {
     type: FlavorType,
@@ -14,13 +16,23 @@ class Berry {
     public static baseWander: PokemonNameType[] = [
         'Tangela', 'Scyther',
         'Pineco', 'Heracross',
-        'Volbeat', 'Illumise',
-        'Burmy (Plant)', 'Cherubi',
+        'Cherubi',
         'Sewaddle', 'Karrablast',
         'Scatterbug',
         'Cutiefly', 'Bounsweet',
         'Blipbug', 'Gossifleur',
     ];
+
+    public static colorWander: Record<BerryColor, PokemonNameType[]> = {
+        [BerryColor.Red]: ['Ledyba', 'Flabébé (Red)', 'Oricorio (Baile)'],
+        [BerryColor.Purple]: ['Illumise', 'Oricorio (Sensu)'],
+        [BerryColor.Pink]: ['Spewpa', 'Oricorio (Pa\'u)'],
+        [BerryColor.Green]: ['Burmy (Plant)'],
+        [BerryColor.Yellow]: ['Combee', 'Flabébé (Yellow)', 'Oricorio (Pom-Pom)'],
+        [BerryColor.Blue]: ['Volbeat', 'Flabébé (Blue)'],
+        [BerryColor.Silver]: ['Flabébé (White)'],
+        [BerryColor.Gold]: ['Flabébé (Orange)'],
+    };
 
     constructor(
         public type: BerryType,
@@ -30,7 +42,10 @@ class Berry {
         public farmValue: number,
         public exp: number,
         flavors: number[],
+        public smoothness: number,
         public color: BerryColor,
+        public size: number,
+        public firmness: BerryFirmness,
         public description: string[],
         public aura?: Aura,
         wander?: PokemonNameType[]
@@ -39,7 +54,7 @@ class Berry {
         for (let i = 0; i < 5; i++) {
             this.flavors.push({type: i, value: flavors[i]});
         }
-        this.wander = wander ? Berry.baseWander.concat(wander) : Berry.baseWander;
+        this.wander = Berry.baseWander.concat(Berry.colorWander[this.color], wander ?? []);
     }
 
     get descriptionHTML(): string {

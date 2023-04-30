@@ -3,7 +3,7 @@
 }
 
 #saveSelector, #loader, body {
-    background: url(../assets/images/background.png), #7dad71;
+    background: url("../assets/images/background.png"), #7dad71;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -11,7 +11,7 @@
     overflow-x: hidden;
 
     &.background-day {
-        background: url(../assets/images/background.png), #7dad71;
+        background: url("../assets/images/background.png"), #7dad71;
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
@@ -19,7 +19,7 @@
     }
 
     &.background-night {
-        background: url(../assets/images/background-night.png), #030206;
+        background: url("../assets/images/background-night.png"), #030206;
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
@@ -34,8 +34,8 @@
 body.background-dynamic #dynamic-background {
     display: block;
     position: fixed;
-    top: 0px;
-    left: 0px;
+    top: 0;
+    left: 0;
     width: 100vw;
     height: 100vh;
     z-index: -10;
@@ -176,8 +176,8 @@ body.background-dynamic #dynamic-background {
         position: absolute;
         background: url('../assets/images/dynamic-background/sun.png');
         background-size: cover;
-        top: 0px;
-        left: 0px;
+        top: 0;
+        left: 0;
         display: block;
         width: 18vh;
         height: 18vh;
@@ -188,8 +188,8 @@ body.background-dynamic #dynamic-background {
         position: absolute;
         background: url('../assets/images/dynamic-background/moon.png');
         background-size: cover;
-        bottom: 0px;
-        right: 0px;
+        bottom: 0;
+        right: 0;
         display: block;
         width: 14.2vh;
         height: 15vh;
@@ -213,29 +213,31 @@ body.background-dynamic #dynamic-background {
         position: relative;
     }
 
-    /* Cloud Animation*/
+    /* Cloud Animation */
 
-    /*variable speed, opacity, and position of clouds for realistic effect*/
+    /* variable speed, opacity, and position of clouds for realistic effect */
     .x2 {
         left: 200px;
         transform: scale(0.6);
-        opacity: 0.6; /*opacity proportional to the size*/
-        /*Speed will also be proportional to the size and opacity*/
-        /*More the speed. Less the time in 's' = seconds*/
+        opacity: 0.6; /* opacity proportional to the size */
+
+        /* Speed will also be proportional to the size and opacity */
+
+        /* More the speed. Less the time in 's' = seconds */
         animation: moveclouds 50s linear infinite;
     }
 
     .x3 {
         left: -250px; bottom: -20vh;
         transform: scale(0.8);
-        opacity: 0.8; /*opacity proportional to the size*/
+        opacity: 0.8; /* opacity proportional to the size */
         animation: moveclouds 45s linear infinite;
     }
 
     .x4 {
         left: 470px; bottom: -10vh;
         transform: scale(0.75);
-        opacity: 0.75; /*opacity proportional to the size*/
+        opacity: 0.75; /* opacity proportional to the size */
         animation: moveclouds 37s linear infinite;
     }
 
@@ -321,33 +323,43 @@ body.background-dynamic #dynamic-background {
         &.speed-0 {
             animation: walkLeft 1s steps(4) infinite, moveLeft 120s linear;
         }
+
         &.speed-1 {
             animation: walkLeft 0.9s steps(4) infinite, moveLeft 100s linear;
         }
+
         &.speed-2 {
             animation: walkLeft 0.85s steps(4) infinite, moveLeft 90s linear;
         }
+
         &.speed-3 {
             animation: walkLeft 0.8s steps(4) infinite, moveLeft 80s linear;
         }
+
         &.speed-4 {
             animation: walkLeft 0.65s steps(4) infinite, moveLeft 70s linear;
         }
+
         &.speed-5 {
             animation: walkLeft 0.52s steps(4) infinite, moveLeft 60s linear;
         }
+
         &.speed-6 {
             animation: walkLeft 0.50s steps(4) infinite, moveLeft 55s linear;
         }
+
         &.speed-7 {
             animation: walkLeft 0.48s steps(4) infinite, moveLeft 50s linear;
         }
+
         &.speed-8 {
             animation: walkLeft 0.44s steps(4) infinite, moveLeft 42s linear;
         }
+
         &.speed-9 {
             animation: walkLeft 0.41s steps(4) infinite, moveLeft 37s linear;
         }
+
         &.speed-10 {
             animation: walkLeft 0.4s steps(4) infinite, moveLeft 30s linear;
         }

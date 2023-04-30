@@ -57,7 +57,7 @@
             <span class="text-muted">These items can be used in the <strong>Farm</strong> to grow more berries and earn farm points.</span><br/>
             <span class="text-muted">They can be exchanged for different items in Berry Master Shops.</span><br/>
             <span class="text-muted">They have special Auras, that can provide Gameplay bonuses.</span><br/>
-            <span class="text-muted">They can attract wild Pokémon that are automatically captured, some of them are only obtanible through the farm.</span></p>
+            <span class="text-muted">They can attract wild Pokémon that are automatically captured, some of them are only obtainable through the farm.</span></p>
             <p><strong>How can I get more Berries?</strong><br/>
             <span class="text-muted">A few berries can be get from Pokémon drops or as chest rewards, but most of them must be mutated in order to get them.</span><br/>
             <span class="text-muted">To know how mutate them you can talk with Kanto Berry Master in Cerulean city who will give you a different hint daily.</span></p>
@@ -78,7 +78,9 @@
             At 10, 100, 1,000, etc. clears<br/>
             (to a minimum of 5x5)</span></p>
             <p><strong>How do I unlock Flash in dungeons?</strong><br/>
-            <span class="text-muted">You must clear the dungeon 200 times.</span></p>
+            <span class="text-muted"><code>Tier 1:</code> 100 clears.</span><br/>
+            <span class="text-muted"><code>Tier 2:</code> 250 clears.</span><br/>
+            <span class="text-muted"><code>Tier 3:</code> 400 clears.</span><br/></p>
             <p><strong>How do the floors in dungeons work?</strong><br/>
             <span class="text-muted">Dungeons can't get bigger than 10x10, instead they get a second floor of at least 5x5. The boss tile is always in the second floor, the first floor has a stairs tile instead. When you reach the second floor, time stops and you get 10 extra seconds.</span></p>
             <p><strong>Can I progress towards more than 1 quest at a time?</strong><br/>
@@ -111,31 +113,57 @@
             <span class="text-muted">Some can only evolve at certain <strong>times of the day</strong>.</span><br/>
             <span class="text-muted">Some can only evolve in specific <strong>locations</strong>.</span><br/>
             <span class="text-muted">Some can only appear/evolve in specific <strong>weather</strong>.</span></p>
+
+            <strong>What is the schedule of the day cycle?</strong>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <td class="text-center"><strong>Part of the day</strong></td>
+                        <td class="text-center"><strong>Icon</strong></td>
+                        <td class="text-center"><strong>Start</strong></td>
+                        <td class="text-center"><strong>End</strong></td>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach: Object.values(GameConstants.DayCycleStartHours)">
+                    <tr>
+                        <td class="text-center" data-bind='text: DayCycle.dayCycleMoments[$index()].description'></td>
+                        <td class="text-center">
+                            <img src="" style="" data-bind="attr: {
+                                src: `assets/images/dayCycle/${DayCycle.dayCycleMoments[$index()].description}.png`,
+                                style: `background: ${DayCycle.dayCycleMoments[$index()].color}; width: 30px;`,
+                            }"/>
+                        </td>
+                        <td class="text-center" data-bind='text: GameHelper.twoDigitNumber($data) + `:00`'></td>
+                        <td class="text-center" data-bind='text: (GameHelper.twoDigitNumber(GameConstants.DayCycleStartHours[$index() + 1] || GameConstants.DayCycleStartHours[0])) + `:00`'></td>
+                    </tr>
+                </tbody>
+            </table>
+
             <strong>What are the EV damage multipliers?</strong>
             <table class="table table-bordered table-striped">
                 <tr>
-                    <td><center><strong>EVs</strong></center></td>
-                    <td><center><strong>Damage Multiplier</strong></center></td>
+                    <td class="text-center"><strong>EVs</strong></td>
+                    <td class="text-center"><strong>Damage Multiplier</strong></td>
                 </tr>
                 <tr>
-                    <td><center><span class="text-muted">50 EVs</span></center></td>
-                    <td><center><span class="text-muted">1.5x Damage</span></center></td>
+                    <td class="text-center text-muted">50 EVs</td>
+                    <td class="text-center text-muted">1.5x Damage</td>
                 </tr>
                 <tr>
-                    <td><center><span class="text-muted">802 EVs</span></center></td>
-                    <td><center><span class="text-muted">2x Damage</span></center></td>
+                    <td class="text-center text-muted">802 EVs</td>
+                    <td class="text-center text-muted">2x Damage</td>
                 </tr>
                 <tr>
-                    <td><center><span class="text-muted">40,121 EVs</span></center></td>
-                    <td><center><span class="text-muted">3x Damage</span></center></td>
+                    <td class="text-center text-muted">40,121 EVs</td>
+                    <td class="text-center text-muted">3x Damage</td>
                 </tr>
                 <tr>
-                    <td><center><span class="text-muted">643,300 EVs</span></center></td>
-                    <td><center><span class="text-muted">4x Damage</span></center></td>
+                    <td class="text-center text-muted">643,300 EVs</td>
+                    <td class="text-center text-muted">4x Damage</td>
                 </tr>
                 <tr>
-                    <td><center><span class="text-muted">5,540,000 EVs</span></center></td>
-                    <td><center><span class="text-muted">5x Damage</span></center></td>
+                    <td class="text-center text-muted">5,540,000 EVs</td>
+                    <td class="text-center text-muted">5x Damage</td>
                 </tr>
             </table>
 
@@ -149,6 +177,7 @@
             <span class="text-muted">Pokérus is spread by Pokémon that are infected, to other Pokémon in the hatchery (not in the queue) that share a type with the infected Pokémon. Neither Pokémon can be ready to hatch, nor can a Hatchery Helper be used on either Pokémon, in order to spread the virus.</span></p>
             <p><strong>How do I gain EVs?</strong><br/>
             <span class="text-muted">EVs can be gained in a variety of ways, but are primarily gained by capturing (not breeding) Pokémon.</span></p>
+            <p class="text-muted">You can use the Contagious Poké Ball selector (unlocked after getting Pokérus) to focus catching Pokémon with less than 50 EVs. Note that setting this selector to "Do not catch" will prevent you from catching any Contagious Pokémon, even if your Caught selector has a Poké Ball set.</p>
             <span class="text-muted">Base Yield: <code>0.1EV</code><br/>
             Evolution Item Yield: <code>1EV</code><br/>
             Wanderer Yield: <code>0.5EV</code><br/>
