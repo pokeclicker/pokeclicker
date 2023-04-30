@@ -2500,7 +2500,7 @@ const Zinnia6 = new NPC('Zinnia', [
     'Yes! Finally! The moment I have been waiting for! I have gathered enough Key Stones to draw out the latent power in Rayquaza and stop the impending disaster!',
     'Huh?! H-how can this be? I did everything I was supposed to, and you\'re not changing! <b>Come on! Do it! Mega Evolve! Why?!</b>',
     'Is it... you\'re not here for me? You\'re here for $playername$? That\'s no fair! I\'m the chosen one!',
-    '<i>You notice the Meteorite Shards you have been carrying have fused together and are emitting a powerful glow.</i></br><img src="assets/images/megaStone/384.png"/>',
+    '<i>You notice the Meteorite Shards you have been carrying have fused together and are emitting a powerful glow.</i></br><img src="assets/images/megaStone/Meteorite.png"/>',
 ], {image: 'assets/images/npcs/other/RayquazaEncounter.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 28), new QuestLineStepCompletedRequirement('The Delta Episode', 30, GameConstants.AchievementOption.less)]),
 });
