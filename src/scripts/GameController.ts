@@ -127,6 +127,7 @@ class GameController {
         const $shipModal = $('#ShipModal');
         // Shop
         const $shopModal = $('#shopModal');
+        $shopModal.on('hidden.bs.modal shown.bs.modal', _ => $shopModal.data('disable-toggle', false));
 
         $(document).on('keydown', e => {
             // Ignore any of our controls if focused on an input element
@@ -411,6 +412,16 @@ class GameController {
                         $('.modal').modal('hide');
                         $undergroundModal.data('disable-toggle', true);
                         $undergroundModal.modal('toggle');
+                        return e.preventDefault();
+                    }
+                    break;
+                case Settings.getSetting('hotkey.shop').value:
+                    // Open the Poke Mart
+                    if (App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Champion Lance')]() >= 1 && !$shopModal.data('disable-toggle')) {
+                        $('.modal').modal('hide');
+                        ShopHandler.showShop(pokeMartShop);
+                        $shopModal.data('disable-toggle', true);
+                        $shopModal.modal('toggle');
                         return e.preventDefault();
                     }
                     break;

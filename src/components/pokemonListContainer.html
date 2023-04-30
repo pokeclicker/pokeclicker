@@ -55,7 +55,7 @@
                 </tr>
             </thead>
             <tbody data-bind="foreach: lazyLoad($element, PartyController.getSortedList, { pageSize: 20 })">
-                <tr data-bind="hidden: $data.breeding">
+                <tr data-toggle="modal" href="#pokemonStatisticsModal" data-bind="hidden: $data.breeding, click: () => { App.game.statistics.selectedPokemonID($data.id) }">
                     <td>
                         <img
                             class="smallImage"
