@@ -114,16 +114,12 @@ class PokedexHelper {
             }
             const hasBaseFormInSameRegion = pokemonList.some((p) => Math.floor(p.id) == Math.floor(pokemon.id) && p.id < pokemon.id && PokemonHelper.calcNativeRegion(p.name) == nativeRegion);
             // Alternate forms that we haven't caught yet
-            if (!alreadyCaught && pokemon.id != Math.floor(pokemon.id)) {
-                if (hasBaseFormInSameRegion) {
-                    return false;
-                }
+            if (!alreadyCaught && pokemon.id != Math.floor(pokemon.id) && hasBaseFormInSameRegion) {
+                return false;
             }
             // Hide uncaught base forms if alternate non-regional form is caught
-            if (!alreadyCaught && pokemon.id == Math.floor(pokemon.id) && App.game.party._caughtPokemon().some((p) => Math.floor(p.id) == pokemon.id)) {
-                if (hasBaseFormInSameRegion) {
-                    return false;
-                }
+            if (!alreadyCaught && pokemon.id == Math.floor(pokemon.id) && App.game.party._caughtPokemon().some((p) => Math.floor(p.id) == pokemon.id) && hasBaseFormInSameRegion) {
+                return false;
             }
 
             const caughtShiny = PokedexFilters.caughtShiny.value();
@@ -150,10 +146,8 @@ class PokedexHelper {
             /* Only base form if alternate exist (Zarbi, Basculin, ...)
              * Mainline regional forms are shown as they are part of dex completion
              */
-            if (PokedexFilters.hideAlternate.value() && !Number.isInteger(pokemon.id)) {
-                if (hasBaseFormInSameRegion) {
-                    return false;
-                }
+            if (PokedexFilters.hideAlternate.value() && !Number.isInteger(pokemon.id) && hasBaseFormInSameRegion) {
+                return false;
             }
 
             // Only pokemon with a hold item
