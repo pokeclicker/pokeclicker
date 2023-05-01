@@ -8,6 +8,9 @@
                     <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#evoStones">Evolution Items</a></li>
                     <li class="nav-item"><a data-toggle='tab' class='nav-link' href="#itemBag">Item Bag</a></li>
                     <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#keyItems">Key Items</a></li>
+                    <!-- ko if: Object.values(ItemList).some((i) => i instanceof MegaStoneItem && player.itemList[i.name]()) -->
+                    <li class="nav-item"><a data-toggle="tab" class="nav-link" href="#megaStones">Mega Stones</a></li>
+                    <!-- /ko -->
                 </ul>
             </div>
 
@@ -165,6 +168,15 @@
                                         </knockout>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="megaStones" class="tab-pane p-3">
+                        <div class="row justify-content-center" data-bind="foreach: Object.values(ItemList).filter((i) => i instanceof MegaStoneItem)">
+                            <div class="bg-primary text-white rounded px-1 py-2 col-3 col-lg-2 item-bag-item" data-bind="visible: player.itemList[$data.name]()">
+                                <img width="40px" data-bind="attr: {src: $data.image }">
+                                <div class="small text-truncate" data-bind="text: GameConstants.humanifyString($data.name)"></div>
                             </div>
                         </div>
                     </div>
