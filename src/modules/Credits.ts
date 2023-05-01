@@ -87,7 +87,7 @@ export const SpriteCredits: Credit[] = [
     {
         name: 'Brumirage, Altthiel, Pujolly, Irpachuza',
         link: 'https://www.smogon.com/forums/threads/revamped-add-sword-and-shield-trainer-avatars-for-everyone.3672829/',
-        image: 'https://www.smogon.com/media/zracknel-beta.svg.m.1',
+        image: 'https://www.smogon.com/forums/media/zracknel-beta.svg.m.1',
         resources: [
             'Allister',
             'Avery',
@@ -349,6 +349,7 @@ export const SpriteCredits: Credit[] = [
             'Shadow Weepinbell',
             'Shadow Zapdos',
             'Shady Salesman',
+            'Ship Front View',
             'Spooky Togepi (shiny)',
             'Spooky Togetic',
             'Spooky Togekiss',
@@ -368,6 +369,12 @@ export const SpriteCredits: Credit[] = [
             'Underground Sablenite',
             'Valencian Raticate',
             'Valencian Paras',
+            'Dugtrio (Punk) shop image',
+            'Gengar (Punk) shop image',
+            'Goldeen (Diva) shop image',
+            'Onix (Rocker) shop image',
+            'Tangela (Pom-pom) shop image',
+            'Weepinbell (Fancy) shop image',
             'Vivillon Photobook',
             'White mane hair icon',
             'Zarude (Dada) shop image',
@@ -432,6 +439,7 @@ export const SpriteCredits: Credit[] = [
             'Koga Trainer',
             'Spooky Ivysaur',
             'Spooky Venusaur',
+            'Dugtrio (Punk)',
         ],
         // Notes: Made specifically for PokéClicker.
     },
@@ -594,6 +602,8 @@ export const SpriteCredits: Credit[] = [
             'Dynamic BG Melmetal',
             'Mega Houndoom (Overworld)',
             'Mega Manectric (Overworld)',
+            'Primal Groudon (Overworld)',
+            'Primal Kyogre (Overworld)',
         ],
         // Notes: Permission given on image page if credited.
     },
@@ -894,6 +904,11 @@ export const SpriteCredits: Credit[] = [
             'Valencian Butterfree',
             'Valencian Vileplume',
             'Valencian Weepinbell',
+            'Onix (Rocker)',
+            'Weepinbell (Fancy)',
+            'Gengar (Punk)',
+            'Tangela (Pom-pom)',
+            'Goldeen (Diva)',
             'XD001',
         ],
         // NOTES: Made specifically for Pokeclicker.
