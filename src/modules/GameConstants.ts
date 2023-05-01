@@ -39,8 +39,9 @@ export enum Region {
     kalos = 5,
     alola = 6,
     galar = 7,
+    hisui = 8,
     // Throws an error if no region after the final region
-    final = 8,
+    final = 9,
 }
 
 export const MAX_AVAILABLE_REGION = Region.galar;
@@ -54,6 +55,7 @@ export const MaxIDPerRegion = [
     721, // 72 - Kalos
     809, // 88 - Alola
     898, // 89 - Galar
+    905, // 7 - Hisui
 ];
 
 // Subregions
@@ -99,6 +101,10 @@ export enum GalarSubRegions {
     CrownTundra,
 }
 
+export enum HisuiSubRegions {
+    Hisui = 0,
+}
+
 export enum FinalSubRegions {
     Final = 0,
 }
@@ -112,6 +118,7 @@ export type SubRegions =
     | KalosSubRegions
     | AlolaSubRegions
     | GalarSubRegions
+    | HisuiSubRegions
     | FinalSubRegions;
 
 // Battle Items
@@ -215,6 +222,7 @@ export enum AchievementType {
     'Battle Frontier',
     'Vitamins',
     'Pokerus',
+    'Shadow',
 }
 
 // Held item chance
@@ -613,7 +621,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.hoenn]: new Set([105, 106, 107, 108, 109, 118, 122, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134]),
         [Region.sinnoh]: new Set([218, 219, 220, 223, 230, 'Pastoria City', 'Lake Verity', 'Lake Valor', 'Sendoff Spring']),
         [Region.unova]: new Set([17, 18, 21, 24, 'Undella Town', 'Humilau City']),
-        [Region.kalos]: new Set([8, 23, 'Coumarine City', 'Couriway Town', 'Sea Spirit\'s Den']),
+        [Region.kalos]: new Set([8, 23, 'Couriway Town', 'Sea Spirit\'s Den']),
         [Region.alola]: new Set([15, 19, 20, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 'Hoppy Town', 'Friend League', 'Quick League', 'Heavy League', 'Great League', 'Fast League', 'Luxury League', 'Heal League', 'Ultra League', 'Elite Four League', 'Master League', 'Magikarp\'s Eye', 'Seafolk Village', 'Brooklet Hill', 'Mina\'s Houseboat', 'Lake of the Sunne and Moone']),
         [Region.galar]: new Set(['Hulbury', 'Roaring-Sea Caves', 5, 6, 8, 9, 16, 21, 27, 29, 36, 37, 41, 42, 43, 44, 51, 53]),
     },
@@ -646,7 +654,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.hoenn]: new Set([119, 'Petalburg Woods']),
         [Region.sinnoh]: new Set([201, 204, 'Eterna City', 'Eterna Forest', 'Fullmoon Island', 'Newmoon Island']),
         [Region.unova]: new Set([6, 'Floccesy Town', 'Lostlorn Forest', 'Pinwheel Forest', 'Pledge Grove']),
-        [Region.kalos]: new Set([1, 14, 20, 'Laverre City', 'Santalune Forest', 'Pokémon Village']),
+        [Region.kalos]: new Set([1, 14, 20, 'Coumarine City', 'Laverre City', 'Santalune Forest', 'Pokémon Village']),
         [Region.alola]: new Set([27, 'Melemele Woods', 'Lush Jungle', 'Malie Garden', 'Ula\'ula Meadow', 'Poni Meadow']),
         [Region.galar]: new Set(['Slumbering Weald', 'Slumbering Weald Shrine', 'Glimwood Tangle', 'Ballonlea', 'Dyna Tree Hill', 2, 12, 13, 35]),
     },
@@ -687,7 +695,7 @@ export const Environments: Record<string, EnvironmentData> = {
     Mansion: {
         [Region.kanto]: new Set(['Silph Co.', 'Pokémon Mansion']),
         [Region.johto]: new Set(['Olivine City', 'Sprout Tower', 'Burned Tower']),
-        [Region.hoenn]: new Set(['Petalburg City', 'Pyrite Bldg']),
+        [Region.hoenn]: new Set(['Petalburg City', 'Pyrite Building']),
         [Region.sinnoh]: new Set(['Veilstone City', 'Canalave City', 'Snowpoint Temple']),
         [Region.unova]: new Set(['Castelia City', 'Mistralton City', 'Opelucid City', 'Liberty Garden', 'Dragonspiral Tower', 'Dreamyard']),
         [Region.kalos]: new Set(['Parfum Palace', 'Lost Hotel']),
@@ -705,6 +713,9 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.alola]: new Set(['Hau\'oli Cemetery', 'Memorial Hill']),
         [Region.galar]: new Set(['Dusty Bowl', 49]),
     },
+
+    // No need to set anything here, only exists for battle overrides
+    Default: {},
 };
 
 export type Environment = keyof typeof Environments;
@@ -719,6 +730,7 @@ export const EnvironmentCssClass: Record<Environment, string> = {
     PowerPlant: 'power-plant',
     Mansion: 'mansion',
     Graveyard: 'graveyard',
+    Default: '',
 };
 
 // Starter Pokémon
@@ -740,6 +752,7 @@ export const RegionalStarters = [
     [650, 653, 656], // Kalos
     [722, 725, 728], // Alola
     [810, 813, 816], // Galar
+    [722, 155, 501], // Hisui
 ];
 
 export enum StoneType {
@@ -785,6 +798,8 @@ export enum StoneType {
     'Galarica_wreath',
     'Black_mane_hair',
     'White_mane_hair',
+    'Black_augurite',
+    'Peat_block',
 }
 
 export enum FossilPieceType {
@@ -915,6 +930,8 @@ export enum BulletinBoards {
     Galar,
     Armor,
     Crown,
+    Hisui,
+    Arceus,
 }
 
 // Underground
@@ -1098,6 +1115,14 @@ export const GalarGyms = [
     'Elite Dojo Master Mustard',
     'Elite Trainer Peony',
 ];
+export const HisuiGyms = [
+    'Grandtree Arena',
+    'Brava Arena',
+    'Molten Arena',
+    'Moonview Arena',
+    'Icepeak Arena',
+    'Temple of Sinnoh',
+];
 
 export const OrangeGyms = [
     'Mikan Island',
@@ -1128,6 +1153,7 @@ export const RegionGyms = [
     KalosGyms,
     AlolaGyms,
     GalarGyms,
+    HisuiGyms,
     // Keep it at the bottom, as we want optional badges at the bottom
     OrangeGyms,
     MagikarpJumpGyms,
@@ -1205,7 +1231,22 @@ export const HoennDungeons = [
     'Sky Pillar',
     'Victory Road Hoenn',
     'Near Space',
-    'Pyrite Bldg', // 57
+    'Phenac City Battles',
+    'Pyrite Town Battles',
+    'Pyrite Colosseum Battles',
+    'Pyrite Building',
+    'Pyrite Cave',
+    'Relic Cave',
+    'Mt. Battle Battles',
+    'The Under Subway',
+    'Cipher Lab Battles',
+    'Realgam Tower Battles',
+    'Realgam Colosseum Battles',
+    'Snagem Hideout',
+    'Deep Colosseum Battles',
+    'Phenac Stadium Battles',
+    'Under Colosseum Battles',
+    'Orre Colosseum Battles', // 72
     // These aren't implemented anywhere yet
     /*
     "Island Cave",
@@ -1234,7 +1275,7 @@ export const HoennDungeons = [
 ];
 
 export const SinnohDungeons = [
-    'Oreburgh Gate', // 58
+    'Oreburgh Gate', // 73
     'Valley Windworks',
     'Eterna Forest',
     'Old Chateau',
@@ -1257,11 +1298,11 @@ export const SinnohDungeons = [
     'Flower Paradise',
     'Snowpoint Temple',
     'Stark Mountain',
-    'Hall of Origin', // 81
+    'Hall of Origin', // 96
 ];
 
 export const UnovaDungeons = [
-    'Floccesy Ranch', // 82
+    'Floccesy Ranch', // 97
     'Liberty Garden',
     'Castelia Sewers',
     'Relic Passage',
@@ -1283,11 +1324,11 @@ export const UnovaDungeons = [
     'Pledge Grove',
     'Pinwheel Forest',
     'Dreamyard',
-    'P2 Laboratory', // 104
+    'P2 Laboratory', // 119
 ];
 
 export const KalosDungeons = [
-    'Santalune Forest', // 105
+    'Santalune Forest', // 120
     'Connecting Cave',
     'Glittering Cave',
     'Reflection Cave',
@@ -1300,12 +1341,12 @@ export const KalosDungeons = [
     'Team Flare Secret HQ',
     'Terminus Cave',
     'Pokémon Village',
-    'Victory Road Kalos', // 117
+    'Victory Road Kalos', // 132
     // 'Unknown Dungeon',
 ];
 
 export const AlolaDungeons = [
-    'Trainers\' School', // 118
+    'Trainers\' School', // 133
     'Hau\'oli Cemetery',
     'Verdant Cavern',
     'Melemele Meadow',
@@ -1334,11 +1375,11 @@ export const AlolaDungeons = [
     'Ruins of Abundance',
     'Ruins of Hope',
     'Poni Meadow',
-    'Resolution Cave', // 147
+    'Resolution Cave', // 162
 ];
 
 export const GalarDungeons = [
-    'Slumbering Weald Shrine', // 148
+    'Slumbering Weald Shrine', // 163
     'Galar Mine',
     'Galar Mine No. 2',
     'Glimwood Tangle',
@@ -1358,7 +1399,30 @@ export const GalarDungeons = [
     'Lakeside Cave',
     'Dyna Tree Hill',
     'Tunnel to the Top',
-    'Crown Shrine', // 168
+    'Crown Shrine', // 183
+];
+
+export const HisuiDungeons = [
+    'Oreburrow Tunnel', // 184
+    'Heartwood',
+    'Shrouded Ruins',
+    'Veilstone Cape',
+    'Firespit Island',
+    'Ancient Wayward Cave',
+    'Ancient Quarry',
+    'Primeval Grotto',
+    'Clamberclaw Cliffs',
+    'Celestica Ruins',
+    'Sacred Plaza',
+    'Crevasse Passage',
+    'Avalugg\'s Legacy',
+    'Ice Column Chamber',
+    'Icepeak Cavern',
+    'Ancient Snowpoint Temple',
+    'Seaside Hollow',
+    'Ancient Lake Verity',
+    'Ancient Lake Valor',
+    'Ancient Lake Acuity', // 203
 ];
 
 export const RegionDungeons = [
@@ -1370,6 +1434,7 @@ export const RegionDungeons = [
     KalosDungeons,
     AlolaDungeons,
     GalarDungeons,
+    HisuiDungeons,
 ];
 
 export function getDungeonIndex(dungeon: string): number {
@@ -1412,6 +1477,7 @@ export const DockTowns = [
     'Coumarine City', // Kalos
     'Hau\'oli City', // Alola
     'Hulbury', // Galar
+    'Prelude Beach', // Hisui
 ];
 
 export const TemporaryBattles = [
@@ -1557,6 +1623,11 @@ export const TemporaryBattles = [
     'Matt 3',
     'Courtney 3',
     'Hoenn Stone Salesman',
+    'Captain Stern',
+    'Archie Primal',
+    'Maxie Primal',
+    'Primal Groudon',
+    'Primal Kyogre',
     'Aipom Alley',
     'Mime Interview',
     'Underground Fighting Ring',
@@ -1715,6 +1786,57 @@ export const TemporaryBattles = [
     'Galarian Moltres 2',
     'Galarian Moltres 3',
     'Regigigas',
+    'Volo 1',
+    'Akari 1',
+    'Warden Mai',
+    'Alpha Kricketune',
+    'Warden Lian',
+    'Irida 1',
+    'Lord of the Woods: Kleavor',
+    'Akari 2',
+    'Volo 2',
+    'Coin 1',
+    'Ursaluna',
+    'Lady of the Ridge: Lilligant',
+    'Irida 2',
+    'Clover',
+    'Coin 2',
+    'Charm 1',
+    'Lord of the Isles: Arcanine',
+    'Adaman 1',
+    'Melli 1',
+    'Warden Ingo',
+    'Melli 2',
+    'Lord of the Hollow: Electrode',
+    'Warden Gaeric',
+    'Warden Sabi',
+    'Hisuian Braviary',
+    'Lord of the Tundra: Avalugg',
+    'Beni',
+    'Kamado 1',
+    'Charm 2',
+    'Dialga (Origin) 1',
+    'Palkia (Origin) 1',
+    'Kamado 2',
+    'Adaman 2',
+    'Irida 3',
+    'Dialga (Origin) 2',
+    'Palkia (Origin) 2',
+    'Volo 3',
+    'Giratina (Origin)',
+    'Tornadus 1',
+    'Tornadus 2',
+    'Tornadus 3',
+    'Thundurus 1',
+    'Thundurus 2',
+    'Thundurus 3',
+    'Landorus 1',
+    'Landorus 2',
+    'Landorus 3',
+    'Enamorus 1',
+    'Enamorus 2',
+    'Enamorus 3',
+    'Arceus',
 ];
 
 export enum ShardTraderLocations {
@@ -1756,6 +1878,7 @@ export enum ShardTraderLocations {
     'Sunyshore City',
     'Survival Area',
     'Resort Area',
+    'Jubilife Village',
     'Castelia City',
     'Nimbasa City',
     'Driftveil City',
@@ -1896,4 +2019,57 @@ export enum ShadowStatus {
     None,
     Shadow,
     Purified,
+}
+
+export enum MegaStoneType {
+    Abomasite,
+    Absolite,
+    Aerodactylite,
+    Aggronite,
+    Alakazite,
+    Altarianite,
+    Ampharosite,
+    Audinite,
+    Banettite,
+    Beedrillite,
+    Blastoisinite,
+    Blazikenite,
+    Blue_Orb,
+    Cameruptite,
+    Charizardite_X,
+    Charizardite_Y,
+    Diancite,
+    Galladite,
+    Garchompite,
+    Gardevoirite,
+    Gengarite,
+    Glalitite,
+    Gyaradosite,
+    Heracronite,
+    Houndoominite,
+    Kangaskhanite,
+    Latiasite,
+    Latiosite,
+    Lopunnite,
+    Lucarionite,
+    Manectite,
+    Mawilite,
+    Medichamite,
+    Metagrossite,
+    Meteorite,
+    Mewtwonite_X,
+    Mewtwonite_Y,
+    Pidgeotite,
+    Pinsirite,
+    Red_Orb,
+    Sablenite,
+    Salamencite,
+    Sceptilite,
+    Scizorite,
+    Sharpedonite,
+    Slowbronite,
+    Steelixite,
+    Swampertite,
+    Tyranitarite,
+    Venusaurite,
 }

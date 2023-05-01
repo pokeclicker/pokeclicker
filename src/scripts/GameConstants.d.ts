@@ -234,6 +234,7 @@ namespace GameConstants {
         kalos,
         alola,
         galar,
+        hisui,
         final,
     }
     declare function clipNumber(num: number, min: number, max: number): number;
@@ -254,6 +255,7 @@ namespace GameConstants {
         PowerPlant: EnvironmentData,
         Mansion: EnvironmentData,
         Graveyard: EnvironmentData,
+        Default: EnvironmentData,
     };
     declare type Environment = keyof typeof Environments;
     declare const EnvironmentCssClass:Record<Environment, string>;
@@ -307,6 +309,8 @@ namespace GameConstants {
         'Galarica_wreath',
         'Black_mane_hair',
         'White_mane_hair',
+        'Black_augurite',
+        'Peat_block',
     }
     declare enum FossilPieceType {
         'None',
@@ -434,7 +438,9 @@ namespace GameConstants {
         Hoppy,
         Galar,
         Armor,
-        Crown
+        Crown,
+        Hisui,
+        Arceus
     }
     declare const EnergyRestoreEffect: {
         SmallRestore: number;
@@ -474,6 +480,7 @@ namespace GameConstants {
     declare const UnovaGyms: string[];
     declare const KalosGyms: string[];
     declare const GalarGyms: string[];
+    declare const HisuiGyms: string[];
     declare const OrangeGyms: string[];
     declare const RegionGyms: string[][];
     declare function getGymIndex(gym: string): number;
@@ -485,6 +492,7 @@ namespace GameConstants {
     declare const UnovaDungeons: string[];
     declare const KalosDungeons: string[];
     declare const GalarDungeons: string[];
+    declare const HisuiDungeons: string[];
     declare const RegionDungeons: string[][];
     declare function getDungeonIndex(dungeon: string): number;
     declare function getDungeonRegion(dungeon: string): Region;
@@ -553,6 +561,7 @@ namespace GameConstants {
         'Sunyshore City',
         'Survival Area',
         'Resort Area',
+        'Jubilife Village',
         'Castelia City',
         'Nimbasa City',
         'Driftveil City',
@@ -635,6 +644,9 @@ namespace GameConstants {
         IsleofArmor,
         CrownTundra,
     }
+    declare enum HisuiSubRegions {
+        Hisui,
+    }
     declare enum FinalSubRegions {
         Final,
     }
@@ -648,6 +660,7 @@ namespace GameConstants {
         | KalosSubRegions
         | AlolaSubRegions
         | GalarSubRegions
+        | HisuiSubRegions
         | FinalSubRegions
 
     // Gender Types
@@ -708,5 +721,57 @@ namespace GameConstants {
         None,
         Shadow,
         Purified,
+    }
+    declare enum MegaStoneType {
+        Abomasite,
+        Absolite,
+        Aerodactylite,
+        Aggronite,
+        Alakazite,
+        Altarianite,
+        Ampharosite,
+        Audinite,
+        Banettite,
+        Beedrillite,
+        Blastoisinite,
+        Blazikenite,
+        Blue_Orb,
+        Cameruptite,
+        Charizardite_X,
+        Charizardite_Y,
+        Diancite,
+        Galladite,
+        Garchompite,
+        Gardevoirite,
+        Gengarite,
+        Glalitite,
+        Gyaradosite,
+        Heracronite,
+        Houndoominite,
+        Kangaskhanite,
+        Latiasite,
+        Latiosite,
+        Lopunnite,
+        Lucarionite,
+        Manectite,
+        Mawilite,
+        Medichamite,
+        Metagrossite,
+        Meteorite,
+        Mewtwonite_X,
+        Mewtwonite_Y,
+        Pidgeotite,
+        Pinsirite,
+        Red_Orb,
+        Sablenite,
+        Salamencite,
+        Sceptilite,
+        Scizorite,
+        Sharpedonite,
+        Slowbronite,
+        Steelixite,
+        Swampertite,
+        Tyranitarite,
+        Venusaurite,
     }
 }

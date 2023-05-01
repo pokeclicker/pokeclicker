@@ -41,6 +41,16 @@ class PokedexHelper {
         return PokedexHelper.cachedFilteredList;
     })
 
+    public static formatSearch(value: string) {
+        if (/[^\d]/.test(value)) {
+            PokedexFilters.name.value(new RegExp(`(${/^\/.+\/$/.test(value) ? value.slice(1, -1) : GameHelper.escapeStringRegex(value)})`, 'i'));
+            PokedexFilters.id.value(-1);
+        } else {
+            PokedexFilters.id.value(value != '' ? +value : -1);
+            PokedexFilters.name.value(new RegExp('', 'i'));
+        }
+    }
+
     public static getList(): typeof pokemonList {
         // Peek a computed to avoid subscribing to 1000s of statistics
         const highestDex = ko.pureComputed(() => {
@@ -58,7 +68,7 @@ class PokedexHelper {
 
             // If the Pokemon shouldn't be unlocked yet
             const nativeRegion = PokemonHelper.calcNativeRegion(pokemon.name);
-            if (nativeRegion > GameConstants.MAX_AVAILABLE_REGION || nativeRegion == GameConstants.Region.none && !alreadyCaught) {
+            if (nativeRegion > player.highestRegion() || nativeRegion == GameConstants.Region.none && !alreadyCaught) {
                 return false;
             }
 
@@ -78,9 +88,16 @@ class PokedexHelper {
                 return false;
             }
 
-            // Check if the name contains the string
-            const name = PokemonHelper.displayName(pokemon.name)();
-            if (!PokedexFilters.name.value().test(name)) {
+            // Check if the englishName or displayName contains the string
+            const displayName = PokemonHelper.displayName(pokemon.name)();
+            const filterName = PokedexFilters.name.value();
+            if (!filterName.test(displayName) && !filterName.test(pokemon.name)) {
+                return false;
+            }
+
+            // Check ID
+            const filterID = PokedexFilters.id.value();
+            if (filterID > -1 && filterID != Math.floor(pokemon.id)) {
                 return false;
             }
 
@@ -95,13 +112,13 @@ class PokedexHelper {
             } else if ((type1 != null && !(pokemon as PokemonListData).type.includes(type1)) || (type2 != null && !(pokemon as PokemonListData).type.includes(type2))) {
                 return false;
             }
-
+            const hasBaseFormInSameRegion = () => pokemonList.some((p) => Math.floor(p.id) == Math.floor(pokemon.id) && p.id < pokemon.id && PokemonHelper.calcNativeRegion(p.name) == nativeRegion);
             // Alternate forms that we haven't caught yet
-            if (!alreadyCaught && pokemon.id != Math.floor(pokemon.id)) {
+            if (!alreadyCaught && pokemon.id != Math.floor(pokemon.id) && hasBaseFormInSameRegion()) {
                 return false;
             }
-            // Hide uncaught base forms if alternative form is caught
-            if (!alreadyCaught && pokemon.id == Math.floor(pokemon.id) && App.game.party._caughtPokemon().some((p) => Math.floor(p.id) == pokemon.id)) {
+            // Hide uncaught base forms if alternate non-regional form is caught
+            if (!alreadyCaught && pokemon.id == Math.floor(pokemon.id) && App.game.party._caughtPokemon().some((p) => Math.floor(p.id) == pokemon.id) && hasBaseFormInSameRegion()) {
                 return false;
             }
 
@@ -127,10 +144,9 @@ class PokedexHelper {
             }
 
             /* Only base form if alternate exist (Zarbi, Basculin, ...)
-             * if Mega are not alternative pokemon, this work
-             * else change condition by `filter['hide-alternate'] && (!Number.isInteger(pokemon.id) || Math.sign(pokemon.id) === -1)`
+             * Mainline regional forms are shown as they are part of dex completion
              */
-            if (PokedexFilters.hideAlternate.value() && !Number.isInteger(pokemon.id)) {
+            if (PokedexFilters.hideAlternate.value() && !Number.isInteger(pokemon.id) && hasBaseFormInSameRegion()) {
                 return false;
             }
 
@@ -155,8 +171,12 @@ class PokedexHelper {
                 // Another option: !(pokemon as PokemonListData).evolutions?.some((p) => p.restrictions.some(p => p instanceof MegaEvolveRequirement))
                 return false;
             }
+            // Only Base Pokémon without Mega Evolution
+            if (uniqueTransformation == 'mega-unobtained' && (!(pokemon as PokemonListData).evolutions?.some((p) => p.evolvedPokemon.startsWith('Mega ') && !App.game.party.alreadyCaughtPokemonByName(p.evolvedPokemon)))) {
+                return false;
+            }
             // Only Mega Pokémon
-            if (uniqueTransformation == 'mega-pokemon' && !(pokemon as PokemonListData).name.startsWith('Mega ')) {
+            if (uniqueTransformation == 'mega-evolution' && !(pokemon as PokemonListData).name.startsWith('Mega ')) {
                 return false;
             }
 

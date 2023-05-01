@@ -24,7 +24,7 @@
                   </td>
                   <td data-bind="contentEditable: $data.name"></td>
                   <td>
-                    <button type="button" class="close text-danger" title="Remove Category" style="opacity: 1;" data-bind="click: () => { PokemonCategories.removeCategory($index()) }">
+                    <button type="button" class="close text-danger" title="Remove Category" style="opacity: 1;" data-bind="click: () => { PokemonCategories.removeCategory($data.id) }">
                         <span aria-hidden="true">&times;</span>
                     </button>
                   </td>

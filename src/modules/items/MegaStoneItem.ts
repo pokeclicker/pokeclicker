@@ -1,20 +1,20 @@
-import { Currency } from '../GameConstants';
-import { pokemonMap } from '../pokemons/PokemonList';
+import { Currency, MegaStoneType } from '../GameConstants';
+//import { pokemonMap } from '../pokemons/PokemonList';
 import { PokemonNameType } from '../pokemons/PokemonNameType';
 import Item from './Item';
 import { ShopOptions } from './types';
 
 export default class MegaStoneItem extends Item {
     constructor(
-        private pokemon: PokemonNameType,
-        megaStoneName: string,
+        public megaStone: MegaStoneType,
+        public basePokemon: PokemonNameType,
         basePrice: number,
         currency: Currency = Currency.questPoint,
         options?: ShopOptions,
         displayName?: string,
         description?: string,
     ) {
-        super(megaStoneName, basePrice, currency, { maxAmount: 1, ...options }, displayName, description);
+        super(MegaStoneType[megaStone], basePrice, currency, { maxAmount: 1, ...options }, displayName, description);
     }
 
     totalPrice(amount: number) {
@@ -27,17 +27,17 @@ export default class MegaStoneItem extends Item {
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     gain(amt: number) {
-        App.game.party.getPokemonByName(this.pokemon).giveMegastone();
+        player.gainMegaStone(this.megaStone);
     }
 
     isAvailable(): boolean {
-        return super.isAvailable() && App.game.party.alreadyCaughtPokemonByName(this.pokemon);
+        return super.isAvailable() && App.game.party.alreadyCaughtPokemonByName(this.basePokemon);
     }
 
     get image(): string {
-        return `assets/images/megaStone/${pokemonMap[this.pokemon].id}.png`;
+        return `assets/images/megaStone/${MegaStoneType[this.megaStone]}.png`;
     }
     isSoldOut(): boolean {
-        return App.game.party.alreadyCaughtPokemonByName(this.pokemon) && App.game.party.getPokemonByName(this.pokemon).megaStone;
+        return player.hasMegaStone(this.megaStone);
     }
 }
