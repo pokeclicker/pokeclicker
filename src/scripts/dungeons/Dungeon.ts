@@ -549,6 +549,12 @@ dungeonList['Mt. Moon'] = new Dungeon('Mt. Moon',
                 new GymPokemon('Voltorb', 2780, 12),
                 new GymPokemon('Koffing', 2780, 12),
             ], { weight: 1 }, 'Miguel'),
+        new DungeonBossPokemon('Vivillon (High Plains)',  96662023, 60, {
+            hide: true,
+            requirement: new MultiRequirement([
+                new ObtainedPokemonRequirement('Vivillon (High Plains)'),
+                new SpecialEventRequirement('Lunar New Year'),
+            ])}),
     ],
     75, 4,
     () => {
@@ -1413,6 +1419,16 @@ dungeonList['Cerulean Cave'] = new Dungeon('Cerulean Cave',
     [
         new DungeonBossPokemon('Kadabra', 183675, 60),
         new DungeonBossPokemon('Mewtwo', 255512, 100),
+        new DungeonBossPokemon('Armored Mewtwo', 1000000, 80, {
+            hide: true,
+            requirement: new SpecialEventRequirement('Mewtwo strikes back!'),
+        }),
+        new DungeonBossPokemon('Vivillon (Modern)',  96662023, 60, {
+            hide: true,
+            requirement: new MultiRequirement([
+                new ObtainedPokemonRequirement('Vivillon (Modern)'),
+                new SpecialEventRequirement('Lunar New Year'),
+            ])}),
     ],
     2500, 23);
 
@@ -1802,6 +1818,12 @@ dungeonList['Sprout Tower'] = new Dungeon('Sprout Tower',
                 new GymPokemon('Hoothoot', 87000, 10),
             ],
             { weight: 1 }, 'Li'),
+        new DungeonBossPokemon('Vivillon (Archipelago)',  96662023, 60, {
+            hide: true,
+            requirement: new MultiRequirement([
+                new ObtainedPokemonRequirement('Vivillon (Archipelago)'),
+                new SpecialEventRequirement('Lunar New Year'),
+            ])}),
     ],
     2500, 31);
 
@@ -1997,6 +2019,12 @@ dungeonList['Ilex Forest'] = new Dungeon('Ilex Forest',
         new DungeonBossPokemon('Beedrill', 340000, 30),
         new DungeonBossPokemon('Butterfree', 340000, 30),
         new DungeonBossPokemon('Celebi', 800000, 50, {hide: true, requirement: new QuestLineStepCompletedRequirement('Unfinished Business', 12)}),
+        new DungeonBossPokemon('Grinch Celebi', 1600000, 100, {
+            hide: true,
+            requirement: new MultiRequirement([
+                new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion),
+                new SpecialEventRequirement('Merry Christmas!'),
+            ])}),
     ],
     4000, 34);
 
@@ -2447,7 +2475,15 @@ dungeonList['Dark Cave'] = new Dungeon('Dark Cave',
         ],
     },
     127000,
-    [new DungeonBossPokemon('Dunsparce', 460000, 55)],
+    [
+        new DungeonBossPokemon('Dunsparce', 460000, 55),
+        new DungeonBossPokemon('Vivillon (Monsoon)',  96662023, 60, {
+            hide: true,
+            requirement: new MultiRequirement([
+                new ObtainedPokemonRequirement('Vivillon (Monsoon)'),
+                new SpecialEventRequirement('Lunar New Year'),
+            ])}),
+    ],
     6500, 45);
 
 dungeonList['Tohjo Falls'] = new Dungeon('Tohjo Falls',
@@ -2776,6 +2812,12 @@ dungeonList['Mt. Chimney Crater'] = new Dungeon('Mt. Chimney Crater',
                 new GymPokemon('Zubat', 4500000, 54),
                 new GymPokemon('Mega Camerupt', 4700000, 55),
             ], { weight: 1, hide: true, requirement: new QuestLineCompletedRequirement('The Delta Episode')}, 'Maxie'),
+        new DungeonBossPokemon('Vivillon (Sun)',  96662023, 60, {
+            hide: true,
+            requirement: new MultiRequirement([
+                new ObtainedPokemonRequirement('Vivillon (Sun)'),
+                new SpecialEventRequirement('Lunar New Year'),
+            ])}),
     ],
     20000, 101);
 
@@ -2851,6 +2893,12 @@ dungeonList['New Mauville'] = new Dungeon('New Mauville',
     [
         new DungeonBossPokemon('Magneton', 1650000, 20),
         new DungeonBossPokemon('Electrode', 1650000, 20),
+        new DungeonBossPokemon('Vivillon (Continental)',  96662023, 60, {
+            hide: true,
+            requirement: new MultiRequirement([
+                new ObtainedPokemonRequirement('Vivillon (Continental)'),
+                new SpecialEventRequirement('Lunar New Year'),
+            ])}),
     ],
     24000, 101);
 
@@ -3326,6 +3374,12 @@ dungeonList['Sky Pillar'] = new Dungeon('Sky Pillar',
     [
         new DungeonBossPokemon('Dusclops', 3200000, 20),
         new DungeonBossPokemon('Rayquaza', 5824002, 100, {requirement: new QuestLineStepCompletedRequirement('The Weather Trio', 5)}),
+        new DungeonBossPokemon('Vivillon (Polar)',  96662023, 60, {
+            hide: true,
+            requirement: new MultiRequirement([
+                new ObtainedPokemonRequirement('Vivillon (Polar)'),
+                new SpecialEventRequirement('Lunar New Year'),
+            ])}),
     ],
     34000, 101);
 
@@ -5143,6 +5197,16 @@ dungeonList['Eterna Forest'] = new Dungeon('Eterna Forest',
             new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 8, GameConstants.AchievementOption.less),
             new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 7),
         ])}),
+        new DungeonBossPokemon('Vivillon (River)',  96662023, 60, {
+            hide: true,
+            requirement: new MultiRequirement([
+                new ObtainedPokemonRequirement('Vivillon (River)'),
+                new SpecialEventRequirement('Lunar New Year'),
+                new OneFromManyRequirement([
+                    new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 7, GameConstants.AchievementOption.less),
+                    new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 8),
+                ]),
+            ])}),
     ],
     48000, 205);
 
@@ -5509,6 +5573,12 @@ dungeonList['Lake Valor'] = new Dungeon('Lake Valor',
                 new GymPokemon('Toxicroak', 1533334, 40),
             ], { weight: 1 }, 'Saturn', '(saturn)'),
         new DungeonBossPokemon('Azelf', 10060000, 50, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Distortion World'))}),
+        new DungeonBossPokemon('Vivillon (Marine)',  96662023, 60, {
+            hide: true,
+            requirement: new MultiRequirement([
+                new ObtainedPokemonRequirement('Vivillon (Marine)'),
+                new SpecialEventRequirement('Lunar New Year'),
+            ])}),
     ],
     69500, 218);
 
@@ -5559,6 +5629,12 @@ dungeonList['Lake Verity'] = new Dungeon('Lake Verity',
                 new GymPokemon('Bronzor', 1606667, 38),
                 new GymPokemon('Purugly', 1606667, 40),
             ], { weight: 1 }, 'Mars', '(mars)'),
+        new DungeonBossPokemon('Vivillon (Marine)',  96662023, 60, {
+            hide: true,
+            requirement: new MultiRequirement([
+                new ObtainedPokemonRequirement('Vivillon (Marine)'),
+                new SpecialEventRequirement('Lunar New Year'),
+            ])}),
     ],
     72500, 218);
 
@@ -5622,6 +5698,12 @@ dungeonList['Lake Acuity'] = new Dungeon('Lake Acuity',
                 new GymPokemon('Skuntank', 1690000, 40),
             ], { weight: 1 }, 'Jupiter', '(jupiter)'),
         new DungeonBossPokemon('Uxie', 10070000, 50, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Distortion World'))}),
+        new DungeonBossPokemon('Vivillon (Marine)',  96662023, 60, {
+            hide: true,
+            requirement: new MultiRequirement([
+                new ObtainedPokemonRequirement('Vivillon (Marine)'),
+                new SpecialEventRequirement('Lunar New Year'),
+            ])}),
     ],
     78000, 217);
 
@@ -6077,6 +6159,18 @@ dungeonList['Flower Paradise'] = new Dungeon('Flower Paradise',
         new DungeonBossPokemon('Breloom', 11000000, 50),
         new DungeonBossPokemon('Shaymin (Land)', 11000000, 50),
         new DungeonBossPokemon('Shaymin (Sky)', 11000000, 50, {requirement: new ObtainedPokemonRequirement('Shaymin (Land)')}),
+        new DungeonBossPokemon('Bulbasaur (Rose)', 1600000, 100, {
+            hide: true,
+            requirement: new MultiRequirement([
+                new ClearDungeonRequirement(10, GameConstants.getDungeonIndex('Flower Paradise')),
+                new SpecialEventRequirement('Golden Week'),
+            ])}),
+        new DungeonBossPokemon('Vivillon (Garden)',  96662023, 60, {
+            hide: true,
+            requirement: new MultiRequirement([
+                new ObtainedPokemonRequirement('Vivillon (Garden)'),
+                new SpecialEventRequirement('Lunar New Year'),
+            ])}),
     ],
     96500, 230);
 
@@ -6477,6 +6571,12 @@ dungeonList['Relic Castle'] = new Dungeon('Relic Castle',
             [new GymPokemon('Sigilyph', 16000000, 23)],
             { weight: 1 }, 'Perry', '(male)'),
         new DungeonBossPokemon('Volcarona', 21000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Relic Passage'))}),
+        new DungeonBossPokemon('Vivillon (Sandstorm)',  96662023, 60, {
+            hide: true,
+            requirement: new MultiRequirement([
+                new ObtainedPokemonRequirement('Vivillon (Sandstorm)'),
+                new SpecialEventRequirement('Lunar New Year'),
+            ])}),
     ],
     166500, 25);
 
@@ -7535,6 +7635,12 @@ dungeonList['Dragonspiral Tower'] = new Dungeon('Dragonspiral Tower',
         new DungeonBossPokemon('Dragonite', 48000000, 100),
         new DungeonBossPokemon('Reshiram', 50000000, 100),
         new DungeonBossPokemon('Zekrom', 50000000, 100),
+        new DungeonBossPokemon('Vivillon (Savanna)',  96662023, 60, {
+            hide: true,
+            requirement: new MultiRequirement([
+                new ObtainedPokemonRequirement('Vivillon (Savanna)'),
+                new SpecialEventRequirement('Lunar New Year'),
+            ])}),
     ],
     356500, 7);
 
@@ -7597,6 +7703,12 @@ dungeonList['Moor of Icirrus'] = new Dungeon('Moor of Icirrus',
         new DungeonBossPokemon('Keldeo', 50000000, 100),
         new DungeonBossPokemon('Seismitoad', 48000000, 100),
         new DungeonBossPokemon('Whiscash', 48000000, 100),
+        new DungeonBossPokemon('Vivillon (Jungle)',  96662023, 60, {
+            hide: true,
+            requirement: new MultiRequirement([
+                new ObtainedPokemonRequirement('Vivillon (Jungle)'),
+                new SpecialEventRequirement('Lunar New Year'),
+            ])}),
     ],
     356500, 8);
 
@@ -7885,6 +7997,12 @@ dungeonList.Dreamyard = new Dungeon('Dreamyard',
         new DungeonBossPokemon('Dunsparce', 48000000, 100),
         new DungeonBossPokemon('Latias', 48000000, 100),
         new DungeonBossPokemon('Latios', 48000000, 100),
+        new DungeonBossPokemon('Vivillon (Ocean)',  96662023, 60, {
+            hide: true,
+            requirement: new MultiRequirement([
+                new ObtainedPokemonRequirement('Vivillon (Ocean)'),
+                new SpecialEventRequirement('Lunar New Year'),
+            ])}),
     ],
     356500, 3);
 
@@ -8298,6 +8416,12 @@ dungeonList['Poké Ball Factory'] = new Dungeon('Poké Ball Factory',
         new DungeonTrainer('Team Flare Bryony',
             [new GymPokemon('Liepard', 79284730, 41)],
             { weight: 1 }),
+        new DungeonBossPokemon('Vivillon (Tundra)',  96662023, 60, {
+            hide: true,
+            requirement: new MultiRequirement([
+                new ObtainedPokemonRequirement('Vivillon (Tundra)'),
+                new SpecialEventRequirement('Lunar New Year'),
+            ])}),
     ],
     615000, 14);
 
@@ -8366,6 +8490,12 @@ dungeonList['Lost Hotel'] = new Dungeon('Lost Hotel',
                 new GymPokemon('Pangoro', 42765500, 42),
             ], { weight: 2 }, 'Zoya & Asa'),
         new DungeonBossPokemon('Rotom', 82376500, 38),
+        new DungeonBossPokemon('Vivillon (Elegant)',  96662023, 60, {
+            hide: true,
+            requirement: new MultiRequirement([
+                new ObtainedPokemonRequirement('Vivillon (Elegant)'),
+                new SpecialEventRequirement('Lunar New Year'),
+            ])}),
     ],
     635000, 15);
 
@@ -8484,6 +8614,12 @@ dungeonList['Frost Cavern'] = new Dungeon('Frost Cavern',
             [new GymPokemon('Houndoom', 87365830, 48)],
             { weight: 1 }),
         new DungeonBossPokemon('Abomasnow', 85376500, 50, {requirement: new QuestLineStepCompletedRequirement('A Beautiful World', 17)}),
+        new DungeonBossPokemon('Vivillon (Icy Snow)',  96662023, 60, {
+            hide: true,
+            requirement: new MultiRequirement([
+                new ObtainedPokemonRequirement('Vivillon (Icy Snow)'),
+                new SpecialEventRequirement('Lunar New Year'),
+            ])}),
     ],
     665500, 15);
 
@@ -9480,6 +9616,12 @@ dungeonList['Thrifty Megamart'] = new Dungeon('Thrifty Megamart',
     [
         new DungeonBossPokemon('Mimikyu', 73527110, 35),
         new DungeonBossPokemon('Totem Mimikyu', 82543791, 60, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
+        new DungeonBossPokemon('Vivillon (Poké Ball)',  96662023, 60, {
+            hide: true,
+            requirement: new MultiRequirement([
+                new ObtainedPokemonRequirement('Vivillon (Poké Ball)'),
+                new SpecialEventRequirement('Lunar New Year'),
+            ])}),
     ],
     1025000, 14,
     () => DungeonGainGymBadge(GymList['Acerola\'s Trial'], BadgeEnums.GhostiumZ));
