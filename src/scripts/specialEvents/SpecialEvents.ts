@@ -45,74 +45,38 @@ class SpecialEvents implements Feature {
 // TODO: Fetch events from a server each 1/2/3/6/12/24 hours?
 // Create our events here for now (yearly)
 
-// Lunar New Year
-// TownList.ts: Vivillon Photobook in Santalune
+/* Lunar New Year
+    RoamingPokemonList.ts:
+        Vivillon (Meadow)
+        Vivillon (Fancy)
+    Dungeon.ts:
+        Vivillon (High Plains) in Mt. Moon
+        Vivillon (Modern) in Cerulean Cave
+        Vivillon (Archipelago) in Sprout Tower
+        Vivillon (Monsoon) in Dark Cave
+        Vivillon (Sun) in Mt. Chimney Crater
+        Vivillon (Continental) in New Mauville
+        Vivillon (Polar) in Sky Pillar
+        Vivillon (River) in Eterna Forest
+        Vivillon (Marine) in Lake Valor, Verity, and Acuity
+        Vivillon (Garden) in Flower Paradise
+        Vivillon (Sandstorm) in Relic Castle
+        Vivillon (Savanna) in Dragonspiral Tower
+        Vivillon (Jungle) in Moor of Icirrus
+        Vivillon (Ocean) in Dreamyard
+        Vivillon (Tundra) in Poké Ball Factory
+        Vivillon (Elegant) in Lost Hotel
+        Vivillon (Icy Snow) in Frost Cavern
+        Vivillon (Poké Ball) in Thrifty Megamart
+    TownList.ts:
+        Vivillon Photobook in Santalune
+    */
 SpecialEvents.newEvent('Lunar New Year', 'Two kinds of Vivillon are roaming Kalos and later regions, and ones you\'ve previously caught have returned. Check the Photobook in Santalune City for hints!',
     // Start
     new Date(new Date().getFullYear(), 0, 24, 1), () => {
-        ([
-            ['Lake Verity', 'Vivillon (Marine)'],
-            ['Lake Acuity', 'Vivillon (Marine)'],
-            ['Lake Valor', 'Vivillon (Marine)'],
-            ['Cerulean Cave', 'Vivillon (Modern)'],
-            ['Moor of Icirrus', 'Vivillon (Jungle)'],
-            ['Dark Cave', 'Vivillon (Monsoon)'],
-            ['Poké Ball Factory', 'Vivillon (Tundra)'],
-            ['Mt. Chimney Crater', 'Vivillon (Sun)'],
-            ['Sprout Tower', 'Vivillon (Archipelago)'],
-            ['Lost Hotel', 'Vivillon (Elegant)'],
-            ['Dreamyard', 'Vivillon (Ocean)'],
-            ['New Mauville', 'Vivillon (Continental)'],
-            ['Sky Pillar', 'Vivillon (Polar)'],
-            ['Relic Castle', 'Vivillon (Sandstorm)'],
-            ['Flower Paradise', 'Vivillon (Garden)'],
-            ['Mt. Moon', 'Vivillon (High Plains)'],
-            ['Dragonspiral Tower', 'Vivillon (Savanna)'],
-            ['Frost Cavern', 'Vivillon (Icy Snow)'],
-            ['Thrifty Megamart', 'Vivillon (Poké Ball)'],
-        ] as [string, PokemonNameType][]).forEach(([location, vivillon]) => {
-            dungeonList[location].bossList.push(
-                new DungeonBossPokemon(vivillon, 96662023, 60, {
-                    hide: true,
-                    requirement: new ObtainedPokemonRequirement(vivillon),
-                })
-            );
-        });
-        dungeonList['Eterna Forest'].bossList.push(new DungeonBossPokemon('Vivillon (River)', 96662023, 60, {hide: true, requirement: new MultiRequirement([
-            new ObtainedPokemonRequirement('Vivillon (River)'),
-            new OneFromManyRequirement([
-                new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 7, GameConstants.AchievementOption.less),
-                new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 8),
-            ]),
-        ])}));
     },
     // End
     new Date(new Date().getFullYear(), 1, 7, 23), () => {
-        [
-            ['Lake Verity', 'Vivillon (Marine)'],
-            ['Lake Acuity', 'Vivillon (Marine)'],
-            ['Lake Valor', 'Vivillon (Marine)'],
-            ['Cerulean Cave', 'Vivillon (Modern)'],
-            ['Moor of Icirrus', 'Vivillon (Jungle)'],
-            ['Dark Cave', 'Vivillon (Monsoon)'],
-            ['Poké Ball Factory', 'Vivillon (Tundra)'],
-            ['Mt. Chimney Crater', 'Vivillon (Sun)'],
-            ['Sprout Tower', 'Vivillon (Archipelago)'],
-            ['Lost Hotel', 'Vivillon (Elegant)'],
-            ['Dreamyard', 'Vivillon (Ocean)'],
-            ['New Mauville', 'Vivillon (Continental)'],
-            ['Eterna Forest', 'Vivillon (River)'],
-            ['Sky Pillar', 'Vivillon (Polar)'],
-            ['Relic Castle', 'Vivillon (Sandstorm)'],
-            ['Flower Paradise', 'Vivillon (Garden)'],
-            ['Mt. Moon', 'Vivillon (High Plains)'],
-            ['Dragonspiral Tower', 'Vivillon (Savanna)'],
-            ['Frost Cavern', 'Vivillon (Icy Snow)'],
-            ['Thrifty Megamart', 'Vivillon (Poké Ball)'],
-        ].forEach(([location, vivillon]) => {
-            dungeonList[location].bossList = dungeonList[location].bossList
-                .filter(boss => boss.name != vivillon || (boss.name == vivillon && !boss.options?.requirement));
-        });
     }
 );
 //Hoopa Day
@@ -138,7 +102,11 @@ SpecialEvents.newEvent('Easter', 'Encounter Surprise Togepi for a limited time w
     new Date(new Date().getFullYear(), 3, 29, 23), () => {
     }
 );
-// First Event
+/* First Event
+    RoamingPokemonList.ts:
+        Flying Pikachu
+        Red Spearow
+    */
 SpecialEvents.newEvent('Flying Pikachu', 'Encounter Flying Pikachu and Red Spearow for a limited time roaming Kanto.',
     // Start
     new Date(new Date().getFullYear(), 6, 6, 1), () => {
@@ -147,15 +115,20 @@ SpecialEvents.newEvent('Flying Pikachu', 'Encounter Flying Pikachu and Red Spear
     new Date(new Date().getFullYear(), 6, 12, 23), () => {
     }
 );
-// Pokemon the first movie release date
+/* Pokemon the first movie release date
+    RoamingPokemonList.ts:
+        Bulbausaur (Clone)
+        Charmander (Clone)
+        Squirtle (Clone)
+    Dungeon.ts:
+        Armored Mewtwo in Cerulean Cave
+    */
 SpecialEvents.newEvent('Mewtwo strikes back!', 'Encounter Armored Mewtwo for a limited time in Cerulean Cave.<br/>Encounter clone Pokémon roaming in Kanto.',
     // Start
     new Date(new Date().getFullYear(), 6, 18, 1), () => {
-        dungeonList['Cerulean Cave'].bossList.push(new DungeonBossPokemon('Armored Mewtwo', 1000000, 80));
     },
     // End
     new Date(new Date().getFullYear(), 6, 24, 23), () => {
-        dungeonList['Cerulean Cave'].bossList = dungeonList['Cerulean Cave'].bossList.filter(boss => boss.name != 'Armored Mewtwo');
     }
 );
 // Halloween
@@ -184,7 +157,11 @@ SpecialEvents.newEvent('Halloween!', 'Encounter Spooky Pokémon for a limited ti
         Routes.getRoutesByRegion(GameConstants.Region.hoenn).forEach(route => route.pokemon.land = route.pokemon.land.filter(p => !['Pikachu (Gengar)', 'Shuppet', 'Duskull'].includes(p)));
     }
 );
-// Let's Go P/E release date
+/* Let's Go P/E release date
+    RoamingPokemonList.ts:
+        Let's Go Pikachu
+        Let's Go Eevee
+    */
 SpecialEvents.newEvent('Let\'s GO!', 'Encounter special Eevee and Pikachu roaming in the Kanto region.',
     // Start
     new Date(new Date().getFullYear(), 10, 16, 1), () => {
@@ -193,25 +170,29 @@ SpecialEvents.newEvent('Let\'s GO!', 'Encounter special Eevee and Pikachu roamin
     new Date(new Date().getFullYear(), 10, 23, 23), () => {
     }
 );
-// Christmas
+/* Christmas
+    RoamingPokemonList.ts:
+        Santa Snorlax
+    Dungeon.ts:
+        Grinch Celebi in Ilex Forest
+    */
 SpecialEvents.newEvent('Merry Christmas!', 'Encounter Santa Snorlax roaming the regions and discover the Grinch of Ilex Forest.',
     // Start
     new Date(new Date().getFullYear(), 11, 24, 1), () => {
-        dungeonList['Ilex Forest'].bossList.push(new DungeonBossPokemon('Grinch Celebi', 1600000, 100, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion)}));
     },
     // End
     new Date(new Date().getFullYear(), 11, 30, 23), () => {
-        dungeonList['Ilex Forest'].bossList = dungeonList['Ilex Forest'].bossList.filter(boss => boss.name != 'Grinch Celebi');
     }
 );
-// Golden Week
+/* Golden Week
+    Dungeon.ts:
+        Bulbasaur (Rose) in Flower Paradise
+    */
 SpecialEvents.newEvent('Golden Week', 'Enjoy your time off in the "Golden Week"! Travel tip: Visit the Flower Paradise in Sinnoh on your well earned vacation and enjoy the bloom of roses.',
     // Start
     new Date(new Date().getFullYear(), 3, 29, 1), () => {
-        dungeonList['Flower Paradise'].bossList.push(new DungeonBossPokemon('Bulbasaur (Rose)', 1600000, 100, {requirement: new ClearDungeonRequirement(10, GameConstants.getDungeonIndex('Flower Paradise'))}));
     },
     // End
     new Date(new Date().getFullYear(), 4, 6, 23), () => {
-        dungeonList['Flower Paradise'].bossList = dungeonList['Flower Paradise'].bossList.filter(boss => boss.name != 'Bulbasaur (Rose)');
     }
 );

@@ -1700,7 +1700,7 @@ class QuestLineHelper {
         deltaEpisodeQuestLine.addQuest(catchDeltaRayquaza);
 
         const MeteoriteReward = () => {
-            App.game.party.getPokemonByName('Rayquaza').giveMegastone();
+            player.gainMegaStone(GameConstants.MegaStoneType.Meteorite);
             Notifier.notify({
                 title: deltaEpisodeQuestLine.name,
                 message: 'Your Meteorite Shards combine into a Meteorite!',
