@@ -137,6 +137,7 @@ class FarmHand {
             message: 'Thanks for hiring me,\nI won\'t let you down!',
             type: NotificationConstants.NotificationOption.success,
             timeout: 30 * GameConstants.SECOND,
+            setting: NotificationConstants.NotificationSetting.Farming.farm_hand,
         });
     }
 
@@ -146,6 +147,7 @@ class FarmHand {
             message: 'Thanks for the work.\nLet me know when you\'re hiring again!',
             type: NotificationConstants.NotificationOption.info,
             timeout: 30 * GameConstants.SECOND,
+            setting: NotificationConstants.NotificationSetting.Farming.farm_hand,
         });
         this.hired(false);
         return;

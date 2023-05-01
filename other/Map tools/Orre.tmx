@@ -246,12 +246,12 @@
   </layer>
   <layer id="52" name="Lab decoration" width="100" height="60" tintcolor="#464646">
    <data encoding="base64" compression="zstd">
-   KLUv/WDAXD0DAIQCACYdAAAnHQAqHQAAKy8dAAAuHTIdAAAzUyYAYFYmAABXJmMmAABkJhSAIClMIA9tDPCAa/tb1edCuHZkqv+I80k5gHPsyKz+Y5KHOEnVUwQaVoBNLjVgXhkEATVHNQFuQTLw7gQ=
+   KLUv/WDAXBUDAHQCACYdAAAnHQAqHQAAKy8dAAAuHTIdAAAzYCYAViYAAFcmYyYAAGQmE4AgJ5hQHm0M8IBr+1vV50K4dmSq/4jzSTmAc+zIrP5jJs8iqGABbHKpAfPKIAioOaoZcCeSgXcn
   </data>
   </layer>
   <layer id="57" name="Lab decoration 2" width="100" height="60" tintcolor="#848484">
    <data encoding="base64" compression="zstd">
-   KLUv/WDAXNUAAEAAVCYAAFUmAAQAYQ94aJ1dKjAFquEreHcF
+   KLUv/WDAXC0BAGgAViYAAFcmAGMmAABkBgCBD/DQOFSoADhAnFyqNgSqoSV4dwU=
   </data>
   </layer>
   <layer id="51" name="Lab" width="100" height="60" tintcolor="#e3e3e3">
@@ -402,7 +402,7 @@
   </layer>
   <layer id="86" name="Decoration" width="100" height="60" tintcolor="#c5c5c5">
    <data encoding="base64" compression="zstd">
-   KLUv/WDAXDUCAKgAUyYAADQRAAAsEQBgJgA8U2AmYGAQoBB36xlwghJd9AGlpwc2uXrkWBPuuk5C1QqoQ5n9Ub4TRFulnuol5hW0KveHVyg=
+   KLUv/WDAXHUBAGgAYCYAADQRAAAsEQA8C4CAr/eBiuuXAkO9P18c2flu16Otrjpd71gCNe4P72w=
   </data>
   </layer>
   <layer id="84" name="Outskirt Stand" width="100" height="60">
