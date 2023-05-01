@@ -439,7 +439,7 @@ export const SpriteCredits: Credit[] = [
             'Koga Trainer',
             'Spooky Ivysaur',
             'Spooky Venusaur',
-            'TODO name for Dugtrio',
+            'Dugtrio (Punk)',
         ],
         // Notes: Made specifically for PokéClicker.
     },
