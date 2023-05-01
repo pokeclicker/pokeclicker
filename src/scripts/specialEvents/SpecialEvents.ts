@@ -68,27 +68,29 @@ class SpecialEvents implements Feature {
         Vivillon (Elegant) in Lost Hotel
         Vivillon (Icy Snow) in Frost Cavern
         Vivillon (Poké Ball) in Thrifty Megamart
+    TownList.ts:
+        Vivillon Photobook in Santalune
     */
 SpecialEvents.newEvent('Lunar New Year', 'Two kinds of Vivillon are roaming Kalos and later regions, and ones you\'ve previously caught have returned. Check the Photobook in Santalune City for hints!',
     // Start
     new Date(new Date().getFullYear(), 0, 24, 1), () => {
-        TownList['Santalune City'].npcs.push(VivillonPhotobook);
     },
     // End
     new Date(new Date().getFullYear(), 1, 7, 23), () => {
-        TownList['Santalune City'].npcs = TownList['Santalune City'].npcs.filter(NPC => NPC.name != 'Vivillon Photobook');
+        });
     }
 );
 //Hoopa Day
-// QuestLineHelper.ts: Pikablu (literally Marill) quest; 'How blu mouse?'
+/*
+TownList.ts and TemporaryBattleList.ts: Youngster Joey in Cherrygrove
+QuestLineHelper.ts: Pikablu (literally Marill) quest; 'How blu mouse?'
+*/
 SpecialEvents.newEvent('Hoopa Day', 'The Mischief Pokémon unleashes his tricks upon the world.',
     // Start
     new Date(new Date().getFullYear(), 3, 1, 1), () => {
-        TownList['Cherrygrove City'].content.push(TemporaryBattleList['Youngster Joey']);
     },
     // End
     new Date(new Date().getFullYear(), 3, 2, 1), () => {
-        TownList['Cherrygrove City'].content = TownList['Cherrygrove City'].content.filter(t => t != TemporaryBattleList['Youngster Joey']);
     }
 );
 // Easter

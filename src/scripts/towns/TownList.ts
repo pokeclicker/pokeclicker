@@ -2,10 +2,11 @@
 ///<reference path="../../declarations/requirements/RouteKillRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/GymBadgeRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/OneFromManyRequirement.d.ts"/>
+///<reference path="../../declarations/requirements/SpecialEventRequirement.d.ts"/>
 ///<reference path="../quests/BulletinBoard.ts"/>
 ///<reference path="BattleCafe.ts"/>
 ///<reference path="../../declarations/requirements/MultiRequirement.d.ts"/>
-///<reference path="../Safari/SafariTownContent.ts"/>
+///<reference path="../safari/SafariTownContent.ts"/>
 ///<reference path="PurifyChamber.ts"/>
 
 const TownList: { [name: string]: Town } = {};
@@ -1678,7 +1679,7 @@ TownList['Cherrygrove City'] = new Town(
     'Cherrygrove City',
     GameConstants.Region.johto,
     GameConstants.JohtoSubRegions.Johto,
-    [CherrygroveCityShop],
+    [CherrygroveCityShop, TemporaryBattleList['Youngster Joey']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 29)],
         npcs: [CherrygroveMrPokemon],
@@ -2499,7 +2500,7 @@ const Zinnia6 = new NPC('Zinnia', [
     'Yes! Finally! The moment I have been waiting for! I have gathered enough Key Stones to draw out the latent power in Rayquaza and stop the impending disaster!',
     'Huh?! H-how can this be? I did everything I was supposed to, and you\'re not changing! <b>Come on! Do it! Mega Evolve! Why?!</b>',
     'Is it... you\'re not here for me? You\'re here for $playername$? That\'s no fair! I\'m the chosen one!',
-    '<i>You notice the Meteorite Shards you have been carrying have fused together and are emitting a powerful glow.</i></br><img src="assets/images/megaStone/384.png"/>',
+    '<i>You notice the Meteorite Shards you have been carrying have fused together and are emitting a powerful glow.</i></br><img src="assets/images/megaStone/Meteorite.png"/>',
 ], {image: 'assets/images/npcs/other/RayquazaEncounter.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 28), new QuestLineStepCompletedRequirement('The Delta Episode', 30, GameConstants.AchievementOption.less)]),
 });
@@ -3281,8 +3282,8 @@ TownList['Pyrite Colosseum Battles'] = new DungeonTown(
         new DevelopmentRequirement(),
     ]
 );
-TownList['Pyrite Bldg'] = new DungeonTown(
-    'Pyrite Bldg',
+TownList['Pyrite Building'] = new DungeonTown(
+    'Pyrite Building',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
@@ -5482,7 +5483,12 @@ const VivillonPhotobook = new NPC('Vivillon Photobook', [
     '<i>You see an Icy Snow Vivillon bundled up with its trainer. It\'s enjoying a much-needed warm cup of cocoa to counteract the icy cave around it.</i>',
     '<img src="assets/images/npcs/textbody/VivillonPhotobookPokéBall.png" style="max-width:100%; height:auto"/>',
     '<i>Lastly, you see a Poké Ball Vivillon in a darkened mall. It\'s trying to scare the camerawoman, completely unaware of the sinister eyes peering from the darkness behind it.</i>',
-]);
+], {
+    requirement: new MultiRequirement([
+        new QuestLineCompletedRequirement('The Great Vivillon Hunt!'),
+        new SpecialEventRequirement('Lunar New Year'),
+    ]),
+});
 
 const FriendlyAttendant = new NPC('Friendly Attendant', [
     'Welcome to the Friend Safari!',
@@ -5519,7 +5525,7 @@ TownList['Santalune City'] = new Town(
     [SantaluneCityShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 3)],
-        npcs: [MysteryFan],
+        npcs: [MysteryFan, VivillonPhotobook],
     }
 );
 TownList['Lumiose City'] = new Town(

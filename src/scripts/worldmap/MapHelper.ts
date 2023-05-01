@@ -71,9 +71,16 @@ class MapHelper {
 
     public static getCurrentEnvironment(): GameConstants.Environment {
         const area = player.route() ||
-            (App.game.gameState == GameConstants.GameState.temporaryBattle ? TemporaryBattleRunner.battleObservable()?.parent?.name ?? TemporaryBattleRunner.battleObservable()?.optionalArgs.returnTown : undefined) ||
+            (App.game.gameState == GameConstants.GameState.temporaryBattle
+                ? TemporaryBattleRunner.getEnvironmentArea() : undefined) ||
+            (App.game.gameState == GameConstants.GameState.gym
+                ? GymRunner.getEnvironmentArea() : undefined) ||
             player.town()?.name ||
             undefined;
+
+        if (area in GameConstants.Environments) {
+            return area;
+        }
 
         const [env] = Object.entries(GameConstants.Environments).find(
             ([, regions]) => regions[player.region]?.has(area)
