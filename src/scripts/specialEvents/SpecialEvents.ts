@@ -77,7 +77,6 @@ SpecialEvents.newEvent('Lunar New Year', 'Two kinds of Vivillon are roaming Kalo
     },
     // End
     new Date(new Date().getFullYear(), 1, 7, 23), () => {
-        });
     }
 );
 //Hoopa Day
