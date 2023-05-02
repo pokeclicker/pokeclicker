@@ -5196,10 +5196,6 @@ dungeonList['Eterna Forest'] = new Dungeon('Eterna Forest',
             requirement: new MultiRequirement([
                 new ObtainedPokemonRequirement('Vivillon (River)'),
                 new SpecialEventRequirement('Lunar New Year'),
-                new OneFromManyRequirement([
-                    new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 7, GameConstants.AchievementOption.less),
-                    new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 8),
-                ]),
             ])}),
     ],
     48000, 205);
