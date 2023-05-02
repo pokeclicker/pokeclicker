@@ -57,6 +57,7 @@ const NotificationConstants = {
             hatched: new NotificationSetting('notification.hatched', 'Egg hatched', true),
             hatched_shiny: new NotificationSetting('notification.hatched_shiny', 'Egg hatched a shiny', true),
             empty_queue: new NotificationSetting('empty_queue', 'Hatchery queue is empty', true),
+            hatchery_helper: new NotificationSetting('notification.hatchery_helper', 'Hatchery Helper Hired/Fired', true),
         },
         Dungeons: {
             dungeon_complete: new NotificationSetting('notification.dungeon_complete', 'Dungeon completed', true),
@@ -85,6 +86,7 @@ const NotificationConstants = {
             berry_dropped: new NotificationSetting('notification.berry_dropped', 'Berry has been dropped', true),
             mulch_ran_out: new NotificationSetting('notification.mulch_ran_out', 'Mulch has run out', true),
             wandering_pokemon: new NotificationSetting('notification.wandering_pokemon', 'Wandering Pokémon encountered', true),
+            farm_hand: new NotificationSetting('notification.farm_hand', 'Farm Hand Hired/Fired', true),
         },
     },
 };

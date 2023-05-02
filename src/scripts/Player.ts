@@ -205,6 +205,26 @@ class Player {
         }
     }
 
+    public hasMegaStone(megaStone: GameConstants.MegaStoneType): boolean {
+        return this._itemList[GameConstants.MegaStoneType[megaStone]]() > 0;
+    }
+
+    public gainMegaStone(megaStone: GameConstants.MegaStoneType, notify = true) {
+        const name = GameConstants.MegaStoneType[megaStone];
+        if (!this._itemList[name]()) {
+            player.gainItem(name, 1);
+        }
+
+        if (notify) {
+            const item = ItemList[GameConstants.MegaStoneType[megaStone]] as MegaStoneItem;
+            const partyPokemon = App.game.party.getPokemonByName(item.basePokemon);
+            Notifier.notify({
+                message: partyPokemon ? `${partyPokemon.displayName} has gained a Mega Stone!` : `You have gained a Mega Stone for ${item.basePokemon}!`,
+                type: NotificationConstants.NotificationOption.success,
+            });
+        }
+    }
+
     // TODO(@Isha) move to underground classes.
     public hasMineItems() {
         for (let i = 0; i < this.mineInventory().length; i++) {
