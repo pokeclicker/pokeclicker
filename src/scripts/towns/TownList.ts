@@ -2093,10 +2093,9 @@ const RoadsideStandShadySalesman = new NPC('Shady Salesman', [
 ], {image: 'assets/images/npcs/ShadySalesman.png'});
 
 const WeatherAppNPC = new NPC('Meteorologist', [
-    'We developed an app called Castform App!.',
+    'We developed an app called Castform App!',
     'This app will show the forecasts of every region.',
     'The app is very limited however, it will only show the forecasts for the next 7 days.',
-    'If you need to see more, you can use our PC in the institute, it will show the forecasts for the next 30 days.',
 ],
 {
     requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Weather Institute')),

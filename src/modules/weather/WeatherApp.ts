@@ -133,20 +133,10 @@ export default class WeatherApp {
     }
 
     /**
-     * Opens the Weather App modal. Changes the date range depending on where the modal is opened from
-     * 7 if shortcut, 30 if Weather Institute dungeon
-     * @param isShortcut 
+     * Opens the Weather App modal.
      */
-    public static openWeatherAppModal(isShortcut: boolean = true) {
+    public static openWeatherAppModal() {
         if (WeatherApp.isUnlocked()) {
-            if (isShortcut && WeatherApp.defaultDateRange !== 7) {
-                WeatherApp.defaultDateRange = 7;
-                WeatherApp.initialize();
-            } else if (!isShortcut && WeatherApp.defaultDateRange !== 30) {
-                WeatherApp.defaultDateRange = 30;
-                WeatherApp.initialize();
-            }
-
             $('#weatherAppModal').modal('show');
         } else {
             Notifier.notify({
@@ -171,11 +161,3 @@ export default class WeatherApp {
         };
     }
 }
-
-$(document).ready(() => {
-    // Add padding if scroll bar is visible
-    $('#weatherAppModal').on('shown.bs.modal', () => {
-        const scrollBarSize = GameHelper.isOverflownX('#forecastTable') ? GameHelper.getScrollBarSize() : 0;
-        $('#timeTable').css('padding-bottom', scrollBarSize);
-    });
-});

@@ -174,7 +174,7 @@ class WeatherAppTownContent extends TownContent {
     }
 
     public onclick(): void {
-        WeatherApp.openWeatherAppModal(false);
+        WeatherApp.openWeatherAppModal();
     }
 
     public text() {
