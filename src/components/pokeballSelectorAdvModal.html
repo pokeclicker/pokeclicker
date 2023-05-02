@@ -177,8 +177,8 @@
                             <p id="pokeballFilterTestMatch">
                                 <span data-bind='visible: $data, text: `This will use your "${$data?.name}" filter`'></span>
                                 <span data-bind='visible: !$data'>None of your enabled filters match this scenario</span>
+                                <!-- ko if: $data -->
                                 <img class="pokeball-selected pokeball-small" data-bind="
-                                    visible: $data,
                                     attr: {
                                         src: 'assets/images/pokeball/' + GameConstants.Pokeball[$data?.ball()] + '.svg'},
                                         tooltip: {
@@ -188,6 +188,7 @@
                                             placement: 'bottom'
                                         },
                                 }" />
+                                <!-- /ko -->
                             </p>
                             <div data-bind="foreach: App.game.pokeballFilters.displayList()">
                                 <p data-bind="
