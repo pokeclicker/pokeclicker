@@ -42,7 +42,7 @@ export const pokeballFilterOptions: {
     [K in keyof PokeballFilterOptions]-?: PokeballFilterOption<K>
 } = {
     shiny: new PokeballFilterOption(
-        (bool = false) => new BooleanSetting(
+        (bool = true) => new BooleanSetting(
             'pokeballFilterShiny',
             'Shiny',
             bool,
@@ -53,7 +53,7 @@ export const pokeballFilterOptions: {
     ),
 
     shadow: new PokeballFilterOption(
-        (bool = false) => new BooleanSetting(
+        (bool = true) => new BooleanSetting(
             'pokeballFilterShadow',
             'Shadow',
             bool,
@@ -65,7 +65,7 @@ export const pokeballFilterOptions: {
     ),
 
     caught: new PokeballFilterOption(
-        (bool = false) => new BooleanSetting(
+        (bool = true) => new BooleanSetting(
             'pokeballFilterCaught',
             'Caught',
             bool,
@@ -76,7 +76,7 @@ export const pokeballFilterOptions: {
     ),
 
     caughtShiny: new PokeballFilterOption(
-        (bool = false) => new BooleanSetting(
+        (bool = true) => new BooleanSetting(
             'pokeballFilterCaughtShiny',
             'Caught Shiny',
             bool,
@@ -87,7 +87,7 @@ export const pokeballFilterOptions: {
     ),
 
     caughtShadow: new PokeballFilterOption(
-        (bool = false) => new BooleanSetting(
+        (bool = true) => new BooleanSetting(
             'pokeballFilterCaughtShadow',
             'Caught Shadow',
             bool,
