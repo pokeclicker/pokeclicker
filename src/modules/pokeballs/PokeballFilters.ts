@@ -79,6 +79,7 @@ export default class PokeballFilters implements Feature {
             title: 'Delete pokeball filter',
             message: `Are you sure you want to delete "${filter.name}"?`,
             type: NotificationOption.danger,
+            confirm: 'Delete',
         })) {
             this.list.remove(filter);
         }
