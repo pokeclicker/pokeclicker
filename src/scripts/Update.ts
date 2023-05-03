@@ -2260,6 +2260,7 @@ class Update implements Saveable {
                         });
                     }
                 }, GameConstants.SECOND);
+            });
         },
     };
 
