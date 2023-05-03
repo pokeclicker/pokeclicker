@@ -10,6 +10,8 @@ import {
     incrementPokemonStatistics,
     typeIdToString,
     typeStringToId,
+    hasMegaEvolution,
+    getMegaStones,
     canPokemonDealDamage,
 } from './PokemonHelper';
 
@@ -27,5 +29,7 @@ export default class TmpPokemonHelper {
     static getPokeballImage = getPokeballImage;
     static incrementPokemonStatistics = incrementPokemonStatistics;
     static displayName = displayName;
+    static hasMegaEvolution = hasMegaEvolution;
+    static getMegaStones = getMegaStones;
     static canPokemonDealDamage = canPokemonDealDamage;
 }
