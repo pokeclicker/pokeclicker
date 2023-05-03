@@ -752,7 +752,7 @@ export const RegionalStarters = [
     [650, 653, 656], // Kalos
     [722, 725, 728], // Alola
     [810, 813, 816], // Galar
-    [722, 155, 501], // Hisui
+    [724.01, 157.01, 503.01], // Hisui
 ];
 
 export enum StoneType {
