@@ -277,8 +277,8 @@ const ViridianCityOldMan1 = new NPC('Old Man', [
 });
 const ViridianCityOldMan2 = new NPC('Old Man', [
     'Ahh, I\'ve had my coffee now and I feel great!',
-    'You can use the Poké Ball Selector to select which type of Poké Ball to use on specific Pokémon based on caught status. The options, from left to right, are "Caught", "Caught Shiny", "New", "New Shiny".',
-    'For example, if you click on the empty ball below the word "Caught" and assign a Poké Ball, you will then start throwing Poké Balls at Pokémon you\'ve already caught before. This can be very useful if you need Dungeon Tokens.',
+    'You can use the Poké Ball Selector to select which type of Poké Ball to use on specific Pokémon based on caught status.',
+    'For example, if you click on the empty ball next to the word "Caught" and assign a Poké Ball, you will then start throwing Poké Balls at Pokémon you\'ve already caught before. This can be very useful if you need Dungeon Tokens.',
     'Here, let me show you how it works.',
     'I\'ll always be here to explain it again if you forget.',
 ], {
@@ -286,8 +286,8 @@ const ViridianCityOldMan2 = new NPC('Old Man', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Tutorial Quests', 4), new QuestLineStepCompletedRequirement('Tutorial Quests', 5, GameConstants.AchievementOption.less)]),
 });
 const ViridianCityOldMan3 = new NPC('Old Man', [
-    'You can use the Poké Ball Selector to select which type of Poké Ball to use on specific Pokémon based on caught status. The options, from left to right, are "Caught", "Caught Shiny", "New", "New Shiny".',
-    'For example, if you click on the empty ball below the word Caught and assign a Poké Ball, you will then start throwing Poké Balls at Pokémon you\'ve already caught before. This can be very useful if you need Dungeon Tokens.',
+    'You can use the Poké Ball Selector to select which type of Poké Ball to use on specific Pokémon based on caught status.',
+    'For example, if you click on the empty ball next to the word "Caught" and assign a Poké Ball, you will then start throwing Poké Balls at Pokémon you\'ve already caught before. This can be very useful if you need Dungeon Tokens.',
     'I\'ll always be here to explain it again if you forget.',
 ], {
     image: 'assets/images/npcs/Old Man.png',
