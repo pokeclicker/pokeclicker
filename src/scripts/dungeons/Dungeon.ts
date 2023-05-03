@@ -3919,13 +3919,18 @@ dungeonList['Pyrite Building'] = new Dungeon('Pyrite Building',
             {loot: 'Green Shard'},
             {loot: 'Yellow Shard'},
             {loot: 'Ochre Shard'},
+            {loot: 'Joy_Scent'},
         ],
         epic: [{loot: 'Ultraball'}],
         legendary: [
             {loot: 'LargeRestore'},
             {loot: 'Revive'},
+            {loot: 'Excite_Scent'},
         ],
-        mythic: [{loot: 'Protein', requirement: new ClearDungeonRequirement(400, GameConstants.getDungeonIndex('Pyrite Building'))}],
+        mythic: [
+            {loot: 'Protein', requirement: new ClearDungeonRequirement(400, GameConstants.getDungeonIndex('Pyrite Building'))},
+            {loot: 'Vivid_Scent'},
+        ],
     },
     630000,
     [
@@ -5185,14 +5190,8 @@ dungeonList['Eterna Forest'] = new Dungeon('Eterna Forest',
     },
     812000,
     [
-        new DungeonBossPokemon('Beautifly', 3950000, 30, {hide: true, requirement: new OneFromManyRequirement([
-            new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 7, GameConstants.AchievementOption.less),
-            new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 8),
-        ])}),
-        new DungeonBossPokemon('Dustox', 3950000, 30, {hide: true, requirement: new OneFromManyRequirement([
-            new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 7, GameConstants.AchievementOption.less),
-            new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 8),
-        ])}),
+        new DungeonBossPokemon('Beautifly', 3950000, 30),
+        new DungeonBossPokemon('Dustox', 3950000, 30),
         new DungeonBossPokemon('Parasect', 4500000, 30, {hide: true, requirement: new MultiRequirement([
             new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 8, GameConstants.AchievementOption.less),
             new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 7),
@@ -5202,10 +5201,6 @@ dungeonList['Eterna Forest'] = new Dungeon('Eterna Forest',
             requirement: new MultiRequirement([
                 new ObtainedPokemonRequirement('Vivillon (River)'),
                 new SpecialEventRequirement('Lunar New Year'),
-                new OneFromManyRequirement([
-                    new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 7, GameConstants.AchievementOption.less),
-                    new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 8),
-                ]),
             ])}),
     ],
     48000, 205);

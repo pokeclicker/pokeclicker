@@ -163,3 +163,21 @@ class MoveToTown extends TownContent {
         }
     }
 }
+
+class WeatherAppTownContent extends TownContent {
+    public cssClass() {
+        return 'btn btn-secondary';
+    }
+
+    public isVisible() {
+        return WeatherApp.isUnlocked();
+    }
+
+    public onclick(): void {
+        WeatherApp.openWeatherAppModal();
+    }
+
+    public text() {
+        return 'Open the Castform App';
+    }
+}
