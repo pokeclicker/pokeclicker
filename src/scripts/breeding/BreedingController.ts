@@ -207,7 +207,7 @@ class BreedingController {
                 return false;
             }
             // Only Mega Pokémon
-            if (uniqueTransformation == 'mega-evolution' && !(pokemon as DataPokemon).name.startsWith('Mega ') && !(pokemon as PokemonListData).name.startsWith('Primal ')) {
+            if (uniqueTransformation == 'mega-evolution' && !(pokemon as DataPokemon).name.startsWith('Mega ') && !(pokemon as DataPokemon).name.startsWith('Primal ')) {
                 return false;
             }
 
