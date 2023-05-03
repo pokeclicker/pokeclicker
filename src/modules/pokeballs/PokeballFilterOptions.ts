@@ -13,7 +13,7 @@ class PokeballFilterOption<T, M = T> {
     public defaultSetting: Setting<T>;
 
     constructor(
-        public createSetting: (defaultVal?: T) => Setting<T>,
+        public createSetting: (defaultVal?: T, name?: string, defaultName?: string) => Setting<T>,
         public describe: (value: T) => string,
         public requirement?: Requirement,
         public matchTest: (optionValue: T, testValue: M) => boolean = (
@@ -105,10 +105,10 @@ export const pokeballFilterOptions = {
     ),
 
     pokemonType: new PokeballFilterOption<PokemonType, [PokemonType, PokemonType]>(
-        (type = PokemonType.Normal) => new Setting(
-            'pokeballFilterPokemonType',
-            'Pokémon Type',
-            GameHelper.enumStrings(PokemonType).filter((k) => k !== 'None').map((k) => new SettingOption(k, PokemonType[k])),
+        (type = PokemonType.Normal, name = 'pokeballFilterPokemonType', defaultName = 'Pokémon Type') => new Setting(
+            name,
+            defaultName,
+            GameHelper.enumStrings(PokemonType).map((k) => new SettingOption(k, PokemonType[k])),
             type,
         ),
         (pokemonType) => `Is ${PokemonType[pokemonType]} type`,
