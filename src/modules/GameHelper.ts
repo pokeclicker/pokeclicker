@@ -173,4 +173,18 @@ export default class GameHelper {
         tomorrow.setMilliseconds(0);
         return tomorrow;
     }
+
+    // Check if HTML container with the given ID is overflowing horizontally
+    public static isOverflownX(htmlID) {
+        const element = document.querySelector(htmlID);
+        return element.scrollWidth > element.clientWidth;
+    }
+
+    // Get scroll bar size (in pixels)
+    public static getScrollBarSize() {
+        var $outer = $('<div>').css({ visibility: 'hidden', width: 100, overflow: 'scroll' }).appendTo('body'),
+            widthWithScroll = $('<div>').css({ width: '100%' }).appendTo($outer).outerWidth();
+        $outer.remove();
+        return 100 - widthWithScroll;
+    }
 }

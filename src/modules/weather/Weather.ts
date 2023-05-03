@@ -134,4 +134,26 @@ export default class Weather {
             weather(selectedWeather || WeatherType.Clear);
         });
     }
+
+    /**
+     * Gets the weather for a region at a certain date
+     * @param date 
+     * @param region 
+     * @returns WeatherType
+     */
+    public static getWeather(region: Region, date: Date = new Date()): WeatherType {
+        SeededRand.seedWithDateHour(date, Weather.period);
+
+        for (let i = 0; i < region; i++) {
+            SeededRand.next();
+        }
+
+        // If no distribution set, assume all weather available
+        const dist = Weather.weatherDistribution[region] || GameHelper.enumNumbers(WeatherType);
+
+        // Select weather based on weighted odds
+        const selectedWeather = SeededRand.fromWeightedArray(dist, dist.map((w) => Weather.weatherConditions[w].weight));
+
+        return selectedWeather;
+    }
 }
