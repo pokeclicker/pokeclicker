@@ -30,6 +30,7 @@ class App {
                 new Profile(),
                 new Breeding(multiplier),
                 new Pokeballs(),
+                new PokeballFilters(),
                 new Wallet(multiplier),
                 new KeyItems(),
                 new BadgeCase(),
