@@ -133,6 +133,11 @@ class GymRunner {
         return (Math.ceil(GymRunner.timeLeft() / 100) / 10).toFixed(1);
     })
 
+    public static getEnvironmentArea() {
+        const gym = GymRunner.gymObservable();
+        return gym.optionalArgs.environment;
+    }
+
 }
 
 document.addEventListener('DOMContentLoaded', () => {

@@ -24,6 +24,7 @@ import KeyItemType from './enums/KeyItemType';
 import MulchType from './enums/MulchType';
 import PlotStage from './enums/PlotStage';
 import QuestLineState from './quests/QuestLineState';
+import WeatherForecastStatus from './enums/WeatherForecastStatus';
 // end enums
 import BooleanSetting from './settings/BooleanSetting';
 import RangeSetting from './settings/RangeSetting';
@@ -32,6 +33,9 @@ import SettingOption from './settings/SettingOption';
 import BreedingFilters from './settings/BreedingFilters';
 import WeatherType from './weather/WeatherType';
 import Weather from './weather/Weather';
+import WeatherApp from './weather/WeatherApp';
+import RegionalForecast from './weather/RegionalForecast';
+import WeatherForecast from './weather/WeatherForecast';
 import DayCycle from './dayCycle/DayCycle';
 import DayCyclePart from './dayCycle/DayCyclePart';
 import DayCyclePartRequirement from './requirements/DayCyclePartRequirement';
@@ -167,12 +171,16 @@ import RoamingPokemonList from './pokemons/RoamingPokemonList';
 import DataPokemon from './pokemons/DataPokemon';
 import RoamingPokemon from './pokemons/RoamingPokemon';
 import UndergroundMegaStoneItem from './underground/UndergroundMegaStoneItem';
+import PokeballFilter from './pokeballs/PokeballFilter';
+import PokeballFilters from './pokeballs/PokeballFilters';
 import TextMerger from './utilities/TextMerger';
+import { pokeballFilterOptions } from './pokeballs/PokeballFilterOptions';
 import { DailyDeal } from './underground/DailyDeal';
 import { Mine } from './underground/Mine';
 import { ShardDeal } from './underground/ShardDeal';
 import { Underground } from './underground/Underground';
 import UndergroundUpgrade from './underground/UndergroundUpgrade';
+import SpecialEventRequirement from './requirements/SpecialEventRequirement';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -199,12 +207,16 @@ Object.assign(<any>window, {
     MulchType,
     PlotStage,
     QuestLineState,
+    WeatherForecastStatus,
     BooleanSetting,
     RangeSetting,
     Setting,
     SettingOption,
     WeatherType,
     Weather,
+    WeatherApp,
+    RegionalForecast,
+    WeatherForecast,
     DayCycle,
     DayCyclePart,
     DayCyclePartRequirement,
@@ -318,6 +330,7 @@ Object.assign(<any>window, {
     QuestLineStepCompletedRequirement,
     QuestLineStartedRequirement,
     TemporaryBattleRequirement,
+    SpecialEventRequirement,
     Translate,
     DayOfWeekRequirement,
     SaveReminder,
@@ -350,7 +363,10 @@ Object.assign(<any>window, {
     DataPokemon,
     RoamingPokemon,
     UndergroundMegaStoneItem,
+    PokeballFilter,
+    PokeballFilters,
     TextMerger,
+    pokeballFilterOptions,
     Mine,
     Underground,
     UndergroundUpgrade,
