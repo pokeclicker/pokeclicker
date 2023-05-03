@@ -54,7 +54,8 @@ class App {
                 new SaveReminder(),
                 new BattleCafeSaveObject(),
                 new DreamOrbController(),
-                new PurifyChamber()
+                new PurifyChamber(),
+                new WeatherApp()
             );
 
             console.log(`[${GameConstants.formatDate(new Date())}] %cGame loaded`, 'color:#2ecc71;font-weight:900;');

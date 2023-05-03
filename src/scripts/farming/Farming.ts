@@ -1751,6 +1751,7 @@ class Farming implements Feature {
 
     handleNotification(farmNotiType: FarmNotificationType, wander?: any): void {
         let message = '';
+        let image = null;
         let type = NotificationConstants.NotificationOption.success;
         let sound = NotificationConstants.NotificationSound.Farming.ready_to_harvest;
         let setting = NotificationConstants.NotificationSetting.Farming.ready_to_harvest;
@@ -1795,6 +1796,7 @@ class Farming implements Feature {
             case FarmNotificationType.Wander:
                 const pokemon = wander?.shiny ? `shiny ${wander?.pokemon}` : wander?.pokemon;
                 message = `A wild ${pokemon} has wandered onto the farm!`;
+                image = PokemonHelper.getImage(wander?.pokemon, wander?.shiny);
                 type = wander?.shiny ? NotificationConstants.NotificationOption.warning : NotificationConstants.NotificationOption.success;
                 sound = NotificationConstants.NotificationSound.Farming.wandering_pokemon;
                 setting = NotificationConstants.NotificationSetting.Farming.wandering_pokemon;
@@ -1803,6 +1805,7 @@ class Farming implements Feature {
 
         Notifier.notify({
             message,
+            image,
             type,
             sound,
             setting,
