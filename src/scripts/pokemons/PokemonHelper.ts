@@ -204,7 +204,7 @@ class PokemonHelper extends TmpPokemonHelper {
         const list = {};
         Object.entries(SafariPokemonList.list).forEach(([region, zones]) => {
             zones().forEach((p, zone) => {
-                if (zone == GameConstants.Region.kalos) {
+                if (region == GameConstants.Region.kalos.toString()) {
                     // Friendly safari might cause infinit recursion
                     return;
                 }

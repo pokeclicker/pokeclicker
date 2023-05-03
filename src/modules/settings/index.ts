@@ -383,3 +383,5 @@ Settings.add(new Setting<Language>('translation.language', 'Language (beta)', Se
 Object.keys(LogBookTypes).forEach((logBookType) => {
     Settings.add(new BooleanSetting(`logBook.${logBookType}`, logBookType, true));
 });
+
+Settings.add(new BooleanSetting('catchFilters.initialEnabled', 'New Catch Filters initially enabled', false));

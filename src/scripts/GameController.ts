@@ -232,7 +232,7 @@ class GameController {
                     }
                     // Select Pokeball from pokeball selector (0 = none)
                     if (numberKey < App.game.pokeballs.pokeballs.length) {
-                        pokeballs.selectedSelection()(numberKey);
+                        pokeballs.selectedSelection()?.(numberKey);
                     }
                     return e.preventDefault();
                 }
