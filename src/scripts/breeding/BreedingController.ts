@@ -199,15 +199,15 @@ class BreedingController {
             const uniqueTransformation = BreedingFilters.uniqueTransformation.value();
             const pokemon = PokemonHelper.getPokemonById(partyPokemon.id);
             // Only Base Pokémon with Mega available
-            if (uniqueTransformation == 'mega-available' && !(pokemon as DataPokemon).evolutions?.some((p) => p.evolvedPokemon.startsWith('Mega '))) {
+            if (uniqueTransformation == 'mega-available' && !(pokemon as DataPokemon).evolutions?.some((p) => p.evolvedPokemon.startsWith('Mega ') || p.evolvedPokemon.startsWith('Primal '))) {
                 return false;
             }
             // Only Base Pokémon without Mega Evolution
-            if (uniqueTransformation == 'mega-unobtained' && (!(pokemon as DataPokemon).evolutions?.some((p) => p.evolvedPokemon.startsWith('Mega ') && !App.game.party.alreadyCaughtPokemonByName(p.evolvedPokemon)))) {
+            if (uniqueTransformation == 'mega-unobtained' && (!(pokemon as DataPokemon).evolutions?.some((p) => (p.evolvedPokemon.startsWith('Mega ') || p.evolvedPokemon.startsWith('Primal ')) && !App.game.party.alreadyCaughtPokemonByName(p.evolvedPokemon)))) {
                 return false;
             }
             // Only Mega Pokémon
-            if (uniqueTransformation == 'mega-evolution' && !(pokemon as DataPokemon).name.startsWith('Mega ')) {
+            if (uniqueTransformation == 'mega-evolution' && !(pokemon as DataPokemon).name.startsWith('Mega ') && !(pokemon as PokemonListData).name.startsWith('Primal ')) {
                 return false;
             }
 
