@@ -12,7 +12,7 @@ export default class WeatherApp {
     defaults: Record<string, any>;
     
     public static fullForecast: ObservableArray<RegionalForecast> = ko.observableArray([]);
-    public static selectedRegion: Observable<Region> = ko.observable(Region.kanto);
+    public static selectedRegion: Observable<Region> = ko.observable(Region.hoenn);
     public static dateList: ObservableArray<Date> = ko.observableArray([]);
 
     public static defaultDateRange: number = 7;
