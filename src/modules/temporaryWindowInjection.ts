@@ -167,7 +167,10 @@ import RoamingPokemonList from './pokemons/RoamingPokemonList';
 import DataPokemon from './pokemons/DataPokemon';
 import RoamingPokemon from './pokemons/RoamingPokemon';
 import UndergroundMegaStoneItem from './underground/UndergroundMegaStoneItem';
+import PokeballFilter from './pokeballs/PokeballFilter';
+import PokeballFilters from './pokeballs/PokeballFilters';
 import TextMerger from './utilities/TextMerger';
+import { pokeballFilterOptions } from './pokeballs/PokeballFilterOptions';
 import { DailyDeal } from './underground/DailyDeal';
 import { Mine } from './underground/Mine';
 import { ShardDeal } from './underground/ShardDeal';
@@ -352,7 +355,10 @@ Object.assign(<any>window, {
     DataPokemon,
     RoamingPokemon,
     UndergroundMegaStoneItem,
+    PokeballFilter,
+    PokeballFilters,
     TextMerger,
+    pokeballFilterOptions,
     Mine,
     Underground,
     UndergroundUpgrade,

@@ -24,6 +24,7 @@ class Game {
         public profile: Profile,
         public breeding: Breeding,
         public pokeballs: Pokeballs,
+        public pokeballFilters: PokeballFilters,
         public wallet: Wallet,
         public keyItems: KeyItems,
         public badgeCase: BadgeCase,
@@ -88,6 +89,7 @@ class Game {
         this.underground.initialize();
         this.farming.initialize();
         this.specialEvents.initialize();
+        this.pokeballFilters.initialize();
         this.load();
 
         // Update if the achievements are already completed

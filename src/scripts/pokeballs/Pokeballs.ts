@@ -14,11 +14,6 @@ class Pokeballs implements Feature {
     };
 
     public pokeballs: Pokeball[];
-    private _alreadyCaughtSelection: KnockoutObservable<GameConstants.Pokeball>;
-    private _alreadyCaughtContagiousSelection: KnockoutObservable<GameConstants.Pokeball>;
-    private _alreadyCaughtShinySelection: KnockoutObservable<GameConstants.Pokeball>;
-    private _notCaughtSelection: KnockoutObservable<GameConstants.Pokeball>;
-    private _notCaughtShinySelection: KnockoutObservable<GameConstants.Pokeball>;
 
     public selectedSelection: KnockoutObservable<KnockoutObservable<GameConstants.Pokeball>>;
     public selectedTitle: KnockoutObservable<string>;
@@ -107,24 +102,17 @@ class Pokeballs implements Feature {
                 return 10;
             }, 1000, 'Can only be used on Ultra Beasts', new TemporaryBattleRequirement('Anabel')),
         ];
-        this._alreadyCaughtSelection = ko.observable(this.defaults.alreadyCaughtSelection);
-        this._alreadyCaughtShinySelection = ko.observable(this.defaults.alreadyCaughtShinySelection);
-        this._alreadyCaughtContagiousSelection = ko.observable(this.defaults.alreadyCaughtContagiousSelection);
-        this._notCaughtSelection = ko.observable(this.defaults.notCaughtSelection);
-        this._notCaughtShinySelection = ko.observable(this.defaults.notCaughtShinySelection);
         this.selectedTitle = ko.observable('');
-        this.selectedSelection = ko.observable(this._alreadyCaughtSelection);
+        this.selectedSelection = ko.observable();
     }
 
     initialize(): void {
-        ([
-            this._alreadyCaughtSelection,
-            this._alreadyCaughtShinySelection,
-            this._alreadyCaughtContagiousSelection,
-            this._notCaughtSelection,
-            this._notCaughtShinySelection,
-        ]).forEach(selection => {
-            selection.subscribe(value => {
+        let subscription: KnockoutSubscription;
+        this.selectedSelection.subscribe((selection) => {
+            if (subscription) {
+                subscription.dispose();
+            }
+            subscription = selection.subscribe(value => {
                 // switch to Ultraball if Masterball is selected
                 if (value == GameConstants.Pokeball.Masterball && App.game.challenges.list.disableMasterballs.active()) {
                     selection(GameConstants.Pokeball.Ultraball);
@@ -151,30 +139,16 @@ class Pokeballs implements Feature {
         const alreadyCaught = App.game.party.alreadyCaughtPokemon(id);
         const alreadyCaughtShiny = App.game.party.alreadyCaughtPokemon(id, true);
         const alreadyCaughtShadow = App.game.party.alreadyCaughtPokemon(id, false, true);
-        const contagious = (App.game.party.getPokemon(id)?.pokerus == GameConstants.Pokerus.Contagious);
         const pokemon = PokemonHelper.getPokemonById(id);
-        let pref: GameConstants.Pokeball;
 
-        // just check against alreadyCaughtShiny as this returns false when you don't have the pokemon yet.
-
-        if (isShiny || isShadow) {
-            if ((!alreadyCaughtShiny && isShiny) || (!alreadyCaughtShadow && isShadow)) {
-                pref = this.notCaughtShinySelection;
-            } else {
-                pref = this.alreadyCaughtShinySelection;
-            }
-        } else {
-            if (!alreadyCaught) {
-                pref = this.notCaughtSelection;
-            } else {
-                // If a pokeball is not selected for contagious pokemon, but there is one selected for caught pokemon, then use that on contagious pokemon as well.
-                if (contagious && this.alreadyCaughtContagiousSelection != GameConstants.Pokeball.None) {
-                    pref = this.alreadyCaughtContagiousSelection;
-                } else {
-                    pref = this.alreadyCaughtSelection;
-                }
-            }
-        }
+        const pref = App.game.pokeballFilters.findMatch({
+            caught: alreadyCaught,
+            caughtShiny: alreadyCaughtShiny,
+            caughtShadow: alreadyCaughtShadow,
+            shadow: isShadow,
+            shiny: isShiny,
+            pokerus: App.game.party.getPokemon(id)?.pokerus,
+        })?.ball() ?? GameConstants.Pokeball.None;
 
         let use: GameConstants.Pokeball = GameConstants.Pokeball.None;
 
@@ -248,66 +222,15 @@ class Pokeballs implements Feature {
         if (json.pokeballs != null) {
             json.pokeballs.map((amt: number, type: number) => this.pokeballs[type].quantity(amt));
         }
-        this.notCaughtSelection = json.notCaughtSelection ?? this.defaults.notCaughtSelection;
-        this.notCaughtShinySelection = json.notCaughtShinySelection ?? this.defaults.notCaughtShinySelection;
-        this.alreadyCaughtSelection = json.alreadyCaughtSelection ?? this.defaults.alreadyCaughtSelection;
-        this.alreadyCaughtContagiousSelection = json.alreadyCaughtContagiousSelection ?? this.defaults.alreadyCaughtContagiousSelection;
-        this.alreadyCaughtShinySelection = json.alreadyCaughtShinySelection ?? this.defaults.alreadyCaughtShinySelection;
     }
 
     toJSON(): Record<string, any> {
         return {
             'pokeballs': this.pokeballs.map(p => p.quantity()),
-            'notCaughtSelection': this.notCaughtSelection,
-            'notCaughtShinySelection': this.notCaughtShinySelection,
-            'alreadyCaughtSelection': this.alreadyCaughtSelection,
-            'alreadyCaughtContagiousSelection': this.alreadyCaughtContagiousSelection,
-            'alreadyCaughtShinySelection': this.alreadyCaughtShinySelection,
         };
     }
 
     update(delta: number): void {
         // This method intentionally left blank
-    }
-
-    // Knockout getters/setters
-    get notCaughtSelection() {
-        return this._notCaughtSelection();
-    }
-
-    set notCaughtSelection(ball: GameConstants.Pokeball) {
-        this._notCaughtSelection(ball);
-    }
-
-    get notCaughtShinySelection() {
-        return this._notCaughtShinySelection();
-    }
-
-    set notCaughtShinySelection(ball: GameConstants.Pokeball) {
-        this._notCaughtShinySelection(ball);
-    }
-
-    get alreadyCaughtSelection() {
-        return this._alreadyCaughtSelection();
-    }
-
-    set alreadyCaughtSelection(ball: GameConstants.Pokeball) {
-        this._alreadyCaughtSelection(ball);
-    }
-
-    get alreadyCaughtContagiousSelection() {
-        return this._alreadyCaughtContagiousSelection();
-    }
-
-    set alreadyCaughtContagiousSelection(ball: GameConstants.Pokeball) {
-        this._alreadyCaughtContagiousSelection(ball);
-    }
-
-    get alreadyCaughtShinySelection() {
-        return this._alreadyCaughtShinySelection();
-    }
-
-    set alreadyCaughtShinySelection(ball: GameConstants.Pokeball) {
-        this._alreadyCaughtShinySelection(ball);
     }
 }
