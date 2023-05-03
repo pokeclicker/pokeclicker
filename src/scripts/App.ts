@@ -30,6 +30,7 @@ class App {
                 new Profile(),
                 new Breeding(multiplier),
                 new Pokeballs(),
+                new PokeballFilters(),
                 new Wallet(multiplier),
                 new KeyItems(),
                 new BadgeCase(),
@@ -52,7 +53,9 @@ class App {
                 multiplier,
                 new SaveReminder(),
                 new BattleCafeSaveObject(),
-                new DreamOrbController()
+                new DreamOrbController(),
+                new PurifyChamber(),
+                new WeatherApp()
             );
 
             console.log(`[${GameConstants.formatDate(new Date())}] %cGame loaded`, 'color:#2ecc71;font-weight:900;');

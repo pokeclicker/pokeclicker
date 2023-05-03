@@ -13,7 +13,8 @@ enum PartyPokemonSaveKeys {
     defaultFemaleSprite,
     hideShinyImage,
     nickname,
-    megaStone
+    shadow,
+    showShadowImage,
 }
 
 class PartyPokemon implements Saveable {
@@ -36,7 +37,8 @@ class PartyPokemon implements Saveable {
         defaultFemaleSprite: false,
         hideShinyImage: false,
         nickname: '',
-        megaStone: undefined,
+        shadow: GameConstants.ShadowStatus.None,
+        showShadowImage: false,
     };
 
     // Saveable observables
@@ -56,7 +58,8 @@ class PartyPokemon implements Saveable {
     heldItem: KnockoutObservable<HeldItem>;
     defaultFemaleSprite: KnockoutObservable<boolean>;
     hideShinyImage: KnockoutObservable<boolean>;
-    _megaStone: KnockoutObservable<MegaStone>;
+    _shadow: KnockoutObservable<GameConstants.ShadowStatus>;
+    _showShadowImage: KnockoutObservable<boolean>;
 
     constructor(
         public id: number,
@@ -65,7 +68,8 @@ class PartyPokemon implements Saveable {
         public baseAttack: number,
         public eggCycles: number,
         shiny = false,
-        public gender
+        public gender,
+        shadow: GameConstants.ShadowStatus
     ) {
         this.vitaminsUsed = {};
         GameHelper.enumNumbers(GameConstants.VitaminType).forEach(i => this.vitaminsUsed[i] = ko.observable(0).extend({ numeric: 0 }));
@@ -103,7 +107,8 @@ class PartyPokemon implements Saveable {
         this.hideShinyImage = ko.observable(false);
         this._nickname = ko.observable();
         this._displayName = ko.pureComputed(() => this._nickname() ? this._nickname() : this._translatedName());
-        this._megaStone = ko.observable(undefined);
+        this._shadow = ko.observable(shadow);
+        this._showShadowImage = ko.observable(false);
     }
 
     public calculateAttack(ignoreLevel = false): number {
@@ -111,7 +116,8 @@ class PartyPokemon implements Saveable {
         const levelMultiplier = ignoreLevel ? 1 : this.level / 100;
         const evsMultiplier = this.calculateEVAttackBonus();
         const heldItemMultiplier = this.heldItem && this.heldItem() instanceof AttackBonusHeldItem ? (this.heldItem() as AttackBonusHeldItem).attackBonus : 1;
-        return Math.max(1, Math.floor((this.baseAttack * attackBonusMultiplier + this.attackBonusAmount) * levelMultiplier * evsMultiplier * heldItemMultiplier));
+        const shadowMultiplier = this.shadow == GameConstants.ShadowStatus.Shadow ? 0.8 : (this.shadow == GameConstants.ShadowStatus.Purified ? 1.2 : 1);
+        return Math.max(1, Math.floor((this.baseAttack * attackBonusMultiplier + this.attackBonusAmount) * levelMultiplier * evsMultiplier * heldItemMultiplier * shadowMultiplier));
     }
 
     public canCatchPokerus(): boolean {
@@ -223,6 +229,14 @@ class PartyPokemon implements Saveable {
             return;
         }
 
+        if (this.breeding) {
+            Notifier.notify({
+                message: 'Vitamins cannot be modified for Pokémon in the hatchery or queue.',
+                type: NotificationConstants.NotificationOption.warning,
+            });
+            return;
+        }
+
         const usesRemaining = this.vitaminUsesRemaining();
 
         // If no more vitamins can be used on this Pokemon
@@ -244,7 +258,14 @@ class PartyPokemon implements Saveable {
     }
 
     public removeVitamin(vitamin: GameConstants.VitaminType, amount: number): void {
-        console.log(vitamin, amount);
+        if (this.breeding) {
+            Notifier.notify({
+                message: 'Vitamins cannot be modified for Pokémon in the hatchery or queue.',
+                type: NotificationConstants.NotificationOption.warning,
+            });
+            return;
+        }
+
         const vitaminName = GameConstants.VitaminType[vitamin];
         amount = Math.min(amount, this.vitaminsUsed[vitamin]());
 
@@ -294,9 +315,6 @@ class PartyPokemon implements Saveable {
     });
 
     public hideFromProteinList = ko.pureComputed(() => {
-        if (this._breeding()) {
-            return true;
-        }
         // Check if search matches nickname or translated name
         if (
             !new RegExp(Settings.getSetting('vitaminSearchFilter').observableValue() , 'i').test(this._translatedName())
@@ -379,19 +397,6 @@ class PartyPokemon implements Saveable {
         return false;
     });
 
-    public giveMegastone(notify = true) {
-        if (!this._megaStone() && this.evolutions?.some((evo) => evo.restrictions.some(r => r instanceof MegaEvolveRequirement))) {
-            this._megaStone(new MegaStone(this.id, this.baseAttack, this._attack));
-            if (notify) {
-                Notifier.notify({
-                    message: `${this.displayName} has gained a Mega Stone!`,
-                    pokemonImage: PokemonHelper.getImage(this.id, this.shiny),
-                    type: NotificationConstants.NotificationOption.success,
-                });
-            }
-        }
-    }
-
     public fromJSON(json: Record<string, any>): void {
         if (json == null) {
             return;
@@ -419,9 +424,8 @@ class PartyPokemon implements Saveable {
         this.defaultFemaleSprite(json[PartyPokemonSaveKeys.defaultFemaleSprite] ?? this.defaults.defaultFemaleSprite);
         this.hideShinyImage(json[PartyPokemonSaveKeys.hideShinyImage] ?? this.defaults.hideShinyImage);
         this._nickname(json[PartyPokemonSaveKeys.nickname] ? decodeURI(json[PartyPokemonSaveKeys.nickname]) : this.defaults.nickname);
-        if (json[PartyPokemonSaveKeys.megaStone]) {
-            this.giveMegastone(false);
-        }
+        this.shadow = json[PartyPokemonSaveKeys.shadow] ?? this.defaults.shadow;
+        this._showShadowImage(json[PartyPokemonSaveKeys.showShadowImage] ?? this.defaults.showShadowImage);
     }
 
     public toJSON() {
@@ -440,7 +444,8 @@ class PartyPokemon implements Saveable {
             [PartyPokemonSaveKeys.defaultFemaleSprite]: this.defaultFemaleSprite(),
             [PartyPokemonSaveKeys.hideShinyImage]: this.hideShinyImage(),
             [PartyPokemonSaveKeys.nickname]: this.nickname ? encodeURI(this.nickname) : undefined,
-            [PartyPokemonSaveKeys.megaStone]: this.megaStone ? true : false,
+            [PartyPokemonSaveKeys.shadow]: this.shadow,
+            [PartyPokemonSaveKeys.showShadowImage]: this._showShadowImage(),
         };
 
         // Don't save anything that is the default option
@@ -534,7 +539,19 @@ class PartyPokemon implements Saveable {
         return this._displayName();
     }
 
-    get megaStone(): MegaStone {
-        return this._megaStone();
+    get shadow(): GameConstants.ShadowStatus {
+        return this._shadow();
+    }
+
+    set shadow(value: GameConstants.ShadowStatus) {
+        this._shadow(value);
+    }
+
+    get showShadowImage(): boolean {
+        return this._showShadowImage();
+    }
+
+    set showShadowImage(value: boolean) {
+        this._showShadowImage(value);
     }
 }

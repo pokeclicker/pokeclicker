@@ -40,9 +40,11 @@ class Breeding implements Feature {
         BreedingFilters.type2.value(Settings.getSetting('breedingTypeFilter2').value);
         BreedingFilters.shinyStatus.value(Settings.getSetting('breedingShinyFilter').value);
         BreedingFilters.pokerus.value(Settings.getSetting('breedingPokerusFilter').value);
+        BreedingFilters.uniqueTransformation.value(Settings.getSetting('breedingUniqueTransformationFilter').value);
         BreedingController.displayValue(Settings.getSetting('breedingDisplayFilter').value);
         BreedingController.regionalAttackDebuff(+Settings.getSetting('breedingRegionalAttackDebuffSetting').value);
         BreedingController.queueSizeLimit(+Settings.getSetting('breedingQueueSizeSetting').value);
+        BreedingFilters.uniqueTransformation.value.subscribe((v) => Settings.setSettingByName('breedingUniqueTransformationFilter', v));
     }
 
     initialize(): void {
@@ -523,7 +525,7 @@ class Breeding implements Feature {
 
     public usableQueueSlots = ko.pureComputed(() => {
         const queueSizeSetting = BreedingController.queueSizeLimit();
-        return queueSizeSetting > -1 ? queueSizeSetting : this.queueSlots();
+        return queueSizeSetting > -1 ? Math.min(queueSizeSetting, this.queueSlots()) : this.queueSlots();
     });
 
     public updateQueueSizeLimit(size: number) {

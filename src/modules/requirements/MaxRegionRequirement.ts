@@ -1,4 +1,4 @@
-import { AchievementOption, Region } from '../GameConstants';
+import { AchievementOption, Region, camelCaseToString } from '../GameConstants';
 import Requirement from './Requirement';
 
 export default class MaxRegionRequirement extends Requirement {
@@ -11,6 +11,6 @@ export default class MaxRegionRequirement extends Requirement {
     }
 
     public hint(): string {
-        return `You need to reach the ${Region[this.requiredValue]} region.`;
+        return `You need to reach the ${camelCaseToString(Region[this.requiredValue])} region.`;
     }
 }

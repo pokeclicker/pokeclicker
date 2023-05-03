@@ -1004,7 +1004,7 @@ class Farming implements Feature {
                 'This Berry has a very dry flavor. It has the effect of making other food eaten at the same time taste sweet.',
                 'The scent of this Berry plant repels wild Pokémon.',
             ],
-            new Aura(AuraType.Repel, [0.1, 0.2, 0.3])
+            new Aura(AuraType.Repel, [0.11, 0.22, 0.33])
         );
 
         this.berryData[BerryType.Custap] = new Berry(
@@ -1102,7 +1102,9 @@ class Farming implements Feature {
             BerryColor.Red,
             11.1,
             BerryFirmness.Very_Hard,
-            ['This Berry is surrounded by mystery. It is rumored to be imbued with the power of the sea.']
+            ['This Berry is surrounded by mystery. It is rumored to be imbued with the power of the sea.'],
+            undefined,
+            ['Manaphy']
         );
 
         this.berryData[BerryType.Ganlon] = new Berry(
@@ -2036,6 +2038,7 @@ class Farming implements Feature {
         if (!disableNotification) {
             Notifier.notify({
                 message: `You found ${GameHelper.anOrA(BerryType[berry])} ${BerryType[berry]} Berry!`,
+                image: FarmController.getBerryImage(berry),
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.Items.route_item_found,
             });
@@ -2073,6 +2076,7 @@ class Farming implements Feature {
         if (!this.unlockedBerries[berry]()) {
             Notifier.notify({
                 message: `You've discovered the ${BerryType[berry]} Berry!`,
+                image: FarmController.getBerryImage(berry),
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.Farming.berry_discovered,
                 sound: NotificationConstants.NotificationSound.Farming.berry_discovered,

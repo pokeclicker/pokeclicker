@@ -80,13 +80,6 @@ class Update implements Saveable {
                     saveData.quests.questList[index].initial = 0;
                 }
             });
-
-            // If player has defeated the Hoenn Champion, start the deoxys quest line
-            saveData.badgeCase = saveData.badgeCase || [];
-            // Not using game constants incase the value isn't 39 in the future
-            if (saveData.badgeCase[39]) {
-                Update.startQuestLine(saveData, 'Mystery of Deoxys');
-            }
         },
 
         '0.5.0': ({ playerData }) => {
@@ -1952,14 +1945,286 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 45);
         },
 
-        '0.10.10': ({ playerData, saveData }) => {
-            //Bill's Grandpa
+        '0.10.10': ({ playerData, saveData, settingsData }) => {
+            // Bill's Grandpa
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 12);
 
             //Mega Manectric/Houndoom
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 144);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 145);
 
+            // Derive Trainer Id from linked Discord Id to preserve Enigma hints
+            if (saveData?.discord?.ID) {
+                const getDerivedTrainerId = (discordId: number) => {
+                    const MULTIPLIER = 9301;
+                    const OFFSET = 49297;
+                    const MOD = 233280;
+                    let val = (discordId * MULTIPLIER + OFFSET) % MOD;
+                    val = (val - OFFSET + MOD) % MOD;
+                    val = (val * 123901) % MOD;
+                    return val;
+                };
+                const trainerId = getDerivedTrainerId(saveData.discord.ID);
+                playerData.trainerId = trainerId.toString().padStart(6, '0');
+            }
+
+            // Delta Episode
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 115);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 116);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 117);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 118);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 119);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 120);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 121);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 122);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 123);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 124);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 125);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 126);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 127);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 128);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 129);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 130);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 131);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 132);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 133);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 134);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 135);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 136);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 137);
+
+            // Add Near Space dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 56);
+
+            // Mega Diancie
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 156);
+
+            // If Distortion World has been cleared and no Pokémon in our party has Pokérus, infect the first Pokémon in our party
+            if (saveData.statistics.dungeonsCleared[72] && !saveData.party.caughtPokemon.some(pokemon => pokemon[8] > 0)) {
+                saveData.party.caughtPokemon[0][8] = 2;
+            }
+
+            //Joey
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 31);
+        },
+
+        '0.10.11': ({ playerData, saveData, settingsData }) => {
+            // Hoenn Stone Shop fight
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 139);
+
+            // Updates Sorting
+            if (settingsData.hatcherySort > 5) {
+                settingsData.hatcherySort++;
+            }
+            if (settingsData.partySort > 5) {
+                settingsData.partySort++;
+            }
+            if (settingsData.vitaminSort > 5) {
+                settingsData.vitaminSort++;
+            }
+            if (settingsData.heldItemSort > 5) {
+                settingsData.heldItemSort++;
+            }
+            saveData.breeding.hatcheryHelpers?.forEach(helper => {
+                if (helper.sortOption > 5) {
+                    helper.sortOption++;
+                }
+            });
+
+            // Update categories and fix category filters
+            const max = saveData.categories.categories.length - 1;
+            saveData.categories.categories.forEach((c, id) => {
+                c.id = id;
+            });
+            if (settingsData.pokedexCategoryFilter > max) {
+                settingsData.pokedexCategoryFilter = -1;
+            }
+            if (settingsData.breedingCategoryFilter > max) {
+                settingsData.breedingCategoryFilter = -1;
+            }
+
+            // Reset Blue 5 to undefeated if he has been defeated before reaching the quest step to battle him
+            const teamRocketQuestLine = saveData.quests.questLines.find((q) => q.name == 'Team Rocket');
+            if (saveData.statistics.temporaryBattleDefeated[7]
+                && (teamRocketQuestLine?.state == 0 || (teamRocketQuestLine?.state == 1 && teamRocketQuestLine?.quest <= 2))
+            ) {
+                saveData.statistics.temporaryBattleDefeated[7] = 0;
+            }
+
+            // Add Phenac City Battles dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 57);
+
+            // Add Pyrite Town Battles dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 58);
+
+            // Add Pyrite Colosseum Battles dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 59);
+
+            // Add Pyrite Blgd dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 60);
+
+            // Add Pyrite Cave dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 61);
+
+            // Add Relic Cave dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 62);
+
+            // Add Mt. Battle Battles dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 63);
+
+            // Add The Under Subway dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 64);
+
+            // Add Cipher Lab Battles dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 65);
+
+            // Add Realgam Tower Battles dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 66);
+
+            // Add Realgam Colosseum Battles dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 67);
+
+            // Add Snagem Hideout dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 68);
+
+            // Add Deep Colosseum dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 69);
+
+            // Add Phenac Stadium dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 70);
+
+            // Add Under Colosseum dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 71);
+
+            // Add Orre Colosseum dungeon
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 72);
+
+            //Team Flare Grunt 1
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 114);
+
+            //Team Flare Grunt 2
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 115);
+
+            //Team Flare Lysandre
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 152);
+
+            //Team Flare Xerosic
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 153);
+
+            //Xerneas
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 154);
+
+            //Yveltal
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 155);
+
+            //Team Flare Boss Lysandre 1
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 156);
+
+            //Storyline AZ
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 166);
+
+            //Team Flare Boss Lysandre 2
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 178);
+
+            // Start Team Flare questline if player has beaten Sycamore 1 already
+            if (saveData.statistics.temporaryBattleDefeated[111]) {
+                Update.startQuestLine(saveData, 'A Beautiful World');
+            }
+
+            // Move pokeball selections onto new filters
+            saveData.pokeballFilters = {
+                list: [
+                    {
+                        name: 'Caught',
+                        options: { caught: true },
+                        ball: saveData.pokeballs?.alreadyCaughtSelection ?? GameConstants.Pokeball.None,
+                    },
+                    {
+                        name: 'Contagious',
+                        options: { pokerus: GameConstants.Pokerus.Contagious },
+                        ball: saveData.pokeballs?.alreadyCaughtContagiousSelection ?? GameConstants.Pokeball.None,
+                    },
+                    {
+                        name: 'Caught Shiny',
+                        options: { shiny: true, caughtShiny: true },
+                        ball: saveData.pokeballs?.alreadyCaughtShinySelection ?? GameConstants.Pokeball.Pokeball,
+                    },
+                    {
+                        name: 'New',
+                        options: { caught: false },
+                        ball: saveData.pokeballs?.notCaughtSelection ?? GameConstants.Pokeball.Pokeball,
+                    },
+                    {
+                        name: 'New Shiny',
+                        options: { shiny: true, caughtShiny: false },
+                        ball: saveData.pokeballs?.notCaughtShinySelection ?? GameConstants.Pokeball.Pokeball,
+                    },
+                ],
+            };
+
+            // Add Hisui Gyms
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 114);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 115);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 116);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 117);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 118);
+            saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 119);
+
+            //Primal Reversion battles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 142);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 143);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 144);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 145);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 146);
+
+            // Mega Stones are items now!
+            // Give the player the Mega Stone if they own the Mega form or have the mega stone on the base form.
+            // Then delete the megaStone property on all caught pokemon.
+            const updateMegaStone = (megaStone: string, basePokemonId: number, megaPokemonId: number) => {
+                const basePokemon = saveData.party.caughtPokemon.find(p => p.id === basePokemonId);
+                const megaPokemon = saveData.party.caughtPokemon.find(p => p.id === megaPokemonId);
+                if (megaPokemon || (basePokemon?.[14])) {
+                    playerData._itemList[megaStone] = 1;
+                }
+            };
+
+            updateMegaStone('Abomasite', 460, 460.01); // Abomasnow
+            updateMegaStone('Absolite', 359, 359.01); // Absol
+            updateMegaStone('Aerodactylite', 142, 142.01); // Aerodactyl
+            updateMegaStone('Aggronite', 306, 306.01); // Aggron
+            updateMegaStone('Alakazite', 65, 65.01); // Alakazam
+            updateMegaStone('Ampharosite', 181, 181.01); // Ampharos
+            updateMegaStone('Audinite', 531, 531.01); // Audino
+            updateMegaStone('Beedrillite', 15, 15.01); // Beedrill
+            updateMegaStone('Cameruptite', 323, 323.01); // Camerupt
+            updateMegaStone('Diancite', 719, 719.01); // Diancie
+            updateMegaStone('Galladite', 475, 475.01); // Gallade
+            updateMegaStone('Garchompite', 445, 445.01); // Garchomp
+            updateMegaStone('Gardevoirite', 282, 282.01); // Gardevoir
+            updateMegaStone('Gengarite', 94, 94.01); // Gengar
+            updateMegaStone('Glalitite', 362, 362.01); // Glalie
+            updateMegaStone('Heracronite', 214, 214.01); // Heracross
+            updateMegaStone('Houndoominite', 229, 229.01); // Houndoom
+            updateMegaStone('Kangaskhanite', 115, 115.01); // Kangaskhan
+            updateMegaStone('Latiasite', 380, 380.01); // Latias
+            updateMegaStone('Latiosite', 381, 381.01); // Latios
+            updateMegaStone('Lopunnite', 428, 428.01); // Lopunny
+            updateMegaStone('Lucarionite', 448, 448.01); // Lucario
+            updateMegaStone('Manectite', 310, 310.01); // Manectric
+            updateMegaStone('Mawilite', 303, 303.01); // Mawile
+            updateMegaStone('Metagrossite', 376, 376.01); // Metagross
+            updateMegaStone('Meteorite', 384, 384.01); // Rayquaza
+            updateMegaStone('Pidgeotite', 18, 18.01); // Pidgeot
+            updateMegaStone('Sablenite', 302, 302.01); // Sableye
+            updateMegaStone('Salamencite', 373, 373.01); // Salamence
+            updateMegaStone('Sharpedonite', 319, 319.01); // Sharpedo
+            updateMegaStone('Slowbronite', 80, 80.01); // Slowbro
+            updateMegaStone('Steelixite', 208, 208.01); // Steelix
+            updateMegaStone('Tyranitarite', 248, 248.01); // Tyranitar
+
+            saveData.party.caughtPokemon.forEach(p => {
+                delete p[14]; // megaStone
+            });
         },
     };
 
