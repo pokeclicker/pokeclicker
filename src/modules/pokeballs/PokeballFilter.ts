@@ -1,7 +1,7 @@
 import { Observable, Unwrapped } from 'knockout';
 import { Pokeball } from '../GameConstants';
 import Setting from '../settings/Setting';
-import { PokeballFilterOptions, pokeballFilterOptions } from './PokeballFilterOptions';
+import { PokeballFilterMatchData, PokeballFilterOptions, pokeballFilterOptions } from './PokeballFilterOptions';
 
 export type PokeballFilterParams = {
     name: string;
@@ -40,7 +40,7 @@ export default class PokeballFilter {
         this.uuid = crypto.randomUUID();
     }
 
-    test(data: PokeballFilterOptions): boolean {
+    test(data: PokeballFilterMatchData): boolean {
         if (!this.enabled()) {
             return false;
         }
@@ -48,11 +48,17 @@ export default class PokeballFilter {
         return this.inverted()
             // true if any option doesn't match
             ? Object.entries(this.options).some(
-                ([key, setting]) => data[key] !== setting.observableValue(),
+                ([key, setting]) => !pokeballFilterOptions[key].matchTest(
+                    setting.observableValue(),
+                    data[key],
+                ),
             )
             // true only when all options match
             : Object.entries(this.options).every(
-                ([key, setting]) => data[key] === setting.observableValue(),
+                ([key, setting]) => pokeballFilterOptions[key].matchTest(
+                    setting.observableValue(),
+                    data[key],
+                ),
             );
     }
 

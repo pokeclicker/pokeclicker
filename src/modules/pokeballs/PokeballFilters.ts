@@ -3,7 +3,7 @@ import { ObservableArray } from 'knockout';
 import { Feature } from '../DataStore/common/Feature';
 import { Pokeball, Pokerus } from '../GameConstants';
 import PokeballFilter, { PokeballFilterParams } from './PokeballFilter';
-import { PokeballFilterOptions, pokeballFilterOptions } from './PokeballFilterOptions';
+import { PokeballFilterMatchData, PokeballFilterOptions, pokeballFilterOptions } from './PokeballFilterOptions';
 import Notifier from '../notifications/Notifier';
 import NotificationOption from '../notifications/NotificationOption';
 import { findRight } from '../utilities/arrayUtils';
@@ -70,7 +70,7 @@ export default class PokeballFilters implements Feature {
         return this.list().find((filter) => filter.name === name);
     }
 
-    findMatch(data: PokeballFilterOptions): PokeballFilter | undefined {
+    findMatch(data: PokeballFilterMatchData): PokeballFilter | undefined {
         return findRight(this.displayList(), (filter) => filter.test(data));
     }
 
