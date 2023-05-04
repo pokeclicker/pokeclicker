@@ -3,11 +3,12 @@ import { ObservableArray } from 'knockout';
 import { Feature } from '../DataStore/common/Feature';
 import { Pokeball, Pokerus } from '../GameConstants';
 import PokeballFilter, { PokeballFilterParams } from './PokeballFilter';
-import { PokeballFilterOptions, pokeballFilterOptions } from './PokeballFilterOptions';
+import { PokeballFilterMatchData, PokeballFilterOptions, pokeballFilterOptions } from './PokeballFilterOptions';
 import Notifier from '../notifications/Notifier';
 import NotificationOption from '../notifications/NotificationOption';
 import { findRight } from '../utilities/arrayUtils';
 import Settings from '../settings';
+import PokemonType from '../enums/PokemonType';
 
 export default class PokeballFilters implements Feature {
     name = 'Pokeball Filters';
@@ -27,12 +28,32 @@ export default class PokeballFilters implements Feature {
         () => this.list().filter((f) => !PokeballFilters.hideFilter(f)),
     );
 
-    public testSettings = Object.fromEntries(
-        Object.entries(pokeballFilterOptions).map(([k, pfo]) => [k, pfo.createSetting()]),
-    );
-    public testSettingsData = ko.pureComputed(() =>
-        Object.fromEntries(Object.entries(this.testSettings).map(([k, v]) => [k, v.observableValue()])),
-    );
+    public testSettings = (() => {
+        const settings = Object.fromEntries(
+            Object.entries(pokeballFilterOptions).map(([k, pfo]) => [k, pfo.createSetting()]),
+        );
+
+        // Create two Pokemon Type settings
+        delete settings.pokemonType;
+        settings.type1 = pokeballFilterOptions.pokemonType.createSetting(
+            PokemonType.Normal, 'pokeballFilterPokemonType1', 'Pokémon Type 1',
+        );
+        settings.type2 = pokeballFilterOptions.pokemonType.createSetting(
+            PokemonType.Normal, 'pokeballFilterPokemonType2', 'Pokémon Type 2',
+        );
+
+        return settings;
+    })();
+    public testSettingsData = ko.pureComputed(() => {
+        const data: any = Object.fromEntries(Object.entries(this.testSettings).map(([k, v]) => [k, v.observableValue()]));
+
+        // Handle Pokemon Types
+        data.pokemonType = [data.type1, data.type2];
+        delete data.type1;
+        delete data.type2;
+
+        return data;
+    });
 
     public static hideFilter(filter: PokeballFilter) {
         return Object.keys(filter.options).some(
@@ -70,7 +91,7 @@ export default class PokeballFilters implements Feature {
         return this.list().find((filter) => filter.name === name);
     }
 
-    findMatch(data: PokeballFilterOptions): PokeballFilter | undefined {
+    findMatch(data: PokeballFilterMatchData): PokeballFilter | undefined {
         return findRight(this.displayList(), (filter) => filter.test(data));
     }
 
