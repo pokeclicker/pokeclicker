@@ -3285,6 +3285,7 @@ class QuestLineHelper {
         this.createAncientGolemsQuestLine();
         this.createOriginalColorMagearnaQuestLine();
         this.createHisuiForcesQuestLine();
+        this.createHisuiArceusQuestLine();
         this.createFindSurpriseTogepiForEasterQuestLine();
         this.createHoopaDayPikabluQuestLine();
         this.createDrSplashQuestLine();
