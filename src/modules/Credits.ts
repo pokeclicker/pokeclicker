@@ -258,6 +258,7 @@ export const SpriteCredits: Credit[] = [
             'Man of Mystery',
             'Merilyn',
             'Meta Groudon Overworld',
+            'Meteorite',
             'Milcery (Cheesy)',
             'Mr Stone',
             'Pinkan Arbok',
