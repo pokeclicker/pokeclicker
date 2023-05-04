@@ -32,6 +32,12 @@
     height: 28px;
     margin-right: 5px;
   }
+
+  img.pokemonIcon {
+    height: 38px;
+    margin: -5px;
+    margin-right: 0;
+  }
 }
 
 
@@ -748,11 +754,34 @@ i[class*="gender-icon-"] {
   }
 }
 
+button.btn-circle {
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 50%;
+    text-shadow: none;
+    opacity: 1;
+    font-weight: 700;
+    line-height: 1;
+    float: right;
+    border: 0;
+    padding: 0;
+}
+
 .shadow-icon {
     filter: drop-shadow(0 0 2px #000);
     width: 20px;
 }
 
+.darker-25 {
+    filter: brightness(75%);
+}
+
 .pokedex-modal h4, .breeding-modal h4 {
   font-size: 1.5rem;
+}
+
+// Weather Forecast
+.weatherForecastPassed {
+  opacity: .25;
+  pointer-events: none;
 }
