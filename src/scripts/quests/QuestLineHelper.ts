@@ -3155,6 +3155,11 @@ class QuestLineHelper {
         App.game.quests.questLines().push(hisuiForcesQuestLine);
     }
 
+    public static createHisuiArceusQuestLine() {
+        const hisuiArceusQuestLine = new QuestLine('Arceus: The Deified Pokémon', 'Discover the truth of the Pokémon deity, Arceus.', new DevelopmentRequirement(), GameConstants.BulletinBoards.Hisui);
+
+        App.game.quests.questLines().push(hisuiArceusQuestLine);
+
     // Event QuestLines
     // Open the game between April 8-29 (Easter).
     public static createFindSurpriseTogepiForEasterQuestLine() {

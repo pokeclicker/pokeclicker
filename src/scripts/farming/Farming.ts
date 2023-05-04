@@ -1670,7 +1670,6 @@ class Farming implements Feature {
         }));
 
         // Hopo
-        /*
         this.mutations.push(new GrowNearBerryMutation(.00001, BerryType.Hopo,
             [
                 BerryType.Micle,
@@ -1685,7 +1684,6 @@ class Farming implements Feature {
                     return App.game.quests.getQuestLine('Arceus: The Deified Pokémon').state() > QuestLineState.inactive;
                 },
             }));
-        */
 
         // Empty Mutations for hints
 
