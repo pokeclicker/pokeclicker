@@ -181,6 +181,7 @@ import { ShardDeal } from './underground/ShardDeal';
 import { Underground } from './underground/Underground';
 import UndergroundUpgrade from './underground/UndergroundUpgrade';
 import SpecialEventRequirement from './requirements/SpecialEventRequirement';
+import MapImageController from './worldMap/MapImageController';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -372,4 +373,5 @@ Object.assign(<any>window, {
     UndergroundUpgrade,
     ShardDeal,
     DailyDeal,
+    MapImageController,
 });
