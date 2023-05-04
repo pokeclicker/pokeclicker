@@ -1796,7 +1796,7 @@ class Farming implements Feature {
             case FarmNotificationType.Wander:
                 const pokemon = wander?.shiny ? `shiny ${wander?.pokemon}` : wander?.pokemon;
                 message = `A wild ${pokemon} has wandered onto the farm!`;
-                image = PokemonHelper.getImage(wander?.pokemon, wander?.shiny);
+                image = PokemonHelper.getImage(PokemonHelper.getPokemonByName(wander?.pokemon).id, wander?.shiny);
                 type = wander?.shiny ? NotificationConstants.NotificationOption.warning : NotificationConstants.NotificationOption.success;
                 sound = NotificationConstants.NotificationSound.Farming.wandering_pokemon;
                 setting = NotificationConstants.NotificationSetting.Farming.wandering_pokemon;
