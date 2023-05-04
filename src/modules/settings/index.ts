@@ -302,6 +302,7 @@ Settings.add(new HotkeySetting('hotkey.farm', 'Farm', 'F'));
 Settings.add(new HotkeySetting('hotkey.hatchery', 'Hatchery', 'H'));
 Settings.add(new HotkeySetting('hotkey.oakItems', 'Oak Items', 'O'));
 Settings.add(new HotkeySetting('hotkey.underground', 'Underground', 'U'));
+Settings.add(new HotkeySetting('hotkey.shop', 'Poké Mart', 'E'));
 Settings.add(new HotkeySetting('hotkey.dailyQuests', 'Daily Quests', 'Q'));
 Settings.add(new HotkeySetting('hotkey.pokeballSelection', 'Poké Ball Selection', 'P', { suffix: ' + Number' }));
 
@@ -382,3 +383,5 @@ Settings.add(new Setting<Language>('translation.language', 'Language (beta)', Se
 Object.keys(LogBookTypes).forEach((logBookType) => {
     Settings.add(new BooleanSetting(`logBook.${logBookType}`, logBookType, true));
 });
+
+Settings.add(new BooleanSetting('catchFilters.initialEnabled', 'New Catch Filters initially enabled', false));
