@@ -1228,11 +1228,11 @@ class Farming implements Feature {
             0,
             15000,
             25,
-            [0, 40, 30, 0, 15],
+            [15, 40, 35, 30, 25],
             49.3,
             BerryColor.Gold,
-            17.7,
-            BerryFirmness.Hard,
+            5.8,
+            BerryFirmness.Very_Soft,
             ['A truly mythical Berry. It is said to have been first created by a god.']
         );
         //#endregion
@@ -1670,13 +1670,22 @@ class Farming implements Feature {
         }));
 
         // Hopo
-        berryReqs = {};
-        berryReqs[BerryType.Micle] = 4;
-        berryReqs[BerryType.Custap] = 4;
-        berryReqs[BerryType.Jaboca] = 4;
-        berryReqs[BerryType.Rowap] = 4;
-        berryReqs[BerryType.Apicot] = 2;
-        berryReqs[BerryType.Lansat] = 2;
+        this.mutations.push(new GrowNearBerryMutation(.0005, BerryType.Hopo,
+            [
+                BerryType.Micle,
+                BerryType.Custap,
+                BerryType.Jaboca,
+                BerryType.Rowap,
+                BerryType.Apicot,
+                BerryType.Lansat,
+            ], {
+                hint: 'I\'ve heard that there\'s a mythical Berry that only appears in a field of Lansat, Apicot, Micle, Custap, Rowap and Jaboca!',
+                unlockReq: function(): boolean {
+                    return App.game.quests.getQuestLine('Team Rocket\'s Pinkan Theme Park').state() > QuestLineState.inactive;
+                },
+            }));
+
+        // Hopo
         this.mutations.push(new FieldComplexMutation(.00001, BerryType.Hopo,
             [
                 BerryType.Micle,
