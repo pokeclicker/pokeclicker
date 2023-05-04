@@ -1670,7 +1670,8 @@ class Farming implements Feature {
         }));
 
         // Hopo
-        this.mutations.push(new GrowNearBerryMutation(.0005, BerryType.Hopo,
+        /*
+        this.mutations.push(new GrowNearBerryMutation(.00001, BerryType.Hopo,
             [
                 BerryType.Micle,
                 BerryType.Custap,
@@ -1681,25 +1682,10 @@ class Farming implements Feature {
             ], {
                 hint: 'I\'ve heard that there\'s a mythical Berry that only appears in a field of Lansat, Apicot, Micle, Custap, Rowap and Jaboca!',
                 unlockReq: function(): boolean {
-                    return App.game.quests.getQuestLine('Team Rocket\'s Pinkan Theme Park').state() > QuestLineState.inactive;
+                    return App.game.quests.getQuestLine('Arceus: The Deified Pokémon').state() > QuestLineState.inactive;
                 },
             }));
-
-        // Hopo
-        this.mutations.push(new FieldComplexMutation(.00001, BerryType.Hopo,
-            [
-                BerryType.Micle,
-                BerryType.Custap,
-                BerryType.Jaboca,
-                BerryType.Rowap,
-                BerryType.Apicot,
-                BerryType.Lansat,
-            ], {
-                hint: 'I\'ve heard that there\'s a mythical Berry that only appears in a field of Lansat, Apicot, Micle, Custap, Rowap and Jaboca!',
-                unlockReq: function(): boolean {
-                    return App.game.quests.getQuestLine('Team Rocket\'s Pinkan Theme Park').state() > QuestLineState.inactive;
-                },
-            }));
+        */
 
         // Empty Mutations for hints
 
