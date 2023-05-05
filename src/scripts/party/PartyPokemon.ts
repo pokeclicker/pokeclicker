@@ -94,6 +94,7 @@ class PartyPokemon implements Saveable {
                 // Log and notify player
                 Notifier.notify({
                     message: `${this.name} has become Resistant to Pokérus.`,
+                    pokemonImage: PokemonHelper.getImage(this.id, this.shiny),
                     type: NotificationConstants.NotificationOption.info,
                     setting: NotificationConstants.NotificationSetting.General.pokerus,
                 });
@@ -167,14 +168,16 @@ class PartyPokemon implements Saveable {
         return this.level;
     }
 
-    public gainExp(exp: number) {
-        this.exp += exp * this.getExpMultiplier();
+    public gainExp(exp: number) : number {
+        const expGained = exp * this.getExpMultiplier();
+        this.exp += expGained;
         const oldLevel = this.level;
         const newLevel = this.calculateLevelFromExp();
         if (oldLevel !== newLevel) {
             this.level = newLevel;
             this.checkForLevelEvolution();
         }
+        return expGained;
     }
 
     private getExpMultiplier() {

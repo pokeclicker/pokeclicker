@@ -13,6 +13,7 @@ export default class Notifier {
         sound = null,
         setting = null,
         image = null,
+        pokemonImage = null,
         strippedMessage = null,
     }: {
         message?: string;
@@ -23,6 +24,7 @@ export default class Notifier {
         sound?: Sound;
         setting?: NotificationSetting;
         image?: string;
+        pokemonImage?: string;
         strippedMessage?: string;
     }): void {
         $(document).ready(() => {
@@ -55,12 +57,14 @@ export default class Notifier {
             const toastHTML = `<div id="${toastID}" class="toast bg-${NotificationOption[type]}" data-autohide="false">
                 ${title ? `<div class="toast-header">
                     ${image ? `<img src="${image}" class="icon" />` : ''}
+                    ${pokemonImage ? `<img src="${pokemonImage}" class="pokemonIcon" />` : ''}
                     <strong class="mr-auto text-primary">${title || ''}</strong>
                     <small class="text-muted">${time}</small>
                     <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">×</button>
                 </div>` : ''}
                 <div class="toast-body text-light">
                     ${!title && image ? `<img src="${image}" class="icon" />` : ''}
+                    ${!title && pokemonImage ? `<img src="${pokemonImage}" class="pokemonIcon" />` : ''}
                     ${message.replace(/\n/g, '<br/>')}
                     ${title ? '' : '<button type="button" class="ml-2 mb-1 close" data-dismiss="toast">×</button>'}
                 </div>
