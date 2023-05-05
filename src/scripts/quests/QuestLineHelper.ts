@@ -1749,7 +1749,7 @@ class QuestLineHelper {
         const talkToSteven = new TalkToNPCQuest(PrimalSteven, 'Talk to Steven in the Granite Cave to learn more avout the Primal Murals.');
         primalReversionQuestLine.addQuest(talkToSteven);
 
-        const talkToStern1 = new TalkToNPCQuest(Stern1, 'Find Captain Stern at Sea Mauville during a thunderstorm.');
+        const talkToStern1 = new TalkToNPCQuest(Stern1, 'Find Captain Stern at Sea Mauville during Thunderstorm Weather.');
         primalReversionQuestLine.addQuest(talkToStern1);
 
         const fightStern = new CustomQuest (1, 0, 'Fight Captain Stern at Sea Mauville.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Captain Stern')]());
@@ -1814,7 +1814,7 @@ class QuestLineHelper {
             [
                 fightPrimalGroudon,
                 fightPrimalKyogre,
-            ], 'Defeat the Primal Reversions. They will pause their rampage under the right weather conditions.'));
+            ], 'Defeat the Primal Reversions. Predict their rampage by monitoring the weather at the Weather Institute.'));
 
         const talkToMrStone2 = new TalkToNPCQuest(MrStone2, 'Talk to Mr. Stone in Slateport City.');
         primalReversionQuestLine.addQuest(talkToMrStone2);
