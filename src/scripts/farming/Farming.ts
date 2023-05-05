@@ -1229,7 +1229,7 @@ class Farming implements Feature {
             15000,
             25,
             [15, 40, 35, 30, 25],
-            49.3,
+            50,
             BerryColor.Gold,
             5.8,
             BerryFirmness.Very_Soft,
