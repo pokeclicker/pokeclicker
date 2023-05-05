@@ -34,7 +34,7 @@ const tempShadowRequirement = new DevelopmentRequirement();
 
 const encounterTypeRequirements: Partial<Record<EncounterType, Requirement>> = {
     [EncounterType.trainer]: tempShadowRequirement,
-    [EncounterType.ultraBeast]: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 1),
+    [EncounterType.ultraBeast]: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 2),
 };
 
 export const pokeballFilterOptions = {
@@ -133,7 +133,7 @@ export const pokeballFilterOptions = {
             Object.values(EncounterType).map((v) => new SettingOption(v, v, encounterTypeRequirements[v])),
             type,
         ),
-        (type) => `Is a ${type} encounter`,
+        (type) => `Is ${GameHelper.anOrA(type)} ${type} encounter`,
     ),
 };
 

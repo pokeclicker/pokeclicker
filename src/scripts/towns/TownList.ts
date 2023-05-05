@@ -6030,6 +6030,7 @@ const RoadsideMotelAnabel1 = new NPC('Anabel', [
 const RoadsideMotelLooker2 = new NPC('Looker', [
     'Catching lots of Ultra Beasts? Oh you want to know more about Beast Balls!',
     'Beast Balls can only be used to catch Ultra Beasts. You can\'t even try to use them against normal Pokémon, and any other Poké Ball type won\'t work against Ultra Beasts.',
+    'To help you out, I\'ve added an "Ultra Beast" option to the Encounter Type Pokéball filter setting. You can use this to set up a filter just for Ultra Beasts. Don\'t forget to enable it and assign Beast Balls!',
 ], {
     image: 'assets/images/npcs/Looker.png',
     requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 2),
