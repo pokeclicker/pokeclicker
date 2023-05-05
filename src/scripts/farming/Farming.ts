@@ -1233,7 +1233,7 @@ class Farming implements Feature {
             BerryColor.Gold,
             5.8,
             BerryFirmness.Very_Soft,
-            ['A truly mythical Berry native to harsh northern lands. It was first created by a Pokémon worshipped as a deity in these lands.']
+            ['A truly mythical Berry native to harsh northern lands. It was first created by a Pokémon believed to have shaped the world.']
         );
         //#endregion
 
