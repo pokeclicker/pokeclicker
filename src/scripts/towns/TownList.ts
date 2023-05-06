@@ -2629,6 +2629,14 @@ const Stern1 = new NPC('Captain Stern', [
     requirement: new MultiRequirement([new WeatherRequirement([WeatherType.Thunderstorm]), new QuestLineStepCompletedRequirement('Primal Reversion', 3), new QuestLineStepCompletedRequirement('Primal Reversion', 5, GameConstants.AchievementOption.less)]),
 });
 
+const SternSubstitute = new NPC('Deck Swabber', [
+    'Hoy thar, matey! What\'s that? You lookin\' for Cap\'n Stern, are ya? That ol\' Jack Tar! A loose cannon \'e is! You\'ll only see \'im ashore in a Thunderstorm. \'E\'ll say it\'s all due to protocol but the trut\' is lightnin\' scares \'im stem to stern! Didn\' \'ear that from me \'ough...',
+    '',
+    'If ya feel like meetin\' \'im, the fine folks at the Weather Insitute can tell you when the next storm\'s brewin\'.',
+], {image: 'assets/images/npcs/Janitor.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Primal Reversion', 3), new QuestLineStepCompletedRequirement('Primal Reversion', 5, GameConstants.AchievementOption.less)]),
+});
+
 const Stern2 = new NPC('Captain Stern', [
     'I see you can be trusted with the mysteries of the sea!',
     'I have been seeing a lot of strange activity around the Seafloor Cavern recently. Whirlpools, thunderstorms, and all nature of strange beasts.',
@@ -2761,7 +2769,7 @@ TownList['Sea Mauville'] = new Town(
     [TemporaryBattleList['Delta Giovanni'], TemporaryBattleList['Captain Stern']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 109)],
-        npcs: [SeaMauvilleRocket1, SeaMauvilleRocket2, Stern1, Stern2, Stern3],
+        npcs: [SeaMauvilleRocket1, SeaMauvilleRocket2, Stern1, SternSubstitute, Stern2, Stern3],
     }
 );
 TownList['Verdanturf Town'] = new Town(
