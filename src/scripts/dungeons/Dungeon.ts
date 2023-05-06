@@ -6154,7 +6154,7 @@ dungeonList['Flower Paradise'] = new Dungeon('Flower Paradise',
         new DungeonBossPokemon('Breloom', 11000000, 50),
         new DungeonBossPokemon('Shaymin (Land)', 11000000, 50),
         new DungeonBossPokemon('Shaymin (Sky)', 11000000, 50, {requirement: new ObtainedPokemonRequirement('Shaymin (Land)')}),
-        new DungeonBossPokemon('Bulbasaur (Rose)', 1600000, 100, {
+        new DungeonBossPokemon('Bulbasaur (Rose)', 16000000, 100, {
             hide: true,
             requirement: new MultiRequirement([
                 new ClearDungeonRequirement(10, GameConstants.getDungeonIndex('Flower Paradise')),
