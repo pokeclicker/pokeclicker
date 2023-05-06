@@ -1220,6 +1220,21 @@ class Farming implements Feature {
             undefined,
             ['Detective Pikachu']
         );
+
+        this.berryData[BerryType.Hopo] = new Berry(
+            BerryType.Hopo,
+            [10800, 21600, 43200, 86400, 604800],
+            1,
+            0,
+            15000,
+            25,
+            [15, 40, 35, 30, 25],
+            50,
+            BerryColor.Gold,
+            5.8,
+            BerryFirmness.Very_Soft,
+            ['A truly mythical Berry native to harsh northern lands. It was first created by a Pokémon believed to have shaped the world.']
+        );
         //#endregion
 
         //#endregion
@@ -1654,6 +1669,22 @@ class Farming implements Feature {
             unlockReq: () => App.game.farming.unlockedBerries[BerryType.Starf](),
         }));
 
+        // Hopo
+        this.mutations.push(new GrowNearBerryMutation(.00001, BerryType.Hopo,
+            [
+                BerryType.Micle,
+                BerryType.Custap,
+                BerryType.Jaboca,
+                BerryType.Rowap,
+                BerryType.Apicot,
+                BerryType.Lansat,
+            ], {
+                hint: 'I\'ve heard that there\'s a mythical Berry that only appears in a field of Lansat, Apicot, Micle, Custap, Rowap and Jaboca!',
+                unlockReq: function(): boolean {
+                    return App.game.quests.getQuestLine('Arceus: The Deified Pokémon').state() > QuestLineState.inactive;
+                },
+            }));
+
         // Empty Mutations for hints
 
         // Kasib
@@ -1796,7 +1827,7 @@ class Farming implements Feature {
             case FarmNotificationType.Wander:
                 const pokemon = wander?.shiny ? `shiny ${wander?.pokemon}` : wander?.pokemon;
                 message = `A wild ${pokemon} has wandered onto the farm!`;
-                image = PokemonHelper.getImage(wander?.pokemon, wander?.shiny);
+                image = PokemonHelper.getImage(PokemonHelper.getPokemonByName(wander?.pokemon).id, wander?.shiny);
                 type = wander?.shiny ? NotificationConstants.NotificationOption.warning : NotificationConstants.NotificationOption.success;
                 sound = NotificationConstants.NotificationSound.Farming.wandering_pokemon;
                 setting = NotificationConstants.NotificationSetting.Farming.wandering_pokemon;

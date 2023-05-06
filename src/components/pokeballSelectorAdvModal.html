@@ -162,7 +162,7 @@
                             <p>Configure these options to describe a Pokémon you want to test:</p>
                             <table>
                                 <tbody data-bind="foreach: Object.entries(App.game.pokeballFilters.testSettings)
-                                                                .filter(([k]) => pokeballFilterOptions[k].canUse())
+                                                                .filter(([k]) => pokeballFilterOptions[k]?.canUse() ?? true)
                                                                 .map(([k, s]) => s)">
                                     <tr data-bind="template: {
                                                             name: $data instanceof BooleanSetting ? 'pokeballFilterSlider' : 'pokeballFilterMultipleChoice',
