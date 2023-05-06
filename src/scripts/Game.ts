@@ -51,7 +51,7 @@ class Game {
         public purifyChamber: PurifyChamber,
         public weatherApp: WeatherApp
     ) {
-        this._gameState = ko.observable(GameConstants.GameState.paused);
+        this._gameState = ko.observable(GameConstants.GameState.loading);
     }
 
     load() {

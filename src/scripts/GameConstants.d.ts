@@ -157,6 +157,7 @@ namespace GameConstants {
     declare const RUST_ITEM_CHANCE: number;
     declare const MANE_ITEM_CHANCE: number;
     declare enum GameState {
+        loading,
         idle,
         paused,
         fighting,

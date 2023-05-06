@@ -333,6 +333,7 @@ export const EP_CHALLENGE_MODIFIER = 10;
  * town: In a town/pre-dungeon, town view is not shown
  */
 export enum GameState {
+    loading = -1,
     idle = 0,
     paused = 1,
     fighting = 2,
