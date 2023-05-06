@@ -365,7 +365,7 @@
 <script type="text/html" id="MultipleChoiceSettingTemplate">
     <td class="p-2" data-bind="text: `${$data.displayName}:`">setting name</td>
     <td class="p-0">
-        <select class="form-control" onchange="Settings.setSettingByName(this.name, this.value)" data-bind="foreach: $data.options, attr: {name}">
+        <select class="form-control" onchange="Settings.setSettingByName(this.name, this.value)" data-bind="foreach: $data.getValidOptions(), attr: {name}">
             <option data-bind="text: $data.text, value: $data.value, attr:{ selected: $parent.observableValue() == $data.value}"></option>
         </select>
     </td>
