@@ -565,6 +565,7 @@ export const SpriteCredits: Credit[] = [
             'Artist (male)',
             'Battle Café Master',
             'Bill',
+            'Blue-LGPE',
             'Blue-Masters',
             'Cook (Gen 8)',
             'Fairy Tale Girl',
@@ -987,6 +988,7 @@ export const SpriteCredits: Credit[] = [
         image: 'https://www.smogon.com/forums/media/data/avatars/o/522/522483.jpg?1650909371',
         resources: [
             'Dexio (Gen 6)',
+            'Green',
         ],
         // Notes: Permission given if credited.
     },

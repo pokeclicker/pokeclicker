@@ -8846,6 +8846,13 @@ dungeonList['Pokémon Village'] = new Dungeon('Pokémon Village',
     [
         new DungeonBossPokemon('Ditto', 94836530, 50),
         new DungeonBossPokemon('Zoroark', 95743340, 50),
+        new DungeonBossPokemon('Mewtwo', 100000000, 70, {requirement: new QuestLineCompletedRequirement('The Strongest Pokémon')}),
+        new DungeonTrainer('Anomaly Mewtwo',
+            [new GymPokemon('Mega Mewtwo Y', 100000000, 70)],
+            { hide: true, requirement: new MultiRequirement([
+                new QuestLineStepCompletedRequirement('The Strongest Pokémon', 6),
+                new QuestLineStepCompletedRequirement('The Strongest Pokémon', 7, GameConstants.AchievementOption.less),
+            ])}),
     ],
     725000, 20);
 
