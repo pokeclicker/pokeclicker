@@ -2848,7 +2848,7 @@ TownList['Lilycove City'] = new Town(
     'Lilycove City',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [DepartmentStoreShop, HoennContestShop],
+    [DepartmentStoreShop], // HoennContestShop
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 121)],
     }
