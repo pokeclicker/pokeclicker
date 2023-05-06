@@ -195,7 +195,7 @@ export const SpriteCredits: Credit[] = [
     {
         name: 'DraK4y',
         link: 'https://discordapp.com/users/272336444297707521/',
-        image: 'assets/images/profile/trainer-96.png',
+        image: 'assets/images/profile/trainer-121.png',
         resources: [
             'Alcremie sweets big icons',
             'Arctovish shop image',
@@ -229,6 +229,7 @@ export const SpriteCredits: Credit[] = [
             'Go-Rock Squad Grunt (male)',
             'Go-Rock Squad Grunt (female)',
             'Honey',
+            'Hopo berry image',
             'Hoppip (Chimecho)',
             'Key Stone',
             'Linking cord cartoon style',
@@ -428,7 +429,11 @@ export const SpriteCredits: Credit[] = [
     {
         name: 'Eat Pant',
         link: 'https://discordapp.com/users/736029608587296819',
+        image: 'assets/images/profile/trainer-119.png',
         resources: [
+            'Dugtrio (Punk)',
+            'Koga Trainer',
+            'Miracle Chest',
             'Pinkan Geodude',
             'Pinkan Mankey',
             'Pinkan Nidoking',
@@ -437,10 +442,8 @@ export const SpriteCredits: Credit[] = [
             'Pinkan Oddish',
             'Pinkan Primeape',
             'Pinkan Venonat',
-            'Koga Trainer',
             'Spooky Ivysaur',
             'Spooky Venusaur',
-            'Dugtrio (Punk)',
         ],
         // Notes: Made specifically for PokéClicker.
     },
