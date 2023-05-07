@@ -5192,14 +5192,8 @@ dungeonList['Eterna Forest'] = new Dungeon('Eterna Forest',
     },
     812000,
     [
-        new DungeonBossPokemon('Beautifly', 3950000, 30, {hide: true, requirement: new OneFromManyRequirement([
-            new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 7, GameConstants.AchievementOption.less),
-            new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 8),
-        ])}),
-        new DungeonBossPokemon('Dustox', 3950000, 30, {hide: true, requirement: new OneFromManyRequirement([
-            new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 7, GameConstants.AchievementOption.less),
-            new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 8),
-        ])}),
+        new DungeonBossPokemon('Beautifly', 3950000, 30),
+        new DungeonBossPokemon('Dustox', 3950000, 30),
         new DungeonBossPokemon('Parasect', 4500000, 30, {hide: true, requirement: new MultiRequirement([
             new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 8, GameConstants.AchievementOption.less),
             new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 7),
@@ -5209,10 +5203,6 @@ dungeonList['Eterna Forest'] = new Dungeon('Eterna Forest',
             requirement: new MultiRequirement([
                 new ObtainedPokemonRequirement('Vivillon (River)'),
                 new SpecialEventRequirement('Lunar New Year'),
-                new OneFromManyRequirement([
-                    new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 7, GameConstants.AchievementOption.less),
-                    new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 8),
-                ]),
             ])}),
     ],
     48000, 205);
@@ -6173,7 +6163,7 @@ dungeonList['Flower Paradise'] = new Dungeon('Flower Paradise',
         new DungeonBossPokemon('Breloom', 9900000, 50),
         new DungeonBossPokemon('Shaymin (Land)', 11000000, 50),
         new DungeonBossPokemon('Shaymin (Sky)', 11000000, 50, {requirement: new ObtainedPokemonRequirement('Shaymin (Land)')}),
-        new DungeonBossPokemon('Bulbasaur (Rose)', 1600000, 100, {
+        new DungeonBossPokemon('Bulbasaur (Rose)', 16000000, 100, {
             hide: true,
             requirement: new MultiRequirement([
                 new ClearDungeonRequirement(10, GameConstants.getDungeonIndex('Flower Paradise')),

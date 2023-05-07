@@ -31,6 +31,7 @@ class PokemonItem extends CaughtIndicatingItem {
         if (shiny || !App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(pokemonName).id)) {
             Notifier.notify({
                 message: `${(shiny) ? `✨ You obtained a shiny ${pokemonName}! ✨` : `You obtained ${GameHelper.anOrA(pokemonName)} ${pokemonName}!`}`,
+                pokemonImage: PokemonHelper.getImage(pokemonID, shiny),
                 type: (shiny ? NotificationConstants.NotificationOption.warning : NotificationConstants.NotificationOption.success),
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
                 sound: ((!App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(pokemonName).id) || (shiny && (!App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(pokemonName).id, true))) ? NotificationConstants.NotificationSound.General.new_catch : null)),
@@ -133,6 +134,6 @@ ItemList['Landorus (Therian)']  = new PokemonItem('Landorus (Therian)', undefine
 ItemList['Dugtrio (Punk)'] = new PokemonItem('Dugtrio (Punk)', 7500, Currency.contestToken);
 ItemList['Gengar (Punk)'] = new PokemonItem('Gengar (Punk)', 10000, Currency.contestToken);
 ItemList['Goldeen (Diva)'] = new PokemonItem('Goldeen (Diva)', 5000, Currency.contestToken);
-ItemList['Onix (Rocker)'] = new PokemonItem('Dugtrio (Punk)', 7500, Currency.contestToken);
+ItemList['Onix (Rocker)'] = new PokemonItem('Onix (Rocker)', 7500, Currency.contestToken);
 ItemList['Tangela (Pom-pom)'] = new PokemonItem('Tangela (Pom-pom)', 7500, Currency.contestToken);
 ItemList['Weepinbell (Fancy)'] = new PokemonItem('Weepinbell (Fancy)', 7500, Currency.contestToken);

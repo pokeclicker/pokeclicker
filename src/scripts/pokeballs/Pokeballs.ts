@@ -148,6 +148,7 @@ class Pokeballs implements Feature {
             shadow: isShadow,
             shiny: isShiny,
             pokerus: App.game.party.getPokemon(id)?.pokerus,
+            pokemonType: [pokemon.type1, pokemon.type2],
         })?.ball() ?? GameConstants.Pokeball.None;
 
         let use: GameConstants.Pokeball = GameConstants.Pokeball.None;

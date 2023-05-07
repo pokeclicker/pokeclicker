@@ -523,7 +523,7 @@ TemporaryBattleList['Spiky-eared Pichu'] = new TemporaryBattle(
     {
         displayName: 'Strange Pichu',
         hideTrainer: true,
-        imageName: '../pokemon/172.1',
+        imageName: '../pokemon/172.01',
     }
 );
 TemporaryBattleList['Rocket Boss Giovanni'] = new TemporaryBattle(
@@ -4712,7 +4712,7 @@ TemporaryBattleList['Zarude (Dada)'] = new TemporaryBattle(
     undefined,
     {
         hideTrainer: true,
-        imageName: '../pokemon/893.1',
+        imageName: '../pokemon/893.01',
     }
 );
 TemporaryBattleList['Flowering Celebi'] = new TemporaryBattle(
@@ -4724,7 +4724,7 @@ TemporaryBattleList['Flowering Celebi'] = new TemporaryBattle(
     {
         isTrainerBattle: false,
         hideTrainer: true,
-        imageName: '../pokemon/251.2',
+        imageName: '../pokemon/251.02',
     }
 );
 TemporaryBattleList.Peony = new TemporaryBattle(
@@ -4803,7 +4803,7 @@ TemporaryBattleList['Galarian Articuno 1'] = new TemporaryBattle(
         hideTrainer: true,
         displayName: 'Galarian Articuno',
         returnTown: 'Roaring-Sea Caves',
-        imageName: '../pokemon/144.1',
+        imageName: '../pokemon/144.01',
         visibleRequirement: new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 3),
     }
 );
@@ -4820,7 +4820,7 @@ TemporaryBattleList['Galarian Articuno 2'] = new TemporaryBattle(
         hideTrainer: true,
         displayName: 'Galarian Articuno',
         returnTown: 'Roaring-Sea Caves',
-        imageName: '../pokemon/144.1',
+        imageName: '../pokemon/144.01',
         visibleRequirement: new TemporaryBattleRequirement('Galarian Articuno 1'),
     }
 );
@@ -4837,7 +4837,7 @@ TemporaryBattleList['Galarian Articuno 3'] = new TemporaryBattle(
         hideTrainer: true,
         displayName: 'Galarian Articuno',
         returnTown: 'Tunnel to the Top',
-        imageName: '../pokemon/144.1',
+        imageName: '../pokemon/144.01',
         visibleRequirement: new TemporaryBattleRequirement('Galarian Articuno 2'),
 
     }
@@ -4852,7 +4852,7 @@ TemporaryBattleList['Galarian Zapdos 1'] = new TemporaryBattle(
         hideTrainer: true,
         displayName: 'Galarian Zapdos',
         returnTown: 'Motostoke',
-        imageName: '../pokemon/145.1',
+        imageName: '../pokemon/145.01',
     }
 );
 TemporaryBattleList['Galarian Zapdos 2'] = new TemporaryBattle(
@@ -4868,7 +4868,7 @@ TemporaryBattleList['Galarian Zapdos 2'] = new TemporaryBattle(
         hideTrainer: true,
         displayName: 'Galarian Zapdos',
         returnTown: 'Dusty Bowl',
-        imageName: '../pokemon/145.1',
+        imageName: '../pokemon/145.01',
         visibleRequirement: new TemporaryBattleRequirement('Galarian Zapdos 1'),
     }
 );
@@ -4885,7 +4885,7 @@ TemporaryBattleList['Galarian Zapdos 3'] = new TemporaryBattle(
         hideTrainer: true,
         displayName: 'Galarian Zapdos',
         returnTown: 'Motostoke',
-        imageName: '../pokemon/145.1',
+        imageName: '../pokemon/145.01',
         visibleRequirement: new TemporaryBattleRequirement('Galarian Zapdos 2'),
     }
 );
@@ -4902,7 +4902,7 @@ TemporaryBattleList['Galarian Moltres 1'] = new TemporaryBattle(
         hideTrainer: true,
         displayName: 'Galarian Moltres',
         returnTown: 'Courageous Cavern',
-        imageName: '../pokemon/146.1',
+        imageName: '../pokemon/146.01',
         visibleRequirement: new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 3),
     }
 );
@@ -4919,7 +4919,7 @@ TemporaryBattleList['Galarian Moltres 2'] = new TemporaryBattle(
         hideTrainer: true,
         displayName: 'Galarian Moltres',
         returnTown: 'Master Dojo',
-        imageName: '../pokemon/146.1',
+        imageName: '../pokemon/146.01',
         visibleRequirement: new TemporaryBattleRequirement('Galarian Moltres 1'),
     }
 );
@@ -4936,7 +4936,7 @@ TemporaryBattleList['Galarian Moltres 3'] = new TemporaryBattle(
         hideTrainer: true,
         displayName: 'Galarian Moltres',
         returnTown: 'Master Dojo',
-        imageName: '../pokemon/146.1',
+        imageName: '../pokemon/146.01',
         visibleRequirement: new TemporaryBattleRequirement('Galarian Moltres 2'),
     }
 );
@@ -5229,7 +5229,7 @@ TemporaryBattleList['Hisuian Braviary'] = new TemporaryBattle(
     undefined,
     {
         hideTrainer: true,
-        imageName: '../pokemon/628.1',
+        imageName: '../pokemon/628.01',
     }
 );
 TemporaryBattleList['Lord of the Tundra: Avalugg'] = new TemporaryBattle(
