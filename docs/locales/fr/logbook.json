@@ -1,4 +1,17 @@
 {
+  "type": {
+    "NEW": "",
+    "SHINY": "",
+    "CAUGHT": "",
+    "ESCAPED": "",
+    "ROAMER": "",
+    "ACHIEVE": "",
+    "QUEST": "",
+    "FOUND": "",
+    "FRONTIER": "",
+    "WANDER": "",
+    "OTHER": ""
+  },
   "earnedAchievement": "Succès « {{ name }} » obtenu.",
   "escapedShiny": "Le {{ pokemon, pokemon }} chromatique s'est échappé !",
   "escapedShinyDupe": "[[escapedShiny]] (doublon)",
@@ -25,6 +38,7 @@
   "capturedShiny": "Vous avez capturé un {{ pokemon, pokemon }} chromatique !",
   "capturedShinyDupe": "[[capturedShiny]] (doublon)",
   "enemyDrop": "Le {{ pokemon, pokemon }} ennemi a lâché un {{ item }}.",
+  "capturedShadow": "",
   "roamer": "[{{ location }}] Vous rencontrez un {{ pokemon, pokemon }} voyageur !",
   "roamerShiny": "[{{ location }}] Vous rencontrez un {{ pokemon, pokemon }} voyageur chromatique !",
   "roamerShinyDupe": "[{{ location }}] Vous rencontrez un {{ pokemon, pokemon }} voyageur chromatique ! (doublon)",

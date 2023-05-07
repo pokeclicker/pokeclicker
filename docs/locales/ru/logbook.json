@@ -1,4 +1,17 @@
 {
+  "type": {
+    "NEW": "",
+    "SHINY": "",
+    "CAUGHT": "",
+    "ESCAPED": "",
+    "ROAMER": "",
+    "ACHIEVE": "",
+    "QUEST": "",
+    "FOUND": "",
+    "FRONTIER": "",
+    "WANDER": "",
+    "OTHER": ""
+  },
   "earnedAchievement": "Получили \"{{ name }}\".",
   "escapedShiny": "Шайни {{ pokemon, pokemon }} убежал!",
   "escapedShinyDupe": "[[escapedShiny]] (дупликат)",
@@ -25,6 +38,7 @@
   "capturedShiny": "Вы поймали шайни {{ pokemon, pokemon }}!",
   "capturedShinyDupe": "[[capturedShiny]] (дупликат)",
   "enemyDrop": "Вражеский{{ pokemon, pokemon }} выронил {{ item }}.",
+  "capturedShadow": "",
   "roamer": "[{{ location }}] Вы встретили бродящего {{ pokemon, pokemon }}!",
   "roamerShiny": "[{{ location }}]  Вы встретили шайни бродящего {{ pokemon, pokemon }}!",
   "roamerShinyDupe": "[[roamerShiny]] (дупликат)",

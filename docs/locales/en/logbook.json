@@ -1,4 +1,17 @@
 {
+  "type": {
+    "NEW": "NEW",
+    "SHINY": "SHINY",
+    "CAUGHT": "CAUGHT",
+    "ESCAPED": "ESCAPED",
+    "ROAMER": "ROAMER",
+    "ACHIEVE": "ACHIEVE",
+    "QUEST": "QUEST",
+    "FOUND": "FOUND",
+    "FRONTIER": "FRONTIER",
+    "WANDER": "WANDER",
+    "OTHER": "OTHER"
+  },
   "earnedAchievement": "Earned \"{{ name }}\".",
   "escapedShiny": "The shiny {{ pokemon, pokemon }} escaped!",
   "escapedShinyDupe": "[[escapedShiny]] (duplicate)",
@@ -25,6 +38,7 @@
   "capturedShiny": "You have captured a shiny {{ pokemon, pokemon }}!",
   "capturedShinyDupe": "[[capturedShiny]] (duplicate)",
   "enemyDrop": "An enemy {{ pokemon, pokemon }} dropped one {{ item }}.",
+  "capturedShadow": "You have captured a shadow {{ pokemon, pokemon }}!",
   "roamer": "[{{ location }}] You encountered a roaming {{ pokemon, pokemon }}!",
   "roamerShiny": "[{{ location }}] You encountered a shiny roaming {{ pokemon, pokemon }}!",
   "roamerShinyDupe": "[[roamerShiny]] (duplicate)",
