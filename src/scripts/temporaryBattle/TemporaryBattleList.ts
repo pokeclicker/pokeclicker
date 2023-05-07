@@ -3118,8 +3118,8 @@ TemporaryBattleList['Wild Electrike Horde'] = new TemporaryBattle(
         returnTown: 'Dendemille Town',
     }
 );
-TemporaryBattleList['Red Mewtwo'] = new TemporaryBattle(
-    'Red Mewtwo',
+TemporaryBattleList['Unrivaled Red'] = new TemporaryBattle(
+    'Unrivaled Red',
     [
         new GymPokemon('Pikachu', 82741389, 85),
         new GymPokemon('Machamp', 82239926, 85),
@@ -3136,8 +3136,8 @@ TemporaryBattleList['Red Mewtwo'] = new TemporaryBattle(
         imageName: 'Red',
     }
 );
-TemporaryBattleList['Blue Mewtwo'] = new TemporaryBattle(
-    'Blue Mewtwo',
+TemporaryBattleList['Unrivaled Blue'] = new TemporaryBattle(
+    'Unrivaled Blue',
     [
       new GymPokemon('Tauros', 82390364, 66),
       new GymPokemon('Alakazam', 82390364, 66),
@@ -3154,8 +3154,8 @@ TemporaryBattleList['Blue Mewtwo'] = new TemporaryBattle(
         imageName: 'Blue-lgpe',
     }
 );
-TemporaryBattleList['Green Mewtwo'] = new TemporaryBattle(
-    'Green Mewtwo',
+TemporaryBattleList['Unrivaled Green'] = new TemporaryBattle(
+    'Unrivaled Green',
     [
       new GymPokemon('Clefable', 82490657, 66),
       new GymPokemon('Gengar', 82490657, 66),

@@ -3273,6 +3273,7 @@ class QuestLineHelper {
         this.createFlareKalosQuestLine();
         this.createPrincessDiancieQuestLine();
         this.createAshKetchumQuestLine();
+        this.createStrongestPokemonQuestLine();
         this.createSkullAetherAlolaQuestLine();
         this.createMinasTrialAlolaQuestLine();
         this.createUltraBeastQuestLine();
