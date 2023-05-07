@@ -155,7 +155,8 @@ class BreedingController {
             // Check if search matches englishName or displayName
             const displayName = PokemonHelper.displayName(partyPokemon.name)();
             const filterName = BreedingFilters.name.value();
-            if (!filterName.test(displayName) && !filterName.test(partyPokemon.name)) {
+            const partyName = partyPokemon.displayName;
+            if (!filterName.test(displayName) && !filterName.test(partyPokemon.name) && !(partyName != undefined && filterName.test(partyName))) {
                 return false;
             }
 
