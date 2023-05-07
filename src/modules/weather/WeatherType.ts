@@ -1,15 +1,13 @@
 enum WeatherType {
     Clear = 0,
-    Overcast,
+    Cloudy,
     Rain,
     Thunderstorm,
     Snow,
-    Hail,
     Blizzard,
     Sunny,
     Sandstorm,
     Fog,
-    Windy,
 }
 
 export default WeatherType;
