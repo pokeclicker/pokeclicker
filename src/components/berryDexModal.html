@@ -55,9 +55,17 @@
                       <td class="text-left">Total Life Span</td>
                       <td class="text-left tight"><code data-bind="html: GameConstants.formatSecondsToTime(App.game.farming.berryData[$data].growthTime[4])">-</code></td>
                     </tr>
-					<tr>
-                      <td class="text-left">Growth Time</td>
+                    <tr data-bind="if: (App.game.farming.berryData[$data].growthTime[4]-App.game.farming.berryData[$data].growthTime[3] === App.game.farming.berryData[$data].growthTime[3])">
+                      <td class="text-left">Growth and Berry Stage Length</td>
                       <td class="text-left tight"><code data-bind="html: GameConstants.formatSecondsToTime(App.game.farming.berryData[$data].growthTime[3])">-</code></td>
+                    </tr>
+                    <tr data-bind="if: (App.game.farming.berryData[$data].growthTime[4]-App.game.farming.berryData[$data].growthTime[3] != App.game.farming.berryData[$data].growthTime[3])">
+                      <td class="text-left">Growth Length</td>
+                      <td class="text-left tight"><code data-bind="html: GameConstants.formatSecondsToTime(App.game.farming.berryData[$data].growthTime[3])">-</code></td>
+                    </tr>
+                    <tr data-bind="if: (App.game.farming.berryData[$data].growthTime[4]-App.game.farming.berryData[$data].growthTime[3] != App.game.farming.berryData[$data].growthTime[3])">
+                      <td class="text-left">Berry Stage Length</td>
+                      <td class="text-left tight"><code data-bind="html: GameConstants.formatSecondsToTime(App.game.farming.berryData[$data].growthTime[4]-App.game.farming.berryData[$data].growthTime[3])">-</code></td>
                     </tr>
                     <tr>
                       <td class="text-left">Harvest Amount</td>
