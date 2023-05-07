@@ -29,7 +29,7 @@ class Safari {
         this.activeRegion(player.region);
         Safari.grid = [];
         Safari.pokemonGrid([]);
-        Safari.itemGrid([new SafariItem('xAttack', 5, 5)]);
+        Safari.itemGrid([new SafariItem({id: 'xAttack', type: ItemType.item}, 5, 5)]);
         Safari.playerXY.x = 0;
         Safari.playerXY.y = 0;
         Safari.lastDirection = 'up';
@@ -414,7 +414,15 @@ class Safari {
     private static checkItem() {
         const itemOnPlayer = this.itemGrid().findIndex(p => p.x === Safari.playerXY.x && p.y === Safari.playerXY.y);
         if (itemOnPlayer >= 0) {
-            this.itemGrid()[itemOnPlayer].item.gain(1);
+            const item = this.itemGrid()[itemOnPlayer];
+            const name = BagHandler.displayName(item.item);
+            BagHandler.gainItem(item.item);
+            Notifier.notify({
+                message: `You found ${GameHelper.anOrA(name)} ${name}!`,
+                image: BagHandler.image(item.item),
+                type: NotificationConstants.NotificationOption.success,
+                setting: NotificationConstants.NotificationSetting.Items.dropped_item,
+            });
             Safari.itemGrid.splice(itemOnPlayer, 1);
         }
     }
