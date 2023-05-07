@@ -81,11 +81,11 @@ class Plot implements Saveable {
                 return '';
             }
             const growthTime = this.berryData.growthTime.find(t => this.age < t);
-            const timeLeft = Math.ceil(growthTime - this.age);
+            const timeLeft = growthTime - this.age;
             const growthMultiplier = includeGrowthMultiplier
                 ? App.game.farming.getGrowthMultiplier() * this.getGrowthMultiplier()
                 : 1;
-            return GameConstants.formatTime(timeLeft / growthMultiplier);
+            return GameConstants.formatTime(Math.ceil(timeLeft / growthMultiplier));
         });
 
         this.formattedStageTimeLeft = ko.pureComputed(() => {
@@ -102,14 +102,14 @@ class Plot implements Saveable {
             }
             let timeLeft = 0;
             if (this.age < this.berryData.growthTime[3]) {
-                timeLeft = Math.ceil(this.berryData.growthTime[3] - this.age);
+                timeLeft = this.berryData.growthTime[3] - this.age;
             } else {
-                timeLeft = Math.ceil(this.berryData.growthTime[4] - this.age);
+                timeLeft = this.berryData.growthTime[4] - this.age;
             }
             const growthMultiplier = includeGrowthMultiplier
                 ? App.game.farming.getGrowthMultiplier() * this.getGrowthMultiplier()
                 : 1;
-            return GameConstants.formatTime(timeLeft / growthMultiplier);
+            return GameConstants.formatTime(Math.ceil(timeLeft / growthMultiplier));
         });
 
         this.formattedTimeLeft = ko.pureComputed(() => {
@@ -374,7 +374,7 @@ class Plot implements Saveable {
             }
 
             // Check if berry replants itself
-            const replantChance = this.berryData.replantRate * App.game.farming.getReplantMultiplier() * this.getReplantMultiplier();
+            const replantChance = Math.min(1, this.berryData.replantRate * App.game.farming.getReplantMultiplier() * this.getReplantMultiplier());
             if (Rand.chance(replantChance)) {
                 this.age = 0;
                 this.notifications.push(FarmNotificationType.Replanted);

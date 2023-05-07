@@ -13,6 +13,12 @@ interface gymFlags {
     champion?: boolean;
 }
 
+interface optionalGymArgs {
+    displayName?: string,
+    imageName?: string,
+    environment?: GameConstants.Environment,
+}
+
 /**
  * Gym class.
  */
@@ -74,14 +80,14 @@ class Gym extends TownContent {
             achievement = true,
             champion = false,
         }: gymFlags = {},
-        public displayName?: string
+        public optionalArgs: optionalGymArgs = {}
     ) {
         super(requirements);
         this.flags.quest = quest;
         this.flags.achievement = achievement;
         this.flags.champion = champion;
-        if (displayName) {
-            this.buttonText = displayName;
+        if (optionalArgs.displayName) {
+            this.buttonText = optionalArgs.displayName;
         } else if (!town.includes('Elite') && !town.includes('Champion') && !town.includes('Supreme')) {
             this.buttonText = `${leaderName}'s Gym`;
         } else {
@@ -122,10 +128,18 @@ class Gym extends TownContent {
     }
 
     get imagePath(): string {
-        return `assets/images/gymLeaders/${GymBattle.gym.leaderName}.png`;
+        return `assets/images/npcs/${this.imageName ?? this.leaderName}.png`;
     }
 
     public getPokemonList() {
         return this.pokemons.filter((p) => p.requirements.every((r => r.isCompleted())));
+    }
+
+    get imageName() {
+        return this.optionalArgs.imageName;
+    }
+
+    get displayName() {
+        return this.optionalArgs.displayName;
     }
 }

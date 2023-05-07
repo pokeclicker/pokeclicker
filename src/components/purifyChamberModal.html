@@ -1,0 +1,39 @@
+<div class="modal fade noselect" id="purifyChamberModal" tabindex="-1" role="dialog"
+aria-labelledby="purifyChamberModalLabel">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Purify Chamber</h5>
+            </div>
+            <div class="modal-body">
+                <!-- ko if: App.game.party.caughtPokemon.some((p) => p.shadow == GameConstants.ShadowStatus.Shadow) -->
+                <select id="purify-chamber-selector" class="custom-select" style="margin-right: 8px"
+                        data-bind="options: App.game.party.caughtPokemon.filter((p) => p.shadow == GameConstants.ShadowStatus.Shadow),
+                               optionsText: 'name',
+                               value: App.game.purifyChamber.selectedPokemon"
+                >
+                </select>
+                <div>
+                    <img data-bind="visible: App.game.purifyChamber.selectedPokemon(), attr: { src: App.game.purifyChamber.selectedPokemon() ? PokemonHelper.getImage(App.game.purifyChamber.selectedPokemon().id) : '' }"/>
+                </div>
+                <div>
+                    <h4>Flow needed for next purification:</h4>
+                    <span data-bind="text: App.game.purifyChamber.currentFlow().toLocaleString('en-US')"></span>
+                    <span> / </span>
+                    <span data-bind="text: App.game.purifyChamber.flowNeeded().toLocaleString('en-US')"></span>
+                </div>
+                <div>
+                    <button data-bind="visible: App.game.purifyChamber.canPurify()" class="btn btn-primary" onclick="App.game.purifyChamber.purify()">Purify</button>
+                </div>
+                <!-- /ko -->
+
+                <!-- ko ifnot: App.game.party.caughtPokemon.some((p) => p.shadow == GameConstants.ShadowStatus.Shadow) -->
+                <div>No Shadow Pokémon in the Party</div>
+                <!-- /ko -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -9,6 +9,7 @@ import {
     KalosSubRegions,
     AlolaSubRegions,
     GalarSubRegions,
+    HisuiSubRegions,
 } from '../GameConstants';
 import GymBadgeRequirement from '../requirements/GymBadgeRequirement';
 import TemporaryBattleRequirement from '../requirements/TemporaryBattleRequirement';
@@ -18,6 +19,7 @@ import QuestLineStepCompletedRequirement from '../requirements/QuestLineStepComp
 import * as GameConstants from '../GameConstants';
 import SubRegion from './SubRegion';
 import QuestLineStartedRequirement from '../requirements/QuestLineStartedRequirement';
+import DevelopmentRequirement from '../requirements/DevelopmentRequirement';
 
 export default class SubRegions {
     public static list: Record<number, SubRegion[]> = {};
@@ -41,6 +43,10 @@ export default class SubRegions {
         return this.list[region].find((s) => s.id === subregionID);
     }
 
+    public static isSubRegionUnlocked(region: Region, subRegion: number): boolean {
+        return this.getSubRegionById(region, subRegion).unlocked();
+    }
+
     public static openModal() {
         $('#SubregionModal').modal('show');
     }
@@ -53,6 +59,7 @@ SubRegions.addSubRegion(Region.kanto, new SubRegion('Sevii Islands 4567', KantoS
 SubRegions.addSubRegion(Region.johto, new SubRegion('Johto', JohtoSubRegions.Johto));
 
 SubRegions.addSubRegion(Region.hoenn, new SubRegion('Hoenn', HoennSubRegions.Hoenn));
+SubRegions.addSubRegion(Region.hoenn, new SubRegion('Orre', HoennSubRegions.Orre, new DevelopmentRequirement(), 'Outskirt Stand', undefined));/* new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), 'Outskirt Stand')); */
 
 SubRegions.addSubRegion(Region.sinnoh, new SubRegion('Sinnoh', SinnohSubRegions.Sinnoh));
 
@@ -70,3 +77,5 @@ SubRegions.addSubRegion(Region.galar, new SubRegion('South Galar', GalarSubRegio
 SubRegions.addSubRegion(Region.galar, new SubRegion('North Galar', GalarSubRegions.NorthGalar, new RouteKillRequirement(10, GameConstants.Region.galar, 22), 'Hammerlocke'));
 SubRegions.addSubRegion(Region.galar, new SubRegion('Isle of Armor', GalarSubRegions.IsleofArmor, new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion), 'Armor Station'));
 SubRegions.addSubRegion(Region.galar, new SubRegion('Crown Tundra', GalarSubRegions.CrownTundra, new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion), 'Crown Tundra Station'));
+
+SubRegions.addSubRegion(Region.hisui, new SubRegion('Hisui', HisuiSubRegions.Hisui, undefined, 'Prelude Beach'));

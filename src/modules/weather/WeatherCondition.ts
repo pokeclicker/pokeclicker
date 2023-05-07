@@ -7,7 +7,7 @@ export default class WeatherCondition {
         public color: string,
         public description: string,
         public weight: number,
-        public multipliers: {type: PokemonType, multiplier: number}[] = [],
+        public multipliers: { type: PokemonType, multiplier: number }[] = [],
     ) { }
 
     get tooltip(): string {
