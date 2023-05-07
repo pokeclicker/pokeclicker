@@ -142,7 +142,6 @@ class Egg implements Saveable {
                 partyPokemon.level = 1;
                 partyPokemon.breeding = false;
                 partyPokemon.level = partyPokemon.calculateLevelFromExp();
-                partyPokemon.checkForLevelEvolution();
                 if (partyPokemon.pokerus == GameConstants.Pokerus.Infected) {
                     partyPokemon.pokerus = GameConstants.Pokerus.Contagious;
                 }
