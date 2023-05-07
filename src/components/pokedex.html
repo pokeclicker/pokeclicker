@@ -250,7 +250,14 @@ aria-labelledby="pokedexModalLabel">
                                                         (App.game.party.getPokemon($data.id)?.pokerus >= GameConstants.Pokerus.Contagious ?
                                                             `<br/>EVs: <strong>${App.game.party.getPokemon($data.id).evs().toLocaleString('en-US')}</strong>
                                                             <br/>EV bonus: <strong>×${App.game.party.getPokemon($data.id).calculateEVAttackBonus().toLocaleString('en-US')}</strong>`
-                                                            : ''),
+                                                            : '') +
+                                                        (PokemonHelper.hasMegaEvolution($data.name) ?
+                                                            App.game.party.getPokemon($data.id).attack < pokemonMap[$data.name].attack * GameConstants.MEGA_REQUIRED_ATTACK_MULTIPLIER ?
+                                                                `<br/>Needs at least ${(pokemonMap[$data.name].attack * GameConstants.MEGA_REQUIRED_ATTACK_MULTIPLIER).toLocaleString('en-US')} attack to Mega Evolve.`
+                                                                : PokemonHelper.getMegaStones($data.name).some(m => player.hasMegaStone(m.megaStone)) ?
+                                                                    '<br/>Use a Key Stone to Mega Evolve.'
+                                                                    : `<br/>Obtain the Mega Stone to Mega Evolve ${$data.name}.`
+                                                        : ''),
                                                     trigger: 'hover',
                                                     placement:'bottom'
                                                 }"></a>
