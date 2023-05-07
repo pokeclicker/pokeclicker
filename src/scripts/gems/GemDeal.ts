@@ -29,6 +29,7 @@ class GemDeal {
 
         GemDeal.list[GameConstants.Region.hoenn].push(...this.generateHoennFluteDeals());
         GemDeal.list[GameConstants.Region.unova].push(...this.generateUnovaFluteDeals());
+        GemDeal.list[GameConstants.Region.kalos].push(...this.generateKalosMegaDeals());
         GemDeal.list[GameConstants.Region.kalos].push(...this.generateFurfrouDeal());
         GemDeal.list[GameConstants.Region.alola].push(...this.generateMagikarpJumpDeal());
     }
@@ -64,7 +65,10 @@ class GemDeal {
             1
         ));
         list.push(new GemDeal(
-            [{gemType: PokemonType.Grass, amount: 250000}],
+            [
+                {gemType: PokemonType.Grass, amount: 125000},
+                {gemType: PokemonType.Dragon, amount: 125000},
+            ],
             ItemList.Sceptilite,
             1
         ));
@@ -115,6 +119,41 @@ class GemDeal {
                 {gemType: PokemonType.Ghost, amount: 10000},
             ],
             ItemList.Blue_Flute,
+            1
+        ));
+        return list;
+    }
+
+    private static generateKalosMegaDeals() {
+        const list = [];
+
+        list.push(new GemDeal(
+            [
+                {gemType: PokemonType.Grass, amount: 125000},
+                {gemType: PokemonType.Poison, amount: 125000},
+            ],
+            ItemList.Venusaurite,
+            1
+        ));
+        list.push(new GemDeal(
+            [
+                {gemType: PokemonType.Fire, amount: 125000},
+                {gemType: PokemonType.Dragon, amount: 125000},
+            ],
+            ItemList.Charizardite_X,
+            1
+        ));
+        list.push(new GemDeal(
+            [
+                {gemType: PokemonType.Fire, amount: 125000},
+                {gemType: PokemonType.Flying, amount: 125000},
+            ],
+            ItemList.Charizardite_Y,
+            1
+        ));
+        list.push(new GemDeal(
+            [{gemType: PokemonType.Water, amount: 250000}],
+            ItemList.Blastoisinite,
             1
         ));
         return list;

@@ -5173,6 +5173,9 @@ const SnowbelleCityShop = new Shop([
     ItemList.Reaper_cloth,
 ]);
 
+//Kalos Gem Shop
+const StoneEmporium = new GemMasterShop();
+
 //Kalos NPCs
 
 const LumioseEngineer = new NPC('Engineer', [
@@ -5557,7 +5560,7 @@ TownList['Lumiose City'] = new Town(
     'Lumiose City',
     GameConstants.Region.kalos,
     GameConstants.KalosSubRegions.Kalos,
-    [TemporaryBattleList['Sycamore 1'], TemporaryBattleList['Tierno 1'], DepartmentStoreShop, FriseurFurfrouShop, TemporaryBattleList['Team Flare Lysandre 1'], TemporaryBattleList['Team Flare Xerosic'], TemporaryBattleList['Storyline AZ'], TemporaryBattleList.AZ, TemporaryBattleList.Merilyn, TemporaryBattleList['Grand Duchess Diantha']],
+    [TemporaryBattleList['Sycamore 1'], TemporaryBattleList['Tierno 1'], DepartmentStoreShop, FriseurFurfrouShop, StoneEmporium, TemporaryBattleList['Team Flare Lysandre 1'], TemporaryBattleList['Team Flare Xerosic'], TemporaryBattleList['Storyline AZ'], TemporaryBattleList.AZ, TemporaryBattleList.Merilyn, TemporaryBattleList['Grand Duchess Diantha']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 4)],
         npcs: [ProfSycamore, LumioseDexio, LumioseEngineer, Lysandre1, Calem1, Lysandre3, Lysandre4, AZ1, BlueButton, RedButton],
