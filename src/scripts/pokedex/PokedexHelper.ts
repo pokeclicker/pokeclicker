@@ -92,7 +92,7 @@ class PokedexHelper {
             const displayName = PokemonHelper.displayName(pokemon.name)();
             const filterName = PokedexFilters.name.value();
             const partyName = App.game.party.getPokemonByName(pokemon.name)?.displayName;
-            if (!filterName.test(displayName) && !filterName.test(pokemon.name) && (partyName != undefined && !filterName.test(partyName))) {
+            if (!filterName.test(displayName) && !filterName.test(pokemon.name) && !(partyName != undefined && filterName.test(partyName))) {
                 return false;
             }
 
