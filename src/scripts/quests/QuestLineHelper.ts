@@ -2076,6 +2076,40 @@ class QuestLineHelper {
         App.game.quests.questLines().push(princessDiancieQuestLine);
     }
 
+    public static createUnrivaledPowerQuestLine() {
+        const unrivaledPowerQuestLine = new QuestLine('An Unrivaled Power', 'It has been said that Mewtwo can Mega Evolve. Search for clues on how to find its Mega Stones, so you can control this unrivaled power.', new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion), GameConstants.BulletinBoards.Kalos);
+
+        const clearUnrivaledRed = new CustomQuest(1, 0, 'Red might know something. Fight him at Indigo Plateau Kanto then ask him what he knows.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Unrivaled Red')]());
+        unrivaledPowerQuestLine.addQuest(clearUnrivaledRed);
+
+        const clearUnrivaledBlue = new CustomQuest(1, 0, '.....right. Of course..... Anyway, Blue has contacted you, saying he knows something but wants a fight first. He is at Viridian City.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Unrivaled Blue')]());
+        unrivaledPowerQuestLine.addQuest(clearUnrivaledBlue);
+
+        const talkToUnrivaledBlue = new TalkToNPCQuest(UnrivaledBlue, 'Talk to Blue in Viridian City.');
+        princessDiancieQuestLine.addQuest(talkToUnrivaledBlue);
+
+        const talkToUnrivaledGreen1 = new TalkToNPCQuest(UnrivaledGreen1, 'You found a trainer standing where Mewtwo once did in Cerulean Cave. Talk to Green.');
+        unrivaledPowerQuestLine.addQuest(talkToUnrivaledGreen1);
+
+        const clearUnrivaledGreen = new CustomQuest(1, 0, 'It seems Green is irritated that you caught Mewtwo before she could. Defeat her in Cerulean Cave.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Unrivaled Green')]());
+        unrivaledPowerQuestLine.addQuest(clearUnrivaledGreen);
+
+        const MewtwoniteXReward = () => {
+            player.gainMegaStone(GameConstants.MegaStoneType.Mewtwonite_X);
+            Notifier.notify({
+                title: unrivaledPowerQuestLine.name,
+                message: 'You received Mewtwonite X from Green!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
+        const talkToUnrivaledGreen = new TalkToNPCQuest(UnrivaledGreen, 'Talk to Green in Cerulean Cave.', MewtwoniteXReward);
+        unrivaledPowerQuestLine.addQuest(talkToUnrivaledGreen);
+
+        App.game.quests.questLines().push(unrivaledPowerQuestLine);
+    }
+
 
     // Alola QuestLines
     // Started upon defeating Konikoni City's gym.

@@ -770,10 +770,10 @@ TownList['Viridian City'] = new Town(
     'Viridian City',
     GameConstants.Region.kanto,
     GameConstants.KantoSubRegions.Kanto,
-    [ViridianCityShop],
+    [ViridianCityShop, TemporaryBattleList['Unrivaled Blue']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 1)],
-        npcs: [ViridianCityOldMan1, ViridianCityOldMan2, ViridianCityOldMan3],
+        npcs: [ViridianCityOldMan1, ViridianCityOldMan2, ViridianCityOldMan3, UnrivaledBlue],
     }
 );
 TownList['Pewter City'] = new Town(
@@ -895,7 +895,7 @@ TownList['Indigo Plateau Kanto'] = new Town(
     'Indigo Plateau Kanto',
     GameConstants.Region.kanto,
     GameConstants.KantoSubRegions.Kanto,
-    [GymList['Elite Lorelei'], GymList['Elite Bruno'], GymList['Elite Agatha'], GymList['Elite Lance'], GymList['Champion Blue'], pokeLeagueShop()],
+    [GymList['Elite Lorelei'], GymList['Elite Bruno'], GymList['Elite Agatha'], GymList['Elite Lance'], GymList['Champion Blue'], pokeLeagueShop(), TemporaryBattleList['Unrivaled Red']],
     {
         requirements: [
             new RouteKillRequirement(10, GameConstants.Region.kanto, 23),
@@ -1195,7 +1195,11 @@ TownList['Cerulean Cave'] = new DungeonTown(
     'Cerulean Cave',
     GameConstants.Region.kanto,
     GameConstants.KantoSubRegions.Kanto,
-    [new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion)],
+    [TemporaryBattleList['Unrivaled Green']],
+    {
+        npcs: [UnrivaledGreen1, UnrivaledGreen2, AnomalyMewtwo1],
+    }
 );
 TownList['Ruby Path'] = new DungeonTown(
     'Ruby Path',
@@ -5802,7 +5806,11 @@ TownList['Pokémon Village'] = new DungeonTown(
     'Pokémon Village',
     GameConstants.Region.kalos,
     GameConstants.KalosSubRegions.Kalos,
-    [new RouteKillRequirement(10, GameConstants.Region.kalos, 20)]
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 20)],
+    [],
+    {
+        npcs: [AnomalyMewtwo2],
+    }
 );
 TownList['Victory Road Kalos'] = new DungeonTown(
     'Victory Road Kalos',
