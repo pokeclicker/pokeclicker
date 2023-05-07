@@ -2234,7 +2234,7 @@ class Update implements Saveable {
                     v.name = 'Hollow Truth and Ideals';
                 }
             });
-        }
+        },
     };
 
     constructor() {
