@@ -156,7 +156,7 @@ class BreedingController {
             const displayName = PokemonHelper.displayName(partyPokemon.name)();
             const filterName = BreedingFilters.name.value();
             const partyName = partyPokemon.displayName;
-            if (!filterName.test(displayName) && !filterName.test(partyPokemon.name) && (partyName != undefined && !filterName.test(partyName))) {
+            if (!filterName.test(displayName) && !filterName.test(partyPokemon.name) && !(partyName != undefined && filterName.test(partyName))) {
                 return false;
             }
 
