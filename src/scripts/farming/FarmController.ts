@@ -241,7 +241,7 @@ class FarmController {
         return tooltip.join('<br>');
     });
 
-// For preview in Farm Modal's BerryDex Tab
+    // For preview in Farm Modal's BerryDex Tab
     public static handleBerryDexClick(berryId: number) {
         if ($('#berry-panel').val() === berryId) {
             $('#berryDexModal').modal('show');
