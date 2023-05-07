@@ -136,16 +136,6 @@
                       </td>
                       </tr>
                   </tbody>
-                  <!-- ko if: FarmController.getHint(+$data) !== ""-->
-                  <thead>
-                    <tr class="text-light">
-                      <th class="bg-dark" colspan="2">Hint</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <td colspan="2"><span data-bind="text: FarmController.getHint(+$data)"></span></td>
-                  </tbody>
-                  <!-- /ko -->
                   <thead>
                     <tr class="text-light">
                       <th class="text-left bg-dark">Statistic</th>
@@ -165,6 +155,16 @@
                       <td class="text-left tight"><code data-bind="text: App.game.statistics.berriesObtained[$data]().toLocaleString('en-US')">-</code></td>
                     </tr>
                   </tbody>
+                  <!-- ko if: FarmController.getHint(+$data) !== ""-->
+                  <thead>
+                    <tr class="text-light">
+                      <th class="bg-dark" colspan="2">Hint</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <td colspan="2"><span data-bind="text: FarmController.getHint(+$data)"></span></td>
+                  </tbody>
+                  <!-- /ko -->
                 </table>
             </div>
         </div>
