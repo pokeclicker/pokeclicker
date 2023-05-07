@@ -73,6 +73,7 @@ enum BerryType {
     Lansat,
     Starf,
     Enigma,
+    Hopo,
 }
 
 export default BerryType;

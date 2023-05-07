@@ -128,6 +128,15 @@
                                     <div class="btn btn-primary col-2 item-bag-item" data-bind="template: { name: 'otherItemTemplate', data: $data.name}, click: () => { HeldItem.heldItemSelected($data); $('#heldItemModal').modal('show'); }, visible: $data.isUnlocked()"></div>
                                 <!-- /ko -->
                             </div>
+                            <!-- ko if: Object.values(ItemList).some((i) => i instanceof MegaStoneItem && player.itemList[i.name]()) -->
+                            <h4>Mega Stones</h4>
+                            <div class="row justify-content-center" data-bind="foreach: Object.values(ItemList).filter((i) => i instanceof MegaStoneItem && player.itemList[i.name]())">
+                                <div class="bg-primary text-white rounded px-1 py-1 col-3 col-lg-2 item-bag-item">
+                                    <img width="40px" data-bind="attr: {src: $data.image }">
+                                    <div class="small text-truncate" data-bind="text: GameConstants.humanifyString($data.name)"></div>
+                                </div>
+                            </div>
+                            <!-- /ko -->
                         </div>
                     </div>
 

@@ -231,9 +231,9 @@ export const DUNGEON_HELD_ITEM_MODIFIER = ROUTE_HELD_ITEM_MODIFIER * 4;
 export const DUNGEON_BOSS_HELD_ITEM_MODIFIER = DUNGEON_HELD_ITEM_MODIFIER * 1.5;
 export const HELD_ITEM_CHANCE = 512;
 export const HELD_UNDERGROUND_ITEM_CHANCE = 2048;
-export const GRISEOUS_ITEM_CHANCE = 80;
-export const DNA_ITEM_CHANCE = 60;
-export const LIGHT_ITEM_CHANCE = 100;
+export const GRISEOUS_ITEM_CHANCE = 50;
+export const DNA_ITEM_CHANCE = 45;
+export const LIGHT_ITEM_CHANCE = 75;
 export const RUST_ITEM_CHANCE = 90;
 export const MANE_ITEM_CHANCE = 10;
 
@@ -752,7 +752,7 @@ export const RegionalStarters = [
     [650, 653, 656], // Kalos
     [722, 725, 728], // Alola
     [810, 813, 816], // Galar
-    [722, 155, 501], // Hisui
+    [724.01, 157.01, 503.01], // Hisui
 ];
 
 export enum StoneType {
@@ -2019,4 +2019,57 @@ export enum ShadowStatus {
     None,
     Shadow,
     Purified,
+}
+
+export enum MegaStoneType {
+    Abomasite,
+    Absolite,
+    Aerodactylite,
+    Aggronite,
+    Alakazite,
+    Altarianite,
+    Ampharosite,
+    Audinite,
+    Banettite,
+    Beedrillite,
+    Blastoisinite,
+    Blazikenite,
+    Blue_Orb,
+    Cameruptite,
+    Charizardite_X,
+    Charizardite_Y,
+    Diancite,
+    Galladite,
+    Garchompite,
+    Gardevoirite,
+    Gengarite,
+    Glalitite,
+    Gyaradosite,
+    Heracronite,
+    Houndoominite,
+    Kangaskhanite,
+    Latiasite,
+    Latiosite,
+    Lopunnite,
+    Lucarionite,
+    Manectite,
+    Mawilite,
+    Medichamite,
+    Metagrossite,
+    Meteorite,
+    Mewtwonite_X,
+    Mewtwonite_Y,
+    Pidgeotite,
+    Pinsirite,
+    Red_Orb,
+    Sablenite,
+    Salamencite,
+    Sceptilite,
+    Scizorite,
+    Sharpedonite,
+    Slowbronite,
+    Steelixite,
+    Swampertite,
+    Tyranitarite,
+    Venusaurite,
 }

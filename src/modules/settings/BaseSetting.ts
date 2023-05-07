@@ -47,6 +47,10 @@ export default abstract class BaseSetting<T, S> {
         return true;
     }
 
+    getValidOptions() {
+        return this.options.filter((opt) => opt.isUnlocked());
+    }
+
     get displayName(): string {
         if (!this.cachedTranslatedName) {
             this.cachedTranslatedName = App.translation.get(
