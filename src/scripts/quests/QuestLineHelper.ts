@@ -50,7 +50,7 @@ class QuestLineHelper {
                     steps: [
                         {
                             element: document.getElementById('pokeballSelector'),
-                            intro: 'Select which Poké Ball types to catch Pokémon with based on their caught/shiny status.<br/><i><sup>Hover over the column titles for more info.</sup></i><br/><br/>Capturing Pokémon gains you <img title="Dungeon Tokens\nGained by capturing Pokémon" src="assets/images/currency/dungeonToken.svg" height="25px"> Dungeon Tokens.<br/><br/>Try now by clicking the "Caught" selector to change it.',
+                            intro: 'Select which Poké Ball types to catch Pokémon with based on their caught/shiny status.<br/><i><sup>Hover over the names for more info.</sup></i><br/><br/>Capturing Pokémon gains you <img title="Dungeon Tokens\nGained by capturing Pokémon" src="assets/images/currency/dungeonToken.svg" height="25px"> Dungeon Tokens.<br/><br/>Try now by clicking the "Caught" selector to change it.',
                         },
                     ],
                     exitOnEsc: false,
@@ -235,7 +235,7 @@ class QuestLineHelper {
             });
         };
 
-        const talkToBillsGrandpa5 = new TalkToNPCQuest(BillsGrandpa5, 'Show your Growlithe to Bill\'s Grandpa.', WaterStoneReward);
+        const talkToBillsGrandpa5 = new TalkToNPCQuest(BillsGrandpa5, 'Show your Growlithe to Bill\'s Grandpa.', FireStoneReward);
         BillsGrandpaQuestLine.addQuest(talkToBillsGrandpa5);
 
         const yellowAndRed = new CaptureSpecificPokemonQuest('Pikachu', 'Catch the desired Pokémon.', 1);
@@ -287,11 +287,32 @@ class QuestLineHelper {
     public static createRocketKantoQuestLine() {
         const rocketKantoQuestLine = new QuestLine('Team Rocket', 'Some nasty villains are up to no good.');
 
-        const clearRocketGameCorner = new CustomQuest(1, 0, 'Illegal activity is afoot. Clear the Rocket Game Corner in Celadon City.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Rocket Game Corner')]());
+        const clearRocketGameCorner = new CustomQuest(1, 0, 'Illegal activity is afoot. Clear the Rocket Game Corner in Celadon City.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Rocket Game Corner')](), undefined, undefined,
+            {
+                clearedMessage: 'I see that you raise Pokémon with utmost care. A child like you would never understand what I hope to achieve. I shall step aside this time! I hope we meet again...',
+                npcDisplayName: 'Team Rocket Boss Giovanni',
+                npcImageName: 'Team Rocket Boss Giovanni',
+            });
         rocketKantoQuestLine.addQuest(clearRocketGameCorner);
 
-        const clearSilphCo = new CustomQuest(1, 0, 'Team Rocket has occupied Silph Co. Clear Silph Co. in Saffron City.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Silph Co.')]());
-        rocketKantoQuestLine.addQuest(clearSilphCo);
+        const clearSilphCo1 = new CustomQuest(1, 0, 'Team Rocket has occupied Silph Co. Clear Silph Co. in Saffron City to find the Card Key.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Silph Co.')](), undefined, undefined,
+            {
+                clearedMessage: 'What kept you $playername$? Hahaha! I thought you\'d turn up if I waited here! I guess Team Rocket slowed you down! Not that I care! I saw you in Saffron, so I decided to see if you got better!',
+                npcDisplayName: 'Rival Blue',
+                npcImageName: 'Rival Blue',
+            });
+        rocketKantoQuestLine.addQuest(clearSilphCo1);
+
+        const clearBlue = new CustomQuest(1, 0, 'Blue is getting in your way. Defeat him in Silph Co.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Blue 5')]());
+        rocketKantoQuestLine.addQuest(clearBlue);
+
+        const clearSilphCo2 = new CustomQuest(1, 0, 'Team Rocket has occupied Silph Co. Clear Silph Co. in Saffron City once more to foil their plans.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Silph Co.')](), undefined, undefined,
+            {
+                clearedMessage: 'Arrgh!! I lost again!? Blast it all! You ruined our plans for Silph! But Team Rocket will never fall! $playername$, never forget that all Pokémon exist for Team Rocket! I must go, but I shall return!',
+                npcDisplayName: 'Team Rocket Boss Giovanni',
+                npcImageName: 'Team Rocket Boss Giovanni',
+            });
+        rocketKantoQuestLine.addQuest(clearSilphCo2);
 
         const ViridianGymReward = () => {
             App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1, false);
@@ -421,7 +442,7 @@ class QuestLineHelper {
     }
 
     public static createJohtoBeastsQuestLine() {
-        const johtoBeastsQuestLine = new QuestLine('The Legendary Beasts', 'Investigate the legends surrounding the strange Burned Tower in Ecruteak City.', new GymBadgeRequirement(BadgeEnums.Fog), GameConstants.BulletinBoards.Johto);
+        const johtoBeastsQuestLine = new QuestLine('The Legendary Beasts', 'Investigate the legends surrounding the strange Burned Tower in Ecruteak City.', new RouteKillRequirement(10, GameConstants.Region.johto, 37), GameConstants.BulletinBoards.Johto);
 
         const talktoEusine1 = new TalkToNPCQuest(EcruteakEusine, 'Talk to Eusine in Ecruteak City.');
         johtoBeastsQuestLine.addQuest(talktoEusine1);
@@ -484,7 +505,7 @@ class QuestLineHelper {
         const clearRoute25Suicune = new CustomQuest(1, 0, 'Find Suicune.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Suicune 5')]());
         johtoSuicuneQuestLine.addQuest(clearRoute25Suicune);
 
-        const talktoEusine6 = new TalkToNPCQuest(CeruleanEusine, 'Talk to Eusine in Cerulean City.');
+        const talktoEusine6 = new TalkToNPCQuest(BillsHouseEusine, 'Talk to Eusine in Bill\'s House.');
         johtoSuicuneQuestLine.addQuest(talktoEusine6);
 
         const catchRoute25Suicune = new CaptureSpecificPokemonQuest('Suicune', 'Catch Suicune.');
@@ -707,9 +728,9 @@ class QuestLineHelper {
         App.game.quests.questLines().push(weatherTrioQuestLine);
     }
 
-    // Started upon becoming Hoenn's Chapmion.
+    // Deoxys
     public static createDeoxysQuestLine() {
-        const deoxysQuestLine = new QuestLine('Mystery of Deoxys', 'Discover the mystery of Deoxys.');
+        const deoxysQuestLine = new QuestLine('Mystery of Deoxys', 'Discover the mystery of Deoxys.', new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), GameConstants.BulletinBoards.Hoenn);
 
         // Defeat 50 Pokemon on route 129
         const route129 = new DefeatPokemonsQuest(50, 0, 129, GameConstants.Region.hoenn);
@@ -808,7 +829,7 @@ class QuestLineHelper {
         const clearRubyPath = new CustomQuest(1, 0, 'Locate the Ruby. Clear Ruby Path in Mt. Ember.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Ruby Path')]());
         rubySapphireSeviiQuestLine.addQuest(clearRubyPath);
 
-        const talktoRuby = new TalkToNPCQuest(SeviiRuby, 'Take the Ruby in Ruby Path');
+        const talktoRuby = new TalkToNPCQuest(SeviiRuby, 'Take the Ruby in Ruby Path', () => ItemList.Celios_Errand_Ruby.gain(1));
         rubySapphireSeviiQuestLine.addQuest(talktoRuby);
 
         const talktoCelio4 = new TalkToNPCQuest(OneIslandCelio5, 'Return the Ruby to Celio on One Island');
@@ -1103,9 +1124,8 @@ class QuestLineHelper {
         const talkGoRockGrunt1 = new TalkToNPCQuest(ManaphyGoRock, 'The Go-Rock Squad are definitely going in circles, but they\'re too dumb to realise it. Interrogate one on their method of navigating the Eterna Forest!');
         manaphyQuestLine.addQuest(talkGoRockGrunt1);
 
-        const clearEternaParasect = new CustomQuest(1, 0, 'They\'re using Parasect to navigate the Eterna Forest. Clear out a Parasect and they should get trapped!', () =>
-            App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Eterna Forest')]());
-        manaphyQuestLine.addQuest(clearEternaParasect);
+        const defeatParasect = new DefeatDungeonBossQuest('Eterna Forest', 'Parasect', 0, 'They\'re using Parasect to navigate the Eterna Forest. Clear out a Parasect and they should get trapped!');
+        manaphyQuestLine.addQuest(defeatParasect);
 
         const clearManaphyGoRock4 = new CustomQuest(1, 0, 'Now you\'ve muddied the path, continue the Eterna Forest chase!', () =>
             App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Manaphy Go-Rock MGrunt 4')]());
@@ -1352,6 +1372,207 @@ class QuestLineHelper {
     }
 
     // Kalos QuestLines
+    // Started upon defeating Professor Sycamore in Lumiose City.
+    public static createFlareKalosQuestLine() {
+        const flareKalosQuestLine = new QuestLine('A Beautiful World', 'End Team Flare\'s plan to destroy the world and create a new one in its place.');
+
+        const talkToLysandre1 = new TalkToNPCQuest(Lysandre1, 'Talk to Lysandre inside Professor Sycamore\'s lab in Lumiose City.');
+        flareKalosQuestLine.addQuest(talkToLysandre1);
+
+        const talkToKalem1 = new TalkToNPCQuest(Calem1, 'Well, that was definitely a weird guy... Seems like Calem wants to meet you somewhere in Lumiose City, go talk with him.');
+        flareKalosQuestLine.addQuest(talkToKalem1);
+
+        const talkToKalem2 = new TalkToNPCQuest(Calem2, 'Meet Calem in Ambrette Town.');
+        flareKalosQuestLine.addQuest(talkToKalem2);
+
+        const clearGlitteringCave = new CustomQuest(1, 0, 'Clear Glittering Cave and find the scientist.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Glittering Cave')](), undefined, undefined,
+            {
+                clearedMessage: 'What\'s this? Well, well. What do we have here? A nosy little trainer has come poking around. Listen up! We\'re the fashionable team whose very name makes people tremble in fear: Team Flare! Team Flare\'s goal is to make it so we\'re the only ones who are happy! We don\'t care one bit about what happens to other trainers or Pokémon. Get out of here, kid. Don\'t you know not to play with fire? We\'ll obliterate you!',
+                npcDisplayName: 'Team Flare Grunt',
+                npcImageName: 'Team Flare Grunt (male)',
+            });
+        flareKalosQuestLine.addQuest(clearGlitteringCave);
+
+        const battleTeamFlareGrunt1 = new CustomQuest (1, 0,  'It seems that Team Flare Grunt is holding the scientist captive, free him!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Flare Grunt 1')]());
+        flareKalosQuestLine.addQuest(battleTeamFlareGrunt1);
+
+        // Talk to Fossil Scientist after beating Team Flare Grunt
+        const KalosFossilReward = () => {
+            const item = Rand.boolean() ? 'Sail Fossil' : 'Jaw Fossil';
+
+            Underground.gainMineItem(UndergroundItems.getByName(item).id, 1);
+            Notifier.notify({
+                title: flareKalosQuestLine.name,
+                message: `Fossil Scientist has given you a ${GameConstants.humanifyString(item)}!`,
+                type: NotificationConstants.NotificationOption.success,
+                sound: NotificationConstants.NotificationSound.Quests.quest_ready_to_complete,
+                setting: NotificationConstants.NotificationSetting.Dungeons.rare_dungeon_item_found,
+            });
+        };
+
+        const talkToFossilScientist = new TalkToNPCQuest(FossilScientist, 'From what you gathered, Team Flare wanted to sell fossils for money. Talk with the fossil scientist you just rescued in Glittering Cave.', KalosFossilReward);
+        flareKalosQuestLine.addQuest(talkToFossilScientist);
+
+        const clearCyllageCityGym = new CustomQuest(1, 0, 'With interesting thoughts about Team Flare in your head, you decide to challenge the Cyllage City Gym to become stronger.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Cyllage City')]());
+        flareKalosQuestLine.addQuest(clearCyllageCityGym);
+
+        const talkToTeamFlareGrunt1 = new TalkToNPCQuest(TeamFlareGrunt1, 'You can see in Geosenge Town the Team Flare Grunt you battled earlier. Approach him once more.');
+        flareKalosQuestLine.addQuest(talkToTeamFlareGrunt1);
+
+        const battleTeamFlareGrunt2 = new CustomQuest (1, 0,  'Beat the Team Flare Grunt once more!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Flare Grunt 2')]());
+        flareKalosQuestLine.addQuest(battleTeamFlareGrunt2);
+
+        const talkToDiantha1 = new TalkToNPCQuest(Diantha1, 'You heard rumors of Diantha being in Coumarine City. Go there to check if you can see her.');
+        flareKalosQuestLine.addQuest(talkToDiantha1);
+
+        const talkToLysandre2 = new TalkToNPCQuest(Lysandre2, 'Lysandre is calling you while you are standing in Coumarine City, pick up the phone.');
+        flareKalosQuestLine.addQuest(talkToLysandre2);
+
+        const clearKalosPowerPlant = new CustomQuest(1, 0, 'Well, that was extremely awkward... But ignoring that, Lumiose City still hasn\'t fixed the power outage, go clear the Kalos Power Plant.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Kalos Power Plant')](), undefined, undefined,
+            {
+                clearedMessage: 'You\'re quite strong. Oh yes... very strong, indeed. I certainly didn\'t expect you to be so interesting. But it matters not, we already have enough energy to power the device. I do hope we can meet again!',
+                npcDisplayName: 'Team Flare Aliana',
+                npcImageName: 'Team Flare Aliana',
+            });
+        flareKalosQuestLine.addQuest(clearKalosPowerPlant);
+
+        const clearLumioseCityGym = new CustomQuest(1, 0, 'You\'ve helped with the power outage problem, now the gym in Lumiose City is back up and you can challenge it!', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Lumiose City')]());
+        flareKalosQuestLine.addQuest(clearLumioseCityGym);
+
+        const talkToLysandre3 = new TalkToNPCQuest(Lysandre3, 'Professor Sycamore wants to meet you in Lumiose City. He\'s with Lysandre, go say hi.');
+        flareKalosQuestLine.addQuest(talkToLysandre3);
+
+        const clearPokéBallFactory = new CustomQuest(1, 0, 'For someone so obsessed with beauty he seems to really care about filth... Anyway, the Poké Ball Factory sounds like a fun place, let\'s go check it out.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Poké Ball Factory')](), undefined, undefined,
+            {
+                clearedMessage: 'No way you beat us! Wow, we are lame. Probability is just probability after all... Absolutes do not exist. But enough already! We\'ve already stolen the Poké Balls, Great Balls, and Ultra Balls. Let\'s call it good and leave.',
+                npcDisplayName: 'Team Flare Bryony',
+                npcImageName: 'Team Flare Bryony',
+            });
+        flareKalosQuestLine.addQuest(clearPokéBallFactory);
+
+        // Talk to Poké Ball Factory Director after talking with Team Flare Bryony
+        const KalosMasterBallReward = () => {
+            App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1, false);
+            Notifier.notify({
+                title: flareKalosQuestLine.name,
+                message: 'The Poké Ball Factory Director has given you a Master Ball!',
+                type: NotificationConstants.NotificationOption.success,
+                sound: NotificationConstants.NotificationSound.Quests.quest_ready_to_complete,
+                setting: NotificationConstants.NotificationSetting.Dungeons.rare_dungeon_item_found,
+            });
+        };
+
+        const talkToPokéBallFactoryDirector = new TalkToNPCQuest(PokéBallFactoryDirector, 'Now that Team Flare is not in the Poké Ball Factory anymore, talk with the Director that you just saved.', KalosMasterBallReward);
+        flareKalosQuestLine.addQuest(talkToPokéBallFactoryDirector);
+
+        const talkToProfessorSycamore1 = new TalkToNPCQuest(ProfessorSycamore1, 'Professor Sycamore is waiting for you in Dendemille Town. He has some important things to say about the legendary Pokémon of Kalos.');
+        flareKalosQuestLine.addQuest(talkToProfessorSycamore1);
+
+        const clearFrostCavern = new CustomQuest(1, 0, 'You were going to Frost Cavern for Pokémon, but what you found there is Team Flare instead! Clear it!', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Frost Cavern')](), undefined, undefined,
+            {
+                clearedMessage: 'Not just strong... TOO strong! Not ordinary, indeed. Whatever, it doesn\'t matter, we already tested what we wanted to know. The Abomasnow from this cavern is a fine specimen. The more we agitate it, the stronger its Snow Warning ability becomes, making the snow fall even more furiously. Whoever has the most energy will come out on top! And it\'s Team Flare, and only Team Flare who will survive!',
+                npcDisplayName: 'Team Flare Mable',
+                npcImageName: 'Team Flare Mable',
+            });
+        flareKalosQuestLine.addQuest(clearFrostCavern);
+
+        const clearAnistarCityGym = new CustomQuest(1, 0, 'So everything is over now, right? Right? Go beat Anistar City Gym!', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Anistar City')]());
+        flareKalosQuestLine.addQuest(clearAnistarCityGym);
+
+        const talkToKalosTVNews = new TalkToNPCQuest(KalosTVNews, 'Lysandre is giving an important speech through the TV News. Watch it in Anistar City.');
+        flareKalosQuestLine.addQuest(talkToKalosTVNews);
+
+        const talkToLysandre4 = new TalkToNPCQuest(Lysandre4, 'Wow! Absolutely no one could have seen this coming! You think you might find Lysandre in Lumiose City where you first met him. Look for him!');
+        flareKalosQuestLine.addQuest(talkToLysandre4);
+
+        const battleTeamFlareLysandre1 = new CustomQuest (1, 0,  'Show Team Flare Lysandre the strength of your convictions in Lumiose City!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Flare Lysandre 1')]());
+        flareKalosQuestLine.addQuest(battleTeamFlareLysandre1);
+
+        const talkToAZ1 = new TalkToNPCQuest(AZ1, 'You run after Lysandre and while going through the Labs you find a jailed mysterious man in Lumiose City. It seems like he has a story to tell...');
+        flareKalosQuestLine.addQuest(talkToAZ1);
+
+        const battleTeamFlareXerosic = new CustomQuest (1, 0,  'Now that you learnt what the ultimate weapon is able to do, you need to stop it. Team Flare Xerosic is in the way in Lumiose City, defeat him!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Flare Xerosic')]());
+        flareKalosQuestLine.addQuest(battleTeamFlareXerosic);
+
+        const talkToBlueButton = new TalkToNPCQuest(BlueButton, 'Press the blue button!');
+        const talkToRedButton = new TalkToNPCQuest(RedButton, 'Press the red button!');
+
+        flareKalosQuestLine.addQuest(new MultipleQuestsQuest([
+            talkToBlueButton,
+            talkToRedButton,
+        ],'Xerosic offers you the possibility to stop the ultimate weapon in Lumiose City. Blue or Red Button, press one!', 0, 1)); //Step 24
+
+        const clearTeamFlareSecretHQ1 = new CustomQuest(1, 0, 'The ultimate weapon was activated in Geosenge Town! Go to the Team Flare Secret HQ to put a stop to it! First step: Beating Team Flare Aliana.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Team Flare Secret HQ')](), undefined, undefined,
+            {
+                clearedMessage: 'I had fun at the Kalos Power Plant. Of course, we could have generated electricity with Team Flare\'s technology, too, you know. We just didn\'t think it justified the cost. To create a world for us and us alone, we have to play it smart, you see.',
+                npcDisplayName: 'Team Flare Aliana',
+                npcImageName: 'Team Flare Aliana',
+            });
+        flareKalosQuestLine.addQuest(clearTeamFlareSecretHQ1);
+
+        const clearTeamFlareSecretHQ2 = new CustomQuest(1, 0, 'Continue traversing through the Team Flare Secret HQ! Second step: Beating Team Flare Celosia.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Team Flare Secret HQ')](), undefined, undefined,
+            {
+                clearedMessage: 'In reality, those stones that line Route 10 are the graves of Pokémon. When the ultimate weapon was used to end that horrible war over 3,000 years ago, it stole the lives of all those Pokémon. Their lives were the price of peace then. And if we want to make our own wishes come true today, we in Team Flare also have to sacrifice something precious.',
+                npcDisplayName: 'Team Flare Celosia',
+                npcImageName: 'Team Flare Celosia',
+            });
+        flareKalosQuestLine.addQuest(clearTeamFlareSecretHQ2);
+
+        const clearTeamFlareSecretHQ3 = new CustomQuest(1, 0, 'You should be halfway through. Go further in the Team Flare Secret HQ! Third step: Beating Team Flare Bryony.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Team Flare Secret HQ')](), undefined, undefined,
+            {
+                clearedMessage: 'We\'ve been using the electricity we stole from the Power Plant to get everything prepared for activating the ultimate weapon. But it\'s not like that\'s all we\'ll need to use it. Are you following me? We\'ll need energy absorbed from Pokémon to power the device! Yes! It\'s the stones on Route 10 that will steal that energy for us and power the ultimate weapon.',
+                npcDisplayName: 'Team Flare Bryony',
+                npcImageName: 'Team Flare Bryony',
+            });
+        flareKalosQuestLine.addQuest(clearTeamFlareSecretHQ3);
+
+        const clearTeamFlareSecretHQ4 = new CustomQuest(1, 0, 'You are getting close. Resume delving into the Team Flare Secret HQ! Fourth step: Beating Team Flare Mable.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Team Flare Secret HQ')](), undefined, undefined,
+            {
+                clearedMessage: 'The power of the Legendary Pokémon... The power to grant life to all around it... The power to steal life from all around it... It\'s a mysterious ability that even scientists like us haven\'t been able to really decode. What d\'you think will happen to the world if we fuel the ultimate weapon with something like that?',
+                npcDisplayName: 'Team Flare Mable',
+                npcImageName: 'Team Flare Mable',
+            });
+        flareKalosQuestLine.addQuest(clearTeamFlareSecretHQ4);
+
+        const clearTeamFlareSecretHQ5 = new CustomQuest(1, 0, 'You are almost there! One more time traversing through the Team Flare Secret HQ and you\'ll get to the end! Fifth step: Beating Team Flare Lysandre.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Team Flare Secret HQ')]());
+        flareKalosQuestLine.addQuest(clearTeamFlareSecretHQ5);
+
+        const talkToTeamFlareLysandre1 = new TalkToNPCQuest(TeamFlareLysandre1, 'This is it, you\'ve beaten Lysandre at the top of his game in Team Flare Secret HQ, right? He might have something else to say...');
+        flareKalosQuestLine.addQuest(talkToTeamFlareLysandre1);
+
+        const battleXerneas = new CustomQuest (1, 0,  'Calm Xerneas down!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Xerneas')]());
+        const battleYveltal = new CustomQuest (1, 0,  'Calm Yveltal down!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Yveltal')]());
+
+        flareKalosQuestLine.addQuest(new MultipleQuestsQuest([
+            battleXerneas,
+            battleYveltal,
+        ],'You go to the lowest level of the Team Flare Secret HQ as Lysandre told you to. There you find Xerneas and Yveltal fighting each other! Fight them yourself and calm them down!'));
+
+        const talkToTeamFlareBossLysandre1 = new TalkToNPCQuest(TeamFlareBossLysandre1, 'Lysandre appears menacingly in front of you in Team Flare Secret HQ. He doesn\'t seem fazed about you subsiding both legendary Pokémon.');
+        flareKalosQuestLine.addQuest(talkToTeamFlareBossLysandre1);
+
+        const battleTeamFlareBossLysandre1 = new CustomQuest (1, 0,  'Stop Team Flare Boss Lysandre in Team Flare Secret HQ once and for all!!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Flare Boss Lysandre 1')]());
+        flareKalosQuestLine.addQuest(battleTeamFlareBossLysandre1);
+
+        const clearKalosLeague = new CustomQuest(1, 0, 'You did it! You saved Kalos! There is nothing else to do except to continue your journey to beat the Kalos Pokémon League!', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Champion Diantha')]());
+        flareKalosQuestLine.addQuest(clearKalosLeague);
+
+        // Battle AZ and finish the quest
+        const KalosKeyStoneReward = () => {
+            player.gainItem('Key_stone', 1);
+            Notifier.notify({
+                message: 'You got a Key Stone for completing the quest!',
+                type: NotificationConstants.NotificationOption.success,
+                sound: NotificationConstants.NotificationSound.Quests.quest_ready_to_complete,
+            });
+        };
+
+        const battleAZ1 = new CustomQuest (1, KalosKeyStoneReward,  'What an amazing trainer! You became Kalos Champion! There is a parade in your honor in Lumiose City. But wait, AZ is there asking you for a battle. Show him what being a Pokémon Trainer is like!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Storyline AZ')]());
+        flareKalosQuestLine.addQuest(battleAZ1);
+
+        App.game.quests.questLines().push(flareKalosQuestLine);
+    }
+
 
     public static createDeltaEpisodeQuestLine() {
         const deltaEpisodeQuestLine = new QuestLine('The Delta Episode', 'A catastrophe is on the horizon! Work with the people of Hoenn to stop it.', new GymBadgeRequirement(BadgeEnums.Rumble), GameConstants.BulletinBoards.Kalos);
@@ -1466,7 +1687,7 @@ class QuestLineHelper {
         const talkToMaxie = new TalkToNPCQuest(Maxie, 'Talk to Maxie in the Team Magma Hideout.');
         deltaEpisodeQuestLine.addQuest(talkToMaxie);
 
-        const talkToWallace3 = new TalkToNPCQuest(Wallace3, 'Talk to Wallace in the Sootopolis City.');
+        const talkToWallace3 = new TalkToNPCQuest(Wallace3, 'Talk to Wallace in Sootopolis City.');
         deltaEpisodeQuestLine.addQuest(talkToWallace3);
 
         const fightDeltaWallace = new CustomQuest (1, 0, 'Defeat Wallace in Sootopolis City.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Delta Wallace')]());
@@ -1475,11 +1696,11 @@ class QuestLineHelper {
         const fightZinnia2 = new CustomQuest (1, 0, 'Defeat Zinnia at the Sky Pillar.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Zinnia 2')]());
         deltaEpisodeQuestLine.addQuest(fightZinnia2);
 
-        const catchDeltaRayquaza = new CaptureSpecificPokemonQuest('Rayquaza', 'Catch or hatch Rayquaza', 1, true, 0, undefined);
+        const catchDeltaRayquaza = new CaptureSpecificPokemonQuest('Rayquaza', 'Catch or hatch Rayquaza.', 1, true, 0, undefined);
         deltaEpisodeQuestLine.addQuest(catchDeltaRayquaza);
 
         const MeteoriteReward = () => {
-            App.game.party.getPokemonByName('Rayquaza').giveMegastone();
+            player.gainMegaStone(GameConstants.MegaStoneType.Meteorite);
             Notifier.notify({
                 title: deltaEpisodeQuestLine.name,
                 message: 'Your Meteorite Shards combine into a Meteorite!',
@@ -1491,7 +1712,7 @@ class QuestLineHelper {
         const talkToZinnia6 = new TalkToNPCQuest(Zinnia6, 'Talk to Zinnia at the Sky Pillar.', MeteoriteReward);
         deltaEpisodeQuestLine.addQuest(talkToZinnia6);
 
-        const catchMegaRayquaza = new CaptureSpecificPokemonQuest('Mega Rayquaza', 'Mega Evolve Rayquaza', 1, false, 0, undefined);
+        const catchMegaRayquaza = new CaptureSpecificPokemonQuest('Mega Rayquaza', 'Mega Evolve Rayquaza.', 1, false, 0, undefined);
         deltaEpisodeQuestLine.addQuest(catchMegaRayquaza);
 
         const talkToZinnia7 = new TalkToNPCQuest(Zinnia7, 'Talk to Zinnia at the Sky Pillar.');
@@ -1506,6 +1727,100 @@ class QuestLineHelper {
         App.game.quests.questLines().push(deltaEpisodeQuestLine);
     }
 
+    public static createPrimalReversionQuestLine() {
+        const primalReversionQuestLine = new QuestLine('Primal Reversion', 'Teams Aqua and Magma have been trying to unlock the Primal power of Groudon and Kyogre.', new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 30), new ObtainedPokemonRequirement('Groudon'), new ObtainedPokemonRequirement('Kyogre')]), GameConstants.BulletinBoards.Hoenn);
+
+        const talkToMrStone1 = new TalkToNPCQuest(MrStone1, 'Talk to Mr. Stone in Slateport City.');
+        primalReversionQuestLine.addQuest(talkToMrStone1);
+
+        const clearGranite2 = new CustomQuest(10, 0, 'Clear Granite Cave 10 times to search for the Primal Reversion Mural.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Granite Cave')]());
+        primalReversionQuestLine.addQuest(clearGranite2);
+
+        const viewPrimalMural1 = new TalkToNPCQuest(PrimalMural1, 'Examine the first Primal Mural in Granite Cave.');
+
+        const viewPrimalMural2 = new TalkToNPCQuest(PrimalMural2, 'Examine the second Primal Mural in Granite Cave.');
+
+        primalReversionQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                viewPrimalMural1,
+                viewPrimalMural2,
+            ], 'Examine the Primal Murals.'));
+
+        const talkToSteven = new TalkToNPCQuest(PrimalSteven, 'Talk to Steven in the Granite Cave to learn more about the Primal Murals.');
+        primalReversionQuestLine.addQuest(talkToSteven);
+
+        const talkToStern1 = new TalkToNPCQuest(Stern1, 'Find Captain Stern at Sea Mauville during Thunderstorm Weather.');
+        primalReversionQuestLine.addQuest(talkToStern1);
+
+        const fightStern = new CustomQuest (1, 0, 'Fight Captain Stern at Sea Mauville.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Captain Stern')]());
+        primalReversionQuestLine.addQuest(fightStern);
+
+        const talkToStern2 = new TalkToNPCQuest(Stern2, 'Talk to Captain Stern at Sea Mauville about the mysteries of the sea.');
+        primalReversionQuestLine.addQuest(talkToStern2);
+
+        const findMetalCoats = new CustomQuest(10, undefined, 'Find 10 Metal Coats.', () => player.itemList.Metal_coat());
+
+        const findMysticWater = new CustomQuest(1, undefined, 'Find one Mystic Water.', () => player.itemList.Mystic_Water());
+
+        const findHeatRocks = new CustomQuest(3, undefined, 'Find 3 Heat Rocks.', () => player.mineInventory().find(item => item.name == 'Heat Rock')?.amount() ?? 0);
+
+        primalReversionQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                findMetalCoats,
+                findMysticWater,
+                findHeatRocks,
+            ], 'Obtain the items Captain Stern needs to upgrade the Submarine.'));
+
+        const talkToStern3 = new TalkToNPCQuest(Stern3, 'Talk to Captain Stern at Sea Mauville and upgrade the submarine.');
+        primalReversionQuestLine.addQuest(talkToStern3);
+
+        const clearSeafloorCavern2 = new CustomQuest(10, 0, 'Clear the Seafloor Cavern 10 times to learn more about the mysterious occurrences.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Seafloor Cavern')]());
+        primalReversionQuestLine.addQuest(clearSeafloorCavern2);
+
+        const fightArchiePrimal = new CustomQuest (1, 0, 'Defeat Archie', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Archie Primal')]());
+
+        const fightMaxiePrimal = new CustomQuest (1, 0, 'Defeat Maxie', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Maxie Primal')]());
+
+        primalReversionQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                fightArchiePrimal,
+                fightMaxiePrimal,
+            ], 'Defeat the Team Aqua and Team Magma leaders in the Seafloor Cavern.'));
+
+        const clearWeatherInstitute2 = new CustomQuest(10, 0, 'Clear the Weather Institute 10 times to search for clues about Archie and Maxie\'s plans.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Weather Institute')]());
+        primalReversionQuestLine.addQuest(clearWeatherInstitute2);
+
+        const weatherScan = new TalkToNPCQuest(WeatherScan, 'Scan the area for unusual weather at the Weather Institute.');
+        primalReversionQuestLine.addQuest(weatherScan);
+
+        const clearMtPyre = new CustomQuest(1, 0, 'Investigate Mt. Pyre for the source of the disturbances.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Mt. Pyre')]());
+        primalReversionQuestLine.addQuest(clearMtPyre);
+
+        const talkToPrimalArchie = new TalkToNPCQuest(PrimalArchie, 'Talk to Archie.');
+
+        const talkToPrimalMaxie = new TalkToNPCQuest(PrimalMaxie, 'Talk to Maxie.');
+
+        primalReversionQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                talkToPrimalArchie,
+                talkToPrimalMaxie,
+            ], 'Find out what the Team Leaders are up to at Mt. Pyre.'));
+
+        const fightPrimalGroudon = new CustomQuest (1, 0, 'Defeat Primal Groudon in Sunny Weather.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Primal Groudon')]());
+
+        const fightPrimalKyogre = new CustomQuest (1, 0, 'Defeat Primal Kyogre in Raining Weather.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Primal Kyogre')]());
+
+        primalReversionQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                fightPrimalGroudon,
+                fightPrimalKyogre,
+            ], 'Defeat the Primal Reversions. Predict their rampage by monitoring the weather at the Weather Institute.'));
+
+        const talkToMrStone2 = new TalkToNPCQuest(MrStone2, 'Talk to Mr. Stone in Slateport City.');
+        primalReversionQuestLine.addQuest(talkToMrStone2);
+
+        App.game.quests.questLines().push(primalReversionQuestLine);
+    }
 
     public static createDetectivePikachuQuestLine() {
         const detectivePikachuQuestLine = new QuestLine('Detective Pikachu', 'Detective Pikachu\'s partner has gone missing, and he needs your help!', new MultiRequirement([new ObtainedPokemonRequirement('Detective Pikachu'), new GymBadgeRequirement(BadgeEnums.Bug)]) , GameConstants.BulletinBoards.Kalos);
@@ -2787,16 +3102,72 @@ class QuestLineHelper {
         App.game.quests.questLines().push(magearnaQuestLine);
     }
 
-    // Event QuestLines
-    // Open the game between April 8-29.
-    public static createFindSurpriseTogepiForEasterQuestLine() {
-        const findSurpriseTogepiForEasterQuestLine = new QuestLine('Togepi Egg Hunt', 'A strange Togepi has been spotted, but cannot be found!');
+    public static createHisuiForcesQuestLine() {
+        const hisuiForcesQuestLine = new QuestLine('Incarnate Forces of Hisui', 'Cogita would like you to catch the Forces of Nature.', new DevelopmentRequirement(), GameConstants.BulletinBoards.Hisui);
 
-        const surpriseTogepi = pokemonMap['Surprise Togepi'];
+        const talktoForcesCogita1 = new TalkToNPCQuest(ForcesCogita1, 'Speak to Cogita in Galaxy Hall.');
+        hisuiForcesQuestLine.addQuest(talktoForcesCogita1);
+
+        const chaseTornadus = new CustomQuest (3, 0, 'Pursue Tornadus in the Alabaster Icelands.', () =>
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Tornadus 1')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Tornadus 2')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Tornadus 3')]()
+        );
+        const captureTornadus = new CaptureSpecificPokemonQuest('Tornadus', 'Catch Tornadus in the Alabaster Icelands', 1, true, 0, undefined);
+        const chaseThundurus = new CustomQuest (3, 0, 'Pursue Thundurus in the Cobalt Coastlands.', () =>
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Thundurus 1')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Thundurus 2')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Thundurus 3')]()
+        );
+        const captureThundurus = new CaptureSpecificPokemonQuest('Thundurus', 'Catch Thundurus in the Cobalt Coastlands', 1, true, 0, undefined);
+        const chaseLandorus = new CustomQuest (3, 0, 'Pursue Landorus in the Obsidian Fieldlands.', () =>
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Landorus 1')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Landorus 2')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Landorus 3')]()
+        );
+        const captureLandorus = new CaptureSpecificPokemonQuest('Landorus', 'Catch Landorus in the Obsidian Fieldlands', 1, true, 0, undefined);
+        hisuiForcesQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                chaseTornadus,
+                captureTornadus,
+                chaseThundurus,
+                captureThundurus,
+                chaseLandorus,
+                captureLandorus,
+            ], 'Tornadus, Thundurus and Landorus have been sighted in the Alabaster Icelands, Cobalt Coastlands and Obsidian Fieldland respectively. Pursue and capture them.'));
+
+        const talktoForcesCogita2 = new TalkToNPCQuest(ForcesCogita2, 'Speak to Cogita at Ancient Retreat.');
+        hisuiForcesQuestLine.addQuest(talktoForcesCogita2);
+
+        const chaseEnamorus = new CustomQuest (3, 0, 'Pursue Enamorus in the Crimson Mirelands.', () =>
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Enamorus 1')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Enamorus 2')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Enamorus 3')]()
+        );
+        hisuiForcesQuestLine.addQuest(chaseEnamorus);
+
+        const captureEnamorus = new CaptureSpecificPokemonQuest('Enamorus', 'Catch Enamorus roaming around Hisui.', 1, true, 0, undefined);
+        hisuiForcesQuestLine.addQuest(captureEnamorus);
+
+        const talktoForcesCogita3 = new TalkToNPCQuest(ForcesCogita3, 'Speak to Cogita at Ancient Retreat.');
+        hisuiForcesQuestLine.addQuest(talktoForcesCogita3);
+
+        App.game.quests.questLines().push(hisuiForcesQuestLine);
+    }
+
+    public static createHisuiArceusQuestLine() {
+        const hisuiArceusQuestLine = new QuestLine('Arceus: The Deified Pokémon', 'Discover the truth of the Pokémon deity, Arceus.', new DevelopmentRequirement(), GameConstants.BulletinBoards.Hisui);
+
+        App.game.quests.questLines().push(hisuiArceusQuestLine);
+    }
+
+    // Event QuestLines
+    // Open the game between April 8-29 (Easter).
+    public static createFindSurpriseTogepiForEasterQuestLine() {
+        const findSurpriseTogepiForEasterQuestLine = new QuestLine('Togepi Egg Hunt', 'A strange Togepi has been spotted, but cannot be found!', new SpecialEventRequirement('Easter'), GameConstants.BulletinBoards.All);
 
         const togepiInKantoSetup = () => {
             dungeonList['Viridian Forest'].bossList.push(new DungeonTrainer('Egg Hunter', [new GymPokemon('Surprise Togepi', 300000, 100)], { weight: 1, requirement: new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion) }));
-            App.game.statistics.pokemonDefeated[surpriseTogepi.id](0);
         };
         const afterDefeatingTogepiInKanto = () => {
             Notifier.notify({
@@ -2809,7 +3180,7 @@ class QuestLineHelper {
 
             dungeonList['Viridian Forest'].bossList = dungeonList['Viridian Forest'].bossList.filter(boss => boss.name != 'Egg Hunter');
         };
-        const defeatTogepiInKanto = new CustomQuest(1, afterDefeatingTogepiInKanto, 'A strange Togepi has been seen around Kanto. Go look for it! Maybe Erika knows more.', App.game.statistics.pokemonDefeated[surpriseTogepi.id], 0, togepiInKantoSetup);
+        const defeatTogepiInKanto = new DefeatDungeonBossQuest('Viridian Forest', 'Egg Hunter', afterDefeatingTogepiInKanto, 'A strange Togepi has been seen around Kanto. Go look for it! Maybe Erika knows more.', togepiInKantoSetup);
         findSurpriseTogepiForEasterQuestLine.addQuest(defeatTogepiInKanto);
 
         const togepiInJohtoSetup = () => {
@@ -2825,7 +3196,7 @@ class QuestLineHelper {
             });
             dungeonList['Ilex Forest'].bossList = dungeonList['Ilex Forest'].bossList.filter(boss => boss.name != 'Egg Hunter');
         };
-        const encounterSurpriseTogepiInJohto = new CustomQuest(1, afterDefeatingTogepiInJohto, 'Another report just came in, stating that they saw a strange egg boarding the ferry to Johto!', App.game.statistics.pokemonDefeated[surpriseTogepi.id], 1, togepiInJohtoSetup);
+        const encounterSurpriseTogepiInJohto = new DefeatDungeonBossQuest('Ilex Forest', 'Egg Hunter', afterDefeatingTogepiInJohto, 'Another report just came in, there have been sightings of a strange egg in a forest in Johto!', togepiInJohtoSetup);
         findSurpriseTogepiForEasterQuestLine.addQuest(encounterSurpriseTogepiInJohto);
 
         const togepiInHoennSetup = () => {
@@ -2841,15 +3212,15 @@ class QuestLineHelper {
             });
             dungeonList['Petalburg Woods'].bossList = dungeonList['Petalburg Woods'].bossList.filter(boss => boss.name != 'Egg Hunter');
         };
-        const encounterTogepiInHoenn = new CustomQuest(1, afterDefeatingTogepiInHoenn, 'There is a big Egg Hunt going on in Petalburg Woods right now; maybe you should take a look?', App.game.statistics.pokemonDefeated[surpriseTogepi.id], 2, togepiInHoennSetup);
+        const encounterTogepiInHoenn = new DefeatDungeonBossQuest('Petalburg Woods', 'Egg Hunter', afterDefeatingTogepiInHoenn, 'There is a big Egg Hunt going on in the woods south of Rustboro in Hoenn; maybe you should take a look?', togepiInHoennSetup);
         findSurpriseTogepiForEasterQuestLine.addQuest(encounterTogepiInHoenn);
 
         App.game.quests.questLines().push(findSurpriseTogepiForEasterQuestLine);
     }
 
-    // Open the game on April 1.
+    // Open the game on April 1 (Hoopa Day).
     public static createHoopaDayPikabluQuestLine() {
-        const hoopaDayPikabluQuestLine = new QuestLine('How blu mouse?', 'Apparently a strange blue mouse-like Pokémon might be out there somewhere?');
+        const hoopaDayPikabluQuestLine = new QuestLine('How blu mouse?', 'Apparently a strange blue mouse-like Pokémon might be out there somewhere?', new SpecialEventRequirement('Hoopa Day'), GameConstants.BulletinBoards.All);
 
         const PikabluCatch = new CaptureSpecificPokemonQuest(
             'Marill',
@@ -2896,8 +3267,10 @@ class QuestLineHelper {
         this.createGiratinaQuestLine();
         this.createPlasmaUnovaQuestLine();
         this.createDeltaEpisodeQuestLine();
+        this.createPrimalReversionQuestLine();
         this.createDetectivePikachuQuestLine();
         this.createVivillonQuestLine();
+        this.createFlareKalosQuestLine();
         this.createPrincessDiancieQuestLine();
         this.createAshKetchumQuestLine();
         this.createSkullAetherAlolaQuestLine();
@@ -2912,6 +3285,8 @@ class QuestLineHelper {
         this.createDynaTreeBirdsQuestLine();
         this.createAncientGolemsQuestLine();
         this.createOriginalColorMagearnaQuestLine();
+        this.createHisuiForcesQuestLine();
+        this.createHisuiArceusQuestLine();
         this.createFindSurpriseTogepiForEasterQuestLine();
         this.createHoopaDayPikabluQuestLine();
         this.createDrSplashQuestLine();

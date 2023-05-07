@@ -25,6 +25,7 @@ class Player {
     private _origins: Array<any>;
     public regionStarters: Array<KnockoutObservable<GameConstants.Starter>>;
     public subregionObject: KnockoutObservable<SubRegion>;
+    public trainerId: string;
 
     constructor(savedPlayer?) {
         const saved: boolean = (savedPlayer != null);
@@ -106,6 +107,8 @@ class Player {
 
         // Save game origins, useful for tracking down any errors that may not be related to the main game
         this._origins = [...new Set((savedPlayer._origins || [])).add(window.location?.origin)];
+
+        this.trainerId = savedPlayer.trainerId || Rand.intBetween(0, 999999).toString().padStart(6, '0');
     }
 
     private _itemList: { [name: string]: KnockoutObservable<number> };
@@ -202,6 +205,26 @@ class Player {
         }
     }
 
+    public hasMegaStone(megaStone: GameConstants.MegaStoneType): boolean {
+        return this._itemList[GameConstants.MegaStoneType[megaStone]]() > 0;
+    }
+
+    public gainMegaStone(megaStone: GameConstants.MegaStoneType, notify = true) {
+        const name = GameConstants.MegaStoneType[megaStone];
+        if (!this._itemList[name]()) {
+            player.gainItem(name, 1);
+        }
+
+        if (notify) {
+            const item = ItemList[GameConstants.MegaStoneType[megaStone]] as MegaStoneItem;
+            const partyPokemon = App.game.party.getPokemonByName(item.basePokemon);
+            Notifier.notify({
+                message: partyPokemon ? `${partyPokemon.displayName} has gained a Mega Stone!` : `You have gained a Mega Stone for ${item.basePokemon}!`,
+                type: NotificationConstants.NotificationOption.success,
+            });
+        }
+    }
+
     // TODO(@Isha) move to underground classes.
     public hasMineItems() {
         for (let i = 0; i < this.mineInventory().length; i++) {
@@ -246,6 +269,7 @@ class Player {
             'highestRegion',
             'highestSubRegion',
             'regionStarters',
+            'trainerId',
         ];
         const plainJS = ko.toJS(this);
         Object.entries(plainJS._itemMultipliers).forEach(([key, value]) => {

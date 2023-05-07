@@ -7,6 +7,7 @@ type TemporaryBattleOptionalArgument = {
     imageName?: string,
     visibleRequirement?: Requirement,
     hideTrainer?: boolean,
+    environment?: GameConstants.Environment
 };
 
 class TemporaryBattle extends TownContent {
@@ -48,7 +49,7 @@ class TemporaryBattle extends TownContent {
     }
     public getImage() {
         const imageName = this.optionalArgs?.imageName ?? this.name;
-        return `assets/images/temporaryBattle/${imageName}.png`;
+        return `assets/images/npcs/${imageName}.png`;
     }
 
     constructor(

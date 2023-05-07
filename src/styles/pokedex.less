@@ -1,4 +1,4 @@
-@import "variables.less";
+@import url("variables.less");
 
 @pokedexEntryBorderRadius: 6px;
 
@@ -8,6 +8,11 @@
   margin: 12px;
   max-width: calc(50% - 24px);
 
+  &.disabled {
+    opacity: .5;
+    pointer-events: none;
+  }
+
   img {
     padding: 16px 0;
   }
@@ -15,7 +20,7 @@
   span {
     position: absolute;
     color: whitesmoke;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 50%);
     left: 0;
     right: 0;
     font-size: 14px;
@@ -29,17 +34,15 @@
     content: 'Attack: ';
   }
 
-  
+
 }
 
 .pokemon-not-seen {
-  -webkit-filter: brightness(0%); /* Safari 6.0 - 9.0 */
   filter: brightness(0%);
   opacity: 0.6;
 }
 
 .pokemon-seen-but-not-caught {
-  -webkit-filter: brightness(0.5) grayscale(1) ; /* Safari 6.0 - 9.0 */
   filter: brightness(0.5) grayscale(1);
   opacity: 0.6;
 }
@@ -56,9 +59,74 @@
 .pokedex-border-bottom {
   border-bottom: 1px solid grey;
 }
+
 @media (min-width: 768px) {
   .checkbox-border-x {
     border-left: 1px solid grey;
     border-right: 1px solid grey;
   }
+}
+
+/* Scrolling divs */
+@media (min-width: 768px) {
+  .scrolling-div-pokedex {
+      overflow-y: auto;
+      height: calc(100vh - 140px);
+  }
+}
+
+@media (max-width: 768px) {
+  .scrolling-div-pokedex {
+      overflow-y: auto;
+      height: calc(100vh - 240px);
+  }
+}
+
+.pokedex-modal {
+  max-width: 1250px !important;
+}
+
+/* Pokemon list border left */
+@media (min-width: 768px) {
+  .pokemon-list {
+    position: relative;
+  }
+
+  .pokemon-list::before {
+    content:"";
+    position: absolute;
+    left: -1px;
+    height: 100%;
+    border-left: 1px solid grey;
+  }
+}
+
+/* Pokedex entry top and bottom text, also used in hatchery */
+.pokedex-top-text {
+  top: 0;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+.pokedex-bottom-text {
+  bottom: 0;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px
+}
+
+/* Pokedex Category dropdown */
+.dropdown button,
+.dropdown .dropdown-item {
+  word-wrap: break-word;
+  white-space: normal !important;
+  overflow: hidden;
+}
+
+.dropdown-item:hover {
+  background-color: var(--secondary) !important;
+}
+
+/* For white dropdown buttons, they have white text in dark themes. Shouldn't affect light themes */
+.btn-dropdown:hover {
+  color:#444 !important;
 }

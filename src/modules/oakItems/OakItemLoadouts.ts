@@ -51,7 +51,7 @@ export default class OakItemLoadouts implements Saveable {
         return this.loadouts[this.selectedLoadout()];
     }
 
-    fromJSON(json: Array<{name: string, loadout: Array<number>}>) {
+    fromJSON(json: Array<{ name: string, loadout: Array<number> }>) {
         json?.forEach((loadout, index) => {
             this.loadouts[index] = new OakItemLoadout(decodeURI(loadout.name), loadout.loadout);
         });

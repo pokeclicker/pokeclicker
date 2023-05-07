@@ -111,6 +111,10 @@ class GameController {
         const $undergroundModal = $('#mineModal');
         $undergroundModal.on('hidden.bs.modal shown.bs.modal', _ => $undergroundModal.data('disable-toggle', false));
         const underground = App.game.underground;
+        // Quests
+        const $questModal = $('#QuestModal');
+        $questModal.on('hidden.bs.modal shown.bs.modal', _ => $questModal.data('disable-toggle', false));
+        const quests = App.game.quests;
         // Farm
         const $farmsModal = $('#farmModal');
         $farmsModal.on('hidden.bs.modal shown.bs.modal', _ => $farmsModal.data('disable-toggle', false));
@@ -123,6 +127,7 @@ class GameController {
         const $shipModal = $('#ShipModal');
         // Shop
         const $shopModal = $('#shopModal');
+        $shopModal.on('hidden.bs.modal shown.bs.modal', _ => $shopModal.data('disable-toggle', false));
 
         $(document).on('keydown', e => {
             // Ignore any of our controls if focused on an input element
@@ -227,7 +232,7 @@ class GameController {
                     }
                     // Select Pokeball from pokeball selector (0 = none)
                     if (numberKey < App.game.pokeballs.pokeballs.length) {
-                        pokeballs.selectedSelection()(numberKey);
+                        pokeballs.selectedSelection()?.(numberKey);
                     }
                     return e.preventDefault();
                 }
@@ -410,6 +415,16 @@ class GameController {
                         return e.preventDefault();
                     }
                     break;
+                case Settings.getSetting('hotkey.shop').value:
+                    // Open the Poke Mart
+                    if (App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Champion Lance')]() >= 1 && !$shopModal.data('disable-toggle')) {
+                        $('.modal').modal('hide');
+                        ShopHandler.showShop(pokeMartShop);
+                        $shopModal.data('disable-toggle', true);
+                        $shopModal.modal('toggle');
+                        return e.preventDefault();
+                    }
+                    break;
                 case Settings.getSetting('hotkey.forceSave').value:
                     if (GameController.keyHeld.Shift) {
                         Save.store(player);
@@ -421,6 +436,15 @@ class GameController {
                         (Settings.getSetting('sound.muted') as BooleanSetting).toggle();
                         return e.preventDefault();
                     }
+                case Settings.getSetting('hotkey.dailyQuests').value:
+                    // Open the Quests
+                    if (quests.isDailyQuestsUnlocked() && !$questModal.data('disable-toggle')) {
+                        $('.modal').modal('hide');
+                        $questModal.data('disable-toggle', true);
+                        $questModal.modal('toggle');
+                        return e.preventDefault();
+                    }
+                    break;
                 default:
                     // Check for a number key being pressed
                     if (isNumberKey) {
