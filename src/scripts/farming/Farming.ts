@@ -2226,5 +2226,12 @@ class Farming implements Feature {
         [SizeUnits.inch]: (num) => `${(num / 2.54).toFixed(1)}\u2033`, // inches
     };
 
+    public auraDisplay(berry: BerryType, stage: number) {
+        if (App.game.farming.berryData[berry].aura.auraType === AuraType.Repel) { // add other additive auras here with ||
+            return `+${GameConstants.formatNumber(App.game.farming.berryData[berry].aura.auraMultipliers[stage] * 100)}%`;
+        } else {
+            return `×${GameConstants.formatNumber(App.game.farming.berryData[berry].aura.auraMultipliers[stage])}`;
+        }
+    }
 
 }

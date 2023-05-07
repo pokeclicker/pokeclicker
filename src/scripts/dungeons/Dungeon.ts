@@ -3352,7 +3352,7 @@ dungeonList['Seafloor Cavern'] = new Dungeon('Seafloor Cavern',
     32000, 101);
 
 dungeonList['Sky Pillar'] = new Dungeon('Sky Pillar',
-    ['Golbat', 'Sableye', 'Claydol', 'Banette', 'Mawile', 'Altaria'],
+    ['Golbat', 'Sableye', 'Ariados', 'Banette', 'Mawile', 'Swablu'],
     {
         common: [
             {loot: 'xAttack', weight: 4},
@@ -3372,6 +3372,8 @@ dungeonList['Sky Pillar'] = new Dungeon('Sky Pillar',
     },
     720000,
     [
+        new DungeonBossPokemon('Claydol', 3200000, 20),
+        new DungeonBossPokemon('Altaria', 3200000, 20),
         new DungeonBossPokemon('Dusclops', 3200000, 20),
         new DungeonBossPokemon('Rayquaza', 5824002, 100, {requirement: new QuestLineStepCompletedRequirement('The Weather Trio', 5)}),
         new DungeonBossPokemon('Vivillon (Polar)',  96662023, 60, {
@@ -5565,7 +5567,7 @@ dungeonList['Lake Valor'] = new Dungeon('Lake Valor',
                 new GymPokemon('Golbat', 1533334, 38),
                 new GymPokemon('Bronzor', 1533334, 38),
                 new GymPokemon('Toxicroak', 1533334, 40),
-            ], { weight: 1 }, 'Saturn', '(saturn)'),
+            ], { weight: 2 }, 'Saturn', '(saturn)'),
         new DungeonBossPokemon('Azelf', 10060000, 50, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Distortion World'))}),
         new DungeonBossPokemon('Vivillon (Marine)',  96662023, 60, {
             hide: true,
@@ -5690,7 +5692,7 @@ dungeonList['Lake Acuity'] = new Dungeon('Lake Acuity',
                 new GymPokemon('Golbat', 1690000, 38),
                 new GymPokemon('Bronzor', 1690000, 38),
                 new GymPokemon('Skuntank', 1690000, 40),
-            ], { weight: 1 }, 'Jupiter', '(jupiter)'),
+            ], { weight: 2 }, 'Jupiter', '(jupiter)'),
         new DungeonBossPokemon('Uxie', 10070000, 50, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Distortion World'))}),
         new DungeonBossPokemon('Vivillon (Marine)',  96662023, 60, {
             hide: true,
@@ -5908,7 +5910,7 @@ dungeonList['Distortion World'] = new Dungeon('Distortion World',
                 new GymPokemon('Crobat', 1128000, 46),
                 new GymPokemon('Gyarados', 1128000, 46),
                 new GymPokemon('Weavile', 1128000, 47),
-            ], { weight: 1 }, 'Cyrus', '(cyrus)'),
+            ], { weight: 2 }, 'Cyrus', '(cyrus)'),
         new DungeonBossPokemon('Giratina (Altered)', 11880000, 45, {requirement: new TemporaryBattleRequirement('Zero')}),
     ],
     86500, 217);
@@ -6093,11 +6095,11 @@ dungeonList['Hall of Origin'] = new Dungeon('Hall of Origin',
     },
     2653000,
     [
-        new DungeonBossPokemon('Arceus (Normal)', 13000000, 100),
         new DungeonBossPokemon('Slaking', 10000000, 100),
         new DungeonBossPokemon('Snorlax', 10000000, 100),
         new DungeonBossPokemon('Shuckle', 10000000, 100),
         new DungeonBossPokemon('Blissey', 10000000, 100),
+        new DungeonBossPokemon('Arceus (Normal)', 13000000, 100),
     ],
     106500, 230);
 
@@ -6112,11 +6114,14 @@ dungeonList['Fullmoon Island'] = new Dungeon('Fullmoon Island',
         epic: [{loot: 'Mind Plate'}],
     },
     2603000,
-    [new DungeonBossPokemon('Clefable', 11000000, 100)],
+    [
+        new DungeonBossPokemon('Lunatone', 11000000, 100),
+        new DungeonBossPokemon('Clefable', 11000000, 100),
+    ],
     96500, 230);
 
 dungeonList['Newmoon Island'] = new Dungeon('Newmoon Island',
-    ['Volbeat', 'Plusle', 'Absol', 'Luvdisc'],
+    ['Volbeat', 'Plusle', 'Sneasel', 'Luvdisc'],
     {
         common: [
             {loot: 'Lucky_egg', weight: 2},
@@ -6127,7 +6132,11 @@ dungeonList['Newmoon Island'] = new Dungeon('Newmoon Island',
         legendary: [{loot: 'Black_Glasses'}],
     },
     2603000,
-    [new DungeonBossPokemon('Darkrai', 11000000, 100)],
+    [
+        new DungeonBossPokemon('Lunatone', 9900000, 100),
+        new DungeonBossPokemon('Absol', 9900000, 100),
+        new DungeonBossPokemon('Darkrai', 11000000, 100),
+    ],
     96500, 230);
 
 dungeonList['Flower Paradise'] = new Dungeon('Flower Paradise',
@@ -6150,7 +6159,7 @@ dungeonList['Flower Paradise'] = new Dungeon('Flower Paradise',
     2603000,
     [
         new DungeonBossPokemon('Parasect', 9900000, 50),
-        new DungeonBossPokemon('Breloom', 11000000, 50),
+        new DungeonBossPokemon('Breloom', 9900000, 50),
         new DungeonBossPokemon('Shaymin (Land)', 11000000, 50),
         new DungeonBossPokemon('Shaymin (Sky)', 11000000, 50, {requirement: new ObtainedPokemonRequirement('Shaymin (Land)')}),
         new DungeonBossPokemon('Bulbasaur (Rose)', 16000000, 100, {
@@ -6188,6 +6197,7 @@ dungeonList['Snowpoint Temple'] = new Dungeon('Snowpoint Temple',
     },
     2603000,
     [
+        new DungeonBossPokemon('Steelix', 10000000, 100),
         new DungeonBossPokemon('Jynx', 10000000, 100),
         new DungeonBossPokemon('Regigigas', 11000000, 100),
     ],
@@ -6195,17 +6205,16 @@ dungeonList['Snowpoint Temple'] = new Dungeon('Snowpoint Temple',
 
 dungeonList['Stark Mountain'] = new Dungeon('Stark Mountain',
     [
-        {pokemon: 'Fearow', options: { weight: 4 }},
-        {pokemon: 'Golbat', options: { weight: 4 }},
-        {pokemon: 'Graveler', options: { weight: 4 }},
-        {pokemon: 'Weezing', options: { weight: 4 }},
-        {pokemon: 'Rhyhorn', options: { weight: 4 }},
-        {pokemon: 'Rhydon', options: { weight: 4 }},
-        {pokemon: 'Slugma', options: { weight: 4 }},
-        {pokemon: 'Magcargo', options: { weight: 4 }},
-        {pokemon: 'Numel', options: { weight: 4 }},
-        {pokemon: 'Camerupt', options: { weight: 4 }},
-        {pokemon: 'Machoke', options: { weight: 4 }},
+        {pokemon: 'Fearow', options: { weight: 4.4 }},
+        {pokemon: 'Golbat', options: { weight: 4.4 }},
+        {pokemon: 'Graveler', options: { weight: 4.4 }},
+        {pokemon: 'Weezing', options: { weight: 4.4 }},
+        {pokemon: 'Rhyhorn', options: { weight: 4.4 }},
+        {pokemon: 'Rhydon', options: { weight: 4.4 }},
+        {pokemon: 'Slugma', options: { weight: 4.4 }},
+        {pokemon: 'Magcargo', options: { weight: 4.4 }},
+        {pokemon: 'Numel', options: { weight: 4.4 }},
+        {pokemon: 'Machoke', options: { weight: 4.4 }},
         new DungeonTrainer('Dragon Tamer',
             [new GymPokemon('Dragonite', 2603000, 60)],
             { weight: 1 }, 'Darien'),
@@ -6310,6 +6319,7 @@ dungeonList['Stark Mountain'] = new Dungeon('Stark Mountain',
     2603000,
     [
         new DungeonBossPokemon('Skarmory', 10000000, 100),
+        new DungeonBossPokemon('Camerupt', 10000000, 100),
         new DungeonBossPokemon('Heatran', 11000000, 100),
     ],
     96500, 230);
@@ -6379,9 +6389,9 @@ dungeonList['Liberty Garden'] = new Dungeon('Liberty Garden',
     },
     2703000,
     [
-        new DungeonBossPokemon('Victini', 14000000, 100),
         new DungeonBossPokemon('Chimecho', 14000000, 100),
         new DungeonBossPokemon('Kadabra', 14000000, 100),
+        new DungeonBossPokemon('Victini', 14000000, 100),
     ],
     136500, 20);
 
@@ -6563,7 +6573,7 @@ dungeonList['Relic Castle'] = new Dungeon('Relic Castle',
     [
         new DungeonTrainer('Psychic',
             [new GymPokemon('Sigilyph', 16000000, 23)],
-            { weight: 1 }, 'Perry', '(male)'),
+            { weight: 2 }, 'Perry', '(male)'),
         new DungeonBossPokemon('Volcarona', 21000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Relic Passage'))}),
         new DungeonBossPokemon('Vivillon (Sandstorm)',  96662023, 60, {
             hide: true,
@@ -7310,23 +7320,24 @@ dungeonList['Abundant Shrine'] = new Dungeon('Abundant Shrine',
 
 dungeonList['Victory Road Unova'] = new Dungeon('Victory Road Unova',
     [
-        {pokemon: 'Poliwag', options: { weight: 5.89 }},
-        {pokemon: 'Onix', options: { weight: 5.89 }},
-        {pokemon: 'Marill', options: { weight: 5.89 }},
-        {pokemon: 'Roselia', options: { weight: 5.89 }},
-        {pokemon: 'Altaria', options: { weight: 5.89 }},
-        {pokemon: 'Banette', options: { weight: 5.89 }},
-        {pokemon: 'Buizel', options: { weight: 5.89 }},
-        {pokemon: 'Basculin (Red-Striped)', options: { weight: 5.89 }},
-        {pokemon: 'Basculin (Blue-Striped)', options: { weight: 5.89 }},
-        {pokemon: 'Boldore', options: { weight: 5.89 }},
-        {pokemon: 'Cottonee', options: { weight: 5.89 }},
-        {pokemon: 'Petilil', options: { weight: 5.89 }},
-        {pokemon: 'Tranquill', options: { weight: 5.89 }},
-        {pokemon: 'Unfezant', options: { weight: 5.89 }},
-        {pokemon: 'Gurdurr', options: { weight: 5.89 }},
-        {pokemon: 'Sawk', options: { weight: 5.89, hide: true, requirement: new ObtainedPokemonRequirement('Sawk')}},
-        {pokemon: 'Throh', options: { weight: 5.89, hide: true, requirement: new ObtainedPokemonRequirement('Throh')}},
+        {pokemon: 'Poliwag', options: { weight: 5.57 }},
+        {pokemon: 'Onix', options: { weight: 5.57 }},
+        {pokemon: 'Marill', options: { weight: 5.57 }},
+        {pokemon: 'Roselia', options: { weight: 5.57 }},
+        {pokemon: 'Altaria', options: { weight: 5.57 }},
+        {pokemon: 'Banette', options: { weight: 5.57 }},
+        {pokemon: 'Buizel', options: { weight: 5.57 }},
+        {pokemon: 'Basculin (Red-Striped)', options: { weight: 5.57 }},
+        {pokemon: 'Basculin (Blue-Striped)', options: { weight: 5.57 }},
+        {pokemon: 'Boldore', options: { weight: 5.57 }},
+        {pokemon: 'Cottonee', options: { weight: 5.57 }},
+        {pokemon: 'Petilil', options: { weight: 5.57 }},
+        {pokemon: 'Tranquill', options: { weight: 5.57 }},
+        {pokemon: 'Unfezant', options: { weight: 5.57 }},
+        {pokemon: 'Gurdurr', options: { weight: 5.57 }},
+        {pokemon: 'Druddigon', options: { weight: 5.57 }},
+        {pokemon: 'Sawk', options: { weight: 5.57, hide: true, requirement: new ObtainedPokemonRequirement('Sawk')}},
+        {pokemon: 'Throh', options: { weight: 5.57, hide: true, requirement: new ObtainedPokemonRequirement('Throh')}},
         new DungeonTrainer('Ace Trainer',
             [
                 new GymPokemon('Golurk', 326500, 55),
@@ -7481,9 +7492,8 @@ dungeonList['Victory Road Unova'] = new Dungeon('Victory Road Unova',
     5003000,
     [
         new DungeonBossPokemon('Golurk', 44000000, 100),
-        new DungeonBossPokemon('Terrakion', 45000000, 100),
         new DungeonBossPokemon('Audino', 45000000, 100),
-        new DungeonBossPokemon('Druddigon', 44000000, 100),
+        new DungeonBossPokemon('Terrakion', 45000000, 100),
     ],
     326500, 23);
 
@@ -7594,7 +7604,7 @@ dungeonList['Twist Mountain'] = new Dungeon('Twist Mountain',
     356500, 7);
 
 dungeonList['Dragonspiral Tower'] = new Dungeon('Dragonspiral Tower',
-    ['Dratini', 'Dragonair', 'Tranquill', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Vanillish', 'Sawsbuck (Spring)', 'Sawsbuck (Summer)', 'Sawsbuck (Autumn)', 'Sawsbuck (Winter)', 'Beartic', 'Mienfoo', 'Mienshao', 'Druddigon', 'Golett', 'Golurk'],
+    ['Dratini', 'Dragonair', 'Tranquill', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Vanillish', 'Sawsbuck (Spring)', 'Sawsbuck (Summer)', 'Sawsbuck (Autumn)', 'Sawsbuck (Winter)', 'Beartic', 'Mienfoo', 'Mienshao', 'Golett', 'Golurk'],
     {
         common: [
             {loot: 'xAttack', weight: 2},
@@ -7626,6 +7636,7 @@ dungeonList['Dragonspiral Tower'] = new Dungeon('Dragonspiral Tower',
     },
     5203000,
     [
+        new DungeonBossPokemon('Druddigon', 48000000, 100),
         new DungeonBossPokemon('Dragonite', 48000000, 100),
         new DungeonBossPokemon('Reshiram', 50000000, 100),
         new DungeonBossPokemon('Zekrom', 50000000, 100),
@@ -7694,9 +7705,9 @@ dungeonList['Moor of Icirrus'] = new Dungeon('Moor of Icirrus',
     },
     5203000,
     [
-        new DungeonBossPokemon('Keldeo', 50000000, 100),
         new DungeonBossPokemon('Seismitoad', 48000000, 100),
         new DungeonBossPokemon('Whiscash', 48000000, 100),
+        new DungeonBossPokemon('Keldeo', 50000000, 100),
         new DungeonBossPokemon('Vivillon (Jungle)',  96662023, 60, {
             hide: true,
             requirement: new MultiRequirement([
@@ -7707,7 +7718,7 @@ dungeonList['Moor of Icirrus'] = new Dungeon('Moor of Icirrus',
     356500, 8);
 
 dungeonList['Pledge Grove'] = new Dungeon('Pledge Grove',
-    ['Fearow', 'Furret', 'Ledian', 'Sudowoodo', 'Stantler', 'Breloom', 'Unfezant', 'Sawsbuck (Autumn)', 'Sawsbuck (Winter)'],
+    ['Fearow', 'Furret', 'Ledian', 'Sudowoodo', 'Stantler', 'Breloom', 'Sawsbuck (Spring)', 'Sawsbuck (Summer)', 'Sawsbuck (Autumn)', 'Sawsbuck (Winter)'],
     {
         common: [
             {loot: 'Lucky_egg'},
@@ -7727,7 +7738,11 @@ dungeonList['Pledge Grove'] = new Dungeon('Pledge Grove',
         ],
     },
     5203000,
-    [new DungeonBossPokemon('Keldeo (Resolute)', 52000000, 100)],
+    [
+        new DungeonBossPokemon('Unfezant', 50000000, 100),
+        new DungeonBossPokemon('Politoed', 50000000, 100),
+        new DungeonBossPokemon('Keldeo (Resolute)', 52000000, 100),
+    ],
     356500, 8);
 
 dungeonList['Pinwheel Forest'] = new Dungeon('Pinwheel Forest',
@@ -8001,13 +8016,12 @@ dungeonList.Dreamyard = new Dungeon('Dreamyard',
     356500, 3);
 
 dungeonList['P2 Laboratory'] = new Dungeon('P2 Laboratory',
-    ['Scyther', 'Electrode', 'Pineco', 'Forretress', 'Metang', 'Ferroseed', 'Ferrothorn'],
+    ['Frillish', 'Finneon', 'Horsea', 'Herdier', 'Magneton', 'Klang', 'Weezing', 'Watchog', 'Scrafty', 'Audino'],
     {
         common: [
             {loot: 'xClick'},
             {loot: 'xAttack', weight: 2},
             {loot: 'Token_collector', weight: 2},
-            {loot: 'Forretress'},
         ],
         rare: [
             {loot: 'Red Shard'},
@@ -8024,13 +8038,9 @@ dungeonList['P2 Laboratory'] = new Dungeon('P2 Laboratory',
     },
     5403000,
     [
-        new DungeonBossPokemon('Ursaring', 58000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('P2 Laboratory'))}),
-        new DungeonBossPokemon('Mawile', 62000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('P2 Laboratory'))}),
-        new DungeonBossPokemon('Sableye', 62000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('P2 Laboratory'))}),
-        new DungeonBossPokemon('Zangoose', 62000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('P2 Laboratory'))}),
-        new DungeonBossPokemon('Audino', 62000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('P2 Laboratory'))}),
-        new DungeonBossPokemon('Durant', 58000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('P2 Laboratory'))}),
-        new DungeonBossPokemon('Genesect', 62000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('P2 Laboratory'))}),
+        new DungeonBossPokemon('Stoutland', 58000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('P2 Laboratory'))}),
+        new DungeonBossPokemon('Magnezone', 58000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('P2 Laboratory'))}),
+        new DungeonBossPokemon('Klinklang', 58000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('P2 Laboratory'))}),
         new DungeonTrainer('Team Plasma',
             [
                 new GymPokemon('Magneton', 10000000, 72),
@@ -8040,6 +8050,7 @@ dungeonList['P2 Laboratory'] = new Dungeon('P2 Laboratory',
                 new GymPokemon('Magnezone', 10000000, 72),
                 new GymPokemon('Klinklang', 11000000, 74),
             ], { weight: 1 }, 'Colress', '(colress)'),
+        new DungeonBossPokemon('Genesect', 62000000, 100, {requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('P2 Laboratory'))}),
     ],
     396500, 18);
 
@@ -8246,13 +8257,13 @@ dungeonList['Reflection Cave'] = new Dungeon('Reflection Cave',
             [
                 new GymPokemon('Absol', 33468400, 26),
                 new GymPokemon('Pinsir', 37474200, 25),
-            ], { weight: 1 }, 'Emil', '(male)'),
+            ], { weight: 1.5 }, 'Emil', '(male)'),
         new DungeonTrainer('Ace Trainer',
             [
                 new GymPokemon('Doduo', 20365400, 24),
                 new GymPokemon('Granbull', 23366400, 24),
                 new GymPokemon('Helioptile', 25476400, 25),
-            ], { weight: 1 }, 'Monique', '(female)'),
+            ], { weight: 1.5 }, 'Monique', '(female)'),
         new DungeonBossPokemon('Diancie', 69694200, 100, {requirement: new QuestLineStepCompletedRequirement('Princess Diancie', 7)}),
     ],
     555000, 11);
@@ -8321,7 +8332,7 @@ dungeonList['Kalos Power Plant'] = new Dungeon('Kalos Power Plant',
     7903570,
     [
         new DungeonTrainer('Team Flare Aliana',
-            [new GymPokemon('Mightyena', 75384400, 38)], { weight: 1 }),
+            [new GymPokemon('Mightyena', 75384400, 38)], { weight: 3 }),
         new DungeonBossPokemon('Volcanion', 83945700, 100,
             {
                 requirement: new MultiRequirement([
@@ -8727,7 +8738,7 @@ dungeonList['Team Flare Secret HQ'] = new Dungeon('Team Flare Secret HQ',
                 new GymPokemon('Pyroar', 23375580, 49),
                 new GymPokemon('Mega Gyarados', 27385730, 51),
             ],
-            { weight: 2, hide: true, requirement: new QuestLineStepCompletedRequirement('A Beautiful World', 33)}),
+            { weight: 3, hide: true, requirement: new QuestLineStepCompletedRequirement('A Beautiful World', 33)}),
         new DungeonBossPokemon('Xerneas', 93659460, 100, {requirement: new QuestLineStepCompletedRequirement('A Beautiful World', 31)}),
         new DungeonBossPokemon('Yveltal', 93659450, 100, {requirement: new QuestLineStepCompletedRequirement('A Beautiful World', 31)}),
     ],
@@ -10107,6 +10118,7 @@ dungeonList['Mount Lanakila'] = new Dungeon('Mount Lanakila',
     },
     16312850,
     [
+        new DungeonBossPokemon('Golbat', 81064250, 50),
         new DungeonBossPokemon('Absol', 81064250, 50),
         new DungeonBossPokemon('Glalie', 81064250, 50),
         new DungeonBossPokemon('Vanilluxe', 81064250, 50),
@@ -10133,14 +10145,18 @@ dungeonList['Lake of the Sunne and Moone'] = new Dungeon('Lake of the Sunne and 
     },
     16435490,
     [
+        new DungeonBossPokemon('Minior (Meteor)', 82177450, 60, {hide: true, requirement: new ObtainedPokemonRequirement('Cosmog', true)}),
+        new DungeonBossPokemon('Minior (Yellow Core)', 82177450, 60, {hide: true, requirement: new ObtainedPokemonRequirement('Cosmog', true)}),
+        new DungeonBossPokemon('Minior (Violet Core)', 82177450, 60, {hide: true, requirement: new ObtainedPokemonRequirement('Cosmog', true)}),
         new DungeonBossPokemon('Cosmog', 82177450, 70),
-        new DungeonBossPokemon('Lunala', 90673816, 100, {requirement: new MultiRequirement([new ObtainedPokemonRequirement('Lunala'), new ObtainedPokemonRequirement('Necrozma')])}),
-        new DungeonBossPokemon('Solgaleo', 90673816, 100, {requirement: new MultiRequirement([new ObtainedPokemonRequirement('Solgaleo'), new ObtainedPokemonRequirement('Necrozma')])}),
+        new DungeonBossPokemon('Cosmoem', 82177450, 70, {hide: true, requirement: new ObtainedPokemonRequirement('Cosmoem')}),
+        new DungeonBossPokemon('Solgaleo', 90673816, 100, {hide: true, requirement: new MultiRequirement([new ObtainedPokemonRequirement('Solgaleo'), new ObtainedPokemonRequirement('Necrozma')])}),
+        new DungeonBossPokemon('Lunala', 90673816, 100, {hide: true, requirement: new MultiRequirement([new ObtainedPokemonRequirement('Lunala'), new ObtainedPokemonRequirement('Necrozma')])}),
     ],
     1200000, 27);
 
 dungeonList['Ruins of Conflict'] = new Dungeon('Ruins of Conflict',
-    ['Floette (Yellow)', 'Comfey', 'Dedenne', 'Ampharos', 'Electabuzz'],
+    ['Floette (Yellow)', 'Comfey', 'Ampharos', 'Electabuzz'],
     {
         common: [
             {loot: 'Dowsing_machine'},
@@ -10159,12 +10175,13 @@ dungeonList['Ruins of Conflict'] = new Dungeon('Ruins of Conflict',
     [
         new DungeonBossPokemon('Luxray', 82177450, 55),
         new DungeonBossPokemon('Granbull', 82177450, 55),
+        new DungeonBossPokemon('Dedenne', 82177450, 55),
         new DungeonBossPokemon('Tapu Koko', 82543791, 60),
     ],
     1200000, 27);
 
 dungeonList['Ruins of Life'] = new Dungeon('Ruins of Life',
-    ['Floette (White)', 'Comfey', 'Gardevoir', 'Chimecho', 'Munna'],
+    ['Floette (White)', 'Comfey', 'Chimecho', 'Munna'],
     {
         common: [
             {loot: 'Dowsing_machine'},
@@ -10185,12 +10202,13 @@ dungeonList['Ruins of Life'] = new Dungeon('Ruins of Life',
     [
         new DungeonBossPokemon('Wobbuffet', 82177450, 55),
         new DungeonBossPokemon('Granbull', 82177450, 55),
+        new DungeonBossPokemon('Gardevoir', 82177450, 55),
         new DungeonBossPokemon('Tapu Lele', 82543791, 60),
     ],
     1200000, 27);
 
 dungeonList['Ruins of Abundance'] = new Dungeon('Ruins of Abundance',
-    ['Floette (Orange)', 'Comfey', 'Cottonee', 'Gloom', 'Petilil'],
+    ['Floette (Orange)', 'Comfey', 'Cottonee', 'Petilil'],
     {
         common: [
             {loot: 'xAttack'},
@@ -10209,12 +10227,13 @@ dungeonList['Ruins of Abundance'] = new Dungeon('Ruins of Abundance',
     [
         new DungeonBossPokemon('Maractus', 82177450, 55),
         new DungeonBossPokemon('Granbull', 82177450, 55),
+        new DungeonBossPokemon('Shiinotic', 82177450, 55),
         new DungeonBossPokemon('Tapu Bulu', 82543791, 60),
     ],
     1200000, 27);
 
 dungeonList['Ruins of Hope'] = new Dungeon('Ruins of Hope',
-    ['Floette (Blue)', 'Comfey', 'Azumarill', 'Poliwhirl', 'Clamperl'],
+    ['Floette (Blue)', 'Comfey', 'Poliwhirl', 'Clamperl'],
     {
         common: [
             {loot: 'Lucky_egg'},
@@ -10233,6 +10252,7 @@ dungeonList['Ruins of Hope'] = new Dungeon('Ruins of Hope',
     [
         new DungeonBossPokemon('Lumineon', 82177450, 55),
         new DungeonBossPokemon('Granbull', 82177450, 55),
+        new DungeonBossPokemon('Azumarill', 82177450, 55),
         new DungeonBossPokemon('Tapu Fini', 82543791, 60),
     ],
     1200000, 27);
@@ -10315,6 +10335,7 @@ dungeonList['Resolution Cave'] = new Dungeon('Resolution Cave',
     [
         new DungeonBossPokemon('Golbat', 85572310, 59),
         new DungeonBossPokemon('Noivern', 85572310, 59),
+        new DungeonBossPokemon('Zygarde', 88406970, 60),
         new DungeonBossPokemon('Guzzlord', 90673816, 70),
     ],
     1250000, 30);
