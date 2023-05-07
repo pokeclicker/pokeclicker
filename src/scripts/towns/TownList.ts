@@ -2,10 +2,11 @@
 ///<reference path="../../declarations/requirements/RouteKillRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/GymBadgeRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/OneFromManyRequirement.d.ts"/>
+///<reference path="../../declarations/requirements/SpecialEventRequirement.d.ts"/>
 ///<reference path="../quests/BulletinBoard.ts"/>
 ///<reference path="BattleCafe.ts"/>
 ///<reference path="../../declarations/requirements/MultiRequirement.d.ts"/>
-///<reference path="../Safari/SafariTownContent.ts"/>
+///<reference path="../safari/SafariTownContent.ts"/>
 ///<reference path="PurifyChamber.ts"/>
 
 const TownList: { [name: string]: Town } = {};
@@ -162,6 +163,7 @@ const FourIslandShop = new Shop([
     ItemList.Ultraball,
     ItemList.xAttack,
     ItemList.Soothe_bell,
+    ItemList.Wonder_Chest,
 ]);
 const FiveIslandShop = new Shop([
     ItemList.Pokeball,
@@ -276,8 +278,8 @@ const ViridianCityOldMan1 = new NPC('Old Man', [
 });
 const ViridianCityOldMan2 = new NPC('Old Man', [
     'Ahh, I\'ve had my coffee now and I feel great!',
-    'You can use the Poké Ball Selector to select which type of Poké Ball to use on specific Pokémon based on caught status. The options, from left to right, are "Caught", "Caught Shiny", "New", "New Shiny".',
-    'For example, if you click on the empty ball below the word "Caught" and assign a Poké Ball, you will then start throwing Poké Balls at Pokémon you\'ve already caught before. This can be very useful if you need Dungeon Tokens.',
+    'You can use the Poké Ball Selector to select which type of Poké Ball to use on specific Pokémon based on caught status.',
+    'For example, if you click on the empty ball next to the word "Caught" and assign a Poké Ball, you will then start throwing Poké Balls at Pokémon you\'ve already caught before. This can be very useful if you need Dungeon Tokens.',
     'Here, let me show you how it works.',
     'I\'ll always be here to explain it again if you forget.',
 ], {
@@ -285,8 +287,8 @@ const ViridianCityOldMan2 = new NPC('Old Man', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Tutorial Quests', 4), new QuestLineStepCompletedRequirement('Tutorial Quests', 5, GameConstants.AchievementOption.less)]),
 });
 const ViridianCityOldMan3 = new NPC('Old Man', [
-    'You can use the Poké Ball Selector to select which type of Poké Ball to use on specific Pokémon based on caught status. The options, from left to right, are "Caught", "Caught Shiny", "New", "New Shiny".',
-    'For example, if you click on the empty ball below the word Caught and assign a Poké Ball, you will then start throwing Poké Balls at Pokémon you\'ve already caught before. This can be very useful if you need Dungeon Tokens.',
+    'You can use the Poké Ball Selector to select which type of Poké Ball to use on specific Pokémon based on caught status.',
+    'For example, if you click on the empty ball next to the word "Caught" and assign a Poké Ball, you will then start throwing Poké Balls at Pokémon you\'ve already caught before. This can be very useful if you need Dungeon Tokens.',
     'I\'ll always be here to explain it again if you forget.',
 ], {
     image: 'assets/images/npcs/Old Man.png',
@@ -1678,7 +1680,7 @@ TownList['Cherrygrove City'] = new Town(
     'Cherrygrove City',
     GameConstants.Region.johto,
     GameConstants.JohtoSubRegions.Johto,
-    [CherrygroveCityShop],
+    [CherrygroveCityShop, TemporaryBattleList['Youngster Joey']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 29)],
         npcs: [CherrygroveMrPokemon],
@@ -1916,6 +1918,7 @@ const RustboroCityShop = new Shop([
     ItemList.Pokeball,
     ItemList.xAttack,
     ItemList.Mystery_egg,
+    ItemList.Wonder_Chest,
 ]);
 const DewfordTownShop = new Shop([
     ItemList.Pokeball,
@@ -2037,6 +2040,16 @@ const HoennBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations[
     ItemList.FarmHandKerry,
     ItemList.HatcheryHelperCameron,
 ], 'Hoenn Berry Master');
+
+//Hoenn Contest Shop
+const HoennContestShop = new Shop([
+    ItemList['Dugtrio (Punk)'],
+    ItemList['Gengar (Punk)'],
+    ItemList['Goldeen (Diva)'],
+    ItemList['Onix (Rocker)'],
+    ItemList['Tangela (Pom-pom)'],
+    ItemList['Weepinbell (Fancy)'],
+], 'Contest Shop', [new DevelopmentRequirement()]);
 
 //Hoenn Flute Master
 const HoennFluteMaster = new GemMasterShop();
@@ -2499,7 +2512,7 @@ const Zinnia6 = new NPC('Zinnia', [
     'Yes! Finally! The moment I have been waiting for! I have gathered enough Key Stones to draw out the latent power in Rayquaza and stop the impending disaster!',
     'Huh?! H-how can this be? I did everything I was supposed to, and you\'re not changing! <b>Come on! Do it! Mega Evolve! Why?!</b>',
     'Is it... you\'re not here for me? You\'re here for $playername$? That\'s no fair! I\'m the chosen one!',
-    '<i>You notice the Meteorite Shards you have been carrying have fused together and are emitting a powerful glow.</i></br><img src="assets/images/megaStone/384.png"/>',
+    '<i>You notice the Meteorite Shards you have been carrying have fused together and are emitting a powerful glow.</i></br><img src="assets/images/megaStone/Meteorite.png"/>',
 ], {image: 'assets/images/npcs/other/RayquazaEncounter.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 28), new QuestLineStepCompletedRequirement('The Delta Episode', 30, GameConstants.AchievementOption.less)]),
 });
@@ -2602,10 +2615,10 @@ const PrimalMural2 = new NPC('Kyogre Mural', [
 const PrimalSteven = new NPC('Steven', [
     'Hello again, $playername$! I see you\'re interested in these murals as well? They seem to be about Groudon and Kyogre.',
     'So in the ancient world, their primal forms once held this much power…? The super-ancient Pokémon… What terrible strength… But this appearance here… It seems somehow different from Mega Evolution, but somehow related.',
-    '"If you don\'t mind me asking… Do you feel anything in particular when you look up at this wall? A primal world, lost thousands of years in the past… A Legendary Pokémon of tremendous power became humanity\'s greatest threat…',
-    'The terror aroused by that power is clear to see in this ancient artwork. you know who might know more about this? Captain Stern, a sailor who works for my father.',
+    'If you don\'t mind me asking… Do you feel anything in particular when you look up at this wall? A primal world, lost thousands of years in the past… A Legendary Pokémon of tremendous power became humanity\'s greatest threat…',
+    'The terror aroused by that power is clear to see in this ancient artwork. You know who might know more about this? Captain Stern, a sailor who works for my father.',
     'He\'s usually out to sea, but you can find him in Sea Mauville if the weather is too stormy to sail.',
-], {image: 'assets/images/gymLeaders/steven.png',
+], {image: 'assets/images/npcs/Steven.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Primal Reversion', 2), new QuestLineStepCompletedRequirement('Primal Reversion', 4, GameConstants.AchievementOption.less)]),
 });
 
@@ -2614,6 +2627,14 @@ const Stern1 = new NPC('Captain Stern', [
     'On the search for mysteries of the sea, eh? Well then I have one whale of a tale for you! But are yeh worthy?',
 ], {image: 'assets/images/npcs/Sailor.png',
     requirement: new MultiRequirement([new WeatherRequirement([WeatherType.Thunderstorm]), new QuestLineStepCompletedRequirement('Primal Reversion', 3), new QuestLineStepCompletedRequirement('Primal Reversion', 5, GameConstants.AchievementOption.less)]),
+});
+
+const SternSubstitute = new NPC('Deck Swabber', [
+    'Hoy thar, matey! What\'s that? You lookin\' for Cap\'n Stern, are ya? That ol\' Jack Tar! A loose cannon \'e is! You\'ll only see \'im ashore in a Thunderstorm. \'E\'ll say it\'s all due to protocol but the trut\' is lightnin\' scares \'im stem to stern! Didn\' \'ear that from me \'ough...',
+    '',
+    'If ya feel like meetin\' \'im, the fine folks at the Weather Insitute can tell you when the next storm\'s brewin\'.',
+], {image: 'assets/images/npcs/Janitor.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Primal Reversion', 3), new QuestLineStepCompletedRequirement('Primal Reversion', 5, GameConstants.AchievementOption.less)]),
 });
 
 const Stern2 = new NPC('Captain Stern', [
@@ -2748,7 +2769,7 @@ TownList['Sea Mauville'] = new Town(
     [TemporaryBattleList['Delta Giovanni'], TemporaryBattleList['Captain Stern']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 109)],
-        npcs: [SeaMauvilleRocket1, SeaMauvilleRocket2, Stern1, Stern2, Stern3],
+        npcs: [SeaMauvilleRocket1, SeaMauvilleRocket2, Stern1, SternSubstitute, Stern2, Stern3],
     }
 );
 TownList['Verdanturf Town'] = new Town(
@@ -2827,7 +2848,7 @@ TownList['Lilycove City'] = new Town(
     'Lilycove City',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [DepartmentStoreShop],
+    [DepartmentStoreShop], // HoennContestShop
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 121)],
     }
@@ -3147,7 +3168,7 @@ TownList['Weather Institute'] = new DungeonTown(
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
     [new RouteKillRequirement(10, GameConstants.Region.hoenn, 119)],
-    [],
+    [new WeatherAppTownContent()],
     {
         npcs: [WeatherScan],
     }
@@ -3281,8 +3302,8 @@ TownList['Pyrite Colosseum Battles'] = new DungeonTown(
         new DevelopmentRequirement(),
     ]
 );
-TownList['Pyrite Bldg'] = new DungeonTown(
-    'Pyrite Bldg',
+TownList['Pyrite Building'] = new DungeonTown(
+    'Pyrite Building',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
@@ -3431,6 +3452,7 @@ const JubilifeCityShop = new Shop([
     ItemList.Token_collector,
     ItemList.Lucky_egg,
     ItemList.Mystery_egg,
+    ItemList.Wonder_Chest,
 ]);
 const OreburghCityShop = new Shop([
     ItemList.Pokeball,
@@ -4295,6 +4317,8 @@ const FloccesyTownShop = new Shop([
     ItemList.xClick,
     ItemList.SmallRestore,
     ItemList.Mystery_egg,
+    ItemList.Wonder_Chest,
+    ItemList.Miracle_Chest,
 ]);
 const VirbankCityShop = new Shop([
     ItemList.Pokeball,
@@ -5041,6 +5065,8 @@ const SantaluneCityShop = new Shop([
     ItemList.Token_collector,
     ItemList.Lucky_egg,
     ItemList.Mystery_egg,
+    ItemList.Wonder_Chest,
+    ItemList.Miracle_Chest,
 ]);
 const FriseurFurfrouShop = new Shop([
     ItemList['Furfrou (Debutante)'],
@@ -5164,9 +5190,9 @@ const LumioseDexio = new NPC('Dexio', [
 });
 
 const Lysandre1 = new NPC('Lysandre', [
-    'Oh! You\'ve already met professor Sycamore... How wonderful! That is a wonderful thing, indeed. You are one of the chosen ones.',
+    'Oh! You\'ve already met Professor Sycamore, how wonderful! That is a wonderful thing, indeed. You are one of the chosen ones.',
     'I am Lysandre. I\'ve tried to learn as much about Pokémon as I can to help build a brighter future. Professor Sycamore has taught me so much.',
-    'Now listen! It is vital that this world becomes a better place. And the people and Pokémon chosen to make the world better must work tirelessly to achieve this goal.',
+    'Now listen! It is vital that this world becomes a better place. The people and Pokémon chosen to make the world better must work tirelessly to achieve this goal.',
     'Well, I\'ll be off. Please give Professor Sycamore my best. My desire... it is for a more beautiful world!',
 ], {image: 'assets/images/npcs/Team Flare Lysandre.png',
     requirement: new MultiRequirement([new QuestLineStartedRequirement('A Beautiful World'), new QuestLineStepCompletedRequirement('A Beautiful World', 1, GameConstants.AchievementOption.less)]),
@@ -5175,7 +5201,7 @@ const Lysandre1 = new NPC('Lysandre', [
 const Calem1 = new NPC('Calem', [
     'Hi $playername$, I just saw Diantha, a really cool and pretty actress, talking with a funny looking guy with orange spiky hair.',
     'He was such a weirdo. He kept telling her how everything should be beautiful forever and how he would end the world in an instant so that beauty never fades.',
-    'Anyway, I\'m gonna continue forward, I\'ll wait for you in Ambrette Town.',
+    'Anyway, I\'m gonna continue forward. I\'ll wait for you in Ambrette Town.',
 ], {
     image: 'assets/images/npcs/Calem.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Beautiful World', 0), new QuestLineStepCompletedRequirement('A Beautiful World', 2, GameConstants.AchievementOption.less)]),
@@ -5394,7 +5420,7 @@ const TeamFlareLysandre1 = new NPC('Team Flare Lysandre', [
 const TeamFlareBossLysandre1 = new NPC('Team Flare Boss Lysandre', [
     'What a startling development! I never would\'ve thought you were really a chosen one!',
     'So THESE were the mighty Xerneas and Yveltal?! I expected more from Pokémon called legend! You desire help from people? YOU need help from a human?',
-    'For me, victory is using the ultimate weapon. In order to do that, I need to reclaim the Legendary Pokémon\'s power and send it to that weapon once again.',
+    'For me, victory is using the ultimate weapon. In order to do that, I need to reclaim the Legendary Pokémon\'s power and send that power to that weapon once again.',
     'I\'ll be taking the Legendary Pokémon back now! This time, I won\'t lose.',
 ], {image: 'assets/images/npcs/Team Flare Boss Lysandre.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Beautiful World', 31), new QuestLineStepCompletedRequirement('A Beautiful World', 33, GameConstants.AchievementOption.less)]),
@@ -5482,7 +5508,12 @@ const VivillonPhotobook = new NPC('Vivillon Photobook', [
     '<i>You see an Icy Snow Vivillon bundled up with its trainer. It\'s enjoying a much-needed warm cup of cocoa to counteract the icy cave around it.</i>',
     '<img src="assets/images/npcs/textbody/VivillonPhotobookPokéBall.png" style="max-width:100%; height:auto"/>',
     '<i>Lastly, you see a Poké Ball Vivillon in a darkened mall. It\'s trying to scare the camerawoman, completely unaware of the sinister eyes peering from the darkness behind it.</i>',
-]);
+], {
+    requirement: new MultiRequirement([
+        new QuestLineCompletedRequirement('The Great Vivillon Hunt!'),
+        new SpecialEventRequirement('Lunar New Year'),
+    ]),
+});
 
 const FriendlyAttendant = new NPC('Friendly Attendant', [
     'Welcome to the Friend Safari!',
@@ -5519,7 +5550,7 @@ TownList['Santalune City'] = new Town(
     [SantaluneCityShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 3)],
-        npcs: [MysteryFan],
+        npcs: [MysteryFan, VivillonPhotobook],
     }
 );
 TownList['Lumiose City'] = new Town(
@@ -5800,6 +5831,8 @@ const HauoliCityShop = new Shop([
     ItemList.Token_collector,
     ItemList.Lucky_egg,
     ItemList.Mystery_egg,
+    ItemList.Wonder_Chest,
+    ItemList.Miracle_Chest,
     ItemList.Shiny_stone,
     ItemList.Dusk_stone,
     ItemList.Dawn_stone,
@@ -6655,6 +6688,8 @@ const PostwickShop = new Shop([
 const WedgehurstShop = new Shop([
     ItemList.Pokeball,
     ItemList.Mystery_egg,
+    ItemList.Wonder_Chest,
+    ItemList.Miracle_Chest,
 ]);
 const TurffieldShop = new Shop([
     ItemList.Pokeball,

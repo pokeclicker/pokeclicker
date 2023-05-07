@@ -21,9 +21,19 @@ class PurifyChamber implements Saveable {
     public static requirements = new DevelopmentRequirement(); //TODO: when should this unlock? Waiting for story
 
     public selectedPokemon: KnockoutObservable<PartyPokemon>;
+    public currentFlow: KnockoutObservable<number>;
+    public flowNeeded: KnockoutComputed<number>;
 
     constructor() {
         this.selectedPokemon = ko.observable(undefined);
+        this.currentFlow = ko.observable(0);
+        this.flowNeeded = ko.pureComputed(() => {
+            const purifiedPokemon = App.game.party.caughtPokemon.filter((p) => p.shadow == GameConstants.ShadowStatus.Purified).length;
+            const flow = 160 * purifiedPokemon * purifiedPokemon +
+                3000 * purifiedPokemon +
+                1000 * Math.exp(0.08 * purifiedPokemon);
+            return Math.round(flow);
+        });
     }
 
     public canPurify() : boolean {
@@ -31,6 +41,9 @@ class PurifyChamber implements Saveable {
             return false;
         }
         if (this.selectedPokemon().shadow != GameConstants.ShadowStatus.Shadow) {
+            return false;
+        }
+        if (this.currentFlow() < this.flowNeeded()) {
             return false;
         }
         return true;
@@ -41,13 +54,23 @@ class PurifyChamber implements Saveable {
             return;
         }
         this.selectedPokemon().shadow = GameConstants.ShadowStatus.Purified;
+        this.currentFlow(0);
+    }
+
+    public gainFlow(exp: number) {
+        if (!PurifyChamber.requirements.isCompleted() || !App.game.party.caughtPokemon.some((p) => p.shadow == GameConstants.ShadowStatus.Shadow)) {
+            return;
+        }
+        const newFlow = Math.round(this.currentFlow() + exp / 1000);
+        this.currentFlow(Math.min(newFlow, this.flowNeeded()));
     }
 
     saveKey = 'PurifyChamber';
     defaults: Record<string, any>;
     toJSON(): Record<string, any> {
         return {
-            selectedPokemon : this.selectedPokemon()?.id,
+            selectedPokemon: this.selectedPokemon()?.id,
+            currentFlow: this.currentFlow(),
         };
     }
 
@@ -59,6 +82,8 @@ class PurifyChamber implements Saveable {
                     selectedPokemon = undefined;
                 }
                 this.selectedPokemon(selectedPokemon);
+
+                this.currentFlow(json.currentFlow ?? 0);
             }
         }
     }

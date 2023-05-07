@@ -7,6 +7,7 @@ type TemporaryBattleOptionalArgument = {
     imageName?: string,
     visibleRequirement?: Requirement,
     hideTrainer?: boolean,
+    environment?: GameConstants.Environment
 };
 
 class TemporaryBattle extends TownContent {

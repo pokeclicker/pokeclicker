@@ -1,5 +1,5 @@
 import UndergroundItemValueType from '../enums/UndergroundItemValueType';
-import { Region } from '../GameConstants';
+import { MegaStoneType, Region } from '../GameConstants';
 import { PokemonNameType } from '../pokemons/PokemonNameType';
 import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
 import MultiRequirement from '../requirements/MultiRequirement';
@@ -8,16 +8,16 @@ import UndergroundItem from './UndergroundItem';
 
 export default class UndergroundMegaStoneItem extends UndergroundItem {
     constructor(
-        name: string,
+        public megaStone: MegaStoneType,
         id: number,
         space: Array<Array<number>>,
         public pokemon: PokemonNameType,
         value = 0,
         weight?: number,
     ) {
-        super(name, id, space, value,
+        super(MegaStoneType[megaStone], id, space, value,
             UndergroundItemValueType.MegaStone,
             new MultiRequirement([new MaxRegionRequirement(Region.kalos), new ObtainedPokemonRequirement(pokemon)]),
-            () => (App.game.party.getPokemonByName(pokemon)?.megaStone ? 0 : weight));
+            () => (player.hasMegaStone(megaStone) ? 0 : weight));
     }
 }
