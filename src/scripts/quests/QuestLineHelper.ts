@@ -50,7 +50,7 @@ class QuestLineHelper {
                     steps: [
                         {
                             element: document.getElementById('pokeballSelector'),
-                            intro: 'Select which Poké Ball types to catch Pokémon with based on their caught/shiny status.<br/><i><sup>Hover over the column titles for more info.</sup></i><br/><br/>Capturing Pokémon gains you <img title="Dungeon Tokens\nGained by capturing Pokémon" src="assets/images/currency/dungeonToken.svg" height="25px"> Dungeon Tokens.<br/><br/>Try now by clicking the "Caught" selector to change it.',
+                            intro: 'Select which Poké Ball types to catch Pokémon with based on their caught/shiny status.<br/><i><sup>Hover over the names for more info.</sup></i><br/><br/>Capturing Pokémon gains you <img title="Dungeon Tokens\nGained by capturing Pokémon" src="assets/images/currency/dungeonToken.svg" height="25px"> Dungeon Tokens.<br/><br/>Try now by clicking the "Caught" selector to change it.',
                         },
                     ],
                     exitOnEsc: false,
@@ -1124,9 +1124,8 @@ class QuestLineHelper {
         const talkGoRockGrunt1 = new TalkToNPCQuest(ManaphyGoRock, 'The Go-Rock Squad are definitely going in circles, but they\'re too dumb to realise it. Interrogate one on their method of navigating the Eterna Forest!');
         manaphyQuestLine.addQuest(talkGoRockGrunt1);
 
-        const clearEternaParasect = new CustomQuest(1, 0, 'They\'re using Parasect to navigate the Eterna Forest. Clear out a Parasect and they should get trapped!', () =>
-            App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Eterna Forest')]());
-        manaphyQuestLine.addQuest(clearEternaParasect);
+        const defeatParasect = new DefeatDungeonBossQuest('Eterna Forest', 'Parasect', 0, 'They\'re using Parasect to navigate the Eterna Forest. Clear out a Parasect and they should get trapped!');
+        manaphyQuestLine.addQuest(defeatParasect);
 
         const clearManaphyGoRock4 = new CustomQuest(1, 0, 'Now you\'ve muddied the path, continue the Eterna Forest chase!', () =>
             App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Manaphy Go-Rock MGrunt 4')]());
@@ -1456,7 +1455,7 @@ class QuestLineHelper {
             App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1, false);
             Notifier.notify({
                 title: flareKalosQuestLine.name,
-                message: 'Poké Ball Factory Director has given you a Master Ball!',
+                message: 'The Poké Ball Factory Director has given you a Master Ball!',
                 type: NotificationConstants.NotificationOption.success,
                 sound: NotificationConstants.NotificationSound.Quests.quest_ready_to_complete,
                 setting: NotificationConstants.NotificationSetting.Dungeons.rare_dungeon_item_found,
@@ -1568,7 +1567,7 @@ class QuestLineHelper {
             });
         };
 
-        const battleAZ1 = new CustomQuest (1, KalosKeyStoneReward,  'What an amazing trainer! You became Kalos Champion! There is a parade in your honor in Lumiose City. But wait, AZ is there asking you for a battle. Show him what being a Pokémon trainer is like!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Storyline AZ')]());
+        const battleAZ1 = new CustomQuest (1, KalosKeyStoneReward,  'What an amazing trainer! You became Kalos Champion! There is a parade in your honor in Lumiose City. But wait, AZ is there asking you for a battle. Show him what being a Pokémon Trainer is like!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Storyline AZ')]());
         flareKalosQuestLine.addQuest(battleAZ1);
 
         App.game.quests.questLines().push(flareKalosQuestLine);
@@ -1701,7 +1700,7 @@ class QuestLineHelper {
         deltaEpisodeQuestLine.addQuest(catchDeltaRayquaza);
 
         const MeteoriteReward = () => {
-            App.game.party.getPokemonByName('Rayquaza').giveMegastone();
+            player.gainMegaStone(GameConstants.MegaStoneType.Meteorite);
             Notifier.notify({
                 title: deltaEpisodeQuestLine.name,
                 message: 'Your Meteorite Shards combine into a Meteorite!',
@@ -1747,10 +1746,10 @@ class QuestLineHelper {
                 viewPrimalMural2,
             ], 'Examine the Primal Murals.'));
 
-        const talkToSteven = new TalkToNPCQuest(PrimalSteven, 'Talk to Steven in the Granite Cave to learn more avout the Primal Murals.');
+        const talkToSteven = new TalkToNPCQuest(PrimalSteven, 'Talk to Steven in the Granite Cave to learn more about the Primal Murals.');
         primalReversionQuestLine.addQuest(talkToSteven);
 
-        const talkToStern1 = new TalkToNPCQuest(Stern1, 'Find Captain Stern at Sea Mauville during a thunderstorm.');
+        const talkToStern1 = new TalkToNPCQuest(Stern1, 'Find Captain Stern at Sea Mauville during Thunderstorm Weather.');
         primalReversionQuestLine.addQuest(talkToStern1);
 
         const fightStern = new CustomQuest (1, 0, 'Fight Captain Stern at Sea Mauville.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Captain Stern')]());
@@ -1815,7 +1814,7 @@ class QuestLineHelper {
             [
                 fightPrimalGroudon,
                 fightPrimalKyogre,
-            ], 'Defeat the Primal Reversions. They will pause their rampage under the right weather conditions.'));
+            ], 'Defeat the Primal Reversions. Predict their rampage by monitoring the weather at the Weather Institute.'));
 
         const talkToMrStone2 = new TalkToNPCQuest(MrStone2, 'Talk to Mr. Stone in Slateport City.');
         primalReversionQuestLine.addQuest(talkToMrStone2);
@@ -3156,16 +3155,19 @@ class QuestLineHelper {
         App.game.quests.questLines().push(hisuiForcesQuestLine);
     }
 
+    public static createHisuiArceusQuestLine() {
+        const hisuiArceusQuestLine = new QuestLine('Arceus: The Deified Pokémon', 'Discover the truth of the Pokémon deity, Arceus.', new DevelopmentRequirement(), GameConstants.BulletinBoards.Hisui);
+
+        App.game.quests.questLines().push(hisuiArceusQuestLine);
+    }
+
     // Event QuestLines
     // Open the game between April 8-29 (Easter).
     public static createFindSurpriseTogepiForEasterQuestLine() {
         const findSurpriseTogepiForEasterQuestLine = new QuestLine('Togepi Egg Hunt', 'A strange Togepi has been spotted, but cannot be found!', new SpecialEventRequirement('Easter'), GameConstants.BulletinBoards.All);
 
-        const surpriseTogepi = pokemonMap['Surprise Togepi'];
-
         const togepiInKantoSetup = () => {
             dungeonList['Viridian Forest'].bossList.push(new DungeonTrainer('Egg Hunter', [new GymPokemon('Surprise Togepi', 300000, 100)], { weight: 1, requirement: new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion) }));
-            App.game.statistics.pokemonDefeated[surpriseTogepi.id](0);
         };
         const afterDefeatingTogepiInKanto = () => {
             Notifier.notify({
@@ -3178,7 +3180,7 @@ class QuestLineHelper {
 
             dungeonList['Viridian Forest'].bossList = dungeonList['Viridian Forest'].bossList.filter(boss => boss.name != 'Egg Hunter');
         };
-        const defeatTogepiInKanto = new CustomQuest(1, afterDefeatingTogepiInKanto, 'A strange Togepi has been seen around Kanto. Go look for it! Maybe Erika knows more.', App.game.statistics.pokemonDefeated[surpriseTogepi.id], 0, togepiInKantoSetup);
+        const defeatTogepiInKanto = new DefeatDungeonBossQuest('Viridian Forest', 'Egg Hunter', afterDefeatingTogepiInKanto, 'A strange Togepi has been seen around Kanto. Go look for it! Maybe Erika knows more.', togepiInKantoSetup);
         findSurpriseTogepiForEasterQuestLine.addQuest(defeatTogepiInKanto);
 
         const togepiInJohtoSetup = () => {
@@ -3194,7 +3196,7 @@ class QuestLineHelper {
             });
             dungeonList['Ilex Forest'].bossList = dungeonList['Ilex Forest'].bossList.filter(boss => boss.name != 'Egg Hunter');
         };
-        const encounterSurpriseTogepiInJohto = new CustomQuest(1, afterDefeatingTogepiInJohto, 'Another report just came in, there have been sightings of a strange egg in a forest in Johto!', App.game.statistics.pokemonDefeated[surpriseTogepi.id], 1, togepiInJohtoSetup);
+        const encounterSurpriseTogepiInJohto = new DefeatDungeonBossQuest('Ilex Forest', 'Egg Hunter', afterDefeatingTogepiInJohto, 'Another report just came in, there have been sightings of a strange egg in a forest in Johto!', togepiInJohtoSetup);
         findSurpriseTogepiForEasterQuestLine.addQuest(encounterSurpriseTogepiInJohto);
 
         const togepiInHoennSetup = () => {
@@ -3210,7 +3212,7 @@ class QuestLineHelper {
             });
             dungeonList['Petalburg Woods'].bossList = dungeonList['Petalburg Woods'].bossList.filter(boss => boss.name != 'Egg Hunter');
         };
-        const encounterTogepiInHoenn = new CustomQuest(1, afterDefeatingTogepiInHoenn, 'There is a big Egg Hunt going on in the woods south of Rustboro in Hoenn; maybe you should take a look?', App.game.statistics.pokemonDefeated[surpriseTogepi.id], 2, togepiInHoennSetup);
+        const encounterTogepiInHoenn = new DefeatDungeonBossQuest('Petalburg Woods', 'Egg Hunter', afterDefeatingTogepiInHoenn, 'There is a big Egg Hunt going on in the woods south of Rustboro in Hoenn; maybe you should take a look?', togepiInHoennSetup);
         findSurpriseTogepiForEasterQuestLine.addQuest(encounterTogepiInHoenn);
 
         App.game.quests.questLines().push(findSurpriseTogepiForEasterQuestLine);
@@ -3284,6 +3286,7 @@ class QuestLineHelper {
         this.createAncientGolemsQuestLine();
         this.createOriginalColorMagearnaQuestLine();
         this.createHisuiForcesQuestLine();
+        this.createHisuiArceusQuestLine();
         this.createFindSurpriseTogepiForEasterQuestLine();
         this.createHoopaDayPikabluQuestLine();
         this.createDrSplashQuestLine();
