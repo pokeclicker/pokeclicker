@@ -29,7 +29,7 @@ class Safari {
         this.activeRegion(player.region);
         Safari.grid = [];
         Safari.pokemonGrid([]);
-        Safari.itemGrid([new SafariItem({id: 'xAttack', type: ItemType.item}, 5, 5)]);
+        Safari.itemGrid([]);
         Safari.playerXY.x = 0;
         Safari.playerXY.y = 0;
         Safari.lastDirection = 'up';
@@ -320,6 +320,12 @@ class Safari {
         }
     }
 
+    public static spawnItemCheck() {
+        if (Rand.boolean()) {
+            this.spawnRandomItem();
+        }
+    }
+
     public static despawnPokemonCheck() {
         let index = this.pokemonGrid().length;
         while (index-- > 0) {
@@ -341,6 +347,19 @@ class Safari {
         pokemon.y = y;
         pokemon.steps = this.sizeX() + this.sizeY() + Rand.floor(21);
         this.pokemonGrid.push(pokemon);
+    }
+
+    private static spawnRandomItem() {
+        const x = Rand.floor(this.sizeX());
+        const y = Rand.floor(this.sizeY());
+        if (!this.canMove(x, y) || (x == this.playerXY.x && y == this.playerXY.y) || this.itemGrid().find(p => p.x === x && p.y === y)) {
+            return;
+        }
+        const item = SafariItemController.getRandomItem();
+        if (!item) {
+            return;
+        }
+        this.itemGrid.push(new SafariItem(item, x, y));
     }
 
     private static directionToXY(dir: string) {
@@ -416,6 +435,9 @@ class Safari {
         if (itemOnPlayer >= 0) {
             const item = this.itemGrid()[itemOnPlayer];
             const name = BagHandler.displayName(item.item);
+            if (!BagHandler.isAvailable(item.item)) {
+                return; // just in case two of the same mega stone spawn or something
+            }
             BagHandler.gainItem(item.item);
             Notifier.notify({
                 message: `You found ${GameHelper.anOrA(name)} ${name}!`,
