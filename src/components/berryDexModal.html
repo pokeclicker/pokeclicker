@@ -37,6 +37,12 @@
                       <td class="text-left">Firmness</td>
                       <td class="text-left tight"><code data-bind="html: GameConstants.humanifyString(BerryFirmness[App.game.farming.berryData[$data].firmness])">-</code></td>
                     </tr>
+                    <!-- ko if: App.game.farming.berryData[$data].aura -->
+                    <tr>
+                      <td class="text-left">Aura</td>
+                      <td class="text-left tight"><code data-bind="text: AuraType[App.game.farming.berryData[$data].aura.auraType]"></code></td>
+                    </tr>
+                    <!-- /ko -->
                     </tbody>
                   <thead>
                     <tr class="text-light">
@@ -84,11 +90,25 @@
                             <td><img src="" data-bind="attr: { src: `assets/images/farm/${BerryType[$data]}Tree${PlotStage[PlotStage.Berry]}.png` }"/></td>
                           </tr>
                           <tr>
+                            <th colspan="4">Total Time until Stage</th>
+                          </tr>
+                          <tr>
                             <td><code data-bind="html: GameConstants.formatSecondsToTime(App.game.farming.berryData[$data].growthTime[0])">-</code></td>
                             <td><code data-bind="html: GameConstants.formatSecondsToTime(App.game.farming.berryData[$data].growthTime[1])">-</code></td>
                             <td><code data-bind="html: GameConstants.formatSecondsToTime(App.game.farming.berryData[$data].growthTime[2])">-</code></td>
                             <td><code data-bind="html: GameConstants.formatSecondsToTime(App.game.farming.berryData[$data].growthTime[3])">-</code></td>
                           </tr>
+                          <!-- ko if: App.game.farming.berryData[$data].aura -->
+                          <tr>
+                            <th colspan="4">Aura Effect at Stage</th>
+                          </tr>
+                          <tr class="aura-box" data-bind="if: App.game.farming.berryData[$data].aura">
+                            <td><code data-bind="html: GameConstants.formatSecondsToTime(1 - 1)">-</code></td>
+                            <td><code data-bind="html: App.game.farming.auraDisplay($data, 0)">-</code></td>
+                            <td><code data-bind="html: App.game.farming.auraDisplay($data, 1)">-</code></td>
+                            <td><code data-bind="html: App.game.farming.auraDisplay($data, 2)">-</code></td>
+                          </tr>
+                          <!-- /ko -->
                         </table>
                       </td>
                     </tr>
