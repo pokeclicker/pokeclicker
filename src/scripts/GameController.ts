@@ -436,6 +436,7 @@ class GameController {
                         (Settings.getSetting('sound.muted') as BooleanSetting).toggle();
                         return e.preventDefault();
                     }
+                    break;
                 case Settings.getSetting('hotkey.dailyQuests').value:
                     // Open the Quests
                     if (quests.isDailyQuestsUnlocked() && !$questModal.data('disable-toggle')) {
