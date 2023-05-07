@@ -202,19 +202,18 @@ class PokemonHelper extends TmpPokemonHelper {
 
     public static getPokemonSafariChance(pokemonName: PokemonNameType): Record<GameConstants.Region, Record<number, number>> {
         const list = {};
-        Object.entries(SafariPokemonList.list).forEach(([region, zones]) => {
-            zones().forEach((p, zone) => {
-                if (region == GameConstants.Region.kalos.toString()) {
-                    // Friendly safari might cause infinit recursion
-                    return;
-                }
-                const safariWeight = p.safariPokemon.reduce((sum, p) => sum += p.weight, 0);
-                const safariPokemon = p.safariPokemon.find(p => p.name == pokemonName);
-                if (safariPokemon) {
-                    list[+region] = list[+region] || {};
-                    list[+region][zone] = +((SafariPokemon.calcPokemonWeight(safariPokemon) / safariWeight) * 100).toFixed(2);
-                }
-            });
+        Object.entries(SafariPokemonList.list).forEach(([region]) => {
+            if (region == GameConstants.Region.kalos.toString()) {
+                // Friendly safari might cause infinit recursion
+                return;
+            }
+            const zone = SafariPokemonList.list[region]();
+            const safariWeight = zone.reduce((sum, p) => sum += p.weight, 0);
+            const safariPokemon = zone.find(p => p.name == pokemonName);
+            if (safariPokemon) {
+                list[+region] = list[+region] || {};
+                list[+region][zone] = +((SafariPokemon.calcPokemonWeight(safariPokemon) / safariWeight) * 100).toFixed(2);
+            }
         });
         return list;
     }
