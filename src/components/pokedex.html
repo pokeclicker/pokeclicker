@@ -252,12 +252,9 @@ aria-labelledby="pokedexModalLabel">
                                                             <br/>EV bonus: <strong>×${App.game.party.getPokemon($data.id).calculateEVAttackBonus().toLocaleString('en-US')}</strong>`
                                                             : '') +
                                                         (PokemonHelper.hasMegaEvolution($data.name) ?
-                                                            App.game.party.getPokemon($data.id).attack < pokemonMap[$data.name].attack * GameConstants.MEGA_REQUIRED_ATTACK_MULTIPLIER ?
-                                                                `<br/>Needs at least ${(pokemonMap[$data.name].attack * GameConstants.MEGA_REQUIRED_ATTACK_MULTIPLIER).toLocaleString('en-US')} attack to Mega Evolve.`
-                                                                : PokemonHelper.getMegaStones($data.name).some(m => player.hasMegaStone(m.megaStone)) ?
-                                                                    '<br/>Use a Key Stone to Mega Evolve.'
-                                                                    : `<br/>Obtain the Mega Stone to Mega Evolve ${$data.name}.`
-                                                        : ''),
+                                                            pokemonMap[$data.name].evolutions.flatMap(e => e.restrictions).filter(r => r instanceof MegaEvolveRequirement && player.hasMegaStone(r.megaStone))
+                                                                .map(r => `<br/><u>${GameConstants.humanifyString(GameConstants.MegaStoneType[r.megaStone])}</u><br/>${r.hint()}`).join('')
+                                                            : ''),
                                                     trigger: 'hover',
                                                     placement:'bottom'
                                                 }"></a>
