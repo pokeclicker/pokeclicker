@@ -2695,8 +2695,8 @@ TemporaryBattleList.Yveltal = new TemporaryBattle(
 TemporaryBattleList['Team Flare Boss Lysandre 1'] = new TemporaryBattle(
     'Team Flare Boss Lysandre 1',
     [
-        new GymPokemon('Mienfoo', 68927443, 49),
-        new GymPokemon('Murkrow', 68927443, 49),
+        new GymPokemon('Mienshao', 68927443, 49),
+        new GymPokemon('Honchkrow', 68927443, 49),
         new GymPokemon('Pyroar', 70334126, 51),
         new GymPokemon('Mega Gyarados', 71740808, 53),
     ],
@@ -3027,8 +3027,8 @@ TemporaryBattleList['Grand Duchess Diantha'] = new TemporaryBattle(
 TemporaryBattleList['Team Flare Boss Lysandre 2'] = new TemporaryBattle(
     'Team Flare Boss Lysandre 2',
     [
-        new GymPokemon('Mienfoo', 127138249, 79),
-        new GymPokemon('Murkrow', 127138249, 79),
+        new GymPokemon('Mienshao', 127138249, 79),
+        new GymPokemon('Honchkrow', 127138249, 79),
         new GymPokemon('Pyroar', 124595484, 81),
         new GymPokemon('Mega Gyarados', 129681014, 83),
     ],
