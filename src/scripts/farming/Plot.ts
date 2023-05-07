@@ -436,7 +436,7 @@ class Plot implements Saveable {
             // Gain Pokemon
             App.game.party.gainPokemonByName(wanderPokemon, shiny, true);
             const partyPokemon = App.game.party.getPokemon(PokemonHelper.getPokemonByName(wanderPokemon).id);
-            partyPokemon.effortPoints += App.game.party.calculateEffortPoints(partyPokemon, shiny, GameConstants.WANDERER_EP_YIELD, Berry.baseWander.includes(wanderPokemon));
+            partyPokemon.effortPoints += App.game.party.calculateEffortPoints(partyPokemon, shiny, GameConstants.ShadowStatus.None, GameConstants.WANDERER_EP_YIELD, Berry.baseWander.includes(wanderPokemon));
 
             // Check for Starf berry generation
             if (shiny) {
