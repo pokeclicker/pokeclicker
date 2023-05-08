@@ -2134,7 +2134,7 @@ GymList['Grandtree Arena'] = new Gym(
     128000,
     'You defeated Lord Kleavor once again!',
     [new DevelopmentRequirement()],
-    undefined, undefined, { displayName: 'Lord Kleavor' }
+    undefined, undefined, { displayName: 'Lord Kleavor', imageName: '../pokemon/900.01' }
 );
 GymList['Brava Arena'] = new Gym(
     'Lady of the Ridge: Lilligant',
@@ -2144,7 +2144,7 @@ GymList['Brava Arena'] = new Gym(
     128000,
     'You defeated Lady Lilligant once again!',
     [new DevelopmentRequirement()],
-    undefined, undefined, { displayName: 'Lady Lilligant' }
+    undefined, undefined, { displayName: 'Lady Lilligant', imageName: '../pokemon/549.02' }
 );
 GymList['Molten Arena'] = new Gym(
     'Lord of the Isles: Arcanine',
@@ -2154,7 +2154,7 @@ GymList['Molten Arena'] = new Gym(
     128000,
     'You defeated Lord Arcanine once again!',
     [new DevelopmentRequirement()],
-    undefined, undefined, { displayName: 'Lord Arcanine' }
+    undefined, undefined, { displayName: 'Lord Arcanine', imageName: '../pokemon/59.02' }
 );
 GymList['Moonview Arena'] = new Gym(
     'Lord of the Hollow: Electrode',
@@ -2164,7 +2164,7 @@ GymList['Moonview Arena'] = new Gym(
     128000,
     'You defeated Lord Electrode once again!',
     [new DevelopmentRequirement()],
-    undefined, undefined, { displayName: 'Lord Electrode' }
+    undefined, undefined, { displayName: 'Lord Electrode', imageName: '../pokemon/101.02' }
 );
 GymList['Icepeak Arena'] = new Gym(
     'Lord of the Tundra: Avalugg',
@@ -2174,7 +2174,7 @@ GymList['Icepeak Arena'] = new Gym(
     128000,
     'You defeated Lord Avalugg once again!',
     [new DevelopmentRequirement()],
-    undefined, undefined, { displayName: 'Lord Avalugg' }
+    undefined, undefined, { displayName: 'Lord Avalugg', imageName: '../pokemon/713.02' }
 );
 GymList['Temple of Sinnoh'] = new Gym(
     'Volo',

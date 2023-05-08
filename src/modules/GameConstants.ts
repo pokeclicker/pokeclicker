@@ -323,6 +323,9 @@ export const ROAMER_EP_MODIFIER = 50;
 export const EP_EV_RATIO = 1000;
 export const EP_CHALLENGE_MODIFIER = 10;
 
+// Mega Evolution
+export const MEGA_REQUIRED_ATTACK_MULTIPLIER = 500;
+
 /**
  * idle: The game is not doing anything, the battle view isn't shown
  * paused: The battle view is shown, but there are no game ticks

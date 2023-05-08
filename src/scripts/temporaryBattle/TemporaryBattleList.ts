@@ -4963,7 +4963,7 @@ TemporaryBattleList['Volo 1'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Ginkgo Guild Member Volo',
-        imageName: 'Volo1',
+        imageName: 'Volo (Ginkgo)',
     }
 );
 TemporaryBattleList['Akari 1'] = new TemporaryBattle(
@@ -4981,7 +4981,11 @@ TemporaryBattleList['Warden Mai'] = new TemporaryBattle(
     'Warden Mai',
     [new GymPokemon('Munchlax', 348526193, 10)],
     'You really aren\'t one of the usual Galaxy buffoons if you could defeat my partner... Well fought, Munchlax.',
-    [new DevelopmentRequirement()]
+    [new DevelopmentRequirement()],
+    undefined,
+    {
+        imageName: 'Mai',
+    }
 );
 TemporaryBattleList['Alpha Kricketune'] = new TemporaryBattle(
     'Alpha Kricketune',
@@ -4999,7 +5003,11 @@ TemporaryBattleList['Warden Lian'] = new TemporaryBattle(
     'Warden Lian',
     [new GymPokemon('Goomy', 348526193, 15)],
     'H-how can this be...',
-    [new DevelopmentRequirement()]
+    [new DevelopmentRequirement()],
+    undefined,
+    {
+        imageName: 'Lian',
+    }
 );
 TemporaryBattleList['Irida 1'] = new TemporaryBattle(
     'Irida 1',
@@ -5045,7 +5053,7 @@ TemporaryBattleList['Volo 2'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Ginkgo Guild Member Volo',
-        imageName: 'Volo1',
+        imageName: 'Volo (Ginkgo)',
     }
 );
 TemporaryBattleList['Coin 1'] = new TemporaryBattle(
@@ -5174,7 +5182,11 @@ TemporaryBattleList['Warden Ingo'] = new TemporaryBattle(
         new GymPokemon('Gliscor', 348526193, 42),
     ],
     'Bravo! Excellent! Your talent has brought you to the destination called Victory! Now, allow me to call Sneasler...',
-    [new DevelopmentRequirement()]
+    [new DevelopmentRequirement()],
+    undefined,
+    {
+        imageName: 'Ingo',
+    }
 );
 TemporaryBattleList['Melli 2'] = new TemporaryBattle(
     'Melli 2',
@@ -5209,7 +5221,11 @@ TemporaryBattleList['Warden Gaeric'] = new TemporaryBattle(
         new GymPokemon('Glalie', 348526193, 48),
     ],
     'Outstanding! I\'m tough as an iceberg, but you smashed me through and through!',
-    [new DevelopmentRequirement()]
+    [new DevelopmentRequirement()],
+    undefined,
+    {
+        imageName: 'Gaeric',
+    }
 );
 TemporaryBattleList['Warden Sabi'] = new TemporaryBattle(
     'Warden Sabi',
@@ -5219,7 +5235,11 @@ TemporaryBattleList['Warden Sabi'] = new TemporaryBattle(
         new GymPokemon('Rhyperior', 348526193, 50),
     ],
     'Wow, you caught us AND you beat us. You\'ve won all our games so far! But Braviary still wants to get to know you even better. Up to the roof we go! All right, Braviary! Why not test out their strength for yourself?',
-    [new DevelopmentRequirement()]
+    [new DevelopmentRequirement()],
+    undefined,
+    {
+        imageName: 'Sabi',
+    }
 );
 TemporaryBattleList['Hisuian Braviary'] = new TemporaryBattle(
     'Hisuian Braviary',
@@ -5256,6 +5276,7 @@ TemporaryBattleList.Beni = new TemporaryBattle(
     undefined,
     {
         displayName: 'The Galaxy Team\'s Beni',
+        imageName: 'Beni (Ninja)',
     }
 );
 TemporaryBattleList['Kamado 1'] = new TemporaryBattle(
@@ -5271,7 +5292,7 @@ TemporaryBattleList['Kamado 1'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'The Galaxy Team\'s Kamado',
-        imageName: 'Kamado',
+        imageName: 'Kamado (Armor)',
     }
 );
 TemporaryBattleList['Charm 2'] = new TemporaryBattle(
@@ -5326,7 +5347,7 @@ TemporaryBattleList['Kamado 2'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'The Galaxy Team\'s Kamado',
-        imageName: 'Kamado',
+        imageName: 'Kamado (Armor)',
     }
 );
 TemporaryBattleList['Adaman 2'] = new TemporaryBattle(
@@ -5396,7 +5417,7 @@ TemporaryBattleList['Volo 3'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Pokémon Wielder Volo',
-        imageName: 'Volo2',
+        imageName: 'Volo',
     }
 );
 TemporaryBattleList['Giratina (Origin)'] = new TemporaryBattle(
