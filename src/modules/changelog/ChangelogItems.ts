@@ -10,6 +10,27 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.10.11
+    new ChangelogUpdate('v0.10.11', new Date(2023, 4, 7)),
+    new Changelog(changelogType.NEW, 'Advanced capture filters'),
+    new Changelog(changelogType.NEW, 'Weather forecast at the Weather Institute in Hoenn'),
+    new Changelog(changelogType.NEW, 'New Megas'),
+    new Changelog(changelogType.NEW, 'New Quest Lines'),
+    new Changelog(changelogType.NEW, 'Hotkey to open the quest list'),
+    new Changelog(changelogType.NEW, 'Hotkey to open Poké Mart shop'),
+    new Changelog(changelogType.CHANGE, 'Dungeon chests have a visual difference based on loot tier'),
+    new Changelog(changelogType.CHANGE, 'S.S. Anne visible on all maps at dock location'),
+    new Changelog(changelogType.CHANGE, 'Adjusted some pokémon locations'),
+    new Changelog(changelogType.CHANGE, 'Pokédex filter improvements'),
+    new Changelog(changelogType.CHANGE, 'Pokémon in the hatchery/queue can be seen in the vitamin list'),
+    new Changelog(changelogType.CHANGE, 'Acquired Mega Stones displayed in item bag'),
+    new Changelog(changelogType.CHANGE, 'Updated egg colors in Hatchery'),
+    new Changelog(changelogType.CHANGE, 'Misc text changes'),
+    new Changelog(changelogType.CHANGE, 'Misc map changes'),
+    new Changelog(changelogType.FIXED, 'Pokédex & hatchery unusable at certain resolutions'),
+    new Changelog(changelogType.FIXED, 'Deleting a category sometimes causing a game crash'),
+    new Changelog(changelogType.FIXED, 'Various broken images'),
+
     // v0.10.10
     new ChangelogUpdate('v0.10.10', new Date(2023, 2, 26)),
     new Changelog(changelogType.NEW, 'New Megas'),
