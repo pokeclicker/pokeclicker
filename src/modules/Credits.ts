@@ -388,6 +388,7 @@ export const SpriteCredits: Credit[] = [
             'Tangela (Pom-pom) shop image',
             'Weepinbell (Fancy) shop image',
             'Vivillon Photobook',
+            'Volo (Ginkgo)',
             'White mane hair icon',
             'Zarude (Dada) shop image',
             'Zero',
