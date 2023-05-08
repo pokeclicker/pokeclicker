@@ -338,7 +338,10 @@ class Safari {
     private static spawnRandomPokemon() {
         const y = Rand.floor(this.sizeY());
         const x = Rand.floor(this.sizeX());
-        if (!this.canMove(x, y) || (x == this.playerXY.x && y == this.playerXY.y) || this.pokemonGrid().find(p => p.x === x && p.y === y)) {
+        if (!this.canMove(x, y) ||
+            (x == this.playerXY.x && y == this.playerXY.y) ||
+            this.pokemonGrid().find(p => p.x === x && p.y === y) ||
+            this.itemGrid().find(i => i.x === x && i.y === y)) {
             return;
         }
         const pokemon = SafariPokemon.random();
@@ -352,7 +355,9 @@ class Safari {
     private static spawnRandomItem() {
         const x = Rand.floor(this.sizeX());
         const y = Rand.floor(this.sizeY());
-        if (!this.canMove(x, y) || (x == this.playerXY.x && y == this.playerXY.y) || this.itemGrid().find(p => p.x === x && p.y === y)) {
+        if (!this.canMove(x, y) || (x == this.playerXY.x && y == this.playerXY.y) ||
+            this.itemGrid().find(i => i.x === x && i.y === y) ||
+            this.pokemonGrid().find(p => p.x === x && p.y === y)) {
             return;
         }
         const item = SafariItemController.getRandomItem();
