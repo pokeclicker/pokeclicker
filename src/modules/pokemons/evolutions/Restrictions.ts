@@ -1,4 +1,4 @@
-import { GameState, Region, Environment } from '../../GameConstants';
+import { GameState, Region, Environment, MegaStoneType } from '../../GameConstants';
 import { ItemNameType } from '../../items/ItemNameType';
 import GameStateRequirement from '../../requirements/GameStateRequirement';
 import HoldingItemRequirement from '../../requirements/HoldingItemRequirement';
@@ -106,11 +106,12 @@ export const nightRestrict = <T extends EvoFn>(evo: T) => (
 ) => dayCyclePartRestrict(evo)([DayCyclePart.Night, DayCyclePart.Dawn], ...rest);
 
 export const megaEvolveRestrict = <T extends EvoFn>(evo: T) => (
+    megaStone: MegaStoneType,
     ...rest: Parameters<T>
 ) => {
     const data = evo(...rest);
     return restrict(
         data,
-        new MegaEvolveRequirement(data.basePokemon),
+        new MegaEvolveRequirement(data.basePokemon, megaStone),
     );
 };

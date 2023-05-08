@@ -718,6 +718,14 @@
         %>
 
         <%- include('templates/mapPOI',
+           { name: "S. S. Anne"
+           , x: 68, y: 8
+           , width: 8, height: 3
+           , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Hulbury') }"
+          })
+        %>
+
+        <%- include('templates/mapPOI',
            { name: "Farm"
            , x: 52, y: 54
            , width: 3, height: 3
@@ -1171,9 +1179,17 @@
         <%- include('templates/mapPOI',
             { name: "Dock"
             , x: 78, y: 57
-            , width: 3, height: 2
+            , width: 4, height: 2
             , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Spikemuth') }"
             })
+        %>
+
+        <%- include('templates/mapPOI',
+           { name: "S. S. Anne"
+           , x: 80, y: 54
+           , width: 8, height: 3
+           , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Spikemuth') }"
+          })
         %>
 
         <%- include('templates/mapPOI',
@@ -2340,6 +2356,14 @@
             })
         %>
 
+        <%- include('templates/mapPOI',
+           { name: "S. S. Anne"
+           , x: 62, y: 44
+           , width: 8, height: 3
+           , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Master Dojo') }"
+          })
+        %>
+
         <%- include('templates/mapOverlay',
             { name: "Pokémon Trainer Klara"
             , x: 52, y: 44
@@ -3074,6 +3098,14 @@
             , width: 3, height: 2
             , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Crown Tundra Station') }"
             })
+        %>
+
+        <%- include('templates/mapPOI',
+           { name: "S. S. Anne"
+           , x: 21, y: 12
+           , width: 8, height: 3
+           , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Crown Tundra Station') }"
+          })
         %>
 
         <%- include('templates/mapOverlay',

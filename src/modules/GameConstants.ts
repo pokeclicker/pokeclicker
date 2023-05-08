@@ -231,9 +231,9 @@ export const DUNGEON_HELD_ITEM_MODIFIER = ROUTE_HELD_ITEM_MODIFIER * 4;
 export const DUNGEON_BOSS_HELD_ITEM_MODIFIER = DUNGEON_HELD_ITEM_MODIFIER * 1.5;
 export const HELD_ITEM_CHANCE = 512;
 export const HELD_UNDERGROUND_ITEM_CHANCE = 2048;
-export const GRISEOUS_ITEM_CHANCE = 80;
-export const DNA_ITEM_CHANCE = 60;
-export const LIGHT_ITEM_CHANCE = 100;
+export const GRISEOUS_ITEM_CHANCE = 50;
+export const DNA_ITEM_CHANCE = 45;
+export const LIGHT_ITEM_CHANCE = 75;
 export const RUST_ITEM_CHANCE = 90;
 export const MANE_ITEM_CHANCE = 10;
 
@@ -322,6 +322,9 @@ export const ROAMER_EP_MODIFIER = 50;
 
 export const EP_EV_RATIO = 1000;
 export const EP_CHALLENGE_MODIFIER = 10;
+
+// Mega Evolution
+export const MEGA_REQUIRED_ATTACK_MULTIPLIER = 500;
 
 /**
  * idle: The game is not doing anything, the battle view isn't shown
@@ -621,7 +624,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.hoenn]: new Set([105, 106, 107, 108, 109, 118, 122, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134]),
         [Region.sinnoh]: new Set([218, 219, 220, 223, 230, 'Pastoria City', 'Lake Verity', 'Lake Valor', 'Sendoff Spring']),
         [Region.unova]: new Set([17, 18, 21, 24, 'Undella Town', 'Humilau City']),
-        [Region.kalos]: new Set([8, 23, 'Coumarine City', 'Couriway Town', 'Sea Spirit\'s Den']),
+        [Region.kalos]: new Set([8, 23, 'Couriway Town', 'Sea Spirit\'s Den']),
         [Region.alola]: new Set([15, 19, 20, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 'Hoppy Town', 'Friend League', 'Quick League', 'Heavy League', 'Great League', 'Fast League', 'Luxury League', 'Heal League', 'Ultra League', 'Elite Four League', 'Master League', 'Magikarp\'s Eye', 'Seafolk Village', 'Brooklet Hill', 'Mina\'s Houseboat', 'Lake of the Sunne and Moone']),
         [Region.galar]: new Set(['Hulbury', 'Roaring-Sea Caves', 5, 6, 8, 9, 16, 21, 27, 29, 36, 37, 41, 42, 43, 44, 51, 53]),
     },
@@ -654,7 +657,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.hoenn]: new Set([119, 'Petalburg Woods']),
         [Region.sinnoh]: new Set([201, 204, 'Eterna City', 'Eterna Forest', 'Fullmoon Island', 'Newmoon Island']),
         [Region.unova]: new Set([6, 'Floccesy Town', 'Lostlorn Forest', 'Pinwheel Forest', 'Pledge Grove']),
-        [Region.kalos]: new Set([1, 14, 20, 'Laverre City', 'Santalune Forest', 'Pokémon Village']),
+        [Region.kalos]: new Set([1, 14, 20, 'Coumarine City', 'Laverre City', 'Santalune Forest', 'Pokémon Village']),
         [Region.alola]: new Set([27, 'Melemele Woods', 'Lush Jungle', 'Malie Garden', 'Ula\'ula Meadow', 'Poni Meadow']),
         [Region.galar]: new Set(['Slumbering Weald', 'Slumbering Weald Shrine', 'Glimwood Tangle', 'Ballonlea', 'Dyna Tree Hill', 2, 12, 13, 35]),
     },
@@ -695,7 +698,7 @@ export const Environments: Record<string, EnvironmentData> = {
     Mansion: {
         [Region.kanto]: new Set(['Silph Co.', 'Pokémon Mansion']),
         [Region.johto]: new Set(['Olivine City', 'Sprout Tower', 'Burned Tower']),
-        [Region.hoenn]: new Set(['Petalburg City', 'Pyrite Bldg']),
+        [Region.hoenn]: new Set(['Petalburg City', 'Pyrite Building']),
         [Region.sinnoh]: new Set(['Veilstone City', 'Canalave City', 'Snowpoint Temple']),
         [Region.unova]: new Set(['Castelia City', 'Mistralton City', 'Opelucid City', 'Liberty Garden', 'Dragonspiral Tower', 'Dreamyard']),
         [Region.kalos]: new Set(['Parfum Palace', 'Lost Hotel']),
@@ -713,6 +716,9 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.alola]: new Set(['Hau\'oli Cemetery', 'Memorial Hill']),
         [Region.galar]: new Set(['Dusty Bowl', 49]),
     },
+
+    // No need to set anything here, only exists for battle overrides
+    Default: {},
 };
 
 export type Environment = keyof typeof Environments;
@@ -727,6 +733,7 @@ export const EnvironmentCssClass: Record<Environment, string> = {
     PowerPlant: 'power-plant',
     Mansion: 'mansion',
     Graveyard: 'graveyard',
+    Default: '',
 };
 
 // Starter Pokémon
@@ -748,7 +755,7 @@ export const RegionalStarters = [
     [650, 653, 656], // Kalos
     [722, 725, 728], // Alola
     [810, 813, 816], // Galar
-    [722, 155, 501], // Hisui
+    [724.01, 157.01, 503.01], // Hisui
 ];
 
 export enum StoneType {
@@ -1230,7 +1237,7 @@ export const HoennDungeons = [
     'Phenac City Battles',
     'Pyrite Town Battles',
     'Pyrite Colosseum Battles',
-    'Pyrite Bldg',
+    'Pyrite Building',
     'Pyrite Cave',
     'Relic Cave',
     'Mt. Battle Battles',
@@ -1619,6 +1626,11 @@ export const TemporaryBattles = [
     'Matt 3',
     'Courtney 3',
     'Hoenn Stone Salesman',
+    'Captain Stern',
+    'Archie Primal',
+    'Maxie Primal',
+    'Primal Groudon',
+    'Primal Kyogre',
     'Aipom Alley',
     'Mime Interview',
     'Underground Fighting Ring',
@@ -2010,4 +2022,57 @@ export enum ShadowStatus {
     None,
     Shadow,
     Purified,
+}
+
+export enum MegaStoneType {
+    Abomasite,
+    Absolite,
+    Aerodactylite,
+    Aggronite,
+    Alakazite,
+    Altarianite,
+    Ampharosite,
+    Audinite,
+    Banettite,
+    Beedrillite,
+    Blastoisinite,
+    Blazikenite,
+    Blue_Orb,
+    Cameruptite,
+    Charizardite_X,
+    Charizardite_Y,
+    Diancite,
+    Galladite,
+    Garchompite,
+    Gardevoirite,
+    Gengarite,
+    Glalitite,
+    Gyaradosite,
+    Heracronite,
+    Houndoominite,
+    Kangaskhanite,
+    Latiasite,
+    Latiosite,
+    Lopunnite,
+    Lucarionite,
+    Manectite,
+    Mawilite,
+    Medichamite,
+    Metagrossite,
+    Meteorite,
+    Mewtwonite_X,
+    Mewtwonite_Y,
+    Pidgeotite,
+    Pinsirite,
+    Red_Orb,
+    Sablenite,
+    Salamencite,
+    Sceptilite,
+    Scizorite,
+    Sharpedonite,
+    Slowbronite,
+    Steelixite,
+    Swampertite,
+    Tyranitarite,
+    Venusaurite,
 }

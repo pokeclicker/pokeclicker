@@ -204,7 +204,7 @@ class PokemonHelper extends TmpPokemonHelper {
         const list = {};
         Object.entries(SafariPokemonList.list).forEach(([region, zones]) => {
             zones().forEach((p, zone) => {
-                if (zone == GameConstants.Region.kalos) {
+                if (region == GameConstants.Region.kalos.toString()) {
                     // Friendly safari might cause infinit recursion
                     return;
                 }
@@ -328,7 +328,7 @@ class PokemonHelper extends TmpPokemonHelper {
         return questLines;
     }
 
-    public static getPokemonLocations = (pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none) => {
+    public static getPokemonLocations = (pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.MAX_AVAILABLE_REGION) => {
         const encounterTypes = {};
         // Routes
         const regionRoutes = PokemonHelper.getPokemonRegionRoutes(pokemonName, maxRegion);
@@ -437,7 +437,7 @@ class PokemonHelper extends TmpPokemonHelper {
         return locations[PokemonLocationType.Dungeon] ||
             locations[PokemonLocationType.DungeonBoss] ||
             locations[PokemonLocationType.DungeonChest] ||
-            locations[PokemonLocationType.Evolution] ||
+            (locations[PokemonLocationType.Evolution] as EvoData[])?.some((evo) => evo.trigger === EvoTrigger.STONE) || // Only stone evolutions gives EVs
             locations[PokemonLocationType.Roaming] ||
             locations[PokemonLocationType.Route] ||
             locations[PokemonLocationType.Safari] ||
