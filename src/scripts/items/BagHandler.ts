@@ -100,8 +100,8 @@ class BagHandler {
             case ItemType.underground:
                 return  !this.getUndergroundItem(item.id).requirement || this.getUndergroundItem(item.id).requirement.isCompleted();
             case ItemType.berry:
-                return true;
             case ItemType.gem:
+            default:
                 return true;
         }
     }
