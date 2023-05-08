@@ -1728,7 +1728,7 @@ class QuestLineHelper {
     }
 
     public static createPrimalReversionQuestLine() {
-        const primalReversionQuestLine = new QuestLine('Primal Reversion', 'Teams Aqua and Magma have been trying to unlock the Primal power of Groudon and Kyogre.', new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 30), new ObtainedPokemonRequirement('Groudon'), new ObtainedPokemonRequirement('Kyogre')]), GameConstants.BulletinBoards.Hoenn);
+        const primalReversionQuestLine = new QuestLine('Primal Reversion', 'Teams Aqua and Magma have been trying to unlock the Primal power of Groudon and Kyogre.', new MultiRequirement([new QuestLineStepCompletedRequirement('The Delta Episode', 28), new ObtainedPokemonRequirement('Groudon'), new ObtainedPokemonRequirement('Kyogre')]), GameConstants.BulletinBoards.Hoenn);
 
         const talkToMrStone1 = new TalkToNPCQuest(MrStone1, 'Talk to Mr. Stone in Slateport City.');
         primalReversionQuestLine.addQuest(talkToMrStone1);
