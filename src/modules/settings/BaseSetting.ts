@@ -51,6 +51,10 @@ export default abstract class BaseSetting<T, S> {
         return this.options.filter((opt) => opt.isUnlocked());
     }
 
+    getOption(value: S): SettingOption<S> {
+        return this.options.find((opt) => opt.value === value);
+    }
+
     get displayName(): string {
         if (!this.cachedTranslatedName) {
             this.cachedTranslatedName = App.translation.get(

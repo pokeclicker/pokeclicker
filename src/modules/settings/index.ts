@@ -225,7 +225,9 @@ Object.keys(BreedingFilters).forEach((key) => {
     }
     const filter = BreedingFilters[key];
     if (key === 'type1' || key === 'type2') {
-        Settings.add(new MultiSetting<string>(filter.optionName, filter.displayName, filter.options || [], filter.value()));
+        const setting = new MultiSetting<string>(filter.optionName, filter.displayName, filter.options || [], filter.value());
+        Settings.add(setting);
+        setting.observableValue.subscribe((val) => BreedingFilters[key].value(val));
     } else {
         Settings.add(new Setting<string>(filter.optionName, filter.displayName, filter.options || [], filter.value().toString()));
     }

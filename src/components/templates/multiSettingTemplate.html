@@ -1,0 +1,21 @@
+<!-- expects a MultiSetting to be passed in as setting -->
+<script type="text/html" id="multiSettingTemplate">
+    <div class="dropdown show">
+        <button type="button" class="text-left custom-select col-12 btn btn-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+            data-bind="text : $data.setting.displayValue()"
+        ></button>
+        <div class="border-secondary dropdown-menu col-12" style="max-height: 50vw; overflow: scroll">
+            <div class="dropdown-item" data-bind="click : function(){ $data.setting.toggleAll() }">
+                All
+            </div>
+            <div class="dropdown-divider"></div>
+            <!-- ko foreach : $data.setting.getValidOptions() -->
+                <div class="dropdown-item" data-bind="class : $parent.setting.isSelected($data.value) ? 'bg-success' : '',
+                    text : $data.text,
+                    click : function(){ $parent.setting.set([$data.value]) },
+                    event : { 'contextmenu' : () => { $parent.setting.toggle($data.value); return false; }
+                }"></div>
+            <!-- /ko-->
+        </div>
+    </div>
+</script>
