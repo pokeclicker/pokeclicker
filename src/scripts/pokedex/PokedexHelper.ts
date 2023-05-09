@@ -91,7 +91,8 @@ class PokedexHelper {
             // Check if the englishName or displayName contains the string
             const displayName = PokemonHelper.displayName(pokemon.name)();
             const filterName = PokedexFilters.name.value();
-            if (!filterName.test(displayName) && !filterName.test(pokemon.name)) {
+            const partyName = App.game.party.getPokemonByName(pokemon.name)?.displayName;
+            if (!filterName.test(displayName) && !filterName.test(pokemon.name) && !(partyName != undefined && filterName.test(partyName))) {
                 return false;
             }
 
