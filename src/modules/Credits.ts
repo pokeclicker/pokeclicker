@@ -215,7 +215,7 @@ export const SpriteCredits: Credit[] = [
             'Bill\'s Grandpa with Eevee',
             'Bill\'s Grandpa without Eevee',
             'Black mane hair big icon',
-            'Blank Plate (item and underground)'
+            'Blank Plate (item and underground)',
             'Blimp base',
             'Butler',
             'Charitative chansey shuffle',
