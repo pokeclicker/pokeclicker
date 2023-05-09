@@ -1609,7 +1609,7 @@ class QuestLineHelper {
             App.game.party.gainPokemonByName('Silvally (Bug)');
             Notifier.notify({
                 title: SilvallyTypesQuestLine.name,
-                message: 'Guzma gives you a Silvally (Bug)!',
+                message: 'Team Skull Boss Guzma gave you a Silvally (Bug)!',
                 type: NotificationConstants.NotificationOption.success,
                 timeout: 3e4,
                 sound: NotificationConstants.NotificationSound.General.new_catch,
@@ -1619,13 +1619,13 @@ class QuestLineHelper {
         const BugSilvallyBattle = new CustomQuest(
             1,
             BugSilvallyReward,
-            'Defeat Guzma to recover the Silvally!',
+            'Defeat Team Skull Boss Guzma to recover the Silvally!',
             () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Guzma Bug Silvally')](),
             0
         );
         SilvallyTypesQuestLine.addQuest(BugSilvallyBattle);
 
-        const talkToFlyingSilvally = new TalkToNPCQuest(KahiliSilvally, 'Some Melemele island habitants have seen Kahili walking with a weird Pokémon near Ten Carat Hill. Go find her in Ten Carat Hill.');
+        const talkToFlyingSilvally = new TalkToNPCQuest(KahiliSilvally, 'Some Melemele island habitants have seen Elite Kahili walking with a weird Pokémon near Ten Carat Hill. Go find her in Ten Carat Hill.');
         SilvallyTypesQuestLine.addQuest(talkToFlyingSilvally);
 
         const FlyingSilvallyReward = () => {
@@ -1642,7 +1642,7 @@ class QuestLineHelper {
         const FlyingSilvallyBattle = new CustomQuest(
             1,
             FlyingSilvallyReward,
-            'Defeat Kahili for a reward!',
+            'Defeat Elite Kahili for a reward!',
             () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Kahili Flying Silvally')](),
             0
         );
@@ -1655,7 +1655,7 @@ class QuestLineHelper {
             App.game.party.gainPokemonByName('Silvally (Poison)');
             Notifier.notify({
                 title: SilvallyTypesQuestLine.name,
-                message: 'Plumeria gives you a Silvally (Poison)!',
+                message: 'Team Skull Admin Plumeria gave you a Silvally (Poison)!',
                 type: NotificationConstants.NotificationOption.success,
                 timeout: 3e4,
                 sound: NotificationConstants.NotificationSound.General.new_catch,
@@ -1665,7 +1665,7 @@ class QuestLineHelper {
         const PoisonSilvallyBattle = new CustomQuest(
             1,
             PoisonSilvallyReward,
-            'Defeat Plumeria to recover the Silvally!',
+            'Defeat Team Skull Admin Plumeria to recover the Silvally!',
             () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Plumeria Poison Silvally')](),
             0
         );
@@ -1678,7 +1678,7 @@ class QuestLineHelper {
             App.game.party.gainPokemonByName('Silvally (Ghost)');
             Notifier.notify({
                 title: SilvallyTypesQuestLine.name,
-                message: 'Acerola gives you a Silvally (Ghost)!',
+                message: 'Captain Acerola gave you a Silvally (Ghost)!',
                 type: NotificationConstants.NotificationOption.success,
                 timeout: 3e4,
                 sound: NotificationConstants.NotificationSound.General.new_catch,
@@ -1688,7 +1688,7 @@ class QuestLineHelper {
         const GhostSilvallyBattle = new CustomQuest(
             1,
             GhostSilvallyReward,
-            'Defeat Acerola to get the Silvally back.',
+            'Defeat Captain Acerola to get the Silvally back.',
             () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Acerola Ghost Silvally')](),
             0
         );
@@ -1701,7 +1701,7 @@ class QuestLineHelper {
             App.game.party.gainPokemonByName('Silvally (Psychic)');
             Notifier.notify({
                 title: SilvallyTypesQuestLine.name,
-                message: 'Faba gives you a Silvally (Psychic)!',
+                message: 'Aether Branch Chief Faba gives you a Silvally (Psychic)!',
                 type: NotificationConstants.NotificationOption.success,
                 timeout: 3e4,
                 sound: NotificationConstants.NotificationSound.General.new_catch,
@@ -1712,19 +1712,18 @@ class QuestLineHelper {
             1,
             PsychicSilvallyReward,
             'Defeat Aether Branch Chief Faba to get the Silvally back.',
-            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Faba Psychic Silvally')](),
-            0
+            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Faba Psychic Silvally')]
         );
         SilvallyTypesQuestLine.addQuest(PsychicSilvallyBattle);
 
-        const talkToSteelSilvally = new TalkToNPCQuest(MolayneSilvally, 'Molayne needs help training in Hokulani Observatory. He has also been seen with a Silvally so go check it out.');
+        const talkToSteelSilvally = new TalkToNPCQuest(MolayneSilvally, 'Elite Molayne needs help training in Hokulani Observatory. He has also been seen with a Silvally so go check it out.');
         SilvallyTypesQuestLine.addQuest(talkToSteelSilvally);
 
         const SteelSilvallyReward = () => {
             App.game.party.gainPokemonByName('Silvally (Steel)');
             Notifier.notify({
                 title: SilvallyTypesQuestLine.name,
-                message: 'Molayne gives you a Silvally (Steel)!',
+                message: 'Molayne gave you a Silvally (Steel)!',
                 type: NotificationConstants.NotificationOption.success,
                 timeout: 3e4,
                 sound: NotificationConstants.NotificationSound.General.new_catch,
@@ -1734,20 +1733,20 @@ class QuestLineHelper {
         const SteelSilvallyBattle = new CustomQuest(
             1,
             SteelSilvallyReward,
-            'Defeat Molayne for a reward!.',
+            'Defeat Elite Molayne for a reward!.',
             () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Molayne Steel Silvally')](),
             0
         );
         SilvallyTypesQuestLine.addQuest(SteelSilvallyBattle);
 
-        const talkToDragonSilvally = new TalkToNPCQuest(RyukiSilvally, 'Molayne needs help training in Hokulani Observatory. He has also been seen with a Silvally so go check it out.');
+        const talkToDragonSilvally = new TalkToNPCQuest(RyukiSilvally, 'Look in the Vast Poni Canyon for the weird dressed guy!');
         SilvallyTypesQuestLine.addQuest(talkToDragonSilvally);
 
         const DragonSilvallyReward = () => {
             App.game.party.gainPokemonByName('Silvally (Dragon)');
             Notifier.notify({
                 title: SilvallyTypesQuestLine.name,
-                message: 'Ryuki gives you a Silvally (Dragon)!',
+                message: 'Ryuki gave you a Silvally (Dragon)!',
                 type: NotificationConstants.NotificationOption.success,
                 timeout: 3e4,
                 sound: NotificationConstants.NotificationSound.General.new_catch,

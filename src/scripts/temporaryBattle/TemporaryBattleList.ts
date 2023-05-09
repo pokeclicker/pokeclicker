@@ -2782,7 +2782,7 @@ TemporaryBattleList['Kahili Flying Silvally'] = new TemporaryBattle(
     [new QuestLineStepCompletedRequirement('Typing some Memories', 24)],
     undefined,
     {
-        displayName: 'Kahili',
+        displayName: 'Elite Kahili',
         imageName: '../gymLeaders/Kahili',
     }
 );
@@ -2818,7 +2818,7 @@ TemporaryBattleList['Acerola Ghost Silvally'] = new TemporaryBattle(
     [new QuestLineStepCompletedRequirement('Typing some Memories', 28)],
     undefined,
     {
-        displayName: 'Acerola',
+        displayName: 'Captain Acerola',
         imageName: '../gymLeaders/Acerola',
     }
 );
@@ -2854,7 +2854,7 @@ TemporaryBattleList['Molayne Steel Silvally'] = new TemporaryBattle(
     [new QuestLineStepCompletedRequirement('Typing some Memories', 32)],
     undefined,
     {
-        displayName: 'Molayne',
+        displayName: 'Elite Molayne',
         imageName: '../gymLeaders/Molayne',
     }
 );

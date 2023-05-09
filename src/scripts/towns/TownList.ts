@@ -5011,10 +5011,10 @@ const GuzmaSilvally = new NPC('Team Skull Boss Guzma', [
     'Huh? What the hell are you doing in here? A what? Silvally? I think I have what you\'re looking for. Yeah, I have it, if you want to see it. Anyway, how the hell did you get in here? Tsk. Those grunts can\'t do anything right. Anyway, you saw what you wanted so get out of here!',
     'What? you aren\'t leaving because you need this stupid thing? well, I\'m not giving it to you without a battle, at least. Here we go, \'m not gonna lose this time.',
 ], {
-    image: 'assets/images/trainers/Team Skull Boss(guzma).png',
+    image: 'assets/images/trainers/Team Skull Boss (guzma).png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 21, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 23, GameConstants.AchievementOption.less)]),
 });
-const KahiliSilvally = new NPC('Kahili', [
+const KahiliSilvally = new NPC('Elite Kahili', [
     'TODO Welcoming the player',
     'TODO Challenging player with a reward if won',
 ], {
@@ -5042,7 +5042,7 @@ const FabaSilvally = new NPC('Aether Branch Chief Faba', [
     image: 'assets/images/trainers/Aether Branch Chief (faba).png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 29, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 31, GameConstants.AchievementOption.less)]),
 });
-const MolayneSilvally = new NPC('Molayne', [
+const MolayneSilvally = new NPC('Elite Molayne', [
     'TODO Welcoming the player',
     'TODO asking the player for a battle as a training for him',
 ], {
@@ -5666,9 +5666,7 @@ TownList['Aether Foundation'] = new DungeonTown(
         TemporaryBattleList['Team Flare Leader Lysandre'],
         TemporaryBattleList['Team Plasma Leader Ghetsis'],
         TemporaryBattleList['Team Rainbow Leader Giovanni'],
-        TemporaryBattleList['Faba Psychic Silvally'],
     ],
-    {npcs: [FabaSilvally]}
 );
 TownList['Exeggutor Island Hill'] = new DungeonTown(
     'Exeggutor Island Hill',
