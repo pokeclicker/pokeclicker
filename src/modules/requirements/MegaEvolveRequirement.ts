@@ -24,7 +24,7 @@ export default class MegaEvolveRequirement extends Requirement {
             if (!player.hasMegaStone(this.megaStone)) {
                 hints.push(`${this.name} needs the ${humanifyString(MegaStoneType[this.megaStone])} Mega Stone.`);
             }
-            if (App.game.party.getPokemonByName(this.name).attack < attackRequired) {
+            if ((App.game.party.getPokemonByName(this.name)?.attack ?? 0) < attackRequired) {
                 hints.push(`Needs at least ${attackRequired.toLocaleString('en-US')} attack to Mega Evolve.`);
             }
             return hints.join('<br />');
