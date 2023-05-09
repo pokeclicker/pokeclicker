@@ -2222,7 +2222,7 @@ const ProfBirch = new ProfNPC('Prof. Birch',
 const CoolTrainerDillan = new NPC('Cool Trainer Dillan', [
     'Hey newcomer! I see you are the Hoenn Champion. You must be an amazing Trainer!',
     'At the Battle Frontier, you can test your skills against Trainers from all over the world.',
-    'Since some of these trainers come from far away, you may see Pokémon that you might not be able to catch yet.',
+    'Since some of these Trainers come from far away, you may see Pokémon that you might not be able to catch yet.',
     'But don\'t worry, catching them all is only a matter of time. Just keep exploring and having fun and you\'ll encounter lots of different Pokémon, either in form, color, or even evolutions!',
 ], {image: 'assets/images/npcs/Cooltrainer (male).png',
 });
