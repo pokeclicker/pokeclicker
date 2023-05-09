@@ -8169,7 +8169,7 @@ dungeonList['Glittering Cave'] = new Dungeon('Glittering Cave',
             {loot: 'xAttack'},
         ],
         rare: [{loot: 'Red Shard'}],
-        epic: [{loot: 'Blank Plate'},],
+        epic: [{loot: 'Blank Plate'}],
         legendary: [
             {loot: 'Hard Stone'},
             {loot: 'Revive'},
