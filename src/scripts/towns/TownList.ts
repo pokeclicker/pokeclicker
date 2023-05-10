@@ -4964,10 +4964,16 @@ TownList['Plasma Frigate'] = new DungeonTown(
             new MultiRequirement([
                 new GymBadgeRequirement(BadgeEnums.Wave),
                 new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 14),
+                new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 15, GameConstants.AchievementOption.less),
             ]),
+            new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 16),
             new QuestLineCompletedRequirement('Quest for the DNA Splicers'),
         ]),
-    ]
+    ],
+    [TemporaryBattleList['Colress 3'], TemporaryBattleList['Plasma Shadow 2'], TemporaryBattleList['Plasma Shadow 3'], TemporaryBattleList['Plasma Shadow 4'], TemporaryBattleList['Ghetsis 1'], TemporaryBattleList['Ghetsis 2']],
+    {
+        npcs: [GiantChasmColress, GiantChasmShadowTriad],
+    }
 );
 TownList['Giant Chasm'] = new DungeonTown(
     'Giant Chasm',
@@ -4976,11 +4982,7 @@ TownList['Giant Chasm'] = new DungeonTown(
     [
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Plasma Frigate')),
         new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 15),
-    ],
-    [TemporaryBattleList['Colress 3'], TemporaryBattleList['Plasma Shadow 2'], TemporaryBattleList['Plasma Shadow 3'], TemporaryBattleList['Plasma Shadow 4'], TemporaryBattleList['Ghetsis 1'], TemporaryBattleList['Ghetsis 2']],
-    {
-        npcs: [GiantChasmColress, GiantChasmShadowTriad],
-    }
+    ]
 );
 TownList['Cave of Being'] = new DungeonTown(
     'Cave of Being',
