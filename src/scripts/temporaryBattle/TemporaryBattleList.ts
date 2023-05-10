@@ -3674,8 +3674,8 @@ TemporaryBattleList['Team Rainbow Leader Giovanni'] = new TemporaryBattle(
         new GymPokemon('Nidoking', 230000000, 60),
         new GymPokemon('Nidoqueen', 230000000, 60),
         new GymPokemon('Rhyperior', 230000000, 60),
-        new GymPokemon('Mega Mewtwo X', 230000000, 60),
-        new GymPokemon('Mega Mewtwo Y', 260000000, 60),
+        new GymPokemon('Mega Mewtwo X', 245000000, 60),
+        new GymPokemon('Mega Mewtwo Y', 245000000, 60),
     ],
     'Ha! That was a truly intense fight!',
     [new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 5)]
