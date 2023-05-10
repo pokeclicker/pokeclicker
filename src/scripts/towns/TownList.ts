@@ -4962,10 +4962,8 @@ TownList['Plasma Frigate'] = new DungeonTown(
     [
         new OneFromManyRequirement([
             new MultiRequirement([
-                new RouteKillRequirement(10, GameConstants.Region.unova, 22),
                 new GymBadgeRequirement(BadgeEnums.Wave),
                 new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 14),
-                new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Plasma Frigate'), GameConstants.AchievementOption.less),
             ]),
             new QuestLineCompletedRequirement('Quest for the DNA Splicers'),
         ]),
