@@ -1625,7 +1625,7 @@ class QuestLineHelper {
         );
         SilvallyTypesQuestLine.addQuest(BugSilvallyBattle);
 
-        const talkToFlyingSilvally = new TalkToNPCQuest(KahiliSilvally, 'Some Melemele island habitants have seen Elite Kahili walking with a weird Pokémon near Ten Carat Hill. Go find her in Ten Carat Hill.');
+        const talkToFlyingSilvally = new TalkToNPCQuest(KahiliSilvally, 'Some Melemele island habitants have seen Kahili walking with a weird Pokémon near Ten Carat Hill. Go find her in Ten Carat Hill.');
         SilvallyTypesQuestLine.addQuest(talkToFlyingSilvally);
 
         const FlyingSilvallyReward = () => {
@@ -1642,7 +1642,7 @@ class QuestLineHelper {
         const FlyingSilvallyBattle = new CustomQuest(
             1,
             FlyingSilvallyReward,
-            'Defeat Elite Kahili for a reward!',
+            'Defeat Kahili for a reward!',
             () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Kahili Flying Silvally')](),
             0
         );
@@ -1716,7 +1716,7 @@ class QuestLineHelper {
         );
         SilvallyTypesQuestLine.addQuest(PsychicSilvallyBattle);
 
-        const talkToSteelSilvally = new TalkToNPCQuest(MolayneSilvally, 'Elite Molayne needs help training in Hokulani Observatory. He has also been seen with a Silvally so go check it out.');
+        const talkToSteelSilvally = new TalkToNPCQuest(MolayneSilvally, 'Molayne needs help training in Hokulani Observatory. He has also been seen with a Silvally so go check it out.');
         SilvallyTypesQuestLine.addQuest(talkToSteelSilvally);
 
         const SteelSilvallyReward = () => {
@@ -1733,7 +1733,7 @@ class QuestLineHelper {
         const SteelSilvallyBattle = new CustomQuest(
             1,
             SteelSilvallyReward,
-            'Defeat Elite Molayne for a reward!.',
+            'Defeat Molayne for a reward!.',
             () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Molayne Steel Silvally')](),
             0
         );
