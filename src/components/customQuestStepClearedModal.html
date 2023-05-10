@@ -1,0 +1,25 @@
+<div class="modal fade" data-keyboard="false" data-backdrop="static" id="customQuestStepClearedModal" tabindex="-1" role="dialog"
+aria-labelledby="customQuestStepClearedModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-scrollable" role="document">
+   <div class="modal-content">
+    <!-- ko if: CustomQuest.questObservable()?.optionalArgs -->
+       <div class="modal-header">
+           <div style="width: 100%;">
+            <img src="" onerror="this.src='assets/images/npcs/specialNPCs/Mysterious Trainer.png'"
+                data-bind="attr:{ src: CustomQuest.questObservable().getNpcImage()}">
+            <h5 class="modal-title" id="customQuestStepClearedModalLabel"
+                data-bind="text: CustomQuest.questObservable().getNpcDisplayName()">Modal title</h5>
+
+           </div>
+        </div>
+        <div class="modal-body">
+            <p data-bind="html: TextMerger.mergeText(CustomQuest.questObservable()?.getClearedMessage())"></p>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        </div>
+    <!-- /ko -->
+   </div>
+</div>
+</div>

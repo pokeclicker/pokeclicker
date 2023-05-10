@@ -65,6 +65,9 @@ export const RegionNightTimedLevelEvolution = regionRestrict(NightTimedLevelEvol
 // QuestlineLevelEvolution(region: GameConstants.Region, basePokemon: string, evolvedPokemon: string, level: number)
 export const QuestlineLevelEvolution = questlineRestrict(LevelEvolution);
 
+// QuestlineStoneEvolution(region: GameConstants.Region, basePokemon: string, evolvedPokemon: string, stone: GameConstants.StoneType)
+export const QuestlineStoneEvolution = questlineRestrict(StoneEvolution);
+
 export const HeldItemLevelEvolution = heldItemRestrict(LevelEvolution);
 
 export const WeatherRestrictedLevelEvolution = weatherRestrict(LevelEvolution);

@@ -1,10 +1,10 @@
-import { Observable } from 'knockout';
+import { Computed, Observable } from 'knockout';
 import { AchievementOption } from '../GameConstants';
 import Requirement from './Requirement';
 
 export default class CustomRequirement<T> extends Requirement {
     constructor(
-        private focus: Observable<T>,
+        private focus: Observable<T> | Computed<T>,
         private required: T,
         private hintText: string,
         option = AchievementOption.more,

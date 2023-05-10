@@ -157,19 +157,19 @@ class FarmController {
     public static navigateRight() {
         if (FarmController.navigateIndex() < FarmController.numberOfTabs()) {
             FarmController.navigateIndex(FarmController.navigateIndex() + 1);
-            this.selectedBerry(this.getBerryListWithIndex()[0]);
+            this.selectedBerry(this.getUnlockedBerryListWithIndex()[0]);
         }
     }
 
     public static navigateLeft() {
         if (FarmController.navigateIndex() > 0) {
             FarmController.navigateIndex(FarmController.navigateIndex() - 1);
-            this.selectedBerry(this.getBerryListWithIndex()[0]);
+            this.selectedBerry(this.getUnlockedBerryListWithIndex()[0]);
         }
     }
 
-    public static getBerryListWithIndex() {
-        return this.berryListFiltered().slice(this.navigateIndex() * this.BERRIES_PER_PAGE, (this.navigateIndex() * this.BERRIES_PER_PAGE) + this.BERRIES_PER_PAGE);
+    public static getUnlockedBerryListWithIndex() {
+        return this.getUnlockedBerryList().slice(this.navigateIndex() * this.BERRIES_PER_PAGE, (this.navigateIndex() * this.BERRIES_PER_PAGE) + this.BERRIES_PER_PAGE);
     }
 
     public static getUnlockedBerryList() {
@@ -192,9 +192,9 @@ class FarmController {
         if (App.game.farming.unlockedBerries[index]()) {
             return GameConstants.BerryColor[App.game.farming.berryData[index].color];
         } else if (FarmController.getHint(index, true) !== '') {
-            return GameConstants.BerryColor[6];
+            return GameConstants.BerryColor[8];
         } else {
-            return GameConstants.BerryColor[7];
+            return GameConstants.BerryColor[9];
         }
 
     }

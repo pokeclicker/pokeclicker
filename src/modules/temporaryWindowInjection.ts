@@ -11,7 +11,9 @@ import LogEvent from './LogEvent';
 import AuraType from './enums/AuraType';
 import BadgeEnums from './enums/Badges';
 import BerryColor from './enums/BerryColor';
+import BerryFirmness from './enums/BerryFirmness';
 import BerryType from './enums/BerryType';
+import SizeUnits from './enums/SizeUnits';
 import PokemonType from './enums/PokemonType';
 import CaughtStatus from './enums/CaughtStatus';
 import EvolutionType from './enums/EvolutionType';
@@ -22,6 +24,7 @@ import KeyItemType from './enums/KeyItemType';
 import MulchType from './enums/MulchType';
 import PlotStage from './enums/PlotStage';
 import QuestLineState from './quests/QuestLineState';
+import WeatherForecastStatus from './enums/WeatherForecastStatus';
 // end enums
 import BooleanSetting from './settings/BooleanSetting';
 import RangeSetting from './settings/RangeSetting';
@@ -30,8 +33,12 @@ import SettingOption from './settings/SettingOption';
 import BreedingFilters from './settings/BreedingFilters';
 import WeatherType from './weather/WeatherType';
 import Weather from './weather/Weather';
+import WeatherApp from './weather/WeatherApp';
+import RegionalForecast from './weather/RegionalForecast';
+import WeatherForecast from './weather/WeatherForecast';
 import DayCycle from './dayCycle/DayCycle';
 import DayCyclePart from './dayCycle/DayCyclePart';
+import DayCyclePartRequirement from './requirements/DayCyclePartRequirement';
 import SeededRand from './utilities/SeededRand';
 import SeededDateRand from './utilities/SeededDateRand';
 import Rand from './utilities/Rand';
@@ -69,10 +76,9 @@ import BoughtOakItem from './oakItems/BoughtOakItem';
 import OakItemController from './oakItems/OakItemController';
 import OakItemLoadout from './oakItems/OakItemLoadout';
 import OakItemLoadouts from './oakItems/OakItemLoadouts';
-import SpecialRoutePokemon from './routes/SpecialRoutePokemon';
-import RoutePokemon from './routes/RoutePokemon';
-import RegionRoute from './routes/RegionRoute';
-import Routes from './routes/Routes';
+import {
+    SpecialRoutePokemon, RoutePokemon, RegionRoute, Routes,
+} from './routes';
 import SubRegion from './subRegion/SubRegion';
 import SubRegions from './subRegion/SubRegions';
 import Requirement from './requirements/Requirement';
@@ -113,6 +119,7 @@ import RouteKillRequirement from './requirements/RouteKillRequirement';
 import SeededDateRequirement from './requirements/SeededDateRequirement';
 import SeviiCaughtRequirement from './requirements/SeviiCaughtRequirement';
 import ShinyPokemonRequirement from './requirements/ShinyPokemonRequirement';
+import ShadowPokemonRequirement from './requirements/ShadowPokemonRequirement';
 import StatisticRequirement from './requirements/StatisticRequirement';
 import SubregionRequirement from './requirements/SubregionRequirement';
 import StarterRequirement from './requirements/StarterRequirement';
@@ -157,12 +164,23 @@ import CaughtIndicatingItem from './items/CaughtIndicatingItem';
 import EggItem from './items/EggItem';
 import MegaStoneItem from './items/MegaStoneItem';
 import PokeballItem from './items/PokeballItem';
+import QuestItem from './items/QuestItem';
 import Vitamin from './items/Vitamin';
 import VitaminController from './items/VitaminController';
 import RoamingPokemonList from './pokemons/RoamingPokemonList';
 import DataPokemon from './pokemons/DataPokemon';
 import RoamingPokemon from './pokemons/RoamingPokemon';
 import UndergroundMegaStoneItem from './underground/UndergroundMegaStoneItem';
+import PokeballFilter from './pokeballs/PokeballFilter';
+import PokeballFilters from './pokeballs/PokeballFilters';
+import TextMerger from './utilities/TextMerger';
+import { pokeballFilterOptions } from './pokeballs/PokeballFilterOptions';
+import { DailyDeal } from './underground/DailyDeal';
+import { Mine } from './underground/Mine';
+import { ShardDeal } from './underground/ShardDeal';
+import { Underground } from './underground/Underground';
+import UndergroundUpgrade from './underground/UndergroundUpgrade';
+import SpecialEventRequirement from './requirements/SpecialEventRequirement';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -176,7 +194,9 @@ Object.assign(<any>window, {
     AuraType,
     BadgeEnums,
     BerryColor,
+    BerryFirmness,
     BerryType,
+    SizeUnits,
     PokemonType,
     CaughtStatus,
     EvolutionType,
@@ -187,14 +207,19 @@ Object.assign(<any>window, {
     MulchType,
     PlotStage,
     QuestLineState,
+    WeatherForecastStatus,
     BooleanSetting,
     RangeSetting,
     Setting,
     SettingOption,
     WeatherType,
     Weather,
+    WeatherApp,
+    RegionalForecast,
+    WeatherForecast,
     DayCycle,
     DayCyclePart,
+    DayCyclePartRequirement,
     SeededRand,
     SeededDateRand,
     Rand,
@@ -282,6 +307,7 @@ Object.assign(<any>window, {
     SeededDateRequirement,
     SeviiCaughtRequirement,
     ShinyPokemonRequirement,
+    ShadowPokemonRequirement,
     StatisticRequirement,
     SubregionRequirement,
     StarterRequirement,
@@ -304,6 +330,7 @@ Object.assign(<any>window, {
     QuestLineStepCompletedRequirement,
     QuestLineStartedRequirement,
     TemporaryBattleRequirement,
+    SpecialEventRequirement,
     Translate,
     DayOfWeekRequirement,
     SaveReminder,
@@ -329,10 +356,20 @@ Object.assign(<any>window, {
     EggItem,
     MegaStoneItem,
     PokeballItem,
+    QuestItem,
     Vitamin,
     VitaminController,
     RoamingPokemonList,
     DataPokemon,
     RoamingPokemon,
     UndergroundMegaStoneItem,
+    PokeballFilter,
+    PokeballFilters,
+    TextMerger,
+    pokeballFilterOptions,
+    Mine,
+    Underground,
+    UndergroundUpgrade,
+    ShardDeal,
+    DailyDeal,
 });

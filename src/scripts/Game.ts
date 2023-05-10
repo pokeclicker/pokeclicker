@@ -24,6 +24,7 @@ class Game {
         public profile: Profile,
         public breeding: Breeding,
         public pokeballs: Pokeballs,
+        public pokeballFilters: PokeballFilters,
         public wallet: Wallet,
         public keyItems: KeyItems,
         public badgeCase: BadgeCase,
@@ -46,7 +47,9 @@ class Game {
         public multiplier: Multiplier,
         public saveReminder: SaveReminder,
         public battleCafe: BattleCafeSaveObject,
-        public dreamOrbController: DreamOrbController
+        public dreamOrbController: DreamOrbController,
+        public purifyChamber: PurifyChamber,
+        public weatherApp: WeatherApp
     ) {
         this._gameState = ko.observable(GameConstants.GameState.paused);
     }
@@ -87,6 +90,7 @@ class Game {
         this.underground.initialize();
         this.farming.initialize();
         this.specialEvents.initialize();
+        this.pokeballFilters.initialize();
         this.load();
 
         // Update if the achievements are already completed
@@ -96,7 +100,7 @@ class Game {
         if (player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.None) {
             Battle.generateNewEnemy();
         } else {
-            const battlePokemon = new BattlePokemon('MissingNo.', 0, PokemonType.None, PokemonType.None, 0, 0, 0, 0, new Amount(0, GameConstants.Currency.money), false, 0, GameConstants.BattlePokemonGender.NoGender);
+            const battlePokemon = new BattlePokemon('MissingNo.', 0, PokemonType.None, PokemonType.None, 0, 0, 0, 0, new Amount(0, GameConstants.Currency.money), false, 0, GameConstants.BattlePokemonGender.NoGender, GameConstants.ShadowStatus.None);
             Battle.enemyPokemon(battlePokemon);
         }
         //Safari.load();
@@ -112,6 +116,7 @@ class Game {
         ShardDeal.generateDeals();
         SafariPokemonList.generateSafariLists();
         RoamingPokemonList.generateIncreasedChanceRoutes(now);
+        WeatherApp.initialize();
 
         if (Settings.getSetting('disableOfflineProgress').value === false) {
             this.computeOfflineEarnings();
@@ -199,17 +204,6 @@ class Game {
                 App.game.quests.getQuestLine('Tutorial Quests').beginQuest(App.game.quests.getQuestLine('Tutorial Quests').curQuest());
             }
         }
-        // Battle Frontier not accessable (chances are people broke this themselves, but whatever...)
-        if (App.game.quests.getQuestLine('Mystery of Deoxys').state() == QuestLineState.inactive) {
-            if (App.game.statistics.battleFrontierHighestStageCompleted() >= 100) {
-                // Defeated stage 100, has obtained deoxys
-                App.game.quests.getQuestLine('Mystery of Deoxys').state(QuestLineState.ended);
-            } else if (App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Champion Wallace')]() >= 1) {
-                // Has defeated the Hoenn champion, Quest is started
-                App.game.quests.getQuestLine('Mystery of Deoxys').state(QuestLineState.started);
-                App.game.quests.getQuestLine('Mystery of Deoxys').beginQuest(App.game.quests.getQuestLine('Mystery of Deoxys').curQuest());
-            }
-        }
         // Mining expedition questline
         if (App.game.quests.getQuestLine('Mining Expedition').state() == QuestLineState.inactive) {
             if (App.game.party.alreadyCaughtPokemon(142)) {
@@ -219,17 +213,6 @@ class Game {
                 // Has the soul badge, Quest is started
                 App.game.quests.getQuestLine('Mining Expedition').state(QuestLineState.started);
                 App.game.quests.getQuestLine('Mining Expedition').beginQuest(App.game.quests.getQuestLine('Mining Expedition').curQuest());
-            }
-        }
-        // Vivillon questline (if not started due to gym bug)
-        if (App.game.quests.getQuestLine('The Great Vivillon Hunt!').state() == QuestLineState.inactive) {
-            if (App.game.party.alreadyCaughtPokemon(666.01)) {
-                // Has obtained Vivillon (Pokéball)
-                App.game.quests.getQuestLine('The Great Vivillon Hunt!').state(QuestLineState.ended);
-            } else if (App.game.badgeCase.badgeList[BadgeEnums.Iceberg]()) {
-                // Has the Iceberg badge, Quest is started
-                App.game.quests.getQuestLine('The Great Vivillon Hunt!').state(QuestLineState.started);
-                App.game.quests.getQuestLine('The Great Vivillon Hunt!').beginQuest(App.game.quests.getQuestLine('The Great Vivillon Hunt!').curQuest());
             }
         }
 
@@ -359,6 +342,9 @@ class Game {
         window.onbeforeunload = () => {
             this.save();
         };
+
+        console.log('%cStop!', 'color: red; font-size: 36px; font-weight: bold;');
+        console.log('%cThis is a browser feature intended for developers. If you were told to copy-paste or enter something here to obtain an easter egg or unlock a secret, it can corrupt your save file, cause bugs, or otherwise break your game.', 'color: red; font-size: 16px;');
     }
 
     stop() {
@@ -432,7 +418,7 @@ class Game {
                     Notifier.notify({
                         title: 'Welcome Time Traveller!',
                         message: `Please ensure you keep a backup of your old save as travelling through time can cause some serious problems.
-                        
+
                         Any Pokémon you may have obtained in the future could cease to exist which could corrupt your save file!`,
                         type: NotificationConstants.NotificationOption.danger,
                         timeout: GameConstants.HOUR,
@@ -457,6 +443,8 @@ class Game {
                 }
                 // Give the players more Battle Cafe spins
                 BattleCafeController.spinsLeft(BattleCafeController.spinsPerDay());
+                // Generate the weather forecast
+                WeatherApp.initialize();
 
                 DayOfWeekRequirement.date(now.getDay());
             }
@@ -465,6 +453,10 @@ class Game {
             if (old.getHours() !== now.getHours()) {
                 Weather.generateWeather(now);
                 RoamingPokemonList.generateIncreasedChanceRoutes(now);
+                // Check if it's weather change time
+                if (now.getHours() % Weather.period === 0) {
+                    WeatherApp.checkDateHasPassed();
+                }
             }
 
             this.save();

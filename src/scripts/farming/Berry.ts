@@ -1,6 +1,8 @@
 /// <reference path="../../declarations/enums/BerryType.d.ts"/>
 /// <reference path="../../declarations/enums/FlavorType.d.ts"/>
 /// <reference path="../../declarations/enums/BerryColor.d.ts"/>
+/// <reference path="../../declarations/enums/BerryFirmness.d.ts"/>
+/// <reference path="../../declarations/enums/SizeUnits.d.ts"/>
 
 interface BerryFlavor {
     type: FlavorType,
@@ -28,6 +30,8 @@ class Berry {
         [BerryColor.Green]: ['Burmy (Plant)'],
         [BerryColor.Yellow]: ['Combee', 'Flabébé (Yellow)', 'Oricorio (Pom-Pom)'],
         [BerryColor.Blue]: ['Volbeat', 'Flabébé (Blue)'],
+        [BerryColor.Silver]: ['Flabébé (White)'],
+        [BerryColor.Gold]: ['Flabébé (Orange)'],
     };
 
     constructor(
@@ -38,7 +42,10 @@ class Berry {
         public farmValue: number,
         public exp: number,
         flavors: number[],
+        public smoothness: number,
         public color: BerryColor,
+        public size: number,
+        public firmness: BerryFirmness,
         public description: string[],
         public aura?: Aura,
         wander?: PokemonNameType[]

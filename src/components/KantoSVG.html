@@ -338,6 +338,14 @@
             })
         %>
 
+        <!--Bill's House-->
+        <%- include('templates/mapTown',
+            { name: "Bill's House"
+            , x: 83, y: 0
+            , width: 5, height: 4
+            })
+        %>
+
         <!--Vermilion City-->
         <%- include('templates/mapTown',
             { name: "Vermilion City"
@@ -407,6 +415,13 @@
             { name: "Fuchsia City"
             , x: 44, y: 44
             , width: 8, height: 5
+            })
+        %>
+
+        <%- include('templates/mapTown',
+            { name: "Safari Zone"
+            , x: 47, y: 39
+            , width: 6, height: 5
             })
         %>
 
@@ -586,14 +601,6 @@
             , x: 69, y: 13
             , width: 4, height: 3.5
             , databind: "click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? 'completed' : 'locked' }"
-            })
-        %>
-
-        <%- include('templates/mapPOI',
-            { name: "Safari Zone"
-            , x: 47, y: 39
-            , width: 6, height: 5
-            , databind: "click:function(){Safari.startSafari()}, attr: { class: Safari.canAccess() ? 'completed' : 'locked' }"
             })
         %>
 
@@ -996,6 +1003,15 @@
             , width: 3, height: 2
             , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('One Island') }"
             })
+        %>
+
+        <!--S. S. Anne-->
+        <%- include('templates/mapPOI',
+           { name: "S. S. Anne"
+           , x: 1, y: 30
+           , width: 3, height: 8
+           , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('One Island') }"
+          })
         %>
     </g>
 
@@ -1567,6 +1583,15 @@
             , width: 3, height: 2
             , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Five Island') }"
             })
+        %>
+
+        <!--S. S. Anne-->
+        <%- include('templates/mapPOI',
+           { name: "S. S. Anne"
+           , x: 58, y: 24
+           , width: 8, height: 3
+           , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Five Island') }"
+          })
         %>
 
         <%- include('templates/mapOverlay',
