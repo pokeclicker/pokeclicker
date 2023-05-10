@@ -1612,26 +1612,26 @@ class Farming implements Feature {
             ]));
 
         // Liechi
-        this.mutations.push(new FieldMutation(.00001, BerryType.Liechi, BerryType.Passho, undefined, {
+        this.mutations.push(new FieldMutation(.00001, BerryType.Liechi, [{ berry: BerryType.Passho, amountRequired: 23 }], {
             unlockReq: () => App.game?.statistics?.pokemonCaptured[PokemonHelper.getPokemonByName('Kyogre').id]() > 0,
         }));
         // Ganlon
-        this.mutations.push(new FieldMutation(.00001, BerryType.Ganlon, BerryType.Shuca, undefined, {
+        this.mutations.push(new FieldMutation(.00001, BerryType.Ganlon, [{ berry: BerryType.Shuca, amountRequired: 23 }], {
             unlockReq: () => App.game?.statistics?.pokemonCaptured[PokemonHelper.getPokemonByName('Groudon').id]() > 0,
         }));
         // Salac
-        this.mutations.push(new FieldMutation(.00001, BerryType.Salac, BerryType.Coba, undefined, {
+        this.mutations.push(new FieldMutation(.00001, BerryType.Salac, [{ berry: BerryType.Coba, amountRequired: 23 }], {
             unlockReq: () => App.game?.statistics?.pokemonCaptured[PokemonHelper.getPokemonByName('Rayquaza').id]() > 0,
         }));
         // Petaya
         this.mutations.push(new PetayaMutation(.00001));
         // Apicot
-        this.mutations.push(new FieldMutation(.00001, BerryType.Apicot, BerryType.Chilan, undefined, {
+        this.mutations.push(new FieldMutation(.00001, BerryType.Apicot, [{ berry: BerryType.Chilan, amountRequired: 23 }], {
             unlockReq: () => App.game?.statistics?.pokemonCaptured[PokemonHelper.getPokemonByName('Palkia').id]() > 0,
         }));
         // Lansat
         // TODO: HLXII - Add Mutation to evolve Payapa when Milotic, Gardevoir, Blissey, and Togekiss in party.
-        this.mutations.push(new FieldMutation(.00001, BerryType.Lansat, BerryType.Roseli, undefined, {
+        this.mutations.push(new FieldMutation(.00001, BerryType.Lansat, [{ berry: BerryType.Roseli, amountRequired: 23 }], {
             unlockReq: () => App.game?.statistics?.pokemonCaptured[PokemonHelper.getPokemonByName('Dialga').id]() > 0,
         }));
 
@@ -1670,16 +1670,15 @@ class Farming implements Feature {
         }));
 
         // Hopo
-        this.mutations.push(new GrowNearBerryMutation(.00001, BerryType.Hopo,
+        this.mutations.push(new FieldMutation(.00001, BerryType.Hopo,
             [
-                BerryType.Micle,
-                BerryType.Custap,
-                BerryType.Jaboca,
-                BerryType.Rowap,
-                BerryType.Apicot,
-                BerryType.Lansat,
+                { berry: BerryType.Lansat, amountRequired: 2},
+                { berry: BerryType.Apicot, amountRequired: 2},
+                { berry: BerryType.Micle, amountRequired: 4},
+                { berry: BerryType.Custap, amountRequired: 4},
+                { berry: BerryType.Jaboca, amountRequired: 4},
+                { berry: BerryType.Rowap, amountRequired: 4},
             ], {
-                hint: 'I\'ve heard that there\'s a mythical Berry that only appears in a field of Lansat, Apicot, Micle, Custap, Rowap and Jaboca!',
                 unlockReq: function(): boolean {
                     return App.game.quests.getQuestLine('Arceus: The Deified Pokémon').state() > QuestLineState.inactive;
                 },
@@ -2226,5 +2225,12 @@ class Farming implements Feature {
         [SizeUnits.inch]: (num) => `${(num / 2.54).toFixed(1)}\u2033`, // inches
     };
 
+    public auraDisplay(berry: BerryType, stage: number) {
+        if (App.game.farming.berryData[berry].aura.auraType === AuraType.Repel) { // add other additive auras here with ||
+            return `+${GameConstants.formatNumber(App.game.farming.berryData[berry].aura.auraMultipliers[stage] * 100)}%`;
+        } else {
+            return `×${GameConstants.formatNumber(App.game.farming.berryData[berry].aura.auraMultipliers[stage])}`;
+        }
+    }
 
 }
