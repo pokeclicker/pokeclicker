@@ -1509,7 +1509,7 @@ export const TemporaryBattles = [
     'Sudowoodo',
     'Silver 3',
     'Silver 4',
-    'Silver 5',
+    'Silver 5', // 20
     'Suicune 1',
     'Eusine',
     'Suicune 2',
@@ -1529,7 +1529,7 @@ export const TemporaryBattles = [
     'May 4',
     'Kecleon 1',
     'Kecleon 2',
-    'Kecleon 3',
+    'Kecleon 3', // 40
     'May 5',
     'Wally 2',
     'Clown Jessie & James',
@@ -1549,7 +1549,7 @@ export const TemporaryBattles = [
     'Pinkan Jessie & James',
     'Pinkan Officer Jenny',
     'Kimono Girls',
-    'Spiky-eared Pichu',
+    'Spiky-eared Pichu', // 60
     'Rocket Boss Giovanni',
     'Barry 1',
     'Barry 2',
@@ -1569,7 +1569,7 @@ export const TemporaryBattles = [
     'Manaphy Go-Rock Pincher',
     'Manaphy Egg Protectors',
     'Zero',
-    'Hugh 1',
+    'Hugh 1', // 80
     'Hugh 2',
     'Team Plasma Grunt 1',
     'Colress 1',
@@ -1589,7 +1589,7 @@ export const TemporaryBattles = [
     'Team Plasma Grunt 8',
     'Team Plasma Grunt 9',
     'Zinzolin 2',
-    'Plasma Shadow 1',
+    'Plasma Shadow 1', // 100
     'Colress 3',
     'Plasma Shadow 2',
     'Plasma Shadow 3',
@@ -1609,7 +1609,7 @@ export const TemporaryBattles = [
     'Calem 1',
     'Korrina',
     'Courtney 1',
-    'Matt 1',
+    'Matt 1', // 120
     'Zinnia 1',
     'Draconid Elder',
     'Aqua Grunt',
@@ -1629,7 +1629,7 @@ export const TemporaryBattles = [
     'Mega Draconid Elder',
     'Delta Steven',
     'Dr Cozmo',
-    'Matt 3',
+    'Matt 3', // 140
     'Courtney 3',
     'Hoenn Stone Salesman',
     'Captain Stern',
@@ -1649,7 +1649,7 @@ export const TemporaryBattles = [
     'Hex Maniac Aster',
     'Team Flare Lysandre 1',
     'Team Flare Xerosic',
-    'Xerneas',
+    'Xerneas', // 160
     'Yveltal',
     'Team Flare Boss Lysandre 1',
     'Sycamore 2',
@@ -1669,7 +1669,7 @@ export const TemporaryBattles = [
     'Ash Ketchum Sinnoh',
     'Ash Ketchum Unova',
     'Ash Ketchum Kalos',
-    'Ash Ketchum Pinkan',
+    'Ash Ketchum Pinkan', // 180
     'Calem 6',
     'Marquis Grant',
     'Grand Duchess Diantha',
@@ -1689,7 +1689,7 @@ export const TemporaryBattles = [
     'Hau 5',
     'Plumeria 2',
     'Gladion 2',
-    'Necrozma',
+    'Necrozma', // 200
     'Ultra Megalopolis',
     'Captain Mina',
     'Captain Ilima',
@@ -1699,7 +1699,7 @@ export const TemporaryBattles = [
     'Captain Sophocles',
     'Kahuna Nanu',
     'Gladion 3',
-    'Guzma Bug Silvally',
+    'Guzma Bug Silvally', // 210
     'Kahili Flying Silvally',
     'Plumeria Poison Silvally',
     'Acerola Ghost Silvally',
