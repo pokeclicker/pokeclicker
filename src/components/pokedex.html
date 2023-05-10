@@ -227,9 +227,12 @@ aria-labelledby="pokedexModalLabel">
                                             <div data-bind="if: App.game.party.getPokemon($data.id)?.pokerus" style="position: absolute;left: 2px;top: -11px;">
                                                 <img width="32px" src="" data-bind="attr: { src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[App.game.party.getPokemon($data.id)?.pokerus]}.png`}"/>
                                             </div>
-                                            <div data-bind="if: App.game.party.getPokemon($data.id)?.megaStone" style="position: absolute;right: 1px;top: 4px;">
-                                                <img width="20px" data-bind="attr: { src: App.game.party.getPokemon($data.id).megaStone.getImage()}"/>
-                                            </div>
+                                            <!-- ko if: PokemonHelper.hasMegaEvolution($data.name) -->
+                                            <knockout data-bind="foreach: PokemonHelper.getMegaStones($data.name).filter(s => player.hasMegaStone(s.megaStone))">
+                                                <img width="20px" style="position: absolute; top: 4px;"
+                                                    data-bind="attr: { src: $data.image }, style: { right: `${1 + 17 * $index()}px` }"/>
+                                            </knockout>
+                                            <!-- /ko -->
                                             <img style="position: absolute; top: 20px; right: 0px;" class="shadow-icon" src="assets/images/status/shadow.svg" data-bind="visible: App.game.party.getPokemon($data.id).shadow == GameConstants.ShadowStatus.Shadow"/>
                                             <img style="position: absolute; top: 20px; right: 0px;" class="shadow-icon" src="assets/images/status/purified.svg" data-bind="visible: App.game.party.getPokemon($data.id).shadow == GameConstants.ShadowStatus.Purified"/>
 
@@ -248,8 +251,9 @@ aria-labelledby="pokedexModalLabel">
                                                             `<br/>EVs: <strong>${App.game.party.getPokemon($data.id).evs().toLocaleString('en-US')}</strong>
                                                             <br/>EV bonus: <strong>×${App.game.party.getPokemon($data.id).calculateEVAttackBonus().toLocaleString('en-US')}</strong>`
                                                             : '') +
-                                                        (App.game.party.getPokemon($data.id)?.megaStone ?
-                                                            `<br/>${App.game.party.getPokemon($data.id).megaStone.getTooltipText()}`
+                                                        (PokemonHelper.hasMegaEvolution($data.name) ?
+                                                            pokemonMap[$data.name].evolutions.flatMap(e => e.restrictions).filter(r => r instanceof MegaEvolveRequirement && player.hasMegaStone(r.megaStone))
+                                                                .map(r => `<br/><u>${GameConstants.humanifyString(GameConstants.MegaStoneType[r.megaStone])}</u><br/>${r.hint()}`).join('')
                                                             : ''),
                                                     trigger: 'hover',
                                                     placement:'bottom'
