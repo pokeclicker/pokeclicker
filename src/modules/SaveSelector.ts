@@ -87,6 +87,10 @@ export default class SaveSelector {
         }
     }
 
+    static btoa(saveString: string):string {
+        return btoa(saveString.replace(/[^\u0000-\u00FF]+/g, (m)=>encodeURI(m)));
+    }
+
     static Download(key: string): void {
         try {
             // Load save data
@@ -107,7 +111,7 @@ export default class SaveSelector {
 
             // Create a download element
             const element = document.createElement('a');
-            element.setAttribute('href', `data:text/plain;charset=utf-8,${encodeURIComponent(btoa(JSON.stringify(data)))}`);
+            element.setAttribute('href', `data:text/plain;charset=utf-8,${encodeURIComponent(this.btoa(JSON.stringify(data)))}`);
             const filename = settingsData.saveFilename ? decodeURI(settingsData.saveFilename) : Settings.getSetting('saveFilename').defaultValue;
             const datestr = formatDate(new Date());
             element.setAttribute('download', GameHelper.saveFileName(filename, { '{date}': datestr, '{version}': saveData.update.version, '{name}': decodeURI(saveData.profile.name) }));

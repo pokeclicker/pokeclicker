@@ -2289,7 +2289,7 @@ class Update implements Saveable {
 
         const button = document.createElement('a');
         try {
-            button.href = `data:text/plain;charset=utf-8,${encodeURIComponent(btoa(backupSaveData))}`;
+            button.href = `data:text/plain;charset=utf-8,${encodeURIComponent(SaveSelector.btoa(backupSaveData))}`;
             button.className = 'btn btn-block btn-warning';
             button.innerText = 'Click to Backup Save!';
             const filename = settingsData.saveFilename ? decodeURI(settingsData.saveFilename) : Settings.getSetting('saveFilename').defaultValue;
