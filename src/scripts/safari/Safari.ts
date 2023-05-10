@@ -360,11 +360,10 @@ class Safari {
             this.pokemonGrid().find(p => p.x === x && p.y === y)) {
             return;
         }
-        const item = SafariItemController.getRandomItem();
-        if (!item) {
+        if (!SafariItemController.currentRegionHasItems()) {
             return;
         }
-        this.itemGrid.push(new SafariItem(item, x, y));
+        this.itemGrid.push(new SafariItem(x, y));
     }
 
     private static directionToXY(dir: string) {
@@ -438,15 +437,12 @@ class Safari {
     private static checkItem() {
         const itemOnPlayer = this.itemGrid().findIndex(p => p.x === Safari.playerXY.x && p.y === Safari.playerXY.y);
         if (itemOnPlayer >= 0) {
-            const item = this.itemGrid()[itemOnPlayer];
-            const name = BagHandler.displayName(item.item);
-            if (!BagHandler.isAvailable(item.item)) {
-                return; // just in case two of the same mega stone spawn or something
-            }
-            BagHandler.gainItem(item.item);
+            const item = SafariItemController.getRandomItem();
+            const name = BagHandler.displayName(item);
+            BagHandler.gainItem(item);
             Notifier.notify({
                 message: `You found ${GameHelper.anOrA(name)} ${name}!`,
-                image: BagHandler.image(item.item),
+                image: BagHandler.image(item),
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.Items.dropped_item,
             });

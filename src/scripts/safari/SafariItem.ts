@@ -1,5 +1,5 @@
 class SafariItem {
-    constructor(public item: BagItem, public x: number, public y: number) {
+    constructor(public x: number, public y: number) {
     }
 }
 
@@ -22,5 +22,12 @@ class SafariItemController {
         }
         const list = SafariItemController.list[player.region].filter((i) => BagHandler.isAvailable(i.item));
         return Rand.fromWeightedArray(list.map((i) => i.item), list.map((i) => i.weight));
+    }
+
+    public static currentRegionHasItems() : boolean {
+        if (SafariItemController.list[player.region]) {
+            return true;
+        }
+        return false;
     }
 }
