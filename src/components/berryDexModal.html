@@ -38,7 +38,7 @@
                       <td class="text-left tight"><code data-bind="html: GameConstants.humanifyString(BerryFirmness[App.game.farming.berryData[$data].firmness])">-</code></td>
                     </tr>
                     <!-- ko if: App.game.farming.berryData[$data].aura -->
-                    <tr>
+                    <tr data-bind="css: { 'auraHighlight': Settings.getSetting('--aura-alpha-base').observableValue() > 0 }">
                       <td class="text-left">Aura</td>
                       <td class="text-left tight"><code data-bind="text: AuraType[App.game.farming.berryData[$data].aura.auraType]"></code></td>
                     </tr>
@@ -105,19 +105,19 @@
                               <tr class="text-light">
                                 <th class="bg-dark" colspan="5">Flavor</th>
                               </tr>
-                              <tr>
-                                  <td>Spicy</td>
-                                  <td>Dry</td>
-                                  <td>Sweet</td>
-                                  <td>Bitter</td>
-                                  <td>Sour</td>
+                              <tr data-bind="css: { 'legible-solar-flavor-text': Settings.getSetting('--flavor-alpha-base').observableValue() > 0.2 }">
+                                  <td style="background: rgba(240, 128, 48, var(--flavor-alpha-base));">Spicy</td>
+                                  <td style="background: rgba(104, 144, 240, var(--flavor-alpha-base));">Dry</td>
+                                  <td style="background: rgba(248, 88, 136, var(--flavor-alpha-base));">Sweet</td>
+                                  <td style="background: rgba(120, 200, 80, var(--flavor-alpha-base));">Bitter</td>
+                                  <td style="background: rgba(248, 208, 48, var(--flavor-alpha-base));">Sour</td>
                               </tr>
-                              <tr>
-                                <td data-bind="text: App.game.farming.berryData[$data].flavors[0].value">Spicy</td>
-                                <td data-bind="text: App.game.farming.berryData[$data].flavors[1].value">Dry</td>
-                                <td data-bind="text: App.game.farming.berryData[$data].flavors[2].value">Sweet</td>
-                                <td data-bind="text: App.game.farming.berryData[$data].flavors[3].value">Bitter</td>
-                                <td data-bind="text: App.game.farming.berryData[$data].flavors[4].value">Sour</td>
+                              <tr data-bind="css: { 'legible-solar-flavor-text': Settings.getSetting('--flavor-alpha-base').observableValue() > 0.2 }">
+                                <td style="background: rgba(240, 128, 48, var(--flavor-alpha-sub));" data-bind="text: App.game.farming.berryData[$data].flavors[0].value">Spicy</td>
+                                <td style="background: rgba(104, 144, 240, var(--flavor-alpha-sub));" data-bind="text: App.game.farming.berryData[$data].flavors[1].value">Dry</td>
+                                <td style="background: rgba(248, 88, 136, var(--flavor-alpha-sub));" data-bind="text: App.game.farming.berryData[$data].flavors[2].value">Sweet</td>
+                                <td style="background: rgba(120, 200, 80, var(--flavor-alpha-sub));" data-bind="text: App.game.farming.berryData[$data].flavors[3].value">Bitter</td>
+                                <td style="background: rgba(248, 208, 48, var(--flavor-alpha-sub));" data-bind="text: App.game.farming.berryData[$data].flavors[4].value">Sour</td>
                             </tr>
                           </table>
                       </td>
@@ -150,7 +150,7 @@
                             <td><code data-bind="html: GameConstants.formatSecondsToTime(App.game.farming.berryData[$data].growthTime[3])">-</code></td>
                           </tr>
                           <!-- ko if: App.game.farming.berryData[$data].aura -->
-                          <tr>
+                          <tr data-bind="css: { 'auraHighlight': Settings.getSetting('--aura-alpha-base').observableValue() > 0 }">
                             <th colspan="4">Aura Effect at Stage</th>
                           </tr>
                           <tr class="aura-box" data-bind="if: App.game.farming.berryData[$data].aura">

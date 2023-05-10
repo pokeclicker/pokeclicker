@@ -3,6 +3,7 @@ import Setting from './Setting';
 import SettingOption from './SettingOption';
 import BooleanSetting from './BooleanSetting';
 import CssVariableSetting from './CssVariableSetting';
+import CssVariableListSetting from './CssVariableListSetting';
 import RangeSetting from './RangeSetting';
 import NotificationConstants from '../notifications/NotificationConstants';
 import DynamicBackground from '../background/DynamicBackground';
@@ -112,6 +113,22 @@ Settings.add(new Setting<string>('sizeUnits', 'Berry size units',
         new SettingOption('Centimeters', 'cm'),
     ],
     'cm'));
+Settings.add(new CssVariableListSetting('flavor-alpha-base', 'Berrydex Flavor Color Opacity',
+    [
+        new SettingOption('None', '0'),
+        new SettingOption('Light', '0.36'),
+        new SettingOption('Medium', '0.54'),
+        new SettingOption('Bold', '0.72'),
+    ],
+    '0.36'));
+Settings.add(new CssVariableListSetting('aura-alpha-base', 'Berrydex Aura Color Opacity',
+    [
+        new SettingOption('None', '0'),
+        new SettingOption('Light', '0.4'),
+        new SettingOption('Medium', '0.8'),
+        new SettingOption('Bold', '1'),
+    ],
+    '0.8'));
 Settings.add(new BooleanSetting('currencyMainDisplayReduced', 'Shorten currency amount shown on main screen', false));
 Settings.add(new BooleanSetting('currencyMainDisplayExtended', 'Show Diamonds, Farm Points and Battle Points on main screen', false));
 Settings.add(new BooleanSetting('confirmLeaveDungeon', 'Confirm before leaving dungeons', false));
