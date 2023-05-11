@@ -2157,16 +2157,16 @@ class QuestLineHelper {
 
         createMultiTypeCaptureQuest([PokemonType.Fighting, PokemonType.Rock, PokemonType.Dark, PokemonType.Fairy], 'Get some trainig before looking for Silvally\'s memories. Capture 100 Fighting, Rock, Dark and Fairy Types');
 
-        const talkToMelemeleLocals = new TalkToNPCQuest(SilvallyHala, 'Talk to the Melemele Island locals to find out more about Silvally\'s memories.');
+        const talkToMelemeleLocals = new TalkToNPCQuest(SilvallyHala, 'Talk to the Melemele Island locals to find out more about Silvally\'s memories.', () => ItemList.Fighting_Memory_Silvally.gain(1));
         SilvallyTypesQuestLine.addQuest(talkToMelemeleLocals);
 
-        const talkToAkalaLocals = new TalkToNPCQuest(SilvallyOlivia, 'Talk to the Akala Island locals to find out more about Silvally\'s memories.');
+        const talkToAkalaLocals = new TalkToNPCQuest(SilvallyOlivia, 'Talk to the Akala Island locals to find out more about Silvally\'s memories.', () => ItemList.Rock_Memory_Silvally.gain(1));
         SilvallyTypesQuestLine.addQuest(talkToAkalaLocals);
 
-        const talkToUlaulaLocals = new TalkToNPCQuest(SilvallyNanu, 'Talk to the Ula\'ula Island locals to find out more about Silvally\'s memories.');
+        const talkToUlaulaLocals = new TalkToNPCQuest(SilvallyNanu, 'Talk to the Ula\'ula Island locals to find out more about Silvally\'s memories.', () => ItemList.Dark_Memory_Silvally.gain(1));
         SilvallyTypesQuestLine.addQuest(talkToUlaulaLocals);
 
-        const talkToPoniLocals = new TalkToNPCQuest(SilvallyMina, 'Talk to the Poni Island locals to find out more about Silvally\'s memories.');
+        const talkToPoniLocals = new TalkToNPCQuest(SilvallyMina, 'Talk to the Poni Island locals to find out more about Silvally\'s memories.', () => ItemList.Fairy_Memory_Silvally.gain(1));
         SilvallyTypesQuestLine.addQuest(talkToPoniLocals);
 
         const SilvallyGladionReward1 = () => {
