@@ -1945,7 +1945,7 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 45);
         },
 
-        '0.10.': ({ playerData, saveData, settingsData }) => {
+        '0.10.10': ({ playerData, saveData, settingsData }) => {
             // Bill's Grandpa
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 12);
 
