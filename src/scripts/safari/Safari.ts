@@ -15,7 +15,6 @@ class Safari {
     static inBattle: KnockoutObservable<boolean> = ko.observable(false);
     static balls: KnockoutObservable<number> = ko.observable().extend({ numeric: 0 });
     static activeRegion: KnockoutObservable<GameConstants.Region> = ko.observable(GameConstants.Region.none);
-    static activeZone: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 0 });
 
     public static sizeX(): number {
         return Math.floor(document.querySelector('#safariModal .modal-dialog').scrollWidth / 32);
@@ -457,12 +456,9 @@ class Safari {
     static completed(shiny = false) {
         // Check current region
         if (SafariPokemonList.list[player.region]) {
-            // Check each zone
-            return SafariPokemonList.list[player.region]().every((list) => {
-                // Check each pokemon within this zone
-                return list.safariPokemon.every(poke => {
-                    return App.game.party.alreadyCaughtPokemonByName(poke.name, shiny);
-                });
+            // Check each pokemon within this zone
+            return SafariPokemonList.list[player.region]().every(poke => {
+                return App.game.party.alreadyCaughtPokemonByName(poke.name, shiny);
             });
         }
         return false;
