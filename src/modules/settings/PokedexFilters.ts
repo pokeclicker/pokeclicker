@@ -81,9 +81,9 @@ const PokedexFilters: Record<string, FilterOption> = {
         'pokedexUniqueTransformationFilter',
         [
             new SettingOption('Show All Pokémon', 'all'),
-            new SettingOption('Mega Evolution Available', 'mega-available'),
-            new SettingOption('Unobtained Mega Evolution', 'mega-unobtained'),
-            new SettingOption('Obtained Mega Evolution', 'mega-evolution'),
+            new SettingOption('Mega Evolution/Primal Reversion Available', 'mega-available'),
+            new SettingOption('Unobtained Mega Evolution/Primal Reversion', 'mega-unobtained'),
+            new SettingOption('Obtained Mega Evolution/Primal Reversion', 'mega-evolution'),
         ],
     ),
     heldItem: new FilterOption<boolean>(

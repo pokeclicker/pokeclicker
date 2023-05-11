@@ -429,7 +429,7 @@ document.addEventListener('DOMContentLoaded', () => {
         SafariBattle.busy(false);
         switch (player.region) {
             case GameConstants.Region.kanto:
-                MapHelper.moveToTown('Fuchsia City');
+                MapHelper.moveToTown('Safari Zone');
                 break;
             case GameConstants.Region.kalos:
                 MapHelper.moveToTown('Friend Safari');
