@@ -2219,6 +2219,14 @@ const ProfBirch = new ProfNPC('Prof. Birch',
     'I really appreciate being able to see your outstanding progress, thank you! Sinnoh is next up.',
     'assets/images/npcs/Professor Birch.png');
 
+const CoolTrainerDillan = new NPC('Cool Trainer Dillan', [
+    'Hey newcomer! I see you are the Hoenn Champion. You must be an amazing Trainer!',
+    'At the Battle Frontier, you can test your skills against Trainers from all over the world.',
+    'Since some of these Trainers come from far away, you may see Pokémon that you might not be able to catch yet.',
+    'But don\'t worry, catching them all is only a matter of time. Just keep exploring and having fun and you\'ll encounter lots of different Pokémon, either in form, color, or even evolutions!',
+], {image: 'assets/images/npcs/Cooltrainer (male).png',
+});
+
 const SCEntrance = new NPC('Strange Markings', [
     '<i>These strange markings seem to spell something out. The nearby Braille Enthusiast may know more.</i>',
 ], {image: 'assets/images/npcs/other/Regi Entrance.png',
@@ -2918,6 +2926,7 @@ TownList['Battle Frontier'] = new Town(
     [BattleFrontierShop, new BattleFrontierTownContent()],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
+        npcs: [CoolTrainerDillan],
     }
 );
 TownList['Pokémon League Hoenn'] = new Town(
