@@ -88,7 +88,7 @@ export default class SaveSelector {
     }
 
     static btoa(saveString: string):string {
-        return btoa(saveString.replace(/[^\u0000-\u00FF]+/g, (m)=>encodeURI(m)));
+        return btoa(saveString.replace(/[^\u0000-\u00FF]+|%/g, (m) => encodeURI(m)));
     }
 
     static Download(key: string): void {

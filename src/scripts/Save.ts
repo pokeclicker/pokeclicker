@@ -226,7 +226,7 @@ class Save {
     public static convert() {
         const base64 = $('#convertTextArea').val().toString();
         try {
-            const json = decodeURI(atob(base64));
+            const json = atob(base64);
             const p = JSON.parse(json);
             Save.convertShinies(p.caughtPokemonList);
             $('#saveModal').modal('hide');
