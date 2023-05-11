@@ -91,6 +91,10 @@ export default class SaveSelector {
         return btoa(saveString.replace(/[^\u0000-\u00FF]+|%/g, (m) => encodeURI(m)));
     }
 
+    static atob(encodeString: string):string {
+        return decodeURI(atob(encodeString));
+    }
+
     static Download(key: string): void {
         try {
             // Load save data

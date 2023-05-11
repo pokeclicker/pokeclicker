@@ -184,25 +184,25 @@ describe('SaveSelector', () => {
     describe('encoding', () => {
         it('encodes and decodes chinese characters', () => {
             const input = '妙蛙种子';
-            const decoded = decodeURI(atob(SaveSelector.btoa(input)));
+            const decoded = SaveSelector.atob(SaveSelector.btoa(input));
             expect(decoded).toBe(input);
         });
 
         it('encodes and decodes emoji', () => {
             const input = '🙂';
-            const decoded = decodeURI(atob(SaveSelector.btoa(input)));
+            const decoded = SaveSelector.atob(SaveSelector.btoa(input));
             expect(decoded).toBe(input);
         });
 
         it('encodes and decodes uri encoded strings', () => {
             const input = 'hello %20 world';
-            const decoded = decodeURI(atob(SaveSelector.btoa(input)));
+            const decoded = SaveSelector.atob(SaveSelector.btoa(input));
             expect(decoded).toBe(input);
         });
 
         it('encodes and decodes non-uri % characters', () => {
             const input = '% % % %';
-            const decoded = decodeURI(atob(SaveSelector.btoa(input)));
+            const decoded = SaveSelector.atob(SaveSelector.btoa(input));
             expect(decoded).toBe(input);
         });
     });

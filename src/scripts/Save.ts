@@ -193,7 +193,7 @@ class Save {
 
         setTimeout(() => {
             try {
-                const decoded = decodeURI(atob(fr.result as string));
+                const decoded = SaveSelector.atob(fr.result as string);
                 console.debug('decoded:', decoded);
                 const json = JSON.parse(decoded);
                 console.debug('json:', json);
