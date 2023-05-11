@@ -11,6 +11,15 @@ type Credit = {
 // Sort alphabetically
 export const SpriteCredits: Credit[] = [
     {
+        name: 'Anarlaurendil',
+        link: 'https://www.deviantart.com/anarlaurendil',
+        image: 'https://a.deviantart.net/avatars-big/a/n/anarlaurendil.png',
+        resources: [
+            'Dynamic Background Wyrdeer',
+        ],
+        // Notes: Allowed use with credit
+    },
+    {
         name: 'arduousFrivolity',
         link: 'https://discordapp.com/users/200069836724764673/',
         resources: [
@@ -193,6 +202,19 @@ export const SpriteCredits: Credit[] = [
             'Pokerus Resistant Icon (colorblind friendly)',
         ],
         // Notes: Made specifically for PokéClicker.
+    },
+    {
+        name: 'DarkusShadow',
+        link: 'https://www.deviantart.com/darkusshadow',
+        image: 'https://a.deviantart.net/avatars-big/d/a/darkusshadow.jpg',
+        resources: [
+            'Dynamic Background Kleavor',
+            'Dynamic Background Ursaluna',
+            'Dynamic Background Sneasler',
+            'Dynamic Background Overqwil',
+            'Dynamic Background Enamorus',
+        ],
+        // Notes: Allowed use with credit
     },
     {
         name: 'Data',
@@ -477,6 +499,15 @@ export const SpriteCredits: Credit[] = [
         // NOTES: No notes about credit, have messaged asking for permission, awaiting confirmation
     },
     {
+        name: 'Ezerart',
+        link: 'https://www.deviantart.com/ezerart',
+        image: 'https://a.deviantart.net/avatars-big/e/z/ezerart.jpg',
+        resources: [
+            'Dynamic Background Basculegion',
+        ],
+        // Notes: Allowed use with credit
+    },
+    {
         name: 'Farboo171',
         link: 'https://github.com/Farboo171',
         resources: [
@@ -634,6 +665,15 @@ export const SpriteCredits: Credit[] = [
             'Primal Kyogre (Overworld)',
         ],
         // Notes: Permission given on image page if credited.
+    },
+    {
+        name: 'lasse00',
+        link: 'https://www.deviantart.com/lasse00',
+        image: 'https://a.deviantart.net/avatars-big/l/a/lasse00.jpg',
+        resources: [
+            'Hisui Dynamic Background Shinies',
+        ],
+        // Notes: Allowed use with credit
     },
     {
         name: 'Leaf',
