@@ -90,6 +90,22 @@ class BagHandler {
         }
     }
 
+    public static isAvailable(item: BagItem): boolean {
+        if (!item) {
+            return false;
+        }
+        switch (item.type) {
+            case ItemType.item:
+                return this.getItem(item.id).isAvailable() && !this.getItem(item.id).isSoldOut();
+            case ItemType.underground:
+                return  !this.getUndergroundItem(item.id).requirement || this.getUndergroundItem(item.id).requirement.isCompleted();
+            case ItemType.berry:
+            case ItemType.gem:
+            default:
+                return true;
+        }
+    }
+
     //#region Item getters
 
     private static getItem(id: string | number): Item {
