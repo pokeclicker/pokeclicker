@@ -1673,7 +1673,7 @@ TemporaryBattleList['Zinzolin 2'] = new TemporaryBattle(
         new GymPokemon('Cryogonal', 17632200, 46),
         new GymPokemon('Weavile', 20632200, 48),
     ],
-    'Have you gotten even stronger than you were in Lucanosa Town? How, in such a brief amount of time...',
+    'Have you gotten even stronger than you were in Lacunosa Town? How, in such a brief amount of time...',
     [
         new TemporaryBattleRequirement('Team Plasma Grunt 7'),
         new TemporaryBattleRequirement('Team Plasma Grunt 8'),
