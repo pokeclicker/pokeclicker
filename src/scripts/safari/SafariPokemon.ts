@@ -113,8 +113,8 @@ class SafariPokemon implements PokemonInterface {
     public static random() {
         // Get a random pokemon from current region and zone for Safari Zone
         const pokemon = Rand.fromWeightedArray(
-            SafariPokemonList.list[Safari.activeRegion()]()[Safari.activeZone()].safariPokemon,
-            SafariPokemonList.list[Safari.activeRegion()]()[Safari.activeZone()].safariPokemon.map(p => p.weight)
+            SafariPokemonList.list[Safari.activeRegion()](),
+            SafariPokemonList.list[Safari.activeRegion()]().map(p => p.weight)
         );
         return new SafariPokemon(pokemon.name);
     }
