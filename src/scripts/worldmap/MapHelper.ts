@@ -163,26 +163,6 @@ class MapHelper {
                 states.push(areaStatus.missingResistant);
             }
         }
-
-        // Is this location a Berry Trader
-        const berryListIndex = Object.values(GameConstants.BerryTraderLocations).indexOf(townName);
-        if (berryListIndex > -1) {
-            const berryDeals = BerryDeal.list[berryListIndex]();
-            const berryTraderPokemon = berryDeals.filter(d => d.item.itemType instanceof PokemonItem).map(d => d.item.itemType.name) as PokemonNameType[];
-
-            if (!RouteHelper.listCompleted(berryTraderPokemon, false)) {
-                states.push(areaStatus.uncaughtPokemon);
-            }
-
-            if (!RouteHelper.listCompleted(berryTraderPokemon, true)) {
-                states.push(areaStatus.uncaughtShinyPokemon);
-            }
-
-            if (RouteHelper.minPokerus(berryTraderPokemon) < 3) {
-                states.push(areaStatus.missingResistant);
-            }
-        }
-
         const town = TownList[townName];
         town.content.forEach(c => {
             // If the town itself is not locked, it should never show locked
