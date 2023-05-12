@@ -151,10 +151,10 @@ ItemList.Mystery_egg = new EggItem(EggItemType.Mystery_egg, 700, undefined, 'Mys
 
 // Quest Items
 ItemList.Celios_Errand_Ruby = new QuestItem('Celios_Errand_Ruby', 'Ruby', 'A Ruby found in Ruby Path', 'Celio\'s Errand');
-ItemList.Fighting_Memory_Silvally = new QuestItem('Fighting_Memory_Silvally', 'Fighting Memory', 'A Fighting Memory you\'ve been given by Kahuna Hala in Iki Town', 'Typing some Memories');
-ItemList.Rock_Memory_Silvally = new QuestItem('Rock_Memory_Silvally', 'Rock Memory', 'A Rock Memory you\'ve been given by Kahuna Olivia in Konikoni City', 'Typing some Memories');
-ItemList.Dark_Memory_Silvally = new QuestItem('Dark_Memory_Silvally', 'Dark Memory', 'A Dark Memory you\'ve been given by Kahuna Nanu in Malie City', 'Typing some Memories');
-ItemList.Fairy_Memory_Silvally = new QuestItem('Fairy_Memory_Silvally', 'Fairy Memory', 'A Fairy Memory you\'ve been given by Captain Mina in Seafolk Village', 'Typing some Memories');
+ItemList.Fighting_Memory_Silvally = new QuestItem('Fighting_Memory_Silvally', 'Fighting Memory', 'One of Silvally\'s memories you\'ve been given by Kahuna Hala in Iki Town', 'Typing some Memories');
+ItemList.Rock_Memory_Silvally = new QuestItem('Rock_Memory_Silvally', 'Rock Memory', 'One of Silvally\'s memories you\'ve been given by Kahuna Olivia in Konikoni City', 'Typing some Memories');
+ItemList.Dark_Memory_Silvally = new QuestItem('Dark_Memory_Silvally', 'Dark Memory', 'One of Silvally\'s memories you\'ve been given by Kahuna Nanu in Malie City', 'Typing some Memories');
+ItemList.Fairy_Memory_Silvally = new QuestItem('Fairy_Memory_Silvally', 'Fairy Memory', 'One of Silvally\'s memories you\'ve been given by Captain Mina in Seafolk Village', 'Typing some Memories');
 
 // Vitamins
 // ItemList.RareCandy = new Vitamin(VitaminType.RareCandy, Infinity, undefined, undefined, 'Rare Candy', 'A rare-to-find candy that currently has no use.');

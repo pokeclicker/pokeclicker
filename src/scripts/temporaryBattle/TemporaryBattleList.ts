@@ -3529,7 +3529,7 @@ TemporaryBattleList['Acerola Ghost Silvally'] = new TemporaryBattle(
     }
 );
 TemporaryBattleList['Faba Psychic Silvally'] = new TemporaryBattle(
-    'Faba Pscyhic Silvally',
+    'Faba Psychic Silvally',
     [
         new GymPokemon('Claydol', 204464883, 63),
         new GymPokemon('Bruxish', 204464883, 63),
