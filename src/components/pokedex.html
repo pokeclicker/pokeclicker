@@ -250,6 +250,10 @@ aria-labelledby="pokedexModalLabel">
                                                         (App.game.party.getPokemon($data.id)?.pokerus >= GameConstants.Pokerus.Contagious ?
                                                             `<br/>EVs: <strong>${App.game.party.getPokemon($data.id).evs().toLocaleString('en-US')}</strong>
                                                             <br/>EV bonus: <strong>×${App.game.party.getPokemon($data.id).calculateEVAttackBonus().toLocaleString('en-US')}</strong>`
+                                                            : '') +
+                                                        (PokemonHelper.hasMegaEvolution($data.name) ?
+                                                            pokemonMap[$data.name].evolutions.flatMap(e => e.restrictions).filter(r => r instanceof MegaEvolveRequirement && player.hasMegaStone(r.megaStone))
+                                                                .map(r => `<br/><u>${GameConstants.humanifyString(GameConstants.MegaStoneType[r.megaStone])}</u><br/>${r.hint()}`).join('')
                                                             : ''),
                                                     trigger: 'hover',
                                                     placement:'bottom'

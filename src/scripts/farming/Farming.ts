@@ -1220,6 +1220,21 @@ class Farming implements Feature {
             undefined,
             ['Detective Pikachu']
         );
+
+        this.berryData[BerryType.Hopo] = new Berry(
+            BerryType.Hopo,
+            [10800, 21600, 43200, 86400, 604800],
+            1,
+            0,
+            15000,
+            25,
+            [15, 40, 35, 30, 25],
+            50,
+            BerryColor.Gold,
+            5.8,
+            BerryFirmness.Very_Soft,
+            ['A truly mythical Berry native to harsh northern lands. It was first created by a Pokémon believed to have shaped the world.']
+        );
         //#endregion
 
         //#endregion
@@ -1597,26 +1612,26 @@ class Farming implements Feature {
             ]));
 
         // Liechi
-        this.mutations.push(new FieldMutation(.00001, BerryType.Liechi, BerryType.Passho, undefined, {
+        this.mutations.push(new FieldMutation(.00001, BerryType.Liechi, [{ berry: BerryType.Passho, amountRequired: 23 }], {
             unlockReq: () => App.game?.statistics?.pokemonCaptured[PokemonHelper.getPokemonByName('Kyogre').id]() > 0,
         }));
         // Ganlon
-        this.mutations.push(new FieldMutation(.00001, BerryType.Ganlon, BerryType.Shuca, undefined, {
+        this.mutations.push(new FieldMutation(.00001, BerryType.Ganlon, [{ berry: BerryType.Shuca, amountRequired: 23 }], {
             unlockReq: () => App.game?.statistics?.pokemonCaptured[PokemonHelper.getPokemonByName('Groudon').id]() > 0,
         }));
         // Salac
-        this.mutations.push(new FieldMutation(.00001, BerryType.Salac, BerryType.Coba, undefined, {
+        this.mutations.push(new FieldMutation(.00001, BerryType.Salac, [{ berry: BerryType.Coba, amountRequired: 23 }], {
             unlockReq: () => App.game?.statistics?.pokemonCaptured[PokemonHelper.getPokemonByName('Rayquaza').id]() > 0,
         }));
         // Petaya
         this.mutations.push(new PetayaMutation(.00001));
         // Apicot
-        this.mutations.push(new FieldMutation(.00001, BerryType.Apicot, BerryType.Chilan, undefined, {
+        this.mutations.push(new FieldMutation(.00001, BerryType.Apicot, [{ berry: BerryType.Chilan, amountRequired: 23 }], {
             unlockReq: () => App.game?.statistics?.pokemonCaptured[PokemonHelper.getPokemonByName('Palkia').id]() > 0,
         }));
         // Lansat
         // TODO: HLXII - Add Mutation to evolve Payapa when Milotic, Gardevoir, Blissey, and Togekiss in party.
-        this.mutations.push(new FieldMutation(.00001, BerryType.Lansat, BerryType.Roseli, undefined, {
+        this.mutations.push(new FieldMutation(.00001, BerryType.Lansat, [{ berry: BerryType.Roseli, amountRequired: 23 }], {
             unlockReq: () => App.game?.statistics?.pokemonCaptured[PokemonHelper.getPokemonByName('Dialga').id]() > 0,
         }));
 
@@ -1653,6 +1668,21 @@ class Farming implements Feature {
             showHint: false,
             unlockReq: () => App.game.farming.unlockedBerries[BerryType.Starf](),
         }));
+
+        // Hopo
+        this.mutations.push(new FieldMutation(.00001, BerryType.Hopo,
+            [
+                { berry: BerryType.Lansat, amountRequired: 2},
+                { berry: BerryType.Apicot, amountRequired: 2},
+                { berry: BerryType.Micle, amountRequired: 4},
+                { berry: BerryType.Custap, amountRequired: 4},
+                { berry: BerryType.Jaboca, amountRequired: 4},
+                { berry: BerryType.Rowap, amountRequired: 4},
+            ], {
+                unlockReq: function(): boolean {
+                    return App.game.quests.getQuestLine('Arceus: The Deified Pokémon').state() > QuestLineState.inactive;
+                },
+            }));
 
         // Empty Mutations for hints
 
@@ -2195,5 +2225,12 @@ class Farming implements Feature {
         [SizeUnits.inch]: (num) => `${(num / 2.54).toFixed(1)}\u2033`, // inches
     };
 
+    public auraDisplay(berry: BerryType, stage: number) {
+        if (App.game.farming.berryData[berry].aura.auraType === AuraType.Repel) { // add other additive auras here with ||
+            return `+${GameConstants.formatNumber(App.game.farming.berryData[berry].aura.auraMultipliers[stage] * 100)}%`;
+        } else {
+            return `×${GameConstants.formatNumber(App.game.farming.berryData[berry].aura.auraMultipliers[stage])}`;
+        }
+    }
 
 }
