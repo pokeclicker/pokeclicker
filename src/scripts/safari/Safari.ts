@@ -1,6 +1,7 @@
 class Safari {
     static grid: Array<Array<number>>;
     static pokemonGrid: KnockoutObservableArray<SafariPokemon> = ko.observableArray([]);
+    static itemGrid: KnockoutObservableArray<SafariItem> = ko.observableArray([]);
     static player: Point = new Point(12, 20);
     static lastDirection = 'up';
     static nextDirection: string;
@@ -14,7 +15,6 @@ class Safari {
     static inBattle: KnockoutObservable<boolean> = ko.observable(false);
     static balls: KnockoutObservable<number> = ko.observable().extend({ numeric: 0 });
     static activeRegion: KnockoutObservable<GameConstants.Region> = ko.observable(GameConstants.Region.none);
-    static activeZone: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 0 });
 
     public static sizeX(): number {
         return Math.floor(document.querySelector('#safariModal .modal-dialog').scrollWidth / 32);
@@ -28,6 +28,7 @@ class Safari {
         this.activeRegion(player.region);
         Safari.grid = [];
         Safari.pokemonGrid([]);
+        Safari.itemGrid([]);
         Safari.playerXY.x = 0;
         Safari.playerXY.y = 0;
         Safari.lastDirection = 'up';
@@ -282,6 +283,7 @@ class Safari {
             Safari.playerXY.y = newPos.y;
             $('#sprite').animate(offset, 250, 'linear', () => {
                 Safari.checkBattle();
+                Safari.checkItem();
                 Safari.isMoving = false;
                 if (Safari.walking) {
                     if (!Safari.checkBattle() && Safari.queue[0]) {
@@ -317,6 +319,12 @@ class Safari {
         }
     }
 
+    public static spawnItemCheck() {
+        if (Rand.boolean()) {
+            this.spawnRandomItem();
+        }
+    }
+
     public static despawnPokemonCheck() {
         let index = this.pokemonGrid().length;
         while (index-- > 0) {
@@ -329,7 +337,10 @@ class Safari {
     private static spawnRandomPokemon() {
         const y = Rand.floor(this.sizeY());
         const x = Rand.floor(this.sizeX());
-        if (!this.canMove(x, y) || (x == this.playerXY.x && y == this.playerXY.y) || this.pokemonGrid().find(p => p.x === x && p.y === y)) {
+        if (!this.canMove(x, y) ||
+            (x == this.playerXY.x && y == this.playerXY.y) ||
+            this.pokemonGrid().find(p => p.x === x && p.y === y) ||
+            this.itemGrid().find(i => i.x === x && i.y === y)) {
             return;
         }
         const pokemon = SafariPokemon.random();
@@ -338,6 +349,20 @@ class Safari {
         pokemon.y = y;
         pokemon.steps = this.sizeX() + this.sizeY() + Rand.floor(21);
         this.pokemonGrid.push(pokemon);
+    }
+
+    private static spawnRandomItem() {
+        const x = Rand.floor(this.sizeX());
+        const y = Rand.floor(this.sizeY());
+        if (!this.canMove(x, y) || (x == this.playerXY.x && y == this.playerXY.y) ||
+            this.itemGrid().find(i => i.x === x && i.y === y) ||
+            this.pokemonGrid().find(p => p.x === x && p.y === y)) {
+            return;
+        }
+        if (!SafariItemController.currentRegionHasItems()) {
+            return;
+        }
+        this.itemGrid.push(new SafariItem(x, y));
     }
 
     private static directionToXY(dir: string) {
@@ -408,6 +433,22 @@ class Safari {
         return false;
     }
 
+    private static checkItem() {
+        const itemOnPlayer = this.itemGrid().findIndex(p => p.x === Safari.playerXY.x && p.y === Safari.playerXY.y);
+        if (itemOnPlayer >= 0) {
+            const item = SafariItemController.getRandomItem();
+            const name = BagHandler.displayName(item);
+            BagHandler.gainItem(item);
+            Notifier.notify({
+                message: `You found ${GameHelper.anOrA(name)} ${name}!`,
+                image: BagHandler.image(item),
+                type: NotificationConstants.NotificationOption.success,
+                setting: NotificationConstants.NotificationSetting.Items.dropped_item,
+            });
+            Safari.itemGrid.splice(itemOnPlayer, 1);
+        }
+    }
+
     private static calculateStartPokeballs() {
         return GameConstants.SAFARI_BASE_POKEBALL_COUNT;
     }
@@ -415,12 +456,9 @@ class Safari {
     static completed(shiny = false) {
         // Check current region
         if (SafariPokemonList.list[player.region]) {
-            // Check each zone
-            return SafariPokemonList.list[player.region]().every((list) => {
-                // Check each pokemon within this zone
-                return list.safariPokemon.every(poke => {
-                    return App.game.party.alreadyCaughtPokemonByName(poke.name, shiny);
-                });
+            // Check each pokemon within this zone
+            return SafariPokemonList.list[player.region]().every(poke => {
+                return App.game.party.alreadyCaughtPokemonByName(poke.name, shiny);
             });
         }
         return false;

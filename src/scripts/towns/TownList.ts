@@ -2219,6 +2219,14 @@ const ProfBirch = new ProfNPC('Prof. Birch',
     'I really appreciate being able to see your outstanding progress, thank you! Sinnoh is next up.',
     'assets/images/npcs/Professor Birch.png');
 
+const CoolTrainerDillan = new NPC('Cool Trainer Dillan', [
+    'Hey newcomer! I see you are the Hoenn Champion. You must be an amazing Trainer!',
+    'At the Battle Frontier, you can test your skills against Trainers from all over the world.',
+    'Since some of these Trainers come from far away, you may see Pokémon that you might not be able to catch yet.',
+    'But don\'t worry, catching them all is only a matter of time. Just keep exploring and having fun and you\'ll encounter lots of different Pokémon, either in form, color, or even evolutions!',
+], {image: 'assets/images/npcs/Cooltrainer (male).png',
+});
+
 const SCEntrance = new NPC('Strange Markings', [
     '<i>These strange markings seem to spell something out. The nearby Braille Enthusiast may know more.</i>',
 ], {image: 'assets/images/npcs/other/Regi Entrance.png',
@@ -2918,6 +2926,7 @@ TownList['Battle Frontier'] = new Town(
     [BattleFrontierShop, new BattleFrontierTownContent()],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
+        npcs: [CoolTrainerDillan],
     }
 );
 TownList['Pokémon League Hoenn'] = new Town(
@@ -4962,14 +4971,18 @@ TownList['Plasma Frigate'] = new DungeonTown(
     [
         new OneFromManyRequirement([
             new MultiRequirement([
-                new RouteKillRequirement(10, GameConstants.Region.unova, 22),
                 new GymBadgeRequirement(BadgeEnums.Wave),
                 new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 14),
-                new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Plasma Frigate'), GameConstants.AchievementOption.less),
+                new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 15, GameConstants.AchievementOption.less),
             ]),
+            new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 16),
             new QuestLineCompletedRequirement('Quest for the DNA Splicers'),
         ]),
-    ]
+    ],
+    [TemporaryBattleList['Colress 3'], TemporaryBattleList['Plasma Shadow 2'], TemporaryBattleList['Plasma Shadow 3'], TemporaryBattleList['Plasma Shadow 4']],
+    {
+        npcs: [GiantChasmColress, GiantChasmShadowTriad],
+    }
 );
 TownList['Giant Chasm'] = new DungeonTown(
     'Giant Chasm',
@@ -4979,10 +4992,7 @@ TownList['Giant Chasm'] = new DungeonTown(
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Plasma Frigate')),
         new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 15),
     ],
-    [TemporaryBattleList['Colress 3'], TemporaryBattleList['Plasma Shadow 2'], TemporaryBattleList['Plasma Shadow 3'], TemporaryBattleList['Plasma Shadow 4'], TemporaryBattleList['Ghetsis 1'], TemporaryBattleList['Ghetsis 2']],
-    {
-        npcs: [GiantChasmColress, GiantChasmShadowTriad],
-    }
+    [TemporaryBattleList['Ghetsis 1'], TemporaryBattleList['Ghetsis 2']]
 );
 TownList['Cave of Being'] = new DungeonTown(
     'Cave of Being',
@@ -6039,6 +6049,7 @@ const RoadsideMotelAnabel1 = new NPC('Anabel', [
 const RoadsideMotelLooker2 = new NPC('Looker', [
     'Catching lots of Ultra Beasts? Oh you want to know more about Beast Balls!',
     'Beast Balls can only be used to catch Ultra Beasts. You can\'t even try to use them against normal Pokémon, and any other Poké Ball type won\'t work against Ultra Beasts.',
+    'To help you out, I\'ve added an "Ultra Beast" option to the Encounter Type Pokéball filter setting. You can use this to set up a filter just for Ultra Beasts. Don\'t forget to enable it and assign Beast Balls!',
 ], {
     image: 'assets/images/npcs/Looker.png',
     requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 2),
