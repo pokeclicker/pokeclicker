@@ -100,6 +100,8 @@ class DungeonBattle extends Battle {
                     },
                     App.game.pokeballs.calculateCatchTime(pokeBall)
                 );
+            } else {
+                DungeonBattle.nextTrainerPokemon();
             }
         } else {
             DungeonBattle.nextTrainerPokemon();
