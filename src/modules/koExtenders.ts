@@ -87,8 +87,7 @@ ko.bindingHandlers.playerSpriteMove = {
 
                         if (rotate) {
                             targetElement.setAttribute('transform', 'rotate(90,' + x + ', ' + y + ')');
-                        }
-                        else {
+                        } else {
                             targetElement.setAttribute('transform', '');
                         }
                         //console.log('Element is rotated? :', rotate, ' : ', x, ':', y);
