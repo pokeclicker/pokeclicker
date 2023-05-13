@@ -2475,6 +2475,7 @@ TemporaryBattleList['Aipom Alley'] = new TemporaryBattle(
     undefined,
     {
         hideTrainer: true,
+        imageName: 'specialNPCs/Aipom Alley',
     }
 );
 TemporaryBattleList['Mime Interview'] = new TemporaryBattle(
