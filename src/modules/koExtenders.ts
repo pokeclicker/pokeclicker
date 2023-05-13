@@ -66,7 +66,7 @@ ko.bindingHandlers.contentEditable = {
     },
 };
 
-
+//TODO: Replace with logic that maintains a singular PlayerSpriteSVG rather than clone re-rendering
 ko.bindingHandlers.playerSpriteMove = {
     init: function (element) {
         var observer = new IntersectionObserver(function (entries, observer) {
