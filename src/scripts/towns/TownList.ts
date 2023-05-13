@@ -4971,14 +4971,18 @@ TownList['Plasma Frigate'] = new DungeonTown(
     [
         new OneFromManyRequirement([
             new MultiRequirement([
-                new RouteKillRequirement(10, GameConstants.Region.unova, 22),
                 new GymBadgeRequirement(BadgeEnums.Wave),
                 new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 14),
-                new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Plasma Frigate'), GameConstants.AchievementOption.less),
+                new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 15, GameConstants.AchievementOption.less),
             ]),
+            new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 16),
             new QuestLineCompletedRequirement('Quest for the DNA Splicers'),
         ]),
-    ]
+    ],
+    [TemporaryBattleList['Colress 3'], TemporaryBattleList['Plasma Shadow 2'], TemporaryBattleList['Plasma Shadow 3'], TemporaryBattleList['Plasma Shadow 4']],
+    {
+        npcs: [GiantChasmColress, GiantChasmShadowTriad],
+    }
 );
 TownList['Giant Chasm'] = new DungeonTown(
     'Giant Chasm',
@@ -4988,10 +4992,7 @@ TownList['Giant Chasm'] = new DungeonTown(
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Plasma Frigate')),
         new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 15),
     ],
-    [TemporaryBattleList['Colress 3'], TemporaryBattleList['Plasma Shadow 2'], TemporaryBattleList['Plasma Shadow 3'], TemporaryBattleList['Plasma Shadow 4'], TemporaryBattleList['Ghetsis 1'], TemporaryBattleList['Ghetsis 2']],
-    {
-        npcs: [GiantChasmColress, GiantChasmShadowTriad],
-    }
+    [TemporaryBattleList['Ghetsis 1'], TemporaryBattleList['Ghetsis 2']]
 );
 TownList['Cave of Being'] = new DungeonTown(
     'Cave of Being',
@@ -6048,6 +6049,7 @@ const RoadsideMotelAnabel1 = new NPC('Anabel', [
 const RoadsideMotelLooker2 = new NPC('Looker', [
     'Catching lots of Ultra Beasts? Oh you want to know more about Beast Balls!',
     'Beast Balls can only be used to catch Ultra Beasts. You can\'t even try to use them against normal Pokémon, and any other Poké Ball type won\'t work against Ultra Beasts.',
+    'To help you out, I\'ve added an "Ultra Beast" option to the Encounter Type Pokéball filter setting. You can use this to set up a filter just for Ultra Beasts. Don\'t forget to enable it and assign Beast Balls!',
 ], {
     image: 'assets/images/npcs/Looker.png',
     requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 2),
