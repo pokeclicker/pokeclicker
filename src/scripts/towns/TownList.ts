@@ -2710,7 +2710,6 @@ const ZinniaOrigin = new NPC('Zinnia', [
 ], {image: 'assets/images/npcs/Zinnia.png',
     requirement: new MultiRequirement([new QuestLineCompletedRequirement('The Delta Episode'), new QuestLineCompletedRequirement('Primal Reversion')]),
 });
-
 //Hoenn Towns
 TownList['Littleroot Town'] = new Town(
     'Littleroot Town',
@@ -3457,6 +3456,7 @@ TownList['Orre Colosseum Battles'] = new DungeonTown(
         new DevelopmentRequirement(),
     ]
 );
+
 
 //Sinnoh Shops
 const SandgemTownShop = new Shop([
@@ -5083,6 +5083,8 @@ const SantaluneCityShop = new Shop([
     ItemList.Token_collector,
     ItemList.Lucky_egg,
     ItemList.Mystery_egg,
+    ItemList.Wonder_Chest,
+    ItemList.Miracle_Chest,
 ]);
 const FriseurFurfrouShop = new Shop([
     ItemList['Furfrou (Debutante)'],
@@ -5833,7 +5835,9 @@ TownList['Victory Road Kalos'] = new DungeonTown(
     ]
 );
 //Unknown Cave?
+
 //Alola Shops
+
 const IkiTownShop = new Shop([
     ItemList.Pokeball,
     ItemList.xAttack,
@@ -7694,7 +7698,7 @@ const ProfMagnolia = new ProfNPC('Prof. Magnolia',
 const MagearnaMysteryGift = new NPC('Mystery Gift', [
     'You have received a Mystery Gift for completing the National Shiny Dex!',
 ], {
-    image: 'assets/images/pokemon/801.1.png',
+    image: 'assets/images/pokemon/801.01.png',
     requirement: new MultiRequirement([new QuestLineStartedRequirement('A Mystery Gift'), new QuestLineCompletedRequirement('A Mystery Gift', GameConstants.AchievementOption.less)]),
 }
 );
