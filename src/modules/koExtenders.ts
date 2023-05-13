@@ -66,6 +66,55 @@ ko.bindingHandlers.contentEditable = {
     },
 };
 
+ko.bindingHandlers.playerSpriteMove = {
+    init: function (element, valueAccessor) {
+        var targetElement = document.getElementById('playerSprite'); // replace with the ID of the target element
+        if (targetElement) {
+            var imageElement = element.cloneNode(true); // clone the image element
+            targetElement.appendChild(imageElement); // append the cloned element to the target element
+        }
+        var value = ko.unwrap(valueAccessor());
+        if (value) {
+            console.log('Element is now visible:', element);
+        }
+    }
+};
+
+ko.bindingHandlers.playerSpriteMove = {
+    init: function (element) {
+        var options = {
+            rootMargin: '0px',
+            threshold: 1.0
+        };
+        var observer = new IntersectionObserver(function (entries, observer) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    var targetElement = document.getElementById('playerSprite');
+                    var imageElement = element.cloneNode(true);
+                    imageElement.setAttribute('visibility', 'visible');
+
+                    targetElement.innerHTML = '';
+                    targetElement.appendChild(imageElement);
+
+                    //Get required variables to replicate the rotate on parent group as well
+                    var rotate = imageElement.getAttribute('rotate');
+                    var x = imageElement.getAttribute('localx');
+                    var y = imageElement.getAttribute('localy');
+
+                    if (rotate) {
+                        targetElement.setAttribute("transform", "rotate(90," + x + ", " + y + ")");
+                    }
+                    else {
+                        targetElement.setAttribute("transform", "");
+                    }
+                    //console.log('Element is rotated? :', rotate, ' : ', x, ':', y);
+                }
+            });
+        }, options);
+        observer.observe(element);
+    }
+};
+
 ko.bindingHandlers.sortable = {
     init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
         bindingContext.extend({ sortableController: null });
