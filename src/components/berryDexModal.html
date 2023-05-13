@@ -64,9 +64,18 @@
                       <td class="text-left tight"><code data-bind="html: GameConstants.formatSecondsToTime(App.game.farming.berryData[$data].growthTime[4]-App.game.farming.berryData[$data].growthTime[3])">-</code></td>
                     </tr>
                     <tr>
+                      <td class="text-left">Growth Duration</td>
+                      <td class="text-left tight"><code data-bind="html: GameConstants.formatSecondsToTime(App.game.farming.berryData[$data].growthTime[3])">-</code></td>
+                    </tr>
+                    <tr>
+                      <td class="text-left">Berry Stage Duration</td>
+                      <td class="text-left tight"><code data-bind="html: GameConstants.formatSecondsToTime(App.game.farming.berryData[$data].growthTime[4]-App.game.farming.berryData[$data].growthTime[3])">-</code></td>
+                    </tr>
+                    <tr>
                       <td class="text-left">Total Life Span</td>
                       <td class="text-left tight"><code data-bind="html: GameConstants.formatSecondsToTime(App.game.farming.berryData[$data].growthTime[4])">-</code></td>
                     </tr>
+                    </tbody>
                     <thead>
                       <tr class="text-light">
                         <th class="text-left bg-dark">Farming Info</th>

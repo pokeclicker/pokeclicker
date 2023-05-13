@@ -1441,7 +1441,7 @@ TemporaryBattleList['Team Plasma Grunt 2'] = new TemporaryBattle(
     [
         new GymBadgeRequirement(BadgeEnums.Bolt),
         new TemporaryBattleRequirement('Team Plasma Grunt 1'),
-        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 3),
+        new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 3),
     ],
     undefined,
     {
@@ -1456,7 +1456,7 @@ TemporaryBattleList['Team Plasma Grunt 3'] = new TemporaryBattle(
     [
         new GymBadgeRequirement(BadgeEnums.Bolt),
         new TemporaryBattleRequirement('Team Plasma Grunt 1'),
-        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 3),
+        new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 3),
     ],
     undefined,
     {
@@ -1520,7 +1520,7 @@ TemporaryBattleList['Team Plasma Grunt 4'] = new TemporaryBattle(
     'Team Plasma Grunt 4',
     [new GymPokemon('Koffing', 39496600, 30)],
     'You! So you\'re a Trainer who fights while believing in your Pokémon, are you?',
-    [new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 5)],
+    [new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 5)],
     undefined,
     {
         displayName: 'Team Plasma Grunt',
@@ -1531,7 +1531,7 @@ TemporaryBattleList['Team Plasma Grunt 5'] = new TemporaryBattle(
     'Team Plasma Grunt 5',
     [new GymPokemon('Trubbish', 39496600, 30)],
     'Plasmaaaa! Plasmaaaa!!',
-    [new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 5)],
+    [new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 5)],
     undefined,
     {
         displayName: 'Team Plasma Grunt',
@@ -1547,7 +1547,7 @@ TemporaryBattleList['Team Plasma Grunts 1'] = new TemporaryBattle(
         new GymPokemon('Krokorok', 9974150, 29),
     ],
     'The Gym Leader is tough, but you... Are you even human?! I tried to use the same combination as you, and yet...',
-    [new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 5)],
+    [new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 5)],
     undefined,
     {
         displayName: 'Team Plasma Grunts',
@@ -1563,7 +1563,7 @@ TemporaryBattleList['Team Plasma Grunts 2'] = new TemporaryBattle(
         new GymPokemon('Raticate', 9974150, 29),
     ],
     'No! At this rate, I... I won\'t be able to protect the Plasma Frigate! P-P-P-Plasmaaaa!',
-    [new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 5)],
+    [new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 5)],
     undefined,
     {
         displayName: 'Team Plasma Grunts',
@@ -1602,7 +1602,7 @@ TemporaryBattleList['Team Plasma Grunt 6'] = new TemporaryBattle(
         new TemporaryBattleRequirement('Team Plasma Grunt 5'),
         new TemporaryBattleRequirement('Team Plasma Grunts 1'),
         new TemporaryBattleRequirement('Team Plasma Grunts 2'),
-        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 8),
+        new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 8),
     ],
     undefined,
     {
@@ -1673,7 +1673,7 @@ TemporaryBattleList['Zinzolin 2'] = new TemporaryBattle(
         new GymPokemon('Cryogonal', 17632200, 46),
         new GymPokemon('Weavile', 20632200, 48),
     ],
-    'Have you gotten even stronger than you were in Lucanosa Town? How, in such a brief amount of time...',
+    'Have you gotten even stronger than you were in Lacunosa Town? How, in such a brief amount of time...',
     [
         new TemporaryBattleRequirement('Team Plasma Grunt 7'),
         new TemporaryBattleRequirement('Team Plasma Grunt 8'),
@@ -1713,7 +1713,7 @@ TemporaryBattleList['Colress 3'] = new TemporaryBattle(
     [
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Giant Chasm')),
         new TemporaryBattleRequirement('Plasma Shadow 1'),
-        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 17),
+        new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 17),
     ],
     undefined,
     {
@@ -1777,7 +1777,7 @@ TemporaryBattleList['Ghetsis 1'] = new TemporaryBattle(
         new TemporaryBattleRequirement('Plasma Shadow 2'),
         new TemporaryBattleRequirement('Plasma Shadow 3'),
         new TemporaryBattleRequirement('Plasma Shadow 4'),
-        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 20),
+        new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 20),
     ],
     undefined,
     {
@@ -2475,6 +2475,7 @@ TemporaryBattleList['Aipom Alley'] = new TemporaryBattle(
     undefined,
     {
         hideTrainer: true,
+        imageName: 'specialNPCs/Aipom Alley',
     }
 );
 TemporaryBattleList['Mime Interview'] = new TemporaryBattle(
@@ -3620,8 +3621,8 @@ TemporaryBattleList['Team Galactic Leader Cyrus'] = new TemporaryBattle(
         new GymPokemon('Honchkrow', 225000000, 60),
         new GymPokemon('Crobat', 225000000, 60),
         new GymPokemon('Weavile', 225000000, 60),
-        new GymPokemon('Dialga', 225000000, 60),
-        new GymPokemon('Palkia', 250000000, 60),
+        new GymPokemon('Dialga', 240000000, 60),
+        new GymPokemon('Palkia', 240000000, 60),
     ],
     'Impressive. Your prowess is notable.',
     [new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 2)],
@@ -3638,8 +3639,8 @@ TemporaryBattleList['Team Flare Leader Lysandre'] = new TemporaryBattle(
         new GymPokemon('Pyroar', 225000000, 60),
         new GymPokemon('Honchkrow', 225000000, 60),
         new GymPokemon('Mega Gyarados', 225000000, 60),
-        new GymPokemon('Xerneas', 225000000, 60),
-        new GymPokemon('Yveltal', 250000000, 60),
+        new GymPokemon('Xerneas', 240000000, 60),
+        new GymPokemon('Yveltal', 240000000, 60),
     ],
     'I can feel the fire of your convictions burning deep within your heart!',
     [new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 3)],
@@ -3656,8 +3657,8 @@ TemporaryBattleList['Team Plasma Leader Ghetsis'] = new TemporaryBattle(
         new GymPokemon('Bouffalant', 225000000, 60),
         new GymPokemon('Bisharp', 225000000, 60),
         new GymPokemon('Hydreigon', 225000000, 60),
-        new GymPokemon('Zekrom', 225000000, 60),
-        new GymPokemon('Reshiram', 250000000, 60),
+        new GymPokemon('Zekrom', 240000000, 60),
+        new GymPokemon('Reshiram', 240000000, 60),
     ],
     'I couldn\'t have been defeated by some random Trainer from who knows where!',
     [new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 4)],
@@ -3674,8 +3675,8 @@ TemporaryBattleList['Team Rainbow Leader Giovanni'] = new TemporaryBattle(
         new GymPokemon('Nidoking', 230000000, 60),
         new GymPokemon('Nidoqueen', 230000000, 60),
         new GymPokemon('Rhyperior', 230000000, 60),
-        new GymPokemon('Mega Mewtwo X', 230000000, 60),
-        new GymPokemon('Mega Mewtwo Y', 260000000, 60),
+        new GymPokemon('Mega Mewtwo X', 245000000, 60),
+        new GymPokemon('Mega Mewtwo Y', 245000000, 60),
     ],
     'Ha! That was a truly intense fight!',
     [new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 5)]

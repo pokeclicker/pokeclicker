@@ -2219,6 +2219,14 @@ const ProfBirch = new ProfNPC('Prof. Birch',
     'I really appreciate being able to see your outstanding progress, thank you! Sinnoh is next up.',
     'assets/images/npcs/Professor Birch.png');
 
+const CoolTrainerDillan = new NPC('Cool Trainer Dillan', [
+    'Hey newcomer! I see you are the Hoenn Champion. You must be an amazing Trainer!',
+    'At the Battle Frontier, you can test your skills against Trainers from all over the world.',
+    'Since some of these Trainers come from far away, you may see Pokémon that you might not be able to catch yet.',
+    'But don\'t worry, catching them all is only a matter of time. Just keep exploring and having fun and you\'ll encounter lots of different Pokémon, either in form, color, or even evolutions!',
+], {image: 'assets/images/npcs/Cooltrainer (male).png',
+});
+
 const SCEntrance = new NPC('Strange Markings', [
     '<i>These strange markings seem to spell something out. The nearby Braille Enthusiast may know more.</i>',
 ], {image: 'assets/images/npcs/other/Regi Entrance.png',
@@ -2918,6 +2926,7 @@ TownList['Battle Frontier'] = new Town(
     [BattleFrontierShop, new BattleFrontierTownContent()],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
+        npcs: [CoolTrainerDillan],
     }
 );
 TownList['Pokémon League Hoenn'] = new Town(
@@ -4505,7 +4514,7 @@ const DriftveilZinzolin = new NPC('Zinzolin', [
     'Shadow Triad! Get them out of here!',
 ], {
     image: 'assets/images/npcs/Team Plasma (zinzolin).png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 6), new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 7, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 6), new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 7, GameConstants.AchievementOption.less)]),
 });
 
 const PlasmaGrunt3 = new NPC('Team Plasma Grunt', [
@@ -4627,7 +4636,7 @@ TownList['Castelia City'] = new Town(
     GameConstants.UnovaSubRegions.Unova,
     [CasteliaCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Castelia City']), new MoveToDungeon(dungeonList['Castelia Sewers'])],
     {
-        requirements: [new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 0)],
+        requirements: [new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 0)],
         npcs: [CasteliaMusician],
     }
 );
@@ -4639,7 +4648,7 @@ TownList['A Perfectly Ordinary Frigate'] = new Town(
     {
         requirements: [
             new GymBadgeRequirement(BadgeEnums.Insect),
-            new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 1),
+            new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 1),
             new TemporaryBattleRequirement('Team Plasma Grunt 1'),
         ],
         npcs: [PlasmaGrunt1],
@@ -4654,7 +4663,7 @@ TownList['Nimbasa City'] = new Town(
         requirements: [
             new RouteKillRequirement(10, GameConstants.Region.unova, 4),
             new TemporaryBattleRequirement('Colress 1'),
-            new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 2),
+            new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 2),
         ],
         npcs: [NimbasaExplorer],
     }
@@ -4669,7 +4678,7 @@ TownList['Driftveil City'] = new Town(
             new RouteKillRequirement(10, GameConstants.Region.unova, 5),
             new TemporaryBattleRequirement('Team Plasma Grunt 2'),
             new TemporaryBattleRequirement('Team Plasma Grunt 3'),
-            new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 4),
+            new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 4),
         ],
     }
 );
@@ -4681,7 +4690,7 @@ TownList['A Totally Unsuspicious Frigate'] = new Town(
     {
         requirements: [
             new GymBadgeRequirement(BadgeEnums.Quake),
-            new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 4),
+            new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 4),
         ],
         npcs: [PlasmaGrunt2, DriftveilZinzolin],
     }
@@ -4695,7 +4704,7 @@ TownList['Mistralton City'] = new Town(
         requirements: [
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Chargestone Cave')),
             new TemporaryBattleRequirement('Colress 2'),
-            new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 7),
+            new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 7),
         ],
     }
 );
@@ -4725,7 +4734,7 @@ TownList['Lacunosa Town'] = new Town(
     {
         requirements: [
             new RouteKillRequirement(10, GameConstants.Region.unova, 13),
-            new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 8),
+            new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 8),
         ],
     }
 );
@@ -4746,7 +4755,7 @@ TownList['Team Plasma Assault'] = new Town(
     {
         requirements: [
             new GymBadgeRequirement(BadgeEnums.Legend),
-            new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 11),
+            new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 11),
         ],
         npcs: [PlasmaGrunt3],
     }
@@ -4893,7 +4902,7 @@ TownList['Castelia Sewers'] = new DungeonTown(
     GameConstants.Region.unova,
     GameConstants.UnovaSubRegions.Unova,
     [
-        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 0),
+        new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 0),
     ]
 );
 TownList['Relic Passage'] = new DungeonTown(
@@ -4952,7 +4961,7 @@ TownList['Seaside Cave'] = new DungeonTown(
     [
         new RouteKillRequirement(10, GameConstants.Region.unova, 24),
         new TemporaryBattleRequirement('Plasma Shadow 1'),
-        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 14),
+        new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 14),
     ]
 );
 TownList['Plasma Frigate'] = new DungeonTown(
@@ -4962,14 +4971,18 @@ TownList['Plasma Frigate'] = new DungeonTown(
     [
         new OneFromManyRequirement([
             new MultiRequirement([
-                new RouteKillRequirement(10, GameConstants.Region.unova, 22),
                 new GymBadgeRequirement(BadgeEnums.Wave),
-                new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 14),
-                new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Plasma Frigate'), GameConstants.AchievementOption.less),
+                new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 14),
+                new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 15, GameConstants.AchievementOption.less),
             ]),
-            new QuestLineCompletedRequirement('Quest for the DNA Splicers'),
+            new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 16),
+            new QuestLineCompletedRequirement('Hollow Truth and Ideals'),
         ]),
-    ]
+    ],
+    [TemporaryBattleList['Colress 3'], TemporaryBattleList['Plasma Shadow 2'], TemporaryBattleList['Plasma Shadow 3'], TemporaryBattleList['Plasma Shadow 4']],
+    {
+        npcs: [GiantChasmColress, GiantChasmShadowTriad],
+    }
 );
 TownList['Giant Chasm'] = new DungeonTown(
     'Giant Chasm',
@@ -4977,12 +4990,9 @@ TownList['Giant Chasm'] = new DungeonTown(
     GameConstants.UnovaSubRegions.Unova,
     [
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Plasma Frigate')),
-        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 15),
+        new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 15),
     ],
-    [TemporaryBattleList['Colress 3'], TemporaryBattleList['Plasma Shadow 2'], TemporaryBattleList['Plasma Shadow 3'], TemporaryBattleList['Plasma Shadow 4'], TemporaryBattleList['Ghetsis 1'], TemporaryBattleList['Ghetsis 2']],
-    {
-        npcs: [GiantChasmColress, GiantChasmShadowTriad],
-    }
+    [TemporaryBattleList['Ghetsis 1'], TemporaryBattleList['Ghetsis 2']]
 );
 TownList['Cave of Being'] = new DungeonTown(
     'Cave of Being',
@@ -6039,6 +6049,7 @@ const RoadsideMotelAnabel1 = new NPC('Anabel', [
 const RoadsideMotelLooker2 = new NPC('Looker', [
     'Catching lots of Ultra Beasts? Oh you want to know more about Beast Balls!',
     'Beast Balls can only be used to catch Ultra Beasts. You can\'t even try to use them against normal Pokémon, and any other Poké Ball type won\'t work against Ultra Beasts.',
+    'To help you out, I\'ve added an "Ultra Beast" option to the Encounter Type Pokéball filter setting. You can use this to set up a filter just for Ultra Beasts. Don\'t forget to enable it and assign Beast Balls!',
 ], {
     image: 'assets/images/npcs/Looker.png',
     requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 2),

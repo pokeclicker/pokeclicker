@@ -83,7 +83,7 @@ class Battle {
         App.game.breeding.progressEggsBattle(Battle.route, player.region);
         const isShiny: boolean = enemyPokemon.shiny;
         const isShadow: boolean = enemyPokemon.shadow == GameConstants.ShadowStatus.Shadow;
-        const pokeBall: GameConstants.Pokeball = App.game.pokeballs.calculatePokeballToUse(enemyPokemon.id, isShiny, isShadow);
+        const pokeBall: GameConstants.Pokeball = App.game.pokeballs.calculatePokeballToUse(enemyPokemon.id, isShiny, isShadow, enemyPokemon.encounterType);
 
         if (pokeBall !== GameConstants.Pokeball.None) {
             this.prepareCatch(enemyPokemon, pokeBall);
