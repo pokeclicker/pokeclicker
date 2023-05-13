@@ -540,7 +540,7 @@ class Update implements Saveable {
         '0.8.15': ({ playerData, saveData }) => {
             // Start Plasma questline if player has Jet Badge already
             if (saveData.badgeCase[58]) {
-                Update.startQuestLine(saveData, 'Hollow Truth and Ideals');
+                Update.startQuestLine(saveData, 'Quest for the DNA Splicers');
             }
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 2, 1); // Digletts Cave
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 5, 4); // Power Plant
@@ -1062,7 +1062,7 @@ class Update implements Saveable {
 
             // Start Plasma questline if player has Toxic Badge already
             if (saveData.badgeCase[59]) {
-                Update.startQuestLine(saveData, 'Hollow Truth and Ideals');
+                Update.startQuestLine(saveData, 'Quest for the DNA Splicers');
             }
             // Remove Team Plasma Assault dungeon
             saveData.statistics.dungeonsCleared.splice(90, 1);
@@ -1901,7 +1901,7 @@ class Update implements Saveable {
             }
 
             // Set 'Team Plasma Grunt 1' to 0 if quest step not completed
-            Update.fixTempBattleState(saveData, 64, 0, 'Hollow Truth and Ideals', 0);
+            Update.fixTempBattleState(saveData, 64, 0, 'Quest for the DNA Splicers', 0);
             // Set Cyrus as complete if 'A New World' completed
             Update.fixTempBattleState(saveData, 57, 1, 'A New World', 3);
         },
