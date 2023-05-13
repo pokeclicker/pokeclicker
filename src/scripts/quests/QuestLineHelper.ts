@@ -1332,7 +1332,7 @@ class QuestLineHelper {
         const clearGiantChasm = new CustomQuest(1, 0, 'Team Plasma\'s leader Ghetsis plans on using the DNA Splicers on Kyurem in Giant Chasm. Clear the dungeon to end his evil plans.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Giant Chasm')]());
         plasmaUnovaQuestLine.addQuest(clearGiantChasm);
 
-        const talktoColress = new TalkToNPCQuest(GiantChasmColress, 'Talk to Colress.');
+        const talktoColress = new TalkToNPCQuest(GiantChasmColress, 'Talk to Colress on the Plasma Frigate.');
         plasmaUnovaQuestLine.addQuest(talktoColress);
 
         const clearColress = new CustomQuest (1, 0, 'Defeat Colress.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Colress 3')]());
@@ -1348,7 +1348,7 @@ class QuestLineHelper {
         const talktoShadowTriad = new TalkToNPCQuest(GiantChasmShadowTriad, 'Talk to the Shadow Triad.');
         plasmaUnovaQuestLine.addQuest(talktoShadowTriad);
 
-        const clearGhetsis1 = new CustomQuest (1, 0, 'Ghetsis has done something to the legendary Dragon-type Pokémon!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ghetsis 1')]());
+        const clearGhetsis1 = new CustomQuest (1, 0, 'Ghetsis has done something to the legendary Dragon-type Pokémon inside Giant Chasm!', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ghetsis 1')]());
         plasmaUnovaQuestLine.addQuest(clearGhetsis1);
 
         const ghetsisReward = () => {

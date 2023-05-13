@@ -82,6 +82,7 @@ export default class DynamicBackground {
         662, 663, 666, 691, 707, 714, 715, 717,
         738, 742, 743, 746, 801,
         822, 823, 826, 841, 845, 854, 855, 873, 885, 886, 887, 890,
+        905,
     ];
 
     public static MIN_SPEED_STAT = 20;

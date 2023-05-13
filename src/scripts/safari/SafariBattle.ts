@@ -248,6 +248,7 @@ class SafariBattle {
         $('#safariBattleModal').one('hidden.bs.modal', () => {
             Safari.inBattle(false);
             SafariBattle.busy(false);
+            Safari.spawnItemCheck();
         }).modal('hide');
     }
 

@@ -336,6 +336,7 @@ export const MEGA_REQUIRED_ATTACK_MULTIPLIER = 500;
  * town: In a town/pre-dungeon, town view is not shown
  */
 export enum GameState {
+    loading = -1,
     idle = 0,
     paused = 1,
     fighting = 2,
