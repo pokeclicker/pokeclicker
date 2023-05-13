@@ -1255,7 +1255,7 @@ class QuestLineHelper {
     // Unova QuestLines
     // Started upon defeating Virbank City's gym.
     public static createPlasmaUnovaQuestLine() {
-        const plasmaUnovaQuestLine = new QuestLine('Quest for the DNA Splicers', 'Prevent Team Plasma from using these dangerous Splicers.');
+        const plasmaUnovaQuestLine = new QuestLine('Hollow Truth and Ideals', 'Prevent Team Plasma from using these dangerous Splicers.');
 
         const clearVirbankGrunt = new CustomQuest (1, 0, 'A Team Plasma Grunt in Virbank City would like to steal your Pokémon. Defeat the grunt.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Team Plasma Grunt 1')]());
         plasmaUnovaQuestLine.addQuest(clearVirbankGrunt);
