@@ -93,6 +93,7 @@ export default class Statistics implements Saveable {
     safariBaitThrown: KnockoutObservable<number>;
     safariBallsThrown: KnockoutObservable<number>;
     safariStepsTaken: KnockoutObservable<number>;
+    safariItemsObtained: KnockoutObservable<number>;
 
     /*
      * arrayObservables
@@ -205,6 +206,7 @@ export default class Statistics implements Saveable {
         'safariBaitThrown',
         'safariBallsThrown',
         'safariStepsTaken',
+        'safariItemsObtained',
     ];
     arrayObservables = [
         'gymsDefeated',
