@@ -38,7 +38,7 @@
                       <td class="text-left tight"><code data-bind="html: GameConstants.humanifyString(BerryFirmness[App.game.farming.berryData[$data].firmness])">-</code></td>
                     </tr>
                     <!-- ko if: App.game.farming.berryData[$data].aura -->
-                    <tr class="auraHighlight">
+                    <tr>
                       <td class="text-left">Aura</td>
                       <td class="text-left tight"><code data-bind="text: AuraType[App.game.farming.berryData[$data].aura.auraType]"></code></td>
                     </tr>
@@ -154,10 +154,10 @@
                             <td><code data-bind="html: GameConstants.formatSecondsToTime(App.game.farming.berryData[$data].growthTime[3])">-</code></td>
                           </tr>
                           <!-- ko if: App.game.farming.berryData[$data].aura -->
-                          <tr class="auraHighlight">
+                          <tr>
                             <th colspan="4">Aura Effect at Stage</th>
                           </tr>
-                          <tr class="aura-box">
+                          <tr>
                             <td><code data-bind="html: GameConstants.formatSecondsToTime(1 - 1)">-</code></td>
                             <td><code data-bind="html: App.game.farming.auraDisplay($data, 0)">-</code></td>
                             <td><code data-bind="html: App.game.farming.auraDisplay($data, 1)">-</code></td>
