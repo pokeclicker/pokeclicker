@@ -69,11 +69,10 @@ ko.bindingHandlers.contentEditable = {
 //TODO: Replace with logic that maintains a singular PlayerSpriteSVG rather than clone re-rendering
 ko.bindingHandlers.playerSpriteMove = {
     init: function (element) {
-        var observer = new IntersectionObserver(function (entries, observer) {
+        var observer = new IntersectionObserver(function (entries) {
             entries.forEach(function (entry) {
                 if (entry.isIntersecting) {
-                    if (element.classList.contains('iconLocation'))
-                    {
+                    if (element.classList.contains('iconLocation')) {
                         var targetElement = document.getElementById('playerSprite');
                         var imageElement = element.cloneNode(true);
                         imageElement.classList.remove('hide');
@@ -87,10 +86,10 @@ ko.bindingHandlers.playerSpriteMove = {
                         var y = imageElement.getAttribute('localy');
 
                         if (rotate) {
-                            targetElement.setAttribute("transform", "rotate(90," + x + ", " + y + ")");
+                            targetElement.setAttribute('transform', 'rotate(90,' + x + ', ' + y + ')');
                         }
                         else {
-                            targetElement.setAttribute("transform", "");
+                            targetElement.setAttribute('transform', '');
                         }
                         //console.log('Element is rotated? :', rotate, ' : ', x, ':', y);
                     }
@@ -98,7 +97,7 @@ ko.bindingHandlers.playerSpriteMove = {
             });
         });
         observer.observe(element);
-    }
+    },
 };
 
 ko.bindingHandlers.sortable = {
