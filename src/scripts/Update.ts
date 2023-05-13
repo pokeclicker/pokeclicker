@@ -2131,21 +2131,36 @@ class Update implements Saveable {
                 Update.startQuestLine(saveData, 'A Beautiful World');
             }
 
-            // Melemele Spearow
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 182);
-            // Hau'oli Skull grunts
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 184);
-            // Hau'oli Ilima
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 185);
-            // Alola route 2 Skull grunts
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 186);
-            // Recon Squad Seaward Cave
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 187);
-
-            // Start Melemele quest if player has beaten Hau 1 already
-            if (saveData.statistics.temporaryBattleDefeated[181] && new DevelopmentRequirement().isCompleted()) {
-                Update.startQuestLine(saveData, 'Welcome to paradise, cousin!');
-            }
+            // Move pokeball selections onto new filters
+            saveData.pokeballFilters = {
+                list: [
+                    {
+                        name: 'Caught',
+                        options: { caught: true },
+                        ball: saveData.pokeballs?.alreadyCaughtSelection ?? GameConstants.Pokeball.None,
+                    },
+                    {
+                        name: 'Contagious',
+                        options: { pokerus: GameConstants.Pokerus.Contagious },
+                        ball: saveData.pokeballs?.alreadyCaughtContagiousSelection ?? GameConstants.Pokeball.None,
+                    },
+                    {
+                        name: 'Caught Shiny',
+                        options: { shiny: true, caughtShiny: true },
+                        ball: saveData.pokeballs?.alreadyCaughtShinySelection ?? GameConstants.Pokeball.Pokeball,
+                    },
+                    {
+                        name: 'New',
+                        options: { caught: false },
+                        ball: saveData.pokeballs?.notCaughtSelection ?? GameConstants.Pokeball.Pokeball,
+                    },
+                    {
+                        name: 'New Shiny',
+                        options: { shiny: true, caughtShiny: false },
+                        ball: saveData.pokeballs?.notCaughtShinySelection ?? GameConstants.Pokeball.Pokeball,
+                    },
+                ],
+            };
 
             // Add Hisui Gyms
             saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 114);
@@ -2210,6 +2225,31 @@ class Update implements Saveable {
             saveData.party.caughtPokemon.forEach(p => {
                 delete p[14]; // megaStone
             });
+        },
+
+        '0.10.12': ({ playerData, saveData, settingsData }) => {
+            // Rename Unova's Quest for the DNA Splicers questline
+            saveData.quests.questLines.forEach(v => {
+                if (v.name === 'Quest for the DNA Splicers') {
+                    v.name = 'Hollow Truth and Ideals';
+                }
+            });
+          
+            // Melemele Spearow
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 182);
+            // Hau'oli Skull grunts
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 184);
+            // Hau'oli Ilima
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 185);
+            // Alola route 2 Skull grunts
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 186);
+            // Recon Squad Seaward Cave
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 187);
+
+            // Start Melemele quest if player has beaten Hau 1 already
+            if (saveData.statistics.temporaryBattleDefeated[181] && new DevelopmentRequirement().isCompleted()) {
+                Update.startQuestLine(saveData, 'Welcome to paradise, cousin!');
+            }
         },
     };
 

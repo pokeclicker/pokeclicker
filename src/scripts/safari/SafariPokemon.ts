@@ -34,6 +34,7 @@ class SafariPokemon implements PokemonInterface {
         if (this.shiny) {
             Notifier.notify({
                 message: `✨ You encountered a shiny ${this.displayName}! ✨`,
+                pokemonImage: PokemonHelper.getImage(this.id, this.shiny, this.gender == GameConstants.BattlePokemonGender.Female),
                 type: NotificationConstants.NotificationOption.warning,
                 sound: NotificationConstants.NotificationSound.General.shiny_long,
                 setting: NotificationConstants.NotificationSetting.General.encountered_shiny,
@@ -112,8 +113,8 @@ class SafariPokemon implements PokemonInterface {
     public static random() {
         // Get a random pokemon from current region and zone for Safari Zone
         const pokemon = Rand.fromWeightedArray(
-            SafariPokemonList.list[Safari.activeRegion()]()[Safari.activeZone()].safariPokemon,
-            SafariPokemonList.list[Safari.activeRegion()]()[Safari.activeZone()].safariPokemon.map(p => p.weight)
+            SafariPokemonList.list[Safari.activeRegion()](),
+            SafariPokemonList.list[Safari.activeRegion()]().map(p => p.weight)
         );
         return new SafariPokemon(pokemon.name);
     }

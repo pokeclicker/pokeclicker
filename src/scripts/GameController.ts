@@ -232,7 +232,7 @@ class GameController {
                     }
                     // Select Pokeball from pokeball selector (0 = none)
                     if (numberKey < App.game.pokeballs.pokeballs.length) {
-                        pokeballs.selectedSelection()(numberKey);
+                        pokeballs.selectedSelection()?.(numberKey);
                     }
                     return e.preventDefault();
                 }
@@ -436,6 +436,7 @@ class GameController {
                         (Settings.getSetting('sound.muted') as BooleanSetting).toggle();
                         return e.preventDefault();
                     }
+                    break;
                 case Settings.getSetting('hotkey.dailyQuests').value:
                     // Open the Quests
                     if (quests.isDailyQuestsUnlocked() && !$questModal.data('disable-toggle')) {

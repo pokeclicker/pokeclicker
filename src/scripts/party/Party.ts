@@ -95,6 +95,7 @@ class Party implements Feature {
             // Notify if not already caught
             Notifier.notify({
                 message: `✨ You have captured a shiny ${pokemon.displayName}! ✨`,
+                pokemonImage: PokemonHelper.getImage(pokemon.id, pokemon.shiny, pokemon.gender),
                 type: NotificationConstants.NotificationOption.warning,
                 sound: NotificationConstants.NotificationSound.General.new_catch,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
@@ -115,6 +116,7 @@ class Party implements Feature {
         if (!suppressNotification) {
             Notifier.notify({
                 message: `You have captured ${GameHelper.anOrA(pokemon.name)} ${pokemon.displayName}!`,
+                pokemonImage: PokemonHelper.getImage(pokemon.id, pokemon.shiny, pokemon.gender),
                 type: NotificationConstants.NotificationOption.success,
                 sound: NotificationConstants.NotificationSound.General.new_catch,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
@@ -136,13 +138,15 @@ class Party implements Feature {
         const multBonus = this.multiplier.getBonus('exp', true);
         const trainerBonus = trainer ? 1.5 : 1;
         const expTotal = Math.floor(exp * level * trainerBonus * multBonus / 9);
+        let expGained = 0;
 
         const maxLevel = App.game.badgeCase.maxLevel();
         for (const pokemon of this.caughtPokemon) {
             if (pokemon.level < maxLevel) {
-                pokemon.gainExp(expTotal);
+                expGained += pokemon.gainExp(expTotal);
             }
         }
+        App.game.purifyChamber.gainFlow(expGained);
     }
 
     /**

@@ -1322,7 +1322,7 @@ Routes.add(new RegionRoute(
     [
         new GymBadgeRequirement(BadgeEnums.Toxic),
         new TemporaryBattleRequirement('Team Plasma Grunt 1'),
-        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 1),
+        new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 1),
     ],
 ));
 Routes.add(new RegionRoute(
@@ -1333,7 +1333,7 @@ Routes.add(new RegionRoute(
     [
         new RouteKillRequirement(10, Region.unova, 4),
         new TemporaryBattleRequirement('Colress 1'),
-        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 2),
+        new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 2),
     ],
     4,
 ));
@@ -1344,7 +1344,7 @@ Routes.add(new RegionRoute(
     }),
     [
         new TemporaryBattleRequirement('Colress 1'),
-        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 2),
+        new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 2),
     ],
 ));
 Routes.add(new RegionRoute(
@@ -1354,7 +1354,7 @@ Routes.add(new RegionRoute(
     }),
     [
         new TemporaryBattleRequirement('Colress 1'),
-        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 2),
+        new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 2),
     ],
     5,
 ));
@@ -1369,7 +1369,7 @@ Routes.add(new RegionRoute(
         new GymBadgeRequirement(BadgeEnums.Bolt),
         new TemporaryBattleRequirement('Team Plasma Grunt 2'),
         new TemporaryBattleRequirement('Team Plasma Grunt 3'),
-        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 4),
+        new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 4),
     ],
 ));
 Routes.add(new RegionRoute(
@@ -1382,7 +1382,7 @@ Routes.add(new RegionRoute(
     [
         new ClearDungeonRequirement(1, getDungeonIndex('Chargestone Cave')),
         new TemporaryBattleRequirement('Colress 2'),
-        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 7),
+        new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 7),
     ],
 ));
 Routes.add(new RegionRoute(
@@ -1418,7 +1418,7 @@ Routes.add(new RegionRoute(
     [
         new RouteKillRequirement(10, Region.unova, 13),
         new TemporaryBattleRequirement('Zinzolin 1'),
-        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 10),
+        new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 10),
     ],
     13.1,
 ));
@@ -1468,7 +1468,7 @@ Routes.add(new RegionRoute(
     [
         new ClearDungeonRequirement(1, getDungeonIndex('Giant Chasm')),
         new TemporaryBattleRequirement('Ghetsis 2'),
-        new QuestLineCompletedRequirement('Quest for the DNA Splicers'),
+        new QuestLineCompletedRequirement('Hollow Truth and Ideals'),
     ],
 ));
 Routes.add(new RegionRoute(

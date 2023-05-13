@@ -523,7 +523,7 @@ TemporaryBattleList['Spiky-eared Pichu'] = new TemporaryBattle(
     {
         displayName: 'Strange Pichu',
         hideTrainer: true,
-        imageName: '../pokemon/172.1',
+        imageName: '../pokemon/172.01',
     }
 );
 TemporaryBattleList['Rocket Boss Giovanni'] = new TemporaryBattle(
@@ -1441,7 +1441,7 @@ TemporaryBattleList['Team Plasma Grunt 2'] = new TemporaryBattle(
     [
         new GymBadgeRequirement(BadgeEnums.Bolt),
         new TemporaryBattleRequirement('Team Plasma Grunt 1'),
-        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 3),
+        new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 3),
     ],
     undefined,
     {
@@ -1456,7 +1456,7 @@ TemporaryBattleList['Team Plasma Grunt 3'] = new TemporaryBattle(
     [
         new GymBadgeRequirement(BadgeEnums.Bolt),
         new TemporaryBattleRequirement('Team Plasma Grunt 1'),
-        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 3),
+        new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 3),
     ],
     undefined,
     {
@@ -1520,7 +1520,7 @@ TemporaryBattleList['Team Plasma Grunt 4'] = new TemporaryBattle(
     'Team Plasma Grunt 4',
     [new GymPokemon('Koffing', 39496600, 30)],
     'You! So you\'re a Trainer who fights while believing in your Pokémon, are you?',
-    [new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 5)],
+    [new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 5)],
     undefined,
     {
         displayName: 'Team Plasma Grunt',
@@ -1531,7 +1531,7 @@ TemporaryBattleList['Team Plasma Grunt 5'] = new TemporaryBattle(
     'Team Plasma Grunt 5',
     [new GymPokemon('Trubbish', 39496600, 30)],
     'Plasmaaaa! Plasmaaaa!!',
-    [new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 5)],
+    [new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 5)],
     undefined,
     {
         displayName: 'Team Plasma Grunt',
@@ -1547,7 +1547,7 @@ TemporaryBattleList['Team Plasma Grunts 1'] = new TemporaryBattle(
         new GymPokemon('Krokorok', 9974150, 29),
     ],
     'The Gym Leader is tough, but you... Are you even human?! I tried to use the same combination as you, and yet...',
-    [new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 5)],
+    [new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 5)],
     undefined,
     {
         displayName: 'Team Plasma Grunts',
@@ -1563,7 +1563,7 @@ TemporaryBattleList['Team Plasma Grunts 2'] = new TemporaryBattle(
         new GymPokemon('Raticate', 9974150, 29),
     ],
     'No! At this rate, I... I won\'t be able to protect the Plasma Frigate! P-P-P-Plasmaaaa!',
-    [new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 5)],
+    [new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 5)],
     undefined,
     {
         displayName: 'Team Plasma Grunts',
@@ -1602,7 +1602,7 @@ TemporaryBattleList['Team Plasma Grunt 6'] = new TemporaryBattle(
         new TemporaryBattleRequirement('Team Plasma Grunt 5'),
         new TemporaryBattleRequirement('Team Plasma Grunts 1'),
         new TemporaryBattleRequirement('Team Plasma Grunts 2'),
-        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 8),
+        new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 8),
     ],
     undefined,
     {
@@ -1673,7 +1673,7 @@ TemporaryBattleList['Zinzolin 2'] = new TemporaryBattle(
         new GymPokemon('Cryogonal', 17632200, 46),
         new GymPokemon('Weavile', 20632200, 48),
     ],
-    'Have you gotten even stronger than you were in Lucanosa Town? How, in such a brief amount of time...',
+    'Have you gotten even stronger than you were in Lacunosa Town? How, in such a brief amount of time...',
     [
         new TemporaryBattleRequirement('Team Plasma Grunt 7'),
         new TemporaryBattleRequirement('Team Plasma Grunt 8'),
@@ -1713,7 +1713,7 @@ TemporaryBattleList['Colress 3'] = new TemporaryBattle(
     [
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Giant Chasm')),
         new TemporaryBattleRequirement('Plasma Shadow 1'),
-        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 17),
+        new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 17),
     ],
     undefined,
     {
@@ -1777,7 +1777,7 @@ TemporaryBattleList['Ghetsis 1'] = new TemporaryBattle(
         new TemporaryBattleRequirement('Plasma Shadow 2'),
         new TemporaryBattleRequirement('Plasma Shadow 3'),
         new TemporaryBattleRequirement('Plasma Shadow 4'),
-        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 20),
+        new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 20),
     ],
     undefined,
     {
@@ -2475,6 +2475,7 @@ TemporaryBattleList['Aipom Alley'] = new TemporaryBattle(
     undefined,
     {
         hideTrainer: true,
+        imageName: 'specialNPCs/Aipom Alley',
     }
 );
 TemporaryBattleList['Mime Interview'] = new TemporaryBattle(
@@ -2695,8 +2696,8 @@ TemporaryBattleList.Yveltal = new TemporaryBattle(
 TemporaryBattleList['Team Flare Boss Lysandre 1'] = new TemporaryBattle(
     'Team Flare Boss Lysandre 1',
     [
-        new GymPokemon('Mienfoo', 68927443, 49),
-        new GymPokemon('Murkrow', 68927443, 49),
+        new GymPokemon('Mienshao', 68927443, 49),
+        new GymPokemon('Honchkrow', 68927443, 49),
         new GymPokemon('Pyroar', 70334126, 51),
         new GymPokemon('Mega Gyarados', 71740808, 53),
     ],
@@ -3027,8 +3028,8 @@ TemporaryBattleList['Grand Duchess Diantha'] = new TemporaryBattle(
 TemporaryBattleList['Team Flare Boss Lysandre 2'] = new TemporaryBattle(
     'Team Flare Boss Lysandre 2',
     [
-        new GymPokemon('Mienfoo', 127138249, 79),
-        new GymPokemon('Murkrow', 127138249, 79),
+        new GymPokemon('Mienshao', 127138249, 79),
+        new GymPokemon('Honchkrow', 127138249, 79),
         new GymPokemon('Pyroar', 124595484, 81),
         new GymPokemon('Mega Gyarados', 129681014, 83),
     ],
@@ -3690,8 +3691,8 @@ TemporaryBattleList['Team Galactic Leader Cyrus'] = new TemporaryBattle(
         new GymPokemon('Honchkrow', 225000000, 60),
         new GymPokemon('Crobat', 225000000, 60),
         new GymPokemon('Weavile', 225000000, 60),
-        new GymPokemon('Dialga', 225000000, 60),
-        new GymPokemon('Palkia', 250000000, 60),
+        new GymPokemon('Dialga', 240000000, 60),
+        new GymPokemon('Palkia', 240000000, 60),
     ],
     'Impressive. Your prowess is notable.',
     [new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 2)],
@@ -3708,8 +3709,8 @@ TemporaryBattleList['Team Flare Leader Lysandre'] = new TemporaryBattle(
         new GymPokemon('Pyroar', 225000000, 60),
         new GymPokemon('Honchkrow', 225000000, 60),
         new GymPokemon('Mega Gyarados', 225000000, 60),
-        new GymPokemon('Xerneas', 225000000, 60),
-        new GymPokemon('Yveltal', 250000000, 60),
+        new GymPokemon('Xerneas', 240000000, 60),
+        new GymPokemon('Yveltal', 240000000, 60),
     ],
     'I can feel the fire of your convictions burning deep within your heart!',
     [new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 3)],
@@ -3726,8 +3727,8 @@ TemporaryBattleList['Team Plasma Leader Ghetsis'] = new TemporaryBattle(
         new GymPokemon('Bouffalant', 225000000, 60),
         new GymPokemon('Bisharp', 225000000, 60),
         new GymPokemon('Hydreigon', 225000000, 60),
-        new GymPokemon('Zekrom', 225000000, 60),
-        new GymPokemon('Reshiram', 250000000, 60),
+        new GymPokemon('Zekrom', 240000000, 60),
+        new GymPokemon('Reshiram', 240000000, 60),
     ],
     'I couldn\'t have been defeated by some random Trainer from who knows where!',
     [new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 4)],
@@ -3744,8 +3745,8 @@ TemporaryBattleList['Team Rainbow Leader Giovanni'] = new TemporaryBattle(
         new GymPokemon('Nidoking', 230000000, 60),
         new GymPokemon('Nidoqueen', 230000000, 60),
         new GymPokemon('Rhyperior', 230000000, 60),
-        new GymPokemon('Mega Mewtwo X', 230000000, 60),
-        new GymPokemon('Mega Mewtwo Y', 260000000, 60),
+        new GymPokemon('Mega Mewtwo X', 245000000, 60),
+        new GymPokemon('Mega Mewtwo Y', 245000000, 60),
     ],
     'Ha! That was a truly intense fight!',
     [new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 5)]
@@ -3761,7 +3762,7 @@ TemporaryBattleList['Magikarp Jump Koylee'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Koylee',
-        imageName: 'Kareign',
+        imageName: 'Jump Champ Green',
         firstTimeRewardFunction: () => {
             Notifier.notify({
                 message: 'You were awarded a Magikarp Calico (Orange, White)!',
@@ -3782,7 +3783,7 @@ TemporaryBattleList['Magikarp Jump Karpella'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Karpella',
-        imageName: 'Karson',
+        imageName: 'Jump Champ Red',
         firstTimeRewardFunction: () => {
             Notifier.notify({
                 message: 'You were awarded a Magikarp Calico (Orange, White, Black)!',
@@ -3803,7 +3804,7 @@ TemporaryBattleList['Magikarp Jump Karpen'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Karpen',
-        imageName: 'Kareign',
+        imageName: 'Jump Champ Green',
         visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.alola, 33),
         firstTimeRewardFunction: () => {
             Notifier.notify({
@@ -3825,7 +3826,7 @@ TemporaryBattleList['Magikarp Jump Tykarp'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Tykarp',
-        imageName: 'Koichiro',
+        imageName: 'Jump Champ Blue',
     }
 );
 
@@ -3837,7 +3838,7 @@ TemporaryBattleList['Magikarp Jump Karpress'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Karpress',
-        imageName: 'Karson',
+        imageName: 'Jump Champ Red',
         visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.alola, 34),
     }
 );
@@ -3850,7 +3851,7 @@ TemporaryBattleList['Magikarp Jump Karami'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Karami',
-        imageName: 'Kareign',
+        imageName: 'Jump Champ Green',
     }
 );
 
@@ -3862,7 +3863,7 @@ TemporaryBattleList['Magikarp Jump Karson'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Karson',
-        imageName: 'Koichiro',
+        imageName: 'Jump Champ Blue',
         visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.alola, 35),
     }
 );
@@ -3875,7 +3876,7 @@ TemporaryBattleList['Magikarp Jump Karpress 2'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Karpress',
-        imageName: 'Karson',
+        imageName: 'Jump Champ Red',
     }
 );
 
@@ -3887,7 +3888,7 @@ TemporaryBattleList['Magikarp Jump Karpen 2'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Karpen',
-        imageName: 'Kareign',
+        imageName: 'Jump Champ Green',
         visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.alola, 36),
     }
 );
@@ -3900,7 +3901,7 @@ TemporaryBattleList['Magikarp Jump Karbuck'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Karbuck',
-        imageName: 'Koichiro',
+        imageName: 'Jump Champ Blue',
         visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.alola, 36),
         firstTimeRewardFunction: () => {
             Notifier.notify({
@@ -3922,7 +3923,7 @@ TemporaryBattleList['Magikarp Jump Skyhopper'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Skyhopper',
-        imageName: 'Karson',
+        imageName: 'Jump Champ Red',
     }
 );
 
@@ -3934,7 +3935,7 @@ TemporaryBattleList['Magikarp Jump Karpen 3'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Karpen',
-        imageName: 'Koichiro',
+        imageName: 'Jump Champ Blue',
         visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.alola, 37),
     }
 );
@@ -3947,7 +3948,7 @@ TemporaryBattleList['Magikarp Jump Karpella 2'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Karpella',
-        imageName: 'Kareign',
+        imageName: 'Jump Champ Green',
         visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.alola, 37),
     }
 );
@@ -3960,7 +3961,7 @@ TemporaryBattleList['Magikarp Jump Karbuck 2'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Karbuck',
-        imageName: 'Karson',
+        imageName: 'Jump Champ Red',
     }
 );
 
@@ -3972,7 +3973,7 @@ TemporaryBattleList['Magikarp Jump Kareign'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Kareign',
-        imageName: 'Koichiro',
+        imageName: 'Jump Champ Blue',
         visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.alola, 38),
     }
 );
@@ -3985,7 +3986,7 @@ TemporaryBattleList['Magikarp Jump Koylee 2'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Koylee',
-        imageName: 'Kareign',
+        imageName: 'Jump Champ Green',
         visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.alola, 38),
     }
 );
@@ -3998,7 +3999,7 @@ TemporaryBattleList['Magikarp Jump Karpress 3'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Karpress',
-        imageName: 'Koichiro',
+        imageName: 'Jump Champ Blue',
         firstTimeRewardFunction: () => {
             Notifier.notify({
                 message: 'You were awarded a Magikarp Grey Diamonds!',
@@ -4019,7 +4020,7 @@ TemporaryBattleList['Magikarp Jump Karpen 4'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Karpen',
-        imageName: 'Karson',
+        imageName: 'Jump Champ Red',
         visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.alola, 39),
     }
 );
@@ -4032,7 +4033,7 @@ TemporaryBattleList['Magikarp Jump Karpella 3'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Karpella',
-        imageName: 'Kareign',
+        imageName: 'Jump Champ Green',
         visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.alola, 39),
         firstTimeRewardFunction: () => {
             Notifier.notify({
@@ -4054,7 +4055,7 @@ TemporaryBattleList['Magikarp Jump Skyhopper 2'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Skyhopper',
-        imageName: 'Koichiro',
+        imageName: 'Jump Champ Blue',
     }
 );
 
@@ -4066,7 +4067,7 @@ TemporaryBattleList['Magikarp Jump Tykarp 2'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Tykarp',
-        imageName: 'Karson',
+        imageName: 'Jump Champ Red',
         visibleRequirement: new RouteKillRequirement(10, GameConstants.Region.alola, 40),
         firstTimeRewardFunction: () => {
             Notifier.notify({
@@ -4782,7 +4783,7 @@ TemporaryBattleList['Zarude (Dada)'] = new TemporaryBattle(
     undefined,
     {
         hideTrainer: true,
-        imageName: '../pokemon/893.1',
+        imageName: '../pokemon/893.01',
     }
 );
 TemporaryBattleList['Flowering Celebi'] = new TemporaryBattle(
@@ -4794,7 +4795,7 @@ TemporaryBattleList['Flowering Celebi'] = new TemporaryBattle(
     {
         isTrainerBattle: false,
         hideTrainer: true,
-        imageName: '../pokemon/251.2',
+        imageName: '../pokemon/251.02',
     }
 );
 TemporaryBattleList.Peony = new TemporaryBattle(
@@ -4873,7 +4874,7 @@ TemporaryBattleList['Galarian Articuno 1'] = new TemporaryBattle(
         hideTrainer: true,
         displayName: 'Galarian Articuno',
         returnTown: 'Roaring-Sea Caves',
-        imageName: '../pokemon/144.1',
+        imageName: '../pokemon/144.01',
         visibleRequirement: new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 3),
     }
 );
@@ -4890,7 +4891,7 @@ TemporaryBattleList['Galarian Articuno 2'] = new TemporaryBattle(
         hideTrainer: true,
         displayName: 'Galarian Articuno',
         returnTown: 'Roaring-Sea Caves',
-        imageName: '../pokemon/144.1',
+        imageName: '../pokemon/144.01',
         visibleRequirement: new TemporaryBattleRequirement('Galarian Articuno 1'),
     }
 );
@@ -4907,7 +4908,7 @@ TemporaryBattleList['Galarian Articuno 3'] = new TemporaryBattle(
         hideTrainer: true,
         displayName: 'Galarian Articuno',
         returnTown: 'Tunnel to the Top',
-        imageName: '../pokemon/144.1',
+        imageName: '../pokemon/144.01',
         visibleRequirement: new TemporaryBattleRequirement('Galarian Articuno 2'),
 
     }
@@ -4922,7 +4923,7 @@ TemporaryBattleList['Galarian Zapdos 1'] = new TemporaryBattle(
         hideTrainer: true,
         displayName: 'Galarian Zapdos',
         returnTown: 'Motostoke',
-        imageName: '../pokemon/145.1',
+        imageName: '../pokemon/145.01',
     }
 );
 TemporaryBattleList['Galarian Zapdos 2'] = new TemporaryBattle(
@@ -4938,7 +4939,7 @@ TemporaryBattleList['Galarian Zapdos 2'] = new TemporaryBattle(
         hideTrainer: true,
         displayName: 'Galarian Zapdos',
         returnTown: 'Dusty Bowl',
-        imageName: '../pokemon/145.1',
+        imageName: '../pokemon/145.01',
         visibleRequirement: new TemporaryBattleRequirement('Galarian Zapdos 1'),
     }
 );
@@ -4955,7 +4956,7 @@ TemporaryBattleList['Galarian Zapdos 3'] = new TemporaryBattle(
         hideTrainer: true,
         displayName: 'Galarian Zapdos',
         returnTown: 'Motostoke',
-        imageName: '../pokemon/145.1',
+        imageName: '../pokemon/145.01',
         visibleRequirement: new TemporaryBattleRequirement('Galarian Zapdos 2'),
     }
 );
@@ -4972,7 +4973,7 @@ TemporaryBattleList['Galarian Moltres 1'] = new TemporaryBattle(
         hideTrainer: true,
         displayName: 'Galarian Moltres',
         returnTown: 'Courageous Cavern',
-        imageName: '../pokemon/146.1',
+        imageName: '../pokemon/146.01',
         visibleRequirement: new QuestLineStepCompletedRequirement('The Birds of the Dyna Tree', 3),
     }
 );
@@ -4989,7 +4990,7 @@ TemporaryBattleList['Galarian Moltres 2'] = new TemporaryBattle(
         hideTrainer: true,
         displayName: 'Galarian Moltres',
         returnTown: 'Master Dojo',
-        imageName: '../pokemon/146.1',
+        imageName: '../pokemon/146.01',
         visibleRequirement: new TemporaryBattleRequirement('Galarian Moltres 1'),
     }
 );
@@ -5006,7 +5007,7 @@ TemporaryBattleList['Galarian Moltres 3'] = new TemporaryBattle(
         hideTrainer: true,
         displayName: 'Galarian Moltres',
         returnTown: 'Master Dojo',
-        imageName: '../pokemon/146.1',
+        imageName: '../pokemon/146.01',
         visibleRequirement: new TemporaryBattleRequirement('Galarian Moltres 2'),
     }
 );
@@ -5033,7 +5034,7 @@ TemporaryBattleList['Volo 1'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Ginkgo Guild Member Volo',
-        imageName: 'Volo1',
+        imageName: 'Volo (Ginkgo)',
     }
 );
 TemporaryBattleList['Akari 1'] = new TemporaryBattle(
@@ -5051,7 +5052,11 @@ TemporaryBattleList['Warden Mai'] = new TemporaryBattle(
     'Warden Mai',
     [new GymPokemon('Munchlax', 348526193, 10)],
     'You really aren\'t one of the usual Galaxy buffoons if you could defeat my partner... Well fought, Munchlax.',
-    [new DevelopmentRequirement()]
+    [new DevelopmentRequirement()],
+    undefined,
+    {
+        imageName: 'Mai',
+    }
 );
 TemporaryBattleList['Alpha Kricketune'] = new TemporaryBattle(
     'Alpha Kricketune',
@@ -5069,7 +5074,11 @@ TemporaryBattleList['Warden Lian'] = new TemporaryBattle(
     'Warden Lian',
     [new GymPokemon('Goomy', 348526193, 15)],
     'H-how can this be...',
-    [new DevelopmentRequirement()]
+    [new DevelopmentRequirement()],
+    undefined,
+    {
+        imageName: 'Lian',
+    }
 );
 TemporaryBattleList['Irida 1'] = new TemporaryBattle(
     'Irida 1',
@@ -5115,7 +5124,7 @@ TemporaryBattleList['Volo 2'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Ginkgo Guild Member Volo',
-        imageName: 'Volo1',
+        imageName: 'Volo (Ginkgo)',
     }
 );
 TemporaryBattleList['Coin 1'] = new TemporaryBattle(
@@ -5244,7 +5253,11 @@ TemporaryBattleList['Warden Ingo'] = new TemporaryBattle(
         new GymPokemon('Gliscor', 348526193, 42),
     ],
     'Bravo! Excellent! Your talent has brought you to the destination called Victory! Now, allow me to call Sneasler...',
-    [new DevelopmentRequirement()]
+    [new DevelopmentRequirement()],
+    undefined,
+    {
+        imageName: 'Ingo',
+    }
 );
 TemporaryBattleList['Melli 2'] = new TemporaryBattle(
     'Melli 2',
@@ -5279,7 +5292,11 @@ TemporaryBattleList['Warden Gaeric'] = new TemporaryBattle(
         new GymPokemon('Glalie', 348526193, 48),
     ],
     'Outstanding! I\'m tough as an iceberg, but you smashed me through and through!',
-    [new DevelopmentRequirement()]
+    [new DevelopmentRequirement()],
+    undefined,
+    {
+        imageName: 'Gaeric',
+    }
 );
 TemporaryBattleList['Warden Sabi'] = new TemporaryBattle(
     'Warden Sabi',
@@ -5289,7 +5306,11 @@ TemporaryBattleList['Warden Sabi'] = new TemporaryBattle(
         new GymPokemon('Rhyperior', 348526193, 50),
     ],
     'Wow, you caught us AND you beat us. You\'ve won all our games so far! But Braviary still wants to get to know you even better. Up to the roof we go! All right, Braviary! Why not test out their strength for yourself?',
-    [new DevelopmentRequirement()]
+    [new DevelopmentRequirement()],
+    undefined,
+    {
+        imageName: 'Sabi',
+    }
 );
 TemporaryBattleList['Hisuian Braviary'] = new TemporaryBattle(
     'Hisuian Braviary',
@@ -5299,7 +5320,7 @@ TemporaryBattleList['Hisuian Braviary'] = new TemporaryBattle(
     undefined,
     {
         hideTrainer: true,
-        imageName: '../pokemon/628.1',
+        imageName: '../pokemon/628.01',
     }
 );
 TemporaryBattleList['Lord of the Tundra: Avalugg'] = new TemporaryBattle(
@@ -5326,6 +5347,7 @@ TemporaryBattleList.Beni = new TemporaryBattle(
     undefined,
     {
         displayName: 'The Galaxy Team\'s Beni',
+        imageName: 'Beni (Ninja)',
     }
 );
 TemporaryBattleList['Kamado 1'] = new TemporaryBattle(
@@ -5341,7 +5363,7 @@ TemporaryBattleList['Kamado 1'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'The Galaxy Team\'s Kamado',
-        imageName: 'Kamado',
+        imageName: 'Kamado (Armor)',
     }
 );
 TemporaryBattleList['Charm 2'] = new TemporaryBattle(
@@ -5396,7 +5418,7 @@ TemporaryBattleList['Kamado 2'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'The Galaxy Team\'s Kamado',
-        imageName: 'Kamado',
+        imageName: 'Kamado (Armor)',
     }
 );
 TemporaryBattleList['Adaman 2'] = new TemporaryBattle(
@@ -5466,7 +5488,7 @@ TemporaryBattleList['Volo 3'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Pokémon Wielder Volo',
-        imageName: 'Volo2',
+        imageName: 'Volo',
     }
 );
 TemporaryBattleList['Giratina (Origin)'] = new TemporaryBattle(
