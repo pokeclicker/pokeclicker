@@ -4975,7 +4975,7 @@ TownList['Plasma Frigate'] = new DungeonTown(
                 new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 14),
                 new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 15, GameConstants.AchievementOption.less),
             ]),
-            new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 16),
+            new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 16),
             new QuestLineCompletedRequirement('Hollow Truth and Ideals'),
         ]),
     ],
