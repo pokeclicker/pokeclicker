@@ -2236,18 +2236,18 @@ class Update implements Saveable {
             });
 
             // Melemele Spearow
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 182);
-            // Hau'oli Skull grunts
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 184);
-            // Hau'oli Ilima
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 185);
-            // Alola route 2 Skull grunts
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 186);
-            // Recon Squad Seaward Cave
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 187);
+            // Hau'oli Skull grunts
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 189);
+            // Hau'oli Ilima
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 190);
+            // Alola route 2 Skull grunts
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 191);
+            // Recon Squad Seaward Cave
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 192);
 
             // Start Melemele quest if player has beaten Hau 1 already
-            if (saveData.statistics.temporaryBattleDefeated[181]) {
+            if (saveData.statistics.temporaryBattleDefeated[186]) {
                 Update.startQuestLine(saveData, 'Welcome to paradise, cousin!');
             }
         },
