@@ -34,6 +34,7 @@ class HatcheryHelper {
     public attackEfficiency: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 1 });
     public prevBonus: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 0 });
     public nextBonus: KnockoutObservable<number> = ko.observable(1).extend({ numeric: 0 });
+    public sortedPokemonList: KnockoutComputed<Array<PartyPokemon>>;
     // public level: number;
     // public experience: number;
 
@@ -61,6 +62,16 @@ class HatcheryHelper {
             if (hatched >= this.nextBonus() || hatched <= this.prevBonus()) {
                 this.updateBonus();
             }
+        });
+
+        this.sortedPokemonList = ko.pureComputed(() => {
+            if (!this.hired()) {
+                return [];
+            }
+
+            return [...App.game.party._caughtPokemon()].sort(
+                PartyController.compareBy(this.sortOption(), this.sortDirection(),
+                    +Settings.getSetting('breedingRegionalAttackDebuffSetting').observableValue()));
         });
     }
 
@@ -208,13 +219,8 @@ class HatcheryHelpers {
 
             // Check if egg slot empty
             if (egg.isNone()) {
-                // Get the currently selected region
-                const currentRegion = +Settings.getSetting('breedingRegionalAttackDebuffSetting').value;
-
                 // Check if there's a pokemon we can chuck into an egg
-                const pokemon = [...App.game.party.caughtPokemon]
-                    .sort(PartyController.compareBy(helper.sortOption(), helper.sortDirection(), currentRegion))
-                    .find(p => BreedingController.visible(p)());
+                const pokemon = helper.sortedPokemonList().find(p => p.isHatchable());
                 if (pokemon) {
                     this.hatchery.gainPokemonEgg(pokemon, true);
                     // Charge the player when we put a pokemon in the hatchery
