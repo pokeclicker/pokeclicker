@@ -99,7 +99,7 @@ class GameController {
 
     // Store keys for multi-key combinations
     static keyHeld: Record<string, any> = {}
-    //Event listeners for hide, hidden and shown. hide is required to prevent 'softlocking' and bricking Bootstrap when closed externally.  
+    //Event listeners for hide, hidden and shown. hide is required to prevent 'softlocking' and bricking Bootstrap when closed externally
     static addKeyListeners() {
         // Oak Items
         const oakItems = App.game.oakItems;
@@ -125,7 +125,7 @@ class GameController {
         const farms = App.game.farming;
         const $farmsModal = $('#farmModal');
         $farmsModal.on('hide.bs.modal', _ => $farmsModal.data('disable-toggle', true));
-        $farmsModal.on('hidden.bs.modal shown.bs.modal', _=> $farmsModal.data('disable-toggle', false));
+        $farmsModal.on('hidden.bs.modal shown.bs.modal', _ => $farmsModal.data('disable-toggle', false));
         // Hatchery
         const hatchery = App.game.breeding;
         const $hatcheryModal = $('#breedingModal');
