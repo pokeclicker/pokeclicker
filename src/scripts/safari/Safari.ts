@@ -16,6 +16,41 @@ class Safari {
     static balls: KnockoutObservable<number> = ko.observable().extend({ numeric: 0 });
     static activeRegion: KnockoutObservable<GameConstants.Region> = ko.observable(GameConstants.Region.none);
 
+    // Safari level
+    static maxSafariLevel = 40;
+    static safariExp: KnockoutComputed<number> = ko.pureComputed(() => {
+        return App.game.statistics.safariRocksThrown() * 10 +
+            App.game.statistics.safariBaitThrown() * 10;
+    });
+    static safariLevel: KnockoutComputed<number> = ko.pureComputed(() => Math.floor(Safari.expToLevel(Safari.safariExp())));
+    static percentToNextSafariLevel: KnockoutComputed<number> = ko.pureComputed(() => {
+        let expRequiredThisLevel = 0;
+        if (Safari.safariLevel() == 1) {
+            expRequiredThisLevel = 0;
+        } else {
+            let i = 0;
+            while (true) {
+                if (Safari.expToLevel(Safari.safariExp() - i) <= Safari.safariLevel()) {
+                    expRequiredThisLevel = Safari.safariExp() - i;
+                    break;
+                }
+                i++;
+            }
+        }
+
+        let expRequiredNextLevel = 0;
+        let i = 0;
+        while (true) {
+            if (Math.floor(Safari.expToLevel(Safari.safariExp() + i)) > Safari.safariLevel()) {
+                expRequiredNextLevel = Safari.safariExp() - i;
+                break;
+            }
+            i++;
+        }
+
+        return (Safari.safariExp() - expRequiredThisLevel) / (expRequiredNextLevel - expRequiredThisLevel) * 100;
+    });
+
     public static sizeX(): number {
         return Math.floor(document.querySelector('#safariModal .modal-dialog').scrollWidth / 32);
     }
@@ -462,6 +497,10 @@ class Safari {
             });
         }
         return false;
+    }
+
+    private static expToLevel(exp: number) {
+        return 9.5 * (1 + exp) ^ (0.1041);
     }
 }
 
