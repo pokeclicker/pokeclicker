@@ -117,8 +117,17 @@ class GameController {
         const quests = App.game.quests;
         // Farm
         const $farmsModal = $('#farmModal');
-        $farmsModal.on('hidden.bs.modal shown.bs.modal', _ => $farmsModal.data('disable-toggle', false));
         const farms = App.game.farming;
+        $farmsModal.on('hide.bs.modal', function () {
+            console.log('Farming Modal is closing....');
+            farms.modalClosing = true;
+        });
+
+        $farmsModal.on('hidden.bs.modal shown.bs.modal', function () {
+            $farmsModal.data('disable-toggle', false);
+            farms.modalClosing = false;
+            console.log('Farming Modal is closed!');
+        });
         // Hatchery
         const $hatcheryModal = $('#breedingModal');
         $hatcheryModal.on('hidden.bs.modal shown.bs.modal', _ => $hatcheryModal.data('disable-toggle', false));
@@ -381,7 +390,7 @@ class GameController {
             switch (key) {
                 case Settings.getSetting('hotkey.farm').value:
                     // Open the Farm
-                    if (farms.canAccess() && !$farmsModal.data('disable-toggle')) {
+                    if (farms.canAccess() && !$farmsModal.data('disable-toggle') && !farms.modalClosing) {
                         $('.modal').modal('hide');
                         $farmsModal.data('disable-toggle', true);
                         $farmsModal.modal('toggle');
