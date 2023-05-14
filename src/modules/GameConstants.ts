@@ -231,9 +231,9 @@ export const DUNGEON_HELD_ITEM_MODIFIER = ROUTE_HELD_ITEM_MODIFIER * 4;
 export const DUNGEON_BOSS_HELD_ITEM_MODIFIER = DUNGEON_HELD_ITEM_MODIFIER * 1.5;
 export const HELD_ITEM_CHANCE = 512;
 export const HELD_UNDERGROUND_ITEM_CHANCE = 2048;
-export const GRISEOUS_ITEM_CHANCE = 80;
-export const DNA_ITEM_CHANCE = 60;
-export const LIGHT_ITEM_CHANCE = 100;
+export const GRISEOUS_ITEM_CHANCE = 50;
+export const DNA_ITEM_CHANCE = 45;
+export const LIGHT_ITEM_CHANCE = 75;
 export const RUST_ITEM_CHANCE = 90;
 export const MANE_ITEM_CHANCE = 10;
 
@@ -323,6 +323,9 @@ export const ROAMER_EP_MODIFIER = 50;
 export const EP_EV_RATIO = 1000;
 export const EP_CHALLENGE_MODIFIER = 10;
 
+// Mega Evolution
+export const MEGA_REQUIRED_ATTACK_MULTIPLIER = 500;
+
 /**
  * idle: The game is not doing anything, the battle view isn't shown
  * paused: The battle view is shown, but there are no game ticks
@@ -333,6 +336,7 @@ export const EP_CHALLENGE_MODIFIER = 10;
  * town: In a town/pre-dungeon, town view is not shown
  */
 export enum GameState {
+    loading = -1,
     idle = 0,
     paused = 1,
     fighting = 2,
