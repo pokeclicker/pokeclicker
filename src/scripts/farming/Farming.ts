@@ -4,7 +4,6 @@
 class Farming implements Feature {
     name = 'Farming';
     saveKey = 'farming';
-    modalClosing = false;
 
     berryData: Berry[] = [];
     mutations: Mutation[] = [];
