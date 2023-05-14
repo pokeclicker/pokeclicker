@@ -410,6 +410,10 @@ class Dungeon {
 
         return encounterInfo;
     }
+
+    public isThereQuestAtLocation = ko.pureComputed(() => {
+        return App.game.quests.currentQuests().some(q => q instanceof DefeatDungeonQuest && q.dungeon == this.name);
+    });
 }
 
 /**
