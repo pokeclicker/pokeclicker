@@ -5963,13 +5963,15 @@ const Lillie1 = new NPC('Mysterious Girl', [
     requirement: new MultiRequirement([new QuestLineStartedRequirement('Welcome to paradise, cousin!'), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 1, GameConstants.AchievementOption.less)]),
 });
 const Lillie2 = new NPC('Mysterious Girl', [
-    'My name is Lillie. Are you a friend of the professor\'s? Let\'s go back to Iki Town.',
+    'Oh... Oh, thank goodness! So...you\'re also one of the professor\'s acquaintances? It\'s nice to meet you...',
+    'I am so grateful to you for helping us out of that dangerous spot. Come on. Into the bag, Nebby.',
+    'Oh...um...yes! You can call me Lillie. I know it\'s too much for me to ask it, but... Do you think you could see us back to town?',
 ], {
     image: 'assets/images/npcs/Lillie.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 1), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 2, GameConstants.AchievementOption.less)]),
 });
 const LillieMahaloTrail = new NPC('Lillie with Nebby', [
-    'Please... Don\'t tell anyone about this... About seeing Nebby... It\'s...it\'s a secret, OK? Um...',
+    'Please... Don\'t tell anyone about this... About seeing Nebby... It\'s...it\'s a secret, OK?',
 ], {
     image: 'assets/images/npcs/Lillie.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 2), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 3, GameConstants.AchievementOption.less)]),
@@ -6090,7 +6092,7 @@ const LillieMelemeleMeadow1 = new NPC('Lillie', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 8), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 11, GameConstants.AchievementOption.less)]),
 });
 const Lillie3 = new NPC('Lillie', [
-    'Nebby! Oh thank goodness you\'re safe. Here $playername$. I mean to give these back in Hau\'oli but forgot. It\'s the least I can do after all the running around I\'ve made you do.',
+    'Nebby! Oh thank goodness you\'re safe. Here $playername$. I meant to give these back in Hau\'oli but forgot. It\'s the least I can do after all the running around I\'ve made you do.',
     'Oh. It seems Hau is also here. Are you two having another battle?',
 ], {
     image: 'assets/images/npcs/Lillie.png',
@@ -6344,6 +6346,16 @@ TownList['Iki Town Outskirts'] = new Town(
         npcs: [IkiOutskirtsMom],
     }
 );
+TownList['Mahalo Trail'] = new Town(
+    'Mahalo Trail',
+    GameConstants.Region.alola,
+    GameConstants.AlolaSubRegions.MelemeleIsland,
+    [TemporaryBattleList['Melemele Spearow']],
+    {
+        requirements: [new QuestLineStartedRequirement('Welcome to paradise, cousin!')],
+        npcs: [Lillie1, Lillie2, LillieMahaloTrail],
+    }
+);
 TownList['Iki Town'] = new Town(
     'Iki Town',
     GameConstants.Region.alola,
@@ -6378,10 +6390,9 @@ TownList['Melemele Woods'] = new Town(
     'Melemele Woods',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MelemeleIsland,
-    [new MoveToDungeon(dungeonList['Verdant Cavern']), new MoveToDungeon(dungeonList['Melemele Meadow']), new MoveToDungeon(dungeonList['Ruins of Conflict']), TemporaryBattleList['Melemele Spearow']],
+    [new MoveToTown('Mahalo Trail'), new MoveToDungeon(dungeonList['Verdant Cavern']), new MoveToDungeon(dungeonList['Melemele Meadow']), new MoveToDungeon(dungeonList['Ruins of Conflict'])],
     {
         requirements: [new TemporaryBattleRequirement('Hau 1')],
-        npcs: [Lillie1, Lillie2, LillieMahaloTrail],
     }
 );
 TownList['Roadside Motel'] = new Town(

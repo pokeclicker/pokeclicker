@@ -2082,11 +2082,11 @@ class QuestLineHelper {
     public static createMelemeleAlolaQuestLine() {
         const melemeleAlolaQuestLine = new QuestLine('Welcome to paradise, cousin!', 'See the sights this small tropical island has to offer!');
         // 0 - Talk to Lillie at Mahalo Trail (Melemele Woods)
-        const talkToLillie1 = new TalkToNPCQuest(Lillie1, 'Time to kick off your Alolan vacation! They say the sacred ruins in Melemele Woods behind Iki Town is home to Melemele\'s legendary guardian. Perhaps a fateful encounter awaits?');
+        const talkToLillie1 = new TalkToNPCQuest(Lillie1, 'Time to kick off your Alolan vacation! They say the sacred Mahalo Trail in Melemele Woods behind Iki Town is home to Melemele\'s legendary guardian. Perhaps a fateful encounter awaits?');
         melemeleAlolaQuestLine.addQuest(talkToLillie1);
 
         // 1 - Fight Spearow
-        const battleMelemeleSpearow = new CustomQuest (1, 0,  'Protect the mysterious girl\'s Pokémon! Battle the Spearow in Melemele Woods.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Melemele Spearow')](), undefined, undefined,
+        const battleMelemeleSpearow = new CustomQuest (1, 0,  'Protect the mysterious girl\'s Pokémon! Battle the Spearow on Mahalo Trail.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Melemele Spearow')](), undefined, undefined,
             {
                 clearedMessage: '<i>The bridge collapses beneath you and the floating Pokémon, and you both fall to the turbulent cascades below... But a swift creature zaps to your rescue! It seems fixated on the safety of the little one.</i>',
                 npcDisplayName: 'Melemele Guardian',
