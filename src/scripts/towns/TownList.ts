@@ -6038,7 +6038,7 @@ const RotomDexUlaUla = new NPC('Rotom Dex', [
     '<b><i>Current Destination: Ula\'Ula</i></b>',
 ], {
     image: 'assets/images/npcs/specialNPCs/Rotom-Dex.png',
-    requirement: new MultiRequirement([new DevelopmentRequirement(), new QuestLineStepCompletedRequirement('Eater of Light', 3), new QuestLineStepCompletedRequirement('Eater of Light', 4, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Eater of Light', 3), new QuestLineStepCompletedRequirement('Eater of Light', 4, GameConstants.AchievementOption.less)]),
 });
 const RotomDexPoni = new NPC('Rotom Dex', [
     'Zzzzt!!! There is... <i>something</i> to do in Poni! Oh gimme a break! It\'zzz a small island, you\'ll find out on your own! Zz-zzt!',
@@ -6047,7 +6047,7 @@ const RotomDexPoni = new NPC('Rotom Dex', [
     '<b><i>Current Destination: Poni</i></b>',
 ], {
     image: 'assets/images/npcs/specialNPCs/Rotom-Dex.png',
-    requirement: new MultiRequirement([new DevelopmentRequirement(), new QuestLineStepCompletedRequirement('Eater of Light', 4), new QuestLineCompletedRequirement('Eater of Light', GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Eater of Light', 4), new QuestLineCompletedRequirement('Eater of Light', GameConstants.AchievementOption.less)]),
 });
 const RotomDexPlaceholder = new NPC('Rotom Dex', [
     'Zzzzt!!! How\'zzz it going, kiddo? Havin\' fun in the Alolan sun?',
@@ -6361,7 +6361,7 @@ TownList['Professor Kukui\'s Lab'] = new Town(
     [new BulletinBoard(GameConstants.BulletinBoards.Alola)],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 18)],
-        npcs: [ProfKukui, RotomDex1, RotomDexMelemele, RotomDexAkala, RotomDexUlaUla, RotomDexPoni, RotomDex2, RotomDex3, RotomDexPlaceholder],
+        npcs: [ProfKukui, RotomDex1, RotomDexMelemele, RotomDexAkala, RotomDexUlaUla, RotomDexPoni, RotomDex2, RotomDex3],
     }
 );
 TownList['Hau\'oli City'] = new Town(
@@ -6371,7 +6371,7 @@ TownList['Hau\'oli City'] = new Town(
     [HauoliCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Hau\'oli City']), TemporaryBattleList['Hauoli Ilima']],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Trainers\' School'))],
-        npcs: [LillieCity],
+        npcs: [LillieCity, RotomDexPlaceholder],
     }
 );
 TownList['Melemele Woods'] = new Town(
@@ -6401,7 +6401,7 @@ TownList['Heahea City'] = new Town(
     [TemporaryBattleList.Dexio, TemporaryBattleList.Sina, HeaheaCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Heahea City']), new DockTownContent()],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.FightiniumZ)],
-        npcs: [HeaheaCafeOwner],
+        npcs: [HeaheaCafeOwner, RotomDexPlaceholder],
     }
 );
 TownList['Paniola Town'] = new Town(
@@ -6456,7 +6456,7 @@ TownList['Malie City'] = new Town(
     [MalieCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Malie City']), new MoveToDungeon(dungeonList['Malie Garden']), new DockTownContent()],
     {
         requirements: [new TemporaryBattleRequirement('Ultra Wormhole')],
-        npcs: [MalieKahuna],
+        npcs: [MalieKahuna, RotomDexPlaceholder],
     }
 );
 TownList['Tapu Village'] = new Town(
@@ -6476,7 +6476,7 @@ TownList['Seafolk Village'] = new Town(
     [SeafolkVillageShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Seafolk Village']), new MoveToDungeon(dungeonList['Mina\'s Houseboat']), new DockTownContent(), TemporaryBattleList['Captain Mina']],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Aether Foundation'))],
-        npcs: [SeafolkCaptain],
+        npcs: [SeafolkCaptain, RotomDexPlaceholder],
     }
 );
 TownList['Exeggutor Island'] = new Town(
@@ -6638,7 +6638,7 @@ TownList['Trainers\' School'] = new DungeonTown(
     'Trainers\' School',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MelemeleIsland,
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 18)], // TODO: [new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 4)],
+    [new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 4)],
     undefined,
     { npcs: [TrainerSchoolTeacher] }
 );
@@ -6653,11 +6653,10 @@ TownList['Verdant Cavern'] = new DungeonTown(
     'Verdant Cavern',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MelemeleIsland,
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 2)],
-    // TODO: [new MultiRequirement([
-    //     new RouteKillRequirement(10, GameConstants.Region.alola, 2),
-    //     new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 7),
-    // ])],
+    [new MultiRequirement([
+        new RouteKillRequirement(10, GameConstants.Region.alola, 2),
+        new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 7),
+    ])],
     undefined,
     { npcs: [ReconSquad3] }
 );

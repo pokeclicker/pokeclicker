@@ -2247,7 +2247,7 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 187);
 
             // Start Melemele quest if player has beaten Hau 1 already
-            if (saveData.statistics.temporaryBattleDefeated[181] && new DevelopmentRequirement().isCompleted()) {
+            if (saveData.statistics.temporaryBattleDefeated[181]) {
                 Update.startQuestLine(saveData, 'Welcome to paradise, cousin!');
             }
         },
