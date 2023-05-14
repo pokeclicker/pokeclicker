@@ -6099,8 +6099,7 @@ const Lillie3 = new NPC('Lillie', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 11), new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 12, GameConstants.AchievementOption.less)]),
 });
 const LillieMelemeleMeadow2 = new NPC('Lillie with Nebby', [
-    'You know, I read something interesting in a book once... Some Pokémon can change forms depending on external factors. Isn\'t that interesting? How a Pokémon can look and behave so differently, yet still be the same being... I thought it was, anyway.',
-    '...',
+    'You know, I read something interesting in a book once... Some Pokémon can change forms depending on external factors. It\'s not actually evolving but undergoing a so-called "form change." Isn\'t that interesting? I thought it was, anyway.',
 ], {
     image: 'assets/images/npcs/Lillie.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Welcome to paradise, cousin!', 12), new QuestLineCompletedRequirement('Welcome to paradise, cousin!', GameConstants.AchievementOption.less)]),
