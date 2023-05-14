@@ -507,9 +507,10 @@ class AchievementHandler {
         // subscribe to filters so that when the player changes a filter it automatically refilters the list
         Object.keys(this.filter).forEach(e => (<KnockoutObservable<any>> this.filter[e]).subscribe(() => this.filterAchievementList()));
 
-        multiplier.addBonus('exp', () => 1 + this.achievementBonus());
-        multiplier.addBonus('money', () => 1 + this.achievementBonus());
-        multiplier.addBonus('dungeonToken', () => 1 + this.achievementBonus());
+        const multiplierSource = 'Achievements';
+        multiplier.addBonus('exp', () => 1 + this.achievementBonus(), multiplierSource);
+        multiplier.addBonus('money', () => 1 + this.achievementBonus(), multiplierSource);
+        multiplier.addBonus('dungeonToken', () => 1 + this.achievementBonus(), multiplierSource);
     }
 
     static load() {
