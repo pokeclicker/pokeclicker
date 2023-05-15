@@ -2769,7 +2769,7 @@ TownList['Dewford Town'] = new Town(
     [DewfordTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Dewford Town'])],
     {
         requirements: [new TemporaryBattleRequirement('May 2')],
-        npcs: [HoennFossilNpc]
+        npcs: [HoennFossilNpc],
     }
 );
 TownList['Slateport City'] = new Town(
@@ -5274,8 +5274,8 @@ const KalosFossilNpc1 = new NPC('Honeymooner Gal', [
     image: 'assets/images/npcs/Tourist (female).png',
     requirement: new OneFromManyRequirement([
         new ObtainedPokemonRequirement('Tyrunt', true),
-        new ObtainedPokemonRequirement('Amaura', true)
-    ])
+        new ObtainedPokemonRequirement('Amaura', true),
+    ]),
 });
 
 const KalosFossilNpc2 = new NPC('Honeymooner Guy', [
@@ -5287,8 +5287,8 @@ const KalosFossilNpc2 = new NPC('Honeymooner Guy', [
     image: 'assets/images/npcs/Tourist (male).png',
     requirement: new OneFromManyRequirement([
         new ObtainedPokemonRequirement('Tyrunt', true),
-        new ObtainedPokemonRequirement('Amaura', true)
-    ])
+        new ObtainedPokemonRequirement('Amaura', true),
+    ]),
 });
 
 const KalosFossilNpc3 = new NPC('Honeymooner Couple', [
@@ -5299,8 +5299,8 @@ const KalosFossilNpc3 = new NPC('Honeymooner Couple', [
     image: 'assets/images/npcs/Honeymooners.png',
     requirement: new MultiRequirement([
         new ObtainedPokemonRequirement('Tyrunt'),
-        new ObtainedPokemonRequirement('Amaura')
-    ])
+        new ObtainedPokemonRequirement('Amaura'),
+    ]),
 });
 
 const FossilScientist = new NPC('Fossil Scientist', [
