@@ -22,33 +22,20 @@ class Safari {
         return App.game.statistics.safariRocksThrown() * 10 +
             App.game.statistics.safariBaitThrown() * 10;
     });
-    static safariLevel: KnockoutComputed<number> = ko.pureComputed(() => Math.floor(Safari.expToLevel(Safari.safariExp())));
+    static safariLevel: KnockoutComputed<number> = ko.pureComputed(() => {
+        let expUsed = 0;
+        for (let i = 1; i <= Safari.maxSafariLevel; i++) {
+            expUsed += Safari.expRequiredForLevel(i);
+            if (Safari.safariExp() <= expUsed) {
+                return i;
+            }
+        }
+        return Safari.maxSafariLevel;
+    });
     static percentToNextSafariLevel: KnockoutComputed<number> = ko.pureComputed(() => {
-        let expRequiredThisLevel = 0;
-        if (Safari.safariLevel() == 1) {
-            expRequiredThisLevel = 0;
-        } else {
-            let i = 0;
-            while (true) {
-                if (Safari.expToLevel(Safari.safariExp() - i) <= Safari.safariLevel()) {
-                    expRequiredThisLevel = Safari.safariExp() - i;
-                    break;
-                }
-                i++;
-            }
-        }
-
-        let expRequiredNextLevel = 0;
-        let i = 0;
-        while (true) {
-            if (Math.floor(Safari.expToLevel(Safari.safariExp() + i)) > Safari.safariLevel()) {
-                expRequiredNextLevel = Safari.safariExp() - i;
-                break;
-            }
-            i++;
-        }
-
-        return (Safari.safariExp() - expRequiredThisLevel) / (expRequiredNextLevel - expRequiredThisLevel) * 100;
+        const expForNextLevel = Safari.expRequiredForLevel(Safari.safariLevel() + 1) - Safari.expRequiredForLevel(Safari.safariLevel() + 1);
+        const expThisLevel = Safari.safariExp() - Safari.expRequiredForLevel(Safari.safariLevel());
+        return expThisLevel / expForNextLevel * 100;
     });
 
     public static sizeX(): number {
@@ -499,8 +486,8 @@ class Safari {
         return false;
     }
 
-    private static expToLevel(exp: number) {
-        return 9.5 * (1 + exp) ^ (0.1041);
+    private static expRequiredForLevel(level: number) {
+        return 2000 * (1.2 ^ (level + 2) - 1);
     }
 }
 
