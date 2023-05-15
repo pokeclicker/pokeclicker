@@ -2082,7 +2082,7 @@ const OldaleTrackingScientist = new NPC('Tracking Scientist', [
     'They were flying really fast, I bet Pokémon that fast will only challenge trainers who have proven they are as strong as Champion Wallace...',
 ]);
 
-const HoennFossilNpc = new NPC('Lazy Fisherman', [
+const HoennFossilNpc = new NPC('Laid-Back Angler', [
     'Every so often, I\'ll snag an old fossil from the seafloor. It weirds me out to think of all the Pokémon that used to crawl around the ocean so many years ago, but it also reminds me that life is fleeting and precious.',
     'So far I\'ve found two that I relate to, a kind of flower-looking thing and a one that looks like a bug pincer.',
     'I wonder what you\'ll feel the next time you find one.',
@@ -3624,7 +3624,7 @@ const SandgemBeachcomber = new NPC('Beachcomber', [
     'Does that mean when this Prince comes, Pokémon like him will start roaming the region?',
 ]);
 
-const SinnohFossilNpc = new NPC('Gossiping Girl', [
+const SinnohFossilNpc = new NPC('Gossiper', [
     'Did you know?! The Gym Leaders of Canalave and Oreburgh are father and son! And what\'s more- there\'s a third person in the mix! Apparently he\'s such a dedicated digger he travelled all the way to Kanto to set up shop selling Explorer Kits! Talk about a family tradition!',
     'Too bad there are only two new fossils in the Sinnoh region. If there was one more, maybe he could be a Gym Leader too!',
     'What? Oh you didn\'t know? The ace Pokémon of Gym Leaders Byron and Roark are resurrected from fossils!',
@@ -4617,7 +4617,7 @@ const VitaminRefundCode = new NPC('Pokémon Breeder', [
     'It will also only refund Vitamins you bought after hitting the price cap.',
 ]);
 
-const UnovaFossilNpc = new NPC('Amicable Waitress', [
+const UnovaFossilNpc = new NPC('Friendly Waitress', [
     'Hello! Would you like a seat indoors or on the patio? We have a lovely view of the museum, it used to double as a Gym you know! Business may have slowed down since the new Normal Gym moved to Aspertia, but our ex-Gym Leader Lenora is still at it with her husband restoring fossils!',
     'Just last week they had an exhibit on a prehistoric bird and turtle! There was quite the crowd!',
     '... Do you think they\'re hiring?',
@@ -5294,7 +5294,7 @@ const KalosFossilNpc2 = new NPC('Honeymooner Guy', [
 const KalosFossilNpc3 = new NPC('Honeymooner Couple', [
     'Oh, it\'s you! It\'s nice to know one of us achieved their goal! No, that\'s not entirely true. We reached our goal too!',
     'We may not have found those fossils, but the true goal we were after was making each other smile! No Pokémon can compare to the realization we had when we found each other in that gem-covered cave! As soon as we locked eyes, we could\'t help but start laughing! To think we went through so much effort when the real present is the time we spend with each other!',
-    'Safe travels, Trainer! And may the blessing of love find you too someday!',
+    'Safe travels, Trainer! And may the blessing of love follow you!',
 ], {
     image: 'assets/images/npcs/Honeymooners.png',
     requirement: new MultiRequirement([
@@ -7321,7 +7321,7 @@ const CrownTundraRoamerNPC = new RoamerNPC('Freezington Mayor', [
 ], GameConstants.Region.galar, RoamingPokemonList.findGroup(GameConstants.Region.galar, GameConstants.GalarSubRegions.CrownTundra));
 
 const GalarFossilHiker = new NPC('Spelunker', [
-    'Wow! The Crown Tundra is filled with fossil Pokémon! I\'ve heard legends of the kinglike Pokémon native to these snowfields protecting the Pokémon living here, but this level of sanctuary is insane!',
+    'Wow! The Crown Tundra is filled with wild fossil Pokémon! I\'ve heard stories of these snowfields protecting the Pokémon living here, but this level of sanctuary is insane!',
     'And what\'s really interesting is that they only show up to trainers who have already caught one of their species. Could it be they are aware enough to use that as an appraisal of trust?',
 ], {image: 'assets/images/npcs/Hiker (Gen 8).png'});
 
