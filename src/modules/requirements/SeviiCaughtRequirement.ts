@@ -8,7 +8,7 @@ export default class SeviiCaughtRequirement extends AchievementRequirement {
 
     public getProgress() {
         return Math.min(App.game.party.caughtPokemon
-            .filter((p) => p.name.includes('Pinkan')
+            .filter((p) => p.name.includes('Pinkan') && p.name != 'Pinkan Pikachu'
             || p.name.includes('Valencian')
             || p.name === 'Crystal Onix'
             || p.name === 'Ash\'s Butterfree'
