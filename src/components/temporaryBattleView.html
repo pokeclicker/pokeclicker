@@ -36,7 +36,7 @@
             <img data-bind="attr:{ src: TemporaryBattleRunner.battleObservable().getImage() }" onerror="this.src='assets/images/npcs/specialNPCs/Mysterious Trainer.png';"/>
         </div>
 
-        <div class="trainer-enemy" data-bind="ifnot: TemporaryBattleBattle.catching">
+        <div data-bind="ifnot: TemporaryBattleBattle.catching">
             <knockout data-bind="template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': TemporaryBattleBattle.enemyPokemon() } }">Pokémon sprite</knockout>
         </div>
 
