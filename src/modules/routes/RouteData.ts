@@ -1055,7 +1055,7 @@ Routes.add(new RegionRoute(
     undefined,
     HoennSubRegions.Orre,
     true,
-    1050000,
+    1500000,
 ));
 Routes.add(new RegionRoute(
     'Oasis Poké Spot', Region.hoenn, 136,
@@ -1066,7 +1066,7 @@ Routes.add(new RegionRoute(
     undefined,
     HoennSubRegions.Orre,
     true,
-    1050000,
+    1500000,
 ));
 Routes.add(new RegionRoute(
     'Cave Poké Spot', Region.hoenn, 137,
@@ -1077,7 +1077,7 @@ Routes.add(new RegionRoute(
     undefined,
     HoennSubRegions.Orre,
     true,
-    1050000,
+    1500000,
 ));
 
 /*
