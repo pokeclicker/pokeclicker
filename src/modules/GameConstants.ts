@@ -286,6 +286,7 @@ export const GAIN_FARM_POINTS_BASE_REWARD = GAIN_MONEY_BASE_REWARD * 90;
 
 export const HATCH_EGGS_BASE_REWARD = questBase * 33;
 export const SHINY_BASE_REWARD = questBase * 3000;
+export const SHADOW_BASE_REWARD = questBase * 500;
 
 export const DEFEAT_POKEMONS_BASE_REWARD = questBase * 1;
 
