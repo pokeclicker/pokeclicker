@@ -520,6 +520,7 @@ export const SpriteCredits: Credit[] = [
         resources: [
             'Flowering Celebi',
             'Freeze Mulch',
+            'Old Lady',
             'Underground Fossilized Dino',
             'Underground Fossilized Drake',
         ],

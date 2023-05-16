@@ -185,7 +185,7 @@ export default class OakItems implements Feature {
     }
 
     private addMultiplier(type: keyof typeof MultiplierType, item: OakItemType) {
-        this.multiplier.addBonus(type, this.createMultiplierFunction(item));
+        this.multiplier.addBonus(type, this.createMultiplierFunction(item), this.itemList[item].displayName);
     }
 
     private createMultiplierFunction(item: OakItemType): GetMultiplierFunction {

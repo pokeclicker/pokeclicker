@@ -18,7 +18,7 @@ export default class EffectEngineRunner {
     public static initialize(multiplier: Multiplier, items: BattleItem[]) {
         items.forEach((item) => {
             if (item.multiplierType) {
-                multiplier.addBonus(item.multiplierType, () => (this.isActive(item.name)() ? item.multiplyBy : 1));
+                multiplier.addBonus(item.multiplierType, () => (this.isActive(item.name)() ? item.multiplyBy : 1), item.displayName);
             }
         });
     }
