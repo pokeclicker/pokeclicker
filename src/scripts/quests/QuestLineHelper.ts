@@ -2338,7 +2338,8 @@ class QuestLineHelper {
             1,
             PsychicSilvallyReward,
             'Defeat Aether Branch Chief Faba to get the Silvally back.',
-            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Faba Psychic Silvally')]
+            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Faba Psychic Silvally')](),
+            0
         );
         SilvallyTypesQuestLine.addQuest(PsychicSilvallyBattle);
 
@@ -2387,6 +2388,9 @@ class QuestLineHelper {
             0
         );
         SilvallyTypesQuestLine.addQuest(DragonSilvallyBattle);
+
+        const talkToGladion4 = new TalkToNPCQuest(SilvallyGladion4, 'Go talk to Gladion and tell him you\'ve recovered all the memories!');
+        SilvallyTypesQuestLine.addQuest(talkToGladion4);
 
         App.game.quests.questLines().push(SilvallyTypesQuestLine);
 

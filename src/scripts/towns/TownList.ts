@@ -6197,7 +6197,7 @@ const SilvallyGladion3 = new NPC('Gladion', [
     'I\'ve heard Molayne wanted to brush up on his training a bit. He\'s at the Hokulani Observatory, and has also been seen with a Silvally. Also, while I was walking through the Vast Poni Canyon, I saw a guy dressed almost like an old Pokémon that doesn\'t exist anymore with a Silvally. They are all tough trainers, so you might need to train more to defeat them.',
 ], {
     image: 'assets/images/npcs/Gladion.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 19, GameConstants.AchievementOption.more), new QuestLineCompletedRequirement('Typing some Memories', GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 19, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 34, GameConstants.AchievementOption.less)]),
 });
 const GuzmaSilvally = new NPC('Team Skull Boss Guzma', [
     'Huh? What the hell are you doing in here? A what? Silvally? I think I have what you\'re looking for. Yeah, I have it, if you want to see it. Anyway, how the hell did you get in here? Tsk. Those grunts can\'t do anything right. Anyway, you saw what you wanted so get out of here!',
@@ -6249,7 +6249,7 @@ const RyukiSilvally = new NPC('Ryuki', [
     'If you can defeat me in a battle, I\'ll let you have the Silvally. It won\'t be easy, mind you. I\'ve spent years perfecting my craft, and I won\'t be holding back. But if you truly have what it takes to be the champion, then you should be up for the challenge, yes? Let\'s do this!',
 ], {
     image: 'assets/images/npcs/Ryuki.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 33, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 35, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 33, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 34, GameConstants.AchievementOption.less)]),
 });
 const LanaSilvally2 = new NPC('Captain Lana', [
     'Hi again, $playername$! My little sisters have been exploring and found more Water Memories.',
@@ -6296,6 +6296,14 @@ const HapuSilvally2 = new NPC('Captain Hapu', [
 ], {
     image:'assets/images/npcs/Hapu.png',
     requirement: new QuestLineStepCompletedRequirement('Typing some Memories', 19, GameConstants.AchievementOption.more),
+});
+const SilvallyGladion4 = new NPC('Gladion', [
+    'Hey there, $playername$! I gotta say, you\'ve done something truly incredible. You\'ve brought back every single one of Silvally\'s lost memories, and I can\'t thank you enough for that. It\'s like a whole new world has opened up for my partner and me.',
+    'Silvally owes this amazing transformation to you and your relentless efforts. Seriously, your determination is off the charts. Now Silvally sees things clearer, understands itself better, and is just overall in a much better place. And it\'s all thanks to you, my friend. I\'m so grateful for what you\'ve done that I\'ve decided to do something I never thought I\'d do. I\'m gonna clone the memories of your Silvally and give \'em to my own. It\'ll create a special bond between our Pokémon, a connection that I think will take them both even closer to their true selves.',
+    'I want you to know that your actions have not only changed Silvally\'s life but also had a huge impact on my own journey. You\'ve been an inspiration to me, showing me what true strength and friendship mean. I\'ve learned so much from you, and I\'ll always carry those lessons with me. So, $playername$, I can\'t say it enough: thank you. Your name will forever be etched in my memory as someone who made a real difference. I hope our paths cross again someday, but until then, I wish you the most epic adventures filled with victories and happiness.',
+], {
+    image:'assets/images/npcs/Gladion.png',
+    requirement: new MultiRequirement ([new QuestLineStepCompletedRequirement('Typing some Memories', 35, GameConstants.AchievementOption.more), new QuestLineCompletedRequirement('Typing some Memories', GameConstants.AchievementOption.less)]),
 });
 //Ultra Beasts NPCs
 const RoadsideMotelLooker1 = new NPC('Looker', [
@@ -6632,7 +6640,7 @@ TownList['Pokémon League Alola'] = new Town(
         requirements:[
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mount Lanakila')),
         ],
-        npcs: [SilvallyGladion1, SilvallyGladion2, SilvallyGladion3],
+        npcs: [SilvallyGladion1, SilvallyGladion2, SilvallyGladion3, SilvallyGladion4],
     }
 );
 TownList['A Tree Maybe'] = new Town(
@@ -6867,8 +6875,8 @@ TownList['Hokulani Observatory'] = new DungeonTown(
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.UlaulaIsland,
     [new RouteKillRequirement(10, GameConstants.Region.alola, 22)],
-    [HokulaniObservatoryShop, TemporaryBattleList['Captain Sophocles']],
-    {npcs: [SophoclesSilvally1, SophoclesSilvally2]}
+    [HokulaniObservatoryShop, TemporaryBattleList['Captain Sophocles'], TemporaryBattleList['Molayne Steel Silvally']],
+    {npcs: [SophoclesSilvally1, SophoclesSilvally2, MolayneSilvally]}
 );
 TownList['Thrifty Megamart'] = new DungeonTown(
     'Thrifty Megamart',
@@ -6920,8 +6928,8 @@ TownList['Vast Poni Canyon'] = new DungeonTown(
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.PoniIsland,
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Exeggutor Island Hill'))],
-    [TemporaryBattleList['Plumeria Poison Silvally']],
-    {npcs: [PlumeriaSilvally]}
+    [TemporaryBattleList['Plumeria Poison Silvally'], TemporaryBattleList['Ryuki Dragon Silvally']],
+    {npcs: [PlumeriaSilvally, RyukiSilvally]}
 );
 TownList['Mina\'s Houseboat'] = new DungeonTown(
     'Mina\'s Houseboat',
