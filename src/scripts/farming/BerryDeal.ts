@@ -229,10 +229,38 @@ class BerryDeal {
                 SeededRand.intBetween(10, 50),
             ],
             ItemList.Protein,
-            1
+            1,
         ));
 
-        return [SeededRand.fromArray(list)];
+        if (App.game.badgeCase.hasBadge(BadgeEnums.Basic)) {
+            list.push(new BerryDeal(
+                [
+                    this.randomBerry(fourthGen),
+                    this.randomBerry(fifthGen),
+                ],
+                [
+                    SeededRand.intBetween(50, 100),
+                    SeededRand.intBetween(10, 50),
+                ],
+                ItemList.Calcium,
+                1,
+            ));
+
+            list.push(new BerryDeal(
+                [
+                    this.randomBerry(fourthGen),
+                    this.randomBerry(fifthGen),
+                ],
+                [
+                    SeededRand.intBetween(50, 100),
+                    SeededRand.intBetween(10, 50),
+                ],
+                ItemList.Carbos,
+                1,
+            ));
+        }
+
+        return list;
     }
 
     private static generatePinkanDeals() {
