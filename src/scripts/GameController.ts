@@ -165,6 +165,18 @@ class GameController {
                     case Settings.getSetting('hotkey.dungeon.right').value:
                         Safari.move('right');
                         break;
+                    case Settings.getSetting('hotkey.safari.ball').value:
+                        SafariBattle.throwBall();
+                        break;
+                    case Settings.getSetting('hotkey.safari.bait').value:
+                        SafariBattle.throwBait();
+                        break;
+                    case Settings.getSetting('hotkey.safari.rock').value:
+                        SafariBattle.throwRock();
+                        break;
+                    case Settings.getSetting('hotkey.safari.run').value:
+                        SafariBattle.run();
+                        break;
                 }
 
                 // We don't want to process any other keys while in the Safari zone
