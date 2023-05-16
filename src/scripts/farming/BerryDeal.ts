@@ -229,7 +229,7 @@ class BerryDeal {
                 SeededRand.intBetween(10, 50),
             ],
             ItemList.Protein,
-            1,
+            1
         ));
 
         if (App.game.badgeCase.hasBadge(BadgeEnums.Basic)) {
@@ -243,7 +243,7 @@ class BerryDeal {
                     SeededRand.intBetween(10, 50),
                 ],
                 ItemList.Calcium,
-                1,
+                1
             ));
 
             list.push(new BerryDeal(
@@ -256,7 +256,7 @@ class BerryDeal {
                     SeededRand.intBetween(10, 50),
                 ],
                 ItemList.Carbos,
-                1,
+                1
             ));
         }
 
