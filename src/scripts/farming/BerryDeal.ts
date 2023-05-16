@@ -260,7 +260,7 @@ class BerryDeal {
             ));
         }
 
-        return list;
+        return [SeededRand.fromArray(list)];
     }
 
     private static generatePinkanDeals() {
