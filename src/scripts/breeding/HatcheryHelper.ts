@@ -34,7 +34,7 @@ class HatcheryHelper {
     public attackEfficiency: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 1 });
     public prevBonus: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 0 });
     public nextBonus: KnockoutObservable<number> = ko.observable(1).extend({ numeric: 0 });
-    public sortedPokemonList: KnockoutComputed<Array<PartyPokemon>>;
+    public sortedPokemonList: KnockoutComputed<PartyPokemon[]>;
     // public level: number;
     // public experience: number;
 
@@ -69,7 +69,7 @@ class HatcheryHelper {
                 return [];
             }
 
-            return [...App.game.party._caughtPokemon()].sort(
+            return [...App.game.party.caughtPokemon].sort(
                 PartyController.compareBy(this.sortOption(), this.sortDirection(),
                     +Settings.getSetting('breedingRegionalAttackDebuffSetting').observableValue()));
         });
