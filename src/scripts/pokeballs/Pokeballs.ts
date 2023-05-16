@@ -135,13 +135,11 @@ class Pokeballs implements Feature {
      * @param isShiny if the Pokémon is shiny.
      * @returns {GameConstants.Pokeball} pokéball to use.
      */
-    public calculatePokeballToUse(id: number, isShiny: boolean, isShadow: boolean, origEncounterType: EncounterType): GameConstants.Pokeball {
+    public calculatePokeballToUse(id: number, isShiny: boolean, isShadow: boolean): GameConstants.Pokeball {
         const alreadyCaught = App.game.party.alreadyCaughtPokemon(id);
         const alreadyCaughtShiny = App.game.party.alreadyCaughtPokemon(id, true);
         const alreadyCaughtShadow = App.game.party.alreadyCaughtPokemon(id, false, true);
         const pokemon = PokemonHelper.getPokemonById(id);
-        const isUltraBeast = GameConstants.UltraBeastType[pokemon.name] != undefined;
-        const encounterType = isUltraBeast ? EncounterType.ultraBeast : origEncounterType;
 
         const pref = App.game.pokeballFilters.findMatch({
             caught: alreadyCaught,
@@ -151,18 +149,17 @@ class Pokeballs implements Feature {
             shiny: isShiny,
             pokerus: App.game.party.getPokemon(id)?.pokerus,
             pokemonType: [pokemon.type1, pokemon.type2],
-            encounterType,
         })?.ball() ?? GameConstants.Pokeball.None;
 
         let use: GameConstants.Pokeball = GameConstants.Pokeball.None;
 
         if (pref == GameConstants.Pokeball.Beastball) {
-            if (isUltraBeast && this.pokeballs[GameConstants.Pokeball.Beastball].quantity() > 0) {
+            if (GameConstants.UltraBeastType[pokemon.name] != undefined && this.pokeballs[GameConstants.Pokeball.Beastball].quantity() > 0) {
                 return GameConstants.Pokeball.Beastball;
             } else {
                 return GameConstants.Pokeball.None;
             }
-        } else if (isUltraBeast) {
+        } else if (GameConstants.UltraBeastType[pokemon.name] != undefined) {
             return GameConstants.Pokeball.None;
         }
 

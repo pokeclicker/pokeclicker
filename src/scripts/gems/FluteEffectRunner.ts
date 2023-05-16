@@ -8,7 +8,7 @@ class FluteEffectRunner {
         GameHelper.enumStrings(GameConstants.FluteItemType).forEach((itemName: GameConstants.FluteItemType) => {
             const item = (ItemList[itemName] as FluteItem);
             if (item.multiplierType) {
-                multiplier.addBonus(item.multiplierType, () => this.getFluteMultiplier(itemName), item.displayName);
+                multiplier.addBonus(item.multiplierType, () => this.getFluteMultiplier(itemName));
             }
             if (this.isActive(itemName)()) {
                 GameHelper.incrementObservable(this.numActiveFlutes,1);

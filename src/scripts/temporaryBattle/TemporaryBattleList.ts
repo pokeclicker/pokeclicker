@@ -1441,7 +1441,7 @@ TemporaryBattleList['Team Plasma Grunt 2'] = new TemporaryBattle(
     [
         new GymBadgeRequirement(BadgeEnums.Bolt),
         new TemporaryBattleRequirement('Team Plasma Grunt 1'),
-        new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 3),
+        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 3),
     ],
     undefined,
     {
@@ -1456,7 +1456,7 @@ TemporaryBattleList['Team Plasma Grunt 3'] = new TemporaryBattle(
     [
         new GymBadgeRequirement(BadgeEnums.Bolt),
         new TemporaryBattleRequirement('Team Plasma Grunt 1'),
-        new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 3),
+        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 3),
     ],
     undefined,
     {
@@ -1520,7 +1520,7 @@ TemporaryBattleList['Team Plasma Grunt 4'] = new TemporaryBattle(
     'Team Plasma Grunt 4',
     [new GymPokemon('Koffing', 39496600, 30)],
     'You! So you\'re a Trainer who fights while believing in your Pokémon, are you?',
-    [new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 5)],
+    [new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 5)],
     undefined,
     {
         displayName: 'Team Plasma Grunt',
@@ -1531,7 +1531,7 @@ TemporaryBattleList['Team Plasma Grunt 5'] = new TemporaryBattle(
     'Team Plasma Grunt 5',
     [new GymPokemon('Trubbish', 39496600, 30)],
     'Plasmaaaa! Plasmaaaa!!',
-    [new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 5)],
+    [new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 5)],
     undefined,
     {
         displayName: 'Team Plasma Grunt',
@@ -1547,7 +1547,7 @@ TemporaryBattleList['Team Plasma Grunts 1'] = new TemporaryBattle(
         new GymPokemon('Krokorok', 9974150, 29),
     ],
     'The Gym Leader is tough, but you... Are you even human?! I tried to use the same combination as you, and yet...',
-    [new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 5)],
+    [new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 5)],
     undefined,
     {
         displayName: 'Team Plasma Grunts',
@@ -1563,7 +1563,7 @@ TemporaryBattleList['Team Plasma Grunts 2'] = new TemporaryBattle(
         new GymPokemon('Raticate', 9974150, 29),
     ],
     'No! At this rate, I... I won\'t be able to protect the Plasma Frigate! P-P-P-Plasmaaaa!',
-    [new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 5)],
+    [new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 5)],
     undefined,
     {
         displayName: 'Team Plasma Grunts',
@@ -1602,7 +1602,7 @@ TemporaryBattleList['Team Plasma Grunt 6'] = new TemporaryBattle(
         new TemporaryBattleRequirement('Team Plasma Grunt 5'),
         new TemporaryBattleRequirement('Team Plasma Grunts 1'),
         new TemporaryBattleRequirement('Team Plasma Grunts 2'),
-        new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 8),
+        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 8),
     ],
     undefined,
     {
@@ -1673,7 +1673,7 @@ TemporaryBattleList['Zinzolin 2'] = new TemporaryBattle(
         new GymPokemon('Cryogonal', 17632200, 46),
         new GymPokemon('Weavile', 20632200, 48),
     ],
-    'Have you gotten even stronger than you were in Lacunosa Town? How, in such a brief amount of time...',
+    'Have you gotten even stronger than you were in Lucanosa Town? How, in such a brief amount of time...',
     [
         new TemporaryBattleRequirement('Team Plasma Grunt 7'),
         new TemporaryBattleRequirement('Team Plasma Grunt 8'),
@@ -1713,7 +1713,7 @@ TemporaryBattleList['Colress 3'] = new TemporaryBattle(
     [
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Giant Chasm')),
         new TemporaryBattleRequirement('Plasma Shadow 1'),
-        new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 17),
+        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 17),
     ],
     undefined,
     {
@@ -1777,7 +1777,7 @@ TemporaryBattleList['Ghetsis 1'] = new TemporaryBattle(
         new TemporaryBattleRequirement('Plasma Shadow 2'),
         new TemporaryBattleRequirement('Plasma Shadow 3'),
         new TemporaryBattleRequirement('Plasma Shadow 4'),
-        new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 20),
+        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 20),
     ],
     undefined,
     {
@@ -2475,7 +2475,6 @@ TemporaryBattleList['Aipom Alley'] = new TemporaryBattle(
     undefined,
     {
         hideTrainer: true,
-        imageName: 'specialNPCs/Aipom Alley',
     }
 );
 TemporaryBattleList['Mime Interview'] = new TemporaryBattle(

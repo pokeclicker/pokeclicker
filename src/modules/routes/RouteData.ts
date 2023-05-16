@@ -1,6 +1,6 @@
 import BadgeEnums from '../enums/Badges';
 import {
-    Region, KantoSubRegions, getDungeonIndex, AlolaSubRegions, GalarSubRegions, HoennSubRegions,
+    Region, KantoSubRegions, getDungeonIndex, AlolaSubRegions, GalarSubRegions,
 } from '../GameConstants';
 import ClearDungeonRequirement from '../requirements/ClearDungeonRequirement';
 import GymBadgeRequirement from '../requirements/GymBadgeRequirement';
@@ -1046,39 +1046,6 @@ Routes.add(new RegionRoute(
     }),
     [new RouteKillRequirement(10, Region.hoenn, 133)],
 ));
-Routes.add(new RegionRoute(
-    'Rock Poké Spot', Region.hoenn, 135,
-    new RoutePokemon({
-        land: ['Sandshrew', 'Gligar', 'Trapinch'],
-    }),
-    [new DevelopmentRequirement()],
-    undefined,
-    HoennSubRegions.Orre,
-    true,
-    1500000,
-));
-Routes.add(new RegionRoute(
-    'Oasis Poké Spot', Region.hoenn, 136,
-    new RoutePokemon({
-        land: ['Hoppip', 'Phanpy', 'Surskit'],
-    }),
-    [new DevelopmentRequirement()],
-    undefined,
-    HoennSubRegions.Orre,
-    true,
-    1500000,
-));
-Routes.add(new RegionRoute(
-    'Cave Poké Spot', Region.hoenn, 137,
-    new RoutePokemon({
-        land: ['Zubat', 'Aron', 'Wooper'],
-    }),
-    [new DevelopmentRequirement()],
-    undefined,
-    HoennSubRegions.Orre,
-    true,
-    1500000,
-));
 
 /*
 SINNOH
@@ -1355,7 +1322,7 @@ Routes.add(new RegionRoute(
     [
         new GymBadgeRequirement(BadgeEnums.Toxic),
         new TemporaryBattleRequirement('Team Plasma Grunt 1'),
-        new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 1),
+        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 1),
     ],
 ));
 Routes.add(new RegionRoute(
@@ -1366,7 +1333,7 @@ Routes.add(new RegionRoute(
     [
         new RouteKillRequirement(10, Region.unova, 4),
         new TemporaryBattleRequirement('Colress 1'),
-        new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 2),
+        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 2),
     ],
     4,
 ));
@@ -1377,7 +1344,7 @@ Routes.add(new RegionRoute(
     }),
     [
         new TemporaryBattleRequirement('Colress 1'),
-        new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 2),
+        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 2),
     ],
 ));
 Routes.add(new RegionRoute(
@@ -1387,7 +1354,7 @@ Routes.add(new RegionRoute(
     }),
     [
         new TemporaryBattleRequirement('Colress 1'),
-        new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 2),
+        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 2),
     ],
     5,
 ));
@@ -1402,7 +1369,7 @@ Routes.add(new RegionRoute(
         new GymBadgeRequirement(BadgeEnums.Bolt),
         new TemporaryBattleRequirement('Team Plasma Grunt 2'),
         new TemporaryBattleRequirement('Team Plasma Grunt 3'),
-        new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 4),
+        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 4),
     ],
 ));
 Routes.add(new RegionRoute(
@@ -1415,7 +1382,7 @@ Routes.add(new RegionRoute(
     [
         new ClearDungeonRequirement(1, getDungeonIndex('Chargestone Cave')),
         new TemporaryBattleRequirement('Colress 2'),
-        new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 7),
+        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 7),
     ],
 ));
 Routes.add(new RegionRoute(
@@ -1451,7 +1418,7 @@ Routes.add(new RegionRoute(
     [
         new RouteKillRequirement(10, Region.unova, 13),
         new TemporaryBattleRequirement('Zinzolin 1'),
-        new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 10),
+        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 10),
     ],
     13.1,
 ));
@@ -1501,7 +1468,7 @@ Routes.add(new RegionRoute(
     [
         new ClearDungeonRequirement(1, getDungeonIndex('Giant Chasm')),
         new TemporaryBattleRequirement('Ghetsis 2'),
-        new QuestLineCompletedRequirement('Hollow Truth and Ideals'),
+        new QuestLineCompletedRequirement('Quest for the DNA Splicers'),
     ],
 ));
 Routes.add(new RegionRoute(
