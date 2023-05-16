@@ -2226,7 +2226,6 @@ class Update implements Saveable {
                 delete p[14]; // megaStone
             });
         },
-
     };
 
     constructor() {
