@@ -229,11 +229,9 @@ class BerryDeal {
         list.push(new BerryDeal(
             [
                 this.randomBerry(fourthGen),
-                this.randomBerry(fifthGen),
             ],
             [
                 SeededRand.intBetween(50, 100),
-                SeededRand.intBetween(10, 50),
             ],
             ItemList.Protein,
             1
@@ -242,11 +240,9 @@ class BerryDeal {
         if (App.game.badgeCase.hasBadge(BadgeEnums.Basic)) {
             list.push(new BerryDeal(
                 [
-                    this.randomBerry(fourthGen),
                     this.randomBerry(fifthGen),
                 ],
                 [
-                    SeededRand.intBetween(50, 100),
                     SeededRand.intBetween(10, 50),
                 ],
                 ItemList.Calcium,
@@ -255,11 +251,9 @@ class BerryDeal {
 
             list.push(new BerryDeal(
                 [
-                    this.randomBerry(fourthGen),
                     this.randomBerry(fifthGen),
                 ],
                 [
-                    SeededRand.intBetween(50, 100),
                     SeededRand.intBetween(10, 50),
                 ],
                 ItemList.Carbos,
