@@ -81,12 +81,12 @@
                                         <div class="btn-group btn-block">
                                             <!-- ko using: PartyController.hasMultipleStoneEvolutionsAvailable(ItemHandler.pokemonSelected(), GameConstants.StoneType[ItemHandler.stoneSelected()]), as: 'multipleEvolution' -->
                                             <button class="btn btn-success btn-block" data-bind="click: function(){ItemHandler.useStones()},
-                                            tooltip: {
-                                                title: 'If a shiny is found, the game will stop using evolution items.' + (multipleEvolution ? '<br/>If the requirements for more than one evolution is fulfilled, a random evolution will be selected.' : ''),
-                                                trigger: 'hover',
-                                                boundary: 'window',
-                                                html: multipleEvolution,
-                                            }">
+                                                    tooltip: {
+                                                    title: 'If a shiny is found, the game will stop using evolution items.' + (multipleEvolution ? '<br/>If the requirements for more than one evolution is fulfilled, a random evolution will be selected.' : ''),
+                                                    trigger: 'hover',
+                                                    boundary: 'window',
+                                                    html: true,
+                                                    }">
                                                 Use evolution items!
                                             </button>
                                             <!-- /ko -->
