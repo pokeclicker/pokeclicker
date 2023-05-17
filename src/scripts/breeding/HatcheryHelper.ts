@@ -34,7 +34,6 @@ class HatcheryHelper {
     public attackEfficiency: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 1 });
     public prevBonus: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 0 });
     public nextBonus: KnockoutObservable<number> = ko.observable(1).extend({ numeric: 0 });
-    public sortedPokemonList: KnockoutComputed<PartyPokemon[]>;
     // public level: number;
     // public experience: number;
 
@@ -62,16 +61,6 @@ class HatcheryHelper {
             if (hatched >= this.nextBonus() || hatched <= this.prevBonus()) {
                 this.updateBonus();
             }
-        });
-
-        this.sortedPokemonList = ko.pureComputed(() => {
-            if (!this.hired()) {
-                return [];
-            }
-
-            return [...App.game.party.caughtPokemon].sort(
-                PartyController.compareBy(this.sortOption(), this.sortDirection(),
-                    +Settings.getSetting('breedingRegionalAttackDebuffSetting').observableValue()));
         });
     }
 
@@ -220,7 +209,19 @@ class HatcheryHelpers {
             // Check if egg slot empty
             if (egg.isNone()) {
                 // Check if there's a pokemon we can chuck into an egg
-                const pokemon = helper.sortedPokemonList().find(p => p.isHatchable());
+                const compare = PartyController.compareBy(helper.sortOption(), helper.sortDirection(),
+                    +Settings.getSetting('breedingRegionalAttackDebuffSetting').value);
+
+                const pokemon = App.game.party.caughtPokemon.reduce((best, pokemon) => {
+                    if (!pokemon.isHatchable()) {
+                        return best;
+                    }
+                    if (best === null) {
+                        return pokemon;
+                    }
+                    return compare(best, pokemon) <= 0 ? best : pokemon;
+                }, null);
+
                 if (pokemon) {
                     this.hatchery.gainPokemonEgg(pokemon, true);
                     // Charge the player when we put a pokemon in the hatchery
