@@ -5280,8 +5280,8 @@ const KalosFossilNpc1 = new NPC('Honeymooner Gal', [
 
 const KalosFossilNpc2 = new NPC('Honeymooner Guy', [
     'I have to find one! I just have to!',
-    'I told my wife I was going buy tickets for the aquarium but little did she know it was a white lie so I could search for a Pokémon fossil found only here in Kalos!',
-    'According to my travel guide, this cave right here is filled with them! It says reviving a Sail Fossil can nab you an Amaura, the perfect anniversary gift for my pumpkin!',
+    'I told my wife I was going buy tickets for the aquarium in the town back there but little did she know it was a white lie so I could search for a Pokémon fossil found only here in Kalos!',
+    'According to my travel guide, this cave is filled with them! It says reviving a Sail Fossil can nab you an Amaura, the perfect anniversary gift for my pumpkin!',
     'I MUST find a Sail Fossil! Nothing will get in the way of making my sunshine happy! She\'s taught me that anything is possible with the power of love!',
 ], {
     image: 'assets/images/npcs/Tourist (male).png',
