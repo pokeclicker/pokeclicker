@@ -197,7 +197,14 @@ class BerryDeal {
         const secondGen = Farming.getGeneration(1);
         const thirdGen = Farming.getGeneration(2);
         const fourthGen = Farming.getGeneration(3);
-        const fifthGen = Farming.getGeneration(4);
+        const fifthGen = [ // only use berries that can grow in under a day so players have time to grow them
+            BerryType.Micle,
+            BerryType.Custap,
+            BerryType.Jaboca,
+            BerryType.Rowap,
+            BerryType.Kee,
+            BerryType.Maranga,           
+        ];
 
         const list = [];
 
