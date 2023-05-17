@@ -203,7 +203,7 @@ class BerryDeal {
             BerryType.Jaboca,
             BerryType.Rowap,
             BerryType.Kee,
-            BerryType.Maranga,           
+            BerryType.Maranga,
         ];
 
         const list = [];
@@ -227,35 +227,23 @@ class BerryDeal {
             1
         ));
         list.push(new BerryDeal(
-            [
-                this.randomBerry(fourthGen),
-            ],
-            [
-                SeededRand.intBetween(50, 100),
-            ],
+            [this.randomBerry(fourthGen)],
+            [SeededRand.intBetween(50, 100)],
             ItemList.Protein,
             1
         ));
 
         if (App.game.badgeCase.hasBadge(BadgeEnums.Basic)) {
             list.push(new BerryDeal(
-                [
-                    this.randomBerry(fifthGen),
-                ],
-                [
-                    SeededRand.intBetween(10, 50),
-                ],
+                [this.randomBerry(fifthGen)],
+                [SeededRand.intBetween(10, 50)],
                 ItemList.Calcium,
                 1
             ));
 
             list.push(new BerryDeal(
-                [
-                    this.randomBerry(fifthGen),
-                ],
-                [
-                    SeededRand.intBetween(10, 50),
-                ],
+                [this.randomBerry(fifthGen)],
+                [SeededRand.intBetween(10, 50)],
                 ItemList.Carbos,
                 1
             ));
