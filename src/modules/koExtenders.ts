@@ -66,15 +66,19 @@ ko.bindingHandlers.contentEditable = {
     },
 };
 
+const sortableControllers = new WeakMap();
 ko.bindingHandlers.sortable = {
-    init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
-        bindingContext.extend({ sortableController: null });
+    init: function (element, valueAccessor) {
+        sortableControllers.set(element, null);
         // Needed to remove elements when the knockout array removes something
-        ko.utils.domNodeDisposal.addDisposeCallback(element, () => bindingContext.sortableController?.destroy());
+        ko.utils.domNodeDisposal.addDisposeCallback(element, () => {
+            sortableControllers.get(element)?.destroy();
+            sortableControllers.delete(element);
+        });
         return ko.bindingHandlers.template.init(element, valueAccessor);
     },
     update: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
-        bindingContext.sortableController?.destroy();
+        sortableControllers.get(element)?.destroy();
 
         const value = ko.unwrap(valueAccessor());
         const options = {
@@ -105,7 +109,7 @@ ko.bindingHandlers.sortable = {
             },
         };
 
-        bindingContext.sortableController = Sortable.create(element, options);
+        sortableControllers.set(element, Sortable.create(element, options));
 
         return ko.bindingHandlers.template.update(element, valueAccessor, allBindings, viewModel, bindingContext);
     },
