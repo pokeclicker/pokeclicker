@@ -5292,8 +5292,8 @@ const KalosFossilNpc2 = new NPC('Honeymooner Guy', [
 });
 
 const KalosFossilNpc3 = new NPC('Honeymooner Couple', [
-    'Oh, it\'s you! It\'s nice to know one of us achieved their goal! No, that\'s not entirely true. We reached our goal too!',
-    'We may not have found those fossils, but the true goal we were after was making each other smile! No Pokémon can compare to the realization we had when we found each other in that gem-covered cave! As soon as we locked eyes, we could\'t help but start laughing! To think we went through so much effort when the real present is the time we spend with each other!',
+    'Oh, you\'ve found all the fossil Pokémon native to Kalos! We tried too, but our search ended in failure. No, that\'s not entirely true...!',
+    'We may not have found those fossils, but our real goal was making each other smile! No Pokémon can compare to the feeling of catching your loved one in the same secret act as you! To think we split up to surprise each other with a fossil when the real present is the time we spend together!',
     'Safe travels, Trainer! And may the blessing of love follow you!',
 ], {
     image: 'assets/images/npcs/Honeymooners.png',
