@@ -899,7 +899,7 @@ export enum PokeBlockColor {
     Brown,
     LiteBlue,
     Olive,
-    Flaxen,
+    Beige,
     Gray,
     White,
 }

@@ -403,7 +403,7 @@ namespace GameConstants {
         Brown,
         LiteBlue,
         Olive,
-        Flaxen,
+        Beige,
         Gray,
         White
     }

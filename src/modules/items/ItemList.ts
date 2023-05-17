@@ -89,7 +89,7 @@ ItemList.PokeBlock_Indigo = new PokeBlock(PokeBlockColor.Indigo, Infinity);
 ItemList.PokeBlock_Brown = new PokeBlock(PokeBlockColor.Brown, Infinity);
 ItemList.PokeBlock_LiteBlue = new PokeBlock(PokeBlockColor.LiteBlue, Infinity);
 ItemList.PokeBlock_Olive = new PokeBlock(PokeBlockColor.Olive, Infinity);
-ItemList.PokeBlock_Flaxen = new PokeBlock(PokeBlockColor.Flaxen, Infinity);
+ItemList.PokeBlock_Beige = new PokeBlock(PokeBlockColor.Beige, Infinity);
 ItemList.PokeBlock_Gray   = new PokeBlock(PokeBlockColor.Gray, Infinity);
 ItemList.PokeBlock_White  = new PokeBlock(PokeBlockColor.White, Infinity);
 
