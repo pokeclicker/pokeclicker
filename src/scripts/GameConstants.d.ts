@@ -401,7 +401,7 @@ namespace GameConstants {
         Purple,
         Indigo,
         Brown,
-        LiteBlue,
+        Light_Blue,
         Olive,
         Beige,
         Gray,
