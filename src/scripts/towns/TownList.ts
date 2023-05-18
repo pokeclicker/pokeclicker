@@ -482,6 +482,12 @@ const CinnabarIslandResearcher = new NPC('Researcher', [
     'Apparently the ancient Pokémon escaped, and can be found roaming around Kanto!',
 ], {image: 'assets/images/npcs/Scientist (male).png'});
 
+const KantoFossilNpc = new NPC('Underground Expert', [
+    'That Explorer Kit is a must-have for any Fossil Fanatic! Why, it\'s how I found my very first Old Amber.',
+    'Hrm, yes! I see that gleam in your eye! It may look expensive now, but the treasures you\'ll find in the Underground are priceless! And what\'s more- with each new region you travel to, the more adept you will become at identifying new curios!',
+    'Speaking of, our very own Kanto is home to three: the Helix Fossil, Dome Fossil, and Old Amber! You can revive them via that Hatchery of yours!',
+], {image: 'assets/images/npcs/Ruin Maniac gen3.png'});
+
 const OneIslandCelio1 = new NPC ('Celio', [
     'Ah, yes. Welcome! Welcome! Almost didn\'t see you there. I\'m just so busy trying to get this darned thing to work. Once it\'s complete we can finally have a direct communications network between the Sevii Islands and Kanto!',
     'I don\'t even have time to go and pick up an important package. A meteorite, found by the owner of the game corner on Two Island. It contains important materials for my machine.',
@@ -897,7 +903,7 @@ TownList['Cinnabar Island'] = new Town(
             new RouteKillRequirement(10, GameConstants.Region.kanto, 20),
             new RouteKillRequirement(10, GameConstants.Region.kanto, 21),
         ])],
-        npcs: [CinnabarIslandResearcher],
+        npcs: [KantoFossilNpc, CinnabarIslandResearcher],
     }
 );
 TownList['Indigo Plateau Kanto'] = new Town(
@@ -2076,6 +2082,12 @@ const OldaleTrackingScientist = new NPC('Tracking Scientist', [
     'They were flying really fast, I bet Pokémon that fast will only challenge trainers who have proven they are as strong as Champion Wallace...',
 ]);
 
+const HoennFossilNpc = new NPC('Laid-Back Angler', [
+    'Every so often, I\'ll snag an old fossil from the seafloor. It weirds me out to think of all the Pokémon that used to crawl around the ocean so many years ago, but it also reminds me that life is fleeting and precious.',
+    'So far I\'ve found two that I relate to, a kind of flower-looking thing and a one that looks like a bug pincer.',
+    'I wonder what you\'ll feel the next time you find one.',
+], {image: 'assets/images/npcs/Fisherman.png'});
+
 const SlateportHoennRoamerNPC = new RoamerNPC('Reporter Gabby', [
     'Our sources indicate that roaming Pokémon are gathering on {ROUTE_NAME}!',
 ], GameConstants.Region.hoenn, RoamingPokemonList.findGroup(GameConstants.Region.hoenn, GameConstants.HoennSubRegions.Hoenn), 'assets/images/npcs/Reporter.png');
@@ -2757,6 +2769,7 @@ TownList['Dewford Town'] = new Town(
     [DewfordTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Dewford Town'])],
     {
         requirements: [new TemporaryBattleRequirement('May 2')],
+        npcs: [HoennFossilNpc],
     }
 );
 TownList['Slateport City'] = new Town(
@@ -3611,6 +3624,12 @@ const SandgemBeachcomber = new NPC('Beachcomber', [
     'Does that mean when this Prince comes, Pokémon like him will start roaming the region?',
 ]);
 
+const SinnohFossilNpc = new NPC('Gossiper', [
+    'Did you know?! The Gym Leaders of Canalave and Oreburgh are father and son! And what\'s more- there\'s a third person in the mix! Apparently he\'s such a dedicated digger he travelled all the way to Kanto to set up shop selling Explorer Kits! Talk about a family tradition!',
+    'Too bad there are only two new fossils in the Sinnoh region. If there was one more, maybe he could be a Gym Leader too!',
+    'What? Oh you didn\'t know? The ace Pokémon of Gym Leaders Byron and Roark are resurrected from fossils!',
+], {image: 'assets/images/npcs/Aroma Lady.png'});
+
 const FloaromaFlowerGirl = new NPC('Flower Girl', [
     'Something amazing just happened!',
     'My friend was taking their Eevee on a walk through Eterna Forest, and it suddenly evolved!',
@@ -3962,7 +3981,7 @@ TownList['Jubilife City'] = new Town(
     [JubilifeCityShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 202)],
-        npcs: [HappinyWitness1, HappinyWitness8],
+        npcs: [SinnohFossilNpc, HappinyWitness1, HappinyWitness8],
     }
 );
 TownList['Oreburgh City'] = new Town(
@@ -4598,6 +4617,12 @@ const VitaminRefundCode = new NPC('Pokémon Breeder', [
     'It will also only refund Vitamins you bought after hitting the price cap.',
 ]);
 
+const UnovaFossilNpc = new NPC('Friendly Waitress', [
+    'Hello! Would you like a seat indoors or on the patio? We have a lovely view of the museum, it used to double as a Gym you know! Business may have slowed down since the new Normal Gym moved to Aspertia, but our ex-Gym Leader Lenora is still at it with her husband restoring fossils!',
+    'Just last week they had an exhibit on a prehistoric bird and turtle! There was quite the crowd!',
+    '... Do you think they\'re hiring?',
+], {image: 'assets/images/npcs/Waitress.png'});
+
 //Unova Towns
 TownList['Aspertia City'] = new Town(
     'Aspertia City',
@@ -4815,7 +4840,7 @@ TownList['Nacrene City'] = new Town(
     [NacreneCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Nacrene City'])],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pinwheel Forest'))],
-        npcs: [VitaminRefundCode],
+        npcs: [VitaminRefundCode, UnovaFossilNpc],
     }
 );
 TownList['Striaton City'] = new Town(
@@ -5240,6 +5265,44 @@ const Calem2 = new NPC('Calem', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Beautiful World', 1), new QuestLineStepCompletedRequirement('A Beautiful World', 3, GameConstants.AchievementOption.less)]),
 });
 
+const KalosFossilNpc1 = new NPC('Honeymooner Gal', [
+    'I must find one! I simply must!',
+    'I sent my husband to buy tickets for the aquarium but it was all a ploy to get some alone time so I can find him a Pokémon fossil found only here in Kalos!',
+    'According to my brochure, there\'s a pretty cave past these cliffs that\'s filled with them! It says reviving a Jaw Fossil can give you a Tyrunt, the perfect anniversary gift for my sweetie pie!',
+    'I WILL find a Jaw Fossil! Nothing will get in the way of seeing my booboo\'s smile! Anything is possible with the power of love! And don\'t you forget that either!',
+], {
+    image: 'assets/images/npcs/Tourist (female).png',
+    requirement: new OneFromManyRequirement([
+        new ObtainedPokemonRequirement('Tyrunt', true),
+        new ObtainedPokemonRequirement('Amaura', true),
+    ]),
+});
+
+const KalosFossilNpc2 = new NPC('Honeymooner Guy', [
+    'I have to find one! I just have to!',
+    'I told my wife I was going buy tickets for the aquarium in the town back there but little did she know it was a white lie so I could search for a Pokémon fossil found only here in Kalos!',
+    'According to my travel guide, this cave is filled with them! It says reviving a Sail Fossil can nab you an Amaura, the perfect anniversary gift for my pumpkin!',
+    'I MUST find a Sail Fossil! Nothing will get in the way of making my sunshine happy! She\'s taught me that anything is possible with the power of love!',
+], {
+    image: 'assets/images/npcs/Tourist (male).png',
+    requirement: new OneFromManyRequirement([
+        new ObtainedPokemonRequirement('Tyrunt', true),
+        new ObtainedPokemonRequirement('Amaura', true),
+    ]),
+});
+
+const KalosFossilNpc3 = new NPC('Honeymooner Couple', [
+    'Oh, you\'ve found all the fossil Pokémon native to Kalos! We tried too, but our search ended in failure. No, that\'s not entirely true...!',
+    'We may not have found those fossils, but our real goal was making each other smile! No Pokémon can compare to the feeling of catching your loved one in the same secret act as you! To think we split up to surprise each other with a fossil when the real present is the time we spend together!',
+    'Safe travels, Trainer! And may the blessing of love follow you!',
+], {
+    image: 'assets/images/npcs/Honeymooners.png',
+    requirement: new MultiRequirement([
+        new ObtainedPokemonRequirement('Tyrunt'),
+        new ObtainedPokemonRequirement('Amaura'),
+    ]),
+});
+
 const FossilScientist = new NPC('Fossil Scientist', [
     'Why, hello! Here to look for fossils as well?',
     'What did you say? Teemphlair was here? What\'s that? A Pokémon?',
@@ -5608,7 +5671,7 @@ TownList['Ambrette Town'] = new Town(
     [AmbretteTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Ambrette Town'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 8)],
-        npcs: [Calem2],
+        npcs: [KalosFossilNpc1, KalosFossilNpc3, Calem2],
     }
 );
 TownList['Cyllage City'] = new Town(
@@ -5752,7 +5815,7 @@ TownList['Glittering Cave'] = new DungeonTown(
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 9), new QuestLineStepCompletedRequirement('A Beautiful World', 2)],
     [TemporaryBattleList['Team Flare Grunt 1']],
     {
-        npcs: [FossilScientist],
+        npcs: [FossilScientist, KalosFossilNpc2],
     }
 );
 
@@ -7257,6 +7320,11 @@ const CrownTundraRoamerNPC = new RoamerNPC('Freezington Mayor', [
     'If my eyes didn\'t deceive me, I saw a rare Pokémon at {ROUTE_NAME}. Go and see if you can find it if you\'re interested.',
 ], GameConstants.Region.galar, RoamingPokemonList.findGroup(GameConstants.Region.galar, GameConstants.GalarSubRegions.CrownTundra));
 
+const GalarFossilHiker = new NPC('Spelunker', [
+    'Wow! The Crown Tundra is filled with wild fossil Pokémon! I\'ve heard stories of these snowfields protecting the Pokémon living here, but this level of sanctuary is insane!',
+    'And what\'s really interesting is that they only show up to trainers who have already caught one of their species. Could it be they are aware enough to use that as an appraisal of trust?',
+], {image: 'assets/images/npcs/Hiker (Gen 8).png'});
+
 const CrownPeony1 = new NPC ('Peony', [
     'Hey, Chief! I was talking to the locals and they were talking about some ancient king Pokémon! They also mentioned a couple of horsey Pokémon that it was ultra-mega-close to. There\'s a statue of it outside and I\'ve heard this rock I\'ve been using as a pillow is part of it!',
     'Could you go and put it back on for me?',
@@ -7722,7 +7790,11 @@ TownList['Roaring-Sea Caves'] = new DungeonTown(
     'Roaring-Sea Caves',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.CrownTundra,
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 50)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 50)],
+    [],
+    {
+        npcs: [GalarFossilHiker],
+    }
 );
 TownList['Rock Peak Ruins'] = new DungeonTown(
     'Rock Peak Ruins',
