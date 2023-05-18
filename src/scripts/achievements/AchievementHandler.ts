@@ -494,9 +494,9 @@ class AchievementHandler {
          */
         addGymAchievements(GameConstants.RegionGyms[GameConstants.Region.final], GameConstants.ExtraAchievementCategories.sevii, 'Sevii Islands');
         AchievementHandler.addAchievement('Sevii Trainer', 'Catch 15 unique Pokémon native to the Sevii Islands.', new SeviiCaughtRequirement(15, false), 3, GameConstants.ExtraAchievementCategories.sevii);
-        AchievementHandler.addAchievement('Sevii Master', 'Catch 35 unique Pokémon native to the Sevii Islands.', new SeviiCaughtRequirement(35, false), 6, GameConstants.ExtraAchievementCategories.sevii);
+        AchievementHandler.addAchievement('Sevii Master', 'Catch 34 unique Pokémon native to the Sevii Islands.', new SeviiCaughtRequirement(34, false), 6, GameConstants.ExtraAchievementCategories.sevii);
         AchievementHandler.addAchievement('Sevii Shiny Trainer', 'Catch 15 unique Shiny Pokémon native to the Sevii Islands.', new SeviiCaughtRequirement(15, true), 5, GameConstants.ExtraAchievementCategories.sevii);
-        AchievementHandler.addAchievement('Sevii Shiny Master', 'Catch 35 unique Shiny Pokémon native to the Sevii Islands.', new SeviiCaughtRequirement(35, true), 9, GameConstants.ExtraAchievementCategories.sevii);
+        AchievementHandler.addAchievement('Sevii Shiny Master', 'Catch 34 unique Shiny Pokémon native to the Sevii Islands.', new SeviiCaughtRequirement(34, true), 9, GameConstants.ExtraAchievementCategories.sevii);
 
         addGymAchievements(GameConstants.RegionGyms[GameConstants.Region.final + 1], GameConstants.ExtraAchievementCategories.magikarpJump, 'Magikarp Jump');
 

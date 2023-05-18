@@ -1,6 +1,6 @@
 import BadgeEnums from '../enums/Badges';
 import {
-    Region, KantoSubRegions, getDungeonIndex, AlolaSubRegions, GalarSubRegions,
+    Region, KantoSubRegions, getDungeonIndex, AlolaSubRegions, GalarSubRegions, HoennSubRegions,
 } from '../GameConstants';
 import ClearDungeonRequirement from '../requirements/ClearDungeonRequirement';
 import GymBadgeRequirement from '../requirements/GymBadgeRequirement';
@@ -1045,6 +1045,39 @@ Routes.add(new RegionRoute(
         water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo', 'Horsea'],
     }),
     [new RouteKillRequirement(10, Region.hoenn, 133)],
+));
+Routes.add(new RegionRoute(
+    'Rock Poké Spot', Region.hoenn, 135,
+    new RoutePokemon({
+        land: ['Sandshrew', 'Gligar', 'Trapinch'],
+    }),
+    [new DevelopmentRequirement()],
+    undefined,
+    HoennSubRegions.Orre,
+    true,
+    1500000,
+));
+Routes.add(new RegionRoute(
+    'Oasis Poké Spot', Region.hoenn, 136,
+    new RoutePokemon({
+        land: ['Hoppip', 'Phanpy', 'Surskit'],
+    }),
+    [new DevelopmentRequirement()],
+    undefined,
+    HoennSubRegions.Orre,
+    true,
+    1500000,
+));
+Routes.add(new RegionRoute(
+    'Cave Poké Spot', Region.hoenn, 137,
+    new RoutePokemon({
+        land: ['Zubat', 'Aron', 'Wooper'],
+    }),
+    [new DevelopmentRequirement()],
+    undefined,
+    HoennSubRegions.Orre,
+    true,
+    1500000,
 ));
 
 /*
