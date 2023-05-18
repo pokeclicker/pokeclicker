@@ -20,13 +20,14 @@ export default class SpecialEvent {
     startFunction: EmptyCallback;
     endTime: Date;
     endFunction: EmptyCallback;
+    hideFromEventCalendar: boolean;
     eventCalendarTimeLeft: KnockoutObservable<number>;
     isActive: KnockoutObservable<boolean>;
 
     // TODO: only notify once initially until event about to start/end
     notified: SpecialEventNotifiedStatus;
 
-    constructor(title: string, description: string, startTime: Date, startFunction: EmptyCallback, endTime: Date, endFunction: EmptyCallback) {
+    constructor(title: string, description: string, startTime: Date, startFunction: EmptyCallback, endTime: Date, endFunction: EmptyCallback, hideFromEventCalendar: boolean) {
         this.title = title;
         this.description = description;
         this.startTime = startTime;
@@ -34,6 +35,7 @@ export default class SpecialEvent {
         this.endTime = endTime;
         this.endFunction = endFunction;
         this.status = ko.observable(SpecialEventStatus.none);
+        this.hideFromEventCalendar = hideFromEventCalendar;
         this.eventCalendarTimeLeft = ko.observable(0);
         this.isActive = ko.pureComputed<boolean>(() => this.status() == SpecialEventStatus.started || this.eventCalendarTimeLeft() > 0);
     }
@@ -81,6 +83,9 @@ export default class SpecialEvent {
     }
 
     eventCalendarActivate(): void {
+        if (this.hideFromEventCalendar) {
+            return;
+        }
         const daysLeft = Math.floor(this.timeTillStart() / 1000 / 60 / 60 / 24);
         const price = 500 * daysLeft;
         if (price > App.game.wallet.currencies[Currency.questPoint]()) {

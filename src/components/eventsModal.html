@@ -32,7 +32,7 @@
                         <!-- ko if: isActive()-->
                         <td class="text-left" colspan="2">Time left: <code data-bind="text: timeLeft()">-</code></td>
                         <!-- /ko -->
-                        <!-- ko if: App.game.keyItems.hasKeyItem(KeyItemType.Event_calendar) -->
+                        <!-- ko if: App.game.keyItems.hasKeyItem(KeyItemType.Event_calendar) && !hideFromEventCalendar -->
                         <td><button class="btn btn-primary" data-bind="enable: !isActive(), click: eventCalendarActivate">Activate</button></td>
                         <!-- /ko -->
                      </tr>
