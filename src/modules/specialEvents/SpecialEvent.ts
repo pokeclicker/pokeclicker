@@ -1,7 +1,8 @@
 import SpecialEventNotifiedStatus from './SpecialEventsNotifiedStatus';
 import Notifier from '../notifications/Notifier';
 import NotificationConstants from '../notifications/NotificationConstants';
-import { DAY, HOUR, formatTimeShortWords } from '../GameConstants';
+import { DAY, HOUR, formatTimeShortWords, formatTime, Currency } from '../GameConstants';
+import NotificationOption from '../notifications/NotificationOption';
 
 type EmptyCallback = () => void;
 
@@ -19,6 +20,8 @@ export default class SpecialEvent {
     startFunction: EmptyCallback;
     endTime: Date;
     endFunction: EmptyCallback;
+    eventCalendarTimeLeft: KnockoutObservable<number>;
+    isActive: KnockoutObservable<boolean>;
 
     // TODO: only notify once initially until event about to start/end
     notified: SpecialEventNotifiedStatus;
@@ -31,6 +34,8 @@ export default class SpecialEvent {
         this.endTime = endTime;
         this.endFunction = endFunction;
         this.status = ko.observable(SpecialEventStatus.none);
+        this.eventCalendarTimeLeft = ko.observable(0);
+        this.isActive = ko.pureComputed<boolean>(() => this.status() == SpecialEventStatus.started || this.eventCalendarTimeLeft() > 0);
     }
 
     initialize(): void {
@@ -57,6 +62,38 @@ export default class SpecialEvent {
 
     hasEnded(): boolean {
         return this.status() === SpecialEventStatus.ended;
+    }
+
+    timeLeft(): string {
+        if (this.hasStarted()) {
+            return formatTime(this.timeTillEnd() / 1000);
+        }
+        if (this.eventCalendarTimeLeft() > 0) {
+            return formatTime(this.eventCalendarTimeLeft());
+        }
+        return '';
+    }
+
+    eventCalendarActivate(): void {
+        const daysLeft = Math.floor(this.timeTillStart() / 1000 / 60 / 60 / 24);
+        const price = 500 * daysLeft;
+        if (price > App.game.wallet.currencies[Currency.questPoint]()) {
+            Notifier.notify({
+                title: 'Cannot afford',
+                message: `This costs ${price} QP.`,
+                type: NotificationOption.danger,
+            });
+            return;
+        }
+        Notifier.confirm({
+            title: 'Do you want to start this event early?',
+            message: `Starting '${this.title}' early will cost you ${price} QP.`,
+        }).then((result: boolean) => {
+            if (result) {
+                App.game.wallet.loseAmount({ amount: price, currency: Currency.questPoint });
+                this.eventCalendarTimeLeft(24 * 60 * 60); // Adds a day
+            }
+        });
     }
 
     notify(time: string, timeout: number, type = NotificationConstants.NotificationOption.info) {

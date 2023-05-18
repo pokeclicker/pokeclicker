@@ -6740,6 +6740,7 @@ const MotostokeShop = new Shop([
 const HammerlockeShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
+    ItemList.Event_calendar,
     ItemList.Dragon_egg,
     ItemList.Metal_coat,
     ItemList.Upgrade,
