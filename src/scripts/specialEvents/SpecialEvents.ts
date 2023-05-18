@@ -5,6 +5,7 @@ class SpecialEvents implements Feature {
     name = 'Events';
     saveKey = 'events';
     defaults: Record<string, any>;
+    public counter = 0;
 
     static events: SpecialEvent[] = [];
 
@@ -23,11 +24,14 @@ class SpecialEvents implements Feature {
         if (!json) {
             return;
         }
+        json.events?.forEach(event => {
+            this.getEvent(event.name)?.fromJSON(event);
+        });
     }
 
     toJSON() {
         return {
-            // no data to save yet
+            events: SpecialEvents.events.map((event) => event.toJSON()),
         };
     }
 
@@ -39,6 +43,13 @@ class SpecialEvents implements Feature {
 
     getEvent(eventName: string) {
         return SpecialEvents.events.find((e) => e.title == eventName);
+    }
+
+    tick(): void {
+        SpecialEvents.events?.forEach(event => {
+            event.tick();
+        });
+        this.counter = 0;
     }
 }
 

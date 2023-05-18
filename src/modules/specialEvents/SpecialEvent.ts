@@ -1,7 +1,7 @@
 import SpecialEventNotifiedStatus from './SpecialEventsNotifiedStatus';
 import Notifier from '../notifications/Notifier';
 import NotificationConstants from '../notifications/NotificationConstants';
-import { DAY, HOUR, formatTimeShortWords, formatTime, Currency } from '../GameConstants';
+import { DAY, HOUR, formatTimeShortWords, formatTime, Currency, SPECIAL_EVENT_TICK, SECOND } from '../GameConstants';
 import NotificationOption from '../notifications/NotificationOption';
 
 type EmptyCallback = () => void;
@@ -72,6 +72,12 @@ export default class SpecialEvent {
             return formatTime(this.eventCalendarTimeLeft());
         }
         return '';
+    }
+
+    tick(): void {
+        if (this.eventCalendarTimeLeft() > 0) {
+            this.eventCalendarTimeLeft(Math.max(0, this.eventCalendarTimeLeft() - SPECIAL_EVENT_TICK / SECOND));
+        }
     }
 
     eventCalendarActivate(): void {
@@ -212,5 +218,19 @@ export default class SpecialEvent {
         this.endTime.setFullYear(this.endTime.getFullYear() + 1);
         this.startTime.setFullYear(this.startTime.getFullYear() + 1);
         this.checkStart();
+    }
+
+    fromJSON(json: any): void {
+        if (!json) {
+            return;
+        }
+        this.eventCalendarTimeLeft(json.eventCalendarTimeLeft ?? 0);
+    }
+
+    toJSON() {
+        return {
+            name: this.title,
+            eventCalendarTimeLeft: this.eventCalendarTimeLeft(),
+        };
     }
 }
