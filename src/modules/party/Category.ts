@@ -84,7 +84,6 @@ export default class PokemonCategories implements Saveable {
             PokedexFilters.category.value(-1);
             Settings.setSettingByName('pokedexCategoryFilter', PokedexFilters.category.value());
         }
-        
         if (BreedingFilters.category.value() === cat.id) {
             BreedingFilters.category.value(-1);
             Settings.setSettingByName('breedingCategoryFilter', BreedingFilters.category.value());
@@ -106,10 +105,11 @@ export default class PokemonCategories implements Saveable {
     }
 
     fromJSON(json: Record<string, any>): void {
-        if (!json) {
+        if (!json || !json.categories) {
             return;
         }
 
+        const categoryOrder = json.categories?.map(c => c.id);
         json.categories?.forEach((category) => {
             const cat = PokemonCategories.categories().find(c => c.id == category.id);
             if (cat) {
@@ -119,6 +119,8 @@ export default class PokemonCategories implements Saveable {
                 PokemonCategories.addCategory(decodeURI(category.name), category.color, category.id);
             }
         });
+
+        PokemonCategories.categories().sort((a, b) => categoryOrder.indexOf(a.id) - categoryOrder.indexOf(b.id));
     }
 }
 
