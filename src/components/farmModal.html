@@ -207,7 +207,6 @@
                         <div class="berryListHeight mt-2 flex-grow-1 col-6 col-lg-4"  style="overflow-y: auto;">
                             <!-- ko using: App.game.statistics.selectedBerryID() -->
                             <div class="sticky-top">
-                                <h5 class="card p-2 modal-title">Berry Tag</h5>
                                 <div class="modal-header bg-dark text-light" style='justify-content-left: space-around;'>
                                     <h5 class="p-0 modal-title text-light" data-bind="text: BerryType[$data]">Berry Statistics</h5>
                                     <h5 id="berry-panel" class="p-0 modal-title text-muted" data-bind="text: `#${(Number($data) + 1).toString().padStart(2,0)}&nbsp;&nbsp;`, value: $data"></h5>
@@ -219,7 +218,7 @@
                                     <table class="table table-striped table-hover table-bordered table-sm m-0">
                                         <thead>
                                             <tr class="text-light">
-                                                <th class="bg-dark" colspan="2">Form</th>
+                                                <th class="bg-dark" colspan="2">Overview</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -227,21 +226,7 @@
                                                 <td class="text-left">Berry Color</td>
                                                 <td class="text-left tight"><code data-bind="text: BerryColor[App.game.farming.berryData[$data].color]">-</code></td>
                                             </tr>
-                                            <!-- ko if: App.game.farming.berryData[$data].aura -->
                                             <tr>
-                                                <td class="text-left">Aura</td>
-                                                <td class="text-left tight"><code data-bind="text: AuraType[App.game.farming.berryData[$data].aura.auraType]"></code></td>
-                                            </tr>
-                                            <!-- /ko -->
-                                        </tbody>
-                                        <thead>
-                                            <tr class="text-light">
-                                                <th class="text-left bg-dark">Information</th>
-                                                <th class="text-left bg-dark">Data</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr">
                                             <td class="text-left">Growth Duration</td>
                                             <td class="text-left tight"><code data-bind="html: GameConstants.formatSecondsToTime(App.game.farming.berryData[$data].growthTime[3])">-</code></td>
                                             </tr>
@@ -258,6 +243,12 @@
                                                 <td class="text-left tight"><code data-bind="text: App.game.farming.berryList[$data]().toLocaleString('en-US')"></span></td>
                                                 </code></td>
                                             </tr>
+                                            <!-- ko if: App.game.farming.berryData[$data].aura -->
+                                            <tr>
+                                                <td class="text-left">Aura</td>
+                                                <td class="text-left tight"><code data-bind="text: AuraType[App.game.farming.berryData[$data].aura.auraType]"></code></td>
+                                            </tr>
+                                            <!-- /ko -->
                                             <tr>
                                                 <td class="p-0" colspan="2">
                                                     <table style="width: 100%;">
