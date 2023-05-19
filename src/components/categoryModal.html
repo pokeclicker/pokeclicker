@@ -49,7 +49,7 @@
                             </td>
                             <td>
                                 <button type="button" class="close text-danger" title="Remove Category" style="opacity: 1;"
-                                    data-bind="click: () => { PokemonCategories.removeCategory($data.id) }">
+                                    data-bind="visible: $data.id > 1, click: () => { PokemonCategories.removeCategory($data.id) }">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </td>
