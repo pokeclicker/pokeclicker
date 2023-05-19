@@ -12,11 +12,15 @@
   height: 100%;
 }
 
-// Applied to gym, dungeon, and tempBattle trainer sprites
+// Applied to gym and tempBattle trainer sprites
 .trainer {
   position: absolute;
   left: 65%;
   top: 25%;
+}
+
+.dungeon .trainer {
+  top: 30%;
 }
 
 .stop-auto {
@@ -26,7 +30,7 @@
 }
 
 // Mobile screen specific stylings
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
   .trainer {
     top: 30%
   }

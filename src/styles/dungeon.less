@@ -97,15 +97,36 @@
   background-color: #9b59b6;
 }
 
-// Mobile screen specific stylings
-@media (max-width: 768px) {
-  .dungeon-enemy {
-    margin-top: -15px;
-  }
+.dungeonTitle {
+    height: 29%;
 
-  .progress.hitpoints.dungeonhitpoints {
-    bottom: 65px;
-  }
+    .left {
+        margin-top: 55px;
+    }
+
+    .right {
+        margin-top: 53px;
+    }
+}
+
+.hitpoints {
+    bottom: 85px;
+}
+
+.pageItemFooter {
+    font-size: 14px !important;
+}
+
+.dungeon-enemy {
+margin-top: -15px;
+}
+
+.progress.hitpoints.dungeonhitpoints {
+bottom: 65px;
+}
+
+.dungeon-chest {
+margin-top: 5px;
 }
 
 .dungeon-board {
@@ -115,8 +136,6 @@
 }
 
 .dungeon-chest {
-  margin-top: 25px;
-
   @media (max-width: 768px) {
     margin-top: 20px;
     position: absolute;
@@ -138,11 +157,7 @@
 }
 
 .dungeon-button {
-  margin-top: 80px;
-
-  @media (max-width: 768px) {
-    margin-top: 50px;
-  }
+  margin-top: 50px;
 }
 
 .dungeon-pokemon-locked {
