@@ -105,7 +105,7 @@
     }
 
     .right {
-        margin-top: 53px;
+        margin-top: 52px;
     }
 }
 
@@ -126,21 +126,18 @@ bottom: 65px;
 }
 
 .dungeon-chest {
-margin-top: 5px;
+  margin-top: 5px;
+  @media (max-width: 768px) {
+    margin-top: 20px;
+    position: absolute;
+    left: 10%;
+  }
 }
 
 .dungeon-board {
   width: 100%;
   padding: 20px;
   margin: auto;
-}
-
-.dungeon-chest {
-  @media (max-width: 768px) {
-    margin-top: 20px;
-    position: absolute;
-    left: 10%;
-  }
 }
 
 .chest-button {
