@@ -1113,6 +1113,35 @@
             href:'assets/images/orre.png?v=$VERSION'
         }"></image>
 
+    <!-- ------ -->
+    <!-- ROUTES -->
+    <!-- ------ -->
+
+    <!--Rock Poké Spot-->
+    <%- include('templates/mapRoute',
+        { route: 135, region: 2
+        , width: 5, height: 4
+        , x: 83, y: 33, name: "RPS"
+        })
+    %>
+
+    <!--Oasis Poké Spot-->
+    <%- include('templates/mapRoute',
+        { route: 136, region: 2
+        , width: 5, height: 4
+        , x: 34, y: 34, name: "OPS"
+        })
+    %>
+
+    <!--Cave Poké Spot-->
+    <%- include('templates/mapRoute',
+        { route: 137, region: 2
+        , width: 4, height: 4
+        , x: 53, y: 17, name: "CPS"
+        })
+    %>
+
+
         <!-- ----- -->
         <!-- TOWNS -->
         <!-- ----- -->
