@@ -16,11 +16,6 @@ class App {
             Object.freeze(GameConstants);
         }
 
-        // Check if Mobile and deliver a warning around mobile compatability / performance issues
-        const isMobile: boolean = /Mobile/.test(navigator.userAgent);
-        const isTouchDevice: boolean = 'ontouchstart' in document.documentElement;
-        const hasSeenWarning: string = localStorage.getItem('hasSeenMobileWarning');
-
         Preload.load(App.debug).then(() => {
             ko.options.deferUpdates = true;
 
@@ -82,6 +77,10 @@ class App {
 
             App.game.start();
 
+            // Check if Mobile and deliver a warning around mobile compatability / performance issues
+            const isMobile: boolean = /Mobile/.test(navigator.userAgent);
+            const isTouchDevice: boolean = 'ontouchstart' in document.documentElement;
+            const hasSeenWarning: string = localStorage.getItem('hasSeenMobileWarning');
             if (isMobile && isTouchDevice && hasSeenWarning != 'true') {
                 Notifier.warning({
                     title: 'Mobile Device Detected',
