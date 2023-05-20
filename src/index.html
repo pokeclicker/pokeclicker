@@ -88,9 +88,6 @@
 <!--$DEV_BANNER-->
 @importif $DEV_BANNER "developmentBanner.html"
 
-<!-- Mobile Warning -->
-@import "mobileWarning.html"
-
 <!-- Spash Screen -->
 @import "saveSelector.html"
 @import "splash.html"
@@ -694,14 +691,6 @@ if (self !== top) {
     document.body.innerHTML = `<div class="text-center">
         <h2>Please visit the official website to play this game <a target="_top" href="https://pokeclicker.com">https://pokeclicker.com</a></h2>
     </div>`;
-}
-// Check if Mobile and deliver a warning around mobile compatability / performance issues
-const isMobile = /Mobile/.test(navigator.userAgent);
-var isTouchDevice = 'ontouchstart' in document.documentElement;
-const hasSeenWarning = localStorage.getItem('hasSeenMobileWarning');
-if (isMobile && isTouchDevice && !hasSeenWarning) {
-    $('#mobileWarningModal').modal('show');
-    localStorage.setItem('hasSeenMobileWarning', true);
 }
 </script>
 </body>
