@@ -924,7 +924,7 @@ GymList['Virbank City'] = new Gym(
     'Sigh! What are you doing losing, Roxie?! Well…I guess that means you\'re strong! This stinks, but I gave it everything I had, and I feel revitalized and refreshed now! Here! Proof that you beat me!',
     [new GymBadgeRequirement(BadgeEnums.Basic)],
     () => {
-        App.game.quests.getQuestLine('Quest for the DNA Splicers').beginQuest();
+        App.game.quests.getQuestLine('Hollow Truth and Ideals').beginQuest();
     }
 );
 GymList['Castelia City'] = new Gym(
