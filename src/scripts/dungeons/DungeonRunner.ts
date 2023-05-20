@@ -306,12 +306,6 @@ class DungeonRunner {
         });
     }
 
-    public static isThereQuestAtLocation(dungeon: Dungeon) {
-        return App.game.quests.currentQuests().some(q => {
-            return q instanceof DefeatDungeonQuest && q.dungeon == dungeon.name;
-        });
-    }
-
     public static hasEnoughTokens() {
         return App.game.wallet.hasAmount(new Amount(DungeonRunner.dungeon.tokenCost, GameConstants.Currency.dungeonToken));
     }
