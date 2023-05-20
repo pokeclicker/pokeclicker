@@ -96,6 +96,7 @@ const DungeonGainGymBadge = (gym: Gym, badge: BadgeEnums) => {
     dungeonRegionalDifficulty?: GameConstants.Region,
 }
 class Dungeon {
+    private mimicList: PokemonNameType[] = [];
 
     constructor(
         public name: string,
@@ -107,7 +108,17 @@ class Dungeon {
         public difficultyRoute: number, // Closest route in terms of difficulty, used for egg steps, dungeon tokens etc.
         public rewardFunction = () => {},
         public optionalParameters: optionalDungeonParameters = {}
-    ) { }
+    ) {
+        // Keep a list of mimics to use with getCaughtMimics()
+        Object.entries(this.lootTable).forEach(([_, itemList]) => {
+            itemList.forEach((loot) => {
+                const mimic = pokemonMap[loot.loot].name;
+                if (mimic != 'MissingNo.') {
+                    this.mimicList.push(mimic);
+                }
+            });
+        });
+    }
 
     public isUnlocked(): boolean {
         // Player requires the Dungeon Ticket to access the dungeons
@@ -218,16 +229,7 @@ class Dungeon {
     }
 
     public getCaughtMimics(): PokemonNameType[] {
-        const encounterInfo = [];
-        Object.entries(this.lootTable).forEach(([tier, itemList]) => {
-            itemList.forEach((loot, i) => {
-                const mimic = pokemonMap[loot.loot].name;
-                if (mimic != 'MissingNo.' && App.game.party.alreadyCaughtPokemonByName(mimic)) {
-                    encounterInfo.push(mimic);
-                }
-            });
-        });
-        return encounterInfo;
+        return this.mimicList.filter(p => App.game.party.alreadyCaughtPokemonByName(p));
     }
 
     public getRandomLootTier(clears: number, debuffed = false): LootTier {
@@ -410,6 +412,10 @@ class Dungeon {
 
         return encounterInfo;
     }
+
+    public isThereQuestAtLocation = ko.pureComputed(() => {
+        return App.game.quests.currentQuests().some(q => q instanceof DefeatDungeonQuest && q.dungeon == this.name);
+    });
 }
 
 /**
