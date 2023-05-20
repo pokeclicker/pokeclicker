@@ -12,17 +12,17 @@ class SafariTownContent extends TownContent {
         Safari.openModal();
     }
     public areaStatus(): areaStatus {
-        const pokemonStatusArray = [areaStatus.completed];
         if (!SafariPokemonList.list[player.region]) {
             return areaStatus.completed;
         }
+        const pokemonStatusArray = [areaStatus.completed];
         SafariPokemonList.list[player.region]().forEach(p => {
-            const currentStatus = PartyController.getCaughtStatusByName(p.name);
-            if (currentStatus == CaughtStatus.NotCaught) {
+            const caughtStatus = PartyController.getCaughtStatusByName(p.name);
+            if (caughtStatus == CaughtStatus.NotCaught) {
                 pokemonStatusArray.push(areaStatus.uncaughtPokemon);
-            } else if (currentStatus == CaughtStatus.Caught) {
+            } else if (caughtStatus == CaughtStatus.Caught) {
                 pokemonStatusArray.push(areaStatus.uncaughtShinyPokemon);
-            } else if (currentStatus < GameConstants.Pokerus.Resistant) {
+            } else if (PartyController.getPokerusStatusByName(p.name) < GameConstants.Pokerus.Resistant) {
                 pokemonStatusArray.push(areaStatus.missingResistant);
             }
         });

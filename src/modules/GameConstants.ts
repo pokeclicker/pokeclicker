@@ -897,9 +897,9 @@ export enum PokeBlockColor {
     Purple,
     Indigo,
     Brown,
-    LiteBlue,
+    Light_Blue,
     Olive,
-    Flaxen,
+    Beige,
     Gray,
     White,
 }
