@@ -2772,7 +2772,7 @@ dungeonList['Meteor Falls'] = new Dungeon('Meteor Falls',
                 new GymPokemon('Flygon', 4073950, 57),
                 new GymPokemon('Haxorus', 4073950, 57),
                 new GymPokemon('Garchomp', 4073950, 57),
-            ], { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('The Delta Episode', 16)}, 'Draconid Elder'),
+            ], { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('The Delta Episode', 16)}),
     ],
     18000, 101);
 
