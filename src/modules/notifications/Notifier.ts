@@ -266,13 +266,10 @@ export default class Notifier {
     <div class="modal-dialog modal-dialog-scrollable modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header modal-header pb-0 pt-2 px-2 bg-${NotificationOption[type]}">
-                <h5>${title}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <h5 class="modal-title">${title}</h5>
             </div>
-            <div class="modal-body py-2 px-2 text-left">
-                ${message.replace(/\n/g, '<br/>')}
+            <div class="modal-body py-2 px-2 text-left text-center">
+                <i class="text-warning">${message.replace(/\n/g, '<br/>')}</i>
             </div>
             <div class="modal-footer p-2">
                 <button class="btn col outline-dark btn-${NotificationOption[type]}" data-dismiss="modal" id="modalConfirm${modalID}">${confirm}</button>

@@ -23,12 +23,12 @@ class App {
 
         if (isMobile && isTouchDevice && hasSeenWarning != 'true') {
             if (await Notifier.warning({
-                title: `Mobile Device Detected`,
+                title: 'Mobile Device Detected',
                 message: 'Please Note: \n\nYou may experience performance issues playing on mobile, especially on older models. \n\nWhile it is ' +
                     'possible to play on a phone or tablet, please be aware that the controls and features are designed with a mouse and keyboard in ' +
                     'mind and may not work as well on a mobile device. \n\nFor the best gameplay experience we highly recommend playing on a PC ' +
                     'browser or our desktop client by <b><a href="https://github.com/RedSparr0w/Pokeclicker-desktop/releases/latest" target="_blank">downloading here</a>' +
-                    '\n\nThank You!'
+                    '\n\nThank You!',
             })) {
                 localStorage.setItem('hasSeenMobileWarning', 'true');
             }
