@@ -31,7 +31,7 @@ class Quests implements Saveable {
         return this.questList().filter(quest => quest.isCompleted());
     });
     public currentQuests: KnockoutComputed<Array<Quest>> = ko.pureComputed(() => {
-        return this.questList().filter(quest => quest.inProgress() && !quest.claimed());
+        return this.questList().filter(quest => quest.inProgress());
     });
     public incompleteQuests: KnockoutComputed<Array<Quest>> =  ko.pureComputed(() => {
         return this.questList().filter(quest => !quest.isCompleted());
