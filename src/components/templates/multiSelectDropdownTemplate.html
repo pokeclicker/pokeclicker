@@ -1,9 +1,10 @@
 <script type="text/html" id="multiSelectDropdownTemplate">
     <div class="dropdown">
-        <button class="btn btn-block dropdown-toggle text-left multiselect-dropdown" type="button" data-toggle="dropdown" data-bind="class: $data.buttonClass">
-            <div class="text-truncate pr-2" data-bind="text: typeof $data.buttonText === 'function' ? $data.buttonText() : $data.buttonText"></div>
+        <button class="btn btn-block dropdown-toggle text-left btn-multiselect-dropdown" type="button" data-toggle="dropdown" data-bind="class: $data.buttonClass">
+            <div class="text-truncate pr-2" style="position: relative; top: 1px;"
+                data-bind="text: typeof $data.buttonText === 'function' ? $data.buttonText() : $data.buttonText"></div>
         </button>
-        <div class="dropdown-menu px-2">
+        <div class="dropdown-menu multiselect-dropdown px-2">
             <!-- ko if: $data.showSelectAll -->
             <div class="text-center pb-1 mb-1 border-bottom border-secondary">
                 <button type="button" class="btn btn-secondary btn-sm btn-block"
