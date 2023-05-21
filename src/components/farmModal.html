@@ -190,15 +190,18 @@
                         <div class="berryListHeight mt-2 col-12 col-md-6 col-lg-8"  style="overflow-y: auto;">
                             <ul class="row justify-content-center p-0 pl-2" data-bind="foreach: FarmController.getUnlockedBerryList()"
                                 style="max-width: 100%; padding:0; margin:0;">
-                                <li class="col-12 col-lg-3 pokedexEntry"
+                                <li class="col-4 col-lg-2 berrydexEntry"
                                     data-bind="style:{background: FarmController.getBackgroundColor($data)},
                                     tooltip: { title: FarmController.getHint($data,true,true),
                                     trigger: 'hover',
-                                    placement:'top' }">
-                                    <span class="id" style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: ($data + 1 + '').padStart(2, 0)">number</span>
-                                    <img src="" width=80px style="padding: 20px 0px;" data-bind="css: { 'pokemon-not-seen': !App.game.farming.unlockedBerries[$data]() }, attr:{ src: FarmController.getBerryImage($data)}">
+                                    placement:'top' },">
+                                    <img src="" data-bind="css: { 'pokemon-not-seen': !App.game.farming.unlockedBerries[$data]() }, attr:{ src: FarmController.getBerryImage($data)}">
+                                    <span class="id" style="top: 0;" data-bind="text: ($data + 1 + '').padStart(2, 0)">number</span>
+                                    <!-- ko if: !App.game.farming.unlockedBerries[$data]() -->
+                                    <span style="bottom: 0;" data-bind="text: '???'">name</span>
+                                    <!-- /ko -->
                                     <!-- ko if: App.game.farming.unlockedBerries[$data]() -->
-                                    <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: BerryType[$data]">name</span>
+                                    <span style="bottom: 0;" data-bind="text: BerryType[$data]">name</span>
                                     <a class="overlay" href='#' data-bind="click: () => {FarmController.handleBerryDexClick($data)}, attr:{'aria-label': BerryType[$data] + '. Click again for dex entry.'}"></a>
                                     <!-- /ko -->
                                 </li>
