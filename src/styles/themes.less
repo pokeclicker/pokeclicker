@@ -60,7 +60,10 @@
 
   /* Berrydex List */
   .berrydexEntry {
-    border: solid var(--info);
+    border-style: solid;
+    border-image: linear-gradient(to bottom, steelblue, var(--info));
+    border-image-slice: 1;
+    border-width: 3px;
 
     span {
       color: var(--info);
@@ -86,6 +89,8 @@
 
   /* Berrydex List */
   .berrydexEntry {
+    border: solid var(--info);
+
     span {
       color: var(--info);
     }
@@ -107,6 +112,7 @@
   /* Berrydex List */
   .berrydexEntry {
     border: solid var(--info);
+    border-radius: 5px;
 
     span {
       color: var(--light);
@@ -118,6 +124,11 @@
   .text-primary, .text-light {
     color: whitesmoke !important;
   }
+
+    /* Berrydex List */
+    .berrydexEntry {
+      border-radius: 3px;
+    }
 }
 
 .flatly {
@@ -126,6 +137,18 @@
     .list-group-item-action:hover {
       color: black;
     }
+  }
+
+    /* Berrydex List */
+    .berrydexEntry {
+      border-radius: 3px;
+    }
+}
+
+.journal {
+    /* Berrydex List */
+    .berrydexEntry {
+      border-radius: 5px;
   }
 }
 
@@ -136,6 +159,11 @@
       color: var(--info);
     }
   }
+
+    /* Berrydex List */
+    .berrydexEntry {
+      border-radius: 15px;
+    }
 }
 
 .lumen {
@@ -147,13 +175,15 @@
   /* Berrydex List */
   .berrydexEntry {
     border: solid var(--info);
+    border-radius: 5px;
 
     span {
       color: var(--info);
     }
   }
   // because Lumen's buttons move when pushed
-  .berrydexEntry:hover {
+  .berrydexEntry:hover, .berrydexEntry:focus-within {
+    box-shadow: 0 1px var(--primary);
     bottom: 2px;
     border: solid var(--primary);
 
@@ -162,12 +192,12 @@
     }
   }
 
-  .berrydexEntry:focus-within {
+  .berrydexEntry:active {
     bottom: 0;
-    border: solid var(--primary);
+    border: solid var(--light);
 
     span {
-      color: var(--primary);
+      color: var(--light);
     }
   }
 }
@@ -180,11 +210,6 @@
 
   .pageItemTitle {
     font-size: 30px !important;
-  }
-
-  /* Berrydex List */
-  .berrydexEntry {
-    border: solid var(--primary);
   }
 }
 
@@ -203,7 +228,7 @@
 
   /* Berrydex List */
   .berrydexEntry {
-    border: solid var(--info);
+    box-shadow: 1px 1px 2px 2px lightgray;
 
     span {
       color:var(--info);
@@ -227,6 +252,7 @@
   /* Berrydex List */
     .berrydexEntry {
       border: solid var(--primary);
+      border-radius: 5px;
 
       span {
         color:var(--secondary);
@@ -239,11 +265,29 @@
   .berrydexEntry {
     border: solid var(--secondary);
   }
+
+  /* Berrydex List */
+  .berrydexEntry:hover {
+    transform: scale(1.1);
+  }
+
+  .berrydexEntry:active {
+    z-index: 2;
+    animation: pulse-mimic 0.3s;
+  }
+
+  @keyframes pulse-mimic {
+    0%, 70% { transform: scale(1); }
+    30%, 100% { transform: scale(1.5); }
+    50%, 90% { transform: scale(1.3); }
+  }
 }
 
 .sandstone{
   /* Berrydex List */
   .berrydexEntry {
+    border-radius: 5px;
+
     span {
       color:var(--secondary);
     }
@@ -260,6 +304,8 @@
 
   /* Berrydex List */
   .berrydexEntry {
+    border-radius: 4px;
+  
     span {
       color:var(--dark);
     }
@@ -353,6 +399,8 @@
 
   /* Berrydex List */
   .berrydexEntry {
+    border-radius: 3px;
+
     span {
       color:var(--primary);
     }
@@ -385,6 +433,7 @@
   /* Berrydex List */
   .berrydexEntry {
     border: solid var(--primary);
+    border-radius: 5px;
 
     span {
       color:var(--dark);
@@ -402,7 +451,10 @@
 
   /* Berrydex List */
   .berrydexEntry {
-    border: solid var(--primary);
+    border-style: solid;
+    border-image: linear-gradient(to bottom, lightblue 5%, var(--primary));
+    border-image-slice: 1;
+    border-width: 3px;
 
     span {
       color:var(--secondary);
@@ -418,10 +470,6 @@
   /* Berrydex List */
   .berrydexEntry {
     border-right: solid var(--primary);
-
-    span {
-      color:var(--dark);
-    }
   }
 }
 
@@ -429,6 +477,7 @@
   /* Berrydex List */
   .berrydexEntry {
     border: solid var(--dark);
+    border-radius: 5px;
   
     span {
       color:var(--dark);

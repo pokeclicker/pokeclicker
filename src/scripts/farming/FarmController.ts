@@ -190,8 +190,7 @@ class FarmController {
 
     public static getBackgroundColor(index: number) {
         if (App.game.farming.unlockedBerries[index]()) {
-            return `linear-gradient(rgba(255,255,255,40%) 50%, rgba(0,0,0,0) 50%),
-            linear-gradient(90deg,${GameConstants.BerryColor[App.game.farming.berryData[index].color]} 20%, rgba(211, 211, 211, 50%) 20%)`;
+            return `linear-gradient(90deg,${GameConstants.BerryColor[App.game.farming.berryData[index].color]} 20%, rgba(211, 211, 211, 50%) 20%)`;
         } else if (FarmController.getHint(index, true) !== '') {
             return `linear-gradient(90deg,${GameConstants.BerryColor[8]} 20%, rgba(211, 211, 211, 50%) 20%)`;
         } else {
