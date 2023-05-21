@@ -6,6 +6,11 @@
   img[src="assets/images/dungeons/boss.svg"] {
     filter: invert(1) brightness(90%);
   }
+  .berrydexEntry {
+    span {
+      color:var(--primary);
+    }
+  }
 }
 
 /* Dark themes */
@@ -19,6 +24,12 @@
   .dungeon-pokemon-locked {
     filter: brightness(0%) invert(100%);
     opacity: 0.3;
+  }
+
+  .berrydexEntry {
+    span {
+      color:var(--secondary);
+    }
   }
 
   code {
@@ -44,6 +55,13 @@
       background-image: linear-gradient(#4e5458, #565b60 40%, #5b6165);
     }
   }
+
+  .berrydexEntry {
+    border: solid var(--info);
+    span {
+      color: var(--primary);
+    }
+  }
 }
 
 .cosmo {
@@ -61,6 +79,12 @@
       color: black;
     }
   }
+
+  .berrydexEntry {
+    span {
+      color: var(--info);
+    }
+  }
 }
 
 .cyborg {
@@ -72,6 +96,12 @@
   #evo-item-list, #evo-pokemon-list {
     .list-group-item-action {
       color: whitesmoke;
+    }
+  }
+  .berrydexEntry {
+    border: solid var(--info);
+    span {
+      color: var(--light);
     }
   }
 }
@@ -91,6 +121,37 @@
   }
 }
 
+.litera {
+  .berrydexEntry {
+    span {
+      color: var(--info);
+    }
+  }
+}
+
+.lumen {
+  .berrydexEntry {
+    border: solid var(--info);
+    span {
+      color: var(--info);
+    }
+  }
+  .berrydexEntry:hover {
+    bottom: 2px;
+    border: solid var(--primary);
+    span {
+      color: var(--primary);
+    }
+  }
+    .berrydexEntry:focus-within {
+    bottom: 0px;
+    border: solid var(--primary);
+    span {
+      color: var(--primary);
+    }
+  }
+}
+
 .lux {
   // Font was too large, covering other ui elements
   .pageItemFooter {
@@ -99,6 +160,10 @@
 
   .pageItemTitle {
     font-size: 30px !important;
+  }
+
+  .berrydexEntry {
+    border: solid var(--primary);
   }
 }
 
@@ -112,6 +177,13 @@
   #evo-item-list, #evo-pokemon-list {
     .item-selected, .pokemon-selected {
       background: #2196f3 linear-gradient(180deg,#42a6f5,#2196f3) repeat-x;
+    }
+  }
+
+  .berrydexEntry {
+    border: solid var(--info);
+    span {
+      color:var(--info);
     }
   }
 }
@@ -128,6 +200,18 @@
         color: black;
       }
     }
+    .berrydexEntry {
+      border: solid var(--primary);
+      span {
+        color:var(--secondary);
+      }
+    }
+}
+
+.pulse {
+  .berrydexEntry {
+    border: solid var(--secondary);
+  }
 }
 
 .simplex {
@@ -135,6 +219,12 @@
   #evo-item-list, #evo-pokemon-list {
     .item-selected, .pokemon-selected {
       background: #d9230f !important;
+    }
+  }
+  .berrydexEntry {
+    border: solid var(--dark);
+    span {
+      color:var(--danger);
     }
   }
 }
@@ -187,6 +277,12 @@
       color: black;
     }
   }
+
+  .berrydexEntry {
+    span {
+      color:var(--secondary);
+    }
+  }
 }
 
 .slate {
@@ -216,6 +312,12 @@
   .modal-header {
     color: whitesmoke
   }
+
+  .berrydexEntry {
+    span {
+      color:var(--primary);
+    }
+  }
 }
 
 .solar {
@@ -240,6 +342,13 @@
   .card.border-secondary, #pokemonList {
     color: #a0b6b8;
   }
+
+  .berrydexEntry {
+    border: solid var(--primary);
+    span {
+      color:var(--dark);
+    }
+  }
 }
 
 .spacelab {
@@ -249,10 +358,22 @@
       background: linear-gradient(#6d94bf,#446e9b 50%,#3e648d)
     }
   }
+  .berrydexEntry {
+    border: solid var(--primary);
+    span {
+      color:var(--secondary);
+    }
+  }
 }
 
 .superhero {
   .text-light {
     color: whitesmoke !important;
+  }
+  .berrydexEntry {
+    border: solid var(--warning);
+    span {
+      color:var(--secondary);
+    }
   }
 }
