@@ -374,25 +374,27 @@ class GameController {
                             player.town().content[0].protectedOnclick();
                         }
                         return e.preventDefault();
-                    } else if (isNumberKey) {
-                        // Check if a number higher than 0 and less than our towns content was pressed
-                        const filteredContent = player.town().content.filter(c => c.isVisible());
-                        const filteredNPCs = player.town().npcs?.filter(n => n.isVisible());
-                        if (numberKey < filteredContent.length) {
-                            filteredContent[numberKey].protectedOnclick();
-                        } else if (filteredNPCs && numberKey < filteredContent.length + filteredNPCs.length) {
-                            filteredNPCs[numberKey - filteredContent.length].openDialog();
-                        }
-                        return e.preventDefault();
-                    } else if (player.town() instanceof DungeonTown) {
-                        const cycle = Object.values(TownList).filter(t => t instanceof DungeonTown && t.region == player.region && t.isUnlocked());
-                        const idx = cycle.findIndex(d => d.name == player.town().name);
-                        switch (key) {
-                            case '=' :
-                            case '+' : MapHelper.moveToTown(cycle[(idx + 1) % cycle.length].name);
-                                return e.preventDefault();
-                            case '-' : MapHelper.moveToTown(cycle[(idx + cycle.length - 1) % cycle.length].name);
-                                return e.preventDefault();
+                    } else if (!GameController.keyHeld[Settings.getSetting('hotkey.pokeballSelection').value]) {
+                        if (isNumberKey) {
+                            // Check if a number higher than 0 and less than our towns content was pressed
+                            const filteredContent = player.town().content.filter(c => c.isVisible());
+                            const filteredNPCs = player.town().npcs?.filter(n => n.isVisible());
+                            if (numberKey < filteredContent.length) {
+                                filteredContent[numberKey].protectedOnclick();
+                            } else if (filteredNPCs && numberKey < filteredContent.length + filteredNPCs.length) {
+                                filteredNPCs[numberKey - filteredContent.length].openDialog();
+                            }
+                            return e.preventDefault();
+                        } else if (player.town() instanceof DungeonTown) {
+                            const cycle = Object.values(TownList).filter(t => t instanceof DungeonTown && t.region == player.region && t.isUnlocked());
+                            const idx = cycle.findIndex(d => d.name == player.town().name);
+                            switch (key) {
+                                case '=' :
+                                case '+' : MapHelper.moveToTown(cycle[(idx + 1) % cycle.length].name);
+                                    return e.preventDefault();
+                                case '-' : MapHelper.moveToTown(cycle[(idx + cycle.length - 1) % cycle.length].name);
+                                    return e.preventDefault();
+                            }
                         }
                     }
                 }
