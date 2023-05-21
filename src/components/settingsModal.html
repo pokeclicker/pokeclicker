@@ -236,6 +236,15 @@
                                 </tr>
                             </tbody>
                             <thead>
+                                <tr><th colspan="2">Safari</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.safari.ball')}"></tr>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.safari.bait')}"></tr>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.safari.rock')}"></tr>
+                                <tr data-bind="template: { name: 'KeyChoiceSettingTemplate', data: Settings.getSetting('hotkey.safari.run')}"></tr>
+                            </tbody>
+                            <thead>
                                 <tr><th colspan="2">Other</th></tr>
                             </thead>
                             <tbody>
@@ -365,7 +374,7 @@
 <script type="text/html" id="MultipleChoiceSettingTemplate">
     <td class="p-2" data-bind="text: `${$data.displayName}:`">setting name</td>
     <td class="p-0">
-        <select class="form-control" onchange="Settings.setSettingByName(this.name, this.value)" data-bind="foreach: $data.options, attr: {name}">
+        <select class="form-control" onchange="Settings.setSettingByName(this.name, this.value)" data-bind="foreach: $data.getValidOptions(), attr: {name}">
             <option data-bind="text: $data.text, value: $data.value, attr:{ selected: $parent.observableValue() == $data.value}"></option>
         </select>
     </td>

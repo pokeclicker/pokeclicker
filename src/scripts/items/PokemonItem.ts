@@ -24,7 +24,8 @@ class PokemonItem extends CaughtIndicatingItem {
             // Statistics
             if (i < amt - 1) { // -1 because gainPokemonById will add 1 to statistics
                 const gender = PokemonFactory.generateGenderById(pokemonID);
-                PokemonHelper.incrementPokemonStatistics(pokemonID, GameConstants.PokemonStatisticsType.Captured, shinyBool, gender);
+                const shadow = GameConstants.ShadowStatus.None;
+                PokemonHelper.incrementPokemonStatistics(pokemonID, GameConstants.PokemonStatisticsType.Captured, shinyBool, gender, shadow);
             }
         }
 
@@ -134,6 +135,6 @@ ItemList['Landorus (Therian)']  = new PokemonItem('Landorus (Therian)', undefine
 ItemList['Dugtrio (Punk)'] = new PokemonItem('Dugtrio (Punk)', 7500, Currency.contestToken);
 ItemList['Gengar (Punk)'] = new PokemonItem('Gengar (Punk)', 10000, Currency.contestToken);
 ItemList['Goldeen (Diva)'] = new PokemonItem('Goldeen (Diva)', 5000, Currency.contestToken);
-ItemList['Onix (Rocker)'] = new PokemonItem('Dugtrio (Punk)', 7500, Currency.contestToken);
+ItemList['Onix (Rocker)'] = new PokemonItem('Onix (Rocker)', 7500, Currency.contestToken);
 ItemList['Tangela (Pom-pom)'] = new PokemonItem('Tangela (Pom-pom)', 7500, Currency.contestToken);
 ItemList['Weepinbell (Fancy)'] = new PokemonItem('Weepinbell (Fancy)', 7500, Currency.contestToken);

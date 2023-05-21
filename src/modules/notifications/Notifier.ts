@@ -237,4 +237,71 @@ export default class Notifier {
             });
         });
     }
+
+    public static warning({
+        title,
+        message,
+        confirm = 'I understand',
+        type = NotificationOption.primary,
+        timeout = 0,
+        sound = null,
+    }: {
+        title: string;
+        message: string;
+        confirm?: string;
+        type?: NotificationOption;
+        timeout?: number;
+        sound?: Sound,
+    }): Promise<boolean> {
+        // If we have sounds enabled for this, play it now
+        if (sound) {
+            sound.play();
+        }
+
+        return new Promise((resolve) => {
+            // Get the notification ready to display
+            const modalID = Rand.string(7);
+            const html = `
+<div class="modal fade noselect" id="modal${modalID}" tabindex="-1" role="dialog" aria-badgeledby="prompt">
+    <div class="modal-dialog modal-dialog-scrollable modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header modal-header pb-0 pt-2 px-2 bg-${NotificationOption[type]}">
+                <h5 class="modal-title">${title}</h5>
+            </div>
+            <div class="modal-body py-2 px-2 text-left text-center">
+                <i class="text-warning">${message.replace(/\n/g, '<br/>')}</i>
+            </div>
+            <div class="modal-footer p-2">
+                <button class="btn col outline-dark btn-${NotificationOption[type]}" data-dismiss="modal" id="modalConfirm${modalID}">${confirm}</button>
+            </div>
+        </div>
+    </div>
+</div>`;
+            $('#toaster').before(html);
+
+            (document.getElementById(`modalConfirm${modalID}`) as HTMLInputElement).addEventListener('click', () => {
+                resolve(true);
+            });
+
+            $(`#modal${modalID}`).modal({
+                backdrop: 'static',
+                show: true,
+            });
+
+            // Once the modal is shown, hide it after specified timeout
+            $(`#modal${modalID}`).on('shown.bs.modal', () => {
+                if (timeout > 0) {
+                    setTimeout(() => {
+                        $(`#modal${modalID}`).modal('hide');
+                    }, timeout);
+                }
+            });
+
+            // Once hidden remove the element
+            $(`#modal${modalID}`).on('hidden.bs.modal', () => {
+                document.getElementById(`modal${modalID}`).remove();
+                resolve(false);
+            });
+        });
+    }
 }
