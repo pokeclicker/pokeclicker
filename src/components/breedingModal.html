@@ -411,7 +411,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                             buttonText: () => {
                                                                 return $data.categories().map(id => PokemonCategories.categories().find(c => c.id === id)?.name()).join('; ') || 'All Categories';
                                                             },
-                                                            buttonClass: 'btn-secondary btn-sm',
+                                                            buttonClass: 'custom-select-sm',
                                                             itemLabel: {
                                                                 class: 'text-white small',
                                                                 style: (item) => ({ 'background-color': item.color() })
