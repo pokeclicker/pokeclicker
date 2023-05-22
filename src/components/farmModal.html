@@ -195,6 +195,7 @@
                                     tooltip: { title: FarmController.getHint($data,true,true),
                                     trigger: 'hover',
                                     placement:'top' },">
+                                    <div class="berryGradient"></div>
                                     <img src="" data-bind="css: { 'pokemon-not-seen': !App.game.farming.unlockedBerries[$data]() }, attr:{ src: FarmController.getBerryImage($data)}">
                                     <span class="id" style="top: 0;" data-bind="text: ($data + 1 + '').padStart(2, 0)">number</span>
                                     <!-- ko if: !App.game.farming.unlockedBerries[$data]() -->

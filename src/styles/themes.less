@@ -9,7 +9,7 @@
   // for the list of berries in the berrydex
   .berrydexEntry {
     span {
-      color:var(--primary);
+      color:var(--dark);
     }
   }
 }
@@ -48,6 +48,20 @@
     filter: invert(1) brightness(100%);
   }
 }
+
+/* Themes with highlight gradient */
+.cerulean, .spacelab {
+  // shiny berry "button"
+  .berryGradient {
+    position: absolute;
+    z-index: 0;
+    left: 0;
+    padding-left: 100%;
+    padding-top: 60%;
+    background-color: rgba(255,255,255,50%);
+  }
+}
+
 
 /* Individual themes */
 .cerulean {
@@ -120,6 +134,10 @@
       color: lavender;
     }
   }
+
+  .berrydexEntry:hover {
+    border: solid lavender;
+  }
 }
 
 .darkly {
@@ -144,6 +162,10 @@
     /* Berrydex List */
     .berrydexEntry {
       border-radius: 3px;
+
+      span {
+        color: var(--primary);
+      }
     }
 }
 
@@ -163,7 +185,6 @@
       font-size: 14px;
       padding-bottom: 1px;
       padding-right: 4px;
-      color: var(--info);
     }
   }
 }
@@ -234,6 +255,7 @@
     .berrydexEntry {
       span {
         font-size: 14px;
+        color: var(--primary);
       }
     }
 }
@@ -254,10 +276,6 @@
   /* Berrydex List */
   .berrydexEntry {
     box-shadow: 1px 1px 2px 2px lightgray;
-
-    span {
-      color:var(--info);
-    }
   }
 }
 
@@ -281,7 +299,7 @@
 
       span {
         font-size: 13px;
-        color:mediumvioletred;
+        color: var(--secondary);
       }
     }
 }
@@ -290,6 +308,10 @@
   /* Berrydex List */
   .berrydexEntry {
     border: solid var(--secondary);
+
+    span {
+      color: var(--primary);
+    }
   }
 
   /* Berrydex List */
@@ -316,7 +338,6 @@
 
     span {
       font-size: 12px;
-      color:var(--secondary);
     }
   }
 }
@@ -335,7 +356,6 @@
   
     span {
       font-size: 13px;
-      color:var(--dark);
     }
   }
 }
@@ -386,13 +406,6 @@
 
     .list-group-item-action:hover {
       color: black;
-    }
-  }
-
-  /* Berrydex List */
-  .berrydexEntry {
-    span {
-      color:var(--secondary);
     }
   }
 }
@@ -496,7 +509,6 @@
 
     span {
       font-size: 13px;
-      color:var(--secondary);
     }
   }
 }
@@ -519,7 +531,7 @@
     border-radius: 5px;
   
     span {
-      color:var(--dark);
+      font-size: 13px;
     }
   }
 }
