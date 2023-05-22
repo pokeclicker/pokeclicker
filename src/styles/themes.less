@@ -30,7 +30,8 @@
   // prevent text from blending in with background
   .berrydexEntry {
     span {
-      color:var(--dark);
+      font-weight: normal;
+      color:whitesmoke;
     }
   }
 
@@ -66,6 +67,7 @@
     border-width: 3px;
 
     span {
+      font-size: 13px;
       color: var(--info);
     }
   }
@@ -115,7 +117,7 @@
     border-radius: 5px;
 
     span {
-      color: var(--light);
+      color: lavender;
     }
   }
 }
@@ -158,6 +160,9 @@
     border-radius: 15px;
   
     span {
+      font-size: 14px;
+      padding-bottom: 1px;
+      padding-right: 4px;
       color: var(--info);
     }
   }
@@ -171,27 +176,43 @@
     
   /* Berrydex List */
   .berrydexEntry {
-    border: solid var(--info);
-    border-radius: 5px;
-
-    span {
-      color: var(--info);
-    }
-  }
-  // because Lumen's buttons move when pushed
-  .berrydexEntry:hover, .berrydexEntry:focus-within {
-    box-shadow: 0 1px var(--primary);
-    bottom: 2px;
     border: solid var(--primary);
+    border-radius: 5px;
 
     span {
       color: var(--primary);
     }
   }
 
-  .berrydexEntry:active {
+  // because Lumen's buttons move when pushed
+  .berrydexEntry:hover {
+    box-shadow: 0 2px var(--info);
+    bottom: 2px;
+    border: solid var(--info);
+
+    span {
+      color: var(--info);
+    }
+  }
+
+  .berrydexEntry:focus-within {
+    box-shadow: 0 2px var(--info);
     bottom: 0;
     border: solid var(--light);
+
+    span {
+      color: var(--info);
+    }
+  }
+
+  .berrydexEntry:active {
+    bottom: -2px;
+    box-shadow: none;
+    border: solid var(--light);
+
+    img {
+      filter: brightness(0) invert(1);
+    }
 
     span {
       color: var(--light);
@@ -208,6 +229,13 @@
   .pageItemTitle {
     font-size: 30px !important;
   }
+
+    /* Berrydex List */
+    .berrydexEntry {
+      span {
+        font-size: 14px;
+      }
+    }
 }
 
 .materia {
@@ -252,7 +280,8 @@
       border-radius: 5px;
 
       span {
-        color:var(--secondary);
+        font-size: 13px;
+        color:mediumvioletred;
       }
     }
 }
@@ -286,6 +315,7 @@
     border-radius: 5px;
 
     span {
+      font-size: 12px;
       color:var(--secondary);
     }
   }
@@ -304,6 +334,7 @@
     border-radius: 4px;
   
     span {
+      font-size: 13px;
       color:var(--dark);
     }
   }
@@ -397,10 +428,6 @@
   /* Berrydex List */
   .berrydexEntry {
     border-radius: 3px;
-
-    span {
-      color:var(--primary);
-    }
   }
 }
 
@@ -433,7 +460,8 @@
     border-radius: 5px;
 
     span {
-      color:var(--dark);
+      font-weight: normal;
+      color: whitesmoke;
     }
   }
 
@@ -467,6 +495,7 @@
     border-width: 3px;
 
     span {
+      font-size: 13px;
       color:var(--secondary);
     }
   }
@@ -493,4 +522,13 @@
       color:var(--dark);
     }
   }
+}
+
+.yeti {
+    /* Berrydex List */
+    .berrydexEntry {
+      span {
+        font-size: 13px;
+      }
+    }
 }
