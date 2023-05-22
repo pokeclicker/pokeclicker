@@ -208,13 +208,20 @@ class HatcheryHelpers {
 
             // Check if egg slot empty
             if (egg.isNone()) {
-                // Get the currently selected region
-                const currentRegion = +Settings.getSetting('breedingRegionalAttackDebuffSetting').value;
-
                 // Check if there's a pokemon we can chuck into an egg
-                const pokemon = [...App.game.party.caughtPokemon]
-                    .sort(PartyController.compareBy(helper.sortOption(), helper.sortDirection(), currentRegion))
-                    .find(p => BreedingController.visible(p)());
+                const compare = PartyController.compareBy(helper.sortOption(), helper.sortDirection(),
+                    +Settings.getSetting('breedingRegionalAttackDebuffSetting').value);
+
+                const pokemon = App.game.party.caughtPokemon.reduce((best, pokemon) => {
+                    if (!pokemon.isHatchable()) {
+                        return best;
+                    }
+                    if (best === null) {
+                        return pokemon;
+                    }
+                    return compare(best, pokemon) <= 0 ? best : pokemon;
+                }, null);
+
                 if (pokemon) {
                     this.hatchery.gainPokemonEgg(pokemon, true);
                     // Charge the player when we put a pokemon in the hatchery
