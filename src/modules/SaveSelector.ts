@@ -92,7 +92,12 @@ export default class SaveSelector {
     }
 
     static atob(encodeString: string):string {
-        return decodeURI(atob(encodeString));
+        const decodeString = atob(encodeString);
+        try {
+            return decodeURI(decodeString);
+        } catch {
+            return decodeString;
+        }
     }
 
     static Download(key: string): void {
