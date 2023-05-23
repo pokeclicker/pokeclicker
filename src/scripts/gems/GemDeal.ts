@@ -1,3 +1,6 @@
+import { ShopOptions } from './types';
+import QuestLineStepCompletedRequirement from '../QuestLineStepCompletedRequirement';
+
 type GemCost = {
     gemType: PokemonType,
     amount: number,
@@ -11,9 +14,10 @@ class GemDeal {
         return this.item.itemType.isVisible();
     }
 
-    constructor(gemCosts: GemCost[], item: Item, itemAmount: number) {
+    constructor(gemCosts: GemCost[], item: Item, itemAmount: number, options?: ShopOptions) {
         this.gems = gemCosts;
-        this.item = {itemType: item, amount: itemAmount};
+        this.item = {itemType: item, amount: itemAmount, { maxAmount: 1, ...options }};
+        super(itemType: item, amount: itemAmount, { maxAmount: 1, ...options });
     }
 
     public static generateDeals() {
@@ -30,6 +34,7 @@ class GemDeal {
         GemDeal.list[GameConstants.Region.hoenn].push(...this.generateHoennFluteDeals());
         GemDeal.list[GameConstants.Region.unova].push(...this.generateUnovaFluteDeals());
         GemDeal.list[GameConstants.Region.kalos].push(...this.generateFurfrouDeal());
+        GemDeal.list[GameConstants.Region.alola].push(...this.generateAlolaSilvallyDeal());
         GemDeal.list[GameConstants.Region.alola].push(...this.generateMagikarpJumpDeal());
     }
 
@@ -159,6 +164,75 @@ class GemDeal {
             1
         ));
         return list;
+    }
+
+    private static generateAlolaSilvallyDeal() {
+        const list = [];
+
+        list.push(new GemDeal(
+            [
+                {gemType: PokemonType.Fighting, amount: 1000},
+            ],
+            ItemList.['Silvally (Fighting) 1'],
+            1,
+
+        ));
+
+        list.push(new GemDeal(
+            [
+                {gemType: PokemonType.Rock, amount: 1000},
+            ],
+            ItemList.['Silvally (Rock) 1'],
+            1
+        ));
+
+        list.push(new GemDeal(
+            [
+                {gemType: PokemonType.Dark, amount: 1000},
+            ],
+            ItemList.['Silvally (Dark) 1'],
+            1
+        ));
+
+        list.push(new GemDeal(
+            [
+                {gemType: PokemonType.Fairy, amount: 1000},
+            ],
+            ItemList.['Silvally (Fairy) 1'],
+            1
+        ));
+
+        list.push(new GemDeal(
+            [
+                {gemType: PokemonType.Fighting, amount: 75000},
+            ],
+            ItemList.['Silvally (Fighting) 2'],
+            1
+        ));
+
+        list.push(new GemDeal(
+            [
+                {gemType: PokemonType.Rock, amount: 150000},
+            ],
+            ItemList.['Silvally (Rock) 2'],
+            1
+        ));
+
+        list.push(new GemDeal(
+            [
+                {gemType: PokemonType.Dark, amount: 45000},
+            ],
+            ItemList.['Silvally (Dark) 2'],
+            1
+        ));
+
+        list.push(new GemDeal(
+            [
+                {gemType: PokemonType.Fairy, amount: 45000},
+            ],
+            ItemList.['Silvally (Fairy) 2'],
+            1
+        ));
     }
 
     public static getDeals(region: GameConstants.Region) {

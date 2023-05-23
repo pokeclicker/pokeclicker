@@ -2145,7 +2145,7 @@ class QuestLineHelper {
     public static createSilvallyTypesQuestLine() {
         const SilvallyTypesQuestLine = new QuestLine('Typing some Memories', 'Help Gladion restore his Silvally memories.', new MultiRequirement([new ObtainedPokemonRequirement('Silvally (Normal)'), new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)]) , GameConstants.BulletinBoards.Alola);
 
-        const talkToGladion1 = new TalkToNPCQuest(SilvallyGladion1, 'Talk to Gladion in the Pokémon League Alola.');
+        const talkToGladion1 = new TalkToNPCQuest(SilvallyGladion1, 'Talk to Gladion in the Aether Foundation.');
         SilvallyTypesQuestLine.addQuest(talkToGladion1);
 
         const createMultiTypeCaptureQuest = (types: Array<PokemonType>, description: string) => {
@@ -2155,55 +2155,42 @@ class QuestLineHelper {
             SilvallyTypesQuestLine.addQuest(quest);
         };
 
-        createMultiTypeCaptureQuest([PokemonType.Fighting, PokemonType.Rock, PokemonType.Dark, PokemonType.Fairy], 'Get some trainig before looking for Silvally\'s memories. Capture 100 Fighting, Rock, Dark and Fairy Types');
+        createMultiTypeCaptureQuest([PokemonType.Fighting, PokemonType.Rock, PokemonType.Dark, PokemonType.Fairy], 'Get some training before looking for Silvally\'s memories. Capture 100 Fighting, Rock, Dark and Fairy Types');
 
-        const talkToMelemeleLocals = new TalkToNPCQuest(SilvallyHala, 'Talk to the Melemele Island locals to find out more about Silvally\'s memories.', () => ItemList.Fighting_Memory_Silvally.gain(1));
+        const talkToMelemeleLocals = new TalkToNPCQuest(SilvallyHala, 'Talk to the Melemele Island locals to find out more about Silvally\'s memories. The island Kahuna may have heard about them.', () => ItemList.Fighting_Memory_Silvally.gain(1));
         SilvallyTypesQuestLine.addQuest(talkToMelemeleLocals);
 
-        const talkToAkalaLocals = new TalkToNPCQuest(SilvallyOlivia, 'Talk to the Akala Island locals to find out more about Silvally\'s memories.', () => ItemList.Rock_Memory_Silvally.gain(1));
+        const talkToAkalaLocals = new TalkToNPCQuest(SilvallyOlivia, 'Talk to the Akala Island locals to find out more about Silvally\'s memories. The island Kahuna may have heard about them', () => ItemList.Rock_Memory_Silvally.gain(1));
         SilvallyTypesQuestLine.addQuest(talkToAkalaLocals);
 
-        const talkToUlaulaLocals = new TalkToNPCQuest(SilvallyNanu, 'Talk to the Ula\'ula Island locals to find out more about Silvally\'s memories.', () => ItemList.Dark_Memory_Silvally.gain(1));
+        const talkToUlaulaLocals = new TalkToNPCQuest(SilvallyNanu, 'Talk to the Ula\'ula Island locals to find out more about Silvally\'s memories. The island Kahuna may have heard about them', () => ItemList.Dark_Memory_Silvally.gain(1));
         SilvallyTypesQuestLine.addQuest(talkToUlaulaLocals);
 
-        const talkToPoniLocals = new TalkToNPCQuest(SilvallyMina, 'Talk to the Poni Island locals to find out more about Silvally\'s memories.', () => ItemList.Fairy_Memory_Silvally.gain(1));
+        const talkToPoniLocals = new TalkToNPCQuest(SilvallyMina, 'Talk to the Poni Island locals to find out more about Silvally\'s memories. Captain Mina might\'ve seen it somewhere', () => [ItemList.Fairy_Memory_Silvally.gain(1)]);
         SilvallyTypesQuestLine.addQuest(talkToPoniLocals);
 
-        const SilvallyGladionReward1 = () => {
-            App.game.party.gainPokemonByName('Silvally (Fighting)');
-            App.game.party.gainPokemonByName('Silvally (Rock)');
-            App.game.party.gainPokemonByName('Silvally (Dark)');
-            App.game.party.gainPokemonByName('Silvally (Fairy)');
-            Notifier.notify({
-                title: SilvallyTypesQuestLine.name,
-                message: 'Gladion awarded you 4 Silvally\'s!',
-                type: NotificationConstants.NotificationOption.success,
-                timeout: 3e4,
-            });
-        };
-
-        const talkToGladion2 = new TalkToNPCQuest(SilvallyGladion2, 'Talk to Gladion in the Pokémon League Alola and tell him what you found out about Silvally\'s memories.', SilvallyGladionReward1);
+        const talkToGladion2 = new TalkToNPCQuest(SilvallyGladion2, 'Talk to Gladion in the Aether Foundation and tell him what you found out about Silvally\'s memories.');
         SilvallyTypesQuestLine.addQuest(talkToGladion2);
 
-        createMultiTypeCaptureQuest([PokemonType.Water, PokemonType.Grass, PokemonType.Fire, PokemonType.Electric, PokemonType.Ground, PokemonType.Ice], 'You probably need to train a bit before going looking for more Silvallys memories. Capture 100 Water, Grass, Fire, Electric, Ground and Ice types.');
+        createMultiTypeCaptureQuest([PokemonType.Water, PokemonType.Grass, PokemonType.Fire, PokemonType.Electric, PokemonType.Ground, PokemonType.Ice], 'You probably need to train a little before going looking for more Silvally memories. Capture 100 Water, Grass, Fire, Electric, Ground and Ice types.');
 
         const talkToLanaSilvally = new TalkToNPCQuest(LanaSilvally1, 'Talk to Captain Lana in Brooklet Hill to find out if she knows something about Silvally\'s memories.');
         SilvallyTypesQuestLine.addQuest(talkToLanaSilvally);
 
-        const catchSilvallyWater = new CaptureSpecificPokemonQuest('Silvally (Water)', 'Trade Captain Lana some Dungeon Tokens for a Silvally.', 1, false, 0, undefined);
-        SilvallyTypesQuestLine.addQuest(catchSilvallyWater);
+        const BuyWaterMemory = new CustomQuest(1, undefined, 'Buy the Water Memory from Captain Lana.', () => player.itemList.Water_Memory_Silvally());
+        SilvallyTypesQuestLine.addQuest(BuyWaterMemory);
 
         const talkToMallowSilvally = new TalkToNPCQuest(MallowSilvally1, 'Talk to Captain Mallow in Lush Jungle to find out if she knows about Silvally\'s memories');
         SilvallyTypesQuestLine.addQuest(talkToMallowSilvally);
 
-        const catchSilvallyGrass = new CaptureSpecificPokemonQuest('Silvally (Grass)', 'Trade Captain Mallow some Quest Points for a Silvally.', 1, false, 0, undefined);
-        SilvallyTypesQuestLine.addQuest(catchSilvallyGrass);
+        const BuyGrassMemory = new CustomQuest(1, undefined, 'Buy the Grass Memory from Captain Mallow.', () => player.itemList.Grass_Memory_Silvally());
+        SilvallyTypesQuestLine.addQuest(BuyGrassMemory);
 
         const talkToKiaweSilvally = new TalkToNPCQuest(KiaweSilvally1, 'Talk to Captain Kiawe in Wela Volcano Park to find out if he knows about Silvally\'s memories.');
         SilvallyTypesQuestLine.addQuest(talkToKiaweSilvally);
 
-        const catchSilvallyFire = new CaptureSpecificPokemonQuest('Silvally (Fire)', 'Trade Captain Kiawe some Battle Points for a Silvally.', 1, false, 0, undefined);
-        SilvallyTypesQuestLine.addQuest(catchSilvallyFire);
+        const BuyFireMemory = new CustomQuest(1, undefined, 'Buy the Fire Memory from Captain Kiawe.', () => player.itemList.Fire_Memory_Silvally());
+        SilvallyTypesQuestLine.addQuest(BuyFireMemory);
 
         const talkToSophoclesSilvally = new TalkToNPCQuest(SophoclesSilvally1, 'Talk to Captain Sophocles in Hokulani Observatory to find out if he knows about Silvally\'s memories.');
         SilvallyTypesQuestLine.addQuest(talkToSophoclesSilvally);
@@ -2223,7 +2210,7 @@ class QuestLineHelper {
         const catchSilvallyGround = new CaptureSpecificPokemonQuest('Silvally (Ground)', 'Trade Kahuna Hapu some Farm Points for a Silvally.', 1, false, 0, undefined);
         SilvallyTypesQuestLine.addQuest(catchSilvallyGround);
 
-        const talkToGladion3 = new TalkToNPCQuest(SilvallyGladion3, 'Go show Gladion those Silvallys in the Pokémon League Alola');
+        const talkToGladion3 = new TalkToNPCQuest(SilvallyGladion3, 'Go show Gladion those memories you\'ve bought in the Aether Foundation');
         SilvallyTypesQuestLine.addQuest(talkToGladion3);
 
         createMultiTypeCaptureQuest([PokemonType.Bug, PokemonType.Flying, PokemonType.Poison, PokemonType.Ghost, PokemonType.Psychic, PokemonType.Steel, PokemonType.Dragon], 'Get some training before looking for more Silvally\'s memories. Capture 100 Bug, Flying, Poison, Ghost, Psychic, Steel and Dragon types.');
@@ -2389,7 +2376,7 @@ class QuestLineHelper {
         );
         SilvallyTypesQuestLine.addQuest(DragonSilvallyBattle);
 
-        const talkToGladion4 = new TalkToNPCQuest(SilvallyGladion4, 'Go talk to Gladion and tell him you\'ve recovered all the memories!');
+        const talkToGladion4 = new TalkToNPCQuest(SilvallyGladion4, 'Go talk to Gladion in the Aether Foundation and tell him you\'ve recovered all the Silvally memories!');
         SilvallyTypesQuestLine.addQuest(talkToGladion4);
 
         App.game.quests.questLines().push(SilvallyTypesQuestLine);

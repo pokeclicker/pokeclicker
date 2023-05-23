@@ -6642,7 +6642,6 @@ TownList['Pokémon League Alola'] = new Town(
         requirements:[
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mount Lanakila')),
         ],
-        npcs: [SilvallyGladion1, SilvallyGladion2, SilvallyGladion3, SilvallyGladion4],
     }
 );
 TownList['A Tree Maybe'] = new Town(
@@ -6916,6 +6915,9 @@ TownList['Aether Foundation'] = new DungeonTown(
         TemporaryBattleList['Team Plasma Leader Ghetsis'],
         TemporaryBattleList['Team Rainbow Leader Giovanni'],
     ]
+    {
+        npcs: [SilvallyGladion1, SilvallyGladion2, SilvallyGladion3, SilvallyGladion4],
+    }
 );
 TownList['Exeggutor Island Hill'] = new DungeonTown(
     'Exeggutor Island Hill',
