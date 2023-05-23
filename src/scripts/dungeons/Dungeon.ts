@@ -1856,12 +1856,12 @@ dungeonList['Ruins of Alph'] = new Dungeon('Ruins of Alph',
             {loot: 'Greatball'},
             {loot: 'Pecha'},
             {loot: 'Sitrus'},
+            {loot: 'Leppa'},
         ],
         rare: [
             {loot: 'Blue Shard'},
             {loot: 'Green Shard'},
         ],
-        epic: [{loot: 'Leppa'}],
         legendary: [
             {loot: 'SmallRestore', weight: 2},
             {loot: 'Star Piece'},
