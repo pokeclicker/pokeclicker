@@ -10676,7 +10676,7 @@ dungeonList['Dusty Bowl'] = new Dungeon('Dusty Bowl',
             {loot: 'Grey Shard'},
         ],
         epic: [
-            {loot: 'Revive'},    
+            {loot: 'Revive'},
             {loot: 'Rare Bone'},
         ],
         legendary: [
