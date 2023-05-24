@@ -931,9 +931,9 @@ export enum PokeBlockColor {
     Purple,
     Indigo,
     Brown,
-    LiteBlue,
+    Light_Blue,
     Olive,
-    Flaxen,
+    Beige,
     Gray,
     White,
 }
@@ -2118,4 +2118,12 @@ export enum MegaStoneType {
     Swampertite,
     Tyranitarite,
     Venusaurite,
+}
+
+export enum GemShops {
+    HoennFluteMaster,
+    HoennStoneSalesman,
+    UnovaFluteMaster,
+    FurfrouGemTrader,
+    MagikarpJumpGemTrader,
 }
