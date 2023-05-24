@@ -96,6 +96,7 @@ const DungeonGainGymBadge = (gym: Gym, badge: BadgeEnums) => {
     dungeonRegionalDifficulty?: GameConstants.Region,
 }
 class Dungeon {
+    private mimicList: PokemonNameType[] = [];
 
     constructor(
         public name: string,
@@ -107,7 +108,17 @@ class Dungeon {
         public difficultyRoute: number, // Closest route in terms of difficulty, used for egg steps, dungeon tokens etc.
         public rewardFunction = () => {},
         public optionalParameters: optionalDungeonParameters = {}
-    ) { }
+    ) {
+        // Keep a list of mimics to use with getCaughtMimics()
+        Object.entries(this.lootTable).forEach(([_, itemList]) => {
+            itemList.forEach((loot) => {
+                const mimic = pokemonMap[loot.loot].name;
+                if (mimic != 'MissingNo.') {
+                    this.mimicList.push(mimic);
+                }
+            });
+        });
+    }
 
     public isUnlocked(): boolean {
         // Player requires the Dungeon Ticket to access the dungeons
@@ -218,16 +229,7 @@ class Dungeon {
     }
 
     public getCaughtMimics(): PokemonNameType[] {
-        const encounterInfo = [];
-        Object.entries(this.lootTable).forEach(([tier, itemList]) => {
-            itemList.forEach((loot, i) => {
-                const mimic = pokemonMap[loot.loot].name;
-                if (mimic != 'MissingNo.' && App.game.party.alreadyCaughtPokemonByName(mimic)) {
-                    encounterInfo.push(mimic);
-                }
-            });
-        });
-        return encounterInfo;
+        return this.mimicList.filter(p => App.game.party.alreadyCaughtPokemonByName(p));
     }
 
     public getRandomLootTier(clears: number, debuffed = false): LootTier {
@@ -410,6 +412,10 @@ class Dungeon {
 
         return encounterInfo;
     }
+
+    public isThereQuestAtLocation = ko.pureComputed(() => {
+        return App.game.quests.currentQuests().some(q => q instanceof DefeatDungeonQuest && q.dungeon == this.name);
+    });
 }
 
 /**
@@ -1850,12 +1856,12 @@ dungeonList['Ruins of Alph'] = new Dungeon('Ruins of Alph',
             {loot: 'Greatball'},
             {loot: 'Pecha'},
             {loot: 'Sitrus'},
+            {loot: 'Leppa'},
         ],
         rare: [
             {loot: 'Blue Shard'},
             {loot: 'Green Shard'},
         ],
-        epic: [{loot: 'Leppa'}],
         legendary: [
             {loot: 'SmallRestore', weight: 2},
             {loot: 'Star Piece'},
@@ -2766,7 +2772,7 @@ dungeonList['Meteor Falls'] = new Dungeon('Meteor Falls',
                 new GymPokemon('Flygon', 4073950, 57),
                 new GymPokemon('Haxorus', 4073950, 57),
                 new GymPokemon('Garchomp', 4073950, 57),
-            ], { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('The Delta Episode', 16)}, 'Draconid Elder'),
+            ], { weight: 1, hide: true, requirement: new QuestLineStepCompletedRequirement('The Delta Episode', 16)}),
     ],
     18000, 101);
 
@@ -10405,7 +10411,10 @@ dungeonList['Slumbering Weald Shrine'] = new Dungeon('Slumbering Weald Shrine',
             {loot: 'Fist Plate'},
             {loot: 'Iron Plate'},
         ],
-        legendary: [{loot: 'LargeRestore'}],
+        legendary: [
+            {loot: 'LargeRestore'},
+            {loot: 'Silver_Powder'},
+        ],
     },
     27009504,
     [
@@ -10643,6 +10652,7 @@ dungeonList['Glimwood Tangle'] = new Dungeon('Glimwood Tangle',
             {loot: 'Pink Shard'},
         ],
         epic: [{loot: 'LargeRestore'}],
+        legendary: [{loot: 'Pink_Bow'}],
     },
     23764848,
     [
@@ -10665,11 +10675,14 @@ dungeonList['Dusty Bowl'] = new Dungeon('Dusty Bowl',
             {loot: 'Ochre Shard'},
             {loot: 'Grey Shard'},
         ],
-        legendary: [
+        epic: [
             {loot: 'Revive'},
-            {loot: 'Max Revive'},
             {loot: 'Rare Bone'},
+        ],
+        legendary: [
+            {loot: 'Max Revive'},
             {loot: 'Star Piece'},
+            {loot: 'Soft_Sand'},
         ],
     },
     22923210,
@@ -10698,6 +10711,7 @@ dungeonList['Warm-Up Tunnel'] = new Dungeon('Warm-Up Tunnel',
         legendary: [
             {loot: 'Revive'},
             {loot: 'Max Revive'},
+            {loot: 'Black_Belt'},
         ],
     },
     28252100,
@@ -10800,6 +10814,7 @@ dungeonList['Tower of Darkness'] = new Dungeon('Tower of Darkness',
             {loot: 'Ochre Shard'},
         ],
         epic: [{loot: 'Dread Plate'}],
+        legendary: [{loot: 'Black_Glasses'}],
     },
     28886112,
     [
@@ -10841,6 +10856,7 @@ dungeonList['Tower of Waters'] = new Dungeon('Tower of Waters',
             {loot: 'Ochre Shard'},
         ],
         epic: [{loot: 'Splash Plate'}],
+        legendary: [{loot: 'Mystic_Water'}],
     },
     28886112,
     [
@@ -10965,6 +10981,7 @@ dungeonList['Iceberg Ruins'] = new Dungeon('Iceberg Ruins',
             {loot: 'Everstone'},
             {loot: 'Icicle Plate'},
         ],
+        legendary: [{loot: 'Never_Melt_Ice'}],
     },
     31507840,
     [
@@ -10985,6 +11002,10 @@ dungeonList['Split-Decision Ruins'] = new Dungeon('Split-Decision Ruins',
             {loot: 'Grey Shard'},
             {loot: 'Yellow Shard'},
             {loot: 'Purple Shard'},
+        ],
+        legendary: [
+            {loot: 'Dragon_Fang'},
+            {loot: 'Magnet'},
         ],
         mythic: [
             {loot: 'Draco Plate'},
@@ -11044,6 +11065,7 @@ dungeonList['Dyna Tree Hill'] = new Dungeon('Dyna Tree Hill',
             {loot: 'Tamato'},
             {loot: 'Hondew'},
         ],
+        legendary: [{loot: 'Silk_Scarf'}],
     },
     33216830,
     [new DungeonBossPokemon('Greedent', 166608415, 60)],

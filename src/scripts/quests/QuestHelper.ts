@@ -9,6 +9,7 @@
 /// <reference path="./questTypes/MineLayersQuest.ts" />
 /// <reference path="./questTypes/MineItemsQuest.ts" />
 /// <reference path="./questTypes/CatchShiniesQuest.ts" />
+/// <reference path="./questTypes/CatchShadowsQuest.ts" />
 /// <reference path="./questTypes/DefeatGymQuest.ts" />
 /// <reference path="./questTypes/DefeatDungeonQuest.ts" />
 /// <reference path="./questTypes/UsePokeballQuest.ts" />
@@ -29,6 +30,7 @@ class QuestHelper {
         MineLayersQuest,
         MineItemsQuest,
         CatchShiniesQuest,
+        CatchShadowsQuest,
         DefeatGymQuest,
         DefeatDungeonQuest,
         UsePokeballQuest,
