@@ -781,6 +781,7 @@ namespace GameConstants {
         HoennStoneSalesman,
         UnovaFluteMaster,
         FurfrouGemTrader,
+        SilvallyTrader,
         MagikarpJumpGemTrader,
     }
 }
