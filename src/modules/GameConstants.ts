@@ -1731,7 +1731,7 @@ export const TemporaryBattles = [
     'Gladion 3',
     'Guzma Bug Memory',
     'Kahili Flying Memory',
-    'Plumeria Poison Silvally',
+    'Plumeria Poison Memory',
     'Acerola Ghost Memory',
     'Faba Psychic Memory',
     'Molayne Steel Memory',
