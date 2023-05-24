@@ -152,7 +152,7 @@ class GemDeal {
             [
                 {gemType: PokemonType.Fighting, amount: 1000},
             ],
-            ItemList.['Silvally (Fighting) 1'],
+            ItemList['Silvally (Fighting) 1'],
             1,
 
         ));
@@ -161,7 +161,7 @@ class GemDeal {
             [
                 {gemType: PokemonType.Rock, amount: 1000},
             ],
-            ItemList.['Silvally (Rock) 1'],
+            ItemList['Silvally (Rock) 1'],
             1
         ));
 
@@ -169,7 +169,7 @@ class GemDeal {
             [
                 {gemType: PokemonType.Dark, amount: 1000},
             ],
-            ItemList.['Silvally (Dark) 1'],
+            ItemList['Silvally (Dark) 1'],
             1
         ));
 
@@ -177,7 +177,7 @@ class GemDeal {
             [
                 {gemType: PokemonType.Fairy, amount: 1000},
             ],
-            ItemList.['Silvally (Fairy) 1'],
+            ItemList['Silvally (Fairy) 1'],
             1
         ));
 
@@ -185,7 +185,7 @@ class GemDeal {
             [
                 {gemType: PokemonType.Fighting, amount: 75000},
             ],
-            ItemList.['Silvally (Fighting) 2'],
+            ItemList['Silvally (Fighting) 2'],
             1
         ));
 
@@ -193,7 +193,7 @@ class GemDeal {
             [
                 {gemType: PokemonType.Rock, amount: 150000},
             ],
-            ItemList.['Silvally (Rock) 2'],
+            ItemList['Silvally (Rock) 2'],
             1
         ));
 
@@ -201,7 +201,7 @@ class GemDeal {
             [
                 {gemType: PokemonType.Dark, amount: 45000},
             ],
-            ItemList.['Silvally (Dark) 2'],
+            ItemList['Silvally (Dark) 2'],
             1
         ));
 
@@ -209,7 +209,7 @@ class GemDeal {
             [
                 {gemType: PokemonType.Fairy, amount: 45000},
             ],
-            ItemList.['Silvally (Fairy) 2'],
+            ItemList['Silvally (Fairy) 2'],
             1
         ));
         return list;
