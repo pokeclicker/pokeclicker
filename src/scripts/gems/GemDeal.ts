@@ -212,6 +212,7 @@ class GemDeal {
             ItemList.['Silvally (Fairy) 2'],
             1
         ));
+        return list;
     }
 
     private static generateMagikarpJumpDeal() {
