@@ -1,6 +1,3 @@
-import { ShopOptions } from './types';
-import QuestLineStepCompletedRequirement from '../QuestLineStepCompletedRequirement';
-
 type GemCost = {
     gemType: PokemonType,
     amount: number,
@@ -16,7 +13,7 @@ class GemDeal {
 
     constructor(gemCosts: GemCost[], item: Item, itemAmount: number) {
         this.gems = gemCosts;
-        this.item = itemType: item, amount: itemAmount};
+        this.item = itemType: {item, amount: itemAmount};
     }
 
     public static generateDeals() {
