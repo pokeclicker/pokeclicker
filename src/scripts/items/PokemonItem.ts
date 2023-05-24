@@ -118,73 +118,73 @@ ItemList['Furfrou (La Reine)']    = new PokemonItem('Furfrou (La Reine)', undefi
 ItemList['Type: Null']           = new PokemonItem('Type: Null', 114000);
 ItemList.Poipole              = new PokemonItem('Poipole', 90000);
 ItemList['Silvally (Fighting) 1'] = new PokemonItem('Silvally (Fighting)', undefined, undefined, false, 'Silvally (Fighting)',
-{ visible: new MultiRequirement ([new QuestLineStepCompletedRequirement('Typing some Memories', 7), new ObtainedPokemonRequirement('Silvally')]) });
+    { visible: new MultiRequirement ([new QuestLineStepCompletedRequirement('Typing some Memories', 4), new ObtainedPokemonRequirement('Silvally (Normal)')]) });
 ItemList['Silvally (Fighting) 2'] = new PokemonItem('Silvally (Fighting)', undefined, undefined, false, 'Silvally (Fighting)',
-{ visible: new ObtainedPokemonRequirement('Silvally (Fighting)') });
+    { visible: new ObtainedPokemonRequirement('Silvally (Fighting)') });
 ItemList['Silvally (Rock) 1'] = new PokemonItem('Silvally (Rock)', undefined, undefined, false, 'Silvally (Rock)',
-{ visible: new MultiRequirement ([new QuestLineStepCompletedRequirement('Typing some Memories'), new ObtainedPokemonRequirement('Silvally')]) });
+    { visible: new MultiRequirement ([new QuestLineStepCompletedRequirement('Typing some Memories', 4), new ObtainedPokemonRequirement('Silvally (Normal)')]) });
 ItemList['Silvally (Rock) 2'] = new PokemonItem('Silvally (Rock)', undefined, undefined, false, 'Silvally (Rock)',
-{ visible: new ObtainedPokemonRequirement('Silvally (Rock)') });
+    { visible: new ObtainedPokemonRequirement('Silvally (Rock)') });
 ItemList['Silvally (Dark) 1'] = new PokemonItem('Silvally (Dark)', undefined, undefined, false, 'Silvally (Dark)',
-{ visible: new MultiRequirement ([new QuestLineStepCompletedRequirement('Typing some Memories'), new ObtainedPokemonRequirement('Silvally')]) });
+    { visible: new MultiRequirement ([new QuestLineStepCompletedRequirement('Typing some Memories', 4), new ObtainedPokemonRequirement('Silvally (Normal)')]) });
 ItemList['Silvally (Dark) 2'] = new PokemonItem('Silvally (Dark)', undefined, undefined, false, 'Silvally (Dark)',
-{ visible: new ObtainedPokemonRequirement('Silvally (Dark)') });
+    { visible: new ObtainedPokemonRequirement('Silvally (Dark)') });
 ItemList['Silvally (Fairy) 1'] = new PokemonItem('Silvally (Fairy)', undefined, undefined, false, 'Silvally (Fairy)',
-{ visible: new MultiRequirement ([new QuestLineStepCompletedRequirement('Typing some Memories'), new ObtainedPokemonRequirement('Silvally')]) });
+    { visible: new MultiRequirement ([new QuestLineStepCompletedRequirement('Typing some Memories', 4), new ObtainedPokemonRequirement('Silvally (Normal)')]) });
 ItemList['Silvally (Fairy) 2'] = new PokemonItem('Silvally (Fairy)', undefined, undefined, false, 'Silvally (Fairy)',
-{ visible: new ObtainedPokemonRequirement('Silvally (Fairy)') });
+    { visible: new ObtainedPokemonRequirement('Silvally (Fairy)') });
 ItemList['Silvally (Water) 1'] = new PokemonItem('Silvally (Water)', undefined, undefined, false, 'Silvally (Water)',
-{ visible: new MultiRequirement ([new QuestLineStepCompletedRequirement('Typing some Memories'), new ObtainedPokemonRequirement('Silvally')]) });
+    { visible: new MultiRequirement ([new QuestLineStepCompletedRequirement('Typing some Memories', 18), new ObtainedPokemonRequirement('Silvally (Normal)')]) });
 ItemList['Silvally (Water) 2'] = new PokemonItem('Silvally (Water)', undefined, undefined, false, 'Silvally (Water)',
-{ visible: new ObtainedPokemonRequirement('Silvally (Water)') });
+    { visible: new ObtainedPokemonRequirement('Silvally (Water)') });
 ItemList['Silvally (Grass) 1'] = new PokemonItem('Silvally (Grass)', undefined, undefined, false, 'Silvally (Grass)',
-{ visible: new MultiRequirement ([new QuestLineStepCompletedRequirement('Typing some Memories'), new ObtainedPokemonRequirement('Silvally')]) });
+    { visible: new MultiRequirement ([new QuestLineStepCompletedRequirement('Typing some Memories', 18), new ObtainedPokemonRequirement('Silvally (Normal)')]) });
 ItemList['Silvally (Grass) 2'] = new PokemonItem('Silvally (Grass)', undefined, undefined, false, 'Silvally (Grass)',
-{ visible: new ObtainedPokemonRequirement('Silvally (Grass)') });
+    { visible: new ObtainedPokemonRequirement('Silvally (Grass)') });
 ItemList['Silvally (Fire) 1'] = new PokemonItem('Silvally (Fire)', undefined, undefined, false, 'Silvally (Fire)',
-{ visible: new MultiRequirement ([new QuestLineStepCompletedRequirement('Typing some Memories'), new ObtainedPokemonRequirement('Silvally')]) });
+    { visible: new MultiRequirement ([new QuestLineStepCompletedRequirement('Typing some Memories', 18), new ObtainedPokemonRequirement('Silvally (Normal)')]) });
 ItemList['Silvally (Fire) 2'] = new PokemonItem('Silvally (Fire)', undefined, undefined, false, 'Silvally (Fire)',
-{ visible: new ObtainedPokemonRequirement('Silvally (Fire)') });
+    { visible: new ObtainedPokemonRequirement('Silvally (Fire)') });
 ItemList['Silvally (Electric) 1'] = new PokemonItem('Silvally (Electric)', undefined, undefined, false, 'Silvally (Electric)',
-{ visible: new MultiRequirement ([new QuestLineStepCompletedRequirement('Typing some Memories'), new ObtainedPokemonRequirement('Silvally')]) });
+    { visible: new MultiRequirement ([new QuestLineStepCompletedRequirement('Typing some Memories', 18), new ObtainedPokemonRequirement('Silvally (Normal)')]) });
 ItemList['Silvally (Electric) 2'] = new PokemonItem('Silvally (Electric)', undefined, undefined, false, 'Silvally (Electric)',
-{ visible: new ObtainedPokemonRequirement('Silvally (Electric)') });
+    { visible: new ObtainedPokemonRequirement('Silvally (Electric)') });
 ItemList['Silvally (Ice) 1'] = new PokemonItem('Silvally (Ice)', undefined, undefined, false, 'Silvally (Ice)',
-{ visible: new MultiRequirement ([new QuestLineCompletedRequirement('Typing some Memories'), new ObtainedPokemonRequirement('Silvally')]) });
+    { visible: new MultiRequirement ([new QuestLineStepCompletedRequirement('Typing some Memories', 18), new ObtainedPokemonRequirement('Silvally (Normal)')]) });
 ItemList['Silvally (Ice) 2'] = new PokemonItem('Silvally (Ice)', undefined, undefined, false, 'Silvally (Ice)',
-{ visible: new ObtainedPokemonRequirement('Silvally (Ice)') });
+    { visible: new ObtainedPokemonRequirement('Silvally (Ice)') });
 ItemList['Silvally (Ground) 1'] = new PokemonItem('Silvally (Ground)', undefined, undefined, false, 'Silvally (Ground)',
-{ visible: new MultiRequirement ([new QuestLineCompletedRequirement('Typing some Memories'), new ObtainedPokemonRequirement('Silvally')]) });
+    { visible: new MultiRequirement ([new QuestLineStepCompletedRequirement('Typing some Memories', 18), new ObtainedPokemonRequirement('Silvally (Normal)')]) });
 ItemList['Silvally (Ground) 2'] = new PokemonItem('Silvally (Ground)', undefined, undefined, false, 'Silvally (Ground)',
-{ visible: new ObtainedPokemonRequirement('Silvally (Ground)') });
+    { visible: new ObtainedPokemonRequirement('Silvally (Ground)') });
 ItemList['Silvally (Bug) 1'] = new PokemonItem('Silvally (Bug)', undefined, undefined, false, 'Silvally (Bug)',
-{ visible: new MultiRequirement ([new QuestLineCompletedRequirement('Typing some Memories'), new ObtainedPokemonRequirement('Silvally')]) });
+    { visible: new MultiRequirement ([new QuestLineStepCompletedRequirement('Typing some Memories', 18), new ObtainedPokemonRequirement('Silvally (Normal)')]) });
 ItemList['Silvally (Bug) 2'] = new PokemonItem('Silvally (Bug)', undefined, undefined, false, 'Silvally (Bug)',
-{ visible: new ObtainedPokemonRequirement('Silvally (Bug)') });
+    { visible: new ObtainedPokemonRequirement('Silvally (Bug)') });
 ItemList['Silvally (Flying) 1'] = new PokemonItem('Silvally (Flying)', undefined, undefined, false, 'Silvally (Bug)',
-{ visible: new MultiRequirement ([new QuestLineCompletedRequirement('Typing some Memories'), new ObtainedPokemonRequirement('Silvally')]) });
+    { visible: new MultiRequirement ([new QuestLineStepCompletedRequirement('Typing some Memories', 34), new ObtainedPokemonRequirement('Silvally (Normal)')]) });
 ItemList['Silvally (Flying) 2'] = new PokemonItem('Silvally (Flying)', undefined, undefined, false, 'Silvally (Flying)',
-{ visible: new ObtainedPokemonRequirement('Silvally (Flying)') });
+    { visible: new ObtainedPokemonRequirement('Silvally (Flying)') });
 ItemList['Silvally (Poison) 1'] = new PokemonItem('Silvally (Poison)', undefined, undefined, false, 'Silvally (Poison)',
-{ visible: new MultiRequirement ([new QuestLineCompletedRequirement('Typing some Memories'), new ObtainedPokemonRequirement('Silvally')]) });
+    { visible: new MultiRequirement ([new QuestLineStepCompletedRequirement('Typing some Memories', 34), new ObtainedPokemonRequirement('Silvally (Normal)')]) });
 ItemList['Silvally (Poison) 2'] = new PokemonItem('Silvally (Poison)', undefined, undefined, false, 'Silvally (Poison)',
-{ visible: new ObtainedPokemonRequirement('Silvally (Poison)') });
+    { visible: new ObtainedPokemonRequirement('Silvally (Poison)') });
 ItemList['Silvally (Ghost) 1'] = new PokemonItem('Silvally (Ghost)', undefined, undefined, false, 'Silvally (Ghost)',
-{ visible: new MultiRequirement ([new QuestLineCompletedRequirement('Typing some Memories'), new ObtainedPokemonRequirement('Silvally')]) });
+    { visible: new MultiRequirement ([new QuestLineStepCompletedRequirement('Typing some Memories', 34), new ObtainedPokemonRequirement('Silvally (Normal)')]) });
 ItemList['Silvally (Ghost) 2'] = new PokemonItem('Silvally (Ghost)', undefined, undefined, false, 'Silvally (Ghost)',
-{ visible: new ObtainedPokemonRequirement('Silvally (Ghost)') });
+    { visible: new ObtainedPokemonRequirement('Silvally (Ghost)') });
 ItemList['Silvally (Psychic) 1'] = new PokemonItem('Silvally (Psychic)', undefined, undefined, false, 'Silvally (Psychic)',
-{ visible: new MultiRequirement ([new QuestLineCompletedRequirement('Typing some Memories'), new ObtainedPokemonRequirement('Silvally')]) });
+    { visible: new MultiRequirement ([new QuestLineStepCompletedRequirement('Typing some Memories', 34), new ObtainedPokemonRequirement('Silvally (Normal)')]) });
 ItemList['Silvally (Psychic) 2'] = new PokemonItem('Silvally (Psychic)', undefined, undefined, false, 'Silvally (Psychic)',
-{ visible: new ObtainedPokemonRequirement('Silvally (Psychic)') });
+    { visible: new ObtainedPokemonRequirement('Silvally (Psychic)') });
 ItemList['Silvally (Steel) 1'] = new PokemonItem('Silvally (Steel)', undefined, undefined, false, 'Silvally (Steel)',
-{ visible: new MultiRequirement ([new QuestLineCompletedRequirement('Typing some Memories'), new ObtainedPokemonRequirement('Silvally')]) });
+    { visible: new MultiRequirement ([new QuestLineStepCompletedRequirement('Typing some Memories', 34), new ObtainedPokemonRequirement('Silvally (Normal)')]) });
 ItemList['Silvally (Steel) 2'] = new PokemonItem('Silvally (Steel)', undefined, undefined, false, 'Silvally (Steel)',
-{ visible: new ObtainedPokemonRequirement('Silvally (Steel)') });
+    { visible: new ObtainedPokemonRequirement('Silvally (Steel)') });
 ItemList['Silvally (Dragon) 1'] = new PokemonItem('Silvally (Dragon)', undefined, undefined, false, 'Silvally (Dragon)',
-{ visible: new MultiRequirement ([new QuestLineCompletedRequirement('Typing some Memories'), new ObtainedPokemonRequirement('Silvally')]) });
+    { visible: new MultiRequirement ([new QuestLineStepCompletedRequirement('Typing some Memories', 34), new ObtainedPokemonRequirement('Silvally (Normal)')]) });
 ItemList['Silvally (Dragon) 2'] = new PokemonItem('Silvally (Dragon)', undefined, undefined, false, 'Silvally (Dragon)',
-{ visible: new ObtainedPokemonRequirement('Silvally (Dragon)') });
+    { visible: new ObtainedPokemonRequirement('Silvally (Dragon)') });
 ItemList.Dracozolt              = new PokemonItem('Dracozolt', 100000);
 ItemList.Arctozolt              = new PokemonItem('Arctozolt', 100000);
 ItemList.Dracovish              = new PokemonItem('Dracovish', 100000);
