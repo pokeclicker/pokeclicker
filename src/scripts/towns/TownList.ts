@@ -6979,7 +6979,7 @@ TownList['Aether Foundation'] = new DungeonTown(
         TemporaryBattleList['Team Flare Leader Lysandre'],
         TemporaryBattleList['Team Plasma Leader Ghetsis'],
         TemporaryBattleList['Team Rainbow Leader Giovanni'],
-    ]
+    ],
     {
         npcs: [SilvallyGladion1, SilvallyGladion2, SilvallyGladion3, SilvallyGladion4],
     }
