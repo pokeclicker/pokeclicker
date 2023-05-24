@@ -6641,6 +6641,7 @@ TownList['Aether Paradise'] = new Town(
         TemporaryBattleList['Ultra Wormhole'],
         AetherParadiseShop,
         new ShardTraderShop(GameConstants.ShardTraderLocations['Aether Paradise']),
+        new GemMasterShop(GameConstants.GemShops.SilvallyTrader, 'Silvally Trader'),
         new MoveToDungeon(dungeonList['Aether Foundation']),
         TemporaryBattleList['Faba Psychic Silvally'],
     ],
