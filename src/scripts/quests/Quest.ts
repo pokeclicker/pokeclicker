@@ -18,6 +18,8 @@ abstract class Quest {
     inQuestLine: boolean;
     _onLoad?: () => void;
     onLoadCalled: boolean;
+    internalProgress: number;
+    prevFocus: number;
 
     constructor(amount: number, pointsReward: number) {
         this.amount = amount;
@@ -26,6 +28,8 @@ abstract class Quest {
         this.claimed = ko.observable(false);
         this.notified = false;
         this.onLoadCalled = false;
+        this.internalProgress = 0;
+        this.prevFocus = 0;
     }
 
     public static canComplete() {
@@ -120,7 +124,10 @@ abstract class Quest {
     protected createProgressObservables() {
         this.progress = ko.pureComputed(() => {
             if (this.initial() !== null) {
-                return Math.min(1, ( this.focus() - this.initial()) / this.amount);
+                const prevFocus = this.prevFocus || this.initial();
+                if (this.focus() > prevFocus) { this.internalProgress += (this.focus() - prevFocus); }
+                this.prevFocus = this.focus();
+                return Math.min(1, this.internalProgress / this.amount);
             } else {
                 return 0;
             }
@@ -128,7 +135,9 @@ abstract class Quest {
 
         this.progressText = ko.pureComputed(() => {
             if (this.initial() !== null) {
-                return `${Math.min((this.focus() - this.initial()), this.amount).toLocaleString('en-US')} / ${this.amount.toLocaleString('en-US')}`;
+                const prevFocus = this.prevFocus || this.initial();
+                if (this.focus() > prevFocus) { this.internalProgress += (this.focus() - prevFocus); }
+                return `${Math.min(this.internalProgress, this.amount).toLocaleString('en-US')} / ${this.amount.toLocaleString('en-US')}`;
             } else {
                 return `0 / ${this.amount.toLocaleString('en-US')}`;
             }
