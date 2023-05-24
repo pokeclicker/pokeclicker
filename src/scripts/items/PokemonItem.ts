@@ -1,9 +1,3 @@
-import MultiRequirement from '../requirements/MultiRequirement';
-import QuestLineStepCompletedRequirement from '../QuestLineStepCompletedRequirement'
-import QuestLineCompletedRequirement from '../QuestLineCompletedRequirement'
-import ObtainedPokemonRequirement from '../ObtainedPokemonRequirement'
-import { ShopOptions } from './types';
-
 class PokemonItem extends CaughtIndicatingItem {
 
     type: PokemonNameType;
