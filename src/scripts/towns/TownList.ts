@@ -5942,56 +5942,56 @@ const ATreeMaybeShop = new Shop([
 //Silvally Typings Shops
 const BrookletHillShop = new Shop(
     [
-        ItemList['Silvally (Water)'],
+        ItemList.Water_Memory_Silvally,
     ],
     'Lana\'s Trade',
     [
-        new QuestLineStepCompletedRequirement('Typing some Memories', 8, GameConstants.AchievementOption.more),
+        new QuestLineStepCompletedRequirement('Typing some Memories', 5, GameConstants.AchievementOption.more),
     ]
 );
 const LushJungleShop = new Shop(
     [
-        ItemList['Silvally (Grass)'],
+        ItemList.Grass_Memory_Silvally,
     ],
     'Mallow\'s Trade',
     [
-        new QuestLineStepCompletedRequirement('Typing some Memories', 10, GameConstants.AchievementOption.more),
+        new QuestLineStepCompletedRequirement('Typing some Memories', 7, GameConstants.AchievementOption.more),
     ]
 );
 const WelaVolcanoParkShop = new Shop(
     [
-        ItemList['Silvally (Fire)'],
+        ItemList.Fire_Memory_Silvally,
     ],
     'Kiawe\'s Trade',
     [
-        new QuestLineStepCompletedRequirement('Typing some Memories', 12, GameConstants.AchievementOption.more),
+        new QuestLineStepCompletedRequirement('Typing some Memories', 9, GameConstants.AchievementOption.more),
     ]
 );
 const HokulaniObservatoryShop = new Shop(
     [
-        ItemList['Silvally (Electric)'],
+        ItemList.Electric_Memory_Silvally,
     ],
     'Sophocles\'s Trade',
     [
-        new QuestLineStepCompletedRequirement('Typing some Memories', 14, GameConstants.AchievementOption.more),
-    ]
-);
-const ExeggutorIslandHillShop = new Shop(
-    [
-        ItemList['Silvally (Ground)'],
-    ],
-    'Hapu\'s Trade',
-    [
-        new QuestLineStepCompletedRequirement('Typing some Memories', 18, GameConstants.AchievementOption.more),
+        new QuestLineStepCompletedRequirement('Typing some Memories', 11, GameConstants.AchievementOption.more),
     ]
 );
 const MountLanakilaShop = new Shop(
     [
-        ItemList['Silvally (Ice)'],
+        ItemList.Ice_Memory_Silvally,
     ],
     'Veteran Aristo\'s Trade',
     [
-        new QuestLineStepCompletedRequirement('Typing some Memories', 16, GameConstants.AchievementOption.more),
+        new QuestLineStepCompletedRequirement('Typing some Memories', 13, GameConstants.AchievementOption.more),
+    ]
+);
+const ExeggutorIslandHillShop = new Shop(
+    [
+        ItemList.Ground_Memory_Silvally,
+    ],
+    'Hapu\'s Trade',
+    [
+        new QuestLineStepCompletedRequirement('Typing some Memories', 15, GameConstants.AchievementOption.more),
     ]
 );
 
@@ -6200,7 +6200,7 @@ const SilvallyGladion3 = new NPC('Gladion', [
     image: 'assets/images/npcs/Gladion.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 19, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 34, GameConstants.AchievementOption.less)]),
 });
-const GuzmaSilvally = new NPC('Team Skull Boss Guzma', [
+const GuzmaSilvally = new NPC('Guzma', [
     'Huh? What the hell are you doing in here? A what? Silvally? I think I have what you\'re looking for. Yeah, I have it, if you want to see it. Anyway, how the hell did you get in here? Tsk. Those grunts can\'t do anything right. Anyway, you saw what you wanted so get out of here!',
     'What? you aren\'t leaving because you need this stupid thing? well, I\'m not giving it to you without a battle, at least. Here we go, \'m not gonna lose this time.',
 ], {
@@ -6553,10 +6553,10 @@ TownList['Royal Avenue'] = new Town(
     'Royal Avenue',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.AkalaIsland,
-    [TemporaryBattleList['Battle Royal'], DepartmentStoreShop],
+    [TemporaryBattleList['Battle Royal'], DepartmentStoreShop, TemporaryBattleList['Molayne Steel Silvally']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 6)],
-        npcs: [RoyalAvenueSpectator],
+        npcs: [RoyalAvenueSpectator, MolayneSilvally],
     }
 );
 TownList['Konikoni City'] = new Town(
@@ -6648,10 +6648,10 @@ TownList['A Tree Maybe'] = new Town(
     'A Tree Maybe',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.PoniIsland,
-    [ATreeMaybeShop],
+    [ATreeMaybeShop, TemporaryBattleList['Ryuki Dragon Silvally']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 30)],
-        npcs: [BattleTreeRed, BattleTreeBlue],
+        npcs: [BattleTreeRed, BattleTreeBlue, RyukiSilvally],
     }
 );
 
@@ -6876,8 +6876,8 @@ TownList['Hokulani Observatory'] = new DungeonTown(
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.UlaulaIsland,
     [new RouteKillRequirement(10, GameConstants.Region.alola, 22)],
-    [HokulaniObservatoryShop, TemporaryBattleList['Captain Sophocles'], TemporaryBattleList['Molayne Steel Silvally']],
-    {npcs: [SophoclesSilvally1, SophoclesSilvally2, MolayneSilvally]}
+    [HokulaniObservatoryShop, TemporaryBattleList['Captain Sophocles']],
+    {npcs: [SophoclesSilvally1, SophoclesSilvally2]}
 );
 TownList['Thrifty Megamart'] = new DungeonTown(
     'Thrifty Megamart',
@@ -6898,7 +6898,7 @@ TownList['Po Town'] = new DungeonTown(
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.UlaulaIsland,
     [new RouteKillRequirement(10, GameConstants.Region.alola, 17)],
-    [TemporaryBattleList['Guzma Bug Silvally']],
+    [TemporaryBattleList['Guzma Bug Memory']],
     {npcs: [GuzmaSilvally]}
 );
 TownList['Aether Foundation'] = new DungeonTown(
@@ -6932,8 +6932,8 @@ TownList['Vast Poni Canyon'] = new DungeonTown(
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.PoniIsland,
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Exeggutor Island Hill'))],
-    [TemporaryBattleList['Plumeria Poison Silvally'], TemporaryBattleList['Ryuki Dragon Silvally']],
-    {npcs: [PlumeriaSilvally, RyukiSilvally]}
+    [TemporaryBattleList['Plumeria Poison Silvally']],
+    {npcs: [PlumeriaSilvally]}
 );
 TownList['Mina\'s Houseboat'] = new DungeonTown(
     'Mina\'s Houseboat',

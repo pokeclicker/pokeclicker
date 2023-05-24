@@ -14,10 +14,9 @@ class GemDeal {
         return this.item.itemType.isVisible();
     }
 
-    constructor(gemCosts: GemCost[], item: Item, itemAmount: number, options?: ShopOptions) {
+    constructor(gemCosts: GemCost[], item: Item, itemAmount: number) {
         this.gems = gemCosts;
-        this.item = {itemType: item, amount: itemAmount, { maxAmount: 1, ...options }};
-        super(itemType: item, amount: itemAmount, { maxAmount: 1, ...options });
+        this.item = itemType: item, amount: itemAmount};
     }
 
     public static generateDeals() {

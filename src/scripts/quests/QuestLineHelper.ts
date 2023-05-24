@@ -2157,17 +2157,17 @@ class QuestLineHelper {
 
         createMultiTypeCaptureQuest([PokemonType.Fighting, PokemonType.Rock, PokemonType.Dark, PokemonType.Fairy], 'Get some training before looking for Silvally\'s memories. Capture 100 Fighting, Rock, Dark and Fairy Types');
 
-        const talkToMelemeleLocals = new TalkToNPCQuest(SilvallyHala, 'Talk to the Melemele Island locals to find out more about Silvally\'s memories. The island Kahuna may have heard about them.', () => ItemList.Fighting_Memory_Silvally.gain(1));
-        SilvallyTypesQuestLine.addQuest(talkToMelemeleLocals);
-
-        const talkToAkalaLocals = new TalkToNPCQuest(SilvallyOlivia, 'Talk to the Akala Island locals to find out more about Silvally\'s memories. The island Kahuna may have heard about them', () => ItemList.Rock_Memory_Silvally.gain(1));
-        SilvallyTypesQuestLine.addQuest(talkToAkalaLocals);
-
-        const talkToUlaulaLocals = new TalkToNPCQuest(SilvallyNanu, 'Talk to the Ula\'ula Island locals to find out more about Silvally\'s memories. The island Kahuna may have heard about them', () => ItemList.Dark_Memory_Silvally.gain(1));
-        SilvallyTypesQuestLine.addQuest(talkToUlaulaLocals);
-
-        const talkToPoniLocals = new TalkToNPCQuest(SilvallyMina, 'Talk to the Poni Island locals to find out more about Silvally\'s memories. Captain Mina might\'ve seen it somewhere', () => [ItemList.Fairy_Memory_Silvally.gain(1)]);
-        SilvallyTypesQuestLine.addQuest(talkToPoniLocals);
+        const talkToMelemeleLocals = new TalkToNPCQuest(SilvallyHala, 'Talk to important people around Melemele Island.', () => ItemList.Fighting_Memory_Silvally.gain(1));
+        const talkToAkalaLocals = new TalkToNPCQuest(SilvallyOlivia, 'Talk to important people around Akala Island.', () => ItemList.Rock_Memory_Silvally.gain(1));
+        const talkToUlaulaLocals = new TalkToNPCQuest(SilvallyNanu, 'Talk to important people around Ula\'ula Island.', () => ItemList.Dark_Memory_Silvally.gain(1));
+        const talkToPoniLocals = new TalkToNPCQuest(SilvallyMina, 'Talk to important people around Poni Island.', () => ItemList.Fairy_Memory_Silvally.gain(1));
+        SilvallyTypesQuestLine.addQuest(new MultipleQuestsQuest(
+            [
+                talkToMelemeleLocals,
+                talkToAkalaLocals,
+                talkToUlaulaLocals,
+                talkToPoniLocals,
+            ], 'Start your search for Silvally\'s memories by asking important people around Alola.'));
 
         const talkToGladion2 = new TalkToNPCQuest(SilvallyGladion2, 'Talk to Gladion in the Aether Foundation and tell him what you found out about Silvally\'s memories.');
         SilvallyTypesQuestLine.addQuest(talkToGladion2);
@@ -2195,46 +2195,37 @@ class QuestLineHelper {
         const talkToSophoclesSilvally = new TalkToNPCQuest(SophoclesSilvally1, 'Talk to Captain Sophocles in Hokulani Observatory to find out if he knows about Silvally\'s memories.');
         SilvallyTypesQuestLine.addQuest(talkToSophoclesSilvally);
 
-        const catchSilvallyElectric = new CaptureSpecificPokemonQuest('Silvally (Electric)', 'Trade Captain Sophocles some Pokédollars for a Silvally.', 1, false, 0, undefined);
-        SilvallyTypesQuestLine.addQuest(catchSilvallyElectric);
+        const BuyElectricMemory = new CustomQuest(1, undefined, 'Buy the Electric Memory from Captain Sophocles.', () => player.itemList.Electric_Memory_Silvally());
+        SilvallyTypesQuestLine.addQuest(BuyElectricMemory);
 
         const talkToVeteranSilvally = new TalkToNPCQuest(VeteranSilvally1, 'Talk to Veteran Aristo in Mount Lanakila to find out if he knows about Silvally\'s memories.');
         SilvallyTypesQuestLine.addQuest(talkToVeteranSilvally);
 
-        const catchSilvallyIce = new CaptureSpecificPokemonQuest('Silvally (Ice)', 'Trade Veteran Aristo some Diamonds for a Silvally.', 1, false, 0, undefined);
-        SilvallyTypesQuestLine.addQuest(catchSilvallyIce);
+        const BuyIceMemory = new CustomQuest(1, undefined, 'Buy the Ice Memory from Veteran Aristo.', () => player.itemList.Ice_Memory_Silvally());
+        SilvallyTypesQuestLine.addQuest(BuyIceMemory);
 
         const talkToHapuSilvally = new TalkToNPCQuest(HapuSilvally1, 'Talk to Kahuna Hapu in Exeggutor Island to find out if she knows about Silvally\'s memories.');
         SilvallyTypesQuestLine.addQuest(talkToHapuSilvally);
 
-        const catchSilvallyGround = new CaptureSpecificPokemonQuest('Silvally (Ground)', 'Trade Kahuna Hapu some Farm Points for a Silvally.', 1, false, 0, undefined);
-        SilvallyTypesQuestLine.addQuest(catchSilvallyGround);
+        const BuyGroundMemory = new CustomQuest(1, undefined, 'Buy the Ground Memory from Kahuna Hapu.', () => player.itemList.Ground_Memory_Silvally());
+        SilvallyTypesQuestLine.addQuest(BuyGroundMemory);
 
         const talkToGladion3 = new TalkToNPCQuest(SilvallyGladion3, 'Go show Gladion those memories you\'ve bought in the Aether Foundation');
         SilvallyTypesQuestLine.addQuest(talkToGladion3);
 
         createMultiTypeCaptureQuest([PokemonType.Bug, PokemonType.Flying, PokemonType.Poison, PokemonType.Ghost, PokemonType.Psychic, PokemonType.Steel, PokemonType.Dragon], 'Get some training before looking for more Silvally\'s memories. Capture 100 Bug, Flying, Poison, Ghost, Psychic, Steel and Dragon types.');
 
-        const talkToBugSilvally = new TalkToNPCQuest(GuzmaSilvally, 'Go ask Team Skull Boss Guzma in Po Town to find out if he has seen any Silvallys near Po Town');
+        const talkToBugSilvally = new TalkToNPCQuest(GuzmaSilvally, 'Go ask Guzma in Po Town to find out if he has seen any Silvallys near Po Town');
         SilvallyTypesQuestLine.addQuest(talkToBugSilvally);
-
-        const BugSilvallyReward = () => {
-            App.game.party.gainPokemonByName('Silvally (Bug)');
-            Notifier.notify({
-                title: SilvallyTypesQuestLine.name,
-                message: 'Team Skull Boss Guzma gave you a Silvally (Bug)!',
-                type: NotificationConstants.NotificationOption.success,
-                timeout: 3e4,
-                sound: NotificationConstants.NotificationSound.General.new_catch,
-            });
-        };
 
         const BugSilvallyBattle = new CustomQuest(
             1,
             BugSilvallyReward,
             'Defeat Team Skull Boss Guzma to recover the Silvally!',
             () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Guzma Bug Silvally')](),
-            0
+            0,
+            () => player.itemList.Bug_Memory_Silvally()
+
         );
         SilvallyTypesQuestLine.addQuest(BugSilvallyBattle);
 
