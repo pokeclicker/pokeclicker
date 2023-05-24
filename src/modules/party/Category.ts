@@ -75,6 +75,15 @@ export default class PokemonCategories implements Saveable {
                 p.category = 0;
             }
         });
+
+        // Remove category from hatchery helper filters if selected
+        App.game.breeding.hatcheryHelpers.available().forEach((helper) => {
+            const idx = helper.categories().indexOf(cat.id);
+            if (idx > -1) {
+                helper.categories().splice(idx, 1);
+            }
+        });
+
         // Remove subscriber
         cat.subscriber?.dispose();
         // Remove category
@@ -84,7 +93,7 @@ export default class PokemonCategories implements Saveable {
             PokedexFilters.category.value(-1);
             Settings.setSettingByName('pokedexCategoryFilter', PokedexFilters.category.value());
         }
-        
+
         if (BreedingFilters.category.value() === cat.id) {
             BreedingFilters.category.value(-1);
             Settings.setSettingByName('breedingCategoryFilter', BreedingFilters.category.value());
