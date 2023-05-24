@@ -90,7 +90,6 @@ ko.bindingHandlers.playerSpriteMove = {
                         } else {
                             targetElement.setAttribute('transform', '');
                         }
-                        //console.log('Element is rotated? :', rotate, ' : ', x, ':', y);
                     }
                 }
             });
