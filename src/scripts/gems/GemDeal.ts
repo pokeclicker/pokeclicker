@@ -6,7 +6,7 @@ type GemCost = {
 class GemDeal {
     public gems: GemCost[];
     public item: { itemType: Item, amount: number};
-    public static list: Record<GameConstants.Region, KnockoutObservableArray<GemDeal>> = {};
+    public static list: Record<GameConstants.GemShops, KnockoutObservableArray<GemDeal>> = {};
     public isVisible(): boolean {
         return this.item.itemType.isVisible();
     }
@@ -17,25 +17,15 @@ class GemDeal {
     }
 
     public static generateDeals() {
-        const gemMasterRegions = [GameConstants.Region.hoenn, GameConstants.Region.unova, GameConstants.Region.kalos, GameConstants.Region.alola];
-
-        for (const region of gemMasterRegions) {
-            if (!GemDeal.list[region]) {
-                GemDeal.list[region] = ko.observableArray();
-            } else {
-                GemDeal.list[region].removeAll();
-            }
-        }
-
-        GemDeal.list[GameConstants.Region.hoenn].push(...this.generateHoennFluteDeals());
-        GemDeal.list[GameConstants.Region.unova].push(...this.generateUnovaFluteDeals());
-        GemDeal.list[GameConstants.Region.kalos].push(...this.generateFurfrouDeal());
-        GemDeal.list[GameConstants.Region.alola].push(...this.generateMagikarpJumpDeal());
+        GemDeal.list[GameConstants.GemShops.HoennFluteMaster] = ko.observableArray(this.generateHoennFluteDeals());
+        GemDeal.list[GameConstants.GemShops.HoennStoneSalesman] = ko.observableArray(this.generateHoennStoneDeals());
+        GemDeal.list[GameConstants.GemShops.UnovaFluteMaster] = ko.observableArray(this.generateUnovaFluteDeals());
+        GemDeal.list[GameConstants.GemShops.FurfrouGemTrader] = ko.observableArray(this.generateFurfrouDeal());
+        GemDeal.list[GameConstants.GemShops.MagikarpJumpGemTrader] = ko.observableArray(this.generateMagikarpJumpDeal());
     }
 
     private static generateHoennFluteDeals() {
         const list = [];
-
         list.push(new GemDeal(
             [
                 {gemType: PokemonType.Grass, amount: 5000},
@@ -63,6 +53,10 @@ class GemDeal {
             ItemList.Black_Flute,
             1
         ));
+        return list;
+    }
+    private static generateHoennStoneDeals() {
+        const list = [];
         list.push(new GemDeal(
             [{gemType: PokemonType.Grass, amount: 250000}],
             ItemList.Sceptilite,
@@ -161,43 +155,47 @@ class GemDeal {
         return list;
     }
 
-    public static getDeals(region: GameConstants.Region) {
-        return GemDeal.list[region];
+    public static getDeals(shop: Shop) {
+        if (shop instanceof GemMasterShop) {
+            return GemDeal.list[shop.shop]();
+        }
+        return [];
     }
 
-    public static canUse(region: GameConstants.Region, i: number): boolean {
-        const deal = GemDeal.list[region].peek()[i];
-        if (ItemList[deal.item.itemType.name].isSoldOut()) {
-            return false;
-        } else {
-            return deal.gems.every((value) => App.game.gems.gemWallet[value.gemType]() >= value.amount);
+    public static canUse(shop: Shop, i: number): boolean {
+        if (shop instanceof GemMasterShop) {
+            const deal = GemDeal.list[shop.shop].peek()[i];
+            if (ItemList[deal.item.itemType.name].isSoldOut()) {
+                return false;
+            } else {
+                return deal.gems.every((value) => App.game.gems.gemWallet[value.gemType]() >= value.amount);
+            }
         }
+        return false;
     }
 
-    public static use(region: GameConstants.Region, i: number, tradeTimes = 1) {
-        const deal = GemDeal.list[region].peek()[i];
-        if (!App.game.badgeCase.hasBadge(BadgeEnums.Heat)) {
-            Notifier.notify({
-                message: 'You are unable to use Flutes yet.\n<i>Visit the Gym in Lavaridge Town.</i>',
-                type: NotificationConstants.NotificationOption.danger,
-            });
-            return false;
+    public static use(shop: Shop, i: number, tradeTimes = 1) {
+        if (shop instanceof GemMasterShop) {
+            const deal = GemDeal.list[shop.shop].peek()[i];
+            if (!App.game.badgeCase.hasBadge(BadgeEnums.Heat)) {
+                Notifier.notify({
+                    message: 'You are unable to use Flutes yet.\n<i>Visit the Gym in Lavaridge Town.</i>',
+                    type: NotificationConstants.NotificationOption.danger,
+                });
+                return false;
+            }
+            if (GemDeal.canUse(shop, i)) {
+                const trades = deal.gems.map(gem => {
+                    const amt = App.game.gems.gemWallet[gem.gemType]();
+                    const maxTrades = Math.floor(amt / gem.amount);
+                    return maxTrades;
+                });
+                const maxTrades = trades.reduce((a,b) => Math.min(a,b), tradeTimes);
+                deal.gems.forEach((value) =>
+                    GameHelper.incrementObservable(App.game.gems.gemWallet[value.gemType], -value.amount * maxTrades));
+                deal.item.itemType.gain(deal.item.amount * maxTrades);
+            }
         }
-        if (GemDeal.canUse(region, i)) {
-            const trades = deal.gems.map(gem => {
-                const amt = App.game.gems.gemWallet[gem.gemType]();
-                const maxTrades = Math.floor(amt / gem.amount);
-                return maxTrades;
-            });
-            const maxTrades = trades.reduce((a,b) => Math.min(a,b), tradeTimes);
-            deal.gems.forEach((value) =>
-                GameHelper.incrementObservable(App.game.gems.gemWallet[value.gemType], -value.amount * maxTrades));
-            deal.item.itemType.gain(deal.item.amount * maxTrades);
-        }
-    }
-
-    public static isFluteDeal(region: GameConstants.Region, i: number): boolean {
-        const deal = GemDeal.list[region].peek()[i];
-        return deal.item.itemType instanceof FluteItem;
+        return false;
     }
 }
