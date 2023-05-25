@@ -98,16 +98,31 @@ ko.bindingHandlers.playerSpriteMove = {
     },
 };
 
+const sortableControllers = new WeakMap();
 ko.bindingHandlers.sortable = {
-    init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
-        bindingContext.extend({ sortableController: null });
-        // Needed to remove elements when the knockout array removes something
-        ko.utils.domNodeDisposal.addDisposeCallback(element, () => bindingContext.sortableController?.destroy());
-        return ko.bindingHandlers.template.init(element, valueAccessor);
+    init: function (element, valueAccessor, allBindings, viewModel) {
+        sortableControllers.set(element, null);
+        const value = valueAccessor();
+        ko.applyBindingsToNode(element, {
+            template: {
+                ...value,
+                afterRender(nodes, el) {
+                    nodes.forEach((n) => {
+                        if (n.dataset) {
+                            n.dataset.sortableId = value.options.getId(el);
+                        }
+                    });
+                },
+                beforeRemove(node: HTMLElement, idx, el) {
+                    // Sortable may have cloned the node, so we need to get the real one
+                    const found = element.querySelector(`[data-sortable-id="${value.options.getId(el)}"]`);
+                    (found ?? node)?.remove();
+                },
+            },
+        }, viewModel);
+        return { controlsDescendantBindings: true };
     },
-    update: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
-        bindingContext.sortableController?.destroy();
-
+    update: function (element, valueAccessor) {
         const value = ko.unwrap(valueAccessor());
         const options = {
             // defaults
@@ -119,6 +134,7 @@ ko.bindingHandlers.sortable = {
 
             // override with options passed through knockout binding
             ...(value.options ?? {}),
+            dataIdAttr: 'data-sortable-id',
 
             // handle updating underlying knockout array when moving items
             onEnd: (evt, originalEvt) => {
@@ -137,8 +153,6 @@ ko.bindingHandlers.sortable = {
             },
         };
 
-        bindingContext.sortableController = Sortable.create(element, options);
-
-        return ko.bindingHandlers.template.update(element, valueAccessor, allBindings, viewModel, bindingContext);
+        sortableControllers.set(element, Sortable.create(element, options));
     },
 };
