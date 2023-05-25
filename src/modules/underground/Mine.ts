@@ -60,11 +60,12 @@ export class Mine {
         }
 
         // Add numItems items to the layer
-        for (let i = 0; i < numItems; i++) {
+        const items = Rand.shuffleArray(UndergroundItems.getUnlockedItems());
+        for (let i = 0; i < numItems && items.length; i++) {
             let res = false;
             let x = 0;
             let y = 0;
-            const item = UndergroundItems.getRandomItem();
+            const item = items.pop();
             let attempts = 0;
             // Keep checking random spots until a legal spot is found
             // If too many failed attempts are made, break out as a failsafe
