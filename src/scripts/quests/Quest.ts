@@ -124,10 +124,18 @@ abstract class Quest {
     protected createProgressObservables() {
         this.progress = ko.pureComputed(() => {
             if (this.initial() !== null) {
-                const prevFocus = this.prevFocus || this.initial();
-                if (this.focus() > prevFocus) { this.internalProgress += (this.focus() - prevFocus); }
-                this.prevFocus = this.focus();
-                return Math.min(1, this.internalProgress / this.amount);
+                var prevFocus = 0;
+                if (this.prevFocus !== 0.1) { prevFocus = this.prevFocus || this.initial();}
+
+                if (this.focus() < prevFocus) {
+                    if (this.focus() !== 0) { this.prevFocus = this.focus();
+                    } else { this.prevFocus = 0.1;}
+                    return Math.min(1, this.internalProgress / this.amount);
+                } else {
+                    this.internalProgress += (this.focus() - prevFocus);
+                    this.prevFocus = this.focus();
+                    return Math.min(1, this.internalProgress / this.amount);
+                }
             } else {
                 return 0;
             }
@@ -136,8 +144,13 @@ abstract class Quest {
         this.progressText = ko.pureComputed(() => {
             if (this.initial() !== null) {
                 const prevFocus = this.prevFocus || this.initial();
-                if (this.focus() > prevFocus) { this.internalProgress += (this.focus() - prevFocus); }
-                return `${Math.min(this.internalProgress, this.amount).toLocaleString('en-US')} / ${this.amount.toLocaleString('en-US')}`;
+                if (this.focus() < prevFocus) {
+                    return `${Math.min(this.internalProgress, this.amount).toLocaleString('en-US')} / ${this.amount.toLocaleString('en-US')}`;
+                }
+                else {
+                    this.internalProgress += (this.focus() - prevFocus);
+                    return `${Math.min(this.internalProgress, this.amount).toLocaleString('en-US')} / ${this.amount.toLocaleString('en-US')}`;
+                }
             } else {
                 return `0 / ${this.amount.toLocaleString('en-US')}`;
             }
