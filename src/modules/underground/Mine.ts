@@ -59,8 +59,10 @@ export class Mine {
             numItems = Rand.intBetween(App.game.underground.getMinItems(), App.game.underground.getMaxItems());
         }
 
+        // Get our available items
+        let items = UndergroundItems.getUnlockedItems();
+        items = Rand.shuffleWeightedArray(items, items.map((i) => i.getWeight())).reverse();
         // Add numItems items to the layer
-        const items = Rand.shuffleArray(UndergroundItems.getUnlockedItems());
         for (let i = 0; i < numItems && items.length; i++) {
             let res = false;
             let x = 0;
