@@ -2172,7 +2172,7 @@ class QuestLineHelper {
         const talkToGladion2 = new TalkToNPCQuest(SilvallyGladion2, 'Talk to Gladion in the Aether Foundation and tell him what you found out about Silvally\'s memories.');
         SilvallyTypesQuestLine.addQuest(talkToGladion2);
 
-        createMultiTypeCaptureQuest([PokemonType.Water, PokemonType.Grass, PokemonType.Fire, PokemonType.Electric, PokemonType.Ground, PokemonType.Ice], 'You probably need to train a little before going looking for more Silvally memories. Capture 100 Water, Grass, Fire, Electric, Ground and Ice types.');
+        createMultiTypeCaptureQuest([PokemonType.Water, PokemonType.Grass, PokemonType.Fire, PokemonType.Electric, PokemonType.Ground, PokemonType.Ice], 'You probably need to train a little before going looking for more of Silvally memories. Capture 100 Water, Grass, Fire, Electric, Ground and Ice types.');
 
         const talkToLanaSilvally = new TalkToNPCQuest(LanaSilvally1, 'Talk to Captain Lana in Brooklet Hill to find out if she knows something about Silvally\'s memories.');
         SilvallyTypesQuestLine.addQuest(talkToLanaSilvally);
@@ -2237,7 +2237,8 @@ class QuestLineHelper {
             undefined,
             'Defeat Kahili for a reward!',
             () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Kahili Flying Silvally')](),
-            0
+            0,
+            () => player.itemList.Flying_Memory_Silvally()
         );
         SilvallyTypesQuestLine.addQuest(FlyingSilvallyBattle);
 
@@ -2249,7 +2250,8 @@ class QuestLineHelper {
             undefined,
             'Defeat Plumeria to recover the Memory!',
             () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Plumeria Poison Silvally')](),
-            0
+            0,
+            () => player.itemList.Poison_Memory_Silvally()
         );
         SilvallyTypesQuestLine.addQuest(PoisonSilvallyBattle);
 
@@ -2261,7 +2263,8 @@ class QuestLineHelper {
             undefined,
             'Defeat Captain Acerola to get the Memory back.',
             () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Acerola Ghost Silvally')](),
-            0
+            0,
+            () => player.itemList.Ghost_Memory_Silvally()
         );
         SilvallyTypesQuestLine.addQuest(GhostSilvallyBattle);
 
@@ -2273,7 +2276,8 @@ class QuestLineHelper {
             undefined,
             'Defeat Aether Branch Chief Faba to get the Memory back.',
             () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Faba Psychic Silvally')](),
-            0
+            0,
+            () => player.itemList.Psychic_Memory_Silvally()
         );
         SilvallyTypesQuestLine.addQuest(PsychicSilvallyBattle);
 
@@ -2285,7 +2289,8 @@ class QuestLineHelper {
             undefined,
             'Defeat Molayne for a reward!.',
             () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Molayne Steel Silvally')](),
-            0
+            0,
+            () => player.itemList.Steel_Memory_Silvally()
         );
         SilvallyTypesQuestLine.addQuest(SteelSilvallyBattle);
 
@@ -2297,7 +2302,8 @@ class QuestLineHelper {
             undefined,
             'Defeat Ryuki for the Memory!.',
             () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ryuki Dragon Silvally')](),
-            0
+            0,
+            () => player.itemList.Dragon_Memory_Silvally()
         );
         SilvallyTypesQuestLine.addQuest(DragonSilvallyBattle);
 
