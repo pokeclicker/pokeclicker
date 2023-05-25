@@ -125,7 +125,9 @@ abstract class Quest {
         this.progress = ko.pureComputed(() => {
             if (this.initial() !== null) {
                 let prevFocus = 0;
-                if (this.prevFocus !== 0.1) { prevFocus = this.prevFocus || this.initial();}
+                if (this.prevFocus !== 0.1) {
+                    prevFocus = this.prevFocus || this.initial();
+                }
 
                 if (this.focus() < prevFocus) {
                     if (this.focus() !== 0) {
