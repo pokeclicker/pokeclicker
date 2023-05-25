@@ -124,12 +124,15 @@ abstract class Quest {
     protected createProgressObservables() {
         this.progress = ko.pureComputed(() => {
             if (this.initial() !== null) {
-                var prevFocus = 0;
+                let prevFocus = 0;
                 if (this.prevFocus !== 0.1) { prevFocus = this.prevFocus || this.initial();}
 
                 if (this.focus() < prevFocus) {
-                    if (this.focus() !== 0) { this.prevFocus = this.focus();
-                    } else { this.prevFocus = 0.1;}
+                    if (this.focus() !== 0) {
+                        this.prevFocus = this.focus();
+                    } else {
+                        this.prevFocus = 0.1;
+                    }
                     return Math.min(1, this.internalProgress / this.amount);
                 } else {
                     this.internalProgress += (this.focus() - prevFocus);
@@ -146,8 +149,7 @@ abstract class Quest {
                 const prevFocus = this.prevFocus || this.initial();
                 if (this.focus() < prevFocus) {
                     return `${Math.min(this.internalProgress, this.amount).toLocaleString('en-US')} / ${this.amount.toLocaleString('en-US')}`;
-                }
-                else {
+                } else {
                     this.internalProgress += (this.focus() - prevFocus);
                     return `${Math.min(this.internalProgress, this.amount).toLocaleString('en-US')} / ${this.amount.toLocaleString('en-US')}`;
                 }
