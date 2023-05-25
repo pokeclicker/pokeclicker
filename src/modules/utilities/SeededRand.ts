@@ -98,7 +98,7 @@ export default class SeededRand {
         const output = [];
         for (let i = 0; arr.length; i++) {
             const item = this.fromWeightedArray(arr, weights);
-            const ind = arr.findIndex(i => i == item);
+            const ind = arr.findIndex(a => a == item);
             arr.splice(ind, 1);
             weights.splice(ind, 1);
             output.push(item);
