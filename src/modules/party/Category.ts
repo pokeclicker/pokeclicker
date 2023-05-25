@@ -114,7 +114,7 @@ export default class PokemonCategories implements Saveable {
     }
 
     fromJSON(json: Record<string, any>): void {
-        if (!json || !json.categories) {
+        if (!json?.categories) {
             return;
         }
 

@@ -24,9 +24,9 @@
                             group: 'pokemonCategories',
                             draggable: '.category-row',
                             handle: '.category-drag-handle',
-                            dataIdAttr: 'data-id',
+                            getId: (cat) => cat.id,
                         }}">
-                        <tr class="category-row" data-bind="attr: { 'data-id': $data.id }">
+                        <tr class="category-row">
                             <td class="category-drag-handle align-middle text-center px-2" style="cursor: grab;">⠿</td>
                             <td class="p-0" data-bind="style: { background: $data.color }">
                                 <label style="width:100%; min-height: 28px; padding:0px; margin: 0px;">
