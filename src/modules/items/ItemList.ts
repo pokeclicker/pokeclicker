@@ -133,13 +133,13 @@ ItemList.Meteorite          = new MegaStoneItem(MegaStoneType.Meteorite, 'Rayqua
 //ItemList.Mewtwonite_X		= new MegaStoneItem(MegaStoneType.Mewtwonite_X, 'Mewtwo', 10000);
 //ItemList.Mewtwonite_Y		= new MegaStoneItem(MegaStoneType.Mewtwonite_Y, 'Mewtwo', 10000);
 ItemList.Pidgeotite			= new MegaStoneItem(MegaStoneType.Pidgeotite, 'Pidgeot', 10000);
-//ItemList.Pinsirite			= new MegaStoneItem(MegaStoneType.Pinsirite, 'Pinsir', 10000);
+ItemList.Pinsirite			= new MegaStoneItem(MegaStoneType.Pinsirite, 'Pinsir', 10000);
 ItemList.Red_Orb            = new MegaStoneItem(MegaStoneType.Red_Orb, 'Groudon', 10000);
 ItemList.Sablenite			= new MegaStoneItem(MegaStoneType.Sablenite, 'Sableye', 10000);
 ItemList.Salamencite		= new MegaStoneItem(MegaStoneType.Salamencite, 'Salamence', 10000);
 ItemList.Sceptilite			= new MegaStoneItem(MegaStoneType.Sceptilite, 'Sceptile', 10000, Currency.questPoint,
     { visible: new MultiRequirement([new TemporaryBattleRequirement('Hoenn Stone Salesman'), new ObtainedPokemonRequirement('Sceptile')]) }, 'Sceptilite', 'A Mega Stone for Sceptile.');
-//ItemList.Scizorite			= new MegaStoneItem(MegaStoneType.Scizorite, 'Scizor', 10000);
+ItemList.Scizorite			= new MegaStoneItem(MegaStoneType.Scizorite, 'Scizor', 10000);
 ItemList.Sharpedonite		= new MegaStoneItem(MegaStoneType.Sharpedonite, 'Sharpedo', 10000);
 ItemList.Slowbronite		= new MegaStoneItem(MegaStoneType.Slowbronite, 'Slowbro', 10000);
 ItemList.Steelixite			= new MegaStoneItem(MegaStoneType.Steelixite, 'Steelix', 10000);

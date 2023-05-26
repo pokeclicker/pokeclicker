@@ -252,6 +252,7 @@ export const SpriteCredits: Credit[] = [
             'Dream Orbs',
             'Dungeon Ladder',
             'Dungeon Chest Tiers',
+            'Exeggcute (Single)',
             'Galar fossils items',
             'Galarian Articuno overworld image',
             'Galarian Moltres overworld image',
@@ -511,6 +512,7 @@ export const SpriteCredits: Credit[] = [
         name: 'Farboo171',
         link: 'https://github.com/Farboo171',
         resources: [
+            'Exeggcute (Single) Item',
             'Flowering Celebi',
             'Freeze Mulch',
             'Old Lady',
