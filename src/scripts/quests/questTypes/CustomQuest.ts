@@ -29,7 +29,7 @@ class CustomQuest extends Quest implements QuestInterface {
     constructor(amount: number, reward: (() => void) | number, description: string, focus: any, initialValue?: number, onLoad?: (() => void), public optionalArgs: CustomQuestOptionalArgument = {}) {
         super(amount, typeof reward == 'number' ? reward : 0);
         this.customDescription = description;
-        this.focus = focus;
+        this.focus = ko.computed(focus);
         this.initialValue = initialValue;
         this.customReward = typeof reward == 'function' ? reward : undefined;
         this._onLoad = typeof onLoad == 'function' ? onLoad : undefined;
