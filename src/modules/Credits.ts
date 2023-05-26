@@ -264,6 +264,7 @@ export const SpriteCredits: Credit[] = [
             'Hopo berry image and trees',
             'Hoppip (Chimecho)',
             'Key Stone',
+            'Komala overworld image',
             'Linking cord cartoon style',
             'Luana',
             'Magikarp Skelly',
@@ -957,6 +958,7 @@ export const SpriteCredits: Credit[] = [
             'Professor Juniper',
             'Realgam Tower',
             'Riot',
+            'Salazle overworld images'
             'Shadow Aipom',
             'Shadow Bayleef',
             'Shadow Delibird',
