@@ -317,13 +317,6 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                 </h5>
                                 <div class="card-body p-0">
                                     <table class="table table-striped table-hover table-bordered table-sm m-0" style="overflow: visible;">
-                                        <thead>
-                                            <tr>
-                                                <th colspan="2" class="text-center text-light bg-dark">
-                                                    <h5 class="m-0">Information</h5>
-                                                </th>
-                                            </tr>
-                                        </thead>
                                         <tbody>
                                             <tr>
                                                 <td class="text-left align-middle">Cost / Hatch:</td>
@@ -391,15 +384,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="text-left align-middle">
-                                                    Category:
-                                                    <div class="d-inline-block float-right"  data-bind="tooltip: {
-                                                        html: true,
-                                                        title: 'Hatchery Helpers <u>always</u> use the filters and settings selected in the Hatchery. Assigning a Helper to one or more categories will limit them to Pokémon in those categories <u>in addition</u> to the other Hatchery filters.',
-                                                        placement: 'top',
-                                                        trigger: 'hover'
-                                                    }">ⓘ</div>
-                                                </td>
+                                                <td class="text-left align-middle">Category:</td>
                                                 <td class="text-center align-middle" style="max-width: 1px;">
                                                     <knockout data-bind="template: { name: 'multiSelectDropdownTemplate',
                                                         data: {
@@ -421,6 +406,23 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                             selectAllClick: () => $data.categories([]),
                                                         }}">
                                                     </knockout>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" class="text-center">
+                                                    <div class="position-relative">
+                                                        <div class="form-check">
+                                                            <input type="checkbox" class="form-check-input mt-1" data-bind="checked: $data.useHatcheryFilters,
+                                                                attr: { id: `hatcheryHelperUseFilters${$index()}` }">
+                                                            <label class="form-check-label" data-bind="attr: { for: `hatcheryHelperUseFilters${$index()}` }">Use Hatchery Filters</label>
+                                                        </div>
+                                                        <div class="position-absolute" style="top:0; right: 0;" data-bind="tooltip: {
+                                                            html: true,
+                                                            title: 'When this option is enabled Hatchery Helpers will use the filters and settings selected in the Hatchery in addition to their own settings. Disabling this option will allow them to work independently and ignore the Hatchery filters.',
+                                                            placement: 'top',
+                                                            trigger: 'hover'
+                                                        }">ⓘ</div>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         </tbody>

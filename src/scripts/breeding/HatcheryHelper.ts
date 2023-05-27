@@ -35,6 +35,7 @@ class HatcheryHelper {
     public prevBonus: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 0 });
     public nextBonus: KnockoutObservable<number> = ko.observable(1).extend({ numeric: 0 });
     public categories: KnockoutObservableArray<number> = ko.observableArray([]);
+    public useHatcheryFilters: KnockoutObservable<boolean> = ko.observable(true);
     // public level: number;
     // public experience: number;
 
@@ -151,6 +152,7 @@ class HatcheryHelper {
             sortDirection: this.sortDirection(),
             hatched: this.hatched(),
             categories: this.categories(),
+            useHatcheryFilters: this.useHatcheryFilters(),
         };
     }
 
@@ -163,6 +165,7 @@ class HatcheryHelper {
         this.sortDirection(json.sortDirection || false);
         this.hatched(json.hatched || 0);
         this.categories(json.categories || []);
+        this.useHatcheryFilters(json.useHatcheryFilters ?? true);
     }
 }
 
@@ -216,8 +219,15 @@ class HatcheryHelpers {
                     +Settings.getSetting('breedingRegionalAttackDebuffSetting').value);
 
                 const categories = helper.categories();
+                const useHatcheryFilters = helper.useHatcheryFilters();
                 const pokemon = App.game.party.caughtPokemon.reduce((best, pokemon) => {
-                    if (!pokemon.isHatchable() || (categories.length && categories.indexOf(pokemon.category) === -1)) {
+                    if (useHatcheryFilters && !pokemon.isHatchable()) {
+                        return best;
+                    }
+                    if (!useHatcheryFilters && (pokemon.breeding || pokemon.level < 100)) {
+                        return best;
+                    }
+                    if (categories.length && categories.indexOf(pokemon.category) === -1) {
                         return best;
                     }
                     if (best === null) {
@@ -227,7 +237,7 @@ class HatcheryHelpers {
                 }, null);
 
                 if (pokemon) {
-                    this.hatchery.gainPokemonEgg(pokemon, true);
+                    this.hatchery.gainPokemonEgg(pokemon, index);
                     // Charge the player when we put a pokemon in the hatchery
                     helper.charge();
                     // Increment our hatched counter
