@@ -87,16 +87,25 @@ export default class SaveSelector {
         }
     }
 
-    static btoa(saveString: string):string {
+    static btoa(saveString: string): string {
         return btoa(saveString.replace(/[^\u0000-\u00FF]+|%/g, (m) => encodeURI(m)));
     }
 
-    static atob(encodeString: string):string {
+    static atob(encodeString: string): string {
         const decodeString = atob(encodeString);
         try {
             return decodeURI(decodeString);
         } catch {
-            return decodeString;
+            // Fix missing encodeURI in v0.10.11
+            try {
+                const URIfixData = JSON.parse(decodeString);
+                URIfixData.save.pokeballFilters.list.forEach((i: any) => {
+                    i.name = encodeURI(i.name);
+                });
+                return decodeURI(JSON.stringify(URIfixData));
+            } catch {
+                return decodeString;
+            }
         }
     }
 
