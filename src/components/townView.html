@@ -8,12 +8,6 @@
             <h2 class="pageItemTitle">
               <knockout data-bind="text: player.town().name">Town Name</knockout>
               <knockout data-bind="if: player.town() instanceof DungeonTown && player.town().dungeon">
-                  <!-- ko if: QuestLineHelper.isQuestLineCompleted('Tutorial Quests') -->
-                  <knockout class="right" data-bind="using: App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(player.town().name)]()">
-                      <knockout data-bind="text: $data.toLocaleString('en-US')">0</knockout>
-                      <knockout data-bind="visible: QuestLineHelper.isQuestLineCompleted('Tutorial Quests')">clears</knockout>
-                  </knockout>
-                  <!-- /ko -->
                   <!--If all Pokémon in the dungeon are caught-->
                   <knockout data-bind="if: (!DungeonRunner.dungeonCompleted(player.town().dungeon, true) && DungeonRunner.dungeonCompleted(player.town().dungeon, false))">
                       <img title="You have captured all Pokémon in this dungeon!" class="pokeball-smallest"
@@ -44,12 +38,14 @@
     <div class="row no-gutters">
        <div class="col-4 no-gutters">
            <div class="list-group">
-                <button class="btn btn-secondary p-0"
-                        onclick="DungeonRunner.initializeDungeon(player.town().dungeon)"
-                        data-bind="visible: player.town() instanceof DungeonTown, if: player.town().dungeon, attr: { class: player.town().dungeon && App.game.wallet.currencies[GameConstants.Currency.dungeonToken]() >= player.town().dungeon.tokenCost ? 'btn btn-success p-0' : 'btn btn-secondary p-0' }">
+               <button class="btn btn-secondary p-0" onclick="DungeonRunner.initializeDungeon(player.town().dungeon)" data-bind="
+                   visible: player.town() instanceof DungeonTown,
+                   if: player.town().dungeon,
+                   attr: { class: player.town().dungeon && App.game.wallet.currencies[GameConstants.Currency.dungeonToken]() >= player.town().dungeon.tokenCost ? 'btn btn-success p-0' : 'btn btn-secondary p-0' },
+                   tooltip: QuestLineHelper.isQuestLineCompleted('Tutorial Quests') ? { title: 'Total Clears: ' + App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(player.town().name)]().toLocaleString('en-US'), trigger: 'hover', placement: 'left' } : undefined">
                     Start<br/>
-                        <span data-bind="template: { name: 'currencyTemplate', data: {'amount': player.town().dungeon.tokenCost, 'currency': GameConstants.Currency.dungeonToken}}"></span>
-                </button>
+                    <span data-bind="template: { name: 'currencyTemplate', data: {'amount': player.town().dungeon.tokenCost, 'currency': GameConstants.Currency.dungeonToken}}"></span>
+               </button>
 
                 <!-- ko foreach: player.town().content -->
                 <div class="btn-group btn-block" style="margin-top: 0px;">
