@@ -777,4 +777,11 @@ namespace GameConstants {
         Tyranitarite,
         Venusaurite,
     }
+    declare enum GemShops {
+        HoennFluteMaster,
+        HoennStoneSalesman,
+        UnovaFluteMaster,
+        FurfrouGemTrader,
+        MagikarpJumpGemTrader,
+    }
 }

@@ -2067,7 +2067,8 @@ const HoennContestShop = new Shop([
 ], 'Contest Shop', [new DevelopmentRequirement()]);
 
 //Hoenn Flute Master
-const HoennFluteMaster = new GemMasterShop();
+const HoennFluteMaster = new GemMasterShop(GameConstants.GemShops.HoennFluteMaster);
+const HoennStoneSalesman = new GemMasterShop(GameConstants.GemShops.HoennStoneSalesman, 'Stone Salesman', [new TemporaryBattleRequirement('Hoenn Stone Salesman')], true);
 
 //Hoenn NPCs
 
@@ -2824,7 +2825,7 @@ TownList['Fallarbor Town'] = new Town(
     'Fallarbor Town',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [FallarborTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Fallarbor Town']), HoennFluteMaster, TemporaryBattleList['Hoenn Stone Salesman']],
+    [FallarborTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Fallarbor Town']), HoennFluteMaster, HoennStoneSalesman, TemporaryBattleList['Hoenn Stone Salesman']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 113)],
         npcs: [FallarborProfessorCozmo, Cozmo1, HoennStoneSalesman1, HoennStoneSalesman2],
@@ -4486,7 +4487,7 @@ const AnvilleTownShop = new Shop([
 ]);
 
 //Unova Gem Master
-const UnovaFluteMaster = new GemMasterShop();
+const UnovaFluteMaster = new GemMasterShop(GameConstants.GemShops.UnovaFluteMaster);
 
 //Unova NPCs
 
@@ -5659,7 +5660,7 @@ TownList['Parfum Palace'] = new Town(
     'Parfum Palace',
     GameConstants.Region.kalos,
     GameConstants.KalosSubRegions.Kalos,
-    [new ShardTraderShop(GameConstants.ShardTraderLocations['Parfum Palace'], 'Furfrou Shard Trader', true), new GemMasterShop('Furfrou Gem Trader')],
+    [new ShardTraderShop(GameConstants.ShardTraderLocations['Parfum Palace'], 'Furfrou Shard Trader', true), new GemMasterShop(GameConstants.GemShops.FurfrouGemTrader, 'Furfrou Gem Trader')],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 6)],
     }
@@ -6004,7 +6005,7 @@ const ATreeMaybeShop = new Shop([
 ]);
 
 // Magikarp Jump Shops
-const MagikarpJumpGemTrade = new GemMasterShop('Trade', [new GymBadgeRequirement(BadgeEnums.Heal_League)]);
+const MagikarpJumpGemTrade = new GemMasterShop(GameConstants.GemShops.MagikarpJumpGemTrader, 'Trade', [new GymBadgeRequirement(BadgeEnums.Heal_League)]);
 const MagikarpJumpShadySalesMan = new Shop([
     ItemList['Magikarp Blue Raindrops'],
     ItemList['Magikarp Saucy Violet'],

@@ -40,10 +40,10 @@
                                     draggable: '.pokeballFilterWrapper',
                                     handle: '.pokeballFilterDragHandle',
                                     dataIdAttr: 'data-key',
+                                    getId: (filter) => filter.uuid,
                                 }
                             }">
                             <div class="pokeballFilterWrapper" data-bind="
-                                attr: { 'data-key': $data.uuid },
                                 visible: !PokeballFilters.hideFilter($data)
                             ">
                                 <div class="pokeballFilterDragHandle bg-dark text-white"></div>
