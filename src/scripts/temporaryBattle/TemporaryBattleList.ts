@@ -892,6 +892,77 @@ TemporaryBattleList.Latios = new TemporaryBattle(
         hideTrainer: true,
     }
 );
+TemporaryBattleList.Willie = new TemporaryBattle(
+    'Willie',
+    [
+        new GymPokemon('Zigzagoon', 6900000, 24),
+        new GymPokemon('Zigzagoon', 6900000, 24),
+    ],
+    'Whew! With skills like that, y\'all should head to Phenac City.',
+    [new QuestLineStepCompletedRequirement('Shadows in the Desert', 0)],
+    undefined,
+    {
+        displayName: 'Willie',
+        imageName: 'Rider (male)',
+    }
+);
+TemporaryBattleList.Folly = new TemporaryBattle(
+    'Folly',
+    [
+        new GymPokemon('Whismur', 6950000, 25),
+        new GymPokemon('Whismur', 6950000, 25),
+    ],
+    '<i>The shady guy flees, dropping a mysterious sack. The sack.... cries out in pain?</i>',
+    [new QuestLineStepCompletedRequirement('Shadows in the Desert', 1)],
+    undefined,
+    {
+        displayName: 'Folly',
+        imageName: 'Shady Guy (male)',
+    }
+);
+TemporaryBattleList['Cipher Peon Doven'] = new TemporaryBattle(
+    'Cipher Peon Doven',
+    [
+        new GymPokemon('Spheal', 7300000, 33),
+        new GymPokemon('Carvanha', 7300000, 34),
+    ],
+    'Rats! Foiled by some nobody!',
+    [new QuestLineStepCompletedRequirement('Shadows in the Desert', 14)],
+    undefined,
+    {
+        displayName: 'Cipher Peon Doven',
+        imageName: 'Cipher Peon (female)',
+    }
+);
+TemporaryBattleList['Cipher Peon Silton'] = new TemporaryBattle(
+    'Cipher Peon Silton',
+    [
+        new GymPokemon('Shroomish', 7300000, 34),
+        new GymPokemon('Cacnea', 7300000, 34),
+    ],
+    'Man! I was really having fun doing these crimes.',
+    [new QuestLineStepCompletedRequirement('Shadows in the Desert', 14)],
+    undefined,
+    {
+        displayName: 'Cipher Peon Silton',
+        imageName: 'Cipher Peon (male)',
+    }
+);
+TemporaryBattleList['Cipher Peon Kass'] = new TemporaryBattle(
+    'Cipher Peon Kass',
+    [
+        new GymPokemon('Baltoy', 4900000, 35),
+        new GymPokemon('Ralts', 4900000, 35),
+        new GymPokemon('Kirlia', 4900000, 35),
+    ],
+    'Run away!',
+    [new QuestLineStepCompletedRequirement('Shadows in the Desert', 14)],
+    undefined,
+    {
+        displayName: 'Cipher Peon Kass',
+        imageName: 'Cipher Peon (female)',
+    }
+);
 TemporaryBattleList['Sevii Rocket Grunt 1'] = new TemporaryBattle(
     'Sevii Rocket Grunt 1',
     [
