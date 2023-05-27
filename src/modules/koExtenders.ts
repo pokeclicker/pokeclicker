@@ -69,6 +69,30 @@ ko.bindingHandlers.contentEditable = {
 //TODO: Replace with logic that maintains a singular PlayerSpriteSVG rather than clone re-rendering
 ko.bindingHandlers.playerSpriteMove = {
     init: function (element) {
+        function handleVisibleElement(element) {
+            if (element.classList.contains('iconLocation')) {
+                if (element.classList.contains('iconLocation')) {
+                    var targetElement = document.getElementById('playerSprite');
+                    var imageElement = element.cloneNode(true);
+                    imageElement.classList.remove('hide');
+
+                    targetElement.innerHTML = '';
+                    targetElement.appendChild(imageElement);
+
+                    //Get required variables to replicate the rotate on parent group as well
+                    var rotate = imageElement.getAttribute('rotate');
+                    var x = imageElement.getAttribute('localx');
+                    var y = imageElement.getAttribute('localy');
+
+                    if (rotate) {
+                        targetElement.setAttribute('transform', 'rotate(90,' + x + ', ' + y + ')');
+                    } else {
+                        targetElement.setAttribute('transform', '');
+                    }
+                }
+            }
+        }
+
         const observer = new MutationObserver((mutationsList) => {
             for (const mutation of mutationsList) {
                 if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
@@ -94,30 +118,6 @@ ko.bindingHandlers.playerSpriteMove = {
         }
     },
 };
-
-function handleVisibleElement(element) {
-    if (element.classList.contains('iconLocation')) {
-        if (element.classList.contains('iconLocation')) {
-            var targetElement = document.getElementById('playerSprite');
-            var imageElement = element.cloneNode(true);
-            imageElement.classList.remove('hide');
-
-            targetElement.innerHTML = '';
-            targetElement.appendChild(imageElement);
-
-            //Get required variables to replicate the rotate on parent group as well
-            var rotate = imageElement.getAttribute('rotate');
-            var x = imageElement.getAttribute('localx');
-            var y = imageElement.getAttribute('localy');
-
-            if (rotate) {
-                targetElement.setAttribute('transform', 'rotate(90,' + x + ', ' + y + ')');
-            } else {
-                targetElement.setAttribute('transform', '');
-            }
-        }
-    }
-}
 
 const sortableControllers = new WeakMap();
 ko.bindingHandlers.sortable = {
