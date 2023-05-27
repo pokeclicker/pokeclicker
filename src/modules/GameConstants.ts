@@ -2078,3 +2078,11 @@ export enum MegaStoneType {
     Tyranitarite,
     Venusaurite,
 }
+
+export enum GemShops {
+    HoennFluteMaster,
+    HoennStoneSalesman,
+    UnovaFluteMaster,
+    FurfrouGemTrader,
+    MagikarpJumpGemTrader,
+}
