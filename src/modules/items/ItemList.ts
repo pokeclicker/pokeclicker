@@ -107,7 +107,7 @@ ItemList.Beedrillite		= new MegaStoneItem(MegaStoneType.Beedrillite, 'Beedrill',
 ItemList.Blastoisinite	= new MegaStoneItem(MegaStoneType.Blastoisinite, 'Blastoise', 10000, Currency.questPoint,
     { visible: new ObtainedPokemonRequirement('Blastoise') }, 'Blastoisinite', 'A Mega Stone for Blastoise.');
 ItemList.Blazikenite		= new MegaStoneItem(MegaStoneType.Blazikenite, 'Blaziken', 10000, Currency.questPoint,
-    { visible: new MultiRequirement([new TemporaryBattleRequirement('Hoenn Stone Salesman'), new ObtainedPokemonRequirement('Blaziken')]) }, 'Blazikenite', 'A Mega Stone for Blaziken.');
+    { visible: new ObtainedPokemonRequirement('Blaziken') }, 'Blazikenite', 'A Mega Stone for Blaziken.');
 ItemList.Blue_Orb       = new MegaStoneItem(MegaStoneType.Blue_Orb, 'Kyogre', 10000);
 ItemList.Cameruptite		= new MegaStoneItem(MegaStoneType.Cameruptite, 'Camerupt', 10000);
 ItemList.Charizardite_X	= new MegaStoneItem(MegaStoneType.Charizardite_X, 'Charizard', 10000, Currency.questPoint,
@@ -141,13 +141,13 @@ ItemList.Red_Orb        = new MegaStoneItem(MegaStoneType.Red_Orb, 'Groudon', 10
 ItemList.Sablenite			= new MegaStoneItem(MegaStoneType.Sablenite, 'Sableye', 10000);
 ItemList.Salamencite		= new MegaStoneItem(MegaStoneType.Salamencite, 'Salamence', 10000);
 ItemList.Sceptilite			= new MegaStoneItem(MegaStoneType.Sceptilite, 'Sceptile', 10000, Currency.questPoint,
-    { visible: new MultiRequirement([new TemporaryBattleRequirement('Hoenn Stone Salesman'), new ObtainedPokemonRequirement('Sceptile')]) }, 'Sceptilite', 'A Mega Stone for Sceptile.');
+    { visible: new ObtainedPokemonRequirement('Sceptile') }, 'Sceptilite', 'A Mega Stone for Sceptile.');
 //ItemList.Scizorite	    = new MegaStoneItem(MegaStoneType.Scizorite, 'Scizor', 10000);
 ItemList.Sharpedonite		= new MegaStoneItem(MegaStoneType.Sharpedonite, 'Sharpedo', 10000);
 ItemList.Slowbronite		= new MegaStoneItem(MegaStoneType.Slowbronite, 'Slowbro', 10000);
 ItemList.Steelixite			= new MegaStoneItem(MegaStoneType.Steelixite, 'Steelix', 10000);
 ItemList.Swampertite		= new MegaStoneItem(MegaStoneType.Swampertite, 'Swampert', 10000, Currency.questPoint,
-    { visible: new MultiRequirement([new TemporaryBattleRequirement('Hoenn Stone Salesman'), new ObtainedPokemonRequirement('Swampert')]) }, 'Swampertite', 'A Mega Stone for Swampert.');
+    { visible: new ObtainedPokemonRequirement('Swampert') }, 'Swampertite', 'A Mega Stone for Swampert.');
 ItemList.Tyranitarite		= new MegaStoneItem(MegaStoneType.Tyranitarite, 'Tyranitar', 10000);
 ItemList.Venusaurite		= new MegaStoneItem(MegaStoneType.Venusaurite, 'Venusaur', 10000, Currency.questPoint,
     { visible: new ObtainedPokemonRequirement('Venusaur') }, 'Venusaurite', 'A Mega Stone for Venusaur.');

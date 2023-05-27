@@ -2616,7 +2616,7 @@ const HoennStoneSalesman1 = new NPC('Stone Salesman', [
 });
 
 const HoennStoneSalesman2 = new NPC('Stone Salesman', [
-    'The Gem Master in town is letting me sell stones at their shop. Let me know if anything there strikes your fancy!',
+    'I\'m selling some unusual stones for gems. Let me know if any of them strike your fancy!',
 ], {
     requirement: new TemporaryBattleRequirement('Hoenn Stone Salesman'),
 });
@@ -5218,8 +5218,9 @@ const SnowbelleCityShop = new Shop([
     ItemList.Reaper_cloth,
 ]);
 
-//Kalos Gem Shop
-const StoneEmporium = new GemMasterShop();
+//Hoenn Flute Master
+const FurfrouGemTrader = new GemMasterShop(GameConstants.GemShops.FurfrouGemTrader);
+const KalosStoneSalesman = new GemMasterShop(GameConstants.GemShops.KalosStoneSalesman, 'Stone Emporium', [new TemporaryBattleRequirement('Kalos Stone Salesman')], true);
 
 //Kalos NPCs
 
@@ -5554,6 +5555,18 @@ const ThanksDiancie = new NPC('Princess Diancie', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Princess Diancie', 6), new QuestLineStepCompletedRequirement('Princess Diancie', 8, GameConstants.AchievementOption.less)]),
 });
 
+const KalosStoneSalesman1 = new NPC('Stone Salesman', [
+    'I\'m hunting for rare stones! If I find any extras, I\'ll sell you some!',
+], {
+    requirement: new TemporaryBattleRequirement('Kalos Stone Salesman', 1, GameConstants.AchievementOption.less),
+});
+
+const KalosStoneSalesman2 = new NPC('Stone Salesman', [
+    'I\'m selling some peculiar stones for gems at my new shop, the Stone Emporium. Let me know if anything there strikes your fancy!',
+], {
+    requirement: new TemporaryBattleRequirement('Kalos Stone Salesman'),
+});
+
 const VivillonPhotobook = new NPC('Vivillon Photobook', [
     '<i>Viola has sent some of her Vivillon photographs in to the local Pokémon Center as a photobook, to celebrate the Lunar New Year. You flip through the pages...</i>',
     '<img src="assets/images/npcs/textbody/VivillonPhotobookFancyMeadow.png" style="max-width:100%; height:auto"/>',
@@ -5643,10 +5656,10 @@ TownList['Lumiose City'] = new Town(
     'Lumiose City',
     GameConstants.Region.kalos,
     GameConstants.KalosSubRegions.Kalos,
-    [TemporaryBattleList['Sycamore 1'], TemporaryBattleList['Tierno 1'], DepartmentStoreShop, FriseurFurfrouShop, StoneEmporium, TemporaryBattleList['Team Flare Lysandre 1'], TemporaryBattleList['Team Flare Xerosic'], TemporaryBattleList['Storyline AZ'], TemporaryBattleList.AZ, TemporaryBattleList.Merilyn, TemporaryBattleList['Grand Duchess Diantha']],
+    [TemporaryBattleList['Sycamore 1'], TemporaryBattleList['Tierno 1'], DepartmentStoreShop, FriseurFurfrouShop, KalosStoneSalesman, TemporaryBattleList['Team Flare Lysandre 1'], TemporaryBattleList['Team Flare Xerosic'], TemporaryBattleList['Storyline AZ'], TemporaryBattleList.AZ, TemporaryBattleList.Merilyn, TemporaryBattleList['Grand Duchess Diantha']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 4)],
-        npcs: [ProfSycamore, LumioseDexio, LumioseEngineer, Lysandre1, Calem1, Lysandre3, Lysandre4, AZ1, BlueButton, RedButton],
+        npcs: [ProfSycamore, LumioseDexio, LumioseEngineer, Lysandre1, Calem1, Lysandre3, Lysandre4, AZ1, BlueButton, RedButton, KalosStoneSalesman1, KalosStoneSalesman2],
     }
 );
 TownList['Camphrier Town'] = new Town(
@@ -5663,7 +5676,7 @@ TownList['Parfum Palace'] = new Town(
     'Parfum Palace',
     GameConstants.Region.kalos,
     GameConstants.KalosSubRegions.Kalos,
-    [new ShardTraderShop(GameConstants.ShardTraderLocations['Parfum Palace'], 'Furfrou Shard Trader', true), new GemMasterShop(GameConstants.GemShops.FurfrouGemTrader, 'Furfrou Gem Trader')],
+    [new ShardTraderShop(GameConstants.ShardTraderLocations['Parfum Palace'], 'Furfrou Shard Trader', true), FurfrouGemTrader],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 6)],
     }
