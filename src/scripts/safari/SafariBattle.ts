@@ -151,7 +151,7 @@ class SafariBattle {
         App.game.party.gainPokemonById(pokemonID, SafariBattle.enemy.shiny);
         const partyPokemon = App.game.party.getPokemon(pokemonID);
         partyPokemon.effortPoints += App.game.party.calculateEffortPoints(partyPokemon, SafariBattle.enemy.shiny, GameConstants.SAFARI_EP_YIELD);
-
+        Safari.spawnItemCheck();
     }
 
     public static throwBait() {
@@ -249,7 +249,6 @@ class SafariBattle {
         $('#safariBattleModal').one('hidden.bs.modal', () => {
             Safari.inBattle(false);
             SafariBattle.busy(false);
-            Safari.spawnItemCheck();
         }).modal('hide');
     }
 
