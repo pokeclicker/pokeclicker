@@ -320,6 +320,7 @@ export const REPEATBALL_EP_MODIFIER = 5;
 export const DUNGEON_EP_MODIFIER = 3;
 export const DUNGEON_BOSS_EP_MODIFIER = 10;
 export const ROAMER_EP_MODIFIER = 50;
+export const SHADOW_EP_MODIFIER = 2;
 
 export const EP_EV_RATIO = 1000;
 export const EP_CHALLENGE_MODIFIER = 10;
@@ -1534,6 +1535,11 @@ export const TemporaryBattles = [
     'Meta Groudon',
     'Latios',
     'Latias',
+    'Willie',
+    'Folly',
+    'Cipher Peon Doven',
+    'Cipher Peon Silton',
+    'Cipher Peon Kass',
     'Sevii Rocket Grunt 1',
     'Sevii Rocket Grunt 2',
     'Sevii Rocket Grunt 3',
