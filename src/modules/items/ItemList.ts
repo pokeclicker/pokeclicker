@@ -20,8 +20,6 @@ import MegaStoneItem from './MegaStoneItem';
 import Vitamin from './Vitamin';
 import EggItem from './EggItem';
 import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
-import MultiRequirement from '../requirements/MultiRequirement';
-import TemporaryBattleRequirement from '../requirements/TemporaryBattleRequirement';
 import ObtainedPokemonRequirement from '../requirements/ObtainedPokemonRequirement';
 import QuestItem from './QuestItem';
 

@@ -492,8 +492,8 @@ export const pokemonList = createPokemonArray(
         'exp': 240,
         'eggCycles': 20,
         'evolutions': [
-           DayTimedMegaEvolution(MegaStoneType.Charizardite_X, 'Charizard', 'Mega Charizard X'),
-           NightTimedMegaEvolution(MegaStoneType.Charizardite_Y, 'Charizard', 'Mega Charizard Y'),
+            DayTimedMegaEvolution(MegaStoneType.Charizardite_X, 'Charizard', 'Mega Charizard X'),
+            NightTimedMegaEvolution(MegaStoneType.Charizardite_Y, 'Charizard', 'Mega Charizard Y'),
         ],
         'base': {
             'hitpoints': 78,
