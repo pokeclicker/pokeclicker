@@ -152,8 +152,19 @@ class GameController {
             // Set our number key if defined (-1 for 0 indexed)
             const numberKey = (+key) - 1;
             const isNumberKey = !isNaN(numberKey) && numberKey >= 0;
-
             const visibleModals = $('.modal:visible').length;
+
+            //Global Multi-key combinations
+            if (isNumberKey) {
+                if (GameController.keyHeld[Settings.getSetting('hotkey.pokeballSelection').value]) {
+                    // Open pokeball selector modal using P + (1-4) for each condition
+                    if (!($pokeballSelector.data('bs.modal')?._isShown) && !$pokeballSelector.data('disable-toggle')) {
+                        $('.modal').modal('hide');
+                        $('#pokeballSelectorBody .clickable.pokeball-selected').eq(numberKey)?.trigger('click');
+                        return e.preventDefault();
+                    }
+                }
+            }
 
             // Safari Zone
             if (App.game.gameState === GameConstants.GameState.safari) {
@@ -374,27 +385,25 @@ class GameController {
                             player.town().content[0].protectedOnclick();
                         }
                         return e.preventDefault();
-                    } else if (!GameController.keyHeld[Settings.getSetting('hotkey.pokeballSelection').value]) {
-                        if (isNumberKey) {
-                            // Check if a number higher than 0 and less than our towns content was pressed
-                            const filteredContent = player.town().content.filter(c => c.isVisible());
-                            const filteredNPCs = player.town().npcs?.filter(n => n.isVisible());
-                            if (numberKey < filteredContent.length) {
-                                filteredContent[numberKey].protectedOnclick();
-                            } else if (filteredNPCs && numberKey < filteredContent.length + filteredNPCs.length) {
-                                filteredNPCs[numberKey - filteredContent.length].openDialog();
-                            }
-                            return e.preventDefault();
-                        } else if (player.town() instanceof DungeonTown) {
-                            const cycle = Object.values(TownList).filter(t => t instanceof DungeonTown && t.region == player.region && t.isUnlocked());
-                            const idx = cycle.findIndex(d => d.name == player.town().name);
-                            switch (key) {
-                                case '=' :
-                                case '+' : MapHelper.moveToTown(cycle[(idx + 1) % cycle.length].name);
-                                    return e.preventDefault();
-                                case '-' : MapHelper.moveToTown(cycle[(idx + cycle.length - 1) % cycle.length].name);
-                                    return e.preventDefault();
-                            }
+                    } else if (isNumberKey) {
+                        // Check if a number higher than 0 and less than our towns content was pressed
+                        const filteredContent = player.town().content.filter(c => c.isVisible());
+                        const filteredNPCs = player.town().npcs?.filter(n => n.isVisible());
+                        if (numberKey < filteredContent.length) {
+                            filteredContent[numberKey].protectedOnclick();
+                        } else if (filteredNPCs && numberKey < filteredContent.length + filteredNPCs.length) {
+                            filteredNPCs[numberKey - filteredContent.length].openDialog();
+                        }
+                        return e.preventDefault();
+                    } else if (player.town() instanceof DungeonTown) {
+                        const cycle = Object.values(TownList).filter(t => t instanceof DungeonTown && t.region == player.region && t.isUnlocked());
+                        const idx = cycle.findIndex(d => d.name == player.town().name);
+                        switch (key) {
+                            case '=' :
+                            case '+' : MapHelper.moveToTown(cycle[(idx + 1) % cycle.length].name);
+                                return e.preventDefault();
+                            case '-' : MapHelper.moveToTown(cycle[(idx + cycle.length - 1) % cycle.length].name);
+                                return e.preventDefault();
                         }
                     }
                 }
@@ -463,18 +472,6 @@ class GameController {
                         return e.preventDefault();
                     }
                     break;
-                default:
-                    // Check for a number key being pressed
-                    if (isNumberKey) {
-                        if (GameController.keyHeld[Settings.getSetting('hotkey.pokeballSelection').value]) {
-                            // Open pokeball selector modal using P + (1-4) for each condition
-                            if (!($pokeballSelector.data('bs.modal')?._isShown) && !$pokeballSelector.data('disable-toggle')) {
-                                $('.modal').modal('hide');
-                                $('#pokeballSelectorBody .clickable.pokeball-selected').eq(numberKey)?.trigger('click');
-                                return e.preventDefault();
-                            }
-                        }
-                    }
             }
 
             if (key === 'Space') {
