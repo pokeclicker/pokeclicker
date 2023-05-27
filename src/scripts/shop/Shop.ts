@@ -8,7 +8,7 @@ class Shop extends TownContent {
         return this.name ?? 'Poké Mart';
     }
     public isVisible(): boolean {
-        return true;
+        return !(this.hideBeforeUnlocked && !this.isUnlocked());
     }
     public onclick(): void {
         ShopHandler.showShop(this);
@@ -18,7 +18,8 @@ class Shop extends TownContent {
     constructor(
         public items: Item[],
         public name = undefined,
-        requirements: (Requirement | OneFromManyRequirement)[] = []
+        requirements: (Requirement | OneFromManyRequirement)[] = [],
+        private hideBeforeUnlocked = false
     ) {
         super(requirements);
     }
