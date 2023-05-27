@@ -131,6 +131,7 @@ class Egg implements Saveable {
 
         const pokemonID = PokemonHelper.getPokemonById(this.pokemon).id;
         const gender = PokemonFactory.generateGenderById(pokemonID);
+        const shadow = GameConstants.ShadowStatus.None;
         if (partyPokemon) {
             // Increase attack
             partyPokemon.attackBonusPercent += Math.max(1, Math.round((GameConstants.BREEDING_ATTACK_BONUS + partyPokemon.vitaminsUsed[GameConstants.VitaminType.Calcium]()) * (efficiency / 100)));
@@ -192,7 +193,7 @@ class Egg implements Saveable {
         }
 
         // Update statistics
-        PokemonHelper.incrementPokemonStatistics(pokemonID, GameConstants.PokemonStatisticsType.Hatched, shiny, gender);
+        PokemonHelper.incrementPokemonStatistics(pokemonID, GameConstants.PokemonStatisticsType.Hatched, shiny, gender, shadow);
         App.game.oakItems.use(OakItemType.Blaze_Cassette);
         return true;
     }

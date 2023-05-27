@@ -66,16 +66,63 @@ ko.bindingHandlers.contentEditable = {
     },
 };
 
-ko.bindingHandlers.sortable = {
-    init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
-        bindingContext.extend({ sortableController: null });
-        // Needed to remove elements when the knockout array removes something
-        ko.utils.domNodeDisposal.addDisposeCallback(element, () => bindingContext.sortableController?.destroy());
-        return ko.bindingHandlers.template.init(element, valueAccessor);
-    },
-    update: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
-        bindingContext.sortableController?.destroy();
+//TODO: Replace with logic that maintains a singular PlayerSpriteSVG rather than clone re-rendering
+ko.bindingHandlers.playerSpriteMove = {
+    init: function (element) {
+        var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    if (element.classList.contains('iconLocation')) {
+                        var targetElement = document.getElementById('playerSprite');
+                        var imageElement = element.cloneNode(true);
+                        imageElement.classList.remove('hide');
 
+                        targetElement.innerHTML = '';
+                        targetElement.appendChild(imageElement);
+
+                        //Get required variables to replicate the rotate on parent group as well
+                        var rotate = imageElement.getAttribute('rotate');
+                        var x = imageElement.getAttribute('localx');
+                        var y = imageElement.getAttribute('localy');
+
+                        if (rotate) {
+                            targetElement.setAttribute('transform', 'rotate(90,' + x + ', ' + y + ')');
+                        } else {
+                            targetElement.setAttribute('transform', '');
+                        }
+                    }
+                }
+            });
+        });
+        observer.observe(element);
+    },
+};
+
+const sortableControllers = new WeakMap();
+ko.bindingHandlers.sortable = {
+    init: function (element, valueAccessor, allBindings, viewModel) {
+        sortableControllers.set(element, null);
+        const value = valueAccessor();
+        ko.applyBindingsToNode(element, {
+            template: {
+                ...value,
+                afterRender(nodes, el) {
+                    nodes.forEach((n) => {
+                        if (n.dataset) {
+                            n.dataset.sortableId = value.options.getId(el);
+                        }
+                    });
+                },
+                beforeRemove(node: HTMLElement, idx, el) {
+                    // Sortable may have cloned the node, so we need to get the real one
+                    const found = element.querySelector(`[data-sortable-id="${value.options.getId(el)}"]`);
+                    (found ?? node)?.remove();
+                },
+            },
+        }, viewModel);
+        return { controlsDescendantBindings: true };
+    },
+    update: function (element, valueAccessor) {
         const value = ko.unwrap(valueAccessor());
         const options = {
             // defaults
@@ -87,6 +134,7 @@ ko.bindingHandlers.sortable = {
 
             // override with options passed through knockout binding
             ...(value.options ?? {}),
+            dataIdAttr: 'data-sortable-id',
 
             // handle updating underlying knockout array when moving items
             onEnd: (evt, originalEvt) => {
@@ -105,8 +153,6 @@ ko.bindingHandlers.sortable = {
             },
         };
 
-        bindingContext.sortableController = Sortable.create(element, options);
-
-        return ko.bindingHandlers.template.update(element, valueAccessor, allBindings, viewModel, bindingContext);
+        sortableControllers.set(element, Sortable.create(element, options));
     },
 };

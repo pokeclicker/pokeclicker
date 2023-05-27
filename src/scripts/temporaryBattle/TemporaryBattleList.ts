@@ -4770,7 +4770,7 @@ TemporaryBattleList['Flowering Celebi'] = new TemporaryBattle(
     {
         isTrainerBattle: false,
         hideTrainer: true,
-        imageName: '../pokemon/251.02',
+        imageName: '../pokemon/251.01',
     }
 );
 TemporaryBattleList.Peony = new TemporaryBattle(
