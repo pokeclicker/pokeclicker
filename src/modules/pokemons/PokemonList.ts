@@ -13671,7 +13671,7 @@ export const pokemonList = createPokemonArray(
         'catchRate': 130,
         'evolutions': [
             // TODO: Evolves while holding an Oval Stone during the Day time
-            StoneEvolution('Happiny', 'Chansey', StoneType.None),
+            DummyEvolution('Happiny', 'Chansey'),
         ],
         'baby': true,
         'base': {
@@ -13697,7 +13697,7 @@ export const pokemonList = createPokemonArray(
         'catchRate': 130,
         'evolutions': [
             // TODO: Evolves while holding an Oval Stone during the Day time
-            StoneEvolution('Handout Happiny', 'Charity Chansey', StoneType.None),
+            DummyEvolution('Handout Happiny', 'Charity Chansey'),
         ],
         'baby': true,
         'base': {
@@ -14119,7 +14119,7 @@ export const pokemonList = createPokemonArray(
         'catchRate': 25,
         'evolutions': [
             // TODO: Evolves when leveled up with a Remoraid in the party
-            StoneEvolution('Mantyke', 'Mantine', StoneType.None),
+            DummyEvolution('Mantyke', 'Mantine'),
         ],
         'baby': true,
         'base': {
@@ -23762,7 +23762,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 135,
         'catchRate': 3,
-        'evolutions': [StoneEvolution('Meltan', 'Melmetal', StoneType.None)],
+        'evolutions': [DummyEvolution('Meltan', 'Melmetal')],
         'base': {
             'hitpoints': 46,
             'attack': 65,
