@@ -1037,7 +1037,7 @@ class QuestLineHelper {
 
     //Orre Questlines
     public static createOrreColosseumQuestLine() {
-        const orreColosseumQuestLine = new QuestLine('Shadows in the Desert', 'Explore Orre and uncover the origin of Shadow Pokémon.', new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), GameConstants.BulletinBoards.Hoenn);
+        const orreColosseumQuestLine = new QuestLine('Shadows in the Desert', 'Explore Orre and uncover the origin of Shadow Pokémon.', new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), new DevelopmentRequirement()]), GameConstants.BulletinBoards.Hoenn);
 
         const exploreStand = new TalkToNPCQuest(ExploreStand, 'Travel to Orre and explore the Outskirt Stand.');
         orreColosseumQuestLine.addQuest(exploreStand);
