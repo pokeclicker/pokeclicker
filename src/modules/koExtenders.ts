@@ -69,7 +69,7 @@ ko.bindingHandlers.contentEditable = {
 //TODO: Replace with logic that maintains a singular PlayerSpriteSVG rather than clone re-rendering
 ko.bindingHandlers.playerSpriteMove = {
     init: function (element) {
-        function handleVisibleElement(element) {
+        function handleVisibleElement() {
             if (element.classList.contains('iconLocation')) {
                 if (element.classList.contains('iconLocation')) {
                     var targetElement = document.getElementById('playerSprite');
@@ -101,7 +101,7 @@ ko.bindingHandlers.playerSpriteMove = {
 
                     const isVisible = displayStyle !== 'none';
                     if (isVisible) {
-                        handleVisibleElement(element);
+                        handleVisibleElement();
                     }
                 }
             }
@@ -114,7 +114,7 @@ ko.bindingHandlers.playerSpriteMove = {
         const displayStyle = window.getComputedStyle(element).getPropertyValue('display');
         const isVisible = displayStyle !== 'none';
         if (isVisible) {
-            handleVisibleElement(element);
+            handleVisibleElement();
         }
     },
 };
