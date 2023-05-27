@@ -2234,6 +2234,9 @@ class Update implements Saveable {
                     v.name = 'Hollow Truth and Ideals';
                 }
             });
+
+            //Kalos Stone Salesman battle
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 142);
         },
     };
 
