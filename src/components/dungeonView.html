@@ -1,19 +1,28 @@
 <div class="row justify-content-center no-gutters" data-bind="if: App.game.gameState === GameConstants.GameState.dungeon">
     <div class="col no-gutters clickable" style="height: 280px; display: block;"
         data-bind="click: function() { DungeonRunner.handleClick() }">
-        <h2 class="pageItemTitle mobileBattleTitle" style="display: block;">
+        <h2 class="pageItemTitle dungeonTitle" style="display: block;">
             <knockout data-bind="if: DungeonBattle.enemyPokemon() && DungeonBattle.enemyPokemon().health()">
                 <knockout data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': DungeonBattle.enemyPokemon() } }">Pokémon name</knockout>
                 <!-- ko if: !DungeonBattle.trainer() -->
                 <knockout data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(DungeonBattle.enemyPokemon().id)}}"></knockout>
                 <knockout style="position: relative; top: -1px;"
-                    data-bind="template: { name: 'pokerusStatusTemplate', data: { 'pokerus': PartyController.getPokerusStatus(DungeonBattle.enemyPokemon().id) }}">
+                          data-bind="template: { name: 'pokerusStatusTemplate', data: { 'pokerus': PartyController.getPokerusStatus(DungeonBattle.enemyPokemon().id) }}">
                 </knockout>
                 <!-- /ko -->
             </knockout>
             <knockout data-bind="if: !DungeonBattle.enemyPokemon() || !DungeonBattle.enemyPokemon().health()">
                 &nbsp;
             </knockout>
+
+            <div class="progress timer">
+                <div class="progress-bar bg-danger" role="progressbar"
+                     data-bind="attr:{ style: 'width:' + DungeonRunner.timeLeftPercentage() + '%' },
+                     css: { 'bg-danger' : DungeonRunner.timeLeftSeconds() < 20, 'bg-primary': DungeonRunner.timeLeftSeconds() >= 20 }"
+                     aria-valuemin="0" aria-valuemax="100">
+                     <span data-bind="text: DungeonRunner.timeLeftSeconds() + 's'" style="font-size: 12px;"></span>
+                </div>
+            </div>
 
             <knockout class="left">
                 <!-- ko if: DungeonBattle.trainer() -->
@@ -36,18 +45,10 @@
                 </span>
             </knockout>
             <!-- /ko -->
-            <div class="progress timer">
-                <div class="progress-bar bg-danger" role="progressbar"
-                     data-bind="attr:{ style: 'width:' + DungeonRunner.timeLeftPercentage() + '%' },
-                     css: { 'bg-danger': DungeonRunner.timeLeftSeconds() < 20, 'bg-primary': DungeonRunner.timeLeftSeconds() >= 20 }"
-                     aria-valuemin="0" aria-valuemax="100">
-                     <span data-bind="text: DungeonRunner.timeLeftSeconds() + 's'" style="font-size: 12px;"></span>
-                </div>
-            </div>
         </h2>
 
         <!-- ko if: (DungeonRunner.fighting() || DungeonBattle.catching)  -->
-        <div data-bind="if: DungeonBattle.enemyPokemon">
+        <div class="dungeon" data-bind="if: DungeonBattle.enemyPokemon">
             <div class="trainer" data-bind="if: DungeonBattle.trainer()">
                 <img data-bind="attr:{ src: DungeonBattle.trainer().image }" onerror="this.src='assets/images/npcs/specialNPCs/Mysterious Trainer.png';"/>
             </div>
