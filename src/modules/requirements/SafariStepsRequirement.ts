@@ -11,6 +11,6 @@ export default class SafariStepsRequirement extends AchievementRequirement {
     }
 
     public hint(): string {
-        return `${this.requiredValue} Steps needs to be taken in the Safari Zone.`;
+        return `${this.requiredValue} Steps needs to be taken in a Safari Zone.`;
     }
 }

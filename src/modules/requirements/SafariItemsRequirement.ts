@@ -11,6 +11,6 @@ export default class SafariItemsRequirement extends AchievementRequirement {
     }
 
     public hint(): string {
-        return `${this.requiredValue} Items needs to be picked up in the Safari Zone.`;
+        return `${this.requiredValue} Items needs to be picked up in a Safari Zone.`;
     }
 }

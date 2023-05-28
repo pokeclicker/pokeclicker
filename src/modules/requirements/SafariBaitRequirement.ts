@@ -11,6 +11,6 @@ export default class SafariBaitRequirement extends AchievementRequirement {
     }
 
     public hint(): string {
-        return `${this.requiredValue} Bait needs to be thrown in the Safari Zone.`;
+        return `${this.requiredValue} Bait needs to be thrown in a Safari Zone.`;
     }
 }

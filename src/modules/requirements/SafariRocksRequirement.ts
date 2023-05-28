@@ -11,6 +11,6 @@ export default class SafariRocksRequirement extends AchievementRequirement {
     }
 
     public hint(): string {
-        return `${this.requiredValue} Rocks needs to be thrown in the Safari Zone.`;
+        return `${this.requiredValue} Rocks needs to be thrown in a Safari Zone.`;
     }
 }
