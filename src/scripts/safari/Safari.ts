@@ -439,6 +439,7 @@ class Safari {
             const item = SafariItemController.getRandomItem();
             const name = BagHandler.displayName(item);
             BagHandler.gainItem(item);
+            GameHelper.incrementObservable(App.game.statistics.safariItemsObtained, 1);
             Notifier.notify({
                 message: `You found ${GameHelper.anOrA(name)} ${name}!`,
                 image: BagHandler.image(item),

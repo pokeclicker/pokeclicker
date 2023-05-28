@@ -219,6 +219,7 @@ export enum AchievementType {
     'Hatchery',
     'Farming',
     'Underground',
+    'Safari',
     'Battle Frontier',
     'Vitamins',
     'Pokerus',
