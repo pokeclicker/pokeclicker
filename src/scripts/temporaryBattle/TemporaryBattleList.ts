@@ -892,6 +892,77 @@ TemporaryBattleList.Latios = new TemporaryBattle(
         hideTrainer: true,
     }
 );
+TemporaryBattleList.Willie = new TemporaryBattle(
+    'Willie',
+    [
+        new GymPokemon('Zigzagoon', 6900000, 24),
+        new GymPokemon('Zigzagoon', 6900000, 24),
+    ],
+    'Whew! With skills like that, y\'all should head to Phenac City.',
+    [new QuestLineStepCompletedRequirement('Shadows in the Desert', 0)],
+    undefined,
+    {
+        displayName: 'Willie',
+        imageName: 'Rider (male)',
+    }
+);
+TemporaryBattleList.Folly = new TemporaryBattle(
+    'Folly',
+    [
+        new GymPokemon('Whismur', 6950000, 25),
+        new GymPokemon('Whismur', 6950000, 25),
+    ],
+    '<i>The shady guy flees, dropping a mysterious sack. The sack.... cries out in pain?</i>',
+    [new QuestLineStepCompletedRequirement('Shadows in the Desert', 1)],
+    undefined,
+    {
+        displayName: 'Folly',
+        imageName: 'Shady Guy (male)',
+    }
+);
+TemporaryBattleList['Cipher Peon Doven'] = new TemporaryBattle(
+    'Cipher Peon Doven',
+    [
+        new GymPokemon('Spheal', 7300000, 33),
+        new GymPokemon('Carvanha', 7300000, 34),
+    ],
+    'Rats! Foiled by some nobody!',
+    [new QuestLineStepCompletedRequirement('Shadows in the Desert', 14)],
+    undefined,
+    {
+        displayName: 'Cipher Peon Doven',
+        imageName: 'Cipher Peon (female)',
+    }
+);
+TemporaryBattleList['Cipher Peon Silton'] = new TemporaryBattle(
+    'Cipher Peon Silton',
+    [
+        new GymPokemon('Shroomish', 7300000, 34),
+        new GymPokemon('Cacnea', 7300000, 34),
+    ],
+    'Man! I was really having fun doing these crimes.',
+    [new QuestLineStepCompletedRequirement('Shadows in the Desert', 14)],
+    undefined,
+    {
+        displayName: 'Cipher Peon Silton',
+        imageName: 'Cipher Peon (male)',
+    }
+);
+TemporaryBattleList['Cipher Peon Kass'] = new TemporaryBattle(
+    'Cipher Peon Kass',
+    [
+        new GymPokemon('Baltoy', 4900000, 35),
+        new GymPokemon('Ralts', 4900000, 35),
+        new GymPokemon('Kirlia', 4900000, 35),
+    ],
+    'Run away!',
+    [new QuestLineStepCompletedRequirement('Shadows in the Desert', 14)],
+    undefined,
+    {
+        displayName: 'Cipher Peon Kass',
+        imageName: 'Cipher Peon (female)',
+    }
+);
 TemporaryBattleList['Sevii Rocket Grunt 1'] = new TemporaryBattle(
     'Sevii Rocket Grunt 1',
     [
@@ -1441,7 +1512,7 @@ TemporaryBattleList['Team Plasma Grunt 2'] = new TemporaryBattle(
     [
         new GymBadgeRequirement(BadgeEnums.Bolt),
         new TemporaryBattleRequirement('Team Plasma Grunt 1'),
-        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 3),
+        new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 3),
     ],
     undefined,
     {
@@ -1456,7 +1527,7 @@ TemporaryBattleList['Team Plasma Grunt 3'] = new TemporaryBattle(
     [
         new GymBadgeRequirement(BadgeEnums.Bolt),
         new TemporaryBattleRequirement('Team Plasma Grunt 1'),
-        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 3),
+        new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 3),
     ],
     undefined,
     {
@@ -1520,7 +1591,7 @@ TemporaryBattleList['Team Plasma Grunt 4'] = new TemporaryBattle(
     'Team Plasma Grunt 4',
     [new GymPokemon('Koffing', 39496600, 30)],
     'You! So you\'re a Trainer who fights while believing in your Pokémon, are you?',
-    [new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 5)],
+    [new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 5)],
     undefined,
     {
         displayName: 'Team Plasma Grunt',
@@ -1531,7 +1602,7 @@ TemporaryBattleList['Team Plasma Grunt 5'] = new TemporaryBattle(
     'Team Plasma Grunt 5',
     [new GymPokemon('Trubbish', 39496600, 30)],
     'Plasmaaaa! Plasmaaaa!!',
-    [new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 5)],
+    [new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 5)],
     undefined,
     {
         displayName: 'Team Plasma Grunt',
@@ -1547,7 +1618,7 @@ TemporaryBattleList['Team Plasma Grunts 1'] = new TemporaryBattle(
         new GymPokemon('Krokorok', 9974150, 29),
     ],
     'The Gym Leader is tough, but you... Are you even human?! I tried to use the same combination as you, and yet...',
-    [new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 5)],
+    [new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 5)],
     undefined,
     {
         displayName: 'Team Plasma Grunts',
@@ -1563,7 +1634,7 @@ TemporaryBattleList['Team Plasma Grunts 2'] = new TemporaryBattle(
         new GymPokemon('Raticate', 9974150, 29),
     ],
     'No! At this rate, I... I won\'t be able to protect the Plasma Frigate! P-P-P-Plasmaaaa!',
-    [new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 5)],
+    [new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 5)],
     undefined,
     {
         displayName: 'Team Plasma Grunts',
@@ -1602,7 +1673,7 @@ TemporaryBattleList['Team Plasma Grunt 6'] = new TemporaryBattle(
         new TemporaryBattleRequirement('Team Plasma Grunt 5'),
         new TemporaryBattleRequirement('Team Plasma Grunts 1'),
         new TemporaryBattleRequirement('Team Plasma Grunts 2'),
-        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 8),
+        new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 8),
     ],
     undefined,
     {
@@ -1713,7 +1784,7 @@ TemporaryBattleList['Colress 3'] = new TemporaryBattle(
     [
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Giant Chasm')),
         new TemporaryBattleRequirement('Plasma Shadow 1'),
-        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 17),
+        new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 17),
     ],
     undefined,
     {
@@ -1777,7 +1848,7 @@ TemporaryBattleList['Ghetsis 1'] = new TemporaryBattle(
         new TemporaryBattleRequirement('Plasma Shadow 2'),
         new TemporaryBattleRequirement('Plasma Shadow 3'),
         new TemporaryBattleRequirement('Plasma Shadow 4'),
-        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 20),
+        new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 20),
     ],
     undefined,
     {
@@ -4725,7 +4796,7 @@ TemporaryBattleList['Flowering Celebi'] = new TemporaryBattle(
     {
         isTrainerBattle: false,
         hideTrainer: true,
-        imageName: '../pokemon/251.02',
+        imageName: '../pokemon/251.01',
     }
 );
 TemporaryBattleList.Peony = new TemporaryBattle(
