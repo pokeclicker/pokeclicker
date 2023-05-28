@@ -16,7 +16,7 @@ class HarvestBerriesQuest extends Quest implements QuestInterface {
 
     public static generateData(): any[] {
         // Getting available Berries (always include Gen 1 Berries)
-        const availableBerries = App.game.farming.berryData.filter(berry => App.game.farming.unlockedBerries[berry.type]() && berry.growthTime[3] < 12000 || berry.type < BerryType.Persim);
+        const availableBerries = App.game.farming.berryData.filter(berry => (App.game.farming.unlockedBerries[berry.type]() && berry.growthTime[3] < 12000) || berry.type < BerryType.Persim);
         const berry = SeededRand.fromArray(availableBerries);
 
         const maxAmt = Math.min(300, Math.ceil(432000 / berry.growthTime[3]));
