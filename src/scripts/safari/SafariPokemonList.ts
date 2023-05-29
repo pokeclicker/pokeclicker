@@ -38,7 +38,7 @@ class SafariPokemonList {
         const pokemon : SafariType[] = SeededRand.shuffleArray(App.game.party.caughtPokemon.map((p) => p.name)
             .filter((p) => !PokemonHelper.hasEvableLocations(p) && Object.keys(PokemonHelper.getPokemonLocations(p)).length)
             .map((p) => {
-                return {name: p, weight: 3};
+                return {name: p, weight: 10};
             })).slice(0, 5);
         pokemon.push({ name: 'Shuckle', weight: 2 });
         pokemon.push({ name: 'Stunfisk', weight: 2 });
