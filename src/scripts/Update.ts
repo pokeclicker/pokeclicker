@@ -2310,7 +2310,7 @@ class Update implements Saveable {
             button.innerText = 'Click to Backup Save!';
             const filename = settingsData.saveFilename || Settings.getSetting('saveFilename').defaultValue;
             const datestr = GameConstants.formatDate(new Date());
-            button.setAttribute('download', GameHelper.saveFileName(filename, {'{date}' : datestr, '{version}' : this.saveVersion, '{name}' : decodeURI(saveData.profile.name)}, true));
+            button.setAttribute('download', GameHelper.saveFileName(filename, {'{date}' : datestr, '{version}' : this.saveVersion, '{name}' : saveData.profile.name}, true));
         } catch (e) {
             console.error('Failed to create backup button data:', e);
         }
