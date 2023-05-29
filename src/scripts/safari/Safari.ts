@@ -20,8 +20,8 @@ class Safari {
     static maxSafariLevel = 40;
     static safariExp: KnockoutComputed<number> = ko.pureComputed(() => {
         return App.game.statistics.safariRocksThrown() * 10 +
-            App.game.statistics.safariBaitThrown() * 10 + 
-            App.game.statistics.safariBallsThrown() * 5 + 
+            App.game.statistics.safariBaitThrown() * 10 +
+            App.game.statistics.safariBallsThrown() * 5 +
             App.game.statistics.safariPokemonCaptured() * 50;
     });
     static safariLevel: KnockoutComputed<number> = ko.pureComputed(() => {
