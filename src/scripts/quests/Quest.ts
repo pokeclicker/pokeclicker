@@ -56,6 +56,7 @@ abstract class Quest {
     claim() {
         if (this.isCompleted() && !this.claimed()) {
             App.game.quests.addXP(this.xpReward);
+            this.focusSub?.dispose?.();
             this.claimed(true);
             if (this.pointsReward) {
                 App.game.wallet.gainQuestPoints(this.pointsReward);
