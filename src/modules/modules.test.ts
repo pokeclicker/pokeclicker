@@ -178,3 +178,32 @@ describe('Test GameHelper', () => {
         expect(GameHelper.escapeStringRegex('/[Just a test](.*?)/')).toEqual('\\/\\[Just a test\\]\\(\\.\\*\\?\\)\\/');
     });
 });
+
+import SaveSelector from './SaveSelector';
+describe('SaveSelector', () => {
+    describe('encoding', () => {
+        it('encodes and decodes chinese characters', () => {
+            const input = '妙蛙种子';
+            const decoded = SaveSelector.atob(SaveSelector.btoa(input));
+            expect(decoded).toBe(input);
+        });
+
+        it('encodes and decodes emoji', () => {
+            const input = '🙂';
+            const decoded = SaveSelector.atob(SaveSelector.btoa(input));
+            expect(decoded).toBe(input);
+        });
+
+        it('encodes and decodes uri encoded strings', () => {
+            const input = 'hello %20 world';
+            const decoded = SaveSelector.atob(SaveSelector.btoa(input));
+            expect(decoded).toBe(input);
+        });
+
+        it('encodes and decodes non-uri % characters', () => {
+            const input = '% % % %';
+            const decoded = SaveSelector.atob(SaveSelector.btoa(input));
+            expect(decoded).toBe(input);
+        });
+    });
+});
