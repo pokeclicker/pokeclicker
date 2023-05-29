@@ -81,7 +81,7 @@
                                 }"/>
                                 <!-- /ko -->
                             </div>
-                            <div class="pokemonAttack" data-bind="text: $data.calculateDamage().toLocaleString('en-US')"></div>
+                            <div class="pokemonAttack" data-bind="text: (Settings.getSetting('displayTrueAttack').value ? $data.calculateModifiedAttack() : attack).toLocaleString('en-US')"></div>
                             <div class="pokemonLevel" data-bind="text: level"></div>
                         </div>
                     </td>

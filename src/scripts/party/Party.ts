@@ -159,7 +159,7 @@ class Party implements Feature {
     public calculatePokemonAttack(type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, ignoreRegionMultiplier = false, region: GameConstants.Region = player.region, subRegion: number = player.subregion, includeBreeding = false, useBaseAttack = false, overrideWeather?: WeatherType, ignoreLevel = false, includeFlute = true): number {
         let attack = 0;
         for (const pokemon of this.caughtPokemon) {
-            attack += pokemon.calculateDamage(type1, type2, region, subRegion, ignoreRegionMultiplier, includeBreeding, useBaseAttack, overrideWeather, ignoreLevel, includeFlute);
+            attack += pokemon.calculateModifiedAttack(type1, type2, region, subRegion, ignoreRegionMultiplier, includeBreeding, useBaseAttack, overrideWeather, ignoreLevel, includeFlute);
         }
 
         const bonus = this.multiplier.getBonus('pokemonAttack');

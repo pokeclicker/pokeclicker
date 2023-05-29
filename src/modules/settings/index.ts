@@ -393,3 +393,5 @@ Object.keys(LogBookTypes).forEach((logBookType) => {
 });
 
 Settings.add(new BooleanSetting('catchFilters.initialEnabled', 'New Catch Filters initially enabled', false));
+
+Settings.add(new BooleanSetting('displayTrueAttack', 'Display True Attack in Pokemon List', false));

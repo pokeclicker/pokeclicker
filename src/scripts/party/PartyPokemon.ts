@@ -111,7 +111,7 @@ class PartyPokemon implements Saveable {
         this._showShadowImage = ko.observable(false);
     }
 
-    public calculateDamage(type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, region: GameConstants.Region = player.region, subRegion: number = player.subregion, ignoreRegionMultiplier = false, includeBreeding = false, useBaseAttack = false, overrideWeather: WeatherType, ignoreLevel = false, includeFlute = true): number {
+    public calculateModifiedAttack(type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, region: GameConstants.Region = player.region, subRegion: number = player.subregion, ignoreRegionMultiplier = false, includeBreeding = false, useBaseAttack = false, overrideWeather: WeatherType, ignoreLevel = false, includeFlute = true): number {
         let multiplier = 1, attack = 0;
 
         if (!ignoreRegionMultiplier) {
