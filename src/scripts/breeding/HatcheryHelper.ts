@@ -34,6 +34,7 @@ class HatcheryHelper {
     public attackEfficiency: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 1 });
     public prevBonus: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 0 });
     public nextBonus: KnockoutObservable<number> = ko.observable(1).extend({ numeric: 0 });
+    public categories: KnockoutObservableArray<number> = ko.observableArray([]);
     // public level: number;
     // public experience: number;
 
@@ -105,6 +106,7 @@ class HatcheryHelper {
             message: 'Thanks for hiring me,\nI won\'t let you down!',
             type: NotificationConstants.NotificationOption.success,
             timeout: 30 * GameConstants.SECOND,
+            setting: NotificationConstants.NotificationSetting.Hatchery.hatchery_helper,
         });
     }
 
@@ -114,6 +116,7 @@ class HatcheryHelper {
             message: 'Thanks for the work.\nLet me know when you\'re hiring again!',
             type: NotificationConstants.NotificationOption.info,
             timeout: 30 * GameConstants.SECOND,
+            setting: NotificationConstants.NotificationSetting.Hatchery.hatchery_helper,
         });
         this.hired(false);
         return;
@@ -147,6 +150,7 @@ class HatcheryHelper {
             sortOption: this.sortOption(),
             sortDirection: this.sortDirection(),
             hatched: this.hatched(),
+            categories: this.categories(),
         };
     }
 
@@ -158,6 +162,7 @@ class HatcheryHelper {
         this.sortOption(json.sortOption || 0);
         this.sortDirection(json.sortDirection || false);
         this.hatched(json.hatched || 0);
+        this.categories(json.categories || []);
     }
 }
 
@@ -209,11 +214,20 @@ class HatcheryHelpers {
                 // Get the currently selected region
                 const currentRegion = +Settings.getSetting('breedingRegionalAttackDebuffSetting').value;
                 const subregion = -1;
-
                 // Check if there's a pokemon we can chuck into an egg
-                const pokemon = [...App.game.party.caughtPokemon]
-                    .sort(PartyController.compareBy(helper.sortOption(), helper.sortDirection(), currentRegion, subregion))
-                    .find(p => BreedingController.visible(p)());
+                const compare = PartyController.compareBy(helper.sortOption(), helper.sortDirection(), currentRegion, subregion);
+
+                const categories = helper.categories();
+                const pokemon = App.game.party.caughtPokemon.reduce((best, pokemon) => {
+                    if (!pokemon.isHatchable() || (categories.length && categories.indexOf(pokemon.category) === -1)) {
+                        return best;
+                    }
+                    if (best === null) {
+                        return pokemon;
+                    }
+                    return compare(best, pokemon) <= 0 ? best : pokemon;
+                }, null);
+
                 if (pokemon) {
                     this.hatchery.gainPokemonEgg(pokemon, true);
                     // Charge the player when we put a pokemon in the hatchery

@@ -231,10 +231,19 @@ class DiscordRichPresence {
     }
 
     static getRichPresenceData() {
-        const nextArea = player.route() ? Routes.getName(player.route(), player.region) : player.town() ? player.town().name : 'Unknown Area';
+        let nextArea;
+        if (player == undefined) {
+            nextArea = 'Loading Game';
+        } else if (player.route()) {
+            nextArea = Routes.getName(player.route(), player.region);
+        } else if (player.town()) {
+            nextArea = player.town().name;
+        } else {
+            nextArea = 'Unknown Area';
+        }
 
         const discordRPCValues: Record<string, any> = {
-            enabled: Settings.getSetting('discord-rp.enabled').observableValue(),
+            enabled: (player != undefined ? Settings.getSetting('discord-rp.enabled').observableValue() : false),
             line1: this.replaceDiscordText(Settings.getSetting('discord-rp.line-1').value || '  '),
             line2: this.replaceDiscordText(Settings.getSetting('discord-rp.line-2').value || '  '),
         };

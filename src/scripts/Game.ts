@@ -24,6 +24,7 @@ class Game {
         public profile: Profile,
         public breeding: Breeding,
         public pokeballs: Pokeballs,
+        public pokeballFilters: PokeballFilters,
         public wallet: Wallet,
         public keyItems: KeyItems,
         public badgeCase: BadgeCase,
@@ -47,9 +48,10 @@ class Game {
         public saveReminder: SaveReminder,
         public battleCafe: BattleCafeSaveObject,
         public dreamOrbController: DreamOrbController,
-        public purifyChamber: PurifyChamber
+        public purifyChamber: PurifyChamber,
+        public weatherApp: WeatherApp
     ) {
-        this._gameState = ko.observable(GameConstants.GameState.paused);
+        this._gameState = ko.observable(GameConstants.GameState.loading);
     }
 
     load() {
@@ -88,6 +90,7 @@ class Game {
         this.underground.initialize();
         this.farming.initialize();
         this.specialEvents.initialize();
+        this.pokeballFilters.initialize();
         this.load();
 
         // Update if the achievements are already completed
@@ -97,7 +100,7 @@ class Game {
         if (player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.None) {
             Battle.generateNewEnemy();
         } else {
-            const battlePokemon = new BattlePokemon('MissingNo.', 0, PokemonType.None, PokemonType.None, 0, 0, 0, 0, new Amount(0, GameConstants.Currency.money), false, 0, GameConstants.BattlePokemonGender.NoGender, GameConstants.ShadowStatus.None);
+            const battlePokemon = new BattlePokemon('MissingNo.', 0, PokemonType.None, PokemonType.None, 0, 0, 0, 0, new Amount(0, GameConstants.Currency.money), false, 0, GameConstants.BattlePokemonGender.NoGender, GameConstants.ShadowStatus.None, EncounterType.route);
             Battle.enemyPokemon(battlePokemon);
         }
         //Safari.load();
@@ -113,6 +116,7 @@ class Game {
         ShardDeal.generateDeals();
         SafariPokemonList.generateSafariLists();
         RoamingPokemonList.generateIncreasedChanceRoutes(now);
+        WeatherApp.initialize();
 
         if (Settings.getSetting('disableOfflineProgress').value === false) {
             this.computeOfflineEarnings();
@@ -338,6 +342,9 @@ class Game {
         window.onbeforeunload = () => {
             this.save();
         };
+
+        console.log('%cStop!', 'color: red; font-size: 36px; font-weight: bold;');
+        console.log('%cThis is a browser feature intended for developers. If you were told to copy-paste or enter something here to obtain an easter egg or unlock a secret, it can corrupt your save file, cause bugs, or otherwise break your game.', 'color: red; font-size: 16px;');
     }
 
     stop() {
@@ -436,6 +443,8 @@ class Game {
                 }
                 // Give the players more Battle Cafe spins
                 BattleCafeController.spinsLeft(BattleCafeController.spinsPerDay());
+                // Generate the weather forecast
+                WeatherApp.initialize();
 
                 DayOfWeekRequirement.date(now.getDay());
             }
@@ -444,6 +453,10 @@ class Game {
             if (old.getHours() !== now.getHours()) {
                 Weather.generateWeather(now);
                 RoamingPokemonList.generateIncreasedChanceRoutes(now);
+                // Check if it's weather change time
+                if (now.getHours() % Weather.period === 0) {
+                    WeatherApp.checkDateHasPassed();
+                }
             }
 
             this.save();
@@ -485,6 +498,12 @@ class Game {
         SaveReminder.counter += GameConstants.TICK_TIME;
         if (SaveReminder.counter >= 5 * GameConstants.MINUTE) {
             SaveReminder.tick();
+        }
+
+        // update event calendar
+        this.specialEvents.counter += GameConstants.TICK_TIME;
+        if (this.specialEvents.counter >= GameConstants.SPECIAL_EVENT_TICK) {
+            this.specialEvents.tick();
         }
     }
 

@@ -17,6 +17,12 @@ aria-labelledby="purifyChamberModalLabel">
                     <img data-bind="visible: App.game.purifyChamber.selectedPokemon(), attr: { src: App.game.purifyChamber.selectedPokemon() ? PokemonHelper.getImage(App.game.purifyChamber.selectedPokemon().id) : '' }"/>
                 </div>
                 <div>
+                    <h4>Flow needed for next purification:</h4>
+                    <span data-bind="text: App.game.purifyChamber.currentFlow().toLocaleString('en-US')"></span>
+                    <span> / </span>
+                    <span data-bind="text: App.game.purifyChamber.flowNeeded().toLocaleString('en-US')"></span>
+                </div>
+                <div>
                     <button data-bind="visible: App.game.purifyChamber.canPurify()" class="btn btn-primary" onclick="App.game.purifyChamber.purify()">Purify</button>
                 </div>
                 <!-- /ko -->

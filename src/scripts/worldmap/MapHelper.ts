@@ -71,9 +71,16 @@ class MapHelper {
 
     public static getCurrentEnvironment(): GameConstants.Environment {
         const area = player.route() ||
-            (App.game.gameState == GameConstants.GameState.temporaryBattle ? TemporaryBattleRunner.battleObservable()?.parent?.name ?? TemporaryBattleRunner.battleObservable()?.optionalArgs.returnTown : undefined) ||
+            (App.game.gameState == GameConstants.GameState.temporaryBattle
+                ? TemporaryBattleRunner.getEnvironmentArea() : undefined) ||
+            (App.game.gameState == GameConstants.GameState.gym
+                ? GymRunner.getEnvironmentArea() : undefined) ||
             player.town()?.name ||
             undefined;
+
+        if (area in GameConstants.Environments) {
+            return area;
+        }
 
         const [env] = Object.entries(GameConstants.Environments).find(
             ([, regions]) => regions[player.region]?.has(area)
@@ -140,16 +147,20 @@ class MapHelper {
         const states = [];
         // Is this location a dungeon
         if (dungeonList[townName]) {
+            const possiblePokemon = dungeonList[townName].allAvailablePokemon();
+
             if (!App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(townName)]()) {
                 states.push(areaStatus.unlockedUnfinished);
-            } else if (DungeonRunner.isThereQuestAtLocation(dungeonList[townName])) {
+            } else if (dungeonList[townName].isThereQuestAtLocation()) {
                 states.push(areaStatus.questAtLocation);
-            } else if (!DungeonRunner.dungeonCompleted(dungeonList[townName], false)) {
+            } else if (!RouteHelper.listCompleted(possiblePokemon, false)) {
                 states.push(areaStatus.uncaughtPokemon);
-            } else if (!DungeonRunner.dungeonCompleted(dungeonList[townName], true) && !DungeonRunner.isAchievementsComplete(dungeonList[townName])) {
-                states.push(areaStatus.uncaughtShinyPokemonAndMissingAchievement);
-            } else if (!DungeonRunner.dungeonCompleted(dungeonList[townName], true)) {
-                states.push(areaStatus.uncaughtShinyPokemon);
+            } else if (!RouteHelper.listCompleted(possiblePokemon, true)) {
+                if (!DungeonRunner.isAchievementsComplete(dungeonList[townName])) {
+                    states.push(areaStatus.uncaughtShinyPokemonAndMissingAchievement);
+                } else {
+                    states.push(areaStatus.uncaughtShinyPokemon);
+                }
             } else if (!DungeonRunner.isAchievementsComplete(dungeonList[townName])) {
                 states.push(areaStatus.missingAchievement);
             } else if (RouteHelper.minPokerus(dungeonList[townName].allAvailablePokemon()) < 3) {

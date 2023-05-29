@@ -709,7 +709,8 @@
     <!--Petalburg Woods-->
     <%- include('templates/mapDungeon',
         { name: "Petalburg Woods"
-        , x: 1, y: 29
+        , x: 0, y: 29
+        , width: 5, height: 3
         })
      %>
 
@@ -897,6 +898,14 @@
     %>
 
     <%- include('templates/mapPOI',
+        { name: "S. S. Anne"
+        , x: 33, y: 47
+        , width: 8, height: 3
+        , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Slateport City') }"
+        })
+    %>
+
+    <%- include('templates/mapPOI',
         { name: "Underground Entrance"
         , x: 32, y: 13
         , width: 3, height: 4
@@ -1070,6 +1079,26 @@
      %>
 
      <%- include('templates/mapOverlay',
+         { name: "Primal Groudon"
+        , x: 64, y: 18
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Primal Groudon'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Primal Groudon'] && TemporaryBattleList['Primal Groudon'].isVisible()"
+         , image: "assets/images/map/primalgroudon.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Primal Kyogre"
+        , x: 68, y: 22
+         , width: 5, height: 5
+         , databind: "click: () => TemporaryBattleList['Primal Kyogre'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Primal Kyogre'] && TemporaryBattleList['Primal Kyogre'].isVisible()"
+         , image: "assets/images/map/primalkyogre.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
          { name: "Ash Ketchum"
          , x: 50, y: 10
          , width: 4, height: 4
@@ -1083,6 +1112,35 @@
             'xlink:href':'assets/images/orre.png?v=$VERSION',
             href:'assets/images/orre.png?v=$VERSION'
         }"></image>
+
+    <!-- ------ -->
+    <!-- ROUTES -->
+    <!-- ------ -->
+
+    <!--Rock Poké Spot-->
+    <%- include('templates/mapRoute',
+        { route: 135, region: 2
+        , width: 5, height: 4
+        , x: 83, y: 33, name: "RPS"
+        })
+    %>
+
+    <!--Oasis Poké Spot-->
+    <%- include('templates/mapRoute',
+        { route: 136, region: 2
+        , width: 5, height: 4
+        , x: 34, y: 34, name: "OPS"
+        })
+    %>
+
+    <!--Cave Poké Spot-->
+    <%- include('templates/mapRoute',
+        { route: 137, region: 2
+        , width: 4, height: 4
+        , x: 53, y: 17, name: "CPS"
+        })
+    %>
+
 
         <!-- ----- -->
         <!-- TOWNS -->
@@ -1269,9 +1327,9 @@
         <!-- DUNGEONS -->
         <!-- -------- -->
 
-        <!--Pyrite Bldg-->
+        <!--Pyrite Building-->
         <%- include('templates/mapDungeon',
-            { name: "Pyrite Bldg"
+            { name: "Pyrite Building"
             , x: 38, y: 43
             , width: 5, height: 8
             })

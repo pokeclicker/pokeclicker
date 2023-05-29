@@ -37,6 +37,7 @@ namespace GameConstants {
     declare const WANDER_TICK: number;
     declare const TEMP_BATTLE_TIME: number;
     declare const TEMP_BATTLE_TICK: number;
+    declare const SPECIAL_EVENT_TICK: number;
     declare const MAX_AVAILABLE_REGION: number;
     declare const MaxIDPerRegion: number[];
     declare const ITEM_USE_TIME: number;
@@ -129,6 +130,7 @@ namespace GameConstants {
     declare const GAIN_MONEY_BASE_REWARD: number;
     declare const HATCH_EGGS_BASE_REWARD: number;
     declare const SHINY_BASE_REWARD: number;
+    declare const SHADOW_BASE_REWARD: number;
     declare const DEFEAT_POKEMONS_BASE_REWARD: number;
     declare const CAPTURE_POKEMONS_BASE_REWARD: number;
     declare const GAIN_TOKENS_BASE_REWARD: number;
@@ -149,6 +151,7 @@ namespace GameConstants {
     declare const DUNGEON_EP_MODIFIER: number;
     declare const DUNGEON_BOSS_EP_MODIFIER: number;
     declare const ROAMER_EP_MODIFIER: number;
+    declare const SHADOW_EP_MODIFIER: number;
     declare const EP_EV_RATIO: number;
     declare const EP_CHALLENGE_MODIFIER: number;
     declare const GRISEOUS_ITEM_CHANCE: number;
@@ -157,6 +160,7 @@ namespace GameConstants {
     declare const RUST_ITEM_CHANCE: number;
     declare const MANE_ITEM_CHANCE: number;
     declare enum GameState {
+        loading,
         idle,
         paused,
         fighting,
@@ -255,6 +259,7 @@ namespace GameConstants {
         PowerPlant: EnvironmentData,
         Mansion: EnvironmentData,
         Graveyard: EnvironmentData,
+        Default: EnvironmentData,
     };
     declare type Environment = keyof typeof Environments;
     declare const EnvironmentCssClass:Record<Environment, string>;
@@ -398,9 +403,9 @@ namespace GameConstants {
         Purple,
         Indigo,
         Brown,
-        LiteBlue,
+        Light_Blue,
         Olive,
-        Flaxen,
+        Beige,
         Gray,
         White
     }
@@ -720,5 +725,64 @@ namespace GameConstants {
         None,
         Shadow,
         Purified,
+    }
+    declare enum MegaStoneType {
+        Abomasite,
+        Absolite,
+        Aerodactylite,
+        Aggronite,
+        Alakazite,
+        Altarianite,
+        Ampharosite,
+        Audinite,
+        Banettite,
+        Beedrillite,
+        Blastoisinite,
+        Blazikenite,
+        Blue_Orb,
+        Cameruptite,
+        Charizardite_X,
+        Charizardite_Y,
+        Diancite,
+        Galladite,
+        Garchompite,
+        Gardevoirite,
+        Gengarite,
+        Glalitite,
+        Gyaradosite,
+        Heracronite,
+        Houndoominite,
+        Kangaskhanite,
+        Latiasite,
+        Latiosite,
+        Lopunnite,
+        Lucarionite,
+        Manectite,
+        Mawilite,
+        Medichamite,
+        Metagrossite,
+        Meteorite,
+        Mewtwonite_X,
+        Mewtwonite_Y,
+        Pidgeotite,
+        Pinsirite,
+        Red_Orb,
+        Sablenite,
+        Salamencite,
+        Sceptilite,
+        Scizorite,
+        Sharpedonite,
+        Slowbronite,
+        Steelixite,
+        Swampertite,
+        Tyranitarite,
+        Venusaurite,
+    }
+    declare enum GemShops {
+        HoennFluteMaster,
+        HoennStoneSalesman,
+        UnovaFluteMaster,
+        FurfrouGemTrader,
+        MagikarpJumpGemTrader,
     }
 }

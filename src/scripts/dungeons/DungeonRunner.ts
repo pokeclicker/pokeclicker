@@ -14,7 +14,7 @@ class DungeonRunner {
     public static currentTileType;
     public static encountersWon: KnockoutObservable<number> = ko.observable(0);
     public static fightingBoss: KnockoutObservable<boolean> = ko.observable(false);
-    public static defeatedBoss: KnockoutObservable<boolean> = ko.observable(false);
+    public static defeatedBoss: KnockoutObservable<string> = ko.observable(null);
     public static dungeonFinished: KnockoutObservable<boolean> = ko.observable(false);
     public static fightingLootEnemy: boolean;
 
@@ -69,7 +69,7 @@ class DungeonRunner {
         });
         DungeonRunner.fightingLootEnemy = false;
         DungeonRunner.fightingBoss(false);
-        DungeonRunner.defeatedBoss(false);
+        DungeonRunner.defeatedBoss(null);
         DungeonRunner.dungeonFinished(false);
         App.game.gameState = GameConstants.GameState.dungeon;
     }
@@ -303,12 +303,6 @@ class DungeonRunner {
         const dungeonIndex = GameConstants.getDungeonIndex(dungeon.name);
         return AchievementHandler.achievementList.every(achievement => {
             return !(achievement.property instanceof ClearDungeonRequirement && achievement.property.dungeonIndex === dungeonIndex && !achievement.isCompleted());
-        });
-    }
-
-    public static isThereQuestAtLocation(dungeon: Dungeon) {
-        return App.game.quests.currentQuests().some(q => {
-            return q instanceof DefeatDungeonQuest && q.dungeon == dungeon.name;
         });
     }
 

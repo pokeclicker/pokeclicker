@@ -165,6 +165,18 @@ class PartyController {
         return PartyController.pokemonsWithHeldItemSortedList;
     }).extend({ rateLimit: 500 });
 
+    public static moveCategoryPokemon(fromCategory: number, toCategory: number) {
+        // Category should exist, otherwise use the None category
+        if (!PokemonCategories.categories().some((c) => c.id === toCategory)) {
+            toCategory = 0;
+        }
+
+        App.game.party.caughtPokemon.forEach((p) => {
+            if (p.category === fromCategory) {
+                p.category = toCategory;
+            }
+        });
+    }
 
     public static compareBy(option: SortOptions, direction: boolean, region = -1, subregion = -1): (a: PartyPokemon, b: PartyPokemon) => number {
         return function (a, b) {

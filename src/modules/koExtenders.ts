@@ -1,6 +1,8 @@
 /* eslint-disable no-param-reassign */
 /// <reference path="./koExtenders.d.ts" />
 
+import Sortable from 'sortablejs';
+
 // Only numeric values allowed - usage: ko.observable(0).extend({ numeric: 0 });
 ko.extenders.numeric = (target: ko.Subscribable, precision: number) => {
     // create a writable computed observable to intercept writes to our observable
@@ -61,5 +63,96 @@ ko.bindingHandlers.contentEditable = {
         element.textContent = value();
         element.contentEditable = 'true';
         element.addEventListener('blur', onBlur);
+    },
+};
+
+//TODO: Replace with logic that maintains a singular PlayerSpriteSVG rather than clone re-rendering
+ko.bindingHandlers.playerSpriteMove = {
+    init: function (element) {
+        var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    if (element.classList.contains('iconLocation')) {
+                        var targetElement = document.getElementById('playerSprite');
+                        var imageElement = element.cloneNode(true);
+                        imageElement.classList.remove('hide');
+
+                        targetElement.innerHTML = '';
+                        targetElement.appendChild(imageElement);
+
+                        //Get required variables to replicate the rotate on parent group as well
+                        var rotate = imageElement.getAttribute('rotate');
+                        var x = imageElement.getAttribute('localx');
+                        var y = imageElement.getAttribute('localy');
+
+                        if (rotate) {
+                            targetElement.setAttribute('transform', 'rotate(90,' + x + ', ' + y + ')');
+                        } else {
+                            targetElement.setAttribute('transform', '');
+                        }
+                    }
+                }
+            });
+        });
+        observer.observe(element);
+    },
+};
+
+const sortableControllers = new WeakMap();
+ko.bindingHandlers.sortable = {
+    init: function (element, valueAccessor, allBindings, viewModel) {
+        sortableControllers.set(element, null);
+        const value = valueAccessor();
+        ko.applyBindingsToNode(element, {
+            template: {
+                ...value,
+                afterRender(nodes, el) {
+                    nodes.forEach((n) => {
+                        if (n.dataset) {
+                            n.dataset.sortableId = value.options.getId(el);
+                        }
+                    });
+                },
+                beforeRemove(node: HTMLElement, idx, el) {
+                    // Sortable may have cloned the node, so we need to get the real one
+                    const found = element.querySelector(`[data-sortable-id="${value.options.getId(el)}"]`);
+                    (found ?? node)?.remove();
+                },
+            },
+        }, viewModel);
+        return { controlsDescendantBindings: true };
+    },
+    update: function (element, valueAccessor) {
+        const value = ko.unwrap(valueAccessor());
+        const options = {
+            // defaults
+            animation: 100,
+            sort: true,
+            delay: 500,
+            delayOnTouchOnly: true,
+            touchStartThreshold: 20,
+
+            // override with options passed through knockout binding
+            ...(value.options ?? {}),
+            dataIdAttr: 'data-sortable-id',
+
+            // handle updating underlying knockout array when moving items
+            onEnd: (evt, originalEvt) => {
+                value.options?.onEnd?.(evt, originalEvt);
+
+                const { oldIndex, newIndex } = evt;
+                const list = [...value.foreach()];
+                const movedItem = list.splice(oldIndex, 1)[0];
+
+                const newList = [
+                    ...list.slice(0, newIndex),
+                    movedItem,
+                    ...list.slice(newIndex),
+                ];
+                value.foreach(newList);
+            },
+        };
+
+        sortableControllers.set(element, Sortable.create(element, options));
     },
 };

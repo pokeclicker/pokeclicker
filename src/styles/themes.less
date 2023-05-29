@@ -10,8 +10,8 @@
 
 /* Dark themes */
 .cyborg, .darkly, .slate, .superhero {
-  // make pokeball images lighter
-  img[src="assets/images/pokeball/None.svg"] {
+  // make pokeball and gear images lighter
+  img[src="assets/images/pokeball/None.svg"], img[src="assets/images/fa-cog.svg"] {
     filter: invert(1) brightness(90%);
   }
 
@@ -88,6 +88,13 @@
     .list-group-item-action:hover {
       color: black;
     }
+  }
+}
+
+.lumen {
+  /* Weather button in dock modal */
+  .btn-weather-dock {
+    border-color: rgba(0,0,0,25%);
   }
 }
 
@@ -185,6 +192,12 @@
 
     .list-group-item-action:hover {
       color: black;
+    }
+  }
+
+  .multiselect-dropdown {
+    .form-check-input {
+      margin-left: 0 !important;
     }
   }
 }
