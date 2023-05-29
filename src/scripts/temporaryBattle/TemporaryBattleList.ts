@@ -3500,8 +3500,8 @@ TemporaryBattleList['Captain Sophocles'] = new TemporaryBattle(
 TemporaryBattleList['Kahuna Nanu'] = new TemporaryBattle(
     'Kahuna Nanu',
     [
-        new GymPokemon('Sableye', 90200640, 51),
-        new GymPokemon('Absol', 90200640, 51),
+        new GymPokemon('Sableye', 189973142, 51),
+        new GymPokemon('Absol', 189973142, 51),
         new GymPokemon('Alolan Persian', 198608284, 51),
     ],
     'Heh... You got me good, kid. Hope I don\'t get in trouble with the girl for this. You should go tell that young filly Mina that you\'re done with what she asked you to do.',

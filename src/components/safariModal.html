@@ -26,6 +26,15 @@
                         />
                     </span>
                 </h4>
+                <div class='col-6'>
+                    <div>Lvl. <knockout data-bind='text: Safari.safariLevel()'></knockout></div>
+                    <div class="progress" style='height: 5px'>
+                        <div class="progress-bar bg-info" role="progressbar"
+                             data-bind="attr:{ style: 'width:' + Safari.percentToNextSafariLevel() + '%' }"
+                             aria-valuemin="0" aria-valuemax="100">
+                        </div>
+                    </div>
+                </div>
                 <button class='btn btn-danger modalClose' onclick='Safari.closeModal()'>Leave</button>
             </div>
 
