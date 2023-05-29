@@ -188,8 +188,8 @@ class PartyController {
 
             // Apply regional debuff if needed
             if (region > -1 && [SortOptions.attack, SortOptions.breedingEfficiency, SortOptions.attackBonus].includes(option)) {
-                aValue *= Party.calculateRegionalMultiplier(a, region, subregion);
-                bValue *= Party.calculateRegionalMultiplier(b, region, subregion);
+                aValue *= a.calculateRegionalMultiplier(region, subregion);
+                bValue *= b.calculateRegionalMultiplier(region, subregion);
             }
 
             if (config.invert) {

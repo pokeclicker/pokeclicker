@@ -159,82 +159,12 @@ class Party implements Feature {
     public calculatePokemonAttack(type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, ignoreRegionMultiplier = false, region: GameConstants.Region = player.region, subRegion: number = player.subregion, includeBreeding = false, useBaseAttack = false, overrideWeather?: WeatherType, ignoreLevel = false, includeFlute = true): number {
         let attack = 0;
         for (const pokemon of this.caughtPokemon) {
-            attack += Party.calculateOnePokemonAttack(pokemon, type1, type2, region, subRegion, ignoreRegionMultiplier, includeBreeding, useBaseAttack, overrideWeather, ignoreLevel, includeFlute);
+            attack += pokemon.calculateDamage(type1, type2, region, subRegion, ignoreRegionMultiplier, includeBreeding, useBaseAttack, overrideWeather, ignoreLevel, includeFlute);
         }
 
         const bonus = this.multiplier.getBonus('pokemonAttack');
 
         return Math.round(attack * bonus);
-    }
-
-    public static calculateOnePokemonAttack(pokemon: PartyPokemon, type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, region: GameConstants.Region = player.region, subRegion: number = player.subregion, ignoreRegionMultiplier = false, includeBreeding = false, useBaseAttack = false, overrideWeather: WeatherType, ignoreLevel = false, includeFlute = true): number {
-        let multiplier = 1, attack = 0;
-
-        if (!ignoreRegionMultiplier) {
-            multiplier = Party.calculateRegionalMultiplier(pokemon, region, subRegion);
-        }
-        if (multiplier == 0) {
-            return 0;
-        }
-
-        const pAttack = useBaseAttack ? pokemon.baseAttack : (ignoreLevel ? pokemon.calculateAttack(ignoreLevel) : pokemon.attack);
-
-        const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
-        // Check if the Pokemon is currently breeding (no attack)
-        if (includeBreeding || !pokemon.breeding) {
-            if (type1 == PokemonType.None) {
-                attack = pAttack * multiplier;
-            } else {
-                attack = pAttack * TypeHelper.getAttackModifier(dataPokemon.type1, dataPokemon.type2, type1, type2) * multiplier;
-            }
-        }
-
-        // Weather boost
-        const weather = Weather.weatherConditions[overrideWeather ?? Weather.currentWeather()];
-        weather.multipliers?.forEach(value => {
-            if (value.type == dataPokemon.type1) {
-                attack *= value.multiplier;
-            }
-            if (value.type == dataPokemon.type2) {
-                attack *= value.multiplier;
-            }
-        });
-
-        // Should we take flute boost into account
-        if (includeFlute) {
-            FluteEffectRunner.activeGemTypes().forEach(value => {
-                if (value == dataPokemon.type1) {
-                    attack *= GameConstants.FLUTE_TYPE_ATTACK_MULTIPLIER;
-                }
-                if (value == dataPokemon.type2) {
-                    attack *= GameConstants.FLUTE_TYPE_ATTACK_MULTIPLIER;
-                }
-            });
-        }
-
-        return attack;
-    }
-
-    public static calculateRegionalMultiplier(pokemon: PartyPokemon, region: number, subRegion: number): number {
-        if (region == GameConstants.Region.alola && subRegion == GameConstants.AlolaSubRegions.MagikarpJump && Math.floor(pokemon.id) != 129) {
-            // Only magikarps can attack in magikarp jump
-            return 0;
-        }
-        // Check if regional debuff challenge mode is active
-        if (App.game.challenges.list.regionalAttackDebuff.active()) {
-            // Check if the pokemon is in their native region
-            const nativeRegion = PokemonHelper.calcNativeRegion(pokemon.name);
-            if (region > -1 && nativeRegion != region && nativeRegion != GameConstants.Region.none) {
-                // Pokemon only retain a % of their total damage in other regions based on highest region.
-                return Party.getRegionAttackMultiplier();
-            }
-        }
-        return 1.0;
-    }
-
-    public static getRegionAttackMultiplier(highestRegion = player.highestRegion()): number {
-        // between 0.2 -> 1 based on highest region
-        return Math.min(1, Math.max(0.2, 0.1 + (highestRegion / 10)));
     }
 
     public calculateEffortPoints(pokemon: PartyPokemon, shiny: boolean, shadow: GameConstants.ShadowStatus, number = GameConstants.BASE_EP_YIELD, ignore = false): number {

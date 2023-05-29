@@ -252,6 +252,11 @@ class Player {
         return 0;
     }
 
+    public getRegionAttackMultiplier(highestRegion = player.highestRegion()): number {
+        // between 0.2 -> 1 based on highest region
+        return Math.min(1, Math.max(0.2, 0.1 + (highestRegion / 10)));
+    }
+
     public toJSON() {
         const keep = [
             '_route',

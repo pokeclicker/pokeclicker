@@ -111,6 +111,71 @@ class PartyPokemon implements Saveable {
         this._showShadowImage = ko.observable(false);
     }
 
+    public calculateDamage(type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, region: GameConstants.Region = player.region, subRegion: number = player.subregion, ignoreRegionMultiplier = false, includeBreeding = false, useBaseAttack = false, overrideWeather: WeatherType, ignoreLevel = false, includeFlute = true): number {
+        let multiplier = 1, attack = 0;
+
+        if (!ignoreRegionMultiplier) {
+            multiplier = this.calculateRegionalMultiplier(region, subRegion);
+        }
+        if (multiplier == 0) {
+            return 0;
+        }
+
+        const pAttack = useBaseAttack ? this.baseAttack : (ignoreLevel ? this.calculateAttack(ignoreLevel) : this.attack);
+
+        const dataPokemon = PokemonHelper.getPokemonByName(this.name);
+        // Check if the Pokemon is currently breeding (no attack)
+        if (includeBreeding || !this.breeding) {
+            if (type1 == PokemonType.None) {
+                attack = pAttack * multiplier;
+            } else {
+                attack = pAttack * TypeHelper.getAttackModifier(dataPokemon.type1, dataPokemon.type2, type1, type2) * multiplier;
+            }
+        }
+
+        // Weather boost
+        const weather = Weather.weatherConditions[overrideWeather ?? Weather.currentWeather()];
+        weather.multipliers?.forEach(value => {
+            if (value.type == dataPokemon.type1) {
+                attack *= value.multiplier;
+            }
+            if (value.type == dataPokemon.type2) {
+                attack *= value.multiplier;
+            }
+        });
+
+        // Should we take flute boost into account
+        if (includeFlute) {
+            FluteEffectRunner.activeGemTypes().forEach(value => {
+                if (value == dataPokemon.type1) {
+                    attack *= GameConstants.FLUTE_TYPE_ATTACK_MULTIPLIER;
+                }
+                if (value == dataPokemon.type2) {
+                    attack *= GameConstants.FLUTE_TYPE_ATTACK_MULTIPLIER;
+                }
+            });
+        }
+
+        return attack;
+    }
+
+    public calculateRegionalMultiplier(region: number, subRegion: number): number {
+        if (region == GameConstants.Region.alola && subRegion == GameConstants.AlolaSubRegions.MagikarpJump && Math.floor(this.id) != 129) {
+            // Only magikarps can attack in magikarp jump
+            return 0;
+        }
+        // Check if regional debuff challenge mode is active
+        if (App.game.challenges.list.regionalAttackDebuff.active()) {
+            // Check if the pokemon is in their native region
+            const nativeRegion = PokemonHelper.calcNativeRegion(this.name);
+            if (region > -1 && nativeRegion != region && nativeRegion != GameConstants.Region.none) {
+                // Pokemon only retain a % of their total damage in other regions based on highest region.
+                return player.getRegionAttackMultiplier();
+            }
+        }
+        return 1.0;
+    }
+
     public calculateAttack(ignoreLevel = false): number {
         const attackBonusMultiplier = 1 + (this.attackBonusPercent / 100);
         const levelMultiplier = ignoreLevel ? 1 : this.level / 100;
