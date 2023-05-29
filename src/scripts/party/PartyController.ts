@@ -120,9 +120,9 @@ class PartyController {
     static getSortedList = ko.pureComputed(() => {
         const list = [...App.game.party.caughtPokemon];
         const compare = Settings.getSetting('displayTrueAttack').value ?
-        PartyController.compareBy(Settings.getSetting('partySort').observableValue(), Settings.getSetting('partySortDirection').observableValue(), player.region, player.subregion)
-        :
-        PartyController.compareBy(Settings.getSetting('partySort').observableValue(), Settings.getSetting('partySortDirection').observableValue());
+            PartyController.compareBy(Settings.getSetting('partySort').observableValue(), Settings.getSetting('partySortDirection').observableValue(), player.region, player.subregion)
+            :
+            PartyController.compareBy(Settings.getSetting('partySort').observableValue(), Settings.getSetting('partySortDirection').observableValue());
         return list.sort(compare);
     }).extend({ rateLimit: 500 });
 
