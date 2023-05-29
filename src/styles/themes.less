@@ -35,15 +35,41 @@
   }
 }
 
-/* Individual themes */
-.cerulean {
-  /* Evolution items */
-  #evo-item-list, #evo-pokemon-list {
-    .item-selected, .pokemon-selected {
-      color: whitesmoke;
-      background-image: linear-gradient(#4e5458, #565b60 40%, #5b6165);
+/* Oak Item Loadout Fix, floating buttons */
+.cerulean, .cosmo, .cyborg, .darkly, .flatly, .journal, .litera, .lux, .materia, .minty, .simplex, .sketchy, .slate, .spacelab, .superhero, .united {
+  #oakItemLoadout {
+    .tight {
+      .btn {
+        padding-left: unset !important;
+        padding-right: unset !important;
+      }
     }
   }
+}
+
+/* Themes who need even more space in tables */
+.cerulean, .cyborg, .darkly, .flatly, .journal, .litera, .materia, .minty, .pulse, .sandstone, .simplex, .sketchy, .slate, .spacelab, .superhero, .united, .yeti {
+  @media (max-width: 992px)
+  {
+    #pokemonVitaminExpandedModal {
+      .tight {
+        .btn {
+          padding-left: 5px !important;
+          padding-right: 5px !important;
+        }
+      }
+    }
+  }
+}
+/* Individual themes */
+.cerulean {
+    /* Evolution items */
+    #evo-item-list, #evo-pokemon-list {
+        .item-selected, .pokemon-selected {
+            color: whitesmoke;
+            background-image: linear-gradient(#4e5458, #565b60 40%, #5b6165);
+        }
+    }
 }
 
 .cosmo {
@@ -108,21 +134,12 @@
     font-size: 30px !important;
   }
 
-  //Tight buttons were floating away on Desktop
-  .tight {
-    .btn {
-      padding-left: unset !important;
-      padding-right: unset !important;
-    }
-  }
-}
-
-.litera {
-  //Tight buttons were floating away on Desktop
-  .tight {
-    .btn {
-      padding-left: unset !important;
-      padding-right: unset !important;
+  #pokemonVitaminExpandedModal {
+    .tight {
+      .btn {
+        padding-left: 5px !important;
+        padding-right: 5px !important;
+      }
     }
   }
 }
