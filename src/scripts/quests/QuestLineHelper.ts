@@ -2222,7 +2222,7 @@ class QuestLineHelper {
             1,
             undefined,
             'Defeat Guzma for the Silvally Memory!',
-            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Guzma Bug Silvally')](),
+            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Guzma Bug Memory')](),
             0,
             () => player.itemList.Bug_Memory_Silvally()
 
@@ -2236,7 +2236,7 @@ class QuestLineHelper {
             1,
             undefined,
             'Defeat Kahili for a reward!',
-            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Kahili Flying Silvally')](),
+            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Kahili Flying Memory')](),
             0,
             () => player.itemList.Flying_Memory_Silvally()
         );
@@ -2249,7 +2249,7 @@ class QuestLineHelper {
             1,
             undefined,
             'Defeat Plumeria to recover the Memory!',
-            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Plumeria Poison Silvally')](),
+            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Plumeria Poison Memory')](),
             0,
             () => player.itemList.Poison_Memory_Silvally()
         );
@@ -2262,7 +2262,7 @@ class QuestLineHelper {
             1,
             undefined,
             'Defeat Captain Acerola to get the Memory back.',
-            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Acerola Ghost Silvally')](),
+            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Acerola Ghost Memory')](),
             0,
             () => player.itemList.Ghost_Memory_Silvally()
         );
@@ -2275,7 +2275,7 @@ class QuestLineHelper {
             1,
             undefined,
             'Defeat Aether Branch Chief Faba to get the Memory back.',
-            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Faba Psychic Silvally')](),
+            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Faba Psychic Memory')](),
             0,
             () => player.itemList.Psychic_Memory_Silvally()
         );
@@ -2288,7 +2288,7 @@ class QuestLineHelper {
             1,
             undefined,
             'Defeat Molayne for a reward!.',
-            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Molayne Steel Silvally')](),
+            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Molayne Steel Memory')](),
             0,
             () => player.itemList.Steel_Memory_Silvally()
         );
@@ -2301,7 +2301,7 @@ class QuestLineHelper {
             1,
             undefined,
             'Defeat Ryuki for the Memory!.',
-            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ryuki Dragon Silvally')](),
+            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ryuki Dragon Memory')](),
             0,
             () => player.itemList.Dragon_Memory_Silvally()
         );

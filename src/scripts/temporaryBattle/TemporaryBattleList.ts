@@ -3457,8 +3457,8 @@ TemporaryBattleList['Gladion 3'] = new TemporaryBattle(
         imageName: 'Gladion',
     }
 );
-TemporaryBattleList['Guzma Bug Silvally'] = new TemporaryBattle(
-    'Guzma Bug Silvally',
+TemporaryBattleList['Guzma Bug Memory'] = new TemporaryBattle(
+    'Guzma Bug Memory',
     [
         new GymPokemon('Golisopod', 225357859, 63),
         new GymPokemon('Ariados', 225357859, 63),
@@ -3474,8 +3474,8 @@ TemporaryBattleList['Guzma Bug Silvally'] = new TemporaryBattle(
         imageName: 'Team Skull Boss (guzma)',
     }
 );
-TemporaryBattleList['Kahili Flying Silvally'] = new TemporaryBattle(
-    'Kahili Flying Silvally',
+TemporaryBattleList['Kahili Flying Memory'] = new TemporaryBattle(
+    'Kahili Flying Memory',
     [
         new GymPokemon('Skarmory', 231357859, 63),
         new GymPokemon('Crobat', 231357859, 63),
@@ -3491,8 +3491,8 @@ TemporaryBattleList['Kahili Flying Silvally'] = new TemporaryBattle(
         imageName: 'Kahili',
     }
 );
-TemporaryBattleList['Plumeria Poison Silvally'] = new TemporaryBattle(
-    'Plumeria Poison Silvally',
+TemporaryBattleList['Plumeria Poison Memory'] = new TemporaryBattle(
+    'Plumeria Poison Memory',
     [
         new GymPokemon('Gengar', 237357859, 63),
         new GymPokemon('Alolan Muk', 237357859, 63),
@@ -3508,8 +3508,8 @@ TemporaryBattleList['Plumeria Poison Silvally'] = new TemporaryBattle(
         imageName: 'Plumeria',
     }
 );
-TemporaryBattleList['Acerola Ghost Silvally'] = new TemporaryBattle(
-    'Acerola Ghost Silvally',
+TemporaryBattleList['Acerola Ghost Memory'] = new TemporaryBattle(
+    'Acerola Ghost Memory',
     [
         new GymPokemon('Banette', 243357859, 63),
         new GymPokemon('Drifblim', 243357859, 63),
@@ -3525,8 +3525,8 @@ TemporaryBattleList['Acerola Ghost Silvally'] = new TemporaryBattle(
         imageName: 'Acerola',
     }
 );
-TemporaryBattleList['Faba Psychic Silvally'] = new TemporaryBattle(
-    'Faba Psychic Silvally',
+TemporaryBattleList['Faba Psychic Memory'] = new TemporaryBattle(
+    'Faba Psychic Memory',
     [
         new GymPokemon('Claydol', 249357859, 63),
         new GymPokemon('Bruxish', 249357859, 63),
@@ -3542,8 +3542,8 @@ TemporaryBattleList['Faba Psychic Silvally'] = new TemporaryBattle(
         imageName: 'Aether Branch Chief (faba)',
     }
 );
-TemporaryBattleList['Molayne Steel Silvally'] = new TemporaryBattle(
-    'Molayne Steel Silvally',
+TemporaryBattleList['Molayne Steel Memory'] = new TemporaryBattle(
+    'Molayne Steel Memory',
     [
         new GymPokemon('Klefki', 255357859, 63),
         new GymPokemon('Bisharp', 255357859, 63),
@@ -3559,8 +3559,8 @@ TemporaryBattleList['Molayne Steel Silvally'] = new TemporaryBattle(
         imageName: 'Molayne',
     }
 );
-TemporaryBattleList['Ryuki Dragon Silvally'] = new TemporaryBattle(
-    'Ryuki Dragon Silvally',
+TemporaryBattleList['Ryuki Dragon Memory'] = new TemporaryBattle(
+    'Ryuki Dragon Memory',
     [
         new GymPokemon('Garchomp', 261357859, 63),
         new GymPokemon('Drampa', 261357859, 63),

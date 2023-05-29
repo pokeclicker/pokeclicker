@@ -6601,7 +6601,6 @@ TownList['Aether Paradise'] = new Town(
         TemporaryBattleList['Ultra Wormhole'],
         AetherParadiseShop,
         new ShardTraderShop(GameConstants.ShardTraderLocations['Aether Paradise']),
-        new GemMasterShop(GameConstants.GemShops.SilvallyTrader, 'Silvally Trader'),
         new MoveToDungeon(dungeonList['Aether Foundation']),
         TemporaryBattleList['Faba Psychic Silvally'],
     ],
@@ -6932,6 +6931,7 @@ TownList['Aether Foundation'] = new DungeonTown(
     GameConstants.AlolaSubRegions.AkalaIsland,
     [new GymBadgeRequirement(BadgeEnums.DarkiniumZ)],
     [
+        new GemMasterShop(GameConstants.GemShops.SilvallyTrader, 'Memory Replicator'),
         TemporaryBattleList['Aether Branch Chief Faba'],
         TemporaryBattleList['Team Aqua Leader Archie'],
         TemporaryBattleList['Team Magma Leader Maxie'],
