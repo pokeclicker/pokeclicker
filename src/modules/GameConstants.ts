@@ -2094,3 +2094,9 @@ export enum GemShops {
     FurfrouGemTrader,
     MagikarpJumpGemTrader,
 }
+
+export enum DungeonInteractionSource {
+    Click,
+    Keybind,
+    HeldKeybind,
+}
