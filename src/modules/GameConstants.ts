@@ -2095,6 +2095,12 @@ export enum GemShops {
     MagikarpJumpGemTrader,
 }
 
+export enum DungeonInteractionSource {
+    Click,
+    Keybind,
+    HeldKeybind,
+}
+
 export const ModalCollapseList = [
     'achievementTrackerBody',
     'battleItemContainerBody',

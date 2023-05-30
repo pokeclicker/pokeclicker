@@ -374,15 +374,8 @@ class GameController {
                             DungeonRunner.map.moveRight();
                             return e.preventDefault();
                         case Settings.getSetting('hotkey.dungeon.interact').value:
-                            if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.entrance) {
-                                DungeonRunner.dungeonLeave();
-                            } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.chest) {
-                                DungeonRunner.openChest();
-                            } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.boss && !DungeonRunner.fightingBoss()) {
-                                DungeonRunner.startBossFight();
-                            } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.ladder) {
-                                DungeonRunner.nextFloor();
-                            }
+                            DungeonRunner.handleInteraction(GameConstants.DungeonInteractionSource.Keybind);
+                            DungeonRunner.continuousInteractionInput = true;
                             return e.preventDefault();
                     }
                 }
@@ -519,6 +512,11 @@ class GameController {
                         Safari.stop('right');
                         return e.preventDefault();
                 }
+            }
+
+            if (key === Settings.getSetting('hotkey.dungeon.interact').value) {
+                DungeonRunner.continuousInteractionInput = false;
+                return e.preventDefault();
             }
 
             if (key === 'Space') {
