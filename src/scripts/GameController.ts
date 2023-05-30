@@ -152,8 +152,19 @@ class GameController {
             // Set our number key if defined (-1 for 0 indexed)
             const numberKey = (+key) - 1;
             const isNumberKey = !isNaN(numberKey) && numberKey >= 0;
-
             const visibleModals = $('.modal:visible').length;
+
+            //Global Multi-key combinations
+            if (isNumberKey) {
+                if (GameController.keyHeld[Settings.getSetting('hotkey.pokeballSelection').value]) {
+                    // Open pokeball selector modal using P + (1-4) for each condition
+                    if (!($pokeballSelector.data('bs.modal')?._isShown) && !$pokeballSelector.data('disable-toggle')) {
+                        $('.modal').modal('hide');
+                        $('#pokeballSelectorBody .clickable.pokeball-selected').eq(numberKey)?.trigger('click');
+                        return e.preventDefault();
+                    }
+                }
+            }
 
             // Safari Zone
             if (App.game.gameState === GameConstants.GameState.safari) {
@@ -461,18 +472,6 @@ class GameController {
                         return e.preventDefault();
                     }
                     break;
-                default:
-                    // Check for a number key being pressed
-                    if (isNumberKey) {
-                        if (GameController.keyHeld[Settings.getSetting('hotkey.pokeballSelection').value]) {
-                            // Open pokeball selector modal using P + (1-4) for each condition
-                            if (!($pokeballSelector.data('bs.modal')?._isShown) && !$pokeballSelector.data('disable-toggle')) {
-                                $('.modal').modal('hide');
-                                $('#pokeballSelectorBody .clickable.pokeball-selected').eq(numberKey)?.trigger('click');
-                                return e.preventDefault();
-                            }
-                        }
-                    }
             }
 
             if (key === 'Space') {

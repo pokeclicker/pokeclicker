@@ -37,6 +37,7 @@ namespace GameConstants {
     declare const WANDER_TICK: number;
     declare const TEMP_BATTLE_TIME: number;
     declare const TEMP_BATTLE_TICK: number;
+    declare const SPECIAL_EVENT_TICK: number;
     declare const MAX_AVAILABLE_REGION: number;
     declare const MaxIDPerRegion: number[];
     declare const ITEM_USE_TIME: number;
@@ -150,6 +151,7 @@ namespace GameConstants {
     declare const DUNGEON_EP_MODIFIER: number;
     declare const DUNGEON_BOSS_EP_MODIFIER: number;
     declare const ROAMER_EP_MODIFIER: number;
+    declare const SHADOW_EP_MODIFIER: number;
     declare const EP_EV_RATIO: number;
     declare const EP_CHALLENGE_MODIFIER: number;
     declare const GRISEOUS_ITEM_CHANCE: number;

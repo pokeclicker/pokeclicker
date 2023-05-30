@@ -4077,7 +4077,7 @@ dungeonList['Pyrite Cave'] = new Dungeon('Pyrite Cave',
                 new GymPokemon('Ludicolo', 950000, 39),
                 new GymPokemon('Ludicolo', 950000, 39),
                 new GymPokemon('Sudowoodo', 950000, 39),
-            ], { weight: 1 }, 'Mirakle B.', '(mirakle b)'),
+            ], { weight: 1, requirement: new QuestLineCompletedRequirement('Shadows in the Desert')}, 'Mirakle B.', '(mirakle b)'),
     ],
     46000, 131);
 

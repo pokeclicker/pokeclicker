@@ -499,6 +499,12 @@ class Game {
         if (SaveReminder.counter >= 5 * GameConstants.MINUTE) {
             SaveReminder.tick();
         }
+
+        // update event calendar
+        this.specialEvents.counter += GameConstants.TICK_TIME;
+        if (this.specialEvents.counter >= GameConstants.SPECIAL_EVENT_TICK) {
+            this.specialEvents.tick();
+        }
     }
 
     save() {

@@ -401,6 +401,11 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Priest in Training', 'Purify 50 unique Shadow Pokémon', new ShadowPokemonRequirement(50, GameConstants.ShadowStatus.Purified), 6, GameConstants.ExtraAchievementCategories.orre);
         AchievementHandler.addAchievement('Hand of Light', 'Purify all 131 unique Shadow Pokémon', new ShadowPokemonRequirement(131, GameConstants.ShadowStatus.Purified), 12, GameConstants.ExtraAchievementCategories.orre);
 
+        AchievementHandler.addAchievement('Who dropped these here?', 'Pick up 10 Items in a Safari Zone', new SafariItemsRequirement(10), 0.2);
+        AchievementHandler.addAchievement('This is not a Pokéball!', 'Throw 10 Rocks in a Safari Zone', new SafariRocksRequirement(10), 0.2);
+        AchievementHandler.addAchievement('Hope it likes berries', 'Throw 10 Bait in a Safari Zone', new SafariBaitRequirement(10), 0.2);
+        AchievementHandler.addAchievement('Gotta get your steps in!', 'Walk 100 Steps in a Safari Zone', new SafariStepsRequirement(100), 0.2);
+
         /*
          * REGIONAL
          */
