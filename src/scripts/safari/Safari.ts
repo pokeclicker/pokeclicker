@@ -504,7 +504,7 @@ class Safari {
     }
 
     private static expRequiredForLevel(level: number) {
-        return Math.ceil(2000 * (1.2 ** level - 1) - 1));
+        return Math.ceil(2000 * (1.2 ** (level - 1) - 1));
     }
 }
 
