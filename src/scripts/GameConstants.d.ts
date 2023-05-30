@@ -790,4 +790,5 @@ namespace GameConstants {
         Keybind,
         HeldKeybind,
     }
+    declare const ModalCollapseList: string[];
 }
