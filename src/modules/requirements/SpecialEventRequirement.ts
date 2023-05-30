@@ -1,5 +1,4 @@
 import { AchievementOption } from '../GameConstants';
-import { SpecialEventStatus } from '../specialEvents/SpecialEvent';
 
 import Requirement from './Requirement';
 
@@ -9,7 +8,7 @@ export default class SpecialEventRequirement extends Requirement {
     }
 
     public getProgress(): number {
-        return +(App.game.specialEvents.getEvent(this.specialEventName).status() == SpecialEventStatus.started);
+        return +(App.game.specialEvents.getEvent(this.specialEventName).isActive());
     }
 
     public hint(): string {

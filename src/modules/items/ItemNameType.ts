@@ -25,6 +25,7 @@ export type ItemNameType
     | 'LargeRestore'
     | 'Dungeon_ticket'
     | 'Explorer_kit'
+    | 'Event_calendar'
     | 'Squirtbottle'
     | 'Sprinklotad'
     | 'Explosive_Charge'
