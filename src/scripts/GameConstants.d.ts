@@ -785,4 +785,10 @@ namespace GameConstants {
         FurfrouGemTrader,
         MagikarpJumpGemTrader,
     }
+    declare enum DungeonInteractionSource {
+        Click,
+        Keybind,
+        HeldKeybind,
+    }
+    declare const ModalCollapseList: string[];
 }
