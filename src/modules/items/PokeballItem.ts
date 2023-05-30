@@ -13,4 +13,8 @@ export default class PokeballItem extends Item {
     gain(amt: number) {
         App.game.pokeballs.gainPokeballs(this.type, amt);
     }
+    
+    get description(): string {
+        return this._description || `A ball for catch Pokémon. Can be bought in shops or find in dungeons.`;
+    }
 }
