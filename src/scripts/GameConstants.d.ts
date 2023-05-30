@@ -785,4 +785,15 @@ namespace GameConstants {
         FurfrouGemTrader,
         MagikarpJumpGemTrader,
     }
+    declare const ModalCollapseList: {
+        'achievementTrackerBody': string;
+        'battleItemContainerBody': string;
+        'dailyQuestDisplayBody': string;
+        'eggList': string;
+        'fluteItemContainerBody': string;
+        'oakItemsBody': string;
+        'pokeballSelectorBody': string;
+        'pokemonListBody': string;
+        'shortcutsBody': string;
+    };
 }
