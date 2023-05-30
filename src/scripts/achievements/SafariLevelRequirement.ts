@@ -8,6 +8,6 @@ class SafariLevelRequirement extends AchievementRequirement {
     }
 
     public hint(): string {
-        return `Needs safari level ${this.requiredValue}.`;
+        return `Needs Safari Level ${this.requiredValue}.`;
     }
 }
