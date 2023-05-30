@@ -2094,3 +2094,21 @@ export enum GemShops {
     FurfrouGemTrader,
     MagikarpJumpGemTrader,
 }
+
+export enum DungeonInteractionSource {
+    Click,
+    Keybind,
+    HeldKeybind,
+}
+
+export const ModalCollapseList = [
+    'achievementTrackerBody',
+    'battleItemContainerBody',
+    'dailyQuestDisplayBody',
+    'eggList',
+    'fluteItemContainerBody',
+    'oakItemsBody',
+    'pokeballSelectorBody',
+    'pokemonListBody',
+    'shortcutsBody',
+];
