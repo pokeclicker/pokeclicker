@@ -6,7 +6,7 @@ export default class PokeballItem extends Item {
     type: PokeballType;
 
     constructor(type: PokeballType, basePrice: number, currency: Currency = Currency.money, options?: ShopOptions, displayName?: string) {
-        super(PokeballType[type], basePrice, currency, options, displayName, 'A ball for catching Pokémon.', undefined, 'pokeball');
+        super(PokeballType[type], basePrice, currency, options, displayName, 'A ball for catching Pokémon.', 'pokeball');
         this.type = type;
     }
 
