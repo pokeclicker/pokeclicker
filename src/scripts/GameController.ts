@@ -137,6 +137,17 @@ class GameController {
         $shopModal.on('hidden.bs.modal shown.bs.modal', _ => $shopModal.data('disable-toggle', false));
         // Ship
         const $shipModal = $('#ShipModal');
+        // Modal Collapse
+        $(GameConstants.ModalCollapseList).map(function() {
+            const id = `#${this}`;
+            const method = Settings.getSetting(`modalCollapse.${this}`).value ? 'show' : 'hide';
+            $(id).collapse(method);
+            return $(id).get();
+        }).on('show.bs.collapse',function() {
+            Settings.setSettingByName(`modalCollapse.${this.id}`, true);
+        }).on('hide.bs.collapse',function() {
+            Settings.setSettingByName(`modalCollapse.${this.id}`, false);
+        });
 
         $(document).on('keydown', e => {
             // Ignore any of our controls if focused on an input element

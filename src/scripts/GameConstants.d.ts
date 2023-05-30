@@ -785,4 +785,5 @@ namespace GameConstants {
         FurfrouGemTrader,
         MagikarpJumpGemTrader,
     }
+    declare const ModalCollapseList: string[];
 }
