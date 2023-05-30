@@ -100,6 +100,7 @@ namespace GameConstants {
         'Hatchery',
         'Farming',
         'Underground',
+        'Safari',
         'Battle Frontier',
         'Protein',
         'Pokerus',
