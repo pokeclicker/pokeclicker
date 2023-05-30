@@ -34,13 +34,14 @@ export default class WeatherApp {
      */
     public static generateRegionalForecast(region: Region, dateRange: number = WeatherApp.defaultDateRange, date: Date = new Date()) {
         const weatherForecastList = [];
+        const options: any = { dateStyle: 'full', timeStyle: 'short', hourCycle: 'h23' };
         // Creates forecasts for X hour
         for (let hour = 0; hour <= 23; hour += Weather.period) {
             const hourForecast = [];
             const newDate = new Date(date.setHours(hour, 0, 0, 0));
             // Gets the weather for every day for that hour
             for (let i = 0; i < dateRange; i++) {
-                const weatherForecastDate = new Date(newDate).toLocaleString();
+                const weatherForecastDate = new Date(newDate).toLocaleString('en-US', options).replace('at', ''); // 'at' is not valid for new Date()
                 const weatherForecast = new WeatherForecast(weatherForecastDate, Weather.getWeather(region, newDate));
                 hourForecast.push(weatherForecast);
                 newDate.setDate(newDate.getDate() + 1);
