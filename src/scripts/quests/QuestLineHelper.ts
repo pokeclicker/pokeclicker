@@ -1035,6 +1035,120 @@ class QuestLineHelper {
         App.game.quests.questLines().push(metaGroudonQuestLine);
     }
 
+    //Orre Questlines
+    public static createOrreColosseumQuestLine() {
+        const orreColosseumQuestLine = new QuestLine('Shadows in the Desert', 'Explore Orre and uncover the origin of Shadow Pokémon.', new MultiRequirement([new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), new DevelopmentRequirement()]), GameConstants.BulletinBoards.Hoenn);
+
+        const exploreStand = new TalkToNPCQuest(ExploreStand, 'Travel to Orre and explore the Outskirt Stand.');
+        orreColosseumQuestLine.addQuest(exploreStand);
+
+        const fightWillie = new CustomQuest(1, 0, 'Fight Willie', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Willie')]());
+        orreColosseumQuestLine.addQuest(fightWillie);
+
+        const fightFolly = new CustomQuest(1, 0, 'Fight Folly the Shady Guy in Phenac City', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Folly')]());
+        orreColosseumQuestLine.addQuest(fightFolly);
+
+        const checkSack = new TalkToNPCQuest(Sack, 'Check the see what is in the mysterious sack.'); // Step 3
+        orreColosseumQuestLine.addQuest(checkSack);
+
+        const defeatShadowsPhenac = new CustomQuest(10, 0, 'Defeat 10 trainers who are using Shadow Pokémon in Phenac City.', () => App.game.statistics.totalShadowPokemonDefeated());
+        orreColosseumQuestLine.addQuest(defeatShadowsPhenac);
+
+        const talkToEsCade1 = new TalkToNPCQuest(EsCade1, 'Talk to the Mayor of Phenac City about the criminals you have been fighting.');
+        orreColosseumQuestLine.addQuest(talkToEsCade1);
+
+        const talkToRui1 = new TalkToNPCQuest(Rui1, 'Meet up with Rui and investigate the Phenac City Stadium.'); // Step 6
+        orreColosseumQuestLine.addQuest(talkToRui1);
+
+        const fightPyriteTown = new CustomQuest(5, 0, 'Fight trainers in Pyrite Town to flush out the criminals.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Pyrite Town Battles')]());
+        orreColosseumQuestLine.addQuest(fightPyriteTown);
+
+        const talkToDuking1 = new TalkToNPCQuest(Duking1, 'Talk to the distraught bodybuilder Duking in Pyrite Town.');
+        orreColosseumQuestLine.addQuest(talkToDuking1);
+
+        const fightPyriteColosseum = new CustomQuest(5, 0, 'Fight trainers in Pyrite Colosseum to flush out the criminals.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Pyrite Colosseum Battles')]()); // Step 9
+        orreColosseumQuestLine.addQuest(fightPyriteColosseum);
+
+        const fightPyriteBuilding = new CustomQuest(5, 0, 'No sign of Shadow Pokémon so far. Fight trainers at the Pyrite Building to flush out the criminals.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Pyrite Building')]());
+        orreColosseumQuestLine.addQuest(fightPyriteBuilding);
+
+        const talkToDoken1 = new TalkToNPCQuest(Doken1, 'Interrogate Hunter Doken to find out who has taken Plusle, and where to.');
+        orreColosseumQuestLine.addQuest(talkToDoken1);
+
+        const clearPyriteCave = new CustomQuest(1, 0, 'Find Miror B. and rescue Duking\'s Plusle!', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Pyrite Cave')](), undefined, undefined,
+            {
+                clearedMessage: 'How, how, how dare you! Don\'t you dare think you\'ll get away with your latest outrage! One of these days, I will take great pleasure in kicking you about with my elegant dance steps! Oh, and I\'m not giving up our Shadow Pokémon plan!',
+                npcDisplayName: 'Miror B.',
+                npcImageName: 'Cipher Admin (miror b)',
+            });
+        orreColosseumQuestLine.addQuest(clearPyriteCave);
+
+        const freePlusle = new TalkToNPCQuest(FreePlusle, 'Free Duking\'s Plusle.'); //Step 13
+        orreColosseumQuestLine.addQuest(freePlusle);
+
+        const talkToRui2 = new TalkToNPCQuest(Rui2, 'Discuss your next move with Rui at the Pyrite Colosseum.');
+        orreColosseumQuestLine.addQuest(talkToRui2);
+
+        const clearAgatePeons = new CustomQuest (3, 0, 'Defeat the Team Cipher Peons looting Agate Village.', () =>
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Cipher Peon Doven')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Cipher Peon Silton')]() +
+            App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Cipher Peon Kass')]()
+        );
+        orreColosseumQuestLine.addQuest(clearAgatePeons);
+
+        const fightRelicCave = new CustomQuest(1, 0, 'Rui is worried her grandpa is in trouble. Search for him by clearing Relic Cave.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Relic Cave')]());
+        orreColosseumQuestLine.addQuest(fightRelicCave);
+
+        const talkToGrandpaEagun = new TalkToNPCQuest(GrandpaEagun1, 'Find out more about Relic Cave from Grandpa Eagun.'); // Step 17
+        orreColosseumQuestLine.addQuest(talkToGrandpaEagun);
+
+        const fightMtBattle = new CustomQuest(1, 0, 'There\'s rumors of more Team Cipher activity at Mt. Battle. Go investigate!', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Mt. Battle Battles')](), undefined, undefined,
+            {
+                clearedMessage: 'This isn\'t over yet. Stronger Pokémon are being made even now. You\'d better get serious about training your Pokémon for our next meeting. Daahahah!',
+                npcDisplayName: 'Dakim',
+                npcImageName: 'Cipher Admin (dakim)',
+            });
+        orreColosseumQuestLine.addQuest(fightMtBattle);
+
+        const talkToRui3 = new TalkToNPCQuest(Rui3, 'Discuss your next move with Rui at Mt. Battle.');
+        orreColosseumQuestLine.addQuest(talkToRui3);
+
+        const fightTheUnder = new CustomQuest(1, 0, 'Track down the TV broadcast coming The Under in Pyrite Town. Clear The Under.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('The Under Subway')](), undefined, undefined,
+            {
+                clearedMessage: 'Aiyeeeeh! How dare you! How could I get bested by a mere boy? Remember this! I\'ll get you back for this!',
+                npcDisplayName: 'Venus',
+                npcImageName: 'Cipher Admin (Venus)',
+            });
+        orreColosseumQuestLine.addQuest(fightTheUnder);
+
+        const searchTheStudio = new TalkToNPCQuest(SearchTheStudio, 'Search Venus\'s Studio in the Under for clues.'); // Step 21
+        orreColosseumQuestLine.addQuest(searchTheStudio);
+
+        const fightCipherLab = new CustomQuest(1, 0, 'Follow the secret tunnel to the Cipher Lab and clear out the enemies.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Cipher Lab Battles')](), undefined, undefined,
+            {
+                clearedMessage: 'Humph! Your struggle to get here was all in vain! The Shadow Pokémon we produced have already been moved elsewhere. And that, of course, includes the ultimate Shadow Pokémon I created for the boss! Wahahahah!',
+                npcDisplayName: 'Ein',
+                npcImageName: 'Cipher Admin (ein)',
+            });
+        orreColosseumQuestLine.addQuest(fightCipherLab);
+
+        const fightRealgamTower = new CustomQuest(5, 0, 'Team Cipher has taken over Realgam Tower! Fight to kick them out!', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Realgam Tower Battles')]());
+        orreColosseumQuestLine.addQuest(fightRealgamTower);
+
+        const talkToEsCade2 = new TalkToNPCQuest(EsCade2, 'From the top of tower, you see Mayor Es Cade at the Realgam Colosseum. Go ask him for help.'); //Step 24
+        orreColosseumQuestLine.addQuest(talkToEsCade2);
+
+        const fightRealgamColosseum = new CustomQuest(10, 0, 'Team Cipher\'s leaders have holed up in the Realgam Colosseum. Fight them to end this once and for all!', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Realgam Colosseum Battles')]());
+        orreColosseumQuestLine.addQuest(fightRealgamColosseum);
+
+        const watchEviceEscape = new TalkToNPCQuest(EviceEscape, 'Just when you have him cornered, Evice radios in a helicopter. Watch him escape the Realgam Colosseum.'); // Step 26
+        orreColosseumQuestLine.addQuest(watchEviceEscape);
+
+        App.game.quests.questLines().push(orreColosseumQuestLine);
+    }
+
+
+
     // Sinnoh QuestLines
     // Started upon defeating Oreburgh City's gym.
     public static createGalacticSinnohQuestLine() {
@@ -3262,6 +3376,7 @@ class QuestLineHelper {
         this.createRegiTrioQuestLine();
         this.createJirachiQuestLine();
         this.createMetaGroudonQuestLine();
+        this.createOrreColosseumQuestLine();
         this.createGalacticSinnohQuestLine();
         this.createManaphyQuestLine();
         this.createGiratinaQuestLine();

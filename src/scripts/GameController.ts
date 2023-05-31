@@ -137,6 +137,17 @@ class GameController {
         $shopModal.on('hidden.bs.modal shown.bs.modal', _ => $shopModal.data('disable-toggle', false));
         // Ship
         const $shipModal = $('#ShipModal');
+        // Modal Collapse
+        $(GameConstants.ModalCollapseList).map(function() {
+            const id = `#${this}`;
+            const method = Settings.getSetting(`modalCollapse.${this}`).value ? 'show' : 'hide';
+            $(id).collapse(method);
+            return $(id).get();
+        }).on('show.bs.collapse',function() {
+            Settings.setSettingByName(`modalCollapse.${this.id}`, true);
+        }).on('hide.bs.collapse',function() {
+            Settings.setSettingByName(`modalCollapse.${this.id}`, false);
+        });
 
         $(document).on('keydown', e => {
             // Ignore any of our controls if focused on an input element
@@ -152,8 +163,19 @@ class GameController {
             // Set our number key if defined (-1 for 0 indexed)
             const numberKey = (+key) - 1;
             const isNumberKey = !isNaN(numberKey) && numberKey >= 0;
-
             const visibleModals = $('.modal:visible').length;
+
+            //Global Multi-key combinations
+            if (isNumberKey) {
+                if (GameController.keyHeld[Settings.getSetting('hotkey.pokeballSelection').value]) {
+                    // Open pokeball selector modal using P + (1-4) for each condition
+                    if (!($pokeballSelector.data('bs.modal')?._isShown) && !$pokeballSelector.data('disable-toggle')) {
+                        $('.modal').modal('hide');
+                        $('#pokeballSelectorBody .clickable.pokeball-selected').eq(numberKey)?.trigger('click');
+                        return e.preventDefault();
+                    }
+                }
+            }
 
             // Safari Zone
             if (App.game.gameState === GameConstants.GameState.safari) {
@@ -352,15 +374,8 @@ class GameController {
                             DungeonRunner.map.moveRight();
                             return e.preventDefault();
                         case Settings.getSetting('hotkey.dungeon.interact').value:
-                            if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.entrance) {
-                                DungeonRunner.dungeonLeave();
-                            } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.chest) {
-                                DungeonRunner.openChest();
-                            } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.boss && !DungeonRunner.fightingBoss()) {
-                                DungeonRunner.startBossFight();
-                            } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.ladder) {
-                                DungeonRunner.nextFloor();
-                            }
+                            DungeonRunner.handleInteraction(GameConstants.DungeonInteractionSource.Keybind);
+                            DungeonRunner.continuousInteractionInput = true;
                             return e.preventDefault();
                     }
                 }
@@ -461,18 +476,6 @@ class GameController {
                         return e.preventDefault();
                     }
                     break;
-                default:
-                    // Check for a number key being pressed
-                    if (isNumberKey) {
-                        if (GameController.keyHeld[Settings.getSetting('hotkey.pokeballSelection').value]) {
-                            // Open pokeball selector modal using P + (1-4) for each condition
-                            if (!($pokeballSelector.data('bs.modal')?._isShown) && !$pokeballSelector.data('disable-toggle')) {
-                                $('.modal').modal('hide');
-                                $('#pokeballSelectorBody .clickable.pokeball-selected').eq(numberKey)?.trigger('click');
-                                return e.preventDefault();
-                            }
-                        }
-                    }
             }
 
             if (key === 'Space') {
@@ -509,6 +512,11 @@ class GameController {
                         Safari.stop('right');
                         return e.preventDefault();
                 }
+            }
+
+            if (key === Settings.getSetting('hotkey.dungeon.interact').value) {
+                DungeonRunner.continuousInteractionInput = false;
+                return e.preventDefault();
             }
 
             if (key === 'Space') {

@@ -5,13 +5,14 @@ class SpecialEvents implements Feature {
     name = 'Events';
     saveKey = 'events';
     defaults: Record<string, any>;
+    public counter = 0;
 
     static events: SpecialEvent[] = [];
 
-    static newEvent(title: string, description: string, startTime: Date, startFunction: EmptyCallback, endTime: Date, endFunction: EmptyCallback) {
+    static newEvent(title: string, description: string, startTime: Date, startFunction: EmptyCallback, endTime: Date, endFunction: EmptyCallback, hideFromEventCalendar = false) {
         // Check if the event exist before adding it again
         if (!SpecialEvents.events.find(event => event.title == title)) {
-            SpecialEvents.events.push(new SpecialEvent(title, description, startTime, startFunction, endTime, endFunction));
+            SpecialEvents.events.push(new SpecialEvent(title, description, startTime, startFunction, endTime, endFunction, hideFromEventCalendar));
         }
     }
 
@@ -23,11 +24,14 @@ class SpecialEvents implements Feature {
         if (!json) {
             return;
         }
+        json.events?.forEach(event => {
+            this.getEvent(event.name)?.fromJSON(event);
+        });
     }
 
     toJSON() {
         return {
-            // no data to save yet
+            events: SpecialEvents.events.map((event) => event.toJSON()),
         };
     }
 
@@ -39,6 +43,13 @@ class SpecialEvents implements Feature {
 
     getEvent(eventName: string) {
         return SpecialEvents.events.find((e) => e.title == eventName);
+    }
+
+    tick(): void {
+        SpecialEvents.events?.forEach(event => {
+            event.tick();
+        });
+        this.counter = 0;
     }
 }
 
@@ -155,7 +166,8 @@ SpecialEvents.newEvent('Halloween!', 'Encounter Spooky Pokémon for a limited ti
         Routes.getRoutesByRegion(GameConstants.Region.kanto).forEach(route => route.pokemon.land = route.pokemon.land.filter(p => !['Spooky Bulbasaur', 'Gastly'].includes(p)));
         Routes.getRoutesByRegion(GameConstants.Region.johto).forEach(route => route.pokemon.land = route.pokemon.land.filter(p => !['Spooky Togepi', 'Misdreavus'].includes(p)));
         Routes.getRoutesByRegion(GameConstants.Region.hoenn).forEach(route => route.pokemon.land = route.pokemon.land.filter(p => !['Pikachu (Gengar)', 'Shuppet', 'Duskull'].includes(p)));
-    }
+    },
+    true
 );
 /* Let's Go P/E release date
     RoamingPokemonList.ts:
