@@ -100,6 +100,7 @@ namespace GameConstants {
         'Hatchery',
         'Farming',
         'Underground',
+        'Safari',
         'Battle Frontier',
         'Protein',
         'Pokerus',
@@ -785,4 +786,10 @@ namespace GameConstants {
         FurfrouGemTrader,
         MagikarpJumpGemTrader,
     }
+    declare enum DungeonInteractionSource {
+        Click,
+        Keybind,
+        HeldKeybind,
+    }
+    declare const ModalCollapseList: string[];
 }
