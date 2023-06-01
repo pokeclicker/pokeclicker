@@ -272,7 +272,7 @@ class DiscordRichPresence {
         if (smallImage === 'cycle') {
             smallImage = this.cycleOptions[++this.cycleSmallImageIndex % this.cycleOptions.length];
         }
-        
+
         if (App.game != undefined) {
             switch (smallImage) {
                 case 'trainer':
@@ -295,7 +295,7 @@ class DiscordRichPresence {
             discordRPCValues.smallImageKey = smallImage;
             discordRPCValues.smallImageText = '';
         }
-        
+
         return discordRPCValues;
     }
 }
