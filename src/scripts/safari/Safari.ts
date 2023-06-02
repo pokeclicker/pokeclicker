@@ -25,16 +25,21 @@ class Safari {
             App.game.statistics.safariPokemonCaptured() * 50;
     });
     static safariLevel: KnockoutComputed<number> = ko.pureComputed(() => {
+        const xp = Safari.safariExp();
         for (let i = 1; i <= Safari.maxSafariLevel; i++) {
-            if (Safari.safariExp() < Safari.expRequiredForLevel(i)) {
+            if (xp < Safari.expRequiredForLevel(i)) {
                 return i - 1;
             }
         }
         return Safari.maxSafariLevel;
     });
     static percentToNextSafariLevel: KnockoutComputed<number> = ko.pureComputed(() => {
-        const expForNextLevel = Safari.expRequiredForLevel(Safari.safariLevel() + 1) - Safari.expRequiredForLevel(Safari.safariLevel());
-        const expThisLevel = Safari.safariExp() - Safari.expRequiredForLevel(Safari.safariLevel());
+        const level = Safari.safariLevel();
+        if (level === Safari.maxSafariLevel) {
+            return 100;
+        }
+        const expForNextLevel = Safari.expRequiredForLevel(level + 1) - Safari.expRequiredForLevel(level);
+        const expThisLevel = Safari.safariExp() - Safari.expRequiredForLevel(level);
         return expThisLevel / expForNextLevel * 100;
     });
 
@@ -485,6 +490,17 @@ class Safari {
             });
         }
         return false;
+    }
+
+    static safariProgressTooltip() {
+        const tooltip = { trigger : 'hover', title : '' };
+        const level = Safari.safariLevel();
+        if (level == Safari.maxSafariLevel) {
+            tooltip.title = 'Max level reached';
+        } else {
+            tooltip.title = `${Safari.safariExp() - Safari.expRequiredForLevel(level)} / ${Safari.expRequiredForLevel(level + 1) - Safari.expRequiredForLevel(level)}`;
+        }
+        return tooltip;
     }
 
     private static expRequiredForLevel(level: number) {
