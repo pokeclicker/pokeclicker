@@ -26,8 +26,8 @@ class SafariItemController {
             {item: {id: 'Protein', type: ItemType.item}, weight: 0.25},
             {item: {id: 'Revive', type: ItemType.underground}, weight: 2.5},
             {item: {id: 'Max Revive', type: ItemType.underground}, weight: 1.5},
-            {item: {id: 'Exeggcute (Single)', type: ItemType.item}, weight: 0.25}, //Add Safari Level requirement later
-            {item: {id: 'Pinsirite', type: ItemType.item}, weight: 1, requirement: new MultiRequirement([new MaxRegionRequirement(GameConstants.Region.kalos), new ObtainedPokemonRequirement('Pinsir')])}, //Add Safari Level requirement later
+            {item: {id: 'Exeggcute (Single)', type: ItemType.item}, weight: 0.25, requirement: new SafariLevelRequirement(5)},
+            {item: {id: 'Pinsirite', type: ItemType.item}, weight: 1, requirement: new MultiRequirement([new MaxRegionRequirement(GameConstants.Region.kalos), new ObtainedPokemonRequirement('Pinsir'), new SafariLevelRequirement(10)])},
         ],
         [GameConstants.Region.kalos]: [
             {item: {id: 'Mago', type: ItemType.berry}, weight: 4.2},
@@ -44,7 +44,7 @@ class SafariItemController {
             {item: {id: 'Luxuryball', type: ItemType.item}, weight: 2},
             {item: {id: 'Repeatball', type: ItemType.item}, weight: 1.5},
             {item: {id: 'Star Piece', type: ItemType.underground}, weight: 1},
-            {item: {id: 'Scizorite', type: ItemType.item}, weight: 1, requirement: new MultiRequirement([new MaxRegionRequirement(GameConstants.Region.kalos), new ObtainedPokemonRequirement('Scizor')])}, //Add Safari Level requirement later
+            {item: {id: 'Scizorite', type: ItemType.item}, weight: 1, requirement: new MultiRequirement([new MaxRegionRequirement(GameConstants.Region.kalos), new ObtainedPokemonRequirement('Scizor'), new SafariLevelRequirement(15)])},
         ],
     }
 
