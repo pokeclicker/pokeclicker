@@ -15,6 +15,7 @@ import {
     DAY,
     ExtraAchievementCategories,
     camelCaseToString,
+    ModalCollapseList,
 } from '../GameConstants';
 import HotkeySetting from './HotkeySetting';
 import Language, { LanguageNames } from '../translation/Language';
@@ -395,3 +396,8 @@ Object.keys(LogBookTypes).forEach((logBookType) => {
 Settings.add(new BooleanSetting('catchFilters.initialEnabled', 'New Catch Filters initially enabled', false));
 
 Settings.add(new BooleanSetting('displayTrueAttack', 'Display True Attack in Pokemon List', false));
+
+// Modal Collapsible Panels
+ModalCollapseList.forEach((collapse) => {
+    Settings.add(new BooleanSetting(`modalCollapse.${collapse}`, 'Modal Collapse', true));
+});

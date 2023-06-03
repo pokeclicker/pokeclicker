@@ -278,6 +278,12 @@ class Quests implements Saveable {
         return 100 * (this.xp() - requiredForCurrent) / (requiredForNext - requiredForCurrent);
     }
 
+    public questProgressTooltip() {
+        const level = this.level();
+        const xp = this.xp();
+        return {title : `${xp - this.levelToXP(level)} / ${this.levelToXP(level + 1) - this.levelToXP(level)}`, trigger : 'hover' };
+    }
+
     public isDailyQuestsUnlocked() {
         return QuestLineHelper.isQuestLineCompleted('Tutorial Quests');
     }

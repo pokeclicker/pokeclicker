@@ -16,6 +16,33 @@ class Safari {
     static balls: KnockoutObservable<number> = ko.observable().extend({ numeric: 0 });
     static activeRegion: KnockoutObservable<GameConstants.Region> = ko.observable(GameConstants.Region.none);
 
+    // Safari level
+    static maxSafariLevel = 40;
+    static safariExp: KnockoutComputed<number> = ko.pureComputed(() => {
+        return App.game.statistics.safariRocksThrown() * 10 +
+            App.game.statistics.safariBaitThrown() * 5 +
+            App.game.statistics.safariBallsThrown() * 10 +
+            App.game.statistics.safariPokemonCaptured() * 50;
+    });
+    static safariLevel: KnockoutComputed<number> = ko.pureComputed(() => {
+        const xp = Safari.safariExp();
+        for (let i = 1; i <= Safari.maxSafariLevel; i++) {
+            if (xp < Safari.expRequiredForLevel(i)) {
+                return i - 1;
+            }
+        }
+        return Safari.maxSafariLevel;
+    });
+    static percentToNextSafariLevel: KnockoutComputed<number> = ko.pureComputed(() => {
+        const level = Safari.safariLevel();
+        if (level === Safari.maxSafariLevel) {
+            return 100;
+        }
+        const expForNextLevel = Safari.expRequiredForLevel(level + 1) - Safari.expRequiredForLevel(level);
+        const expThisLevel = Safari.safariExp() - Safari.expRequiredForLevel(level);
+        return expThisLevel / expForNextLevel * 100;
+    });
+
     public static sizeX(): number {
         return Math.floor(document.querySelector('#safariModal .modal-dialog').scrollWidth / 32);
     }
@@ -463,6 +490,21 @@ class Safari {
             });
         }
         return false;
+    }
+
+    static safariProgressTooltip() {
+        const tooltip = { trigger : 'hover', title : '' };
+        const level = Safari.safariLevel();
+        if (level == Safari.maxSafariLevel) {
+            tooltip.title = 'Max level reached';
+        } else {
+            tooltip.title = `${Safari.safariExp() - Safari.expRequiredForLevel(level)} / ${Safari.expRequiredForLevel(level + 1) - Safari.expRequiredForLevel(level)}`;
+        }
+        return tooltip;
+    }
+
+    private static expRequiredForLevel(level: number) {
+        return Math.ceil(2000 * (1.2 ** (level - 1) - 1));
     }
 }
 
