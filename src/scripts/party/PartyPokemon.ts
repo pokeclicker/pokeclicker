@@ -316,6 +316,112 @@ class PartyPokemon implements Saveable {
         return ((this.getBreedingAttackBonus() * this.calculateEVAttackBonus()) / this.getEggSteps()) * GameConstants.EGG_CYCLE_MULTIPLIER;
     });
 
+    public isHatchable = ko.pureComputed(() => {
+        // Only breedable Pokemon
+        if (this.breeding || this.level < 100) {
+            return false;
+        }
+
+        // Check if search matches englishName or displayName
+        const displayName = PokemonHelper.displayName(this.name)();
+        const filterName = BreedingFilters.name.value();
+        const partyName = this.displayName;
+        if (!filterName.test(displayName) && !filterName.test(this.name) && !(partyName != undefined && filterName.test(partyName))) {
+            return false;
+        }
+
+        // Check ID
+        const filterID = BreedingFilters.id.value();
+        if (filterID > -1 && filterID != Math.floor(this.id)) {
+            return false;
+        }
+
+        // Check based on category
+        if (BreedingFilters.category.value() >= 0) {
+            if (this.category !== BreedingFilters.category.value()) {
+                return false;
+            }
+        }
+
+        // Check based on shiny status
+        if (BreedingFilters.shinyStatus.value() >= 0) {
+            if (+this.shiny !== BreedingFilters.shinyStatus.value()) {
+                return false;
+            }
+        }
+
+        // Check based on native region
+        const showRegions = BreedingFilters.region.value();
+        const region = PokemonHelper.calcNativeRegion(this.name);
+        const regionBitInFilter = 1 << region & showRegions;
+        const noneRegionCheck = (showRegions === 0 || showRegions === (2 << player.highestRegion()) - 1)
+            && region === GameConstants.Region.none;
+        if (!regionBitInFilter && !noneRegionCheck) {
+            return false;
+        }
+
+        // check based on Pokerus status
+        if (BreedingFilters.pokerus.value() > -1) {
+            if (this.pokerus !== BreedingFilters.pokerus.value()) {
+                return false;
+            }
+        }
+
+        const uniqueTransformation = BreedingFilters.uniqueTransformation.value();
+        const pokemon = PokemonHelper.getPokemonById(this.id);
+        // Only Base Pokémon with Mega available
+        if (uniqueTransformation == 'mega-available' && !PokemonHelper.hasMegaEvolution(pokemon.name)) {
+            return false;
+        }
+        // Only Base Pokémon without Mega Evolution
+        if (uniqueTransformation == 'mega-unobtained' && !(PokemonHelper.hasMegaEvolution(pokemon.name) && (pokemon as DataPokemon).evolutions?.some((e) => !App.game.party.alreadyCaughtPokemonByName(e.evolvedPokemon)))) {
+            return false;
+        }
+        // Only Mega Pokémon
+        if (uniqueTransformation == 'mega-evolution' && !(PokemonHelper.getPokemonPrevolution(pokemon.name)?.some((e) => PokemonHelper.hasMegaEvolution(e.basePokemon)))) {
+            return false;
+        }
+
+        // Check if either of the types match
+        if (!this.filterByTypes(BreedingFilters.type1.value(), BreedingFilters.type2.value())) {
+            return false;
+        }
+        return true;
+    });
+
+    private filterByTypes(filterTypes1: PokemonType[], filterTypes2: PokemonType[]) {
+        const numTypes = GameHelper.enumLength(PokemonType) - 1;
+        const { type: [type1, type2] } = pokemonMap[this.name];
+
+        // Check if all types are selected or if the first type is included in the first filter.
+        if (filterTypes1.length === numTypes || filterTypes1.includes(type1)) {
+            // Check if all types are selected in the second filter
+            if (filterTypes2.length === numTypes) {
+                return true;
+            }
+            // Check if we match a pure type
+            if (type2 === undefined || type2 === PokemonType.None) {
+                return filterTypes2.length === 0 || filterTypes2.includes(type1);
+            }
+            // Check if the second type is included in the second filter.
+            if (filterTypes2.includes(type2)) {
+                return true;
+            }
+        }
+        // Check if all types are selected or if the first type is included in the second filter.
+        if (filterTypes2.length === numTypes || filterTypes2.includes(type1)) {
+            // Check if we're searching for pure types
+            if (type2 === undefined || type2 === PokemonType.None) {
+                return filterTypes1.length === 0;
+            }
+            // Check if the second type is included in the first filter.
+            if (filterTypes1.includes(type2)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public hideFromProteinList = ko.pureComputed(() => {
         // Check if search matches nickname or translated name
         if (
@@ -392,7 +498,19 @@ class PartyPokemon implements Saveable {
         if (!new RegExp(Settings.getSetting('heldItemSearchFilter').observableValue() , 'i').test(this.displayName)) {
             return true;
         }
+        if (Settings.getSetting('heldItemRegionFilter').observableValue() > -2) {
+            if (PokemonHelper.calcNativeRegion(this.name) !== Settings.getSetting('heldItemRegionFilter').observableValue()) {
+                return true;
+            }
+        }
+        const type = Settings.getSetting('heldItemTypeFilter').observableValue();
+        if (type > -2 && !pokemonMap[this.name].type.includes(type)) {
+            return true;
+        }
         if (Settings.getSetting('heldItemHideHoldingPokemon').observableValue() && this.heldItem()) {
+            return true;
+        }
+        if (Settings.getSetting('heldItemShowHoldingThisItem').observableValue() && this.heldItem() !== HeldItem.heldItemSelected()) {
             return true;
         }
 
@@ -425,7 +543,7 @@ class PartyPokemon implements Saveable {
         this.heldItem(json[PartyPokemonSaveKeys.heldItem] && ItemList[json[PartyPokemonSaveKeys.heldItem]] instanceof HeldItem ? ItemList[json[PartyPokemonSaveKeys.heldItem]] as HeldItem : undefined);
         this.defaultFemaleSprite(json[PartyPokemonSaveKeys.defaultFemaleSprite] ?? this.defaults.defaultFemaleSprite);
         this.hideShinyImage(json[PartyPokemonSaveKeys.hideShinyImage] ?? this.defaults.hideShinyImage);
-        this._nickname(json[PartyPokemonSaveKeys.nickname] ? decodeURI(json[PartyPokemonSaveKeys.nickname]) : this.defaults.nickname);
+        this._nickname(json[PartyPokemonSaveKeys.nickname] || this.defaults.nickname);
         this.shadow = json[PartyPokemonSaveKeys.shadow] ?? this.defaults.shadow;
         this._showShadowImage(json[PartyPokemonSaveKeys.showShadowImage] ?? this.defaults.showShadowImage);
     }
@@ -445,7 +563,7 @@ class PartyPokemon implements Saveable {
             [PartyPokemonSaveKeys.heldItem]: this.heldItem()?.name,
             [PartyPokemonSaveKeys.defaultFemaleSprite]: this.defaultFemaleSprite(),
             [PartyPokemonSaveKeys.hideShinyImage]: this.hideShinyImage(),
-            [PartyPokemonSaveKeys.nickname]: this.nickname ? encodeURI(this.nickname) : undefined,
+            [PartyPokemonSaveKeys.nickname]: this.nickname || undefined,
             [PartyPokemonSaveKeys.shadow]: this.shadow,
             [PartyPokemonSaveKeys.showShadowImage]: this._showShadowImage(),
         };

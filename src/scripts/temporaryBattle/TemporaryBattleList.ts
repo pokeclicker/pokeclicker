@@ -892,6 +892,77 @@ TemporaryBattleList.Latios = new TemporaryBattle(
         hideTrainer: true,
     }
 );
+TemporaryBattleList.Willie = new TemporaryBattle(
+    'Willie',
+    [
+        new GymPokemon('Zigzagoon', 6900000, 24),
+        new GymPokemon('Zigzagoon', 6900000, 24),
+    ],
+    'Whew! With skills like that, y\'all should head to Phenac City.',
+    [new QuestLineStepCompletedRequirement('Shadows in the Desert', 0)],
+    undefined,
+    {
+        displayName: 'Willie',
+        imageName: 'Rider (male)',
+    }
+);
+TemporaryBattleList.Folly = new TemporaryBattle(
+    'Folly',
+    [
+        new GymPokemon('Whismur', 6950000, 25),
+        new GymPokemon('Whismur', 6950000, 25),
+    ],
+    '<i>The shady guy flees, dropping a mysterious sack. The sack.... cries out in pain?</i>',
+    [new QuestLineStepCompletedRequirement('Shadows in the Desert', 1)],
+    undefined,
+    {
+        displayName: 'Folly',
+        imageName: 'Shady Guy (male)',
+    }
+);
+TemporaryBattleList['Cipher Peon Doven'] = new TemporaryBattle(
+    'Cipher Peon Doven',
+    [
+        new GymPokemon('Spheal', 7300000, 33),
+        new GymPokemon('Carvanha', 7300000, 34),
+    ],
+    'Rats! Foiled by some nobody!',
+    [new QuestLineStepCompletedRequirement('Shadows in the Desert', 14)],
+    undefined,
+    {
+        displayName: 'Cipher Peon Doven',
+        imageName: 'Cipher Peon (female)',
+    }
+);
+TemporaryBattleList['Cipher Peon Silton'] = new TemporaryBattle(
+    'Cipher Peon Silton',
+    [
+        new GymPokemon('Shroomish', 7300000, 34),
+        new GymPokemon('Cacnea', 7300000, 34),
+    ],
+    'Man! I was really having fun doing these crimes.',
+    [new QuestLineStepCompletedRequirement('Shadows in the Desert', 14)],
+    undefined,
+    {
+        displayName: 'Cipher Peon Silton',
+        imageName: 'Cipher Peon (male)',
+    }
+);
+TemporaryBattleList['Cipher Peon Kass'] = new TemporaryBattle(
+    'Cipher Peon Kass',
+    [
+        new GymPokemon('Baltoy', 4900000, 35),
+        new GymPokemon('Ralts', 4900000, 35),
+        new GymPokemon('Kirlia', 4900000, 35),
+    ],
+    'Run away!',
+    [new QuestLineStepCompletedRequirement('Shadows in the Desert', 14)],
+    undefined,
+    {
+        displayName: 'Cipher Peon Kass',
+        imageName: 'Cipher Peon (female)',
+    }
+);
 TemporaryBattleList['Sevii Rocket Grunt 1'] = new TemporaryBattle(
     'Sevii Rocket Grunt 1',
     [
@@ -1441,7 +1512,7 @@ TemporaryBattleList['Team Plasma Grunt 2'] = new TemporaryBattle(
     [
         new GymBadgeRequirement(BadgeEnums.Bolt),
         new TemporaryBattleRequirement('Team Plasma Grunt 1'),
-        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 3),
+        new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 3),
     ],
     undefined,
     {
@@ -1456,7 +1527,7 @@ TemporaryBattleList['Team Plasma Grunt 3'] = new TemporaryBattle(
     [
         new GymBadgeRequirement(BadgeEnums.Bolt),
         new TemporaryBattleRequirement('Team Plasma Grunt 1'),
-        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 3),
+        new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 3),
     ],
     undefined,
     {
@@ -1520,7 +1591,7 @@ TemporaryBattleList['Team Plasma Grunt 4'] = new TemporaryBattle(
     'Team Plasma Grunt 4',
     [new GymPokemon('Koffing', 39496600, 30)],
     'You! So you\'re a Trainer who fights while believing in your Pokémon, are you?',
-    [new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 5)],
+    [new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 5)],
     undefined,
     {
         displayName: 'Team Plasma Grunt',
@@ -1531,7 +1602,7 @@ TemporaryBattleList['Team Plasma Grunt 5'] = new TemporaryBattle(
     'Team Plasma Grunt 5',
     [new GymPokemon('Trubbish', 39496600, 30)],
     'Plasmaaaa! Plasmaaaa!!',
-    [new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 5)],
+    [new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 5)],
     undefined,
     {
         displayName: 'Team Plasma Grunt',
@@ -1547,7 +1618,7 @@ TemporaryBattleList['Team Plasma Grunts 1'] = new TemporaryBattle(
         new GymPokemon('Krokorok', 9974150, 29),
     ],
     'The Gym Leader is tough, but you... Are you even human?! I tried to use the same combination as you, and yet...',
-    [new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 5)],
+    [new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 5)],
     undefined,
     {
         displayName: 'Team Plasma Grunts',
@@ -1563,7 +1634,7 @@ TemporaryBattleList['Team Plasma Grunts 2'] = new TemporaryBattle(
         new GymPokemon('Raticate', 9974150, 29),
     ],
     'No! At this rate, I... I won\'t be able to protect the Plasma Frigate! P-P-P-Plasmaaaa!',
-    [new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 5)],
+    [new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 5)],
     undefined,
     {
         displayName: 'Team Plasma Grunts',
@@ -1602,7 +1673,7 @@ TemporaryBattleList['Team Plasma Grunt 6'] = new TemporaryBattle(
         new TemporaryBattleRequirement('Team Plasma Grunt 5'),
         new TemporaryBattleRequirement('Team Plasma Grunts 1'),
         new TemporaryBattleRequirement('Team Plasma Grunts 2'),
-        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 8),
+        new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 8),
     ],
     undefined,
     {
@@ -1673,7 +1744,7 @@ TemporaryBattleList['Zinzolin 2'] = new TemporaryBattle(
         new GymPokemon('Cryogonal', 17632200, 46),
         new GymPokemon('Weavile', 20632200, 48),
     ],
-    'Have you gotten even stronger than you were in Lucanosa Town? How, in such a brief amount of time...',
+    'Have you gotten even stronger than you were in Lacunosa Town? How, in such a brief amount of time...',
     [
         new TemporaryBattleRequirement('Team Plasma Grunt 7'),
         new TemporaryBattleRequirement('Team Plasma Grunt 8'),
@@ -1713,7 +1784,7 @@ TemporaryBattleList['Colress 3'] = new TemporaryBattle(
     [
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Giant Chasm')),
         new TemporaryBattleRequirement('Plasma Shadow 1'),
-        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 17),
+        new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 17),
     ],
     undefined,
     {
@@ -1777,7 +1848,7 @@ TemporaryBattleList['Ghetsis 1'] = new TemporaryBattle(
         new TemporaryBattleRequirement('Plasma Shadow 2'),
         new TemporaryBattleRequirement('Plasma Shadow 3'),
         new TemporaryBattleRequirement('Plasma Shadow 4'),
-        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 20),
+        new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 20),
     ],
     undefined,
     {
@@ -2475,6 +2546,7 @@ TemporaryBattleList['Aipom Alley'] = new TemporaryBattle(
     undefined,
     {
         hideTrainer: true,
+        imageName: 'specialNPCs/Aipom Alley',
     }
 );
 TemporaryBattleList['Mime Interview'] = new TemporaryBattle(
@@ -3428,8 +3500,8 @@ TemporaryBattleList['Captain Sophocles'] = new TemporaryBattle(
 TemporaryBattleList['Kahuna Nanu'] = new TemporaryBattle(
     'Kahuna Nanu',
     [
-        new GymPokemon('Sableye', 90200640, 51),
-        new GymPokemon('Absol', 90200640, 51),
+        new GymPokemon('Sableye', 189973142, 51),
+        new GymPokemon('Absol', 189973142, 51),
         new GymPokemon('Alolan Persian', 198608284, 51),
     ],
     'Heh... You got me good, kid. Hope I don\'t get in trouble with the girl for this. You should go tell that young filly Mina that you\'re done with what she asked you to do.',
@@ -3620,8 +3692,8 @@ TemporaryBattleList['Team Galactic Leader Cyrus'] = new TemporaryBattle(
         new GymPokemon('Honchkrow', 225000000, 60),
         new GymPokemon('Crobat', 225000000, 60),
         new GymPokemon('Weavile', 225000000, 60),
-        new GymPokemon('Dialga', 225000000, 60),
-        new GymPokemon('Palkia', 250000000, 60),
+        new GymPokemon('Dialga', 240000000, 60),
+        new GymPokemon('Palkia', 240000000, 60),
     ],
     'Impressive. Your prowess is notable.',
     [new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 2)],
@@ -3638,8 +3710,8 @@ TemporaryBattleList['Team Flare Leader Lysandre'] = new TemporaryBattle(
         new GymPokemon('Pyroar', 225000000, 60),
         new GymPokemon('Honchkrow', 225000000, 60),
         new GymPokemon('Mega Gyarados', 225000000, 60),
-        new GymPokemon('Xerneas', 225000000, 60),
-        new GymPokemon('Yveltal', 250000000, 60),
+        new GymPokemon('Xerneas', 240000000, 60),
+        new GymPokemon('Yveltal', 240000000, 60),
     ],
     'I can feel the fire of your convictions burning deep within your heart!',
     [new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 3)],
@@ -3656,8 +3728,8 @@ TemporaryBattleList['Team Plasma Leader Ghetsis'] = new TemporaryBattle(
         new GymPokemon('Bouffalant', 225000000, 60),
         new GymPokemon('Bisharp', 225000000, 60),
         new GymPokemon('Hydreigon', 225000000, 60),
-        new GymPokemon('Zekrom', 225000000, 60),
-        new GymPokemon('Reshiram', 250000000, 60),
+        new GymPokemon('Zekrom', 240000000, 60),
+        new GymPokemon('Reshiram', 240000000, 60),
     ],
     'I couldn\'t have been defeated by some random Trainer from who knows where!',
     [new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 4)],
@@ -3674,8 +3746,8 @@ TemporaryBattleList['Team Rainbow Leader Giovanni'] = new TemporaryBattle(
         new GymPokemon('Nidoking', 230000000, 60),
         new GymPokemon('Nidoqueen', 230000000, 60),
         new GymPokemon('Rhyperior', 230000000, 60),
-        new GymPokemon('Mega Mewtwo X', 230000000, 60),
-        new GymPokemon('Mega Mewtwo Y', 260000000, 60),
+        new GymPokemon('Mega Mewtwo X', 245000000, 60),
+        new GymPokemon('Mega Mewtwo Y', 245000000, 60),
     ],
     'Ha! That was a truly intense fight!',
     [new QuestLineStepCompletedRequirement('Defeat Rainbow Rocket', 5)]
@@ -4724,7 +4796,7 @@ TemporaryBattleList['Flowering Celebi'] = new TemporaryBattle(
     {
         isTrainerBattle: false,
         hideTrainer: true,
-        imageName: '../pokemon/251.02',
+        imageName: '../pokemon/251.01',
     }
 );
 TemporaryBattleList.Peony = new TemporaryBattle(
@@ -4963,7 +5035,7 @@ TemporaryBattleList['Volo 1'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Ginkgo Guild Member Volo',
-        imageName: 'Volo1',
+        imageName: 'Volo (Ginkgo)',
     }
 );
 TemporaryBattleList['Akari 1'] = new TemporaryBattle(
@@ -4981,7 +5053,11 @@ TemporaryBattleList['Warden Mai'] = new TemporaryBattle(
     'Warden Mai',
     [new GymPokemon('Munchlax', 348526193, 10)],
     'You really aren\'t one of the usual Galaxy buffoons if you could defeat my partner... Well fought, Munchlax.',
-    [new DevelopmentRequirement()]
+    [new DevelopmentRequirement()],
+    undefined,
+    {
+        imageName: 'Mai',
+    }
 );
 TemporaryBattleList['Alpha Kricketune'] = new TemporaryBattle(
     'Alpha Kricketune',
@@ -4999,7 +5075,11 @@ TemporaryBattleList['Warden Lian'] = new TemporaryBattle(
     'Warden Lian',
     [new GymPokemon('Goomy', 348526193, 15)],
     'H-how can this be...',
-    [new DevelopmentRequirement()]
+    [new DevelopmentRequirement()],
+    undefined,
+    {
+        imageName: 'Lian',
+    }
 );
 TemporaryBattleList['Irida 1'] = new TemporaryBattle(
     'Irida 1',
@@ -5045,7 +5125,7 @@ TemporaryBattleList['Volo 2'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Ginkgo Guild Member Volo',
-        imageName: 'Volo1',
+        imageName: 'Volo (Ginkgo)',
     }
 );
 TemporaryBattleList['Coin 1'] = new TemporaryBattle(
@@ -5174,7 +5254,11 @@ TemporaryBattleList['Warden Ingo'] = new TemporaryBattle(
         new GymPokemon('Gliscor', 348526193, 42),
     ],
     'Bravo! Excellent! Your talent has brought you to the destination called Victory! Now, allow me to call Sneasler...',
-    [new DevelopmentRequirement()]
+    [new DevelopmentRequirement()],
+    undefined,
+    {
+        imageName: 'Ingo',
+    }
 );
 TemporaryBattleList['Melli 2'] = new TemporaryBattle(
     'Melli 2',
@@ -5209,7 +5293,11 @@ TemporaryBattleList['Warden Gaeric'] = new TemporaryBattle(
         new GymPokemon('Glalie', 348526193, 48),
     ],
     'Outstanding! I\'m tough as an iceberg, but you smashed me through and through!',
-    [new DevelopmentRequirement()]
+    [new DevelopmentRequirement()],
+    undefined,
+    {
+        imageName: 'Gaeric',
+    }
 );
 TemporaryBattleList['Warden Sabi'] = new TemporaryBattle(
     'Warden Sabi',
@@ -5219,7 +5307,11 @@ TemporaryBattleList['Warden Sabi'] = new TemporaryBattle(
         new GymPokemon('Rhyperior', 348526193, 50),
     ],
     'Wow, you caught us AND you beat us. You\'ve won all our games so far! But Braviary still wants to get to know you even better. Up to the roof we go! All right, Braviary! Why not test out their strength for yourself?',
-    [new DevelopmentRequirement()]
+    [new DevelopmentRequirement()],
+    undefined,
+    {
+        imageName: 'Sabi',
+    }
 );
 TemporaryBattleList['Hisuian Braviary'] = new TemporaryBattle(
     'Hisuian Braviary',
@@ -5256,6 +5348,7 @@ TemporaryBattleList.Beni = new TemporaryBattle(
     undefined,
     {
         displayName: 'The Galaxy Team\'s Beni',
+        imageName: 'Beni (Ninja)',
     }
 );
 TemporaryBattleList['Kamado 1'] = new TemporaryBattle(
@@ -5271,7 +5364,7 @@ TemporaryBattleList['Kamado 1'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'The Galaxy Team\'s Kamado',
-        imageName: 'Kamado',
+        imageName: 'Kamado (Armor)',
     }
 );
 TemporaryBattleList['Charm 2'] = new TemporaryBattle(
@@ -5326,7 +5419,7 @@ TemporaryBattleList['Kamado 2'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'The Galaxy Team\'s Kamado',
-        imageName: 'Kamado',
+        imageName: 'Kamado (Armor)',
     }
 );
 TemporaryBattleList['Adaman 2'] = new TemporaryBattle(
@@ -5396,7 +5489,7 @@ TemporaryBattleList['Volo 3'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Pokémon Wielder Volo',
-        imageName: 'Volo2',
+        imageName: 'Volo',
     }
 );
 TemporaryBattleList['Giratina (Origin)'] = new TemporaryBattle(

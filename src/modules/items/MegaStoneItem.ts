@@ -37,7 +37,12 @@ export default class MegaStoneItem extends Item {
     get image(): string {
         return `assets/images/megaStone/${MegaStoneType[this.megaStone]}.png`;
     }
+
     isSoldOut(): boolean {
         return player.hasMegaStone(this.megaStone);
+    }
+
+    get description(): string {
+        return this._description || `A Mega Stone for ${this.basePokemon}.`;
     }
 }

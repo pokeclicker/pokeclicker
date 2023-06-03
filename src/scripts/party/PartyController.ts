@@ -172,6 +172,19 @@ class PartyController {
         return 1.0;
     }
 
+    public static moveCategoryPokemon(fromCategory: number, toCategory: number) {
+        // Category should exist, otherwise use the None category
+        if (!PokemonCategories.categories().some((c) => c.id === toCategory)) {
+            toCategory = 0;
+        }
+
+        App.game.party.caughtPokemon.forEach((p) => {
+            if (p.category === fromCategory) {
+                p.category = toCategory;
+            }
+        });
+    }
+
     public static compareBy(option: SortOptions, direction: boolean, region = -1): (a: PartyPokemon, b: PartyPokemon) => number {
         return function (a, b) {
             let res, dir = (direction) ? -1 : 1;
@@ -204,38 +217,5 @@ class PartyController {
 
             return res * dir;
         };
-    }
-
-    public static filterByTypes(pokemon: string, filterTypes1: PokemonType[], filterTypes2: PokemonType[]) {
-        const numTypes = GameHelper.enumLength(PokemonType) - 1;
-        const { type: [type1, type2] } = pokemonMap[pokemon];
-
-        // Check if all types are selected or if the first type is included in the first filter.
-        if (filterTypes1.length === numTypes || filterTypes1.includes(type1)) {
-            // Check if all types are selected in the second filter
-            if (filterTypes2.length === numTypes) {
-                return true;
-            }
-            // Check if we match a pure type
-            if (type2 === undefined || type2 === PokemonType.None) {
-                return filterTypes2.length === 0 || filterTypes2.includes(type1);
-            }
-            // Check if the second type is included in the second filter.
-            if (filterTypes2.includes(type2)) {
-                return true;
-            }
-        }
-        // Check if all types are selected or if the first type is included in the second filter.
-        if (filterTypes2.length === numTypes || filterTypes2.includes(type1)) {
-            // Check if we're searching for pure types
-            if (type2 === undefined || type2 === PokemonType.None) {
-                return filterTypes1.length === 0;
-            }
-            // Check if the second type is included in the first filter.
-            if (filterTypes1.includes(type2)) {
-                return true;
-            }
-        }
-        return false;
     }
 }

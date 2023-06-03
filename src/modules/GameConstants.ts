@@ -26,6 +26,7 @@ export const MUTATION_TICK = 1 * SECOND;
 export const WANDER_TICK = 1.5 * SECOND;
 export const TEMP_BATTLE_TIME = 60 * SECOND;
 export const TEMP_BATTLE_TICK = 0.1 * SECOND;
+export const SPECIAL_EVENT_TICK = 1 * SECOND;
 
 // Update the requirement for "Final Region Town" in TownList, when adding new regions.
 // Else the professor NPC won't work.
@@ -219,6 +220,7 @@ export enum AchievementType {
     'Hatchery',
     'Farming',
     'Underground',
+    'Safari',
     'Battle Frontier',
     'Vitamins',
     'Pokerus',
@@ -282,10 +284,11 @@ const questBase = 1; // change this to scale all quest points
 // Currency → QP reward amounts
 export const GAIN_MONEY_BASE_REWARD = questBase * 0.0017;
 export const GAIN_TOKENS_BASE_REWARD = GAIN_MONEY_BASE_REWARD * 55;
-export const GAIN_FARM_POINTS_BASE_REWARD = GAIN_MONEY_BASE_REWARD * 90;
+export const GAIN_FARM_POINTS_BASE_REWARD = GAIN_MONEY_BASE_REWARD * 360;
 
 export const HATCH_EGGS_BASE_REWARD = questBase * 33;
 export const SHINY_BASE_REWARD = questBase * 3000;
+export const SHADOW_BASE_REWARD = questBase * 500;
 
 export const DEFEAT_POKEMONS_BASE_REWARD = questBase * 1;
 
@@ -319,9 +322,13 @@ export const REPEATBALL_EP_MODIFIER = 5;
 export const DUNGEON_EP_MODIFIER = 3;
 export const DUNGEON_BOSS_EP_MODIFIER = 10;
 export const ROAMER_EP_MODIFIER = 50;
+export const SHADOW_EP_MODIFIER = 2;
 
 export const EP_EV_RATIO = 1000;
 export const EP_CHALLENGE_MODIFIER = 10;
+
+// Mega Evolution
+export const MEGA_REQUIRED_ATTACK_MULTIPLIER = 500;
 
 /**
  * idle: The game is not doing anything, the battle view isn't shown
@@ -333,6 +340,7 @@ export const EP_CHALLENGE_MODIFIER = 10;
  * town: In a town/pre-dungeon, town view is not shown
  */
 export enum GameState {
+    loading = -1,
     idle = 0,
     paused = 1,
     fighting = 2,
@@ -662,7 +670,7 @@ export const Environments: Record<string, EnvironmentData> = {
     Cave: {
         [Region.kanto]: new Set([37, 39, 'Pewter City', 'Diglett\'s Cave', 'Mt. Moon', 'Rock Tunnel', 'Victory Road', 'Lost Cave', 'Altering Cave', 'Tanoby Ruins']),
         [Region.johto]: new Set(['Cianwood City', 'Ruins of Alph', 'Union Cave', 'Mt. Mortar', 'Dark Cave', 'Tohjo Falls', 'Victory Road Johto']),
-        [Region.hoenn]: new Set(['Rustboro City', 'Dewford Town', 'Rusturf Tunnel', 'Granite Cave', 'Meteor Falls', 'Jagged Pass', 'Seafloor Cavern', 'Victory Road Hoenn']),
+        [Region.hoenn]: new Set(['Rustboro City', 'Dewford Town', 'Rusturf Tunnel', 'Granite Cave', 'Meteor Falls', 'Jagged Pass', 'Seafloor Cavern', 'Victory Road Hoenn', 135]),
         [Region.sinnoh]: new Set(['Oreburgh City', 'Oreburgh Gate', 'Wayward Cave', 'Mt. Coronet', 'Mt. Coronet South', 'Iron Island', 'Mt. Coronet North', 'Victory Road Sinnoh']),
         [Region.unova]: new Set(['Relic Castle', 'Relic Passage', 'Seaside Cave', 'Victory Road Unova', 'Twist Mountain']),
         [Region.kalos]: new Set([9, 13, 'Connecting Cave', 'Kiloude City', 'Terminus Cave', 'Victory Road Kalos']),
@@ -673,7 +681,7 @@ export const Environments: Record<string, EnvironmentData> = {
     GemCave: {
         [Region.kanto]: new Set(['Viridian City', 'Cerulean Cave', 'Sunburst Island']),
         [Region.johto]: new Set(['Blackthorn City', 'Mt. Silver', 'Whirl Islands']),
-        [Region.hoenn]: new Set(['Cave of Origin', 'Sky Pillar', 'Sealed Chamber']),
+        [Region.hoenn]: new Set(['Cave of Origin', 'Sky Pillar', 'Sealed Chamber', 137]),
         [Region.sinnoh]: new Set(['Spear Pillar', 'Hall of Origin']),
         [Region.unova]: new Set(['Chargestone Cave', 'Mistralton Cave', 'Cave of Being']),
         [Region.kalos]: new Set(['Glittering Cave', 'Reflection Cave']),
@@ -892,9 +900,9 @@ export enum PokeBlockColor {
     Purple,
     Indigo,
     Brown,
-    LiteBlue,
+    Light_Blue,
     Olive,
-    Flaxen,
+    Beige,
     Gray,
     White,
 }
@@ -1529,6 +1537,11 @@ export const TemporaryBattles = [
     'Meta Groudon',
     'Latios',
     'Latias',
+    'Willie',
+    'Folly',
+    'Cipher Peon Doven',
+    'Cipher Peon Silton',
+    'Cipher Peon Kass',
     'Sevii Rocket Grunt 1',
     'Sevii Rocket Grunt 2',
     'Sevii Rocket Grunt 3',
@@ -2073,3 +2086,29 @@ export enum MegaStoneType {
     Tyranitarite,
     Venusaurite,
 }
+
+export enum GemShops {
+    HoennFluteMaster,
+    HoennStoneSalesman,
+    UnovaFluteMaster,
+    FurfrouGemTrader,
+    MagikarpJumpGemTrader,
+}
+
+export enum DungeonInteractionSource {
+    Click,
+    Keybind,
+    HeldKeybind,
+}
+
+export const ModalCollapseList = [
+    'achievementTrackerBody',
+    'battleItemContainerBody',
+    'dailyQuestDisplayBody',
+    'eggList',
+    'fluteItemContainerBody',
+    'oakItemsBody',
+    'pokeballSelectorBody',
+    'pokemonListBody',
+    'shortcutsBody',
+];

@@ -181,6 +181,11 @@ import { ShardDeal } from './underground/ShardDeal';
 import { Underground } from './underground/Underground';
 import UndergroundUpgrade from './underground/UndergroundUpgrade';
 import SpecialEventRequirement from './requirements/SpecialEventRequirement';
+import EncounterType from './enums/EncounterType';
+import SafariBaitRequirement from './requirements/SafariBaitRequirement';
+import SafariStepsRequirement from './requirements/SafariStepsRequirement';
+import SafariRocksRequirement from './requirements/SafariRocksRequirement';
+import SafariItemsRequirement from './requirements/SafariItemsRequirement';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -372,4 +377,9 @@ Object.assign(<any>window, {
     UndergroundUpgrade,
     ShardDeal,
     DailyDeal,
+    EncounterType,
+    SafariBaitRequirement,
+    SafariStepsRequirement,
+    SafariRocksRequirement,
+    SafariItemsRequirement,
 });

@@ -26,6 +26,15 @@
                         />
                     </span>
                 </h4>
+                <div class='col-6' data-bind="tooltip : Safari.safariProgressTooltip()">
+                    <div>Lvl. <knockout data-bind='text: Safari.safariLevel()'></knockout></div>
+                    <div class="progress" style='height: 5px'>
+                        <div class="progress-bar bg-info" role="progressbar"
+                             data-bind="attr:{ style: 'width:' + Safari.percentToNextSafariLevel() + '%' }"
+                             aria-valuemin="0" aria-valuemax="100">
+                        </div>
+                    </div>
+                </div>
                 <button class='btn btn-danger modalClose' onclick='Safari.closeModal()'>Leave</button>
             </div>
 
@@ -64,6 +73,13 @@
                                     <div class="pokemonSprite walkDown" data-bind="css: { shiny: $data.shiny },
                                     style: {
                                         backgroundImage: `${$data.shiny ? 'url(\'assets/images/dynamic-background/pokemon/sparkle.png\'), ' : ''}url('assets/images/dynamic-background/pokemon/${Math.floor($data.id).toString().padStart(3, '0')}${$data.shiny ? 's' : ''}.png')`,
+                                        top: `${32 * $data.y - 8}px`,
+                                        left: `${32 * $data.x - 4}px`,
+                                    }"></div>
+                                <!-- /ko -->
+                                <!-- ko foreach: Safari.itemGrid -->
+                                    <div class="safari-item" data-bind="
+                                    style: {
                                         top: `${32 * $data.y - 8}px`,
                                         left: `${32 * $data.x - 4}px`,
                                     }"></div>

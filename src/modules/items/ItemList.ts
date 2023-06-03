@@ -46,6 +46,7 @@ ItemList.LargeRestore    = new EnergyRestore(EnergyRestoreSize.LargeRestore, 400
 
 ItemList.Dungeon_ticket = new BuyKeyItem(KeyItemType.Dungeon_ticket, 100, undefined, undefined, 'Dungeon Ticket');
 ItemList.Explorer_kit = new BuyKeyItem(KeyItemType.Explorer_kit, 5000, undefined, undefined, 'Explorer Kit');
+ItemList.Event_calendar = new BuyKeyItem(KeyItemType.Event_calendar, 100000, undefined, undefined, 'Event Calendar');
 
 ItemList.Squirtbottle = new BuyOakItem(OakItemType.Squirtbottle, 5000, Currency.farmPoint);
 ItemList.Sprinklotad = new BuyOakItem(OakItemType.Sprinklotad, 10000, Currency.farmPoint);
@@ -79,8 +80,17 @@ ItemList.Mulch_Shovel = new MulchShovelItem(300, 'Mulch Shovel', 'Removes Mulch 
 
 ItemList.PokeBlock_Black  = new PokeBlock(PokeBlockColor.Black, Infinity);
 ItemList.PokeBlock_Red    = new PokeBlock(PokeBlockColor.Red, Infinity);
+ItemList.PokeBlock_Blue = new PokeBlock(PokeBlockColor.Blue, Infinity);
+ItemList.PokeBlock_Pink = new PokeBlock(PokeBlockColor.Pink, Infinity);
+ItemList.PokeBlock_Green = new PokeBlock(PokeBlockColor.Green, Infinity);
+ItemList.PokeBlock_Yellow = new PokeBlock(PokeBlockColor.Yellow, Infinity);
 ItemList.PokeBlock_Gold   = new PokeBlock(PokeBlockColor.Gold, Infinity);
 ItemList.PokeBlock_Purple = new PokeBlock(PokeBlockColor.Purple, Infinity);
+ItemList.PokeBlock_Indigo = new PokeBlock(PokeBlockColor.Indigo, Infinity);
+ItemList.PokeBlock_Brown = new PokeBlock(PokeBlockColor.Brown, Infinity);
+ItemList.PokeBlock_Light_Blue = new PokeBlock(PokeBlockColor.Light_Blue, Infinity);
+ItemList.PokeBlock_Olive = new PokeBlock(PokeBlockColor.Olive, Infinity);
+ItemList.PokeBlock_Beige = new PokeBlock(PokeBlockColor.Beige, Infinity);
 ItemList.PokeBlock_Gray   = new PokeBlock(PokeBlockColor.Gray, Infinity);
 ItemList.PokeBlock_White  = new PokeBlock(PokeBlockColor.White, Infinity);
 
