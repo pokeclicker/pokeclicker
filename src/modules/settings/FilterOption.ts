@@ -6,6 +6,6 @@ export default class FilterOption<T = any> {
         public displayName: string,
         public value: Observable<T>,
         public optionName = '',
-        public options: SettingOption<string>[] = [],
+        public options: SettingOption<any>[] = [],
     ) {}
 }

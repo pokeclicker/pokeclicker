@@ -91,13 +91,13 @@ aria-labelledby="pokedexModalLabel">
                                                 Categories
                                             </button>
                                             <div class="border-secondary dropdown-menu col-12">
-                                                <div class="dropdown-item dropdown-text" data-bind="click : function(){ Settings.setSettingByName('pokedexCategoryFilter', -1) }">
+                                                <div class="dropdown-item dropdown-text" data-bind="click : function(){ PokedexFilters.category.value(-1) }">
                                                     All
                                                 </div>
                                                 <div class="dropdown-divider"></div>
                                                 <!-- ko foreach : PokemonCategories.categories -->
                                                 <div class="dropdown-item" data-bind="text : $data.name(), style: { background: $data.color() },
-                                                    click : function(){ Settings.setSettingByName('pokedexCategoryFilter', $data.id) }">
+                                                    click : function(){ PokedexFilters.category.value($data.id) }">
                                                 </div>
                                                 <!-- /ko-->
                                                 <div class="dropdown-divider"></div>

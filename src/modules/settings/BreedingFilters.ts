@@ -4,6 +4,7 @@ import SettingOption from './SettingOption';
 import Settings from './Settings';
 import FilterOption from './FilterOption';
 import GameHelper from '../GameHelper';
+import MultiFilterOption from './MultiFilterOption';
 
 const BreedingFilters: Record<string, FilterOption> = {
     name: new FilterOption<RegExp>(
@@ -24,18 +25,18 @@ const BreedingFilters: Record<string, FilterOption> = {
         ko.observable(-1).extend({ numeric: 0 }),
         'breedingShinyFilter',
         [
-            new SettingOption('All', '-1'),
-            new SettingOption('Not Shiny', '0'),
-            new SettingOption('Shiny', '1'),
+            new SettingOption('All', -1),
+            new SettingOption('Not Shiny', 0),
+            new SettingOption('Shiny', 1),
         ],
     ),
-    type1: new FilterOption<number[]>(
+    type1: new MultiFilterOption<number>(
         'Type 1',
         ko.observable(GameHelper.enumNumbers(PokemonType).filter(v => v !== PokemonType.None)),
         'breedingTypeFilter1',
         Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None'),
     ),
-    type2: new FilterOption<number[]>(
+    type2: new MultiFilterOption<number>(
         'Type 2',
         ko.observable(GameHelper.enumNumbers(PokemonType).filter(v => v !== PokemonType.None)),
         'breedingTypeFilter2',
@@ -52,8 +53,8 @@ const BreedingFilters: Record<string, FilterOption> = {
         ko.observable(-1).extend({ numeric: 0 }),
         'breedingPokerusFilter',
         [
-            new SettingOption('All', '-1'),
-            ...Settings.enumToSettingOptionArray(Pokerus, (t) => t !== 'Infected'),
+            new SettingOption('All', -1),
+            ...Settings.enumToNumberSettingOptionArray(Pokerus, (t) => t !== 'Infected'),
         ],
     ),
     uniqueTransformation: new FilterOption<string>(

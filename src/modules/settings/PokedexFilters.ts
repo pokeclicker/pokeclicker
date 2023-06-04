@@ -66,7 +66,7 @@ const PokedexFilters: Record<string, FilterOption> = {
         ko.observable(-1).extend({ numeric: 0 }),
         'pokdexPokerusFilter',
         [
-            new SettingOption('All', '-1'),
+            new SettingOption('All', -1),
             ...Settings.enumToNumberSettingOptionArray(Pokerus, (t) => t !== 'Infected'),
         ],
     ),

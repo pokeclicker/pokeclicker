@@ -23,9 +23,9 @@ import BreedingFilters from './BreedingFilters';
 import GameHelper from '../GameHelper';
 import PokemonType from '../enums/PokemonType';
 import PokedexFilters from './PokedexFilters';
-import FilterSetting from './FilterSetting';
 import MultiSetting from './MultiSetting';
 import { LogBookTypes } from '../logbook/LogBookTypes';
+import MultiFilterOption from './MultiFilterOption';
 
 export default Settings;
 
@@ -224,25 +224,29 @@ Settings.add(new BooleanSetting('heldItemShowHoldingThisItem', 'Show only Pokém
 // Breeding Filters
 Object.keys(BreedingFilters).forEach((key) => {
     // One-off because search isn't stored in settings
-    if (key === 'search') {
+    if (key === 'name' || key === 'id') {
         return;
     }
     const filter = BreedingFilters[key];
-    if (key === 'type1' || key === 'type2') {
-        Settings.add(new MultiSetting<string>(filter.optionName, filter.displayName, filter.options || [], filter.value()));
-    } else {
-        Settings.add(new Setting<string>(filter.optionName, filter.displayName, filter.options || [], filter.value().toString()));
-    }
+    const setting = filter instanceof MultiFilterOption ?
+        new MultiSetting<string>(filter.optionName, filter.displayName, filter.options, filter.value()) :
+        new Setting<string>(filter.optionName, filter.displayName, filter.options, filter.value());
+    setting.subscribeToVal(filter.value);
+    Settings.add(setting);
 });
 
 // Pokedex Filters
 Object.keys(PokedexFilters).forEach((key) => {
     // dont store name filter
-    if (key === 'name') {
+    if (key === 'name' || key === 'id') {
         return;
     }
     const filter = PokedexFilters[key];
-    Settings.add(new FilterSetting(filter));
+    const setting = filter instanceof MultiFilterOption ? 
+        new MultiSetting<string>(filter.optionName, filter.displayName, filter.options, filter.value()) :
+        new Setting<string>(filter.optionName, filter.displayName, filter.options, filter.value());
+    setting.subscribeToVal(filter.value);
+    Settings.add(setting);
 });
 
 Settings.add(new Setting<string>('breedingDisplayFilter', 'breedingDisplayFilter',

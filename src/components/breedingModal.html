@@ -70,21 +70,44 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                 <input autocomplete="off" class="form-control" oninput="BreedingController.formatSearch(this.value)" placeholder="Search here"/>
                                             </div>
 
-                                            <div class="form-group col-lg-6 col-6">
+                                            <div class="form-group col-lg-12 col-12">
                                                 <label>Types</label>
-                                                <select name="breedingTypeFilter1" autocomplete="off" class="custom-select" onchange="BreedingFilters.type1.value(Array.from(this.selectedOptions).map(o => Number(o.value))), Settings.setSettingByName(this.name, Array.from(this.selectedOptions).map(o => Number(o.value)))" multiple="true">
-                                                    <!-- ko foreach: Settings.getSetting('breedingTypeFilter1').options -->
-                                                    <option data-bind="attr: { value: Number($data.value), selected: Settings.getSetting('breedingTypeFilter1').isSelected($data.value) }, text: $data.text">Type</option>
-                                                    <!-- /ko -->
-                                                </select>
-                                            </div>
-                                            <div class="form-group col-md-6 col-6">
-                                                <label> </label>
-                                                <select name="breedingTypeFilter2" autocomplete="off" class="custom-select" onchange="BreedingFilters.type2.value(Array.from(this.selectedOptions).map(o => Number(o.value))), Settings.setSettingByName(this.name, Array.from(this.selectedOptions).map(o => Number(o.value)))" multiple="true">
-                                                    <!-- ko foreach: Settings.getSetting('breedingTypeFilter2').options -->
-                                                    <option data-bind="attr: { value: Number($data.value), selected: Settings.getSetting('breedingTypeFilter2').isSelected($data.value) }, text: $data.text">Type</option>
-                                                    <!-- /ko -->
-                                                </select>
+                                                <knockout data-bind="template: { name: 'multiSelectDropdownTemplate',
+                                                    data: {
+                                                        id: `breedingTypeFilter1`,
+                                                        options: BreedingFilters.type1.options,
+                                                        optionsText: 'text',
+                                                        optionsValue: 'value',
+                                                        bindingField: BreedingFilters.type1.value,
+                                                        buttonText: () => BreedingFilters.type1.getSelectedValue(),
+                                                        buttonClass: 'btn-secondary btn-sm',
+                                                        itemLabel: {
+                                                            class: 'text-white small',
+                                                            style: (item) => ({'background-color': '#' + TypeHelper.typeColors[item.value]})
+                                                        },
+                                                        showSelectAll: true,
+                                                        selectAllText: 'All Types',
+                                                        selectAllClick: () => BreedingFilters.type1.selectAll(),
+                                                    }}">
+                                                </knockout>
+                                                <knockout data-bind="template: { name: 'multiSelectDropdownTemplate',
+                                                    data: {
+                                                        id: `breedingTypeFilter2`,
+                                                        options: BreedingFilters.type2.options,
+                                                        optionsText: 'text',
+                                                        optionsValue: 'value',
+                                                        bindingField: BreedingFilters.type2.value,
+                                                        buttonText: () => BreedingFilters.type2.getSelectedValue(),
+                                                        buttonClass: 'btn-secondary btn-sm',
+                                                        itemLabel: {
+                                                            class: 'text-white small',
+                                                            style: (item) => ({'background-color': '#' + TypeHelper.typeColors[item.value]})
+                                                        },
+                                                        showSelectAll: true,
+                                                        selectAllText: 'All Types',
+                                                        selectAllClick: () => BreedingFilters.type2.selectAll(),
+                                                    }}">
+                                                </knockout>
                                             </div>
 
                                             <div class="form-group col-lg-6 col-6">
@@ -102,16 +125,16 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                         Regions
                                                     </button>
                                                     <div class="border-secondary dropdown-menu col-12">
-                                                        <div class="dropdown-item" data-bind="click : function(){ BreedingFilters.region.value((2 << player.highestRegion()) - 1); Settings.setSettingByName('breedingRegionFilter', BreedingFilters.region.value()) }">
+                                                        <div class="dropdown-item" data-bind="click : function(){ BreedingFilters.region.value((2 << player.highestRegion()) - 1) }">
                                                             All
                                                         </div>
                                                         <div class="dropdown-divider"></div>
                                                         <!-- ko foreach : Object.keys(GameConstants.Region).filter(function(r){ return r <= player.highestRegion() && r >= 0; }) -->
                                                         <div class="dropdown-item" data-bind="class : Settings.getSetting('breedingRegionFilter').observableValue() & (1 << $data) ? 'bg-success' : '',
                                                             text : GameConstants.camelCaseToString(GameConstants.Region[$data]),
-                                                            click : function(){ BreedingFilters.region.value(1 << $data); Settings.setSettingByName('breedingRegionFilter', 1 << $data) },
+                                                            click : function(){ BreedingFilters.region.value(1 << $data) },
                                                             attr : { 'oncontextmenu' : 'BreedingFilters.region.value(BreedingFilters.region.value() ^ ' + (1 << $data) + ');' +
-                                                                'Settings.setSettingByName(\'breedingRegionFilter\', BreedingFilters.region.value()); return false'
+                                                                'return false'
                                                             }">
                                                         </div>
                                                         <!-- /ko-->
@@ -128,13 +151,13 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                         Categories
                                                     </button>
                                                     <div class="border-secondary dropdown-menu col-12">
-                                                        <div class="dropdown-item dropdown-text" data-bind="click : function(){ BreedingFilters.category.value(-1); Settings.setSettingByName('breedingCategoryFilter', -1) }">
+                                                        <div class="dropdown-item dropdown-text" data-bind="click : function(){ BreedingFilters.category.value(-1) }">
                                                             All
                                                         </div>
                                                         <div class="dropdown-divider"></div>
                                                         <!-- ko foreach : PokemonCategories.categories -->
                                                         <div class="dropdown-item" data-bind="text : $data.name(), style: { background: $data.color() },
-                                                            click : function(){ BreedingFilters.category.value($data.id); Settings.setSettingByName('breedingCategoryFilter', $data.id) }">
+                                                            click : function(){ BreedingFilters.category.value($data.id) }">
                                                         </div>
                                                         <!-- /ko-->
                                                         <div class="dropdown-divider"></div>
@@ -147,15 +170,15 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
 
                                             <div class="form-group col-lg-6 col-6">
                                                 <label>Shiny Status</label>
-                                                <select name="breedingShinyFilter" autocomplete="off" class="custom-select" onchange="BreedingFilters.shinyStatus.value(+this.value), Settings.setSettingByName(this.name, this.value)">
-                                                    <option value="-1" data-bind="attr: { selected: Settings.getSetting('breedingShinyFilter').value === '-1' }">All</option>
-                                                    <option value="0" data-bind="attr: { selected: Settings.getSetting('breedingShinyFilter').value === '0' }">Not Shiny</option>
-                                                    <option value="1" data-bind="attr: { selected: Settings.getSetting('breedingShinyFilter').value === '1' }">Shiny</option>
+                                                <select name="breedingShinyFilter" autocomplete="off" class="custom-select" onchange="BreedingFilters.shinyStatus.value(+this.value)">
+                                                    <!-- ko foreach: Settings.getSetting('breedingShinyFilter').options -->
+                                                    <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('breedingShinyFilter').value === $data.value }, text: $data.text"></option>
+                                                    <!-- /ko -->
                                                 </select>
                                             </div>
                                             <div class="form-group col-lg-6 col-6">
                                                 <label>Pokérus Status</label>
-                                                <select name="breedingPokerusFilter" autocomplete="off" class="custom-select" onchange="BreedingFilters.pokerus.value(+this.value), Settings.setSettingByName(this.name, this.value)">
+                                                <select name="breedingPokerusFilter" autocomplete="off" class="custom-select" onchange="BreedingFilters.pokerus.value(+this.value)">
                                                     <!-- ko foreach: Settings.getSetting('breedingPokerusFilter').options -->
                                                     <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('breedingPokerusFilter').value === $data.value }, text: $data.text"></option>
                                                     <!-- /ko -->

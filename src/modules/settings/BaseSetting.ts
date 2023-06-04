@@ -1,6 +1,7 @@
 import {
     Observable as KnockoutObservable,
     Computed as KnockoutComputed,
+    Observable,
 } from 'knockout';
 import SettingOption from './SettingOption';
 
@@ -38,11 +39,6 @@ export default abstract class BaseSetting<T, S> {
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars, class-methods-use-this
-    protected isSelected(value: S): boolean {
-        return false;
-    }
-
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars, class-methods-use-this
     isUnlocked(value: T): boolean {
         return true;
     }
@@ -60,5 +56,12 @@ export default abstract class BaseSetting<T, S> {
             );
         }
         return this.cachedTranslatedName();
+    }
+
+    subscribeToVal(value: Observable<T>): void {
+        this.observableValue = value;
+        value.subscribe((val) => {
+            this.value = val;
+        });
     }
 }

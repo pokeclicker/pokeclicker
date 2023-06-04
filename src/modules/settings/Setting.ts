@@ -10,11 +10,11 @@ export default class Setting<T> extends BaseSetting<T, T> {
                 return this.options[i].isUnlocked();
             }
         }
+        console.log(this.name);
+        console.log(value);
+        console.log(typeof value);
+        console.log(this.options);
 
         return false;
-    }
-
-    protected isSelected(value: T): boolean {
-        return this.observableValue() === value;
     }
 }

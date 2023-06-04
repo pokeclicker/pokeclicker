@@ -44,7 +44,6 @@ class Breeding implements Feature {
         BreedingController.displayValue(Settings.getSetting('breedingDisplayFilter').value);
         BreedingController.regionalAttackDebuff(+Settings.getSetting('breedingRegionalAttackDebuffSetting').value);
         BreedingController.queueSizeLimit(+Settings.getSetting('breedingQueueSizeSetting').value);
-        BreedingFilters.uniqueTransformation.value.subscribe((v) => Settings.setSettingByName('breedingUniqueTransformationFilter', v));
     }
 
     initialize(): void {

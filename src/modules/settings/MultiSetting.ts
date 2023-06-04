@@ -20,8 +20,4 @@ export default class MultiSetting<T> extends BaseSetting<T[], T> {
 
         return true;
     }
-
-    protected isSelected(value: T): boolean {
-        return this.observableValue().includes(value);
-    }
 }
