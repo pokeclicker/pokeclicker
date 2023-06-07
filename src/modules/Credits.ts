@@ -958,7 +958,7 @@ export const SpriteCredits: Credit[] = [
             'Professor Juniper',
             'Realgam Tower',
             'Riot',
-            'Salazle overworld images'
+            'Salazzle overworld images',
             'Shadow Aipom',
             'Shadow Bayleef',
             'Shadow Delibird',
