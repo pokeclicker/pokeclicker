@@ -40,7 +40,7 @@ class BattlePokemon implements EnemyPokemonInterface {
         public shadow: GameConstants.ShadowStatus,
         public encounterType: EncounterType,
         public heldItem?: BagItem,
-        public ep?: number
+        public ep: number = GameConstants.BASE_EP_YIELD
     ) {
         this.health = ko.observable(maxHealth);
         this.maxHealth = ko.observable(maxHealth);
