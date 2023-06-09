@@ -107,7 +107,7 @@ describe('Test GameConstants', () => {
         expect(getDungeonRegion('Not a real dungeon')).toEqual(-1);
     });
     it('return the temp battles total index', () => {
-        expect(getTemporaryBattlesIndex('Underground Fighting Ring')).toEqual(149);
+        expect(getTemporaryBattlesIndex('Underground Fighting Ring')).toEqual(154);
         expect(getTemporaryBattlesIndex('Not a real temp battle')).toEqual(-1);
     });
 });
@@ -176,5 +176,34 @@ describe('Test GameHelper', () => {
 
     it('escape regex values from a string', () => {
         expect(GameHelper.escapeStringRegex('/[Just a test](.*?)/')).toEqual('\\/\\[Just a test\\]\\(\\.\\*\\?\\)\\/');
+    });
+});
+
+import SaveSelector from './SaveSelector';
+describe('SaveSelector', () => {
+    describe('encoding', () => {
+        it('encodes and decodes chinese characters', () => {
+            const input = '妙蛙种子';
+            const decoded = SaveSelector.atob(SaveSelector.btoa(input));
+            expect(decoded).toBe(input);
+        });
+
+        it('encodes and decodes emoji', () => {
+            const input = '🙂';
+            const decoded = SaveSelector.atob(SaveSelector.btoa(input));
+            expect(decoded).toBe(input);
+        });
+
+        it('encodes and decodes uri encoded strings', () => {
+            const input = 'hello %20 world';
+            const decoded = SaveSelector.atob(SaveSelector.btoa(input));
+            expect(decoded).toBe(input);
+        });
+
+        it('encodes and decodes non-uri % characters', () => {
+            const input = '% % % %';
+            const decoded = SaveSelector.atob(SaveSelector.btoa(input));
+            expect(decoded).toBe(input);
+        });
     });
 });

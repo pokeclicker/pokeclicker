@@ -183,7 +183,7 @@ class Battle {
         App.game.party.gainPokemonById(enemyPokemon.id, enemyPokemon.shiny, undefined, enemyPokemon.gender, enemyPokemon.shadow);
         const partyPokemon = App.game.party.getPokemon(enemyPokemon.id);
         const epBonus = App.game.pokeballs.getEPBonus(this.pokeball());
-        partyPokemon.effortPoints += App.game.party.calculateEffortPoints(partyPokemon, enemyPokemon.shiny, enemyPokemon.ep * epBonus);
+        partyPokemon.effortPoints += App.game.party.calculateEffortPoints(partyPokemon, enemyPokemon.shiny, enemyPokemon.shadow, enemyPokemon.ep * epBonus);
     }
 
     protected static gainTokens(route: number, region: GameConstants.Region) {
