@@ -6577,7 +6577,7 @@ TownList['Royal Avenue'] = new Town(
     'Royal Avenue',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.AkalaIsland,
-    [TemporaryBattleList['Battle Royal'], DepartmentStoreShop, TemporaryBattleList['Molayne Steel Silvally']],
+    [TemporaryBattleList['Battle Royal'], DepartmentStoreShop, TemporaryBattleList['Molayne Steel Memory']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 6)],
         npcs: [RoyalAvenueSpectator, MolayneSilvally],
@@ -6602,7 +6602,7 @@ TownList['Aether Paradise'] = new Town(
         AetherParadiseShop,
         new ShardTraderShop(GameConstants.ShardTraderLocations['Aether Paradise']),
         new MoveToDungeon(dungeonList['Aether Foundation']),
-        TemporaryBattleList['Faba Psychic Silvally'],
+        TemporaryBattleList['Faba Psychic Memory'],
     ],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.RockiumZ)],
@@ -6672,7 +6672,7 @@ TownList['A Tree Maybe'] = new Town(
     'A Tree Maybe',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.PoniIsland,
-    [ATreeMaybeShop, TemporaryBattleList['Ryuki Dragon Silvally']],
+    [ATreeMaybeShop, TemporaryBattleList['Ryuki Dragon Memory']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 30)],
         npcs: [BattleTreeRed, BattleTreeBlue, RyukiSilvally],
@@ -6832,7 +6832,7 @@ TownList['Ten Carat Hill'] = new DungeonTown(
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MelemeleIsland,
     [new GymBadgeRequirement(BadgeEnums.FightiniumZ)],
-    [TemporaryBattleList['Kahili Flying Silvally']],
+    [TemporaryBattleList['Kahili Flying Memory']],
     {
         npcs:[KahiliSilvally],
     }
@@ -6908,7 +6908,7 @@ TownList['Thrifty Megamart'] = new DungeonTown(
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.UlaulaIsland,
     [new RouteKillRequirement(10, GameConstants.Region.alola, 14)],
-    [TemporaryBattleList['Acerola Ghost Silvally']],
+    [TemporaryBattleList['Acerola Ghost Memory']],
     {npcs: [AcerolaSilvally]}
 );
 TownList['Ula\'ula Meadow'] = new DungeonTown(
@@ -6957,7 +6957,7 @@ TownList['Vast Poni Canyon'] = new DungeonTown(
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.PoniIsland,
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Exeggutor Island Hill'))],
-    [TemporaryBattleList['Plumeria Poison Silvally']],
+    [TemporaryBattleList['Plumeria Poison Memory']],
     {npcs: [PlumeriaSilvally]}
 );
 TownList['Mina\'s Houseboat'] = new DungeonTown(
