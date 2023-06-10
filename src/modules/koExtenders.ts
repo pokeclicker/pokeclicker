@@ -66,37 +66,60 @@ ko.bindingHandlers.contentEditable = {
     },
 };
 
-//TODO: Replace with logic that maintains a singular PlayerSpriteSVG rather than clone re-rendering
+//Fixes the PlayerSVG rendering beneath other SVGs by rerendering the current PlayerSVG in the forefront. #4306
+//TODO: Replace with logic that maintains a singular PlayerSpriteSVG (Might be performance costly over a simple observer)
+function handleVisibleElement(element) {
+    if (element.classList.contains('iconLocation')) {
+        if (element.classList.contains('iconLocation')) {
+            var targetElement = document.getElementById('playerSprite');
+            var imageElement = element.cloneNode(true);
+            imageElement.classList.remove('hide');
+
+            targetElement.innerHTML = '';
+            targetElement.appendChild(imageElement);
+
+            //Get required variables to replicate the rotate on parent group as well
+            var rotate = imageElement.getAttribute('rotate');
+            var x = imageElement.getAttribute('localx');
+            var y = imageElement.getAttribute('localy');
+
+            if (rotate) {
+                targetElement.setAttribute('transform', 'rotate(90,' + x + ', ' + y + ')');
+            } else {
+                targetElement.setAttribute('transform', '');
+            }
+        }
+    }
+}
+
 ko.bindingHandlers.playerSpriteMove = {
     init: function (element) {
-        var observer = new IntersectionObserver(function (entries) {
-            entries.forEach(function (entry) {
-                if (entry.isIntersecting) {
-                    if (element.classList.contains('iconLocation')) {
-                        var targetElement = document.getElementById('playerSprite');
-                        var imageElement = element.cloneNode(true);
-                        imageElement.classList.remove('hide');
+        const observer = new MutationObserver((mutationsList) => {
+            for (const mutation of mutationsList) {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+                    const target = mutation.target as HTMLElement;
+                    const displayStyle = window.getComputedStyle(target).getPropertyValue('display');
 
-                        targetElement.innerHTML = '';
-                        targetElement.appendChild(imageElement);
-
-                        //Get required variables to replicate the rotate on parent group as well
-                        var rotate = imageElement.getAttribute('rotate');
-                        var x = imageElement.getAttribute('localx');
-                        var y = imageElement.getAttribute('localy');
-
-                        if (rotate) {
-                            targetElement.setAttribute('transform', 'rotate(90,' + x + ', ' + y + ')');
-                        } else {
-                            targetElement.setAttribute('transform', '');
-                        }
+                    const isVisible = displayStyle !== 'none';
+                    if (isVisible) {
+                        handleVisibleElement(element);
                     }
                 }
-            });
+            }
         });
-        observer.observe(element);
+
+        // Observe changes to the 'style' attribute of the target element
+        observer.observe(element, { attributes: true });
+
+        // Trigger initial visibility check on load
+        const displayStyle = window.getComputedStyle(element).getPropertyValue('display');
+        const isVisible = displayStyle !== 'none';
+        if (isVisible) {
+            handleVisibleElement(element);
+        }
     },
 };
+//TODO END
 
 const sortableControllers = new WeakMap();
 ko.bindingHandlers.sortable = {

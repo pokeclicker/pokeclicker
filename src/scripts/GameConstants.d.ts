@@ -37,6 +37,7 @@ namespace GameConstants {
     declare const WANDER_TICK: number;
     declare const TEMP_BATTLE_TIME: number;
     declare const TEMP_BATTLE_TICK: number;
+    declare const SPECIAL_EVENT_TICK: number;
     declare const MAX_AVAILABLE_REGION: number;
     declare const MaxIDPerRegion: number[];
     declare const ITEM_USE_TIME: number;
@@ -99,6 +100,7 @@ namespace GameConstants {
         'Hatchery',
         'Farming',
         'Underground',
+        'Safari',
         'Battle Frontier',
         'Protein',
         'Pokerus',
@@ -784,4 +786,10 @@ namespace GameConstants {
         FurfrouGemTrader,
         MagikarpJumpGemTrader,
     }
+    declare enum DungeonInteractionSource {
+        Click,
+        Keybind,
+        HeldKeybind,
+    }
+    declare const ModalCollapseList: string[];
 }

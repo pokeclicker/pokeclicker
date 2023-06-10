@@ -104,7 +104,7 @@ export default class PokemonCategories implements Saveable {
         PokemonCategories.categories().forEach((c) => {
             categories.push({
                 id: c.id,
-                name: encodeURI(c.name()),
+                name: c.name(),
                 color: c.color(),
             });
         });
@@ -122,10 +122,10 @@ export default class PokemonCategories implements Saveable {
         json.categories?.forEach((category) => {
             const cat = PokemonCategories.categories().find(c => c.id == category.id);
             if (cat) {
-                cat.name(decodeURI(category.name));
+                cat.name(category.name);
                 cat.color(category.color);
             } else {
-                PokemonCategories.addCategory(decodeURI(category.name), category.color, category.id);
+                PokemonCategories.addCategory(category.name, category.color, category.id);
             }
         });
 
