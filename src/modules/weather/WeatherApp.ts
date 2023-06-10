@@ -40,7 +40,7 @@ export default class WeatherApp {
             const newDate = new Date(date.setHours(hour, 0, 0, 0));
             // Gets the weather for every day for that hour
             for (let i = 0; i < dateRange; i++) {
-                const weatherForecastDate = new Date(newDate).toLocaleString();
+                const weatherForecastDate = new Date(newDate);
                 const weatherForecast = new WeatherForecast(weatherForecastDate, Weather.getWeather(region, newDate));
                 hourForecast.push(weatherForecast);
                 newDate.setDate(newDate.getDate() + 1);
@@ -107,7 +107,7 @@ export default class WeatherApp {
             // Full forecast
             // Set status to hasPassed if weather end date has passed already
             rf.weatherForecastList().flat().map((wf) => {
-                const weatherEndDate = new Date(new Date(wf.date).setHours(new Date(wf.date).getHours() + Weather.period, 0, 0, 0));
+                const weatherEndDate = new Date(new Date(wf.date).setHours(wf.date.getHours() + Weather.period, 0, 0, 0));
                 if (now > weatherEndDate) {
                     wf.setStatusHasPassed();
                 }
