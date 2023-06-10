@@ -16,7 +16,7 @@ class GainTokensQuest extends Quest implements QuestInterface {
             }
             return max;
         }, 0) / 10;
-        const baseAmount = Math.floor(rawAmount * (2 + dungeonCount / 20));
+        const baseAmount = Math.floor(rawAmount * (1 + dungeonCount / 15));
         //const amount = SeededRand.intBetween(baseAmount, baseAmount * 3);
         const amount = baseAmount;
         const reward = this.calcReward(amount, rawAmount);
