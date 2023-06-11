@@ -348,8 +348,8 @@ class Safari {
 
     public static spawnItemCheck() {
         const baseChance = 0.4;
-        const levelModifier = (Safari.safariLevel() - 1) / 100;
-        if (Rand.chance(baseChance + levelModifier)) {
+        const itemLevelModifier = (Safari.safariLevel() - 1) / 100;
+        if (Rand.chance(baseChance + itemLevelModifier)) {
             this.spawnRandomItem();
         }
     }
