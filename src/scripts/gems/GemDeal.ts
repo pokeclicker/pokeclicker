@@ -21,6 +21,7 @@ class GemDeal {
         GemDeal.list[GameConstants.GemShops.HoennStoneSalesman] = ko.observableArray(this.generateHoennStoneDeals());
         GemDeal.list[GameConstants.GemShops.UnovaFluteMaster] = ko.observableArray(this.generateUnovaFluteDeals());
         GemDeal.list[GameConstants.GemShops.FurfrouGemTrader] = ko.observableArray(this.generateFurfrouDeal());
+        GemDeal.list[GameConstants.GemShops.KalosStoneSalesman] = ko.observableArray(this.generateKalosStoneDeals());
         GemDeal.list[GameConstants.GemShops.MagikarpJumpGemTrader] = ko.observableArray(this.generateMagikarpJumpDeal());
     }
 
@@ -58,7 +59,10 @@ class GemDeal {
     private static generateHoennStoneDeals() {
         const list = [];
         list.push(new GemDeal(
-            [{gemType: PokemonType.Grass, amount: 250000}],
+            [
+                {gemType: PokemonType.Grass, amount: 125000},
+                {gemType: PokemonType.Dragon, amount: 125000},
+            ],
             ItemList.Sceptilite,
             1
         ));
@@ -109,6 +113,41 @@ class GemDeal {
                 {gemType: PokemonType.Ghost, amount: 10000},
             ],
             ItemList.Blue_Flute,
+            1
+        ));
+        return list;
+    }
+
+    private static generateKalosStoneDeals() {
+        const list = [];
+
+        list.push(new GemDeal(
+            [
+                {gemType: PokemonType.Grass, amount: 125000},
+                {gemType: PokemonType.Poison, amount: 125000},
+            ],
+            ItemList.Venusaurite,
+            1
+        ));
+        list.push(new GemDeal(
+            [
+                {gemType: PokemonType.Fire, amount: 125000},
+                {gemType: PokemonType.Dragon, amount: 125000},
+            ],
+            ItemList.Charizardite_X,
+            1
+        ));
+        list.push(new GemDeal(
+            [
+                {gemType: PokemonType.Fire, amount: 125000},
+                {gemType: PokemonType.Flying, amount: 125000},
+            ],
+            ItemList.Charizardite_Y,
+            1
+        ));
+        list.push(new GemDeal(
+            [{gemType: PokemonType.Water, amount: 250000}],
+            ItemList.Blastoisinite,
             1
         ));
         return list;
