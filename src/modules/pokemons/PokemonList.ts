@@ -4198,6 +4198,23 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 102.01,
+        'name': 'Exeggcute (Single)',
+        'catchRate': 90,
+        'type': [PokemonType.Grass, PokemonType.Psychic],
+        'levelType': LevelType.slow,
+        'exp': 65,
+        'eggCycles': 20,
+        'base': {
+            'hitpoints': 60,
+            'attack': 40,
+            'specialAttack': 60,
+            'defense': 80,
+            'specialDefense': 45,
+            'speed': 40,
+        },
+    },
+    {
         'id': 103,
         'name': 'Exeggutor',
         'catchRate': 45,
@@ -4971,7 +4988,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 175,
         'eggCycles': 25,
-        // 'evolutions': [MegaEvolution(MegaStoneType.Pinsirite, 'Pinsir', 'Mega Pinsir')],
+        'evolutions': [MegaEvolution(MegaStoneType.Pinsirite, 'Pinsir', 'Mega Pinsir')],
         'base': {
             'hitpoints': 65,
             'attack': 125,
@@ -8318,7 +8335,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 175,
         'eggCycles': 25,
-        // 'evolutions': [MegaEvolution(MegaStoneType.Scizorite, 'Scizor', 'Mega Scizor')],
+        //'evolutions': [MegaEvolution(MegaStoneType.Scizorite, 'Scizor', 'Mega Scizor')],
         'base': {
             'hitpoints': 70,
             'attack': 130,
