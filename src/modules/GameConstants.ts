@@ -1636,6 +1636,7 @@ export const TemporaryBattles = [
     'Matt 3',
     'Courtney 3',
     'Hoenn Stone Salesman',
+    'Kalos Stone Salesman',
     'Captain Stern',
     'Archie Primal',
     'Maxie Primal',
@@ -2092,6 +2093,7 @@ export enum GemShops {
     HoennStoneSalesman,
     UnovaFluteMaster,
     FurfrouGemTrader,
+    KalosStoneSalesman,
     MagikarpJumpGemTrader,
 }
 
