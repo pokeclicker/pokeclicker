@@ -6183,7 +6183,7 @@ const SilvallyGladion1 = new NPC('Gladion', [
     'Keep an eye out if you come across any of them.',
 ], {
     image: 'assets/images/npcs/Gladion.png',
-    requirement: new MultiRequirement ([new QuestLineStepCompletedRequirement('Typing some Memories', 3, GameConstants.AchievementOption.less), new QuestLineStartedRequirement('Typing some Memories', GameConstants.AchievementOption.more)]),
+    requirement: new MultiRequirement ([new QuestLineStepCompletedRequirement('Typing some Memories', 2, GameConstants.AchievementOption.less), new QuestLineStartedRequirement('Typing some Memories', GameConstants.AchievementOption.more)]),
 });
 const SilvallyHala = new NPC('Kahuna Hala', [
     'Greetings, $playername$. May I help you with something? Oh, you\'re looking for things called Silvally memories? Something like this one?',
@@ -6225,7 +6225,7 @@ const SilvallyGladion2 = new NPC('Gladion', [
     'Oh and also, I\'ve heard some inhabitants have seen some people looking to sell some strange disk. I think they might be Silvally Memories we\'re looking for. I got descriptions of them: you should look for a blue-haired girl near Brooklet Hill, a green-haired girl in Lush Jungle, a black and red-haired guy at the Wela Volcano Park, a child with yellow hair in the Hokulani Observatory, a dark blue-haired guy that looks like a Veteran near Mount Lanakila and a girl with a Mudsdale in the Exeggutor Island Hill.',
 ], {
     image: 'assets/images/npcs/Gladion.png',
-    requirement: new  MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 3, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 17, GameConstants.AchievementOption.less)]),
+    requirement: new  MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 2, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 17, GameConstants.AchievementOption.less)]),
 });
 const LanaSilvally1 = new NPC('Captain Lana', [
     'Hi, $playername$. How are you doing? I\'m not doing so well right now.',
