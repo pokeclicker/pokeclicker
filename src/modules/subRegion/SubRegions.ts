@@ -19,7 +19,6 @@ import QuestLineStepCompletedRequirement from '../requirements/QuestLineStepComp
 import * as GameConstants from '../GameConstants';
 import SubRegion from './SubRegion';
 import QuestLineStartedRequirement from '../requirements/QuestLineStartedRequirement';
-//import DevelopmentRequirement from '../requirements/DevelopmentRequirement';
 
 export default class SubRegions {
     public static list: Record<number, SubRegion[]> = {};
