@@ -189,7 +189,7 @@ class GemDeal {
 
         list.push(new GemDeal(
             [{gemType: PokemonType.Fighting, amount: 1000}],
-            ItemList['Silvally Fighting 1'],
+            ItemList['Silvally (Fighting) 1'],
             1
         ));
         list.push(new GemDeal(
