@@ -3067,7 +3067,7 @@ TownList['Outskirt Stand'] = new Town(
     GameConstants.HoennSubRegions.Orre,
     [TemporaryBattleList.Willie],
     {
-        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), new DevelopmentRequirement()],
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), new QuestLineStartedRequirement('Shadows in the Desert')],
         npcs: [ExploreStand],
     }
 );
@@ -3076,21 +3076,10 @@ TownList['Phenac City'] = new Town(
     'Phenac City',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new MoveToTown('Phenac Stadium'), new MoveToDungeon(dungeonList['Phenac City Battles']), TemporaryBattleList.Folly],
+    [new MoveToDungeon(dungeonList['Phenac Stadium']), new MoveToDungeon(dungeonList['Phenac City Battles']), TemporaryBattleList.Folly],
     {
-        requirements: [new DevelopmentRequirement()],
-        npcs: [Sack, EsCade1],
-    }
-);
-
-TownList['Phenac Stadium'] = new Town(
-    'Phenac Stadium',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [new MoveToTown('Phenac City', undefined, false), new MoveToDungeon(dungeonList['Phenac Stadium Battles'])],
-    {
-        requirements: [new DevelopmentRequirement()],
-        npcs: [Rui1],
+        requirements: [new QuestLineStepCompletedRequirement('Shadows in the Desert', 1)],
+        npcs: [Sack, EsCade1, Rui1],
     }
 );
 
@@ -3098,21 +3087,10 @@ TownList['Pyrite Town'] = new Town(
     'Pyrite Town',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new MoveToTown('Pyrite Colosseum'), new MoveToTown('The Under'), new MoveToDungeon(dungeonList['Pyrite Town Battles'])],
+    [new MoveToTown('Pyrite Colosseum'), new MoveToDungeon(dungeonList['The Under']), new MoveToDungeon(dungeonList['Pyrite Town Battles']), new MoveToDungeon(dungeonList['Deep Colosseum']), new MoveToDungeon(dungeonList['Under Colosseum'])],
     {
-        requirements: [new DevelopmentRequirement()],
+        requirements: [new QuestLineStepCompletedRequirement('Shadows in the Desert', 6)],
         npcs: [Duking1],
-    }
-);
-
-TownList['Pyrite Colosseum'] = new Town(
-    'Pyrite Colosseum',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [new MoveToTown('Pyrite Town', undefined, false), new MoveToDungeon(dungeonList['Pyrite Colosseum Battles'])],
-    {
-        requirements: [new DevelopmentRequirement()],
-        npcs: [Rui2],
     }
 );
 
@@ -3122,7 +3100,7 @@ TownList['Agate Village'] = new Town(
     GameConstants.HoennSubRegions.Orre,
     [new MoveToTown('Relic Stone'), new MoveToDungeon(dungeonList['Relic Cave']), TemporaryBattleList['Cipher Peon Doven'], TemporaryBattleList['Cipher Peon Silton'], TemporaryBattleList['Cipher Peon Kass']],
     {
-        requirements: [new DevelopmentRequirement()],
+        requirements: [new QuestLineStepCompletedRequirement('Shadows in the Desert', 14)],
     }
 );
 
@@ -3132,39 +3110,7 @@ TownList['Relic Stone'] = new Town(
     GameConstants.HoennSubRegions.Orre,
     [new MoveToTown('Agate Village', undefined, false), new MoveToDungeon(dungeonList['Relic Cave']), new PurifyChamberTownContent()],
     {
-        requirements: [new DevelopmentRequirement()],
-    }
-);
-
-TownList['Mt. Battle'] = new Town(
-    'Mt. Battle',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [new MoveToDungeon(dungeonList['Mt. Battle Battles'])],
-    {
-        requirements: [new DevelopmentRequirement()],
-        npcs: [Rui3],
-    }
-);
-
-TownList['The Under'] = new Town(
-    'The Under',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [new MoveToTown('Pyrite Town', undefined, false), new MoveToTown('Under Colosseum'), new MoveToTown('Deep Colosseum'), new MoveToDungeon(dungeonList['The Under Subway'])],
-    {
-        requirements: [new DevelopmentRequirement()],
-        npcs: [SearchTheStudio],
-    }
-);
-
-TownList['Cipher Lab'] = new Town(
-    'Cipher Lab',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [new MoveToDungeon(dungeonList['Cipher Lab Battles'])],
-    {
-        requirements: [new DevelopmentRequirement()],
+        requirements: [new QuestLineStepCompletedRequirement('Shadows in the Desert', 17)],
     }
 );
 
@@ -3172,60 +3118,10 @@ TownList['Realgam Tower'] = new Town(
     'Realgam Tower',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new MoveToTown('Realgam Colosseum'), new MoveToDungeon(dungeonList['Realgam Tower Battles'])],
+    [new MoveToDungeon(dungeonList['Realgam Tower Battles']), new MoveToDungeon(dungeonList['Realgam Colosseum'])],
     {
-        requirements: [new DevelopmentRequirement()],
-    }
-);
-
-TownList['Realgam Colosseum'] = new Town(
-    'Realgam Colosseum',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [new MoveToTown('Realgam Tower', undefined, false), new MoveToDungeon(dungeonList['Realgam Colosseum Battles'])],
-    {
-        requirements: [new DevelopmentRequirement()],
-        npcs: [EsCade2, EviceEscape],
-    }
-);
-
-TownList['Eclo Canyon'] = new Town(
-    'Eclo Canyon',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [new MoveToDungeon(dungeonList['Snagem Hideout'])],
-    {
-        requirements: [new DevelopmentRequirement()],
-    }
-);
-
-TownList['Deep Colosseum'] = new Town(
-    'Deep Colosseum',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [new MoveToTown('The Under', undefined, false), new MoveToDungeon(dungeonList['Deep Colosseum Battles'])],
-    {
-        requirements: [new DevelopmentRequirement()],
-    }
-);
-
-TownList['Orre Colosseum'] = new Town(
-    'Orre Colosseum',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [new MoveToDungeon(dungeonList['Orre Colosseum Battles'])],
-    {
-        requirements: [new DevelopmentRequirement()],
-    }
-);
-
-TownList['Under Colosseum'] = new Town(
-    'Under Colosseum',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [new MoveToTown('The Under', undefined, false), new MoveToDungeon(dungeonList['Under Colosseum Battles'])],
-    {
-        requirements: [new DevelopmentRequirement()],
+        requirements: [new QuestLineStepCompletedRequirement('Shadows in the Desert', 22)],
+        npcs: [EsCade2],
     }
 );
 
@@ -3417,7 +3313,7 @@ TownList['Phenac City Battles'] = new DungeonTown(
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new DevelopmentRequirement(),
+        new QuestLineStepCompletedRequirement('Shadows in the Desert', 3),
     ]
 );
 TownList['Pyrite Town Battles'] = new DungeonTown(
@@ -3425,23 +3321,27 @@ TownList['Pyrite Town Battles'] = new DungeonTown(
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new DevelopmentRequirement(),
+        new QuestLineStepCompletedRequirement('Shadows in the Desert', 6),
     ]
 );
-TownList['Pyrite Colosseum Battles'] = new DungeonTown(
-    'Pyrite Colosseum Battles',
+TownList['Pyrite Colosseum'] = new DungeonTown(
+    'Pyrite Colosseum',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new DevelopmentRequirement(),
-    ]
+        new QuestLineStepCompletedRequirement('Shadows in the Desert', 8),
+    ],
+    [],
+    {
+        npcs: [Rui2],
+    }
 );
 TownList['Pyrite Building'] = new DungeonTown(
     'Pyrite Building',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new DevelopmentRequirement(),
+        new QuestLineStepCompletedRequirement('Shadows in the Desert', 9),
     ],
     [],
     {
@@ -3453,7 +3353,7 @@ TownList['Pyrite Cave'] = new DungeonTown(
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new DevelopmentRequirement(),
+        new QuestLineStepCompletedRequirement('Shadows in the Desert', 11),
     ],
     [],
     {
@@ -3465,35 +3365,43 @@ TownList['Relic Cave'] = new DungeonTown(
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new DevelopmentRequirement(),
+        new QuestLineStepCompletedRequirement('Shadows in the Desert', 15),
     ],
     [],
     {
         npcs: [GrandpaEagun1],
     }
 );
-TownList['Mt. Battle Battles'] = new DungeonTown(
-    'Mt. Battle Battles',
+TownList['Mt. Battle'] = new DungeonTown(
+    'Mt. Battle',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new DevelopmentRequirement(),
-    ]
+        new QuestLineStepCompletedRequirement('Shadows in the Desert', 17),
+    ],
+    [],
+    {
+        npcs: [Rui3],
+    }
 );
-TownList['The Under Subway'] = new DungeonTown(
-    'The Under Subway',
+TownList['The Under'] = new DungeonTown(
+    'The Under',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new DevelopmentRequirement(),
-    ]
+        new QuestLineStepCompletedRequirement('Shadows in the Desert', 19),
+    ],
+    [],
+    {
+        npcs: [SearchTheStudio],
+    }
 );
-TownList['Cipher Lab Battles'] = new DungeonTown(
-    'Cipher Lab Battles',
+TownList['Cipher Lab'] = new DungeonTown(
+    'Cipher Lab',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new DevelopmentRequirement(),
+        new QuestLineStepCompletedRequirement('Shadows in the Desert', 21),
     ]
 );
 TownList['Realgam Tower Battles'] = new DungeonTown(
@@ -3501,87 +3409,59 @@ TownList['Realgam Tower Battles'] = new DungeonTown(
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new DevelopmentRequirement(),
+        new QuestLineStepCompletedRequirement('Shadows in the Desert', 22),
     ]
 );
-TownList['Realgam Colosseum Battles'] = new DungeonTown(
-    'Realgam Colosseum Battles',
+TownList['Realgam Colosseum'] = new DungeonTown(
+    'Realgam Colosseum',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new DevelopmentRequirement(),
-    ]
+        new QuestLineStepCompletedRequirement('Shadows in the Desert', 23),
+    ],
+    [new MoveToTown('Realgam Tower')],
+    {
+        npcs: [EviceEscape],
+    }
 );
 TownList['Snagem Hideout'] = new DungeonTown(
     'Snagem Hideout',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new DevelopmentRequirement(),
+        new QuestLineCompletedRequirement('Shadows in the Desert'),
     ]
 );
-TownList['Deep Colosseum Battles'] = new DungeonTown(
-    'Deep Colosseum Battles',
+TownList['Deep Colosseum'] = new DungeonTown(
+    'Deep Colosseum',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new DevelopmentRequirement(),
+        new QuestLineCompletedRequirement('Shadows in the Desert'),
     ]
 );
-TownList['Phenac Stadium Battles'] = new DungeonTown(
-    'Phenac Stadium Battles',
+TownList['Phenac Stadium'] = new DungeonTown(
+    'Phenac Stadium',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new DevelopmentRequirement(),
+        new QuestLineCompletedRequirement('Shadows in the Desert'),
     ]
 );
-TownList['Under Colosseum Battles'] = new DungeonTown(
-    'Under Colosseum Battles',
+TownList['Under Colosseum'] = new DungeonTown(
+    'Under Colosseum',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new DevelopmentRequirement(),
+        new MultiRequirement([new DevelopmentRequirement(), new QuestLineCompletedRequirement('Shadows in the Desert')]),
     ]
 );
-TownList['Realgam Tower Battles'] = new DungeonTown(
-    'Realgam Tower Battles',
+TownList['Orre Colosseum'] = new DungeonTown(
+    'Orre Colosseum',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new DevelopmentRequirement(),
-    ]
-);
-TownList['Realgam Colosseum Battles'] = new DungeonTown(
-    'Realgam Colosseum Battles',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [
-        new DevelopmentRequirement(),
-    ]
-);
-TownList['Deep Colosseum Battles'] = new DungeonTown(
-    'Deep Colosseum Battles',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [
-        new DevelopmentRequirement(),
-    ]
-);
-TownList['Under Colosseum Battles'] = new DungeonTown(
-    'Under Colosseum Battles',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [
-        new DevelopmentRequirement(),
-    ]
-);
-TownList['Orre Colosseum Battles'] = new DungeonTown(
-    'Orre Colosseum Battles',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [
-        new DevelopmentRequirement(),
+        new MultiRequirement([new DevelopmentRequirement(), new QuestLineCompletedRequirement('Shadows in the Desert')]),
     ]
 );
 
