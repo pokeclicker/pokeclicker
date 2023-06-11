@@ -38,10 +38,7 @@ class HarvestBerriesQuest extends Quest implements QuestInterface {
     }
 
     get description(): string {
-        if (this.customDescription) {
-            return this.customDescription;
-        }
-        return `Harvest ${this.amount.toLocaleString('en-US')} ${BerryType[this.berryType]} ${GameConstants.pluralizeString('Berry', this.amount)} at the farm.`;
+        return this.customDescription ?? `Harvest ${this.amount.toLocaleString('en-US')} ${BerryType[this.berryType]} ${GameConstants.pluralizeString('Berry', this.amount)} at the farm.`;
     }
 
     toJSON() {
