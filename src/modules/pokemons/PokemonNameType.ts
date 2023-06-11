@@ -229,6 +229,7 @@ export type PokemonNameType
     | 'Hisuian Electrode'
     | 'Noble Electrode'
     | 'Exeggcute'
+    | 'Exeggcute (Single)'
     | 'Exeggutor'
     | 'Alolan Exeggutor'
     | 'Pinkan Exeggutor'
