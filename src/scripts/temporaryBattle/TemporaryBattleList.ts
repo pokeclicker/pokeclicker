@@ -2475,21 +2475,21 @@ TemporaryBattleList['Kalos Stone Salesman'] = new TemporaryBattle(
     {
         imageName: 'Owner',
         firstTimeRewardFunction: () => {
-            if ((App.game.party.alreadyCaughtPokemonByName('Venusaur') == true) && (player.regionStarters[GameConstants.Region.kanto]() == GameConstants.Starter.Grass)) {
+            if ((App.game.party.alreadyCaughtPokemonByName('Venusaur')) && (player.regionStarters[GameConstants.Region.kanto]() == GameConstants.Starter.Grass)) {
                 player.gainMegaStone(GameConstants.MegaStoneType.Venusaurite);
                 Notifier.notify({
                     message: 'You were awarded Venusaurite!',
                     type: NotificationConstants.NotificationOption.success,
                     setting: NotificationConstants.NotificationSetting.Dungeons.rare_dungeon_item_found,
                 });
-            } else if ((App.game.party.alreadyCaughtPokemonByName('Charizard') == true) && (player.regionStarters[GameConstants.Region.kanto]() == GameConstants.Starter.Fire)) {
+            } else if ((App.game.party.alreadyCaughtPokemonByName('Charizard')) && (player.regionStarters[GameConstants.Region.kanto]() == GameConstants.Starter.Fire)) {
                 player.gainMegaStone(GameConstants.MegaStoneType.Charizardite_Y);
                 Notifier.notify({
                     message: 'You were awarded Charizardite Y!',
                     type: NotificationConstants.NotificationOption.success,
                     setting: NotificationConstants.NotificationSetting.Dungeons.rare_dungeon_item_found,
                 });
-            } else if ((App.game.party.alreadyCaughtPokemonByName('Blastoise') == true) && (player.regionStarters[GameConstants.Region.kanto]() == GameConstants.Starter.Water)) {
+            } else if ((App.game.party.alreadyCaughtPokemonByName('Blastoise')) && (player.regionStarters[GameConstants.Region.kanto]() == GameConstants.Starter.Water)) {
                 player.gainMegaStone(GameConstants.MegaStoneType.Blastoisinite);
                 Notifier.notify({
                     message: 'You were awarded Blastoisinite!',
