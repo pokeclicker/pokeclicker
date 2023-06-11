@@ -6191,7 +6191,7 @@ const SilvallyHala = new NPC('Kahuna Hala', [
     'I found that while getting back here after helping Ilima in the Verdant Cavern. If you need it, I can give it to you. Here it is. Oh, also Kahuna Olivia told me she found one of these in Akala island somewhere. Maybe you should go and ask her for it too. She\'ll probably give it to you as she also doesn\'t know what it is.',
 ], {
     image: 'assets/images/npcs/Hala.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 2, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 3, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 1, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 3, GameConstants.AchievementOption.less)]),
 });
 const SilvallyOlivia = new NPC('Kahuna Olivia', [
     'Hey, kiddo. What are you doing here? Just visiting Akala Island? Cus y\'know lots of tourists come here to see the Battle Royal. So, what\'re you doing here? Looking for something?',
@@ -6200,7 +6200,7 @@ const SilvallyOlivia = new NPC('Kahuna Olivia', [
     'I found it while helping Mallow with her trial. If you want it, you can have it. It\'s useless to me anyway.',
 ], {
     image: 'assets/images/npcs/Olivia.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 2, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 3, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 1, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 2, GameConstants.AchievementOption.less)]),
 });
 const SilvallyNanu = new NPC('Kahuna Nanu', [
     'Oh, hello. How can I help you? You\'re looking for Silvally memories? What do they look like? Oh, so like a disk with a broken part. I think I have seen one while helping Acerola with her trial. Here, you can take it.',
@@ -6208,7 +6208,7 @@ const SilvallyNanu = new NPC('Kahuna Nanu', [
     'I don\'t know how to use it, so you can keep it.',
 ], {
     image: 'assets/images/npcs/Nanu.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 2, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 3, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 1, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 2, GameConstants.AchievementOption.less)]),
 });
 const SilvallyMina = new NPC('Captain Mina', [
     'Hello, $playername$. Here to do my Trial again? Oh, I see you\'re looking for Silvally memories. Well, I have just the right thing for you. Here, take it.',
@@ -6216,7 +6216,7 @@ const SilvallyMina = new NPC('Captain Mina', [
     'Kahuna Hapu gave me that as a gift. She even told me how to use it, but I couldn\'t afford to buy a Silvally. You can keep it.',
 ], {
     image: 'assets/images/npcs/Mina.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 2, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 3, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 1, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 2, GameConstants.AchievementOption.less)]),
 });
 const SilvallyGladion2 = new NPC('Gladion', [
     'Hey, I see you\'re back. Did you find any Silvally memories? Oh, I see you found 4 of them. Lemme take a look at them and figure out how to give them to Silvally.',
