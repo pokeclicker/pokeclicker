@@ -2427,7 +2427,6 @@ TemporaryBattleList['Hoenn Stone Salesman'] = new TemporaryBattle(
     [new QuestLineStepCompletedRequirement('The Delta Episode', 5)],
     undefined,
     {
-        displayName: 'Hoenn Stone Salesman',
         imageName: 'Ruin Maniac gen3',
         firstTimeRewardFunction: () => {
             if ((App.game.party.alreadyCaughtPokemonByName('Sceptile') == true) && (player.regionStarters[GameConstants.Region.hoenn]() == GameConstants.Starter.Grass)) {
@@ -2448,6 +2447,52 @@ TemporaryBattleList['Hoenn Stone Salesman'] = new TemporaryBattle(
                 player.gainMegaStone(GameConstants.MegaStoneType.Swampertite);
                 Notifier.notify({
                     message: 'You were awarded Swampertite!',
+                    type: NotificationConstants.NotificationOption.success,
+                    setting: NotificationConstants.NotificationSetting.Dungeons.rare_dungeon_item_found,
+                });
+            } else {
+                BagHandler.gainItem({type: ItemType.item, id: 'Key_stone'}, 1);
+                Notifier.notify({
+                    message: 'You were awarded a Key Stone!',
+                    type: NotificationConstants.NotificationOption.success,
+                    setting: NotificationConstants.NotificationSetting.Dungeons.rare_dungeon_item_found,
+                });
+            }
+        },
+    }
+);
+TemporaryBattleList['Kalos Stone Salesman'] = new TemporaryBattle(
+    'Kalos Stone Salesman',
+    [
+        new GymPokemon('Mega Venusaur', 54478245, 63),
+        new GymPokemon('Mega Charizard X', 54478245, 63),
+        new GymPokemon('Mega Charizard Y', 54478245, 63),
+        new GymPokemon('Mega Blastoise', 54478245, 63),
+    ],
+    'Wow! I\'ll let you buy some of my super fancy stones, now that I know you\'re a serious trainer!',
+    [new QuestLineStepCompletedRequirement('A Beautiful World', 12)],
+    undefined,
+    {
+        imageName: 'Owner',
+        firstTimeRewardFunction: () => {
+            if ((App.game.party.alreadyCaughtPokemonByName('Venusaur')) && (player.regionStarters[GameConstants.Region.kanto]() == GameConstants.Starter.Grass)) {
+                player.gainMegaStone(GameConstants.MegaStoneType.Venusaurite);
+                Notifier.notify({
+                    message: 'You were awarded Venusaurite!',
+                    type: NotificationConstants.NotificationOption.success,
+                    setting: NotificationConstants.NotificationSetting.Dungeons.rare_dungeon_item_found,
+                });
+            } else if ((App.game.party.alreadyCaughtPokemonByName('Charizard')) && (player.regionStarters[GameConstants.Region.kanto]() == GameConstants.Starter.Fire)) {
+                player.gainMegaStone(GameConstants.MegaStoneType.Charizardite_Y);
+                Notifier.notify({
+                    message: 'You were awarded Charizardite Y!',
+                    type: NotificationConstants.NotificationOption.success,
+                    setting: NotificationConstants.NotificationSetting.Dungeons.rare_dungeon_item_found,
+                });
+            } else if ((App.game.party.alreadyCaughtPokemonByName('Blastoise')) && (player.regionStarters[GameConstants.Region.kanto]() == GameConstants.Starter.Water)) {
+                player.gainMegaStone(GameConstants.MegaStoneType.Blastoisinite);
+                Notifier.notify({
+                    message: 'You were awarded Blastoisinite!',
                     type: NotificationConstants.NotificationOption.success,
                     setting: NotificationConstants.NotificationSetting.Dungeons.rare_dungeon_item_found,
                 });
