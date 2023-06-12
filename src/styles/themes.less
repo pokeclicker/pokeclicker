@@ -66,6 +66,25 @@
   }
 }
 
+/* Themes that need BerryDex to be longer */
+.cosmo, .cyborg, .lumen, .pulse, .sketchy, .sandstone, .simplex, .solar {
+  @media (max-width: 767px) {
+    .berryListHeight {
+      max-height: calc(50vh);
+    }
+  }
+}
+
+/* Themes with BerryDex borders */
+.cerulean, .cosmo, .journal, .lumen, .solar, .spacelab, .united {
+  @media (max-width: 991px) {
+    .berrydexEntry {
+      img {
+        margin-top: -3px;
+      }
+    }
+  }
+}
 
 /* Individual themes */
 .cerulean {
@@ -141,17 +160,16 @@
 
   /* Berrydex List */
   .berrydexEntry {
-    border: solid var(--info);
     border-radius: 5px;
-    --berryBG: var(--light);
-
-    span {
-      color: lavender;
-    }
   }
 
+  
   .berrydexEntry:hover {
-    border: solid lavender;
+    --berryBG: var(--dark);
+
+    span {
+      color: var(--light);
+    }
   }
 }
 
@@ -186,15 +204,18 @@
 
 .journal {
     /* Berrydex List */
+    @media (min-width: 992px) {
+      .berrydexEntry {
+        img {
+          margin-top: 10px;
+        }
+    }
+  }   
+
     .berrydexEntry {
       border-radius: 5px;
       border-top: solid var(--secondary);
       border-bottom: solid var(--secondary);
-
-      img {
-        margin-top: 10px;
-        scale: 85%;
-      }
   }
 
   .berrydexEntry:active{
@@ -297,10 +318,39 @@
   }
 
     /* Berrydex List */
+    @media (min-width: 992px) {
+      .berrydexEntry {
+        img {
+        position: relative;
+        top: 10%;
+        left: 5%;
+        scale: 100%;
+        }
+      }
+    }
+
+    @media (max-width: 991px) {
+      .berryListHeight {
+        max-height: calc(100vh - 240px);
+      }
+    
+       .berrydexEntry {
+         img {
+          margin-left: 0;
+          }
+       }
+    }
+
+    @media (max-width: 767px) {
+      .berryListHeight {
+        max-height: calc(50vh - 60px);
+      }
+    }
+
     .berrydexEntry {
       --berryBG: whitesmoke;
-
       span {
+        margin-left: 5%;
         font-size: 14px;
         color: var(--primary);
       }
@@ -324,6 +374,14 @@
   .berrydexEntry {
     box-shadow: 1px 1px 2px 2px lightgray;
     border-radius: 3px;
+  }
+
+  .berrydexEntry:hover {
+    box-shadow: none;
+
+    span {
+      font-weight: normal;
+    }
   }
 }
 
@@ -399,6 +457,14 @@
 
 .sandstone{
   /* Berrydex List */
+  @media (min-width: 992px) {
+    .berrydexEntry {
+      img {
+        margin-top: 15px;
+      }
+  }
+} 
+
   .berrydexEntry {
     border-radius: 5px;
     --berryBG: var(--secondary);
@@ -516,7 +582,7 @@
   /* Berrydex List */
   .berrydexEntry {
     border-radius: 3px;
-    --berryBG: var(--dark);
+    --berryBG: var(--primary);
   }
 
   .berryGradient {
@@ -525,6 +591,7 @@
   }
 
   .berrydexEntry:hover {
+    --berryBG: var(--dark);
     .berryGradient {
       filter: invert(1);
       z-index: 2;
@@ -585,8 +652,7 @@
       right: 0;
       padding-right: 80%;
       height: 85px;
-      padding-top: 60%;
-      background: radial-gradient(rgba(0,0,0,0),rgba(255, 235, 205,50%)); //blanchedalmond
+      background: radial-gradient(rgba(0,0,0,0),rgba(255, 235, 205,30%)); //blanchedalmond
     }
   }
 }
@@ -619,7 +685,9 @@
 
   /* Berrydex List */
   .berrydexEntry {
-    border-right: solid var(--primary);
+    span::before {
+      color: var(--primary);
+    }
   }
 }
 

@@ -187,10 +187,10 @@
                 <div id="berryDexView" class="tab-pane fade">
 
                     <div class="row w-100">
-                        <div class="berryListHeight mt-2 col-12 col-md-6 col-lg-8"  style="overflow-y: auto;">
+                        <div id="berryDexList" class="berryListHeight mt-2 col-12 col-md"  style="overflow-y: auto;">
                             <ul class="row justify-content-center p-0 pl-2" data-bind="foreach: FarmController.getUnlockedBerryList()"
                                 style="max-width: 100%; padding:0; margin:0;">
-                                <li class="col-5 col-lg-2 berrydexEntry"
+                                <li class="col-5 col-md col-lg-2 berrydexEntry"
                                     data-bind="style:{background: FarmController.getBackgroundColor($data)},
                                     tooltip: { title: FarmController.getHint($data,true,true),
                                     trigger: 'hover',
@@ -208,7 +208,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="berryListHeight mt-2 flex-grow-1 col-12 col-md-6 col-lg-4"  style="overflow-y: auto;">
+                        <div id="berryDexPreview" class="berryListHeight mt-2 col-12 col-md-auto"  style="overflow-y: auto; overflow-x: hidden;">
                             <!-- ko using: App.game.statistics.selectedBerryID() -->
                             <div class="sticky-top">
                                 <div class="modal-header bg-dark text-light" style='justify-content-left: space-around;'>
