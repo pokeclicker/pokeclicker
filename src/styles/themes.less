@@ -54,7 +54,7 @@
 }
 
 /* Themes with highlight gradient */
-.cerulean, .slate, .spacelab {
+.cerulean, .materia, .slate, .spacelab {
   // shiny berry "button"
   .berryGradient {
     position: absolute;
@@ -330,6 +330,11 @@
         left: 5%;
         scale: 100%;
         }
+
+        span {
+          margin-left: 2px;
+          font-size: 11px;
+        }
       }
     }
 
@@ -340,7 +345,7 @@
     
        .berrydexEntry {
          img {
-          margin-left: 0;
+          margin-left: -5%;
           }
        }
     }
@@ -354,8 +359,6 @@
     .berrydexEntry {
       --berryBG: whitesmoke;
       span {
-        margin-left: 5%;
-        font-size: 14px;
         color: var(--primary);
       }
     }
@@ -381,9 +384,20 @@
   }
 
   .berrydexEntry:hover {
-    box-shadow: none;
+    // box-shadow: none;
+    --berryBG: var(--primary);
 
     span {
+      color: var(--light);
+      font-weight: normal;
+    }
+  }
+
+  .berrydexEntry:focus-within {
+    --berryBG: var(--info);
+
+    span {
+      color: var(--light);
       font-weight: normal;
     }
   }
