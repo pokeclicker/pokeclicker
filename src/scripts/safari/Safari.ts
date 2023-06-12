@@ -322,7 +322,7 @@ class Safari {
                     document.getElementById('sprite').classList.value = `walk${direction}`;
                 }
             });
-            App.game.breeding.progressEggs(1);
+            App.game.breeding.progressEggs(1 + Math.floor(Safari.safariLevel() / 10));
             this.spawnPokemonCheck();
             this.despawnPokemonCheck();
         } else {
@@ -347,7 +347,9 @@ class Safari {
     }
 
     public static spawnItemCheck() {
-        if (Rand.boolean()) {
+        const baseChance = 0.4;
+        const itemLevelModifier = (Safari.safariLevel() - 1) / 100;
+        if (Rand.chance(baseChance + itemLevelModifier)) {
             this.spawnRandomItem();
         }
     }
