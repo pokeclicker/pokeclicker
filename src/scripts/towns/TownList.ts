@@ -6060,7 +6060,7 @@ const MountLanakilaShop = new Shop(
     ],
     'Veteran Aristo\'s Trade',
     [
-        new MultiRequirement ([new QuestLineStepCompletedRequirement('Typing some Memories', 13), new ItemRequirement(1, 'Ice_Memory_Silvally', GameConstants.AchievementOption.less)),
+        new MultiRequirement ([new QuestLineStepCompletedRequirement('Typing some Memories', 13, GameConstants.AchievementOption.more), new ItemRequirement(1, 'Ice_Memory_Silvally', GameConstants.AchievementOption.less)),
     ],
     true
 );
