@@ -2408,7 +2408,7 @@ class QuestLineHelper {
         );
         SilvallyTypesQuestLine.addQuest(SteelSilvallyBattle);
 
-        const talkToDragonSilvally = new TalkToNPCQuest(RyukiSilvally, 'Look in the Vast Poni Canyon for the weird dressed guy!');
+        const talkToDragonSilvally = new TalkToNPCQuest(RyukiSilvally, 'Look in the A Tree Maybe for the weird dressed guy!');
         SilvallyTypesQuestLine.addQuest(talkToDragonSilvally);
 
         const DragonSilvallyBattle = new CustomQuest(
