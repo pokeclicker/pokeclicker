@@ -3583,7 +3583,7 @@ TemporaryBattleList['Guzma Bug Memory'] = new TemporaryBattle(
         new GymPokemon('Scizor', 225357859, 63),
     ],
     'Here take it, it was good battling you one last time.',
-    [new QuestLineStepCompletedRequirement('Typing some Memories', 22)],
+    [new QuestLineStepCompletedRequirement('Typing some Memories', 19)],
     undefined,
     {
         displayName: 'Guzma',
@@ -3600,7 +3600,7 @@ TemporaryBattleList['Kahili Flying Memory'] = new TemporaryBattle(
         new GymPokemon('Toucannon', 231357859, 63),
     ],
     'Here is your reward, just like i promissed',
-    [new QuestLineStepCompletedRequirement('Typing some Memories', 24)],
+    [new QuestLineStepCompletedRequirement('Typing some Memories', 21)],
     undefined,
     {
         displayName: 'Kahili',
@@ -3617,7 +3617,7 @@ TemporaryBattleList['Plumeria Poison Memory'] = new TemporaryBattle(
         new GymPokemon('Salazzle', 237357859, 63),
     ],
     'Ugh, why do i always lose to you? well, have this disk for defeating me.',
-    [new QuestLineStepCompletedRequirement('Typing some Memories', 26)],
+    [new QuestLineStepCompletedRequirement('Typing some Memories', 23)],
     undefined,
     {
         displayName: 'Plumeria',
@@ -3634,7 +3634,7 @@ TemporaryBattleList['Acerola Ghost Memory'] = new TemporaryBattle(
         new GymPokemon('Palossand', 243357859, 63),
     ],
     'That was an amazing battle! You really love your Pokémons don\'t you. Anyway, take this Silvally as you\'ve won against me.',
-    [new QuestLineStepCompletedRequirement('Typing some Memories', 28)],
+    [new QuestLineStepCompletedRequirement('Typing some Memories', 25)],
     undefined,
     {
         displayName: 'Captain Acerola',
@@ -3651,7 +3651,7 @@ TemporaryBattleList['Faba Psychic Memory'] = new TemporaryBattle(
         new GymPokemon('Hypno', 249357859, 63),
     ],
     'H-h-how did you? i can\'t believe this. You can take this Silvally as an act of kindness from the brach chief.',
-    [new QuestLineStepCompletedRequirement('Typing some Memories', 30)],
+    [new QuestLineStepCompletedRequirement('Typing some Memories', 27)],
     undefined,
     {
         displayName: 'Aether Branch Chief Faba',
@@ -3668,7 +3668,7 @@ TemporaryBattleList['Molayne Steel Memory'] = new TemporaryBattle(
         new GymPokemon('Alolan Dugtrio', 255357859, 63),
     ],
     'You certainly are a strong trainer, i hope we can battle again soon. Here, take the Silvally for helping me train a little, all the Elite four stuff is being really hard.',
-    [new QuestLineStepCompletedRequirement('Typing some Memories', 32)],
+    [new QuestLineStepCompletedRequirement('Typing some Memories', 29)],
     undefined,
     {
         displayName: 'Molayne',
@@ -3685,7 +3685,7 @@ TemporaryBattleList['Ryuki Dragon Memory'] = new TemporaryBattle(
         new GymPokemon('Kommo-o', 261357859, 63),
     ],
     'I\'m gonna belt out everything inside of me! I\'ve gotta encourage my Pokémon to keep rocking!. Here, take this thing you call Silvally Memory.',
-    [new QuestLineStepCompletedRequirement('Typing some Memories', 34)],
+    [new QuestLineStepCompletedRequirement('Typing some Memories', 31)],
     undefined,
     {
         displayName: 'Ryuki',

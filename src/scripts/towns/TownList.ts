@@ -6225,7 +6225,7 @@ const SilvallyGladion2 = new NPC('Gladion', [
     'Oh and also, I\'ve heard some inhabitants have seen some people looking to sell some strange disk. I think they might be Silvally Memories we\'re looking for. I got descriptions of them: you should look for a blue-haired girl near Brooklet Hill, a green-haired girl in Lush Jungle, a black and red-haired guy at the Wela Volcano Park, a child with yellow hair in the Hokulani Observatory, a dark blue-haired guy that looks like a Veteran near Mount Lanakila and a girl with a Mudsdale in the Exeggutor Island Hill.',
 ], {
     image: 'assets/images/npcs/Gladion.png',
-    requirement: new  MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 2, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 17, GameConstants.AchievementOption.less)]),
+    requirement: new  MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 2, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 16, GameConstants.AchievementOption.less)]),
 });
 const LanaSilvally1 = new NPC('Captain Lana', [
     'Hi, $playername$. How are you doing? I\'m not doing so well right now.',
@@ -6241,35 +6241,35 @@ const MallowSilvally1 = new NPC('Captain Mallow', [
     'How about a trade? I will give you the Memory if you give me some Quest Points, how \'bout that? Ok, I\'ll be here in the Lush Jungle for a while, so you can get Quest Points and come back later to do the trade if you need to.',
 ], {
     image: 'assets/images/npcs/Mallow.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 7, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 9, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 6, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 8, GameConstants.AchievementOption.less)]),
 });
 const KiaweSilvally1 = new NPC('Captain Kiawe', [
     'Hey, good to see ya here. How are you doing? I\'m doing well, but I need some Battle Points. I need to get more materials for a school project, but I\'m not sure how I will get Battle Points in Alola, since the Battle Frontier is only in the Hoenn region. And I don\'t know anyone who could get them and deliver them to me.',
     'Oh, Silvally Memory? The thing that\'s shaped like a disk? I have one right here, but I\'m not sure how it works. Wait, I just got an idea, what about a trade? I\'ll trade the Memory for some Battle Points. I\'ll be here for a while, probably long enough for you to take a trip to the Hoenn region to get some Battle Points.',
 ], {
     image: 'assets/images/npcs/Kiawe.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 9, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 11, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 8, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 10, GameConstants.AchievementOption.less)]),
 });
 const SophoclesSilvally1 = new NPC('Captain Sophocles', [
     'Hey, $playername$! How are you doing? I\'ve been doing great, except that my equipment is getting old and rusted. I would like to buy some more, but I don\'t have enough money to buy them right now.',
     'So, how can I help you? Oh, you\'re looking for a Silvally Memory? I have been keeping one of them here. I have been doing a little bit of testing to find out how it works. Maybe we could make a trade. I\'ll trade the Silvally Memory for some Pokédollars. I\'ll be trying to figure out how it works, so you can go get Pokédollars and come back later to trade if you need to.',
 ], {
     image: 'assets/images/npcs/Sophocles.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 11, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 13, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 10, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 12, GameConstants.AchievementOption.less)]),
 });
 const VeteranSilvally1 = new NPC('Veteran Aristo', [
     'Hey, $playername$. Looking for a battle? Hm, ok. Can I say something to you anyway? It will be quick. I want to propose to my wife, but I can\'t afford the ring she really wants. It\'s so expensive, and I feel guilty not being able to give her what she deserves. I don\'t know what to do! Maybe I could pick up some extra work to hire more Miners for some Diamonds.',
     'Anyway what did you want to ask me? Hmm, if I\'ve seen a Silvally Memory anywhere near? Sure, it\'s in my pocket right here. It even is coloured like a diamond! I wish I could trade it for some... hm? You\'re asking if we could do a trade? Sure, I\'ll sell it to you for 5k Diamonds, so i can buy my lovely fiancee an engagement ring. I\'ll always be here in the same place at all times, we can trade anytime you want.',
 ], {
     image: 'assets/images/npcs/Veteran (male).png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 13, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 15, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 12, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 14, GameConstants.AchievementOption.less)]),
 });
 const HapuSilvally1 = new NPC('Kahuna Hapu', [
     'Hey, $playername$. How\'s it going? Looking for a rematch, or did you come here explore the Poni Island secrets? Oh, I see. You\'re looking for a Silvally Memory. I found a memory in the floor here, so I took it and studied it a bit. All I could find out is that it was from some Silvally. I also found another memory while helping Mina out with her trial. I gave it to her, but I\'m not sure if she found out how it works.',
     'Anyway. Can I ask you something? Do you know any farmers? I\'m needing to plant more palm trees around here in Exeggutor Island but I don\'t have enough Farm Points to buy all the seeds I need. If I got in contact with a farmer I could get them for much cheaper or even free! Oh? You know how to use the Farm, so it means you have a lot of Farm Points, right? Good! How about you give me some of those Farm Points for this Silvally Memory? Ok, I\'ll be here taking care of the Exeggutor\'s for while so you can come and visit me anytime so we can do this trade.',
 ], {
     image: 'assets/images/npcs/Hapu.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 15, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 17, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 14, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 16, GameConstants.AchievementOption.less)]),
 });
 const SilvallyGladion3 = new NPC('Gladion', [
     'I see you\'ve recovered more of the Silvally memories on your own. Thanks for helping me recover them, Silvally appreciates it. How did it go, getting them back? You had to pay for them? How did you get that much money? Are you rich? I\'m confused.',
@@ -6278,20 +6278,20 @@ const SilvallyGladion3 = new NPC('Gladion', [
     'I\'ve heard Molayne wanted to brush up on his training a bit. He\'s at the Royal Avenue, and he\'s also offering a strange reward which I presume is a Silvally Memory. Also, while I was walking near a Tree maybe? I saw a guy dressed almost like an old Pokémon that doesn\'t exist anymore with a Silvally Memory. They are all tough trainers, so you might need to train more to defeat them.',
 ], {
     image: 'assets/images/npcs/Gladion.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 17, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 33, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 16, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 32, GameConstants.AchievementOption.less)]),
 });
 const GuzmaSilvally = new NPC('Guzma', [
     'Huh? What are you doing in here? A what? Silvally Memory? I think I have what you\'re looking for. Yeah, I have it, if you want to see it. Anyways, I was just passing by and decided to visit this place again.',
     'If you need this Memory, let\'s battle. I miss the times when you got in the way of my plans for Team Skull and I used to battle you and lose. I\'m not gonna lose this time.',
 ], {
     image: 'assets/images/npcs/Team Skull Boss (guzma).png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 19, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 21, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 18, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 20, GameConstants.AchievementOption.less)]),
 });
 const KahiliSilvally = new NPC('Kahili', [
     'Hello there, $playername$! Today is a beautiful day for a walk. I found this disk while walking around. I\'m not so sure what it is, but it\'s an interesting find. What brings you here? Oh, you\'re here looking for this disk. Well, I can give them to you if you beat me in battle! What do you say? Fantastic!',
 ], {
     image: 'assets/images/npcs/Kahili.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 21, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 23, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 20, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 22, GameConstants.AchievementOption.less)]),
 });
 const PlumeriaSilvally = new NPC('Plumeria', [
     'Well, well, well, look who we have here! A trainer, wandering all the way into our turf in the Vast Poni Canyon. You gotta have guts to do that, kid. Not many outsiders dare to challenge us and our Pokémon.',
@@ -6300,27 +6300,27 @@ const PlumeriaSilvally = new NPC('Plumeria', [
     'But if you want the Silvally Memory back, you gotta earn it. I won\'t just hand it over to you, no way. You gotta show me what you\'re made of, in a battle. You and your Pokémon against me and mine. If you win, I\'ll consider giving it to you. But if you lose... well, let\'s just say it won\'t be pretty. Are you up for the challenge, kid?',
 ], {
     image: 'assets/images/npcs/Plumeria.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 23, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 25, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 22, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 24, GameConstants.AchievementOption.less)]),
 });
 const AcerolaSilvally = new NPC('Captain Acerola', [
     'Hey there, $playername$! Have you checked out the trail behind the Thrifty Megamart lately? It\'s been pretty wild! I ventured there the other day and stumbled upon a Mimikyu holding a Silvally Memory. It was quite a challenge to retrieve it, but I managed to befriend it and recover it eventually. I love the thrill of exploring new places and discovering new Stuff, don\'t you?',
     'But enough about me, what brings you here? Hmm, I can sense that you have a burning desire for something... Ah, it must be the Silvally Memory I found in the trail, am I right? It was a challenge to befriend that Mimikyu holding it. If you want it, you\'ll have to battle me first! Don\'t worry, I won\'t hold back just because we\'re friends. I want to see what you\'re made of! So, what do you say, ready to face the challenge?',
 ], {
     image: 'assets/images/npcs/Acerola.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 25, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 27, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 24, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 26, GameConstants.AchievementOption.less)]),
 });
 const FabaSilvally = new NPC('Aether Branch Chief Faba', [
     'Welcome $playername$, the Champion of Alola! I see you still haven\'t lost the title yet, you\'re a pretty worthy trainer. Anyways, I think you should come visit us another time we\'re... er.. busy right now... Oh, you\'re looking for a Silvally Memory? Well I can\'t help you with it so bye! What? You\'re not leaving until i help you? Ugh.. kids are so annoying these days.. er... I mean I\'d gladly help, I\'m just busy right now! I guess you already know, we\'ve been to the Hala Desert looking for Tapu Bulu, but the search team stumbled upon this Silvally Memory and it looks pretty rare because we couldn\'t find much information about it. We want to take it in for some experiments, but we knew you wouldn\'t let us do our experiments so I tried to hide it. Now that you know, my only choice is battling you. Let\'s make a deal first though: If I defeat you, you\'ll let us do our experiments on that thing and leave us alone forever, but if you defeat me I\'ll give that Silvally to you. Sounds like a deal? Then let\'s see if you can take the new Faba!',
 ], {
     image: 'assets/images/npcs/Aether Branch Chief (faba).png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 27, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 29, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 26, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 28, GameConstants.AchievementOption.less)]),
 });
 const MolayneSilvally = new NPC('Molayne', [
     'Hello there, $playername$! Have you perchance caught sight of my advertisement? I\'m on the lookout for a formidable opponent to assist me in honing my Pokémon\'s skills. And let me assure you, the rewards are quite substantial! Should you best me in battle, you shall be granted a most wondrous prize: a Silvally Memory that I have found inside the Hokulani Observatory.',
     'As you may already know, I am both a Steel-type expert and a stickler for precision in combat. I desire nothing more than to elevate my team to the utmost degree of mastery. But in order to do so, I must face off against trainers of the highest caliber. That is where you come in, my friend! If you are prepared for the challenge, step forward and engage me in a duel for the ages!',
 ], {
     image: 'assets/images/npcs/Molayne.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 29, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 31, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 28, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 30, GameConstants.AchievementOption.less)]),
 });
 const RyukiSilvally = new NPC('Ryuki', [
     'Ahoy, traveler! You\'ve came here to battle against me again? No? Why\'s that? I see, you\'re looking for a.. Silvally Memory?',
@@ -6330,7 +6330,7 @@ const RyukiSilvally = new NPC('Ryuki', [
     'If you can defeat me in a battle, I\'ll let you have the Silvally Memory. It won\'t be easy, mind you. I\'ve spent years perfecting my craft, and I won\'t be holding back. But if you truly have what it takes to be the champion, then you should be up for the challenge, yes? Let\'s do this!',
 ], {
     image: 'assets/images/npcs/Ryuki.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 31, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 33, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 30, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 32, GameConstants.AchievementOption.less)]),
 });
 const SilvallyGladion4 = new NPC('Gladion', [
     'Hey there, $playername$! I gotta say, you\'ve done something truly incredible. You\'ve brought back every single one of Silvally\'s lost memories, and I can\'t thank you enough for that. It\'s like a whole new world has opened up for my partner and me.',
@@ -6338,7 +6338,7 @@ const SilvallyGladion4 = new NPC('Gladion', [
     'I want you to know that your actions have not only changed Silvally\'s life but also had a huge impact on my own journey. You\'ve been an inspiration to me, showing me what true strength and friendship mean. I\'ve learned so much from you, and I\'ll always carry those lessons with me. So, $playername$, I can\'t say it enough: thank you. Your name will forever be etched in my memory as someone who made a real difference. I hope our paths cross again someday, but until then, I wish you the most epic adventures filled with victories and happiness.',
 ], {
     image:'assets/images/npcs/Gladion.png',
-    requirement: new MultiRequirement ([new QuestLineStepCompletedRequirement('Typing some Memories', 33, GameConstants.AchievementOption.more), new QuestLineCompletedRequirement('Typing some Memories', GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement ([new QuestLineStepCompletedRequirement('Typing some Memories', 32, GameConstants.AchievementOption.more), new QuestLineCompletedRequirement('Typing some Memories', GameConstants.AchievementOption.less)]),
 });
 //Ultra Beasts NPCs
 const RoadsideMotelLooker1 = new NPC('Looker', [
