@@ -6941,7 +6941,7 @@ TownList['Aether Foundation'] = new DungeonTown(
     GameConstants.AlolaSubRegions.AkalaIsland,
     [new GymBadgeRequirement(BadgeEnums.DarkiniumZ)],
     [
-        new GemMasterShop(GameConstants.GemShops.SilvallyTrader, 'Memory Replicator', [new QuestLineStepCompletedRequirement('Typing some Memories', 4)]),
+        new GemMasterShop(GameConstants.GemShops.SilvallyTrader, 'Memory Replicator', [new QuestLineStepCompletedRequirement('Typing some Memories', 4)], true),
         TemporaryBattleList['Aether Branch Chief Faba'],
         TemporaryBattleList['Team Aqua Leader Archie'],
         TemporaryBattleList['Team Magma Leader Maxie'],
