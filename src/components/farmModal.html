@@ -190,8 +190,9 @@
                         <div id="berryDexList" class="berryListHeight mt-2 col-12 col-md"  style="overflow-y: auto;">
                             <ul class="row justify-content-center p-0 pl-2" data-bind="foreach: FarmController.getUnlockedBerryList()"
                                 style="max-width: 100%; padding:0; margin:0;">
-                                <li class="col-5 col-md col-lg-2 berrydexEntry"
-                                    data-bind="style:{background: FarmController.getBackgroundColor($data)},
+                                <li class="col-5 col-md col-lg-2 berryDexEntry"
+                                    data-bind="style:{background: FarmController.getBackgroundColor($data),},
+                                    css:{ 'berryDexEntrySelected': App.game.statistics.selectedBerryID() === $data},
                                     tooltip: { title: FarmController.getHint($data,true,true),
                                     trigger: 'hover',
                                     placement:'top' },">

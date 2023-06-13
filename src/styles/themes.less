@@ -7,7 +7,7 @@
     filter: invert(1) brightness(90%);
   }
   // for the list of berries in the berrydex
-  .berrydexEntry {
+  .berryDexEntry {
     --berryBG: var(--light);
 
     span {
@@ -30,13 +30,17 @@
   }
 
   // prevent text from blending in with background
-  .berrydexEntry {
+  .berryDexEntry {
     --berryBG: rgba(211, 211, 211, 20%);
     
     span {
       font-weight: normal;
       color:whitesmoke;
     }
+  }
+
+  .berryDexEntrySelected {
+    --berryBG: var(--dark);
   }
 
   code {
@@ -78,7 +82,7 @@
 /* Themes with BerryDex borders */
 .cerulean, .cosmo, .journal, .lumen, .solar, .spacelab, .united {
   @media (max-width: 991px) {
-    .berrydexEntry {
+    .berryDexEntry {
       img {
         margin-top: -3px;
       }
@@ -97,7 +101,7 @@
   }
 
   /* Berrydex List */
-  .berrydexEntry {
+  .berryDexEntry {
     border-style: solid;
     border-image: linear-gradient(to bottom, steelblue, var(--info));
     border-image-slice: 1;
@@ -108,6 +112,15 @@
       font-size: 13px;
       color: var(--info);
       opacity: 83%;
+    }
+  }
+
+  .berryDexEntrySelected {
+    --berryBG: var(--info);
+
+    span {
+      color: var(--light);
+      opacity: 95%;
     }
   }
 }
@@ -129,7 +142,7 @@
   }
 
   /* Berrydex List */
-  .berrydexEntry {
+  .berryDexEntry {
     border: solid var(--info);
 
     span {
@@ -137,7 +150,7 @@
     }
   }
 
-  .berrydexEntry:hover {
+  .berryDexEntry:hover, .berryDexEntrySelected {
     --berryBG: var(--info);
 
     span {
@@ -159,14 +172,11 @@
   }
 
   /* Berrydex List */
-  .berrydexEntry {
+  .berryDexEntry {
     border-radius: 5px;
   }
 
-  
-  .berrydexEntry:hover {
-    --berryBG: var(--dark);
-
+  .berryDexEntrySelected {
     span {
       color: var(--light);
     }
@@ -179,9 +189,9 @@
   }
 
     /* Berrydex List */
-    .berrydexEntry {
+    .berryDexEntry {
       border-radius: 3px;
-    }
+    }  
 }
 
 .flatly {
@@ -193,32 +203,42 @@
   }
 
     /* Berrydex List */
-    .berrydexEntry {
+    .berryDexEntry {
       border-radius: 3px;
 
       span {
         color: var(--primary);
       }
     }
+
+    .berryDexEntrySelected {
+      --berryBG: var(--dark);
+
+      span {
+        color: var(--light);
+      }
+    }  
 }
 
 .journal {
     /* Berrydex List */
     @media (min-width: 992px) {
-      .berrydexEntry {
+      .berryDexEntry {
         img {
           margin-top: 10px;
         }
     }
   }   
 
-    .berrydexEntry {
+  .berryDexEntry {
       border-radius: 5px;
       border-top: solid var(--secondary);
       border-bottom: solid var(--secondary);
   }
 
-  .berrydexEntry:active{
+  .berryDexEntrySelected{
+    --berryBG: var(--light);
+
     span {
       color: var(--primary);
     }
@@ -227,7 +247,7 @@
 
 .litera {
   /* Berrydex List */
-  .berrydexEntry {
+  .berryDexEntry {
     border-radius: 15px;
   
     span {
@@ -237,17 +257,18 @@
     }
   }
 
-  .berrydexEntry:hover {
-    transition: 0.1s ease-in-out;
+  .berryDexEntry:hover, .berryDexEntrySelected {
+    transition: 0.1s;
     border-radius: 60px;
+    --berryBG: var(--light);
 
     img {
-      transition: 0.1s ease-in-out;
+      transition: 0.1s;
       transform: translateX(-4px);
     }
 
     span {
-      transition: 0.1s ease-in-out;
+      transition: 0.1s;
       transform: translateX(-4px);
       font-size: 13px;
     }
@@ -261,7 +282,7 @@
   }
     
   /* Berrydex List */
-  .berrydexEntry {
+  .berryDexEntry {
     border: solid var(--primary);
     border-radius: 5px;
 
@@ -271,7 +292,7 @@
   }
 
   // because Lumen's buttons move when pushed
-  .berrydexEntry:hover {
+  .berryDexEntry:hover {
     box-shadow: 0 2px var(--info);
     bottom: 2px;
     border: solid var(--info);
@@ -280,18 +301,8 @@
       color: var(--info);
     }
   }
-
-  .berrydexEntry:focus-within {
-    box-shadow: 0 2px var(--info);
-    bottom: 0;
-    border: solid var(--light);
-
-    span {
-      color: var(--info);
-    }
-  }
-
-  .berrydexEntry:active {
+  
+  .berryDexEntry:active {
     bottom: -2px;
     box-shadow: none;
     border: solid var(--light);
@@ -303,6 +314,17 @@
 
     span {
       color: var(--light);
+    }
+  }
+
+  .berryDexEntrySelected {
+    box-shadow: 0 2px var(--info);
+    bottom: 0;
+    border: solid var(--light);
+    --berryBG: white;
+
+    span {
+      color: var(--info);
     }
   }
 }
@@ -323,7 +345,7 @@
     }
 
     @media (min-width: 992px) {
-      .berrydexEntry {
+      .berryDexEntry {
         img {
         position: relative;
         top: 10%;
@@ -332,7 +354,8 @@
         }
 
         span {
-          margin-left: 2px;
+          margin: 4px 2px;
+          // margin-left: 2px;
           font-size: 11px;
         }
       }
@@ -343,7 +366,7 @@
         max-height: calc(100vh - 240px);
       }
     
-       .berrydexEntry {
+       .berryDexEntry {
          img {
           margin-left: -5%;
           }
@@ -356,10 +379,18 @@
       }
     }
 
-    .berrydexEntry {
+    .berryDexEntry {
       --berryBG: whitesmoke;
       span {
         color: var(--primary);
+      }
+    }
+
+    .berryDexEntrySelected {
+      --berryBG: var(--dark);
+
+      span {
+        color: var(--light);
       }
     }
 }
@@ -378,27 +409,29 @@
   }
 
   /* Berrydex List */
-  .berrydexEntry {
+  .berryDexEntry {
     box-shadow: 1px 1px 2px 2px lightgray;
     border-radius: 3px;
+
+    span {
+      font-weight: normal;
+    }
   }
 
-  .berrydexEntry:hover {
+  .berryDexEntry:hover {
     // box-shadow: none;
     --berryBG: var(--primary);
 
     span {
       color: var(--light);
-      font-weight: normal;
     }
   }
 
-  .berrydexEntry:focus-within {
+  .berryDexEntrySelected {
     --berryBG: var(--info);
 
     span {
       color: var(--light);
-      font-weight: normal;
     }
   }
 }
@@ -417,52 +450,56 @@
     }
 
   /* Berrydex List */
-    .berrydexEntry {
+    .berryDexEntry {
       border: solid var(--primary);
       border-radius: 5px;
       --berryBG: snow;
 
       span {
         font-size: 13px;
-        color: var(--secondary);
-      }
-    }
-
-    .berrydexEntry:active {
-      border: solid mistyrose;
-      --berryBG: var(--secondary);
-  
-      img {
-        filter: brightness(110%) contrast(120%) hue-rotate(50deg);
-      }
-  
-      span {
         color: var(--primary);
       }
     }
 
-    .berrydexEntry:hover {
+    .berryDexEntry:active {
       border: solid mistyrose;
+      --berryBG: var(--secondary);
+  
+      span {
+        color: mistyrose;
+      }
+    }
+
+    .berryDexEntry:hover {
+      border: solid mistyrose;
+    }
+
+    .berryDexEntrySelected {
+      border: solid var(--secondary);
+
+      span {
+        color: var(--secondary);
+      }
     }
 }
 
 .pulse {
   /* Berrydex List */
-  .berrydexEntry {
+  .berryDexEntry {
     border: solid var(--secondary);
-    --berryBG: whitesmoke;
 
     span {
       color: var(--primary);
+      font-size: 14.5px;
     }
   }
 
   /* Berrydex List */
-  .berrydexEntry:hover {
+  .berryDexEntry:hover {
     transform: scale(1.1);
   }
 
-  .berrydexEntry:active {
+  .berryDexEntry:active {
     z-index: 2;
     animation: pulse-mimic ease-in-out 0.3s;
   }
@@ -470,6 +507,11 @@
   @keyframes pulse-mimic {
     0%, 70% { transform: scale(1); }
     30%, 100% { transform: scale(1.5); }
+  }
+
+  .berryDexEntrySelected {
+    --berryBG: var(--light);
+    transform: scale(0.9);
   }
 }
 
@@ -480,14 +522,14 @@
   }
 
   @media (min-width: 992px) {
-    .berrydexEntry {
+    .berryDexEntry {
       img {
         margin-top: 15px;
       }
   }
 } 
 
-  .berrydexEntry {
+  .berryDexEntry {
     border-radius: 5px;
     --berryBG: var(--secondary);
 
@@ -495,6 +537,14 @@
       font-size: 12px;
       color: var(--light);
       font-weight: normal;
+    }
+  }
+
+  .berryDexEntrySelected {
+    --berryBG: var(--light);
+
+    span {
+      color: var(--dark);
     }
   }
 }
@@ -508,13 +558,19 @@
   }
 
   /* Berrydex List */
-  .berrydexEntry {
+  .berryDexEntry {
     border-radius: 4px;
-    box-shadow: inset 0 0 2px gray;
+    box-shadow: 0 0 0 1px lightgray;
   
     span {
       font-size: 13px;
     }
+  }
+
+  .berryDexEntrySelected {
+    transition: 0.1s;
+    --berryBG: var(--light);
+    box-shadow: 0 0 0 1px var(--primary), 0 0 0 5px rgba(217, 35, 15, 30%);
   }
 }
 
@@ -568,8 +624,16 @@
   }
 
     /* Berrydex List */
-    .berrydexEntry {
-      box-shadow: 0 0 2px var(--secondary);
+    .berryDexEntry {
+      box-shadow: 0 0 0 2px var(--secondary);
+    }
+
+    .berryDexEntrySelected {
+      --berryBG: var(--dark);
+      
+      span {
+        color: var(--light);
+      }
     }
 }
 
@@ -602,7 +666,7 @@
   }
 
   /* Berrydex List */
-  .berrydexEntry {
+  .berryDexEntry {
     border-radius: 3px;
     --berryBG: var(--primary);
   }
@@ -612,7 +676,7 @@
     opacity: 50%;
   }
 
-  .berrydexEntry:hover {
+  .berryDexEntry:hover, .berryDexEntrySelected {
     --berryBG: var(--dark);
     .berryGradient {
       filter: invert(1);
@@ -646,7 +710,7 @@
   }
 
   /* Berrydex List */
-  .berrydexEntry {
+  .berryDexEntry {
     border: solid var(--primary);
     border-radius: 5px;
     --berryBG: rgba(255,255,255, 20%);
@@ -657,12 +721,28 @@
     }
   }
 
-  .berrydexEntry:hover {
+  .berryDexEntry:hover {
     border: solid var(--light);
-    filter: sepia(70%) brightness(110%) opacity(90%);
+
+    span {
+      color:var(--light);
+    }
+    .berryGradient {
+      position: absolute;
+      z-index: 0;
+      right: 0;
+      padding-right: 80%;
+      height: 85px;
+      background: radial-gradient(rgba(0,0,0,0),rgba(255, 235, 205,30%)); //blanchedalmond
+    }
+  }
+  
+  .berryDexEntrySelected {
+    border: solid var(--light);
+    filter: sepia(40%) brightness(110%) opacity(90%);
 
     img {
-      filter: sepia(20%) blur(0.5px) drop-shadow(2px 2px var(--light));
+      filter: blur(0.5px);
     }
 
     span {
@@ -688,7 +768,7 @@
   }
 
   /* Berrydex List */
-  .berrydexEntry {
+  .berryDexEntry {
     border-style: solid;
     border-image: linear-gradient(to bottom, lightblue 5%, var(--primary));
     border-image-slice: 1;
@@ -696,6 +776,14 @@
 
     span {
       font-size: 13px;
+    }
+  }
+
+  .berryDexEntrySelected {
+    --berryBG: var(--primary);
+
+    span {
+      color: var(--light);
     }
   }
 }
@@ -706,16 +794,20 @@
   }
 
   /* Berrydex List */
-  .berrydexEntry {
+  .berryDexEntry {
     span::before {
       color: var(--primary);
     }
+  }
+
+  .berryDexEntrySelected {
+    box-shadow: inset -3px 0 0 var(--primary);
   }
 }
 
 .united {
   /* Berrydex List */
-  .berrydexEntry {
+  .berryDexEntry {
     border: solid var(--dark);
     border-radius: 5px;
   
@@ -723,13 +815,21 @@
       font-size: 13px;
     }
   }
+
+  .berryDexEntrySelected {
+    --berryBG: papayawhip;
+  }
 }
 
 .yeti {
     /* Berrydex List */
-    .berrydexEntry {
+    .berryDexEntry {
       span {
         font-size: 13px;
       }
+    }
+
+    .berryDexEntrySelected{
+      --berryBG: lightgray;
     }
 }
