@@ -12,6 +12,6 @@ export default class ItemRequirement extends Requirement {
     }
 
     public hint(): string {
-        return `Your amount of ${ItemList[this.itemName].displayName} must be ${this.requiredValue}${this.option == AchievementOption.equal ? '' : ` or ${AchievementOption[this.option]}`}.`;
+        return `You must own ${this.requiredValue}${this.option == AchievementOption.equal ? '' : ` or ${AchievementOption[this.option]}`} of ${ItemList[this.itemName].displayName}.`;
     }
 }
