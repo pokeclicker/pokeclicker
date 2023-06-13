@@ -8,24 +8,23 @@ class GainTokensQuest extends Quest implements QuestInterface {
     }
 
     public static generateData(): any[] {
-        let dungeonCount = 0;
-        const rawAmount = 1500 + Object.values(dungeonList).reduce((max, dungeon) => {
+        const highestRegion = player.highestRegion()
+        const dungeonAmount = Object.values(dungeonList).reduce((max, dungeon) => {
             if (App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(dungeon.name)]()) {
-                dungeonCount++;
                 return Math.max(max, dungeon.tokenCost);
             }
             return max;
-        }, 0) / 10;
-        const baseAmount = Math.floor(rawAmount * (1 + dungeonCount / 15));
-        //const amount = SeededRand.intBetween(baseAmount, baseAmount * 3);
-        const amount = baseAmount;
-        const reward = this.calcReward(amount, rawAmount);
+        }, 0) || dungeonList[GameConstants.KantoDungeons[0]].tokenCost;
+        const baseAmount = dungeonAmount;
+        const maxAmount = Math.ceil(baseAmount * (3 + highestRegion));
+        const amount = SeededRand.intBetween(baseAmount, maxAmount);
+        const reward = GainTokensQuest.calcReward(amount, baseAmount);
         return [amount, reward];
     }
 
-    private static calcReward(amount: number, rawAmount: number): number {
-        const reward =  Math.ceil(amount / rawAmount * GameConstants.GAIN_TOKENS_BASE_REWARD);
-        return reward; //super.randomizeReward(reward);
+    private static calcReward(amount: number, baseAmount: number): number {
+        const reward =  Math.ceil(amount / baseAmount * GameConstants.GAIN_TOKENS_BASE_REWARD);
+        return GainTokensQuest.randomizeReward(reward);
     }
 
     get description(): string {

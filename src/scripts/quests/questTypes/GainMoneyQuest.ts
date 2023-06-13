@@ -9,27 +9,23 @@ class GainMoneyQuest extends Quest implements QuestInterface {
 
     public static generateData(): any[] {
         const highestRegion = player.highestRegion();
-        const badgeCount = App.game.badgeCase.badgeCount();
-        const minMoneyReward = 10000;
-        let rawAmount = Object.values(GymList).reduce((max, gym) => {
+        let gymAmount = Object.values(GymList).reduce((max, gym) => {
             if (App.game.statistics.gymsDefeated[GameConstants.getGymIndex(gym.town)]()) {
-                // 1.3 raised to variable power so we account for earlier gym being easier and better for money (Blue and Diantha).
-                return Math.max(max, (minMoneyReward + gym.moneyReward) * 1.3 ** (highestRegion - GameConstants.getGymRegion(gym.town)));
+                // 1.3 raised to variable power so we account for gyms from early regions being easier and better for money.
+                return Math.max(max, (gym.moneyReward) * 1.3 ** (highestRegion - GameConstants.getGymRegion(gym.town)));
             }
             return max;
-        }, minMoneyReward);
-        const baseAmount = rawAmount * (1 + badgeCount / 10);
-        //const amount = SeededRand.intBetween(moneyReward, moneyReward * 3);
-        let amount = baseAmount;
-        const reward = this.calcReward(amount, rawAmount);
-        // Achievement bonus accounted after reward calculation.
-        amount *= (2 + highestRegion) / 2;
+        }, 0) || GymList[GameConstants.KantoGyms[0]].moneyReward;
+        const baseAmount = gymAmount * (1 + highestRegion) * 2;
+        const maxAmount = Math.ceil(baseAmount * (3 + highestRegion));
+        const amount = SeededRand.intBetween(baseAmount, maxAmount);
+        const reward = GainMoneyQuest.calcReward(amount, baseAmount);
         return [amount, reward];
     }
 
-    private static calcReward(amount: number, rawAmount: number): number {
-        const reward = Math.ceil(amount / rawAmount * GameConstants.GAIN_MONEY_BASE_REWARD);
-        return reward; //super.randomizeReward(reward);
+    private static calcReward(amount: number, baseAmount: number): number {
+        const reward = Math.ceil(amount / baseAmount * GameConstants.GAIN_MONEY_BASE_REWARD);
+        return GainMoneyQuest.randomizeReward(reward);
     }
 
     get description(): string {
