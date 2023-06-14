@@ -177,6 +177,14 @@
     border-radius: 5px;
   }
 
+  .berryDexEntry:hover {
+    --berryBG: var(--info);
+
+    span {
+      color: whitesmoke;
+    }
+  }
+
   .berryDexEntrySelected {
     span {
       color: var(--light);
@@ -238,8 +246,6 @@
   }
 
   .berryDexEntrySelected{
-    --berryBG: var(--light);
-
     span {
       color: var(--primary);
     }
@@ -261,8 +267,6 @@
   .berryDexEntry:hover, .berryDexEntrySelected {
     transition: 0.1s;
     border-radius: 60px;
-
-    --berryBG: var(--light);
 
     img {
       transition: 0.1s;
@@ -517,8 +521,6 @@
 
   .berryDexEntrySelected {
     transform: scale(0.9);
-
-    --berryBG: var(--light);
   }
 }
 
@@ -578,8 +580,6 @@
   .berryDexEntrySelected {
     transition: 0.1s;
     box-shadow: 0 0 0 1px var(--primary), 0 0 0 5px rgba(217, 35, 15, 30%);
-
-    --berryBG: var(--light);
   }
 }
 
@@ -634,7 +634,7 @@
 
     /* Berrydex List */
     .berryDexEntry {
-      box-shadow: 0 0 0 2px var(--secondary);
+      box-shadow: 0 0 0 2px var(--primary);
     }
 
     .berryDexEntrySelected {
