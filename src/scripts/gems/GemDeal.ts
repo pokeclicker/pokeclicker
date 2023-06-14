@@ -11,7 +11,7 @@ class GemDeal {
         return this.item.itemType.isVisible();
     }
 
-    constructor(gemCosts: GemCost[], item: Item, itemAmount: number, uncaught = false) {
+    constructor(gemCosts: GemCost[], item: Item, itemAmount: number) {
         this.gems = gemCosts;
         this.item = {itemType: item, amount: itemAmount};
     }
