@@ -50,8 +50,8 @@ class PokemonItem extends CaughtIndicatingItem {
         App.game.party.gainPokemonById(pokemonID, shiny, true);
 
         const partyPokemon = App.game.party.getPokemon(pokemonID);
-        partyPokemon.effortPoints += App.game.party.calculateEffortPoints(partyPokemon, false, GameConstants.SHOPMON_EP_YIELD * (amt - numShiny), this.ignoreEV);
-        partyPokemon.effortPoints += App.game.party.calculateEffortPoints(partyPokemon, true, GameConstants.SHOPMON_EP_YIELD * numShiny, this.ignoreEV);
+        partyPokemon.effortPoints += App.game.party.calculateEffortPoints(partyPokemon, false, GameConstants.ShadowStatus.None, GameConstants.SHOPMON_EP_YIELD * (amt - numShiny), this.ignoreEV);
+        partyPokemon.effortPoints += App.game.party.calculateEffortPoints(partyPokemon, true, GameConstants.ShadowStatus.None, GameConstants.SHOPMON_EP_YIELD * numShiny, this.ignoreEV);
     }
 
     getCaughtStatus(): CaughtStatus {
@@ -78,6 +78,7 @@ ItemList['Pinkan Poliwhirl']  = new PokemonItem('Pinkan Poliwhirl', undefined);
 ItemList['Pinkan Geodude']  = new PokemonItem('Pinkan Geodude', undefined);
 ItemList['Pinkan Dodrio']  = new PokemonItem('Pinkan Dodrio', 50000);
 ItemList['Charity Chansey']   = new PokemonItem('Charity Chansey', 5000);
+ItemList['Exeggcute (Single)'] = new PokemonItem('Exeggcute (Single)', undefined);
 ItemList.Lickitung            = new PokemonItem('Lickitung', 1000);
 ItemList['Pinkan Weezing']  = new PokemonItem('Pinkan Weezing', undefined);
 ItemList['Pinkan Scyther']  = new PokemonItem('Pinkan Scyther', undefined);

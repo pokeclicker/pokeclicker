@@ -59,7 +59,7 @@ class EvolutionHandler {
         }
 
         // EVs
-        evolvedPartyPokemon.effortPoints += App.game.party.calculateEffortPoints(evolvedPartyPokemon, shiny, GameConstants.STONE_EP_YIELD);
+        evolvedPartyPokemon.effortPoints += App.game.party.calculateEffortPoints(evolvedPartyPokemon, shiny, GameConstants.ShadowStatus.None, GameConstants.STONE_EP_YIELD);
         return shiny;
     }
 }

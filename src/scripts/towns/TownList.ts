@@ -2616,7 +2616,7 @@ const HoennStoneSalesman1 = new NPC('Stone Salesman', [
 });
 
 const HoennStoneSalesman2 = new NPC('Stone Salesman', [
-    'The Gem Master in town is letting me sell stones at their shop. Let me know if anything there strikes your fancy!',
+    'I\'m selling some unusual stones for gems. Let me know if any of them strike your fancy!',
 ], {
     requirement: new TemporaryBattleRequirement('Hoenn Stone Salesman'),
 });
@@ -2722,6 +2722,100 @@ const ZinniaOrigin = new NPC('Zinnia', [
     'Archie and Maxie are still lurking somewhere in Hoenn,but without the Orbs I think they\'re mostly harmless. If you need some help smacking em down again, come get me!',
 ], {image: 'assets/images/npcs/Zinnia.png',
     requirement: new MultiRequirement([new QuestLineCompletedRequirement('The Delta Episode'), new QuestLineCompletedRequirement('Primal Reversion')]),
+});
+const ExploreStand = new NPC('Explore the Outskirt Stand', [
+    '<i>You look around the Outskirt Stand, and see two shady figures shuffling off into the horizon. As you move to get a closer look, some guy steps in your way.</i>',
+    'Hey! You\'re new around these parts, and I don\'t take too kindly to strangers!',
+    'You\'ll have to prove your worth, or my name ain\'t Willie!',
+], {image: 'assets/images/npcs/Rider (male).png',
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('Shadows in the Desert'), new QuestLineStepCompletedRequirement('Shadows in the Desert', 1, GameConstants.AchievementOption.less)]),
+});
+const Sack = new NPC('Check the sack', [
+    '<i>You open the sack and a girl pops out!</i>',
+    'Thanks for letting me out! I thought I was done for!',
+    'My name is Rui, by the way. I\'m a psychic of sorts, on a mission to save Pokémon who have had their souls corrupted by some evil folks in Orre.',
+    'There\'s a few in this city that need help. Can you come with me though? I\'m worried more shady guys will show up.',
+    'I can point out which Pokémon have been corrupted, or turned into "Shadow Pokémon", and you can confiscate them from evildoers using your Pokéballs.',
+], {image: 'assets/images/npcs/Rui.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Shadows in the Desert', 2), new QuestLineStepCompletedRequirement('Shadows in the Desert', 4, GameConstants.AchievementOption.less)]),
+});
+const EsCade1 = new NPC('Mayor Es Cade', [
+    'Ah, you must be travelers! Welcome to Phenac City! I am Es Cade, the Mayor. Now, you wanted to see me. Is there something that I may be able to assist you with?',
+    'O-o-o-oh, my! Shadow Pokémon? And they attack people?! Now if that were true, that would be truly frightening. However, that is a little hard to believe.',
+    'I understand your concern, though. I will order an investigation at once.',
+    'I promise you, we will obtain useful information about those sinister Pokémon. While we do so, I heartily recommend that you visit our Stadium, the symbol of our civic pride!',
+], {image: 'assets/images/npcs/Es Cade.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Shadows in the Desert', 4), new QuestLineStepCompletedRequirement('Shadows in the Desert', 6, GameConstants.AchievementOption.less)]),
+});
+const Rui1 = new NPC('Rui', [
+    'There\'s something suspicious going on here, but I\'m not sure what our next move is here.',
+    'The Stadium here isn\'t even open yet, I think the Mayor was just trying to get rid of us.',
+    'Let\'s see if we can find out more in Pyrite Town.',
+], {image: 'assets/images/npcs/Rui.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Shadows in the Desert', 5), new QuestLineStepCompletedRequirement('Shadows in the Desert', 7, GameConstants.AchievementOption.less)]),
+});
+const Duking1 = new NPC('Duking', [
+    '<i>Sniff...</i>.',
+    'I\'m not crying, these are allergies. Shut up.',
+    'I just... Some really mean guys kidnapped my beloved Plusle. It really has me upset.',
+    'They told me that I had to let they have free reign in town, or there would be trouble. They\'re out at the Colosseum causing trouble.',
+], {image: 'assets/images/npcs/Duking.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Shadows in the Desert', 7), new QuestLineStepCompletedRequirement('Shadows in the Desert', 9, GameConstants.AchievementOption.less)]),
+});
+const Doken1 = new NPC('Doken', [
+    'Yow! You\'re too tough!',
+    'I know the Plusle you\'re looking for, it got taken by the infamous dance machine, Miror B.',
+    'You don\'t want to mess with him, I promise! Oh? You do?',
+    'Well, his hideout is in the Pyrite Cave. But you shouldn\'t go there.',
+], {image: 'assets/images/npcs/Hunter (male).png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Shadows in the Desert', 10), new QuestLineStepCompletedRequirement('Shadows in the Desert', 12, GameConstants.AchievementOption.less)]),
+});
+const FreePlusle = new NPC('Free Duking\'s Plusle', [
+    '<i>Miror B. flees, leaving Plusle behind. Plusle runs off in the direction of Pyrite Town.</i>',
+], {image: 'assets/images/pokemon/311.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Shadows in the Desert', 12), new QuestLineStepCompletedRequirement('Shadows in the Desert', 14, GameConstants.AchievementOption.less)]),
+});
+const Rui2 = new NPC('Rui', [
+    'You did a good thing, freeing that Plusle from those goons. I think they were all part of the evil organization I\'ve been hearing about: Team Cipher!',
+    'My grandfather might know more about them, he\'s a smart guy. Let\'s go see him in Agate Village!',
+], {image: 'assets/images/npcs/Rui.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Shadows in the Desert', 13), new QuestLineStepCompletedRequirement('Shadows in the Desert', 15, GameConstants.AchievementOption.less)]),
+});
+const GrandpaEagun1 = new NPC('Grandpa Eagun', [
+    'Rui! And you are? $playername$? Nice to meet you!',
+    'Thank you both for saving me from those goons. They were disrupting the beace and tranquility of this whole area.',
+    '$playername$, if you ever have troubled or downright evil Pokémon, take them to the nearby Relic Stone. Its power, combined with the power of friendship you share with your Pokémon, may purify their souls.',
+], {image: 'assets/images/npcs/Old Man.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Shadows in the Desert', 16), new QuestLineStepCompletedRequirement('Shadows in the Desert', 18, GameConstants.AchievementOption.less)]),
+});
+const Rui3 = new NPC('Rui', [
+    'Have you seen this crazy broadcast on TV?',
+    '<i>Rui shows you a TV broadcast coming out of a dark room underground, in which a beautiful woman is encouraging her minions to steal Pokémon.</i>',
+], {image: 'assets/images/npcs/Rui.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Shadows in the Desert', 18), new QuestLineStepCompletedRequirement('Shadows in the Desert', 20, GameConstants.AchievementOption.less)]),
+});
+const SearchTheStudio = new NPC('Search The Studio', [
+    '<i>Scripts litter Venus\'s desk, as well as other, more suspicious files addressing what trainers in town have which Pokémon. There are also several letters labeled  "Mayor\'s Office".</i>',
+    '<i>Rui calls to you from across the room:</i>',
+    'Hey $playername$! I found a button! I\'m gonna press it!',
+    '<i>An explosion rocks the room, revealing a tunnel out of a secret entrance. The scripts and letters are scattered all over the studio, making them impossible to sort out.</i>',
+],
+{requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Shadows in the Desert', 20), new QuestLineStepCompletedRequirement('Shadows in the Desert', 22, GameConstants.AchievementOption.less)])}
+);
+const EsCade2 = new NPC('Mayor Es Cade', [
+    'My, my. That certainly was a battle worth seeing. I must be honest with you. I never imaged that you would get this far.',
+    'Oh, dear me. Do you fail to understand still? You\'re such an innocent child. At times, I am the affable mayor of Phenac... And at others, I am the secret boss of the criminal syndicate Cipher!',
+    'I am Evice, and I shall rule the world!',
+    '<i>The Mayor changes before your eyes, taking on a much more sinister appearance.</i>',
+], {image: 'assets/images/npcs/Es Cade.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Shadows in the Desert', 23), new QuestLineStepCompletedRequirement('Shadows in the Desert', 25, GameConstants.AchievementOption.less)]),
+});
+const EviceEscape = new NPC('Watch Evice Escape', [
+    '<i>Before the helicopter can land, a fireball shoots across the sky, blowing it up!</i>',
+    '<i>A Ho-oh flies low, screeching a thanks to you for stopping the evil Team Cipher.</i>',
+    '</br><img src="assets/images/pokemon/250.png"/>',
+], {image: 'assets/images/npcs/other/EviceHelicopter.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Shadows in the Desert', 25), new QuestLineCompletedRequirement('Shadows in the Desert', GameConstants.AchievementOption.less)]),
 });
 //Hoenn Towns
 TownList['Littleroot Town'] = new Town(
@@ -2971,9 +3065,10 @@ TownList['Outskirt Stand'] = new Town(
     'Outskirt Stand',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [],
+    [TemporaryBattleList.Willie],
     {
-        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), new DevelopmentRequirement()],
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), new QuestLineStartedRequirement('Shadows in the Desert')],
+        npcs: [ExploreStand],
     }
 );
 
@@ -2981,19 +3076,10 @@ TownList['Phenac City'] = new Town(
     'Phenac City',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new MoveToTown('Phenac Stadium'), new MoveToDungeon(dungeonList['Phenac City Battles'])],
+    [new MoveToDungeon(dungeonList['Phenac Stadium']), new MoveToDungeon(dungeonList['Phenac City Battles']), TemporaryBattleList.Folly],
     {
-        requirements: [new DevelopmentRequirement()],
-    }
-);
-
-TownList['Phenac Stadium'] = new Town(
-    'Phenac Stadium',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [new MoveToTown('Phenac City', undefined, false), new MoveToDungeon(dungeonList['Phenac Stadium Battles'])],
-    {
-        requirements: [new DevelopmentRequirement()],
+        requirements: [new QuestLineStepCompletedRequirement('Shadows in the Desert', 1)],
+        npcs: [Sack, EsCade1, Rui1],
     }
 );
 
@@ -3001,19 +3087,10 @@ TownList['Pyrite Town'] = new Town(
     'Pyrite Town',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new MoveToTown('Pyrite Colosseum'), new MoveToTown('The Under'), new MoveToDungeon(dungeonList['Pyrite Town Battles'])],
+    [new MoveToTown('Pyrite Colosseum'), new MoveToDungeon(dungeonList['The Under']), new MoveToDungeon(dungeonList['Pyrite Town Battles']), new MoveToDungeon(dungeonList['Deep Colosseum']), new MoveToDungeon(dungeonList['Under Colosseum'])],
     {
-        requirements: [new DevelopmentRequirement()],
-    }
-);
-
-TownList['Pyrite Colosseum'] = new Town(
-    'Pyrite Colosseum',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [new MoveToTown('Pyrite Town', undefined, false), new MoveToDungeon(dungeonList['Pyrite Colosseum Battles'])],
-    {
-        requirements: [new DevelopmentRequirement()],
+        requirements: [new QuestLineStepCompletedRequirement('Shadows in the Desert', 6)],
+        npcs: [Duking1],
     }
 );
 
@@ -3021,9 +3098,9 @@ TownList['Agate Village'] = new Town(
     'Agate Village',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new MoveToTown('Relic Stone'), new MoveToDungeon(dungeonList['Relic Cave'])],
+    [new MoveToTown('Relic Stone'), new MoveToDungeon(dungeonList['Relic Cave']), TemporaryBattleList['Cipher Peon Doven'], TemporaryBattleList['Cipher Peon Silton'], TemporaryBattleList['Cipher Peon Kass']],
     {
-        requirements: [new DevelopmentRequirement()],
+        requirements: [new QuestLineStepCompletedRequirement('Shadows in the Desert', 14)],
     }
 );
 
@@ -3033,37 +3110,7 @@ TownList['Relic Stone'] = new Town(
     GameConstants.HoennSubRegions.Orre,
     [new MoveToTown('Agate Village', undefined, false), new MoveToDungeon(dungeonList['Relic Cave']), new PurifyChamberTownContent()],
     {
-        requirements: [new DevelopmentRequirement()],
-    }
-);
-
-TownList['Mt. Battle'] = new Town(
-    'Mt. Battle',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [new MoveToDungeon(dungeonList['Mt. Battle Battles'])],
-    {
-        requirements: [new DevelopmentRequirement()],
-    }
-);
-
-TownList['The Under'] = new Town(
-    'The Under',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [new MoveToTown('Pyrite Town', undefined, false), new MoveToTown('Under Colosseum'), new MoveToTown('Deep Colosseum'), new MoveToDungeon(dungeonList['The Under Subway'])],
-    {
-        requirements: [new DevelopmentRequirement()],
-    }
-);
-
-TownList['Cipher Lab'] = new Town(
-    'Cipher Lab',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [new MoveToDungeon(dungeonList['Cipher Lab Battles'])],
-    {
-        requirements: [new DevelopmentRequirement()],
+        requirements: [new QuestLineStepCompletedRequirement('Shadows in the Desert', 17)],
     }
 );
 
@@ -3071,59 +3118,10 @@ TownList['Realgam Tower'] = new Town(
     'Realgam Tower',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new MoveToTown('Realgam Colosseum'), new MoveToDungeon(dungeonList['Realgam Tower Battles'])],
+    [new MoveToDungeon(dungeonList['Realgam Tower Battles']), new MoveToDungeon(dungeonList['Realgam Colosseum'])],
     {
-        requirements: [new DevelopmentRequirement()],
-    }
-);
-
-TownList['Realgam Colosseum'] = new Town(
-    'Realgam Colosseum',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [new MoveToTown('Realgam Tower', undefined, false), new MoveToDungeon(dungeonList['Realgam Colosseum Battles'])],
-    {
-        requirements: [new DevelopmentRequirement()],
-    }
-);
-
-TownList['Eclo Canyon'] = new Town(
-    'Eclo Canyon',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [new MoveToDungeon(dungeonList['Snagem Hideout'])],
-    {
-        requirements: [new DevelopmentRequirement()],
-    }
-);
-
-TownList['Deep Colosseum'] = new Town(
-    'Deep Colosseum',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [new MoveToTown('The Under', undefined, false), new MoveToDungeon(dungeonList['Deep Colosseum Battles'])],
-    {
-        requirements: [new DevelopmentRequirement()],
-    }
-);
-
-TownList['Orre Colosseum'] = new Town(
-    'Orre Colosseum',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [new MoveToDungeon(dungeonList['Orre Colosseum Battles'])],
-    {
-        requirements: [new DevelopmentRequirement()],
-    }
-);
-
-TownList['Under Colosseum'] = new Town(
-    'Under Colosseum',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [new MoveToTown('The Under', undefined, false), new MoveToDungeon(dungeonList['Under Colosseum Battles'])],
-    {
-        requirements: [new DevelopmentRequirement()],
+        requirements: [new QuestLineStepCompletedRequirement('Shadows in the Desert', 22)],
+        npcs: [EsCade2],
     }
 );
 
@@ -3315,7 +3313,7 @@ TownList['Phenac City Battles'] = new DungeonTown(
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new DevelopmentRequirement(),
+        new QuestLineStepCompletedRequirement('Shadows in the Desert', 3),
     ]
 );
 TownList['Pyrite Town Battles'] = new DungeonTown(
@@ -3323,63 +3321,87 @@ TownList['Pyrite Town Battles'] = new DungeonTown(
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new DevelopmentRequirement(),
+        new QuestLineStepCompletedRequirement('Shadows in the Desert', 6),
     ]
 );
-TownList['Pyrite Colosseum Battles'] = new DungeonTown(
-    'Pyrite Colosseum Battles',
+TownList['Pyrite Colosseum'] = new DungeonTown(
+    'Pyrite Colosseum',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new DevelopmentRequirement(),
-    ]
+        new QuestLineStepCompletedRequirement('Shadows in the Desert', 8),
+    ],
+    [],
+    {
+        npcs: [Rui2],
+    }
 );
 TownList['Pyrite Building'] = new DungeonTown(
     'Pyrite Building',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new DevelopmentRequirement(),
-    ]
+        new QuestLineStepCompletedRequirement('Shadows in the Desert', 9),
+    ],
+    [],
+    {
+        npcs: [Doken1],
+    }
 );
 TownList['Pyrite Cave'] = new DungeonTown(
     'Pyrite Cave',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new DevelopmentRequirement(),
-    ]
+        new QuestLineStepCompletedRequirement('Shadows in the Desert', 11),
+    ],
+    [],
+    {
+        npcs: [FreePlusle],
+    }
 );
 TownList['Relic Cave'] = new DungeonTown(
     'Relic Cave',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new DevelopmentRequirement(),
-    ]
+        new QuestLineStepCompletedRequirement('Shadows in the Desert', 15),
+    ],
+    [],
+    {
+        npcs: [GrandpaEagun1],
+    }
 );
-TownList['Mt. Battle Battles'] = new DungeonTown(
-    'Mt. Battle Battles',
+TownList['Mt. Battle'] = new DungeonTown(
+    'Mt. Battle',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new DevelopmentRequirement(),
-    ]
+        new QuestLineStepCompletedRequirement('Shadows in the Desert', 17),
+    ],
+    [],
+    {
+        npcs: [Rui3],
+    }
 );
-TownList['The Under Subway'] = new DungeonTown(
-    'The Under Subway',
+TownList['The Under'] = new DungeonTown(
+    'The Under',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new DevelopmentRequirement(),
-    ]
+        new QuestLineStepCompletedRequirement('Shadows in the Desert', 19),
+    ],
+    [],
+    {
+        npcs: [SearchTheStudio],
+    }
 );
-TownList['Cipher Lab Battles'] = new DungeonTown(
-    'Cipher Lab Battles',
+TownList['Cipher Lab'] = new DungeonTown(
+    'Cipher Lab',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new DevelopmentRequirement(),
+        new QuestLineStepCompletedRequirement('Shadows in the Desert', 21),
     ]
 );
 TownList['Realgam Tower Battles'] = new DungeonTown(
@@ -3387,87 +3409,59 @@ TownList['Realgam Tower Battles'] = new DungeonTown(
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new DevelopmentRequirement(),
+        new QuestLineStepCompletedRequirement('Shadows in the Desert', 22),
     ]
 );
-TownList['Realgam Colosseum Battles'] = new DungeonTown(
-    'Realgam Colosseum Battles',
+TownList['Realgam Colosseum'] = new DungeonTown(
+    'Realgam Colosseum',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new DevelopmentRequirement(),
-    ]
+        new QuestLineStepCompletedRequirement('Shadows in the Desert', 23),
+    ],
+    [new MoveToTown('Realgam Tower')],
+    {
+        npcs: [EviceEscape],
+    }
 );
 TownList['Snagem Hideout'] = new DungeonTown(
     'Snagem Hideout',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new DevelopmentRequirement(),
+        new QuestLineCompletedRequirement('Shadows in the Desert'),
     ]
 );
-TownList['Deep Colosseum Battles'] = new DungeonTown(
-    'Deep Colosseum Battles',
+TownList['Deep Colosseum'] = new DungeonTown(
+    'Deep Colosseum',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new DevelopmentRequirement(),
+        new QuestLineCompletedRequirement('Shadows in the Desert'),
     ]
 );
-TownList['Phenac Stadium Battles'] = new DungeonTown(
-    'Phenac Stadium Battles',
+TownList['Phenac Stadium'] = new DungeonTown(
+    'Phenac Stadium',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new DevelopmentRequirement(),
+        new QuestLineCompletedRequirement('Shadows in the Desert'),
     ]
 );
-TownList['Under Colosseum Battles'] = new DungeonTown(
-    'Under Colosseum Battles',
+TownList['Under Colosseum'] = new DungeonTown(
+    'Under Colosseum',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new DevelopmentRequirement(),
+        new MultiRequirement([new DevelopmentRequirement(), new QuestLineCompletedRequirement('Shadows in the Desert')]),
     ]
 );
-TownList['Realgam Tower Battles'] = new DungeonTown(
-    'Realgam Tower Battles',
+TownList['Orre Colosseum'] = new DungeonTown(
+    'Orre Colosseum',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new DevelopmentRequirement(),
-    ]
-);
-TownList['Realgam Colosseum Battles'] = new DungeonTown(
-    'Realgam Colosseum Battles',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [
-        new DevelopmentRequirement(),
-    ]
-);
-TownList['Deep Colosseum Battles'] = new DungeonTown(
-    'Deep Colosseum Battles',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [
-        new DevelopmentRequirement(),
-    ]
-);
-TownList['Under Colosseum Battles'] = new DungeonTown(
-    'Under Colosseum Battles',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [
-        new DevelopmentRequirement(),
-    ]
-);
-TownList['Orre Colosseum Battles'] = new DungeonTown(
-    'Orre Colosseum Battles',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [
-        new DevelopmentRequirement(),
+        new MultiRequirement([new DevelopmentRequirement(), new QuestLineCompletedRequirement('Shadows in the Desert')]),
     ]
 );
 
@@ -5218,6 +5212,10 @@ const SnowbelleCityShop = new Shop([
     ItemList.Reaper_cloth,
 ]);
 
+//Hoenn Flute Master
+const FurfrouGemTrader = new GemMasterShop(GameConstants.GemShops.FurfrouGemTrader, 'Furfrou Gem Trader');
+const KalosStoneSalesman = new GemMasterShop(GameConstants.GemShops.KalosStoneSalesman, 'Stone Emporium', [new TemporaryBattleRequirement('Kalos Stone Salesman')], true);
+
 //Kalos NPCs
 
 const LumioseEngineer = new NPC('Engineer', [
@@ -5551,6 +5549,18 @@ const ThanksDiancie = new NPC('Princess Diancie', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Princess Diancie', 6), new QuestLineStepCompletedRequirement('Princess Diancie', 8, GameConstants.AchievementOption.less)]),
 });
 
+const KalosStoneSalesman1 = new NPC('Stone Salesman', [
+    'I\'m hunting for rare stones! If I find any extras, I\'ll sell you some!',
+], {
+    requirement: new TemporaryBattleRequirement('Kalos Stone Salesman', 1, GameConstants.AchievementOption.less),
+});
+
+const KalosStoneSalesman2 = new NPC('Stone Salesman', [
+    'I\'m selling some peculiar stones for gems at my new shop, the Stone Emporium. Let me know if anything there strikes your fancy!',
+], {
+    requirement: new TemporaryBattleRequirement('Kalos Stone Salesman'),
+});
+
 const VivillonPhotobook = new NPC('Vivillon Photobook', [
     '<i>Viola has sent some of her Vivillon photographs in to the local Pokémon Center as a photobook, to celebrate the Lunar New Year. You flip through the pages...</i>',
     '<img src="assets/images/npcs/textbody/VivillonPhotobookFancyMeadow.png" style="max-width:100%; height:auto"/>',
@@ -5640,10 +5650,10 @@ TownList['Lumiose City'] = new Town(
     'Lumiose City',
     GameConstants.Region.kalos,
     GameConstants.KalosSubRegions.Kalos,
-    [TemporaryBattleList['Sycamore 1'], TemporaryBattleList['Tierno 1'], DepartmentStoreShop, FriseurFurfrouShop, TemporaryBattleList['Team Flare Lysandre 1'], TemporaryBattleList['Team Flare Xerosic'], TemporaryBattleList['Storyline AZ'], TemporaryBattleList.AZ, TemporaryBattleList.Merilyn, TemporaryBattleList['Grand Duchess Diantha']],
+    [TemporaryBattleList['Sycamore 1'], TemporaryBattleList['Tierno 1'], DepartmentStoreShop, FriseurFurfrouShop, KalosStoneSalesman, TemporaryBattleList['Team Flare Lysandre 1'], TemporaryBattleList['Team Flare Xerosic'], TemporaryBattleList['Storyline AZ'], TemporaryBattleList.AZ, TemporaryBattleList.Merilyn, TemporaryBattleList['Grand Duchess Diantha'], TemporaryBattleList['Kalos Stone Salesman']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 4)],
-        npcs: [ProfSycamore, LumioseDexio, LumioseEngineer, Lysandre1, Calem1, Lysandre3, Lysandre4, AZ1, BlueButton, RedButton],
+        npcs: [ProfSycamore, LumioseDexio, LumioseEngineer, Lysandre1, Calem1, Lysandre3, Lysandre4, AZ1, BlueButton, RedButton, KalosStoneSalesman1, KalosStoneSalesman2],
     }
 );
 TownList['Camphrier Town'] = new Town(
@@ -5660,7 +5670,7 @@ TownList['Parfum Palace'] = new Town(
     'Parfum Palace',
     GameConstants.Region.kalos,
     GameConstants.KalosSubRegions.Kalos,
-    [new ShardTraderShop(GameConstants.ShardTraderLocations['Parfum Palace'], 'Furfrou Shard Trader', true), new GemMasterShop(GameConstants.GemShops.FurfrouGemTrader, 'Furfrou Gem Trader')],
+    [new ShardTraderShop(GameConstants.ShardTraderLocations['Parfum Palace'], 'Furfrou Shard Trader', true), FurfrouGemTrader],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 6)],
     }
@@ -6804,6 +6814,7 @@ const MotostokeShop = new Shop([
 const HammerlockeShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
+    ItemList.Event_calendar,
     ItemList.Dragon_egg,
     ItemList.Metal_coat,
     ItemList.Upgrade,

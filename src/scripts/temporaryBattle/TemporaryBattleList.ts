@@ -892,6 +892,77 @@ TemporaryBattleList.Latios = new TemporaryBattle(
         hideTrainer: true,
     }
 );
+TemporaryBattleList.Willie = new TemporaryBattle(
+    'Willie',
+    [
+        new GymPokemon('Zigzagoon', 6900000, 24),
+        new GymPokemon('Zigzagoon', 6900000, 24),
+    ],
+    'Whew! With skills like that, y\'all should head to Phenac City.',
+    [new QuestLineStepCompletedRequirement('Shadows in the Desert', 0)],
+    undefined,
+    {
+        displayName: 'Willie',
+        imageName: 'Rider (male)',
+    }
+);
+TemporaryBattleList.Folly = new TemporaryBattle(
+    'Folly',
+    [
+        new GymPokemon('Whismur', 6950000, 25),
+        new GymPokemon('Whismur', 6950000, 25),
+    ],
+    '<i>The shady guy flees, dropping a mysterious sack. The sack.... cries out in pain?</i>',
+    [new QuestLineStepCompletedRequirement('Shadows in the Desert', 1)],
+    undefined,
+    {
+        displayName: 'Folly',
+        imageName: 'Shady Guy (male)',
+    }
+);
+TemporaryBattleList['Cipher Peon Doven'] = new TemporaryBattle(
+    'Cipher Peon Doven',
+    [
+        new GymPokemon('Spheal', 7300000, 33),
+        new GymPokemon('Carvanha', 7300000, 34),
+    ],
+    'Rats! Foiled by some nobody!',
+    [new QuestLineStepCompletedRequirement('Shadows in the Desert', 14)],
+    undefined,
+    {
+        displayName: 'Cipher Peon Doven',
+        imageName: 'Cipher Peon (female)',
+    }
+);
+TemporaryBattleList['Cipher Peon Silton'] = new TemporaryBattle(
+    'Cipher Peon Silton',
+    [
+        new GymPokemon('Shroomish', 7300000, 34),
+        new GymPokemon('Cacnea', 7300000, 34),
+    ],
+    'Man! I was really having fun doing these crimes.',
+    [new QuestLineStepCompletedRequirement('Shadows in the Desert', 14)],
+    undefined,
+    {
+        displayName: 'Cipher Peon Silton',
+        imageName: 'Cipher Peon (male)',
+    }
+);
+TemporaryBattleList['Cipher Peon Kass'] = new TemporaryBattle(
+    'Cipher Peon Kass',
+    [
+        new GymPokemon('Baltoy', 4900000, 35),
+        new GymPokemon('Ralts', 4900000, 35),
+        new GymPokemon('Kirlia', 4900000, 35),
+    ],
+    'Run away!',
+    [new QuestLineStepCompletedRequirement('Shadows in the Desert', 14)],
+    undefined,
+    {
+        displayName: 'Cipher Peon Kass',
+        imageName: 'Cipher Peon (female)',
+    }
+);
 TemporaryBattleList['Sevii Rocket Grunt 1'] = new TemporaryBattle(
     'Sevii Rocket Grunt 1',
     [
@@ -2356,7 +2427,6 @@ TemporaryBattleList['Hoenn Stone Salesman'] = new TemporaryBattle(
     [new QuestLineStepCompletedRequirement('The Delta Episode', 5)],
     undefined,
     {
-        displayName: 'Hoenn Stone Salesman',
         imageName: 'Ruin Maniac gen3',
         firstTimeRewardFunction: () => {
             if ((App.game.party.alreadyCaughtPokemonByName('Sceptile') == true) && (player.regionStarters[GameConstants.Region.hoenn]() == GameConstants.Starter.Grass)) {
@@ -2377,6 +2447,52 @@ TemporaryBattleList['Hoenn Stone Salesman'] = new TemporaryBattle(
                 player.gainMegaStone(GameConstants.MegaStoneType.Swampertite);
                 Notifier.notify({
                     message: 'You were awarded Swampertite!',
+                    type: NotificationConstants.NotificationOption.success,
+                    setting: NotificationConstants.NotificationSetting.Dungeons.rare_dungeon_item_found,
+                });
+            } else {
+                BagHandler.gainItem({type: ItemType.item, id: 'Key_stone'}, 1);
+                Notifier.notify({
+                    message: 'You were awarded a Key Stone!',
+                    type: NotificationConstants.NotificationOption.success,
+                    setting: NotificationConstants.NotificationSetting.Dungeons.rare_dungeon_item_found,
+                });
+            }
+        },
+    }
+);
+TemporaryBattleList['Kalos Stone Salesman'] = new TemporaryBattle(
+    'Kalos Stone Salesman',
+    [
+        new GymPokemon('Mega Venusaur', 54478245, 63),
+        new GymPokemon('Mega Charizard X', 54478245, 63),
+        new GymPokemon('Mega Charizard Y', 54478245, 63),
+        new GymPokemon('Mega Blastoise', 54478245, 63),
+    ],
+    'Wow! I\'ll let you buy some of my super fancy stones, now that I know you\'re a serious trainer!',
+    [new QuestLineStepCompletedRequirement('A Beautiful World', 12)],
+    undefined,
+    {
+        imageName: 'Owner',
+        firstTimeRewardFunction: () => {
+            if ((App.game.party.alreadyCaughtPokemonByName('Venusaur')) && (player.regionStarters[GameConstants.Region.kanto]() == GameConstants.Starter.Grass)) {
+                player.gainMegaStone(GameConstants.MegaStoneType.Venusaurite);
+                Notifier.notify({
+                    message: 'You were awarded Venusaurite!',
+                    type: NotificationConstants.NotificationOption.success,
+                    setting: NotificationConstants.NotificationSetting.Dungeons.rare_dungeon_item_found,
+                });
+            } else if ((App.game.party.alreadyCaughtPokemonByName('Charizard')) && (player.regionStarters[GameConstants.Region.kanto]() == GameConstants.Starter.Fire)) {
+                player.gainMegaStone(GameConstants.MegaStoneType.Charizardite_Y);
+                Notifier.notify({
+                    message: 'You were awarded Charizardite Y!',
+                    type: NotificationConstants.NotificationOption.success,
+                    setting: NotificationConstants.NotificationSetting.Dungeons.rare_dungeon_item_found,
+                });
+            } else if ((App.game.party.alreadyCaughtPokemonByName('Blastoise')) && (player.regionStarters[GameConstants.Region.kanto]() == GameConstants.Starter.Water)) {
+                player.gainMegaStone(GameConstants.MegaStoneType.Blastoisinite);
+                Notifier.notify({
+                    message: 'You were awarded Blastoisinite!',
                     type: NotificationConstants.NotificationOption.success,
                     setting: NotificationConstants.NotificationSetting.Dungeons.rare_dungeon_item_found,
                 });
@@ -3429,8 +3545,8 @@ TemporaryBattleList['Captain Sophocles'] = new TemporaryBattle(
 TemporaryBattleList['Kahuna Nanu'] = new TemporaryBattle(
     'Kahuna Nanu',
     [
-        new GymPokemon('Sableye', 90200640, 51),
-        new GymPokemon('Absol', 90200640, 51),
+        new GymPokemon('Sableye', 189973142, 51),
+        new GymPokemon('Absol', 189973142, 51),
         new GymPokemon('Alolan Persian', 198608284, 51),
     ],
     'Heh... You got me good, kid. Hope I don\'t get in trouble with the girl for this. You should go tell that young filly Mina that you\'re done with what she asked you to do.',

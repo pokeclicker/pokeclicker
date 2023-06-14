@@ -26,6 +26,7 @@ export const MUTATION_TICK = 1 * SECOND;
 export const WANDER_TICK = 1.5 * SECOND;
 export const TEMP_BATTLE_TIME = 60 * SECOND;
 export const TEMP_BATTLE_TICK = 0.1 * SECOND;
+export const SPECIAL_EVENT_TICK = 1 * SECOND;
 
 // Update the requirement for "Final Region Town" in TownList, when adding new regions.
 // Else the professor NPC won't work.
@@ -219,6 +220,7 @@ export enum AchievementType {
     'Hatchery',
     'Farming',
     'Underground',
+    'Safari',
     'Battle Frontier',
     'Vitamins',
     'Pokerus',
@@ -282,7 +284,7 @@ const questBase = 1; // change this to scale all quest points
 // Currency → QP reward amounts
 export const GAIN_MONEY_BASE_REWARD = questBase * 0.0017;
 export const GAIN_TOKENS_BASE_REWARD = GAIN_MONEY_BASE_REWARD * 55;
-export const GAIN_FARM_POINTS_BASE_REWARD = GAIN_MONEY_BASE_REWARD * 90;
+export const GAIN_FARM_POINTS_BASE_REWARD = GAIN_MONEY_BASE_REWARD * 360;
 
 export const HATCH_EGGS_BASE_REWARD = questBase * 33;
 export const SHINY_BASE_REWARD = questBase * 3000;
@@ -320,6 +322,7 @@ export const REPEATBALL_EP_MODIFIER = 5;
 export const DUNGEON_EP_MODIFIER = 3;
 export const DUNGEON_BOSS_EP_MODIFIER = 10;
 export const ROAMER_EP_MODIFIER = 50;
+export const SHADOW_EP_MODIFIER = 2;
 
 export const EP_EV_RATIO = 1000;
 export const EP_CHALLENGE_MODIFIER = 10;
@@ -1238,20 +1241,20 @@ export const HoennDungeons = [
     'Near Space',
     'Phenac City Battles',
     'Pyrite Town Battles',
-    'Pyrite Colosseum Battles',
+    'Pyrite Colosseum',
     'Pyrite Building',
     'Pyrite Cave',
     'Relic Cave',
-    'Mt. Battle Battles',
-    'The Under Subway',
-    'Cipher Lab Battles',
+    'Mt. Battle',
+    'The Under',
+    'Cipher Lab',
     'Realgam Tower Battles',
-    'Realgam Colosseum Battles',
+    'Realgam Colosseum',
     'Snagem Hideout',
-    'Deep Colosseum Battles',
-    'Phenac Stadium Battles',
-    'Under Colosseum Battles',
-    'Orre Colosseum Battles', // 72
+    'Deep Colosseum',
+    'Phenac Stadium',
+    'Under Colosseum',
+    'Orre Colosseum', // 72
     // These aren't implemented anywhere yet
     /*
     "Island Cave",
@@ -1534,6 +1537,11 @@ export const TemporaryBattles = [
     'Meta Groudon',
     'Latios',
     'Latias',
+    'Willie',
+    'Folly',
+    'Cipher Peon Doven',
+    'Cipher Peon Silton',
+    'Cipher Peon Kass',
     'Sevii Rocket Grunt 1',
     'Sevii Rocket Grunt 2',
     'Sevii Rocket Grunt 3',
@@ -1628,6 +1636,7 @@ export const TemporaryBattles = [
     'Matt 3',
     'Courtney 3',
     'Hoenn Stone Salesman',
+    'Kalos Stone Salesman',
     'Captain Stern',
     'Archie Primal',
     'Maxie Primal',
@@ -2084,5 +2093,24 @@ export enum GemShops {
     HoennStoneSalesman,
     UnovaFluteMaster,
     FurfrouGemTrader,
+    KalosStoneSalesman,
     MagikarpJumpGemTrader,
 }
+
+export enum DungeonInteractionSource {
+    Click,
+    Keybind,
+    HeldKeybind,
+}
+
+export const ModalCollapseList = [
+    'achievementTrackerBody',
+    'battleItemContainerBody',
+    'dailyQuestDisplayBody',
+    'eggList',
+    'fluteItemContainerBody',
+    'oakItemsBody',
+    'pokeballSelectorBody',
+    'pokemonListBody',
+    'shortcutsBody',
+];
