@@ -11,7 +11,7 @@ class PokemonItem extends CaughtIndicatingItem {
         displayName: string = undefined,
         options?: ShopOptions,
         name: string = pokemon) {
-        super(name, basePrice, currency, { maxAmount: 1, ...options }, undefined, `Add ${pokemon} to your party.`, 'pokemonItem');
+        super(name, basePrice, currency, options, undefined, `Add ${pokemon} to your party.`, 'pokemonItem');
         this.type = pokemon;
         this._translatedOrDisplayName = ko.pureComputed(() => displayName ?? PokemonHelper.displayName(pokemon)());
     }
