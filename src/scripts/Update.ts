@@ -2131,6 +2131,37 @@ class Update implements Saveable {
                 Update.startQuestLine(saveData, 'A Beautiful World');
             }
 
+            // Move pokeball selections onto new filters
+            saveData.pokeballFilters = {
+                list: [
+                    {
+                        name: 'Caught',
+                        options: { caught: true },
+                        ball: saveData.pokeballs?.alreadyCaughtSelection ?? GameConstants.Pokeball.None,
+                    },
+                    {
+                        name: 'Contagious',
+                        options: { pokerus: GameConstants.Pokerus.Contagious },
+                        ball: saveData.pokeballs?.alreadyCaughtContagiousSelection ?? GameConstants.Pokeball.None,
+                    },
+                    {
+                        name: 'Caught Shiny',
+                        options: { shiny: true, caughtShiny: true },
+                        ball: saveData.pokeballs?.alreadyCaughtShinySelection ?? GameConstants.Pokeball.Pokeball,
+                    },
+                    {
+                        name: 'New',
+                        options: { caught: false },
+                        ball: saveData.pokeballs?.notCaughtSelection ?? GameConstants.Pokeball.Pokeball,
+                    },
+                    {
+                        name: 'New Shiny',
+                        options: { shiny: true, caughtShiny: false },
+                        ball: saveData.pokeballs?.notCaughtShinySelection ?? GameConstants.Pokeball.Pokeball,
+                    },
+                ],
+            };
+
             // Add Hisui Gyms
             saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 114);
             saveData.statistics.gymsDefeated = Update.moveIndex(saveData.statistics.gymsDefeated, 115);
@@ -2195,6 +2226,25 @@ class Update implements Saveable {
                 delete p[14]; // megaStone
             });
         },
+
+        '0.10.12': ({ playerData, saveData, settingsData }) => {
+            // Rename Unova's Quest for the DNA Splicers questline
+            saveData.quests.questLines.forEach(v => {
+                if (v.name === 'Quest for the DNA Splicers') {
+                    v.name = 'Hollow Truth and Ideals';
+                }
+            });
+
+            //Colosseum battles
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 48);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 49);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 50);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 51);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 52);
+
+            //Kalos Stone Salesman battle
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 147);
+        },
     };
 
     constructor() {
@@ -2258,12 +2308,12 @@ class Update implements Saveable {
 
         const button = document.createElement('a');
         try {
-            button.href = `data:text/plain;charset=utf-8,${encodeURIComponent(btoa(backupSaveData))}`;
+            button.href = `data:text/plain;charset=utf-8,${encodeURIComponent(SaveSelector.btoa(backupSaveData))}`;
             button.className = 'btn btn-block btn-warning';
             button.innerText = 'Click to Backup Save!';
-            const filename = settingsData.saveFilename ? decodeURI(settingsData.saveFilename) : Settings.getSetting('saveFilename').defaultValue;
+            const filename = settingsData.saveFilename || Settings.getSetting('saveFilename').defaultValue;
             const datestr = GameConstants.formatDate(new Date());
-            button.setAttribute('download', GameHelper.saveFileName(filename, {'{date}' : datestr, '{version}' : this.saveVersion, '{name}' : decodeURI(saveData.profile.name)}, true));
+            button.setAttribute('download', GameHelper.saveFileName(filename, {'{date}' : datestr, '{version}' : this.saveVersion, '{name}' : saveData.profile.name}, true));
         } catch (e) {
             console.error('Failed to create backup button data:', e);
         }

@@ -181,7 +181,7 @@ class AchievementHandler {
         const categories = GameHelper.enumStrings(GameConstants.Region).filter(r => r != 'none' && r != 'final').map(r => new AchievementCategory(r, 100, () => player.highestRegion() >= GameConstants.Region[r]));
         categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.global], 150, () => true));
         categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.sevii], 50, () => SubRegions.isSubRegionUnlocked(GameConstants.Region.kanto, GameConstants.KantoSubRegions.Sevii123)));
-        categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.orre], 50, () => SubRegions.isSubRegionUnlocked(GameConstants.Region.hoenn, GameConstants.HoennSubRegions.Orre)));
+        categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.orre], 75, () => SubRegions.isSubRegionUnlocked(GameConstants.Region.hoenn, GameConstants.HoennSubRegions.Orre)));
         categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.magikarpJump], 25, () => SubRegions.isSubRegionUnlocked(GameConstants.Region.alola, GameConstants.AlolaSubRegions.MagikarpJump)));
 
         AchievementHandler._achievementCategories = categories;
@@ -401,6 +401,12 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Priest in Training', 'Purify 50 unique Shadow Pokémon', new ShadowPokemonRequirement(50, GameConstants.ShadowStatus.Purified), 6, GameConstants.ExtraAchievementCategories.orre);
         AchievementHandler.addAchievement('Hand of Light', 'Purify all 131 unique Shadow Pokémon', new ShadowPokemonRequirement(131, GameConstants.ShadowStatus.Purified), 12, GameConstants.ExtraAchievementCategories.orre);
 
+        AchievementHandler.addAchievement('Who dropped these here?', 'Pick up 10 Items in a Safari Zone', new SafariItemsRequirement(10), 0.2);
+        AchievementHandler.addAchievement('This is not a Pokéball!', 'Throw 10 Rocks in a Safari Zone', new SafariRocksRequirement(10), 0.2);
+        AchievementHandler.addAchievement('Hope it likes berries', 'Throw 10 Bait in a Safari Zone', new SafariBaitRequirement(10), 0.2);
+        AchievementHandler.addAchievement('Gotta get your steps in!', 'Walk 100 Steps in a Safari Zone', new SafariStepsRequirement(100), 0.2);
+        AchievementHandler.addAchievement('Where Pinsir?', 'Reach Safari Level 5.', new SafariLevelRequirement(5), 0.2);
+
         /*
          * REGIONAL
          */
@@ -494,9 +500,9 @@ class AchievementHandler {
          */
         addGymAchievements(GameConstants.RegionGyms[GameConstants.Region.final], GameConstants.ExtraAchievementCategories.sevii, 'Sevii Islands');
         AchievementHandler.addAchievement('Sevii Trainer', 'Catch 15 unique Pokémon native to the Sevii Islands.', new SeviiCaughtRequirement(15, false), 3, GameConstants.ExtraAchievementCategories.sevii);
-        AchievementHandler.addAchievement('Sevii Master', 'Catch 35 unique Pokémon native to the Sevii Islands.', new SeviiCaughtRequirement(35, false), 6, GameConstants.ExtraAchievementCategories.sevii);
+        AchievementHandler.addAchievement('Sevii Master', 'Catch 34 unique Pokémon native to the Sevii Islands.', new SeviiCaughtRequirement(34, false), 6, GameConstants.ExtraAchievementCategories.sevii);
         AchievementHandler.addAchievement('Sevii Shiny Trainer', 'Catch 15 unique Shiny Pokémon native to the Sevii Islands.', new SeviiCaughtRequirement(15, true), 5, GameConstants.ExtraAchievementCategories.sevii);
-        AchievementHandler.addAchievement('Sevii Shiny Master', 'Catch 35 unique Shiny Pokémon native to the Sevii Islands.', new SeviiCaughtRequirement(35, true), 9, GameConstants.ExtraAchievementCategories.sevii);
+        AchievementHandler.addAchievement('Sevii Shiny Master', 'Catch 34 unique Shiny Pokémon native to the Sevii Islands.', new SeviiCaughtRequirement(34, true), 9, GameConstants.ExtraAchievementCategories.sevii);
 
         addGymAchievements(GameConstants.RegionGyms[GameConstants.Region.final + 1], GameConstants.ExtraAchievementCategories.magikarpJump, 'Magikarp Jump');
 
@@ -507,9 +513,10 @@ class AchievementHandler {
         // subscribe to filters so that when the player changes a filter it automatically refilters the list
         Object.keys(this.filter).forEach(e => (<KnockoutObservable<any>> this.filter[e]).subscribe(() => this.filterAchievementList()));
 
-        multiplier.addBonus('exp', () => 1 + this.achievementBonus());
-        multiplier.addBonus('money', () => 1 + this.achievementBonus());
-        multiplier.addBonus('dungeonToken', () => 1 + this.achievementBonus());
+        const multiplierSource = 'Achievements';
+        multiplier.addBonus('exp', () => 1 + this.achievementBonus(), multiplierSource);
+        multiplier.addBonus('money', () => 1 + this.achievementBonus(), multiplierSource);
+        multiplier.addBonus('dungeonToken', () => 1 + this.achievementBonus(), multiplierSource);
     }
 
     static load() {

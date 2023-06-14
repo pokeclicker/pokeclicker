@@ -15,6 +15,7 @@ import {
     DAY,
     ExtraAchievementCategories,
     camelCaseToString,
+    ModalCollapseList,
 } from '../GameConstants';
 import HotkeySetting from './HotkeySetting';
 import Language, { LanguageNames } from '../translation/Language';
@@ -206,7 +207,6 @@ Settings.add(new BooleanSetting('vitaminHideShinyPokemon', 'Hide shiny Pokémon'
 Settings.add(new Setting<string>('vitaminSearchFilter', 'Search', [], ''));
 Settings.add(new Setting<number>('vitaminRegionFilter', 'Region', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(Region)], -2));
 Settings.add(new Setting<number>('vitaminTypeFilter', 'Type', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None')], -2));
-Settings.add(new BooleanSetting('heldItemHideHoldingPokemon', 'Hide Pokémon holding an item', false));
 
 // Held Item Sorting
 const heldItemSortSettings = Object.keys(SortOptionConfigs).map((opt) => (
@@ -215,6 +215,10 @@ const heldItemSortSettings = Object.keys(SortOptionConfigs).map((opt) => (
 Settings.add(new Setting<number>('heldItemSort', 'Sort:', heldItemSortSettings, SortOptions.id));
 Settings.add(new BooleanSetting('heldItemSortDirection', 'reverse', false));
 Settings.add(new Setting<string>('heldItemSearchFilter', 'Search', [], ''));
+Settings.add(new Setting<number>('heldItemRegionFilter', 'Region', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(Region)], -2));
+Settings.add(new Setting<number>('heldItemTypeFilter', 'Type', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None')], -2));
+Settings.add(new BooleanSetting('heldItemHideHoldingPokemon', 'Hide Pokémon holding an item', false));
+Settings.add(new BooleanSetting('heldItemShowHoldingThisItem', 'Show only Pokémon holding this item', false));
 
 // Breeding Filters
 Object.keys(BreedingFilters).forEach((key) => {
@@ -329,6 +333,11 @@ Settings.add(new HotkeySetting('hotkey.shop.max', 'Select max amount', 'M'));
 Settings.add(new HotkeySetting('hotkey.shop.reset', 'Reset amount', 'R'));
 Settings.add(new HotkeySetting('hotkey.shop.increase', 'Increase amount', 'I'));
 
+Settings.add(new HotkeySetting('hotkey.safari.ball', 'Throw Ball', 'C'));
+Settings.add(new HotkeySetting('hotkey.safari.bait', 'Throw Bait', 'B'));
+Settings.add(new HotkeySetting('hotkey.safari.rock', 'Throw Rock', 'R'));
+Settings.add(new HotkeySetting('hotkey.safari.run', 'Run', 'F'));
+
 // Discord
 Settings.add(new BooleanSetting('discord-rp.enabled', 'Discord RP enabled', true));
 Settings.add(new Setting('discord-rp.line-1', 'Discord line 1 text', [], 'Shinies: {caught_shiny}/{caught} {sparkle}'));
@@ -383,3 +392,12 @@ Settings.add(new Setting<Language>('translation.language', 'Language (beta)', Se
 Object.keys(LogBookTypes).forEach((logBookType) => {
     Settings.add(new BooleanSetting(`logBook.${logBookType}`, logBookType, true));
 });
+
+Settings.add(new BooleanSetting('catchFilters.initialEnabled', 'New Catch Filters initially enabled', false));
+
+// Modal Collapsible Panels
+ModalCollapseList.forEach((collapse) => {
+    Settings.add(new BooleanSetting(`modalCollapse.${collapse}`, 'Modal Collapse', true));
+});
+
+

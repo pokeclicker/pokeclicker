@@ -163,6 +163,7 @@ const FourIslandShop = new Shop([
     ItemList.Ultraball,
     ItemList.xAttack,
     ItemList.Soothe_bell,
+    ItemList.Wonder_Chest,
 ]);
 const FiveIslandShop = new Shop([
     ItemList.Pokeball,
@@ -277,8 +278,8 @@ const ViridianCityOldMan1 = new NPC('Old Man', [
 });
 const ViridianCityOldMan2 = new NPC('Old Man', [
     'Ahh, I\'ve had my coffee now and I feel great!',
-    'You can use the Poké Ball Selector to select which type of Poké Ball to use on specific Pokémon based on caught status. The options, from left to right, are "Caught", "Caught Shiny", "New", "New Shiny".',
-    'For example, if you click on the empty ball below the word "Caught" and assign a Poké Ball, you will then start throwing Poké Balls at Pokémon you\'ve already caught before. This can be very useful if you need Dungeon Tokens.',
+    'You can use the Poké Ball Selector to select which type of Poké Ball to use on specific Pokémon based on caught status.',
+    'For example, if you click on the empty ball next to the word "Caught" and assign a Poké Ball, you will then start throwing Poké Balls at Pokémon you\'ve already caught before. This can be very useful if you need Dungeon Tokens.',
     'Here, let me show you how it works.',
     'I\'ll always be here to explain it again if you forget.',
 ], {
@@ -286,8 +287,8 @@ const ViridianCityOldMan2 = new NPC('Old Man', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Tutorial Quests', 4), new QuestLineStepCompletedRequirement('Tutorial Quests', 5, GameConstants.AchievementOption.less)]),
 });
 const ViridianCityOldMan3 = new NPC('Old Man', [
-    'You can use the Poké Ball Selector to select which type of Poké Ball to use on specific Pokémon based on caught status. The options, from left to right, are "Caught", "Caught Shiny", "New", "New Shiny".',
-    'For example, if you click on the empty ball below the word Caught and assign a Poké Ball, you will then start throwing Poké Balls at Pokémon you\'ve already caught before. This can be very useful if you need Dungeon Tokens.',
+    'You can use the Poké Ball Selector to select which type of Poké Ball to use on specific Pokémon based on caught status.',
+    'For example, if you click on the empty ball next to the word "Caught" and assign a Poké Ball, you will then start throwing Poké Balls at Pokémon you\'ve already caught before. This can be very useful if you need Dungeon Tokens.',
     'I\'ll always be here to explain it again if you forget.',
 ], {
     image: 'assets/images/npcs/Old Man.png',
@@ -480,6 +481,12 @@ const CinnabarIslandResearcher = new NPC('Researcher', [
     'They were trying to clone an ancient Pokémon in the mansion... I wonder if they succeeded.',
     'Apparently the ancient Pokémon escaped, and can be found roaming around Kanto!',
 ], {image: 'assets/images/npcs/Scientist (male).png'});
+
+const KantoFossilNpc = new NPC('Underground Expert', [
+    'That Explorer Kit is a must-have for any Fossil Fanatic! Why, it\'s how I found my very first Old Amber.',
+    'Hrm, yes! I see that gleam in your eye! It may look expensive now, but the treasures you\'ll find in the Underground are priceless! And what\'s more- with each new region you travel to, the more adept you will become at identifying new curios!',
+    'Speaking of, our very own Kanto is home to three: the Helix Fossil, Dome Fossil, and Old Amber! You can revive them via that Hatchery of yours!',
+], {image: 'assets/images/npcs/Ruin Maniac gen3.png'});
 
 const OneIslandCelio1 = new NPC ('Celio', [
     'Ah, yes. Welcome! Welcome! Almost didn\'t see you there. I\'m just so busy trying to get this darned thing to work. Once it\'s complete we can finally have a direct communications network between the Sevii Islands and Kanto!',
@@ -877,6 +884,15 @@ TownList['Fuchsia City'] = new Town(
         npcs: [FuchsiaKantoRoamerNPC, FuchsiaEusine],
     }
 );
+TownList['Safari Zone'] = new Town(
+    'Safari Zone',
+    GameConstants.Region.kanto,
+    GameConstants.KantoSubRegions.Kanto,
+    [new SafariTownContent()],
+    {
+        requirements: [new CustomRequirement(ko.pureComputed(() => +App.game.keyItems.hasKeyItem(KeyItemType.Safari_ticket)), 1, 'Obtain the Safari Ticket')],
+    }
+);
 TownList['Cinnabar Island'] = new Town(
     'Cinnabar Island',
     GameConstants.Region.kanto,
@@ -887,7 +903,7 @@ TownList['Cinnabar Island'] = new Town(
             new RouteKillRequirement(10, GameConstants.Region.kanto, 20),
             new RouteKillRequirement(10, GameConstants.Region.kanto, 21),
         ])],
-        npcs: [CinnabarIslandResearcher],
+        npcs: [KantoFossilNpc, CinnabarIslandResearcher],
     }
 );
 TownList['Indigo Plateau Kanto'] = new Town(
@@ -1917,6 +1933,7 @@ const RustboroCityShop = new Shop([
     ItemList.Pokeball,
     ItemList.xAttack,
     ItemList.Mystery_egg,
+    ItemList.Wonder_Chest,
 ]);
 const DewfordTownShop = new Shop([
     ItemList.Pokeball,
@@ -2050,7 +2067,8 @@ const HoennContestShop = new Shop([
 ], 'Contest Shop', [new DevelopmentRequirement()]);
 
 //Hoenn Flute Master
-const HoennFluteMaster = new GemMasterShop();
+const HoennFluteMaster = new GemMasterShop(GameConstants.GemShops.HoennFluteMaster);
+const HoennStoneSalesman = new GemMasterShop(GameConstants.GemShops.HoennStoneSalesman, 'Stone Salesman', [new TemporaryBattleRequirement('Hoenn Stone Salesman')], true);
 
 //Hoenn NPCs
 
@@ -2064,6 +2082,12 @@ const OldaleTrackingScientist = new NPC('Tracking Scientist', [
     'Hey trainer, look at these footprints! Huh, I’ve never seen footprints like these before… They look like they came from two different Pokémon, and I saw two blurs, one red and one blue, quickly fly away just as I exited the Pokémon Center.',
     'They were flying really fast, I bet Pokémon that fast will only challenge trainers who have proven they are as strong as Champion Wallace...',
 ]);
+
+const HoennFossilNpc = new NPC('Laid-Back Angler', [
+    'Every so often, I\'ll snag an old fossil from the seafloor. It weirds me out to think of all the Pokémon that used to crawl around the ocean so many years ago, but it also reminds me that life is fleeting and precious.',
+    'So far I\'ve found two that I relate to, a kind of flower-looking thing and a one that looks like a bug pincer.',
+    'I wonder what you\'ll feel the next time you find one.',
+], {image: 'assets/images/npcs/Fisherman.png'});
 
 const SlateportHoennRoamerNPC = new RoamerNPC('Reporter Gabby', [
     'Our sources indicate that roaming Pokémon are gathering on {ROUTE_NAME}!',
@@ -2207,6 +2231,14 @@ const ProfBirch = new ProfNPC('Prof. Birch',
     'That\'s another regional Pokédex completed! Fantastic.',
     'I really appreciate being able to see your outstanding progress, thank you! Sinnoh is next up.',
     'assets/images/npcs/Professor Birch.png');
+
+const CoolTrainerDillan = new NPC('Cool Trainer Dillan', [
+    'Hey newcomer! I see you are the Hoenn Champion. You must be an amazing Trainer!',
+    'At the Battle Frontier, you can test your skills against Trainers from all over the world.',
+    'Since some of these Trainers come from far away, you may see Pokémon that you might not be able to catch yet.',
+    'But don\'t worry, catching them all is only a matter of time. Just keep exploring and having fun and you\'ll encounter lots of different Pokémon, either in form, color, or even evolutions!',
+], {image: 'assets/images/npcs/Cooltrainer (male).png',
+});
 
 const SCEntrance = new NPC('Strange Markings', [
     '<i>These strange markings seem to spell something out. The nearby Braille Enthusiast may know more.</i>',
@@ -2584,7 +2616,7 @@ const HoennStoneSalesman1 = new NPC('Stone Salesman', [
 });
 
 const HoennStoneSalesman2 = new NPC('Stone Salesman', [
-    'The Gem Master in town is letting me sell stones at their shop. Let me know if anything there strikes your fancy!',
+    'I\'m selling some unusual stones for gems. Let me know if any of them strike your fancy!',
 ], {
     requirement: new TemporaryBattleRequirement('Hoenn Stone Salesman'),
 });
@@ -2613,10 +2645,10 @@ const PrimalMural2 = new NPC('Kyogre Mural', [
 const PrimalSteven = new NPC('Steven', [
     'Hello again, $playername$! I see you\'re interested in these murals as well? They seem to be about Groudon and Kyogre.',
     'So in the ancient world, their primal forms once held this much power…? The super-ancient Pokémon… What terrible strength… But this appearance here… It seems somehow different from Mega Evolution, but somehow related.',
-    '"If you don\'t mind me asking… Do you feel anything in particular when you look up at this wall? A primal world, lost thousands of years in the past… A Legendary Pokémon of tremendous power became humanity\'s greatest threat…',
-    'The terror aroused by that power is clear to see in this ancient artwork. you know who might know more about this? Captain Stern, a sailor who works for my father.',
+    'If you don\'t mind me asking… Do you feel anything in particular when you look up at this wall? A primal world, lost thousands of years in the past… A Legendary Pokémon of tremendous power became humanity\'s greatest threat…',
+    'The terror aroused by that power is clear to see in this ancient artwork. You know who might know more about this? Captain Stern, a sailor who works for my father.',
     'He\'s usually out to sea, but you can find him in Sea Mauville if the weather is too stormy to sail.',
-], {image: 'assets/images/gymLeaders/steven.png',
+], {image: 'assets/images/npcs/Steven.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Primal Reversion', 2), new QuestLineStepCompletedRequirement('Primal Reversion', 4, GameConstants.AchievementOption.less)]),
 });
 
@@ -2625,6 +2657,14 @@ const Stern1 = new NPC('Captain Stern', [
     'On the search for mysteries of the sea, eh? Well then I have one whale of a tale for you! But are yeh worthy?',
 ], {image: 'assets/images/npcs/Sailor.png',
     requirement: new MultiRequirement([new WeatherRequirement([WeatherType.Thunderstorm]), new QuestLineStepCompletedRequirement('Primal Reversion', 3), new QuestLineStepCompletedRequirement('Primal Reversion', 5, GameConstants.AchievementOption.less)]),
+});
+
+const SternSubstitute = new NPC('Deck Swabber', [
+    'Hoy thar, matey! What\'s that? You lookin\' for Cap\'n Stern, are ya? That ol\' Jack Tar! A loose cannon \'e is! You\'ll only see \'im ashore in a Thunderstorm. \'E\'ll say it\'s all due to protocol but the trut\' is lightnin\' scares \'im stem to stern! Didn\' \'ear that from me \'ough...',
+    '',
+    'If ya feel like meetin\' \'im, the fine folks at the Weather Insitute can tell you when the next storm\'s brewin\'.',
+], {image: 'assets/images/npcs/Janitor.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Primal Reversion', 3), new QuestLineStepCompletedRequirement('Primal Reversion', 5, GameConstants.AchievementOption.less)]),
 });
 
 const Stern2 = new NPC('Captain Stern', [
@@ -2683,6 +2723,100 @@ const ZinniaOrigin = new NPC('Zinnia', [
 ], {image: 'assets/images/npcs/Zinnia.png',
     requirement: new MultiRequirement([new QuestLineCompletedRequirement('The Delta Episode'), new QuestLineCompletedRequirement('Primal Reversion')]),
 });
+const ExploreStand = new NPC('Explore the Outskirt Stand', [
+    '<i>You look around the Outskirt Stand, and see two shady figures shuffling off into the horizon. As you move to get a closer look, some guy steps in your way.</i>',
+    'Hey! You\'re new around these parts, and I don\'t take too kindly to strangers!',
+    'You\'ll have to prove your worth, or my name ain\'t Willie!',
+], {image: 'assets/images/npcs/Rider (male).png',
+    requirement: new MultiRequirement([new QuestLineStartedRequirement('Shadows in the Desert'), new QuestLineStepCompletedRequirement('Shadows in the Desert', 1, GameConstants.AchievementOption.less)]),
+});
+const Sack = new NPC('Check the sack', [
+    '<i>You open the sack and a girl pops out!</i>',
+    'Thanks for letting me out! I thought I was done for!',
+    'My name is Rui, by the way. I\'m a psychic of sorts, on a mission to save Pokémon who have had their souls corrupted by some evil folks in Orre.',
+    'There\'s a few in this city that need help. Can you come with me though? I\'m worried more shady guys will show up.',
+    'I can point out which Pokémon have been corrupted, or turned into "Shadow Pokémon", and you can confiscate them from evildoers using your Pokéballs.',
+], {image: 'assets/images/npcs/Rui.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Shadows in the Desert', 2), new QuestLineStepCompletedRequirement('Shadows in the Desert', 4, GameConstants.AchievementOption.less)]),
+});
+const EsCade1 = new NPC('Mayor Es Cade', [
+    'Ah, you must be travelers! Welcome to Phenac City! I am Es Cade, the Mayor. Now, you wanted to see me. Is there something that I may be able to assist you with?',
+    'O-o-o-oh, my! Shadow Pokémon? And they attack people?! Now if that were true, that would be truly frightening. However, that is a little hard to believe.',
+    'I understand your concern, though. I will order an investigation at once.',
+    'I promise you, we will obtain useful information about those sinister Pokémon. While we do so, I heartily recommend that you visit our Stadium, the symbol of our civic pride!',
+], {image: 'assets/images/npcs/Es Cade.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Shadows in the Desert', 4), new QuestLineStepCompletedRequirement('Shadows in the Desert', 6, GameConstants.AchievementOption.less)]),
+});
+const Rui1 = new NPC('Rui', [
+    'There\'s something suspicious going on here, but I\'m not sure what our next move is here.',
+    'The Stadium here isn\'t even open yet, I think the Mayor was just trying to get rid of us.',
+    'Let\'s see if we can find out more in Pyrite Town.',
+], {image: 'assets/images/npcs/Rui.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Shadows in the Desert', 5), new QuestLineStepCompletedRequirement('Shadows in the Desert', 7, GameConstants.AchievementOption.less)]),
+});
+const Duking1 = new NPC('Duking', [
+    '<i>Sniff...</i>.',
+    'I\'m not crying, these are allergies. Shut up.',
+    'I just... Some really mean guys kidnapped my beloved Plusle. It really has me upset.',
+    'They told me that I had to let they have free reign in town, or there would be trouble. They\'re out at the Colosseum causing trouble.',
+], {image: 'assets/images/npcs/Duking.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Shadows in the Desert', 7), new QuestLineStepCompletedRequirement('Shadows in the Desert', 9, GameConstants.AchievementOption.less)]),
+});
+const Doken1 = new NPC('Doken', [
+    'Yow! You\'re too tough!',
+    'I know the Plusle you\'re looking for, it got taken by the infamous dance machine, Miror B.',
+    'You don\'t want to mess with him, I promise! Oh? You do?',
+    'Well, his hideout is in the Pyrite Cave. But you shouldn\'t go there.',
+], {image: 'assets/images/npcs/Hunter (male).png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Shadows in the Desert', 10), new QuestLineStepCompletedRequirement('Shadows in the Desert', 12, GameConstants.AchievementOption.less)]),
+});
+const FreePlusle = new NPC('Free Duking\'s Plusle', [
+    '<i>Miror B. flees, leaving Plusle behind. Plusle runs off in the direction of Pyrite Town.</i>',
+], {image: 'assets/images/pokemon/311.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Shadows in the Desert', 12), new QuestLineStepCompletedRequirement('Shadows in the Desert', 14, GameConstants.AchievementOption.less)]),
+});
+const Rui2 = new NPC('Rui', [
+    'You did a good thing, freeing that Plusle from those goons. I think they were all part of the evil organization I\'ve been hearing about: Team Cipher!',
+    'My grandfather might know more about them, he\'s a smart guy. Let\'s go see him in Agate Village!',
+], {image: 'assets/images/npcs/Rui.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Shadows in the Desert', 13), new QuestLineStepCompletedRequirement('Shadows in the Desert', 15, GameConstants.AchievementOption.less)]),
+});
+const GrandpaEagun1 = new NPC('Grandpa Eagun', [
+    'Rui! And you are? $playername$? Nice to meet you!',
+    'Thank you both for saving me from those goons. They were disrupting the beace and tranquility of this whole area.',
+    '$playername$, if you ever have troubled or downright evil Pokémon, take them to the nearby Relic Stone. Its power, combined with the power of friendship you share with your Pokémon, may purify their souls.',
+], {image: 'assets/images/npcs/Old Man.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Shadows in the Desert', 16), new QuestLineStepCompletedRequirement('Shadows in the Desert', 18, GameConstants.AchievementOption.less)]),
+});
+const Rui3 = new NPC('Rui', [
+    'Have you seen this crazy broadcast on TV?',
+    '<i>Rui shows you a TV broadcast coming out of a dark room underground, in which a beautiful woman is encouraging her minions to steal Pokémon.</i>',
+], {image: 'assets/images/npcs/Rui.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Shadows in the Desert', 18), new QuestLineStepCompletedRequirement('Shadows in the Desert', 20, GameConstants.AchievementOption.less)]),
+});
+const SearchTheStudio = new NPC('Search The Studio', [
+    '<i>Scripts litter Venus\'s desk, as well as other, more suspicious files addressing what trainers in town have which Pokémon. There are also several letters labeled  "Mayor\'s Office".</i>',
+    '<i>Rui calls to you from across the room:</i>',
+    'Hey $playername$! I found a button! I\'m gonna press it!',
+    '<i>An explosion rocks the room, revealing a tunnel out of a secret entrance. The scripts and letters are scattered all over the studio, making them impossible to sort out.</i>',
+],
+{requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Shadows in the Desert', 20), new QuestLineStepCompletedRequirement('Shadows in the Desert', 22, GameConstants.AchievementOption.less)])}
+);
+const EsCade2 = new NPC('Mayor Es Cade', [
+    'My, my. That certainly was a battle worth seeing. I must be honest with you. I never imaged that you would get this far.',
+    'Oh, dear me. Do you fail to understand still? You\'re such an innocent child. At times, I am the affable mayor of Phenac... And at others, I am the secret boss of the criminal syndicate Cipher!',
+    'I am Evice, and I shall rule the world!',
+    '<i>The Mayor changes before your eyes, taking on a much more sinister appearance.</i>',
+], {image: 'assets/images/npcs/Es Cade.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Shadows in the Desert', 23), new QuestLineStepCompletedRequirement('Shadows in the Desert', 25, GameConstants.AchievementOption.less)]),
+});
+const EviceEscape = new NPC('Watch Evice Escape', [
+    '<i>Before the helicopter can land, a fireball shoots across the sky, blowing it up!</i>',
+    '<i>A Ho-oh flies low, screeching a thanks to you for stopping the evil Team Cipher.</i>',
+    '</br><img src="assets/images/pokemon/250.png"/>',
+], {image: 'assets/images/npcs/other/EviceHelicopter.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Shadows in the Desert', 25), new QuestLineCompletedRequirement('Shadows in the Desert', GameConstants.AchievementOption.less)]),
+});
 //Hoenn Towns
 TownList['Littleroot Town'] = new Town(
     'Littleroot Town',
@@ -2730,6 +2864,7 @@ TownList['Dewford Town'] = new Town(
     [DewfordTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Dewford Town'])],
     {
         requirements: [new TemporaryBattleRequirement('May 2')],
+        npcs: [HoennFossilNpc],
     }
 );
 TownList['Slateport City'] = new Town(
@@ -2759,7 +2894,7 @@ TownList['Sea Mauville'] = new Town(
     [TemporaryBattleList['Delta Giovanni'], TemporaryBattleList['Captain Stern']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 109)],
-        npcs: [SeaMauvilleRocket1, SeaMauvilleRocket2, Stern1, Stern2, Stern3],
+        npcs: [SeaMauvilleRocket1, SeaMauvilleRocket2, Stern1, SternSubstitute, Stern2, Stern3],
     }
 );
 TownList['Verdanturf Town'] = new Town(
@@ -2784,7 +2919,7 @@ TownList['Fallarbor Town'] = new Town(
     'Fallarbor Town',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [FallarborTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Fallarbor Town']), HoennFluteMaster, TemporaryBattleList['Hoenn Stone Salesman']],
+    [FallarborTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Fallarbor Town']), HoennFluteMaster, HoennStoneSalesman, TemporaryBattleList['Hoenn Stone Salesman']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 113)],
         npcs: [FallarborProfessorCozmo, Cozmo1, HoennStoneSalesman1, HoennStoneSalesman2],
@@ -2838,7 +2973,7 @@ TownList['Lilycove City'] = new Town(
     'Lilycove City',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [DepartmentStoreShop, HoennContestShop],
+    [DepartmentStoreShop], // HoennContestShop
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 121)],
     }
@@ -2899,6 +3034,7 @@ TownList['Battle Frontier'] = new Town(
     [BattleFrontierShop, new BattleFrontierTownContent()],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
+        npcs: [CoolTrainerDillan],
     }
 );
 TownList['Pokémon League Hoenn'] = new Town(
@@ -2929,9 +3065,10 @@ TownList['Outskirt Stand'] = new Town(
     'Outskirt Stand',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [],
+    [TemporaryBattleList.Willie],
     {
-        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), new DevelopmentRequirement()],
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), new QuestLineStartedRequirement('Shadows in the Desert')],
+        npcs: [ExploreStand],
     }
 );
 
@@ -2939,19 +3076,10 @@ TownList['Phenac City'] = new Town(
     'Phenac City',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new MoveToTown('Phenac Stadium'), new MoveToDungeon(dungeonList['Phenac City Battles'])],
+    [new MoveToDungeon(dungeonList['Phenac Stadium']), new MoveToDungeon(dungeonList['Phenac City Battles']), TemporaryBattleList.Folly],
     {
-        requirements: [new DevelopmentRequirement()],
-    }
-);
-
-TownList['Phenac Stadium'] = new Town(
-    'Phenac Stadium',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [new MoveToTown('Phenac City', undefined, false), new MoveToDungeon(dungeonList['Phenac Stadium Battles'])],
-    {
-        requirements: [new DevelopmentRequirement()],
+        requirements: [new QuestLineStepCompletedRequirement('Shadows in the Desert', 1)],
+        npcs: [Sack, EsCade1, Rui1],
     }
 );
 
@@ -2959,19 +3087,10 @@ TownList['Pyrite Town'] = new Town(
     'Pyrite Town',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new MoveToTown('Pyrite Colosseum'), new MoveToTown('The Under'), new MoveToDungeon(dungeonList['Pyrite Town Battles'])],
+    [new MoveToTown('Pyrite Colosseum'), new MoveToDungeon(dungeonList['The Under']), new MoveToDungeon(dungeonList['Pyrite Town Battles']), new MoveToDungeon(dungeonList['Deep Colosseum']), new MoveToDungeon(dungeonList['Under Colosseum'])],
     {
-        requirements: [new DevelopmentRequirement()],
-    }
-);
-
-TownList['Pyrite Colosseum'] = new Town(
-    'Pyrite Colosseum',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [new MoveToTown('Pyrite Town', undefined, false), new MoveToDungeon(dungeonList['Pyrite Colosseum Battles'])],
-    {
-        requirements: [new DevelopmentRequirement()],
+        requirements: [new QuestLineStepCompletedRequirement('Shadows in the Desert', 6)],
+        npcs: [Duking1],
     }
 );
 
@@ -2979,9 +3098,9 @@ TownList['Agate Village'] = new Town(
     'Agate Village',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new MoveToTown('Relic Stone'), new MoveToDungeon(dungeonList['Relic Cave'])],
+    [new MoveToTown('Relic Stone'), new MoveToDungeon(dungeonList['Relic Cave']), TemporaryBattleList['Cipher Peon Doven'], TemporaryBattleList['Cipher Peon Silton'], TemporaryBattleList['Cipher Peon Kass']],
     {
-        requirements: [new DevelopmentRequirement()],
+        requirements: [new QuestLineStepCompletedRequirement('Shadows in the Desert', 14)],
     }
 );
 
@@ -2991,37 +3110,7 @@ TownList['Relic Stone'] = new Town(
     GameConstants.HoennSubRegions.Orre,
     [new MoveToTown('Agate Village', undefined, false), new MoveToDungeon(dungeonList['Relic Cave']), new PurifyChamberTownContent()],
     {
-        requirements: [new DevelopmentRequirement()],
-    }
-);
-
-TownList['Mt. Battle'] = new Town(
-    'Mt. Battle',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [new MoveToDungeon(dungeonList['Mt. Battle Battles'])],
-    {
-        requirements: [new DevelopmentRequirement()],
-    }
-);
-
-TownList['The Under'] = new Town(
-    'The Under',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [new MoveToTown('Pyrite Town', undefined, false), new MoveToTown('Under Colosseum'), new MoveToTown('Deep Colosseum'), new MoveToDungeon(dungeonList['The Under Subway'])],
-    {
-        requirements: [new DevelopmentRequirement()],
-    }
-);
-
-TownList['Cipher Lab'] = new Town(
-    'Cipher Lab',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [new MoveToDungeon(dungeonList['Cipher Lab Battles'])],
-    {
-        requirements: [new DevelopmentRequirement()],
+        requirements: [new QuestLineStepCompletedRequirement('Shadows in the Desert', 17)],
     }
 );
 
@@ -3029,59 +3118,10 @@ TownList['Realgam Tower'] = new Town(
     'Realgam Tower',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new MoveToTown('Realgam Colosseum'), new MoveToDungeon(dungeonList['Realgam Tower Battles'])],
+    [new MoveToDungeon(dungeonList['Realgam Tower Battles']), new MoveToDungeon(dungeonList['Realgam Colosseum'])],
     {
-        requirements: [new DevelopmentRequirement()],
-    }
-);
-
-TownList['Realgam Colosseum'] = new Town(
-    'Realgam Colosseum',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [new MoveToTown('Realgam Tower', undefined, false), new MoveToDungeon(dungeonList['Realgam Colosseum Battles'])],
-    {
-        requirements: [new DevelopmentRequirement()],
-    }
-);
-
-TownList['Eclo Canyon'] = new Town(
-    'Eclo Canyon',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [new MoveToDungeon(dungeonList['Snagem Hideout'])],
-    {
-        requirements: [new DevelopmentRequirement()],
-    }
-);
-
-TownList['Deep Colosseum'] = new Town(
-    'Deep Colosseum',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [new MoveToTown('The Under', undefined, false), new MoveToDungeon(dungeonList['Deep Colosseum Battles'])],
-    {
-        requirements: [new DevelopmentRequirement()],
-    }
-);
-
-TownList['Orre Colosseum'] = new Town(
-    'Orre Colosseum',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [new MoveToDungeon(dungeonList['Orre Colosseum Battles'])],
-    {
-        requirements: [new DevelopmentRequirement()],
-    }
-);
-
-TownList['Under Colosseum'] = new Town(
-    'Under Colosseum',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [new MoveToTown('The Under', undefined, false), new MoveToDungeon(dungeonList['Under Colosseum Battles'])],
-    {
-        requirements: [new DevelopmentRequirement()],
+        requirements: [new QuestLineStepCompletedRequirement('Shadows in the Desert', 22)],
+        npcs: [EsCade2],
     }
 );
 
@@ -3158,7 +3198,7 @@ TownList['Weather Institute'] = new DungeonTown(
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
     [new RouteKillRequirement(10, GameConstants.Region.hoenn, 119)],
-    [],
+    [new WeatherAppTownContent()],
     {
         npcs: [WeatherScan],
     }
@@ -3273,7 +3313,7 @@ TownList['Phenac City Battles'] = new DungeonTown(
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new DevelopmentRequirement(),
+        new QuestLineStepCompletedRequirement('Shadows in the Desert', 3),
     ]
 );
 TownList['Pyrite Town Battles'] = new DungeonTown(
@@ -3281,63 +3321,87 @@ TownList['Pyrite Town Battles'] = new DungeonTown(
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new DevelopmentRequirement(),
+        new QuestLineStepCompletedRequirement('Shadows in the Desert', 6),
     ]
 );
-TownList['Pyrite Colosseum Battles'] = new DungeonTown(
-    'Pyrite Colosseum Battles',
+TownList['Pyrite Colosseum'] = new DungeonTown(
+    'Pyrite Colosseum',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new DevelopmentRequirement(),
-    ]
+        new QuestLineStepCompletedRequirement('Shadows in the Desert', 8),
+    ],
+    [],
+    {
+        npcs: [Rui2],
+    }
 );
 TownList['Pyrite Building'] = new DungeonTown(
     'Pyrite Building',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new DevelopmentRequirement(),
-    ]
+        new QuestLineStepCompletedRequirement('Shadows in the Desert', 9),
+    ],
+    [],
+    {
+        npcs: [Doken1],
+    }
 );
 TownList['Pyrite Cave'] = new DungeonTown(
     'Pyrite Cave',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new DevelopmentRequirement(),
-    ]
+        new QuestLineStepCompletedRequirement('Shadows in the Desert', 11),
+    ],
+    [],
+    {
+        npcs: [FreePlusle],
+    }
 );
 TownList['Relic Cave'] = new DungeonTown(
     'Relic Cave',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new DevelopmentRequirement(),
-    ]
+        new QuestLineStepCompletedRequirement('Shadows in the Desert', 15),
+    ],
+    [],
+    {
+        npcs: [GrandpaEagun1],
+    }
 );
-TownList['Mt. Battle Battles'] = new DungeonTown(
-    'Mt. Battle Battles',
+TownList['Mt. Battle'] = new DungeonTown(
+    'Mt. Battle',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new DevelopmentRequirement(),
-    ]
+        new QuestLineStepCompletedRequirement('Shadows in the Desert', 17),
+    ],
+    [],
+    {
+        npcs: [Rui3],
+    }
 );
-TownList['The Under Subway'] = new DungeonTown(
-    'The Under Subway',
+TownList['The Under'] = new DungeonTown(
+    'The Under',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new DevelopmentRequirement(),
-    ]
+        new QuestLineStepCompletedRequirement('Shadows in the Desert', 19),
+    ],
+    [],
+    {
+        npcs: [SearchTheStudio],
+    }
 );
-TownList['Cipher Lab Battles'] = new DungeonTown(
-    'Cipher Lab Battles',
+TownList['Cipher Lab'] = new DungeonTown(
+    'Cipher Lab',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new DevelopmentRequirement(),
+        new QuestLineStepCompletedRequirement('Shadows in the Desert', 21),
     ]
 );
 TownList['Realgam Tower Battles'] = new DungeonTown(
@@ -3345,87 +3409,59 @@ TownList['Realgam Tower Battles'] = new DungeonTown(
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new DevelopmentRequirement(),
+        new QuestLineStepCompletedRequirement('Shadows in the Desert', 22),
     ]
 );
-TownList['Realgam Colosseum Battles'] = new DungeonTown(
-    'Realgam Colosseum Battles',
+TownList['Realgam Colosseum'] = new DungeonTown(
+    'Realgam Colosseum',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new DevelopmentRequirement(),
-    ]
+        new QuestLineStepCompletedRequirement('Shadows in the Desert', 23),
+    ],
+    [new MoveToTown('Realgam Tower')],
+    {
+        npcs: [EviceEscape],
+    }
 );
 TownList['Snagem Hideout'] = new DungeonTown(
     'Snagem Hideout',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new DevelopmentRequirement(),
+        new QuestLineCompletedRequirement('Shadows in the Desert'),
     ]
 );
-TownList['Deep Colosseum Battles'] = new DungeonTown(
-    'Deep Colosseum Battles',
+TownList['Deep Colosseum'] = new DungeonTown(
+    'Deep Colosseum',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new DevelopmentRequirement(),
+        new QuestLineCompletedRequirement('Shadows in the Desert'),
     ]
 );
-TownList['Phenac Stadium Battles'] = new DungeonTown(
-    'Phenac Stadium Battles',
+TownList['Phenac Stadium'] = new DungeonTown(
+    'Phenac Stadium',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new DevelopmentRequirement(),
+        new QuestLineCompletedRequirement('Shadows in the Desert'),
     ]
 );
-TownList['Under Colosseum Battles'] = new DungeonTown(
-    'Under Colosseum Battles',
+TownList['Under Colosseum'] = new DungeonTown(
+    'Under Colosseum',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new DevelopmentRequirement(),
+        new MultiRequirement([new DevelopmentRequirement(), new QuestLineCompletedRequirement('Shadows in the Desert')]),
     ]
 );
-TownList['Realgam Tower Battles'] = new DungeonTown(
-    'Realgam Tower Battles',
+TownList['Orre Colosseum'] = new DungeonTown(
+    'Orre Colosseum',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new DevelopmentRequirement(),
-    ]
-);
-TownList['Realgam Colosseum Battles'] = new DungeonTown(
-    'Realgam Colosseum Battles',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [
-        new DevelopmentRequirement(),
-    ]
-);
-TownList['Deep Colosseum Battles'] = new DungeonTown(
-    'Deep Colosseum Battles',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [
-        new DevelopmentRequirement(),
-    ]
-);
-TownList['Under Colosseum Battles'] = new DungeonTown(
-    'Under Colosseum Battles',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [
-        new DevelopmentRequirement(),
-    ]
-);
-TownList['Orre Colosseum Battles'] = new DungeonTown(
-    'Orre Colosseum Battles',
-    GameConstants.Region.hoenn,
-    GameConstants.HoennSubRegions.Orre,
-    [
-        new DevelopmentRequirement(),
+        new MultiRequirement([new DevelopmentRequirement(), new QuestLineCompletedRequirement('Shadows in the Desert')]),
     ]
 );
 
@@ -3442,6 +3478,7 @@ const JubilifeCityShop = new Shop([
     ItemList.Token_collector,
     ItemList.Lucky_egg,
     ItemList.Mystery_egg,
+    ItemList.Wonder_Chest,
 ]);
 const OreburghCityShop = new Shop([
     ItemList.Pokeball,
@@ -3581,6 +3618,12 @@ const SandgemBeachcomber = new NPC('Beachcomber', [
     'I think it went something like... "When the Prince of the Seas is born, all of his kin will come to this region to celebrate."',
     'Does that mean when this Prince comes, Pokémon like him will start roaming the region?',
 ]);
+
+const SinnohFossilNpc = new NPC('Gossiper', [
+    'Did you know?! The Gym Leaders of Canalave and Oreburgh are father and son! And what\'s more- there\'s a third person in the mix! Apparently he\'s such a dedicated digger he travelled all the way to Kanto to set up shop selling Explorer Kits! Talk about a family tradition!',
+    'Too bad there are only two new fossils in the Sinnoh region. If there was one more, maybe he could be a Gym Leader too!',
+    'What? Oh you didn\'t know? The ace Pokémon of Gym Leaders Byron and Roark are resurrected from fossils!',
+], {image: 'assets/images/npcs/Aroma Lady.png'});
 
 const FloaromaFlowerGirl = new NPC('Flower Girl', [
     'Something amazing just happened!',
@@ -3933,7 +3976,7 @@ TownList['Jubilife City'] = new Town(
     [JubilifeCityShop],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 202)],
-        npcs: [HappinyWitness1, HappinyWitness8],
+        npcs: [SinnohFossilNpc, HappinyWitness1, HappinyWitness8],
     }
 );
 TownList['Oreburgh City'] = new Town(
@@ -4306,6 +4349,8 @@ const FloccesyTownShop = new Shop([
     ItemList.xClick,
     ItemList.SmallRestore,
     ItemList.Mystery_egg,
+    ItemList.Wonder_Chest,
+    ItemList.Miracle_Chest,
 ]);
 const VirbankCityShop = new Shop([
     ItemList.Pokeball,
@@ -4436,7 +4481,7 @@ const AnvilleTownShop = new Shop([
 ]);
 
 //Unova Gem Master
-const UnovaFluteMaster = new GemMasterShop();
+const UnovaFluteMaster = new GemMasterShop(GameConstants.GemShops.UnovaFluteMaster);
 
 //Unova NPCs
 
@@ -4483,7 +4528,7 @@ const DriftveilZinzolin = new NPC('Zinzolin', [
     'Shadow Triad! Get them out of here!',
 ], {
     image: 'assets/images/npcs/Team Plasma (zinzolin).png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 6), new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 7, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 6), new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 7, GameConstants.AchievementOption.less)]),
 });
 
 const PlasmaGrunt3 = new NPC('Team Plasma Grunt', [
@@ -4567,6 +4612,12 @@ const VitaminRefundCode = new NPC('Pokémon Breeder', [
     'It will also only refund Vitamins you bought after hitting the price cap.',
 ]);
 
+const UnovaFossilNpc = new NPC('Friendly Waitress', [
+    'Hello! Would you like a seat indoors or on the patio? We have a lovely view of the museum, it used to double as a Gym you know! Business may have slowed down since the new Normal Gym moved to Aspertia, but our ex-Gym Leader Lenora is still at it with her husband restoring fossils!',
+    'Just last week they had an exhibit on a prehistoric bird and turtle! There was quite the crowd!',
+    '... Do you think they\'re hiring?',
+], {image: 'assets/images/npcs/Waitress.png'});
+
 //Unova Towns
 TownList['Aspertia City'] = new Town(
     'Aspertia City',
@@ -4605,7 +4656,7 @@ TownList['Castelia City'] = new Town(
     GameConstants.UnovaSubRegions.Unova,
     [CasteliaCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Castelia City']), new MoveToDungeon(dungeonList['Castelia Sewers'])],
     {
-        requirements: [new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 0)],
+        requirements: [new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 0)],
         npcs: [CasteliaMusician],
     }
 );
@@ -4617,7 +4668,7 @@ TownList['A Perfectly Ordinary Frigate'] = new Town(
     {
         requirements: [
             new GymBadgeRequirement(BadgeEnums.Insect),
-            new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 1),
+            new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 1),
             new TemporaryBattleRequirement('Team Plasma Grunt 1'),
         ],
         npcs: [PlasmaGrunt1],
@@ -4632,7 +4683,7 @@ TownList['Nimbasa City'] = new Town(
         requirements: [
             new RouteKillRequirement(10, GameConstants.Region.unova, 4),
             new TemporaryBattleRequirement('Colress 1'),
-            new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 2),
+            new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 2),
         ],
         npcs: [NimbasaExplorer],
     }
@@ -4647,7 +4698,7 @@ TownList['Driftveil City'] = new Town(
             new RouteKillRequirement(10, GameConstants.Region.unova, 5),
             new TemporaryBattleRequirement('Team Plasma Grunt 2'),
             new TemporaryBattleRequirement('Team Plasma Grunt 3'),
-            new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 4),
+            new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 4),
         ],
     }
 );
@@ -4659,7 +4710,7 @@ TownList['A Totally Unsuspicious Frigate'] = new Town(
     {
         requirements: [
             new GymBadgeRequirement(BadgeEnums.Quake),
-            new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 4),
+            new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 4),
         ],
         npcs: [PlasmaGrunt2, DriftveilZinzolin],
     }
@@ -4673,7 +4724,7 @@ TownList['Mistralton City'] = new Town(
         requirements: [
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Chargestone Cave')),
             new TemporaryBattleRequirement('Colress 2'),
-            new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 7),
+            new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 7),
         ],
     }
 );
@@ -4703,7 +4754,7 @@ TownList['Lacunosa Town'] = new Town(
     {
         requirements: [
             new RouteKillRequirement(10, GameConstants.Region.unova, 13),
-            new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 8),
+            new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 8),
         ],
     }
 );
@@ -4724,7 +4775,7 @@ TownList['Team Plasma Assault'] = new Town(
     {
         requirements: [
             new GymBadgeRequirement(BadgeEnums.Legend),
-            new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 11),
+            new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 11),
         ],
         npcs: [PlasmaGrunt3],
     }
@@ -4784,7 +4835,7 @@ TownList['Nacrene City'] = new Town(
     [NacreneCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Nacrene City'])],
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pinwheel Forest'))],
-        npcs: [VitaminRefundCode],
+        npcs: [VitaminRefundCode, UnovaFossilNpc],
     }
 );
 TownList['Striaton City'] = new Town(
@@ -4871,7 +4922,7 @@ TownList['Castelia Sewers'] = new DungeonTown(
     GameConstants.Region.unova,
     GameConstants.UnovaSubRegions.Unova,
     [
-        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 0),
+        new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 0),
     ]
 );
 TownList['Relic Passage'] = new DungeonTown(
@@ -4930,7 +4981,7 @@ TownList['Seaside Cave'] = new DungeonTown(
     [
         new RouteKillRequirement(10, GameConstants.Region.unova, 24),
         new TemporaryBattleRequirement('Plasma Shadow 1'),
-        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 14),
+        new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 14),
     ]
 );
 TownList['Plasma Frigate'] = new DungeonTown(
@@ -4940,14 +4991,18 @@ TownList['Plasma Frigate'] = new DungeonTown(
     [
         new OneFromManyRequirement([
             new MultiRequirement([
-                new RouteKillRequirement(10, GameConstants.Region.unova, 22),
                 new GymBadgeRequirement(BadgeEnums.Wave),
-                new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 14),
-                new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Plasma Frigate'), GameConstants.AchievementOption.less),
+                new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 14),
+                new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 15, GameConstants.AchievementOption.less),
             ]),
-            new QuestLineCompletedRequirement('Quest for the DNA Splicers'),
+            new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 16),
+            new QuestLineCompletedRequirement('Hollow Truth and Ideals'),
         ]),
-    ]
+    ],
+    [TemporaryBattleList['Colress 3'], TemporaryBattleList['Plasma Shadow 2'], TemporaryBattleList['Plasma Shadow 3'], TemporaryBattleList['Plasma Shadow 4']],
+    {
+        npcs: [GiantChasmColress, GiantChasmShadowTriad],
+    }
 );
 TownList['Giant Chasm'] = new DungeonTown(
     'Giant Chasm',
@@ -4955,12 +5010,9 @@ TownList['Giant Chasm'] = new DungeonTown(
     GameConstants.UnovaSubRegions.Unova,
     [
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Plasma Frigate')),
-        new QuestLineStepCompletedRequirement('Quest for the DNA Splicers', 15),
+        new QuestLineStepCompletedRequirement('Hollow Truth and Ideals', 15),
     ],
-    [TemporaryBattleList['Colress 3'], TemporaryBattleList['Plasma Shadow 2'], TemporaryBattleList['Plasma Shadow 3'], TemporaryBattleList['Plasma Shadow 4'], TemporaryBattleList['Ghetsis 1'], TemporaryBattleList['Ghetsis 2']],
-    {
-        npcs: [GiantChasmColress, GiantChasmShadowTriad],
-    }
+    [TemporaryBattleList['Ghetsis 1'], TemporaryBattleList['Ghetsis 2']]
 );
 TownList['Cave of Being'] = new DungeonTown(
     'Cave of Being',
@@ -5052,6 +5104,8 @@ const SantaluneCityShop = new Shop([
     ItemList.Token_collector,
     ItemList.Lucky_egg,
     ItemList.Mystery_egg,
+    ItemList.Wonder_Chest,
+    ItemList.Miracle_Chest,
 ]);
 const FriseurFurfrouShop = new Shop([
     ItemList['Furfrou (Debutante)'],
@@ -5158,6 +5212,10 @@ const SnowbelleCityShop = new Shop([
     ItemList.Reaper_cloth,
 ]);
 
+//Hoenn Flute Master
+const FurfrouGemTrader = new GemMasterShop(GameConstants.GemShops.FurfrouGemTrader, 'Furfrou Gem Trader');
+const KalosStoneSalesman = new GemMasterShop(GameConstants.GemShops.KalosStoneSalesman, 'Stone Emporium', [new TemporaryBattleRequirement('Kalos Stone Salesman')], true);
+
 //Kalos NPCs
 
 const LumioseEngineer = new NPC('Engineer', [
@@ -5175,9 +5233,9 @@ const LumioseDexio = new NPC('Dexio', [
 });
 
 const Lysandre1 = new NPC('Lysandre', [
-    'Oh! You\'ve already met professor Sycamore... How wonderful! That is a wonderful thing, indeed. You are one of the chosen ones.',
+    'Oh! You\'ve already met Professor Sycamore, how wonderful! That is a wonderful thing, indeed. You are one of the chosen ones.',
     'I am Lysandre. I\'ve tried to learn as much about Pokémon as I can to help build a brighter future. Professor Sycamore has taught me so much.',
-    'Now listen! It is vital that this world becomes a better place. And the people and Pokémon chosen to make the world better must work tirelessly to achieve this goal.',
+    'Now listen! It is vital that this world becomes a better place. The people and Pokémon chosen to make the world better must work tirelessly to achieve this goal.',
     'Well, I\'ll be off. Please give Professor Sycamore my best. My desire... it is for a more beautiful world!',
 ], {image: 'assets/images/npcs/Team Flare Lysandre.png',
     requirement: new MultiRequirement([new QuestLineStartedRequirement('A Beautiful World'), new QuestLineStepCompletedRequirement('A Beautiful World', 1, GameConstants.AchievementOption.less)]),
@@ -5186,7 +5244,7 @@ const Lysandre1 = new NPC('Lysandre', [
 const Calem1 = new NPC('Calem', [
     'Hi $playername$, I just saw Diantha, a really cool and pretty actress, talking with a funny looking guy with orange spiky hair.',
     'He was such a weirdo. He kept telling her how everything should be beautiful forever and how he would end the world in an instant so that beauty never fades.',
-    'Anyway, I\'m gonna continue forward, I\'ll wait for you in Ambrette Town.',
+    'Anyway, I\'m gonna continue forward. I\'ll wait for you in Ambrette Town.',
 ], {
     image: 'assets/images/npcs/Calem.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Beautiful World', 0), new QuestLineStepCompletedRequirement('A Beautiful World', 2, GameConstants.AchievementOption.less)]),
@@ -5204,6 +5262,44 @@ const Calem2 = new NPC('Calem', [
 ], {
     image: 'assets/images/npcs/Calem.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Beautiful World', 1), new QuestLineStepCompletedRequirement('A Beautiful World', 3, GameConstants.AchievementOption.less)]),
+});
+
+const KalosFossilNpc1 = new NPC('Honeymooner Gal', [
+    'I must find one! I simply must!',
+    'I sent my husband to buy tickets for the aquarium but it was all a ploy to get some alone time so I can find him a Pokémon fossil found only here in Kalos!',
+    'According to my brochure, there\'s a pretty cave past these cliffs that\'s filled with them! It says reviving a Jaw Fossil can give you a Tyrunt, the perfect anniversary gift for my sweetie pie!',
+    'I WILL find a Jaw Fossil! Nothing will get in the way of seeing my booboo\'s smile! Anything is possible with the power of love! And don\'t you forget that either!',
+], {
+    image: 'assets/images/npcs/Tourist (female).png',
+    requirement: new OneFromManyRequirement([
+        new ObtainedPokemonRequirement('Tyrunt', true),
+        new ObtainedPokemonRequirement('Amaura', true),
+    ]),
+});
+
+const KalosFossilNpc2 = new NPC('Honeymooner Guy', [
+    'I have to find one! I just have to!',
+    'I told my wife I was going buy tickets for the aquarium in the town back there but little did she know it was a white lie so I could search for a Pokémon fossil found only here in Kalos!',
+    'According to my travel guide, this cave is filled with them! It says reviving a Sail Fossil can nab you an Amaura, the perfect anniversary gift for my pumpkin!',
+    'I MUST find a Sail Fossil! Nothing will get in the way of making my sunshine happy! She\'s taught me that anything is possible with the power of love!',
+], {
+    image: 'assets/images/npcs/Tourist (male).png',
+    requirement: new OneFromManyRequirement([
+        new ObtainedPokemonRequirement('Tyrunt', true),
+        new ObtainedPokemonRequirement('Amaura', true),
+    ]),
+});
+
+const KalosFossilNpc3 = new NPC('Honeymooner Couple', [
+    'Oh, you\'ve found all the fossil Pokémon native to Kalos! We tried too, but our search ended in failure. No, that\'s not entirely true...!',
+    'We may not have found those fossils, but our real goal was making each other smile! No Pokémon can compare to the feeling of catching your loved one in the same secret act as you! To think we split up to surprise each other with a fossil when the real present is the time we spend together!',
+    'Safe travels, Trainer! And may the blessing of love follow you!',
+], {
+    image: 'assets/images/npcs/Honeymooners.png',
+    requirement: new MultiRequirement([
+        new ObtainedPokemonRequirement('Tyrunt'),
+        new ObtainedPokemonRequirement('Amaura'),
+    ]),
 });
 
 const FossilScientist = new NPC('Fossil Scientist', [
@@ -5405,7 +5501,7 @@ const TeamFlareLysandre1 = new NPC('Team Flare Lysandre', [
 const TeamFlareBossLysandre1 = new NPC('Team Flare Boss Lysandre', [
     'What a startling development! I never would\'ve thought you were really a chosen one!',
     'So THESE were the mighty Xerneas and Yveltal?! I expected more from Pokémon called legend! You desire help from people? YOU need help from a human?',
-    'For me, victory is using the ultimate weapon. In order to do that, I need to reclaim the Legendary Pokémon\'s power and send it to that weapon once again.',
+    'For me, victory is using the ultimate weapon. In order to do that, I need to reclaim the Legendary Pokémon\'s power and send that power to that weapon once again.',
     'I\'ll be taking the Legendary Pokémon back now! This time, I won\'t lose.',
 ], {image: 'assets/images/npcs/Team Flare Boss Lysandre.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('A Beautiful World', 31), new QuestLineStepCompletedRequirement('A Beautiful World', 33, GameConstants.AchievementOption.less)]),
@@ -5451,6 +5547,18 @@ const ThanksDiancie = new NPC('Princess Diancie', [
 ], {
     image: 'assets/images/pokemon/719.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Princess Diancie', 6), new QuestLineStepCompletedRequirement('Princess Diancie', 8, GameConstants.AchievementOption.less)]),
+});
+
+const KalosStoneSalesman1 = new NPC('Stone Salesman', [
+    'I\'m hunting for rare stones! If I find any extras, I\'ll sell you some!',
+], {
+    requirement: new TemporaryBattleRequirement('Kalos Stone Salesman', 1, GameConstants.AchievementOption.less),
+});
+
+const KalosStoneSalesman2 = new NPC('Stone Salesman', [
+    'I\'m selling some peculiar stones for gems at my new shop, the Stone Emporium. Let me know if anything there strikes your fancy!',
+], {
+    requirement: new TemporaryBattleRequirement('Kalos Stone Salesman'),
 });
 
 const VivillonPhotobook = new NPC('Vivillon Photobook', [
@@ -5542,10 +5650,10 @@ TownList['Lumiose City'] = new Town(
     'Lumiose City',
     GameConstants.Region.kalos,
     GameConstants.KalosSubRegions.Kalos,
-    [TemporaryBattleList['Sycamore 1'], TemporaryBattleList['Tierno 1'], DepartmentStoreShop, FriseurFurfrouShop, TemporaryBattleList['Team Flare Lysandre 1'], TemporaryBattleList['Team Flare Xerosic'], TemporaryBattleList['Storyline AZ'], TemporaryBattleList.AZ, TemporaryBattleList.Merilyn, TemporaryBattleList['Grand Duchess Diantha']],
+    [TemporaryBattleList['Sycamore 1'], TemporaryBattleList['Tierno 1'], DepartmentStoreShop, FriseurFurfrouShop, KalosStoneSalesman, TemporaryBattleList['Team Flare Lysandre 1'], TemporaryBattleList['Team Flare Xerosic'], TemporaryBattleList['Storyline AZ'], TemporaryBattleList.AZ, TemporaryBattleList.Merilyn, TemporaryBattleList['Grand Duchess Diantha'], TemporaryBattleList['Kalos Stone Salesman']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 4)],
-        npcs: [ProfSycamore, LumioseDexio, LumioseEngineer, Lysandre1, Calem1, Lysandre3, Lysandre4, AZ1, BlueButton, RedButton],
+        npcs: [ProfSycamore, LumioseDexio, LumioseEngineer, Lysandre1, Calem1, Lysandre3, Lysandre4, AZ1, BlueButton, RedButton, KalosStoneSalesman1, KalosStoneSalesman2],
     }
 );
 TownList['Camphrier Town'] = new Town(
@@ -5562,7 +5670,7 @@ TownList['Parfum Palace'] = new Town(
     'Parfum Palace',
     GameConstants.Region.kalos,
     GameConstants.KalosSubRegions.Kalos,
-    [new ShardTraderShop(GameConstants.ShardTraderLocations['Parfum Palace'], 'Furfrou Shard Trader', true), new GemMasterShop('Furfrou Gem Trader')],
+    [new ShardTraderShop(GameConstants.ShardTraderLocations['Parfum Palace'], 'Furfrou Shard Trader', true), FurfrouGemTrader],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 6)],
     }
@@ -5574,7 +5682,7 @@ TownList['Ambrette Town'] = new Town(
     [AmbretteTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Ambrette Town'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 8)],
-        npcs: [Calem2],
+        npcs: [KalosFossilNpc1, KalosFossilNpc3, Calem2],
     }
 );
 TownList['Cyllage City'] = new Town(
@@ -5718,7 +5826,7 @@ TownList['Glittering Cave'] = new DungeonTown(
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 9), new QuestLineStepCompletedRequirement('A Beautiful World', 2)],
     [TemporaryBattleList['Team Flare Grunt 1']],
     {
-        npcs: [FossilScientist],
+        npcs: [FossilScientist, KalosFossilNpc2],
     }
 );
 
@@ -5816,6 +5924,8 @@ const HauoliCityShop = new Shop([
     ItemList.Token_collector,
     ItemList.Lucky_egg,
     ItemList.Mystery_egg,
+    ItemList.Wonder_Chest,
+    ItemList.Miracle_Chest,
     ItemList.Shiny_stone,
     ItemList.Dusk_stone,
     ItemList.Dawn_stone,
@@ -5905,7 +6015,7 @@ const ATreeMaybeShop = new Shop([
 ]);
 
 // Magikarp Jump Shops
-const MagikarpJumpGemTrade = new GemMasterShop('Trade', [new GymBadgeRequirement(BadgeEnums.Heal_League)]);
+const MagikarpJumpGemTrade = new GemMasterShop(GameConstants.GemShops.MagikarpJumpGemTrader, 'Trade', [new GymBadgeRequirement(BadgeEnums.Heal_League)]);
 const MagikarpJumpShadySalesMan = new Shop([
     ItemList['Magikarp Blue Raindrops'],
     ItemList['Magikarp Saucy Violet'],
@@ -6013,6 +6123,7 @@ const RoadsideMotelAnabel1 = new NPC('Anabel', [
 const RoadsideMotelLooker2 = new NPC('Looker', [
     'Catching lots of Ultra Beasts? Oh you want to know more about Beast Balls!',
     'Beast Balls can only be used to catch Ultra Beasts. You can\'t even try to use them against normal Pokémon, and any other Poké Ball type won\'t work against Ultra Beasts.',
+    'To help you out, I\'ve added an "Ultra Beast" option to the Encounter Type Pokéball filter setting. You can use this to set up a filter just for Ultra Beasts. Don\'t forget to enable it and assign Beast Balls!',
 ], {
     image: 'assets/images/npcs/Looker.png',
     requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 2),
@@ -6671,6 +6782,8 @@ const PostwickShop = new Shop([
 const WedgehurstShop = new Shop([
     ItemList.Pokeball,
     ItemList.Mystery_egg,
+    ItemList.Wonder_Chest,
+    ItemList.Miracle_Chest,
 ]);
 const TurffieldShop = new Shop([
     ItemList.Pokeball,
@@ -6701,6 +6814,7 @@ const MotostokeShop = new Shop([
 const HammerlockeShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
+    ItemList.Event_calendar,
     ItemList.Dragon_egg,
     ItemList.Metal_coat,
     ItemList.Upgrade,
@@ -7218,6 +7332,11 @@ const CrownTundraRoamerNPC = new RoamerNPC('Freezington Mayor', [
     'If my eyes didn\'t deceive me, I saw a rare Pokémon at {ROUTE_NAME}. Go and see if you can find it if you\'re interested.',
 ], GameConstants.Region.galar, RoamingPokemonList.findGroup(GameConstants.Region.galar, GameConstants.GalarSubRegions.CrownTundra));
 
+const GalarFossilHiker = new NPC('Spelunker', [
+    'Wow! The Crown Tundra is filled with wild fossil Pokémon! I\'ve heard stories of these snowfields protecting the Pokémon living here, but this level of sanctuary is insane!',
+    'And what\'s really interesting is that they only show up to trainers who have already caught one of their species. Could it be they are aware enough to use that as an appraisal of trust?',
+], {image: 'assets/images/npcs/Hiker (Gen 8).png'});
+
 const CrownPeony1 = new NPC ('Peony', [
     'Hey, Chief! I was talking to the locals and they were talking about some ancient king Pokémon! They also mentioned a couple of horsey Pokémon that it was ultra-mega-close to. There\'s a statue of it outside and I\'ve heard this rock I\'ve been using as a pillow is part of it!',
     'Could you go and put it back on for me?',
@@ -7683,7 +7802,11 @@ TownList['Roaring-Sea Caves'] = new DungeonTown(
     'Roaring-Sea Caves',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.CrownTundra,
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 50)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 50)],
+    [],
+    {
+        npcs: [GalarFossilHiker],
+    }
 );
 TownList['Rock Peak Ruins'] = new DungeonTown(
     'Rock Peak Ruins',

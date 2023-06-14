@@ -31,7 +31,7 @@ class Quests implements Saveable {
         return this.questList().filter(quest => quest.isCompleted());
     });
     public currentQuests: KnockoutComputed<Array<Quest>> = ko.pureComputed(() => {
-        return this.questList().filter(quest => quest.inProgress() && !quest.claimed());
+        return this.questList().filter(quest => quest.inProgress());
     });
     public incompleteQuests: KnockoutComputed<Array<Quest>> =  ko.pureComputed(() => {
         return this.questList().filter(quest => !quest.isCompleted());
@@ -276,6 +276,12 @@ class Quests implements Saveable {
         const requiredForCurrent = this.levelToXP(current);
         const requiredForNext = this.levelToXP(current + 1);
         return 100 * (this.xp() - requiredForCurrent) / (requiredForNext - requiredForCurrent);
+    }
+
+    public questProgressTooltip() {
+        const level = this.level();
+        const xp = this.xp();
+        return {title : `${xp - this.levelToXP(level)} / ${this.levelToXP(level + 1) - this.levelToXP(level)}`, trigger : 'hover' };
     }
 
     public isDailyQuestsUnlocked() {

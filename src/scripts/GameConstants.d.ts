@@ -37,6 +37,7 @@ namespace GameConstants {
     declare const WANDER_TICK: number;
     declare const TEMP_BATTLE_TIME: number;
     declare const TEMP_BATTLE_TICK: number;
+    declare const SPECIAL_EVENT_TICK: number;
     declare const MAX_AVAILABLE_REGION: number;
     declare const MaxIDPerRegion: number[];
     declare const ITEM_USE_TIME: number;
@@ -99,6 +100,7 @@ namespace GameConstants {
         'Hatchery',
         'Farming',
         'Underground',
+        'Safari',
         'Battle Frontier',
         'Protein',
         'Pokerus',
@@ -129,6 +131,7 @@ namespace GameConstants {
     declare const GAIN_MONEY_BASE_REWARD: number;
     declare const HATCH_EGGS_BASE_REWARD: number;
     declare const SHINY_BASE_REWARD: number;
+    declare const SHADOW_BASE_REWARD: number;
     declare const DEFEAT_POKEMONS_BASE_REWARD: number;
     declare const CAPTURE_POKEMONS_BASE_REWARD: number;
     declare const GAIN_TOKENS_BASE_REWARD: number;
@@ -149,6 +152,7 @@ namespace GameConstants {
     declare const DUNGEON_EP_MODIFIER: number;
     declare const DUNGEON_BOSS_EP_MODIFIER: number;
     declare const ROAMER_EP_MODIFIER: number;
+    declare const SHADOW_EP_MODIFIER: number;
     declare const EP_EV_RATIO: number;
     declare const EP_CHALLENGE_MODIFIER: number;
     declare const GRISEOUS_ITEM_CHANCE: number;
@@ -157,6 +161,7 @@ namespace GameConstants {
     declare const RUST_ITEM_CHANCE: number;
     declare const MANE_ITEM_CHANCE: number;
     declare enum GameState {
+        loading,
         idle,
         paused,
         fighting,
@@ -399,9 +404,9 @@ namespace GameConstants {
         Purple,
         Indigo,
         Brown,
-        LiteBlue,
+        Light_Blue,
         Olive,
-        Flaxen,
+        Beige,
         Gray,
         White
     }
@@ -774,4 +779,18 @@ namespace GameConstants {
         Tyranitarite,
         Venusaurite,
     }
+    declare enum GemShops {
+        HoennFluteMaster,
+        HoennStoneSalesman,
+        UnovaFluteMaster,
+        FurfrouGemTrader,
+        KalosStoneSalesman,
+        MagikarpJumpGemTrader,
+    }
+    declare enum DungeonInteractionSource {
+        Click,
+        Keybind,
+        HeldKeybind,
+    }
+    declare const ModalCollapseList: string[];
 }

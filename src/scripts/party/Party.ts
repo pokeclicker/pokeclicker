@@ -54,7 +54,7 @@ class Party implements Feature {
     }
 
     gainPokemon(pokemon: PartyPokemon, suppressNotification = false) {
-        PokemonHelper.incrementPokemonStatistics(pokemon.id, GameConstants.PokemonStatisticsType.Captured, pokemon.shiny, pokemon.gender);
+        PokemonHelper.incrementPokemonStatistics(pokemon.id, GameConstants.PokemonStatisticsType.Captured, pokemon.shiny, pokemon.gender, pokemon.shadow);
 
         if (pokemon.shadow) {
             // Already caught (shadow)
@@ -95,6 +95,7 @@ class Party implements Feature {
             // Notify if not already caught
             Notifier.notify({
                 message: `✨ You have captured a shiny ${pokemon.displayName}! ✨`,
+                pokemonImage: PokemonHelper.getImage(pokemon.id, pokemon.shiny, pokemon.gender),
                 type: NotificationConstants.NotificationOption.warning,
                 sound: NotificationConstants.NotificationSound.General.new_catch,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
@@ -115,6 +116,7 @@ class Party implements Feature {
         if (!suppressNotification) {
             Notifier.notify({
                 message: `You have captured ${GameHelper.anOrA(pokemon.name)} ${pokemon.displayName}!`,
+                pokemonImage: PokemonHelper.getImage(pokemon.id, pokemon.shiny, pokemon.gender),
                 type: NotificationConstants.NotificationOption.success,
                 sound: NotificationConstants.NotificationSound.General.new_catch,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
@@ -136,13 +138,15 @@ class Party implements Feature {
         const multBonus = this.multiplier.getBonus('exp', true);
         const trainerBonus = trainer ? 1.5 : 1;
         const expTotal = Math.floor(exp * level * trainerBonus * multBonus / 9);
+        let expGained = 0;
 
         const maxLevel = App.game.badgeCase.maxLevel();
         for (const pokemon of this.caughtPokemon) {
             if (pokemon.level < maxLevel) {
-                pokemon.gainExp(expTotal);
+                expGained += pokemon.gainExp(expTotal);
             }
         }
+        App.game.purifyChamber.gainFlow(expGained);
     }
 
     /**
@@ -225,7 +229,7 @@ class Party implements Feature {
         return Math.min(1, Math.max(0.2, 0.1 + (highestRegion / 10)));
     }
 
-    public calculateEffortPoints(pokemon: PartyPokemon, shiny: boolean, number = GameConstants.BASE_EP_YIELD, ignore = false): number {
+    public calculateEffortPoints(pokemon: PartyPokemon, shiny: boolean, shadow: GameConstants.ShadowStatus, number = GameConstants.BASE_EP_YIELD, ignore = false): number {
         if (pokemon.pokerus < GameConstants.Pokerus.Contagious) {
             return 0;
         }
@@ -242,6 +246,10 @@ class Party implements Feature {
 
         if (shiny) {
             EPNum *= GameConstants.SHINY_EP_MODIFIER;
+        }
+
+        if (shadow == GameConstants.ShadowStatus.Shadow) {
+            EPNum *= GameConstants.SHADOW_EP_MODIFIER;
         }
 
         return Math.floor(EPNum);
