@@ -405,6 +405,7 @@ class AchievementHandler {
         AchievementHandler.addAchievement('This is not a Pokéball!', 'Throw 10 Rocks in a Safari Zone', new SafariRocksRequirement(10), 0.2);
         AchievementHandler.addAchievement('Hope it likes berries', 'Throw 10 Bait in a Safari Zone', new SafariBaitRequirement(10), 0.2);
         AchievementHandler.addAchievement('Gotta get your steps in!', 'Walk 100 Steps in a Safari Zone', new SafariStepsRequirement(100), 0.2);
+        AchievementHandler.addAchievement('Where Pinsir?', 'Reach Safari Level 5.', new SafariLevelRequirement(5), 0.2);
 
         /*
          * REGIONAL

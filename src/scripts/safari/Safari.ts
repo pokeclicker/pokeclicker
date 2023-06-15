@@ -25,16 +25,21 @@ class Safari {
             App.game.statistics.safariPokemonCaptured() * 50;
     });
     static safariLevel: KnockoutComputed<number> = ko.pureComputed(() => {
+        const xp = Safari.safariExp();
         for (let i = 1; i <= Safari.maxSafariLevel; i++) {
-            if (Safari.safariExp() < Safari.expRequiredForLevel(i)) {
+            if (xp < Safari.expRequiredForLevel(i)) {
                 return i - 1;
             }
         }
         return Safari.maxSafariLevel;
     });
     static percentToNextSafariLevel: KnockoutComputed<number> = ko.pureComputed(() => {
-        const expForNextLevel = Safari.expRequiredForLevel(Safari.safariLevel() + 1) - Safari.expRequiredForLevel(Safari.safariLevel());
-        const expThisLevel = Safari.safariExp() - Safari.expRequiredForLevel(Safari.safariLevel());
+        const level = Safari.safariLevel();
+        if (level === Safari.maxSafariLevel) {
+            return 100;
+        }
+        const expForNextLevel = Safari.expRequiredForLevel(level + 1) - Safari.expRequiredForLevel(level);
+        const expThisLevel = Safari.safariExp() - Safari.expRequiredForLevel(level);
         return expThisLevel / expForNextLevel * 100;
     });
 
@@ -163,8 +168,12 @@ class Safari {
     }
 
     public static openModal() {
-        App.game.gameState = GameConstants.GameState.safari;
-        $('#safariModal').modal({backdrop: 'static', keyboard: false});
+        if (Safari.inProgress() && Safari.activeRegion() !== player.region) {
+            this.safariReset();
+        } else {
+            App.game.gameState = GameConstants.GameState.safari;
+            $('#safariModal').modal({backdrop: 'static', keyboard: false});
+        }
     }
 
     public static startSafari() {
@@ -317,7 +326,7 @@ class Safari {
                     document.getElementById('sprite').classList.value = `walk${direction}`;
                 }
             });
-            App.game.breeding.progressEggs(1);
+            App.game.breeding.progressEggs(1 + Math.floor(Safari.safariLevel() / 10));
             this.spawnPokemonCheck();
             this.despawnPokemonCheck();
         } else {
@@ -342,7 +351,9 @@ class Safari {
     }
 
     public static spawnItemCheck() {
-        if (Rand.boolean()) {
+        const baseChance = 0.4;
+        const itemLevelModifier = (Safari.safariLevel() - 1) / 100;
+        if (Rand.chance(baseChance + itemLevelModifier)) {
             this.spawnRandomItem();
         }
     }
@@ -485,6 +496,17 @@ class Safari {
             });
         }
         return false;
+    }
+
+    static safariProgressTooltip() {
+        const tooltip = { trigger : 'hover', title : '' };
+        const level = Safari.safariLevel();
+        if (level == Safari.maxSafariLevel) {
+            tooltip.title = 'Max level reached';
+        } else {
+            tooltip.title = `${Safari.safariExp() - Safari.expRequiredForLevel(level)} / ${Safari.expRequiredForLevel(level + 1) - Safari.expRequiredForLevel(level)}`;
+        }
+        return tooltip;
     }
 
     private static expRequiredForLevel(level: number) {
