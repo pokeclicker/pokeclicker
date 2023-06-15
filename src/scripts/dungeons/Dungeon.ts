@@ -228,6 +228,35 @@ class Dungeon {
         return encounterInfo;
     }
 
+    public allAvailableShadowPokemon(): PokemonNameType[] {
+        const encounterInfo = [];
+        this.enemyList.forEach(enemy => {
+            if (enemy instanceof DungeonTrainer) {
+                if (enemy.options?.requirement?.isCompleted() === false) {
+                    return;
+                }
+                enemy.getTeam().forEach(pokemon => {
+                    if (pokemon.shadow == GameConstants.ShadowStatus.Shadow) {
+                        encounterInfo.push(pokemon.name);
+                    }
+                });
+            }
+        });
+        this.bossList.forEach(boss => {
+            if (boss instanceof DungeonTrainer) {
+                if (boss.options?.requirement?.isCompleted() === false) {
+                    return;
+                }
+                boss.getTeam().forEach(pokemon => {
+                    if (pokemon.shadow == GameConstants.ShadowStatus.Shadow) {
+                        encounterInfo.push(pokemon.name);
+                    }
+                });
+            }
+        });
+        return encounterInfo;
+    }
+
     public getCaughtMimics(): PokemonNameType[] {
         return this.mimicList.filter(p => App.game.party.alreadyCaughtPokemonByName(p));
     }
