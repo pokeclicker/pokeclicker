@@ -6,14 +6,6 @@
   img[src="assets/images/dungeons/boss.svg"] {
     filter: invert(1) brightness(90%);
   }
-  // for the list of berries in the berrydex
-  .berryDexEntry {
-    --berryBG: var(--light);
-
-    span {
-      color:var(--dark);
-    }
-  }
 }
 
 /* Dark themes */
@@ -27,20 +19,6 @@
   .dungeon-pokemon-locked {
     filter: brightness(0%) invert(100%);
     opacity: 0.3;
-  }
-
-  // prevent text from blending in with background
-  .berryDexEntry {
-    --berryBG: rgba(211, 211, 211, 20%);
-    
-    span {
-      font-weight: normal;
-      color:whitesmoke;
-    }
-  }
-
-  .berryDexEntrySelected {
-    --berryBG: var(--dark);
   }
 
   code {
@@ -57,35 +35,11 @@
   }
 }
 
-/* Themes with highlight gradient */
-.cerulean, .materia, .slate, .spacelab {
-  // shiny berry "button"
-  .berryGradient {
-    position: absolute;
-    z-index: 0;
-    left: 0;
-    padding-left: 100%;
-    padding-top: 60%;
-    background: linear-gradient(rgba(255,255,255, 50%), rgba(255,255,255, 0%));
-  }
-}
-
-/* Themes that need BerryDex to be longer */
+/* Themes that can have longer BerryDex on phone */
 .cosmo, .cyborg, .lumen, .pulse, .sketchy, .sandstone, .simplex, .solar {
   @media (max-width: 767px) {
     .berryListHeight {
       max-height: calc(50vh);
-    }
-  }
-}
-
-/* Themes with BerryDex borders */
-.cerulean, .cosmo, .journal, .lumen, .solar, .spacelab, .united {
-  @media (max-width: 991px) {
-    .berryDexEntry {
-      img {
-        margin-top: -3px;
-      }
     }
   }
 }
@@ -97,31 +51,6 @@
     .item-selected, .pokemon-selected {
       color: whitesmoke;
       background-image: linear-gradient(#4e5458, #565b60 40%, #5b6165);
-    }
-  }
-
-  /* Berrydex List */
-  .berryDexEntry {
-    border-style: solid;
-    border-image: linear-gradient(to bottom, steelblue, var(--info));
-    border-image-slice: 1;
-    border-width: 3px;
-
-    --berryBG: var(--secondary);
-
-    span {
-      font-size: 13px;
-      color: var(--info);
-      opacity: 83%;
-    }
-  }
-
-  .berryDexEntrySelected {
-    --berryBG: var(--info);
-
-    span {
-      color: var(--light);
-      opacity: 95%;
     }
   }
 }
@@ -141,54 +70,11 @@
       color: black;
     }
   }
-
-  /* Berrydex List */
-  .berryDexEntry {
-    border: solid var(--info);
-
-    span {
-      color: var(--info);
-    }
-  }
-
-  .berryDexEntry:hover, .berryDexEntrySelected {
-    --berryBG: var(--info);
-
-    span {
-      color: var(--light);
-    }
-  }
 }
 
 .cyborg {
   .text-light {
     color: whitesmoke !important;
-  }
-
-  /* Evolution items */
-  #evo-item-list, #evo-pokemon-list {
-    .list-group-item-action {
-      color: whitesmoke;
-    }
-  }
-
-  /* Berrydex List */
-  .berryDexEntry {
-    border-radius: 5px;
-  }
-
-  .berryDexEntry:hover {
-    --berryBG: var(--info);
-
-    span {
-      color: whitesmoke;
-    }
-  }
-
-  .berryDexEntrySelected {
-    span {
-      color: var(--light);
-    }
   }
 }
 
@@ -196,11 +82,6 @@
   .text-primary, .text-light {
     color: whitesmoke !important;
   }
-
-    /* Berrydex List */
-    .berryDexEntry {
-      border-radius: 3px;
-    }
 }
 
 .flatly {
@@ -210,73 +91,14 @@
       color: black;
     }
   }
-
-    /* Berrydex List */
-    .berryDexEntry {
-      border-radius: 3px;
-
-      span {
-        color: var(--primary);
-      }
-    }
-
-    .berryDexEntrySelected {
-      --berryBG: var(--dark);
-
-      span {
-        color: var(--light);
-      }
-    }  
 }
 
 .journal {
-    /* Berrydex List */
-    @media (min-width: 992px) {
-      .berryDexEntry {
-        img {
-          margin-top: 10px;
-        }
-    }
-  }   
-
-  .berryDexEntry {
-      border-radius: 5px;
-      border-top: solid var(--secondary);
-      border-bottom: solid var(--secondary);
-  }
-
-  .berryDexEntrySelected{
-    span {
-      color: var(--primary);
-    }
-  }
-}
-
-.litera {
-  /* Berrydex List */
-  .berryDexEntry {
-    border-radius: 15px;
-  
-    span {
-      font-size: 14px;
-      padding-bottom: 1px;
-      padding-right: 4px;
-    }
-  }
-
-  .berryDexEntry:hover, .berryDexEntrySelected {
-    transition: 0.1s;
-    border-radius: 60px;
-
-    img {
-      transition: 0.1s;
-      transform: translateX(-4px);
-    }
-
-    span {
-      transition: 0.1s;
-      transform: translateX(-4px);
-      font-size: 13px;
+  @media (min-width: 992px) {
+    .berryDexEntry {
+      img {
+        margin-top: 5px;
+      }
     }
   }
 }
@@ -285,55 +107,6 @@
     /* Weather button in dock modal */
   .btn-weather-dock {
     border-color: rgba(0,0,0,25%);
-  }
-    
-  /* Berrydex List */
-  .berryDexEntry {
-    border: solid var(--primary);
-    border-radius: 5px;
-
-    span {
-      color: var(--primary);
-    }
-  }
-
-  // because Lumen's buttons move when pushed
-  .berryDexEntry:hover {
-    box-shadow: 0 2px var(--info);
-    bottom: 2px;
-    border: solid var(--info);
-
-    span {
-      color: var(--info);
-    }
-  }
-  
-  .berryDexEntry:active {
-    bottom: -2px;
-    box-shadow: none;
-    border: solid var(--light);
-
-    --berryBG: var(--info);
-
-    img {
-      filter: brightness(0) invert(1);
-    }
-
-    span {
-      color: var(--light);
-    }
-  }
-
-  .berryDexEntrySelected {
-    box-shadow: 0 2px var(--info);
-    bottom: 0;
-    border: solid var(--light);
-
-    --berryBG: white;
-
-    span {
-      color: var(--info);
-    }
   }
 }
 
@@ -355,16 +128,8 @@
     @media (min-width: 992px) {
       .berryDexEntry {
         img {
-        position: relative;
-        top: 10%;
-        left: 5%;
-        scale: 100%;
-        }
-
-        span {
-          margin: 4px 2px;
-          // margin-left: 2px;
-          font-size: 11px;
+          padding: 12px 0;
+          scale: (270%);
         }
       }
     }
@@ -373,33 +138,23 @@
       .berryListHeight {
         max-height: calc(100vh - 240px);
       }
+
+      .berryDexEntry {
+        img {
+          transform: scale(50%);
+        }
+      }
     
-       .berryDexEntry {
-         img {
-          margin-left: -5%;
-          }
-       }
+       #berryDexList {
+        .btn {
+          padding: 0;
+        }
+      }
     }
 
     @media (max-width: 767px) {
       .berryListHeight {
         max-height: calc(50vh - 60px);
-      }
-    }
-
-    .berryDexEntry {
-      --berryBG: whitesmoke;
-
-      span {
-        color: var(--primary);
-      }
-    }
-
-    .berryDexEntrySelected {
-      --berryBG: var(--dark);
-
-      span {
-        color: var(--light);
       }
     }
 }
@@ -416,32 +171,6 @@
       background: #2196f3 linear-gradient(180deg,#42a6f5,#2196f3) repeat-x;
     }
   }
-
-  /* Berrydex List */
-  .berryDexEntry {
-    box-shadow: 1px 1px 2px 2px lightgray;
-    border-radius: 3px;
-
-    span {
-      font-weight: normal;
-    }
-  }
-
-  .berryDexEntry:hover {
-    --berryBG: var(--primary);
-
-    span {
-      color: var(--light);
-    }
-  }
-
-  .berryDexEntrySelected {
-    --berryBG: var(--info);
-
-    span {
-      color: var(--light);
-    }
-  }
 }
 
 .minty {
@@ -456,106 +185,12 @@
         color: black;
       }
     }
-
-  /* Berrydex List */
-    .berryDexEntry {
-      border: solid var(--primary);
-      border-radius: 5px;
-
-      --berryBG: snow;
-
-      span {
-        font-size: 13px;
-        color: var(--primary);
-      }
-    }
-
-    .berryDexEntry:active {
-      border: solid mistyrose;
-
-      --berryBG: var(--secondary);
-  
-      span {
-        color: mistyrose;
-      }
-    }
-
-    .berryDexEntry:hover {
-      border: solid mistyrose;
-    }
-
-    .berryDexEntrySelected {
-      border: solid var(--secondary);
-
-      span {
-        color: var(--secondary);
-      }
-    }
-}
-
-.pulse {
-  /* Berrydex List */
-  .berryDexEntry {
-    border: solid var(--secondary);
-
-    span {
-      color: var(--primary);
-      font-size: 14.5px;
-    }
-  }
-
-  /* Berrydex List */
-  .berryDexEntry:hover {
-    transform: scale(1.1);
-  }
-
-  .berryDexEntry:active {
-    z-index: 2;
-    animation: pulse-mimic ease-in-out 0.3s;
-  }
-
-  @keyframes pulse-mimic {
-    0%, 70% { transform: scale(1); }
-    30%, 100% { transform: scale(1.5); }
-  }
-
-  .berryDexEntrySelected {
-    transform: scale(0.9);
-  }
 }
 
 .sandstone{
   /* Berrydex List */
   #berryDexPreview {
     min-width: 300px;
-  }
-
-  @media (min-width: 992px) {
-    .berryDexEntry {
-      img {
-        margin-top: 15px;
-      }
-  }
-} 
-
-  .berryDexEntry {
-    border-radius: 5px;
-
-    --berryBG: var(--secondary);
-
-    span {
-      font-size: 12px;
-      color: var(--light);
-      font-weight: normal;
-    }
-  }
-
-  .berryDexEntrySelected {
-    --berryBG: var(--light);
-
-    span {
-      color: var(--dark);
-    }
   }
 }
 
@@ -565,21 +200,6 @@
     .item-selected, .pokemon-selected {
       background: #d9230f !important;
     }
-  }
-
-  /* Berrydex List */
-  .berryDexEntry {
-    border-radius: 4px;
-    box-shadow: 0 0 0 1px lightgray;
-  
-    span {
-      font-size: 13px;
-    }
-  }
-
-  .berryDexEntrySelected {
-    transition: 0.1s;
-    box-shadow: 0 0 0 1px var(--primary), 0 0 0 5px rgba(217, 35, 15, 30%);
   }
 }
 
@@ -631,19 +251,6 @@
       color: black;
     }
   }
-
-    /* Berrydex List */
-    .berryDexEntry {
-      box-shadow: 0 0 0 2px var(--primary);
-    }
-
-    .berryDexEntrySelected {
-      --berryBG: var(--dark);
-      
-      span {
-        color: var(--light);
-      }
-    }
 }
 
 .slate {
@@ -673,28 +280,6 @@
   .modal-header {
     color: whitesmoke
   }
-
-  /* Berrydex List */
-  .berryDexEntry {
-    border-radius: 3px;
-
-    --berryBG: var(--primary);
-  }
-
-  .berryGradient {
-    border-radius: 3px;
-    opacity: 50%;
-  }
-
-  .berryDexEntry:hover, .berryDexEntrySelected {
-    --berryBG: var(--dark);
-
-    .berryGradient {
-      filter: invert(1);
-      z-index: 2;
-      pointer-events: none;
-    }
-  }
 }
 
 .solar {
@@ -720,53 +305,17 @@
     color: #a0b6b8;
   }
 
-  /* Berrydex List */
   .berryDexEntry {
-    border: solid var(--primary);
-    border-radius: 5px;
-
-    --berryBG: rgba(255,255,255, 20%);
+    background: rgba(0,0,0,0%);
 
     span {
-      font-weight: normal;
-      color: whitesmoke;
+      color: var(--secondary);
     }
   }
 
   .berryDexEntry:hover {
-    border: solid var(--light);
-
     span {
-      color:var(--light);
-    }
-    .berryGradient {
-      position: absolute;
-      z-index: 0;
-      right: 0;
-      padding-right: 80%;
-      height: 85px;
-      background: radial-gradient(rgba(0,0,0,0),rgba(255, 235, 205,30%)); //blanchedalmond
-    }
-  }
-  
-  .berryDexEntrySelected {
-    border: solid var(--light);
-    filter: sepia(40%) brightness(110%) opacity(90%);
-
-    img {
-      filter: blur(0.5px);
-    }
-
-    span {
-      color:var(--light);
-    }
-    .berryGradient {
-      position: absolute;
-      z-index: 0;
-      right: 0;
-      padding-right: 80%;
-      height: 85px;
-      background: radial-gradient(rgba(0,0,0,0),rgba(255, 235, 205,30%)); //blanchedalmond
+      color: whitesmoke;
     }
   }
 }
@@ -778,70 +327,10 @@
       background: linear-gradient(#6d94bf,#446e9b 50%,#3e648d)
     }
   }
-
-  /* Berrydex List */
-  .berryDexEntry {
-    border-style: solid;
-    border-image: linear-gradient(to bottom, lightblue 5%, var(--primary));
-    border-image-slice: 1;
-    border-width: 3px;
-
-    span {
-      font-size: 13px;
-    }
-  }
-
-  .berryDexEntrySelected {
-    --berryBG: var(--primary);
-
-    span {
-      color: var(--light);
-    }
-  }
 }
 
 .superhero {
   .text-light {
     color: whitesmoke !important;
   }
-
-  /* Berrydex List */
-  .berryDexEntry {
-    span::before {
-      color: var(--primary);
-    }
-  }
-
-  .berryDexEntrySelected {
-    box-shadow: inset -3px 0 0 var(--primary);
-  }
-}
-
-.united {
-  /* Berrydex List */
-  .berryDexEntry {
-    border: solid var(--dark);
-    border-radius: 5px;
-  
-    span {
-      font-size: 13px;
-    }
-  }
-
-  .berryDexEntrySelected {
-    --berryBG: papayawhip;
-  }
-}
-
-.yeti {
-    /* Berrydex List */
-    .berryDexEntry {
-      span {
-        font-size: 13px;
-      }
-    }
-
-    .berryDexEntrySelected{
-      --berryBG: lightgray;
-    }
 }

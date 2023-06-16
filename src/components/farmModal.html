@@ -190,13 +190,12 @@
                         <div id="berryDexList" class="berryListHeight mt-2 col-12 col-md"  style="overflow-y: auto;">
                             <ul class="row justify-content-center p-0 pl-2" data-bind="foreach: FarmController.getUnlockedBerryList()"
                                 style="max-width: 100%; padding:0; margin:0;">
-                                <li class="col-5 col-md col-lg-2 berryDexEntry"
-                                    data-bind="style:{background: FarmController.getBackgroundColor($data),},
-                                    css:{ 'berryDexEntrySelected': App.game.statistics.selectedBerryID() === $data},
+                                <li class="col-5 col-md col-lg-2 berryDexEntry btn"
+                                    data-bind="
+                                    css:{ 'btn-primary': App.game.statistics.selectedBerryID() === $data, 'btn-secondary': App.game.statistics.selectedBerryID() != $data},
                                     tooltip: { title: FarmController.getHint($data,true,true),
                                     trigger: 'hover',
                                     placement:'top' },">
-                                    <div class="berryGradient"></div>
                                     <img src="" data-bind="css: { 'pokemon-not-seen': !App.game.farming.unlockedBerries[$data]() }, attr:{ src: FarmController.getBerryImage($data)}">
                                     <span class="id" style="top: 0;" data-bind="text: ($data + 1 + '').padStart(2, 0)">number</span>
                                     <!-- ko if: !App.game.farming.unlockedBerries[$data]() -->
