@@ -30,7 +30,7 @@ class TemporaryBattle extends TownContent {
     public areaStatus() {
         if (!this.isUnlocked()) {
             return areaStatus.locked;
-        } else if (App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(this.name)]() == 0) {
+        } else if (App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(this.name)]() == 0 && this.isVisible()) {
             return areaStatus.unlockedUnfinished;
         } else {
             return areaStatus.completed;
