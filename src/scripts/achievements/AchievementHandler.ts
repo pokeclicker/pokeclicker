@@ -411,11 +411,11 @@ class AchievementHandler {
         AchievementHandler.addAchievement('What Is "Bait" Made Of?', 'Throw 100 Bait in a Safari Zone', new SafariBaitRequirement(100), 0.2);
         AchievementHandler.addAchievement('Stay For Dinner', 'Throw 1,000 Bait in a Safari Zone', new SafariBaitRequirement(1000), 0.3);
         AchievementHandler.addAchievement('Gotta Get Your Steps In!', 'Walk 100 Steps in a Safari Zone', new SafariStepsRequirement(100), 0.1);
-        AchievementHandler.addAchievement('One More Lap', 'Walk 1,000 Steps in a Safari Zone', new SafariStepsRequirement(1000), 0.2);
-        AchievementHandler.addAchievement('Marathon Runner', 'Walk 10,000 Steps in a Safari Zone', new SafariStepsRequirement(10000), 0.3);
-        AchievementHandler.addAchievement('Where Pinsir?', 'Reach Safari Level 5.', new SafariLevelRequirement(5), 0.1);
-        AchievementHandler.addAchievement('Chasing the Chansey', 'Reach Safari Level 15.', new SafariLevelRequirement(15), 0.2);
-        AchievementHandler.addAchievement('Catch Animation Enthusiast', 'Reach Safari Level 30.', new SafariLevelRequirement(30), 0.3);
+        AchievementHandler.addAchievement('One More Lap', 'Walk 1,000 Steps in a Safari Zone', new SafariStepsRequirement(1000), 0.3);
+        AchievementHandler.addAchievement('Marathon Runner', 'Walk 10,000 Steps in a Safari Zone', new SafariStepsRequirement(10000), 0.6);
+        AchievementHandler.addAchievement('Where Pinsir?', 'Reach Safari Level 5.', new SafariLevelRequirement(5), 0.25);
+        AchievementHandler.addAchievement('Chasing the Chansey', 'Reach Safari Level 15.', new SafariLevelRequirement(15), 0.5);
+        AchievementHandler.addAchievement('Catch Animation Enthusiast', 'Reach Safari Level 30.', new SafariLevelRequirement(30), 1);
 
         /*
          * REGIONAL
