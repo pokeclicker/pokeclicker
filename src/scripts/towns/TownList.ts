@@ -762,7 +762,7 @@ const RedSpearow = new NPC('Red Spearow', [
     '<i>The Red Spearow seems to appreciate your visit.</i>',
 ], {image: 'assets/images/pokemon/21.01.png'});
 
-const BugCatcherPinsir = new NPC('Bug Catcher', [
+const BugCatcherPinsir = new NPC('Bug Catcher Michel', [
     'I heard there was a stone hidden in the Safari Zone that makes Pinsir stronger!',
     'But... I don\'t have enough Safari Experience to find it.',
 ], {image: 'assets/images/npcs/Bug Catcher.png'});
@@ -5621,7 +5621,7 @@ const FriendlyAttendant = new NPC('Friendly Attendant', [
     'As new and rare types of Pokémon are discovered, park staff will add them to our rotation of potential stock!',
 ]);
 
-const BugCatcherScizor = new NPC('Bug Catcher', [
+const BugCatcherScizor = new NPC('Bug Catcher Elliot', [
     'I heard there was a stone hidden in the Friend Safari that makes Scizor stronger!',
     'It takes a very experienced trainer to find it, though.',
 ], {image: 'assets/images/npcs/Bug Catcher.png'});
