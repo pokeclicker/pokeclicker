@@ -17,18 +17,18 @@ enum areaStatus {
 class MapHelper {
 
     public static generateMapPopoverContent(): string {
-        let rows = [];
+        const rows = [];
         GameHelper.enumStrings(areaStatus).map(status => Settings.getSetting(`--${status}`))
-        .filter(setting => setting.isUnlocked()).forEach(setting => {
-            rows.push(
-                `<div class='col-10 legend-item'>
-                    <span>${setting.displayName}:</span>
-                </div>
-                <div class='col-2'>
-                    <span class='float-right px-4 bg-${setting.name.substring(2)}'>&nbsp;</span>
-                </div>`);
-        })
-        let res = `<div class='row map-legend'>
+            .filter(setting => setting.isUnlocked()).forEach(setting => {
+                rows.push(
+                    `<div class='col-10 legend-item'>
+                        <span>${setting.displayName}:</span>
+                    </div>
+                    <div class='col-2'>
+                        <span class='float-right px-4 bg-${setting.name.substring(2)}'>&nbsp;</span>
+                    </div>`);
+            });
+        const res = `<div class='row map-legend'>
                     <div class='col-12'>
                         Map locations will be coloured based on the following:
                     </div>
