@@ -191,17 +191,15 @@
                             <ul class="row justify-content-center p-0 pl-2" data-bind="foreach: FarmController.getUnlockedBerryList()"
                                 style="max-width: 100%; padding:0; margin:0;">
                                 <li class="col-5 col-md col-lg-2 berryDexEntry btn"
-                                    data-bind="
-                                    css:{ 'btn-primary': App.game.statistics.selectedBerryID() === $data, 'btn-secondary': App.game.statistics.selectedBerryID() != $data},
-                                    tooltip: { title: FarmController.getHint($data,true,true),
-                                    trigger: 'hover',
-                                    placement:'top' },">
+                                    data-bind="css:{ 'btn-primary': App.game.statistics.selectedBerryID() === $data,
+                                    'btn-secondary': App.game.statistics.selectedBerryID() != $data,
+                                    'disabled': !App.game.farming.unlockedBerries[$data]() && !FarmController.getHint($data,true)}">
                                     <img src="" data-bind="css: { 'pokemon-not-seen': !App.game.farming.unlockedBerries[$data]() }, attr:{ src: FarmController.getBerryImage($data)}">
                                     <span class="id" style="top: 0;" data-bind="text: ($data + 1 + '').padStart(2, 0)">number</span>
-                                    <!-- ko if: !App.game.farming.unlockedBerries[$data]() -->
+                                    <!-- ko if: !App.game.farming.unlockedBerries[$data]() && !FarmController.getHint($data,true) -->
                                     <span style="bottom: 0;" data-bind="text: '???'">name</span>
                                     <!-- /ko -->
-                                    <!-- ko if: App.game.farming.unlockedBerries[$data]() -->
+                                    <!-- ko if: App.game.farming.unlockedBerries[$data]() || FarmController.getHint($data,true) -->
                                     <span style="bottom: 0;" data-bind="text: BerryType[$data]">name</span>
                                     <a class="overlay" href='#' data-bind="click: () => {FarmController.handleBerryDexClick($data)}, attr:{'aria-label': BerryType[$data] + '. Click again for dex entry.'}"></a>
                                     <!-- /ko -->
@@ -220,6 +218,7 @@
                                 <img data-bind="attr:{ src: FarmController.getBerryImage($data) }" src=""/>
                                 <div class="card" style="overflow-x: auto;">
                                     <table class="table table-striped table-hover table-bordered table-sm m-0">
+                                        <!-- ko if: App.game.farming.unlockedBerries[$data]() -->
                                         <thead>
                                             <tr class="text-light">
                                                 <th class="bg-dark" colspan="2">Overview</th>
@@ -277,9 +276,20 @@
                                                 </td>
                                             </tr>
                                         </tbody>
+                                        <!-- /ko -->
+                                        <!-- ko if: !App.game.farming.unlockedBerries[$data]() -->
+                                        <thead>
+                                            <tr class="text-light">
+                                              <th class="bg-dark" colspan="2">Hint</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <td colspan="2"><span data-bind="text: FarmController.getHint(+$data)"></span></td>
+                                        </tbody>
+                                        <!-- /ko -->
                                     </table>
                                 </div>
-                                <button type="button" class="btn btn-info btn-block" href="#berryDexModal" data-toggle="modal" data-bind="click: ()=>{App.game.statistics.selectedBerryID($data)}">
+                                <button type="button" class="btn btn-info btn-block" href="#berryDexModal" data-toggle="modal" data-bind="click: ()=>{App.game.statistics.selectedBerryID($data)}, visible: App.game.farming.unlockedBerries[$data]()">
                                 More Info
                                 </button>
                             </div>
