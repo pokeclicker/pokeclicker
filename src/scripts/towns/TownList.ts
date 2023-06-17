@@ -765,7 +765,7 @@ const RedSpearow = new NPC('Red Spearow', [
 const BugCatcherPinsir = new NPC('Bug Catcher Michel', [
     'I heard there was a stone hidden in the Safari Zone that makes Pinsir stronger!',
     'But... I don\'t have enough Safari Experience to find it.',
-], {image: 'assets/images/npcs/Bug Catcher.png'});
+], {image: 'assets/images/npcs/Bug Catcher.png', requirement: new MaxRegionRequirement(GameConstants.Region.kalos)});
 
 //Kanto Towns
 TownList['Pallet Town'] = new Town(
