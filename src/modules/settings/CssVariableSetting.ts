@@ -1,7 +1,8 @@
 import Setting from './Setting';
+import Requirement from '../requirements/Requirement';
 
 export default class CssVariableSetting extends Setting<string> {
-    constructor(name: string, displayName: string, options = [], defaultValue = '') {
+    constructor(name: string, displayName: string, options = [], defaultValue = '', requirements: Requirement[] = []) {
         // Get the default value from our css
         const defValue = defaultValue || getComputedStyle(document.documentElement).getPropertyValue(`--${name}`) || '';
         super(
@@ -9,6 +10,7 @@ export default class CssVariableSetting extends Setting<string> {
             displayName,
             options,
             defValue,
+            requirements,
         );
 
         // Update the value
