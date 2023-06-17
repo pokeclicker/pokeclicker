@@ -38,7 +38,7 @@
 /* Themes that can have longer BerryDex on phone */
 .cosmo, .cyborg, .lumen, .pulse, .sketchy, .sandstone, .simplex, .solar {
   @media (max-width: 767px) {
-    .berryListHeight {
+    .berryPreviewHeight {
       max-height: calc(50vh);
     }
   }
@@ -95,7 +95,7 @@
 
 .journal {
   @media (min-width: 992px) {
-    .berryDexEntry {
+    .berryDexButtons {
       img {
         padding-top: 4px;
         padding-bottom: 3px;
@@ -122,12 +122,12 @@
   }
 
     /* Berrydex List */
-    #berryDexPreview {
+    #berryDexPreviewTable {
       width: 360px;
     }
 
     @media (min-width: 992px) {
-      .berryDexEntry {
+      .berryDexButtons {
         img {
           padding: 12px 0;
           scale: (270%);
@@ -136,17 +136,17 @@
     }
 
     @media (max-width: 991px) {
-      .berryListHeight {
+      .berryPreviewHeight {
         max-height: calc(100vh - 240px);
       }
 
-      .berryDexEntry {
+      .berryDexButtons {
         img {
           transform: scale(50%);
         }
       }
     
-       #berryDexList {
+       #berryDexPreviewList {
         .btn {
           padding: 0;
         }
@@ -154,7 +154,7 @@
     }
 
     @media (max-width: 767px) {
-      .berryListHeight {
+      .berryPreviewHeight {
         max-height: calc(50vh - 60px);
       }
     }
@@ -190,7 +190,7 @@
 
 .sandstone{
   /* Berrydex List */
-  #berryDexPreview {
+  #berryDexPreviewTable {
     width: 300px;
   }
 }
@@ -306,7 +306,7 @@
     color: #a0b6b8;
   }
 
-  .berryDexEntry {
+  .berryDexButtons {
     background: rgba(0,0,0,0%);
 
     span {
@@ -314,7 +314,7 @@
     }
   }
 
-  .berryDexEntry:hover {
+  .berryDexButtons:hover {
     span {
       color: whitesmoke;
     }

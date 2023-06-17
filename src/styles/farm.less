@@ -1,11 +1,11 @@
 @import url("variables.less");
 
 @media (min-width: 992px) { // computer
-  .berryListHeight {
+  .berryPreviewHeight {
     max-height: calc(100vh - 205px);
   }
   
-  .berryDexEntry {
+  .berryDexButtons {
     margin: 6px;
 
     img {
@@ -16,11 +16,11 @@
 }
 
 @media (max-width: 991px) { // tablet
-  .berryListHeight {
+  .berryPreviewHeight {
     max-height: calc(100vh - 225px);
   }
 
-  .berryDexEntry {
+  .berryDexButtons {
     margin: 6px 0;
   
     img {
@@ -30,24 +30,24 @@
 }
 
 @media (max-width: 767px) { // phone
-  .berryListHeight {
+  .berryPreviewHeight {
     max-height: calc(50vh - 35px);
     margin: 1%;
   }
   
-  #berryDexList {
+  #berryDexPreviewList {
     max-height: calc(50vh - 205px);
     min-height: 100px;
   }
 
-  .berryDexEntry {
+  .berryDexButtons {
     margin: 10px 15px 0;
   }
 }
 
 @padding: 3px;
 
-.berryDexEntry {
+.berryDexButtons {
   span {
     position: absolute;
     left: 0;
@@ -63,7 +63,7 @@
   }
 }
 
-#berryDexPreview {
+#berryDexPreviewTable {
   width: 270px;
   margin-right: -10px;
 }
