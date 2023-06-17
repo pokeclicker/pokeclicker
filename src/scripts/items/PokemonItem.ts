@@ -19,7 +19,7 @@ class PokemonItem extends CaughtIndicatingItem {
     gain(amt: number) {
         let shiny = false;
         let numShiny = 0;
-        const pokemonName = this.name as PokemonNameType;
+        const pokemonName = this.type;
         const pokemonID = PokemonHelper.getPokemonByName(pokemonName).id;
         for (let i = 0; i < amt; i++) {
             const shinyBool = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SHOP);
@@ -62,11 +62,11 @@ class PokemonItem extends CaughtIndicatingItem {
     }
 
     getCaughtStatus(): CaughtStatus {
-        return PartyController.getCaughtStatusByName(this.name as PokemonNameType);
+        return PartyController.getCaughtStatusByName(this.type);
     }
 
     getPokerusStatus(): GameConstants.Pokerus {
-        return PartyController.getPokerusStatusByName(this.name as PokemonNameType);
+        return PartyController.getPokerusStatusByName(this.type);
     }
 
     get image() {
