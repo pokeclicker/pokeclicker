@@ -29,11 +29,11 @@ class MapHelper {
                     </div>`);
             });
         const res = `<div class='row map-legend'>
-                    <div class='col-12'>
-                        Map locations will be coloured based on the following:
-                    </div>
-                    ${rows.join('\n')}
-                    <div class='col-12'>
+                        <div class='col-12'>
+                            Map locations will be coloured based on the following:
+                        </div>
+                        ${rows.join('\n')}
+                        <div class='col-12'>
                             <i>NOTE: These colors can be customized in the settings menu</i>
                         </div>
                     </div>`;
