@@ -100,8 +100,17 @@ class ExternalHelper {
         return containsDevRequirement;
     }
 
-    private static pokemonIsInLiveVersion(pokemon: PokemonNameType) {
-        //TODO
+    public static pokemonIsInLiveVersion(name: PokemonNameType) {
+        if (PokemonHelper.calcNativeRegion(name) > GameConstants.MAX_AVAILABLE_REGION) {
+            return false;
+        }
+
+        const locations = PokemonHelper.getPokemonLocations(name);
+        if (!locations) {
+            return false;
+        }
+        //TODO: run ExternalHelper.isInLiveVersion for each location
+
         return true;
     }
 }
