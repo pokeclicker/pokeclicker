@@ -16,28 +16,8 @@ enum areaStatus {
 
 class MapHelper {
 
-    public static generateMapPopoverContent(): string {
-        const rows = [];
-        GameHelper.enumStrings(areaStatus).map(status => Settings.getSetting(`--${status}`))
-            .filter(setting => setting.isUnlocked()).forEach(setting => {
-                rows.push(
-                    `<div class='col-10 legend-item'>
-                        <span>${setting.displayName}:</span>
-                    </div>
-                    <div class='col-2'>
-                        <span class='float-right px-4 bg-${setting.name.substring(2)}'>&nbsp;</span>
-                    </div>`);
-            });
-        const res = `<div class='row map-legend'>
-                        <div class='col-12'>
-                            Map locations will be coloured based on the following:
-                        </div>
-                        ${rows.join('\n')}
-                        <div class='col-12'>
-                            <i>NOTE: These colors can be customized in the settings menu</i>
-                        </div>
-                    </div>`;
-        return res;
+    public static getUsableFilters(): CssVariableSetting[] {
+        return GameHelper.enumStrings(areaStatus).map(status => Settings.getSetting(`--${status}`)).filter(setting => setting.isUnlocked());
     }
 
     public static moveToRoute = function (route: number, region: GameConstants.Region) {

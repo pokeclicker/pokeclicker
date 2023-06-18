@@ -370,7 +370,22 @@
                     </div>
                     <button class='btn btn-sm' style="position: absolute; left: 0px; top: 0px; width: auto; height: 41px;" data-toggle="popover" data-trigger="hover" data-html="true" data-title="Map Legend:"
                     data-content=""
-                    data-placement="bottom" data-bind="attr: {'data-content': MapHelper.generateMapPopoverContent()}">ⓘ</button>
+                    data-placement="bottom" data-bind="attr: {'data-content': `<div class='row map-legend'>
+                            <div class='col-12'>
+                                Map locations will be coloured based on the following:
+                            </div>
+                            ${MapHelper.getUsableFilters().map(setting => {
+                                return `<div class='col-10 legend-item'>
+                                    <span>${setting.displayName}:</span>
+                                </div>
+                                <div class='col-2'>
+                                    <span class='float-right px-4 bg-${setting.name.substring(2)}'>&nbsp;</span>
+                                </div>`
+                            }).join('\n')}
+                            <div class='col-12'>
+                                <i>NOTE: These colors can be customized in the settings menu</i>
+                            </div>
+                        </div>`}">ⓘ</button>
                     <button class='btn btn-sm' style="position: absolute; right: 48px; top: 0px; width: auto; height: 41px;"
                     data-bind='style: { background: DayCycle.color() },
                         tooltip: {
