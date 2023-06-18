@@ -168,8 +168,12 @@ class Safari {
     }
 
     public static openModal() {
-        App.game.gameState = GameConstants.GameState.safari;
-        $('#safariModal').modal({backdrop: 'static', keyboard: false});
+        if (Safari.inProgress() && Safari.activeRegion() !== player.region) {
+            this.safariReset();
+        } else {
+            App.game.gameState = GameConstants.GameState.safari;
+            $('#safariModal').modal({backdrop: 'static', keyboard: false});
+        }
     }
 
     public static startSafari() {
