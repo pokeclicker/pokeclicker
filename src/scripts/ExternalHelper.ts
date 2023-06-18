@@ -3,8 +3,9 @@ class ExternalHelper {
     private static questlineCache: {[name: string] : boolean} = {};
     private static temporaryBattleCache: {[name: string] : boolean} = {};
     private static routeCache: {[name: string] : boolean} = {};
+    private static gymCache: {[name: string] : boolean} = {};
 
-    public static isInLiveVersion(content: Town | QuestLine | TemporaryBattle | RegionRoute) {
+    public static isInLiveVersion(content: Town | QuestLine | TemporaryBattle | RegionRoute | Gym) {
         if (content instanceof Town) {
             if (content.region > GameConstants.MAX_AVAILABLE_REGION) {
                 return false;
@@ -35,6 +36,12 @@ class ExternalHelper {
             }
             return !ExternalHelper.routeCache[content.routeName];
         }
+        if (content instanceof Gym) {
+            if (ExternalHelper.gymCache[content.town] == undefined) {
+                ExternalHelper.gymCache[content.town] = ExternalHelper.containsDevRequirement(content.requirements);
+            }
+            return !ExternalHelper.gymCache[content.town];
+        }
         return true;
     }
 
@@ -60,6 +67,8 @@ class ExternalHelper {
                 containsDevRequirement = ExternalHelper.isInLiveVersion(TemporaryBattleList[r.battleName]);
             } else if (r instanceof RouteKillRequirement) {
                 containsDevRequirement = ExternalHelper.isInLiveVersion(Routes.getRoute(r.region, r.route));
+            } else if (r instanceof ClearGymRequirement) {
+                containsDevRequirement = ExternalHelper.isInLiveVersion(Object.values(GymList).find(g => GameConstants.getGymIndex(g.town) == r.gymIndex));
             }
 
             if (containsDevRequirement) {
