@@ -18,7 +18,7 @@ export default class Setting<T> {
         private defaultDisplayName: string,
         public options: SettingOption<T>[],
         public defaultValue: T,
-        public requirements : Requirement[] = [],
+        public requirement : Requirement = undefined,
     ) {
         this.observableValue = ko.observable(this.defaultValue);
         this.set(defaultValue);
@@ -57,7 +57,7 @@ export default class Setting<T> {
     }
 
     isUnlocked(): boolean {
-        return !this.requirements.some(r => !r.isCompleted());
+        return this.requirement ? this.requirement.isCompleted() : true;
     }
 
     getValidOptions() {
