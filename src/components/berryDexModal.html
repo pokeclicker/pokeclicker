@@ -166,7 +166,34 @@
                           <!-- /ko -->
                         </table>
                       </td>
-                    </tr>
+                    </tr>  
+                    <!-- ko if: (App.game.farming.berryData[$data].wander.filter((w) => !Berry.baseWander.some((b) => w === b) && !Berry.colorWander[App.game.farming.berryData[$data].color].some((b) => w === b)).filter(pokemon => PokemonHelper.calcNativeRegion(pokemon) <= player.highestRegion()) || Berry.colorWander[App.game.farming.berryData[$data].color].filter(pokemon => PokemonHelper.calcNativeRegion(pokemon) <= player.highestRegion())) != "" -->
+                    <tr>
+                      <td class="p-0" colspan="2">
+                        <table class="table table-striped table-hover table-bordered table-sm m-0">
+                          <tr class="text-light">
+                            <th class="bg-dark">Wanderering Pokémon</th>
+                          </tr>
+                          <!-- ko if: Berry.colorWander[App.game.farming.berryData[$data].color].filter(pokemon => PokemonHelper.calcNativeRegion(pokemon) <= player.highestRegion()) != "" -->
+                          <tr>
+                            <th colspan="2">Color Wanderers</th>
+                          </tr>
+                          <tr>
+                            <td><code data-bind="text: Berry.colorWander[App.game.farming.berryData[$data].color].filter(pokemon => PokemonHelper.calcNativeRegion(pokemon) <= player.highestRegion()).join(', ')">-</code></td>
+                          </tr>
+                          <!-- /ko -->
+                          <!-- ko if: App.game.farming.berryData[$data].wander.filter((w) => !Berry.baseWander.some((b) => w === b) && !Berry.colorWander[App.game.farming.berryData[$data].color].some((b) => w === b)).filter(pokemon => PokemonHelper.calcNativeRegion(pokemon) <= player.highestRegion()) != "" -->
+                          <tr>
+                            <th colspan="2">Specific Wanderers</th>
+                          </tr>
+                          <tr>
+                            <td><code data-bind="text: App.game.farming.berryData[$data].wander.filter((w) => !Berry.baseWander.some((b) => w === b) && !Berry.colorWander[App.game.farming.berryData[$data].color].some((b) => w === b)).filter(pokemon => PokemonHelper.calcNativeRegion(pokemon) <= player.highestRegion()).join(', ')">-</code></td>
+                          </tr>
+                          <!-- /ko -->
+                        </table>
+                      </td>
+                    </tr>  
+                    <!-- /ko -->                  
                   </tbody>
                   <!-- ko if: FarmController.getHint(+$data) !== ""-->
                   <thead>
