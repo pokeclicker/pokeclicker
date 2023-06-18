@@ -785,6 +785,7 @@ namespace GameConstants {
         UnovaFluteMaster,
         FurfrouGemTrader,
         KalosStoneSalesman,
+        SilvallyTrader,
         MagikarpJumpGemTrader,
     }
     declare enum DungeonInteractionSource {
