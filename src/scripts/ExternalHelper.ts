@@ -4,6 +4,9 @@ class ExternalHelper {
 
     public static isInLiveVersion(content: Town | QuestLine) {
         if (content instanceof Town) {
+            if (content.region > GameConstants.MAX_AVAILABLE_REGION) {
+                return false;
+            }
             if (ExternalHelper.townCache[content.name] == undefined) {
                 ExternalHelper.townCache[content.name] = ExternalHelper.containsDevRequirement(content.requirements);
             }
