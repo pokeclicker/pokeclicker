@@ -69,6 +69,28 @@ class ExternalHelper {
                 containsDevRequirement = ExternalHelper.isInLiveVersion(Routes.getRoute(r.region, r.route));
             } else if (r instanceof ClearGymRequirement) {
                 containsDevRequirement = ExternalHelper.isInLiveVersion(Object.values(GymList).find(g => GameConstants.getGymIndex(g.town) == r.gymIndex));
+            } else if (r instanceof MaxRegionRequirement) {
+                containsDevRequirement = r.requiredValue > GameConstants.MAX_AVAILABLE_REGION;
+            } else if (r instanceof ObtainedPokemonRequirement) {
+                containsDevRequirement = ExternalHelper.pokemonIsInLiveVersion(r.pokemon);
+            } else if (r instanceof PokemonLevelRequirement) {
+                containsDevRequirement = ExternalHelper.pokemonIsInLiveVersion(r.pokemon);
+            } else if (r instanceof StarterRequirement) {
+                containsDevRequirement = r.region > GameConstants.MAX_AVAILABLE_REGION;
+            } else if (r instanceof MultiRequirement) {
+                r.requirements.forEach(r2 => {
+                    if (!containsDevRequirement) {
+                        containsDevRequirement = ExternalHelper.containsDevRequirement(r2);
+                    }
+                });
+            } else if (r instanceof OneFromManyRequirement) {
+                let containsNonDevRequirement = false;
+                r.requirements.forEach(r2 => {
+                    if (!containsNonDevRequirement) {
+                        containsNonDevRequirement = !ExternalHelper.containsDevRequirement(r2);
+                    }
+                    containsDevRequirement = !containsNonDevRequirement;
+                });
             }
 
             if (containsDevRequirement) {
@@ -76,5 +98,10 @@ class ExternalHelper {
             }
         });
         return containsDevRequirement;
+    }
+
+    private static pokemonIsInLiveVersion(pokemon: PokemonNameType) {
+        //TODO
+        return true;
     }
 }
