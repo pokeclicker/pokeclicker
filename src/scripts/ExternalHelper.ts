@@ -11,7 +11,7 @@ class ExternalHelper {
         }
         if (content instanceof QuestLine) {
             if (ExternalHelper.questlineCache[content.name] == undefined) {
-                ExternalHelper.questlineCache[content.name] = ExternalHelper.containsDevRequirement(content.requirements);
+                ExternalHelper.questlineCache[content.name] = ExternalHelper.containsDevRequirement(content.requirement);
             }
             return !ExternalHelper.questlineCache[content.name];
         }
@@ -26,20 +26,21 @@ class ExternalHelper {
             requirements = [requirements];
         }
 
-
+        let containsDevRequirement = false;
         requirements.forEach((r) => {
             if (r instanceof DevelopmentRequirement) {
-                return true;
+                containsDevRequirement = true;
+            } else if (r instanceof QuestLineCompletedRequirement) {
+                containsDevRequirement = ExternalHelper.isInLiveVersion(r.cachedQuest);
+            } else if (r instanceof QuestLineStartedRequirement) {
+                containsDevRequirement = ExternalHelper.isInLiveVersion(r.cachedQuest);
+            } else if (r instanceof QuestLineStepCompletedRequirement) {
+                containsDevRequirement = ExternalHelper.isInLiveVersion(r.cachedQuest);
             }
-            if (r instanceof QuestLineCompletedRequirement) {
-                return ExternalHelper.isInLiveVersion(App.game.quests.getQuestLine(r.quest));
-            }
-            if (r instanceof QuestLineStartedRequirement) {
-                return ExternalHelper.isInLiveVersion(App.game.quests.getQuestLine(r.quest));
-            }
-            if (r instanceof QuestLineStepCompletedRequirement) {
-                return ExternalHelper.isInLiveVersion(App.game.quests.getQuestLine(r.quest));
+            if (containsDevRequirement) {
+                return false;
             }
         });
+        return containsDevRequirement;
     }
 }
