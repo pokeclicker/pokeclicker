@@ -762,6 +762,11 @@ const RedSpearow = new NPC('Red Spearow', [
     '<i>The Red Spearow seems to appreciate your visit.</i>',
 ], {image: 'assets/images/pokemon/21.01.png'});
 
+const BugCatcherPinsir = new NPC('Bug Catcher Michel', [
+    'I heard there was a stone hidden in the Safari Zone that makes Pinsir stronger!',
+    'But... I don\'t have enough Safari Experience to find it.',
+], {image: 'assets/images/npcs/Bug Catcher.png', requirement: new MaxRegionRequirement(GameConstants.Region.kalos)});
+
 //Kanto Towns
 TownList['Pallet Town'] = new Town(
     'Pallet Town',
@@ -891,6 +896,7 @@ TownList['Safari Zone'] = new Town(
     [new SafariTownContent()],
     {
         requirements: [new CustomRequirement(ko.pureComputed(() => +App.game.keyItems.hasKeyItem(KeyItemType.Safari_ticket)), 1, 'Obtain the Safari Ticket')],
+        npcs: [BugCatcherPinsir],
     }
 );
 TownList['Cinnabar Island'] = new Town(
@@ -5615,6 +5621,11 @@ const FriendlyAttendant = new NPC('Friendly Attendant', [
     'As new and rare types of Pokémon are discovered, park staff will add them to our rotation of potential stock!',
 ]);
 
+const BugCatcherScizor = new NPC('Bug Catcher Elliot', [
+    'I heard there was a stone hidden in the Friend Safari that makes Scizor stronger!',
+    'It takes a very experienced trainer to find it, though.',
+], {image: 'assets/images/npcs/Bug Catcher.png'});
+
 //Kalos Towns
 
 TownList['Vaniville Town'] = new Town(
@@ -5801,8 +5812,8 @@ TownList['Friend Safari'] = new Town(
     GameConstants.KalosSubRegions.Kalos,
     [new SafariTownContent()],
     {
-        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion), new DevelopmentRequirement()],
-        npcs: [FriendlyAttendant],
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
+        npcs: [FriendlyAttendant, BugCatcherScizor],
     }
 );
 
