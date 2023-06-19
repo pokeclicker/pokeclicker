@@ -3607,21 +3607,21 @@ dungeonList['Near Space'] = new Dungeon('Near Space',
 
 dungeonList['Phenac City Battles'] = new Dungeon('Phenac City Battles',
     [
-        new DungeonTrainer('Shady Guy',
+        new DungeonTrainer('Peon',
             [
                 new GymPokemon('Whismur', 38000, 24),
                 new GymPokemon('Whismur', 38000, 25),
-            ], { weight: 1, requirement: new ClearDungeonRequirement(25, GameConstants.getDungeonIndex('Phenac City Battles'), GameConstants.AchievementOption.less)}, 'Folly', '(female)'),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(25, GameConstants.getDungeonIndex('Phenac City Battles'), GameConstants.AchievementOption.less)}, 'Folly', '(folly)'),
         new DungeonTrainer('Team Snagem',
             [
                 new GymPokemon('Corphish', 38000, 25),
                 new GymPokemon('Koffing', 38000, 27),
             ], { weight: 1, requirement: new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Phenac City Battles'), GameConstants.AchievementOption.less)}, 'Wakin'),
-        new DungeonTrainer('Shady Guy',
+        new DungeonTrainer('Peon',
             [
                 new GymPokemon('Whismur', 38000, 26),
                 new GymPokemon('Lotad', 38000, 25),
-            ], { weight: 1, requirement: new ClearDungeonRequirement(75, GameConstants.getDungeonIndex('Phenac City Battles'), GameConstants.AchievementOption.less)}, 'Folly', '(female)'),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(75, GameConstants.getDungeonIndex('Phenac City Battles'), GameConstants.AchievementOption.less)}, 'Folly', '(folly)'),
         new DungeonTrainer('Mystery Troop Green',
             [
                 new GymPokemon('Grimer', 38000, 26),
@@ -3640,11 +3640,11 @@ dungeonList['Phenac City Battles'] = new Dungeon('Phenac City Battles',
                 new GymPokemon('Spoink', 38000, 24),
                 new GymPokemon('Croconaw', 38000, 30, undefined, undefined, GameConstants.ShadowStatus.Shadow),
             ], { weight: 0.25}, 'Bluno'),
-        new DungeonTrainer('Shady Guy',
+        new DungeonTrainer('Peon',
             [
                 new GymPokemon('Exploud', 38000, 53),
                 new GymPokemon('Ludicolo', 38000, 55),
-            ], { weight: 1, requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Phenac City Battles'), GameConstants.AchievementOption.less)}, 'Folly', '(female)'),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Phenac City Battles'), GameConstants.AchievementOption.less)}, 'Folly', '(folly)'),
         new DungeonTrainer('Peon',
             [
                 new GymPokemon('Dusclops', 38000, 54),
