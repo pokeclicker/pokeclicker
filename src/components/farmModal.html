@@ -292,7 +292,22 @@
                                                     </table>
                                                 </td>
                                             </tr>
+                                            <!-- ko if: App.game.farming.berryData[$data].wander.filter((w) => !Berry.baseWander.some((b) => w === b) && !Berry.colorWander[App.game.farming.berryData[$data].color].some((b) => w === b)).filter(pokemon => PokemonHelper.calcNativeRegion(pokemon) <= player.highestRegion()) != "" -->
+                                            <tr>
+                                                <td class="p-0" colspan="2">
+                                                <table style="width: 100%;"">
+                                                    <tr class="text-light">
+                                                    <th class="bg-dark">Wanderering Pokémon</th>
+                                                    </tr>
+                                                    <tr>
+                                                    <td><code data-bind="text: App.game.farming.berryData[$data].wander.filter((w) => !Berry.baseWander.some((b) => w === b) && !Berry.colorWander[App.game.farming.berryData[$data].color].some((b) => w === b)).filter(pokemon => PokemonHelper.calcNativeRegion(pokemon) <= player.highestRegion()).join(', ')">-</code></td>
+                                                    </tr>
+                                                </table>
+                                                </td>
+                                            </tr>  
+                                            <!-- /ko -->
                                         </tbody>
+                                    </tr>    
                                         <!-- /ko -->
                                         <!-- ko if: !App.game.farming.unlockedBerries[$data]() -->
                                         <thead>
