@@ -2324,7 +2324,7 @@ class QuestLineHelper {
         const BuyIceMemory = new CustomQuest(1, undefined, 'Buy the Ice Memory from Veteran Aristo.', () => player.itemList.Ice_Memory_Silvally());
         SilvallyTypesQuestLine.addQuest(BuyIceMemory);
 
-        const talkToHapuSilvally = new TalkToNPCQuest(HapuSilvally1, 'Talk to Kahuna Hapu in Exeggutor Island to find out if she knows about Silvally\'s memories.');
+        const talkToHapuSilvally = new TalkToNPCQuest(HapuSilvally1, 'Talk to Kahuna Hapu on Exeggutor Island Hill to find out if she knows about Silvally\'s memories.');
         SilvallyTypesQuestLine.addQuest(talkToHapuSilvally);
 
         const BuyGroundMemory = new CustomQuest(1, undefined, 'Buy the Ground Memory from Kahuna Hapu.', () => player.itemList.Ground_Memory_Silvally());
@@ -2333,7 +2333,7 @@ class QuestLineHelper {
         const talkToGladion3 = new TalkToNPCQuest(SilvallyGladion3, 'Go show Gladion those memories you\'ve bought in the Aether Foundation');
         SilvallyTypesQuestLine.addQuest(talkToGladion3);
 
-        createMultiTypeCaptureQuest([PokemonType.Bug, PokemonType.Flying, PokemonType.Poison, PokemonType.Ghost, PokemonType.Psychic, PokemonType.Steel, PokemonType.Dragon], 'Get some training before looking for more Silvally\'s memories. Capture 100 Bug, Flying, Poison, Ghost, Psychic, Steel and Dragon types.');
+        createMultiTypeCaptureQuest([PokemonType.Bug, PokemonType.Flying, PokemonType.Poison, PokemonType.Ghost, PokemonType.Psychic, PokemonType.Steel, PokemonType.Dragon], 'Get some training before looking for more of Silvally\'s memories. Capture 100 Bug, Flying, Poison, Ghost, Psychic, Steel and Dragon types.');
 
         const talkToBugSilvally = new TalkToNPCQuest(GuzmaSilvally, 'Go ask Guzma in Po Town to find out if he has seen any Silvally Memories near Po Town');
         SilvallyTypesQuestLine.addQuest(talkToBugSilvally);
@@ -2349,7 +2349,7 @@ class QuestLineHelper {
         );
         SilvallyTypesQuestLine.addQuest(BugSilvallyBattle);
 
-        const talkToFlyingSilvally = new TalkToNPCQuest(KahiliSilvally, 'Some Melemele island habitants have seen Kahili having daily walks around Ten Carat Hill. Go find her in Ten Carat Hill.');
+        const talkToFlyingSilvally = new TalkToNPCQuest(KahiliSilvally, 'Some Melemele Island inhabitants have seen Kahili having daily walks around Ten Carat Hill. Go find her on Ten Carat Hill.');
         SilvallyTypesQuestLine.addQuest(talkToFlyingSilvally);
 
         const FlyingSilvallyBattle = new CustomQuest(
@@ -2362,7 +2362,7 @@ class QuestLineHelper {
         );
         SilvallyTypesQuestLine.addQuest(FlyingSilvallyBattle);
 
-        const talkToPoisonSilvally = new TalkToNPCQuest(PlumeriaSilvally, 'Some Poni island habitants have spotted alot of movimentation of Team Skull Grunts in Vast Poni Canyon. Go check it out.');
+        const talkToPoisonSilvally = new TalkToNPCQuest(PlumeriaSilvally, 'Some Poni Island inhabitants have spotted a lot of movement of Team Skull Grunts in Vast Poni Canyon. Go check it out.');
         SilvallyTypesQuestLine.addQuest(talkToPoisonSilvally);
 
         const PoisonSilvallyBattle = new CustomQuest(
@@ -2375,7 +2375,7 @@ class QuestLineHelper {
         );
         SilvallyTypesQuestLine.addQuest(PoisonSilvallyBattle);
 
-        const talkToGhostSilvally = new TalkToNPCQuest(AcerolaSilvally, 'Captain Acerola has been seen with a Silvally inside the Thrifty Megamart. Go find her.');
+        const talkToGhostSilvally = new TalkToNPCQuest(AcerolaSilvally, 'Captain Acerola has been seen with a Silvally Memory inside the Thrifty Megamart. Go find her.');
         SilvallyTypesQuestLine.addQuest(talkToGhostSilvally);
 
         const GhostSilvallyBattle = new CustomQuest(
@@ -2388,7 +2388,7 @@ class QuestLineHelper {
         );
         SilvallyTypesQuestLine.addQuest(GhostSilvallyBattle);
 
-        const talkToPsychicSilvally = new TalkToNPCQuest(FabaSilvally, 'Some habitants from Akala island have seen some Aether employees travelling to the Southwest of Akala island. Go check it .');
+        const talkToPsychicSilvally = new TalkToNPCQuest(FabaSilvally, 'Some inhabitants from Akala Island have seen some Aether employees traveling to the southwest of Akala Island. Go check it out.');
         SilvallyTypesQuestLine.addQuest(talkToPsychicSilvally);
 
         const PsychicSilvallyBattle = new CustomQuest(
@@ -2401,13 +2401,13 @@ class QuestLineHelper {
         );
         SilvallyTypesQuestLine.addQuest(PsychicSilvallyBattle);
 
-        const talkToSteelSilvally = new TalkToNPCQuest(MolayneSilvally, 'Molayne needs help training in Royal Avenue. He has also been seen with a Silvally so go check it out.');
+        const talkToSteelSilvally = new TalkToNPCQuest(MolayneSilvally, 'Molayne needs help training in Royal Avenue. He has also been seen with a Silvally Memory so go check it out.');
         SilvallyTypesQuestLine.addQuest(talkToSteelSilvally);
 
         const SteelSilvallyBattle = new CustomQuest(
             1,
             undefined,
-            'Defeat Molayne for a reward!.',
+            'Defeat Molayne for a reward!',
             () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Molayne Steel Memory')](),
             0,
             () => ItemList.Steel_Memory_Silvally.gain(1)
@@ -2420,14 +2420,14 @@ class QuestLineHelper {
         const DragonSilvallyBattle = new CustomQuest(
             1,
             undefined,
-            'Defeat Ryuki for the Memory!.',
+            'Defeat Ryuki for the Memory!',
             () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ryuki Dragon Memory')](),
             0,
             () => ItemList.Dragon_Memory_Silvally.gain(1)
         );
         SilvallyTypesQuestLine.addQuest(DragonSilvallyBattle);
 
-        const talkToGladion4 = new TalkToNPCQuest(SilvallyGladion4, 'Go talk to Gladion in the Aether Foundation and tell him you\'ve recovered all the Silvally memories!');
+        const talkToGladion4 = new TalkToNPCQuest(SilvallyGladion4, 'Go talk to Gladion in the Aether Foundation and tell him you\'ve recovered all the Silvally Memories!');
         SilvallyTypesQuestLine.addQuest(talkToGladion4);
 
         App.game.quests.questLines().push(SilvallyTypesQuestLine);

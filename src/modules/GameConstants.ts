@@ -282,9 +282,9 @@ export const SAFARI_OUT_OF_BALLS = 'Game Over!<br>You have run out of safari bal
 const questBase = 1; // change this to scale all quest points
 
 // Currency → QP reward amounts
-export const GAIN_MONEY_BASE_REWARD = questBase * 0.0017;
-export const GAIN_TOKENS_BASE_REWARD = GAIN_MONEY_BASE_REWARD * 55;
-export const GAIN_FARM_POINTS_BASE_REWARD = GAIN_MONEY_BASE_REWARD * 360;
+export const GAIN_MONEY_BASE_REWARD = questBase * 80;
+export const GAIN_TOKENS_BASE_REWARD = GAIN_MONEY_BASE_REWARD * 2.5;
+export const GAIN_FARM_POINTS_BASE_REWARD = questBase * 0.612;
 
 export const HATCH_EGGS_BASE_REWARD = questBase * 33;
 export const SHINY_BASE_REWARD = questBase * 3000;
