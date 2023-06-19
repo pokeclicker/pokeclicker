@@ -3599,7 +3599,7 @@ TemporaryBattleList['Kahili Flying Memory'] = new TemporaryBattle(
         new GymPokemon('Mandibuzz', 23135785, 63), // new GymPokemon('Mandibuzz', 231357859, 63),
         new GymPokemon('Toucannon', 23135785, 63), // new GymPokemon('Toucannon', 231357859, 63),
     ],
-    'You\'re pretty talented, $playername$! No wonder you\'ve became the Champion of Alola! anyways, here is the Memory I said i\'d give it to you. </br><img src="assets/images/items/quest/Flying_Memory_Silvally.png"></br><i>You obtained a Flying Silvally Memory!</i>',
+    'You\'re pretty talented, $playername$! No wonder you\'ve become the Champion of Alola! Anyways, here is the Memory. I said I\'d give it to you. </br><img src="assets/images/items/quest/Flying_Memory_Silvally.png"></br><i>You obtained a Flying Silvally Memory!</i>',
     [new QuestLineStepCompletedRequirement('Typing some Memories', 21)],
     undefined,
     {
@@ -3684,7 +3684,7 @@ TemporaryBattleList['Ryuki Dragon Memory'] = new TemporaryBattle(
         new GymPokemon('Dragonite', 26135785, 63), // new GymPokemon('Dragonite', 261357859, 63),
         new GymPokemon('Kommo-o', 26135785, 63), // new GymPokemon('Kommo-o', 261357859, 63),
     ],
-    'That was an exciting battle, $playername$! Why don\'t you go beat my Gym someday? it\'s located in Malie city in Ula\'ula island, i\'m sure you\'ll find it pretty quickly when arriving there. Anyways you can take this.. Whats was it\'s name? Oh, right. You can take this Memory with you. </br><img src="assets/images/items/quest/Dragon_Memory_Silvally.png"></br><i>You obtained a Dragon Silvally Memory!</i>',
+    'That was an exciting battle, $playername$! Why don\'t you go beat my Gym someday? It\'s located in Malie city on Ula\'ula Island, I\'m sure you\'ll find it pretty quickly when arriving there. Anyways you can take this.. What was it\'s name? Oh, right. You can take this Memory with you. </br><img src="assets/images/items/quest/Dragon_Memory_Silvally.png"></br><i>You obtained a Dragon Silvally Memory!</i>',
     [new QuestLineStepCompletedRequirement('Typing some Memories', 31)],
     undefined,
     {
