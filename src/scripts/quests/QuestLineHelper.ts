@@ -2374,12 +2374,7 @@ class QuestLineHelper {
             'Defeat Guzma for the Silvally Memory!',
             () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Guzma Bug Memory')](),
             0,
-            () => ItemList.Bug_Memory_Silvally.gain(1),
-            {
-                clearedMessage: 'That was a good battle, and you\'ve won against me one more time. This just proves how much of a good trainer you are. Here is the Memory you\'ve been looking for',
-                npcDisplayName: 'Guzma',
-                npcImageName: 'Team Skull Boss (guzma)',
-            }
+            () => ItemList.Bug_Memory_Silvally.gain(1)
         );
         SilvallyTypesQuestLine.addQuest(BugSilvallyBattle);
 
@@ -2392,12 +2387,7 @@ class QuestLineHelper {
             'Defeat Kahili for a reward!',
             () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Kahili Flying Memory')](),
             0,
-            () => ItemList.Flying_Memory_Silvally.gain(1),
-            {
-                clearedMessage: 'You\'re pretty talented, $playername$! No wonder you\'ve became the Champion of Alola! anyways, here is the Memory I said i\'d give it to you',
-                npcDisplayName: 'Kahili',
-                npcImageName: 'Kahili',
-            }
+            () => ItemList.Flying_Memory_Silvally.gain(1)
         );
         SilvallyTypesQuestLine.addQuest(FlyingSilvallyBattle);
 
@@ -2410,12 +2400,7 @@ class QuestLineHelper {
             'Defeat Plumeria to recover the Memory!',
             () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Plumeria Poison Memory')](),
             0,
-            () => ItemList.Poison_Memory_Silvally.gain(1),
-            {
-                clearedMessage: '<i>tsk.<i> And you\'ve won again against me. I guess you\'re pretty strong for a kid, $playername$. Take the Memory with you, you deserve it.',
-                npcDisplayName: 'Plumeria',
-                npcImageName: 'Plumeria',
-            }
+            () => ItemList.Poison_Memory_Silvally.gain(1)
         );
         SilvallyTypesQuestLine.addQuest(PoisonSilvallyBattle);
 
@@ -2428,12 +2413,7 @@ class QuestLineHelper {
             'Defeat Captain Acerola to get the Memory back.',
             () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Acerola Ghost Memory')](),
             0,
-            () => ItemList.Ghost_Memory_Silvally.gain(1),
-            {
-                clearedMessage: 'That was so much fun, $playername$! I hope you come by more times so we can battle more often! Anyways, here is the Memory Mimikyu had found.',
-                npcDisplayName: 'Captain Acerola',
-                npcImageName: 'Acerola',
-            }
+            () => ItemList.Ghost_Memory_Silvally.gain(1)
         );
         SilvallyTypesQuestLine.addQuest(GhostSilvallyBattle);
 
@@ -2446,12 +2426,7 @@ class QuestLineHelper {
             'Defeat Aether Branch Chief Faba to get the Memory back.',
             () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Faba Psychic Memory')](),
             0,
-            () => ItemList.Psychic_Memory_Silvally.gain(1),
-            {
-                clearedMessage: 'You\'re still pretty strong after all that time since our last battle. Well, take the Memory with you.',
-                npcDisplayName: 'Aether Branch Chief Faba',
-                npcImageName: 'Aether Branch Chief (faba)',
-            }
+            () => ItemList.Psychic_Memory_Silvally.gain(1)
         );
         SilvallyTypesQuestLine.addQuest(PsychicSilvallyBattle);
 
@@ -2464,12 +2439,7 @@ class QuestLineHelper {
             'Defeat Molayne for a reward!',
             () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Molayne Steel Memory')](),
             0,
-            () => ItemList.Steel_Memory_Silvally.gain(1),
-            {
-                clearedMessage: 'That was a good match! Thank you for helping me train in here and as a reward for being the first person to defeat me, you can take this strange disk!',
-                npcDisplayName: 'Molayne',
-                npcImageName: 'Molayne',
-            }
+            () => ItemList.Steel_Memory_Silvally.gain(1)
         );
         SilvallyTypesQuestLine.addQuest(SteelSilvallyBattle);
 
@@ -2482,12 +2452,7 @@ class QuestLineHelper {
             'Defeat Ryuki for the Memory!',
             () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ryuki Dragon Memory')](),
             0,
-            () => ItemList.Dragon_Memory_Silvally.gain(1),
-            {
-                clearedMessage: 'That was an exciting battle, $playername$! Why don\'t you go beat my Gym someday? it\'s located in Malie city in Ula\'ula island, i\'m sure you\'ll find it pretty quickly when arriving there. Anyways you can take this.. Whats was it\'s name? Oh, right. You can take this Memory with you.',
-                npcDisplayName: 'Ryuki',
-                npcImageName: 'Ryuki',
-            }
+            () => ItemList.Dragon_Memory_Silvally.gain(1)
         );
         SilvallyTypesQuestLine.addQuest(DragonSilvallyBattle);
 
