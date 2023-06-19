@@ -3582,7 +3582,7 @@ TemporaryBattleList['Guzma Bug Memory'] = new TemporaryBattle(
         new GymPokemon('Pinsir', 22535785, 63), // new GymPokemon('Pinsir', 225357859, 63),
         new GymPokemon('Scizor', 22535785, 63), // new GymPokemon('Scizor', 225357859, 63),
     ],
-    'That was a good battle, and you\'ve won against me one more time. This just proves how much of a good trainer you are. Here is the Memory you\'ve been looking for. </i></br><img src="assets/images/items/quest/Bug_Memory_Silvally.png"/></br><i>You obtained a Bug Silvally Memory!</i>',
+    'That was a good battle, and you\'ve won against me one more time. This just proves how much of a good trainer you are. Here is the Memory you\'ve been looking for. </br><img src="assets/images/items/quest/Bug_Memory_Silvally.png"></br><i>You obtained a Bug Silvally Memory!</i>',
     [new QuestLineStepCompletedRequirement('Typing some Memories', 19)],
     undefined,
     {
@@ -3599,7 +3599,7 @@ TemporaryBattleList['Kahili Flying Memory'] = new TemporaryBattle(
         new GymPokemon('Mandibuzz', 23135785, 63), // new GymPokemon('Mandibuzz', 231357859, 63),
         new GymPokemon('Toucannon', 23135785, 63), // new GymPokemon('Toucannon', 231357859, 63),
     ],
-    'You\'re pretty talented, $playername$! No wonder you\'ve became the Champion of Alola! anyways, here is the Memory I said i\'d give it to you. </i></br><img src="assets/images/items/quest/Flying_Memory_Silvally.png"/></br><i>You obtained a Flying Silvally Memory!</i>',
+    'You\'re pretty talented, $playername$! No wonder you\'ve became the Champion of Alola! anyways, here is the Memory I said i\'d give it to you. </br><img src="assets/images/items/quest/Flying_Memory_Silvally.png"></br><i>You obtained a Flying Silvally Memory!</i>',
     [new QuestLineStepCompletedRequirement('Typing some Memories', 21)],
     undefined,
     {
@@ -3616,7 +3616,7 @@ TemporaryBattleList['Plumeria Poison Memory'] = new TemporaryBattle(
         new GymPokemon('Toxapex', 23735785, 63),// new GymPokemon('Toxapex', 237357859, 63),
         new GymPokemon('Salazzle', 23735785, 63), // new GymPokemon('Salazzle', 237357859, 63),
     ],
-    '<i>tsk.<i> And you\'ve won again against me. I guess you\'re pretty strong for a kid, $playername$. Take the Memory with you, you deserve it. </i></br><img src="assets/images/items/quest/Poison_Memory_Silvally.png"/></br><i>You obtained a Poison Silvally Memory!</i>',
+    '<i>tsk.<i> And you\'ve won again against me. I guess you\'re pretty strong for a kid, $playername$. Take the Memory with you, you deserve it. </br><img src="assets/images/items/quest/Poison_Memory_Silvally.png"></br><i>You obtained a Poison Silvally Memory!</i>',
     [new QuestLineStepCompletedRequirement('Typing some Memories', 23)],
     undefined,
     {
@@ -3633,7 +3633,7 @@ TemporaryBattleList['Acerola Ghost Memory'] = new TemporaryBattle(
         new GymPokemon('Froslass', 24335785, 63), // new GymPokemon('Froslass', 243357859, 63),
         new GymPokemon('Palossand', 24335785, 63), // new GymPokemon('Palossand', 243357859, 63),
     ],
-    'That was so much fun, $playername$! I hope you come by more times so we can battle more often! Anyways, here is the Memory Mimikyu had found. </i></br><img src="assets/images/items/quest/Ghost_Memory_Silvally.png"/></br><i>You obtained a Ghost Silvally Memory!</i>',
+    'That was so much fun, $playername$! I hope you come by more times so we can battle more often! Anyways, here is the Memory Mimikyu had found. </br><img src="assets/images/items/quest/Ghost_Memory_Silvally.png"></br><i>You obtained a Ghost Silvally Memory!</i>',
     [new QuestLineStepCompletedRequirement('Typing some Memories', 25)],
     undefined,
     {
@@ -3650,7 +3650,7 @@ TemporaryBattleList['Faba Psychic Memory'] = new TemporaryBattle(
         new GymPokemon('Alakazam', 24935785, 63), // new GymPokemon('Alakazam', 249357859, 63),
         new GymPokemon('Hypno', 24935785, 63), // new GymPokemon('Hypno', 249357859, 63),
     ],
-    'You\'re still pretty strong after all that time since our last battle. Well, take the Memory with you. </i></br><img src="assets/images/items/quest/Psychic_Memory_Silvally.png"/></br><i>You obtained a Psychic Silvally Memory!</i>',
+    'You\'re still pretty strong after all that time since our last battle. Well, take the Memory with you. </br><img src="assets/images/items/quest/Psychic_Memory_Silvally.png"></br><i>You obtained a Psychic Silvally Memory!</i>',
     [new QuestLineStepCompletedRequirement('Typing some Memories', 27)],
     undefined,
     {
@@ -3667,7 +3667,7 @@ TemporaryBattleList['Molayne Steel Memory'] = new TemporaryBattle(
         new GymPokemon('Metagross', 25535785, 63), // new GymPokemon('Metagross', 255357859, 63),
         new GymPokemon('Alolan Dugtrio', 25535785, 63), // new GymPokemon('Alolan Dugtrio', 255357859, 63),
     ],
-    'That was a good match! Thank you for helping me train in here and as a reward for being the first person to defeat me, you can take this strange disk! </i></br><img src="assets/images/items/quest/Steel_Memory_Silvally.png"/></br><i>You obtained a Steel Silvally Memory!</i>',
+    'That was a good match! Thank you for helping me train in here and as a reward for being the first person to defeat me, you can take this strange disk! </br><img src="assets/images/items/quest/Steel_Memory_Silvally.png"></br><i>You obtained a Steel Silvally Memory!</i>',
     [new QuestLineStepCompletedRequirement('Typing some Memories', 29)],
     undefined,
     {
@@ -3684,7 +3684,7 @@ TemporaryBattleList['Ryuki Dragon Memory'] = new TemporaryBattle(
         new GymPokemon('Dragonite', 26135785, 63), // new GymPokemon('Dragonite', 261357859, 63),
         new GymPokemon('Kommo-o', 26135785, 63), // new GymPokemon('Kommo-o', 261357859, 63),
     ],
-    'That was an exciting battle, $playername$! Why don\'t you go beat my Gym someday? it\'s located in Malie city in Ula\'ula island, i\'m sure you\'ll find it pretty quickly when arriving there. Anyways you can take this.. Whats was it\'s name? Oh, right. You can take this Memory with you. </i></br><img src="assets/images/items/quest/Dragon_Memory_Silvally.png"/></br><i>You obtained a Dragon Silvally Memory!</i>',
+    'That was an exciting battle, $playername$! Why don\'t you go beat my Gym someday? it\'s located in Malie city in Ula\'ula island, i\'m sure you\'ll find it pretty quickly when arriving there. Anyways you can take this.. Whats was it\'s name? Oh, right. You can take this Memory with you. </br><img src="assets/images/items/quest/Dragon_Memory_Silvally.png"></br><i>You obtained a Dragon Silvally Memory!</i>',
     [new QuestLineStepCompletedRequirement('Typing some Memories', 31)],
     undefined,
     {
