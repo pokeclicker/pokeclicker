@@ -2299,7 +2299,7 @@ class QuestLineHelper {
 
         const BuyWaterMemory = new CustomQuest(1, undefined, 'Buy the Water Memory from Captain Lana.', () => player.itemList.Water_Memory_Silvally(), undefined, undefined,
             {
-                clearedMessage: 'Thank you so much $playername$! Now i can finally buy that rod i\'ve always wanted!',
+                clearedMessage: 'Thank you so much $playername$! Now I can finally buy that rod i\'ve always wanted!',
                 npcDisplayName: 'Captain Lana',
                 npcImageName: 'Lana',
             });
@@ -2310,7 +2310,7 @@ class QuestLineHelper {
 
         const BuyGrassMemory = new CustomQuest(1, undefined, 'Buy the Grass Memory from Captain Mallow.', () => player.itemList.Grass_Memory_Silvally(), undefined, undefined,
             {
-                clearedMessage: 'Thank you, $playername$. I\'ll go to the Market buy the new ingredients right now!',
+                clearedMessage: 'Thank you, $playername$. I\'ll go to the market and buy the new ingredients right now!',
                 npcDisplayName: 'Captain Mallow',
                 npcImageName: 'Mallow',
             });
@@ -2332,7 +2332,7 @@ class QuestLineHelper {
 
         const BuyElectricMemory = new CustomQuest(1, undefined, 'Buy the Electric Memory from Captain Sophocles.', () => player.itemList.Electric_Memory_Silvally(), undefined, undefined,
             {
-                clearedMessage: 'Thank you, $playername$! Now i\'ll go buy some new equipments to my laboratory.',
+                clearedMessage: 'Thank you, $playername$! Now I\'ll go buy some new equipment for my laboratory.',
                 npcDisplayName: 'Captain Sophocles',
                 npcImageName: 'Sophocles',
             });
@@ -2343,7 +2343,7 @@ class QuestLineHelper {
 
         const BuyIceMemory = new CustomQuest(1, undefined, 'Buy the Ice Memory from Veteran Aristo.', () => player.itemList.Ice_Memory_Silvally(), undefined, undefined,
             {
-                clearedMessage: 'You\'re the best, kiddo! I\'m sure she\'ll love the ring i\'ll buy her with these diamonds!',
+                clearedMessage: 'You\'re the best, kiddo! I\'m sure she\'ll love the ring I\'ll buy her with these diamonds!',
                 npcDisplayName: 'Veteran Aristo',
                 npcImageName: 'Veteran (male)',
             });
