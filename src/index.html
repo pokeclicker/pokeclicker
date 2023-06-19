@@ -117,6 +117,7 @@
 @import "templates/pokemonGenderTemplate.html"
 @import "templates/pokemonAttackTemplate.html"
 @import "templates/pokemonGenderStatisticTemplate.html"
+@import "templates/multiSelectDropdownTemplate.html"
 
 <div id="game" class="container loading" data-bind="css: {'container': Settings.getSetting('gameDisplayStyle').observableValue() === 'standard3', 'container-fluid': Settings.getSetting('gameDisplayStyle').observableValue() !== 'standard3'}">
     <div class="row justify-content-center">
@@ -398,6 +399,12 @@
                             <span class='float-right px-4 bg-uncaughtPokemon'>&nbsp;</span>
                         </div>
                         <div class='col-10 legend-item'>
+                            <span>Uncaught Shadow Pokemon:</span>
+                        </div>
+                        <div class='col-2'>
+                            <span class='float-right px-4 bg-uncaughtShadowPokemon'>&nbsp;</span>
+                        </div>
+                        <div class='col-10 legend-item'>
                             <span>Uncaught Shiny Pokemon and Missing Achievement:</span>
                         </div>
                         <div class='col-2'>
@@ -488,6 +495,10 @@
                             @import "GalarSVG.html"
                             @import "HisuiSVG.html"
 
+                            <g id="playerSprite">
+                                <!-- This group is cleared actively via koExtenders.ts added to fix #3358 -->
+                                <!-- TODO: Replace current PlayerSprite rendering logic so a singular SVG is used / updated like so:-->
+                            </g>
                         </svg>
                     </div>
                 </div>
@@ -524,7 +535,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 

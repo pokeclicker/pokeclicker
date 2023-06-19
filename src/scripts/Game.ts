@@ -445,6 +445,8 @@ class Game {
                 BattleCafeController.spinsLeft(BattleCafeController.spinsPerDay());
                 // Generate the weather forecast
                 WeatherApp.initialize();
+                // Refresh Friend Safari Pokemon List
+                SafariPokemonList.generateKalosSafariList();
 
                 DayOfWeekRequirement.date(now.getDay());
             }
@@ -498,6 +500,12 @@ class Game {
         SaveReminder.counter += GameConstants.TICK_TIME;
         if (SaveReminder.counter >= 5 * GameConstants.MINUTE) {
             SaveReminder.tick();
+        }
+
+        // update event calendar
+        this.specialEvents.counter += GameConstants.TICK_TIME;
+        if (this.specialEvents.counter >= GameConstants.SPECIAL_EVENT_TICK) {
+            this.specialEvents.tick();
         }
     }
 

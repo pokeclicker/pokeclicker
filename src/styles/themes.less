@@ -35,6 +35,21 @@
   }
 }
 
+/* Themes who need more space in tables */
+.cerulean, .cyborg, .darkly, .flatly, .journal, .litera, .materia, .minty, .pulse, .sandstone, .simplex, .sketchy, .slate, .spacelab, .superhero, .united, .yeti {
+  @media (max-width: 992px)
+  {
+    #pokemonVitaminExpandedModal {
+      .tight {
+        .btn {
+          padding-left: 5px !important;
+          padding-right: 5px !important;
+        }
+      }
+    }
+  }
+}
+
 /* Themes that can have longer BerryDex on phone */
 .cosmo, .cyborg, .lumen, .pulse, .sketchy, .sandstone, .simplex, .solar {
   @media (max-width: 767px) {
@@ -46,13 +61,13 @@
 
 /* Individual themes */
 .cerulean {
-  /* Evolution items */
-  #evo-item-list, #evo-pokemon-list {
-    .item-selected, .pokemon-selected {
-      color: whitesmoke;
-      background-image: linear-gradient(#4e5458, #565b60 40%, #5b6165);
+    /* Evolution items */
+    #evo-item-list, #evo-pokemon-list {
+        .item-selected, .pokemon-selected {
+            color: whitesmoke;
+            background-image: linear-gradient(#4e5458, #565b60 40%, #5b6165);
+        }
     }
-  }
 }
 
 .cosmo {
@@ -129,7 +144,16 @@
     font-size: 30px !important;
   }
 
-    /* Berrydex List */
+  #pokemonVitaminExpandedModal {
+    .tight {
+      .btn {
+        padding-left: 5px !important;
+        padding-right: 5px !important;
+      }
+    }
+  }
+
+   /* Berrydex List */
     #berryDexPreviewTable {
       width: 360px;
     }
@@ -258,6 +282,12 @@
 
     .list-group-item-action:hover {
       color: black;
+    }
+  }
+
+  .multiselect-dropdown {
+    .form-check-input {
+      margin-left: 0 !important;
     }
   }
 }

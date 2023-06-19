@@ -26,6 +26,7 @@ export const MUTATION_TICK = 1 * SECOND;
 export const WANDER_TICK = 1.5 * SECOND;
 export const TEMP_BATTLE_TIME = 60 * SECOND;
 export const TEMP_BATTLE_TICK = 0.1 * SECOND;
+export const SPECIAL_EVENT_TICK = 1 * SECOND;
 
 // Update the requirement for "Final Region Town" in TownList, when adding new regions.
 // Else the professor NPC won't work.
@@ -219,6 +220,7 @@ export enum AchievementType {
     'Hatchery',
     'Farming',
     'Underground',
+    'Safari',
     'Battle Frontier',
     'Vitamins',
     'Pokerus',
@@ -280,9 +282,9 @@ export const SAFARI_OUT_OF_BALLS = 'Game Over!<br>You have run out of safari bal
 const questBase = 1; // change this to scale all quest points
 
 // Currency → QP reward amounts
-export const GAIN_MONEY_BASE_REWARD = questBase * 0.0017;
-export const GAIN_TOKENS_BASE_REWARD = GAIN_MONEY_BASE_REWARD * 55;
-export const GAIN_FARM_POINTS_BASE_REWARD = GAIN_MONEY_BASE_REWARD * 90;
+export const GAIN_MONEY_BASE_REWARD = questBase * 80;
+export const GAIN_TOKENS_BASE_REWARD = GAIN_MONEY_BASE_REWARD * 2.5;
+export const GAIN_FARM_POINTS_BASE_REWARD = questBase * 0.612;
 
 export const HATCH_EGGS_BASE_REWARD = questBase * 33;
 export const SHINY_BASE_REWARD = questBase * 3000;
@@ -320,6 +322,7 @@ export const REPEATBALL_EP_MODIFIER = 5;
 export const DUNGEON_EP_MODIFIER = 3;
 export const DUNGEON_BOSS_EP_MODIFIER = 10;
 export const ROAMER_EP_MODIFIER = 50;
+export const SHADOW_EP_MODIFIER = 2;
 
 export const EP_EV_RATIO = 1000;
 export const EP_CHALLENGE_MODIFIER = 10;
@@ -865,6 +868,40 @@ export enum PokemonItemType {
     'Meloetta (Pirouette)',
     'Type: Null',
     'Poipole',
+    'Silvally (Fighting) 1',
+    'Silvally (Rock) 1',
+    'Silvally (Dark) 1',
+    'Silvally (Fairy) 1',
+    'Silvally (Water) 1',
+    'Silvally (Grass) 1',
+    'Silvally (Fire) 1',
+    'Silvally (Electric) 1',
+    'Silvally (Ice) 1',
+    'Silvally (Ground) 1',
+    'Silvally (Bug) 1',
+    'Silvally (Flying) 1',
+    'Silvally (Poison) 1',
+    'Silvally (Ghost) 1',
+    'Silvally (Psychic) 1',
+    'Silvally (Steel) 1',
+    'Silvally (Dragon) 1',
+    'Silvally (Fighting) 2',
+    'Silvally (Rock) 2',
+    'Silvally (Dark) 2',
+    'Silvally (Fairy) 2',
+    'Silvally (Water) 2',
+    'Silvally (Grass) 2',
+    'Silvally (Fire) 2',
+    'Silvally (Electric) 2',
+    'Silvally (Ice) 2',
+    'Silvally (Ground) 2',
+    'Silvally (Bug) 2',
+    'Silvally (Flying) 2',
+    'Silvally (Poison) 2',
+    'Silvally (Ghost) 2',
+    'Silvally (Psychic) 2',
+    'Silvally (Steel) 2',
+    'Silvally (Dragon) 2',
     'Dracozolt',
     'Arctozolt',
     'Dracovish',
@@ -1238,20 +1275,20 @@ export const HoennDungeons = [
     'Near Space',
     'Phenac City Battles',
     'Pyrite Town Battles',
-    'Pyrite Colosseum Battles',
+    'Pyrite Colosseum',
     'Pyrite Building',
     'Pyrite Cave',
     'Relic Cave',
-    'Mt. Battle Battles',
-    'The Under Subway',
-    'Cipher Lab Battles',
+    'Mt. Battle',
+    'The Under',
+    'Cipher Lab',
     'Realgam Tower Battles',
-    'Realgam Colosseum Battles',
+    'Realgam Colosseum',
     'Snagem Hideout',
-    'Deep Colosseum Battles',
-    'Phenac Stadium Battles',
-    'Under Colosseum Battles',
-    'Orre Colosseum Battles', // 72
+    'Deep Colosseum',
+    'Phenac Stadium',
+    'Under Colosseum',
+    'Orre Colosseum', // 72
     // These aren't implemented anywhere yet
     /*
     "Island Cave",
@@ -1534,6 +1571,11 @@ export const TemporaryBattles = [
     'Meta Groudon',
     'Latios',
     'Latias',
+    'Willie',
+    'Folly',
+    'Cipher Peon Doven',
+    'Cipher Peon Silton',
+    'Cipher Peon Kass',
     'Sevii Rocket Grunt 1',
     'Sevii Rocket Grunt 2',
     'Sevii Rocket Grunt 3',
@@ -1628,6 +1670,7 @@ export const TemporaryBattles = [
     'Matt 3',
     'Courtney 3',
     'Hoenn Stone Salesman',
+    'Kalos Stone Salesman',
     'Captain Stern',
     'Archie Primal',
     'Maxie Primal',
@@ -1695,6 +1738,13 @@ export const TemporaryBattles = [
     'Captain Sophocles',
     'Kahuna Nanu',
     'Gladion 3',
+    'Guzma Bug Memory',
+    'Kahili Flying Memory',
+    'Plumeria Poison Memory',
+    'Acerola Ghost Memory',
+    'Faba Psychic Memory',
+    'Molayne Steel Memory',
+    'Ryuki Dragon Memory',
     'Anabel',
     'Captain Mina UB',
     'Kahuna Nanu UB',
@@ -2078,3 +2128,31 @@ export enum MegaStoneType {
     Tyranitarite,
     Venusaurite,
 }
+
+export enum GemShops {
+    HoennFluteMaster,
+    HoennStoneSalesman,
+    UnovaFluteMaster,
+    FurfrouGemTrader,
+    KalosStoneSalesman,
+    SilvallyTrader,
+    MagikarpJumpGemTrader,
+}
+
+export enum DungeonInteractionSource {
+    Click,
+    Keybind,
+    HeldKeybind,
+}
+
+export const ModalCollapseList = [
+    'achievementTrackerBody',
+    'battleItemContainerBody',
+    'dailyQuestDisplayBody',
+    'eggList',
+    'fluteItemContainerBody',
+    'oakItemsBody',
+    'pokeballSelectorBody',
+    'pokemonListBody',
+    'shortcutsBody',
+];
