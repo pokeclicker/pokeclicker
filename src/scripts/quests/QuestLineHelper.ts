@@ -2269,7 +2269,7 @@ class QuestLineHelper {
             SilvallyTypesQuestLine.addQuest(quest);
         };
 
-        createMultiTypeCaptureQuest([PokemonType.Fighting, PokemonType.Rock, PokemonType.Dark, PokemonType.Fairy], 'Get some training before looking for Silvally\'s memories. Capture 100 Fighting, Rock, Dark and Fairy Types');
+        createMultiTypeCaptureQuest([PokemonType.Fighting, PokemonType.Rock, PokemonType.Dark, PokemonType.Fairy], 'Get some training before looking for Silvally\'s memories. Catch or hatch 100 Fighting, Rock, Dark and Fairy Types');
 
         const talkToMelemeleLocals = new TalkToNPCQuest(SilvallyHala, 'Talk to important people around Melemele Island.', () => ItemList.Fighting_Memory_Silvally.gain(1));
         const talkToAkalaLocals = new TalkToNPCQuest(SilvallyOlivia, 'Talk to important people around Akala Island.', () => ItemList.Rock_Memory_Silvally.gain(1));
@@ -2292,48 +2292,78 @@ class QuestLineHelper {
         const talkToGladion2 = new TalkToNPCQuest(SilvallyGladion2, 'Talk to Gladion in the Aether Foundation and tell him what you found out about Silvally\'s memories.');
         SilvallyTypesQuestLine.addQuest(talkToGladion2);
 
-        createMultiTypeCaptureQuest([PokemonType.Water, PokemonType.Grass, PokemonType.Fire, PokemonType.Electric, PokemonType.Ground, PokemonType.Ice], 'You probably need to train a little before going looking for more of Silvally memories. Capture 100 Water, Grass, Fire, Electric, Ground and Ice types.');
+        createMultiTypeCaptureQuest([PokemonType.Water, PokemonType.Grass, PokemonType.Fire, PokemonType.Electric, PokemonType.Ground, PokemonType.Ice], 'You probably need to train a little before going looking for more of Silvally memories. Catch or hatch 100 Water, Grass, Fire, Electric, Ground and Ice types.');
 
         const talkToLanaSilvally = new TalkToNPCQuest(LanaSilvally1, 'Talk to Captain Lana in Brooklet Hill to find out if she knows something about Silvally\'s memories.');
         SilvallyTypesQuestLine.addQuest(talkToLanaSilvally);
 
-        const BuyWaterMemory = new CustomQuest(1, undefined, 'Buy the Water Memory from Captain Lana.', () => player.itemList.Water_Memory_Silvally());
+        const BuyWaterMemory = new CustomQuest(1, undefined, 'Buy the Water Memory from Captain Lana.', () => player.itemList.Water_Memory_Silvally(), undefined, undefined,
+            {
+                clearedMessage: 'Thank you so much $playername$! Now I can finally buy that rod i\'ve always wanted!',
+                npcDisplayName: 'Captain Lana',
+                npcImageName: 'Lana',
+            });
         SilvallyTypesQuestLine.addQuest(BuyWaterMemory);
 
         const talkToMallowSilvally = new TalkToNPCQuest(MallowSilvally1, 'Talk to Captain Mallow in Lush Jungle to find out if she knows about Silvally\'s memories');
         SilvallyTypesQuestLine.addQuest(talkToMallowSilvally);
 
-        const BuyGrassMemory = new CustomQuest(1, undefined, 'Buy the Grass Memory from Captain Mallow.', () => player.itemList.Grass_Memory_Silvally());
+        const BuyGrassMemory = new CustomQuest(1, undefined, 'Buy the Grass Memory from Captain Mallow.', () => player.itemList.Grass_Memory_Silvally(), undefined, undefined,
+            {
+                clearedMessage: 'Thank you, $playername$. I\'ll go to the market and buy the new ingredients right now!',
+                npcDisplayName: 'Captain Mallow',
+                npcImageName: 'Mallow',
+            });
         SilvallyTypesQuestLine.addQuest(BuyGrassMemory);
 
         const talkToKiaweSilvally = new TalkToNPCQuest(KiaweSilvally1, 'Talk to Captain Kiawe in Wela Volcano Park to find out if he knows about Silvally\'s memories.');
         SilvallyTypesQuestLine.addQuest(talkToKiaweSilvally);
 
-        const BuyFireMemory = new CustomQuest(1, undefined, 'Buy the Fire Memory from Captain Kiawe.', () => player.itemList.Fire_Memory_Silvally());
+        const BuyFireMemory = new CustomQuest(1, undefined, 'Buy the Fire Memory from Captain Kiawe.', () => player.itemList.Fire_Memory_Silvally(), undefined, undefined,
+            {
+                clearedMessage: 'Thanks, $playername$. I\'ll be going to the market to buy the project supplies this instant.',
+                npcDisplayName: 'Captain Kiawe',
+                npcImageName: 'Kiawe',
+            });
         SilvallyTypesQuestLine.addQuest(BuyFireMemory);
 
         const talkToSophoclesSilvally = new TalkToNPCQuest(SophoclesSilvally1, 'Talk to Captain Sophocles in Hokulani Observatory to find out if he knows about Silvally\'s memories.');
         SilvallyTypesQuestLine.addQuest(talkToSophoclesSilvally);
 
-        const BuyElectricMemory = new CustomQuest(1, undefined, 'Buy the Electric Memory from Captain Sophocles.', () => player.itemList.Electric_Memory_Silvally());
+        const BuyElectricMemory = new CustomQuest(1, undefined, 'Buy the Electric Memory from Captain Sophocles.', () => player.itemList.Electric_Memory_Silvally(), undefined, undefined,
+            {
+                clearedMessage: 'Thank you, $playername$! Now I\'ll go buy some new equipment for my laboratory.',
+                npcDisplayName: 'Captain Sophocles',
+                npcImageName: 'Sophocles',
+            });
         SilvallyTypesQuestLine.addQuest(BuyElectricMemory);
 
         const talkToVeteranSilvally = new TalkToNPCQuest(VeteranSilvally1, 'Talk to Veteran Aristo in Mount Lanakila to find out if he knows about Silvally\'s memories.');
         SilvallyTypesQuestLine.addQuest(talkToVeteranSilvally);
 
-        const BuyIceMemory = new CustomQuest(1, undefined, 'Buy the Ice Memory from Veteran Aristo.', () => player.itemList.Ice_Memory_Silvally());
+        const BuyIceMemory = new CustomQuest(1, undefined, 'Buy the Ice Memory from Veteran Aristo.', () => player.itemList.Ice_Memory_Silvally(), undefined, undefined,
+            {
+                clearedMessage: 'You\'re the best, kiddo! I\'m sure she\'ll love the ring I\'ll buy her with these diamonds!',
+                npcDisplayName: 'Veteran Aristo',
+                npcImageName: 'Veteran (male)',
+            });
         SilvallyTypesQuestLine.addQuest(BuyIceMemory);
 
         const talkToHapuSilvally = new TalkToNPCQuest(HapuSilvally1, 'Talk to Kahuna Hapu on Exeggutor Island Hill to find out if she knows about Silvally\'s memories.');
         SilvallyTypesQuestLine.addQuest(talkToHapuSilvally);
 
-        const BuyGroundMemory = new CustomQuest(1, undefined, 'Buy the Ground Memory from Kahuna Hapu.', () => player.itemList.Ground_Memory_Silvally());
+        const BuyGroundMemory = new CustomQuest(1, undefined, 'Buy the Ground Memory from Kahuna Hapu.', () => player.itemList.Ground_Memory_Silvally(), undefined, undefined,
+            {
+                clearedMessage: 'Wow you\'re pretty good at the farm, $playername$! I\'ll go buy the palm tree seeds right this isntant',
+                npcDisplayName: 'Kahuna Hapu',
+                npcImageName: 'Hapu',
+            });
         SilvallyTypesQuestLine.addQuest(BuyGroundMemory);
 
         const talkToGladion3 = new TalkToNPCQuest(SilvallyGladion3, 'Go show Gladion those memories you\'ve bought in the Aether Foundation');
         SilvallyTypesQuestLine.addQuest(talkToGladion3);
 
-        createMultiTypeCaptureQuest([PokemonType.Bug, PokemonType.Flying, PokemonType.Poison, PokemonType.Ghost, PokemonType.Psychic, PokemonType.Steel, PokemonType.Dragon], 'Get some training before looking for more of Silvally\'s memories. Capture 100 Bug, Flying, Poison, Ghost, Psychic, Steel and Dragon types.');
+        createMultiTypeCaptureQuest([PokemonType.Bug, PokemonType.Flying, PokemonType.Poison, PokemonType.Ghost, PokemonType.Psychic, PokemonType.Steel, PokemonType.Dragon], 'Get some training before looking for more of Silvally\'s memories. Catch or hatch 100 Bug, Flying, Poison, Ghost, Psychic, Steel and Dragon types.');
 
         const talkToBugSilvally = new TalkToNPCQuest(GuzmaSilvally, 'Go ask Guzma in Po Town to find out if he has seen any Silvally Memories near Po Town');
         SilvallyTypesQuestLine.addQuest(talkToBugSilvally);
@@ -2345,7 +2375,6 @@ class QuestLineHelper {
             () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Guzma Bug Memory')](),
             0,
             () => ItemList.Bug_Memory_Silvally.gain(1)
-
         );
         SilvallyTypesQuestLine.addQuest(BugSilvallyBattle);
 
