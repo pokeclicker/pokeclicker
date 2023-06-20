@@ -21,6 +21,8 @@ class GemDeal {
         GemDeal.list[GameConstants.GemShops.HoennStoneSalesman] = ko.observableArray(this.generateHoennStoneDeals());
         GemDeal.list[GameConstants.GemShops.UnovaFluteMaster] = ko.observableArray(this.generateUnovaFluteDeals());
         GemDeal.list[GameConstants.GemShops.FurfrouGemTrader] = ko.observableArray(this.generateFurfrouDeal());
+        GemDeal.list[GameConstants.GemShops.KalosStoneSalesman] = ko.observableArray(this.generateKalosStoneDeals());
+        GemDeal.list[GameConstants.GemShops.SilvallyTrader] = ko.observableArray(this.generateAlolaSilvallyDeal());
         GemDeal.list[GameConstants.GemShops.MagikarpJumpGemTrader] = ko.observableArray(this.generateMagikarpJumpDeal());
     }
 
@@ -58,7 +60,10 @@ class GemDeal {
     private static generateHoennStoneDeals() {
         const list = [];
         list.push(new GemDeal(
-            [{gemType: PokemonType.Grass, amount: 250000}],
+            [
+                {gemType: PokemonType.Grass, amount: 125000},
+                {gemType: PokemonType.Dragon, amount: 125000},
+            ],
             ItemList.Sceptilite,
             1
         ));
@@ -114,6 +119,41 @@ class GemDeal {
         return list;
     }
 
+    private static generateKalosStoneDeals() {
+        const list = [];
+
+        list.push(new GemDeal(
+            [
+                {gemType: PokemonType.Grass, amount: 125000},
+                {gemType: PokemonType.Poison, amount: 125000},
+            ],
+            ItemList.Venusaurite,
+            1
+        ));
+        list.push(new GemDeal(
+            [
+                {gemType: PokemonType.Fire, amount: 125000},
+                {gemType: PokemonType.Dragon, amount: 125000},
+            ],
+            ItemList.Charizardite_X,
+            1
+        ));
+        list.push(new GemDeal(
+            [
+                {gemType: PokemonType.Fire, amount: 125000},
+                {gemType: PokemonType.Flying, amount: 125000},
+            ],
+            ItemList.Charizardite_Y,
+            1
+        ));
+        list.push(new GemDeal(
+            [{gemType: PokemonType.Water, amount: 250000}],
+            ItemList.Blastoisinite,
+            1
+        ));
+        return list;
+    }
+
     private static generateFurfrouDeal() {
         const list = [];
 
@@ -139,6 +179,182 @@ class GemDeal {
                 {gemType: PokemonType.Fairy, amount: 100000},
             ],
             ItemList['Furfrou (La Reine)'],
+            1
+        ));
+        return list;
+    }
+
+    private static generateAlolaSilvallyDeal() {
+        const list = [];
+
+        list.push(new GemDeal(
+            [{gemType: PokemonType.Fighting, amount: 1000}],
+            ItemList['Silvally (Fighting) 1'],
+            1
+        ));
+        list.push(new GemDeal(
+            [{gemType: PokemonType.Fighting, amount: 75000}],
+            ItemList['Silvally (Fighting) 2'],
+            1
+        ));
+        list.push(new GemDeal(
+            [{gemType: PokemonType.Rock, amount: 1000}],
+            ItemList['Silvally (Rock) 1'],
+            1
+        ));
+        list.push(new GemDeal(
+            [{gemType: PokemonType.Rock, amount: 150000}],
+            ItemList['Silvally (Rock) 2'],
+            1
+        ));
+        list.push(new GemDeal(
+            [{gemType: PokemonType.Dark, amount: 1000}],
+            ItemList['Silvally (Dark) 1'],
+            1
+        ));
+        list.push(new GemDeal(
+            [{gemType: PokemonType.Dark, amount: 45000}],
+            ItemList['Silvally (Dark) 2'],
+            1
+        ));
+        list.push(new GemDeal(
+            [{gemType: PokemonType.Fairy, amount: 1000}],
+            ItemList['Silvally (Fairy) 1'],
+            1
+        ));
+        list.push(new GemDeal(
+            [{gemType: PokemonType.Fairy, amount: 45000}],
+            ItemList['Silvally (Fairy) 2'],
+            1
+        ));
+        list.push(new GemDeal(
+            [{gemType: PokemonType.Water, amount: 1000}],
+            ItemList['Silvally (Water) 1'],
+            1
+        ));
+        list.push(new GemDeal(
+            [{gemType: PokemonType.Water, amount: 250000}],
+            ItemList['Silvally (Water) 2'],
+            1
+        ));
+        list.push(new GemDeal(
+            [{gemType: PokemonType.Grass, amount: 1000}],
+            ItemList['Silvally (Grass) 1'],
+            1
+        ));
+        list.push(new GemDeal(
+            [{gemType: PokemonType.Grass, amount: 150000}],
+            ItemList['Silvally (Grass) 2'],
+            1
+        ));
+        list.push(new GemDeal(
+            [{gemType: PokemonType.Fire, amount: 1000}],
+            ItemList['Silvally (Fire) 1'],
+            1
+        ));
+        list.push(new GemDeal(
+            [{gemType: PokemonType.Fire, amount: 150000}],
+            ItemList['Silvally (Fire) 2'],
+            1
+        ));
+        list.push(new GemDeal(
+            [{gemType: PokemonType.Electric, amount: 1000}],
+            ItemList['Silvally (Electric) 1'],
+            1
+        ));
+        list.push(new GemDeal(
+            [{gemType: PokemonType.Electric, amount: 150000}],
+            ItemList['Silvally (Electric) 2'],
+            1
+        ));
+        list.push(new GemDeal(
+            [{gemType: PokemonType.Ice, amount: 1000}],
+            ItemList['Silvally (Ice) 1'],
+            1
+        ));
+        list.push(new GemDeal(
+            [{gemType: PokemonType.Ice, amount: 75000}],
+            ItemList['Silvally (Ice) 2'],
+            1
+        ));
+        list.push(new GemDeal(
+            [{gemType: PokemonType.Ground, amount: 1000}],
+            ItemList['Silvally (Ground) 1'],
+            1
+        ));
+        list.push(new GemDeal(
+            [{gemType: PokemonType.Ground, amount: 150000}],
+            ItemList['Silvally (Ground) 2'],
+            1
+        ));
+        list.push(new GemDeal(
+            [{gemType: PokemonType.Bug, amount: 1000}],
+            ItemList['Silvally (Bug) 1'],
+            1
+        ));
+        list.push(new GemDeal(
+            [{gemType: PokemonType.Bug, amount: 150000}],
+            ItemList['Silvally (Bug) 2'],
+            1
+        ));
+        list.push(new GemDeal(
+            [{gemType: PokemonType.Flying, amount: 1000}],
+            ItemList['Silvally (Flying) 1'],
+            1
+        ));
+        list.push(new GemDeal(
+            [{gemType: PokemonType.Flying, amount: 250000}],
+            ItemList['Silvally (Flying) 2'],
+            1
+        ));
+        list.push(new GemDeal(
+            [{gemType: PokemonType.Poison, amount: 1000}],
+            ItemList['Silvally (Poison) 1'],
+            1
+        ));
+        list.push(new GemDeal(
+            [{gemType: PokemonType.Poison, amount: 150000}],
+            ItemList['Silvally (Poison) 2'],
+            1
+        ));
+        list.push(new GemDeal(
+            [{gemType: PokemonType.Ghost, amount: 1000}],
+            ItemList['Silvally (Ghost) 1'],
+            1
+        ));
+        list.push(new GemDeal(
+            [{gemType: PokemonType.Ghost, amount: 75000}],
+            ItemList['Silvally (Ghost) 2'],
+            1
+        ));
+        list.push(new GemDeal(
+            [{gemType: PokemonType.Psychic, amount: 1000}],
+            ItemList['Silvally (Psychic) 1'],
+            1
+        ));
+        list.push(new GemDeal(
+            [{gemType: PokemonType.Psychic, amount: 75000}],
+            ItemList['Silvally (Psychic) 2'],
+            1
+        ));
+        list.push(new GemDeal(
+            [{gemType: PokemonType.Steel, amount: 1000}],
+            ItemList['Silvally (Steel) 1'],
+            1
+        ));
+        list.push(new GemDeal(
+            [{gemType: PokemonType.Steel, amount: 45000}],
+            ItemList['Silvally (Steel) 2'],
+            1
+        ));
+        list.push(new GemDeal(
+            [{gemType: PokemonType.Dragon, amount: 1000}],
+            ItemList['Silvally (Dragon) 1'],
+            1
+        ));
+        list.push(new GemDeal(
+            [{gemType: PokemonType.Dragon, amount: 45000}],
+            ItemList['Silvally (Dragon) 2'],
             1
         ));
         return list;
