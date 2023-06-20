@@ -916,8 +916,8 @@ TemporaryBattleList.Folly = new TemporaryBattle(
     [new QuestLineStepCompletedRequirement('Shadows in the Desert', 1)],
     undefined,
     {
-        displayName: 'Folly',
-        imageName: 'Shady Guy (male)',
+        displayName: 'Shady Guy',
+        imageName: 'Peon (folly)',
     }
 );
 TemporaryBattleList['Cipher Peon Doven'] = new TemporaryBattle(
