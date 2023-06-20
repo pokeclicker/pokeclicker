@@ -6114,7 +6114,7 @@ const IkiKahuna = new NPC('Kahuna Hala', [
     'This island only has one trial: Captain Ilima\'s trial in Verdant Cavern, below the Melemele Woods. Come back here after clearing that challenge for your Grand trial battle.',
 ], {
     image: 'assets/images/npcs/Hala.png',
-    requirement: new MultiRequirement ([new QuestLineStartedRequirement('Typing some Memories', GameConstants.AchievementOption.less), new QuestLineCompletedRequirement('Typing some Memories', GameConstants.AchievementOption.more)]),
+    requirement: new OneFromManyRequirement ([new QuestLineStartedRequirement('Typing some Memories', GameConstants.AchievementOption.less), new QuestLineCompletedRequirement('Typing some Memories', GameConstants.AchievementOption.more)]),
 });
 const HeaheaCafeOwner = new NPC('Café Owner', [
     'Akala Island has three trials.',
@@ -6138,7 +6138,7 @@ const KonikoniKahuna = new NPC('Kahuna Olivia', [
     'Come fight me in our very special and unique brand new Pokémon League and see if you still think our Island Challenge is nothing special!',
 ], {
     image: 'assets/images/npcs/Olivia.png',
-    requirement: new MultiRequirement ([new QuestLineStartedRequirement('Typing some Memories', GameConstants.AchievementOption.less), new QuestLineCompletedRequirement('Typing some Memories', GameConstants.AchievementOption.more)]),
+    requirement: new OneFromManyRequirement ([new QuestLineStartedRequirement('Typing some Memories', GameConstants.AchievementOption.less), new QuestLineCompletedRequirement('Typing some Memories', GameConstants.AchievementOption.more)]),
 });
 const MalieKahuna = new NPC('Kahuna Nanu', [
     'A trial-goer, huh? Figures.',
@@ -6146,7 +6146,7 @@ const MalieKahuna = new NPC('Kahuna Nanu', [
     'Then come back here so we can get this Grand trial over with.',
 ], {
     image: 'assets/images/npcs/Nanu.png',
-    requirement: new MultiRequirement ([new QuestLineStartedRequirement('Typing some Memories', GameConstants.AchievementOption.less), new QuestLineCompletedRequirement('Typing some Memories', GameConstants.AchievementOption.more)]),
+    requirement: new OneFromManyRequirement ([new QuestLineStartedRequirement('Typing some Memories', GameConstants.AchievementOption.less), new QuestLineCompletedRequirement('Typing some Memories', GameConstants.AchievementOption.more)]),
 });
 const TapuWorker = new NPC('Worker Ovid', [
     'Yesterday was my first day working on Mount Lanakila. I was up there maintaining the paths to the new Pokémon League.',
@@ -6158,9 +6158,8 @@ const SeafolkCaptain = new NPC('Captain Mina', [
     'If you can clear my trial you\'ll find our Kahuna on Exeggutor Island.',
 ], {
     image: 'assets/images/npcs/Mina.png',
-    requirement: new MultiRequirement ([new QuestLineStartedRequirement('Typing some Memories', GameConstants.AchievementOption.less), new QuestLineCompletedRequirement('Typing some Memories', GameConstants.AchievementOption.more)]),
+    requirement: new OneFromManyRequirement ([new QuestLineStartedRequirement('Typing some Memories', GameConstants.AchievementOption.less), new QuestLineCompletedRequirement('Typing some Memories', GameConstants.AchievementOption.more)]),
 });
-
 const LanakilaColress = new NPC('Colress', [
     'It\'s been a while. You must be a formidable Trainer indeed if you are able to get Necrozma as one of your allies.',
     'Good! And this is from me! The Ultra Recon Squad asked me to develop a device that would be able to control Necrozma. But I improved it to my own liking! And now it is a device that makes it possible to draw out even more power from Necrozma!',
