@@ -1,4 +1,4 @@
-class SafariRangerNPC extends NPC {
+class SafariPokemonNPC extends NPC {
 
     constructor(
         public name: string,
