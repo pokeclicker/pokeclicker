@@ -2354,7 +2354,7 @@ class QuestLineHelper {
 
         const BuyGroundMemory = new CustomQuest(1, undefined, 'Buy the Ground Memory from Kahuna Hapu.', () => player.itemList.Ground_Memory_Silvally(), undefined, undefined,
             {
-                clearedMessage: 'Wow you\'re pretty good at the farm, $playername$! I\'ll go buy the palm tree seeds right this isntant',
+                clearedMessage: 'Wow you\'re pretty good at the farm, $playername$! I\'ll go buy the palm tree seeds right this instant!',
                 npcDisplayName: 'Kahuna Hapu',
                 npcImageName: 'Hapu',
             });
