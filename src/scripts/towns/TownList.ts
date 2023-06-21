@@ -6247,7 +6247,7 @@ const LanaSilvally1 = new NPC('Captain Lana', [
 });
 const MallowSilvally1 = new NPC('Captain Mallow', [
     'Hey, welcome to the Lush Jungle! How are you doing today? I\'m not so good. I wanted to try a new ingredient to see if it attracts Lurantis, but it costs too much. Like, a lot of Quest Points. I just can\'t afford it.',
-    'Oh, you\'re asking if I have a Silvally Memory? You mean that weird fusion-like Pokémon Memory? Yeah, I do. It has a weird green coloration on it, which weirdly enough reminds me of Pokémon resistant to Electric attacks and weak against Fire attacks.',
+    'Oh, you\'re asking if I have a Silvally Memory? You mean from that weird fusion-like Pokémon? Yeah, I do. It has a weird green coloration on it, which weirdly enough reminds me of Pokémon resistant to Electric attacks and weak against Fire attacks.',
     'How about a trade? I will give you the Memory if you give me some Quest Points, how \'bout that? Ok, I\'ll be here in the Lush Jungle for a while, so you can get Quest Points and come back later to do the trade if you need to.',
 ], {
     image: 'assets/images/npcs/Mallow.png',
