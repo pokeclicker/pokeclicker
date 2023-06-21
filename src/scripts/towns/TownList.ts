@@ -762,7 +762,7 @@ const RedSpearow = new NPC('Red Spearow', [
     '<i>The Red Spearow seems to appreciate your visit.</i>',
 ], {image: 'assets/images/pokemon/21.01.png'});
 
-const KantoSafariRanger = new SafariRangerNPC('Safari Ranger', [
+const KantoSafariRanger = new SafariPokemonNPC('Safari Ranger', [
     'All sorts of unique Pokémon can be found in the Safari Zone!',
 ], GameConstants.Region.kanto, 'assets/images/npcs/Pokémon Breeder (male).png');
 
@@ -5618,7 +5618,7 @@ const VivillonPhotobook = new NPC('Vivillon Photobook', [
     ]),
 });
 
-const KalosSafariRanger = new SafariRangerNPC('Safari Ranger', [
+const KalosSafariRanger = new SafariPokemonNPC('Safari Ranger', [
     'We\'ve had sightings of several unique Pokémon today along with the usual familiar faces!',
 ], GameConstants.Region.kalos, 'assets/images/npcs/Pokemon Ranger (female).png');
 
