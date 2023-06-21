@@ -2299,7 +2299,7 @@ class QuestLineHelper {
 
         const BuyWaterMemory = new CustomQuest(1, undefined, 'Buy the Water Memory from Captain Lana.', () => player.itemList.Water_Memory_Silvally(), undefined, undefined,
             {
-                clearedMessage: 'Thank you so much $playername$! Now I can finally buy that rod i\'ve always wanted!',
+                clearedMessage: 'Thank you so much $playername$! Now I can finally buy that rod I\'ve always wanted!',
                 npcDisplayName: 'Captain Lana',
                 npcImageName: 'Lana',
             });
