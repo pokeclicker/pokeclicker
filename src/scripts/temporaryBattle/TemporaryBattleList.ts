@@ -3650,7 +3650,7 @@ TemporaryBattleList['Faba Psychic Memory'] = new TemporaryBattle(
         new GymPokemon('Alakazam', 24935785, 63), // new GymPokemon('Alakazam', 249357859, 63),
         new GymPokemon('Hypno', 24935785, 63), // new GymPokemon('Hypno', 249357859, 63),
     ],
-    'You\'re still pretty strong after all that time since our last battle. Well, take the Memory with you. </br><img src="assets/images/items/quest/Psychic_Memory_Silvally.png"></br><i>You obtained a Psychic Silvally Memory!</i>',
+    'You\'re still pretty strong after all that time since our last battle. Well, take this Memory. Now off with you! </br><img src="assets/images/items/quest/Psychic_Memory_Silvally.png"></br><i>You obtained a Psychic Silvally Memory!</i>',
     [new QuestLineStepCompletedRequirement('Typing some Memories', 27)],
     undefined,
     {

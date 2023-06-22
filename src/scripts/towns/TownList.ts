@@ -6189,7 +6189,7 @@ const ProfKukui = new ProfNPC('Prof. Kukui',
 const SilvallyGladion1 = new NPC('Gladion', [
     'Oh, it\'s you. I thought the professor would help when I put my request up at the Bulletin Board, but the Champion\'s even better.',
     'See, my Silvally has been "sleeping" during battles but I have no idea why. My guess is that it\'s because of its traumatizing past, the poor thing. My plan to solve this issue is to try to recover its memories instead of letting it have all of those traumatizing flashbacks all at once. I need help with getting them back. That\'s where you come in.',
-    'I\'ve heard that Silvally have their memories divided in 17 parts and I had mine\'s once, but I\'ve lost all of them after traveling with it around Alola. Try talking with citizens of all four islands to find out if they know anything about them. If you help me restore all of its memories I\'ll maybe give you a reward, but don\'t expect any charity. The memories look like this.',
+    'I\'ve heard that Silvally have their memories divided in 17 parts and I had mine\'s once, but I\'ve lost all of them after traveling with it around Alola. Try talking with citizens of all four islands to find out if they know anything about them. If you help me restore all of its memories I\'ll maybe give you a reward, but don\'t expect any charity. The memories look like this:',
     '<img src="assets/images/items/quest/Dark_Memory_Silvally.png">',
     'Keep an eye out if you come across any of them.',
 ], {
@@ -6240,10 +6240,16 @@ const SilvallyGladion2 = new NPC('Gladion', [
     requirement: new  MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 2, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 16, GameConstants.AchievementOption.less)]),
 });
 const SilvallyGladion2Hints = new NPC('Ask Gladion for help', [
-    'Here are the descriptions of them: you should look for a blue-haired girl near Brooklet Hill, a green-haired girl in Lush Jungle, a black and red-haired guy at the Wela Volcano Park, a child with orange hair in the Hokulani Observatory, a dark blue-haired guy that looks like a Veteran inside Mount Lanakila, and a girl with a Mudsdale on Exeggutor Island Hill.',
+    'Here are the descriptions of them. You should look for:',
+    'A blue-haired girl near Brooklet Hill,',
+    'A green-haired girl in Lush Jungle,',
+    'A black and red-haired guy at the Wela Volcano Park,',
+    'A child with orange hair in the Hokulani Observatory,',
+    'A dark blue-haired guy that looks like a Veteran inside Mount Lanakila,',
+    'And a girl with a Mudsdale on Exeggutor Island Hill.',
 ], {
     image: 'assets/images/npcs/Gladion.png',
-    requirement: new  MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 2, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 16, GameConstants.AchievementOption.less)]),
+    requirement: new  MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 3, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 16, GameConstants.AchievementOption.less)]),
 });
 const LanaSilvally1 = new NPC('Captain Lana', [
     'Hi, $playername$. How are you doing? I\'m not doing so well right now.',
@@ -6291,7 +6297,7 @@ const HapuSilvally1 = new NPC('Kahuna Hapu', [
 });
 const SilvallyGladion3 = new NPC('Gladion', [
     'I see you\'ve recovered more of the Silvally Memories. Thanks for helping me recover them. Silvally appreciates it too. How did it go, getting them back?',
-    'You had to <i>pay</i> for them? How did you get that much money? Are you rich? I... Never mind. You\'re doing a great job. Buddy\'s feeling better already. What? No, I said Silvally\'s feeling better already. You must be hearing things. Go find those memories.',
+    'You had to <i>pay</i> for them? Wha- How did you even get that much money? Are you rich? I... Never mind. You\'re doing a great job. Buddy\'s feeling better already. What? No, I said Silvally\'s feeling better already. You must be hearing things. Go find those memories.',
     'Also I\'m not compensating you.',
 ], {
     image: 'assets/images/npcs/Gladion.png',
@@ -6305,10 +6311,11 @@ const SilvallyGladion3Hints = new NPC('Ask Gladion for help', [
     'Some people from Poni Island have seen Plumeria walking around with some old Team Skull grunts around the Vast Poni Canyon. That is really suspicious, so they probably found something rare or presumably a Silvally Memory.',
     'Some people from Akala Island have seen some people in white suits with a lot of boxes travelling to the southwest of the island.',
     'I\'ve heard Molayne wanted to brush up on his training a bit. He\'s at the Royal Avenue, and he\'s also offering a strange reward which I presume is a Silvally Memory.',
-    'Also, while I was walking near A Tree Maybe I saw a guy dressed almost like an old Pokémon that doesn\'t exist anymore with a Silvally Memory. They are all tough trainers, so you might need to train more to defeat them.',
+    'Also, while I was walking near A Tree Maybe I saw a guy dressed almost like an old Pokémon that doesn\'t exist anymore with a Silvally Memory.',
+    'They are all tough trainers, so you might need to train more to defeat them.',
 ], {
     image: 'assets/images/npcs/Gladion.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 16, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 32, GameConstants.AchievementOption.less)]),
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 17, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 32, GameConstants.AchievementOption.less)]),
 });
 const GuzmaSilvally = new NPC('Guzma', [
     'Huh? What are you doing in here? A what? Silvally Memory? I think I have what you\'re looking for. Yeah, I have it, if you want to see it. Anyways, I was just passing by and decided to visit this place again.',
@@ -6339,9 +6346,10 @@ const AcerolaSilvally = new NPC('Captain Acerola', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 24, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 26, GameConstants.AchievementOption.less)]),
 });
 const FabaSilvally = new NPC('Aether Branch Chief Faba', [
-    'Oh, welcome $playername$, the <i>Champion</i> of Alola! I see you <i>still</i> haven\'t lost that title. You\'re a pretty... <i>worthy</i> trainer, aren\'t you? Anyways, I think you should come visit us another time we\'re... er.. busy! Yes, we\'re extremely busy right now... ',
+    'Oh, welcome $playername$, the Champion of Alola! I see you <i>still</i> haven\'t lost that title. You\'re a pretty... <i>worthy</i> trainer, aren\'t you? Anyways, I think you should come visit us another time we\'re... er.. busy! Yes, we\'re extremely busy right now... ',
     'Oh, you\'re looking for a Silvally Memory? Well I can\'t help you with it so bye! What? You\'re not leaving until I help you? Ugh.. kids are so annoying these days.. er... I mean I\'d gladly help, I\'m just <i>busy</i> right now. <i>LikeISaidTwoSecondsAgo.</i>',
-    'I guess you already know, we\'ve been to the Haina Desert looking for Tapu Bulu, but the search team stumbled upon this Silvally Memory and it looks pretty rare because we couldn\'t find much information about it. We want to take it in for some experiments, but we knew you wouldn\'t let us do that so I tried to hide it. Now that you know, my only choice is battling you. Let\'s make a deal first though: If I defeat you, you\'ll let us do our experiments on that thing and leave us alone forever, but if you defeat me I\'ll give that Memory to you. Sounds like a deal? Then let\'s see if you can take the new Faba!',
+    'Well, I guess you can already tell. We\'ve been in Haina Desert looking for Tapu Bulu, but the search team stumbled upon this Silvally Memory instead and it looks pretty rare because we couldn\'t find much information about it. We want to take it in for some experiments, but we knew you wouldn\'t let us do that so I tried to hide it. Now that you know, my only choice is battling you.',
+    'Let\'s make a deal first though: If I defeat you, you\'ll let us do our experiments on that thing and leave us alone forever, but if you defeat me I\'ll give that Memory to you. Sounds like a deal? Then let\'s see if you can take the new Faba!',
 ], {
     image: 'assets/images/npcs/Aether Branch Chief (faba).png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 26, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 28, GameConstants.AchievementOption.less)]),
@@ -6355,7 +6363,7 @@ const MolayneSilvally = new NPC('Molayne', [
 });
 const RyukiSilvally = new NPC('Ryuki', [
     'Yo, traveler! The name\'s Ryuki! You\'ve come here to battle against a star like me, haven\'t you? No? Why\'s that? I see, you\'re looking for something?',
-    'Speaking of which, I stumbled upon a gnarly disk in my travels recently. It was unlike any setpiece I had ever seen before, it has a rockin\' dark blue coloration. But for all its uniqueness, I can\'t make out what it is, see?',
+    'Speaking of which, I stumbled upon a gnarly disk in my travels recently. It was unlike any music disk I had ever seen before, it has a rockin\' dark blue coloration. But for all its uniqueness, I can\'t make out what it is, see?',
     'A Dragon-type Silvally Memory, you say? Rock on! I had a feeling it was something rare and powerful, but I never would have guessed it was a Silvally Memory! But now that I know what I have, I can\'t simply give it to you. I\'m a rock star, not a trial captain! We\'re on stage and the crowd wants a show!',
     'If you want this Silvally Memory, you have to defeat me in a buring hot battle! It won\'t be easy, mind you. My babies are dying to play a set, and I won\'t be holding back! But if you truly have what it takes to be the champion, then you should be up for the challenge, yeah? Right on! Let\'s rock!',
 ], {
