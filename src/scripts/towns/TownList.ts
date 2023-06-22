@@ -762,6 +762,10 @@ const RedSpearow = new NPC('Red Spearow', [
     '<i>The Red Spearow seems to appreciate your visit.</i>',
 ], {image: 'assets/images/pokemon/21.01.png'});
 
+const KantoSafariRanger = new SafariPokemonNPC('Safari Ranger', [
+    'All sorts of unique Pokémon can be found in the Safari Zone!',
+], GameConstants.Region.kanto, 'assets/images/npcs/Pokémon Breeder (male).png');
+
 const BugCatcherPinsir = new NPC('Bug Catcher Michel', [
     'I heard there was a stone hidden in the Safari Zone that makes Pinsir stronger!',
     'But... I don\'t have enough Safari Experience to find it.',
@@ -896,7 +900,7 @@ TownList['Safari Zone'] = new Town(
     [new SafariTownContent()],
     {
         requirements: [new CustomRequirement(ko.pureComputed(() => +App.game.keyItems.hasKeyItem(KeyItemType.Safari_ticket)), 1, 'Obtain the Safari Ticket')],
-        npcs: [BugCatcherPinsir],
+        npcs: [KantoSafariRanger, BugCatcherPinsir],
     }
 );
 TownList['Cinnabar Island'] = new Town(
@@ -5614,6 +5618,10 @@ const VivillonPhotobook = new NPC('Vivillon Photobook', [
     ]),
 });
 
+const KalosSafariRanger = new SafariPokemonNPC('Safari Ranger', [
+    'We\'ve had sightings of several unique Pokémon today along with the usual familiar faces!',
+], GameConstants.Region.kalos, 'assets/images/npcs/Pokemon Ranger (female).png');
+
 const FriendlyAttendant = new NPC('Friendly Attendant', [
     'Welcome to the Friend Safari!',
     'This place is a lot like the Kanto Safari Zone, except we get a much wider variety of Pokémon coming through here.',
@@ -5813,7 +5821,7 @@ TownList['Friend Safari'] = new Town(
     [new SafariTownContent()],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
-        npcs: [FriendlyAttendant, BugCatcherScizor],
+        npcs: [KalosSafariRanger, FriendlyAttendant, BugCatcherScizor],
     }
 );
 
