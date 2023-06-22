@@ -6291,7 +6291,7 @@ const HapuSilvally1 = new NPC('Kahuna Hapu', [
 });
 const SilvallyGladion3 = new NPC('Gladion', [
     'I see you\'ve recovered more of the Silvally Memories. Thanks for helping me recover them. Silvally appreciates it too. How did it go, getting them back?',
-    'You had to <i>pay</i> for them? Are you rich? How did you even... Never mind. You\'re doing a great job. Buddy\'s feeling better already. What? No, I said Silvally\'s feeling better already. You must be hearing things. Go find those memories.',
+    'You had to <i>pay</i> for them? How did you get that much money? Are you rich? I... Never mind. You\'re doing a great job. Buddy\'s feeling better already. What? No, I said Silvally\'s feeling better already. You must be hearing things. Go find those memories.',
     'Also I\'m not compensating you.',
 ], {
     image: 'assets/images/npcs/Gladion.png',
