@@ -6196,8 +6196,8 @@ const ProfKukui = new ProfNPC('Prof. Kukui',
 //Silvally Types NPC
 const SilvallyGladion1 = new NPC('Gladion', [
     'Oh, it\'s you. I thought the professor would help when I put my request up at the Bulletin Board, but the Champion\'s even better.',
-    'See, my Silvally has been "sleeping" during battles but I have no idea why. My guess is that it\'s because of its traumatizing past, the poor thing. My plan to solve this issue is to try to recover its memories instead of letting it have all of those traumatizing flashbacks all at once. I need help with getting them back. That\'s where you come in.',
-    'I\'ve heard that Silvally have their memories divided in 17 parts and I had mine\'s once, but I\'ve lost all of them after traveling with it around Alola. Try talking with citizens of all four islands to find out if they know anything about them. If you help me restore all of its memories I\'ll maybe give you a reward, but don\'t expect any charity. The memories look like this:',
+    'See, my Silvally has been acting strange lately, almost as if it\'s back to being haunted by its traumatizing past, the poor thing. Silvally are unique Pokémon who can download memories from artificial disks to change their type, but my Silvally\'s own memories somehow got mixed in with them. I need to get the disks back and recover its memories. That\'s where you come in.',
+    'Silvally has its memories divided in 17 parts and I lost all of them after traveling with it around Alola. Try talking with citizens of all four islands to find out if they know anything about them. If you help me restore its memories I\'ll maybe give you a reward, but don\'t expect any charity. The memories look like this:',
     '<img src="assets/images/items/quest/Dark_Memory_Silvally.png">',
     'Keep an eye out if you come across any of them.',
 ], {
@@ -6240,7 +6240,7 @@ const SilvallyMina = new NPC('Captain Mina', [
 const SilvallyGladion2 = new NPC('Gladion', [
     'Hey, I see you\'re back. Did you find any Silvally Memories? Oh, I see you found 4 of them, and in surprisingly relevant places too. Let me give them to Silvally.',
     '<i>Gladion uses the 4 memories on Silvally</i>',
-    'As for that reward I mentioned, I\'ll put these memories in the Memory Replicator so I can make some Silvally Memories for you. The machine isn\'t powerful enough to create the Memories out of nothing, though. I\'ll be needing you to grab some gems of the Memory\'s type so I can replicate the Memory and insert it into a Silvally for you.',
+    'As for that reward I mentioned, I\'ll put these memories in the Memory Replicator so I can make some Silvally Memories for you. The machine isn\'t powerful enough to create the Memories out of nothing, though. I\'ll be needing you to grab some gems of the Memory\'s type so I can replicate the Memory and insert it into a Silvally for you. It needs some fine-tuning first so the amount needed won\'t be the same after the first trade.',
     'Oh and also, I\'ve heard of more sightings of strange disks across the region. I think they might be the Silvally Memories we\'re looking for. If you\'re ever lost, I got descriptions of them.',
     'I\'ll let you keep the Memories you\'ve found in the meantime so you keep track of your progress.',
 ], {
@@ -6379,9 +6379,9 @@ const RyukiSilvally = new NPC('Ryuki', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 30, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 32, GameConstants.AchievementOption.less)]),
 });
 const SilvallyGladion4 = new NPC('Gladion', [
-    'Hey there, $playername$! I gotta say, you\'ve done something truly incredible. You\'ve brought back every single one of Silvally\'s lost memories. Thank you. It\'s like a whole new world has opened up for my partner and me.',
-    'Silvally owes this amazing transformation to you and your relentless efforts. We couldn\'t have done it without you. Silvally is in a much better place now, and it\'s all thanks to you. I\'m so grateful for what you\'ve done that I\'ve decided to do something I never thought I\'d do. I\'m gonna clone the memories of your Silvally and give \'em to my own. It\'ll create a special bond between our Pokémon, a connection that I think will take them both even closer to their true selves.',
-    'I can see what Lillie saw in you now, you\'ve been a true inspiration to me too. Strength and friendship go hand in hand, and I\'m glad to have learned that from you. I hope our paths cross again someday, but until then, I wish you the most epic adventures filled with victories and happiness.',
+    'Hey there, $playername$! I gotta say, you\'ve done something truly incredible. You\'ve brought back every single one of Silvally\'s lost memories. I expected nothing less from the Champion. I can\'t even imagine how long all that must have taken you. Silvally\'s back to normal and I can\'t thank you enough.',
+    'And... seeing my buddy suffer like that made me consider how many new memories I\'ve been taking for granted... I\'m glad to have met you, Hau... everyone. Like Hau said, people can achieve more if they do something together. Thank you for reminding me of that.',
+    'I can see what Lillie saw in you now... You\'ve been a true inspiration to me too. I hope our paths cross again someday. Until then... See you around.',
 ], {
     image:'assets/images/npcs/Gladion.png',
     requirement: new MultiRequirement ([new QuestLineStepCompletedRequirement('Typing some Memories', 32, GameConstants.AchievementOption.more), new QuestLineCompletedRequirement('Typing some Memories', GameConstants.AchievementOption.less)]),
