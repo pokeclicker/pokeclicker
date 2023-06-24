@@ -1,0 +1,1029 @@
+<g data-bind='visible: player.region == GameConstants.Region.hisui'>
+    <image width="1600" height="960" data-bind="attr: {
+        'xlink:href':'assets/images/hsiui.png?v=$VERSION',
+        href:'assets/images/hisui.png?v=$VERSION'
+    }"></image>
+
+    <!-- ------ -->
+    <!-- ROUTES -->
+    <!-- ------ -->
+
+    <!--Aspiration Hill-->
+    <%- include('templates/mapRoute',
+        { route: 1, region: 8
+        , height: 3, width: 3
+        , x: 0, y: 0, name: "AH"
+        })
+    %>
+
+    <!--Horseshoe Plains-->
+    <%- include('templates/mapRoute',
+        { route: 2, region: 8
+        , height: 3, width: 3
+        , x: 3, y: 0, name: "HP"
+        })
+    %>
+
+    <!--Floaro Gardens-->
+    <%- include('templates/mapRoute',
+        { route: 3, region: 8
+        , height: 3, width: 3
+        , x: 6, y: 0, name: "FG"
+        })
+    %>
+
+    <!--Sandgem Flats-->
+    <%- include('templates/mapRoute',
+        { route: 4, region: 8
+        , height: 3, width: 3
+        , x: 9, y: 0, name: "SF"
+        })
+    %>
+
+    <!--Deertrack Path-->
+    <%- include('templates/mapRoute',
+        { route: 5, region: 8
+        , height: 3, width: 3
+        , x: 12, y: 0, name: "DP"
+        })
+    %>
+
+    <!--Deertrack Heights-->
+    <%- include('templates/mapRoute',
+        { route: 6, region: 8
+        , height: 3, width: 3
+        , x: 15, y: 0, name: "DH"
+        })
+    %>
+
+    <!--Windswept Run-->
+    <%- include('templates/mapRoute',
+        { route: 7, region: 8
+        , height: 3, width: 3
+        , x: 18, y: 0, name: "WR"
+        })
+    %>
+
+    <!--Nature's Pantry-->
+    <%- include('templates/mapRoute',
+        { route: 8, region: 8
+        , height: 3, width: 3
+        , x: 21, y: 0, name: "NP"
+        })
+    %>
+
+    <!--Worn Bridge-->
+    <%- include('templates/mapRoute',
+        { route: 9, region: 8
+        , height: 3, width: 3
+        , x: 24, y: 0, name: "WB"
+        })
+    %>
+
+    <!--Gruelling Grove-->
+    <%- include('templates/mapRoute',
+        { route: 10, region: 8
+        , height: 3, width: 3
+        , x: 27, y: 0, name: "GG"
+        })
+    %>
+
+    <!--Tidewater Dam-->
+    <%- include('templates/mapRoute',
+        { route: 11, region: 8
+        , height: 3, width: 3
+        , x: 30, y: 0, name: "TD"
+        })
+    %>
+
+    <!--Obsidian Falls-->
+    <%- include('templates/mapRoute',
+        { route: 12, region: 8
+        , height: 3, width: 3
+        , x: 33, y: 0, name: "OF"
+        })
+    %>
+
+    <!--Ramanas Island-->
+    <%- include('templates/mapRoute',
+        { route: 13, region: 8
+        , height: 3, width: 3
+        , x: 36, y: 0, name: "RI"
+        })
+    %>
+
+    <!--Golden Lowlands-->
+    <%- include('templates/mapRoute',
+        { route: 14, region: 8
+        , height: 3, width: 3
+        , x: 39, y: 0, name: "GL"
+        })
+    %>
+
+    <!--Scarlet Bog-->
+    <%- include('templates/mapRoute',
+        { route: 15, region: 8
+        , height: 3, width: 3
+        , x: 42, y: 0, name: "SB"
+        })
+    %>
+
+    <!--Cloudpool Ridge-->
+    <%- include('templates/mapRoute',
+        { route: 16, region: 8
+        , height: 3, width: 3
+        , x: 45, y: 0, name: "CR"
+        })
+    %>
+
+    <!--Diamond Heath-->
+    <%- include('templates/mapRoute',
+        { route: 17, region: 8
+        , height: 3, width: 3
+        , x: 48, y: 0, name: "DH"
+        })
+    %>
+
+    <!--Cottonsedge Prairie-->
+    <%- include('templates/mapRoute',
+        { route: 18, region: 8
+        , height: 3, width: 3
+        , x: 51, y: 0, name: "CP"
+        })
+    %>
+
+    <!--Droning Meadow-->
+    <%- include('templates/mapRoute',
+        { route: 19, region: 8
+        , height: 3, width: 3
+        , x: 54, y: 0, name: "DM"
+        })
+    %>
+
+    <!--Bolderoll Slope-->
+    <%- include('templates/mapRoute',
+        { route: 20, region: 8
+        , height: 3, width: 3
+        , x: 57, y: 0, name: "BS"
+        })
+    %>
+
+    <!--Gapejaw Bog-->
+    <%- include('templates/mapRoute',
+        { route: 21, region: 8
+        , height: 3, width: 3
+        , x: 60, y: 0, name: "GB"
+        })
+    %>
+
+    <!--Ursa's Ring-->
+    <%- include('templates/mapRoute',
+        { route: 22, region: 8
+        , height: 3, width: 3
+        , x: 63, y: 0, name: "UR"
+        })
+    %>
+
+    <!--Holm of Trials-->
+    <%- include('templates/mapRoute',
+        { route: 23, region: 8
+        , height: 3, width: 3
+        , x: 66, y: 0, name: "HoT"
+        })
+    %>
+
+    <!--Crossing Slope-->
+    <%- include('templates/mapRoute',
+        { route: 24, region: 8
+        , height: 3, width: 3
+        , x: 69, y: 0, name: "CS"
+        })
+    %>
+
+    <!--Ginkgo Landing-->
+    <%- include('templates/mapRoute',
+        { route: 25, region: 8
+        , height: 3, width: 3
+        , x: 72, y: 0, name: "GL"
+        })
+    %>
+
+    <!--Aipom Hill-->
+    <%- include('templates/mapRoute',
+        { route: 26, region: 8
+        , height: 3, width: 3
+        , x: 75, y: 0, name: "AH"
+        })
+    %>
+
+    <!--Bather's Lagoon-->
+    <%- include('templates/mapRoute',
+        { route: 27, region: 8
+        , height: 3, width: 3
+        , x: 78, y: 0, name: "BL"
+        })
+    %>
+
+    <!--Hideaway Bay-->
+    <%- include('templates/mapRoute',
+        { route: 28, region: 8
+        , height: 3, width: 3
+        , x: 81, y: 0, name: "HB"
+        })
+    %>
+
+    <!--Deadwood Haunt-->
+    <%- include('templates/mapRoute',
+        { route: 29, region: 8
+        , height: 3, width: 3
+        , x: 84, y: 0, name: "DH"
+        })
+    %>
+
+    <!--Sand's Reach-->
+    <%- include('templates/mapRoute',
+        { route: 30, region: 8
+        , height: 3, width: 3
+        , x: 87, y: 0, name: "SR"
+        })
+    %>
+
+    <!--Castaway Shore-->
+    <%- include('templates/mapRoute',
+        { route: 31, region: 8
+        , height: 3, width: 3
+        , x: 90, y: 0, name: "CS"
+        })
+    %>
+
+    <!--Windbreak Stand-->
+    <%- include('templates/mapRoute',
+        { route: 32, region: 8
+        , height: 3, width: 3
+        , x: 93, y: 0, name: "WS"
+        })
+    %>
+
+    <!--Spring Path-->
+    <%- include('templates/mapRoute',
+        { route: 33, region: 8
+        , height: 3, width: 3
+        , x: 96, y: 0, name: "SP"
+        })
+    %>
+
+    <!--Islespy Shore-->
+    <%- include('templates/mapRoute',
+        { route: 34, region: 8
+        , height: 3, width: 3
+        , x: 0, y: 3, name: "IS"
+        })
+    %>
+
+    <!--Tranquility Cove-->
+    <%- include('templates/mapRoute',
+        { route: 35, region: 8
+        , height: 3, width: 3
+        , x: 3, y: 3, name: "TQ"
+        })
+    %>
+
+    <!--Lunker's Lair-->
+    <%- include('templates/mapRoute',
+        { route: 36, region: 8
+        , height: 3, width: 3
+        , x: 6, y: 3, name: "LL"
+        })
+    %>
+
+    <!--Seagrass Haven-->
+    <%- include('templates/mapRoute',
+        { route: 37, region: 8
+        , height: 3, width: 3
+        , x: 9, y: 3, name: "SH"
+        })
+    %>
+
+    <!--Tombolo Walk-->
+    <%- include('templates/mapRoute',
+        { route: 38, region: 8
+        , height: 3, width: 3
+        , x: 12, y: 3, name: "TW"
+        })
+    %>
+
+    <!--Heavenward Lookout-->
+    <%- include('templates/mapRoute',
+        { route: 39, region: 8
+        , height: 3, width: 3
+        , x: 15, y: 3, name: "HL"
+        })
+    %>
+
+    <!--Wayward Wood-->
+    <%- include('templates/mapRoute',
+        { route: 40, region: 8
+        , height: 3, width: 3
+        , x: 18, y: 3, name: "WW"
+        })
+    %>
+
+    <!--Lonely Spring-->
+    <%- include('templates/mapRoute',
+        { route: 41, region: 8
+        , height: 3, width: 3
+        , x: 21, y: 3, name: "LS"
+        })
+    %>
+
+    <!--Sonorous Path-->
+    <%- include('templates/mapRoute',
+        { route: 42, region: 8
+        , height: 3, width: 3
+        , x: 24, y: 3, name: "SP"
+        })
+    %>
+
+    <!--Celestica Trail-->
+    <%- include('templates/mapRoute',
+        { route: 43, region: 8
+        , height: 3, width: 3
+        , x: 27, y: 3, name: "CT"
+        })
+    %>
+
+    <!--Fabled Spring-->
+    <%- include('templates/mapRoute',
+        { route: 44, region: 8
+        , height: 3, width: 3
+        , x: 30, y: 3, name: "FS"
+        })
+    %>
+
+    <!--Bolderoll Ravine-->
+    <%- include('templates/mapRoute',
+        { route: 45, region: 8
+        , height: 3, width: 3
+        , x: 33, y: 3, name: "BR"
+        })
+    %>
+
+    <!--Stonetooth Rows-->
+    <%- include('templates/mapRoute',
+        { route: 46, region: 8
+        , height: 3, width: 3
+        , x: 36, y: 3, name: "SR"
+        })
+    %>
+
+    <!--Cloudcap Pass-->
+    <%- include('templates/mapRoute',
+        { route: 47, region: 8
+        , height: 3, width: 3
+        , x: 39, y: 3, name: "CP"
+        })
+    %>
+
+    <!--Whiteout Valley-->
+    <%- include('templates/mapRoute',
+        { route: 48, region: 8
+        , height: 3, width: 3
+        , x: 42, y: 3, name: "WV"
+        })
+    %>
+
+    <!--Bonechill Wastes-->
+    <%- include('templates/mapRoute',
+        { route: 49, region: 8
+        , height: 3, width: 3
+        , x: 45, y: 3, name: "BW"
+        })
+    %>
+
+    <!--Arena's Approach-->
+    <%- include('templates/mapRoute',
+        { route: 50, region: 8
+        , height: 3, width: 3
+        , x: 48, y: 3, name: "AA"
+        })
+    %>
+
+    <!--Avalanche Slopes-->
+    <%- include('templates/mapRoute',
+        { route: 51, region: 8
+        , height: 3, width: 3
+        , x: 51, y: 3, name: "AS"
+        })
+    %>
+
+    <!--Icebound Falls-->
+    <%- include('templates/mapRoute',
+        { route: 52, region: 8
+        , height: 3, width: 3
+        , x: 54, y: 3, name: "IF"
+        })
+    %>
+
+    <!--Heart's Crag-->
+    <%- include('templates/mapRoute',
+        { route: 53, region: 8
+        , height: 3, width: 3
+        , x: 57, y: 3, name: "HC"
+        })
+    %>
+
+    <!--Snowfall Hot Spring-->
+    <%- include('templates/mapRoute',
+        { route: 54, region: 8
+        , height: 3, width: 3
+        , x: 60, y: 3, name: "SHS"
+        })
+    %>
+
+    <!--Glacier Terrace-->
+    <%- include('templates/mapRoute',
+        { route: 55, region: 8
+        , height: 3, width: 3
+        , x: 63, y: 3, name: "GT"
+        })
+    %>
+
+
+    <!-- ----- -->
+    <!-- TOWNS -->
+    <!-- ----- -->
+
+    <!--Prelude Beach-->
+    <%- include('templates/mapTown',
+        { name: "Prelude Beach"
+        , x:0 , y: 21
+        , height: 3, width: 3
+        , home: true
+        })
+    %>
+
+    <!--Jubilife Village-->
+    <%- include('templates/mapTown',
+        { name: "Jubilife Village"
+        , x:3 , y: 21
+        , height: 3, width: 3
+        })
+    %>
+
+    <!--Galaxy Hall-->
+    <%- include('templates/mapTown',
+        { name: "Galaxy Hall"
+        , x:6 , y: 21
+        , height: 3, width: 3
+        })
+    %>
+
+    <!--Fieldlands Camp-->
+    <%- include('templates/mapTown',
+        { name: "Fieldlands Camp"
+        , x:9 , y: 21
+        , height: 3, width: 3
+        })
+    %>
+
+    <!--Heights Camp-->
+    <%- include('templates/mapTown',
+        { name: "Heights Camp"
+        , x:12 , y: 21
+        , height: 3, width: 3
+        })
+    %>
+
+    <!--Grandtree Arena-->
+    <%- include('templates/mapTown',
+        { name: "Grandtree Arena"
+        , x:15 , y: 21
+        , height: 3, width: 3
+        })
+    %>
+
+    <!--Mirelands Camp-->
+    <%- include('templates/mapTown',
+        { name: "Mirelands Camp"
+        , x:18 , y: 21
+        , height: 3, width: 3
+        })
+    %>
+
+    <!--Bogbound Camp-->
+    <%- include('templates/mapTown',
+        { name: "Bogbound Camp"
+        , x:21 , y: 21
+        , height: 3, width: 3
+        })
+    %>
+
+    <!--Ancient Solaceon Ruins-->
+    <%- include('templates/mapTown',
+        { name: "Ancient Solaceon Ruins"
+        , x:24 , y: 21
+        , height: 3, width: 3
+        })
+    %>
+
+    <!--Sludge Mound-->
+    <%- include('templates/mapTown',
+        { name: "Sludge Mound"
+        , x:27 , y: 21
+        , height: 3, width: 3
+        })
+    %>
+
+    <!--Diamond Settlement-->
+    <%- include('templates/mapTown',
+        { name: "Diamond Settlement"
+        , x:30 , y: 21
+        , height: 3, width: 3
+        })
+    %>
+
+    <!--Brava Arena-->
+    <%- include('templates/mapTown',
+        { name: "Brava Arena"
+        , x:33 , y: 21
+        , height: 3, width: 3
+        })
+    %>
+
+    <!--Beachside Camp-->
+    <%- include('templates/mapTown',
+        { name: "Beachside Camp"
+        , x:36 , y: 21
+        , height: 3, width: 3
+        })
+    %>
+
+    <!--Coastlands Camp-->
+    <%- include('templates/mapTown',
+        { name: "Coastlands Camp"
+        , x:39 , y: 21
+        , height: 3, width: 3
+        })
+    %>
+
+    <!--Iscan's Cabin-->
+    <%- include('templates/mapTown',
+        { name: "Iscan's Cabin"
+        , x:39 , y: 21
+        , height: 3, width: 3
+        })
+    %>
+
+    <!--Molten Arena-->
+    <%- include('templates/mapTown',
+        { name: "Molten Arena"
+        , x:42 , y: 21
+        , height: 3, width: 3
+        })
+    %>
+
+    <!--Highlands Camp-->
+    <%- include('templates/mapTown',
+        { name: "Highlands Camp"
+        , x:45 , y: 21
+        , height: 3, width: 3
+        })
+    %>
+
+    <!--Mountain Camp-->
+    <%- include('templates/mapTown',
+        { name: "Mountain Camp"
+        , x:48 , y: 21
+        , height: 3, width: 3
+        })
+    %>
+
+    <!--Summit Camp-->
+    <%- include('templates/mapTown',
+        { name: "Summit Camp"
+        , x:51 , y: 21
+        , height: 3, width: 3
+        })
+    %>
+
+    <!--Moonview Arena-->
+    <%- include('templates/mapTown',
+        { name: "Moonview Arena"
+        , x:54 , y: 21
+        , height: 3, width: 3
+        })
+    %>
+
+    <!--Snowfields Camp-->
+    <%- include('templates/mapTown',
+        { name: "Snowfields Camp"
+        , x:57 , y: 21
+        , height: 3, width: 3
+        })
+    %>
+
+    <!--Icepeak Camp-->
+    <%- include('templates/mapTown',
+        { name: "Icepeak Camp"
+        , x:60 , y: 21
+        , height: 3, width: 3
+        })
+    %>
+
+    <!--Pearl Settlement-->
+    <%- include('templates/mapTown',
+        { name: "Pearl Settlement"
+        , x:63 , y: 21
+        , height: 3, width: 3
+        })
+    %>
+
+    <!--Icepeak Arena-->
+    <%- include('templates/mapTown',
+        { name: "Icepeak Arena"
+        , x:66 , y: 21
+        , height: 3, width: 3
+        })
+    %>
+
+    <!--Ancient Retreat-->
+    <%- include('templates/mapTown',
+        { name: "Ancient Retreat"
+        , x:69 , y: 21
+        , height: 3, width: 3
+        })
+    %>
+
+    <!--Stone Portal-->
+    <%- include('templates/mapTown',
+        { name: "Stone Portal"
+        , x:72 , y: 21
+        , height: 3, width: 3
+        })
+    %>
+
+    <!--Temple of Sinnoh-->
+    <%- include('templates/mapTown',
+        { name: "Temple of Sinnoh"
+        , x:75 , y: 21
+        , height: 3, width: 3
+        })
+    %>
+
+    <!--Turnback Cave-->
+    <%- include('templates/mapTown',
+        { name: "Turnback Cave"
+        , x:78 , y: 21
+        , height: 3, width: 3
+        })
+    %>
+
+    <!--Ancient Hall of Origin-->
+    <%- include('templates/mapTown',
+        { name: "Ancient Hall of Origin"
+        , x:81 , y: 21
+        , height: 3, width: 3
+        })
+    %>
+
+    <!-- ----- -->
+    <!--DUNGEONS-->
+    <!-- ----- -->
+
+    <!--Oreburrow Tunnel-->
+    <%- include('templates/mapDungeon',
+        { name: "Oreburrow Tunnel"
+        , x: 0, y: 42
+        , height: 3, width: 3
+        })
+    %>
+
+    <!--Heartwood-->
+    <%- include('templates/mapDungeon',
+        { name: "Heartwood"
+        , x: 3, y: 42
+        , height: 3, width: 3
+        })
+    %>
+
+    <!--Shrouded Ruins-->
+    <%- include('templates/mapDungeon',
+        { name: "Shrouded Ruins"
+        , x: 6, y: 42
+        , height: 3, width: 3
+        })
+    %>
+
+    <!--Veilstone Cape-->
+    <%- include('templates/mapDungeon',
+        { name: "Veilstone Cape"
+        , x: 9, y: 42
+        , height: 3, width: 3
+        })
+    %>
+
+    <!--Firespit Island-->
+    <%- include('templates/mapDungeon',
+        { name: "Firespit Island"
+        , x: 12, y: 42
+        , height: 3, width: 3
+        })
+    %>
+
+    <!--Ancient Wayward Cave-->
+    <%- include('templates/mapDungeon',
+        { name: "Ancient Wayward Cave"
+        , x: 15, y: 42
+        , height: 3, width: 3
+        })
+    %>
+
+    <!--Ancient Quarry-->
+    <%- include('templates/mapDungeon',
+        { name: "Ancient Quarry"
+        , x: 18, y: 42
+        , height: 3, width: 3
+        })
+    %>
+
+    <!--Primeval Grotto-->
+    <%- include('templates/mapDungeon',
+        { name: "Primeval Grotto"
+        , x: 21, y: 42
+        , height: 3, width: 3
+        })
+    %>
+
+    <!--Clamberclaw Cliffs-->
+    <%- include('templates/mapDungeon',
+        { name: "Clamberclaw Cliffs"
+        , x: 24, y: 42
+        , height: 3, width: 3
+        })
+    %>
+
+    <!--Celestica Ruins-->
+    <%- include('templates/mapDungeon',
+        { name: "Celestica Ruins"
+        , x: 27, y: 42
+        , height: 3, width: 3
+        })
+    %>
+
+    <!--Sacred Plaza-->
+    <%- include('templates/mapDungeon',
+        { name: "Sacred Plaza"
+        , x: 30, y: 42
+        , height: 3, width: 3
+        })
+    %>
+
+    <!--Crevasse Passage-->
+    <%- include('templates/mapDungeon',
+        { name: "Crevasse Passage"
+        , x: 33, y: 42
+        , height: 3, width: 3
+        })
+    %>
+
+    <!--Avalugg's Legacy-->
+    <%- include('templates/mapDungeon',
+        { name: "Avalugg's Legacy"
+        , x: 36, y: 42
+        , height: 3, width: 3
+        })
+    %>
+
+    <!--Ice Column Chamber-->
+    <%- include('templates/mapDungeon',
+        { name: "Ice Column Chamber"
+        , x: 39, y: 42
+        , height: 3, width: 3
+        })
+    %>
+
+    <!--Icepeak Cavern-->
+    <%- include('templates/mapDungeon',
+        { name: "Icepeak Cavern"
+        , x: 42, y: 42
+        , height: 3, width: 3
+        })
+    %>
+
+    <!--Ancient Snowpoint Temple-->
+    <%- include('templates/mapDungeon',
+        { name: "Ancient Snowpoint Temple"
+        , x: 45, y: 42
+        , height: 3, width: 3
+        })
+    %>
+
+    <!--Seaside Hollow-->
+    <%- include('templates/mapDungeon',
+        { name: "Seaside Hollow"
+        , x: 48, y: 42
+        , height: 3, width: 3
+        })
+    %>
+
+    <!--Ancient Lake Verity-->
+    <%- include('templates/mapDungeon',
+        { name: "Ancient Lake Verity"
+        , x: 51, y: 42
+        , height: 3, width: 3
+        })
+    %>
+
+    <!--Ancient Lake Valor-->
+    <%- include('templates/mapDungeon',
+        { name: "Ancient Lake Valor"
+        , x: 54, y: 42
+        , height: 3, width: 3
+        })
+    %>
+
+    <!--Ancient Lake Acuity-->
+    <%- include('templates/mapDungeon',
+        { name: "Ancient Lake Acuity"
+        , x: 57, y: 42
+        , height: 3, width: 3
+        })
+    %>
+
+    <!-- ------------------ -->
+    <!-- PLACES OF INTEREST -->
+    <!-- ------------------ -->
+
+    <%- include('templates/mapPOI',
+        { name: "Dock"
+        , x: 0, y: 56
+        , width: 3, height: 4
+        , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Prelude Beach') }"
+        })
+    %>
+
+    <%- include('templates/mapPOI',
+        { name: "Underground Entrance"
+        , x: 3, y: 56
+        , width: 3, height: 4
+        , databind: "click:function(){App.game.underground.openUndergroundModal()}, attr: { class: App.game.underground.canAccess() ? 'completed' : 'locked' }"
+        })
+     %>
+
+     <%- include('templates/mapPOI',
+        { name: "Farm"
+        , x: 6, y: 57
+        , width: 3, height: 3
+        , databind: "click:function(){FarmController.openFarmModal()}, attr: { class: App.game.farming.canAccess() ? 'completed' : 'locked' }"
+        })
+     %>
+
+     <%- include('templates/mapPOI',
+        { name: "Pokémon Day Care"
+        , x: 9, y: 56
+        , width: 4, height: 4
+        , databind: "click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? 'completed' : 'locked' }"
+        })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Professor Laventon's Blimp"
+         , x: 57, y: 52
+         , width: 6, height: 3
+         , databind: "click:function(){MapHelper.moveToTown('Prelude Beach')}, attr:{ class: MapHelper.calculateTownCssClass('Prelude Beach') }"
+         , visible:  "MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.Special"
+         , image: "assets/images/map/blimp_empty.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Professor Laventon's Blimp"
+         , x: 57, y: 52
+         , width: 6, height: 3
+         , databind: "click:function(){MapHelper.moveToTown('Prelude Beach')}, attr:{ class: MapHelper.calculateTownCssClass('Prelude Beach') }"
+         , visible:  "MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() == GameConstants.Starter.Special"
+         , image: "assets/images/map/blimp_pikachu.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Tornadus"
+         , x: 13, y: 56
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Tornadus 1'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Tornadus 1'] && TemporaryBattleList['Tornadus 1'].isVisible()"
+         , image: "assets/images/map/Tornadus.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Tornadus"
+         , x: 17, y: 56
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Tornadus 2'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Tornadus 2'] && TemporaryBattleList['Tornadus 2'].isVisible()"
+         , image: "assets/images/map/Tornadus.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Tornadus"
+         , x: 21, y: 56
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Tornadus 3'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Tornadus 3'] && TemporaryBattleList['Tornadus 3'].isVisible()"
+         , image: "assets/images/map/Tornadus.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Thundurus"
+         , x: 25, y: 56
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Thundurus 1'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Thundurus 1'] && TemporaryBattleList['Thundurus 1'].isVisible()"
+         , image: "assets/images/map/Thundurus.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Thundurus"
+         , x: 29, y: 56
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Thundurus 2'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Thundurus 2'] && TemporaryBattleList['Thundurus 2'].isVisible()"
+         , image: "assets/images/map/Thundurus.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Thundurus"
+         , x: 33, y: 56
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Thundurus 3'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Thundurus 3'] && TemporaryBattleList['Thundurus 3'].isVisible()"
+         , image: "assets/images/map/Thundurus.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Landorus"
+         , x: 37, y: 56
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Landorus 1'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Landorus 1'] && TemporaryBattleList['Landorus 1'].isVisible()"
+         , image: "assets/images/map/Landorus.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Landorus"
+         , x: 41, y: 56
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Landorus 2'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Landorus 2'] && TemporaryBattleList['Landorus 2'].isVisible()"
+         , image: "assets/images/map/Landorus.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Landorus"
+         , x: 45, y: 56
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Landorus 3'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Landorus 3'] && TemporaryBattleList['Landorus 3'].isVisible()"
+         , image: "assets/images/map/Landorus.png"
+         })
+      %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Enamorus"
+         , x: 49, y: 56
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Enamorus 1'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Enamorus 1'] && TemporaryBattleList['Enamorus 1'].isVisible()"
+         , image: "assets/images/map/Enamorus.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Enamorus"
+         , x: 53, y: 56
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Enamorus 2'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Enamorus 2'] && TemporaryBattleList['Enamorus 2'].isVisible()"
+         , image: "assets/images/map/Enamorus.png"
+         })
+     %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Enamorus"
+         , x: 57, y: 56
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Enamorus 3'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Enamorus 3'] && TemporaryBattleList['Enamorus 3'].isVisible()"
+         , image: "assets/images/map/Enamorus.png"
+         })
+     %>
+
+</g>

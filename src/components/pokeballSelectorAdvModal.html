@@ -1,0 +1,307 @@
+<div class="modal fade" id="pokeballSelectorAdvModal" tabindex="-1" role="dialog"
+    aria-labelledby="PokeballSelectorAdvModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header p-0" style='justify-content: space-around;'>
+                <ul class="nav nav-tabs nav-fill w-100">
+                    <li class="nav-item">
+                        <a data-toggle='tab' class='nav-link active' href="#pokeballFilterConfigTab">
+                            Configure Filters
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a data-toggle='tab' class='nav-link' href="#pokeballFilterTestTab">
+                            Test Filters
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a data-toggle="tab" class="nav-link" href="#pokeballFilterHelpTab">
+                            Help
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="modal-body p-0">
+                <div class="tab-content">
+                    <div id="pokeballFilterConfigTab" class="tab-pane active p-3">
+                        <div>
+                            <button class="btn btn-primary my-2 mr-2" onclick="App.game.pokeballFilters.createFilter()">
+                                Create New Filter
+                            </button>
+                            <button class="btn btn-primary my-2" onclick="App.game.pokeballFilters.reset()">
+                                Reset Filters
+                            </button>
+                        </div>
+                        <div id="pokeballFilterConfigs"
+                            data-bind="sortable: {
+                                foreach: App.game.pokeballFilters.list,
+                                options: {
+                                    group: 'pokeballFilters',
+                                    draggable: '.pokeballFilterWrapper',
+                                    handle: '.pokeballFilterDragHandle',
+                                    dataIdAttr: 'data-key',
+                                    getId: (filter) => filter.uuid,
+                                }
+                            }">
+                            <div class="pokeballFilterWrapper" data-bind="
+                                visible: !PokeballFilters.hideFilter($data)
+                            ">
+                                <div class="pokeballFilterDragHandle bg-dark text-white"></div>
+                                <div class="pokeballFilter">
+                                    <div class="pokeballFilterHeader">
+                                        <div class="pokeballFilterEnableToggle" data-bind="
+                                            tooltip: {
+                                                title: $data.enabled() ? 'Enabled' : 'Disabled',
+                                                trigger: 'hover',
+                                                animation: false,
+                                                placement: 'bottom',
+                                            },
+                                            template: {
+                                                name: 'toggleSliderTemplate',
+                                                data: {
+                                                    value: $data.enabled,
+                                                    key: `checkbox-enabled-${$index()}`
+                                                },
+                                            }
+                                        "></div>
+                                        <button class="btn-circle btn-info"
+                                                data-bind="tooltip: {
+                                                    title: $data.description,
+                                                    trigger: 'hover',
+                                                    animation: false,
+                                                    placement: 'right',
+                                                    html: true,
+                                                }"
+                                        >?</button>
+                                        <div class="pokeballFilterName">
+                                            <input class="form-control" data-bind="textInput: $data._name"></span>
+                                        </div>
+                                        <img class="clickable pokeball-selected pokeball-small" data-bind="
+                                        attr: {
+                                            src: 'assets/images/pokeball/' + GameConstants.Pokeball[$data.ball()] + '.svg'},
+                                            tooltip: {
+                                                title: $data.ball() === -1 ? 'None' : ItemList[GameConstants.Pokeball[$data.ball()]].displayName,
+                                                trigger: 'hover',
+                                                animation: false,
+                                                placement: 'bottom'
+                                            },
+                                            click: function() {
+                                                App.game.pokeballs.selectedSelection($data.ball);
+                                                App.game.pokeballs.selectedTitle($data.name);
+                                                $('#pokeballSelectorModal').modal('show')
+                                            },
+                                        }" />
+                                    </div>
+                                    <button class="pokeballFilterExpandBtn btn btn-secondary btn-block"
+                                            data-toggle="collapse"
+                                            data-bind="attr: { href: `#pokeball-filter-options-${$index()}` }"
+                                    >Toggle Settings</button>
+                                    <div class="collapse pokeballFilterBody"
+                                        data-bind="attr: { id: `pokeball-filter-options-${$index()}`}">
+                                        <table class="pokeballFilterOptions">
+                                            <tbody>
+                                                <!-- ko foreach: Object.entries($data.options).map(([k, v]) => ({ optionName: k, setting: v })) -->
+                                                <tr>
+                                                    <td>
+                                                        <button class="btn-circle btn-danger"
+                                                            data-bind="click: () => App.game.pokeballFilters.removeFilterOption($parent, optionName)">
+                                                            <span>&minus;</span>
+                                                        </button>
+                                                    </td>
+                                                    <!-- ko template: {
+                                                    name: setting instanceof BooleanSetting ? 'pokeballFilterSlider' : 'pokeballFilterMultipleChoice',
+                                                    data: { setting, key: $index() },
+                                                } --><!-- /ko -->
+                                                </tr>
+                                                <!-- /ko -->
+                                                <!-- ko foreach: Object.keys(pokeballFilterOptions).filter(k => !(k in $data.options) && pokeballFilterOptions[k].canUse()) -->
+                                                <tr class="bg-faded text-white">
+                                                    <td>
+                                                        <button class="btn-circle btn-success"
+                                                            data-bind="click: () => App.game.pokeballFilters.addFilterOption($parent, $data)">
+                                                            <span>&plus;</span>
+                                                        </button>
+                                                    </td>
+                                                    <td class="p-2"
+                                                        data-bind="text: pokeballFilterOptions[$data].defaultSetting.displayName">
+                                                    </td>
+                                                    <td></td>
+                                                </tr>
+                                                <!-- /ko -->
+                                                <!-- Commenting out the invert filter because it is confusing and possibly not even wanted
+                                                     Can be re-enabled in a future release if we find it is wanted
+                                                    tr>
+                                                    <td></td>
+                                                    <td class="p-2"><label class="m-0" data-bind="attr: { 'for': `checkbox-inverted-${$index()}` }">Invert Filter:</label></td>
+                                                    <td class="p-2" data-bind="template: {
+                                                        name: 'toggleSliderTemplate',
+                                                        data: {
+                                                            value: $data.inverted,
+                                                            key: `checkbox-inverted-${$index()}`,
+                                                        }
+                                                    }"></td>
+                                                </tr -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="pokeballFilterDelete">
+                                    <button class="btn bg-danger text-white deleteButton"
+                                        data-bind="click: () => App.game.pokeballFilters.deleteFilter($data)">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="pokeballFilterTestTab" class="tab-pane p-3">
+                        <div>
+                            <p>This tab is useful for making sure what your filters match, and which ones take precedence. See the Help tab for more details.</p>
+                        </div>
+                        <div id="pokeballFilterTestInput">
+                            <p>Configure these options to describe a Pokémon you want to test:</p>
+                            <table>
+                                <tbody data-bind="foreach: Object.entries(App.game.pokeballFilters.testSettings)
+                                                                .filter(([k]) => pokeballFilterOptions[k]?.canUse() ?? true)
+                                                                .map(([k, s]) => s)">
+                                    <tr data-bind="template: {
+                                                            name: $data instanceof BooleanSetting ? 'pokeballFilterSlider' : 'pokeballFilterMultipleChoice',
+                                                            data: { setting: $data, key: `test-${$index()}` },
+                                                        }"></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="pokeballFilterTestResults" data-bind="using: App.game.pokeballFilters.findMatch(
+                                                                    App.game.pokeballFilters.testSettingsData()
+                                                                )">
+                            <p id="pokeballFilterTestMatch">
+                                <span data-bind='visible: $data, text: `This will use your "${$data?.name}" filter`'></span>
+                                <span data-bind='visible: !$data'>None of your enabled filters match this scenario</span>
+                                <!-- ko if: $data -->
+                                <img class="pokeball-selected pokeball-small" data-bind="
+                                    attr: {
+                                        src: 'assets/images/pokeball/' + GameConstants.Pokeball[$data?.ball()] + '.svg'},
+                                        tooltip: {
+                                            title: $data?.ball() === -1 ? 'None' : ItemList[GameConstants.Pokeball[$data?.ball()]].displayName,
+                                            trigger: 'hover',
+                                            animation: false,
+                                            placement: 'bottom'
+                                        },
+                                }" />
+                                <!-- /ko -->
+                            </p>
+                            <div data-bind="foreach: App.game.pokeballFilters.displayList()">
+                                <p data-bind="
+                                    class: $data.test(App.game.pokeballFilters.testSettingsData()) ? 'bg-success text-white' : '',
+                                    css: {
+                                        'pokeballFilterDisabled': !$data.enabled(),
+                                        'font-weight-bold': $parent === $data,
+                                        'darker-25': $parent !== $data,
+                                    }
+                                ">
+                                    <span data-bind="if: $parent === $data">*** </span>
+                                    <span data-bind="text: $data.name"></span>
+                                    <span data-bind="if: $parent === $data"> ***</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="pokeballFilterHelpTab" class="tab-pane p-3">
+                        <h2>Configure Filters</h2>
+                        <p>
+                            Use this tab to add, edit, re-order, and remove Pokéball filters.
+                        </p>
+                        <p>
+                            Click the "Toggle Settings" button for a filter to configure how it works.
+                            Options listed first are all the values that are checked when catching - you can click their <button class="btn-circle btn-danger float-none">&minus;</button> to remove these.
+                            The darker options below that are not checked.
+                            You can click their <button class="btn-circle btn-success float-none">&plus;</button> button to include it in the filter, and choose a value it must match.
+                        </p>
+                        <p>
+                            Filters can be re-ordered by dragging them from the bar on the left side of each filter.
+                            You can click the x on the right of each filter to remove them - this will open a confirmation box to prevent accidentally deleting one.
+                        </p>
+                        <p>
+                            Some filter options and default filters are hidden at the start of the game, and will unlock as they become relevant.
+                        </p>
+                        <p>
+                            The "Enabled" toggle allows you to turn a filter off.
+                            Disabled filters will be grayed out in the filter list on the main game screen, and also in the Test Filters tab.
+                            The "Inverted" toggle, when turned on, will make that filter <i>ignore</i> any Pokémon that match its conditions, and catch all the rest.
+                        </p>
+                        <p>
+                            You can hover (or tap) the <button class="btn-circle btn-info float-none">&#8505;</button> icon for a description of what the filter will catch.
+                        </p>
+
+                        <h2>Test Filters</h2>
+                        <p>
+                            In some scenario, multiple of your filters may meet all of their conditions,
+                            but only one can be used to choose a ball for catching.
+                        </p>
+                        <p>
+                            This tab will allow you to see exactly which will be chosen,
+                            for some scenario you configure with the settings in the tab.
+                        </p>
+                        <p>
+                            For instance, if you wanted to know what is used for a shiny Rattata,
+                            when you already have a normal Rattata,
+                            you would turn on the "Shiny" and "Caught" toggles,
+                            but leave the others off.
+                        </p>
+                        <p>
+                            With the default catch filters,
+                            you will see that both "Caught" and "New Shiny" meet their conditions,
+                            but the "New Shiny" filter is the one used for catching.
+                            The filter furthest down in your list that matches all conditions is the one used.
+                            The highlighted filters are ones that matched the scenario.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="toggleSliderTemplate">
+    <!-- ko if: $data.text -->
+    <label data-bind="attr: { for: $data.key }, text: $data.text"></label>
+    <!-- /ko -->
+    <label class="form-check-label toggler-wrapper style-1 m-auto">
+        <input class="clickable" type="checkbox"
+            data-bind="checked: $data.value, attr: { id: $data.key }">
+        <div class="toggler-slider">
+            <div class="toggler-knob"></div>
+        </div>
+    </label>
+</script>
+<script type="text/html" id="pokeballFilterSlider">
+    <td class="p-2">
+        <label class="m-0" data-bind="attr: { for: `checkbox-${setting.name}-${key}` }, text: `${setting.displayName}:`">
+            setting name
+        </label>
+    </td>
+    <td class="p-2">
+        <label class="form-check-label toggler-wrapper style-1 m-auto">
+            <input class="clickable" type="checkbox"
+                data-bind="checked: setting.observableValue, attr: { id: `checkbox-${setting.name}-${key}` }">
+            <div class="toggler-slider">
+                <div class="toggler-knob"></div>
+            </div>
+        </label>
+    </td>
+</script>
+
+<script type="text/html" id="pokeballFilterMultipleChoice">
+    <td class="p-2" data-bind="text: `${setting.displayName}:`">setting name</td>
+    <td class="p-0">
+        <select class="form-control" data-bind="
+            options: setting.getValidOptions(),
+            optionsValue: 'value',
+            optionsText: 'text',
+            value: setting.observableValue
+        "></select>
+    </td>
+</script>

@@ -15,6 +15,7 @@ import {
     DAY,
     ExtraAchievementCategories,
     camelCaseToString,
+    ModalCollapseList,
 } from '../GameConstants';
 import HotkeySetting from './HotkeySetting';
 import Language, { LanguageNames } from '../translation/Language';
@@ -23,6 +24,7 @@ import GameHelper from '../GameHelper';
 import PokemonType from '../enums/PokemonType';
 import PokedexFilters from './PokedexFilters';
 import FilterSetting from './FilterSetting';
+import { LogBookTypes } from '../logbook/LogBookTypes';
 
 export default Settings;
 
@@ -130,6 +132,7 @@ Settings.add(new CssVariableSetting('locked', 'Locked Location', [], '#000000'))
 Settings.add(new CssVariableSetting('incomplete', 'Incomplete Area', [], '#ff9100'));
 Settings.add(new CssVariableSetting('questAtLocation', 'Quest at Location', [], '#55ff00'));
 Settings.add(new CssVariableSetting('uncaughtPokemon', 'Uncaught Pokemon', [], '#3498db'));
+Settings.add(new CssVariableSetting('uncaughtShadowPokemon', 'Uncaught Shadow Pokemon', [], '#a11131'));
 Settings.add(new CssVariableSetting('uncaughtShinyPokemonAndMissingAchievement', 'Uncaught Shiny Pokemon and Missing Achievement', [], '#c939fe'));
 Settings.add(new CssVariableSetting('uncaughtShinyPokemon', 'Uncaught Shiny Pokemon', [], '#ffee00'));
 Settings.add(new CssVariableSetting('missingAchievement', 'Missing Achievement', [], '#57e3ff'));
@@ -205,7 +208,6 @@ Settings.add(new BooleanSetting('vitaminHideShinyPokemon', 'Hide shiny Pokémon'
 Settings.add(new Setting<string>('vitaminSearchFilter', 'Search', [], ''));
 Settings.add(new Setting<number>('vitaminRegionFilter', 'Region', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(Region)], -2));
 Settings.add(new Setting<number>('vitaminTypeFilter', 'Type', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None')], -2));
-Settings.add(new BooleanSetting('heldItemHideHoldingPokemon', 'Hide Pokémon holding an item', false));
 
 // Held Item Sorting
 const heldItemSortSettings = Object.keys(SortOptionConfigs).map((opt) => (
@@ -214,6 +216,10 @@ const heldItemSortSettings = Object.keys(SortOptionConfigs).map((opt) => (
 Settings.add(new Setting<number>('heldItemSort', 'Sort:', heldItemSortSettings, SortOptions.id));
 Settings.add(new BooleanSetting('heldItemSortDirection', 'reverse', false));
 Settings.add(new Setting<string>('heldItemSearchFilter', 'Search', [], ''));
+Settings.add(new Setting<number>('heldItemRegionFilter', 'Region', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(Region)], -2));
+Settings.add(new Setting<number>('heldItemTypeFilter', 'Type', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None')], -2));
+Settings.add(new BooleanSetting('heldItemHideHoldingPokemon', 'Hide Pokémon holding an item', false));
+Settings.add(new BooleanSetting('heldItemShowHoldingThisItem', 'Show only Pokémon holding this item', false));
 
 // Breeding Filters
 Object.keys(BreedingFilters).forEach((key) => {
@@ -244,7 +250,7 @@ Settings.add(new Setting<string>('breedingDisplayFilter', 'breedingDisplayFilter
         new SettingOption('Times Hatched', 'timesHatched'),
         new SettingOption('Breeding Efficiency', 'breedingEfficiency'),
         new SettingOption('Steps per Attack Bonus', 'stepsPerAttack'),
-        new SettingOption('Pokedex ID', 'dexId'),
+        new SettingOption('Pokémon ID #', 'dexId'),
         new SettingOption('Vitamins used', 'vitamins'),
         new SettingOption('EVs', 'evs'),
     ],
@@ -301,6 +307,8 @@ Settings.add(new HotkeySetting('hotkey.farm', 'Farm', 'F'));
 Settings.add(new HotkeySetting('hotkey.hatchery', 'Hatchery', 'H'));
 Settings.add(new HotkeySetting('hotkey.oakItems', 'Oak Items', 'O'));
 Settings.add(new HotkeySetting('hotkey.underground', 'Underground', 'U'));
+Settings.add(new HotkeySetting('hotkey.shop', 'Poké Mart', 'E'));
+Settings.add(new HotkeySetting('hotkey.dailyQuests', 'Daily Quests', 'Q'));
 Settings.add(new HotkeySetting('hotkey.pokeballSelection', 'Poké Ball Selection', 'P', { suffix: ' + Number' }));
 
 Settings.add(new HotkeySetting('hotkey.farm.toggleShovel', 'Toggle Shovel', 'S'));
@@ -325,6 +333,11 @@ Settings.add(new HotkeySetting('hotkey.shop.buy', 'Buy item', 'B'));
 Settings.add(new HotkeySetting('hotkey.shop.max', 'Select max amount', 'M'));
 Settings.add(new HotkeySetting('hotkey.shop.reset', 'Reset amount', 'R'));
 Settings.add(new HotkeySetting('hotkey.shop.increase', 'Increase amount', 'I'));
+
+Settings.add(new HotkeySetting('hotkey.safari.ball', 'Throw Ball', 'C'));
+Settings.add(new HotkeySetting('hotkey.safari.bait', 'Throw Bait', 'B'));
+Settings.add(new HotkeySetting('hotkey.safari.rock', 'Throw Rock', 'R'));
+Settings.add(new HotkeySetting('hotkey.safari.run', 'Run', 'F'));
 
 // Discord
 Settings.add(new BooleanSetting('discord-rp.enabled', 'Discord RP enabled', true));
@@ -375,3 +388,17 @@ Settings.getSetting('backgroundImage').observableValue.subscribe((newValue) => {
 
 // Translation
 Settings.add(new Setting<Language>('translation.language', 'Language (beta)', Settings.enumToSettingOptionArray(Language, () => true, LanguageNames) as unknown as SettingOption<Language>[], Language.en));
+
+// Logs Settings
+Object.keys(LogBookTypes).forEach((logBookType) => {
+    Settings.add(new BooleanSetting(`logBook.${logBookType}`, logBookType, true));
+});
+
+Settings.add(new BooleanSetting('catchFilters.initialEnabled', 'New Catch Filters initially enabled', false));
+
+// Modal Collapsible Panels
+ModalCollapseList.forEach((collapse) => {
+    Settings.add(new BooleanSetting(`modalCollapse.${collapse}`, 'Modal Collapse', true));
+});
+
+

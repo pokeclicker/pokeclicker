@@ -4,12 +4,17 @@ import {
     Region,
     BattlePokemonGender,
     PokemonStatisticsType,
+    ShadowStatus,
+    MegaStoneType,
 } from '../GameConstants';
 import { PokemonNameType } from './PokemonNameType';
 import P from './mapProvider';
 import PokemonType from '../enums/PokemonType';
 import DataPokemon from './DataPokemon';
 import GameHelper from '../GameHelper';
+import MegaEvolveRequirement from '../requirements/MegaEvolveRequirement';
+import MegaStoneItem from '../items/MegaStoneItem';
+import { ItemList } from '../items/ItemList';
 
 // eslint-disable-next-line import/prefer-default-export
 export function calcNativeRegion(pokemonName: PokemonNameType) {
@@ -66,8 +71,9 @@ export function typeIdToString(id: number) {
     return PokemonType[id];
 }
 
-export function getImage(pokemonId: number, shiny: boolean = undefined, gender: boolean = undefined): string {
+export function getImage(pokemonId: number, shiny: boolean = undefined, gender: boolean = undefined, shadow: ShadowStatus = undefined): string {
     let src = 'assets/images/';
+    let showShadow = false;
     if (shiny === undefined) {
         // eslint-disable-next-line no-param-reassign
         shiny = App.game.party.alreadyCaughtPokemon(pokemonId, true)
@@ -77,9 +83,23 @@ export function getImage(pokemonId: number, shiny: boolean = undefined, gender: 
         // eslint-disable-next-line no-param-reassign
         gender = App.game.party.getPokemon(pokemonId)?.defaultFemaleSprite() ?? false;
     }
+    if (shadow === undefined) {
+        const partyPokemon = App.game.party.getPokemon(pokemonId);
+        if (partyPokemon) {
+            showShadow = partyPokemon.shadow === ShadowStatus.Shadow
+                || (partyPokemon.shadow === ShadowStatus.Purified && partyPokemon.showShadowImage);
+        } else {
+            showShadow = false;
+        }
+    } else {
+        showShadow = shadow === ShadowStatus.Shadow;
+    }
 
     if (shiny) {
         src += 'shiny';
+    }
+    if (showShadow) {
+        src += 'shadow';
     }
     let genderString = '';
     // If Pokémon is female, use the female sprite, otherwise use the male/genderless one
@@ -109,8 +129,18 @@ export function displayName(englishName: string): Computed<string> {
     return App.translation.get(englishName, 'pokemon');
 }
 
+export function hasMegaEvolution(pokemonName: PokemonNameType): boolean {
+    return !!P.pokemonMap[pokemonName].evolutions?.some((e) => e.restrictions.some((r) => r instanceof MegaEvolveRequirement));
+}
+
+export function getMegaStones(pokemonName: PokemonNameType): MegaStoneItem[] {
+    return GameHelper.enumStrings(MegaStoneType)
+        .filter(s => (ItemList[s] as MegaStoneItem)?.basePokemon == pokemonName)
+        .map(s => ItemList[s] as MegaStoneItem);
+}
+
 // To have encounter/caught/defeat/hatch statistics in a single place
-export function incrementPokemonStatistics(pokemonId: number, statistic: PokemonStatisticsType, shiny: boolean, gender: number) {
+export function incrementPokemonStatistics(pokemonId: number, statistic: PokemonStatisticsType, shiny: boolean, gender: number, shadow: ShadowStatus) {
     const pokemonStatistics = {
         Captured: App.game.statistics.pokemonCaptured[pokemonId],
         Defeated: App.game.statistics.pokemonDefeated[pokemonId],
@@ -136,6 +166,13 @@ export function incrementPokemonStatistics(pokemonId: number, statistic: Pokemon
         ShinyFemaleDefeated: App.game.statistics.shinyFemalePokemonDefeated[pokemonId],
         ShinyFemaleEncountered: App.game.statistics.shinyFemalePokemonEncountered[pokemonId],
         ShinyFemaleHatched: App.game.statistics.shinyFemalePokemonHatched[pokemonId],
+        ShadowCaptured: App.game.statistics.shadowPokemonCaptured[pokemonId],
+        ShadowDefeated: App.game.statistics.shadowPokemonDefeated[pokemonId],
+        ShadowMaleCaptured: App.game.statistics.shadowMalePokemonCaptured[pokemonId],
+        ShadowMaleDefeated: App.game.statistics.shadowMalePokemonDefeated[pokemonId],
+        ShadowFemaleCaptured: App.game.statistics.shadowFemalePokemonCaptured[pokemonId],
+        ShadowFemaleDefeated: App.game.statistics.shadowFemalePokemonDefeated[pokemonId],
+
     };
     const totalStatistics = {
         Captured: App.game.statistics.totalPokemonCaptured,
@@ -170,6 +207,14 @@ export function incrementPokemonStatistics(pokemonId: number, statistic: Pokemon
         ShinyGenderlessDefeated: App.game.statistics.totalShinyGenderlessPokemonDefeated,
         ShinyGenderlessEncountered: App.game.statistics.totalShinyGenderlessPokemonEncountered,
         ShinyGenderlessHatched: App.game.statistics.totalShinyGenderlessPokemonHatched,
+        ShadowCaptured: App.game.statistics.totalShadowPokemonCaptured,
+        ShadowDefeated: App.game.statistics.totalShadowPokemonDefeated,
+        ShadowMaleCaptured: App.game.statistics.totalShadowMalePokemonCaptured,
+        ShadowMaleDefeated: App.game.statistics.totalShadowMalePokemonDefeated,
+        ShadowFemaleCaptured: App.game.statistics.totalShadowFemalePokemonCaptured,
+        ShadowFemaleDefeated: App.game.statistics.totalShadowFemalePokemonDefeated,
+        ShadowGenderlessCaptured: App.game.statistics.totalShadowGenderlessPokemonCaptured,
+        ShadowGenderlessDefeated: App.game.statistics.totalShadowGenderlessPokemonDefeated,
     };
     let genderString = '';
     // Gender Statistics
@@ -196,5 +241,15 @@ export function incrementPokemonStatistics(pokemonId: number, statistic: Pokemon
             GameHelper.incrementObservable(pokemonStatistics[shinyString + genderString + statistic]);
         }
         GameHelper.incrementObservable(totalStatistics[shinyString + genderString + statistic]);
+    }
+    if (shadow === ShadowStatus.Shadow) {
+        const shadowString = 'Shadow';
+        GameHelper.incrementObservable(pokemonStatistics[shadowString + statistic]);
+        GameHelper.incrementObservable(totalStatistics[shadowString + statistic]);
+        // Gender
+        if (gender !== BattlePokemonGender.NoGender) {
+            GameHelper.incrementObservable(pokemonStatistics[shadowString + genderString + statistic]);
+        }
+        GameHelper.incrementObservable(totalStatistics[shadowString + genderString + statistic]);
     }
 }

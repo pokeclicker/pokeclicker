@@ -10,6 +10,43 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.10.11
+    new ChangelogUpdate('v0.10.11', new Date(2023, 4, 7)),
+    new Changelog(changelogType.NEW, 'Advanced capture filters'),
+    new Changelog(changelogType.NEW, 'Weather forecast at the Weather Institute in Hoenn'),
+    new Changelog(changelogType.NEW, 'New Megas'),
+    new Changelog(changelogType.NEW, 'New Quest Lines'),
+    new Changelog(changelogType.NEW, 'Hotkey to open the quest list'),
+    new Changelog(changelogType.NEW, 'Hotkey to open Poké Mart shop'),
+    new Changelog(changelogType.CHANGE, 'Dungeon chests have a visual difference based on loot tier'),
+    new Changelog(changelogType.CHANGE, 'S.S. Anne visible on all maps at dock location'),
+    new Changelog(changelogType.CHANGE, 'Adjusted some pokémon locations'),
+    new Changelog(changelogType.CHANGE, 'Pokédex filter improvements'),
+    new Changelog(changelogType.CHANGE, 'Pokémon in the hatchery/queue can be seen in the vitamin list'),
+    new Changelog(changelogType.CHANGE, 'Acquired Mega Stones displayed in item bag'),
+    new Changelog(changelogType.CHANGE, 'Updated egg colors in Hatchery'),
+    new Changelog(changelogType.CHANGE, 'Misc text changes'),
+    new Changelog(changelogType.CHANGE, 'Misc map changes'),
+    new Changelog(changelogType.FIXED, 'Pokédex & hatchery unusable at certain resolutions'),
+    new Changelog(changelogType.FIXED, 'Deleting a category sometimes causing a game crash'),
+    new Changelog(changelogType.FIXED, 'Various broken images'),
+
+    // v0.10.10
+    new ChangelogUpdate('v0.10.10', new Date(2023, 2, 26)),
+    new Changelog(changelogType.NEW, 'New Megas'),
+    new Changelog(changelogType.NEW, 'New Quest Lines'),
+    new Changelog(changelogType.CHANGE, 'Added Pokérus icon to more places'),
+    new Changelog(changelogType.CHANGE, 'Battle Café now gives more spins on full shiny/resistant set'),
+    new Changelog(changelogType.CHANGE, 'Faster growth berry auras no longer affects matured plants'),
+    new Changelog(changelogType.CHANGE, 'Slower growth berry auras now only affects matured plants'),
+    new Changelog(changelogType.CHANGE, 'More berry information added'),
+    new Changelog(changelogType.CHANGE, 'Manaphy is now a wandering Pokémon again'),
+    new Changelog(changelogType.CHANGE, 'Misc UI changes'),
+    new Changelog(changelogType.CHANGE, 'Misc text changes'),
+    new Changelog(changelogType.CHANGE, 'Misc map changes'),
+    new Changelog(changelogType.FIXED, 'Real evolution challenge now correctly keeps track of level'),
+    new Changelog(changelogType.FIXED, 'Some requirements for routes and towns'),
+
     // v0.10.9
     new ChangelogUpdate('v0.10.9', new Date(2023, 0, 28)),
     new Changelog(changelogType.NEW, 'New Megas'),

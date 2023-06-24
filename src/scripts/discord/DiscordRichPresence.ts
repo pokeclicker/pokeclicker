@@ -231,10 +231,19 @@ class DiscordRichPresence {
     }
 
     static getRichPresenceData() {
-        const nextArea = player.route() ? Routes.getName(player.route(), player.region) : player.town() ? player.town().name : 'Unknown Area';
+        let nextArea;
+        if (player == undefined) {
+            nextArea = 'Loading Game';
+        } else if (player.route()) {
+            nextArea = Routes.getName(player.route(), player.region);
+        } else if (player.town()) {
+            nextArea = player.town().name;
+        } else {
+            nextArea = 'Unknown Area';
+        }
 
         const discordRPCValues: Record<string, any> = {
-            enabled: Settings.getSetting('discord-rp.enabled').observableValue(),
+            enabled: (player != undefined ? Settings.getSetting('discord-rp.enabled').observableValue() : false),
             line1: this.replaceDiscordText(Settings.getSetting('discord-rp.line-1').value || '  '),
             line2: this.replaceDiscordText(Settings.getSetting('discord-rp.line-2').value || '  '),
         };
@@ -263,22 +272,28 @@ class DiscordRichPresence {
         if (smallImage === 'cycle') {
             smallImage = this.cycleOptions[++this.cycleSmallImageIndex % this.cycleOptions.length];
         }
-        switch (smallImage) {
-            case 'trainer':
-                discordRPCValues.smallImageKey = `trainer-${App.game.profile.trainer()}`;
-                discordRPCValues.smallImageText = this.replaceDiscordText('Total Attack: {attack}');
-                break;
-            case 'egg':
-                discordRPCValues.smallImageKey = smallImage;
-                discordRPCValues.smallImageText = this.replaceDiscordText('Total Hatched: {hatched}');
-                break;
-            case 'pokeball':
-                discordRPCValues.smallImageKey = smallImage;
-                discordRPCValues.smallImageText = this.replaceDiscordText('Shinies: {caught_shiny}/{caught} ✨');
-                break;
-            default:
-                discordRPCValues.smallImageKey = smallImage.toLowerCase();
-                discordRPCValues.smallImageText = `${GameConstants.camelCaseToString(smallImage)}: ${App.game.wallet.currencies[GameConstants.Currency[smallImage]]?.().toLocaleString('en-US') ?? '0'}`;
+
+        if (App.game != undefined) {
+            switch (smallImage) {
+                case 'trainer':
+                    discordRPCValues.smallImageKey = `trainer-${App.game.profile.trainer()}`;
+                    discordRPCValues.smallImageText = this.replaceDiscordText('Total Attack: {attack}');
+                    break;
+                case 'egg':
+                    discordRPCValues.smallImageKey = smallImage;
+                    discordRPCValues.smallImageText = this.replaceDiscordText('Total Hatched: {hatched}');
+                    break;
+                case 'pokeball':
+                    discordRPCValues.smallImageKey = smallImage;
+                    discordRPCValues.smallImageText = this.replaceDiscordText('Shinies: {caught_shiny}/{caught} ✨');
+                    break;
+                default:
+                    discordRPCValues.smallImageKey = smallImage.toLowerCase();
+                    discordRPCValues.smallImageText = `${GameConstants.camelCaseToString(smallImage)}: ${App.game.wallet.currencies[GameConstants.Currency[smallImage]]?.().toLocaleString('en-US') ?? '0'}`;
+            }
+        } else {
+            discordRPCValues.smallImageKey = smallImage;
+            discordRPCValues.smallImageText = '';
         }
 
         return discordRPCValues;

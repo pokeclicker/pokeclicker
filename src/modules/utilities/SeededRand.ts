@@ -92,4 +92,17 @@ export default class SeededRand {
         }
         return output;
     }
+
+    // Shuffle an array based on the weights of the items
+    public static shuffleWeightedArray<T>(arr: Array<T>, weights: Array<number>): Array<T> {
+        const output = [];
+        for (let i = 0; arr.length; i++) {
+            const item = this.fromWeightedArray(arr, weights);
+            const ind = arr.findIndex(a => a == item);
+            arr.splice(ind, 1);
+            weights.splice(ind, 1);
+            output.push(item);
+        }
+        return output;
+    }
 }

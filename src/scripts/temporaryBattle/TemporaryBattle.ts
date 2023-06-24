@@ -7,6 +7,7 @@ type TemporaryBattleOptionalArgument = {
     imageName?: string,
     visibleRequirement?: Requirement,
     hideTrainer?: boolean,
+    environment?: GameConstants.Environment
 };
 
 class TemporaryBattle extends TownContent {
@@ -29,7 +30,7 @@ class TemporaryBattle extends TownContent {
     public areaStatus() {
         if (!this.isUnlocked()) {
             return areaStatus.locked;
-        } else if (App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(this.name)]() == 0) {
+        } else if (App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(this.name)]() == 0 && this.isVisible()) {
             return areaStatus.unlockedUnfinished;
         } else {
             return areaStatus.completed;
@@ -48,7 +49,7 @@ class TemporaryBattle extends TownContent {
     }
     public getImage() {
         const imageName = this.optionalArgs?.imageName ?? this.name;
-        return `assets/images/temporaryBattle/${imageName}.png`;
+        return `assets/images/npcs/${imageName}.png`;
     }
 
     constructor(

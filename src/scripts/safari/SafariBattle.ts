@@ -4,6 +4,7 @@ class SafariBattle {
     static text: KnockoutObservable<string> = ko.observable('What will you do?');
     static escapeAttempts = 0;
     static particle;
+    static selectedBait: KnockoutObservable<Bait> = ko.observable(BaitList.Bait);
 
     public static get enemy(): SafariPokemon {
         return SafariBattle._enemy();
@@ -28,7 +29,7 @@ class SafariBattle {
     }
 
     public static throwBall() {
-        if (!SafariBattle.busy()) {
+        if (Safari.inBattle() && !SafariBattle.busy()) {
             SafariBattle.busy(true);
             Safari.balls(Safari.balls() - 1);
 
@@ -146,17 +147,18 @@ class SafariBattle {
 
     private static capturePokemon() {
         SafariBattle.text(`GOTCHA!<br>${SafariBattle.enemy.name} was caught!`);
+        GameHelper.incrementObservable(App.game.statistics.safariPokemonCaptured, 1);
         const pokemonID = PokemonHelper.getPokemonByName(SafariBattle.enemy.name).id;
         App.game.party.gainPokemonById(pokemonID, SafariBattle.enemy.shiny);
         const partyPokemon = App.game.party.getPokemon(pokemonID);
-        partyPokemon.effortPoints += App.game.party.calculateEffortPoints(partyPokemon, SafariBattle.enemy.shiny, GameConstants.SAFARI_EP_YIELD);
-
+        partyPokemon.effortPoints += App.game.party.calculateEffortPoints(partyPokemon, SafariBattle.enemy.shiny, GameConstants.ShadowStatus.None, GameConstants.SAFARI_EP_YIELD);
+        Safari.spawnItemCheck();
     }
 
-    public static throwBait(baitType: BaitType) {
-        if (!SafariBattle.busy()) {
+    public static throwBait() {
+        if (Safari.inBattle() && !SafariBattle.busy()) {
             SafariBattle.busy(true);
-            const bait: Bait = BaitList[BaitType[baitType]];
+            const bait = SafariBattle.selectedBait();
             if (bait.amount() <= 0) {
                 SafariBattle.text(`You don't have enough ${bait.name}`);
                 setTimeout(() => {
@@ -177,7 +179,7 @@ class SafariBattle {
     }
 
     public static throwRock() {
-        if (!SafariBattle.busy()) {
+        if (Safari.inBattle() && !SafariBattle.busy()) {
             SafariBattle.busy(true);
             SafariBattle.text(`You throw a rock at ${SafariBattle.enemy.displayName}`);
             GameHelper.incrementObservable(App.game.statistics.safariRocksThrown, 1);
@@ -217,7 +219,7 @@ class SafariBattle {
     }
 
     public static run() {
-        if (!SafariBattle.busy()) {
+        if (Safari.inBattle() && !SafariBattle.busy()) {
             SafariBattle.busy(true);
             SafariBattle.text('You flee.');
             setTimeout(SafariBattle.endBattle, 1500);

@@ -82,7 +82,8 @@ class Battle {
 
         App.game.breeding.progressEggsBattle(Battle.route, player.region);
         const isShiny: boolean = enemyPokemon.shiny;
-        const pokeBall: GameConstants.Pokeball = App.game.pokeballs.calculatePokeballToUse(enemyPokemon.id, isShiny);
+        const isShadow: boolean = enemyPokemon.shadow == GameConstants.ShadowStatus.Shadow;
+        const pokeBall: GameConstants.Pokeball = App.game.pokeballs.calculatePokeballToUse(enemyPokemon.id, isShiny, isShadow, enemyPokemon.encounterType);
 
         if (pokeBall !== GameConstants.Pokeball.None) {
             this.prepareCatch(enemyPokemon, pokeBall);
@@ -112,7 +113,7 @@ class Battle {
         this.counter = 0;
         this.enemyPokemon(PokemonFactory.generateWildPokemon(player.route(), player.region, player.subregionObject()));
         const enemyPokemon = this.enemyPokemon();
-        PokemonHelper.incrementPokemonStatistics(enemyPokemon.id, GameConstants.PokemonStatisticsType.Encountered, enemyPokemon.shiny, enemyPokemon.gender);
+        PokemonHelper.incrementPokemonStatistics(enemyPokemon.id, GameConstants.PokemonStatisticsType.Encountered, enemyPokemon.shiny, enemyPokemon.gender, enemyPokemon.shadow);
         // Shiny
         if (enemyPokemon.shiny) {
             App.game.logbook.newLog(
@@ -179,10 +180,10 @@ class Battle {
     public static catchPokemon(enemyPokemon: BattlePokemon, route: number, region: GameConstants.Region) {
         this.gainTokens(route, region);
         App.game.oakItems.use(OakItemType.Magic_Ball);
-        App.game.party.gainPokemonById(enemyPokemon.id, enemyPokemon.shiny, undefined, enemyPokemon.gender);
+        App.game.party.gainPokemonById(enemyPokemon.id, enemyPokemon.shiny, undefined, enemyPokemon.gender, enemyPokemon.shadow);
         const partyPokemon = App.game.party.getPokemon(enemyPokemon.id);
         const epBonus = App.game.pokeballs.getEPBonus(this.pokeball());
-        partyPokemon.effortPoints += App.game.party.calculateEffortPoints(partyPokemon, enemyPokemon.shiny, enemyPokemon.ep * epBonus);
+        partyPokemon.effortPoints += App.game.party.calculateEffortPoints(partyPokemon, enemyPokemon.shiny, enemyPokemon.shadow, enemyPokemon.ep * epBonus);
     }
 
     protected static gainTokens(route: number, region: GameConstants.Region) {

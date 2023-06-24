@@ -99,30 +99,55 @@ class GameController {
 
     // Store keys for multi-key combinations
     static keyHeld: Record<string, any> = {}
+    //Event listeners for hide, hidden and shown. hide is required to prevent 'softlocking' and bricking Bootstrap when closed externally
     static addKeyListeners() {
         // Oak Items
-        const $oakItemsModal = $('#oakItemsModal');
-        $oakItemsModal.on('hidden.bs.modal shown.bs.modal', _ => $oakItemsModal.data('disable-toggle', false));
         const oakItems = App.game.oakItems;
+        const $oakItemsModal = $('#oakItemsModal');
+        $oakItemsModal.on('hide.bs.modal', _ => $oakItemsModal.data('disable-toggle', true));
+        $oakItemsModal.on('hidden.bs.modal shown.bs.modal', _ => $oakItemsModal.data('disable-toggle', false));
         // Pokeball Selector
-        const $pokeballSelector = $('#pokeballSelectorModal');
         const pokeballs = App.game.pokeballs;
+        const $pokeballSelector = $('#pokeballSelectorModal');
+        $pokeballSelector.on('hide.bs.modal', _ => $pokeballSelector.data('disable-toggle', true));
+        $pokeballSelector.on('hidden.bs.modal shown.bs.modal', _ => $pokeballSelector.data('disable-toggle', false));
         // Underground
-        const $undergroundModal = $('#mineModal');
-        $undergroundModal.on('hidden.bs.modal shown.bs.modal', _ => $undergroundModal.data('disable-toggle', false));
         const underground = App.game.underground;
+        const $undergroundModal = $('#mineModal');
+        $undergroundModal.on('hide.bs.modal', _ => $undergroundModal.data('disable-toggle', true));
+        $undergroundModal.on('hidden.bs.modal shown.bs.modal', _ => $undergroundModal.data('disable-toggle', false));
+        // Quests
+        const quests = App.game.quests;
+        const $questModal = $('#QuestModal');
+        $questModal.on('hide.bs.modal', _ => $questModal.data('disable-toggle', true));
+        $questModal.on('hidden.bs.modal shown.bs.modal', _ => $questModal.data('disable-toggle', false));
         // Farm
-        const $farmsModal = $('#farmModal');
-        $farmsModal.on('hidden.bs.modal shown.bs.modal', _ => $farmsModal.data('disable-toggle', false));
         const farms = App.game.farming;
+        const $farmsModal = $('#farmModal');
+        $farmsModal.on('hide.bs.modal', _ => $farmsModal.data('disable-toggle', true));
+        $farmsModal.on('hidden.bs.modal shown.bs.modal', _ => $farmsModal.data('disable-toggle', false));
         // Hatchery
-        const $hatcheryModal = $('#breedingModal');
-        $hatcheryModal.on('hidden.bs.modal shown.bs.modal', _ => $hatcheryModal.data('disable-toggle', false));
         const hatchery = App.game.breeding;
-        // Ship
-        const $shipModal = $('#ShipModal');
+        const $hatcheryModal = $('#breedingModal');
+        $hatcheryModal.on('hide.bs.modal', _ => $hatcheryModal.data('disable-toggle', true));
+        $hatcheryModal.on('hidden.bs.modal shown.bs.modal', _ => $hatcheryModal.data('disable-toggle', false));
         // Shop
         const $shopModal = $('#shopModal');
+        $shopModal.on('hide.bs.modal', _ => $shopModal.data('disable-toggle', true));
+        $shopModal.on('hidden.bs.modal shown.bs.modal', _ => $shopModal.data('disable-toggle', false));
+        // Ship
+        const $shipModal = $('#ShipModal');
+        // Modal Collapse
+        $(GameConstants.ModalCollapseList).map(function() {
+            const id = `#${this}`;
+            const method = Settings.getSetting(`modalCollapse.${this}`).value ? 'show' : 'hide';
+            $(id).collapse(method);
+            return $(id).get();
+        }).on('show.bs.collapse',function() {
+            Settings.setSettingByName(`modalCollapse.${this.id}`, true);
+        }).on('hide.bs.collapse',function() {
+            Settings.setSettingByName(`modalCollapse.${this.id}`, false);
+        });
 
         $(document).on('keydown', e => {
             // Ignore any of our controls if focused on an input element
@@ -138,8 +163,19 @@ class GameController {
             // Set our number key if defined (-1 for 0 indexed)
             const numberKey = (+key) - 1;
             const isNumberKey = !isNaN(numberKey) && numberKey >= 0;
-
             const visibleModals = $('.modal:visible').length;
+
+            //Global Multi-key combinations
+            if (isNumberKey) {
+                if (GameController.keyHeld[Settings.getSetting('hotkey.pokeballSelection').value]) {
+                    // Open pokeball selector modal using P + (1-4) for each condition
+                    if (!($pokeballSelector.data('bs.modal')?._isShown) && !$pokeballSelector.data('disable-toggle')) {
+                        $('.modal').modal('hide');
+                        $('#pokeballSelectorBody .clickable.pokeball-selected').eq(numberKey)?.trigger('click');
+                        return e.preventDefault();
+                    }
+                }
+            }
 
             // Safari Zone
             if (App.game.gameState === GameConstants.GameState.safari) {
@@ -159,6 +195,18 @@ class GameController {
                     case 'ArrowRight':
                     case Settings.getSetting('hotkey.dungeon.right').value:
                         Safari.move('right');
+                        break;
+                    case Settings.getSetting('hotkey.safari.ball').value:
+                        SafariBattle.throwBall();
+                        break;
+                    case Settings.getSetting('hotkey.safari.bait').value:
+                        SafariBattle.throwBait();
+                        break;
+                    case Settings.getSetting('hotkey.safari.rock').value:
+                        SafariBattle.throwRock();
+                        break;
+                    case Settings.getSetting('hotkey.safari.run').value:
+                        SafariBattle.run();
                         break;
                 }
 
@@ -227,7 +275,7 @@ class GameController {
                     }
                     // Select Pokeball from pokeball selector (0 = none)
                     if (numberKey < App.game.pokeballs.pokeballs.length) {
-                        pokeballs.selectedSelection()(numberKey);
+                        pokeballs.selectedSelection()?.(numberKey);
                     }
                     return e.preventDefault();
                 }
@@ -326,15 +374,8 @@ class GameController {
                             DungeonRunner.map.moveRight();
                             return e.preventDefault();
                         case Settings.getSetting('hotkey.dungeon.interact').value:
-                            if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.entrance) {
-                                DungeonRunner.dungeonLeave();
-                            } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.chest) {
-                                DungeonRunner.openChest();
-                            } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.boss && !DungeonRunner.fightingBoss()) {
-                                DungeonRunner.startBossFight();
-                            } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.ladder) {
-                                DungeonRunner.nextFloor();
-                            }
+                            DungeonRunner.handleInteraction(GameConstants.DungeonInteractionSource.Keybind);
+                            DungeonRunner.continuousInteractionInput = true;
                             return e.preventDefault();
                     }
                 }
@@ -378,7 +419,6 @@ class GameController {
                     // Open the Farm
                     if (farms.canAccess() && !$farmsModal.data('disable-toggle')) {
                         $('.modal').modal('hide');
-                        $farmsModal.data('disable-toggle', true);
                         $farmsModal.modal('toggle');
                         return e.preventDefault();
                     }
@@ -387,7 +427,6 @@ class GameController {
                     // Open the Hatchery
                     if (hatchery.canAccess() && !$hatcheryModal.data('disable-toggle')) {
                         $('.modal').modal('hide');
-                        $hatcheryModal.data('disable-toggle', true);
                         $hatcheryModal.modal('toggle');
                         return e.preventDefault();
                     }
@@ -396,7 +435,6 @@ class GameController {
                     // Open oak items
                     if (oakItems.canAccess() && !$oakItemsModal.data('disable-toggle')) {
                         $('.modal').modal('hide');
-                        $oakItemsModal.data('disable-toggle', true);
                         $oakItemsModal.modal('toggle');
                         return e.preventDefault();
                     }
@@ -405,8 +443,16 @@ class GameController {
                     // Open the Underground
                     if (underground.canAccess() && !$undergroundModal.data('disable-toggle')) {
                         $('.modal').modal('hide');
-                        $undergroundModal.data('disable-toggle', true);
                         $undergroundModal.modal('toggle');
+                        return e.preventDefault();
+                    }
+                    break;
+                case Settings.getSetting('hotkey.shop').value:
+                    // Open the Poke Mart
+                    if (App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Champion Lance')]() >= 1 && !$shopModal.data('disable-toggle')) {
+                        $('.modal').modal('hide');
+                        ShopHandler.showShop(pokeMartShop);
+                        $shopModal.modal('toggle');
                         return e.preventDefault();
                     }
                     break;
@@ -421,18 +467,15 @@ class GameController {
                         (Settings.getSetting('sound.muted') as BooleanSetting).toggle();
                         return e.preventDefault();
                     }
-                default:
-                    // Check for a number key being pressed
-                    if (isNumberKey) {
-                        if (GameController.keyHeld[Settings.getSetting('hotkey.pokeballSelection').value]) {
-                            // Open pokeball selector modal using P + (1-4) for each condition
-                            if (!($pokeballSelector.data('bs.modal')?._isShown)) {
-                                $('.modal').modal('hide');
-                            }
-                            $('#pokeballSelectorBody .clickable.pokeball-selected').eq(numberKey)?.trigger('click');
-                            return e.preventDefault();
-                        }
+                    break;
+                case Settings.getSetting('hotkey.dailyQuests').value:
+                    // Open the Quests
+                    if (quests.isDailyQuestsUnlocked() && !$questModal.data('disable-toggle')) {
+                        $('.modal').modal('hide');
+                        $questModal.modal('toggle');
+                        return e.preventDefault();
                     }
+                    break;
             }
 
             if (key === 'Space') {
@@ -469,6 +512,11 @@ class GameController {
                         Safari.stop('right');
                         return e.preventDefault();
                 }
+            }
+
+            if (key === Settings.getSetting('hotkey.dungeon.interact').value) {
+                DungeonRunner.continuousInteractionInput = false;
+                return e.preventDefault();
             }
 
             if (key === 'Space') {

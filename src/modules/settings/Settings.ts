@@ -28,16 +28,14 @@ export default class Settings {
     static toJSON() {
         const json = {};
         this.list.forEach((setting) => {
-            const v = typeof setting.value === 'string' ? encodeURI(setting.value) : setting.value;
-            json[setting.name] = v;
+            json[setting.name] = setting.value;
         });
         return json;
     }
 
     static fromJSON(dict) {
         Object.entries(dict || {})?.forEach(([name, value]) => {
-            const v = typeof value === 'string' ? decodeURI(value) : value;
-            this.setSettingByName(name, v);
+            this.setSettingByName(name, value);
         });
     }
 
@@ -51,7 +49,7 @@ export default class Settings {
         return GameHelper.enumStrings(obj).filter(filter).map((val) => new SettingOption(camelCaseToString(val), obj[val]));
     }
 
-    static selectOptionsToSettingOptions<T>(opts: Array<{ name: string, value: T}>) {
+    static selectOptionsToSettingOptions<T>(opts: Array<{ name: string, value: T }>) {
         return opts.map(({ name, value }) => new SettingOption(camelCaseToString(name), value));
     }
 

@@ -43,23 +43,27 @@
     overflow:hidden;
     background-repeat: no-repeat;
     position: absolute;
-    top: 0px;
-    left: 0px;
+    top: 0;
+    left: 0;
     width: 100%;
     padding-top:100% !important;
 
     &.rotations-0 {
         transform: rotate(0deg);
     }
+
     &.rotations-1 {
         transform: rotate(90deg);
     }
+
     &.rotations-2 {
         transform: rotate(-90deg);
     }
+
     &.rotations-3 {
         transform: rotate(180deg);
     }
+
     /*
     CODE TO GENERATE THE MINE CSS:
 
@@ -84,21 +88,25 @@
     &.size-1-1 {
         &.pos-0-0 { background-position: 0.00000% 0.00000%; background-size: 100% 100%; }
     }
+
     &.size-1-2 {
         &.pos-0-0 { background-position: 0.00000% 0.00000%; background-size: 100% 200%; }
         &.pos-0-1 { background-position: 0.00000% 100.000%; background-size: 100% 200%; }
     }
+
     &.size-1-3 {
         &.pos-0-0 { background-position: 0.00000% 0.00000%; background-size: 100% 300%; }
         &.pos-0-1 { background-position: 0.00000% 50.0000%; background-size: 100% 300%; }
         &.pos-0-2 { background-position: 0.00000% 100.000%; background-size: 100% 300%; }
     }
+
     &.size-1-4 {
         &.pos-0-0 { background-position: 0.00000% 0.00000%; background-size: 100% 400%; }
         &.pos-0-1 { background-position: 0.00000% 33.3333%; background-size: 100% 400%; }
         &.pos-0-2 { background-position: 0.00000% 66.6666%; background-size: 100% 400%; }
         &.pos-0-3 { background-position: 0.00000% 100.000%; background-size: 100% 400%; }
     }
+
     &.size-1-5 {
         &.pos-0-0 { background-position: 0.00000% 0.00000%; background-size: 100% 500%; }
         &.pos-0-1 { background-position: 0.00000% 25.0000%; background-size: 100% 500%; }
@@ -106,6 +114,7 @@
         &.pos-0-3 { background-position: 0.00000% 75.0000%; background-size: 100% 500%; }
         &.pos-0-4 { background-position: 0.00000% 100.000%; background-size: 100% 500%; }
     }
+
     &.size-1-6 {
         &.pos-0-0 { background-position: 0.00000% 0.00000%; background-size: 100% 600%; }
         &.pos-0-1 { background-position: 0.00000% 20.0000%; background-size: 100% 600%; }
@@ -114,16 +123,19 @@
         &.pos-0-4 { background-position: 0.00000% 80.0000%; background-size: 100% 600%; }
         &.pos-0-5 { background-position: 0.00000% 100.000%; background-size: 100% 600%; }
     }
+
     &.size-2-1 {
         &.pos-0-0 { background-position: 0.00000% 0.00000%; background-size: 200% 100%; }
         &.pos-1-0 { background-position: 100.000% 0.00000%; background-size: 200% 100%; }
     }
+
     &.size-2-2 {
         &.pos-0-0 { background-position: 0.00000% 0.00000%; background-size: 200% 200%; }
         &.pos-0-1 { background-position: 0.00000% 100.000%; background-size: 200% 200%; }
         &.pos-1-0 { background-position: 100.000% 0.00000%; background-size: 200% 200%; }
         &.pos-1-1 { background-position: 100.000% 100.000%; background-size: 200% 200%; }
     }
+
     &.size-2-3 {
         &.pos-0-0 { background-position: 0.00000% 0.00000%; background-size: 200% 300%; }
         &.pos-0-1 { background-position: 0.00000% 50.0000%; background-size: 200% 300%; }
@@ -132,6 +144,7 @@
         &.pos-1-1 { background-position: 100.000% 50.0000%; background-size: 200% 300%; }
         &.pos-1-2 { background-position: 100.000% 100.000%; background-size: 200% 300%; }
     }
+
     &.size-2-4 {
         &.pos-0-0 { background-position: 0.00000% 0.00000%; background-size: 200% 400%; }
         &.pos-0-1 { background-position: 0.00000% 33.3333%; background-size: 200% 400%; }
@@ -142,6 +155,7 @@
         &.pos-1-2 { background-position: 100.000% 66.6666%; background-size: 200% 400%; }
         &.pos-1-3 { background-position: 100.000% 100.000%; background-size: 200% 400%; }
     }
+
     &.size-2-5 {
         &.pos-0-0 { background-position: 0.00000% 0.00000%; background-size: 200% 500%; }
         &.pos-0-1 { background-position: 0.00000% 25.0000%; background-size: 200% 500%; }
@@ -154,6 +168,7 @@
         &.pos-1-3 { background-position: 100.000% 75.0000%; background-size: 200% 500%; }
         &.pos-1-4 { background-position: 100.000% 100.000%; background-size: 200% 500%; }
     }
+
     &.size-2-6 {
         &.pos-0-0 { background-position: 0.00000% 0.00000%; background-size: 200% 600%; }
         &.pos-0-1 { background-position: 0.00000% 20.0000%; background-size: 200% 600%; }
@@ -168,11 +183,13 @@
         &.pos-1-4 { background-position: 100.000% 80.0000%; background-size: 200% 600%; }
         &.pos-1-5 { background-position: 100.000% 100.000%; background-size: 200% 600%; }
     }
+
     &.size-3-1 {
         &.pos-0-0 { background-position: 0.00000% 0.00000%; background-size: 300% 100%; }
         &.pos-1-0 { background-position: 50.0000% 0.00000%; background-size: 300% 100%; }
         &.pos-2-0 { background-position: 100.000% 0.00000%; background-size: 300% 100%; }
     }
+
     &.size-3-2 {
         &.pos-0-0 { background-position: 0.00000% 0.00000%; background-size: 300% 200%; }
         &.pos-0-1 { background-position: 0.00000% 100.000%; background-size: 300% 200%; }
@@ -181,6 +198,7 @@
         &.pos-2-0 { background-position: 100.000% 0.00000%; background-size: 300% 200%; }
         &.pos-2-1 { background-position: 100.000% 100.000%; background-size: 300% 200%; }
     }
+
     &.size-3-3 {
         &.pos-0-0 { background-position: 0.00000% 0.00000%; background-size: 300% 300%; }
         &.pos-0-1 { background-position: 0.00000% 50.0000%; background-size: 300% 300%; }
@@ -192,6 +210,7 @@
         &.pos-2-1 { background-position: 100.000% 50.0000%; background-size: 300% 300%; }
         &.pos-2-2 { background-position: 100.000% 100.000%; background-size: 300% 300%; }
     }
+
     &.size-3-4 {
         &.pos-0-0 { background-position: 0.00000% 0.00000%; background-size: 300% 400%; }
         &.pos-0-1 { background-position: 0.00000% 33.3333%; background-size: 300% 400%; }
@@ -206,6 +225,7 @@
         &.pos-2-2 { background-position: 100.000% 66.6666%; background-size: 300% 400%; }
         &.pos-2-3 { background-position: 100.000% 100.000%; background-size: 300% 400%; }
     }
+
     &.size-3-5 {
         &.pos-0-0 { background-position: 0.00000% 0.00000%; background-size: 300% 500%; }
         &.pos-0-1 { background-position: 0.00000% 25.0000%; background-size: 300% 500%; }
@@ -223,6 +243,7 @@
         &.pos-2-3 { background-position: 100.000% 75.0000%; background-size: 300% 500%; }
         &.pos-2-4 { background-position: 100.000% 100.000%; background-size: 300% 500%; }
     }
+
     &.size-3-6 {
         &.pos-0-0 { background-position: 0.00000% 0.00000%; background-size: 300% 600%; }
         &.pos-0-1 { background-position: 0.00000% 20.0000%; background-size: 300% 600%; }
@@ -243,12 +264,14 @@
         &.pos-2-4 { background-position: 100.000% 80.0000%; background-size: 300% 600%; }
         &.pos-2-5 { background-position: 100.000% 100.000%; background-size: 300% 600%; }
     }
+
     &.size-4-1 {
         &.pos-0-0 { background-position: 0.00000% 0.00000%; background-size: 400% 100%; }
         &.pos-1-0 { background-position: 33.3333% 0.00000%; background-size: 400% 100%; }
         &.pos-2-0 { background-position: 66.6666% 0.00000%; background-size: 400% 100%; }
         &.pos-3-0 { background-position: 100.000% 0.00000%; background-size: 400% 100%; }
     }
+
     &.size-4-2 {
         &.pos-0-0 { background-position: 0.00000% 0.00000%; background-size: 400% 200%; }
         &.pos-0-1 { background-position: 0.00000% 100.000%; background-size: 400% 200%; }
@@ -259,6 +282,7 @@
         &.pos-3-0 { background-position: 100.000% 0.00000%; background-size: 400% 200%; }
         &.pos-3-1 { background-position: 100.000% 100.000%; background-size: 400% 200%; }
     }
+
     &.size-4-3 {
         &.pos-0-0 { background-position: 0.00000% 0.00000%; background-size: 400% 300%; }
         &.pos-0-1 { background-position: 0.00000% 50.0000%; background-size: 400% 300%; }
@@ -273,6 +297,7 @@
         &.pos-3-1 { background-position: 100.000% 50.0000%; background-size: 400% 300%; }
         &.pos-3-2 { background-position: 100.000% 100.000%; background-size: 400% 300%; }
     }
+
     &.size-4-4 {
         &.pos-0-0 { background-position: 0.00000% 0.00000%; background-size: 400% 400%; }
         &.pos-0-1 { background-position: 0.00000% 33.3333%; background-size: 400% 400%; }
@@ -291,6 +316,7 @@
         &.pos-3-2 { background-position: 100.000% 66.6666%; background-size: 400% 400%; }
         &.pos-3-3 { background-position: 100.000% 100.000%; background-size: 400% 400%; }
     }
+
     &.size-4-5 {
         &.pos-0-0 { background-position: 0.00000% 0.00000%; background-size: 400% 500%; }
         &.pos-0-1 { background-position: 0.00000% 25.0000%; background-size: 400% 500%; }
@@ -313,6 +339,7 @@
         &.pos-3-3 { background-position: 100.000% 75.0000%; background-size: 400% 500%; }
         &.pos-3-4 { background-position: 100.000% 100.000%; background-size: 400% 500%; }
     }
+
     &.size-4-6 {
         &.pos-0-0 { background-position: 0.00000% 0.00000%; background-size: 400% 600%; }
         &.pos-0-1 { background-position: 0.00000% 20.0000%; background-size: 400% 600%; }
@@ -339,6 +366,7 @@
         &.pos-3-4 { background-position: 100.000% 80.0000%; background-size: 400% 600%; }
         &.pos-3-5 { background-position: 100.000% 100.000%; background-size: 400% 600%; }
     }
+
     &.size-5-1 {
         &.pos-0-0 { background-position: 0.00000% 0.00000%; background-size: 500% 100%; }
         &.pos-1-0 { background-position: 25.0000% 0.00000%; background-size: 500% 100%; }
@@ -346,6 +374,7 @@
         &.pos-3-0 { background-position: 75.0000% 0.00000%; background-size: 500% 100%; }
         &.pos-4-0 { background-position: 100.000% 0.00000%; background-size: 500% 100%; }
     }
+
     &.size-5-2 {
         &.pos-0-0 { background-position: 0.00000% 0.00000%; background-size: 500% 200%; }
         &.pos-0-1 { background-position: 0.00000% 100.000%; background-size: 500% 200%; }
@@ -358,6 +387,7 @@
         &.pos-4-0 { background-position: 100.000% 0.00000%; background-size: 500% 200%; }
         &.pos-4-1 { background-position: 100.000% 100.000%; background-size: 500% 200%; }
     }
+
     &.size-5-3 {
         &.pos-0-0 { background-position: 0.00000% 0.00000%; background-size: 500% 300%; }
         &.pos-0-1 { background-position: 0.00000% 50.0000%; background-size: 500% 300%; }
@@ -375,6 +405,7 @@
         &.pos-4-1 { background-position: 100.000% 50.0000%; background-size: 500% 300%; }
         &.pos-4-2 { background-position: 100.000% 100.000%; background-size: 500% 300%; }
     }
+
     &.size-5-4 {
         &.pos-0-0 { background-position: 0.00000% 0.00000%; background-size: 500% 400%; }
         &.pos-0-1 { background-position: 0.00000% 33.3333%; background-size: 500% 400%; }
@@ -397,6 +428,7 @@
         &.pos-4-2 { background-position: 100.000% 66.6666%; background-size: 500% 400%; }
         &.pos-4-3 { background-position: 100.000% 100.000%; background-size: 500% 400%; }
     }
+
     &.size-5-5 {
         &.pos-0-0 { background-position: 0.00000% 0.00000%; background-size: 500% 500%; }
         &.pos-0-1 { background-position: 0.00000% 25.0000%; background-size: 500% 500%; }
@@ -424,6 +456,7 @@
         &.pos-4-3 { background-position: 100.000% 75.0000%; background-size: 500% 500%; }
         &.pos-4-4 { background-position: 100.000% 100.000%; background-size: 500% 500%; }
     }
+
     &.size-5-6 {
         &.pos-0-0 { background-position: 0.00000% 0.00000%; background-size: 500% 600%; }
         &.pos-0-1 { background-position: 0.00000% 20.0000%; background-size: 500% 600%; }
@@ -456,6 +489,7 @@
         &.pos-4-4 { background-position: 100.000% 80.0000%; background-size: 500% 600%; }
         &.pos-4-5 { background-position: 100.000% 100.000%; background-size: 500% 600%; }
     }
+
     &.size-6-1 {
         &.pos-0-0 { background-position: 0.00000% 0.00000%; background-size: 600% 100%; }
         &.pos-1-0 { background-position: 20.0000% 0.00000%; background-size: 600% 100%; }
@@ -464,6 +498,7 @@
         &.pos-4-0 { background-position: 80.0000% 0.00000%; background-size: 600% 100%; }
         &.pos-5-0 { background-position: 100.000% 0.00000%; background-size: 600% 100%; }
     }
+
     &.size-6-2 {
         &.pos-0-0 { background-position: 0.00000% 0.00000%; background-size: 600% 200%; }
         &.pos-0-1 { background-position: 0.00000% 100.000%; background-size: 600% 200%; }
@@ -478,6 +513,7 @@
         &.pos-5-0 { background-position: 100.000% 0.00000%; background-size: 600% 200%; }
         &.pos-5-1 { background-position: 100.000% 100.000%; background-size: 600% 200%; }
     }
+
     &.size-6-3 {
         &.pos-0-0 { background-position: 0.00000% 0.00000%; background-size: 600% 300%; }
         &.pos-0-1 { background-position: 0.00000% 50.0000%; background-size: 600% 300%; }
@@ -498,6 +534,7 @@
         &.pos-5-1 { background-position: 100.000% 50.0000%; background-size: 600% 300%; }
         &.pos-5-2 { background-position: 100.000% 100.000%; background-size: 600% 300%; }
     }
+
     &.size-6-4 {
         &.pos-0-0 { background-position: 0.00000% 0.00000%; background-size: 600% 400%; }
         &.pos-0-1 { background-position: 0.00000% 33.3333%; background-size: 600% 400%; }
@@ -524,6 +561,7 @@
         &.pos-5-2 { background-position: 100.000% 66.6666%; background-size: 600% 400%; }
         &.pos-5-3 { background-position: 100.000% 100.000%; background-size: 600% 400%; }
     }
+
     &.size-6-5 {
         &.pos-0-0 { background-position: 0.00000% 0.00000%; background-size: 600% 500%; }
         &.pos-0-1 { background-position: 0.00000% 25.0000%; background-size: 600% 500%; }
@@ -556,6 +594,7 @@
         &.pos-5-3 { background-position: 100.000% 75.0000%; background-size: 600% 500%; }
         &.pos-5-4 { background-position: 100.000% 100.000%; background-size: 600% 500%; }
     }
+
     &.size-6-6 {
         &.pos-0-0 { background-position: 0.00000% 0.00000%; background-size: 600% 600%; }
         &.pos-0-1 { background-position: 0.00000% 20.0000%; background-size: 600% 600%; }
@@ -603,10 +642,10 @@
 }
 
 .mineSquare {
-    height: 0px;
+    height: 0;
     width:4% !important;
-    margin: 0px !important;
-    padding: 0px !important;
+    margin: 0 !important;
+    padding: 0 !important;
     padding-top:4% !important;
     text-align: center;
     max-width: 4% !important;
@@ -615,6 +654,7 @@
 
 .HammerSelected {
     cursor:url('../assets/images/underground/Hammer.png') 5 15, auto;
+
     &:active {
         cursor:url('../assets/images/underground/Hammer.png') 5 10, auto;
     }
@@ -622,10 +662,12 @@
 
 .ChiselSelected {
     cursor: url('../assets/images/underground/Chisel.png') 5 25, auto;
+
     &:active {
         cursor: url('../assets/images/underground/Chisel.png') 5 20, auto;
     }
-    &.mineSquare:after {
+
+    &.mineSquare::after {
         content: "";
         position: absolute;
         top: 0;
@@ -634,11 +676,11 @@
         pointer-events: none;
     }
 
-    &.rock1:hover:after,
-    &.rock2:hover:after,
-    &.rock3:hover:after,
-    &.rock4:hover:after,
-    &.rock5:hover:after {
+    &.rock1:hover::after,
+    &.rock2:hover::after,
+    &.rock3:hover::after,
+    &.rock4:hover::after,
+    &.rock5:hover::after {
         width: 100%;
         height: 100%;
         border: 1px solid red;
@@ -656,8 +698,7 @@
 
     .row {
         .HammerSelected {
-
-            &.mineSquare:after {
+            &.mineSquare::after {
                 content: "";
                 position: absolute;
                 top: -100%;
@@ -666,7 +707,7 @@
                 pointer-events: none;
             }
 
-            &.mineSquare:hover:after
+            &.mineSquare:hover::after
             {
                 width: 300%;
                 height: 300%;

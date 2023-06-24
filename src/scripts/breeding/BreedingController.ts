@@ -135,71 +135,17 @@ class BreedingController {
         return SeededRand.fromArray(this.spotTypes);
     }
 
-    public static visible(partyPokemon: PartyPokemon) {
-        return ko.pureComputed(() => {
-            // Only breedable Pokemon
-            if (partyPokemon.breeding || partyPokemon.level < 100) {
-                return false;
-            }
-
-            // Check if search matches nickname or translated name
-            if (
-                !BreedingFilters.search.value().test(partyPokemon.displayName)
-                && !BreedingFilters.search.value().test(partyPokemon._translatedName())
-            ) {
-                return false;
-            }
-
-            // Check based on category
-            if (BreedingFilters.category.value() >= 0) {
-                if (partyPokemon.category !== BreedingFilters.category.value()) {
-                    return false;
-                }
-            }
-
-            // Check based on shiny status
-            if (BreedingFilters.shinyStatus.value() >= 0) {
-                if (+partyPokemon.shiny !== BreedingFilters.shinyStatus.value()) {
-                    return false;
-                }
-            }
-
-            // Check based on native region
-            const showRegions = BreedingFilters.region.value();
-            const region = PokemonHelper.calcNativeRegion(partyPokemon.name);
-            const regionBitInFilter = 1 << region & showRegions;
-            const noneRegionCheck = (showRegions === 0 || showRegions === (2 << player.highestRegion()) - 1)
-                && region === GameConstants.Region.none;
-            if (!regionBitInFilter && !noneRegionCheck) {
-                return false;
-            }
-
-            // check based on Pokerus status
-            if (BreedingFilters.pokerus.value() > -1) {
-                if (partyPokemon.pokerus !== BreedingFilters.pokerus.value()) {
-                    return false;
-                }
-            }
-
-            // Check if either of the types match
-            const type1: (PokemonType | null) = BreedingFilters.type1.value() > -2 ? BreedingFilters.type1.value() : null;
-            const type2: (PokemonType | null) = BreedingFilters.type2.value() > -2 ? BreedingFilters.type2.value() : null;
-            if (type1 !== null || type2 !== null) {
-                const { type: types } = pokemonMap[partyPokemon.name];
-                if ([type1, type2].includes(PokemonType.None)) {
-                    const type = (type1 == PokemonType.None) ? type2 : type1;
-                    if (!BreedingController.isPureType(partyPokemon, type)) {
-                        return false;
-                    }
-                } else if ((type1 !== null && !types.includes(type1)) || (type2 !== null && !types.includes(type2))) {
-                    return false;
-                }
-            }
-            return true;
-        });
+    public static formatSearch(value: string) {
+        if (/[^\d]/.test(value)) {
+            BreedingFilters.name.value(new RegExp(`(${/^\/.+\/$/.test(value) ? value.slice(1, -1) : GameHelper.escapeStringRegex(value)})`, 'i'));
+            BreedingFilters.id.value(-1);
+        } else {
+            BreedingFilters.id.value(value != '' ? +value : -1);
+            BreedingFilters.name.value(new RegExp('', 'i'));
+        }
     }
 
-    private static isPureType(pokemon: PartyPokemon, type: (PokemonType | null)): boolean {
+    public static isPureType(pokemon: PartyPokemon, type: (PokemonType | null)): boolean {
         const pokemonData = pokemonMap[pokemon.name];
         return ((type == null || pokemonData.type[0] === type) && (pokemonData.type[1] == undefined || pokemonData.type[1] == PokemonType.None));
     }

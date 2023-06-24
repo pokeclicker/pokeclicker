@@ -18,6 +18,7 @@ class SafariPokemon implements PokemonInterface {
     private _eating: KnockoutObservable<number>;
     private _eatingBait: KnockoutObservable<BaitType>;
     private _displayName: KnockoutObservable<string>;
+    levelModifier: number;
 
     constructor(name: PokemonNameType) {
         const data = PokemonHelper.getPokemonByName(name);
@@ -29,11 +30,12 @@ class SafariPokemon implements PokemonInterface {
         this.shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SAFARI);
         this._displayName = PokemonHelper.displayName(name);
         this.gender = PokemonFactory.generateGender(data.gender.femaleRatio, data.gender.type);
-        PokemonHelper.incrementPokemonStatistics(this.id, GameConstants.PokemonStatisticsType.Encountered, this.shiny, this.gender);
+        PokemonHelper.incrementPokemonStatistics(this.id, GameConstants.PokemonStatisticsType.Encountered, this.shiny, this.gender, GameConstants.ShadowStatus.None);
         // Shiny
         if (this.shiny) {
             Notifier.notify({
                 message: `✨ You encountered a shiny ${this.displayName}! ✨`,
+                pokemonImage: PokemonHelper.getImage(this.id, this.shiny, this.gender == GameConstants.BattlePokemonGender.Female),
                 type: NotificationConstants.NotificationOption.warning,
                 sound: NotificationConstants.NotificationSound.General.shiny_long,
                 setting: NotificationConstants.NotificationSetting.General.encountered_shiny,
@@ -48,6 +50,7 @@ class SafariPokemon implements PokemonInterface {
         this._angry = ko.observable(0);
         this._eating = ko.observable(0);
         this._eatingBait = ko.observable(BaitType.Bait);
+        this.levelModifier = (Safari.safariLevel() - 1) / 50;
     }
 
     public static calcPokemonWeight(pokemon): number {
@@ -58,13 +61,13 @@ class SafariPokemon implements PokemonInterface {
         const oakBonus = App.game.oakItems.calculateBonus(OakItemType.Magic_Ball);
         let catchF = this.baseCatchFactor + oakBonus;
         if (this.eating > 0) {
-            catchF /= 2;
+            catchF /= 2 - this.levelModifier;
         }
         if (this.angry > 0) {
-            catchF *= 2;
+            catchF *= 2 + this.levelModifier;
         }
         if (this.eatingBait === BaitType.Nanab) {
-            catchF *= 1.5;
+            catchF *= 1.5 + this.levelModifier;
         }
 
         return Math.min(100, catchF);
@@ -73,13 +76,13 @@ class SafariPokemon implements PokemonInterface {
     public get escapeFactor(): number {
         let escapeF = this.baseEscapeFactor;
         if (this.eating > 0) {
-            escapeF /= 4;
+            escapeF /= 4 + this.levelModifier;
         }
         if (this.angry > 0) {
-            escapeF *= 2;
+            escapeF *= 2 - this.levelModifier;
         }
         if (this.eatingBait === BaitType.Razz) {
-            escapeF /= 1.5;
+            escapeF /= 1.5 + this.levelModifier;
         }
 
         return escapeF;
@@ -112,8 +115,8 @@ class SafariPokemon implements PokemonInterface {
     public static random() {
         // Get a random pokemon from current region and zone for Safari Zone
         const pokemon = Rand.fromWeightedArray(
-            SafariPokemonList.list[Safari.activeRegion()]()[Safari.activeZone()].safariPokemon,
-            SafariPokemonList.list[Safari.activeRegion()]()[Safari.activeZone()].safariPokemon.map(p => p.weight)
+            SafariPokemonList.list[Safari.activeRegion()](),
+            SafariPokemonList.list[Safari.activeRegion()]().map(p => p.weight)
         );
         return new SafariPokemon(pokemon.name);
     }
