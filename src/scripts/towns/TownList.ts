@@ -3097,7 +3097,7 @@ TownList['Pyrite Town'] = new Town(
     'Pyrite Town',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new MoveToTown('Pyrite Colosseum'), new MoveToDungeon(dungeonList['The Under']), new MoveToDungeon(dungeonList['Pyrite Town Battles']), new MoveToDungeon(dungeonList['Deep Colosseum']), new MoveToDungeon(dungeonList['Under Colosseum'])],
+    [GymList['Cipher Admin Miror B.'], new MoveToTown('Pyrite Colosseum'), new MoveToDungeon(dungeonList['The Under']), new MoveToDungeon(dungeonList['Pyrite Town Battles']), new MoveToDungeon(dungeonList['Deep Colosseum']), new MoveToDungeon(dungeonList['Under Colosseum'])],
     {
         requirements: [new QuestLineStepCompletedRequirement('Shadows in the Desert', 6)],
         npcs: [Duking1],
@@ -3389,7 +3389,7 @@ TownList['Mt. Battle'] = new DungeonTown(
     [
         new QuestLineStepCompletedRequirement('Shadows in the Desert', 17),
     ],
-    [],
+    [GymList['Cipher Admin Dakim']],
     {
         npcs: [Rui3],
     }
@@ -3401,7 +3401,7 @@ TownList['The Under'] = new DungeonTown(
     [
         new QuestLineStepCompletedRequirement('Shadows in the Desert', 19),
     ],
-    [],
+    [GymList['Cipher Admin Venus']],
     {
         npcs: [SearchTheStudio],
     }
@@ -3412,7 +3412,8 @@ TownList['Cipher Lab'] = new DungeonTown(
     GameConstants.HoennSubRegions.Orre,
     [
         new QuestLineStepCompletedRequirement('Shadows in the Desert', 21),
-    ]
+    ],
+    [GymList['Cipher Admin Ein']]
 );
 TownList['Realgam Tower Battles'] = new DungeonTown(
     'Realgam Tower Battles',
@@ -3429,7 +3430,7 @@ TownList['Realgam Colosseum'] = new DungeonTown(
     [
         new QuestLineStepCompletedRequirement('Shadows in the Desert', 23),
     ],
-    [new MoveToTown('Realgam Tower')],
+    [],
     {
         npcs: [EviceEscape],
     }
@@ -3463,7 +3464,7 @@ TownList['Under Colosseum'] = new DungeonTown(
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new MultiRequirement([new DevelopmentRequirement(), new QuestLineCompletedRequirement('Shadows in the Desert')]),
+        new QuestLineCompletedRequirement('Shadows in the Desert'),
     ]
 );
 TownList['Orre Colosseum'] = new DungeonTown(

@@ -487,6 +487,7 @@ namespace GameConstants {
     declare const GalarGyms: string[];
     declare const HisuiGyms: string[];
     declare const OrangeGyms: string[];
+    declare const OrreGyms: string[];
     declare const RegionGyms: string[][];
     declare function getGymIndex(gym: string): number;
     declare function getGymRegion(gym: string): Region;
