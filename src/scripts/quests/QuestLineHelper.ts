@@ -2294,7 +2294,7 @@ class QuestLineHelper {
 
         createMultiTypeCaptureQuest([PokemonType.Water, PokemonType.Grass, PokemonType.Fire, PokemonType.Electric, PokemonType.Ground, PokemonType.Ice], 'You probably need to train a little before going looking for more of Silvally memories. Catch or hatch 100 Water, Grass, Fire, Electric, Ground and Ice types.');
 
-        const talkToLanaSilvally = new TalkToNPCQuest(LanaSilvally1, 'Search for Silvally\'s Water Memory.');
+        const talkToLanaSilvally = new TalkToNPCQuest(LanaSilvally1, 'Search for Silvally\'s Memory near pools of freshwater. Ask Gladion at Aether Foundation if you\'re lost.');
         SilvallyTypesQuestLine.addQuest(talkToLanaSilvally);
 
         const BuyWaterMemory = new CustomQuest(1, undefined, 'Buy the Water Memory from Captain Lana with Dungeon Tokens.', () => player.itemList.Water_Memory_Silvally(), undefined, undefined,
@@ -2305,7 +2305,7 @@ class QuestLineHelper {
             });
         SilvallyTypesQuestLine.addQuest(BuyWaterMemory);
 
-        const talkToMallowSilvally = new TalkToNPCQuest(MallowSilvally1, 'Search for Silvally\'s Grass Memory.');
+        const talkToMallowSilvally = new TalkToNPCQuest(MallowSilvally1, 'Search for Silvally\'s Memory in overgrown forests. Ask Gladion at Aether Foundation if you\'re lost.');
         SilvallyTypesQuestLine.addQuest(talkToMallowSilvally);
 
         const BuyGrassMemory = new CustomQuest(1, undefined, 'Buy the Grass Memory from Captain Mallow with Quest Points.', () => player.itemList.Grass_Memory_Silvally(), undefined, undefined,
@@ -2316,7 +2316,7 @@ class QuestLineHelper {
             });
         SilvallyTypesQuestLine.addQuest(BuyGrassMemory);
 
-        const talkToKiaweSilvally = new TalkToNPCQuest(KiaweSilvally1, 'Search for Silvally\'s Fire Memory.');
+        const talkToKiaweSilvally = new TalkToNPCQuest(KiaweSilvally1, 'Search for Silvally\'s Memory near fiery hotspots. Ask Gladion at Aether Foundation if you\'re lost.');
         SilvallyTypesQuestLine.addQuest(talkToKiaweSilvally);
 
         const BuyFireMemory = new CustomQuest(1, undefined, 'Buy the Fire Memory from Captain Kiawe with Battle Points.', () => player.itemList.Fire_Memory_Silvally(), undefined, undefined,
@@ -2327,7 +2327,7 @@ class QuestLineHelper {
             });
         SilvallyTypesQuestLine.addQuest(BuyFireMemory);
 
-        const talkToSophoclesSilvally = new TalkToNPCQuest(SophoclesSilvally1, 'Search for Silvally\'s Electric Memory.');
+        const talkToSophoclesSilvally = new TalkToNPCQuest(SophoclesSilvally1, 'Search for Silvally\'s Memory in electrical institutions. Ask Gladion at Aether Foundation if you\'re lost.');
         SilvallyTypesQuestLine.addQuest(talkToSophoclesSilvally);
 
         const BuyElectricMemory = new CustomQuest(1, undefined, 'Buy the Electric Memory from Captain Sophocles with Pokédollars.', () => player.itemList.Electric_Memory_Silvally(), undefined, undefined,
@@ -2338,7 +2338,7 @@ class QuestLineHelper {
             });
         SilvallyTypesQuestLine.addQuest(BuyElectricMemory);
 
-        const talkToVeteranSilvally = new TalkToNPCQuest(VeteranSilvally1, 'Search for Silvally\'s Ice Memory.');
+        const talkToVeteranSilvally = new TalkToNPCQuest(VeteranSilvally1, 'Search for Silvally\'s Memory near snow-covered peaks. Ask Gladion at Aether Foundation if you\'re lost.');
         SilvallyTypesQuestLine.addQuest(talkToVeteranSilvally);
 
         const BuyIceMemory = new CustomQuest(1, undefined, 'Buy the Ice Memory from Veteran Aristo with Diamonds.', () => player.itemList.Ice_Memory_Silvally(), undefined, undefined,
@@ -2349,7 +2349,7 @@ class QuestLineHelper {
             });
         SilvallyTypesQuestLine.addQuest(BuyIceMemory);
 
-        const talkToHapuSilvally = new TalkToNPCQuest(HapuSilvally1, 'Search for Silvally\'s Ground Memory.');
+        const talkToHapuSilvally = new TalkToNPCQuest(HapuSilvally1, 'Search for Silvally\'s Memory in isolated ground. Ask Gladion at Aether Foundation if you\'re lost.');
         SilvallyTypesQuestLine.addQuest(talkToHapuSilvally);
 
         const BuyGroundMemory = new CustomQuest(1, undefined, 'Buy the Ground Memory from Kahuna Hapu with Farm Points.', () => player.itemList.Ground_Memory_Silvally(), undefined, undefined,
@@ -2365,7 +2365,7 @@ class QuestLineHelper {
 
         createMultiTypeCaptureQuest([PokemonType.Bug, PokemonType.Flying, PokemonType.Poison, PokemonType.Ghost, PokemonType.Psychic, PokemonType.Steel, PokemonType.Dragon], 'Get some training before looking for more of Silvally\'s memories. Catch or hatch 100 Bug, Flying, Poison, Ghost, Psychic, Steel and Dragon types.');
 
-        const talkToBugSilvally = new TalkToNPCQuest(GuzmaSilvally, 'Search for Silvally\'s Bug Memory.');
+        const talkToBugSilvally = new TalkToNPCQuest(GuzmaSilvally, 'Search for Silvally\'s Memory where pests make their home. Ask Gladion at Aether Foundation if you\'re lost.');
         SilvallyTypesQuestLine.addQuest(talkToBugSilvally);
 
         const BugSilvallyBattle = new CustomQuest(
@@ -2378,7 +2378,7 @@ class QuestLineHelper {
         );
         SilvallyTypesQuestLine.addQuest(BugSilvallyBattle);
 
-        const talkToFlyingSilvally = new TalkToNPCQuest(KahiliSilvally, 'Search for Silvally\'s Flying Memory.');
+        const talkToFlyingSilvally = new TalkToNPCQuest(KahiliSilvally, 'Search for Silvally\'s Memory where the earth opens to the sky. Ask Gladion at Aether Foundation if you\'re lost.');
         SilvallyTypesQuestLine.addQuest(talkToFlyingSilvally);
 
         const FlyingSilvallyBattle = new CustomQuest(
@@ -2391,7 +2391,7 @@ class QuestLineHelper {
         );
         SilvallyTypesQuestLine.addQuest(FlyingSilvallyBattle);
 
-        const talkToPoisonSilvally = new TalkToNPCQuest(PlumeriaSilvally, 'Search for Silvally\'s Poison Memory.');
+        const talkToPoisonSilvally = new TalkToNPCQuest(PlumeriaSilvally, 'Search for Silvally\'s Memory near an ancient trial. Ask Gladion at Aether Foundation if you\'re lost.');
         SilvallyTypesQuestLine.addQuest(talkToPoisonSilvally);
 
         const PoisonSilvallyBattle = new CustomQuest(
@@ -2404,7 +2404,7 @@ class QuestLineHelper {
         );
         SilvallyTypesQuestLine.addQuest(PoisonSilvallyBattle);
 
-        const talkToGhostSilvally = new TalkToNPCQuest(AcerolaSilvally, 'Search for Silvally\'s Ghost Memory.');
+        const talkToGhostSilvally = new TalkToNPCQuest(AcerolaSilvally, 'Search for Silvally\'s Memory near an abandoned village. Ask Gladion at Aether Foundation if you\'re lost.');
         SilvallyTypesQuestLine.addQuest(talkToGhostSilvally);
 
         const GhostSilvallyBattle = new CustomQuest(
@@ -2417,7 +2417,7 @@ class QuestLineHelper {
         );
         SilvallyTypesQuestLine.addQuest(GhostSilvallyBattle);
 
-        const talkToPsychicSilvally = new TalkToNPCQuest(FabaSilvally, 'Search for Silvally\'s Psychic Memory.');
+        const talkToPsychicSilvally = new TalkToNPCQuest(FabaSilvally, 'Search for Silvally\'s Memory in a modern haven. Ask Gladion at Aether Foundation if you\'re lost.');
         SilvallyTypesQuestLine.addQuest(talkToPsychicSilvally);
 
         const PsychicSilvallyBattle = new CustomQuest(
@@ -2430,7 +2430,7 @@ class QuestLineHelper {
         );
         SilvallyTypesQuestLine.addQuest(PsychicSilvallyBattle);
 
-        const talkToSteelSilvally = new TalkToNPCQuest(MolayneSilvally, 'Search for Silvally\'s Steel Memory.');
+        const talkToSteelSilvally = new TalkToNPCQuest(MolayneSilvally, 'Search for Silvally\'s Memory near a steel dome. Ask Gladion at Aether Foundation if you\'re lost.');
         SilvallyTypesQuestLine.addQuest(talkToSteelSilvally);
 
         const SteelSilvallyBattle = new CustomQuest(
@@ -2443,7 +2443,7 @@ class QuestLineHelper {
         );
         SilvallyTypesQuestLine.addQuest(SteelSilvallyBattle);
 
-        const talkToDragonSilvally = new TalkToNPCQuest(RyukiSilvally, 'Search for Silvally\'s Dragon Memory.');
+        const talkToDragonSilvally = new TalkToNPCQuest(RyukiSilvally, 'Search for Silvally\'s Memory near a tree. Ask Gladion at Aether Foundation if you\'re lost.');
         SilvallyTypesQuestLine.addQuest(talkToDragonSilvally);
 
         const DragonSilvallyBattle = new CustomQuest(
