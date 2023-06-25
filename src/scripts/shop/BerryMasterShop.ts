@@ -32,7 +32,7 @@ class BerryMasterShop extends Shop {
                 itemStatusArray.push(areaStatus.uncaughtShinyPokemon);
             }
 
-            if (RouteHelper.minPokerus(berryTraderPokemon) < 3) {
+            if (Settings.getSetting(`--${areaStatus[areaStatus.missingResistant]}`).isUnlocked() && RouteHelper.minPokerus(berryTraderPokemon) < GameConstants.Pokerus.Resistant) {
                 itemStatusArray.push(areaStatus.missingResistant);
             }
         }
