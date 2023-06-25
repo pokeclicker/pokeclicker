@@ -16,7 +16,7 @@ class BulletinBoard extends TownContent {
     }
     public areaStatus() {
         if (this.getQuests().filter((q) => q.state() == QuestLineState.inactive).length) {
-            return areaStatus.unlockedUnfinished;
+            return areaStatus.incomplete;
         }
         return areaStatus.completed;
     }

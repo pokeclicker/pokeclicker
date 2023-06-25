@@ -445,6 +445,8 @@ class Game {
                 BattleCafeController.spinsLeft(BattleCafeController.spinsPerDay());
                 // Generate the weather forecast
                 WeatherApp.initialize();
+                // Refresh Friend Safari Pokemon List
+                SafariPokemonList.generateKalosSafariList();
 
                 DayOfWeekRequirement.date(now.getDay());
             }

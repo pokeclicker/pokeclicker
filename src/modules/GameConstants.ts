@@ -282,9 +282,9 @@ export const SAFARI_OUT_OF_BALLS = 'Game Over!<br>You have run out of safari bal
 const questBase = 1; // change this to scale all quest points
 
 // Currency → QP reward amounts
-export const GAIN_MONEY_BASE_REWARD = questBase * 0.0017;
-export const GAIN_TOKENS_BASE_REWARD = GAIN_MONEY_BASE_REWARD * 55;
-export const GAIN_FARM_POINTS_BASE_REWARD = GAIN_MONEY_BASE_REWARD * 360;
+export const GAIN_MONEY_BASE_REWARD = questBase * 80;
+export const GAIN_TOKENS_BASE_REWARD = GAIN_MONEY_BASE_REWARD * 2.5;
+export const GAIN_FARM_POINTS_BASE_REWARD = questBase * 0.612;
 
 export const HATCH_EGGS_BASE_REWARD = questBase * 33;
 export const SHINY_BASE_REWARD = questBase * 3000;
@@ -868,6 +868,40 @@ export enum PokemonItemType {
     'Meloetta (Pirouette)',
     'Type: Null',
     'Poipole',
+    'Silvally (Fighting) 1',
+    'Silvally (Rock) 1',
+    'Silvally (Dark) 1',
+    'Silvally (Fairy) 1',
+    'Silvally (Water) 1',
+    'Silvally (Grass) 1',
+    'Silvally (Fire) 1',
+    'Silvally (Electric) 1',
+    'Silvally (Ice) 1',
+    'Silvally (Ground) 1',
+    'Silvally (Bug) 1',
+    'Silvally (Flying) 1',
+    'Silvally (Poison) 1',
+    'Silvally (Ghost) 1',
+    'Silvally (Psychic) 1',
+    'Silvally (Steel) 1',
+    'Silvally (Dragon) 1',
+    'Silvally (Fighting) 2',
+    'Silvally (Rock) 2',
+    'Silvally (Dark) 2',
+    'Silvally (Fairy) 2',
+    'Silvally (Water) 2',
+    'Silvally (Grass) 2',
+    'Silvally (Fire) 2',
+    'Silvally (Electric) 2',
+    'Silvally (Ice) 2',
+    'Silvally (Ground) 2',
+    'Silvally (Bug) 2',
+    'Silvally (Flying) 2',
+    'Silvally (Poison) 2',
+    'Silvally (Ghost) 2',
+    'Silvally (Psychic) 2',
+    'Silvally (Steel) 2',
+    'Silvally (Dragon) 2',
     'Dracozolt',
     'Arctozolt',
     'Dracovish',
@@ -1704,6 +1738,13 @@ export const TemporaryBattles = [
     'Captain Sophocles',
     'Kahuna Nanu',
     'Gladion 3',
+    'Guzma Bug Memory',
+    'Kahili Flying Memory',
+    'Plumeria Poison Memory',
+    'Acerola Ghost Memory',
+    'Faba Psychic Memory',
+    'Molayne Steel Memory',
+    'Ryuki Dragon Memory',
     'Anabel',
     'Captain Mina UB',
     'Kahuna Nanu UB',
@@ -2094,6 +2135,7 @@ export enum GemShops {
     UnovaFluteMaster,
     FurfrouGemTrader,
     KalosStoneSalesman,
+    SilvallyTrader,
     MagikarpJumpGemTrader,
 }
 
