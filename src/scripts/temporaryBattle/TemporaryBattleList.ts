@@ -3582,7 +3582,7 @@ TemporaryBattleList['Guzma Bug Memory'] = new TemporaryBattle(
         new GymPokemon('Pinsir', 22535785, 63), // new GymPokemon('Pinsir', 225357859, 63),
         new GymPokemon('Scizor', 22535785, 63), // new GymPokemon('Scizor', 225357859, 63),
     ],
-    'That was a good battle, and you\'ve won against me one more time. This just proves how much of a good trainer you are. Here is the Memory you\'ve been looking for. </br><img src="assets/images/items/quest/Bug_Memory_Silvally.png"></br><i>You obtained a Bug Silvally Memory!</i>',
+    'That was a good beat-down, Champion! You sure wrecked me again. This just proves how much of a tough trainer you are. Here is the Memory you\'ve been looking for. </br><img src="assets/images/items/quest/Bug_Memory_Silvally.png"></br><i>You obtained a Bug Silvally Memory!</i>',
     [new QuestLineStepCompletedRequirement('Typing some Memories', 19)],
     undefined,
     {
@@ -3616,7 +3616,7 @@ TemporaryBattleList['Plumeria Poison Memory'] = new TemporaryBattle(
         new GymPokemon('Toxapex', 23735785, 63),// new GymPokemon('Toxapex', 237357859, 63),
         new GymPokemon('Salazzle', 23735785, 63), // new GymPokemon('Salazzle', 237357859, 63),
     ],
-    '<i>tsk.<i> And you\'ve won again against me. I guess you\'re pretty strong for a kid, $playername$. Take the Memory with you, you deserve it. </br><img src="assets/images/items/quest/Poison_Memory_Silvally.png"></br><i>You obtained a Poison Silvally Memory!</i>',
+    'You\'re pretty strong, $playername$. Maybe my Pokémon and I need to go through more together to deepen our friendship. Take the Memory with you, you deserve it. </br><img src="assets/images/items/quest/Poison_Memory_Silvally.png"></br><i>You obtained a Poison Silvally Memory!</i>',
     [new QuestLineStepCompletedRequirement('Typing some Memories', 23)],
     undefined,
     {
@@ -3650,7 +3650,7 @@ TemporaryBattleList['Faba Psychic Memory'] = new TemporaryBattle(
         new GymPokemon('Alakazam', 24935785, 63), // new GymPokemon('Alakazam', 249357859, 63),
         new GymPokemon('Hypno', 24935785, 63), // new GymPokemon('Hypno', 249357859, 63),
     ],
-    'You\'re still pretty strong after all that time since our last battle. Well, take the Memory with you. </br><img src="assets/images/items/quest/Psychic_Memory_Silvally.png"></br><i>You obtained a Psychic Silvally Memory!</i>',
+    'You\'re still pretty strong after all that time since our last battle. Well, take this Memory. Now off with you! </br><img src="assets/images/items/quest/Psychic_Memory_Silvally.png"></br><i>You obtained a Psychic Silvally Memory!</i>',
     [new QuestLineStepCompletedRequirement('Typing some Memories', 27)],
     undefined,
     {
@@ -3684,7 +3684,7 @@ TemporaryBattleList['Ryuki Dragon Memory'] = new TemporaryBattle(
         new GymPokemon('Dragonite', 26135785, 63), // new GymPokemon('Dragonite', 261357859, 63),
         new GymPokemon('Kommo-o', 26135785, 63), // new GymPokemon('Kommo-o', 261357859, 63),
     ],
-    'That was an exciting battle, $playername$! Why don\'t you go beat my Gym someday? It\'s located in Malie city on Ula\'ula Island, I\'m sure you\'ll find it pretty quickly when arriving there. Anyways you can take this.. What was it\'s name? Oh, right. You can take this Memory with you. </br><img src="assets/images/items/quest/Dragon_Memory_Silvally.png"></br><i>You obtained a Dragon Silvally Memory!</i>',
+    'And the crowd goes wild! $playername$! You should come by my Gym someday! It\'s in Malie city on Ula\'ula Island right above the Poké Mart, can\'t miss it. What? You\'ve never seen it? It\'s totally there and a real thing! Anyways you can take this.. What was it\'s name? Oh, right. You can take this Memory with you. </br><img src="assets/images/items/quest/Dragon_Memory_Silvally.png"></br><i>You obtained a Dragon Silvally Memory!</i>',
     [new QuestLineStepCompletedRequirement('Typing some Memories', 31)],
     undefined,
     {
