@@ -286,7 +286,7 @@ export const GAIN_MONEY_BASE_REWARD = questBase * 80;
 export const GAIN_TOKENS_BASE_REWARD = GAIN_MONEY_BASE_REWARD * 2.5;
 export const GAIN_FARM_POINTS_BASE_REWARD = questBase * 0.612;
 
-export const HATCH_EGGS_BASE_REWARD = questBase * 33;
+export const HATCH_EGGS_BASE_REWARD = questBase * 25;
 export const SHINY_BASE_REWARD = questBase * 3000;
 export const SHADOW_BASE_REWARD = questBase * 500;
 
