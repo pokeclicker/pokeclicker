@@ -268,6 +268,7 @@ export const SpriteCredits: Credit[] = [
             'Hoppip (Chimecho)',
             'Key Stone',
             'Komala overworld image',
+            'Legend Plate',
             'Linking cord cartoon style',
             'Luana',
             'Magikarp Skelly',
