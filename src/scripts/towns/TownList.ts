@@ -2051,7 +2051,33 @@ const BattleFrontierShop = new Shop([
     ItemList.HatcheryHelperNoel,
     ItemList.Muscle_Band,
 ]);
-
+const OutskirtStandShop = new Shop([
+    ItemList.Pokeball,
+    ItemList.Greatball,
+    ItemList.Ultraball,
+    ItemList.SmallRestore,
+    ItemList.MediumRestore,
+    ItemList.LargeRestore,
+    ItemList.Wonder_Chest,
+]);
+const PhenacCityShop = new Shop([
+    ItemList.Pokeball,
+    ItemList.Greatball,
+    ItemList.Ultraball,
+    ItemList.xAttack,
+    ItemList.xClick,
+    ItemList.Lucky_egg,
+    ItemList.Wonder_Chest,
+]);
+const AgateVillageShop = new Shop([
+    ItemList.Pokeball,
+    ItemList.Greatball,
+    ItemList.Ultraball,
+    ItemList.Lucky_incense,
+    ItemList.Token_collector,
+    ItemList.Dowsing_machine,
+    ItemList.Wonder_Chest,
+]);
 //Hoenn Berry Master
 const HoennBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations['Mauville City'],[
     ItemList.Boost_Mulch,
@@ -2827,6 +2853,29 @@ const EviceEscape = new NPC('Watch Evice Escape', [
 ], {image: 'assets/images/npcs/other/EviceHelicopter.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Shadows in the Desert', 25), new QuestLineCompletedRequirement('Shadows in the Desert', GameConstants.AchievementOption.less)]),
 });
+const OutskirtCowboy = new NPC('Cowboy', [
+    'Howdy, partner! Welcome to Orre!',
+    'Wild Pokémon are few and far between \'round these parts, but we make due!',
+    'Most everyone here will be happy to battle ya! But we know when we\'re beat, and will bow out of a fight once we\'ve been thoroughly licked.',
+]);
+const OldManPhenac = new NPC('Old Man', [
+    'There\'s been a lot of crime around here recently.',
+    'Some folks have been currupting their Pokémon and making them commit evil acts.',
+    'Those Pokémon would be better off in the hands of a loving trainer.',
+]);
+const OrreRoamerNPC = new RoamerNPC('Fanteen\'s Fortune Telling', [
+    'I sense the presence of rate Pokémon at the {ROUTE_NAME}! Hurry, before the fates intervene!',
+], GameConstants.Region.hoenn, RoamingPokemonList.findGroup(GameConstants.Region.hoenn, GameConstants.HoennSubRegions.Orre), 'assets/images/npcs/Psychic (female).png');
+const AgateOldMan = new NPC('Old Man', [
+    'This town is pretty quite. Most folks here are retired trainers.',
+    'We\'re always happy to help out any young folks who come through though!',
+    'Our only real tourist attraction is the Relic Stone north of town.',
+]);
+const RelicSage = new NPC('Relic Stone Sage', [
+    'This stone has the power to cleanse and purify the spirits of Pokémon.',
+    'If you train with your Pokémon, you will gain spiritual energy, or "Flow". You can use this Flow to purify your Pokémon.',
+    'Purification will take more flow with each Pokémon you purify.',
+]);
 //Hoenn Towns
 TownList['Littleroot Town'] = new Town(
     'Littleroot Town',
@@ -3075,10 +3124,10 @@ TownList['Outskirt Stand'] = new Town(
     'Outskirt Stand',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [TemporaryBattleList.Willie],
+    [OutskirtStandShop, TemporaryBattleList.Willie],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), new QuestLineStartedRequirement('Shadows in the Desert')],
-        npcs: [ExploreStand],
+        npcs: [ExploreStand, OutskirtCowboy],
     }
 );
 
@@ -3086,10 +3135,10 @@ TownList['Phenac City'] = new Town(
     'Phenac City',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new MoveToDungeon(dungeonList['Phenac Stadium']), new MoveToDungeon(dungeonList['Phenac City Battles']), TemporaryBattleList.Folly],
+    [PhenacCityShop, new MoveToDungeon(dungeonList['Phenac Stadium']), new MoveToDungeon(dungeonList['Phenac City Battles']), TemporaryBattleList.Folly],
     {
         requirements: [new QuestLineStepCompletedRequirement('Shadows in the Desert', 1)],
-        npcs: [Sack, EsCade1, Rui1],
+        npcs: [OldManPhenac, Sack, EsCade1, Rui1],
     }
 );
 
@@ -3100,7 +3149,7 @@ TownList['Pyrite Town'] = new Town(
     [GymList['Cipher Admin Miror B.'], new MoveToTown('Pyrite Colosseum'), new MoveToDungeon(dungeonList['The Under']), new MoveToDungeon(dungeonList['Pyrite Town Battles']), new MoveToDungeon(dungeonList['Deep Colosseum']), new MoveToDungeon(dungeonList['Under Colosseum'])],
     {
         requirements: [new QuestLineStepCompletedRequirement('Shadows in the Desert', 6)],
-        npcs: [Duking1],
+        npcs: [OrreRoamerNPC, Duking1],
     }
 );
 
@@ -3108,9 +3157,10 @@ TownList['Agate Village'] = new Town(
     'Agate Village',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [new MoveToTown('Relic Stone'), new MoveToDungeon(dungeonList['Relic Cave']), TemporaryBattleList['Cipher Peon Doven'], TemporaryBattleList['Cipher Peon Silton'], TemporaryBattleList['Cipher Peon Kass']],
+    [AgateVillageShop, new MoveToTown('Relic Stone'), new MoveToDungeon(dungeonList['Relic Cave']), TemporaryBattleList['Cipher Peon Doven'], TemporaryBattleList['Cipher Peon Silton'], TemporaryBattleList['Cipher Peon Kass']],
     {
         requirements: [new QuestLineStepCompletedRequirement('Shadows in the Desert', 14)],
+        npcs: [AgateOldMan],
     }
 );
 
@@ -3121,6 +3171,7 @@ TownList['Relic Stone'] = new Town(
     [new MoveToTown('Agate Village', undefined, false), new MoveToDungeon(dungeonList['Relic Cave']), new PurifyChamberTownContent()],
     {
         requirements: [new QuestLineStepCompletedRequirement('Shadows in the Desert', 17)],
+        npcs: [RelicSage],
     }
 );
 
