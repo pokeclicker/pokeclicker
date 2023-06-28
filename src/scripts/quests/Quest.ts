@@ -11,6 +11,8 @@ abstract class Quest {
     isCompleted: KnockoutComputed<boolean>;
     claimed: KnockoutObservable<boolean>;
     private _focus: KnockoutObservable<any>;
+    private focusSub: KnockoutSubscription;
+    private focusValue: number;
     initial: KnockoutObservable<any>;
     notified: boolean;
     autoComplete: boolean;
@@ -54,6 +56,7 @@ abstract class Quest {
     claim() {
         if (this.isCompleted() && !this.claimed()) {
             App.game.quests.addXP(this.xpReward);
+            this.focusSub?.dispose?.();
             this.claimed(true);
             if (this.pointsReward) {
                 App.game.wallet.gainQuestPoints(this.pointsReward);
@@ -118,6 +121,20 @@ abstract class Quest {
     }
 
     protected createProgressObservables() {
+        // Dispose of our old subscriber if one exists
+        this.focusSub?.dispose?.();
+
+        // Subscribe to the new focus
+        this.focusValue = this._focus();
+        this.focusSub = this._focus.subscribe?.((newValue) => {
+            // If the focus goes down, adjust our initial value
+            if (newValue < this.focusValue) {
+                this.initial(this.initial() - (this.focusValue - newValue));
+            }
+            this.focusValue = newValue;
+        });
+
+        // Calculate our progress
         this.progress = ko.pureComputed(() => {
             if (this.initial() !== null) {
                 return Math.min(1, ( this.focus() - this.initial()) / this.amount);

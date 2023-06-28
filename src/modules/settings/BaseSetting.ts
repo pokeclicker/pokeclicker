@@ -4,6 +4,7 @@ import {
     Observable,
 } from 'knockout';
 import SettingOption from './SettingOption';
+import Requirement from '../requirements/Requirement';
 
 export default abstract class BaseSetting<T, S> {
     value: T;
@@ -18,6 +19,7 @@ export default abstract class BaseSetting<T, S> {
         private defaultDisplayName: string,
         public options: SettingOption<S>[],
         public defaultValue: T,
+        public requirement : Requirement = undefined,
     ) {
         this.observableValue = ko.observable(this.defaultValue);
         this.set(defaultValue);
@@ -36,6 +38,15 @@ export default abstract class BaseSetting<T, S> {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars, class-methods-use-this
     validValue(value: T): boolean {
         return false;
+    }
+    
+    isSelected(value: T): KnockoutComputed<boolean> {
+        return ko.pureComputed(() => (this.observableValue() === value), this);
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars, class-methods-use-this
+    isValueUnlocked(value: T): boolean { 
+        return true;
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars, class-methods-use-this
