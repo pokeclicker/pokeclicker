@@ -49,9 +49,8 @@ export default abstract class BaseSetting<T, S> {
         return true;
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars, class-methods-use-this
-    isUnlocked(value: T): boolean {
-        return true;
+    isUnlocked(): boolean {
+        return this.requirement ? this.requirement.isCompleted() : true;
     }
 
     getValidOptions() {

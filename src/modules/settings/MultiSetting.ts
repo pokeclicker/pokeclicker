@@ -4,7 +4,7 @@ export default class MultiSetting<T> extends BaseSetting<T[], T> {
     private optionValues: T[];
 
     validValue(value: T[]): boolean {
-        if (!this.isUnlocked(value)) {
+        if (!this.isValueUnlocked(value)) {
             return false;
         }
 
