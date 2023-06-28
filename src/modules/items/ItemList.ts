@@ -20,8 +20,6 @@ import MegaStoneItem from './MegaStoneItem';
 import Vitamin from './Vitamin';
 import EggItem from './EggItem';
 import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
-import MultiRequirement from '../requirements/MultiRequirement';
-import TemporaryBattleRequirement from '../requirements/TemporaryBattleRequirement';
 import ObtainedPokemonRequirement from '../requirements/ObtainedPokemonRequirement';
 import QuestItem from './QuestItem';
 
@@ -95,59 +93,63 @@ ItemList.PokeBlock_Gray   = new PokeBlock(PokeBlockColor.Gray, Infinity);
 ItemList.PokeBlock_White  = new PokeBlock(PokeBlockColor.White, Infinity);
 
 // Mega Stones
-ItemList.Abomasite			= new MegaStoneItem(MegaStoneType.Abomasite, 'Abomasnow', 10000);
-ItemList.Absolite			= new MegaStoneItem(MegaStoneType.Absolite, 'Absol', 10000);
-ItemList.Aerodactylite		= new MegaStoneItem(MegaStoneType.Aerodactylite, 'Aerodactyl', 10000);
-ItemList.Aggronite			= new MegaStoneItem(MegaStoneType.Aggronite, 'Aggron', 10000);
-ItemList.Alakazite			= new MegaStoneItem(MegaStoneType.Alakazite, 'Alakazam', 10000);
-//ItemList.Altarianite		= new MegaStoneItem(MegaStoneType.Altarianite, 'Altaria', 10000);
-ItemList.Ampharosite		= new MegaStoneItem(MegaStoneType.Ampharosite, 'Ampharos', 10000);
-ItemList.Audinite			= new MegaStoneItem(MegaStoneType.Audinite, 'Audino', 10000);
-//ItemList.Banettite			= new MegaStoneItem(MegaStoneType.Banettite, 'Banette', 10000);
-ItemList.Beedrillite		= new MegaStoneItem(MegaStoneType.Beedrillite, 'Beedrill', 10000);
-//ItemList.Blastoisinite		= new MegaStoneItem(MegaStoneType.Blastoisinite, 'Blastoise', 10000);
-ItemList.Blazikenite		= new MegaStoneItem(MegaStoneType.Blazikenite, 'Blaziken', 10000, Currency.questPoint,
-    { visible: new MultiRequirement([new TemporaryBattleRequirement('Hoenn Stone Salesman'), new ObtainedPokemonRequirement('Blaziken')]) }, 'Blazikenite', 'A Mega Stone for Blaziken.');
+ItemList.Abomasite          = new MegaStoneItem(MegaStoneType.Abomasite, 'Abomasnow', 10000);
+ItemList.Absolite           = new MegaStoneItem(MegaStoneType.Absolite, 'Absol', 10000);
+ItemList.Aerodactylite      = new MegaStoneItem(MegaStoneType.Aerodactylite, 'Aerodactyl', 10000);
+ItemList.Aggronite          = new MegaStoneItem(MegaStoneType.Aggronite, 'Aggron', 10000);
+ItemList.Alakazite          = new MegaStoneItem(MegaStoneType.Alakazite, 'Alakazam', 10000);
+//ItemList.Altarianite        = new MegaStoneItem(MegaStoneType.Altarianite, 'Altaria', 10000);
+ItemList.Ampharosite        = new MegaStoneItem(MegaStoneType.Ampharosite, 'Ampharos', 10000);
+ItemList.Audinite           = new MegaStoneItem(MegaStoneType.Audinite, 'Audino', 10000);
+//ItemList.Banettite          = new MegaStoneItem(MegaStoneType.Banettite, 'Banette', 10000);
+ItemList.Beedrillite        = new MegaStoneItem(MegaStoneType.Beedrillite, 'Beedrill', 10000);
+ItemList.Blastoisinite      = new MegaStoneItem(MegaStoneType.Blastoisinite, 'Blastoise', 10000, Currency.questPoint,
+    { visible: new ObtainedPokemonRequirement('Blastoise') }, 'Blastoisinite', 'A Mega Stone for Blastoise.');
+ItemList.Blazikenite        = new MegaStoneItem(MegaStoneType.Blazikenite, 'Blaziken', 10000, Currency.questPoint,
+    { visible: new ObtainedPokemonRequirement('Blaziken') }, 'Blazikenite', 'A Mega Stone for Blaziken.');
 ItemList.Blue_Orb           = new MegaStoneItem(MegaStoneType.Blue_Orb, 'Kyogre', 10000);
-ItemList.Cameruptite		= new MegaStoneItem(MegaStoneType.Cameruptite, 'Camerupt', 10000);
-//ItemList.Charizardite_X		= new MegaStoneItem(MegaStoneType.Charizardite_X, 'Charizard', 10000);
-//ItemList.Charizardite_Y		= new MegaStoneItem(MegaStoneType.Charizardite_Y, 'Charizard', 10000);
-ItemList.Diancite			= new MegaStoneItem(MegaStoneType.Diancite, 'Diancie', 10000);
-ItemList.Galladite			= new MegaStoneItem(MegaStoneType.Galladite, 'Gallade', 10000);
-ItemList.Garchompite		= new MegaStoneItem(MegaStoneType.Garchompite, 'Garchomp', 10000);
-ItemList.Gardevoirite		= new MegaStoneItem(MegaStoneType.Gardevoirite, 'Gardevoir', 10000);
-ItemList.Gengarite			= new MegaStoneItem(MegaStoneType.Gengarite, 'Gengar', 10000);
-ItemList.Glalitite			= new MegaStoneItem(MegaStoneType.Glalitite, 'Glalie', 10000);
-ItemList.Gyaradosite		= new MegaStoneItem(MegaStoneType.Gyaradosite, 'Gyarados', 10000);
-ItemList.Heracronite		= new MegaStoneItem(MegaStoneType.Heracronite, 'Heracross', 10000);
-ItemList.Houndoominite		= new MegaStoneItem(MegaStoneType.Houndoominite, 'Houndoom', 10000);
-ItemList.Kangaskhanite		= new MegaStoneItem(MegaStoneType.Kangaskhanite, 'Kangaskhan', 10000);
-ItemList.Latiasite			= new MegaStoneItem(MegaStoneType.Latiasite, 'Latias', 10000);
-ItemList.Latiosite			= new MegaStoneItem(MegaStoneType.Latiosite, 'Latios', 10000);
-ItemList.Lopunnite			= new MegaStoneItem(MegaStoneType.Lopunnite, 'Lopunny', 10000);
-ItemList.Lucarionite		= new MegaStoneItem(MegaStoneType.Lucarionite, 'Lucario', 10000);
-ItemList.Manectite			= new MegaStoneItem(MegaStoneType.Manectite, 'Manectric', 10000);
-ItemList.Mawilite			= new MegaStoneItem(MegaStoneType.Mawilite, 'Mawile', 10000);
-//ItemList.Medichamite		= new MegaStoneItem(MegaStoneType.Medichamite, 'Medicham', 10000);
-ItemList.Metagrossite		= new MegaStoneItem(MegaStoneType.Metagrossite, 'Metagross', 10000);
+ItemList.Cameruptite        = new MegaStoneItem(MegaStoneType.Cameruptite, 'Camerupt', 10000);
+ItemList.Charizardite_X     = new MegaStoneItem(MegaStoneType.Charizardite_X, 'Charizard', 10000, Currency.questPoint,
+    { visible: new ObtainedPokemonRequirement('Charizard') }, 'Charizardite X', 'A Mega Stone for Charizard.');
+ItemList.Charizardite_Y     = new MegaStoneItem(MegaStoneType.Charizardite_Y, 'Charizard', 10000, Currency.questPoint,
+    { visible: new ObtainedPokemonRequirement('Charizard') }, 'Charizardite Y', 'A Mega Stone for Charizard.');
+ItemList.Diancite           = new MegaStoneItem(MegaStoneType.Diancite, 'Diancie', 10000);
+ItemList.Galladite          = new MegaStoneItem(MegaStoneType.Galladite, 'Gallade', 10000);
+ItemList.Garchompite        = new MegaStoneItem(MegaStoneType.Garchompite, 'Garchomp', 10000);
+ItemList.Gardevoirite       = new MegaStoneItem(MegaStoneType.Gardevoirite, 'Gardevoir', 10000);
+ItemList.Gengarite          = new MegaStoneItem(MegaStoneType.Gengarite, 'Gengar', 10000);
+ItemList.Glalitite          = new MegaStoneItem(MegaStoneType.Glalitite, 'Glalie', 10000);
+ItemList.Gyaradosite        = new MegaStoneItem(MegaStoneType.Gyaradosite, 'Gyarados', 10000);
+ItemList.Heracronite        = new MegaStoneItem(MegaStoneType.Heracronite, 'Heracross', 10000);
+ItemList.Houndoominite      = new MegaStoneItem(MegaStoneType.Houndoominite, 'Houndoom', 10000);
+ItemList.Kangaskhanite      = new MegaStoneItem(MegaStoneType.Kangaskhanite, 'Kangaskhan', 10000);
+ItemList.Latiasite          = new MegaStoneItem(MegaStoneType.Latiasite, 'Latias', 10000);
+ItemList.Latiosite          = new MegaStoneItem(MegaStoneType.Latiosite, 'Latios', 10000);
+ItemList.Lopunnite          = new MegaStoneItem(MegaStoneType.Lopunnite, 'Lopunny', 10000);
+ItemList.Lucarionite        = new MegaStoneItem(MegaStoneType.Lucarionite, 'Lucario', 10000);
+ItemList.Manectite          = new MegaStoneItem(MegaStoneType.Manectite, 'Manectric', 10000);
+ItemList.Mawilite           = new MegaStoneItem(MegaStoneType.Mawilite, 'Mawile', 10000);
+//ItemList.Medichamite        = new MegaStoneItem(MegaStoneType.Medichamite, 'Medicham', 10000);
+ItemList.Metagrossite       = new MegaStoneItem(MegaStoneType.Metagrossite, 'Metagross', 10000);
 ItemList.Meteorite          = new MegaStoneItem(MegaStoneType.Meteorite, 'Rayquaza', 10000);
-//ItemList.Mewtwonite_X		= new MegaStoneItem(MegaStoneType.Mewtwonite_X, 'Mewtwo', 10000);
-//ItemList.Mewtwonite_Y		= new MegaStoneItem(MegaStoneType.Mewtwonite_Y, 'Mewtwo', 10000);
-ItemList.Pidgeotite			= new MegaStoneItem(MegaStoneType.Pidgeotite, 'Pidgeot', 10000);
-//ItemList.Pinsirite			= new MegaStoneItem(MegaStoneType.Pinsirite, 'Pinsir', 10000);
+//ItemList.Mewtwonite_X       = new MegaStoneItem(MegaStoneType.Mewtwonite_X, 'Mewtwo', 10000);
+//ItemList.Mewtwonite_Y       = new MegaStoneItem(MegaStoneType.Mewtwonite_Y, 'Mewtwo', 10000);
+ItemList.Pidgeotite         = new MegaStoneItem(MegaStoneType.Pidgeotite, 'Pidgeot', 10000);
+ItemList.Pinsirite          = new MegaStoneItem(MegaStoneType.Pinsirite, 'Pinsir', 10000);
 ItemList.Red_Orb            = new MegaStoneItem(MegaStoneType.Red_Orb, 'Groudon', 10000);
-ItemList.Sablenite			= new MegaStoneItem(MegaStoneType.Sablenite, 'Sableye', 10000);
-ItemList.Salamencite		= new MegaStoneItem(MegaStoneType.Salamencite, 'Salamence', 10000);
-ItemList.Sceptilite			= new MegaStoneItem(MegaStoneType.Sceptilite, 'Sceptile', 10000, Currency.questPoint,
-    { visible: new MultiRequirement([new TemporaryBattleRequirement('Hoenn Stone Salesman'), new ObtainedPokemonRequirement('Sceptile')]) }, 'Sceptilite', 'A Mega Stone for Sceptile.');
-//ItemList.Scizorite			= new MegaStoneItem(MegaStoneType.Scizorite, 'Scizor', 10000);
-ItemList.Sharpedonite		= new MegaStoneItem(MegaStoneType.Sharpedonite, 'Sharpedo', 10000);
-ItemList.Slowbronite		= new MegaStoneItem(MegaStoneType.Slowbronite, 'Slowbro', 10000);
-ItemList.Steelixite			= new MegaStoneItem(MegaStoneType.Steelixite, 'Steelix', 10000);
-ItemList.Swampertite		= new MegaStoneItem(MegaStoneType.Swampertite, 'Swampert', 10000, Currency.questPoint,
-    { visible: new MultiRequirement([new TemporaryBattleRequirement('Hoenn Stone Salesman'), new ObtainedPokemonRequirement('Swampert')]) }, 'Swampertite', 'A Mega Stone for Swampert.');
-ItemList.Tyranitarite		= new MegaStoneItem(MegaStoneType.Tyranitarite, 'Tyranitar', 10000);
-//ItemList.Venusaurite		= new MegaStoneItem(MegaStoneType.Venusaurite, 'Venusaur', 10000);
+ItemList.Sablenite          = new MegaStoneItem(MegaStoneType.Sablenite, 'Sableye', 10000);
+ItemList.Salamencite        = new MegaStoneItem(MegaStoneType.Salamencite, 'Salamence', 10000);
+ItemList.Sceptilite         = new MegaStoneItem(MegaStoneType.Sceptilite, 'Sceptile', 10000, Currency.questPoint,
+    { visible: new ObtainedPokemonRequirement('Sceptile') }, 'Sceptilite', 'A Mega Stone for Sceptile.');
+ItemList.Scizorite          = new MegaStoneItem(MegaStoneType.Scizorite, 'Scizor', 10000);
+ItemList.Sharpedonite       = new MegaStoneItem(MegaStoneType.Sharpedonite, 'Sharpedo', 10000);
+ItemList.Slowbronite        = new MegaStoneItem(MegaStoneType.Slowbronite, 'Slowbro', 10000);
+ItemList.Steelixite         = new MegaStoneItem(MegaStoneType.Steelixite, 'Steelix', 10000);
+ItemList.Swampertite        = new MegaStoneItem(MegaStoneType.Swampertite, 'Swampert', 10000, Currency.questPoint,
+    { visible: new ObtainedPokemonRequirement('Swampert') }, 'Swampertite', 'A Mega Stone for Swampert.');
+ItemList.Tyranitarite       = new MegaStoneItem(MegaStoneType.Tyranitarite, 'Tyranitar', 10000);
+ItemList.Venusaurite        = new MegaStoneItem(MegaStoneType.Venusaurite, 'Venusaur', 10000, Currency.questPoint,
+    { visible: new ObtainedPokemonRequirement('Venusaur') }, 'Venusaurite', 'A Mega Stone for Venusaur.');
 
 // Eggs
 ItemList.Fire_egg = new EggItem(EggItemType.Fire_egg, 1000, undefined, 'Fire Egg');
@@ -161,6 +163,23 @@ ItemList.Mystery_egg = new EggItem(EggItemType.Mystery_egg, 700, undefined, 'Mys
 
 // Quest Items
 ItemList.Celios_Errand_Ruby = new QuestItem('Celios_Errand_Ruby', 'Ruby', 'A Ruby found in Ruby Path', 'Celio\'s Errand');
+ItemList.Fighting_Memory_Silvally = new QuestItem('Fighting_Memory_Silvally', 'Fighting Memory', 'One of Silvally\'s memories, obtained from Kahuna Hala in Iki Town', 'Typing some Memories');
+ItemList.Rock_Memory_Silvally = new QuestItem('Rock_Memory_Silvally', 'Rock Memory', 'One of Silvally\'s memories, obtained from Kahuna Olivia in Konikoni City', 'Typing some Memories');
+ItemList.Dark_Memory_Silvally = new QuestItem('Dark_Memory_Silvally', 'Dark Memory', 'One of Silvally\'s memories, obtained from Kahuna Nanu in Malie City', 'Typing some Memories');
+ItemList.Fairy_Memory_Silvally = new QuestItem('Fairy_Memory_Silvally', 'Fairy Memory', 'One of Silvally\'s memories, obtained from Captain Mina in Seafolk Village', 'Typing some Memories');
+ItemList.Water_Memory_Silvally = new QuestItem('Water_Memory_Silvally', 'Water Memory', 'One of Silvally\'s memories, obtained from Captain Lana in Brooklet Hill', 'Typing some Memories', 'Typing some Memories', 125000000, Currency.dungeonToken);
+ItemList.Grass_Memory_Silvally = new QuestItem('Grass_Memory_Silvally', 'Grass Memory', 'One of Silvally\'s memories, obtained from Captain Mallow in Lush Jungle', 'Typing some Memories', 'Typing some Memories', 125000, Currency.questPoint);
+ItemList.Fire_Memory_Silvally = new QuestItem('Fire_Memory_Silvally', 'Fire Memory', 'One of Silvally\'s memories, obtained from Captain Kiawe in Wela Volcano Park', 'Typing some Memories', 'Typing some Memories', 75000, Currency.battlePoint);
+ItemList.Electric_Memory_Silvally = new QuestItem('Electric_Memory_Silvally', 'Electric Memory', 'One of Silvally\'s memories, obtained from Captain Sophocles in Hokulani Observatory', 'Typing some Memories', 'Typing some Memories', 500000000, Currency.money);
+ItemList.Ice_Memory_Silvally = new QuestItem('Ice_Memory_Silvally', 'Ice Memory', 'One of Silvally\'s memories, obtained from Veteran Aristo in Mt. Lanakila', 'Typing some Memories', 'Typing some Memories', 5000, Currency.diamond);
+ItemList.Ground_Memory_Silvally = new QuestItem('Ground_Memory_Silvally', 'Ground Memory', 'One of Silvally\'s memories, obtained from Kahuna Hapu on Exeggutor Island Hill', 'Typing some Memories', 'Typing some Memories', 200000, Currency.farmPoint);
+ItemList.Bug_Memory_Silvally = new QuestItem('Bug_Memory_Silvally', 'Bug Memory', 'One of Silvally\'s memories, obtained from Guzma in Po Town', 'Typing some Memories');
+ItemList.Flying_Memory_Silvally = new QuestItem('Flying_Memory_Silvally', 'Flying Memory', 'One of Silvally\'s memories, obtained from Kahili on Ten Carat Hill', 'Typing some Memories');
+ItemList.Poison_Memory_Silvally = new QuestItem('Poison_Memory_Silvally', 'Poison Memory', 'One of Silvally\'s memories, obtained from Plumeria in Vast Poni Canyon', 'Typing some Memories');
+ItemList.Ghost_Memory_Silvally = new QuestItem('Ghost_Memory_Silvally', 'Ghost Memory', 'One of Silvally\'s memories, obtained from Captain Acerola in Thrifty Megamart', 'Typing some Memories');
+ItemList.Psychic_Memory_Silvally = new QuestItem('Psychic_Memory_Silvally', 'Psychic Memory', 'One of Silvally\'s memories, obtained from Aether Branch Chief Faba in Aether Paradise', 'Typing some Memories');
+ItemList.Steel_Memory_Silvally = new QuestItem('Steel_Memory_Silvally', 'Steel Memory', 'One of Silvally\'s memories, obtained from Molayne in Royal Avenue', 'Typing some Memories');
+ItemList.Dragon_Memory_Silvally = new QuestItem('Dragon_Memory_Silvally', 'Dragon Memory', 'One of Silvally\'s memories, obtained from Ryuki in A Tree Maybe', 'Typing some Memories');
 
 // Vitamins
 // ItemList.RareCandy = new Vitamin(VitaminType.RareCandy, Infinity, undefined, undefined, 'Rare Candy', 'A rare-to-find candy that currently has no use.');
