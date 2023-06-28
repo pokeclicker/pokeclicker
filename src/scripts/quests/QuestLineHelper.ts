@@ -2257,14 +2257,14 @@ class QuestLineHelper {
 
     //Silvally Typings Questline
     public static createSilvallyTypesQuestLine() {
-        const SilvallyTypesQuestLine = new QuestLine('Typing some Memories', 'Help Gladion restore his Silvally\'s memories.', new MultiRequirement([new ObtainedPokemonRequirement('Silvally (Normal)'), new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion), new DevelopmentRequirement()]) , GameConstants.BulletinBoards.Alola);
+        const SilvallyTypesQuestLine = new QuestLine('Typing some Memories', 'Help Gladion restore his Silvally\'s memories.', new MultiRequirement([new ObtainedPokemonRequirement('Silvally (Normal)'), new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)]) , GameConstants.BulletinBoards.Alola);
 
         const talkToGladion1 = new TalkToNPCQuest(SilvallyGladion1, 'Talk to Gladion in the Aether Foundation.');
         SilvallyTypesQuestLine.addQuest(talkToGladion1);
 
         const createMultiTypeCaptureQuest = (types: Array<PokemonType>, description: string) => {
             const quest = new MultipleQuestsQuest(types.map(type => {
-                return new CapturePokemonTypesQuest(1, undefined, type);
+                return new CapturePokemonTypesQuest(100, undefined, type);
             }), description);
             SilvallyTypesQuestLine.addQuest(quest);
         };

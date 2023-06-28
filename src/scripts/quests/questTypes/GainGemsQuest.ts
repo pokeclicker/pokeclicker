@@ -44,7 +44,7 @@ class GainGemsQuest extends Quest implements QuestInterface {
     }
 
     private static calcReward(type: PokemonType, amount: number): number {
-        const reward = amount * GameConstants.DEFEAT_POKEMONS_BASE_REWARD * this.weights[type].weight;
+        const reward = amount * GameConstants.DEFEAT_POKEMONS_BASE_REWARD * this.weights[type].weight * 0.5;
         return super.randomizeReward(reward);
     }
 
