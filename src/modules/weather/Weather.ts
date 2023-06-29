@@ -42,7 +42,6 @@ export default class Weather {
                 [{ type: PokemonType.Water, multiplier: 1.1 }, { type: PokemonType.Bug, multiplier: 1.1 }]),
         [WeatherType.Thunderstorm]:
             new WeatherCondition(WeatherType.Thunderstorm, '#a19288', 'It\'s currently raining heavily with thunder.', 5,
-        // tslint:disable-next-line:max-line-length
                 [{ type: PokemonType.Electric, multiplier: 1.1 }, { type: PokemonType.Water, multiplier: 1.1 }, { type: PokemonType.Dragon, multiplier: 1.1 }, 
                 { type: PokemonType.Fire, multiplier: 0.9 }]),
         [WeatherType.Snow]:
@@ -61,7 +60,6 @@ export default class Weather {
                 [{ type: PokemonType.Rock, multiplier: 1.1 }, { type: PokemonType.Ground, multiplier: 1.1 }]),
         [WeatherType.Fog]:
             new WeatherCondition(WeatherType.Fog, '#d2c2ef', 'The fog is deep...', 10,
-        // tslint:disable-next-line:max-line-length
                 [{ type: PokemonType.Psychic, multiplier: 1.1 }, { type: PokemonType.Ghost, multiplier: 1.1 }, { type: PokemonType.Fairy, multiplier: 1.1 }, 
                 { type: PokemonType.Electric, multiplier: 0.9 }]),
     };
