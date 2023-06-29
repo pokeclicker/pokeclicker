@@ -181,7 +181,7 @@ class AchievementHandler {
         const categories = GameHelper.enumStrings(GameConstants.Region).filter(r => r != 'none' && r != 'final').map(r => new AchievementCategory(r, 100, () => player.highestRegion() >= GameConstants.Region[r]));
         categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.global], 150, () => true));
         categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.sevii], 50, () => SubRegions.isSubRegionUnlocked(GameConstants.Region.kanto, GameConstants.KantoSubRegions.Sevii123)));
-        categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.orre], 50, () => SubRegions.isSubRegionUnlocked(GameConstants.Region.hoenn, GameConstants.HoennSubRegions.Orre)));
+        categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.orre], 75, () => SubRegions.isSubRegionUnlocked(GameConstants.Region.hoenn, GameConstants.HoennSubRegions.Orre)));
         categories.push(new AchievementCategory(GameConstants.ExtraAchievementCategories[GameConstants.ExtraAchievementCategories.magikarpJump], 25, () => SubRegions.isSubRegionUnlocked(GameConstants.Region.alola, GameConstants.AlolaSubRegions.MagikarpJump)));
 
         AchievementHandler._achievementCategories = categories;
@@ -400,6 +400,26 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Almost Clean Enough to Look Shiny', 'Purify 10 unique Shadow Pokémon', new ShadowPokemonRequirement(10, GameConstants.ShadowStatus.Purified), 3, GameConstants.ExtraAchievementCategories.orre);
         AchievementHandler.addAchievement('Priest in Training', 'Purify 50 unique Shadow Pokémon', new ShadowPokemonRequirement(50, GameConstants.ShadowStatus.Purified), 6, GameConstants.ExtraAchievementCategories.orre);
         AchievementHandler.addAchievement('Hand of Light', 'Purify all 131 unique Shadow Pokémon', new ShadowPokemonRequirement(131, GameConstants.ShadowStatus.Purified), 12, GameConstants.ExtraAchievementCategories.orre);
+
+        AchievementHandler.addAchievement('Who Dropped These Here?', 'Pick up 10 Items in a Safari Zone', new SafariItemsRequirement(10), 0.1);
+        AchievementHandler.addAchievement('Cheaper Than Buying It', 'Pick up 50 Items in a Safari Zone', new SafariItemsRequirement(50), 0.2);
+        AchievementHandler.addAchievement('Itemfinder Has Nothing On Me!', 'Pick up 100 Items in a Safari Zone', new SafariItemsRequirement(100), 0.4);
+
+        AchievementHandler.addAchievement('This Is Not A Pokéball!', 'Throw 10 Rocks in a Safari Zone', new SafariRocksRequirement(10), 0.1);
+        AchievementHandler.addAchievement('You\'re A Big Meanie!', 'Throw 100 Rocks in a Safari Zone', new SafariRocksRequirement(100), 0.3);
+        AchievementHandler.addAchievement('Why Are You Like This?', 'Throw 1,000 Rocks in a Safari Zone', new SafariRocksRequirement(1000), 0.7);
+
+        AchievementHandler.addAchievement('Hope It Likes Berries', 'Throw 10 Bait in a Safari Zone', new SafariBaitRequirement(10), 0.1);
+        AchievementHandler.addAchievement('What Is "Bait" Made Of?', 'Throw 100 Bait in a Safari Zone', new SafariBaitRequirement(100), 0.3);
+        AchievementHandler.addAchievement('Stay For Dinner', 'Throw 1,000 Bait in a Safari Zone', new SafariBaitRequirement(1000), 0.5);
+
+        AchievementHandler.addAchievement('Gotta Get Your Steps In!', 'Walk 100 Steps in a Safari Zone', new SafariStepsRequirement(100), 0.1);
+        AchievementHandler.addAchievement('One More Lap', 'Walk 1,000 Steps in a Safari Zone', new SafariStepsRequirement(1000), 0.2);
+        AchievementHandler.addAchievement('Marathon Runner', 'Walk 10,000 Steps in a Safari Zone', new SafariStepsRequirement(10000), 0.3);
+
+        AchievementHandler.addAchievement('Where Pinsir?', 'Reach Safari Level 5.', new SafariLevelRequirement(5), 0.25);
+        AchievementHandler.addAchievement('Chasing the Chansey', 'Reach Safari Level 15.', new SafariLevelRequirement(15), 0.5);
+        AchievementHandler.addAchievement('Catch Animation Enthusiast', 'Reach Safari Level 30.', new SafariLevelRequirement(30), 1);
 
         /*
          * REGIONAL

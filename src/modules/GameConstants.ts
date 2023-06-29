@@ -26,6 +26,7 @@ export const MUTATION_TICK = 1 * SECOND;
 export const WANDER_TICK = 1.5 * SECOND;
 export const TEMP_BATTLE_TIME = 60 * SECOND;
 export const TEMP_BATTLE_TICK = 0.1 * SECOND;
+export const SPECIAL_EVENT_TICK = 1 * SECOND;
 
 // Update the requirement for "Final Region Town" in TownList, when adding new regions.
 // Else the professor NPC won't work.
@@ -219,6 +220,7 @@ export enum AchievementType {
     'Hatchery',
     'Farming',
     'Underground',
+    'Safari',
     'Battle Frontier',
     'Vitamins',
     'Pokerus',
@@ -280,11 +282,11 @@ export const SAFARI_OUT_OF_BALLS = 'Game Over!<br>You have run out of safari bal
 const questBase = 1; // change this to scale all quest points
 
 // Currency → QP reward amounts
-export const GAIN_MONEY_BASE_REWARD = questBase * 0.0017;
-export const GAIN_TOKENS_BASE_REWARD = GAIN_MONEY_BASE_REWARD * 55;
-export const GAIN_FARM_POINTS_BASE_REWARD = GAIN_MONEY_BASE_REWARD * 90;
+export const GAIN_MONEY_BASE_REWARD = questBase * 80;
+export const GAIN_TOKENS_BASE_REWARD = GAIN_MONEY_BASE_REWARD * 2.5;
+export const GAIN_FARM_POINTS_BASE_REWARD = questBase * 0.612;
 
-export const HATCH_EGGS_BASE_REWARD = questBase * 33;
+export const HATCH_EGGS_BASE_REWARD = questBase * 25;
 export const SHINY_BASE_REWARD = questBase * 3000;
 export const SHADOW_BASE_REWARD = questBase * 500;
 
@@ -320,6 +322,7 @@ export const REPEATBALL_EP_MODIFIER = 5;
 export const DUNGEON_EP_MODIFIER = 3;
 export const DUNGEON_BOSS_EP_MODIFIER = 10;
 export const ROAMER_EP_MODIFIER = 50;
+export const SHADOW_EP_MODIFIER = 2;
 
 export const EP_EV_RATIO = 1000;
 export const EP_CHALLENGE_MODIFIER = 10;
@@ -645,7 +648,7 @@ export const Environments: Record<string, EnvironmentData> = {
     Fire: {
         [Region.kanto]: new Set(['Cinnabar Island', 'Mt. Ember', 'Mt. Ember Summit', 'Ruby Path']),
         [Region.johto]: new Set(),
-        [Region.hoenn]: new Set(['Lavaridge Town', 'Fiery Path', 'Mt. Chimney', 'Mt. Chimney Crater', 'Magma Hideout']),
+        [Region.hoenn]: new Set(['Lavaridge Town', 'Fiery Path', 'Mt. Chimney', 'Mt. Chimney Crater', 'Magma Hideout', 'Mt. Battle']),
         [Region.sinnoh]: new Set(['Stark Mountain']),
         [Region.unova]: new Set(['Reversal Mountain']),
         [Region.kalos]: new Set(),
@@ -667,7 +670,7 @@ export const Environments: Record<string, EnvironmentData> = {
     Cave: {
         [Region.kanto]: new Set([37, 39, 'Pewter City', 'Diglett\'s Cave', 'Mt. Moon', 'Rock Tunnel', 'Victory Road', 'Lost Cave', 'Altering Cave', 'Tanoby Ruins']),
         [Region.johto]: new Set(['Cianwood City', 'Ruins of Alph', 'Union Cave', 'Mt. Mortar', 'Dark Cave', 'Tohjo Falls', 'Victory Road Johto']),
-        [Region.hoenn]: new Set(['Rustboro City', 'Dewford Town', 'Rusturf Tunnel', 'Granite Cave', 'Meteor Falls', 'Jagged Pass', 'Seafloor Cavern', 'Victory Road Hoenn', 135]),
+        [Region.hoenn]: new Set(['Rustboro City', 'Dewford Town', 'Rusturf Tunnel', 'Granite Cave', 'Meteor Falls', 'Jagged Pass', 'Seafloor Cavern', 'Victory Road Hoenn', 135, 'Pyrite Cave', 'Relic Cave', 'The Under']),
         [Region.sinnoh]: new Set(['Oreburgh City', 'Oreburgh Gate', 'Wayward Cave', 'Mt. Coronet', 'Mt. Coronet South', 'Iron Island', 'Mt. Coronet North', 'Victory Road Sinnoh']),
         [Region.unova]: new Set(['Relic Castle', 'Relic Passage', 'Seaside Cave', 'Victory Road Unova', 'Twist Mountain']),
         [Region.kalos]: new Set([9, 13, 'Connecting Cave', 'Kiloude City', 'Terminus Cave', 'Victory Road Kalos']),
@@ -678,7 +681,7 @@ export const Environments: Record<string, EnvironmentData> = {
     GemCave: {
         [Region.kanto]: new Set(['Viridian City', 'Cerulean Cave', 'Sunburst Island']),
         [Region.johto]: new Set(['Blackthorn City', 'Mt. Silver', 'Whirl Islands']),
-        [Region.hoenn]: new Set(['Cave of Origin', 'Sky Pillar', 'Sealed Chamber', 137]),
+        [Region.hoenn]: new Set(['Cave of Origin', 'Sky Pillar', 'Sealed Chamber', 137, 'Deep Colosseum', 'Under Colosseum']),
         [Region.sinnoh]: new Set(['Spear Pillar', 'Hall of Origin']),
         [Region.unova]: new Set(['Chargestone Cave', 'Mistralton Cave', 'Cave of Being']),
         [Region.kalos]: new Set(['Glittering Cave', 'Reflection Cave']),
@@ -689,7 +692,7 @@ export const Environments: Record<string, EnvironmentData> = {
     PowerPlant: {
         [Region.kanto]: new Set(['Vermilion City', 'Rocket Game Corner', 'Power Plant']),
         [Region.johto]: new Set(['Tin Tower', 'Team Rocket\'s Hideout', 'Radio Tower']),
-        [Region.hoenn]: new Set(['Mauville City', 'New Mauville', 'Weather Institute', 'Aqua Hideout', 'Near Space']),
+        [Region.hoenn]: new Set(['Mauville City', 'New Mauville', 'Weather Institute', 'Aqua Hideout', 'Near Space', 'Pyrite Colosseum', 'Cipher Lab', 'Realgam Tower Battles', 'Realgam Colosseum']),
         [Region.sinnoh]: new Set(['Sunyshore City', 'Valley Windworks', 'Team Galactic Eterna Building', 'Team Galactic HQ']),
         [Region.unova]: new Set(['Castelia Sewers', 'Virbank City', 'Nimbasa City', 'A Totally Unsuspicious Frigate', 'Plasma Frigate']),
         [Region.kalos]: new Set(['Lumiose City', 'Kalos Power Plant', 'Poké Ball Factory', 'Team Flare Secret HQ']),
@@ -700,7 +703,7 @@ export const Environments: Record<string, EnvironmentData> = {
     Mansion: {
         [Region.kanto]: new Set(['Silph Co.', 'Pokémon Mansion']),
         [Region.johto]: new Set(['Olivine City', 'Sprout Tower', 'Burned Tower']),
-        [Region.hoenn]: new Set(['Petalburg City', 'Pyrite Building']),
+        [Region.hoenn]: new Set(['Petalburg City', 'Phenac City Battles', 'Pyrite Town Battles', 'Pyrite Building', 'Snagem Hideout', 'Phenac Stadium', 'Orre Colosseum']),
         [Region.sinnoh]: new Set(['Veilstone City', 'Canalave City', 'Snowpoint Temple']),
         [Region.unova]: new Set(['Castelia City', 'Mistralton City', 'Opelucid City', 'Liberty Garden', 'Dragonspiral Tower', 'Dreamyard']),
         [Region.kalos]: new Set(['Parfum Palace', 'Lost Hotel']),
@@ -865,6 +868,40 @@ export enum PokemonItemType {
     'Meloetta (Pirouette)',
     'Type: Null',
     'Poipole',
+    'Silvally (Fighting) 1',
+    'Silvally (Rock) 1',
+    'Silvally (Dark) 1',
+    'Silvally (Fairy) 1',
+    'Silvally (Water) 1',
+    'Silvally (Grass) 1',
+    'Silvally (Fire) 1',
+    'Silvally (Electric) 1',
+    'Silvally (Ice) 1',
+    'Silvally (Ground) 1',
+    'Silvally (Bug) 1',
+    'Silvally (Flying) 1',
+    'Silvally (Poison) 1',
+    'Silvally (Ghost) 1',
+    'Silvally (Psychic) 1',
+    'Silvally (Steel) 1',
+    'Silvally (Dragon) 1',
+    'Silvally (Fighting) 2',
+    'Silvally (Rock) 2',
+    'Silvally (Dark) 2',
+    'Silvally (Fairy) 2',
+    'Silvally (Water) 2',
+    'Silvally (Grass) 2',
+    'Silvally (Fire) 2',
+    'Silvally (Electric) 2',
+    'Silvally (Ice) 2',
+    'Silvally (Ground) 2',
+    'Silvally (Bug) 2',
+    'Silvally (Flying) 2',
+    'Silvally (Poison) 2',
+    'Silvally (Ghost) 2',
+    'Silvally (Psychic) 2',
+    'Silvally (Steel) 2',
+    'Silvally (Dragon) 2',
     'Dracozolt',
     'Arctozolt',
     'Dracovish',
@@ -1136,6 +1173,14 @@ export const OrangeGyms = [
     'Kumquat Island',
     'Supreme Gym Leader Drake',
 ];
+
+export const OrreGyms = [
+    'Cipher Admin Ein',
+    'Cipher Admin Miror B.',
+    'Cipher Admin Dakim',
+    'Cipher Admin Venus',
+];
+
 export const MagikarpJumpGyms = [
     'Friend League',
     'Quick League',
@@ -1162,6 +1207,7 @@ export const RegionGyms = [
     // Keep it at the bottom, as we want optional badges at the bottom
     OrangeGyms,
     MagikarpJumpGyms,
+    OrreGyms,
 ];
 
 export function getGymIndex(gym: string): number {
@@ -1238,20 +1284,20 @@ export const HoennDungeons = [
     'Near Space',
     'Phenac City Battles',
     'Pyrite Town Battles',
-    'Pyrite Colosseum Battles',
+    'Pyrite Colosseum',
     'Pyrite Building',
     'Pyrite Cave',
     'Relic Cave',
-    'Mt. Battle Battles',
-    'The Under Subway',
-    'Cipher Lab Battles',
+    'Mt. Battle',
+    'The Under',
+    'Cipher Lab',
     'Realgam Tower Battles',
-    'Realgam Colosseum Battles',
+    'Realgam Colosseum',
     'Snagem Hideout',
-    'Deep Colosseum Battles',
-    'Phenac Stadium Battles',
-    'Under Colosseum Battles',
-    'Orre Colosseum Battles', // 72
+    'Deep Colosseum',
+    'Phenac Stadium',
+    'Under Colosseum',
+    'Orre Colosseum', // 72
     // These aren't implemented anywhere yet
     /*
     "Island Cave",
@@ -1534,6 +1580,11 @@ export const TemporaryBattles = [
     'Meta Groudon',
     'Latios',
     'Latias',
+    'Willie',
+    'Folly',
+    'Cipher Peon Doven',
+    'Cipher Peon Silton',
+    'Cipher Peon Kass',
     'Sevii Rocket Grunt 1',
     'Sevii Rocket Grunt 2',
     'Sevii Rocket Grunt 3',
@@ -1628,6 +1679,7 @@ export const TemporaryBattles = [
     'Matt 3',
     'Courtney 3',
     'Hoenn Stone Salesman',
+    'Kalos Stone Salesman',
     'Captain Stern',
     'Archie Primal',
     'Maxie Primal',
@@ -1695,6 +1747,13 @@ export const TemporaryBattles = [
     'Captain Sophocles',
     'Kahuna Nanu',
     'Gladion 3',
+    'Guzma Bug Memory',
+    'Kahili Flying Memory',
+    'Plumeria Poison Memory',
+    'Acerola Ghost Memory',
+    'Faba Psychic Memory',
+    'Molayne Steel Memory',
+    'Ryuki Dragon Memory',
     'Anabel',
     'Captain Mina UB',
     'Kahuna Nanu UB',
@@ -2078,3 +2137,31 @@ export enum MegaStoneType {
     Tyranitarite,
     Venusaurite,
 }
+
+export enum GemShops {
+    HoennFluteMaster,
+    HoennStoneSalesman,
+    UnovaFluteMaster,
+    FurfrouGemTrader,
+    KalosStoneSalesman,
+    SilvallyTrader,
+    MagikarpJumpGemTrader,
+}
+
+export enum DungeonInteractionSource {
+    Click,
+    Keybind,
+    HeldKeybind,
+}
+
+export const ModalCollapseList = [
+    'achievementTrackerBody',
+    'battleItemContainerBody',
+    'dailyQuestDisplayBody',
+    'eggList',
+    'fluteItemContainerBody',
+    'oakItemsBody',
+    'pokeballSelectorBody',
+    'pokemonListBody',
+    'shortcutsBody',
+];

@@ -15,6 +15,8 @@ import {
     DAY,
     ExtraAchievementCategories,
     camelCaseToString,
+    ModalCollapseList,
+    getDungeonIndex,
 } from '../GameConstants';
 import HotkeySetting from './HotkeySetting';
 import Language, { LanguageNames } from '../translation/Language';
@@ -24,6 +26,8 @@ import PokemonType from '../enums/PokemonType';
 import PokedexFilters from './PokedexFilters';
 import FilterSetting from './FilterSetting';
 import { LogBookTypes } from '../logbook/LogBookTypes';
+import QuestLineStartedRequirement from '../requirements/QuestLineStartedRequirement';
+import ClearDungeonRequirement from '../requirements/ClearDungeonRequirement';
 
 export default Settings;
 
@@ -131,10 +135,11 @@ Settings.add(new CssVariableSetting('locked', 'Locked Location', [], '#000000'))
 Settings.add(new CssVariableSetting('incomplete', 'Incomplete Area', [], '#ff9100'));
 Settings.add(new CssVariableSetting('questAtLocation', 'Quest at Location', [], '#55ff00'));
 Settings.add(new CssVariableSetting('uncaughtPokemon', 'Uncaught Pokemon', [], '#3498db'));
+Settings.add(new CssVariableSetting('uncaughtShadowPokemon', 'Uncaught Shadow Pokemon', [], '#a11131', new QuestLineStartedRequirement('Shadows in the Desert')));
 Settings.add(new CssVariableSetting('uncaughtShinyPokemonAndMissingAchievement', 'Uncaught Shiny Pokemon and Missing Achievement', [], '#c939fe'));
 Settings.add(new CssVariableSetting('uncaughtShinyPokemon', 'Uncaught Shiny Pokemon', [], '#ffee00'));
 Settings.add(new CssVariableSetting('missingAchievement', 'Missing Achievement', [], '#57e3ff'));
-Settings.add(new CssVariableSetting('missingResistant', 'Missing Resistant', [], '#ffffff'));
+Settings.add(new CssVariableSetting('missingResistant', 'Missing Resistant', [], '#ffffff', new ClearDungeonRequirement(1, getDungeonIndex('Distortion World'))));
 Settings.add(new CssVariableSetting('completed', 'Completed Location', [], '#ffffff'));
 
 // Other settings
@@ -393,3 +398,10 @@ Object.keys(LogBookTypes).forEach((logBookType) => {
 });
 
 Settings.add(new BooleanSetting('catchFilters.initialEnabled', 'New Catch Filters initially enabled', false));
+
+// Modal Collapsible Panels
+ModalCollapseList.forEach((collapse) => {
+    Settings.add(new BooleanSetting(`modalCollapse.${collapse}`, 'Modal Collapse', true));
+});
+
+
