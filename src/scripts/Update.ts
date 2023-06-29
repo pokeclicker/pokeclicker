@@ -2259,6 +2259,11 @@ class Update implements Saveable {
             saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 46);
             saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 47);
             saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 48);
+
+            // Changing MissingResistant to match new default
+            if (settingsData['--missingResistant'] === '#ffffff') {
+                settingsData['--missingResistant'] = Settings.getSetting('--missingResistant').defaultValue;
+            }
         },
     };
 
