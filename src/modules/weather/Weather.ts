@@ -48,7 +48,7 @@ export default class Weather {
                 [{ type: PokemonType.Ice, multiplier: 1.1 }]),
         [WeatherType.Blizzard]:
             new WeatherCondition(WeatherType.Blizzard, '#98d8d8', 'A howling blizzard blows.', 5,
-                [{ type: PokemonType.Ice, multiplier: 1.1 }, { type: PokemonType.Steel, multiplier: 1.1 }]),
+                [{ type: PokemonType.Ice, multiplier: 1.1 }, { type: PokemonType.Steel, multiplier: 1.1 }, { type: PokemonType.Grass, multiplier: 0.9 }]),
         [WeatherType.Sunny]:
             new WeatherCondition(WeatherType.Sunny, '#f5ac78', 'The sunlight is strong.', 10,
                 [{ type: PokemonType.Fire, multiplier: 1.1 }, { type: PokemonType.Ground, multiplier: 1.1 }]),
