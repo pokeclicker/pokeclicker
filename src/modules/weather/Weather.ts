@@ -42,7 +42,7 @@ export default class Weather {
                 [{ type: PokemonType.Water, multiplier: 1.1 }, { type: PokemonType.Bug, multiplier: 1.1 }]),
         [WeatherType.Thunderstorm]:
             new WeatherCondition(WeatherType.Thunderstorm, '#a19288', 'It\'s currently raining heavily with thunder.', 5,
-                [{ type: PokemonType.Electric, multiplier: 1.1 }, { type: PokemonType.Water, multiplier: 1.10 }, { type: PokemonType.Dragon, multiplier: 1.1 }]),
+                [{ type: PokemonType.Electric, multiplier: 1.1 }, { type: PokemonType.Water, multiplier: 1.1 }, { type: PokemonType.Dragon, multiplier: 1.1 }, { type: PokemonType.Fire, multiplier: 0.9 }]),
         [WeatherType.Snow]:
             new WeatherCondition(WeatherType.Snow, '#bbe6e6', 'It\'s cold and snowing.', 10,
                 [{ type: PokemonType.Ice, multiplier: 1.1 }]),
