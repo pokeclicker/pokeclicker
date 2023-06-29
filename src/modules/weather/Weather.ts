@@ -51,7 +51,7 @@ export default class Weather {
                 [{ type: PokemonType.Ice, multiplier: 1.1 }, { type: PokemonType.Steel, multiplier: 1.1 }, { type: PokemonType.Grass, multiplier: 0.9 }]),
         [WeatherType.Sunny]:
             new WeatherCondition(WeatherType.Sunny, '#f5ac78', 'The sunlight is strong.', 10,
-                [{ type: PokemonType.Fire, multiplier: 1.1 }, { type: PokemonType.Ground, multiplier: 1.1 }]),
+                [{ type: PokemonType.Fire, multiplier: 1.1 }, { type: PokemonType.Ground, multiplier: 1.1 }, { type: PokemonType.Water, multiplier: 0.9 }]),
         [WeatherType.Sandstorm]:
             new WeatherCondition(WeatherType.Sandstorm, '#d1c07d', 'A sandstorm is raging.', 10,
                 [{ type: PokemonType.Rock, multiplier: 1.1 }, { type: PokemonType.Ground, multiplier: 1.1 }]),
