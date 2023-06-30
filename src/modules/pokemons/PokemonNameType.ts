@@ -705,6 +705,7 @@ export type PokemonNameType
     | 'Lopunny'
     | 'Mega Lopunny'
     | 'Mismagius'
+    | 'Mismagius (Illusion)'
     | 'Honchkrow'
     | 'Glameow'
     | 'Purugly'

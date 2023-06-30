@@ -13477,6 +13477,23 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 429.01,
+        'name': 'Mismagius (Illusion)',
+        'type': [PokemonType.Ghost],
+        'eggCycles': 25,
+        'levelType': LevelType.fast,
+        'exp': 173,
+        'catchRate': 45,
+        'base': {
+            'hitpoints': 60,
+            'attack': 60,
+            'specialAttack': 105,
+            'defense': 60,
+            'specialDefense': 105,
+            'speed': 105,
+        },
+    },
+    {
         'id': 430,
         'name': 'Honchkrow',
         'type': [PokemonType.Dark, PokemonType.Flying],

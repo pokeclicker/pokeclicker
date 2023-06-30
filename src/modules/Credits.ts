@@ -299,6 +299,7 @@ export const SpriteCredits: Credit[] = [
             'Meteorite',
             'Milcery (Cheesy)',
             'Miror B.',
+            'Mismagius (Illusion)',
             'Mr Stone',
             'Peat Block',
             'Pinkan Arbok',
