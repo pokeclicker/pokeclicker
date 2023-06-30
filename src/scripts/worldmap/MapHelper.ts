@@ -161,7 +161,7 @@ class MapHelper {
                 states.push(areaStatus.questAtLocation);
             } else if (!RouteHelper.listCompleted(possiblePokemon, false)) {
                 states.push(areaStatus.uncaughtPokemon);
-            } else if (Settings.getSetting(`--${areaStatus[areaStatus.missingResistant]}`).isUnlocked()
+            } else if (Settings.getSetting(`--${areaStatus[areaStatus.uncaughtShadowPokemon]}`).isUnlocked()
                 && shadowPokemon.some(pokemon => App.game.party.getPokemonByName(pokemon)?.shadow < GameConstants.ShadowStatus.Shadow)) {
                 states.push(areaStatus.uncaughtShadowPokemon);
             } else if (!RouteHelper.listCompleted(possiblePokemon, true)) {

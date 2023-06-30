@@ -185,7 +185,7 @@ class Dungeon {
      * Gets all available Pokemon in the dungeon
      */
     public allAvailablePokemon(): PokemonNameType[] {
-        const encounterInfo = [];
+        const encounterInfo = this.allAvailableShadowPokemon();
 
         // Handling minions
         this.enemyList.forEach((enemy) => {
