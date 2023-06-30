@@ -8335,7 +8335,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 175,
         'eggCycles': 25,
-        //'evolutions': [MegaEvolution(MegaStoneType.Scizorite, 'Scizor', 'Mega Scizor')],
+        'evolutions': [MegaEvolution(MegaStoneType.Scizorite, 'Scizor', 'Mega Scizor')],
         'base': {
             'hitpoints': 70,
             'attack': 130,
