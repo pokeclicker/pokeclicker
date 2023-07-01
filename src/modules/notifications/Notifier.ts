@@ -127,18 +127,12 @@ export default class Notifier {
                 <input class="outline-dark form-control" placeholder="Type here.." id="promptInput${modalID}" type="text">
             </div>
             <div class="modal-footer p-2">
-                <button class="btn btn-block outline-dark btn-${NotificationOption[type]}" data-dismiss="modal">Submit</button>
+                <button id="promptConfirm${modalID}" class="btn btn-block outline-dark btn-${NotificationOption[type]}" data-dismiss="modal">Submit</button>
             </div>
         </div>
     </div>
 </div>`;
             $('#toaster').before(html);
-
-            (document.getElementById(`promptInput${modalID}`) as HTMLInputElement).addEventListener('keyup', ({ key }) => {
-                if (key === 'Enter') {
-                    $(`#modal${modalID}`).modal('hide');
-                }
-            });
 
             $(`#modal${modalID}`).modal({
                 backdrop: 'static',
@@ -155,13 +149,29 @@ export default class Notifier {
                 }
             });
 
-            // Once hidden remove the element
-            $(`#modal${modalID}`).on('hidden.bs.modal', () => {
-                const inputEl = document.getElementById(`promptInput${modalID}`) as HTMLInputElement;
-                const inputValue = inputEl?.value;
-                document.getElementById(`modal${modalID}`).remove();
-                resolve(inputValue);
+            const promptCheck = () => {
+                // Once hidden remove the element
+                $(`#modal${modalID}`).on('hidden.bs.modal', () => {
+                    const inputEl = document.getElementById(`promptInput${modalID}`) as HTMLInputElement;
+                    const inputValue = inputEl?.value;
+                    document.getElementById(`modal${modalID}`).remove();
+                    resolve(inputValue);
+                });
+            };
+
+            // Enter key listener
+            (document.getElementById(`promptInput${modalID}`) as HTMLInputElement).addEventListener('keyup', ({ key }) => {
+                if (key === 'Enter') {
+                    $(`#modal${modalID}`).modal('hide');
+                    promptCheck();
+                }
             });
+
+            // Submit button listener
+            (document.getElementById(`promptConfirm${modalID}`) as HTMLInputElement).addEventListener('click', () => {
+                promptCheck();
+            });
+            
         });
     }
 
