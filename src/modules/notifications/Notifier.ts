@@ -138,6 +138,9 @@ export default class Notifier {
                 if (key === 'Enter') {
                     $(`#modal${modalID}`).modal('hide');
                 }
+                if (key === 'Escape') {
+                    $(`#promptInput${modalID}`).val('');
+                }
             });
 
             $(`#modal${modalID}`).modal({
