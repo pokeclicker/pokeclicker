@@ -116,7 +116,7 @@ export default class Notifier {
         <div class="modal-content">
             <div class="modal-header modal-header pb-0 pt-2 px-2 bg-${NotificationOption[type]}">
                 <h5>${title}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button id="promptClose${modalID}" type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -127,12 +127,18 @@ export default class Notifier {
                 <input class="outline-dark form-control" placeholder="Type here.." id="promptInput${modalID}" type="text">
             </div>
             <div class="modal-footer p-2">
-                <button id="promptConfirm${modalID}" class="btn btn-block outline-dark btn-${NotificationOption[type]}" data-dismiss="modal">Submit</button>
+                <button class="btn btn-block outline-dark btn-${NotificationOption[type]}" data-dismiss="modal">Submit</button>
             </div>
         </div>
     </div>
 </div>`;
             $('#toaster').before(html);
+
+            (document.getElementById(`promptInput${modalID}`) as HTMLInputElement).addEventListener('keyup', ({ key }) => {
+                if (key === 'Enter') {
+                    $(`#modal${modalID}`).modal('hide');
+                }
+            });
 
             $(`#modal${modalID}`).modal({
                 backdrop: 'static',
@@ -149,27 +155,17 @@ export default class Notifier {
                 }
             });
 
-            const promptCheck = () => {
-                // Once hidden remove the element
-                $(`#modal${modalID}`).on('hidden.bs.modal', () => {
-                    const inputEl = document.getElementById(`promptInput${modalID}`) as HTMLInputElement;
-                    const inputValue = inputEl?.value;
-                    document.getElementById(`modal${modalID}`).remove();
-                    resolve(inputValue);
-                });
-            };
-
-            // Enter key listener
-            (document.getElementById(`promptInput${modalID}`) as HTMLInputElement).addEventListener('keyup', ({ key }) => {
-                if (key === 'Enter') {
-                    $(`#modal${modalID}`).modal('hide');
-                    promptCheck();
-                }
+            // Clean the input if the player closes the modal with the X
+            (document.getElementById(`promptClose${modalID}`) as HTMLInputElement).addEventListener('click', () => {
+                $(`#promptInput${modalID}`).val('');
             });
 
-            // Submit button listener
-            (document.getElementById(`promptConfirm${modalID}`) as HTMLInputElement).addEventListener('click', () => {
-                promptCheck();
+            // Once hidden remove the element
+            $(`#modal${modalID}`).on('hidden.bs.modal', () => {
+                const inputEl = document.getElementById(`promptInput${modalID}`) as HTMLInputElement;
+                const inputValue = inputEl?.value;
+                document.getElementById(`modal${modalID}`).remove();
+                resolve(inputValue);
             });
             
         });
