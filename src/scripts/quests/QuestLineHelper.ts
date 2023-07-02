@@ -2281,13 +2281,8 @@ class QuestLineHelper {
                 talkToAkalaLocals,
                 talkToUlaulaLocals,
                 talkToPoniLocals,
-            ], 'Start your search for Silvally\'s memories by asking important people around Alola.',
-            () => { //TODO: remove when rewards in subquests works
-                ItemList.Fighting_Memory_Silvally.gain(1);
-                ItemList.Rock_Memory_Silvally.gain(1);
-                ItemList.Dark_Memory_Silvally.gain(1);
-                ItemList.Fairy_Memory_Silvally.gain(1);
-            }));
+            ], 'Start your search for Silvally\'s memories by asking important people around Alola.'
+        ));
 
         const talkToGladion2 = new TalkToNPCQuest(SilvallyGladion2, 'Talk to Gladion in the Aether Foundation and tell him what you found out about Silvally\'s memories.');
         SilvallyTypesQuestLine.addQuest(talkToGladion2);
