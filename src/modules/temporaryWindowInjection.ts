@@ -186,6 +186,7 @@ import SafariBaitRequirement from './requirements/SafariBaitRequirement';
 import SafariStepsRequirement from './requirements/SafariStepsRequirement';
 import SafariRocksRequirement from './requirements/SafariRocksRequirement';
 import SafariItemsRequirement from './requirements/SafariItemsRequirement';
+import SafariCatchRequirement from './requirements/SafariCatchRequirement';
 import ItemRequirement from './requirements/ItemRequirement';
 
 Object.assign(<any>window, {
