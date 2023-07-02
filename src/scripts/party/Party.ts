@@ -172,7 +172,7 @@ class Party implements Feature {
         return Math.round(attack * bonus);
     }
 
-    public calculateOnePokemonAttack(pokemon: PartyPokemon, type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, region: GameConstants.Region = player.region, ignoreRegionMultiplier = false, includeBreeding = false, useBaseAttack = false, overrideWeather: WeatherType, ignoreLevel = false, includeFlute = true): number {
+    public calculateOnePokemonAttack(pokemon: PartyPokemon, type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, region: GameConstants.Region = player.region, ignoreRegionMultiplier = false, includeBreeding = false, useBaseAttack = false, overrideWeather: WeatherType, ignoreLevel = false, includeFluteZMoves = true): number {
         let multiplier = 1, attack = 0;
         const pAttack = useBaseAttack ? pokemon.baseAttack : (ignoreLevel ? pokemon.calculateAttack(ignoreLevel) : pokemon.attack);
         const nativeRegion = PokemonHelper.calcNativeRegion(pokemon.name);
@@ -209,7 +209,7 @@ class Party implements Feature {
         });
 
         // Should we take flute boost into account
-        if (includeFlute) {
+        if (includeFluteZMoves) {
             const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
             FluteEffectRunner.activeGemTypes().forEach(value => {
                 if (value == dataPokemon.type1) {
@@ -219,6 +219,7 @@ class Party implements Feature {
                     attack *= GameConstants.FLUTE_TYPE_ATTACK_MULTIPLIER;
                 }
             });
+            attack *= App.game.zMoves.getMultiplier(dataPokemon.type1, dataPokemon.type2);
         }
 
         return attack;
