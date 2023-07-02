@@ -2244,6 +2244,26 @@ class Update implements Saveable {
 
             //Kalos Stone Salesman battle
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 147);
+
+            //Silvally Types
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 215);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 216);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 217);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 218);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 219);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 220);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 221);
+
+            // Adding Orre badges
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 45);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 46);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 47);
+            saveData.badgeCase = Update.moveIndex(saveData.badgeCase, 48);
+
+            // Changing MissingResistant to match new default
+            if (settingsData['--missingResistant'] === '#ffffff') {
+                settingsData['--missingResistant'] = Settings.getSetting('--missingResistant').defaultValue;
+            }
         },
     };
 

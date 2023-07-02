@@ -185,7 +185,7 @@ class Dungeon {
      * Gets all available Pokemon in the dungeon
      */
     public allAvailablePokemon(): PokemonNameType[] {
-        const encounterInfo = [];
+        const encounterInfo = this.allAvailableShadowPokemon();
 
         // Handling minions
         this.enemyList.forEach((enemy) => {
@@ -225,6 +225,35 @@ class Dungeon {
 
         this.getCaughtMimics().forEach((mimic) => encounterInfo.push(mimic));
 
+        return encounterInfo;
+    }
+
+    public allAvailableShadowPokemon(): PokemonNameType[] {
+        const encounterInfo = [];
+        this.enemyList.forEach(enemy => {
+            if (enemy instanceof DungeonTrainer) {
+                if (enemy.options?.requirement?.isCompleted() === false) {
+                    return;
+                }
+                enemy.getTeam().forEach(pokemon => {
+                    if (pokemon.shadow == GameConstants.ShadowStatus.Shadow) {
+                        encounterInfo.push(pokemon.name);
+                    }
+                });
+            }
+        });
+        this.bossList.forEach(boss => {
+            if (boss instanceof DungeonTrainer) {
+                if (boss.options?.requirement?.isCompleted() === false) {
+                    return;
+                }
+                boss.getTeam().forEach(pokemon => {
+                    if (pokemon.shadow == GameConstants.ShadowStatus.Shadow) {
+                        encounterInfo.push(pokemon.name);
+                    }
+                });
+            }
+        });
         return encounterInfo;
     }
 
@@ -3578,21 +3607,21 @@ dungeonList['Near Space'] = new Dungeon('Near Space',
 
 dungeonList['Phenac City Battles'] = new Dungeon('Phenac City Battles',
     [
-        new DungeonTrainer('Shady Guy',
+        new DungeonTrainer('Peon',
             [
                 new GymPokemon('Whismur', 38000, 24),
                 new GymPokemon('Whismur', 38000, 25),
-            ], { weight: 1, requirement: new ClearDungeonRequirement(25, GameConstants.getDungeonIndex('Phenac City Battles'), GameConstants.AchievementOption.less)}, 'Folly', '(female)'),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(25, GameConstants.getDungeonIndex('Phenac City Battles'), GameConstants.AchievementOption.less)}, 'Folly', '(folly)'),
         new DungeonTrainer('Team Snagem',
             [
                 new GymPokemon('Corphish', 38000, 25),
                 new GymPokemon('Koffing', 38000, 27),
             ], { weight: 1, requirement: new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Phenac City Battles'), GameConstants.AchievementOption.less)}, 'Wakin'),
-        new DungeonTrainer('Shady Guy',
+        new DungeonTrainer('Peon',
             [
                 new GymPokemon('Whismur', 38000, 26),
                 new GymPokemon('Lotad', 38000, 25),
-            ], { weight: 1, requirement: new ClearDungeonRequirement(75, GameConstants.getDungeonIndex('Phenac City Battles'), GameConstants.AchievementOption.less)}, 'Folly', '(female)'),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(75, GameConstants.getDungeonIndex('Phenac City Battles'), GameConstants.AchievementOption.less)}, 'Folly', '(folly)'),
         new DungeonTrainer('Mystery Troop Green',
             [
                 new GymPokemon('Grimer', 38000, 26),
@@ -3611,11 +3640,11 @@ dungeonList['Phenac City Battles'] = new Dungeon('Phenac City Battles',
                 new GymPokemon('Spoink', 38000, 24),
                 new GymPokemon('Croconaw', 38000, 30, undefined, undefined, GameConstants.ShadowStatus.Shadow),
             ], { weight: 0.25}, 'Bluno'),
-        new DungeonTrainer('Shady Guy',
+        new DungeonTrainer('Peon',
             [
                 new GymPokemon('Exploud', 38000, 53),
                 new GymPokemon('Ludicolo', 38000, 55),
-            ], { weight: 1, requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Phenac City Battles'), GameConstants.AchievementOption.less)}, 'Folly', '(female)'),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Phenac City Battles'), GameConstants.AchievementOption.less)}, 'Folly', '(folly)'),
         new DungeonTrainer('Peon',
             [
                 new GymPokemon('Dusclops', 38000, 54),
@@ -4563,7 +4592,7 @@ dungeonList['Realgam Tower Battles'] = new Dungeon('Realgam Tower Battles',
                 new GymPokemon('Rhydon', 1100000, 50),
                 new GymPokemon('Starmie', 1100000, 49),
                 new GymPokemon('Manectric', 1100000, 50),
-            ], { weight: 1 }, 'Ein', '(ein)'),
+            ], { weight: 1, requirement: new QuestLineCompletedRequirement('Shadows in the Desert', GameConstants.AchievementOption.less) }, 'Ein', '(ein)'),
         new DungeonTrainer('Cipher Admin',
             [
                 new GymPokemon('Ludicolo', 1100000, 44),
@@ -4571,7 +4600,7 @@ dungeonList['Realgam Tower Battles'] = new Dungeon('Realgam Tower Battles',
                 new GymPokemon('Loudred', 1100000, 46),
                 new GymPokemon('Golduck', 1100000, 45),
                 new GymPokemon('Armaldo', 1100000, 43),
-            ], { weight: 1 }, 'Miror B.', '(miror b)'),
+            ], { weight: 1, requirement: new QuestLineCompletedRequirement('Shadows in the Desert', GameConstants.AchievementOption.less) }, 'Miror B.', '(miror b)'),
         new DungeonTrainer('Cipher Admin',
             [
                 new GymPokemon('Claydol', 1100000, 46),
@@ -4579,7 +4608,7 @@ dungeonList['Realgam Tower Battles'] = new Dungeon('Realgam Tower Battles',
                 new GymPokemon('Flygon', 1100000, 46),
                 new GymPokemon('Whiscash', 1100000, 46),
                 new GymPokemon('Houndoom', 1100000, 47),
-            ], { weight: 1 }, 'Dakim', '(dakim)'),
+            ], { weight: 1, requirement: new QuestLineCompletedRequirement('Shadows in the Desert', GameConstants.AchievementOption.less) }, 'Dakim', '(dakim)'),
         new DungeonTrainer('Cipher Admin',
             [
                 new GymPokemon('Bellossom', 1100000, 47),
@@ -4587,7 +4616,7 @@ dungeonList['Realgam Tower Battles'] = new Dungeon('Realgam Tower Battles',
                 new GymPokemon('Raichu', 1100000, 48),
                 new GymPokemon('Wigglytuff', 1100000, 48),
                 new GymPokemon('Milotic', 1100000, 48),
-            ], { weight: 1 }, 'Venus', '(venus)'),
+            ], { weight: 1,  requirement: new QuestLineCompletedRequirement('Shadows in the Desert', GameConstants.AchievementOption.less) }, 'Venus', '(venus)'),
         new DungeonTrainer('Snagem Head',
             [
                 new GymPokemon('Crawdaunt', 1100000, 47),
@@ -5087,18 +5116,124 @@ dungeonList['Phenac Stadium'] = new Dungeon('Phenac Stadium',
     89500, 134);
 
 dungeonList['Under Colosseum'] = new Dungeon('Under Colosseum',
-    [],
-    {},
-    660000,
-    [],
-    56000, 134);
+    [
+        new DungeonTrainer('School Kid',
+            [
+                new GymPokemon('Dustox', 91500, 50, new ClearDungeonRequirement(10, GameConstants.getDungeonIndex('Under Colosseum'), GameConstants.AchievementOption.less)),
+                new GymPokemon('Yanma', 91500, 50, new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Under Colosseum'), GameConstants.AchievementOption.less)),
+                new GymPokemon('Ariados', 91500, 50, new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Under Colosseum'), GameConstants.AchievementOption.less)),
+                new GymPokemon('Rhyhorn', 91500, 50),
+                new GymPokemon('Grovyle', 91500, 50),
+                new GymPokemon('Masquerain', 91500, 50),
+            ], { weight: 1}, 'Sainz', '(male)'),
+        new DungeonTrainer('Teacher',
+            [
+                new GymPokemon('Delcatty', 91500, 50, new ClearDungeonRequirement(10, GameConstants.getDungeonIndex('Under Colosseum'), GameConstants.AchievementOption.less)),
+                new GymPokemon('Beautifly', 91500, 50, new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Under Colosseum'), GameConstants.AchievementOption.less)),
+                new GymPokemon('Roselia', 91500, 50, new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Under Colosseum'), GameConstants.AchievementOption.less)),
+                new GymPokemon('Mawile', 91500, 50),
+                new GymPokemon('Luvdisc', 91500, 50),
+                new GymPokemon('Kirlia', 91500, 50),
+            ], { weight: 1}, 'Foshe'),
+        new DungeonTrainer('Bodybuilder',
+            [
+                new GymPokemon('Lunatone', 91500, 50, new ClearDungeonRequirement(10, GameConstants.getDungeonIndex('Under Colosseum'), GameConstants.AchievementOption.less)),
+                new GymPokemon('Metang', 91500, 50, new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Under Colosseum'), GameConstants.AchievementOption.less)),
+                new GymPokemon('Electrode', 91500, 50, new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Under Colosseum'), GameConstants.AchievementOption.less)),
+                new GymPokemon('Wailord', 91500, 50),
+                new GymPokemon('Piloswine', 91500, 50),
+                new GymPokemon('Illumise', 91500, 50),
+            ], { weight: 1}, 'Glya', '(female)'),
+        new DungeonTrainer('Rider',
+            [
+                new GymPokemon('Shuckle', 91500, 50, new ClearDungeonRequirement(10, GameConstants.getDungeonIndex('Under Colosseum'), GameConstants.AchievementOption.less)),
+                new GymPokemon('Murkrow', 91500, 50, new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Under Colosseum'), GameConstants.AchievementOption.less)),
+                new GymPokemon('Misdreavus', 91500, 50, new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Under Colosseum'), GameConstants.AchievementOption.less)),
+                new GymPokemon('Azumarill', 91500, 50),
+                new GymPokemon('Breloom', 91500, 50),
+                new GymPokemon('Wobbuffet', 91500, 50),
+            ], { weight: 1}, 'Fokil', '(male)'),
+        new DungeonTrainer('Reporter',
+            [
+                new GymPokemon('Castform', 91500, 50, new ClearDungeonRequirement(10, GameConstants.getDungeonIndex('Under Colosseum'), GameConstants.AchievementOption.less)),
+                new GymPokemon('Torkoal', 91500, 50, new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Under Colosseum'), GameConstants.AchievementOption.less)),
+                new GymPokemon('Glalie', 91500, 50, new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Under Colosseum'), GameConstants.AchievementOption.less)),
+                new GymPokemon('Jumpluff', 91500, 50),
+                new GymPokemon('Sealeo', 91500, 50),
+                new GymPokemon('Lanturn', 91500, 50),
+            ], { weight: 1}, 'Sclim'),
+        new DungeonTrainer('Hunter',
+            [
+                new GymPokemon('Forretress', 91500, 50, new ClearDungeonRequirement(10, GameConstants.getDungeonIndex('Under Colosseum'), GameConstants.AchievementOption.less)),
+                new GymPokemon('Cacturne', 91500, 50, new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Under Colosseum'), GameConstants.AchievementOption.less)),
+                new GymPokemon('Skarmory', 91500, 50, new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Under Colosseum'), GameConstants.AchievementOption.less)),
+                new GymPokemon('Sandslash', 91500, 50),
+                new GymPokemon('Camerupt', 91500, 50),
+                new GymPokemon('Magcargo', 91500, 50),
+            ], { weight: 1}, 'Rina', '(female)'),
+        new DungeonTrainer('Rider',
+            [
+                new GymPokemon('Tentacruel', 91500, 50, new ClearDungeonRequirement(10, GameConstants.getDungeonIndex('Under Colosseum'), GameConstants.AchievementOption.less)),
+                new GymPokemon('Cradily', 91500, 50, new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Under Colosseum'), GameConstants.AchievementOption.less)),
+                new GymPokemon('Hariyama', 91500, 50, new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Under Colosseum'), GameConstants.AchievementOption.less)),
+                new GymPokemon('Zangoose', 91500, 50),
+                new GymPokemon('Grumpig', 91500, 50),
+                new GymPokemon('Absol', 91500, 50),
+            ], { weight: 1}, 'Kou', '(female)'),
+        new DungeonTrainer('Bandana Guy',
+            [
+                new GymPokemon('Armaldo', 91500, 50, new ClearDungeonRequirement(10, GameConstants.getDungeonIndex('Under Colosseum'), GameConstants.AchievementOption.less)),
+                new GymPokemon('Exploud', 91500, 50, new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Under Colosseum'), GameConstants.AchievementOption.less)),
+                new GymPokemon('Aggron', 91500, 50, new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Under Colosseum'), GameConstants.AchievementOption.less)),
+                new GymPokemon('Rhydon', 91500, 50),
+                new GymPokemon('Tropius', 91500, 50),
+                new GymPokemon('Seviper', 91500, 50),
+            ], { weight: 1}, 'Roblin'),
+    ],
+    {
+        common: [
+            {loot: 'xAttack'},
+            {loot: 'Pokeball'},
+        ],
+        rare: [
+            {loot: 'Blue Shard'},
+            {loot: 'Purple Shard'},
+            {loot: 'Ochre Shard'},
+        ],
+        epic: [
+            {loot: 'Persim'},
+            {loot: 'Sitrus'},
+            {loot: 'Joy_Scent', ignoreDebuff : true},
+        ],
+        legendary: [
+            {loot: 'Lum', requirement: new ClearDungeonRequirement(50, GameConstants.getDungeonIndex('Under Colosseum'))},
+            {loot: 'Excite_Scent', ignoreDebuff : true},
+        ],
+        mythic: [
+            {loot: 'Muscle_Band', requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Under Colosseum'))},
+            {loot: 'Vivid_Scent', ignoreDebuff : true},
+        ],
+    },
+    1603000,
+    [
+        new DungeonTrainer('Shady Guy',
+            [
+                new GymPokemon('Armaldo', 2100000, 68),
+                new GymPokemon('Milotic', 2100000, 68),
+                new GymPokemon('Manectric', 2100000, 68),
+                new GymPokemon('Houndoom', 2100000, 68),
+                new GymPokemon('Gyarados', 2100000, 68),
+                new GymPokemon('Togetic', 2100000, 70, undefined, undefined, GameConstants.ShadowStatus.Shadow),
+            ], { weight: 1 }, 'Fein', '(male)'),
+    ],
+    91500, 134);
 
-dungeonList['Orre Colosseum'] = new Dungeon('Orre Colosseum',
+dungeonList['Orre Colosseum'] = new Dungeon('Orre Colosseum', // To be used for XD content, not Colosseum
     [],
     {},
-    680000,
+    1603000,
     [],
-    58000, 134);
+    91500, 134);
 
 // Sinnoh
 

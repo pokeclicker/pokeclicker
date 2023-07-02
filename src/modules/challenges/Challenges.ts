@@ -16,7 +16,7 @@ export default class Challenges implements Saveable {
         disableGems: new Challenge('No Gem', 'Disables the usage of Gems to increase damage multipliers'),
         disableVitamins: new Challenge('No Vitamins', 'Disables the usage of Vitamins'),
         slowEVs: new Challenge('Slow EVs', 'Gain EVs 10x slower'),
-        realEvolutions: new Challenge('Real evolutions', 'Your Pokémon go away, when they evolve'),
+        realEvolutions: new Challenge('Real evolutions', 'Your Pokémon go away when they evolve'),
     };
 
     fromJSON(json): void {
