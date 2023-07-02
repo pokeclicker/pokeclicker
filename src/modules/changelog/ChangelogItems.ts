@@ -35,6 +35,7 @@ const ChangelogItems = [
     new Changelog(changelogType.FIXED, 'Various performance optimizations'),
     new Changelog(changelogType.FIXED, 'Pokedex & Hatchery filtering now works with party nickname'),
     new Changelog(changelogType.FIXED, 'Broken Gym Leader sprites'),
+    new Changelog(changelogType.FIXED, 'Delete save triggering if cancelled after typing DELETE'),
 
     // v0.10.11
     new ChangelogUpdate('v0.10.11', new Date(2023, 4, 7)),
