@@ -2698,6 +2698,104 @@ TemporaryBattleList['Rampaging Yveltal'] = new TemporaryBattle(
         returnTown: 'Shalour City',
     }
 );
+TemporaryBattleList['Hoopa 1'] = new TemporaryBattle(
+    'Hoopa 1',
+    [new GymPokemon('Lugia', 446974112, 80)],
+    '<i>The Unbound Hoopa casts you through a ring to a far away land, escaping for now.</i>',
+    [new QuestLineStepCompletedRequirement('Clash of Ages', 7)],
+    undefined,
+    {
+        displayName: 'Unbound Hoopa',
+        imageName: '../pokemon/720.01',
+        hideTrainer: true,
+        returnTown: 'Shalour City',
+    }
+);
+TemporaryBattleList['Hoopa 2'] = new TemporaryBattle(
+    'Hoopa 2',
+    [
+        new GymPokemon('Rayquaza', 163890507, 80),
+        new GymPokemon('Latias', 163890507, 80),
+        new GymPokemon('Latios', 163890507, 80),
+    ],
+    '<i>The Unbound Hoopa casts you through a ring to a far away land, escaping for now.</i>',
+    [new QuestLineStepCompletedRequirement('Clash of Ages', 8)],
+    undefined,
+    {
+        displayName: 'Unbound Hoopa',
+        imageName: '../pokemon/720.01',
+        hideTrainer: true,
+        returnTown: 'Lumiose City',
+    }
+);
+TemporaryBattleList['Hoopa 3'] = new TemporaryBattle(
+    'Hoopa 3',
+    [
+        new GymPokemon('Primal Groudon', 107273786, 80),
+        new GymPokemon('Primal Kyogre', 107273786, 80),
+        new GymPokemon('Kyurem', 107273786, 80),
+        new GymPokemon('Dialga', 107273786, 80),
+        new GymPokemon('Palkia', 107273786, 80),
+    ],
+    '<i>The Unbound Hoopa casts you through a ring to a far away land, escaping for now.</i>',
+    [new QuestLineStepCompletedRequirement('Clash of Ages', 9)],
+    undefined,
+    {
+        displayName: 'Unbound Hoopa',
+        imageName: '../pokemon/720.01',
+        hideTrainer: true,
+        returnTown: 'Anistar City',
+    }
+);
+TemporaryBattleList['Hoopa 4'] = new TemporaryBattle(
+    'Hoopa 4',
+    [
+        new GymPokemon('Mega Rayquaza', 193688781, 80),
+        new GymPokemon('Mega Latias', 193688781, 80),
+        new GymPokemon('Mega Latios', 193688781, 80),
+    ],
+    '<i>The Unbound Hoopa casts you through a ring to a far away land, escaping for now.</i>',
+    [new QuestLineStepCompletedRequirement('Clash of Ages', 10)],
+    undefined,
+    {
+        displayName: 'Unbound Hoopa',
+        imageName: '../pokemon/720.01',
+        hideTrainer: true,
+        returnTown: 'Laverre City',
+    }
+);
+TemporaryBattleList['Hoopa 5'] = new TemporaryBattle(
+    'Hoopa 5',
+    [
+        new GymPokemon('Kyurem (Black)', 312881878, 80),
+        new GymPokemon('Kyurem (White)', 312881878, 80),
+    ],
+    '<i>The Unbound Hoopa casts you through a ring to a far away land, escaping for now.</i>',
+    [new QuestLineStepCompletedRequirement('Clash of Ages', 11)],
+    undefined,
+    {
+        displayName: 'Unbound Hoopa',
+        imageName: '../pokemon/720.01',
+        hideTrainer: true,
+        returnTown: 'Vaniville Town',
+    }
+);
+TemporaryBattleList['Hoopa 6'] = new TemporaryBattle(
+    'Hoopa 6',
+    [new GymPokemon('Hoopa (Unbound)', 670461168, 80)],
+    '<i>The Unbound Hoopa is sucked into the Prison Bottle, and you gain control of it.</i>',
+    [new QuestLineStepCompletedRequirement('Clash of Ages', 12)],
+    undefined,
+    {
+        displayName: 'Unbound Hoopa',
+        imageName: '../pokemon/720.01',
+        hideTrainer: true,
+        returnTown: 'Kiloude City',
+        firstTimeRewardFunction: () => {
+            App.game.party.gainPokemonByName('Hoopa (Unbound)');
+        },
+    }
+);
 TemporaryBattleList['Calem 2'] = new TemporaryBattle(
     'Calem 2',
     [
