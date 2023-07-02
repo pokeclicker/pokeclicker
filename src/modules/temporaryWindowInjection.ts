@@ -384,5 +384,6 @@ Object.assign(<any>window, {
     SafariStepsRequirement,
     SafariRocksRequirement,
     SafariItemsRequirement,
+    SafariCatchRequirement,
     ItemRequirement,
 });
