@@ -47,7 +47,7 @@ class SafariBattle {
                 .then(SafariBattle.startCapture)                                   // pokemon being sucked into ball
                 .then(SafariBattle.delay(0.75 * SafariBattle.Speed.enemyTransition))
                 .then(SafariBattle.startBounce)                                    // pokeball dropping to ground
-                .then(SafariBattle.delay(Safari.safariLevel() >= 20? 1.2 : 1.7 * SafariBattle.Speed.ballBounce))
+                .then(SafariBattle.delay(1.7 * SafariBattle.Speed.ballBounce))
                 .then(SafariBattle.calcIndex)                                      // roll a dice for catching, use dice roll to determine how many pokeball rolls
                 .then(SafariBattle.delayRoll)
                 .then(SafariBattle.finishCapture);                                  // capture pokemon or break free
@@ -113,7 +113,7 @@ class SafariBattle {
                 setTimeout(() => {
                     SafariBattle.particle.remove();
                     isgameOver ? SafariBattle.gameOver() : SafariBattle.endBattle();
-                }, Safari.safariLevel() >= 20? 1.2 : 1.7 * SafariBattle.Speed.enemyTransition);
+                }, 1.7 * SafariBattle.Speed.enemyTransition);
             } else {
                 $('#safariBattleModal .enemy > img').css('opacity', '1');
                 $('#safariBattleModal .enemy').removeClass('safariCapture');
