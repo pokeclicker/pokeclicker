@@ -133,7 +133,7 @@ class SafariBattle {
         $('#safariBall').addClass('safari-roll-left');
         setTimeout(() => {
             SafariBattle.safariRoll(n - 1);
-        }, 1200);
+        }, 1200 * SafariBattle.tierMultiplier(Safari.safariLevel()));
     }
 
     private static safariRoll = function (n) {
@@ -141,7 +141,7 @@ class SafariBattle {
             $('#safariBall').toggleClass('safari-roll-left').toggleClass('safari-roll-right');
             setTimeout(() => {
                 SafariBattle.safariRoll(n - 1);
-            }, 1200);
+            }, 1200 * SafariBattle.tierMultiplier(Safari.safariLevel()));
         }
     }
 
