@@ -243,7 +243,7 @@ class SafariBattle {
         setTimeout(() => {
             SafariBattle.text('What will you do?');
             SafariBattle.busy(false);
-        }, 1500 * SafariBattle.tierMultiplier(Safari.safariLevel()));
+        }, 1500);
     }
 
     private static endBattle() {
