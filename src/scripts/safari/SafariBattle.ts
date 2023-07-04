@@ -286,7 +286,7 @@ class SafariBattle {
 
     private static tierMultiplier(level) {
         const TIERS = [0, 10, 20, 30, 40];
-        const MULTIPLIERS = [1, 0.90, 0.75, 0.57, 0.48];
+        const MULTIPLIERS = [1, 0.90, 0.75, 0.57, 0.45];
         let tier = 0;
 
         for (let i = 0; i < TIERS.length; i++) {
