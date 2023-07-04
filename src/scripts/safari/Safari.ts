@@ -313,7 +313,7 @@ class Safari {
             document.getElementById('sprite').classList.value = `walk${direction} moving`;
             Safari.playerXY.x = newPos.x;
             Safari.playerXY.y = newPos.y;
-            $('#sprite').animate(offset, 250, 'linear', () => {
+            $('#sprite').animate(offset, Safari.safariLevel() >= 30 ? 175 : 250, 'linear', () => {
                 Safari.checkBattle();
                 Safari.checkItem();
                 Safari.isMoving = false;
