@@ -7,7 +7,9 @@
                 <!-- ko if: !DungeonBattle.trainer() -->
                 <knockout data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(DungeonBattle.enemyPokemon().id)}}"></knockout>
                 <knockout style="position: relative; top: -1px;"
-                    data-bind="template: { name: 'pokerusStatusTemplate', data: { 'pokerus': PartyController.getPokerusStatus(DungeonBattle.enemyPokemon().id) }}">
+                    data-bind="template: { name: 'pokerusStatusTemplate', data: {
+                        'pokerus': PartyController.getPokerusStatus(DungeonBattle.enemyPokemon().id),
+                        'evs': App.game.party.getPokemon(DungeonBattle.enemyPokemon().id)?.evs() }}">
                 </knockout>
                 <!-- /ko -->
             </knockout>
