@@ -2212,7 +2212,8 @@ class QuestLineHelper {
         const talkToBaraz3 = new TalkToNPCQuest(Baraz3, 'That didn\'t work either. Talk to Baraz in Kiloude City.');
         clashOfAgesQuestLine.addQuest(talkToBaraz3);
 
-        const catch100Hoopa = new CaptureSpecificPokemonQuest('Hoopa', 'Catch 100 Hoopa.', 1, false, 0, undefined);
+        const hoopaID = PokemonHelper.getPokemonByName('Hoopa').id;
+        const catch100Hoopa = new CustomQuest(100, 0, 'Catch 100 Hoopa.', () => 100 * (App.game.statistics.pokemonCaptured[hoopaID]() - App.game.statistics.pokemonHatched[hoopaID]()));
         clashOfAgesQuestLine.addQuest(catch100Hoopa);
 
         const talkToBaraz4 = new TalkToNPCQuest(Baraz4, 'This is ridiculous. Talk to Baraz in Kiloude City.', () => ItemList.Prison_Bottle.gain(1));
