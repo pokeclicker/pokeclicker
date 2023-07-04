@@ -45,9 +45,9 @@ class SafariBattle {
 
             SafariBattle.delay(1.1 * SafariBattle.Speed.ballThrow * SafariBattle.tierMultiplier(Safari.safariLevel()))(0)            // throwing the ball
                 .then(SafariBattle.startCapture)                                   // pokemon being sucked into ball
-                .then(SafariBattle.delay(0.75 * SafariBattle.Speed.enemyTransition * SafariBattle.tierMultiplier(Safari.safariLevel())))
+                .then(SafariBattle.delay(0.75 * SafariBattle.Speed.enemyTransition))
                 .then(SafariBattle.startBounce)                                    // pokeball dropping to ground
-                .then(SafariBattle.delay(1.7 * SafariBattle.Speed.ballBounce * SafariBattle.tierMultiplier(Safari.safariLevel())))
+                .then(SafariBattle.delay(Safari.safariLevel() >= 20? 1 : 1.7 * SafariBattle.Speed.ballBounce))
                 .then(SafariBattle.calcIndex)                                      // roll a dice for catching, use dice roll to determine how many pokeball rolls
                 .then(SafariBattle.delayRoll)
                 .then(SafariBattle.finishCapture);                                  // capture pokemon or break free
@@ -121,7 +121,7 @@ class SafariBattle {
                 SafariBattle.particle.remove();
                 setTimeout(() => {
                     isgameOver ? SafariBattle.gameOver() : SafariBattle.enemyTurn();
-                }, 1 * SafariBattle.Speed.enemyTransition * SafariBattle.tierMultiplier(Safari.safariLevel()));
+                }, 1 * SafariBattle.Speed.enemyTransition);
             }
         });
     }
@@ -230,7 +230,7 @@ class SafariBattle {
         // Enemy turn to flee;
         if (Rand.chance(SafariBattle.enemy.escapeFactor / 100)) {
             SafariBattle.text(`${SafariBattle.enemy.displayName} has fled.`);
-            setTimeout(SafariBattle.endBattle, 1000);
+            setTimeout(SafariBattle.endBattle, 1000 * SafariBattle.tierMultiplier(Safari.safariLevel()));
         } else if (SafariBattle.enemy.eating > 0) {
             SafariBattle.text(`${SafariBattle.enemy.displayName} is eating..`);
         } else if (SafariBattle.enemy.angry > 0) {
