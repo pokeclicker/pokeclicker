@@ -204,15 +204,15 @@ class PokemonHelper extends TmpPokemonHelper {
         const list = {};
         Object.entries(SafariPokemonList.list).forEach(([region]) => {
             if (region == GameConstants.Region.kalos.toString()) {
-                // Friendly safari might cause infinite recursion
+                // Friendly safari might cause infinit recursion
                 return;
             }
-            const zoneList = SafariPokemonList.list[region]();
-            const safariWeight = zoneList.reduce((sum, p) => sum += p.weight, 0);
-            const safariPokemon = zoneList.find(p => p.name == pokemonName);
+            const zone = SafariPokemonList.list[region]();
+            const safariWeight = zone.reduce((sum, p) => sum += p.weight, 0);
+            const safariPokemon = zone.find(p => p.name == pokemonName);
             if (safariPokemon) {
                 list[+region] = list[+region] || {};
-                list[+region][0] = +((SafariPokemon.calcPokemonWeight(safariPokemon) / safariWeight) * 100).toFixed(2);
+                list[+region][zone] = +((SafariPokemon.calcPokemonWeight(safariPokemon) / safariWeight) * 100).toFixed(2);
             }
         });
         return list;
