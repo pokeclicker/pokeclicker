@@ -22,7 +22,8 @@ class Safari {
         return App.game.statistics.safariRocksThrown() * 10 +
             App.game.statistics.safariBaitThrown() * 5 +
             App.game.statistics.safariBallsThrown() * 10 +
-            App.game.statistics.safariPokemonCaptured() * 50;
+            App.game.statistics.safariPokemonCaptured() * 50 +
+            App.game.statistics.safariItemsObtained() * 10;
     });
     static safariLevel: KnockoutComputed<number> = ko.pureComputed(() => {
         const xp = Safari.safariExp();
