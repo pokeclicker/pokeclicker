@@ -14,7 +14,9 @@
                                 <knockout data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': SafariBattle.enemy } }">Pokémon name</knockout>
                                 <knockout data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(SafariBattle.enemy.id)}}"></knockout>
                                 <knockout style="position: relative; top: -1px;"
-                                    data-bind="template: { name: 'pokerusStatusTemplate', data: { 'pokerus': PartyController.getPokerusStatus(SafariBattle.enemy.id) }}">
+                                    data-bind="template: { name: 'pokerusStatusTemplate', data: {
+                                        'pokerus': PartyController.getPokerusStatus(SafariBattle.enemy.id),
+                                        'evs': App.game.party.getPokemon(SafariBattle.enemy.id)?.evs() }}">
                                 </knockout>
                           </knockout>
 
