@@ -84,6 +84,6 @@ type UndergroundItemNameType
     | 'Rose Shard'
     | 'Brown Shard'
     | 'Beige Shard'
-    | 'Stale Shard';
+    | 'Slate Shard';
 
 export default UndergroundItemNameType;
