@@ -184,25 +184,33 @@ describe('SaveSelector', () => {
     describe('encoding', () => {
         it('encodes and decodes chinese characters', () => {
             const input = '妙蛙种子';
-            const decoded = SaveSelector.atob(SaveSelector.btoa(input));
+            const encoded = SaveSelector.btoa(input);
+            expect(encoded).toBe('JUU1JUE2JTk5JUU4JTlCJTk5JUU3JUE3JThEJUU1JUFEJTkw');
+            const decoded = SaveSelector.atob(encoded);
             expect(decoded).toBe(input);
         });
 
         it('encodes and decodes emoji', () => {
             const input = '🙂';
-            const decoded = SaveSelector.atob(SaveSelector.btoa(input));
+            const encoded = SaveSelector.btoa(input);
+            expect(encoded).toBe('JUYwJTlGJTk5JTgy');
+            const decoded = SaveSelector.atob(encoded);
             expect(decoded).toBe(input);
         });
 
         it('encodes and decodes uri encoded strings', () => {
             const input = 'hello %20 world';
-            const decoded = SaveSelector.atob(SaveSelector.btoa(input));
+            const encoded = SaveSelector.btoa(input);
+            expect(encoded).toBe('aGVsbG8gJTI1MjAgd29ybGQ=');
+            const decoded = SaveSelector.atob(encoded);
             expect(decoded).toBe(input);
         });
 
         it('encodes and decodes non-uri % characters', () => {
             const input = '% % % %';
-            const decoded = SaveSelector.atob(SaveSelector.btoa(input));
+            const encoded = SaveSelector.btoa(input);
+            expect(encoded).toBe('JTI1ICUyNSAlMjUgJTI1');
+            const decoded = SaveSelector.atob(encoded);
             expect(decoded).toBe(input);
         });
     });
