@@ -8,4 +8,8 @@ export default class PokeBlock extends Item {
         super(`PokeBlock_${PokeBlockColor[color]}`, basePrice, currency);
         this.type = color;
     }
+    
+    get description(): string {
+        return this._description || 'Unobtainable item for future uses';
+    }
 }

@@ -23,6 +23,10 @@ export default class UndergroundItems {
         return this.list.find((item) => item.id === id);
     }
 
+    public static getUnlockedItems(): UndergroundItem[] {
+        return this.list.filter((item) => item.isUnlocked());
+    }
+
     // Returns a random unlocked item
     public static getRandomItem(): UndergroundItem {
         const unlockedItems = this.list.filter((item) => item.isUnlocked());

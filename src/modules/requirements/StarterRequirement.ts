@@ -5,7 +5,7 @@ import { pokemonList } from '../pokemons/PokemonList';
 import Requirement from './Requirement';
 
 export default class StarterRequirement extends Requirement {
-    constructor(private region: Region, private starter: Starter) {
+    constructor(public region: Region, private starter: Starter) {
         super(starter, AchievementOption.equal);
     }
 

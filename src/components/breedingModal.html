@@ -229,8 +229,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                     </button>
                                     <!-- ko if: App.game.party.hasMaxLevelPokemon() -->
                                     <ul class="row justify-content-center w-100 p-0 m-0" data-bind="foreach: lazyLoad($element, PartyController.getHatcherySortedList, { pageSize: 60, reset: modalUtils.observableState.breedingModalObservable })">
-                                        <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry" data-bind="visible: BreedingController.visible($data), style:{background: PokedexHelper.getBackgroundColors($data.name)}, class: App.game.breeding.hasFreeEggSlot() || App.game.breeding.hasFreeQueueSlot() ? '' : 'disabled'">
-                                            <span class="pokedex-top-text" data-bind="text: $data.displayName">name</span>
+                                        <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry" data-bind="visible: $data.isHatchable(), style:{background: PokedexHelper.getBackgroundColors($data.name)}, class: App.game.breeding.hasFreeEggSlot() || App.game.breeding.hasFreeQueueSlot() ? '' : 'disabled'">
                                             <div class="breedingListShiny" data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)">✨</div>
                                             <img class="breeding-shadow-icon shadow-icon" src="assets/images/status/shadow.svg" data-bind="visible: $data.shadow == GameConstants.ShadowStatus.Shadow"/>
                                             <img class="breeding-shadow-icon shadow-icon" src="assets/images/status/purified.svg" data-bind="visible: $data.shadow == GameConstants.ShadowStatus.Purified"/>
@@ -240,6 +239,13 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                             <img src="" width="80px" data-bind="attr:{ src: PokemonHelper.getImage($data.id) }">
                                             <span class="pokedex-bottom-text" data-bind="text: BreedingController.getDisplayValue($data)">value</span>
                                             <a class="overlay" href="#breed" data-bind="click: function() { App.game.breeding.addPokemonToHatchery($data); App.game.breeding.checkCloseModal();}"></a>
+                                            <span class="pokedex-top-text text-truncate px-1" data-bind="text: $data.displayName,
+                                                tooltip: {
+                                                    title: PokemonHelper.displayName($data.name),
+                                                    trigger: 'hover',
+                                                    placement: 'top',
+                                                    boundary: 'viewport'
+                                                }">name</span>
 
                                             <!-- Category Button -->
                                             <div class="pokemonCategory dropdown">
@@ -310,14 +316,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                     <img class="float-right pixelated" src="" height="24px" data-bind="attr:{ src: `assets/images/profile/trainer-${$data.trainerSprite}.png` }">
                                 </h5>
                                 <div class="card-body p-0">
-                                    <table class="table table-striped table-hover table-bordered table-sm m-0">
-                                        <thead>
-                                            <tr>
-                                                <th colspan="2" class="text-center text-light bg-dark">
-                                                    <h5 class="m-0">Information</h5>
-                                                </th>
-                                            </tr>
-                                        </thead>
+                                    <table class="table table-striped table-hover table-bordered table-sm m-0" style="overflow: visible;">
                                         <tbody>
                                             <tr>
                                                 <td class="text-left align-middle">Cost / Hatch:</td>
@@ -367,15 +366,6 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                     </div>
                                                 </td>
                                             </tr>
-                                        </tbody>
-                                        <thead>
-                                            <tr>
-                                                <th colspan="2" class="text-center text-light bg-dark">
-                                                    <h5 class="m-0">Settings</h5>
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
                                             <tr>
                                                 <td class="text-left align-middle">Sort:</td>
                                                 <td class="text-center align-middle">
@@ -391,7 +381,48 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                                 data-bind="attr: { id: 'hatcheryHelperSortDirection' + $index() }, checked:  $data.sortDirection" />
                                                         </div>
                                                     </div>
-
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left align-middle">Category:</td>
+                                                <td class="text-center align-middle" style="max-width: 1px;">
+                                                    <knockout data-bind="template: { name: 'multiSelectDropdownTemplate',
+                                                        data: {
+                                                            id: `helper-category${$index()}`,
+                                                            options: PokemonCategories.categories(),
+                                                            optionsText: 'name',
+                                                            optionsValue: 'id',
+                                                            bindingField: $data.categories,
+                                                            buttonText: () => {
+                                                                return $data.categories().map(id => PokemonCategories.categories().find(c => c.id === id)?.name()).join('; ') || 'All Categories';
+                                                            },
+                                                            buttonClass: 'custom-select-sm',
+                                                            itemLabel: {
+                                                                class: 'text-white small',
+                                                                style: (item) => ({ 'background-color': item.color() })
+                                                            },
+                                                            showSelectAll: true,
+                                                            selectAllText: 'All Categories',
+                                                            selectAllClick: () => $data.categories([]),
+                                                        }}">
+                                                    </knockout>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" class="text-center">
+                                                    <div class="position-relative">
+                                                        <div class="form-check">
+                                                            <input type="checkbox" class="form-check-input mt-1" data-bind="checked: $data.useHatcheryFilters,
+                                                                attr: { id: `hatcheryHelperUseFilters${$index()}` }">
+                                                            <label class="form-check-label" data-bind="attr: { for: `hatcheryHelperUseFilters${$index()}` }">Use Hatchery Filters</label>
+                                                        </div>
+                                                        <div class="position-absolute" style="top:0; right: 0;" data-bind="tooltip: {
+                                                            html: true,
+                                                            title: 'When this option is enabled Hatchery Helpers will use the filters and settings selected in the Hatchery in addition to their own settings. Disabling this option will allow them to work independently and ignore the Hatchery filters.',
+                                                            placement: 'top',
+                                                            trigger: 'hover'
+                                                        }">ⓘ</div>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -403,8 +434,6 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                             </tr>
                                         </tfoot>
                                     </table>
-                                    <p class="card-text">
-                                    </p>
                                 </div>
                             </div>
                         </div>

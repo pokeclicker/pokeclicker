@@ -48,6 +48,11 @@ enum BadgeEnums {
     'Spike_Shell',
     'Jade_Star',
     'Elite_OrangeChampion',
+    // Orre
+    'Elite_F_Disk',
+    'Elite_L_Disk',
+    'Elite_R_Disk',
+    'Elite_U_Disk',
     // Sinnoh
     'Coal',
     'Forest',

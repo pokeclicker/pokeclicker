@@ -7,7 +7,7 @@ import Notifier from '../notifications/Notifier';
 import Rand from '../utilities/Rand';
 
 export default class Profile implements Saveable {
-    public static MAX_TRAINER = 122;
+    public static MAX_TRAINER = 157;
     public static MAX_BACKGROUND = 40;
 
     saveKey = 'profile';
@@ -142,7 +142,7 @@ export default class Profile implements Saveable {
             return;
         }
 
-        if (json.name) this.name(decodeURI(json.name));
+        if (json.name) this.name(json.name);
         if (json.trainer !== undefined) this.trainer(json.trainer);
         if (json.pokemon !== undefined) this.pokemon(json.pokemon);
         if (json.pokemonShiny !== undefined) this.pokemonShiny(json.pokemonShiny);
@@ -153,7 +153,7 @@ export default class Profile implements Saveable {
 
     toJSON(): Record<string, any> {
         return {
-            name: encodeURI(this.name()),
+            name: this.name(),
             trainer: this.trainer(),
             pokemon: this.pokemon(),
             pokemonShiny: this.pokemonShiny(),
