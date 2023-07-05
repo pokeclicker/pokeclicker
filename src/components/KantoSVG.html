@@ -418,6 +418,13 @@
             })
         %>
 
+        <%- include('templates/mapTown',
+            { name: "Safari Zone"
+            , x: 47, y: 39
+            , width: 6, height: 5
+            })
+        %>
+
         <!--Cinnabar Island-->
         <%- include('templates/mapTown',
             { name: "Cinnabar Island"
@@ -594,14 +601,6 @@
             , x: 69, y: 13
             , width: 4, height: 3.5
             , databind: "click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? 'completed' : 'locked' }"
-            })
-        %>
-
-        <%- include('templates/mapPOI',
-            { name: "Safari Zone"
-            , x: 47, y: 39
-            , width: 6, height: 5
-            , databind: "click:function(){Safari.startSafari()}, attr: { class: Safari.canAccess() ? 'completed' : 'locked' }"
             })
         %>
 

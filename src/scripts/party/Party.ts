@@ -54,7 +54,7 @@ class Party implements Feature {
     }
 
     gainPokemon(pokemon: PartyPokemon, suppressNotification = false) {
-        PokemonHelper.incrementPokemonStatistics(pokemon.id, GameConstants.PokemonStatisticsType.Captured, pokemon.shiny, pokemon.gender);
+        PokemonHelper.incrementPokemonStatistics(pokemon.id, GameConstants.PokemonStatisticsType.Captured, pokemon.shiny, pokemon.gender, pokemon.shadow);
 
         if (pokemon.shadow) {
             // Already caught (shadow)
@@ -229,7 +229,7 @@ class Party implements Feature {
         return Math.min(1, Math.max(0.2, 0.1 + (highestRegion / 10)));
     }
 
-    public calculateEffortPoints(pokemon: PartyPokemon, shiny: boolean, number = GameConstants.BASE_EP_YIELD, ignore = false): number {
+    public calculateEffortPoints(pokemon: PartyPokemon, shiny: boolean, shadow: GameConstants.ShadowStatus, number = GameConstants.BASE_EP_YIELD, ignore = false): number {
         if (pokemon.pokerus < GameConstants.Pokerus.Contagious) {
             return 0;
         }
@@ -246,6 +246,10 @@ class Party implements Feature {
 
         if (shiny) {
             EPNum *= GameConstants.SHINY_EP_MODIFIER;
+        }
+
+        if (shadow == GameConstants.ShadowStatus.Shadow) {
+            EPNum *= GameConstants.SHADOW_EP_MODIFIER;
         }
 
         return Math.floor(EPNum);

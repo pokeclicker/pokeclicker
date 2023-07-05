@@ -703,6 +703,71 @@ GymList['Supreme Gym Leader Drake'] = new Gym(
     'You really deserve that trophy. You\'re a great Pokémon trainer.'
 );
 
+// Orre Gyms
+GymList['Cipher Admin Ein'] = new Gym (
+    'Cipher Admin Ein',
+    'Cipher Admin Ein',
+    [
+        new GymPokemon('Crobat', 12099520, 48),
+        new GymPokemon('Pelipper', 12099520, 49),
+        new GymPokemon('Rhydon', 12099520, 50),
+        new GymPokemon('Starmie', 12099520, 49),
+        new GymPokemon('Manectric', 12099520, 50),
+    ],
+    BadgeEnums.Elite_F_Disk,
+    10000,
+    'Urrrgh… What unbelievable power…',
+    [new QuestLineCompletedRequirement('Shadows in the Desert')],
+    undefined, undefined, { displayName: 'Challenge Ein' }
+);
+GymList['Cipher Admin Miror B.'] = new Gym (
+    'Cipher Admin Miror B',
+    'Cipher Admin Miror B.',
+    [
+        new GymPokemon('Ludicolo', 11599520, 44),
+        new GymPokemon('Ludicolo', 11599520, 45),
+        new GymPokemon('Loudred', 11599520, 46),
+        new GymPokemon('Golduck', 11599520, 45),
+        new GymPokemon('Armaldo', 11599520, 43),
+    ],
+    BadgeEnums.Elite_L_Disk,
+    10000,
+    'I\'m an awesome dancer… But I can\'t win in battles!',
+    [new QuestLineCompletedRequirement('Shadows in the Desert')],
+    undefined, undefined, { displayName: 'Challenge Miror B.' }
+);
+GymList['Cipher Admin Dakim'] = new Gym (
+    'Cipher Admin Dakim',
+    'Cipher Admin Dakim',
+    [
+        new GymPokemon('Claydol', 11999520, 46),
+        new GymPokemon('Forretress', 11999520, 45),
+        new GymPokemon('Flygon', 11999520, 46),
+        new GymPokemon('Whiscash', 11999520, 46),
+        new GymPokemon('Houndoom', 11999520, 47),
+    ],
+    BadgeEnums.Elite_R_Disk,
+    10000,
+    'This can\'t be! The mighty Dakim loses again?',
+    [new QuestLineCompletedRequirement('Shadows in the Desert')],
+    undefined, undefined, { displayName: 'Challenge Dakim' }
+);
+GymList['Cipher Admin Venus'] = new Gym (
+    'Cipher Admin Venus',
+    'Cipher Admin Venus',
+    [
+        new GymPokemon('Bellossom', 12299520, 47),
+        new GymPokemon('Misdreavus', 12299520, 47),
+        new GymPokemon('Raichu', 12299520, 48),
+        new GymPokemon('Wigglytuff', 12299520, 48),
+        new GymPokemon('Milotic', 12299520, 48),
+    ],
+    BadgeEnums.Elite_U_Disk,
+    10000,
+    'I shall forget that I ever battled with you. Yes, that\'s what I\'ll do. Ohohohoh!',
+    [new QuestLineCompletedRequirement('Shadows in the Desert')],
+    undefined, undefined, { displayName: 'Challenge Venus' }
+);
 //Sinnoh Gyms
 GymList['Oreburgh City'] = new Gym(
     'Roark',
@@ -924,7 +989,7 @@ GymList['Virbank City'] = new Gym(
     'Sigh! What are you doing losing, Roxie?! Well…I guess that means you\'re strong! This stinks, but I gave it everything I had, and I feel revitalized and refreshed now! Here! Proof that you beat me!',
     [new GymBadgeRequirement(BadgeEnums.Basic)],
     () => {
-        App.game.quests.getQuestLine('Quest for the DNA Splicers').beginQuest();
+        App.game.quests.getQuestLine('Hollow Truth and Ideals').beginQuest();
     }
 );
 GymList['Castelia City'] = new Gym(
@@ -2134,7 +2199,7 @@ GymList['Grandtree Arena'] = new Gym(
     128000,
     'You defeated Lord Kleavor once again!',
     [new DevelopmentRequirement()],
-    undefined, undefined, { displayName: 'Lord Kleavor' }
+    undefined, undefined, { displayName: 'Lord Kleavor', imageName: '../pokemon/900.01' }
 );
 GymList['Brava Arena'] = new Gym(
     'Lady of the Ridge: Lilligant',
@@ -2144,7 +2209,7 @@ GymList['Brava Arena'] = new Gym(
     128000,
     'You defeated Lady Lilligant once again!',
     [new DevelopmentRequirement()],
-    undefined, undefined, { displayName: 'Lady Lilligant' }
+    undefined, undefined, { displayName: 'Lady Lilligant', imageName: '../pokemon/549.02' }
 );
 GymList['Molten Arena'] = new Gym(
     'Lord of the Isles: Arcanine',
@@ -2154,7 +2219,7 @@ GymList['Molten Arena'] = new Gym(
     128000,
     'You defeated Lord Arcanine once again!',
     [new DevelopmentRequirement()],
-    undefined, undefined, { displayName: 'Lord Arcanine' }
+    undefined, undefined, { displayName: 'Lord Arcanine', imageName: '../pokemon/59.02' }
 );
 GymList['Moonview Arena'] = new Gym(
     'Lord of the Hollow: Electrode',
@@ -2164,7 +2229,7 @@ GymList['Moonview Arena'] = new Gym(
     128000,
     'You defeated Lord Electrode once again!',
     [new DevelopmentRequirement()],
-    undefined, undefined, { displayName: 'Lord Electrode' }
+    undefined, undefined, { displayName: 'Lord Electrode', imageName: '../pokemon/101.02' }
 );
 GymList['Icepeak Arena'] = new Gym(
     'Lord of the Tundra: Avalugg',
@@ -2174,7 +2239,7 @@ GymList['Icepeak Arena'] = new Gym(
     128000,
     'You defeated Lord Avalugg once again!',
     [new DevelopmentRequirement()],
-    undefined, undefined, { displayName: 'Lord Avalugg' }
+    undefined, undefined, { displayName: 'Lord Avalugg', imageName: '../pokemon/713.02' }
 );
 GymList['Temple of Sinnoh'] = new Gym(
     'Volo',

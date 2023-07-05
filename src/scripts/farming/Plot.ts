@@ -81,11 +81,11 @@ class Plot implements Saveable {
                 return '';
             }
             const growthTime = this.berryData.growthTime.find(t => this.age < t);
-            const timeLeft = Math.ceil(growthTime - this.age);
+            const timeLeft = growthTime - this.age;
             const growthMultiplier = includeGrowthMultiplier
                 ? App.game.farming.getGrowthMultiplier() * this.getGrowthMultiplier()
                 : 1;
-            return GameConstants.formatTime(timeLeft / growthMultiplier);
+            return GameConstants.formatTime(Math.ceil(timeLeft / growthMultiplier));
         });
 
         this.formattedStageTimeLeft = ko.pureComputed(() => {
@@ -102,14 +102,14 @@ class Plot implements Saveable {
             }
             let timeLeft = 0;
             if (this.age < this.berryData.growthTime[3]) {
-                timeLeft = Math.ceil(this.berryData.growthTime[3] - this.age);
+                timeLeft = this.berryData.growthTime[3] - this.age;
             } else {
-                timeLeft = Math.ceil(this.berryData.growthTime[4] - this.age);
+                timeLeft = this.berryData.growthTime[4] - this.age;
             }
             const growthMultiplier = includeGrowthMultiplier
                 ? App.game.farming.getGrowthMultiplier() * this.getGrowthMultiplier()
                 : 1;
-            return GameConstants.formatTime(timeLeft / growthMultiplier);
+            return GameConstants.formatTime(Math.ceil(timeLeft / growthMultiplier));
         });
 
         this.formattedTimeLeft = ko.pureComputed(() => {
@@ -436,7 +436,7 @@ class Plot implements Saveable {
             // Gain Pokemon
             App.game.party.gainPokemonByName(wanderPokemon, shiny, true);
             const partyPokemon = App.game.party.getPokemon(PokemonHelper.getPokemonByName(wanderPokemon).id);
-            partyPokemon.effortPoints += App.game.party.calculateEffortPoints(partyPokemon, shiny, GameConstants.WANDERER_EP_YIELD, Berry.baseWander.includes(wanderPokemon));
+            partyPokemon.effortPoints += App.game.party.calculateEffortPoints(partyPokemon, shiny, GameConstants.ShadowStatus.None, GameConstants.WANDERER_EP_YIELD, Berry.baseWander.includes(wanderPokemon));
 
             // Check for Starf berry generation
             if (shiny) {
