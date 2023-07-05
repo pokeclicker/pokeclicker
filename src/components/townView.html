@@ -32,10 +32,10 @@
                 </div>
 
                 <!-- ko if: QuestLineHelper.isQuestLineCompleted('Tutorial Quests') -->
-                <div class="d-flex flex-column position-absolute justify-content-center mr-1" style="right: 0; top: 0; height: 100%;"
+                <div class="d-flex flex-column position-absolute justify-content-center small mr-1" style="right: 0; top: 0; height: 100%;"
                     data-bind="using: App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(player.town().name)]()">
-                    <div style="line-height: 1.2;" data-bind="text: $data.toLocaleString('en-US')">0</div>
-                    <div style="line-height: 1.2;">clears</div>
+                    <div style="line-height: normal;" data-bind="text: $data.toLocaleString('en-US')">0</div>
+                    <div style="line-height: normal;">clears</div>
                 </div>
                 <!-- /ko -->
               </knockout>
