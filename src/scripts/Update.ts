@@ -2265,6 +2265,29 @@ class Update implements Saveable {
                 settingsData['--missingResistant'] = Settings.getSetting('--missingResistant').defaultValue;
             }
         },
+
+        '0.10.13': ({ playerData, saveData, settingsData }) => {
+            // Fix up any decoding errors from v0.10.12
+            const decodeStringsDeep = (obj) => {
+                Object.keys(obj).forEach(key => {
+                    if (typeof obj[key] === 'object' && obj[key] !== null) {
+                        decodeStringsDeep(obj[key]);
+                    }
+                    if (typeof obj[key] === 'string') {
+                        try {
+                            obj[key] = decodeURI(obj[key]);
+                        } catch (e) {
+                            console.warn('Unable to decode save file string', obj[key]);
+                        }
+                    }
+                });
+            };
+
+            // try and decode our data
+            decodeStringsDeep(saveData);
+            decodeStringsDeep(playerData);
+            decodeStringsDeep(settingsData);
+        },
     };
 
     constructor() {
