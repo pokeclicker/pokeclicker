@@ -5672,6 +5672,7 @@ const VivillonPhotobook = new NPC('Vivillon Photobook', [
 
 const KalosSafariRanger = new SafariPokemonNPC('Safari Ranger', [
     'We\'ve had sightings of several unique Pokémon today along with the usual familiar faces!',
+    'These Pokémon will hide from trainers unless captured elsewhere first.',
 ], GameConstants.Region.kalos, 'assets/images/npcs/Pokemon Ranger (female).png');
 
 const FriendlyAttendant = new NPC('Friendly Attendant', [
