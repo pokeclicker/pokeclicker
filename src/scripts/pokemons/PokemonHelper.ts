@@ -431,9 +431,9 @@ class PokemonHelper extends TmpPokemonHelper {
         return encounterTypes;
     }
 
-    public static hasEvableLocations = (pokemonName: PokemonNameType) => {
+    public static isObtainableAndNotEvable = (pokemonName: PokemonNameType) => {
         const locations = PokemonHelper.getPokemonLocations(pokemonName);
-        return locations[PokemonLocationType.Dungeon] ||
+        const isEvable = locations[PokemonLocationType.Dungeon] ||
             locations[PokemonLocationType.DungeonBoss] ||
             locations[PokemonLocationType.DungeonChest] ||
             (locations[PokemonLocationType.Evolution] as EvoData[])?.some((evo) => evo.trigger === EvoTrigger.STONE) || // Only stone evolutions gives EVs
@@ -442,6 +442,6 @@ class PokemonHelper extends TmpPokemonHelper {
             locations[PokemonLocationType.Safari] ||
             locations[PokemonLocationType.Shop] ||
             locations[PokemonLocationType.Wandering];
-
+        return !isEvable && Object.keys(locations).length;
     };
 }
