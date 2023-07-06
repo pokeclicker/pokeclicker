@@ -39,16 +39,18 @@ class SafariPokemonList {
     }
 
     public static generateKalosSafariList() {
-        SeededRand.seedWithDate(new Date());
-        const pokemon: SafariType[] = [];
-        const shuffledPokemon = SeededRand.shuffleArray(App.game.party.caughtPokemon.map((p) => p.name));
+        SeededRand.seed(+player.trainerId);
+        const shuffledPokemon = SeededRand.shuffleArray(
+            pokemonList.filter((p) => PokemonHelper.isObtainableAndNotEvable(p.name)
+                && PokemonHelper.calcNativeRegion(p.name) <= GameConstants.MAX_AVAILABLE_REGION));
 
-        for (let i = 0; i < shuffledPokemon.length && pokemon.length < 5; i++) {
-            const p = shuffledPokemon[i];
-            if (!PokemonHelper.hasEvableLocations(p) && Object.keys(PokemonHelper.getPokemonLocations(p)).length) {
-                pokemon.push({ name: p, weight: 10 });
-            }
-        }
+        const batchCount = Math.ceil(shuffledPokemon.length / GameConstants.FRIEND_SAFARI_POKEMON);
+        const startIndex = (Math.floor((new Date()).getTime() / (24 * 60 * 60 * 1000)) % batchCount) * GameConstants.FRIEND_SAFARI_POKEMON;
+        const endIndex = startIndex + GameConstants.FRIEND_SAFARI_POKEMON;
+
+        const pokemon: SafariType[] = shuffledPokemon.slice(startIndex, endIndex).map((p) => {
+            return { name: p.name, weight: 10, locked: !App.game.party.alreadyCaughtPokemonByName(p.name) };
+        });
 
         pokemon.push({ name: 'Shuckle', weight: 2 });
         pokemon.push({ name: 'Stunfisk', weight: 2 });
