@@ -341,7 +341,7 @@
                       data-bind="text: (App.game.party.getPokemon($data) ? App.game.party.getPokemon($data).totalVitaminsUsed() : 0).toLocaleString('en-US')">-</code>
                   </td>
                 </tr>
-                <!-- ko foreach: GameHelper.enumNumbers(GameConstants.VitaminType) -->
+                <!-- ko foreach: GameHelper.enumNumbers(GameConstants.VitaminType).filter(v => v !== GameConstants.VitaminType.RareCandy) -->
                 <tr>
                   <td class="text-left" data-bind="text: `${GameConstants.VitaminType[$data]}`">X Used</td>
                   <td class="text-left tight"><code

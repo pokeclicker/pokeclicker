@@ -182,19 +182,19 @@ ItemList.Steel_Memory_Silvally = new QuestItem('Steel_Memory_Silvally', 'Steel M
 ItemList.Dragon_Memory_Silvally = new QuestItem('Dragon_Memory_Silvally', 'Dragon Memory', 'One of Silvally\'s memories, obtained from Ryuki in A Tree Maybe', 'Typing some Memories');
 
 // Vitamins
-// ItemList.RareCandy = new Vitamin(VitaminType.RareCandy, Infinity, undefined, undefined, 'Rare Candy', 'A rare-to-find candy that currently has no use.');
-ItemList.Protein   = new Vitamin(VitaminType.Protein, 1e4, Currency.money, {
+ItemList.RareCandy = new Vitamin(VitaminType.RareCandy, Infinity, undefined, undefined, 'Rare Candy', 'A rare-to-find Candy<br/>Not for human consumption!<br/>Straight up increases the attack of a Pokémon');
+ItemList.Protein    = new Vitamin(VitaminType.Protein, 1e4, Currency.money, {
     multiplier: 1.1,
     multiplierDecrease: false,
     saveName: `${VitaminType[VitaminType.Protein]}|${Currency[Currency.money]}`,
 }, undefined, 'Increases Pokémon attack bonus.<br/><i>(attack gained per breeding cycle)</i><br/>Increases steps required when hatching by 20');
-ItemList.Calcium   = new Vitamin(VitaminType.Calcium, 5e4, Currency.money, {
+ItemList.Calcium    = new Vitamin(VitaminType.Calcium, 5e4, Currency.money, {
     multiplier: 1.1,
     multiplierDecrease: false,
     saveName: `${VitaminType[VitaminType.Calcium]}|${Currency[Currency.money]}`,
     visible: new MaxRegionRequirement(Region.hoenn),
 }, undefined, 'Increases Pokémon attack bonus %.<br/><i>(attack gained per breeding cycle)</i><br/>Increases steps required when hatching by 20');
-ItemList.Carbos   = new Vitamin(VitaminType.Carbos, 1e5, Currency.money, {
+ItemList.Carbos    = new Vitamin(VitaminType.Carbos, 1e5, Currency.money, {
     multiplier: 1.1,
     multiplierDecrease: false,
     saveName: `${VitaminType[VitaminType.Carbos]}|${Currency[Currency.money]}`,
