@@ -2268,7 +2268,7 @@ class Update implements Saveable {
 
         '0.10.13': ({ playerData, saveData, settingsData }) => {
 
-            //Hoopa battles
+          //Hoopa battles
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 167);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 168);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 169);
@@ -2276,6 +2276,26 @@ class Update implements Saveable {
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 171);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 172);
 
+            // Fix up any decoding errors from v0.10.12
+            const decodeStringsDeep = (obj) => {
+                Object.keys(obj).forEach(key => {
+                    if (typeof obj[key] === 'object' && obj[key] !== null) {
+                        decodeStringsDeep(obj[key]);
+                    }
+                    if (typeof obj[key] === 'string') {
+                        try {
+                            obj[key] = decodeURI(obj[key]);
+                        } catch (e) {
+                            console.warn('Unable to decode save file string', obj[key]);
+                        }
+                    }
+                });
+            };
+
+            // try and decode our data
+            decodeStringsDeep(saveData);
+            decodeStringsDeep(playerData);
+            decodeStringsDeep(settingsData);
         },
 
     };
