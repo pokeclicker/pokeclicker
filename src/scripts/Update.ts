@@ -2268,7 +2268,7 @@ class Update implements Saveable {
 
         '0.10.13': ({ playerData, saveData, settingsData }) => {
 
-          //Hoopa battles
+            //Hoopa battles
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 167);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 168);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 169);
