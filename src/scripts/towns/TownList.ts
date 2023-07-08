@@ -2759,12 +2759,20 @@ const ZinniaOrigin = new NPC('Zinnia', [
 ], {image: 'assets/images/npcs/Zinnia.png',
     requirement: new MultiRequirement([new QuestLineCompletedRequirement('The Delta Episode'), new QuestLineCompletedRequirement('Primal Reversion')]),
 });
+
 const ExploreStand = new NPC('Explore the Outskirt Stand', [
     '<i>You look around the Outskirt Stand, and see two shady figures shuffling off into the horizon. As you move to get a closer look, some guy steps in your way.</i>',
     'Hey! You\'re new around these parts, and I don\'t take too kindly to strangers!',
     'You\'ll have to prove your worth, or my name ain\'t Willie!',
-], {image: 'assets/images/npcs/Rider (male).png',
+], {image: 'assets/images/npcs/Willie.png',
     requirement: new MultiRequirement([new QuestLineStartedRequirement('Shadows in the Desert'), new QuestLineStepCompletedRequirement('Shadows in the Desert', 1, GameConstants.AchievementOption.less)]),
+});
+const Willie = new NPC('Willie', [
+    'Well partner, that was some dang fancy fighting, I\'ll tell you what.',
+    'I dunno what your plans are round these parts, but you\'d best keep an eye out for some of them dang ole Shadow Pokémon.',
+    'I hear they are weaker than normal Pokémon but can hold fancy incense. But if you manage to purify their souls, they will get a bit stronger!',
+], {image: 'assets/images/npcs/Willie.png',
+    requirement: new QuestLineStepCompletedRequirement('Shadows in the Desert', 1),
 });
 const Sack = new NPC('Check the sack', [
     '<i>You open the sack and a girl pops out!</i>',
@@ -3127,7 +3135,7 @@ TownList['Outskirt Stand'] = new Town(
     [OutskirtStandShop, TemporaryBattleList.Willie],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), new QuestLineStartedRequirement('Shadows in the Desert')],
-        npcs: [ExploreStand, OutskirtCowboy],
+        npcs: [ExploreStand, OutskirtCowboy, Willie],
     }
 );
 
