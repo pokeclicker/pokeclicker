@@ -157,10 +157,9 @@ class PokemonHelper extends TmpPokemonHelper {
                     } else {
                         hasPokemon = (shop as Shop).items?.some(item => item instanceof PokemonItem && item.type == pokemonName);
                     }
-
-                    if (hasPokemon) {
-                        shops.push(townName);
-                    }
+                }
+                if (hasPokemon) {
+                    shops.push(townName);
                 }
             }
         });
