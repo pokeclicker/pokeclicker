@@ -254,12 +254,12 @@ class FenceBody extends SandBody {
                         this.grid[pos.y - 1][pos.x] = 26;
                     }
                     if (tileBelow === 30 || tileBelow === 36) {
-                        this.grid[pos.y + 1][pos.x] = 26;
+                        this.grid[pos.y + 1][pos.x] = 31;
                     }
                     break;
                 case 29: // Right fence tile
                     if (tileAbove === 27 || tileAbove === 34) {
-                        this.grid[pos.y - 1][pos.x] = 31;
+                        this.grid[pos.y - 1][pos.x] = 26;
                     }
                     if (tileBelow === 32 || tileBelow === 33) {
                         this.grid[pos.y + 1][pos.x] = 31;
