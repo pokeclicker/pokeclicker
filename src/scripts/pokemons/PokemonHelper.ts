@@ -139,17 +139,28 @@ class PokemonHelper extends TmpPokemonHelper {
     public static getPokemonShops(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): Array<string> {
         const shops = [];
         Object.entries(TownList).forEach(([townName, town]) => {
-            // Check if the shop has items
-            const townShops = town.content.filter(c => c instanceof Shop && c.items);
+            // If we only want to check up to a maximum region
+            const region = town.region;
+            if (maxRegion != GameConstants.Region.none && region > maxRegion) {
+                return false;
+            }
+
+            const townShops = town.content.filter(c => c instanceof Shop);
             if (townShops.length) {
-                // If we only want to check up to a maximum region
-                const region = town.region;
-                if (maxRegion != GameConstants.Region.none && region > maxRegion) {
-                    return false;
-                }
-                const hasPokemon = townShops.find(ts => (ts as Shop).items?.find(item => item.name == pokemonName));
-                if (hasPokemon) {
-                    shops.push(townName);
+                let hasPokemon = false;
+                for (let i = 0; i < townShops.length && !hasPokemon; i++) {
+                    const shop = townShops[i];
+                    if (shop instanceof GemMasterShop) {
+                        hasPokemon = GemDeal.list[shop.shop]?.().some(deal => deal.item.itemType instanceof PokemonItem && deal.item.itemType.type == pokemonName);
+                    } else if (shop instanceof ShardTraderShop) {
+                        hasPokemon = ShardDeal.list[shop.location]?.().some(deal => deal.item.itemType instanceof PokemonItem && deal.item.itemType.type == pokemonName);
+                    } else {
+                        hasPokemon = (shop as Shop).items?.some(item => item instanceof PokemonItem && item.type == pokemonName);
+                    }
+
+                    if (hasPokemon) {
+                        shops.push(townName);
+                    }
                 }
             }
         });
