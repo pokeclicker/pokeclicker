@@ -182,7 +182,12 @@ abstract class Quest {
         }
     }
 
-    complete() {
+    complete(bypassAutoCompleter = false) {
+        if (bypassAutoCompleter) {
+            this.deleteAutoCompleter();
+            // Was consequently disposed on auto completion.
+            this.focusSub?.dispose();
+        }
         this.initial(this.focus() - this.amount);
     }
 
@@ -191,9 +196,13 @@ abstract class Quest {
         this.autoCompleter = this.isCompleted.subscribe(() => {
             if (this.isCompleted()) {
                 this.claim();
-                this.autoCompleter.dispose();
+                this.deleteAutoCompleter();
             }
         });
+    }
+
+    deleteAutoCompleter() {
+        this.autoCompleter?.dispose();
     }
 
     //#endregion
