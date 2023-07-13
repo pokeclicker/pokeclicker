@@ -182,6 +182,16 @@ export default class RedeemableCodes implements Saveable {
                     return false;
                 }
 
+                if (quest.curQuest() < 1) {
+                    Notifier.notify({
+                        title: 'Tutorial Skip',
+                        message: 'The first step of the Tutorial must first be completed.',
+                        type: NotificationConstants.NotificationOption.warning,
+                        timeout: 1e4,
+                    });
+                    return false;
+                }
+
                 while (quest.curQuest() < quest.totalQuests) {
                     quest.curQuestObject().complete();
                 }
