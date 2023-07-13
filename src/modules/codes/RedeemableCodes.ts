@@ -178,7 +178,7 @@ export default class RedeemableCodes implements Saveable {
             }),
             new RedeemableCode('tutorial-skip', -253994129, false, async () => {
                 const quest = App.game.quests.getQuestLine('Tutorial Quests');
-                if (!quest || quest.state() == QuestLineState.ended) {
+                if (!quest || quest.state() != QuestLineState.started) {
                     return false;
                 }
 
