@@ -15,6 +15,7 @@ import RedeemableCode from './RedeemableCode';
 import GameHelper from '../GameHelper';
 import Amount from '../wallet/Amount';
 import Item from '../items/Item';
+import QuestLineState from '../quests/QuestLineState';
 
 export default class RedeemableCodes implements Saveable {
     defaults: Record<string, any>;
@@ -174,6 +175,18 @@ export default class RedeemableCodes implements Saveable {
                 }
 
                 return refund;
+            }),
+            new RedeemableCode('tutorial-skip', -253994129, false, async () => {
+                const quest = App.game.quests.getQuestLine('Tutorial Quests');
+                if (!quest || quest.state() == QuestLineState.ended) {
+                    return false;
+                }
+
+                while (quest.curQuest() < quest.totalQuests) {
+                    quest.curQuestObject().complete();
+                }
+
+                return true;
             }),
         ];
     }
