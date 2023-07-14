@@ -2287,6 +2287,37 @@ class Update implements Saveable {
             decodeStringsDeep(saveData);
             decodeStringsDeep(playerData);
             decodeStringsDeep(settingsData);
+
+            // Fix up Zero's Ambition questline restarting
+            if (saveData.party.caughtPokemon.find(p => p.id === 487)) { // If Giratina Altered caught
+                const zeroQuestLine = saveData.quests.questLines.find(q => q.name === 'Zero\'s Ambition');
+                if (zeroQuestLine) {
+                    zeroQuestLine.state = 2;
+                }
+            } else if (saveData.statistics.temporaryBattleDefeated[83] >= 1) { // If zero temp battle defeated
+                const zeroQuestLine = saveData.quests.questLines.find(q => q.name === 'Zero\'s Ambition');
+                if (zeroQuestLine) {
+                    zeroQuestLine.state = 1;
+                    zeroQuestLine.quest = 14;
+                    zeroQuestLine.initial = 0;
+                }
+            }
+
+            // Fix up Zero's Ambition questline starting early
+            const zeroQuestLine = saveData.quests.questLines.find(q => q.name === 'Zero\'s Ambition');
+            if (zeroQuestLine && zeroQuestLine.state === 1) {
+                // Quest is started, check if the player has the rquirements for starting the quest
+                const caughtUxie = saveData.party.caughtPokemon.find(p => p.id === 480);
+                const caughtMesprit = saveData.party.caughtPokemon.find(p => p.id === 481);
+                const caughtAzelf = saveData.party.caughtPokemon.find(p => p.id === 482);
+                const hasSinnohChampionBadge = !!saveData.badgeCase[61];
+                // If any of these requirements are not met, reset the questline
+                if (!caughtUxie || !caughtMesprit || !caughtAzelf || !hasSinnohChampionBadge) {
+                    zeroQuestLine.state = 0;
+                    zeroQuestLine.quest = 0;
+                    zeroQuestLine.initial = 0;
+                }
+            }
         },
     };
 
