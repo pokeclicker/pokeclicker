@@ -903,7 +903,7 @@ TemporaryBattleList.Willie = new TemporaryBattle(
     undefined,
     {
         displayName: 'Willie',
-        imageName: 'Rider (male)',
+        imageName: 'Willie',
     }
 );
 TemporaryBattleList.Folly = new TemporaryBattle(

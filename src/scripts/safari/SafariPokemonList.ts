@@ -47,17 +47,23 @@ class SafariPokemonList {
 
     public static generateKalosSafariList() {
         SeededRand.seed(+player.trainerId);
-        const shuffledPokemon = SeededRand.shuffleArray(
-            pokemonList.filter((p) => PokemonHelper.isObtainableAndNotEvable(p.name)
-                && PokemonHelper.calcNativeRegion(p.name) <= GameConstants.MAX_AVAILABLE_REGION));
 
+        // Obtain the list of non-EVable pokemon and shuffle it
+        // There may not be an evenly divisible number of pokemon so repeat list 5 times
+        const shuffledPokemon = new Array(GameConstants.FRIEND_SAFARI_POKEMON).fill(
+            SeededRand.shuffleArray(
+                pokemonList.filter((p) => PokemonHelper.isObtainableAndNotEvable(p.name)
+                    && PokemonHelper.calcNativeRegion(p.name) <= GameConstants.MAX_AVAILABLE_REGION).map((p) => p.name))
+        ).flat();
+
+        // Rotation is fixed, use the current date to determine where in the list to select the 5 pokemon
         const batchCount = Math.ceil(shuffledPokemon.length / GameConstants.FRIEND_SAFARI_POKEMON);
         const now = new Date();
         const startIndex = (Math.floor((now.getTime() - now.getTimezoneOffset() * 60 * 1000) / (24 * 60 * 60 * 1000)) % batchCount) * GameConstants.FRIEND_SAFARI_POKEMON;
         const endIndex = startIndex + GameConstants.FRIEND_SAFARI_POKEMON;
 
         const pokemon: SafariEncounter[] = shuffledPokemon.slice(startIndex, endIndex).map((p) => {
-            return new SafariEncounter(p.name, 10, true);
+            return new SafariEncounter(p, 10, true);
         });
 
         pokemon.push(new SafariEncounter('Shuckle', 2));
