@@ -231,15 +231,43 @@ class FenceBody extends SandBody {
     }
 
     private openFence() {
+        const removedTiles = [];
         const options = [26, 28, 29, 31];
         const pick = Rand.fromArray(options);
         for (let i = 0; i < this.grid.length; i++) {
             for (let j = 0; j < this.grid[0].length; j++) {
                 if (this.grid[i][j] === pick) {
+                    if (pick == 28 || pick == 29) { // Only tiles connected to the left/right fence tiles are broken
+                        removedTiles.push({x: j, y: i});
+                    }
                     this.grid[i][j] = 0;
                 }
             }
         }
+        // Check tiles above and below the removed ones to avoid broken fences tiles
+        removedTiles?.map((pos) => {
+            const tileAbove = this.grid[pos.y - 1] ? this.grid[pos.y - 1][pos.x] : undefined;
+            const tileBelow = this.grid[pos.y + 1] ? this.grid[pos.y + 1][pos.x] : undefined;
+            switch (pick) {
+                case 28: // Left fence tile
+                    if (tileAbove === 25 || tileAbove === 35) {
+                        this.grid[pos.y - 1][pos.x] = 26;
+                    }
+                    if (tileBelow === 30 || tileBelow === 36) {
+                        this.grid[pos.y + 1][pos.x] = 31;
+                    }
+                    break;
+                case 29: // Right fence tile
+                    if (tileAbove === 27 || tileAbove === 34) {
+                        this.grid[pos.y - 1][pos.x] = 26;
+                    }
+                    if (tileBelow === 32 || tileBelow === 33) {
+                        this.grid[pos.y + 1][pos.x] = 31;
+                    }
+                    break;
+                default:
+            }
+        });
     }
 }
 

@@ -204,15 +204,15 @@ class PokemonHelper extends TmpPokemonHelper {
         const list = {};
         Object.entries(SafariPokemonList.list).forEach(([region]) => {
             if (region == GameConstants.Region.kalos.toString()) {
-                // Friendly safari might cause infinit recursion
+                // Friendly safari might cause infinite recursion
                 return;
             }
-            const zone = SafariPokemonList.list[region]();
-            const safariWeight = zone.reduce((sum, p) => sum += p.weight, 0);
-            const safariPokemon = zone.find(p => p.name == pokemonName);
+            const zoneList = SafariPokemonList.list[region]();
+            const safariWeight = zoneList.reduce((sum, p) => sum += p.weight, 0);
+            const safariPokemon = zoneList.find(p => p.name == pokemonName);
             if (safariPokemon) {
                 list[+region] = list[+region] || {};
-                list[+region][zone] = +((SafariPokemon.calcPokemonWeight(safariPokemon) / safariWeight) * 100).toFixed(2);
+                list[+region][0] = +((SafariPokemon.calcPokemonWeight(safariPokemon) / safariWeight) * 100).toFixed(2);
             }
         });
         return list;
@@ -431,9 +431,9 @@ class PokemonHelper extends TmpPokemonHelper {
         return encounterTypes;
     }
 
-    public static hasEvableLocations = (pokemonName: PokemonNameType) => {
+    public static isObtainableAndNotEvable = (pokemonName: PokemonNameType) => {
         const locations = PokemonHelper.getPokemonLocations(pokemonName);
-        return locations[PokemonLocationType.Dungeon] ||
+        const isEvable = locations[PokemonLocationType.Dungeon] ||
             locations[PokemonLocationType.DungeonBoss] ||
             locations[PokemonLocationType.DungeonChest] ||
             (locations[PokemonLocationType.Evolution] as EvoData[])?.some((evo) => evo.trigger === EvoTrigger.STONE) || // Only stone evolutions gives EVs
@@ -442,6 +442,6 @@ class PokemonHelper extends TmpPokemonHelper {
             locations[PokemonLocationType.Safari] ||
             locations[PokemonLocationType.Shop] ||
             locations[PokemonLocationType.Wandering];
-
+        return !isEvable && Object.keys(locations).length;
     };
 }

@@ -94,7 +94,7 @@ export default class Item {
             n = this.maxAmount;
         }
 
-        if (!this.isAvailable()) {
+        if (!this.isAvailable() || this.isSoldOut()) {
             Notifier.notify({
                 message: `${displayName} is sold out!`,
                 type: NotificationConstants.NotificationOption.danger,

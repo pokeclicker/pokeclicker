@@ -22,7 +22,8 @@ class Safari {
         return App.game.statistics.safariRocksThrown() * 10 +
             App.game.statistics.safariBaitThrown() * 5 +
             App.game.statistics.safariBallsThrown() * 10 +
-            App.game.statistics.safariPokemonCaptured() * 50;
+            App.game.statistics.safariPokemonCaptured() * 50 +
+            App.game.statistics.safariItemsObtained() * 10;
     });
     static safariLevel: KnockoutComputed<number> = ko.pureComputed(() => {
         const xp = Safari.safariExp();
@@ -168,8 +169,12 @@ class Safari {
     }
 
     public static openModal() {
-        App.game.gameState = GameConstants.GameState.safari;
-        $('#safariModal').modal({backdrop: 'static', keyboard: false});
+        if (Safari.inProgress() && Safari.activeRegion() !== player.region) {
+            this.safariReset();
+        } else {
+            App.game.gameState = GameConstants.GameState.safari;
+            $('#safariModal').modal({backdrop: 'static', keyboard: false});
+        }
     }
 
     public static startSafari() {
@@ -322,7 +327,7 @@ class Safari {
                     document.getElementById('sprite').classList.value = `walk${direction}`;
                 }
             });
-            App.game.breeding.progressEggs(1);
+            App.game.breeding.progressEggs(1 + Math.floor(Safari.safariLevel() / 10));
             this.spawnPokemonCheck();
             this.despawnPokemonCheck();
         } else {
@@ -347,7 +352,9 @@ class Safari {
     }
 
     public static spawnItemCheck() {
-        if (Rand.boolean()) {
+        const baseChance = 0.4;
+        const itemLevelModifier = (Safari.safariLevel() - 1) / 100;
+        if (Rand.chance(baseChance + itemLevelModifier)) {
             this.spawnRandomItem();
         }
     }
