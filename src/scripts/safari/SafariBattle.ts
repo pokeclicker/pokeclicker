@@ -108,7 +108,7 @@ class SafariBattle {
         const isgameOver = (Safari.balls() == 0);
         return new Promise((resolve, reject) => {
             if (random * 100 < SafariBattle.enemy.catchFactor) {
-                SafariBattle.capturePokemon();
+                SafariBattle.capturePokemon(isgameOver);
                 $('#safariBall').css('filter', 'brightness(0.4) grayscale(100%)');
                 setTimeout(() => {
                     SafariBattle.particle.remove();
@@ -145,14 +145,16 @@ class SafariBattle {
         }
     }
 
-    private static capturePokemon() {
+    private static capturePokemon(isgameOver: boolean) {
         SafariBattle.text(`GOTCHA!<br>${SafariBattle.enemy.displayName} was caught!`);
         GameHelper.incrementObservable(App.game.statistics.safariPokemonCaptured, 1);
         const pokemonID = PokemonHelper.getPokemonByName(SafariBattle.enemy.name).id;
         App.game.party.gainPokemonById(pokemonID, SafariBattle.enemy.shiny);
         const partyPokemon = App.game.party.getPokemon(pokemonID);
         partyPokemon.effortPoints += App.game.party.calculateEffortPoints(partyPokemon, SafariBattle.enemy.shiny, GameConstants.ShadowStatus.None, GameConstants.SAFARI_EP_YIELD);
-        Safari.spawnItemCheck();
+        if (!isgameOver) {
+            Safari.spawnItemCheck();
+        }
     }
 
     public static throwBait() {
