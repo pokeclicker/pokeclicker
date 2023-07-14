@@ -275,6 +275,8 @@ export const LEGAL_WALK_BLOCKS = [
 
 export const SAFARI_OUT_OF_BALLS = 'Game Over!<br>You have run out of safari balls to use.';
 
+export const FRIEND_SAFARI_POKEMON = 5;
+
 // Quests
 
 // Numbers calculated by Dimava assumes ability to 1 shot on high routes and some use oak items,
