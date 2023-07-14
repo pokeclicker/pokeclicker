@@ -239,7 +239,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                             <img src="" width="80px" data-bind="attr:{ src: PokemonHelper.getImage($data.id) }">
                                             <span class="pokedex-bottom-text" data-bind="text: BreedingController.getDisplayValue($data)">value</span>
                                             <a class="overlay" href="#breed" data-bind="click: function() { App.game.breeding.addPokemonToHatchery($data); App.game.breeding.checkCloseModal();}"></a>
-                                            <span class="pokedex-top-text text-truncate px-1" data-bind="text: PokemonHelper.displayName($data.name),
+                                            <span class="pokedex-top-text text-truncate px-1" data-bind="text: $data.displayName,
                                                 tooltip: {
                                                     title: PokemonHelper.displayName($data.name),
                                                     trigger: 'hover',
