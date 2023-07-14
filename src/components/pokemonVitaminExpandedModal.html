@@ -74,7 +74,7 @@
                                 <div class="btn-group" role="group">
                                     <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"></button>
                                     <div class="dropdown-menu">
-                                        <!-- ko foreach: GameHelper.enumNumbers(GameConstants.VitaminType).filter(v => v !== GameConstants.VitaminType.RareCandy) -->
+                                        <!-- ko foreach: GameHelper.enumNumbers(GameConstants.VitaminType) -->
                                         <a class="dropdown-item" href="#" data-bind="text: `Remove All ${GameConstants.VitaminType[$data]}`, click: () => { PartyController.removeVitaminFromParty($data) }"></a>
                                         <!-- /ko -->
                                         <div class="dropdown-divider"></div>
@@ -91,7 +91,7 @@
                             <tr>
                                 <th class="align-middle">Pokémon</th>
                                 <th class="text-center align-middle">Vitamins Used</th>
-                                <!-- ko foreach: GameHelper.enumStrings(GameConstants.VitaminType).filter(v => GameConstants.VitaminType[v] !== GameConstants.VitaminType.RareCandy) -->
+                                <!-- ko foreach: GameHelper.enumStrings(GameConstants.VitaminType) -->
                                 <th class="text-center align-middle">
                                     <span data-bind="text: $data"></span><br />
                                     <span class="font-weight-normal small" data-bind="text: `[ ${player._itemList[$data]().toLocaleString('en-US')} ]`"></span>
@@ -109,7 +109,7 @@
                                     <sup data-bind="visible: $data.shiny">✨</sup>
                                 </td>
                                 <td class="text-center align-middle tight" data-bind="text: $data.totalVitaminsUsed().toLocaleString('en-US')"></td>
-                                <!-- ko foreach: GameHelper.enumNumbers(GameConstants.VitaminType).filter(v => v !== GameConstants.VitaminType.RareCandy) -->
+                                <!-- ko foreach: GameHelper.enumNumbers(GameConstants.VitaminType) -->
                                 <td class="text-center align-middle tight">
                                     <button type="button" class="btn btn-link btn-sm text-decoration-none align-text-top" style="line-height: 0.6; font-size: 1rem;"
                                         data-bind="

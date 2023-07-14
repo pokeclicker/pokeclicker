@@ -101,7 +101,7 @@ class PartyController {
             }
         }
 
-        const vitamins = GameHelper.enumNumbers(GameConstants.VitaminType).filter(v => v !== GameConstants.VitaminType.RareCandy);
+        const vitamins = GameHelper.enumNumbers(GameConstants.VitaminType);
         App.game.party.caughtPokemon.forEach((p) => {
             vitamins.forEach((v) => {
                 if (p.vitaminsUsed[v]() > 0) {

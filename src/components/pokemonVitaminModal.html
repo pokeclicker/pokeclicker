@@ -23,9 +23,9 @@
                             boundary: document.getElementById('pokemonVitaminModal'),
                         }">
                         <button class="btn btn-sm btn-info" data-bind="click: () => VitaminController.currentlySelected((VitaminController.currentlySelected() + GameHelper.enumLength(GameConstants.VitaminType) - 1) % GameHelper.enumLength(GameConstants.VitaminType))">&lt;</button>
-                        <button class="btn btn-block btn-secondary btn-static" data-bind="text: `${ItemList[GameConstants.VitaminType[VitaminController.currentlySelected()]].displayName}: ${player.itemList[GameConstants.VitaminType[VitaminController.currentlySelected()]]().toLocaleString('en-US')}`"></button>
+                        <button class="btn btn-block btn-secondary btn-static" data-bind="text: `${GameConstants.VitaminType[VitaminController.currentlySelected()]}: ${player.itemList[GameConstants.VitaminType[VitaminController.currentlySelected()]]().toLocaleString('en-US')}`"></button>
                         <button class="btn btn-sm btn-info" data-bind="click: () => VitaminController.currentlySelected((VitaminController.currentlySelected() + 1) % GameHelper.enumLength(GameConstants.VitaminType))">&gt;</button>
-                        <button type="button" class="btn btn-sm btn-primary" data-bind="css : { disabled : VitaminController.currentlySelected() === GameConstants.VitaminType.RareCandy}, text: VitaminController.add() || VitaminController.currentlySelected() === GameConstants.VitaminType.RareCandy ? 'Give' : 'Take'" onclick="VitaminController.add(!VitaminController.add())" title="Add/Remove" data-toggle="tooltip" data-html="true" data-content="Left/right click to cycle amount
+                        <button type="button" class="btn btn-sm btn-primary" data-bind="text: VitaminController.add() ? 'Give' : 'Take'" onclick="VitaminController.add(!VitaminController.add())" title="Add/Remove" data-toggle="tooltip" data-html="true" data-content="Left/right click to cycle amount
               <br/>Click on Pokémon to use" data-placement="right" data-trigger="hover"></button>
                         <button type="button" class="btn btn-sm btn-primary" data-bind="text: VitaminController.multiplier[VitaminController.multiplierIndex()]" onclick="VitaminController.incrementMultiplier()" oncontextmenu="VitaminController.decrementMultiplier(); return false" title="Multiplier" data-toggle="tooltip" data-html="true" data-content="Left/right click to cycle amount
               <br/>Click on Pokémon to use" data-placement="right" data-trigger="hover"></button>
@@ -73,15 +73,14 @@
                         </div>
                     </div>
                 </div>
-                <i data-bind="text: VitaminController.currentlySelected() === GameConstants.VitaminType.RareCandy ? 'Left click to give' : (VitaminController.add() ? 'Left click to give, Right click to take' : 'Left/Right click to take')">Left click to give, Right click to take</i>
+                <i data-bind="text: VitaminController.add() ? 'Left click to give, Right click to take' : 'Left/Right click to take'">Left click to give, Right click to take</i>
                 <div class="table-responsive" style="overflow-y: hidden;">
                     <table class="table table-striped table-hover table-bordered table-sm m-0">
                         <thead>
                             <tr class="text-light">
                                 <th class="text-left bg-dark align-middle">Pokémon</th>
                                 <th class="text-center bg-dark align-middle">Vitamins Used</th>
-                                <th class="text-center bg-dark align-middle" data-bind="visible : VitaminController.currentlySelected() === GameConstants.VitaminType.RareCandy">Rare Candy Bonus</th>
-                                <th class="text-center bg-dark align-middle" data-bind="visible : VitaminController.currentlySelected() !== GameConstants.VitaminType.RareCandy, text: `${ItemList[GameConstants.VitaminType[VitaminController.currentlySelected()]].displayName} Used`">X Used</th>
+                                <th class="text-center bg-dark align-middle" data-bind="text: `${GameConstants.VitaminType[VitaminController.currentlySelected()]} Used`">X Used</th>
                                 <th class="text-center bg-dark align-middle">Attack Bonus</th>
                                 <th class="text-center bg-dark align-middle">Egg Steps</th>
                                 <th class="text-center bg-dark align-middle">Breeding Efficiency</th>
@@ -89,7 +88,7 @@
                         </thead>
                         <tbody data-bind="foreach: lazyLoad($element, PartyController.getvitaminSortedList, { reset: modalUtils.observableState.pokemonVitaminModalObservable })">
                             <tr class="clickable" data-bind="
-                                click: () => VitaminController.add() || VitaminController.currentlySelected() === GameConstants.VitaminType.RarCandy ? $data.useVitamin(VitaminController.currentlySelected(), VitaminController.getMultiplier()) : $data.removeVitamin(VitaminController.currentlySelected(), VitaminController.getMultiplier());,
+                                click: () => VitaminController.add() ? $data.useVitamin(VitaminController.currentlySelected(), VitaminController.getMultiplier()) : $data.removeVitamin(VitaminController.currentlySelected(), VitaminController.getMultiplier());,
                                 event: { contextmenu: () => { $data.removeVitamin(VitaminController.currentlySelected(), VitaminController.getMultiplier()); return false; } },
                                 hidden: $data.hideFromProteinList(),
                                 css: { 'text-muted': $data.breeding }">
@@ -98,8 +97,7 @@
                                     <sup data-bind="visible: $data.shiny">✨</sup>
                                 </td>
                                 <td class="text-center tight" data-bind="text: $data.totalVitaminsUsed().toLocaleString('en-US')">-</td>
-                                <td class="text-center tight" data-bind="visible : VitaminController.currentlySelected() === GameConstants.VitaminType.RareCandy, text: $data.baseAttack * GameConstants.BREEDING_ATTACK_BONUS / 100">-</td> 
-                                <td class="text-center tight" data-bind="visible : VitaminController.currentlySelected() !== GameConstants.VitaminType.RareCandy, text: $data.vitaminsUsed[VitaminController.currentlySelected()]().toLocaleString('en-US')">-</td>
+                                <td class="text-center tight" data-bind="text: $data.vitaminsUsed[VitaminController.currentlySelected()]().toLocaleString('en-US')">-</td>
                                 <td class="text-center tight" data-bind="text: $data.getBreedingAttackBonus().toLocaleString('en-US')">-</td>
                                 <td class="text-center tight" data-bind="text: $data.getEggSteps().toLocaleString('en-US')">-</td>
                                 <td class="text-center tight" data-bind="text: $data.breedingEfficiency().toLocaleString('en-US', { maximumSignificantDigits: 2 })">-</td>

@@ -239,7 +239,7 @@ class PartyPokemon implements Saveable {
             return;
         }
 
-        const usesRemaining = vitamin === GameConstants.VitaminType.RareCandy ? Infinity : this.vitaminUsesRemaining();
+        const usesRemaining = this.vitaminUsesRemaining();
 
         // If no more vitamins can be used on this Pokemon
         if (!usesRemaining) {
@@ -255,18 +255,11 @@ class PartyPokemon implements Saveable {
 
         // Apply the vitamin
         if (ItemHandler.useItem(GameConstants.VitaminType[vitamin], amount)) {
-            if (vitamin === GameConstants.VitaminType.RareCandy) {
-                GameHelper.incrementObservable(this._attackBonusPercent, GameConstants.BREEDING_ATTACK_BONUS * amount);
-                return;
-            }
             GameHelper.incrementObservable(this.vitaminsUsed[vitamin], amount);
         }
     }
 
     public removeVitamin(vitamin: GameConstants.VitaminType, amount: number): void {
-        if (vitamin === GameConstants.VitaminType.RareCandy) {
-            return;
-        }
         if (this.breeding) {
             Notifier.notify({
                 message: 'Vitamins cannot be modified for Pokémon in the hatchery or queue.',

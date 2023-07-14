@@ -947,7 +947,6 @@ export enum VitaminType {
     Protein,
     Calcium,
     Carbos,
-    RareCandy,
 }
 
 export enum EggItemType {
