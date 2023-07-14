@@ -406,9 +406,10 @@ class Safari {
     }
 
     private static canPlaceAtPosition(x: number, y: number) {
-        return !(!this.canMove(x, y) || (x == this.playerXY.x && y == this.playerXY.y) ||
-            this.pokemonGrid().find(p => p.x === x && p.y === y) ||
-            this.itemGrid().find(i => i.x === x && i.y === y));
+        return this.canMove(x, y) &&
+            !(x == this.playerXY.x && y == this.playerXY.y) &&
+            !this.pokemonGrid().find(p => p.x === x && p.y === y) &&
+            !this.itemGrid().find(i => i.x === x && i.y === y);
     }
 
     private static directionToXY(dir: string) {
