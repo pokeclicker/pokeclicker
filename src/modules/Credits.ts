@@ -11,6 +11,21 @@ type Credit = {
 // Sort alphabetically
 export const SpriteCredits: Credit[] = [
     {
+        name: 'Akuma-Tsubasa',
+        link: 'https://www.deviantart.com/akuma-tsubasa',
+        image: 'https://a.deviantart.net/avatars-big/a/k/akuma-tsubasa.png?13',
+        resources: [
+            'Angol',
+            'Cail',
+            'Dakim',
+            'Ein',
+            'Gonzap',
+            'Nascour',
+            'Venus',
+        ],
+        // Notes: Akuma-Tsubasa is the creator, LightningKillua15 is the owner allowing use if the creator is credited.
+    },
+    {
         name: 'Anarlaurendil',
         link: 'https://www.deviantart.com/anarlaurendil',
         image: 'https://a.deviantart.net/avatars-big/a/n/anarlaurendil.png',
@@ -789,6 +804,7 @@ export const SpriteCredits: Credit[] = [
         link: 'https://github.com/osherwott',
         resources: [
             'Bandana Guy',
+            'Bodybuilder (female)',
             'Chaser (female)',
             'Chaser (male)',
             'Hunter (female)',

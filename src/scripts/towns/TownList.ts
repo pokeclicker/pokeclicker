@@ -2871,7 +2871,7 @@ const OldManPhenac = new NPC('Old Man', [
     'Some folks have been currupting their Pokémon and making them commit evil acts.',
     'Those Pokémon would be better off in the hands of a loving trainer.',
 ]);
-const OrreRoamerNPC = new RoamerNPC('Fanteen\'s Fortune Telling', [
+const OrreRoamerNPC = new RoamerNPC('Fateen\'s Fortune Telling', [
     'I sense the presence of rate Pokémon at the {ROUTE_NAME}! Hurry, before the fates intervene!',
 ], GameConstants.Region.hoenn, RoamingPokemonList.findGroup(GameConstants.Region.hoenn, GameConstants.HoennSubRegions.Orre), 'assets/images/npcs/Psychic (female).png');
 const AgateOldMan = new NPC('Old Man', [
