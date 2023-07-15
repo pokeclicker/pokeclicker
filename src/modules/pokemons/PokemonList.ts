@@ -7508,7 +7508,10 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 87,
         'eggCycles': 25,
-        'evolutions': [StoneEvolution('Misdreavus', 'Mismagius', StoneType.Dusk_stone)],
+        'evolutions': [
+            StoneEvolution('Misdreavus', 'Mismagius', StoneType.Dusk_stone),
+            DummyEvolution('Misdreavus', 'Mismagius (Illusion)'),
+        ],
         'base': {
             'hitpoints': 60,
             'attack': 60,
