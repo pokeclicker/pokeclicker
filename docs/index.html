@@ -17,10 +17,10 @@
     <script src="libs/Sortable.min.js"></script>
 
     <!-- New module-based code from './modules' -->
-    <script src="scripts/modules.min.js?v=0.10.12"></script>
+    <script src="scripts/modules.min.js?v=0.10.13"></script>
 
     <!--Minified scripts-->
-    <script src="scripts/script.min.js?v=0.10.12"></script>
+    <script src="scripts/script.min.js?v=0.10.13"></script>
 
     <!--Popper.js-->
     <script src="libs/popper.min.js"></script>
@@ -38,7 +38,7 @@
     <link href="libs/introjs-modern.css" rel="stylesheet">
 
     <!--Minified styles-->
-    <link href="styles/styles.min.css?v=0.10.12" rel="stylesheet">
+    <link href="styles/styles.min.css?v=0.10.13" rel="stylesheet">
 
     <!-- Google Analytics-->
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -253,6 +253,9 @@
             <a class="dropdown-item" href="#settingsModal" data-toggle="modal">Settings</a>
         </li>
         <li>
+            <a class="dropdown-item" href="#eventsModal" data-toggle="modal">Events</a>
+        </li>
+        <li>
             <button class="dropdown-item" href="#statisticsModal" data-toggle="modal">Statistics</button>
         </li>
         <li>
@@ -269,9 +272,6 @@
         </li>
         <li>
             <a class="dropdown-item" href="#changelogModal" data-toggle="modal">Changelog</a>
-        </li>
-        <li>
-            <a class="dropdown-item" href="#eventsModal" data-toggle="modal">Events</a>
         </li>
         <li>
             <a class="dropdown-item" href="#FAQModal" data-toggle="modal">FAQ</a>
@@ -760,7 +760,12 @@
 <script type="text/html" id="pokerusStatusTemplate">
     <knockout style="display: inline;">
         <!-- ko if: $data.pokerus -->
-        <img width="" src="" data-bind="attr: { src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[$data.pokerus]}.png`, width: $data.width }"/>
+        <img width="" src="" data-bind="attr: { src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[$data.pokerus]}.png`, width: $data.width },
+            tooltip: {
+                title:  $data.evs !== undefined ? `EVs: ${$data.evs.toLocaleString('en-US')}` : '',
+                trigger: 'hover',
+                placement: 'top',
+            }"/>
         <!-- /ko -->
     </knockout>
 </script>
@@ -1494,7 +1499,9 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
                 <!-- ko if: !DungeonBattle.trainer() -->
                 <knockout data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(DungeonBattle.enemyPokemon().id)}}"></knockout>
                 <knockout style="position: relative; top: -1px;"
-                    data-bind="template: { name: 'pokerusStatusTemplate', data: { 'pokerus': PartyController.getPokerusStatus(DungeonBattle.enemyPokemon().id) }}">
+                    data-bind="template: { name: 'pokerusStatusTemplate', data: {
+                        'pokerus': PartyController.getPokerusStatus(DungeonBattle.enemyPokemon().id),
+                        'evs': App.game.party.getPokemon(DungeonBattle.enemyPokemon().id)?.evs() }}">
                 </knockout>
                 <!-- /ko -->
             </knockout>
@@ -1863,35 +1870,42 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
     <div class="row justify-content-center no-gutters">
         <div class="col no-gutters">
             <button type="button" class="btn btn-outline-info" style="float: right;"
-            data-bind="visible: player.town() instanceof DungeonTown && !QuestLineHelper.isQuestLineCompleted('Tutorial Quests'), tooltip: { title: 'Capture Pokémon to gain Dungeon Tokens in order to battle dungeons.', trigger: 'hover', placement:'left' }">?</button>
-            <h2 class="pageItemTitle">
-              <knockout data-bind="text: player.town().name">Town Name</knockout>
-              <knockout data-bind="if: player.town() instanceof DungeonTown && player.town().dungeon">
-                  <!--If all Pokémon in the dungeon are caught-->
-                  <knockout data-bind="if: (!DungeonRunner.dungeonCompleted(player.town().dungeon, true) && DungeonRunner.dungeonCompleted(player.town().dungeon, false))">
-                      <img title="You have captured all Pokémon in this dungeon!" class="pokeball-smallest"
-                           src="assets/images/pokeball/Pokeball.svg"/>
-                  </knockout>
+                data-bind="visible: player.town() instanceof DungeonTown && !QuestLineHelper.isQuestLineCompleted('Tutorial Quests'), tooltip: { title: 'Capture Pokémon to gain Dungeon Tokens in order to battle dungeons.', trigger: 'hover', placement:'left' }">?</button>
+            <div class="pageItemTitle" data-bind="using: { isDungeon: player.town() instanceof DungeonTown && player.town().dungeon }">
+              <div style="font-size: 1.8rem;" data-bind="text: player.town().name, css: { 'mx-5': $data.isDungeon }">Town Name</div>
+              <knockout data-bind="if: $data.isDungeon">
+                <div class="d-flex flex-column position-absolute justify-content-center ml-1" style="left: 0; top: 0; height: 100%;">
+                    <!--If all Pokémon in the dungeon are caught-->
+                    <div data-bind="if: (!DungeonRunner.dungeonCompleted(player.town().dungeon, true) && DungeonRunner.dungeonCompleted(player.town().dungeon, false))" style="font-size: 0;">
+                        <img title="You have captured all Pokémon in this dungeon!" class="pokeball-smallest ml-0" src="assets/images/pokeball/Pokeball.svg" />
+                    </div>
 
-                  <!--If all Pokémon in the dungeon are caught shiny-->
-                  <knockout data-bind="if: DungeonRunner.dungeonCompleted(player.town().dungeon, true)">
-                      <img title="You have captured all Pokémon shiny in this dungeon!"
-                           class="pokeball-smallest"
-                           src="assets/images/pokeball/Pokeball-shiny.svg"/>
-                  </knockout>
+                    <!--If all Pokémon in the dungeon are caught shiny-->
+                    <div data-bind="if: DungeonRunner.dungeonCompleted(player.town().dungeon, true)" style="font-size: 0;">
+                        <img title="You have captured all Pokémon shiny in this dungeon!" class="pokeball-smallest ml-0" src="assets/images/pokeball/Pokeball-shiny.svg"/>
+                    </div>
 
-                  <!--Pokérus image-->
-                  <knockout data-bind="if: RouteHelper.minPokerusCheck(player.town().dungeon.allAvailablePokemon())">
-                      <img src="" data-bind="
+                    <!--Pokérus image-->
+                    <div data-bind="if: RouteHelper.minPokerusCheck(player.town().dungeon.allAvailablePokemon())" style="font-size: 0;">
+                        <img src="" data-bind="
                         attr:{ src: 'assets/images/breeding/pokerus/' + GameConstants.Pokerus[RouteHelper.minPokerus(player.town().dungeon.allAvailablePokemon())] + '.png'},
                         tooltip: {
                             title: RouteHelper.dungeonPokerusEVs(player.town().dungeon),
                             placement: 'bottom',
                             trigger: 'hover'
                         }" />
-                  </knockout>
+                    </div>
+                </div>
+
+                <!-- ko if: QuestLineHelper.isQuestLineCompleted('Tutorial Quests') -->
+                <div class="d-flex flex-column position-absolute justify-content-center small mr-1" style="right: 0; top: 0; height: 100%;"
+                    data-bind="using: App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(player.town().name)]()">
+                    <div style="line-height: normal;" data-bind="text: $data.toLocaleString('en-US')">0</div>
+                    <div style="line-height: normal;">clears</div>
+                </div>
+                <!-- /ko -->
               </knockout>
-            </h2>
+            </div>
         </div>
     </div>
     <div class="row no-gutters">
@@ -1900,8 +1914,7 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
                <button class="btn btn-secondary p-0" onclick="DungeonRunner.initializeDungeon(player.town().dungeon)" data-bind="
                    visible: player.town() instanceof DungeonTown,
                    if: player.town().dungeon,
-                   attr: { class: player.town().dungeon && App.game.wallet.currencies[GameConstants.Currency.dungeonToken]() >= player.town().dungeon.tokenCost ? 'btn btn-success p-0' : 'btn btn-secondary p-0' },
-                   tooltip: QuestLineHelper.isQuestLineCompleted('Tutorial Quests') ? { title: 'Total Clears: ' + App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(player.town().name)]().toLocaleString('en-US'), trigger: 'hover', placement: 'left' } : undefined">
+                   attr: { class: player.town().dungeon && App.game.wallet.currencies[GameConstants.Currency.dungeonToken]() >= player.town().dungeon.tokenCost ? 'btn btn-success p-0' : 'btn btn-secondary p-0' }">
                     Start<br/>
                     <span data-bind="template: { name: 'currencyTemplate', data: {'amount': player.town().dungeon.tokenCost, 'currency': GameConstants.Currency.dungeonToken}}"></span>
                </button>
@@ -2148,8 +2161,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.kanto, 'Kanto').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/kanto-kanto.png?v=0.10.12',
-            href:'assets/images/kanto-kanto.png?v=0.10.12'
+            'xlink:href':'assets/images/kanto-kanto.png?v=0.10.13',
+            href:'assets/images/kanto-kanto.png?v=0.10.13'
         }"></image>
 
         <!-- ------ -->
@@ -4558,8 +4571,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.kanto, 'Sevii Islands 123').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/kanto-sevii123.png?v=0.10.12',
-            href:'assets/images/kanto-sevii123.png?v=0.10.12'
+            'xlink:href':'assets/images/kanto-sevii123.png?v=0.10.13',
+            href:'assets/images/kanto-sevii123.png?v=0.10.13'
         }"></image>
 
         <!-- ------ -->
@@ -5127,8 +5140,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.kanto, 'Sevii Islands 4567').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/kanto-sevii4567.png?v=0.10.12',
-            href:'assets/images/kanto-sevii4567.png?v=0.10.12'
+            'xlink:href':'assets/images/kanto-sevii4567.png?v=0.10.13',
+            href:'assets/images/kanto-sevii4567.png?v=0.10.13'
         }"></image>
 
         <!-- ------ -->
@@ -6724,8 +6737,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
                             <g data-bind='visible: player.region == GameConstants.Region.johto'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/johto.png?v=0.10.12',
-        href:'assets/images/johto.png?v=0.10.12'
+        'xlink:href':'assets/images/johto.png?v=0.10.13',
+        href:'assets/images/johto.png?v=0.10.13'
     }"></image>
 
     <!-- ------ -->
@@ -9083,8 +9096,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
                             <g data-bind='visible: player.region == GameConstants.Region.hoenn'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/hoenn.png?v=0.10.12',
-        href:'assets/images/hoenn.png?v=0.10.12'
+        'xlink:href':'assets/images/hoenn.png?v=0.10.13',
+        href:'assets/images/hoenn.png?v=0.10.13'
     }"></image>
 
     <!-- ------ -->
@@ -12442,8 +12455,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
      <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.hoenn, 'Orre').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/orre.png?v=0.10.12',
-            href:'assets/images/orre.png?v=0.10.12'
+            'xlink:href':'assets/images/orre.png?v=0.10.13',
+            href:'assets/images/orre.png?v=0.10.13'
         }"></image>
 
     <!-- ------ -->
@@ -13089,8 +13102,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
                             <g data-bind='visible: player.region == GameConstants.Region.sinnoh'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/sinnoh.png?v=0.10.12',
-        href:'assets/images/sinnoh.png?v=0.10.12'
+        'xlink:href':'assets/images/sinnoh.png?v=0.10.13',
+        href:'assets/images/sinnoh.png?v=0.10.13'
     }"></image>
 
     <!-- ------ -->
@@ -16107,8 +16120,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
                             <g data-bind='visible: player.region == GameConstants.Region.unova'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/unova.png?v=0.10.12',
-        href:'assets/images/unova.png?v=0.10.12'
+        'xlink:href':'assets/images/unova.png?v=0.10.13',
+        href:'assets/images/unova.png?v=0.10.13'
     }"></image>
 
     <!-- ------ -->
@@ -19155,8 +19168,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
                             <g data-bind='visible: player.region == GameConstants.Region.kalos'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/kalos.png?v=0.10.12',
-        href:'assets/images/kalos.png?v=0.10.12'
+        'xlink:href':'assets/images/kalos.png?v=0.10.13',
+        href:'assets/images/kalos.png?v=0.10.13'
     }"></image>
 
     <!-- ------ -->
@@ -21626,8 +21639,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Melemele Island').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-melemele.png?v=0.10.12',
-            href:'assets/images/alola-melemele.png?v=0.10.12'
+            'xlink:href':'assets/images/alola-melemele.png?v=0.10.13',
+            href:'assets/images/alola-melemele.png?v=0.10.13'
         }"></image>
 
         <!-- ------ -->
@@ -24984,8 +24997,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Akala Island').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-akala.png?v=0.10.12',
-            href:'assets/images/alola-akala.png?v=0.10.12'
+            'xlink:href':'assets/images/alola-akala.png?v=0.10.13',
+            href:'assets/images/alola-akala.png?v=0.10.13'
         }"></image>
 
         <!-- ------ -->
@@ -27245,8 +27258,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Ula\'ula Island').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-ulaula.png?v=0.10.12',
-            href:'assets/images/alola-ulaula.png?v=0.10.12'
+            'xlink:href':'assets/images/alola-ulaula.png?v=0.10.13',
+            href:'assets/images/alola-ulaula.png?v=0.10.13'
         }"></image>
 
         <!-- ------ -->
@@ -29950,8 +29963,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Poni Island').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-poni.png?v=0.10.12',
-            href:'assets/images/alola-poni.png?v=0.10.12'
+            'xlink:href':'assets/images/alola-poni.png?v=0.10.13',
+            href:'assets/images/alola-poni.png?v=0.10.13'
         }"></image>
 
         <!-- ------ -->
@@ -32045,8 +32058,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.alola, 'Magikarp Jump').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/alola-magikarp-jump.png?v=0.10.12',
-            href:'assets/images/alola-magikarp-jump.png?v=0.10.12'
+            'xlink:href':'assets/images/alola-magikarp-jump.png?v=0.10.13',
+            href:'assets/images/alola-magikarp-jump.png?v=0.10.13'
         }"></image>
 
         <!-- ------ -->
@@ -34144,8 +34157,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'South Galar').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/galar-south.png?v=0.10.12',
-            href:'assets/images/galar-south.png?v=0.10.12'
+            'xlink:href':'assets/images/galar-south.png?v=0.10.13',
+            href:'assets/images/galar-south.png?v=0.10.13'
         }"></image>
 
         <!-- ------ -->
@@ -36340,8 +36353,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
     </g>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'North Galar').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/galar-north.png?v=0.10.12',
-            href:'assets/images/galar-north.png?v=0.10.12'
+            'xlink:href':'assets/images/galar-north.png?v=0.10.13',
+            href:'assets/images/galar-north.png?v=0.10.13'
         }"></image>
 
         <!-- ------ -->
@@ -37427,8 +37440,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
     </g>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'Isle of Armor').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/galar-isle-of-armor.png?v=0.10.12',
-            href:'assets/images/galar-isle-of-armor.png?v=0.10.12'
+            'xlink:href':'assets/images/galar-isle-of-armor.png?v=0.10.13',
+            href:'assets/images/galar-isle-of-armor.png?v=0.10.13'
         }"></image>
 
         <!-- ------ -->
@@ -40075,8 +40088,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
     </g>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'Crown Tundra').id">
         <image width="1600" height="960" data-bind="attr: {
-            'xlink:href':'assets/images/galar-crown-tundra.png?v=0.10.12',
-            href:'assets/images/galar-crown-tundra.png?v=0.10.12'
+            'xlink:href':'assets/images/galar-crown-tundra.png?v=0.10.13',
+            href:'assets/images/galar-crown-tundra.png?v=0.10.13'
         }"></image>
 
         <!-- ------ -->
@@ -41817,8 +41830,8 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
 
                             <g data-bind='visible: player.region == GameConstants.Region.hisui'>
     <image width="1600" height="960" data-bind="attr: {
-        'xlink:href':'assets/images/hsiui.png?v=0.10.12',
-        href:'assets/images/hisui.png?v=0.10.12'
+        'xlink:href':'assets/images/hsiui.png?v=0.10.13',
+        href:'assets/images/hisui.png?v=0.10.13'
     }"></image>
 
     <!-- ------ -->
@@ -45991,7 +46004,9 @@ selectAllClick - (Optional) Function called when the Select All button is clicke
                 }">
                <knockout data-bind="if: ($data instanceof PokemonItem)">
                     <span style="position: absolute; top: 12px; left: 20px;"
-                        data-bind="template: { name: 'pokerusStatusTemplate', data: { 'pokerus': $data.getPokerusStatus(), 'width': '32px' }}">
+                        data-bind="template: { name: 'pokerusStatusTemplate', data: {
+                            'pokerus': $data.getPokerusStatus(), 'width': '32px',
+                            'evs': App.game.party.getPokemonByName($data.type)?.evs() }}">
                     </span>
                </knockout>
                <knockout data-bind="if: ($data instanceof CaughtIndicatingItem)">
@@ -46550,6 +46565,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
             <div class="modal-body p-0">
                 <ul class="nav nav-tabs nav-fill">
                     <li class="nav-item"><a class="nav-link active" href="#settings-display" data-toggle="tab">Display</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#settings-game" data-toggle="tab">Gameplay</a></li>
                     <li class="nav-item"><a class="nav-link" href="#settings-sound" data-toggle="tab">Sound</a></li>
                     <li class="nav-item"><a class="nav-link" href="#settings-notifications" data-toggle="tab">Notifications</a></li>
                     <li class="nav-item"><a class="nav-link" href="#settings-hotkeys" data-toggle="tab">Hotkeys</a></li>
@@ -46574,25 +46590,18 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('theme')}"></tr>
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('backgroundImage')}"></tr>
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('breedingDisplay')}"></tr>
-                                <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('shopButtons')}"></tr>
-                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('resetShopAmountOnPurchase')}"></tr>
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('eggAnimation')}"></tr>
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('hideHatchery')}"></tr>
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('farmDisplay')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('farmBoostDisplay')}"></tr>
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('sizeUnits')}"></tr>
-                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('hideQuestsOnFull')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showCurrencyGainedAnimation')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showCurrencyLostAnimation')}"></tr>
                                 <tr data-bind="visible: Object.values(App.game.challenges.list).filter(c => c.active()).length > 0, template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('hideChallengeRelatedModules')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('currencyMainDisplayReduced')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('currencyMainDisplayExtended')}"></tr>
-                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('confirmLeaveDungeon')}"></tr>
-                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('confirmBeformeMulchingAllPlots')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showGymGoAnimation')}"></tr>
-                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('disableRightClickMenu')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showMuteButton')}"></tr>
-                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('catchFilters.initialEnabled')}"></tr>
                                 <tr><th colspan="2">Map Colors</th></tr>
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--locked')}"></tr>
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--incomplete')}"></tr>
@@ -46608,6 +46617,37 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--missingResistant')}"></tr>
                                 <!-- /ko -->
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--completed')}"></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="tab-pane" id="settings-game">
+                        <table class="table table-striped table-hover m-0">
+                            <tbody>
+                                <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('shopButtons')}"></tr>
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('resetShopAmountOnPurchase')}"></tr>
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('hideQuestsOnFull')}"></tr>
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('confirmLeaveDungeon')}"></tr>
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('confirmBeformeMulchingAllPlots')}"></tr>
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('disableRightClickMenu')}"></tr>
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('catchFilters.initialEnabled')}"></tr>
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('useWebWorkerForGameTicks')}"></tr>
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('disableOfflineProgress')}"></tr>
+                                <tr data-bind="visible: player.highestRegion() > 0, with: Settings.getSetting('breedingQueueSizeSetting')">
+                                    <td class="p-2" data-bind="text: `${$data.displayName}:`">setting name</td>
+                                    <td class="p-0">
+                                        <input type="text" class="form-control"
+                                            data-bind="attr: { name: $data.name, id: `setting-${$data.name}` }, value: $data.observableValue, tooltip: {
+                                                title: `Restrict your hatchery queue to a specific size or disable entirely. Enter a value between 1 and your current max size (${App.game.breeding.queueSlots()}), zero (0) to disable the queue entirely, or -1 for no limit.`,
+                                                trigger: 'hover'
+                                            }"
+                                            onchange="(() => {
+                                                const val = Number.isNaN(parseInt(this.value)) ? -1 : +this.value;
+                                                this.value = val < -1 ? -1 : Math.min(val, App.game.breeding.queueSlots());
+                                            })(), App.game.breeding.updateQueueSizeLimit(+this.value), Settings.setSettingByName(this.name, this.value)
+                                        ">
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -46814,23 +46854,6 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                             <tbody>
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('saveReminder')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('disableAutoDownloadBackupSaveOnUpdate')}"></tr>
-                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('useWebWorkerForGameTicks')}"></tr>
-                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('disableOfflineProgress')}"></tr>
-                                <tr data-bind="visible: player.highestRegion() > 0, with: Settings.getSetting('breedingQueueSizeSetting')">
-                                    <td class="p-2" data-bind="text: `${$data.displayName}:`">setting name</td>
-                                    <td class="p-0">
-                                        <input type="text" class="form-control"
-                                            data-bind="attr: { name: $data.name, id: `setting-${$data.name}` }, value: $data.observableValue, tooltip: {
-                                                title: `Restrict your hatchery queue to a specific size or disable entirely. Enter a value between 1 and your current max size (${App.game.breeding.queueSlots()}), zero (0) to disable the queue entirely, or -1 for no limit.`,
-                                                trigger: 'hover'
-                                            }"
-                                            onchange="(() => {
-                                                const val = Number.isNaN(parseInt(this.value)) ? -1 : +this.value;
-                                                this.value = val < -1 ? -1 : Math.min(val, App.game.breeding.queueSlots());
-                                            })(), App.game.breeding.updateQueueSizeLimit(+this.value), Settings.setSettingByName(this.name, this.value)
-                                        ">
-                                    </td>
-                                </tr>
 								<tr data-bind="with : Settings.getSetting('saveFilename')">
 									<td class="p-2" data-bind="text : `${$data.displayName}:`">setting name</td>
 									<td class="p-0">
@@ -50546,8 +50569,9 @@ aria-labelledby="badgeCaseModalLabel">
                                             </knockout>
                                             <knockout data-bind="if: ($parent.item.itemType instanceof PokemonItem)">
                                                 <span style="position: relative; top: -1px;"
-                                                    data-bind="template: { name: 'pokerusStatusTemplate',
-                                                        data: { 'pokerus': $parent.item.itemType.getPokerusStatus(), 'width': '32px' }}">
+                                                    data-bind="template: { name: 'pokerusStatusTemplate', data: {
+                                                        'pokerus': $parent.item.itemType.getPokerusStatus(), 'width': '32px',
+                                                        'evs': App.game.party.getPokemonByName($parent.item.itemType.type)?.evs() }}">
                                                 </span>
                                             </knockout>
                                         </span>
@@ -50678,7 +50702,21 @@ aria-labelledby="badgeCaseModalLabel">
                                                 html: true
                                               }"/>
                                         </td>
-                                        <td class='vertical-middle' data-bind='attr: { rowspan: $parent.gems.length }, text: $parent.item.amount + " × " + $parent.item.itemType.displayName'></td>
+                                        <td class='vertical-middle' data-bind='attr: { rowspan: $parent.gems.length }'>
+                                            <span data-bind='text: $parent.item.amount + " × " + $parent.item.itemType.displayName'></span>
+                                            <span style="float: right; margin-right: 5px">
+                                                <knockout data-bind="if: ($parent.item.itemType instanceof CaughtIndicatingItem)">
+                                                    <span data-bind="template: { name: 'caughtStatusTemplate', data: {'status': $parent.item.itemType.getCaughtStatus()}}"></span>
+                                                </knockout>
+                                                <knockout data-bind="if: ($parent.item.itemType instanceof PokemonItem)">
+                                                    <span style="position: relative; top: -1px;"
+                                                        data-bind="template: { name: 'pokerusStatusTemplate', data: {
+                                                            'pokerus': $parent.item.itemType.getPokerusStatus(), 'width': '32px',
+                                                            'evs': App.game.party.getPokemonByName($parent.item.itemType.type)?.evs() }}">
+                                                    </span>
+                                                </knockout>
+                                            </span>
+                                        </td>
                                         <td class='vertical-middle' data-bind="attr: { rowspan: $parent.gems.length }">
                                             <div class="btn-group btn-block" data-bind="let: { tradeAmount: ko.observable(1) }">
                                                 <button class='btn btn-success btn-block' data-bind='click: function(){GemDeal.use(ShopHandler.shopObservable(), $parentContext.$index(), tradeAmount())}, css: { disabled: !GemDeal.canUse(ShopHandler.shopObservable(), $parentContext.$index()) }'>
@@ -51004,7 +51042,9 @@ aria-labelledby="badgeCaseModalLabel">
                                 <knockout data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': SafariBattle.enemy } }">Pokémon name</knockout>
                                 <knockout data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(SafariBattle.enemy.id)}}"></knockout>
                                 <knockout style="position: relative; top: -1px;"
-                                    data-bind="template: { name: 'pokerusStatusTemplate', data: { 'pokerus': PartyController.getPokerusStatus(SafariBattle.enemy.id) }}">
+                                    data-bind="template: { name: 'pokerusStatusTemplate', data: {
+                                        'pokerus': PartyController.getPokerusStatus(SafariBattle.enemy.id),
+                                        'evs': App.game.party.getPokemon(SafariBattle.enemy.id)?.evs() }}">
                                 </knockout>
                           </knockout>
 
