@@ -10,6 +10,21 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.10.13
+    new ChangelogUpdate('v0.10.13', new Date(2023, 6, 15)),
+    new Changelog(changelogType.NEW, 'New Battle Frontier reward'),
+    new Changelog(changelogType.NEW, 'More held items'),
+    new Changelog(changelogType.NEW, 'More profile trainers'),
+    new Changelog(changelogType.NEW, 'Safari Zone based achievements'),
+    new Changelog(changelogType.CHANGE, 'Adjust Safari Zone item spawning'),
+    new Changelog(changelogType.CHANGE, 'Replaced Pancham with Carbink in Mystery Eggs'),
+    new Changelog(changelogType.CHANGE, 'Misc UI changes'),
+    new Changelog(changelogType.CHANGE, 'Misc text changes'),
+    new Changelog(changelogType.CHANGE, 'Misc image changes'),
+    new Changelog(changelogType.FIXED, 'Safari broken fences'),
+    new Changelog(changelogType.FIXED, 'Saves with encoded text'),
+    new Changelog(changelogType.FIXED, 'Zero\'s Ambition questline re-starting or starting early'),
+
     // v0.10.12
     new ChangelogUpdate('v0.10.12', new Date(2023, 6, 2)),
     new Changelog(changelogType.NEW, 'Friend Safari is now open!'),
