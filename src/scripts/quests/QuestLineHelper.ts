@@ -584,7 +584,7 @@ class QuestLineHelper {
             1,
             () => ItemList.Clear_Bell_Hooh.gain(1),
             'Prove your abilities as a trainer to the Kimono Girls of Ecruteak City.',
-            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Kimono Girls)]()
+            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Kimono Girls')]()
         );
         hoohJohtoQuestLine.addQuest(clearKimonoGirls);
 
