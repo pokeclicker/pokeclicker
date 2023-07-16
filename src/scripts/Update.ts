@@ -2267,7 +2267,6 @@ class Update implements Saveable {
         },
 
         '0.10.13': ({ playerData, saveData, settingsData }) => {
-
             // Fix up any decoding errors from v0.10.12
             const decodeStringsDeep = (obj) => {
                 Object.keys(obj).forEach(key => {
