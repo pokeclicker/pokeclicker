@@ -5277,7 +5277,7 @@ TemporaryBattleList['Galarian Moltres 3'] = new TemporaryBattle(
 TemporaryBattleList.Regigigas = new TemporaryBattle(
     'Regigigas',
     [new GymPokemon('Regigigas', 2031393560, 100)],
-    '<i>The ancient giant was defeated!</i>',
+    undefined,
     [new QuestLineStepCompletedRequirement('The Ancient Golems', 6)],
     [new QuestLineStepCompletedRequirement('The Ancient Golems', 7)],
     {
@@ -5285,6 +5285,42 @@ TemporaryBattleList.Regigigas = new TemporaryBattle(
         isTrainerBattle: false,
         returnTown: 'Freezington',
         imageName: '../pokemon/486',
+    }
+);
+TemporaryBattleList['Max Raid 1'] = new TemporaryBattle(
+    'Max Raid 1',
+    [new GymPokemon('Gigantamax Machamp', 1, 100)],
+    undefined,
+    [new QuestLineStartedRequirement('TODO Gigantamax questline name')],
+    undefined,
+    {
+        hideTrainer: true,
+        returnTown: 'Motostoke',
+        rewardFunction: () => ItemList.Wishing_Piece.gain(1),
+    }
+);
+TemporaryBattleList['Max Raid 2'] = new TemporaryBattle(
+    'Max Raid 2',
+    [new GymPokemon('Gigantamax Snorlax', 1, 100)],
+    undefined,
+    [new QuestLineStartedRequirement('TODO Gigantamax questline name')],
+    undefined,
+    {
+        hideTrainer: true,
+        returnTown: 'Motostoke',
+        rewardFunction: () => ItemList.Wishing_Piece.gain(1),
+    }
+);
+TemporaryBattleList['Max Raid 3'] = new TemporaryBattle(
+    'Max Raid 3',
+    [new GymPokemon('Gigantamax Eevee', 1, 100)],
+    'You gained a Wishing Piece!',
+    [new QuestLineStartedRequirement('TODO Gigantamax questline name')],
+    undefined,
+    {
+        hideTrainer: true,
+        returnTown: 'Professor Magnolia\'s House',
+        rewardFunction: () => ItemList.Wishing_Piece.gain(1),
     }
 );
 

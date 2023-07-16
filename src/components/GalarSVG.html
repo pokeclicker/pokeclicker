@@ -830,6 +830,36 @@
                   , image: "assets/images/map/galarianzapdos.png"
                   })
                %>
+
+            <%- include('templates/mapOverlay',
+                { name: "Max Raid"
+                , x: 26, y: 29
+                , width: 4, height: 4
+                , databind: "click: () => TemporaryBattleList['Max Raid 1'].protectedOnclick()"
+                , visible:  "TemporaryBattleList['Max Raid 1'] && TemporaryBattleList['Max Raid 1'].isVisible()"
+                , image: "assets/images/map/Raid.png"
+            })
+            %>
+
+            <%- include('templates/mapOverlay',
+                { name: "Max Raid"
+                , x: 66, y: 18
+                , width: 4, height: 4
+                , databind: "click: () => TemporaryBattleList['Max Raid 2'].protectedOnclick()"
+                , visible:  "TemporaryBattleList['Max Raid 2'] && TemporaryBattleList['Max Raid 2'].isVisible()"
+                , image: "assets/images/map/Raid.png"
+            })
+            %>
+
+            <%- include('templates/mapOverlay',
+                { name: "Max Raid"
+                , x: 56, y: 50
+                , width: 4, height: 4
+                , databind: "click: () => TemporaryBattleList['Max Raid 3'].protectedOnclick()"
+                , visible:  "TemporaryBattleList['Max Raid 3'] && TemporaryBattleList['Max Raid 3'].isVisible()"
+                , image: "assets/images/map/Raid.png"
+            })
+            %>
     </g>
     <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.galar, 'North Galar').id">
         <image width="1600" height="960" data-bind="attr: {
