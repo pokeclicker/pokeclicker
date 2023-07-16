@@ -11284,6 +11284,24 @@ dungeonList['Crown Shrine'] = new Dungeon('Crown Shrine',
     ],
     2200000, 55);
 
+// Function, because we don't have 'player' on load
+const maxLairQuestStepRandomIndex = (index: number) => {
+    SeededRand.seed(+player.trainerId);
+    return SeededRand.shuffleArray([0, 1])[index];
+};
+dungeonList['Max Lair'] = new Dungeon('Max Lair',
+    ['Machop'],
+    {
+        common: [{loot: 'Lucky_egg'}],
+    },
+    33915762,
+    [
+        new DungeonBossPokemon('Machoke', 161099869, 60),
+        new DungeonBossPokemon('Gigantamax Machamp', 161099869, 60, {requirement: new QuestLineStepCompletedRequirement('TODO Gigantamax questline name', () => maxLairQuestStepRandomIndex(0))}),
+        new DungeonBossPokemon('Gigantamax Snorlax', 161099869, 60, {requirement: new QuestLineStepCompletedRequirement('TODO Gigantamax questline name', () => maxLairQuestStepRandomIndex(1))}),
+    ],
+    2200000, 55);
+
 //Hisui Dungeons
 
 dungeonList['Oreburrow Tunnel'] = new Dungeon('Oreburrow Tunnel',
