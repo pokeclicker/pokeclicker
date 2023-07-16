@@ -127,9 +127,7 @@
                   </knockout>
                 </td>
                 <td width="50%">
-                  <knockout data-bind="using: App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]()"</knockout>
-                  <knockout data-bind="text: $data.toLocaleString('en-US')">0</knockout>
-                  &nbsp;Clears
+                  <knockout data-bind="text: `${App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name)]().toLocaleString('en-US')} Clears`"></knockout>
                 </td>
               </tr>
               <tr>
