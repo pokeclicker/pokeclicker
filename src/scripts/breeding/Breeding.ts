@@ -114,7 +114,7 @@ class Breeding implements Feature {
             ['Trapinch', 'Sableye', 'Spoink'],
             ['Stunky', 'Bronzor'],
             ['Vanillite', 'Drilbur'],
-            ['Pancham', 'Honedge'],
+            ['Carbink', 'Honedge'],
             ['Mudbray', 'Rockruff'],
             ['Rolycoly', 'Milcery'],
         ];

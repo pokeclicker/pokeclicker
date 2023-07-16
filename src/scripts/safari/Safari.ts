@@ -15,6 +15,7 @@ class Safari {
     static inBattle: KnockoutObservable<boolean> = ko.observable(false);
     static balls: KnockoutObservable<number> = ko.observable().extend({ numeric: 0 });
     static activeRegion: KnockoutObservable<GameConstants.Region> = ko.observable(GameConstants.Region.none);
+    private static maxPlacementAttempts = 20;
 
     // Safari level
     static maxSafariLevel = 40;
@@ -369,34 +370,46 @@ class Safari {
     }
 
     private static spawnRandomPokemon() {
-        const y = Rand.floor(this.sizeY());
-        const x = Rand.floor(this.sizeX());
-        if (!this.canMove(x, y) ||
-            (x == this.playerXY.x && y == this.playerXY.y) ||
-            this.pokemonGrid().find(p => p.x === x && p.y === y) ||
-            this.itemGrid().find(i => i.x === x && i.y === y)) {
-            return;
+        const pos = this.generatePlaceableSpawnPosition();
+        if (pos) {
+            const pokemon = SafariPokemon.random();
+            pokemon.x = pos.x;
+            pokemon.y = pos.y;
+            pokemon.steps = this.grid.length + this.grid[0].length + Rand.floor(21);
+            this.pokemonGrid.push(pokemon);
         }
-        const pokemon = SafariPokemon.random();
-
-        pokemon.x = x;
-        pokemon.y = y;
-        pokemon.steps = this.sizeX() + this.sizeY() + Rand.floor(21);
-        this.pokemonGrid.push(pokemon);
     }
 
     private static spawnRandomItem() {
-        const x = Rand.floor(this.sizeX());
-        const y = Rand.floor(this.sizeY());
-        if (!this.canMove(x, y) || (x == this.playerXY.x && y == this.playerXY.y) ||
-            this.itemGrid().find(i => i.x === x && i.y === y) ||
-            this.pokemonGrid().find(p => p.x === x && p.y === y)) {
-            return;
-        }
         if (!SafariItemController.currentRegionHasItems()) {
             return;
         }
-        this.itemGrid.push(new SafariItem(x, y));
+
+        const pos = this.generatePlaceableSpawnPosition();
+        if (pos) {
+            this.itemGrid.push(new SafariItem(pos.x, pos.y));
+        }
+    }
+
+    private static generatePlaceableSpawnPosition() {
+        let result = false;
+        let x = 0;
+        let y = 0;
+        let attempts = 0;
+        while (!result && attempts++ < this.maxPlacementAttempts) {
+            x = Rand.floor(this.grid[0].length);
+            y = Rand.floor(this.grid.length);
+            result = this.canPlaceAtPosition(x, y);
+        }
+
+        return result ? {x: x, y: y} : null;
+    }
+
+    private static canPlaceAtPosition(x: number, y: number) {
+        return this.canMove(x, y) &&
+            !(x == this.playerXY.x && y == this.playerXY.y) &&
+            !this.pokemonGrid().find(p => p.x === x && p.y === y) &&
+            !this.itemGrid().find(i => i.x === x && i.y === y);
     }
 
     private static directionToXY(dir: string) {
