@@ -38,6 +38,7 @@ namespace GameConstants {
     declare const TEMP_BATTLE_TIME: number;
     declare const TEMP_BATTLE_TICK: number;
     declare const SPECIAL_EVENT_TICK: number;
+    declare const ZMOVE_TICK: number;
     declare const MAX_AVAILABLE_REGION: number;
     declare const MaxIDPerRegion: number[];
     declare const ITEM_USE_TIME: number;
@@ -128,6 +129,7 @@ namespace GameConstants {
     declare const SAFARI_BASE_POKEBALL_COUNT: number;
     declare const LEGAL_WALK_BLOCKS: number[];
     declare const SAFARI_OUT_OF_BALLS: string;
+    declare const FRIEND_SAFARI_POKEMON: number;
     declare const GAIN_MONEY_BASE_REWARD: number;
     declare const HATCH_EGGS_BASE_REWARD: number;
     declare const SHINY_BASE_REWARD: number;
@@ -795,4 +797,15 @@ namespace GameConstants {
         HeldKeybind,
     }
     declare const ModalCollapseList: string[];
+
+    declare const zCrystalItemType: string[];
+    declare enum ZMoveStatus {
+        inactive,
+        counteractive,
+        active,
+    }
+    declare const ZMOVE_ACTIVE_MULTIPLIER: number;
+    declare const ZMOVE_COUNTERACTIVE_MULTIPLIER: number;
+    declare const ZMOVE_ACTIVE_TIME: number;
+    declare const ZMOVE_COUNTERACTIVE_TIME: number;
 }

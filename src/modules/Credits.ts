@@ -11,6 +11,21 @@ type Credit = {
 // Sort alphabetically
 export const SpriteCredits: Credit[] = [
     {
+        name: 'Akuma-Tsubasa',
+        link: 'https://www.deviantart.com/akuma-tsubasa',
+        image: 'https://a.deviantart.net/avatars-big/a/k/akuma-tsubasa.png?13',
+        resources: [
+            'Angol',
+            'Cail',
+            'Dakim',
+            'Ein',
+            'Gonzap',
+            'Nascour',
+            'Venus',
+        ],
+        // Notes: Akuma-Tsubasa is the creator, LightningKillua15 is the owner allowing use if the creator is credited.
+    },
+    {
         name: 'Anarlaurendil',
         link: 'https://www.deviantart.com/anarlaurendil',
         image: 'https://a.deviantart.net/avatars-big/a/n/anarlaurendil.png',
@@ -553,6 +568,8 @@ export const SpriteCredits: Credit[] = [
         name: 'Farboo171',
         link: 'https://github.com/Farboo171',
         resources: [
+            'Athlete (male)',
+            'Bodybuilder (male)',
             'Exeggcute (Single) Item',
             'Flowering Celebi',
             'Freeze Mulch',
@@ -781,6 +798,25 @@ export const SpriteCredits: Credit[] = [
             'Furfrou Trim Shop Icons',
         ],
         // NOTES: Granted permission on devianart to NiceDice via PN
+    },
+    {
+        name: 'osherwott',
+        link: 'https://github.com/osherwott',
+        resources: [
+            'Bandana Guy',
+            'Bodybuilder (female)',
+            'Chaser (female)',
+            'Chaser (male)',
+            'Hunter (female)',
+            'Hunter (male)',
+            'Rider (female)',
+            'Rider (male)',
+            'Roller Boy',
+            'Rui',
+            'Street Performer',
+            'Team Snagem',
+            'Willie',
+        ],
     },
     {
         name: 'pixie-rings',
@@ -1156,7 +1192,7 @@ fetch(`https://api.github.com/repos/pokeclicker/pokeclicker/contributors?per_pag
 export const CodeCredits: Credit[] = [
     {
         resources: [
-            1422,
+            1427,
         ],
         name: 'RedSparr0w',
         link: 'https://github.com/RedSparr0w',
@@ -1188,7 +1224,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            224,
+            229,
         ],
         name: 'Jaaslet',
         link: 'https://github.com/Jaaslet',
@@ -1220,6 +1256,14 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
+            82,
+        ],
+        name: 'Farboo171',
+        link: 'https://github.com/Farboo171',
+        image: 'https://avatars.githubusercontent.com/u/109317224?v=4',
+    },
+    {
+        resources: [
             78,
         ],
         name: 'jk13pclick',
@@ -1228,15 +1272,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            74,
-        ],
-        name: 'Farboo171',
-        link: 'https://github.com/Farboo171',
-        image: 'https://avatars.githubusercontent.com/u/109317224?v=4',
-    },
-    {
-        resources: [
-            71,
+            76,
         ],
         name: 'CypherX',
         link: 'https://github.com/CypherX',
@@ -1260,7 +1296,7 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            44,
+            45,
         ],
         name: 'osherwott',
         link: 'https://github.com/osherwott',
@@ -1286,6 +1322,14 @@ export const CodeCredits: Credit[] = [
         resources: [
             34,
         ],
+        name: 'Crobat4',
+        link: 'https://github.com/Crobat4',
+        image: 'https://avatars.githubusercontent.com/u/104547700?v=4',
+    },
+    {
+        resources: [
+            34,
+        ],
         name: 'DraKay',
         link: 'https://github.com/DraKay',
         image: 'https://avatars.githubusercontent.com/u/114853432?v=4',
@@ -1302,14 +1346,6 @@ export const CodeCredits: Credit[] = [
         resources: [
             32,
         ],
-        name: 'Crobat4',
-        link: 'https://github.com/Crobat4',
-        image: 'https://avatars.githubusercontent.com/u/104547700?v=4',
-    },
-    {
-        resources: [
-            32,
-        ],
         name: 'apple096',
         link: 'https://github.com/apple096',
         image: 'https://avatars.githubusercontent.com/u/62083669?v=4',
@@ -1321,6 +1357,22 @@ export const CodeCredits: Credit[] = [
         name: 'tkatchen',
         link: 'https://github.com/tkatchen',
         image: 'https://avatars.githubusercontent.com/u/26515965?v=4',
+    },
+    {
+        resources: [
+            25,
+        ],
+        name: 'EatPant2nd',
+        link: 'https://github.com/EatPant2nd',
+        image: 'https://avatars.githubusercontent.com/u/106291026?v=4',
+    },
+    {
+        resources: [
+            25,
+        ],
+        name: 'amative1',
+        link: 'https://github.com/amative1',
+        image: 'https://avatars.githubusercontent.com/u/14666630?v=4',
     },
     {
         resources: [
@@ -1345,22 +1397,6 @@ export const CodeCredits: Credit[] = [
         name: 'davmillar',
         link: 'https://github.com/davmillar',
         image: 'https://avatars.githubusercontent.com/u/576958?v=4',
-    },
-    {
-        resources: [
-            24,
-        ],
-        name: 'EatPant2nd',
-        link: 'https://github.com/EatPant2nd',
-        image: 'https://avatars.githubusercontent.com/u/106291026?v=4',
-    },
-    {
-        resources: [
-            24,
-        ],
-        name: 'amative1',
-        link: 'https://github.com/amative1',
-        image: 'https://avatars.githubusercontent.com/u/14666630?v=4',
     },
     {
         resources: [
@@ -1436,19 +1472,19 @@ export const CodeCredits: Credit[] = [
     },
     {
         resources: [
-            12,
+            13,
         ],
-        name: 'Nydaleclya',
-        link: 'https://github.com/Nydaleclya',
-        image: 'https://avatars.githubusercontent.com/u/21280367?v=4',
+        name: 'Someonealive-QN',
+        link: 'https://github.com/Someonealive-QN',
+        image: 'https://avatars.githubusercontent.com/u/97617298?v=4',
     },
     {
         resources: [
             12,
         ],
-        name: 'Someonealive-QN',
-        link: 'https://github.com/Someonealive-QN',
-        image: 'https://avatars.githubusercontent.com/u/97617298?v=4',
+        name: 'Nydaleclya',
+        link: 'https://github.com/Nydaleclya',
+        image: 'https://avatars.githubusercontent.com/u/21280367?v=4',
     },
     {
         resources: [
@@ -1473,6 +1509,14 @@ export const CodeCredits: Credit[] = [
         name: 'KrushGames',
         link: 'https://github.com/KrushGames',
         image: 'https://avatars.githubusercontent.com/u/71728117?v=4',
+    },
+    {
+        resources: [
+            9,
+        ],
+        name: 'xslk',
+        link: 'https://github.com/xslk',
+        image: 'https://avatars.githubusercontent.com/u/100386196?v=4',
     },
     {
         resources: [
@@ -1537,14 +1581,6 @@ export const CodeCredits: Credit[] = [
         name: 'umbralOptimatum',
         link: 'https://github.com/umbralOptimatum',
         image: 'https://avatars.githubusercontent.com/u/12092270?v=4',
-    },
-    {
-        resources: [
-            7,
-        ],
-        name: 'xslk',
-        link: 'https://github.com/xslk',
-        image: 'https://avatars.githubusercontent.com/u/100386196?v=4',
     },
     {
         resources: [
