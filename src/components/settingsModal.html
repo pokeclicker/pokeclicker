@@ -11,6 +11,7 @@
             <div class="modal-body p-0">
                 <ul class="nav nav-tabs nav-fill">
                     <li class="nav-item"><a class="nav-link active" href="#settings-display" data-toggle="tab">Display</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#settings-game" data-toggle="tab">Gameplay</a></li>
                     <li class="nav-item"><a class="nav-link" href="#settings-sound" data-toggle="tab">Sound</a></li>
                     <li class="nav-item"><a class="nav-link" href="#settings-notifications" data-toggle="tab">Notifications</a></li>
                     <li class="nav-item"><a class="nav-link" href="#settings-hotkeys" data-toggle="tab">Hotkeys</a></li>
@@ -35,25 +36,18 @@
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('theme')}"></tr>
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('backgroundImage')}"></tr>
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('breedingDisplay')}"></tr>
-                                <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('shopButtons')}"></tr>
-                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('resetShopAmountOnPurchase')}"></tr>
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('eggAnimation')}"></tr>
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('hideHatchery')}"></tr>
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('farmDisplay')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('farmBoostDisplay')}"></tr>
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('sizeUnits')}"></tr>
-                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('hideQuestsOnFull')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showCurrencyGainedAnimation')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showCurrencyLostAnimation')}"></tr>
                                 <tr data-bind="visible: Object.values(App.game.challenges.list).filter(c => c.active()).length > 0, template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('hideChallengeRelatedModules')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('currencyMainDisplayReduced')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('currencyMainDisplayExtended')}"></tr>
-                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('confirmLeaveDungeon')}"></tr>
-                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('confirmBeformeMulchingAllPlots')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showGymGoAnimation')}"></tr>
-                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('disableRightClickMenu')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showMuteButton')}"></tr>
-                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('catchFilters.initialEnabled')}"></tr>
                                 <tr><th colspan="2">Map Colors</th></tr>
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--locked')}"></tr>
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--incomplete')}"></tr>
@@ -69,6 +63,37 @@
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--missingResistant')}"></tr>
                                 <!-- /ko -->
                                 <tr data-bind="template: { name: 'ColorChoiceSettingTemplate', data: Settings.getSetting('--completed')}"></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="tab-pane" id="settings-game">
+                        <table class="table table-striped table-hover m-0">
+                            <tbody>
+                                <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('shopButtons')}"></tr>
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('resetShopAmountOnPurchase')}"></tr>
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('hideQuestsOnFull')}"></tr>
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('confirmLeaveDungeon')}"></tr>
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('confirmBeformeMulchingAllPlots')}"></tr>
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('disableRightClickMenu')}"></tr>
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('catchFilters.initialEnabled')}"></tr>
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('useWebWorkerForGameTicks')}"></tr>
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('disableOfflineProgress')}"></tr>
+                                <tr data-bind="visible: player.highestRegion() > 0, with: Settings.getSetting('breedingQueueSizeSetting')">
+                                    <td class="p-2" data-bind="text: `${$data.displayName}:`">setting name</td>
+                                    <td class="p-0">
+                                        <input type="text" class="form-control"
+                                            data-bind="attr: { name: $data.name, id: `setting-${$data.name}` }, value: $data.observableValue, tooltip: {
+                                                title: `Restrict your hatchery queue to a specific size or disable entirely. Enter a value between 1 and your current max size (${App.game.breeding.queueSlots()}), zero (0) to disable the queue entirely, or -1 for no limit.`,
+                                                trigger: 'hover'
+                                            }"
+                                            onchange="(() => {
+                                                const val = Number.isNaN(parseInt(this.value)) ? -1 : +this.value;
+                                                this.value = val < -1 ? -1 : Math.min(val, App.game.breeding.queueSlots());
+                                            })(), App.game.breeding.updateQueueSizeLimit(+this.value), Settings.setSettingByName(this.name, this.value)
+                                        ">
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -275,23 +300,6 @@
                             <tbody>
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('saveReminder')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('disableAutoDownloadBackupSaveOnUpdate')}"></tr>
-                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('useWebWorkerForGameTicks')}"></tr>
-                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('disableOfflineProgress')}"></tr>
-                                <tr data-bind="visible: player.highestRegion() > 0, with: Settings.getSetting('breedingQueueSizeSetting')">
-                                    <td class="p-2" data-bind="text: `${$data.displayName}:`">setting name</td>
-                                    <td class="p-0">
-                                        <input type="text" class="form-control"
-                                            data-bind="attr: { name: $data.name, id: `setting-${$data.name}` }, value: $data.observableValue, tooltip: {
-                                                title: `Restrict your hatchery queue to a specific size or disable entirely. Enter a value between 1 and your current max size (${App.game.breeding.queueSlots()}), zero (0) to disable the queue entirely, or -1 for no limit.`,
-                                                trigger: 'hover'
-                                            }"
-                                            onchange="(() => {
-                                                const val = Number.isNaN(parseInt(this.value)) ? -1 : +this.value;
-                                                this.value = val < -1 ? -1 : Math.min(val, App.game.breeding.queueSlots());
-                                            })(), App.game.breeding.updateQueueSizeLimit(+this.value), Settings.setSettingByName(this.name, this.value)
-                                        ">
-                                    </td>
-                                </tr>
 								<tr data-bind="with : Settings.getSetting('saveFilename')">
 									<td class="p-2" data-bind="text : `${$data.displayName}:`">setting name</td>
 									<td class="p-0">

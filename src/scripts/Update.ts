@@ -509,10 +509,10 @@ class Update implements Saveable {
 
             setTimeout(async () => {
                 // Check if player wants to activate the new challenge modes
-                if (!await Notifier.confirm({ title: 'Regional Attack Debuff (recommended)', message: 'New challenge mode added Regional Attack Debuff.\n\nLowers Pokémon attack based on native region and highest reached region.\n\nThis is the default and recommended way to play, but is now an optional challenge.\n\nPlease choose if you would like this challenge mode to be enabled or disabled (cannot be re-enabled later)', confirm: 'enable', cancel: 'disable' })) {
+                if (await Notifier.confirm({ title: 'Regional Attack Debuff (recommended)', message: 'New challenge mode added Regional Attack Debuff.\n\nLowers Pokémon attack based on native region and highest reached region.\n\nThis is the default and recommended way to play, but is now an optional challenge.\n\nPlease choose if you would like this challenge mode to be enabled or disabled (cannot be re-enabled later)', confirm: 'Disable', cancel: 'Enable' })) {
                     App.game.challenges.list.regionalAttackDebuff.disable();
                 }
-                if (!await Notifier.confirm({ title: 'Require Complete Pokédex (recommended)', message: 'New challenge mode added Require Complete Pokédex.\n\nRequires a complete regional pokédex before moving on to the next region.\n\nThis is the default and recommended way to play, but is now an optional challenge.\n\nPlease choose if you would like this challenge mode to be enabled or disabled (cannot be re-enabled later)', confirm: 'enable', cancel: 'disable' })) {
+                if (await Notifier.confirm({ title: 'Require Complete Pokédex (recommended)', message: 'New challenge mode added Require Complete Pokédex.\n\nRequires a complete regional pokédex before moving on to the next region.\n\nThis is the default and recommended way to play, but is now an optional challenge.\n\nPlease choose if you would like this challenge mode to be enabled or disabled (cannot be re-enabled later)', confirm: 'Disable' , cancel: 'Enable' })) {
                     App.game.challenges.list.requireCompletePokedex.disable();
                 }
             }, GameConstants.SECOND);
@@ -2263,6 +2263,60 @@ class Update implements Saveable {
             // Changing MissingResistant to match new default
             if (settingsData['--missingResistant'] === '#ffffff') {
                 settingsData['--missingResistant'] = Settings.getSetting('--missingResistant').defaultValue;
+            }
+        },
+
+        '0.10.13': ({ playerData, saveData, settingsData }) => {
+            // Fix up any decoding errors from v0.10.12
+            const decodeStringsDeep = (obj) => {
+                Object.keys(obj).forEach(key => {
+                    if (typeof obj[key] === 'object' && obj[key] !== null) {
+                        decodeStringsDeep(obj[key]);
+                    }
+                    if (typeof obj[key] === 'string') {
+                        try {
+                            obj[key] = decodeURI(obj[key]);
+                        } catch (e) {
+                            console.warn('Unable to decode save file string', obj[key]);
+                        }
+                    }
+                });
+            };
+
+            // try and decode our data
+            decodeStringsDeep(saveData);
+            decodeStringsDeep(playerData);
+            decodeStringsDeep(settingsData);
+
+            // Fix up Zero's Ambition questline restarting
+            if (saveData.party.caughtPokemon.find(p => p.id === 487)) { // If Giratina Altered caught
+                const zeroQuestLine = saveData.quests.questLines.find(q => q.name === 'Zero\'s Ambition');
+                if (zeroQuestLine) {
+                    zeroQuestLine.state = 2;
+                }
+            } else if (saveData.statistics.temporaryBattleDefeated[83] >= 1) { // If zero temp battle defeated
+                const zeroQuestLine = saveData.quests.questLines.find(q => q.name === 'Zero\'s Ambition');
+                if (zeroQuestLine) {
+                    zeroQuestLine.state = 1;
+                    zeroQuestLine.quest = 14;
+                    zeroQuestLine.initial = 0;
+                }
+            }
+
+            // Fix up Zero's Ambition questline starting early
+            const zeroQuestLine = saveData.quests.questLines.find(q => q.name === 'Zero\'s Ambition');
+            if (zeroQuestLine && zeroQuestLine.state === 1) {
+                // Quest is started, check if the player has the rquirements for starting the quest
+                const caughtUxie = saveData.party.caughtPokemon.find(p => p.id === 480);
+                const caughtMesprit = saveData.party.caughtPokemon.find(p => p.id === 481);
+                const caughtAzelf = saveData.party.caughtPokemon.find(p => p.id === 482);
+                const hasSinnohChampionBadge = !!saveData.badgeCase[61];
+                // If any of these requirements are not met, reset the questline
+                if (!caughtUxie || !caughtMesprit || !caughtAzelf || !hasSinnohChampionBadge) {
+                    zeroQuestLine.state = 0;
+                    zeroQuestLine.quest = 0;
+                    zeroQuestLine.initial = 0;
+                }
             }
         },
     };

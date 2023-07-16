@@ -18,6 +18,9 @@ class SafariTownContent extends TownContent {
         const pokemonStatusArray = [areaStatus.completed];
         const pokerusUnlocked = Settings.getSetting(`--${areaStatus[areaStatus.missingResistant]}`).isUnlocked();
         SafariPokemonList.list[player.region]().forEach(p => {
+            if (!p.isAvailable()) {
+                return;
+            }
             const caughtStatus = PartyController.getCaughtStatusByName(p.name);
             if (caughtStatus == CaughtStatus.NotCaught) {
                 pokemonStatusArray.push(areaStatus.uncaughtPokemon);
