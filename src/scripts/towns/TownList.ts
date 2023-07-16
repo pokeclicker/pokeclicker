@@ -5631,6 +5631,39 @@ const KalosStoneSalesman2 = new NPC('Stone Salesman', [
     requirement: new TemporaryBattleRequirement('Kalos Stone Salesman'),
 });
 
+const Baraz1 = new NPC('Baraz', [
+    'Hello, $playername$! My name is Baraz, and my people have a complicated history with Hoopa.',
+    'I have come to this region to search of a Prison Bottle, in which the spirit of a powerful Hoopa is bound.',
+    'Can you help with my search? My search indicates it is nearby, maybe one of the local Psychic Pokémon has it?',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Clash of Ages', 0), new QuestLineStepCompletedRequirement('Clash of Ages', 2, GameConstants.AchievementOption.less)]),
+});
+
+const Baraz2 = new NPC('Baraz', [
+    '$playername$! No luck?',
+    'Maybe beating the Pokémon isn\'t enough. Try catching some of these Psychic Pokémon.',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Clash of Ages', 2), new QuestLineStepCompletedRequirement('Clash of Ages', 3, GameConstants.AchievementOption.less)]),
+});
+
+const Baraz3 = new NPC('Baraz', [
+    'There\'s only one Pokémon who could keep the Prison Bottle from us for so long: Hoopa!',
+    'You\'ll have to catch a ton before you find the Prison Bottle. Maybe... 100?',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Clash of Ages', 4), new QuestLineStepCompletedRequirement('Clash of Ages', 6, GameConstants.AchievementOption.less)]),
+});
+
+const Baraz4 = new NPC('Baraz', [
+    'Wow, you caught 100 that fast?',
+    'No? There\'s no other way, I\'m sorry...',
+    '<i>While Baraz is talking, a hoop appears behind him and the Prison Bottle falls out.</i>',
+    'Aha! There it is!',
+    '<i>Baraz grabs the Prison Bottle, and an eerie glow surrounds him. A massive Pokémon picks him up and flies away into a nearby hoop.</i>',
+], {
+    image: 'assets/images/items/quest/Prison_Bottle.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Clash of Ages', 6), new QuestLineStepCompletedRequirement('Clash of Ages', 8, GameConstants.AchievementOption.less)]),
+});
+
 const VivillonPhotobook = new NPC('Vivillon Photobook', [
     '<i>Viola has sent some of her Vivillon photographs in to the local Pokémon Center as a photobook, to celebrate the Lunar New Year. You flip through the pages...</i>',
     '<img src="assets/images/npcs/textbody/VivillonPhotobookFancyMeadow.png" style="max-width:100%; height:auto"/>',
@@ -5860,7 +5893,7 @@ TownList['Kiloude City'] = new Town(
     [TemporaryBattleList['Calem 6']],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
-        npcs: [KiloudeConfusedHiker],
+        npcs: [KiloudeConfusedHiker, Baraz1, Baraz2, Baraz3, Baraz4],
     }
 );
 TownList['Pokémon League Kalos'] = new Town(

@@ -21261,6 +21261,26 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 720.01,
+        'name': 'Hoopa (Unbound)',
+        'type': [PokemonType.Psychic, PokemonType.Dark],
+        'eggCycles': 120,
+        'levelType': LevelType.slow,
+        'exp': 270,
+        'catchRate': 3,
+        'base': {
+            'hitpoints': 80,
+            'attack': 160,
+            'specialAttack': 170,
+            'defense': 60,
+            'specialDefense': 130,
+            'speed': 70,
+        },
+        'gender': {
+            'type': Genders.Genderless,
+        },
+    },
+    {
         'id': 721,
         'name': 'Volcanion',
         'type': [PokemonType.Fire, PokemonType.Water],
