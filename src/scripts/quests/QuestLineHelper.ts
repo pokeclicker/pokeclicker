@@ -2200,6 +2200,7 @@ class QuestLineHelper {
 
         App.game.quests.questLines().push(princessDiancieQuestLine);
     }
+
     public static createClashOfAgesQuestLine() {
         const clashOfAgesQuestLine = new QuestLine('Clash of Ages', 'Hoopa is up to something mischievous...', new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion) , GameConstants.BulletinBoards.Kalos);
 
