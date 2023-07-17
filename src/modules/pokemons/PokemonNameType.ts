@@ -1114,6 +1114,7 @@ export type PokemonNameType
     | 'Diancie'
     | 'Mega Diancie'
     | 'Hoopa'
+    | 'Hoopa (Unbound)'
     | 'Volcanion'
     | 'Rowlet'
     | 'Dartrix'

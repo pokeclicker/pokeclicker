@@ -54,10 +54,15 @@
             Stop Auto
         </button>
         <h2 class="pageItemFooter" style="display: block; font-size: 1rem;">
-            <knockout>
-                <knockout data-bind="text: GymBattle.gym.leaderName.replace(/\d/g,'')"></knockout>
-            </knockout>
             <table width="100%">
+              <tr>
+                <td with="50%">
+                  <knockout data-bind="text: GymBattle.gym.leaderName.replace(/\d/g,'')"></knockout>
+                </td>
+                <td width="50%">
+                  <knockout data-bind="text: `${GymRunner.gymObservable().clears().toLocaleString('en-US')} Clears`"></knockout>
+                </td>
+              </tr>
               <tr>
                 <td width="50%">
                     <knockout data-bind="template: { name: 'pokemonAttackTemplate', data: { 'pokemon': Battle.enemyPokemon() } }"></knockout>

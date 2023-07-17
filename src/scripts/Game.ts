@@ -49,7 +49,8 @@ class Game {
         public battleCafe: BattleCafeSaveObject,
         public dreamOrbController: DreamOrbController,
         public purifyChamber: PurifyChamber,
-        public weatherApp: WeatherApp
+        public weatherApp: WeatherApp,
+        public zMoves: ZMoves
     ) {
         this._gameState = ko.observable(GameConstants.GameState.loading);
     }
@@ -488,6 +489,11 @@ class Game {
         FluteEffectRunner.counter += GameConstants.TICK_TIME;
         if (FluteEffectRunner.counter >= GameConstants.EFFECT_ENGINE_TICK) {
             FluteEffectRunner.tick();
+        }
+
+        this.zMoves.counter += GameConstants.TICK_TIME;
+        if (this.zMoves.counter >= GameConstants.ZMOVE_TICK) {
+            this.zMoves.tick();
         }
 
         // Game timers
