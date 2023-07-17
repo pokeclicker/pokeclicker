@@ -260,8 +260,8 @@ class Safari {
     private static addPlayer(i: number, j: number) {
         const topLeft = $('#safari-0-0').offset();
         const offset = {
-            top: 32 * j + topLeft.top,
-            left: 32 * i + topLeft.left,
+            top: 32 * j + topLeft.top - 8,
+            left: 32 * i + topLeft.left - 4,
         };
         $('#safariBody').append('<div id="sprite"></div>');
         document.getElementById('sprite').classList.value = `walk${Safari.lastDirection}`;

@@ -64,7 +64,7 @@
                                 <img class='fit-width' src="assets/images/safari/area1.png" />
                             </div>
 
-                            <div style="position: relative;">
+                            <div style="position: relative; overflow-x: hidden;">
                                 <div id="safariBody"
                                     class='container-fluid'
                                     data-bind="visible: Safari.inProgress()">
@@ -80,8 +80,8 @@
                                 <!-- ko foreach: Safari.itemGrid -->
                                     <div class="safari-item" data-bind="
                                     style: {
-                                        top: `${32 * $data.y - 8}px`,
-                                        left: `${32 * $data.x - 4}px`,
+                                        top: `${32 * $data.y}px`,
+                                        left: `${32 * $data.x}px`,
                                     }"></div>
                                 <!-- /ko -->
                             </div>
