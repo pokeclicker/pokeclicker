@@ -7508,7 +7508,10 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 87,
         'eggCycles': 25,
-        'evolutions': [StoneEvolution('Misdreavus', 'Mismagius', StoneType.Dusk_stone)],
+        'evolutions': [
+            StoneEvolution('Misdreavus', 'Mismagius', StoneType.Dusk_stone),
+            DummyEvolution('Misdreavus', 'Mismagius (Illusion)'),
+        ],
         'base': {
             'hitpoints': 60,
             'attack': 60,
@@ -21249,6 +21252,26 @@ export const pokemonList = createPokemonArray(
             'hitpoints': 80,
             'attack': 110,
             'specialAttack': 150,
+            'defense': 60,
+            'specialDefense': 130,
+            'speed': 70,
+        },
+        'gender': {
+            'type': Genders.Genderless,
+        },
+    },
+    {
+        'id': 720.01,
+        'name': 'Hoopa (Unbound)',
+        'type': [PokemonType.Psychic, PokemonType.Dark],
+        'eggCycles': 120,
+        'levelType': LevelType.slow,
+        'exp': 270,
+        'catchRate': 3,
+        'base': {
+            'hitpoints': 80,
+            'attack': 160,
+            'specialAttack': 170,
             'defense': 60,
             'specialDefense': 130,
             'speed': 70,
