@@ -113,6 +113,18 @@ SpecialEvents.newEvent('Easter', 'Encounter Surprise Togepi for a limited time w
     new Date(new Date().getFullYear(), 3, 29, 23), () => {
     }
 );
+/* Golden Week
+    Dungeon.ts:
+        Bulbasaur (Rose) in Flower Paradise
+    */
+        SpecialEvents.newEvent('Golden Week', 'Enjoy your time off in the "Golden Week"! Travel tip: Visit the Flower Paradise in Sinnoh on your well earned vacation and enjoy the bloom of roses.',
+        // Start
+        new Date(new Date().getFullYear(), 3, 29, 1), () => {
+        },
+        // End
+        new Date(new Date().getFullYear(), 4, 6, 23), () => {
+        }
+    );    
 /* First Event
     RoamingPokemonList.ts:
         Flying Pikachu
@@ -194,17 +206,5 @@ SpecialEvents.newEvent('Merry Christmas!', 'Encounter Santa Snorlax roaming the 
     },
     // End
     new Date(new Date().getFullYear(), 11, 30, 23), () => {
-    }
-);
-/* Golden Week
-    Dungeon.ts:
-        Bulbasaur (Rose) in Flower Paradise
-    */
-SpecialEvents.newEvent('Golden Week', 'Enjoy your time off in the "Golden Week"! Travel tip: Visit the Flower Paradise in Sinnoh on your well earned vacation and enjoy the bloom of roses.',
-    // Start
-    new Date(new Date().getFullYear(), 3, 29, 1), () => {
-    },
-    // End
-    new Date(new Date().getFullYear(), 4, 6, 23), () => {
     }
 );
