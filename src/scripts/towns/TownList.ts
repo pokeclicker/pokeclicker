@@ -1478,7 +1478,7 @@ const AzaleaCelebiOak1 = new NPC('Prof. Oak', [
 const AzaleaCelebiOak2 = new NPC('Prof. Oak', [
     'Celebi wasn\'t there? Strange, usually it loves to play with young people at the shrine.',
     'Wait. That Pichu! It used to play with us at that shrine way back when! It looks like it hasn\'t aged a day!',
-    'It sounds like you encountered a Time Distortion. Celebi is sensitive to time, it must be distressed. I have heared rumors of something similar going on at Tohjo Falls. Maybe if you clear up that Time Distortion, Celebi will want to come out to play?',
+    'It sounds like you encountered a Time Distortion. Celebi is sensitive to time, it must be distressed. I have heard rumors of something similar going on at Tohjo Falls. Maybe if you clear up that Time Distortion, Celebi will want to come out to play?',
 ], {
     image: 'assets/images/npcs/Professor Oak.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Unfinished Business', 7), new QuestLineStepCompletedRequirement('Unfinished Business', 9, GameConstants.AchievementOption.less)]),
@@ -2759,12 +2759,20 @@ const ZinniaOrigin = new NPC('Zinnia', [
 ], {image: 'assets/images/npcs/Zinnia.png',
     requirement: new MultiRequirement([new QuestLineCompletedRequirement('The Delta Episode'), new QuestLineCompletedRequirement('Primal Reversion')]),
 });
+
 const ExploreStand = new NPC('Explore the Outskirt Stand', [
     '<i>You look around the Outskirt Stand, and see two shady figures shuffling off into the horizon. As you move to get a closer look, some guy steps in your way.</i>',
     'Hey! You\'re new around these parts, and I don\'t take too kindly to strangers!',
     'You\'ll have to prove your worth, or my name ain\'t Willie!',
-], {image: 'assets/images/npcs/Rider (male).png',
+], {image: 'assets/images/npcs/Willie.png',
     requirement: new MultiRequirement([new QuestLineStartedRequirement('Shadows in the Desert'), new QuestLineStepCompletedRequirement('Shadows in the Desert', 1, GameConstants.AchievementOption.less)]),
+});
+const Willie = new NPC('Willie', [
+    'Well partner, that was some dang fancy fighting, I\'ll tell you what.',
+    'I dunno what your plans are round these parts, but you\'d best keep an eye out for some of them dang ole Shadow Pokémon.',
+    'I hear they are weaker than normal Pokémon but can hold fancy incense. But if you manage to purify their souls, they will get a bit stronger!',
+], {image: 'assets/images/npcs/Willie.png',
+    requirement: new QuestLineStepCompletedRequirement('Shadows in the Desert', 1),
 });
 const Sack = new NPC('Check the sack', [
     '<i>You open the sack and a girl pops out!</i>',
@@ -2863,7 +2871,7 @@ const OldManPhenac = new NPC('Old Man', [
     'Some folks have been currupting their Pokémon and making them commit evil acts.',
     'Those Pokémon would be better off in the hands of a loving trainer.',
 ]);
-const OrreRoamerNPC = new RoamerNPC('Fanteen\'s Fortune Telling', [
+const OrreRoamerNPC = new RoamerNPC('Fateen\'s Fortune Telling', [
     'I sense the presence of rate Pokémon at the {ROUTE_NAME}! Hurry, before the fates intervene!',
 ], GameConstants.Region.hoenn, RoamingPokemonList.findGroup(GameConstants.Region.hoenn, GameConstants.HoennSubRegions.Orre), 'assets/images/npcs/Psychic (female).png');
 const AgateOldMan = new NPC('Old Man', [
@@ -3127,7 +3135,7 @@ TownList['Outskirt Stand'] = new Town(
     [OutskirtStandShop, TemporaryBattleList.Willie],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), new QuestLineStartedRequirement('Shadows in the Desert')],
-        npcs: [ExploreStand, OutskirtCowboy],
+        npcs: [ExploreStand, OutskirtCowboy, Willie],
     }
 );
 
@@ -5623,6 +5631,39 @@ const KalosStoneSalesman2 = new NPC('Stone Salesman', [
     requirement: new TemporaryBattleRequirement('Kalos Stone Salesman'),
 });
 
+const Baraz1 = new NPC('Baraz', [
+    'Hello, $playername$! My name is Baraz, and my people have a complicated history with Hoopa.',
+    'I have come to this region to search of a Prison Bottle, in which the spirit of a powerful Hoopa is bound.',
+    'Can you help with my search? My search indicates it is nearby, maybe one of the local Psychic Pokémon has it?',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Clash of Ages', 0), new QuestLineStepCompletedRequirement('Clash of Ages', 2, GameConstants.AchievementOption.less)]),
+});
+
+const Baraz2 = new NPC('Baraz', [
+    '$playername$! No luck?',
+    'Maybe beating the Pokémon isn\'t enough. Try catching some of these Psychic Pokémon.',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Clash of Ages', 2), new QuestLineStepCompletedRequirement('Clash of Ages', 3, GameConstants.AchievementOption.less)]),
+});
+
+const Baraz3 = new NPC('Baraz', [
+    'There\'s only one Pokémon who could keep the Prison Bottle from us for so long: Hoopa!',
+    'You\'ll have to catch a ton before you find the Prison Bottle. Maybe... 100?',
+], {
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Clash of Ages', 4), new QuestLineStepCompletedRequirement('Clash of Ages', 6, GameConstants.AchievementOption.less)]),
+});
+
+const Baraz4 = new NPC('Baraz', [
+    'Wow, you caught 100 that fast?',
+    'No? There\'s no other way, I\'m sorry...',
+    '<i>While Baraz is talking, a hoop appears behind him and the Prison Bottle falls out.</i>',
+    'Aha! There it is!',
+    '<i>Baraz grabs the Prison Bottle, and an eerie glow surrounds him. A massive Pokémon picks him up and flies away into a nearby hoop.</i>',
+], {
+    image: 'assets/images/items/quest/Prison_Bottle.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Clash of Ages', 6), new QuestLineStepCompletedRequirement('Clash of Ages', 8, GameConstants.AchievementOption.less)]),
+});
+
 const VivillonPhotobook = new NPC('Vivillon Photobook', [
     '<i>Viola has sent some of her Vivillon photographs in to the local Pokémon Center as a photobook, to celebrate the Lunar New Year. You flip through the pages...</i>',
     '<img src="assets/images/npcs/textbody/VivillonPhotobookFancyMeadow.png" style="max-width:100%; height:auto"/>',
@@ -5852,7 +5893,7 @@ TownList['Kiloude City'] = new Town(
     [TemporaryBattleList['Calem 6']],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
-        npcs: [KiloudeConfusedHiker],
+        npcs: [KiloudeConfusedHiker, Baraz1, Baraz2, Baraz3, Baraz4],
     }
 );
 TownList['Pokémon League Kalos'] = new Town(
@@ -6426,7 +6467,7 @@ const RyukiSilvally = new NPC('Ryuki', [
     'Yo, traveler! The name\'s Ryuki! You\'ve come here to battle against a star like me, haven\'t you? No? Why\'s that? I see, you\'re looking for something?',
     'Speaking of which, I stumbled upon a gnarly disk in my travels recently. It was unlike any music disk I had ever seen before, it has a rockin\' dark blue coloration. But for all its uniqueness, I can\'t make out what it is, see?',
     'A Dragon-type Silvally Memory, you say? Rock on! I had a feeling it was something rare and powerful, but I never would have guessed it was a Silvally Memory! But now that I know what I have, I can\'t simply give it to you. I\'m a rock star, not a trial captain! We\'re on stage and the crowd wants a show!',
-    'If you want this Silvally Memory, you have to defeat me in a buring hot battle! It won\'t be easy, mind you. My babies are dying to play a set, and I won\'t be holding back! But if you truly have what it takes to be the champion, then you should be up for the challenge, yeah? Right on! Let\'s rock!',
+    'If you want this Silvally Memory, you have to defeat me in a burning hot battle! It won\'t be easy, mind you. My babies are dying to play a set, and I won\'t be holding back! But if you truly have what it takes to be the champion, then you should be up for the challenge, yeah? Right on! Let\'s rock!',
 ], {
     image: 'assets/images/npcs/Ryuki.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Typing some Memories', 30, GameConstants.AchievementOption.more), new QuestLineStepCompletedRequirement('Typing some Memories', 32, GameConstants.AchievementOption.less)]),
@@ -7970,7 +8011,7 @@ TownList.Spikemuth = new Town(
     'Spikemuth',
     GameConstants.Region.galar,
     GameConstants.GalarSubRegions.NorthGalar,
-    [TemporaryBattleList['Gym Leader Marnie'], SpikemuthShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Spikemuth)],
+    [TemporaryBattleList['Gym Leader Marnie'], SpikemuthShop, new ShardTraderShop(GameConstants.ShardTraderLocations.Spikemuth), new DockTownContent()],
     {
         requirements: [new TemporaryBattleRequirement('Marnie 2')],
         npcs: [TeamYellGrunts],
