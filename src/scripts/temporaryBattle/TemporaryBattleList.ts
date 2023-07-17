@@ -903,7 +903,7 @@ TemporaryBattleList.Willie = new TemporaryBattle(
     undefined,
     {
         displayName: 'Willie',
-        imageName: 'Rider (male)',
+        imageName: 'Willie',
     }
 );
 TemporaryBattleList.Folly = new TemporaryBattle(
@@ -916,8 +916,8 @@ TemporaryBattleList.Folly = new TemporaryBattle(
     [new QuestLineStepCompletedRequirement('Shadows in the Desert', 1)],
     undefined,
     {
-        displayName: 'Folly',
-        imageName: 'Shady Guy (male)',
+        displayName: 'Shady Guy',
+        imageName: 'Peon (folly)',
     }
 );
 TemporaryBattleList['Cipher Peon Doven'] = new TemporaryBattle(
@@ -2698,6 +2698,104 @@ TemporaryBattleList['Rampaging Yveltal'] = new TemporaryBattle(
         returnTown: 'Shalour City',
     }
 );
+TemporaryBattleList['Hoopa 1'] = new TemporaryBattle(
+    'Hoopa 1',
+    [new GymPokemon('Lugia', 446974112, 80)],
+    '<i>The Unbound Hoopa casts you through a ring to a far away land, escaping for now.</i>',
+    [new QuestLineStepCompletedRequirement('Clash of Ages', 7)],
+    undefined,
+    {
+        displayName: 'Unbound Hoopa',
+        imageName: '../pokemon/720.01',
+        hideTrainer: true,
+        returnTown: 'Shalour City',
+    }
+);
+TemporaryBattleList['Hoopa 2'] = new TemporaryBattle(
+    'Hoopa 2',
+    [
+        new GymPokemon('Rayquaza', 163890507, 80),
+        new GymPokemon('Latias', 163890507, 80),
+        new GymPokemon('Latios', 163890507, 80),
+    ],
+    '<i>The Unbound Hoopa casts you through a ring to a far away land, escaping for now.</i>',
+    [new QuestLineStepCompletedRequirement('Clash of Ages', 8)],
+    undefined,
+    {
+        displayName: 'Unbound Hoopa',
+        imageName: '../pokemon/720.01',
+        hideTrainer: true,
+        returnTown: 'Lumiose City',
+    }
+);
+TemporaryBattleList['Hoopa 3'] = new TemporaryBattle(
+    'Hoopa 3',
+    [
+        new GymPokemon('Primal Groudon', 107273786, 80),
+        new GymPokemon('Primal Kyogre', 107273786, 80),
+        new GymPokemon('Kyurem', 107273786, 80),
+        new GymPokemon('Dialga', 107273786, 80),
+        new GymPokemon('Palkia', 107273786, 80),
+    ],
+    '<i>The Unbound Hoopa casts you through a ring to a far away land, escaping for now.</i>',
+    [new QuestLineStepCompletedRequirement('Clash of Ages', 9)],
+    undefined,
+    {
+        displayName: 'Unbound Hoopa',
+        imageName: '../pokemon/720.01',
+        hideTrainer: true,
+        returnTown: 'Anistar City',
+    }
+);
+TemporaryBattleList['Hoopa 4'] = new TemporaryBattle(
+    'Hoopa 4',
+    [
+        new GymPokemon('Mega Rayquaza', 193688781, 80),
+        new GymPokemon('Mega Latias', 193688781, 80),
+        new GymPokemon('Mega Latios', 193688781, 80),
+    ],
+    '<i>The Unbound Hoopa casts you through a ring to a far away land, escaping for now.</i>',
+    [new QuestLineStepCompletedRequirement('Clash of Ages', 10)],
+    undefined,
+    {
+        displayName: 'Unbound Hoopa',
+        imageName: '../pokemon/720.01',
+        hideTrainer: true,
+        returnTown: 'Laverre City',
+    }
+);
+TemporaryBattleList['Hoopa 5'] = new TemporaryBattle(
+    'Hoopa 5',
+    [
+        new GymPokemon('Kyurem (Black)', 312881878, 80),
+        new GymPokemon('Kyurem (White)', 312881878, 80),
+    ],
+    '<i>The Unbound Hoopa casts you through a ring to a far away land, escaping for now.</i>',
+    [new QuestLineStepCompletedRequirement('Clash of Ages', 11)],
+    undefined,
+    {
+        displayName: 'Unbound Hoopa',
+        imageName: '../pokemon/720.01',
+        hideTrainer: true,
+        returnTown: 'Vaniville Town',
+    }
+);
+TemporaryBattleList['Hoopa 6'] = new TemporaryBattle(
+    'Hoopa 6',
+    [new GymPokemon('Hoopa (Unbound)', 670461168, 80)],
+    '<i>The Unbound Hoopa is sucked into the Prison Bottle, and you gain control of it.</i>',
+    [new QuestLineStepCompletedRequirement('Clash of Ages', 12)],
+    undefined,
+    {
+        displayName: 'Unbound Hoopa',
+        imageName: '../pokemon/720.01',
+        hideTrainer: true,
+        returnTown: 'Kiloude City',
+        firstTimeRewardFunction: () => {
+            App.game.party.gainPokemonByName('Hoopa (Unbound)');
+        },
+    }
+);
 TemporaryBattleList['Calem 2'] = new TemporaryBattle(
     'Calem 2',
     [
@@ -3571,6 +3669,125 @@ TemporaryBattleList['Gladion 3'] = new TemporaryBattle(
         displayName: 'Pokémon Trainer Gladion',
         returnTown: 'Tapu Village',
         imageName: 'Gladion',
+    }
+);
+TemporaryBattleList['Guzma Bug Memory'] = new TemporaryBattle(
+    'Guzma Bug Memory',
+    [
+        new GymPokemon('Golisopod', 225357859, 63),
+        new GymPokemon('Ariados', 225357859, 63),
+        new GymPokemon('Masquerain', 225357859, 63),
+        new GymPokemon('Pinsir', 225357859, 63),
+        new GymPokemon('Scizor', 225357859, 63),
+    ],
+    'That was a good beat-down, Champion! You sure wrecked me again. This just proves how much of a tough trainer you are. Here is the Memory you\'ve been looking for. </br><img src="assets/images/items/quest/Bug_Memory_Silvally.png"></br><i>You obtained a Bug Silvally Memory!</i>',
+    [new QuestLineStepCompletedRequirement('Typing some Memories', 19)],
+    undefined,
+    {
+        displayName: 'Guzma',
+        imageName: 'Team Skull Boss (guzma)',
+    }
+);
+TemporaryBattleList['Kahili Flying Memory'] = new TemporaryBattle(
+    'Kahili Flying Memory',
+    [
+        new GymPokemon('Skarmory', 231357859, 63),
+        new GymPokemon('Crobat', 231357859, 63),
+        new GymPokemon('Oricorio (Baile)', 231357859, 63),
+        new GymPokemon('Mandibuzz', 231357859, 63),
+        new GymPokemon('Toucannon', 231357859, 63),
+    ],
+    'You\'re pretty talented, $playername$! No wonder you\'ve become the Champion of Alola! Anyways, here is the Memory. I said I\'d give it to you. </br><img src="assets/images/items/quest/Flying_Memory_Silvally.png"></br><i>You obtained a Flying Silvally Memory!</i>',
+    [new QuestLineStepCompletedRequirement('Typing some Memories', 21)],
+    undefined,
+    {
+        displayName: 'Kahili',
+        imageName: 'Kahili',
+    }
+);
+TemporaryBattleList['Plumeria Poison Memory'] = new TemporaryBattle(
+    'Plumeria Poison Memory',
+    [
+        new GymPokemon('Gengar', 237357859, 63),
+        new GymPokemon('Alolan Muk', 237357859, 63),
+        new GymPokemon('Crobat', 237357859, 63),
+        new GymPokemon('Toxapex', 237357859, 63),
+        new GymPokemon('Salazzle', 237357859, 63),
+    ],
+    'You\'re pretty strong, $playername$. Maybe my Pokémon and I need to go through more together to deepen our friendship. Take the Memory with you, you deserve it. </br><img src="assets/images/items/quest/Poison_Memory_Silvally.png"></br><i>You obtained a Poison Silvally Memory!</i>',
+    [new QuestLineStepCompletedRequirement('Typing some Memories', 23)],
+    undefined,
+    {
+        displayName: 'Plumeria',
+        imageName: 'Plumeria',
+    }
+);
+TemporaryBattleList['Acerola Ghost Memory'] = new TemporaryBattle(
+    'Acerola Ghost Memory',
+    [
+        new GymPokemon('Banette', 243357859, 63),
+        new GymPokemon('Drifblim', 243357859, 63),
+        new GymPokemon('Dhelmise', 243357859, 63),
+        new GymPokemon('Froslass', 243357859, 63),
+        new GymPokemon('Palossand', 243357859, 63),
+    ],
+    'That was so much fun, $playername$! I hope you come by more times so we can battle more often! Anyways, here is the Memory Mimikyu had found. </br><img src="assets/images/items/quest/Ghost_Memory_Silvally.png"></br><i>You obtained a Ghost Silvally Memory!</i>',
+    [new QuestLineStepCompletedRequirement('Typing some Memories', 25)],
+    undefined,
+    {
+        displayName: 'Captain Acerola',
+        imageName: 'Acerola',
+    }
+);
+TemporaryBattleList['Faba Psychic Memory'] = new TemporaryBattle(
+    'Faba Psychic Memory',
+    [
+        new GymPokemon('Claydol', 249357859, 63),
+        new GymPokemon('Bruxish', 249357859, 63),
+        new GymPokemon('Alolan Raichu', 249357859, 63),
+        new GymPokemon('Alakazam', 249357859, 63),
+        new GymPokemon('Hypno', 249357859, 63),
+    ],
+    'You\'re still pretty strong after all that time since our last battle. Well, take this Memory. Now off with you! </br><img src="assets/images/items/quest/Psychic_Memory_Silvally.png"></br><i>You obtained a Psychic Silvally Memory!</i>',
+    [new QuestLineStepCompletedRequirement('Typing some Memories', 27)],
+    undefined,
+    {
+        displayName: 'Aether Branch Chief Faba',
+        imageName: 'Aether Branch Chief (faba)',
+    }
+);
+TemporaryBattleList['Molayne Steel Memory'] = new TemporaryBattle(
+    'Molayne Steel Memory',
+    [
+        new GymPokemon('Klefki', 255357859, 63),
+        new GymPokemon('Bisharp', 255357859, 63),
+        new GymPokemon('Magnezone', 255357859, 63),
+        new GymPokemon('Metagross', 255357859, 63),
+        new GymPokemon('Alolan Dugtrio', 255357859, 63),
+    ],
+    'That was a good match! Thank you for helping me train in here and as a reward for being the first person to defeat me, you can take this strange disk! </br><img src="assets/images/items/quest/Steel_Memory_Silvally.png"></br><i>You obtained a Steel Silvally Memory!</i>',
+    [new QuestLineStepCompletedRequirement('Typing some Memories', 29)],
+    undefined,
+    {
+        displayName: 'Molayne',
+        imageName: 'Molayne',
+    }
+);
+TemporaryBattleList['Ryuki Dragon Memory'] = new TemporaryBattle(
+    'Ryuki Dragon Memory',
+    [
+        new GymPokemon('Garchomp', 261357859, 63),
+        new GymPokemon('Drampa', 261357859, 63),
+        new GymPokemon('Turtonator', 261357859, 63),
+        new GymPokemon('Dragonite', 261357859, 63),
+        new GymPokemon('Kommo-o', 261357859, 63),
+    ],
+    'And the crowd goes wild! $playername$! You should come by my Gym someday! It\'s in Malie city on Ula\'ula Island right above the Poké Mart, can\'t miss it. What? You\'ve never seen it? It\'s totally there and a real thing! Anyways you can take this.. What was it\'s name? Oh, right. You can take this Memory with you. </br><img src="assets/images/items/quest/Dragon_Memory_Silvally.png"></br><i>You obtained a Dragon Silvally Memory!</i>',
+    [new QuestLineStepCompletedRequirement('Typing some Memories', 31)],
+    undefined,
+    {
+        displayName: 'Ryuki',
+        imageName: 'Ryuki',
     }
 );
 TemporaryBattleList.Anabel = new TemporaryBattle(
