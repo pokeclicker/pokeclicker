@@ -796,4 +796,7 @@ namespace GameConstants {
         HeldKeybind,
     }
     declare const ModalCollapseList: string[];
+    declare enum ConsumableType {
+        RareCandy,
+    }
 }

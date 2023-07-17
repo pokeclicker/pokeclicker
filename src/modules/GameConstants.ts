@@ -2167,3 +2167,7 @@ export const ModalCollapseList = [
     'pokemonListBody',
     'shortcutsBody',
 ];
+
+export enum ConsumableType {
+    RareCandy,
+}
