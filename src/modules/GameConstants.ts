@@ -1453,11 +1453,12 @@ export const GalarDungeons = [
     'Lakeside Cave',
     'Dyna Tree Hill',
     'Tunnel to the Top',
-    'Crown Shrine', // 183
+    'Crown Shrine',
+    'Max Lair', // 184
 ];
 
 export const HisuiDungeons = [
-    'Oreburrow Tunnel', // 184
+    'Oreburrow Tunnel', // 185
     'Heartwood',
     'Shrouded Ruins',
     'Veilstone Cape',
@@ -1476,7 +1477,7 @@ export const HisuiDungeons = [
     'Seaside Hollow',
     'Ancient Lake Verity',
     'Ancient Lake Valor',
-    'Ancient Lake Acuity', // 203
+    'Ancient Lake Acuity', // 204
 ];
 
 export const RegionDungeons = [
