@@ -5297,6 +5297,7 @@ TemporaryBattleList['Max Raid 1'] = new TemporaryBattle(
         hideTrainer: true,
         returnTown: 'Motostoke',
         rewardFunction: () => ItemList.Wishing_Piece.gain(1),
+        resetDaily: true,
     }
 );
 TemporaryBattleList['Max Raid 2'] = new TemporaryBattle(
@@ -5309,6 +5310,7 @@ TemporaryBattleList['Max Raid 2'] = new TemporaryBattle(
         hideTrainer: true,
         returnTown: 'Motostoke',
         rewardFunction: () => ItemList.Wishing_Piece.gain(1),
+        resetDaily: true,
     }
 );
 TemporaryBattleList['Max Raid 3'] = new TemporaryBattle(
@@ -5321,6 +5323,7 @@ TemporaryBattleList['Max Raid 3'] = new TemporaryBattle(
         hideTrainer: true,
         returnTown: 'Professor Magnolia\'s House',
         rewardFunction: () => ItemList.Wishing_Piece.gain(1),
+        resetDaily: true,
     }
 );
 
