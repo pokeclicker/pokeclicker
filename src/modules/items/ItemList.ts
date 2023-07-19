@@ -202,4 +202,4 @@ ItemList.Carbos   = new Vitamin(VitaminType.Carbos, 1e5, Currency.money, {
 }, undefined, 'Reduces steps required when hatching');
 
 // Consumables
-ItemList.RareCandy = new Consumable(ConsumableType.RareCandy, Infinity, undefined, undefined, 'Rare Candy', 'A rare-to-find Candy<br/>Keep away from children!<br/>Increases the attack of a Pokémon as if bred');
+ItemList.RareCandy = new Consumable(ConsumableType.RareCandy, Infinity, undefined, undefined, 'Rare Candy', 'Permanently Increases the attack of a Pokémon');
