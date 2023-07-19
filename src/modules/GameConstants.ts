@@ -272,6 +272,9 @@ export const LEGAL_WALK_BLOCKS = [
     22,
     23,
     24,
+    37, // Tree top left
+    38, // Tree top mid
+    39, // Tree top right
 ];
 
 export const SAFARI_OUT_OF_BALLS = 'Game Over!<br>You have run out of safari balls to use.';
