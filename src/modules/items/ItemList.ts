@@ -12,7 +12,7 @@ import Item from './Item';
 import MulchItem from './MulchItem';
 import PokeballItem from './PokeballItem';
 import {
-    BattleItemType, Currency, EggItemType, EnergyRestoreSize, MegaStoneType, Pokeball, PokeBlockColor, Region, VitaminType, ConsumableType, BREEDING_ATTACK_BONUS,
+    BattleItemType, Currency, EggItemType, EnergyRestoreSize, MegaStoneType, Pokeball, PokeBlockColor, Region, VitaminType, ConsumableType,
 } from '../GameConstants';
 import { ShovelItem, MulchShovelItem } from './ShovelItem';
 import PokeBlock from './PokeBlock';
@@ -23,9 +23,6 @@ import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
 import ObtainedPokemonRequirement from '../requirements/ObtainedPokemonRequirement';
 import QuestItem from './QuestItem';
 import Consumable from './Consumable';
-import GameHelper from '../GameHelper';
-import NotificationConstants from '../notifications/NotificationConstants';
-import Notifier from '../notifications/Notifier';
 // eslint-disable-next-line import/prefer-default-export
 export const ItemList: { [name: string]: Item } = {};
 
@@ -205,13 +202,4 @@ ItemList.Carbos   = new Vitamin(VitaminType.Carbos, 1e5, Currency.money, {
 }, undefined, 'Reduces steps required when hatching');
 
 // Consumables
-ItemList.RareCandy = new Consumable(ConsumableType.RareCandy, (amount: number, name: string) => {
-    const pokemon = App.game.party.getPokemonByName(name);
-    const prevAttack = pokemon.calculateAttack(true);
-    GameHelper.incrementObservable(pokemon._attackBonusPercent, BREEDING_ATTACK_BONUS * amount);
-    Notifier.notify({
-        message : `${pokemon.displayName} gained ${pokemon.calculateAttack(true) - prevAttack} attack points.`,
-        type : NotificationConstants.NotificationOption.success,
-    });
-    return true;
-}, Infinity, undefined, undefined, 'Rare Candy', 'A rare-to-find Candy<br/>Keep away from children!<br/>Increases the attack of a Pokémon as if bred');
+ItemList.RareCandy = new Consumable(ConsumableType.RareCandy, Infinity, undefined, undefined, 'Rare Candy', 'A rare-to-find Candy<br/>Keep away from children!<br/>Increases the attack of a Pokémon as if bred');

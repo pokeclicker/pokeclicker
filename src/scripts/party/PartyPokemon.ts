@@ -283,6 +283,34 @@ class PartyPokemon implements Saveable {
         GameHelper.incrementObservable(player.itemList[vitaminName], amount);
     }
 
+    public useConsumable(type: GameConstants.ConsumableType, amount: number): void {
+        const itemName = GameConstants.ConsumableType[type];
+        if (!player.itemList[itemName]()) {
+            return Notifier.notify({
+                message : `You do not have any more ${ItemList[itemName].displayName}`,
+                type : NotificationConstants.NotificationOption.danger,
+            });
+        }
+        switch (type) {
+            case GameConstants.ConsumableType.RareCandy : amount = Math.min(amount, player.itemList[itemName]());
+                const curAttack = this.calculateAttack(true);
+                GameHelper.incrementObservable(this._attackBonusPercent, 25 * amount);
+                Notifier.notify({
+                    message : `Your Pokémon gained ${this.calculateAttack(true) - curAttack} attack points`,
+                    type : NotificationConstants.NotificationOption.success,
+                    pokemonImage : PokemonHelper.getImage(this.id),
+                });
+                break;
+            default :
+        }
+        GameHelper.incrementObservable(player.itemList[itemName], -amount);
+        Notifier.notify({
+            message : `You used ${amount} of ${ItemList[itemName].displayName}`,
+            type : NotificationConstants.NotificationOption.success,
+            image : ItemList[itemName].image,
+        });
+    }
+
     totalVitaminsUsed = ko.pureComputed((): number => {
         return Object.values(this.vitaminsUsed).reduce((sum, obs) => sum + obs(), 0);
     });
