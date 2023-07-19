@@ -127,6 +127,10 @@ abstract class Quest {
         // Subscribe to the new focus
         this.focusValue = this._focus();
         this.focusSub = this._focus.subscribe?.((newValue) => {
+            // If we aren't actively completing this quests, don't do anything
+            if (!this.inProgress()) {
+                return;
+            }
             // If the focus goes down, adjust our initial value
             if (newValue < this.focusValue) {
                 this.initial(this.initial() - (this.focusValue - newValue));

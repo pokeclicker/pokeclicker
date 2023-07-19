@@ -38,6 +38,7 @@ namespace GameConstants {
     declare const TEMP_BATTLE_TIME: number;
     declare const TEMP_BATTLE_TICK: number;
     declare const SPECIAL_EVENT_TICK: number;
+    declare const ZMOVE_TICK: number;
     declare const MAX_AVAILABLE_REGION: number;
     declare const MaxIDPerRegion: number[];
     declare const ITEM_USE_TIME: number;
@@ -796,4 +797,15 @@ namespace GameConstants {
         HeldKeybind,
     }
     declare const ModalCollapseList: string[];
+
+    declare const zCrystalItemType: string[];
+    declare enum ZMoveStatus {
+        inactive,
+        counteractive,
+        active,
+    }
+    declare const ZMOVE_ACTIVE_MULTIPLIER: number;
+    declare const ZMOVE_COUNTERACTIVE_MULTIPLIER: number;
+    declare const ZMOVE_ACTIVE_TIME: number;
+    declare const ZMOVE_COUNTERACTIVE_TIME: number;
 }

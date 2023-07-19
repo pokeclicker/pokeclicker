@@ -2201,6 +2201,56 @@ class QuestLineHelper {
         App.game.quests.questLines().push(princessDiancieQuestLine);
     }
 
+    public static createClashOfAgesQuestLine() {
+        const clashOfAgesQuestLine = new QuestLine('Clash of Ages', 'Hoopa is up to something mischievous...', new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion) , GameConstants.BulletinBoards.Kalos);
+
+        const catchHoopa = new CaptureSpecificPokemonQuest('Hoopa', 'Catch Hoopa to learn more.', 1, false, 0, undefined);
+        clashOfAgesQuestLine.addQuest(catchHoopa);
+
+        const talkToBaraz1 = new TalkToNPCQuest(Baraz1, 'Talk to Baraz in Kiloude City.');
+        clashOfAgesQuestLine.addQuest(talkToBaraz1);
+
+        const hoopaBeatPsychic = new CustomQuest(100, 0, 'Defeat 100 Psychic-type Pokémon.', () => {
+            return pokemonMap.filter(p => p.type.includes(PokemonType.Psychic)).map(p => App.game.statistics.pokemonDefeated[p.id]()).reduce((a,b) => a + b, 0);
+        });
+        clashOfAgesQuestLine.addQuest(hoopaBeatPsychic);
+
+        const talkToBaraz2 = new TalkToNPCQuest(Baraz2, 'That didn\'t work. Talk to Baraz in Kiloude City.');
+        clashOfAgesQuestLine.addQuest(talkToBaraz2);
+
+        const hoopaCatchPsychic = new CapturePokemonTypesQuest(100, undefined, PokemonType.Psychic);
+        clashOfAgesQuestLine.addQuest(hoopaCatchPsychic);
+
+        const talkToBaraz3 = new TalkToNPCQuest(Baraz3, 'That didn\'t work either. Talk to Baraz in Kiloude City.');
+        clashOfAgesQuestLine.addQuest(talkToBaraz3);
+
+        const hoopaID = PokemonHelper.getPokemonByName('Hoopa').id;
+        const catch100Hoopa = new CustomQuest(100, 0, 'Catch 100 Hoopa.', () => 100 * (App.game.statistics.pokemonCaptured[hoopaID]() - App.game.statistics.pokemonHatched[hoopaID]()));
+        clashOfAgesQuestLine.addQuest(catch100Hoopa);
+
+        const talkToBaraz4 = new TalkToNPCQuest(Baraz4, 'This is ridiculous. Talk to Baraz in Kiloude City.', () => ItemList.Prison_Bottle.gain(1));
+        clashOfAgesQuestLine.addQuest(talkToBaraz4);
+
+        const clearHoopa1 = new CustomQuest(1, 0, 'Defeat the Unbound Hoopa and it\'s summoned defenders near Kiloude City.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Hoopa 1')]());
+        clashOfAgesQuestLine.addQuest(clearHoopa1);
+
+        const clearHoopa2 = new CustomQuest(1, 0, 'Defeat the Unbound Hoopa and it\'s summoned defenders near Shalour City.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Hoopa 2')]());
+        clashOfAgesQuestLine.addQuest(clearHoopa2);
+
+        const clearHoopa3 = new CustomQuest(1, 0, 'Defeat the Unbound Hoopa and it\'s summoned defenders near Lumiose City.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Hoopa 3')]());
+        clashOfAgesQuestLine.addQuest(clearHoopa3);
+
+        const clearHoopa4 = new CustomQuest(1, 0, 'Defeat the Unbound Hoopa and it\'s summoned defenders near Anistar City.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Hoopa 4')]());
+        clashOfAgesQuestLine.addQuest(clearHoopa4);
+
+        const clearHoopa5 = new CustomQuest(1, 0, 'Defeat the Unbound Hoopa and it\'s summoned defenders near Laverre City.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Hoopa 5')]());
+        clashOfAgesQuestLine.addQuest(clearHoopa5);
+
+        const clearHoopa6 = new CustomQuest(1, 0, 'Defeat the Unbound Hoopa near Kiloude City, this time for real.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Hoopa 6')]());
+        clashOfAgesQuestLine.addQuest(clearHoopa6);
+
+        App.game.quests.questLines().push(clashOfAgesQuestLine);
+    }
     /* Alola QuestLines */
 
     // Started upon defeating Konikoni City's gym.
@@ -3620,6 +3670,7 @@ class QuestLineHelper {
         this.createVivillonQuestLine();
         this.createFlareKalosQuestLine();
         this.createPrincessDiancieQuestLine();
+        this.createClashOfAgesQuestLine();
         this.createAshKetchumQuestLine();
         this.createSkullAetherAlolaQuestLine();
         this.createMinasTrialAlolaQuestLine();
