@@ -27,6 +27,7 @@ export const WANDER_TICK = 1.5 * SECOND;
 export const TEMP_BATTLE_TIME = 60 * SECOND;
 export const TEMP_BATTLE_TICK = 0.1 * SECOND;
 export const SPECIAL_EVENT_TICK = 1 * SECOND;
+export const ZMOVE_TICK = 1 * SECOND;
 
 // Update the requirement for "Final Region Town" in TownList, when adding new regions.
 // Else the professor NPC won't work.
@@ -271,6 +272,9 @@ export const LEGAL_WALK_BLOCKS = [
     22,
     23,
     24,
+    37, // Tree top left
+    38, // Tree top mid
+    39, // Tree top right
 ];
 
 export const SAFARI_OUT_OF_BALLS = 'Game Over!<br>You have run out of safari balls to use.';
@@ -1701,6 +1705,12 @@ export const TemporaryBattles = [
     'Team Flare Xerosic',
     'Xerneas',
     'Yveltal',
+    'Hoopa 1',
+    'Hoopa 2',
+    'Hoopa 3',
+    'Hoopa 4',
+    'Hoopa 5',
+    'Hoopa 6',
     'Team Flare Boss Lysandre 1',
     'Sycamore 2',
     'Shauna 2',
@@ -2167,3 +2177,37 @@ export const ModalCollapseList = [
     'pokemonListBody',
     'shortcutsBody',
 ];
+
+export enum ConsumableType {
+    Rare_Candy,
+}
+
+export const zCrystalItemType = [
+    'Normalium Z',
+    'Firium Z',
+    'Waterium Z',
+    'Electrium Z',
+    'Grassium Z',
+    'Icium Z',
+    'Fightinium Z',
+    'Poisonium Z',
+    'Groundium Z',
+    'Flyinium Z',
+    'Psychium Z',
+    'Buginium Z',
+    'Rockium Z',
+    'Ghostium Z',
+    'Dragonium Z',
+    'Darkinium Z',
+    'Steelium Z',
+    'Fairium Z',
+];
+export enum ZMoveStatus {
+    inactive,
+    counteractive,
+    active,
+}
+export const ZMOVE_ACTIVE_MULTIPLIER = 1.5;
+export const ZMOVE_COUNTERACTIVE_MULTIPLIER = 0.75;
+export const ZMOVE_ACTIVE_TIME = 1 * MINUTE;
+export const ZMOVE_COUNTERACTIVE_TIME = 4 * MINUTE;
