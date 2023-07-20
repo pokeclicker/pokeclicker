@@ -12,7 +12,7 @@ import Item from './Item';
 import MulchItem from './MulchItem';
 import PokeballItem from './PokeballItem';
 import {
-    BattleItemType, Currency, EggItemType, EnergyRestoreSize, MegaStoneType, Pokeball, PokeBlockColor, Region, VitaminType,
+    BattleItemType, Currency, EggItemType, EnergyRestoreSize, MegaStoneType, Pokeball, PokeBlockColor, Region, VitaminType, ConsumableType,
 } from '../GameConstants';
 import { ShovelItem, MulchShovelItem } from './ShovelItem';
 import PokeBlock from './PokeBlock';
@@ -22,7 +22,7 @@ import EggItem from './EggItem';
 import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
 import ObtainedPokemonRequirement from '../requirements/ObtainedPokemonRequirement';
 import QuestItem from './QuestItem';
-
+import Consumable from './Consumable';
 // eslint-disable-next-line import/prefer-default-export
 export const ItemList: { [name: string]: Item } = {};
 
@@ -183,7 +183,6 @@ ItemList.Steel_Memory_Silvally = new QuestItem('Steel_Memory_Silvally', 'Steel M
 ItemList.Dragon_Memory_Silvally = new QuestItem('Dragon_Memory_Silvally', 'Dragon Memory', 'One of Silvally\'s memories, obtained from Ryuki in A Tree Maybe', 'Typing some Memories');
 
 // Vitamins
-// ItemList.RareCandy = new Vitamin(VitaminType.RareCandy, Infinity, undefined, undefined, 'Rare Candy', 'A rare-to-find candy that currently has no use.');
 ItemList.Protein   = new Vitamin(VitaminType.Protein, 1e4, Currency.money, {
     multiplier: 1.1,
     multiplierDecrease: false,
@@ -201,3 +200,6 @@ ItemList.Carbos   = new Vitamin(VitaminType.Carbos, 1e5, Currency.money, {
     saveName: `${VitaminType[VitaminType.Carbos]}|${Currency[Currency.money]}`,
     visible: new MaxRegionRequirement(Region.unova),
 }, undefined, 'Reduces steps required when hatching');
+
+// Consumables
+ItemList.Rare_Candy = new Consumable(ConsumableType.Rare_Candy, Infinity, undefined, undefined, 'Rare Candy', 'Permanently increases the attack of a Pokémon');
