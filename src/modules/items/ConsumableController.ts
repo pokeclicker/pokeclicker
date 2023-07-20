@@ -1,7 +1,7 @@
 import { ConsumableType } from '../GameConstants';
 
 export default class ConsumableController {
-    public static currentlySelected = ko.observable(ConsumableType.RareCandy).extend({ numeric: 0 });
+    public static currentlySelected = ko.observable(ConsumableType.Rare_Candy).extend({ numeric: 0 });
     public static currentlySelectedName = ko.computed(() => ConsumableType[this.currentlySelected()]);
     public static multiplier = ['×1', '×5', '×10', 'Max'];
     public static multiplierIndex = ko.observable(0);

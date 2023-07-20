@@ -292,11 +292,11 @@ class PartyPokemon implements Saveable {
             });
         }
         switch (type) {
-            case GameConstants.ConsumableType.RareCandy : amount = Math.min(amount, player.itemList[itemName]());
+            case GameConstants.ConsumableType.Rare_Candy : amount = Math.min(amount, player.itemList[itemName]());
                 const curAttack = this.calculateAttack(true);
                 GameHelper.incrementObservable(this._attackBonusPercent, 25 * amount);
                 Notifier.notify({
-                    message : `Your Pokémon gained ${this.calculateAttack(true) - curAttack} attack points`,
+                    message : `${this.displayName} gained ${this.calculateAttack(true) - curAttack} attack points`,
                     type : NotificationConstants.NotificationOption.success,
                     pokemonImage : PokemonHelper.getImage(this.id),
                 });

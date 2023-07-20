@@ -2179,7 +2179,7 @@ export const ModalCollapseList = [
 ];
 
 export enum ConsumableType {
-    RareCandy,
+    Rare_Candy,
 }
 
 export const zCrystalItemType = [

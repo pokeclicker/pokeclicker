@@ -798,7 +798,7 @@ namespace GameConstants {
     }
     declare const ModalCollapseList: string[];
     declare enum ConsumableType {
-        RareCandy,
+        Rare_Candy,
     }
     declare const zCrystalItemType: string[];
     declare enum ZMoveStatus {
