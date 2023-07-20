@@ -12,7 +12,7 @@ import Item from './Item';
 import MulchItem from './MulchItem';
 import PokeballItem from './PokeballItem';
 import {
-    BattleItemType, Currency, EggItemType, EnergyRestoreSize, MegaStoneType, Pokeball, PokeBlockColor, Region, VitaminType,
+    BattleItemType, Currency, EggItemType, EnergyRestoreSize, MegaStoneType, Pokeball, PokeBlockColor, Region, VitaminType, ConsumableType,
 } from '../GameConstants';
 import { ShovelItem, MulchShovelItem } from './ShovelItem';
 import PokeBlock from './PokeBlock';
@@ -22,7 +22,7 @@ import EggItem from './EggItem';
 import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
 import ObtainedPokemonRequirement from '../requirements/ObtainedPokemonRequirement';
 import QuestItem from './QuestItem';
-
+import Consumable from './Consumable';
 // eslint-disable-next-line import/prefer-default-export
 export const ItemList: { [name: string]: Item } = {};
 
@@ -214,7 +214,6 @@ ItemList.Shaderoot_Carrot_Calyrex = new QuestItem('Shaderoot_Carrot_Calyrex', 'S
 ItemList.Iceroot_Carrot_Calyrex = new QuestItem('Iceroot_Carrot_Calyrex', 'Iceroot Carrot', 'Carrot that the King of Bountiful Harvest\'s beloved steed likes to eat. It grew in a field covered in snow.', 'The Crown of Galar');
 
 // Vitamins
-// ItemList.RareCandy = new Vitamin(VitaminType.RareCandy, Infinity, undefined, undefined, 'Rare Candy', 'A rare-to-find candy that currently has no use.');
 ItemList.Protein   = new Vitamin(VitaminType.Protein, 1e4, Currency.money, {
     multiplier: 1.1,
     multiplierDecrease: false,
@@ -232,3 +231,6 @@ ItemList.Carbos   = new Vitamin(VitaminType.Carbos, 1e5, Currency.money, {
     saveName: `${VitaminType[VitaminType.Carbos]}|${Currency[Currency.money]}`,
     visible: new MaxRegionRequirement(Region.unova),
 }, undefined, 'Reduces steps required when hatching');
+
+// Consumables
+ItemList.Rare_Candy = new Consumable(ConsumableType.Rare_Candy, Infinity, undefined, undefined, 'Rare Candy', 'Permanently increases the attack of a Pokémon');
