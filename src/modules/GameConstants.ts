@@ -2178,6 +2178,10 @@ export const ModalCollapseList = [
     'shortcutsBody',
 ];
 
+export enum ConsumableType {
+    Rare_Candy,
+}
+
 export const zCrystalItemType = [
     'Normalium Z',
     'Firium Z',
