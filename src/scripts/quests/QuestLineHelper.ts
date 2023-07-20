@@ -382,7 +382,7 @@ class QuestLineHelper {
         const clearBerryForest = new CustomQuest(1, 0, 'Find Lostelle. Clear Berry Forest.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Berry Forest')]());
         billSeviiQuestLine.addQuest(clearBerryForest);
 
-        const talktoGameCornerOwner2 = new TalkToNPCQuest(TwoIslandGameCornerOwner2, 'Lostelle has been found. Return to the Game Corner owner on Two Island.');
+        const talktoGameCornerOwner2 = new TalkToNPCQuest(TwoIslandGameCornerOwner2, 'Lostelle has been found. Return to the Game Corner owner on Two Island.', () => ItemList.Meteorite_Bills_Errand.gain(1));
         billSeviiQuestLine.addQuest(talktoGameCornerOwner2);
 
         const BillsErrandReward = () => {
@@ -557,7 +557,7 @@ class QuestLineHelper {
         const helpKuni = new CustomQuest(1, 0, 'Clear the Radio Tower to get rid of any lingering Team Rocket activity.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Radio Tower')]());
         lugiaJohtoQuestLine.addQuest(helpKuni);
 
-        const talktoKimonoGirlsWhirl = new TalkToNPCQuest(KimonoGirlsWhirl, 'Meet the Kimono Girls at the Whirl Islands.');
+        const talktoKimonoGirlsWhirl = new TalkToNPCQuest(KimonoGirlsWhirl, 'Meet the Kimono Girls at the Whirl Islands.', () => ItemList.Tidal_Bell_Lugia.gain(1));
         lugiaJohtoQuestLine.addQuest(talktoKimonoGirlsWhirl);
 
         const LugiaCatch = new CaptureSpecificPokemonQuest(
@@ -579,7 +579,13 @@ class QuestLineHelper {
         const talkKimonoGirlsEcruteak = new TalkToNPCQuest(KimonoGirlsEcruteak, 'Meet the Kimono Girls at the Ecruteak Dance Theatre.');
         hoohJohtoQuestLine.addQuest(talkKimonoGirlsEcruteak);
 
-        const clearKimonoGirls = new CustomQuest (1, 0, 'Prove your abilities as a trainer to the Kimono Girls of Ecruteak City.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Kimono Girls')]());
+        const clearKimonoGirls = new CustomQuest
+        (
+            1,
+            () => ItemList.Clear_Bell_Hooh.gain(1),
+            'Prove your abilities as a trainer to the Kimono Girls of Ecruteak City.',
+            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Kimono Girls')]()
+        );
         hoohJohtoQuestLine.addQuest(clearKimonoGirls);
 
         const HoohCatch = new CaptureSpecificPokemonQuest(
@@ -602,7 +608,7 @@ class QuestLineHelper {
         const talktoProfOak1 = new TalkToNPCQuest(PalletCelebiProfOak1, 'Talk to Professor Oak in Pallet Town.');
         celebiJohtoQuestLine.addQuest(talktoProfOak1);
 
-        const talktoProfIvy = new TalkToNPCQuest(CelebiProfIvy, 'Talk to Professor Ivy in her lab in the Sevii Islands.');
+        const talktoProfIvy = new TalkToNPCQuest(CelebiProfIvy, 'Talk to Professor Ivy in her lab in the Sevii Islands.', () => ItemList.GS_Ball_Celebi.gain(1));
         celebiJohtoQuestLine.addQuest(talktoProfIvy);
 
         const talktoProfOak2 = new TalkToNPCQuest(PalletCelebiProfOak2, 'Deliver the GS Ball to Professor Oak in Pallet Town.');
@@ -861,7 +867,7 @@ class QuestLineHelper {
         const clearSeviiArcher = new CustomQuest(1, 0, 'Defeat Team Rocket Executive Archer in Rocket Warehouse.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Sevii Rocket Archer')]());
         rubySapphireSeviiQuestLine.addQuest(clearSeviiArcher);
 
-        const clearSeviiGideon = new CustomQuest(1, 0, 'Defeat Scientist Gideon to reclaim the Sapphire.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Scientist Gideon')]());
+        const clearSeviiGideon = new CustomQuest(1, 0, 'Defeat Scientist Gideon to reclaim the Sapphire.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Scientist Gideon')](), 0, () => ItemList.Celios_Errand_Sapphire.gain(1));
         rubySapphireSeviiQuestLine.addQuest(clearSeviiGideon);
 
         const talktoCelio5 = new TalkToNPCQuest(OneIslandCelio6, 'Return the Sapphire to Celio on One Island');
@@ -976,7 +982,7 @@ class QuestLineHelper {
         const talkToButler1 = new TalkToNPCQuest(Butler1, 'Learn the legend of the Millennium Comet from Butler near Lavaridge Town.');
         jirachiQuestLine.addQuest(talkToButler1);
 
-        const clearMtChimney2 = new CustomQuest(1, 0, 'Climb to the Mt. Chimney Crater to get a better view of the Millennium Comet as it passes.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Mt. Chimney Crater')]());
+        const clearMtChimney2 = new CustomQuest(1, 0, 'Climb to the Mt. Chimney Crater to get a better view of the Millennium Comet as it passes.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Mt. Chimney Crater')](), 0, () => ItemList.Crystalline_Cocoon_Jirachi.gain(1));
         jirachiQuestLine.addQuest(clearMtChimney2);
 
         const catchAbsol = new CaptureSpecificPokemonQuest('Absol', 'You are being stalked by Absol, the Disaster Pokémon. Capture it or hatch your own to befriend it.', 1, true);
@@ -1745,7 +1751,7 @@ class QuestLineHelper {
         const talkToZinnia2 = new TalkToNPCQuest(Zinnia2, 'Talk to Zinnia in Granite Cave.');
         deltaEpisodeQuestLine.addQuest(talkToZinnia2);
 
-        const fightZinnia1 = new CustomQuest (1, 0, 'Defeat Zinnia in Granite Cave', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Zinnia 1')]());
+        const fightZinnia1 = new CustomQuest (1, 0, 'Defeat Zinnia in Granite Cave', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Zinnia 1')](), 0, () => ItemList.Meteorite_Shard_Delta.gain(1));
         deltaEpisodeQuestLine.addQuest(fightZinnia1);
 
         const talkToZinnia3 = new TalkToNPCQuest(Zinnia3, 'Talk to Zinnia in Granite Cave.');
@@ -1769,7 +1775,7 @@ class QuestLineHelper {
         const fightDracElder = new CustomQuest (1, 0, 'Defeat the Draconid Elder in Meteor Falls.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Draconid Elder')]());
         deltaEpisodeQuestLine.addQuest(fightDracElder);
 
-        const talkToDracElder2 = new TalkToNPCQuest(DraconidElder2, 'Talk to the Draconid Elder in Meteor Falls.');
+        const talkToDracElder2 = new TalkToNPCQuest(DraconidElder2, 'Talk to the Draconid Elder in Meteor Falls.', () => ItemList.Meteorite_Shard_Delta.gain(1));
         deltaEpisodeQuestLine.addQuest(talkToDracElder2);
 
         const fightAquaGrunts = new CustomQuest (1, 0, 'Defeat the Aqua Grunt.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Aqua Grunt')]());
@@ -1950,7 +1956,7 @@ class QuestLineHelper {
         const searchForClues1 = new TalkToNPCQuest(searchForClues, 'Search Goldenrod City for clues.');
         detectivePikachuQuestLine.addQuest(searchForClues1);
 
-        const aipomAlley = new CustomQuest(1, 0, 'Defeat the Aipoms', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Aipom Alley')]());
+        const aipomAlley = new CustomQuest(1, 0, 'Defeat the Aipoms', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Aipom Alley')](), 0, () => ItemList.Mysterious_Vial_Detective_Pikachu);
         detectivePikachuQuestLine.addQuest(aipomAlley);
 
         const searchForClues2 = new CustomQuest(1, 0, 'The Aipoms dropped some sort of vial while they were running away. It looks like they were headed towards the Radio Tower. Find it!', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Radio Tower')]());
@@ -2178,7 +2184,7 @@ class QuestLineHelper {
         const bladeForme = new TalkToNPCQuest(ExamineAegislash, 'Your Doublade learned something from the Steels, examine it in Shalour City to find out what!', BladeAegislashReward);
         princessDiancieQuestLine.addQuest(bladeForme);
 
-        const heartDiamond = new CustomQuest(1000, undefined, 'Diancie needs help building a Heart Diamond to stabilize the Diamond Domain. Gather some Fairy Gems for her.', App.game.statistics.gemsGained[17]);
+        const heartDiamond = new CustomQuest(1000, undefined, 'Diancie needs help building a Heart Diamond to stabilize the Diamond Domain. Gather some Fairy Gems for her.', App.game.statistics.gemsGained[17], 0, () => ItemList.Heart_Diamond_Diancie.gain(1));
         princessDiancieQuestLine.addQuest(heartDiamond);
 
         const thanksDiancie = new TalkToNPCQuest(ThanksDiancie, 'Talk to Princess Diancie in Shalour City.');
@@ -2201,6 +2207,56 @@ class QuestLineHelper {
         App.game.quests.questLines().push(princessDiancieQuestLine);
     }
 
+    public static createClashOfAgesQuestLine() {
+        const clashOfAgesQuestLine = new QuestLine('Clash of Ages', 'Hoopa is up to something mischievous...', new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion) , GameConstants.BulletinBoards.Kalos);
+
+        const catchHoopa = new CaptureSpecificPokemonQuest('Hoopa', 'Catch Hoopa to learn more.', 1, false, 0, undefined);
+        clashOfAgesQuestLine.addQuest(catchHoopa);
+
+        const talkToBaraz1 = new TalkToNPCQuest(Baraz1, 'Talk to Baraz in Kiloude City.');
+        clashOfAgesQuestLine.addQuest(talkToBaraz1);
+
+        const hoopaBeatPsychic = new CustomQuest(100, 0, 'Defeat 100 Psychic-type Pokémon.', () => {
+            return pokemonMap.filter(p => p.type.includes(PokemonType.Psychic)).map(p => App.game.statistics.pokemonDefeated[p.id]()).reduce((a,b) => a + b, 0);
+        });
+        clashOfAgesQuestLine.addQuest(hoopaBeatPsychic);
+
+        const talkToBaraz2 = new TalkToNPCQuest(Baraz2, 'That didn\'t work. Talk to Baraz in Kiloude City.');
+        clashOfAgesQuestLine.addQuest(talkToBaraz2);
+
+        const hoopaCatchPsychic = new CapturePokemonTypesQuest(100, undefined, PokemonType.Psychic);
+        clashOfAgesQuestLine.addQuest(hoopaCatchPsychic);
+
+        const talkToBaraz3 = new TalkToNPCQuest(Baraz3, 'That didn\'t work either. Talk to Baraz in Kiloude City.');
+        clashOfAgesQuestLine.addQuest(talkToBaraz3);
+
+        const hoopaID = PokemonHelper.getPokemonByName('Hoopa').id;
+        const catch100Hoopa = new CustomQuest(100, 0, 'Catch 100 Hoopa.', () => 100 * (App.game.statistics.pokemonCaptured[hoopaID]() - App.game.statistics.pokemonHatched[hoopaID]()));
+        clashOfAgesQuestLine.addQuest(catch100Hoopa);
+
+        const talkToBaraz4 = new TalkToNPCQuest(Baraz4, 'This is ridiculous. Talk to Baraz in Kiloude City.', () => ItemList.Prison_Bottle.gain(1));
+        clashOfAgesQuestLine.addQuest(talkToBaraz4);
+
+        const clearHoopa1 = new CustomQuest(1, 0, 'Defeat the Unbound Hoopa and it\'s summoned defenders near Kiloude City.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Hoopa 1')]());
+        clashOfAgesQuestLine.addQuest(clearHoopa1);
+
+        const clearHoopa2 = new CustomQuest(1, 0, 'Defeat the Unbound Hoopa and it\'s summoned defenders near Shalour City.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Hoopa 2')]());
+        clashOfAgesQuestLine.addQuest(clearHoopa2);
+
+        const clearHoopa3 = new CustomQuest(1, 0, 'Defeat the Unbound Hoopa and it\'s summoned defenders near Lumiose City.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Hoopa 3')]());
+        clashOfAgesQuestLine.addQuest(clearHoopa3);
+
+        const clearHoopa4 = new CustomQuest(1, 0, 'Defeat the Unbound Hoopa and it\'s summoned defenders near Anistar City.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Hoopa 4')]());
+        clashOfAgesQuestLine.addQuest(clearHoopa4);
+
+        const clearHoopa5 = new CustomQuest(1, 0, 'Defeat the Unbound Hoopa and it\'s summoned defenders near Laverre City.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Hoopa 5')]());
+        clashOfAgesQuestLine.addQuest(clearHoopa5);
+
+        const clearHoopa6 = new CustomQuest(1, 0, 'Defeat the Unbound Hoopa near Kiloude City, this time for real.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Hoopa 6')]());
+        clashOfAgesQuestLine.addQuest(clearHoopa6);
+
+        App.game.quests.questLines().push(clashOfAgesQuestLine);
+    }
     /* Alola QuestLines */
 
     // Started upon defeating Konikoni City's gym.
@@ -2239,25 +2295,25 @@ class QuestLineHelper {
     public static createMinasTrialAlolaQuestLine() {
         const minasTrialAlolaQuestLine = new QuestLine('Mina\'s Trial', 'Mina has asked you to battle the Trial captains of the other islands to earn access to her Trial site.');
 
-        const clearCaptainMina = new CustomQuest(1, 0, 'Defeat Captain Mina in Seafolk Village.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Captain Mina')]());
+        const clearCaptainMina = new CustomQuest(1, 0, 'Defeat Captain Mina in Seafolk Village.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Captain Mina')](), 0, () => ItemList.Pink_Petal_Mina.gain(1));
         minasTrialAlolaQuestLine.addQuest(clearCaptainMina);
 
-        const clearCaptainIlima = new CustomQuest(1, 0, 'Defeat Captain Ilima in Hau\'oli Cemetery.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Captain Ilima')]());
+        const clearCaptainIlima = new CustomQuest(1, 0, 'Defeat Captain Ilima in Hau\'oli Cemetery.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Captain Ilima')](), 0, () => ItemList.Orange_Petal_Mina.gain(1));
         minasTrialAlolaQuestLine.addQuest(clearCaptainIlima);
 
-        const clearCaptainMallow = new CustomQuest(1, 0, 'Defeat Captain Mallow in Lush Jungle.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Captain Mallow')]());
+        const clearCaptainMallow = new CustomQuest(1, 0, 'Defeat Captain Mallow in Lush Jungle.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Captain Mallow')](), 0, () => ItemList.Green_Petal_Mina.gain(1));
         minasTrialAlolaQuestLine.addQuest(clearCaptainMallow);
 
-        const clearCaptainLana = new CustomQuest(1, 0, 'Defeat Captain Lana in Lush Jungle.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Captain Lana')]());
+        const clearCaptainLana = new CustomQuest(1, 0, 'Defeat Captain Lana in Lush Jungle.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Captain Lana')](), 0, () => ItemList.Blue_Petal_Mina.gain(1));
         minasTrialAlolaQuestLine.addQuest(clearCaptainLana);
 
-        const clearCaptainKiawe = new CustomQuest(1, 0, 'Defeat Captain Kiawe in Wela Volcano Park.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Captain Kiawe')]());
+        const clearCaptainKiawe = new CustomQuest(1, 0, 'Defeat Captain Kiawe in Wela Volcano Park.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Captain Kiawe')](), 0, () => ItemList.Red_Petal_Mina.gain(1));
         minasTrialAlolaQuestLine.addQuest(clearCaptainKiawe);
 
-        const clearCaptainSophocles = new CustomQuest(1, 0, 'Defeat Captain Sophocles in Hokulani Observatory.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Captain Sophocles')]());
+        const clearCaptainSophocles = new CustomQuest(1, 0, 'Defeat Captain Sophocles in Hokulani Observatory.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Captain Sophocles')](), 0, () => ItemList.Yellow_Petal_Mina.gain(1));
         minasTrialAlolaQuestLine.addQuest(clearCaptainSophocles);
 
-        const clearKahunaNanu = new CustomQuest(1, 0, 'Captain Acerola is apparently busy with something at the top of Mount Lanakila. Defeat Kahuna Nanu in Tapu Village instead.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Kahuna Nanu')]());
+        const clearKahunaNanu = new CustomQuest(1, 0, 'Captain Acerola is apparently busy with something at the top of Mount Lanakila. Defeat Kahuna Nanu in Tapu Village instead.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Kahuna Nanu')](), 0, () => ItemList.Purple_Petal_Mina.gain(1));
         minasTrialAlolaQuestLine.addQuest(clearKahunaNanu);
 
         const clearMinasHouseboat = new CustomQuest(1, 0, 'Complete the Trial! Clear Mina\'s Houseboat in Seafolk Village.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Mina\'s Houseboat')]());
@@ -3105,7 +3161,7 @@ class QuestLineHelper {
             [
                 clearKlara2,
                 clearAvery2,
-            ], 'You, Klara and Avery have happened upon the same Max Mushroom in Warm-Up Tunnel. Defeat them both to win it.'));
+            ], 'You, Klara and Avery have happened upon the same Max Mushroom in Warm-Up Tunnel. Defeat them both to win it.', () => ItemList.Max_Mushroom_IoA.gain(1)));
 
         const talktoMustard5 = new TalkToNPCQuest(Mustard5, 'Talk to Mustard at the Master Dojo.');
         dojoArmorQuestLine.addQuest(talktoMustard5);
@@ -3253,7 +3309,10 @@ class QuestLineHelper {
             [
                 oldCemetery,
                 snowslideSlope,
-            ], 'Calyrex is going to Old Cemetery and Snowslide Slope to grow a Shaderoot Carrot and an Iceroot Carrot. Protect it from wild Pokémon so it can concentrate.'));
+            ], 'Calyrex is going to Old Cemetery and Snowslide Slope to grow a Shaderoot Carrot and an Iceroot Carrot. Protect it from wild Pokémon so it can concentrate.', () => {
+                ItemList.Shaderoot_Carrot_Calyrex.gain(1);
+                ItemList.Iceroot_Carrot_Calyrex.gain(1);
+            }));
 
         const talktoCalyrex2 = new TalkToNPCQuest(Calyrex2, 'After growing both carrots, Calyrex has returned to Freezington. Talk to it.');
         galarCrownQuestLine.addQuest(talktoCalyrex2);
@@ -3620,6 +3679,7 @@ class QuestLineHelper {
         this.createVivillonQuestLine();
         this.createFlareKalosQuestLine();
         this.createPrincessDiancieQuestLine();
+        this.createClashOfAgesQuestLine();
         this.createAshKetchumQuestLine();
         this.createSkullAetherAlolaQuestLine();
         this.createMinasTrialAlolaQuestLine();
