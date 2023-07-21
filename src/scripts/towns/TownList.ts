@@ -2762,8 +2762,8 @@ const ZinniaOrigin = new NPC('Zinnia', [
 
 const ExploreStand = new NPC('Explore the Outskirt Stand', [
     '<i>You look around the Outskirt Stand, and see two shady figures shuffling off into the horizon. As you move to get a closer look, some guy steps in your way.</i>',
-    'Hey! You\'re new around these parts, and I don\'t take too kindly to strangers!',
-    'You\'ll have to prove your worth, or my name ain\'t Willie!',
+    'Hey there! You\'re a fresh face \'round these parts, aren\'tcha!',
+    'You\'ll have to let me welcome you with a battle, or my name ain\'t Willie!',
 ], {image: 'assets/images/npcs/Willie.png',
     requirement: new MultiRequirement([new QuestLineStartedRequirement('Shadows in the Desert'), new QuestLineStepCompletedRequirement('Shadows in the Desert', 1, GameConstants.AchievementOption.less)]),
 });
@@ -2799,10 +2799,9 @@ const Rui1 = new NPC('Rui', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Shadows in the Desert', 5), new QuestLineStepCompletedRequirement('Shadows in the Desert', 7, GameConstants.AchievementOption.less)]),
 });
 const Duking1 = new NPC('Duking', [
-    '<i>Sniff...</i>.',
-    'I\'m not crying, these are allergies. Shut up.',
-    'I just... Some really mean guys kidnapped my beloved Plusle. It really has me upset.',
-    'They told me that I had to let they have free reign in town, or there would be trouble. They\'re out at the Colosseum causing trouble.',
+    '<i>Grr...</i>.',
+    'Those masked trainers went and kidnapped my beloved Plusle! How dare they!',
+    'They told me that I had to let them have free reign in town, or there would be trouble. They\'re out at the Colosseum causing trouble.',
 ], {image: 'assets/images/npcs/Duking.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Shadows in the Desert', 7), new QuestLineStepCompletedRequirement('Shadows in the Desert', 9, GameConstants.AchievementOption.less)]),
 });
