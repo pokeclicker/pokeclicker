@@ -570,6 +570,7 @@ export const SpriteCredits: Credit[] = [
         resources: [
             'Athlete (male)',
             'Bodybuilder (male)',
+            'Evice',
             'Exeggcute (Single) Item',
             'Flowering Celebi',
             'Freeze Mulch',
@@ -803,10 +804,12 @@ export const SpriteCredits: Credit[] = [
         name: 'osherwott',
         link: 'https://github.com/osherwott',
         resources: [
+            'Athlete (female)',
             'Bandana Guy',
             'Bodybuilder (female)',
             'Chaser (female)',
             'Chaser (male)',
+            'Es Cade',
             'Hunter (female)',
             'Hunter (male)',
             'Rider (female)',
@@ -1057,6 +1060,7 @@ export const SpriteCredits: Credit[] = [
             'Shadow Stantler',
             'Shadow Sunflora',
             'Shadow Yanma',
+            'Shady Guy (male)',
             'Team Flare Boss Lysandre',
             'Valencian Butterfree',
             'Valencian Vileplume',
