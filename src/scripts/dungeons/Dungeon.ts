@@ -5231,7 +5231,7 @@ dungeonList['Under Colosseum'] = new Dungeon('Under Colosseum',
                 new GymPokemon('Houndoom', 2100000, 68),
                 new GymPokemon('Gyarados', 2100000, 68),
                 new GymPokemon('Togetic', 2100000, 70, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-            ], { weight: 1 }, 'Fein', '(male)'),
+            ], { weight: 1 }, 'Fein', '(wes)'),
     ],
     91500, 134);
 
