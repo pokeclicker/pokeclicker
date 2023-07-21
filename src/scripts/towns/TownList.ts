@@ -771,6 +771,11 @@ const BugCatcherPinsir = new NPC('Bug Catcher Michel', [
     'But... I don\'t have enough Safari Experience to find it.',
 ], {image: 'assets/images/npcs/Bug Catcher.png', requirement: new MaxRegionRequirement(GameConstants.Region.kalos)});
 
+const CandyMan = new NPC('The Candy Man', [
+    'I sure do love candy. The rarer, the better!',
+    'I\'ve got a real SWEET-TOOTH!',
+]);
+
 //Kanto Towns
 TownList['Pallet Town'] = new Town(
     'Pallet Town',
@@ -864,7 +869,7 @@ TownList['Celadon City'] = new Town(
     [CeladonDepartmentStoreShop, CeladonCityShop, new MoveToDungeon(dungeonList['Rocket Game Corner'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 7)],
-        npcs: [BigSpender, EggHuntErika],
+        npcs: [BigSpender, EggHuntErika, CandyMan],
     }
 );
 TownList['Saffron City'] = new Town(
