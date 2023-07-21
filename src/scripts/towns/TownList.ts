@@ -2784,7 +2784,7 @@ const Sack = new NPC('Check the sack', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Shadows in the Desert', 2), new QuestLineStepCompletedRequirement('Shadows in the Desert', 4, GameConstants.AchievementOption.less)]),
 });
 const EsCade1 = new NPC('Mayor Es Cade', [
-    'Ah, you must be travelers! Welcome to Phenac City! I am Es Cade, the Mayor. Now, you wanted to see me. Is there something that I may be able to assist you with?',
+    'Ah, you must be travelers! Welcome to Phenac City! I am Es Cade, the Mayor. Now, you wanted to see me? Is there something that I may be able to assist you with?',
     'O-o-o-oh, my! Shadow Pokémon? And they attack people?! Now if that were true, that would be truly frightening. However, that is a little hard to believe.',
     'I understand your concern, though. I will order an investigation at once.',
     'I promise you, we will obtain useful information about those sinister Pokémon. While we do so, I heartily recommend that you visit our Stadium, the symbol of our civic pride!',
@@ -2827,7 +2827,7 @@ const Rui2 = new NPC('Rui', [
 });
 const GrandpaEagun1 = new NPC('Grandpa Eagun', [
     'Rui! And you are? $playername$? Nice to meet you!',
-    'Thank you both for saving me from those goons. They were disrupting the beace and tranquility of this whole area.',
+    'Thank you both for saving me from those goons. They were disrupting the peace and tranquility of this whole area.',
     '$playername$, if you ever have troubled or downright evil Pokémon, take them to the nearby Relic Stone. Its power, combined with the power of friendship you share with your Pokémon, may purify their souls.',
 ], {image: 'assets/images/npcs/Old Man.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Shadows in the Desert', 16), new QuestLineStepCompletedRequirement('Shadows in the Desert', 18, GameConstants.AchievementOption.less)]),
@@ -2839,7 +2839,7 @@ const Rui3 = new NPC('Rui', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Shadows in the Desert', 18), new QuestLineStepCompletedRequirement('Shadows in the Desert', 20, GameConstants.AchievementOption.less)]),
 });
 const SearchTheStudio = new NPC('Search The Studio', [
-    '<i>Scripts litter Venus\'s desk, as well as other, more suspicious files addressing what trainers in town have which Pokémon. There are also several letters labeled  "Mayor\'s Office".</i>',
+    '<i>Scripts litter Venus\' desk, as well as other, more suspicious files addressing what trainers in town have which Pokémon. There are also several letters labeled "Mayor\'s Office".</i>',
     '<i>Rui calls to you from across the room:</i>',
     'Hey $playername$! I found a button! I\'m gonna press it!',
     '<i>An explosion rocks the room, revealing a tunnel out of a secret entrance. The scripts and letters are scattered all over the studio, making them impossible to sort out.</i>',
@@ -2847,7 +2847,7 @@ const SearchTheStudio = new NPC('Search The Studio', [
 {requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Shadows in the Desert', 20), new QuestLineStepCompletedRequirement('Shadows in the Desert', 22, GameConstants.AchievementOption.less)])}
 );
 const EsCade2 = new NPC('Mayor Es Cade', [
-    'My, my. That certainly was a battle worth seeing. I must be honest with you. I never imaged that you would get this far.',
+    'My, my. That certainly was a battle worth seeing. I must be honest with you. I never imagined that you would get this far.',
     'Oh, dear me. Do you fail to understand still? You\'re such an innocent child. At times, I am the affable mayor of Phenac... And at others, I am the secret boss of the criminal syndicate Cipher!',
     'I am Evice, and I shall rule the world!',
     '<i>The Mayor changes before your eyes, taking on a much more sinister appearance.</i>',
@@ -2872,7 +2872,7 @@ const OldManPhenac = new NPC('Old Man', [
     'Those Pokémon would be better off in the hands of a loving trainer.',
 ]);
 const OrreRoamerNPC = new RoamerNPC('Fateen\'s Fortune Telling', [
-    'I sense the presence of rate Pokémon at the {ROUTE_NAME}! Hurry, before the fates intervene!',
+    'I sense the presence of rare Pokémon at the {ROUTE_NAME}! Hurry, before the fates intervene!',
 ], GameConstants.Region.hoenn, RoamingPokemonList.findGroup(GameConstants.Region.hoenn, GameConstants.HoennSubRegions.Orre), 'assets/images/npcs/Psychic (female).png');
 const AgateOldMan = new NPC('Old Man', [
     'This town is pretty quite. Most folks here are retired trainers.',
