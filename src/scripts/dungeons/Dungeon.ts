@@ -3751,7 +3751,7 @@ dungeonList['Pyrite Town Battles'] = new Dungeon('Pyrite Town Battles',
                 new GymPokemon('Kirlia', 41000, 35),
                 new GymPokemon('Nuzleaf', 41000, 35),
                 new GymPokemon('Machop', 41000, 35),
-            ], { weight: 1, requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Pyrite Town Battles'), GameConstants.AchievementOption.less)}, 'Cail'),
+            ], { weight: 1, requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Pyrite Town Battles'), GameConstants.AchievementOption.less)}, 'Cail', 'Cail'),
         new DungeonTrainer('Chaser',
             [
                 new GymPokemon('Furret', 41000, 35),
@@ -3829,7 +3829,7 @@ dungeonList['Pyrite Town Battles'] = new Dungeon('Pyrite Town Battles',
                 new GymPokemon('Seedot', 900000, 29),
                 new GymPokemon('Ralts', 900000, 29),
                 new GymPokemon('Furret', 900000, 33, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-            ], { weight: 0.25}, 'Cail'),
+            ], { weight: 0.25}, 'Cail', 'Cail'),
     ],
     41000, 116);
 
@@ -5231,7 +5231,7 @@ dungeonList['Under Colosseum'] = new Dungeon('Under Colosseum',
                 new GymPokemon('Houndoom', 2100000, 68),
                 new GymPokemon('Gyarados', 2100000, 68),
                 new GymPokemon('Togetic', 2100000, 70, undefined, undefined, GameConstants.ShadowStatus.Shadow),
-            ], { weight: 1 }, 'Fein', '(male)'),
+            ], { weight: 1 }, 'Fein', '(wes)'),
     ],
     91500, 134);
 
