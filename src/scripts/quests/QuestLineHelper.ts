@@ -1059,7 +1059,7 @@ class QuestLineHelper {
         const fightFolly = new CustomQuest(1, 0, 'Fight Folly the Shady Guy in Phenac City', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Folly')]());
         orreColosseumQuestLine.addQuest(fightFolly);
 
-        const checkSack = new TalkToNPCQuest(Sack, 'Check the see what is in the mysterious sack.'); // Step 3
+        const checkSack = new TalkToNPCQuest(Sack, 'Check what is in the mysterious sack.'); // Step 3
         orreColosseumQuestLine.addQuest(checkSack);
 
         const defeatShadowsPhenac = new CustomQuest(10, 0, 'Defeat 10 trainers who are using Shadow Pokémon in Phenac City.', () => App.game.statistics.totalShadowPokemonDefeated());
@@ -1097,7 +1097,7 @@ class QuestLineHelper {
         const freePlusle = new TalkToNPCQuest(FreePlusle, 'Free Duking\'s Plusle.'); //Step 13
         orreColosseumQuestLine.addQuest(freePlusle);
 
-        const talkToRui2 = new TalkToNPCQuest(Rui2, 'Discuss your next move with Rui at the Pyrite Colosseum.');
+        const talkToRui2 = new TalkToNPCQuest(Rui2, 'Discuss your next move with Rui at Pyrite Colosseum.');
         orreColosseumQuestLine.addQuest(talkToRui2);
 
         const clearAgatePeons = new CustomQuest (3, 0, 'Defeat the Team Cipher Peons looting Agate Village.', () =>
@@ -1126,13 +1126,13 @@ class QuestLineHelper {
 
         const fightTheUnder = new CustomQuest(1, 0, 'Track down the TV broadcast coming The Under in Pyrite Town. Clear The Under.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('The Under')](), undefined, undefined,
             {
-                clearedMessage: 'Aiyeeeeh! How dare you! How could I get bested by a mere boy? Remember this! I\'ll get you back for this!',
+                clearedMessage: 'Aiyeeeeh! How dare you! How could I get bested by a mere child? Remember this! I\'ll get you back for this!',
                 npcDisplayName: 'Venus',
                 npcImageName: 'Cipher Admin (Venus)',
             });
         orreColosseumQuestLine.addQuest(fightTheUnder);
 
-        const searchTheStudio = new TalkToNPCQuest(SearchTheStudio, 'Search Venus\'s Studio in the Under for clues.'); // Step 21
+        const searchTheStudio = new TalkToNPCQuest(SearchTheStudio, 'Search Venus\' Studio in the Under for clues.'); // Step 21
         orreColosseumQuestLine.addQuest(searchTheStudio);
 
         const fightCipherLab = new CustomQuest(1, 0, 'Follow the secret tunnel to the Cipher Lab and clear out the enemies.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Cipher Lab')](), undefined, undefined,
@@ -1152,7 +1152,7 @@ class QuestLineHelper {
         const fightRealgamColosseum = new CustomQuest(10, 0, 'Team Cipher\'s leaders have holed up in the Realgam Colosseum. Fight them to end this once and for all!', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Realgam Colosseum')]());
         orreColosseumQuestLine.addQuest(fightRealgamColosseum);
 
-        const watchEviceEscape = new TalkToNPCQuest(EviceEscape, 'Just when you have him cornered, Evice radios in a helicopter. Watch him escape the Realgam Colosseum.'); // Step 26
+        const watchEviceEscape = new TalkToNPCQuest(EviceEscape, 'Just when you have him cornered, Evice calls in a helicopter. Watch him escape the Realgam Colosseum.'); // Step 26
         orreColosseumQuestLine.addQuest(watchEviceEscape);
 
         App.game.quests.questLines().push(orreColosseumQuestLine);
