@@ -695,7 +695,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.galar]: new Set(['Galar Mine', 'Galar Mine No. 2', 'Iron Ruins']),
     },
 
-    DesertTropical: {
+    Desert: {
         [Region.kanto]: new Set(),
         [Region.johto]: new Set(),
         [Region.hoenn]: new Set([111, 135, 'Outskirt Stand', 'Orre Colosseum']),
@@ -763,7 +763,7 @@ export const EnvironmentCssClass: Record<Environment, string> = {
     Forest: 'forest',
     Cave: 'cave',
     GemCave: 'cave-gem',
-    DesertTropical: 'desert-tropical',
+    Desert: 'desert',
     DesertTemperate: 'desert-temperate',
     PowerPlant: 'power-plant',
     Mansion: 'mansion',
