@@ -216,7 +216,7 @@ export default class RedeemableCodes implements Saveable {
                 });
 
                 return true;
-            },),
+            }),
         ];
     }
 
