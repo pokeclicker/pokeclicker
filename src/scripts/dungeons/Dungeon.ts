@@ -5919,10 +5919,10 @@ dungeonList['Citadark Isle Dome'] = new Dungeon('Citadark Isle Dome', // Difficu
     },
     8173950,
     [
-        new DungeonTrainer('Grnd Master',
+        new DungeonTrainer('Grand Master',
             [new GymPokemon('XD001', 83753718, 50, undefined, undefined, GameConstants.ShadowStatus.Shadow)],
             { weight: 1 }, 'Greevil', 'Greevil'),
-        new DungeonTrainer('Grnd Master',
+        new DungeonTrainer('Grand Master',
             [
                 new GymPokemon('Rhydon', 13958953, 46, undefined, undefined, GameConstants.ShadowStatus.Shadow),
                 new GymPokemon('Moltres', 13958953, 50, undefined, undefined, GameConstants.ShadowStatus.Shadow),

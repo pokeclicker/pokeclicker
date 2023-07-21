@@ -1058,7 +1058,7 @@ TemporaryBattleList.Zook = new TemporaryBattle(
     undefined,
     {
         displayName: 'Zook',
-        imageName: 'Zook',
+        imageName: 'Thug',
     }
 );
 TemporaryBattleList['Miror B. 2'] = new TemporaryBattle(
