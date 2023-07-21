@@ -517,7 +517,9 @@ class Game {
 
     save() {
         player._lastSeen = Date.now();
-        Save.store(player);
+        if (Settings.getSetting('disableAutoSave').value === false) {
+            Save.store(player);
+        }
     }
 
     // Knockout getters/setters

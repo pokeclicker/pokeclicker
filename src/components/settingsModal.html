@@ -79,6 +79,7 @@
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('catchFilters.initialEnabled')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('useWebWorkerForGameTicks')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('disableOfflineProgress')}"></tr>
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('disableAutoSave')}"></tr>
                                 <tr data-bind="visible: player.highestRegion() > 0, with: Settings.getSetting('breedingQueueSizeSetting')">
                                     <td class="p-2" data-bind="text: `${$data.displayName}:`">setting name</td>
                                     <td class="p-0">

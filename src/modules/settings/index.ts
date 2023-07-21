@@ -146,6 +146,7 @@ Settings.add(new CssVariableSetting('completed', 'Completed Location', [], '#fff
 Settings.add(new BooleanSetting('disableAutoDownloadBackupSaveOnUpdate', 'Disable automatic backup save downloading when game updates', false));
 Settings.add(new BooleanSetting('useWebWorkerForGameTicks', 'Make use of web workers for game ticks (more consistent game speed)', true));
 Settings.add(new BooleanSetting('disableOfflineProgress', 'Disable offline progress', false));
+Settings.add(new BooleanSetting('disableAutoSave', 'Disable Auto Saves', false));
 Settings.add(new Setting<string>('saveReminder', 'Save reminder interval (in game time)',
     [
         new SettingOption('Never', '0'),
