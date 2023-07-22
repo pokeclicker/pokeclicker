@@ -167,6 +167,8 @@ import PokeballItem from './items/PokeballItem';
 import QuestItem from './items/QuestItem';
 import Vitamin from './items/Vitamin';
 import VitaminController from './items/VitaminController';
+import Consumable from './items/Consumable';
+import ConsumableController from './items/ConsumableController';
 import RoamingPokemonList from './pokemons/RoamingPokemonList';
 import DataPokemon from './pokemons/DataPokemon';
 import RoamingPokemon from './pokemons/RoamingPokemon';
@@ -366,6 +368,8 @@ Object.assign(<any>window, {
     QuestItem,
     Vitamin,
     VitaminController,
+    Consumable,
+    ConsumableController,
     RoamingPokemonList,
     DataPokemon,
     RoamingPokemon,

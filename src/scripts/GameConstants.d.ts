@@ -797,7 +797,9 @@ namespace GameConstants {
         HeldKeybind,
     }
     declare const ModalCollapseList: string[];
-
+    declare enum ConsumableType {
+        Rare_Candy,
+    }
     declare const zCrystalItemType: string[];
     declare enum ZMoveStatus {
         inactive,
