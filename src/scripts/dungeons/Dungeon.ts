@@ -11134,7 +11134,7 @@ dungeonList['Ruins of Conflict'] = new Dungeon('Ruins of Conflict',
         ],
         rare: [
             {loot: 'Yellow Shard'},
-            {loot: 'Pnik Shard'},
+            {loot: 'Pink Shard'},
         ],
         epic: [
             {loot: 'Zap Plate'},
