@@ -5732,6 +5732,80 @@ const BugCatcherScizor = new NPC('Bug Catcher Elliot', [
     'It takes a very experienced trainer to find it, though.',
 ], {image: 'assets/images/npcs/Bug Catcher.png'});
 
+const UnrivaledBlue = new NPC('Blue', [
+    'So, you said you want to know where you might find Mewtwo\'s Mega Stones, right?',
+    'Well, you\'re in luck! I was talking to an old rival of mine the other day, and she said she was looking for Mewtwo, and that she already had two of its Mega Stones. Unfortunately for her, they were the same one.',
+    'Not much use in having two of the same Mega Stone, so she might be willing to give one up. If you want to find her, you should check out Cerulean Cave.',
+  ], {
+      image: 'assets/images/npcs/Blue-lgpe.png',
+      requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 1), new QuestLineStepCompletedRequirement('An Unrivaled Power', 3, GameConstants.AchievementOption.less)]),
+  });
+
+const UnrivaledGreen1 = new NPC('Green', [
+    '*Ow! You were hit by a low-flying Poké Ball!*',
+    'Oh, whoops! You\'re not a Pokémon! Sorry, it\'s so dark in here, I saw you and thought you were some kind of Pokémon.',
+    'Well, uh... nice to meet you. I\'m Green! So hey, I\'m just curious... Are you here because you\'re also looking for... y\'know, something special?',
+    'R-right! Mewtwo! ...Drat, so you knew about it already, huh.......',
+    'Whaaaaaaaaaat?! You\'ve already caught it?! Hey, no fair! I was planning on catching it first!',
+  ], {
+      image: 'assets/images/npcs/Green.png',
+      requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 2), new QuestLineStepCompletedRequirement('An Unrivaled Power', 4, GameConstants.AchievementOption.less)]),
+  });
+
+const UnrivaledGreen2 = new NPC('Green', [
+    'Wow, you\'re strong! Well, I guess that\'s that. Here, you can have this.',
+    '</i></br><img src="assets/images/megaStone/Mewtwonite_X.png"/></br><i>You obtained the Mewtwonite X!</i>',
+    'Oh, I know! Why don\'t you become one of my Pokémon, together with Mewtwo?',
+    '*A Poké Ball came flying at you!*',
+    '*A Poké Ball came flying at you!*',
+    'Hee hee hee... *A Poké Ball came flying at you!*',
+    '*A Poké Ball came flying at you!*',
+    '*A Poké Ball came flying at you!* Think about it, ok?',
+], {
+    image: 'assets/images/npcs/Green.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 4), new QuestLineStepCompletedRequirement('An Unrivaled Power', 6, GameConstants.AchievementOption.less)]),
+});
+
+const AnomalyMewtwo1 = new NPC('Anomaly Mewtwo', [
+    '<i>That child... She wished to possess me, like a mere animal. She would have cared little for my own desires. I wish only to live in peace, without being disturbed.</i>',
+    '<i>You say you would help me? But you are no different. You even possess another of my kind. You do not fool me.</i>',
+    '<i>I will leave this place now, to find what I desire. Do not follow me.</i>',
+], {
+    image: 'assets/images/pokemon/151.01.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 5), new QuestLineStepCompletedRequirement('An Unrivaled Power', 7, GameConstants.AchievementOption.less)]),
+});
+
+const AnomalyMewtwo2 = new NPC('Anomaly Mewtwo', [
+    '<i>This place is... beautiful. I am amazed such a place truly exists.</i>',
+    '<i>.......Thank you.</i>',
+    '<i>I would like to give you something, but first, may I ask something of you?</i>',
+    '<i>You have heard of Twisted Spoons, yes? They are items that greatly boost the power of psychic type Pokémon.</i>',
+    '<i>When I was created, I had an enhanced version of this item created for me. I have heard it is now in the hands of an organisation named Team Plasma, in an area named P2 Laboratory.</i>',
+    '<i>I would greatly appreciate it if you would retrieve this item for me.</i>',
+], {
+    image: 'assets/images/pokemon/151.02.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 11), new QuestLineStepCompletedRequirement('An Unrivaled Power', 13, GameConstants.AchievementOption.less)]),
+});
+
+const AnomalyMewtwo3 = new NPC('Anomaly Mewtwo', [
+    '<i>I am even more in your debt. But there is one more thing I would like to ask of you.</i>',
+    '<i>Would you be willing to fight me, one last time, in this new home you have given me?</i>',
+    '<i>With my Twisted Spoon in hand, and my Mega Evolution, I can finally show you the true heights of my power!</i>',
+], {
+    image: 'assets/images/pokemon/151.02.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 13), new QuestLineStepCompletedRequirement('An Unrivaled Power', 15, GameConstants.AchievementOption.less)]),
+});
+
+const AnomalyMewtwo4 = new NPC('Anomaly Mewtwo', [
+    '<i>Hah! Your strength is truly unyielding!</i>',
+    '<i>I would like to apolagise for accusing you of merely possessing the Mewtwo in your care. It is clear that you greatly care for it, as well as all your other Pokémon. Take this.</i>',
+    '</i></br><img src="assets/images/megaStone/Mewtwonite_Y.png"/></br><i>You obtained the Mewtwonite Y!</i>',
+    '<i>You are truly deserving of this Mega Stone. Use it to give your Mewtwo a truly unrivaled power.</i>',
+], {
+    image: 'assets/images/pokemon/151.02.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 15), new QuestLineCompletedRequirement('An Unrivaled Power', GameConstants.AchievementOption.less)]),
+});
+
 //Kalos Towns
 
 TownList['Vaniville Town'] = new Town(
@@ -6015,7 +6089,7 @@ TownList['Pokémon Village'] = new DungeonTown(
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 20)],
     [],
     {
-        npcs: [AnomalyMewtwo2],
+        npcs: [AnomalyMewtwo2, AnomalyMewtwo3, AnomalyMewtwo4],
     }
 );
 TownList['Victory Road Kalos'] = new DungeonTown(

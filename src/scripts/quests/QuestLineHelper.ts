@@ -2280,8 +2280,41 @@ class QuestLineHelper {
             });
         };
 
-        const talkToUnrivaledGreen = new TalkToNPCQuest(UnrivaledGreen, 'Talk to Green in Cerulean Cave.', MewtwoniteXReward);
-        unrivaledPowerQuestLine.addQuest(talkToUnrivaledGreen);
+        const talkToUnrivaledGreen2 = new TalkToNPCQuest(UnrivaledGreen2, 'Talk to Green in Cerulean Cave.', MewtwoniteXReward);
+        unrivaledPowerQuestLine.addQuest(talkToUnrivaledGreen2);
+
+        const talkToAnomalyMewtwo1 = new TalkToNPCQuest(AnomalyMewtwo1, 'Talk to Anomaly Mewtwo in Cerulean Cave.');
+        unrivaledPowerQuestLine.addQuest(talkToAnomalyMewtwo1);
+
+        const clearAnomalyMewtwo1 = new CustomQuest(1, 0, 'Mewtwo wishes to find a place it can live undisturbed. You know of such a place, but it seems unwilling to listen. Defeat Anomaly Mewtwo near Cerulean Cave so you may attempt to talk to it.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Anomaly Mewtwo 1')]());
+        unrivaledPowerQuestLine.addQuest(clearAnomalyMewtwo1);
+
+        const clearAnomalyMewtwo2 = new CustomQuest(1, 0, 'It escaped to the west. Defeat Anomaly Mewtwo again.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Anomaly Mewtwo 2')]());
+        unrivaledPowerQuestLine.addQuest(clearAnomalyMewtwo2);
+
+        const clearAnomalyMewtwo3 = new CustomQuest(1, 0, 'It changed form and flew off in the direction of the sea. Defeat Anomaly Mewtwo yet again.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Anomaly Mewtwo 3')]());
+        unrivaledPowerQuestLine.addQuest(clearAnomalyMewtwo3);
+
+        const clearAnomalyMewtwo4 = new CustomQuest(1, 0, 'It flew off to the peak of a great mountain. Defeat Anomaly Mewtwo yet again.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Anomaly Mewtwo 4')]());
+        unrivaledPowerQuestLine.addQuest(clearAnomalyMewtwo4);
+
+        const clearAnomalyMewtwo5 = new CustomQuest(1, 0, 'It flew off to a faraway region to hide in a large city. Defeat Anomaly Mewtwo yet again.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Anomaly Mewtwo 5')]());
+        unrivaledPowerQuestLine.addQuest(clearAnomalyMewtwo5);
+
+        const talkToAnomalyMewtwo2 = new TalkToNPCQuest(AnomalyMewtwo2, 'Talk to Anomaly Mewtwo in Pokémon Village.');
+        unrivaledPowerQuestLine.addQuest(talkToAnomalyMewtwo2);
+
+        const findGreatTwistedSpoon = new CustomQuest(1, undefined, 'Find the Great Twisted Spoon in P2 Lab.', () => player.itemList.Great_Twisted_Spoon();
+        unrivaledPowerQuestLine.addQuest(findGreatTwistedSpoon);
+
+        const talkToAnomalyMewtwo3 = new TalkToNPCQuest(AnomalyMewtwo3, 'Talk to Anomaly Mewtwo in Pokémon Village.');
+        unrivaledPowerQuestLine.addQuest(talkToAnomalyMewtwo3);
+
+        const clearAnomalyMewtwo6 = new CustomQuest(1, 0, 'Defeat Anomaly Mewtwo in Pokémon Village.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Pokémon Village')]());
+        unrivaledPowerQuestLine.addQuest(clearAnomalyMewtwo6);
+
+        const talkToAnomalyMewtwo4 = new TalkToNPCQuest(AnomalyMewtwo4, 'Talk to Anomaly Mewtwo in Pokémon Village.');
+        unrivaledPowerQuestLine.addQuest(talkToAnomalyMewtwo4);
 
         App.game.quests.questLines().push(unrivaledPowerQuestLine);
     }

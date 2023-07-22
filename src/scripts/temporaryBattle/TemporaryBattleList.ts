@@ -3344,7 +3344,7 @@ TemporaryBattleList['Unrivaled Red'] = new TemporaryBattle(
         new GymPokemon('Mega Venusaur', 90263333, 85),
     ],
     '... ... ...!',
-    [new QuestLineStepCompletedRequirement('The Strongest Pokémon', 35)],
+    [new QuestLineStartedRequirement('An Unrivaled Power')],
     undefined,
     {
         displayName: 'Pokémon Trainer Red',
@@ -3362,7 +3362,7 @@ TemporaryBattleList['Unrivaled Blue'] = new TemporaryBattle(
       new GymPokemon('Mega Charizard Y', 90363626, 68),
     ],
     'Aw man, what was I doing?',
-    [new QuestLineStepCompletedRequirement('The Strongest Pokémon', 35)],
+    [new QuestLineStepCompletedRequirement('An Unrivaled Power', 0)],
     undefined,
     {
         displayName: 'Gym Leader Blue',
@@ -3380,7 +3380,7 @@ TemporaryBattleList['Unrivaled Green'] = new TemporaryBattle(
       new GymPokemon('Mega Blastoise', 90514065, 68),
     ],
     'Come on! What\'s with that...?',
-    [new QuestLineStepCompletedRequirement('The Strongest Pokémon', 35)],
+    [new QuestLineStepCompletedRequirement('An Unrivaled Power', 3)],
     undefined,
     {
         displayName: 'Pokémon Trainer Green',
@@ -3390,8 +3390,8 @@ TemporaryBattleList['Unrivaled Green'] = new TemporaryBattle(
 TemporaryBattleList['Anomaly Mewtwo 1'] = new TemporaryBattle(
     'Anomaly Mewtwo 1',
     [new GymPokemon('Mega Mewtwo X', 500000000, 70)],
-    '<i>I see. You are indeed strong. But I do not wish to deal with humans. Leave me.</i>',
-    [new QuestLineStepCompletedRequirement('The Strongest Pokémon', 4)],
+    '<i>I see. You are indeed strong. But I do not wish to talk to you. As I already told you, do not continue to follow me.</i>',
+    [new QuestLineStepCompletedRequirement('An Unrivaled Power', 6)],
     undefined,
     {
         displayName: 'Anomaly Mewtwo',
@@ -3403,11 +3403,11 @@ TemporaryBattleList['Anomaly Mewtwo 2'] = new TemporaryBattle(
     'Anomaly Mewtwo 2',
     [new GymPokemon('Mega Mewtwo X', 510000000, 70)],
     '<i>Do you not comprehend human speech?! Fine then, if you will not leave me alone, then I will not let you catch up to me!</i>',
-    [new QuestLineStepCompletedRequirement('The Strongest Pokémon', 4)],
+    [new QuestLineStepCompletedRequirement('An Unrivaled Power', 7)],
     undefined,
     {
         displayName: 'Anomaly Mewtwo',
-        imageName: '../pokemon/150.01',
+        imageName: '../pokemon/ 150.01',
         hideTrainer: true,
     }
 );
@@ -3415,7 +3415,7 @@ TemporaryBattleList['Anomaly Mewtwo 3'] = new TemporaryBattle(
     'Anomaly Mewtwo 3',
     [new GymPokemon('Mega Mewtwo Y', 520000000, 70)],
     '<i>Damn it! How could you possibly pursue me so quickly!</i>',
-    [new QuestLineStepCompletedRequirement('The Strongest Pokémon', 4)],
+    [new QuestLineStepCompletedRequirement('An Unrivaled Power', 8)],
     undefined,
     {
         displayName: 'Anomaly Mewtwo',
@@ -3427,7 +3427,7 @@ TemporaryBattleList['Anomaly Mewtwo 4'] = new TemporaryBattle(
     'Anomaly Mewtwo 4',
     [new GymPokemon('Mega Mewtwo Y', 530000000, 70)],
     '<i>WHAT DO YOU WANT WITH ME, HUMAN?!</i>',
-    [new QuestLineStepCompletedRequirement('The Strongest Pokémon', 4)],
+    [new QuestLineStepCompletedRequirement('An Unrivaled Power', 9)],
     undefined,
     {
         displayName: 'Anomaly Mewtwo',
@@ -3438,8 +3438,8 @@ TemporaryBattleList['Anomaly Mewtwo 4'] = new TemporaryBattle(
 TemporaryBattleList['Anomaly Mewtwo 5'] = new TemporaryBattle(
     'Anomaly Mewtwo 5',
     [new GymPokemon('Mega Mewtwo Y', 540000000, 70)],
-    '<i>GAARGH!!! ......... What? ......... You say you just want to help me? You have an unusual way of showing it. Fine then. You say you know of a place where I could easily avoid most unwanted attention? Take me there.</i>',
-    [new QuestLineStepCompletedRequirement('The Strongest Pokémon', 4)],
+    '<i>GAARGH!!! ......... What? ......... You say you truly just want to help me? You are irritatingly persistant. Fine then. You say you know of a place where I can live undisturbed? Take me there.</i>',
+    [new QuestLineStepCompletedRequirement('An Unrivaled Power', 10)],
     undefined,
     {
         displayName: 'Anomaly Mewtwo',
