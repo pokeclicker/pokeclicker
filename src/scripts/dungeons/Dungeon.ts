@@ -2,6 +2,7 @@
 ///<reference path="DungeonBossPokemon.ts"/>
 ///<reference path="../../declarations/requirements/GymBadgeRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/MultiRequirement.d.ts"/>
+///<reference path="../../declarations/requirements/OneFromManyRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/SeededDateRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/DayOfWeekRequirement.d.ts"/>
 ///<reference path="../../declarations/requirements/ObtainedPokemonRequirement.d.ts"/>
@@ -8919,7 +8920,7 @@ dungeonList['P2 Laboratory'] = new Dungeon('P2 Laboratory',
             {loot: 'Iron Plate', weight: 2},
             {loot: 'Insect Plate', weight: 2},
             {loot: 'Zap Plate'},
-            {loot: 'Twisted_Spoon', ignoreDebuff : true, weight: 3, requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 5), new QuestLineStepCompletedRequirement('An Unrivaled Power', 7, GameConstants.AchievementOption.less)])},
+            {loot: 'Great_Twisted_Spoon', ignoreDebuff : true, weight: 3, requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 5), new QuestLineStepCompletedRequirement('An Unrivaled Power', 6, GameConstants.AchievementOption.less)])},
         ],
         legendary: [{loot: 'Revive'}],
     },
@@ -9743,14 +9744,14 @@ dungeonList['Pokémon Village'] = new Dungeon('Pokémon Village',
     [
         new DungeonBossPokemon('Ditto', 94836530, 50,
             { hide: true, requirement: new OneFromManyRequirement([
-            new QuestLineStepCompletedRequirement('The Strongest Pokémon', 6, GameConstants.AchievementOption.less),
-            new QuestLineCompletedRequirement('The Strongest Pokémon'),
-        ])}),
+                new QuestLineStepCompletedRequirement('The Strongest Pokémon', 6, GameConstants.AchievementOption.less),
+                new QuestLineCompletedRequirement('The Strongest Pokémon'),
+            ])}),
         new DungeonBossPokemon('Zoroark', 95743340, 50,
             { hide: true, requirement: new OneFromManyRequirement([
-            new QuestLineStepCompletedRequirement('The Strongest Pokémon', 6, GameConstants.AchievementOption.less),
-            new QuestLineCompletedRequirement('The Strongest Pokémon'),
-        ])}),
+                new QuestLineStepCompletedRequirement('The Strongest Pokémon', 6, GameConstants.AchievementOption.less),
+                new QuestLineCompletedRequirement('The Strongest Pokémon'),
+            ])}),
         new DungeonTrainer('Anomaly Mewtwo',
             [new GymPokemon('Mega Mewtwo X', 120000000, 70)],
             { hide: true, requirement: new QuestLineCompletedRequirement('The Strongest Pokémon', GameConstants.AchievementOption.less)}),
