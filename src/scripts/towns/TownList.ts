@@ -780,10 +780,10 @@ const UnrivaledBlue = new NPC('Blue', [
     'So, you said you want to know where you might find Mewtwo\'s Mega Stones, right?',
     'Well, you\'re in luck! I was talking to an old rival of mine the other day, and she said she was looking for Mewtwo, and that she already had two of its Mega Stones. Unfortunately for her, they were the same one.',
     'Not much use in having two of the same Mega Stone, so she might be willing to give one up. If you want to find her, you should check out Cerulean Cave.',
-  ], {
-      image: 'assets/images/npcs/Blue-lgpe.png',
-      requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 1), new QuestLineStepCompletedRequirement('An Unrivaled Power', 3, GameConstants.AchievementOption.less)]),
-  });
+], {
+    image: 'assets/images/npcs/Blue-lgpe.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 1), new QuestLineStepCompletedRequirement('An Unrivaled Power', 3, GameConstants.AchievementOption.less)]),
+});
 
 const UnrivaledGreen1 = new NPC('Green', [
     '*Ow! You were hit by a low-flying Poké Ball!*',
@@ -791,10 +791,10 @@ const UnrivaledGreen1 = new NPC('Green', [
     'Well, uh... nice to meet you. I\'m Green! So hey, I\'m just curious... Are you here because you\'re also looking for... y\'know, something special?',
     'R-right! Mewtwo! ...Drat, so you knew about it already, huh.......',
     'Whaaaaaaaaaat?! You\'ve already caught it?! Hey, no fair! I was planning on catching it first!',
-  ], {
-      image: 'assets/images/npcs/Green.png',
-      requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 2), new QuestLineStepCompletedRequirement('An Unrivaled Power', 4, GameConstants.AchievementOption.less)]),
-  });
+], {
+    image: 'assets/images/npcs/Green.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 2), new QuestLineStepCompletedRequirement('An Unrivaled Power', 4, GameConstants.AchievementOption.less)]),
+});
 
 const UnrivaledGreen2 = new NPC('Green', [
     'Wow, you\'re strong! Well, I guess that\'s that. Here, you can have this.',
