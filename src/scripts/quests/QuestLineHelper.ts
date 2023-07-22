@@ -1495,6 +1495,15 @@ class QuestLineHelper {
 
         App.game.quests.questLines().push(plasmaUnovaQuestLine);
     }
+    // XD Questline, available after Unova E4
+    public static createOrreXDQuestLine() {
+        const orreXDQuestLine = new QuestLine('Gale of Darkness', 'Team Cipher has returned to Orre. Stop their new evil plan!', new DevelopmentRequirement(), GameConstants.BulletinBoards.Hoenn);
+
+        const talkToWillie = new TalkToNPCQuest(Willie, 'This is a placeholder for locking content'); // TODO make the quest for real
+        orreXDQuestLine.addQuest(talkToWillie);
+
+        App.game.quests.questLines().push(orreXDQuestLine);
+    }
 
     /* Kalos QuestLines */
 
@@ -3673,6 +3682,7 @@ class QuestLineHelper {
         this.createManaphyQuestLine();
         this.createGiratinaQuestLine();
         this.createPlasmaUnovaQuestLine();
+        this.createOrreXDQuestLine();
         this.createDeltaEpisodeQuestLine();
         this.createPrimalReversionQuestLine();
         this.createDetectivePikachuQuestLine();

@@ -99,7 +99,7 @@ describe('Test GameConstants', () => {
         expect(getGymRegion('Not a real gym')).toEqual(-1);
     });
     it('return the dungeons total index', () => {
-        expect(getDungeonIndex('Abundant Shrine')).toEqual(111);
+        expect(getDungeonIndex('Abundant Shrine')).toEqual(115);
         expect(getDungeonIndex('Not a real dungeon')).toEqual(-1);
     });
     it('return the region a dungeon is in', () => {
@@ -107,7 +107,7 @@ describe('Test GameConstants', () => {
         expect(getDungeonRegion('Not a real dungeon')).toEqual(-1);
     });
     it('return the temp battles total index', () => {
-        expect(getTemporaryBattlesIndex('Underground Fighting Ring')).toEqual(155);
+        expect(getTemporaryBattlesIndex('Underground Fighting Ring')).toEqual(162);
         expect(getTemporaryBattlesIndex('Not a real temp battle')).toEqual(-1);
     });
 });
