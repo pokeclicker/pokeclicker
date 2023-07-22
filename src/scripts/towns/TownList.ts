@@ -776,6 +776,49 @@ const CandyMan = new NPC('The Candy Man', [
     'I\'ve got a real SWEET-TOOTH!',
 ]);
 
+const UnrivaledBlue = new NPC('Blue', [
+    'So, you said you want to know where you might find Mewtwo\'s Mega Stones, right?',
+    'Well, you\'re in luck! I was talking to an old rival of mine the other day, and she said she was looking for Mewtwo, and that she already had two of its Mega Stones. Unfortunately for her, they were the same one.',
+    'Not much use in having two of the same Mega Stone, so she might be willing to give one up. If you want to find her, you should check out Cerulean Cave.',
+  ], {
+      image: 'assets/images/npcs/Blue-lgpe.png',
+      requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 1), new QuestLineStepCompletedRequirement('An Unrivaled Power', 3, GameConstants.AchievementOption.less)]),
+  });
+
+const UnrivaledGreen1 = new NPC('Green', [
+    '*Ow! You were hit by a low-flying Poké Ball!*',
+    'Oh, whoops! You\'re not a Pokémon! Sorry, it\'s so dark in here, I saw you and thought you were some kind of Pokémon.',
+    'Well, uh... nice to meet you. I\'m Green! So hey, I\'m just curious... Are you here because you\'re also looking for... y\'know, something special?',
+    'R-right! Mewtwo! ...Drat, so you knew about it already, huh.......',
+    'Whaaaaaaaaaat?! You\'ve already caught it?! Hey, no fair! I was planning on catching it first!',
+  ], {
+      image: 'assets/images/npcs/Green.png',
+      requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 2), new QuestLineStepCompletedRequirement('An Unrivaled Power', 4, GameConstants.AchievementOption.less)]),
+  });
+
+const UnrivaledGreen2 = new NPC('Green', [
+    'Wow, you\'re strong! Well, I guess that\'s that. Here, you can have this.',
+    '</i></br><img src="assets/images/megaStone/Mewtwonite_X.png"/></br><i>You obtained the Mewtwonite X!</i>',
+    'Oh, I know! Why don\'t you become one of my Pokémon, together with Mewtwo?',
+    '*A Poké Ball came flying at you!*',
+    '*A Poké Ball came flying at you!*',
+    'Hee hee hee... *A Poké Ball came flying at you!*',
+    '*A Poké Ball came flying at you!*',
+    '*A Poké Ball came flying at you!* Think about it, ok?',
+], {
+    image: 'assets/images/npcs/Green.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 4), new QuestLineStepCompletedRequirement('An Unrivaled Power', 6, GameConstants.AchievementOption.less)]),
+});
+
+const AnomalyMewtwo1 = new NPC('Anomaly Mewtwo', [
+    '<i>That child... She wished to possess me, like a mere animal. She would have cared little for my own desires. I wish only to live in peace, without being disturbed.</i>',
+    '<i>You say you would help me? But you are no different. You even possess another of my kind. You do not fool me.</i>',
+    '<i>I will leave this place now, to find what I desire. Do not follow me.</i>',
+], {
+    image: 'assets/images/pokemon/151.01.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 5), new QuestLineStepCompletedRequirement('An Unrivaled Power', 7, GameConstants.AchievementOption.less)]),
+});
+
 //Kanto Towns
 TownList['Pallet Town'] = new Town(
     'Pallet Town',
@@ -5819,49 +5862,6 @@ const BugCatcherScizor = new NPC('Bug Catcher Elliot', [
     'I heard there was a stone hidden in the Friend Safari that makes Scizor stronger!',
     'It takes a very experienced trainer to find it, though.',
 ], {image: 'assets/images/npcs/Bug Catcher.png'});
-
-const UnrivaledBlue = new NPC('Blue', [
-    'So, you said you want to know where you might find Mewtwo\'s Mega Stones, right?',
-    'Well, you\'re in luck! I was talking to an old rival of mine the other day, and she said she was looking for Mewtwo, and that she already had two of its Mega Stones. Unfortunately for her, they were the same one.',
-    'Not much use in having two of the same Mega Stone, so she might be willing to give one up. If you want to find her, you should check out Cerulean Cave.',
-  ], {
-      image: 'assets/images/npcs/Blue-lgpe.png',
-      requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 1), new QuestLineStepCompletedRequirement('An Unrivaled Power', 3, GameConstants.AchievementOption.less)]),
-  });
-
-const UnrivaledGreen1 = new NPC('Green', [
-    '*Ow! You were hit by a low-flying Poké Ball!*',
-    'Oh, whoops! You\'re not a Pokémon! Sorry, it\'s so dark in here, I saw you and thought you were some kind of Pokémon.',
-    'Well, uh... nice to meet you. I\'m Green! So hey, I\'m just curious... Are you here because you\'re also looking for... y\'know, something special?',
-    'R-right! Mewtwo! ...Drat, so you knew about it already, huh.......',
-    'Whaaaaaaaaaat?! You\'ve already caught it?! Hey, no fair! I was planning on catching it first!',
-  ], {
-      image: 'assets/images/npcs/Green.png',
-      requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 2), new QuestLineStepCompletedRequirement('An Unrivaled Power', 4, GameConstants.AchievementOption.less)]),
-  });
-
-const UnrivaledGreen2 = new NPC('Green', [
-    'Wow, you\'re strong! Well, I guess that\'s that. Here, you can have this.',
-    '</i></br><img src="assets/images/megaStone/Mewtwonite_X.png"/></br><i>You obtained the Mewtwonite X!</i>',
-    'Oh, I know! Why don\'t you become one of my Pokémon, together with Mewtwo?',
-    '*A Poké Ball came flying at you!*',
-    '*A Poké Ball came flying at you!*',
-    'Hee hee hee... *A Poké Ball came flying at you!*',
-    '*A Poké Ball came flying at you!*',
-    '*A Poké Ball came flying at you!* Think about it, ok?',
-], {
-    image: 'assets/images/npcs/Green.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 4), new QuestLineStepCompletedRequirement('An Unrivaled Power', 6, GameConstants.AchievementOption.less)]),
-});
-
-const AnomalyMewtwo1 = new NPC('Anomaly Mewtwo', [
-    '<i>That child... She wished to possess me, like a mere animal. She would have cared little for my own desires. I wish only to live in peace, without being disturbed.</i>',
-    '<i>You say you would help me? But you are no different. You even possess another of my kind. You do not fool me.</i>',
-    '<i>I will leave this place now, to find what I desire. Do not follow me.</i>',
-], {
-    image: 'assets/images/pokemon/151.01.png',
-    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 5), new QuestLineStepCompletedRequirement('An Unrivaled Power', 7, GameConstants.AchievementOption.less)]),
-});
 
 const AnomalyMewtwo2 = new NPC('Anomaly Mewtwo', [
     '<i>This place is... beautiful. I am amazed such a place truly exists.</i>',

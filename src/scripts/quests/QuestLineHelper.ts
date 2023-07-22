@@ -2277,7 +2277,7 @@ class QuestLineHelper {
         unrivaledPowerQuestLine.addQuest(clearUnrivaledBlue);
 
         const talkToUnrivaledBlue = new TalkToNPCQuest(UnrivaledBlue, 'Talk to Blue in Viridian City.');
-        princessDiancieQuestLine.addQuest(talkToUnrivaledBlue);
+        unrivaledPowerQuestLine.addQuest(talkToUnrivaledBlue);
 
         const talkToUnrivaledGreen1 = new TalkToNPCQuest(UnrivaledGreen1, 'You found a trainer standing where Mewtwo once did in Cerulean Cave. Talk to Green.');
         unrivaledPowerQuestLine.addQuest(talkToUnrivaledGreen1);
@@ -2319,7 +2319,7 @@ class QuestLineHelper {
         const talkToAnomalyMewtwo2 = new TalkToNPCQuest(AnomalyMewtwo2, 'Talk to Anomaly Mewtwo in Pokémon Village.');
         unrivaledPowerQuestLine.addQuest(talkToAnomalyMewtwo2);
 
-        const findGreatTwistedSpoon = new CustomQuest(1, undefined, 'Find the Great Twisted Spoon in P2 Lab.', () => player.itemList.Great_Twisted_Spoon();
+        const findGreatTwistedSpoon = new CustomQuest(1, undefined, 'Find the Great Twisted Spoon in P2 Lab.', () => player.itemList.Great_Twisted_Spoon());
         unrivaledPowerQuestLine.addQuest(findGreatTwistedSpoon);
 
         const talkToAnomalyMewtwo3 = new TalkToNPCQuest(AnomalyMewtwo3, 'Talk to Anomaly Mewtwo in Pokémon Village.');
@@ -3759,7 +3759,7 @@ class QuestLineHelper {
         this.createPrincessDiancieQuestLine();
         this.createClashOfAgesQuestLine();
         this.createAshKetchumQuestLine();
-        this.createStrongestPokemonQuestLine();
+        this.createUnrivaledPowerQuestLine();
         this.createSkullAetherAlolaQuestLine();
         this.createMinasTrialAlolaQuestLine();
         this.createSilvallyTypesQuestLine();
