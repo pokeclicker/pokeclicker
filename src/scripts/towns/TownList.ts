@@ -2083,6 +2083,15 @@ const AgateVillageShop = new Shop([
     ItemList.Dowsing_machine,
     ItemList.Wonder_Chest,
 ]);
+const GateonPortShop = new Shop([
+    ItemList.Pokeball,
+    ItemList.Greatball,
+    ItemList.Ultraball,
+    ItemList.xAttack,
+    ItemList.xClick,
+    ItemList.Lucky_incense,
+    ItemList.Miracle_Chest,
+]);
 //Hoenn Berry Master
 const HoennBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations['Mauville City'],[
     ItemList.Boost_Mulch,
@@ -2882,7 +2891,8 @@ const RelicSage = new NPC('Relic Stone Sage', [
     'This stone has the power to cleanse and purify the spirits of Pokémon.',
     'If you train with your Pokémon, you will gain spiritual energy, or "Flow". You can use this Flow to purify your Pokémon.',
     'Purification will take more flow with each Pokémon you purify.',
-]);
+    '<img src="./assets/images/status/shadow.svg" height="60px"/> <img src="./assets/images/arrow.svg" height="30px"/> <img src="./assets/images/status/purified.svg" height="60px"/>',
+], {image: 'assets/images/npcs/Sage.png'});
 //Hoenn Towns
 TownList['Littleroot Town'] = new Town(
     'Littleroot Town',
@@ -3131,7 +3141,7 @@ TownList['Outskirt Stand'] = new Town(
     'Outskirt Stand',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [OutskirtStandShop, TemporaryBattleList.Willie],
+    [OutskirtStandShop, TemporaryBattleList.Willie, TemporaryBattleList['Miror B. 2']],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), new QuestLineStartedRequirement('Shadows in the Desert')],
         npcs: [ExploreStand, Willie],
@@ -3190,6 +3200,50 @@ TownList['Realgam Tower'] = new Town(
     {
         requirements: [new QuestLineStepCompletedRequirement('Shadows in the Desert', 22)],
         npcs: [EsCade2],
+    }
+);
+
+TownList['Gateon Port'] = new Town(
+    'Gateon Port',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [GateonPortShop, new MoveToDungeon(dungeonList['Gateon Port Battles'])],
+    {
+        requirements: [new QuestLineCompletedRequirement('Gale of Darkness')],
+        npcs: [],
+    }
+);
+
+TownList['Pokemon HQ Lab'] = new Town(
+    'Pokemon HQ Lab',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [TemporaryBattleList['Cipher Peon Naps']],
+    {
+        requirements: [new QuestLineCompletedRequirement('Gale of Darkness')],
+        npcs: [],
+    }
+);
+
+TownList['Kaminko\'s House'] = new Town(
+    'Kaminko\'s House',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [TemporaryBattleList['Chobin 1'], TemporaryBattleList['Chobin 2']],
+    {
+        requirements: [new QuestLineCompletedRequirement('Gale of Darkness')],
+        npcs: [],
+    }
+);
+
+TownList['SS Libra'] = new Town(
+    'SS Libra',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [TemporaryBattleList['Cipher Peon Smarton']],
+    {
+        requirements: [new QuestLineCompletedRequirement('Gale of Darkness')],
+        npcs: [],
     }
 );
 
@@ -3530,10 +3584,45 @@ TownList['Orre Colosseum'] = new DungeonTown(
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new MultiRequirement([new DevelopmentRequirement(), new QuestLineCompletedRequirement('Shadows in the Desert')]),
+        new QuestLineCompletedRequirement('Gale of Darkness'),
     ]
 );
-
+TownList['Gateon Port Battles'] = new DungeonTown(
+    'Gateon Port Battles',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [
+        new QuestLineCompletedRequirement('Gale of Darkness'),
+    ]
+);
+TownList['Cipher Key Lair'] = new DungeonTown(
+    'Cipher Key Lair',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [
+        new QuestLineCompletedRequirement('Gale of Darkness'),
+    ],
+    [TemporaryBattleList.Zook],
+    {
+        npcs: [],
+    }
+);
+TownList['Citadark Isle'] = new DungeonTown(
+    'Citadark Isle',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [
+        new QuestLineCompletedRequirement('Gale of Darkness'),
+    ]
+);
+TownList['Citadark Isle Dome'] = new DungeonTown(
+    'Citadark Isle Dome',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [
+        new QuestLineCompletedRequirement('Gale of Darkness'),
+    ]
+);
 
 //Sinnoh Shops
 const SandgemTownShop = new Shop([
