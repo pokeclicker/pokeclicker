@@ -1027,7 +1027,7 @@ class Farming implements Feature {
                 'The flesh underneath the Custap Berry\'s tough skin is sweet and creamy soft.',
                 'This inspires Pokémon to train harder.',
             ],
-            new Aura(AuraType.Xp, [1.005, 1.01, 1.015]),
+            new Aura(AuraType.Xp, [1.005, 1.01, 1.015])
         );
 
         this.berryData[BerryType.Jaboca] = new Berry(
