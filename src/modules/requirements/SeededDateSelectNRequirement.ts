@@ -1,5 +1,5 @@
 import { AchievementOption } from '../GameConstants';
-import SeededDateRand from '../utilities/SeededDateRand';
+import SeededRand from '../utilities/SeededRand';
 import Requirement from './Requirement';
 
 export default class SeededDateSelectNRequirement extends Requirement {
@@ -8,7 +8,8 @@ export default class SeededDateSelectNRequirement extends Requirement {
     }
 
     public getProgress(): number {
-        const numbersSelected = SeededDateRand.shuffleArray([...Array(this.total).keys()].map(i => i.toString())).slice(0, this.select).map(s => parseInt(s));
+        SeededRand.seedWithDate(new Date());
+        const numbersSelected = SeededRand.shuffleArray([...Array(this.total).keys()].map(i => i.toString())).slice(0, this.select).map(s => parseInt(s));
 
         return +(this.index in numbersSelected);
     }
