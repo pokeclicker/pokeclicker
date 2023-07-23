@@ -248,17 +248,20 @@ class Safari {
     }
 
     private static square(i: number, j: number): string {
-        const img = `assets/images/safari/${this.grid[i][j]}.png`;
+        const tile = this.grid[i][j];
+        const img = `assets/images/safari/${tile}.png`;
         const divId = `safari-${j}-${i}`;
+        // Add z-index if tiles are tree top tiles
+        const zIndex = tile === 37 || tile === 38 || tile === 39 ? 'z-index: 2;' : '';
 
-        return `<div id='${divId}' style=background-image:url('${img}') class='safariSquare'></div>`;
+        return `<div id='${divId}' style="background-image:url('${img}'); ${zIndex}" class='safariSquare'></div>`;
     }
 
     private static addPlayer(i: number, j: number) {
         const topLeft = $('#safari-0-0').offset();
         const offset = {
-            top: 32 * j + topLeft.top,
-            left: 32 * i + topLeft.left,
+            top: 32 * j + topLeft.top - 8,
+            left: 32 * i + topLeft.left - 4,
         };
         $('#safariBody').append('<div id="sprite"></div>');
         document.getElementById('sprite').classList.value = `walk${Safari.lastDirection}`;
