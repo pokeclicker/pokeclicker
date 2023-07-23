@@ -204,6 +204,19 @@ export default class RedeemableCodes implements Saveable {
 
                 return true;
             }),
+            new RedeemableCode('Rare Candy', -296173205, false, async () => {
+                // Give the player a few Rare Candies
+                player.gainItem('Rare_Candy', 10);
+                // Notify that the code was activated successfully
+                Notifier.notify({
+                    title: 'Code activated!',
+                    message: 'You gained 10 Rare Candy!',
+                    type: NotificationConstants.NotificationOption.success,
+                    timeout: 1e4,
+                });
+
+                return true;
+            }),
         ];
     }
 
