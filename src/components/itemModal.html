@@ -145,6 +145,26 @@
                             </div>
                         </div>
 
+                        <!-- ko if: GameHelper.enumStrings(GameConstants.ConsumableType).some(type => player.itemList[type]()) -->
+                        <div class="bg-primary text-left rounded-0 px-3 py-2 mb-1" data-toggle="collapse" data-target="#itemBag-consumables">
+                            <h5 class="m-0 text-light">Consumables</h5>
+                        </div>
+                        <div id="itemBag-consumables" class="collapse show">
+                            <div class="card-body pt-2 p-1">
+                                <div class="row justify-content-center">
+                                    <!-- ko foreach: GameHelper.enumStrings(GameConstants.ConsumableType).filter(type => player.itemList[type]()).map(type => ItemList[type]) -->
+                                    <div class="col-6 col-lg-3 mb-2">
+                                        <div class="btn btn-secondary text-left w-100 px-1" style="padding-top: 1px; padding-bottom: 2px;"
+                                            data-bind="template: { name: 'otherItemTemplate', data: $data.name },
+                                            click: () => { ConsumableController.currentlySelected($data.type); $('#consumableModal').modal('show'); }">
+                                        </div>
+                                    </div>
+                                    <!-- /ko -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+
                         <div class="bg-primary text-left rounded-0 px-3 py-2 mb-1" data-toggle="collapse" data-target="#itemBag-heldItems">
                             <h5 class="m-0 text-light">Held Items</h5>
                         </div>

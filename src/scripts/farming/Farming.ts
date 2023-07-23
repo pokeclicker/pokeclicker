@@ -51,6 +51,7 @@ class Farming implements Feature {
         this.externalAuras[AuraType.Shiny] = ko.pureComputed<number>(() => this.multiplyPlotAuras(AuraType.Shiny));
         this.externalAuras[AuraType.Roaming] = ko.pureComputed<number>(() => this.multiplyPlotAuras(AuraType.Roaming));
         this.externalAuras[AuraType.Ev] = ko.pureComputed<number>(() => this.multiplyPlotAuras(AuraType.Ev));
+        this.externalAuras[AuraType.Xp] = ko.pureComputed<number>(() => this.multiplyPlotAuras(AuraType.Xp));
         this.externalAuras[AuraType.Repel] = ko.pureComputed<number>(() => this.addPlotAuras(AuraType.Repel));
 
         const multiplierSource = 'Farm Aura';
@@ -58,6 +59,7 @@ class Farming implements Feature {
         this.multiplier.addBonus('eggStep', () => this.externalAuras[AuraType.Egg](), multiplierSource);
         this.multiplier.addBonus('roaming', () => this.externalAuras[AuraType.Roaming](), multiplierSource);
         this.multiplier.addBonus('ev', () => this.externalAuras[AuraType.Ev](), multiplierSource);
+        this.multiplier.addBonus('exp', () => this.externalAuras[AuraType.Xp](), multiplierSource);
 
         this.highestUnlockedBerry = ko.pureComputed(() => {
             for (let i = GameHelper.enumLength(BerryType) - 2; i >= 0; i--) {
@@ -1005,7 +1007,8 @@ class Farming implements Feature {
                 'This Berry has a very dry flavor. It has the effect of making other food eaten at the same time taste sweet.',
                 'The scent of this Berry plant repels wild Pokémon.',
             ],
-            new Aura(AuraType.Repel, [0.11, 0.22, 0.33])
+            new Aura(AuraType.Repel, [0.11, 0.22, 0.33]),
+            ['Hoopa']
         );
 
         this.berryData[BerryType.Custap] = new Berry(
@@ -1020,7 +1023,11 @@ class Farming implements Feature {
             BerryColor.Red,
             26.7,
             BerryFirmness.Super_Hard,
-            ['The flesh underneath the Custap Berry\'s tough skin is sweet and creamy soft.']
+            [
+                'The flesh underneath the Custap Berry\'s tough skin is sweet and creamy soft.',
+                'This inspires Pokémon to train harder.',
+            ],
+            new Aura(AuraType.Xp, [1.005, 1.01, 1.015])
         );
 
         this.berryData[BerryType.Jaboca] = new Berry(
