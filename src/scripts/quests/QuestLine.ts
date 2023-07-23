@@ -47,7 +47,7 @@ class QuestLine {
 
         this.autoBegin = this.curQuest.subscribe((num) => {
             if (this.curQuest() < this.totalQuests) {
-                if (this.curQuestObject().initial() == null) {
+                if (this.curQuestObject().initial() == null && this.state() != QuestLineState.suspended) {
                     this.beginQuest(this.curQuest());
                 }
             } else {
@@ -88,6 +88,18 @@ class QuestLine {
         } else {
             this.beginQuest(0);
         }
+    }
+
+    suspendQuest() {
+        const q = this.quests()[this.curQuest()];
+        if (q instanceof MultipleQuestsQuest) {
+            q.quests.forEach((q) => q.initial(null));
+        } else {
+            q.initial(null);
+        }
+
+        this.curQuestInitial(null);
+        this.state(QuestLineState.suspended);
     }
 
     toJSON() {

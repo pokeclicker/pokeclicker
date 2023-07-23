@@ -325,6 +325,12 @@ class Quests implements Saveable {
                         } else {
                             ql.resumeAt(questLine.quest, questLine.initial);
                         }
+                    } else if (questLine.state == QuestLineState.suspended) {
+                        // Load quest progress so it can be resumed but don't start it
+                        for (let i = 0; i < Math.min(questLine.quest, ql.totalQuests); i++) {
+                            ql.quests()[i].autoCompleter.dispose();
+                            ql.quests()[i].complete();
+                        }
                     }
                 }
             } catch (e) {
