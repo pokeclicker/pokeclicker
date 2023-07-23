@@ -786,7 +786,7 @@ const UnrivaledBlue = new NPC('Blue', [
 });
 
 const UnrivaledGreen1 = new NPC('Green', [
-    '*Ow! You were hit by a low-flying Poké Ball!*',
+    '<i>Ow! You were hit by a low-flying Poké Ball!</i>',
     'Oh, whoops! You\'re not a Pokémon! Sorry, it\'s so dark in here, I saw you and thought you were some kind of Pokémon.',
     'Well, uh... nice to meet you. I\'m Green! So hey, I\'m just curious... Are you here because you\'re also looking for... y\'know, something special?',
     'R-right! Mewtwo! ...Drat, so you knew about it already, huh.......',
@@ -800,11 +800,11 @@ const UnrivaledGreen2 = new NPC('Green', [
     'Wow, you\'re strong! Well, I guess that\'s that. Here, you can have this.',
     '</i></br><img src="assets/images/megaStone/Mewtwonite_X.png"/></br><i>You obtained the Mewtwonite X!</i>',
     'Oh, I know! Why don\'t you become one of my Pokémon, together with Mewtwo?',
-    '*A Poké Ball came flying at you!*',
-    '*A Poké Ball came flying at you!*',
-    'Hee hee hee... *A Poké Ball came flying at you!*',
-    '*A Poké Ball came flying at you!*',
-    '*A Poké Ball came flying at you!* Think about it, ok?',
+    '<i>A Poké Ball came flying at you!</i>',
+    '<i>A Poké Ball came flying at you!</i>',
+    'Hee hee hee... <i>A Poké Ball came flying at you!</i>',
+    '<i>A Poké Ball came flying at you!</i>',
+    '<i>A Poké Ball came flying at you!</i> Think about it, ok?',
 ], {
     image: 'assets/images/npcs/Green.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 4), new QuestLineStepCompletedRequirement('An Unrivaled Power', 6, GameConstants.AchievementOption.less)]),
