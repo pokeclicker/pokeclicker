@@ -18,7 +18,8 @@ enum PokemonLocationType {
     QuestLineReward,
     TempBattleReward,
     GymReward,
-    DungeonReward
+    DungeonReward,
+    Trade
 }
 
 class PokemonHelper extends TmpPokemonHelper {
@@ -139,25 +140,15 @@ class PokemonHelper extends TmpPokemonHelper {
     public static getPokemonShops(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): Array<string> {
         const shops = [];
         Object.entries(TownList).forEach(([townName, town]) => {
-            // If we only want to check up to a maximum region
-            const region = town.region;
-            if (maxRegion != GameConstants.Region.none && region > maxRegion) {
-                return false;
-            }
-
-            const townShops = town.content.filter(c => c instanceof Shop);
+            // Check if the shop has items
+            const townShops = town.content.filter(c => c instanceof Shop && c.items);
             if (townShops.length) {
-                let hasPokemon = false;
-                for (let i = 0; i < townShops.length && !hasPokemon; i++) {
-                    const shop = townShops[i];
-                    if (shop instanceof GemMasterShop) {
-                        hasPokemon = GemDeal.list[shop.shop]?.().some(deal => deal.item.itemType instanceof PokemonItem && deal.item.itemType.type == pokemonName);
-                    } else if (shop instanceof ShardTraderShop) {
-                        hasPokemon = ShardDeal.list[shop.location]?.().some(deal => deal.item.itemType instanceof PokemonItem && deal.item.itemType.type == pokemonName);
-                    } else {
-                        hasPokemon = (shop as Shop).items?.some(item => item instanceof PokemonItem && item.type == pokemonName);
-                    }
+                // If we only want to check up to a maximum region
+                const region = town.region;
+                if (maxRegion != GameConstants.Region.none && region > maxRegion) {
+                    return false;
                 }
+                const hasPokemon = townShops.find(ts => (ts as Shop).items?.find(item => item.name == pokemonName));
                 if (hasPokemon) {
                     shops.push(townName);
                 }
@@ -337,6 +328,35 @@ class PokemonHelper extends TmpPokemonHelper {
         return questLines;
     }
 
+    public static getPokemonTrades(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): Array<string> {
+        const trades = [];
+        Object.entries(TownList).forEach(([townName, town]) => {
+            // If we only want to check up to a maximum region
+            if (maxRegion != GameConstants.Region.none && town.region > maxRegion) {
+                return false;
+            }
+
+            const townShops = town.content.filter(c => c instanceof Shop);
+            if (townShops.length) {
+                let hasPokemon = false;
+                for (let i = 0; i < townShops.length && !hasPokemon; i++) {
+                    const shop = townShops[i];
+                    if (shop instanceof GemMasterShop) {
+                        hasPokemon = GemDeal.list[shop.shop]?.().some(deal => deal.item.itemType.type == pokemonName);
+                    } else if (shop instanceof ShardTraderShop) {
+                        hasPokemon = ShardDeal.list[shop.location]?.().some(deal => deal.item.itemType.type == pokemonName);
+                    } else if (shop instanceof BerryMasterShop) {
+                        hasPokemon = BerryDeal.list[shop.location]?.().some(deal => deal.item.itemType.type == pokemonName);
+                    }
+                }
+                if (hasPokemon) {
+                    trades.push(townName);
+                }
+            }
+        });
+        return trades;
+    }
+
     public static getPokemonLocations = (pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.MAX_AVAILABLE_REGION) => {
         const encounterTypes = {};
         // Routes
@@ -437,6 +457,12 @@ class PokemonHelper extends TmpPokemonHelper {
             encounterTypes[PokemonLocationType.QuestLineReward] = questLineReward;
         }
 
+        // Trades
+        const trades = PokemonHelper.getPokemonTrades(pokemonName);
+        if (trades.length) {
+            encounterTypes[PokemonLocationType.Trade] = trades;
+        }
+
         // Return the list of items
         return encounterTypes;
     }
@@ -451,7 +477,8 @@ class PokemonHelper extends TmpPokemonHelper {
             locations[PokemonLocationType.Route] ||
             locations[PokemonLocationType.Safari] ||
             locations[PokemonLocationType.Shop] ||
-            locations[PokemonLocationType.Wandering];
+            locations[PokemonLocationType.Wandering] ||
+            locations[PokemonLocationType.Trade];
         return !isEvable && Object.keys(locations).length;
     };
 }
