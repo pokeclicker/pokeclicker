@@ -815,7 +815,7 @@ const AnomalyMewtwo1 = new NPC('Anomaly Mewtwo', [
     '<i>You say you would help me? But you are no different. You even possess another of my kind. You do not fool me.</i>',
     '<i>I will leave this place now, to find what I desire. Do not follow me.</i>',
 ], {
-    image: 'assets/images/pokemon/151.01.png',
+    image: 'assets/images/pokemon/150.01.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 5), new QuestLineStepCompletedRequirement('An Unrivaled Power', 7, GameConstants.AchievementOption.less)]),
 });
 
@@ -5871,7 +5871,7 @@ const AnomalyMewtwo2 = new NPC('Anomaly Mewtwo', [
     '<i>When I was created, I had an enhanced version of this item created for me. I have heard it is now in the hands of an organisation named Team Plasma, in an area named P2 Laboratory.</i>',
     '<i>I would greatly appreciate it if you would retrieve this item for me.</i>',
 ], {
-    image: 'assets/images/pokemon/151.02.png',
+    image: 'assets/images/pokemon/150.02.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 11), new QuestLineStepCompletedRequirement('An Unrivaled Power', 13, GameConstants.AchievementOption.less)]),
 });
 
@@ -5880,7 +5880,7 @@ const AnomalyMewtwo3 = new NPC('Anomaly Mewtwo', [
     '<i>Would you be willing to fight me, one last time, in this new home you have given me?</i>',
     '<i>With my Twisted Spoon in hand, and my Mega Evolution, I can finally show you the true heights of my power!</i>',
 ], {
-    image: 'assets/images/pokemon/151.02.png',
+    image: 'assets/images/pokemon/150.02.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 13), new QuestLineStepCompletedRequirement('An Unrivaled Power', 15, GameConstants.AchievementOption.less)]),
 });
 
@@ -5890,7 +5890,7 @@ const AnomalyMewtwo4 = new NPC('Anomaly Mewtwo', [
     '</i></br><img src="assets/images/megaStone/Mewtwonite_Y.png"/></br><i>You obtained the Mewtwonite Y!</i>',
     '<i>You are truly deserving of this Mega Stone. Use it to give your Mewtwo a truly unrivaled power.</i>',
 ], {
-    image: 'assets/images/pokemon/151.02.png',
+    image: 'assets/images/pokemon/150.02.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('An Unrivaled Power', 15), new QuestLineCompletedRequirement('An Unrivaled Power', GameConstants.AchievementOption.less)]),
 });
 
