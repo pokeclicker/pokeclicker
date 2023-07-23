@@ -2328,7 +2328,17 @@ class QuestLineHelper {
         const clearAnomalyMewtwo6 = new CustomQuest(1, 0, 'Defeat Anomaly Mewtwo in Pokémon Village.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Pokémon Village')]());
         unrivaledPowerQuestLine.addQuest(clearAnomalyMewtwo6);
 
-        const talkToAnomalyMewtwo4 = new TalkToNPCQuest(AnomalyMewtwo4, 'Talk to Anomaly Mewtwo in Pokémon Village.');
+        const MewtwoniteYReward = () => {
+            player.gainMegaStone(GameConstants.MegaStoneType.Mewtwonite_Y);
+            Notifier.notify({
+                title: unrivaledPowerQuestLine.name,
+                message: 'You received Mewtwonite Y from Anomaly Mewtwo!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
+        const talkToAnomalyMewtwo4 = new TalkToNPCQuest(AnomalyMewtwo4, 'Talk to Anomaly Mewtwo in Pokémon Village.', MewtwoniteYReward);
         unrivaledPowerQuestLine.addQuest(talkToAnomalyMewtwo4);
 
         App.game.quests.questLines().push(unrivaledPowerQuestLine);
