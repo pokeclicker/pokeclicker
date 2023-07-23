@@ -2441,11 +2441,9 @@ class QuestLineHelper {
 
         const BugSilvallyBattle = new CustomQuest(
             1,
-            undefined,
+            () => ItemList.Bug_Memory_Silvally.gain(1),
             'Defeat Guzma to get the Memory back.',
-            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Guzma Bug Memory')](),
-            0,
-            () => ItemList.Bug_Memory_Silvally.gain(1)
+            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Guzma Bug Memory')]()
         );
         SilvallyTypesQuestLine.addQuest(BugSilvallyBattle);
 
@@ -2454,11 +2452,9 @@ class QuestLineHelper {
 
         const FlyingSilvallyBattle = new CustomQuest(
             1,
-            undefined,
+            () => ItemList.Flying_Memory_Silvally.gain(1),
             'Defeat Kahili to get the Memory back.',
-            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Kahili Flying Memory')](),
-            0,
-            () => ItemList.Flying_Memory_Silvally.gain(1)
+            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Kahili Flying Memory')]()
         );
         SilvallyTypesQuestLine.addQuest(FlyingSilvallyBattle);
 
@@ -2467,11 +2463,9 @@ class QuestLineHelper {
 
         const PoisonSilvallyBattle = new CustomQuest(
             1,
-            undefined,
+            () => ItemList.Poison_Memory_Silvally.gain(1),
             'Defeat Plumeria to get the Memory back.',
-            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Plumeria Poison Memory')](),
-            0,
-            () => ItemList.Poison_Memory_Silvally.gain(1)
+            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Plumeria Poison Memory')]()
         );
         SilvallyTypesQuestLine.addQuest(PoisonSilvallyBattle);
 
@@ -2480,11 +2474,9 @@ class QuestLineHelper {
 
         const GhostSilvallyBattle = new CustomQuest(
             1,
-            undefined,
+            () => ItemList.Ghost_Memory_Silvally.gain(1),
             'Defeat Captain Acerola to get the Memory back.',
-            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Acerola Ghost Memory')](),
-            0,
-            () => ItemList.Ghost_Memory_Silvally.gain(1)
+            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Acerola Ghost Memory')]()
         );
         SilvallyTypesQuestLine.addQuest(GhostSilvallyBattle);
 
@@ -2493,11 +2485,9 @@ class QuestLineHelper {
 
         const PsychicSilvallyBattle = new CustomQuest(
             1,
-            undefined,
+            () => ItemList.Psychic_Memory_Silvally.gain(1),
             'Defeat Aether Branch Chief Faba to get the Memory back.',
-            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Faba Psychic Memory')](),
-            0,
-            () => ItemList.Psychic_Memory_Silvally.gain(1)
+            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Faba Psychic Memory')]()
         );
         SilvallyTypesQuestLine.addQuest(PsychicSilvallyBattle);
 
@@ -2506,11 +2496,9 @@ class QuestLineHelper {
 
         const SteelSilvallyBattle = new CustomQuest(
             1,
-            undefined,
+            () => ItemList.Steel_Memory_Silvally.gain(1),
             'Defeat Molayne to get the Memory back.',
-            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Molayne Steel Memory')](),
-            0,
-            () => ItemList.Steel_Memory_Silvally.gain(1)
+            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Molayne Steel Memory')]()
         );
         SilvallyTypesQuestLine.addQuest(SteelSilvallyBattle);
 
@@ -2519,11 +2507,9 @@ class QuestLineHelper {
 
         const DragonSilvallyBattle = new CustomQuest(
             1,
-            undefined,
+            () => ItemList.Dragon_Memory_Silvally.gain(1),
             'Defeat Ryuki to get the Memory back.',
-            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ryuki Dragon Memory')](),
-            0,
-            () => ItemList.Dragon_Memory_Silvally.gain(1)
+            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ryuki Dragon Memory')]()
         );
         SilvallyTypesQuestLine.addQuest(DragonSilvallyBattle);
 
