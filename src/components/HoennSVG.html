@@ -1107,6 +1107,17 @@
          , image: "assets/images/map/ashketchumoverworld.png"
          })
      %>
+
+     <%- include('templates/mapOverlay',
+         { name: "Anomaly Mewtwo"
+         , x: 66, y: 25
+         , width: 4, height: 4
+         , databind: "click: () => TemporaryBattleList['Anomaly Mewtwo 3'].protectedOnclick()"
+         , visible:  "TemporaryBattleList['Anomaly Mewtwo 3'] && TemporaryBattleList['Anomaly Mewtwo 3'].isVisible()"
+         , image: "assets/images/map/mewtwoy.png"
+         })
+     %>
+
      <g data-bind="visible: player.subregion == SubRegions.getSubRegion(GameConstants.Region.hoenn, 'Orre').id">
         <image width="1600" height="960" data-bind="attr: {
             'xlink:href':'assets/images/orre.png?v=$VERSION',
