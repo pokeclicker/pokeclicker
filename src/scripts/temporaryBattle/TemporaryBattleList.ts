@@ -3522,7 +3522,7 @@ TemporaryBattleList['Anomaly Mewtwo 2'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Anomaly Mewtwo',
-        imageName: '../pokemon/ 150.01',
+        imageName: '../pokemon/150.01',
         hideTrainer: true,
     }
 );
