@@ -12,6 +12,7 @@ enum AuraType {
     Ev,
     Repel,
     Decay,
+    Xp,
 }
 
 export default AuraType;

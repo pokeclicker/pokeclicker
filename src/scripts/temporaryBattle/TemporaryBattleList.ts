@@ -963,6 +963,121 @@ TemporaryBattleList['Cipher Peon Kass'] = new TemporaryBattle(
         imageName: 'Cipher Peon (female)',
     }
 );
+TemporaryBattleList['Cipher Peon Naps'] = new TemporaryBattle(
+    'Cipher Peon Naps',
+    [new GymPokemon('Teddiursa', 110813753, 11, undefined, undefined, GameConstants.ShadowStatus.Shadow)], // Slightly weaker than Calem 1
+    'What was that? My Shadow Pokémon!',
+    [new QuestLineCompletedRequirement('Gale of Darkness')],
+    undefined,
+    {
+        displayName: 'Cipher Peon Naps',
+        imageName: 'Cipher Peon (male)',
+    }
+);
+TemporaryBattleList['Chobin 1'] = new TemporaryBattle(
+    'Chobin 1',
+    [
+        new GymPokemon('Sunkern', 57406876, 6),
+        new GymPokemon('Magikarp', 57406876, 6),
+    ],
+    'Huh? Closer observation reveals that the subject is a trainer. Ergo, the subject is not a burglar! Ahaha! Chobin wishes you spoke up right away. You\'re $playername$? Chobin apologizes for jumping to the wrong conclusion.',
+    [new QuestLineCompletedRequirement('Gale of Darkness')],
+    undefined,
+    {
+        displayName: 'Chobin',
+        imageName: 'Chobin',
+    }
+);
+TemporaryBattleList['Miror B. 1'] = new TemporaryBattle(
+    'Miror B. 1',
+    [
+        new GymPokemon('Lombre', 34444125, 17),
+        new GymPokemon('Lombre', 34444125, 17),
+        new GymPokemon('Lombre', 34444125, 17),
+        new GymPokemon('Voltorb', 34444125, 19, undefined, undefined, GameConstants.ShadowStatus.Shadow),
+    ],
+    'You messed up my rhythm! I just can\'t, no, I just can\'t do it!',
+    [new QuestLineCompletedRequirement('Gale of Darkness')], // TODO put on overworld
+    undefined,
+    {
+        displayName: 'Miror B.',
+        imageName: 'Cipher Admin Miror B',
+        firstTimeRewardFunction: () => {
+            BagHandler.gainItem({type: ItemType.item, id: 'Magnet'}, 1);
+            Notifier.notify({
+                message: 'You snagged a Magnet from Miror B\'s Voltorb!',
+                type: NotificationConstants.NotificationOption.success,
+                setting: NotificationConstants.NotificationSetting.Dungeons.rare_dungeon_item_found,
+            });
+        },
+    }
+);
+TemporaryBattleList['Chobin 2'] = new TemporaryBattle(
+    'Chobin 2',
+    [
+        new GymPokemon('Sunflora', 48221775, 26),
+        new GymPokemon('Gyarados', 48221775, 26),
+        new GymPokemon('Hoppip', 48221775, 26),
+        new GymPokemon('Tropius', 48221775, 26),
+    ],
+    'Huh? Oh, you\'re that trainer from before?! Chobin wishes you spoke up right away.',
+    [new QuestLineCompletedRequirement('Gale of Darkness')],
+    undefined,
+    {
+        displayName: 'Chobin',
+        imageName: 'Robo Groudon',
+    }
+);
+TemporaryBattleList['Cipher Peon Smarton'] = new TemporaryBattle(
+    'Cipher Peon Smarton',
+    [
+        new GymPokemon('Huntail', 49221775, 27),
+        new GymPokemon('Cacnea', 49221775, 27),
+        new GymPokemon('Teddiursa', 49221775, 27),
+        new GymPokemon('Koffing', 49221775, 27),
+    ],
+    'You\'re too late! We already took everything we needed!',
+    [new QuestLineCompletedRequirement('Gale of Darkness')],
+    undefined,
+    {
+        displayName: 'Cipher Peon Smarton',
+        imageName: 'Cipher Peon (male)',
+    }
+);
+TemporaryBattleList.Zook = new TemporaryBattle(
+    'Zook',
+    [
+        new GymPokemon('Zangoose', 35797654, 28, undefined, undefined, GameConstants.ShadowStatus.Shadow),
+        new GymPokemon('Doduo', 35797654, 26),
+        new GymPokemon('Carvanha', 35797654, 26),
+        new GymPokemon('Seviper', 35797654, 26),
+        new GymPokemon('Relicanth', 35797654, 26),
+    ],
+    'Yeah, whatever! I was leaving anyways.',
+    [new QuestLineCompletedRequirement('Gale of Darkness')],
+    undefined,
+    {
+        displayName: 'Zook',
+        imageName: 'Thug',
+    }
+);
+TemporaryBattleList['Miror B. 2'] = new TemporaryBattle(
+    'Miror B. 2',
+    [
+        new GymPokemon('Lombre', 38797654, 26),
+        new GymPokemon('Lombre', 38797654, 26),
+        new GymPokemon('Lombre', 38797654, 26),
+        new GymPokemon('Nosepass', 38797654, 25, undefined, undefined, GameConstants.ShadowStatus.Shadow),
+        new GymPokemon('Ludicolo', 38797654, 26),
+    ],
+    'I shouldn\'t have done something this strenuous right after eating…',
+    [new QuestLineCompletedRequirement('Gale of Darkness')],
+    undefined,
+    {
+        displayName: 'Miror B.',
+        imageName: 'Cipher Admin Miror B',
+    }
+);
 TemporaryBattleList['Sevii Rocket Grunt 1'] = new TemporaryBattle(
     'Sevii Rocket Grunt 1',
     [
