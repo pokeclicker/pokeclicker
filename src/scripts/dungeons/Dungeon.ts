@@ -6654,9 +6654,7 @@ dungeonList['Team Galactic HQ'] = new Dungeon('Team Galactic HQ',
             {loot: 'Crimson Shard'},
             {loot: 'Lime Shard'},
         ],
-        epic: [
-            {loot: 'Sky Plate'},
-        ],
+        epic: [{loot: 'Sky Plate'}],
         legendary: [
             {loot: 'LargeRestore'},
             {loot: 'Poison_Barb'},
