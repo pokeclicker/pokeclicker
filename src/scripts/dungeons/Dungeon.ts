@@ -9744,23 +9744,23 @@ dungeonList['Pokémon Village'] = new Dungeon('Pokémon Village',
     [
         new DungeonBossPokemon('Ditto', 94836530, 50,
             { hide: true, requirement: new OneFromManyRequirement([
-                new QuestLineStepCompletedRequirement('An Unrivaled Power', 6, GameConstants.AchievementOption.less),
+                new QuestLineStepCompletedRequirement('An Unrivaled Power', 14, GameConstants.AchievementOption.less),
                 new QuestLineCompletedRequirement('An Unrivaled Power'),
             ])}),
         new DungeonBossPokemon('Zoroark', 95743340, 50,
             { hide: true, requirement: new OneFromManyRequirement([
-                new QuestLineStepCompletedRequirement('An Unrivaled Power', 6, GameConstants.AchievementOption.less),
+                new QuestLineStepCompletedRequirement('An Unrivaled Power', 14, GameConstants.AchievementOption.less),
                 new QuestLineCompletedRequirement('An Unrivaled Power'),
             ])}),
         new DungeonTrainer('Anomaly Mewtwo',
             [new GymPokemon('Mega Mewtwo X', 120000000, 70)],
-            { hide: true, requirement: new QuestLineCompletedRequirement('An Unrivaled Power', GameConstants.AchievementOption.less)}),
+            { hide: true, requirement: new QuestLineCompletedRequirement('An Unrivaled Power')}, undefined, 'X'),
         new DungeonTrainer('Anomaly Mewtwo',
             [new GymPokemon('Mega Mewtwo Y', 120000000, 70)],
             { hide: true, requirement: new MultiRequirement([
-                new QuestLineStepCompletedRequirement('An Unrivaled Power', 6),
+                new QuestLineStepCompletedRequirement('An Unrivaled Power', 14),
                 new QuestLineCompletedRequirement('An Unrivaled Power', GameConstants.AchievementOption.less),
-            ])}),
+            ])}, undefined, 'Y'),
     ],
     725000, 20);
 
