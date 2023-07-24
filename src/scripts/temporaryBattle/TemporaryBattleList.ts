@@ -917,7 +917,7 @@ TemporaryBattleList.Folly = new TemporaryBattle(
     undefined,
     {
         displayName: 'Shady Guy',
-        imageName: 'Peon (folly)',
+        imageName: 'Miror B. Peon (folly)',
     }
 );
 TemporaryBattleList['Cipher Peon Doven'] = new TemporaryBattle(
@@ -971,7 +971,7 @@ TemporaryBattleList['Cipher Peon Naps'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Cipher Peon Naps',
-        imageName: 'Cipher Peon (male)',
+        imageName: 'Cipher Peon XD (yellow)',
     }
 );
 TemporaryBattleList['Chobin 1'] = new TemporaryBattle(
@@ -1041,7 +1041,7 @@ TemporaryBattleList['Cipher Peon Smarton'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Cipher Peon Smarton',
-        imageName: 'Cipher Peon (male)',
+        imageName: 'Cipher Peon XD (yellow)',
     }
 );
 TemporaryBattleList.Zook = new TemporaryBattle(

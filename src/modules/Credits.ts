@@ -993,10 +993,7 @@ export const SpriteCredits: Credit[] = [
             'Camouflaged Kecleon image',
             'Cissy',
             'Cipher Key Lair',
-            'Cipher Peon (ferma)', // placeholder
-            'Cipher Peon (folly)', // placeholder
-            'Cipher Peon (reath)', // placeholder
-            'Cipher Peon (trudly)', // placeholder
+            'Miror B. Peons', // placeholder
             'Cipher Peon (skrub)',
             'Cipher Peon (mirakle b)',
             'Crystalline Cocoon',
