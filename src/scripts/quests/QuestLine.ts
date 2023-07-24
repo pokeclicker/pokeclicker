@@ -91,6 +91,11 @@ class QuestLine {
     }
 
     suspendQuest() {
+        if (this.bulletinBoard == GameConstants.BulletinBoards.None) {
+            // Can suspend bulletin board quest lines only
+            return;
+        }
+
         const q = this.quests()[this.curQuest()];
         if (q instanceof MultipleQuestsQuest) {
             q.quests.forEach((q) => q.initial(null));

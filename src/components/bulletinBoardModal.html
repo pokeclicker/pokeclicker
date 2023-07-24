@@ -21,7 +21,7 @@ aria-labelledby="bulletinBoardModalLabel" aria-hidden="true">
                                     <!-- ko if: $data.state() == QuestLineState.suspended -->
                                     <div class="text-center text-muted small">
                                         <p class="m-0">Previously Started</p>
-                                        <p class="m-0" data-bind="text: `Progress: ${$data.curQuest()} / ${$data.totalQuests}`"></p>
+                                        <p class="m-0" data-bind="text: `Step: ${$data.curQuest() + 1} / ${$data.totalQuests}`"></p>
                                     </div>
                                     <!-- /ko -->
                                 </div>
