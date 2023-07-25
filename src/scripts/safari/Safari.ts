@@ -306,6 +306,8 @@ class Safari {
             x: Safari.playerXY.x + directionOffset.x,
             y: Safari.playerXY.y + directionOffset.y,
         };
+        // CSS class with the environment (for the sprite change)
+        let envClass = Safari.environmentCssClass();
 
         if (Safari.canMove(newPos.x, newPos.y)) {
             const next = $(`#safari-${newPos.x}-${newPos.y}`).offset();
@@ -316,11 +318,13 @@ class Safari {
             };
 
             document.getElementById('sprite').classList.value = `walk${direction} moving`;
+            $('#sprite').addClass(`${envClass}`);
             Safari.playerXY.x = newPos.x;
             Safari.playerXY.y = newPos.y;
+            Safari.activeEnvironment(Safari.getEnvironmentTile(Safari.playerXY.x, Safari.playerXY.y));
+            // Re-call the class as the activeEnvironment may have changed
+            envClass = Safari.environmentCssClass();
             $('#sprite').animate(offset, 250, 'linear', () => {
-                Safari.activeEnvironment(Safari.getEnvironmentTile(Safari.playerXY.x, Safari.playerXY.y));
-                Safari.checkPlayerSprite();
                 Safari.checkBattle();
                 Safari.checkItem();
                 Safari.isMoving = false;
@@ -329,9 +333,11 @@ class Safari {
                         Safari.step(Safari.queue[0]);
                     } else {
                         document.getElementById('sprite').classList.value = `walk${direction}`;
+                        $('#sprite').addClass(`${envClass}`);
                     }
                 } else {
                     document.getElementById('sprite').classList.value = `walk${direction}`;
+                    $('#sprite').addClass(`${envClass}`);
                 }
             });
             App.game.breeding.progressEggs(1 + Math.floor(Safari.safariLevel() / 10));
@@ -339,6 +345,7 @@ class Safari {
             this.despawnPokemonCheck();
         } else {
             document.getElementById('sprite').classList.value = `walk${direction}`;
+            $('#sprite').addClass(`${envClass}`);
             setTimeout(() => {
                 Safari.walking = false;
                 Safari.isMoving = false;
@@ -349,14 +356,6 @@ class Safari {
                 }
             }, 250);
         }
-    }
-
-    private static checkPlayerSprite() {
-        let playerSpriteFilename = '';
-        if (Safari.activeEnvironment() === SafariEnvironments.Water) { // Surf sprites
-            playerSpriteFilename = '-surf';
-        }
-        $('#sprite').css('background-image',`url(../assets/images/safari/player${playerSpriteFilename}.png)`);
     }
 
     public static spawnPokemonCheck() {
@@ -553,6 +552,10 @@ class Safari {
 
     private static expRequiredForLevel(level: number) {
         return Math.ceil(2000 * (1.2 ** (level - 1) - 1));
+    }
+
+    public static environmentCssClass() {
+        return GameHelper.enumStrings(SafariEnvironments)[Safari.activeEnvironment()].toLowerCase();
     }
 }
 
