@@ -43,6 +43,7 @@ class SafariPokemonList {
             new SafariEncounter('Marowak', 5),
             new SafariEncounter('Tangela', 4),
             // Water
+            new SafariEncounter('Magikarp', 20, [SafariEnvironments.Water]),
             new SafariEncounter('Psyduck', 20, [SafariEnvironments.Water]),
             new SafariEncounter('Slowpoke', 20, [SafariEnvironments.Water]),
             new SafariEncounter('Poliwag', 15, [SafariEnvironments.Water]),
