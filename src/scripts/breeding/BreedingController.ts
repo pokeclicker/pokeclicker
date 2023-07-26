@@ -203,74 +203,74 @@ class BreedingController {
     // Checks for filters that a pokemon could change to match or not match are in PartyPokemon.hideFromBreedingList()
     private static getFilteredList = ko.pureComputed(() => {
         return App.game.party.caughtPokemon.filter((pokemon) => {
-          // Check if search matches englishName or displayName
-          const displayName = PokemonHelper.displayName(pokemon.name)();
-          const filterName = BreedingFilters.name.value();
-          const partyName = pokemon.displayName;
-          if (!filterName.test(displayName) && !filterName.test(pokemon.name) && !(partyName != undefined && filterName.test(partyName))) {
-              return false;
-          }
+            // Check if search matches englishName or displayName
+            const displayName = PokemonHelper.displayName(pokemon.name)();
+            const filterName = BreedingFilters.name.value();
+            const partyName = pokemon.displayName;
+            if (!filterName.test(displayName) && !filterName.test(pokemon.name) && !(partyName != undefined && filterName.test(partyName))) {
+                return false;
+            }
 
-          const filterID = BreedingFilters.id.value();
-          if (filterID > -1 && filterID != Math.floor(pokemon.id)) {
-              return false;
-          }
+            const filterID = BreedingFilters.id.value();
+            if (filterID > -1 && filterID != Math.floor(pokemon.id)) {
+                return false;
+            }
 
-          // Check to filter out already-shiny
-          if (BreedingFilters.shinyStatus.value() == 0) {
-              if (+pokemon.shiny !== BreedingFilters.shinyStatus.value()) {
-                  return false;
-              }
-          }
+            // Check to filter out already-shiny
+            if (BreedingFilters.shinyStatus.value() == 0) {
+                if (+pokemon.shiny !== BreedingFilters.shinyStatus.value()) {
+                    return false;
+                }
+            }
 
-          // Check based on native region
-          const showRegions = BreedingFilters.region.value();
-          const region = PokemonHelper.calcNativeRegion(pokemon.name);
-          const regionBitInFilter = 1 << region & showRegions;
-          const noneRegionCheck = (showRegions === 0 || showRegions === (2 << player.highestRegion()) - 1)
-              && region === GameConstants.Region.none;
-          if (!regionBitInFilter && !noneRegionCheck) {
-              return false;
-          }
+            // Check based on native region
+            const showRegions = BreedingFilters.region.value();
+            const region = PokemonHelper.calcNativeRegion(pokemon.name);
+            const regionBitInFilter = 1 << region & showRegions;
+            const noneRegionCheck = (showRegions === 0 || showRegions === (2 << player.highestRegion()) - 1)
+                && region === GameConstants.Region.none;
+            if (!regionBitInFilter && !noneRegionCheck) {
+                return false;
+            }
 
-          // Check to filter out Pokerus already-infected
-          if (BreedingFilters.pokerus.value() > -1) {
-              if (pokemon.pokerus > BreedingFilters.pokerus.value()) {
-                  return false;
-              }
-          }
+            // Check to filter out Pokerus already-infected
+            if (BreedingFilters.pokerus.value() > -1) {
+                if (pokemon.pokerus > BreedingFilters.pokerus.value()) {
+                    return false;
+                }
+            }
 
-          const uniqueTransformation = BreedingFilters.uniqueTransformation.value();
-          const basePokemon = PokemonHelper.getPokemonById(pokemon.id);
-          // Only Base Pokémon with Mega available
-          if (uniqueTransformation == 'mega-available' && !PokemonHelper.hasMegaEvolution(basePokemon.name)) {
-              return false;
-          }
-          // Only Base Pokémon without Mega Evolution
-          if (uniqueTransformation == 'mega-unobtained' && !(PokemonHelper.hasMegaEvolution(basePokemon.name) && (basePokemon as DataPokemon).evolutions?.some((e) => !App.game.party.alreadyCaughtPokemonByName(e.evolvedPokemon)))) {
-              return true;
-          }
-          // Only Mega Pokémon
-          if (uniqueTransformation == 'mega-evolution' && !(PokemonHelper.getPokemonPrevolution(basePokemon.name)?.some((e) => PokemonHelper.hasMegaEvolution(e.basePokemon)))) {
-              return false;
-          }
+            const uniqueTransformation = BreedingFilters.uniqueTransformation.value();
+            const basePokemon = PokemonHelper.getPokemonById(pokemon.id);
+            // Only Base Pokémon with Mega available
+            if (uniqueTransformation == 'mega-available' && !PokemonHelper.hasMegaEvolution(basePokemon.name)) {
+                return false;
+            }
+            // Only Base Pokémon without Mega Evolution
+            if (uniqueTransformation == 'mega-unobtained' && !(PokemonHelper.hasMegaEvolution(basePokemon.name) && (basePokemon as DataPokemon).evolutions?.some((e) => !App.game.party.alreadyCaughtPokemonByName(e.evolvedPokemon)))) {
+                return true;
+            }
+            // Only Mega Pokémon
+            if (uniqueTransformation == 'mega-evolution' && !(PokemonHelper.getPokemonPrevolution(basePokemon.name)?.some((e) => PokemonHelper.hasMegaEvolution(e.basePokemon)))) {
+                return false;
+            }
 
-          // Check if either of the types match
-          const type1: (PokemonType | null) = BreedingFilters.type1.value() > -2 ? BreedingFilters.type1.value() : null;
-          const type2: (PokemonType | null) = BreedingFilters.type2.value() > -2 ? BreedingFilters.type2.value() : null;
-          if (type1 !== null || type2 !== null) {
-              const { type: types } = pokemonMap[pokemon.name];
-              if ([type1, type2].includes(PokemonType.None)) {
-                  const type = (type1 == PokemonType.None) ? type2 : type1;
-                  if (!BreedingController.isPureType(pokemon, type)) {
-                      return false;
-                  }
-              } else if ((type1 !== null && !types.includes(type1)) || (type2 !== null && !types.includes(type2))) {
-                  return false;
-              }
-          }
+            // Check if either of the types match
+            const type1: (PokemonType | null) = BreedingFilters.type1.value() > -2 ? BreedingFilters.type1.value() : null;
+            const type2: (PokemonType | null) = BreedingFilters.type2.value() > -2 ? BreedingFilters.type2.value() : null;
+            if (type1 !== null || type2 !== null) {
+                const { type: types } = pokemonMap[pokemon.name];
+                if ([type1, type2].includes(PokemonType.None)) {
+                    const type = (type1 == PokemonType.None) ? type2 : type1;
+                    if (!BreedingController.isPureType(pokemon, type)) {
+                        return false;
+                    }
+                } else if ((type1 !== null && !types.includes(type1)) || (type2 !== null && !types.includes(type2))) {
+                    return false;
+                }
+            }
 
-          return true;
+            return true;
         });
     });
 }
