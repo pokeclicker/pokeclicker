@@ -1,5 +1,6 @@
 class Safari {
     static grid: Array<Array<number>>;
+    static accessibleTiles: Array<Array<boolean>>;
     static pokemonGrid: KnockoutObservableArray<SafariPokemon> = ko.observableArray([]);
     static itemGrid: KnockoutObservableArray<SafariItem> = ko.observableArray([]);
     static player: Point = new Point(12, 20);
@@ -92,6 +93,9 @@ class Safari {
         Safari.addRandomBody(new GrassBody());
         Safari.addRandomBody(new GrassBody());
         Safari.addRandomBody(new GrassBody());
+
+        Safari.calculateAccessibleTiles();
+
         Safari.show();
     }
 
@@ -148,6 +152,38 @@ class Safari {
                     }
                 }
             }
+        }
+    }
+
+    private static calculateAccessibleTiles() {
+        // Reset accessible tile grid
+        Safari.accessibleTiles = Safari.grid.map(row => row.map(tile => false));
+
+        // Start with the tile player spawns on
+        const toProcess = [Safari.getPlayerStartCoords()];
+
+        // While we have things in our list of tiles to process
+        while (toProcess.length) {
+            // Get the first one and mark it as accessible
+            const [x, y] = toProcess.shift();
+            this.accessibleTiles[y][x] = true;
+
+            // Then queue up any neighbors for processing
+            [[x + 1, y], [x - 1, y], [x, y + 1], [x, y - 1]]
+                .forEach(([nx, ny]) => {
+                    if (// but skip if:
+                        // already processed,
+                        this.accessibleTiles[ny]?.[nx] ||
+                        // already queued,
+                        toProcess.find(([px, py]) => px === nx && py === ny) ||
+                        // or can't access
+                        !Safari.canMove(nx, ny)
+                    ) {
+                        return;
+                    }
+
+                    toProcess.push([nx, ny]);
+                });
         }
     }
 
@@ -230,6 +266,10 @@ class Safari {
         return App.game.keyItems.hasKeyItem(KeyItemType.Safari_ticket);
     }
 
+    static getPlayerStartCoords() {
+        return [Math.floor((this.sizeX() - 1) / 2), this.sizeY() - 1];
+    }
+
     static show() {
         let html = '';
 
@@ -243,7 +283,8 @@ class Safari {
 
         $('#safariBody').html(html);
 
-        Safari.addPlayer(Math.floor((this.sizeX() - 1) / 2), this.sizeY() - 1);
+        const [x, y] = Safari.getPlayerStartCoords();
+        Safari.addPlayer(x, y);
 
     }
 
@@ -410,6 +451,7 @@ class Safari {
 
     private static canPlaceAtPosition(x: number, y: number) {
         return this.canMove(x, y) &&
+            this.isAccessible(x, y) &&
             !(x == this.playerXY.x && y == this.playerXY.y) &&
             !this.pokemonGrid().find(p => p.x === x && p.y === y) &&
             !this.itemGrid().find(i => i.x === x && i.y === y);
@@ -437,6 +479,10 @@ class Safari {
             }
         }
         return false;
+    }
+
+    private static isAccessible(x: number, y: number): boolean {
+        return this.accessibleTiles[y][x];
     }
 
     private static setNextDirection(direction: string) {
