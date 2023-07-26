@@ -56,6 +56,7 @@ class App {
                 new DreamOrbController(),
                 new PurifyChamber(),
                 new WeatherApp(),
+                new ZMoves(),
                 new PokemonContest()
             );
 

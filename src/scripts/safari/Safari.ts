@@ -15,6 +15,7 @@ class Safari {
     static inBattle: KnockoutObservable<boolean> = ko.observable(false);
     static balls: KnockoutObservable<number> = ko.observable().extend({ numeric: 0 });
     static activeRegion: KnockoutObservable<GameConstants.Region> = ko.observable(GameConstants.Region.none);
+    private static maxPlacementAttempts = 20;
 
     // Safari level
     static maxSafariLevel = 40;
@@ -22,7 +23,8 @@ class Safari {
         return App.game.statistics.safariRocksThrown() * 10 +
             App.game.statistics.safariBaitThrown() * 5 +
             App.game.statistics.safariBallsThrown() * 10 +
-            App.game.statistics.safariPokemonCaptured() * 50;
+            App.game.statistics.safariPokemonCaptured() * 50 +
+            App.game.statistics.safariItemsObtained() * 10;
     });
     static safariLevel: KnockoutComputed<number> = ko.pureComputed(() => {
         const xp = Safari.safariExp();
@@ -246,17 +248,20 @@ class Safari {
     }
 
     private static square(i: number, j: number): string {
-        const img = `assets/images/safari/${this.grid[i][j]}.png`;
+        const tile = this.grid[i][j];
+        const img = `assets/images/safari/${tile}.png`;
         const divId = `safari-${j}-${i}`;
+        // Add z-index if tiles are tree top tiles
+        const zIndex = tile === 37 || tile === 38 || tile === 39 ? 'z-index: 2;' : '';
 
-        return `<div id='${divId}' style=background-image:url('${img}') class='safariSquare'></div>`;
+        return `<div id='${divId}' style="background-image:url('${img}'); ${zIndex}" class='safariSquare'></div>`;
     }
 
     private static addPlayer(i: number, j: number) {
         const topLeft = $('#safari-0-0').offset();
         const offset = {
-            top: 32 * j + topLeft.top,
-            left: 32 * i + topLeft.left,
+            top: 32 * j + topLeft.top - 8,
+            left: 32 * i + topLeft.left - 4,
         };
         $('#safariBody').append('<div id="sprite"></div>');
         document.getElementById('sprite').classList.value = `walk${Safari.lastDirection}`;
@@ -368,34 +373,46 @@ class Safari {
     }
 
     private static spawnRandomPokemon() {
-        const y = Rand.floor(this.sizeY());
-        const x = Rand.floor(this.sizeX());
-        if (!this.canMove(x, y) ||
-            (x == this.playerXY.x && y == this.playerXY.y) ||
-            this.pokemonGrid().find(p => p.x === x && p.y === y) ||
-            this.itemGrid().find(i => i.x === x && i.y === y)) {
-            return;
+        const pos = this.generatePlaceableSpawnPosition();
+        if (pos) {
+            const pokemon = SafariPokemon.random();
+            pokemon.x = pos.x;
+            pokemon.y = pos.y;
+            pokemon.steps = this.grid.length + this.grid[0].length + Rand.floor(21);
+            this.pokemonGrid.push(pokemon);
         }
-        const pokemon = SafariPokemon.random();
-
-        pokemon.x = x;
-        pokemon.y = y;
-        pokemon.steps = this.sizeX() + this.sizeY() + Rand.floor(21);
-        this.pokemonGrid.push(pokemon);
     }
 
     private static spawnRandomItem() {
-        const x = Rand.floor(this.sizeX());
-        const y = Rand.floor(this.sizeY());
-        if (!this.canMove(x, y) || (x == this.playerXY.x && y == this.playerXY.y) ||
-            this.itemGrid().find(i => i.x === x && i.y === y) ||
-            this.pokemonGrid().find(p => p.x === x && p.y === y)) {
-            return;
-        }
         if (!SafariItemController.currentRegionHasItems()) {
             return;
         }
-        this.itemGrid.push(new SafariItem(x, y));
+
+        const pos = this.generatePlaceableSpawnPosition();
+        if (pos) {
+            this.itemGrid.push(new SafariItem(pos.x, pos.y));
+        }
+    }
+
+    private static generatePlaceableSpawnPosition() {
+        let result = false;
+        let x = 0;
+        let y = 0;
+        let attempts = 0;
+        while (!result && attempts++ < this.maxPlacementAttempts) {
+            x = Rand.floor(this.grid[0].length);
+            y = Rand.floor(this.grid.length);
+            result = this.canPlaceAtPosition(x, y);
+        }
+
+        return result ? {x: x, y: y} : null;
+    }
+
+    private static canPlaceAtPosition(x: number, y: number) {
+        return this.canMove(x, y) &&
+            !(x == this.playerXY.x && y == this.playerXY.y) &&
+            !this.pokemonGrid().find(p => p.x === x && p.y === y) &&
+            !this.itemGrid().find(i => i.x === x && i.y === y);
     }
 
     private static directionToXY(dir: string) {

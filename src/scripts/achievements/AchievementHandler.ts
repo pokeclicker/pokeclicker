@@ -421,6 +421,10 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Chasing the Chansey', 'Reach Safari Level 15.', new SafariLevelRequirement(15), 0.5);
         AchievementHandler.addAchievement('Catch Animation Enthusiast', 'Reach Safari Level 30.', new SafariLevelRequirement(30), 1);
 
+        AchievementHandler.addAchievement('Just Keep Chuckin\' Balls', 'Catch 50 Pokémon in a Safari Zone', new SafariCatchRequirement(50), 0.1);
+        AchievementHandler.addAchievement('Strategic Chucker', 'Catch 100 Pokémon in a Safari Zone', new SafariCatchRequirement(100), 0.2);
+        AchievementHandler.addAchievement('Master of the Safari', 'Catch 250 Pokémon in a Safari Zone', new SafariCatchRequirement(250), 0.4);
+
         /*
          * REGIONAL
          */
@@ -531,6 +535,7 @@ class AchievementHandler {
         multiplier.addBonus('exp', () => 1 + this.achievementBonus(), multiplierSource);
         multiplier.addBonus('money', () => 1 + this.achievementBonus(), multiplierSource);
         multiplier.addBonus('dungeonToken', () => 1 + this.achievementBonus(), multiplierSource);
+        multiplier.addBonus('clickAttack', () => 1 + this.achievementBonus(), multiplierSource);
     }
 
     static load() {
