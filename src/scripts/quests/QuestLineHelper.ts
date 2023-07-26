@@ -1090,7 +1090,7 @@ class QuestLineHelper {
             {
                 clearedMessage: 'How, how, how dare you! Don\'t you dare think you\'ll get away with your latest outrage! One of these days, I will take great pleasure in kicking you about with my elegant dance steps! Oh, and I\'m not giving up our Shadow Pokémon plan!',
                 npcDisplayName: 'Miror B.',
-                npcImageName: 'Cipher Admin (miror b)',
+                npcImageName: 'Cipher Admin Miror B',
             });
         orreColosseumQuestLine.addQuest(clearPyriteCave);
 
