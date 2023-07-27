@@ -703,6 +703,71 @@ GymList['Supreme Gym Leader Drake'] = new Gym(
     'You really deserve that trophy. You\'re a great Pokémon trainer.'
 );
 
+// Orre Gyms
+GymList['Cipher Admin Ein'] = new Gym (
+    'Cipher Admin Ein',
+    'Cipher Admin Ein',
+    [
+        new GymPokemon('Crobat', 12099520, 48),
+        new GymPokemon('Pelipper', 12099520, 49),
+        new GymPokemon('Rhydon', 12099520, 50),
+        new GymPokemon('Starmie', 12099520, 49),
+        new GymPokemon('Manectric', 12099520, 50),
+    ],
+    BadgeEnums.Elite_F_Disk,
+    10000,
+    'Urrrgh… What unbelievable power…',
+    [new QuestLineCompletedRequirement('Shadows in the Desert')],
+    undefined, undefined, { displayName: 'Challenge Ein' }
+);
+GymList['Cipher Admin Miror B.'] = new Gym (
+    'Cipher Admin Miror B',
+    'Cipher Admin Miror B.',
+    [
+        new GymPokemon('Ludicolo', 11599520, 44),
+        new GymPokemon('Ludicolo', 11599520, 45),
+        new GymPokemon('Loudred', 11599520, 46),
+        new GymPokemon('Golduck', 11599520, 45),
+        new GymPokemon('Armaldo', 11599520, 43),
+    ],
+    BadgeEnums.Elite_L_Disk,
+    10000,
+    'I\'m an awesome dancer… But I can\'t win in battles!',
+    [new QuestLineCompletedRequirement('Shadows in the Desert')],
+    undefined, undefined, { displayName: 'Challenge Miror B.' }
+);
+GymList['Cipher Admin Dakim'] = new Gym (
+    'Cipher Admin Dakim',
+    'Cipher Admin Dakim',
+    [
+        new GymPokemon('Claydol', 11999520, 46),
+        new GymPokemon('Forretress', 11999520, 45),
+        new GymPokemon('Flygon', 11999520, 46),
+        new GymPokemon('Whiscash', 11999520, 46),
+        new GymPokemon('Houndoom', 11999520, 47),
+    ],
+    BadgeEnums.Elite_R_Disk,
+    10000,
+    'This can\'t be! The mighty Dakim loses again?',
+    [new QuestLineCompletedRequirement('Shadows in the Desert')],
+    undefined, undefined, { displayName: 'Challenge Dakim' }
+);
+GymList['Cipher Admin Venus'] = new Gym (
+    'Cipher Admin Venus',
+    'Cipher Admin Venus',
+    [
+        new GymPokemon('Bellossom', 12299520, 47),
+        new GymPokemon('Misdreavus', 12299520, 47),
+        new GymPokemon('Raichu', 12299520, 48),
+        new GymPokemon('Wigglytuff', 12299520, 48),
+        new GymPokemon('Milotic', 12299520, 48),
+    ],
+    BadgeEnums.Elite_U_Disk,
+    10000,
+    'I shall forget that I ever battled with you. Yes, that\'s what I\'ll do. Ohohohoh!',
+    [new QuestLineCompletedRequirement('Shadows in the Desert')],
+    undefined, undefined, { displayName: 'Challenge Venus' }
+);
 //Sinnoh Gyms
 GymList['Oreburgh City'] = new Gym(
     'Roark',
@@ -1302,7 +1367,10 @@ GymList['Iki Town'] = new Gym(
     128000,
     'The results come as no surprise to me. What a fine Trainer...and what fine Pokémon, too! Accept this Z-Crystal! It allows Trainers to share their power with their partner Pokémon!',
     [new TemporaryBattleRequirement('Hau 3')],
-    undefined, undefined, { displayName: 'Hala\'s Grand Trial' }
+    () => {
+        player.gainItem(GameConstants.zCrystalItemType[PokemonType.Fighting], 1);
+    },
+    undefined, { displayName: 'Hala\'s Grand Trial' }
 );
 GymList['Konikoni City'] = new Gym(
     'Olivia',
@@ -1318,6 +1386,7 @@ GymList['Konikoni City'] = new Gym(
     [new TemporaryBattleRequirement('Plumeria 1')],
     () => {
         App.game.quests.getQuestLine('Eater of Light').beginQuest();
+        player.gainItem(GameConstants.zCrystalItemType[PokemonType.Rock], 1);
     },
     undefined, { displayName: 'Olivia\'s Grand Trial' }
 );
@@ -1332,7 +1401,10 @@ GymList['Malie City'] = new Gym(
     BadgeEnums.DarkiniumZ,
     128000,
     'Hmph... heh. Let me fix your team up for you. Here. This is yours.',
-    [new TemporaryBattleRequirement('Gladion 2')], undefined, undefined, { displayName: 'Nanu\'s Grand Trial' }
+    [new TemporaryBattleRequirement('Gladion 2')],
+    () => {
+        player.gainItem(GameConstants.zCrystalItemType[PokemonType.Dark], 1);
+    }, undefined, { displayName: 'Nanu\'s Grand Trial' }
 );
 GymList['Exeggutor Island'] = new Gym(
     'Hapu',
@@ -1347,7 +1419,9 @@ GymList['Exeggutor Island'] = new Gym(
     128000,
     'You have succeeded in your final grand trial! That was enjoyable. Looks like I cannot beat you even when I am not holding back... Take your Ground-type Z-Crystal then... This Groundium Z is yours!',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mina\'s Houseboat'))],
-    undefined, undefined, { displayName: 'Hapu\'s Grand Trial' }
+    () => {
+        player.gainItem(GameConstants.zCrystalItemType[PokemonType.Ground], 1);
+    }, undefined, { displayName: 'Hapu\'s Grand Trial' }
 );
 //trials
 GymList['Ilima\'s Trial'] = new Gym(
@@ -1362,7 +1436,9 @@ GymList['Ilima\'s Trial'] = new Gym(
     128000,
     'What an incredible Trainer you are! The Z-Crystal from the pedestal is yours now! It is known as Normalium Z!',
     undefined,
-    undefined,
+    () => {
+        player.gainItem(GameConstants.zCrystalItemType[PokemonType.Normal], 1);
+    },
     {
         quest: false,
         achievement: false,
@@ -1380,7 +1456,9 @@ GymList['Lana\'s Trial'] = new Gym(
     128000,
     'Very well done! You do know what this is, don\'t you? Please take this Waterium Z.',
     undefined,
-    undefined,
+    () => {
+        player.gainItem(GameConstants.zCrystalItemType[PokemonType.Water], 1);
+    },
     {
         quest: false,
         achievement: false,
@@ -1398,7 +1476,9 @@ GymList['Kiawe\'s Trial'] = new Gym(
     128000,
     'Whoa! S-spectacular! That Pokémon was protecting this Firium Z. Now it is yours.',
     undefined,
-    undefined,
+    () => {
+        player.gainItem(GameConstants.zCrystalItemType[PokemonType.Fire], 1);
+    },
     {
         quest: false,
         achievement: false,
@@ -1416,7 +1496,9 @@ GymList['Mallow\'s Trial'] = new Gym(
     128000,
     'Wow, you\'re even stronger than I thought! Looks like you\'ve cleared all three of Akala\'s trials! Here! A gift for such an inspiring young Trainer!',
     undefined,
-    undefined,
+    () => {
+        player.gainItem(GameConstants.zCrystalItemType[PokemonType.Grass], 1);
+    },
     {
         quest: false,
         achievement: false,
@@ -1434,7 +1516,9 @@ GymList['Sophocles\' Trial'] = new Gym(
     128000,
     'That Pokémon was really something else! Here, I\'ll give you this Electrium Z to reward you for beating it.',
     undefined,
-    undefined,
+    () => {
+        player.gainItem(GameConstants.zCrystalItemType[PokemonType.Electric], 1);
+    },
     {
         quest: false,
         achievement: false,
@@ -1452,7 +1536,9 @@ GymList['Acerola\'s Trial'] = new Gym(
     128000,
     'Welcome back! Now let\'s see how you did... Yup! You passed my trial! Here you go!',
     undefined,
-    undefined,
+    () => {
+        player.gainItem(GameConstants.zCrystalItemType[PokemonType.Ghost], 1);
+    },
     {
         quest: false,
         achievement: false,
@@ -1470,7 +1556,9 @@ GymList['Vast Poni Canyon Trial'] = new Gym(
     128000,
     '<i>You obtained a Dragon-Type Z-Crystal. The Dragonium Z is yours!<i>',
     undefined,
-    undefined,
+    () => {
+        player.gainItem(GameConstants.zCrystalItemType[PokemonType.Dragon], 1);
+    },
     {
         quest: false,
         achievement: false,
@@ -1489,7 +1577,9 @@ GymList['Mina\'s Trial'] = new Gym(
     128000,
     'That\'s a pretty great picture. You and your Pokémon! You\'re a great Pokémon Trainer! So here you go! A piece of Fairium Z for you!',
     undefined,
-    undefined,
+    () => {
+        player.gainItem(GameConstants.zCrystalItemType[PokemonType.Fairy], 1);
+    },
     {
         quest: false,
         achievement: false,

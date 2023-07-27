@@ -16,6 +16,8 @@ import {
     DayTimedLevelEvolution,
     DayCyclePartRestrictedLevelEvolution,
     MegaEvolution,
+    DayTimedMegaEvolution,
+    NightTimedMegaEvolution,
 } from './evolutions/Methods';
 import BerryType from '../enums/BerryType';
 import ItemType from '../enums/ItemType';
@@ -281,7 +283,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 236,
         'eggCycles': 20,
-        // 'evolutions': [MegaEvolution('Venusaur', 'Mega Venusaur')],
+        'evolutions': [MegaEvolution(MegaStoneType.Venusaurite, 'Venusaur', 'Mega Venusaur')],
         'base': {
             'hitpoints': 80,
             'attack': 82,
@@ -489,10 +491,10 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 240,
         'eggCycles': 20,
-        // 'evolutions': [
-        //     MegaEvolution(MegaStoneType.Charizardite_X, 'Charizard', 'Mega Charizard X'),
-        //     MegaEvolution(MegaStoneType.Charizardite_Y, 'Charizard', 'Mega Charizard Y'),
-        // ],
+        'evolutions': [
+            DayTimedMegaEvolution(MegaStoneType.Charizardite_X, 'Charizard', 'Mega Charizard X'),
+            NightTimedMegaEvolution(MegaStoneType.Charizardite_Y, 'Charizard', 'Mega Charizard Y'),
+        ],
         'base': {
             'hitpoints': 78,
             'attack': 84,
@@ -678,7 +680,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 239,
         'eggCycles': 20,
-        // 'evolutions': [MegaEvolution('Blastoise', 'Mega Blastoise')],
+        'evolutions': [MegaEvolution(MegaStoneType.Blastoisinite, 'Blastoise', 'Mega Blastoise')],
         'base': {
             'hitpoints': 79,
             'attack': 83,
@@ -2555,6 +2557,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 40,
             'speed': 90,
         },
+        'heldItem': { type: ItemType.item, id: 'Rare_Candy' },
     },
     {
         'id': 52.01,
@@ -4196,6 +4199,23 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 102.01,
+        'name': 'Exeggcute (Single)',
+        'catchRate': 90,
+        'type': [PokemonType.Grass, PokemonType.Psychic],
+        'levelType': LevelType.slow,
+        'exp': 65,
+        'eggCycles': 20,
+        'base': {
+            'hitpoints': 60,
+            'attack': 40,
+            'specialAttack': 60,
+            'defense': 80,
+            'specialDefense': 45,
+            'speed': 40,
+        },
+    },
+    {
         'id': 103,
         'name': 'Exeggutor',
         'catchRate': 45,
@@ -4969,7 +4989,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 175,
         'eggCycles': 25,
-        // 'evolutions': [MegaEvolution('Pinsir', 'Mega Pinsir')],
+        'evolutions': [MegaEvolution(MegaStoneType.Pinsirite, 'Pinsir', 'Mega Pinsir')],
         'base': {
             'hitpoints': 65,
             'attack': 125,
@@ -6303,8 +6323,8 @@ export const pokemonList = createPokemonArray(
         'exp': 306,
         'eggCycles': 120,
         // 'evolutions': [
-        //     MegaEvolution('Mewtwo', 'Mega Mewtwo X'),
-        //     MegaEvolution('Mewtwo', 'Mega Mewtwo Y'),
+        //    DayTimedMegaEvolution(MegaStoneType.Mewtwonite_X, 'Mewtwo', 'Mega Mewtwo X'),
+        //    NightTimedMegaEvolution(MegaStoneType.Mewtwonite_Y, 'Mewtwo', 'Mega Mewtwo Y'),
         // ],
         'base': {
             'hitpoints': 106,
@@ -7289,6 +7309,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'visualDifference': true,
         },
+        'heldItem': { type: ItemType.item, id: 'Rare_Candy' },
     },
     {
         'id': 191,
@@ -7489,7 +7510,10 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 87,
         'eggCycles': 25,
-        'evolutions': [StoneEvolution('Misdreavus', 'Mismagius', StoneType.Dusk_stone)],
+        'evolutions': [
+            StoneEvolution('Misdreavus', 'Mismagius', StoneType.Dusk_stone),
+            DummyEvolution('Misdreavus', 'Mismagius (Illusion)'),
+        ],
         'base': {
             'hitpoints': 60,
             'attack': 60,
@@ -8316,7 +8340,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 175,
         'eggCycles': 25,
-        // 'evolutions': [MegaEvolution('Scizor', 'Mega Scizor')],
+        'evolutions': [MegaEvolution(MegaStoneType.Scizorite, 'Scizor', 'Mega Scizor')],
         'base': {
             'hitpoints': 70,
             'attack': 130,
@@ -10544,7 +10568,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 144,
         'catchRate': 90,
-        // 'evolutions': [MegaEvolution('Medicham', 'Mega Medicham')],
+        // 'evolutions': [MegaEvolution(MegaStoneType.Medichamite, 'Medicham', 'Mega Medicham')],
         'base': {
             'hitpoints': 60,
             'attack': 60,
@@ -11098,7 +11122,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.erratic,
         'exp': 172,
         'catchRate': 45,
-        // 'evolutions': [MegaEvolution('Altaria', 'Mega Altaria')],
+        // 'evolutions': [MegaEvolution(MegaStoneType.Altarianite, 'Altaria', 'Mega Altaria')],
         'base': {
             'hitpoints': 75,
             'attack': 70,
@@ -11543,7 +11567,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 159,
         'catchRate': 45,
-        // 'evolutions': [MegaEvolution('Banette', 'Mega Banette')],
+        // 'evolutions': [MegaEvolution(MegaStoneType.Bannetite, 'Banette', 'Mega Banette')],
         'base': {
             'hitpoints': 64,
             'attack': 115,
@@ -13173,6 +13197,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'visualDifference': true,
         },
+        'heldItem': { type: ItemType.item, id: 'Rare_Candy' },
     },
     {
         'id': 418,
@@ -13443,6 +13468,23 @@ export const pokemonList = createPokemonArray(
     {
         'id': 429,
         'name': 'Mismagius',
+        'type': [PokemonType.Ghost],
+        'eggCycles': 25,
+        'levelType': LevelType.fast,
+        'exp': 173,
+        'catchRate': 45,
+        'base': {
+            'hitpoints': 60,
+            'attack': 60,
+            'specialAttack': 105,
+            'defense': 60,
+            'specialDefense': 105,
+            'speed': 105,
+        },
+    },
+    {
+        'id': 429.01,
+        'name': 'Mismagius (Illusion)',
         'type': [PokemonType.Ghost],
         'eggCycles': 25,
         'levelType': LevelType.fast,
@@ -20685,6 +20727,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 67,
             'speed': 101,
         },
+        'heldItem': { type: ItemType.item, id: 'Rare_Candy' },
     },
     {
         'id': 703,
@@ -21213,6 +21256,26 @@ export const pokemonList = createPokemonArray(
             'hitpoints': 80,
             'attack': 110,
             'specialAttack': 150,
+            'defense': 60,
+            'specialDefense': 130,
+            'speed': 70,
+        },
+        'gender': {
+            'type': Genders.Genderless,
+        },
+    },
+    {
+        'id': 720.01,
+        'name': 'Hoopa (Unbound)',
+        'type': [PokemonType.Psychic, PokemonType.Dark],
+        'eggCycles': 120,
+        'levelType': LevelType.slow,
+        'exp': 270,
+        'catchRate': 3,
+        'base': {
+            'hitpoints': 80,
+            'attack': 160,
+            'specialAttack': 170,
             'defense': 60,
             'specialDefense': 130,
             'speed': 70,

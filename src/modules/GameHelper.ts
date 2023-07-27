@@ -187,4 +187,26 @@ export default class GameHelper {
         $outer.remove();
         return 100 - widthWithScroll;
     }
+
+    /**
+     * Insecure hash, but should keep some of the nosy people out.
+     * @param text
+     */
+    public static hash(text: string): number {
+        let hash = 0;
+        let i = 0;
+        let chr = 0;
+        if (text.length === 0) {
+            return hash;
+        }
+
+        for (i = 0; i < text.length; i++) {
+            chr = text.charCodeAt(i);
+            // eslint-disable-next-line no-bitwise
+            hash = ((hash << 5) - hash) + chr;
+            // eslint-disable-next-line no-bitwise
+            hash |= 0; // Convert to 32bit integer
+        }
+        return hash;
+    }
 }
