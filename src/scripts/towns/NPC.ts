@@ -28,6 +28,7 @@ class NPC {
     }
 
     public setTalkedTo() {
+        this.talkedTo(true);
         if (this.saveKey && !this.hasTalkedTo()) {
             GameHelper.incrementObservable(App.game.statistics.npcTalkedTo[this.saveKey]);
         }

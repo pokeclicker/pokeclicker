@@ -20,5 +20,7 @@ class GiftNPC extends NPC {
         GameHelper.incrementObservable(App.game.statistics.npcTalkedTo[this.saveKey]);
     }
 
-    public setTalkedTo() {} // intentionally left blank
+    public setTalkedTo() {
+        this.talkedTo(true);
+    }
 }
