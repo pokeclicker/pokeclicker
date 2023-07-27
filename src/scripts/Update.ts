@@ -2366,6 +2366,9 @@ class Update implements Saveable {
                     playerData._itemList[crystalName] = 1;
                 }
             });
+
+            // Fixing Silvally item amounts
+            Object.keys(playerData._itemList).filter(itemName => itemName.includes('Memory_Silvally')).forEach(itemName => playerData._itemList[itemName] = Math.min(1, playerData._itemList[itemName]));
         },
     };
 
