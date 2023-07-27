@@ -11,6 +11,10 @@ class GiftNPC extends NPC {
         super(name, dialog, options, NPCType.Gift);
     }
 
+    public isVisible() {
+        return super.isVisible() && !this.hasTalkedTo();
+    }
+
     public acceptGift() {
         this.giftFunction?.();
         GameHelper.incrementObservable(App.game.statistics.npcTalkedTo[this.saveKey]);
