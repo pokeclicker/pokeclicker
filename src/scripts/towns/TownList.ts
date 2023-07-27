@@ -7559,8 +7559,8 @@ const EnergyPlantRose = new NPC('Chairman Rose', [
 const EternatusCatch = new GiftNPC('Catch Eternatus', [
     'You caught Eternatus!',
 ], () => {
-    App.game.party.gainPokemonByName('Lapras');
-}, 'assets/images/pokemon/890.png', { saveKey: 'eternatuscatch', requirement: new TemporaryBattleRequirement('Eternamax Eternatus') });
+    App.game.party.gainPokemonByName('Eternatus');
+}, 'assets/images/pokemon/890.png', { saveKey: 'eternatuscatch', requirement: new TemporaryBattleRequirement('The Darkest Day') });
 
 const Leon = new NPC('Leon', [
     'My matches are always sold out, but this... I\'ve never seen a crowd this wild!',
