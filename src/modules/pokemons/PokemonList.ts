@@ -2557,6 +2557,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 40,
             'speed': 90,
         },
+        'heldItem': { type: ItemType.item, id: 'Rare_Candy' },
     },
     {
         'id': 52.01,
@@ -7308,6 +7309,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'visualDifference': true,
         },
+        'heldItem': { type: ItemType.item, id: 'Rare_Candy' },
     },
     {
         'id': 191,
@@ -13195,6 +13197,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'visualDifference': true,
         },
+        'heldItem': { type: ItemType.item, id: 'Rare_Candy' },
     },
     {
         'id': 418,
@@ -15737,6 +15740,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 45,
             'speed': 55,
         },
+        'heldItem': { type: ItemType.item, id: 'Rare_Candy' },
     },
     {
         'id': 507,
@@ -19152,6 +19156,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 36,
             'speed': 57,
         },
+        'heldItem': { type: ItemType.item, id: 'Rare_Candy' },
     },
     {
         'id': 660,
@@ -20724,6 +20729,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 67,
             'speed': 101,
         },
+        'heldItem': { type: ItemType.item, id: 'Rare_Candy' },
     },
     {
         'id': 703,
@@ -21524,6 +21530,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 30,
             'speed': 65,
         },
+        'heldItem': { type: ItemType.item, id: 'Rare_Candy' },
     },
     {
         'id': 732,
