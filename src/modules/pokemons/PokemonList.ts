@@ -15740,7 +15740,6 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 45,
             'speed': 55,
         },
-        'heldItem': { type: ItemType.item, id: 'Rare_Candy' },
     },
     {
         'id': 507,
@@ -19156,7 +19155,6 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 36,
             'speed': 57,
         },
-        'heldItem': { type: ItemType.item, id: 'Rare_Candy' },
     },
     {
         'id': 660,
@@ -21530,7 +21528,6 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 30,
             'speed': 65,
         },
-        'heldItem': { type: ItemType.item, id: 'Rare_Candy' },
     },
     {
         'id': 732,
