@@ -4701,7 +4701,7 @@ TemporaryBattleList.Eternatus = new TemporaryBattle(
 TemporaryBattleList['The Darkest Day'] = new TemporaryBattle(
     'The Darkest Day',
     [new GymPokemon('Eternamax Eternatus', 1567895148, 60)],
-    '<b><i>You caught Eternatus!</i></b>',
+    '<b><i>You finally defeated Eternatus!</i></b>',
     [new TemporaryBattleRequirement('Eternatus')],
     undefined,
     {
