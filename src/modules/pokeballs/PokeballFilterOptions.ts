@@ -30,7 +30,7 @@ class PokeballFilterOption<T, M = T> {
     }
 }
 
-const tempShadowRequirement = new DevelopmentRequirement();
+const tempShadowRequirement = new QuestLineStepCompletedRequirement('Shadows in the Desert', 3);
 
 const encounterTypeRequirements: Partial<Record<EncounterType, Requirement>> = {
     [EncounterType.trainer]: tempShadowRequirement,

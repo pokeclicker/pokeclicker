@@ -976,6 +976,7 @@ export enum BulletinBoards {
     Hoenn,
     Sevii4567,
     Sinnoh,
+    Unova,
     Kalos,
     Alola,
     Hoppy,

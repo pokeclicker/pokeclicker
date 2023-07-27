@@ -2804,6 +2804,7 @@ const Sack = new NPC('Check the sack', [
     'My name is Rui, by the way. I\'m a psychic of sorts, on a mission to save Pokémon who have had their souls corrupted by some evil folks in Orre.',
     'There\'s a few in this city that need help. Can you come with me though? I\'m worried more shady guys will show up.',
     'I can point out which Pokémon have been corrupted, or turned into "Shadow Pokémon", and you can confiscate them from evildoers using your Pokéballs.',
+    'You can adjust your Catch Filters to catch any Shadow Pokémon now too.',
 ], {image: 'assets/images/npcs/Rui.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Shadows in the Desert', 2), new QuestLineStepCompletedRequirement('Shadows in the Desert', 4, GameConstants.AchievementOption.less)]),
 });
@@ -4791,7 +4792,7 @@ TownList['Aspertia City'] = new Town(
     'Aspertia City',
     GameConstants.Region.unova,
     GameConstants.UnovaSubRegions.Unova,
-    [],
+    [new BulletinBoard(GameConstants.BulletinBoards.Unova)],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)],
         npcs: [],
