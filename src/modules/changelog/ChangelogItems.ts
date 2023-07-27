@@ -10,6 +10,48 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.10.13
+    new ChangelogUpdate('v0.10.13', new Date(2023, 6, 15)),
+    new Changelog(changelogType.NEW, 'New Battle Frontier reward'),
+    new Changelog(changelogType.NEW, 'More held items'),
+    new Changelog(changelogType.NEW, 'More profile trainers'),
+    new Changelog(changelogType.NEW, 'Safari Zone based achievements'),
+    new Changelog(changelogType.CHANGE, 'Adjust Safari Zone item spawning'),
+    new Changelog(changelogType.CHANGE, 'Replaced Pancham with Carbink in Mystery Eggs'),
+    new Changelog(changelogType.CHANGE, 'Misc UI changes'),
+    new Changelog(changelogType.CHANGE, 'Misc text changes'),
+    new Changelog(changelogType.CHANGE, 'Misc image changes'),
+    new Changelog(changelogType.FIXED, 'Safari broken fences'),
+    new Changelog(changelogType.FIXED, 'Saves with encoded text'),
+    new Changelog(changelogType.FIXED, 'Zero\'s Ambition questline re-starting or starting early'),
+
+    // v0.10.12
+    new ChangelogUpdate('v0.10.12', new Date(2023, 6, 2)),
+    new Changelog(changelogType.NEW, 'Friend Safari is now open!'),
+    new Changelog(changelogType.NEW, 'Safari XP & Safari Level - see the Help tab in the Safari Zone for more information'),
+    new Changelog(changelogType.NEW, 'Safari keybinds'),
+    new Changelog(changelogType.NEW, 'Event Calendar - Halloween not included (purchased in Hammerlocke)'),
+    new Changelog(changelogType.NEW, 'Added additional catch filters'),
+    new Changelog(changelogType.NEW, 'Multipliers tab in the Statistics menu'),
+    new Changelog(changelogType.NEW, 'Added additional Held Item filters'),
+    new Changelog(changelogType.NEW, 'New Megas'),
+    new Changelog(changelogType.NEW, 'New Quest Line'),
+    new Changelog(changelogType.NEW, 'New Achievements'),
+    new Changelog(changelogType.CHANGE, 'Improved category management'),
+    new Changelog(changelogType.CHANGE, 'Improved hatchery helper customization'),
+    new Changelog(changelogType.CHANGE, 'Several held items added to Galar dungeons'),
+    new Changelog(changelogType.CHANGE, 'Item Bag & Pokedex entry UI refresh'),
+    new Changelog(changelogType.CHANGE, 'Number of bosses in legendary dungeons rebalanced'),
+    new Changelog(changelogType.CHANGE, 'Berrydex improvements'),
+    new Changelog(changelogType.CHANGE, 'Quest Point rebalance'),
+    new Changelog(changelogType.CHANGE, 'Misc text changes'),
+    new Changelog(changelogType.CHANGE, 'Misc image changes'),
+    new Changelog(changelogType.FIXED, 'Quest progress decreasing or becoming negative'),
+    new Changelog(changelogType.FIXED, 'Various performance optimizations'),
+    new Changelog(changelogType.FIXED, 'Pokedex & Hatchery filtering now works with party nickname'),
+    new Changelog(changelogType.FIXED, 'Broken Gym Leader sprites'),
+    new Changelog(changelogType.FIXED, 'Delete save triggering if cancelled after typing DELETE'),
+
     // v0.10.11
     new ChangelogUpdate('v0.10.11', new Date(2023, 4, 7)),
     new Changelog(changelogType.NEW, 'Advanced capture filters'),

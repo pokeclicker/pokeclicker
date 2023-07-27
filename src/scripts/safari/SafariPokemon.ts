@@ -59,7 +59,7 @@ class SafariPokemon implements PokemonInterface {
 
     public get catchFactor(): number {
         const oakBonus = App.game.oakItems.calculateBonus(OakItemType.Magic_Ball);
-        let catchF = this.baseCatchFactor + oakBonus;
+        let catchF = this.baseCatchFactor + oakBonus + (this.levelModifier * 10);
         if (this.eating > 0) {
             catchF /= 2 - this.levelModifier;
         }
@@ -114,10 +114,8 @@ class SafariPokemon implements PokemonInterface {
 
     public static random() {
         // Get a random pokemon from current region and zone for Safari Zone
-        const pokemon = Rand.fromWeightedArray(
-            SafariPokemonList.list[Safari.activeRegion()](),
-            SafariPokemonList.list[Safari.activeRegion()]().map(p => p.weight)
-        );
+        const safariPokemon = SafariPokemonList.list[Safari.activeRegion()]().filter((p) => p.isAvailable());
+        const pokemon = Rand.fromWeightedArray(safariPokemon, safariPokemon.map(p => p.weight));
         return new SafariPokemon(pokemon.name);
     }
 
