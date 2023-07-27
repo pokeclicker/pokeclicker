@@ -295,7 +295,7 @@ class Party implements Feature {
         const caught = caughtPokemon.length;
         const shiny = caughtPokemon.filter(p => p.shiny).length;
         const resistant = caughtPokemon.filter(p => p.pokerus >= GameConstants.Pokerus.Resistant).length;
-        const clickAttack = Math.pow(caught + shiny + resistant + 1, 1.4) * (1 + AchievementHandler.achievementBonus());
+        const clickAttack = Math.pow(caught + shiny + resistant + 1, 1.4);
 
         const bonus = this.multiplier.getBonus('clickAttack', useItem);
 
