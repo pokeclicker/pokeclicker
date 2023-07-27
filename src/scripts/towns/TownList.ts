@@ -463,6 +463,13 @@ const SaffronBreeder = new NPC('Breeder', [
     requirement: new GymBadgeRequirement(BadgeEnums.Earth),
 });
 
+const LaprasGift = new GiftNPC('Silph Co. Employee', [
+    'Oh! Hi! You\'re not a member of Team Rocket! You came to save us? Why thank you!',
+    'I want you to have this Pokémon for saving us.',
+], () => {
+    App.game.party.gainPokemonByName('Lapras');
+}, 'assets/images/pokemon/131.png', { saveKey: 'laprasgift', image: 'assets/images/npcs/Office Worker (male).png', requirement: new MultiRequirement([new TemporaryBattleRequirement('Blue 5'), new ObtainedPokemonRequirement('Lapras', true)]) });
+
 const FuchsiaKantoRoamerNPC = new RoamerNPC('Youngster Wendy', [
     'There\'s been some recent sightings of roaming Pokémon on {ROUTE_NAME}!',
 ], GameConstants.Region.kanto, RoamingPokemonList.findGroup(GameConstants.Region.kanto, GameConstants.KantoSubRegions.Kanto));
@@ -1174,7 +1181,10 @@ TownList['Silph Co.'] = new DungeonTown(
     GameConstants.Region.kanto,
     GameConstants.KantoSubRegions.Kanto,
     [new TemporaryBattleRequirement('Blue 4')],
-    [TemporaryBattleList['Blue 5']]
+    [TemporaryBattleList['Blue 5']],
+    {
+        npcs: [LaprasGift],
+    }
 );
 TownList['Power Plant'] = new DungeonTown(
     'Power Plant',
@@ -7546,11 +7556,16 @@ const EnergyPlantRose = new NPC('Chairman Rose', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Darkest Day', 15), new QuestLineStepCompletedRequirement('The Darkest Day', 17, GameConstants.AchievementOption.less)]),
 });
 
+const EternatusCatch = new GiftNPC('Catch Eternatus', [
+    'You caught Eternatus!',
+], () => {
+    App.game.party.gainPokemonByName('Eternatus');
+}, 'assets/images/pokemon/890.png', { saveKey: 'eternatuscatch', requirement: new MultiRequirement([new TemporaryBattleRequirement('The Darkest Day'), new ObtainedPokemonRequirement('Eternatus', true)]) });
+
 const Leon = new NPC('Leon', [
     'My matches are always sold out, but this... I\'ve never seen a crowd this wild!',
     'Everyone knows what you did for us this week... They know you\'re the one who caught Eternatus and saved the future of the Galar region.',
     'A real hero, who battled alongside the Legendary Pokémon, Zacian and Zamazenta... I couldn\'t have dreamed of a better challenger to help increase my winning streak!',
-    'Oh... And you\'ve even added Eternatus to your party. The greatest challenger along with the most powerful Pokémon—is that it? Now you\'re really getting me excited!',
     'Now that I\'ve seen just what kind of strength you possess as the greatest of challengers...crushing you into the dirt will show everyone just how strong their Champion truly is!',
     'Come on, now! Let\'s make this a final match that\'ll go down in Galar\'s history! No! A match that\'ll change Galar forever!',
     'We\'re gonna have an absolutely champion time!',
@@ -8225,7 +8240,7 @@ TownList['Energy Plant'] = new DungeonTown(
     [new QuestLineStepCompletedRequirement('The Darkest Day', 14)],
     [TemporaryBattleList.Eternatus, TemporaryBattleList['Sordward 2'], TemporaryBattleList['Shielbert 2'], TemporaryBattleList['Rampaging Zacian'], TemporaryBattleList['Rampaging Zamazenta'], TemporaryBattleList['The Darkest Day']],
     {
-        npcs: [EnergyPlantRose, SordwardShielbert3, SordwardShielbert4, Piers, EnergyPlantHop],
+        npcs: [EnergyPlantRose, EternatusCatch, SordwardShielbert3, SordwardShielbert4, Piers, EnergyPlantHop],
     }
 );
 TownList['Dusty Bowl'] = new DungeonTown(

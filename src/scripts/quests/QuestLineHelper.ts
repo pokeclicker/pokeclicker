@@ -1090,7 +1090,7 @@ class QuestLineHelper {
             {
                 clearedMessage: 'How, how, how dare you! Don\'t you dare think you\'ll get away with your latest outrage! One of these days, I will take great pleasure in kicking you about with my elegant dance steps! Oh, and I\'m not giving up our Shadow Pokémon plan!',
                 npcDisplayName: 'Miror B.',
-                npcImageName: 'Cipher Admin (miror b)',
+                npcImageName: 'Cipher Admin Miror B',
             });
         orreColosseumQuestLine.addQuest(clearPyriteCave);
 
@@ -1117,7 +1117,7 @@ class QuestLineHelper {
             {
                 clearedMessage: 'This isn\'t over yet. Stronger Pokémon are being made even now. You\'d better get serious about training your Pokémon for our next meeting. Daahahah!',
                 npcDisplayName: 'Dakim',
-                npcImageName: 'Cipher Admin (dakim)',
+                npcImageName: 'Cipher Admin Dakim',
             });
         orreColosseumQuestLine.addQuest(fightMtBattle);
 
@@ -1128,7 +1128,7 @@ class QuestLineHelper {
             {
                 clearedMessage: 'Aiyeeeeh! How dare you! How could I get bested by a mere child? Remember this! I\'ll get you back for this!',
                 npcDisplayName: 'Venus',
-                npcImageName: 'Cipher Admin (Venus)',
+                npcImageName: 'Cipher Admin Venus',
             });
         orreColosseumQuestLine.addQuest(fightTheUnder);
 
@@ -1139,7 +1139,7 @@ class QuestLineHelper {
             {
                 clearedMessage: 'Humph! Your struggle to get here was all in vain! The Shadow Pokémon we produced have already been moved elsewhere. And that, of course, includes the ultimate Shadow Pokémon I created for the boss! Wahahahah!',
                 npcDisplayName: 'Ein',
-                npcImageName: 'Cipher Admin (ein)',
+                npcImageName: 'Cipher Admin Ein',
             });
         orreColosseumQuestLine.addQuest(fightCipherLab);
 

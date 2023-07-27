@@ -25,6 +25,7 @@ import MulchType from './enums/MulchType';
 import PlotStage from './enums/PlotStage';
 import QuestLineState from './quests/QuestLineState';
 import WeatherForecastStatus from './enums/WeatherForecastStatus';
+import SafariEnvironments from './enums/SafariEnvironments';
 // end enums
 import BooleanSetting from './settings/BooleanSetting';
 import RangeSetting from './settings/RangeSetting';
@@ -217,6 +218,7 @@ Object.assign(<any>window, {
     PlotStage,
     QuestLineState,
     WeatherForecastStatus,
+    SafariEnvironments,
     BooleanSetting,
     RangeSetting,
     Setting,
