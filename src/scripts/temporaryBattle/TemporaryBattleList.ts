@@ -170,9 +170,6 @@ TemporaryBattleList['Blue 5'] = new TemporaryBattle(
     {
         displayName: 'Rival Blue',
         imageName: 'Blue2',
-        firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonByName('Lapras');
-        },
     }
 );
 TemporaryBattleList['Biker Goon 1'] = new TemporaryBattle(
@@ -4708,9 +4705,6 @@ TemporaryBattleList['The Darkest Day'] = new TemporaryBattle(
     [new TemporaryBattleRequirement('Eternatus')],
     undefined,
     {
-        firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonByName('Eternatus');
-        },
         hideTrainer: true,
         imageName: '../pokemon/890',
     }
