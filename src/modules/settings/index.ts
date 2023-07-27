@@ -200,17 +200,28 @@ const hatcherySortSettings = Object.keys(SortOptionConfigs).map((opt) => (
 Settings.add(new Setting<number>('hatcherySort', 'Sort', hatcherySortSettings, SortOptions.id));
 Settings.add(new BooleanSetting('hatcherySortDirection', 'reverse', false));
 
-// Protein Sorting
+// Vitamin Sorting
 const vitaminSortSettings = Object.keys(SortOptionConfigs).map((opt) => (
     new SettingOption<number>(SortOptionConfigs[opt].text, parseInt(opt, 10))
 ));
 Settings.add(new Setting<number>('vitaminSort', 'Sort', vitaminSortSettings, SortOptions.id));
 Settings.add(new BooleanSetting('vitaminSortDirection', 'reverse', false));
-Settings.add(new BooleanSetting('vitaminHideMaxedPokemon', 'Hide Pokémon with max protein', false));
+Settings.add(new BooleanSetting('vitaminHideMaxedPokemon', 'Hide Pokémon with max vitamin', false));
 Settings.add(new BooleanSetting('vitaminHideShinyPokemon', 'Hide shiny Pokémon', false));
 Settings.add(new Setting<string>('vitaminSearchFilter', 'Search', [], ''));
 Settings.add(new Setting<number>('vitaminRegionFilter', 'Region', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(Region)], -2));
 Settings.add(new Setting<number>('vitaminTypeFilter', 'Type', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None')], -2));
+
+// Consumable Sorting
+const consumableSortSettings = Object.keys(SortOptionConfigs).map((opt) => (
+    new SettingOption<number>(SortOptionConfigs[opt].text, parseInt(opt, 10))
+));
+Settings.add(new Setting<number>('consumableSort', 'Sort', consumableSortSettings, SortOptions.id));
+Settings.add(new BooleanSetting('consumableSortDirection', 'reverse', false));
+Settings.add(new BooleanSetting('consumableHideShinyPokemon', 'Hide shiny Pokémon', false));
+Settings.add(new Setting<string>('consumableSearchFilter', 'Search', [], ''));
+Settings.add(new Setting<number>('consumableRegionFilter', 'Region', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(Region)], -2));
+Settings.add(new Setting<number>('consumableTypeFilter', 'Type', [new SettingOption('All', -2), ...Settings.enumToNumberSettingOptionArray(PokemonType, (t) => t !== 'None')], -2));
 
 // Held Item Sorting
 const heldItemSortSettings = Object.keys(SortOptionConfigs).map((opt) => (
