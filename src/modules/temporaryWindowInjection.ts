@@ -25,6 +25,7 @@ import MulchType from './enums/MulchType';
 import PlotStage from './enums/PlotStage';
 import QuestLineState from './quests/QuestLineState';
 import WeatherForecastStatus from './enums/WeatherForecastStatus';
+import SafariEnvironments from './enums/SafariEnvironments';
 // end enums
 import BooleanSetting from './settings/BooleanSetting';
 import RangeSetting from './settings/RangeSetting';
@@ -167,6 +168,8 @@ import PokeballItem from './items/PokeballItem';
 import QuestItem from './items/QuestItem';
 import Vitamin from './items/Vitamin';
 import VitaminController from './items/VitaminController';
+import Consumable from './items/Consumable';
+import ConsumableController from './items/ConsumableController';
 import RoamingPokemonList from './pokemons/RoamingPokemonList';
 import DataPokemon from './pokemons/DataPokemon';
 import RoamingPokemon from './pokemons/RoamingPokemon';
@@ -215,6 +218,7 @@ Object.assign(<any>window, {
     PlotStage,
     QuestLineState,
     WeatherForecastStatus,
+    SafariEnvironments,
     BooleanSetting,
     RangeSetting,
     Setting,
@@ -366,6 +370,8 @@ Object.assign(<any>window, {
     QuestItem,
     Vitamin,
     VitaminController,
+    Consumable,
+    ConsumableController,
     RoamingPokemonList,
     DataPokemon,
     RoamingPokemon,

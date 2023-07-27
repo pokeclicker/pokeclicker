@@ -2,6 +2,7 @@ class SafariEncounter {
     constructor(
         public name: PokemonNameType,
         public weight: number,
+        public environments: SafariEnvironments[] = [SafariEnvironments.Grass],
         private requireCaught = false
     ) {}
 
@@ -24,6 +25,7 @@ class SafariPokemonList {
     private static generateKantoSafariList() {
         // Lower weighted pokemon will appear less frequently, equally weighted are equally likely to appear
         const pokemon : SafariEncounter[] = [
+            // Grass
             new SafariEncounter('Nidoran(F)', 15),
             new SafariEncounter('Nidorina', 10),
             new SafariEncounter('Nidoran(M)', 25),
@@ -40,6 +42,15 @@ class SafariPokemonList {
             new SafariEncounter('Cubone', 10),
             new SafariEncounter('Marowak', 5),
             new SafariEncounter('Tangela', 4),
+            // Water
+            new SafariEncounter('Magikarp', 20, [SafariEnvironments.Water]),
+            new SafariEncounter('Psyduck', 20, [SafariEnvironments.Water]),
+            new SafariEncounter('Slowpoke', 20, [SafariEnvironments.Water]),
+            new SafariEncounter('Poliwag', 15, [SafariEnvironments.Water]),
+            new SafariEncounter('Goldeen', 15, [SafariEnvironments.Water]),
+            new SafariEncounter('Seaking', 5, [SafariEnvironments.Water]),
+            new SafariEncounter('Dratini', 10, [SafariEnvironments.Water], true),
+            new SafariEncounter('Dragonair', 4, [SafariEnvironments.Water], true),
         ];
 
         SafariPokemonList.list[GameConstants.Region.kanto](pokemon);
@@ -63,7 +74,7 @@ class SafariPokemonList {
         const endIndex = startIndex + GameConstants.FRIEND_SAFARI_POKEMON;
 
         const pokemon: SafariEncounter[] = shuffledPokemon.slice(startIndex, endIndex).map((p) => {
-            return new SafariEncounter(p, 10, true);
+            return new SafariEncounter(p, 10, [SafariEnvironments.Grass], true);
         });
 
         pokemon.push(new SafariEncounter('Shuckle', 2));
@@ -75,7 +86,8 @@ class SafariPokemonList {
         pokemon.push(new SafariEncounter('Woobat', 2));
         pokemon.push(new SafariEncounter('Golurk', 2));
         pokemon.push(new SafariEncounter('Marowak', 2));
-        pokemon.push(new SafariEncounter('Lapras', 2));
+        // Grass and Water
+        pokemon.push(new SafariEncounter('Lapras', 2, [SafariEnvironments.Grass, SafariEnvironments.Water]));
 
         SafariPokemonList.list[GameConstants.Region.kalos](pokemon);
     }

@@ -12,7 +12,7 @@ import Item from './Item';
 import MulchItem from './MulchItem';
 import PokeballItem from './PokeballItem';
 import {
-    BattleItemType, Currency, EggItemType, EnergyRestoreSize, MegaStoneType, Pokeball, PokeBlockColor, Region, VitaminType,
+    BattleItemType, Currency, EggItemType, EnergyRestoreSize, MegaStoneType, Pokeball, PokeBlockColor, Region, VitaminType, ConsumableType,
 } from '../GameConstants';
 import { ShovelItem, MulchShovelItem } from './ShovelItem';
 import PokeBlock from './PokeBlock';
@@ -22,7 +22,7 @@ import EggItem from './EggItem';
 import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
 import ObtainedPokemonRequirement from '../requirements/ObtainedPokemonRequirement';
 import QuestItem from './QuestItem';
-
+import Consumable from './Consumable';
 // eslint-disable-next-line import/prefer-default-export
 export const ItemList: { [name: string]: Item } = {};
 
@@ -162,7 +162,35 @@ ItemList.Pokemon_egg = new EggItem(EggItemType.Pokemon_egg, 1000, undefined, 'Po
 ItemList.Mystery_egg = new EggItem(EggItemType.Mystery_egg, 700, undefined, 'Mystery Egg');
 
 // Quest Items
+ItemList.Meteorite_Bills_Errand = new QuestItem('Meteorite_Bills_Errand', 'Meteorite', 'A Meteorite the Game Corner owner gave you for find his daughter', 'Bill\'s Errand');
+ItemList.Tidal_Bell_Lugia = new QuestItem('Tidal_Bell_Lugia', 'Tidal Bell', 'A Bell that can summon the Legendary Pokémon Lugia', 'Whirl Guardian');
+ItemList.Clear_Bell_Hooh = new QuestItem('Clear_Bell_Hooh', 'Clear Bell', 'A Bell that can summon the Legendary Pokémon Ho-oh', 'Rainbow Guardian');
+ItemList.GS_Ball_Celebi = new QuestItem('GS_Ball_Celebi', 'GS Ball', 'A Strange Pokéball that Professor Ivy gave you', 'Unfinished Business');
+ItemList.Eon_Ticket_Latis = new QuestItem('Eon_Ticket_Latis', 'Eon Ticket', 'A limited edition ticket for a cruise to the Southern Island.', 'The Eon Duo');
 ItemList.Celios_Errand_Ruby = new QuestItem('Celios_Errand_Ruby', 'Ruby', 'A Ruby found in Ruby Path', 'Celio\'s Errand');
+ItemList.Celios_Errand_Sapphire = new QuestItem('Celios_Errand_Sapphire', 'Sapphire', 'A Sapphire you\'ve recovered from Scientist Gideon', 'Celio\'s Errand');
+ItemList.Crystalline_Cocoon_Jirachi = new QuestItem('Crystalline_Cocoon_Jirachi', 'Crystalline Cocoon', 'A Purple Crystal that Butler gave you at Mt. Chimney Crater', 'Wish Maker');
+ItemList.Meteorite_Shard_Delta = new QuestItem('Meteorite_Shard_Delta', 'Meteorite Shard', 'A Shard of a Meteorite', 'The Delta Episode');
+ItemList.Mysterious_Vial_Detective_Pikachu = new QuestItem('Mysterious_Vial_Detective_Pikachu', 'Mysterious Vial', 'An Aipom dropped this while running away, I wonder what it is?', 'Detective Pikachu');
+ItemList.Heart_Diamond_Diancie = new QuestItem('Heart_Diamond_Diancie', 'Heart Diamond', 'The energy core of the Diamond domain', 'Princess Diancie');
+ItemList.Red_Petal_Mina = new QuestItem('Red_Petal_Mina', 'Red Petal', 'One of the Petals you need for Mina\'s trial given by Captain Kiawe', 'Mina\'s Trial');
+ItemList.Orange_Petal_Mina = new QuestItem('Orange_Petal_Mina', 'Orange Petal', 'One of the Petals you need for Mina\'s trial given by Captain Ilima', 'Mina\'s Trial');
+ItemList.Yellow_Petal_Mina = new QuestItem('Yellow_Petal_Mina', 'Yellow Petal', 'One of the Petals you need for Mina\'s trial given by Captain Sophocles', 'Mina\'s Trial');
+ItemList.Green_Petal_Mina = new QuestItem('Green_Petal_Mina', 'Green Petal', 'One of the Petals you need for Mina\'s trial given by Captain Mallow', 'Mina\'s Trial');
+ItemList.Blue_Petal_Mina = new QuestItem('Blue_Petal_Mina', 'Blue Petal', 'One of the Petals you need for Mina\'s trial given by Captain Lana', 'Mina\'s Trial');
+ItemList.Purple_Petal_Mina = new QuestItem('Purple_Petal_Mina', 'Purple Petal', 'One of the Petals you need for Mina\'s trial given by Kahuna Nanu', 'Mina\'s Trial');
+ItemList.Pink_Petal_Mina = new QuestItem('Pink_Petal_Mina', 'Pink Petal', 'One of the Petals you need for Mina\'s trial given by Captain Mina', 'Mina\'s Trial');
+ItemList.Sand_Bag_Magikarp_Jump = new QuestItem('Sand_Bag_Magikarp_Jump', 'Sand Bag', 'One of the materials Dr. Splash asked you for his laboratory', 'Dr. Splash\'s Research Project');
+ItemList.Jump_Counter_Magikarp_Jump = new QuestItem('Jump_Counter_Magikarp_Jump', 'Jump Counter', 'One of the materials Dr. Splash asked you for his laboratory', 'Dr. Splash\'s Research Project');
+ItemList.Timber_Magikarp_Jump = new QuestItem('Timber_Magikarp_Jump', 'Timber', 'One of the materials Dr. Splash asked you for his laboratory', 'Dr. Splash\'s Research Project');
+ItemList.Rock_Cruncher_Magikarp_Jump = new QuestItem('Rock_Cruncher_Magikarp_Jump', 'Rock Cruncher', 'One of the materials Dr. Splash asked you for his laboratory', 'Dr. Splash\'s Research Project');
+ItemList.Power_Generator_Magikarp_Jump = new QuestItem('Power_Generator_Magikarp_Jump', 'Power Generator', 'One of the materials Dr. Splash asked you for his laboratory', 'Dr. Splash\'s Research Project');
+ItemList.Pokeball_Smash_Magikarp_Jump = new QuestItem('Pokeball_Smash_Magikarp_Jump', 'Pokéball Smash', 'One of the materials Dr. Splash asked you for his laboratory', 'Dr. Splash\'s Research Project');
+ItemList.Push_Dwebble_Magikarp_Jump = new QuestItem('Push_Dwebble_Magikarp_Jump', 'Push Dwebble', 'One of the pushing Pokémons Dr. Splash asked you for his laboratory', 'Dr. Splash\'s Research Project');
+ItemList.Push_Boldore_Magikarp_Jump = new QuestItem('Push_Boldore_Magikarp_Jump', 'Push Boldore', 'One of the pushing Pokémons Dr. Splash asked you for his laboratory', 'Dr. Splash\'s Research Project');
+ItemList.Push_Forretress_Magikarp_Jump = new QuestItem('Push_Forretress_Magikarp_Jump', 'Push Forretress', 'One of the pushing Pokémons Dr. Splash asked you for his laboratory', 'Dr. Splash\'s Research Project');
+ItemList.Push_Golem_Magikarp_Jump = new QuestItem('Push_Golem_Magikarp_Jump', 'Push Golem', 'One of the pushing Pokémons Dr. Splash asked you for his laboratory', 'Dr. Splash\'s Research Project');
+ItemList.Push_Steelix_Magikarp_Jump = new QuestItem('Push_Steelix_Magikarp_Jump', 'Push Steelix', 'One of the pushing Pokémons Dr. Splash asked you for his laboratory', 'Dr. Splash\'s Research Project');
 ItemList.Prison_Bottle = new QuestItem('Prison_Bottle', 'Prison Bottle', 'A magical bottle used to bind Hoopa', 'Clash of Ages');
 ItemList.Fighting_Memory_Silvally = new QuestItem('Fighting_Memory_Silvally', 'Fighting Memory', 'One of Silvally\'s memories, obtained from Kahuna Hala in Iki Town', 'Typing some Memories');
 ItemList.Rock_Memory_Silvally = new QuestItem('Rock_Memory_Silvally', 'Rock Memory', 'One of Silvally\'s memories, obtained from Kahuna Olivia in Konikoni City', 'Typing some Memories');
@@ -181,9 +209,11 @@ ItemList.Ghost_Memory_Silvally = new QuestItem('Ghost_Memory_Silvally', 'Ghost M
 ItemList.Psychic_Memory_Silvally = new QuestItem('Psychic_Memory_Silvally', 'Psychic Memory', 'One of Silvally\'s memories, obtained from Aether Branch Chief Faba in Aether Paradise', 'Typing some Memories');
 ItemList.Steel_Memory_Silvally = new QuestItem('Steel_Memory_Silvally', 'Steel Memory', 'One of Silvally\'s memories, obtained from Molayne in Royal Avenue', 'Typing some Memories');
 ItemList.Dragon_Memory_Silvally = new QuestItem('Dragon_Memory_Silvally', 'Dragon Memory', 'One of Silvally\'s memories, obtained from Ryuki in A Tree Maybe', 'Typing some Memories');
+ItemList.Max_Mushroom_IoA = new QuestItem('Max_Mushroom_IoA', 'Max Mushroom', 'A Mushroom that contains the power of Dynamax forms', 'The Dojo\'s Armor');
+ItemList.Shaderoot_Carrot_Calyrex = new QuestItem('Shaderoot_Carrot_Calyrex', 'Shaderoot Carrot', 'Carrot that the King of Bountiful Harvest\'s beloved steed likes to eat. It grew in a gloomy field.', 'The Crown of Galar');
+ItemList.Iceroot_Carrot_Calyrex = new QuestItem('Iceroot_Carrot_Calyrex', 'Iceroot Carrot', 'Carrot that the King of Bountiful Harvest\'s beloved steed likes to eat. It grew in a field covered in snow.', 'The Crown of Galar');
 
 // Vitamins
-// ItemList.RareCandy = new Vitamin(VitaminType.RareCandy, Infinity, undefined, undefined, 'Rare Candy', 'A rare-to-find candy that currently has no use.');
 ItemList.Protein   = new Vitamin(VitaminType.Protein, 1e4, Currency.money, {
     multiplier: 1.1,
     multiplierDecrease: false,
@@ -201,3 +231,6 @@ ItemList.Carbos   = new Vitamin(VitaminType.Carbos, 1e5, Currency.money, {
     saveName: `${VitaminType[VitaminType.Carbos]}|${Currency[Currency.money]}`,
     visible: new MaxRegionRequirement(Region.unova),
 }, undefined, 'Reduces steps required when hatching');
+
+// Consumables
+ItemList.Rare_Candy = new Consumable(ConsumableType.Rare_Candy, Infinity, undefined, undefined, 'Rare Candy', 'Permanently increases the attack of a Pokémon');

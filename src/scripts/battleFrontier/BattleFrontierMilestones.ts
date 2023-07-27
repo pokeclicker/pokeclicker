@@ -69,6 +69,7 @@ BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(30, 'Ultra
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(35, 'xClick', 100));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(40, 'xAttack', 100));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(50, 'SmallRestore', 100));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(75, 'Rare_Candy', 5));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestonePokemon(100, 'Deoxys', new QuestLineStepCompletedRequirement('Mystery of Deoxys', 2)));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(110, 'Water_stone', 10));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(120, 'Leaf_stone', 10));
@@ -87,12 +88,14 @@ BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(230, 'Thun
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(240, 'Moon_stone', 40));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(250, 'Ultraball', 6400));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestonePokemon(251, 'Deoxys (Defense)', new ObtainedPokemonRequirement('Deoxys')));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(275, 'Rare_Candy', 10));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(300, 'Linking_cord', 100));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(310, 'Dragon_scale', 20));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(320, 'Sun_stone', 40));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(330, 'Kings_rock', 20));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(340, 'Metal_coat', 20));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(350, 'Upgrade', 10));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(375, 'Rare_Candy', 15));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestonePokemon(386, 'Deoxys (Speed)', new ObtainedPokemonRequirement('Deoxys')));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(400, 'Soothe_bell', 40));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(410, 'Deepsea_tooth', 10));
@@ -113,5 +116,7 @@ BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(660, 'Sach
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(670, 'Whipped_dream', 15, new MaxRegionRequirement(GameConstants.Region.kalos)));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(690, 'Lopunnite', 1, new MultiRequirement([new MaxRegionRequirement(GameConstants.Region.kalos), new ObtainedPokemonRequirement('Lopunny')])));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(700, 'Ice_stone', 40, new MaxRegionRequirement(GameConstants.Region.alola)));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(750, 'Rare_Candy', 20));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(1000, 'Masterball', 10));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(1500, 'Rare_Candy', 25));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestonePokemon(2000, 'Mismagius (Illusion)', new ObtainedPokemonRequirement('Mismagius')));
