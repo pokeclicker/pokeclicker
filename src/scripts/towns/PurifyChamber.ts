@@ -55,10 +55,6 @@ class PurifyChamber implements Saveable {
         }
         this.selectedPokemon().shadow = GameConstants.ShadowStatus.Purified;
         this.currentFlow(0);
-        const heldItem = this.selectedPokemon().heldItem();
-        if (heldItem && !heldItem.canUse(this.selectedPokemon())) {
-            this.selectedPokemon().heldItem(undefined);
-        }
     }
 
     public gainFlow(exp: number) {
