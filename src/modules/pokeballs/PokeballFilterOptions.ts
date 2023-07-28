@@ -4,7 +4,6 @@ import Setting from '../settings/Setting';
 import GameHelper from '../GameHelper';
 import SettingOption from '../settings/SettingOption';
 import KeyItemType from '../enums/KeyItemType';
-import DevelopmentRequirement from '../requirements/DevelopmentRequirement';
 import Requirement from '../requirements/Requirement';
 import CustomRequirement from '../requirements/CustomRequirement';
 import PokemonType from '../enums/PokemonType';
