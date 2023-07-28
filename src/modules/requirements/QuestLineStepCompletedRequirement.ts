@@ -17,7 +17,8 @@ export default class QuestLineStepCompletedRequirement extends Requirement {
     }
 
     public getProgress(): number {
-        return (this.quest.state() === QuestLineState.ended || this.quest.curQuest() > this.questIndex) ? 1 : 0;
+        return this.quest.state() !== QuestLineState.suspended &&
+            (this.quest.state() === QuestLineState.ended || this.quest.curQuest() > this.questIndex) ? 1 : 0;
     }
 
     public hint(): string {
