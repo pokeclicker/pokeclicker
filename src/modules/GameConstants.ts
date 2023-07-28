@@ -277,6 +277,10 @@ export const LEGAL_WALK_BLOCKS = [
     39, // Tree top right
 ];
 
+export const SAFARI_WATER_BLOCKS = [
+    1, 2, 3, 4, 5, 6, 7, 8, 9,
+];
+
 export const SAFARI_OUT_OF_BALLS = 'Game Over!<br>You have run out of safari balls to use.';
 
 export const FRIEND_SAFARI_POKEMON = 5;

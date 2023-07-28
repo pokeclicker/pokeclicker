@@ -315,6 +315,9 @@ class PokemonFactory {
             case 'White_mane_hair':
                 chance = GameConstants.MANE_ITEM_CHANCE;
                 break;
+            case 'Rare_Candy':
+                chance = GameConstants.HELD_UNDERGROUND_ITEM_CHANCE;
+                break;
         }
 
         chance /= modifier;
