@@ -38,7 +38,7 @@ aria-labelledby="battleCafeModalLabel">
             <hr/>
             <h4>Spin!</h4>
             <div class="pb-2">
-                <span>Spins left today: </span><span data-bind="text: BattleCafeController.spinsLeft()"></span>
+                <span>Remaining Spin Attempts: </span><span data-bind="text: BattleCafeController.spinsLeft()"></span>
             </div>
             <div>
                 <img style="width: 60px;" data-bind="
@@ -47,11 +47,14 @@ aria-labelledby="battleCafeModalLabel">
                 " src="assets/images/profile/trainer-1.png">
             </div>
             <div class="input-group justify-content-center align-items-center pt-3">
-                <label class="m-0 pr-1" for="battleCafeDuration">Spin duration:</label><input style="max-width: 100px;" class="form-control col-4" id="battleCafeDuration" type="number" min="1" max="20" value="3"/>
+                <label class="m-0 pr-1" for="battleCafeDuration">Spin Duration (seconds):</label><input style="max-width: 100px;" class="form-control col-4" id="battleCafeDuration" type="number" min="1" max="20" value="3"/>
             </div>
             <div class="pt-2">
                 <button style="width: 200px;" class="btn btn-primary" onclick="BattleCafeController.spin(true);">Clockwise</button>
                 <button style="width: 200px;" class="btn btn-primary" onclick="BattleCafeController.spin(false);">Counter-Clockwise</button>
+            </div>
+            <div class="pb-2">
+                <span>Spin Attempts Reset at Midnight</span>
             </div>
         </div>
 
