@@ -1036,7 +1036,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Sandshrew', 'Gligar', 'Trapinch'],
     }),
-    [new DevelopmentRequirement(), new QuestLineCompletedRequirement('Shadows in the Desert')],
+    [new DevelopmentRequirement(), new QuestLineStepCompletedRequirement('Shadows in the Desert', 1)],
     undefined,
     HoennSubRegions.Orre,
     true,
@@ -1047,7 +1047,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Hoppip', 'Phanpy', 'Surskit'],
     }),
-    [new DevelopmentRequirement(), new QuestLineCompletedRequirement('Shadows in the Desert')],
+    [new DevelopmentRequirement(), new QuestLineStepCompletedRequirement('Shadows in the Desert', 14)],
     undefined,
     HoennSubRegions.Orre,
     true,
@@ -1058,7 +1058,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Zubat', 'Aron', 'Wooper'],
     }),
-    [new DevelopmentRequirement(), new QuestLineCompletedRequirement('Shadows in the Desert')],
+    [new DevelopmentRequirement(), new QuestLineStepCompletedRequirement('Shadows in the Desert', 17)],
     undefined,
     HoennSubRegions.Orre,
     true,
