@@ -212,7 +212,7 @@ class BreedingController {
             }
 
             const filterID = BreedingFilters.id.value();
-            if (filterID > -1 && filterID != Math.floor(pokemon.id)) {  
+            if (filterID > -1 && filterID != Math.floor(pokemon.id)) {
                 return false;
             }
 
