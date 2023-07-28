@@ -326,10 +326,24 @@ class Quests implements Saveable {
                             ql.resumeAt(questLine.quest, questLine.initial);
                         }
                     } else if (questLine.state == QuestLineState.suspended) {
-                        // Load quest progress so it can be resumed but don't start it
+                        // Suspended quests need to be loaded to preserve progress but should not be started.
                         for (let i = 0; i < Math.min(questLine.quest, ql.totalQuests); i++) {
                             ql.quests()[i].autoCompleter.dispose();
                             ql.quests()[i].complete();
+                        }
+
+                        // When the current step is a multi quest we need to set the initial for each sub-quest.
+                        // Completed sub-quests are preserved and will be populated with the original
+                        // initial value, incomplete sub-quests are set to null to prevent progress.
+                        if (ql.quests()[questLine.quest] instanceof MultipleQuestsQuest) {
+                            // Load the multi quest and restore progress for completed sub-quests.
+                            const quest = ql.quests()[questLine.quest];
+                            quest.initial(0);
+                            quest.onLoad();
+                            ql.curQuestInitial(quest.initial());
+                            ql.curQuestObject().quests.forEach((q, i) => {
+                                q.initial(questLine?.initial[i]);
+                            });
                         }
                     }
                 }

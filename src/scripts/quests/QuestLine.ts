@@ -91,20 +91,48 @@ class QuestLine {
     }
 
     suspendQuest() {
-        if (this.bulletinBoard == GameConstants.BulletinBoards.None) {
-            // Can suspend bulletin board quest lines only
+        if (this.bulletinBoard == GameConstants.BulletinBoards.None || this.state() == QuestLineState.suspended) {
+            // Do nothing if already suspended or not a bulletin board quest
             return;
         }
 
         const q = this.quests()[this.curQuest()];
         if (q instanceof MultipleQuestsQuest) {
-            q.quests.forEach((q) => q.initial(null));
+            q.quests.forEach((q) => {
+                // Set initial to null if not completed to prevent progress while suspended.
+                // Completed parts of multi quests will be preserved.
+                if (!q.isCompleted()) {
+                    q.initial(null);
+                }
+            });
         } else {
             q.initial(null);
         }
 
         this.curQuestInitial(null);
         this.state(QuestLineState.suspended);
+    }
+
+    resumeSuspendedQuest() {
+        if (this.state() != QuestLineState.suspended) {
+            return;
+        }
+
+        // Re-activate suspended quest
+        const q = this.quests()[this.curQuest()];
+        if (q instanceof MultipleQuestsQuest) {
+            // For multi quests, the initial of incomplete parts was set to null to prevent progress.
+            q.quests.forEach((q) => {
+                if (!q.initial()) {
+                    q.begin();
+                }
+            });
+
+            this.curQuestInitial(q.initial());
+            this.state(QuestLineState.started);
+        } else {
+            this.beginQuest(this.curQuest());
+        }
     }
 
     toJSON() {
