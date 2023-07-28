@@ -48,11 +48,11 @@ class Safari {
     });
 
     public static sizeX(): number {
-        return Math.floor(document.querySelector('#safariModal .modal-dialog').scrollWidth / 32);
+        return Math.max(5, Math.floor(document.querySelector('#safariModal .modal-dialog').scrollWidth / 32));
     }
 
     public static sizeY(): number {
-        return Math.floor((window.innerHeight - 250) / 32);
+        return Math.max(5, Math.floor((window.innerHeight - 250) / 32));
     }
 
     public static load() {
@@ -107,7 +107,22 @@ class Safari {
             x = Math.max(0, x - 3);
             y = Math.max(0, y - 3);
         }
-        const res = Safari.canAddBody(x, y, body);
+        let res = Safari.canAddBody(x, y, body);
+
+        // Force the addition of water tiles if there are no water tiles in the grid
+        if (!res && body.type === 'water' && !Safari.hasWaterTiles()) {
+            let attempts = 0;
+            while (!res && attempts++ < 50) {
+                // Create a new WaterBody with minimum X and Y (3x3) after 10 attempts
+                if (attempts === 10) {
+                    body = new WaterBody(3, 3);
+                }
+                x = Safari.getRandomCoord(this.sizeX() - 2);
+                y = Safari.getRandomCoord(this.sizeY() - 2);
+                res = Safari.canAddBody(x, y, body);
+            }
+        }
+
         if (res || body.type === 'grass') {
             Safari.addBody(x, y, body);
         }
@@ -154,6 +169,13 @@ class Safari {
                 }
             }
         }
+    }
+
+    // Check if grid has water tiles
+    private static hasWaterTiles() {
+        // Check if mid center water tile (5) exists
+        // Water body is 3x3 at min so that tile will always appear if there is a water body
+        return Safari.grid.some((row) => row.includes(5));
     }
 
     private static calculateAccessibleTiles() {

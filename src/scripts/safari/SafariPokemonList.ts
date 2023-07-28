@@ -74,7 +74,7 @@ class SafariPokemonList {
         const endIndex = startIndex + GameConstants.FRIEND_SAFARI_POKEMON;
 
         const pokemon: SafariEncounter[] = shuffledPokemon.slice(startIndex, endIndex).map((p) => {
-            return new SafariEncounter(p, 10, [SafariEnvironments.Grass], true);
+            return new SafariEncounter(p, 10, SafariPokemonList.getEnvironmentByPokemonType(p), true);
         });
 
         pokemon.push(new SafariEncounter('Shuckle', 2));
@@ -86,9 +86,27 @@ class SafariPokemonList {
         pokemon.push(new SafariEncounter('Woobat', 2));
         pokemon.push(new SafariEncounter('Golurk', 2));
         pokemon.push(new SafariEncounter('Marowak', 2));
-        // Grass and Water
-        pokemon.push(new SafariEncounter('Lapras', 2, [SafariEnvironments.Grass, SafariEnvironments.Water]));
+        // Water
+        pokemon.push(new SafariEncounter('Lapras', 2, [SafariEnvironments.Water]));
 
         SafariPokemonList.list[GameConstants.Region.kalos](pokemon);
+    }
+
+    // Get SafariEnvironment according to the Pokemon types
+    public static getEnvironmentByPokemonType(p: PokemonNameType) {
+        const pokemon = PokemonHelper.getPokemonByName(p);
+        const safariEnvironments = [];
+        // If Pokemon is water-type, add the water environment
+        if (pokemon.type1 === PokemonType.Water || pokemon.type2 === PokemonType.Water) {
+            safariEnvironments.push(SafariEnvironments.Water);
+        }
+        const pureWater = pokemon.type1 === PokemonType.Water && pokemon.type2 === PokemonType.None;
+        const waterIce = pokemon.type1 === PokemonType.Water && pokemon.type2 === PokemonType.Ice;
+        const iceWater = pokemon.type1 === PokemonType.Ice && pokemon.type2 === PokemonType.Water;
+        // If Pokemon is not pure water, water/ice or ice/water, add the grass environment
+        if (!(pureWater || waterIce || iceWater)) {
+            safariEnvironments.push(SafariEnvironments.Grass);
+        }
+        return safariEnvironments;
     }
 }
