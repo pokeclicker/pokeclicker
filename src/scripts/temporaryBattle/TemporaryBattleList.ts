@@ -971,7 +971,7 @@ TemporaryBattleList['Cipher Peon Naps'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Cipher Peon Naps',
-        imageName: 'Cipher Peon XD (yellow)',
+        imageName: 'Cipher Peon (yellow)',
     }
 );
 TemporaryBattleList['Chobin 1'] = new TemporaryBattle(
@@ -1041,7 +1041,7 @@ TemporaryBattleList['Cipher Peon Smarton'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Cipher Peon Smarton',
-        imageName: 'Cipher Peon XD (yellow)',
+        imageName: 'Cipher Peon (yellow)',
     }
 );
 TemporaryBattleList.Zook = new TemporaryBattle(
