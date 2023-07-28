@@ -186,17 +186,17 @@ class BreedingController {
     // Queue size limit setting
     public static queueSizeLimit = ko.observable(-1);
 
-    private static cachedFilteredList;
+    private static cachedSortedFilteredList;
 
     public static hatcherySortedFilteredList = ko.pureComputed(() => {
         // If the breeding modal is open, we should sort it.
-        if (modalUtils.observableState.breedingModal === 'show' || !BreedingController.cachedFilteredList) {
-            BreedingController.cachedFilteredList = BreedingController.getFilteredList();
+        if (modalUtils.observableState.breedingModal === 'show' || !BreedingController.cachedSortedFilteredList) {
+            BreedingController.cachedSortedFilteredList = BreedingController.getFilteredList();
             // Don't adjust attack based on region if debuff is disabled
             const region = App.game.challenges.list.regionalAttackDebuff.active() ? BreedingController.regionalAttackDebuff() : -1;
-            BreedingController.cachedFilteredList.sort(PartyController.compareBy(Settings.getSetting('hatcherySort').observableValue(), Settings.getSetting('hatcherySortDirection').observableValue(), region));
+            BreedingController.cachedSortedFilteredList.sort(PartyController.compareBy(Settings.getSetting('hatcherySort').observableValue(), Settings.getSetting('hatcherySortDirection').observableValue(), region));
         }
-        return BreedingController.cachedFilteredList;
+        return BreedingController.cachedSortedFilteredList;
     }).extend({ rateLimit: 500 });
 
     // Filters pokemon that can never match filters out of the hatchery list
@@ -217,7 +217,7 @@ class BreedingController {
             }
 
             // Check to filter out already-shiny
-            if (BreedingFilters.shinyStatus.value() == 0) {
+            if (BreedingFilters.shinyStatus.value() > -1) {
                 if (+pokemon.shiny !== BreedingFilters.shinyStatus.value()) {
                     return false;
                 }
@@ -235,7 +235,7 @@ class BreedingController {
 
             // Check to filter out Pokerus already-infected
             if (BreedingFilters.pokerus.value() > -1) {
-                if (pokemon.pokerus > BreedingFilters.pokerus.value()) {
+                if (pokemon.pokerus !== BreedingFilters.pokerus.value()) {
                     return false;
                 }
             }
@@ -247,11 +247,11 @@ class BreedingController {
                 return false;
             }
             // Only Base Pokémon without Mega Evolution
-            if (uniqueTransformation == 'mega-unobtained' && !(PokemonHelper.hasMegaEvolution(basePokemon.name) && (basePokemon as DataPokemon).evolutions?.some((e) => !App.game.party.alreadyCaughtPokemonByName(e.evolvedPokemon)))) {
-                return true;
+            if (uniqueTransformation == 'mega-unobtained' && !(PokemonHelper.hasMegaEvolution(basePokemon.name) && (basePokemon as DataPokemon).evolutions?.some((e) => !App.game.party.alreadyCaughtPokemonByName(e.evolvedPokemon) && e.restrictions.some((r) => r instanceof MegaEvolveRequirement)))) {
+                return false;
             }
             // Only Mega Pokémon
-            if (uniqueTransformation == 'mega-evolution' && !(PokemonHelper.getPokemonPrevolution(basePokemon.name)?.some((e) => PokemonHelper.hasMegaEvolution(e.basePokemon)))) {
+            if (uniqueTransformation == 'mega-evolution' && !(PokemonHelper.getPokemonPrevolution(basePokemon.name)?.some((e) => e.restrictions.some((r) => r instanceof MegaEvolveRequirement)))) {
                 return false;
             }
 
@@ -272,5 +272,5 @@ class BreedingController {
 
             return true;
         });
-    });
+    }).extend({ rateLimit: 1000 });
 }

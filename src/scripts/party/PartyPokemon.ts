@@ -345,8 +345,12 @@ class PartyPokemon implements Saveable {
     });
 
     public isHatchable = ko.pureComputed(() => {
+        return !(this.breeding || this.level < 100);
+    });
+
+    public isHatchableFiltered = ko.pureComputed(() => {
         // Only breedable Pokemon
-        if (this.breeding || this.level < 100) {
+        if (!this.isHatchable) {
             return false;
         }
 
@@ -425,46 +429,6 @@ class PartyPokemon implements Saveable {
         }
 
         return true;
-    });
-
-    public hideFromBreedingList = ko.pureComputed(() => {
-        // Check based on category
-        if (BreedingFilters.category.value() >= 0) {
-            if (this.category !== BreedingFilters.category.value()) {
-                return true;
-            }
-        }
-
-        // Check based on shiny status
-        if (BreedingFilters.shinyStatus.value() >= 0) {
-            if (+this.shiny !== BreedingFilters.shinyStatus.value()) {
-                return true;
-            }
-        }
-
-        // check based on Pokerus status
-        if (BreedingFilters.pokerus.value() > -1) {
-            if (this.pokerus !== BreedingFilters.pokerus.value()) {
-                return true;
-            }
-        }
-
-        const uniqueTransformation = BreedingFilters.uniqueTransformation.value();
-        const pokemon = PokemonHelper.getPokemonById(this.id);
-        // Only Base Pokémon with Mega available
-        if (uniqueTransformation == 'mega-available' && !PokemonHelper.hasMegaEvolution(pokemon.name)) {
-            return true;
-        }
-        // Only Base Pokémon without Mega Evolution
-        if (uniqueTransformation == 'mega-unobtained' && !(PokemonHelper.hasMegaEvolution(pokemon.name) && (pokemon as DataPokemon).evolutions?.some((e) => !App.game.party.alreadyCaughtPokemonByName(e.evolvedPokemon)))) {
-            return true;
-        }
-        // Only Mega Pokémon
-        if (uniqueTransformation == 'mega-evolution' && !(PokemonHelper.getPokemonPrevolution(pokemon.name)?.some((e) => PokemonHelper.hasMegaEvolution(e.basePokemon)))) {
-            return true;
-        }
-
-        return false;
     });
 
     public hideFromProteinList = ko.pureComputed(() => {
