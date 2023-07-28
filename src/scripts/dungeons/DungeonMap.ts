@@ -24,15 +24,7 @@ class DungeonMap {
 
         // Move the boss or ladder if it spawns on the player.
         this.floorSizes.forEach((size, index) => {
-            const endTileType = index == this.floorSizes.length - 1 ? GameConstants.DungeonTile.boss : GameConstants.DungeonTile.ladder;
             const entranceTile = this.board()[index][size - 1][Math.floor(size / 2)];
-            if (entranceTile.type() == endTileType) {
-                entranceTile.type(GameConstants.DungeonTile.entrance);
-                const newX = Rand.intBetween(0, size - 1);
-                const newY = Rand.intBetween(0, size - 2); // Don't allow it to be on the bottom row
-                this.board()[index][newY][newX].type(endTileType);
-                this.board()[index][newY][newX].calculateCssClass();
-            }
             entranceTile.type(GameConstants.DungeonTile.entrance);
             entranceTile.isVisible = true;
             entranceTile.isVisited = true;
@@ -166,7 +158,7 @@ class DungeonMap {
             // Shuffle the tiles randomly
             this.shuffle(mapList);
             // Make sure the player tile is empty
-            while (mapList[mapList.length - Math.floor(size / 2) - 1].type() != GameConstants.DungeonTile.empty) {
+            while (mapList[mapList.length - Math.ceil(size / 2)].type() != GameConstants.DungeonTile.empty) {
                 this.shuffle(mapList);
             }
 
