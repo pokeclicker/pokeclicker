@@ -5,6 +5,22 @@ class PokemonContest implements Feature {
     public lastEnteredDate: KnockoutObservable<Date>;
     public entries: KnockoutObservableArray<ContestEntry>;
 
+    public rewards = [
+        new PokemonContestReward('10 Rare Candy',
+            'Get 10 Rare Candy by catching a Machop! (real requirement will be added later)',
+            'Rare_Candy',
+            10,
+            new ObtainedPokemonRequirement('Machop')
+        ),
+        new PokemonContestReward('Secret Mega Stone',
+            'Get a secret Mega Stone for reaching Kalos. (real requirement will be added later)',
+            'Altarianite',
+            10,
+            new MaxRegionRequirement(GameConstants.Region.kalos),
+            new MaxRegionRequirement(GameConstants.Region.kalos)
+        ),
+    ];
+
     constructor() {
         this.lastEnteredDate = ko.observable(undefined);
         this.entries = ko.observableArray(Array(3).fill(undefined).map(() => new ContestEntry()));
@@ -157,5 +173,41 @@ class PokemonContestTownContent extends TownContent {
     }
     public onclick(): void {
         $('#pokemonContestModal').modal('show');
+    }
+}
+
+class PokemonContestReward {
+    private item: Item;
+    public claimed: KnockoutObservable<boolean> = ko.observable<boolean>(false);
+
+    constructor(
+        public title: string,
+        public description: string,
+        itemName: ItemNameType,
+        private amount: number,
+        private claimRequirement: Requirement,
+        private visibleRequirement?: Requirement
+    ) {
+        this.item = ItemList[itemName];
+    }
+
+    getImage() {
+        return this.item.image;
+    }
+
+    isVisible() {
+        return this.item.isAvailable() && !this.item.isSoldOut() && (!this.visibleRequirement || this.visibleRequirement.isCompleted());
+    }
+
+    canBeClaimed() {
+        return !this.claimed() && this.claimRequirement.isCompleted();
+    }
+
+    claim() {
+        if (!this.canBeClaimed()) {
+            return;
+        }
+        this.claimed(true);
+        this.item.gain(this.amount);
     }
 }
