@@ -96,20 +96,13 @@ class QuestLine {
             return;
         }
 
-        const q = this.quests()[this.curQuest()];
-        if (q instanceof MultipleQuestsQuest) {
-            q.quests.forEach((q) => {
-                // Set initial to null if not completed to prevent progress while suspended.
-                // Completed parts of multi quests will be preserved.
-                if (!q.isCompleted()) {
-                    q.initial(null);
-                }
-            });
-        } else {
-            q.initial(null);
+        // Mark quest (or sub quests if multi quest) as suspended to prevent progress
+        const quest = this.quests()[this.curQuest()];
+        if (quest instanceof MultipleQuestsQuest) {
+            quest.quests.forEach((q) => q.suspended = true);
         }
 
-        this.curQuestInitial(null);
+        quest.suspended = true;
         this.state(QuestLineState.suspended);
     }
 
@@ -119,20 +112,13 @@ class QuestLine {
         }
 
         // Re-activate suspended quest
-        const q = this.quests()[this.curQuest()];
-        if (q instanceof MultipleQuestsQuest) {
-            // For multi quests, the initial of incomplete parts was set to null to prevent progress.
-            q.quests.forEach((q) => {
-                if (!q.initial()) {
-                    q.begin();
-                }
-            });
-
-            this.curQuestInitial(q.initial());
-            this.state(QuestLineState.started);
-        } else {
-            this.beginQuest(this.curQuest());
+        const quest = this.quests()[this.curQuest()];
+        if (quest instanceof MultipleQuestsQuest) {
+            quest.quests.forEach((q) => q.suspended = false);
         }
+
+        quest.suspended = false;
+        this.state(QuestLineState.started);
     }
 
     toJSON() {
@@ -140,7 +126,7 @@ class QuestLine {
             state: this.state(),
             name: this.name,
             quest: this.curQuest(),
-            initial: this.curQuestInitial(),
+            initial: this.curQuestObject().initial?.() ?? this.curQuestInitial(),
         };
         if (this.curQuestObject() instanceof MultipleQuestsQuest) {
             json.initial = this.curQuestObject().quests.map((q) => q.initial());

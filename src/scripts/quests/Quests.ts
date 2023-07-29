@@ -316,7 +316,7 @@ class Quests implements Saveable {
                 const ql = this.getQuestLine(questLine.name);
                 if (ql) {
                     ql.state(questLine.state);
-                    if (questLine.state == QuestLineState.started) {
+                    if (questLine.state == QuestLineState.started || questLine.state == QuestLineState.suspended) {
                         if (ql.quests()[questLine.quest] instanceof MultipleQuestsQuest) {
                             ql.resumeAt(questLine.quest, 0);
                             ql.curQuestObject().quests.forEach((q, i) => {
@@ -325,25 +325,8 @@ class Quests implements Saveable {
                         } else {
                             ql.resumeAt(questLine.quest, questLine.initial);
                         }
-                    } else if (questLine.state == QuestLineState.suspended) {
-                        // Suspended quests need to be loaded to preserve progress but should not be started.
-                        for (let i = 0; i < Math.min(questLine.quest, ql.totalQuests); i++) {
-                            ql.quests()[i].autoCompleter.dispose();
-                            ql.quests()[i].complete();
-                        }
-
-                        // When the current step is a multi quest we need to set the initial for each sub-quest.
-                        // Completed sub-quests are preserved and will be populated with the original
-                        // initial value, incomplete sub-quests are set to null to prevent progress.
-                        if (ql.quests()[questLine.quest] instanceof MultipleQuestsQuest) {
-                            // Load the multi quest and restore progress for completed sub-quests.
-                            const quest = ql.quests()[questLine.quest];
-                            quest.initial(0);
-                            quest.onLoad();
-                            ql.curQuestInitial(quest.initial());
-                            ql.curQuestObject().quests.forEach((q, i) => {
-                                q.initial(questLine?.initial[i]);
-                            });
+                        if (questLine.state == QuestLineState.suspended) {
+                            ql.suspendQuest();
                         }
                     }
                 }
