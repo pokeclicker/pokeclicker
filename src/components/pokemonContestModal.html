@@ -21,10 +21,6 @@
                     <div>
                         <span class="text-danger font-weight-bold">Type:</span>
                         <knockout data-bind="text: PokemonType[PokemonContestController.pokemonType()]"></knockout>
-                        <!--<span class="text-danger font-weight-bold">Type:</span>
-                        <span class="badge text-light" data-bind="text: PokemonType[PokemonType.Poison].toUpperCase(), style: { 'background-color': TypeColor[PokemonType.Poison] }">
-
-                        </span>-->
                     </div>
                 </div>
                 <div class="tab-content my-2">
@@ -55,21 +51,12 @@
                                         </select>
                                     </div>
                                 </div>
-                                <!--<div class="mt-3">
-                                    <div class="small">Style Points: <knockout data-bind="text: $data.getStylePoints()">0</knockout></div>
-                                </div>-->
                             </div>
                         </div>
-                        <!--<div class="bg-secondary shadow py-2">
-                            <strong>Total Style Points: <knockout data-bind="text: PokemonContestController.getTotalStylePoints()">0</knockout></strong>
-                        </div>-->
                         <hr class="bg-secondary" />
                         <div class="my-3">
                             <button type="button" class="btn btn-primary w-50">Enter Contest!</button>
                         </div>
-                        <!--<div class="my-3">
-                            <p class="mb-0 text-warning">The contest will begin shortly...</p>
-                        </div>-->
                     </div>
                     <div class="tab-pane fade" id="contest-prizes-tab" role="tabpanel">
                         <span>prizes tab</span>
