@@ -1,6 +1,6 @@
 class PokemonContest implements Feature {
-    name: 'Pokemon Contest';
-    saveKey: 'pokemonContest';
+    name = 'Pokemon Contest';
+    saveKey = 'pokemonContest';
 
     public lastEnteredDate: KnockoutObservable<Date>;
     public entries: KnockoutObservableArray<ContestEntry>;
@@ -39,10 +39,20 @@ class PokemonContest implements Feature {
 
     defaults: Record<string, any>;
     toJSON(): Record<string, any> {
-        throw new Error('Method not implemented.');
+        return {
+            prizes: this.prizes.map(p => p.toJSON()),
+        };
     }
     fromJSON(json: Record<string, any>): void {
-        throw new Error('Method not implemented.');
+        if (!json) {
+            return;
+        }
+        this.prizes.forEach(p => {
+            const jsonPrize = json?.prizes.find(p2 => p2.title == p.title);
+            if (jsonPrize) {
+                p.fromJSON(jsonPrize);
+            }
+        });
     }
 }
 
@@ -209,5 +219,17 @@ class PokemonContestPrizes {
         }
         this.claimed(true);
         this.item.gain(this.amount);
+    }
+
+    toJSON(): Record<string, any> {
+        return {
+            title: this.title,
+            claimed: this.claimed(),
+        };
+    }
+    fromJSON(json: Record<string, any>): void {
+        if (json) {
+            this.claimed(json.claimed);
+        }
     }
 }
