@@ -170,9 +170,6 @@ TemporaryBattleList['Blue 5'] = new TemporaryBattle(
     {
         displayName: 'Rival Blue',
         imageName: 'Blue2',
-        firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonByName('Lapras');
-        },
     }
 );
 TemporaryBattleList['Biker Goon 1'] = new TemporaryBattle(
@@ -917,7 +914,7 @@ TemporaryBattleList.Folly = new TemporaryBattle(
     undefined,
     {
         displayName: 'Shady Guy',
-        imageName: 'Peon (folly)',
+        imageName: 'Miror B. Peon (folly)',
     }
 );
 TemporaryBattleList['Cipher Peon Doven'] = new TemporaryBattle(
@@ -971,7 +968,7 @@ TemporaryBattleList['Cipher Peon Naps'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Cipher Peon Naps',
-        imageName: 'Cipher Peon (male)',
+        imageName: 'Cipher Peon (yellow)',
     }
 );
 TemporaryBattleList['Chobin 1'] = new TemporaryBattle(
@@ -1041,7 +1038,7 @@ TemporaryBattleList['Cipher Peon Smarton'] = new TemporaryBattle(
     undefined,
     {
         displayName: 'Cipher Peon Smarton',
-        imageName: 'Cipher Peon (male)',
+        imageName: 'Cipher Peon (yellow)',
     }
 );
 TemporaryBattleList.Zook = new TemporaryBattle(
@@ -4704,13 +4701,10 @@ TemporaryBattleList.Eternatus = new TemporaryBattle(
 TemporaryBattleList['The Darkest Day'] = new TemporaryBattle(
     'The Darkest Day',
     [new GymPokemon('Eternamax Eternatus', 1567895148, 60)],
-    '<b><i>You caught Eternatus!</i></b>',
+    '<b><i>You finally defeated Eternatus!</i></b>',
     [new TemporaryBattleRequirement('Eternatus')],
     undefined,
     {
-        firstTimeRewardFunction: () => {
-            App.game.party.gainPokemonByName('Eternatus');
-        },
         hideTrainer: true,
         imageName: '../pokemon/890',
     }
