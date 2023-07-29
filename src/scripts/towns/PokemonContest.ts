@@ -5,14 +5,14 @@ class PokemonContest implements Feature {
     public lastEnteredDate: KnockoutObservable<Date>;
     public entries: KnockoutObservableArray<ContestEntry>;
 
-    public rewards = [
-        new PokemonContestReward('10 Rare Candy',
+    public prizes = [
+        new PokemonContestPrizes('10 Rare Candy',
             'Get 10 Rare Candy by catching a Machop! (real requirement will be added later)',
             'Rare_Candy',
             10,
             new ObtainedPokemonRequirement('Machop')
         ),
-        new PokemonContestReward('Secret Mega Stone',
+        new PokemonContestPrizes('Secret Mega Stone',
             'Get a secret Mega Stone for reaching Kalos. (real requirement will be added later)',
             'Altarianite',
             10,
@@ -176,7 +176,7 @@ class PokemonContestTownContent extends TownContent {
     }
 }
 
-class PokemonContestReward {
+class PokemonContestPrizes {
     private item: Item;
     public claimed: KnockoutObservable<boolean> = ko.observable<boolean>(false);
 
