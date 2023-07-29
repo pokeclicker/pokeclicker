@@ -8,9 +8,6 @@ class PurifyChamberTownContent extends TownContent {
     public text(): string {
         return 'Purify Chamber';
     }
-    public isVisible(): boolean {
-        return true;
-    }
     public onclick(): void {
         $('#purifyChamberModal').modal('show');
     }

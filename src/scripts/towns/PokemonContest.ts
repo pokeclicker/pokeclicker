@@ -151,10 +151,6 @@ class PokemonContestTownContent extends TownContent {
     public text(): string {
         return 'Pokémon Contest';
     }
-    public isVisible(): boolean {
-        //return true;
-        return new DevelopmentRequirement().isCompleted();
-    }
     public onclick(): void {
         $('#pokemonContestModal').modal('show');
     }

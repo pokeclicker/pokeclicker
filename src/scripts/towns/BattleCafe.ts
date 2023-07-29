@@ -6,9 +6,6 @@ class BattleCafe extends TownContent {
     public cssClass() {
         return 'btn btn-info';
     }
-    public isVisible() {
-        return true;
-    }
 
     public onclick(): void {
         $('#battleCafeModal').modal('show');

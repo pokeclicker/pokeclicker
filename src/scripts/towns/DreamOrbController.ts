@@ -137,9 +137,6 @@ class DreamOrbTownContent extends TownContent {
     public text(): string {
         return 'Open Dream Orbs';
     }
-    public isVisible(): boolean {
-        return true;
-    }
     public onclick(): void {
         $('#dreamOrbsModal').modal('show');
     }

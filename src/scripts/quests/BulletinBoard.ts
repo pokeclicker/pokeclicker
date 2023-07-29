@@ -23,9 +23,6 @@ class BulletinBoard extends TownContent {
     public text(): string {
         return 'Bulletin Board';
     }
-    public isVisible(): boolean {
-        return true;
-    }
     public onclick(): void {
         BulletinBoard.selectedBulletinBoard(this);
         $('#bulletinBoardModal').modal('show');

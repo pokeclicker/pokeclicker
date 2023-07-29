@@ -34,9 +34,6 @@ class Gym extends TownContent {
     public text(): string {
         return this.buttonText;
     }
-    public isVisible(): boolean {
-        return true;
-    }
     public onclick(): void {
         GymRunner.startGym(this);
     }
