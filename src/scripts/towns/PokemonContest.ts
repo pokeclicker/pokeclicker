@@ -141,3 +141,21 @@ enum ContestStyle {
     Tough,
 }
 
+class PokemonContestTownContent extends TownContent {
+    constructor() {
+        super([new DevelopmentRequirement()]);
+    }
+    public cssClass(): string {
+        return 'btn btn-primary';
+    }
+    public text(): string {
+        return 'Pokémon Contest';
+    }
+    public isVisible(): boolean {
+        //return true;
+        return new DevelopmentRequirement().isCompleted();
+    }
+    public onclick(): void {
+        $('#pokemonContestModal').modal('show');
+    }
+}

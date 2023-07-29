@@ -8,6 +8,7 @@
 ///<reference path="../../declarations/requirements/MultiRequirement.d.ts"/>
 ///<reference path="../safari/SafariTownContent.ts"/>
 ///<reference path="PurifyChamber.ts"/>
+///<reference path="PokemonContest.ts"/>
 
 const TownList: { [name: string]: Town } = {};
 
@@ -3060,7 +3061,7 @@ TownList['Lilycove City'] = new Town(
     'Lilycove City',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [DepartmentStoreShop], // HoennContestShop
+    [DepartmentStoreShop, new PokemonContestTownContent()], // HoennContestShop
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 121)],
     }
