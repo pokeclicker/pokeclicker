@@ -9768,18 +9768,6 @@ dungeonList['Sacred Plaza'] = new Dungeon('Sacred Plaza',
     ],
     96500, 1);
 
-dungeonList['Crevasse Passage'] = new Dungeon('Crevasse Passage',
-    ['Bergmite'],
-    {
-        common: [
-            {loot: 'Token_collector', weight: 2},
-            {loot: 'Aspear'},
-        ],
-    },
-    2603000,
-    [new DungeonBossPokemon('Bergmite', 10000000, 51)],
-    96500, 1);
-
 dungeonList['Avalugg\'s Legacy'] = new Dungeon('Avalugg\'s Legacy',
     ['Bergmite', 'Swinub', 'Piloswine', 'Drifloon', 'Drifblim', 'Bibarel', 'Glalie', 'Froslass'],
     {

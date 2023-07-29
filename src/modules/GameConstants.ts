@@ -1410,7 +1410,6 @@ export const HisuiDungeons = [
     'Clamberclaw Cliffs',
     'Celestica Ruins',
     'Sacred Plaza',
-    'Crevasse Passage',
     'Avalugg\'s Legacy',
     'Ice Column Chamber',
     'Icepeak Cavern',
@@ -1418,7 +1417,7 @@ export const HisuiDungeons = [
     'Seaside Hollow',
     'Ancient Lake Verity',
     'Ancient Lake Valor',
-    'Ancient Lake Acuity', // 203
+    'Ancient Lake Acuity', // 202
 ];
 
 export const RegionDungeons = [

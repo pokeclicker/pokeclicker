@@ -7982,12 +7982,6 @@ TownList['Sacred Plaza'] = new DungeonTown(
     GameConstants.HisuiSubRegions.Hisui,
     [new DevelopmentRequirement()]
 );
-TownList['Crevasse Passage'] = new DungeonTown(
-    'Crevasse Passage',
-    GameConstants.Region.hisui,
-    GameConstants.HisuiSubRegions.Hisui,
-    [new DevelopmentRequirement()]
-);
 TownList['Avalugg\'s Legacy'] = new DungeonTown(
     'Avalugg\'s Legacy',
     GameConstants.Region.hisui,
