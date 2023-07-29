@@ -15,6 +15,15 @@ class PurifyChamberTownContent extends TownContent {
         $('#purifyChamberModal').modal('show');
     }
 
+    public areaStatus(): areaStatus {
+        if (!PurifyChamber.requirements.isCompleted()) {
+            return super.areaStatus();
+        }
+        if (App.game.purifyChamber.currentFlow() >= App.game.purifyChamber.flowNeeded() && App.game.party.caughtPokemon.some(p => p.shadow == GameConstants.ShadowStatus.Shadow)) {
+            return areaStatus.uncaughtPokemon;
+        }
+    }
+
 }
 
 class PurifyChamber implements Saveable {
