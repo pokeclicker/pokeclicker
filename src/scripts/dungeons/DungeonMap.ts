@@ -140,27 +140,25 @@ class DungeonMap {
                 mapList.push(new DungeonTile(GameConstants.DungeonTile.ladder, null));
             }
 
-            // Chests (leave 1 space for enemy and 1 space for empty tile)
+            // Chests (leave 1 space for enemy and 1 space for entrance)
             for (let i = 0; i < size && mapList.length < size * size - 2; i++) {
                 mapList.push(new DungeonTile(GameConstants.DungeonTile.chest, this.generateChestLoot()));
             }
 
-            // Enemy Pokemon (leave 1 space for empty tile)
+            // Enemy Pokemon (leave 1 space for entrance)
             for (let i = 0; i < size * 2 + 3 && mapList.length < size * size - 1; i++) {
                 mapList.push(new DungeonTile(GameConstants.DungeonTile.enemy, null));
             }
 
-            // Fill with empty tiles
-            for (let i: number = mapList.length; i < size * size; i++) {
+            // Fill with empty tiles (leave 1 space for entrance)
+            for (let i: number = mapList.length; i < size * size - 1; i++) {
                 mapList.push(new DungeonTile(GameConstants.DungeonTile.empty, null));
             }
 
             // Shuffle the tiles randomly
             this.shuffle(mapList);
-            // Make sure the player tile is empty
-            while (mapList[mapList.length - Math.ceil(size / 2)].type() != GameConstants.DungeonTile.empty) {
-                this.shuffle(mapList);
-            }
+            // Then place the empty tile for entrance
+            mapList.splice(mapList.length + 1 - Math.ceil(size / 2), 0, new DungeonTile(GameConstants.DungeonTile.empty, null));
 
             // Create a 2d array
             const floor: DungeonTile[][] = [];
