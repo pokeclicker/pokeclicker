@@ -75,3 +75,9 @@ export const WeatherRestrictedLevelEvolution = weatherRestrict(LevelEvolution);
 const KeyStoneEvolution = (basePokemon: PokemonNameType, evolvedPokemon: PokemonNameType) => StoneEvolution(basePokemon, evolvedPokemon, StoneType.Key_stone);
 
 export const MegaEvolution = megaEvolveRestrict(KeyStoneEvolution);
+
+// DayTimedMegaEvolution(megaStone: GameConstants.MegaStoneType, basePokemon: string, evolvedPokemon: string)
+export const DayTimedMegaEvolution = dayRestrict(MegaEvolution);
+
+// NightTimedMegaEvolution(megaStone: GameConstants.MegaStoneType, basePokemon: string, evolvedPokemon: string)
+export const NightTimedMegaEvolution = nightRestrict(MegaEvolution);

@@ -7,6 +7,7 @@ type TemporaryBattleOptionalArgument = {
     imageName?: string,
     visibleRequirement?: Requirement,
     hideTrainer?: boolean,
+    environment?: GameConstants.Environment
 };
 
 class TemporaryBattle extends TownContent {
@@ -29,8 +30,8 @@ class TemporaryBattle extends TownContent {
     public areaStatus() {
         if (!this.isUnlocked()) {
             return areaStatus.locked;
-        } else if (App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(this.name)]() == 0) {
-            return areaStatus.unlockedUnfinished;
+        } else if (App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(this.name)]() == 0 && this.isVisible()) {
+            return areaStatus.incomplete;
         } else {
             return areaStatus.completed;
         }

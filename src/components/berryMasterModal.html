@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content" data-bind="let: { shopVisible: ko.observable(true) }">
             <div class="modal-header text-center">
-                <h4>Berry Master</h4>
+                <h4 data-bind="text: ShopHandler.shopObservable().displayName">Berry Master</h4>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">&times;</button>
             </div>
             <div>
@@ -56,8 +56,9 @@
                                             </knockout>
                                             <knockout data-bind="if: ($parent.item.itemType instanceof PokemonItem)">
                                                 <span style="position: relative; top: -1px;"
-                                                    data-bind="template: { name: 'pokerusStatusTemplate',
-                                                        data: { 'pokerus': $parent.item.itemType.getPokerusStatus(), 'width': '32px' }}">
+                                                    data-bind="template: { name: 'pokerusStatusTemplate', data: {
+                                                        'pokerus': $parent.item.itemType.getPokerusStatus(), 'width': '32px',
+                                                        'evs': App.game.party.getPokemonByName($parent.item.itemType.type)?.evs() }}">
                                                 </span>
                                             </knockout>
                                         </span>

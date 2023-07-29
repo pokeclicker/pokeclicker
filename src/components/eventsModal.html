@@ -16,17 +16,26 @@
                        <th>Description</th>
                        <th>Start Time</th>
                        <th>End Time</th>
+                       <!-- ko if: App.game.keyItems.hasKeyItem(KeyItemType.Event_calendar) -->
+                       <th>Activate</th>
+                       <!-- /ko -->
                      </tr>
                    </thead>
-                   <tbody data-bind="foreach: SpecialEvents.events.sort((a, b) => a.startTime - b.startTime)">
-                     <!-- ko if: Date.now() < endTime -->
+                   <tbody data-bind="foreach: Object.values(App.game.specialEvents.events).sort((a, b) => a.startTime - b.startTime)">
                      <tr>
-                       <td data-bind="text: title"></td>
-                       <td class="text-left" data-bind="html: description"></td>
-                       <td class="text-left"><code data-bind="text: startTime.toLocaleString()">-</code></td>
-                       <td class="text-left"><code data-bind="text: endTime.toLocaleString()">-</code></td>
+                        <td data-bind="text: title"></td>
+                        <td class="text-left" data-bind="html: description"></td>
+                        <!-- ko ifnot: isActive()-->
+                        <td class="text-left"><code data-bind="text: startTime.toLocaleString()">-</code></td>
+                        <td class="text-left"><code data-bind="text: endTime.toLocaleString()">-</code></td>
+                        <!-- /ko -->
+                        <!-- ko if: isActive()-->
+                        <td class="text-left" colspan="2">Time left: <code data-bind="text: timeLeft()">-</code></td>
+                        <!-- /ko -->
+                        <!-- ko if: App.game.keyItems.hasKeyItem(KeyItemType.Event_calendar) && !hideFromEventCalendar -->
+                        <td><button class="btn btn-primary" data-bind="enable: !isActive(), click: eventCalendarActivate">Activate</button></td>
+                        <!-- /ko -->
                      </tr>
-                     <!-- /ko -->
                    </tbody>
                </table>
            </div>

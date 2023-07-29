@@ -173,4 +173,40 @@ export default class GameHelper {
         tomorrow.setMilliseconds(0);
         return tomorrow;
     }
+
+    // Check if HTML container with the given ID is overflowing horizontally
+    public static isOverflownX(htmlID) {
+        const element = document.querySelector(htmlID);
+        return element.scrollWidth > element.clientWidth;
+    }
+
+    // Get scroll bar size (in pixels)
+    public static getScrollBarSize() {
+        var $outer = $('<div>').css({ visibility: 'hidden', width: 100, overflow: 'scroll' }).appendTo('body'),
+            widthWithScroll = $('<div>').css({ width: '100%' }).appendTo($outer).outerWidth();
+        $outer.remove();
+        return 100 - widthWithScroll;
+    }
+
+    /**
+     * Insecure hash, but should keep some of the nosy people out.
+     * @param text
+     */
+    public static hash(text: string): number {
+        let hash = 0;
+        let i = 0;
+        let chr = 0;
+        if (text.length === 0) {
+            return hash;
+        }
+
+        for (i = 0; i < text.length; i++) {
+            chr = text.charCodeAt(i);
+            // eslint-disable-next-line no-bitwise
+            hash = ((hash << 5) - hash) + chr;
+            // eslint-disable-next-line no-bitwise
+            hash |= 0; // Convert to 32bit integer
+        }
+        return hash;
+    }
 }

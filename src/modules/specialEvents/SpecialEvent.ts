@@ -1,7 +1,8 @@
 import SpecialEventNotifiedStatus from './SpecialEventsNotifiedStatus';
 import Notifier from '../notifications/Notifier';
 import NotificationConstants from '../notifications/NotificationConstants';
-import { DAY, HOUR, formatTimeShortWords } from '../GameConstants';
+import { DAY, HOUR, formatTimeShortWords, formatTime, Currency, SPECIAL_EVENT_TICK, SECOND } from '../GameConstants';
+import NotificationOption from '../notifications/NotificationOption';
 
 type EmptyCallback = () => void;
 
@@ -14,22 +15,29 @@ export enum SpecialEventStatus {
 export default class SpecialEvent {
     title: string;
     description: string;
-    status: SpecialEventStatus = SpecialEventStatus.none;
+    status: KnockoutObservable<SpecialEventStatus>;
     startTime: Date;
     startFunction: EmptyCallback;
     endTime: Date;
     endFunction: EmptyCallback;
+    hideFromEventCalendar: boolean;
+    eventCalendarTimeLeft: KnockoutObservable<number>;
+    isActive: KnockoutObservable<boolean>;
 
     // TODO: only notify once initially until event about to start/end
     notified: SpecialEventNotifiedStatus;
 
-    constructor(title: string, description: string, startTime: Date, startFunction: EmptyCallback, endTime: Date, endFunction: EmptyCallback) {
+    constructor(title: string, description: string, startTime: Date, startFunction: EmptyCallback, endTime: Date, endFunction: EmptyCallback, hideFromEventCalendar: boolean) {
         this.title = title;
         this.description = description;
         this.startTime = startTime;
         this.startFunction = startFunction;
         this.endTime = endTime;
         this.endFunction = endFunction;
+        this.status = ko.observable(SpecialEventStatus.none);
+        this.hideFromEventCalendar = hideFromEventCalendar;
+        this.eventCalendarTimeLeft = ko.observable(0);
+        this.isActive = ko.pureComputed<boolean>(() => this.status() == SpecialEventStatus.started || this.eventCalendarTimeLeft() > 0);
     }
 
     initialize(): void {
@@ -51,11 +59,52 @@ export default class SpecialEvent {
     }
 
     hasStarted(): boolean {
-        return this.status === SpecialEventStatus.started;
+        return this.status() === SpecialEventStatus.started;
     }
 
     hasEnded(): boolean {
-        return this.status === SpecialEventStatus.ended;
+        return this.status() === SpecialEventStatus.ended;
+    }
+
+    timeLeft(): string {
+        if (this.hasStarted()) {
+            return formatTime(this.timeTillEnd() / 1000);
+        }
+        if (this.eventCalendarTimeLeft() > 0) {
+            return formatTime(this.eventCalendarTimeLeft());
+        }
+        return '';
+    }
+
+    tick(): void {
+        if (this.eventCalendarTimeLeft() > 0) {
+            this.eventCalendarTimeLeft(Math.max(0, this.eventCalendarTimeLeft() - SPECIAL_EVENT_TICK / SECOND));
+        }
+    }
+
+    eventCalendarActivate(): void {
+        if (this.hideFromEventCalendar) {
+            return;
+        }
+        const daysLeft = Math.floor(this.timeTillStart() / 1000 / 60 / 60 / 24);
+        const price = 500 * daysLeft;
+        if (price > App.game.wallet.currencies[Currency.questPoint]()) {
+            Notifier.notify({
+                title: 'Cannot afford',
+                message: `This costs ${price} QP.`,
+                type: NotificationOption.danger,
+            });
+            return;
+        }
+        Notifier.confirm({
+            title: 'Do you want to start this event early?',
+            message: `Starting '${this.title}' early will cost you ${price} QP for 24 hours of event time.`,
+        }).then((result: boolean) => {
+            if (result) {
+                App.game.wallet.loseAmount({ amount: price, currency: Currency.questPoint });
+                this.eventCalendarTimeLeft(24 * 60 * 60); // Adds a day
+            }
+        });
     }
 
     notify(time: string, timeout: number, type = NotificationConstants.NotificationOption.info) {
@@ -121,7 +170,7 @@ export default class SpecialEvent {
 
     start() {
         // Update event status
-        this.status = SpecialEventStatus.started;
+        this.status(SpecialEventStatus.started);
 
         // We only wan't the notification displayed for 1 hour, or until the event is over
         const timeTillEventEnd = this.timeTillEnd();
@@ -165,7 +214,7 @@ export default class SpecialEvent {
         // Update event status
         this.notify('just ended!', 1 * HOUR, NotificationConstants.NotificationOption.danger);
         this.endFunction();
-        this.status = SpecialEventStatus.none;
+        this.status(SpecialEventStatus.none);
         this.updateDate();
     }
 
@@ -174,5 +223,19 @@ export default class SpecialEvent {
         this.endTime.setFullYear(this.endTime.getFullYear() + 1);
         this.startTime.setFullYear(this.startTime.getFullYear() + 1);
         this.checkStart();
+    }
+
+    fromJSON(json: any): void {
+        if (!json) {
+            return;
+        }
+        this.eventCalendarTimeLeft(json.eventCalendarTimeLeft ?? 0);
+    }
+
+    toJSON() {
+        return {
+            name: this.title,
+            eventCalendarTimeLeft: this.eventCalendarTimeLeft(),
+        };
     }
 }

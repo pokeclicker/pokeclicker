@@ -1,0 +1,78 @@
+<div class="modal fade" id="weatherAppModal" tabindex="-1" role="dialog" aria-labelledby="weatherAppModal">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg h-100" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Castform App</h4>
+                <div style="width: 100px;">
+                    <!-- ko using: GameHelper.enumNumbers(GameConstants.Region).filter((r) => r >= 0 && r <= player.highestRegion()), as: 'regions' -->
+                    <select class="custom-select" onchange="WeatherApp.selectedRegion(+this.value);">
+                        <!-- ko foreach: regions -->
+                        <option data-bind="attr: { value: $data, selected: WeatherApp.selectedRegion() === $data }, text: GameConstants.camelCaseToString(GameConstants.Region[$data])"></option>
+                        <!-- /ko -->
+                    </select>
+                    <!-- /ko -->
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="row m-0 w-100 h-100">
+                    <div class="col-2 w-100 px-0" id="timeTable">
+                        <table class="w-100 h-100" border="1">
+                            <thead>
+                                <tr>
+                                    <th style="height: 26px;">Time</th>
+                                </tr>
+                            </thead>
+                            <tbody data-bind="foreach: WeatherApp.generateHourList()">
+                                <tr>
+                                    <td style="height: 60px;" data-bind="text: `${GameHelper.twoDigitNumber(+$data)}:00 - ${GameHelper.twoDigitNumber(+$data + (Weather.period - 1))}:59`"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-10 w-100 px-0 overflow-auto" id="forecastTable">
+                        <table class="w-100 h-100" border="1">
+                            <thead>
+                                <tr>
+                                    <!-- ko foreach: WeatherApp.dateList() -->
+                                    <th style="height: 26px;" data-bind="text: GameConstants.DayOfWeek[$data.getDay()].slice(0, 3),
+                                        tooltip: {
+                                            title: $data.toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }),
+                                            placement: 'bottom',
+                                            trigger: 'hover',
+                                            boundary: 'window',
+                                        }">
+                                    </th>
+                                    <!-- /ko -->
+                                </tr>
+                            </thead>
+                            <tbody data-bind="foreach: { data: WeatherApp.fullForecast().find((rf) => rf.region == WeatherApp.selectedRegion()).weatherForecastList(), as: 'hourForecast' }">
+                                <tr class="py-2" data-bind="template: { name: 'weatherAppTemplate', data: {'hourForecast': hourForecast, 'region': WeatherApp.selectedRegion()} }"></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="weatherAppTemplate">
+    <!-- ko foreach: { data: $data.hourForecast, as: 'weatherForecast' } -->
+    <td class="px-3 clickable" style="height: 60px; position: relative;"
+        data-bind="css: { 'weatherForecastPassed': weatherForecast.status() === WeatherForecastStatus.hasPassed }">
+        <button class='btn btn-sm' style="right: 0px; top: 0px; width: auto; height: 41px;"
+        data-bind='style: { background: Weather.weatherConditions[weatherForecast.weatherType].color },
+            tooltip: {
+                title: WeatherType[weatherForecast.weatherType],
+                placement: "bottom",
+                trigger: "hover",
+                boundary: "window",
+            }'>
+            <img width=30px src="" data-bind="attr: { src: `assets/images/weather/${WeatherType[weatherForecast.weatherType]}.png` }"/>
+        </button>
+    </td>
+    <!-- /ko -->
+</script>
