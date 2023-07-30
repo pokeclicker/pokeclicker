@@ -208,9 +208,9 @@
                           <tr>
                             <th colspan="2">Specific Wanderers</th>
                           </tr>
-                            <tr id="wanderRow">
-                              <td id="wanderPokemonList">
-                                <ul class="list-inline">
+                          <tr id="wanderRow">
+                            <td id="wanderPokemonList">
+                              <ul class="list-inline">
                               <!-- ko foreach: App.game.farming.berryData[$data].wander.filter((w) => !Berry.baseWander.some((b) => w === b) && !Berry.colorWander[App.game.farming.berryData[$data].color].some((b) => w === b)) -->
                               <li class="list-inline-item">
                                 <!-- ko if: App.game.party.getPokemon(pokemonMap[$data].id)?.pokerus -->
@@ -231,11 +231,11 @@
                                     placement: 'top',
                                     trigger: 'hover'
                                 }">
-                              </li>
+                                </li>
                               <!-- /ko -->
                               </ul>
-                              </td>
-                            </tr>
+                            </td>
+                          </tr>
                           <!-- /ko -->
                         </table>
                       </td>
