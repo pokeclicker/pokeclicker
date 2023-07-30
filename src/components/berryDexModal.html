@@ -175,6 +175,14 @@
                           </tr>
                           <tr>
                             <th>Default to all Berries</th>
+                            <td style="position: absolute; right: 0;" type="button" class="btn mr-auto"
+                            data-bind="visible: App.game.keyItems.hasKeyItem(KeyItemType.Pokerus_virus),
+                            tooltip: {
+                              title: 'These Pokémon do not gain EVs when attracted to the Farm.',
+                              trigger: 'hover',
+                              placement:'top',
+                              html: true,
+                            }">ⓘ</td>
                           </tr>
                           <tr id="wanderRow">
                             <td id="wanderPokemonList">
