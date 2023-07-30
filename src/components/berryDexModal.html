@@ -174,7 +174,7 @@
                             <th class="bg-dark">Wandering Pokémon</th>
                           </tr>
                           <tr>
-                            <th>All Berries</th>
+                            <th data-bind="text: 'Attracted by all Berries'">Base Wanderers</th>
                             <td style="position: absolute; right: 0;"
                             data-bind="visible: App.game.keyItems.hasKeyItem(KeyItemType.Pokerus_virus),
                             tooltip: {
@@ -204,7 +204,7 @@
                             </td>
                           </tr>
                           <tr>
-                            <th colspan="2" data-bind="text: `Specific to ${BerryColor[App.game.farming.berryData[$data].color]}-Colored Berries`">Color Wanderers</th>
+                            <th colspan="2" data-bind="text: `Attracted to ${BerryColor[App.game.farming.berryData[$data].color]}-Colored Berries`">Color Wanderers</th>
                           </tr>
                           <tr id="wanderRow">
                             <td id="wanderPokemonList">
@@ -236,7 +236,7 @@
                           </tr>
                           <!-- ko if: App.game.farming.berryData[$data].wander.filter((w) => !Berry.baseWander.some((b) => w === b) && !Berry.colorWander[App.game.farming.berryData[$data].color].some((b) => w === b)) != "" -->
                           <tr>
-                            <th colspan="2" data-bind="text: `Specific to ${BerryType[$data]} Berry`">Specific Wanderers</th>
+                            <th colspan="2" data-bind="text: `Attracted to ${BerryType[$data]} Berry`">Specific Wanderers</th>
                           </tr>
                           <tr id="wanderRow">
                             <td id="wanderPokemonList">
