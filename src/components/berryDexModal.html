@@ -174,6 +174,28 @@
                             <th class="bg-dark">Wandering Pokémon</th>
                           </tr>
                           <tr>
+                            <th>Default to all Berries</th>
+                          </tr>
+                          <tr id="wanderRow">
+                            <td id="wanderPokemonList">
+                              <ul class="list-inline">
+                              <!-- ko foreach: Berry.baseWander -->
+                              <li class="list-inline-item">
+                                <img class="dungeon-pokemon-preview" src="" data-bind="attr:{ src: `assets/images/${(App.game.party.alreadyCaughtPokemonByName($data, true) ? 'shiny' : '')}pokemon/${pokemonList.find((p) => p.name == $data).id}.png` },
+                                css: { 'dungeon-pokemon-locked': !App.game.party.alreadyCaughtPokemonByName(pokemonList.find((p) => p.name == $data).name) }" onerror="this.src='assets/images/pokemon/0.png';"/>
+                                <sup class="shiny" data-bind="visible: App.game.party.alreadyCaughtPokemonByName($data, true)">✨</sup>
+                                <img class="lock" src="assets/images/breeding/lock.svg" data-bind="hidden: PokemonHelper.calcNativeRegion(pokemonList.find((p) => p.name == $data).id) <= player.highestRegion(),
+                                tooltip: {
+                                  title: `Reach ${GameConstants.camelCaseToString(GameConstants.Region[PokemonHelper.calcNativeRegion(pokemonList.find((p) => p.name == $data).id)])} to attract this Pokémon!`,
+                                    placement: 'top',
+                                    trigger: 'hover'
+                                }">
+                                </li>
+                              <!-- /ko -->
+                              </ul>
+                            </td>
+                          </tr>
+                          <tr>
                             <th colspan="2" data-bind="text: `Specific to ${BerryColor[App.game.farming.berryData[$data].color]}-Colored Berries`">Color Wanderers</th>
                           </tr>
                           <tr id="wanderRow">
