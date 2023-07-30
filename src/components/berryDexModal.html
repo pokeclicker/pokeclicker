@@ -188,7 +188,7 @@
                             <td id="wanderPokemonList">
                               <ul class="list-inline">
                               <!-- ko foreach: Berry.baseWander -->
-                              <li class="list-inline-item">
+                              <li class="list-inline-item no-pokerus">
                                 <img class="dungeon-pokemon-preview" src="" data-bind="attr:{ src: `assets/images/${(App.game.party.alreadyCaughtPokemonByName($data, true) ? 'shiny' : '')}pokemon/${pokemonList.find((p) => p.name == $data).id}.png` },
                                 css: { 'dungeon-pokemon-locked': !App.game.party.alreadyCaughtPokemonByName(pokemonList.find((p) => p.name == $data).name) }" onerror="this.src='assets/images/pokemon/0.png';"/>
                                 <sup class="shiny" data-bind="visible: App.game.party.alreadyCaughtPokemonByName($data, true)">✨</sup>
