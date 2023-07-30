@@ -22,14 +22,6 @@ class DungeonMap {
         this.playerPosition = ko.observable(new Point(Math.floor(this.floorSizes[0] / 2), this.floorSizes[0] - 1));
         this.playerMoved = ko.observable(false);
 
-        // Move the boss or ladder if it spawns on the player.
-        this.floorSizes.forEach((size, index) => {
-            const entranceTile = this.board()[index][size - 1][Math.floor(size / 2)];
-            entranceTile.type(GameConstants.DungeonTile.entrance);
-            entranceTile.isVisible = true;
-            entranceTile.isVisited = true;
-        });
-
         this.currentTile().hasPlayer = true;
         this.flash?.apply(this.board(), this.playerPosition());
 
@@ -157,8 +149,11 @@ class DungeonMap {
 
             // Shuffle the tiles randomly
             this.shuffle(mapList);
-            // Then place the empty tile for entrance
-            mapList.splice(mapList.length + 1 - Math.ceil(size / 2), 0, new DungeonTile(GameConstants.DungeonTile.empty, null));
+            // Then place the entrance tile
+            const entranceTile = new DungeonTile(GameConstants.DungeonTile.entrance, null);
+            entranceTile.isVisible = true;
+            entranceTile.isVisited = true;
+            mapList.splice(mapList.length + 1 - Math.ceil(size / 2), 0, entranceTile);
 
             // Create a 2d array
             const floor: DungeonTile[][] = [];
