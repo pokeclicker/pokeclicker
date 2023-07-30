@@ -21,7 +21,7 @@
                        <!-- /ko -->
                      </tr>
                    </thead>
-                   <tbody data-bind="foreach: Object.values(SpecialEvents.events).sort((a, b) => a.startTime - b.startTime)">
+                   <tbody data-bind="foreach: Object.values(App.game.specialEvents.events).sort((a, b) => a.startTime - b.startTime)">
                      <tr>
                         <td data-bind="text: title"></td>
                         <td class="text-left" data-bind="html: description"></td>
