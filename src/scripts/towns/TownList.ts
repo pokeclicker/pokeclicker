@@ -8,6 +8,7 @@
 ///<reference path="../../declarations/requirements/MultiRequirement.d.ts"/>
 ///<reference path="../safari/SafariTownContent.ts"/>
 ///<reference path="PurifyChamber.ts"/>
+///<reference path="PokemonContest.ts"/>
 
 const TownList: { [name: string]: Town } = {};
 
@@ -3060,7 +3061,7 @@ TownList['Lilycove City'] = new Town(
     'Lilycove City',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [DepartmentStoreShop], // HoennContestShop
+    [DepartmentStoreShop, new PokemonContestTownContent()], // HoennContestShop
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 121)],
     }
@@ -6680,15 +6681,21 @@ const MayorKarp = new NPC('Mayor Karp', [
     'You\'re good at raising Pokémon, right? We called you here to compete in the ten leagues around the island and pick up our poor Magikarp\'s spirits!',
     'Around these parts, folks love to compete to see whose Magikarp can splash harder and jump higher! No other Pokémon are allowed to compete in these events. So, do your best to raise up some fine Magikarp!',
     'Our island is a special place, home to Magikarp patterns that aren\'t found anywhere else in the world! Collect and raise them all to increase your jump power and take on our league champion!',
-], {image: 'assets/images/npcs/MayorKarp.png'});
+], {
+    image: 'assets/images/npcs/MayorKarp.png',
+    requirement: new OneFromManyRequirement([new ObtainedPokemonRequirement('Magikarp'), new ObtainedPokemonRequirement('Magikarp (Feebas)')]),
+});
 const MagikarpJumpRoamerNPC = new RoamerNPC('Roddy Tackle', [
     'There are some singularly stunning individuals down at {ROUTE_NAME}! Some Magikarp with real personality!',
-], GameConstants.Region.alola, RoamingPokemonList.findGroup(GameConstants.Region.alola, GameConstants.AlolaSubRegions.MagikarpJump), 'assets/images/npcs/Roddy Tackle.png');
+], GameConstants.Region.alola, RoamingPokemonList.findGroup(GameConstants.Region.alola, GameConstants.AlolaSubRegions.MagikarpJump), 'assets/images/npcs/Roddy Tackle.png', new OneFromManyRequirement([new ObtainedPokemonRequirement('Magikarp'), new ObtainedPokemonRequirement('Magikarp (Feebas)')]));
 const HoppyManOfMystery = new NPC('Man of Mystery', [
     'We have been looking for a Shady Salesman.',
     'He is trying to sell overpriced Magikarps to clueless children.',
     'Please keep an <i>eye</i> open for him.',
-],  {image:'assets/images/npcs/Man of Mystery.png'});
+],  {
+    image:'assets/images/npcs/Man of Mystery.png',
+    requirement: new OneFromManyRequirement([new ObtainedPokemonRequirement('Magikarp'), new ObtainedPokemonRequirement('Magikarp (Feebas)')]),
+});
 
 const DrSplash1 = new NPC('Dr. Splash', [
     'Welcome to my laboratory!',
@@ -6741,6 +6748,14 @@ const MagikarpEyeShadySalesman = new NPC('Shady Salesman', [
     'Kid, I have a deal for you! And for you alone. Here\'s your chance. I will sell you the secret Magikarp... For an unbelievable price.',
     'Oh, yeah... Returns not accepted, got that?',
 ],  {image:'assets/images/npcs/ShadySalesman.png'});
+
+const FishPolice = new NPC('The Fish Police', [
+    'Stop right there! This is the sacred land of Magikarp Jump. I can tell there is something suspicious about you... Yeah, I see! You have no Magikarp! How did you even make it this far without the best Pokémon, anyway?',
+    'In any case, everyone in town is too afraid of you so come back here when you get a Magikarp of your own. Then, the residents may be willing to talk to you.',
+],  {
+    image:'assets/images/npcs/Officer Jenny.png',
+    requirement: new MultiRequirement([new ObtainedPokemonRequirement('Magikarp', true), new ObtainedPokemonRequirement('Magikarp (Feebas)', true)]),
+});
 
 //Alola Towns
 
@@ -6936,7 +6951,7 @@ TownList['Hoppy Town'] = new Town(
     [new DockTownContent(), new BulletinBoard(GameConstants.BulletinBoards.Hoppy), MagikarpJumpGemTrade],
     {
         requirements: [new QuestLineStartedRequirement('Magikarp Jump')],
-        npcs: [MayorKarp, MagikarpJumpRoamerNPC, HoppyManOfMystery, DrSplash1, DrSplash2, DrSplash3, DrSplash4, DrSplash5],
+        npcs: [MayorKarp, MagikarpJumpRoamerNPC, HoppyManOfMystery, DrSplash1, DrSplash2, DrSplash3, DrSplash4, DrSplash5, FishPolice],
     }
 );
 TownList['Friend League'] = new Town(
