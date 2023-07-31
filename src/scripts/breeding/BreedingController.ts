@@ -93,7 +93,8 @@ class BreedingController {
 
     public static initialize() {
         // Create computed observable after App.game.party has been initialized
-        BreedingController.updateSortedFilteredList = ko.computed(BreedingController.updateSortedFilteredList).extend({ rateLimit: 500 });
+        BreedingController.updateSortedFilteredList = ko.computed(BreedingController.updateSortedFilteredList)
+            .extend({ rateLimit: 550 }); // slightly longer than getFilteredList
     }
 
     public static openBreedingModal() {
@@ -212,7 +213,7 @@ class BreedingController {
         const region = App.game.challenges.list.regionalAttackDebuff.active() ? BreedingController.regionalAttackDebuff() : -1;
         filteredList.sort(PartyController.compareBy(Settings.getSetting('hatcherySort').observableValue(), Settings.getSetting('hatcherySortDirection').observableValue(), region));
         BreedingController.hatcherySortedFilteredList(filteredList);
-    }.extend({ rateLimit: 550 }); // slightly longer than getFilteredList
+    };
 
     private static _cachedFilteredList;
     // Filters for pokemon that match hatchery filters, but don't subscribe to PartyPokemon categories (can change too frequently with the modal open)
