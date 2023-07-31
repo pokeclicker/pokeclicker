@@ -83,6 +83,7 @@ class Game {
         EffectEngineRunner.initialize(this.multiplier, GameHelper.enumStrings(GameConstants.BattleItemType).map((name) => ItemList[name]));
         FluteEffectRunner.initialize(this.multiplier);
         ItemHandler.initilizeEvoStones();
+        BreedingController.initialize();
         this.profile.initialize();
         this.breeding.initialize();
         this.pokeballs.initialize();

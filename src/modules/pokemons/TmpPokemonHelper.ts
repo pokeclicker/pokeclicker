@@ -11,6 +11,7 @@ import {
     typeIdToString,
     typeStringToId,
     hasMegaEvolution,
+    isMegaEvolution,
     getMegaStones,
 } from './PokemonHelper';
 
@@ -29,5 +30,6 @@ export default class TmpPokemonHelper {
     static incrementPokemonStatistics = incrementPokemonStatistics;
     static displayName = displayName;
     static hasMegaEvolution = hasMegaEvolution;
+    static isMegaEvolution = isMegaEvolution;
     static getMegaStones = getMegaStones;
 }
