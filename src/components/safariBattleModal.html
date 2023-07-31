@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
        <div class="modal-content">
            <div class="modal-body p-0">
-              <div class="battle-view">
+              <div class="battle-view" data-bind="class: Safari.environmentCssClass()">
                 <div class="row justify-content-center no-gutters" data-bind="if: Safari.inBattle">
                   <div class="col no-gutters clickable" data-bind="click: function() {BattleFrontierBattle.clickAttack()}" style="height: 280px; display: block;">
                       <h2 class="pageItemTitle" style="display: block;">

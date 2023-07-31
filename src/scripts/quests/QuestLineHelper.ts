@@ -1090,7 +1090,7 @@ class QuestLineHelper {
             {
                 clearedMessage: 'How, how, how dare you! Don\'t you dare think you\'ll get away with your latest outrage! One of these days, I will take great pleasure in kicking you about with my elegant dance steps! Oh, and I\'m not giving up our Shadow Pokémon plan!',
                 npcDisplayName: 'Miror B.',
-                npcImageName: 'Cipher Admin (miror b)',
+                npcImageName: 'Cipher Admin Miror B',
             });
         orreColosseumQuestLine.addQuest(clearPyriteCave);
 
@@ -1117,7 +1117,7 @@ class QuestLineHelper {
             {
                 clearedMessage: 'This isn\'t over yet. Stronger Pokémon are being made even now. You\'d better get serious about training your Pokémon for our next meeting. Daahahah!',
                 npcDisplayName: 'Dakim',
-                npcImageName: 'Cipher Admin (dakim)',
+                npcImageName: 'Cipher Admin Dakim',
             });
         orreColosseumQuestLine.addQuest(fightMtBattle);
 
@@ -1128,7 +1128,7 @@ class QuestLineHelper {
             {
                 clearedMessage: 'Aiyeeeeh! How dare you! How could I get bested by a mere child? Remember this! I\'ll get you back for this!',
                 npcDisplayName: 'Venus',
-                npcImageName: 'Cipher Admin (Venus)',
+                npcImageName: 'Cipher Admin Venus',
             });
         orreColosseumQuestLine.addQuest(fightTheUnder);
 
@@ -1139,7 +1139,7 @@ class QuestLineHelper {
             {
                 clearedMessage: 'Humph! Your struggle to get here was all in vain! The Shadow Pokémon we produced have already been moved elsewhere. And that, of course, includes the ultimate Shadow Pokémon I created for the boss! Wahahahah!',
                 npcDisplayName: 'Ein',
-                npcImageName: 'Cipher Admin (ein)',
+                npcImageName: 'Cipher Admin Ein',
             });
         orreColosseumQuestLine.addQuest(fightCipherLab);
 
@@ -1494,6 +1494,15 @@ class QuestLineHelper {
         plasmaUnovaQuestLine.addQuest(clearGhetsis2);
 
         App.game.quests.questLines().push(plasmaUnovaQuestLine);
+    }
+    // XD Questline, available after Unova E4
+    public static createOrreXDQuestLine() {
+        const orreXDQuestLine = new QuestLine('Gale of Darkness', 'Team Cipher has returned to Orre. Stop their new evil plan!', new MultiRequirement([new DevelopmentRequirement(), new QuestLineCompletedRequirement('Shadows in the Desert'), new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)]), GameConstants.BulletinBoards.Unova);
+
+        const talkToWillie = new TalkToNPCQuest(Willie, 'This is a placeholder for locking content'); // TODO make the quest for real
+        orreXDQuestLine.addQuest(talkToWillie);
+
+        App.game.quests.questLines().push(orreXDQuestLine);
     }
 
     /* Kalos QuestLines */
@@ -2432,11 +2441,9 @@ class QuestLineHelper {
 
         const BugSilvallyBattle = new CustomQuest(
             1,
-            undefined,
+            () => ItemList.Bug_Memory_Silvally.gain(1),
             'Defeat Guzma to get the Memory back.',
-            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Guzma Bug Memory')](),
-            0,
-            () => ItemList.Bug_Memory_Silvally.gain(1)
+            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Guzma Bug Memory')]()
         );
         SilvallyTypesQuestLine.addQuest(BugSilvallyBattle);
 
@@ -2445,11 +2452,9 @@ class QuestLineHelper {
 
         const FlyingSilvallyBattle = new CustomQuest(
             1,
-            undefined,
+            () => ItemList.Flying_Memory_Silvally.gain(1),
             'Defeat Kahili to get the Memory back.',
-            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Kahili Flying Memory')](),
-            0,
-            () => ItemList.Flying_Memory_Silvally.gain(1)
+            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Kahili Flying Memory')]()
         );
         SilvallyTypesQuestLine.addQuest(FlyingSilvallyBattle);
 
@@ -2458,11 +2463,9 @@ class QuestLineHelper {
 
         const PoisonSilvallyBattle = new CustomQuest(
             1,
-            undefined,
+            () => ItemList.Poison_Memory_Silvally.gain(1),
             'Defeat Plumeria to get the Memory back.',
-            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Plumeria Poison Memory')](),
-            0,
-            () => ItemList.Poison_Memory_Silvally.gain(1)
+            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Plumeria Poison Memory')]()
         );
         SilvallyTypesQuestLine.addQuest(PoisonSilvallyBattle);
 
@@ -2471,11 +2474,9 @@ class QuestLineHelper {
 
         const GhostSilvallyBattle = new CustomQuest(
             1,
-            undefined,
+            () => ItemList.Ghost_Memory_Silvally.gain(1),
             'Defeat Captain Acerola to get the Memory back.',
-            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Acerola Ghost Memory')](),
-            0,
-            () => ItemList.Ghost_Memory_Silvally.gain(1)
+            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Acerola Ghost Memory')]()
         );
         SilvallyTypesQuestLine.addQuest(GhostSilvallyBattle);
 
@@ -2484,11 +2485,9 @@ class QuestLineHelper {
 
         const PsychicSilvallyBattle = new CustomQuest(
             1,
-            undefined,
+            () => ItemList.Psychic_Memory_Silvally.gain(1),
             'Defeat Aether Branch Chief Faba to get the Memory back.',
-            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Faba Psychic Memory')](),
-            0,
-            () => ItemList.Psychic_Memory_Silvally.gain(1)
+            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Faba Psychic Memory')]()
         );
         SilvallyTypesQuestLine.addQuest(PsychicSilvallyBattle);
 
@@ -2497,11 +2496,9 @@ class QuestLineHelper {
 
         const SteelSilvallyBattle = new CustomQuest(
             1,
-            undefined,
+            () => ItemList.Steel_Memory_Silvally.gain(1),
             'Defeat Molayne to get the Memory back.',
-            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Molayne Steel Memory')](),
-            0,
-            () => ItemList.Steel_Memory_Silvally.gain(1)
+            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Molayne Steel Memory')]()
         );
         SilvallyTypesQuestLine.addQuest(SteelSilvallyBattle);
 
@@ -2510,11 +2507,9 @@ class QuestLineHelper {
 
         const DragonSilvallyBattle = new CustomQuest(
             1,
-            undefined,
+            () => ItemList.Dragon_Memory_Silvally.gain(1),
             'Defeat Ryuki to get the Memory back.',
-            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ryuki Dragon Memory')](),
-            0,
-            () => ItemList.Dragon_Memory_Silvally.gain(1)
+            () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Ryuki Dragon Memory')]()
         );
         SilvallyTypesQuestLine.addQuest(DragonSilvallyBattle);
 
@@ -3673,6 +3668,7 @@ class QuestLineHelper {
         this.createManaphyQuestLine();
         this.createGiratinaQuestLine();
         this.createPlasmaUnovaQuestLine();
+        this.createOrreXDQuestLine();
         this.createDeltaEpisodeQuestLine();
         this.createPrimalReversionQuestLine();
         this.createDetectivePikachuQuestLine();

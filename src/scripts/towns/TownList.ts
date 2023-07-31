@@ -8,6 +8,7 @@
 ///<reference path="../../declarations/requirements/MultiRequirement.d.ts"/>
 ///<reference path="../safari/SafariTownContent.ts"/>
 ///<reference path="PurifyChamber.ts"/>
+///<reference path="PokemonContest.ts"/>
 
 const TownList: { [name: string]: Town } = {};
 
@@ -462,6 +463,13 @@ const SaffronBreeder = new NPC('Breeder', [
     image: 'assets/images/npcs/Pokémon Breeder (female).png',
     requirement: new GymBadgeRequirement(BadgeEnums.Earth),
 });
+
+const LaprasGift = new GiftNPC('Silph Co. Employee', [
+    'Oh! Hi! You\'re not a member of Team Rocket! You came to save us? Why thank you!',
+    'I want you to have this Pokémon for saving us.',
+], () => {
+    App.game.party.gainPokemonByName('Lapras');
+}, 'assets/images/pokemon/131.png', { saveKey: 'laprasgift', image: 'assets/images/npcs/Office Worker (male).png', requirement: new MultiRequirement([new TemporaryBattleRequirement('Blue 5'), new ObtainedPokemonRequirement('Lapras', true)]) });
 
 const FuchsiaKantoRoamerNPC = new RoamerNPC('Youngster Wendy', [
     'There\'s been some recent sightings of roaming Pokémon on {ROUTE_NAME}!',
@@ -1174,7 +1182,10 @@ TownList['Silph Co.'] = new DungeonTown(
     GameConstants.Region.kanto,
     GameConstants.KantoSubRegions.Kanto,
     [new TemporaryBattleRequirement('Blue 4')],
-    [TemporaryBattleList['Blue 5']]
+    [TemporaryBattleList['Blue 5']],
+    {
+        npcs: [LaprasGift],
+    }
 );
 TownList['Power Plant'] = new DungeonTown(
     'Power Plant',
@@ -2083,6 +2094,15 @@ const AgateVillageShop = new Shop([
     ItemList.Dowsing_machine,
     ItemList.Wonder_Chest,
 ]);
+const GateonPortShop = new Shop([
+    ItemList.Pokeball,
+    ItemList.Greatball,
+    ItemList.Ultraball,
+    ItemList.xAttack,
+    ItemList.xClick,
+    ItemList.Lucky_incense,
+    ItemList.Miracle_Chest,
+]);
 //Hoenn Berry Master
 const HoennBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations['Mauville City'],[
     ItemList.Boost_Mulch,
@@ -2785,6 +2805,7 @@ const Sack = new NPC('Check the sack', [
     'My name is Rui, by the way. I\'m a psychic of sorts, on a mission to save Pokémon who have had their souls corrupted by some evil folks in Orre.',
     'There\'s a few in this city that need help. Can you come with me though? I\'m worried more shady guys will show up.',
     'I can point out which Pokémon have been corrupted, or turned into "Shadow Pokémon", and you can confiscate them from evildoers using your Pokéballs.',
+    'You can adjust your Catch Filters to catch any Shadow Pokémon now too.',
 ], {image: 'assets/images/npcs/Rui.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Shadows in the Desert', 2), new QuestLineStepCompletedRequirement('Shadows in the Desert', 4, GameConstants.AchievementOption.less)]),
 });
@@ -2882,7 +2903,8 @@ const RelicSage = new NPC('Relic Stone Sage', [
     'This stone has the power to cleanse and purify the spirits of Pokémon.',
     'If you train with your Pokémon, you will gain spiritual energy, or "Flow". You can use this Flow to purify your Pokémon.',
     'Purification will take more flow with each Pokémon you purify.',
-]);
+    '<img src="./assets/images/status/shadow.svg" height="60px"/> <img src="./assets/images/arrow.svg" height="30px"/> <img src="./assets/images/status/purified.svg" height="60px"/>',
+], {image: 'assets/images/npcs/Sage.png'});
 //Hoenn Towns
 TownList['Littleroot Town'] = new Town(
     'Littleroot Town',
@@ -3039,7 +3061,7 @@ TownList['Lilycove City'] = new Town(
     'Lilycove City',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Hoenn,
-    [DepartmentStoreShop], // HoennContestShop
+    [DepartmentStoreShop, new PokemonContestTownContent()], // HoennContestShop
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 121)],
     }
@@ -3131,7 +3153,7 @@ TownList['Outskirt Stand'] = new Town(
     'Outskirt Stand',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [OutskirtStandShop, TemporaryBattleList.Willie],
+    [OutskirtStandShop, TemporaryBattleList.Willie, TemporaryBattleList['Miror B. 2']],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion), new QuestLineStartedRequirement('Shadows in the Desert')],
         npcs: [ExploreStand, Willie],
@@ -3190,6 +3212,50 @@ TownList['Realgam Tower'] = new Town(
     {
         requirements: [new QuestLineStepCompletedRequirement('Shadows in the Desert', 22)],
         npcs: [EsCade2],
+    }
+);
+
+TownList['Gateon Port'] = new Town(
+    'Gateon Port',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [GateonPortShop, new MoveToDungeon(dungeonList['Gateon Port Battles'])],
+    {
+        requirements: [new QuestLineCompletedRequirement('Gale of Darkness')],
+        npcs: [],
+    }
+);
+
+TownList['Pokemon HQ Lab'] = new Town(
+    'Pokemon HQ Lab',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [TemporaryBattleList['Cipher Peon Naps']],
+    {
+        requirements: [new QuestLineCompletedRequirement('Gale of Darkness')],
+        npcs: [],
+    }
+);
+
+TownList['Kaminko\'s House'] = new Town(
+    'Kaminko\'s House',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [TemporaryBattleList['Chobin 1'], TemporaryBattleList['Chobin 2']],
+    {
+        requirements: [new QuestLineCompletedRequirement('Gale of Darkness')],
+        npcs: [],
+    }
+);
+
+TownList['SS Libra'] = new Town(
+    'SS Libra',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [TemporaryBattleList['Cipher Peon Smarton']],
+    {
+        requirements: [new QuestLineCompletedRequirement('Gale of Darkness')],
+        npcs: [],
     }
 );
 
@@ -3530,10 +3596,45 @@ TownList['Orre Colosseum'] = new DungeonTown(
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
     [
-        new MultiRequirement([new DevelopmentRequirement(), new QuestLineCompletedRequirement('Shadows in the Desert')]),
+        new QuestLineCompletedRequirement('Gale of Darkness'),
     ]
 );
-
+TownList['Gateon Port Battles'] = new DungeonTown(
+    'Gateon Port Battles',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [
+        new QuestLineCompletedRequirement('Gale of Darkness'),
+    ]
+);
+TownList['Cipher Key Lair'] = new DungeonTown(
+    'Cipher Key Lair',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [
+        new QuestLineCompletedRequirement('Gale of Darkness'),
+    ],
+    [TemporaryBattleList.Zook],
+    {
+        npcs: [],
+    }
+);
+TownList['Citadark Isle'] = new DungeonTown(
+    'Citadark Isle',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [
+        new QuestLineCompletedRequirement('Gale of Darkness'),
+    ]
+);
+TownList['Citadark Isle Dome'] = new DungeonTown(
+    'Citadark Isle Dome',
+    GameConstants.Region.hoenn,
+    GameConstants.HoennSubRegions.Orre,
+    [
+        new QuestLineCompletedRequirement('Gale of Darkness'),
+    ]
+);
 
 //Sinnoh Shops
 const SandgemTownShop = new Shop([
@@ -4692,7 +4793,7 @@ TownList['Aspertia City'] = new Town(
     'Aspertia City',
     GameConstants.Region.unova,
     GameConstants.UnovaSubRegions.Unova,
-    [],
+    [new BulletinBoard(GameConstants.BulletinBoards.Unova)],
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)],
         npcs: [],
@@ -6580,15 +6681,21 @@ const MayorKarp = new NPC('Mayor Karp', [
     'You\'re good at raising Pokémon, right? We called you here to compete in the ten leagues around the island and pick up our poor Magikarp\'s spirits!',
     'Around these parts, folks love to compete to see whose Magikarp can splash harder and jump higher! No other Pokémon are allowed to compete in these events. So, do your best to raise up some fine Magikarp!',
     'Our island is a special place, home to Magikarp patterns that aren\'t found anywhere else in the world! Collect and raise them all to increase your jump power and take on our league champion!',
-], {image: 'assets/images/npcs/MayorKarp.png'});
+], {
+    image: 'assets/images/npcs/MayorKarp.png',
+    requirement: new OneFromManyRequirement([new ObtainedPokemonRequirement('Magikarp'), new ObtainedPokemonRequirement('Magikarp (Feebas)')]),
+});
 const MagikarpJumpRoamerNPC = new RoamerNPC('Roddy Tackle', [
     'There are some singularly stunning individuals down at {ROUTE_NAME}! Some Magikarp with real personality!',
-], GameConstants.Region.alola, RoamingPokemonList.findGroup(GameConstants.Region.alola, GameConstants.AlolaSubRegions.MagikarpJump), 'assets/images/npcs/Roddy Tackle.png');
+], GameConstants.Region.alola, RoamingPokemonList.findGroup(GameConstants.Region.alola, GameConstants.AlolaSubRegions.MagikarpJump), 'assets/images/npcs/Roddy Tackle.png', new OneFromManyRequirement([new ObtainedPokemonRequirement('Magikarp'), new ObtainedPokemonRequirement('Magikarp (Feebas)')]));
 const HoppyManOfMystery = new NPC('Man of Mystery', [
     'We have been looking for a Shady Salesman.',
     'He is trying to sell overpriced Magikarps to clueless children.',
     'Please keep an <i>eye</i> open for him.',
-],  {image:'assets/images/npcs/Man of Mystery.png'});
+],  {
+    image:'assets/images/npcs/Man of Mystery.png',
+    requirement: new OneFromManyRequirement([new ObtainedPokemonRequirement('Magikarp'), new ObtainedPokemonRequirement('Magikarp (Feebas)')]),
+});
 
 const DrSplash1 = new NPC('Dr. Splash', [
     'Welcome to my laboratory!',
@@ -6641,6 +6748,14 @@ const MagikarpEyeShadySalesman = new NPC('Shady Salesman', [
     'Kid, I have a deal for you! And for you alone. Here\'s your chance. I will sell you the secret Magikarp... For an unbelievable price.',
     'Oh, yeah... Returns not accepted, got that?',
 ],  {image:'assets/images/npcs/ShadySalesman.png'});
+
+const FishPolice = new NPC('The Fish Police', [
+    'Stop right there! This is the sacred land of Magikarp Jump. I can tell there is something suspicious about you... Yeah, I see! You have no Magikarp! How did you even make it this far without the best Pokémon, anyway?',
+    'In any case, everyone in town is too afraid of you so come back here when you get a Magikarp of your own. Then, the residents may be willing to talk to you.',
+],  {
+    image:'assets/images/npcs/Officer Jenny.png',
+    requirement: new MultiRequirement([new ObtainedPokemonRequirement('Magikarp', true), new ObtainedPokemonRequirement('Magikarp (Feebas)', true)]),
+});
 
 //Alola Towns
 
@@ -6836,7 +6951,7 @@ TownList['Hoppy Town'] = new Town(
     [new DockTownContent(), new BulletinBoard(GameConstants.BulletinBoards.Hoppy), MagikarpJumpGemTrade],
     {
         requirements: [new QuestLineStartedRequirement('Magikarp Jump')],
-        npcs: [MayorKarp, MagikarpJumpRoamerNPC, HoppyManOfMystery, DrSplash1, DrSplash2, DrSplash3, DrSplash4, DrSplash5],
+        npcs: [MayorKarp, MagikarpJumpRoamerNPC, HoppyManOfMystery, DrSplash1, DrSplash2, DrSplash3, DrSplash4, DrSplash5, FishPolice],
     }
 );
 TownList['Friend League'] = new Town(
@@ -7457,11 +7572,16 @@ const EnergyPlantRose = new NPC('Chairman Rose', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Darkest Day', 15), new QuestLineStepCompletedRequirement('The Darkest Day', 17, GameConstants.AchievementOption.less)]),
 });
 
+const EternatusCatch = new GiftNPC('Catch Eternatus', [
+    'You caught Eternatus!',
+], () => {
+    App.game.party.gainPokemonByName('Eternatus');
+}, 'assets/images/pokemon/890.png', { saveKey: 'eternatuscatch', requirement: new MultiRequirement([new TemporaryBattleRequirement('The Darkest Day'), new ObtainedPokemonRequirement('Eternatus', true)]) });
+
 const Leon = new NPC('Leon', [
     'My matches are always sold out, but this... I\'ve never seen a crowd this wild!',
     'Everyone knows what you did for us this week... They know you\'re the one who caught Eternatus and saved the future of the Galar region.',
     'A real hero, who battled alongside the Legendary Pokémon, Zacian and Zamazenta... I couldn\'t have dreamed of a better challenger to help increase my winning streak!',
-    'Oh... And you\'ve even added Eternatus to your party. The greatest challenger along with the most powerful Pokémon—is that it? Now you\'re really getting me excited!',
     'Now that I\'ve seen just what kind of strength you possess as the greatest of challengers...crushing you into the dirt will show everyone just how strong their Champion truly is!',
     'Come on, now! Let\'s make this a final match that\'ll go down in Galar\'s history! No! A match that\'ll change Galar forever!',
     'We\'re gonna have an absolutely champion time!',
@@ -8136,7 +8256,7 @@ TownList['Energy Plant'] = new DungeonTown(
     [new QuestLineStepCompletedRequirement('The Darkest Day', 14)],
     [TemporaryBattleList.Eternatus, TemporaryBattleList['Sordward 2'], TemporaryBattleList['Shielbert 2'], TemporaryBattleList['Rampaging Zacian'], TemporaryBattleList['Rampaging Zamazenta'], TemporaryBattleList['The Darkest Day']],
     {
-        npcs: [EnergyPlantRose, SordwardShielbert3, SordwardShielbert4, Piers, EnergyPlantHop],
+        npcs: [EnergyPlantRose, EternatusCatch, SordwardShielbert3, SordwardShielbert4, Piers, EnergyPlantHop],
     }
 );
 TownList['Dusty Bowl'] = new DungeonTown(
