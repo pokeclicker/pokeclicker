@@ -349,11 +349,15 @@ class PartyPokemon implements Saveable {
     });
 
     public isHatchableFiltered = ko.pureComputed(() => {
-        // Only breedable Pokemon
-        if (!this.isHatchable) {
-            return false;
-        }
+        return this.isHatchable() && this.matchesHatcheryFilters();
+    });
 
+    public matchesHatcheryFilters = ko.pureComputed(() => {
+        // Check _category() again since matchesHatcheryFiltersNonCat doesn't subscribe to it
+        return this.matchesHatcheryFiltersNonCat && !(BreedingFilters.category.value() >= 0 && this.category !== BreedingFilters.category.value());
+    });
+
+    public matchesHatcheryFiltersNonCat = ko.pureComputed(() => {
         // Check if search matches englishName or displayName
         const displayName = PokemonHelper.displayName(this.name)();
         const filterName = BreedingFilters.name.value();
@@ -367,11 +371,9 @@ class PartyPokemon implements Saveable {
             return false;
         }
 
-        // Check based on category
-        if (BreedingFilters.category.value() >= 0) {
-            if (this.category !== BreedingFilters.category.value()) {
-                return false;
-            }
+        // Check based on category, but avoid subscribing to not recompute BreedingController.hatcherySortedFilteredList too often
+        if (BreedingFilters.category.value() >= 0 && this._category.peek() !== BreedingFilters.category.value()) {
+            return false;
         }
 
         // Check based on shiny status
@@ -405,11 +407,11 @@ class PartyPokemon implements Saveable {
             return false;
         }
         // Only Base Pokémon without Mega Evolution
-        if (uniqueTransformation == 'mega-unobtained' && !(PokemonHelper.hasMegaEvolution(pokemon.name) && (pokemon as DataPokemon).evolutions?.some((e) => !App.game.party.alreadyCaughtPokemonByName(e.evolvedPokemon)))) {
+        if (uniqueTransformation == 'mega-unobtained' && !(PokemonHelper.hasMegaEvolution(pokemon.name) && (pokemon as DataPokemon).evolutions?.some((e) => !App.game.party.alreadyCaughtPokemonByName(e.evolvedPokemon) && e.restrictions.some((r) => r instanceof MegaEvolveRequirement)))) {
             return false;
         }
         // Only Mega Pokémon
-        if (uniqueTransformation == 'mega-evolution' && !(PokemonHelper.getPokemonPrevolution(pokemon.name)?.some((e) => PokemonHelper.hasMegaEvolution(e.basePokemon)))) {
+        if (uniqueTransformation == 'mega-evolution' && !(PokemonHelper.isMegaEvolution(pokemon.name))) {
             return false;
         }
 
