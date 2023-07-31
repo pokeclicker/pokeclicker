@@ -698,22 +698,11 @@ export const Environments: Record<string, EnvironmentData> = {
     Desert: {
         [Region.kanto]: new Set(),
         [Region.johto]: new Set(),
-        [Region.hoenn]: new Set([111, 135, 'Outskirt Stand', 'Orre Colosseum']),
-        [Region.sinnoh]: new Set(),
-        [Region.unova]: new Set([4, 25]),
-        [Region.kalos]: new Set(),
-        [Region.alola]: new Set([23]),
-        [Region.galar]: new Set(),
-    },
-
-    DesertTemperate: {
-        [Region.kanto]: new Set(),
-        [Region.johto]: new Set(),
-        [Region.hoenn]: new Set(['Pyrite Town', 'Pyrite Town Battles']),
+        [Region.hoenn]: new Set([111, 135, 'Outskirt Stand', 'Pyrite Town', 'Pyrite Town Battles', 'Orre Colosseum']),
         [Region.sinnoh]: new Set([228]),
-        [Region.unova]: new Set(['Lentimas Town', 'Reversal Mountain']),
+        [Region.unova]: new Set([4, 25, 'Lentimas Town', 'Reversal Mountain']),
         [Region.kalos]: new Set([13]),
-        [Region.alola]: new Set(),
+        [Region.alola]: new Set([23]),
         [Region.galar]: new Set([23, 25, 39, 'Dusty Bowl', 'Stow-on-Side']),
     },
 
@@ -764,7 +753,6 @@ export const EnvironmentCssClass: Record<Environment, string> = {
     Cave: 'cave',
     GemCave: 'cave-gem',
     Desert: 'desert',
-    DesertTemperate: 'desert-temperate',
     PowerPlant: 'power-plant',
     Mansion: 'mansion',
     Graveyard: 'graveyard',
