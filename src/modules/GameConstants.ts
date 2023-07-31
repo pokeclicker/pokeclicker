@@ -1471,6 +1471,7 @@ export const GalarDungeons = [
 export const HisuiDungeons = [
     'Oreburrow Tunnel', // 188
     'Heartwood',
+    'Ancient Solaceon Ruins',
     'Shrouded Ruins',
     'Veilstone Cape',
     'Firespit Island',
@@ -1487,7 +1488,9 @@ export const HisuiDungeons = [
     'Seaside Hollow',
     'Ancient Lake Verity',
     'Ancient Lake Valor',
-    'Ancient Lake Acuity', // 206
+    'Ancient Lake Acuity',
+    'Temple of Sinnoh',
+    'Turnback Cave', // 209
 ];
 
 export const RegionDungeons = [
@@ -1904,17 +1907,13 @@ export const TemporaryBattles = [
     'Hisuian Braviary',
     'Lord of the Tundra: Avalugg',
     'Beni',
-    'Kamado 1',
     'Charm 2',
-    'Dialga (Origin) 1',
-    'Palkia (Origin) 1',
-    'Kamado 2',
+    'Dialga (Origin)',
+    'Palkia (Origin)',
+    'The Galaxy Team\'s Kamado',
     'Adaman 2',
     'Irida 3',
-    'Dialga (Origin) 2',
-    'Palkia (Origin) 2',
     'Volo 3',
-    'Giratina (Origin)',
     'Tornadus 1',
     'Tornadus 2',
     'Tornadus 3',

@@ -3706,7 +3706,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Celestica Trail', Region.hisui, 43,
     new RoutePokemon({
-        land: ['Rhyhorn', 'Rhydon', 'Onix', 'Steelix', 'Hippopotas', 'Hippowdon', 'Chimecho'],
+        land: ['Rhyhorn', 'Rhydon', 'Onix', 'Steelix', 'Hippopotas', 'Hippowdon', 'Chimecho', 'Hisuian Sneasel'],
         headbutt: ['Graveler'],
     }),
     [new DevelopmentRequirement()],

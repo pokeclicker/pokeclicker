@@ -12009,6 +12009,27 @@ dungeonList.Heartwood = new Dungeon('Heartwood',
     ],
     96500, 1);
 
+v// All Unown
+SeededRand.seed(123);
+const AncientSolaceonUnownList = SeededRand.shuffleArray('ABCDEFGHIJKLMNOPQRSTUVWXYZ?!'.split(''));
+
+dungeonList['Ancient Solaceon Ruins'] = new Dungeon('Ancient Solaceon Ruins',
+    ['Paras', 'Carnivine', 'Croagunk', 'Yanma', 'Stunky', 'Kirlia'],
+    {
+        common: [
+            {loot: 'Token_collector', weight: 2},
+            {loot: 'Aspear'},
+        ],
+    },
+    960000,
+    [
+        ...SolaceonUnownList.map((char) => new DungeonBossPokemon(`Unown (${char})` as PokemonNameType, 4100000, 30, {
+            hide: true,
+            requirement: new SeededDateRequirement(() => SeededDateRand.fromArray(AncientSolaceonUnownList) == char),
+        })),
+    ],
+    62500, 209);
+
 dungeonList['Shrouded Ruins'] = new Dungeon('Shrouded Ruins',
     ['Geodude', 'Graveler', 'Rhyhorn', 'Gastly', 'Haunter', 'Lickitung', 'Ralts', 'Kirlia', 'Carnivine', 'Burmy (Sand)'],
     {
@@ -12050,7 +12071,10 @@ dungeonList['Firespit Island'] = new Dungeon('Firespit Island',
         ],
     },
     2603000,
-    [new DungeonBossPokemon('Ninetales', 10000000, 61)],
+    [
+        new DungeonBossPokemon('Ninetales', 10000000, 61),
+        new DungeonBossPokemon('Heatran', 10000000, 70, {hide: true, requirement: new DevelopmentRequirement()}),
+    ],
     96500, 1);
 
 dungeonList['Ancient Wayward Cave'] = new Dungeon('Ancient Wayward Cave',
@@ -12078,7 +12102,7 @@ dungeonList['Ancient Quarry'] = new Dungeon('Ancient Quarry',
     96500, 1);
 
 dungeonList['Primeval Grotto'] = new Dungeon('Primeval Grotto',
-    ['Bronzor'],
+    ['Bronzor', 'Scyther', 'Gligar', 'Nosepass', 'Gyarados', 'Cherubi', 'Cherrim (Overcast)'],
     {
         common: [
             {loot: 'Token_collector', weight: 2},
@@ -12086,7 +12110,11 @@ dungeonList['Primeval Grotto'] = new Dungeon('Primeval Grotto',
         ],
     },
     2603000,
-    [new DungeonBossPokemon('Nosepass', 10000000, 71)],
+    [
+        new DungeonBossPokemon('Probopass', 10000000, 71),
+        new DungeonBossPokemon('Gliscor', 10000000, 71),
+        new DungeonBossPokemon('Hisuian Sneasel', 10000000, 71),
+    ],
     96500, 1);
 
 dungeonList['Clamberclaw Cliffs'] = new Dungeon('Clamberclaw Cliffs',
@@ -12101,7 +12129,7 @@ dungeonList['Clamberclaw Cliffs'] = new Dungeon('Clamberclaw Cliffs',
     [
         new DungeonBossPokemon('Bronzong', 10000000, 44),
         new DungeonBossPokemon('Gabite', 10000000, 47),
-        new DungeonBossPokemon('Darkrai', 10000000, 70),
+        new DungeonBossPokemon('Darkrai', 10000000, 70, {hide: true, requirement: new DevelopmentRequirement()}),
     ],
     96500, 1);
 
@@ -12136,7 +12164,7 @@ dungeonList['Sacred Plaza'] = new Dungeon('Sacred Plaza',
     96500, 1);
 
 dungeonList['Avalugg\'s Legacy'] = new Dungeon('Avalugg\'s Legacy',
-    ['Bergmite', 'Swinub', 'Piloswine', 'Drifloon', 'Drifblim', 'Bibarel', 'Glalie', 'Froslass'],
+    ['Hisuian Sneasel', 'Bergmite', 'Swinub', 'Piloswine', 'Drifloon', 'Drifblim', 'Bibarel', 'Glalie', 'Froslass'],
     {
         common: [
             {loot: 'Token_collector', weight: 2},
@@ -12185,7 +12213,7 @@ dungeonList['Ancient Snowpoint Temple'] = new Dungeon('Ancient Snowpoint Temple'
     2603000,
     [
         new DungeonBossPokemon('Gallade', 10000000, 70),
-        new DungeonBossPokemon('Regigigas', 10000000, 70),
+        new DungeonBossPokemon('Regigigas', 10000000, 70, {hide: true, requirement: new DevelopmentRequirement()}),
     ],
     96500, 1);
 
@@ -12212,7 +12240,7 @@ dungeonList['Ancient Lake Verity'] = new Dungeon('Ancient Lake Verity',
     2603000,
     [
         new DungeonBossPokemon('Hisuian Goodra', 10000000, 58),
-        new DungeonBossPokemon('Mesprit', 10000000, 70),
+        new DungeonBossPokemon('Mesprit', 10000000, 70, {hide: true, requirement: new DevelopmentRequirement()}),
     ],
     96500, 1);
 
@@ -12227,7 +12255,7 @@ dungeonList['Ancient Lake Valor'] = new Dungeon('Ancient Lake Valor',
     2603000,
     [
         new DungeonBossPokemon('Overqwil', 10000000, 58),
-        new DungeonBossPokemon('Azelf', 10000000, 70),
+        new DungeonBossPokemon('Azelf', 10000000, 70, {hide: true, requirement: new DevelopmentRequirement()}),
     ],
     96500, 1);
 
@@ -12242,6 +12270,46 @@ dungeonList['Ancient Lake Acuity'] = new Dungeon('Ancient Lake Acuity',
     2603000,
     [
         new DungeonBossPokemon('Hisuian Zoroark', 10000000, 58),
-        new DungeonBossPokemon('Uxie', 10000000, 70),
+        new DungeonBossPokemon('Uxie', 10000000, 70, {hide: true, requirement: new DevelopmentRequirement()}),
+    ],
+    96500, 1);
+
+dungeonList['Temple of Sinnoh'] = new Dungeon('Temple of Sinnoh',
+    ['Bronzong', 'Floatzel', 'Magnezone', 'Lumineon', 'Lucario', 'Bibarel', 'Garchomp'],
+    {
+        common: [
+            {loot: 'Token_collector', weight: 2},
+            {loot: 'Aspear'},
+        ],
+    },
+    1350400,
+    [
+        new DungeonTrainer('The Galaxy Team\'s',
+            [
+                new GymPokemon('Hisuian Braviary', 1128000, 61),
+                new GymPokemon('Golem', 1128000, 61),
+                new GymPokemon('Clefable', 1128000, 61),
+                new GymPokemon('Snorlax', 1128000, 61),
+            ], { weight: 4 }, 'Kamado', '(armor)'),
+        new DungeonBossPokemon('Dialga (Origin)', 11880000, 70, {hide: true, requirement: new DevelopmentRequirement()}),
+        new DungeonBossPokemon('Palkia (Origin)', 11880000, 70, {hide: true, requirement: new DevelopmentRequirement()}),
+    ],
+    86500, 217);
+
+dungeonList['Turnback Cave'] = new Dungeon('Turnback Cave',
+    ['Gabite', 'Hisuian Sliggoo', 'Dusclops', 'Gengar', 'Rotom', 'Drifblim', 'Hisuian Zorua'],
+    {
+        common: [
+            {loot: 'Token_collector', weight: 2},
+            {loot: 'Aspear'},
+        ],
+    },
+    2603000,
+    [
+        new DungeonBossPokemon('Garchomp', 10000000, 58),
+        new DungeonBossPokemon('Dusknoir', 10000000, 58),
+        new DungeonBossPokemon('Mismagius', 10000000, 58),
+        new DungeonBossPokemon('Froslass', 10000000, 58),
+        new DungeonBossPokemon('Giratina (Origin)', 10000000, 70),
     ],
     96500, 1);
