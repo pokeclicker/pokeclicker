@@ -797,14 +797,8 @@ export type Environment = keyof typeof Environments;
 
 export const EnvironmentCssClass: Record<Environment, string> = {
     Water: 'water',
-    Ice: 'ice',
-    Fire: 'fire',
     Forest: 'forest',
     Cave: 'cave',
-    GemCave: 'cave-gem',
-    PowerPlant: 'power-plant',
-    Mansion: 'mansion',
-    Graveyard: 'graveyard',
     Indoors: 'indoors',
     Default: '',
 };
