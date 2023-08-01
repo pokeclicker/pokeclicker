@@ -115,7 +115,7 @@ class MapHelper {
     }
 
     public static calculateBattleCssClass(): string {
-        return `${this.getCurrentSubEnvironment()? GameConstants.SubEnvironmentCssClass[this.getCurrentSubEnvironment()] : GameConstants.EnvironmentCssClass[this.getCurrentEnvironment()]}`;
+        return `${this.getCurrentSubEnvironment() ? GameConstants.SubEnvironmentCssClass[this.getCurrentSubEnvironment()] : GameConstants.EnvironmentCssClass[this.getCurrentEnvironment()]}`;
     }
 
     public static calculateRouteCssClass(route: number, region: GameConstants.Region): string {
