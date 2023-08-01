@@ -96,6 +96,10 @@ class MapHelper {
 
     public static getCurrentSubEnvironment(): GameConstants.SubEnvironment {
         const area = player.route() ||
+            (App.game.gameState == GameConstants.GameState.temporaryBattle
+                ? TemporaryBattleRunner.getSubEnvironmentArea() : undefined) ||
+            (App.game.gameState == GameConstants.GameState.gym
+                ? GymRunner.getSubEnvironmentArea() : undefined) ||
             player.town()?.name ||
             undefined;
 

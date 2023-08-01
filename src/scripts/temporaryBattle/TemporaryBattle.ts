@@ -8,6 +8,7 @@ type TemporaryBattleOptionalArgument = {
     visibleRequirement?: Requirement,
     hideTrainer?: boolean,
     environment?: GameConstants.Environment
+    subEnvironment?: GameConstants.SubEnvironment // Can be assigned without an environment
 };
 
 class TemporaryBattle extends TownContent {

@@ -138,6 +138,11 @@ class GymRunner {
         return gym.optionalArgs.environment;
     }
 
+    public static getSubEnvironmentArea() {
+        const gym = GymRunner.gymObservable();
+        return gym.optionalArgs.subEnvironment;
+    }
+
 }
 
 document.addEventListener('DOMContentLoaded', () => {

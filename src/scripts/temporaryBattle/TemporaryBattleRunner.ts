@@ -115,4 +115,9 @@ class TemporaryBattleRunner {
             ?? battle?.parent?.name
             ?? battle?.optionalArgs.returnTown;
     }
+
+    public static getSubEnvironmentArea() {
+        const battle = TemporaryBattleRunner.battleObservable();
+        return battle?.optionalArgs.subEnvironment;
+    }
 }

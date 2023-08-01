@@ -17,6 +17,7 @@ interface optionalGymArgs {
     displayName?: string,
     imageName?: string,
     environment?: GameConstants.Environment,
+    subEnvironment?: GameConstants.SubEnvironment, // Can be assigned without an environment
 }
 
 /**
