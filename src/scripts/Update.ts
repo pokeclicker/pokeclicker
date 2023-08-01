@@ -2369,6 +2369,28 @@ class Update implements Saveable {
 
             // Fixing Silvally item amounts
             Object.keys(playerData._itemList).filter(itemName => itemName.includes('Memory_Silvally')).forEach(itemName => playerData._itemList[itemName] = Math.min(1, playerData._itemList[itemName]));
+
+            // Updates Sorting
+            if (settingsData.hatcherySort >= 5) {
+                settingsData.hatcherySort++;
+            } else if (settingsData.partySort == 2) {
+                // Sort by attack -> attack at lv100
+                settingsData.hatcherySort = 5;
+            }
+            if (settingsData.partySort >= 5) {
+                settingsData.partySort++;
+            }
+            if (settingsData.vitaminSort >= 5) {
+                settingsData.vitaminSort++;
+            }
+            if (settingsData.heldItemSort >= 5) {
+                settingsData.heldItemSort++;
+            }
+            saveData.breeding.hatcheryHelpers?.forEach(helper => {
+                if (helper.sortOption >= 5) {
+                    helper.sortOption++;
+                }
+            });
         },
     };
 
