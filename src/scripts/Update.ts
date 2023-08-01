@@ -2373,7 +2373,7 @@ class Update implements Saveable {
             // Updates Sorting
             if (settingsData.hatcherySort >= 5) {
                 settingsData.hatcherySort++;
-            } else if (settingsData.partySort == 2)
+            } else if (settingsData.partySort == 2) {
                 // Sort by attack -> attack at lv100
                 settingsData.hatcherySort = 5;
             }
