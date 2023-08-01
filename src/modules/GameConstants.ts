@@ -631,6 +631,7 @@ export const ACHIEVEMENT_DEFEAT_DUNGEON_VALUES = [
     500,
 ];
 
+// Use Environments for mechanics (Burmy evolutions, dive ball, etc.)
 export type EnvironmentData = Partial<Record<Region, Set<string | number>>>;
 export const Environments: Record<string, EnvironmentData> = {
     Water: {
@@ -721,6 +722,8 @@ export const Environments: Record<string, EnvironmentData> = {
     Default: {},
 };
 
+// Use SubEnvironments to specify visuals (Cerulean Cave has Gems). Can be independent of above Environments (ex. Lake Acuity is a water environment for dive balls but we want it to look icy)
+// If changing an Environment to SubEnvironment or vice versa, don't forget to change it in GameConstants.d.ts, GymList.ts, TemporaryBattleList.ts, or elsewhere too (Burmy, dive ball, etc.)
 export type SubEnvironmentData = Partial<Record<Region, Set<string | number>>>;
 export const SubEnvironments: Record<string, SubEnvironmentData> = {
     GemCave: {
