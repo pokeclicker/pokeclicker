@@ -738,6 +738,71 @@ export const Environments: Record<string, EnvironmentData> = {
 
 export type SubEnvironmentData = Partial<Record<Region, Set<string | number>>>;
 export const SubEnvironments: Record<string, SubEnvironmentData> = {
+    GemCave: {
+        [Region.kanto]: new Set(['Viridian City', 'Cerulean Cave', 'Sunburst Island']),
+        [Region.johto]: new Set(['Blackthorn City', 'Mt. Silver', 'Whirl Islands']),
+        [Region.hoenn]: new Set(['Cave of Origin', 'Sky Pillar', 'Sealed Chamber', 137, 'Deep Colosseum', 'Under Colosseum']),
+        [Region.sinnoh]: new Set(['Spear Pillar', 'Hall of Origin']),
+        [Region.unova]: new Set(['Chargestone Cave', 'Mistralton Cave', 'Cave of Being']),
+        [Region.kalos]: new Set(['Glittering Cave', 'Reflection Cave']),
+        [Region.alola]: new Set(['Altar of the Sunne and Moone', 'Resolution Cave']),
+        [Region.galar]: new Set(['Galar Mine', 'Galar Mine No. 2', 'Iron Ruins']),
+    },
+
+    Fire: {
+        [Region.kanto]: new Set(['Cinnabar Island', 'Mt. Ember', 'Mt. Ember Summit', 'Ruby Path']),
+        [Region.johto]: new Set(),
+        [Region.hoenn]: new Set(['Lavaridge Town', 'Fiery Path', 'Mt. Chimney', 'Mt. Chimney Crater', 'Magma Hideout', 'Mt. Battle']),
+        [Region.sinnoh]: new Set(['Stark Mountain']),
+        [Region.unova]: new Set(['Reversal Mountain']),
+        [Region.kalos]: new Set(),
+        [Region.alola]: new Set(['Wela Volcano Park']),
+        [Region.galar]: new Set(['Motostoke']),
+    },
+    
+    Ice: {
+        [Region.kanto]: new Set(['Seafoam Islands', 'Icefall Cave']),
+        [Region.johto]: new Set(['Mahogany Town', 'Ice Path']),
+        [Region.hoenn]: new Set(['Sootopolis City', 'Shoal Cave']),
+        [Region.sinnoh]: new Set([216, 217, 'Snowpoint City', 'Lake Acuity']),
+        [Region.unova]: new Set(['Giant Chasm', 'Team Plasma Assault']),
+        [Region.kalos]: new Set([17, 'Dendemille Town', 'Snowbelle City', 'Frost Cavern']),
+        [Region.alola]: new Set(['Mount Lanakila']),
+        [Region.galar]: new Set(['Circhester', 'Iceberg Ruins', 'Crown Shrine', 'Freezington', 26, 28, 31, 32, 46, 47, 54, 55]),
+    },
+
+    PowerPlant: {
+        [Region.kanto]: new Set(['Vermilion City', 'Rocket Game Corner', 'Power Plant']),
+        [Region.johto]: new Set(['Tin Tower', 'Team Rocket\'s Hideout', 'Radio Tower']),
+        [Region.hoenn]: new Set(['Mauville City', 'New Mauville', 'Weather Institute', 'Aqua Hideout', 'Near Space', 'Pyrite Colosseum', 'Cipher Lab', 'Realgam Tower Battles', 'Realgam Colosseum', 'Cipher Key Lair']),
+        [Region.sinnoh]: new Set(['Sunyshore City', 'Valley Windworks', 'Team Galactic Eterna Building', 'Team Galactic HQ']),
+        [Region.unova]: new Set(['Castelia Sewers', 'Virbank City', 'Nimbasa City', 'A Totally Unsuspicious Frigate', 'Plasma Frigate']),
+        [Region.kalos]: new Set(['Lumiose City', 'Kalos Power Plant', 'Poké Ball Factory', 'Team Flare Secret HQ']),
+        [Region.alola]: new Set(['Aether Paradise', 'Hokulani Observatory', 'Aether Foundation']),
+        [Region.galar]: new Set(['Spikemuth', 'Energy Plant', 'Armor Station', 'Crown Tundra Station']),
+    },
+
+    Mansion: {
+        [Region.kanto]: new Set(['Silph Co.', 'Pokémon Mansion']),
+        [Region.johto]: new Set(['Olivine City', 'Sprout Tower', 'Burned Tower']),
+        [Region.hoenn]: new Set(['Petalburg City', 'Phenac City Battles', 'Pyrite Town Battles', 'Pyrite Building', 'Snagem Hideout', 'Phenac Stadium', 'Orre Colosseum', 'Citadark Isle Dome']),
+        [Region.sinnoh]: new Set(['Veilstone City', 'Canalave City', 'Snowpoint Temple']),
+        [Region.unova]: new Set(['Castelia City', 'Mistralton City', 'Opelucid City', 'Liberty Garden', 'Dragonspiral Tower', 'Dreamyard']),
+        [Region.kalos]: new Set(['Parfum Palace', 'Lost Hotel']),
+        [Region.alola]: new Set(['Trainers\' School', 'Thrifty Megamart', 'Po Town', 'Ruins of Conflict', 'Ruins of Life', 'Ruins of Abundance', 'Ruins of Hope']),
+        [Region.galar]: new Set(['Rose Tower', 'Hammerlocke', 'Stow-on-Side', 'Tower of Darkness', 'Tower of Waters', 'Professor Magnolia\'s House', 'Wyndon', 'Wyndon Stadium', 'Master Dojo', 11]),
+    },
+
+    Graveyard: {
+        [Region.kanto]: new Set(['Saffron City', 'Pokémon Tower']),
+        [Region.johto]: new Set(['Ecruteak City']),
+        [Region.hoenn]: new Set(['Mossdeep City', 'Mt. Pyre']),
+        [Region.sinnoh]: new Set(['Hearthome City', 'Old Chateau', 'Solaceon Ruins', 'Distortion World']),
+        [Region.unova]: new Set(['Celestial Tower']),
+        [Region.kalos]: new Set(),
+        [Region.alola]: new Set(['Hau\'oli Cemetery', 'Memorial Hill']),
+        [Region.galar]: new Set(['Dusty Bowl', 49]),
+    },
 };
 
 export type Environment = keyof typeof Environments;
