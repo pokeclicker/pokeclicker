@@ -257,9 +257,7 @@ namespace GameConstants {
         Water: EnvironmentData,
         Forest: EnvironmentData,
         Cave: EnvironmentData,
-        PowerPlant: EnvironmentData,
-        Mansion: EnvironmentData,
-        Graveyard: EnvironmentData,
+        Indoors: EnvironmentData,
         Default: EnvironmentData,
     };
     declare type Environment = keyof typeof Environments;
