@@ -736,6 +736,10 @@ export const Environments: Record<string, EnvironmentData> = {
     Default: {},
 };
 
+export type SubEnvironmentData = Partial<Record<Region, Set<string | number>>>;
+export const SubEnvironments: Record<string, SubEnvironmentData> = {
+};
+
 export type Environment = keyof typeof Environments;
 
 export const EnvironmentCssClass: Record<Environment, string> = {
@@ -749,6 +753,17 @@ export const EnvironmentCssClass: Record<Environment, string> = {
     Mansion: 'mansion',
     Graveyard: 'graveyard',
     Default: '',
+};
+
+export type SubEnvironment = keyof typeof SubEnvironments;
+
+export const SubEnvironmentCssClass: Record<SubEnvironment, string> = {
+    GemCave: 'cave-gem',
+    Fire: 'fire',
+    Ice: 'ice',
+    PowerPlant: 'power-plant',
+    Mansion: 'mansion',
+    Graveyard: 'graveyard',
 };
 
 // Starter Pokémon

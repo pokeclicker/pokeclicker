@@ -267,6 +267,17 @@ namespace GameConstants {
     };
     declare type Environment = keyof typeof Environments;
     declare const EnvironmentCssClass:Record<Environment, string>;
+    declare type SubEnvironmentData = Partial<Record<number, Set<string | number>>>
+    declare const SubEnvironments: {
+        GemCave: SubEnvironmentData,
+        Fire: SubEnvironmentData,
+        Ice: SubEnvironmentData,
+        PowerPlant: SubEnvironmentData,
+        Mansion: SubEnvironmentData,
+        Graveyard: SubEnvironmentData,
+    };
+    declare type SubEnvironment = keyof typeof SubEnvironments;
+    declare const SubEnvironmentCssClass:Record<SubEnvironment, string>;
     declare enum Starter {
         None = -1,
         Grass = 0,

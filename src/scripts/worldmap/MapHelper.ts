@@ -94,6 +94,22 @@ class MapHelper {
         return (env as GameConstants.Environment);
     }
 
+    public static getCurrentSubEnvironment(): GameConstants.SubEnvironment {
+        const area = player.route() ||
+            player.town()?.name ||
+            undefined;
+
+        if (area in GameConstants.SubEnvironments) {
+            return area;
+        }
+
+        const [subEnv] = Object.entries(GameConstants.SubEnvironments).find(
+            ([, regions]) => regions[player.region]?.has(area)
+        ) || [];
+
+        return (subEnv as GameConstants.SubEnvironment);
+    }
+
     public static calculateBattleCssClass(): string {
         return GameConstants.EnvironmentCssClass[this.getCurrentEnvironment()];
     }
