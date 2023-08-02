@@ -68,20 +68,20 @@ class QuestLine {
         const quest = this.quests()[index];
         if (initial != undefined) {
             quest.initial(initial);
-        } else if (notifyStart) {
-            Notifier.notify({
-                title: 'New Quest Line Started!',
-                message: `${quest.description}\n<i>"${this.name}" added to the Quest List!</i>`,
-                type: NotificationConstants.NotificationOption.success,
-                timeout: 5 * GameConstants.MINUTE,
-            });
-            quest.begin();
         } else {
             quest.begin();
         }
         quest.onLoad();
         this.curQuestInitial(quest.initial());
         this.state(QuestLineState.started);
+        if (notifyStart) {
+            Notifier.notify({
+                title: 'New Quest Line Started!',
+                message: `${quest.description}\n<i>"${this.name}" added to the Quest List!</i>`,
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 5 * GameConstants.MINUTE,
+            });
+        }
     }
 
     resumeAt(index: number, initial) {
