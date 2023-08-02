@@ -273,10 +273,8 @@ class FenceBody extends SandBody {
 
 
 class WaterBody extends SafariBody {
-    constructor() {
+    constructor(x = Rand.intBetween(3, 5), y = Rand.intBetween(3, 5)) {
         super();
-        const x = Rand.intBetween(3, 5);
-        const y = Rand.intBetween(3, 5);
         const body = [];
         for (let i = 0; i < y; i++) {
             const row = [];
