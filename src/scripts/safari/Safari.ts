@@ -16,6 +16,7 @@ class Safari {
     static balls: KnockoutObservable<number> = ko.observable().extend({ numeric: 0 });
     static activeRegion: KnockoutObservable<GameConstants.Region> = ko.observable(GameConstants.Region.none);
     private static maxPlacementAttempts = 20;
+    private static readonly moveSpeed = 250;
 
     // Safari level
     static maxSafariLevel = 40;
@@ -317,7 +318,7 @@ class Safari {
             document.getElementById('sprite').classList.value = `walk${direction} moving`;
             Safari.playerXY.x = newPos.x;
             Safari.playerXY.y = newPos.y;
-            $('#sprite').animate(offset, 250, 'linear', () => {
+            $('#sprite').animate(offset, Safari.moveSpeed, 'linear', () => {
                 Safari.checkBattle();
                 Safari.checkItem();
                 Safari.isMoving = false;
@@ -344,7 +345,7 @@ class Safari {
                     Safari.walking = true;
                     Safari.step(Safari.queue[0]);
                 }
-            }, 250);
+            }, Safari.moveSpeed);
         }
     }
 

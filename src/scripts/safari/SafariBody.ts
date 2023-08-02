@@ -12,30 +12,30 @@ abstract class SafariBody {
         if (x === 0) {
             ret[3] = false;
         } else {
-            ret[3] = this.grid[y][x - 1] !== 0;
+            ret[3] = this.grid[y][x - 1] !== SafariTiles.ground;
         }
         if (y === 0) {
             ret[0] = false;
         } else {
-            ret[0] = this.grid[y - 1][x] !== 0;
+            ret[0] = this.grid[y - 1][x] !== SafariTiles.ground;
         }
         if (x === this.grid[0].length - 1) {
             ret[1] = false;
         } else {
-            ret[1] = this.grid[y][x + 1] !== 0;
+            ret[1] = this.grid[y][x + 1] !== SafariTiles.ground;
         }
 
         if (y === this.grid.length - 1) {
             ret[2] = false;
         } else {
-            ret[2] = this.grid[y + 1][x] !== 0 && this.grid[y + 1][x] !== undefined;
+            ret[2] = this.grid[y + 1][x] !== SafariTiles.ground && this.grid[y + 1][x] !== undefined;
         }
 
         if (ret.equals([true, true, true, true])) {
-            cross[0] = this.grid[y - 1][x + 1] !== 0;
-            cross[1] = this.grid[y + 1][x + 1] !== 0;
-            cross[2] = this.grid[y + 1][x - 1] !== 0;
-            cross[3] = this.grid[y - 1][x - 1] !== 0;
+            cross[0] = this.grid[y - 1][x + 1] !== SafariTiles.ground;
+            cross[1] = this.grid[y + 1][x + 1] !== SafariTiles.ground;
+            cross[2] = this.grid[y + 1][x - 1] !== SafariTiles.ground;
+            cross[3] = this.grid[y - 1][x - 1] !== SafariTiles.ground;
         }
         return {
             plus: ret,
@@ -71,7 +71,7 @@ abstract class SafariBody {
 
 
 class SandBody extends SafariBody {
-    edgeDetectCheck = 15;
+    edgeDetectCheck = SafariTiles.sandC;
 
     constructor(
         x: number = SandBody.randomInt(),
@@ -107,16 +107,16 @@ class SandBody extends SafariBody {
 
     private static addCube(x: number, y: number, body: Array<Array<number>>): Array<Array<number>> {
         if (Rand.boolean()) {
-            body[y + 2][x] = 15;
-            body[y + 2][x + 1] = 15;
-            body[y][x + 2] = 15;
-            body[y + 1][x + 2] = 15;
-            body[y + 2][x + 2] = 15;
+            body[y + 2][x] = SafariTiles.sandC;
+            body[y + 2][x + 1] = SafariTiles.sandC;
+            body[y][x + 2] = SafariTiles.sandC;
+            body[y + 1][x + 2] = SafariTiles.sandC;
+            body[y + 2][x + 2] = SafariTiles.sandC;
         }
-        body[y][x] = 15;
-        body[y + 1][x] = 15;
-        body[y][x + 1] = 15;
-        body[y + 1][x + 1] = 15;
+        body[y][x] = SafariTiles.sandC;
+        body[y + 1][x] = SafariTiles.sandC;
+        body[y][x + 1] = SafariTiles.sandC;
+        body[y + 1][x + 1] = SafariTiles.sandC;
         return body;
     }
 
@@ -134,45 +134,45 @@ class SandBody extends SafariBody {
         const plus = neighbours.plus;
         const cross = neighbours.cross;
         if (plus.equals([false, true, true, false])) {
-            return 11;
+            return SafariTiles.sandUL;
         }
         if (plus.equals([false, true, true, true])) {
-            return 12;
+            return SafariTiles.sandU;
         }
         if (plus.equals([false, false, true, true])) {
-            return 13;
+            return SafariTiles.sandUR;
         }
         if (plus.equals([true, true, true, false])) {
-            return 14;
+            return SafariTiles.sandL;
         }
         if (plus.equals([true, true, true, true])) {
             if (!cross[0]) {
-                return 21;
+                return SafariTiles.sandURinverted;
             }
             if (!cross[1]) {
-                return 22;
+                return SafariTiles.sandDRinverted;
             }
             if (!cross[2]) {
-                return 23;
+                return SafariTiles.sandDLinverted;
             }
             if (!cross[3]) {
-                return 24;
+                return SafariTiles.sandULinverted;
             }
-            return 15;
+            return SafariTiles.sandC;
         }
         if (plus.equals([true, false, true, true])) {
-            return 16;
+            return SafariTiles.sandR;
         }
         if (plus.equals([true, true, false, false])) {
-            return 17;
+            return SafariTiles.sandDL;
         }
         if (plus.equals([true, true, false, true])) {
-            return 18;
+            return SafariTiles.sandD;
         }
         if (plus.equals([true, false, false, true])) {
-            return 19;
+            return SafariTiles.sandDR;
         }
-        return 10;
+        return SafariTiles.grass;
     }
 }
 
@@ -189,58 +189,58 @@ class FenceBody extends SandBody {
         const plus = neighbours.plus;
         const cross = neighbours.cross;
         if (plus.equals([false, true, true, false])) {
-            return 25;
+            return SafariTiles.fenceUL;
         }
         if (plus.equals([false, true, true, true])) {
-            return 26;
+            return SafariTiles.fenceU;
         }
         if (plus.equals([false, false, true, true])) {
-            return 27;
+            return SafariTiles.fenceUR;
         }
         if (plus.equals([true, true, true, false])) {
-            return 28;
+            return SafariTiles.fenceL;
         }
         if (plus.equals([true, true, true, true])) {
             if (!cross[0]) {
-                return 33;
+                return SafariTiles.fenceDRend;
             }
             if (!cross[1]) {
-                return 34;
+                return SafariTiles.fenceURend;
             }
             if (!cross[2]) {
-                return 35;
+                return SafariTiles.fenceULend;
             }
             if (!cross[3]) {
-                return 36;
+                return SafariTiles.fenceDLend;
             }
-            return 10;
+            return SafariTiles.grass;
         }
         if (plus.equals([true, false, true, true])) {
-            return 29;
+            return SafariTiles.fenceR;
         }
         if (plus.equals([true, true, false, false])) {
-            return 30;
+            return SafariTiles.fenceDL;
         }
         if (plus.equals([true, true, false, true])) {
-            return 31;
+            return SafariTiles.fenceD;
         }
         if (plus.equals([true, false, false, true])) {
-            return 32;
+            return SafariTiles.fenceDR;
         }
-        return 10;
+        return SafariTiles.grass;
     }
 
     private openFence() {
         const removedTiles = [];
-        const options = [26, 28, 29, 31];
+        const options = [SafariTiles.fenceU, SafariTiles.fenceL, SafariTiles.fenceR, SafariTiles.fenceD];
         const pick = Rand.fromArray(options);
         for (let i = 0; i < this.grid.length; i++) {
             for (let j = 0; j < this.grid[0].length; j++) {
                 if (this.grid[i][j] === pick) {
-                    if (pick == 28 || pick == 29) { // Only tiles connected to the left/right fence tiles are broken
+                    if (pick == SafariTiles.fenceL || pick == SafariTiles.fenceR) { // Only tiles connected to the left/right fence tiles are broken
                         removedTiles.push({x: j, y: i});
                     }
-                    this.grid[i][j] = 0;
+                    this.grid[i][j] = SafariTiles.ground;
                 }
             }
         }
@@ -249,20 +249,20 @@ class FenceBody extends SandBody {
             const tileAbove = this.grid[pos.y - 1] ? this.grid[pos.y - 1][pos.x] : undefined;
             const tileBelow = this.grid[pos.y + 1] ? this.grid[pos.y + 1][pos.x] : undefined;
             switch (pick) {
-                case 28: // Left fence tile
-                    if (tileAbove === 25 || tileAbove === 35) {
-                        this.grid[pos.y - 1][pos.x] = 26;
+                case SafariTiles.fenceL: // Left fence tile
+                    if (tileAbove === SafariTiles.fenceUL || tileAbove === SafariTiles.fenceULend) {
+                        this.grid[pos.y - 1][pos.x] = SafariTiles.fenceU;
                     }
-                    if (tileBelow === 30 || tileBelow === 36) {
-                        this.grid[pos.y + 1][pos.x] = 31;
+                    if (tileBelow === SafariTiles.fenceDL || tileBelow === SafariTiles.fenceDLend) {
+                        this.grid[pos.y + 1][pos.x] = SafariTiles.fenceD;
                     }
                     break;
-                case 29: // Right fence tile
-                    if (tileAbove === 27 || tileAbove === 34) {
-                        this.grid[pos.y - 1][pos.x] = 26;
+                case SafariTiles.fenceR: // Right fence tile
+                    if (tileAbove === SafariTiles.fenceUR || tileAbove === SafariTiles.fenceURend) {
+                        this.grid[pos.y - 1][pos.x] = SafariTiles.fenceU;
                     }
-                    if (tileBelow === 32 || tileBelow === 33) {
-                        this.grid[pos.y + 1][pos.x] = 31;
+                    if (tileBelow === SafariTiles.fenceDR || tileBelow === SafariTiles.fenceDRend) {
+                        this.grid[pos.y + 1][pos.x] = SafariTiles.fenceD;
                     }
                     break;
                 default:
@@ -283,27 +283,27 @@ class WaterBody extends SafariBody {
             for (let j = 0; j < x; j++) {
                 if (i === 0) {
                     if ( j === 0) {
-                        row.push(1);
+                        row.push(SafariTiles.waterUL);
                     } else if (j < x - 1) {
-                        row.push(2);
+                        row.push(SafariTiles.waterU);
                     } else if (j === x - 1) {
-                        row.push(3);
+                        row.push(SafariTiles.waterUR);
                     }
                 } else if (i < y - 1) {
                     if ( j === 0) {
-                        row.push(4);
+                        row.push(SafariTiles.waterL);
                     } else if (j < x - 1) {
-                        row.push(5);
+                        row.push(SafariTiles.waterC);
                     } else if (j === x - 1) {
-                        row.push(6);
+                        row.push(SafariTiles.waterR);
                     }
                 } else if (i === y - 1) {
                     if ( j === 0) {
-                        row.push(7);
+                        row.push(SafariTiles.waterDL);
                     } else if (j < x - 1) {
-                        row.push(8);
+                        row.push(SafariTiles.waterD);
                     } else if (j === x - 1) {
-                        row.push(9);
+                        row.push(SafariTiles.waterDR);
                     }
                 }
             }
@@ -325,9 +325,9 @@ class GrassBody extends SafariBody {
             const row = [];
             for (let j = 0; j < x; j++) {
                 if (j < x * 2 / 3 - 1) {
-                    row.push(10);
+                    row.push(SafariTiles.grass);
                 } else {
-                    row.push(0);
+                    row.push(SafariTiles.ground);
                 }
             }
             SafariBody.shuffle(row);
@@ -342,10 +342,10 @@ class GrassBody extends SafariBody {
     private fillHoles() {
         for (let i = 0; i < this.grid.length; i++) {
             for (let j = 0; j < this.grid[0].length; j++) {
-                if (this.grid[i][j] === 0) {
+                if (this.grid[i][j] === SafariTiles.ground) {
                     if (i !== 0 && i !== this.grid.length - 1) {
-                        if (this.grid[i - 1][j] === 10 && this.grid[i + 1][j] === 10) {
-                            this.grid[i][j] = 10;
+                        if (this.grid[i - 1][j] === SafariTiles.grass && this.grid[i + 1][j] === SafariTiles.grass) {
+                            this.grid[i][j] = SafariTiles.grass;
                         }
                     }
                 }
@@ -354,11 +354,11 @@ class GrassBody extends SafariBody {
 
         for (let i = 0; i < this.grid.length; i++) {
             for (let j = 0; j < this.grid[0].length; j++) {
-                if (this.grid[i][j] === 0) {
+                if (this.grid[i][j] === SafariTiles.ground) {
 
                     if (j !== 0 && j !== this.grid[0].length - 1) {
-                        if (this.grid[i][j - 1] === 10 && this.grid[i][j + 1] === 10) {
-                            this.grid[i][j] = 10;
+                        if (this.grid[i][j - 1] === SafariTiles.grass && this.grid[i][j + 1] === SafariTiles.grass) {
+                            this.grid[i][j] = SafariTiles.grass;
                         }
                     }
                 }
@@ -370,7 +370,12 @@ class GrassBody extends SafariBody {
 class TreeBody extends SafariBody {
     constructor() {
         super();
-        this.grid = [[37,38,39],[40,41,42],[43,44,45],[46,47,48]];
+        this.grid = [
+            [SafariTiles.treeTopL, SafariTiles.treeTopC, SafariTiles.treeTopR],
+            [SafariTiles.treeLeavesL, SafariTiles.treeLeavesC, SafariTiles.treeLeavesR],
+            [SafariTiles.treeTrunkL, SafariTiles.treeTrunkC, SafariTiles.treeTrunkR],
+            [SafariTiles.treeRootsL, SafariTiles.treeRootsC, SafariTiles.treeRootsR],
+        ];
         this.type = 'tree';
     }
 }
@@ -403,4 +408,56 @@ Array.prototype.equals = function (array) {
 
 interface Array<T> {
     equals(array: Array<T>): boolean;
+}
+
+enum SafariTiles {
+    ground = 0,
+    waterUL = 1,
+    waterU = 2,
+    waterUR = 3,
+    waterL = 4,
+    waterC = 5,
+    waterR = 6,
+    waterDL = 7,
+    waterD = 8,
+    waterDR = 9,
+    grass = 10,
+    sandUL = 11,
+    sandU = 12,
+    sandUR = 13,
+    sandL = 14,
+    sandC = 15,
+    sandR = 16,
+    sandDL = 17,
+    sandD = 18,
+    sandDR = 19,
+    sandURinverted = 21,
+    sandDRinverted = 22,
+    sandDLinverted = 23,
+    sandULinverted = 24,
+    fenceUL = 25,
+    fenceU = 26,
+    fenceUR = 27,
+    fenceL = 28,
+    fenceR = 29,
+    fenceDL = 30,
+    fenceD = 31,
+    fenceDR = 32,
+    fenceDRend = 33,
+    fenceURend = 34,
+    fenceULend = 35,
+    fenceDLend = 36,
+    treeTopL = 37,
+    treeTopC = 38,
+    treeTopR = 39,
+    treeLeavesL = 40,
+    treeLeavesC = 41,
+    treeLeavesR = 42,
+    treeTrunkL = 43,
+    treeTrunkC = 44,
+    treeTrunkR = 45,
+    treeRootsL = 46,
+    treeRootsC = 47,
+    treeRootsR = 48,
+    sign = 51,
 }
