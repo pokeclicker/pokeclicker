@@ -257,9 +257,9 @@ namespace GameConstants {
         MagneticField: EnvironmentData,
         MossRock: EnvironmentData,
         IceRock: EnvironmentData,
-        PlantCloak: EnvironmentData,
-        SandCloak: EnvironmentData,
-        TrashCloak: EnvironmentData,
+        Grassy: EnvironmentData,
+        Sandy: EnvironmentData,
+        Urban: EnvironmentData,
         DiveBall: EnvironmentData,
     };
     declare type Environment = keyof typeof Environments;

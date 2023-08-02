@@ -142,7 +142,7 @@ class MapHelper {
         }
 
         // Water routes
-        if (GameConstants.Environments.DiveBall[region]?.has(route)) {
+        if (GameConstants.SubEnvironments.Water[region]?.has(route)) {
             cls = `${cls} waterRoute`;
         }
 

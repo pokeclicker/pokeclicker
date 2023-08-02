@@ -658,11 +658,11 @@ export const Environments: Record<string, EnvironmentData | SubEnvironment[]> = 
         [Region.alola]: new Set(['Mount Lanakila']),
     },
 
-    PlantCloak: ['Default', 'Forest'],
+    Grassy: ['Default', 'Forest'],
 
-    SandCloak: ['Cave', 'GemCave'],
+    Sandy: ['Cave', 'GemCave'],
 
-    TrashCloak: ['PowerPlant', 'Mansion', 'Graveyard'],
+    Urban: ['PowerPlant', 'Mansion', 'Graveyard'],
 
     DiveBall: {[Region.sinnoh]: new Set(['Lake Acuity'])} ['Water'],
 };
