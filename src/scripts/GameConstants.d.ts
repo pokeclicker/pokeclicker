@@ -254,10 +254,13 @@ namespace GameConstants {
     declare const ACHIEVEMENT_DEFEAT_DUNGEON_VALUES: number[];
     declare type EnvironmentData = Partial<Record<number, Set<string | number>>>
     declare const Environments: {
-        Water: EnvironmentData,
-        Forest: EnvironmentData,
-        Cave: EnvironmentData,
-        Indoors: EnvironmentData,
+        MagneticField: EnvironmentData,
+        MossRock: EnvironmentData,
+        IceRock: EnvironmentData,
+        PlantCloak: EnvironmentData,
+        SandCloak: EnvironmentData,
+        TrashCloak: EnvironmentData,
+        DiveBall: EnvironmentData,
     };
     declare type Environment = keyof typeof Environments;
     declare type SubEnvironmentData = Partial<Record<number, Set<string | number>>>

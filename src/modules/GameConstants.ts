@@ -633,18 +633,79 @@ export const ACHIEVEMENT_DEFEAT_DUNGEON_VALUES = [
 
 // Use Environments for mechanics (Burmy evolutions, dive ball, etc.)
 export type EnvironmentData = Partial<Record<Region, Set<string | number>>>;
-export const Environments: Record<string, EnvironmentData> = {
+export const Environments: Record<string, EnvironmentData | SubEnvironment[]> = {
+    MagneticField: {
+        [Region.hoenn]: new Set(['New Mauville']),
+        [Region.sinnoh]: new Set(['Mt. Coronet', 'Mt. Coronet North', 'Mt. Coronet South', 'Spear Pillar', 'Hall of Origin']),
+        [Region.unova]: new Set(['Chargestone Cave']),
+        [Region.kalos]: new Set([13]),
+        [Region.alola]: new Set(['Vast Poni Canyon']),
+    },
+
+    MossRock: {
+        [Region.hoenn]: new Set(['Petalburg Woods']),
+        [Region.sinnoh]: new Set(['Eterna Forest']),
+        [Region.unova]: new Set(['Pinwheel Forest']),
+        [Region.kalos]: new Set([20]),
+        [Region.alola]: new Set(['Lush Jungle']),
+    },
+
+    IceRock: {
+        [Region.hoenn]: new Set(['Shoal Cave']),
+        [Region.sinnoh]: new Set([217]),
+        [Region.unova]: new Set(['Twist Mountain']),
+        [Region.kalos]: new Set(['Frost Cavern']),
+        [Region.alola]: new Set(['Mount Lanakila']),
+    },
+
+    PlantCloak: ['Default', 'Forest'],
+
+    SandCloak: ['Cave', 'GemCave'],
+
+    TrashCloak: ['PowerPlant', 'Mansion', 'Graveyard'],
+
+    DiveBall: {[Region.sinnoh]: new Set(['Lake Acuity'])} ['Water'],
+};
+
+export type Environment = keyof typeof Environments;
+
+// Use SubEnvironments to specify visuals (Cerulean Cave has Gems). Can be independent of above Environments (ex. Lake Acuity is a water environment for dive balls but we want it to look icy)
+// If changing an Environment to SubEnvironment or vice versa, don't forget to change it in GameConstants.d.ts, GymList.ts, TemporaryBattleList.ts, or elsewhere too (PokemonList.ts, Pokeballs.ts, etc.)
+export type SubEnvironmentData = Partial<Record<Region, Set<string | number>>>;
+export const SubEnvironments: Record<string, SubEnvironmentData> = {
     Water: {
         [Region.kanto]: new Set([12, 13, 19, 20, 21, 24, 26, 31, 32, 33, 34, 35, 36, 'Cerulean City']),
         [Region.johto]: new Set([40, 41, 'Slowpoke Well']),
-        [Region.hoenn]: new Set([105, 106, 107, 108, 109, 118, 122, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 'Sootopolis City', 'Gateon Port Battles']),
-        [Region.sinnoh]: new Set([218, 219, 220, 223, 230, 'Pastoria City', 'Lake Verity', 'Lake Valor', 'Lake Acuity', 'Sendoff Spring']),
+        [Region.hoenn]: new Set([105, 106, 107, 108, 109, 118, 122, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 'Gateon Port Battles']),
+        [Region.sinnoh]: new Set([218, 219, 220, 223, 230, 'Pastoria City', 'Lake Verity', 'Lake Valor', 'Sendoff Spring']),
         [Region.unova]: new Set([17, 18, 21, 24, 'Undella Town', 'Humilau City']),
         [Region.kalos]: new Set([8, 23, 'Couriway Town', 'Sea Spirit\'s Den']),
         [Region.alola]: new Set([15, 19, 20, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 'Hoppy Town', 'Friend League', 'Quick League', 'Heavy League', 'Great League', 'Fast League', 'Luxury League', 'Heal League', 'Ultra League', 'Elite Four League', 'Master League', 'Magikarp\'s Eye', 'Seafolk Village', 'Brooklet Hill', 'Mina\'s Houseboat', 'Lake of the Sunne and Moone']),
         [Region.galar]: new Set(['Hulbury', 'Roaring-Sea Caves', 5, 6, 8, 9, 16, 21, 27, 29, 36, 37, 41, 42, 43, 44, 51, 53]),
     },
 
+    Ice: {
+        [Region.kanto]: new Set(['Seafoam Islands', 'Icefall Cave']),
+        [Region.johto]: new Set(['Mahogany Town', 'Ice Path']),
+        [Region.hoenn]: new Set(['Sootopolis City', 'Shoal Cave']),
+        [Region.sinnoh]: new Set([216, 217, 'Snowpoint City', 'Lake Acuity']),
+        [Region.unova]: new Set(['Giant Chasm', 'Team Plasma Assault']),
+        [Region.kalos]: new Set([17, 'Dendemille Town', 'Snowbelle City', 'Frost Cavern']),
+        [Region.alola]: new Set(['Mount Lanakila']),
+        [Region.galar]: new Set(['Circhester', 'Iceberg Ruins', 'Crown Shrine', 'Freezington', 26, 28, 31, 32, 46, 47, 54, 55]),
+    },
+    
+    Fire: {
+        [Region.kanto]: new Set(['Cinnabar Island', 'Mt. Ember', 'Mt. Ember Summit', 'Ruby Path']),
+        [Region.johto]: new Set(),
+        [Region.hoenn]: new Set(['Lavaridge Town', 'Fiery Path', 'Mt. Chimney', 'Mt. Chimney Crater', 'Magma Hideout', 'Mt. Battle']),
+        [Region.sinnoh]: new Set(['Stark Mountain']),
+        [Region.unova]: new Set(['Reversal Mountain']),
+        [Region.kalos]: new Set(),
+        [Region.alola]: new Set(['Wela Volcano Park']),
+        [Region.galar]: new Set(['Motostoke']),
+    },
+    
     Forest: {
         [Region.kanto]: new Set([25, 30, 'Fuchsia City', 'Viridian Forest', 'Berry Forest', 'Pattern Bush', 'Valencia Island', 'Pinkan Forest']),
         [Region.johto]: new Set([36, 38, 43, 'Azalea Town', 'Ilex Forest']),
@@ -657,71 +718,17 @@ export const Environments: Record<string, EnvironmentData> = {
     },
 
     Cave: {
-        [Region.kanto]: new Set([37, 39, 'Pewter City', 'Diglett\'s Cave', 'Mt. Moon', 'Rock Tunnel', 'Victory Road', 'Lost Cave', 'Altering Cave', 'Tanoby Ruins',
-            'Viridian City', 'Cerulean Cave', 'Sunburst Island',
-            'Mt. Ember', 'Mt. Ember Summit', 'Ruby Path',
-            'Seafoam Islands', 'Icefall Cave']),
-        [Region.johto]: new Set(['Cianwood City', 'Ruins of Alph', 'Union Cave', 'Mt. Mortar', 'Dark Cave', 'Tohjo Falls', 'Victory Road Johto',
-            'Blackthorn City', 'Mt. Silver', 'Whirl Islands',
-            'Ice Path']),
-        [Region.hoenn]: new Set(['Rustboro City', 'Dewford Town', 'Rusturf Tunnel', 'Granite Cave', 'Meteor Falls', 'Jagged Pass', 'Seafloor Cavern', 'Victory Road Hoenn', 135, 'Pyrite Cave', 'Relic Cave', 'The Under', 'Citadark Isle',
-            'Cave of Origin', 'Sky Pillar', 'Sealed Chamber', 137, 'Deep Colosseum', 'Under Colosseum',
-            'Fiery Path', 'Mt. Chimney', 'Mt. Chimney Crater', 'Magma Hideout', 'Mt. Battle',
-            'Shoal Cave']),
-        [Region.sinnoh]: new Set(['Oreburgh City', 'Oreburgh Gate', 'Wayward Cave', 'Mt. Coronet', 'Mt. Coronet South', 'Iron Island', 'Mt. Coronet North', 'Victory Road Sinnoh',
-            'Spear Pillar', 'Hall of Origin',
-            'Stark Mountain']),
+        [Region.kanto]: new Set([37, 39, 'Pewter City', 'Diglett\'s Cave', 'Mt. Moon', 'Rock Tunnel', 'Victory Road', 'Lost Cave', 'Altering Cave', 'Tanoby Ruins']),
+        [Region.johto]: new Set(['Cianwood City', 'Ruins of Alph', 'Union Cave', 'Mt. Mortar', 'Dark Cave', 'Tohjo Falls', 'Victory Road Johto']),
+        [Region.hoenn]: new Set(['Rustboro City', 'Dewford Town', 'Rusturf Tunnel', 'Granite Cave', 'Meteor Falls', 'Jagged Pass', 'Seafloor Cavern', 'Victory Road Hoenn', 135, 'Pyrite Cave', 'Relic Cave', 'The Under', 'Citadark Isle']),
+        [Region.sinnoh]: new Set(['Oreburgh City', 'Oreburgh Gate', 'Wayward Cave', 'Mt. Coronet', 'Mt. Coronet South', 'Iron Island', 'Mt. Coronet North', 'Victory Road Sinnoh']),
         [Region.unova]: new Set(['Relic Castle', 'Relic Passage', 'Seaside Cave', 'Victory Road Unova', 'Twist Mountain',
-            'Chargestone Cave', 'Mistralton Cave', 'Cave of Being',
-            'Reversal Mountain',
-            'Giant Chasm']),
-        [Region.kalos]: new Set([9, 13, 'Connecting Cave', 'Kiloude City', 'Terminus Cave', 'Victory Road Kalos',
-            'Glittering Cave', 'Reflection Cave',
-            'Frost Cavern']),
-        [Region.alola]: new Set([12, 22, 29, 'Verdant Cavern', 'Seaward Cave', 'Ten Carat Hill', 'Diglett\'s Tunnel', 'Vast Poni Canyon',
-            'Altar of the Sunne and Moone', 'Resolution Cave',
-            'Wela Volcano Park',
-            'Mount Lanakila']),
-        [Region.galar]: new Set(['Warm-Up Tunnel', 'Courageous Cavern', 'Brawlers\' Cave', 'Rock Peak Ruins', 'Split-Decision Ruins', 'Lakeside Cave', 'Tunnel to the Top', 18,
-            'Galar Mine', 'Galar Mine No. 2', 'Iron Ruins',
-            'Iceberg Ruins', 'Crown Shrine']),
+            'Chargestone Cave', 'Mistralton Cave', 'Cave of Being']),
+        [Region.kalos]: new Set([9, 13, 'Connecting Cave', 'Kiloude City', 'Terminus Cave', 'Victory Road Kalos']),
+        [Region.alola]: new Set([12, 22, 29, 'Verdant Cavern', 'Seaward Cave', 'Ten Carat Hill', 'Diglett\'s Tunnel', 'Vast Poni Canyon']),
+        [Region.galar]: new Set(['Warm-Up Tunnel', 'Courageous Cavern', 'Brawlers\' Cave', 'Rock Peak Ruins', 'Split-Decision Ruins', 'Lakeside Cave', 'Tunnel to the Top', 18]),
     },
 
-    Indoors: {
-        [Region.kanto]: new Set(['Vermilion City', 'Rocket Game Corner', 'Power Plant',
-            'Silph Co.', 'Pokémon Mansion',
-            'Saffron City', 'Pokémon Tower']),
-        [Region.johto]: new Set(['Mahogany Town', 
-            'Tin Tower', 'Team Rocket\'s Hideout', 'Radio Tower',
-            'Olivine City', 'Sprout Tower', 'Burned Tower',
-            'Ecruteak City']),
-        [Region.hoenn]: new Set(['Lavaridge Town',
-            'Mauville City', 'New Mauville', 'Weather Institute', 'Aqua Hideout', 'Near Space', 'Pyrite Colosseum', 'Cipher Lab', 'Realgam Tower Battles', 'Realgam Colosseum', 'Cipher Key Lair',
-            'Petalburg City', 'Phenac City Battles', 'Pyrite Town Battles', 'Pyrite Building', 'Snagem Hideout', 'Phenac Stadium', 'Orre Colosseum', 'Citadark Isle Dome',
-            'Mossdeep City', 'Mt. Pyre']),
-        [Region.sinnoh]: new Set(['Sunyshore City', 'Valley Windworks', 'Team Galactic Eterna Building', 'Team Galactic HQ',
-            'Veilstone City', 'Canalave City', 'Snowpoint Temple',
-            'Hearthome City', 'Old Chateau', 'Solaceon Ruins']),
-        [Region.unova]: new Set(['Team Plasma Assault',
-            'Castelia Sewers', 'Virbank City', 'Nimbasa City', 'A Totally Unsuspicious Frigate', 'Plasma Frigate',
-            'Castelia City', 'Mistralton City', 'Opelucid City', 'Liberty Garden', 'Dragonspiral Tower', 'Dreamyard',
-            'Celestial Tower']),
-        [Region.kalos]: new Set(['Dendemille Town', 'Snowbelle City',
-            'Lumiose City', 'Kalos Power Plant', 'Poké Ball Factory', 'Team Flare Secret HQ',
-            'Lost Hotel']),
-        [Region.alola]: new Set(['Aether Paradise', 'Hokulani Observatory', 'Aether Foundation',
-            'Trainers\' School', 'Thrifty Megamart', 'Po Town', 'Ruins of Conflict', 'Ruins of Life', 'Ruins of Abundance', 'Ruins of Hope']),
-        [Region.galar]: new Set(['Motostoke',
-            'Circhester', 'Crown Shrine', 'Freezington',
-            'Spikemuth', 'Energy Plant', 'Armor Station', 'Crown Tundra Station',
-            'Rose Tower', 'Hammerlocke', 'Stow-on-Side', 'Tower of Darkness', 'Tower of Waters', 'Professor Magnolia\'s House', 'Wyndon', 'Wyndon Stadium', 'Master Dojo']),
-    },
-};
-
-// Use SubEnvironments to specify visuals (Cerulean Cave has Gems). Can be independent of above Environments (ex. Lake Acuity is a water environment for dive balls but we want it to look icy)
-// If changing an Environment to SubEnvironment or vice versa, don't forget to change it in GameConstants.d.ts, GymList.ts, TemporaryBattleList.ts, or elsewhere too (Burmy, dive ball, etc.)
-export type SubEnvironmentData = Partial<Record<Region, Set<string | number>>>;
-export const SubEnvironments: Record<string, SubEnvironmentData> = {
     GemCave: {
         [Region.kanto]: new Set(['Viridian City', 'Cerulean Cave', 'Sunburst Island']),
         [Region.johto]: new Set(['Blackthorn City', 'Mt. Silver', 'Whirl Islands']),
@@ -731,28 +738,6 @@ export const SubEnvironments: Record<string, SubEnvironmentData> = {
         [Region.kalos]: new Set(['Glittering Cave', 'Reflection Cave']),
         [Region.alola]: new Set(['Altar of the Sunne and Moone', 'Resolution Cave']),
         [Region.galar]: new Set(['Galar Mine', 'Galar Mine No. 2', 'Iron Ruins']),
-    },
-
-    Fire: {
-        [Region.kanto]: new Set(['Cinnabar Island', 'Mt. Ember', 'Mt. Ember Summit', 'Ruby Path']),
-        [Region.johto]: new Set(),
-        [Region.hoenn]: new Set(['Lavaridge Town', 'Fiery Path', 'Mt. Chimney', 'Mt. Chimney Crater', 'Magma Hideout', 'Mt. Battle']),
-        [Region.sinnoh]: new Set(['Stark Mountain']),
-        [Region.unova]: new Set(['Reversal Mountain']),
-        [Region.kalos]: new Set(),
-        [Region.alola]: new Set(['Wela Volcano Park']),
-        [Region.galar]: new Set(['Motostoke']),
-    },
-    
-    Ice: {
-        [Region.kanto]: new Set(['Seafoam Islands', 'Icefall Cave']),
-        [Region.johto]: new Set(['Mahogany Town', 'Ice Path']),
-        [Region.hoenn]: new Set(['Sootopolis City', 'Shoal Cave']),
-        [Region.sinnoh]: new Set([216, 217, 'Snowpoint City', 'Lake Acuity']),
-        [Region.unova]: new Set(['Giant Chasm', 'Team Plasma Assault']),
-        [Region.kalos]: new Set([17, 'Dendemille Town', 'Snowbelle City', 'Frost Cavern']),
-        [Region.alola]: new Set(['Mount Lanakila']),
-        [Region.galar]: new Set(['Circhester', 'Iceberg Ruins', 'Crown Shrine', 'Freezington', 26, 28, 31, 32, 46, 47, 54, 55]),
     },
 
     PowerPlant: {
@@ -791,8 +776,6 @@ export const SubEnvironments: Record<string, SubEnvironmentData> = {
     // No need to set anything here, only exists for battle overrides
     Default: {},
 };
-
-export type Environment = keyof typeof Environments;
 
 export type SubEnvironment = keyof typeof SubEnvironments;
 

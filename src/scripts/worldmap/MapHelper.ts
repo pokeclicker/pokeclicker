@@ -74,7 +74,7 @@ class MapHelper {
         return this.routeExist(route, region) && Routes.getRoute(region, route).isUnlocked();
     };
 
-    public static getCurrentEnvironment(): GameConstants.Environment {
+    public static getCurrentEnvironment(): GameConstants.Environment { // TODO: if this Environment *contains* area instead of in what Envrionment is this area *in*
         const area = player.route() ||
             (App.game.gameState == GameConstants.GameState.temporaryBattle
                 ? TemporaryBattleRunner.getEnvironmentArea() : undefined) ||
@@ -142,7 +142,7 @@ class MapHelper {
         }
 
         // Water routes
-        if (GameConstants.Environments.Water[region]?.has(route)) {
+        if (GameConstants.Environments.DiveBall[region]?.has(route)) {
             cls = `${cls} waterRoute`;
         }
 
