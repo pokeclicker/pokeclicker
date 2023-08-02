@@ -26,7 +26,7 @@ GymList['Cerulean City'] = new Gym(
     'Wow! You\'re too much, all right! You can have the CascadeBadge to show that you beat me.',
     [new RouteKillRequirement(10, GameConstants.Region.kanto, 4)],
     () => {
-        App.game.quests.getQuestLine('Team Rocket').beginQuest();
+        App.game.quests.getQuestLine('Team Rocket').beginQuest(0, undefined, true);
     }
 );
 GymList['Vermilion City'] = new Gym(
@@ -92,7 +92,7 @@ GymList['Fuchsia City'] = new Gym(
     ],
     () => {
         App.game.keyItems.gainKeyItem(KeyItemType.Safari_ticket, true);
-        App.game.quests.getQuestLine('Mining Expedition').beginQuest();
+        App.game.quests.getQuestLine('Mining Expedition').beginQuest(0, undefined, true);
     }
 );
 GymList['Cinnabar Island'] = new Gym(
@@ -109,7 +109,7 @@ GymList['Cinnabar Island'] = new Gym(
     'I have burned down to nothing! Not even ashes remain! You have earned the VolcanoBadge.',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Mansion'))],
     () => {
-        App.game.quests.getQuestLine('Bill\'s Errand').beginQuest();
+        App.game.quests.getQuestLine('Bill\'s Errand').beginQuest(0, undefined, true);
     }
 );
 GymList['Viridian City'] = new Gym(
@@ -133,7 +133,7 @@ GymList['Viridian City'] = new Gym(
     ],
     () => {
         App.game.keyItems.gainKeyItem(KeyItemType.Gem_case, true);
-        App.game.quests.getQuestLine('Persons of Interest').beginQuest();
+        App.game.quests.getQuestLine('Persons of Interest').beginQuest(0, undefined, true);
     },
     undefined,
     { imageName: 'Team Rocket Boss Giovanni' }
@@ -294,7 +294,7 @@ GymList['Ecruteak City'] = new Gym(
     'I\'m not good enough yet... All right. This Badge is yours.',
     [new GymBadgeRequirement(BadgeEnums.Plain)],
     () => {
-        App.game.quests.getQuestLine('Team Rocket Again').beginQuest();
+        App.game.quests.getQuestLine('Team Rocket Again').beginQuest(0, undefined, true);
     }
 );
 GymList['Cianwood City'] = new Gym(
@@ -473,7 +473,7 @@ GymList['Mauville City'] = new Gym(
     'Wahahahah! Fine, I lost! You ended up giving me a thrill! Take this Badge!',
     [new TemporaryBattleRequirement('Wally 1')],
     () => {
-        App.game.quests.getQuestLine('Land vs. Water').beginQuest();
+        App.game.quests.getQuestLine('Land vs. Water').beginQuest(0, undefined, true);
     }
 );
 GymList['Lavaridge Town'] = new Gym(
@@ -782,7 +782,7 @@ GymList['Oreburgh City'] = new Gym(
     'This is embarrassing... I went and lost to a Trainer who didn\'t have a single Gym Badge... But that\'s tough. You were strong, and I was weak. That\'s all there is. According to Pokémon League rules, I have to give you our Gym Badge since you\'ve beaten me, the Leader. Heres your official Pokémon League Coal Badge.',
     [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)],
     () => {
-        App.game.quests.getQuestLine('A New World').beginQuest();
+        App.game.quests.getQuestLine('A New World').beginQuest(0, undefined, true);
     }
 );
 GymList['Eterna City'] = new Gym(
@@ -989,7 +989,7 @@ GymList['Virbank City'] = new Gym(
     'Sigh! What are you doing losing, Roxie?! Well…I guess that means you\'re strong! This stinks, but I gave it everything I had, and I feel revitalized and refreshed now! Here! Proof that you beat me!',
     [new GymBadgeRequirement(BadgeEnums.Basic)],
     () => {
-        App.game.quests.getQuestLine('Hollow Truth and Ideals').beginQuest();
+        App.game.quests.getQuestLine('Hollow Truth and Ideals').beginQuest(0, undefined, true);
     }
 );
 GymList['Castelia City'] = new Gym(
@@ -1385,7 +1385,7 @@ GymList['Konikoni City'] = new Gym(
     'How lovely. Diamonds only sparkle after coal is pushed to its absolute limit. Here. The Rock-type Z-Crystal... The Rockium Z is all yours!',
     [new TemporaryBattleRequirement('Plumeria 1')],
     () => {
-        App.game.quests.getQuestLine('Eater of Light').beginQuest();
+        App.game.quests.getQuestLine('Eater of Light').beginQuest(0, undefined, true);
         player.gainItem(GameConstants.zCrystalItemType[PokemonType.Rock], 1);
     },
     undefined, { displayName: 'Olivia\'s Grand Trial' }
@@ -1947,7 +1947,7 @@ GymList['Stow-on-Side1'] = new Gym(
     // Starts Galar story quest if both Stow-on-Side gyms are defeated.
     () => {
         if (App.game.badgeCase.hasBadge(BadgeEnums.Galar_Ghost)) {
-            App.game.quests.getQuestLine('The Darkest Day').beginQuest();
+            App.game.quests.getQuestLine('The Darkest Day').beginQuest(0, undefined, true);
         }
     }, undefined, { displayName: 'Bea\'s Stow-on-Side Gym' }
 );
@@ -1967,7 +1967,7 @@ GymList['Stow-on-Side2'] = new Gym(
     // Starts Galar story quest if both Stow-on-Side gyms are defeated.
     () => {
         if (App.game.badgeCase.hasBadge(BadgeEnums.Galar_Fighting)) {
-            App.game.quests.getQuestLine('The Darkest Day').beginQuest();
+            App.game.quests.getQuestLine('The Darkest Day').beginQuest(0, undefined, true);
         }
     }, undefined, { displayName: 'Allister\'s Stow-on-Side Gym' }
 );

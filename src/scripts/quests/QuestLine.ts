@@ -64,10 +64,18 @@ class QuestLine {
         this.quests.push(quest);
     }
 
-    beginQuest(index = 0, initial?: number) {
+    beginQuest(index = 0, initial?: number, notifyStart: boolean = false) {
         const quest = this.quests()[index];
         if (initial != undefined) {
             quest.initial(initial);
+        } else if (notifyStart) {
+            Notifier.notify({
+                title: `New Quest Line Started!`,
+                message: `${quest.description}\n<i>"${this.name}" added to the Quest List!</i>`,
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 5 * GameConstants.MINUTE,
+            });
+            quest.begin();
         } else {
             quest.begin();
         }
