@@ -174,7 +174,7 @@ GymList['Elite Bruno'] = new Gym(
     [new GymBadgeRequirement(BadgeEnums.Elite_Lorelei)],
     undefined,
     undefined,
-    { environment: 'Cave' }
+    { subEnvironment: 'Cave' }
 );
 GymList['Elite Agatha'] = new Gym(
     'Agatha',

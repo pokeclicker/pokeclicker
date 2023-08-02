@@ -716,9 +716,6 @@ export const Environments: Record<string, EnvironmentData> = {
             'Spikemuth', 'Energy Plant', 'Armor Station', 'Crown Tundra Station',
             'Rose Tower', 'Hammerlocke', 'Stow-on-Side', 'Tower of Darkness', 'Tower of Waters', 'Professor Magnolia\'s House', 'Wyndon', 'Wyndon Stadium', 'Master Dojo']),
     },
-
-    // No need to set anything here, only exists for battle overrides
-    Default: {},
 };
 
 // Use SubEnvironments to specify visuals (Cerulean Cave has Gems). Can be independent of above Environments (ex. Lake Acuity is a water environment for dive balls but we want it to look icy)
@@ -790,27 +787,26 @@ export const SubEnvironments: Record<string, SubEnvironmentData> = {
         [Region.alola]: new Set(['Hau\'oli Cemetery', 'Memorial Hill']),
         [Region.galar]: new Set(['Dusty Bowl', 49]),
     },
+
+    // No need to set anything here, only exists for battle overrides
+    Default: {},
 };
 
 export type Environment = keyof typeof Environments;
 
-export const EnvironmentCssClass: Record<Environment, string> = {
-    Water: 'water',
-    Forest: 'forest',
-    Cave: 'cave',
-    Indoors: 'indoors',
-    Default: '',
-};
-
 export type SubEnvironment = keyof typeof SubEnvironments;
 
 export const SubEnvironmentCssClass: Record<SubEnvironment, string> = {
-    GemCave: 'cave-gem',
-    Fire: 'fire',
+    Water: 'water',
     Ice: 'ice',
+    Fire: 'fire',
+    Forest: 'forest',
+    Cave: 'cave',
+    GemCave: 'cave-gem',
     PowerPlant: 'power-plant',
     Mansion: 'mansion',
     Graveyard: 'graveyard',
+    Default: '',
 };
 
 // Starter Pokémon

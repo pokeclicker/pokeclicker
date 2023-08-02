@@ -258,18 +258,20 @@ namespace GameConstants {
         Forest: EnvironmentData,
         Cave: EnvironmentData,
         Indoors: EnvironmentData,
-        Default: EnvironmentData,
     };
     declare type Environment = keyof typeof Environments;
-    declare const EnvironmentCssClass:Record<Environment, string>;
     declare type SubEnvironmentData = Partial<Record<number, Set<string | number>>>
     declare const SubEnvironments: {
-        GemCave: SubEnvironmentData,
-        Fire: SubEnvironmentData,
+        Water: SubEnvironmentData,
         Ice: SubEnvironmentData,
+        Fire: SubEnvironmentData,
+        Forest: SubEnvironmentData,
+        Cave: SubEnvironmentData,
+        GemCave: SubEnvironmentData,
         PowerPlant: SubEnvironmentData,
         Mansion: SubEnvironmentData,
         Graveyard: SubEnvironmentData,
+        Default: SubEnvironmentData,
     };
     declare type SubEnvironment = keyof typeof SubEnvironments;
     declare const SubEnvironmentCssClass:Record<SubEnvironment, string>;
