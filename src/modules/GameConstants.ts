@@ -678,7 +678,7 @@ export const Environments: Record<string, EnvironmentData> = {
 
     Outdoors: {}, // Burmy Plant Cloak - Default (Tall Grass)
 
-    Cave: { // Burmy Sand Cloak - Caves, Beaches, and Deserts
+    Cave: { // Burmy Sand Cloak - Caves and Beaches
         [Region.kanto]: new Set(['Mt. Moon', 'Diglett\'s Cave', 'Rock Tunnel', 'Seafoam Islands', 'Victory Road', 'Cerulean Cave', 'Ruby Path', 'Icefall Cave', 'Lost Cave', 'Altering Cave']),
         [Region.johto]: new Set(['Union Cave', 'Slowpoke Well', 'Burned Tower', 'Mt. Mortar', 'Whirl Islands', 'Ice Path', 'Dark Cave', 'Tohjo Falls', 'Victory Road Johto', 'Mt. Silver']),
         [Region.hoenn]: new Set(['Rusturf Tunnel', 'Granite Cave', 'Fiery Path', 'Meteor Falls', 'Seafloor Cavern', 'Sealed Chamber', 'Cave of Origin', 'Victory Road Hoenn', 'Pyrite Cave', 'Relic Cave', 'Mt. Battle', 'The Under', 'Under Colosseum', 'Citadark Isle']),
