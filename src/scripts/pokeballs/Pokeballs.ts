@@ -64,7 +64,7 @@ class Pokeballs implements Feature {
             new Pokeball(GameConstants.Pokeball.Diveball, () => {
 
                 // If area is a water environment,
-                if (MapHelper.getCurrentEnvironment() == 'DiveBall') {
+                if (MapHelper.getCurrentSubEnvironment() == 'Water') {
                     return 15;
                 }
                 return 0;

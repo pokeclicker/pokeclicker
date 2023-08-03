@@ -631,45 +631,81 @@ export const ACHIEVEMENT_DEFEAT_DUNGEON_VALUES = [
     500,
 ];
 
-// Use Environments for mechanics (Burmy evolutions, dive ball, etc.)
+// Use Environments for specific things independent of visual envionments (ex. evolutions, but not dive ball)
+// If there is overlap, only the first environment an area is assigned to will register
 export type EnvironmentData = Partial<Record<Region, Set<string | number>>>;
-export const Environments: Record<string, EnvironmentData | SubEnvironment[]> = {
-    MagneticField: {
+export const Environments: Record<string, EnvironmentData> = {
+    MagneticField: { // For Magnezone, Probopass, and Vikavolt
+        [Region.kanto]: new Set([]),
+        [Region.johto]: new Set([]),
         [Region.hoenn]: new Set(['New Mauville']),
         [Region.sinnoh]: new Set(['Mt. Coronet', 'Mt. Coronet North', 'Mt. Coronet South', 'Spear Pillar', 'Hall of Origin']),
         [Region.unova]: new Set(['Chargestone Cave']),
         [Region.kalos]: new Set([13]),
         [Region.alola]: new Set(['Vast Poni Canyon']),
+        [Region.galar]: new Set([]),
+        [Region.hisui]: new Set([]),
     },
 
-    MossRock: {
+    MossRock: { // Leafeon
+        [Region.kanto]: new Set([]),
+        [Region.johto]: new Set([]),
         [Region.hoenn]: new Set(['Petalburg Woods']),
         [Region.sinnoh]: new Set(['Eterna Forest']),
         [Region.unova]: new Set(['Pinwheel Forest']),
         [Region.kalos]: new Set([20]),
         [Region.alola]: new Set(['Lush Jungle']),
+        [Region.galar]: new Set([]),
+        [Region.hisui]: new Set([]),
     },
 
-    IceRock: {
+    IceRock: { // Glaceon
+        [Region.kanto]: new Set([]),
+        [Region.johto]: new Set([]),
         [Region.hoenn]: new Set(['Shoal Cave']),
         [Region.sinnoh]: new Set([217]),
         [Region.unova]: new Set(['Twist Mountain']),
         [Region.kalos]: new Set(['Frost Cavern']),
         [Region.alola]: new Set(['Mount Lanakila']),
+        [Region.galar]: new Set([]),
+        [Region.hisui]: new Set([]),
     },
 
-    Grassy: ['Default', 'Forest'],
+    // TODO: Change Dusty Bowl from a dungeon into a route
+    // DustyBowl: { // Runerigus
+    //     [Region.galar]: new Set([]),
+    // },
 
-    Sandy: ['Cave', 'GemCave'],
+    Outdoors: {}, // Burmy Plant Cloak - Default (Tall Grass)
 
-    Urban: ['PowerPlant', 'Mansion', 'Graveyard'],
+    Cave: { // Burmy Sand Cloak - Caves, Beaches, and Deserts
+        [Region.kanto]: new Set(['Mt. Moon', 'Diglett\'s Cave', 'Rock Tunnel', 'Seafoam Islands', 'Victory Road', 'Cerulean Cave', 'Ruby Path', 'Icefall Cave', 'Lost Cave', 'Altering Cave']),
+        [Region.johto]: new Set(['Union Cave', 'Slowpoke Well', 'Burned Tower', 'Mt. Mortar', 'Whirl Islands', 'Ice Path', 'Dark Cave', 'Tohjo Falls', 'Victory Road Johto', 'Mt. Silver']),
+        [Region.hoenn]: new Set(['Rusturf Tunnel', 'Granite Cave', 'Fiery Path', 'Meteor Falls', 'Seafloor Cavern', 'Sealed Chamber', 'Cave of Origin', 'Victory Road Hoenn', 'Pyrite Cave', 'Relic Cave', 'Mt. Battle', 'The Under', 'Under Colosseum', 'Citadark Isle']),
+        [Region.sinnoh]: new Set(['Oreburgh Gate', 'Wayward Cave', 'Iron Island', 'Victory Road Sinnoh', 'Stark Mountain']),
+        [Region.unova]: new Set(['Relic Passage', 'Relic Castle', 'Mistralton Cave', 'Reversal Mountain', 'Seaside Cave', 'Giant Chasm', 'Cave of Being', 'Victory Road Unova']),
+        [Region.kalos]: new Set(['Connecting Cave', 'Glittering Cave', 'Reflection Cave', 'Sea Spirit\'s Den', 'Terminus Cave', 'Victory Road Kalos']),
+        [Region.alola]: new Set(['Verdant Cavern', 'Seaward Cave', 'Ten Carat Hill', 'Diglett\'s Tunnel', 'Resolution Cave']),
+        [Region.galar]: new Set(['Galar Mine', 'Galar Mine No. 2', 'Courageous Cavern', 'Brawler\'s Cave', 'Warm-Up Tunnel', 'Roaring-Sea Caves', 'Tunnel to the Top']),
+        [Region.hisui]: new Set([]),
+    },
 
-    DiveBall: {[Region.sinnoh]: new Set(['Lake Acuity'])} ['Water'],
+    Indoors: { // Burmy Trash Cloak - Only inside buildings
+        [Region.kanto]: new Set(['Rocket Game Corner', 'Pokémon Tower', 'Silph Co.', 'Power Plant', 'Pokémon Mansion']),
+        [Region.johto]: new Set(['Sprout Tower', 'Tin Tower', 'Team Rocket\'s Hideout', 'Radio Tower']),
+        [Region.hoenn]: new Set(['Weather Institute', 'Pyrite Building', 'Cipher Lab', 'Realgam Tower Battles', 'Cipher Key Lair']),
+        [Region.sinnoh]: new Set(['Valley Windworks', 'Old Chateau', 'Team Galactic Eterna Building', 'Team Galactic HQ']),
+        [Region.unova]: new Set(['Liberty Garden', 'Castelia Sewers', 'Celestial Tower', 'P2 Laboratory']),
+        [Region.kalos]: new Set(['Kalos Power Plant', 'Poké Ball Factory', 'Lost Hotel', 'Team Flare Secret HQ']),
+        [Region.alola]: new Set(['Trainers\' School', 'Hokulani Observatory', 'Thrifty Megamart', 'Aether Foundation', 'Mina\'s Houseboat']),
+        [Region.galar]: new Set(['Rose Tower', 'Energy Plant']),
+        [Region.hisui]: new Set([]),
+    },
 };
 
 export type Environment = keyof typeof Environments;
 
-// Use SubEnvironments to specify visuals (Cerulean Cave has Gems). Can be independent of above Environments (ex. Lake Acuity is a water environment for dive balls but we want it to look icy)
+// Use SubEnvironments to choose background image (Cerulean Cave has Gems)
 // If changing an Environment to SubEnvironment or vice versa, don't forget to change it in GameConstants.d.ts, GymList.ts, TemporaryBattleList.ts, or elsewhere too (PokemonList.ts, Pokeballs.ts, etc.)
 export const SubEnvironments: Record<string, EnvironmentData> = {
     Water: {
@@ -756,7 +792,7 @@ export const SubEnvironments: Record<string, EnvironmentData> = {
         [Region.hoenn]: new Set(['Petalburg City', 'Phenac City Battles', 'Pyrite Town Battles', 'Pyrite Building', 'Snagem Hideout', 'Phenac Stadium', 'Orre Colosseum', 'Citadark Isle Dome']),
         [Region.sinnoh]: new Set(['Veilstone City', 'Canalave City', 'Snowpoint Temple']),
         [Region.unova]: new Set(['Castelia City', 'Mistralton City', 'Opelucid City', 'Liberty Garden', 'Dragonspiral Tower', 'Dreamyard']),
-        [Region.kalos]: new Set(['Parfum Palace', 'Lost Hotel']),
+        [Region.kalos]: new Set(['Lost Hotel']),
         [Region.alola]: new Set(['Trainers\' School', 'Thrifty Megamart', 'Po Town', 'Ruins of Conflict', 'Ruins of Life', 'Ruins of Abundance', 'Ruins of Hope']),
         [Region.galar]: new Set(['Rose Tower', 'Hammerlocke', 'Stow-on-Side', 'Tower of Darkness', 'Tower of Waters', 'Professor Magnolia\'s House', 'Wyndon', 'Wyndon Stadium', 'Master Dojo', 11]),
     },

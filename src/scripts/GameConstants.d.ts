@@ -257,10 +257,9 @@ namespace GameConstants {
         MagneticField: EnvironmentData,
         MossRock: EnvironmentData,
         IceRock: EnvironmentData,
-        Grassy: EnvironmentData,
-        Sandy: EnvironmentData,
-        Urban: EnvironmentData,
-        DiveBall: EnvironmentData,
+        Outdoors: EnvironmentData,
+        Cave: EnvironmentData,
+        Indoors: EnvironmentData,
     };
     declare type Environment = keyof typeof Environments;
     declare type SubEnvironmentData = Partial<Record<number, Set<string | number>>>

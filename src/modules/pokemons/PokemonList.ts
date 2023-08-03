@@ -12999,8 +12999,8 @@ export const pokemonList = createPokemonArray(
         'evolutions': [
             LevelEvolution('Burmy (Plant)', 'Wormadam (Plant)', 20),
             LevelEvolution('Burmy (Plant)', 'Mothim', 20),
-            EnvironmentRestrictedLevelEvolution('Sandy', 'Burmy (Plant)', 'Burmy (Sand)', 1),
-            EnvironmentRestrictedLevelEvolution('Urban', 'Burmy (Plant)', 'Burmy (Trash)', 1),
+            EnvironmentRestrictedLevelEvolution('Cave', 'Burmy (Plant)', 'Burmy (Sand)', 1),
+            EnvironmentRestrictedLevelEvolution('Indoors', 'Burmy (Plant)', 'Burmy (Trash)', 1),
             DummyEvolution('Burmy (Plant)', 'Burmy (Sand)'), // TODO: remove and fix egg steps
             DummyEvolution('Burmy (Plant)', 'Burmy (Trash)'),
             DummyEvolution('Burmy (Plant)', 'Burmy (Trash)'),
@@ -13025,8 +13025,8 @@ export const pokemonList = createPokemonArray(
         'evolutions': [
             LevelEvolution('Burmy (Sand)', 'Wormadam (Sand)', 20),
             LevelEvolution('Burmy (Sand)', 'Mothim', 20),
-            // EnvironmentRestrictedLevelEvolution('Grassy', 'Burmy (Sand)', 'Burmy (Plant)', 1), // TODO: add and fix egg steps
-            // EnvironmentRestrictedLevelEvolution('Urban', 'Burmy (Sand)', 'Burmy (Trash)', 1),
+            // EnvironmentRestrictedLevelEvolution('Outdoors', 'Burmy (Sand)', 'Burmy (Plant)', 1), // TODO: add and fix egg steps
+            // EnvironmentRestrictedLevelEvolution('Indoors', 'Burmy (Sand)', 'Burmy (Trash)', 1),
         ],
         'base': {
             'hitpoints': 40,
@@ -13048,8 +13048,8 @@ export const pokemonList = createPokemonArray(
         'evolutions': [
             LevelEvolution('Burmy (Trash)', 'Wormadam (Trash)', 20),
             LevelEvolution('Burmy (Trash)', 'Mothim', 20),
-            // EnvironmentRestrictedLevelEvolution('Grassy', 'Burmy (Trash)', 'Burmy (Plant)', 1), // TODO: add and fix egg steps
-            // EnvironmentRestrictedLevelEvolution('Sandy', 'Burmy (Trash)', 'Burmy (Sand)', 1),
+            // EnvironmentRestrictedLevelEvolution('Outdoors', 'Burmy (Trash)', 'Burmy (Plant)', 1), // TODO: add and fix egg steps
+            // EnvironmentRestrictedLevelEvolution('Cave', 'Burmy (Trash)', 'Burmy (Sand)', 1),
         ],
         'base': {
             'hitpoints': 40,
