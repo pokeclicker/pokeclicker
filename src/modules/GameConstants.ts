@@ -671,12 +671,11 @@ export type Environment = keyof typeof Environments;
 
 // Use SubEnvironments to specify visuals (Cerulean Cave has Gems). Can be independent of above Environments (ex. Lake Acuity is a water environment for dive balls but we want it to look icy)
 // If changing an Environment to SubEnvironment or vice versa, don't forget to change it in GameConstants.d.ts, GymList.ts, TemporaryBattleList.ts, or elsewhere too (PokemonList.ts, Pokeballs.ts, etc.)
-export type SubEnvironmentData = Partial<Record<Region, Set<string | number>>>;
-export const SubEnvironments: Record<string, SubEnvironmentData> = {
+export const SubEnvironments: Record<string, EnvironmentData> = {
     Water: {
         [Region.kanto]: new Set([12, 13, 19, 20, 21, 24, 26, 31, 32, 33, 34, 35, 36, 'Cerulean City']),
         [Region.johto]: new Set([40, 41, 'Slowpoke Well']),
-        [Region.hoenn]: new Set([105, 106, 107, 108, 109, 118, 122, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 'Gateon Port Battles']),
+        [Region.hoenn]: new Set([105, 106, 107, 108, 109, 118, 122, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 'Sootopolis City', 'Gateon Port Battles']),
         [Region.sinnoh]: new Set([218, 219, 220, 223, 230, 'Pastoria City', 'Lake Verity', 'Lake Valor', 'Sendoff Spring']),
         [Region.unova]: new Set([17, 18, 21, 24, 'Undella Town', 'Humilau City']),
         [Region.kalos]: new Set([8, 23, 'Couriway Town', 'Sea Spirit\'s Den']),
@@ -687,7 +686,7 @@ export const SubEnvironments: Record<string, SubEnvironmentData> = {
     Ice: {
         [Region.kanto]: new Set(['Seafoam Islands', 'Icefall Cave']),
         [Region.johto]: new Set(['Mahogany Town', 'Ice Path']),
-        [Region.hoenn]: new Set(['Sootopolis City', 'Shoal Cave']),
+        [Region.hoenn]: new Set(['Shoal Cave']),
         [Region.sinnoh]: new Set([216, 217, 'Snowpoint City', 'Lake Acuity']),
         [Region.unova]: new Set(['Giant Chasm', 'Team Plasma Assault']),
         [Region.kalos]: new Set([17, 'Dendemille Town', 'Snowbelle City', 'Frost Cavern']),

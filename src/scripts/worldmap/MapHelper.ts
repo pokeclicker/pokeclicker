@@ -74,7 +74,7 @@ class MapHelper {
         return this.routeExist(route, region) && Routes.getRoute(region, route).isUnlocked();
     };
 
-    public static getCurrentEnvironment(): GameConstants.Environment { // TODO: if this Environment *contains* area instead of in what Envrionment is this area *in*
+    public static getCurrentEnvironment(): GameConstants.Environment {
         const area = player.route() ||
             (App.game.gameState == GameConstants.GameState.temporaryBattle
                 ? TemporaryBattleRunner.getEnvironmentArea() : undefined) ||
