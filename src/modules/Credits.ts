@@ -311,6 +311,7 @@ export const SpriteCredits: Credit[] = [
             'Magikarp Saucy Violet Shop Icon',
             'Magikarp (Feebas)',
             'Magma Admin Courtney',
+            'Magma Stone',
             'Man of Mystery',
             'Merilyn',
             'Meta Groudon Overworld',
