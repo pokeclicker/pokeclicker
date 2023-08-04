@@ -178,8 +178,8 @@ namespace GameConstants {
         treeRootsC,
         treeRootsR,
         sign,
-    };
-    declare const LEGAL_WALK_BLOCKS: number[];
+    }
+    declare const SAFARI_LEGAL_WALK_BLOCKS: number[];
     declare const SAFARI_WATER_BLOCKS: number[];
     declare const SAFARI_OUT_OF_BALLS: string;
     declare const FRIEND_SAFARI_POKEMON: number;

@@ -304,7 +304,7 @@ export enum SafariTile {
     treeRootsC = 47,
     treeRootsR = 48,
     sign = 51,
-};
+}
 
 export const SAFARI_LEGAL_WALK_BLOCKS = [
     SafariTile.ground,
@@ -328,7 +328,15 @@ export const SAFARI_LEGAL_WALK_BLOCKS = [
 ];
 
 export const SAFARI_WATER_BLOCKS = [
-    1, 2, 3, 4, 5, 6, 7, 8, 9,
+    SafariTile.waterUL,
+    SafariTile.waterU,
+    SafariTile.waterUR,
+    SafariTile.waterL,
+    SafariTile.waterC,
+    SafariTile.waterR,
+    SafariTile.waterDL,
+    SafariTile.waterD,
+    SafariTile.waterDR,
 ];
 
 export const SAFARI_OUT_OF_BALLS = 'Game Over!<br>You have run out of safari balls to use.';

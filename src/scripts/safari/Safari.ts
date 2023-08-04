@@ -484,7 +484,7 @@ class Safari {
 
     private static canPlaceAtPosition(x: number, y: number, isItem = false) {
         // Items doesn't spawn on water
-        const canPlace = isItem ? GameConstants.LEGAL_WALK_BLOCKS.includes(Safari.grid[y][x]) : true;
+        const canPlace = isItem ? GameConstants.SAFARI_LEGAL_WALK_BLOCKS.includes(Safari.grid[y][x]) : true;
         return this.canMove(x, y) && canPlace &&
             this.isAccessible(x, y) &&
             !(x == this.playerXY.x && y == this.playerXY.y) &&
