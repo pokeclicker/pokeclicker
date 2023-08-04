@@ -252,29 +252,91 @@ export const GYM_GEMS = 5;
 
 // Safari Zone
 export const SAFARI_BATTLE_CHANCE = 5;
-
 export const SAFARI_BASE_POKEBALL_COUNT = 30;
 
-export const LEGAL_WALK_BLOCKS = [
-    0,
-    10,
-    11,
-    12,
-    13,
-    14,
-    15,
-    16,
-    17,
-    18,
-    19,
-    20,
-    21,
-    22,
-    23,
-    24,
-    37, // Tree top left
-    38, // Tree top mid
-    39, // Tree top right
+export enum SafariTile {
+    ground = 0,
+    waterUL = 1,
+    waterU = 2,
+    waterUR = 3,
+    waterL = 4,
+    waterC = 5,
+    waterR = 6,
+    waterDL = 7,
+    waterD = 8,
+    waterDR = 9,
+    grass = 10,
+    sandUL = 11,
+    sandU = 12,
+    sandUR = 13,
+    sandL = 14,
+    sandC = 15,
+    sandR = 16,
+    sandDL = 17,
+    sandD = 18,
+    sandDR = 19,
+    sandURinverted = 21,
+    sandDRinverted = 22,
+    sandDLinverted = 23,
+    sandULinverted = 24,
+    fenceUL = 25,
+    fenceU = 26,
+    fenceUR = 27,
+    fenceL = 28,
+    fenceR = 29,
+    fenceDL = 30,
+    fenceD = 31,
+    fenceDR = 32,
+    fenceDRend = 33,
+    fenceURend = 34,
+    fenceULend = 35,
+    fenceDLend = 36,
+    treeTopL = 37,
+    treeTopC = 38,
+    treeTopR = 39,
+    treeLeavesL = 40,
+    treeLeavesC = 41,
+    treeLeavesR = 42,
+    treeTrunkL = 43,
+    treeTrunkC = 44,
+    treeTrunkR = 45,
+    treeRootsL = 46,
+    treeRootsC = 47,
+    treeRootsR = 48,
+    sign = 51,
+}
+
+export const SAFARI_LEGAL_WALK_BLOCKS = [
+    SafariTile.ground,
+    SafariTile.grass,
+    SafariTile.sandUL,
+    SafariTile.sandU,
+    SafariTile.sandUR,
+    SafariTile.sandL,
+    SafariTile.sandC,
+    SafariTile.sandR,
+    SafariTile.sandDL,
+    SafariTile.sandD,
+    SafariTile.sandDR,
+    SafariTile.sandURinverted,
+    SafariTile.sandDRinverted,
+    SafariTile.sandDLinverted,
+    SafariTile.sandULinverted,
+    SafariTile.treeTopL,
+    SafariTile.treeTopC,
+    SafariTile.treeTopR,
+];
+
+export const SAFARI_WATER_BLOCKS = [
+    SafariTile.waterUL,
+    SafariTile.waterU,
+    SafariTile.waterUR,
+    SafariTile.waterL,
+    SafariTile.waterC,
+    SafariTile.waterR,
+    SafariTile.waterDL,
+    SafariTile.waterD,
+    SafariTile.waterDR,
 ];
 
 export const SAFARI_OUT_OF_BALLS = 'Game Over!<br>You have run out of safari balls to use.';
@@ -972,6 +1034,7 @@ export enum BulletinBoards {
     Hoenn,
     Sevii4567,
     Sinnoh,
+    Unova,
     Kalos,
     Alola,
     Hoppy,
@@ -1465,8 +1528,10 @@ export const GalarDungeons = [
 ];
 
 export const HisuiDungeons = [
-    'Oreburrow Tunnel', // 189
+    'Floaro Gardens', // 189
+    'Oreburrow Tunnel',
     'Heartwood',
+    'Ancient Solaceon Ruins',
     'Shrouded Ruins',
     'Veilstone Cape',
     'Firespit Island',
@@ -1476,7 +1541,6 @@ export const HisuiDungeons = [
     'Clamberclaw Cliffs',
     'Celestica Ruins',
     'Sacred Plaza',
-    'Crevasse Passage',
     'Avalugg\'s Legacy',
     'Ice Column Chamber',
     'Icepeak Cavern',
@@ -1484,7 +1548,9 @@ export const HisuiDungeons = [
     'Seaside Hollow',
     'Ancient Lake Verity',
     'Ancient Lake Valor',
-    'Ancient Lake Acuity', // 208
+    'Ancient Lake Acuity',
+    'Temple of Sinnoh',
+    'Turnback Cave', // 211
 ];
 
 export const RegionDungeons = [
@@ -1516,6 +1582,7 @@ export const StartingTowns = [
     'Vaniville Town', // Kalos
     'Iki Town Outskirts', // Alola
     'Postwick', // Galar
+    'Prelude Beach', // Hisui
     'Final Region Town', // Final
 ];
 
@@ -1528,6 +1595,7 @@ export const StartingRoutes = [
     1, // Kalos
     1, // Alola
     1, // Galar
+    1, // Hisui
 ];
 
 export const DockTowns = [
@@ -1904,17 +1972,13 @@ export const TemporaryBattles = [
     'Hisuian Braviary',
     'Lord of the Tundra: Avalugg',
     'Beni',
-    'Kamado 1',
     'Charm 2',
-    'Dialga (Origin) 1',
-    'Palkia (Origin) 1',
-    'Kamado 2',
+    'Dialga (Origin)',
+    'Palkia (Origin)',
+    'The Galaxy Team\'s Kamado',
     'Adaman 2',
     'Irida 3',
-    'Dialga (Origin) 2',
-    'Palkia (Origin) 2',
     'Volo 3',
-    'Giratina (Origin)',
     'Tornadus 1',
     'Tornadus 2',
     'Tornadus 3',
@@ -1969,7 +2033,6 @@ export enum ShardTraderLocations {
     'Sunyshore City',
     'Survival Area',
     'Resort Area',
-    'Jubilife Village',
     'Castelia City',
     'Nimbasa City',
     'Driftveil City',
@@ -2017,6 +2080,7 @@ export enum ShardTraderLocations {
     'Circhester',
     'Spikemuth',
     'Master Dojo',
+    'Jubilife Village',
 }
 
 export enum BerryTraderLocations {

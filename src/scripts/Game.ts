@@ -50,7 +50,8 @@ class Game {
         public dreamOrbController: DreamOrbController,
         public purifyChamber: PurifyChamber,
         public weatherApp: WeatherApp,
-        public zMoves: ZMoves
+        public zMoves: ZMoves,
+        public pokemonContest: PokemonContest
     ) {
         this._gameState = ko.observable(GameConstants.GameState.loading);
     }
@@ -118,6 +119,7 @@ class Game {
         SafariPokemonList.generateSafariLists();
         RoamingPokemonList.generateIncreasedChanceRoutes(now);
         WeatherApp.initialize();
+        PokemonContestController.generateDailyContest(now);
 
         if (Settings.getSetting('disableOfflineProgress').value === false) {
             this.computeOfflineEarnings();

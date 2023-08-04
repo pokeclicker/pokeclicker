@@ -2557,6 +2557,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 40,
             'speed': 90,
         },
+        'heldItem': { type: ItemType.item, id: 'Rare_Candy' },
     },
     {
         'id': 52.01,
@@ -7308,6 +7309,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'visualDifference': true,
         },
+        'heldItem': { type: ItemType.item, id: 'Rare_Candy' },
     },
     {
         'id': 191,
@@ -8492,7 +8494,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 175,
         'eggCycles': 20,
-        'evolutions': [StoneEvolution('Ursaring', 'Ursaluna', StoneType.Peat_block)],
+        'evolutions': [NightTimedStoneEvolution('Ursaring', 'Ursaluna', StoneType.Peat_block)],
         'base': {
             'hitpoints': 90,
             'attack': 130,
@@ -13195,6 +13197,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'visualDifference': true,
         },
+        'heldItem': { type: ItemType.item, id: 'Rare_Candy' },
     },
     {
         'id': 418,
@@ -20724,6 +20727,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 67,
             'speed': 101,
         },
+        'heldItem': { type: ItemType.item, id: 'Rare_Candy' },
     },
     {
         'id': 703,

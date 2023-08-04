@@ -629,7 +629,9 @@ class Farming implements Feature {
             [
                 'This Berry endemic to Pinkan Island has an incredibly sweet taste.',
                 'It has a vibrant pink pigment, and it is found in such abundance on Pinkan Island that all Pokémon found there are colored Pink!',
-            ]
+            ],
+            undefined,
+            ['Pinkan Scyther']
         );
         //#endregion
 
