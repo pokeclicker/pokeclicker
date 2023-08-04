@@ -87,8 +87,7 @@ class QuestLine {
     resumeAt(index: number, initial) {
         if (initial != undefined) {
             for (let i = 0; i < Math.min(index, this.totalQuests); i++) {
-                this.quests()[i].autoCompleter.dispose();
-                this.quests()[i].complete();
+                this.quests()[i].complete(true);
             }
             if (index < this.totalQuests) {
                 this.beginQuest(index, initial);
@@ -137,7 +136,7 @@ class QuestLine {
             initial: this.curQuestObject().initial?.() ?? this.curQuestInitial(),
         };
         if (this.curQuestObject() instanceof MultipleQuestsQuest) {
-            json.initial = this.curQuestObject().quests.map((q) => q.initial());
+            json.initial = this.curQuestObject().quests.map((q) => q.isCompleted() ? true : q.initial());
         }
         return json;
     }
