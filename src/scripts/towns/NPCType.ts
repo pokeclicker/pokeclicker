@@ -1,0 +1,4 @@
+enum NPCType {
+    Default,
+    Gift,
+}

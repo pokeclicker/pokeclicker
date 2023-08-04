@@ -22,6 +22,7 @@ class PartyPokemon implements Saveable {
     public exp = 0;
     public evs: KnockoutComputed<number>;
     _attack: KnockoutComputed<number>;
+    private _canUseHeldItem: KnockoutComputed<boolean>;
 
     defaults = {
         attackBonusPercent: 0,
@@ -109,6 +110,12 @@ class PartyPokemon implements Saveable {
         this._displayName = ko.pureComputed(() => this._nickname() ? this._nickname() : this._translatedName());
         this._shadow = ko.observable(shadow);
         this._showShadowImage = ko.observable(false);
+        this._canUseHeldItem = ko.pureComputed(() => this.heldItem()?.canUse(this));
+        this._canUseHeldItem.subscribe((canUse) => {
+            if (!canUse && this.heldItem()) {
+                this.addOrRemoveHeldItem(this.heldItem());
+            }
+        });
     }
 
     public calculateAttack(ignoreLevel = false): number {

@@ -180,6 +180,7 @@ namespace GameConstants {
         sign,
     };
     declare const LEGAL_WALK_BLOCKS: number[];
+    declare const SAFARI_WATER_BLOCKS: number[];
     declare const SAFARI_OUT_OF_BALLS: string;
     declare const FRIEND_SAFARI_POKEMON: number;
     declare const GAIN_MONEY_BASE_REWARD: number;
@@ -492,6 +493,7 @@ namespace GameConstants {
         Hoenn,
         Sevii4567,
         Sinnoh,
+        Unova,
         Kalos,
         Alola,
         Hoppy,
