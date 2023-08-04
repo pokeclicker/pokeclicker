@@ -1,4 +1,4 @@
-import { AchievementOption, Environment } from '../GameConstants';
+import { AchievementOption, Environment, camelCaseToString } from '../GameConstants';
 import GameHelper from '../GameHelper';
 import Requirement from './Requirement';
 
@@ -15,7 +15,7 @@ export default class InEnvironmentRequirement extends Requirement {
         return `You must be in ${
             GameHelper.anOrA(this.environment)
         } ${
-            this.environment
+            camelCaseToString(this.environment)
         } environment`;
     }
 }
