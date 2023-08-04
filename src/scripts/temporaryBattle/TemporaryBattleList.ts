@@ -2095,7 +2095,7 @@ TemporaryBattleList['Sycamore 1'] = new TemporaryBattle(
     undefined,
     {
         firstTimeRewardFunction: () => {
-            App.game.quests.getQuestLine('A Beautiful World').beginQuest();
+            App.game.quests.getQuestLine('A Beautiful World').beginQuest(0, undefined, true);
         },
         displayName: 'Pokémon Professor Sycamore',
         imageName: 'Sycamore',
@@ -3671,7 +3671,7 @@ TemporaryBattleList['Ultra Megalopolis'] = new TemporaryBattle(
     undefined,
     {
         firstTimeRewardFunction: () => {
-            App.game.quests.getQuestLine('Mina\'s Trial').beginQuest();
+            App.game.quests.getQuestLine('Mina\'s Trial').beginQuest(0, undefined, true);
         },
         hideTrainer: true,
         imageName: 'specialNPCs/Wormhole',
@@ -5722,22 +5722,6 @@ TemporaryBattleList.Beni = new TemporaryBattle(
         imageName: 'Beni (Ninja)',
     }
 );
-TemporaryBattleList['Kamado 1'] = new TemporaryBattle(
-    'Kamado 1',
-    [
-        new GymPokemon('Hisuian Braviary', 348526193, 61),
-        new GymPokemon('Golem', 348526193, 61),
-        new GymPokemon('Clefable', 348526193, 61),
-        new GymPokemon('Snorlax', 348526193, 62),
-    ],
-    'Any Pokémon that threatens our life here...must be eliminated!',
-    [new DevelopmentRequirement()],
-    undefined,
-    {
-        displayName: 'The Galaxy Team\'s Kamado',
-        imageName: 'Kamado (Armor)',
-    }
-);
 TemporaryBattleList['Charm 2'] = new TemporaryBattle(
     'Charm 2',
     [
@@ -5752,32 +5736,30 @@ TemporaryBattleList['Charm 2'] = new TemporaryBattle(
         imageName: 'Charm',
     }
 );
-TemporaryBattleList['Dialga (Origin) 1'] = new TemporaryBattle(
-    'Dialga (Origin) 1',
+TemporaryBattleList['Dialga (Origin)'] = new TemporaryBattle(
+    'Dialga (Origin)',
     [new GymPokemon('Dialga (Origin)', 2031393560, 65)],
     'Dialga was captured in the Origin Ball and returned to its base form!',
     [new DevelopmentRequirement()],
     undefined,
     {
-        displayName: 'Dialga - Origin Form',
         hideTrainer: true,
         imageName: '../pokemon/483.01',
     }
 );
-TemporaryBattleList['Palkia (Origin) 1'] = new TemporaryBattle(
-    'Palkia (Origin) 1',
+TemporaryBattleList['Palkia (Origin)'] = new TemporaryBattle(
+    'Palkia (Origin)',
     [new GymPokemon('Palkia (Origin)', 2031393560, 65)],
     'Palkia was captured in the Origin Ball and returned to its base form!',
     [new DevelopmentRequirement()],
     undefined,
     {
-        displayName: 'Palkia - Origin Form',
         hideTrainer: true,
         imageName: '../pokemon/484.01',
     }
 );
-TemporaryBattleList['Kamado 2'] = new TemporaryBattle(
-    'Kamado 2',
+TemporaryBattleList['The Galaxy Team\'s Kamado'] = new TemporaryBattle(
+    'The Galaxy Team\'s Kamado',
     [
         new GymPokemon('Golem', 348526193, 65),
         new GymPokemon('Clefable', 348526193, 65),
@@ -5789,7 +5771,6 @@ TemporaryBattleList['Kamado 2'] = new TemporaryBattle(
     [new DevelopmentRequirement()],
     undefined,
     {
-        displayName: 'The Galaxy Team\'s Kamado',
         imageName: 'Kamado (Armor)',
     }
 );
@@ -5823,32 +5804,6 @@ TemporaryBattleList['Irida 3'] = new TemporaryBattle(
         imageName: 'Irida',
     }
 );
-TemporaryBattleList['Dialga (Origin) 2'] = new TemporaryBattle(
-    'Dialga (Origin) 2',
-    [new GymPokemon('Dialga (Origin)', 2031393560, 65)],
-    undefined,
-    [new DevelopmentRequirement()],
-    [new ObtainedPokemonRequirement('Dialga (Origin)')],
-    {
-        isTrainerBattle: false,
-        displayName: 'Dialga - Origin Form',
-        hideTrainer: true,
-        imageName: '../pokemon/483.01',
-    }
-);
-TemporaryBattleList['Palkia (Origin) 2'] = new TemporaryBattle(
-    'Palkia (Origin) 2',
-    [new GymPokemon('Palkia (Origin)', 2031393560, 65)],
-    undefined,
-    [new DevelopmentRequirement()],
-    [new ObtainedPokemonRequirement('Palkia (Origin)')],
-    {
-        isTrainerBattle: false,
-        displayName: 'Palkia (Origin)',
-        hideTrainer: true,
-        imageName: '../pokemon/484.01',
-    }
-);
 TemporaryBattleList['Volo 3'] = new TemporaryBattle(
     'Volo 3',
     [
@@ -5861,18 +5816,6 @@ TemporaryBattleList['Volo 3'] = new TemporaryBattle(
     {
         displayName: 'Pokémon Wielder Volo',
         imageName: 'Volo',
-    }
-);
-TemporaryBattleList['Giratina (Origin)'] = new TemporaryBattle(
-    'Giratina (Origin)',
-    [new GymPokemon('Giratina (Origin)', 2031393560, 70)],
-    undefined,
-    [new DevelopmentRequirement()],
-    [new ObtainedPokemonRequirement('Giratina (Origin)'), new TemporaryBattleRequirement('Giratina (Origin)')],
-    {
-        isTrainerBattle: false,
-        imageName: '../pokemon/487.01',
-        hideTrainer: true,
     }
 );
 TemporaryBattleList['Tornadus 1'] = new TemporaryBattle(
