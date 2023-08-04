@@ -8661,6 +8661,12 @@ TownList['Stone Portal'] = new Town(
 );
 
 //Hisui Dungeons
+TownList['Floaro Gardens'] = new DungeonTown(
+    'Floaro Gardens',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [new DevelopmentRequirement()]
+);
 TownList['Oreburrow Tunnel'] = new DungeonTown(
     'Oreburrow Tunnel',
     GameConstants.Region.hisui,
@@ -8795,14 +8801,14 @@ TownList['Ancient Lake Acuity'] = new DungeonTown(
 TownList['Temple of Sinnoh'] = new DungeonTown(
     'Temple of Sinnoh',
     GameConstants.Region.hisui,
-    GameConstants.HisuiSubRegions.Hisui,,
+    GameConstants.HisuiSubRegions.Hisui,
     [new DevelopmentRequirement()],
     [TemporaryBattleList['Dialga (Origin)'], TemporaryBattleList['Palkia (Origin)'], TemporaryBattleList['Volo 3'], TemporaryBattleList.Arceus]
 );
 TownList['Turnback Cave'] = new DungeonTown(
     'Turnback Cave',
     GameConstants.Region.hisui,
-    GameConstants.HisuiSubRegions.Hisui,,
+    GameConstants.HisuiSubRegions.Hisui,
     [new DevelopmentRequirement()]
 );
 

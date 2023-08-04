@@ -1469,7 +1469,8 @@ export const GalarDungeons = [
 ];
 
 export const HisuiDungeons = [
-    'Oreburrow Tunnel', // 188
+    'Floaro Gardens', // 188
+    'Oreburrow Tunnel',
     'Heartwood',
     'Ancient Solaceon Ruins',
     'Shrouded Ruins',
@@ -1490,7 +1491,7 @@ export const HisuiDungeons = [
     'Ancient Lake Valor',
     'Ancient Lake Acuity',
     'Temple of Sinnoh',
-    'Turnback Cave', // 209
+    'Turnback Cave', // 210
 ];
 
 export const RegionDungeons = [
@@ -1522,6 +1523,7 @@ export const StartingTowns = [
     'Vaniville Town', // Kalos
     'Iki Town Outskirts', // Alola
     'Postwick', // Galar
+    'Prelude Beach', // Hisui
     'Final Region Town', // Final
 ];
 
@@ -1534,6 +1536,7 @@ export const StartingRoutes = [
     1, // Kalos
     1, // Alola
     1, // Galar
+    1, // Hisui
 ];
 
 export const DockTowns = [
@@ -1968,7 +1971,6 @@ export enum ShardTraderLocations {
     'Sunyshore City',
     'Survival Area',
     'Resort Area',
-    'Jubilife Village',
     'Castelia City',
     'Nimbasa City',
     'Driftveil City',
@@ -2016,6 +2018,7 @@ export enum ShardTraderLocations {
     'Circhester',
     'Spikemuth',
     'Master Dojo',
+    'Jubilife Village',
 }
 
 export enum BerryTraderLocations {
