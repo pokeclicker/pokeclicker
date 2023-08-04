@@ -13006,7 +13006,7 @@ export const pokemonList = createPokemonArray(
         'evolutions': [
             LevelEvolution('Burmy (Sand)', 'Wormadam (Sand)', 20),
             LevelEvolution('Burmy (Sand)', 'Mothim', 20),
-            // EnvironmentRestrictedLevelEvolution('Outdoors', 'Burmy (Sand)', 'Burmy (Plant)', 1), // TODO: add and fix egg steps
+            // EnvironmentRestrictedLevelEvolution('Outdoors', 'Burmy (Sand)', 'Burmy (Plant)', 1), // Fix form egg steps before adding
             // EnvironmentRestrictedLevelEvolution('Indoors', 'Burmy (Sand)', 'Burmy (Trash)', 1),
         ],
         'base': {
@@ -13029,7 +13029,7 @@ export const pokemonList = createPokemonArray(
         'evolutions': [
             LevelEvolution('Burmy (Trash)', 'Wormadam (Trash)', 20),
             LevelEvolution('Burmy (Trash)', 'Mothim', 20),
-            // EnvironmentRestrictedLevelEvolution('Outdoors', 'Burmy (Trash)', 'Burmy (Plant)', 1), // TODO: add and fix egg steps
+            // EnvironmentRestrictedLevelEvolution('Outdoors', 'Burmy (Trash)', 'Burmy (Plant)', 1), // Fix form egg steps before adding
             // EnvironmentRestrictedLevelEvolution('Cave', 'Burmy (Trash)', 'Burmy (Sand)', 1),
         ],
         'base': {
