@@ -12,7 +12,8 @@ class QuestLine {
         public name: string,
         public description: string,
         public requirement?: Requirement,
-        public bulletinBoard: GameConstants.BulletinBoards = GameConstants.BulletinBoards.None
+        public bulletinBoard: GameConstants.BulletinBoards = GameConstants.BulletinBoards.None,
+        private disablePausing = false // applies to bulletin board quests only
     ) {
         this.name = name;
         this.description = description;
@@ -126,6 +127,14 @@ class QuestLine {
 
         quest.suspended = false;
         this.state(QuestLineState.started);
+    }
+
+    isPausable(): boolean {
+        if (this.disablePausing || this.bulletinBoard == GameConstants.BulletinBoards.None || App.game.gameState == GameConstants.GameState.temporaryBattle) {
+            return false;
+        }
+
+        return true;
     }
 
     toJSON() {
