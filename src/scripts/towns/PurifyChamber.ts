@@ -18,7 +18,7 @@ class PurifyChamberTownContent extends TownContent {
 }
 
 class PurifyChamber implements Saveable {
-    public static requirements = new DevelopmentRequirement(); //TODO: when should this unlock? Waiting for story
+    public static requirements = new QuestLineStepCompletedRequirement('Shadows in the Desert', 17);
 
     public selectedPokemon: KnockoutObservable<PartyPokemon>;
     public currentFlow: KnockoutObservable<number>;

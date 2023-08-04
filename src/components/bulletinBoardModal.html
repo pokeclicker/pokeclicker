@@ -26,7 +26,7 @@ aria-labelledby="bulletinBoardModalLabel" aria-hidden="true">
                                     <!-- /ko -->
                                 </div>
                                 <div class="card-footer p-0">
-                                    <button class="btn btn-primary btn-block" data-bind="visible: !$data.state(), click: () => { $data.beginQuest(0, undefined, true); }">Accept</button>
+                                    <button class="btn btn-primary btn-block" data-bind="visible: !$data.state(), click: () => { $data.beginQuest(); }">Accept</button>
                                     <button class="btn btn-primary btn-block" data-bind="visible: $data.state() == QuestLineState.started" disabled>Started</button>
                                     <button class="btn btn-primary btn-block" data-bind="visible: $data.state() == QuestLineState.suspended, click: () => { $data.resumeSuspendedQuest() }">Resume</button>
                                 </div>

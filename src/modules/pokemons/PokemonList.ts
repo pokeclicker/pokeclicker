@@ -8494,7 +8494,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 175,
         'eggCycles': 20,
-        'evolutions': [StoneEvolution('Ursaring', 'Ursaluna', StoneType.Peat_block)],
+        'evolutions': [NightTimedStoneEvolution('Ursaring', 'Ursaluna', StoneType.Peat_block)],
         'base': {
             'hitpoints': 90,
             'attack': 130,
