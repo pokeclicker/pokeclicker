@@ -18,6 +18,7 @@ class Safari {
     static activeRegion: KnockoutObservable<GameConstants.Region> = ko.observable(GameConstants.Region.none);
     static activeEnvironment: KnockoutObservable<SafariEnvironments> = ko.observable(SafariEnvironments.Grass);
     private static maxPlacementAttempts = 20;
+    private static readonly moveSpeed = 250;
 
     // Safari level
     static maxSafariLevel = 40;
@@ -48,15 +49,15 @@ class Safari {
     });
 
     public static sizeX(): number {
-        return Math.floor(document.querySelector('#safariModal .modal-dialog').scrollWidth / 32);
+        return Math.max(5, Math.floor(document.querySelector('#safariModal .modal-dialog').scrollWidth / 32));
     }
 
     public static sizeY(): number {
-        return Math.floor((window.innerHeight - 250) / 32);
+        return Math.max(5, Math.floor((window.innerHeight - 250) / 32));
     }
 
     public static load() {
-        this.activeRegion(player.region);
+        Safari.activeRegion(player.region);
         Safari.grid = [];
         Safari.pokemonGrid([]);
         Safari.itemGrid([]);
@@ -107,7 +108,22 @@ class Safari {
             x = Math.max(0, x - 3);
             y = Math.max(0, y - 3);
         }
-        const res = Safari.canAddBody(x, y, body);
+        let res = Safari.canAddBody(x, y, body);
+
+        // Force the addition of water tiles if there are no water tiles in the grid
+        if (!res && body.type === 'water' && !Safari.hasWaterTiles()) {
+            let attempts = 0;
+            while (!res && attempts++ < 50) {
+                // Create a new WaterBody with minimum X and Y (3x3) after 10 attempts
+                if (attempts === 10) {
+                    body = new WaterBody(3, 3);
+                }
+                x = Safari.getRandomCoord(this.sizeX() - 2);
+                y = Safari.getRandomCoord(this.sizeY() - 2);
+                res = Safari.canAddBody(x, y, body);
+            }
+        }
+
         if (res || body.type === 'grass') {
             Safari.addBody(x, y, body);
         }
@@ -154,6 +170,13 @@ class Safari {
                 }
             }
         }
+    }
+
+    // Check if grid has water tiles
+    private static hasWaterTiles() {
+        // Check if mid center water tile (5) exists
+        // Water body is 3x3 at min so that tile will always appear if there is a water body
+        return Safari.grid.some((row) => row.includes(5));
     }
 
     private static calculateAccessibleTiles() {
@@ -294,7 +317,7 @@ class Safari {
         const img = `assets/images/safari/${tile}.png`;
         const divId = `safari-${j}-${i}`;
         // Add z-index if tiles are tree top tiles
-        const zIndex = tile === 37 || tile === 38 || tile === 39 ? 'z-index: 2;' : '';
+        const zIndex = tile === GameConstants.SafariTile.treeTopL || tile === GameConstants.SafariTile.treeTopC || tile === GameConstants.SafariTile.treeTopR ? 'z-index: 2;' : '';
 
         return `<div id='${divId}' style="background-image:url('${img}'); ${zIndex}" class='safariSquare'></div>`;
     }
@@ -365,7 +388,7 @@ class Safari {
             Safari.activeEnvironment(Safari.getEnvironmentTile(Safari.playerXY.x, Safari.playerXY.y));
             // Re-call the class as the activeEnvironment may have changed
             envClass = Safari.environmentCssClass();
-            $('#sprite').animate(offset, 250, 'linear', () => {
+            $('#sprite').animate(offset, Safari.moveSpeed, 'linear', () => {
                 Safari.checkBattle();
                 Safari.checkItem();
                 Safari.isMoving = false;
@@ -395,7 +418,7 @@ class Safari {
                     Safari.walking = true;
                     Safari.step(Safari.queue[0]);
                 }
-            }, 250);
+            }, Safari.moveSpeed);
         }
     }
 
@@ -461,7 +484,7 @@ class Safari {
 
     private static canPlaceAtPosition(x: number, y: number, isItem = false) {
         // Items doesn't spawn on water
-        const canPlace = isItem ? GameConstants.LEGAL_WALK_BLOCKS.includes(Safari.grid[y][x]) : true;
+        const canPlace = isItem ? GameConstants.SAFARI_LEGAL_WALK_BLOCKS.includes(Safari.grid[y][x]) : true;
         return this.canMove(x, y) && canPlace &&
             this.isAccessible(x, y) &&
             !(x == this.playerXY.x && y == this.playerXY.y) &&
@@ -485,8 +508,8 @@ class Safari {
         if (!Safari.inProgress()) {
             return false;
         }
-        for (let i = 0; i < GameConstants.LEGAL_WALK_BLOCKS.length; i++) {
-            if (Safari.grid[y] && Safari.grid[y][x] === GameConstants.LEGAL_WALK_BLOCKS[i]) {
+        for (let i = 0; i < GameConstants.SAFARI_LEGAL_WALK_BLOCKS.length; i++) {
+            if (Safari.grid[y] && Safari.grid[y][x] === GameConstants.SAFARI_LEGAL_WALK_BLOCKS[i]) {
                 return true;
             }
         }
