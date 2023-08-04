@@ -2095,7 +2095,7 @@ TemporaryBattleList['Sycamore 1'] = new TemporaryBattle(
     undefined,
     {
         firstTimeRewardFunction: () => {
-            App.game.quests.getQuestLine('A Beautiful World').beginQuest();
+            App.game.quests.getQuestLine('A Beautiful World').beginQuest(0, undefined, true);
         },
         displayName: 'Pokémon Professor Sycamore',
         imageName: 'Sycamore',
@@ -3671,7 +3671,7 @@ TemporaryBattleList['Ultra Megalopolis'] = new TemporaryBattle(
     undefined,
     {
         firstTimeRewardFunction: () => {
-            App.game.quests.getQuestLine('Mina\'s Trial').beginQuest();
+            App.game.quests.getQuestLine('Mina\'s Trial').beginQuest(0, undefined, true);
         },
         hideTrainer: true,
         imageName: 'specialNPCs/Wormhole',
