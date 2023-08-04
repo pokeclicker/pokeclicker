@@ -24,11 +24,48 @@
 }
 
 #sprite {
-  height: 40px;
-  width: 40px;
+  height: 56px;
+  width: 56px;
   z-index: 1;
   background-image: url('../assets/images/safari/player.png');
   background-size: 400% 400%;
+
+  &.water {
+    background-image: url('../assets/images/safari/player-surf.png');
+
+    /* Idle animation */
+    &.walkdown {
+      animation: walkdown 4s steps(4) infinite;
+    }
+
+    @keyframes walkdown {
+      100% { background-position: 133.333% 0.00000%; }
+    }
+
+    &.walkleft {
+      animation: walkleft 4s steps(4) infinite;
+    }
+
+    @keyframes walkleft {
+      100% { background-position: 133.333% 33.3333%; }
+    }
+
+    &.walkright {
+      animation: walkright 4s steps(4) infinite;
+    }
+
+    @keyframes walkright {
+      100% { background-position: 133.333% 66.6666%; }
+    }
+
+    &.walkup {
+      animation: walkup 4s steps(4) infinite;
+    }
+
+    @keyframes walkup {
+      100% { background-position: 133.333% 100.000%; }
+    }
+  }
 
   &.walkdown {
     background-position: 0.00000% 0.00000%;
