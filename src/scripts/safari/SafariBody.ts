@@ -12,30 +12,30 @@ abstract class SafariBody {
         if (x === 0) {
             ret[3] = false;
         } else {
-            ret[3] = this.grid[y][x - 1] !== SafariTiles.ground;
+            ret[3] = this.grid[y][x - 1] !== GameConstants.SafariTile.ground;
         }
         if (y === 0) {
             ret[0] = false;
         } else {
-            ret[0] = this.grid[y - 1][x] !== SafariTiles.ground;
+            ret[0] = this.grid[y - 1][x] !== GameConstants.SafariTile.ground;
         }
         if (x === this.grid[0].length - 1) {
             ret[1] = false;
         } else {
-            ret[1] = this.grid[y][x + 1] !== SafariTiles.ground;
+            ret[1] = this.grid[y][x + 1] !== GameConstants.SafariTile.ground;
         }
 
         if (y === this.grid.length - 1) {
             ret[2] = false;
         } else {
-            ret[2] = this.grid[y + 1][x] !== SafariTiles.ground && this.grid[y + 1][x] !== undefined;
+            ret[2] = this.grid[y + 1][x] !== GameConstants.SafariTile.ground && this.grid[y + 1][x] !== undefined;
         }
 
         if (ret.equals([true, true, true, true])) {
-            cross[0] = this.grid[y - 1][x + 1] !== SafariTiles.ground;
-            cross[1] = this.grid[y + 1][x + 1] !== SafariTiles.ground;
-            cross[2] = this.grid[y + 1][x - 1] !== SafariTiles.ground;
-            cross[3] = this.grid[y - 1][x - 1] !== SafariTiles.ground;
+            cross[0] = this.grid[y - 1][x + 1] !== GameConstants.SafariTile.ground;
+            cross[1] = this.grid[y + 1][x + 1] !== GameConstants.SafariTile.ground;
+            cross[2] = this.grid[y + 1][x - 1] !== GameConstants.SafariTile.ground;
+            cross[3] = this.grid[y - 1][x - 1] !== GameConstants.SafariTile.ground;
         }
         return {
             plus: ret,
@@ -71,7 +71,7 @@ abstract class SafariBody {
 
 
 class SandBody extends SafariBody {
-    edgeDetectCheck = SafariTiles.sandC;
+    edgeDetectCheck = GameConstants.SafariTile.sandC;
 
     constructor(
         x: number = SandBody.randomInt(),
@@ -107,16 +107,16 @@ class SandBody extends SafariBody {
 
     private static addCube(x: number, y: number, body: Array<Array<number>>): Array<Array<number>> {
         if (Rand.boolean()) {
-            body[y + 2][x] = SafariTiles.sandC;
-            body[y + 2][x + 1] = SafariTiles.sandC;
-            body[y][x + 2] = SafariTiles.sandC;
-            body[y + 1][x + 2] = SafariTiles.sandC;
-            body[y + 2][x + 2] = SafariTiles.sandC;
+            body[y + 2][x] = GameConstants.SafariTile.sandC;
+            body[y + 2][x + 1] = GameConstants.SafariTile.sandC;
+            body[y][x + 2] = GameConstants.SafariTile.sandC;
+            body[y + 1][x + 2] = GameConstants.SafariTile.sandC;
+            body[y + 2][x + 2] = GameConstants.SafariTile.sandC;
         }
-        body[y][x] = SafariTiles.sandC;
-        body[y + 1][x] = SafariTiles.sandC;
-        body[y][x + 1] = SafariTiles.sandC;
-        body[y + 1][x + 1] = SafariTiles.sandC;
+        body[y][x] = GameConstants.SafariTile.sandC;
+        body[y + 1][x] = GameConstants.SafariTile.sandC;
+        body[y][x + 1] = GameConstants.SafariTile.sandC;
+        body[y + 1][x + 1] = GameConstants.SafariTile.sandC;
         return body;
     }
 
@@ -134,45 +134,45 @@ class SandBody extends SafariBody {
         const plus = neighbours.plus;
         const cross = neighbours.cross;
         if (plus.equals([false, true, true, false])) {
-            return SafariTiles.sandUL;
+            return GameConstants.SafariTile.sandUL;
         }
         if (plus.equals([false, true, true, true])) {
-            return SafariTiles.sandU;
+            return GameConstants.SafariTile.sandU;
         }
         if (plus.equals([false, false, true, true])) {
-            return SafariTiles.sandUR;
+            return GameConstants.SafariTile.sandUR;
         }
         if (plus.equals([true, true, true, false])) {
-            return SafariTiles.sandL;
+            return GameConstants.SafariTile.sandL;
         }
         if (plus.equals([true, true, true, true])) {
             if (!cross[0]) {
-                return SafariTiles.sandURinverted;
+                return GameConstants.SafariTile.sandURinverted;
             }
             if (!cross[1]) {
-                return SafariTiles.sandDRinverted;
+                return GameConstants.SafariTile.sandDRinverted;
             }
             if (!cross[2]) {
-                return SafariTiles.sandDLinverted;
+                return GameConstants.SafariTile.sandDLinverted;
             }
             if (!cross[3]) {
-                return SafariTiles.sandULinverted;
+                return GameConstants.SafariTile.sandULinverted;
             }
-            return SafariTiles.sandC;
+            return GameConstants.SafariTile.sandC;
         }
         if (plus.equals([true, false, true, true])) {
-            return SafariTiles.sandR;
+            return GameConstants.SafariTile.sandR;
         }
         if (plus.equals([true, true, false, false])) {
-            return SafariTiles.sandDL;
+            return GameConstants.SafariTile.sandDL;
         }
         if (plus.equals([true, true, false, true])) {
-            return SafariTiles.sandD;
+            return GameConstants.SafariTile.sandD;
         }
         if (plus.equals([true, false, false, true])) {
-            return SafariTiles.sandDR;
+            return GameConstants.SafariTile.sandDR;
         }
-        return SafariTiles.grass;
+        return GameConstants.SafariTile.grass;
     }
 }
 
@@ -189,58 +189,58 @@ class FenceBody extends SandBody {
         const plus = neighbours.plus;
         const cross = neighbours.cross;
         if (plus.equals([false, true, true, false])) {
-            return SafariTiles.fenceUL;
+            return GameConstants.SafariTile.fenceUL;
         }
         if (plus.equals([false, true, true, true])) {
-            return SafariTiles.fenceU;
+            return GameConstants.SafariTile.fenceU;
         }
         if (plus.equals([false, false, true, true])) {
-            return SafariTiles.fenceUR;
+            return GameConstants.SafariTile.fenceUR;
         }
         if (plus.equals([true, true, true, false])) {
-            return SafariTiles.fenceL;
+            return GameConstants.SafariTile.fenceL;
         }
         if (plus.equals([true, true, true, true])) {
             if (!cross[0]) {
-                return SafariTiles.fenceDRend;
+                return GameConstants.SafariTile.fenceDRend;
             }
             if (!cross[1]) {
-                return SafariTiles.fenceURend;
+                return GameConstants.SafariTile.fenceURend;
             }
             if (!cross[2]) {
-                return SafariTiles.fenceULend;
+                return GameConstants.SafariTile.fenceULend;
             }
             if (!cross[3]) {
-                return SafariTiles.fenceDLend;
+                return GameConstants.SafariTile.fenceDLend;
             }
-            return SafariTiles.grass;
+            return GameConstants.SafariTile.grass;
         }
         if (plus.equals([true, false, true, true])) {
-            return SafariTiles.fenceR;
+            return GameConstants.SafariTile.fenceR;
         }
         if (plus.equals([true, true, false, false])) {
-            return SafariTiles.fenceDL;
+            return GameConstants.SafariTile.fenceDL;
         }
         if (plus.equals([true, true, false, true])) {
-            return SafariTiles.fenceD;
+            return GameConstants.SafariTile.fenceD;
         }
         if (plus.equals([true, false, false, true])) {
-            return SafariTiles.fenceDR;
+            return GameConstants.SafariTile.fenceDR;
         }
-        return SafariTiles.grass;
+        return GameConstants.SafariTile.grass;
     }
 
     private openFence() {
         const removedTiles = [];
-        const options = [SafariTiles.fenceU, SafariTiles.fenceL, SafariTiles.fenceR, SafariTiles.fenceD];
+        const options = [GameConstants.SafariTile.fenceU, GameConstants.SafariTile.fenceL, GameConstants.SafariTile.fenceR, GameConstants.SafariTile.fenceD];
         const pick = Rand.fromArray(options);
         for (let i = 0; i < this.grid.length; i++) {
             for (let j = 0; j < this.grid[0].length; j++) {
                 if (this.grid[i][j] === pick) {
-                    if (pick == SafariTiles.fenceL || pick == SafariTiles.fenceR) { // Only tiles connected to the left/right fence tiles are broken
+                    if (pick == GameConstants.SafariTile.fenceL || pick == GameConstants.SafariTile.fenceR) { // Only tiles connected to the left/right fence tiles are broken
                         removedTiles.push({x: j, y: i});
                     }
-                    this.grid[i][j] = SafariTiles.ground;
+                    this.grid[i][j] = GameConstants.SafariTile.ground;
                 }
             }
         }
@@ -249,20 +249,20 @@ class FenceBody extends SandBody {
             const tileAbove = this.grid[pos.y - 1] ? this.grid[pos.y - 1][pos.x] : undefined;
             const tileBelow = this.grid[pos.y + 1] ? this.grid[pos.y + 1][pos.x] : undefined;
             switch (pick) {
-                case SafariTiles.fenceL: // Left fence tile
-                    if (tileAbove === SafariTiles.fenceUL || tileAbove === SafariTiles.fenceULend) {
-                        this.grid[pos.y - 1][pos.x] = SafariTiles.fenceU;
+                case GameConstants.SafariTile.fenceL: // Left fence tile
+                    if (tileAbove === GameConstants.SafariTile.fenceUL || tileAbove === GameConstants.SafariTile.fenceULend) {
+                        this.grid[pos.y - 1][pos.x] = GameConstants.SafariTile.fenceU;
                     }
-                    if (tileBelow === SafariTiles.fenceDL || tileBelow === SafariTiles.fenceDLend) {
-                        this.grid[pos.y + 1][pos.x] = SafariTiles.fenceD;
+                    if (tileBelow === GameConstants.SafariTile.fenceDL || tileBelow === GameConstants.SafariTile.fenceDLend) {
+                        this.grid[pos.y + 1][pos.x] = GameConstants.SafariTile.fenceD;
                     }
                     break;
-                case SafariTiles.fenceR: // Right fence tile
-                    if (tileAbove === SafariTiles.fenceUR || tileAbove === SafariTiles.fenceURend) {
-                        this.grid[pos.y - 1][pos.x] = SafariTiles.fenceU;
+                case GameConstants.SafariTile.fenceR: // Right fence tile
+                    if (tileAbove === GameConstants.SafariTile.fenceUR || tileAbove === GameConstants.SafariTile.fenceURend) {
+                        this.grid[pos.y - 1][pos.x] = GameConstants.SafariTile.fenceU;
                     }
-                    if (tileBelow === SafariTiles.fenceDR || tileBelow === SafariTiles.fenceDRend) {
-                        this.grid[pos.y + 1][pos.x] = SafariTiles.fenceD;
+                    if (tileBelow === GameConstants.SafariTile.fenceDR || tileBelow === GameConstants.SafariTile.fenceDRend) {
+                        this.grid[pos.y + 1][pos.x] = GameConstants.SafariTile.fenceD;
                     }
                     break;
                 default:
@@ -283,27 +283,27 @@ class WaterBody extends SafariBody {
             for (let j = 0; j < x; j++) {
                 if (i === 0) {
                     if ( j === 0) {
-                        row.push(SafariTiles.waterUL);
+                        row.push(GameConstants.SafariTile.waterUL);
                     } else if (j < x - 1) {
-                        row.push(SafariTiles.waterU);
+                        row.push(GameConstants.SafariTile.waterU);
                     } else if (j === x - 1) {
-                        row.push(SafariTiles.waterUR);
+                        row.push(GameConstants.SafariTile.waterUR);
                     }
                 } else if (i < y - 1) {
                     if ( j === 0) {
-                        row.push(SafariTiles.waterL);
+                        row.push(GameConstants.SafariTile.waterL);
                     } else if (j < x - 1) {
-                        row.push(SafariTiles.waterC);
+                        row.push(GameConstants.SafariTile.waterC);
                     } else if (j === x - 1) {
-                        row.push(SafariTiles.waterR);
+                        row.push(GameConstants.SafariTile.waterR);
                     }
                 } else if (i === y - 1) {
                     if ( j === 0) {
-                        row.push(SafariTiles.waterDL);
+                        row.push(GameConstants.SafariTile.waterDL);
                     } else if (j < x - 1) {
-                        row.push(SafariTiles.waterD);
+                        row.push(GameConstants.SafariTile.waterD);
                     } else if (j === x - 1) {
-                        row.push(SafariTiles.waterDR);
+                        row.push(GameConstants.SafariTile.waterDR);
                     }
                 }
             }
@@ -325,9 +325,9 @@ class GrassBody extends SafariBody {
             const row = [];
             for (let j = 0; j < x; j++) {
                 if (j < x * 2 / 3 - 1) {
-                    row.push(SafariTiles.grass);
+                    row.push(GameConstants.SafariTile.grass);
                 } else {
-                    row.push(SafariTiles.ground);
+                    row.push(GameConstants.SafariTile.ground);
                 }
             }
             SafariBody.shuffle(row);
@@ -342,10 +342,10 @@ class GrassBody extends SafariBody {
     private fillHoles() {
         for (let i = 0; i < this.grid.length; i++) {
             for (let j = 0; j < this.grid[0].length; j++) {
-                if (this.grid[i][j] === SafariTiles.ground) {
+                if (this.grid[i][j] === GameConstants.SafariTile.ground) {
                     if (i !== 0 && i !== this.grid.length - 1) {
-                        if (this.grid[i - 1][j] === SafariTiles.grass && this.grid[i + 1][j] === SafariTiles.grass) {
-                            this.grid[i][j] = SafariTiles.grass;
+                        if (this.grid[i - 1][j] === GameConstants.SafariTile.grass && this.grid[i + 1][j] === GameConstants.SafariTile.grass) {
+                            this.grid[i][j] = GameConstants.SafariTile.grass;
                         }
                     }
                 }
@@ -354,11 +354,11 @@ class GrassBody extends SafariBody {
 
         for (let i = 0; i < this.grid.length; i++) {
             for (let j = 0; j < this.grid[0].length; j++) {
-                if (this.grid[i][j] === SafariTiles.ground) {
+                if (this.grid[i][j] === GameConstants.SafariTile.ground) {
 
                     if (j !== 0 && j !== this.grid[0].length - 1) {
-                        if (this.grid[i][j - 1] === SafariTiles.grass && this.grid[i][j + 1] === SafariTiles.grass) {
-                            this.grid[i][j] = SafariTiles.grass;
+                        if (this.grid[i][j - 1] === GameConstants.SafariTile.grass && this.grid[i][j + 1] === GameConstants.SafariTile.grass) {
+                            this.grid[i][j] = GameConstants.SafariTile.grass;
                         }
                     }
                 }
@@ -371,10 +371,10 @@ class TreeBody extends SafariBody {
     constructor() {
         super();
         this.grid = [
-            [SafariTiles.treeTopL, SafariTiles.treeTopC, SafariTiles.treeTopR],
-            [SafariTiles.treeLeavesL, SafariTiles.treeLeavesC, SafariTiles.treeLeavesR],
-            [SafariTiles.treeTrunkL, SafariTiles.treeTrunkC, SafariTiles.treeTrunkR],
-            [SafariTiles.treeRootsL, SafariTiles.treeRootsC, SafariTiles.treeRootsR],
+            [GameConstants.SafariTile.treeTopL, GameConstants.SafariTile.treeTopC, GameConstants.SafariTile.treeTopR],
+            [GameConstants.SafariTile.treeLeavesL, GameConstants.SafariTile.treeLeavesC, GameConstants.SafariTile.treeLeavesR],
+            [GameConstants.SafariTile.treeTrunkL, GameConstants.SafariTile.treeTrunkC, GameConstants.SafariTile.treeTrunkR],
+            [GameConstants.SafariTile.treeRootsL, GameConstants.SafariTile.treeRootsC, GameConstants.SafariTile.treeRootsR],
         ];
         this.type = 'tree';
     }
@@ -408,56 +408,4 @@ Array.prototype.equals = function (array) {
 
 interface Array<T> {
     equals(array: Array<T>): boolean;
-}
-
-enum SafariTiles {
-    ground = 0,
-    waterUL = 1,
-    waterU = 2,
-    waterUR = 3,
-    waterL = 4,
-    waterC = 5,
-    waterR = 6,
-    waterDL = 7,
-    waterD = 8,
-    waterDR = 9,
-    grass = 10,
-    sandUL = 11,
-    sandU = 12,
-    sandUR = 13,
-    sandL = 14,
-    sandC = 15,
-    sandR = 16,
-    sandDL = 17,
-    sandD = 18,
-    sandDR = 19,
-    sandURinverted = 21,
-    sandDRinverted = 22,
-    sandDLinverted = 23,
-    sandULinverted = 24,
-    fenceUL = 25,
-    fenceU = 26,
-    fenceUR = 27,
-    fenceL = 28,
-    fenceR = 29,
-    fenceDL = 30,
-    fenceD = 31,
-    fenceDR = 32,
-    fenceDRend = 33,
-    fenceURend = 34,
-    fenceULend = 35,
-    fenceDLend = 36,
-    treeTopL = 37,
-    treeTopC = 38,
-    treeTopR = 39,
-    treeLeavesL = 40,
-    treeLeavesC = 41,
-    treeLeavesR = 42,
-    treeTrunkL = 43,
-    treeTrunkC = 44,
-    treeTrunkR = 45,
-    treeRootsL = 46,
-    treeRootsC = 47,
-    treeRootsR = 48,
-    sign = 51,
 }

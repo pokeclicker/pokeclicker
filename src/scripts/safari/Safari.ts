@@ -55,7 +55,7 @@ class Safari {
     }
 
     public static load() {
-        this.activeRegion(player.region);
+        Safari.activeRegion(player.region);
         Safari.grid = [];
         Safari.pokemonGrid([]);
         Safari.itemGrid([]);
@@ -253,7 +253,7 @@ class Safari {
         const img = `assets/images/safari/${tile}.png`;
         const divId = `safari-${j}-${i}`;
         // Add z-index if tiles are tree top tiles
-        const zIndex = tile === 37 || tile === 38 || tile === 39 ? 'z-index: 2;' : '';
+        const zIndex = tile === GameConstants.SafariTile.treeTopL || tile === GameConstants.SafariTile.treeTopC || tile === GameConstants.SafariTile.treeTopR ? 'z-index: 2;' : '';
 
         return `<div id='${divId}' style="background-image:url('${img}'); ${zIndex}" class='safariSquare'></div>`;
     }
@@ -432,8 +432,8 @@ class Safari {
         if (!Safari.inProgress()) {
             return false;
         }
-        for (let i = 0; i < GameConstants.LEGAL_WALK_BLOCKS.length; i++) {
-            if (Safari.grid[y] && Safari.grid[y][x] === GameConstants.LEGAL_WALK_BLOCKS[i]) {
+        for (let i = 0; i < GameConstants.SAFARI_LEGAL_WALK_BLOCKS.length; i++) {
+            if (Safari.grid[y] && Safari.grid[y][x] === GameConstants.SAFARI_LEGAL_WALK_BLOCKS[i]) {
                 return true;
             }
         }
