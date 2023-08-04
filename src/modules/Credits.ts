@@ -581,6 +581,7 @@ export const SpriteCredits: Credit[] = [
             'Old Lady',
             'Underground Fossilized Dino',
             'Underground Fossilized Drake',
+            'Zook (Overworld)',
         ],
         // Notes: Made specifically for PokéClicker.
     },
@@ -1170,6 +1171,7 @@ export const SpriteCredits: Credit[] = [
             'Plumeria overworld',
             'Overworld Klara',
             'Overworld Avery',
+            'Overworld Miror B.',
         ],
         // Notes: Permission given on image page if credited
     },

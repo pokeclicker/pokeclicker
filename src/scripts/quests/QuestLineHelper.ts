@@ -1499,8 +1499,142 @@ class QuestLineHelper {
     public static createOrreXDQuestLine() {
         const orreXDQuestLine = new QuestLine('Gale of Darkness', 'Team Cipher has returned to Orre. Stop their new evil plan!', new MultiRequirement([new DevelopmentRequirement(), new QuestLineCompletedRequirement('Shadows in the Desert'), new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)]), GameConstants.BulletinBoards.Unova);
 
-        const talkToWillie = new TalkToNPCQuest(Willie, 'This is a placeholder for locking content'); // TODO make the quest for real
-        orreXDQuestLine.addQuest(talkToWillie);
+        const talkToGateonSailor = new TalkToNPCQuest(GateonSailor, 'Ask around Gateon Port for clues about new Team Cipher activity.');
+        orreXDQuestLine.addQuest(talkToGateonSailor);
+
+        const battleNaps = new CustomQuest (1, 0,  'Fight the Cipher Peons attacking the Pokemon HQ Lab.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Cipher Peon Naps')]());
+        orreXDQuestLine.addQuest(battleNaps);
+
+        const clearGateonPort = new CustomQuest(1, 0, 'Clear Gateon Port to search for the Cipher Peons who kidnapped Professor Krane.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Gateon Port Battles')](), undefined, undefined,
+            {
+                clearedMessage: 'Cipher? Nah, I don\'t play with those punks. I\m my own man, flying solo. No, I won\'t say where I got this Zangoose.',
+                npcDisplayName: 'Thug Zook',
+                npcImageName: 'Thug',
+            });
+        orreXDQuestLine.addQuest(clearGateonPort);
+
+        const battleChobin1 = new CustomQuest (1, 0,  'Talk to Chobin at Kaminko\'s Manor, if he\'s willing to talk.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Chobin 1')]());
+        orreXDQuestLine.addQuest(battleChobin1);
+
+        const talkToChobin1 = new TalkToNPCQuest(Chobin1, 'Talk to Chobin at Kaminko\'s Manor.');
+        orreXDQuestLine.addQuest(talkToChobin1);
+
+        const talkToEagun2 = new TalkToNPCQuest(Eagun2, 'Talk to Grandpa Eagun at the Relic Stone.'); // Step 5
+        orreXDQuestLine.addQuest(talkToEagun2);
+
+        const clearMtBattle = new CustomQuest(1, 0, 'Clear Mount Battle and see if anyone there has a lead on the source of Shadow Pokémon.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Mt. Battle')](), undefined, undefined,
+            {
+                clearedMessage: 'Wow, you\'ve got some strong Pokémon! You might be able to beat Team Cipher! I heard they re-activated their operations at the Cipher Lab.',
+                npcDisplayName: 'Vander',
+                npcImageName: 'Cooltrainer (male)',
+            });
+        orreXDQuestLine.addQuest(clearMtBattle);
+
+        const defeatLovrina = new DefeatDungeonBossQuest('Cipher Lab', 'Cipher Admin Lovrina', 0, 'Track down the new boss of the Cipher Lab.'); //Step 7
+        orreXDQuestLine.addQuest(defeatLovrina);
+
+        const talkToLovrina = new TalkToNPCQuest(Lovrina, 'Talk to Cipher Admin Lovrina at the Cipher Lab.');
+        orreXDQuestLine.addQuest(talkToLovrina);
+
+        const clearPyriteTown = new CustomQuest(1, 0, 'Pyrite Town is in chaos! Battle your way through to get some answers.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Pyrite Town Battles')](), undefined, undefined,
+            {
+                clearedMessage: 'This is Marcia live on the scene! Chaos in Pyrite Town as Team Cipher has returned! Rumors are swirling about an infamous dance machine making a scene!',
+                npcDisplayName: 'Marcia',
+                npcImageName: 'Reporter',
+            });
+        orreXDQuestLine.addQuest(clearPyriteTown);
+
+        const battleMirorB1 = new CustomQuest (1, 0,  'Find and defeat Miror B. near a cool cave.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Miror B. 1')]()); // Step 10
+        orreXDQuestLine.addQuest(battleMirorB1);
+
+        const defeatExol = new DefeatDungeonBossQuest('Pyrite Building', 'Cipher Commander Exol', 0, 'Track down the new boss of the Pyrite Building.');
+        orreXDQuestLine.addQuest(defeatExol);
+
+        const talkToExol = new TalkToNPCQuest(Exol, 'Talk to Cipher Commander Exol at the Pyrite Building.');
+        orreXDQuestLine.addQuest(talkToExol);
+
+        const fightPhenacCity = new CustomQuest(10, 0, 'Battle through the new Cipher Peons in Phenac City.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Phenac City Battles')]());
+        orreXDQuestLine.addQuest(fightPhenacCity);
+
+        const defeatSnattle = new DefeatDungeonBossQuest('Phenac Stadium', 'Cipher Admin Snattle', 0, 'Track down the new boss of the Phenac Stadium.');
+        orreXDQuestLine.addQuest(defeatSnattle);
+
+        const talkToSnattle = new TalkToNPCQuest(Snattle, 'Talk to Cipher Admin Snattle at the Phenac Stadium.'); //Step 15
+        orreXDQuestLine.addQuest(talkToSnattle);
+
+        const RareCandyReward = () => {
+            player.gainItem('Rare_Candy', 50);
+            Notifier.notify({
+                title: orreXDQuestLine.name,
+                message: 'Mayor Trest has given a big box of Rare Candy.',
+                type: NotificationConstants.NotificationOption.success,
+                sound: NotificationConstants.NotificationSound.Quests.quest_ready_to_complete,
+            });
+        };
+
+        const talkToMayorTrest = new TalkToNPCQuest(Trest, 'Talk to Mayor Trest at the Phenac City.', RareCandyReward);
+        orreXDQuestLine.addQuest(talkToMayorTrest);
+
+        const talkToVerich = new TalkToNPCQuest(Verich, 'Talk to the wealthy Mr. Verich at Gateon Port to learn more about the S. S. Libra.');
+        orreXDQuestLine.addQuest(talkToVerich);
+
+        const battleChobin2 = new CustomQuest (1, 0,  'Talk to Chobin at Kaminko\'s Manor, if he\'s willing to talk.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Chobin 2')]());
+        orreXDQuestLine.addQuest(battleChobin2);
+
+        const talkToChobin2 = new TalkToNPCQuest(Chobin2, 'Talk to Chobin at Kaminko\'s Manor.'); // Step 19
+        orreXDQuestLine.addQuest(talkToChobin2);
+
+        const battleSmarton = new CustomQuest (1, 0,  'Fight the Cipher Peon at the wreck of the S. S. Libra.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Cipher Peon Smarton')]()); // Step 20
+        orreXDQuestLine.addQuest(battleSmarton);
+
+        const LuxuryReward = () => {
+            App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Luxuryball, 100, false);
+            Notifier.notify({
+                title: orreXDQuestLine.name,
+                message: 'You find a crate of Luxury Balls in the wreckage.',
+                type: NotificationConstants.NotificationOption.success,
+                sound: NotificationConstants.NotificationSound.Quests.quest_ready_to_complete,
+            });
+        };
+
+        const searchSSLibra = new TalkToNPCQuest(SearchLibra, 'Search the S. S. Libra for clues.', LuxuryReward);
+        orreXDQuestLine.addQuest(searchSSLibra);
+
+        const battleZook = new CustomQuest (1, 0,  'Fight Zook outside of the Cipher Key Lair.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Zook')]());
+        orreXDQuestLine.addQuest(battleZook);
+
+        const battleMirorB2 = new CustomQuest (1, 0,  'Miror B. has surfaced again! Fight him at the Outskirt Stand.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Miror B. 2')]());
+        orreXDQuestLine.addQuest(battleMirorB2);
+
+        const fightSnagemHideout = new CustomQuest(10, 0, 'Battle through the Snagem Hideout and look for clues.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Snagem Hideout')]());
+        orreXDQuestLine.addQuest(fightSnagemHideout);
+
+        const clearCipherKeyLair = new CustomQuest(1, 0, 'You found a key to the Cipher Key Lair. Find out what\'s inside!', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Cipher Key Lair')](), undefined, undefined, // Step 25
+            {
+                clearedMessage: 'Bah! No Fair! Fine, you have take your precious Professor Krane. Get out of here!',
+                npcDisplayName: 'Gorigan',
+                npcImageName: 'Cipher Admin Gorigan',
+            });
+        orreXDQuestLine.addQuest(clearCipherKeyLair);
+
+        const KraneReward = () => {
+            App.game.pokeballs.gainPokeballs(GameConstants.Pokeball.Masterball, 1, false);
+            Notifier.notify({
+                title: orreXDQuestLine.name,
+                message: 'Professor Krane gives you a Master Ball.',
+                type: NotificationConstants.NotificationOption.success,
+                sound: NotificationConstants.NotificationSound.Quests.quest_ready_to_complete,
+            });
+        };
+
+        const talkToProfKrane = new TalkToNPCQuest(ProfKrane, 'Talk to Professor Krane at the Pokémon HQ Lab.', KraneReward);
+        orreXDQuestLine.addQuest(talkToProfKrane);
+
+        const fightCitadarkIsle = new CustomQuest(10, 0, 'Battle through Team Cipher on Citadark Isle', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Citadark Isle')]());
+        orreXDQuestLine.addQuest(fightCitadarkIsle);
+
+        const fightCitadarkIsleDome = new CustomQuest(1, 0, 'Defeat Grand Master Greevil and XD001 in the Citradark Isle Dome.', () => App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Citadark Isle Dome')]());
+        orreXDQuestLine.addQuest(fightCitadarkIsleDome);
 
         App.game.quests.questLines().push(orreXDQuestLine);
     }
