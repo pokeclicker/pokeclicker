@@ -103,8 +103,9 @@ namespace GameConstants {
         'Underground',
         'Safari',
         'Battle Frontier',
-        'Protein',
+        'Vitamins',
         'Pokerus',
+        'Shadow',
     }
     declare enum DungeonTile {
         empty = 0,
@@ -127,7 +128,58 @@ namespace GameConstants {
     declare const GYM_GEMS: number;
     declare const SAFARI_BATTLE_CHANCE: number;
     declare const SAFARI_BASE_POKEBALL_COUNT: number;
-    declare const LEGAL_WALK_BLOCKS: number[];
+    declare enum SafariTile {
+        ground,
+        waterUL,
+        waterU,
+        waterUR,
+        waterL,
+        waterC,
+        waterR,
+        waterDL,
+        waterD,
+        waterDR,
+        grass,
+        sandUL,
+        sandU,
+        sandUR,
+        sandL,
+        sandC,
+        sandR,
+        sandDL,
+        sandD,
+        sandDR,
+        sandURinverted,
+        sandDRinverted,
+        sandDLinverted,
+        sandULinverted,
+        fenceUL,
+        fenceU,
+        fenceUR,
+        fenceL,
+        fenceR,
+        fenceDL,
+        fenceD,
+        fenceDR,
+        fenceDRend,
+        fenceURend,
+        fenceULend,
+        fenceDLend,
+        treeTopL,
+        treeTopC,
+        treeTopR,
+        treeLeavesL,
+        treeLeavesC,
+        treeLeavesR,
+        treeTrunkL,
+        treeTrunkC,
+        treeTrunkR,
+        treeRootsL,
+        treeRootsC,
+        treeRootsR,
+        sign,
+    }
+    declare const SAFARI_LEGAL_WALK_BLOCKS: number[];
     declare const SAFARI_WATER_BLOCKS: number[];
     declare const SAFARI_OUT_OF_BALLS: string;
     declare const FRIEND_SAFARI_POKEMON: number;
