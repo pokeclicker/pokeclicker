@@ -8436,7 +8436,7 @@ TownList['Prelude Beach'] = new Town(
     'Prelude Beach',
     GameConstants.Region.hisui,
     GameConstants.HisuiSubRegions.Hisui,
-    [TemporaryBattleList['Kamado 2']],
+    [TemporaryBattleList['The Galaxy Team\'s Kamado']],
     {
         requirements: [new DevelopmentRequirement()],
     }
@@ -8501,15 +8501,6 @@ TownList['Bogbound Camp'] = new Town(
     GameConstants.Region.hisui,
     GameConstants.HisuiSubRegions.Hisui,
     [],
-    {
-        requirements: [new DevelopmentRequirement()],
-    }
-);
-TownList['Ancient Solaceon Ruins'] = new Town(
-    'Ancient Solaceon Ruins',
-    GameConstants.Region.hisui,
-    GameConstants.HisuiSubRegions.Hisui,
-    [TemporaryBattleList['Volo 2']],
     {
         requirements: [new DevelopmentRequirement()],
     }
@@ -8668,35 +8659,14 @@ TownList['Stone Portal'] = new Town(
         requirements: [new DevelopmentRequirement()],
     }
 );
-TownList['Temple of Sinnoh'] = new Town(
-    'Temple of Sinnoh',
-    GameConstants.Region.hisui,
-    GameConstants.HisuiSubRegions.Hisui,
-    [TemporaryBattleList['Kamado 1'], TemporaryBattleList['Dialga (Origin) 1'], TemporaryBattleList['Palkia (Origin) 1'], TemporaryBattleList['Dialga (Origin) 2'], TemporaryBattleList['Palkia (Origin) 2'], TemporaryBattleList['Volo 3']],
-    {
-        requirements: [new DevelopmentRequirement()],
-    }
-);
-TownList['Turnback Cave'] = new Town(
-    'Turnback Cave',
-    GameConstants.Region.hisui,
-    GameConstants.HisuiSubRegions.Hisui,
-    [TemporaryBattleList['Giratina (Origin)']],
-    {
-        requirements: [new DevelopmentRequirement()],
-    }
-);
-TownList['Ancient Hall of Origin'] = new Town(
-    'Ancient Hall of Origin',
-    GameConstants.Region.hisui,
-    GameConstants.HisuiSubRegions.Hisui,
-    [TemporaryBattleList.Arceus],
-    {
-        requirements: [new DevelopmentRequirement()],
-    }
-);
 
 //Hisui Dungeons
+TownList['Floaro Gardens'] = new DungeonTown(
+    'Floaro Gardens',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [new DevelopmentRequirement()]
+);
 TownList['Oreburrow Tunnel'] = new DungeonTown(
     'Oreburrow Tunnel',
     GameConstants.Region.hisui,
@@ -8708,6 +8678,13 @@ TownList.Heartwood = new DungeonTown(
     GameConstants.Region.hisui,
     GameConstants.HisuiSubRegions.Hisui,
     [new DevelopmentRequirement()]
+);
+TownList['Ancient Solaceon Ruins'] = new DungeonTown(
+    'Ancient Solaceon Ruins',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [new DevelopmentRequirement()],
+    [TemporaryBattleList['Volo 2']]
 );
 TownList['Shrouded Ruins'] = new DungeonTown(
     'Shrouded Ruins',
@@ -8725,7 +8702,8 @@ TownList['Firespit Island'] = new DungeonTown(
     'Firespit Island',
     GameConstants.Region.hisui,
     GameConstants.HisuiSubRegions.Hisui,
-    [new DevelopmentRequirement()]
+    [new DevelopmentRequirement()],
+    [new MoveToTown('Molten Arena')]
 );
 TownList['Ancient Wayward Cave'] = new DungeonTown(
     'Ancient Wayward Cave',
@@ -8762,12 +8740,6 @@ TownList['Celestica Ruins'] = new DungeonTown(
 );
 TownList['Sacred Plaza'] = new DungeonTown(
     'Sacred Plaza',
-    GameConstants.Region.hisui,
-    GameConstants.HisuiSubRegions.Hisui,
-    [new DevelopmentRequirement()]
-);
-TownList['Crevasse Passage'] = new DungeonTown(
-    'Crevasse Passage',
     GameConstants.Region.hisui,
     GameConstants.HisuiSubRegions.Hisui,
     [new DevelopmentRequirement()]
@@ -8822,6 +8794,19 @@ TownList['Ancient Lake Valor'] = new DungeonTown(
 );
 TownList['Ancient Lake Acuity'] = new DungeonTown(
     'Ancient Lake Acuity',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [new DevelopmentRequirement()]
+);
+TownList['Temple of Sinnoh'] = new DungeonTown(
+    'Temple of Sinnoh',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [new DevelopmentRequirement()],
+    [TemporaryBattleList['Dialga (Origin)'], TemporaryBattleList['Palkia (Origin)'], TemporaryBattleList['Volo 3'], TemporaryBattleList.Arceus]
+);
+TownList['Turnback Cave'] = new DungeonTown(
+    'Turnback Cave',
     GameConstants.Region.hisui,
     GameConstants.HisuiSubRegions.Hisui,
     [new DevelopmentRequirement()]

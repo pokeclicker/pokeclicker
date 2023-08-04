@@ -455,7 +455,7 @@ class QuestLineHelper {
         const clearSilver = new CustomQuest(1, 0, 'Defeat Silver.', () => App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex('Silver 3')]());
         johtoBeastsQuestLine.addQuest(clearSilver);
 
-        const talktoPokéfanDerek = new TalkToNPCQuest(EcruteakPokéfan, 'Talk to Pokéfan Derek in Ecruteak City.', () => App.game.quests.getQuestLine('Eusine\'s Chase').beginQuest());
+        const talktoPokéfanDerek = new TalkToNPCQuest(EcruteakPokéfan, 'Talk to Pokéfan Derek in Ecruteak City.', () => App.game.quests.getQuestLine('Eusine\'s Chase').beginQuest(0, undefined, true));
         johtoBeastsQuestLine.addQuest(talktoPokéfanDerek);
 
         const catchRaikou = new CaptureSpecificPokemonQuest('Raikou', 'Catch or hatch Raikou', 1, true);
@@ -2763,7 +2763,7 @@ class QuestLineHelper {
             meltanCatch20Lileep,
             meltanCatch20Aerodactyl,
             meltanDefeatHau15,
-        ],'Step 10 of Let\'s Go, Meltan!', () => App.game.quests.getQuestLine('Defeat Rainbow Rocket').beginQuest()));
+        ],'Step 10 of Let\'s Go, Meltan!', () => App.game.quests.getQuestLine('Defeat Rainbow Rocket').beginQuest(0, undefined, true)));
 
         // Multi-step #10
 
