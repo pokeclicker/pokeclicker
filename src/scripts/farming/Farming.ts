@@ -1511,7 +1511,7 @@ class Farming implements Feature {
             hint: 'I\'ve heard that growing a Passho Berry alone will cause it to change!',
         }));
         // Chople
-        this.mutations.push(new OakMutation(.0001, BerryType.Chople, BerryType.Spelon, OakItemType.Blaze_Cassette));
+        this.mutations.push(new OakMutation(.0001, BerryType.Chople, BerryType.Spelon, OakItemType.Magma_Stone));
         // Kebia
         this.mutations.push(new OakMutation(.0001, BerryType.Kebia, BerryType.Pamtre, OakItemType.Rocky_Helmet));
         // Kebia Parasite
