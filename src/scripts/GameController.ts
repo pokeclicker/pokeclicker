@@ -396,7 +396,7 @@ class GameController {
                         if (numberKey < filteredContent.length) {
                             filteredContent[numberKey].protectedOnclick();
                         } else if (filteredNPCs && numberKey < filteredContent.length + filteredNPCs.length) {
-                            filteredNPCs[numberKey - filteredContent.length].openDialog();
+                            NPCController.openDialog(filteredNPCs[numberKey - filteredContent.length]);
                         }
                         return e.preventDefault();
                     } else if (player.town() instanceof DungeonTown) {
