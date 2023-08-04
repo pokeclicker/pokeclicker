@@ -1469,8 +1469,10 @@ export const GalarDungeons = [
 ];
 
 export const HisuiDungeons = [
-    'Oreburrow Tunnel', // 188
+    'Floaro Gardens', // 188
+    'Oreburrow Tunnel',
     'Heartwood',
+    'Ancient Solaceon Ruins',
     'Shrouded Ruins',
     'Veilstone Cape',
     'Firespit Island',
@@ -1480,7 +1482,6 @@ export const HisuiDungeons = [
     'Clamberclaw Cliffs',
     'Celestica Ruins',
     'Sacred Plaza',
-    'Crevasse Passage',
     'Avalugg\'s Legacy',
     'Ice Column Chamber',
     'Icepeak Cavern',
@@ -1488,7 +1489,9 @@ export const HisuiDungeons = [
     'Seaside Hollow',
     'Ancient Lake Verity',
     'Ancient Lake Valor',
-    'Ancient Lake Acuity', // 207
+    'Ancient Lake Acuity',
+    'Temple of Sinnoh',
+    'Turnback Cave', // 210
 ];
 
 export const RegionDungeons = [
@@ -1520,6 +1523,7 @@ export const StartingTowns = [
     'Vaniville Town', // Kalos
     'Iki Town Outskirts', // Alola
     'Postwick', // Galar
+    'Prelude Beach', // Hisui
     'Final Region Town', // Final
 ];
 
@@ -1532,6 +1536,7 @@ export const StartingRoutes = [
     1, // Kalos
     1, // Alola
     1, // Galar
+    1, // Hisui
 ];
 
 export const DockTowns = [
@@ -1905,17 +1910,13 @@ export const TemporaryBattles = [
     'Hisuian Braviary',
     'Lord of the Tundra: Avalugg',
     'Beni',
-    'Kamado 1',
     'Charm 2',
-    'Dialga (Origin) 1',
-    'Palkia (Origin) 1',
-    'Kamado 2',
+    'Dialga (Origin)',
+    'Palkia (Origin)',
+    'The Galaxy Team\'s Kamado',
     'Adaman 2',
     'Irida 3',
-    'Dialga (Origin) 2',
-    'Palkia (Origin) 2',
     'Volo 3',
-    'Giratina (Origin)',
     'Tornadus 1',
     'Tornadus 2',
     'Tornadus 3',
@@ -1970,7 +1971,6 @@ export enum ShardTraderLocations {
     'Sunyshore City',
     'Survival Area',
     'Resort Area',
-    'Jubilife Village',
     'Castelia City',
     'Nimbasa City',
     'Driftveil City',
@@ -2018,6 +2018,7 @@ export enum ShardTraderLocations {
     'Circhester',
     'Spikemuth',
     'Master Dojo',
+    'Jubilife Village',
 }
 
 export enum BerryTraderLocations {
