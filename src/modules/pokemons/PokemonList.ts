@@ -3565,10 +3565,6 @@ export const pokemonList = createPokemonArray(
         'eggCycles': 20,
         'evolutions': [
             EnvironmentRestrictedLevelEvolution('MagneticField', 'Magneton', 'Magnezone', 20),
-            DummyEvolution('Magneton', 'Magnezone'), // TODO: remove and fix egg steps
-            DummyEvolution('Magneton', 'Magnezone'),
-            DummyEvolution('Magneton', 'Magnezone'),
-            DummyEvolution('Magneton', 'Magnezone'),
             RegionStoneEvolution(galarOnly, 'Magneton', 'Magnezone', StoneType.Thunder_stone),
         ],
         'base': {
@@ -5806,12 +5802,6 @@ export const pokemonList = createPokemonArray(
             NightTimedStoneEvolution('Eevee', 'Umbreon', StoneType.Soothe_bell),
             EnvironmentRestrictedLevelEvolution('MossRock', 'Eevee', 'Leafeon', 20),
             EnvironmentRestrictedLevelEvolution('IceRock', 'Eevee', 'Glaceon', 20),
-            DummyEvolution('Eevee', 'Leafeon'), // TODO: remove and fix egg steps
-            DummyEvolution('Eevee', 'Leafeon'),
-            DummyEvolution('Eevee', 'Glaceon'),
-            DummyEvolution('Eevee', 'Glaceon'),
-            DummyEvolution('Eevee', 'Glaceon'),
-            DummyEvolution('Eevee', 'Glaceon'),
             LevelEvolution('Eevee', 'Sylveon', 29),
             RegionStoneEvolution(galarOnly, 'Eevee', 'Leafeon', StoneType.Leaf_stone),
             RegionStoneEvolution(galarOnly, 'Eevee', 'Glaceon', StoneType.Ice_stone),
@@ -10336,13 +10326,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 75,
         'catchRate': 255,
-        'evolutions': [
-            EnvironmentRestrictedLevelEvolution('MagneticField', 'Nosepass', 'Probopass', 20),
-            DummyEvolution('Nosepass', 'Probopass'), // TODO: remove and fix egg steps
-            DummyEvolution('Nosepass', 'Probopass'),
-            DummyEvolution('Nosepass', 'Probopass'),
-            DummyEvolution('Nosepass', 'Probopass'),
-        ],
+        'evolutions': [EnvironmentRestrictedLevelEvolution('MagneticField', 'Nosepass', 'Probopass', 20)],
         'base': {
             'hitpoints': 30,
             'attack': 45,
@@ -13001,9 +12985,6 @@ export const pokemonList = createPokemonArray(
             LevelEvolution('Burmy (Plant)', 'Mothim', 20),
             EnvironmentRestrictedLevelEvolution('Cave', 'Burmy (Plant)', 'Burmy (Sand)', 1),
             EnvironmentRestrictedLevelEvolution('Indoors', 'Burmy (Plant)', 'Burmy (Trash)', 1),
-            DummyEvolution('Burmy (Plant)', 'Burmy (Sand)'), // TODO: remove and fix egg steps
-            DummyEvolution('Burmy (Plant)', 'Burmy (Trash)'),
-            DummyEvolution('Burmy (Plant)', 'Burmy (Trash)'),
         ],
         'base': {
             'hitpoints': 40,
@@ -21648,10 +21629,6 @@ export const pokemonList = createPokemonArray(
         'catchRate': 120,
         'evolutions': [
             EnvironmentRestrictedLevelEvolution('MagneticField', 'Charjabug', 'Vikavolt', 20),
-            DummyEvolution('Charjabug', 'Vikavolt'), // TODO: remove and fix egg steps
-            DummyEvolution('Charjabug', 'Vikavolt'),
-            DummyEvolution('Charjabug', 'Vikavolt'),
-            DummyEvolution('Charjabug', 'Vikavolt'),
             RegionStoneEvolution(galarOnly, 'Charjabug', 'Vikavolt', StoneType.Thunder_stone),
         ],
         'base': {
