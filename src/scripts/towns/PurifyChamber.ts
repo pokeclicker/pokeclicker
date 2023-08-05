@@ -29,9 +29,9 @@ class PurifyChamber implements Saveable {
         this.currentFlow = ko.observable(0);
         this.flowNeeded = ko.pureComputed(() => {
             const purifiedPokemon = App.game.party.caughtPokemon.filter((p) => p.shadow == GameConstants.ShadowStatus.Purified).length;
-            const flow = 160 * purifiedPokemon * purifiedPokemon +
-                3000 * purifiedPokemon +
-                1000 * Math.exp(0.08 * purifiedPokemon);
+            const flow = 10 * purifiedPokemon * purifiedPokemon +
+                10 * purifiedPokemon +
+                1000 * Math.exp(0.1 * purifiedPokemon);
             return Math.round(flow);
         });
     }
