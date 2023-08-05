@@ -2374,6 +2374,16 @@ class Update implements Saveable {
             saveData.oakItems.Magma_Stone = saveData.oakItems.Blaze_Cassette;
             delete saveData.oakItems.Blaze_Cassette;
 
+            // Snover Berry
+            saveData.farming.berryList = Update.moveIndex(saveData.farming.berryList, 54);
+            saveData.farming.unlockedBerries = Update.moveIndex(saveData.farming.unlockedBerries, 54);
+            saveData.farming.mutations = Update.moveIndex(saveData.farming.mutations, 50);
+            saveData.farming.plotList.forEach(p => {
+                if (p.berry >= 54) {
+                    p.berry++;
+                }
+            });
+
         },
     };
 

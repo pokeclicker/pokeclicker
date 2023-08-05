@@ -927,6 +927,7 @@ export enum PokemonItemType {
     'Porygon',
     'Togepi',
     'Beldum',
+    'Grotle (Acorn)',
     'Skorupi',
     'Combee',
     'Burmy (Plant)',
@@ -2085,6 +2086,7 @@ export enum BerryTraderLocations {
     'Mauville City',
     'Pinkan Pokémon Reserve',
     'Hearthome City',
+    'Secret Berry Shop',
 }
 
 export function getTemporaryBattlesIndex(temporaryBattle: string): number {
