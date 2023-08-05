@@ -1308,7 +1308,7 @@ dungeonList['Berry Forest'] = new Dungeon('Berry Forest',
 
 dungeonList['New Island'] = new Dungeon('New Island',
     [
-        new DungeonTrainer('Armored Mewtwo',
+        new DungeonTrainer('Armored',
             [
                 new GymPokemon('Tentacruel', 18500, 40),
                 new GymPokemon('Gyarados', 18500, 40),
