@@ -2974,6 +2974,9 @@ const ProfKrane = new NPC('Professor Krane', [
     'Snagging this powerful Shadow Pokémon will be hard, take this Master Ball!',
 ], {requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Gale of Darkness', 25), new QuestLineStepCompletedRequirement('Gale of Darkness', 27, GameConstants.AchievementOption.less)]),
 });
+const DrKaminko = new NPC('Dr. Kaminko', [
+    'Leave me alone! I\'m WORKING!']
+);
 
 //Hoenn Towns
 TownList['Littleroot Town'] = new Town(
@@ -3314,7 +3317,7 @@ TownList['Kaminko\'s Manor'] = new Town(
     [TemporaryBattleList['Chobin 1'], TemporaryBattleList['Chobin 2']],
     {
         requirements: [new QuestLineStepCompletedRequirement('Gale of Darkness', 2)],
-        npcs: [Chobin1, Chobin2],
+        npcs: [DrKaminko, Chobin1, Chobin2],
     }
 );
 
