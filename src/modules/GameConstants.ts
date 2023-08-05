@@ -764,7 +764,7 @@ export const Environments: Record<string, EnvironmentData> = {
 export type Environment = keyof typeof Environments;
 
 // Use SubEnvironments to choose background image (Cerulean Cave has Gems)
-// If changing an Environment to SubEnvironment or vice versa, don't forget to change it in GameConstants.d.ts, GymList.ts, TemporaryBattleList.ts, or elsewhere too (PokemonList.ts, Pokeballs.ts, etc.)
+// If changing Environment to SubEnvironment or vice versa, don't forget to change it in GameConstants.d.ts, GymList.ts, TemporaryBattleList.ts, or elsewhere too (PokemonList.ts, Pokeballs.ts, etc.)
 export const SubEnvironments: Record<string, EnvironmentData> = {
     Water: {
         [Region.kanto]: new Set([12, 13, 19, 20, 21, 24, 26, 31, 32, 33, 34, 35, 36, 'Cerulean City']),
