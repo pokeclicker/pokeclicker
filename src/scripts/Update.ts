@@ -2369,6 +2369,11 @@ class Update implements Saveable {
 
             // Fixing Silvally item amounts
             Object.keys(playerData._itemList).filter(itemName => itemName.includes('Memory_Silvally')).forEach(itemName => playerData._itemList[itemName] = Math.min(1, playerData._itemList[itemName]));
+
+            //Replace Blaze Cassette with Magma Stone
+            saveData.oakItems.Magma_Stone = saveData.oakItems.Blaze_Cassette;
+            delete saveData.oakItems.Blaze_Cassette;
+
         },
     };
 
