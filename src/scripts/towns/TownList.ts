@@ -3230,7 +3230,7 @@ TownList['Pokemon HQ Lab'] = new Town(
     'Pokemon HQ Lab',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [TemporaryBattleList['Cipher Peon Naps']],
+    [new ShardTraderShop(GameConstants.ShardTraderLocations['Pokemon HQ Lab']), TemporaryBattleList['Cipher Peon Naps']],
     {
         requirements: [new QuestLineCompletedRequirement('Gale of Darkness')],
         npcs: [],
