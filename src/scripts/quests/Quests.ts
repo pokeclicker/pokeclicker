@@ -316,14 +316,20 @@ class Quests implements Saveable {
                 const ql = this.getQuestLine(questLine.name);
                 if (ql) {
                     ql.state(questLine.state);
-                    if (questLine.state == QuestLineState.started) {
+                    if (questLine.state == QuestLineState.started || questLine.state == QuestLineState.suspended) {
                         if (ql.quests()[questLine.quest] instanceof MultipleQuestsQuest) {
                             ql.resumeAt(questLine.quest, 0);
                             ql.curQuestObject().quests.forEach((q, i) => {
+                                if (questLine?.initial[i] === true) {
+                                    return q.complete(true);
+                                }
                                 q.initial(questLine?.initial[i] ?? 0);
                             });
                         } else {
                             ql.resumeAt(questLine.quest, questLine.initial);
+                        }
+                        if (questLine.state == QuestLineState.suspended) {
+                            ql.suspendQuest();
                         }
                     }
                 }

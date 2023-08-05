@@ -770,6 +770,28 @@ const RedSpearow = new NPC('Red Spearow', [
     '<i>The Red Spearow seems to appreciate your visit.</i>',
 ], {image: 'assets/images/pokemon/21.01.png'});
 
+const NewIslandJessieAndJames = new RoamerNPC('Jessie And James',
+    ['Mewtwo\'s Clones have escape and are Roaming freely across Kanto. Will you help us track them down? It\'s for a good cause, we swear.'],
+    GameConstants.Region.kanto, 0, 'assets/images/npcs/Jessie And James.png',
+    new ClearDungeonRequirement(1,  GameConstants.getDungeonIndex('New Island'))
+);
+
+const NewIslandAsh1 = new NPC('Ash Ketchum',
+    ['Mewtwo has created an army of Clones. Please help me fight them, I have to save Pikachu!'],
+    {
+        image: 'assets/images/npcs/Ash Ketchum.png',
+        requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('New Island'), GameConstants.AchievementOption.less),
+    }
+);
+
+const NewIslandAsh2 = new NPC('Ash Ketchum',
+    ['There are still Clones left in Mewtwos army! Help me fight them!'],
+    {
+        image: 'assets/images/npcs/Ash Ketchum.png',
+        requirement: new MultiRequirement([new ClearDungeonRequirement(1,  GameConstants.getDungeonIndex('New Island')), new ClearDungeonRequirement(10, GameConstants.getDungeonIndex('New Island'), GameConstants.AchievementOption.less)]),
+    }
+);
+
 const KantoSafariRanger = new SafariPokemonNPC('Safari Ranger', [
     'All sorts of unique Pokémon can be found in the Safari Zone!',
 ], GameConstants.Region.kanto, 'assets/images/npcs/Pokémon Breeder (male).png');
@@ -1225,6 +1247,16 @@ TownList['Berry Forest'] = new DungeonTown(
     GameConstants.Region.kanto,
     GameConstants.KantoSubRegions.Sevii123,
     [new RouteKillRequirement(10, GameConstants.Region.kanto, 29)]
+);
+TownList['New Island'] = new DungeonTown(
+    'New Island',
+    GameConstants.Region.kanto,
+    GameConstants.KantoSubRegions.Kanto,
+    [new SpecialEventRequirement('Mewtwo strikes back!')],
+    [TemporaryBattleList['Ash Ketchum New Island']],
+    {
+        npcs: [NewIslandAsh1, NewIslandAsh2, NewIslandJessieAndJames],
+    }
 );
 TownList['Victory Road'] = new DungeonTown(
     'Victory Road',
@@ -3230,7 +3262,7 @@ TownList['Pokemon HQ Lab'] = new Town(
     'Pokemon HQ Lab',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [TemporaryBattleList['Cipher Peon Naps']],
+    [new ShardTraderShop(GameConstants.ShardTraderLocations['Pokemon HQ Lab']), TemporaryBattleList['Cipher Peon Naps']],
     {
         requirements: [new QuestLineCompletedRequirement('Gale of Darkness')],
         npcs: [],
@@ -8436,7 +8468,7 @@ TownList['Prelude Beach'] = new Town(
     'Prelude Beach',
     GameConstants.Region.hisui,
     GameConstants.HisuiSubRegions.Hisui,
-    [TemporaryBattleList['Kamado 2']],
+    [TemporaryBattleList['The Galaxy Team\'s Kamado']],
     {
         requirements: [new DevelopmentRequirement()],
     }
@@ -8501,15 +8533,6 @@ TownList['Bogbound Camp'] = new Town(
     GameConstants.Region.hisui,
     GameConstants.HisuiSubRegions.Hisui,
     [],
-    {
-        requirements: [new DevelopmentRequirement()],
-    }
-);
-TownList['Ancient Solaceon Ruins'] = new Town(
-    'Ancient Solaceon Ruins',
-    GameConstants.Region.hisui,
-    GameConstants.HisuiSubRegions.Hisui,
-    [TemporaryBattleList['Volo 2']],
     {
         requirements: [new DevelopmentRequirement()],
     }
@@ -8668,35 +8691,14 @@ TownList['Stone Portal'] = new Town(
         requirements: [new DevelopmentRequirement()],
     }
 );
-TownList['Temple of Sinnoh'] = new Town(
-    'Temple of Sinnoh',
-    GameConstants.Region.hisui,
-    GameConstants.HisuiSubRegions.Hisui,
-    [TemporaryBattleList['Kamado 1'], TemporaryBattleList['Dialga (Origin) 1'], TemporaryBattleList['Palkia (Origin) 1'], TemporaryBattleList['Dialga (Origin) 2'], TemporaryBattleList['Palkia (Origin) 2'], TemporaryBattleList['Volo 3']],
-    {
-        requirements: [new DevelopmentRequirement()],
-    }
-);
-TownList['Turnback Cave'] = new Town(
-    'Turnback Cave',
-    GameConstants.Region.hisui,
-    GameConstants.HisuiSubRegions.Hisui,
-    [TemporaryBattleList['Giratina (Origin)']],
-    {
-        requirements: [new DevelopmentRequirement()],
-    }
-);
-TownList['Ancient Hall of Origin'] = new Town(
-    'Ancient Hall of Origin',
-    GameConstants.Region.hisui,
-    GameConstants.HisuiSubRegions.Hisui,
-    [TemporaryBattleList.Arceus],
-    {
-        requirements: [new DevelopmentRequirement()],
-    }
-);
 
 //Hisui Dungeons
+TownList['Floaro Gardens'] = new DungeonTown(
+    'Floaro Gardens',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [new DevelopmentRequirement()]
+);
 TownList['Oreburrow Tunnel'] = new DungeonTown(
     'Oreburrow Tunnel',
     GameConstants.Region.hisui,
@@ -8708,6 +8710,13 @@ TownList.Heartwood = new DungeonTown(
     GameConstants.Region.hisui,
     GameConstants.HisuiSubRegions.Hisui,
     [new DevelopmentRequirement()]
+);
+TownList['Ancient Solaceon Ruins'] = new DungeonTown(
+    'Ancient Solaceon Ruins',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [new DevelopmentRequirement()],
+    [TemporaryBattleList['Volo 2']]
 );
 TownList['Shrouded Ruins'] = new DungeonTown(
     'Shrouded Ruins',
@@ -8725,7 +8734,8 @@ TownList['Firespit Island'] = new DungeonTown(
     'Firespit Island',
     GameConstants.Region.hisui,
     GameConstants.HisuiSubRegions.Hisui,
-    [new DevelopmentRequirement()]
+    [new DevelopmentRequirement()],
+    [new MoveToTown('Molten Arena')]
 );
 TownList['Ancient Wayward Cave'] = new DungeonTown(
     'Ancient Wayward Cave',
@@ -8762,12 +8772,6 @@ TownList['Celestica Ruins'] = new DungeonTown(
 );
 TownList['Sacred Plaza'] = new DungeonTown(
     'Sacred Plaza',
-    GameConstants.Region.hisui,
-    GameConstants.HisuiSubRegions.Hisui,
-    [new DevelopmentRequirement()]
-);
-TownList['Crevasse Passage'] = new DungeonTown(
-    'Crevasse Passage',
     GameConstants.Region.hisui,
     GameConstants.HisuiSubRegions.Hisui,
     [new DevelopmentRequirement()]
@@ -8822,6 +8826,19 @@ TownList['Ancient Lake Valor'] = new DungeonTown(
 );
 TownList['Ancient Lake Acuity'] = new DungeonTown(
     'Ancient Lake Acuity',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [new DevelopmentRequirement()]
+);
+TownList['Temple of Sinnoh'] = new DungeonTown(
+    'Temple of Sinnoh',
+    GameConstants.Region.hisui,
+    GameConstants.HisuiSubRegions.Hisui,
+    [new DevelopmentRequirement()],
+    [TemporaryBattleList['Dialga (Origin)'], TemporaryBattleList['Palkia (Origin)'], TemporaryBattleList['Volo 3'], TemporaryBattleList.Arceus]
+);
+TownList['Turnback Cave'] = new DungeonTown(
+    'Turnback Cave',
     GameConstants.Region.hisui,
     GameConstants.HisuiSubRegions.Hisui,
     [new DevelopmentRequirement()]
