@@ -3807,6 +3807,13 @@ const SinnohBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations
     ItemList.FarmHandRiley,
 ], 'Sinnoh Berry Master');
 
+const SecretBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations['Secret Berry Shop'],[
+    ItemList.Freeze_Mulch,
+    ItemList.Berry_Shovel,
+    ItemList.Mulch_Shovel,
+], 'Secret Berry Shop');
+
+
 //Sinnoh NPCs
 
 const TwinleafContestChampion = new NPC('Contest Champion', [
@@ -4149,6 +4156,17 @@ const HappinyBoulders = new NPC('Strange Boulders', [
     image: 'assets/images/npcs/specialNPCs/Strange Boulders.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 22), new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 24, GameConstants.AchievementOption.less)]),
 });
+const SnoverBreeder = new NPC('Snover Breeder', [
+    'I\'ve been finding ways to grow Snover Berries using humane methods',
+    'Snover are happy to let you pick their berries, then they wander away into the wilderness. Just be kind to them.',
+], {image: 'assets/images/npcs/Pokémon Breeder (female).png'});
+const GrotleAcornParty = new NPC('Grotle and Friends', [
+    '<i>Several friendly Pokémon are snacking on a Grotle\'s acorns.</i>',
+], {
+    image: 'assets/images/npcs/specialNPCs/Grotle Acorn Party.png',
+    requirement: new ObtainedPokemonRequirement('Grotle (Acorn)'),
+});
+
 
 //Sinnoh Towns
 TownList['Twinleaf Town'] = new Town(
@@ -4300,6 +4318,19 @@ TownList['Snowpoint City'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 217)],
         npcs: [SnowpointYoungGirl],
+    }
+);
+TownList['Secret Berry Shop'] = new Town(
+    'Secret Berry Shop',
+    GameConstants.Region.sinnoh,
+    GameConstants.SinnohSubRegions.Sinnoh,
+    [SecretBerryMaster],
+    {
+        requirements: [
+            new RouteKillRequirement(10, GameConstants.Region.sinnoh, 217),
+        ],
+        npcs: [SnoverBreeder, GrotleAcornParty],
+        ignoreAreaStatus: true,
     }
 );
 TownList['Sunyshore City'] = new Town(
