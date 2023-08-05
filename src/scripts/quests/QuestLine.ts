@@ -99,7 +99,7 @@ class QuestLine {
     }
 
     suspendQuest() {
-        if (this.bulletinBoard == GameConstants.BulletinBoards.None || this.state() == QuestLineState.suspended) {
+        if (!this.isPausable() || this.state() == QuestLineState.suspended) {
             // Do nothing if already suspended or not a bulletin board quest
             return;
         }
