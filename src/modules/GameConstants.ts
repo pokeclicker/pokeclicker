@@ -759,6 +759,31 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.galar]: new Set(['Rose Tower', 'Energy Plant']),
         [Region.hisui]: new Set([]),
     },
+
+    // Hisui Areas
+    JubilifeVillage: {
+        [Region.hisui]: new Set(['Prelude Beach', 'Jubilife Village', 'Galaxy Hall']),
+    },
+
+    ObsidianFieldlands: {
+        [Region.hisui]: new Set([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 'Floaro Gardens', 'Oreburrow Tunnel', 'Heartwood', 'Ancient Lake Verity', 'Fieldlands Camp', 'Heights Camp', 'Grandtree Arena']),
+    },
+
+    CrimsonMirelands: {
+        [Region.hisui]: new Set([13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 'Ancient Solaceon Ruins', 'Shrouded Ruins', 'Mirelands Camp', 'Bogbound Camp', 'Sludge Mound', 'Ancient Lake Valor', 'Diamond Settlement', 'Brava Arena']),
+    },
+
+    CobaltCoastlands: {
+        [Region.hisui]: new Set([23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 'Veilstone Cape', 'Firespit Island', 'Seaside Hollow', 'Turnback Cave', 'Beachside Camp', 'Coastlands Camp', 'Iscan\'s Cabin', 'Molten Arena']),
+    },
+
+    CoronetHighlands: {
+        [Region.hisui]: new Set([38, 39, 40, 41, 42, 43, 44, 45, 46, 'Ancient Wayward Cave', 'Ancient Quarry', 'Primeval Grotto', 'Clamberclaw Cliffs', 'Celestica Ruins', 'Sacred Plaza', 'Temple of Sinnoh', 'Highlands Camp', 'Mountain Camp', 'Summit Camp', 'Moonview Arena']),
+    },
+
+    AlabasterIcelands: {
+        [Region.hisui]: new Set([47, 48, 49, 50, 51, 52, 53, 54, 'Avalugg\'s Legacy', 'Ice Column Chamber', 'Icepeak Cavern', 'Ancient Snowpoint Temple', 'Ancient Lake Acuity', 'Snowfields Camp', 'Icepeak Camp', 'Pearl Settlement', 'Icepeak Arena', 'Stone Portal']),
+    },
 };
 
 export type Environment = keyof typeof Environments;

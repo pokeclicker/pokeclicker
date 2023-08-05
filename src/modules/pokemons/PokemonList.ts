@@ -3566,6 +3566,7 @@ export const pokemonList = createPokemonArray(
         'evolutions': [
             EnvironmentRestrictedLevelEvolution('MagneticField', 'Magneton', 'Magnezone', 20),
             RegionStoneEvolution(galarOnly, 'Magneton', 'Magnezone', StoneType.Thunder_stone),
+            EnvironmentRestrictedLevelEvolution('CoronetHighlands', 'Magneton', 'Magnezone', 20),
         ],
         'base': {
             'hitpoints': 50,
@@ -5805,6 +5806,8 @@ export const pokemonList = createPokemonArray(
             LevelEvolution('Eevee', 'Sylveon', 29),
             RegionStoneEvolution(galarOnly, 'Eevee', 'Leafeon', StoneType.Leaf_stone),
             RegionStoneEvolution(galarOnly, 'Eevee', 'Glaceon', StoneType.Ice_stone),
+            EnvironmentRestrictedLevelEvolution('ObsidianFieldands', 'Eevee', 'Leafeon', 20),
+            EnvironmentRestrictedLevelEvolution('AlabasterIcelands', 'Eevee', 'Glaceon', 20),
         ],
         'base': {
             'hitpoints': 55,
@@ -10326,7 +10329,10 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 75,
         'catchRate': 255,
-        'evolutions': [EnvironmentRestrictedLevelEvolution('MagneticField', 'Nosepass', 'Probopass', 20)],
+        'evolutions': [
+            EnvironmentRestrictedLevelEvolution('MagneticField', 'Nosepass', 'Probopass', 20),
+            EnvironmentRestrictedLevelEvolution('CoronetHighlands', 'Nosepass', 'Probopass', 20),
+        ],
         'base': {
             'hitpoints': 30,
             'attack': 45,
@@ -12984,7 +12990,11 @@ export const pokemonList = createPokemonArray(
             LevelEvolution('Burmy (Plant)', 'Wormadam (Plant)', 20),
             LevelEvolution('Burmy (Plant)', 'Mothim', 20),
             EnvironmentRestrictedLevelEvolution('Cave', 'Burmy (Plant)', 'Burmy (Sand)', 1),
+            EnvironmentRestrictedLevelEvolution('CrimsonMirelands', 'Burmy (Plant)', 'Burmy (Sand)', 1),
+            EnvironmentRestrictedLevelEvolution('CobaltCoastlands', 'Burmy (Plant)', 'Burmy (Sand)', 1),
             EnvironmentRestrictedLevelEvolution('Indoors', 'Burmy (Plant)', 'Burmy (Trash)', 1),
+            EnvironmentRestrictedLevelEvolution('CoronetHighlands', 'Burmy (Plant)', 'Burmy (Trash)', 1),
+            EnvironmentRestrictedLevelEvolution('AlabasterIcelands', 'Burmy (Plant)', 'Burmy (Trash)', 1),
         ],
         'base': {
             'hitpoints': 40,

@@ -312,6 +312,11 @@ namespace GameConstants {
         Outdoors: EnvironmentData,
         Cave: EnvironmentData,
         Indoors: EnvironmentData,
+        ObsidianFieldlands: EnvironmentData,
+        CrimsonMirelands: EnvironmentData,
+        CobaltCoastlands: EnvironmentData,
+        CoronetHighlands: EnvironmentData,
+        AlabasterIcelands: EnvironmentData,
     };
     declare type Environment = keyof typeof Environments;
     declare type SubEnvironmentData = Partial<Record<number, Set<string | number>>>
