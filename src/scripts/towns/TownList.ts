@@ -771,13 +771,13 @@ const RedSpearow = new NPC('Red Spearow', [
 ], {image: 'assets/images/pokemon/21.01.png'});
 
 const NewIslandJessieAndJames = new RoamerNPC('Jessie And James',
-    ['These clones managed to escape and are Roaming fleely in the area. Will you help us track them down?'],
+    ['Mewtwo\'s Clones have escape and are Roaming freely across Kanto. Will you help us track them down? It\'s for a good cause, we swear.'],
     GameConstants.Region.kanto, 0, 'assets/images/npcs/Jessie And James.png',
     new ClearDungeonRequirement(1,  GameConstants.getDungeonIndex('New Island'))
 );
 
 const NewIslandAsh1 = new NPC('Ash Ketchum',
-    ['Mewtwo has created an army of Clones. Please help me fight them!'],
+    ['Mewtwo has created an army of Clones. Please help me fight them, I have to save Pikachu!'],
     {
         image: 'assets/images/npcs/Ash Ketchum.png',
         requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('New Island'), GameConstants.AchievementOption.less),

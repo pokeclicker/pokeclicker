@@ -144,11 +144,12 @@ class SpecialEvents implements Feature {
             Bulbausaur (Clone)
             Charmander (Clone)
             Squirtle (Clone)
+            Pikachu (Clone)
         Dungeon.ts:
             New Island as a dungeon
             Armored Mewtwo in New Island
         */
-        this.newEvent('Mewtwo strikes back!', '"New Island" has appeared near the Sevii Islands. Go stop Mewtwo!',
+        this.newEvent('Mewtwo strikes back!', '"New Island" has appeared off the coast of Kanto. Go stop Mewtwo!',
             // Start
             new Date(new Date().getFullYear(), 6, 18, 1), () => {
             },
