@@ -221,6 +221,24 @@ TemporaryBattleList['Cue Ball Paxton'] = new TemporaryBattle(
         new TemporaryBattleRequirement('Biker Goon 3'),
     ]
 );
+TemporaryBattleList['Ash Ketchum New Island'] = new TemporaryBattle(
+    'Ash Ketchum New Island',
+    [
+        new GymPokemon('Bulbasaur', 151664, 25),
+        new GymPokemon('Squirtle', 151664, 25),
+        new GymPokemon('Pikachu', 151664, 30),
+    ],
+    'I found this Clone Mewtwo left behind. Can you take care of it?',
+    [new ClearDungeonRequirement(10, GameConstants.getDungeonIndex('New Island'))],
+    undefined,
+    {
+        displayName: 'Ash Ketchum',
+        imageName: 'Ash Ketchum',
+        firstTimeRewardFunction: () => {
+            App.game.party.gainPokemonByName('Pikachu (Clone)');
+        },
+    }
+);
 TemporaryBattleList['Bill\'s Grandpa'] = new TemporaryBattle(
     'Bill\'s Grandpa',
     [
