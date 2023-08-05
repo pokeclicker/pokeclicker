@@ -145,9 +145,10 @@ class SpecialEvents implements Feature {
             Charmander (Clone)
             Squirtle (Clone)
         Dungeon.ts:
-            Armored Mewtwo in Cerulean Cave
+            New Island as a dungeon
+            Armored Mewtwo in New Island
         */
-        this.newEvent('Mewtwo strikes back!', 'Encounter Armored Mewtwo for a limited time in Cerulean Cave.<br/>Encounter clone Pokémon roaming in Kanto.',
+        this.newEvent('Mewtwo strikes back!', '"New Island" has appeared near the Sevii Islands. Go stop Mewtwo!',
             // Start
             new Date(new Date().getFullYear(), 6, 18, 1), () => {
             },
