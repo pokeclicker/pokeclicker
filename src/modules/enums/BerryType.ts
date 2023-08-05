@@ -58,6 +58,7 @@ enum BerryType {
     Babiri,
     Chilan,
     Roseli,
+    Snover,
     // Fifth Generation
     Micle,
     Custap,
