@@ -1306,6 +1306,59 @@ dungeonList['Berry Forest'] = new Dungeon('Berry Forest',
     ],
     1750, 29);
 
+dungeonList['New Island'] = new Dungeon('New Island',
+    [
+        new DungeonTrainer('Armored Mewtwo',
+            [
+                new GymPokemon('Tentacruel', 18500, 40),
+                new GymPokemon('Gyarados', 18500, 40),
+            ], { weight: 1 }, ''),
+        new DungeonTrainer('Armored Mewtwo',
+            [
+                new GymPokemon('Sandslash', 18500, 40),
+                new GymPokemon('Vaporeon', 18500, 40),
+                new GymPokemon('Golduck', 18500, 40),
+            ], { weight: 1 }, ''),
+        new DungeonTrainer('Armored Mewtwo',
+            [
+                new GymPokemon('Nidoqueen', 18500, 40),
+                new GymPokemon('Ninetales', 18500, 40),
+            ], { weight: 1 }, ''),
+        new DungeonTrainer('Armored Mewtwo',
+            [new GymPokemon('Blastoise (Clone)', 20000, 50)],
+            { weight: 2 }, ''),
+        new DungeonTrainer('Armored Mewtwo',
+            [new GymPokemon('Venusaur (Clone)', 20000, 50)]
+            , { weight: 2 }, ''),
+        new DungeonTrainer('Armored Mewtwo',
+            [new GymPokemon('Charmander (Clone)', 20000, 50)],
+            { weight: 2 }, ''),
+        new DungeonTrainer('Armored Mewtwo',
+            [
+                new GymPokemon('Vulpix', 18500, 40),
+                new GymPokemon('Vileplume', 18500, 40),
+            ], { weight: 1 }, ''),
+        new DungeonTrainer('Armored Mewtwo',
+            [
+                new GymPokemon('Wigglytuff', 18500, 40),
+                new GymPokemon('Rapidash', 18500, 40),
+            ], { weight: 1 }, ''),
+        new DungeonTrainer('Armored Mewtwo',
+            [new GymPokemon('Rhydon', 18500, 40)],
+            { weight: 1 }, ''),
+        new DungeonTrainer('Jessie And James',
+            [new GymPokemon('Meowth', 150, 10)],
+            { weight: 1 }, ''),
+    ],
+    {
+        common: [{loot: 'xClick'}],
+        rare: [{loot: 'Yellow Shard'}],
+        mythic: [{loot: 'Heart Scale'}],
+    },
+    18500,
+    [new DungeonBossPokemon('Armored Mewtwo', 131500, 70)],
+    1800, 40);
+
 dungeonList['Victory Road'] = new Dungeon('Victory Road',
     [
         {pokemon: 'Arbok', options: { weight: 4.88 }},
@@ -1452,10 +1505,6 @@ dungeonList['Cerulean Cave'] = new Dungeon('Cerulean Cave',
     [
         new DungeonBossPokemon('Kadabra', 183675, 60),
         new DungeonBossPokemon('Mewtwo', 255512, 100),
-        new DungeonBossPokemon('Armored Mewtwo', 1000000, 80, {
-            hide: true,
-            requirement: new SpecialEventRequirement('Mewtwo strikes back!'),
-        }),
         new DungeonBossPokemon('Vivillon (Modern)',  96662023, 60, {
             hide: true,
             requirement: new MultiRequirement([

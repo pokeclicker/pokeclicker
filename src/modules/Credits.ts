@@ -324,7 +324,9 @@ export const SpriteCredits: Credit[] = [
             'Mismagius (Illusion)',
             'Mismagius (Illusion) Shop Icon',
             'Mr Stone',
+            'New Island Overworld',
             'Peat Block',
+            'Pikachu (Clone)',
             'Pinkan Arbok',
             'Pinkan Bellsprout',
             'Pink Bow',
@@ -864,6 +866,14 @@ export const SpriteCredits: Credit[] = [
         image: 'https://a.deviantart.net/avatars-big/p/h/phoenixoflight92.png',
         resources: [
             'Shauna',
+        ],
+        // Notes: Permission given on image page if credited.
+    },
+    {
+        name: 'Pokemon Showdown',
+        link: 'https://play.pokemonshowdown.com/sprites/trainers/',
+        resources: [
+            'Jessie and James',
         ],
         // Notes: Permission given on image page if credited.
     },
