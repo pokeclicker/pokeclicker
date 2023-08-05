@@ -711,7 +711,7 @@ export const SubEnvironments: Record<string, EnvironmentData> = {
     Water: {
         [Region.kanto]: new Set([12, 13, 19, 20, 21, 24, 26, 31, 32, 33, 34, 35, 36, 'Cerulean City']),
         [Region.johto]: new Set([40, 41]),
-        [Region.hoenn]: new Set([105, 106, 107, 108, 109, 118, 122, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 'Sootopolis City', 'Gateon Port Battles']),
+        [Region.hoenn]: new Set([105, 106, 107, 108, 109, 118, 122, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 'Gateon Port Battles']),
         [Region.sinnoh]: new Set([218, 219, 220, 223, 230, 'Pastoria City', 'Lake Verity', 'Lake Valor', 'Sendoff Spring']),
         [Region.unova]: new Set([17, 18, 21, 24, 'Undella Town', 'Humilau City']),
         [Region.kalos]: new Set([8, 23, 'Couriway Town']),
@@ -722,7 +722,7 @@ export const SubEnvironments: Record<string, EnvironmentData> = {
     Ice: {
         [Region.kanto]: new Set(['Seafoam Islands', 'Icefall Cave']),
         [Region.johto]: new Set(['Mahogany Town', 'Ice Path']),
-        [Region.hoenn]: new Set(['Shoal Cave']),
+        [Region.hoenn]: new Set(['Sootopolis City', 'Shoal Cave']),
         [Region.sinnoh]: new Set([216, 217, 'Snowpoint City', 'Lake Acuity']),
         [Region.unova]: new Set(['Giant Chasm', 'Team Plasma Assault']),
         [Region.kalos]: new Set([17, 'Dendemille Town', 'Snowbelle City', 'Frost Cavern']),
@@ -757,7 +757,7 @@ export const SubEnvironments: Record<string, EnvironmentData> = {
         [Region.johto]: new Set(['Cianwood City', 'Ruins of Alph', 'Mt. Mortar', 'Dark Cave', 'Victory Road Johto']),
         [Region.hoenn]: new Set(['Rustboro City', 'Dewford Town', 'Rusturf Tunnel', 'Granite Cave', 'Jagged Pass', 'Victory Road Hoenn', 135, 'Pyrite Cave', 'The Under', 'Citadark Isle']),
         [Region.sinnoh]: new Set(['Oreburgh City', 'Oreburgh Gate', 'Wayward Cave', 'Mt. Coronet', 'Mt. Coronet South', 'Iron Island', 'Mt. Coronet North', 'Victory Road Sinnoh']),
-        [Region.unova]: new Set(['Relic Castle', 'Relic Passage', 'Victory Road Unova', 'Twist Mountain', 'Chargestone Cave', 'Mistralton Cave', 'Cave of Being']),
+        [Region.unova]: new Set(['Relic Castle', 'Relic Passage', 'Victory Road Unova', 'Twist Mountain']),
         [Region.kalos]: new Set([9, 13, 'Connecting Cave', 'Kiloude City', 'Terminus Cave', 'Victory Road Kalos']),
         [Region.alola]: new Set([12, 22, 29, 'Verdant Cavern', 'Ten Carat Hill', 'Diglett\'s Tunnel', 'Vast Poni Canyon']),
         [Region.galar]: new Set(['Warm-Up Tunnel', 'Brawlers\' Cave', 'Rock Peak Ruins', 'Split-Decision Ruins', 'Lakeside Cave', 'Tunnel to the Top', 18]),
