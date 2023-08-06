@@ -418,6 +418,7 @@ namespace GameConstants {
         'Porygon',
         'Togepi',
         'Beldum',
+        'Grotle (Acorn)',
         'Skorupi',
         'Combee',
         'Burmy (plant)',
@@ -584,6 +585,7 @@ namespace GameConstants {
         'Mauville City',
         'Pinkan Pokémon Reserve',
         'Hearthome City',
+        'Secret Berry Shop',
     }
     declare enum ShardTraderLocations {
         'Cerulean City',
