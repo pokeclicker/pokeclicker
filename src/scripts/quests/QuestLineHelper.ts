@@ -2033,7 +2033,7 @@ class QuestLineHelper {
     public static createVivillonQuestLine() {
         const vivillonQuestLine = new QuestLine('The Great Vivillon Hunt!', 'Discover the beauty of Vivillon.', new GymBadgeRequirement(BadgeEnums.Iceberg), GameConstants.BulletinBoards.Kalos);
 
-        const createVivillonQuest = (type: PokemonType, vivillon: PokemonNameType, dungeons: Array<string>, hint: string) => {
+        const createVivillonQuest = (type: PokemonType, vivillon: PokemonNameType, hint: string) => {
             // Capture 100 Water type Pokemon
             const catchType = new CustomQuest(100, undefined, `Capture or hatch 100 ${PokemonType[type]}-type Pokémon.`, () => {
                 return pokemonMap.filter(p => p.type.includes(type)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
@@ -2042,9 +2042,6 @@ class QuestLineHelper {
 
             // Capture Vivillon in a dungeon
             const vivillonAdd = () => {
-                dungeons.forEach(dungeon => {
-                    dungeonList[dungeon].bossList.push(new DungeonBossPokemon(vivillon, 93659450, 80));
-                });
                 Notifier.notify({
                     title: vivillonQuestLine.name,
                     message: `A Vivillon is hiding somewhere.\n${hint}`,
@@ -2052,9 +2049,6 @@ class QuestLineHelper {
                 });
             };
             const vivillonRemove = () => {
-                dungeons.forEach(dungeon => {
-                    dungeonList[dungeon].bossList = dungeonList[dungeon].bossList.filter(boss => boss.name != vivillon || (boss.name == vivillon && boss.options?.requirement));
-                });
                 Notifier.notify({
                     title: vivillonQuestLine.name,
                     message: `You caught the rare ${vivillon}!`,
@@ -2071,23 +2065,23 @@ class QuestLineHelper {
             vivillonQuestLine.addQuest(catchVivillon);
         };
 
-        createVivillonQuest(PokemonType.Water, 'Vivillon (Marine)', ['Lake Verity', 'Lake Valor', 'Lake Acuity'], 'It has been spotted at some Lakes.');
-        createVivillonQuest(PokemonType.Psychic, 'Vivillon (Modern)', ['Cerulean Cave'], 'It\'s surrounded by strong Pokémon.');
-        createVivillonQuest(PokemonType.Poison, 'Vivillon (Jungle)', ['Moor of Icirrus'], 'It has been spotted in a swamp.');
-        createVivillonQuest(PokemonType.Dark, 'Vivillon (Monsoon)', ['Dark Cave'], 'It\'s hiding at a dark place.');
-        createVivillonQuest(PokemonType.Steel, 'Vivillon (Tundra)', ['Poké Ball Factory'], 'It flew into a factory.');
-        createVivillonQuest(PokemonType.Fire, 'Vivillon (Sun)', ['Mt. Chimney Crater'], 'It seems to like hot places.');
-        createVivillonQuest(PokemonType.Fighting, 'Vivillon (Archipelago)', ['Sprout Tower'], 'It\'s sitting on a swaying pillar.');
-        createVivillonQuest(PokemonType.Ghost, 'Vivillon (Elegant)', ['Lost Hotel'], 'It\'s visiting an abandoned and spooky place.');
-        createVivillonQuest(PokemonType.Fairy, 'Vivillon (Ocean)', ['Dreamyard'], 'It\'s flying around an overgrown place full of dreams.');
-        createVivillonQuest(PokemonType.Electric, 'Vivillon (Continental)', ['New Mauville'], 'It\'s currently in a City full of Electric-type Pokémon.');
-        createVivillonQuest(PokemonType.Bug, 'Vivillon (River)', ['Eterna Forest'], 'It hides in a dark Forest.');
-        createVivillonQuest(PokemonType.Flying, 'Vivillon (Polar)', ['Sky Pillar'], 'It\'s high up in the sky.');
-        createVivillonQuest(PokemonType.Ground, 'Vivillon (Sandstorm)', ['Relic Castle'], 'It got lost in the desert sand.');
-        createVivillonQuest(PokemonType.Grass, 'Vivillon (Garden)', ['Flower Paradise'], 'It only shows up amongst the most beautiful flowers.');
-        createVivillonQuest(PokemonType.Rock, 'Vivillon (High Plains)', ['Mt. Moon'], 'It has been spotted dancing in the moonlight.');
-        createVivillonQuest(PokemonType.Dragon, 'Vivillon (Savanna)', ['Dragonspiral Tower'], 'It\'s surrounded by dragons.');
-        createVivillonQuest(PokemonType.Ice, 'Vivillon (Icy Snow)', ['Frost Cavern'], 'It can be found at a very cold place.');
+        createVivillonQuest(PokemonType.Water, 'Vivillon (Marine)', 'It has been spotted at some Lakes.');
+        createVivillonQuest(PokemonType.Psychic, 'Vivillon (Modern)', 'It\'s surrounded by strong Pokémon.');
+        createVivillonQuest(PokemonType.Poison, 'Vivillon (Jungle)', 'It has been spotted in a swamp.');
+        createVivillonQuest(PokemonType.Dark, 'Vivillon (Monsoon)', 'It\'s hiding at a dark place.');
+        createVivillonQuest(PokemonType.Steel, 'Vivillon (Tundra)', 'It flew into a factory.');
+        createVivillonQuest(PokemonType.Fire, 'Vivillon (Sun)', 'It seems to like hot places.');
+        createVivillonQuest(PokemonType.Fighting, 'Vivillon (Archipelago)', 'It\'s sitting on a swaying pillar.');
+        createVivillonQuest(PokemonType.Ghost, 'Vivillon (Elegant)', 'It\'s visiting an abandoned and spooky place.');
+        createVivillonQuest(PokemonType.Fairy, 'Vivillon (Ocean)', 'It\'s flying around an overgrown place full of dreams.');
+        createVivillonQuest(PokemonType.Electric, 'Vivillon (Continental)', 'It\'s currently in a City full of Electric-type Pokémon.');
+        createVivillonQuest(PokemonType.Bug, 'Vivillon (River)', 'It hides in a dark Forest.');
+        createVivillonQuest(PokemonType.Flying, 'Vivillon (Polar)', 'It\'s high up in the sky.');
+        createVivillonQuest(PokemonType.Ground, 'Vivillon (Sandstorm)', 'It got lost in the desert sand.');
+        createVivillonQuest(PokemonType.Grass, 'Vivillon (Garden)', 'It only shows up amongst the most beautiful flowers.');
+        createVivillonQuest(PokemonType.Rock, 'Vivillon (High Plains)', 'It has been spotted dancing in the moonlight.');
+        createVivillonQuest(PokemonType.Dragon, 'Vivillon (Savanna)', 'It\'s surrounded by dragons.');
+        createVivillonQuest(PokemonType.Ice, 'Vivillon (Icy Snow)', 'It can be found at a very cold place.');
 
         // Capture 200 Normal type Pokemon
         const catchNormal = new CustomQuest(200, undefined, 'Capture or hatch 200 Normal-type Pokémon.', () => {
