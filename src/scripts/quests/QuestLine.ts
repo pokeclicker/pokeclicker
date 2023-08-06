@@ -47,7 +47,7 @@ class QuestLine {
 
         this.autoBegin = this.curQuest.subscribe((num) => {
             if (this.curQuest() < this.totalQuests) {
-                if (this.curQuestObject().initial() == null) {
+                if (this.curQuestObject().initial() == null && this.state() != QuestLineState.suspended) {
                     this.beginQuest(this.curQuest());
                 }
             } else {
@@ -87,8 +87,7 @@ class QuestLine {
     resumeAt(index: number, initial) {
         if (initial != undefined) {
             for (let i = 0; i < Math.min(index, this.totalQuests); i++) {
-                this.quests()[i].autoCompleter.dispose();
-                this.quests()[i].complete();
+                this.quests()[i].complete(true);
             }
             if (index < this.totalQuests) {
                 this.beginQuest(index, initial);
@@ -98,15 +97,46 @@ class QuestLine {
         }
     }
 
+    suspendQuest() {
+        if (this.bulletinBoard == GameConstants.BulletinBoards.None || this.state() == QuestLineState.suspended) {
+            // Do nothing if already suspended or not a bulletin board quest
+            return;
+        }
+
+        // Mark quest (or sub quests if multi quest) as suspended to prevent progress
+        const quest = this.quests()[this.curQuest()];
+        if (quest instanceof MultipleQuestsQuest) {
+            quest.quests.forEach((q) => q.suspended = true);
+        }
+
+        quest.suspended = true;
+        this.state(QuestLineState.suspended);
+    }
+
+    resumeSuspendedQuest() {
+        if (this.state() != QuestLineState.suspended) {
+            return;
+        }
+
+        // Re-activate suspended quest
+        const quest = this.quests()[this.curQuest()];
+        if (quest instanceof MultipleQuestsQuest) {
+            quest.quests.forEach((q) => q.suspended = false);
+        }
+
+        quest.suspended = false;
+        this.state(QuestLineState.started);
+    }
+
     toJSON() {
         const json = {
             state: this.state(),
             name: this.name,
             quest: this.curQuest(),
-            initial: this.curQuestInitial(),
+            initial: this.curQuestObject().initial?.() ?? this.curQuestInitial(),
         };
         if (this.curQuestObject() instanceof MultipleQuestsQuest) {
-            json.initial = this.curQuestObject().quests.map((q) => q.initial());
+            json.initial = this.curQuestObject().quests.map((q) => q.isCompleted() ? true : q.initial());
         }
         return json;
     }

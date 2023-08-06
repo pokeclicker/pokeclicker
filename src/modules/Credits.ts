@@ -281,6 +281,9 @@ export const SpriteCredits: Credit[] = [
             'Go-Rock Squad Commander',
             'Go-Rock Squad Grunt (male)',
             'Go-Rock Squad Grunt (female)',
+            'Grotle (Acorn)',
+            'Grotle (Acorn) Shop Icon',
+            'Grotle and Friends',
             'Honey',
             'Hopo berry image and trees',
             'Hoppip (Chimecho)',
@@ -311,6 +314,7 @@ export const SpriteCredits: Credit[] = [
             'Magikarp Saucy Violet Shop Icon',
             'Magikarp (Feebas)',
             'Magma Admin Courtney',
+            'Magma Stone',
             'Man of Mystery',
             'Merilyn',
             'Meta Groudon Overworld',
@@ -320,7 +324,9 @@ export const SpriteCredits: Credit[] = [
             'Mismagius (Illusion)',
             'Mismagius (Illusion) Shop Icon',
             'Mr Stone',
+            'New Island Overworld',
             'Peat Block',
+            'Pikachu (Clone)',
             'Pinkan Arbok',
             'Pinkan Bellsprout',
             'Pink Bow',
@@ -428,6 +434,7 @@ export const SpriteCredits: Credit[] = [
             'Shadow Zapdos',
             'Shady Salesman',
             'Ship Front View',
+            'Shuckle (Corked)',
             'Silvally (Bug) Shuffle',
             'Silvally (Dark) Shuffle',
             'Silvally (Dragon) Shuffle',
@@ -445,6 +452,8 @@ export const SpriteCredits: Credit[] = [
             'Silvally (Rock) Shuffle',
             'Silvally (Steel) Shuffle',
             'Silvally (Water) Shuffle',
+            'Snover Berry and Trees',
+            'Snover (Berry)',
             'Spooky Togepi (shiny)',
             'Spooky Togetic',
             'Spooky Togekiss',
@@ -861,6 +870,14 @@ export const SpriteCredits: Credit[] = [
         // Notes: Permission given on image page if credited.
     },
     {
+        name: 'Pokemon Showdown',
+        link: 'https://play.pokemonshowdown.com/sprites/trainers/',
+        resources: [
+            'Jessie and James',
+        ],
+        // Notes: Permission given on image page if credited.
+    },
+    {
         name: 'Prodigal96',
         link: 'https://www.deviantart.com/prodigal96',
         image: 'https://a.deviantart.net/avatars-big/p/r/prodigal96.jpg',
@@ -991,6 +1008,7 @@ export const SpriteCredits: Credit[] = [
         link: 'https://discordapp.com/users/824384977633411082',
         resources: [
             'Bede overworld image',
+            'Burmy (No Coat)',
             'Cactus',
             'Camouflaged Kecleon image',
             'Cissy',
