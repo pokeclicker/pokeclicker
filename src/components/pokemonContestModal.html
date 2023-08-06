@@ -1,0 +1,71 @@
+<div class="modal fade noselect" id="pokemonContestModal" tabindex="-1" role="dialog" aria-labelledby="pokemonContestModalLabel">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body p-0">
+                <ul class="nav nav-tabs nav-justified">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#contest-main-tab" data-toggle="tab">Contest</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contest-prizes-tab" data-toggle="tab">Prizes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contest-help-tab" data-toggle="tab">Help</a>
+                    </li>
+                </ul>
+                <div class="d-flex bg-secondary p-3 justify-content-around shadow">
+                    <div>
+                        <span class="text-danger font-weight-bold">Style:</span>
+                        <knockout data-bind="text: ContestStyle[PokemonContestController.contestStyle()]"></knockout>
+                    </div>
+                    <div>
+                        <span class="text-danger font-weight-bold">Type:</span>
+                        <knockout data-bind="text: PokemonType[PokemonContestController.pokemonType()]"></knockout>
+                    </div>
+                </div>
+                <div class="tab-content my-2">
+                    <div class="tab-pane fade show active" id="contest-main-tab" role="tabpanel">
+                        <div class="d-flex flex-wrap mt-5" data-bind="foreach: App.game.pokemonContest.entries">
+                            <div class="col-12 col-lg-4 px-4">
+                                <div class="small mb-1">Entry #<knockout data-bind="text: $index() + 1"></knockout></div>
+                                <div class="contest-entry-image">
+                                    <div class="d-inline-block border border-secondary">
+                                        <img class="m-2" width="96" data-bind="attr: { src: $data.getPokemonImage() }" />
+                                    </div>
+                                </div>
+
+                                <div class="contest-entry-pokemon-select mt-4">
+                                    <div class="form-group text-left">
+                                        <label class="small mb-0">Pokémon</label>
+                                        <select class="form-control form-control-sm"
+                                            data-bind="options: PokemonContestController.getValidPokemonList($index()), optionsText: 'displayName', optionsValue: 'name', value: $data.pokemonName, optionsCaption: 'None'">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="contest-entry-berry-select mt-4">
+                                    <div class="form-group text-left">
+                                        <label class="small mb-0">Berry</label>
+                                        <select class="form-control form-control-sm"
+                                            data-bind="options: PokemonContestController.getBerryList(),
+                                                optionsValue: 'type', optionsText: (berry) => BerryType[berry.type], value: $data.berry, optionsCaption: 'None'">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="bg-secondary" />
+                        <div class="my-3">
+                            <button type="button" class="btn btn-primary w-50">Enter Contest!</button>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="contest-prizes-tab" role="tabpanel">
+                        <span>prizes tab</span>
+                    </div>
+                    <div class="tab-pane fade" id="contest-help-tab" role="tabpanel">
+                        <span>help tab</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

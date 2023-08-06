@@ -22,6 +22,7 @@ class PartyPokemon implements Saveable {
     public exp = 0;
     public evs: KnockoutComputed<number>;
     _attack: KnockoutComputed<number>;
+    private _canUseHeldItem: KnockoutComputed<boolean>;
 
     defaults = {
         attackBonusPercent: 0,
@@ -109,6 +110,12 @@ class PartyPokemon implements Saveable {
         this._displayName = ko.pureComputed(() => this._nickname() ? this._nickname() : this._translatedName());
         this._shadow = ko.observable(shadow);
         this._showShadowImage = ko.observable(false);
+        this._canUseHeldItem = ko.pureComputed(() => this.heldItem()?.canUse(this));
+        this._canUseHeldItem.subscribe((canUse) => {
+            if (!canUse && this.heldItem()) {
+                this.addOrRemoveHeldItem(this.heldItem());
+            }
+        });
     }
 
     public calculateAttack(ignoreLevel = false): number {
@@ -281,6 +288,34 @@ class PartyPokemon implements Saveable {
 
         GameHelper.incrementObservable(this.vitaminsUsed[vitamin], -amount);
         GameHelper.incrementObservable(player.itemList[vitaminName], amount);
+    }
+
+    public useConsumable(type: GameConstants.ConsumableType, amount: number): void {
+        const itemName = GameConstants.ConsumableType[type];
+        if (!player.itemList[itemName]()) {
+            return Notifier.notify({
+                message : `You do not have any more ${ItemList[itemName].displayName}`,
+                type : NotificationConstants.NotificationOption.danger,
+            });
+        }
+        switch (type) {
+            case GameConstants.ConsumableType.Rare_Candy : amount = Math.min(amount, player.itemList[itemName]());
+                const curAttack = this.calculateAttack(true);
+                GameHelper.incrementObservable(this._attackBonusPercent, 25 * amount);
+                Notifier.notify({
+                    message : `${this.displayName} gained ${this.calculateAttack(true) - curAttack} attack points`,
+                    type : NotificationConstants.NotificationOption.success,
+                    pokemonImage : PokemonHelper.getImage(this.id),
+                });
+                break;
+            default :
+        }
+        GameHelper.incrementObservable(player.itemList[itemName], -amount);
+        Notifier.notify({
+            message : `You used ${amount} of ${ItemList[itemName].displayName}`,
+            type : NotificationConstants.NotificationOption.success,
+            image : ItemList[itemName].image,
+        });
     }
 
     totalVitaminsUsed = ko.pureComputed((): number => {
@@ -488,6 +523,26 @@ class PartyPokemon implements Saveable {
             return true;
         }
         if (Settings.getSetting('heldItemShowHoldingThisItem').observableValue() && this.heldItem() !== HeldItem.heldItemSelected()) {
+            return true;
+        }
+
+        return false;
+    });
+
+    public hideFromConsumableList = ko.pureComputed(() => {
+        if (!new RegExp(Settings.getSetting('consumableSearchFilter').observableValue() , 'i').test(this.displayName)) {
+            return true;
+        }
+        if (Settings.getSetting('consumableRegionFilter').observableValue() > -2) {
+            if (PokemonHelper.calcNativeRegion(this.name) !== Settings.getSetting('consumableRegionFilter').observableValue()) {
+                return true;
+            }
+        }
+        const type = Settings.getSetting('consumableTypeFilter').observableValue();
+        if (type > -2 && !pokemonMap[this.name].type.includes(type)) {
+            return true;
+        }
+        if (Settings.getSetting('consumableHideShinyPokemon').observableValue() && this.shiny) {
             return true;
         }
 

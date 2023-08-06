@@ -1,6 +1,22 @@
 class BulletinBoard extends TownContent {
     public static selectedBulletinBoard: KnockoutObservable<BulletinBoard> = ko.observable(undefined);
 
+    public static getLocation(bulletinBoard: GameConstants.BulletinBoards) {
+        switch (bulletinBoard) {
+            case GameConstants.BulletinBoards.Sevii4567:
+                return 'Sevii Islands 4567';
+            case GameConstants.BulletinBoards.Hoppy:
+                return 'Magikarp Jump';
+            case GameConstants.BulletinBoards.Armor:
+                return 'Isle of Armor';
+            case GameConstants.BulletinBoards.Crown:
+                return 'Crown Tundra';
+            default:
+                return GameConstants.BulletinBoards[bulletinBoard];
+        }
+    }
+
+
     public cssClass() {
         return 'btn btn-secondary';
     }

@@ -1669,6 +1669,26 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 25.16,
+        'name': 'Pikachu (Clone)',
+        'catchRate': 190,
+        'type': [PokemonType.Electric],
+        'levelType': LevelType.mediumfast,
+        'exp': 112,
+        'eggCycles': 10,
+        'base': {
+            'hitpoints': 35,
+            'attack': 55,
+            'specialAttack': 50,
+            'defense': 40,
+            'specialDefense': 50,
+            'speed': 90,
+        },
+        'gender': {
+            'femaleRatio': 0,
+        },
+    },
+    {
         'id': 26,
         'name': 'Raichu',
         'catchRate': 75,
@@ -2557,6 +2577,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 40,
             'speed': 90,
         },
+        'heldItem': { type: ItemType.item, id: 'Rare_Candy' },
     },
     {
         'id': 52.01,
@@ -7308,6 +7329,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'visualDifference': true,
         },
+        'heldItem': { type: ItemType.item, id: 'Rare_Candy' },
     },
     {
         'id': 191,
@@ -8386,6 +8408,23 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 213.01,
+        'name': 'Shuckle (Corked)',
+        'catchRate': 190,
+        'type': [PokemonType.Bug, PokemonType.Rock],
+        'levelType': LevelType.mediumslow,
+        'exp': 177,
+        'eggCycles': 20,
+        'base': {
+            'hitpoints': 20,
+            'attack': 10,
+            'specialAttack': 10,
+            'defense': 230,
+            'specialDefense': 230,
+            'speed': 5,
+        },
+    },
+    {
         'id': 214,
         'name': 'Heracross',
         'catchRate': 45,
@@ -8492,7 +8531,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 175,
         'eggCycles': 20,
-        'evolutions': [StoneEvolution('Ursaring', 'Ursaluna', StoneType.Peat_block)],
+        'evolutions': [NightTimedStoneEvolution('Ursaring', 'Ursaluna', StoneType.Peat_block)],
         'base': {
             'hitpoints': 90,
             'attack': 130,
@@ -12481,7 +12520,10 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 64,
         'catchRate': 45,
-        'evolutions': [LevelEvolution('Turtwig', 'Grotle', 18)],
+        'evolutions': [
+            LevelEvolution('Turtwig', 'Grotle', 18),
+            DummyEvolution('Turtwig', 'Grotle (Acorn)'),
+        ],
         'base': {
             'hitpoints': 55,
             'attack': 68,
@@ -12503,6 +12545,26 @@ export const pokemonList = createPokemonArray(
         'exp': 142,
         'catchRate': 45,
         'evolutions': [LevelEvolution('Grotle', 'Torterra', 32)],
+        'base': {
+            'hitpoints': 75,
+            'attack': 89,
+            'specialAttack': 55,
+            'defense': 85,
+            'specialDefense': 65,
+            'speed': 36,
+        },
+        'gender': {
+            'femaleRatio': 0.125,
+        },
+    },
+    {
+        'id': 388.01,
+        'name': 'Grotle (Acorn)',
+        'type': [PokemonType.Grass],
+        'eggCycles': 20,
+        'levelType': LevelType.mediumslow,
+        'exp': 142,
+        'catchRate': 45,
         'base': {
             'hitpoints': 75,
             'attack': 89,
@@ -13055,6 +13117,23 @@ export const pokemonList = createPokemonArray(
         },
     },
     {
+        'id': 412.03,
+        'name': 'Burmy (No Coat)',
+        'type': [PokemonType.Bug],
+        'eggCycles': 15,
+        'levelType': LevelType.mediumfast,
+        'exp': 45,
+        'catchRate': 120,
+        'base': {
+            'hitpoints': 40,
+            'attack': 29,
+            'specialAttack': 29,
+            'defense': 45,
+            'specialDefense': 45,
+            'speed': 36,
+        },
+    },
+    {
         'id': 413,
         'name': 'Wormadam (Plant)',
         'type': [PokemonType.Bug, PokemonType.Grass],
@@ -13195,6 +13274,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'visualDifference': true,
         },
+        'heldItem': { type: ItemType.item, id: 'Rare_Candy' },
     },
     {
         'id': 418,
@@ -14188,6 +14268,27 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'visualDifference': true,
         },
+    },
+    {
+        'id': 459.01,
+        'name': 'Snover (Berry)',
+        'type': [PokemonType.Grass, PokemonType.Ice],
+        'eggCycles': 20,
+        'levelType': LevelType.slow,
+        'exp': 67,
+        'catchRate': 120,
+        'base': {
+            'hitpoints': 60,
+            'attack': 62,
+            'specialAttack': 62,
+            'defense': 50,
+            'specialDefense': 60,
+            'speed': 40,
+        },
+        'gender': {
+            'femaleRatio': 0,
+        },
+        'heldItem': { type: ItemType.berry, id: BerryType.Snover },
     },
     {
         'id': 460,
@@ -20724,6 +20825,7 @@ export const pokemonList = createPokemonArray(
             'specialDefense': 67,
             'speed': 101,
         },
+        'heldItem': { type: ItemType.item, id: 'Rare_Candy' },
     },
     {
         'id': 703,
@@ -21252,6 +21354,26 @@ export const pokemonList = createPokemonArray(
             'hitpoints': 80,
             'attack': 110,
             'specialAttack': 150,
+            'defense': 60,
+            'specialDefense': 130,
+            'speed': 70,
+        },
+        'gender': {
+            'type': Genders.Genderless,
+        },
+    },
+    {
+        'id': 720.01,
+        'name': 'Hoopa (Unbound)',
+        'type': [PokemonType.Psychic, PokemonType.Dark],
+        'eggCycles': 120,
+        'levelType': LevelType.slow,
+        'exp': 270,
+        'catchRate': 3,
+        'base': {
+            'hitpoints': 80,
+            'attack': 160,
+            'specialAttack': 170,
             'defense': 60,
             'specialDefense': 130,
             'speed': 70,

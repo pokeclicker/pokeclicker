@@ -138,15 +138,16 @@ class Party implements Feature {
         const multBonus = this.multiplier.getBonus('exp', true);
         const trainerBonus = trainer ? 1.5 : 1;
         const expTotal = Math.floor(exp * level * trainerBonus * multBonus / 9);
-        let expGained = 0;
+        let shadowExpGained = 0;
 
         const maxLevel = App.game.badgeCase.maxLevel();
         for (const pokemon of this.caughtPokemon) {
-            if (pokemon.level < maxLevel) {
-                expGained += pokemon.gainExp(expTotal);
+            const exp = pokemon.gainExp(expTotal);
+            if (pokemon.shadow >= GameConstants.ShadowStatus.Shadow) {
+                shadowExpGained += exp;
             }
         }
-        App.game.purifyChamber.gainFlow(expGained);
+        App.game.purifyChamber.gainFlow(shadowExpGained);
     }
 
     /**
@@ -156,7 +157,7 @@ class Party implements Feature {
      * @returns {number} damage to be done.
      */
 
-    public calculatePokemonAttack(type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, ignoreRegionMultiplier = false, region: GameConstants.Region = player.region, includeBreeding = false, useBaseAttack = false, overrideWeather?: WeatherType, ignoreLevel = false, includeFlute = true): number {
+    public calculatePokemonAttack(type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, ignoreRegionMultiplier = false, region: GameConstants.Region = player.region, includeBreeding = false, useBaseAttack = false, overrideWeather?: WeatherType, ignoreLevel = false, includeTempBonuses = true): number {
         let attack = 0;
         for (const pokemon of this.caughtPokemon) {
             if (region == GameConstants.Region.alola && player.region == GameConstants.Region.alola && player.subregion == GameConstants.AlolaSubRegions.MagikarpJump &&
@@ -164,7 +165,7 @@ class Party implements Feature {
                 // Only magikarps can attack in magikarp jump
                 continue;
             }
-            attack += this.calculateOnePokemonAttack(pokemon, type1, type2, region, ignoreRegionMultiplier, includeBreeding, useBaseAttack, overrideWeather, ignoreLevel, includeFlute);
+            attack += this.calculateOnePokemonAttack(pokemon, type1, type2, region, ignoreRegionMultiplier, includeBreeding, useBaseAttack, overrideWeather, ignoreLevel, includeTempBonuses);
         }
 
         const bonus = this.multiplier.getBonus('pokemonAttack');
@@ -172,7 +173,7 @@ class Party implements Feature {
         return Math.round(attack * bonus);
     }
 
-    public calculateOnePokemonAttack(pokemon: PartyPokemon, type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, region: GameConstants.Region = player.region, ignoreRegionMultiplier = false, includeBreeding = false, useBaseAttack = false, overrideWeather: WeatherType, ignoreLevel = false, includeFlute = true): number {
+    public calculateOnePokemonAttack(pokemon: PartyPokemon, type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, region: GameConstants.Region = player.region, ignoreRegionMultiplier = false, includeBreeding = false, useBaseAttack = false, overrideWeather: WeatherType, ignoreLevel = false, includeTempBonuses = true): number {
         let multiplier = 1, attack = 0;
         const pAttack = useBaseAttack ? pokemon.baseAttack : (ignoreLevel ? pokemon.calculateAttack(ignoreLevel) : pokemon.attack);
         const nativeRegion = PokemonHelper.calcNativeRegion(pokemon.name);
@@ -209,7 +210,7 @@ class Party implements Feature {
         });
 
         // Should we take flute boost into account
-        if (includeFlute) {
+        if (includeTempBonuses) {
             const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
             FluteEffectRunner.activeGemTypes().forEach(value => {
                 if (value == dataPokemon.type1) {
@@ -219,6 +220,7 @@ class Party implements Feature {
                     attack *= GameConstants.FLUTE_TYPE_ATTACK_MULTIPLIER;
                 }
             });
+            attack *= App.game.zMoves.getMultiplier(dataPokemon.type1, dataPokemon.type2);
         }
 
         return attack;
@@ -294,7 +296,7 @@ class Party implements Feature {
         const caught = caughtPokemon.length;
         const shiny = caughtPokemon.filter(p => p.shiny).length;
         const resistant = caughtPokemon.filter(p => p.pokerus >= GameConstants.Pokerus.Resistant).length;
-        const clickAttack = Math.pow(caught + shiny + resistant + 1, 1.4) * (1 + AchievementHandler.achievementBonus());
+        const clickAttack = Math.pow(caught + shiny + resistant + 1, 1.4);
 
         const bonus = this.multiplier.getBonus('clickAttack', useItem);
 

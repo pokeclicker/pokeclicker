@@ -24,6 +24,6 @@ export default class Vitamin extends Item {
     }
 
     get image() {
-        return `assets/images/items/vitamin/${this.displayName}.png`;
+        return `assets/images/items/vitamin/${this.name}.png`;
     }
 }

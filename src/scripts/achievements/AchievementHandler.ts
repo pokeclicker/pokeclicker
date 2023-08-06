@@ -535,6 +535,7 @@ class AchievementHandler {
         multiplier.addBonus('exp', () => 1 + this.achievementBonus(), multiplierSource);
         multiplier.addBonus('money', () => 1 + this.achievementBonus(), multiplierSource);
         multiplier.addBonus('dungeonToken', () => 1 + this.achievementBonus(), multiplierSource);
+        multiplier.addBonus('clickAttack', () => 1 + this.achievementBonus(), multiplierSource);
     }
 
     static load() {
