@@ -5786,11 +5786,7 @@ TemporaryBattleList['The Galaxy Team\'s Kamado'] = new TemporaryBattle(
         new GymPokemon('Snorlax', 348526193, 66),
     ],
     'Even frightful creatures like Pokémon can become powerful allies...',
-    [new DevelopmentRequirement()],
-    undefined,
-    {
-        imageName: 'Kamado (Armor)',
-    }
+    [new DevelopmentRequirement()]
 );
 TemporaryBattleList['Adaman 2'] = new TemporaryBattle(
     'Adaman 2',
