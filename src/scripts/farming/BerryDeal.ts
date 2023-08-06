@@ -108,7 +108,7 @@ class BerryDeal {
     public static generateDeals(date: Date) {
         SeededRand.seedWithDate(date);
 
-        const berryMasterTowns = [GameConstants.BerryTraderLocations['Goldenrod City'], GameConstants.BerryTraderLocations['Mauville City'], GameConstants.BerryTraderLocations['Hearthome City'], GameConstants.BerryTraderLocations['Pinkan Pokémon Reserve']];
+        const berryMasterTowns = [GameConstants.BerryTraderLocations['Goldenrod City'], GameConstants.BerryTraderLocations['Mauville City'], GameConstants.BerryTraderLocations['Hearthome City'], GameConstants.BerryTraderLocations['Pinkan Pokémon Reserve'], GameConstants.BerryTraderLocations['Secret Berry Shop']];
 
         // Removing old deals
         for (const town of berryMasterTowns) {
@@ -122,6 +122,7 @@ class BerryDeal {
         BerryDeal.list[GameConstants.BerryTraderLocations['Mauville City']].push(...this.generateMauvilleDeals());
         BerryDeal.list[GameConstants.BerryTraderLocations['Pinkan Pokémon Reserve']].push(...this.generatePinkanDeals());
         BerryDeal.list[GameConstants.BerryTraderLocations['Hearthome City']].push(...this.generateHearthomeDeals());
+        BerryDeal.list[GameConstants.BerryTraderLocations['Secret Berry Shop']].push(...this.generateSecretBerryShopDeals());
     }
 
     private static generateGoldenrodDeals() {
@@ -294,6 +295,18 @@ class BerryDeal {
             [BerryType.Pinkan],
             [SeededRand.intBetween(80, 100)],
             ItemList['Pinkan Electabuzz'],
+            1
+        ));
+
+        return list;
+    }
+
+    private static generateSecretBerryShopDeals() {
+        const list = [];
+        list.push(new BerryDeal(
+            [BerryType.Snover],
+            [SeededRand.intBetween(80, 100)],
+            ItemList['Grotle (Acorn)'],
             1
         ));
 

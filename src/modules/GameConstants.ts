@@ -758,7 +758,7 @@ export const Environments: Record<string, EnvironmentData> = {
     },
 
     PowerPlant: {
-        [Region.kanto]: new Set(['Vermilion City', 'Rocket Game Corner', 'Power Plant']),
+        [Region.kanto]: new Set(['Vermilion City', 'Rocket Game Corner', 'Power Plant', 'New Island']),
         [Region.johto]: new Set(['Tin Tower', 'Team Rocket\'s Hideout', 'Radio Tower']),
         [Region.hoenn]: new Set(['Mauville City', 'New Mauville', 'Weather Institute', 'Aqua Hideout', 'Near Space', 'Pyrite Colosseum', 'Cipher Lab', 'Realgam Tower Battles', 'Realgam Colosseum', 'Cipher Key Lair']),
         [Region.sinnoh]: new Set(['Sunyshore City', 'Valley Windworks', 'Team Galactic Eterna Building', 'Team Galactic HQ']),
@@ -927,6 +927,7 @@ export enum PokemonItemType {
     'Porygon',
     'Togepi',
     'Beldum',
+    'Grotle (Acorn)',
     'Skorupi',
     'Combee',
     'Burmy (Plant)',
@@ -1300,6 +1301,7 @@ export const KantoDungeons = [
     'Pokémon Mansion',
     'Mt. Ember Summit',
     'Berry Forest',
+    'New Island',
     'Victory Road',
     'Cerulean Cave',
     'Ruby Path',
@@ -1309,11 +1311,11 @@ export const KantoDungeons = [
     'Pattern Bush',
     'Altering Cave',
     'Tanoby Ruins',
-    'Pinkan Mountain', // 21
+    'Pinkan Mountain', // 22
 ];
 
 export const JohtoDungeons = [
-    'Sprout Tower', // 22
+    'Sprout Tower', // 23
     'Ruins of Alph',
     'Union Cave',
     'Slowpoke Well',
@@ -1328,11 +1330,11 @@ export const JohtoDungeons = [
     'Dark Cave',
     'Tohjo Falls',
     'Victory Road Johto',
-    'Mt. Silver', // 37
+    'Mt. Silver', // 38
 ];
 
 export const HoennDungeons = [
-    'Petalburg Woods', // 38
+    'Petalburg Woods', // 39
     'Rusturf Tunnel',
     'Granite Cave',
     'Fiery Path',
@@ -1370,7 +1372,7 @@ export const HoennDungeons = [
     'Gateon Port Battles',
     'Cipher Key Lair',
     'Citadark Isle',
-    'Citadark Isle Dome', // 76
+    'Citadark Isle Dome', // 77
     // These aren't implemented anywhere yet
     /*
     "Island Cave",
@@ -1399,7 +1401,7 @@ export const HoennDungeons = [
 ];
 
 export const SinnohDungeons = [
-    'Oreburgh Gate', // 77
+    'Oreburgh Gate', // 78
     'Valley Windworks',
     'Eterna Forest',
     'Old Chateau',
@@ -1422,11 +1424,11 @@ export const SinnohDungeons = [
     'Flower Paradise',
     'Snowpoint Temple',
     'Stark Mountain',
-    'Hall of Origin', // 100
+    'Hall of Origin', // 101
 ];
 
 export const UnovaDungeons = [
-    'Floccesy Ranch', // 101
+    'Floccesy Ranch', // 102
     'Liberty Garden',
     'Castelia Sewers',
     'Relic Passage',
@@ -1448,11 +1450,11 @@ export const UnovaDungeons = [
     'Pledge Grove',
     'Pinwheel Forest',
     'Dreamyard',
-    'P2 Laboratory', // 123
+    'P2 Laboratory', // 124
 ];
 
 export const KalosDungeons = [
-    'Santalune Forest', // 124
+    'Santalune Forest', // 125
     'Connecting Cave',
     'Glittering Cave',
     'Reflection Cave',
@@ -1465,12 +1467,12 @@ export const KalosDungeons = [
     'Team Flare Secret HQ',
     'Terminus Cave',
     'Pokémon Village',
-    'Victory Road Kalos', // 136
+    'Victory Road Kalos', // 137
     // 'Unknown Dungeon',
 ];
 
 export const AlolaDungeons = [
-    'Trainers\' School', // 137
+    'Trainers\' School', // 138
     'Hau\'oli Cemetery',
     'Verdant Cavern',
     'Melemele Meadow',
@@ -1499,11 +1501,11 @@ export const AlolaDungeons = [
     'Ruins of Abundance',
     'Ruins of Hope',
     'Poni Meadow',
-    'Resolution Cave', // 166
+    'Resolution Cave', // 167
 ];
 
 export const GalarDungeons = [
-    'Slumbering Weald Shrine', // 167
+    'Slumbering Weald Shrine', // 168
     'Galar Mine',
     'Galar Mine No. 2',
     'Glimwood Tangle',
@@ -1523,11 +1525,11 @@ export const GalarDungeons = [
     'Lakeside Cave',
     'Dyna Tree Hill',
     'Tunnel to the Top',
-    'Crown Shrine', // 187
+    'Crown Shrine', // 188
 ];
 
 export const HisuiDungeons = [
-    'Floaro Gardens', // 188
+    'Floaro Gardens', // 189
     'Oreburrow Tunnel',
     'Heartwood',
     'Ancient Solaceon Ruins',
@@ -1549,7 +1551,7 @@ export const HisuiDungeons = [
     'Ancient Lake Valor',
     'Ancient Lake Acuity',
     'Temple of Sinnoh',
-    'Turnback Cave', // 210
+    'Turnback Cave', // 211
 ];
 
 export const RegionDungeons = [
@@ -1622,6 +1624,7 @@ export const TemporaryBattles = [
     'Biker Goon 2',
     'Biker Goon 3',
     'Cue Ball Paxton',
+    'Ash Ketchum New Island',
     'Bill\'s Grandpa',
     'Blue 6',
     'Silver 1',
@@ -2085,6 +2088,7 @@ export enum BerryTraderLocations {
     'Mauville City',
     'Pinkan Pokémon Reserve',
     'Hearthome City',
+    'Secret Berry Shop',
 }
 
 export function getTemporaryBattlesIndex(temporaryBattle: string): number {

@@ -2336,14 +2336,19 @@ class Update implements Saveable {
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 75);
             saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 76);
 
+            // Update Mewtwo Strikes Back! event
+            saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 12);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 12);
+
             // Add XD Temp Battles
-            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 53);
+
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 54);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 55);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 56);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 57);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 58);
             saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 59);
+            saveData.statistics.temporaryBattleDefeated = Update.moveIndex(saveData.statistics.temporaryBattleDefeated, 60);
 
             // ZCrystals
             const crystalOrder = [
@@ -2373,6 +2378,18 @@ class Update implements Saveable {
             //Replace Blaze Cassette with Magma Stone
             saveData.oakItems.Magma_Stone = saveData.oakItems.Blaze_Cassette;
             delete saveData.oakItems.Blaze_Cassette;
+
+            // Snover Berry
+            saveData.farming.berryList = Update.moveIndex(saveData.farming.berryList, 54);
+            saveData.farming.unlockedBerries = Update.moveIndex(saveData.farming.unlockedBerries, 54);
+            saveData.farming.mutations = Update.moveIndex(saveData.farming.mutations, 50);
+            saveData.statistics.berriesHarvested = Update.moveIndex(saveData.statistics.berriesHarvested, 54);
+            saveData.statistics.berriesObtained = Update.moveIndex(saveData.statistics.berriesObtained, 54);
+            saveData.farming.plotList.forEach(p => {
+                if (p.berry >= 54) {
+                    p.berry++;
+                }
+            });
 
         },
     };

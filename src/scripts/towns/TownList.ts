@@ -770,6 +770,28 @@ const RedSpearow = new NPC('Red Spearow', [
     '<i>The Red Spearow seems to appreciate your visit.</i>',
 ], {image: 'assets/images/pokemon/21.01.png'});
 
+const NewIslandJessieAndJames = new RoamerNPC('Jessie And James',
+    ['Mewtwo\'s Clones have escape and are Roaming freely across Kanto. Will you help us track them down? It\'s for a good cause, we swear.'],
+    GameConstants.Region.kanto, 0, 'assets/images/npcs/Jessie And James.png',
+    new ClearDungeonRequirement(1,  GameConstants.getDungeonIndex('New Island'))
+);
+
+const NewIslandAsh1 = new NPC('Ash Ketchum',
+    ['Mewtwo has created an army of Clones. Please help me fight them, I have to save Pikachu!'],
+    {
+        image: 'assets/images/npcs/Ash Ketchum.png',
+        requirement: new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('New Island'), GameConstants.AchievementOption.less),
+    }
+);
+
+const NewIslandAsh2 = new NPC('Ash Ketchum',
+    ['There are still Clones left in Mewtwos army! Help me fight them!'],
+    {
+        image: 'assets/images/npcs/Ash Ketchum.png',
+        requirement: new MultiRequirement([new ClearDungeonRequirement(1,  GameConstants.getDungeonIndex('New Island')), new ClearDungeonRequirement(10, GameConstants.getDungeonIndex('New Island'), GameConstants.AchievementOption.less)]),
+    }
+);
+
 const KantoSafariRanger = new SafariPokemonNPC('Safari Ranger', [
     'All sorts of unique Pokémon can be found in the Safari Zone!',
 ], GameConstants.Region.kanto, 'assets/images/npcs/Pokémon Breeder (male).png');
@@ -1225,6 +1247,16 @@ TownList['Berry Forest'] = new DungeonTown(
     GameConstants.Region.kanto,
     GameConstants.KantoSubRegions.Sevii123,
     [new RouteKillRequirement(10, GameConstants.Region.kanto, 29)]
+);
+TownList['New Island'] = new DungeonTown(
+    'New Island',
+    GameConstants.Region.kanto,
+    GameConstants.KantoSubRegions.Kanto,
+    [new SpecialEventRequirement('Mewtwo strikes back!')],
+    [TemporaryBattleList['Ash Ketchum New Island']],
+    {
+        npcs: [NewIslandAsh1, NewIslandAsh2, NewIslandJessieAndJames],
+    }
 );
 TownList['Victory Road'] = new DungeonTown(
     'Victory Road',
@@ -3230,7 +3262,7 @@ TownList['Pokemon HQ Lab'] = new Town(
     'Pokemon HQ Lab',
     GameConstants.Region.hoenn,
     GameConstants.HoennSubRegions.Orre,
-    [TemporaryBattleList['Cipher Peon Naps']],
+    [new ShardTraderShop(GameConstants.ShardTraderLocations['Pokemon HQ Lab']), TemporaryBattleList['Cipher Peon Naps']],
     {
         requirements: [new QuestLineCompletedRequirement('Gale of Darkness')],
         npcs: [],
@@ -3775,6 +3807,13 @@ const SinnohBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations
     ItemList.FarmHandRiley,
 ], 'Sinnoh Berry Master');
 
+const SecretBerryMaster = new BerryMasterShop(GameConstants.BerryTraderLocations['Secret Berry Shop'],[
+    ItemList.Freeze_Mulch,
+    ItemList.Berry_Shovel,
+    ItemList.Mulch_Shovel,
+], 'Secret Berry Shop');
+
+
 //Sinnoh NPCs
 
 const TwinleafContestChampion = new NPC('Contest Champion', [
@@ -4117,6 +4156,17 @@ const HappinyBoulders = new NPC('Strange Boulders', [
     image: 'assets/images/npcs/specialNPCs/Strange Boulders.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 22), new QuestLineStepCompletedRequirement('Recover the Precious Egg!', 24, GameConstants.AchievementOption.less)]),
 });
+const SnoverBreeder = new NPC('Snover Breeder', [
+    'I\'ve been finding ways to grow Snover Berries using humane methods',
+    'Snover are happy to let you pick their berries, then they wander away into the wilderness. Just be kind to them.',
+], {image: 'assets/images/npcs/Pokémon Breeder (female).png'});
+const GrotleAcornParty = new NPC('Grotle and Friends', [
+    '<i>Several friendly Pokémon are snacking on a Grotle\'s acorns.</i>',
+], {
+    image: 'assets/images/npcs/specialNPCs/Grotle Acorn Party.png',
+    requirement: new ObtainedPokemonRequirement('Grotle (Acorn)'),
+});
+
 
 //Sinnoh Towns
 TownList['Twinleaf Town'] = new Town(
@@ -4268,6 +4318,19 @@ TownList['Snowpoint City'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 217)],
         npcs: [SnowpointYoungGirl],
+    }
+);
+TownList['Secret Berry Shop'] = new Town(
+    'Secret Berry Shop',
+    GameConstants.Region.sinnoh,
+    GameConstants.SinnohSubRegions.Sinnoh,
+    [SecretBerryMaster],
+    {
+        requirements: [
+            new RouteKillRequirement(10, GameConstants.Region.sinnoh, 217),
+        ],
+        npcs: [SnoverBreeder, GrotleAcornParty],
+        ignoreAreaStatus: true,
     }
 );
 TownList['Sunyshore City'] = new Town(
