@@ -20,6 +20,10 @@ export default class QuestLineStepCompletedRequirement extends Requirement {
         return (this.quest.state() === QuestLineState.ended || this.quest.curQuest() > this.questIndex) ? 1 : 0;
     }
 
+    public isCompleted() {
+        return this.quest.state() == QuestLineState.suspended ? false : super.isCompleted();
+    }
+
     public hint(): string {
         return `Progress further in questline ${this.questLineName}.`;
     }
