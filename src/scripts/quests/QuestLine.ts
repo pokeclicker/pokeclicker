@@ -7,6 +7,7 @@ class QuestLine {
     totalQuests: number;
 
     autoBegin: KnockoutSubscription;
+    private pausableStates = [GameConstants.GameState.town, GameConstants.GameState.fighting];
 
     constructor(
         public name: string,
@@ -130,11 +131,25 @@ class QuestLine {
     }
 
     isPausable(): boolean {
-        if (this.disablePausing || this.bulletinBoard == GameConstants.BulletinBoards.None || App.game.gameState == GameConstants.GameState.temporaryBattle) {
+        if (this.disablePausing || this.bulletinBoard == GameConstants.BulletinBoards.None
+            || !this.pausableStates.includes(App.game.gameState)
+        ) {
             return false;
         }
 
         return true;
+    }
+
+    get pauseTooltip(): string {
+        if (this.disablePausing || this.bulletinBoard == GameConstants.BulletinBoards.None) {
+            return 'This quest line cannot be paused. It is either a story, progression related, or otherwise required quest.';
+        }
+
+        if (!this.pausableStates.includes(App.game.gameState)) {
+            return 'Quest Lines can only be paused while in a town or fighting on a route.';
+        }
+
+        return 'Pausing this quest line will remove it from your quest list and prevent any progress.<br /><br />It can be resumed from the current step at the Bulletin Board it was originally accepted.';
     }
 
     toJSON() {
