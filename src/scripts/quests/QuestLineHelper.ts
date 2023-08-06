@@ -2097,7 +2097,6 @@ class QuestLineHelper {
 
         // Capture Vivillon (Pokéball)
         const viviBallAdd = () => {
-            BattleFrontierMilestones.addMilestone(new BattleFrontierMilestonePokemon(666, 'Vivillon (Poké Ball)'));
             Notifier.notify({
                 title: vivillonQuestLine.name,
                 message: 'A Vivillon is hiding somewhere.\nOnly the strongest Challengers can reach it.',
