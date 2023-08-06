@@ -1,12 +1,6 @@
-
 <div class="row justify-content-center no-gutters" data-bind="if: App.game.gameState == GameConstants.GameState.battleFrontier">
     <div class="col no-gutters" data-bind="if: BattleFrontierBattle.enemyPokemon" style="height: 280px; display: block;">
         <h2 class="pageItemTitle mobileBattleTitle" style="display: block;">
-
-            <knockout class="left">
-                Stage <knockout data-bind="text: BattleFrontierRunner.stage">0</knockout> / <knockout data-bind="text: BattleFrontierRunner.highest">0</knockout>
-            </knockout>
-
             <knockout>
                 <knockout data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': BattleFrontierBattle.enemyPokemon() } }">Pokémon name</knockout>
             </knockout>
@@ -25,7 +19,7 @@
 
         </h2>
 
-        <div class="trainer-enemy">
+        <div>
             <knockout data-bind="template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': BattleFrontierBattle.enemyPokemon() } }">Pokémon sprite</knockout>
         </div>
         <div class="progress hitpoints trainerhitpoints">
@@ -36,12 +30,15 @@
             </div>
         </div>
         <h2 class="pageItemFooter" style="display: block; font-size: 1rem;">
-          <table width="100%">
-              <tr>
-                <td>
-                    <span style="display: inline;">
-                        Pokémon Attack:
-                        <span data-bind="
+            <knockout>
+                Stage <knockout data-bind="text: BattleFrontierRunner.stage">0</knockout> / <knockout data-bind="text: BattleFrontierRunner.highest">0</knockout>
+            </knockout>
+            <table width="100%">
+                <tr>
+                    <td>
+                        <span style="display: inline;">
+                            Pokémon Attack:
+                            <span data-bind="
                             text: App.game.party.calculatePokemonAttack(
                                 PokemonType.None,
                                 PokemonType.None,
@@ -55,13 +52,12 @@
                                         true,
                                     ).toLocaleString('en-US')} against ${Battle.enemyPokemon().name}`
                                     : '',
-                                trigger: 'hover',
-                            }
-                        "></span>
-                    </span>
-                  </td>
-              </tr>
-          </table>
+                                trigger: 'hover'}">
+                            </span>
+                        </span>
+                    </td>
+                </tr>
+            </table>
         </h2>
     </div>
 </div>

@@ -3,12 +3,12 @@ import WeatherForecastStatus from '../enums/WeatherForecastStatus';
 import WeatherType from './WeatherType';
 
 export default class WeatherForecast {
-    public date: string;
+    public date: Date;
     public weatherType: WeatherType;
     public status: Observable<WeatherForecastStatus>;
 
     constructor(
-        date: string, // Date as toLocaleString
+        date: Date,
         weatherType: WeatherType,
         status = WeatherForecastStatus.disabled,
     ) {

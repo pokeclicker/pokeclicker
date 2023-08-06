@@ -17,10 +17,7 @@ class MultipleQuestsQuest extends Quest implements QuestInterface {
     }
 
     begin() {
-        this.onLoad();
-        this.quests.forEach(q => {
-            q.begin();
-        });
+        this.quests.forEach(q => q.begin());
         super.begin();
     }
 
@@ -29,5 +26,15 @@ class MultipleQuestsQuest extends Quest implements QuestInterface {
             this.customReward();
         }
         return super.claim();
+    }
+
+    createAutoCompleter(): void {
+        this.quests.forEach(q => q.createAutoCompleter());
+        super.createAutoCompleter();
+    }
+
+    deleteAutoCompleter() {
+        this.quests.forEach(q => q.deleteAutoCompleter());
+        super.deleteAutoCompleter();
     }
 }

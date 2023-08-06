@@ -18,7 +18,8 @@ enum PokemonLocationType {
     QuestLineReward,
     TempBattleReward,
     GymReward,
-    DungeonReward
+    DungeonReward,
+    Trade
 }
 
 class PokemonHelper extends TmpPokemonHelper {
@@ -202,19 +203,18 @@ class PokemonHelper extends TmpPokemonHelper {
 
     public static getPokemonSafariChance(pokemonName: PokemonNameType): Record<GameConstants.Region, Record<number, number>> {
         const list = {};
-        Object.entries(SafariPokemonList.list).forEach(([region, zones]) => {
-            zones().forEach((p, zone) => {
-                if (zone == GameConstants.Region.kalos) {
-                    // Friendly safari might cause infinit recursion
-                    return;
-                }
-                const safariWeight = p.safariPokemon.reduce((sum, p) => sum += p.weight, 0);
-                const safariPokemon = p.safariPokemon.find(p => p.name == pokemonName);
-                if (safariPokemon) {
-                    list[+region] = list[+region] || {};
-                    list[+region][zone] = +((SafariPokemon.calcPokemonWeight(safariPokemon) / safariWeight) * 100).toFixed(2);
-                }
-            });
+        Object.entries(SafariPokemonList.list).forEach(([region]) => {
+            if (region == GameConstants.Region.kalos.toString()) {
+                // Friendly safari might cause infinite recursion
+                return;
+            }
+            const zoneList = SafariPokemonList.list[region]();
+            const safariWeight = zoneList.reduce((sum, p) => sum += p.weight, 0);
+            const safariPokemon = zoneList.find(p => p.name == pokemonName);
+            if (safariPokemon) {
+                list[+region] = list[+region] || {};
+                list[+region][0] = +((SafariPokemon.calcPokemonWeight(safariPokemon) / safariWeight) * 100).toFixed(2);
+            }
         });
         return list;
     }
@@ -328,7 +328,36 @@ class PokemonHelper extends TmpPokemonHelper {
         return questLines;
     }
 
-    public static getPokemonLocations = (pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none) => {
+    public static getPokemonTrades(pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.Region.none): Array<string> {
+        const trades = [];
+        Object.entries(TownList).forEach(([townName, town]) => {
+            // If we only want to check up to a maximum region
+            if (maxRegion != GameConstants.Region.none && town.region > maxRegion) {
+                return false;
+            }
+
+            const townShops = town.content.filter(c => c instanceof Shop);
+            if (townShops.length) {
+                let hasPokemon = false;
+                for (let i = 0; i < townShops.length && !hasPokemon; i++) {
+                    const shop = townShops[i];
+                    if (shop instanceof GemMasterShop) {
+                        hasPokemon = GemDeal.list[shop.shop]?.().some(deal => deal.item.itemType.type == pokemonName);
+                    } else if (shop instanceof ShardTraderShop) {
+                        hasPokemon = ShardDeal.list[shop.location]?.().some(deal => deal.item.itemType.type == pokemonName);
+                    } else if (shop instanceof BerryMasterShop) {
+                        hasPokemon = BerryDeal.list[shop.location]?.().some(deal => deal.item.itemType.type == pokemonName);
+                    }
+                }
+                if (hasPokemon) {
+                    trades.push(townName);
+                }
+            }
+        });
+        return trades;
+    }
+
+    public static getPokemonLocations = (pokemonName: PokemonNameType, maxRegion: GameConstants.Region = GameConstants.MAX_AVAILABLE_REGION) => {
         const encounterTypes = {};
         // Routes
         const regionRoutes = PokemonHelper.getPokemonRegionRoutes(pokemonName, maxRegion);
@@ -428,13 +457,19 @@ class PokemonHelper extends TmpPokemonHelper {
             encounterTypes[PokemonLocationType.QuestLineReward] = questLineReward;
         }
 
+        // Trades
+        const trades = PokemonHelper.getPokemonTrades(pokemonName);
+        if (trades.length) {
+            encounterTypes[PokemonLocationType.Trade] = trades;
+        }
+
         // Return the list of items
         return encounterTypes;
     }
 
-    public static hasEvableLocations = (pokemonName: PokemonNameType) => {
+    public static isObtainableAndNotEvable = (pokemonName: PokemonNameType) => {
         const locations = PokemonHelper.getPokemonLocations(pokemonName);
-        return locations[PokemonLocationType.Dungeon] ||
+        const isEvable = locations[PokemonLocationType.Dungeon] ||
             locations[PokemonLocationType.DungeonBoss] ||
             locations[PokemonLocationType.DungeonChest] ||
             (locations[PokemonLocationType.Evolution] as EvoData[])?.some((evo) => evo.trigger === EvoTrigger.STONE) || // Only stone evolutions gives EVs
@@ -442,7 +477,8 @@ class PokemonHelper extends TmpPokemonHelper {
             locations[PokemonLocationType.Route] ||
             locations[PokemonLocationType.Safari] ||
             locations[PokemonLocationType.Shop] ||
-            locations[PokemonLocationType.Wandering];
-
+            locations[PokemonLocationType.Wandering] ||
+            locations[PokemonLocationType.Trade];
+        return !isEvable && Object.keys(locations).length;
     };
 }

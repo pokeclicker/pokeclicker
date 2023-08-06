@@ -15,7 +15,7 @@
             <span class="text-muted">or download the Windows client:</span><br/>
             <span class="text-muted"><a href="https://github.com/RedSparr0w/Pokeclicker-desktop/releases/latest" target="_blank">https://github.com/RedSparr0w/Pokeclicker-desktop/releases/latest</a></span></p>
             <p><strong>Where is the wiki?</strong><br/>
-            <span class="text-muted"><a href="https://pokeclicker.miraheze.org/" target="_blank">https://pokeclicker.miraheze.org/</a><br/>
+            <span class="text-muted"><a href="https://wiki.pokeclicker.com/" target="_blank">https://wiki.pokeclicker.com/</a><br/>
             The Start Menu has a Wiki button too.</span></p>
             <p><strong>My game isn&#39;t running at full speed when the window isn&#39;t active.</strong><br/>
             <span class="text-muted">This is a setting on browsers that slows down inactive windows.</span><br/>
@@ -25,6 +25,13 @@
             <p><strong>How do I get Dungeon Tokens?</strong><br/>
             <span class="text-muted">Read the in-game Tutorial.</span><br/>
             <span class="text-muted">Set the &quot;Caught&quot; selector in the top left to Poké Ball to capture Pokémon you have already caught.</span></p>
+            <p><strong>How is damage calculated?</strong><br/>
+            <span class="text-muted">The damage you do against an enemy Pokémon is the sum of the attack of all Pokémon the player has, after type effectiveness, type weakness, and other multipliers are applied.</span><br/>
+            <span class="text-muted">For players' Pokémon with two types, only the most efficient type is applied.</span><br/>
+            <span class="text-muted">For enemy Pokémon with two types, effectiveness and weakness is applied once to each type.</span><br/>
+            <span class="text-muted">For enemy Pokémon with one type, effectiveness and weakness is applied twice to that single type.</span><br/>
+            <span class="text-muted">Other factors that will multiply damage value include flutes, battle items, and weather. Gems can be used to change the effectiveness and weakness multipliers as well.</span><br/>
+            <span class="text-muted"> Player can check the attack against a specific Pokémon they are fighting by <strong>hovering over Pokémon attack value.</strong>.</span><br/>
             <p><h5 class="text-primary"><strong>Saves:</strong></h5></p>
             <p><strong>Can I import my save from the previous version?</strong><br/>
             <span class="text-muted">You can only import the shinies you obtained in the previous version.</span><br/>
@@ -39,10 +46,12 @@
             <p><strong>What are the odds of finding a shiny Pokémon?</strong><br/>
             <span class="text-muted">On a Route: <code>1/8192</code><br/>
             In a Dungeon: <code>1/4096</code><br/>
-            In the Safari Zone: <code>1/2048</code><br/>
             Using an Evolution Item: <code>1/2048</code><br/>
+            In the Safari Zone: <code>1/1024</code><br/>
             From a Shop: <code>1/1024</code><br/>
             From Hatching an Egg: <code>1/1024</code><br/>
+            From a Reward: <code>1/1024</code><br/>
+            From a Battle Frontier Milestone: <code>1/1024</code><br/>
             Wandering on the Farm: <code>1/1024</code></span></p>
             <p><strong>Do shiny Pokémon give any bonus to gameplay?</strong><br/>
             <span class="text-muted">Yes, they give an extra 100% bonus to Click Attack.</span></p>
@@ -67,7 +76,8 @@
             <p><strong>How many regions are playable?</strong><br/>
             <span class="text-muted">Currently Kanto through to <span data-bind="text: GameConstants.camelCaseToString(GameConstants.Region[GameConstants.MAX_AVAILABLE_REGION])">...</span> are able to be played.</span></p>
             <p><strong>How do I get to the next region?</strong><br/>
-            <span class="text-muted">You must obtain all Pokémon available in the current region.</span><br/>
+            <span class="text-muted">You must defeat the league champion of the current region. 
+            <span class="text-muted">If you have regional Pokedex challenge active you must obtain all Pokémon available in the current region.</span><br/>
             <span class="text-muted"><strong>Note:</strong> Once you go to the next region, you will not be able to go back to previous regions until you reach the dock.</span></p>
             <p><strong>How do I increase my Click Attack?</strong><br/>
             <span class="text-muted">New Pokémon you capture, shinies obtained, and Pokémon made resistant to Pokérus all increase your click attack</span></p>
@@ -203,6 +213,83 @@
             <span class="text-muted"><img src ='assets/images/breeding/pokerus/Infected.png'/> <code>Infected</code>: Pokémon has Pokérus, but cannot spread Pokérus or gain EVs until hatching.<br/>
             <span class="text-muted"><img src ='assets/images/breeding/pokerus/Contagious.png'/> <code>Contagious</code>: Pokémon with less than 50 EVs.<br/>
             <span class="text-muted"><img src ='assets/images/breeding/pokerus/Resistant.png'/> <code>Resistant</code>: Pokémon with 50 or more EVs. These Pokémon will still be able to spread Pokérus.<br/>
+    
+            <p><h5 class="text-primary"><strong>Challenge modes:</strong></h5></p>
+            <p><strong>What are challenge modes?</strong><br/>
+            <span class="text-muted">They are options you can select <strong>when starting a new save</strong> to make the game harder or more complex modifying some mechanics.</span><br/>
+            <span class="text-muted"><strong>Note:</strong> You can deactivate the challenges at any moment, but can't be activated later.</span></p>
+            <strong>What do I get for activating challenge modes?</strong><br/>
+            <span class="text-muted">You don't get anything special for having challenges active, but each challenge will give you a ribbon on your trainer profile.</span></p>
+            <strong>Regional debuff attack</strong><br/>
+            <span class="text-muted">Lower the attack of the Pokémon that aren't native to the current region.</span><br/>
+            <span class="text-muted">The strength of the debuff is based on your highest region, not the region you are battling in.</span><br/>
+            <span class="text-muted">The Pokémon retain 20% of their attack in Johto and this value raises by 10% each region.</span><br/>
+            <span class="text-muted">The following table shows <strong>Bulbasaur's</strong> attack in different regions:</span></p>
+            <table class="table table-bordered table-striped">
+                <tr>
+                    <td class="text-center"><Region</strong></td>
+                    <td class="text-center"><strong>Current region</strong></td>
+                    <td class="text-center"><strong>MAX region</strong></td>
+                </tr>
+                <tr>
+                    <td class="text-center text-muted">1,000 attack</td>
+                    <td class="text-center text-muted">Kanto</td>
+                    <td class="text-center text-muted">Kanto</td>
+                </tr>
+                <tr>
+                    <td class="text-center text-muted">1,000 attack</td>
+                    <td class="text-center text-muted">Kanto</td>
+                    <td class="text-center text-muted">Galar</td>
+                </tr>
+                <tr>
+                    <td class="text-center text-muted">200 attack</td>
+                    <td class="text-center text-muted">Johto</td>
+                    <td class="text-center text-muted">Johto</td>
+                </tr>
+                <tr>
+                    <td class="text-center text-muted">800 attack</td>
+                    <td class="text-center text-muted">Johto</td>
+                    <td class="text-center text-muted">Galar</td>
+                </tr>
+                <tr>
+                    <td class="text-center text-muted">800 attack</td>
+                    <td class="text-center text-muted">Hoenn</td>
+                    <td class="text-center text-muted">Galar</td>
+                </tr>
+            </table>
+            <span class="text-muted"><strong>Important:</strong>This challenge is activated by default.</span></p>
+            <strong>Complete Pokedex</strong><br/>
+            <span class="text-muted">Requires a complete regional Pokedex before moving on to the next region.</span><br/>
+            <span class="text-muted">You only need <strong>one of each Pokémon</strong> to be able to move to the next region. Any form of the Pokémon is valid even if it isn't the base form.</span><br/>
+            <span class="text-muted"><strong>Important:</strong>This challenge is activated by default.</span></p>
+            <strong>No click attack</strong><br/>
+            <span class="text-muted">Disables the ability to use click attacks</span><br/>
+            <span class="text-muted">You still can click in the very first battle of the game.</span></p>
+            <strong>No battle items</strong><br/>
+            <span class="text-muted">Disables the usage of x attack, x click, lucky egg, token collector, dowsing machine and lucky incense.</span><br/>
+            <span class="text-muted">This challenge also disables the usage of flutes.</span><br/>
+            <span class="text-muted">Caution! You still can buy these items even if you can't use them.</span></p>
+            <strong>No Master balls</strong><br/>
+            <span class="text-muted">Disables the usage of Master Balls</span><br/>
+            <span class="text-muted">You still can buy them, so you can complete the related achievements.</span></p>
+            <strong>No Oak items</strong><br/>
+            <span class="text-muted">Disables the usage of all Oak items.</span><br/>
+            <span class="text-muted">The achievements related with level up will dissappear and the percentage will be distributed between the other general achievements.</span><br/>
+            <span class="text-muted">In order to get the berries that mutate while using some Oak Items you can buy them in Johto berry master once you have unlocked the berry that evolves to them.</span></p>
+            <strong>No gems</strong><br/>
+            <span class="text-muted">Disables the usage of gems to increase damage multipliers.</span><br/>
+            <span class="text-muted">You still can get gems and use them to buy items such as flutes or Pokémon.</span></p>
+            <strong>No vitamins</strong><br/>
+            <span class="text-muted">Disables the usage of vitamins</span><br/>
+            <span class="text-muted">You still can buy them, so you can complete the related achievements. After getting them you can get a money refund by inputting the code: "REFUND-VITAMINS" (one use only).</span></p>
+            <strong>Slow EVs</strong><br/>
+            <span class="text-muted">Gain EVs 10x times slower.</span><br/>
+            <span class="text-muted">If the challenge is deactivated, the EV get multiplied back</span></p>
+            <strong>Real evolutions</strong><br/>
+            <span class="text-muted">Your Pokémon go away when they evolve</span><br/>
+            <span class="text-muted">When your Pokémon evolve their stats are carried over to the evolution. This include times hatched, EVs and shiny status.</span><br/>
+            <span class="text-muted">If the base Pokémon had a Held Item, it will be carried over to the evolution unless the item is incompatible. For example, Light Ball won't be transferred to a Raichu but a Magnet will.</span><br/>
+            <span class="text-muted">Baby Pokémon aren't considered evolutions but gifts.</span></p>
 
             <p><h5 class="text-primary"><strong>Development:</strong></h5></p>
             <p><strong>When will the development version be fully released?</strong><br/>

@@ -60,7 +60,7 @@ export default class SaveSelector {
             const playerData = JSON.parse(localStorage.getItem(`player${key}`));
             let username = saveData.profile?.name ?? 'Trainer';
             try {
-                username = decodeURI(saveData.profile?.name ?? 'Trainer');
+                username = saveData.profile?.name ?? 'Trainer';
             } catch (e) {
                 console.warn('Unable to parse username');
             }
@@ -87,6 +87,28 @@ export default class SaveSelector {
         }
     }
 
+    static btoa(saveString: string): string {
+        return btoa(saveString.replace(/[^\u0000-\u00FF]+|%/g, (m) => encodeURI(m)));
+    }
+
+    static atob(encodeString: string): string {
+        const decodeString = atob(encodeString);
+        try {
+            return decodeURI(decodeString);
+        } catch {
+            // Fix missing encodeURI in v0.10.11
+            try {
+                const URIfixData = JSON.parse(decodeString);
+                URIfixData.save.pokeballFilters.list.forEach((i: any) => {
+                    i.name = encodeURI(i.name);
+                });
+                return decodeURI(JSON.stringify(URIfixData));
+            } catch {
+                return decodeString;
+            }
+        }
+    }
+
     static Download(key: string): void {
         try {
             // Load save data
@@ -107,10 +129,10 @@ export default class SaveSelector {
 
             // Create a download element
             const element = document.createElement('a');
-            element.setAttribute('href', `data:text/plain;charset=utf-8,${encodeURIComponent(btoa(JSON.stringify(data)))}`);
-            const filename = settingsData.saveFilename ? decodeURI(settingsData.saveFilename) : Settings.getSetting('saveFilename').defaultValue;
+            element.setAttribute('href', `data:text/plain;charset=utf-8,${encodeURIComponent(this.btoa(JSON.stringify(data)))}`);
+            const filename = settingsData.saveFilename || Settings.getSetting('saveFilename').defaultValue;
             const datestr = formatDate(new Date());
-            element.setAttribute('download', GameHelper.saveFileName(filename, { '{date}': datestr, '{version}': saveData.update.version, '{name}': decodeURI(saveData.profile.name) }));
+            element.setAttribute('download', GameHelper.saveFileName(filename, { '{date}': datestr, '{version}': saveData.update.version, '{name}': saveData.profile.name }));
 
             element.style.display = 'none';
             document.body.appendChild(element);

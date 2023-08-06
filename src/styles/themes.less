@@ -10,8 +10,8 @@
 
 /* Dark themes */
 .cyborg, .darkly, .slate, .superhero {
-  // make pokeball images lighter
-  img[src="assets/images/pokeball/None.svg"] {
+  // make pokeball and gear images lighter
+  img[src="assets/images/pokeball/None.svg"], img[src="assets/images/fa-cog.svg"] {
     filter: invert(1) brightness(90%);
   }
 
@@ -32,6 +32,28 @@
   img[src="assets/images/volume-high.svg"],
   img[src="assets/images/volume-xmark.svg"] {
     filter: invert(1) brightness(100%);
+  }
+}
+
+/* Themes who need more space in tables */
+.cerulean, .cyborg, .darkly, .flatly, .journal, .litera, .materia, .minty, .pulse, .sandstone, .simplex, .sketchy, .slate, .spacelab, .superhero, .united, .yeti {
+  @media (max-width: 992px)
+  {
+    #pokemonVitaminExpandedModal {
+      .tight {
+        .btn {
+          padding-left: 5px !important;
+          padding-right: 5px !important;
+        }
+      }
+    }
+  }
+}
+
+/* Fixes font-light being too bright / unreadable for table-warnings theme specific colour themes */
+.journal, .lux, .materia, .pulse, .sketchy, .spacelab, .united {
+  .table-warning.text-light {
+    color: black !important;
   }
 }
 
@@ -91,6 +113,13 @@
   }
 }
 
+.lumen {
+  /* Weather button in dock modal */
+  .btn-weather-dock {
+    border-color: rgba(0,0,0,25%);
+  }
+}
+
 .lux {
   // Font was too large, covering other ui elements
   .pageItemFooter {
@@ -99,6 +128,27 @@
 
   .pageItemTitle {
     font-size: 30px !important;
+  }
+
+  #pokemonVitaminExpandedModal {
+    .tight {
+      .btn {
+        padding-left: 5px !important;
+        padding-right: 5px !important;
+      }
+    }
+  }
+
+  #berryDexModal {
+    .table-sm td, .table-sm th {
+      padding: 0.3rem;
+    }
+  }
+
+  #pokemonStatisticsModal {
+    .table-sm td, .table-sm th {
+        padding: 0.3rem 0;
+    }
   }
 }
 
@@ -167,13 +217,29 @@
     }
   }
 
+  //Still had double close for Battle Frontier
+  .close span {
+    visibility: hidden !important;
+  }
+
+  //Fixes margins causing white to float off modal
+  #battleContainer table .row {
+    margin: 0 !important
+  }
+
+  //Fixes save containers having a white table
+  .save-container table td {
+    background-color:unset !important;
+  }
+
   .modal-header {
     border-radius: 0;
   }
 
+   // Font was not visible on the footer of battle-views
   .pageItemFooter {
-    // Font was not visible on the footer of battle-views
-    color: rgba(0, 0, 0);
+    background-color: white; // Ensures background is white
+    color: black;
     font-weight: 700;
   }
 
@@ -185,6 +251,12 @@
 
     .list-group-item-action:hover {
       color: black;
+    }
+  }
+
+  .multiselect-dropdown {
+    .form-check-input {
+      margin-left: 0 !important;
     }
   }
 }

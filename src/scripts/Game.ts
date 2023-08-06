@@ -49,9 +49,11 @@ class Game {
         public battleCafe: BattleCafeSaveObject,
         public dreamOrbController: DreamOrbController,
         public purifyChamber: PurifyChamber,
-        public weatherApp: WeatherApp
+        public weatherApp: WeatherApp,
+        public zMoves: ZMoves,
+        public pokemonContest: PokemonContest
     ) {
-        this._gameState = ko.observable(GameConstants.GameState.paused);
+        this._gameState = ko.observable(GameConstants.GameState.loading);
     }
 
     load() {
@@ -100,7 +102,7 @@ class Game {
         if (player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.None) {
             Battle.generateNewEnemy();
         } else {
-            const battlePokemon = new BattlePokemon('MissingNo.', 0, PokemonType.None, PokemonType.None, 0, 0, 0, 0, new Amount(0, GameConstants.Currency.money), false, 0, GameConstants.BattlePokemonGender.NoGender, GameConstants.ShadowStatus.None);
+            const battlePokemon = new BattlePokemon('MissingNo.', 0, PokemonType.None, PokemonType.None, 0, 0, 0, 0, new Amount(0, GameConstants.Currency.money), false, 0, GameConstants.BattlePokemonGender.NoGender, GameConstants.ShadowStatus.None, EncounterType.route);
             Battle.enemyPokemon(battlePokemon);
         }
         //Safari.load();
@@ -117,6 +119,7 @@ class Game {
         SafariPokemonList.generateSafariLists();
         RoamingPokemonList.generateIncreasedChanceRoutes(now);
         WeatherApp.initialize();
+        PokemonContestController.generateDailyContest(now);
 
         if (Settings.getSetting('disableOfflineProgress').value === false) {
             this.computeOfflineEarnings();
@@ -445,6 +448,8 @@ class Game {
                 BattleCafeController.spinsLeft(BattleCafeController.spinsPerDay());
                 // Generate the weather forecast
                 WeatherApp.initialize();
+                // Refresh Friend Safari Pokemon List
+                SafariPokemonList.generateKalosSafariList();
 
                 DayOfWeekRequirement.date(now.getDay());
             }
@@ -488,6 +493,11 @@ class Game {
             FluteEffectRunner.tick();
         }
 
+        this.zMoves.counter += GameConstants.TICK_TIME;
+        if (this.zMoves.counter >= GameConstants.ZMOVE_TICK) {
+            this.zMoves.tick();
+        }
+
         // Game timers
         GameHelper.counter += GameConstants.TICK_TIME;
         if (GameHelper.counter >= GameConstants.MINUTE) {
@@ -498,6 +508,12 @@ class Game {
         SaveReminder.counter += GameConstants.TICK_TIME;
         if (SaveReminder.counter >= 5 * GameConstants.MINUTE) {
             SaveReminder.tick();
+        }
+
+        // update event calendar
+        this.specialEvents.counter += GameConstants.TICK_TIME;
+        if (this.specialEvents.counter >= GameConstants.SPECIAL_EVENT_TICK) {
+            this.specialEvents.tick();
         }
     }
 

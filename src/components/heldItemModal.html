@@ -1,5 +1,5 @@
 <div class="modal noselect fade" id="heldItemModal" tabindex="-1" role="dialog" aria-labelledby="heldItemModal">
-    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+    <div class="modal-dialog modal-dialog-scrollable modal-sm" role="document">
         <div class="modal-content">
             <!-- ko if: modalUtils.observableState['heldItemModal'] === 'show' -->
             <div class="modal-header bg-dark text-light" style='justify-content: space-around;'>
@@ -8,14 +8,14 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body p-0">
+            <div class="modal-body p-0" style="background-color: inherit;">
                 <img data-bind="attr: { src: HeldItem.heldItemSelected().image }" width="40%"/>
                 <br/>
-                <div class="sticky-top bg-dark text-light">
+                <div class="sticky-top" style="background-color: inherit;">
                   <div class="btn-group btn-block m-0" role="group" aria-label="Basic example">
                     <button class="btn btn-block btn-secondary btn-static" data-bind="text: HeldItem.heldItemSelected().displayName + ': ' + player.amountOfItem(HeldItem.heldItemSelected().name)"></button>
                   </div>
-                  <div class="input-group" data-bind="with: Settings.getSetting('heldItemSort')">
+                  <div class="input-group px-1 mt-1" data-bind="with: Settings.getSetting('heldItemSort')">
                       <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])"
                           data-bind="foreach: $data.options, attr: {name}, selectedOptions: [$data.observableValue()]">
                           <option data-bind="text: $data.text, value: $data.value"></option>
@@ -30,14 +30,41 @@
                               onchange="Settings.setSettingByName('heldItemSortDirection', this.checked)"/>
                       </div>
                   </div>
-                  <div class="form-check form-check-inline align-middle">
-                    <input type="checkbox" id="hide-holding-item-pokemon" class="form-check-input" data-bind="checked: Settings.getSetting('heldItemHideHoldingPokemon').observableValue()" onchange="Settings.setSettingByName('heldItemHideHoldingPokemon', this.checked)" />
-                    <label for="hide-holding-item-pokemon" class="form-check-label">Hide Pokémon holding an item</label>
-                  </div>
-                  <div class="form-group mb-1">
+                  <div class="form-group px-1 mt-1 mb-0">
                     <input id="heldItemSearch" autocomplete="off" class="form-control" placeholder="Search"
-                        data-bind="textInput: Settings.getSetting('heldItemSearchFilter').observableValue"
-                    />
+                        data-bind="textInput: Settings.getSetting('heldItemSearchFilter').observableValue" />
+                  </div>
+                  <div class="small px-1 pb-2 my-1" style="overflow-x: hidden;">
+                    <div class="form-row px-1">
+                        <div class="form-group col-6 m-0 px-1 py-0">
+                            <label class="mb-1" for="held-item-region-filter">Region</label>
+                            <select id="held-item-region-filter" name="heldItemRegionFilter" autocomplete="off" class="custom-select custom-select-sm" onchange="Settings.setSettingByName(this.name, +this.value)">
+                                <!-- ko foreach: Settings.getSetting('heldItemRegionFilter').options.filter(r => r.value <= player.highestRegion()) -->
+                                <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('heldItemRegionFilter').value === $data.value }, text: $data.text">Region</option>
+                                <!-- /ko -->
+                            </select>
+                        </div>
+                        <div class="form-group col-6 m-0 px-1 py-0">
+                            <label class="mb-1" for="held-item-type-filter">Type</label>
+                            <select id="held-item-type-filter" name="heldItemTypeFilter" autocomplete="off" class="custom-select custom-select-sm" onchange="Settings.setSettingByName(this.name, +this.value)">
+                                <!-- ko foreach: Settings.getSetting('heldItemTypeFilter').options -->
+                                <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('heldItemTypeFilter').value === $data.value }, text: $data.text">Type</option>
+                                <!-- /ko -->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-check align-middle mt-1">
+                        <input type="checkbox" id="hide-holding-item-pokemon" class="form-check-input"
+                            data-bind="checked: Settings.getSetting('heldItemHideHoldingPokemon').observableValue()"
+                            onchange="Settings.setSettingByName('heldItemHideHoldingPokemon', this.checked)" />
+                        <label for="hide-holding-item-pokemon" class="form-check-label">Hide Pokémon holding an item</label>
+                    </div>
+                    <div class="form-check align-middle mt-1">
+                        <input type="checkbox" id="show-this-item-pokemon" class="form-check-input"
+                            data-bind="checked: Settings.getSetting('heldItemShowHoldingThisItem').observableValue()"
+                            onchange="Settings.setSettingByName('heldItemShowHoldingThisItem', this.checked)" />
+                        <label for="show-this-item-pokemon" class="form-check-label">Show <u>only</u> Pokémon holding this item</label>
+                    </div>
                   </div>
                 </div>
                 <table class="table table-striped table-hover table-bordered table-sm m-0">

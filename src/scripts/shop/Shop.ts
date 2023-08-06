@@ -8,7 +8,7 @@ class Shop extends TownContent {
         return this.name ?? 'Poké Mart';
     }
     public isVisible(): boolean {
-        return true;
+        return !(this.hideBeforeUnlocked && !this.isUnlocked());
     }
     public onclick(): void {
         ShopHandler.showShop(this);
@@ -18,20 +18,22 @@ class Shop extends TownContent {
     constructor(
         public items: Item[],
         public name = undefined,
-        requirements: (Requirement | OneFromManyRequirement)[] = []
+        requirements: (Requirement | OneFromManyRequirement)[] = [],
+        private hideBeforeUnlocked = false
     ) {
         super(requirements);
     }
 
     public areaStatus() {
         const itemStatusArray = [areaStatus.completed];
+        const pokerusUnlocked = Settings.getSetting(`--${areaStatus[areaStatus.missingResistant]}`).isUnlocked();
         this.items.forEach(i => {
             if (i instanceof PokemonItem) {
                 if (i.getCaughtStatus() == CaughtStatus.NotCaught) {
                     itemStatusArray.push(areaStatus.uncaughtPokemon);
                 } else if (i.getCaughtStatus() == CaughtStatus.Caught) {
                     itemStatusArray.push(areaStatus.uncaughtShinyPokemon);
-                } else if (i.getPokerusStatus() < GameConstants.Pokerus.Resistant) {
+                } else if (pokerusUnlocked && i.getPokerusStatus() < GameConstants.Pokerus.Resistant) {
                     itemStatusArray.push(areaStatus.missingResistant);
                 }
             }

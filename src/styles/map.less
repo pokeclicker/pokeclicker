@@ -15,7 +15,7 @@
     opacity: 0.5;
   }
 
-  .unlockedUnfinished {
+  .incomplete {
     fill: var(--incomplete);
     opacity: 0.6;
   }
@@ -28,6 +28,11 @@
   .uncaughtPokemon {
     fill: var(--uncaughtPokemon);
     opacity: 0.6;
+  }
+
+  .uncaughtShadowPokemon {
+     fill: var(--uncaughtShadowPokemon);
+     opacity: 0.6;
   }
 
   .uncaughtShinyPokemon {
@@ -67,6 +72,9 @@
     pointer-events: none;
   }
 
+  .hide {
+    opacity: 0;
+  }
 }
 
 #mapTooltip {

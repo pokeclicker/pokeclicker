@@ -54,10 +54,14 @@ Parameters:
     <image width="48" height="48"
         x="<%= locals.x * 16 + (locals.width * 16) / 2 - 24 %>"
         y="<%= locals.y * 16 + (locals.height * 16) / 2 - 24 - (locals.rotate ? locals.height * 16 : 0) %>"
-        class="iconLocation"
+        class="iconLocation hide"
         transform='rotate(<%= (locals.rotate ? -90 : 0) %>)'
+        rotate="<%= locals.rotate %>"
+        localx="<%= locals.x * 16 %>"
+        localy="<%= locals.y * 16 %>"
         data-bind="visible: MapHelper.isRouteCurrentLocation(<%= locals.route %>, <%= locals.region %>),
-            attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`}">
+            attr: {href:`assets/images/profile/trainer-${App.game.profile.trainer() || 0}.png`},
+            playerSpriteMove">
     </image>
     <% } %>
 

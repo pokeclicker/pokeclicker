@@ -81,12 +81,12 @@
                                         <div class="btn-group btn-block">
                                             <!-- ko using: PartyController.hasMultipleStoneEvolutionsAvailable(ItemHandler.pokemonSelected(), GameConstants.StoneType[ItemHandler.stoneSelected()]), as: 'multipleEvolution' -->
                                             <button class="btn btn-success btn-block" data-bind="click: function(){ItemHandler.useStones()},
-                                            tooltip: {
-                                                title: 'If a shiny is found, the game will stop using evolution items.' + (multipleEvolution ? '<br/>If the requirements for more than one evolution is fulfilled, a random evolution will be selected.' : ''),
-                                                trigger: 'hover',
-                                                boundary: 'window',
-                                                html: multipleEvolution,
-                                            }">
+                                                    tooltip: {
+                                                    title: 'If a shiny is found, the game will stop using evolution items.' + (multipleEvolution ? '<br/>If the requirements for more than one evolution is fulfilled, a random evolution will be selected.' : ''),
+                                                    trigger: 'hover',
+                                                    boundary: 'window',
+                                                    html: true,
+                                                    }">
                                                 Use evolution items!
                                             </button>
                                             <!-- /ko -->
@@ -104,40 +104,104 @@
                     </div>
 
                     <div id="itemBag" class="tab-pane p-3">
-                        <div>
-                            <!-- ko if: Object.values(ItemList).some((i) => i instanceof QuestItem && i.isActive() && player.itemList[i.name]()) -->
-                            <h4>Quest items</h4>
-                            <div class="row justify-content-center">
-                                <!-- ko foreach: Object.values(ItemList).filter((i) => i instanceof QuestItem && i.isActive() && player.itemList[i.name]()) -->
-                                    <div class="btn btn-primary col-2 item-bag-item" data-bind="template: { name: 'otherItemTemplate', data: $data.name }"></div>
-                                <!-- /ko -->
-                            </div>
-                            <!-- /ko -->
-                            <h4>Vitamins</h4>
-                            <div class="row justify-content-center">
-                                <!-- ko foreach: GameHelper.enumNumbers(GameConstants.VitaminType) -->
-                                    <div class="btn btn-primary col-2 item-bag-item" data-bind="template: { name: 'otherItemTemplate', data: GameConstants.VitaminType[$data]}, click: () => { VitaminController.currentlySelected($data); $('#pokemonVitaminModal').modal('show'); }"></div>
-                                <!-- /ko -->
-                            </div>
-                            <div class="row justify-content-center mb-2">
-                                <button type="button" class="btn btn-primary btn-sm" data-bind="click: () => { $('#pokemonVitaminExpandedModal').modal('show') }">All Vitamins</button>
-                            </div>
-                            <h4>Held items</h4>
-                            <div class="row justify-content-center">
-                                <!-- ko foreach: HeldItem.getSortedHeldItems() -->
-                                    <div class="btn btn-primary col-2 item-bag-item" data-bind="template: { name: 'otherItemTemplate', data: $data.name}, click: () => { HeldItem.heldItemSelected($data); $('#heldItemModal').modal('show'); }, visible: $data.isUnlocked()"></div>
-                                <!-- /ko -->
-                            </div>
-                            <!-- ko if: Object.values(ItemList).some((i) => i instanceof MegaStoneItem && player.itemList[i.name]()) -->
-                            <h4>Mega Stones</h4>
-                            <div class="row justify-content-center" data-bind="foreach: Object.values(ItemList).filter((i) => i instanceof MegaStoneItem && player.itemList[i.name]())">
-                                <div class="bg-primary text-white rounded px-1 py-1 col-3 col-lg-2 item-bag-item">
-                                    <img width="40px" data-bind="attr: {src: $data.image }">
-                                    <div class="small text-truncate" data-bind="text: GameConstants.humanifyString($data.name)"></div>
+
+                        <!-- ko if: Object.values(ItemList).some((i) => i instanceof QuestItem && i.isActive() && player.itemList[i.name]()) -->
+                        <div class="bg-primary text-left rounded-0 px-3 py-2 mb-1" data-toggle="collapse" data-target="#itemBag-questItems">
+                            <h5 class="m-0 text-light">Quest Items</h5>
+                        </div>
+                        <div id="itemBag-questItems" class="collapse show">
+                            <div class="card-body pt-2 p-1">
+                                <div class="row justify-content-center">
+                                    <!-- ko foreach: Object.values(ItemList).filter((i) => i instanceof QuestItem && i.isActive() && player.itemList[i.name]()) -->
+                                    <div class="col-6 col-lg-3 mb-2">
+                                        <div class="btn btn-secondary text-left w-100 px-1" style="padding-top: 1px; padding-bottom: 2px;"
+                                            data-bind="template: { name: 'otherItemTemplate', data: $data.name }">
+                                        </div>
+                                    </div>
+                                    <!-- /ko -->
                                 </div>
                             </div>
-                            <!-- /ko -->
                         </div>
+                        <!-- /ko -->
+
+                        <div class="bg-primary text-left rounded-0 px-3 py-2 mb-1" data-toggle="collapse" data-target="#itemBag-vitamins">
+                            <h5 class="m-0 text-light">Vitamins</h5>
+                        </div>
+                        <div id="itemBag-vitamins" class="collapse show">
+                            <div class="card-body pt-2 p-1">
+                                <div class="row justify-content-center">
+                                    <!-- ko foreach: GameHelper.enumNumbers(GameConstants.VitaminType) -->
+                                    <div class="col-6 col-lg-3 mb-2">
+                                        <div class="btn btn-secondary text-left w-100 px-1" style="padding-top: 1px; padding-bottom: 2px;"
+                                            data-bind="template: { name: 'otherItemTemplate', data: GameConstants.VitaminType[$data]},
+                                                click: () => { VitaminController.currentlySelected($data); $('#pokemonVitaminModal').modal('show'); }">
+                                        </div>
+                                    </div>
+                                    <!-- /ko -->
+                                </div>
+                                <div class="row justify-content-center mb-1">
+                                    <button type="button" class="btn btn-secondary btn-sm" data-bind="click: () => { $('#pokemonVitaminExpandedModal').modal('show') }">All Vitamins</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ko if: GameHelper.enumStrings(GameConstants.ConsumableType).some(type => player.itemList[type]()) -->
+                        <div class="bg-primary text-left rounded-0 px-3 py-2 mb-1" data-toggle="collapse" data-target="#itemBag-consumables">
+                            <h5 class="m-0 text-light">Consumables</h5>
+                        </div>
+                        <div id="itemBag-consumables" class="collapse show">
+                            <div class="card-body pt-2 p-1">
+                                <div class="row justify-content-center">
+                                    <!-- ko foreach: GameHelper.enumStrings(GameConstants.ConsumableType).filter(type => player.itemList[type]()).map(type => ItemList[type]) -->
+                                    <div class="col-6 col-lg-3 mb-2">
+                                        <div class="btn btn-secondary text-left w-100 px-1" style="padding-top: 1px; padding-bottom: 2px;"
+                                            data-bind="template: { name: 'otherItemTemplate', data: $data.name },
+                                            click: () => { ConsumableController.currentlySelected($data.type); $('#consumableModal').modal('show'); }">
+                                        </div>
+                                    </div>
+                                    <!-- /ko -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+
+                        <div class="bg-primary text-left rounded-0 px-3 py-2 mb-1" data-toggle="collapse" data-target="#itemBag-heldItems">
+                            <h5 class="m-0 text-light">Held Items</h5>
+                        </div>
+                        <div id="itemBag-heldItems" class="collapse show mt-1">
+                            <div class="card-body pt-2 p-1">
+                                <div class="row justify-content-center">
+                                    <!-- ko foreach: HeldItem.getSortedHeldItems() -->
+                                    <div class="col-6 col-lg-3 mb-2" data-bind="visible: $data.isUnlocked()">
+                                        <div class="btn btn-secondary text-left w-100 px-1" style="padding-top: 1px; padding-bottom: 2px;"
+                                            data-bind="template: { name: 'otherItemTemplate', data: $data.name },
+                                                click: () => { HeldItem.heldItemSelected($data); $('#heldItemModal').modal('show'); }">
+                                        </div>
+                                    </div>
+                                    <!-- /ko -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ko if: Object.values(ItemList).some((i) => i instanceof MegaStoneItem && player.itemList[i.name]()) -->
+                        <div class="bg-primary text-left rounded-0 px-3 py-2 mb-1" data-toggle="collapse" data-target="#itemBag-megaStones">
+                            <h5 class="m-0 text-light">Mega Stones</h5>
+                        </div>
+                        <div id="itemBag-megaStones" class="collapse show mt-1">
+                            <div class="card-body pt-2 p-1">
+                                <div class="row justify-content-center" data-bind="foreach: Object.values(ItemList).filter((i) => i instanceof MegaStoneItem && player.itemList[i.name]())">
+                                    <div class="col-6 col-lg-3 mb-2">
+                                        <div class="btn btn-secondary px-1 py-0 d-flex align-items-center text-left" style="pointer-events: none;">
+                                            <img width="42px" data-bind="attr: { src: $data.image }">
+                                            <div class="flex-grow-1 small ml-2" style="min-width: 0;">
+                                                <div class="text-truncate" data-bind="text: GameConstants.humanifyString($data.name)"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
                     </div>
 
                     <div id="keyItems" class="tab-pane p-3">
@@ -188,14 +252,17 @@
 </div>
 
 <script type="text/html" id="otherItemTemplate">
-    <div data-container="body" data-bind="tooltip: {
+    <div class="d-flex w-100" data-container="body" data-bind="tooltip: {
         title: ItemList[$data] ? `<u>${ItemList[$data].displayName}</u><br/>${ItemList[$data].description || ''}` : '',
         trigger: 'hover',
         placement:'top',
         html: true,
         boundary: document.getElementById('showItemsModal'),
     }">
-        <img data-bind="attr: {src: ItemList[$data].image }" style="max-width: 32px;">
-        <div data-bind="text: player._itemList[$data]().toLocaleString('en-US')"></div>
+        <img width="42px" data-bind="attr: { src: ItemList[$data].image }">
+        <div class="flex-grow-1 small align-self-end ml-2" style="min-width: 0;">
+            <div class="text-truncate" data-bind="text: ItemList[$data].displayName"></div>
+            <div data-bind="text: player._itemList[$data]().toLocaleString('en-US')"></div>
+        </div>
     </div>
 </script>

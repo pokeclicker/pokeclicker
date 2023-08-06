@@ -15,6 +15,7 @@ import RedeemableCode from './RedeemableCode';
 import GameHelper from '../GameHelper';
 import Amount from '../wallet/Amount';
 import Item from '../items/Item';
+import QuestLineState from '../quests/QuestLineState';
 
 export default class RedeemableCodes implements Saveable {
     defaults: Record<string, any>;
@@ -175,6 +176,47 @@ export default class RedeemableCodes implements Saveable {
 
                 return refund;
             }),
+            new RedeemableCode('tutorial-skip', -253994129, false, async () => {
+                const quest = App.game.quests.getQuestLine('Tutorial Quests');
+                if (quest.state() != QuestLineState.started) {
+                    Notifier.notify({
+                        title: 'Tutorial Skip',
+                        message: 'The Tutorial is already completed.',
+                        type: NotificationConstants.NotificationOption.warning,
+                        timeout: 1e4,
+                    });
+                    return false;
+                }
+
+                if (quest.curQuest() < 1) {
+                    Notifier.notify({
+                        title: 'Tutorial Skip',
+                        message: 'The first step of the Tutorial must first be completed.',
+                        type: NotificationConstants.NotificationOption.warning,
+                        timeout: 1e4,
+                    });
+                    return false;
+                }
+
+                while (quest.curQuest() < quest.totalQuests) {
+                    quest.curQuestObject().complete();
+                }
+
+                return true;
+            }),
+            new RedeemableCode('Rare Candy', -296173205, false, async () => {
+                // Give the player a few Rare Candies
+                player.gainItem('Rare_Candy', 10);
+                // Notify that the code was activated successfully
+                Notifier.notify({
+                    title: 'Code activated!',
+                    message: 'You gained 10 Rare Candy!',
+                    type: NotificationConstants.NotificationOption.success,
+                    timeout: 1e4,
+                });
+
+                return true;
+            }),
         ];
     }
 
@@ -190,7 +232,7 @@ export default class RedeemableCodes implements Saveable {
             return;
         }
 
-        const hash = this.hash(code);
+        const hash = GameHelper.hash(code);
 
         const redeemableCode = this.codeList.find((c) => c.hash === hash);
 
@@ -203,29 +245,6 @@ export default class RedeemableCodes implements Saveable {
         }
 
         redeemableCode.redeem();
-    }
-
-    /**
-     * Insecure hash, but should keep some of the nosy people out.
-     * @param text
-     */
-    // eslint-disable-next-line class-methods-use-this
-    hash(text: string): number {
-        let hash = 0;
-        let i = 0;
-        let chr = 0;
-        if (text.length === 0) {
-            return hash;
-        }
-
-        for (i = 0; i < text.length; i++) {
-            chr = text.charCodeAt(i);
-            // eslint-disable-next-line no-bitwise
-            hash = ((hash << 5) - hash) + chr;
-            // eslint-disable-next-line no-bitwise
-            hash |= 0; // Convert to 32bit integer
-        }
-        return hash;
     }
 
     fromJSON(json: string[]): void {

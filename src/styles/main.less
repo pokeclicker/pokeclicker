@@ -5,12 +5,6 @@
   src: url("../assets/fonts/firered.ttf");
 }
 
-@media (min-width: 1200px) {
-  .container {
-    width: 70%;
-  }
-}
-
 #toaster {
   position: fixed;
   left: 0;
@@ -32,8 +26,29 @@
     height: 28px;
     margin-right: 5px;
   }
+
+  img.pokemonIcon {
+    height: 38px;
+    margin: -5px;
+    margin-right: 0;
+  }
 }
 
+//Fixes floating buttons on all themes.
+#oakItemLoadout {
+  .tight {
+    .btn {
+      padding-left: unset !important;
+      padding-right: unset !important;
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        width: 70%;
+    }
+}
 
 @media (min-width: 768px) {
   #left-column, #middle-sort-column, #right-column {
@@ -74,6 +89,13 @@
 
   .pageItemFooter {
     font-size: 14px !important;
+  }
+}
+
+//Mobile > Small Desktops styling
+@media (max-width: 992px){
+  .table-sm td, .table-sm th {
+     padding: 0.1rem !important;
   }
 }
 
@@ -564,6 +586,10 @@ td.tight {
   background-color: var(--uncaughtPokemon);
 }
 
+.bg-uncaughtShadowPokemon {
+  background-color: var(--uncaughtShadowPokemon);
+}
+
 .bg-uncaughtShinyPokemon {
   background-color: var(--uncaughtShinyPokemon);
 }
@@ -778,4 +804,18 @@ button.btn-circle {
 .weatherForecastPassed {
   opacity: .25;
   pointer-events: none;
+}
+
+#pokemonStatisticsModal {
+  @media (min-width: 992px) {
+    .modal-dialog {
+      max-width: 600px;
+    }
+  }
+
+  @media (max-width: 992px){
+    .table-sm td, .table-sm th {
+       padding: 0.3rem !important;
+    }
+  }
 }

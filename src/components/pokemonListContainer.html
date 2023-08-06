@@ -72,7 +72,13 @@
                                 <img class="shadow-icon" src="assets/images/status/shadow.svg" data-bind="visible: $data.shadow == GameConstants.ShadowStatus.Shadow"/>
                                 <img class="shadow-icon" src="assets/images/status/purified.svg" data-bind="visible: $data.shadow == GameConstants.ShadowStatus.Purified"/>
                                 <!-- ko foreach: PokemonHelper.getMegaStones($data.name).filter(s => player.hasMegaStone(s.megaStone)) -->
-                                <img width="20px" data-bind="attr: { src: $data.image }"/>
+                                <img width="20px" data-bind="attr: { src: $data.image },
+                                    tooltip: {
+                                        title: pokemonMap[$parent.name].evolutions.flatMap(e => e.restrictions)
+                                            .find(r => r instanceof MegaEvolveRequirement && r.megaStone == $data.megaStone)?.hint() ?? '',
+                                        trigger: 'hover',
+                                        placement: 'bottom'
+                                }"/>
                                 <!-- /ko -->
                             </div>
                             <div class="pokemonAttack" data-bind="text: attack.toLocaleString('en-US')"></div>

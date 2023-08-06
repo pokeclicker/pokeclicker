@@ -91,7 +91,8 @@ class PokedexHelper {
             // Check if the englishName or displayName contains the string
             const displayName = PokemonHelper.displayName(pokemon.name)();
             const filterName = PokedexFilters.name.value();
-            if (!filterName.test(displayName) && !filterName.test(pokemon.name)) {
+            const partyName = App.game.party.getPokemonByName(pokemon.name)?.displayName;
+            if (!filterName.test(displayName) && !filterName.test(pokemon.name) && !(partyName != undefined && filterName.test(partyName))) {
                 return false;
             }
 
@@ -118,7 +119,9 @@ class PokedexHelper {
                 return false;
             }
             // Hide uncaught base forms if alternate non-regional form is caught
-            if (!alreadyCaught && pokemon.id == Math.floor(pokemon.id) && App.game.party._caughtPokemon().some((p) => Math.floor(p.id) == pokemon.id) && hasBaseFormInSameRegion()) {
+            if (!alreadyCaught && pokemon.id == Math.floor(pokemon.id) &&
+                App.game.party._caughtPokemon().some((p) => Math.floor(p.id) == pokemon.id && PokemonHelper.calcNativeRegion(p.name) == nativeRegion)
+            ) {
                 return false;
             }
 
@@ -167,16 +170,16 @@ class PokedexHelper {
 
             const uniqueTransformation = PokedexFilters.uniqueTransformation.value();
             // Only Base Pokémon with Mega available
-            if (uniqueTransformation == 'mega-available' && !(pokemon as PokemonListData).evolutions?.some((p) => p.evolvedPokemon.startsWith('Mega '))) {
+            if (uniqueTransformation == 'mega-available' && !PokemonHelper.hasMegaEvolution(pokemon.name)) {
                 // Another option: !(pokemon as PokemonListData).evolutions?.some((p) => p.restrictions.some(p => p instanceof MegaEvolveRequirement))
                 return false;
             }
             // Only Base Pokémon without Mega Evolution
-            if (uniqueTransformation == 'mega-unobtained' && (!(pokemon as PokemonListData).evolutions?.some((p) => p.evolvedPokemon.startsWith('Mega ') && !App.game.party.alreadyCaughtPokemonByName(p.evolvedPokemon)))) {
+            if (uniqueTransformation == 'mega-unobtained' && !(PokemonHelper.hasMegaEvolution(pokemon.name) && (pokemon as PokemonListData).evolutions?.some((e) => !App.game.party.alreadyCaughtPokemonByName(e.evolvedPokemon)))) {
                 return false;
             }
             // Only Mega Pokémon
-            if (uniqueTransformation == 'mega-evolution' && !(pokemon as PokemonListData).name.startsWith('Mega ')) {
+            if (uniqueTransformation == 'mega-evolution' && !(PokemonHelper.getPokemonPrevolution(pokemon.name)?.some((e) => PokemonHelper.hasMegaEvolution(e.basePokemon)))) {
                 return false;
             }
 

@@ -1,6 +1,6 @@
 <!-- Provide a general summary of your changes in the Title above -->
 <!-- Please fill out this form, so that we have all the info needed to review your changes -->
-<!-- Any text inside of the <!- angle brackets -> will not show up in the final comment. Check the Preview tab to confirm -->
+<!-- Any text inside of the angle brackets will not show up in the final comment. Check the Preview tab to confirm -->
 
 ## Description
 <!-- Describe your changes in detail -->
@@ -28,6 +28,7 @@
 
 
 ## Types of changes
-<!-- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
-- [ ] Bug fix
-- [ ] New feature
+<!-- What types of changes does your code introduce? Delete any that don't apply, and/or add more you think would be useful -->
+- Bug fix
+- New feature
+- UI improvement

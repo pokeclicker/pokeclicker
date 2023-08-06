@@ -21,5 +21,6 @@ Parameters:
     y="<%= locals.y * 16 %>"
     height="<%= (locals.height || 3) * 16 %>"
     width="<%= (locals.width || 3) * 16 %>"
-    data-bind="<%= locals.databind %>">
+    data-bind="<%= locals.databind %>,
+		playerSpriteMove">
 </rect>

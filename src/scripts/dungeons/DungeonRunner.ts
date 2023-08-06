@@ -14,9 +14,10 @@ class DungeonRunner {
     public static currentTileType;
     public static encountersWon: KnockoutObservable<number> = ko.observable(0);
     public static fightingBoss: KnockoutObservable<boolean> = ko.observable(false);
-    public static defeatedBoss: KnockoutObservable<boolean> = ko.observable(false);
+    public static defeatedBoss: KnockoutObservable<string> = ko.observable(null);
     public static dungeonFinished: KnockoutObservable<boolean> = ko.observable(false);
     public static fightingLootEnemy: boolean;
+    public static continuousInteractionInput = false;
 
     public static initializeDungeon(dungeon) {
         if (!dungeon.isUnlocked()) {
@@ -69,7 +70,7 @@ class DungeonRunner {
         });
         DungeonRunner.fightingLootEnemy = false;
         DungeonRunner.fightingBoss(false);
-        DungeonRunner.defeatedBoss(false);
+        DungeonRunner.defeatedBoss(null);
         DungeonRunner.dungeonFinished(false);
         App.game.gameState = GameConstants.GameState.dungeon;
     }
@@ -85,6 +86,9 @@ class DungeonRunner {
         if (DungeonRunner.map.playerMoved()) {
             DungeonRunner.timeLeft(DungeonRunner.timeLeft() - GameConstants.DUNGEON_TICK);
             DungeonRunner.timeLeftPercentage(Math.floor(DungeonRunner.timeLeft() / (GameConstants.DUNGEON_TIME * FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute)) * 100));
+            if (DungeonRunner.continuousInteractionInput) {
+                DungeonRunner.handleInteraction(GameConstants.DungeonInteractionSource.HeldKeybind);
+            }
         }
         const currentFluteBonus = FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute);
         if (currentFluteBonus != DungeonRunner.timeBonus()) {
@@ -105,12 +109,12 @@ class DungeonRunner {
     }
 
     /**
-     * Handles the click event in the dungeon view
+     * Handles the interaction event in the dungeon view and from keybinds
      */
-    public static handleClick() {
-        if (DungeonRunner.fighting() && !DungeonBattle.catching()) {
+    public static handleInteraction(source: GameConstants.DungeonInteractionSource = GameConstants.DungeonInteractionSource.Click) {
+        if (DungeonRunner.fighting() && !DungeonBattle.catching() && source === GameConstants.DungeonInteractionSource.Click) {
             DungeonBattle.clickAttack();
-        } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.entrance) {
+        } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.entrance && source !== GameConstants.DungeonInteractionSource.HeldKeybind) {
             DungeonRunner.dungeonLeave();
         } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.chest) {
             DungeonRunner.openChest();
@@ -303,12 +307,6 @@ class DungeonRunner {
         const dungeonIndex = GameConstants.getDungeonIndex(dungeon.name);
         return AchievementHandler.achievementList.every(achievement => {
             return !(achievement.property instanceof ClearDungeonRequirement && achievement.property.dungeonIndex === dungeonIndex && !achievement.isCompleted());
-        });
-    }
-
-    public static isThereQuestAtLocation(dungeon: Dungeon) {
-        return App.game.quests.currentQuests().some(q => {
-            return q instanceof DefeatDungeonQuest && q.dungeon == dungeon.name;
         });
     }
 

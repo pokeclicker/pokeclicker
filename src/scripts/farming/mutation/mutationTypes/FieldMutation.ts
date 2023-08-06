@@ -1,17 +1,16 @@
 /// <reference path="./GrowMutation.ts" />
 
+type FieldMutationFieldBerry = {
+    berry: BerryType,
+    amountRequired: number
+}
+
 /**
  * Mutation that requires a number of Berry plants in the farm
  */
 class FieldMutation extends GrowMutation {
-
-    fieldBerry: BerryType
-    fieldAmount: number
-
-    constructor(mutationChance: number, mutatedBerry: BerryType, fieldBerry: BerryType, fieldAmount = 22, options?: MutationOptions) {
+    constructor(mutationChance: number, mutatedBerry: BerryType, private fieldBerries: FieldMutationFieldBerry[], options?: MutationOptions) {
         super(mutationChance, mutatedBerry, options);
-        this.fieldBerry = fieldBerry;
-        this.fieldAmount = fieldAmount;
     }
 
     /**
@@ -20,7 +19,7 @@ class FieldMutation extends GrowMutation {
      */
     getMutationPlots(): number[] {
         const emptyPlots = super.getMutationPlots();
-        let fieldPlots = 0;
+        const fieldPlots = Array<number>(this.fieldBerries.length).fill(0);
         App.game.farming.plotList.forEach((plot, idx) => {
             if (!plot.isUnlocked) {
                 return;
@@ -28,12 +27,14 @@ class FieldMutation extends GrowMutation {
             if (plot.isEmpty()) {
                 return;
             }
-            if (plot.berry === this.fieldBerry && plot.stage() === PlotStage.Berry) {
-                fieldPlots += 1;
-            }
+            this.fieldBerries.forEach((fb, index) => {
+                if (plot.berry === fb.berry && plot.stage() === PlotStage.Berry) {
+                    fieldPlots[index] += 1;
+                }
+            });
         });
 
-        if (fieldPlots > this.fieldAmount) {
+        if (fieldPlots.every((fp, index) => fp >= this.fieldBerries[index].amountRequired)) {
             return emptyPlots;
         }
         return [];
@@ -44,7 +45,7 @@ class FieldMutation extends GrowMutation {
      */
     get unlocked(): boolean {
         // Check for Berry requirements
-        if (!App.game.farming.unlockedBerries[this.fieldBerry]()) {
+        if (this.fieldBerries.some((fb) => !App.game.farming.unlockedBerries[fb.berry]())) {
             return false;
         }
         return super.unlocked;
@@ -57,7 +58,8 @@ class FieldMutation extends GrowMutation {
         if (super.hint) {
             return super.hint;
         }
-        return `Legends tell of a mysterious Berry that only appears in a field of ${BerryType[this.fieldBerry]} Berries.`;
+        const berries = this.fieldBerries.map((fb) => BerryType[fb.berry]).join(', ');
+        return `Legends tell of a mysterious Berry that only appears in a field of ${berries} Berries.`;
     }
 
 }

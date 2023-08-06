@@ -40,10 +40,10 @@
                                     draggable: '.pokeballFilterWrapper',
                                     handle: '.pokeballFilterDragHandle',
                                     dataIdAttr: 'data-key',
+                                    getId: (filter) => filter.uuid,
                                 }
                             }">
                             <div class="pokeballFilterWrapper" data-bind="
-                                attr: { 'data-key': $data.uuid },
                                 visible: !PokeballFilters.hideFilter($data)
                             ">
                                 <div class="pokeballFilterDragHandle bg-dark text-white"></div>
@@ -162,7 +162,7 @@
                             <p>Configure these options to describe a Pokémon you want to test:</p>
                             <table>
                                 <tbody data-bind="foreach: Object.entries(App.game.pokeballFilters.testSettings)
-                                                                .filter(([k]) => pokeballFilterOptions[k].canUse())
+                                                                .filter(([k]) => pokeballFilterOptions[k]?.canUse() ?? true)
                                                                 .map(([k, s]) => s)">
                                     <tr data-bind="template: {
                                                             name: $data instanceof BooleanSetting ? 'pokeballFilterSlider' : 'pokeballFilterMultipleChoice',
@@ -298,7 +298,7 @@
     <td class="p-2" data-bind="text: `${setting.displayName}:`">setting name</td>
     <td class="p-0">
         <select class="form-control" data-bind="
-            options: setting.options,
+            options: setting.getValidOptions(),
             optionsValue: 'value',
             optionsText: 'text',
             value: setting.observableValue

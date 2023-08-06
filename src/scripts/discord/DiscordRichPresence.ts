@@ -272,22 +272,28 @@ class DiscordRichPresence {
         if (smallImage === 'cycle') {
             smallImage = this.cycleOptions[++this.cycleSmallImageIndex % this.cycleOptions.length];
         }
-        switch (smallImage) {
-            case 'trainer':
-                discordRPCValues.smallImageKey = `trainer-${App.game.profile.trainer()}`;
-                discordRPCValues.smallImageText = this.replaceDiscordText('Total Attack: {attack}');
-                break;
-            case 'egg':
-                discordRPCValues.smallImageKey = smallImage;
-                discordRPCValues.smallImageText = this.replaceDiscordText('Total Hatched: {hatched}');
-                break;
-            case 'pokeball':
-                discordRPCValues.smallImageKey = smallImage;
-                discordRPCValues.smallImageText = this.replaceDiscordText('Shinies: {caught_shiny}/{caught} ✨');
-                break;
-            default:
-                discordRPCValues.smallImageKey = smallImage.toLowerCase();
-                discordRPCValues.smallImageText = `${GameConstants.camelCaseToString(smallImage)}: ${App.game.wallet.currencies[GameConstants.Currency[smallImage]]?.().toLocaleString('en-US') ?? '0'}`;
+
+        if (App.game != undefined) {
+            switch (smallImage) {
+                case 'trainer':
+                    discordRPCValues.smallImageKey = `trainer-${App.game.profile.trainer()}`;
+                    discordRPCValues.smallImageText = this.replaceDiscordText('Total Attack: {attack}');
+                    break;
+                case 'egg':
+                    discordRPCValues.smallImageKey = smallImage;
+                    discordRPCValues.smallImageText = this.replaceDiscordText('Total Hatched: {hatched}');
+                    break;
+                case 'pokeball':
+                    discordRPCValues.smallImageKey = smallImage;
+                    discordRPCValues.smallImageText = this.replaceDiscordText('Shinies: {caught_shiny}/{caught} ✨');
+                    break;
+                default:
+                    discordRPCValues.smallImageKey = smallImage.toLowerCase();
+                    discordRPCValues.smallImageText = `${GameConstants.camelCaseToString(smallImage)}: ${App.game.wallet.currencies[GameConstants.Currency[smallImage]]?.().toLocaleString('en-US') ?? '0'}`;
+            }
+        } else {
+            discordRPCValues.smallImageKey = smallImage;
+            discordRPCValues.smallImageText = '';
         }
 
         return discordRPCValues;

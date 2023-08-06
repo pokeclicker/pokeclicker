@@ -26,6 +26,15 @@
                         />
                     </span>
                 </h4>
+                <div class='col-6' data-bind="tooltip : Safari.safariProgressTooltip()">
+                    <div>Lvl. <knockout data-bind='text: Safari.safariLevel()'></knockout></div>
+                    <div class="progress" style='height: 5px'>
+                        <div class="progress-bar bg-info" role="progressbar"
+                             data-bind="attr:{ style: 'width:' + Safari.percentToNextSafariLevel() + '%' }"
+                             aria-valuemin="0" aria-valuemax="100">
+                        </div>
+                    </div>
+                </div>
                 <button class='btn btn-danger modalClose' onclick='Safari.closeModal()'>Leave</button>
             </div>
 
@@ -55,7 +64,7 @@
                                 <img class='fit-width' src="assets/images/safari/area1.png" />
                             </div>
 
-                            <div style="position: relative;">
+                            <div style="position: relative; overflow-x: hidden;">
                                 <div id="safariBody"
                                     class='container-fluid'
                                     data-bind="visible: Safari.inProgress()">
@@ -66,6 +75,13 @@
                                         backgroundImage: `${$data.shiny ? 'url(\'assets/images/dynamic-background/pokemon/sparkle.png\'), ' : ''}url('assets/images/dynamic-background/pokemon/${Math.floor($data.id).toString().padStart(3, '0')}${$data.shiny ? 's' : ''}.png')`,
                                         top: `${32 * $data.y - 8}px`,
                                         left: `${32 * $data.x - 4}px`,
+                                    }"></div>
+                                <!-- /ko -->
+                                <!-- ko foreach: Safari.itemGrid -->
+                                    <div class="safari-item" data-bind="
+                                    style: {
+                                        top: `${32 * $data.y}px`,
+                                        left: `${32 * $data.x}px`,
                                     }"></div>
                                 <!-- /ko -->
                             </div>
@@ -79,17 +95,21 @@
                             <div id="safariHelpText">
                                 <p>The Safari Zone uses a different method of encountering and capturing Pokémon, and it contains several unique Pokémon.</p>
                                 <p>After paying the entrance fee, you will be able to walk around in the Safari Zone. To encounter Pokémon, you must either walk in the tall grass or walk into Pokémon that randomly appear on the map.</p>
+                                <p>As you perform actions, you will gain Safari XP and increase your Safari Level. If you catch a Pokémon, there is a chance an item will appear on the map.</p>
                                 <p>
                                     When you have encountered a Pokémon, you will be given 4 options:
                                     <ul>
-                                        <li>Ball: This will throw a Poké Ball and give you a chance of capturing the Pokémon.</li>
-                                        <li>Rock: Throwing a rock will make the Pokémon more likely to flee, but easier to catch.</li>
-                                        <li>Bait: Throwing bait will make the Pokémon less likely to flee, but harder to catch. If you have Razz or Nanab berries, you can use them as bait for special effects.</li>
+                                        <li>Ball: This will throw a Poké Ball and give you a chance of capturing the Pokémon. Provides 10 Safari XP.</li>
+                                        <li>Rock: Throwing a Rock will make the Pokémon angry, and more likely to flee, but easier to catch. Provides 10 Safari XP.</li>
+                                        <li>Bait: Throwing any kind of Bait will make the Pokémon eat, and less likely to flee, but harder to catch. Berry Baits change the base rates of the Pokémon, with Razz lowering flee rate, and Nanab increasing catch rate. Only one Berry effect can be present at a time. Provides 5 Safari XP.</li>
                                         <li>Run: This will end the encounter.</li>
                                     </ul>
                                 </p>
+                                <p>Catching a Pokémon will provide 50 Safari XP.</p>
                                 <p>After your turn of the encounter, if it did not result in the encounter ending, the wild Pokémon will have a chance of running away.</p>
                                 <p>Your safari exploration will end when you have run out of Poké Balls. You can freely leave and re-enter without having to pay the fee again as long as you still have Poké Balls remaining.</p>
+                                <p>Safari Level will increase the effectiveness of Rocks and Bait, the Egg Steps gained from walking, and the odds that an item will spawn when a Pokémon is caught.</p>
+                                <p>Some items are not available until a certain Safari Level is reached.</p>
                             </div>
                         </div>
                     </div>

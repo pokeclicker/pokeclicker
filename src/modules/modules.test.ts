@@ -99,7 +99,7 @@ describe('Test GameConstants', () => {
         expect(getGymRegion('Not a real gym')).toEqual(-1);
     });
     it('return the dungeons total index', () => {
-        expect(getDungeonIndex('Abundant Shrine')).toEqual(111);
+        expect(getDungeonIndex('Abundant Shrine')).toEqual(116);
         expect(getDungeonIndex('Not a real dungeon')).toEqual(-1);
     });
     it('return the region a dungeon is in', () => {
@@ -107,7 +107,7 @@ describe('Test GameConstants', () => {
         expect(getDungeonRegion('Not a real dungeon')).toEqual(-1);
     });
     it('return the temp battles total index', () => {
-        expect(getTemporaryBattlesIndex('Underground Fighting Ring')).toEqual(149);
+        expect(getTemporaryBattlesIndex('Underground Fighting Ring')).toEqual(163);
         expect(getTemporaryBattlesIndex('Not a real temp battle')).toEqual(-1);
     });
 });
@@ -176,5 +176,42 @@ describe('Test GameHelper', () => {
 
     it('escape regex values from a string', () => {
         expect(GameHelper.escapeStringRegex('/[Just a test](.*?)/')).toEqual('\\/\\[Just a test\\]\\(\\.\\*\\?\\)\\/');
+    });
+});
+
+import SaveSelector from './SaveSelector';
+describe('SaveSelector', () => {
+    describe('encoding', () => {
+        it('encodes and decodes chinese characters', () => {
+            const input = '妙蛙种子';
+            const encoded = SaveSelector.btoa(input);
+            expect(encoded).toBe('JUU1JUE2JTk5JUU4JTlCJTk5JUU3JUE3JThEJUU1JUFEJTkw');
+            const decoded = SaveSelector.atob(encoded);
+            expect(decoded).toBe(input);
+        });
+
+        it('encodes and decodes emoji', () => {
+            const input = '🙂';
+            const encoded = SaveSelector.btoa(input);
+            expect(encoded).toBe('JUYwJTlGJTk5JTgy');
+            const decoded = SaveSelector.atob(encoded);
+            expect(decoded).toBe(input);
+        });
+
+        it('encodes and decodes uri encoded strings', () => {
+            const input = 'hello %20 world';
+            const encoded = SaveSelector.btoa(input);
+            expect(encoded).toBe('aGVsbG8gJTI1MjAgd29ybGQ=');
+            const decoded = SaveSelector.atob(encoded);
+            expect(decoded).toBe(input);
+        });
+
+        it('encodes and decodes non-uri % characters', () => {
+            const input = '% % % %';
+            const encoded = SaveSelector.btoa(input);
+            expect(encoded).toBe('JTI1ICUyNSAlMjUgJTI1');
+            const decoded = SaveSelector.atob(encoded);
+            expect(decoded).toBe(input);
+        });
     });
 });

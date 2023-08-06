@@ -4,29 +4,22 @@ import Setting from '../settings/Setting';
 import GameHelper from '../GameHelper';
 import SettingOption from '../settings/SettingOption';
 import KeyItemType from '../enums/KeyItemType';
-import DevelopmentRequirement from '../requirements/DevelopmentRequirement';
 import Requirement from '../requirements/Requirement';
 import CustomRequirement from '../requirements/CustomRequirement';
+import PokemonType from '../enums/PokemonType';
+import EncounterType from '../enums/EncounterType';
+import QuestLineStepCompletedRequirement from '../requirements/QuestLineStepCompletedRequirement';
 
-export type PokeballFilterOptions = {
-    shiny?: boolean;
-    shadow?: boolean;
-    caught?: boolean;
-    caughtShiny?: boolean;
-    caughtShadow?: boolean;
-    pokerus?: Pokerus;
-};
-
-class PokeballFilterOption<
-    K extends keyof PokeballFilterOptions,
-    T = PokeballFilterOptions[K],
-> {
+class PokeballFilterOption<T, M = T> {
     public defaultSetting: Setting<T>;
 
     constructor(
-        public createSetting: (defaultVal?: T) => Setting<T>,
+        public createSetting: (defaultVal?: T, name?: string, defaultName?: string) => Setting<T>,
         public describe: (value: T) => string,
         public requirement?: Requirement,
+        public matchTest: (optionValue: T, testValue: M) => boolean = (
+            optionValue: T, testValue: M,
+        ) => optionValue === (testValue as unknown as T),
     ) {
         this.defaultSetting = createSetting();
     }
@@ -36,12 +29,15 @@ class PokeballFilterOption<
     }
 }
 
-const tempShadowRequirement = new DevelopmentRequirement();
+const tempShadowRequirement = new QuestLineStepCompletedRequirement('Shadows in the Desert', 3);
 
-export const pokeballFilterOptions: {
-    [K in keyof PokeballFilterOptions]-?: PokeballFilterOption<K>
-} = {
-    shiny: new PokeballFilterOption(
+const encounterTypeRequirements: Partial<Record<EncounterType, Requirement>> = {
+    [EncounterType.trainer]: tempShadowRequirement,
+    [EncounterType.ultraBeast]: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 2),
+};
+
+export const pokeballFilterOptions = {
+    shiny: new PokeballFilterOption<boolean>(
         (bool = true) => new BooleanSetting(
             'pokeballFilterShiny',
             'Shiny',
@@ -52,7 +48,7 @@ export const pokeballFilterOptions: {
         }Shiny`,
     ),
 
-    shadow: new PokeballFilterOption(
+    shadow: new PokeballFilterOption<boolean>(
         (bool = true) => new BooleanSetting(
             'pokeballFilterShadow',
             'Shadow',
@@ -64,7 +60,7 @@ export const pokeballFilterOptions: {
         tempShadowRequirement,
     ),
 
-    caught: new PokeballFilterOption(
+    caught: new PokeballFilterOption<boolean>(
         (bool = true) => new BooleanSetting(
             'pokeballFilterCaught',
             'Caught',
@@ -75,7 +71,7 @@ export const pokeballFilterOptions: {
         } caught`,
     ),
 
-    caughtShiny: new PokeballFilterOption(
+    caughtShiny: new PokeballFilterOption<boolean>(
         (bool = true) => new BooleanSetting(
             'pokeballFilterCaughtShiny',
             'Caught Shiny',
@@ -86,7 +82,7 @@ export const pokeballFilterOptions: {
         }caught`,
     ),
 
-    caughtShadow: new PokeballFilterOption(
+    caughtShadow: new PokeballFilterOption<boolean>(
         (bool = true) => new BooleanSetting(
             'pokeballFilterCaughtShadow',
             'Caught Shadow',
@@ -98,7 +94,7 @@ export const pokeballFilterOptions: {
         tempShadowRequirement,
     ),
 
-    pokerus: new PokeballFilterOption(
+    pokerus: new PokeballFilterOption<Pokerus>(
         (pokerus = Pokerus.Uninfected) => new Setting(
             'pokeballFilterPokerus',
             'Pokérus State',
@@ -114,4 +110,42 @@ export const pokeballFilterOptions: {
         ),
     ),
 
+    pokemonType: new PokeballFilterOption<PokemonType, [PokemonType, PokemonType]>(
+        (type = PokemonType.Normal, name = 'pokeballFilterPokemonType', defaultName = 'Pokémon Type') => new Setting(
+            name,
+            defaultName,
+            GameHelper.enumStrings(PokemonType).map((k) => new SettingOption(k, PokemonType[k])),
+            type,
+        ),
+        (pokemonType) => `Is ${PokemonType[pokemonType]} type`,
+        undefined,
+        (
+            optionValue: PokemonType,
+            testValues: [PokemonType, PokemonType],
+        ) => testValues.includes(optionValue),
+    ),
+
+    encounterType: new PokeballFilterOption<EncounterType>(
+        (type: EncounterType = EncounterType.route) => new Setting(
+            'pokeballFilterEncounterType',
+            'Encounter Type',
+            Object.values(EncounterType).map((v) => new SettingOption(v, v, encounterTypeRequirements[v])),
+            type,
+        ),
+        (type) => `Is ${GameHelper.anOrA(type)} ${type} encounter`,
+    ),
+};
+
+type PokeballFilterValueType<T>
+    = T extends PokeballFilterOption<infer K> ? K : never;
+
+type PokeballFilterMatchType<T>
+    = T extends PokeballFilterOption<any, infer M> ? M : never;
+
+export type PokeballFilterOptions = Partial<{
+    [K in keyof typeof pokeballFilterOptions]: PokeballFilterValueType<typeof pokeballFilterOptions[K]>;
+}>;
+
+export type PokeballFilterMatchData = {
+    [K in keyof typeof pokeballFilterOptions]: PokeballFilterMatchType<typeof pokeballFilterOptions[K]>;
 };

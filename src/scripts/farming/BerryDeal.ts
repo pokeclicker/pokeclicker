@@ -108,7 +108,7 @@ class BerryDeal {
     public static generateDeals(date: Date) {
         SeededRand.seedWithDate(date);
 
-        const berryMasterTowns = [GameConstants.BerryTraderLocations['Goldenrod City'], GameConstants.BerryTraderLocations['Mauville City'], GameConstants.BerryTraderLocations['Hearthome City'], GameConstants.BerryTraderLocations['Pinkan Pokémon Reserve']];
+        const berryMasterTowns = [GameConstants.BerryTraderLocations['Goldenrod City'], GameConstants.BerryTraderLocations['Mauville City'], GameConstants.BerryTraderLocations['Hearthome City'], GameConstants.BerryTraderLocations['Pinkan Pokémon Reserve'], GameConstants.BerryTraderLocations['Secret Berry Shop']];
 
         // Removing old deals
         for (const town of berryMasterTowns) {
@@ -122,6 +122,7 @@ class BerryDeal {
         BerryDeal.list[GameConstants.BerryTraderLocations['Mauville City']].push(...this.generateMauvilleDeals());
         BerryDeal.list[GameConstants.BerryTraderLocations['Pinkan Pokémon Reserve']].push(...this.generatePinkanDeals());
         BerryDeal.list[GameConstants.BerryTraderLocations['Hearthome City']].push(...this.generateHearthomeDeals());
+        BerryDeal.list[GameConstants.BerryTraderLocations['Secret Berry Shop']].push(...this.generateSecretBerryShopDeals());
     }
 
     private static generateGoldenrodDeals() {
@@ -197,7 +198,14 @@ class BerryDeal {
         const secondGen = Farming.getGeneration(1);
         const thirdGen = Farming.getGeneration(2);
         const fourthGen = Farming.getGeneration(3);
-        const fifthGen = Farming.getGeneration(4);
+        const fifthGen = [ // only use berries that can grow in under a day so players have time to grow them
+            BerryType.Micle,
+            BerryType.Custap,
+            BerryType.Jaboca,
+            BerryType.Rowap,
+            BerryType.Kee,
+            BerryType.Maranga,
+        ];
 
         const list = [];
 
@@ -220,17 +228,27 @@ class BerryDeal {
             1
         ));
         list.push(new BerryDeal(
-            [
-                this.randomBerry(fourthGen),
-                this.randomBerry(fifthGen),
-            ],
-            [
-                SeededRand.intBetween(50, 100),
-                SeededRand.intBetween(10, 50),
-            ],
+            [this.randomBerry(fourthGen)],
+            [SeededRand.intBetween(50, 100)],
             ItemList.Protein,
             1
         ));
+
+        if (App.game.badgeCase.hasBadge(BadgeEnums.Basic)) {
+            list.push(new BerryDeal(
+                [this.randomBerry(fifthGen)],
+                [SeededRand.intBetween(10, 50)],
+                ItemList.Calcium,
+                1
+            ));
+
+            list.push(new BerryDeal(
+                [this.randomBerry(fifthGen)],
+                [SeededRand.intBetween(10, 50)],
+                ItemList.Carbos,
+                1
+            ));
+        }
 
         return [SeededRand.fromArray(list)];
     }
@@ -277,6 +295,18 @@ class BerryDeal {
             [BerryType.Pinkan],
             [SeededRand.intBetween(80, 100)],
             ItemList['Pinkan Electabuzz'],
+            1
+        ));
+
+        return list;
+    }
+
+    private static generateSecretBerryShopDeals() {
+        const list = [];
+        list.push(new BerryDeal(
+            [BerryType.Snover],
+            [SeededRand.intBetween(80, 100)],
+            ItemList['Grotle (Acorn)'],
             1
         ));
 

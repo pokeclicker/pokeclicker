@@ -38,8 +38,9 @@ class BattlePokemon implements EnemyPokemonInterface {
         public gemReward = 1,
         public gender: number,
         public shadow: GameConstants.ShadowStatus,
+        public encounterType: EncounterType,
         public heldItem?: BagItem,
-        public ep?: number
+        public ep: number = GameConstants.BASE_EP_YIELD
     ) {
         this.health = ko.observable(maxHealth);
         this.maxHealth = ko.observable(maxHealth);
@@ -61,7 +62,7 @@ class BattlePokemon implements EnemyPokemonInterface {
     }
 
     public defeat(trainer = false): void {
-        PokemonHelper.incrementPokemonStatistics(this.id, GameConstants.PokemonStatisticsType.Defeated, this.shiny, this.gender);
+        PokemonHelper.incrementPokemonStatistics(this.id, GameConstants.PokemonStatisticsType.Defeated, this.shiny, this.gender, this.shadow);
 
         if (this.reward.amount > 0) {
             App.game.wallet.addAmount(this.reward);

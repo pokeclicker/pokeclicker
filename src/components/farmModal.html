@@ -30,7 +30,7 @@
                             <div class="tab-content">
                                 <div id="seeds" class="tab-pane active">
                                     <ul id="seedList" class="list-group p-0">
-                                        <!-- ko foreach: FarmController.getBerryListWithIndex() -->
+                                        <!-- ko foreach: FarmController.getUnlockedBerryListWithIndex() -->
                                         <li class="list-group-item list-group-item-action seed-list-item p-2"
                                             data-bind="click: function() {FarmController.selectedBerry($data);FarmController.selectedShovel(false);FarmController.selectedMulchShovel(false);FarmController.selectedPlotSafeLock(false);}, css: { 'active': FarmController.selectedBerry() === $data && !FarmController.selectedShovel() }">
                                             <img src="" height="28px"
@@ -221,9 +221,9 @@
                     <h4><u>Mutations</u></h4>
                     <p>Berries have the chance to cause mutations and create new Berry species in empty plots based on certain conditions.
                     <br/><i>(the Berry Master in Kanto will give you daily hints to what these conditions may be)</i></p>
-                    
+
                     <p>There are two types of mutations:</p>
-                    
+
                     <p><b>Common mutations:</b> They requires specific berries to happen. <i>This mutations only happens at Ripe stage.</i>
                     <br/><b>Evolution mutations:</b> They usually require a berry changing into other and are related with flavour profiles or use of objects. <i>This mutations can start to happen at Taller stage.</i></p>
 

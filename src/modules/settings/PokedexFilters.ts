@@ -64,9 +64,9 @@ const PokedexFilters: Record<string, FilterOption> = {
     statusPokerus: new FilterOption<number>(
         'Pokerus',
         ko.observable(-1).extend({ numeric: 0 }),
-        'pokdexPokerusFilter',
+        'pokedexPokerusFilter',
         [
-            new SettingOption('All', '-1'),
+            new SettingOption('All', -1),
             ...Settings.enumToNumberSettingOptionArray(Pokerus, (t) => t !== 'Infected'),
         ],
     ),
@@ -81,9 +81,9 @@ const PokedexFilters: Record<string, FilterOption> = {
         'pokedexUniqueTransformationFilter',
         [
             new SettingOption('Show All Pokémon', 'all'),
-            new SettingOption('Mega Evolution Available', 'mega-available'),
-            new SettingOption('Unobtained Mega Evolution', 'mega-unobtained'),
-            new SettingOption('Obtained Mega Evolution', 'mega-evolution'),
+            new SettingOption('Mega Evolution/Primal Reversion Available', 'mega-available'),
+            new SettingOption('Unobtained Mega Evolution/Primal Reversion', 'mega-unobtained'),
+            new SettingOption('Obtained Mega Evolution/Primal Reversion', 'mega-evolution'),
         ],
     ),
     heldItem: new FilterOption<boolean>(

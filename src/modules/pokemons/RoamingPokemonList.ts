@@ -22,7 +22,7 @@ export default class RoamingPokemonList {
     public static roamerGroups: RoamingGroup[][] = [
         [new RoamingGroup('Kanto', [KantoSubRegions.Kanto]), new RoamingGroup('Kanto - Sevii Islands', [KantoSubRegions.Sevii123, KantoSubRegions.Sevii4567])],
         [new RoamingGroup('Johto', [JohtoSubRegions.Johto])],
-        [new RoamingGroup('Hoenn', [HoennSubRegions.Hoenn])],
+        [new RoamingGroup('Hoenn', [HoennSubRegions.Hoenn]), new RoamingGroup('Orre', [HoennSubRegions.Orre])],
         [new RoamingGroup('Sinnoh', [SinnohSubRegions.Sinnoh])],
         [new RoamingGroup('Unova', [UnovaSubRegions.Unova])],
         [new RoamingGroup('Kalos', [KalosSubRegions.Kalos])],
@@ -105,6 +105,8 @@ RoamingPokemonList.add(Region.hoenn, 0, new RoamingPokemon('Latios', new QuestLi
 RoamingPokemonList.add(Region.hoenn, 0, new RoamingPokemon('Latias', new QuestLineStepCompletedRequirement('The Eon Duo', 3)));
 // TODO: these need another way to be obtained
 RoamingPokemonList.add(Region.hoenn, 0, new RoamingPokemon('Jirachi', new QuestLineStepCompletedRequirement('Wish Maker', 8)));
+// Orre
+RoamingPokemonList.add(Region.hoenn, 1, new RoamingPokemon('Ho-Oh', new QuestLineCompletedRequirement('Shadows in the Desert')));
 
 // Sinnoh
 RoamingPokemonList.add(Region.sinnoh, 0, new RoamingPokemon('Manaphy', new QuestLineCompletedRequirement('Recover the Precious Egg!')));
@@ -169,9 +171,10 @@ RoamingPokemonList.add(Region.alola, 0, new RoamingPokemon('Vivillon (Meadow)', 
 RoamingPokemonList.add(Region.kanto, 0, new RoamingPokemon('Flying Pikachu', new SpecialEventRequirement('Flying Pikachu')));
 RoamingPokemonList.add(Region.kanto, 0, new RoamingPokemon('Red Spearow', new SpecialEventRequirement('Flying Pikachu')));
 // First movie anniversay (Jul 18 - Jul 24)
-RoamingPokemonList.add(Region.kanto, 0, new RoamingPokemon('Bulbasaur (Clone)', new SpecialEventRequirement('Mewtwo strikes back!')));
-RoamingPokemonList.add(Region.kanto, 0, new RoamingPokemon('Charmander (Clone)', new SpecialEventRequirement('Mewtwo strikes back!')));
-RoamingPokemonList.add(Region.kanto, 0, new RoamingPokemon('Squirtle (Clone)', new SpecialEventRequirement('Mewtwo strikes back!')));
+RoamingPokemonList.add(Region.kanto, 0, new RoamingPokemon('Bulbasaur (Clone)', new MultiRequirement([new SpecialEventRequirement('Mewtwo strikes back!'), new ClearDungeonRequirement(1, getDungeonIndex('New Island'))])));
+RoamingPokemonList.add(Region.kanto, 0, new RoamingPokemon('Charmander (Clone)', new MultiRequirement([new SpecialEventRequirement('Mewtwo strikes back!'), new ClearDungeonRequirement(1, getDungeonIndex('New Island'))])));
+RoamingPokemonList.add(Region.kanto, 0, new RoamingPokemon('Squirtle (Clone)', new MultiRequirement([new SpecialEventRequirement('Mewtwo strikes back!'), new ClearDungeonRequirement(1, getDungeonIndex('New Island'))])));
+RoamingPokemonList.add(Region.kanto, 0, new RoamingPokemon('Pikachu (Clone)', new MultiRequirement([new SpecialEventRequirement('Mewtwo strikes back!'), new ObtainedPokemonRequirement('Pikachu (Clone)')])));
 // Halloween (Oct 30 - Nov 5)
 // Let's Go Pikachu Eevee (Nov 16 - Nov 23)
 RoamingPokemonList.add(Region.kanto, 0, new RoamingPokemon('Let\'s Go Pikachu', new SpecialEventRequirement('Let\'s GO!')));

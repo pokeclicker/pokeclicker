@@ -8,26 +8,66 @@
                 </button>
             </div>
             <div class="modal-body p-0">
-                <table class="table table-striped table-hover table-bordered table-sm m-0">
-                    <thead>
-                      <tr>
-                        <th>Statistic</th>
-                        <th>Amount</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td class="text-left">Time Played</td>
-                        <td class="text-left tight text-muted" data-bind="html: GameConstants.formatSecondsToTime(App.game.statistics['secondsPlayed']())">-</td>
-                      </tr>
-                      <!-- ko foreach: App.game.statistics.observables -->
-                      <tr>
-                        <td class="text-left" data-bind="text: GameConstants.camelCaseToString($data)">-</td>
-                        <td class="text-left tight text-muted" data-bind="text: App.game.statistics[$data]().toLocaleString('en-US')">-</td>
-                      </tr>
-                      <!-- /ko -->
-                    </tbody>
-                </table>
+                <ul class="nav nav-tabs nav-fill">
+                    <li class="nav-item"><a class="nav-link active" href="#statisticsModalStatsPane" data-toggle="tab">Stats</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#statisticsModalMultipliersPane" data-toggle="tab">Multipliers</a></li>
+                </ul>
+                <div class="tab-content">
+                    <!-- Stats Pane -->
+                    <div class="tab-pane active" id="statisticsModalStatsPane">
+                        <table class="table table-striped table-hover table-bordered table-sm m-0">
+                            <thead>
+                            <tr>
+                                <th>Statistic</th>
+                                <th>Amount</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="text-left">Time Played</td>
+                                <td class="text-left tight text-muted" data-bind="html: GameConstants.formatSecondsToTime(App.game.statistics['secondsPlayed']())">-</td>
+                            </tr>
+                            <!-- ko foreach: App.game.statistics.observables -->
+                            <tr>
+                                <td class="text-left" data-bind="text: GameConstants.camelCaseToString($data)">-</td>
+                                <td class="text-left tight text-muted" data-bind="text: App.game.statistics[$data]().toLocaleString('en-US')">-</td>
+                            </tr>
+                            <!-- /ko -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Multipliers Pane -->
+                    <div class="tab-pane" id="statisticsModalMultipliersPane">
+                        <table class='table table-sm table-hover m-0'>
+                            <!-- ko foreach: Object.entries(App.game.multiplier.multipliers) -->
+                                <thead>
+                                    <tr>
+                                        <th colspan="2" class="clickable text-left table-dark text-light" data-toggle="collapse" data-bind="attr: { 'href': '#collapse-multiplier-' + $index() }">
+                                            <h3>
+                                                <knockout data-bind="text: GameConstants.camelCaseToString($data[0])"></knockout>
+                                                <div class="float-right">
+                                                    <knockout data-bind="text: `${App.game.multiplier.getBonus($data[0]).toFixed(2)}x`"></knockout>
+                                                </div>
+                                            </h3>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody data-bind="class: 'collapse', attr: { id: 'collapse-multiplier-' + $index()}">
+                                    <!-- ko foreach: $data[1] -->
+                                        <tr data-bind="if: $data.bonusFunction() !== 1">
+                                            <td data-bind="text: $data.source"></td>
+                                            <td data-bind="text: `${$data.bonusFunction().toFixed(2)}x`"></td>
+                                        </tr>
+                                    <!-- /ko -->
+                                    <tr data-bind="if: !$data[1].some(({ bonusFunction }) => bonusFunction() !== 1)">
+                                        <td colspan="2">You have no active multipliers of this type</td>
+                                    </tr>
+                                </tbody>
+                            <!-- /ko -->
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

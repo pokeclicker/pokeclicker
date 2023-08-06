@@ -59,12 +59,15 @@ export class Mine {
             numItems = Rand.intBetween(App.game.underground.getMinItems(), App.game.underground.getMaxItems());
         }
 
+        // Get our available items
+        let items = UndergroundItems.getUnlockedItems();
+        items = Rand.shuffleWeightedArray(items, items.map((i) => i.getWeight())).reverse();
         // Add numItems items to the layer
-        for (let i = 0; i < numItems; i++) {
+        for (let i = 0; i < numItems && items.length; i++) {
             let res = false;
             let x = 0;
             let y = 0;
-            const item = UndergroundItems.getRandomItem();
+            const item = items.pop();
             let attempts = 0;
             // Keep checking random spots until a legal spot is found
             // If too many failed attempts are made, break out as a failsafe

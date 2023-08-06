@@ -18,7 +18,7 @@ export default class RangeSetting extends Setting<number> {
     }
 
     validValue(value: number): boolean {
-        if (!this.isUnlocked(value)) {
+        if (!this.isValueUnlocked(value)) {
             return false;
         }
         return (this.minValue === undefined || value >= this.minValue) && (this.maxValue === undefined || value <= this.maxValue);

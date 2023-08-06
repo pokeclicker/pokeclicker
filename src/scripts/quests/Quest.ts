@@ -11,6 +11,8 @@ abstract class Quest {
     isCompleted: KnockoutComputed<boolean>;
     claimed: KnockoutObservable<boolean>;
     private _focus: KnockoutObservable<any>;
+    private focusSub: KnockoutSubscription;
+    private focusValue: number;
     initial: KnockoutObservable<any>;
     notified: boolean;
     autoComplete: boolean;
@@ -18,6 +20,7 @@ abstract class Quest {
     inQuestLine: boolean;
     _onLoad?: () => void;
     onLoadCalled: boolean;
+    suspended: boolean;
 
     constructor(amount: number, pointsReward: number) {
         this.amount = amount;
@@ -26,6 +29,7 @@ abstract class Quest {
         this.claimed = ko.observable(false);
         this.notified = false;
         this.onLoadCalled = false;
+        this.suspended = false;
     }
 
     public static canComplete() {
@@ -54,6 +58,7 @@ abstract class Quest {
     claim() {
         if (this.isCompleted() && !this.claimed()) {
             App.game.quests.addXP(this.xpReward);
+            this.focusSub?.dispose?.();
             this.claimed(true);
             if (this.pointsReward) {
                 App.game.wallet.gainQuestPoints(this.pointsReward);
@@ -118,6 +123,28 @@ abstract class Quest {
     }
 
     protected createProgressObservables() {
+        // Dispose of our old subscriber if one exists
+        this.focusSub?.dispose?.();
+
+        // Subscribe to the new focus
+        this.focusValue = this._focus();
+        this.focusSub = this._focus.subscribe?.((newValue) => {
+            // If we aren't actively completing this quests, don't do anything
+            if (!this.inProgress()) {
+                return;
+            }
+            // If the focus goes down, adjust our initial value
+            if (newValue < this.focusValue) {
+                this.initial(this.initial() - (this.focusValue - newValue));
+            }
+            // Prevent progress on suspended quests by adjusting the initial value
+            if (this.suspended && newValue > this.focusValue) {
+                this.initial(this.initial() + (newValue - this.focusValue));
+            }
+            this.focusValue = newValue;
+        });
+
+        // Calculate our progress
         this.progress = ko.pureComputed(() => {
             if (this.initial() !== null) {
                 return Math.min(1, ( this.focus() - this.initial()) / this.amount);
@@ -165,7 +192,12 @@ abstract class Quest {
         }
     }
 
-    complete() {
+    complete(bypassAutoCompleter = false) {
+        if (bypassAutoCompleter) {
+            this.deleteAutoCompleter();
+            // Was consequently disposed on auto completion.
+            this.focusSub?.dispose();
+        }
         this.initial(this.focus() - this.amount);
     }
 
@@ -174,9 +206,13 @@ abstract class Quest {
         this.autoCompleter = this.isCompleted.subscribe(() => {
             if (this.isCompleted()) {
                 this.claim();
-                this.autoCompleter.dispose();
+                this.deleteAutoCompleter();
             }
         });
+    }
+
+    deleteAutoCompleter() {
+        this.autoCompleter?.dispose();
     }
 
     //#endregion

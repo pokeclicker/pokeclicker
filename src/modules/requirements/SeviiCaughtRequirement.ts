@@ -8,8 +8,8 @@ export default class SeviiCaughtRequirement extends AchievementRequirement {
 
     public getProgress() {
         return Math.min(App.game.party.caughtPokemon
-            .filter((p) => p.name.includes('Pinkan')
-            || p.name.includes('Valencian')
+            .filter((p) => p.name.startsWith('Pinkan') && p.name != 'Pinkan Pikachu'
+            || p.name.startsWith('Valencian')
             || p.name === 'Crystal Onix'
             || p.name === 'Ash\'s Butterfree'
             || p.name === 'Pink Butterfree')
@@ -18,6 +18,6 @@ export default class SeviiCaughtRequirement extends AchievementRequirement {
     }
 
     public hint(): string {
-        return `${this.requiredValue} unique Pokémon need to be caught.`;
+        return `${this.requiredValue} unique Sevii Pokémon need to be caught.`;
     }
 }

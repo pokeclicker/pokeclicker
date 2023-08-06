@@ -154,6 +154,16 @@ class PartyController {
         return PartyController.heldItemSortedList;
     }).extend({ rateLimit: 500 });
 
+    private static consumableSortedList = [];
+    static getConsumableSortedList = ko.pureComputed(() => {
+        // If the consumable modal is open, we should sort it.
+        if (modalUtils.observableState.consumableModal === 'show') {
+            PartyController.consumableSortedList = [...App.game.party.caughtPokemon];
+            return PartyController.consumableSortedList.sort(PartyController.compareBy(Settings.getSetting('consumableSort').observableValue(), Settings.getSetting('consumableSortDirection').observableValue()));
+        }
+        return PartyController.consumableSortedList;
+    }).extend({ rateLimit: 500 });
+
     private static pokemonsWithHeldItemSortedList = [];
     static getPokemonsWithHeldItemSortedList = ko.pureComputed(() => {
         // If the held item modal is open, we should sort it.
@@ -170,6 +180,19 @@ class PartyController {
             return App.game.party.getRegionAttackMultiplier();
         }
         return 1.0;
+    }
+
+    public static moveCategoryPokemon(fromCategory: number, toCategory: number) {
+        // Category should exist, otherwise use the None category
+        if (!PokemonCategories.categories().some((c) => c.id === toCategory)) {
+            toCategory = 0;
+        }
+
+        App.game.party.caughtPokemon.forEach((p) => {
+            if (p.category === fromCategory) {
+                p.category = toCategory;
+            }
+        });
     }
 
     public static compareBy(option: SortOptions, direction: boolean, region = -1): (a: PartyPokemon, b: PartyPokemon) => number {

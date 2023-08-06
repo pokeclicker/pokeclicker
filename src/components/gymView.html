@@ -2,10 +2,6 @@
 <div class="row justify-content-center no-gutters" data-bind="if: App.game.gameState === GameConstants.GameState.gym">
     <div class="col no-gutters clickable" data-bind="click: function() {GymBattle.clickAttack()}" style="height: 280px; display: block;">
         <h2 class="pageItemTitle mobileBattleTitle" style="display: block;">
-            <knockout class="left">
-                <knockout data-bind="text: GymBattle.gym.leaderName.replace(/\d/g,'')"></knockout>
-            </knockout>
-
             <knockout>
                 <knockout data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': GymBattle.enemyPokemon() } }">Pokémon name</knockout>
             </knockout>
@@ -41,7 +37,7 @@
             <img data-bind="attr:{ src: GymBattle.gym.imagePath }" onerror="this.src='assets/images/npcs/specialNPCs/Mysterious Trainer.png';"/>
         </div>
 
-        <div class="trainer-enemy">
+        <div>
             <knockout data-bind="template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': GymBattle.enemyPokemon() } }">Pokémon sprite</knockout>
         </div>
 
@@ -58,7 +54,15 @@
             Stop Auto
         </button>
         <h2 class="pageItemFooter" style="display: block; font-size: 1rem;">
-          <table width="100%">
+            <table width="100%">
+              <tr>
+                <td with="50%">
+                  <knockout data-bind="text: GymBattle.gym.leaderName.replace(/\d/g,'')"></knockout>
+                </td>
+                <td width="50%">
+                  <knockout data-bind="text: `${(GymRunner.gymObservable()?.clears() ?? 0).toLocaleString('en-US')} Clears`"></knockout>
+                </td>
+              </tr>
               <tr>
                 <td width="50%">
                     <knockout data-bind="template: { name: 'pokemonAttackTemplate', data: { 'pokemon': Battle.enemyPokemon() } }"></knockout>

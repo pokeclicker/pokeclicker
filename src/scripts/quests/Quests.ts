@@ -31,7 +31,7 @@ class Quests implements Saveable {
         return this.questList().filter(quest => quest.isCompleted());
     });
     public currentQuests: KnockoutComputed<Array<Quest>> = ko.pureComputed(() => {
-        return this.questList().filter(quest => quest.inProgress() && !quest.claimed());
+        return this.questList().filter(quest => quest.inProgress());
     });
     public incompleteQuests: KnockoutComputed<Array<Quest>> =  ko.pureComputed(() => {
         return this.questList().filter(quest => !quest.isCompleted());
@@ -278,6 +278,12 @@ class Quests implements Saveable {
         return 100 * (this.xp() - requiredForCurrent) / (requiredForNext - requiredForCurrent);
     }
 
+    public questProgressTooltip() {
+        const level = this.level();
+        const xp = this.xp();
+        return {title : `${xp - this.levelToXP(level)} / ${this.levelToXP(level + 1) - this.levelToXP(level)}`, trigger : 'hover' };
+    }
+
     public isDailyQuestsUnlocked() {
         return QuestLineHelper.isQuestLineCompleted('Tutorial Quests');
     }
@@ -310,14 +316,20 @@ class Quests implements Saveable {
                 const ql = this.getQuestLine(questLine.name);
                 if (ql) {
                     ql.state(questLine.state);
-                    if (questLine.state == QuestLineState.started) {
+                    if (questLine.state == QuestLineState.started || questLine.state == QuestLineState.suspended) {
                         if (ql.quests()[questLine.quest] instanceof MultipleQuestsQuest) {
                             ql.resumeAt(questLine.quest, 0);
                             ql.curQuestObject().quests.forEach((q, i) => {
+                                if (questLine?.initial[i] === true) {
+                                    return q.complete(true);
+                                }
                                 q.initial(questLine?.initial[i] ?? 0);
                             });
                         } else {
                             ql.resumeAt(questLine.quest, questLine.initial);
+                        }
+                        if (questLine.state == QuestLineState.suspended) {
+                            ql.suspendQuest();
                         }
                     }
                 }

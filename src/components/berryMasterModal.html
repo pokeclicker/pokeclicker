@@ -56,8 +56,9 @@
                                             </knockout>
                                             <knockout data-bind="if: ($parent.item.itemType instanceof PokemonItem)">
                                                 <span style="position: relative; top: -1px;"
-                                                    data-bind="template: { name: 'pokerusStatusTemplate',
-                                                        data: { 'pokerus': $parent.item.itemType.getPokerusStatus(), 'width': '32px' }}">
+                                                    data-bind="template: { name: 'pokerusStatusTemplate', data: {
+                                                        'pokerus': $parent.item.itemType.getPokerusStatus(), 'width': '32px',
+                                                        'evs': App.game.party.getPokemonByName($parent.item.itemType.type)?.evs() }}">
                                                 </span>
                                             </knockout>
                                         </span>

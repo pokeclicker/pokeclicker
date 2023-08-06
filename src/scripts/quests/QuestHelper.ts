@@ -1,6 +1,7 @@
 /// <reference path="./questTypes/DefeatPokemonsQuest.ts" />
 /// <reference path="./questTypes/CapturePokemonsQuest.ts" />
 /// <reference path="./questTypes/CapturePokemonTypesQuest.ts" />
+/// <reference path="./questTypes/ClearBattleFrontier.ts" />
 /// <reference path="./questTypes/GainFarmPointsQuest.ts" />
 /// <reference path="./questTypes/GainMoneyQuest.ts" />
 /// <reference path="./questTypes/GainTokensQuest.ts" />
@@ -9,6 +10,7 @@
 /// <reference path="./questTypes/MineLayersQuest.ts" />
 /// <reference path="./questTypes/MineItemsQuest.ts" />
 /// <reference path="./questTypes/CatchShiniesQuest.ts" />
+/// <reference path="./questTypes/CatchShadowsQuest.ts" />
 /// <reference path="./questTypes/DefeatGymQuest.ts" />
 /// <reference path="./questTypes/DefeatDungeonQuest.ts" />
 /// <reference path="./questTypes/UsePokeballQuest.ts" />
@@ -21,6 +23,7 @@ class QuestHelper {
         DefeatPokemonsQuest,
         CapturePokemonsQuest,
         CapturePokemonTypesQuest,
+        ClearBattleFrontier,
         GainFarmPointsQuest,
         GainMoneyQuest,
         GainTokensQuest,
@@ -29,6 +32,7 @@ class QuestHelper {
         MineLayersQuest,
         MineItemsQuest,
         CatchShiniesQuest,
+        CatchShadowsQuest,
         DefeatGymQuest,
         DefeatDungeonQuest,
         UsePokeballQuest,

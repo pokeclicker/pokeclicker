@@ -58,6 +58,7 @@ enum BerryType {
     Babiri,
     Chilan,
     Roseli,
+    Snover,
     // Fifth Generation
     Micle,
     Custap,
@@ -73,6 +74,7 @@ enum BerryType {
     Lansat,
     Starf,
     Enigma,
+    Hopo,
 }
 
 export default BerryType;

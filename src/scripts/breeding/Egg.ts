@@ -131,6 +131,7 @@ class Egg implements Saveable {
 
         const pokemonID = PokemonHelper.getPokemonById(this.pokemon).id;
         const gender = PokemonFactory.generateGenderById(pokemonID);
+        const shadow = GameConstants.ShadowStatus.None;
         if (partyPokemon) {
             // Increase attack
             partyPokemon.attackBonusPercent += Math.max(1, Math.round((GameConstants.BREEDING_ATTACK_BONUS + partyPokemon.vitaminsUsed[GameConstants.VitaminType.Calcium]()) * (efficiency / 100)));
@@ -142,7 +143,6 @@ class Egg implements Saveable {
                 partyPokemon.level = 1;
                 partyPokemon.breeding = false;
                 partyPokemon.level = partyPokemon.calculateLevelFromExp();
-                partyPokemon.checkForLevelEvolution();
                 if (partyPokemon.pokerus == GameConstants.Pokerus.Infected) {
                     partyPokemon.pokerus = GameConstants.Pokerus.Contagious;
                 }
@@ -155,6 +155,7 @@ class Egg implements Saveable {
         if (shiny) {
             Notifier.notify({
                 message: `✨ You hatched a shiny ${PokemonHelper.displayName(PokemonHelper.getPokemonById(this.pokemon).name)()}! ✨`,
+                pokemonImage: PokemonHelper.getImage(PokemonHelper.getPokemonById(this.pokemon).id, shiny),
                 type: NotificationConstants.NotificationOption.warning,
                 sound: NotificationConstants.NotificationSound.General.shiny_long,
                 setting: NotificationConstants.NotificationSetting.Hatchery.hatched_shiny,
@@ -169,6 +170,7 @@ class Egg implements Saveable {
         } else {
             Notifier.notify({
                 message: `You hatched ${GameHelper.anOrA(PokemonHelper.getPokemonById(this.pokemon).name)} ${PokemonHelper.displayName(PokemonHelper.getPokemonById(this.pokemon).name)()}!`,
+                pokemonImage: PokemonHelper.getImage(PokemonHelper.getPokemonById(this.pokemon).id),
                 type: NotificationConstants.NotificationOption.success,
                 setting: NotificationConstants.NotificationSetting.Hatchery.hatched,
             });
@@ -182,6 +184,7 @@ class Egg implements Saveable {
         if (pokemonName != baseFormName && !App.game.party.alreadyCaughtPokemon(baseForm.id)) {
             Notifier.notify({
                 message: `You also found ${GameHelper.anOrA(baseFormName)} ${baseFormName} nearby!`,
+                pokemonImage: PokemonHelper.getImage(baseForm.id),
                 type: NotificationConstants.NotificationOption.success,
                 sound: NotificationConstants.NotificationSound.General.new_catch,
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
@@ -190,8 +193,8 @@ class Egg implements Saveable {
         }
 
         // Update statistics
-        PokemonHelper.incrementPokemonStatistics(pokemonID, GameConstants.PokemonStatisticsType.Hatched, shiny, gender);
-        App.game.oakItems.use(OakItemType.Blaze_Cassette);
+        PokemonHelper.incrementPokemonStatistics(pokemonID, GameConstants.PokemonStatisticsType.Hatched, shiny, gender, shadow);
+        App.game.oakItems.use(OakItemType.Magma_Stone);
         return true;
     }
 

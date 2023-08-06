@@ -22,6 +22,7 @@ class PartyPokemon implements Saveable {
     public exp = 0;
     public evs: KnockoutComputed<number>;
     _attack: KnockoutComputed<number>;
+    private _canUseHeldItem: KnockoutComputed<boolean>;
 
     defaults = {
         attackBonusPercent: 0,
@@ -94,6 +95,7 @@ class PartyPokemon implements Saveable {
                 // Log and notify player
                 Notifier.notify({
                     message: `${this.name} has become Resistant to Pokérus.`,
+                    pokemonImage: PokemonHelper.getImage(this.id, this.shiny),
                     type: NotificationConstants.NotificationOption.info,
                     setting: NotificationConstants.NotificationSetting.General.pokerus,
                 });
@@ -108,6 +110,12 @@ class PartyPokemon implements Saveable {
         this._displayName = ko.pureComputed(() => this._nickname() ? this._nickname() : this._translatedName());
         this._shadow = ko.observable(shadow);
         this._showShadowImage = ko.observable(false);
+        this._canUseHeldItem = ko.pureComputed(() => this.heldItem()?.canUse(this));
+        this._canUseHeldItem.subscribe((canUse) => {
+            if (!canUse && this.heldItem()) {
+                this.addOrRemoveHeldItem(this.heldItem());
+            }
+        });
     }
 
     public calculateAttack(ignoreLevel = false): number {
@@ -167,14 +175,16 @@ class PartyPokemon implements Saveable {
         return this.level;
     }
 
-    public gainExp(exp: number) {
-        this.exp += exp * this.getExpMultiplier();
+    public gainExp(exp: number) : number {
+        const expGained = exp * this.getExpMultiplier();
+        this.exp += expGained;
         const oldLevel = this.level;
         const newLevel = this.calculateLevelFromExp();
         if (oldLevel !== newLevel) {
             this.level = newLevel;
             this.checkForLevelEvolution();
         }
+        return expGained;
     }
 
     private getExpMultiplier() {
@@ -280,6 +290,34 @@ class PartyPokemon implements Saveable {
         GameHelper.incrementObservable(player.itemList[vitaminName], amount);
     }
 
+    public useConsumable(type: GameConstants.ConsumableType, amount: number): void {
+        const itemName = GameConstants.ConsumableType[type];
+        if (!player.itemList[itemName]()) {
+            return Notifier.notify({
+                message : `You do not have any more ${ItemList[itemName].displayName}`,
+                type : NotificationConstants.NotificationOption.danger,
+            });
+        }
+        switch (type) {
+            case GameConstants.ConsumableType.Rare_Candy : amount = Math.min(amount, player.itemList[itemName]());
+                const curAttack = this.calculateAttack(true);
+                GameHelper.incrementObservable(this._attackBonusPercent, 25 * amount);
+                Notifier.notify({
+                    message : `${this.displayName} gained ${this.calculateAttack(true) - curAttack} attack points`,
+                    type : NotificationConstants.NotificationOption.success,
+                    pokemonImage : PokemonHelper.getImage(this.id),
+                });
+                break;
+            default :
+        }
+        GameHelper.incrementObservable(player.itemList[itemName], -amount);
+        Notifier.notify({
+            message : `You used ${amount} of ${ItemList[itemName].displayName}`,
+            type : NotificationConstants.NotificationOption.success,
+            image : ItemList[itemName].image,
+        });
+    }
+
     totalVitaminsUsed = ko.pureComputed((): number => {
         return Object.values(this.vitaminsUsed).reduce((sum, obs) => sum + obs(), 0);
     });
@@ -311,6 +349,89 @@ class PartyPokemon implements Saveable {
 
     breedingEfficiency = ko.pureComputed((): number => {
         return ((this.getBreedingAttackBonus() * this.calculateEVAttackBonus()) / this.getEggSteps()) * GameConstants.EGG_CYCLE_MULTIPLIER;
+    });
+
+    public isHatchable = ko.pureComputed(() => {
+        // Only breedable Pokemon
+        if (this.breeding || this.level < 100) {
+            return false;
+        }
+
+        // Check if search matches englishName or displayName
+        const displayName = PokemonHelper.displayName(this.name)();
+        const filterName = BreedingFilters.name.value();
+        const partyName = this.displayName;
+        if (!filterName.test(displayName) && !filterName.test(this.name) && !(partyName != undefined && filterName.test(partyName))) {
+            return false;
+        }
+
+        const filterID = BreedingFilters.id.value();
+        if (filterID > -1 && filterID != Math.floor(this.id)) {
+            return false;
+        }
+
+        // Check based on category
+        if (BreedingFilters.category.value() >= 0) {
+            if (this.category !== BreedingFilters.category.value()) {
+                return false;
+            }
+        }
+
+        // Check based on shiny status
+        if (BreedingFilters.shinyStatus.value() >= 0) {
+            if (+this.shiny !== BreedingFilters.shinyStatus.value()) {
+                return false;
+            }
+        }
+
+        // Check based on native region
+        const showRegions = BreedingFilters.region.value();
+        const region = PokemonHelper.calcNativeRegion(this.name);
+        const regionBitInFilter = 1 << region & showRegions;
+        const noneRegionCheck = (showRegions === 0 || showRegions === (2 << player.highestRegion()) - 1)
+            && region === GameConstants.Region.none;
+        if (!regionBitInFilter && !noneRegionCheck) {
+            return false;
+        }
+
+        // check based on Pokerus status
+        if (BreedingFilters.pokerus.value() > -1) {
+            if (this.pokerus !== BreedingFilters.pokerus.value()) {
+                return false;
+            }
+        }
+
+        const uniqueTransformation = BreedingFilters.uniqueTransformation.value();
+        const pokemon = PokemonHelper.getPokemonById(this.id);
+        // Only Base Pokémon with Mega available
+        if (uniqueTransformation == 'mega-available' && !PokemonHelper.hasMegaEvolution(pokemon.name)) {
+            return false;
+        }
+        // Only Base Pokémon without Mega Evolution
+        if (uniqueTransformation == 'mega-unobtained' && !(PokemonHelper.hasMegaEvolution(pokemon.name) && (pokemon as DataPokemon).evolutions?.some((e) => !App.game.party.alreadyCaughtPokemonByName(e.evolvedPokemon)))) {
+            return false;
+        }
+        // Only Mega Pokémon
+        if (uniqueTransformation == 'mega-evolution' && !(PokemonHelper.getPokemonPrevolution(pokemon.name)?.some((e) => PokemonHelper.hasMegaEvolution(e.basePokemon)))) {
+            return false;
+        }
+
+        // Check if either of the types match
+        const type1: (PokemonType | null) = BreedingFilters.type1.value() > -2 ? BreedingFilters.type1.value() : null;
+        const type2: (PokemonType | null) = BreedingFilters.type2.value() > -2 ? BreedingFilters.type2.value() : null;
+        if (type1 !== null || type2 !== null) {
+            const { type: types } = pokemonMap[this.name];
+            if ([type1, type2].includes(PokemonType.None)) {
+                const type = (type1 == PokemonType.None) ? type2 : type1;
+                if (!BreedingController.isPureType(this, type)) {
+                    return false;
+                }
+            } else if ((type1 !== null && !types.includes(type1)) || (type2 !== null && !types.includes(type2))) {
+                return false;
+            }
+        }
+
+        return true;
     });
 
     public hideFromProteinList = ko.pureComputed(() => {
@@ -389,7 +510,39 @@ class PartyPokemon implements Saveable {
         if (!new RegExp(Settings.getSetting('heldItemSearchFilter').observableValue() , 'i').test(this.displayName)) {
             return true;
         }
+        if (Settings.getSetting('heldItemRegionFilter').observableValue() > -2) {
+            if (PokemonHelper.calcNativeRegion(this.name) !== Settings.getSetting('heldItemRegionFilter').observableValue()) {
+                return true;
+            }
+        }
+        const type = Settings.getSetting('heldItemTypeFilter').observableValue();
+        if (type > -2 && !pokemonMap[this.name].type.includes(type)) {
+            return true;
+        }
         if (Settings.getSetting('heldItemHideHoldingPokemon').observableValue() && this.heldItem()) {
+            return true;
+        }
+        if (Settings.getSetting('heldItemShowHoldingThisItem').observableValue() && this.heldItem() !== HeldItem.heldItemSelected()) {
+            return true;
+        }
+
+        return false;
+    });
+
+    public hideFromConsumableList = ko.pureComputed(() => {
+        if (!new RegExp(Settings.getSetting('consumableSearchFilter').observableValue() , 'i').test(this.displayName)) {
+            return true;
+        }
+        if (Settings.getSetting('consumableRegionFilter').observableValue() > -2) {
+            if (PokemonHelper.calcNativeRegion(this.name) !== Settings.getSetting('consumableRegionFilter').observableValue()) {
+                return true;
+            }
+        }
+        const type = Settings.getSetting('consumableTypeFilter').observableValue();
+        if (type > -2 && !pokemonMap[this.name].type.includes(type)) {
+            return true;
+        }
+        if (Settings.getSetting('consumableHideShinyPokemon').observableValue() && this.shiny) {
             return true;
         }
 
@@ -422,7 +575,7 @@ class PartyPokemon implements Saveable {
         this.heldItem(json[PartyPokemonSaveKeys.heldItem] && ItemList[json[PartyPokemonSaveKeys.heldItem]] instanceof HeldItem ? ItemList[json[PartyPokemonSaveKeys.heldItem]] as HeldItem : undefined);
         this.defaultFemaleSprite(json[PartyPokemonSaveKeys.defaultFemaleSprite] ?? this.defaults.defaultFemaleSprite);
         this.hideShinyImage(json[PartyPokemonSaveKeys.hideShinyImage] ?? this.defaults.hideShinyImage);
-        this._nickname(json[PartyPokemonSaveKeys.nickname] ? decodeURI(json[PartyPokemonSaveKeys.nickname]) : this.defaults.nickname);
+        this._nickname(json[PartyPokemonSaveKeys.nickname] || this.defaults.nickname);
         this.shadow = json[PartyPokemonSaveKeys.shadow] ?? this.defaults.shadow;
         this._showShadowImage(json[PartyPokemonSaveKeys.showShadowImage] ?? this.defaults.showShadowImage);
     }
@@ -442,7 +595,7 @@ class PartyPokemon implements Saveable {
             [PartyPokemonSaveKeys.heldItem]: this.heldItem()?.name,
             [PartyPokemonSaveKeys.defaultFemaleSprite]: this.defaultFemaleSprite(),
             [PartyPokemonSaveKeys.hideShinyImage]: this.hideShinyImage(),
-            [PartyPokemonSaveKeys.nickname]: this.nickname ? encodeURI(this.nickname) : undefined,
+            [PartyPokemonSaveKeys.nickname]: this.nickname || undefined,
             [PartyPokemonSaveKeys.shadow]: this.shadow,
             [PartyPokemonSaveKeys.showShadowImage]: this._showShadowImage(),
         };
