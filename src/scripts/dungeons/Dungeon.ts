@@ -127,6 +127,22 @@ class Dungeon {
             });
             return false;
         }
+        // Player may not meet the requirements to start the dungeon
+        const dungeonTown = TownList[this.name];
+        if (!dungeonTown.isUnlocked()) {
+            const reqsList = [];
+            dungeonTown.requirements?.forEach(req => {
+                if (!req.isCompleted()) {
+                    reqsList.push(req.hint());
+                }
+            });
+
+            Notifier.notify({
+                message: `You don't have access to this dungeon yet.\n<i>${reqsList.join('\n')}</i>`,
+                type: NotificationConstants.NotificationOption.warning,
+            });
+            return false;
+        }
         return true;
     }
 
