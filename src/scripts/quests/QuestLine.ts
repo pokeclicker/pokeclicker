@@ -7,12 +7,14 @@ class QuestLine {
     totalQuests: number;
 
     autoBegin: KnockoutSubscription;
+    private pausableStates = [GameConstants.GameState.town, GameConstants.GameState.fighting];
 
     constructor(
         public name: string,
         public description: string,
         public requirement?: Requirement,
-        public bulletinBoard: GameConstants.BulletinBoards = GameConstants.BulletinBoards.None
+        public bulletinBoard: GameConstants.BulletinBoards = GameConstants.BulletinBoards.None,
+        private disablePausing = false // applies to bulletin board quests only
     ) {
         this.name = name;
         this.description = description;
@@ -98,7 +100,7 @@ class QuestLine {
     }
 
     suspendQuest() {
-        if (this.bulletinBoard == GameConstants.BulletinBoards.None || this.state() == QuestLineState.suspended) {
+        if (!this.isPausable() || this.state() == QuestLineState.suspended) {
             // Do nothing if already suspended or not a bulletin board quest
             return;
         }
@@ -126,6 +128,28 @@ class QuestLine {
 
         quest.suspended = false;
         this.state(QuestLineState.started);
+    }
+
+    isPausable(): boolean {
+        if (this.disablePausing || this.bulletinBoard == GameConstants.BulletinBoards.None
+            || !this.pausableStates.includes(App.game.gameState)
+        ) {
+            return false;
+        }
+
+        return true;
+    }
+
+    get pauseTooltip(): string {
+        if (this.disablePausing || this.bulletinBoard == GameConstants.BulletinBoards.None) {
+            return 'This quest line cannot be paused. It is either a story, progression related, or otherwise required quest.';
+        }
+
+        if (!this.pausableStates.includes(App.game.gameState)) {
+            return 'Quest Lines can only be paused while in a town or fighting on a route.';
+        }
+
+        return 'Pausing this quest line will remove it from your quest list and prevent any progress.<br /><br />It can be resumed from the current step at the Bulletin Board it was originally accepted.';
     }
 
     toJSON() {
