@@ -72,7 +72,7 @@
                     <div class="tab-pane" id="questsModalQuestLinesPane">
                         <div class="px-2 pt-3 text-left" data-bind="with: {
                             active: App.game.quests.questLines().filter(q => q.state() === QuestLineState.started),
-                            available: App.game.quests.questLines().filter(q => q.state() === QuestLineState.inactive && q.bulletinBoard !== GameConstants.BulletinBoards.None && q.requirement?.isCompleted()),
+                            available: App.game.quests.questLines().filter(q => (q.state() === QuestLineState.inactive || q.state() === QuestLineState.suspended) && q.bulletinBoard !== GameConstants.BulletinBoards.None && q.requirement?.isCompleted()),
                             complete: App.game.quests.questLines().filter(q => q.state() === QuestLineState.ended)
                         }">
                             <!-- ko if: $data.active.length -->
@@ -83,7 +83,8 @@
                                 <thead>
                                     <tr>
                                         <th>Name</th>
-                                        <th class="text-center">Progress</th>
+                                        <th class="text-center">Step</th>
+                                        <th style="width: 1px;"></th>
                                     </tr>
                                 </thead>
                                 <tbody data-bind="foreach: $data.active">
@@ -93,6 +94,16 @@
                                             <knockout class="small" data-bind="text: $data.description"></knockout>
                                         </td>
                                         <td class="text-nowrap align-middle text-center" data-bind="text: `${$data.curQuest() + 1} / ${$data.totalQuests}`"></td>
+                                        <td class="align-middle text-center">
+                                            <button type="button" class="btn btn-danger btn-sm" data-bind="click: () => { $data.suspendQuest() }, tooltip: {
+                                                title: $data.bulletinBoard == GameConstants.BulletinBoards.None ?
+                                                    'This is a story or progression related quest and it cannot be paused.'
+                                                    : 'Pausing this quest line will remove it from your quest list and prevent any progress.<br /><br />It can be resumed from the current step at the Bulletin Board it was originally accepted.',
+                                                trigger: 'hover',
+                                                placement: 'top',
+                                                html: true
+                                            }, attr: { disabled: $data.bulletinBoard == GameConstants.BulletinBoards.None }">Pause</button>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>

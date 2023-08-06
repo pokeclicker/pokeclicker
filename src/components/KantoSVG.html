@@ -787,6 +787,28 @@
             , image: "assets/images/map/snorlaxoverworld.png"
             })
         %>
+
+        <!--New Island-->
+        <%- include('templates/mapOverlay',
+            { x: 80, y: 50
+            , width: 4, height: 3
+            , databind: "click:function(){MapHelper.moveToTown('New Island')}, attr:{ class: MapHelper.calculateTownCssClass('New Island') }"
+            , visible:  "TownList['New Island'].isUnlocked()"
+            , image: "assets/images/map/new_island.png"
+            })
+        %>
+
+        <!--New Island extension-->
+        <%- include('templates/mapOverlay',
+            { x: 80, y: 50
+            , width: 4, height: 3
+            , databind: "click:function(){MapHelper.moveToTown('New Island')}, attr:{ class: MapHelper.calculateTownCssClass('New Island') }"
+            , visible:  "TownList['New Island'].isUnlocked()"
+            , image: "assets/images/map/transparent.png"
+            , connectedToTown: "New Island"
+            })
+        %>
+
     %>
     </g>
 

@@ -105,7 +105,7 @@ class ContestEntry {
         switch (PokemonContestController.contestStyle()) {
             case ContestStyle.Cool:
                 stylePoints = baseStats.attack + baseStats.specialDefense;
-                flavorType = FlavorType.Bitter;
+                flavorType = FlavorType.Spicy;
                 break;
             case ContestStyle.Beautiful:
                 stylePoints = baseStats.specialAttack + baseStats.defense;
@@ -117,11 +117,11 @@ class ContestEntry {
                 break;
             case ContestStyle.Clever:
                 stylePoints = baseStats.specialAttack + baseStats.speed;
-                flavorType = FlavorType.Sour;
+                flavorType = FlavorType.Bitter;
                 break;
             case ContestStyle.Tough:
                 stylePoints = baseStats.hitpoints + baseStats.defense;
-                flavorType = FlavorType.Spicy;
+                flavorType = FlavorType.Sour;
                 break;
         }
 
