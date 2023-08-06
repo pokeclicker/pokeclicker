@@ -444,7 +444,7 @@ class QuestLineHelper {
 
     // Available upon clearing Route 37
     public static createJohtoBeastsQuestLine() {
-        const johtoBeastsQuestLine = new QuestLine('The Legendary Beasts', 'Investigate the legends surrounding the strange Burned Tower in Ecruteak City.', new RouteKillRequirement(10, GameConstants.Region.johto, 37), GameConstants.BulletinBoards.Johto);
+        const johtoBeastsQuestLine = new QuestLine('The Legendary Beasts', 'Investigate the legends surrounding the strange Burned Tower in Ecruteak City.', new RouteKillRequirement(10, GameConstants.Region.johto, 37), GameConstants.BulletinBoards.Johto, true);
 
         const talktoEusine1 = new TalkToNPCQuest(EcruteakEusine, 'Talk to Eusine in Ecruteak City.');
         johtoBeastsQuestLine.addQuest(talktoEusine1);
@@ -2645,7 +2645,7 @@ class QuestLineHelper {
 
     // Available post-E4
     public static createMeltanQuestLine() {
-        const meltanQuestLine = new QuestLine('Let\'s Go, Meltan!', 'I need your assistance in learning more about the newly discovered Pokémon that has really sent me and other Pokémon researchers into quite a tizzy.', new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion), GameConstants.BulletinBoards.Alola);
+        const meltanQuestLine = new QuestLine('Let\'s Go, Meltan!', 'I need your assistance in learning more about the newly discovered Pokémon that has really sent me and other Pokémon researchers into quite a tizzy.', new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion), GameConstants.BulletinBoards.Alola, true);
 
         // Multi-step #0:
 
@@ -3578,9 +3578,6 @@ class QuestLineHelper {
     public static createFindSurpriseTogepiForEasterQuestLine() {
         const findSurpriseTogepiForEasterQuestLine = new QuestLine('Togepi Egg Hunt', 'A strange Togepi has been spotted, but cannot be found!', new SpecialEventRequirement('Easter'), GameConstants.BulletinBoards.All);
 
-        const togepiInKantoSetup = () => {
-            dungeonList['Viridian Forest'].bossList.push(new DungeonTrainer('Egg Hunter', [new GymPokemon('Surprise Togepi', 300000, 100)], { weight: 1, requirement: new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion) }));
-        };
         const afterDefeatingTogepiInKanto = () => {
             Notifier.notify({
                 title: findSurpriseTogepiForEasterQuestLine.name,
@@ -3589,15 +3586,10 @@ class QuestLineHelper {
                 type: NotificationConstants.NotificationOption.info,
                 timeout: 3e4,
             });
-
-            dungeonList['Viridian Forest'].bossList = dungeonList['Viridian Forest'].bossList.filter(boss => boss.name != 'Egg Hunter');
         };
-        const defeatTogepiInKanto = new DefeatDungeonBossQuest('Viridian Forest', 'Egg Hunter', afterDefeatingTogepiInKanto, 'A strange Togepi has been seen around Kanto. Go look for it! Maybe Erika knows more.', togepiInKantoSetup);
+        const defeatTogepiInKanto = new DefeatDungeonBossQuest('Viridian Forest', 'Egg Hunter', afterDefeatingTogepiInKanto, 'A strange Togepi has been seen around Kanto. Go look for it! Maybe Erika knows more.');
         findSurpriseTogepiForEasterQuestLine.addQuest(defeatTogepiInKanto);
 
-        const togepiInJohtoSetup = () => {
-            dungeonList['Ilex Forest'].bossList.push(new DungeonTrainer('Egg Hunter', [new GymPokemon('Surprise Togepi', 900000, 100)], { weight: 1, requirement: new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion) }));
-        };
         const afterDefeatingTogepiInJohto = () => {
             Notifier.notify({
                 title: findSurpriseTogepiForEasterQuestLine.name,
@@ -3606,14 +3598,10 @@ class QuestLineHelper {
                 type: NotificationConstants.NotificationOption.info,
                 timeout: 3e4,
             });
-            dungeonList['Ilex Forest'].bossList = dungeonList['Ilex Forest'].bossList.filter(boss => boss.name != 'Egg Hunter');
         };
-        const encounterSurpriseTogepiInJohto = new DefeatDungeonBossQuest('Ilex Forest', 'Egg Hunter', afterDefeatingTogepiInJohto, 'Another report just came in, there have been sightings of a strange egg in a forest in Johto!', togepiInJohtoSetup);
+        const encounterSurpriseTogepiInJohto = new DefeatDungeonBossQuest('Ilex Forest', 'Egg Hunter', afterDefeatingTogepiInJohto, 'Another report just came in, there have been sightings of a strange egg in a forest in Johto!');
         findSurpriseTogepiForEasterQuestLine.addQuest(encounterSurpriseTogepiInJohto);
 
-        const togepiInHoennSetup = () => {
-            dungeonList['Petalburg Woods'].bossList.push(new DungeonTrainer('Egg Hunter', [new GymPokemon('Surprise Togepi', 2700000, 100)], { weight: 1, requirement: new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion) }));
-        };
         const afterDefeatingTogepiInHoenn = () => {
             App.game.party.gainPokemonByName('Surprise Togepi');
             Notifier.notify({
@@ -3622,9 +3610,8 @@ class QuestLineHelper {
                 type: NotificationConstants.NotificationOption.success,
                 timeout: 3e4,
             });
-            dungeonList['Petalburg Woods'].bossList = dungeonList['Petalburg Woods'].bossList.filter(boss => boss.name != 'Egg Hunter');
         };
-        const encounterTogepiInHoenn = new DefeatDungeonBossQuest('Petalburg Woods', 'Egg Hunter', afterDefeatingTogepiInHoenn, 'There is a big Egg Hunt going on in the woods south of Rustboro in Hoenn; maybe you should take a look?', togepiInHoennSetup);
+        const encounterTogepiInHoenn = new DefeatDungeonBossQuest('Petalburg Woods', 'Egg Hunter', afterDefeatingTogepiInHoenn, 'There is a big Egg Hunt going on in the woods south of Rustboro in Hoenn; maybe you should take a look?');
         findSurpriseTogepiForEasterQuestLine.addQuest(encounterTogepiInHoenn);
 
         App.game.quests.questLines().push(findSurpriseTogepiForEasterQuestLine);
