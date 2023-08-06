@@ -1017,6 +1017,7 @@ TemporaryBattleList['Miror B. 1'] = new TemporaryBattle(
     {
         displayName: 'Miror B.',
         imageName: 'Cipher Admin Miror B',
+        returnTown: 'Pyrite Town',
         firstTimeRewardFunction: () => {
             BagHandler.gainItem({type: ItemType.item, id: 'Magnet'}, 1);
             Notifier.notify({
@@ -1074,6 +1075,7 @@ TemporaryBattleList.Zook = new TemporaryBattle(
     {
         displayName: 'Zook',
         imageName: 'Thug',
+        returnTown: 'Pyrite Town',
     }
 );
 TemporaryBattleList['Miror B. 2'] = new TemporaryBattle(

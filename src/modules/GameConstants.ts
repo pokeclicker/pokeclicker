@@ -225,7 +225,6 @@ export enum AchievementType {
     'Battle Frontier',
     'Vitamins',
     'Pokerus',
-    'Shadow',
 }
 
 // Held item chance
