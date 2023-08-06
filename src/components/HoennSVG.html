@@ -1318,53 +1318,53 @@
             })
         %>
 
-        <!--Kaminko's House-->
+        <!--Kaminko's Manor-->
         <%- include('templates/mapTown',
-            { name: "Kaminko's House"
+            { name: "Kaminko's Manor"
             , x: 17, y: 23
             , width: 6, height: 11
             })
         %>
 
-        <!--Kaminko's House extension-->
+        <!--Kaminko's Manor extension-->
         <%- include('templates/mapTown',
-            { name: "Kaminko's House"
+            { name: "Kaminko's Manor"
             , x: 16, y: 25
             , width: 1, height: 7
             , isExtension: true
             })
         %>
 
-        <!--Kaminko's House extension-->
+        <!--Kaminko's Manor extension-->
         <%- include('templates/mapTown',
-            { name: "Kaminko's House"
+            { name: "Kaminko's Manor"
             , x: 23, y: 24
             , width: 1, height: 9
             , isExtension: true
             })
         %>
 
-        <!--Kaminko's House extension-->
+        <!--Kaminko's Manor extension-->
         <%- include('templates/mapTown',
-            { name: "Kaminko's House"
+            { name: "Kaminko's Manor"
             , x: 24, y: 25
             , width: 1, height: 7
             , isExtension: true
             })
         %>
 
-        <!--Kaminko's House extension-->
+        <!--Kaminko's Manor extension-->
         <%- include('templates/mapTown',
-            { name: "Kaminko's House"
+            { name: "Kaminko's Manor"
             , x: 25, y: 26
             , width: 1, height: 5
             , isExtension: true
             })
         %>
 
-        <!--SS Libra-->
+        <!--S. S. Libra-->
         <%- include('templates/mapTown',
-            { name: "SS Libra"
+            { name: "S. S. Libra"
             , x: 69, y: 31
             , width: 6, height: 3
             })
@@ -1669,6 +1669,26 @@
         , x: 5, y: 32
         , width: 8, height: 3
         , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Gateon Port') }"
+        })
+    %>
+
+    <%- include('templates/mapOverlay',
+        { name: "Miror B."
+        , x: 56, y: 17
+        , width: 4, height: 6
+        , databind: "click: () => TemporaryBattleList['Miror B. 1'].protectedOnclick()"
+        , visible:  "TemporaryBattleList['Miror B. 1'] && TemporaryBattleList['Miror B. 1'].isVisible()"
+        , image: "assets/images/map/Miror B.png"
+        })
+    %>
+
+    <%- include('templates/mapOverlay',
+        { name: "Zook"
+        , x: 73, y: 18
+        , width: 4, height: 6
+        , databind: "click: () => TemporaryBattleList['Zook'].protectedOnclick()"
+        , visible:  "TemporaryBattleList['Zook'] && TemporaryBattleList['Zook'].isVisible()"
+        , image: "assets/images/map/Zook.png"
         })
     %>
 

@@ -981,8 +981,8 @@ TemporaryBattleList['Cipher Peon Kass'] = new TemporaryBattle(
 TemporaryBattleList['Cipher Peon Naps'] = new TemporaryBattle(
     'Cipher Peon Naps',
     [new GymPokemon('Teddiursa', 110813753, 11, undefined, undefined, GameConstants.ShadowStatus.Shadow)], // Slightly weaker than Calem 1
-    'What was that? My Shadow Pokémon!',
-    [new QuestLineCompletedRequirement('Gale of Darkness')],
+    'What was that? My Shadow Pokémon! It doesn\'t matter though, my teammates escaped with Professor Krane!',
+    [new QuestLineStepCompletedRequirement('Gale of Darkness', 0)],
     undefined,
     {
         displayName: 'Cipher Peon Naps',
@@ -996,7 +996,7 @@ TemporaryBattleList['Chobin 1'] = new TemporaryBattle(
         new GymPokemon('Magikarp', 57406876, 6),
     ],
     'Huh? Closer observation reveals that the subject is a trainer. Ergo, the subject is not a burglar! Ahaha! Chobin wishes you spoke up right away. You\'re $playername$? Chobin apologizes for jumping to the wrong conclusion.',
-    [new QuestLineCompletedRequirement('Gale of Darkness')],
+    [new QuestLineStepCompletedRequirement('Gale of Darkness', 2)],
     undefined,
     {
         displayName: 'Chobin',
@@ -1011,8 +1011,8 @@ TemporaryBattleList['Miror B. 1'] = new TemporaryBattle(
         new GymPokemon('Lombre', 34444125, 17),
         new GymPokemon('Voltorb', 34444125, 19, undefined, undefined, GameConstants.ShadowStatus.Shadow),
     ],
-    'You messed up my rhythm! I just can\'t, no, I just can\'t do it!',
-    [new QuestLineCompletedRequirement('Gale of Darkness')], // TODO put on overworld
+    'You messed up my rhythm! I just can\'t, no, I just can\'t do it! Shouldn\'t you be paying more attention to what\'s happening in the Pyrite Buiding than to me?',
+    [new QuestLineStepCompletedRequirement('Gale of Darkness', 9)],
     undefined,
     {
         displayName: 'Miror B.',
@@ -1036,7 +1036,7 @@ TemporaryBattleList['Chobin 2'] = new TemporaryBattle(
         new GymPokemon('Tropius', 48221775, 26),
     ],
     'Huh? Oh, you\'re that trainer from before?! Chobin wishes you spoke up right away.',
-    [new QuestLineCompletedRequirement('Gale of Darkness')],
+    [new QuestLineStepCompletedRequirement('Gale of Darkness', 17)],
     undefined,
     {
         displayName: 'Chobin',
@@ -1052,7 +1052,7 @@ TemporaryBattleList['Cipher Peon Smarton'] = new TemporaryBattle(
         new GymPokemon('Koffing', 49221775, 27),
     ],
     'You\'re too late! We already took everything we needed!',
-    [new QuestLineCompletedRequirement('Gale of Darkness')],
+    [new QuestLineStepCompletedRequirement('Gale of Darkness', 19)],
     undefined,
     {
         displayName: 'Cipher Peon Smarton',
@@ -1069,7 +1069,7 @@ TemporaryBattleList.Zook = new TemporaryBattle(
         new GymPokemon('Relicanth', 35797654, 26),
     ],
     'Yeah, whatever! I was leaving anyways.',
-    [new QuestLineCompletedRequirement('Gale of Darkness')],
+    [new QuestLineStepCompletedRequirement('Gale of Darkness', 21)],
     undefined,
     {
         displayName: 'Zook',
@@ -1085,8 +1085,8 @@ TemporaryBattleList['Miror B. 2'] = new TemporaryBattle(
         new GymPokemon('Nosepass', 38797654, 25, undefined, undefined, GameConstants.ShadowStatus.Shadow),
         new GymPokemon('Ludicolo', 38797654, 26),
     ],
-    'I shouldn\'t have done something this strenuous right after eating…',
-    [new QuestLineCompletedRequirement('Gale of Darkness')],
+    'I shouldn\'t have done something this strenuous right after eating… I\'ll need to get some new Shadow Pokémon from Team Snagem.',
+    [new QuestLineStepCompletedRequirement('Gale of Darkness', 22)],
     undefined,
     {
         displayName: 'Miror B.',
