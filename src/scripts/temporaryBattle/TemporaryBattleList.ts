@@ -5990,3 +5990,17 @@ TemporaryBattleList.Arceus = new TemporaryBattle(
         imageName: '../pokemon/493',
     }
 );
+
+// Paldea Temporary Battles
+TemporaryBattleList['Paradise Protection Protocol'] = new TemporaryBattle(
+    'Paradise Protection Protocol',
+    [
+        new GymPokemon('Koraidon', 710987746, 70),
+        new GymPokemon('Miraidon', 710987746, 70),
+    ],
+    '<i>The Guardians of Paradise were defeated!</i>',
+    [
+        new GymBadgeRequirement(BadgeEnums.Elite_Sada),
+        new GymBadgeRequirement(BadgeEnums.Elite_Turo),
+    ]
+);

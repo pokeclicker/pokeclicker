@@ -295,6 +295,7 @@ namespace GameConstants {
         alola,
         galar,
         hisui,
+        paldea,
         final,
     }
     declare function clipNumber(num: number, min: number, max: number): number;
@@ -371,6 +372,10 @@ namespace GameConstants {
         'White_mane_hair',
         'Black_augurite',
         'Peat_block',
+        'Auspicious_armor',
+        'Malicious_armor',
+        'Leaders_crest',
+        'Gimmighoul_coin',
     }
     declare enum FossilPieceType {
         'None',
@@ -502,7 +507,8 @@ namespace GameConstants {
         Armor,
         Crown,
         Hisui,
-        Arceus
+        Arceus,
+        Paldea
     }
     declare const EnergyRestoreEffect: {
         SmallRestore: number;
@@ -543,6 +549,7 @@ namespace GameConstants {
     declare const KalosGyms: string[];
     declare const GalarGyms: string[];
     declare const HisuiGyms: string[];
+    declare const PaldeaGyms: string[];
     declare const OrangeGyms: string[];
     declare const OrreGyms: string[];
     declare const RegionGyms: string[][];
@@ -556,6 +563,7 @@ namespace GameConstants {
     declare const KalosDungeons: string[];
     declare const GalarDungeons: string[];
     declare const HisuiDungeons: string[];
+    declare const PaldeaDungeons: string[];
     declare const RegionDungeons: string[][];
     declare function getDungeonIndex(dungeon: string): number;
     declare function getDungeonRegion(dungeon: string): Region;
@@ -711,6 +719,9 @@ namespace GameConstants {
     declare enum HisuiSubRegions {
         Hisui,
     }
+    declare enum PaldeaSubRegions {
+        Paldea,
+    }
     declare enum FinalSubRegions {
         Final,
     }
@@ -725,6 +736,7 @@ namespace GameConstants {
         | AlolaSubRegions
         | GalarSubRegions
         | HisuiSubRegions
+        | PaldeaSubRegions
         | FinalSubRegions
 
     // Gender Types

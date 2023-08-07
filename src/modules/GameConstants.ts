@@ -42,8 +42,9 @@ export enum Region {
     alola = 6,
     galar = 7,
     hisui = 8,
+    paldea = 9,
     // Throws an error if no region after the final region
-    final = 9,
+    final = 10,
 }
 
 export const MAX_AVAILABLE_REGION = Region.galar;
@@ -58,6 +59,7 @@ export const MaxIDPerRegion = [
     809, // 88 - Alola
     898, // 89 - Galar
     905, // 7 - Hisui
+    1010, // 105 - Paldea
 ];
 
 // Subregions
@@ -107,6 +109,10 @@ export enum HisuiSubRegions {
     Hisui = 0,
 }
 
+export enum PaldeaSubRegions {
+    Paldea = 0,
+}
+
 export enum FinalSubRegions {
     Final = 0,
 }
@@ -121,6 +127,7 @@ export type SubRegions =
     | AlolaSubRegions
     | GalarSubRegions
     | HisuiSubRegions
+    | PaldeaSubRegions
     | FinalSubRegions;
 
 // Battle Items
@@ -829,6 +836,7 @@ export const RegionalStarters = [
     [722, 725, 728], // Alola
     [810, 813, 816], // Galar
     [724.01, 157.01, 503.01], // Hisui
+    [906, 909, 912], // Paldea
 ];
 
 export enum StoneType {
@@ -876,6 +884,10 @@ export enum StoneType {
     'White_mane_hair',
     'Black_augurite',
     'Peat_block',
+    'Auspicious_armor',
+    'Malicious_armor',
+    'Leaders_crest',
+    'Gimmighoul_coin',
 }
 
 export enum FossilPieceType {
@@ -1044,6 +1056,7 @@ export enum BulletinBoards {
     Crown,
     Hisui,
     Arceus,
+    Paldea,
 }
 
 // Underground
@@ -1236,6 +1249,38 @@ export const HisuiGyms = [
     'Temple of Sinnoh',
 ];
 
+export const PaldeaGyms = [
+    'Cortondo',
+    'Artazon',
+    'Levincia',
+    'Cascarrafa',
+    'Medali',
+    'Montenevera',
+    'Alfornada',
+    'Glaseado Mountain',
+    'Elite Rika',
+    'Elite Poppy',
+    'Elite Larry',
+    'Elite Hassel',
+    'Top Champion Geeta',
+    'Champion Nemona',
+    'Segin Squad\'s Base',
+    'Schedar Squad\'s Base',
+    'Navi Squad\'s Base',
+    'Ruchbah Squad\'s Base',
+    'Caph Squad\'s Base',
+    'Director Clavell',
+    'Penny of Team Star',
+    'Stony Cliff Titan',
+    'Open Sky Titan',
+    'Lurking Steel Titan',
+    'Asado Desert',
+    'Casseroya Lake',
+    'Pokémon Trainer Arven',
+    'AI Sada',
+    'AI Turo',
+];
+
 export const OrangeGyms = [
     'Mikan Island',
     'Navel Island',
@@ -1274,6 +1319,7 @@ export const RegionGyms = [
     AlolaGyms,
     GalarGyms,
     HisuiGyms,
+    PaldeaGyms,
     // Keep it at the bottom, as we want optional badges at the bottom
     OrangeGyms,
     MagikarpJumpGyms,
@@ -1554,6 +1600,17 @@ export const HisuiDungeons = [
     'Turnback Cave', // 211
 ];
 
+export const PaldeaDungeons = [
+    'Inlet Grotto', // 212
+    'Glaseado Mountain',
+    'Grasswither Shrine',
+    'Icerend Shrine',
+    'Groundblight Shrine',
+    'Firescourge Shrine',
+    'Area Zero',
+    'Area Zero Depths', // 219
+];
+
 export const RegionDungeons = [
     KantoDungeons,
     JohtoDungeons,
@@ -1564,6 +1621,7 @@ export const RegionDungeons = [
     AlolaDungeons,
     GalarDungeons,
     HisuiDungeons,
+    PaldeaDungeons,
 ];
 
 export function getDungeonIndex(dungeon: string): number {
@@ -1584,6 +1642,7 @@ export const StartingTowns = [
     'Iki Town Outskirts', // Alola
     'Postwick', // Galar
     'Prelude Beach', // Hisui
+    'Cabo Poco', // Paldea
     'Final Region Town', // Final
 ];
 
@@ -1597,6 +1656,7 @@ export const StartingRoutes = [
     1, // Alola
     1, // Galar
     1, // Hisui
+    1, // Paldea
 ];
 
 export const DockTowns = [
@@ -1609,6 +1669,7 @@ export const DockTowns = [
     'Hau\'oli City', // Alola
     'Hulbury', // Galar
     'Prelude Beach', // Hisui
+    'Porto Marinada', // Paldea
 ];
 
 export const TemporaryBattles = [
@@ -1991,6 +2052,7 @@ export const TemporaryBattles = [
     'Enamorus 2',
     'Enamorus 3',
     'Arceus',
+    'Paradise Protection Protocol',
 ];
 
 export enum ShardTraderLocations {
